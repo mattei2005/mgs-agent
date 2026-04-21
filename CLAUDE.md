@@ -59,6 +59,75 @@ Commits on `main` from the current session (oldest → newest):
 
 - `scripts/search-card-image.sh` tier 2 occasionally returns a 48×48 placeholder/icon as a false-positive card image. Needs a minimum-dimension / aspect-ratio guard before accepting the candidate at tier 2.
 
+## Test 4 Closure — AIB Visa Gold on eggbev.com
+
+Status: **PASS** ✓
+Date: 2026-04-21
+Validated by: Raquel Oliveira (Slack: "sim" at 14:41)
+Post ID: 61940
+Edit link: https://eggbev.com/wp-admin/post.php?post=61940&action=edit
+
+End-to-end pipeline steps exercised:
+- resolve-credentials (1P SA)
+- upload-image (card + featured)
+- Gemini 2.5 Flash Image generation
+- validate-article (word count)
+- LazyBlock credit-card + botao assembly (compact URL-encoded)
+- Subtitle insertion (Raquel's reference from post 8151, anti-invention rule applied)
+- create-post (with categories, tags, featured_media, meta)
+- update-yoast + verify (content_score 60, linkdex 70)
+- `_hide_from_home=1` via REST (mu-plugin reads it)
+
+Known acceptable deltas:
+- Slug auto-disambiguated to `-4` (see débito: slug pre-check)
+- Yoast reports 532 words vs `validate-article.sh` 478 — both acceptable
+- `_hide_from_home` visual checkbox absent (intentional: mu-plugin, not plugin-based)
+
+Next: Test 5 with REAL card data (HSBC Premier or Barclaycard Platinum, both UK-CC vertical) on eggbev.com — exercises LLM-generated subtitle without mock data fallback. Same template (rec-gb-cc-en.md) since templates are vertical-scoped, not site-scoped. Other verticals (e.g., mx-cc-es, us-loans-en, br-jobs-pt, gaming-roblox-en) require dedicated templates created and refined before testing in those territories.
+
+## Technical Debt
+
+- `skills/content-publish-wordpress/scripts/upload-image.sh`: output JSON does not include `mime_type`. LazyBlock does not consume it, but useful for debug/auditing. Add in the next refactor.
+- `skills/content-publish-wordpress/scripts/upload-image.sh`: missing HTTP status-code capture via `curl -w '%{http_code}'`. If WP returns 401/403/500 with a JSON error body, the script does not detect the failure explicitly (only checks if `.id` exists in the response). Important fix before production.
+- WP credential handling: all WP-facing scripts (`upload-image.sh`, `create-post.sh`, `update-yoast.sh`, `resolve-term.sh`) pass the Application Password as `curl -u "user:pass"`. This exposes the password briefly in `ps`/argv (milliseconds during curl execution). Acceptable for now; future fix = `curl -K config-file` or `--netrc-file` (both keep the secret off argv).
+- **Canonical content structure (MANDATORY — Raquel's editorial rule):**
+
+  Post content MUST start with an editorial subtitle as the first `<p>`:
+
+      <!-- wp:paragraph -->
+      <p>{subtitle}</p>
+      <!-- /wp:paragraph -->
+
+      <!-- wp:lazyblock/credit-card ... -->
+      ...
+      <!-- wp:paragraph -->
+      <p>{intro 1}</p>
+      <!-- /wp:paragraph -->
+
+      ...
+
+      <!-- wp:lazyblock/botao ... -->
+
+  Subtitle rules (auto-generated in Step 5 by writer LLM):
+  - MAX 100 characters (spaces + punctuation)
+  - MUST contain exact focus keyphrase
+  - MUST highlight 1 specific feature or benefit of the card
+  - Editorial/news-subhead tone (punchy, verb-driven)
+  - Third person, no 'you should'
+  - British spelling for UK cards, etc.
+  - No ellipsis, clean cut
+  - No `<strong>` or `<em>` (plain text)
+  - Position: FIRST element of `post_content` (before LazyBlock credit-card)
+
+  WP `excerpt` field: INTENTIONALLY LEFT EMPTY. Single source of truth = subtitle in body. WP fallback auto-generates excerpt from first ~55 words of content, which equals the subtitle. No duplication.
+
+  Draft markers: ZERO tolerance in `post_content`. Never, not even for testing. Use git/CLAUDE.md for dev tracking.
+
+  **Subtitle data source (anti-invention rule):** The writer LLM MUST derive the subtitle from REAL card data extracted in Step 2 (Research the card) — actual fees, benefits, APR, and target audience from the `card_official_url`. Never invent benefits, competitors, or qualifiers. If Step 2 cannot confirm a fact, that fact cannot appear in the subtitle.
+
+  **Test 4 exception (documented):** For post 61940 (AIB Visa Gold Card), the subtitle `AIB Visa Gold Card provides existing bank customers with premium travel benefits.` was sourced from Raquel's published reference post 8151 rather than LLM-generated. The Test 4 fixture used mock data (invented competitors and benefits for pipeline validation), so an LLM-generated subtitle would have compounded the mock with invented descriptors. Reusing the real reference post's subtitle preserves editorial truth while still exercising the pipeline's subtitle-insertion mechanics.
+- **Slug auto-disambiguation by WP:** when prior drafts/trashed posts/revisions share the same `post_name`, WP appends `-N` to new posts' slugs. Pipeline should either (a) pre-check slug availability via `GET /wp/v2/posts?slug=<s>&status=any,trash,auto-draft` before POST and warn, or (b) accept drift and optionally PUT the canonical slug after cleaning conflicts. Observed on eggbev with `rec-gb-cc-aib-visa-gold-4` (post 61940) due to prior draft `rec-gb-cc-aib-visa-gold-2` (id 54050, 2026-03-02).
+
 ## How to Resume This Session
 
 ```bash

@@ -79,6 +79,36 @@ main benefits or category (e.g. "travel credit card", "airport lounge access",
 "no annual fee", "cashback rewards").
 Total: 6-8 tags per article.
 
+## Subtitle Generation (MANDATORY)
+
+Before writing the article body, generate a SUBTITLE at the very top.
+
+Subtitle rules:
+- MAX 100 characters (spaces and punctuation count)
+- MUST contain the exact focus keyphrase: {keyphrase}
+- MUST highlight ONE specific feature or benefit of the card
+  (e.g., no foreign fees, interest-free period, credit limit,
+  travel insurance, cashback rate, annual fee, rewards points)
+- Editorial tone (punchy, like a news subhead), NOT descriptive
+- Third person, no "you should"
+- British spelling for UK cards
+- No ellipsis, no trailing "..."
+- No <strong> or <em> (plain text)
+
+Examples (for AIB Visa Gold Card):
+✓ "AIB Visa Gold Card offers no foreign fees and bundled travel insurance."
+✓ "AIB Visa Gold Card: 56 days interest-free credit with £10,000 limit."
+✓ "AIB Visa Gold Card rewards premium UK travellers with zero foreign fees."
+✗ "AIB Visa Gold Card is a premium credit product aimed at UK customers." (generic, no benefit)
+✗ "The AIB Visa Gold Card targets middle-tier consumers." (descriptive, no benefit)
+
+Output format:
+<!-- wp:paragraph -->
+<p>{subtitle text, no <strong> tags}</p>
+<!-- /wp:paragraph -->
+
+This <p> is the FIRST element of the post content (before LazyBlock credit-card).
+
 STRUCTURE (STRICT ORDER):
 1. TITLE
 2. FIRST PARAGRAPH
