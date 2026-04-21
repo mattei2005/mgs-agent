@@ -112,7 +112,7 @@ while [ "$attempt" -le "$max_attempts" ]; do
     exit 1
   fi
 
-  img_b64=$(jq -r '.candidates[0].content.parts[]? | select(.inline_data) | .inline_data.data' <<<"$body" | head -n1)
+  img_b64=$(jq -r '.candidates[0].content.parts[]? | (.inlineData // .inline_data) | .data // empty' <<<"$body" | head -n1)
   if [ -z "$img_b64" ] || [ "$img_b64" = "null" ]; then
     echo "[$(date -Iseconds)] generate-featured-image NO-IMAGE slug=$SLUG body=$(echo "$body" | head -c 500)" >>"$LOG"
     echo "ERROR: Gemini returned no image. Response head: $(echo "$body" | head -c 500)" >&2
