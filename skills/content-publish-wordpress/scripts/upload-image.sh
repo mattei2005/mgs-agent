@@ -20,20 +20,29 @@ case "${FILENAME,,}" in
   *.webp) mime="image/webp" ;;
 esac
 
-resp=$(curl -sS -u "$user:$pass" \
+tmp=$(mktemp)
+http=$(curl -sS -o "$tmp" -w '%{http_code}' -u "$user:$pass" \
   -H "Content-Disposition: attachment; filename=\"$FILENAME\"" \
   -H "Content-Type: $mime" \
   --data-binary "@$IMAGE_PATH" \
-  "$wp/wp-json/wp/v2/media")
+  "$wp/wp-json/wp/v2/media" || echo "000")
+resp=$(cat "$tmp")
+rm -f "$tmp"
+
+if [ "${http:0:1}" != "2" ]; then
+  echo "[$(date -Iseconds)] upload-image FAIL http=$http site=$SITE_KEY file=$FILENAME resp=$(echo "$resp" | head -c 500)" >>"$LOG"
+  echo "ERROR: upload-image HTTP $http: $(echo "$resp" | head -c 500)" >&2
+  exit 1
+fi
 
 id=$(jq -r '.id // empty' <<<"$resp")
 url=$(jq -r '.source_url // empty' <<<"$resp")
 
 if [ -z "$id" ]; then
-  echo "[$(date -Iseconds)] upload-image FAIL site=$SITE_KEY file=$FILENAME resp=$resp" >>"$LOG"
-  echo "ERROR: upload failed: $resp" >&2
+  echo "[$(date -Iseconds)] upload-image FAIL http=$http no_id site=$SITE_KEY file=$FILENAME resp=$(echo "$resp" | head -c 500)" >>"$LOG"
+  echo "ERROR: upload-image got HTTP $http but no id in response: $(echo "$resp" | head -c 500)" >&2
   exit 1
 fi
 
-echo "[$(date -Iseconds)] upload-image OK site=$SITE_KEY file=$FILENAME id=$id" >>"$LOG"
+echo "[$(date -Iseconds)] upload-image OK http=$http site=$SITE_KEY file=$FILENAME id=$id" >>"$LOG"
 jq -n --argjson id "$id" --arg url "$url" '{id:$id, source_url:$url}'

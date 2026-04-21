@@ -18,11 +18,20 @@ pass=$(jq -r '.password' <<<"$creds")
 
 # PUT 1: only meta
 meta_only=$(jq '{meta: .meta}' "$YOAST_JSON")
-r1=$(curl -sS -u "$user:$pass" -H "Content-Type: application/json" \
-  -X PUT -d "$meta_only" "$wp/wp-json/wp/v2/posts/$POST_ID")
+tmp1=$(mktemp)
+h1=$(curl -sS -o "$tmp1" -w '%{http_code}' -u "$user:$pass" -H "Content-Type: application/json" \
+  -X PUT -d "$meta_only" "$wp/wp-json/wp/v2/posts/$POST_ID" || echo "000")
+r1=$(cat "$tmp1")
+rm -f "$tmp1"
+
+if [ "${h1:0:1}" != "2" ]; then
+  echo "[$(date -Iseconds)] update-yoast PUT1 FAIL http=$h1 id=$POST_ID resp=$(echo "$r1" | head -c 500)" >>"$LOG"
+  echo "ERROR: update-yoast PUT1 HTTP $h1: $(echo "$r1" | head -c 500)" >&2
+  exit 1
+fi
 if ! jq -e '.id' <<<"$r1" >/dev/null 2>&1; then
-  echo "[$(date -Iseconds)] update-yoast PUT1 FAIL id=$POST_ID resp=$r1" >>"$LOG"
-  echo "ERROR: PUT1 failed: $r1" >&2
+  echo "[$(date -Iseconds)] update-yoast PUT1 FAIL http=$h1 no_id id=$POST_ID resp=$(echo "$r1" | head -c 500)" >>"$LOG"
+  echo "ERROR: update-yoast PUT1 got HTTP $h1 but no id in response: $(echo "$r1" | head -c 500)" >&2
   exit 1
 fi
 
@@ -30,17 +39,35 @@ sleep 2
 
 # PUT 2: title + content + meta to trigger save_post
 full=$(jq '{title: .title, content: .content, meta: .meta}' "$YOAST_JSON")
-r2=$(curl -sS -u "$user:$pass" -H "Content-Type: application/json" \
-  -X PUT -d "$full" "$wp/wp-json/wp/v2/posts/$POST_ID")
+tmp2=$(mktemp)
+h2=$(curl -sS -o "$tmp2" -w '%{http_code}' -u "$user:$pass" -H "Content-Type: application/json" \
+  -X PUT -d "$full" "$wp/wp-json/wp/v2/posts/$POST_ID" || echo "000")
+r2=$(cat "$tmp2")
+rm -f "$tmp2"
+
+if [ "${h2:0:1}" != "2" ]; then
+  echo "[$(date -Iseconds)] update-yoast PUT2 FAIL http=$h2 id=$POST_ID resp=$(echo "$r2" | head -c 500)" >>"$LOG"
+  echo "ERROR: update-yoast PUT2 HTTP $h2: $(echo "$r2" | head -c 500)" >&2
+  exit 1
+fi
 if ! jq -e '.id' <<<"$r2" >/dev/null 2>&1; then
-  echo "[$(date -Iseconds)] update-yoast PUT2 FAIL id=$POST_ID resp=$r2" >>"$LOG"
-  echo "ERROR: PUT2 failed: $r2" >&2
+  echo "[$(date -Iseconds)] update-yoast PUT2 FAIL http=$h2 no_id id=$POST_ID resp=$(echo "$r2" | head -c 500)" >>"$LOG"
+  echo "ERROR: update-yoast PUT2 got HTTP $h2 but no id in response: $(echo "$r2" | head -c 500)" >&2
   exit 1
 fi
 
 if [ -n "$VERIFY" ]; then
   sleep 1
-  got=$(curl -sS -u "$user:$pass" "$wp/wp-json/wp/v2/posts/$POST_ID?context=edit")
+  tmp3=$(mktemp)
+  h3=$(curl -sS -o "$tmp3" -w '%{http_code}' -u "$user:$pass" "$wp/wp-json/wp/v2/posts/$POST_ID?context=edit" || echo "000")
+  got=$(cat "$tmp3")
+  rm -f "$tmp3"
+
+  if [ "${h3:0:1}" != "2" ]; then
+    echo "[$(date -Iseconds)] update-yoast VERIFY-GET FAIL http=$h3 id=$POST_ID resp=$(echo "$got" | head -c 500)" >>"$LOG"
+    echo "ERROR: update-yoast verify GET HTTP $h3: $(echo "$got" | head -c 500)" >&2
+    exit 1
+  fi
   want_t=$(jq -r '.meta._yoast_wpseo_title // ""' "$YOAST_JSON")
   want_d=$(jq -r '.meta._yoast_wpseo_metadesc // ""' "$YOAST_JSON")
   want_f=$(jq -r '.meta._yoast_wpseo_focuskw // ""' "$YOAST_JSON")

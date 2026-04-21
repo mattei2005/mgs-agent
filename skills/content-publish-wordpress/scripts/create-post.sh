@@ -41,13 +41,23 @@ if [ -n "$req_slug" ] && [ "${ALLOW_DISAMBIGUATION:-0}" != "1" ]; then
   fi
 fi
 
-resp=$(curl -sS -u "$user:$pass" -H "Content-Type: application/json" \
-  -X POST --data-binary "@$POST_JSON" "$wp/wp-json/wp/v2/posts")
-id=$(jq -r '.id // empty' <<<"$resp")
-if [ -z "$id" ]; then
-  echo "[$(date -Iseconds)] create-post FAIL site=$SITE_KEY resp=$resp" >>"$LOG"
-  echo "ERROR: post creation failed: $resp" >&2
+tmp=$(mktemp)
+http=$(curl -sS -o "$tmp" -w '%{http_code}' -u "$user:$pass" -H "Content-Type: application/json" \
+  -X POST --data-binary "@$POST_JSON" "$wp/wp-json/wp/v2/posts" || echo "000")
+resp=$(cat "$tmp")
+rm -f "$tmp"
+
+if [ "${http:0:1}" != "2" ]; then
+  echo "[$(date -Iseconds)] create-post FAIL http=$http site=$SITE_KEY resp=$(echo "$resp" | head -c 500)" >>"$LOG"
+  echo "ERROR: create-post HTTP $http: $(echo "$resp" | head -c 500)" >&2
   exit 1
 fi
-echo "[$(date -Iseconds)] create-post OK site=$SITE_KEY id=$id" >>"$LOG"
+
+id=$(jq -r '.id // empty' <<<"$resp")
+if [ -z "$id" ]; then
+  echo "[$(date -Iseconds)] create-post FAIL http=$http no_id site=$SITE_KEY resp=$(echo "$resp" | head -c 500)" >>"$LOG"
+  echo "ERROR: create-post got HTTP $http but no id in response: $(echo "$resp" | head -c 500)" >&2
+  exit 1
+fi
+echo "[$(date -Iseconds)] create-post OK http=$http site=$SITE_KEY id=$id" >>"$LOG"
 echo "$resp"
