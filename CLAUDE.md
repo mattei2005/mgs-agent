@@ -64,8 +64,9 @@ Commits on `main` from the current session (oldest → newest):
 Status: **PASS** ✓
 Date: 2026-04-21
 Validated by: Raquel Oliveira (Slack: "sim" at 14:41)
-Post ID: 61940
-Edit link: https://eggbev.com/wp-admin/post.php?post=61940&action=edit
+Post ID: 61940 (initial test, deleted by Rodolfo) → 61948 (re-POST after cleanup)
+Edit link: https://eggbev.com/wp-admin/post.php?post=61948&action=edit
+Slug: rec-gb-cc-aib-visa-gold-2 (was -4 with 61940 due to draft 54050; after manual cleanup of 54050 + 61940, WP re-disambiguated to -2)
 
 End-to-end pipeline steps exercised:
 - resolve-credentials (1P SA)
@@ -82,6 +83,8 @@ Known acceptable deltas:
 - Slug auto-disambiguated to `-4` (see débito: slug pre-check)
 - Yoast reports 532 words vs `validate-article.sh` 478 — both acceptable
 - `_hide_from_home` visual checkbox absent (intentional: mu-plugin, not plugin-based)
+
+Slug auto-disambiguation behavior observed: After deleting conflicting drafts (54050 at slug -2, post 61940 at slug -4) and re-POSTing the same content, WP assigned slug -2 instead of base. WP appears to maintain reservations on base + -1 slugs even when no visible posts hold them — likely due to attachments, revisions, or auto-drafts in the same namespace. Reclaim via PUT was rejected (would risk overwriting the published reference post 8151 at base slug). Final slug -2 is acceptable for test artifact.
 
 Next: Test 5 with REAL card data (HSBC Premier or Barclaycard Platinum, both UK-CC vertical) on eggbev.com — exercises LLM-generated subtitle without mock data fallback. Same template (rec-gb-cc-en.md) since templates are vertical-scoped, not site-scoped. Other verticals (e.g., mx-cc-es, us-loans-en, br-jobs-pt, gaming-roblox-en) require dedicated templates created and refined before testing in those territories.
 
