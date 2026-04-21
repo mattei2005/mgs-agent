@@ -8,6 +8,17 @@ SLUG="${1:?usage: generate-featured-image.sh <slug> <card_image_path>}"
 CARD_IMG="${2:?missing card_image_path}"
 LOG="/root/mgs-agent/logs/generate-rec.log"
 
+TEMP_FILES=()
+cleanup_temps() {
+  local f
+  for f in "${TEMP_FILES[@]}"; do
+    [ -n "$f" ] || continue
+    echo "[$(date -Iseconds)] generate-featured-image CLEANUP tmp=$f slug=$SLUG" >>"$LOG"
+    rm -f "$f"
+  done
+}
+trap 'cleanup_temps' EXIT
+
 [ -f "$CARD_IMG" ] || { echo "ERROR: card image not found: $CARD_IMG" >&2; exit 1; }
 
 api_key=$(op item get "Gemini API Key" --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" --fields api_key --reveal 2>/dev/null) || {
@@ -32,7 +43,7 @@ scene="${scenes[$RANDOM % ${#scenes[@]}]}"
 
 mime=$(file -b --mime-type "$CARD_IMG" 2>/dev/null || echo "image/png")
 b64_tmp=$(mktemp /tmp/gemini-b64-XXXXXX)
-trap 'echo "[$(date -Iseconds)] generate-featured-image CLEANUP tmp=$b64_tmp slug=$SLUG" >>"$LOG"; rm -f "$b64_tmp"' EXIT
+TEMP_FILES+=("$b64_tmp")
 base64 -w0 "$CARD_IMG" | tr -d '\n' > "$b64_tmp"
 
 prompt=$(cat <<PROMPT
@@ -61,11 +72,14 @@ Output: one image, 16:9, photo-realistic.
 PROMPT
 )
 
-req=$(jq -n \
+req_tmp=$(mktemp /tmp/gemini-req-XXXXXX)
+TEMP_FILES+=("$req_tmp")
+jq -n \
   --arg text "$prompt" \
   --arg mime "$mime" \
   --rawfile data "$b64_tmp" \
-  '{contents:[{parts:[{text:$text},{inline_data:{mime_type:$mime,data:$data}}]}]}')
+  '{contents:[{parts:[{text:$text},{inline_data:{mime_type:$mime,data:$data}}]}]}' \
+  > "$req_tmp"
 
 endpoint="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent?key=$api_key"
 out="/tmp/featured-$SLUG.png"
@@ -75,7 +89,7 @@ attempt=1
 while [ "$attempt" -le "$max_attempts" ]; do
   tmp_body=$(mktemp)
   http_code=$(curl -sS -o "$tmp_body" -w '%{http_code}' \
-    -H "Content-Type: application/json" -X POST -d "$req" "$endpoint" || echo "000")
+    -H "Content-Type: application/json" -X POST -d @"$req_tmp" "$endpoint" || echo "000")
   body=$(cat "$tmp_body")
   rm -f "$tmp_body"
 
