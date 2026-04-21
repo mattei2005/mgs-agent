@@ -7,6 +7,23 @@ LOG="/root/mgs-agent/logs/generate-rec.log"
 
 slug=$(echo "$CARD_NAME" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g')
 
+# Dimension filter thresholds (env-overridable for calibration)
+CARD_MIN_WIDTH="${CARD_MIN_WIDTH:-200}"
+CARD_MIN_HEIGHT="${CARD_MIN_HEIGHT:-100}"
+CARD_ASPECT_MIN="${CARD_ASPECT_MIN:-1.2}"
+CARD_ASPECT_MAX="${CARD_ASPECT_MAX:-2.2}"
+
+# Temp file tracking for unified cleanup
+TEMP_FILES=()
+cleanup_temps() {
+  local f
+  for f in "${TEMP_FILES[@]}"; do
+    [ -n "$f" ] || continue
+    rm -f "$f"
+  done
+}
+trap 'cleanup_temps' EXIT
+
 emit_needs_manual() {
   local reason="$1"
   echo "[$(date -Iseconds)] search-card-image NEEDS-MANUAL card=$CARD_NAME url=$OFFICIAL_URL reason=$reason" >>"$LOG"
@@ -49,21 +66,71 @@ scored=$(while IFS= read -r u; do
   echo "$score $u"
 done <<<"$abs_candidates" | sort -rn)
 
-best=$(echo "$scored" | head -n1 | awk '{print $2}')
-best_score=$(echo "$scored" | head -n1 | awk '{print $1}')
+# Iterate scored candidates (score > 0) until one passes dimension + aspect filters
+best=""
+best_score=""
+ext=""
+out=""
 
-if [ -z "$best" ] || [ "$best_score" -le 0 ]; then
-  emit_needs_manual "scoring_no_match"
+while IFS= read -r line; do
+  [ -z "$line" ] && continue
+  cand_score=$(echo "$line" | awk '{print $1}')
+  cand_url=$(echo "$line" | awk '{print $2}')
+  [ "$cand_score" -le 0 ] && break   # scored list is sorted desc by score
+
+  cand_ext="${cand_url##*.}"; cand_ext="${cand_ext%%\?*}"
+  cand_ext=$(echo "$cand_ext" | tr '[:upper:]' '[:lower:]')
+  case "$cand_ext" in png|jpg|jpeg|webp) ;; *) cand_ext="png" ;; esac
+  cand_tmp="/tmp/card-candidate-$slug-$$-$RANDOM.$cand_ext"
+  TEMP_FILES+=("$cand_tmp")
+
+  if ! curl -sS -L -A "Mozilla/5.0" -o "$cand_tmp" "$cand_url" 2>/dev/null; then
+    echo "[$(date -Iseconds)] search-card-image REJECT download_failed url=$cand_url" >>"$LOG"
+    continue
+  fi
+  [ -s "$cand_tmp" ] || { echo "[$(date -Iseconds)] search-card-image REJECT download_empty url=$cand_url" >>"$LOG"; continue; }
+
+  if ! command -v identify >/dev/null 2>&1; then
+    echo "[$(date -Iseconds)] search-card-image WARN identify_unavailable accepting_without_dim_check url=$cand_url" >>"$LOG"
+    best="$cand_url"; best_score="$cand_score"; ext="$cand_ext"; out="$cand_tmp"
+    break
+  fi
+
+  dims=$(identify -format '%w %h' "$cand_tmp" 2>/dev/null || echo "")
+  if [ -z "$dims" ]; then
+    echo "[$(date -Iseconds)] search-card-image REJECT identify_failed url=$cand_url" >>"$LOG"
+    continue
+  fi
+  w=$(echo "$dims" | awk '{print $1}')
+  h=$(echo "$dims" | awk '{print $2}')
+
+  if [ "$w" -lt "$CARD_MIN_WIDTH" ] || [ "$h" -lt "$CARD_MIN_HEIGHT" ]; then
+    echo "[$(date -Iseconds)] search-card-image REJECT too_small w=${w} h=${h} (min ${CARD_MIN_WIDTH}x${CARD_MIN_HEIGHT}) url=$cand_url" >>"$LOG"
+    continue
+  fi
+
+  aspect=$(awk -v w="$w" -v h="$h" 'BEGIN{ printf "%.3f", w/h }')
+  in_range=$(awk -v a="$aspect" -v lo="$CARD_ASPECT_MIN" -v hi="$CARD_ASPECT_MAX" 'BEGIN{ print (a>=lo && a<=hi) ? "1" : "0" }')
+  if [ "$in_range" != "1" ]; then
+    echo "[$(date -Iseconds)] search-card-image REJECT aspect_out_of_range w=${w} h=${h} aspect=${aspect} (expected ${CARD_ASPECT_MIN}-${CARD_ASPECT_MAX}) url=$cand_url" >>"$LOG"
+    continue
+  fi
+
+  echo "[$(date -Iseconds)] search-card-image ACCEPT w=${w} h=${h} aspect=${aspect} score=${cand_score} url=$cand_url" >>"$LOG"
+  best="$cand_url"; best_score="$cand_score"; ext="$cand_ext"; out="$cand_tmp"
+  break
+done <<<"$scored"
+
+if [ -z "$best" ]; then
+  emit_needs_manual "dimensions_filter_all_rejected"
 fi
 
-ext="${best##*.}"
-ext="${ext%%\?*}"
-ext=$(echo "$ext" | tr '[:upper:]' '[:lower:]')
-case "$ext" in png|jpg|jpeg|webp) ;; *) ext="png" ;; esac
-
-out="/tmp/card-$slug.$ext"
-curl -sS -L -A "Mozilla/5.0" -o "$out" "$best" || emit_needs_manual "download_failed"
-[ -s "$out" ] || emit_needs_manual "download_empty"
+# Move accepted candidate to canonical output path
+final_out="/tmp/card-$slug.$ext"
+if [ "$out" != "$final_out" ]; then
+  mv "$out" "$final_out"
+  out="$final_out"
+fi
 mime=$(file -b --mime-type "$out" 2>/dev/null || echo "image/$ext")
 
 # Classify tier:
