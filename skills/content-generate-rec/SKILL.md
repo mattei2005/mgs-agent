@@ -17,6 +17,14 @@ Required:
 
 Optional:
 - `status` — `draft` (default) or `publish`
+- `overrides.button_color` — override for this article's button color. Accepts:
+  - hex direct in `#RRGGBB` format (e.g. `#c9a227`)
+  - friendly name in Portuguese (e.g. `dourado`) — resolved via `/root/mgs-agent/data/button-colors.json`
+
+  Friendly color names are kept in Portuguese because they are user-facing —
+  Raquel and the editorial team use them directly. The hex is internal.
+
+  If omitted, uses `sites.json[site_key].default_button_color`.
 
 ## Template selection (CRITICAL)
 
@@ -47,6 +55,29 @@ image integrity check.
 - Read `sites.json[site_key]` → `wp_url`, `publishing_user.id`, `template_key`,
   `default_category`, `domain`, `country`, `language`, `verticals`
 - Load `templates/rec-{template_key}.md` → this IS the writer prompt
+
+### 1b. Resolve button color
+
+Run:
+`../content-publish-wordpress/scripts/resolve-button-color.sh <site_key> [override]`
+
+Returns `{hex, source, input}`:
+- `hex` — validated `#RRGGBB` color to use in both LazyBlocks (Step 7)
+- `source` — `request_override` or `site_default`
+- `input` — the original override argument (or `null` if omitted)
+
+Precedence (first match wins):
+1. If `overrides.button_color` provided → hex direct (starts with `#`) or
+   friendly name (looked up in `data/button-colors.json`) → validate → `source=request_override`
+2. Else → `sites.json[site_key].default_button_color` → validate → `source=site_default`
+3. Else (neither present) → abort
+
+Validation: all paths must produce a value matching `^#[0-9A-Fa-f]{6}$`. Otherwise
+the script aborts with exit 1 and a clear error on stderr.
+
+Reserved for v2: `type_convention` source — auto-inference from card-name patterns
+(e.g. "Gold" cards → `dourado`, "Platinum" → `prata`). Not implemented in v1; a
+future run will slot in between (1) and (2) above.
 
 ### 2. Research the card
 - Fetch `card_official_url` (WebFetch) and extract:
@@ -166,7 +197,7 @@ and embedding the full media object including `description.rendered` and
 - `botao-texto` — `"How to Apply"`
 - `siteXfora` — `"You will remain on this website."`
 - `botao-url` — `"https://{domain}/apply-now-{country}-{vertical}-{card-slug}/"`
-- `color-botao` — `"#27ae60"`
+- `color-botao` — resolved hex from Step 1b (not hardcoded)
 - `blockId` — random 6-char base62 (see below)
 - `blockUniqueClass` — `"lazyblock-credit-card-<blockId>"`
 
@@ -174,7 +205,7 @@ and embedding the full media object including `description.rendered` and
 
 - `texto-botao` — `" HOW TO APPLY "` (note the leading/trailing spaces)
 - `link-botao` — same as `botao-url` above
-- `cor-botao` — `"#27ae60"`
+- `cor-botao` — same resolved hex as `color-botao` (from Step 1b)
 - `texto-pequeno` — `"You will remain on this website."`
 - `blockId` — random 6-char base62
 - `blockUniqueClass` — `"lazyblock-botao-<blockId>"`
@@ -256,6 +287,9 @@ Emit a summary to the user:
   `{path, scene}`.
 - `scripts/validate-article.sh <html_file>` → word-count validator
   (exit 0 if 450–500, exit 1 otherwise; prints count + status).
+- `../content-publish-wordpress/scripts/resolve-button-color.sh <site_key> [override]`
+  → validates and resolves the button color hex for this article. Returns
+  `{hex, source, input}` (see Step 1b).
 
 ## Logs
 
