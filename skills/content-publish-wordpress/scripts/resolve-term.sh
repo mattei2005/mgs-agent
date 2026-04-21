@@ -19,7 +19,7 @@ pass=$(jq -r '.password' <<<"$creds")
 search=$(jq -rn --arg n "$NAME" '$n|@uri')
 list=$(curl -sS -u "$user:$pass" "$wp/wp-json/wp/v2/$TAX?search=$search&per_page=100")
 
-match=$(jq -e --arg n "$NAME" '[.[] | select(.name==$n)][0]' <<<"$list" 2>/dev/null || echo "")
+match=$(jq --arg n "$NAME" '[.[] | select(.name==$n)][0] // empty' <<<"$list" 2>/dev/null)
 
 if [ -n "$match" ]; then
   id=$(jq -r '.id' <<<"$match")
