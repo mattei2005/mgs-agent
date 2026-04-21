@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Load env vars (for systemd/cron use)
+[ -f /root/mgs-agent/.env ] && set -a && . /root/mgs-agent/.env && set +a
+
 SITE_KEY="${1:?usage: resolve-credentials.sh <site_key>}"
 SITES_JSON="/root/mgs-agent/data/sites.json"
 
