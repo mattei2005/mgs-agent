@@ -88,6 +88,32 @@ Slug auto-disambiguation behavior observed: After deleting conflicting drafts (5
 
 Next: Test 5 with REAL card data (HSBC Premier or Barclaycard Platinum, both UK-CC vertical) on eggbev.com — exercises LLM-generated subtitle without mock data fallback. Same template (rec-gb-cc-en.md) since templates are vertical-scoped, not site-scoped. Other verticals (e.g., mx-cc-es, us-loans-en, br-jobs-pt, gaming-roblox-en) require dedicated templates created and refined before testing in those territories.
 
+## Known Issue: WP REST /posts?slug= filter broken on eggbev
+
+Symptom: GET /wp-json/wp/v2/posts?slug=<existing-slug>&status=any returns []
+even when the slug exists (verified via direct GET /posts/<id>). Affects
+both auth and unauth requests, and all status filters tested (publish, draft,
+trash, auto-draft, any). Other endpoints unaffected: /media?slug= works,
+/posts?per_page=N (no filter) works, GET /posts/<id> direct works.
+
+Suspected cause: Plugin interference in `rest_post_query` filter hook.
+Likely culprits on eggbev: Rank Math SEO, Wordfence, custom theme functions.
+
+Workaround: check-slug-conflict.sh detects attachments correctly (via /media)
+but cannot detect post conflicts. create-post.sh still calls the check
+fail-closed but coverage is partial on eggbev. Other WP sites in portfolio
+may not be affected.
+
+Investigation TODO (low priority, requires Raquel + downtime risk):
+1. Disable Rank Math REST integration → re-test
+2. Disable Wordfence REST API protection → re-test
+3. If both clean → check theme/mu-plugins for rest_post_query hooks
+4. Once culprit identified, configure exception or accept native behavior
+
+Detection: check-slug-conflict.sh now logs WARN when /posts query returns
+0 results (likely false negative due to filter interference). In production,
+look for these WARN entries to identify affected sites.
+
 ## Technical Debt
 
 - `skills/content-publish-wordpress/scripts/upload-image.sh`: output JSON does not include `mime_type`. LazyBlock does not consume it, but useful for debug/auditing. Add in the next refactor.
