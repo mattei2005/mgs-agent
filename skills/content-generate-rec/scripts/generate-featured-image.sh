@@ -1,13 +1,16 @@
 #!/bin/bash
 set -e
 
+# Load env vars (OP_DEFAULT_VAULT, etc.) — runs under systemd/cron too
+[ -f /root/mgs-agent/.env ] && set -a && . /root/mgs-agent/.env && set +a
+
 SLUG="${1:?usage: generate-featured-image.sh <slug> <card_image_path>}"
 CARD_IMG="${2:?missing card_image_path}"
 LOG="/root/mgs-agent/logs/generate-rec.log"
 
 [ -f "$CARD_IMG" ] || { echo "ERROR: card image not found: $CARD_IMG" >&2; exit 1; }
 
-api_key=$(op item get "Gemini API Key" --fields api_key --reveal 2>/dev/null) || {
+api_key=$(op item get "Gemini API Key" --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" --fields api_key --reveal 2>/dev/null) || {
   echo "ERROR: could not read Gemini API Key from 1Password" >&2
   exit 1
 }
@@ -28,7 +31,9 @@ scenes=(
 scene="${scenes[$RANDOM % ${#scenes[@]}]}"
 
 mime=$(file -b --mime-type "$CARD_IMG" 2>/dev/null || echo "image/png")
-b64=$(base64 -w0 "$CARD_IMG")
+b64_tmp=$(mktemp /tmp/gemini-b64-XXXXXX)
+trap 'echo "[$(date -Iseconds)] generate-featured-image CLEANUP tmp=$b64_tmp slug=$SLUG" >>"$LOG"; rm -f "$b64_tmp"' EXIT
+base64 -w0 "$CARD_IMG" | tr -d '\n' > "$b64_tmp"
 
 prompt=$(cat <<PROMPT
 You must compose a photo-realistic 16:9 (1920x1080) horizontal image using the
@@ -59,7 +64,7 @@ PROMPT
 req=$(jq -n \
   --arg text "$prompt" \
   --arg mime "$mime" \
-  --arg data "$b64" \
+  --rawfile data "$b64_tmp" \
   '{contents:[{parts:[{text:$text},{inline_data:{mime_type:$mime,data:$data}}]}]}')
 
 endpoint="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent?key=$api_key"
