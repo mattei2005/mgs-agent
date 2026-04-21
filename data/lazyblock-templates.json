@@ -1,0 +1,26 @@
+{
+  "site": "eggbev",
+  "lazyblocks": {
+    "credit-card": {
+      "slug": "credit-card",
+      "fields": ["imagem", "categoria", "titulo", "tag10", "tag2", "texto", "botao-texto", "siteXfora", "botao-url", "color-botao"]
+    },
+    "botao": {
+      "slug": "botao",
+      "fields": ["texto-botao", "link-botao", "cor-botao", "texto-pequeno"]
+    }
+  },
+  "patterns": {
+    "rec": {
+      "structure": "intro + credit-card + body + botao",
+      "card_redirect_notice": "You will remain on this website.",
+      "card_button_target": "internal_p1"
+    },
+    "p1": {
+      "structure": "intro + credit-card_top + body + credit-card_bottom",
+      "card_redirect_notice": "You will be redirected.",
+      "card_button_target": "external_bank",
+      "card_appears": 2
+    }
+  }
+}
