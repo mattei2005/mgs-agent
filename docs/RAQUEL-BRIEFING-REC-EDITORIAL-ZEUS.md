@@ -2,7 +2,7 @@
 
 **Para:** Raquel Oliveira  
 **De:** Rodolfo Mattei (via Atena)  
-**Data:** 22/04/2026  
+**Data:** 22/04/2026 — atualizado 22/04/2026  
 **Objetivo:** documentar em linguagem editorial o padrão de REC que temos hoje, pra você poder replicar a lógica em outras verticais e revisar o que os agentes produzem com consistência.
 
 ---
@@ -103,13 +103,14 @@ A ordem é **rígida** — todo REC segue exatamente essa sequência:
 
 ### H2 — Key Benefits of the Card
 
-- 3 a 4 parágrafos descrevendo os principais benefícios reais
+- **Máximo 4 parágrafos** nessa seção
+- Cada parágrafo máximo ~35 palavras
 - Cada benefício baseado no site oficial do banco
 - Exemplos de benefícios que entram aqui: taxa de juros representativa (APR), limite de crédito, programa de recompensas, seguro viagem, proteção contra fraude, acesso a lounges
 
 ### H2 — How Does It Work
 
-- Explica o **mecanismo** do cartão
+- **Máximo 4 parágrafos** nessa seção
 - Como funciona o programa de pontos/cashback
 - Período promocional (se houver): taxa zero por X meses, etc
 - Requisitos pra aplicar (idade, residência, renda mínima, se divulgado)
@@ -133,6 +134,8 @@ A ordem é **rígida** — todo REC segue exatamente essa sequência:
 - Produtos sem esse atributo: `N/A charge card`
 
 Após a tabela, **parágrafos de posicionamento** explicam brevemente o que a comparação revela (1-2 parágrafos).
+
+> ⚠️ **Nota técnica (para revisão editorial):** A tabela no WordPress deve usar o bloco nativo de tabela do Gutenberg — **não** o bloco HTML customizado. Quando você revisar o draft no WordPress, verifique se a tabela aparece formatada corretamente no mobile. Se estiver quebrada, avise o Rodolfo.
 
 ### H2 — Who Is This Card Best For
 
@@ -173,8 +176,36 @@ Elementos que **toda** REC deve ter (não é opcional):
 | 3 a 5 benefícios reais | Só do que está no site oficial do banco. **Nunca inventar.** |
 | 2 competidores reais | Mesmo segmento e país, nomes completos, dados verificáveis |
 | Descritor curto | 50 a 100 caracteres, usado em elementos visuais do artigo |
-| Tags | 2 tags curtas descritivas (ex: "No Annual Fee", "Airport Lounge Access") |
+| Tags | Ver seção 4a abaixo — sistema obrigatório de tags |
 | Call to action | Botão "HOW TO APPLY" apontando pra URL da P1 |
+
+### 4a. Sistema de tags (obrigatório)
+
+Todo REC precisa de **6 a 8 tags**, nessa ordem exata:
+
+| Posição | Tag | Regra |
+|---|---|---|
+| 1ª | `rec` | Sempre. Identifica o tipo de artigo. |
+| 2ª | `cc` | Sempre (para vertical credit card). Identifica a vertical. |
+| 3ª | `gb` | Sempre (para vertical UK). Identifica o país. |
+| 4ª | slug do cartão | Nome do cartão em minúsculas com hífens. Ex: `hsbc-premier-credit-card`, `aib-visa-gold-card` |
+| 5ª a 8ª | tags SEO do cartão | 2 a 4 tags sobre os principais benefícios ou categoria do cartão |
+
+**Exemplos de tags SEO (posições 5ª a 8ª):**
+- `travel credit card`
+- `airport lounge access`
+- `no annual fee`
+- `cashback rewards`
+- `0% purchase offer`
+- `rewards points`
+
+**Exemplo completo para HSBC Premier Credit Card:**
+`rec`, `cc`, `gb`, `hsbc-premier-credit-card`, `travel credit card`, `airport lounge access`, `no annual fee`
+
+**Regras de formato:**
+- Todas em minúsculas
+- Sem caracteres especiais (apenas letras, números e hífens)
+- As 4 primeiras são fixas — nunca omitir
 
 ### O que NÃO aparece no REC
 
