@@ -36,8 +36,7 @@
       "discord_channel_id": "1496267571543019653",
       "discord_channel_name": "atena-content-agent",
       "authorized_user_discord_ids": [
-        "1496254952501280974",
-        "344196393512075265"
+        "1496254952501280974"
       ],
       "allowed_intents": [
         "rec_create",
@@ -60,19 +59,19 @@
           "discord_role": "Conteudo",
           "added": "2026-04-21",
           "added_by": "rodolfo"
-        },
-        {
-          "discord_id": "344196393512075265",
-          "discord_username": "rodolfomattei",
-          "name": "Rodolfo Mattei",
-          "discord_role": "Super Admin",
-          "access_level": "full",
-          "added": "2026-04-22",
-          "added_by": "zeus"
         }
       ]
     }
   },
   "blocklist": [],
-  "pending_approvals": []
+  "pending_approvals": [
+    {
+      "user_discord_id": "344196393512075265",
+      "user_mention": "<@344196393512075265>",
+      "user_name": "Rodolfo Mattei",
+      "agent": "atena",
+      "request": "quero fazer um pedido de conteudo",
+      "timestamp": "2026-04-22T06:38:03.419049+00:00"
+    }
+  ]
 }

@@ -16,7 +16,9 @@ Required:
 - `site_key` — key in `/root/mgs-agent/data/sites.json` (e.g. "eggbev")
 
 Optional:
-- `status` — `draft` (default) or `publish`
+- `status` — `draft` (default) or `publish`. **Always ask the user explicitly
+  before starting** — do not assume draft. Include this as one of the 4 intake
+  questions: "Should I publish it directly or save as a draft?"
 - `overrides.button_color` — override for this article's button color. Accepts:
   - hex direct in `#RRGGBB` format (e.g. `#c9a227`)
   - friendly name in Portuguese (e.g. `dourado`) — resolved via `/root/mgs-agent/data/button-colors.json`
@@ -80,7 +82,7 @@ Reserved for v2: `type_convention` source — auto-inference from card-name patt
 future run will slot in between (1) and (2) above.
 
 ### 2. Research the card
-- Fetch `card_official_url` (WebFetch) and extract:
+- Fetch `card_official_url` and extract:
   - Exact card name (verify against `card_name`)
   - Annual fee (numeric or "No annual fee")
   - 3–5 real benefits (never invent)
@@ -90,14 +92,23 @@ future run will slot in between (1) and (2) above.
 - Identify 2 real competitor cards from the same country/segment
   (for the Comparative Table section).
 
+> **PITFALL — major bank sites block curl/Python (CRITICAL):** Large UK/US
+> banks (HSBC, Barclays, Lloyds, etc.) deploy bot-detection that returns
+> empty HTML bodies or 0-byte responses to programmatic requests via curl,
+> wget, or Python's urllib — even with realistic headers. The page will
+> appear to return HTTP 200 but the body will be empty.
+>
+> **Always use `browser_navigate` + `browser_snapshot(full=true)`** to fetch
+> official bank card pages. This is the only reliable method for these sites.
+> Do NOT waste time adjusting headers or trying multiple curl approaches —
+> if the first curl attempt returns 0 bytes, switch to the browser immediately.
+
 ### 3. Card image (single source of truth)
 
 **CARD IMAGE PROCESSING IS BEST-EFFORT IN V1 — manual override expected in
 draft review.** The Raquel (editor) will review the draft in WordPress and
 swap the card image manually if quality is poor. V2 will add programmatic
-background removal (rembg or remove.bg API).
-
-- Run `scripts/search-card-image.sh <card_name> <card_official_url>`
+background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image.sh <card_name> <card_official_url>`
   which prioritizes (in order):
   1. A PNG with transparent background from the official bank page
   2. A PNG from the official bank page (even with background)
@@ -106,8 +117,85 @@ background removal (rembg or remove.bg API).
 - The script logs which priority tier was used. If tier 3 or 4, the log
   notes it so Raquel knows to expect manual review.
 - The image is saved to `/tmp/card-<slug>.<ext>`.
+
+> **PITFALL — card image must be HORIZONTAL (landscape) orientation (CRITICAL):**
+> After downloading the candidate image, verify it is in landscape orientation
+> (width > height) before uploading. Modern bank cards (HSBC, Barclays, etc.)
+> increasingly use a vertical/portrait format on their websites, but the
+> LazyBlock card component expects a horizontal card for correct layout.
+>
+> How to check: use `mcp_vision_analyze` on the downloaded image and ask
+> "Is this card horizontal (landscape) or vertical (portrait)?"
+>
+> If the image is vertical → rotate it 90 degrees using Python/PIL:
+> ```python
+> from PIL import Image
+> img = Image.open('/tmp/card-<slug>.<ext>')
+> img_rotated = img.rotate(-90, expand=True)  # -90 = clockwise
+> img_rotated.save('/tmp/card-<slug>.<ext>')
+> ```
+> **Do NOT search for alternative versions. Do NOT use images from other sources
+> (e.g. business cards, old versions). Always rotate the official image.**
+> **Do NOT upload a vertical card image.** It will render incorrectly in the
+> LazyBlock and require a manual fix pass.
+>
+> **PITFALL — card image must be cropped to card edges (CRITICAL):**
+> After downloading and rotating (if needed), always crop the image to remove
+> any white borders or padding around the card. Use pixel-level detection:
+> ```python
+> from PIL import Image
+> img = Image.open('/tmp/card-<slug>.<ext>')
+> arr = img.load()
+> w, h = img.size
+> left, right, top, bottom = w, 0, h, 0
+> for y in range(h):
+>     for x in range(w):
+>         r, g, b = arr[x, y]
+>         if r < 235 or g < 235 or b < 235:
+>             if x < left: left = x
+>             if x > right: right = x
+>             if y < top: top = y
+>             if y > bottom: bottom = y
+> pad = 3
+> cropped = img.crop((max(0,left-pad), max(0,top-pad), min(w,right+pad), min(h,bottom+pad)))
+> cropped.save('/tmp/card-<slug>.<ext>', quality=95)
+> ```
+> Verify the result with vision_analyze: "Does the card have white borders?" If yes, crop again.
+> **Always crop before upload** — white borders render poorly in the LazyBlock card component.
+
 - Upload via `content-publish-wordpress/scripts/upload-image.sh` →
   `{id, source_url}` — this is the **card_media**.
+
+> **PITFALL — WordPress auto-renames duplicate filenames (CRITICAL):**
+> When you upload a file with a name that already exists in the media library,
+> WordPress automatically appends a numeric suffix (e.g. `hsbc-premier-credit-card.jpg`
+> becomes `hsbc-premier-credit-card-1.jpg`). The `source_url` returned by the
+> upload response will contain the **renamed URL** (with the suffix), not the
+> original filename you passed.
+>
+> **Always use the `source_url` AND `id` from the upload response** when building
+> the LazyBlock `imagem` JSON — never hardcode or reconstruct the URL from the
+> filename argument. The upload response is the single source of truth.
+>
+> Example:
+> ```bash
+> result=$(upload-image.sh eggbev /tmp/card.jpg "hsbc-premier-credit-card.jpg")
+> card_id=$(echo $result | jq -r '.id')          # e.g. 61970
+> card_url=$(echo $result | jq -r '.source_url') # e.g. .../hsbc-premier-credit-card-1.jpg
+> ```
+> Use `card_id` and `card_url` from this result — NEVER derive the URL from the
+> filename string you passed.
+
+> **PITFALL — upload-image filename argument (CRITICAL):** `upload-image.sh`
+> determines the MIME type from the **third argument** (filename string), NOT
+> from the file path. Always pass a filename **with the correct extension** as
+> the third arg:
+> ```
+> upload-image.sh eggbev /tmp/card-foo.jpeg "hsbc-premier-credit-card.jpeg"
+> ```
+> Passing a bare title with no extension causes HTTP 500
+> (`rest_upload_sideload_error`). The extension in the third arg must match
+> one of: `.jpg`, `.jpeg`, `.webp`, `.png`.
 
 ### 4. Featured image (composition)
 - Run `scripts/generate-featured-image.sh <slug> <card_image_path>` which
@@ -124,6 +212,38 @@ background removal (rembg or remove.bg API).
   card_media. If not, regenerate (retry up to 2x). If still broken,
   abort with a clear message.
 
+### 4b. Theme HTML sanitization on eggbev (jbf-wp-theme-main)
+
+> **PITFALL — theme strips div/style from wp:html blocks (CRITICAL):**
+> The `jbf-wp-theme-main` theme used on eggbev applies aggressive `wp_kses`
+> filtering at render time. Inside `<!-- wp:html -->` blocks, it strips:
+> - `<div style="...">` — inline style removed, div may also be removed
+> - `<div class="...">` — the div element itself is removed from output
+> - `<style>` tags — removed entirely
+>
+> The HTML saves correctly to the database but is sanitized on page render.
+> This means you CANNOT add responsive wrappers or scoped CSS inside `wp:html`.
+>
+> **What survives inside wp:html:** native table elements (`<table>`, `<thead>`,
+> `<tbody>`, `<tr>`, `<th>`, `<td>`), and their standard attributes.
+>
+> **Where to put global CSS:** Customizer → Additional CSS (`Aparência →
+> Customizar → CSS Adicional`) — this is injected into `<head>` by WordPress
+> itself, before the theme's `wp_kses` filter runs, so it is safe. Any CSS
+> that needs to affect post content (e.g. responsive table overflow) must go
+> there. Example for responsive tables on all posts:
+> ```css
+> .jd-post-content table {
+>   display: block;
+>   overflow-x: auto;
+>   -webkit-overflow-scrolling: touch;
+>   max-width: 100%;
+> }
+> ```
+> This requires manual action in the WP admin panel (cannot be applied via
+> REST API on this site — the `/wp/v2/custom_css` and global-styles endpoints
+> are not available for this classic theme).
+
 ### 5. Write the article
 Follow the loaded template strictly. Word count is a HARD LIMIT:
 **450–500 words** in the final visible body.
@@ -136,9 +256,24 @@ Structure (order is mandatory):
 5. H2 — How Does It Work
 6. H2 — Comparative Table — **MUST contain a real HTML `<table>`** comparing
    the main card with the 2 competitors (columns: card names; rows: annual
-   fee, rewards, lounge access / relevant perks, APR). The table lives inside
-   a Gutenberg `<!-- wp:html -->...<!-- /wp:html -->` block so the editor does
-   not rewrite it. Positioning paragraphs go AFTER the table.
+   fee, rewards, lounge access / relevant perks, APR). The table MUST use
+   the native Gutenberg `<!-- wp:table -->` block wrapped in
+   `<figure class="wp-block-table">`. This is the ONLY format that
+   receives the theme's `overflow-x: auto` on mobile — do NOT use
+   `<!-- wp:html -->`, which the theme sanitizes and strips the wrapper.
+   HTML must be compact (no indentation, no line breaks between tags).
+   Positioning paragraphs go AFTER the table.
+
+   **Table formatting rules (mobile readability):**
+   - Always add `style="font-size:85%"` to the `<table>` element
+   - Keep cell text short and concise — avoid wrapping. Conventions:
+     - Rewards: `1.5pts/£1; 2pts/£1 abroad` (not `1.5 pts per £1 sterling; 2 pts per £1 on foreign currency`)
+     - Lounge access: `Priority Pass £24/visit` (not `Priority Pass (£24/visit)`)
+     - Unlimited lounge: `Unlimited PP` (not `Unlimited Priority Pass`)
+     - APR: `29.9% var.` (not `29.9% variable`)
+     - Approximate APR: `~29.9% var.`
+     - Charge card: `N/A charge card`
+   - Goal: cells fit in one line on mobile wherever possible
 7. H2 — Who Is This Card Best For
 
 Card LazyBlocks and the CTA LazyBlock are inserted by the skill (see step 7),
@@ -148,8 +283,42 @@ not by the writer — do NOT add placeholders in the writer output.
 Run `scripts/validate-article.sh <body_html_file>`. If exit != 0, expand or
 trim the article and re-validate. Never publish out-of-range content.
 
+> **PITFALL — validate the EXACT content that will be published (CRITICAL):**
+> The validator must be called on the **final assembled body** — the same string
+> passed to `create-post.sh` or `update-yoast.sh`. If the article is rewritten
+> for any reason after the first validation (image fix, LazyBlock correction,
+> retry), the validator MUST be called again before publishing.
+> Never assume a previous PASS still applies to modified content.
+> Rule: one validate call per publish attempt, always on the final string.
+
+> **PITFALL — word count must include table content (CRITICAL):**
+> The validator counts ALL visible text including H2 subtitles, body paragraphs,
+> and table cell content. LazyBlock card and CTA blocks are excluded.
+> Token = any whitespace-separated string containing at least one letter or digit
+> (matches WP's native word counter). This means a table with 3 rows × 5 columns
+> easily adds 50–60 words. Always write the article body (with the table already
+> included) and validate the complete body file — not a "prose-only" version.
+>
+> **Practical rule:** When the article includes a Comparative Table, budget for it.
+> Target the prose content at ~420–440 words, then the table brings the total to
+> the 450–500 range. Validate the whole body file (including `<!-- wp:html -->` table)
+> in a single pass — do NOT validate prose and table separately.
+
 ### 7. Assemble raw HTML
 Build the final content (raw Gutenberg format) as:
+
+> **PITFALL — splitting article body blocks:** When splitting the article HTML
+> into Gutenberg blocks with `re.split(r'(?=<!-- wp:)', body)`, the result
+> starts with an empty string if the body begins with `<!-- wp:`. Always
+> filter empty strings after splitting:
+> ```python
+> blocks = [b.strip() for b in re.split(r'(?=<!-- wp:)', body.strip()) if b.strip()]
+> subtitle_block = blocks[0]   # first <!-- wp:paragraph --> = subtitle
+> rest_blocks = '\n\n'.join(blocks[1:])
+> ```
+> Do NOT rely on index position without filtering; inserting the LazyBlock
+> between subtitle and body will silently break if the empty element is
+> left in the list.
 
 ```
 <!-- wp:paragraph -->
@@ -167,9 +336,9 @@ Build the final content (raw Gutenberg format) as:
 ... paragraphs ...
 
 <!-- wp:heading --><h2 class="wp-block-heading">Comparative Table</h2><!-- /wp:heading -->
-<!-- wp:html -->
-<table> ... real HTML table with 2 competitors ... </table>
-<!-- /wp:html -->
+<!-- wp:table -->
+<figure class="wp-block-table"><table class="has-fixed-layout" style="font-size:85%"><thead><tr><th>...</th></tr></thead><tbody><tr><td>...</td></tr></tbody></table></figure>
+<!-- /wp:table -->
 ... positioning paragraphs ...
 
 <!-- wp:heading --><h2 class="wp-block-heading">Who Is This Card Best For</h2><!-- /wp:heading -->
@@ -228,8 +397,11 @@ Each LazyBlock in the post gets its own freshly generated `blockId`.
   `https://{domain}/apply-now-{country}-{vertical}-{card_slug}/`
 
 ### 9. Yoast SEO fields
-- `_yoast_wpseo_title` — `"{Card Name}: {catchy phrase} | {Site Name}"`
-  (≤60 chars ideal)
+- `_yoast_wpseo_title` — Use a card benefit (NOT the word "Review", NOT the site name).
+  Format: `"{Card Name}: {benefit phrase}"` — e.g. `"HSBC Premier: No Fee, Lounge Access"`
+  **HARD LIMIT: ≤60 characters including spaces and punctuation. Must contain
+  the focus keyphrase (card name). Count the EXACT character length before saving —
+  never estimate. NEVER include the site name at the end. NEVER use the word "Review".**
 - `_yoast_wpseo_metadesc` — 140–155 chars, must include card name
 - `_yoast_wpseo_focuskw` — the card name (e.g. "AIB Visa Gold Card")
 
@@ -247,6 +419,22 @@ Plus **2–4 SEO tags chosen by the writer** based on the card's main benefits
 name (WP auto-slugs to kebab-case — e.g. `"travel credit card"` →
 slug `travel-credit-card`). If you need the slug explicitly, compute:
 lowercase, spaces → `-`, strip non-alphanumeric.
+
+> **PITFALL — tags CANNOT contain hyphens (CRITICAL):** Tag names must use
+> spaces, never hyphens. Example: `"travel credit card"` ✅, `"travel-credit-card"` ❌.
+> This applies to ALL tags including the card_slug tag — use the card name words
+> with spaces (e.g. `"hsbc premier credit card"`, NOT `"hsbc-premier-credit-card"`).
+
+> **PITFALL — resolve-term.sh returns HTTP 400 when tag already exists:** The script
+> errors out with `term_exists` even though it includes the term_id in the error body.
+> When this happens, fetch the tag ID directly via the REST API:
+> ```bash
+> curl -s -u "$WP_USER:$WP_PASS" \
+>   "$WP_URL/wp-json/wp/v2/tags?search=travel%20credit%20card&per_page=5" \
+>   | python3 -c "import sys,json; t=[x for x in json.load(sys.stdin) if x['name'].lower()=='travel credit card']; print(t[0]['id'])"
+> ```
+> Do NOT assume the tag is missing just because resolve-term.sh errored — always
+> verify via GET before attempting to create.
 
 Total: 6–8 tags.
 
@@ -271,7 +459,8 @@ exits 3 if any mismatch is found.
 ### 12. Return
 
 Emit a summary to the user:
-- Post ID + URL
+- Post ID + WordPress edit link
+- **Official source URL** used to research the card (card_official_url)
 - Featured media URL
 - Card media URL (and the priority tier from search-card-image.sh)
 - Final word count

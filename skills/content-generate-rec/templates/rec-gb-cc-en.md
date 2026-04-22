@@ -11,9 +11,9 @@ Under 450 = FAIL
 Over 500 = FAIL
 
 WORD COUNT RULE:
-Count ONLY real visible words in the final article body
-Do NOT count spaces, punctuation, symbols, HTML tags, formatting characters,
-comments, JSON blocks, or hidden metadata.
+Count ALL visible words including: subtitle (H2s), body paragraphs, and table content.
+Do NOT count: LazyBlock card block, CTA buttons, spaces, punctuation, HTML tags,
+formatting characters, comments, JSON blocks, or hidden metadata.
 
 CRITICAL:
 The validation must be done on the FINAL assembled article body.
