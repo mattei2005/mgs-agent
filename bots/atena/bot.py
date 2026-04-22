@@ -28,6 +28,7 @@ from bots.shared.config import (
     log_path,
 )
 from bots.shared.auth import is_authorized, get_user_details
+from bots.shared import events
 
 
 # ===== Logging setup =====
@@ -116,6 +117,14 @@ async def on_message(message: discord.Message):
             f"🔒 {message.author.mention}, você não está autorizado a usar Atena. "
             f"Solicite autorização ao Zeus admin."
         )
+        # Report auth request to Zeus
+        try:
+            await events.report_auth_request(
+                bot, "Atena", message.author.id, message.author.mention,
+                message.content[:100]
+            )
+        except Exception:
+            logger.exception("Failed to report auth_request to Zeus")
         return
 
     # Authorized — route intent
@@ -125,23 +134,30 @@ async def on_message(message: discord.Message):
 
     content = message.content.strip().lower()
 
-    # Intent detection (simple for MVP)
-    if any(kw in content for kw in ["status", "tá tudo ok", "health", "tudo certo"]):
-        await handle_status(message)
-    elif content in ["templates", "lista verticais", "list templates"] or "templates" in content:
-        await handle_list_templates(message)
-    elif content in ["sites", "lista sites", "list sites"] or content.startswith("sites"):
-        await handle_list_sites(message)
-    elif content.startswith("rec ") or "faz um rec" in content or "create rec" in content:
-        await handle_rec_create(message, content)
-    else:
-        await message.channel.send(
-            f"Olá {username}! Comandos disponíveis:\n"
-            f"• `rec [card] no [site]` — criar REC article\n"
-            f"• `templates` — listar templates disponíveis\n"
-            f"• `sites` — listar sites configurados\n"
-            f"• `status` — health check"
-        )
+    try:
+        # Intent detection (simple for MVP)
+        if any(kw in content for kw in ["status", "tá tudo ok", "health", "tudo certo"]):
+            await handle_status(message)
+        elif content in ["templates", "lista verticais", "list templates"] or "templates" in content:
+            await handle_list_templates(message)
+        elif content in ["sites", "lista sites", "list sites"] or content.startswith("sites"):
+            await handle_list_sites(message)
+        elif content.startswith("rec ") or "faz um rec" in content or "create rec" in content:
+            await handle_rec_create(message, content)
+        else:
+            await message.channel.send(
+                f"Olá {username}! Comandos disponíveis:\n"
+                f"• `rec [card] no [site]` — criar REC article\n"
+                f"• `templates` — listar templates disponíveis\n"
+                f"• `sites` — listar sites configurados\n"
+                f"• `status` — health check"
+            )
+    except Exception as e:
+        logger.exception("Unhandled error in on_message intent routing")
+        try:
+            await events.report_error(bot, "Atena", "on_message", str(e), username)
+        except Exception:
+            logger.exception("Failed to report error to Zeus")
 
 
 # ===== Intent handlers =====
@@ -239,6 +255,20 @@ async def handle_rec_create(message: discord.Message, content: str):
             "Exemplo: `rec HSBC Premier no eggbev`"
         )
         return
+
+    # Resolve username for event reporting
+    user_details = get_user_details(message.author.id, "atena")
+    username = user_details.get("name") if user_details else str(message.author)
+
+    # Report to Zeus BEFORE responding on channel
+    try:
+        await events.report_pipeline_started(
+            bot, "Atena", username,
+            f"rec '{card_name}' no {site_key}",
+            {"card": card_name, "site": site_key}
+        )
+    except Exception:
+        logger.exception("Failed to report pipeline_started to Zeus")
 
     # Confirm parsing (MVP — no pipeline execution yet)
     response = (
