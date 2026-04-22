@@ -114,6 +114,95 @@ Detection: check-slug-conflict.sh now logs WARN when /posts query returns
 0 results (likely false negative due to filter interference). In production,
 look for these WARN entries to identify affected sites.
 
+## Agent Roadmap
+
+### Philosophy
+
+Each agent is a specialized "employee" of MGS Digital Corp's content operation.
+Zeus is the General Manager — sees everything, authorizes users, monitors agents.
+Specialized agents report to Zeus and execute their domain autonomously.
+
+### Phase 1 — Foundation (2026-04-21, in progress)
+
+**Zeus** — Admin Agent / General Manager
+- Discord channel: zeus-admin-agent
+- Whitelist: Rodolfo (Super Admin)
+- Receives: all events from other agents (started, paused, completed, errors, auth requests)
+- Proactive: alerts when agents go offline, auto-summaries
+- Commands: status, list users, aprova/nega, pending, last N, pipeline <agent>
+
+**Atena** — Content Agent
+- Discord channel: atena-content-agent
+- Whitelist: Raquel
+- Combines skills: content-generate-rec + content-publish-wordpress
+- Full pipeline: WebFetch research → generate article → create images → publish WordPress
+- Reports to Zeus at each lifecycle event
+- 4 mandatory human-review pauses (after Step 2, 5, 11.1, 11.5)
+
+### Phase 2 — Quality Assurance (planned)
+
+**Hermes** — Site Auditor / Quality Manager
+- Function: keep all sites "100% redondos" at all times
+- Audit categories:
+  - Links: broken links, redirect chains, dead external links
+  - SEO: keyword stuffing, meta descriptions, alt text, schema markup
+  - Content: plagiarism, readability, keyword density
+  - Product/Card: card existence check, benefit updates, fee changes
+  - Legal/Compliance: privacy policy, terms, cookie banner, disclaimers
+  - AdSense/AdX: Google guidelines enforcement (YMYL, clickbait, prohibited categories)
+  - Performance: Lighthouse scores, Core Web Vitals, page speed
+  - Mobile: responsiveness
+  - Accessibility: WCAG compliance, contrast, ARIA
+  - Duplication: canonical tags, duplicate content
+  - Images: alt text, optimization, WebP
+  - Structure: sitemap.xml, robots.txt, internal linking
+- Country-specific regulatory audits:
+  - UK: FCA financial product disclaimers
+  - US: TILA/Reg Z disclosures
+  - EU: GDPR + cookie compliance
+  - BR: BACEN credit card regulations
+  - MX: CNBV compliance
+- Additional checks (Claude suggestions to Rodolfo):
+  - Schema.org markup for financial products (Review schema, FAQPage)
+  - HTTPS mixed content detection
+  - Meta robots conflicts (noindex where shouldn't be)
+  - Abandoned drafts (>X days)
+  - Outdated posts (>6 months in competitive keywords)
+- Output: prioritized checklist → assigned to Raquel with tracking
+- Reports to Zeus
+
+### Phase 3 — Marketing (future)
+
+**Ares** — Ads Manager
+- Platforms: Facebook Ads Manager + Google Ads
+- Functions: campaign creation, monitoring, optimization, A/B testing
+- Budget allocation between campaigns
+- Automation: pause underperforming, scale high-ROI
+- Reports to Zeus with ROI dashboards
+
+### Phase N — Beyond
+
+Additional agents to be added as business grows. Examples for later consideration:
+- Analytics agent (extraction + reporting)
+- Email campaign agent
+- SEO research agent
+- Competitor intelligence agent
+
+### Communication pattern
+
+All agents → Zeus via Discord webhook (posts to #zeus-admin-agent channel).
+Zeus → agents via direct messages in their respective channels (future:
+inter-agent orchestration).
+
+Event types sent to Zeus:
+- pipeline_started (agent, user, request_summary)
+- pipeline_paused (agent, step, awaiting_from)
+- pipeline_completed (agent, duration, output_url)
+- error (agent, step, error_message)
+- auth_request (agent, user, request)
+- unauthorized_attempt (agent, user, request)
+- health_heartbeat (agent, uptime) — periodic
+
 ## Technical Debt
 
 - `skills/content-publish-wordpress/scripts/upload-image.sh`: output JSON does not include `mime_type`. LazyBlock does not consume it, but useful for debug/auditing. Add in the next refactor.
