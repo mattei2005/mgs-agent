@@ -1,5 +1,6 @@
 node_modules/
 .env
+.env.*
 logs/
 *.log
 dist/
@@ -10,3 +11,18 @@ __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
+
+# Secret-shaped files (defense-in-depth pra auto-commit watcher)
+*credentials*
+*secret*
+*token*
+*.pem
+*.key
+*.p12
+*.pfx
+.git-credentials
+
+# Backups temporários
+data/*.bak_*
+*.bak
+*.bak.*
