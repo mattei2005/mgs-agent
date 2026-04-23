@@ -49,4 +49,41 @@ Não existe flag nativa no Hermes pra suprimir mensagens de `status_callback("li
 - Auxiliary model: claude-haiku-4-5-20251001 (vision, title_generation, compression, etc)
 - Sessões acumulam histórico — quando passam de 30k tokens, cada nova msg bate no rate limit Tier 1
 
-<!-- test auto-commit Thu Apr 23 12:23:42 AM UTC 2026 -->
+## 2026-04-23
+
+### Feature: Auto-commit watcher (inotify + systemd)
+
+**Objetivo:** toda mudança em `/root/mgs-agent/` vira commit+push automático pro GitHub em ~10-15 segundos, sem intervenção manual.
+
+**Peças:**
+- `scripts/auto-commit-watcher.sh` — loop infinito com `inotifywait -r` + debounce de 10s; ao detectar mudança faz `git add -A && git commit -m "auto: <files>"`
+- `/etc/systemd/system/mgs-autocommit.service` — wraps o script como service `Type=simple` + `Restart=on-failure` + `EnvironmentFile=/root/.hermes/.env` (pra hook de push ter `OP_SERVICE_ACCOUNT_TOKEN`)
+- Push real é feito pelo post-commit hook **já existente** (token via 1P on-demand, nunca persistido)
+
+**Exclusões** (pra não criar loop ou lixo):
+- `.git/` — ignorar operações internas do git
+- `.bak`, `.swp`, `.tmp` — editores/backups temporários
+- `sessions/`, `/logs/` — fora do repo mas poderia ser tocado
+- `node_modules`
+
+**Defesa em profundidade — `.gitignore` reforçado antes de ativar:**
+- `*credentials*`, `*secret*`, `*token*`, `*.pem`, `*.key`, `*.p12`, `*.pfx`
+- `.env.*`, `.git-credentials`
+- `data/*.bak_*`, `*.bak`, `*.bak.*`
+
+**Log:** `/root/mgs-agent/logs/auto-commit-watcher.log`
+
+**Ops:**
+- `systemctl status mgs-autocommit` — ver estado
+- `systemctl restart mgs-autocommit` — após editar o script
+- `systemctl stop mgs-autocommit` — pra pausar auto-commit temporariamente
+- `journalctl -u mgs-autocommit -f` — stream de logs
+
+**Teste de smoke** (validado em 2026-04-23 00:23):
+- Edit em `docs/CHANGELOG.md` → watcher detectou → 10s depois commit `8dc6776 auto: docs/CHANGELOG.md` → hook 1P pushou em 1s → commit visível no GitHub
+
+**Trade-offs conhecidos:**
+- Cada edit pequena vira commit na history (ruído). Aceitável porque o git log serve como audit trail, não commit-graph curado.
+- Debounce de 10s pode deixar passar 2 edits seguidas em 1 commit só (desejável) ou pode atrasar um commit mais do que o necessário (aceitável).
+- Se o `OP_SERVICE_ACCOUNT_TOKEN` expirar, o commit ainda acontece mas o push falha silente (logado em `logs/auto-push.log`). Precisa monitorar.
+
