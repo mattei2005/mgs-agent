@@ -201,3 +201,43 @@ If broken → regenerate
 
 OUTPUT FORMAT:
 HTML ONLY
+
+---
+
+## SEO FIELDS
+
+These fields are published to Yoast SEO. Write them AFTER the article body is final.
+The pipeline reads them from the template output and publishes via API.
+
+### SEO Title (`_yoast_wpseo_title`)
+- Format: `{Card Name}: {benefit phrase}`
+- HARD LIMIT: ≤60 characters including spaces and punctuation
+- MUST contain the focus keyphrase (card name)
+- Use a real card benefit — not a generic phrase
+- NEVER use the word "Review"
+- NEVER include the site name
+- Count the EXACT character length before finalising — never estimate
+
+Examples:
+✓ `"HSBC Premier: No Fee & Lounge Access"` (38 chars)
+✓ `"AIB Visa Gold: No Foreign Fees, Travel Cover"` (45 chars)
+✗ `"HSBC Premier Credit Card Review"` (contains "Review")
+✗ `"HSBC Premier Credit Card | Eggbev"` (contains site name)
+
+### Meta Description (`_yoast_wpseo_metadesc`)
+- HARD LIMIT: ≤130 characters including spaces and punctuation
+- MUST contain the exact card name
+- MUST mention 2 real benefits of the card (no invented data)
+- Tone: direct, factual, no clickbait, no "click here"
+- British spelling for UK cards
+- No ellipsis, no trailing "..."
+- Count the EXACT character length before finalising — never estimate
+
+Examples:
+✓ `"HSBC Premier Credit Card earns 20,000 bonus points and offers Priority Pass lounge access with no annual fee."` (109 chars)
+✗ `"The best credit card for UK travellers — apply now!"` (no card name, clickbait)
+✗ `"HSBC Premier Credit Card is a great option with many benefits for customers."` (vague, no real benefits)
+
+### Focus Keyphrase (`_yoast_wpseo_focuskw`)
+- Exact card name, no changes (e.g. `"HSBC Premier Credit Card"`)
+
