@@ -504,7 +504,8 @@ Emit a summary to the user:
 - Featured media URL
 - Card media URL (and the priority tier from search-card-image.sh)
 - Final word count
-- Tags applied (names + IDs)
+- Tags applied (names + IDs) — confirm `lang_{language}` tag is present
+- **Always mention Raquel (<@1496254952501280974>) in the summary** so she receives a Discord notification and can review the published article.
 
 ## Scripts
 
