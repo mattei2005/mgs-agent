@@ -330,39 +330,50 @@ Se a qualidade da imagem oficial for ruim ou a imagem não estiver disponível, 
 
 ---
 
-## 7. Metadata SEO (Yoast)
+## 7. Metadata SEO (Yoast) — campos obrigatórios
 
-Todo REC publicado tem metadata SEO configurada pro Yoast SEO. São 3 campos críticos:
+Todo REC publicado tem 3 campos SEO obrigatórios configurados via Yoast. Esses campos são escritos **no final do template**, após o artigo estar finalizado — são a fonte de verdade que o sistema lê e publica na API.
 
-### Focus keyphrase
+> **Arquitetura importante:** o `SKILL.md` é o pipeline técnico (os passos de execução). O template `rec-gb-cc-en.md` é onde ficam as regras de escrita — incluindo os campos SEO. Raquel escreve os campos no template; a Atena lê e publica via API.
 
-- **Igual ao nome exato do cartão** (ex: *"AIB Visa Gold Card"*, *"HSBC Premier Credit Card"*)
+### SEO Title (`_yoast_wpseo_title`)
+
+| Regra | Detalhe |
+|---|---|
+| Limite duro | ≤60 caracteres (espaços e pontuação incluídos) |
+| Formato | `{Nome do Cartão}: {frase de benefício real}` |
+| Deve conter | Nome exato do cartão (focus keyphrase) |
+| Nunca usa | A palavra "Review", nome do site, emojis |
+
+**Contar o tamanho exato antes de finalizar — nunca estimar.**
+
+✅ `"HSBC Premier: No Fee & Lounge Access"` (38 chars)  
+✅ `"AIB Visa Gold: No Foreign Fees, Travel Cover"` (45 chars)  
+❌ `"HSBC Premier Credit Card Review"` (contém "Review")  
+❌ `"HSBC Premier Credit Card | Eggbev"` (contém nome do site)
+
+### Meta Description (`_yoast_wpseo_metadesc`)
+
+| Regra | Detalhe |
+|---|---|
+| Limite duro | ≤130 caracteres (espaços e pontuação incluídos) |
+| Deve conter | Nome exato do cartão |
+| Deve mencionar | 2 benefícios reais do cartão (sem inventar) |
+| Tom | Direto, factual, sem clickbait, sem "clique aqui" |
+| Spelling | Britânico para cartões UK |
+| Proibido | Reticências, trailing "..." |
+
+**Contar o tamanho exato antes de finalizar — nunca estimar.**
+
+✅ `"HSBC Premier Credit Card earns 20,000 bonus points and offers Priority Pass lounge access with no annual fee."` (109 chars)  
+❌ `"The best credit card for UK travellers — apply now!"` (sem nome do cartão, clickbait)  
+❌ `"HSBC Premier Credit Card is a great option with many benefits."` (vago, sem benefícios reais)
+
+### Focus Keyphrase (`_yoast_wpseo_focuskw`)
+
+- Nome exato do cartão, sem alterações
+- Exemplos: `"HSBC Premier Credit Card"`, `"AIB Visa Gold Card"`
 - É a palavra-chave que o artigo vai disputar no Google
-
-### Meta title (título de SEO)
-
-| Regra | Detalhe |
-|---|---|
-| Limite duro | 60 caracteres (contando espaços e pontuação) |
-| Deve conter | Focus keyphrase (nome do cartão) |
-| Formato | `{Nome do Cartão}: {frase de benefício}` |
-| Nunca usa | A palavra "Review", o nome do site, emojis |
-
-**Exemplo correto:** *"HSBC Premier: No Fee, Lounge Access"* (45 caracteres)  
-**Exemplo errado:** *"HSBC Premier Credit Card Review 2026 — Best UK Travel Card | EggBev"* (66 caracteres, tem "Review", tem site)
-
-### Meta description
-
-| Regra | Detalhe |
-|---|---|
-| Tamanho | Máximo 130 caracteres (limite duro) |
-| Deve conter | Nome do cartão |
-| Tom | Editorial, informativo, sem call to action agressivo |
-| Objetivo | Ganhar o clique no resultado do Google |
-
-**Exemplo:** *"HSBC Premier Credit Card offers 20,000 bonus points, airport lounge access and no annual fee for UK Premier customers. Read our review."* (109 caracteres)
-
----
 
 ## 8. Exemplo prático de estrutura editorial
 
