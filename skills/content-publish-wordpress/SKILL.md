@@ -112,3 +112,27 @@ The `yoast_json_path` file must contain:
 All scripts append to `/root/mgs-agent/logs/publish-wordpress.log` with
 timestamp + action + HTTP status. On error, stderr receives a human-readable
 message and exit code is non-zero.
+
+## Querying WP post status from outside the pipeline (Zeus / audit use)
+
+**Best source** — `logs/publish-wordpress.log`, grep for `create-post OK`:
+```bash
+grep "create-post OK" /root/mgs-agent/logs/publish-wordpress.log | tail -5
+# e.g. → create-post OK http=201 site=eggbev id=61965
+```
+Gives the canonical post ID without touching WP REST API.
+
+**Fetch post by ID** (no auth needed for published posts):
+```bash
+curl -s "https://eggbev.com/wp-json/wp/v2/posts/<ID>" | python3 -c "
+import sys, json; p = json.load(sys.stdin)
+print(p['id'], p['status'], p['slug'], p['title']['rendered'][:80])"
+```
+
+**eggbev.com REST API quirks (verified 2026-04-23)**:
+- `Authorization: Basic <base64>` via `-H` fails silently on HTTP/2 (connection drops). Use `-u user:pass` instead.
+- `GET /users/me` returns 401 even with valid app password — auth partially restricted.
+- `?status=draft` / `?status=any` → 401 without working auth session.
+- `?slug=<slug>` always returns `[]` — broken by plugin interference (known issue, see CLAUDE.md).
+- `?search=rec` on public endpoint works but only returns published posts.
+- Direct `GET /posts/<id>` is the most reliable query — works unauthenticated for published posts.
