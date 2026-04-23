@@ -126,6 +126,23 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   notes it so Raquel knows to expect manual review.
 - The image is saved to `/tmp/card-<slug>.<ext>`.
 
+> **PITFALL — search-card-image.sh may select wrong card on multi-card pages (CRITICAL):**
+> Some bank pages (especially Barclaycard) display multiple card images —
+> e.g. a generic "Rewards" card thumbnail alongside the specific Avios Plus
+> card. The scoring algorithm picks the highest-scoring PNG by keyword match,
+> which may not be the correct card if a generic card image scores higher or
+> equally due to naming conventions (e.g. `rewards-vertical-tombstone.png`
+> outscoring `AviosPlus-front.png` due to keyword overlap).
+>
+> **Always verify the downloaded card image with `mcp_vision_analyze` before
+> proceeding**, asking: "Is this the [exact card name] card?" If the script
+> picked the wrong card, identify the correct image URL from
+> `browser_get_images` output and download it manually with curl.
+>
+> Example for Barclaycard Avios Plus: the script may grab the generic
+> Barclaycard Rewards PNG; the correct image is the one explicitly named
+> `AviosPlus-front` in the page's image list.
+
 > **PITFALL — card image must be HORIZONTAL (landscape) orientation (CRITICAL):**
 > After downloading the candidate image, verify it is in landscape orientation
 > (width > height) before uploading. Modern bank cards (HSBC, Barclays, etc.)
