@@ -103,6 +103,14 @@ future run will slot in between (1) and (2) above.
 > Do NOT waste time adjusting headers or trying multiple curl approaches —
 > if the first curl attempt returns 0 bytes, switch to the browser immediately.
 
+> **PITFALL — Barclays vs Barclaycard: two separate domains (CRITICAL):**
+> Barclays Bank (`barclays.co.uk`) and Barclaycard (`barclaycard.co.uk`) are
+> separate UK entities with separate card pages. Credit cards branded
+> "Barclaycard" (Avios Plus, Avios, Rewards, Platinum, etc.) live at
+> `https://www.barclaycard.co.uk/personal/credit-cards/<slug>`, NOT at
+> `barclays.co.uk/credit-cards/<slug>` — that path 404s for Barclaycard
+> products. Always confirm the correct domain before fetching card data.
+
 ### 3. Card image (single source of truth)
 
 **CARD IMAGE PROCESSING IS BEST-EFFORT IN V1 — manual override expected in
