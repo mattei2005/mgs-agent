@@ -304,9 +304,23 @@ Structure (order is mandatory):
 Card LazyBlocks and the CTA LazyBlock are inserted by the skill (see step 7),
 not by the writer — do NOT add placeholders in the writer output.
 
-### 6. Validate word count
+### 6. Validate word count and subtitle length
 Run `scripts/validate-article.sh <body_html_file>`. If exit != 0, expand or
 trim the article and re-validate. Never publish out-of-range content.
+
+**Also validate the subtitle (excerpt) length before publishing:**
+The subtitle — the first `<!-- wp:paragraph -->` block, placed before the
+LazyBlock credit-card — is what WordPress renders as the post excerpt. It has
+a **hard limit of 100 characters** (spaces and punctuation included).
+
+> **PITFALL — subtitle IS the excerpt (CRITICAL):**
+> The first paragraph of the post content (before the card LazyBlock) is
+> displayed as the excerpt on listing pages, RSS feeds, and social previews.
+> Exceeding 100 characters produces a truncated or broken excerpt.
+>
+> Measure with: `python3 -c "s='<subtitle text>'; print(len(s))"`
+>
+> If over 100 chars → rewrite to fit. Do NOT publish until ≤100 chars confirmed.
 
 > **PITFALL — validate the EXACT content that will be published (CRITICAL):**
 > The validator must be called on the **final assembled body** — the same string
