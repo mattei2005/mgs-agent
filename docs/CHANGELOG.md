@@ -48,3 +48,5 @@ Não existe flag nativa no Hermes pra suprimir mensagens de `status_callback("li
 - Main model: claude-sonnet-4-6 em ambos profiles
 - Auxiliary model: claude-haiku-4-5-20251001 (vision, title_generation, compression, etc)
 - Sessões acumulam histórico — quando passam de 30k tokens, cada nova msg bate no rate limit Tier 1
+
+<!-- test auto-commit Thu Apr 23 12:23:42 AM UTC 2026 -->
