@@ -437,6 +437,7 @@ Mandatory tags (in order), coming from config + card_slug:
 2. `"{vertical}"` — e.g. `"cc"`
 3. `"{country}"` — e.g. `"gb"`
 4. `"{card_slug}"` — e.g. `"aib-visa-gold"`
+5. `"lang_{language}"` — derived from the last segment of `template_key` (e.g. `gb-cc-en` → `"lang_en"`, `mx-cc-es` → `"lang_es"`, `br-loans-pt` → `"lang_pt"`). **Always include. Applies to all sites and verticals.**
 
 Plus **2–4 SEO tags chosen by the writer** based on the card's main benefits
 (examples: `"travel credit card"`, `"airport lounge access"`, `"no annual fee"`,
