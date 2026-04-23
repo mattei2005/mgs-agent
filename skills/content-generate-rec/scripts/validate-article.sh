@@ -42,12 +42,38 @@ print(len(tokens))
 PYEOF
 )
 
-if [ "$count" -ge "$MIN" ] && [ "$count" -le "$MAX" ]; then
-  jq -n --argjson c "$count" --argjson mn "$MIN" --argjson mx "$MAX" \
-    '{count:$c, min:$mn, max:$mx, status:"PASS"}'
+# Extract subtitle (first visible paragraph — the excerpt)
+subtitle=$(python3 - "$HTML_FILE" <<'PYEOF2'
+import sys, re
+with open(sys.argv[1]) as f:
+    content = f.read()
+# Remove LazyBlock lines
+content = re.sub(r'<!--\s*wp:lazyblock/.*?/-->', '', content)
+# Find first <p>...</p>
+m = re.search(r'<p>(.*?)</p>', content, re.DOTALL)
+if not m:
+    print("")
+else:
+    text = re.sub(r'<[^>]+>', '', m.group(1)).strip()
+    print(text)
+PYEOF2
+)
+
+subtitle_len=${#subtitle}
+SUBTITLE_MAX=100
+
+# Evaluate results
+word_ok=false
+subtitle_ok=false
+
+[ "$count" -ge "$MIN" ] && [ "$count" -le "$MAX" ] && word_ok=true
+[ "$subtitle_len" -le "$SUBTITLE_MAX" ] && subtitle_ok=true
+
+if $word_ok && $subtitle_ok; then
+  jq -n --argjson c "$count" --argjson mn "$MIN" --argjson mx "$MAX"     --argjson sl "$subtitle_len" --argjson sm "$SUBTITLE_MAX"     '{count:$c, min:$mn, max:$mx, subtitle_chars:$sl, subtitle_max:$sm, status:"PASS"}'
   exit 0
 else
-  jq -n --argjson c "$count" --argjson mn "$MIN" --argjson mx "$MAX" \
-    '{count:$c, min:$mn, max:$mx, status:"FAIL"}'
+  status="FAIL"
+  jq -n --argjson c "$count" --argjson mn "$MIN" --argjson mx "$MAX"     --argjson sl "$subtitle_len" --argjson sm "$SUBTITLE_MAX"     --arg wok "$([ "$word_ok" = true ] && echo pass || echo fail)"     --arg sok "$([ "$subtitle_ok" = true ] && echo pass || echo fail)"     '{count:$c, min:$mn, max:$mx, word_count:$wok, subtitle_chars:$sl, subtitle_max:$sm, subtitle:$sok, status:"FAIL"}'
   exit 1
 fi
