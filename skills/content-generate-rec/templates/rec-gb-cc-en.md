@@ -84,7 +84,9 @@ Total: 6-8 tags per article.
 Before writing the article body, generate a SUBTITLE at the very top.
 
 Subtitle rules:
-- MAX 100 characters (spaces and punctuation count)
+- **HARD LIMIT: MAX 100 characters** (spaces and punctuation count)
+- This subtitle IS the excerpt — it is the first thing readers and Google see
+- Count the EXACT length before publishing — never estimate
 - MUST contain the exact focus keyphrase: {keyphrase}
 - MUST highlight ONE specific feature or benefit of the card
   (e.g., no foreign fees, interest-free period, credit limit,
