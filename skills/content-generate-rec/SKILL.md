@@ -397,13 +397,13 @@ Each LazyBlock in the post gets its own freshly generated `blockId`.
   `https://{domain}/apply-now-{country}-{vertical}-{card_slug}/`
 
 ### 9. Yoast SEO fields
-- `_yoast_wpseo_title` — Use a card benefit (NOT the word "Review", NOT the site name).
-  Format: `"{Card Name}: {benefit phrase}"` — e.g. `"HSBC Premier: No Fee, Lounge Access"`
-  **HARD LIMIT: ≤60 characters including spaces and punctuation. Must contain
-  the focus keyphrase (card name). Count the EXACT character length before saving —
-  never estimate. NEVER include the site name at the end. NEVER use the word "Review".**
-- `_yoast_wpseo_metadesc` — 140–155 chars, must include card name
-- `_yoast_wpseo_focuskw` — the card name (e.g. "AIB Visa Gold Card")
+Writing rules for these fields are defined in the template (see `templates/rec-{template_key}.md`,
+section **SEO FIELDS**). The template is the single source of truth for content and tone.
+
+Technical constraints (pipeline-level):
+- `_yoast_wpseo_title` — ≤60 chars (hard limit). Count exact length before saving.
+- `_yoast_wpseo_metadesc` — ≤130 chars (hard limit). Count exact length before saving.
+- `_yoast_wpseo_focuskw` — exact card name as-is (e.g. `"HSBC Premier Credit Card"`)
 
 ### 10. Resolve taxonomy IDs
 
