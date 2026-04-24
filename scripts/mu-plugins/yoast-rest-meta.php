@@ -1,58 +1,60 @@
 <?php
 /**
- * MU Plugin: Yoast REST Meta + Indexable Refresh
+ * MU Plugin: Yoast REST Meta
  * File: wp-content/mu-plugins/yoast-rest-meta.php
  *
- * Expõe via REST apenas os INPUTS do usuário (title, metadesc, focuskw, _hide_from_home).
- * Os scores (_yoast_wpseo_linkdex e _yoast_wpseo_content_score) NÃO são expostos,
- * pois são OUTPUTS calculados pelo próprio Yoast — deixar eles graváveis via REST
- * causa valores stale que fazem o editor piscar (vermelho → laranja) no load.
+ * Registra os campos do Yoast SEO e _hide_from_home no WordPress
+ * REST API para leitura e escrita via API.
  *
- * O build() do indexable só roda no CREATE ($creating === true). Em updates
- * subsequentes (quando o JS do Yoast salva um novo score), o build não roda
- * e portanto não sobrescreve o score real calculado pelo frontend do Yoast.
+ * IMPORTANTE: este plugin NÃO interfere no indexable do Yoast.
+ * Deixa o Yoast construir/recalcular o indexable sozinho no timing
+ * dele. Qualquer interferência (mesmo $indexable_builder->build()
+ * no create) introduz estado intermediário que causa piscar no
+ * editor ao dar F5.
  */
-add_action('init', function () {
-    $meta_keys = [
-        '_yoast_wpseo_title',
-        '_yoast_wpseo_metadesc',
-        '_yoast_wpseo_focuskw',
-        '_hide_from_home',
-    ];
-    foreach ($meta_keys as $key) {
-        register_post_meta('post', $key, [
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
+add_action( 'init', function () {
+    $meta_fields = array(
+        '_yoast_wpseo_focuskw'  => array(
+            'type'        => 'string',
+            'description' => 'Yoast SEO Focus Keyphrase',
+            'single'      => true,
+            'default'     => '',
+        ),
+        '_yoast_wpseo_metadesc' => array(
+            'type'        => 'string',
+            'description' => 'Yoast SEO Meta Description',
+            'single'      => true,
+            'default'     => '',
+        ),
+        '_yoast_wpseo_title'    => array(
+            'type'        => 'string',
+            'description' => 'Yoast SEO Title',
+            'single'      => true,
+            'default'     => '',
+        ),
+        '_hide_from_home'       => array(
+            'type'        => 'string',
+            'description' => 'Hide From Home - ocultar da home e feeds',
+            'single'      => true,
+            'default'     => '',
+        ),
+    );
+
+    foreach ( $meta_fields as $meta_key => $args ) {
+        register_post_meta( 'post', $meta_key, array(
+            'type'          => $args['type'],
+            'description'   => $args['description'],
+            'single'        => $args['single'],
+            'default'       => $args['default'],
             'show_in_rest'  => true,
-            'single'        => true,
-            'type'          => 'string',
-            'auth_callback' => function () { return current_user_can('edit_posts'); },
-        ]);
+            'auth_callback' => function () {
+                return current_user_can( 'edit_posts' );
+            },
+        ) );
     }
-});
-add_action('rest_after_insert_post', function ($post, $request, $creating) {
-    if (!class_exists('WPSEO_Meta') || !function_exists('YoastSEO')) return;
-    try {
-        $container         = YoastSEO()->classes;
-        $indexable_repo    = $container->get('Yoast\WP\SEO\Repositories\Indexable_Repository');
-        $indexable_builder = $container->get('Yoast\WP\SEO\Builders\Indexable_Builder');
-        if (!$indexable_repo || !$indexable_builder) return;
-        $indexable = $indexable_repo->find_by_id_and_type($post->ID, 'post');
-        if (!$indexable) {
-            $indexable = $indexable_repo->create_for_id_and_type($post->ID, 'post');
-        }
-        if ($creating) {
-            $indexable = $indexable_builder->build($indexable);
-        }
-        $title = get_post_meta($post->ID, '_yoast_wpseo_title', true);
-        $desc  = get_post_meta($post->ID, '_yoast_wpseo_metadesc', true);
-        $kw    = get_post_meta($post->ID, '_yoast_wpseo_focuskw', true);
-        if ($title) $indexable->title                 = $title;
-        if ($desc)  $indexable->description           = $desc;
-        if ($kw)    $indexable->primary_focus_keyword = $kw;
-        if (empty($indexable->link_count)) {
-            $indexable->link_count = 0;
-        }
-        $indexable->save();
-    } catch (Exception $e) {
-        error_log('Yoast indexable rebuild error: ' . $e->getMessage());
-    }
-}, 20, 3);
+} );
