@@ -511,7 +511,36 @@ Note: `update-yoast.sh` accepts `verify` (or `--verify`) as an optional
 on the post to confirm the three Yoast meta fields actually saved, and
 exits 3 if any mismatch is found.
 
-### 12. Return
+### 12. Score (Yoast background scorer)
+
+After publishing (step 11), trigger the Yoast scorer para computar scores reais
+de SEO e legibilidade e gravá-los no banco. Elimina o ponto cinza na lista de posts
+(aparece quando os scores não estão no postmeta).
+
+```bash
+bash /root/mgs-agent/skills/content-generate-rec/scripts/yoast-score-post.sh \
+  <site_key> <post_id>
+```
+
+Expected output:
+```json
+{"status":"ok","post_id":<id>,"seo_score":<0-100>,"readability_score":<0-100>,"indexable_seo":"<val>","indexable_read":"<val>","wpcli_ok":true}
+```
+
+- `seo_score` + `readability_score`: calculados pela lib `yoastseo` (mesma do editor)
+- `indexable_seo` + `indexable_read`: confirmados escritos em `wp_yoast_indexable` via SSH/DB
+- `wpcli_ok`: true = WP-CLI meta update + rebuild do indexable executados com sucesso
+
+Se `wpcli_ok` for false → log a falha. Post continua no ar; scores serão preenchidos
+quando Raquel abrir o editor. Incluir o resultado do scorer no summary final.
+
+> **Note — scores não expostos via REST:** `_yoast_wpseo_linkdex` e
+> `_yoast_wpseo_content_score` NÃO estão em `register_post_meta` no mu-plugin v4
+> (por design). São gravados em postmeta e `wp_yoast_indexable` mas não expostos
+> via REST API. Verificação é feita via SSH/DB. Os valores `indexable_seo` /
+> `indexable_read` no JSON confirmam o estado no banco.
+
+### 13. Return
 
 Emit a summary to the user:
 - Post ID + WordPress edit link
