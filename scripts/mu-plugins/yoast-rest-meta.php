@@ -53,12 +53,14 @@ add_action('rest_after_insert_post', function ($post, $request, $creating) {
                 update_post_meta($post->ID, '_yoast_wpseo_content_score', '60');
             }
         }
-        $indexable = $indexable_repo->find_by_id_and_type($post->ID, 'post');
-        if ($indexable) {
-            $indexable->readability_score               = 60;
-            $indexable->primary_focus_keyword_score     = 70;
-            $indexable->save();
-        }
+        // Removed: unconditional overwrite of readability_score=60 and
+        // primary_focus_keyword_score=70 on the yoast_indexables table.
+        // Those hardcoded fallbacks masked real Yoast analysis — posts with
+        // genuine high scores showed false "ok" (orange) instead of "good"
+        // (green), and low-quality posts were hidden behind false "ok".
+        // Let Yoast calculate and persist the real scores via build() above.
+        // Posts without a calculated score will show "notAnalyzed" (grey)
+        // until the editor is opened once — which is the honest state.
         do_action('wpseo_save_compare_data', $post);
     } catch (Exception $e) {
         error_log('Yoast indexable rebuild error: ' . $e->getMessage());
