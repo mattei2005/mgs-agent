@@ -1,22 +1,18 @@
 <?php
 /**
- * MU Plugin: Yoast REST Meta
- * File: wp-content/mu-plugins/yoast-rest-meta.php
- *
- * Registra os campos do Yoast SEO e _hide_from_home no WordPress
- * REST API para leitura e escrita via API.
- *
- * IMPORTANTE: este plugin NÃO interfere no indexable do Yoast.
- * Deixa o Yoast construir/recalcular o indexable sozinho no timing
- * dele. Qualquer interferência (mesmo $indexable_builder->build()
- * no create) introduz estado intermediário que causa piscar no
- * editor ao dar F5.
+ * Plugin Name: MGS REST Meta
+ * Description: Registra campos do Yoast SEO e _hide_from_home no
+ *              WordPress REST API. Oculta posts marcados da home,
+ *              feeds, categorias, tags, busca e archives.
+ * Version: 1.0
+ * Author: MGS Digital Corp
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+// ─── 1. Registra meta fields no REST API ─────────────────────────
 add_action( 'init', function () {
     $meta_fields = array(
         '_yoast_wpseo_focuskw'  => array(
@@ -56,5 +52,39 @@ add_action( 'init', function () {
                 return current_user_can( 'edit_posts' );
             },
         ) );
+    }
+} );
+
+// ─── 2. Oculta posts marcados no frontend ────────────────────────
+add_action( 'pre_get_posts', function ( $query ) {
+    if ( is_admin() ) {
+        return;
+    }
+    if (
+        $query->is_home()       ||
+        $query->is_front_page() ||
+        $query->is_feed()       ||
+        $query->is_category()   ||
+        $query->is_tag()        ||
+        $query->is_search()     ||
+        $query->is_archive()
+    ) {
+        $meta_query = $query->get( 'meta_query' );
+        if ( ! is_array( $meta_query ) ) {
+            $meta_query = array();
+        }
+        $meta_query[] = array(
+            'relation' => 'OR',
+            array(
+                'key'     => '_hide_from_home',
+                'compare' => 'NOT EXISTS',
+            ),
+            array(
+                'key'     => '_hide_from_home',
+                'value'   => '1',
+                'compare' => '!=',
+            ),
+        );
+        $query->set( 'meta_query', $meta_query );
     }
 } );
