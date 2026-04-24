@@ -613,8 +613,8 @@ All actions append to `/root/mgs-agent/logs/generate-rec.log`.
 
 ## Post deletion (re-publish flow)
 
-Whenever a post needs to be deleted to re-publish (e.g. slug conflict, rebuild),
-**always delete the media attachments together with the post** — before or at the
+Whenever a post is deleted — **for any reason** (re-publish, slug conflict, test cleanup,
+or explicit user request) — **always delete the media attachments together with the post** — before or at the
 same time. If the media files are left orphaned in the library, WordPress
 auto-renames the re-uploaded versions with numeric suffixes (`-1`, `-2`, `-3`...),
 which breaks the canonical URLs and pollutes the media library.
