@@ -5,7 +5,9 @@
     "wp_url": "https://eggbev.com",
     "country": "gb",
     "language": "en",
-    "verticals": ["cc"],
+    "verticals": [
+      "cc"
+    ],
     "template_key": "gb-cc-en",
     "publishing_user": {
       "id": 11,
@@ -21,5 +23,27 @@
     "default_button_color": "#27ae60",
     "hide_rec_from_home": true,
     "hide_p1_from_home": false
+  },
+  "fincgriffin": {
+    "name": "FincGriffin",
+    "domain": "fincgriffin.com",
+    "wp_url": "https://fincgriffin.com",
+    "verticals": [
+      "gb-cc-en",
+      "tr-cc-tr",
+      "es-cc-es"
+    ],
+    "deployment_mode": "manual_only",
+    "manual_exception": {
+      "reason": "Servidor hospedado em infra de terceiros (ADX) — sem acesso SSH/API/SFTP disponível para a equipe MGS",
+      "last_manual_update": "2026-04-24T00:53:00-04:00",
+      "last_manual_update_by": "rodolfo",
+      "manual_actions_performed": [
+        "imagify_installed_and_bulk_executed",
+        "mu_plugin_hide_from_home_deployed",
+        "mu_plugin_yoast_rest_meta_deployed"
+      ],
+      "agent_instructions": "Agentes NÃO devem tentar deploy automático neste site. Qualquer atualização de mu-plugins, plugins ou arquivos requer intervenção manual do Rodolfo via WP-Admin."
+    }
   }
 }
