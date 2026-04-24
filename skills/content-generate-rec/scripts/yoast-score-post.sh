@@ -114,21 +114,25 @@ EOFEXP
 chmod +x /tmp/_ssh_y${POST_ID}.exp
 SSH_OUT=$(/tmp/_ssh_y${POST_ID}.exp "$S03_PASS" "$S01_PASS" 2>/dev/null)
 
-# Parse verify line via Python (handles \r\n and tab separators cleanly)
-IDX_RESULT=$(echo "$SSH_OUT" | python3 - "$POST_ID" << 'PYPARSE'
-import sys, re
-post_id = sys.argv[1]
-data = sys.stdin.read()
-for line in data.replace('\r','').split('\n'):
-    parts = re.split(r'\s+', line.strip())
-    if len(parts) >= 3 and parts[0] == post_id:
-        print(parts[1], parts[2])
-        sys.exit(0)
-print("? ?")
-PYPARSE
+# ── Step 3: Verify via REST (mais confiável que parsear SSH output) ────────────
+VERIFY_JSON=$(cd "$SCORER_DIR" && WP_URL="$WP_URL" POST_ID="$POST_ID" WP_USER="$WP_USER" WP_PASS="$WP_PASS" node - << 'JSEOF'
+const https = require('https');
+function get(url, auth) {
+  return new Promise((resolve, reject) => {
+    https.get(url, { headers: { 'Authorization': 'Basic ' + Buffer.from(auth).toString('base64') } }, res => {
+      let d = ''; res.on('data', c => d += c); res.on('end', () => resolve(JSON.parse(d)));
+    }).on('error', reject);
+  });
+}
+(async () => {
+  const post = await get(process.env.WP_URL + '/wp-json/wp/v2/posts/' + process.env.POST_ID + '?_fields=meta', process.env.WP_USER + ':' + process.env.WP_PASS);
+  const meta = post.meta || {};
+  console.log(JSON.stringify({ linkdex: meta._yoast_wpseo_linkdex || '?', content_score: meta._yoast_wpseo_content_score || '?' }));
+})().catch(e => console.log('{"linkdex":"?","content_score":"?"}'));
+JSEOF
 )
-IDX_SEO=$(echo  "$IDX_RESULT" | awk '{print $1}')
-IDX_READ=$(echo "$IDX_RESULT" | awk '{print $2}')
+IDX_SEO=$(echo  "$VERIFY_JSON" | python3 -c "import sys,json; print(json.loads(sys.stdin.read()).get('linkdex','?'))")
+IDX_READ=$(echo "$VERIFY_JSON" | python3 -c "import sys,json; print(json.loads(sys.stdin.read()).get('content_score','?'))")
 WPCLI_OK=$(echo "$SSH_OUT" | grep -c "WPCLI_DONE" || echo "0")
 
 # Cleanup
