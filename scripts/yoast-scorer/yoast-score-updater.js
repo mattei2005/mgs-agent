@@ -2,74 +2,32 @@
 /**
  * yoast-score-updater.js
  *
- * Computes real Yoast SEO + readability scores for a WordPress post
- * using the same @yoast/yoastseo library that runs in the Gutenberg editor,
- * then writes the scores back to wp_postmeta via WP-CLI and triggers
- * `wp yoast index` to rebuild the indexable (used by the admin list columns).
+ * Fetches a WordPress post via REST API, runs Yoast SEO + Readability analysis
+ * using the @yoast/yoastseo library (same engine as Gutenberg editor),
+ * and outputs scores as JSON to stdout.
  *
- * Usage:
- *   node yoast-score-updater.js <post_id> <wp_url> <wp_user> <wp_pass> <wp_path>
+ * Usage: node yoast-score-updater.js <post_id> <wp_url> <wp_user> <wp_pass>
  *
- * Arguments:
- *   post_id   — WordPress post ID (integer)
- *   wp_url    — e.g. https://eggbev.com
- *   wp_user   — WP REST API username
- *   wp_pass   — WP REST API application password
- *   wp_path   — path to WP root on server, e.g. /home/runcloud/webapps/eggbev
- *               (used for WP-CLI commands via SSH — passed to calling shell script)
+ * Output (stdout, JSON):
+ *   { "seo": 72, "readability": 85, "seo_color": "green", "read_color": "green" }
  *
- * Exit codes:
- *   0 — success (scores computed + written)
- *   1 — fetch error
- *   2 — analysis error
- *   3 — score below threshold (warning only, still exits 0 in practice)
+ * Exit codes: 0 = success, 1 = error
  */
 
 'use strict';
 
-const https  = require('https');
-const http   = require('http');
-const { execSync } = require('child_process');
+const https = require('https');
+const http  = require('http');
 
-// ── @yoast/yoastseo imports ───────────────────────────────────────────────────
-const {
-  Paper,
-  Researcher,
-  SeoAssessor,
-  ContentAssessor,
-} = require('yoastseo');
+// ─── helpers ────────────────────────────────────────────────────────────────
 
-// ── Args ─────────────────────────────────────────────────────────────────────
-const [,, POST_ID, WP_URL, WP_USER, WP_PASS, WP_CLI_PATH] = process.argv;
-
-if (!POST_ID || !WP_URL || !WP_USER || !WP_PASS) {
-  console.error('Usage: node yoast-score-updater.js <post_id> <wp_url> <wp_user> <wp_pass> [wp_cli_path]');
-  process.exit(1);
+function scoreColor(score) {
+  if (score === null || score === undefined) return 'notAnalyzed';
+  if (score >= 71) return 'green';
+  if (score >= 41) return 'orange';
+  return 'red';
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
-function fetchJson(url, user, pass) {
-  return new Promise((resolve, reject) => {
-    const parsed   = new URL(url);
-    const lib      = parsed.protocol === 'https:' ? https : http;
-    const auth     = Buffer.from(`${user}:${pass}`).toString('base64');
-    const options  = {
-      hostname : parsed.hostname,
-      path     : parsed.pathname + parsed.search,
-      headers  : { 'Authorization': `Basic ${auth}`, 'Accept': 'application/json' },
-    };
-    lib.get(options, (res) => {
-      let body = '';
-      res.on('data', chunk => body += chunk);
-      res.on('end', () => {
-        try { resolve(JSON.parse(body)); }
-        catch (e) { reject(new Error(`JSON parse error: ${e.message}\nBody: ${body.slice(0,200)}`)); }
-      });
-    }).on('error', reject);
-  });
-}
-
-// Strip HTML tags for plain-text analysis
 function stripHtml(html) {
   return (html || '')
     .replace(/<[^>]+>/g, ' ')
@@ -82,87 +40,118 @@ function stripHtml(html) {
     .trim();
 }
 
-// Yoast score → numeric (0–100 integer)
-// SeoAssessor returns a Score object; getOverallScore() returns 0–9 float
-// We map it to 0–100 to match wp_postmeta format
-function overallToInt(assessor) {
-  const raw = assessor.calculateOverallScore();  // 0–100 already in yoastseo lib
-  return Math.round(raw);
+function fetchJson(url, user, pass) {
+  return new Promise((resolve, reject) => {
+    const parsed = new URL(url);
+    const options = {
+      hostname: parsed.hostname,
+      port:     parsed.port || (parsed.protocol === 'https:' ? 443 : 80),
+      path:     parsed.pathname + parsed.search,
+      method:   'GET',
+      headers: {
+        'Authorization': 'Basic ' + Buffer.from(`${user}:${pass}`).toString('base64'),
+        'Accept':        'application/json',
+      },
+    };
+    const lib = parsed.protocol === 'https:' ? https : http;
+    const req = lib.request(options, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try { resolve(JSON.parse(data)); }
+        catch (e) { reject(new Error(`JSON parse error: ${e.message}\nBody: ${data.slice(0, 200)}`)); }
+      });
+    });
+    req.on('error', reject);
+    req.end();
+  });
 }
 
-// ── Main ──────────────────────────────────────────────────────────────────────
-(async () => {
-  // 1. Fetch post from REST API (rendered content = what the browser sees)
-  const endpoint = `${WP_URL}/wp-json/wp/v2/posts/${POST_ID}?context=view&_fields=id,title,content,excerpt,meta,slug,link`;
-  console.log(`[yoast-scorer] Fetching post ${POST_ID} from ${WP_URL}...`);
+// ─── main ────────────────────────────────────────────────────────────────────
 
+async function main() {
+  const [postId, wpUrl, wpUser, wpPass] = process.argv.slice(2);
+
+  if (!postId || !wpUrl || !wpUser || !wpPass) {
+    process.stderr.write('Usage: node yoast-score-updater.js <post_id> <wp_url> <wp_user> <wp_pass>\n');
+    process.exit(1);
+  }
+
+  // 1. Fetch post data
+  const apiUrl = `${wpUrl.replace(/\/$/, '')}/wp-json/wp/v2/posts/${postId}?_fields=id,slug,link,title,content,excerpt,meta`;
   let post;
   try {
-    post = await fetchJson(endpoint, WP_USER, WP_PASS);
+    post = await fetchJson(apiUrl, wpUser, wpPass);
   } catch (e) {
-    console.error(`[yoast-scorer] Fetch error: ${e.message}`);
+    process.stderr.write(`Failed to fetch post ${postId}: ${e.message}\n`);
     process.exit(1);
   }
 
-  if (post.code && post.code.includes('invalid_id')) {
-    console.error(`[yoast-scorer] Post ${POST_ID} not found.`);
+  if (post.code) {
+    process.stderr.write(`WP API error for post ${postId}: ${post.message}\n`);
     process.exit(1);
   }
 
-  const title     = stripHtml(post.title?.rendered || '');
-  const content   = stripHtml(post.content?.rendered || '');
-  const excerpt   = stripHtml(post.excerpt?.rendered || '');
-  const focuskw   = (post.meta?._yoast_wpseo_focuskw || '').trim();
-  const permalink = post.link || '';
-  const slug      = post.slug || '';
+  // 2. Extract fields
+  const meta        = post.meta || {};
+  const keyword     = meta._yoast_wpseo_focuskw   || '';
+  const seoTitle    = meta._yoast_wpseo_title      || (post.title && post.title.rendered) || '';
+  const metaDesc    = meta._yoast_wpseo_metadesc   || (post.excerpt && stripHtml(post.excerpt.rendered)) || '';
+  const bodyHtml    = (post.content && post.content.rendered) || '';
+  const slug        = post.slug || '';
+  const permalink   = post.link || `${wpUrl}/${slug}/`;
 
-  console.log(`[yoast-scorer] title="${title.slice(0,60)}" focuskw="${focuskw}" words≈${content.split(' ').length}`);
+  // 3. Load Yoast modules
+  const { Paper, assessors } = require('yoastseo');
+  const { SEOAssessor, ContentAssessor } = assessors;
+  const EnResearcher = require('./node_modules/yoastseo/build/languageProcessing/languages/en/Researcher.js').default;
 
-  // 2. Build Paper + run analysis
-  let seoScore, readabilityScore;
-  try {
-    const paper = new Paper(content, {
-      keyword      : focuskw,
-      title        : title,
-      titleWidth   : title.length * 8,   // approximate px
-      url          : slug,
-      permalink    : permalink,
-      excerpt      : excerpt,
-      locale       : 'en_US',
-    });
+  // 4. Build Paper
+  const paper = new Paper(
+    stripHtml(bodyHtml),
+    {
+      keyword,
+      description : metaDesc,
+      title       : seoTitle,
+      titleWidth  : Math.min(seoTitle.length * 8, 600), // rough px estimate
+      slug,
+      permalink,
+      locale      : 'en_US',
+    }
+  );
 
-    const researcher = new Researcher(paper);
+  // 5. Run assessors (suppress internal Yoast Trace logs to stderr)
+  const origWarn = console.warn;
+  console.warn = () => {};
 
-    const seoAssessor  = new SeoAssessor(null, { locale: 'en_US' });
-    seoAssessor.assess(paper);
+  const researcher = new EnResearcher(paper);
 
-    const readAssessor = new ContentAssessor(null, { locale: 'en_US' });
-    readAssessor.assess(paper);
+  const seoAssessor = new SEOAssessor(researcher);
+  seoAssessor.assess(paper);
+  const seoScore = seoAssessor.calculateOverallScore();
 
-    seoScore         = overallToInt(seoAssessor);
-    readabilityScore = overallToInt(readAssessor);
+  const readAssessor = new ContentAssessor(researcher);
+  readAssessor.assess(paper);
+  const readScore = readAssessor.calculateOverallScore();
 
-  } catch (e) {
-    console.error(`[yoast-scorer] Analysis error: ${e.message}`);
-    process.exit(2);
-  }
+  console.warn = origWarn;
 
-  console.log(`[yoast-scorer] Scores computed — SEO: ${seoScore}, Readability: ${readabilityScore}`);
-
-  // Score → color mapping (for logging)
-  const color = (s) => s >= 71 ? 'green' : s >= 41 ? 'orange' : 'red';
-  console.log(`[yoast-scorer] SEO color: ${color(seoScore)}, Readability color: ${color(readabilityScore)}`);
-
-  // 3. Output scores as JSON for the calling shell script to use
+  // 6. Output
   const result = {
-    post_id          : parseInt(POST_ID),
-    seo_score        : seoScore,
-    readability_score: readabilityScore,
-    seo_color        : color(seoScore),
-    readability_color: color(readabilityScore),
+    post_id      : parseInt(postId, 10),
+    seo          : seoScore,
+    readability  : readScore,
+    seo_color    : scoreColor(seoScore),
+    read_color   : scoreColor(readScore),
+    keyword,
+    slug,
   };
 
-  // Print JSON to stdout — shell script reads this
-  console.log('SCORES_JSON:' + JSON.stringify(result));
+  process.stdout.write(JSON.stringify(result) + '\n');
+  process.exit(0);
+}
 
-})();
+main().catch(e => {
+  process.stderr.write(`Unhandled error: ${e.message}\n`);
+  process.exit(1);
+});
