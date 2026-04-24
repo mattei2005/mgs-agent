@@ -126,6 +126,21 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   notes it so Raquel knows to expect manual review.
 - The image is saved to `/tmp/card-<slug>.<ext>`.
 
+> **PITFALL — search-card-image.sh returns NEEDS_MANUAL for banks without standalone card images:**
+> Some bank pages (e.g. Santander UK) use only lifestyle photos and return no card image.
+> The script returns `{"status":"NEEDS_MANUAL","reason":"dimensions_filter_all_rejected"}`.
+> When this happens:
+> 1. Check `browser_get_images` on the official page — if no card image there, move on
+> 2. Try financial comparison sites (finder.com/uk, moneysupermarket.com, money.co.uk)
+>    via a `delegate_task` subagent with browser + web toolsets — ask for a direct image URL
+> 3. Download the found image with curl using a Referer header to bypass 403:
+>    ```bash
+>    curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36" \
+>      -H "Referer: https://www.finder.com/" "<image_url>" -o /tmp/card-<slug>.png
+>    ```
+> 4. Verify with `vision_analyze` before proceeding
+> 5. Apply rotation + crop as normal (see other PITFALL notes below)
+>
 > **PITFALL — search-card-image.sh may select wrong card on multi-card pages (CRITICAL):**
 > Some bank pages (especially Barclaycard) display multiple card images —
 > e.g. a generic "Rewards" card thumbnail alongside the specific Avios Plus
@@ -496,7 +511,36 @@ Note: `update-yoast.sh` accepts `verify` (or `--verify`) as an optional
 on the post to confirm the three Yoast meta fields actually saved, and
 exits 3 if any mismatch is found.
 
-### 12. Return
+### 12. Score (Yoast background scorer)
+
+After publishing (step 11), trigger the Yoast scorer para computar scores reais
+de SEO e legibilidade e gravá-los no banco. Elimina o ponto cinza na lista de posts
+(aparece quando os scores não estão no postmeta).
+
+```bash
+bash /root/mgs-agent/skills/content-generate-rec/scripts/yoast-score-post.sh \
+  <site_key> <post_id>
+```
+
+Expected output:
+```json
+{"status":"ok","post_id":<id>,"seo_score":<0-100>,"readability_score":<0-100>,"indexable_seo":"<val>","indexable_read":"<val>","wpcli_ok":true}
+```
+
+- `seo_score` + `readability_score`: calculados pela lib `yoastseo` (mesma do editor)
+- `indexable_seo` + `indexable_read`: confirmados escritos em `wp_yoast_indexable` via SSH/DB
+- `wpcli_ok`: true = WP-CLI meta update + rebuild do indexable executados com sucesso
+
+Se `wpcli_ok` for false → log a falha. Post continua no ar; scores serão preenchidos
+quando Raquel abrir o editor. Incluir o resultado do scorer no summary final.
+
+> **Note — scores não expostos via REST:** `_yoast_wpseo_linkdex` e
+> `_yoast_wpseo_content_score` NÃO estão em `register_post_meta` no mu-plugin v4
+> (por design). São gravados em postmeta e `wp_yoast_indexable` mas não expostos
+> via REST API. Verificação é feita via SSH/DB. Os valores `indexable_seo` /
+> `indexable_read` no JSON confirmam o estado no banco.
+
+### 13. Return
 
 Emit a summary to the user:
 - Post ID + WordPress edit link
