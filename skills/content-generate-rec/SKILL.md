@@ -540,6 +540,48 @@ quando Raquel abrir o editor. Incluir o resultado do scorer no summary final.
 > via REST API. Verificação é feita via SSH/DB. Os valores `indexable_seo` /
 > `indexable_read` no JSON confirmam o estado no banco.
 
+> **PITFALL — RunCloud ASCII art interfere com grep em output SQL (CRÍTICO):**
+> O banner de boas-vindas do RunCloud contém a string `8888888b...888` (arte ASCII).
+> Qualquer grep com padrão `^[0-9]+` ou `^\s*[0-9]+\s+[0-9]+` vai CASAR com essas
+> linhas e retornar os dígitos do banner (ex: `888` em vez do valor real `84`).
+>
+> **Solução**: sempre fazer grep pelo `POST_ID` exato na linha, ou usar Python com
+> `PARSE_ID` env var e um arquivo temp (NÃO heredoc dentro de `$(...)` — falha
+> silenciosamente). Exemplo correto:
+> ```bash
+> cat > /tmp/_parse.py << 'PYEOF'
+> import sys, re, os
+> pid = os.environ.get("PARSE_ID","")
+> data = sys.stdin.read()
+> for line in data.replace('\r','').split('\n'):
+>     m = re.match(r'\|\s*' + re.escape(pid) + r'\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|', line.strip())
+>     if m:
+>         print(m.group(1), m.group(2)); sys.exit(0)
+> print("? ?")
+> PYEOF
+> _IDX=$(echo "$SSH_OUT" | PARSE_ID="$POST_ID" python3 /tmp/_parse.py)
+> rm -f /tmp/_parse.py
+> ```
+
+> **PITFALL — `wp yoast index` não aceita `--object-id` (CRÍTICO):**
+> O WP-CLI do Yoast v27.x não suporta reindex de post individual via `--object-id`.
+> Usar `wp yoast index --reindex` reindexaria o site inteiro (lento, perigoso).
+>
+> **Solução**: SQL UPDATE direto no `wp_yoast_indexable`:
+> ```sql
+> UPDATE wp_yoast_indexable
+>   SET primary_focus_keyword_score=84, readability_score=90
+>   WHERE object_id=62008 AND object_type='post'
+> ```
+> Seguido de `post meta update` para manter postmeta em sincronia.
+
+> **PITFALL — yoastseo v3.6 API e `node_modules` path:**
+> A lib `yoastseo` deve ser `require`d do diretório que contém `node_modules/`.
+> Sempre executar o scorer com `cd "$SCORER_DIR" && node yoast-scorer.js ...`
+> em vez de `node "$SCORER_DIR/yoast-scorer.js"` (o segundo não resolve `node_modules`
+> relativo ao script). API usada: `{ Paper, SeoAssessor, ContentAssessor, Researcher }`.
+> `Researcher` recebe `(paper, i18n)` e é passado para os assessors como segundo arg.
+
 ### 13. Return
 
 Emit a summary to the user:
