@@ -20,8 +20,8 @@ set -euo pipefail
 
 SITE_KEY="${1:-}"
 POST_ID="${2:-}"
-SCORER_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../scripts/yoast-scorer" && pwd)"
-PUBLISH_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../skills/content-publish-wordpress/scripts" && pwd)"
+SCORER_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PUBLISH_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../content-publish-wordpress/scripts" && pwd)"
 
 if [[ -z "$SITE_KEY" || -z "$POST_ID" ]]; then
   echo '{"status":"error","message":"Usage: yoast-score-post.sh <site_key> <post_id>"}' >&2
