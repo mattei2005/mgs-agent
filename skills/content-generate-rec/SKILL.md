@@ -126,6 +126,21 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   notes it so Raquel knows to expect manual review.
 - The image is saved to `/tmp/card-<slug>.<ext>`.
 
+> **PITFALL — search-card-image.sh returns NEEDS_MANUAL for banks without standalone card images:**
+> Some bank pages (e.g. Santander UK) use only lifestyle photos and return no card image.
+> The script returns `{"status":"NEEDS_MANUAL","reason":"dimensions_filter_all_rejected"}`.
+> When this happens:
+> 1. Check `browser_get_images` on the official page — if no card image there, move on
+> 2. Try financial comparison sites (finder.com/uk, moneysupermarket.com, money.co.uk)
+>    via a `delegate_task` subagent with browser + web toolsets — ask for a direct image URL
+> 3. Download the found image with curl using a Referer header to bypass 403:
+>    ```bash
+>    curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36" \
+>      -H "Referer: https://www.finder.com/" "<image_url>" -o /tmp/card-<slug>.png
+>    ```
+> 4. Verify with `vision_analyze` before proceeding
+> 5. Apply rotation + crop as normal (see other PITFALL notes below)
+>
 > **PITFALL — search-card-image.sh may select wrong card on multi-card pages (CRITICAL):**
 > Some bank pages (especially Barclaycard) display multiple card images —
 > e.g. a generic "Rewards" card thumbnail alongside the specific Avios Plus
