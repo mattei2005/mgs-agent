@@ -60,6 +60,15 @@ image integrity check.
 
 ### 1b. Resolve button color
 
+> **PITFALL — NUNCA usar a cor da marca do cartão como cor do botão (CRÍTICO):**
+> A cor do botão (`color-botao` no LazyBlock `credit-card` e `cor-botao` no `botao`)
+> deve sempre vir do `default_button_color` do site em `sites.json` — ou de um
+> override explicitamente solicitado pelo usuário. **Nunca inferir a cor da identidade
+> visual do cartão** (ex: vermelho da Santander, azul da Barclaycard, verde da HSBC).
+> Isso viola a consistência visual do site e requer correção manual posterior.
+> Regra: se o usuário não pediu override de cor, use sempre `default_button_color`.
+
+
 Run:
 `../content-publish-wordpress/scripts/resolve-button-color.sh <site_key> [override]`
 
@@ -539,6 +548,16 @@ quando Raquel abrir o editor. Incluir o resultado do scorer no summary final.
 > (por design). São gravados em postmeta e `wp_yoast_indexable` mas não expostos
 > via REST API. Verificação é feita via SSH/DB. Os valores `indexable_seo` /
 > `indexable_read` no JSON confirmam o estado no banco.
+
+> **PITFALL — yoastseo v3.6 API quirks (descobertos por trial & error):**
+> - `require('yoastseo')` exporta `{ Paper, assessors, ... }` — os assessors ficam
+>   dentro do namespace `assessors`: `const { SEOAssessor, ContentAssessor } = assessors`
+> - Assessor constructor: `new SEOAssessor(researcher)` — researcher é o **primeiro** argumento (não segundo)
+> - `Researcher` do `_default` não tem `getHelper()` e retorna scores errados → usar sempre o específico do idioma:
+>   `require('./node_modules/yoastseo/build/languageProcessing/languages/en/Researcher').default`
+> - O módulo Researcher exporta `.default` (ES module wrapped em CJS): sempre acessar `.default`
+> - O scorer DEVE ser executado com `cd "$SCORER_DIR" && node yoast-scorer.js ...`
+>   (não `node "$SCORER_DIR/yoast-scorer.js"`) — o segundo não resolve `node_modules` relativo ao script
 
 > **PITFALL — RunCloud ASCII art interfere com grep em output SQL (CRÍTICO):**
 > O banner de boas-vindas do RunCloud contém a string `8888888b...888` (arte ASCII).
