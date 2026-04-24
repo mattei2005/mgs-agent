@@ -114,25 +114,24 @@ EOFEXP
 chmod +x /tmp/_ssh_y${POST_ID}.exp
 SSH_OUT=$(/tmp/_ssh_y${POST_ID}.exp "$S03_PASS" "$S01_PASS" 2>/dev/null)
 
-# ── Step 3: Verify via REST (mais confiável que parsear SSH output) ────────────
-VERIFY_JSON=$(cd "$SCORER_DIR" && WP_URL="$WP_URL" POST_ID="$POST_ID" WP_USER="$WP_USER" WP_PASS="$WP_PASS" node - << 'JSEOF'
-const https = require('https');
-function get(url, auth) {
-  return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'Authorization': 'Basic ' + Buffer.from(auth).toString('base64') } }, res => {
-      let d = ''; res.on('data', c => d += c); res.on('end', () => resolve(JSON.parse(d)));
-    }).on('error', reject);
-  });
-}
-(async () => {
-  const post = await get(process.env.WP_URL + '/wp-json/wp/v2/posts/' + process.env.POST_ID + '?_fields=meta', process.env.WP_USER + ':' + process.env.WP_PASS);
-  const meta = post.meta || {};
-  console.log(JSON.stringify({ linkdex: meta._yoast_wpseo_linkdex || '?', content_score: meta._yoast_wpseo_content_score || '?' }));
-})().catch(e => console.log('{"linkdex":"?","content_score":"?"}'));
-JSEOF
+# ── Step 3: Verify — parse SSH_OUT for indexable row ───────────────────────────
+# Note: _yoast_wpseo_linkdex / content_score are NOT exposed via REST (not in
+# register_post_meta in v4 by design). Verification is done via SSH/DB output.
+_IDX=$(echo "$SSH_OUT" | PARSE_ID="$POST_ID" python3 - << 'PYEOF'
+import sys, re, os
+pid = os.environ.get("PARSE_ID","")
+data = sys.stdin.read()
+for line in data.replace('\r','').split('\n'):
+    l = line.strip()
+    m = re.match(r'\|\s*' + re.escape(pid) + r'\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|', l)
+    if m:
+        print(m.group(1), m.group(2))
+        sys.exit(0)
+print("? ?")
+PYEOF
 )
-IDX_SEO=$(echo  "$VERIFY_JSON" | python3 -c "import sys,json; print(json.loads(sys.stdin.read()).get('linkdex','?'))")
-IDX_READ=$(echo "$VERIFY_JSON" | python3 -c "import sys,json; print(json.loads(sys.stdin.read()).get('content_score','?'))")
+IDX_SEO=$(echo  "$_IDX" | awk '{print $1}')
+IDX_READ=$(echo "$_IDX" | awk '{print $2}')
 WPCLI_OK=$(echo "$SSH_OUT" | grep -c "WPCLI_DONE" || echo "0")
 
 # Cleanup
