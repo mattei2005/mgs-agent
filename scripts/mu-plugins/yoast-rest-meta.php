@@ -43,16 +43,10 @@ add_action('rest_after_insert_post', function ($post, $request, $creating) {
             $indexable->link_count = 0;
         }
         $indexable->save();
-        if ($kw) {
-            $current_linkdex = get_post_meta($post->ID, '_yoast_wpseo_linkdex', true);
-            if (empty($current_linkdex)) {
-                update_post_meta($post->ID, '_yoast_wpseo_linkdex', '70');
-            }
-            $current_score = get_post_meta($post->ID, '_yoast_wpseo_content_score', true);
-            if (empty($current_score)) {
-                update_post_meta($post->ID, '_yoast_wpseo_content_score', '60');
-            }
-        }
+        // Removed: conditional fallback scores (lines 46-55, A2 scope)
+        // Previously wrote linkdex=70 / content_score=60 when fields were empty.
+        // These fake defaults masked real Yoast analysis even on first publish.
+        // Posts will show notAnalyzed (grey) until editor is opened — honest state.
         // Removed: unconditional overwrite of readability_score=60 and
         // primary_focus_keyword_score=70 on the yoast_indexables table.
         // Those hardcoded fallbacks masked real Yoast analysis — posts with
