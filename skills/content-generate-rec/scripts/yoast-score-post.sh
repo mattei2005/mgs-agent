@@ -114,11 +114,11 @@ EOFEXP
 chmod +x /tmp/_ssh_y${POST_ID}.exp
 SSH_OUT=$(/tmp/_ssh_y${POST_ID}.exp "$S03_PASS" "$S01_PASS" 2>/dev/null)
 
-# Parse verify line: object_id  seo  read
-VERIFY_LINE=$(echo "$SSH_OUT" | grep -E "^[[:space:]]*[0-9]+[[:space:]]+[0-9]+[[:space:]]+[0-9]+" | tail -1 || echo "")
-IDX_OBJ=$(echo  "$VERIFY_LINE" | awk '{print $1}' | tr -d '[:space:]\r' || echo "?")
-IDX_SEO=$(echo  "$VERIFY_LINE" | awk '{print $2}' | tr -d '[:space:]\r' || echo "?")
-IDX_READ=$(echo "$VERIFY_LINE" | awk '{print $3}' | tr -d '[:space:]\r' || echo "?")
+# Parse verify line: grep by POST_ID to avoid RunCloud ASCII art false matches
+VERIFY_LINE=$(echo "$SSH_OUT" | grep -E "^[[:space:]]*${POST_ID}[[:space:]]" | tail -1 | tr -d '\r' || echo "")
+IDX_OBJ=$(echo  "$VERIFY_LINE" | awk '{print $1}' | tr -d '[:space:]' || echo "?")
+IDX_SEO=$(echo  "$VERIFY_LINE" | awk '{print $2}' | tr -d '[:space:]' || echo "?")
+IDX_READ=$(echo "$VERIFY_LINE" | awk '{print $3}' | tr -d '[:space:]' || echo "?")
 WPCLI_OK=$(echo "$SSH_OUT" | grep -c "WPCLI_DONE" || echo "0")
 
 # Cleanup
