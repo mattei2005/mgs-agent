@@ -20,7 +20,7 @@ set -euo pipefail
 
 SITE_KEY="${1:-}"
 POST_ID="${2:-}"
-SCORER_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCORER_DIR="/root/mgs-agent/scripts/yoast-scorer"
 PUBLISH_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../content-publish-wordpress/scripts" && pwd)"
 
 if [[ -z "$SITE_KEY" || -z "$POST_ID" ]]; then
