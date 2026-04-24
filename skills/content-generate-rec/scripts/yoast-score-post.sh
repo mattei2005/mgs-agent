@@ -117,7 +117,7 @@ SSH_OUT=$(/tmp/_ssh_y${POST_ID}.exp "$S03_PASS" "$S01_PASS" 2>/dev/null)
 # ── Step 3: Verify — parse SSH_OUT for indexable row ───────────────────────────
 # Note: _yoast_wpseo_linkdex / content_score are NOT exposed via REST (not in
 # register_post_meta in v4 by design). Verification is done via SSH/DB output.
-_IDX=$(echo "$SSH_OUT" | PARSE_ID="$POST_ID" python3 - << 'PYEOF'
+cat > /tmp/_parse_idx_$$.py << 'PYEOF'
 import sys, re, os
 pid = os.environ.get("PARSE_ID","")
 data = sys.stdin.read()
@@ -129,7 +129,8 @@ for line in data.replace('\r','').split('\n'):
         sys.exit(0)
 print("? ?")
 PYEOF
-)
+_IDX=$(echo "$SSH_OUT" | PARSE_ID="$POST_ID" python3 /tmp/_parse_idx_$$.py 2>/dev/null)
+rm -f /tmp/_parse_idx_$$.py
 IDX_SEO=$(echo  "$_IDX" | awk '{print $1}')
 IDX_READ=$(echo "$_IDX" | awk '{print $2}')
 WPCLI_OK=$(echo "$SSH_OUT" | grep -c "WPCLI_DONE" || echo "0")
