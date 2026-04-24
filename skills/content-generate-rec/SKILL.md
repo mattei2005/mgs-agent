@@ -569,6 +569,29 @@ Emit a summary to the user:
 
 All actions append to `/root/mgs-agent/logs/generate-rec.log`.
 
+## Post deletion (re-publish flow)
+
+Whenever a post needs to be deleted to re-publish (e.g. slug conflict, rebuild),
+**always delete the media attachments together with the post** — before or at the
+same time. If the media files are left orphaned in the library, WordPress
+auto-renames the re-uploaded versions with numeric suffixes (`-1`, `-2`, `-3`...),
+which breaks the canonical URLs and pollutes the media library.
+
+**Delete order:**
+1. Fetch the post to get `featured_media` ID + parse card media ID from content
+2. DELETE `/wp/v2/posts/<id>?force=true`
+3. DELETE `/wp/v2/media/<featured_id>?force=true`
+4. DELETE `/wp/v2/media/<card_id>?force=true`
+
+```bash
+# Example
+curl -s -u "$WP_USER:$WP_PASS" -X DELETE "$WP_URL/wp-json/wp/v2/posts/62004?force=true"
+curl -s -u "$WP_USER:$WP_PASS" -X DELETE "$WP_URL/wp-json/wp/v2/media/61999?force=true"
+curl -s -u "$WP_USER:$WP_PASS" -X DELETE "$WP_URL/wp-json/wp/v2/media/62000?force=true"
+```
+
+Confirm each DELETE returns `{"deleted":true}` before re-uploading.
+
 ## Failure modes
 
 - Template missing → abort
