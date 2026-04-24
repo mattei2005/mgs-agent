@@ -49,6 +49,6 @@ systemctl restart zeus-gateway atena-gateway
 ```
 
 ### Status upstream
-- Issue reportada em: [LINK A SER ADICIONADO]
+- Issue reportada em: https://github.com/NousResearch/hermes-agent/issues/14905
 - PR submetido: [se aplicável]
 
