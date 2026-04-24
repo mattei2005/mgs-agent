@@ -48,7 +48,7 @@ S01_PASS=$(op item get 'Runcloud Server 01 - 162.55.28.178- zeus Acesso' \
 WP_PATH="/home/runcloud/webapps/$SITE_KEY"
 
 # ── Step 1: Calculate scores via Node ─────────────────────────────────────────
-SCORE_JSON=$(node "$SCORER_DIR/yoast-scorer.js" "$WP_URL" "$POST_ID" "$WP_USER" "$WP_PASS" 2>/dev/null)
+SCORE_JSON=$(cd "$SCORER_DIR" && node yoast-scorer.js "$WP_URL" "$POST_ID" "$WP_USER" "$WP_PASS" 2>/dev/null)
 SCORE_STATUS=$(echo "$SCORE_JSON" | python3 -c "import sys,json; print(json.load(sys.stdin).get('status','error'))")
 
 if [[ "$SCORE_STATUS" != "ok" ]]; then
