@@ -1,0 +1,1 @@
+/root/.hermes/profiles/atena/SOUL.md
