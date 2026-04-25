@@ -349,3 +349,49 @@ Include `context/security-policies.md` policies in the agent's SOUL.md (mandator
 ### Authorization data
 
 Add agent to `data/authorized-users.json` with its whitelist of Discord IDs (individual IDs, not roles).
+
+---
+
+## Hierarquia Operacional e Reporting de Infra
+
+### Zeus é o coordenador de infraestrutura compartilhada
+
+Zeus mantém visibilidade de todos os artefatos de infra da operação MGS via `/root/mgs-agent/data/infra-inventory.json`.
+
+### Reporting obrigatório (não aprovação)
+
+Outros agentes (Atena, futuros) **NÃO precisam pedir autorização** ao Zeus para criar/modificar infra. Mas **DEVEM reportar** no canal `#zeus-admin-agent` (ID: `1496267442899521627`) imediatamente após executar.
+
+### Quando reportar
+
+Ações que disparam report obrigatório:
+- Criar/modificar cron job
+- Criar/modificar/deletar arquivo em `/root/mgs-agent/scripts/`
+- Criar/modificar/deletar skill em `/root/mgs-agent/skills/`
+- Criar/modificar arquivo em `/root/mgs-agent/data/` (exceto campos editoriais)
+- Editar `AGENT.md`
+- Modificar configs de sistema (systemd, crontab, .env)
+
+Ações que **NÃO** geram report:
+- Publicação editorial WordPress (posts, mídias, tags)
+- Templates de prompt (`rec-*.md`)
+- Campos editoriais em `sites.json` (cores, categorias)
+- `memory.jsonl` e `SOUL.md` próprios (exceto regras estruturais)
+
+### Formato do report
+
+```
+[REPORT-INFRA] <@&1496306777933877369>
+Ação: [criada/modificada/removida]
+Tipo: [cron/skill/script/config/data]
+Path: [caminho exato]
+Motivo: [contexto]
+Evidência: [hash commit / output]
+```
+
+### Papel do Zeus ao receber report
+
+1. Validar mentalmente se faz sentido
+2. Atualizar `/root/mgs-agent/data/infra-inventory.json`
+3. Se identificar problema → escalar para Rodolfo
+4. Se OK → silêncio ou ack curto
