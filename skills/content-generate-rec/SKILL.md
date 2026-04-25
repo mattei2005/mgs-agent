@@ -135,13 +135,17 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   notes it so Raquel knows to expect manual review.
 - The image is saved to `/tmp/card-<slug>.<ext>`.
 
-> **PITFALL — search-card-image.sh returns NEEDS_MANUAL for banks without standalone card images:**
+> **PITFALL — search-card-image.sh returns NEEDS_MANUAL or low-quality image:**
 > Some bank pages (e.g. Santander UK) use only lifestyle photos and return no card image.
 > The script returns `{"status":"NEEDS_MANUAL","reason":"dimensions_filter_all_rejected"}`.
-> When this happens:
+> Also: the script may return a valid image that is too small to use (e.g. 130×80px) —
+> always check the downloaded image dimensions and run `vision_analyze` to confirm quality.
+> When either situation occurs:
 > 1. Check `browser_get_images` on the official page — if no card image there, move on
-> 2. Try financial comparison sites (finder.com/uk, moneysupermarket.com, money.co.uk)
->    via a `delegate_task` subagent with browser + web toolsets — ask for a direct image URL
+> 2. Use a `delegate_task` subagent with browser + web toolsets to search for a direct
+>    image URL from financial comparison sites (finder.com/uk, moneysupermarket.com,
+>    money.co.uk) — ask for the highest-resolution card image URL available. This is
+>    the preferred method because it can find CDN images from the bank itself.
 > 3. Download the found image with curl using a Referer header to bypass 403:
 >    ```bash
 >    curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36" \
