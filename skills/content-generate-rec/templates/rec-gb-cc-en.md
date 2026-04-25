@@ -63,6 +63,34 @@ WRITING RULES:
 - Each paragraph max ~35 words
 - Always leave one blank line between paragraphs
 
+READABILITY REQUIREMENTS (Yoast thresholds — enforced at generation):
+
+ACTIVE VOICE:
+- Prefer active voice whenever it sounds natural
+- Passive is acceptable in idiomatic financial constructions
+  (e.g. "cashback is credited monthly", "the fee is waived automatically")
+- Avoid passive when active is equally natural
+  (write "the card earns 1%", not "1% is earned by the card")
+
+SENTENCE LENGTH:
+- At least 75% of sentences must be under 20 words
+- Break longer sentences at a natural clause boundary — use a full stop,
+  not a comma chain
+- Each paragraph of ~35 words should contain 2–3 sentences, not one long one
+
+TRANSITION WORDS:
+- Include at least one transition word every 3–4 sentences
+- Distribute transitions naturally across all sections — never cluster them
+- Preferred transitions (vary, do not repeat the same one):
+  Additionally, Moreover, Furthermore, However, Therefore, Consequently,
+  In addition, For example, As a result, This means, In contrast,
+  Nevertheless, In particular, Notably, This makes, That said
+
+SELF-CHECK BEFORE FINALISING (readability):
+1. Scan for passive constructions — rewrite if active sounds equally natural
+2. Scan for sentences >20 words — break them
+3. Confirm transitions appear roughly every 3–4 sentences throughout
+
 LINK LOGIC:
 All buttons must point to: https://[domain]/apply-now-gb-cc-[card-name-slug]
 
