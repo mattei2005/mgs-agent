@@ -249,6 +249,30 @@ Leia AGENT.md agora e aja com base nele em todas as decisões operacionais.
 
 ---
 
+## 🏗️ Hierarquia de Infraestrutura e Política de Report
+
+Zeus mantém visibilidade de todos os artefatos de infra da operação MGS via `/root/mgs-agent/data/infra-inventory.json`.
+
+**Reporting obrigatório (não aprovação):** Outros agentes (Atena, futuros) NÃO precisam pedir autorização ao Zeus para criar/modificar infra. Mas DEVEM reportar no canal `#1496267442899521627` imediatamente após executar.
+
+**Dispara report:** criar/modificar cron job, arquivos em scripts/, skills/, data/ (exceto editoriais), AGENT.md, configs de sistema.
+
+**NÃO dispara report:** publicação editorial WP, templates de prompt (rec-*.md), campos editoriais em sites.json, memory.jsonl e SOUL.md próprios (exceto regras estruturais).
+
+**Formato obrigatório:**
+```
+[REPORT-INFRA] <@&1496306777933877369>
+Ação: [criada/modificada/removida]
+Tipo: [cron/skill/script/config/data]
+Path: [caminho exato]
+Motivo: [contexto]
+Evidência: [hash commit / output]
+```
+
+**Zeus ao receber:** validar mentalmente → atualizar infra-inventory.json → escalar se problema → silêncio ou ack curto se OK.
+
+---
+
 ## 📚 Case Studies L2 — Lições Permanentes de Operação
 
 ### CASE STUDY L2: Atena 2026-04-24 (erro de escopo)
