@@ -49,25 +49,46 @@ while IFS= read -r fpath; do
         '. += [{"path": $path, "size_bytes": $size, "modified_at": $mtime}]')
 done < <(find "$REPO/scripts" -maxdepth 2 -type f \( -name "*.sh" -o -name "*.php" -o -name "*.js" \) ! -path "*/node_modules/*" | sort)
 
-# ── 4. Skills MGS ────────────────────────────────────────────────────────────
-log "Coletando skills..."
-SKILLS_JSON="[]"
+# ── 4. Skills MGS (/root/mgs-agent/skills/) ─────────────────────────────────
+log "Coletando skills_mgs..."
+SKILLS_MGS_JSON="[]"
+while IFS= read -r skill_md; do
+    skill_dir=$(dirname "$skill_md")
+    skill_name=$(basename "$skill_dir")
+    SKILLS_MGS_JSON=$(echo "$SKILLS_MGS_JSON" | jq \
+        --arg name "$skill_name" \
+        --arg path "$skill_dir/" \
+        --arg skill_md "$skill_md" \
+        '. += [{"name": $name, "path": $path, "skill_md": $skill_md}]')
+done < <(find "$REPO/skills" -name "SKILL.md" 2>/dev/null | sort)
+
+# ── 5. Skills Hermes (/root/.hermes/profiles/{agent}/skills/) ─────────────────
+log "Coletando skills_hermes..."
+SKILLS_HERMES_JSON="{}"
 for profile_dir in /root/.hermes/profiles/*/skills; do
     agent=$(basename "$(dirname "$profile_dir")")
+    AGENT_SKILLS="[]"
     while IFS= read -r skill_md; do
         skill_path=$(dirname "$skill_md")
         skill_name=$(basename "$skill_path")
         category=$(basename "$(dirname "$skill_path")")
-        SKILLS_JSON=$(echo "$SKILLS_JSON" | jq \
-            --arg agent "$agent" \
+        # Se category == skills, não há subdiretório de categoria
+        if [[ "$category" == "skills" ]]; then
+            category=""
+        fi
+        AGENT_SKILLS=$(echo "$AGENT_SKILLS" | jq \
             --arg name "$skill_name" \
             --arg category "$category" \
-            --arg path "$skill_md" \
-            '. += [{"agent": $agent, "name": $name, "category": $category, "skill_md": $path}]')
+            --arg skill_md "$skill_md" \
+            '. += [{"name": $name, "category": $category, "skill_md": $skill_md}]')
     done < <(find "$profile_dir" -name "SKILL.md" 2>/dev/null | sort)
+    SKILLS_HERMES_JSON=$(echo "$SKILLS_HERMES_JSON" | jq \
+        --arg agent "$agent" \
+        --argjson skills "$AGENT_SKILLS" \
+        '.[$agent] = $skills')
 done
 
-# ── 5. Data files relevantes ─────────────────────────────────────────────────
+# ── 6. Data files relevantes ─────────────────────────────────────────────────
 log "Coletando data files..."
 DATA_JSON="[]"
 for fpath in "$REPO/data"/*.json "$REPO/profiles"/*.md; do
@@ -84,7 +105,7 @@ for fpath in "$REPO/data"/*.json "$REPO/profiles"/*.md; do
         '. += [{"path": $path, "size_bytes": $size, "md5": $md5, "modified_at": $mtime}]')
 done
 
-# ── 6. Mu-plugin deploy status ────────────────────────────────────────────────
+# ── 7. Mu-plugin deploy status ────────────────────────────────────────────────
 log "Verificando mu-plugin canônico..."
 MU_PATH="$REPO/scripts/mu-plugins/yoast-rest-meta.php"
 if [[ -f "$MU_PATH" ]]; then
@@ -95,7 +116,7 @@ else
     MU_LINES=0
 fi
 
-# ── 7. Montar JSON final ──────────────────────────────────────────────────────
+# ── 8. Montar JSON final ──────────────────────────────────────────────────────
 log "Montando JSON final..."
 jq -n \
     --arg updated_at "$NOW" \
@@ -104,7 +125,8 @@ jq -n \
     --argjson services "$SERVICES_JSON" \
     --argjson crons "$CRONS_JSON" \
     --argjson scripts "$SCRIPTS_JSON" \
-    --argjson skills "$SKILLS_JSON" \
+    --argjson skills_mgs "$SKILLS_MGS_JSON" \
+    --argjson skills_hermes "$SKILLS_HERMES_JSON" \
     --argjson data_files "$DATA_JSON" \
     '{
         "_meta": {
@@ -115,7 +137,8 @@ jq -n \
         "systemd_services": $services,
         "crons": $crons,
         "scripts": $scripts,
-        "skills": $skills,
+        "skills_mgs": $skills_mgs,
+        "skills_hermes": $skills_hermes,
         "data_files": $data_files,
         "mu_plugin_canonical": {
             "path": "scripts/mu-plugins/yoast-rest-meta.php",
@@ -124,6 +147,10 @@ jq -n \
         }
     }' > "$OUT"
 
+SKILLS_MGS_COUNT=$(echo "$SKILLS_MGS_JSON" | jq 'length')
+SKILLS_HERMES_COUNTS=$(echo "$SKILLS_HERMES_JSON" | jq '[to_entries[] | "\(.key)=\(.value|length)"] | join(", ")')
+
 log "Inventário salvo em $OUT"
-log "Serviços: $(echo "$SERVICES_JSON" | jq 'length') | Crons: $(echo "$CRONS_JSON" | jq 'length') | Scripts: $(echo "$SCRIPTS_JSON" | jq 'length') | Skills: $(echo "$SKILLS_JSON" | jq 'length')"
+log "Serviços: $(echo "$SERVICES_JSON" | jq 'length') | Crons: $(echo "$CRONS_JSON" | jq 'length') | Scripts: $(echo "$SCRIPTS_JSON" | jq 'length')"
+log "skills_mgs: $SKILLS_MGS_COUNT | skills_hermes: $SKILLS_HERMES_COUNTS"
 log "=== infra-discovery.sh DONE ==="
