@@ -1,172 +1,1096 @@
 {
   "_meta": {
-    "description": "Inventário de infraestrutura compartilhada da operação MGS. Mantido pelo Zeus. Atualizado após cada REPORT-INFRA recebido.",
-    "updated_at": "2026-04-24T23:30:00-04:00",
-    "updated_by": "zeus"
+    "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
+    "updated_at": "2026-04-25T00:06:37-04:00",
+    "generated_by": "infra-discovery.sh"
   },
-
   "systemd_services": [
     {
       "name": "zeus-gateway.service",
-      "description": "Hermes Gateway — Zeus (MGS Digital Corp)",
-      "status": "active/running",
-      "profile": "zeus",
-      "owner": "zeus"
+      "status": "active"
     },
     {
       "name": "atena-gateway.service",
-      "description": "Hermes Gateway — Atena (MGS Digital Corp)",
-      "status": "active/running",
-      "profile": "atena",
-      "owner": "atena"
+      "status": "active"
     },
     {
       "name": "mgs-autocommit.service",
-      "description": "MGS Agent Auto-Commit Watcher — detecta mudanças em /root/mgs-agent e faz git commit + push automático",
-      "status": "active/running",
-      "script": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "owner": "zeus"
+      "status": "active"
     }
   ],
-
-  "cron_jobs": [
+  "crons": [
     {
-      "schedule": "*/5 * * * *",
-      "command": "/root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1",
-      "description": "Sincroniza SOUL.md de todos os agentes para /root/mgs-agent/profiles/ para versionamento via git + auto-push",
-      "log": "/root/mgs-agent/logs/sync-souls.log",
-      "owner": "zeus",
-      "created_at": "2026-04-24"
+      "entry": "*/5 * * * * /root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1"
     }
   ],
-
   "scripts": [
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "description": "Watcher inotify — detecta mudanças no repo mgs-agent e faz commit automático. Executado via mgs-autocommit.service.",
-      "owner": "zeus"
+      "size_bytes": 1337,
+      "modified_at": "2026-04-22T20:22:30-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/sync-souls.sh",
-      "description": "Copia SOUL.md dos perfis Hermes (zeus, atena) para /root/mgs-agent/profiles/ para versionamento. Rodado via cron */5.",
-      "owner": "zeus",
-      "created_at": "2026-04-24"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
-      "description": "Gera inventário de webapps dos servidores RunCloud via API v3. Output: /root/mgs-agent/inventario-webapps.json",
-      "owner": "zeus"
+      "path": "/root/mgs-agent/scripts/infra-discovery.sh",
+      "size_bytes": 5702,
+      "modified_at": "2026-04-25T00:06:33-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-rec-readability.sh",
-      "description": "Monitora scores de readability dos posts REC em produção.",
-      "owner": "atena"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/update-yoast-scores.sh",
-      "description": "Atualiza scores Yoast nos posts via WP REST API.",
-      "owner": "atena"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
-      "description": "Lib Node.js para calcular scores Yoast (SEO + readability) localmente sem precisar do WP-Admin.",
-      "owner": "atena"
+      "size_bytes": 4355,
+      "modified_at": "2026-04-24T23:22:13-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mu-plugins/yoast-rest-meta.php",
-      "description": "mu-plugin PHP canônico deployado nos sites RunCloud MGS. v2 (2026-04-24): remove fallbacks fixos de scores Yoast. MD5: 2795fb88cfd25101bc16ff8130ceeb7b.",
-      "version": "v2",
-      "md5": "2795fb88cfd25101bc16ff8130ceeb7b",
-      "deploy_status": {
-        "eggbev.com": "deployed_v2",
-        "fincgriffin.com": "pending_manual",
-        "runcloud_34_sites": "pending_fase2_suspended"
-      },
-      "owner": "atena"
+      "size_bytes": 2905,
+      "modified_at": "2026-04-24T16:20:23-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
+      "size_bytes": 2714,
+      "modified_at": "2026-04-23T12:03:33-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/sync-souls.sh",
+      "size_bytes": 451,
+      "modified_at": "2026-04-24T23:11:05-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/update-yoast-scores.sh",
+      "size_bytes": 5882,
+      "modified_at": "2026-04-24T18:37:51-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
+      "size_bytes": 4466,
+      "modified_at": "2026-04-24T18:05:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-score-updater.js",
+      "size_bytes": 5045,
+      "modified_at": "2026-04-24T18:36:54-04:00"
     }
   ],
-
-  "skills": {
-    "zeus": [
-      "ops/runcloud-api-management",
-      "ops/wp-rest-mu-plugin-deploy",
-      "ops/inter-agent-messaging",
-      "ops/claude-code-restart",
-      "ops/sftp-deployment",
-      "ops/wp-plugin-mass-operation",
-      "content-generate-rec",
-      "content-publish-wordpress"
-    ],
-    "atena": [
-      "content-generate-rec",
-      "content-publish-wordpress",
-      "devops/soul-md-persist-rules",
-      "devops/ssh-jump-runcloud"
-    ]
-  },
-
+  "skills": [
+    {
+      "agent": "atena",
+      "name": "apple-notes",
+      "category": "apple",
+      "skill_md": "/root/.hermes/profiles/atena/skills/apple/apple-notes/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "apple-reminders",
+      "category": "apple",
+      "skill_md": "/root/.hermes/profiles/atena/skills/apple/apple-reminders/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "findmy",
+      "category": "apple",
+      "skill_md": "/root/.hermes/profiles/atena/skills/apple/findmy/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "imessage",
+      "category": "apple",
+      "skill_md": "/root/.hermes/profiles/atena/skills/apple/imessage/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "claude-code",
+      "category": "autonomous-ai-agents",
+      "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/claude-code/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "codex",
+      "category": "autonomous-ai-agents",
+      "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/codex/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "hermes-agent",
+      "category": "autonomous-ai-agents",
+      "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "opencode",
+      "category": "autonomous-ai-agents",
+      "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/opencode/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "architecture-diagram",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/atena/skills/creative/architecture-diagram/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "ascii-art",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/atena/skills/creative/ascii-art/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "ascii-video",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/atena/skills/creative/ascii-video/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "baoyu-comic",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/atena/skills/creative/baoyu-comic/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "baoyu-infographic",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/atena/skills/creative/baoyu-infographic/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "creative-ideation",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/atena/skills/creative/creative-ideation/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "excalidraw",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/atena/skills/creative/excalidraw/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "manim-video",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/atena/skills/creative/manim-video/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "p5js",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/atena/skills/creative/p5js/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "pixel-art",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/atena/skills/creative/pixel-art/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "popular-web-designs",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/atena/skills/creative/popular-web-designs/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "songwriting-and-ai-music",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/atena/skills/creative/songwriting-and-ai-music/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "jupyter-live-kernel",
+      "category": "data-science",
+      "skill_md": "/root/.hermes/profiles/atena/skills/data-science/jupyter-live-kernel/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "soul-md-persist-rules",
+      "category": "devops",
+      "skill_md": "/root/.hermes/profiles/atena/skills/devops/soul-md-persist-rules/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "ssh-jump-runcloud",
+      "category": "devops",
+      "skill_md": "/root/.hermes/profiles/atena/skills/devops/ssh-jump-runcloud/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "webhook-subscriptions",
+      "category": "devops",
+      "skill_md": "/root/.hermes/profiles/atena/skills/devops/webhook-subscriptions/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "dogfood",
+      "category": "skills",
+      "skill_md": "/root/.hermes/profiles/atena/skills/dogfood/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "himalaya",
+      "category": "email",
+      "skill_md": "/root/.hermes/profiles/atena/skills/email/himalaya/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "minecraft-modpack-server",
+      "category": "gaming",
+      "skill_md": "/root/.hermes/profiles/atena/skills/gaming/minecraft-modpack-server/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "pokemon-player",
+      "category": "gaming",
+      "skill_md": "/root/.hermes/profiles/atena/skills/gaming/pokemon-player/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "codebase-inspection",
+      "category": "github",
+      "skill_md": "/root/.hermes/profiles/atena/skills/github/codebase-inspection/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "github-auth",
+      "category": "github",
+      "skill_md": "/root/.hermes/profiles/atena/skills/github/github-auth/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "github-code-review",
+      "category": "github",
+      "skill_md": "/root/.hermes/profiles/atena/skills/github/github-code-review/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "github-issues",
+      "category": "github",
+      "skill_md": "/root/.hermes/profiles/atena/skills/github/github-issues/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "github-pr-workflow",
+      "category": "github",
+      "skill_md": "/root/.hermes/profiles/atena/skills/github/github-pr-workflow/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "github-repo-management",
+      "category": "github",
+      "skill_md": "/root/.hermes/profiles/atena/skills/github/github-repo-management/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "native-mcp",
+      "category": "mcp",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mcp/native-mcp/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "gif-search",
+      "category": "media",
+      "skill_md": "/root/.hermes/profiles/atena/skills/media/gif-search/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "heartmula",
+      "category": "media",
+      "skill_md": "/root/.hermes/profiles/atena/skills/media/heartmula/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "songsee",
+      "category": "media",
+      "skill_md": "/root/.hermes/profiles/atena/skills/media/songsee/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "youtube-content",
+      "category": "media",
+      "skill_md": "/root/.hermes/profiles/atena/skills/media/youtube-content/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "lm-evaluation-harness",
+      "category": "evaluation",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mlops/evaluation/lm-evaluation-harness/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "weights-and-biases",
+      "category": "evaluation",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mlops/evaluation/weights-and-biases/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "huggingface-hub",
+      "category": "mlops",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mlops/huggingface-hub/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "llama-cpp",
+      "category": "inference",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mlops/inference/llama-cpp/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "obliteratus",
+      "category": "inference",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mlops/inference/obliteratus/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "outlines",
+      "category": "inference",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mlops/inference/outlines/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "vllm",
+      "category": "inference",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mlops/inference/vllm/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "audiocraft",
+      "category": "models",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mlops/models/audiocraft/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "segment-anything",
+      "category": "models",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mlops/models/segment-anything/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "dspy",
+      "category": "research",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mlops/research/dspy/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "axolotl",
+      "category": "training",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mlops/training/axolotl/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "trl-fine-tuning",
+      "category": "training",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mlops/training/trl-fine-tuning/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "unsloth",
+      "category": "training",
+      "skill_md": "/root/.hermes/profiles/atena/skills/mlops/training/unsloth/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "obsidian",
+      "category": "note-taking",
+      "skill_md": "/root/.hermes/profiles/atena/skills/note-taking/obsidian/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "google-workspace",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/atena/skills/productivity/google-workspace/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "linear",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/atena/skills/productivity/linear/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "maps",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/atena/skills/productivity/maps/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "nano-pdf",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/atena/skills/productivity/nano-pdf/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "notion",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/atena/skills/productivity/notion/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "ocr-and-documents",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/atena/skills/productivity/ocr-and-documents/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "powerpoint",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/atena/skills/productivity/powerpoint/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "godmode",
+      "category": "red-teaming",
+      "skill_md": "/root/.hermes/profiles/atena/skills/red-teaming/godmode/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "arxiv",
+      "category": "research",
+      "skill_md": "/root/.hermes/profiles/atena/skills/research/arxiv/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "blogwatcher",
+      "category": "research",
+      "skill_md": "/root/.hermes/profiles/atena/skills/research/blogwatcher/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "llm-wiki",
+      "category": "research",
+      "skill_md": "/root/.hermes/profiles/atena/skills/research/llm-wiki/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "polymarket",
+      "category": "research",
+      "skill_md": "/root/.hermes/profiles/atena/skills/research/polymarket/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "research-paper-writing",
+      "category": "research",
+      "skill_md": "/root/.hermes/profiles/atena/skills/research/research-paper-writing/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "openhue",
+      "category": "smart-home",
+      "skill_md": "/root/.hermes/profiles/atena/skills/smart-home/openhue/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "xurl",
+      "category": "social-media",
+      "skill_md": "/root/.hermes/profiles/atena/skills/social-media/xurl/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "plan",
+      "category": "software-development",
+      "skill_md": "/root/.hermes/profiles/atena/skills/software-development/plan/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "requesting-code-review",
+      "category": "software-development",
+      "skill_md": "/root/.hermes/profiles/atena/skills/software-development/requesting-code-review/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "subagent-driven-development",
+      "category": "software-development",
+      "skill_md": "/root/.hermes/profiles/atena/skills/software-development/subagent-driven-development/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "systematic-debugging",
+      "category": "software-development",
+      "skill_md": "/root/.hermes/profiles/atena/skills/software-development/systematic-debugging/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "test-driven-development",
+      "category": "software-development",
+      "skill_md": "/root/.hermes/profiles/atena/skills/software-development/test-driven-development/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "writing-plans",
+      "category": "software-development",
+      "skill_md": "/root/.hermes/profiles/atena/skills/software-development/writing-plans/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "content-repair-readability",
+      "category": "wordpress",
+      "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/content-repair-readability/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "wp-deploy-file-without-ssh",
+      "category": "wordpress",
+      "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/wp-deploy-file-without-ssh/SKILL.md"
+    },
+    {
+      "agent": "atena",
+      "name": "yoast-score-architecture",
+      "category": "wordpress",
+      "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/yoast-score-architecture/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "apple-notes",
+      "category": "apple",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/apple/apple-notes/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "apple-reminders",
+      "category": "apple",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/apple/apple-reminders/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "findmy",
+      "category": "apple",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/apple/findmy/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "imessage",
+      "category": "apple",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/apple/imessage/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "claude-code",
+      "category": "autonomous-ai-agents",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/claude-code/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "codex",
+      "category": "autonomous-ai-agents",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/codex/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "hermes-agent",
+      "category": "autonomous-ai-agents",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "opencode",
+      "category": "autonomous-ai-agents",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/opencode/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "architecture-diagram",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/creative/architecture-diagram/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "ascii-art",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/creative/ascii-art/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "ascii-video",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/creative/ascii-video/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "baoyu-comic",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/creative/baoyu-comic/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "baoyu-infographic",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/creative/baoyu-infographic/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "creative-ideation",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/creative/creative-ideation/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "excalidraw",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/creative/excalidraw/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "manim-video",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/creative/manim-video/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "p5js",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/creative/p5js/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "pixel-art",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/creative/pixel-art/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "popular-web-designs",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/creative/popular-web-designs/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "songwriting-and-ai-music",
+      "category": "creative",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/creative/songwriting-and-ai-music/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "jupyter-live-kernel",
+      "category": "data-science",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/data-science/jupyter-live-kernel/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "webhook-subscriptions",
+      "category": "devops",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/devops/webhook-subscriptions/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "dogfood",
+      "category": "skills",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/dogfood/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "himalaya",
+      "category": "email",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/email/himalaya/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "minecraft-modpack-server",
+      "category": "gaming",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/gaming/minecraft-modpack-server/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "pokemon-player",
+      "category": "gaming",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/gaming/pokemon-player/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "codebase-inspection",
+      "category": "github",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/github/codebase-inspection/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "github-auth",
+      "category": "github",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-auth/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "github-code-review",
+      "category": "github",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-code-review/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "github-issues",
+      "category": "github",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-issues/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "github-pr-workflow",
+      "category": "github",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-pr-workflow/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "github-repo-management",
+      "category": "github",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-repo-management/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "native-mcp",
+      "category": "mcp",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mcp/native-mcp/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "gif-search",
+      "category": "media",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/media/gif-search/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "heartmula",
+      "category": "media",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/media/heartmula/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "songsee",
+      "category": "media",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/media/songsee/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "youtube-content",
+      "category": "media",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/media/youtube-content/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "lm-evaluation-harness",
+      "category": "evaluation",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/evaluation/lm-evaluation-harness/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "weights-and-biases",
+      "category": "evaluation",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/evaluation/weights-and-biases/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "huggingface-hub",
+      "category": "mlops",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/huggingface-hub/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "llama-cpp",
+      "category": "inference",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/inference/llama-cpp/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "obliteratus",
+      "category": "inference",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/inference/obliteratus/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "outlines",
+      "category": "inference",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/inference/outlines/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "vllm",
+      "category": "inference",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/inference/vllm/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "audiocraft",
+      "category": "models",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/models/audiocraft/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "segment-anything",
+      "category": "models",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/models/segment-anything/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "dspy",
+      "category": "research",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/research/dspy/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "axolotl",
+      "category": "training",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/training/axolotl/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "trl-fine-tuning",
+      "category": "training",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/training/trl-fine-tuning/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "unsloth",
+      "category": "training",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/training/unsloth/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "obsidian",
+      "category": "note-taking",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/note-taking/obsidian/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "hermes-agent-restart",
+      "category": "ops",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-restart/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "hermes-profile-versioning",
+      "category": "ops",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-profile-versioning/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "hermes-soul-versioning",
+      "category": "ops",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-soul-versioning/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "inter-agent-messaging",
+      "category": "ops",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/ops/inter-agent-messaging/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "runcloud-api-management",
+      "category": "ops",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/ops/runcloud-api-management/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "sftp-deployment",
+      "category": "ops",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/ops/sftp-deployment/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "wp-plugin-mass-operation",
+      "category": "ops",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "wp-rest-mu-plugin-deploy",
+      "category": "ops",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/ops/wp-rest-mu-plugin-deploy/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "google-workspace",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/google-workspace/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "linear",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/linear/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "maps",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/maps/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "nano-pdf",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/nano-pdf/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "notion",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/notion/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "ocr-and-documents",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/ocr-and-documents/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "powerpoint",
+      "category": "productivity",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/powerpoint/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "godmode",
+      "category": "red-teaming",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/red-teaming/godmode/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "arxiv",
+      "category": "research",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/research/arxiv/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "blogwatcher",
+      "category": "research",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/research/blogwatcher/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "llm-wiki",
+      "category": "research",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/research/llm-wiki/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "polymarket",
+      "category": "research",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/research/polymarket/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "research-paper-writing",
+      "category": "research",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/research/research-paper-writing/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "openhue",
+      "category": "smart-home",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/smart-home/openhue/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "xurl",
+      "category": "social-media",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/social-media/xurl/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "plan",
+      "category": "software-development",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/plan/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "requesting-code-review",
+      "category": "software-development",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/requesting-code-review/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "subagent-driven-development",
+      "category": "software-development",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/subagent-driven-development/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "systematic-debugging",
+      "category": "software-development",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/systematic-debugging/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "test-driven-development",
+      "category": "software-development",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/test-driven-development/SKILL.md"
+    },
+    {
+      "agent": "zeus",
+      "name": "writing-plans",
+      "category": "software-development",
+      "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/writing-plans/SKILL.md"
+    }
+  ],
   "data_files": [
     {
-      "path": "/root/mgs-agent/data/sites.json",
-      "description": "Registry dos sites MGS (eggbev, fincgriffin). Fonte de verdade para credenciais WP via 1Password refs.",
-      "owner": "zeus"
-    },
-    {
       "path": "/root/mgs-agent/data/authorized-users.json",
-      "description": "Usuários autorizados a interagir com agentes MGS. Gerenciado exclusivamente pelo Zeus.",
-      "owner": "zeus"
+      "size_bytes": 2223,
+      "md5": "7a4e5244f5baf7f6f23ad386aca01a89",
+      "modified_at": "2026-04-22T14:07:35-04:00"
     },
     {
-      "path": "/root/mgs-agent/inventario-webapps.json",
-      "description": "Inventário completo de webapps RunCloud (107 entradas, 5 servidores). Gerado por runcloud-inventory.sh. No .gitignore.",
-      "owner": "zeus",
-      "gitignored": true
+      "path": "/root/mgs-agent/data/button-colors.json",
+      "size_bytes": 318,
+      "md5": "912c87c7968abd362b4d4bdedda03b47",
+      "modified_at": "2026-04-21T11:28:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/infra-inventory.json",
+      "size_bytes": 6335,
+      "md5": "7cbb8200caf2ef9676a320ac48ca1f96",
+      "modified_at": "2026-04-24T23:50:30-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
+      "size_bytes": 1146,
+      "md5": "6f82bff542de7f4432b7bdd705da566d",
+      "modified_at": "2026-04-20T23:08:39-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/lazyblock-templates.json",
+      "size_bytes": 779,
+      "md5": "277d141a9b151eaad863a73ad64fa86a",
+      "modified_at": "2026-04-20T23:14:41-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/post-aib-rec.json",
+      "size_bytes": 2,
+      "md5": "d751713988987e9331980363e24189ce",
+      "modified_at": "2026-04-20T23:09:47-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/post-p1-54241.json",
+      "size_bytes": 55178,
+      "md5": "bc76a4719d036914b5c04c138ce1c610",
+      "modified_at": "2026-04-20T23:12:32-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/post-rec-8151.json",
+      "size_bytes": 37243,
+      "md5": "d7a2188e39398dcd43082aee41b89445",
+      "modified_at": "2026-04-20T23:12:25-04:00"
     },
     {
       "path": "/root/mgs-agent/data/rec-readability-monitor.json",
-      "description": "Dados de monitoramento de readability dos posts REC.",
-      "owner": "atena"
-    }
-  ],
-
-  "profiles": [
+      "size_bytes": 484,
+      "md5": "659ede94e96aec1641a0f2f89ad51430",
+      "modified_at": "2026-04-24T23:22:18-04:00"
+    },
     {
-      "path": "/root/mgs-agent/profiles/zeus-soul.md",
-      "description": "Cópia versionada do SOUL.md do Zeus. Sincronizada via cron sync-souls.sh a cada 5 min.",
-      "source": "/root/.hermes/profiles/zeus/SOUL.md",
-      "owner": "zeus"
+      "path": "/root/mgs-agent/data/sites.json",
+      "size_bytes": 1542,
+      "md5": "947411a0af43e2f7ced79f79a1b15deb",
+      "modified_at": "2026-04-24T18:04:19-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "description": "Cópia versionada do SOUL.md da Atena. Sincronizada via cron sync-souls.sh a cada 5 min.",
-      "source": "/root/.hermes/profiles/atena/SOUL.md",
-      "owner": "atena"
+      "size_bytes": 12785,
+      "md5": "c88c07e219f9f63563972722aacb22b1",
+      "modified_at": "2026-04-24T23:16:40-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/zeus-soul.md",
+      "size_bytes": 13005,
+      "md5": "b55acce2367b1fa30bcec5d7f2bf7528",
+      "modified_at": "2026-04-25T00:00:01-04:00"
     }
   ],
-
-  "report_policy": {
-    "channel": "1496267442899521627",
-    "role_mention": "<@&1496306777933877369>",
-    "triggers": [
-      "cron job criado/modificado",
-      "arquivo criado/modificado em /root/mgs-agent/scripts/",
-      "skill criada/modificada/deletada em /root/mgs-agent/skills/",
-      "arquivo criado/modificado em /root/mgs-agent/data/ (exceto editoriais)",
-      "AGENT.md editado",
-      "configs de sistema modificadas"
-    ],
-    "no_report_needed": [
-      "publicação editorial WordPress (posts, mídias, tags)",
-      "templates de prompt (rec-*.md)",
-      "campos editoriais em sites.json (cores, categorias)",
-      "memory.jsonl e SOUL.md próprios (exceto regras estruturais)"
-    ],
-    "format": "[REPORT-INFRA] <@&1496306777933877369>\nAção: [criada/modificada/removida]\nTipo: [cron/skill/script/config/data]\nPath: [caminho exato]\nMotivo: [contexto]\nEvidência: [hash commit / output]",
-    "zeus_action_on_receipt": [
-      "Validar mentalmente se faz sentido",
-      "Atualizar /root/mgs-agent/data/infra-inventory.json",
-      "Se identificar problema → escalar para Rodolfo",
-      "Se OK → silêncio ou ack curto"
-    ]
+  "mu_plugin_canonical": {
+    "path": "scripts/mu-plugins/yoast-rest-meta.php",
+    "md5": "069270de4c07a9d15838ff45df65f539",
+    "lines": 90
   }
 }
