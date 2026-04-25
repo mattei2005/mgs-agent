@@ -263,5 +263,3 @@ No mesmo dia, ao receber Fase 2 do mu-plugin com briefing dizendo "34 sites RunC
 
 **Lição permanente:** Sempre validar inventário real antes de mass operation. Quando há divergência entre briefing e realidade, parar e reportar — nunca executar com base em número incorreto assumindo que "deve estar certo".
 
-
-<!-- cron-test-2026-04-24 -->
