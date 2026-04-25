@@ -287,3 +287,32 @@ No mesmo dia, ao receber Fase 2 do mu-plugin com briefing dizendo "34 sites RunC
 
 **Lição permanente:** Sempre validar inventário real antes de mass operation. Quando há divergência entre briefing e realidade, parar e reportar — nunca executar com base em número incorreto assumindo que "deve estar certo".
 
+### CASE STUDY L2: Zeus 2026-04-25 (incidente openzed.com — método arriscado + b64 corrompido)
+
+**O que aconteceu:** Durante Fase 2.5 (deploy mu-plugin v4 nos 4 sites SFTP Bitnami/AWS), Zeus usou WPCode PHP snippet como método de deploy em openzed.com. O snippet continha b64 do arquivo PHP. O b64 foi corrompido (provável typo manual ou cópia parcial), gerando PHP parse error quando o snippet foi ativado via admin_init. Resultado: openzed.com DOWN (HTTP 500, frontend + admin + REST API). Recuperação depende de acesso AWS Console ou chave .pem bitnami — indisponível no momento do incidente (3h46 EDT, fim de semana).
+
+**Por que aconteceu:** Duas falhas combinadas:
+1. **Método errado:** Zeus escolheu WPCode snippet sem justificativa técnica — inércia de sessão anterior. O método correto para mu-plugins existentes é elFinder `cmd: put` com base64: escreve o arquivo em disco sem executar PHP, portanto parse error no conteúdo não derruba o site. WPCode executa o PHP no carregamento do WP — parse error = fatal error imediato.
+2. **b64 corrompido:** A skill alerta explicitamente que nunca se deve editar o b64 manualmente. O b64 foi corrompido de alguma forma (cópia parcial, typo, ou versão errada do arquivo).
+
+**O que aprendi:**
+- Em servidores Bitnami sem acesso .pem, WPCode snippet PHP é o método de maior risco: falha = DOWN irrecuperável sem AWS Console.
+- elFinder `cmd: put` com base64 é sempre preferível: o arquivo vai para disco, PHP não é executado na escrita.
+- Horário de execução importa: às 3h da manhã, com dev externo indisponível, qualquer método arriscado deve ser recusado.
+- A inércia de sessão ("usamos WPCode antes, então...") não é justificativa técnica.
+
+**Como evitar no futuro:**
+1. Para sites Bitnami sem .pem: SEMPRE usar elFinder `cmd: put` para arquivos PHP. WPCode snippet apenas para código não-crítico ou quando elFinder indisponível E horário comercial E dev externo acessível.
+2. Validação MD5 reversa ANTES de ativar snippet: gerar b64 → decodificar localmente → md5sum → comparar com MD5 do arquivo canonical. Se divergir, não ativar.
+3. Se MD5 não puder ser verificado localmente, não prosseguir.
+4. Nunca executar deploy de PHP em produção Bitnami após meia-noite sem confirmação explícita do Rodolfo para o horário.
+
+**Cleanup necessário em openzed.com quando recuperado:**
+```sql
+DELETE FROM wp_options WHERE option_name = 'zeus_deploy_v4_status';
+DELETE FROM wp_posts WHERE post_type='wpcode' AND post_title LIKE 'zeus-deploy%';
+DELETE FROM wp_options WHERE option_name LIKE '_transient_wpcode%';
+DELETE FROM wp_options WHERE option_name LIKE '_transient_timeout_wpcode%';
+```
+Depois: deploy correto via elFinder `cmd: put` com MD5 verificado.
+
