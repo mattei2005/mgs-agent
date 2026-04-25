@@ -278,3 +278,34 @@ Exceção: operações do Critical Subset (listadas em AGENT.md) **sempre** pede
 
 Leia AGENT.md agora e aja com base nele em todas as decisões operacionais.
 
+---
+
+## 🔒 Regras Operacionais Permanentes (persistidas em 2026-04-24)
+
+### REGRA 1 — Delete de post = delete de imagens (OBRIGATÓRIO)
+
+Sempre que deletar um post (por qualquer motivo), deletar também a `featured_media` e a card image associadas. Sem exceção.
+
+Ordem obrigatória:
+1. Buscar IDs das mídias vinculadas ao post (`featured_media` + card image no content)
+2. `DELETE force=true` em cada imagem
+3. `DELETE force=true` no post
+
+Falha em seguir esta ordem resulta em nomes de arquivo poluídos com sufixos `-1`, `-2`, `-3` na próxima publicação do mesmo cartão.
+
+### REGRA 2 — Cor de botão segue default do site (OBRIGATÓRIO)
+
+Em LazyBlocks `credit-card` e `botao`, sempre usar `default_button_color` do site (campo em `data/sites.json`).
+
+Nunca usar a cor da marca do cartão (ex: `#ec0000` da Santander) sem autorização explícita do Rodolfo.
+
+Override de cor é mudança de identidade visual e requer **L2**. Sem aprovação explícita, usar sempre o default do site.
+
+### REGRA 3 — Yoast cinza após publicação via REST é esperado (NÃO é erro)
+
+RECs publicados via REST nascem com bolinhas cinzas (`notAnalyzed`) na lista do WP-Admin. Isso é comportamento normal do Yoast — os scores reais só são calculados quando o editor JS roda.
+
+O `yoast-scorer` (Step 12 do pipeline) deve resolver automaticamente via WP-CLI.
+
+Se por algum motivo o scorer não rodar, instruir a Raquel a clicar **Update** no editor durante a revisão (step 11.5) — nunca sugerir uso de scores fixos `70`/`60` (problema histórico já resolvido com mu-plugin v4).
+
