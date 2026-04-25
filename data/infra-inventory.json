@@ -2,7 +2,9 @@
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
     "updated_at": "2026-04-25T00:54:53-04:00",
-    "generated_by": "infra-discovery.sh"
+    "generated_by": "infra-discovery.sh",
+    "last_updated": "2026-04-25T08:00:00-04:00",
+    "updated_by": "zeus"
   },
   "systemd_services": [
     {
@@ -963,6 +965,78 @@
   "mu_plugin_canonical": {
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
-    "lines": 90
+    "lines": 90,
+    "deploy_status": {
+      "as_of": "2026-04-25",
+      "canonical_md5": "069270de4c07a9d15838ff45df65f539",
+      "total_sites": 32,
+      "deployed": 31,
+      "pending_recovery": 1,
+      "sites": {
+        "eggbev.com": {
+          "status": "deployed",
+          "role": "canário",
+          "method": "ssh_zeus"
+        },
+        "runcloud_26_sites": {
+          "status": "deployed",
+          "count": 26,
+          "servers": {
+            "MatteiInc01": {
+              "ip": "162.55.28.178",
+              "count": 16
+            },
+            "MatteiInc02": {
+              "ip": "162.55.28.179",
+              "count": 2
+            },
+            "MatteiInc03JBF": {
+              "ip": "46.4.95.117",
+              "count": 8
+            }
+          },
+          "method": "ssh_sshpass_zeus_user"
+        },
+        "sftp_sites": {
+          "finanzas.openzed.com": {
+            "status": "deployed",
+            "ip": "3.19.138.131",
+            "method": "wpcode_snippet"
+          },
+          "finanzas.cliquet.com": {
+            "status": "deployed",
+            "ip": "18.116.18.34",
+            "method": "wpcode_snippet"
+          },
+          "cliquet.com": {
+            "status": "deployed",
+            "ip": "35.175.97.196",
+            "method": "wpcode_snippet"
+          },
+          "openzed.com": {
+            "status": "incident_pending_recovery",
+            "ip": "44.208.155.39",
+            "incident": {
+              "date": "2026-04-25",
+              "cause": "PHP fatal error por snippet WPCode com b64 corrompido",
+              "site_status": "DOWN",
+              "recovery": "requer dev externo ou AWS Console (chave .pem bitnami)",
+              "cleanup_needed": [
+                "DELETE FROM wp_options WHERE option_name = 'zeus_deploy_v4_status'",
+                "DELETE FROM wp_posts WHERE post_type='wpcode' AND post_title LIKE 'zeus-deploy%'",
+                "DELETE FROM wp_options WHERE option_name LIKE '_transient_wpcode%'",
+                "DELETE FROM wp_options WHERE option_name LIKE '_transient_timeout_wpcode%'"
+              ]
+            }
+          }
+        },
+        "fincgriffin.com": {
+          "status": "deployed",
+          "method": "manual_rodolfo",
+          "note": "servidor terceiros sem acesso programático"
+        }
+      },
+      "notes": "Fase 2.5 SUSPENSA após incidente openzed.com. Retomar quando openzed recuperado."
+    }
   }
 }
