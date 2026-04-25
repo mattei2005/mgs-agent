@@ -634,6 +634,22 @@ Emit a summary to the user:
 
 All actions append to `/root/mgs-agent/logs/generate-rec.log`.
 
+## Finding a post ID when REST API returns empty for a slug
+
+When `GET /wp/v2/posts?slug=<slug>` returns `[]` (even with `status=any` or
+`context=edit`), the post may still exist. Use the public HTML to get the ID:
+
+```bash
+curl -s "https://<domain>/<slug>/" | grep -oE 'post-[0-9]+' | head -1
+```
+
+WordPress embeds the post ID in the `<body>` class (e.g. `class="post-62013 ..."`).
+Extract the number: `post-62013` → ID is `62013`.
+
+Then fetch via `GET /wp/v2/posts/62013?context=edit` to get the full raw content.
+
+---
+
 ## Post deletion (re-publish flow)
 
 Whenever a post is deleted — **for any reason** (re-publish, slug conflict, test cleanup,
