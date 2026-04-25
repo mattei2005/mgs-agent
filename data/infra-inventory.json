@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-04-25T00:20:35-04:00",
+    "updated_at": "2026-04-25T00:54:53-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -21,6 +21,9 @@
   "crons": [
     {
       "entry": "*/5 * * * * /root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1"
+    },
+    {
+      "entry": "0 10 * * * /root/mgs-agent/scripts/monitor-rec-readability.sh >> /root/mgs-agent/logs/rec-readability-monitor.log 2>&1"
     }
   ],
   "scripts": [
@@ -727,6 +730,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/note-taking/obsidian/SKILL.md"
       },
       {
+        "name": "git-hook-discord-notify",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/git-hook-discord-notify/SKILL.md"
+      },
+      {
         "name": "hermes-agent-restart",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-restart/SKILL.md"
@@ -745,6 +753,11 @@
         "name": "inter-agent-messaging",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/inter-agent-messaging/SKILL.md"
+      },
+      {
+        "name": "mgs-infra-inventory",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-infra-inventory/SKILL.md"
       },
       {
         "name": "runcloud-api-management",
@@ -888,9 +901,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 34126,
-      "md5": "f0abb0fbac0278253a1bfac1ef5f759d",
-      "modified_at": "2026-04-25T00:06:38-04:00"
+      "size_bytes": 32454,
+      "md5": "45bce990dc6a24c0cf771d54fa35b36e",
+      "modified_at": "2026-04-25T00:20:37-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -936,9 +949,9 @@
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "size_bytes": 12785,
-      "md5": "c88c07e219f9f63563972722aacb22b1",
-      "modified_at": "2026-04-24T23:16:40-04:00"
+      "size_bytes": 14970,
+      "md5": "d25a38aa674e72e3533dc7950a06ba6b",
+      "modified_at": "2026-04-25T00:38:32-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
