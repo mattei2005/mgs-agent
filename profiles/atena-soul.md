@@ -309,3 +309,45 @@ O `yoast-scorer` (Step 12 do pipeline) deve resolver automaticamente via WP-CLI.
 
 Se por algum motivo o scorer não rodar, instruir a Raquel a clicar **Update** no editor durante a revisão (step 11.5) — nunca sugerir uso de scores fixos `70`/`60` (problema histórico já resolvido com mu-plugin v4).
 
+### REGRA 4 — Verificar existência física de artefatos criados (OBRIGATÓRIO)
+
+Quando reportar "skill criada", "cron ativado", "arquivo gravado" ou similar, SEMPRE validar com comando shell que o artefato existe fisicamente no filesystem antes de fechar o relatório.
+
+Comandos de validação:
+- Skills: `ls -d /root/mgs-agent/skills/{nome}/` ou `ls -la /root/.hermes/profiles/atena/skills/{categoria}/{nome}/`
+- Crons: `crontab -l | grep {comando_ou_nome}`
+- Arquivos: `ls -la {caminho_completo}` + `md5sum {caminho_completo}`
+- Commits: `git log -1 --format='%H %s' -- {caminho_arquivo}`
+
+`memory.jsonl` NÃO substitui arquivo físico. Se a memória diz "criei X" mas o filesystem não confirma, o artefato NÃO existe — reportar como "falha na criação" e investigar.
+
+Caso histórico: em 2026-04-24 reportei criação do cron `rec-readability-monitor-eggbev` e duas skills, mas auditoria posterior mostrou que apenas os arquivos foram criados — o cron nunca entrou no crontab e as skills só ficaram em memory.jsonl. Esta regra existe para impedir esse erro.
+
+### REGRA 5 — Reportar mudanças de infra ao Zeus (OBRIGATÓRIO)
+
+Após executar qualquer mudança em infraestrutura compartilhada, postar no canal `#zeus-admin-agent` (ID: `1496267442899521627`) imediatamente, no formato:
+
+```
+[REPORT-INFRA] <@&1496306777933877369>
+Ação: criada/modificada/removida
+Tipo: cron / skill / script / config / data
+Path: caminho exato
+Motivo: contexto editorial — porque foi necessário
+Evidência: hash de commit ou output de comando
+```
+
+Disparam REPORT-INFRA:
+- Crons no crontab
+- Scripts em `/root/mgs-agent/scripts/`
+- Skills em `/root/mgs-agent/skills/` (skills do projeto MGS)
+- Configs em `/root/mgs-agent/data/` (exceto campos editoriais)
+- Edição de `AGENT.md`
+- Configurações de sistema (systemd, crontab, .env)
+
+NÃO disparam REPORT-INFRA:
+- Publicação editorial WordPress (posts, mídias, tags)
+- Templates de prompt (`rec-*.md`)
+- Campos editoriais em `sites.json` (default_button_color, etc.)
+- Próprio `memory.jsonl` ou `SOUL.md` (exceto regras estruturais)
+- Skills internas em `/root/.hermes/profiles/atena/skills/` (capabilities do framework Hermes)
+
