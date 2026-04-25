@@ -1,0 +1,172 @@
+{
+  "_meta": {
+    "description": "Inventário de infraestrutura compartilhada da operação MGS. Mantido pelo Zeus. Atualizado após cada REPORT-INFRA recebido.",
+    "updated_at": "2026-04-24T23:30:00-04:00",
+    "updated_by": "zeus"
+  },
+
+  "systemd_services": [
+    {
+      "name": "zeus-gateway.service",
+      "description": "Hermes Gateway — Zeus (MGS Digital Corp)",
+      "status": "active/running",
+      "profile": "zeus",
+      "owner": "zeus"
+    },
+    {
+      "name": "atena-gateway.service",
+      "description": "Hermes Gateway — Atena (MGS Digital Corp)",
+      "status": "active/running",
+      "profile": "atena",
+      "owner": "atena"
+    },
+    {
+      "name": "mgs-autocommit.service",
+      "description": "MGS Agent Auto-Commit Watcher — detecta mudanças em /root/mgs-agent e faz git commit + push automático",
+      "status": "active/running",
+      "script": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
+      "owner": "zeus"
+    }
+  ],
+
+  "cron_jobs": [
+    {
+      "schedule": "*/5 * * * *",
+      "command": "/root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1",
+      "description": "Sincroniza SOUL.md de todos os agentes para /root/mgs-agent/profiles/ para versionamento via git + auto-push",
+      "log": "/root/mgs-agent/logs/sync-souls.log",
+      "owner": "zeus",
+      "created_at": "2026-04-24"
+    }
+  ],
+
+  "scripts": [
+    {
+      "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
+      "description": "Watcher inotify — detecta mudanças no repo mgs-agent e faz commit automático. Executado via mgs-autocommit.service.",
+      "owner": "zeus"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/sync-souls.sh",
+      "description": "Copia SOUL.md dos perfis Hermes (zeus, atena) para /root/mgs-agent/profiles/ para versionamento. Rodado via cron */5.",
+      "owner": "zeus",
+      "created_at": "2026-04-24"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
+      "description": "Gera inventário de webapps dos servidores RunCloud via API v3. Output: /root/mgs-agent/inventario-webapps.json",
+      "owner": "zeus"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/monitor-rec-readability.sh",
+      "description": "Monitora scores de readability dos posts REC em produção.",
+      "owner": "atena"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/update-yoast-scores.sh",
+      "description": "Atualiza scores Yoast nos posts via WP REST API.",
+      "owner": "atena"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
+      "description": "Lib Node.js para calcular scores Yoast (SEO + readability) localmente sem precisar do WP-Admin.",
+      "owner": "atena"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mu-plugins/yoast-rest-meta.php",
+      "description": "mu-plugin PHP canônico deployado nos sites RunCloud MGS. v2 (2026-04-24): remove fallbacks fixos de scores Yoast. MD5: 2795fb88cfd25101bc16ff8130ceeb7b.",
+      "version": "v2",
+      "md5": "2795fb88cfd25101bc16ff8130ceeb7b",
+      "deploy_status": {
+        "eggbev.com": "deployed_v2",
+        "fincgriffin.com": "pending_manual",
+        "runcloud_34_sites": "pending_fase2_suspended"
+      },
+      "owner": "atena"
+    }
+  ],
+
+  "skills": {
+    "zeus": [
+      "ops/runcloud-api-management",
+      "ops/wp-rest-mu-plugin-deploy",
+      "ops/inter-agent-messaging",
+      "ops/claude-code-restart",
+      "ops/sftp-deployment",
+      "ops/wp-plugin-mass-operation",
+      "content-generate-rec",
+      "content-publish-wordpress"
+    ],
+    "atena": [
+      "content-generate-rec",
+      "content-publish-wordpress",
+      "devops/soul-md-persist-rules",
+      "devops/ssh-jump-runcloud"
+    ]
+  },
+
+  "data_files": [
+    {
+      "path": "/root/mgs-agent/data/sites.json",
+      "description": "Registry dos sites MGS (eggbev, fincgriffin). Fonte de verdade para credenciais WP via 1Password refs.",
+      "owner": "zeus"
+    },
+    {
+      "path": "/root/mgs-agent/data/authorized-users.json",
+      "description": "Usuários autorizados a interagir com agentes MGS. Gerenciado exclusivamente pelo Zeus.",
+      "owner": "zeus"
+    },
+    {
+      "path": "/root/mgs-agent/inventario-webapps.json",
+      "description": "Inventário completo de webapps RunCloud (107 entradas, 5 servidores). Gerado por runcloud-inventory.sh. No .gitignore.",
+      "owner": "zeus",
+      "gitignored": true
+    },
+    {
+      "path": "/root/mgs-agent/data/rec-readability-monitor.json",
+      "description": "Dados de monitoramento de readability dos posts REC.",
+      "owner": "atena"
+    }
+  ],
+
+  "profiles": [
+    {
+      "path": "/root/mgs-agent/profiles/zeus-soul.md",
+      "description": "Cópia versionada do SOUL.md do Zeus. Sincronizada via cron sync-souls.sh a cada 5 min.",
+      "source": "/root/.hermes/profiles/zeus/SOUL.md",
+      "owner": "zeus"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/atena-soul.md",
+      "description": "Cópia versionada do SOUL.md da Atena. Sincronizada via cron sync-souls.sh a cada 5 min.",
+      "source": "/root/.hermes/profiles/atena/SOUL.md",
+      "owner": "atena"
+    }
+  ],
+
+  "report_policy": {
+    "channel": "1496267442899521627",
+    "role_mention": "<@&1496306777933877369>",
+    "triggers": [
+      "cron job criado/modificado",
+      "arquivo criado/modificado em /root/mgs-agent/scripts/",
+      "skill criada/modificada/deletada em /root/mgs-agent/skills/",
+      "arquivo criado/modificado em /root/mgs-agent/data/ (exceto editoriais)",
+      "AGENT.md editado",
+      "configs de sistema modificadas"
+    ],
+    "no_report_needed": [
+      "publicação editorial WordPress (posts, mídias, tags)",
+      "templates de prompt (rec-*.md)",
+      "campos editoriais em sites.json (cores, categorias)",
+      "memory.jsonl e SOUL.md próprios (exceto regras estruturais)"
+    ],
+    "format": "[REPORT-INFRA] <@&1496306777933877369>\nAção: [criada/modificada/removida]\nTipo: [cron/skill/script/config/data]\nPath: [caminho exato]\nMotivo: [contexto]\nEvidência: [hash commit / output]",
+    "zeus_action_on_receipt": [
+      "Validar mentalmente se faz sentido",
+      "Atualizar /root/mgs-agent/data/infra-inventory.json",
+      "Se identificar problema → escalar para Rodolfo",
+      "Se OK → silêncio ou ack curto"
+    ]
+  }
+}
