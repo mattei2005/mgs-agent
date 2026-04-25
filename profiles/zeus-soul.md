@@ -1,1 +1,0 @@
-/root/.hermes/profiles/zeus/SOUL.md

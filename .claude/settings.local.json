@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(apt install *)",
+      "Bash(jq --version)",
+      "Bash(mkdir -p /root/.claude/skills/content-publish-wordpress/scripts /root/.claude/skills/content-generate-rec/templates /root/.claude/skills/content-generate-rec/scripts /root/mgs-agent/logs)",
+      "Read(//root/.claude/**)"
+    ]
+  }
+}
