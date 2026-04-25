@@ -1,11 +1,8 @@
 #!/bin/bash
 # monitor-rec-readability.sh
-# Verifica readability dos RECs gb-cc-en publicados no eggbev.
+# Verifica readability dos RECs gb-cc-en publicados no eggbev APÓS o adendo (2026-04-25).
 # Mantém contador de consecutivos verdes rumo ao threshold de 5.
-# Reporta via Discord se algum REC sair vermelho ou amarelo.
-#
-# Uso: bash monitor-rec-readability.sh
-# Cron: diário
+# Output: JSON para o cron report processar.
 
 set -euo pipefail
 
@@ -13,116 +10,122 @@ SITE="eggbev"
 STATE_FILE="/root/mgs-agent/data/rec-readability-monitor.json"
 SCORER="/root/mgs-agent/skills/content-generate-rec/scripts/yoast-score-post.sh"
 RESOLVE="/root/mgs-agent/skills/content-publish-wordpress/scripts/resolve-credentials.sh"
+ADENDO_DATE="2026-04-25"
 
 set -a && . /root/mgs-agent/.env && set +a
 
-# Resolver credenciais
 CREDS=$(bash "$RESOLVE" "$SITE" 2>/dev/null)
-WP_URL=$(echo "$CREDS" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['wp_url'])")
+WP_URL=$(echo  "$CREDS" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['wp_url'])")
 WP_USER=$(echo "$CREDS" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['username'])")
 WP_PASS=$(echo "$CREDS" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['password'])")
 
-# Carregar estado atual
-if [ ! -f "$STATE_FILE" ]; then
-    echo '{"consecutive_green": 0, "checked_ids": [], "history": []}' > "$STATE_FILE"
-fi
-
+# Carregar estado
 STATE=$(cat "$STATE_FILE")
 CONSECUTIVE=$(echo "$STATE" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('consecutive_green',0))")
-CHECKED_IDS=$(echo "$STATE" | python3 -c "import sys,json; d=json.load(sys.stdin); print(json.dumps(d.get('checked_ids',[])))")
+THRESHOLD=$(echo  "$STATE" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('threshold',5))")
 
 # Buscar RECs gb-cc-en publicados (tags: rec=219, gb=451, cc=214, lang_en=215)
+# Filtrar apenas posts >= ADENDO_DATE
 POSTS=$(curl -s \
   -u "$WP_USER:$WP_PASS" \
-  "$WP_URL/wp-json/wp/v2/posts?tags=219,451,214,215&per_page=10&_fields=id,slug,date&status=publish" \
+  "$WP_URL/wp-json/wp/v2/posts?tags=219,451,214,215&per_page=20&_fields=id,slug,date&status=publish&after=${ADENDO_DATE}T00:00:00" \
   2>/dev/null)
 
-NEW_CHECKED="$CHECKED_IDS"
-NEW_CONSECUTIVE="$CONSECUTIVE"
-ALERTS=""
-HISTORY_APPEND=""
+# Processar posts via Python (mais robusto que bash puro)
+python3 - <<PYEOF
+import json, subprocess, sys
 
-while IFS= read -r line; do
-    POST_ID=$(echo "$line" | python3 -c "import sys,json; d=json.loads(sys.stdin.read()); print(d['id'])")
-    POST_SLUG=$(echo "$line" | python3 -c "import sys,json; d=json.loads(sys.stdin.read()); print(d['slug'])")
-    POST_DATE=$(echo "$line" | python3 -c "import sys,json; d=json.loads(sys.stdin.read()); print(d['date'][:10])")
+STATE_FILE = "$STATE_FILE"
+SCORER     = "$SCORER"
+SITE       = "$SITE"
 
-    # Pular se já checado
-    ALREADY=$(echo "$NEW_CHECKED" | python3 -c "import sys,json; ids=json.load(sys.stdin); print('yes' if $POST_ID in ids else 'no')")
-    if [ "$ALREADY" = "yes" ]; then
-        continue
-    fi
-
-    # Rodar scorer
-    SCORE_JSON=$(bash "$SCORER" "$SITE" "$POST_ID" 2>/dev/null || echo '{}')
-    READ_SCORE=$(echo "$SCORE_JSON" | python3 -c "import sys,json; d=json.loads(sys.stdin.read()); print(d.get('readability_score','null'))" 2>/dev/null || echo "null")
-    SEO_SCORE=$(echo "$SCORE_JSON"  | python3 -c "import sys,json; d=json.loads(sys.stdin.read()); print(d.get('seo_score','null'))" 2>/dev/null || echo "null")
-
-    if [ "$READ_SCORE" = "null" ] || [ -z "$READ_SCORE" ]; then
-        continue
-    fi
-
-    # Classificar
-    if   [ "$READ_SCORE" -ge 71 ] 2>/dev/null; then COLOR="green";  EMOJI="🟢"
-    elif [ "$READ_SCORE" -ge 41 ] 2>/dev/null; then COLOR="orange"; EMOJI="🟡"
-    else                                              COLOR="red";    EMOJI="🔴"
-    fi
-
-    # Atualizar consecutivos
-    if [ "$COLOR" = "green" ]; then
-        NEW_CONSECUTIVE=$((NEW_CONSECUTIVE + 1))
-    else
-        NEW_CONSECUTIVE=0
-        ALERTS="${ALERTS}⚠️ REC com readability não-verde: **${POST_SLUG}** | Read=${READ_SCORE} ${EMOJI} | SEO=${SEO_SCORE} | Data=${POST_DATE}\n"
-    fi
-
-    # Adicionar ao histórico
-    HISTORY_APPEND="${HISTORY_APPEND}{\"id\":${POST_ID},\"slug\":\"${POST_SLUG}\",\"date\":\"${POST_DATE}\",\"readability\":${READ_SCORE},\"seo\":${SEO_SCORE},\"color\":\"${COLOR}\"},"
-
-    # Marcar como checado
-    NEW_CHECKED=$(echo "$NEW_CHECKED" | python3 -c "import sys,json; ids=json.load(sys.stdin); ids.append($POST_ID); print(json.dumps(ids))")
-
-    echo "Checked: $POST_SLUG | Read=$READ_SCORE $EMOJI | SEO=$SEO_SCORE | Consec=$NEW_CONSECUTIVE"
-done < <(echo "$POSTS" | python3 -c "
-import sys, json
-posts = json.load(sys.stdin)
-for p in posts:
-    print(json.dumps(p))
-")
-
-# Salvar novo estado
-python3 -c "
-import json, sys
-
-with open('$STATE_FILE') as f:
+with open(STATE_FILE) as f:
     state = json.load(f)
 
-state['consecutive_green'] = $NEW_CONSECUTIVE
-state['checked_ids'] = json.loads('''$NEW_CHECKED''')
+consecutive  = state.get("consecutive_green", 0)
+checked_ids  = set(state.get("checked_ids", []))
+history      = state.get("history", [])
+threshold    = state.get("threshold", 5)
 
-# Append history
-new_items = '''$HISTORY_APPEND'''.strip().rstrip(',')
-if new_items:
-    for item in new_items.split('},{'):
-        item = item.strip().strip(',')
-        if not item.startswith('{'): item = '{' + item
-        if not item.endswith('}'): item = item + '}'
-        try:
-            state.setdefault('history', []).append(json.loads(item))
-        except: pass
+posts = json.loads('''$POSTS''')
 
-with open('$STATE_FILE', 'w') as f:
+alerts    = []
+new_posts = []
+
+for post in posts:
+    pid   = post["id"]
+    slug  = post["slug"]
+    date  = post["date"][:10]
+
+    if pid in checked_ids:
+        continue
+
+    # Scorer
+    try:
+        result = subprocess.run(
+            ["bash", SCORER, SITE, str(pid)],
+            capture_output=True, text=True, timeout=60
+        )
+        score_data = json.loads(result.stdout.strip())
+        read_score = score_data.get("readability_score")
+        seo_score  = score_data.get("seo_score")
+    except Exception as e:
+        print(f"SCORER ERROR {slug}: {e}", file=sys.stderr)
+        continue
+
+    if read_score is None:
+        continue
+
+    # Classificar
+    if   read_score >= 71: color, emoji = "green",  "🟢"
+    elif read_score >= 41: color, emoji = "orange", "🟡"
+    else:                  color, emoji = "red",    "🔴"
+
+    if color == "green":
+        consecutive += 1
+    else:
+        consecutive = 0
+        alerts.append({
+            "slug": slug, "id": pid, "date": date,
+            "readability": read_score, "seo": seo_score,
+            "emoji": emoji, "color": color
+        })
+
+    entry = {
+        "id": pid, "slug": slug, "date": date,
+        "readability": read_score, "seo": seo_score,
+        "color": color,
+        "note": f"REC #{len(history)+1} pós-adendo (canário)"
+    }
+    history.append(entry)
+    checked_ids.add(pid)
+    new_posts.append(entry)
+    print(f"Checked: {slug} | Read={read_score} {emoji} | SEO={seo_score} | Consec={consecutive}")
+
+# Salvar estado
+state["consecutive_green"] = consecutive
+state["checked_ids"]       = list(checked_ids)
+state["history"]           = history
+
+with open(STATE_FILE, "w") as f:
     json.dump(state, f, indent=2)
 
-print(f'State saved: consecutive_green={state[\"consecutive_green\"]}')
-"
+# Output para o cron
+print(f"\n--- SUMMARY ---")
+print(f"CONSECUTIVE_GREEN={consecutive}/{threshold}")
+print(f"NEW_POSTS={len(new_posts)}")
 
-# Output final para o cron report
-echo ""
-echo "CONSECUTIVE_GREEN=$NEW_CONSECUTIVE"
-echo "ALERTS=$ALERTS"
-if [ -n "$ALERTS" ]; then
-    echo "STATUS=ALERT"
-else
-    echo "STATUS=OK"
-fi
+if consecutive >= threshold:
+    print("STATUS=THRESHOLD_REACHED")
+    print(f"ACTION_REQUIRED: 5 RECs consecutivos verdes atingidos. Autorizado replicar adendo para próximo template de idioma.")
+elif alerts:
+    print("STATUS=ALERT")
+    for a in alerts:
+        print(f"ALERT: {a['slug']} | Read={a['readability']} {a['emoji']} | SEO={a['seo']}")
+else:
+    print("STATUS=OK")
+    if new_posts:
+        print(f"All {len(new_posts)} new RECs passed readability check.")
+    else:
+        print("No new RECs to check today.")
+PYEOF
