@@ -228,22 +228,59 @@ Passo 2 — Copiar template canônico (templates/wpcode-snippet-template.php) e 
 Passo 3 — Login browser + criar snippet no WPCode com o PHP do template
 Passo 4 — Navegar para wp-admin/index.php (dispara admin_init → executa o snippet)
 Passo 5 — Validar MD5 do arquivo em disco via SFTP get + md5sum (069270de4c07a9d15838ff45df65f539)
-Passo 6 — REMOVER SNIPPET (OBRIGATÓRIO — deploy não está completo sem este passo)
-           Validar: GET /wp-json/wp/v2/posts?post_type=wpcode deve retornar array vazio
+Passo 6 — REMOVER SNIPPET (detalhes em ### PASSO 6 abaixo — OBRIGATÓRIO)
 Passo 7 — Validar REST API (post de teste com _hide_from_home + _yoast_wpseo_title)
 Passo 8 — Desativar + remover WP File Manager via REST API
 ```
 
-### Exit checklist (todos os itens obrigatórios antes de marcar site como ✅)
+### PASSO 6 — REMOVER SNIPPET (OBRIGATÓRIO — não-negociável)
+
+Após validar deploy via MD5 (Passo 5), executar os seguintes sub-passos antes de qualquer outra ação:
+
+1. Login wp-admin do site (mesma sessão se ainda válida)
+2. Navegar: **Code Snippets** (WPCode) → listar snippets ativos
+3. Localizar o snippet `zeus-deploy-v4-once` (ou nome exato usado no deploy)
+4. **DELETAR PERMANENTEMENTE** (duas etapas obrigatórias):
+   - Clicar nos 3 pontos → "Move to Trash"
+   - Navegar para a aba Trash → "Delete Permanently"
+5. **Validar via método NÃO-CIRCULAR** (não usar `/wp-json` — REST API pode estar indisponível se snippet teve parse error):
+   - Recarregar a página Code Snippets
+   - Confirmar visualmente que snippet **não aparece** nem em Active nem em Trash
+   - Opcional (se plugin de query disponível): `SELECT COUNT(*) FROM wp_posts WHERE post_type='wpcode' AND post_title LIKE 'zeus-deploy%'` → deve retornar 0
+6. Só após confirmação visual: prosseguir para Passo 7
+
+**Falha em qualquer sub-step = deploy NÃO está completo.** Reportar como pendente e tentar cleanup novamente antes de declarar conclusão.
+
+### FASES FORMAIS DO DEPLOY
+
+Deploy NÃO termina quando o arquivo é escrito em disco. São **duas fases distintas**:
+
+#### FASE 1 — Deploy Completo
+**Critério:** arquivo escrito em disco + MD5 validado (Passo 5) + snippet REMOVIDO (Passo 6)  
+**Saída:** site tem mu-plugin v4 em disco e nenhum artefato temporário no banco.
+
+#### FASE 2 — Deploy Validado
+**Critério:** REST API confirma campos Yoast E `_hide_from_home` funcionando (Passo 7) + frontend HTTP 200 + wp-admin acessível  
+**Saída:** confirmação empírica de que o mu-plugin está executando corretamente em runtime.
+
+**Site só é marcado como ✅ no relatório APÓS ambas as fases concluídas.** Marcar ✅ apenas com Fase 1 = relatório incompleto.
+
+### EXIT CHECKLIST (obrigatório antes de declarar site ✅)
+
+Antes de marcar deploy como concluído, todos os checks abaixo devem estar confirmados:
 
 ```
-[ ] MD5 do arquivo em disco = 069270de4c07a9d15838ff45df65f539 (via SFTP get + md5sum)
-[ ] REST API valida (_hide_from_home='1' + _yoast_wpseo_title retornado corretamente)
-[ ] Snippet zeus-deploy-v4-once REMOVIDO (GET wpcode retorna 0 resultados)
-[ ] WP File Manager DESATIVADO e DELETADO (GET /wp/v2/plugins não lista wp-file-manager)
+[ ] MD5 do arquivo em /wp-content/mu-plugins/yoast-rest-meta.php = 069270de4c07a9d15838ff45df65f539
+[ ] hide-from-home.php DELETADO de /wp-content/mu-plugins/ (confirmado via SFTP ls)
+[ ] Snippet zeus-deploy-v4-once REMOVIDO permanentemente (verificado visualmente em Code Snippets — NEM em Active NEM em Trash)
+[ ] WP File Manager DESATIVADO E DELETADO (GET /wp/v2/plugins não lista wp-file-manager)
+[ ] update_option zeus_deploy_v4_status existe em wp_options (evidência de auditoria)
+[ ] Site responde HTTP 200 no frontend: curl -I https://SITE
+[ ] wp-admin acessa normalmente (login funcional)
+[ ] REST API responde wp/v2 (validação adicional após cleanup)
 ```
 
-**"Deploy encerrado" ≠ "Deploy validado".** Arquivo escrito em disco = deploy encerrado. Todos os checks acima = deploy validado. Só marcar ✅ após validado.
+**Sem TODOS os checks marcados, deploy NÃO está completo.**
 
 > **Causa histórica desta regra:** Post-mortem 2026-04-26 revelou que em 2 de 3 deploys via WPCode snippet (finanzas.openzed.com sessão 03:00, finanzas.cliquet.com sessão 07:14), o snippet foi esquecido no banco. Rodolfo detectou na auditoria manual e deletou manualmente. A 3ª sessão (cliquet.com 08:00) limpou apenas por estar imediatamente após o incidente openzed — cleanup dependia de memória de sessão, não de procedimento. Esta seção corrige esse gap estrutural.
 
@@ -458,45 +495,46 @@ O WPCode (plugin "insert-headers-and-footers") está instalado em todos os 4 sit
 
 1. **Login browser** no WP Admin
 2. **Navegar** para `wp-admin/admin.php?page=wpcode-snippet-manager&custom=1`
-3. **Injetar via console JS:**
+3. **Preparar PHP do snippet a partir do template canônico** (NUNCA regenerar inline):
+
+```bash
+# 1. Ler o template canônico
+cat /root/.hermes/profiles/zeus/skills/ops/wp-rest-mu-plugin-deploy/templates/wpcode-snippet-template.php
+
+# 2. Gerar b64 fresco
+b64=$(base64 -w 0 /root/mgs-agent/scripts/mu-plugins/yoast-rest-meta.php)
+
+# 3. Validar MD5 reverso (OBRIGATÓRIO — não pular)
+echo "$b64" | base64 -d | md5sum
+# Deve retornar: 069270de4c07a9d15838ff45df65f539 — se divergir: NÃO PROSSEGUIR
+
+# 4. Substituir ${B64_PAYLOAD} no template pelo $b64 validado
+# Resultado = phpCode pronto para injetar no CodeMirror
+
+# 5. NÃO reescrever o PHP manualmente — sempre copiar literal do template substituído
+```
+
+**Via console JS no WPCode (`page=wpcode-snippet-manager&custom=1`):**
 
 ```javascript
-// CRÍTICO: sempre usar base64 gerado diretamente do arquivo canonical, sem edição manual
-// Obter b64: base64 -w 0 /root/mgs-agent/scripts/mu-plugins/yoast-rest-meta.php
-var b64 = 'BASE64_CANONICA_AQUI';  // copiar output do comando acima
+// phpCode = conteúdo do template canônico com ${B64_PAYLOAD} substituído pelo b64 validado
+// NUNCA escrever este PHP manualmente ou regenerar inline — causa variações entre sessões
+var phpCode = `COLAR_AQUI_TEMPLATE_COM_B64_SUBSTITUIDO`;
 
-var phpCode = `<?php
-add_action('admin_init', function() {
-    $mu = WP_CONTENT_DIR . '/mu-plugins';
-    $content = base64_decode('${b64}');
-    file_put_contents($mu . '/yoast-rest-meta.php', $content);
-    if (file_exists($mu . '/hide-from-home.php')) {
-        unlink($mu . '/hide-from-home.php');
-    }
-    update_option('zeus_deploy_v4_status', [
-        'md5' => md5_file($mu . '/yoast-rest-meta.php'),
-        'hide_deleted' => !file_exists($mu . '/hide-from-home.php'),
-        'ts' => time()
-    ]);
-});`;
-
-// Mudar tipo para PHP
 var typeSelect = document.querySelector('select[name="wpcode_snippet_type"]');
 typeSelect.value = 'php';
 typeSelect.dispatchEvent(new Event('change', {bubbles: true}));
 
-// Injetar código no CodeMirror
 var cm = document.querySelector('.CodeMirror')?.CodeMirror;
 if (cm) cm.setValue(phpCode);
 
-// Define título e ativar
 // ⚠️ #wpcode_snippet_title pode não existir — usar seletor por name que é mais confiável
 var titleField = document.querySelector('input[name="wpcode_snippet_title"]') || document.querySelector('#wpcode_snippet_title');
 if (titleField) { titleField.value = 'zeus-deploy-v4-once'; titleField.dispatchEvent(new Event('input', {bubbles: true})); titleField.dispatchEvent(new Event('change', {bubbles: true})); }
 var checkbox = document.querySelector('#wpcode_active');
 if (checkbox && !checkbox.checked) checkbox.click();
 
-// Salvar — usar match exato para evitar clicar em "Save to Library" (botão diferente)
+// Usar match exato — "Save to Library" é botão diferente, não usar includes('Save')
 var saveBtn = Array.from(document.querySelectorAll('button')).find(function(b) {
   var t = b.textContent.trim();
   return t === 'Save Snippet' || t === 'Guardar Snippet' || t.includes('Guardar');
