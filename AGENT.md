@@ -390,6 +390,17 @@ Motivo: [contexto]
 Evidência: [hash commit / output]
 ```
 
+### Skills MGS-específicas (em sync para Git)
+
+Skills criadas em `/root/.hermes/profiles/{agent}/skills/` nas categorias abaixo são automaticamente sincronizadas para `/root/mgs-agent/profiles/{agent}-skills/` pelo cron `sync-souls.sh` (5 min) e versionadas via auto-commit:
+
+- **Zeus:** `ops/`
+- **Atena:** `wordpress/`, `devops/`
+
+Se uma skill nova for criada em outra categoria com relevância operacional MGS (ex: `zeus/skills/data-science/`), o agente deve:
+1. Reportar via `[REPORT-INFRA]` como já é regra
+2. **Propor** atualização do `sync-souls.sh` para incluir a nova categoria — skill criada fora do sync = não versionada = sem proteção de rastreabilidade
+
 ### Papel do Zeus ao receber report
 
 1. Validar mentalmente se faz sentido
