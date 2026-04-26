@@ -1023,7 +1023,10 @@
             "md5_validated": true,
             "md5": "069270de4c07a9d15838ff45df65f539",
             "deployed_date": "2026-04-26",
-            "note": "Recuperação após incidente 25/04. Dev externo limpou arquivo quebrado, Rodolfo deployou v4 manualmente via WP File Manager. MD5 validado via Get-FileHash no Windows."
+            "wpcode_cleanup": "done_dev_externo_2026_04_26",
+            "wp_file_manager_status": "removed_by_zeus_2026_04_26",
+            "exit_checklist_complete": true,
+            "note": "Recuperação após incidente 25/04. Dev externo limpou arquivo quebrado, Rodolfo deployou v4 manualmente via WP File Manager. MD5 validado via Get-FileHash no Windows. EXIT CHECKLIST 100% completo após remoção do WP File Manager via REST API (Zeus, 2026-04-26)."
           }
         },
         "fincgriffin.com": {
@@ -1032,7 +1035,7 @@
           "note": "servidor terceiros sem acesso programático"
         }
       },
-      "notes": "Fase 2.5 COMPLETA. 32/32 sites com mu-plugin v4. Pós-mortem do incidente openzed registrado em SOUL.md (CASE STUDY 2026-04-25 + 2026-04-26). Skill wp-rest-mu-plugin-deploy patched: PASSO 6 numerado, EXIT CHECKLIST 8 itens, FASES FORMAIS, código PHP inline antigo removido. Template canônico em skills/ops/wp-rest-mu-plugin-deploy/templates/wpcode-snippet-template.php"
+      "notes": "Fase 2.5 COMPLETA. 32/32 sites com mu-plugin v4. EXIT CHECKLIST 100% completo em todos os 4 sites SFTP (openzed.com incluindo remoção do WP File Manager 2026-04-26). Pós-mortem do incidente openzed registrado em SOUL.md (CASE STUDY 2026-04-25 + 2026-04-26). Skill wp-rest-mu-plugin-deploy patched: PASSO 6 numerado, EXIT CHECKLIST 8 itens, FASES FORMAIS, código PHP inline antigo removido. Template canônico em skills/ops/wp-rest-mu-plugin-deploy/templates/wpcode-snippet-template.php"
     }
   }
 }
