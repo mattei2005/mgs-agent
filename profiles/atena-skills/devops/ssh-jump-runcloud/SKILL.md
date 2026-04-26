@@ -1,0 +1,167 @@
+---
+name: ssh-jump-runcloud
+description: >
+  Deploy files and run commands on RunCloud Server 01 (162.55.28.178, hosts eggbev)
+  via SSH ProxyJump through Server 03 (46.4.95.117), because S01 blocks direct SSH
+  from this machine. Uses expect scripts for password auth at both hops.
+tags: [ssh, runcloud, eggbev, deploy, jump-host, expect]
+---
+
+# SSH Jump — RunCloud S03 → S01
+
+## Context
+
+RunCloud Server 01 (162.55.28.178) hosts eggbev and has direct SSH blocked from
+the mgs-agent machine. Server 03 (46.4.95.117) can reach S01, so it acts as jump host.
+
+- S01 (target): 162.55.28.178 — hosts eggbev, wantabrand, receitasdescomplicada, etc.
+- S02 (irrelevant): 162.55.28.179 — different sites
+- S03 (jump host): 46.4.95.117 — can reach S01 on port 22
+
+All credentials in 1Password vault `MGS Conteúdo`:
+- S01: item `Runcloud Server 01 - 162.55.28.178- zeus Acesso`, field `password`
+- S03: item `Runcloud Server 03 - 46.4.95.117- zeus Acesso`, field `password`
+- All use user `zeus`
+
+**IMPORTANT:** `sshpass` is NOT available on S03. Use SSH ProxyJump (`-J`) natively
+from the mgs-agent machine with expect scripts to handle both password prompts.
+
+## Pitfalls
+
+- S01 shows ALL ports blocked from mgs-agent (22, 2222, 8022, 443, 34210 all CLOSED)
+- S03 port 22 is open from mgs-agent ✓
+- `sshpass` not on S03 → can't chain sshpass inside an SSH session
+- `expect` single-quotes inside heredoc cause parsing errors — use `[lindex $argv N]` for passwords
+- The S01 MOTD ends with "Made with ♥ by RunCloud Team" — use `expect "Made with"` then `sleep 3` to wait for shell prompt
+- Shell prompt on S01 is `zeus@MatteiInc01:~$ ` — not a simple `$` pattern; use `sleep N` after commands instead of pattern-matching the prompt
+- `sudo cat /path/to/wp-config.php` returns "Permission denied" for zeus — use `sudo -u runcloud` for WP CLI commands
+- `wp db tables '*yoast*'` may return empty even if Yoast is installed (see yoast-score-architecture skill)
+
+## Step-by-step: Copy a file to S01
+
+```bash
+# 1. Load credentials
+set -a && . /root/mgs-agent/.env && set +a
+S03_PASS=$(op item get 'Runcloud Server 03 - 46.4.95.117- zeus Acesso' \
+  --vault 'MGS Conteúdo' --fields password --reveal)
+S01_PASS=$(op item get 'Runcloud Server 01 - 162.55.28.178- zeus Acesso' \
+  --vault 'MGS Conteúdo' --fields password --reveal)
+
+# 2. Write expect script for SCP
+cat > /tmp/scp_jump.exp << 'EOFEXP'
+#!/usr/bin/expect -f
+set s03 [lindex $argv 0]
+set s01 [lindex $argv 1]
+set timeout 30
+spawn scp -o StrictHostKeyChecking=no \
+  -J zeus@46.4.95.117 \
+  /local/path/to/file.php \
+  zeus@162.55.28.178:/tmp/file.php
+expect "46.4.95.117's password:"
+send "$s03\r"
+expect "162.55.28.178's password:"
+send "$s01\r"
+expect {
+    "100%" { puts "SCP SUCCESS"; exp_continue }
+    eof {}
+}
+EOFEXP
+chmod +x /tmp/scp_jump.exp
+
+# 3. Run SCP
+/tmp/scp_jump.exp "$S03_PASS" "$S01_PASS"
+```
+
+## Step-by-step: Run a command on S01
+
+```bash
+# Write a shell script to /tmp first, SCP it, then execute via expect SSH
+
+# 1. Write the remote script locally
+cat > /tmp/remote_cmd.sh << 'EOF'
+#!/bin/bash
+# your command here, e.g.:
+sudo cp /tmp/file.php /home/runcloud/webapps/eggbev/wp-content/mu-plugins/file.php && echo OK
+EOF
+chmod +x /tmp/remote_cmd.sh
+
+# 2. SCP the script (use scp_jump.exp pattern above, change paths)
+
+# 3. Execute via SSH expect
+cat > /tmp/run_remote.exp << 'EOFEXP'
+#!/usr/bin/expect -f
+set s03 [lindex $argv 0]
+set s01 [lindex $argv 1]
+set timeout 60
+
+spawn ssh -o StrictHostKeyChecking=no -J zeus@46.4.95.117 zeus@162.55.28.178
+expect "46.4.95.117's password:"
+send "$s03\r"
+expect "162.55.28.178's password:"
+send "$s01\r"
+expect "Made with"
+sleep 3
+send "bash /tmp/remote_cmd.sh\n"
+sleep 10        # adjust based on command duration
+send "exit\r"
+expect eof
+EOFEXP
+chmod +x /tmp/run_remote.exp
+/tmp/run_remote.exp "$S03_PASS" "$S01_PASS"
+```
+
+## Full deploy workflow (deploy file + verify)
+
+```bash
+cat > /tmp/deploy_full.sh << 'EOFEXP'
+#!/bin/bash
+set -a && . /root/mgs-agent/.env && set +a
+S03_PASS=$(op item get 'Runcloud Server 03 - 46.4.95.117- zeus Acesso' --vault 'MGS Conteúdo' --fields password --reveal)
+S01_PASS=$(op item get 'Runcloud Server 01 - 162.55.28.178- zeus Acesso' --vault 'MGS Conteúdo' --fields password --reveal)
+
+# Step 1: SCP file
+cat > /tmp/_scp.exp << 'EOF'
+#!/usr/bin/expect -f
+set s03 [lindex $argv 0]; set s01 [lindex $argv 1]; set timeout 30
+spawn scp -o StrictHostKeyChecking=no -J zeus@46.4.95.117 /tmp/myfile.php zeus@162.55.28.178:/tmp/myfile.php
+expect "46.4.95.117's password:"; send "$s03\r"
+expect "162.55.28.178's password:"; send "$s01\r"
+expect { "100%" { exp_continue } eof {} }
+EOF
+chmod +x /tmp/_scp.exp && /tmp/_scp.exp "$S03_PASS" "$S01_PASS"
+
+# Step 2: Deploy + verify
+cat > /tmp/verify.sh << 'EOF'
+#!/bin/bash
+TARGET="/home/runcloud/webapps/eggbev/wp-content/mu-plugins/myfile.php"
+sudo cp /tmp/myfile.php "$TARGET" && echo COPY_OK
+sudo md5sum "$TARGET" /tmp/myfile.php
+sudo grep -c 'update_post_meta' "$TARGET" && echo HAS_META || echo NO_META
+EOF
+scp + exec as above...
+EOFEXP
+```
+
+## Verification commands (run on S01 via expect SSH)
+
+```bash
+# Find webapps on S01
+sudo ls /home/runcloud/webapps/ 2>&1
+
+# Find specific file
+sudo find /home -maxdepth 6 -name 'myfile.php' 2>/dev/null
+
+# Check WP plugins (as runcloud user)
+sudo -u runcloud wp --path=/home/runcloud/webapps/eggbev plugin list 2>&1
+
+# Check WP DB tables
+sudo -u runcloud wp --path=/home/runcloud/webapps/eggbev db tables --all-tables 2>&1
+```
+
+## Server → webapp mapping (verified 2026-04-24)
+
+| Server | IP | Webapps include |
+|--------|-----|-----------------|
+| S01 | 162.55.28.178 | eggbev, wantabrand, receitasdescomplicada, newsfolha, topfeed, vagaaqui, lyzmo, ... |
+| S02 | 162.55.28.179 | autocreditadxx, autolendpro, carcreditad, creditoparaveiculo, gamingadx, ... |
+| S03 | 46.4.95.117 | xyvlov, escalatepower, marevelx, ducapes-finance, FinanceADX, cephyric, ... |
