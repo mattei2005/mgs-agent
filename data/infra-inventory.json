@@ -967,11 +967,11 @@
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90,
     "deploy_status": {
-      "as_of": "2026-04-25",
+      "as_of": "2026-04-26",
       "canonical_md5": "069270de4c07a9d15838ff45df65f539",
       "total_sites": 32,
-      "deployed": 31,
-      "pending_recovery": 1,
+      "deployed": 32,
+      "pending_recovery": 0,
       "sites": {
         "eggbev.com": {
           "status": "deployed",
@@ -1001,27 +1001,30 @@
           "finanzas.openzed.com": {
             "status": "deployed",
             "ip": "3.19.138.131",
-            "method": "wpcode_snippet"
+            "method": "wpcode_snippet",
+            "wpcode_cleanup": "done_manual_rodolfo_2026_04_26"
           },
           "finanzas.cliquet.com": {
             "status": "deployed",
             "ip": "18.116.18.34",
-            "method": "wpcode_snippet"
+            "method": "wpcode_snippet",
+            "wpcode_cleanup": "done_manual_rodolfo_2026_04_26"
           },
           "cliquet.com": {
             "status": "deployed",
             "ip": "35.175.97.196",
-            "method": "wpcode_snippet"
+            "method": "wpcode_snippet",
+            "wpcode_cleanup": "done_zeus_session_2026_04_25"
           },
-      "openzed.com": {
-        "status": "deployed",
-        "ip": "44.208.155.39",
-        "method": "manual_rodolfo_via_wp_file_manager",
-        "md5_validated": true,
-        "md5": "069270de4c07a9d15838ff45df65f539",
-        "deployed_date": "2026-04-26",
-        "note": "Recuperação após incidente 25/04. Dev externo limpou arquivo quebrado, Rodolfo deployou v4 manualmente via WP File Manager. MD5 validado via Get-FileHash no Windows."
-      }
+          "openzed.com": {
+            "status": "deployed",
+            "ip": "44.208.155.39",
+            "method": "manual_rodolfo_via_wp_file_manager",
+            "md5_validated": true,
+            "md5": "069270de4c07a9d15838ff45df65f539",
+            "deployed_date": "2026-04-26",
+            "note": "Recuperação após incidente 25/04. Dev externo limpou arquivo quebrado, Rodolfo deployou v4 manualmente via WP File Manager. MD5 validado via Get-FileHash no Windows."
+          }
         },
         "fincgriffin.com": {
           "status": "deployed",
@@ -1029,7 +1032,7 @@
           "note": "servidor terceiros sem acesso programático"
         }
       },
-      "notes": "Fase 2.5 SUSPENSA após incidente openzed.com. Retomar quando openzed recuperado."
+      "notes": "Fase 2.5 COMPLETA. 32/32 sites com mu-plugin v4. Pós-mortem do incidente openzed registrado em SOUL.md (CASE STUDY 2026-04-25 + 2026-04-26). Skill wp-rest-mu-plugin-deploy patched: PASSO 6 numerado, EXIT CHECKLIST 8 itens, FASES FORMAIS, código PHP inline antigo removido. Template canônico em skills/ops/wp-rest-mu-plugin-deploy/templates/wpcode-snippet-template.php"
     }
   }
 }
