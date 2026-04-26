@@ -42,7 +42,7 @@ b64=$(base64 -w 0 /caminho/arquivo.php)
 
 ---
 
-## Template canônico do snippet PHP (OBRIGATÓRIO — nunca reescrever)
+## TEMPLATE CANÔNICO DO SNIPPET PHP (OBRIGATÓRIO — nunca reescrever)
 
 O arquivo `/root/.hermes/profiles/zeus/skills/ops/wp-rest-mu-plugin-deploy/templates/wpcode-snippet-template.php` contém o template PHP canônico do snippet WPCode.
 
