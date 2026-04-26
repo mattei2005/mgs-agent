@@ -340,3 +340,21 @@ Se o b64 não foi gerado por shell e validado por MD5 reverso, **ele NÃO É VÁ
 
 Esta regra existe porque em 2026-04-25 inventei um b64 "made-up" para deploy do mu-plugin v4 em openzed.com. Resultado: site DOWN por 18+ horas, dependência de dev externo para recuperar.
 
+---
+
+### CASE STUDY L2: Zeus 2026-04-26 (snippets WPCode órfãos — cleanup não determinístico)
+
+**O que aconteceu:** Durante Fase 2.5 (deploy mu-plugin v4 nos 4 sites SFTP Bitnami/AWS), Zeus executou 3 deploys via WPCode snippet em 3 sessões separadas (finanzas.openzed 03:00, finanzas.cliquet 07:14, cliquet 08:00). Post-deploy, auditoria manual do Rodolfo revelou que apenas 1 dos 3 snippets havia sido removido (cliquet.com). Os outros 2 (finanzas.openzed, finanzas.cliquet) permaneceram ativos no banco — descobertos e deletados manualmente pelo Rodolfo.
+
+**Causa raiz:** A skill `wp-rest-mu-plugin-deploy` descrevia o cleanup como instrução narrativa no rodapé da seção WPCode, não como passo numerado no fluxo. Isso tornava o cleanup dependente de memória de sessão — não de procedimento estrutural. Sessões independentes (contextos frescos) executavam o deploy de forma ligeiramente diferente: formato do snippet variava (multi-linha vs inline, com/sem comentários), pois o código PHP era gerado em tempo real a cada sessão em vez de copiado de template canônico. O cleanup só aconteceu na 3ª sessão (pós-incidente openzed) porque estava na memória ativa por proximidade temporal com o incidente de downtime.
+
+**Impacto:** Snippets PHP com `add_action('admin_init', ...)` ativos em banco de dois sites por horas/dias. Risco direto baixo (ação idempotente — `file_put_contents` sobrescreve o mesmo arquivo). Risco real: confusão em futuras auditorias, potencial de execução indesejada em edge cases, ausência de rastreabilidade. Cleanup manual realizado pelo Rodolfo.
+
+**Lição permanente:** Cleanup de artefatos temporários de deploy (snippets WPCode, plugins auxiliares, options de status) é parte integrante do deploy, não etapa opcional. Deve ser passo numerado com validação explícita — nunca instrução narrativa. Qualquer deploy sem cleanup confirmado está incompleto.
+
+**Como evitar:**
+1. Cleanup de snippet WPCode é **PASSO 6 numerado** no fluxo — obrigatório, com validação `GET /wpcode` confirmando 0 resultados antes de declarar conclusão. *(será implementado na skill — próxima ação)*
+2. Template canônico do snippet PHP — **IMPLEMENTADO 2026-04-26** em `/root/.hermes/profiles/zeus/skills/ops/wp-rest-mu-plugin-deploy/templates/wpcode-snippet-template.php`. Copiar literalmente, nunca regenerar via LLM. Versionado via sync seletivo (skill MGS ops/).
+3. Exit checklist com todos os checks antes de marcar site como ✅ — `md5 bate`, `REST API valida`, `snippet removido`, `File Manager removido`. *(será implementado na skill — próxima ação)*
+4. "Deploy encerrado" ≠ "Deploy validado" — ambas as fases devem ser formais e explícitas no relatório. *(será formalizado na skill — próxima ação)*
+

@@ -90,18 +90,21 @@ Ou via cronjob Hermes agendado diariamente.
 
 ---
 
-## Solução implantada em produção (2026-04-24) — cópia periódica via cron
+## Solução implantada em produção — cópia periódica via cron (2026-04-24, estendida 2026-04-26)
 
-Rodolfo escolheu a cópia periódica como solução definitiva (SOUL.md muda raramente, overhead de cron a cada 5 min é zero).
+Rodolfo escolheu a cópia periódica como solução definitiva. O script sincroniza **SOUL.md + skills MGS-específicas**.
 
 **Script:** `/root/mgs-agent/scripts/sync-souls.sh`
 ```bash
 #!/bin/bash
+# Sync SOUL.md + MGS-specific skills from Hermes profiles to mgs-agent for versioning
 set -e
+
 PROFILES_DIR="/root/.hermes/profiles"
 TARGET_DIR="/root/mgs-agent/profiles"
 mkdir -p "$TARGET_DIR"
 
+# ── SOUL.md sync ───────────────────────────────────────────────────────────
 for agent in zeus atena; do
     SOURCE="$PROFILES_DIR/$agent/SOUL.md"
     TARGET="$TARGET_DIR/$agent-soul.md"
@@ -110,17 +113,47 @@ for agent in zeus atena; do
         echo "$(date -Iseconds) synced $agent SOUL"
     fi
 done
+
+# ── Skills MGS-específicas sync ────────────────────────────────────────────
+# Zeus: ops/ (skills de infra e deploy MGS)
+mkdir -p "$TARGET_DIR/zeus-skills"
+rsync -a --delete \
+    "$PROFILES_DIR/zeus/skills/ops/" \
+    "$TARGET_DIR/zeus-skills/ops/" \
+    && echo "$(date -Iseconds) synced zeus skills/ops"
+
+# Atena: wordpress/ + devops/ (skills WP e deploy MGS-específicas)
+mkdir -p "$TARGET_DIR/atena-skills"
+for category in wordpress devops; do
+    if [ -d "$PROFILES_DIR/atena/skills/$category" ]; then
+        rsync -a --delete \
+            "$PROFILES_DIR/atena/skills/$category/" \
+            "$TARGET_DIR/atena-skills/$category/" \
+            && echo "$(date -Iseconds) synced atena skills/$category"
+    fi
+done
 ```
 
 **Crontab:** `*/5 * * * * /root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1`
 
-**Ciclo validado end-to-end:**
-1. Editar SOUL.md → MD5 diverge entre original e cópia
-2. Cron roda no próximo tick de 5 min → `sync-souls.sh` detecta (`-nt` = newer than) e copia
-3. `mgs-autocommit.service` detecta mudança via inotify → commit automático → push para GitHub
-4. Log confirma: `2026-04-24T23:15:01-04:00 synced zeus SOUL`
+**Destinos no git:**
+- `profiles/zeus-soul.md` — SOUL.md do Zeus
+- `profiles/atena-soul.md` — SOUL.md da Atena
+- `profiles/zeus-skills/ops/` — skills operacionais MGS do Zeus (12 skills)
+- `profiles/atena-skills/wordpress/` — skills WP da Atena (3 skills)
+- `profiles/atena-skills/devops/` — skills devops da Atena (3 skills)
 
-**Pitfall `-nt`:** a flag `-nt` compara mtime. Se o TARGET não existir ainda, a condição falha silenciosamente. Solução: script usa `mkdir -p` e na primeira execução o TARGET não existe, então `[ "$SOURCE" -nt "$TARGET" ]` retorna true (target inexistente = mtime=0).
+**Por que rsync para skills (e não -nt como SOUL.md):** SOUL.md é 1 arquivo — `-nt` (mtime) é suficiente. Skills são árvores de diretórios — `rsync -a --delete` detecta adições, modificações e deleções de forma atômica. O `--delete` propaga remoções para o repo (sem ele, skills deletadas ficam "zumbis" no git).
+
+**Ciclo validado end-to-end:**
+1. Editar/criar skill em `.hermes/profiles/{agent}/skills/ops/` (ou wordpress/, devops/)
+2. Cron roda no próximo tick de 5 min → rsync detecta e copia
+3. `mgs-autocommit.service` detecta via inotify → commit automático → push GitHub
+4. Log: `2026-04-26T16:11:08-04:00 synced zeus skills/ops`
+
+**Pitfall `-nt`:** a flag `-nt` compara mtime. Se TARGET não existir, a condição retorna true (target inexistente = mtime=0) — funciona corretamente na primeira execução.
+
+**Política de extensão:** se nova skill MGS-específica for criada em categoria não coberta (ex: `zeus/skills/data-science/`), adicionar ao bloco rsync do script E reportar via `[REPORT-INFRA]`. Skill fora do sync = não versionada = sem rastreabilidade.
 
 ---
 

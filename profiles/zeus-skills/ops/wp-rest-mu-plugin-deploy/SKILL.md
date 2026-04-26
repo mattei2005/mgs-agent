@@ -42,6 +42,16 @@ b64=$(base64 -w 0 /caminho/arquivo.php)
 
 ---
 
+## Template canônico do snippet PHP (OBRIGATÓRIO — nunca reescrever)
+
+O arquivo `/root/.hermes/profiles/zeus/skills/ops/wp-rest-mu-plugin-deploy/templates/wpcode-snippet-template.php` contém o template PHP canônico do snippet WPCode.
+
+**Regra:** Nunca reescrever ou regenerar o snippet PHP a cada sessão. Copiar literalmente do template, substituindo apenas `${B64_PAYLOAD}` pelo output de `base64 -w 0 yoast-rest-meta.php` (após validação MD5 reversa obrigatória).
+
+Motivo: cada instância LLM que reescreve o snippet introduz variações de estilo (multi-linha vs inline, com/sem comentários, nomes de variáveis diferentes) e — mais crítico — pode esquecer o cleanup. O template fixo elimina ambos os riscos.
+
+---
+
 ## ⚠️ POLÍTICA DE ESCOLHA DE MÉTODO (CRÍTICO — ler antes de executar)
 
 Esta skill documenta **dois** métodos para deploy em Bitnami/AWS sem SSH de escrita:
@@ -205,6 +215,37 @@ ef.request({
 });
 // Verificar window._fix_ok === true antes de prosseguir
 ```
+
+---
+
+## Fluxo WPCode snippet — passos OBRIGATÓRIOS (incluindo cleanup)
+
+Ao usar o método WPCode snippet (ver política de escolha acima), os passos são **numerados e obrigatórios** — não narrativos. Não avançar para o próximo passo sem concluir o atual.
+
+```
+Passo 1 — Gerar b64 + validar MD5 reverso (NUNCA inventar)
+Passo 2 — Copiar template canônico (templates/wpcode-snippet-template.php) e substituir ${B64_PAYLOAD}
+Passo 3 — Login browser + criar snippet no WPCode com o PHP do template
+Passo 4 — Navegar para wp-admin/index.php (dispara admin_init → executa o snippet)
+Passo 5 — Validar MD5 do arquivo em disco via SFTP get + md5sum (069270de4c07a9d15838ff45df65f539)
+Passo 6 — REMOVER SNIPPET (OBRIGATÓRIO — deploy não está completo sem este passo)
+           Validar: GET /wp-json/wp/v2/posts?post_type=wpcode deve retornar array vazio
+Passo 7 — Validar REST API (post de teste com _hide_from_home + _yoast_wpseo_title)
+Passo 8 — Desativar + remover WP File Manager via REST API
+```
+
+### Exit checklist (todos os itens obrigatórios antes de marcar site como ✅)
+
+```
+[ ] MD5 do arquivo em disco = 069270de4c07a9d15838ff45df65f539 (via SFTP get + md5sum)
+[ ] REST API valida (_hide_from_home='1' + _yoast_wpseo_title retornado corretamente)
+[ ] Snippet zeus-deploy-v4-once REMOVIDO (GET wpcode retorna 0 resultados)
+[ ] WP File Manager DESATIVADO e DELETADO (GET /wp/v2/plugins não lista wp-file-manager)
+```
+
+**"Deploy encerrado" ≠ "Deploy validado".** Arquivo escrito em disco = deploy encerrado. Todos os checks acima = deploy validado. Só marcar ✅ após validado.
+
+> **Causa histórica desta regra:** Post-mortem 2026-04-26 revelou que em 2 de 3 deploys via WPCode snippet (finanzas.openzed.com sessão 03:00, finanzas.cliquet.com sessão 07:14), o snippet foi esquecido no banco. Rodolfo detectou na auditoria manual e deletou manualmente. A 3ª sessão (cliquet.com 08:00) limpou apenas por estar imediatamente após o incidente openzed — cleanup dependia de memória de sessão, não de procedimento. Esta seção corrige esse gap estrutural.
 
 ---
 
