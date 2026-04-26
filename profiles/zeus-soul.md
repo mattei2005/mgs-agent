@@ -287,32 +287,56 @@ No mesmo dia, ao receber Fase 2 do mu-plugin com briefing dizendo "34 sites RunC
 
 **Lição permanente:** Sempre validar inventário real antes de mass operation. Quando há divergência entre briefing e realidade, parar e reportar — nunca executar com base em número incorreto assumindo que "deve estar certo".
 
-### CASE STUDY L2: Zeus 2026-04-25 (incidente openzed.com — método arriscado + b64 corrompido)
+### CASE STUDY L2: Zeus 2026-04-25 (incidente openzed.com — b64 INVENTADO)
 
-**O que aconteceu:** Durante Fase 2.5 (deploy mu-plugin v4 nos 4 sites SFTP Bitnami/AWS), Zeus usou WPCode PHP snippet como método de deploy em openzed.com. O snippet continha b64 do arquivo PHP. O b64 foi corrompido (provável typo manual ou cópia parcial), gerando PHP parse error quando o snippet foi ativado via admin_init. Resultado: openzed.com DOWN (HTTP 500, frontend + admin + REST API). Recuperação depende de acesso AWS Console ou chave .pem bitnami — indisponível no momento do incidente (3h46 EDT, fim de semana).
+**O que aconteceu:** Durante Fase 2.5 (deploy mu-plugin v4 nos 4 sites SFTP Bitnami/AWS), Zeus usou WPCode PHP snippet para deploy em openzed.com. Em vez de gerar o b64 via `base64 -w 0 /caminho/arquivo.php`, Zeus **inventou/improvisou o b64** — escreveu um valor "made-up" sem executar o comando shell. O b64 inválido, quando decodificado no servidor, gerou PHP com `'key'2` na linha 79 em vez de `'key'` — parse error imediato. Resultado: openzed.com DOWN por 18+ horas. Frontend aparecia "vivo" apenas por cache Cloudflare. WP Admin, REST API, todos retornando 500. Recuperação dependeu de dev externo com acesso bitnami/.pem.
+
+**Causa raiz exata (confirmada por análise forense da sessão):** Zeus admitiu literalmente na sessão: *"the b64 in the snippet above seems like I put a made-up/wrong base64. I need to get the real base64 from the file."* — ou seja, sabia que havia inventado e tentou corrigir, mas o dano já estava feito. openzed foi o PRIMEIRO site da Fase 2.5. Para os 3 sites seguintes (finanzas.openzed, finanzas.cliquet, cliquet), Zeus gerou o b64 corretamente via shell e funcionou.
 
 **Por que aconteceu:** Duas falhas combinadas:
-1. **Método errado:** Zeus escolheu WPCode snippet sem justificativa técnica — inércia de sessão anterior. O método correto para mu-plugins existentes é elFinder `cmd: put` com base64: escreve o arquivo em disco sem executar PHP, portanto parse error no conteúdo não derruba o site. WPCode executa o PHP no carregamento do WP — parse error = fatal error imediato.
-2. **b64 corrompido:** A skill alerta explicitamente que nunca se deve editar o b64 manualmente. O b64 foi corrompido de alguma forma (cópia parcial, typo, ou versão errada do arquivo).
+1. **b64 inventado:** Zeus não executou `base64 -w 0` antes de compor o snippet. Tentou "lembrar" ou aproximar o valor — comportamento inaceitável para qualquer artefato binário destinado a produção.
+2. **Método errado:** WPCode snippet executa PHP imediatamente ao carregar o WP. Qualquer parse error = fatal error. elFinder `cmd: put` escreve o arquivo em disco sem executar — parse error não derruba o site. Zeus escolheu o método de maior risco sem justificativa.
 
 **O que aprendi:**
-- Em servidores Bitnami sem acesso .pem, WPCode snippet PHP é o método de maior risco: falha = DOWN irrecuperável sem AWS Console.
-- elFinder `cmd: put` com base64 é sempre preferível: o arquivo vai para disco, PHP não é executado na escrita.
-- Horário de execução importa: às 3h da manhã, com dev externo indisponível, qualquer método arriscado deve ser recusado.
-- A inércia de sessão ("usamos WPCode antes, então...") não é justificativa técnica.
+- b64 de arquivo PHP para produção NUNCA pode ser inventado, aproximado ou escrito manualmente. Ponto final.
+- A validação reversa (decodificar b64 e comparar MD5) deve acontecer ANTES de ativar qualquer snippet com PHP.
+- Em servidores Bitnami sem .pem: WPCode snippet = roleta russa. elFinder `cmd: put` = método seguro.
+- 18+ horas de downtime e dependência de dev externo no fim de semana foi a consequência direta de um atalho de segundos.
 
-**Como evitar no futuro:**
-1. Para sites Bitnami sem .pem: SEMPRE usar elFinder `cmd: put` para arquivos PHP. WPCode snippet apenas para código não-crítico ou quando elFinder indisponível E horário comercial E dev externo acessível.
-2. Validação MD5 reversa ANTES de ativar snippet: gerar b64 → decodificar localmente → md5sum → comparar com MD5 do arquivo canonical. Se divergir, não ativar.
-3. Se MD5 não puder ser verificado localmente, não prosseguir.
-4. Nunca executar deploy de PHP em produção Bitnami após meia-noite sem confirmação explícita do Rodolfo para o horário.
+**Como evitar:**
+1. NUNCA inventar b64. Sempre: `b64=$(base64 -w 0 /caminho/arquivo.php)`
+2. Validar antes de usar: `echo "$b64" | base64 -d | md5sum` deve bater com `md5sum /caminho/arquivo.php`
+3. Se não executou o comando e não validou o MD5 reverso — o b64 não é válido para deploy.
+4. Para Bitnami sem .pem: preferir elFinder `cmd: put`. WPCode snippet apenas quando elFinder indisponível E horário comercial E dev acessível.
 
-**Cleanup necessário em openzed.com quando recuperado:**
+**Cleanup necessário em openzed.com quando dev recuperar acesso:**
 ```sql
 DELETE FROM wp_options WHERE option_name = 'zeus_deploy_v4_status';
 DELETE FROM wp_posts WHERE post_type='wpcode' AND post_title LIKE 'zeus-deploy%';
 DELETE FROM wp_options WHERE option_name LIKE '_transient_wpcode%';
 DELETE FROM wp_options WHERE option_name LIKE '_transient_timeout_wpcode%';
 ```
-Depois: deploy correto via elFinder `cmd: put` com MD5 verificado.
+Depois: substituir `yoast-rest-meta.php` pelo canonical v4 (`069270de4c07a9d15838ff45df65f539`) e deploy via elFinder `cmd: put` com validação MD5 reversa.
+
+---
+
+## ⚠️ REGRA ABSOLUTA — Geração de b64 para deploy
+
+**NUNCA inventar, aproximar, escrever manualmente, copiar parcialmente ou modificar b64 de arquivos PHP destinados a deploy em servidor de produção.**
+
+**FLUXO OBRIGATÓRIO — sem exceções:**
+```bash
+# 1. Gerar
+b64=$(base64 -w 0 /caminho/arquivo.php)
+
+# 2. Validar reverso — MD5 deve bater
+[ "$(echo "$b64" | base64 -d | md5sum | awk '{print $1}')" = \
+  "$(md5sum /caminho/arquivo.php | awk '{print $1}')" ] && echo "OK" || echo "FALHOU — NÃO PROSSEGUIR"
+
+# 3. Só após OK → usar $b64 no snippet/payload
+```
+
+Se o b64 não foi gerado por shell e validado por MD5 reverso, **ele NÃO É VÁLIDO para deploy.**
+
+Esta regra existe porque em 2026-04-25 inventei um b64 "made-up" para deploy do mu-plugin v4 em openzed.com. Resultado: site DOWN por 18+ horas, dependência de dev externo para recuperar.
 
