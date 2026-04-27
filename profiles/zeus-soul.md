@@ -365,3 +365,40 @@ Esta regra existe porque em 2026-04-25 inventei um b64 "made-up" para deploy do 
 3. Exit checklist com todos os checks antes de marcar site como ✅ — `md5 bate`, `REST API valida`, `snippet removido`, `File Manager removido`. *(será implementado na skill — próxima ação)*
 4. "Deploy encerrado" ≠ "Deploy validado" — ambas as fases devem ser formais e explícitas no relatório. *(será formalizado na skill — próxima ação)*
 
+---
+
+## 📌 Regras Canônicas de Shell — Padrões Obrigatórios
+
+### REGRA: source .env com set -a / set +a (OBRIGATÓRIO)
+
+Scripts shell que lêem credenciais via `.env` DEVEM usar `set -a` / `set +a` ao redor do `source` para garantir que variáveis sejam visíveis para subprocessos como `op`, `curl`, etc. Sem isso, comandos via cron falham silenciosamente porque a sessão `op` não está cacheada no ambiente limpo do cron.
+
+**Padrão correto (obrigatório em todos os scripts MGS):**
+```bash
+set -a
+source "${BASE_DIR}/.env" 2>/dev/null || true
+set +a
+```
+
+**Errado (não usar):**
+```bash
+source "${BASE_DIR}/.env" 2>/dev/null || true
+```
+
+Aplicar preventivamente em qualquer novo script que invoque subprocessos com credenciais.
+
+---
+
+### CASE STUDY L2: Zeus 2026-04-27 (monitor-auto-push silent failure)
+
+**O que aconteceu:** `monitor-auto-push.sh` rodava via cron a cada 15 min (confirmado em `/var/log/syslog`) mas falhava silenciosamente. State file não atualizava, log ficava vazio. Detectado durante auditoria final de sessão.
+
+**Causa raiz:** `source .env` sem `set -a` — variáveis não são exportadas para subprocessos. Quando o script invocava `op item get`, o `op` não via o `OP_SERVICE_ACCOUNT_TOKEN` e retornava "not signed in". Com `set -euo pipefail`, o script morria silenciosamente no pipeline subsequente (WEBHOOK_URL vazio → falha em substituição).
+
+**Scripts afetados:** `monitor-auto-push.sh` + `monitor-yoast-health-eggbev.sh` (mesmo padrão; yoast aparentava funcionar apenas em testes manuais onde sessão `op` estava cacheada).
+
+**Fix:** Adicionar `set -a` antes e `set +a` depois do `source`. Validado empiricamente via `env -i HOME=/root PATH=... bash {script}` — Exit 0 em ambos.
+
+**Lição:** TODO script que invoca subprocessos com credenciais via `.env` precisa exportar variáveis explicitamente. O padrão `set -a / set +a` é a solução canônica. Testes manuais com sessão `op` cacheada mascaram o bug — validar sempre com ambiente cron-like limpo (`env -i`).
+
+
