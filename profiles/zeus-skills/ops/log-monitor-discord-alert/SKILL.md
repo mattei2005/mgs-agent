@@ -19,6 +19,23 @@ Exemplo validado: `monitor-auto-push.sh` para o auto-push do mgs-agent.
 
 ---
 
+## Convenção de canal Discord
+
+Alertas automáticos de monitores de log devem usar o webhook do canal **#mgs-alerts**:
+
+- **Vault 1Password:** MGS Conteúdo
+- **Item:** `Discord Webhook - MGS Alerts Channel`
+- **Field:** `webhook_url`
+
+**NÃO usar** o webhook do `#zeus-admin-agent` para alertas de cron/monitor automatizado. Esse canal é exclusivo para:
+- Conversa operacional Rodolfo ↔ Zeus
+- `[REPORT-INFRA]` de outros agentes
+- Hook git de commits manuais (post-commit)
+
+**Razão:** separação evita ruído. `#mgs-alerts` em silêncio = sistema OK; `#mgs-alerts` ativo = ação requerida.
+
+---
+
 ## Estrutura do sistema
 
 ```
@@ -69,7 +86,7 @@ ANTI_SPAM_HOURS="${ANTI_SPAM_HOURS:-2}"
 
 source "${BASE_DIR}/.env" 2>/dev/null || true
 
-WEBHOOK_URL="$(op item get "Discord Webhook - Zeus Channel" \
+WEBHOOK_URL="$(op item get "Discord Webhook - MGS Alerts Channel" \
     --vault 'MGS Conteúdo' \
     --fields label=webhook_url \
     --reveal 2>/dev/null)"
@@ -279,7 +296,9 @@ Após criar os artefatos, atualizar manualmente 3 seções do inventário:
 
 6. **Arquivo `.tmp` intermediário no jq** — sempre usar `jq ... "$STATE_FILE" > "${STATE_FILE}.tmp" && mv "${STATE_FILE}.tmp" "$STATE_FILE"` para evitar truncar o state file em caso de erro do jq.
 
-7. **Não adicionar o cron manualmente ao crontab** — usar `(crontab -l 2>/dev/null; echo "ENTRY") | crontab -` para preservar entradas existentes. `crontab -l > /tmp/crontab_current.txt && echo "..." >> /tmp/crontab_current.txt && crontab /tmp/crontab_current.txt` também funciona (alternativa usada em 2026-04-26).
+7. **Regex `[a-f0-9]+` falha silenciosamente em IDs não-hex** — o padrão `grep -oP 'commit=\K[a-f0-9]+'` retorna vazio (e dispara `|| continue`) quando o ID começa com caractere não-hex (ex: `test001` → `t` não é hex → zero match → falha ignorada silenciosamente). Em testes de stress, usar sempre IDs com prefixo hex válido (ex: `dead001`, `cafe001`, `beef001`). Em produção, hashes git reais são sempre hex — não é bug do script, é armadilha nos testes.
+
+8. **Não adicionar o cron manualmente ao crontab** — usar `(crontab -l 2>/dev/null; echo "ENTRY") | crontab -` para preservar entradas existentes. `crontab -l > /tmp/crontab_current.txt && echo "..." >> /tmp/crontab_current.txt && crontab /tmp/crontab_current.txt` também funciona (alternativa usada em 2026-04-26).
 
 ---
 
