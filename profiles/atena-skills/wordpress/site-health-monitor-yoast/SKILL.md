@@ -92,14 +92,35 @@ Remote script emits exactly one line: `YOAST_DATA:{json}` or `YOAST_ERROR:{msg}`
 
 ## Pitfalls
 
-### PITFALL 1 — set -euo pipefail + 2>/dev/null can mask failure silently
-When running with `set -euo pipefail`, if a subshell command with `2>/dev/null` exits
-non-zero and exits the script, the log shows the last successful message, not the error.
+### PITFALL 1 — op CLI rate-limit em runs consecutivos rápidos (VALIDADO 2026-04-26)
+Quando o script é executado várias vezes em sequência rápida (teste, debug, etc.),
+o `op` CLI pode retornar string vazia sem erro e sem stderr em alguns runs.
+`set -euo pipefail` faz o script sair silenciosamente.
 
-**Symptom:** Script logs "Buscando credenciais..." then exits with code 1 with no further output.
-**Cause:** Not the credentials (they work fine). Likely a subsequent command failing silently.
-**Debug:** Run `bash -x script.sh 2>&1 | head -80` to see exact trace. Credentials OK → look further.
-**Fix:** Test each `op item get` individually first. Run full script without piping to `head`.
+**Sintoma:** Script loga "Buscando credenciais..." → exit 1 sem mais output.
+**Causa:** Rate-limit transitório do `op` CLI — NÃO é problema de credenciais.
+**Comprovação:** Rodar `op item get ...` manualmente logo depois funciona normalmente.
+**Fix implementado:** Retry helper com backoff 2s, 3 tentativas:
+
+```bash
+op_get_retry() {
+    local item="$1" vault="$2" field="$3"
+    local val="" attempt=0
+    while [[ $attempt -lt 3 ]]; do
+        val="$(op item get "$item" --vault "$vault" --fields "$field" --reveal 2>/dev/null)" || true
+        [[ -n "$val" ]] && echo "$val" && return 0
+        attempt=$(( attempt + 1 ))
+        [[ $attempt -lt 3 ]] && sleep 2
+    done
+    return 1
+}
+
+WEBHOOK_URL="$(op_get_retry 'Discord Webhook - MGS Alerts Channel' 'MGS Conteúdo' 'label=webhook_url')" || true
+S03_PASS="$(op_get_retry 'Runcloud Server 03 ...' 'MGS Conteúdo' 'password')" || true
+```
+
+**Debug geral:** Run `bash -x script.sh 2>&1 | head -80` para ver trace exato.
+Se credenciais aparecem OK no trace mas o script para em outro ponto, buscar mais adiante.
 
 ### PITFALL 2 — wp_yoast_indexable NOT wp_yoast_indexables (singular)
 Table name is singular. See yoast-score-architecture skill.
@@ -154,6 +175,48 @@ Replace `eggbev` with site key, update:
 
 Same SSH jump pattern (S03 → S01 for sites on S01; adjust for S02/S03 hosted sites).
 Check ssh-jump-runcloud skill for server→webapp mapping.
+
+## Teste empírico do alerta (validado 2026-04-26)
+
+Para validar que o alerta dispara corretamente **sem tocar em posts de produção**:
+
+```bash
+# 1. Backup
+cp data/yoast-readability-{site}-snapshots.json \
+   data/yoast-readability-{site}-snapshots.json.bak-test
+
+# 2. Manipular snapshot — substituir o último por dados "muito melhores"
+#    Ex: red=10, amber=25 (vs real: red=39, amber=36)
+#    Calcula delta: +29 vermelhos = +12pp → bem acima do threshold de 3pp
+python3 -c "
+import json
+with open('data/yoast-readability-{site}-snapshots.json') as f:
+    d = json.load(f)
+d['snapshots'] = [{'date': '2026-04-25', 'timestamp': '...', 'green': 197,
+    'amber': 25, 'red': 10, 'not_analyzed': 0, 'total': 232, 'post_type': 'baseline'}]
+with open('data/yoast-readability-{site}-snapshots.json', 'w') as f:
+    json.dump(d, f, indent=2)
+"
+
+# 3. Rodar — deve detectar degradação e postar alerta
+bash scripts/monitor-yoast-readability-{site}.sh
+
+# 4. Restaurar IMEDIATAMENTE após validar
+mv data/yoast-readability-{site}-snapshots.json.bak-test \
+   data/yoast-readability-{site}-snapshots.json
+
+# 5. Rodar novamente — deve ser silencioso (delta=0 vs baseline restaurado)
+bash scripts/monitor-yoast-readability-{site}.sh
+```
+
+**Resultado esperado do run com alerta:**
+- Log: `ALERTA: degradação vermelhos ≥3pp detectada` + `Discord: OK (HTTP 204)`
+- Discord: mensagem com prefixo `⚠️ [YOAST] ALERTA degradação`
+- Variação vs ontem: mostra deltas reais com ⬆️/⬇️
+
+**Resultado esperado do run pós-restauração:**
+- Log: `Estável ou melhora — silencioso (sem post)`
+- Nenhuma mensagem no Discord
 
 ## Reference files
 
