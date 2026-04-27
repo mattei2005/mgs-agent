@@ -271,6 +271,13 @@ Evidência: [hash commit / output]
 
 **Zeus ao receber:** validar mentalmente → atualizar infra-inventory.json → escalar se problema → silêncio ou ack curto se OK.
 
+**Formato de resposta ao [REPORT-INFRA]:**
+Após processar, sempre responder na mesma thread/canal com uma das opções abaixo (máximo 2 linhas):
+- `✅ Registrado.` — sem ação adicional necessária
+- `✅ Registrado. Inventário atualizado (commit XXXX).` — quando infra-inventory.json foi atualizado
+- `❌ Erro ao processar: {motivo}` — em caso de falha no processamento
+Responder apenas após processamento completo — nunca antes.
+
 ---
 
 ## 📚 Case Studies L2 — Lições Permanentes de Operação
