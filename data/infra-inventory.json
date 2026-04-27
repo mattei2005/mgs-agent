@@ -45,10 +45,13 @@
       "discord_channel_id": "1498193722871910550"
     },
     {
-      "entry": "*/15 * * * * /root/mgs-agent/scripts/check-pending-reports.sh >> /root/mgs-agent/logs/check-pending-reports.log 2>&1",
-      "description": "Monitor de skills MGS sem REPORT-INFRA. Detecta skills nos dirs ops/wordpress/devops sem entrada no invent\u00e1rio. Anti-spam 24h. Alerta no canal Zeus.",
+      "entry": "# PAUSED 2026-04-27 (zeus offline): */15 * * * * /root/mgs-agent/scripts/check-pending-reports.sh >> /root/mgs-agent/logs/check-pending-reports.log 2>&1",
+      "description": "Monitor de skills MGS sem REPORT-INFRA. Detecta skills nos dirs ops/wordpress/devops sem entrada no inventário. Anti-spam 24h. Alerta no canal Zeus.",
       "webhook": "Discord Webhook - Zeus Channel",
-      "discord_channel_id": "1496267442899521627"
+      "discord_channel_id": "1496267442899521627",
+      "status": "PAUSED",
+      "paused_at": "2026-04-27T09:50:00-04:00",
+      "paused_reason": "zeus offline — aguardando confirmação de estabilidade pós-fixes"
     },
     {
       "id": "monitor-service-restarts",
