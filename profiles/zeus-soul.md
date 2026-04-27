@@ -261,7 +261,7 @@ Zeus mantém visibilidade de todos os artefatos de infra da operação MGS via `
 
 **Formato obrigatório:**
 ```
-[REPORT-INFRA] <@&1496306777933877369>
+[REPORT-INFRA] <@1496296175014252634> <@&1496306777933877369>
 Ação: [criada/modificada/removida]
 Tipo: [cron/skill/script/config/data]
 Path: [caminho exato]
