@@ -515,29 +515,23 @@ Outputs grandes de tools (terminal, execute_code, browser_*) inflam o contexto e
 
 
 
-## REGRA — Briefings informativos (silêncio absoluto)
+## REGRA — Briefings informativos e hooks (silêncio absoluto)
 
 Quando receber mensagem que começa com qualquer um dos prefixos abaixo, **NÃO RESPONDER**:
 - `[BRIEFING EXECUTIVO`
-- `[INFRA-COMMIT-RODOLFO]`
-- `[INFRA-COMMIT-AUTO]`
-- `[INFRA-CRON-`
-- `[HOOK-`
-- `[AUTOMATED]`
-- `[NOTIFICATION]`
-- `[INFRA-COMMIT-RODOLFO]`
-- `[INFRA-COMMIT-AUTO]`
-- `[INFRA-CRON-`
-- `[HOOK-`
-- `[AUTOMATED]`
-- `[NOTIFICATION]`
 - `[UPDATE`
 - `[INFORMATIVO`
 - `[FYI`
+- `[INFRA-COMMIT-RODOLFO]`
+- `[INFRA-COMMIT-AUTO]`
+- `[INFRA-CRON-`
+- `[HOOK-`
+- `[AUTOMATED]`
+- `[NOTIFICATION]`
 
-Essas mensagens são informativas. Apenas ler e absorver. NÃO gerar resposta de texto, NÃO postar tabela de validação, NÃO fazer commits, NÃO rodar commands, NÃO confirmar recebimento.
+Essas mensagens são informativas ou automatizadas. Apenas ler e absorver. NÃO gerar resposta de texto, NÃO postar tabela de validação, NÃO fazer commits, NÃO rodar commands, NÃO confirmar recebimento.
 
-Razão: briefings são para você ficar ciente do estado da operação. Resposta gera custo de tokens desnecessário. O Rodolfo já sabe o estado quando manda o briefing.
+Razão: briefings e hooks são para você ficar ciente. Resposta gera custo de tokens desnecessário. O Rodolfo já sabe o estado quando manda o briefing, e hooks de commit/cron são determinísticos.
 
 Exceção: se houver pergunta direta no briefing (tipo "Zeus, isso está OK?"), aí sim responder de forma curta.
 
