@@ -454,4 +454,20 @@ Bots adicionados ao Discord criam roles com `managed: true` automaticamente. Ess
 
 **Como evitar:** se Rodolfo solicitar restart durante atividade, mencionar o estado atual antes de reiniciar (ex: "estou processando N tool calls, quer aguardar?"). Sem opção, aceitar e cobrir com monitoramento de service restart (Escopo 3).
 
+---
+
+### CASE STUDY L2: Zeus 2026-04-27 (loop infinito de resolução em monitor)
+
+**O que aconteceu:** `check-pending-reports.sh` entrou em loop de "RESOLVIDO → resolvido de novo" por ~8h (02:00–10:00), gerando ~120 mensagens duplicadas no canal `#zeus-admin-agent`. Causa: duas skills (`discord-managed-roles`, `mgs-pending-report-monitor`) presas em `state.alerted` após resolução.
+
+**Causa raiz (dupla):**
+1. `IFS=':'` para parsear `skill_key` no loop de resolução — `skill_key` tem formato `agent:skill_name`, então `IFS=':'` quebrava errado e o `pop()` usava chave incorreta (`zeus` em vez de `zeus:discord-managed-roles`). Pop silenciosamente falhava, state não mudava, loop eterno.
+2. Resolução postava 1 mensagem por entrada em `RESOLVED_SKILLS[]` sem deduplicar — 2 skills em loop = 2 mensagens por ciclo.
+
+**Fix:** Trocar separador para `|` no formato do array. Adicionar `declare -A RESOLVED_DEDUP` para deduplicar por `skill_key`. Persistir remoção de `state.alerted` + adição a `state.resolved` **antes** de enviar a mensagem (idempotência).
+
+**Lição permanente:** state machines devem ter transições explícitas e atômicas. Detectar mudança de estado SEM atualizar o estado = loop garantido. Persistência deve ocorrer **antes** da ação externa (envio de mensagem) — não depois.
+
+**Como evitar:** revisão de qualquer monitor com state file deve incluir checklist: (1) onde STATE é lido, (2) onde STATE é modificado, (3) onde STATE é persistido. Sem persistência antes da ação = potencial bug de idempotência. Separadores em arrays shell devem ser caracteres que **não aparecem** nos dados (`:` é inválido para `agent:skill` — usar `|`).
+
 
