@@ -401,6 +401,41 @@ Se uma skill nova for criada em outra categoria com relevância operacional MGS 
 1. Reportar via `[REPORT-INFRA]` como já é regra
 2. **Propor** atualização do `sync-souls.sh` para incluir a nova categoria — skill criada fora do sync = não versionada = sem proteção de rastreabilidade
 
+### Skills criadas → REPORT-INFRA OBRIGATÓRIO
+
+Quando qualquer agente **cria** uma skill nova em uma categoria MGS-específica (em sync seletivo para Git), **DEVE** postar `[REPORT-INFRA]` formal no canal `#zeus-admin-agent` (ID: `1496267442899521627`) — mesmo que a skill tenha sido criada como subproduto de outra tarefa principal.
+
+Categorias MGS-específicas que disparam REPORT-INFRA:
+- **Zeus:** `skills/ops/`
+- **Atena:** `skills/wordpress/`, `skills/devops/`
+
+Formato obrigatório:
+```
+[REPORT-INFRA] <@&1496306777933877369>
+Ação: criada
+Tipo: skill
+Path: <path completo da skill>
+Motivo: <descrição clara do propósito da skill>
+Evidência: <commit hash do sync seletivo OU criação manual>
+```
+
+Após postar REPORT-INFRA, atualizar `/root/mgs-agent/data/infra-inventory.json` — adicionar entrada em `skills_hermes.{agent}`:
+```json
+{
+  "name": "<nome da skill>",
+  "category": "<ops|wordpress|devops>",
+  "skill_md": "<path completo>",
+  "purpose": "<propósito>",
+  "reference_implementation": "<script ou cron que usa, se aplicável>"
+}
+```
+
+**Razão da regra:** skills criadas sem REPORT-INFRA ficam invisíveis para o Zeus enquanto coordenador de infra. O Git versiona automaticamente (via sync seletivo), mas o registro humano-legível no inventário e o reconhecimento no canal Zeus precisam ser explícitos.
+
+**Casos históricos onde a regra foi violada (ambos retroativados em 2026-04-26):**
+- Zeus criou `log-monitor-discord-alert` sem REPORT-INFRA — corrigido retroativamente
+- Atena criou `site-health-monitor-yoast` sem REPORT-INFRA — corrigido retroativamente no commit `4ac48fe`
+
 ### Papel do Zeus ao receber report
 
 1. Validar mentalmente se faz sentido
