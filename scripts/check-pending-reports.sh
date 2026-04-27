@@ -174,11 +174,18 @@ fi
 
 # Enviar notificações de resolução
 if (( ${#RESOLVED_SKILLS[@]} > 0 )); then
+    # Deduplicar por skill_key antes de processar
+    declare -A RESOLVED_DEDUP
     for entry in "${RESOLVED_SKILLS[@]}"; do
-        IFS=':' read -r agent_skill skill_path <<< "$entry"
-        # agent_skill = "agent:skill_name"
-        skill_name="${agent_skill#*:}"
-        agent="${agent_skill%%:*}"
+        IFS='|' read -r skill_key skill_path <<< "$entry"
+        RESOLVED_DEDUP["$skill_key"]="$skill_path"
+    done
+
+    for skill_key in "${!RESOLVED_DEDUP[@]}"; do
+        skill_path="${RESOLVED_DEDUP[$skill_key]}"
+        # skill_key = "agent:skill_name"
+        skill_name="${skill_key#*:}"
+        agent="${skill_key%%:*}"
 
         # Buscar commit mais recente do inventário para evidência
         last_commit=$(cd "$BASE_DIR" && git log --oneline -1 -- data/infra-inventory.json 2>/dev/null | awk '{print $1}' || echo "N/A")
@@ -191,21 +198,27 @@ msg = sys.argv[1]
 print(json.dumps({'content': msg}))
 " "$resolve_msg")
 
+        # Persistir remoção do state ANTES de enviar (idempotência)
+        STATE=$(echo "$STATE" | python3 -c "
+import json, sys, datetime
+d = json.load(sys.stdin)
+entry = d.get('alerted', {}).pop('${skill_key}', None)
+d.setdefault('resolved', {})['${skill_key}'] = {
+    'resolved_at': datetime.datetime.utcnow().isoformat() + 'Z',
+    'skill_name': '${skill_name}',
+    'agent': '${agent}'
+}
+print(json.dumps(d, indent=2))
+")
+        echo "$STATE" > "$STATE_FILE"
+
         HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
             -H "Content-Type: application/json" \
             -d "$payload" \
             "$WEBHOOK_URL")
 
         if [[ "$HTTP_CODE" == "204" ]]; then
-            echo "${LOG_PREFIX} Resolução enviada para ${agent_skill}"
-            # Remover da lista de alertados
-            STATE=$(echo "$STATE" | python3 -c "
-import json, sys
-d = json.load(sys.stdin)
-d.get('alerted', {}).pop('${agent_skill}', None)
-print(json.dumps(d, indent=2))
-")
-            echo "$STATE" > "$STATE_FILE"
+            echo "${LOG_PREFIX} Resolução enviada para ${skill_key}"
         else
             echo "${LOG_PREFIX} ERRO ao enviar resolução Discord: HTTP ${HTTP_CODE}"
         fi

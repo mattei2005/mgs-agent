@@ -1,17 +1,17 @@
 {
-  "alerted": {
+  "alerted": {},
+  "resolved": {
     "zeus:discord-managed-roles": {
-      "alerted_at": 1777267623,
+      "resolved_at": "2026-04-27T14:08:34.496020Z",
       "skill_name": "discord-managed-roles",
       "agent": "zeus",
-      "path": "/root/.hermes/profiles/zeus/skills/ops/discord-managed-roles"
+      "note": "cleanup retroativo 2026-04-27 \u2014 skill estava em alerted ap\u00f3s resolu\u00e7\u00e3o por bug IFS"
     },
     "zeus:mgs-pending-report-monitor": {
-      "alerted_at": 1777268702,
+      "resolved_at": "2026-04-27T14:08:34.496020Z",
       "skill_name": "mgs-pending-report-monitor",
       "agent": "zeus",
-      "path": "/root/.hermes/profiles/zeus/skills/ops/mgs-pending-report-monitor"
+      "note": "cleanup retroativo 2026-04-27 \u2014 skill estava em alerted ap\u00f3s resolu\u00e7\u00e3o por bug IFS"
     }
-  },
-  "resolved": {}
+  }
 }
