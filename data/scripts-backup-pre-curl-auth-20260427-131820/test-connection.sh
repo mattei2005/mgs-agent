@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Helper para curl autenticado seguro (não expõe senha em ps aux)
-source "/root/mgs-agent/skills/content-publish-wordpress/scripts/wp-curl-auth.sh"
-
 SITE="eggbev"
 USERNAME="raqueloliveira"
 APP_PASSWORD=$(op item get "eggbev - WordPress" --fields wp_app_password --reveal)
@@ -17,7 +14,7 @@ echo "→ Teste 1: API pública"
 curl -s -o /dev/null -w "   Status: %{http_code}\n" "$WP_URL"
 
 echo "→ Teste 2: Autenticação"
-RESPONSE=$(wp_curl_auth "$USERNAME" "$APP_PASSWORD" -s -w "\n%{http_code}" "$WP_URL/users/me")
+RESPONSE=$(curl -s -w "\n%{http_code}" -u "$USERNAME:$APP_PASSWORD" "$WP_URL/users/me")
 HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
 BODY=$(echo "$RESPONSE" | head -n-1)
 
@@ -31,7 +28,7 @@ else
 fi
 
 echo "→ Teste 3: Listar categorias"
-CATEGORIES=$(wp_curl_auth "$USERNAME" "$APP_PASSWORD" -s "$WP_URL/categories?per_page=5")
+CATEGORIES=$(curl -s -u "$USERNAME:$APP_PASSWORD" "$WP_URL/categories?per_page=5")
 COUNT=$(echo "$CATEGORIES" | grep -oP '"id":' | wc -l)
 echo "   Encontrou $COUNT categorias"
 
