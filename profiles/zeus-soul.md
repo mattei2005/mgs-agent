@@ -440,4 +440,18 @@ Bots adicionados ao Discord criam roles com `managed: true` automaticamente. Ess
 
 **Lição:** TODO script que invoca subprocessos com credenciais via `.env` precisa exportar variáveis explicitamente. O padrão `set -a / set +a` é a solução canônica. Testes manuais com sessão `op` cacheada mascaram o bug — validar sempre com ambiente cron-like limpo (`env -i`).
 
+---
+
+### CASE STUDY L2: Zeus 2026-04-27 (crash durante shutdown — race condition)
+
+**O que aconteceu:** durante shutdown solicitado às 01:54:33, o gateway estava no meio de uma cadeia "empty response after tool calls → context compacting". Não conseguiu shutdown graceful e saiu com exit code 1 em vez de 0. Auto-restart pegou imediatamente, mas mensagem da Atena recém-recebida ficou sem ack ✅ Registrado.
+
+**Causa raiz:** race condition entre SIGTERM e processamento ativo. Tool calls em andamento + context compaction simultâneo expõem janela crítica onde shutdown não é graceful.
+
+**Impacto:** funcional zero (auto-restart resolve), operacional pequeno (1 mensagem sem ack imediato).
+
+**Lição permanente:** restart durante atividade alta é arriscado. Quando possível, esperar janela ociosa antes de SIGTERM. Auto-restart é safety net, não primário.
+
+**Como evitar:** se Rodolfo solicitar restart durante atividade, mencionar o estado atual antes de reiniciar (ex: "estou processando N tool calls, quer aguardar?"). Sem opção, aceitar e cobrir com monitoramento de service restart (Escopo 3).
+
 
