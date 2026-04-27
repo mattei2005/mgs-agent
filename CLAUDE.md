@@ -206,8 +206,8 @@ Event types sent to Zeus:
 ## Technical Debt
 
 - `skills/content-publish-wordpress/scripts/upload-image.sh`: output JSON does not include `mime_type`. LazyBlock does not consume it, but useful for debug/auditing. Add in the next refactor.
-- `skills/content-publish-wordpress/scripts/upload-image.sh`: missing HTTP status-code capture via `curl -w '%{http_code}'`. If WP returns 401/403/500 with a JSON error body, the script does not detect the failure explicitly (only checks if `.id` exists in the response). Important fix before production.
-- WP credential handling: all WP-facing scripts (`upload-image.sh`, `create-post.sh`, `update-yoast.sh`, `resolve-term.sh`) pass the Application Password as `curl -u "user:pass"`. This exposes the password briefly in `ps`/argv (milliseconds during curl execution). Acceptable for now; future fix = `curl -K config-file` or `--netrc-file` (both keep the secret off argv).
+- ~~`upload-image.sh`: missing HTTP status-code capture~~ **RESOLVED 2026-04-27** — All WP-facing scripts now capture `%{http_code}` via `wp_curl_auth` helper.
+- ~~WP credential handling: scripts pass password via `curl -u "user:pass"` (briefly exposed in argv)~~ **RESOLVED 2026-04-27** — All 6 WP-facing scripts (`upload-image.sh`, `create-post.sh`, `update-yoast.sh`, `resolve-term.sh`, `check-slug-conflict.sh`, `test-connection.sh`) migrated to `wp_curl_auth` helper that uses `curl -K tempfile` (chmod 600). Password never appears in `ps aux` or `/proc/*/cmdline`. See `docs/security/migration-curl-auth-20260427.md`.
 - **Canonical content structure (MANDATORY — Raquel's editorial rule):**
 
   Post content MUST start with an editorial subtitle as the first `<p>`:
