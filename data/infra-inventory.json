@@ -930,10 +930,10 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/writing-plans/SKILL.md"
       },
       {
-        "name": "shell-cron-credentials",
+        "name": "shell-cron-env-export",
         "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/shell-cron-credentials/SKILL.md",
-        "purpose": "padrão canônico set -a/+a para scripts shell que leem credenciais via .env em ambiente cron — garante export para subprocessos como op, curl, etc.",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/shell-cron-env-export/SKILL.md",
+        "purpose": "padrão canônico set -a/+a para auto-export de variáveis de .env em scripts shell rodando via cron (necessário para subprocessos como op CLI verem credenciais)",
         "reference_implementation": "scripts/monitor-auto-push.sh, scripts/monitor-yoast-health-eggbev.sh"
       }
     ]
