@@ -33,6 +33,8 @@ Após editar o `.env`, **reiniciar o agente destino** para carregar a variável.
 | **Zeus** | `1496296175014252634` | `1496267442899521627` (`#zeus-admin-agent`) |
 | **Atena** | `1496306920494202950` | `1496267571543019653` (`#atena-content-agent`) |
 
+> ⚠️ **Atenção:** O ID do Zeus bot (`1496296175014252634`) é diferente do ID da Atena bot (`1496306920494202950`). Os últimos dígitos diferem — confirmar via API antes de usar em produção.
+
 Para descobrir o ID de um bot via API:
 ```bash
 TOKEN="<bot_token>"
