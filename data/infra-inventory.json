@@ -940,6 +940,14 @@
         "name": "discord-managed-roles",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/discord-managed-roles/SKILL.md",
+        "purpose": "Diagnóstico e limitações de roles 'managed' criados automaticamente pelo Discord ao adicionar bots. Não podem ser deletados via API (HTTP 400). Alternativa: remover o bot.",
+        "created_at": "2026-04-27T01:00:29-04:00",
+        "created_by": "zeus"
+      }
+    ]
+  },
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/discord-managed-roles/SKILL.md",
         "purpose": "conhecimento sobre managed roles do Discord (bots) — não podem ser deletados via API; diagnóstico e alternativas"
       }
     ]
