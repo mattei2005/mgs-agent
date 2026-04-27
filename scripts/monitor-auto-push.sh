@@ -19,7 +19,9 @@ ANTI_SPAM_HOURS="${ANTI_SPAM_HOURS:-2}"
 
 # ─── Credenciais via 1Password ────────────────────────────────────────────────
 # shellcheck source=/dev/null
+set -a
 source "${BASE_DIR}/.env" 2>/dev/null || true
+set +a
 
 WEBHOOK_URL="$(op item get "Discord Webhook - MGS Alerts Channel" \
     --vault 'MGS Conteúdo' \

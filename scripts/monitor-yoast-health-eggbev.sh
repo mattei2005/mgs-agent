@@ -36,7 +36,9 @@ LOG_PREFIX="monitor-yoast-health-eggbev"
 
 # Carregar env (OP_SERVICE_ACCOUNT_TOKEN etc)
 # shellcheck source=/dev/null
+set -a
 source "${BASE_DIR}/.env" 2>/dev/null || true
+set +a
 
 NOW_ISO="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 NOW_DATE="$(date +%Y-%m-%d)"
