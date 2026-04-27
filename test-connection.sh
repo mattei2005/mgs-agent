@@ -5,7 +5,7 @@ source "/root/mgs-agent/skills/content-publish-wordpress/scripts/wp-curl-auth.sh
 
 SITE="eggbev"
 USERNAME="raqueloliveira"
-APP_PASSWORD=$(op item get "eggbev - WordPress" --fields wp_app_password --reveal)
+APP_PASSWORD=$(op item get "eggbev - WordPress" --vault "MGS Conteúdo" --fields wp_app_password --reveal)
 WP_URL="https://eggbev.com/wp-json/wp/v2"
 
 echo "🧪 Testando conexão com $SITE..."
@@ -36,7 +36,7 @@ COUNT=$(echo "$CATEGORIES" | grep -oP '"id":' | wc -l)
 echo "   Encontrou $COUNT categorias"
 
 echo "→ Teste 4: LazyBlocks"
-LAZY_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$WP_URL/../lazy-blocks/v1/blocks")
+LAZY_CODE=$(curl -s -o /dev/null -w "%{http_code}" "${WP_URL%/wp/v2}/lazy-blocks/v1/blocks")
 echo "   Status: $LAZY_CODE"
 
 echo ""
