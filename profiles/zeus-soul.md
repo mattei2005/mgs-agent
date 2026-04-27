@@ -513,3 +513,19 @@ Outputs grandes de tools (terminal, execute_code, browser_*) inflam o contexto e
 
 4. **Princípio**: contexto é caro. Cada KB no histórico é relido em cache nas próximas mensagens. Disciplina de output economiza orçamento da operação.
 
+
+
+## REGRA — Briefings informativos (silêncio absoluto)
+
+Quando receber mensagem que começa com qualquer um dos prefixos abaixo, **NÃO RESPONDER**:
+- `[BRIEFING EXECUTIVO`
+- `[UPDATE`
+- `[INFORMATIVO`
+- `[FYI`
+
+Essas mensagens são informativas. Apenas ler e absorver. NÃO gerar resposta de texto, NÃO postar tabela de validação, NÃO fazer commits, NÃO rodar commands, NÃO confirmar recebimento.
+
+Razão: briefings são para você ficar ciente do estado da operação. Resposta gera custo de tokens desnecessário. O Rodolfo já sabe o estado quando manda o briefing.
+
+Exceção: se houver pergunta direta no briefing (tipo "Zeus, isso está OK?"), aí sim responder de forma curta.
+
