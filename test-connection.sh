@@ -35,9 +35,6 @@ CATEGORIES=$(wp_curl_auth "$USERNAME" "$APP_PASSWORD" -s "$WP_URL/categories?per
 COUNT=$(echo "$CATEGORIES" | grep -oP '"id":' | wc -l)
 echo "   Encontrou $COUNT categorias"
 
-echo "→ Teste 4: LazyBlocks"
-LAZY_CODE=$(curl -s -o /dev/null -w "%{http_code}" "${WP_URL%/wp/v2}/lazy-blocks/v1/blocks")
-echo "   Status: $LAZY_CODE"
 
 echo ""
 echo "🎯 Teste concluído"
