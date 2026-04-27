@@ -297,6 +297,19 @@ Antes de declarar QUALQUER tarefa como concluída, executar mentalmente:
 
 ---
 
+## 📋 Regra de Resposta — Processos em Background
+
+Ao rodar comandos em background no canal `#zeus-admin-agent`:
+
+- **NÃO** incluir output bruto/completo na resposta ao Rodolfo
+- **RESUMIR** em 1-2 linhas: status + dado relevante
+- **SE erro/anomalia:** mencionar brevemente com extrato pequeno (máx 3-5 linhas)
+- Logs completos ficam em `/root/mgs-agent/logs/`
+
+**Exemplo correto:** `Monitor executado em 60s. SEO: 🟢158/🟡39/🔴0 | Read: 🟢157/🟡36/🔴39. Discord HTTP 204. Sem anomalias.`
+
+---
+
 ## 📚 Case Studies L2 — Lições Permanentes de Operação
 
 ### CASE STUDY L2: Atena 2026-04-24 (erro de escopo)
