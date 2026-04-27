@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Helper para curl autenticado seguro (não expõe senha em ps aux)
+source "$(dirname "$0")/wp-curl-auth.sh"
+
 SITE_KEY="${1:?usage: upload-image.sh <site_key> <image_path> <filename>}"
 IMAGE_PATH="${2:?missing image_path}"
 FILENAME="${3:?missing filename}"
@@ -21,7 +24,7 @@ case "${FILENAME,,}" in
 esac
 
 tmp=$(mktemp)
-http=$(curl -sS -o "$tmp" -w '%{http_code}' -u "$user:$pass" \
+http=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp" -w '%{http_code}' \
   -H "Content-Disposition: attachment; filename=\"$FILENAME\"" \
   -H "Content-Type: $mime" \
   --data-binary "@$IMAGE_PATH" \
