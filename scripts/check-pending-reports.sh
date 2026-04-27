@@ -11,11 +11,11 @@ LOG_PREFIX="[$(date '+%Y-%m-%d %H:%M:%S')]"
 
 # Carregar variáveis de ambiente (incluindo OP_SERVICE_ACCOUNT_TOKEN)
 set -a
-source "/root/.hermes/profiles/zeus/.env" 2>/dev/null || true
+source "/root/mgs-agent/.env" 2>/dev/null || true
 set +a
 
-# Buscar webhook via 1Password
-WEBHOOK_URL=$(op item get "3jffmnrxkxbzmb3g745t777po4" --vault "MGS Conteúdo" --fields label=webhook_url 2>/dev/null || true)
+# Buscar webhook via 1Password (canal Zeus — alerta operacional ao Zeus, não infra)
+WEBHOOK_URL=$(op item get "Discord Webhook - Zeus Channel" --vault "MGS Conteúdo" --fields label=webhook_url 2>/dev/null || true)
 
 if [[ -z "$WEBHOOK_URL" ]]; then
     echo "${LOG_PREFIX} ERRO: Não foi possível obter WEBHOOK_URL do 1Password. Abortando."
