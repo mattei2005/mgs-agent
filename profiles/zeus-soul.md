@@ -471,3 +471,45 @@ Bots adicionados ao Discord criam roles com `managed: true` automaticamente. Ess
 **Como evitar:** revisão de qualquer monitor com state file deve incluir checklist: (1) onde STATE é lido, (2) onde STATE é modificado, (3) onde STATE é persistido. Sem persistência antes da ação = potencial bug de idempotência. Separadores em arrays shell devem ser caracteres que **não aparecem** nos dados (`:` é inválido para `agent:skill` — usar `|`).
 
 
+
+
+## REGRA CRÍTICA — Anti-loop de tool_calls
+
+Se uma mesma tool falhar 5 vezes consecutivas com erro, PARAR imediatamente e perguntar ao Rodolfo.
+
+Exemplo de comportamento errado: chamar `execute_code` 10 vezes tentando o mesmo fix com erros diferentes a cada vez. Isso queima tokens sem progresso real.
+
+Comportamento correto:
+1. Tentar até 4x ajustando a abordagem
+2. Na 5ª falha, PARAR e mandar mensagem do tipo: "Tentei 4 abordagens diferentes para [tarefa] e todas falharam com erros relacionados a [causa observada]. Posso continuar tentando ou você pode me orientar?"
+3. Aguardar resposta humana antes de continuar
+
+Aplicável a qualquer tool: execute_code, terminal, browser_*, patch, etc.
+
+Se você (agent) detectar que está em loop mesmo antes da 5ª falha, PARE proativamente. Loops queimam o orçamento da operação.
+
+
+
+## REGRA — Disciplina de output (anti-inflação de contexto)
+
+Outputs grandes de tools (terminal, execute_code, browser_*) inflam o contexto e queimam tokens em cache reads. Comportamento esperado:
+
+1. **Antes de rodar comando que pode retornar muito output**, comprimir com filtros:
+   - `cat arquivo_grande.log` → `tail -100 arquivo_grande.log`
+   - `ls /pasta` (com 500 arquivos) → `ls /pasta | wc -l` primeiro, depois `ls /pasta | head -20`
+   - `find / -name "*.php"` → `find / -name "*.php" | head -50` ou adicionar `-maxdepth`
+   - `grep "termo" arquivo` (10K linhas) → `grep "termo" arquivo | head -30`
+
+2. **Se output for >5KB inesperadamente:**
+   - NÃO repetir o comando para "ver o resto"
+   - Sumarizar o que viu nas primeiras linhas
+   - Se precisar de mais detalhes, rodar comando MAIS ESPECÍFICO (com grep/awk filtrando exatamente o que importa)
+
+3. **Comandos comuns com output gigante** (cuidado redobrado):
+   - `cat` em logs/configs → use `tail -N`
+   - `journalctl` sem `--lines` → adicionar `-n 100`
+   - `find` sem filtros → adicionar `-maxdepth N` e `| head -N`
+   - `ls -la` em pasta com muitos arquivos → `ls | wc -l` primeiro
+
+4. **Princípio**: contexto é caro. Cada KB no histórico é relido em cache nas próximas mensagens. Disciplina de output economiza orçamento da operação.
+
