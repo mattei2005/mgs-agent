@@ -154,7 +154,19 @@
       "path": "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh",
       "size_bytes": 21979,
       "modified_at": "2026-04-26T23:28:00-04:00",
-      "description": "Monitor de saude Yoast (SEO + Readability) \u2014 eggbev. Substitui monitor-yoast-readability-eggbev.sh."
+      "description": "Monitor de saude Yoast (SEO + Readability) — eggbev. Substitui monitor-yoast-readability-eggbev.sh."
+    },
+    {
+      "path": "/root/mgs-agent/scripts/monitor-anthropic-cost.sh",
+      "size_bytes": 3444,
+      "modified_at": "2026-04-27T11:46:00-04:00",
+      "description": "Monitor diário de gasto Anthropic API via Admin API (sk-ant-admin01-*). Divisor=88. Thresholds verde/amarelo/vermelho. Posta em #alerts-infra."
+    },
+    {
+      "path": "/root/mgs-agent/scripts/monitor-tool-loops.sh",
+      "size_bytes": 5526,
+      "modified_at": "2026-04-27T12:02:00-04:00",
+      "description": "Detector de loops de tool_calls. Varre sessions Hermes modificadas nos últimos 10min, detecta 5+ erros consecutivos. Anti-spam 30min por session."
     }
   ],
   "skills_mgs": [
