@@ -57,6 +57,12 @@
       "log": "/root/mgs-agent/logs/monitor-service-restarts.log",
       "description": "Detecta restarts inesperados de services Hermes e alerta #alerts-infra",
       "created": "2026-04-27"
+    },
+    {
+      "entry": "*/5 * * * * /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1",
+      "description": "Monitor de restarts inesperados de services Hermes (zeus-gateway, atena-gateway, mgs-autocommit). Thresholds INFO(3)/WARN(5) em 24h. Anti-spam 12h por n\u00edvel.",
+      "webhook": "Discord Webhook - Alerts Infra Channel",
+      "discord_channel_id": "1498132022634483894"
     }
   ],
   "scripts": [
@@ -970,7 +976,14 @@
         "created_at": "2026-04-27T01:29:08-04:00",
         "created_by": "zeus"
       },
-      "service-restart-monitor"
+      {
+        "name": "service-restart-monitor",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/service-restart-monitor/SKILL.md",
+        "purpose": "Monitor autom\u00e1tico que detecta restarts inesperados de zeus-gateway, atena-gateway e mgs-autocommit. Alerta #alerts-infra via webhook Discord com thresholds INFO(3) / WARN(5) e anti-spam 12h.",
+        "created_at": "2026-04-27",
+        "created_by": "zeus"
+      }
     ]
   },
   "data_files": [
