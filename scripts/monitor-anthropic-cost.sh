@@ -59,8 +59,9 @@ USAGE_JSON=$(curl -s -H "x-api-key: $ADMIN_KEY" \
 CACHE_READ=$(echo "$USAGE_JSON" | jq -r '.data[0].results[0].cache_read_input_tokens // 0')
 OUTPUT=$(echo "$USAGE_JSON" | jq -r '.data[0].results[0].output_tokens // 0')
 
-CACHE_READ_M=$(echo "scale=1; $CACHE_READ / 1000000" | bc)
-OUTPUT_M=$(echo "scale=1; $OUTPUT / 1000000" | bc)
+# Formatação melhor (sempre mostra casas decimais)
+CACHE_READ_M=$(awk "BEGIN {printf \"%.2f\", $CACHE_READ / 1000000}")
+OUTPUT_K=$(awk "BEGIN {printf \"%.0f\", $OUTPUT / 1000}")
 
 COST_INT=$(echo "$COST" | cut -d. -f1)
 
@@ -77,7 +78,7 @@ elif [ "$COST_INT" -ge "$THRESHOLD_WARN" ]; then
 elif [ "$COST_INT" -ge "$THRESHOLD_INFO" ]; then
   EMOJI="🟢"
   COLOR=3066993
-  STATUS="OK — Gasto saudavel"
+  STATUS="OK — Gasto saudável"
   MENTION=""
 else
   EMOJI="🟢"
@@ -87,7 +88,9 @@ else
 fi
 
 TITLE="${EMOJI} [ANTHROPIC API] Gasto 24h: \$${COST}"
-DESC="**Status:** ${STATUS}\n**Cache reads:** ${CACHE_READ_M}M tokens\n**Output:** ${OUTPUT_M}M tokens\n**Auto-reload:** Ativo (\$10 -> \$20)"
+
+# Newlines reais (não escapados)
+DESC=$(printf "**Status:** %s\n**Cache reads:** %s M tokens\n**Output:** %s K tokens\n**Auto-reload:** Ativo (\$10 → \$20)" "$STATUS" "$CACHE_READ_M" "$OUTPUT_K")
 
 if [ -n "$MENTION" ]; then
   CONTENT="${MENTION} verificar logs Zeus/Atena"
@@ -95,6 +98,7 @@ else
   CONTENT=""
 fi
 
+# jq com --rawfile/--arg lida com newlines corretamente
 PAYLOAD=$(jq -n \
   --arg c "$CONTENT" \
   --arg t "$TITLE" \
@@ -108,6 +112,7 @@ HTTP_CODE=$(curl -s -X POST -H "Content-Type: application/json" \
   -o /tmp/discord-response.txt -w "%{http_code}")
 
 echo "Monitor: \$${COST} | Status: ${STATUS} | HTTP: ${HTTP_CODE}"
+echo "Cache: ${CACHE_READ_M}M | Output: ${OUTPUT_K}K tokens"
 
 if [ "$HTTP_CODE" != "204" ] && [ "$HTTP_CODE" != "200" ]; then
   echo "Discord error response:"
