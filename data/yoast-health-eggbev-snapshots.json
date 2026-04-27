@@ -12,21 +12,46 @@
   },
   "snapshots": [
     {
-      "date": "2026-04-25",
-      "timestamp": "2026-04-26T02:00:00Z",
+      "date": "2026-04-26",
+      "timestamp": "2026-04-27T02:25:20Z",
       "total": 232,
       "post_type": "baseline",
-      "_test_fabricado": true,
-      "seo": {
-        "green": 220,
-        "amber": 10,
-        "red": 2,
+      "seo": null,
+      "readability": {
+        "green": 157,
+        "amber": 36,
+        "red": 39,
         "not_analyzed": 0
+      }
+    },
+    {
+      "date": "2026-04-26",
+      "timestamp": "2026-04-27T03:00:24Z",
+      "total": 232,
+      "post_type": "silent",
+      "seo": null,
+      "readability": {
+        "green": 157,
+        "amber": 36,
+        "red": 39,
+        "not_analyzed": 0
+      }
+    },
+    {
+      "date": "2026-04-26",
+      "timestamp": "2026-04-27T03:29:18Z",
+      "total": 232,
+      "post_type": "silent",
+      "seo": {
+        "green": 158,
+        "amber": 39,
+        "red": 0,
+        "not_analyzed": 35
       },
       "readability": {
-        "green": 210,
-        "amber": 15,
-        "red": 7,
+        "green": 157,
+        "amber": 36,
+        "red": 39,
         "not_analyzed": 0
       }
     }
