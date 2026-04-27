@@ -1,10 +1,10 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-04-25T00:54:53-04:00",
+    "updated_at": "2026-04-26T22:26:16-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_updated": "2026-04-25T08:00:00-04:00",
-    "updated_by": "zeus"
+    "last_updated": "2026-04-26T22:26:16-04:00",
+    "updated_by": "atena"
   },
   "systemd_services": [
     {
@@ -25,11 +25,16 @@
       "entry": "*/5 * * * * /root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1"
     },
     {
-      "entry": "0 10 * * * /root/mgs-agent/scripts/monitor-rec-readability.sh >> /root/mgs-agent/logs/rec-readability-monitor.log 2>&1"
+      "entry": "# DEPRECATED 2026-04-26: 0 10 * * * /root/mgs-agent/scripts/monitor-rec-readability.sh >> /root/mgs-agent/logs/rec-readability-monitor.log 2>&1",
+      "description": "DEPRECATED — substituído por monitor-yoast-readability-eggbev.sh em 2026-04-26"
     },
     {
       "entry": "*/15 * * * * /root/mgs-agent/scripts/monitor-auto-push.sh >> /root/mgs-agent/logs/monitor-auto-push.log 2>&1",
       "description": "Monitor de falhas no auto-push. Detecta START sem OK correspondente, erros explícitos. Alerta Discord se consecutive_failures >= 3."
+    },
+    {
+      "entry": "0 10 * * * /root/mgs-agent/scripts/monitor-yoast-readability-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-readability-eggbev.log 2>&1",
+      "description": "Monitor de saude readability Yoast — eggbev. Varre todos os posts via SQL na wp_yoast_indexable. Thresholds Yoast (>=71/41-70/<=40/NULL). Logica condicional: baseline, alerta degradacao, relatorio semanal."
     }
   ],
   "scripts": [
@@ -83,6 +88,12 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-score-updater.js",
       "size_bytes": 5045,
       "modified_at": "2026-04-24T18:36:54-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/monitor-yoast-readability-eggbev.sh",
+      "size_bytes": 15642,
+      "modified_at": "2026-04-26T22:24:00-04:00",
+      "description": "Monitor de saude readability Yoast — eggbev. Varre wp_yoast_indexable via SSH S03->S01. Webhook Discord MGS Alerts Channel."
     }
   ],
   "skills_mgs": [
@@ -980,6 +991,12 @@
       "size_bytes": 13005,
       "md5": "b55acce2367b1fa30bcec5d7f2bf7528",
       "modified_at": "2026-04-25T00:00:01-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
+      "description": "Historico diario de snapshots de saude readability Yoast do eggbev. Max 90 entradas (~3 meses). Gerado por monitor-yoast-readability-eggbev.sh.",
+      "created_at": "2026-04-26T22:26:15-04:00",
+      "created_by": "atena"
     }
   ],
   "mu_plugin_canonical": {
