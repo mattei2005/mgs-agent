@@ -137,6 +137,12 @@ cat /root/mgs-agent/data/pending-reports-state.json
 
 6. **Inventário usa `python3` inline** — o script depende de `python3` disponível no PATH. Validado no VPS (Debian). Se mudar ambiente, verificar dependência.
 
+7. **⚠️ BUG HISTÓRICO CORRIGIDO (2026-04-27) — separador IFS em `RESOLVED_SKILLS[]`:** O formato original usava `:` como separador no array (`skill_key:skill_path`), mas `skill_key` tem formato `agent:skill_name` — o `:` colidia. O `IFS=':' read -r agent_skill skill_path` quebrava errado, o `pop()` usava chave `"zeus"` em vez de `"zeus:skill-name"`, falhava silenciosamente, state nunca atualizava → loop infinito de resoluções. **Fix:** separador trocado para `|`. Se fizer refactor, nunca usar `:` como separador em arrays shell que carreguem `agent:skill_name`.
+
+8. **⚠️ BUG HISTÓRICO CORRIGIDO (2026-04-27) — persistir state ANTES de enviar mensagem:** Versão original persistia o state *após* o `curl`. Se o curl falhasse, estado não era salvo e a skill reentraria no loop no próximo ciclo. **Fix canônico:** `echo "$STATE" > "$STATE_FILE"` deve ocorrer *antes* do `curl`. Idempotência garante que segunda execução seja no-op mesmo sem resposta do Discord.
+
+9. **Loop infinito de resolução:** Combinação dos bugs 7+8 causou ~120 mensagens duplicadas em 8h (2026-04-27, 02:00–10:00). Sempre validar empiricamente com dry-run após qualquer modificação no script, especialmente na lógica de state transitions.
+
 ---
 
 ## Comportamento esperado — fluxo completo
