@@ -26,6 +26,10 @@
     },
     {
       "entry": "0 10 * * * /root/mgs-agent/scripts/monitor-rec-readability.sh >> /root/mgs-agent/logs/rec-readability-monitor.log 2>&1"
+    },
+    {
+      "entry": "*/15 * * * * /root/mgs-agent/scripts/monitor-auto-push.sh >> /root/mgs-agent/logs/monitor-auto-push.log 2>&1",
+      "description": "Monitor de falhas no auto-push. Detecta START sem OK correspondente, erros explícitos. Alerta Discord se consecutive_failures >= 3."
     }
   ],
   "scripts": [
@@ -43,6 +47,12 @@
       "path": "/root/mgs-agent/scripts/monitor-rec-readability.sh",
       "size_bytes": 4355,
       "modified_at": "2026-04-24T23:22:13-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/monitor-auto-push.sh",
+      "size_bytes": 9048,
+      "modified_at": "2026-04-26T21:19:00-04:00",
+      "description": "Monitor de falhas no auto-push. threshold=3, anti_spam=2h, janela=60min. State em data/auto-push-monitor.json."
     },
     {
       "path": "/root/mgs-agent/scripts/mu-plugins/yoast-rest-meta.php",
