@@ -19,20 +19,20 @@ Exemplo validado: `monitor-auto-push.sh` para o auto-push do mgs-agent.
 
 ---
 
-## Convenção de canal Discord
+## Convenção de canal Discord por tipo de alerta
 
-Alertas automáticos de monitores de log devem usar o webhook do canal **#mgs-alerts**:
+| Tipo de alerta | Canal | Webhook 1Password |
+|---|---|---|
+| Saúde Yoast SEO/Readability | `#alerts-yoast` (1498193722871910550) | `Discord Webhook - Alerts Yoast Channel` |
+| Infra crítica (auto-push, deploy) | `#mgs-alerts` (1498132022634483894) | `Discord Webhook - Alerts Infra Channel` |
+| Cobrança operacional ao Zeus | `#zeus-admin-agent` (1496267442899521627) | `Discord Webhook - Zeus Channel` |
 
-- **Vault 1Password:** MGS Conteúdo
-- **Item:** `Discord Webhook - MGS Alerts Channel`
-- **Field:** `webhook_url`
+**Convenção de prefixo nas mensagens:** `[SITE.COM] [MÉTRICA] descrição`
+- Site primeiro → identifica origem ao escanear canal
+- Métrica segundo → tipo de dado ([YOAST], [BACKUP], [UPTIME], etc.)
+- Exemplo: `[EGGBEV.COM] [YOAST] Relatório semanal (27/04 10h)`
 
-**NÃO usar** o webhook do `#zeus-admin-agent` para alertas de cron/monitor automatizado. Esse canal é exclusivo para:
-- Conversa operacional Rodolfo ↔ Zeus
-- `[REPORT-INFRA]` de outros agentes
-- Hook git de commits manuais (post-commit)
-
-**Razão:** separação evita ruído. `#mgs-alerts` em silêncio = sistema OK; `#mgs-alerts` ativo = ação requerida.
+**NÃO usar** o webhook `#zeus-admin-agent` para alertas de cron/monitor automatizado. Esse canal é exclusivo para conversa operacional Rodolfo ↔ Zeus, `[REPORT-INFRA]` de agentes, e hook git de commits interativos.
 
 ---
 
@@ -284,7 +284,9 @@ Após criar os artefatos, atualizar manualmente 3 seções do inventário:
 
 ## Pitfalls
 
-1. **`os.environ` em `execute_code` não propaga para `terminal()`** — variáveis setadas com `os.environ[...] = ...` em Python NÃO chegam nos subprocessos do `terminal()`. Para credenciais 1Password dentro de `execute_code`, chamar `terminal("op item get ... --reveal")` diretamente e usar o output como string Python. Não tentar setar via `os.environ` e usar em `terminal()` subsequente.
+1. **`notify_on_complete=true` envia output bruto diretamente no canal Discord** — ao rodar scripts com `terminal(background=true, notify_on_complete=true)`, a plataforma Hermes entrega automaticamente o output completo do processo no canal assim que termina, **sem passar pelo agente**. Isso polui o canal com logs brutos. Usar sempre `process(action='wait')` ou `process(action='poll')` manualmente e sumarizar o resultado em 1-2 linhas. Nunca usar `notify_on_complete=true` para processos verbosos no canal de conversa.
+
+2. **`os.environ` em `execute_code` não propaga para `terminal()`** — variáveis setadas com `os.environ[...] = ...` em Python NÃO chegam nos subprocessos do `terminal()`. Para credenciais 1Password dentro de `execute_code`, chamar `terminal("op item get ... --reveal")` diretamente e usar o output como string Python. Não tentar setar via `os.environ` e usar em `terminal()` subsequente.
 
 2. **Campo do webhook no 1Password é `webhook_url`, não `url`** — o item "Discord Webhook - Zeus Channel" tem campo `label=webhook_url`. Usar `--fields label=webhook_url --reveal` (não `--fields label=url`).
 

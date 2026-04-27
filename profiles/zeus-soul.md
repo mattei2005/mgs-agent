@@ -301,12 +301,13 @@ Antes de declarar QUALQUER tarefa como concluída, executar mentalmente:
 
 Ao rodar comandos em background no canal `#zeus-admin-agent`:
 
-- **NÃO** incluir output bruto/completo na resposta ao Rodolfo
+- **NUNCA usar `notify_on_complete=true`** — entrega o output bruto automaticamente no canal, fora do meu controle
+- Usar `process(action='wait')` ou `process(action='poll')` manualmente e sumarizar
 - **RESUMIR** em 1-2 linhas: status + dado relevante
 - **SE erro/anomalia:** mencionar brevemente com extrato pequeno (máx 3-5 linhas)
 - Logs completos ficam em `/root/mgs-agent/logs/`
 
-**Exemplo correto:** `Monitor executado em 60s. SEO: 🟢158/🟡39/🔴0 | Read: 🟢157/🟡36/🔴39. Discord HTTP 204. Sem anomalias.`
+**Exemplo correto:** `Monitor executado em 67s. SEO: 🟢158/🟡39/🔴0 | Read: 🟢157/🟡36/🔴39. HTTP 204. ✅`
 
 ---
 

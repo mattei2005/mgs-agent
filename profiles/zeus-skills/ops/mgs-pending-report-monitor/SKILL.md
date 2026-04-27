@@ -125,7 +125,7 @@ cat /root/mgs-agent/data/pending-reports-state.json
 
 2. **`set -a / set +a` ao redor do `source .env`** — obrigatório para que `op` CLI veja `OP_SERVICE_ACCOUNT_TOKEN`. Sem isso, script falha silenciosamente em ambiente cron. Ver skill `shell-cron-env-export`.
 
-3. **Source correto: `/root/.hermes/profiles/zeus/.env`** — não `/root/mgs-agent/.env`. O token 1Password está no profile zeus.
+3. **Source correto: `/root/mgs-agent/.env`** — o `OP_SERVICE_ACCOUNT_TOKEN` está em `/root/mgs-agent/.env`, não em `/root/.hermes/profiles/zeus/.env`. O profile zeus `.env` não tem o token. Usar `source "/root/mgs-agent/.env"` no script.
 
 4. **Dry-run detecta uma skill real pendente** — é esperado se houver skill no filesystem que de fato não está no inventário. O sistema está funcionando corretamente. Adicionar ao inventário e rodar novamente.
 

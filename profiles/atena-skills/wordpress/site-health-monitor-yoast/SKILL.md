@@ -140,7 +140,7 @@ If `seo` is None, log "Snapshot anterior sem SEO — comparação SEO ignorada n
 ### 5. Discord message format
 
 ```
-📊 [YOAST] Baseline eggbev (26/04 10h)   ← or ⚠️ ALERTA / 📅 Relatório semanal
+📊 [EGGBEV.COM] [YOAST] Baseline (26/04 10h)   ← or ⚠️ ALERTA / 📅 Relatório semanal
 Total posts publicados: **232**
 
 ⚠️ *Cada post conta em ambas as métricas (mesmo post pode ser SEO 🟢 + Read 🔴):*
@@ -154,8 +154,13 @@ Variação Readability vs ontem: +32 vermelho(s) ⬆️, +21 amarelo(s) ⬆️
 💬 Para listar URLs por cor/métrica, peça no <#1496267571543019653>
 ```
 
-Prefix: `[YOAST]` (not `[ATENA]`). Identifies data type.
-Channel: `#mgs-alerts` (webhook `Discord Webhook - MGS Alerts Channel`), NOT `#atena-content-agent`.
+**Convenção de prefixo (escalável):** `[SITE.COM] [MÉTRICA]`
+- Site primeiro — identifica origem imediatamente ao escanear canal
+- Métrica segundo — tipo de dado ([YOAST], [BACKUP], [UPTIME], etc.)
+- Exemplo futuro: `[ZUOUT.COM] [YOAST] Relatório semanal (...)`, `[LYZMO.COM] [BACKUP] ALERTA (...)`
+
+Prefix: `[SITE.COM] [YOAST]` (not just `[YOAST]`). Site before metric — scalable for multi-site.
+Channel: `#alerts-yoast` (webhook `Discord Webhook - Alerts Yoast Channel`), NOT `#atena-content-agent`.
 
 ## SSH execution pattern
 
