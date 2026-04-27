@@ -122,3 +122,5 @@ Zeus responde com máximo 2 linhas:
 - **Reiniciar o agente destino após editar `.env`** — variáveis de ambiente só são carregadas na inicialização
 - **A resposta vai pro canal da Atena, não pro Zeus** — Zeus não recebe callback automático; deve ler o log ou session file
 - **Sessão nova por interação** — cada mensagem do Zeus para a Atena cria uma nova sessão no session store da Atena; o session ID está no nome do arquivo mais recente em `/root/.hermes/profiles/atena/sessions/`
+- **Roles "Zeus" e "Atena" no server são `managed: true`** — criados automaticamente pelo Discord quando o bot é adicionado. Não podem ser deletados via API (`HTTP 400 "Cannot delete a managed role"`). São cosméticos e inofensivos — ignorar.
+- **Push notification mobile depende de config do Discord, não do formato** — user mention `<@USER_ID>` chega corretamente; se push não aparece no celular, verificar: (1) Configurações do servidor → canal → override de notificações (não pode estar mudo), (2) Discord mobile → Notificações → Push ativado, (3) Sistema operacional → Discord → permissão de notificação em background. Canal de alertas MGS: `1498132022634483894`.

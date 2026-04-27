@@ -389,6 +389,14 @@ Aplicar preventivamente em qualquer novo script que invoque subprocessos com cre
 
 ---
 
+## 📌 Discord — Fatos Operacionais
+
+### Managed Roles (bots)
+
+Bots adicionados ao Discord criam roles com `managed: true` automaticamente. Esses roles **não podem ser deletados via API** (HTTP 400 — "Cannot delete a managed role"). Para removê-los, é necessário remover o bot do server, o que desativa o bot. Aceitar como cosmético sem impacto operacional.
+
+---
+
 ### CASE STUDY L2: Zeus 2026-04-27 (monitor-auto-push silent failure)
 
 **O que aconteceu:** `monitor-auto-push.sh` rodava via cron a cada 15 min (confirmado em `/var/log/syslog`) mas falhava silenciosamente. State file não atualizava, log ficava vazio. Detectado durante auditoria final de sessão.
