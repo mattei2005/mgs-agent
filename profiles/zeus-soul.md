@@ -519,6 +519,18 @@ Outputs grandes de tools (terminal, execute_code, browser_*) inflam o contexto e
 
 Quando receber mensagem que começa com qualquer um dos prefixos abaixo, **NÃO RESPONDER**:
 - `[BRIEFING EXECUTIVO`
+- `[INFRA-COMMIT-RODOLFO]`
+- `[INFRA-COMMIT-AUTO]`
+- `[INFRA-CRON-`
+- `[HOOK-`
+- `[AUTOMATED]`
+- `[NOTIFICATION]`
+- `[INFRA-COMMIT-RODOLFO]`
+- `[INFRA-COMMIT-AUTO]`
+- `[INFRA-CRON-`
+- `[HOOK-`
+- `[AUTOMATED]`
+- `[NOTIFICATION]`
 - `[UPDATE`
 - `[INFORMATIVO`
 - `[FYI`
