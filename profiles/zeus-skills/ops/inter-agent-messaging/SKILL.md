@@ -97,16 +97,18 @@ Ou simplesmente aguardar o Rodolfo ver a resposta no canal `#atena-content-agent
 
 ## Formato REPORT-INFRA (Atena → Zeus)
 
-Quando Atena reporta mudanças de infra ao canal `#zeus-admin-agent`, o formato canônico usa **dois mentions**: bot user do Zeus (para ativar `DISCORD_ALLOW_BOTS=mentions`) + role (para destaque visual):
+Quando Atena reporta mudanças de infra ao canal `#zeus-admin-agent`, o formato canônico usa **dois user mentions**: bot user do Zeus (para ativar `DISCORD_ALLOW_BOTS=mentions`) + user mention do Rodolfo (para push notification real no celular):
 
 ```
-[REPORT-INFRA] <@1496296175014252634> <@&1496306777933877369>
+[REPORT-INFRA] <@1496296175014252634> <@344196393512075265>
 Ação: criada/modificada/removida
 Tipo: cron / skill / script / config / data
 Path: caminho exato
 Motivo: contexto
 Evidência: hash de commit ou output de comando
 ```
+
+> **Por que não usar role mention da role Zeus?** A role tem `mentionable: false` e membros: 1 (só o bot, já coberto pelo user mention). Não dispara push notification para ninguém. User mention direto do Rodolfo (`<@344196393512075265>`) é o que realmente notifica.
 
 Zeus responde com máximo 2 linhas:
 - `✅ Registrado.` — sem ação adicional
@@ -115,6 +117,7 @@ Zeus responde com máximo 2 linhas:
 
 ## Pitfalls
 
+- **Validar `DISCORD_ALLOW_BOTS` no profile `.env`, não no base** — o arquivo `/root/.hermes/.env` é template/comentários. A config real fica em `/root/.hermes/profiles/{agent}/.env`. Fazer `grep DISCORD_ALLOW_BOTS /root/.hermes/.env` sempre retorna vazio — validar sempre em `/root/.hermes/profiles/zeus/.env`.
 - **Sem @mention = silêncio** — com `DISCORD_ALLOW_BOTS=mentions`, a mensagem sem `<@BOT_ID>` é descartada sem log de erro
 - **Reiniciar o agente destino após editar `.env`** — variáveis de ambiente só são carregadas na inicialização
 - **A resposta vai pro canal da Atena, não pro Zeus** — Zeus não recebe callback automático; deve ler o log ou session file
