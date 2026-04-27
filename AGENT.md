@@ -382,7 +382,7 @@ Ações que **NÃO** geram report:
 ### Formato do report
 
 ```
-[REPORT-INFRA] <@&1496306777933877369>
+[REPORT-INFRA] <@1496306920494202950> <@&1496306777933877369>
 Ação: [criada/modificada/removida]
 Tipo: [cron/skill/script/config/data]
 Path: [caminho exato]
@@ -411,7 +411,7 @@ Categorias MGS-específicas que disparam REPORT-INFRA:
 
 Formato obrigatório:
 ```
-[REPORT-INFRA] <@&1496306777933877369>
+[REPORT-INFRA] <@1496306920494202950> <@&1496306777933877369>
 Ação: criada
 Tipo: skill
 Path: <path completo da skill>
