@@ -36,9 +36,19 @@ Automated pipeline for generating and publishing credit card recommendation (REC
 - `data/debug-*.png` — latest debug artifacts
 - `logs/generate-rec.log`, `logs/publish-wordpress.log`
 
-## Current State (2026-04-21)
+## Current State (2026-04-27)
 
-Commits on `main` from the current session (oldest → newest):
+Foundation complete (Phase 1 ✅). Pipeline operational in production.
+
+**Active agents:** Zeus (admin) + Atena (content), both online with auto-thread, anti-loop, output discipline.
+
+**Production stats:**
+- eggbev.com: 232 posts published
+- Yoast scores: 158 SEO 🟢 / 157 Readability 🟢 (latest weekly snapshot)
+- Crontab: 7 active monitors (sync-souls, auto-push, yoast-health, pending-reports, service-restarts, anthropic-cost, tool-loops)
+- Auto-push to GitHub on every commit (post-commit hook)
+
+**Recent foundational commits (oldest → newest):**
 
 - `15cfcd2` — `fix(gemini): use --rawfile to bypass MAX_ARG_STRLEN limit` (also: `.env` sourcing + `--vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}"` in Gemini key lookup)
 - `8d5f74b` — `fix(gemini): write request payload to temp file for curl -d @` (+ unified `cleanup_temps` via `TEMP_FILES[]` array, one `trap EXIT`)
@@ -53,7 +63,7 @@ Commits on `main` from the current session (oldest → newest):
 
 ### Test pending
 
-4. **Full publish pipeline** — end-to-end REC article generation + publication to WordPress (article assembly from templates → featured image → WP media upload → post create → Yoast meta).
+~4. **Full publish pipeline**~~ **PASSED 2026-04-23** — End-to-end REC pipeline validated in production. AIB Visa Gold (post 62008): SEO 84 🟢 / Readability 90 🟢. Multiple RECs published since then (Barclaycard Platinum, Virgin Atlantic Reward, etc.).
 
 ## Known Issues
 
@@ -122,7 +132,7 @@ Each agent is a specialized "employee" of MGS Digital Corp's content operation.
 Zeus is the General Manager — sees everything, authorizes users, monitors agents.
 Specialized agents report to Zeus and execute their domain autonomously.
 
-### Phase 1 — Foundation (2026-04-21, in progress)
+### Phase 1 — Foundation (2026-04-21 → 2026-04-23, ✅ COMPLETE)
 
 **Zeus** — Admin Agent / General Manager
 - Discord channel: zeus-admin-agent
@@ -248,9 +258,14 @@ Event types sent to Zeus:
 
 ## How to Resume This Session
 
-```bash
-claude --resume c0ee7f2a-9489-43fd-b190-1e9a1940c0ad
-```
+This document is consulted by Claude Code (CLI) and Claude.ai (web) sessions
+working on this repository. State is reconstructed from:
+
+1. Current `git log` and `git diff`
+2. `data/infra-inventory.json` (run `bash scripts/infra-discovery.sh` to refresh)
+3. `data/auto-push-monitor.json`, `service-restart-state.json`, etc. (state files)
+4. SOULs in `profiles/zeus-soul.md` and `profiles/atena-soul.md` (agent identity + Case Studies)
+5. Active session journal in `/mnt/transcripts/` (if Claude.ai web with code interpreter)
 
 ## Next Steps
 
