@@ -377,7 +377,7 @@ Ações que **NÃO** geram report:
 - Templates de prompt (`rec-*.md`)
 - Campos editoriais em `sites.json` (cores, categorias)
 - `memory.jsonl` e `SOUL.md` próprios (exceto regras estruturais)
-- Skills em `/root/.hermes/profiles/{agent}/skills/` (capabilities internas do framework Hermes) — são domínio do agente, não disparam REPORT-INFRA. **Apenas skills criadas em `/root/mgs-agent/skills/` (skills do projeto MGS) disparam.**
+- Skills em `/root/.hermes/profiles/{agent}/skills/` (capabilities internas do framework Hermes) — são domínio do agente, não disparam REPORT-INFRA, **exceto** nas categorias MGS-específicas em sync seletivo (`zeus/ops/`, `atena/wordpress/`, `atena/devops/`) — ver sub-seção abaixo.
 
 ### Formato do report
 
