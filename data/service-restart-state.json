@@ -1,0 +1,35 @@
+{
+  "_meta": {
+    "description": "Estado do monitor service-restart-watcher",
+    "created": "2026-04-27T13:51:58.736970Z",
+    "thresholds": {
+      "info": 3,
+      "warn": 5
+    },
+    "window_hours": 24,
+    "anti_spam_hours": 12
+  },
+  "services": {
+    "zeus-gateway": {
+      "baseline_nrestarts": 0,
+      "baseline_timestamp": "2026-04-27T13:51:58.736970Z",
+      "window_start": "2026-04-27T13:51:58.736970Z",
+      "last_alert_sent": null,
+      "last_alert_level": null
+    },
+    "atena-gateway": {
+      "baseline_nrestarts": 0,
+      "baseline_timestamp": "2026-04-27T13:51:58.736970Z",
+      "window_start": "2026-04-27T13:51:58.736970Z",
+      "last_alert_sent": null,
+      "last_alert_level": null
+    },
+    "mgs-autocommit": {
+      "baseline_nrestarts": 0,
+      "baseline_timestamp": "2026-04-27T13:51:58.736970Z",
+      "window_start": "2026-04-27T13:51:58.736970Z",
+      "last_alert_sent": null,
+      "last_alert_level": null
+    }
+  }
+}
