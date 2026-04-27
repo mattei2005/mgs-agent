@@ -56,13 +56,40 @@
       "script": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
       "log": "/root/mgs-agent/logs/monitor-service-restarts.log",
       "description": "Detecta restarts inesperados de services Hermes e alerta #alerts-infra",
-      "created": "2026-04-27"
+      "created": "2026-04-27",
+      "status": "PAUSED",
+      "paused_at": "2026-04-27T09:55:00-04:00",
+      "paused_reason": "token investigation — aguardando confirmação de estabilidade pós-fixes"
     },
     {
-      "entry": "*/5 * * * * /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1",
-      "description": "Monitor de restarts inesperados de services Hermes (zeus-gateway, atena-gateway, mgs-autocommit). Thresholds INFO(3)/WARN(5) em 24h. Anti-spam 12h por n\u00edvel.",
+      "entry": "# PAUSED 2026-04-27 (token investigation): */5 * * * * /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1",
+      "description": "Monitor de restarts inesperados de services Hermes (zeus-gateway, atena-gateway, mgs-autocommit). Thresholds INFO(3)/WARN(5) em 24h. Anti-spam 12h por nível.",
       "webhook": "Discord Webhook - Alerts Infra Channel",
-      "discord_channel_id": "1498132022634483894"
+      "discord_channel_id": "1498132022634483894",
+      "status": "PAUSED"
+    },
+    {
+      "id": "monitor-anthropic-cost",
+      "schedule": "0 12 * * *",
+      "script": "/root/mgs-agent/scripts/monitor-anthropic-cost.sh",
+      "log": "/root/mgs-agent/logs/monitor-anthropic-cost.log",
+      "description": "Monitor diário de gasto Anthropic via Admin API. Thresholds: <$5 OK (verde), $5-15 WARN (amarelo), >$15 ALERT (vermelho). Divisor=88 aplicado (bug unidade API). Posta em #alerts-infra às 08:00 EDT.",
+      "webhook": "Discord Webhook - Alerts Infra Channel",
+      "discord_channel_id": "1498132022634483894",
+      "created": "2026-04-27",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "monitor-tool-loops",
+      "schedule": "*/5 * * * *",
+      "script": "/root/mgs-agent/scripts/monitor-tool-loops.sh",
+      "log": "/root/mgs-agent/logs/monitor-tool-loops.log",
+      "description": "Detector de loops de tool_calls em sessions ativas. Varre sessions modificadas nos últimos 10min, detecta 5+ erros consecutivos da mesma tool. Anti-spam: 1 alerta por session a cada 30min. State em data/tool-loops-state.json.",
+      "webhook": "Discord Webhook - Alerts Infra Channel",
+      "discord_channel_id": "1498132022634483894",
+      "state_file": "/root/mgs-agent/data/tool-loops-state.json",
+      "created": "2026-04-27",
+      "status": "ACTIVE"
     }
   ],
   "scripts": [
