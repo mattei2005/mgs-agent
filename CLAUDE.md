@@ -63,7 +63,7 @@ Foundation complete (Phase 1 ✅). Pipeline operational in production.
 
 ### Test pending
 
-~4. **Full publish pipeline**~~ **PASSED 2026-04-23** — End-to-end REC pipeline validated in production. AIB Visa Gold (post 62008): SEO 84 🟢 / Readability 90 🟢. Multiple RECs published since then (Barclaycard Platinum, Virgin Atlantic Reward, etc.).
+~~4. **Full publish pipeline**~~ **PASSED 2026-04-23** — End-to-end REC pipeline validated in production. AIB Visa Gold (post 62008): SEO 84 🟢 / Readability 90 🟢. Multiple RECs published since then (Barclaycard Platinum, Virgin Atlantic Reward, etc.).
 
 ## Known Issues
 
