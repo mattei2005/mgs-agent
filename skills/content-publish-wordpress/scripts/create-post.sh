@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Helper para curl autenticado seguro (não expõe senha em ps aux)
+source "$(dirname "$0")/wp-curl-auth.sh"
+
 SITE_KEY="${1:?usage: create-post.sh <site_key> <post_json_path>}"
 POST_JSON="${2:?missing post_json_path}"
 LOG="/root/mgs-agent/logs/publish-wordpress.log"
@@ -42,7 +45,7 @@ if [ -n "$req_slug" ] && [ "${ALLOW_DISAMBIGUATION:-0}" != "1" ]; then
 fi
 
 tmp=$(mktemp)
-http=$(curl -sS -o "$tmp" -w '%{http_code}' -u "$user:$pass" -H "Content-Type: application/json" \
+http=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp" -w '%{http_code}' -H "Content-Type: application/json" \
   -X POST --data-binary "@$POST_JSON" "$wp/wp-json/wp/v2/posts" || echo "000")
 resp=$(cat "$tmp")
 rm -f "$tmp"
