@@ -21,6 +21,8 @@ mime="image/png"
 case "${FILENAME,,}" in
   *.jpg|*.jpeg) mime="image/jpeg" ;;
   *.webp) mime="image/webp" ;;
+  *.avif) mime="image/avif" ;;
+  *.gif) mime="image/gif" ;;
 esac
 
 tmp=$(mktemp)
