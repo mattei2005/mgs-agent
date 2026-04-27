@@ -1,0 +1,7 @@
+*/5 * * * * /root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1
+# DEPRECATED 2026-04-26: 0 10 * * * /root/mgs-agent/scripts/monitor-rec-readability.sh >> /root/mgs-agent/logs/rec-readability-monitor.log 2>&1
+# DEPRECATED 2026-04-26: 0 10 * * * /root/mgs-agent/scripts/monitor-yoast-readability-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-readability-eggbev.log 2>&1
+*/15 * * * * /root/mgs-agent/scripts/monitor-auto-push.sh >> /root/mgs-agent/logs/monitor-auto-push.log 2>&1
+0 10 * * * /root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-health-eggbev.log 2>&1
+# PAUSED 2026-04-27 (zeus offline): */15 * * * * /root/mgs-agent/scripts/check-pending-reports.sh >> /root/mgs-agent/logs/check-pending-reports.log 2>&1
+# PAUSED 2026-04-27 (token investigation): */5 * * * * /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1
