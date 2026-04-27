@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-04-26T22:26:16-04:00",
+    "updated_at": "2026-04-26T22:38:00-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_updated": "2026-04-26T22:26:16-04:00",
+    "last_updated": "2026-04-26T22:38:00-04:00",
     "updated_by": "atena"
   },
   "systemd_services": [
@@ -494,6 +494,13 @@
         "name": "yoast-score-architecture",
         "category": "wordpress",
         "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/yoast-score-architecture/SKILL.md"
+      },
+      {
+        "name": "site-health-monitor-yoast",
+        "category": "wordpress",
+        "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/site-health-monitor-yoast/SKILL.md",
+        "purpose": "padrao reutilizavel de monitor de saude Yoast por site",
+        "reference_implementation": "scripts/monitor-yoast-readability-eggbev.sh"
       }
     ],
     "zeus": [
