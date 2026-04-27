@@ -935,6 +935,12 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/shell-cron-env-export/SKILL.md",
         "purpose": "padrão canônico set -a/+a para auto-export de variáveis de .env em scripts shell rodando via cron (necessário para subprocessos como op CLI verem credenciais)",
         "reference_implementation": "scripts/monitor-auto-push.sh, scripts/monitor-yoast-health-eggbev.sh"
+      },
+      {
+        "name": "discord-managed-roles",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/discord-managed-roles/SKILL.md",
+        "purpose": "conhecimento sobre managed roles do Discord (bots) — não podem ser deletados via API; diagnóstico e alternativas"
       }
     ]
   },
