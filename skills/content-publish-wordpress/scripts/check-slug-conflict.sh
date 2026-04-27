@@ -25,7 +25,7 @@ IFS=',' read -ra TYPES <<<"$POST_TYPES"
 for pt in "${TYPES[@]}"; do
   # Attempt 1: with status=any,trash,auto-draft
   tmp=$(mktemp)
-  http=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp" -w \'%{http_code}\' \
+  http=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp" -w '%{http_code}' \
     "$wp/wp-json/wp/v2/$pt?slug=$slug_enc&status=any,trash,auto-draft&per_page=20" 2>/dev/null || echo "000")
   body=$(cat "$tmp")
   rm -f "$tmp"
@@ -33,8 +33,7 @@ for pt in "${TYPES[@]}"; do
   # Retry without status filter if the first call rejected it (e.g. media doesn't accept auto-draft)
   if [ "${http:0:1}" != "2" ]; then
     tmp=$(mktemp)
-    http=$(curl -sS -o "$tmp" -w '%{http_code}' \
-      -u "$user:$pass" \
+    http=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp" -w '%{http_code}' \
       "$wp/wp-json/wp/v2/$pt?slug=$slug_enc&per_page=20" 2>/dev/null || echo "000")
     body=$(cat "$tmp")
     rm -f "$tmp"
