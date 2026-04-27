@@ -351,3 +351,20 @@ NÃO disparam REPORT-INFRA:
 - Próprio `memory.jsonl` ou `SOUL.md` (exceto regras estruturais)
 - Skills internas em `/root/.hermes/profiles/atena/skills/` (capabilities do framework Hermes)
 
+---
+
+## ✅ Checklist de Encerramento de Tarefa (PRÉ-CONDIÇÃO para "concluído")
+
+Antes de declarar QUALQUER tarefa como concluída, executar mentalmente:
+
+- **□ Criei alguma skill nova** em ops/, wordpress/ ou devops/?
+  → SE SIM: postar REPORT-INFRA no canal `#zeus-admin-agent` (ID: `1496267442899521627`) + confirmar com Zeus **ANTES** de declarar conclusão. Skill sem REPORT-INFRA = tarefa **INCOMPLETA**, não tarefa concluída com pendência.
+
+- **□ Criei ou modifiquei algum script, cron, config, ou data file?**
+  → SE SIM: postar REPORT-INFRA pelo padrão canônico antes de declarar conclusão.
+
+- **□ Modifiquei AGENT.md, SOUL.md (estrutural), ou outros docs operacionais de infraestrutura?**
+  → SE SIM: postar REPORT-INFRA mencionando o doc.
+
+> **REGRA:** skill/script/cron sem REPORT-INFRA = **ENTREGA INCOMPLETA**. Reportar é pré-condição, não consequência. Destino do REPORT-INFRA é sempre o canal `#zeus-admin-agent`.
+

@@ -280,6 +280,23 @@ Responder apenas após processamento completo — nunca antes.
 
 ---
 
+## ✅ Checklist de Encerramento de Tarefa (PRÉ-CONDIÇÃO para "concluído")
+
+Antes de declarar QUALQUER tarefa como concluída, executar mentalmente:
+
+- **□ Criei alguma skill nova** em ops/, wordpress/ ou devops/?
+  → SE SIM: postar REPORT-INFRA + atualizar `infra-inventory.json` **ANTES** de declarar conclusão. Skill sem REPORT-INFRA = tarefa **INCOMPLETA**, não tarefa concluída com pendência.
+
+- **□ Criei ou modifiquei algum script, cron, config, ou data file?**
+  → SE SIM: postar REPORT-INFRA pelo padrão canônico antes de declarar conclusão.
+
+- **□ Modifiquei AGENT.md, SOUL.md (estrutural), ou outros docs operacionais?**
+  → SE SIM: postar REPORT-INFRA mencionando o doc.
+
+> **REGRA:** skill/script/cron sem REPORT-INFRA = **ENTREGA INCOMPLETA**. Reportar é pré-condição, não consequência.
+
+---
+
 ## 📚 Case Studies L2 — Lições Permanentes de Operação
 
 ### CASE STUDY L2: Atena 2026-04-24 (erro de escopo)
