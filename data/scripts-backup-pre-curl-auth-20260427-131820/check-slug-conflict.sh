@@ -4,9 +4,6 @@ set -e
 # Load env vars (OP_DEFAULT_VAULT, etc.) — runs under systemd/cron too
 [ -f /root/mgs-agent/.env ] && set -a && . /root/mgs-agent/.env && set +a
 
-# Helper para curl autenticado seguro (não expõe senha em ps aux)
-source "$(dirname "$0")/wp-curl-auth.sh"
-
 SITE_KEY="${1:?usage: check-slug-conflict.sh <site_key> <slug> [post_types_csv]}"
 SLUG="${2:?missing slug}"
 POST_TYPES="${3:-posts,media}"
@@ -25,7 +22,8 @@ IFS=',' read -ra TYPES <<<"$POST_TYPES"
 for pt in "${TYPES[@]}"; do
   # Attempt 1: with status=any,trash,auto-draft
   tmp=$(mktemp)
-  http=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp" -w \'%{http_code}\' \
+  http=$(curl -sS -o "$tmp" -w '%{http_code}' \
+    -u "$user:$pass" \
     "$wp/wp-json/wp/v2/$pt?slug=$slug_enc&status=any,trash,auto-draft&per_page=20" 2>/dev/null || echo "000")
   body=$(cat "$tmp")
   rm -f "$tmp"
