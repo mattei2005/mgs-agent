@@ -502,11 +502,11 @@ def delta_str(dr, da, dg, first_seo=False):
 
 # Cabeçalho
 headers = {
-    "baseline": f"📊 **[YOAST] Baseline eggbev ({date_display})**",
-    "weekly":   f"📅 **[YOAST] Relatório semanal eggbev ({date_display})**",
-    "alert":    f"⚠️ **[YOAST] ALERTA degradação — eggbev ({date_display})**",
+    "baseline": f"📊 **[EGGBEV.COM] [YOAST] Baseline ({date_display})**",
+    "weekly":   f"📅 **[EGGBEV.COM] [YOAST] Relatório semanal ({date_display})**",
+    "alert":    f"⚠️ **[EGGBEV.COM] [YOAST] ALERTA degradação ({date_display})**",
 }
-header = headers.get(post_type, f"📊 **[YOAST] Saúde eggbev ({date_display})**")
+header = headers.get(post_type, f"📊 **[EGGBEV.COM] [YOAST] Saúde ({date_display})**")
 
 lines = [
     header,
