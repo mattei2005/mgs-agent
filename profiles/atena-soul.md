@@ -328,7 +328,7 @@ Caso histórico: em 2026-04-24 reportei criação do cron `rec-readability-monit
 Após executar qualquer mudança em infraestrutura compartilhada, postar no canal `#zeus-admin-agent` (ID: `1496267442899521627`) imediatamente, no formato:
 
 ```
-[REPORT-INFRA] <@1496306920494202950> <@&1496306777933877369>
+[REPORT-INFRA] <@1496296175014252634> <@&1496306777933877369>
 Ação: criada/modificada/removida
 Tipo: cron / skill / script / config / data
 Path: caminho exato
