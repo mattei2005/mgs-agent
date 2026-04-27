@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Helper para curl autenticado seguro (não expõe senha em ps aux)
+source "$(dirname "$0")/wp-curl-auth.sh"
+
 SITE_KEY="${1:?usage: resolve-term.sh <site_key> <taxonomy> <name> [strict]}"
 TAX="${2:?missing taxonomy (categories|tags)}"
 NAME="${3:?missing name}"
@@ -18,7 +21,7 @@ pass=$(jq -r '.password' <<<"$creds")
 
 search=$(jq -rn --arg n "$NAME" '$n|@uri')
 tmp_list=$(mktemp)
-h_list=$(curl -sS -o "$tmp_list" -w '%{http_code}' -u "$user:$pass" "$wp/wp-json/wp/v2/$TAX?search=$search&per_page=100" || echo "000")
+h_list=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp_list" -w '%{http_code}' "$wp/wp-json/wp/v2/$TAX?search=$search&per_page=100" || echo "000")
 list=$(cat "$tmp_list")
 rm -f "$tmp_list"
 
@@ -46,7 +49,7 @@ fi
 
 body=$(jq -n --arg n "$NAME" '{name:$n}')
 tmp_c=$(mktemp)
-h_c=$(curl -sS -o "$tmp_c" -w '%{http_code}' -u "$user:$pass" -H "Content-Type: application/json" \
+h_c=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp_c" -w '%{http_code}' -H "Content-Type: application/json" \
   -X POST -d "$body" "$wp/wp-json/wp/v2/$TAX" || echo "000")
 resp=$(cat "$tmp_c")
 rm -f "$tmp_c"
