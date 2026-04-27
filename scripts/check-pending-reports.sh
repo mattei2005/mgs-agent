@@ -105,7 +105,7 @@ print(alerted.get('${skill_key}', {}).get('alerted_at', ''))
 " 2>/dev/null || true)
 
             if [[ -n "$was_alerted" ]]; then
-                RESOLVED_SKILLS+=("${skill_key}:${skill_full_path}")
+                RESOLVED_SKILLS+=("${skill_key}|${skill_full_path}")
                 echo "${LOG_PREFIX} RESOLVIDO: ${skill_key} agora está no inventário"
             fi
         else
