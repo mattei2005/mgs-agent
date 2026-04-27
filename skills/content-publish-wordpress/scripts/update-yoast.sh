@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Helper para curl autenticado seguro (não expõe senha em ps aux)
+source "$(dirname "$0")/wp-curl-auth.sh"
+
 SITE_KEY="${1:?usage: update-yoast.sh <site_key> <post_id> <yoast_json_path> [verify]}"
 POST_ID="${2:?missing post_id}"
 YOAST_JSON="${3:?missing yoast_json_path}"
@@ -19,7 +22,7 @@ pass=$(jq -r '.password' <<<"$creds")
 # PUT 1: only meta
 meta_only=$(jq '{meta: .meta}' "$YOAST_JSON")
 tmp1=$(mktemp)
-h1=$(curl -sS -o "$tmp1" -w '%{http_code}' -u "$user:$pass" -H "Content-Type: application/json" \
+h1=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp1" -w '%{http_code}' -H "Content-Type: application/json" \
   -X PUT -d "$meta_only" "$wp/wp-json/wp/v2/posts/$POST_ID" || echo "000")
 r1=$(cat "$tmp1")
 rm -f "$tmp1"
@@ -40,7 +43,7 @@ sleep 2
 # PUT 2: title + content + meta to trigger save_post
 full=$(jq '{title: .title, content: .content, meta: .meta}' "$YOAST_JSON")
 tmp2=$(mktemp)
-h2=$(curl -sS -o "$tmp2" -w '%{http_code}' -u "$user:$pass" -H "Content-Type: application/json" \
+h2=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp2" -w '%{http_code}' -H "Content-Type: application/json" \
   -X PUT -d "$full" "$wp/wp-json/wp/v2/posts/$POST_ID" || echo "000")
 r2=$(cat "$tmp2")
 rm -f "$tmp2"
@@ -59,7 +62,7 @@ fi
 if [ -n "$VERIFY" ]; then
   sleep 1
   tmp3=$(mktemp)
-  h3=$(curl -sS -o "$tmp3" -w '%{http_code}' -u "$user:$pass" "$wp/wp-json/wp/v2/posts/$POST_ID?context=edit" || echo "000")
+  h3=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp3" -w '%{http_code}' "$wp/wp-json/wp/v2/posts/$POST_ID?context=edit" || echo "000")
   got=$(cat "$tmp3")
   rm -f "$tmp3"
 
