@@ -286,6 +286,12 @@ Após criar os artefatos, atualizar manualmente 3 seções do inventário:
 
 1. **`notify_on_complete=true` envia output bruto diretamente no canal Discord** — ao rodar scripts com `terminal(background=true, notify_on_complete=true)`, a plataforma Hermes entrega automaticamente o output completo do processo no canal assim que termina, **sem passar pelo agente**. Isso polui o canal com logs brutos. Usar sempre `process(action='wait')` ou `process(action='poll')` manualmente e sumarizar o resultado em 1-2 linhas. Nunca usar `notify_on_complete=true` para processos verbosos no canal de conversa.
 
+   **Causa raiz mais profunda:** mesmo *sem* `notify_on_complete=true`, o gateway Hermes tem um watcher assíncrono que entrega o output de *qualquer* background process no canal quando `background_process_notifications != "off"`. Configurável em:
+   - `~/.hermes/profiles/zeus/config.yaml` → `display.background_process_notifications: error` (só alerta em falha)
+   - Env var: `HERMES_BACKGROUND_NOTIFICATIONS=error`
+   
+   Modos disponíveis: `all` (padrão — sempre entrega), `result` (só ao terminar), `error` (só se exit ≠ 0), `off` (silêncio total). O modo `error` é o ideal para o canal Zeus: silêncio em sucesso, alerta em falha. Código em `gateway/run.py` → `_load_background_notifications_mode()`.
+
 2. **`os.environ` em `execute_code` não propaga para `terminal()`** — variáveis setadas com `os.environ[...] = ...` em Python NÃO chegam nos subprocessos do `terminal()`. Para credenciais 1Password dentro de `execute_code`, chamar `terminal("op item get ... --reveal")` diretamente e usar o output como string Python. Não tentar setar via `os.environ` e usar em `terminal()` subsequente.
 
 2. **Campo do webhook no 1Password é `webhook_url`, não `url`** — o item "Discord Webhook - Zeus Channel" tem campo `label=webhook_url`. Usar `--fields label=webhook_url --reveal` (não `--fields label=url`).
