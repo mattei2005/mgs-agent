@@ -43,23 +43,30 @@ log "Data: ${NOW_DATE} | Dia semana: ${DAY_OF_WEEK}"
 # ── Credenciais ───────────────────────────────────────────────────────────────
 log "Buscando credenciais via 1Password..."
 
-WEBHOOK_URL="$(op item get 'Discord Webhook - MGS Alerts Channel' \
-    --vault 'MGS Conteúdo' \
-    --fields label=webhook_url \
-    --reveal 2>/dev/null)"
+# Retry helper: 3 tentativas com 2s de espera entre elas
+# Necessário porque runs consecutivos rápidos podem causar rate-limit transitório do op CLI
+op_get_retry() {
+    local item="$1" vault="$2" field="$3"
+    local val="" attempt=0
+    while [[ $attempt -lt 3 ]]; do
+        val="$(op item get "$item" --vault "$vault" --fields "$field" --reveal 2>/dev/null)" || true
+        [[ -n "$val" ]] && echo "$val" && return 0
+        attempt=$(( attempt + 1 ))
+        [[ $attempt -lt 3 ]] && sleep 2
+    done
+    return 1
+}
 
-S03_PASS="$(op item get 'Runcloud Server 03 - 46.4.95.117- zeus Acesso' \
-    --vault 'MGS Conteúdo' --fields password --reveal 2>/dev/null)"
-
-S01_PASS="$(op item get 'Runcloud Server 01 - 162.55.28.178- zeus Acesso' \
-    --vault 'MGS Conteúdo' --fields password --reveal 2>/dev/null)"
+WEBHOOK_URL="$(op_get_retry 'Discord Webhook - MGS Alerts Channel' 'MGS Conteúdo' 'label=webhook_url')" || true
+S03_PASS="$(op_get_retry 'Runcloud Server 03 - 46.4.95.117- zeus Acesso' 'MGS Conteúdo' 'password')" || true
+S01_PASS="$(op_get_retry 'Runcloud Server 01 - 162.55.28.178- zeus Acesso' 'MGS Conteúdo' 'password')" || true
 
 if [[ -z "$WEBHOOK_URL" ]]; then
-    log "ERRO CRÍTICO: Webhook URL vazio — abortando"
+    log "ERRO CRÍTICO: Webhook URL vazio após 3 tentativas — abortando"
     exit 1
 fi
 if [[ -z "$S03_PASS" || -z "$S01_PASS" ]]; then
-    log "ERRO CRÍTICO: Credenciais SSH vazias — abortando"
+    log "ERRO CRÍTICO: Credenciais SSH vazias após 3 tentativas — abortando"
     exit 1
 fi
 log "Credenciais OK."
