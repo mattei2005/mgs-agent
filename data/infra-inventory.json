@@ -928,6 +928,13 @@
         "name": "writing-plans",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/writing-plans/SKILL.md"
+      },
+      {
+        "name": "shell-cron-credentials",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/shell-cron-credentials/SKILL.md",
+        "purpose": "padrão canônico set -a/+a para scripts shell que leem credenciais via .env em ambiente cron — garante export para subprocessos como op, curl, etc.",
+        "reference_implementation": "scripts/monitor-auto-push.sh, scripts/monitor-yoast-health-eggbev.sh"
       }
     ]
   },
