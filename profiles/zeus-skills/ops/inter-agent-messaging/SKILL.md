@@ -33,7 +33,7 @@ Após editar o `.env`, **reiniciar o agente destino** para carregar a variável.
 | **Zeus** | `1496296175014252634` | `1496267442899521627` (`#zeus-admin-agent`) |
 | **Atena** | `1496306920494202950` | `1496267571543019653` (`#atena-content-agent`) |
 
-> ⚠️ **Atenção:** O ID do Zeus bot (`1496296175014252634`) é diferente do ID da Atena bot (`1496306920494202950`). Os últimos dígitos diferem — confirmar via API antes de usar em produção.
+> ⚠️ **Atenção:** Os IDs são diferentes nos últimos dígitos — confirmar via API se houver dúvida. Zeus bot ID (`1496296175014252634`) é o que Atena usa no REPORT-INFRA para acionar Zeus. Atena bot ID (`1496306920494202950`) é o que Zeus usa ao enviar mensagens para Atena.
 
 Para descobrir o ID de um bot via API:
 ```bash
@@ -94,6 +94,24 @@ for m in s.get('messages', []):
 ```
 
 Ou simplesmente aguardar o Rodolfo ver a resposta no canal `#atena-content-agent`.
+
+## Formato REPORT-INFRA (Atena → Zeus)
+
+Quando Atena reporta mudanças de infra ao canal `#zeus-admin-agent`, o formato canônico usa **dois mentions**: bot user do Zeus (para ativar `DISCORD_ALLOW_BOTS=mentions`) + role (para destaque visual):
+
+```
+[REPORT-INFRA] <@1496296175014252634> <@&1496306777933877369>
+Ação: criada/modificada/removida
+Tipo: cron / skill / script / config / data
+Path: caminho exato
+Motivo: contexto
+Evidência: hash de commit ou output de comando
+```
+
+Zeus responde com máximo 2 linhas:
+- `✅ Registrado.` — sem ação adicional
+- `✅ Registrado. Inventário atualizado (commit XXXX).` — quando infra-inventory.json foi atualizado
+- `❌ Erro ao processar: {motivo}`
 
 ## Pitfalls
 
