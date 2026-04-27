@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
+    "description": "Invent\u00e1rio de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
     "updated_at": "2026-04-26T23:33:00-04:00",
     "generated_by": "infra-discovery.sh",
     "last_updated": "2026-04-26T23:33:00-04:00",
@@ -26,29 +26,37 @@
     },
     {
       "entry": "# DEPRECATED 2026-04-26: 0 10 * * * /root/mgs-agent/scripts/monitor-rec-readability.sh >> /root/mgs-agent/logs/rec-readability-monitor.log 2>&1",
-      "description": "DEPRECATED — substituído por monitor-yoast-readability-eggbev.sh em 2026-04-26"
+      "description": "DEPRECATED \u2014 substitu\u00eddo por monitor-yoast-readability-eggbev.sh em 2026-04-26"
     },
     {
       "entry": "*/15 * * * * /root/mgs-agent/scripts/monitor-auto-push.sh >> /root/mgs-agent/logs/monitor-auto-push.log 2>&1",
-      "description": "Monitor de falhas no auto-push. Detecta START sem OK correspondente, erros explícitos. Alerta Discord se consecutive_failures >= 3.",
+      "description": "Monitor de falhas no auto-push. Detecta START sem OK correspondente, erros expl\u00edcitos. Alerta Discord se consecutive_failures >= 3.",
       "webhook": "Discord Webhook - Alerts Infra Channel",
       "discord_channel_id": "1498132022634483894"
     },
     {
       "entry": "# DEPRECATED 2026-04-26: 0 10 * * * /root/mgs-agent/scripts/monitor-yoast-readability-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-readability-eggbev.log 2>&1",
-      "description": "DEPRECATED — substituído por monitor-yoast-health-eggbev.sh em 2026-04-26"
+      "description": "DEPRECATED \u2014 substitu\u00eddo por monitor-yoast-health-eggbev.sh em 2026-04-26"
     },
     {
       "entry": "0 10 * * * /root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-health-eggbev.log 2>&1",
-      "description": "Monitor de saude Yoast (SEO + Readability) — eggbev. Lógica OR: alerta se qualquer metrica degradar. Relatorio semanal toda segunda. Estado em data/yoast-health-eggbev-snapshots.json. | Webhook: Alerts Yoast Channel (migrado 2026-04-27)",
+      "description": "Monitor de saude Yoast (SEO + Readability) \u2014 eggbev. L\u00f3gica OR: alerta se qualquer metrica degradar. Relatorio semanal toda segunda. Estado em data/yoast-health-eggbev-snapshots.json. | Webhook: Alerts Yoast Channel (migrado 2026-04-27)",
       "webhook": "Discord Webhook - Alerts Yoast Channel",
       "discord_channel_id": "1498193722871910550"
     },
     {
       "entry": "*/15 * * * * /root/mgs-agent/scripts/check-pending-reports.sh >> /root/mgs-agent/logs/check-pending-reports.log 2>&1",
-      "description": "Monitor de skills MGS sem REPORT-INFRA. Detecta skills nos dirs ops/wordpress/devops sem entrada no inventário. Anti-spam 24h. Alerta no canal Zeus.",
+      "description": "Monitor de skills MGS sem REPORT-INFRA. Detecta skills nos dirs ops/wordpress/devops sem entrada no invent\u00e1rio. Anti-spam 24h. Alerta no canal Zeus.",
       "webhook": "Discord Webhook - Zeus Channel",
       "discord_channel_id": "1496267442899521627"
+    },
+    {
+      "id": "monitor-service-restarts",
+      "schedule": "*/5 * * * *",
+      "script": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
+      "log": "/root/mgs-agent/logs/monitor-service-restarts.log",
+      "description": "Detecta restarts inesperados de services Hermes e alerta #alerts-infra",
+      "created": "2026-04-27"
     }
   ],
   "scripts": [
@@ -107,13 +115,13 @@
       "path": "/root/mgs-agent/scripts/monitor-yoast-readability-eggbev.sh",
       "size_bytes": 15642,
       "modified_at": "2026-04-26T22:24:00-04:00",
-      "description": "Monitor de saude readability Yoast — eggbev. Varre wp_yoast_indexable via SSH S03->S01. Webhook Discord MGS Alerts Channel."
+      "description": "Monitor de saude readability Yoast \u2014 eggbev. Varre wp_yoast_indexable via SSH S03->S01. Webhook Discord MGS Alerts Channel."
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh",
       "size_bytes": 21979,
       "modified_at": "2026-04-26T23:28:00-04:00",
-      "description": "Monitor de saude Yoast (SEO + Readability) — eggbev. Substitui monitor-yoast-readability-eggbev.sh."
+      "description": "Monitor de saude Yoast (SEO + Readability) \u2014 eggbev. Substitui monitor-yoast-readability-eggbev.sh."
     }
   ],
   "skills_mgs": [
@@ -943,14 +951,14 @@
         "name": "shell-cron-env-export",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/shell-cron-env-export/SKILL.md",
-        "purpose": "padrão canônico set -a/+a para auto-export de variáveis de .env em scripts shell rodando via cron (necessário para subprocessos como op CLI verem credenciais)",
+        "purpose": "padr\u00e3o can\u00f4nico set -a/+a para auto-export de vari\u00e1veis de .env em scripts shell rodando via cron (necess\u00e1rio para subprocessos como op CLI verem credenciais)",
         "reference_implementation": "scripts/monitor-auto-push.sh, scripts/monitor-yoast-health-eggbev.sh"
       },
       {
         "name": "discord-managed-roles",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/discord-managed-roles/SKILL.md",
-        "purpose": "Diagnóstico e limitações de roles 'managed' criados automaticamente pelo Discord ao adicionar bots. Não podem ser deletados via API (HTTP 400). Alternativa: remover o bot.",
+        "purpose": "Diagn\u00f3stico e limita\u00e7\u00f5es de roles 'managed' criados automaticamente pelo Discord ao adicionar bots. N\u00e3o podem ser deletados via API (HTTP 400). Alternativa: remover o bot.",
         "created_at": "2026-04-27T01:00:29-04:00",
         "created_by": "zeus"
       },
@@ -958,10 +966,11 @@
         "name": "mgs-pending-report-monitor",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-pending-report-monitor/SKILL.md",
-        "purpose": "Monitor automático que detecta skills MGS criadas sem REPORT-INFRA no inventário. Alerta via Discord webhook, anti-spam 24h, resolução automática. Parte do sistema defense-in-depth para rastreabilidade de infra.",
+        "purpose": "Monitor autom\u00e1tico que detecta skills MGS criadas sem REPORT-INFRA no invent\u00e1rio. Alerta via Discord webhook, anti-spam 24h, resolu\u00e7\u00e3o autom\u00e1tica. Parte do sistema defense-in-depth para rastreabilidade de infra.",
         "created_at": "2026-04-27T01:29:08-04:00",
         "created_by": "zeus"
-      }
+      },
+      "service-restart-monitor"
     ]
   },
   "data_files": [
@@ -1068,7 +1077,7 @@
       "sites": {
         "eggbev.com": {
           "status": "deployed",
-          "role": "canário",
+          "role": "can\u00e1rio",
           "method": "ssh_zeus"
         },
         "runcloud_26_sites": {
@@ -1119,16 +1128,16 @@
             "wpcode_cleanup": "done_dev_externo_2026_04_26",
             "wp_file_manager_status": "removed_by_zeus_2026_04_26",
             "exit_checklist_complete": true,
-            "note": "Recuperação após incidente 25/04. Dev externo limpou arquivo quebrado, Rodolfo deployou v4 manualmente via WP File Manager. MD5 validado via Get-FileHash no Windows. EXIT CHECKLIST 100% completo após remoção do WP File Manager via REST API (Zeus, 2026-04-26)."
+            "note": "Recupera\u00e7\u00e3o ap\u00f3s incidente 25/04. Dev externo limpou arquivo quebrado, Rodolfo deployou v4 manualmente via WP File Manager. MD5 validado via Get-FileHash no Windows. EXIT CHECKLIST 100% completo ap\u00f3s remo\u00e7\u00e3o do WP File Manager via REST API (Zeus, 2026-04-26)."
           }
         },
         "fincgriffin.com": {
           "status": "deployed",
           "method": "manual_rodolfo",
-          "note": "servidor terceiros sem acesso programático"
+          "note": "servidor terceiros sem acesso program\u00e1tico"
         }
       },
-      "notes": "Fase 2.5 COMPLETA. 32/32 sites com mu-plugin v4. EXIT CHECKLIST 100% completo em todos os 4 sites SFTP (openzed.com incluindo remoção do WP File Manager 2026-04-26). Pós-mortem do incidente openzed registrado em SOUL.md (CASE STUDY 2026-04-25 + 2026-04-26). Skill wp-rest-mu-plugin-deploy patched: PASSO 6 numerado, EXIT CHECKLIST 8 itens, FASES FORMAIS, código PHP inline antigo removido. Template canônico em skills/ops/wp-rest-mu-plugin-deploy/templates/wpcode-snippet-template.php"
+      "notes": "Fase 2.5 COMPLETA. 32/32 sites com mu-plugin v4. EXIT CHECKLIST 100% completo em todos os 4 sites SFTP (openzed.com incluindo remo\u00e7\u00e3o do WP File Manager 2026-04-26). P\u00f3s-mortem do incidente openzed registrado em SOUL.md (CASE STUDY 2026-04-25 + 2026-04-26). Skill wp-rest-mu-plugin-deploy patched: PASSO 6 numerado, EXIT CHECKLIST 8 itens, FASES FORMAIS, c\u00f3digo PHP inline antigo removido. Template can\u00f4nico em skills/ops/wp-rest-mu-plugin-deploy/templates/wpcode-snippet-template.php"
     }
   }
 }
