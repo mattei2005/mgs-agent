@@ -30,7 +30,9 @@
     },
     {
       "entry": "*/15 * * * * /root/mgs-agent/scripts/monitor-auto-push.sh >> /root/mgs-agent/logs/monitor-auto-push.log 2>&1",
-      "description": "Monitor de falhas no auto-push. Detecta START sem OK correspondente, erros explícitos. Alerta Discord se consecutive_failures >= 3."
+      "description": "Monitor de falhas no auto-push. Detecta START sem OK correspondente, erros explícitos. Alerta Discord se consecutive_failures >= 3.",
+      "webhook": "Discord Webhook - Alerts Infra Channel",
+      "discord_channel_id": "1498132022634483894"
     },
     {
       "entry": "# DEPRECATED 2026-04-26: 0 10 * * * /root/mgs-agent/scripts/monitor-yoast-readability-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-readability-eggbev.log 2>&1",
@@ -38,7 +40,15 @@
     },
     {
       "entry": "0 10 * * * /root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-health-eggbev.log 2>&1",
-      "description": "Monitor de saude Yoast (SEO + Readability) — eggbev. Lógica OR: alerta se qualquer metrica degradar. Relatorio semanal toda segunda. Estado em data/yoast-health-eggbev-snapshots.json."
+      "description": "Monitor de saude Yoast (SEO + Readability) — eggbev. Lógica OR: alerta se qualquer metrica degradar. Relatorio semanal toda segunda. Estado em data/yoast-health-eggbev-snapshots.json. | Webhook: Alerts Yoast Channel (migrado 2026-04-27)",
+      "webhook": "Discord Webhook - Alerts Yoast Channel",
+      "discord_channel_id": "1498193722871910550"
+    },
+    {
+      "entry": "*/15 * * * * /root/mgs-agent/scripts/check-pending-reports.sh >> /root/mgs-agent/logs/check-pending-reports.log 2>&1",
+      "description": "Monitor de skills MGS sem REPORT-INFRA. Detecta skills nos dirs ops/wordpress/devops sem entrada no inventário. Anti-spam 24h. Alerta no canal Zeus.",
+      "webhook": "Discord Webhook - Zeus Channel",
+      "discord_channel_id": "1496267442899521627"
     }
   ],
   "scripts": [
