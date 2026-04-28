@@ -112,7 +112,7 @@ echo "$PUBLICATIONS" | grep "create-post OK" | while IFS= read -r LINE; do
     TOPIC=""
   else
     STARTED_TS=$(echo "$STARTED_LOCAL" | awk '{print $1, $2}' | sed 's/,.*$//')
-    STARTED_AT_UTC=$(date -u -d "$STARTED_TS America/New_York" '+%Y-%m-%dT%H:%M:%SZ')
+    STARTED_AT_UTC=$(TZ=America/New_York date -d "$STARTED_TS" -u '+%Y-%m-%dT%H:%M:%SZ')
     TOPIC=$(echo "$STARTED_LOCAL" | grep -oE "msg='[^']+'" | sed "s/^msg='//; s/'$//" | head -c 200)
     log "  started_at (UTC): $STARTED_AT_UTC"
     log "  topic: $TOPIC"
