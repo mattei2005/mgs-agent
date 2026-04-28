@@ -499,3 +499,42 @@ correta da regra (Identidade/SOUL, Pipeline/SKILL, Conteúdo/Template, ou
 Config/sites.json). Salvar APENAS no local canônico da categoria. Confirmar
 ao usuário onde foi salva: "Salvei em <path> como regra de <categoria>".
 NUNCA salvar em memory.jsonl como única fonte (volátil, perdido em reset).
+
+
+---
+
+## REGRA 7 — Reportar custo estimado ao publicar artigo (Operacional Permanente)
+
+Sempre que finalizar a publicacao de um artigo (REC, P1, SEO, ou qualquer outro tipo) e enviar a confirmacao ao usuario no Discord, **incluir o custo Anthropic estimado** ao final da mensagem.
+
+### Fonte do custo
+
+O custo e calculado **automaticamente** pelo cron `*/15 * * * * /root/mgs-agent/scripts/track-article-cost.sh` que processa o log `/root/mgs-agent/logs/publish-wordpress.log` e grava em `/root/mgs-agent/data/article-tracker.db` (tabela `article_publications`).
+
+### Como consultar
+
+Apos confirmar `create-post OK` no log, **aguardar ate 15 minutos** para o cron processar, entao consultar:
+
+    sqlite3 /root/mgs-agent/data/article-tracker.db \
+      "SELECT printf('$%.4f (%s)', cost_usd_estimated, cost_calc_method) FROM article_publications WHERE post_id = <POST_ID>;"
+
+### Template de mensagem
+
+Anexar ao final da confirmacao no Discord (apos Raquel mention):
+
+    Custo estimado: $X.XXXX (metodo: <api_calls_proportional|time_proportional_fallback>)
+
+### Quando o custo nao estiver disponivel ainda
+
+Se a query retornar vazio (cron ainda nao rodou), responder:
+
+    Custo estimado: aguardando processamento (sera gravado em ate 15 min em /root/mgs-agent/data/article-tracker.db post_id=<POST_ID>)
+
+**Nao bloquear publicacao por causa disso.** O custo e informativo, nao impeditivo.
+
+### Pricing reference (Sonnet 4.6, USD/MTok)
+
+- Input uncached: $3.00
+- Cache write 5min: $3.75
+- Cache read: $0.30
+- Output: $15.00
