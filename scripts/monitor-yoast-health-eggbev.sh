@@ -23,7 +23,7 @@
 # Log:      /root/mgs-agent/logs/monitor-yoast-health-eggbev.log
 #
 # Arquitetura: cron Linux standalone (não Hermes interno)
-# Substitui:   monitor-yoast-readability-eggbev.sh (deprecated 2026-04-26)
+# Substitui:   monitor-yoast-readability-eggbev.sh (deprecated 2026-04-26 — em scripts/deprecated/)
 # =============================================================================
 
 set -euo pipefail
