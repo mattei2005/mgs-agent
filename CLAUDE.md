@@ -67,7 +67,7 @@ Foundation complete (Phase 1 ✅). Pipeline operational in production.
 
 ## Known Issues
 
-- `scripts/search-card-image.sh` tier 2 occasionally returns a 48×48 placeholder/icon as a false-positive card image. Needs a minimum-dimension / aspect-ratio guard before accepting the candidate at tier 2.
+- ~~`scripts/search-card-image.sh` tier 2 occasionally returns a 48×48 placeholder/icon as a false-positive card image~~ **RESOLVED** — Dimension filter (`CARD_MIN_WIDTH=200`, `CARD_MIN_HEIGHT=100`) added in commit `8cd3310`. ImageMagick `identify` validates each candidate before acceptance.
 
 ## Test 4 Closure — AIB Visa Gold on eggbev.com
 
@@ -304,4 +304,4 @@ working on this repository. State is reconstructed from:
 ## Next Steps
 
 - Execute Test 4 (end-to-end): run `content-generate-rec` against a real card slug, verify the WP post is created with correct article body, featured image, and Yoast meta.
-- Add minimum-dimension filter to `scripts/search-card-image.sh` tier 2 to eliminate the 48×48 false-positive.
+- ~~Add minimum-dimension filter to `scripts/search-card-image.sh` tier 2~~ **DONE** (commit `8cd3310`).
