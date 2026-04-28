@@ -94,6 +94,12 @@ SELF-CHECK BEFORE FINALISING (readability):
 LINK LOGIC:
 All buttons must point to: https://[domain]/apply-now-gb-cc-[card-name-slug]
 
+BUTTON COLOR (CRITICAL):
+Always use the site default button color (default_button_color from data/sites.json).
+Never use the brand color of the card issuer (e.g., never use Santander red #ec0000
+or HSBC red without explicit authorization). Brand color overrides are visual identity
+changes and require explicit approval from Rodolfo (L2). Default = consistency.
+
 TAGS (CRITICAL):
 The tags array MUST include the following mandatory tags (always lowercase,
 in this exact order first):
@@ -101,11 +107,13 @@ in this exact order first):
 2. "cc" — the vertical (credit card)
 3. "gb" — the country code
 4. The card name slug
+5. "lang_en" — language tag (EN for this template; ES, DE, TR, etc. in other templates)
+6. "atena_agent" — author tag (always added when Atena publishes the article)
 
-After the 4 mandatory tags, add 2-4 additional SEO tags relevant to the card's
+After the 6 mandatory tags, add 2-4 additional SEO tags relevant to the card's
 main benefits or category (e.g. "travel credit card", "airport lounge access",
 "no annual fee", "cashback rewards").
-Total: 6-8 tags per article.
+Total: 8-10 tags per article.
 
 ## Subtitle Generation (MANDATORY)
 
