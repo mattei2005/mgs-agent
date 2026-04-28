@@ -258,7 +258,7 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   office, elegant home interior, rooftop with skyline, airport lounge,
   contemporary coworking, urban street with cinematic blur, city at sunset,
   nighttime metropolis).
-- Output: 16:9 PNG at `/tmp/featured-<slug>.png`.
+- Output: 16:9 JPEG at `/tmp/featured-<slug>.jpg` (auto-compressed via `compress-image.sh`: PNG 2 MB → JPEG ~150 KB, quality 88, max 1280px wide).
 - Upload via `upload-image.sh` → `{id, source_url, mime_type}` — this is the
   **featured_media**.
 - VALIDATE: the card in the composition must be visually identical to the
@@ -622,7 +622,7 @@ Emit a summary to the user:
   → downloads best-candidate card image, prints
   `{path, mime, tier}` where tier is 1–4 (see step 3).
 - `scripts/generate-featured-image.sh <slug> <card_image_path>`
-  → Gemini composition; saves `/tmp/featured-<slug>.png` and prints
+  → Gemini composition; saves `/tmp/featured-<slug>.jpg` (auto-compressed) and prints
   `{path, scene}`.
 - `scripts/validate-article.sh <html_file>` → word-count validator
   (exit 0 if 450–500, exit 1 otherwise; prints count + status).
