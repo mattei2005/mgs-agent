@@ -23,9 +23,9 @@ Gerado por: `/root/mgs-agent/scripts/infra-discovery.sh`
 
 ```bash
 /root/mgs-agent/scripts/infra-discovery.sh
-# Saída esperada:
-# Serviços: 3 | Crons: 1 | Scripts: 9
-# skills_mgs: 2 | skills_hermes: "atena=77, zeus=80"
+# Saída esperada (atualizado 2026-04-27):
+# Serviços: 3 | Crons: 7 | Scripts: ~12
+# skills_mgs: 2 | skills_hermes: "atena=78, zeus=87"
 ```
 
 O auto-commit watcher detecta a mudança e faz push para GitHub automaticamente.
@@ -70,10 +70,13 @@ jq '.crons | length' /root/mgs-agent/data/infra-inventory.json
 | `skills_mgs` | `/root/mgs-agent/skills/` | Skills do **projeto MGS** | ✅ Sim |
 | `skills_hermes` | `/root/.hermes/profiles/{agent}/skills/` | Capabilities internas do **framework Hermes** | ❌ Não |
 
-**Números de referência (2026-04-24):**
+**Números de referência (2026-04-27):**
 - `skills_mgs`: 2 (content-generate-rec, content-publish-wordpress)
-- `skills_hermes.atena`: ~77
-- `skills_hermes.zeus`: ~80
+- `skills_hermes.atena`: 78
+- `skills_hermes.zeus`: 87
+
+**Para contagem de sites/webapps MGS (não coberto por esta SKILL):**
+Ver `docs/site-counting.md`. Resumo: **32 sites MGS oficiais** (fonte: `context/sites.md`), 27 rodam em RunCloud, 5 em SFTP. Os 107 webapps RunCloud incluem não-MGS (sites pessoais, parceiros, staging) — não são fonte de verdade pra contagem MGS.
 
 ## Processo após receber REPORT-INFRA
 
