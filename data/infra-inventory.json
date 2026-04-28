@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-04-28T02:31:04-04:00",
+    "updated_at": "2026-04-28T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -90,8 +90,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
-      "size_bytes": 4333,
-      "modified_at": "2026-04-28T02:21:04-04:00"
+      "size_bytes": 6907,
+      "modified_at": "2026-04-28T02:43:25-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
@@ -998,15 +998,15 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 260,
-      "md5": "6b3ca3315511df9c49458fbf7b0a616a",
-      "modified_at": "2026-04-28T02:22:31-04:00"
+      "size_bytes": 334,
+      "md5": "62843605feaae753e752b2c785252b9e",
+      "modified_at": "2026-04-28T02:47:11-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 37082,
-      "md5": "7380e2485c87c49fdba23daac34dd744",
-      "modified_at": "2026-04-27T22:16:37-04:00"
+      "size_bytes": 37583,
+      "md5": "eb35e21ab952c668563e320668d07a89",
+      "modified_at": "2026-04-28T02:31:06-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1048,7 +1048,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
       "md5": "9c8910a204f5bd15de0bbaf449ce5943",
-      "modified_at": "2026-04-28T02:30:02-04:00"
+      "modified_at": "2026-04-28T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
