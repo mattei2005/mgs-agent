@@ -50,4 +50,4 @@ if [ -z "$id" ]; then
 fi
 
 echo "[$(date -Iseconds)] upload-image OK http=$http site=$SITE_KEY file=$FILENAME id=$id" >>"$LOG"
-jq -n --argjson id "$id" --arg url "$url" '{id:$id, source_url:$url}'
+jq -n --argjson id "$id" --arg url "$url" --arg mime "$mime" '{id:$id, source_url:$url, mime_type:$mime}'

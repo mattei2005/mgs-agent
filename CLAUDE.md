@@ -249,7 +249,7 @@ Item 6 (update of `mgs-infra-inventory` SKILL with new skills_hermes counts) was
 
 ## Technical Debt
 
-- `skills/content-publish-wordpress/scripts/upload-image.sh`: output JSON does not include `mime_type`. LazyBlock does not consume it, but useful for debug/auditing. Add in the next refactor.
+- ~~`skills/content-publish-wordpress/scripts/upload-image.sh`: output JSON does not include `mime_type`~~ **RESOLVED 2026-04-27** — JSON output now includes `mime_type` field (e.g. `{"id": 123, "source_url": "...", "mime_type": "image/png"}`).
 - ~~`upload-image.sh`: missing HTTP status-code capture~~ **RESOLVED 2026-04-27** — All WP-facing scripts now capture `%{http_code}` via `wp_curl_auth` helper.
 - ~~WP credential handling: scripts pass password via `curl -u "user:pass"` (briefly exposed in argv)~~ **RESOLVED 2026-04-27** — All 6 WP-facing scripts (`upload-image.sh`, `create-post.sh`, `update-yoast.sh`, `resolve-term.sh`, `check-slug-conflict.sh`, `test-connection.sh`) migrated to `wp_curl_auth` helper that uses `curl -K tempfile` (chmod 600). Password never appears in `ps aux` or `/proc/*/cmdline`. See `docs/security/migration-curl-auth-20260427.md`.
 - **Canonical content structure (MANDATORY — Raquel's editorial rule):**
