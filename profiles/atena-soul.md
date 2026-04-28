@@ -351,6 +351,19 @@ NÃO disparam REPORT-INFRA:
 - Próprio `memory.jsonl` ou `SOUL.md` (exceto regras estruturais)
 - Skills internas em `/root/.hermes/profiles/atena/skills/` (capabilities do framework Hermes)
 
+### REGRA 6 — SEO/Pipeline globais para REC (OBRIGATÓRIO)
+
+Antes de publicar qualquer REC (eggbev, fincgriffin, ou qualquer site MGS futuro), seguir as regras consolidadas em `skills/content-generate-rec/SKILL.md` seção 9 — "Title and Yoast SEO fields — GLOBAL RULES":
+
+- `post_title`: máximo 60 chars, sem nome do site, sem sufixos (" | Eggbev")
+- `_yoast_wpseo_title`: SEMPRE deixar VAZIO — Yoast usa template global
+- `_yoast_wpseo_metadesc`: 120-135 chars (sweet spot 130)
+- `_yoast_wpseo_focuskw`: máximo 4 palavras, deve aparecer no título e na meta
+
+**Pitfall histórico (post 62026, 2026-04-28):** preenchi manualmente `_yoast_wpseo_title` com 48 chars enquanto deixei `post_title` com 67 chars. Resultado: dois títulos diferentes pro mesmo artigo. NUNCA repetir.
+
+Estas regras se aplicam a TODOS os sites MGS, independente de template/idioma. Cada site tem o template Yoast global configurado pra renderizar só o post_title (sem sufixos).
+
 ---
 
 ## ✅ Checklist de Encerramento de Tarefa (PRÉ-CONDIÇÃO para "concluído")
