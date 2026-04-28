@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-04-27T22:16:35-04:00",
+    "updated_at": "2026-04-28T02:31:04-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -42,6 +42,9 @@
     },
     {
       "entry": "0 5 * * * /root/mgs-agent/scripts/infra-discovery.sh >> /root/mgs-agent/logs/infra-discovery.log 2>&1"
+    },
+    {
+      "entry": "0 8 * * * /root/mgs-agent/scripts/monitor-hermes-updates.sh >> /root/mgs-agent/logs/monitor-hermes-updates.log 2>&1"
     }
   ],
   "scripts": [
@@ -86,6 +89,11 @@
       "modified_at": "2026-04-27T00:24:32-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
+      "size_bytes": 4333,
+      "modified_at": "2026-04-28T02:21:04-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
       "size_bytes": 5247,
       "modified_at": "2026-04-27T09:51:54-04:00"
@@ -107,13 +115,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
-      "size_bytes": 2714,
-      "modified_at": "2026-04-23T12:03:33-04:00"
+      "size_bytes": 2738,
+      "modified_at": "2026-04-27T22:27:00-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sync-souls.sh",
-      "size_bytes": 1573,
-      "modified_at": "2026-04-26T16:11:06-04:00"
+      "size_bytes": 2168,
+      "modified_at": "2026-04-27T23:07:40-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
@@ -989,10 +997,16 @@
       "modified_at": "2026-04-21T11:28:16-04:00"
     },
     {
+      "path": "/root/mgs-agent/data/hermes-version-state.json",
+      "size_bytes": 260,
+      "md5": "6b3ca3315511df9c49458fbf7b0a616a",
+      "modified_at": "2026-04-28T02:22:31-04:00"
+    },
+    {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 45405,
-      "md5": "f779d0c54ccb16aa58359d809ecdb4c5",
-      "modified_at": "2026-04-27T12:17:25-04:00"
+      "size_bytes": 37082,
+      "md5": "7380e2485c87c49fdba23daac34dd744",
+      "modified_at": "2026-04-27T22:16:37-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1034,7 +1048,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
       "md5": "9c8910a204f5bd15de0bbaf449ce5943",
-      "modified_at": "2026-04-27T22:15:01-04:00"
+      "modified_at": "2026-04-28T02:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1062,9 +1076,9 @@
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "size_bytes": 25105,
-      "md5": "c083b93baf16f93c930b905f67567be4",
-      "modified_at": "2026-04-27T12:05:01-04:00"
+      "size_bytes": 26045,
+      "md5": "24f84236a45234ffac25bb253fca89dd",
+      "modified_at": "2026-04-27T23:41:11-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
