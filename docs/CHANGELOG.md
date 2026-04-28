@@ -1,5 +1,66 @@
 # CHANGELOG — MGS Agent
 
+## 2026-04-28 — Article Cost Tracking System
+
+### Adicionado
+- **Script `/root/mgs-agent/scripts/track-article-cost.sh`** (10705 bytes, executavel)
+  Calcula custo Anthropic por artigo publicado via WordPress.
+  Le `logs/publish-wordpress.log` buscando `create-post OK`, cruza com
+  `/root/.hermes/profiles/atena/logs/agent.log` para detectar started_at,
+  consulta Anthropic Admin API (usage_report/messages com bucket_width=1h
+  e group_by=api_key_id), e calcula custo proporcional.
+
+- **SQLite `/root/mgs-agent/data/article-tracker.db`**
+  Tabelas: `article_publications` (18 colunas), `cost_method_log`.
+  Indexes em site e started_at.
+
+- **Cron */15min** adicionado ao crontab (10 entradas totais)
+  `*/15 * * * * /root/mgs-agent/scripts/track-article-cost.sh`
+
+- **REGRA 7 na SOUL Atena** (`/root/.hermes/profiles/atena/SOUL.md`, L506)
+  Atena passa a reportar custo estimado ao confirmar publicacao no Discord.
+
+### Pricing Sonnet 4.6 hardcoded (USD/MTok)
+- Input uncached: $3.00
+- Cache write 5min: $3.75
+- Cache read: $0.30
+- Output: $15.00
+
+### Metodo de calculo
+Principal: `api_calls_proportional`
+  cost = bucket_total_cost x article_api_calls / bucket_total_api_calls
+
+Fallback: `time_proportional_fallback`
+  cost = bucket_total_cost x article_duration / bucket_window_seconds
+
+### Validacao retroativa
+Processou 14 posts historicos do `publish-wordpress.log`:
+- 8 posts: api_calls_proportional ($0.83-$8.92)
+- 4 posts: time_proportional_fallback (sem api_calls no agent.log)
+- 4 posts: $0.00 (>7 dias, sem dados na Admin API)
+
+Total acumulado: $40.47 em 15 artigos (avg $2.70/artigo).
+
+### Outliers identificados
+- Post 61965 ($12.17): duration 35326s — detector pegou inbound message
+  da manha cedo; valor inflado, aceito como "best effort historico"
+- Post 61955 ($2.27): duration 25109s — mesmo problema
+
+### Limitacoes conhecidas
+- Anthropic Admin API tem retencao ~7 dias; posts mais antigos retornam $0
+- Detector de started_at usa primeira inbound message anterior; pode
+  inflar duration se houve gap entre conversa e publicacao
+- Cron processa ate 15min apos publish; mensagem da Atena pode ficar
+  "aguardando processamento" no Discord nesse intervalo
+
+### Arquivos modificados
+- `scripts/track-article-cost.sh` (novo)
+- `data/article-tracker.db` (novo)
+- `crontab -l` (entrada nova)
+- `/root/.hermes/profiles/atena/SOUL.md` (501 -> 540 linhas, REGRA 7)
+- `docs/CHANGELOG.md` (este arquivo)
+
+---
 Registro cronológico de mudanças operacionais na infraestrutura de agentes (Zeus, Atena) e integrações MGS.
 
 ## 2026-04-28
