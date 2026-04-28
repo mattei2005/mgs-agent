@@ -217,7 +217,7 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
 > **Always crop before upload** — white borders render poorly in the LazyBlock card component.
 
 - Upload via `content-publish-wordpress/scripts/upload-image.sh` →
-  `{id, source_url}` — this is the **card_media**.
+  `{id, source_url, mime_type}` — this is the **card_media**.
 
 > **PITFALL — WordPress auto-renames duplicate filenames (CRITICAL):**
 > When you upload a file with a name that already exists in the media library,
