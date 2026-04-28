@@ -299,5 +299,5 @@ bash scripts/monitor-yoast-health-{site}.sh
 
 - Script: `/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh`
 - Snapshot: `/root/mgs-agent/data/yoast-health-eggbev-snapshots.json`
-- Old script (deprecated): `/root/mgs-agent/scripts/monitor-yoast-readability-eggbev.sh`
+- Old script (deprecated): `/root/mgs-agent/scripts/deprecated/monitor-yoast-readability-eggbev.sh`
 - Pattern reference: `/root/mgs-agent/scripts/monitor-auto-push.sh` (Zeus pattern)
