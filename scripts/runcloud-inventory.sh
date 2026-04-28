@@ -49,7 +49,7 @@ for server_id, server_name in servers:
         data = api_get(f"/servers/{server_id}/webapps", f"?perPage=40&page={page}")
         webapps = data.get('data', [])
         all_webapps.extend(webapps)
-        total_pages = data.get('meta', {}).get('pagination', {}).get('total_pages', 1)
+        total_pages = data.get('meta', {}).get('lastPage', 1)  # fix Item 10 — campo correto da API RunCloud
         if page >= total_pages:
             break
         page += 1
