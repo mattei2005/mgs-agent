@@ -120,6 +120,11 @@ while [ "$attempt" -le "$max_attempts" ]; do
   fi
 
   echo "$img_b64" | base64 -d >"$out"
+
+  # Comprimir PNG -> JPEG (reduz ~94%, qualidade visual mantida)
+  SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+  out=$("$SCRIPT_DIR/compress-image.sh" "$out" featured)
+
   echo "[$(date -Iseconds)] generate-featured-image OK slug=$SLUG scene=$scene attempt=$attempt path=$out" >>"$LOG"
   jq -n --arg p "$out" --arg s "$scene" --argjson a "$attempt" '{path:$p, scene:$s, attempt:$a}'
   exit 0
