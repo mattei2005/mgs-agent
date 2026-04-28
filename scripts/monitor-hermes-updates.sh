@@ -168,7 +168,7 @@ if [[ ${#MESSAGE} -gt 1900 ]]; then
   MESSAGE="${MESSAGE:0:1850}"$'\n\n[...truncated. Ver release notes completo no link acima]'
 fi
 
-PAYLOAD=$(jq -n --arg c "$MESSAGE" '{content: $c}')
+PAYLOAD=$(jq -n --arg c "$MESSAGE" '{content: $c, flags: 4}')
 HTTP_CODE=$(curl -s -o /tmp/hermes-monitor-response.json -w '%{http_code}' \
   -X POST "$WEBHOOK" \
   -H "Content-Type: application/json" \
