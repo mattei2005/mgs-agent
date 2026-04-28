@@ -17,6 +17,19 @@ for agent in zeus atena; do
     fi
 done
 
+# ── Config.yaml sync (Atena + Zeus) ────────────────────────────────────────
+# Adicionado 2026-04-27 (Item 23) — sincroniza configs do Hermes
+# Mantem permissao 600 no destino
+for agent in zeus atena; do
+    SOURCE="$PROFILES_DIR/$agent/config.yaml"
+    TARGET="$TARGET_DIR/$agent-config.yaml"
+    if [ -f "$SOURCE" ] && { [ ! -f "$TARGET" ] || [ "$SOURCE" -nt "$TARGET" ]; }; then
+        cp "$SOURCE" "$TARGET"
+        chmod 600 "$TARGET"
+        echo "$(date -Iseconds) synced $agent config"
+    fi
+done
+
 # ── Skills MGS-específicas sync ────────────────────────────────────────────
 # Zeus: ops/ (skills de infra e deploy MGS)
 mkdir -p "$TARGET_DIR/zeus-skills"
