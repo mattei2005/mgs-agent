@@ -112,6 +112,23 @@ future run will slot in between (1) and (2) above.
 > Do NOT waste time adjusting headers or trying multiple curl approaches —
 > if the first curl attempt returns 0 bytes, switch to the browser immediately.
 
+> **PITFALL — Capital One UK: homepage is the only reliable data source (CRITICAL):**
+> Capital One UK (`capitalone.co.uk`) returns "page not available" for almost all
+> subpage URLs including `/credit-cards/classic`, `/credit-cards/classic-credit-card`,
+> and `/credit-cards/credit-cards-for-bad-credit`. The **homepage** (`https://www.capitalone.co.uk/`)
+> is the only page that reliably loads and contains key card data (credit limits,
+> APR, benefits) for both the Classic Card and Balance Transfer Card.
+>
+> Card image: use `https://www.capitalone.co.uk/cloud_assets/webp/contactless-card-image.webp`
+> (1154×724px RGBA webp) — clean isolated card shot, no hands. Download with a
+> `Referer: https://www.capitalone.co.uk/` header. The image has no white borders
+> so the crop step returns identical bounds (still run it for correctness).
+>
+> RGBA handling: when the downloaded image is RGBA mode (webp with alpha), the
+> pixel loop must unpack 4 channels: `r, g, b, a = arr[x, y]`. Also gate on
+> `a > 20` to skip fully transparent pixels before checking brightness thresholds.
+> Otherwise the crop bounds will be wrong.
+
 > **PITFALL — Barclays vs Barclaycard: two separate domains (CRITICAL):**
 > Barclays Bank (`barclays.co.uk`) and Barclaycard (`barclaycard.co.uk`) are
 > separate UK entities with separate card pages. Credit cards branded
