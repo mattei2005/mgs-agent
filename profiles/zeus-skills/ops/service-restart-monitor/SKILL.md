@@ -104,6 +104,11 @@ tail -20 /root/mgs-agent/logs/monitor-service-restarts.log
 
 Webhook no 1Password vault `MGS Conteúdo`, item `Discord Webhook - Alerts Infra Channel`, field `webhook_url`.
 
+## Bug history — lições de monitors com state file
+
+- **2026-04-27:** `check-pending-reports.sh` (monitor similar) entrou em loop infinito (~120 msgs em 8h). Root causes: (1) separador `':'` no array `RESOLVED_SKILLS[]` colide com `agent:skill` — usar `|`. (2) state não era atualizado antes do curl → reentrada no mesmo branch. Fix: separador `|`, `declare -A RESOLVED_DEDUP` para dedup, persistir state **antes** da ação externa.
+- **Regra universal para monitors com state:** detectar mudança de estado SEM atualizar o estado = loop garantido. Persistência deve ocorrer ANTES da ação externa (curl, mensagem). Ver CASE STUDY L2 no SOUL.md do Zeus (2026-04-27).
+
 ## REPORT-INFRA obrigatório
 
 Qualquer modificação ao script ou state file deve gerar `[REPORT-INFRA]` no canal `#zeus-admin-agent` conforme padrão canônico, mencionando `<@1496296175014252634>` (bot Zeus) e `<@344196393512075265>` (Rodolfo).
