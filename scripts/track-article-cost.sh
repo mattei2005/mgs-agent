@@ -122,6 +122,17 @@ echo "$PUBLICATIONS" | grep "create-post OK" | while IFS= read -r LINE; do
   EPOCH_START=$(date -u -d "$STARTED_AT_UTC" '+%s')
   EPOCH_END=$(date -u -d "$ENDED_AT_UTC" '+%s')
   DURATION_SEC=$((EPOCH_END - EPOCH_START))
+
+  # Safeguard: cap duration at 2h (7200s) — evita inflar custo quando
+  # detector pega inbound message nao relacionada do inicio do dia.
+  if [[ "$DURATION_SEC" -gt 7200 ]]; then
+    log "  WARN: detected duration ${DURATION_SEC}s > 7200s cap — using ended_at - 2h"
+    EPOCH_START=$((EPOCH_END - 7200))
+    STARTED_AT_UTC=$(date -u -d "@$EPOCH_START" '+%Y-%m-%dT%H:%M:%SZ')
+    DURATION_SEC=7200
+    log "  started_at (capped): $STARTED_AT_UTC"
+  fi
+
   log "  duration_sec: $DURATION_SEC"
   
   # Find session_id, api_calls, response_chars from agent.log
