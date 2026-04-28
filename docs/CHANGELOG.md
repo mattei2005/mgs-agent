@@ -2,6 +2,42 @@
 
 Registro cronológico de mudanças operacionais na infraestrutura de agentes (Zeus, Atena) e integrações MGS.
 
+## 2026-04-28
+
+### Performance, monitoring e tech debt zerada
+
+**Pacote PERFORMANCE — Compactação de imagens:**
+- Criado `skills/content-generate-rec/scripts/compress-image.sh` (Pillow 10.2.0 + ImageMagick 6.9.12).
+  - **Featured images:** PNG → JPEG quality=88, max 1280px wide. Redução validada: **2.2 MB → 128 KB (94% menor)**.
+  - **Card images:** mantidas PNG transparente (preserva transparência pro LazyBlock).
+- `generate-featured-image.sh` integrado: chama `compress-image.sh` automaticamente após Gemini gerar PNG.
+- SKILL `content-generate-rec` atualizada (L261 + L625) refletindo novo formato JPEG.
+- Imagify Plus continua ativo no WP como fallback de otimização adicional.
+
+**Pacote MONITORING — Hermes upstream watcher:**
+- Criado `scripts/monitor-hermes-updates.sh` — monitora updates do Hermes Agent (NousResearch) sem custo de tokens.
+- Lógica: `git fetch origin --tags` → compara HEAD local vs `origin/main` → notifica via Discord webhook (canal `#alerts-infra`) se há commits novos.
+- Detecta breaking changes nos commit messages (`grep BREAKING`) e flagga visualmente.
+- Estado salvo em `data/hermes-version-state.json` (anti-spam: não re-notifica mesmo commit).
+- Cron diário 8 AM EST (servidor `America/New_York`, DST automático). Total crons: 8 → **9**.
+- Primeiro teste manual: 776 commits behind, tag upstream `v2026.4.23` (zero breaking changes). Webhook validado.
+
+**Pacote SAÚDE — Tech debt zerada:**
+- `mime_type` adicionado ao output JSON do `upload-image.sh` (`{id, source_url, mime_type}`). SKILL atualizada (L220 + L262). Era a última Technical Debt aberta no CLAUDE.md.
+- Auditoria `set -a/+a` confirmada: TODOS os 7 scripts em cron ativo já têm o anti-loop fix preventivo.
+- Bug 48×48 placeholder no `search-card-image.sh`: investigação confirmou que já estava resolvido em commit `8cd3310` (filtro `CARD_MIN_WIDTH=200`, `CARD_MIN_HEIGHT=100` + ImageMagick `identify`). CLAUDE.md L70 e L307 atualizados marcando como RESOLVED.
+
+**Pacote DOC — Correções de timezone:**
+- CHANGELOG L47 corrigido: "10 UTC" → "10 AM EST (servidor America/New_York, DST automático)". Servidor está em America/New_York desde sempre — referências antigas a "UTC" eram erro de documentação.
+- Confirmado que NÃO há outras menções erradas de UTC fora de libs externas (lodash, loglevel — refere ao Unix epoch, sempre UTC por especificação).
+
+**Validações:**
+- Auto-discovery (`infra-discovery.sh`) confirmou 9 crons + 17 scripts (antes era 8/16).
+- Pipeline novo de imagens validado visualmente por Rodolfo (servidor HTTP temporário em `/tmp/`).
+- Tech debt aberta: **0**.
+
+---
+
 ## 2026-04-27
 
 ### Cleanup operacional + segurança curl-auth + organização do repo
