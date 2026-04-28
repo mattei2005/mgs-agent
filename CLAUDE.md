@@ -213,6 +213,40 @@ Event types sent to Zeus:
 - unauthorized_attempt (agent, user, request)
 - health_heartbeat (agent, uptime) — periodic
 
+## ⚠️ CRITICAL: Skills Sync Direction (Canonical vs Mirror)
+
+**Sync direction is UNIDIRECTIONAL** (`/root/.hermes/` → `profiles/`):
+
+```
+FONTE DE VERDADE (canonical):     /root/.hermes/profiles/{zeus,atena}/skills/
+                                          |
+                                          |  rsync -a --delete  (every 5 min via cron)
+                                          v
+MIRROR VERSIONADO (git-tracked):  /root/mgs-agent/profiles/{zeus,atena}-skills/
+```
+
+**Driven by:** `scripts/sync-souls.sh`
+**Cron:** `*/5 * * * *`
+
+### Rules
+1. **EDIT IN CANONICAL ONLY.** Never edit `profiles/{zeus,atena}-skills/` — `rsync --delete` will overwrite within 5 min.
+2. **After editing canonical**, run `bash scripts/sync-souls.sh` to push to mirror immediately (otherwise wait up to 5 min for cron).
+3. **Both paths must show identical md5** after sync.
+
+### Validation command
+```bash
+md5sum /root/.hermes/profiles/zeus/skills/ops/<skill>/SKILL.md \
+       /root/mgs-agent/profiles/zeus-skills/ops/<skill>/SKILL.md
+```
+
+### Why this matters
+The mirror exists for git versioning + GitHub backup. The canonical is what Zeus/Atena actually load at runtime. Editing the mirror is wasted work — it gets overwritten.
+
+### Lesson learned (2026-04-27)
+Item 6 (update of `mgs-infra-inventory` SKILL with new skills_hermes counts) was applied to the mirror first, got reverted by `rsync --delete` within 5 min. Fix: edit canonical, then force sync.
+
+---
+
 ## Technical Debt
 
 - `skills/content-publish-wordpress/scripts/upload-image.sh`: output JSON does not include `mime_type`. LazyBlock does not consume it, but useful for debug/auditing. Add in the next refactor.
