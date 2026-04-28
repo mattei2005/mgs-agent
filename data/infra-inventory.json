@@ -132,6 +132,13 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-score-updater.js",
       "size_bytes": 5045,
       "modified_at": "2026-04-24T18:36:54-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/track-article-cost.sh",
+      "description": "Tracking de custo Anthropic por artigo via Admin API (api_calls_proportional). Cron */15min.",
+      "created": "2026-04-28",
+      "last_modified": "2026-04-28",
+      "notes": "Cap 2h em duration_sec adicionado (safeguard outliers). Backup: /tmp/track-article-cost.sh.bak-pre-2h-cap-v2"
     }
   ],
   "skills_mgs": [
@@ -1085,6 +1092,12 @@
       "size_bytes": 30043,
       "md5": "14a5cb6a7144a58fd64e7909f4226745",
       "modified_at": "2026-04-27T13:40:01-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/article-tracker.db",
+      "description": "SQLite — tracking custo Anthropic por artigo publicado. Schema: article_id, cost_usd, api_calls, duration_sec, etc.",
+      "created": "2026-04-28",
+      "notes": "15 registros iniciais, $34.29 acumulado (avg $2.29/artigo após cap 2h). Alimentado por track-article-cost.sh."
     }
   ],
   "mu_plugin_canonical": {
