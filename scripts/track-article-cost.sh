@@ -189,28 +189,58 @@ echo "$PUBLICATIONS" | grep "create-post OK" | while IFS= read -r LINE; do
     (.uncached * $p1 + .cache_5m * $p2 + .cache_read * $p3 + .output * $p4) / 1000000')
   log "  Bucket total cost (full window): \$$BUCKET_COST"
   
-  # Calculate proportional: how many seconds were Atena actively working in this bucket?
-  # Conservative: use article's own duration vs total bucket window seconds
-  BUCKET_START_EPOCH=$(date -u -d "$HOUR_START" '+%s')
-  BUCKET_END_EPOCH=$(date -u -d "$HOUR_END" '+%s')
-  BUCKET_TOTAL_SEC=$((BUCKET_END_EPOCH - BUCKET_START_EPOCH))
+  # === OPÇÃO B: proporção por api_calls do bucket ===
+  # Sum all api_calls reported in "response ready" lines within hour bucket window
+  HOUR_START_LOCAL=$(TZ=America/New_York date -d "$HOUR_START" '+%Y-%m-%d %H:%M:%S')
+  HOUR_END_LOCAL=$(TZ=America/New_York date -d "$HOUR_END" '+%Y-%m-%d %H:%M:%S')
   
-  # Proportional cost: article duration / bucket window
-  if [[ "$BUCKET_TOTAL_SEC" -gt 0 ]] && [[ "$DURATION_SEC" -gt 0 ]]; then
+  BUCKET_API_CALLS=$(awk -v start="$HOUR_START_LOCAL" -v end="$HOUR_END_LOCAL" '
+    /response ready/ {
+      ts = substr($0, 1, 19)
+      if (ts >= start && ts < end) {
+        match($0, /api_calls=[0-9]+/)
+        if (RSTART) {
+          calls = substr($0, RSTART+10, RLENGTH-10)
+          total += calls + 0
+        }
+      }
+    }
+    END { print (total ? total : 0) }
+  ' "$AGENT_LOG")
+  
+  log "  Bucket api_calls total: $BUCKET_API_CALLS  Article api_calls: $API_CALLS"
+  
+  # Calculate cost via api_calls proportion
+  if [[ "$BUCKET_API_CALLS" -gt 0 ]] && [[ "$API_CALLS" -gt 0 ]]; then
+    COST=$(awk -v bcost="$BUCKET_COST" -v ac="$API_CALLS" -v bac="$BUCKET_API_CALLS" \
+      'BEGIN { printf "%.6f", bcost * ac / bac }')
+    METHOD="api_calls_proportional"
+  elif [[ "$DURATION_SEC" -gt 0 ]]; then
+    # Fallback to duration proportional
+    BUCKET_START_EPOCH=$(date -u -d "$HOUR_START" '+%s')
+    BUCKET_END_EPOCH=$(date -u -d "$HOUR_END" '+%s')
+    BUCKET_TOTAL_SEC=$((BUCKET_END_EPOCH - BUCKET_START_EPOCH))
     COST=$(awk -v bcost="$BUCKET_COST" -v dur="$DURATION_SEC" -v btot="$BUCKET_TOTAL_SEC" \
       'BEGIN { printf "%.6f", bcost * dur / btot }')
-    METHOD="proportional"
+    METHOD="time_proportional_fallback"
   else
     COST="0"
     METHOD="estimated"
   fi
-  log "  Article cost (proportional): \$$COST  method=$METHOD"
+  log "  Article cost: \$$COST  method=$METHOD"
   
-  # Article-specific token allocation (proportional)
-  ARTICLE_UNCACHED=$(awk -v t="$UNCACHED" -v dur="$DURATION_SEC" -v btot="$BUCKET_TOTAL_SEC" 'BEGIN { printf "%d", t * dur / btot }')
-  ARTICLE_CACHE_5M=$(awk -v t="$CACHE_5M" -v dur="$DURATION_SEC" -v btot="$BUCKET_TOTAL_SEC" 'BEGIN { printf "%d", t * dur / btot }')
-  ARTICLE_CACHE_READ=$(awk -v t="$CACHE_READ" -v dur="$DURATION_SEC" -v btot="$BUCKET_TOTAL_SEC" 'BEGIN { printf "%d", t * dur / btot }')
-  ARTICLE_OUTPUT=$(awk -v t="$OUTPUT" -v dur="$DURATION_SEC" -v btot="$BUCKET_TOTAL_SEC" 'BEGIN { printf "%d", t * dur / btot }')
+  # Article-specific token allocation (same proportion as cost)
+  if [[ "$BUCKET_API_CALLS" -gt 0 ]] && [[ "$API_CALLS" -gt 0 ]]; then
+    ARTICLE_UNCACHED=$(awk -v t="$UNCACHED" -v ac="$API_CALLS" -v bac="$BUCKET_API_CALLS" 'BEGIN { printf "%d", t * ac / bac }')
+    ARTICLE_CACHE_5M=$(awk -v t="$CACHE_5M" -v ac="$API_CALLS" -v bac="$BUCKET_API_CALLS" 'BEGIN { printf "%d", t * ac / bac }')
+    ARTICLE_CACHE_READ=$(awk -v t="$CACHE_READ" -v ac="$API_CALLS" -v bac="$BUCKET_API_CALLS" 'BEGIN { printf "%d", t * ac / bac }')
+    ARTICLE_OUTPUT=$(awk -v t="$OUTPUT" -v ac="$API_CALLS" -v bac="$BUCKET_API_CALLS" 'BEGIN { printf "%d", t * ac / bac }')
+  else
+    ARTICLE_UNCACHED="$UNCACHED"
+    ARTICLE_CACHE_5M="$CACHE_5M"
+    ARTICLE_CACHE_READ="$CACHE_READ"
+    ARTICLE_OUTPUT="$OUTPUT"
+  fi
   
   # Build raw_log_excerpt
   EXCERPT=$(printf 'pub_log: %s\nresp_log: %s' "$LINE" "${RESPONSE_LINE:-NONE}")
