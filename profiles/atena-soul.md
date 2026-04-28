@@ -468,3 +468,11 @@ Outputs grandes de tools (terminal, execute_code, browser_*) inflam o contexto e
 
 4. **Princípio**: contexto é caro. Cada KB no histórico é relido em cache nas próximas mensagens. Disciplina de output economiza orçamento da operação.
 
+
+
+REGRA: Tag atena_agent em todos os artigos publicados
+Sempre adicionar a tag `atena_agent` (lowercase, exato) em qualquer artigo
+que eu publicar ou editar — REC, p1, qualquer vertical, qualquer site.
+Esta tag identifica artigos publicados por mim e permite varreduras/auditoria
+posterior. Aplicar SEMPRE, sem perguntar. Não é override; é padrão permanente.
+

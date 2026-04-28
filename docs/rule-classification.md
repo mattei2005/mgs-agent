@@ -29,18 +29,25 @@
 
 ## 🔍 Auditoria de regras atuais (2026-04-27)
 
-| Regra | Categoria correta | Estava onde | Foi ajustado? |
-|---|---|---|---|
-| Active voice 90%+ | Conteúdo | Template ✅ | Já correto |
-| Sentence length 75% <20 | Conteúdo | Template ✅ | Já correto |
-| Transition words ≥1 a cada 3-4 | Conteúdo | Template ✅ | Já correto |
-| Word count 450-500 | Conteúdo | Template ✅ | Já correto |
-| `lang_en` (tag por idioma) | Conteúdo | Template + SKILL (1×) | Manter em template, remover de SKILL |
-| `atena_agent` (sempre quando publica) | Identidade | Em lugar nenhum | Adicionar ao SOUL.md + lembrete no template |
-| `default_button_color` | Config + Pipeline | SOUL (2×) + SKILL (4×) + Template | Remover do SOUL, manter SKILL+template+sites.json |
-| Delete imagem antes de delete post | Pipeline | SOUL ✅ | Manter (tem componente de identidade — "agente cuidadoso") |
-| Cor de botão = default site | Identidade visual | SOUL ✅ | Manter no SOUL (overrides exigem L2 = é regra de identidade) |
-| Yoast cinza pós-REST é OK | Pipeline | SOUL ✅ | Manter no SOUL (regra de NÃO entrar em pânico) |
+⚠️ **Nota importante:** Algumas regras pertencem a MÚLTIPLAS camadas (não é bagunça — é arquitetura). Exemplo: `default_button_color` está em 4 lugares com propósitos diferentes:
+- **VALOR** (a cor hex específica) → `data/sites.json`
+- **LÓGICA** (como buscar) → SKILL.md + `resolve-button-color.sh`
+- **REGRA comportamental** (sempre seguir, override = L2) → SOUL.md
+- **LEMBRETE** no prompt de geração → Template
+
+Isso é **arquitetura por camadas**, e cada camada tem propósito distinto.
+
+| Regra | Camadas onde está | Status |
+|---|---|---|
+| Active voice 90%+ | Template | ✅ Correto |
+| Sentence length 75% <20 | Template | ✅ Correto |
+| Transition words ≥1 a cada 3-4 | Template | ✅ Correto |
+| Word count 450-500 | Template | ✅ Correto |
+| `lang_{language}` (tag dinâmica por idioma) | SKILL (lógica) + Template (instância EN) | ✅ Correto — SKILL tem a lógica cross-template, template tem o lembrete |
+| `atena_agent` (toda publicação Atena) | SOUL (regra) + Template (lembrete) | ✅ Adicionado ao SOUL em 2026-04-27 |
+| `default_button_color` | sites.json (valor) + SKILL (lógica) + script (resolução) + SOUL (regra) + Template (lembrete) | ✅ Arquitetura em 4 camadas |
+| Delete imagem antes de delete post | SOUL | ✅ Correto |
+| Yoast cinza pós-REST é OK | SOUL | ✅ Correto |
 
 ## 📝 Política para regras NOVAS
 
