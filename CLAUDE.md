@@ -59,7 +59,7 @@ Foundation complete (Phase 1 ✅). Pipeline operational in production.
 
 1. **Credentials path** — 1P Service Account token + `OP_DEFAULT_VAULT` resolve both Gemini API key and WP credentials correctly.
 2. **Gemini payload transport** — base64-encoded card image (~140 KB) no longer trips the kernel `MAX_ARG_STRLEN` (128 KB / single argv entry); carried via `jq --rawfile` + `curl -d @file`.
-3. **Gemini end-to-end** — request succeeds, response parsed, PNG saved. Verified with slug `aib-visa-gold` → `/tmp/featured-aib-visa-gold.png` (1248×832, 1.87 MiB, 1 attempt, scene=nighttime metropolis). See `data/debug-featured-aib.png`.
+3. **Gemini end-to-end** — request succeeds, response parsed, PNG saved. Verified with slug `aib-visa-gold` → `/tmp/featured-aib-visa-gold.png` (1248×832, 1.87 MiB, 1 attempt, scene=nighttime metropolis).
 
 ### Test pending
 
