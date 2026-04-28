@@ -2,6 +2,85 @@
 
 Registro cronológico de mudanças operacionais na infraestrutura de agentes (Zeus, Atena) e integrações MGS.
 
+## 2026-04-27
+
+### Cleanup operacional + segurança curl-auth + organização do repo
+
+**Pacote ALTA — Segurança e correções:**
+- Migrados 6/6 scripts WP-facing para helper `wp_curl_auth` (curl -K tempfile chmod 600). Senha não aparece mais em `ps aux` ou `/proc/*/cmdline`. Migrações novas hoje: `check-slug-conflict.sh` (commit 682b8d9) + `test-connection.sh`. Ver `docs/security/migration-curl-auth-20260427.md`.
+- `update-yoast-scores.sh` movido para `scripts/deprecated/` (usava `wp yoast index --object-id` que não existe em Yoast v27.x; substituto: `skills/content-generate-rec/scripts/yoast-score-post.sh`).
+- CLAUDE.md atualizado: 2 notas de Technical Debt marcadas RESOLVED 2026-04-27, Phase 1 marcada ✅ COMPLETE, "How to Resume This Session" reescrita.
+- AGENT.md ↔ CLAUDE.md: confirmado escopos diferentes (AGENT.md = operacional dos agentes; CLAUDE.md = pipeline técnico). Convivem.
+
+**Pacote LIMPEZA SEGURA — Housekeeping:**
+- Deletado `agent-learned-skills/` (2 SKILLs duplicatas; versões canônicas em `profiles/zeus-skills/ops/`).
+- Deletado `data/cleanup-backup-20260427-121204/` (13 arquivos lixo, 7 com nomes shell-vazados commitados por engano).
+- Deletado lixo binário em `data/`: `debug-card-aib.png`, `debug-featured-aib.png` (~2 MB), `post-aib-rec.json`. Referência em CLAUDE.md L62 atualizada.
+- Deletados 4 backups `.bak` antigos sem dependência (`authorized-users.json.bak_clean`, `authorized-users.json.bak_pre_v3`, `sites.json.bak_fincgriffin_*`, `pending-reports-state.json.bak_*`). Mantido `yoast-readability-eggbev-snapshots.json` como fail-safe do health monitor.
+- Deletados 3 backups Yoast snapshots de teste do dia (`*.bak2`, `*.bak-test`, `*.bak-20260427013411`).
+- Movidos para `scripts/deprecated/`: `monitor-rec-readability.sh` + `monitor-yoast-readability-eggbev.sh` (substituídos por `monitor-yoast-health-eggbev.sh` em 26/04).
+- Deletado `package.json` órfão da raiz (yoast-scorer tem o seu próprio).
+
+**Pacote MÉDIA — Operacional:**
+- SKILL `mgs-infra-inventory` atualizada com números reais (skills_hermes: atena=78, zeus=87) — antes estava "atena=77, zeus=80" (data 24/04, desatualizado).
+- Criado `docs/site-counting.md` documentando os números: 32 sites MGS oficiais (sites.md), 27 em RunCloud, 5 em SFTP (openzed/cliquet/fincgriffin), 107 webapps RunCloud total (80 não-MGS).
+- Cron diário 5 AM adicionado para `infra-discovery.sh` (antes só rodava manual). Total crons ativos: 7 → 8.
+
+**Impacto:**
+- ~2 MB liberados do repo
+- 22 arquivos deletados, 3 movidos pra deprecated, 5+ arquivos atualizados
+- Repo significativamente mais limpo → Zeus/Atena consomem menos tokens consultando inventários
+
+---
+
+## 2026-04-26
+
+### openzed.com EXIT CHECKLIST 100% concluído
+
+- WP File Manager removido pelo Zeus em openzed.com (commit 5a0476a).
+- Post-mortem do incidente: SOUL Zeus atualizado com regra absoluta sobre base64 inventado (causa raiz: Atena gerou b64 falso ao invés de processar arquivo real). Commits a589ce1, 686b765.
+- Case study L2 adicionado ao SOUL Zeus.
+
+### `monitor-yoast-health-eggbev.sh` substitui readability monitor
+
+- Novo monitor unificado SEO + Readability (substitui `monitor-yoast-readability-eggbev.sh` e `monitor-rec-readability.sh`).
+- Cron diário 10 UTC.
+- Snapshot novo: `data/yoast-health-eggbev-snapshots.json` (formato unificado, max 90 snapshots ~3 meses).
+
+---
+
+## 2026-04-25
+
+### sync-souls.sh estendido para versionar skills MGS-específicas
+
+- Commit 2791736: `feat(sync): extend sync-souls to version MGS-specific skills`.
+- Antes: só `souls` (atena-soul.md, zeus-soul.md) sincronizavam */5min.
+- Agora: também sincroniza skills MGS-específicas em `profiles/{atena,zeus}-skills/` ↔ `/root/.hermes/profiles/{atena,zeus}/skills/`.
+- Permite versionar Git skills internas MGS (ex: `mgs-infra-inventory`, `wp-rest-mu-plugin-deploy`).
+
+### `monitor-auto-push.sh` ativado
+
+- Commit dc26b8f: detecta falhas no auto-push (commits sem `push OK`), threshold consecutive_failures >= 3.
+- State em `data/auto-push-monitor.json`. Anti-spam 2h, janela de 60min.
+- Cron */15min.
+
+---
+
+## 2026-04-24
+
+### Yoast scorer real (Node.js + @yoastseo) integrado ao pipeline
+
+- Commit 7f19c4e: `feat(yoast): add scorer Node.js lib + yoast-score-post.sh shell integration`.
+- Antes: scores Yoast eram calculados aproximadamente.
+- Agora: scores reais via `@yoast/yoastseo` v3.6 (mesma engine do plugin Yoast).
+- Tested: post 62008 (AIB Visa Gold) → SEO 84/green, Readability 90/green ✅.
+- Step 12 adicionado em `skills/content-generate-rec/SKILL.md` (uso pós-publish).
+
+### SOUL Atena: novas regras (3 + 2)
+
+- Commit fae4411: 3 regras de 2026-04-24 (image delete + button color + yoast grey).
+- Commit be8ffad: 2 regras adicionais (verificar existência física antes de operar + reportar mudanças de infra ao Zeus).
+
 ## 2026-04-22
 
 ### Fix: compression threshold dos agentes Hermes (Zeus + Atena)
