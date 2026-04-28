@@ -31,6 +31,17 @@ Registro cronológico de mudanças operacionais na infraestrutura de agentes (Ze
 - CHANGELOG L47 corrigido: "10 UTC" → "10 AM EST (servidor America/New_York, DST automático)". Servidor está em America/New_York desde sempre — referências antigas a "UTC" eram erro de documentação.
 - Confirmado que NÃO há outras menções erradas de UTC fora de libs externas (lodash, loglevel — refere ao Unix epoch, sempre UTC por especificação).
 
+**Pacote SEO/PIPELINE — Regras globais de título e Yoast consolidadas:**
+- SKILL `content-generate-rec/SKILL.md` seção 9 reescrita (L483-520) — antes era "Yoast SEO fields" genérico (3 bullets), agora é "Title and Yoast SEO fields — GLOBAL RULES (all MGS sites)" com 4 sub-seções estruturadas (`post_title`, `_yoast_wpseo_title`, `_yoast_wpseo_metadesc`, `_yoast_wpseo_focuskw`).
+- Mudanças de regra técnica:
+  - `post_title`: NOVA regra explícita — máximo 60 chars, sem nome do site, sem sufixos. Antes não documentada.
+  - `_yoast_wpseo_title`: regra MUDOU — antes "≤60 chars (hard limit)" / agora "LEAVE EMPTY" (Yoast usa template global do site).
+  - `_yoast_wpseo_metadesc`: limite MUDOU — antes "≤130 chars" / agora "120-135 chars (sweet spot 130)".
+  - `_yoast_wpseo_focuskw`: NOVA regra — máximo 4 palavras (Yoast scorer requirement). Antes só dizia "exact card name as-is".
+- PITFALL real documentado: Atena preencheu `_yoast_wpseo_title` manualmente com 48 chars enquanto `post_title` ficou com 67 chars (post 62026, eggbev.com, REC Capital One Classic). Resultado: dois títulos diferentes pro mesmo artigo.
+- SOUL Atena (canônico `/root/.hermes/profiles/atena/SOUL.md`) — REGRA 6 adicionada à seção "Regras Operacionais Permanentes" (L354), referenciando SKILL seção 9 + pitfall histórico. Sync-souls propaga pro mirror.
+- Aplicabilidade: TODOS os sites MGS atuais (eggbev, fincgriffin) e futuros (mx-cc-es, de-cc-de, tr-cc-tr, etc.) — independente de template/idioma. Cada site tem template Yoast global configurado pra renderizar só `%%title%%` (sem sufixos tipo " | Eggbev").
+
 **Validações:**
 - Auto-discovery (`infra-discovery.sh`) confirmou 9 crons + 17 scripts (antes era 8/16).
 - Pipeline novo de imagens validado visualmente por Rodolfo (servidor HTTP temporário em `/tmp/`).
