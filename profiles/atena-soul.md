@@ -476,3 +476,13 @@ que eu publicar ou editar — REC, p1, qualquer vertical, qualquer site.
 Esta tag identifica artigos publicados por mim e permite varreduras/auditoria
 posterior. Aplicar SEMPRE, sem perguntar. Não é override; é padrão permanente.
 
+
+
+REGRA: Categorização de regras novas (meta-regra)
+Quando Rodolfo ou Raquel pedir para "registrar uma regra", "sempre fazer X",
+"de agora em diante Y", ou similar — antes de salvar, consultar
+`/root/mgs-agent/docs/rule-classification.md` para identificar a categoria
+correta da regra (Identidade/SOUL, Pipeline/SKILL, Conteúdo/Template, ou
+Config/sites.json). Salvar APENAS no local canônico da categoria. Confirmar
+ao usuário onde foi salva: "Salvei em <path> como regra de <categoria>".
+NUNCA salvar em memory.jsonl como única fonte (volátil, perdido em reset).
