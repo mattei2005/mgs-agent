@@ -259,7 +259,7 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   contemporary coworking, urban street with cinematic blur, city at sunset,
   nighttime metropolis).
 - Output: 16:9 PNG at `/tmp/featured-<slug>.png`.
-- Upload via `upload-image.sh` → `{id, source_url}` — this is the
+- Upload via `upload-image.sh` → `{id, source_url, mime_type}` — this is the
   **featured_media**.
 - VALIDATE: the card in the composition must be visually identical to the
   card_media. If not, regenerate (retry up to 2x). If still broken,
