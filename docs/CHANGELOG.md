@@ -44,7 +44,7 @@ Registro cronológico de mudanças operacionais na infraestrutura de agentes (Ze
 ### `monitor-yoast-health-eggbev.sh` substitui readability monitor
 
 - Novo monitor unificado SEO + Readability (substitui `monitor-yoast-readability-eggbev.sh` e `monitor-rec-readability.sh`).
-- Cron diário 10 UTC.
+- Cron diário 10 AM EST (servidor America/New_York, DST automático).
 - Snapshot novo: `data/yoast-health-eggbev-snapshots.json` (formato unificado, max 90 snapshots ~3 meses).
 
 ---
