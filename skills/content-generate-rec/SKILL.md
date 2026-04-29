@@ -772,3 +772,109 @@ Se o DB ainda nao tiver registro do post, omitir o bloco e adicionar uma linha:
 
 Total: ~50 tokens output adicionais por REC. Negligenciavel vs custo do REC ($2-3).
 
+
+## Step 1c - CACHE LOOKUP (CRITICAL - DO BEFORE BROWSER)
+
+ANTES de pesquisar o cartao no site oficial (Step 2), SEMPRE consultar o card cache local. Cache hits economizam ~5min de browser navigation + ~$1 USD por REC.
+
+### Como consultar
+
+1. Calcular card_slug a partir do card_name (kebab-case, sem palavra "card" se redundante):
+   - "AIB Visa Gold Card" -> "aib-visa-gold"
+   - "HSBC Premier Credit Card" -> "hsbc-premier-credit-card"
+   - "Tesco Bank Clubcard" -> "tesco-bank-clubcard"
+
+2. Executar:
+
+    bash /root/mgs-agent/skills/content-generate-rec/scripts/card-cache-lookup.sh "$CARD_SLUG"
+
+Output:
+   HIT  -> JSON completo com card_name, annual_fee, apr, benefits, competitors, etc
+   MISS -> {"hit": false, "card_slug": "..."}
+
+### Decisao apos lookup
+
+**Se HIT (exit 0):**
+   - Usar dados do cache diretamente
+   - PULAR Step 2 (research do cartao via browser)
+   - PULAR Step 3 se cache tiver card_image_uploaded_url (reutilizar imagem ja no WP)
+   - Ir direto pro Step 4 (gerar featured image)
+   - Economia tipica: ~5 minutos + ~$1 USD por REC
+
+**Se MISS (exit 1):**
+   - Continuar workflow normal (Step 2 - research via browser)
+   - APOS Step 3 (download imagem), salvar tudo no cache (ver Step 2.5 abaixo)
+
+### Campos do cache que substituem browser research
+
+   annual_fee   -> usado direto (Step 2)
+   apr          -> usado direto (Step 2)
+   benefits     -> JSON array com 3-5 benefits ja extraidos
+   tag10        -> LazyBlock tag (Step 7)
+   tag2         -> LazyBlock tag (Step 7)
+   descriptor   -> LazyBlock texto (Step 7)
+   competitors  -> array com 2 cartoes pra Comparative Table
+   card_image_uploaded_url -> URL no WordPress (se HIT, pular upload)
+   card_image_uploaded_id  -> media ID (Step 7 imagem JSON)
+
+### Campos que podem estar null no cache (precisam ser preenchidos)
+
+Cache populado retroativamente pode ter alguns campos vazios. Se tag10/tag2/descriptor estao null:
+   - Atena gera baseado nos benefits do cache (rapido, sem browser)
+   - Salva no cache de novo no Step 2.5 pra proximas execucoes
+
+## Step 2.5 - CACHE SAVE (CRITICAL - APOS RESEARCH)
+
+Apos completar Step 2 (research) e Step 3 (card image upload), SEMPRE salvar dados no cache pra futuros RECs do mesmo cartao.
+
+### Quando executar
+
+   - Apos Step 3 (card image uploaded, temos uploaded_id e uploaded_url)
+   - Antes do Step 4 (featured image generation)
+
+### Como salvar
+
+1. Montar JSON com todos os campos coletados:
+
+    cat > /tmp/cache-save-${CARD_SLUG}.json << JSON
+    {
+      "card_slug": "tesco-bank-clubcard",
+      "card_name": "Tesco Bank Clubcard Credit Card",
+      "card_official_url": "https://www.tescobank.com/...",
+      "country": "gb",
+      "vertical": "cc",
+      "language": "en",
+      "annual_fee": "No annual fee",
+      "apr": "12.9% var.",
+      "benefits": ["Benefit 1...", "Benefit 2...", "Benefit 3..."],
+      "tag10": "Clubcard rewards",
+      "tag2": "No annual fee",
+      "descriptor": "Earn Clubcard points on every purchase.",
+      "competitors": [{"name": "Sainsburys Nectar"}, {"name": "Asda Money"}],
+      "card_image_local_path": "/tmp/card-tesco-bank-clubcard.jpg",
+      "card_image_url_orig": "https://www.tescobank.com/.../card.png",
+      "card_image_uploaded_id": 62033,
+      "card_image_uploaded_url": "https://eggbev.com/wp-content/.../card.jpg",
+      "ttl_days": 30,
+      "source": "browser"
+    }
+    JSON
+
+2. Salvar no cache:
+
+    bash /root/mgs-agent/skills/content-generate-rec/scripts/card-cache-save.sh /tmp/cache-save-${CARD_SLUG}.json
+
+### Politica de TTL
+
+   - Default: 30 dias
+   - Apos TTL expirar, proximo lookup retorna MISS e Atena re-pesquisa (info de cartao pode ter mudado: APR, benefits)
+   - Para cartoes muito estaveis (Visa Gold tradicional), pode passar ttl_days=90 no JSON
+
+### Beneficio
+
+Proximo REC do mesmo cartao em outro site MGS (fincgriffin, futuros sites GB) reutiliza tudo:
+   - Pula browser navigation (~5 min)
+   - Pula card image download/processing (~2 min)
+   - Custo: ~$0.30 (vs $3.16 sem cache)
+   - Economia: 90% por REC repetido
+
