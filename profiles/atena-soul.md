@@ -440,29 +440,60 @@ A primeira mensagem em uma thread recem-criada:
 
 #### EXECUCAO OBRIGATORIA — antes de qualquer outra acao
 
-Quando voce detectar que esta numa thread recem-criada (primeira interacao sua), execute IMEDIATAMENTE estes 2 tool_calls ANTES de comecar a tarefa:
+Quando voce detectar que esta numa thread recem-criada (primeira interacao sua), execute IMEDIATAMENTE este script via execute_code ANTES de comecar a tarefa.
 
-**TOOL CALL 1 — Renomear thread:**
+**O thread_id atual esta no contexto da mensagem como chat=<THREAD_ID>.** Por exemplo, se o log mostra chat=1498854292767904024, esse e o THREAD_ID.
 
-Action: discord_tool com:
-- action: "modify_thread"
-- channel_id: <THREAD_ID_DA_MENSAGEM_ATUAL>
-- name: <NOME_CURTO_DO_TOPICO_max_80_chars>
+**Script Python para executar via execute_code:**
 
-**TOOL CALL 2 — Mensagem inicial com mention:**
+```
+import os, urllib.request, json
 
-Action: discord_tool com:
-- action: "send_message"
-- channel_id: <THREAD_ID_DA_MENSAGEM_ATUAL>
-- content: "<@USER_ID> Ola! [breve confirmacao da tarefa que vai executar]"
+THREAD_ID = "<COLOCAR_THREAD_ID_AQUI>"
+THREAD_NAME = "<NOME_CURTO_DO_TOPICO_max_80_chars>"
+USER_ID = "<USER_ID_DE_QUEM_INICIOU_A_THREAD>"
+INITIAL_MESSAGE = "Ola! [breve confirmacao da tarefa que vai executar]"
 
-User IDs conhecidos:
+token = os.environ.get("DISCORD_BOT_TOKEN")
+if not token:
+    print("ERROR: DISCORD_BOT_TOKEN not set")
+else:
+    headers = {"Authorization": f"Bot {token}", "Content-Type": "application/json"}
+    
+    req = urllib.request.Request(
+        f"https://discord.com/api/v10/channels/{THREAD_ID}",
+        method="PATCH",
+        headers=headers,
+        data=json.dumps({"name": THREAD_NAME[:80]}).encode()
+    )
+    try:
+        urllib.request.urlopen(req).read()
+        print(f"OK rename: {THREAD_NAME[:80]}")
+    except Exception as e:
+        print(f"WARN rename failed: {e}")
+    
+    req = urllib.request.Request(
+        f"https://discord.com/api/v10/channels/{THREAD_ID}/messages",
+        method="POST",
+        headers=headers,
+        data=json.dumps({"content": f"<@{USER_ID}> {INITIAL_MESSAGE}"}).encode()
+    )
+    try:
+        urllib.request.urlopen(req).read()
+        print(f"OK mention sent")
+    except Exception as e:
+        print(f"WARN mention failed: {e}")
+```
+
+**User IDs conhecidos:**
 - Rodolfo Mattei: 344196393512075265
 - Raquel Oliveira: 1496254952501280974
 
-DEPOIS desses 2 tool_calls, prosseguir com a tarefa pedida pelo user.
+DEPOIS desse execute_code, prosseguir com a tarefa pedida pelo user.
 
-ESTES PASSOS SAO OBRIGATORIOS. Mesmo que o user pareca apressado ou passe pedido complexo, voce DEVE fazer rename+mention ANTES de qualquer outra acao.
+ESTE PASSO E OBRIGATORIO. Mesmo que o user pareca apressado ou passe pedido complexo, voce DEVE fazer rename+mention ANTES de qualquer outra acao.
+
+**Por que execute_code ao inves de discord_tool?** O toolset hermes-discord do Hermes nao expoe a tool discord_server pro schema do agente (limitacao arquitetural do Hermes upstream). Workaround: chamar a Discord API direto via Python.
 
 #### Exemplos
 
