@@ -775,103 +775,81 @@ Confirm each DELETE returns `{"deleted":true}` before re-uploading.
 
 ## Step 14 - Cost reporting (mandatory after publish)
 
-Apos completar Step 13 (Return summary com mensagem unica), SEMPRE incluir bloco de custo na MESMA mensagem. Nao usar segunda mensagem. Nao esperar cron.
+Apos completar Step 13 (Return summary com mensagem unica), SEMPRE incluir bloco de custo na MESMA mensagem. Zero latencia, sem segunda mensagem, sem esperar cron.
 
 ### Como calcular custo na hora (state.db delta)
 
-Atena calcula custo real baseado nos tokens consumidos pela propria sessao atual. Zero latencia, zero tokens LLM extras (apenas 1 query SQL).
+Atena calcula custo real baseado nos tokens da propria sessao. IMPORTANTE: Atena pode dividir uma execucao em multiplas sessoes (parent + children quando auto-prune trigga). O calculo precisa SOMAR parent + children via parent_session_id.
 
-#### Passo 1 - capturar session_id atual
+#### Schema relevante
 
-Atena ja sabe o session_id da sessao atual (esta no contexto). Se precisar buscar via shell:
+Tabela sessions em /root/.hermes/profiles/atena/state.db:
+- id TEXT PRIMARY KEY (formato: 20260429_160151_27c93f7f)
+- parent_session_id TEXT (aponta pra sessao pai quando ha split)
+- input_tokens, output_tokens INTEGER
+- cache_read_tokens, cache_write_tokens INTEGER
+- tool_call_count INTEGER
+- started_at, ended_at REAL (epoch float)
 
-    SESSION_ID=$(ls -t /root/.hermes/profiles/atena/sessions/session_*.json | head -1 | xargs -I {} basename {} .json)
-    echo "Session: $SESSION_ID"
+#### Passo 1 - identificar parent session
 
-#### Passo 2 - query no state.db pra delta de tokens
+PARENT_ID=$(sqlite3 /root/.hermes/profiles/atena/state.db "SELECT COALESCE(parent_session_id, id) FROM sessions ORDER BY started_at DESC LIMIT 1;")
 
-    sqlite3 /root/.hermes/profiles/atena/state.db -json "
-    SELECT 
-        COALESCE(input_tokens, 0) AS input_tokens,
-        COALESCE(output_tokens, 0) AS output_tokens,
-        COALESCE(cache_read_tokens, 0) AS cache_read_tokens,
-        COALESCE(cache_write_tokens, 0) AS cache_write_tokens
-    FROM sessions
-    WHERE session_id = '$SESSION_ID';
-    "
+#### Passo 2 - somar tokens parent + children via Python
 
-Resultado tipico:
-    [{"input_tokens": 95, "output_tokens": 22446, "cache_read_tokens": 3767524, "cache_write_tokens": 144487}]
+import sqlite3
+conn = sqlite3.connect("/root/.hermes/profiles/atena/state.db")
+cur = conn.execute("SELECT SUM(input_tokens), SUM(output_tokens), SUM(cache_read_tokens), SUM(cache_write_tokens), SUM(tool_call_count), MIN(started_at), MAX(COALESCE(ended_at, started_at)) FROM sessions WHERE id = ? OR parent_session_id = ?", (PARENT_ID, PARENT_ID))
+i, o, cr, cw, tools, start, end = cur.fetchone()
+conn.close()
 
-#### Passo 3 - calcular custo USD via pricing Sonnet 4.6
+# Pricing Sonnet 4.6 (USD per million tokens)
+atena_cost = (i*3.00 + o*15.00 + cr*0.30 + cw*3.75) / 1_000_000
+duration_min = round((end - start) / 60, 1) if start and end else 0
 
-    python3 << EOF
-    import json, sqlite3
-    
-    SESSION_ID = "session_20260429_160151_27c93f7f"  # substituir pelo real
-    
-    conn = sqlite3.connect("/root/.hermes/profiles/atena/state.db")
-    cur = conn.execute("""
-        SELECT input_tokens, output_tokens, cache_read_tokens, cache_write_tokens
-        FROM sessions WHERE session_id = ?
-    """, (SESSION_ID,))
-    row = cur.fetchone()
-    conn.close()
-    
-    if row:
-        i, o, cr, cw = row
-        # Pricing Sonnet 4.6 (USD per million tokens)
-        cost = (i*3.00 + o*15.00 + cr*0.30 + cw*3.75) / 1_000_000
-        print(f"Custo Atena desta sessao: ${cost:.4f}")
-        print(f"Tokens: input={i} output={o} cache_read={cr} cache_write={cw}")
-    EOF
+#### Passo 3 - somar com custo da API
 
-#### Passo 4 - somar com custo da API
+A resposta da API mgs-rec-api ja inclui cost_usd. Guardar quando fez Step 5b:
+api_cost = response.get("cost_usd", 0.0)
+total_cost = atena_cost + api_cost
 
-A resposta da API mgs-rec-api ja inclui `cost_usd`. Guardar essa variavel durante Step 5b:
+#### Passo 4 - incluir bloco no template do Step 13
 
-    api_cost_usd = response.get("cost_usd", 0.0)  # ex: 0.0269
-    api_duration = response.get("duration_sec", 0)  # ex: 18.77
+Custo: total_cost USD (duration_min, tools tools)
+   Atena: atena_cost | API: api_cost
 
-Custo total = atena_cost + api_cost.
+### Pricing Sonnet 4.6 (USD per million tokens)
 
-#### Passo 5 - incluir no template do Step 13
+- input: 3.00
+- output: 15.00
+- cache_read: 0.30
+- cache_write: 3.75
 
-No bloco de cost reporting da mensagem unica:
+Se mudarem, atualizar tambem em /root/mgs-agent/api/generate-rec-api.py e /root/mgs-agent/scripts/track-article-cost.sh.
 
-    💰 Custo: ${total:.2f} USD ({duration_min}min, {tools_count} tools)
-       • Atena: ${atena_cost:.2f} | API: ${api_cost:.4f}
+### Por que parent_session_id
 
-Onde:
-- `total` = atena_cost + api_cost
-- `duration_min` = tempo total do REC (ex: "10")
-- `tools_count` = total de tool_calls da sessao (query rapida no .json)
-- `atena_cost` = calculado no Passo 3
-- `api_cost` = retornado pela API no Passo 4
+Hermes faz auto-prune/split quando sessao fica grande. Uma execucao do REC pode virar 2-3 sessoes. Sem agregar via parent_session_id, custo aparece subestimado em ate 70%.
 
-### Pricing usado (hardcoded)
+Validacao empirica do REC Halifax 62039 (29/04/2026):
+- Sessao parent: 20260429_160151_27c93f7f
+- Sessao child:  20260429_160240_579083
+- Total agregado: 2.01 Atena + 0.03 API = 2.04
+- Sem agregar: subestima em 50%
 
-Sonnet 4.6 (USD per million tokens):
-- input: $3.00
-- output: $15.00
-- cache_read: $0.30
-- cache_write: $3.75
+### Por que NAO usar Admin API ou cron
 
-Esses valores estao em sync com a API mgs-rec-api e o monitor cron. Se mudarem, atualizar nos 3 lugares.
+- Admin API tem latencia 30-60min (Anthropic agrega depois)
+- Cron track-article-cost.sh usa Admin API (mesma latencia)
+- state.db eh LOCAL, instantaneo, fonte de verdade
+- Discrepancia menor que 2 por cento (insignificante)
 
-### Por que nao usar Admin API ou cron
-
-- Admin API tem latencia de 30-60min (Anthropic agrega billing depois)
-- Cron track-article-cost.sh roda a cada 15min mas usa Admin API (mesma latencia)
-- state.db delta eh INSTANTANEO e a fonte de verdade da propria Atena
-- Discrepancia <2% entre state.db e Admin API real (insignificante)
-
-O cron 15min continua rodando para reconciliacao historica no DB tracker, mas NAO eh usado pra mensagem do Discord.
+Cron 15min continua rodando pra reconciliacao historica no DB tracker (separado).
 
 ### Custo desta secao (overhead)
 
 - 1 query SQL no state.db: 0 tokens LLM
 - 1 calculo Python: 0 tokens LLM
-- Bloco no Discord: ~30 tokens output adicionais
+- Bloco no Discord: 30 tokens output adicionais
 
-Total: ~30 tokens output extras por REC. Negligenciavel.
+Total: 30 tokens output extras por REC. Negligenciavel.
