@@ -343,12 +343,14 @@ discord:
     '1496267571543019653': "INSTRUCAO CRITICA - EXECUTE ANTES DE QUALQUER OUTRA ACAO\n\nEsta eh a primeira mensagem em uma thread Discord. ANTES de processar a tarefa do user, voce DEVE executar este codigo\
       \ via execute_code:\n\nimport os, urllib.request, json\n\nTHREAD_ID = \"<ID_DA_THREAD_ATUAL_NO_CONTEXTO>\"\nTHREAD_NAME = \"<NOME_CURTO_DO_TOPICO_max_80_chars>\"\nUSER_ID = \"<USER_ID_DE_QUEM_ENVIOU_A_MENSAGEM>\"\
       \nINITIAL_MESSAGE = \"Ola! Vou processar sua solicitacao agora.\"\n\n# User IDs conhecidos:\n# Rodolfo Mattei: 344196393512075265\n# Raquel Oliveira: 1496254952501280974\n\ntoken = os.environ.get(\"\
-      DISCORD_BOT_TOKEN\")\nheaders = {\"Authorization\": f\"Bot {token}\", \"Content-Type\": \"application/json\"}\n\n# 1. Renomear thread\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}\"\
-      ,\n    method=\"PATCH\",\n    headers=headers,\n    data=json.dumps({\"name\": THREAD_NAME[:80]}).encode()\n)\ntry:\n    urllib.request.urlopen(req).read()\n    print(f\"OK rename: {THREAD_NAME[:80]}\"\
-      )\nexcept Exception as e:\n    print(f\"WARN rename: {e}\")\n\n# 2. Mensagem inicial com mention\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}/messages\"\
-      ,\n    method=\"POST\",\n    headers=headers,\n    data=json.dumps({\"content\": f\"<@{USER_ID}> {INITIAL_MESSAGE}\"}).encode()\n)\ntry:\n    urllib.request.urlopen(req).read()\n    print(\"OK mention\
-      \ sent\")\nexcept Exception as e:\n    print(f\"WARN mention: {e}\")\n\nESTE PASSO NAO EH OPCIONAL. Eh a PRIMEIRA coisa a fazer em toda thread nova. Depois disso, prossiga com a tarefa do user normalmente.\n\
-      \nPor que: thread vem com nome cortado da primeira mensagem (feio) e Discord nao envia push notification se nao houver mention explicita. Esse rename + mention eh UX critico para o user."
+      DISCORD_BOT_TOKEN\")\nheaders = {\n    \"Authorization\": f\"Bot {token}\",\n    \"Content-Type\": \"application/json\",\n    \"User-Agent\": \"Hermes-Agent (https://github.com/NousResearch/hermes-agent)\"\
+      \n}\n\n# 1. Renomear thread\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}\",\n    method=\"PATCH\",\n    headers=headers,\n    data=json.dumps({\"name\":\
+      \ THREAD_NAME[:80]}).encode()\n)\ntry:\n    urllib.request.urlopen(req).read()\n    print(f\"OK rename: {THREAD_NAME[:80]}\")\nexcept Exception as e:\n    print(f\"WARN rename: {e}\")\n\n# 2. Mensagem\
+      \ inicial com mention\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}/messages\",\n    method=\"POST\",\n    headers=headers,\n    data=json.dumps({\"content\"\
+      : f\"<@{USER_ID}> {INITIAL_MESSAGE}\"}).encode()\n)\ntry:\n    urllib.request.urlopen(req).read()\n    print(\"OK mention sent\")\nexcept Exception as e:\n    print(f\"WARN mention: {e}\")\n\nESTE\
+      \ PASSO NAO EH OPCIONAL. Eh a PRIMEIRA coisa a fazer em toda thread nova. Depois disso, prossiga com a tarefa do user normalmente.\n\nCRITICO: o header User-Agent eh OBRIGATORIO. Sem User-Agent, Cloudflare\
+      \ bloqueia com erro 1010.\n\nPor que: thread vem com nome cortado da primeira mensagem (feio) e Discord nao envia push notification se nao houver mention explicita. Esse rename + mention eh UX critico\
+      \ para o user."
   server_actions: ''
 whatsapp: {}
 telegram:
