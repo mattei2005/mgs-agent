@@ -1,11 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-04-28T05:00:01-04:00",
-    "generated_by": "infra-discovery.sh",
-    "atena_soul_lines": 593,
-    "zeus_soul_lines": 592,
-    "last_updated": "2026-04-28"
+    "updated_at": "2026-04-29T05:00:01-04:00",
+    "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
     {
@@ -48,6 +45,12 @@
     },
     {
       "entry": "0 8 * * * /root/mgs-agent/scripts/monitor-hermes-updates.sh >> /root/mgs-agent/logs/monitor-hermes-updates.log 2>&1"
+    },
+    {
+      "entry": "*/15 * * * * /root/mgs-agent/scripts/track-article-cost.sh >> /root/mgs-agent/logs/track-article-cost-cron.log 2>&1"
+    },
+    {
+      "entry": "0 4 * * * /root/mgs-agent/scripts/cleanup-discord-threads.sh >> /root/mgs-agent/logs/cleanup-discord-threads-cron.log 2>&1"
     }
   ],
   "scripts": [
@@ -60,6 +63,11 @@
       "path": "/root/mgs-agent/scripts/check-pending-reports.sh",
       "size_bytes": 8054,
       "modified_at": "2026-04-27T10:08:25-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/cleanup-discord-threads.sh",
+      "size_bytes": 3708,
+      "modified_at": "2026-04-29T02:26:20-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/deprecated/monitor-rec-readability.sh",
@@ -127,6 +135,11 @@
       "modified_at": "2026-04-27T23:07:40-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/track-article-cost.sh",
+      "size_bytes": 11465,
+      "modified_at": "2026-04-28T21:42:58-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
@@ -135,19 +148,6 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-score-updater.js",
       "size_bytes": 5045,
       "modified_at": "2026-04-24T18:36:54-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/track-article-cost.sh",
-      "description": "Tracking de custo Anthropic por artigo via Admin API (api_calls_proportional). Cron */15min.",
-      "created": "2026-04-28",
-      "last_modified": "2026-04-28",
-      "notes": "Cap 2h em duration_sec adicionado (safeguard outliers). Backup: /tmp/track-article-cost.sh.bak-pre-2h-cap-v2"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/cleanup-discord-threads.sh",
-      "description": "Deleta threads Discord arquivadas há 2+ dias na categoria Agents (auto-descobre canais da categoria 1496264197439230003)",
-      "created": "2026-04-29",
-      "created_by": "zeus/claude-web-session"
     }
   ],
   "skills_mgs": [
@@ -1015,14 +1015,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
       "size_bytes": 334,
-      "md5": "62843605feaae753e752b2c785252b9e",
-      "modified_at": "2026-04-28T02:47:11-04:00"
+      "md5": "7b749a1c38b6e4af1d65a1790ce821a8",
+      "modified_at": "2026-04-28T08:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 37583,
-      "md5": "eb35e21ab952c668563e320668d07a89",
-      "modified_at": "2026-04-28T02:31:06-04:00"
+      "size_bytes": 39669,
+      "md5": "b09c8c196766ee0a3ce7e10ec9436145",
+      "modified_at": "2026-04-29T02:48:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1063,8 +1063,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
-      "md5": "9c8910a204f5bd15de0bbaf449ce5943",
-      "modified_at": "2026-04-28T05:00:02-04:00"
+      "md5": "dd372b58cc597bf59044db3ae6ede1d5",
+      "modified_at": "2026-04-29T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1080,9 +1080,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 2776,
-      "md5": "10820851faa169627cc6aa4db5fdc046",
-      "modified_at": "2026-04-27T10:01:07-04:00"
+      "size_bytes": 3140,
+      "md5": "fdd151e8665f95d0333ecd9e32f7e5b7",
+      "modified_at": "2026-04-28T10:01:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -1092,50 +1092,20 @@
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "size_bytes": 26045,
-      "md5": "24f84236a45234ffac25bb253fca89dd",
-      "modified_at": "2026-04-27T23:41:11-04:00"
+      "size_bytes": 33845,
+      "md5": "3a3b741b0c22b9a6f4c3ed7436ee47de",
+      "modified_at": "2026-04-29T00:40:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
-      "size_bytes": 30043,
-      "md5": "14a5cb6a7144a58fd64e7909f4226745",
-      "modified_at": "2026-04-27T13:40:01-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/data/article-tracker.db",
-      "description": "SQLite — tracking custo Anthropic por artigo publicado. Schema: article_id, cost_usd, api_calls, duration_sec, etc.",
-      "created": "2026-04-28",
-      "notes": "15 registros iniciais, $34.29 acumulado (avg $2.29/artigo após cap 2h). Alimentado por track-article-cost.sh."
+      "size_bytes": 32634,
+      "md5": "1028ddab7a937472188836b5f2beb741",
+      "modified_at": "2026-04-29T03:40:01-04:00"
     }
   ],
   "mu_plugin_canonical": {
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  },
-  "custom_patches": [
-    {
-      "path": "/root/.hermes/hermes-agent/tools/discord_tool.py",
-      "type": "upstream_patch",
-      "description": "Nova action modify_thread (PATCH /channels/{id}) — permite rename, archive, lock de threads.",
-      "created": "2026-04-28",
-      "risk": "ALTO — arquivo upstream Hermes. Próximo hermes update (776 commits behind) pode sobrescrever.",
-      "reapply_instructions": "Adicionar action modify_thread no discord_tool.py conforme REGRA 8 de Atena/Zeus SOUL.md",
-      "related_souls": [
-        "atena",
-        "zeus"
-      ]
-    }
-  ],
-  "cron_jobs": [
-    {
-      "name": "cleanup-discord-threads",
-      "schedule": "0 4 * * *",
-      "description": "Deleta threads Discord arquivadas há 2+ dias (4 AM EDT diariamente)",
-      "script": "/root/mgs-agent/scripts/cleanup-discord-threads.sh",
-      "created": "2026-04-29",
-      "created_by": "zeus/claude-web-session"
-    }
-  ]
+  }
 }
