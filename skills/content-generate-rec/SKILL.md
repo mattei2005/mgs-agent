@@ -651,6 +651,18 @@ quando Raquel abrir o editor. Incluir o resultado do scorer no summary final.
 > relativo ao script). API usada: `{ Paper, SeoAssessor, ContentAssessor, Researcher }`.
 > `Researcher` recebe `(paper, i18n)` e é passado para os assessors como segundo arg.
 
+
+> **PITFALL — guardar URLs e scene durante workflow (CRITICAL):**
+>
+> O Step 13 exige URLs completas das imagens E o nome da scene da featured. Esses dados são produzidos durante Steps 3 e 4 mas frequentemente são esquecidos quando o summary é montado. Resultado: Atena posta IDs das imagens mas SEM URLs, ou inventa URLs (ainda pior).
+>
+> **Regra:** durante o workflow, capturar e GUARDAR explicitamente:
+> - Step 3 (card image upload): `card_id`, `card_url` (do `source_url` retornado pelo upload-image.sh)
+> - Step 4 (featured image): `featured_id`, `featured_url`, `featured_scene` (do output de generate-featured-image.sh: `{path, scene}`)
+> - Step 6 (validate-article.sh): `subtitle_chars` da contagem da string do primeiro `<!-- wp:paragraph -->`
+>
+> Use variáveis Python claras tipo `card_url`, `featured_url`, `featured_scene`, `subtitle_chars` e referencie no template do Step 13. Não tente reconstruir URLs a partir de slugs (PITFALL conhecido — WP renomeia duplicates com -1, -2).
+
 ### 13. Return (CRITICAL - SINGLE MESSAGE ONLY)
 
 Emit EXACTLY ONE summary message to the user. NEVER send two messages (one announcement + one summary). NEVER duplicate information across messages. UMA mensagem com TUDO consolidado.
@@ -662,13 +674,12 @@ Emit EXACTLY ONE summary message to the user. NEVER send two messages (one annou
 
 Required fields in the single message:
 - Confirmação de publicação (uma linha)
-- Post ID + WordPress edit link
-- Public URL
-- Yoast scores (SEO + Readability)
-- Word count + title char count
-- Focus keyword + meta description char count
-- Card image ID + Featured image ID
-- Tags applied (confirm lang_{language} tag presente)
+- Post ID + WordPress edit link + public URL
+- Yoast scores (SEO + Readability) com emoji 🟢/🟡/🔴 conforme score
+- Word count + title char count + SUB-TITLE char count + meta desc char count
+- Focus keyword
+- Tags applied (confirm lang_{language} tag presente, lista CSV)
+- Imagens com IDs E URLs completas (card + featured + scene da featured)
 - Cost reporting (Step 14 — duração, API calls, custo USD)
 - @Raquel mention (<@1496254952501280974>) for review notification
 
@@ -676,14 +687,18 @@ Format example (1 single Discord message):
 
 @Rodolfo ✅ {Card Name} publicado no {site}!
 
-📄 Post ID: {id} | 🔗 {public_url}
+📄 Post ID: {id}
+🔗 {public_url}
 ✏️ Edit: {edit_url}
 
 📊 Yoast: SEO {seo}🟢 | Readability {read}🟢
-📝 {words} palavras | Title {title_chars}c | Meta {meta_chars}c
+📝 {words} palavras | Title {title_chars}c | Sub-Title {subtitle_chars}c | Meta {meta_chars}c
 🔍 Focus: "{focus_kw}"
-🖼️ Card: {card_id} | Featured: {featured_id}
 🏷️ Tags: {tags_csv}
+
+🖼️ Imagens:
+• Card image ID: {card_id} — {card_url}
+• Featured image ID: {featured_id} — {featured_url} (cena: {featured_scene})
 
 💰 Custo: ${cost} USD ({duration}, {api_calls} API calls)
 
