@@ -853,3 +853,208 @@ Cron 15min continua rodando pra reconciliacao historica no DB tracker (separado)
 - Bloco no Discord: 30 tokens output adicionais
 
 Total: 30 tokens output extras por REC. Negligenciavel.
+
+## Step 1c - CACHE LOOKUP (CRITICAL - DO BEFORE BROWSER)
+
+ANTES de pesquisar o cartao no site oficial (Step 2), SEMPRE consultar o card cache local. Cache hits economizam ~5min de browser navigation + ~$1 USD por REC.
+
+### Como consultar
+
+1. Calcular card_slug a partir do card_name (kebab-case, sem palavra "card" se redundante):
+   - "AIB Visa Gold Card" -> "aib-visa-gold"
+   - "HSBC Premier Credit Card" -> "hsbc-premier-credit-card"
+   - "Tesco Bank Clubcard" -> "tesco-bank-clubcard"
+
+2. Executar:
+
+    bash /root/mgs-agent/skills/content-generate-rec/scripts/card-cache-lookup.sh "$CARD_SLUG"
+
+Output:
+   HIT  -> JSON completo com card_name, annual_fee, apr, benefits, competitors, etc
+   MISS -> {"hit": false, "card_slug": "..."}
+
+### Decisao apos lookup
+
+**Se HIT (exit 0):**
+   - Usar dados do cache diretamente
+   - PULAR Step 2 (research do cartao via browser)
+   - PULAR Step 3 se cache tiver card_image_uploaded_url (reutilizar imagem ja no WP)
+   - Ir direto pro Step 4 (gerar featured image)
+   - Economia tipica: ~5 minutos + ~$1 USD por REC
+
+**Se MISS (exit 1):**
+   - Continuar workflow normal (Step 2 - research via browser)
+   - APOS Step 3 (download imagem), salvar tudo no cache (ver Step 2.5 abaixo)
+
+### Campos do cache que substituem browser research
+
+   annual_fee   -> usado direto (Step 2)
+   apr          -> usado direto (Step 2)
+   benefits     -> JSON array com 3-5 benefits ja extraidos
+   tag10        -> LazyBlock tag (Step 7)
+   tag2         -> LazyBlock tag (Step 7)
+   descriptor   -> LazyBlock texto (Step 7)
+   competitors  -> array com 2 cartoes pra Comparative Table
+   card_image_uploaded_url -> URL no WordPress (se HIT, pular upload)
+   card_image_uploaded_id  -> media ID (Step 7 imagem JSON)
+
+### Campos que podem estar null no cache (precisam ser preenchidos)
+
+Cache populado retroativamente pode ter alguns campos vazios. Se tag10/tag2/descriptor estao null:
+   - Atena gera baseado nos benefits do cache (rapido, sem browser)
+   - Salva no cache de novo no Step 2.5 pra proximas execucoes
+## Step 2.5 - CACHE SAVE (CRITICAL - APOS RESEARCH)
+
+Apos completar Step 2 (research) e Step 3 (card image upload), SEMPRE salvar dados no cache pra futuros RECs do mesmo cartao.
+
+### Quando executar
+
+   - Apos Step 3 (card image uploaded, temos uploaded_id e uploaded_url)
+   - Antes do Step 4 (featured image generation)
+
+### Como salvar
+
+1. Montar JSON com todos os campos coletados:
+
+    cat > /tmp/cache-save-${CARD_SLUG}.json << JSON
+    {
+      "card_slug": "tesco-bank-clubcard",
+      "card_name": "Tesco Bank Clubcard Credit Card",
+      "card_official_url": "https://www.tescobank.com/...",
+      "country": "gb",
+      "vertical": "cc",
+      "language": "en",
+      "annual_fee": "No annual fee",
+      "apr": "12.9% var.",
+      "benefits": ["Benefit 1...", "Benefit 2...", "Benefit 3..."],
+      "tag10": "Clubcard rewards",
+      "tag2": "No annual fee",
+      "descriptor": "Earn Clubcard points on every purchase.",
+      "competitors": [{"name": "Sainsburys Nectar"}, {"name": "Asda Money"}],
+      "card_image_local_path": "/tmp/card-tesco-bank-clubcard.jpg",
+      "card_image_url_orig": "https://www.tescobank.com/.../card.png",
+      "card_image_uploaded_id": 62033,
+      "card_image_uploaded_url": "https://eggbev.com/wp-content/.../card.jpg",
+      "ttl_days": 30,
+      "source": "browser"
+    }
+    JSON
+
+2. Salvar no cache:
+
+    bash /root/mgs-agent/skills/content-generate-rec/scripts/card-cache-save.sh /tmp/cache-save-${CARD_SLUG}.json
+
+### Politica de TTL
+
+   - Default: 30 dias
+   - Apos TTL expirar, proximo lookup retorna MISS e Atena re-pesquisa (info de cartao pode ter mudado: APR, benefits)
+   - Para cartoes muito estaveis (Visa Gold tradicional), pode passar ttl_days=90 no JSON
+
+### Beneficio
+
+Proximo REC do mesmo cartao em outro site MGS (fincgriffin, futuros sites GB) reutiliza tudo:
+   - Pula browser navigation (~5 min)
+   - Pula card image download/processing (~2 min)
+   - Custo: ~$0.30 (vs $3.16 sem cache)
+   - Economia: 90% por REC repetido
+## Step 5b - USE MGS REC API (CRITICAL - PREFER OVER MANUAL GENERATION)
+
+A partir de 29/04/2026, a geracao do article HTML deve SEMPRE usar a API local mgs-rec-api ao inves de gerar inline. Isso reduz custo de $3.16/REC para $0.03/REC (99% menos) e tempo de 10min para 20s.
+
+### Quando usar
+
+SEMPRE - substitui completamente o Step 5 (Write the article).
+
+Excecoes (raras):
+   - API down (health check falha): cair pro modo legacy (Step 5 manual)
+   - Cartao com requisitos especiais nao suportados pelo template
+
+### Como chamar
+
+Apos Step 4 (featured image generation), chamar a API:
+
+    # Validar que API esta up
+    curl -s http://127.0.0.1:8001/health || echo "API DOWN - cair pro modo legacy"
+
+    # Montar payload com dados do cartao
+    cat > /tmp/api-request-${CARD_SLUG}.json << JSON
+    {
+      "site": "eggbev",
+      "card_slug": "tesco-bank-clubcard",
+      "card_name": "Tesco Bank Clubcard Credit Card",
+      "card_official_url": "https://www.tescobank.com/...",
+      "annual_fee": "No annual fee",
+      "apr": "12.9% var.",
+      "benefits": ["Benefit 1...", "Benefit 2...", "Benefit 3..."],
+      "competitors": [{"name": "Sainsburys Nectar"}, {"name": "Asda Money"}]
+    }
+    JSON
+
+    # Chamar API (timeout 60s, retry 1x)
+    RESPONSE=$(curl -s --max-time 60 -X POST http://127.0.0.1:8001/generate \
+         -H "Content-Type: application/json" \
+         -d @/tmp/api-request-${CARD_SLUG}.json)
+
+    # Validar resposta
+    SUCCESS=$(echo "$RESPONSE" | jq -r .success)
+    if [ "$SUCCESS" != "true" ]; then
+      echo "API failed: $RESPONSE"
+      # CAIR PRO MODO LEGACY (Step 5 original)
+    fi
+
+    # Extrair HTML pronto
+    ARTICLE_HTML=$(echo "$RESPONSE" | jq -r .article_html)
+    COST=$(echo "$RESPONSE" | jq -r .cost_usd)
+    DURATION=$(echo "$RESPONSE" | jq -r .duration_sec)
+
+    echo "Article generated via API: cost=\$$COST duration=${DURATION}s"
+
+### O que a API faz por voce
+
+1. Consulta cache (card-cache.db) automaticamente
+2. Carrega template correto (rec-{template_key}.md)
+3. Carrega config do site (sites.json)
+4. Gera article HTML em formato Gutenberg (450-500 palavras)
+5. Retorna HTML + custo + tempo + tokens
+6. Loga tudo em /root/mgs-agent/api/usage.db
+
+### O que VOCE (Atena) ainda faz APOS receber HTML da API
+
+A API gera APENAS o body HTML. Voce ainda precisa:
+
+1. Inserir LazyBlock credit-card no posicao correta (apos primeiro paragrafo)
+   - Substituir comentario placeholder com JSON LazyBlock real
+   - Usar dados do cache (tag10, tag2, descriptor) ou gerar baseado em benefits
+2. Inserir LazyBlock botao no final
+3. Step 6: Validar word count (rodar validate-article.sh)
+4. Step 7-8: Build slugs e URLs
+5. Step 9: SEO fields (title, metadesc, focuskw)
+6. Step 10: Resolver tags + categoria via WP REST
+7. Step 11: Publicar via create-post.sh + update-yoast.sh
+8. Step 12: Trigger Yoast scorer
+9. Step 13: Return summary (incluindo Step 14 cost reporting)
+
+### Tratamento de erros
+
+API pode retornar:
+   - HTTP 200 success=true: HTML pronto
+   - HTTP 200 success=false: erro logico (ex: cache MISS sem dados)
+   - HTTP 500: erro interno (ex: Anthropic API down)
+   - HTTP 404: site/template nao encontrado
+   - Timeout: API demorou >60s
+
+Em qualquer erro nao recuperavel: cair pro Step 5 original (gerar inline). Reportar erro ao Rodolfo no Discord.
+
+### Logs e debug
+
+   API logs:    /root/mgs-agent/api/logs/api.log
+   Systemd log: /root/mgs-agent/api/logs/systemd.log
+   Usage DB:    /root/mgs-agent/api/usage.db
+   Stats:       curl http://127.0.0.1:8001/stats
+   Restart:     systemctl restart mgs-rec-api.service
+
+### Custo desta etapa
+
+   - Geracao via API: $0.03 por REC (vs $3.16 inline)
+   - Tempo: 20s por REC (vs 10min inline)
+   - Economia: 99% custo + 97% tempo
