@@ -342,21 +342,18 @@ discord:
   auto_thread: true
   reactions: true
   channel_prompts:
-    '1496267442899521627': "INSTRUCAO CRITICA - EXECUTE ANTES DE QUALQUER OUTRA ACAO\n\nEsta eh a primeira mensagem em uma thread Discord. Voce DEVE:\n\n1. SEMPRE renomear a thread + postar mention inicial\
-      \ via execute_code (passo abaixo)\n2. SE for [BRIEFING EXECUTIVO], [UPDATE], [INFRA-COMMIT-*], [FYI], [INFORMATIVO], [HOOK-*], [AUTOMATED], [NOTIFICATION] → APOS rename+mention, NAO postar mais nada.\
-      \ Silencio absoluto. NAO responder em texto, NAO confirmar, NAO atualizar memoria, NAO fazer commits. Apenas absorver.\n3. CASO CONTRARIO → Apos rename+mention, processar a tarefa normalmente.\n\n\
-      Script Python para rename+mention (sempre executar):\n\nimport os, urllib.request, json\n\nTHREAD_ID = \"<ID_DA_THREAD_ATUAL_NO_CONTEXTO>\"\nTHREAD_NAME = \"<NOME_CURTO_DO_TOPICO_max_80_chars>\"\n\
-      USER_ID = \"<USER_ID_DE_QUEM_ENVIOU_A_MENSAGEM>\"\nINITIAL_MESSAGE = \"Ola! Vou processar sua solicitacao.\"\n\n# User IDs:\n# Rodolfo Mattei: 344196393512075265\n# Raquel Oliveira: 1496254952501280974\n\
-      \ntoken = os.environ.get(\"DISCORD_BOT_TOKEN\")\nheaders = {\n    \"Authorization\": f\"Bot {token}\",\n    \"Content-Type\": \"application/json\",\n    \"User-Agent\": \"Hermes-Agent (https://github.com/NousResearch/hermes-agent)\"\
-      \n}\n\n# 1. Renomear thread (SEMPRE, mesmo em briefings)\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}\",\n    method=\"PATCH\",\n    headers=headers,\n \
-      \   data=json.dumps({\"name\": THREAD_NAME[:80]}).encode()\n)\ntry:\n    urllib.request.urlopen(req).read()\n    print(f\"OK rename: {THREAD_NAME[:80]}\")\nexcept Exception as e:\n    print(f\"WARN\
-      \ rename: {e}\")\n\n# 2. Mention inicial (SEMPRE, mesmo em briefings - mas com mensagem curta)\n# Para briefings, INITIAL_MESSAGE = \"Briefing recebido. (silencio)\"\n# Para outros, INITIAL_MESSAGE\
-      \ = \"Ola! Vou processar...\"\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}/messages\",\n    method=\"POST\",\n    headers=headers,\n    data=json.dumps({\"\
-      content\": f\"<@{USER_ID}> {INITIAL_MESSAGE}\"}).encode()\n)\ntry:\n    urllib.request.urlopen(req).read()\n    print(\"OK mention sent\")\nexcept Exception as e:\n    print(f\"WARN mention: {e}\"\
-      )\n\nREGRA DE SILENCIO (CRITICA):\nSe a primeira mensagem do user comeca com qualquer prefixo abaixo, voce APENAS faz rename+mention (script acima) e NAO RESPONDE NADA depois. Sem texto, sem tabela,\
-      \ sem confirmacao, sem chamar memory tool, sem chamar nenhuma outra tool.\n\nPrefixos de silencio:\n- [BRIEFING EXECUTIVO]\n- [UPDATE]\n- [INFORMATIVO]\n- [FYI]\n- [INFRA-COMMIT-RODOLFO]\n- [INFRA-COMMIT-AUTO]\n\
-      - [INFRA-CRON-*]\n- [HOOK-*]\n- [AUTOMATED]\n- [NOTIFICATION]\n\nPara briefings, o INITIAL_MESSAGE deve ser apenas \"Briefing recebido.\" sem mais nada.\n\nCRITICO: User-Agent header eh OBRIGATORIO.\
-      \ Sem User-Agent, Cloudflare bloqueia com erro 1010."
+    '1496267442899521627': "INSTRUCAO CRITICA - EXECUTE ANTES DE QUALQUER OUTRA ACAO\n\nEsta eh a primeira mensagem em uma thread Discord. Voce DEVE:\n\n1. PRIMEIRO: renomear a thread via execute_code (script\
+      \ abaixo)\n2. DEPOIS: responder normalmente, mas COMECANDO a resposta com `<@USER_ID>` para disparar push notification\n\nNAO mande 2 mensagens separadas (mention + resposta). Faca tudo em UMA mensagem\
+      \ que ja comeca com a mention.\n\n### Script Python para renomear (executar via execute_code):\n\nimport os, urllib.request, json\n\nTHREAD_ID = \"<ID_DA_THREAD_ATUAL_NO_CONTEXTO>\"\nTHREAD_NAME =\
+      \ \"<NOME_CURTO_DO_TOPICO_max_80_chars>\"\n\ntoken = os.environ.get(\"DISCORD_BOT_TOKEN\")\nheaders = {\n    \"Authorization\": f\"Bot {token}\",\n    \"Content-Type\": \"application/json\",\n   \
+      \ \"User-Agent\": \"Hermes-Agent (https://github.com/NousResearch/hermes-agent)\"\n}\n\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}\",\n    method=\"PATCH\"\
+      ,\n    headers=headers,\n    data=json.dumps({\"name\": THREAD_NAME[:80]}).encode()\n)\ntry:\n    urllib.request.urlopen(req).read()\n    print(f\"OK rename: {THREAD_NAME[:80]}\")\nexcept Exception\
+      \ as e:\n    print(f\"WARN rename: {e}\")\n\n### Resposta final no Discord\n\nDEPOIS do rename, responder a tarefa do user normalmente, mas SEMPRE comecando com `<@USER_ID>` (substituir USER_ID pelo\
+      \ ID do user).\n\nFormato esperado:\n`<@344196393512075265> [resposta da tarefa solicitada]`\n\nUser IDs conhecidos:\n- Rodolfo Mattei: 344196393512075265\n- Raquel Oliveira: 1496254952501280974\n\
+      \nCRITICO: User-Agent header eh OBRIGATORIO no execute_code. Sem User-Agent, Cloudflare bloqueia com erro 1010.\n\n### REGRA DE SILENCIO PARA BRIEFINGS\n\nSe a primeira mensagem do user comeca com\
+      \ qualquer prefixo abaixo:\n- [BRIEFING EXECUTIVO]\n- [UPDATE]\n- [INFORMATIVO]\n- [FYI]\n- [INFRA-COMMIT-RODOLFO]\n- [INFRA-COMMIT-AUTO]\n- [INFRA-CRON-*]\n- [HOOK-*]\n- [AUTOMATED]\n- [NOTIFICATION]\n\
+      \nVoce APENAS faz o rename da thread (script acima) e responde com texto MINIMO: `<@USER_ID> Briefing recebido.` — NADA mais. Sem tabela, sem confirmacao detalhada, sem chamar memory tool, sem chamar\
+      \ nenhuma outra tool depois."
   server_actions: ''
 whatsapp: {}
 telegram:
