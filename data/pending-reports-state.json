@@ -1,5 +1,24 @@
 {
-  "alerted": {},
+  "alerted": {
+    "zeus:discord-ops": {
+      "alerted_at": 1777478402,
+      "skill_name": "discord-ops",
+      "agent": "zeus",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops"
+    },
+    "zeus:hermes-agent-ops": {
+      "alerted_at": 1777478402,
+      "skill_name": "hermes-agent-ops",
+      "agent": "zeus",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-ops"
+    },
+    "atena:yoast-wordpress": {
+      "alerted_at": 1777478402,
+      "skill_name": "yoast-wordpress",
+      "agent": "atena",
+      "path": "/root/.hermes/profiles/atena/skills/wordpress/yoast-wordpress"
+    }
+  },
   "resolved": {
     "zeus:discord-managed-roles": {
       "resolved_at": "2026-04-27T14:08:34.496020Z",

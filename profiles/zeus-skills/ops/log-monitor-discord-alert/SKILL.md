@@ -1,8 +1,8 @@
 ---
 name: log-monitor-discord-alert
-description: "Cria um monitor de log com alerta Discord, state file JSON e cron entry. Padrão reusável: detecta entradas START sem OK correspondente + erros explícitos + threshold + anti-spam + mensagem de RESOLVIDO."
-tags: [monitoring, discord, cron, logs, alerting, bash]
-related_skills: [git-hook-discord-notify, mgs-infra-inventory]
+description: "Monitoramento MGS com alertas Discord: template genérico de monitor de log (START/OK padrão), monitor de restarts de services systemd (zeus-gateway, atena-gateway, mgs-autocommit), e monitor de skills MGS sem REPORT-INFRA no inventário. Inclui state file JSON, anti-spam, resolução automática e padrão cron."
+tags: [monitoring, discord, cron, logs, alerting, bash, systemd, restart, infra, inventory, skills, report-infra]
+related_skills: [mgs-infra-inventory, shell-cron-env-export, hermes-agent-ops]
 ---
 
 # Monitor de Log com Alerta Discord
