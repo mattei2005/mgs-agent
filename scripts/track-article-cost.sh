@@ -199,6 +199,12 @@ echo "$PUBLICATIONS" | grep "create-post OK" | while IFS= read -r LINE; do
   BUCKET_COST=$(echo "$TOKENS" | jq -r --argjson p1 $PRICE_UNCACHED --argjson p2 $PRICE_CACHE_5M --argjson p3 $PRICE_CACHE_READ --argjson p4 $PRICE_OUTPUT '
     (.uncached * $p1 + .cache_5m * $p2 + .cache_read * $p3 + .output * $p4) / 1000000')
   log "  Bucket total cost (full window): \$$BUCKET_COST"
+
+  # Skip if bucket is empty (likely Admin API lag — bucket not closed yet)
+  if [[ "$UNCACHED" -eq 0 ]] && [[ "$CACHE_5M" -eq 0 ]] && [[ "$CACHE_READ" -eq 0 ]] && [[ "$OUTPUT" -eq 0 ]]; then
+    log "  ⏳  Bucket empty (Admin API lag) — skipping save. Will retry on next cron."
+    continue
+  fi
   
   # === OPÇÃO B: proporção por api_calls do bucket ===
   # Sum all api_calls reported in "response ready" lines within hour bucket window
