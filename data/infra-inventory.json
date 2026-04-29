@@ -2,7 +2,10 @@
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
     "updated_at": "2026-04-28T05:00:01-04:00",
-    "generated_by": "infra-discovery.sh"
+    "generated_by": "infra-discovery.sh",
+    "atena_soul_lines": 593,
+    "zeus_soul_lines": 592,
+    "last_updated": "2026-04-28"
   },
   "systemd_services": [
     {
@@ -1104,5 +1107,19 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "custom_patches": [
+    {
+      "path": "/root/.hermes/hermes-agent/tools/discord_tool.py",
+      "type": "upstream_patch",
+      "description": "Nova action modify_thread (PATCH /channels/{id}) — permite rename, archive, lock de threads.",
+      "created": "2026-04-28",
+      "risk": "ALTO — arquivo upstream Hermes. Próximo hermes update (776 commits behind) pode sobrescrever.",
+      "reapply_instructions": "Adicionar action modify_thread no discord_tool.py conforme REGRA 8 de Atena/Zeus SOUL.md",
+      "related_souls": [
+        "atena",
+        "zeus"
+      ]
+    }
+  ]
 }
