@@ -342,17 +342,21 @@ discord:
   auto_thread: true
   reactions: true
   channel_prompts:
-    '1496267442899521627': "INSTRUCAO CRITICA - EXECUTE ANTES DE QUALQUER OUTRA ACAO\n\nEsta eh a primeira mensagem em uma thread Discord. ANTES de processar a tarefa do user, voce DEVE executar este codigo\
-      \ via execute_code:\n\nimport os, urllib.request, json\n\nTHREAD_ID = \"<ID_DA_THREAD_ATUAL_NO_CONTEXTO>\"\nTHREAD_NAME = \"<NOME_CURTO_DO_TOPICO_max_80_chars>\"\nUSER_ID = \"<USER_ID_DE_QUEM_ENVIOU_A_MENSAGEM>\"\
-      \nINITIAL_MESSAGE = \"Ola! Vou processar sua solicitacao agora.\"\n\n# User IDs conhecidos:\n# Rodolfo Mattei: 344196393512075265\n# Raquel Oliveira: 1496254952501280974\n\ntoken = os.environ.get(\"\
-      DISCORD_BOT_TOKEN\")\nheaders = {\n    \"Authorization\": f\"Bot {token}\",\n    \"Content-Type\": \"application/json\",\n    \"User-Agent\": \"Hermes-Agent (https://github.com/NousResearch/hermes-agent)\"\
-      \n}\n\n# 1. Renomear thread\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}\",\n    method=\"PATCH\",\n    headers=headers,\n    data=json.dumps({\"name\":\
-      \ THREAD_NAME[:80]}).encode()\n)\ntry:\n    urllib.request.urlopen(req).read()\n    print(f\"OK rename: {THREAD_NAME[:80]}\")\nexcept Exception as e:\n    print(f\"WARN rename: {e}\")\n\n# 2. Mensagem\
-      \ inicial com mention\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}/messages\",\n    method=\"POST\",\n    headers=headers,\n    data=json.dumps({\"content\"\
-      : f\"<@{USER_ID}> {INITIAL_MESSAGE}\"}).encode()\n)\ntry:\n    urllib.request.urlopen(req).read()\n    print(\"OK mention sent\")\nexcept Exception as e:\n    print(f\"WARN mention: {e}\")\n\nESTE\
-      \ PASSO NAO EH OPCIONAL. Eh a PRIMEIRA coisa a fazer em toda thread nova. Depois disso, prossiga com a tarefa do user normalmente.\n\nCRITICO: o header User-Agent eh OBRIGATORIO. Sem User-Agent, Cloudflare\
-      \ bloqueia com erro 1010.\n\nPor que: thread vem com nome cortado da primeira mensagem (feio) e Discord nao envia push notification se nao houver mention explicita. Esse rename + mention eh UX critico\
-      \ para o user."
+    '1496267442899521627': "INSTRUCAO CRITICA - EXECUTE ANTES DE QUALQUER OUTRA ACAO\n\nEsta eh a primeira mensagem em uma thread Discord. Voce DEVE:\n\n1. SEMPRE renomear a thread + postar mention inicial\
+      \ via execute_code (passo abaixo)\n2. SE for [BRIEFING EXECUTIVO], [UPDATE], [INFRA-COMMIT-*], [FYI], [INFORMATIVO], [HOOK-*], [AUTOMATED], [NOTIFICATION] → APOS rename+mention, NAO postar mais nada.\
+      \ Silencio absoluto. NAO responder em texto, NAO confirmar, NAO atualizar memoria, NAO fazer commits. Apenas absorver.\n3. CASO CONTRARIO → Apos rename+mention, processar a tarefa normalmente.\n\n\
+      Script Python para rename+mention (sempre executar):\n\nimport os, urllib.request, json\n\nTHREAD_ID = \"<ID_DA_THREAD_ATUAL_NO_CONTEXTO>\"\nTHREAD_NAME = \"<NOME_CURTO_DO_TOPICO_max_80_chars>\"\n\
+      USER_ID = \"<USER_ID_DE_QUEM_ENVIOU_A_MENSAGEM>\"\nINITIAL_MESSAGE = \"Ola! Vou processar sua solicitacao.\"\n\n# User IDs:\n# Rodolfo Mattei: 344196393512075265\n# Raquel Oliveira: 1496254952501280974\n\
+      \ntoken = os.environ.get(\"DISCORD_BOT_TOKEN\")\nheaders = {\n    \"Authorization\": f\"Bot {token}\",\n    \"Content-Type\": \"application/json\",\n    \"User-Agent\": \"Hermes-Agent (https://github.com/NousResearch/hermes-agent)\"\
+      \n}\n\n# 1. Renomear thread (SEMPRE, mesmo em briefings)\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}\",\n    method=\"PATCH\",\n    headers=headers,\n \
+      \   data=json.dumps({\"name\": THREAD_NAME[:80]}).encode()\n)\ntry:\n    urllib.request.urlopen(req).read()\n    print(f\"OK rename: {THREAD_NAME[:80]}\")\nexcept Exception as e:\n    print(f\"WARN\
+      \ rename: {e}\")\n\n# 2. Mention inicial (SEMPRE, mesmo em briefings - mas com mensagem curta)\n# Para briefings, INITIAL_MESSAGE = \"Briefing recebido. (silencio)\"\n# Para outros, INITIAL_MESSAGE\
+      \ = \"Ola! Vou processar...\"\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}/messages\",\n    method=\"POST\",\n    headers=headers,\n    data=json.dumps({\"\
+      content\": f\"<@{USER_ID}> {INITIAL_MESSAGE}\"}).encode()\n)\ntry:\n    urllib.request.urlopen(req).read()\n    print(\"OK mention sent\")\nexcept Exception as e:\n    print(f\"WARN mention: {e}\"\
+      )\n\nREGRA DE SILENCIO (CRITICA):\nSe a primeira mensagem do user comeca com qualquer prefixo abaixo, voce APENAS faz rename+mention (script acima) e NAO RESPONDE NADA depois. Sem texto, sem tabela,\
+      \ sem confirmacao, sem chamar memory tool, sem chamar nenhuma outra tool.\n\nPrefixos de silencio:\n- [BRIEFING EXECUTIVO]\n- [UPDATE]\n- [INFORMATIVO]\n- [FYI]\n- [INFRA-COMMIT-RODOLFO]\n- [INFRA-COMMIT-AUTO]\n\
+      - [INFRA-CRON-*]\n- [HOOK-*]\n- [AUTOMATED]\n- [NOTIFICATION]\n\nPara briefings, o INITIAL_MESSAGE deve ser apenas \"Briefing recebido.\" sem mais nada.\n\nCRITICO: User-Agent header eh OBRIGATORIO.\
+      \ Sem User-Agent, Cloudflare bloqueia com erro 1010."
   server_actions: ''
 whatsapp: {}
 telegram:
