@@ -651,16 +651,45 @@ quando Raquel abrir o editor. Incluir o resultado do scorer no summary final.
 > relativo ao script). API usada: `{ Paper, SeoAssessor, ContentAssessor, Researcher }`.
 > `Researcher` recebe `(paper, i18n)` e é passado para os assessors como segundo arg.
 
-### 13. Return
+### 13. Return (CRITICAL - SINGLE MESSAGE ONLY)
 
-Emit a summary to the user:
+Emit EXACTLY ONE summary message to the user. NEVER send two messages (one announcement + one summary). NEVER duplicate information across messages. UMA mensagem com TUDO consolidado.
+
+> **PITFALL — duplicate messages waste tokens (CRITICAL):**
+> Atena historically sent 2 messages: one announcing the publish + another summarizing details. This wastes ~500 output tokens per REC and degrades UX (user has to scroll twice through nearly identical content).
+>
+> **The rule is strict:** ONE message after publish. Combine announcement, details, and Raquel mention in a single block.
+
+Required fields in the single message:
+- Confirmação de publicação (uma linha)
 - Post ID + WordPress edit link
-- **Official source URL** used to research the card (card_official_url)
-- Featured media URL
-- Card media URL (and the priority tier from search-card-image.sh)
-- Final word count
-- Tags applied (names + IDs) — confirm `lang_{language}` tag is present
-- **Always mention Raquel (<@1496254952501280974>) in the summary** so she receives a Discord notification and can review the published article.
+- Public URL
+- Yoast scores (SEO + Readability)
+- Word count + title char count
+- Focus keyword + meta description char count
+- Card image ID + Featured image ID
+- Tags applied (confirm lang_{language} tag presente)
+- Cost reporting (Step 14 — duração, API calls, custo USD)
+- @Raquel mention (<@1496254952501280974>) for review notification
+
+Format example (1 single Discord message):
+
+@Rodolfo ✅ {Card Name} publicado no {site}!
+
+📄 Post ID: {id} | 🔗 {public_url}
+✏️ Edit: {edit_url}
+
+📊 Yoast: SEO {seo}🟢 | Readability {read}🟢
+📝 {words} palavras | Title {title_chars}c | Meta {meta_chars}c
+🔍 Focus: "{focus_kw}"
+🖼️ Card: {card_id} | Featured: {featured_id}
+🏷️ Tags: {tags_csv}
+
+💰 Custo: ${cost} USD ({duration}, {api_calls} API calls)
+
+@Raquel artigo pronto para revisão! 👀
+
+**NUNCA** envie uma segunda mensagem com versão "resumida" do mesmo conteúdo. UMA MENSAGEM SÓ.
 
 ## Scripts
 
