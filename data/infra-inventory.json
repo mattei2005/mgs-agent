@@ -142,6 +142,12 @@
       "created": "2026-04-28",
       "last_modified": "2026-04-28",
       "notes": "Cap 2h em duration_sec adicionado (safeguard outliers). Backup: /tmp/track-article-cost.sh.bak-pre-2h-cap-v2"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/cleanup-discord-threads.sh",
+      "description": "Deleta threads Discord arquivadas há 2+ dias na categoria Agents (auto-descobre canais da categoria 1496264197439230003)",
+      "created": "2026-04-29",
+      "created_by": "zeus/claude-web-session"
     }
   ],
   "skills_mgs": [
@@ -1120,6 +1126,16 @@
         "atena",
         "zeus"
       ]
+    }
+  ],
+  "cron_jobs": [
+    {
+      "name": "cleanup-discord-threads",
+      "schedule": "0 4 * * *",
+      "description": "Deleta threads Discord arquivadas há 2+ dias (4 AM EDT diariamente)",
+      "script": "/root/mgs-agent/scripts/cleanup-discord-threads.sh",
+      "created": "2026-04-29",
+      "created_by": "zeus/claude-web-session"
     }
   ]
 }
