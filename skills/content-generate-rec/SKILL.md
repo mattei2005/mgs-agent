@@ -728,3 +728,47 @@ Confirm each DELETE returns `{"deleted":true}` before re-uploading.
 - Gemini composition fails after 2 retries → abort
 - WP publish failure → log full response, abort
 - Yoast verify mismatch → log and surface to user (post still exists, but meta needs manual fix)
+
+## Step 14 - Cost reporting (mandatory after publish)
+
+Apos completar Step 13 (Return summary), SEMPRE executar estes 2 sub-passos para reportar custo do REC no Discord:
+
+### 14a - Forcar atualizacao do DB de tracking
+
+O cron track-article-cost.sh roda a cada 15min. Apos publicar, forcar update imediato:
+
+    bash /root/mgs-agent/scripts/track-article-cost.sh
+    sleep 5
+
+Custo: 0 tokens (script shell puro, sem LLM).
+
+### 14b - Consultar custo e incluir no summary
+
+Apos track-article-cost.sh rodar:
+
+    POST_ID=<id_do_post_publicado>
+    sqlite3 /root/mgs-agent/data/article-tracker.db "SELECT post_id, site, duration_sec, api_calls, printf(\"%.4f\", cost_usd_estimated) AS cost FROM article_publications WHERE post_id = $POST_ID;"
+
+Resultado tipico: 62042|eggbev|425|41|2.1234
+
+### Bloco a incluir no summary final ao usuario
+
+No final do summary que ja inclui post_id, link, scores Yoast, etc., adicionar:
+
+    Custo desta publicacao:
+      - Duracao: 7m 5s
+      - API calls: 41
+      - Custo estimado: $2.12 USD
+
+Se o DB ainda nao tiver registro do post, omitir o bloco e adicionar uma linha:
+
+    Custo: ainda calculando (track-article-cost.sh rodara no proximo tick)
+
+### Custo desta secao (overhead)
+
+- bash track-article-cost.sh: 0 tokens (shell)
+- sqlite3 query: 0 tokens (shell)
+- Bloco no Discord: ~50 tokens output
+
+Total: ~50 tokens output adicionais por REC. Negligenciavel vs custo do REC ($2-3).
+
