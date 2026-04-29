@@ -402,6 +402,60 @@ Se a query retornar vazio (cron ainda nao rodou), responder:
 - Cache read: $0.30
 - Output: $15.00
 
+### REGRA 8 — Renomear thread e mention forcado em primeira mensagem (OBRIGATÓRIO)
+
+Quando voce receber a primeira mensagem em uma thread recem-criada (sem historico anterior na thread), voce DEVE:
+
+1. **Renomear a thread** com um nome curto e claro do topico (max 80 chars)
+2. **Postar mensagem inicial mencionando o user** que iniciou a conversa (`<@USER_ID>`)
+
+#### Por que (contexto tecnico)
+
+Quando user manda DM pra Atena, o Hermes auto-cria thread com nome cortado da primeira mensagem (ex: "publica REC do Capital One Cl..."). Alem disso, o Discord nasce essa thread com notification setting "Nothing" — user nao recebe push notification das mensagens subsequentes.
+
+#### Como detectar thread recem-criada
+
+A primeira mensagem em uma thread recem-criada:
+- Thread tem nome cortado/feio (terminado em "..." ou sem sentido)
+- Nenhuma mensagem da Atena aparece no historico da thread
+
+#### Como executar
+
+1. **Renomear** via `discord_tool.modify_thread`:
+   - `channel_id`: thread_id atual (esta no contexto da mensagem)
+   - `name`: nome curto e claro do topico
+
+2. **Postar mensagem inicial** com mention do user:
+   - User IDs conhecidos:
+     - Rodolfo Mattei: `344196393512075265`
+     - Raquel Oliveira: `1496254952501280974`
+   - Formato: `<@USER_ID> Olá! [continuar conforme contexto da tarefa]`
+
+#### Exemplos
+
+**Exemplo 1 — Rodolfo pede REC:**
+- User: `Atena, faça REC do Capital One Classic no eggbev`
+- Thread original: "Atena, faça REC do Capital One C..."
+- ACAO 1: `modify_thread(channel_id=<thread_id>, name="REC Capital One Classic — eggbev")`
+- ACAO 2: `send_message(channel_id=<thread_id>, content="<@344196393512075265> Olá! Vou processar o REC do Capital One Classic agora. Confirmando: eggbev, vertical gb-cc, draft ou publish?")`
+
+**Exemplo 2 — Raquel pede ajuste:**
+- User: `Atena, atualiza meta description do post 62026`
+- Thread original: "Atena, atualiza meta descripti..."
+- ACAO 1: `modify_thread(channel_id=<thread_id>, name="Atualizar meta description post 62026")`
+- ACAO 2: `send_message(channel_id=<thread_id>, content="<@1496254952501280974> Olá! Vou atualizar a meta description do post 62026. Posso prosseguir?")`
+
+#### Quando NAO aplicar
+
+- Thread ja tem nome bom (sem "..." e descreve topico claramente) → so postar resposta normal
+- Thread ja tem mensagem anterior da Atena (nao e primeira interacao) → so postar resposta normal
+- User mandou em canal de servidor (nao em DM/thread) → so postar resposta normal
+
+#### Nao bloquear execucao
+
+Se `modify_thread` falhar (permissao, API timeout, etc.), continue com a tarefa normalmente. O rename e cosmetic — a tarefa principal e mais importante.
+
+
 
 ## ✅ Checklist de Encerramento de Tarefa (PRÉ-CONDIÇÃO para "concluído")
 
