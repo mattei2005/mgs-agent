@@ -1,36 +1,35 @@
 {
-  "alerted": {
-    "zeus:discord-ops": {
-      "alerted_at": 1777478402,
-      "skill_name": "discord-ops",
-      "agent": "zeus",
-      "path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops"
-    },
-    "zeus:hermes-agent-ops": {
-      "alerted_at": 1777478402,
-      "skill_name": "hermes-agent-ops",
-      "agent": "zeus",
-      "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-ops"
-    },
-    "atena:yoast-wordpress": {
-      "alerted_at": 1777478402,
-      "skill_name": "yoast-wordpress",
-      "agent": "atena",
-      "path": "/root/.hermes/profiles/atena/skills/wordpress/yoast-wordpress"
-    }
-  },
+  "alerted": {},
   "resolved": {
     "zeus:discord-managed-roles": {
       "resolved_at": "2026-04-27T14:08:34.496020Z",
       "skill_name": "discord-managed-roles",
       "agent": "zeus",
-      "note": "cleanup retroativo 2026-04-27 \u2014 skill estava em alerted ap\u00f3s resolu\u00e7\u00e3o por bug IFS"
+      "note": "cleanup retroativo 2026-04-27 — skill estava em alerted após resolução por bug IFS"
     },
     "zeus:mgs-pending-report-monitor": {
       "resolved_at": "2026-04-27T14:08:34.496020Z",
       "skill_name": "mgs-pending-report-monitor",
       "agent": "zeus",
-      "note": "cleanup retroativo 2026-04-27 \u2014 skill estava em alerted ap\u00f3s resolu\u00e7\u00e3o por bug IFS"
+      "note": "cleanup retroativo 2026-04-27 — skill estava em alerted após resolução por bug IFS"
+    },
+    "zeus:discord-ops": {
+      "resolved_at": "2026-04-29T16:09:07.810272Z",
+      "skill_name": "discord-ops",
+      "agent": "zeus",
+      "note": "cleanup retroativo 2026-04-29 — skills movidas de inventory.skills (key errada) pra inventory.skills_hermes.{agent} (key correta)"
+    },
+    "zeus:hermes-agent-ops": {
+      "resolved_at": "2026-04-29T16:09:07.810272Z",
+      "skill_name": "hermes-agent-ops",
+      "agent": "zeus",
+      "note": "cleanup retroativo 2026-04-29 — skills movidas de inventory.skills (key errada) pra inventory.skills_hermes.{agent} (key correta)"
+    },
+    "atena:yoast-wordpress": {
+      "resolved_at": "2026-04-29T16:09:07.810272Z",
+      "skill_name": "yoast-wordpress",
+      "agent": "atena",
+      "note": "cleanup retroativo 2026-04-29 — skills movidas de inventory.skills (key errada) pra inventory.skills_hermes.{agent} (key correta)"
     }
   }
 }

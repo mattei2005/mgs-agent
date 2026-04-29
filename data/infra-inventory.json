@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-04-29T12:00:00-04:00",
+    "updated_at": "2026-04-29T16:09:07.741155Z",
     "generated_by": "infra-discovery.sh",
-    "updated_by": "zeus (REPORT-INFRA pending-report resolution)"
+    "updated_by": "fix-skills-key-mismatch"
   },
   "systemd_services": [
     {
@@ -554,6 +554,24 @@
         "name": "yoast-score-architecture",
         "category": "wordpress",
         "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/yoast-score-architecture/SKILL.md"
+      },
+      {
+        "name": "yoast-wordpress",
+        "agent": "atena",
+        "path": "/root/.hermes/profiles/atena/skills/wordpress/yoast-wordpress",
+        "description": "Class-level umbrella for all Yoast SEO + Readability work on WordPress sites. Covers: score architecture, mu-plugin design, fixing readability violations, and running cron health monitor.",
+        "tags": [
+          "yoast",
+          "wordpress",
+          "seo",
+          "readability",
+          "monitoring",
+          "mu-plugin",
+          "eggbev",
+          "cron"
+        ],
+        "created_commit": "79f6516",
+        "registered_at": "2026-04-29T12:00:00-04:00"
       }
     ],
     "zeus": [
@@ -991,6 +1009,44 @@
         "name": "writing-plans",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/writing-plans/SKILL.md"
+      },
+      {
+        "name": "discord-ops",
+        "agent": "zeus",
+        "path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops",
+        "description": "Operações Discord para o ecossistema MGS: comunicação inter-agente (Zeus↔Atena), roles managed, e hook git post-commit com notificação via webhook.",
+        "tags": [
+          "discord",
+          "inter-agent",
+          "messaging",
+          "webhook",
+          "hook",
+          "git",
+          "roles",
+          "infra",
+          "notification"
+        ],
+        "created_commit": "79f6516",
+        "registered_at": "2026-04-29T12:00:00-04:00"
+      },
+      {
+        "name": "hermes-agent-ops",
+        "agent": "zeus",
+        "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-ops",
+        "description": "Operações de manutenção dos agentes Hermes (Zeus, Atena): diagnóstico e reinicialização de gateway, versionamento de profiles via git.",
+        "tags": [
+          "hermes",
+          "agent",
+          "restart",
+          "versioning",
+          "soul",
+          "profile",
+          "git",
+          "cron",
+          "systemd"
+        ],
+        "created_commit": "79f6516",
+        "registered_at": "2026-04-29T12:00:00-04:00"
       }
     ]
   },
@@ -1108,63 +1164,5 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  },
-  "skills": [
-    {
-      "name": "discord-ops",
-      "agent": "zeus",
-      "path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops",
-      "description": "Operações Discord para o ecossistema MGS: comunicação inter-agente (Zeus↔Atena), roles managed, e hook git post-commit com notificação via webhook.",
-      "tags": [
-        "discord",
-        "inter-agent",
-        "messaging",
-        "webhook",
-        "hook",
-        "git",
-        "roles",
-        "infra",
-        "notification"
-      ],
-      "created_commit": "79f6516",
-      "registered_at": "2026-04-29T12:00:00-04:00"
-    },
-    {
-      "name": "hermes-agent-ops",
-      "agent": "zeus",
-      "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-ops",
-      "description": "Operações de manutenção dos agentes Hermes (Zeus, Atena): diagnóstico e reinicialização de gateway, versionamento de profiles via git.",
-      "tags": [
-        "hermes",
-        "agent",
-        "restart",
-        "versioning",
-        "soul",
-        "profile",
-        "git",
-        "cron",
-        "systemd"
-      ],
-      "created_commit": "79f6516",
-      "registered_at": "2026-04-29T12:00:00-04:00"
-    },
-    {
-      "name": "yoast-wordpress",
-      "agent": "atena",
-      "path": "/root/.hermes/profiles/atena/skills/wordpress/yoast-wordpress",
-      "description": "Class-level umbrella for all Yoast SEO + Readability work on WordPress sites. Covers: score architecture, mu-plugin design, fixing readability violations, and running cron health monitor.",
-      "tags": [
-        "yoast",
-        "wordpress",
-        "seo",
-        "readability",
-        "monitoring",
-        "mu-plugin",
-        "eggbev",
-        "cron"
-      ],
-      "created_commit": "79f6516",
-      "registered_at": "2026-04-29T12:00:00-04:00"
-    }
-  ]
+  }
 }
