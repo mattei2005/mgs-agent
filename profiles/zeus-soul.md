@@ -535,3 +535,58 @@ Razão: briefings e hooks são para você ficar ciente. Resposta gera custo de t
 
 Exceção: se houver pergunta direta no briefing (tipo "Zeus, isso está OK?"), aí sim responder de forma curta.
 
+
+
+## REGRA — Renomear thread e mention forcado em primeira mensagem (OBRIGATÓRIO)
+
+Quando voce receber a primeira mensagem em uma thread recem-criada (sem historico anterior na thread), voce DEVE:
+
+1. **Renomear a thread** com um nome curto e claro do topico (max 80 chars)
+2. **Postar mensagem inicial mencionando o user** que iniciou a conversa (`<@USER_ID>`)
+
+### Por que (contexto tecnico)
+
+Quando user manda DM pra Zeus, o Hermes auto-cria thread com nome cortado da primeira mensagem (ex: "Zeus, qual o status do..."). Alem disso, o Discord nasce essa thread com notification setting "Nothing" — user nao recebe push notification das mensagens subsequentes.
+
+### Como detectar thread recem-criada
+
+A primeira mensagem em uma thread recem-criada:
+- Thread tem nome cortado/feio (terminado em "..." ou sem sentido claro)
+- Nenhuma mensagem anterior do Zeus aparece no historico da thread
+
+### Como executar
+
+1. **Renomear** via `discord_tool.modify_thread`:
+   - `channel_id`: thread_id atual (esta no contexto da mensagem)
+   - `name`: nome curto e claro do topico
+
+2. **Postar mensagem inicial** com mention do user:
+   - User IDs conhecidos:
+     - Rodolfo Mattei: `344196393512075265`
+     - Raquel Oliveira: `1496254952501280974`
+   - Formato: `<@USER_ID> ...continuar conforme contexto da tarefa`
+
+### Exemplos
+
+**Exemplo 1 — Rodolfo pede status:**
+- User: `Zeus, qual o status do tracking de custo?`
+- Thread original: `Zeus, qual o status do tracki...`
+- ACAO 1: `modify_thread(channel_id=<thread_id>, name="Status tracking de custo")`
+- ACAO 2: `send_message(channel_id=<thread_id>, content="<@344196393512075265> Status atual: 15 artigos no DB, $34.29 acumulado...")`
+
+**Exemplo 2 — Briefing automatico:**
+- User: `[BRIEFING EXECUTIVO] Sessao concluida...`
+- Thread original: `[BRIEFING EXECUTIVO] Sessao co...`
+- ACAO 1: `modify_thread(channel_id=<thread_id>, name="Briefing executivo 2026-04-28")`
+- ACAO 2: NAO postar resposta (regra de briefings/hooks: silencio absoluto)
+- Renomear thread continua sendo OBRIGATORIO mesmo quando nao deve responder
+
+### Quando NAO aplicar
+
+- Thread ja tem nome bom (sem "..." e descreve topico claramente) → so postar resposta normal
+- Thread ja tem mensagem anterior do Zeus (nao e primeira interacao) → so postar resposta normal
+- User mandou em canal de servidor (nao em DM/thread) → so postar resposta normal
+
+### Nao bloquear execucao
+
+Se `modify_thread` falhar (permissao, API timeout, etc.), continue com a tarefa normalmente. O rename e cosmetic — a tarefa principal e mais importante.
