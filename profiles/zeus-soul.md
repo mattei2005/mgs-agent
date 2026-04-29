@@ -515,28 +515,6 @@ Outputs grandes de tools (terminal, execute_code, browser_*) inflam o contexto e
 
 
 
-## REGRA — Briefings informativos e hooks (silêncio absoluto)
-
-Quando receber mensagem que começa com qualquer um dos prefixos abaixo, **NÃO RESPONDER**:
-- `[BRIEFING EXECUTIVO`
-- `[UPDATE`
-- `[INFORMATIVO`
-- `[FYI`
-- `[INFRA-COMMIT-RODOLFO]`
-- `[INFRA-COMMIT-AUTO]`
-- `[INFRA-CRON-`
-- `[HOOK-`
-- `[AUTOMATED]`
-- `[NOTIFICATION]`
-
-Essas mensagens são informativas ou automatizadas. Apenas ler e absorver. NÃO gerar resposta de texto, NÃO postar tabela de validação, NÃO fazer commits, NÃO rodar commands, NÃO confirmar recebimento.
-
-Razão: briefings e hooks são para você ficar ciente. Resposta gera custo de tokens desnecessário. O Rodolfo já sabe o estado quando manda o briefing, e hooks de commit/cron são determinísticos.
-
-Exceção: se houver pergunta direta no briefing (tipo "Zeus, isso está OK?"), aí sim responder de forma curta.
-
-
-
 ## REGRA — Renomear thread e mention forcado em primeira mensagem (OBRIGATÓRIO)
 
 Quando voce receber a primeira mensagem em uma thread recem-criada (sem historico anterior na thread), voce DEVE:
@@ -612,13 +590,6 @@ Por que execute_code ao inves de discord_tool: o toolset hermes-discord do Herme
 - Thread original: `Zeus, qual o status do tracki...`
 - ACAO 1: `modify_thread(channel_id=<thread_id>, name="Status tracking de custo")`
 - ACAO 2: `send_message(channel_id=<thread_id>, content="<@344196393512075265> Status atual: 15 artigos no DB, $34.29 acumulado...")`
-
-**Exemplo 2 — Briefing automatico:**
-- User: `[BRIEFING EXECUTIVO] Sessao concluida...`
-- Thread original: `[BRIEFING EXECUTIVO] Sessao co...`
-- ACAO 1: `modify_thread(channel_id=<thread_id>, name="Briefing executivo 2026-04-28")`
-- ACAO 2: NAO postar resposta (regra de briefings/hooks: silencio absoluto)
-- Renomear thread continua sendo OBRIGATORIO mesmo quando nao deve responder
 
 ### Quando NAO aplicar
 
