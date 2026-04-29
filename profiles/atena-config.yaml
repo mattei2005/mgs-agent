@@ -340,14 +340,27 @@ discord:
   auto_thread: true
   reactions: true
   channel_prompts:
-    '1496267571543019653': "INSTRUCAO CRITICA - EXECUTE ANTES DE QUALQUER OUTRA ACAO\n\nEsta eh a primeira mensagem em uma thread Discord. Voce DEVE:\n\n1. PRIMEIRO: renomear a thread via execute_code (script\
-      \ abaixo)\n2. DEPOIS: responder normalmente, mas COMECANDO a resposta com `<@USER_ID>` para disparar push notification\n\nNAO mande 2 mensagens separadas (mention + resposta). Faca tudo em UMA mensagem\
-      \ que ja comeca com a mention.\n\n### Script Python para renomear (executar via execute_code):\n\nimport os, urllib.request, json\n\nTHREAD_ID = \"<ID_DA_THREAD_ATUAL_NO_CONTEXTO>\"\nTHREAD_NAME =\
-      \ \"<NOME_CURTO_DO_TOPICO_max_80_chars>\"\n\ntoken = os.environ.get(\"DISCORD_BOT_TOKEN\")\nheaders = {\n    \"Authorization\": f\"Bot {token}\",\n    \"Content-Type\": \"application/json\",\n   \
-      \ \"User-Agent\": \"Hermes-Agent (https://github.com/NousResearch/hermes-agent)\"\n}\n\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}\",\n    method=\"PATCH\"\
-      ,\n    headers=headers,\n    data=json.dumps({\"name\": THREAD_NAME[:80]}).encode()\n)\ntry:\n    urllib.request.urlopen(req).read()\n    print(f\"OK rename: {THREAD_NAME[:80]}\")\nexcept Exception\
-      \ as e:\n    print(f\"WARN rename: {e}\")\n\n### Resposta final no Discord\n\nDEPOIS do rename, responder a tarefa do user normalmente, mas SEMPRE comecando com `<@USER_ID>` (substituir USER_ID pelo\
-      \ ID do user).\n\nFormato esperado:\n`<@344196393512075265> [resposta da tarefa solicitada]`\n\nUser IDs conhecidos:\n- Rodolfo Mattei: 344196393512075265\n- Raquel Oliveira: 1496254952501280974\n\
+    '1496267571543019653': "INSTRUCAO CRITICA - EXECUTE ANTES DE QUALQUER OUTRA ACAO\n\nEsta eh a primeira mensagem em uma thread Discord. Voce DEVE:\n\n1. PRIMEIRO: renomear thread + adicionar membros\
+      \ automaticamente via execute_code\n2. DEPOIS: responder normalmente, COMECANDO a resposta com `<@USER_ID>` para disparar push notification\n\nNAO mande 2 mensagens separadas (mention + resposta).\
+      \ Faca tudo em UMA mensagem que ja comeca com a mention.\n\n### Script Python para renomear + auto-discover membros (executar via execute_code):\n\nimport os, urllib.request, json\n\nTHREAD_ID = \"\
+      <ID_DA_THREAD_ATUAL_NO_CONTEXTO>\"\nTHREAD_NAME = \"<NOME_CURTO_DO_TOPICO_max_80_chars>\"\nPARENT_CHANNEL_ID = \"1496267571543019653\"  # #atena-content-agent\nGUILD_ID = \"1185714635991679006\"\n\
+      \n# Bitmask de permissions Discord\nADMINISTRATOR = 0x8\nVIEW_CHANNEL = 0x400\n\ntoken = os.environ.get(\"DISCORD_BOT_TOKEN\")\nheaders = {\n    \"Authorization\": f\"Bot {token}\",\n    \"Content-Type\"\
+      : \"application/json\",\n    \"User-Agent\": \"Hermes-Agent (https://github.com/NousResearch/hermes-agent)\"\n}\n\ndef http_get(url):\n    req = urllib.request.Request(url, headers=headers)\n    return\
+      \ json.loads(urllib.request.urlopen(req).read())\n\ndef http_put(url):\n    req = urllib.request.Request(url, method=\"PUT\", headers=headers, data=b\"\")\n    return urllib.request.urlopen(req).read()\n\
+      \ndef http_patch(url, body):\n    req = urllib.request.Request(url, method=\"PATCH\", headers=headers, data=json.dumps(body).encode())\n    return urllib.request.urlopen(req).read()\n\n# 1. Renomear\
+      \ thread\ntry:\n    http_patch(f\"https://discord.com/api/v10/channels/{THREAD_ID}\", {\"name\": THREAD_NAME[:80]})\n    print(f\"OK rename: {THREAD_NAME[:80]}\")\nexcept Exception as e:\n    print(f\"\
+      WARN rename: {e}\")\n\n# 2. Auto-discover membros que podem ver o canal pai\ntry:\n    # 2a. Roles do guild com permissions globais\n    roles = http_get(f\"https://discord.com/api/v10/guilds/{GUILD_ID}/roles\"\
+      )\n    role_perms = {r['id']: int(r.get('permissions', 0)) for r in roles}\n    \n    # Roles com ADMIN global (sempre veem tudo)\n    admin_roles = {rid for rid, p in role_perms.items() if (p & ADMINISTRATOR)\
+      \ != 0}\n    \n    # 2b. Permission overwrites do canal pai\n    parent = http_get(f\"https://discord.com/api/v10/channels/{PARENT_CHANNEL_ID}\")\n    allowed_roles = set(admin_roles)\n    denied_roles\
+      \ = set()\n    for po in parent.get('permission_overwrites', []):\n        if po.get('type') == 0:  # role\n            allow = int(po.get('allow', 0))\n            deny = int(po.get('deny', 0))\n\
+      \            if (allow & VIEW_CHANNEL) != 0:\n                allowed_roles.add(po['id'])\n            if (deny & VIEW_CHANNEL) != 0:\n                denied_roles.add(po['id'])\n    \n    # Filtrar:\
+      \ allowed - denied (deny tem prioridade)\n    final_roles = allowed_roles - denied_roles\n    \n    # 2c. Buscar membros com algum desses roles (excluindo bots)\n    members = http_get(f\"https://discord.com/api/v10/guilds/{GUILD_ID}/members?limit=100\"\
+      )\n    eligible_users = []\n    for m in members:\n        user = m.get('user', {})\n        if user.get('bot'):\n            continue\n        member_roles = set(m.get('roles', []))\n        if member_roles\
+      \ & final_roles:\n            eligible_users.append((user['id'], user.get('username', '?')))\n    \n    print(f\"Found {len(eligible_users)} eligible members\")\n    \n    # 2d. Adicionar cada um\
+      \ à thread\n    added = 0\n    skipped = 0\n    for uid, uname in eligible_users:\n        try:\n            http_put(f\"https://discord.com/api/v10/channels/{THREAD_ID}/thread-members/{uid}\")\n\
+      \            added += 1\n        except Exception as e:\n            skipped += 1\n    \n    print(f\"OK members: {added} added, {skipped} skipped\")\nexcept Exception as e:\n    print(f\"WARN auto-discover\
+      \ failed: {e}\")\n\n### Resposta final no Discord\n\nDEPOIS do rename + adicao de membros, responder a tarefa do user normalmente, mas SEMPRE comecando com `<@USER_ID>` (substituir USER_ID pelo ID\
+      \ do user que enviou a mensagem).\n\nFormato esperado:\n`<@344196393512075265> [resposta da tarefa solicitada]`\n\nUser IDs conhecidos:\n- Rodolfo Mattei: 344196393512075265\n- Raquel Oliveira: 1496254952501280974\n\
       \nCRITICO: User-Agent header eh OBRIGATORIO no execute_code. Sem User-Agent, Cloudflare bloqueia com erro 1010."
   server_actions: ''
 whatsapp: {}
