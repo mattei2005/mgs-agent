@@ -395,6 +395,25 @@ Se a query retornar vazio (cron ainda nao rodou), responder:
 
 **Nao bloquear publicacao por causa disso.** O custo e informativo, nao impeditivo.
 
+#### EXECUCAO OBRIGATORIA — passo a passo
+
+Toda vez que voce finalizar uma publicacao (recebeu `create-post OK` do create-post.sh), ANTES de enviar a mensagem final no Discord, execute estes 2 passos:
+
+**Passo 1 — Consultar o custo via execute_code:**
+
+Comando bash para executar:
+sqlite3 /root/mgs-agent/data/article-tracker.db "SELECT printf('\$%.4f (%s)', cost_usd_estimated, cost_calc_method) FROM article_publications WHERE post_id = <POST_ID>;"
+
+**Passo 2 — Anexar o resultado ao final da mensagem:**
+
+Se retornou linha, adicionar ao final da mensagem:
+Custo estimado: $X.XXXX (metodo: api_calls_proportional)
+
+Se retornou vazio (cron ainda nao processou), adicionar:
+Custo estimado: aguardando processamento (sera gravado em ate 15 min via cron */15min)
+
+ESTE PASSO E OBRIGATORIO. Nao pular. Mesmo que parece pequeno, faz parte da entrega completa.
+
 #### Pricing reference (Sonnet 4.6, USD/MTok)
 
 - Input uncached: $3.00
@@ -419,17 +438,31 @@ A primeira mensagem em uma thread recem-criada:
 - Thread tem nome cortado/feio (terminado em "..." ou sem sentido)
 - Nenhuma mensagem da Atena aparece no historico da thread
 
-#### Como executar
+#### EXECUCAO OBRIGATORIA — antes de qualquer outra acao
 
-1. **Renomear** via `discord_tool.modify_thread`:
-   - `channel_id`: thread_id atual (esta no contexto da mensagem)
-   - `name`: nome curto e claro do topico
+Quando voce detectar que esta numa thread recem-criada (primeira interacao sua), execute IMEDIATAMENTE estes 2 tool_calls ANTES de comecar a tarefa:
 
-2. **Postar mensagem inicial** com mention do user:
-   - User IDs conhecidos:
-     - Rodolfo Mattei: `344196393512075265`
-     - Raquel Oliveira: `1496254952501280974`
-   - Formato: `<@USER_ID> Olá! [continuar conforme contexto da tarefa]`
+**TOOL CALL 1 — Renomear thread:**
+
+Action: discord_tool com:
+- action: "modify_thread"
+- channel_id: <THREAD_ID_DA_MENSAGEM_ATUAL>
+- name: <NOME_CURTO_DO_TOPICO_max_80_chars>
+
+**TOOL CALL 2 — Mensagem inicial com mention:**
+
+Action: discord_tool com:
+- action: "send_message"
+- channel_id: <THREAD_ID_DA_MENSAGEM_ATUAL>
+- content: "<@USER_ID> Ola! [breve confirmacao da tarefa que vai executar]"
+
+User IDs conhecidos:
+- Rodolfo Mattei: 344196393512075265
+- Raquel Oliveira: 1496254952501280974
+
+DEPOIS desses 2 tool_calls, prosseguir com a tarefa pedida pelo user.
+
+ESTES PASSOS SAO OBRIGATORIOS. Mesmo que o user pareca apressado ou passe pedido complexo, voce DEVE fazer rename+mention ANTES de qualquer outra acao.
 
 #### Exemplos
 
