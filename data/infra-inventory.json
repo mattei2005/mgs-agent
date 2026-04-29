@@ -1,9 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-04-29T16:09:07.741155Z",
-    "generated_by": "infra-discovery.sh",
-    "updated_by": "fix-skills-key-mismatch"
+    "updated_at": "2026-04-29T18:00:43-04:00",
+    "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
     {
@@ -231,14 +230,29 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/baoyu-infographic/SKILL.md"
       },
       {
+        "name": "claude-design",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/creative/claude-design/SKILL.md"
+      },
+      {
         "name": "creative-ideation",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/creative-ideation/SKILL.md"
       },
       {
+        "name": "design-md",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/creative/design-md/SKILL.md"
+      },
+      {
         "name": "excalidraw",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/excalidraw/SKILL.md"
+      },
+      {
+        "name": "humanizer",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/creative/humanizer/SKILL.md"
       },
       {
         "name": "manim-video",
@@ -261,9 +275,19 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/popular-web-designs/SKILL.md"
       },
       {
+        "name": "sketch",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/creative/sketch/SKILL.md"
+      },
+      {
         "name": "songwriting-and-ai-music",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/songwriting-and-ai-music/SKILL.md"
+      },
+      {
+        "name": "touchdesigner-mcp",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/creative/touchdesigner-mcp/SKILL.md"
       },
       {
         "name": "jupyter-live-kernel",
@@ -356,6 +380,11 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/media/songsee/SKILL.md"
       },
       {
+        "name": "spotify",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/atena/skills/media/spotify/SKILL.md"
+      },
+      {
         "name": "youtube-content",
         "category": "media",
         "skill_md": "/root/.hermes/profiles/atena/skills/media/youtube-content/SKILL.md"
@@ -429,6 +458,11 @@
         "name": "obsidian",
         "category": "note-taking",
         "skill_md": "/root/.hermes/profiles/atena/skills/note-taking/obsidian/SKILL.md"
+      },
+      {
+        "name": "airtable",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/atena/skills/productivity/airtable/SKILL.md"
       },
       {
         "name": "google-workspace",
@@ -506,14 +540,39 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/social-media/xurl/SKILL.md"
       },
       {
+        "name": "debugging-hermes-tui-commands",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/debugging-hermes-tui-commands/SKILL.md"
+      },
+      {
+        "name": "hermes-agent-skill-authoring",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+      },
+      {
+        "name": "node-inspect-debugger",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/node-inspect-debugger/SKILL.md"
+      },
+      {
         "name": "plan",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/atena/skills/software-development/plan/SKILL.md"
       },
       {
+        "name": "python-debugpy",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/python-debugpy/SKILL.md"
+      },
+      {
         "name": "requesting-code-review",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/atena/skills/software-development/requesting-code-review/SKILL.md"
+      },
+      {
+        "name": "spike",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/spike/SKILL.md"
       },
       {
         "name": "subagent-driven-development",
@@ -534,6 +593,11 @@
         "name": "writing-plans",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/atena/skills/software-development/writing-plans/SKILL.md"
+      },
+      {
+        "name": "content-generate-rec-issuer-quirks",
+        "category": "wordpress",
+        "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/content-generate-rec-issuer-quirks/SKILL.md"
       },
       {
         "name": "content-repair-readability",
@@ -557,21 +621,13 @@
       },
       {
         "name": "yoast-wordpress",
-        "agent": "atena",
-        "path": "/root/.hermes/profiles/atena/skills/wordpress/yoast-wordpress",
-        "description": "Class-level umbrella for all Yoast SEO + Readability work on WordPress sites. Covers: score architecture, mu-plugin design, fixing readability violations, and running cron health monitor.",
-        "tags": [
-          "yoast",
-          "wordpress",
-          "seo",
-          "readability",
-          "monitoring",
-          "mu-plugin",
-          "eggbev",
-          "cron"
-        ],
-        "created_commit": "79f6516",
-        "registered_at": "2026-04-29T12:00:00-04:00"
+        "category": "wordpress",
+        "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/yoast-wordpress/SKILL.md"
+      },
+      {
+        "name": "yuanbao",
+        "category": "",
+        "skill_md": "/root/.hermes/profiles/atena/skills/yuanbao/SKILL.md"
       }
     ],
     "zeus": [
@@ -641,14 +697,29 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/baoyu-infographic/SKILL.md"
       },
       {
+        "name": "claude-design",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/claude-design/SKILL.md"
+      },
+      {
         "name": "creative-ideation",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/creative-ideation/SKILL.md"
       },
       {
+        "name": "design-md",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/design-md/SKILL.md"
+      },
+      {
         "name": "excalidraw",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/excalidraw/SKILL.md"
+      },
+      {
+        "name": "humanizer",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/humanizer/SKILL.md"
       },
       {
         "name": "manim-video",
@@ -671,9 +742,19 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/popular-web-designs/SKILL.md"
       },
       {
+        "name": "sketch",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/sketch/SKILL.md"
+      },
+      {
         "name": "songwriting-and-ai-music",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/songwriting-and-ai-music/SKILL.md"
+      },
+      {
+        "name": "touchdesigner-mcp",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/touchdesigner-mcp/SKILL.md"
       },
       {
         "name": "jupyter-live-kernel",
@@ -756,6 +837,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/media/songsee/SKILL.md"
       },
       {
+        "name": "spotify",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/media/spotify/SKILL.md"
+      },
+      {
         "name": "youtube-content",
         "category": "media",
         "skill_md": "/root/.hermes/profiles/zeus/skills/media/youtube-content/SKILL.md"
@@ -831,34 +917,19 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/note-taking/obsidian/SKILL.md"
       },
       {
-        "name": "discord-managed-roles",
+        "name": "discord-ops",
         "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/discord-managed-roles/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/SKILL.md"
       },
       {
-        "name": "git-hook-discord-notify",
+        "name": "hermes-agent-ops",
         "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/git-hook-discord-notify/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-ops/SKILL.md"
       },
       {
         "name": "hermes-agent-restart",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-restart/SKILL.md"
-      },
-      {
-        "name": "hermes-profile-versioning",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-profile-versioning/SKILL.md"
-      },
-      {
-        "name": "hermes-soul-versioning",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-soul-versioning/SKILL.md"
-      },
-      {
-        "name": "inter-agent-messaging",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/inter-agent-messaging/SKILL.md"
       },
       {
         "name": "log-monitor-discord-alert",
@@ -871,19 +942,9 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-infra-inventory/SKILL.md"
       },
       {
-        "name": "mgs-pending-report-monitor",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-pending-report-monitor/SKILL.md"
-      },
-      {
         "name": "runcloud-api-management",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/runcloud-api-management/SKILL.md"
-      },
-      {
-        "name": "service-restart-monitor",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/service-restart-monitor/SKILL.md"
       },
       {
         "name": "sftp-deployment",
@@ -904,6 +965,11 @@
         "name": "wp-rest-mu-plugin-deploy",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/wp-rest-mu-plugin-deploy/SKILL.md"
+      },
+      {
+        "name": "airtable",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/airtable/SKILL.md"
       },
       {
         "name": "google-workspace",
@@ -981,14 +1047,39 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/social-media/xurl/SKILL.md"
       },
       {
+        "name": "debugging-hermes-tui-commands",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/debugging-hermes-tui-commands/SKILL.md"
+      },
+      {
+        "name": "hermes-agent-skill-authoring",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+      },
+      {
+        "name": "node-inspect-debugger",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/node-inspect-debugger/SKILL.md"
+      },
+      {
         "name": "plan",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/plan/SKILL.md"
       },
       {
+        "name": "python-debugpy",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/python-debugpy/SKILL.md"
+      },
+      {
         "name": "requesting-code-review",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/requesting-code-review/SKILL.md"
+      },
+      {
+        "name": "spike",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/spike/SKILL.md"
       },
       {
         "name": "subagent-driven-development",
@@ -1011,42 +1102,9 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/writing-plans/SKILL.md"
       },
       {
-        "name": "discord-ops",
-        "agent": "zeus",
-        "path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops",
-        "description": "Operações Discord para o ecossistema MGS: comunicação inter-agente (Zeus↔Atena), roles managed, e hook git post-commit com notificação via webhook.",
-        "tags": [
-          "discord",
-          "inter-agent",
-          "messaging",
-          "webhook",
-          "hook",
-          "git",
-          "roles",
-          "infra",
-          "notification"
-        ],
-        "created_commit": "79f6516",
-        "registered_at": "2026-04-29T12:00:00-04:00"
-      },
-      {
-        "name": "hermes-agent-ops",
-        "agent": "zeus",
-        "path": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-ops",
-        "description": "Operações de manutenção dos agentes Hermes (Zeus, Atena): diagnóstico e reinicialização de gateway, versionamento de profiles via git.",
-        "tags": [
-          "hermes",
-          "agent",
-          "restart",
-          "versioning",
-          "soul",
-          "profile",
-          "git",
-          "cron",
-          "systemd"
-        ],
-        "created_commit": "79f6516",
-        "registered_at": "2026-04-29T12:00:00-04:00"
+        "name": "yuanbao",
+        "category": "",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/yuanbao/SKILL.md"
       }
     ]
   },
@@ -1072,14 +1130,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
       "size_bytes": 334,
-      "md5": "7b749a1c38b6e4af1d65a1790ce821a8",
-      "modified_at": "2026-04-28T08:00:04-04:00"
+      "md5": "ce01083d015267b0c11fe52ce723d593",
+      "modified_at": "2026-04-29T08:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 39669,
-      "md5": "b09c8c196766ee0a3ce7e10ec9436145",
-      "modified_at": "2026-04-29T02:48:01-04:00"
+      "size_bytes": 40146,
+      "md5": "f26cf177fc52a2b03bbaf6422c94e9ee",
+      "modified_at": "2026-04-29T12:09:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1095,9 +1153,9 @@
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
-      "size_bytes": 613,
-      "md5": "d963549c2a4ba0f6d1d4109f854598cd",
-      "modified_at": "2026-04-27T10:08:34-04:00"
+      "size_bytes": 1786,
+      "md5": "e2c6e40f94b482efb80ebdaf0eb4ba00",
+      "modified_at": "2026-04-29T18:00:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -1120,8 +1178,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
-      "md5": "dd372b58cc597bf59044db3ae6ede1d5",
-      "modified_at": "2026-04-29T05:00:01-04:00"
+      "md5": "8e582cff3c24d35e21ec6ccdfe2f0e62",
+      "modified_at": "2026-04-29T18:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1137,9 +1195,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 3140,
-      "md5": "fdd151e8665f95d0333ecd9e32f7e5b7",
-      "modified_at": "2026-04-28T10:01:07-04:00"
+      "size_bytes": 3504,
+      "md5": "bd61ff0bf514898a844f86a200dd48eb",
+      "modified_at": "2026-04-29T10:01:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
