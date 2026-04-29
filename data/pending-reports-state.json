@@ -1,12 +1,5 @@
 {
-  "alerted": {
-    "atena:content-generate-rec-issuer-quirks": {
-      "alerted_at": 1777500002,
-      "skill_name": "content-generate-rec-issuer-quirks",
-      "agent": "atena",
-      "path": "/root/.hermes/profiles/atena/skills/wordpress/content-generate-rec-issuer-quirks"
-    }
-  },
+  "alerted": {},
   "resolved": {
     "zeus:discord-managed-roles": {
       "resolved_at": "2026-04-27T14:08:34.496020Z",
@@ -37,6 +30,11 @@
       "skill_name": "yoast-wordpress",
       "agent": "atena",
       "note": "cleanup retroativo 2026-04-29 \u2014 skills movidas de inventory.skills (key errada) pra inventory.skills_hermes.{agent} (key correta)"
+    },
+    "atena:content-generate-rec-issuer-quirks": {
+      "resolved_at": "2026-04-29T22:15:02.845441Z",
+      "skill_name": "content-generate-rec-issuer-quirks",
+      "agent": "atena"
     }
   }
 }
