@@ -399,8 +399,8 @@ logging:
 network:
   force_ipv4: false
 sessions:
-  auto_prune: false
-  retention_days: 90
+  auto_prune: true
+  retention_days: 30
   vacuum_after_prune: true
   min_interval_hours: 24
 _config_version: 22

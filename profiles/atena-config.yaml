@@ -415,3 +415,8 @@ platform_toolsets:
   - hermes-homeassistant
   qqbot:
   - hermes-qqbot
+sessions:
+  auto_prune: true
+  retention_days: 30
+  vacuum_after_prune: true
+  min_interval_hours: 24

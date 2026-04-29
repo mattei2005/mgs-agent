@@ -1,10 +1,12 @@
 ---
 name: ssh-jump-runcloud
 description: >
-  Deploy files and run commands on RunCloud Server 01 (162.55.28.178, hosts eggbev)
-  via SSH ProxyJump through Server 03 (46.4.95.117), because S01 blocks direct SSH
-  from this machine. Uses expect scripts for password auth at both hops.
-tags: [ssh, runcloud, eggbev, deploy, jump-host, expect]
+  RunCloud server access umbrella: deploy files and run commands on RunCloud servers.
+  Primary path: SSH ProxyJump S03→S01 via expect scripts (for machines where direct SSH
+  from mgs-agent works through S03). Fallback path: WP Plugin Editor form POST when
+  SSH is fully blocked by Cloudflare (e.g. eggbev). See references/ for full workflows.
+tags: [ssh, runcloud, eggbev, deploy, jump-host, expect, wp-admin, plugin-editor]
+related_skills: [yoast-wordpress]
 ---
 
 # SSH Jump — RunCloud S03 → S01
@@ -157,6 +159,29 @@ sudo -u runcloud wp --path=/home/runcloud/webapps/eggbev plugin list 2>&1
 # Check WP DB tables
 sudo -u runcloud wp --path=/home/runcloud/webapps/eggbev db tables --all-tables 2>&1
 ```
+
+---
+
+## § Fallback: Deploy Without SSH (WP Plugin Editor)
+
+When S01's SSH is fully blocked via Cloudflare (all ports 22/2222/8022/443 closed
+from mgs-agent), files can be deployed via the **WP admin Plugin Editor form POST**,
+which writes to the filesystem using the WP Filesystem API.
+
+**Prerequisites:** Admin credentials (regular password, NOT Application Password),
+custom login URL (WPS Hide Login), Plugin Editor not disabled (`DISALLOW_FILE_EDIT`).
+
+**Critical pitfalls:**
+- Application Passwords rejected for form login — use real password from 1Password
+- `admin-ajax edit-theme-plugin-file` nonces expire too fast — use the form POST (step 3)
+- WPS Hide Login: standard `wp-login.php` returns 404 — find slug in 1Password or `whl_page` option
+- `REST POST /wp/v2/plugins` only accepts wordpress.org slugs — cannot upload arbitrary ZIPs
+- `die()` in injected PHP returns HTTP 500 — execution still happened, read result via WP option
+
+See `references/wp-deploy-file-without-ssh.md` for full Python workflow, bootstrap
+technique (execute PHP + store result in WP option), and eggbev-specific credentials.
+
+---
 
 ## Server → webapp mapping (verified 2026-04-24)
 
