@@ -878,3 +878,106 @@ Proximo REC do mesmo cartao em outro site MGS (fincgriffin, futuros sites GB) re
    - Custo: ~$0.30 (vs $3.16 sem cache)
    - Economia: 90% por REC repetido
 
+
+## Step 5b - USE MGS REC API (CRITICAL - PREFER OVER MANUAL GENERATION)
+
+A partir de 29/04/2026, a geracao do article HTML deve SEMPRE usar a API local mgs-rec-api ao inves de gerar inline. Isso reduz custo de $3.16/REC para $0.03/REC (99% menos) e tempo de 10min para 20s.
+
+### Quando usar
+
+SEMPRE - substitui completamente o Step 5 (Write the article).
+
+Excecoes (raras):
+   - API down (health check falha): cair pro modo legacy (Step 5 manual)
+   - Cartao com requisitos especiais nao suportados pelo template
+
+### Como chamar
+
+Apos Step 4 (featured image generation), chamar a API:
+
+    # Validar que API esta up
+    curl -s http://127.0.0.1:8001/health || echo "API DOWN - cair pro modo legacy"
+
+    # Montar payload com dados do cartao
+    cat > /tmp/api-request-${CARD_SLUG}.json << JSON
+    {
+      "site": "eggbev",
+      "card_slug": "tesco-bank-clubcard",
+      "card_name": "Tesco Bank Clubcard Credit Card",
+      "card_official_url": "https://www.tescobank.com/...",
+      "annual_fee": "No annual fee",
+      "apr": "12.9% var.",
+      "benefits": ["Benefit 1...", "Benefit 2...", "Benefit 3..."],
+      "competitors": [{"name": "Sainsburys Nectar"}, {"name": "Asda Money"}]
+    }
+    JSON
+
+    # Chamar API (timeout 60s, retry 1x)
+    RESPONSE=$(curl -s --max-time 60 -X POST http://127.0.0.1:8001/generate \
+         -H "Content-Type: application/json" \
+         -d @/tmp/api-request-${CARD_SLUG}.json)
+
+    # Validar resposta
+    SUCCESS=$(echo "$RESPONSE" | jq -r .success)
+    if [ "$SUCCESS" != "true" ]; then
+      echo "API failed: $RESPONSE"
+      # CAIR PRO MODO LEGACY (Step 5 original)
+    fi
+
+    # Extrair HTML pronto
+    ARTICLE_HTML=$(echo "$RESPONSE" | jq -r .article_html)
+    COST=$(echo "$RESPONSE" | jq -r .cost_usd)
+    DURATION=$(echo "$RESPONSE" | jq -r .duration_sec)
+
+    echo "Article generated via API: cost=\$$COST duration=${DURATION}s"
+
+### O que a API faz por voce
+
+1. Consulta cache (card-cache.db) automaticamente
+2. Carrega template correto (rec-{template_key}.md)
+3. Carrega config do site (sites.json)
+4. Gera article HTML em formato Gutenberg (450-500 palavras)
+5. Retorna HTML + custo + tempo + tokens
+6. Loga tudo em /root/mgs-agent/api/usage.db
+
+### O que VOCE (Atena) ainda faz APOS receber HTML da API
+
+A API gera APENAS o body HTML. Voce ainda precisa:
+
+1. Inserir LazyBlock credit-card no posicao correta (apos primeiro paragrafo)
+   - Substituir comentario placeholder com JSON LazyBlock real
+   - Usar dados do cache (tag10, tag2, descriptor) ou gerar baseado em benefits
+2. Inserir LazyBlock botao no final
+3. Step 6: Validar word count (rodar validate-article.sh)
+4. Step 7-8: Build slugs e URLs
+5. Step 9: SEO fields (title, metadesc, focuskw)
+6. Step 10: Resolver tags + categoria via WP REST
+7. Step 11: Publicar via create-post.sh + update-yoast.sh
+8. Step 12: Trigger Yoast scorer
+9. Step 13: Return summary (incluindo Step 14 cost reporting)
+
+### Tratamento de erros
+
+API pode retornar:
+   - HTTP 200 success=true: HTML pronto
+   - HTTP 200 success=false: erro logico (ex: cache MISS sem dados)
+   - HTTP 500: erro interno (ex: Anthropic API down)
+   - HTTP 404: site/template nao encontrado
+   - Timeout: API demorou >60s
+
+Em qualquer erro nao recuperavel: cair pro Step 5 original (gerar inline). Reportar erro ao Rodolfo no Discord.
+
+### Logs e debug
+
+   API logs:    /root/mgs-agent/api/logs/api.log
+   Systemd log: /root/mgs-agent/api/logs/systemd.log
+   Usage DB:    /root/mgs-agent/api/usage.db
+   Stats:       curl http://127.0.0.1:8001/stats
+   Restart:     systemctl restart mgs-rec-api.service
+
+### Custo desta etapa
+
+   - Geracao via API: $0.03 por REC (vs $3.16 inline)
+   - Tempo: 20s por REC (vs 10min inline)
+   - Economia: 99% custo + 97% tempo
+
