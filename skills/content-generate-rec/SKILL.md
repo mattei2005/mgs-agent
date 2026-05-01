@@ -152,24 +152,57 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   notes it so Raquel knows to expect manual review.
 - The image is saved to `/tmp/card-<slug>.<ext>`.
 
-> **PITFALL — search-card-image.sh returns NEEDS_MANUAL or low-quality image:**
-> Some bank pages (e.g. Santander UK) use only lifestyle photos and return no card image.
-> The script returns `{"status":"NEEDS_MANUAL","reason":"dimensions_filter_all_rejected"}`.
-> Also: the script may return a valid image that is too small to use (e.g. 130×80px) —
-> always check the downloaded image dimensions and run `vision_analyze` to confirm quality.
-> When either situation occurs:
-> 1. Check `browser_get_images` on the official page — if no card image there, move on
-> 2. Use a `delegate_task` subagent with browser + web toolsets to search for a direct
->    image URL from financial comparison sites (finder.com/uk, moneysupermarket.com,
->    money.co.uk) — ask for the highest-resolution card image URL available. This is
->    the preferred method because it can find CDN images from the bank itself.
-> 3. Download the found image with curl using a Referer header to bypass 403:
->    ```bash
->    curl -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36" \
->      -H "Referer: https://www.finder.com/" "<image_url>" -o /tmp/card-<slug>.png
->    ```
-> 4. Verify with `vision_analyze` before proceeding
-> 5. Apply rotation + crop as normal (see other PITFALL notes below)
+> **PITFALL - CIRCUIT BREAKER quando imagem do cartao falha (CRITICAL - anti-loop):**
+>
+> Quando search-card-image.sh retorna NEEDS_MANUAL ou imagem de baixa qualidade:
+>
+> **REGRA DE OURO: Maximo 2 tentativas. Se ambas falharem, PUBLICAR SEM IMAGEM e avisar Raquel.**
+>
+> NUNCA usar delegate_task com sites comparadores (finder.com, moneysupermarket.com, comparethemarket.com, totallymoney.com, money.co.uk). Esses sites bloqueiam Browserbase com Cloudflare e geram loop infinito (caso real 01/05: 149 browser_navigate, $6.37 perdidos, nao publicou).
+>
+> **Tentativa 1 - Estrategia issuer-specific** (rapida, bem definida):
+>   - Amex UK: CDN icm.aexp-static.com + curl com Referer https://www.americanexpress.com/
+>   - Barclaycard: slug previsivel /personal/credit-cards/<card-slug>
+>   - Capital One UK: homepage + cloud_assets/webp/contactless-card-image.webp
+>   - HSBC UK: site oficial responde, parsing direto do HTML
+>   - Outros issuers: tentar curl direto com User-Agent residencial + Referer da pagina oficial
+>
+> **Tentativa 2 - curl direto na URL oficial do site:**
+>   - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36
+>   - Header: Referer = card_official_url
+>   - Se houver proxy Webshare configurado (env HTTPS_PROXY): usar
+>   - Parsear HTML retornado, extrair `<img>` do cartao via regex/BeautifulSoup
+>   - Download com mesmo User-Agent + Referer
+>
+> **Se ambas falharem: PUBLICAR ARTIGO SEM CARD IMAGE.** NAO abortar.
+>   - LazyBlock credit-card vai com `imagem` vazio (URL e ID null) - Raquel preenche manualmente
+>   - Featured image AINDA gera normalmente via Step 4 (Gemini compoe usando placeholder)
+>   - Step 13 (return summary) inclui aviso explicito ao Raquel - ver bloco "Card image manual" no template
+>
+> **ISSUERS BLACKLISTADOS - pular Tentativa 1 e 2, ir direto pra "publicar sem imagem":**
+>   - MBNA UK (Lloyds Banking Group, Cloudflare error 1007 garantido)
+>   - Vanquis Bank (multi-step JS challenge)
+>   - NewDay (Aqua, Marbles, Aqua Reward) - site SPA pesado bloqueia
+>   - Bancos pequenos UK em geral (Tandem, Zable, Pulse, etc.)
+>
+>   Detectar issuer pelo `card_official_url` (dominio) ANTES de chamar search-card-image.sh.
+>   Se dominio bate blacklist: skip Tentativa 1+2, ir direto pra fluxo "sem imagem + aviso Raquel".
+>
+> **LIMITES DUROS - anti-loop (forcar parada):**
+>   - MAX 5 browser_navigate por sessao de REC inteira (nao 149!)
+>   - MAX 3 minutos no Step 3 inteiro (timeout)
+>   - MAX 2 tentativas de download por imagem
+>   - Se exceder qualquer limite: encerrar Step 3 e ir pra fluxo "sem imagem"
+>
+> **NUNCA fazer (causou perda de $6.37 em 01/05/2026):**
+>   - Wayback Machine para imagens (raramente funciona, sempre custa caro)
+>   - Bing/Google image search via browser_navigate em loop
+>   - Tentar dezenas de sites comparadores
+>   - Insistir apos Tentativa 2 falhar
+>   - Variar URLs do mesmo site procurando imagem
+>
+> Custo de loop ate auto-prune Hermes: $5-10 USD por sessao perdida.
+> Custo de abortar e publicar sem imagem: $0.50-1.00 USD.
 >
 > **PITFALL — search-card-image.sh may select wrong card on multi-card pages (CRITICAL):**
 > Some bank pages (especially Barclaycard) display multiple card images —
@@ -704,6 +737,23 @@ Format example (1 single Discord message):
 
 @Raquel artigo pronto para revisão! 👀
 
+---
+
+**Quando NAO conseguiu pegar card image (Circuit Breaker disparou):**
+
+Substituir o bloco "🖼️ Imagens" e adicionar aviso ao Raquel ANTES do "artigo pronto":
+
+🖼️ Imagens:
+• ⚠️ Card image: NAO PUBLICADA (issuer bloqueia automacao ou imagem rejeitada)
+• Featured image ID: {featured_id} — <{featured_url}> (cena: {featured_scene})
+
+⚠️ @Raquel ATENCAO: card image precisa upload manual!
+   Issuer: {issuer_name}
+   Motivo: {reason} (ex: Cloudflare bot block, blacklisted issuer, image quality)
+   Acao: editar post {id} no WP, abrir LazyBlock credit-card, fazer upload da imagem do cartao
+
+@Raquel artigo pronto para revisão! 👀
+
 **NUNCA** envie uma segunda mensagem com versão "resumida" do mesmo conteúdo. UMA MENSAGEM SÓ.
 
 ## Scripts
@@ -767,7 +817,7 @@ Confirm each DELETE returns `{"deleted":true}` before re-uploading.
 
 - Template missing → abort
 - Card page unfetchable → abort (never invent data)
-- Card image not found in any tier → abort with message (ask user for image URL)
+- Card image not found in any tier → **NAO ABORTAR**. Publicar sem imagem + avisar Raquel (ver Circuit Breaker em Step 3 e bloco condicional em Step 13)
 - Word count out of 450–500 after 2 retries → abort
 - Gemini composition fails after 2 retries → abort
 - WP publish failure → log full response, abort
