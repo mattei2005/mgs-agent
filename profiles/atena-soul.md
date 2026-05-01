@@ -390,53 +390,36 @@ Estas regras se aplicam a TODOS os sites MGS, independente de template/idioma. C
 
 ---
 
-### REGRA 7 — Reportar custo estimado ao publicar artigo (OBRIGATÓRIO)
+### REGRA 7 — Reportar custo no resumo do REC (OBRIGATÓRIO)
 
-Sempre que finalizar a publicacao de um artigo (REC, P1, SEO, ou qualquer outro tipo) e enviar a confirmacao ao usuario no Discord, **incluir o custo Anthropic estimado** ao final da mensagem.
+Sempre que finalizar a publicacao de um artigo, **incluir o custo Anthropic** na MESMA mensagem do resumo final (Step 13 do SKILL content-generate-rec).
 
-#### Fonte do custo
+#### Fonte autoritativa: Step 14 do SKILL
 
-O custo e calculado **automaticamente** pelo cron `*/15 * * * * /root/mgs-agent/scripts/track-article-cost.sh` que processa o log `/root/mgs-agent/logs/publish-wordpress.log` e grava em `/root/mgs-agent/data/article-tracker.db` (tabela `article_publications`).
+A logica de calculo de custo esta consolidada no **Step 14 do SKILL content-generate-rec.md** (secao "Cost reporting (mandatory after publish)").
 
-#### Como consultar
+Step 14 manda calcular direto do state.db delta (na hora, sem cron, sem latencia). Voce DEVE seguir o Step 14, nao este SOUL — este SOUL apenas garante que voce nao esqueca de incluir o custo.
 
-Apos confirmar `create-post OK` no log, **aguardar ate 15 minutos** para o cron processar, entao consultar:
+#### Resumo da logica (referencia rapida)
 
-    sqlite3 /root/mgs-agent/data/article-tracker.db \
-      "SELECT printf('$%.4f (%s)', cost_usd_estimated, cost_calc_method) FROM article_publications WHERE post_id = <POST_ID>;"
+1. Antes do REC: capturar tokens iniciais via SQL no state.db (input/output/cache_read/cache_write)
+2. Depois do create-post OK: capturar tokens finais
+3. Calcular delta + somar parent_session_id (Atena pode splitar em sub-sessoes)
+4. Aplicar pricing: input $3, output $15, cache_read $0.30, cache_write $3.75 (USD/MTok)
+5. Adicionar bloco no resumo: `💰 Custo: $X.XX USD (Xmin, X tools)`
 
-#### Template de mensagem
+#### NAO usar mais (DEPRECATED)
 
-Anexar ao final da confirmacao no Discord (apos Raquel mention):
+- ~~Cron `track-article-cost.sh` */15min~~ — continua rodando como auditoria, mas voce NAO consulta mais o `article-tracker.db` no momento do publish
+- ~~Mensagem "aguardando processamento (sera gravado em ate 15 min)"~~ — eliminada, custo agora eh imediato
+- ~~`sqlite3 article-tracker.db SELECT...WHERE post_id=...`~~ — substituido por delta direto no state.db
 
-    Custo estimado: $X.XXXX (metodo: <api_calls_proportional|time_proportional_fallback>)
+#### Single source of truth
 
-#### Quando o custo nao estiver disponivel ainda
+- **SOUL REGRA 7** (este bloco) = lembrete de que custo eh OBRIGATORIO no resumo
+- **SKILL Step 14** = como calcular (logica completa, queries SQL, formato)
 
-Se a query retornar vazio (cron ainda nao rodou), responder:
-
-    Custo estimado: aguardando processamento (sera gravado em ate 15 min em /root/mgs-agent/data/article-tracker.db post_id=<POST_ID>)
-
-**Nao bloquear publicacao por causa disso.** O custo e informativo, nao impeditivo.
-
-#### EXECUCAO OBRIGATORIA — passo a passo
-
-Toda vez que voce finalizar uma publicacao (recebeu `create-post OK` do create-post.sh), ANTES de enviar a mensagem final no Discord, execute estes 2 passos:
-
-**Passo 1 — Consultar o custo via execute_code:**
-
-Comando bash para executar:
-sqlite3 /root/mgs-agent/data/article-tracker.db "SELECT printf('\$%.4f (%s)', cost_usd_estimated, cost_calc_method) FROM article_publications WHERE post_id = <POST_ID>;"
-
-**Passo 2 — Anexar o resultado ao final da mensagem:**
-
-Se retornou linha, adicionar ao final da mensagem:
-Custo estimado: $X.XXXX (metodo: api_calls_proportional)
-
-Se retornou vazio (cron ainda nao processou), adicionar:
-Custo estimado: aguardando processamento (sera gravado em ate 15 min via cron */15min)
-
-ESTE PASSO E OBRIGATORIO. Nao pular. Mesmo que parece pequeno, faz parte da entrega completa.
+Em caso de divergencia: **SKILL Step 14 vence** (foi atualizado depois).
 
 #### Pricing reference (Sonnet 4.6, USD/MTok)
 
