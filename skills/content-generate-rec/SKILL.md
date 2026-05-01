@@ -697,8 +697,8 @@ Format example (1 single Discord message):
 🏷️ Tags: {tags_csv}
 
 🖼️ Imagens:
-• Card image ID: {card_id} — {card_url}
-• Featured image ID: {featured_id} — {featured_url} (cena: {featured_scene})
+• Card image ID: {card_id} — <{card_url}>
+• Featured image ID: {featured_id} — <{featured_url}> (cena: {featured_scene})
 
 💰 Custo: ${cost} USD ({duration}, {api_calls} API calls)
 
