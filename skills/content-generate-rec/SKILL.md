@@ -739,20 +739,47 @@ Format example (1 single Discord message):
 
 ---
 
-**Quando NAO conseguiu pegar card image (Circuit Breaker disparou):**
+### LOGICA DE ESCOLHA (CRITICAL): qual template usar?
 
-Substituir o bloco "🖼️ Imagens" e adicionar aviso ao Raquel ANTES do "artigo pronto":
+**Voce DEVE escolher UM template e usar SO ele. NUNCA combinar os dois.**
+
+- Se publicacao foi 100% OK (incluindo card image): usar **TEMPLATE A — NORMAL** (acima)
+- Se Circuit Breaker disparou (card image NAO publicada): usar **TEMPLATE B — SEM IMAGEM** (abaixo)
+
+Como detectar qual template usar:
+- `card_image_id` foi preenchido com numero valido + upload retornou 200? → **TEMPLATE A**
+- `card_image_id` ficou null / Step 3 abortou apos 2 tentativas / blacklist? → **TEMPLATE B**
+
+---
+
+### TEMPLATE B — Circuit Breaker disparou (publicado SEM card image)
+
+Use ESTE template (e SO este, nao combinar com Template A) quando o Step 3 nao conseguiu obter a imagem do cartao:
+
+```
+@Rodolfo ⚠️ {Card Name} publicado no {site} (SEM card image)
+
+📄 Post ID: {id}
+🔗 {public_url}
+✏️ Edit: {edit_url}
+
+📊 Yoast: SEO {seo}🟢 | Readability {read}🟢
+📝 {words} palavras | Title {title_chars}c | Sub-Title {subtitle_chars}c | Meta {meta_chars}c
+🔍 Focus: "{focus_kw}"
+🏷️ Tags: {tags_csv}
 
 🖼️ Imagens:
 • ⚠️ Card image: NAO PUBLICADA (issuer bloqueia automacao ou imagem rejeitada)
 • Featured image ID: {featured_id} — <{featured_url}> (cena: {featured_scene})
 
+💰 Custo: ${cost} USD ({duration}, {api_calls} API calls)
+
 ⚠️ @Raquel ATENCAO: card image precisa upload manual!
    Issuer: {issuer_name}
    Motivo: {reason} (ex: Cloudflare bot block, blacklisted issuer, image quality)
+   Google Images: <https://www.google.com/search?q={card_slug_url_encoded}&udm=2>
    Acao: editar post {id} no WP, abrir LazyBlock credit-card, fazer upload da imagem do cartao
-
-@Raquel artigo pronto para revisão! 👀
+```
 
 **NUNCA** envie uma segunda mensagem com versão "resumida" do mesmo conteúdo. UMA MENSAGEM SÓ.
 
