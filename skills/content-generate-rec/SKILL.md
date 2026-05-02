@@ -225,40 +225,16 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
 >
 > Outros sites MGS (futuro) terao referencias proprias `references/site-quirks-{site}.md`.
 
-### 5. Write the article
-Follow the loaded template strictly. Word count is a HARD LIMIT:
-**450–500 words** in the final visible body.
+### 5. Write the article (DEPRECATED - use Step 5b API)
 
-Structure (order is mandatory):
-1. TITLE (post title, not H1 in body)
-2. FIRST PARAGRAPH — intro, with `card_name` in `<strong>` in first sentence
-3. INTRODUCTION — 2–3 more short paragraphs
-4. H2 — Key Benefits of the Card
-5. H2 — How Does It Work
-6. H2 — Comparative Table — **MUST contain a real HTML `<table>`** comparing
-   the main card with the 2 competitors (columns: card names; rows: annual
-   fee, rewards, lounge access / relevant perks, APR). The table MUST use
-   the native Gutenberg `<!-- wp:table -->` block wrapped in
-   `<figure class="wp-block-table">`. This is the ONLY format that
-   receives the theme's `overflow-x: auto` on mobile — do NOT use
-   `<!-- wp:html -->`, which the theme sanitizes and strips the wrapper.
-   HTML must be compact (no indentation, no line breaks between tags).
-   Positioning paragraphs go AFTER the table.
+Step 5 manual writing was DEPRECATED em 29/04/2026. **SEMPRE use Step 5b** (mgs-rec-api).
 
-   **Table formatting rules (mobile readability):**
-   - Always add `style="font-size:85%"` to the `<table>` element
-   - Keep cell text short and concise — avoid wrapping. Conventions:
-     - Rewards: `1.5pts/£1; 2pts/£1 abroad` (not `1.5 pts per £1 sterling; 2 pts per £1 on foreign currency`)
-     - Lounge access: `Priority Pass £24/visit` (not `Priority Pass (£24/visit)`)
-     - Unlimited lounge: `Unlimited PP` (not `Unlimited Priority Pass`)
-     - APR: `29.9% var.` (not `29.9% variable`)
-     - Approximate APR: `~29.9% var.`
-     - Charge card: `N/A charge card`
-   - Goal: cells fit in one line on mobile wherever possible
-7. H2 — Who Is This Card Best For
-
-Card LazyBlocks and the CTA LazyBlock are inserted by the skill (see step 7),
-not by the writer — do NOT add placeholders in the writer output.
+**Fallback de emergencia (apenas se API estiver down):**
+- Verificar `/health` da API: `curl -s http://127.0.0.1:8001/health`
+- Se API down: instruir LLM a escrever artigo seguindo o template carregado em Step 1
+- Estrutura obrigatoria: intro + H2 Key Benefits + H2 How Does It Work + H2 Comparative Table + H2 Who Is This Card Best For
+- Word count: 450-500 palavras (validar com Step 6)
+- Reportar API down ao Rodolfo no Discord para investigacao
 
 ### 6. Validate word count and subtitle length
 Run `scripts/validate-article.sh <body_html_file>`. If exit != 0, expand or
