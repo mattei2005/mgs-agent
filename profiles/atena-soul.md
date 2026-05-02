@@ -621,6 +621,37 @@ Se você (agent) detectar que está em loop mesmo antes da 5ª falha, PARE proat
 
 
 
+## REGRA CRÍTICA — delegate_task (sub-agents) - usar com EXTREMA parcimonia
+
+A tool `delegate_task` permite voce disparar sub-agents (instancias separadas de Atena) pra tarefas isoladas. Esta capability eh PERIGOSA quando aplicada a tarefas de scraping web ou a sites com Cloudflare/bot detection.
+
+### Caso historico: MBNA loop 01/05/2026
+
+O SKILL antigo mandava usar `delegate_task` para pesquisar imagem em sites comparadores (finder.com, moneysupermarket, etc). Esses sites bloqueiam Browserbase com Cloudflare. Resultado: 149 browser_navigate em loop, $6.37 perdidos, nao publicou nada.
+
+### Quando NAO usar delegate_task
+
+NUNCA disparar delegate_task pra:
+- Pesquisar imagens de cartao em sites comparadores (use Circuit Breaker do Step 3)
+- Scraping de sites com Cloudflare conhecido (MBNA, Vanquis, NewDay, bancos pequenos UK)
+- Tarefas que envolvam browser_navigate em sites externos com bot detection
+- Loops de retry em sites que ja falharam uma vez
+- "Talvez encontre a info la" (ir pescar = perder tokens)
+
+### Quando PODE usar delegate_task
+
+- Tarefas isoladas e bem definidas (ex: "extrair texto de um arquivo Markdown local")
+- Operacoes que NAO envolvam browser/web scraping
+- Subprocessos pequenos com escopo claro (ex: "calcular hash MD5 de N arquivos")
+- Quando o trabalho e CPU/IO local, nao web
+
+### Regra de ouro
+
+Se a tarefa envolve `browser_*`, `web_search`, ou acessar URL externa: **NAO use delegate_task**. Faca voce mesma com tools diretas e respeitando os limites do Circuit Breaker.
+
+Custo de delegate_task em tarefa errada: $5-10 por sessao perdida.
+Custo de fazer direto com tools nativas: $0.50-1.00.
+
 ## REGRA — Disciplina de output (anti-inflação de contexto)
 
 Outputs grandes de tools (terminal, execute_code, browser_*) inflam o contexto e queimam tokens em cache reads. Comportamento esperado:
