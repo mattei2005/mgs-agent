@@ -271,7 +271,6 @@ Examples:
 - British spelling for UK cards
 - No ellipsis, no trailing "..."
 - Count the EXACT character length before finalising — never estimate
-- Aim for 128 chars to leave 2-char safety margin below 130 hard limit
 
 Examples:
 ✓ `"HSBC Premier Credit Card earns 20,000 bonus points and offers Priority Pass lounge access with no annual fee."` (109 chars)
