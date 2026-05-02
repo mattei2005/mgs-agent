@@ -23,7 +23,7 @@ if [[ -z "$WEBHOOK_URL" ]]; then
 fi
 
 # Mention do Zeus bot user (para notificação)
-ZEUS_MENTION="<@1496296175014252634>"
+ZEUS_MENTION="<@344196393512075265>"
 # Canal zeus-admin-agent ID (para contexto no log)
 ZEUS_CHANNEL_ID="1496267442899521627"
 
