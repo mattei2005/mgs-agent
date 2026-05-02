@@ -36,7 +36,7 @@ if [[ ! -f "${STATE_FILE}" ]]; then
   python3 - <<PYEOF
 import json, datetime
 
-now = datetime.datetime.utcnow().isoformat() + "Z"
+now = datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z"
 state = {
   "_meta": {
     "description": "Estado do monitor service-restart-watcher",
@@ -85,21 +85,21 @@ with open(STATE_FILE) as f:
 
 svc_state = state["services"].get(SVC, {
   "baseline_nrestarts": 0,
-  "baseline_timestamp": datetime.datetime.utcnow().isoformat() + "Z",
-  "window_start": datetime.datetime.utcnow().isoformat() + "Z",
+  "baseline_timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z",
+  "window_start": datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z",
   "last_alert_sent": None,
   "last_alert_level": None
 })
 
 baseline = svc_state.get("baseline_nrestarts", 0)
-window_start_str = svc_state.get("window_start", datetime.datetime.utcnow().isoformat() + "Z")
+window_start_str = svc_state.get("window_start", datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z")
 window_start = datetime.datetime.fromisoformat(window_start_str.replace("Z",""))
-window_age_hours = (datetime.datetime.utcnow() - window_start).total_seconds() / 3600
+window_age_hours = (datetime.datetime.now(datetime.timezone.utc) - window_start).total_seconds() / 3600
 
 # Reset janela de 24h
 if window_age_hours >= WINDOW_HOURS:
   baseline = CURRENT_N
-  window_start = datetime.datetime.utcnow()
+  window_start = datetime.datetime.now(datetime.timezone.utc)
   svc_state["baseline_nrestarts"] = baseline
   svc_state["baseline_timestamp"] = window_start.isoformat() + "Z"
   svc_state["window_start"] = window_start.isoformat() + "Z"
@@ -119,13 +119,13 @@ if level:
   last_level = svc_state.get("last_alert_level")
   if last_alert_str and last_level == level:
     last_alert_dt = datetime.datetime.fromisoformat(last_alert_str.replace("Z",""))
-    hours_since = (datetime.datetime.utcnow() - last_alert_dt).total_seconds() / 3600
+    hours_since = (datetime.datetime.now(datetime.timezone.utc) - last_alert_dt).total_seconds() / 3600
     if hours_since < ANTI_SPAM_HOURS:
       level = None  # anti-spam ativo
 
 if level:
   alert_needed = True
-  svc_state["last_alert_sent"] = datetime.datetime.utcnow().isoformat() + "Z"
+  svc_state["last_alert_sent"] = datetime.datetime.now(datetime.timezone.utc).isoformat() + "Z"
   svc_state["last_alert_level"] = level
 
 # Atualizar state
