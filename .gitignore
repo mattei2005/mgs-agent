@@ -1,6 +1,63 @@
+# ─── Original ─────────────────────────────────────────────────
 node_modules/
 .env
 logs/
 *.log
 dist/
 .DS_Store
+
+# ─── Python ───────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.coverage
+
+# ─── Databases (state ativo, muda em runtime) ─────────────────
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# ─── Backups e arquivos temporários ───────────────────────────
+*.bak
+*.bak-*
+*.bak.*
+*.swp
+*.tmp
+*.orig
+*.rej
+
+# ─── Caches ──────────────────────────────────────────────────
+data/card-images-cache/
+**/cache/
+*.cache
+
+# ─── State files (gerados por cron, mudam toda hora) ─────────
+data/auto-push-monitor.json
+data/service-restart-state.json
+data/pending-reports-state.json
+data/hermes-version-state.json
+data/yoast-health-eggbev-snapshots.json
+data/yoast-readability-eggbev-snapshots.json
+data/rec-readability-monitor.json
+data/anthropic-cost-state.json
+data/tool-loops-state.json
+data/article-tracker.db
+data/card-cache.db
+api/usage.db
+
+# ─── Backups antigos (snapshots Hetzner cobrem) ───────────────
+backups/
+
+# ─── Lockfiles internos do Hermes ─────────────────────────────
+*.lock
+*.pid
+
+# ─── Outros temporários ───────────────────────────────────────
+.tmp/
+tmp/

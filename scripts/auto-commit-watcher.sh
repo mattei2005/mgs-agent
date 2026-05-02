@@ -33,7 +33,7 @@ while inotifywait -r -e modify,create,delete,move \
   CHANGES_TRIM=$(echo "$CHANGES" | cut -c1-100)
 
   # Add + commit (push acontece via hook 1P existente)
-  git add -A
+  git add .
 
   COMMIT_MSG="auto: $CHANGES_TRIM"
 

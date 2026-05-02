@@ -1,0 +1,73 @@
+diff --git a/tools/discord_tool.py b/tools/discord_tool.py
+index 1bdbbd43..fa858a62 100644
+--- a/tools/discord_tool.py
++++ b/tools/discord_tool.py
+@@ -440,6 +440,44 @@ def _create_thread(
+     })
+ 
+ 
++def _modify_thread(
++    token: str, channel_id: str,
++    name: Optional[str] = None,
++    archived: Optional[bool] = None,
++    auto_archive_duration: Optional[int] = None,
++    locked: Optional[bool] = None,
++    **_kwargs: Any,
++) -> str:
++    """Modify thread properties (rename, archive, lock).
++
++    channel_id: thread ID to modify.
++    name: new thread name (max 100 chars).
++    archived: archive (True) or unarchive (False) the thread.
++    auto_archive_duration: minutes (60, 1440, 4320, 10080).
++    locked: lock (True) or unlock (False) the thread.
++    """
++    body: Dict[str, Any] = {}
++    if name is not None:
++        body["name"] = name[:100]
++    if archived is not None:
++        body["archived"] = archived
++    if auto_archive_duration is not None:
++        body["auto_archive_duration"] = auto_archive_duration
++    if locked is not None:
++        body["locked"] = locked
++
++    if not body:
++        return json.dumps({"success": False, "error": "no_fields_to_update"})
++
++    thread = _discord_request("PATCH", f"/channels/{channel_id}", token, body=body)
++    return json.dumps({
++        "success": True,
++        "thread_id": thread["id"],
++        "name": thread.get("name"),
++        "archived": thread.get("thread_metadata", {}).get("archived"),
++    })
++
++
+ def _add_role(token: str, guild_id: str, user_id: str, role_id: str, **_kwargs: Any) -> str:
+     """Add a role to a guild member."""
+     _discord_request("PUT", f"/guilds/{guild_id}/members/{user_id}/roles/{role_id}", token)
+@@ -469,6 +507,7 @@ _ACTIONS = {
+     "pin_message": _pin_message,
+     "unpin_message": _unpin_message,
+     "create_thread": _create_thread,
++    "modify_thread": _modify_thread,
+     "add_role": _add_role,
+     "remove_role": _remove_role,
+ }
+@@ -489,6 +528,7 @@ _ACTION_MANIFEST: List[Tuple[str, str, str]] = [
+     ("pin_message", "(channel_id, message_id)", "pin a message"),
+     ("unpin_message", "(channel_id, message_id)", "unpin a message"),
+     ("create_thread", "(channel_id, name)", "create a public thread; optional message_id anchor"),
++    ("modify_thread", "(channel_id, name?, archived?)", "modify thread (rename, archive, lock)"),
+     ("add_role", "(guild_id, user_id, role_id)", "assign a role"),
+     ("remove_role", "(guild_id, user_id, role_id)", "remove a role"),
+ ]
+@@ -509,6 +549,7 @@ _REQUIRED_PARAMS: Dict[str, List[str]] = {
+     "pin_message": ["channel_id", "message_id"],
+     "unpin_message": ["channel_id", "message_id"],
+     "create_thread": ["channel_id", "name"],
++    "modify_thread": ["channel_id"],
+     "add_role": ["guild_id", "user_id", "role_id"],
+     "remove_role": ["guild_id", "user_id", "role_id"],
+ }
