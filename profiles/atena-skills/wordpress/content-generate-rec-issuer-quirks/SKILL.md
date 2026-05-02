@@ -13,6 +13,9 @@ Companion to `content-generate-rec`. Contains pitfalls and patterns discovered
 in live REC sessions that are too issuer-specific for the main SKILL.md but
 critical enough to encode.
 
+**Support files:**
+- `references/subtitle-rewrite-patterns.md` — confirmed ≤100-char subtitle examples + cascade fix pattern
+
 ---
 
 ## 1. American Express UK
@@ -95,7 +98,35 @@ RGBA webp — handle 4-channel pixels in crop loop (see main SKILL.md pitfall).
 
 ---
 
-## 4. API HTML Post-Processing
+## 4. NatWest
+
+### Card Image
+- Official page: `https://www.natwest.com/credit-cards/reward-credit-card.html`
+- Card image URL (Reward Credit Card, as of 2026-05):
+  ```
+  https://www.natwest.com/credit-cards/reward-credit-card/_jcr_content/root/responsivegrid/container_1115300139/productcardshelf_cop/productcard_0/card_right_image.coreimg.png/1767607794625/nw-credit-card-reward-470x2642x.png
+  ```
+- Image: 940×528px PNG, sRGB, horizontal/landscape — no rotation needed.
+- Download with:
+  - `User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36`
+  - `Referer: https://www.natwest.com/credit-cards/reward-credit-card.html`
+- NatWest is **NOT blacklisted** — direct curl works reliably (confirmed 2026-05-02).
+- The image has a white/light background area around the card — **always crop** with the pixel-detection method before upload.
+
+### Page Data (Reward Credit Card)
+| Field | Value |
+|-------|-------|
+| Annual fee | £24 (£0 with NatWest Reward current account) |
+| Purchase APR | 25.9% p.a. (variable) |
+| Representative APR | 31.0% (variable) |
+| Supermarket rewards | 1% back in Rewards |
+| Other spending | 0.25% back |
+| Partner retailers | 1–15% via MyRewards |
+| Eligibility min income | £10,000/year |
+
+---
+
+## 5. API HTML Post-Processing
 
 ### Malformed Closing Tags from mgs-rec-api
 The API sometimes returns `<!-- /w:heading -->` (missing `p`) instead of
@@ -128,9 +159,26 @@ Always inject before upload:
 content = content.replace('<table><thead>', '<table class="has-fixed-layout" style="font-size:85%"><thead>')
 ```
 
+### Subtitle Length — API Consistently Over-Generates
+The API tends to generate subtitles in the **140–160 char range**, failing the
+100-char hard limit. This is a systematic issue, not a one-off.
+
+**Always check subtitle length immediately after receiving the API response.**
+Do NOT proceed to LazyBlock assembly or file writing until subtitle is ≤100 chars.
+
+Rewrite pattern: `{Card Name} {ONE benefit}. {ONE secondary fact if fits.}`
+- Drop "with annual fee waived for X" type clauses — they push past 100 chars.
+- Confirmed working (89 chars):
+  `"NatWest Reward Credit Card earns 1% back on groceries and up to 15% at partner retailers."`
+
+**Cascade warning:** Rewriting the subtitle to ≤100 chars removes ~10–15 words.
+If the body was at 451 words, it will drop to ~438–441. Expand 1–2 paragraphs
+by one clause each (~10 words total) before re-validating. Re-validation is
+mandatory — do not assume a prior PASS still holds.
+
 ---
 
-## 5. Focus Keyword Abbreviation for Long Card Names
+## 6. Focus Keyword Abbreviation for Long Card Names
 
 When the official card name has >4 words (Yoast max), abbreviate for focuskw:
 | Card name (full) | Focus KW (≤4 words) |
