@@ -537,11 +537,11 @@ tone and language.
 - PITFALL real: Atena once filled this with a custom 48-char title while `post_title` had 67 chars (post 62026, eggbev.com, 2026-04-28). Result: two different titles for the same article. NEVER do this.
 
 #### `_yoast_wpseo_metadesc` (Yoast meta description)
-- LIMIT: 120-135 chars (min 120, max 135) — count exact length before saving
-- Sweet spot: 130 chars
+- LIMIT: 120-130 chars (min 120, max 130) — count exact length before saving
+- Sweet spot: 128 chars (2-char buffer below hard limit)
 - MUST contain the focus keyphrase within the first 100 chars
 - If draft <120 chars: REWRITE to add context, CTA, or specific benefit
-- If draft >135 chars: trim to 130 keeping keyphrase intact
+- If draft >130 chars: trim to 128 keeping keyphrase intact
 
 #### `_yoast_wpseo_focuskw` (focus keyphrase)
 - HARD LIMIT: max 4 words (Yoast scorer requirement)

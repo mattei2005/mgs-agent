@@ -255,6 +255,7 @@ The pipeline reads them from the template output and publishes via API.
 - NEVER use the word "Review"
 - NEVER include the site name
 - Count the EXACT character length before finalising — never estimate
+- Aim for 128 chars to leave 2-char safety margin below 130 hard limit
 
 Examples:
 ✓ `"HSBC Premier: No Fee & Lounge Access"` (38 chars)
@@ -263,13 +264,14 @@ Examples:
 ✗ `"HSBC Premier Credit Card | Eggbev"` (contains site name)
 
 ### Meta Description (`_yoast_wpseo_metadesc`)
-- HARD LIMIT: ≤130 characters including spaces and punctuation
+- LIMIT: 120-130 characters including spaces and punctuation (sweet spot 128)
 - MUST contain the exact card name
 - MUST mention 2 real benefits of the card (no invented data)
 - Tone: direct, factual, no clickbait, no "click here"
 - British spelling for UK cards
 - No ellipsis, no trailing "..."
 - Count the EXACT character length before finalising — never estimate
+- Aim for 128 chars to leave 2-char safety margin below 130 hard limit
 
 Examples:
 ✓ `"HSBC Premier Credit Card earns 20,000 bonus points and offers Priority Pass lounge access with no annual fee."` (109 chars)
