@@ -4,7 +4,7 @@ description: >
   Companion reference for content-generate-rec. Issuer-specific URL quirks,
   image CDN patterns, and HTML post-processing fixes discovered during REC
   pipeline runs. Load this alongside content-generate-rec when the issuer is
-  American Express UK, Barclaycard, or Capital One UK.
+  American Express UK, Barclaycard, Capital One UK, NatWest, or Lloyds Bank.
 ---
 
 # content-generate-rec — Issuer Quirks & Post-Processing Reference
