@@ -178,7 +178,62 @@ mandatory — do not assume a prior PASS still holds.
 
 ---
 
-## 6. Focus Keyword Abbreviation for Long Card Names
+## 6. Lloyds Bank (lloydsbank.com) — BLACKLISTED
+
+**Status:** Fully blacklisted — confirmed 01/05/2026.
+
+Both `browser_navigate` and `curl` are blocked:
+- Browser returns Cloudflare **Error 1007** ("Access Denied") with a standard error page — no card content is reachable.
+- Curl returns 92 KB of HTML that is the error/redirect page, not the actual card page (no `<img>` tags, no card data).
+
+This applies to **all pages** on `lloydsbank.com`, not just the credit cards section.
+
+**Correct workflow when issuer domain is `lloydsbank.com`:**
+1. Skip Step 3 entirely (no card image attempts — ZERO browser navigates).
+2. For card data (Step 2): use `delegate_task` with `toolsets=["web"]` (web search only, no browser). Web search via sub-agent works and avoids the Cloudflare wall.
+3. Publish without card image, include ⚠️ Template B summary and manual-upload instructions for Raquel.
+
+**MBNA vs Lloyds Bank:**
+- MBNA UK (`mbna.co.uk`) — also Lloyds Banking Group, also blacklisted (previously documented)
+- Lloyds Bank (`lloydsbank.com`) — the main bank, also blacklisted (added 01/05/2026)
+- Both domains → skip image, go to Template B immediately
+
+**Featured image workaround when no card image:**
+When generating the featured image via `generate-featured-image.sh <slug> <card_image_path>` and no real card image exists, create a generic dark-card PIL placeholder:
+```python
+from PIL import Image, ImageDraw
+W, H = 856, 540
+img = Image.new('RGB', (W, H), '#16213e')
+draw = ImageDraw.Draw(img)
+# Add chip + card number dots + minimal branding
+img.save('/tmp/card-placeholder-generic.png', 'PNG')
+```
+Then pass `/tmp/card-placeholder-generic.png` as the card_image_path. Gemini will compose a plausible generic card in the scene. Raquel replaces both the featured image and the card LazyBlock image manually during review.
+
+---
+
+## 7. Upload-Image MIME Detection Pitfall (CRITICAL)
+
+`upload-image.sh` detects MIME type from the **filename argument** (3rd arg), not from file magic bytes. The detection regex is:
+```bash
+case "${FILENAME,,}" in
+  *.jpg|*.jpeg) mime="image/jpeg" ;;
+  *.webp)       mime="image/webp" ;;
+  ...
+esac
+```
+Default fallback is `image/png`.
+
+**If you pass a filename WITHOUT extension, WP rejects with HTTP 500 `rest_upload_sideload_error`.**
+
+✅ CORRECT: `upload-image.sh eggbev /tmp/featured-foo.jpg featured-foo.jpg`
+❌ WRONG:   `upload-image.sh eggbev /tmp/featured-foo.jpg featured-foo` → HTTP 500
+
+**Rule:** always include the file extension in the 3rd argument (`filename` param). Even if the 4th arg (alt text/title) is what changed, 3rd arg must have `.jpg`/`.png`/`.webp`.
+
+---
+
+## 8. Focus Keyword Abbreviation for Long Card Names
 
 When the official card name has >4 words (Yoast max), abbreviate for focuskw:
 | Card name (full) | Focus KW (≤4 words) |
