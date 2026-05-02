@@ -215,37 +215,15 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   card_media. If not, regenerate (retry up to 2x). If still broken,
   abort with a clear message.
 
-### 4b. Theme HTML sanitization on eggbev (jbf-wp-theme-main)
+### 4b. Theme HTML quirks (per-site)
 
-> **PITFALL — theme strips div/style from wp:html blocks (CRITICAL):**
-> The `jbf-wp-theme-main` theme used on eggbev applies aggressive `wp_kses`
-> filtering at render time. Inside `<!-- wp:html -->` blocks, it strips:
-> - `<div style="...">` — inline style removed, div may also be removed
-> - `<div class="...">` — the div element itself is removed from output
-> - `<style>` tags — removed entirely
+> **REFERENCE - eggbev theme quirks:** O tema `jbf-wp-theme-main` (eggbev.com)
+> tem regras especificas pra wp:html sanitization, comparative tables, e REST
+> API. Ver `references/site-quirks-eggbev.md` (carregada sob demanda via `view`).
 >
-> The HTML saves correctly to the database but is sanitized on page render.
-> This means you CANNOT add responsive wrappers or scoped CSS inside `wp:html`.
+> Carregue essa reference quando publicar em eggbev.com (sempre).
 >
-> **What survives inside wp:html:** native table elements (`<table>`, `<thead>`,
-> `<tbody>`, `<tr>`, `<th>`, `<td>`), and their standard attributes.
->
-> **Where to put global CSS:** Customizer → Additional CSS (`Aparência →
-> Customizar → CSS Adicional`) — this is injected into `<head>` by WordPress
-> itself, before the theme's `wp_kses` filter runs, so it is safe. Any CSS
-> that needs to affect post content (e.g. responsive table overflow) must go
-> there. Example for responsive tables on all posts:
-> ```css
-> .jd-post-content table {
->   display: block;
->   overflow-x: auto;
->   -webkit-overflow-scrolling: touch;
->   max-width: 100%;
-> }
-> ```
-> This requires manual action in the WP admin panel (cannot be applied via
-> REST API on this site — the `/wp/v2/custom_css` and global-styles endpoints
-> are not available for this classic theme).
+> Outros sites MGS (futuro) terao referencias proprias `references/site-quirks-{site}.md`.
 
 ### 5. Write the article
 Follow the loaded template strictly. Word count is a HARD LIMIT:
