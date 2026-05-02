@@ -60,16 +60,13 @@ Example:
 
 ---
 
-## REST /posts?slug= broken on eggbev
+## ~~REST /posts?slug= broken~~ — RESOLVED (01/05/2026)
 
-Symptom: `GET /wp-json/wp/v2/posts?slug=<existing-slug>&status=any` returns []
-even when the slug exists. Affects both auth and unauth requests.
+Bug historico: `GET /wp-json/wp/v2/posts?slug=<existing-slug>` retornava []
+mesmo com post existindo. Suspeitava-se Wordfence/Yoast/tema.
 
-Suspected cause: Plugin interference in `rest_post_query` filter hook
-(likely Rank Math SEO, Wordfence, or theme functions).
+Validado em 01/05/2026: query funciona normalmente. Bug parou de manifestar
+em algum momento entre 28/04 e 01/05/2026 (provavelmente update de plugin).
 
-Workaround: `check-slug-conflict.sh` already handles this fail-closed.
-The script may emit `WARN posts_query_zero_results` - this is expected on
-eggbev and does not block publishing.
-
-Detection: look for these WARN entries in `/root/mgs-agent/logs/publish-wordpress.log`.
+`check-slug-conflict.sh` ainda tem fallback `WARN posts_query_zero_results`
+mas nao deve mais disparar.
