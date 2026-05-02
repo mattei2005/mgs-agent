@@ -204,7 +204,7 @@ import json, sys, datetime
 d = json.load(sys.stdin)
 entry = d.get('alerted', {}).pop('${skill_key}', None)
 d.setdefault('resolved', {})['${skill_key}'] = {
-    'resolved_at': datetime.datetime.now(datetime.timezone.utc).isoformat() + 'Z',
+    'resolved_at': datetime.datetime.utcnow().isoformat() + 'Z',
     'skill_name': '${skill_name}',
     'agent': '${agent}'
 }
