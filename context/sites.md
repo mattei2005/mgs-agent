@@ -52,7 +52,7 @@ Exemplos:
 | finanzas.cliquet.com | US-CC-ES |
 | wantabrand.com | US-CC-ES |
 | finance.wantabrand.com | US-CC-EN, GB-CC-EN |
-| fincgriffin.com | GB-CC-EN, TR-CC-TR, ES-CC-ES |
+| fincgriffin.com | GB-CC-EN, TR-CC-TR, ES-CC-ES | (1) |
 | financeadx.com | US-CC-EN, US-CC-ES, CA-CC-EN, CA-CC-FR, MX-CC-ES, ZA-CC-EN, AR-CC-ES |
 | marevelx.com | DE-CC-DE, US-CC-EN, US-CC-ES, MX-CC-ES |
 | helixenit.net | DE-CC-DE, US-CC-EN, US-CC-ES, MX-CC-ES |
@@ -108,3 +108,9 @@ Agentes devem usar o JSON pra operações (criar artigo, subir campanha) e este 
 - SMS lead capture
 - Rec pages: `/rec-{vertical}-{card-name}/`
 - P1 pages: páginas how-to-apply
+
+---
+
+## Notas operacionais
+
+(1) **fincgriffin: deploy manual.** Servidor hospedado em infra de terceiros (ADX) sem acesso SSH/API/SFTP. Agentes (Atena, Zeus) NAO operam neste site. Toda atualizacao de plugins, mu-plugins ou conteudo eh feita manualmente pelo Rodolfo via WP-Admin. Nao incluido em `data/sites.json` (que eh registro de pipelines ativos automatizados).
