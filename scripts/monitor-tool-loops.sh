@@ -98,7 +98,7 @@ for line in lines:
                 tc["error"] = is_error
                 break
 
-# Contar erros consecutivos por tool (do final pra tras)
+# === DETECCAO 1: Erros consecutivos por tool (deteccao original) ===
 consecutive_errors_by_tool = defaultdict(int)
 streak_active = defaultdict(bool)
 
@@ -108,26 +108,72 @@ for tc in reversed(tool_calls):
         if not streak_active.get(name + "_broken", False):
             consecutive_errors_by_tool[name] += 1
     elif tc.get("error") is False:
-        # Sucesso quebra a streak
         streak_active[name + "_broken"] = True
 
-# Imprimir tool com mais erros consecutivos
+# === DETECCAO 2: Frequencia de tool calls (mesmo sem erro) ===
+# Loops do tipo MBNA: browser_navigate em sites bloqueados retorna HTTP 200
+# (pagina Cloudflare challenge), monitor original nao detectava.
+# Aqui contamos a FREQUENCIA total de cada tool nos ultimos 30 turns.
+FREQUENCY_THRESHOLDS = {
+    "browser_navigate": 15,    # >15 navigates em 30 turns = loop suspeito
+    "browser_get_images": 15,
+    "web_search": 10,
+    "web_fetch": 15,
+}
+DEFAULT_FREQUENCY = 25  # Outras tools
+
+frequency_by_tool = defaultdict(int)
+for tc in tool_calls:
+    frequency_by_tool[tc["name"]] += 1
+
+# Identificar tools acima do threshold
+high_frequency = {}
+for tool_name, count in frequency_by_tool.items():
+    threshold = FREQUENCY_THRESHOLDS.get(tool_name, DEFAULT_FREQUENCY)
+    if count >= threshold:
+        high_frequency[tool_name] = count
+
+# === DECISAO: Reportar pior caso (erros consecutivos OU frequencia alta) ===
+result_tool = "none"
+result_count = 0
+result_kind = "none"
+
 if consecutive_errors_by_tool:
-    max_tool = max(consecutive_errors_by_tool, key=consecutive_errors_by_tool.get)
-    max_count = consecutive_errors_by_tool[max_tool]
-    print(f"{max_tool}|{max_count}")
-else:
-    print("none|0")
+    max_err_tool = max(consecutive_errors_by_tool, key=consecutive_errors_by_tool.get)
+    max_err_count = consecutive_errors_by_tool[max_err_tool]
+    result_tool = max_err_tool
+    result_count = max_err_count
+    result_kind = "errors"
+
+if high_frequency:
+    max_freq_tool = max(high_frequency, key=high_frequency.get)
+    max_freq_count = high_frequency[max_freq_tool]
+    # Frequencia alta tem prioridade se for muito acima do threshold
+    threshold = FREQUENCY_THRESHOLDS.get(max_freq_tool, DEFAULT_FREQUENCY)
+    if max_freq_count >= threshold * 1.5 or result_kind == "none":
+        result_tool = max_freq_tool
+        result_count = max_freq_count
+        result_kind = "frequency"
+
+# Output: tool|count|kind (compatibilidade backward com bash)
+print(f"{result_tool}|{result_count}|{result_kind}")
 PYTHON_END
 )
     
     TOOL_NAME=$(echo "$LOOP_DETECTED" | cut -d'|' -f1)
     ERROR_COUNT=$(echo "$LOOP_DETECTED" | cut -d'|' -f2)
+    DETECTION_KIND=$(echo "$LOOP_DETECTED" | cut -d'|' -f3)
     
     [ "$TOOL_NAME" = "none" ] && continue
     [ -z "$ERROR_COUNT" ] && continue
     
-    if [ "$ERROR_COUNT" -ge "$THRESHOLD" ]; then
+    # Threshold dinamico: 5 pra erros, 1 pra frequencia (ja foi filtrado pelo Python)
+    EFFECTIVE_THRESHOLD=$THRESHOLD
+    if [ "$DETECTION_KIND" = "frequency" ]; then
+      EFFECTIVE_THRESHOLD=1
+    fi
+    
+    if [ "$ERROR_COUNT" -ge "$EFFECTIVE_THRESHOLD" ]; then
       # Verificar cooldown
       LAST_ALERT=$(jq -r --arg k "$KEY" '.[$k] // 0' "$STATE_FILE")
       ELAPSED=$((NOW - LAST_ALERT))
@@ -135,7 +181,12 @@ PYTHON_END
       if [ "$ELAPSED" -ge "$COOLDOWN_SECONDS" ]; then
         # Postar alerta
         TITLE="🔴 [LOOP DETECTADO] ${AGENT^} em loop"
-        DESC=$(printf "**Agent:** %s\n**Session:** %s\n**Tool:** \`%s\`\n**Erros consecutivos:** %s\n**Sugestão:** mandar mensagem ao agent pra parar ou orientar" "$AGENT" "$SESSION_ID" "$TOOL_NAME" "$ERROR_COUNT")
+        if [ "$DETECTION_KIND" = "frequency" ]; then
+          KIND_LABEL="Frequencia alta (sem erros)"
+        else
+          KIND_LABEL="Erros consecutivos"
+        fi
+        DESC=$(printf "**Agent:** %s\n**Session:** %s\n**Tool:** \`%s\`\n**Tipo:** %s\n**Contagem:** %s\n**Sugestão:** mandar mensagem ao agent pra parar ou orientar" "$AGENT" "$SESSION_ID" "$TOOL_NAME" "$KIND_LABEL" "$ERROR_COUNT")
         
         PAYLOAD=$(jq -n \
           --arg c "<@344196393512075265> verificar agent" \
