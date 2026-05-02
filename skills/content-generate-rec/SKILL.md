@@ -367,44 +367,29 @@ Each LazyBlock in the post gets its own freshly generated `blockId`.
 - `p1_url` (used in both LazyBlocks):
   `https://{domain}/apply-now-{country}-{vertical}-{card_slug}/`
 
-### 9. Title and Yoast SEO fields — GLOBAL RULES (all MGS sites)
+### 9. Title and Yoast SEO fields
 
-Writing rules for these fields are defined in the template (see `templates/rec-{template_key}.md`,
-section **SEO FIELDS**). The template is the single source of truth for content
-tone and language.
+Step 9 enxuto - constraints universais (todos sites MGS, todos templates).
 
-**Technical constraints (pipeline-level — apply to ALL MGS sites, regardless of template/country/language):**
+Regras de **conteudo/tom/idioma** ficam no template (`templates/rec-{template_key}.md`,
+secao "SEO FIELDS") - ver template carregado em Step 1.
 
-#### `post_title` (post title in WordPress, renders as `<h1>`)
-- HARD LIMIT: max 60 chars (incluindo espacos e pontuacao) — count exact length before saving
-- MUST contain the focus keyphrase
-- NEVER include site name (ex: " | Eggbev"), separators (" - ", " | "), or sufixos
-- Each MGS site has its Yoast global template configured to render only the title (no suffixes)
-- If card name >60 chars, abbreviate while keeping the focus keyphrase
-  - Example BAD: "Capital One Classic Credit Card: No Fee & Credit Limit Up to GBP4,000" (67 chars)
-  - Example GOOD: "Capital One Classic: Build Credit, No Annual Fee" (48 chars)
+**Constraints tecnicos universais (TODOS sites MGS):**
 
-#### `_yoast_wpseo_title` (Yoast SEO Title meta)
-- LEAVE EMPTY. Do NOT fill manually.
-- Yoast inherits the site global template automatically (configured per-site to show only the post title)
-- Filling manually overrides the global template and breaks consistency across the site
-- PITFALL real: Atena once filled this with a custom 48-char title while `post_title` had 67 chars (post 62026, eggbev.com, 2026-04-28). Result: two different titles for the same article. NEVER do this.
+| Campo | Limite |
+|---|---|
+| `post_title` | max 60 chars, contem focus keyphrase, SEM suffix de site |
+| `_yoast_wpseo_title` | DEIXAR VAZIO (Yoast inherita global template do site) |
+| `_yoast_wpseo_metadesc` | 120-130 chars (sweet spot 128), focus keyphrase nos primeiros 100 chars |
+| `_yoast_wpseo_focuskw` | max 4 palavras, aparece em title + metadesc + 1o paragrafo |
 
-#### `_yoast_wpseo_metadesc` (Yoast meta description)
-- LIMIT: 120-130 chars (min 120, max 130) — count exact length before saving
-- Sweet spot: 128 chars (2-char buffer below hard limit)
-- MUST contain the focus keyphrase within the first 100 chars
-- If draft <120 chars: REWRITE to add context, CTA, or specific benefit
-- If draft >130 chars: trim to 128 keeping keyphrase intact
+**Pitfalls criticos:**
+- NUNCA preencher `_yoast_wpseo_title` (override quebra consistencia do site - ver post 62026 historico)
+- Sempre validar EXACT char count antes de salvar (nao estimar)
+- Se card_name >60 chars: abreviar mantendo focus keyphrase (ex: "Capital One Classic Credit Card" -> "Capital One Classic")
 
-#### `_yoast_wpseo_focuskw` (focus keyphrase)
-- HARD LIMIT: max 4 words (Yoast scorer requirement)
-- MUST appear in `post_title`
-- MUST appear in `_yoast_wpseo_metadesc` (first 100 chars)
-- MUST appear in the article first paragraph
-- If card name has >4 words, abbreviate while keeping the brand identifiable
-  - Example: "Capital One Classic Credit Card" (5 words) -> "Capital One Classic" (3 words)
-  - Example: "Barclaycard Avios Plus Credit Card" (5 words) -> "Barclaycard Avios Plus" (3 words)
+Demais regras (tom, exemplos, casos por idioma) -> template.
+
 ### 10. Resolve taxonomy IDs
 
 Mandatory tags (in order), coming from config + card_slug:
