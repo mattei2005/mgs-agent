@@ -60,35 +60,25 @@ image integrity check.
 
 ### 1b. Resolve button color
 
-> **PITFALL — NUNCA usar a cor da marca do cartão como cor do botão (CRÍTICO):**
-> A cor do botão (`color-botao` no LazyBlock `credit-card` e `cor-botao` no `botao`)
-> deve sempre vir do `default_button_color` do site em `sites.json` — ou de um
-> override explicitamente solicitado pelo usuário. **Nunca inferir a cor da identidade
-> visual do cartão** (ex: vermelho da Santander, azul da Barclaycard, verde da HSBC).
-> Isso viola a consistência visual do site e requer correção manual posterior.
-> Regra: se o usuário não pediu override de cor, use sempre `default_button_color`.
+Step 1b enxuto - script faz tudo (validacao, precedencia, fallback).
 
+**Como chamar:**
+```bash
+../content-publish-wordpress/scripts/resolve-button-color.sh <site_key> [override]
+```
 
-Run:
-`../content-publish-wordpress/scripts/resolve-button-color.sh <site_key> [override]`
+Retorna `{hex, source, input}`:
+- `hex` - cor `#RRGGBB` validada (usar em `color-botao` do LazyBlock credit-card e `cor-botao` do botao - Step 7)
+- `source` - `request_override` ou `site_default`
+- `input` - argumento original (ou null)
 
-Returns `{hex, source, input}`:
-- `hex` — validated `#RRGGBB` color to use in both LazyBlocks (Step 7)
-- `source` — `request_override` or `site_default`
-- `input` — the original override argument (or `null` if omitted)
+Override pode ser: hex direto (`#c9a227`) ou nome amigavel em PT (`dourado`, lista em `data/button-colors.json`).
+Sem override -> usa `default_button_color` do site em `sites.json`.
 
-Precedence (first match wins):
-1. If `overrides.button_color` provided → hex direct (starts with `#`) or
-   friendly name (looked up in `data/button-colors.json`) → validate → `source=request_override`
-2. Else → `sites.json[site_key].default_button_color` → validate → `source=site_default`
-3. Else (neither present) → abort
-
-Validation: all paths must produce a value matching `^#[0-9A-Fa-f]{6}$`. Otherwise
-the script aborts with exit 1 and a clear error on stderr.
-
-Reserved for v2: `type_convention` source — auto-inference from card-name patterns
-(e.g. "Gold" cards → `dourado`, "Platinum" → `prata`). Not implemented in v1; a
-future run will slot in between (1) and (2) above.
+> **PITFALL CRITICO - NUNCA inferir cor da marca do cartao:**
+> NAO usar vermelho da Santander, azul da Barclaycard, verde da HSBC, etc.
+> Sempre usar `default_button_color` do site (consistencia visual da marca eggbev/etc).
+> Override so se Rodolfo/Raquel pedirem explicitamente.
 
 ### 2. Research the card
 - Fetch `card_official_url` and extract:
