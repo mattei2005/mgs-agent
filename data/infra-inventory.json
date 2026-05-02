@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-02T01:37:04-04:00",
+    "updated_at": "2026-05-02T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -64,8 +64,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/check-pending-reports.sh",
-      "size_bytes": 8054,
-      "modified_at": "2026-04-27T10:08:25-04:00"
+      "size_bytes": 8072,
+      "modified_at": "2026-05-02T01:40:57-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/cleanup-discord-threads.sh",
@@ -148,14 +148,14 @@
       "modified_at": "2026-04-28T21:42:58-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-score-updater.js",
-      "size_bytes": 5045,
-      "modified_at": "2026-04-24T18:36:54-04:00"
-    },
-    {
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-score-updater.js",
+      "size_bytes": 5045,
+      "modified_at": "2026-04-24T18:36:54-04:00"
     }
   ],
   "skills_mgs": [
@@ -1183,9 +1183,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 42327,
-      "md5": "3e9a379e982ed56c64b4b2d7406191a7",
-      "modified_at": "2026-05-01T05:00:03-04:00"
+      "size_bytes": 43905,
+      "md5": "b7cc7a3df405069d2a305cf6e7c89260",
+      "modified_at": "2026-05-02T01:37:06-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1201,9 +1201,9 @@
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
-      "size_bytes": 2286,
-      "md5": "3406ff563fbc74185aade04776d4059b",
-      "modified_at": "2026-05-02T00:30:03-04:00"
+      "size_bytes": 2170,
+      "md5": "8d46ea66fc37d8b48e8d2c3b6914a96c",
+      "modified_at": "2026-05-02T01:37:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -1227,7 +1227,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
       "md5": "57e5e931cd992e5dc0c0496aca8810f0",
-      "modified_at": "2026-05-02T01:35:02-04:00"
+      "modified_at": "2026-05-02T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
