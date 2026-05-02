@@ -30,7 +30,7 @@ log() { echo "[$(date -Iseconds)] housekeeping: $*" | tee -a "$LOG"; }
 log "=== START — retention=${RETENTION_DAYS} dias ==="
 
 # ─── Coletar arquivos a deletar ANTES de deletar (pra logar/notificar) ──────
-TO_DELETE=$(find /root/.hermes /root/mgs-agent /root/backups \
+TO_DELETE=$(find /root/.hermes /root/mgs-agent /root/backups /tmp \
     -type f -name "*.bak*" \
     -mtime +${RETENTION_DAYS} \
     ! -path '*/.git/*' \
