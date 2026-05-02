@@ -1,5 +1,18 @@
 {
-  "alerted": {},
+  "alerted": {
+    "atena:kanban-orchestrator": {
+      "alerted_at": 1777696202,
+      "skill_name": "kanban-orchestrator",
+      "agent": "atena",
+      "path": "/root/.hermes/profiles/atena/skills/devops/kanban-orchestrator"
+    },
+    "atena:kanban-worker": {
+      "alerted_at": 1777696202,
+      "skill_name": "kanban-worker",
+      "agent": "atena",
+      "path": "/root/.hermes/profiles/atena/skills/devops/kanban-worker"
+    }
+  },
   "resolved": {
     "zeus:discord-managed-roles": {
       "resolved_at": "2026-04-27T14:08:34.496020Z",
