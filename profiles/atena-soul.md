@@ -197,6 +197,7 @@ Dados operacionais (JSON) estão em `/root/mgs-agent/data/`:
 
 - `content-generate-rec` ✅ — criar artigos REC
 - `content-publish-wordpress` ✅ — publicar no WordPress
+- `content-generate-rec-issuer-quirks` ✅ — companion para Amex/Barclaycard/Capital One (CDN URLs, fallbacks)
 - `content-generate-p1` 🔜 — em desenvolvimento
 - `content-generate-rec-and-p1` 🔜 — em desenvolvimento
 - `content-generate-seo` 🔜 — planejado
