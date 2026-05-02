@@ -80,6 +80,89 @@ Sem override -> usa `default_button_color` do site em `sites.json`.
 > Sempre usar `default_button_color` do site (consistencia visual da marca eggbev/etc).
 > Override so se Rodolfo/Raquel pedirem explicitamente.
 
+### 1.5. Validate URL/Source if provided (CRITICAL - fail fast)
+
+Se a mensagem do usuario contem `URL/Fonte:`, `URL:`, `Fonte:`, `Source:`
+(case-insensitive), Atena DEVE validar a URL ANTES de qualquer pesquisa.
+
+**Por que:** evita gastar 30-60s + ~\$0.30 pesquisando cartao quando URL informada
+ja resolve direto. Se URL invalida, falha em 1s em vez de 5min de browser_navigate.
+
+**Como detectar URL na mensagem:**
+- Padroes aceitos: `URL/Fonte:`, `URL:`, `Fonte:`, `Source:`, `Site:` (case-insensitive)
+- Extrair primeiro link http/https que aparecer apos um desses prefixos
+- Se mensagem nao tem prefixo URL mas contem 1 unica URL claramente sendo do banco
+  (ex: barclaycard.co.uk, hsbc.co.uk), tratar como URL/Fonte fornecida
+
+**Validacao (executar ANTES de Step 2 Research):**
+
+```bash
+URL="<url_fornecida>"
+HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+  --max-time 10 -L \
+  -A "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
+  "$URL")
+echo "URL: $URL"
+echo "HTTP: $HTTP_CODE"
+```
+
+**Decisao baseada em HTTP status:**
+
+| Code | Acao |
+|---|---|
+| 200 | Continuar pipeline normal, usar URL direto em Step 2 (browser_navigate) |
+| 301/302 (com -L curl) | Ja seguiu redirect, usar URL final retornada |
+| 403 | Cloudflare/bot block - PARAR e reportar |
+| 404 | Cartao nao existe nessa URL - PARAR e reportar |
+| 5xx | Tentar 1x apos 30s. Se falhar PARAR |
+| timeout/network error | PARAR e reportar |
+
+**Mensagem de PARADA (publicar no Discord, NAO continuar pipeline):**
+
+```
+@<solicitante> URL/Fonte fornecida nao acessivel
+
+URL: <url_fornecida>
+Status: <http_code> (<descricao>)
+
+Verifique:
+1. URL esta correta? (typo, parametros)
+2. Cartao ainda existe nesse site?
+3. Cole URL atualizada e tento de novo
+
+Pipeline NAO inicia ate URL ser validada (economia ~\$0.30 e 5min).
+```
+
+**Quando validacao passa (HTTP 200):**
+
+- Pular DIRETAMENTE para Step 2 com `browser_navigate <URL>`
+- NAO pesquisar URL alternativa
+- NAO usar Google/web search pra achar pagina
+- NAO fazer research preliminar do cartao
+- Step 2 (Research) usa essa URL como ponto de partida unico
+
+**PITFALLS criticos:**
+
+> **NUNCA inventar URL alternativa** se a fornecida falhar. Sempre PARAR e pedir nova URL.
+> Razao: usuario forneceu URL especifica = espera que Atena use ESSA. Inventar
+> URL "parecida" pode levar a cartao errado (ex: barclaycard.co.uk vs barclays.co.uk).
+
+> **NUNCA assumir cartao "similar"** se URL 404. Pode ser nome diferente, produto
+> descontinuado, ou troca regional (UK vs US). Reportar e parar.
+
+> **NUNCA pular esta validacao** quando URL fornecida. Mesmo que cartao pareca
+> obvio, validar URL primeiro evita 5+ minutos de tentativas se URL ruim.
+
+**Quando NAO ha URL fornecida (mensagem soh tem nome do cartao):**
+
+Comportamento atual continua valendo - Atena pesquisa normalmente em Step 2.
+Esta regra eh apenas para o cenario "URL fornecida" (preferred workflow).
+
+**Beneficio mensuravel:**
+- Com URL boa: economia ~30-60s + ~\$0.30 por REC
+- Com URL ruim: economia ~5min + ~\$1.00 (falha rapida em vez de loop)
+- 15 RECs/semana com URL: ~\$4.50 + 15min economizados
+
 ### 2. Research the card
 - Fetch `card_official_url` and extract:
   - Exact card name (verify against `card_name`)
