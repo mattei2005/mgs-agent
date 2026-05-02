@@ -208,7 +208,7 @@ op_get_retry() {
     return 1
 }
 
-WEBHOOK_URL="$(op_get_retry 'Discord Webhook - Alerts Infra Channel' 'MGS Conteúdo' 'label=webhook_url')" || true
+WEBHOOK_URL="$(op_get_retry 'Discord Webhook - MGS Alerts Channel' 'MGS Conteúdo' 'label=webhook_url')" || true
 S03_PASS="$(op_get_retry 'Runcloud Server 03 - 46.4.95.117- zeus Acesso' 'MGS Conteúdo' 'password')" || true
 S01_PASS="$(op_get_retry 'Runcloud Server 01 - 162.55.28.178- zeus Acesso' 'MGS Conteúdo' 'password')" || true
 ```
