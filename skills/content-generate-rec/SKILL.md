@@ -637,16 +637,52 @@ conn.close()
 atena_cost = (i*3.00 + o*15.00 + cr*0.30 + cw*3.75) / 1_000_000
 duration_min = round((end - start) / 60, 1) if start and end else 0
 
-#### Passo 3 - somar com custo da API
+#### Passo 3 - somar custo da API (PATCH 15 - api_cost via query agregada)
 
-A resposta da API mgs-rec-api ja inclui cost_usd. Guardar quando fez Step 5b:
-api_cost = response.get("cost_usd", 0.0)
+A API mgs-rec-api pode ser chamada MAIS DE UMA VEZ por REC (refinement, retry).
+NAO usar `response.get("cost_usd")` da resposta - so pega a ultima chamada e
+sub-reporta custo.
+
+**Em vez disso, somar TODAS chamadas desse REC via query SQL:**
+
+```bash
+# REC_START_TS foi capturado no Step 5b ANTES da primeira chamada
+API_COST=$(sqlite3 /root/mgs-agent/api/usage.db "
+SELECT printf('%.4f', COALESCE(SUM(cost_usd), 0))
+FROM api_calls
+WHERE card_slug = '$CARD_SLUG'
+  AND timestamp >= '$REC_START_TS';
+")
+API_CALLS=$(sqlite3 /root/mgs-agent/api/usage.db "
+SELECT COUNT(*)
+FROM api_calls
+WHERE card_slug = '$CARD_SLUG'
+  AND timestamp >= '$REC_START_TS';
+")
+```
+
+Em Python equivalente:
+
+```python
+import sqlite3
+conn = sqlite3.connect("/root/mgs-agent/api/usage.db")
+cur = conn.execute(
+    "SELECT COALESCE(SUM(cost_usd), 0), COUNT(*) FROM api_calls WHERE card_slug=? AND timestamp>=?",
+    (card_slug, rec_start_ts)
+)
+api_cost, api_calls = cur.fetchone()
+conn.close()
+```
+
 total_cost = atena_cost + api_cost
 
 #### Passo 4 - incluir bloco no template do Step 13
 
 Custo: total_cost USD (duration_min, tools tools)
-   Atena: atena_cost | API: api_cost
+   Atena: atena_cost | API: api_cost (api_calls calls)
+
+NOTA: api_calls vem da query agregada do Passo 3 (COUNT(*)).
+Se api_calls > 1, foi refinement/retry - normal mas vale logar.
 
 ### Pricing Sonnet 4.6 (USD per million tokens)
 
@@ -820,6 +856,11 @@ Apos Step 4 (featured image generation), chamar a API:
     }
     JSON
 
+    # IMPORTANTE: capturar timestamp ANTES da primeira chamada API
+    # (usado no Step 14 pra somar TODAS chamadas desse REC via query agregada)
+    REC_START_TS=$(date -u +%Y-%m-%dT%H:%M:%S.000000Z)
+    echo "REC_START_TS=$REC_START_TS"  # GUARDAR pra Step 14
+
     # Chamar API (timeout 60s, retry 1x)
     RESPONSE=$(curl -s --max-time 60 -X POST http://127.0.0.1:8001/generate \
          -H "Content-Type: application/json" \
@@ -837,7 +878,8 @@ Apos Step 4 (featured image generation), chamar a API:
     COST=$(echo "$RESPONSE" | jq -r .cost_usd)
     DURATION=$(echo "$RESPONSE" | jq -r .duration_sec)
 
-    echo "Article generated via API: cost=\$$COST duration=${DURATION}s"
+    echo "Article generated via API: cost=\$$COST duration=${DURATION}s (PARCIAL - so esta chamada)"
+    # NOTA: Step 14 vai SOMAR todas chamadas via query SQL (nao usar este COST diretamente)
 
 ### O que a API faz por voce
 
