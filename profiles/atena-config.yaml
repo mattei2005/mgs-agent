@@ -147,13 +147,13 @@ auxiliary:
     api_key: ''
     timeout: 30
     extra_body: {}
-  flush_memories:
-    provider: auto
-    model: claude-haiku-4-5-20251001
-    base_url: ''
-    api_key: ''
-    timeout: 30
-    extra_body: {}
+# REMOVED v0.12.0 (deprecated):   flush_memories:
+# REMOVED v0.12.0:     provider: auto
+# REMOVED v0.12.0:     model: claude-haiku-4-5-20251001
+# REMOVED v0.12.0:     base_url: ''
+# REMOVED v0.12.0:     api_key: ''
+# REMOVED v0.12.0:     timeout: 30
+# REMOVED v0.12.0:     extra_body: {}
   title_generation:
     provider: auto
     model: claude-haiku-4-5-20251001
