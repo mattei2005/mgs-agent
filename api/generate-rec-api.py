@@ -48,13 +48,43 @@ LOGS_DIR = "/root/mgs-agent/api/logs"
 USAGE_DB = "/root/mgs-agent/api/usage.db"
 
 # Anthropic config
-ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY") or open("/root/.hermes/profiles/atena/.env").read()
-# Parse from .env if needed
-if not ANTHROPIC_API_KEY.startswith("sk-ant-"):
-    for line in ANTHROPIC_API_KEY.split('\n'):
-        if line.startswith("ANTHROPIC_API_KEY="):
-            ANTHROPIC_API_KEY = line.split('=', 1)[1].strip().strip('"').strip("'")
-            break
+def _load_anthropic_api_key():
+    """Load ANTHROPIC_API_KEY with fail-fast validation.
+
+    Order:
+    1. Environment variable (set by systemd EnvironmentFile)
+    2. Parse from /root/.hermes/profiles/atena/.env
+
+    Raises RuntimeError with clear message if not found or invalid.
+    """
+    # 1. Env var (preferred, set by systemd EnvironmentFile)
+    key = os.environ.get("ANTHROPIC_API_KEY", "").strip().strip('"').strip("'")
+    if key.startswith("sk-ant-"):
+        return key
+
+    # 2. Fallback: parse .env file directly
+    env_path = "/root/.hermes/profiles/atena/.env"
+    try:
+        with open(env_path) as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith("ANTHROPIC_API_KEY="):
+                    parsed = line.split("=", 1)[1].strip().strip('"').strip("'")
+                    if parsed.startswith("sk-ant-"):
+                        return parsed
+    except FileNotFoundError:
+        raise RuntimeError(
+            f"ANTHROPIC_API_KEY not in env and .env not found at {env_path}"
+        )
+
+    # Both methods failed — fail fast at startup, not on first request
+    raise RuntimeError(
+        "ANTHROPIC_API_KEY not found or invalid. "
+        "Expected env var or 'ANTHROPIC_API_KEY=sk-ant-...' line in "
+        "/root/.hermes/profiles/atena/.env"
+    )
+
+ANTHROPIC_API_KEY = _load_anthropic_api_key()
 
 MODEL = "claude-sonnet-4-6"
 MAX_TOKENS = 4000  # artigo final ~3500 tokens (HTML 450-500 palavras)
