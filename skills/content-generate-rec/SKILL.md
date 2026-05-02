@@ -632,44 +632,15 @@ Use ESTE template (e SO este, nao combinar com Template A) quando o Step 3 nao c
 
 All actions append to `/root/mgs-agent/logs/generate-rec.log`.
 
-## Finding a post ID when REST API returns empty for a slug
+## Post operations (find by slug / delete) - reference
 
-When `GET /wp/v2/posts?slug=<slug>` returns `[]` (even with `status=any` or
-`context=edit`), the post may still exist. Use the public HTML to get the ID:
-
-```bash
-curl -s "https://<domain>/<slug>/" | grep -oE 'post-[0-9]+' | head -1
-```
-
-WordPress embeds the post ID in the `<body>` class (e.g. `class="post-62013 ..."`).
-Extract the number: `post-62013` → ID is `62013`.
-
-Then fetch via `GET /wp/v2/posts/62013?context=edit` to get the full raw content.
-
----
-
-## Post deletion (re-publish flow)
-
-Whenever a post is deleted — **for any reason** (re-publish, slug conflict, test cleanup,
-or explicit user request) — **always delete the media attachments together with the post** — before or at the
-same time. If the media files are left orphaned in the library, WordPress
-auto-renames the re-uploaded versions with numeric suffixes (`-1`, `-2`, `-3`...),
-which breaks the canonical URLs and pollutes the media library.
-
-**Delete order:**
-1. Fetch the post to get `featured_media` ID + parse card media ID from content
-2. DELETE `/wp/v2/posts/<id>?force=true`
-3. DELETE `/wp/v2/media/<featured_id>?force=true`
-4. DELETE `/wp/v2/media/<card_id>?force=true`
-
-```bash
-# Example
-curl -s -u "$WP_USER:$WP_PASS" -X DELETE "$WP_URL/wp-json/wp/v2/posts/62004?force=true"
-curl -s -u "$WP_USER:$WP_PASS" -X DELETE "$WP_URL/wp-json/wp/v2/media/61999?force=true"
-curl -s -u "$WP_USER:$WP_PASS" -X DELETE "$WP_URL/wp-json/wp/v2/media/62000?force=true"
-```
-
-Confirm each DELETE returns `{"deleted":true}` before re-uploading.
+> **REFERENCE - post operations:** Para operacoes auxiliares em posts
+> ja publicados (achar post pelo slug quando REST API retorna vazio,
+> deletar post + media juntos durante re-publish), ver
+> `references/post-operations.md` (carregada sob demanda via `view`).
+>
+> Carregue essa reference quando: precisar deletar/recriar post, fazer
+> cleanup, ou se `check-slug-conflict.sh` retornar WARN posts_query_zero_results.
 
 ## Failure modes
 
