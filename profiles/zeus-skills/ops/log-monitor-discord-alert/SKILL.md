@@ -86,7 +86,7 @@ ANTI_SPAM_HOURS="${ANTI_SPAM_HOURS:-2}"
 
 source "${BASE_DIR}/.env" 2>/dev/null || true
 
-WEBHOOK_URL="$(op item get "Discord Webhook - MGS Alerts Channel" \
+WEBHOOK_URL="$(op item get "Discord Webhook - Alerts Infra Channel" \
     --vault 'MGS Conteúdo' \
     --fields label=webhook_url \
     --reveal 2>/dev/null)"

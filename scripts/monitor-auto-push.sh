@@ -23,10 +23,18 @@ set -a
 source "${BASE_DIR}/.env" 2>/dev/null || true
 set +a
 
-WEBHOOK_URL="$(op item get "Discord Webhook - MGS Alerts Channel" \
+WEBHOOK_URL="$(op item get "Discord Webhook - Alerts Infra Channel" \
     --vault 'MGS Conteúdo' \
     --fields label=webhook_url \
     --reveal 2>/dev/null)"
+
+# ─── Fail-fast loud — se webhook vier vazio, gritar no syslog ─────────────
+if [[ -z "${WEBHOOK_URL:-}" ]]; then
+    echo "[$(date -Iseconds)] monitor-auto-push: FATAL — WEBHOOK_URL is empty (1Password lookup falhou? item renomeado?)" >&2
+    logger -t monitor-auto-push "FATAL: WEBHOOK_URL empty — check 1Password item name"
+    exit 2
+fi
+
 
 NOW_ISO="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 NOW_EPOCH="$(date +%s)"
