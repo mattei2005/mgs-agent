@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-01T05:00:01-04:00",
+    "updated_at": "2026-05-02T01:37:04-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -51,6 +51,9 @@
     },
     {
       "entry": "0 4 * * * /root/mgs-agent/scripts/cleanup-discord-threads.sh >> /root/mgs-agent/logs/cleanup-discord-threads-cron.log 2>&1"
+    },
+    {
+      "entry": "0 * * * * /root/mgs-agent/scripts/cleanup-zombie-sessions.sh"
     }
   ],
   "scripts": [
@@ -68,6 +71,11 @@
       "path": "/root/mgs-agent/scripts/cleanup-discord-threads.sh",
       "size_bytes": 3708,
       "modified_at": "2026-04-29T02:26:20-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/cleanup-zombie-sessions.sh",
+      "size_bytes": 1744,
+      "modified_at": "2026-05-01T23:58:09-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/deprecated/monitor-rec-readability.sh",
@@ -111,8 +119,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-tool-loops.sh",
-      "size_bytes": 5526,
-      "modified_at": "2026-04-27T12:02:17-04:00"
+      "size_bytes": 7517,
+      "modified_at": "2026-05-01T21:18:35-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh",
@@ -140,14 +148,14 @@
       "modified_at": "2026-04-28T21:42:58-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
-      "size_bytes": 4466,
-      "modified_at": "2026-04-24T18:05:16-04:00"
-    },
-    {
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-score-updater.js",
       "size_bytes": 5045,
       "modified_at": "2026-04-24T18:36:54-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
+      "size_bytes": 4466,
+      "modified_at": "2026-04-24T18:05:16-04:00"
     }
   ],
   "skills_mgs": [
@@ -235,6 +243,11 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/claude-design/SKILL.md"
       },
       {
+        "name": "comfyui",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/creative/comfyui/SKILL.md"
+      },
+      {
         "name": "creative-ideation",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/creative-ideation/SKILL.md"
@@ -275,6 +288,11 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/popular-web-designs/SKILL.md"
       },
       {
+        "name": "pretext",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/creative/pretext/SKILL.md"
+      },
+      {
         "name": "sketch",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/sketch/SKILL.md"
@@ -293,6 +311,16 @@
         "name": "jupyter-live-kernel",
         "category": "data-science",
         "skill_md": "/root/.hermes/profiles/atena/skills/data-science/jupyter-live-kernel/SKILL.md"
+      },
+      {
+        "name": "kanban-orchestrator",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/atena/skills/devops/kanban-orchestrator/SKILL.md"
+      },
+      {
+        "name": "kanban-worker",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/atena/skills/devops/kanban-worker/SKILL.md"
       },
       {
         "name": "soul-md-persist-rules",
@@ -702,6 +730,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/claude-design/SKILL.md"
       },
       {
+        "name": "comfyui",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/comfyui/SKILL.md"
+      },
+      {
         "name": "creative-ideation",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/creative-ideation/SKILL.md"
@@ -742,6 +775,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/popular-web-designs/SKILL.md"
       },
       {
+        "name": "pretext",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/pretext/SKILL.md"
+      },
+      {
         "name": "sketch",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/sketch/SKILL.md"
@@ -760,6 +798,16 @@
         "name": "jupyter-live-kernel",
         "category": "data-science",
         "skill_md": "/root/.hermes/profiles/zeus/skills/data-science/jupyter-live-kernel/SKILL.md"
+      },
+      {
+        "name": "kanban-orchestrator",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/devops/kanban-orchestrator/SKILL.md"
+      },
+      {
+        "name": "kanban-worker",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/devops/kanban-worker/SKILL.md"
       },
       {
         "name": "webhook-subscriptions",
@@ -1129,15 +1177,15 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 332,
-      "md5": "a6adb5b4331513441160397d309506c3",
-      "modified_at": "2026-04-30T08:00:05-04:00"
+      "size_bytes": 333,
+      "md5": "16449e1ba24290477f8cb46862aa3847",
+      "modified_at": "2026-05-01T08:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 42327,
-      "md5": "c929c4e16306030e0b6d4fbba044a825",
-      "modified_at": "2026-04-30T05:00:03-04:00"
+      "md5": "3e9a379e982ed56c64b4b2d7406191a7",
+      "modified_at": "2026-05-01T05:00:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1153,9 +1201,9 @@
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
-      "size_bytes": 1862,
-      "md5": "77506075280c5e90a0e30a6195c7a122",
-      "modified_at": "2026-04-30T21:30:03-04:00"
+      "size_bytes": 2286,
+      "md5": "3406ff563fbc74185aade04776d4059b",
+      "modified_at": "2026-05-02T00:30:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -1178,14 +1226,14 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
-      "md5": "2118a008512c27f0733797a1b5d08672",
-      "modified_at": "2026-05-01T05:00:02-04:00"
+      "md5": "57e5e931cd992e5dc0c0496aca8810f0",
+      "modified_at": "2026-05-02T01:35:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
-      "size_bytes": 1542,
-      "md5": "947411a0af43e2f7ced79f79a1b15deb",
-      "modified_at": "2026-04-27T13:43:08-04:00"
+      "size_bytes": 665,
+      "md5": "35601fa424681df91103bb319cadf590",
+      "modified_at": "2026-05-01T21:15:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -1195,9 +1243,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 3868,
-      "md5": "7404b07f51bf01323fcd71c005fe054d",
-      "modified_at": "2026-04-30T10:01:09-04:00"
+      "size_bytes": 4232,
+      "md5": "dd8293bbdcca3d99bc5f6d474d874502",
+      "modified_at": "2026-05-01T10:01:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -1207,15 +1255,15 @@
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "size_bytes": 34763,
-      "md5": "d270fedc9058937a7b68acfd484db35c",
-      "modified_at": "2026-05-01T00:00:01-04:00"
+      "size_bytes": 35974,
+      "md5": "816261d02711ef7f8c7c74d9083ee0ac",
+      "modified_at": "2026-05-01T21:20:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
-      "size_bytes": 32634,
-      "md5": "1028ddab7a937472188836b5f2beb741",
-      "modified_at": "2026-04-29T03:40:01-04:00"
+      "size_bytes": 34417,
+      "md5": "74357c86c22a0b4fa359590a15d9d13a",
+      "modified_at": "2026-05-02T01:25:01-04:00"
     }
   ],
   "mu_plugin_canonical": {
