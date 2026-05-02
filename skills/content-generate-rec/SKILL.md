@@ -514,24 +514,6 @@ quando Raquel abrir o editor. Incluir o resultado do scorer no summary final.
 
 
 
-> **PITFALL — yoastseo v3.6 API quirks (descobertos por trial & error):**
-> - `require('yoastseo')` exporta `{ Paper, assessors, ... }` — os assessors ficam
->   dentro do namespace `assessors`: `const { SEOAssessor, ContentAssessor } = assessors`
-> - Assessor constructor: `new SEOAssessor(researcher)` — researcher é o **primeiro** argumento (não segundo)
-> - `Researcher` do `_default` não tem `getHelper()` e retorna scores errados → usar sempre o específico do idioma:
->   `require('./node_modules/yoastseo/build/languageProcessing/languages/en/Researcher').default`
-> - O módulo Researcher exporta `.default` (ES module wrapped em CJS): sempre acessar `.default`
-> - O scorer DEVE ser executado com `cd "$SCORER_DIR" && node yoast-scorer.js ...`
->   (não `node "$SCORER_DIR/yoast-scorer.js"`) — o segundo não resolve `node_modules` relativo ao script
-
-
-
-> **PITFALL — yoastseo v3.6 API e `node_modules` path:**
-> A lib `yoastseo` deve ser `require`d do diretório que contém `node_modules/`.
-> Sempre executar o scorer com `cd "$SCORER_DIR" && node yoast-scorer.js ...`
-> em vez de `node "$SCORER_DIR/yoast-scorer.js"` (o segundo não resolve `node_modules`
-> relativo ao script). API usada: `{ Paper, SeoAssessor, ContentAssessor, Researcher }`.
-> `Researcher` recebe `(paper, i18n)` e é passado para os assessors como segundo arg.
 
 
 > **PITFALL — guardar URLs e scene durante workflow (CRITICAL):**
