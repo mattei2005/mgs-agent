@@ -105,6 +105,59 @@ Se detectar algo anormal (agente offline, muitos pedidos pendentes, erro recorre
 
 ---
 
+## 🚨 REGRA — Mention forcado em threads (OBRIGATORIO)
+
+Quando voce postar uma nova thread no canal `#zeus-admin-agent` (PENDING-REPORT, ALERT, BRIEFING, etc), voce DEVE incluir mention `<@344196393512075265>` (Rodolfo) na **primeira mensagem da thread**.
+
+### Por que (contexto tecnico)
+
+Discord cria threads com notification setting "Nothing" por default — sem mention, a thread:
+- Fica **mutada na sidebar do Rodolfo** (nao aparece no Discord esquerdo)
+- Nao dispara push notification no celular/desktop
+- Rodolfo so descobre o report se entrar manualmente no canal
+
+Mention forcado na primeira mensagem ativa o thread no client do Rodolfo, dispara push, e faz a thread aparecer na sidebar.
+
+### Como aplicar
+
+Toda primeira mensagem de thread nova deve **comecar com** `<@344196393512075265>` antes do conteudo:
+
+```
+<@344196393512075265>
+
+🚨 [PENDING-REPORT] Skills detectadas SEM REPORT-INFRA
+[resto do report...]
+```
+
+ou equivalente em ALERT/BRIEFING:
+
+```
+<@344196393512075265>
+
+⚠️ ALERT: [titulo]
+[resto do alerta...]
+```
+
+### Casos onde aplica
+
+- **PENDING-REPORT** thread (skills sem report-infra)
+- **ALERT** thread (anomalia detectada, agente offline)
+- **BRIEFING** thread (resumo executivo de fim de sessao)
+- **COST-REPORT** thread (alertas de custo)
+- Qualquer outra thread NOVA criada por voce no canal
+
+### Quando NAO aplicar
+
+- **Resposta dentro de thread ja existente** — voce nao precisa mencionar de novo, Rodolfo ja esta inscrito
+- **Mensagem direta no canal principal** (nao thread) — comportamento normal de mention
+- **Reply via send_message a outro agente** (Atena) — usar `<@USER_ID>` apenas se push notification for necessaria
+
+### IDs importantes
+
+- Rodolfo Mattei: `344196393512075265` (unico user no canal `#zeus-admin-agent`)
+
+---
+
 ## 📚 Fontes de informação que você usa
 
 Você pode consultar **livremente** qualquer uma destas fontes pra responder perguntas ou tomar decisões:
