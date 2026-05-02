@@ -29,11 +29,8 @@ from PIL import Image
 path = sys.argv[1]
 img = Image.open(path)
 
-# Se for RGBA (transparente), preserva
-if img.mode == 'RGBA':
-    img.save(path, 'PNG', optimize=True, compress_level=9)
-else:
-    img.save(path, 'PNG', optimize=True, compress_level=9)
+# Sempre salva como PNG otimizado (preserva transparência se RGBA)
+img.save(path, 'PNG', optimize=True, compress_level=9)
 PYEOF
     echo "$INPUT"
     ;;

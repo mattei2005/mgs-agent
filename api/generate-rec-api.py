@@ -33,7 +33,7 @@ import json
 import time
 import os
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 # ─────────────────────────────────────────────────────────────
@@ -165,7 +165,7 @@ def lookup_cache(card_slug: str) -> Optional[Dict[str, Any]]:
     conn = sqlite3.connect(CACHE_DB)
     conn.row_factory = sqlite3.Row
     
-    now = datetime.utcnow().isoformat() + "Z"
+    now = datetime.now(timezone.utc).replace(tzinfo=None).isoformat() + "Z"
     cur = conn.execute("""
         SELECT * FROM card_cache 
         WHERE card_slug = ?
@@ -377,7 +377,7 @@ def generate_rec(req: GenerateRequest):
     7. Retorna HTML + metadata
     """
     start = time.time()
-    timestamp = datetime.utcnow().isoformat() + "Z"
+    timestamp = datetime.now(timezone.utc).replace(tzinfo=None).isoformat() + "Z"
     
     log.info(f"Generate request: site={req.site} card_slug={req.card_slug}")
     
