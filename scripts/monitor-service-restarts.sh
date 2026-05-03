@@ -147,13 +147,13 @@ PYEOF
 
   if [[ "${ALERT_LEVEL}" == "info" ]]; then
     MSG="⚠️ [INFRA] [RESTART] \`${SVC}\` reiniciou ${DELTA}x nas últimas ${WINDOW_HOURS}h. Acompanhar."
-    curl -s -X POST "${WEBHOOK_URL}" \
+    curl -s --max-time 15 -X POST "${WEBHOOK_URL}" \
       -H "Content-Type: application/json" \
       -d "{\"content\": \"${MSG}\"}" > /dev/null
     echo "$(date -Iseconds) ${LOG_PREFIX} INFO alert enviado para ${SVC}"
   elif [[ "${ALERT_LEVEL}" == "warn" ]]; then
     MSG="🚨 [INFRA] [RESTART] \`${SVC}\` reiniciou ${DELTA}x nas últimas ${WINDOW_HOURS}h. Investigar urgente. <@344196393512075265>"
-    curl -s -X POST "${WEBHOOK_URL}" \
+    curl -s --max-time 15 -X POST "${WEBHOOK_URL}" \
       -H "Content-Type: application/json" \
       -d "{\"content\": \"${MSG}\"}" > /dev/null
     echo "$(date -Iseconds) ${LOG_PREFIX} WARN alert enviado para ${SVC}"

@@ -44,7 +44,7 @@ fi
 YESTERDAY=$(date -u -d '1 day ago' +%Y-%m-%dT00:00:00Z)
 TODAY=$(date -u +%Y-%m-%dT00:00:00Z)
 
-RAW_AMOUNT=$(curl -s -H "x-api-key: $ADMIN_KEY" \
+RAW_AMOUNT=$(curl -s --max-time 15 -H "x-api-key: $ADMIN_KEY" \
      -H "anthropic-version: 2023-06-01" \
      "https://api.anthropic.com/v1/organizations/cost_report?starting_at=${YESTERDAY}&ending_at=${TODAY}&bucket_width=1d" \
      | jq -r '.data[0].results[0].amount // "0"')
@@ -55,7 +55,7 @@ RAW_AMOUNT=$(curl -s -H "x-api-key: $ADMIN_KEY" \
 DIVISOR=100
 COST=$(echo "scale=2; $RAW_AMOUNT / $DIVISOR" | bc)
 
-USAGE_JSON=$(curl -s -H "x-api-key: $ADMIN_KEY" \
+USAGE_JSON=$(curl -s --max-time 15 -H "x-api-key: $ADMIN_KEY" \
      -H "anthropic-version: 2023-06-01" \
      "https://api.anthropic.com/v1/organizations/usage_report/messages?starting_at=${YESTERDAY}&ending_at=${TODAY}&bucket_width=1d")
 
@@ -109,7 +109,7 @@ PAYLOAD=$(jq -n \
   --argjson col "$COLOR" \
   '{content: $c, embeds: [{title: $t, description: $d, color: $col}]}')
 
-HTTP_CODE=$(curl -s -X POST -H "Content-Type: application/json" \
+HTTP_CODE=$(curl -s --max-time 15 -X POST -H "Content-Type: application/json" \
   -d "$PAYLOAD" \
   "$WEBHOOK" \
   -o /tmp/discord-response.txt -w "%{http_code}")

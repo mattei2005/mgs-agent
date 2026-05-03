@@ -195,7 +195,7 @@ PYTHON_END
           --argjson col 15158332 \
           '{content: $c, embeds: [{title: $t, description: $d, color: $col}]}')
         
-        curl -s -X POST -H "Content-Type: application/json" \
+        curl -s --max-time 15 -X POST -H "Content-Type: application/json" \
           -d "$PAYLOAD" "$WEBHOOK" > /dev/null
         
         # Atualizar state
