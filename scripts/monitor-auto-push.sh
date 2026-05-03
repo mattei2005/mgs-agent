@@ -104,9 +104,16 @@ while IFS= read -r line; do
 done <<< "$WINDOW_LINES"
 
 # ─── Detectar erros explícitos na janela ─────────────────────────────────────
+# IMPORTANTE: Só checa linhas que NÃO sejam START/OK/SKIP do auto-push, pois
+# mensagens de commit podem conter palavras como "timeout", "error" inocentes
+# (ex: "docs: F1 curl timeout fix" — não é erro de push).
 ERROR_PATTERNS="rejected|failed to push|Authentication failed|fatal:|error:|timeout|Permission denied"
 EXPLICIT_ERRORS=()
 while IFS= read -r line; do
+    # Pular linhas de START/OK/SKIP — mensagens de commit têm palavras inocentes
+    if echo "$line" | grep -qE "auto-push (START|OK|SKIP)|discord-notify"; then
+        continue
+    fi
     if echo "$line" | grep -qiE "$ERROR_PATTERNS"; then
         EXPLICIT_ERRORS+=("$line")
     fi
