@@ -71,7 +71,7 @@ else
   done <<< "$ALL"
 fi
 
-PUB_COUNT=$(echo "$PUBLICATIONS" | grep -c "create-post OK" || echo 0)
+PUB_COUNT=$(printf "%s" "$PUBLICATIONS" | grep -c "create-post OK" || echo 0)
 log "Pending publications: $PUB_COUNT"
 
 [[ "$PUB_COUNT" -eq 0 ]] && log "Nothing to process. Exit." && exit 0

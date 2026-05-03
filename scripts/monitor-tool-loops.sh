@@ -60,7 +60,7 @@ tool_calls = []  # lista de (tool_name, has_error)
 for line in lines:
     try:
         entry = json.loads(line)
-    except:
+    except (json.JSONDecodeError, AttributeError, TypeError):
         continue
     
     role = entry.get("role", "")
@@ -87,8 +87,8 @@ for line in lines:
                         is_error = True
                     if "error" in str(result.get("output", "")).lower()[:200]:
                         # heuristica fraca, mas vale
-                        pass
-            except:
+                        is_error = True
+            except (json.JSONDecodeError, AttributeError, TypeError):
                 if "error" in content.lower()[:200] or "exception" in content.lower()[:200]:
                     is_error = True
         

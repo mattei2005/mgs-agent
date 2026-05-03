@@ -16,7 +16,8 @@ log() {
 log "═══ cleanup-discord-threads.sh start ═══"
 
 # Configurações
-DISCORD_BOT_TOKEN=$(grep "^DISCORD_BOT_TOKEN=" /root/.hermes/profiles/atena/.env | sed -E 's/^[^=]+=["']?(.*[^"']*)["']?$/\1/' | tr -d '"')
+# Parse robusto: pega valor após =, tira aspas se houver
+DISCORD_BOT_TOKEN=$(grep "^DISCORD_BOT_TOKEN=" /root/.hermes/profiles/atena/.env | head -1 | cut -d= -f2- | tr -d '"' | tr -d "'" | xargs)
 GUILD_ID="1185714635991679006"
 CATEGORY_ID="1496264197439230003"  # Categoria 'Agents'
 DAYS_THRESHOLD=2
