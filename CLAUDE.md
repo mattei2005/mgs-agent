@@ -358,3 +358,58 @@ NUNCA editar `data/pendencias.db.json` ou os MDs manualmente. Sempre via scripts
 ### Para Atena e Zeus
 Quando descoberem algo novo que precisa virar pendência durante operação, adicionem com `--por atena` ou `--por zeus`. Quando concluírem tarefa, usem `pendencia-done.sh`. Sistema é fonte única de verdade — agentes consultam aqui antes de assumir trabalho pendente.
 
+
+## Sistema de Chat Log MGS
+
+**Source of truth:** `data/chat-logs/sessao-YYYY-MM-DD_HHMM.md` (uma por sessão de chat)
+**Index:** `data/chat-logs/INDEX.md` (regenerado a cada hora por cron + a cada mudança)
+**Symlink atual:** `data/chat-logs/_atual.md` (aponta pra sessão ativa)
+
+### Propósito
+Preservar contexto entre sessões de chat. Quando um chat web encher de tokens, o próximo chat lê o INDEX + última sessão pra retomar sem perder histórico.
+
+### Como retomar contexto em chat novo
+Cole no início:
+```
+Lê /root/mgs-agent/data/chat-logs/INDEX.md e o arquivo da sessão mais
+recente listado abaixo, para retomar contexto sem search profundo.
+Em seguida, lê /root/mgs-agent/docs/PENDENCIAS.md para saber o que está aberto.
+```
+
+### Comandos
+
+```bash
+# Iniciar nova sessão (no início do dia/work session)
+./scripts/chat-log.sh --nova-sessao "Sessão tarde 03/05 — descrição"
+
+# Registrar evento (durante a sessão)
+./scripts/chat-log.sh --tipo decisao "Decidi migrar X para Y"
+./scripts/chat-log.sh --tipo contexto "Descobri que Z funciona assim"
+./scripts/chat-log.sh --tipo licao "PITFALL: nunca fazer Q porque W"
+./scripts/chat-log.sh --tipo pend-add "PEND-058: nova pendência adicionada"
+./scripts/chat-log.sh --tipo pend-done "PEND-001: como foi resolvido"
+./scripts/chat-log.sh --tipo proximo "Próximo: fazer X"
+./scripts/chat-log.sh "Evento livre sem tipo específico"
+
+# Fechar sessão (no fim do trabalho)
+./scripts/chat-log.sh --fechar
+
+# Listar sessões
+./scripts/chat-log.sh --listar
+
+# Regenerar index manualmente (cron faz a cada hora)
+./scripts/chat-log.sh --rebuild-index
+```
+
+### Tipos de evento
+- `decisao` — decisões estratégicas/técnicas tomadas
+- `contexto` — informação nova descoberta sobre sistema/negócio
+- `licao` — PITFALLs, lições aprendidas
+- `pend-add` — pendência adicionada (também via pendencia-add.sh)
+- `pend-done` — pendência resolvida (também via pendencia-done.sh)
+- `proximo` — próximos passos identificados
+- `evento` (default) — qualquer outro evento
+
+### Para Atena e Zeus
+Quando descoberem algo novo, registrem via `chat-log.sh --tipo contexto "..."`. Quando concluírem decisão técnica, `--tipo decisao`. Sistema é fonte única de verdade entre sessões — agentes contribuem.
+
