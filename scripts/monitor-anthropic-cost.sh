@@ -49,7 +49,10 @@ RAW_AMOUNT=$(curl -s -H "x-api-key: $ADMIN_KEY" \
      "https://api.anthropic.com/v1/organizations/cost_report?starting_at=${YESTERDAY}&ending_at=${TODAY}&bucket_width=1d" \
      | jq -r '.data[0].results[0].amount // "0"')
 
-DIVISOR=88
+# Anthropic /v1/organizations/cost_report retorna amount em CENTAVOS (USD * 100)
+# Validado empiricamente 02/05/2026 cruzando com CSV oficial Anthropic
+# Antes: DIVISOR=88 (errado, inflava custo em ~14%)
+DIVISOR=100
 COST=$(echo "scale=2; $RAW_AMOUNT / $DIVISOR" | bc)
 
 USAGE_JSON=$(curl -s -H "x-api-key: $ADMIN_KEY" \
