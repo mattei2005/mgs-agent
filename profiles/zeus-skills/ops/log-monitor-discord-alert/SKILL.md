@@ -473,7 +473,70 @@ Aguardo REPORT-INFRA + atualização de `infra-inventory.json`. <@14962961750142
 
 ---
 
-## SEÇÃO D — Bug History: Regras Universais para Monitors com State File
+## SEÇÃO D — Hardening de Monitors em Produção (checklist obrigatório)
+
+Lições da sessão de auditoria 02/05/2026 — aplicar a todo monitor novo ou existente:
+
+### 1. flock — Proteger contra execuções paralelas
+
+Sem flock, crons `*/5` ou `*/15` podem sobrepor quando o monitor demora mais que o intervalo (ex: timeout de rede).
+
+```bash
+# Cron entry com flock:
+*/15 * * * * flock -n /tmp/monitor-NOME.lock /root/mgs-agent/scripts/monitor-NOME.sh >> /root/mgs-agent/logs/monitor-NOME.log 2>&1
+```
+
+`-n` = não bloqueia (pula a execução se lock estiver ocupado). Sem `-n`, execuções empilham.
+
+**7 crons MGS com flock (aplicado 02/05/2026):** sync-souls, monitor-auto-push, check-pending-reports, monitor-service-restarts, monitor-tool-loops, track-article-cost, cleanup-zombie-sessions.
+
+### 2. --max-time em todo curl
+
+Sem `--max-time`, um webhook Discord lento ou rede instável trava o script indefinidamente, bloqueando o flock e impedindo execuções subsequentes.
+
+```bash
+# OBRIGATORIO em qualquer curl para webhook ou API externa:
+curl -s -X POST "$WEBHOOK_URL" \
+  -H "Content-Type: application/json" \
+  -d "$payload" \
+  --max-time 15 >/dev/null
+```
+
+**3 monitors corrigidos (02/05/2026):** monitor-tool-loops, monitor-anthropic-cost, monitor-service-restarts.
+
+### 3. Logrotate — Nunca deixar logs crescer sem controle
+
+Sem rotação, logs de crons `*/5` ou `*/15` crescem 100-200 linhas/hora. `monitor-service-restarts.log` atingiu 4.2 MB em semanas.
+
+Config em `/etc/logrotate.d/mgs-agent` (criado 02/05/2026):
+```
+/root/mgs-agent/logs/*.log {
+    daily
+    maxsize 10M
+    rotate 14
+    compress
+    delaycompress
+    copytruncate
+    missingok
+    notifempty
+}
+```
+
+`copytruncate` = trunca o log original sem restart do processo (safe para crons). `delaycompress` = mantém o log do dia anterior descomprimido (útil para debug imediato).
+
+### 4. Heurística de frequência vs erros consecutivos
+
+Detectar só erros consecutivos não é suficiente. Cloudflare e similares retornam HTTP 200 em páginas de challenge — o monitor precisa checar frequência também.
+
+```python
+# Adicionado em monitor-tool-loops.py (Patch 7, 01/05/2026):
+# browser_navigate > 15 em 30 turns = alerta de loop
+# Independente de estar retornando 200
+```
+
+---
+
+## SEÇÃO E — Bug History: Regras Universais para Monitors com State File
 
 Lessons learned 2026-04-27 (`check-pending-reports.sh` loop de ~120 msgs):
 

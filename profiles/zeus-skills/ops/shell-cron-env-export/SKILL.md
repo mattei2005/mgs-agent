@@ -70,6 +70,46 @@ echo "Exit: $?"
 - **Aplicar em TODOS os scripts MGS que usam `op`** — não apenas nos monitorados. Bug recorrente: `monitor-auto-push.sh` e `monitor-yoast-health-eggbev.sh` foram afetados (2026-04-27).
 - **Nome da skill vs .gitignore** — nome `shell-cron-env-export` foi escolhido para não bater no padrão `*credentials*` do `.gitignore` (linha 16). Nomes com "credentials" ficam bloqueados do git por regra de segurança — usar sempre nomes descritivos do mecanismo (env-export, env-load, etc).
 
+## 🚨 Padrão Proibido — Configs Críticas (crontab, etc.)
+
+**NUNCA usar heredoc dentro de `$()` seguido de operação destrutiva:**
+
+```bash
+# PADRÃO PERIGOSO — incidente MGS 02/05/2026:
+NEW=$(crontab -l | python3 << EOF
+...código Python...
+EOF)
+echo "$NEW" | crontab -   # SE $NEW vazio -> apaga tudo sem erro!
+```
+
+**Por que falha:** Python heredoc dentro de `$()` pode falhar silenciosamente → `$NEW` fica vazio → `echo "" | crontab -` aceita stdin vazio sem aviso e apaga o crontab inteiro.
+
+**Padrão seguro obrigatório para configs críticas (crontab, systemd, nginx, etc.):**
+
+```bash
+# PADRÃO SEGURO:
+BACKUP="/tmp/crontab-$(date +%Y%m%d_%H%M%S).bak"
+crontab -l > "$BACKUP"                        # 1. backup com timestamp
+[[ -s "$BACKUP" ]] || { echo "ERRO: backup vazio"; exit 1; }
+
+# Gerar novo conteúdo em arquivo intermediário (NUNCA em $())
+python3 script.py < "$BACKUP" > /tmp/crontab-new.txt
+
+# 2. Validar antes de aplicar
+NEW_SIZE=$(wc -c < /tmp/crontab-new.txt)
+OLD_SIZE=$(wc -c < "$BACKUP")
+[[ $NEW_SIZE -gt $((OLD_SIZE - 100)) ]] || { echo "ERRO: tamanho suspeito"; exit 1; }
+[[ $(wc -l < /tmp/crontab-new.txt) -ge $(wc -l < "$BACKUP") ]] || { echo "ERRO: linhas reduziram"; exit 1; }
+
+# 3. Mostrar diff antes de aplicar
+diff "$BACKUP" /tmp/crontab-new.txt || true
+
+# 4. Aplicar so apos validacao
+crontab /tmp/crontab-new.txt
+```
+
+Mesma logica se aplica a: overwrite de `.env`, substituicao de configs systemd — qualquer operacao onde "arquivo vazio = desastre".
+
 ## Scripts MGS que usam este padrão
 
 | Script | Aplicado em |
@@ -78,3 +118,9 @@ echo "Exit: $?"
 | `scripts/monitor-yoast-health-eggbev.sh` | 2026-04-27 (fix retroativo) |
 
 Ao criar novo script, adicionar à tabela acima via patch nesta skill.
+
+## Referências
+
+- `references/mgs-audit-2026-05-02.md` — auditoria 130 arquivos repo mgs-agent:
+  taxa de falso positivo por severidade (P0=0%, P1=21%, P2=75%, P3=86%),
+  bugs mais impactantes, falsos positivos notáveis, método correto de grep.
