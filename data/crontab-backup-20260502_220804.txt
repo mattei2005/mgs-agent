@@ -1,0 +1,21 @@
+*/5 * * * * /root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1
+# DEPRECATED 2026-04-26: 0 10 * * * /root/mgs-agent/scripts/monitor-rec-readability.sh >> /root/mgs-agent/logs/rec-readability-monitor.log 2>&1
+# DEPRECATED 2026-04-26: 0 10 * * * /root/mgs-agent/scripts/monitor-yoast-readability-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-readability-eggbev.log 2>&1
+*/15 * * * * /root/mgs-agent/scripts/monitor-auto-push.sh >> /root/mgs-agent/logs/monitor-auto-push.log 2>&1
+0 10 * * * /root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-health-eggbev.log 2>&1
+*/15 * * * * /root/mgs-agent/scripts/check-pending-reports.sh >> /root/mgs-agent/logs/check-pending-reports.log 2>&1
+*/5 * * * * /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1
+
+# Monitor diario gasto Anthropic API
+0 12 * * * /root/mgs-agent/scripts/monitor-anthropic-cost.sh >> /root/mgs-agent/logs/monitor-anthropic-cost.log 2>&1
+
+# Detector de loops em tool_calls
+*/5 * * * * /root/mgs-agent/scripts/monitor-tool-loops.sh >> /root/mgs-agent/logs/monitor-tool-loops.log 2>&1
+
+# Atualiza inventário de infra diariamente às 5 AM (Item 7 — 2026-04-27)
+0 5 * * * /root/mgs-agent/scripts/infra-discovery.sh >> /root/mgs-agent/logs/infra-discovery.log 2>&1
+0 8 * * * /root/mgs-agent/scripts/monitor-hermes-updates.sh >> /root/mgs-agent/logs/monitor-hermes-updates.log 2>&1
+*/15 * * * * /root/mgs-agent/scripts/track-article-cost.sh >> /root/mgs-agent/logs/track-article-cost-cron.log 2>&1
+0 4 * * * /root/mgs-agent/scripts/cleanup-discord-threads.sh >> /root/mgs-agent/logs/cleanup-discord-threads-cron.log 2>&1
+0 * * * * /root/mgs-agent/scripts/cleanup-zombie-sessions.sh
+0 3 * * * /root/mgs-agent/scripts/housekeeping-bak-cleanup.sh >> /root/mgs-agent/logs/housekeeping-cron.log 2>&1
