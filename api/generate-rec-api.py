@@ -90,6 +90,8 @@ MODEL = "claude-sonnet-4-6"
 MAX_TOKENS = 4000  # artigo final ~3500 tokens (HTML 450-500 palavras)
 
 # Pricing (USD per million tokens)
+# ⚠️  SINGLE SOURCE OF TRUTH: skills/content-generate-rec/references/pricing.md
+# Se atualizar aqui, atualizar TAMBÉM em scripts/track-article-cost.sh + SKILL.md
 PRICE_INPUT = 3.00
 PRICE_OUTPUT = 15.00
 PRICE_CACHE_READ = 0.30

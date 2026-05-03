@@ -717,6 +717,8 @@ i, o, cr, cw, tools, start, end = cur.fetchone()
 conn.close()
 
 # Pricing Sonnet 4.6 (USD per million tokens)
+# ⚠️  SINGLE SOURCE OF TRUTH: references/pricing.md
+# Se atualizar aqui, atualizar TAMBÉM em api/generate-rec-api.py + scripts/track-article-cost.sh
 atena_cost = (i*3.00 + o*15.00 + cr*0.30 + cw*3.75) / 1_000_000
 duration_min = round((end - start) / 60, 1) if start and end else 0
 

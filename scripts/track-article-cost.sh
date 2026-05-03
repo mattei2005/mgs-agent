@@ -27,6 +27,8 @@ SCRIPT_LOG="/root/mgs-agent/logs/track-article-cost.log"
 ATENA_API_KEY_ID="apikey_012LYMZh6h8LfeiiLBU16MWh"
 
 # Sonnet 4.6 pricing (USD per million tokens)
+# ⚠️  SINGLE SOURCE OF TRUTH: skills/content-generate-rec/references/pricing.md
+# Se atualizar aqui, atualizar TAMBÉM em api/generate-rec-api.py + SKILL.md
 PRICE_UNCACHED=3.00
 PRICE_CACHE_5M=3.75
 PRICE_CACHE_READ=0.30
