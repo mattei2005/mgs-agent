@@ -305,3 +305,56 @@ working on this repository. State is reconstructed from:
 
 - Execute Test 4 (end-to-end): run `content-generate-rec` against a real card slug, verify the WP post is created with correct article body, featured image, and Yoast meta.
 - ~~Add minimum-dimension filter to `scripts/search-card-image.sh` tier 2~~ **DONE** (commit `8cd3310`).
+
+## Sistema de Pendências MGS
+
+**Source of truth:** `data/pendencias.db.json` (JSON estruturado)
+**Vista humana:** `docs/PENDENCIAS.md` (regenerada cron 8 AM EST)
+**Histórico de resolvidas:** `docs/PENDENCIAS-HISTORICO.md`
+
+### Regra absoluta
+NUNCA editar `data/pendencias.db.json` ou os MDs manualmente. Sempre via scripts.
+
+### Comandos
+
+```bash
+# Adicionar nova pendência
+./scripts/pendencia-add.sh "Título da tarefa" \
+  --categoria infra \
+  --prioridade alta \
+  --tempo "30min" \
+  --tags "tag1,tag2" \
+  --contexto "Contexto opcional" \
+  --bloqueio "Bloqueio opcional" \
+  --por "atena|zeus|rodolfo|claude-web"
+
+# Marcar como resolvida
+./scripts/pendencia-done.sh PEND-001 \
+  --como "Como foi resolvido" \
+  --por "rodolfo|atena|zeus"
+
+# Listar com filtros
+./scripts/pendencia-list.sh                       # todas abertas
+./scripts/pendencia-list.sh --prioridade alta     # filtra prioridade
+./scripts/pendencia-list.sh --categoria seguranca # filtra categoria
+./scripts/pendencia-list.sh --tag rec             # filtra tag
+./scripts/pendencia-list.sh --resolvidas          # mostra resolvidas
+./scripts/pendencia-list.sh --stats               # estatísticas
+./scripts/pendencia-list.sh --json                # output JSON puro
+./scripts/pendencia-list.sh PEND-001              # uma específica
+
+# Regenerar MD manualmente (cron faz isso 8 AM EST)
+./scripts/pendencia-render-md.sh
+```
+
+### Categorias válidas
+`app, seguranca, infra, conteudo, skills, agente, lovable, monitor, documentacao, externo, pessoal`
+
+### Prioridades
+- `alta` — Acionável agora, alto valor, baixo risco
+- `media` — Backlog estratégico, precisa decisão/planejamento
+- `baixa` — Async, externo, longo prazo, cosmético
+
+### Para Atena e Zeus
+Quando descoberem algo novo que precisa virar pendência durante operação, adicionem com `--por atena` ou `--por zeus`. Quando concluírem tarefa, usem `pendencia-done.sh`. Sistema é fonte única de verdade — agentes consultam aqui antes de assumir trabalho pendente.
+
