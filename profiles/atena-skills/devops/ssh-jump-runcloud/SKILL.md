@@ -178,8 +178,9 @@ custom login URL (WPS Hide Login), Plugin Editor not disabled (`DISALLOW_FILE_ED
 - `REST POST /wp/v2/plugins` only accepts wordpress.org slugs — cannot upload arbitrary ZIPs
 - `die()` in injected PHP returns HTTP 500 — execution still happened, read result via WP option
 
-See `references/wp-deploy-file-without-ssh.md` for full Python workflow, bootstrap
-technique (execute PHP + store result in WP option), and eggbev-specific credentials.
+See `references/wp-deploy-file-without-ssh.md` for full Python workflow (steps 1–5),
+bootstrap technique (execute PHP + store result via WP option), eggbev-specific
+credentials, and a table of approaches already tried-and-failed (saves rework).
 
 ---
 
