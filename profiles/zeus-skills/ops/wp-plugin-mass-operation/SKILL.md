@@ -1,8 +1,8 @@
 ---
 name: wp-plugin-mass-operation
-description: Executa operações de plugin WordPress em massa nos 31 sites MGS via WP-CLI (RunCloud) + browser automation (AWS/Bitnami). Cobre install, activate, deactivate, delete e comandos WP-CLI específicos de plugin.
-tags: [wordpress, wp-cli, plugin, mass-operation, runcloud, infra]
-related_skills: [runcloud-api-management, wp-rest-mu-plugin-deploy, sftp-deployment]
+description: "Operações WordPress em massa nos 31 sites MGS: WP-CLI (RunCloud SSH), browser automation (AWS/Bitnami), SFTP, elFinder/WPCode deploy de mu-plugins, e RunCloud API v3. Cobre infra completa (27 RunCloud + 4 Bitnami + fincgriffin), credenciais, 1Password, SSH setup e pitfalls críticos de deploy."
+tags: [wordpress, wp-cli, plugin, mass-operation, runcloud, sftp, mu-plugins, bitnami, api, deploy, infra]
+related_skills: [mgs-infra-inventory, log-monitor-discord-alert, shell-cron-env-export]
 ---
 
 # Operações de Plugin WordPress em Massa — Sites MGS
@@ -186,3 +186,69 @@ Para estes 4 sites, o padrão é:
 5. **`wp imagify info` não tem output útil** — usar query no banco `_imagify_data` para validação real.
 
 6. **`apiDown: true` no browser Imagify** — a API do Imagify é externa. Se o servidor AWS/Bitnami não tiver saída para `api.imagify.io`, o bulk não dispara pelo browser. Verificar `window.imagifyBulk.apiDown` no console.
+
+---
+
+## SEÇÃO B — Deploy de mu-plugins nos 4 sites AWS/Bitnami
+
+Para deploy de arquivos PHP em `wp-content/mu-plugins/` nos 4 sites fora do RunCloud (openzed.com, finanzas.openzed.com, cliquet.com, finanzas.cliquet.com), ver o guia completo em:
+
+**`references/bitnami-mu-plugin-deploy.md`** — fluxo elFinder, WPCode snippet, validação REST API, exit checklist, política de canário, pitfalls críticos de backslash/b64.
+
+### Resumo dos métodos disponíveis
+
+| Método | Risco | Quando usar |
+|---|---|---|
+| **elFinder `cmd: put`** | ✅ Baixo | Sempre preferido. Escreve em disco, não executa PHP. |
+| **SFTP (`wpfiles`)** | ❌ Read-only | `wpfiles` é 100% read-only — não consegue escrever. |
+| **WPCode snippet** | ❌ Alto | Última opção. Parse error = site DOWN irrecuperável sem .pem. |
+| **SSH bitnami + .pem** | ✅ Melhor | Quando .pem disponível — acesso direto. |
+
+Credenciais WP Admin (browser login): `op item get "SITE wordpress zeus" --vault "MGS Conteúdo" --fields label=username`
+Credenciais REST API: campos `api_auth_user` + `api_application_password` no mesmo item.
+
+---
+
+## SEÇÃO C — RunCloud API v3 e Setup SSH
+
+Para configuração completa da RunCloud API v3 (autenticação, paginação, inventário de webapps) e setup de SSH com chave/usuário zeus para deploy direto nos servidores RunCloud, ver:
+
+**`references/runcloud-api-ssh-setup.md`** — endpoints API, IDs de servidores, SSH key vault, Fail2Ban, firewall, sshpass, deploy em massa validado.
+
+### Referência rápida
+
+- **Base URL**: `https://manage.runcloud.io/api/v3`
+- **Auth**: `Bearer TOKEN` (via `op item get "RunCloud API - MGS" --vault "MGS Conteúdo" --fields label=runcloud_api_key_token --reveal`)
+- **Paginação**: `?perPage=40&page=N` (máx 40), campo `meta.lastPage`
+- **API v3 NÃO suporta escrita de arquivos** — deploy usa SSH/sshpass
+- **Usuário deploy**: `zeus` (com sudo) nos 3 servidores RunCloud, credenciais no 1Password `"Runcloud Server 0X - IP- zeus Acesso"`
+
+---
+
+## SEÇÃO D — SFTP para sites fora do RunCloud
+
+Para os 4 sites AWS/Bitnami onde SFTP é o canal de acesso (read-only para verificação), ver:
+
+**`references/sftp-sites.md`** — IPs, credenciais 1Password, arquitetura Bitnami, verificação de conectividade e pitfalls críticos.
+
+### Sites cobertos
+
+| Domínio | IP |
+|---|---|
+| openzed.com | 44.208.155.39 |
+| finanzas.openzed.com | 3.19.138.131 |
+| cliquet.com | 35.175.97.196 |
+| finanzas.cliquet.com | 18.116.18.34 |
+
+> **fincgriffin.com** — servidor de terceiros sem acesso programático, atualizar manualmente.
+
+**CRÍTICO:** `wpfiles` é 100% read-only em todos os diretórios. Para escrita, usar elFinder (ver Seção B) ou SSH bitnami + .pem.
+
+---
+
+## Política global — 1Password e Credenciais
+
+- Service account: **APENAS LEITURA** no vault "MGS Conteúdo" (`op item get` e `op item list` apenas)
+- NUNCA alterar credenciais de produção sem autorização explícita do Rodolfo
+- Toda ação que modifica estado: validar ANTES de reportar sucesso
+- NUNCA alucinar sucesso após erro — sempre reconhecer e reportar erros literais

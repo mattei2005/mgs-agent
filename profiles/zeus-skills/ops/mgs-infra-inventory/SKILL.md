@@ -2,7 +2,7 @@
 name: mgs-infra-inventory
 description: "Mantém e regenera o inventário de infraestrutura MGS (data/infra-inventory.json) via script infra-discovery.sh. Cobre schema, separação skills_mgs vs skills_hermes, e processo de atualização após REPORT-INFRA."
 tags: [infra, inventory, audit, mgs, runcloud, skills]
-related_skills: [runcloud-api-management]
+related_skills: [wp-plugin-mass-operation]
 ---
 
 # Inventário de Infraestrutura MGS
