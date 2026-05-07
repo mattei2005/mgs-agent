@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-06T05:00:01-04:00",
+    "updated_at": "2026-05-07T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -662,26 +662,6 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/content-generate-rec-issuer-quirks/SKILL.md"
       },
       {
-        "name": "content-repair-readability",
-        "category": "wordpress",
-        "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/content-repair-readability/SKILL.md"
-      },
-      {
-        "name": "site-health-monitor-yoast",
-        "category": "wordpress",
-        "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/site-health-monitor-yoast/SKILL.md"
-      },
-      {
-        "name": "wp-deploy-file-without-ssh",
-        "category": "wordpress",
-        "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/wp-deploy-file-without-ssh/SKILL.md"
-      },
-      {
-        "name": "yoast-score-architecture",
-        "category": "wordpress",
-        "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/yoast-score-architecture/SKILL.md"
-      },
-      {
         "name": "yoast-wordpress",
         "category": "wordpress",
         "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/yoast-wordpress/SKILL.md"
@@ -1009,11 +989,6 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-ops/SKILL.md"
       },
       {
-        "name": "hermes-agent-restart",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-restart/SKILL.md"
-      },
-      {
         "name": "log-monitor-discord-alert",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md"
@@ -1024,16 +999,6 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-infra-inventory/SKILL.md"
       },
       {
-        "name": "runcloud-api-management",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/runcloud-api-management/SKILL.md"
-      },
-      {
-        "name": "sftp-deployment",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/sftp-deployment/SKILL.md"
-      },
-      {
         "name": "shell-cron-env-export",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/shell-cron-env-export/SKILL.md"
@@ -1042,11 +1007,6 @@
         "name": "wp-plugin-mass-operation",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/SKILL.md"
-      },
-      {
-        "name": "wp-rest-mu-plugin-deploy",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/wp-rest-mu-plugin-deploy/SKILL.md"
       },
       {
         "name": "airtable",
@@ -1200,8 +1160,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 342,
-      "md5": "2774dc2a4bb97892cf964a0bcd70fdd2",
-      "modified_at": "2026-05-06T05:00:02-04:00"
+      "md5": "4d5c9d4c8e6c3dd1797b4a318a49d14a",
+      "modified_at": "2026-05-07T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1212,14 +1172,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
       "size_bytes": 333,
-      "md5": "f0d472f6d4ed49e0098a55bd596294f3",
-      "modified_at": "2026-05-05T08:00:03-04:00"
+      "md5": "4a5cf312275ca656d132beea57f1bc12",
+      "modified_at": "2026-05-06T08:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 45350,
-      "md5": "f9fcd7d85727c18788ca5cee998a95c2",
-      "modified_at": "2026-05-05T05:00:04-04:00"
+      "md5": "5fdae3625fbcfd9173e274de03159133",
+      "modified_at": "2026-05-06T05:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1260,8 +1220,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
-      "md5": "62471c6fee24371a3c7e8bd715e43e7a",
-      "modified_at": "2026-05-06T05:00:02-04:00"
+      "md5": "e5d8f5143a2d781fc409d2a483cea441",
+      "modified_at": "2026-05-07T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1277,9 +1237,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 5688,
-      "md5": "b8df8b337167389641683c2eea08710e",
-      "modified_at": "2026-05-05T10:01:08-04:00"
+      "size_bytes": 6052,
+      "md5": "616fa527f75e1ffbf54e0fbc9a0a4c1d",
+      "modified_at": "2026-05-06T10:01:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
