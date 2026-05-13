@@ -4,7 +4,9 @@ description: >
   RunCloud server access umbrella: deploy files and run commands on RunCloud servers.
   Primary path: SSH ProxyJump S03→S01 via expect scripts (for machines where direct SSH
   from mgs-agent works through S03). Fallback path: WP Plugin Editor form POST when
-  SSH is fully blocked by Cloudflare (e.g. eggbev). See references/ for full workflows.
+  SSH is fully blocked by Cloudflare (e.g. eggbev). Also covers persisting rules to
+  Atena's SOUL.md (edit, sync to mgs-agent repo, commit, push with 1Password token).
+  See references/ for full workflows.
 tags: [ssh, runcloud, eggbev, deploy, jump-host, expect, wp-admin, plugin-editor]
 related_skills: [yoast-wordpress]
 ---
@@ -181,6 +183,67 @@ custom login URL (WPS Hide Login), Plugin Editor not disabled (`DISALLOW_FILE_ED
 See `references/wp-deploy-file-without-ssh.md` for full Python workflow (steps 1–5),
 bootstrap technique (execute PHP + store result via WP option), eggbev-specific
 credentials, and a table of approaches already tried-and-failed (saves rework).
+
+---
+
+## § Manage Agent Identity (SOUL.md)
+
+When a rule must survive model resets and upgrades. `memory.jsonl` is volatile —
+SOUL.md is the permanent identity file for Atena.
+
+### File locations
+
+| Role | Path |
+|---|---|
+| Live SOUL.md (Atena) | `/root/.hermes/profiles/atena/SOUL.md` |
+| Repo mirror (Atena) | `/root/mgs-agent/profiles/atena-soul.md` |
+| Sync script | `/root/mgs-agent/scripts/sync-souls.sh` |
+
+### Steps
+
+**1. Capture MD5 before editing**
+```bash
+md5sum /root/.hermes/profiles/atena/SOUL.md
+```
+
+**2. Find insertion point**
+```bash
+read_file("/root/.hermes/profiles/atena/SOUL.md", offset=270, limit=15)
+```
+
+**3. Edit via patch** — use `mcp_patch` to append the new rule after the last meaningful line.
+
+**4. Validate with grep**
+```bash
+grep -n -iE "keyword" /root/.hermes/profiles/atena/SOUL.md
+```
+
+**5. Sync to repo**
+```bash
+bash /root/mgs-agent/scripts/sync-souls.sh
+# Verify MD5s match:
+md5sum /root/.hermes/profiles/atena/SOUL.md
+md5sum /root/mgs-agent/profiles/atena-soul.md
+```
+
+**6. Commit + push with 1Password token**
+```bash
+cd /root/mgs-agent
+git add profiles/atena-soul.md
+git commit -m "docs(soul/atena): <description>"
+set -a && . /root/mgs-agent/.env && set +a
+TOKEN=$(op item get 'GitHub PAT - mgs-agent' --vault 'MGS Conteúdo' --fields github_token --reveal 2>/dev/null)
+git push "https://$TOKEN@github.com/mattei2005/mgs-agent.git" main
+```
+
+**Pitfalls:**
+- `~/.hermes/` is NOT a git repo — commits go to `/root/mgs-agent/`
+- `profiles/atena-soul.md` in repo ≠ `~/.hermes/profiles/atena/SOUL.md` — always sync via script first
+- `sync-souls.sh` only copies if source is newer — force with `cp` directly if timestamps are wrong
+- 1Password field is `github_token` (not `credential` or `password`) — wrong name returns empty string silently
+- `git push` may say "Everything up-to-date" if auto-process already pushed — verify with `git log --oneline -3`
+
+**Reporting format:** MD5 before/after · grep match counts · commit hash · push status
 
 ---
 
