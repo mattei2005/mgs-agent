@@ -1,10 +1,3 @@
----
-name: shell-cron-env-export
-description: Padrão canônico para shell scripts MGS que lêem variáveis de .env e invocam subprocessos (op, curl). Previne falha silenciosa via cron causada por variáveis não exportadas para subprocessos.
-version: 1.1.0
-author: Zeus
----
-
 # Shell Scripts com .env — Padrão de Export Canônico MGS
 
 ## Quando usar
@@ -38,7 +31,7 @@ set +a                                        # desliga auto-export
 #!/usr/bin/env bash
 set -euo pipefail
 
-BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/..)" && pwd)"
 
 # ─── Credenciais via 1Password ────────────────────────────────
 # shellcheck source=/dev/null
@@ -68,7 +61,7 @@ echo "Exit: $?"
 - **Falha silenciosa com `set -euo pipefail`** — variável vazia em expansão (`${WEBHOOK_URL}`) mata o script sem mensagem se `nounset` estiver ativo.
 - **`set -a` deve ficar antes do source, `set +a` depois** — não depois de outras atribuições que você não quer exportar.
 - **Aplicar em TODOS os scripts MGS que usam `op`** — não apenas nos monitorados. Bug recorrente: `monitor-auto-push.sh` e `monitor-yoast-health-eggbev.sh` foram afetados (2026-04-27).
-- **Nome da skill vs .gitignore** — nome `shell-cron-env-export` foi escolhido para não bater no padrão `*credentials*` do `.gitignore` (linha 16). Nomes com "credentials" ficam bloqueados do git por regra de segurança — usar sempre nomes descritivos do mecanismo (env-export, env-load, etc).
+- **Nome da skill vs .gitignore** — nomes com "credentials" ficam bloqueados do git por regra de segurança — usar sempre nomes descritivos do mecanismo (env-export, env-load, etc).
 
 ## 🚨 Padrão Proibido — Configs Críticas (crontab, etc.)
 
@@ -116,11 +109,3 @@ Mesma logica se aplica a: overwrite de `.env`, substituicao de configs systemd �
 |--------|-------------|
 | `scripts/monitor-auto-push.sh` | 2026-04-27 (fix retroativo) |
 | `scripts/monitor-yoast-health-eggbev.sh` | 2026-04-27 (fix retroativo) |
-
-Ao criar novo script, adicionar à tabela acima via patch nesta skill.
-
-## Referências
-
-- `references/mgs-audit-2026-05-02.md` — auditoria 130 arquivos repo mgs-agent:
-  taxa de falso positivo por severidade (P0=0%, P1=21%, P2=75%, P3=86%),
-  bugs mais impactantes, falsos positivos notáveis, método correto de grep.

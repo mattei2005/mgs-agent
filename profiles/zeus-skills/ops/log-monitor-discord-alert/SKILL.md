@@ -1,8 +1,8 @@
 ---
 name: log-monitor-discord-alert
-description: "Monitoramento MGS com alertas Discord: template genérico de monitor de log (START/OK padrão), monitor de restarts de services systemd (zeus-gateway, atena-gateway, mgs-autocommit), e monitor de skills MGS sem REPORT-INFRA no inventário. Inclui state file JSON, anti-spam, resolução automática e padrão cron."
-tags: [monitoring, discord, cron, logs, alerting, bash, systemd, restart, infra, inventory, skills, report-infra]
-related_skills: [mgs-infra-inventory, shell-cron-env-export, hermes-agent-ops]
+description: "Monitoramento MGS com alertas Discord: template genérico de monitor de log (START/OK padrão), monitor de restarts de services systemd (zeus-gateway, atena-gateway, mgs-autocommit), e monitor de skills MGS sem REPORT-INFRA no inventário. Inclui state file JSON, anti-spam, resolução automática, padrão cron, set-a env export para cron, e padrão seguro para crontab. Referências: shell-env-crontab-patterns.md (set-a, crontab safety), mgs-audit-2026-05-02.md (auditoria 130 arquivos)."
+tags: [monitoring, discord, cron, logs, alerting, bash, systemd, restart, infra, inventory, skills, report-infra, env-export, shell]
+related_skills: [wp-plugin-mass-operation, discord-ops]
 ---
 
 # Monitor de Log com Alerta Discord
@@ -296,7 +296,7 @@ Após criar os artefatos, atualizar manualmente 3 seções do inventário:
 
 2. **Campo do webhook no 1Password é `webhook_url`, não `url`** — o item "Discord Webhook - Zeus Channel" tem campo `label=webhook_url`. Usar `--fields label=webhook_url --reveal` (não `--fields label=url`).
 
-3. **Sempre exportar `OP_SERVICE_ACCOUNT_TOKEN` antes do `op` em scripts shell** — scripts executados via cron não têm a env do `.env` carregada automaticamente. O `source "${BASE_DIR}/.env"` no início do script é obrigatório.
+3. **Sempre exportar `OP_SERVICE_ACCOUNT_TOKEN` antes do `op` em scripts shell** — scripts executados via cron não têm a env do `.env` carregada automaticamente. O `source "${BASE_DIR}/.env"` no início do script é obrigatório. Usar o padrão `set -a / source / set +a` descrito em `references/shell-env-crontab-patterns.md` (padrão canônico MGS para scripts que invocam `op`). Para segurança ao modificar crontab via script, ver a seção "Padrão Proibido" no mesmo arquivo.
 
 4. **WINDOW_LINES pode estar vazio se o log não tem entradas recentes** — tratar o caso sem erro (script deve terminar normalmente com "OK: zero falhas").
 
