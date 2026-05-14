@@ -60,7 +60,8 @@ from datetime import datetime
 with open("$DB") as f:
     data = json.load(f)
 
-next_id = data["metadata"]["proximo_id"]
+# Read: prefer root .proximo_id (canonical post-Fase-3), fallback metadata
+next_id = data.get("proximo_id", data.get("metadata", {}).get("proximo_id", 1))
 new_pend = {
     "id": f"PEND-{next_id:03d}",
     "titulo": "$TITULO",
@@ -76,9 +77,14 @@ new_pend = {
 }
 
 data["pendencias"].append(new_pend)
-data["metadata"]["proximo_id"] = next_id + 1
-data["metadata"]["total_abertas"] = sum(1 for p in data["pendencias"] if p["status"] == "aberta")
-data["metadata"]["ultima_atualizacao"] = "$TIMESTAMP"
+# Write proximo_id em AMBOS os lugares (root + metadata) pra evitar drift
+data["proximo_id"] = next_id + 1
+if "metadata" in data:
+    data["metadata"]["proximo_id"] = next_id + 1
+    data["metadata"]["total_abertas"] = sum(1 for p in data["pendencias"] if p["status"] == "aberta")
+    data["metadata"]["ultima_atualizacao"] = "$TIMESTAMP"
+# ultima_atualizacao em root também (schema dual)
+data["ultima_atualizacao"] = "$TIMESTAMP"
 
 with open("$DB", "w") as f:
     json.dump(data, f, indent=2, ensure_ascii=False)

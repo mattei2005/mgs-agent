@@ -108,7 +108,11 @@ if 'resolvidas' not in db:
 db['resolvidas'].append(novo_item)
 
 # === ANTI-BUG 3: incrementar proximo_id de verdade ===
+# Write em AMBOS os lugares (root + metadata) pra evitar drift — bug catch 14/05
 db['proximo_id'] = proximo_id + 1
+if 'metadata' in db:
+    db['metadata']['proximo_id'] = proximo_id + 1
+    db['metadata']['ultima_atualizacao'] = os.environ['TIMESTAMP']
 db['ultima_atualizacao'] = os.environ['TIMESTAMP']
 
 with open(DB, 'w') as f:
