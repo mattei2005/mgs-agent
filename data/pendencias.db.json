@@ -2,9 +2,9 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-05-14T13:10:38-04:00",
-    "total_abertas": 61,
-    "total_resolvidas": 24,
+    "ultima_atualizacao": "2026-05-14T13:13:03-04:00",
+    "total_abertas": 60,
+    "total_resolvidas": 25,
     "proximo_id": 74,
     "responsavel": "Rodolfo Mattei"
   },
@@ -61,24 +61,6 @@
         "publico"
       ],
       "contexto": "App está como 'Anyone with the link / Publicly accessible'. Dashboard financeiro com gestores e comissões visível. Lovable → Publish → Edit settings → Private/Unlisted."
-    },
-    {
-      "id": "PEND-004",
-      "titulo": "REC 62026 Yoast SEO Title duplicado - decisão produto",
-      "categoria": "conteudo",
-      "prioridade": "alta",
-      "status": "aberta",
-      "tempo_estimado": "15min",
-      "bloqueio": null,
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "rec",
-        "yoast",
-        "62026",
-        "decisao"
-      ],
-      "contexto": "Atena preencheu _yoast_wpseo_title com 48 chars manualmente, post_title ficou 67 chars. Decisão: patch via REST OU delete+republish OU aceitar. REGRA 6 já documentada para evitar reincidência."
     },
     {
       "id": "PEND-005",
@@ -1405,6 +1387,14 @@
       "resolvida_em": "2026-05-14T13:10:38-04:00",
       "resolvida_por": "claude-web",
       "como": "Validado 2026-05-14: patch ainda necessário. HEAD Hermes v0.12.0 local (instalado 30/04) NÃO tem modify_thread (grep=0). origin/main upstream (1391 commits à frente) TAMBÉM não tem (grep=0). Upstream NousResearch nunca portou. Documentado em CLAUDE.md Technical Debt com instruções pra reaplicar patch após próximo upgrade (atenção ao refactor discord → discord+discord_admin upstream)."
+    },
+    {
+      "id": "PEND-004",
+      "titulo": "REC 62026 Yoast SEO Title duplicado - decisão produto",
+      "categoria": "conteudo",
+      "resolvida_em": "2026-05-14T13:13:03-04:00",
+      "resolvida_por": "claude-web",
+      "como": "Verificado 14/05: divergência não existe mais. POST 62026 force-deleted (404, não no trash). POST 62031 é o REC live: post_title 48 chars + _yoast_wpseo_title vazio (REGRA 6 compliant) + Yoast render 'Capital One Classic: Build Credit, No Annual Fee - EGGBEV' 58 chars (dentro do limite). Slug base canônico (sem -N suffix, pq 62026 foi force-deleted). Linha do tempo: 28/04 criou bugado, 29/04 republicou limpo, deletou bugado antes de 14/05. Pendência cunhada 03/05 com base em log antigo sem inspect live."
     }
   ],
   "proximo_id": 86,
