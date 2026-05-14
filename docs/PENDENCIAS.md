@@ -4,7 +4,7 @@
 > Gerado automaticamente a partir de `data/pendencias.db.json`.  
 > Para adicionar/resolver: use scripts em `scripts/pendencia-*.sh`
 
-**Última atualização:** 2026-05-14T13:47:58-04:00  
+**Última atualização:** 2026-05-14T15:27:15-04:00  
 **Total abertas:** 58  
 **Total resolvidas:** 28
 
@@ -53,8 +53,8 @@
 | `PEND-021` | Migração Lovable Cloud → Supabase próprio (MGS Dashboard) | `lovable` | 8-16h | — |
 | `PEND-022` | Trocar @lovable.dev/cloud-auth-js → auth nativo Supabase | `lovable` | 4h | Bloqueado por PEND-021 |
 | `PEND-023` | Trocar @lovable.dev/email-js → Resend/SES/Postmark | `lovable` | 1h | — |
-| `PEND-024` | Fix segurança wp_app_password (criptografar pgsodium) | `seguranca` | 1-2h | — |
-| `PEND-026` | Preservar última migration kill-switch force_logout_version | `lovable` | 10min | Crítico se PEND-021 |
+| `PEND-024` | Fix segurança wp_app_password (criptografar pgsodium) | `seguranca` | 1-2h | Delegada pro Lovable.dev (14/05/2026) — aguarda... |
+| `PEND-026` | Preservar última migration kill-switch force_logout_version | `lovable` | 10min | Delegada pro Lovable.dev (14/05/2026) — aguarda... |
 | `PEND-027` | Agente Ares (FB Ads + Google Ads + ChatPion) | `agente` | 40h+ | Após Atena 100% estável em produção |
 | `PEND-028` | Adicionar gestores em authorized-users.json | `agente` | 30min | Quando Ares existir |
 | `PEND-035` | Migração total operação MGS para produção (90+ RECs/mês) | `agente` | ongoing | — |

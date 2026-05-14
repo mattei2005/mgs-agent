@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-05-14T13:47:58-04:00",
+    "ultima_atualizacao": "2026-05-14T15:27:15-04:00",
     "total_abertas": 58,
     "total_resolvidas": 28,
     "proximo_id": 87,
@@ -316,7 +316,7 @@
       "prioridade": "media",
       "status": "aberta",
       "tempo_estimado": "1-2h",
-      "bloqueio": null,
+      "bloqueio": "Delegada pro Lovable.dev (14/05/2026) — aguardando ação externa",
       "criada_em": "2026-05-03T04:30:00-04:00",
       "criada_por": "claude-web",
       "tags": [
@@ -324,7 +324,7 @@
         "wp-credentials",
         "lovable"
       ],
-      "contexto": "Senhas WordPress armazenadas em texto puro na tabela content_sites do Supabase Lovable. Vazamento se anon key + bypass RLS. Migrar pra pgsodium encryption."
+      "contexto": "Senhas WordPress armazenadas em texto puro na tabela content_sites do Supabase Lovable. Vazamento se anon key + bypass RLS. Migrar pra pgsodium encryption. | DELEGADA pro Lovable.dev em 14/05/2026 via mensagem direta. Aguardando resposta com estimativa de tempo e implementação. Não atacar localmente."
     },
     {
       "id": "PEND-025",
@@ -350,7 +350,7 @@
       "prioridade": "media",
       "status": "aberta",
       "tempo_estimado": "10min",
-      "bloqueio": "Crítico se PEND-021",
+      "bloqueio": "Delegada pro Lovable.dev (14/05/2026) — aguardando ação externa",
       "criada_em": "2026-05-03T04:30:00-04:00",
       "criada_por": "claude-web",
       "tags": [
@@ -358,7 +358,7 @@
         "kill-switch",
         "supabase"
       ],
-      "contexto": "Migration 20260417151500_881f470f cria force_logout_version em app_settings. Permite forçar logout global de todos users com 1 query. Backup essencial pré-migração."
+      "contexto": "Migration 20260417151500_881f470f cria force_logout_version em app_settings. Permite forçar logout global de todos users com 1 query. Backup essencial pré-migração. | DELEGADA pro Lovable.dev em 14/05/2026 via mensagem direta. Aguardando resposta com estimativa de tempo e implementação. Não atacar localmente."
     },
     {
       "id": "PEND-027",
@@ -1389,5 +1389,5 @@
     }
   ],
   "proximo_id": 87,
-  "ultima_atualizacao": "2026-05-14T13:47:58-04:00"
+  "ultima_atualizacao": "2026-05-14T15:27:15-04:00"
 }
