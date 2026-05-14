@@ -1,43 +1,36 @@
-# CHECKPOINT FASE 3 — MGS Agent
+# CHECKPOINT FASE 3 + 4 — MGS Agent
 Data: 14/05/2026
-Status: ✅ CONCLUÍDA (após fix de bug 14/05)
+Status: ✅ AMBAS CONCLUÍDAS
 
-## Resumo
-Catalogação retroativa de ~80 ações operacionais em 12 marcos agregados.
-Fase originalmente "concluída" em 06/05, mas com bug de IDs que foi
-corrigido em 14/05.
+## Fase 3 (concluída antes desta sessão, com fix 14/05)
+- 12 marcos históricos catalogados PEND-074 a PEND-085 (cobertura 22/04 → 03/05)
+- Bug v1 do pendencia-historico-add.sh corrigido (3 bugs: numeração resetada, proximo_id, schema)
+- v2 do script com schema canônico + anti-duplicata + heredoc seguro
 
-## Bug encontrado e corrigido (14/05)
-Script `pendencia-historico-add.sh` (v1) tinha 3 bugs críticos:
-1. Resetava numeração — gerou PEND-001 a PEND-012 em vez de PEND-074 a PEND-085
-2. Não incrementava `proximo_id` (ficou em 13 quando deveria estar em 86)
-3. Permitia duplicatas (gerou PEND-006 duplicado, colidindo com canário Discord)
+## Fase 4 (concluída 14/05 nesta sessão)
+- 6 das 7 ALTA fechadas via Claude Code
+- PEND-001 (Play Store publish) rebaixada alta→baixa (async/cosmético)
+- 1 nova baixa criada (PEND-086 — monitor Tier 4 Anthropic)
 
-Plus: schema usado pelo script (v1) divergia do canônico:
-- `criado_em` → deveria ser `criada_em`
-- `resolvido_em` → deveria ser `resolvida_em`
-- `como_foi_resolvido` → deveria ser `como`
+## Bug crítico descoberto e corrigido (14/05 tarde)
+Colisão de IDs: pendencia-add.sh usava metadata.proximo_id, pendencia-historico-add.sh usava root .proximo_id. Renumeração da Fase 3 atualizou só root, deixando metadata=74 desatualizado. Primeira nova add após Fase 3 (PEND-074 "Monitor Tier 4") colidiu com PEND-074 já em resolvidas[].
 
-## Fixes aplicados em 14/05
-1. **Renumeração:** 12 marcos PEND-001..PEND-012 → PEND-074..PEND-085
-2. **Canário preservado:** PEND-006 original (Thread Discord 1498667382334554263) intacto
-3. **Schema normalizado:** todos os 12 marcos com campos canônicos
-4. **proximo_id corrigido:** 13 → 86
-5. **Script v2:** reescrito com schema canônico + anti-duplicata + heredoc seguro
-6. **Teste anti-bug:** validação ativa recusa IDs existentes
+Solução:
+1. Migration scripts/migration-2026-05-14-proximo-id-collision-fix.sh aplicada: renumerou PEND-074 nova→PEND-086 preservando todos os campos, sincronizou ambos proximo_id em 87
+2. Patches em pendencia-add.sh + pendencia-historico-add.sh: read root com fallback metadata, write em AMBOS
+3. Convenção scripts/migration-YYYY-MM-DD-<desc>.sh estabelecida pra mudanças one-off futuras
+4. Discovery adicional: ultima_atualizacao também tem schema dual (root + metadata), mesma classe de bug — preventivamente sincronizado nos scripts
 
-## Estado final
-- Abertas: 63
-- Resolvidas: 22 (PEND-006 + PEND-074..PEND-085 + PEND-R001..PEND-R009)
-- proximo_id: 86
-- Duplicatas: ZERO
-- Colisões abertas↔resolvidas: ZERO
+## Estado final do sistema
+- ALTA: 0 (zero)
+- MEDIA: 25
+- BAIXA: 33
+- Total abertas: 58
+- Total resolvidas: 28
+- proximo_id: 87 (root = metadata, SYNC ✓)
+- Backups acumulados: 5 (pode limpar após 1 semana se estável)
 
-## Backups criados
-- data/pendencias.db.json.bak-20260514_123057 (pre-renumeração)
-- data/pendencias.db.json.bak-20260514_124515-pre-normalize (pre-normalização)
-- scripts/pendencia-historico-add.sh.bak-* (script v1 bugado)
-
-## Próximo passo
-Fase 4: atacar as 7 pendências ALTA (PEND-001 a PEND-008, exceto PEND-006 já fechada).
-Estimado ~50 min total. Recomendação: usar Claude Code direto no VPS pra essa fase.
+## Próximos passos (Fase 5 — opcional)
+- 25 MEDIA aguardando priorização interna
+- Auditar outros campos "duais" no JSON com risco de drift (total_abertas, total_resolvidas)
+- Limpar .bak-* antigos após validação de estabilidade
