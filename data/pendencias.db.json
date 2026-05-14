@@ -2,10 +2,10 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-05-14T13:14:00-04:00",
+    "ultima_atualizacao": "2026-05-14T13:40:31-04:00",
     "total_abertas": 59,
     "total_resolvidas": 27,
-    "proximo_id": 75,
+    "proximo_id": 87,
     "responsavel": "Rodolfo Mattei"
   },
   "categorias": {
@@ -1033,7 +1033,7 @@
       "contexto": "REC BA Amex (29/04): Atena disparou apenas 1 send_message mas mensagem apareceu em thread + canal pai. Hipotese: preview nativo Discord (mensagem unica exibida 2x). Confirmar visualmente proximo REC: clicar no canal pai (nao thread), ver se mensagem tem botao 'Open Thread' (= preview nativo, OK) ou aparece como mensagem isolada (= bug real)."
     },
     {
-      "id": "PEND-074",
+      "id": "PEND-086",
       "titulo": "Monitorar resposta form Tier 4 Anthropic (enviado 22/04)",
       "categoria": "externo",
       "prioridade": "baixa",
@@ -1397,6 +1397,6 @@
       "como": "Inbox Anthropic verificado em 14/05/2026: SEM resposta do form Tier 4 enviado em 22/04. Form aparece como recebido mas sem retorno em 22 dias. Decisão: fechar como 'monitorar passivamente' — se chegar resposta no futuro, reabrir."
     }
   ],
-  "proximo_id": 86,
-  "ultima_atualizacao": "2026-05-14T11:59:28-04:00"
+  "proximo_id": 87,
+  "ultima_atualizacao": "2026-05-14T13:40:31-04:00"
 }
