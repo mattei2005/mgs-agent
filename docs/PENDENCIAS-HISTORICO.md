@@ -74,84 +74,84 @@
 - **Resolvida por:** nous-research
 - **Como:** PR #14762 MERGED upstream em 23/04/2026. Hermes v0.11+ tem fix nativo.
 
-### ✅ [PEND-001] Hermes Agent setup completo (Zeus + Atena online em produção)
+### ✅ [PEND-074] Hermes Agent setup completo (Zeus + Atena online em produção)
 
 - **Categoria:** `infra`
 - **Resolvida em:** ?
 - **Resolvida por:** ?
 - **Como:** ?
 
-### ✅ [PEND-002] Pipeline REC end-to-end validado (primeiro REC AIB Visa Gold publicado eggbev)
+### ✅ [PEND-075] Pipeline REC end-to-end validado (primeiro REC AIB Visa Gold publicado eggbev)
 
 - **Categoria:** `conteudo`
 - **Resolvida em:** ?
 - **Resolvida por:** ?
 - **Como:** ?
 
-### ✅ [PEND-003] AGENT.md hierarquia operacional (L0-L3 + Critical Subset + roles)
+### ✅ [PEND-076] AGENT.md hierarquia operacional (L0-L3 + Critical Subset + roles)
 
 - **Categoria:** `documentacao`
 - **Resolvida em:** ?
 - **Resolvida por:** ?
 - **Como:** ?
 
-### ✅ [PEND-004] Yoast mu-plugin v4 deploy 32 sites + openzed.com recovery EXIT CHECKLIST 8/8
+### ✅ [PEND-077] Yoast mu-plugin v4 deploy 32 sites + openzed.com recovery EXIT CHECKLIST 8/8
 
 - **Categoria:** `infra`
 - **Resolvida em:** ?
 - **Resolvida por:** ?
 - **Como:** ?
 
-### ✅ [PEND-005] Tier Anthropic Tier 1 → Tier 3 + Auxiliary models 9 tasks usando Haiku
+### ✅ [PEND-078] Tier Anthropic Tier 1 → Tier 3 + Auxiliary models 9 tasks usando Haiku
 
 - **Categoria:** `infra`
 - **Resolvida em:** ?
 - **Resolvida por:** ?
 - **Como:** ?
 
-### ✅ [PEND-006] 14 crons defensivos + monitoring infra + Admin API tracking
+### ✅ [PEND-079] 14 crons defensivos + monitoring infra + Admin API tracking
 
 - **Categoria:** `monitor`
 - **Resolvida em:** ?
 - **Resolvida por:** ?
 - **Como:** ?
 
-### ✅ [PEND-007] Security hardening - curl-auth migration 6 scripts WordPress
+### ✅ [PEND-080] Security hardening - curl-auth migration 6 scripts WordPress
 
 - **Categoria:** `seguranca`
 - **Resolvida em:** ?
 - **Resolvida por:** ?
 - **Como:** ?
 
-### ✅ [PEND-008] Discord auto-thread + REGRA 6 (post limpo) + REGRA 8 (rename+mention) + tracking custo
+### ✅ [PEND-081] Discord auto-thread + REGRA 6 (post limpo) + REGRA 8 (rename+mention) + tracking custo
 
 - **Categoria:** `agente`
 - **Resolvida em:** ?
 - **Resolvida por:** ?
 - **Como:** ?
 
-### ✅ [PEND-009] Hermes upgrades v0.10 → v0.11 → v0.12 + features nativas adotadas
+### ✅ [PEND-082] Hermes upgrades v0.10 → v0.11 → v0.12 + features nativas adotadas
 
 - **Categoria:** `infra`
 - **Resolvida em:** ?
 - **Resolvida por:** ?
 - **Como:** ?
 
-### ✅ [PEND-010] Card cache + API mgs-rec-api (FastAPI porta 8001) - redução custo REC 99%
+### ✅ [PEND-083] Card cache + API mgs-rec-api (FastAPI porta 8001) - redução custo REC 99%
 
 - **Categoria:** `infra`
 - **Resolvida em:** ?
 - **Resolvida por:** ?
 - **Como:** ?
 
-### ✅ [PEND-011] Audit massivo 02/05 - 24 fixes P0/P1/P2/P3 + recovery crontab + cleanup 94 .bak
+### ✅ [PEND-084] Audit massivo 02/05 - 24 fixes P0/P1/P2/P3 + recovery crontab + cleanup 94 .bak
 
 - **Categoria:** `infra`
 - **Resolvida em:** ?
 - **Resolvida por:** ?
 - **Como:** ?
 
-### ✅ [PEND-012] Sistemas fundacionais 03/05 - Pendências DB JSON + Chat-log + Obsidian Vault setup
+### ✅ [PEND-085] Sistemas fundacionais 03/05 - Pendências DB JSON + Chat-log + Obsidian Vault setup
 
 - **Categoria:** `documentacao`
 - **Resolvida em:** ?
