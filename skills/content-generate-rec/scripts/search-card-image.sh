@@ -32,16 +32,35 @@ emit_needs_manual() {
   exit 1
 }
 
+run_bing_fallback() {
+  # ── Tentativa 2: Bing Images via Playwright local ──────────────────────
+  echo "[$(date -Iseconds)] search-card-image FALLBACK bing_playwright card=$CARD_NAME" >>"$LOG"
+  BING_SCRIPT="$(dirname "$0")/search-card-image-bing.py"
+  if [ -f "$BING_SCRIPT" ]; then
+    bing_result=$(python3 "$BING_SCRIPT" "$CARD_NAME" 2>>"$LOG") || true
+    bing_status=$(echo "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('status',''))" 2>/dev/null || echo "")
+    if [ "$bing_status" = "OK" ]; then
+      bing_path=$(echo "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('path',''))"   2>/dev/null || echo "")
+      bing_mime=$(echo "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('mime',''))"   2>/dev/null || echo "")
+      bing_src=$(echo  "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('source',''))" 2>/dev/null || echo "")
+      echo "[$(date -Iseconds)] search-card-image BING_OK path=$bing_path src=$bing_src" >>"$LOG"
+      jq -n --arg p "$bing_path" --arg m "$bing_mime" --arg s "$bing_src" \
+        '{path:$p, mime:$m, tier:4, source:$s, status:"OK"}'
+      exit 0
+    fi
+  fi
+  emit_needs_manual "all_sources_failed"
+}
+
 # ── Tentativa 1: Fetch official page ──────────────────────────────────────
 # Captura HTTP status junto com o body para detecção rápida de geo-IP/bot block
 http_out=$(curl -sS -L -A "Mozilla/5.0" -w "\nHTTP_STATUS:%{http_code}" "$OFFICIAL_URL" 2>/dev/null) || true
 http_status=$(echo "$http_out" | grep -o 'HTTP_STATUS:[0-9]*' | cut -d: -f2)
 html=$(echo "$http_out" | sed '/HTTP_STATUS:[0-9]*/d')
 
-# Detectar bloqueio antes de tentar scraping:
+# Detectar bloqueio:
 # - HTTP 4xx/5xx
-# - Cloudflare "Error 1007 / 1020 / 403" no body
-# - Lloyds / banco UK retornando página de erro genérica
+# - Cloudflare "Error 1007/1020" ou página de erro genérica no body
 _blocked=0
 if [ -n "$http_status" ] && [ "$http_status" -ge 400 ] 2>/dev/null; then
   _blocked=1
@@ -49,19 +68,16 @@ fi
 if echo "$html" | grep -qiE '(error 10[0-9]{2}|access denied|cf-mitigated|cf-ray|enable javascript and cookies|sorry.{0,40}error occurred|we are sorry an error)'; then
   _blocked=1
 fi
-if [ "$_blocked" = "1" ]; then
-  echo "[$(date -Iseconds)] search-card-image GEO_BLOCK_DETECTED status=${http_status:-?} skipping_to_bing card=$CARD_NAME url=$OFFICIAL_URL" >>"$LOG"
-  html=""
+
+if [ "$_blocked" = "1" ] || [ -z "$html" ]; then
+  echo "[$(date -Iseconds)] search-card-image GEO_BLOCK_OR_EMPTY status=${http_status:-?} skipping_to_bing card=$CARD_NAME url=$OFFICIAL_URL" >>"$LOG"
+  run_bing_fallback
 fi
 
-[ -z "$html" ] && {
-  # Pular direto para Tentativa 2 (Bing) sem emit_needs_manual ainda
-  :
-}
-
+# ── Scraping do site oficial ──────────────────────────────────────────────
 base_host=$(echo "$OFFICIAL_URL" | sed -E 's#^(https?://[^/]+).*#\1#')
 candidates=$(echo "$html" | grep -oE '(src|data-src|data-lazy-src)="[^"]+\.(png|jpe?g|webp)"' \
-  | sed -E 's/^[^"]+"([^"]+)".*/\1/' \
+  | sed -E 's/^[^"]+\"([^"]+)\".*/\1/' \
   | sort -u)
 
 abs_candidates=$(while IFS= read -r u; do
@@ -74,7 +90,10 @@ abs_candidates=$(while IFS= read -r u; do
   esac
 done <<<"$candidates")
 
-[ -z "$abs_candidates" ] && emit_needs_manual "no_image_tags_on_page"
+if [ -z "$abs_candidates" ]; then
+  echo "[$(date -Iseconds)] search-card-image no_image_tags_on_page skipping_to_bing card=$CARD_NAME" >>"$LOG"
+  run_bing_fallback
+fi
 
 kw=$(echo "$slug" | tr '-' '|')
 scored=$(while IFS= read -r u; do
@@ -144,24 +163,9 @@ while IFS= read -r line; do
   break
 done <<<"$scored"
 
+# Se Tentativa 1 não encontrou nada → Bing fallback
 if [ -z "$best" ]; then
-  # ── Tentativa 2: Bing Images via Playwright local ───────────────────────
-  echo "[$(date -Iseconds)] search-card-image FALLBACK bing_playwright card=$CARD_NAME" >>"$LOG"
-  BING_SCRIPT="$(dirname "$0")/search-card-image-bing.py"
-  if [ -f "$BING_SCRIPT" ]; then
-    bing_result=$(python3 "$BING_SCRIPT" "$CARD_NAME" 2>>"$LOG") || true
-    bing_status=$(echo "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('status',''))" 2>/dev/null || echo "")
-    if [ "$bing_status" = "OK" ]; then
-      bing_path=$(echo   "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('path',''))"   2>/dev/null || echo "")
-      bing_mime=$(echo   "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('mime',''))"   2>/dev/null || echo "")
-      bing_src=$(echo    "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('source',''))" 2>/dev/null || echo "")
-      echo "[$(date -Iseconds)] search-card-image BING_OK path=$bing_path src=$bing_src" >>"$LOG"
-      jq -n --arg p "$bing_path" --arg m "$bing_mime" --arg s "$bing_src" \
-        '{path:$p, mime:$m, tier:4, source:$s, status:"OK"}'
-      exit 0
-    fi
-  fi
-  emit_needs_manual "dimensions_filter_all_rejected_bing_also_failed"
+  run_bing_fallback
 fi
 
 # Move accepted candidate to canonical output path
