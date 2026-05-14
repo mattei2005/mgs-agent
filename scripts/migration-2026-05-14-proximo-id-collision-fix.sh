@@ -126,11 +126,13 @@ data["pendencias"][idx]["id"] = new_id
 
 next_pid = new_num + 1
 data["proximo_id"] = next_pid
-if "metadata" in data:
-    data["metadata"]["proximo_id"] = next_pid
-    # ultima_atualizacao timestamp
-    now = datetime.now(timezone(timedelta(hours=-4))).isoformat(timespec="seconds")
-    data["metadata"]["ultima_atualizacao"] = now
+data["metadata"]["proximo_id"] = next_pid
+
+# ultima_atualizacao em AMBOS os lugares (root + metadata) — schema dual,
+# mesma classe de bug que proximo_id. Sincroniza pra evitar drift.
+now = datetime.now(timezone(timedelta(hours=-4))).isoformat(timespec="seconds")
+data["ultima_atualizacao"] = now
+data["metadata"]["ultima_atualizacao"] = now
 
 # ------------------------------------------------------------------
 # PASSO 5: validação em memória ANTES do write
