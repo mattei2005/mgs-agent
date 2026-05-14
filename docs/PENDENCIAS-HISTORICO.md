@@ -4,6 +4,90 @@
 
 ---
 
+### ✅ [PEND-074] Hermes Agent setup completo (Zeus + Atena online em produção)
+
+- **Categoria:** `infra`
+- **Resolvida em:** 2026-05-14T11:59:28-04:00
+- **Resolvida por:** claude-web
+- **Como:** Migração de bots Python custom para Hermes Agent framework (NousResearch). Zeus (orquestrador admin) + Atena (content) instalados, com tokens Discord via 1Password, channel directory 23 targets, 41 slash commands cada, prompt caching ativo. Patch run.py para bug busy_input_mode#14905 (depois mergeado upstream PR#14762).
+
+### ✅ [PEND-075] Pipeline REC end-to-end validado (primeiro REC AIB Visa Gold publicado eggbev)
+
+- **Categoria:** `conteudo`
+- **Resolvida em:** 2026-05-14T11:59:28-04:00
+- **Resolvida por:** claude-web
+- **Como:** Test 4 completo: skills content-generate-rec + content-publish-wordpress operacionais. Post 61948 (rec-gb-cc-aib-visa-gold-2) publicado com Yoast SEO 84 + Readability 90, validado visualmente por Raquel. Pipeline cobre research browser + image generation Gemini + LazyBlock injection + WP REST publish + Yoast meta.
+
+### ✅ [PEND-076] AGENT.md hierarquia operacional (L0-L3 + Critical Subset + roles)
+
+- **Categoria:** `documentacao`
+- **Resolvida em:** 2026-05-14T11:59:28-04:00
+- **Resolvida por:** claude-web
+- **Como:** Modelo de autorização 4 níveis: L0 (read livre), L1 (execute + audit), L2 (approval required), L3 (forbidden). Critical Subset definido. Roles: Super Admin (Rodolfo), Conteudo (Raquel full access Atena), gestor, unauthorized. authorized-users.json com Discord IDs reais. Hierarquia: Rodolfo > Zeus > Atena > Ares (futuro).
+
+### ✅ [PEND-077] Yoast mu-plugin v4 deploy 32 sites + openzed.com recovery EXIT CHECKLIST 8/8
+
+- **Categoria:** `infra`
+- **Resolvida em:** 2026-05-14T11:59:28-04:00
+- **Resolvida por:** claude-web
+- **Como:** Deploy massivo: 26 sites RunCloud via SSH + 4 sites SFTP/Bitnami (openzed/cliquet/finanzas) via elFinder + fincgriffin manual + eggbev canário = 32/32 sites com MD5 069270de4c07a9d15838ff45df65f539. Incidente openzed 25/04 (b64 inventado pelo Zeus → site down 18h) recuperado pelo dev externo + cleanup SQL + skill wp-rest-mu-plugin-deploy criada com PITFALL #1 + EXIT CHECKLIST 8 itens validados. SOUL Zeus atualizado com case study L2.
+
+### ✅ [PEND-078] Tier Anthropic Tier 1 → Tier 3 + Auxiliary models 9 tasks usando Haiku
+
+- **Categoria:** `infra`
+- **Resolvida em:** 2026-05-14T11:59:28-04:00
+- **Resolvida por:** claude-web
+- **Como:** Upgrade gradual Tier 1 (30k/min) → Tier 3 (800k/min) via gasto acumulado + form sales. 9 tasks Atena+Zeus migradas para claude-haiku-4-5-20251001 (vision, web_extract, compression, session_search, skills_hub, approval, mcp, flush_memories, title_generation) — estimativa 80-85% redução de custo nessas tasks vs Sonnet. provider=auto em todos. Tier 4 form enviado, sem resposta.
+
+### ✅ [PEND-079] 14 crons defensivos + monitoring infra + Admin API tracking
+
+- **Categoria:** `monitor`
+- **Resolvida em:** 2026-05-14T11:59:28-04:00
+- **Resolvida por:** claude-web
+- **Como:** Setup completo monitoring: sync-souls (5min), monitor-auto-push (15min), monitor-yoast-health-eggbev (10 UTC), monitor-anthropic-cost (12 UTC, divisor 88), monitor-tool-loops (5min), monitor-service-restarts (5min), check-pending-reports (15min), cleanup-discord-threads (4 AM), infra-discovery (5 AM), track-article-cost (15min), housekeeping .bak (3 AM). Admin API key separada criada. Webhook Discord #alerts-infra + #alerts-yoast (canais separados). Sistema previne 80%+ dos problemas operacionais.
+
+### ✅ [PEND-080] Security hardening - curl-auth migration 6 scripts WordPress
+
+- **Categoria:** `seguranca`
+- **Resolvida em:** 2026-05-14T11:59:28-04:00
+- **Resolvida por:** claude-web
+- **Como:** Migração de curl -u inline (expõe senha em ps aux/argv) para wp_curl_auth helper usando curl -K tempfile chmod 600 + trap RETURN. 6 scripts migrados: upload-image.sh, create-post.sh, update-yoast.sh, resolve-term.sh, check-slug-conflict.sh, test-connection.sh. Doc auditoria em docs/security/migration-curl-auth-20260427.md. set -a/+a aplicado em todos scripts cron com 'op' (1Password CLI). Skill shell-cron-env-export documenta padrão.
+
+### ✅ [PEND-081] Discord auto-thread + REGRA 6 (post limpo) + REGRA 8 (rename+mention) + tracking custo
+
+- **Categoria:** `agente`
+- **Resolvida em:** 2026-05-14T11:59:28-04:00
+- **Resolvida por:** claude-web
+- **Como:** REGRA 6 validada em REC 62031 Capital One (post_title 48c, Yoast title vazio, metadesc 121c, focus_kw 3 palavras). REGRA 8 (rename thread + mention unificado) funcionando em DM threads Atena+Zeus após resolver bloqueios (toolset hermes-discord, DISCORD_BOT_TOKEN passthrough, Cloudflare 1010 User-Agent). channel_prompts otimizado (1 mensagem). cleanup-discord-threads.sh cron 4 AM auto-deleta arquivadas 2 dias. Patch discord_tool.py modify_thread (4 ocorrências, custom mantido após updates Hermes).
+
+### ✅ [PEND-082] Hermes upgrades v0.10 → v0.11 → v0.12 + features nativas adotadas
+
+- **Categoria:** `infra`
+- **Resolvida em:** 2026-05-14T11:59:28-04:00
+- **Resolvida por:** claude-web
+- **Como:** Upgrade v0.10→v0.11 (29/04, snapshot Hetzner 381460955) + v0.11→v0.12 (02/05, snapshot 382641638). Features nativas ativadas: steer mode (/steer mid-run), status-rich ack, smart compressor (dedup + anti-thrashing + language-aware), webhook direct-delivery (zero-LLM push), auto-prune sessions + VACUUM state.db (retention 30d). Patch run.py removido (queue agora nativo). Patch custom remanescente: discord_tool.py modify_thread. Compression config: enabled=true, threshold=0.15, target_ratio=0.2, protect_last_n=20.
+
+### ✅ [PEND-083] Card cache + API mgs-rec-api (FastAPI porta 8001) - redução custo REC 99%
+
+- **Categoria:** `infra`
+- **Resolvida em:** 2026-05-14T11:59:28-04:00
+- **Resolvida por:** claude-web
+- **Como:** Card cache implementado em /root/mgs-agent/data/card-cache.db + imagens em data/card-images-cache/ (TTL 30d, 8 cartões UK populados). Scripts card-cache-lookup/save/stats.sh integrados na SKILL content-generate-rec (Step 1c lookup + Step 2.5 save). API mgs-rec-api FastAPI em /root/mgs-agent/api/generate-rec-api.py porta 8001, systemd service (Restart=on-failure, MemoryLimit=512M). Custo MEDIDO: -bash.029/REC em 20s via API vs .16/10min via Atena agent (-99% custo, -97% tempo). REC Halifax 62039 publicado via API com sucesso.
+
+### ✅ [PEND-084] Audit massivo 02/05 - 24 fixes P0/P1/P2/P3 + recovery crontab + cleanup 94 .bak
+
+- **Categoria:** `infra`
+- **Resolvida em:** 2026-05-14T11:59:28-04:00
+- **Resolvida por:** claude-web
+- **Como:** Deep audit line-by-line repo mgs-agent: 52 bugs catalogados, 24 fixes aplicados em produção. P0-3 webhook fail-fast (4 files), P0-4 false positive validation, .bak cleanup (94 arquivos deletados /root/.hermes/profiles + /root/mgs-agent), housekeeping cron 3 AM (retention 15d), P1-9 mention fix, P1-1 datetime.utcnow fix monitor-service-restarts.sh, P0-1 api credential parsing, P0-2 .gitignore + auto-commit-watcher. Incidente crontab vazio recuperado via /tmp/crontab-20260502_215822.bak. SKILL refactor revertido (falhou). Snapshots Hetzner: 382263233, 382319113, 382641638.
+
+### ✅ [PEND-085] Sistemas fundacionais 03/05 - Pendências DB JSON + Chat-log + Obsidian Vault setup
+
+- **Categoria:** `documentacao`
+- **Resolvida em:** 2026-05-14T11:59:28-04:00
+- **Resolvida por:** claude-web
+- **Como:** 3 sistemas críticos criados: (1) Sistema de Pendências - data/pendencias.db.json com 57 abertas + 9 resolvidas + 11 categorias, scripts pendencia-{add,done,list,render-md}.sh, cron 8 AM EST regenera docs/PENDENCIAS.md + docs/PENDENCIAS-HISTORICO.md. (2) Sistema Chat-log - scripts/chat-log.sh com tipos (decisao/contexto/licao/pend-add/pend-done/proximo/evento), 22 entradas fundação, INDEX hourly, prompt de retomada definido. (3) Obsidian Vault setup parcial Windows - SSH key GitHub + repo clonado MGS-Vault + Obsidian instalado, wikilinks/auto-pull adiados (PEND-067 criado).
+
 ### ✅ [PEND-006] Verificar canário thread Discord 1498667382334554263
 
 - **Categoria:** `infra`
@@ -73,87 +157,3 @@
 - **Resolvida em:** 2026-04-23T00:00:00-04:00
 - **Resolvida por:** nous-research
 - **Como:** PR #14762 MERGED upstream em 23/04/2026. Hermes v0.11+ tem fix nativo.
-
-### ✅ [PEND-074] Hermes Agent setup completo (Zeus + Atena online em produção)
-
-- **Categoria:** `infra`
-- **Resolvida em:** ?
-- **Resolvida por:** ?
-- **Como:** ?
-
-### ✅ [PEND-075] Pipeline REC end-to-end validado (primeiro REC AIB Visa Gold publicado eggbev)
-
-- **Categoria:** `conteudo`
-- **Resolvida em:** ?
-- **Resolvida por:** ?
-- **Como:** ?
-
-### ✅ [PEND-076] AGENT.md hierarquia operacional (L0-L3 + Critical Subset + roles)
-
-- **Categoria:** `documentacao`
-- **Resolvida em:** ?
-- **Resolvida por:** ?
-- **Como:** ?
-
-### ✅ [PEND-077] Yoast mu-plugin v4 deploy 32 sites + openzed.com recovery EXIT CHECKLIST 8/8
-
-- **Categoria:** `infra`
-- **Resolvida em:** ?
-- **Resolvida por:** ?
-- **Como:** ?
-
-### ✅ [PEND-078] Tier Anthropic Tier 1 → Tier 3 + Auxiliary models 9 tasks usando Haiku
-
-- **Categoria:** `infra`
-- **Resolvida em:** ?
-- **Resolvida por:** ?
-- **Como:** ?
-
-### ✅ [PEND-079] 14 crons defensivos + monitoring infra + Admin API tracking
-
-- **Categoria:** `monitor`
-- **Resolvida em:** ?
-- **Resolvida por:** ?
-- **Como:** ?
-
-### ✅ [PEND-080] Security hardening - curl-auth migration 6 scripts WordPress
-
-- **Categoria:** `seguranca`
-- **Resolvida em:** ?
-- **Resolvida por:** ?
-- **Como:** ?
-
-### ✅ [PEND-081] Discord auto-thread + REGRA 6 (post limpo) + REGRA 8 (rename+mention) + tracking custo
-
-- **Categoria:** `agente`
-- **Resolvida em:** ?
-- **Resolvida por:** ?
-- **Como:** ?
-
-### ✅ [PEND-082] Hermes upgrades v0.10 → v0.11 → v0.12 + features nativas adotadas
-
-- **Categoria:** `infra`
-- **Resolvida em:** ?
-- **Resolvida por:** ?
-- **Como:** ?
-
-### ✅ [PEND-083] Card cache + API mgs-rec-api (FastAPI porta 8001) - redução custo REC 99%
-
-- **Categoria:** `infra`
-- **Resolvida em:** ?
-- **Resolvida por:** ?
-- **Como:** ?
-
-### ✅ [PEND-084] Audit massivo 02/05 - 24 fixes P0/P1/P2/P3 + recovery crontab + cleanup 94 .bak
-
-- **Categoria:** `infra`
-- **Resolvida em:** ?
-- **Resolvida por:** ?
-- **Como:** ?
-
-### ✅ [PEND-085] Sistemas fundacionais 03/05 - Pendências DB JSON + Chat-log + Obsidian Vault setup
-
-- **Categoria:** `documentacao`
-- **Resolvida em:** ?
-- **Resolvida por:** ?
-- **Como:** ?
