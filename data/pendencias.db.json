@@ -2,10 +2,10 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-05-14T13:13:03-04:00",
-    "total_abertas": 60,
-    "total_resolvidas": 25,
-    "proximo_id": 74,
+    "ultima_atualizacao": "2026-05-14T13:14:00-04:00",
+    "total_abertas": 59,
+    "total_resolvidas": 27,
+    "proximo_id": 75,
     "responsavel": "Rodolfo Mattei"
   },
   "categorias": {
@@ -46,23 +46,6 @@
       "contexto": "Play Console aprovou produção em 28/04/2026 - app.lovable.mgsdashboard. Só publicar."
     },
     {
-      "id": "PEND-003",
-      "titulo": "Trocar app.mgsdigitalcorp.com de Public para Private/Unlisted",
-      "categoria": "seguranca",
-      "prioridade": "alta",
-      "status": "aberta",
-      "tempo_estimado": "1min",
-      "bloqueio": null,
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "lovable",
-        "mgs-dashboard",
-        "publico"
-      ],
-      "contexto": "App está como 'Anyone with the link / Publicly accessible'. Dashboard financeiro com gestores e comissões visível. Lovable → Publish → Edit settings → Private/Unlisted."
-    },
-    {
       "id": "PEND-005",
       "titulo": "Migrar runcloud-inventory.sh para set -a/+a",
       "categoria": "infra",
@@ -78,23 +61,6 @@
         "1password"
       ],
       "contexto": "Único script ativo MGS sem o anti-loop fix. Usa op CLI mas sem set -a/+a. Auditoria 27/04 confirmou todos os 7 scripts em cron já têm fix; runcloud-inventory.sh roda manual."
-    },
-    {
-      "id": "PEND-008",
-      "titulo": "Verificar resposta form Tier 4 Anthropic",
-      "categoria": "externo",
-      "prioridade": "alta",
-      "status": "aberta",
-      "tempo_estimado": "5min",
-      "bloqueio": null,
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "anthropic",
-        "tier",
-        "rate-limit"
-      ],
-      "contexto": "Tier 3 ATIVO ($200+ cumulativo). Form Tier 4 (400k tpm) enviado durante crise rate limit. Verificar se Anthropic respondeu."
     },
     {
       "id": "PEND-009",
@@ -1065,6 +1031,24 @@
         "validacao-visual"
       ],
       "contexto": "REC BA Amex (29/04): Atena disparou apenas 1 send_message mas mensagem apareceu em thread + canal pai. Hipotese: preview nativo Discord (mensagem unica exibida 2x). Confirmar visualmente proximo REC: clicar no canal pai (nao thread), ver se mensagem tem botao 'Open Thread' (= preview nativo, OK) ou aparece como mensagem isolada (= bug real)."
+    },
+    {
+      "id": "PEND-074",
+      "titulo": "Monitorar resposta form Tier 4 Anthropic (enviado 22/04)",
+      "categoria": "externo",
+      "prioridade": "baixa",
+      "status": "aberta",
+      "tempo_estimado": "5min check periódico",
+      "bloqueio": null,
+      "criada_em": "2026-05-14T13:14:00-04:00",
+      "criada_por": "root",
+      "tags": [
+        "anthropic",
+        "tier-4",
+        "monitor",
+        "async"
+      ],
+      "contexto": "Form Tier 4 enviado 22/04/2026, sem resposta em 14/05 (22 dias). PEND-008 fechada. Reabrir se chegar retorno. Check inbox/dashboard a cada 2 semanas."
     }
   ],
   "resolvidas": [
@@ -1395,6 +1379,22 @@
       "resolvida_em": "2026-05-14T13:13:03-04:00",
       "resolvida_por": "claude-web",
       "como": "Verificado 14/05: divergência não existe mais. POST 62026 force-deleted (404, não no trash). POST 62031 é o REC live: post_title 48 chars + _yoast_wpseo_title vazio (REGRA 6 compliant) + Yoast render 'Capital One Classic: Build Credit, No Annual Fee - EGGBEV' 58 chars (dentro do limite). Slug base canônico (sem -N suffix, pq 62026 foi force-deleted). Linha do tempo: 28/04 criou bugado, 29/04 republicou limpo, deletou bugado antes de 14/05. Pendência cunhada 03/05 com base em log antigo sem inspect live."
+    },
+    {
+      "id": "PEND-003",
+      "titulo": "Trocar app.mgsdigitalcorp.com de Public para Private/Unlisted",
+      "categoria": "seguranca",
+      "resolvida_em": "2026-05-14T13:13:58-04:00",
+      "resolvida_por": "rodolfo",
+      "como": "Visibilidade alterada de Public para Private no Lovable em 14/05/2026 via UI. app.mgsdigitalcorp.com não acessível sem autenticação."
+    },
+    {
+      "id": "PEND-008",
+      "titulo": "Verificar resposta form Tier 4 Anthropic",
+      "categoria": "externo",
+      "resolvida_em": "2026-05-14T13:13:59-04:00",
+      "resolvida_por": "rodolfo",
+      "como": "Inbox Anthropic verificado em 14/05/2026: SEM resposta do form Tier 4 enviado em 22/04. Form aparece como recebido mas sem retorno em 22 dias. Decisão: fechar como 'monitorar passivamente' — se chegar resposta no futuro, reabrir."
     }
   ],
   "proximo_id": 86,
