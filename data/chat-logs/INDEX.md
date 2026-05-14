@@ -1,7 +1,7 @@
 # 📚 Index — Chat Logs MGS Digital Corp
 
-> Atualizado: 2026-05-14T13:44:15.023132
-> Total sessões: 1
+> Atualizado: 2026-05-14T13:46:03.694113
+> Total sessões: 2
 
 ---
 
@@ -19,4 +19,5 @@ Em seguida, lê /root/mgs-agent/docs/PENDENCIAS.md para saber o que está aberto
 
 ## Sessões (mais recentes primeiro)
 
+- **`sessao-2026-05-14_1346.md`** — Sessão 14/05 tarde — post-Fase 4 + rebaixa PEND-001 _(369B, mod 2026-05-14 13:46)_
 - **`sessao-2026-05-03_0111.md`** — Sessão fundação 03/05 — sistema pendências + chat-log _(5071B, mod 2026-05-14 13:44)_
