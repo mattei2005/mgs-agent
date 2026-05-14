@@ -1,5 +1,5 @@
 #!/bin/bash
-# pendencia-historico-add.sh
+# pendencia-historico-add.sh (v2 — schema canônico + anti-duplicata)
 # Adiciona item direto em 'resolvidas' (sem passar por 'abertas')
 # Útil para catalogar histórico retroativo
 #
@@ -54,44 +54,68 @@ fi
 
 TIMESTAMP=$(date -Iseconds)
 
-python3 << PYEOF
-import json
-from datetime import datetime
+# Passa via env pra evitar quebra com aspas/cifrão no input
+export TITULO CATEGORIA COMO PRIORIDADE DATA_RESOLUCAO TAGS CONTEXTO POR TIMESTAMP DB
 
-with open("$DB", "r") as f:
+python3 <<'PYEOF'
+import json
+import os
+import sys
+
+DB = os.environ['DB']
+
+with open(DB, 'r') as f:
     db = json.load(f)
 
-proximo_id = db.get("proximo_id", 1)
+# === ANTI-BUG 1: usar proximo_id, nunca resetar ===
+proximo_id = db.get('proximo_id', 1)
 pend_id = f"PEND-{proximo_id:03d}"
 
-tags_list = [t.strip() for t in "$TAGS".split(",") if t.strip()] if "$TAGS" else []
+# === ANTI-BUG 2: validar que ID não colide com abertas nem resolvidas ===
+ids_abertas = {p['id'] for p in db.get('pendencias', [])}
+ids_resolvidas = {p['id'] for p in db.get('resolvidas', [])}
 
+if pend_id in ids_abertas or pend_id in ids_resolvidas:
+    print(f"❌ ERRO: ID {pend_id} já existe (proximo_id corrompido?)")
+    print(f"   IDs em abertas: {len(ids_abertas)}, em resolvidas: {len(ids_resolvidas)}")
+    sys.exit(1)
+
+# Tags
+tags_raw = os.environ.get('TAGS', '')
+tags_list = [t.strip() for t in tags_raw.split(',') if t.strip()] if tags_raw else []
+
+# === Schema canônico (feminino, igual PEND-R001 e pendencia-done.sh) ===
 novo_item = {
     "id": pend_id,
-    "titulo": "$TITULO",
-    "categoria": "$CATEGORIA",
-    "prioridade": "$PRIORIDADE",
-    "criado_em": "$DATA_RESOLUCAO" + "T00:00:00-04:00",
-    "criado_por": "$POR",
-    "contexto": "$CONTEXTO",
+    "titulo": os.environ['TITULO'],
+    "categoria": os.environ['CATEGORIA'],
+    "prioridade": os.environ['PRIORIDADE'],
     "tags": tags_list,
-    "resolvido_em": "$TIMESTAMP",
-    "resolvido_por": "$POR",
-    "como_foi_resolvido": "$COMO",
-    "tipo": "historico_retroativo"
+    "tipo": "historico_retroativo",
+    "criada_em": os.environ['DATA_RESOLUCAO'] + "T00:00:00-04:00",
+    "criada_por": os.environ['POR'],
+    "resolvida_em": os.environ['TIMESTAMP'],
+    "resolvida_por": os.environ['POR'],
+    "como": os.environ['COMO'],
 }
 
-if "resolvidas" not in db:
-    db["resolvidas"] = []
+contexto = os.environ.get('CONTEXTO', '').strip()
+if contexto:
+    novo_item['contexto'] = contexto
 
-db["resolvidas"].append(novo_item)
-db["proximo_id"] = proximo_id + 1
-db["ultima_atualizacao"] = "$TIMESTAMP"
+if 'resolvidas' not in db:
+    db['resolvidas'] = []
+db['resolvidas'].append(novo_item)
 
-with open("$DB", "w") as f:
+# === ANTI-BUG 3: incrementar proximo_id de verdade ===
+db['proximo_id'] = proximo_id + 1
+db['ultima_atualizacao'] = os.environ['TIMESTAMP']
+
+with open(DB, 'w') as f:
     json.dump(db, f, ensure_ascii=False, indent=2)
 
-print(f"✅ Histórico registrado: {pend_id} - $TITULO")
-print(f"   Categoria: $CATEGORIA | Data resolução: $DATA_RESOLUCAO")
-print(f"   Como: $COMO"[:200])
+print(f"✅ Histórico registrado: {pend_id}")
+print(f"   Título: {os.environ['TITULO'][:80]}")
+print(f"   Categoria: {os.environ['CATEGORIA']} | Data resolução: {os.environ['DATA_RESOLUCAO']}")
+print(f"   proximo_id agora = {db['proximo_id']}")
 PYEOF
