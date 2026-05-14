@@ -122,7 +122,23 @@ while IFS= read -r line; do
 done <<<"$scored"
 
 if [ -z "$best" ]; then
-  emit_needs_manual "dimensions_filter_all_rejected"
+  # ── Tentativa 2: Bing Images via Playwright local ───────────────────────
+  echo "[$(date -Iseconds)] search-card-image FALLBACK bing_playwright card=$CARD_NAME" >>"$LOG"
+  BING_SCRIPT="$(dirname "$0")/search-card-image-bing.py"
+  if [ -f "$BING_SCRIPT" ]; then
+    bing_result=$(python3 "$BING_SCRIPT" "$CARD_NAME" 2>>"$LOG") || true
+    bing_status=$(echo "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('status',''))" 2>/dev/null || echo "")
+    if [ "$bing_status" = "OK" ]; then
+      bing_path=$(echo   "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('path',''))"   2>/dev/null || echo "")
+      bing_mime=$(echo   "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('mime',''))"   2>/dev/null || echo "")
+      bing_src=$(echo    "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('source',''))" 2>/dev/null || echo "")
+      echo "[$(date -Iseconds)] search-card-image BING_OK path=$bing_path src=$bing_src" >>"$LOG"
+      jq -n --arg p "$bing_path" --arg m "$bing_mime" --arg s "$bing_src" \
+        '{path:$p, mime:$m, tier:4, source:$s, status:"OK"}'
+      exit 0
+    fi
+  fi
+  emit_needs_manual "dimensions_filter_all_rejected_bing_also_failed"
 fi
 
 # Move accepted candidate to canonical output path

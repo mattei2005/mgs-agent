@@ -193,6 +193,8 @@ Esta regra eh apenas para o cenario "URL fornecida" (preferred workflow).
 draft review.** The Raquel (editor) will review the draft in WordPress and
 swap the card image manually if quality is poor. V2 will add programmatic
 background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image.sh <card_name> <card_official_url>`
+  - **Tentativa 1:** scraping do site oficial do banco
+  - **Tentativa 2 (fallback automático):** Bing Images via Playwright LOCAL (`search-card-image-bing.py`) — acionado quando Tentativa 1 falha (site bloqueia por geo-IP, Cloudflare, etc). Playwright roda headless local, NÃO Browserbase — mais barato e sem bloqueio de geo.
   which prioritizes (in order):
   1. A PNG with transparent background from the official bank page
   2. A PNG from the official bank page (even with background)
