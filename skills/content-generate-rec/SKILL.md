@@ -208,49 +208,40 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
 >
 > Quando search-card-image.sh retorna NEEDS_MANUAL ou imagem de baixa qualidade:
 >
-> **REGRA DE OURO: Maximo 2 tentativas. Se ambas falharem, PUBLICAR SEM IMAGEM e avisar Raquel.**
+> **REGRA DE OURO: O script ja tenta tudo automaticamente. Se retornar NEEDS_MANUAL, PUBLICAR SEM IMAGEM e avisar Raquel. NAO tentar manualmente.**
 >
 > NUNCA usar delegate_task com sites comparadores (finder.com, moneysupermarket.com, comparethemarket.com, totallymoney.com, money.co.uk). Esses sites bloqueiam Browserbase com Cloudflare e geram loop infinito (caso real 01/05: 149 browser_navigate, $6.37 perdidos, nao publicou).
 >
-> **Tentativa 1 - Estrategia issuer-specific** (rapida, bem definida):
->   - Amex UK: CDN icm.aexp-static.com + curl com Referer https://www.americanexpress.com/
->   - Barclaycard: slug previsivel /personal/credit-cards/<card-slug>
->   - Capital One UK: homepage + cloud_assets/webp/contactless-card-image.webp
->   - HSBC UK: site oficial responde, parsing direto do HTML
->   - Outros issuers: tentar curl direto com User-Agent residencial + Referer da pagina oficial
+> **Como o script funciona internamente (2 tentativas automaticas):**
 >
-> **Tentativa 2 - curl direto na URL oficial do site:**
->   - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36
->   - Header: Referer = card_official_url
->   - Se houver proxy Webshare configurado (env HTTPS_PROXY): usar
->   - Parsear HTML retornado, extrair `<img>` do cartao via regex/BeautifulSoup
->   - Download com mesmo User-Agent + Referer
+> **Tentativa 1 - Scraping do site oficial (curl + HTML parsing):**
+>   - curl com User-Agent residencial na `card_official_url`
+>   - Detecta geo-IP/bot block automaticamente: HTTP 4xx/5xx OU body contendo `Error 1007`, `cf-ray`, `we are sorry an error`, `access denied`
+>   - Se bloqueio detectado em <1s: pula IMEDIATAMENTE para Tentativa 2 (sem gastar tempo)
+>   - Se pagina carrega: extrai e valida candidatos por score + dimensoes (min 200×100px, aspect 1.2-2.2)
 >
-> **Se ambas falharem: PUBLICAR ARTIGO SEM CARD IMAGE.** NAO abortar.
+> **Tentativa 2 - Bing Images via Playwright LOCAL (`search-card-image-bing.py`):**
+>   - Playwright roda headless LOCAL (NAO Browserbase) — sem bloqueio geo-IP, custo ~$0
+>   - Busca `{card_name} credit card` no Bing Images, extrai URLs originais via `a.iusc[m]`
+>   - Prioriza fontes UK confiáveis: headforpoints.com, backtodefault.com, moneysavingexpert.com
+>   - Valida dimensoes e aspect ratio antes de aceitar
+>   - Custo: ~15s de CPU local, zero tokens LLM extras
+>
+> **Se ambas falharem → NEEDS_MANUAL: PUBLICAR ARTIGO SEM CARD IMAGE.** NAO abortar.
 >   - LazyBlock credit-card vai com `imagem` vazio (URL e ID null) - Raquel preenche manualmente
 >   - Featured image AINDA gera normalmente via Step 4 (Gemini compoe usando placeholder)
 >   - Step 13 (return summary) inclui aviso explicito ao Raquel - ver bloco "Card image manual" no template
 >
-> **ISSUERS BLACKLISTADOS - pular Tentativa 1 e 2, ir direto pra "publicar sem imagem":**
->   - MBNA UK (Lloyds Banking Group, Cloudflare error 1007 garantido)
->   - Vanquis Bank (multi-step JS challenge)
->   - NewDay (Aqua, Marbles, Aqua Reward) - site SPA pesado bloqueia
->   - Bancos pequenos UK em geral (Tandem, Zable, Pulse, etc.)
->
->   Detectar issuer pelo `card_official_url` (dominio) ANTES de chamar search-card-image.sh.
->   Se dominio bate blacklist: skip Tentativa 1+2, ir direto pra fluxo "sem imagem + aviso Raquel".
->
 > **LIMITES DUROS - anti-loop (forcar parada):**
 >   - MAX 5 browser_navigate por sessao de REC inteira (nao 149!)
 >   - MAX 3 minutos no Step 3 inteiro (timeout)
->   - MAX 2 tentativas de download por imagem
 >   - Se exceder qualquer limite: encerrar Step 3 e ir pra fluxo "sem imagem"
 >
 > **NUNCA fazer (causou perda de $6.37 em 01/05/2026):**
 >   - Wayback Machine para imagens (raramente funciona, sempre custa caro)
->   - Bing/Google image search via **browser_navigate** em loop (o fallback correto é o `search-card-image-bing.py` que usa Playwright LOCAL, não Browserbase)
->   - Tentar dezenas de sites comparadores
->   - Insistir apos Tentativa 2 falhar
+>   - Bing/Google image search via **browser_navigate** em loop (usar `search-card-image-bing.py` que roda Playwright LOCAL, não Browserbase — o script faz isso automaticamente)
+>   - Tentar dezenas de sites comparadores manualmente
+>   - Insistir apos script retornar NEEDS_MANUAL
 >   - Variar URLs do mesmo site procurando imagem
 >
 > Custo de loop ate auto-prune Hermes: $5-10 USD por sessao perdida.
