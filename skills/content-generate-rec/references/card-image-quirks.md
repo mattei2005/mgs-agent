@@ -1,5 +1,51 @@
 # Card image - issuer-specific quirks
 
+---
+
+## Geo-IP / bot block — bancos que bloqueiam acesso externo (UK e outros)
+
+Vários bancos UK retornam `Error 1007` (Cloudflare) ou uma página de erro genérica
+(`"We are sorry an error has occurred"`) para qualquer IP fora do Reino Unido,
+independente de User-Agent. Isso inclui:
+
+- **Lloyds Bank** (`lloydsbank.com`) — bloqueia toda a navegação por geo-IP
+- **MBNA UK** (`mbna.co.uk`) — Cloudflare error 1007 garantido
+- **Vanquis Bank** (`vanquis.co.uk`) — JS challenge multi-step
+- **NewDay** (`newday.co.uk`) — SPA pesado, bloqueia bots
+
+O `search-card-image.sh` **detecta esses bloqueios automaticamente** verificando:
+1. HTTP status ≥ 400
+2. Body contendo: `Error 10xx`, `cf-ray`, `cf-mitigated`, `we are sorry an error`, `access denied`, `enable javascript and cookies`
+
+Quando detectado → pula em <1s direto para **Tentativa 2 (Bing/Playwright LOCAL)**.
+
+### Fallback: Bing Images via Playwright LOCAL (`search-card-image-bing.py`)
+
+Quando o site oficial bloqueia, o script usa `search-card-image-bing.py`:
+- Playwright headless LOCAL (não Browserbase — sem geo-block, custo zero)
+- Busca no Bing Images: `{card_name} credit card`
+- Extrai URLs originais via `a.iusc` → atributo `m` → campo `murl`
+- Prioriza fontes UK confiáveis (maior score):
+  - `headforpoints.com` (+8 pts) — reviews UK detalhadas com foto do cartão atual
+  - `backtodefault.com` (+8 pts) — guias de aplicação com imagem oficial
+  - `moneysavingexpert.com` (+8 pts) — fonte autoridade UK
+  - `which.co.uk` (+8 pts)
+  - `thisismoney.co.uk` (+8 pts)
+- Valida dimensões (min 200×100px) e aspect ratio (1.2–2.2) antes de aceitar
+- Tempo: ~15s | Custo: ~$0
+
+**Exemplo real (Lloyds World Elite Mastercard, 14/05/2026):**
+```
+Tentativa 1: curl lloydsbank.com → "We are sorry an error has occurred" → GEO_BLOCK detectado em <1s
+Tentativa 2: Bing → headforpoints.com/2025/05/HFP-Lloyds-Mastecard-World-Elite-2.webp
+             w=1300 h=860 aspect=1.512 score=18 → ACCEPT
+```
+
+**NUNCA** usar `browser_navigate` (Browserbase) para buscar imagem no Bing/Google em loop.
+O `search-card-image-bing.py` faz isso via Playwright local e é chamado automaticamente pelo shell script.
+
+---
+
 Reference loaded ON DEMAND quando Atena precisa de detalhes especificos por banco.
 Carregada via `view references/card-image-quirks.md` quando o issuer eh Capital One,
 Barclays/Barclaycard, ou quando search-card-image.sh retorna problema.
