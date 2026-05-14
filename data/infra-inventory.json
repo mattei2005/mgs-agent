@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-13T05:00:01-04:00",
+    "updated_at": "2026-05-14T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -355,11 +355,6 @@
         "name": "kanban-worker",
         "category": "devops",
         "skill_md": "/root/.hermes/profiles/atena/skills/devops/kanban-worker/SKILL.md"
-      },
-      {
-        "name": "soul-md-persist-rules",
-        "category": "devops",
-        "skill_md": "/root/.hermes/profiles/atena/skills/devops/soul-md-persist-rules/SKILL.md"
       },
       {
         "name": "ssh-jump-runcloud",
@@ -984,24 +979,9 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/SKILL.md"
       },
       {
-        "name": "hermes-agent-ops",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-ops/SKILL.md"
-      },
-      {
         "name": "log-monitor-discord-alert",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md"
-      },
-      {
-        "name": "mgs-infra-inventory",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-infra-inventory/SKILL.md"
-      },
-      {
-        "name": "shell-cron-env-export",
-        "category": "ops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/shell-cron-env-export/SKILL.md"
       },
       {
         "name": "wp-plugin-mass-operation",
@@ -1160,8 +1140,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "7343e86180a131ce6d7dda2e68a0ccd0",
-      "modified_at": "2026-05-13T05:00:02-04:00"
+      "md5": "e9e2e00365d132dae6a94a6ca4295006",
+      "modified_at": "2026-05-14T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1172,14 +1152,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
       "size_bytes": 335,
-      "md5": "4eadbc7eac79c951d410000fbdecc04f",
-      "modified_at": "2026-05-12T08:00:04-04:00"
+      "md5": "132f200a99848bba92670558ad0d788c",
+      "modified_at": "2026-05-13T08:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 43852,
-      "md5": "7924100caedac914f15eddb4446f48c6",
-      "modified_at": "2026-05-12T05:00:04-04:00"
+      "md5": "49f7e68b1f52005141797f8d198b8e68",
+      "modified_at": "2026-05-13T05:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1220,8 +1200,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
-      "md5": "fac979ffe07b3f3511dfdc42f2c6473d",
-      "modified_at": "2026-05-13T05:00:02-04:00"
+      "md5": "59afc65c3937aa78a0de1e9f0c6f467e",
+      "modified_at": "2026-05-14T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1237,9 +1217,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 7872,
-      "md5": "b125a681bb0a8f45abb71b07a0cd6a97",
-      "modified_at": "2026-05-12T10:01:08-04:00"
+      "size_bytes": 8236,
+      "md5": "9ccd5e150734e62ad0a72703ceca23af",
+      "modified_at": "2026-05-13T10:01:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
