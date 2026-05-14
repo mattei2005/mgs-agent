@@ -6,7 +6,7 @@
 
 **Última atualização:** 2026-05-14T11:54:07-04:00  
 **Total abertas:** 63  
-**Total resolvidas:** 10
+**Total resolvidas:** 22
 
 ---
 
