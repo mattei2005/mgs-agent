@@ -4,9 +4,9 @@
 > Gerado automaticamente a partir de `data/pendencias.db.json`.  
 > Para adicionar/resolver: use scripts em `scripts/pendencia-*.sh`
 
-**Última atualização:** 2026-05-03T04:30:00-04:00  
-**Total abertas:** 57  
-**Total resolvidas:** 9
+**Última atualização:** 2026-05-14T11:54:07-04:00  
+**Total abertas:** 63  
+**Total resolvidas:** 10
 
 ---
 
@@ -14,27 +14,27 @@
 
 | Prioridade | Quantidade |
 |---|---|
-| 🔴 alta | 8 |
-| 🟡 media | 24 |
-| 🟢 baixa | 25 |
+| 🔴 alta | 7 |
+| 🟡 media | 25 |
+| 🟢 baixa | 31 |
 
 **Por categoria:**
 
-- `infra`: 9
-- `agente`: 8
+- `infra`: 10
+- `agente`: 10
 - `conteudo`: 7
 - `monitor`: 7
 - `skills`: 6
 - `lovable`: 5
+- `documentacao`: 5
+- `pessoal`: 5
 - `externo`: 4
-- `pessoal`: 4
 - `seguranca`: 3
-- `documentacao`: 3
 - `app`: 1
 
 ---
 
-## 🔴 ALTA (8 itens)
+## 🔴 ALTA (7 itens)
 
 | ID | Título | Categoria | Tempo | Bloqueio |
 |---|---|---|---|---|
@@ -43,11 +43,10 @@
 | `PEND-003` | Trocar app.mgsdigitalcorp.com de Public para Private/Unlisted | `seguranca` | 1min | — |
 | `PEND-004` | REC 62026 Yoast SEO Title duplicado - decisão produto | `conteudo` | 15min | — |
 | `PEND-005` | Migrar runcloud-inventory.sh para set -a/+a | `infra` | 10min | — |
-| `PEND-006` | Verificar canário thread Discord 1498667382334554263 | `infra` | 2min | — |
 | `PEND-007` | Verificar se Hermes v0.12 native modify_thread substitui patch custom | `infra` | 15min | — |
 | `PEND-008` | Verificar resposta form Tier 4 Anthropic | `externo` | 5min | — |
 
-## 🟡 MÉDIA (24 itens)
+## 🟡 MÉDIA (25 itens)
 
 | ID | Título | Categoria | Tempo | Bloqueio |
 |---|---|---|---|---|
@@ -75,8 +74,9 @@
 | `PEND-046` | Reunião com Raquel (pipeline + próxima vertical) | `documentacao` | 1h | — |
 | `PEND-047` | Adicionar Raquel como GitHub collaborator (mattei2005/mgs-agent) | `documentacao` | 5min | — |
 | `PEND-054` | 1Password Teams plan vaults estruturados | `pessoal` | 4h | — |
+| `PEND-067` | Auto-discover Discord channel_prompts - validar fix em REC real | `agente` | 5min após próximo REC | — |
 
-## 🟢 BAIXA (25 itens)
+## 🟢 BAIXA (31 itens)
 
 | ID | Título | Categoria | Tempo | Bloqueio |
 |---|---|---|---|---|
@@ -105,6 +105,12 @@
 | `PEND-055` | SSH no Mac do Rodolfo | `pessoal` | 30min | — |
 | `PEND-056` | Backup ZIP automatizado da operação | `infra` | 2h | — |
 | `PEND-057` | Hurácan diminished value claim vs Allstate | `pessoal` | ongoing | Pessoal/jurídico |
+| `PEND-068` | Push notifications Discord mobile não chegam ao celular Rodolfo | `pessoal` | investigação | — |
+| `PEND-069` | AGENT.md authorization layer - verificar se finalização foi commitada | `documentacao` | 30min validação | — |
+| `PEND-070` | Criar docs/onboarding-new-site.md (mapa completo adicionar site MGS) | `documentacao` | 30min skeleton + preenchimento gradual | — |
+| `PEND-071` | Hermes session zombies em pts/ - investigar fix estrutural | `infra` | investigacao 1h | — |
+| `PEND-072` | Cost tracking nativo Hermes - revisitar quando upstream adicionar pricing dos modelos atuais | `infra` | 10min validacao | — |
+| `PEND-073` | Confirmar visualmente se duplicacao Atena canal pai vs thread eh preview nativo Discord ou bug real | `agente` | 5min observacao | — |
 
 ---
 

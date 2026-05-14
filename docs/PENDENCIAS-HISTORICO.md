@@ -1,8 +1,15 @@
 # 📚 Histórico de Pendências Resolvidas — MGS Digital Corp
 
-> Arquivo gerado automaticamente. Total: 9 resolvidas.
+> Arquivo gerado automaticamente. Total: 10 resolvidas.
 
 ---
+
+### ✅ [PEND-006] Verificar canário thread Discord 1498667382334554263
+
+- **Categoria:** `infra`
+- **Resolvida em:** 2026-05-14T11:54:07-04:00
+- **Resolvida por:** claude-web
+- **Como:** Thread canário 1498667382334554263 retornou 'Unknown Channel' via Discord API em 06/05/2026 — cron deletou conforme esperado. Sistema validado funcional em produção.
 
 ### ✅ [PEND-R007] Skills Atena+Zeus auxiliary models otimizados (Haiku)
 
