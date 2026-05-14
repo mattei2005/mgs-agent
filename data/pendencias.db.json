@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-05-14T13:44:12-04:00",
+    "ultima_atualizacao": "2026-05-14T13:47:58-04:00",
     "total_abertas": 58,
     "total_resolvidas": 28,
     "proximo_id": 87,
@@ -31,7 +31,7 @@
       "id": "PEND-001",
       "titulo": "Publicar MGS Dashboard Android no Play Store",
       "categoria": "app",
-      "prioridade": "alta",
+      "prioridade": "baixa",
       "status": "aberta",
       "tempo_estimado": "10min",
       "bloqueio": null,
@@ -43,7 +43,7 @@
         "rapido",
         "ja-aprovado"
       ],
-      "contexto": "Play Console aprovou produção em 28/04/2026 - app.lovable.mgsdashboard. Só publicar."
+      "contexto": "Play Console aprovou produção em 28/04/2026 - app.lovable.mgsdashboard. Só publicar. | Rebaixada de alta → baixa em 14/05/2026: Play Store aprovou produção 28/04 mas publish não afeta operação core MGS. Async, sem urgência."
     },
     {
       "id": "PEND-009",
@@ -1389,5 +1389,5 @@
     }
   ],
   "proximo_id": 87,
-  "ultima_atualizacao": "2026-05-14T13:40:31-04:00"
+  "ultima_atualizacao": "2026-05-14T13:47:58-04:00"
 }

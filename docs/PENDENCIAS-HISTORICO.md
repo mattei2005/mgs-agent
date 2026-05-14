@@ -1,8 +1,50 @@
 # 📚 Histórico de Pendências Resolvidas — MGS Digital Corp
 
-> Arquivo gerado automaticamente. Total: 22 resolvidas.
+> Arquivo gerado automaticamente. Total: 28 resolvidas.
 
 ---
+
+### ✅ [PEND-005] Migrar runcloud-inventory.sh para set -a/+a
+
+- **Categoria:** `infra`
+- **Resolvida em:** 2026-05-14T13:44:12-04:00
+- **Resolvida por:** claude-web
+- **Como:** Aplicado 14/05: inserido bloco set -a / source .env / set +a entre linha 2 (set -e) e linha 4 (op item get) seguindo padrão canônico de check-pending-reports.sh. Syntax check OK (bash -n). Backup do original: scripts/runcloud-inventory.sh.bak-20260514. Era o último script ativo MGS sem o anti-loop fix (auditoria 27/04 confirmou todos os outros 7 já tinham).
+
+### ✅ [PEND-008] Verificar resposta form Tier 4 Anthropic
+
+- **Categoria:** `externo`
+- **Resolvida em:** 2026-05-14T13:13:59-04:00
+- **Resolvida por:** rodolfo
+- **Como:** Inbox Anthropic verificado em 14/05/2026: SEM resposta do form Tier 4 enviado em 22/04. Form aparece como recebido mas sem retorno em 22 dias. Decisão: fechar como 'monitorar passivamente' — se chegar resposta no futuro, reabrir.
+
+### ✅ [PEND-003] Trocar app.mgsdigitalcorp.com de Public para Private/Unlisted
+
+- **Categoria:** `seguranca`
+- **Resolvida em:** 2026-05-14T13:13:58-04:00
+- **Resolvida por:** rodolfo
+- **Como:** Visibilidade alterada de Public para Private no Lovable em 14/05/2026 via UI. app.mgsdigitalcorp.com não acessível sem autenticação.
+
+### ✅ [PEND-004] REC 62026 Yoast SEO Title duplicado - decisão produto
+
+- **Categoria:** `conteudo`
+- **Resolvida em:** 2026-05-14T13:13:03-04:00
+- **Resolvida por:** claude-web
+- **Como:** Verificado 14/05: divergência não existe mais. POST 62026 force-deleted (404, não no trash). POST 62031 é o REC live: post_title 48 chars + _yoast_wpseo_title vazio (REGRA 6 compliant) + Yoast render 'Capital One Classic: Build Credit, No Annual Fee - EGGBEV' 58 chars (dentro do limite). Slug base canônico (sem -N suffix, pq 62026 foi force-deleted). Linha do tempo: 28/04 criou bugado, 29/04 republicou limpo, deletou bugado antes de 14/05. Pendência cunhada 03/05 com base em log antigo sem inspect live.
+
+### ✅ [PEND-007] Verificar se Hermes v0.12 native modify_thread substitui patch custom
+
+- **Categoria:** `infra`
+- **Resolvida em:** 2026-05-14T13:10:38-04:00
+- **Resolvida por:** claude-web
+- **Como:** Validado 2026-05-14: patch ainda necessário. HEAD Hermes v0.12.0 local (instalado 30/04) NÃO tem modify_thread (grep=0). origin/main upstream (1391 commits à frente) TAMBÉM não tem (grep=0). Upstream NousResearch nunca portou. Documentado em CLAUDE.md Technical Debt com instruções pra reaplicar patch após próximo upgrade (atenção ao refactor discord → discord+discord_admin upstream).
+
+### ✅ [PEND-002] Desativar e deletar WP File Manager em openzed.com
+
+- **Categoria:** `seguranca`
+- **Resolvida em:** 2026-05-14T13:06:12-04:00
+- **Resolvida por:** claude-web
+- **Como:** Verificado 14/05: plugin já removido entre 03/05 (criação da pendência) e 14/05. Triangulação dupla: WP REST /plugins (18 plugins listados, nenhum file-manager) + SFTP wp-content/plugins/ (19 entradas, nenhum file-manager) + lookup direto dos 3 slugs conhecidos (wp-file-manager, file-manager-advanced, advanced-file-manager) = not found. mu-plugins/ limpo (só yoast-rest-meta.php). CVE-2020-25213 sem superfície de ataque ativa.
 
 ### ✅ [PEND-074] Hermes Agent setup completo (Zeus + Atena online em produção)
 

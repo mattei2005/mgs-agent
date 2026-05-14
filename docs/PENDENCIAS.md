@@ -4,9 +4,9 @@
 > Gerado automaticamente a partir de `data/pendencias.db.json`.  
 > Para adicionar/resolver: use scripts em `scripts/pendencia-*.sh`
 
-**Última atualização:** 2026-05-14T11:54:07-04:00  
-**Total abertas:** 63  
-**Total resolvidas:** 22
+**Última atualização:** 2026-05-14T13:47:58-04:00  
+**Total abertas:** 58  
+**Total resolvidas:** 28
 
 ---
 
@@ -14,37 +14,25 @@
 
 | Prioridade | Quantidade |
 |---|---|
-| 🔴 alta | 7 |
+| 🔴 alta | 0 |
 | 🟡 media | 25 |
-| 🟢 baixa | 31 |
+| 🟢 baixa | 33 |
 
 **Por categoria:**
 
-- `infra`: 10
 - `agente`: 10
-- `conteudo`: 7
+- `infra`: 8
 - `monitor`: 7
+- `conteudo`: 6
 - `skills`: 6
 - `lovable`: 5
 - `documentacao`: 5
 - `pessoal`: 5
 - `externo`: 4
-- `seguranca`: 3
 - `app`: 1
+- `seguranca`: 1
 
 ---
-
-## 🔴 ALTA (7 itens)
-
-| ID | Título | Categoria | Tempo | Bloqueio |
-|---|---|---|---|---|
-| `PEND-001` | Publicar MGS Dashboard Android no Play Store | `app` | 10min | — |
-| `PEND-002` | Desativar e deletar WP File Manager em openzed.com | `seguranca` | 5min | — |
-| `PEND-003` | Trocar app.mgsdigitalcorp.com de Public para Private/Unlisted | `seguranca` | 1min | — |
-| `PEND-004` | REC 62026 Yoast SEO Title duplicado - decisão produto | `conteudo` | 15min | — |
-| `PEND-005` | Migrar runcloud-inventory.sh para set -a/+a | `infra` | 10min | — |
-| `PEND-007` | Verificar se Hermes v0.12 native modify_thread substitui patch custom | `infra` | 15min | — |
-| `PEND-008` | Verificar resposta form Tier 4 Anthropic | `externo` | 5min | — |
 
 ## 🟡 MÉDIA (25 itens)
 
@@ -76,10 +64,11 @@
 | `PEND-054` | 1Password Teams plan vaults estruturados | `pessoal` | 4h | — |
 | `PEND-067` | Auto-discover Discord channel_prompts - validar fix em REC real | `agente` | 5min após próximo REC | — |
 
-## 🟢 BAIXA (31 itens)
+## 🟢 BAIXA (33 itens)
 
 | ID | Título | Categoria | Tempo | Bloqueio |
 |---|---|---|---|---|
+| `PEND-001` | Publicar MGS Dashboard Android no Play Store | `app` | 10min | — |
 | `PEND-025` | Cleanup repos zumbis GitHub (mgsdashboard + -bbdeba00) | `lovable` | 5min | Aguarda Lovable autorizar |
 | `PEND-029` | Migração ChatPion → bot próprio | `agente` | 80h+ | Longo prazo, projeto paralelo |
 | `PEND-030` | Otimização SOUL/tools overhead (~80k chars/sessão) | `agente` | 8-16h | Refactoring grande |
@@ -111,6 +100,7 @@
 | `PEND-071` | Hermes session zombies em pts/ - investigar fix estrutural | `infra` | investigacao 1h | — |
 | `PEND-072` | Cost tracking nativo Hermes - revisitar quando upstream adicionar pricing dos modelos atuais | `infra` | 10min validacao | — |
 | `PEND-073` | Confirmar visualmente se duplicacao Atena canal pai vs thread eh preview nativo Discord ou bug real | `agente` | 5min observacao | — |
+| `PEND-086` | Monitorar resposta form Tier 4 Anthropic (enviado 22/04) | `externo` | 5min check periódico | — |
 
 ---
 
