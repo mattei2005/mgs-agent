@@ -2,9 +2,9 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-05-14T11:54:07-04:00",
-    "total_abertas": 63,
-    "total_resolvidas": 10,
+    "ultima_atualizacao": "2026-05-14T13:06:12-04:00",
+    "total_abertas": 62,
+    "total_resolvidas": 23,
     "proximo_id": 74,
     "responsavel": "Rodolfo Mattei"
   },
@@ -44,23 +44,6 @@
         "ja-aprovado"
       ],
       "contexto": "Play Console aprovou produção em 28/04/2026 - app.lovable.mgsdashboard. Só publicar."
-    },
-    {
-      "id": "PEND-002",
-      "titulo": "Desativar e deletar WP File Manager em openzed.com",
-      "categoria": "seguranca",
-      "prioridade": "alta",
-      "status": "aberta",
-      "tempo_estimado": "5min",
-      "bloqueio": null,
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "openzed",
-        "wp-file-manager",
-        "cve-risco"
-      ],
-      "contexto": "Plugin foi instalado para recovery manual do incidente 25/04. NÃO foi desativado após uso. CVE-2020-25213 (RCE crítico). wp-admin → Plugins → Desativar → Deletar."
     },
     {
       "id": "PEND-003",
@@ -1423,6 +1406,14 @@
       "resolvida_em": "2026-05-14T11:59:28-04:00",
       "resolvida_por": "claude-web",
       "como": "3 sistemas críticos criados: (1) Sistema de Pendências - data/pendencias.db.json com 57 abertas + 9 resolvidas + 11 categorias, scripts pendencia-{add,done,list,render-md}.sh, cron 8 AM EST regenera docs/PENDENCIAS.md + docs/PENDENCIAS-HISTORICO.md. (2) Sistema Chat-log - scripts/chat-log.sh com tipos (decisao/contexto/licao/pend-add/pend-done/proximo/evento), 22 entradas fundação, INDEX hourly, prompt de retomada definido. (3) Obsidian Vault setup parcial Windows - SSH key GitHub + repo clonado MGS-Vault + Obsidian instalado, wikilinks/auto-pull adiados (PEND-067 criado)."
+    },
+    {
+      "id": "PEND-002",
+      "titulo": "Desativar e deletar WP File Manager em openzed.com",
+      "categoria": "seguranca",
+      "resolvida_em": "2026-05-14T13:06:12-04:00",
+      "resolvida_por": "claude-web",
+      "como": "Verificado 14/05: plugin já removido entre 03/05 (criação da pendência) e 14/05. Triangulação dupla: WP REST /plugins (18 plugins listados, nenhum file-manager) + SFTP wp-content/plugins/ (19 entradas, nenhum file-manager) + lookup direto dos 3 slugs conhecidos (wp-file-manager, file-manager-advanced, advanced-file-manager) = not found. mu-plugins/ limpo (só yoast-rest-meta.php). CVE-2020-25213 sem superfície de ataque ativa."
     }
   ],
   "proximo_id": 86,
