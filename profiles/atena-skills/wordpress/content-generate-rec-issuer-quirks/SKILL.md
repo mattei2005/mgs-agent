@@ -2,9 +2,10 @@
 name: content-generate-rec-issuer-quirks
 description: >
   Companion reference for content-generate-rec. Issuer-specific URL quirks,
-  image CDN patterns, and HTML post-processing fixes discovered during REC
-  pipeline runs. Load this alongside content-generate-rec when the issuer is
-  American Express UK, Barclaycard, Capital One UK, NatWest, or Lloyds Bank.
+  image CDN patterns, HTML post-processing fixes, and geo-block workarounds
+  (Bing Images + Playwright local fallback for blocked domains like lloydsbank.com).
+  Load this alongside content-generate-rec when the issuer is American Express UK,
+  Barclaycard, Capital One UK, NatWest, or Lloyds Bank.
 ---
 
 # content-generate-rec — Issuer Quirks & Post-Processing Reference
@@ -15,6 +16,7 @@ critical enough to encode.
 
 **Support files:**
 - `references/subtitle-rewrite-patterns.md` — confirmed ≤100-char subtitle examples + cascade fix pattern
+- `references/playwright-local-install.md` — Playwright local: install steps on MGS server, usage pattern for Bing Images scraping, geo-block vs bot-block distinction
 
 ---
 
@@ -178,37 +180,113 @@ mandatory — do not assume a prior PASS still holds.
 
 ---
 
-## 6. Lloyds Bank (lloydsbank.com) — BLACKLISTED
+## 6. Lloyds Bank (lloydsbank.com) — BLACKLISTED (site oficial)
 
-**Status:** Fully blacklisted — confirmed 01/05/2026.
+**Status:** Site oficial totalmente bloqueado por geolocalização de IP — confirmado 01/05/2026 e reconfirmado 14/05/2026.
 
-Both `browser_navigate` and `curl` are blocked:
-- Browser returns Cloudflare **Error 1007** ("Access Denied") with a standard error page — no card content is reachable.
-- Curl returns 92 KB of HTML that is the error/redirect page, not the actual card page (no `<img>` tags, no card data).
-
-This applies to **all pages** on `lloydsbank.com`, not just the credit cards section.
-
-**Correct workflow when issuer domain is `lloydsbank.com`:**
-1. Skip Step 3 entirely (no card image attempts — ZERO browser navigates).
-2. For card data (Step 2): use `delegate_task` with `toolsets=["web"]` (web search only, no browser). Web search via sub-agent works and avoids the Cloudflare wall.
-3. Publish without card image, include ⚠️ Template B summary and manual-upload instructions for Raquel.
+Tanto `mcp_browser_navigate` (Browserbase) quanto `curl` e **Playwright local** são bloqueados quando o IP não é UK:
+- Qualquer URL em `lloydsbank.com` retorna **Error 1007** (página de erro do banco, não Cloudflare wall) — sem conteúdo de cartão.
+- Aplica-se a **todas as páginas** do domínio, incluindo a homepage.
 
 **MBNA vs Lloyds Bank:**
-- MBNA UK (`mbna.co.uk`) — also Lloyds Banking Group, also blacklisted (previously documented)
-- Lloyds Bank (`lloydsbank.com`) — the main bank, also blacklisted (added 01/05/2026)
-- Both domains → skip image, go to Template B immediately
+- MBNA UK (`mbna.co.uk`) — Lloyds Banking Group, também bloqueado
+- Lloyds Bank (`lloydsbank.com`) — bloqueado por geolocalização de IP (não-UK)
+- Ambos → não tentar site oficial, ir direto para fallback abaixo
 
-**Featured image workaround when no card image:**
-When generating the featured image via `generate-featured-image.sh <slug> <card_image_path>` and no real card image exists, create a generic dark-card PIL placeholder:
+---
+
+### Fallback de card image: Bing Images + Playwright local (PREFERIDO)
+
+> **Descoberto em 14/05/2026** — Bing Images funciona e produz imagens reais de alta qualidade do cartão. Usar ANTES de qualquer Template B.
+
+**Por que Bing e não Google Images?**
+- Google Images bloqueia o IP do servidor com CAPTCHA ("sorry" redirect)
+- Bing Images funciona sem bloqueio e retorna URLs de imagem originais (alta res)
+
+**Por que Playwright local e não `mcp_browser_navigate`?**
+- `mcp_browser_navigate` usa Browserbase (cloud remoto) — IP não-UK, bloqueado
+- Playwright local (`python3 - <<'EOF'...`) roda diretamente na máquina — também bloqueado no lloydsbank.com, mas **funciona para Bing Images**
+
+**Procedimento completo:**
+
+1. Verificar que playwright está instalado:
+```bash
+python3 -c "from playwright.sync_api import sync_playwright; print('ok')"
+# Se ModuleNotFoundError: instalar com
+python3 /tmp/pip_extracted/pip install playwright --break-system-packages -q
+python3 -m playwright install chromium
+# (pip está em /usr/share/python-wheels/pip-24.0-py3-none-any.whl — extrair se necessário)
+```
+
+2. Buscar no Bing e extrair URLs originais via atributo `m` (JSON com campo `murl`):
+```python
+from playwright.sync_api import sync_playwright
+import json, time
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True)
+    context = browser.new_context(
+        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        viewport={"width": 1280, "height": 900}
+    )
+    page = context.new_page()
+    page.goto("https://www.bing.com/images/search?q=lloyds+bank+world+elite+mastercard+credit+card&qft=+filterui:imagesize-large", timeout=30000)
+    time.sleep(3)
+
+    items = page.query_selector_all('a.iusc')
+    for item in items[:20]:
+        m_attr = item.get_attribute('m')
+        if m_attr:
+            data = json.loads(m_attr)
+            print(data.get('murl', ''), '|', data.get('t', '')[:80])
+    browser.close()
+```
+
+3. Baixar as melhores candidatas (priorizar: headforpoints.com > comparadores UK > blogs):
+```python
+import urllib.request
+headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)..."}
+req = urllib.request.Request(url, headers=headers)
+data = urllib.request.urlopen(req, timeout=15).read()
+with open('/tmp/lloyds_card.jpg', 'wb') as f:
+    f.write(data)
+```
+
+4. Verificar com `vision_analyze` se é o cartão correto, horizontal (landscape), sem logo errado.
+
+5. Aplicar crop pixel-level (remover bordas brancas) conforme padrão do SKILL principal.
+
+**Fontes confiáveis encontradas para Lloyds World Elite Mastercard (2026):**
+| URL | Dimensões | Observação |
+|-----|-----------|------------|
+| `https://www.headforpoints.com/wp-content/uploads/2025/05/HFP-Lloyds-Mastecard-World-Elite-2.webp` | 1300×860 | ✅ Melhor opção — landscape, 2025, cartão real |
+| `https://backtodefault.com/wp-content/uploads/2025/07/Lloyds-Bank-World-Elite-Mastercard-750x450.jpg` | 750×450 | ✅ Landscape, 2025 |
+| `https://www.headforpoints.com/wp-content/uploads/2023/11/Lloyds-World-Elite-Mastercard.jpg` | — | ⚠️ Portrait/inclinado |
+
+---
+
+### Fallback final: Template B (apenas se Bing também falhar)
+
+Somente ir para Template B se o Bing retornar zero resultados úteis ou todas as imagens forem de outros bancos/cartões genéricos.
+
+**Featured image workaround quando não há card image:**
 ```python
 from PIL import Image, ImageDraw
 W, H = 856, 540
 img = Image.new('RGB', (W, H), '#16213e')
 draw = ImageDraw.Draw(img)
-# Add chip + card number dots + minimal branding
 img.save('/tmp/card-placeholder-generic.png', 'PNG')
 ```
-Then pass `/tmp/card-placeholder-generic.png` as the card_image_path. Gemini will compose a plausible generic card in the scene. Raquel replaces both the featured image and the card LazyBlock image manually during review.
+Passar como `card_image_path` para o Gemini. Raquel substitui durante revisão.
+
+---
+
+### Card data (Step 2) para lloydsbank.com
+
+Para buscar dados do cartão (features, APR, fees) sem acessar o site oficial:
+- Use web search direta (não browser) — os dados do cartão aparecem em snippets e comparadores UK
+- Fontes confiáveis: headforpoints.com, moneysavingexpert.com, finder.com/uk
+- NÃO usar `delegate_task` com browser toolset — vai bloquear no mesmo Error 1007
 
 ---
 
