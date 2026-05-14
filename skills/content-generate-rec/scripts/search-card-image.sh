@@ -32,9 +32,32 @@ emit_needs_manual() {
   exit 1
 }
 
-# Fetch official page
-html=$(curl -sS -L -A "Mozilla/5.0" "$OFFICIAL_URL" 2>/dev/null) || emit_needs_manual "fetch_failed"
-[ -z "$html" ] && emit_needs_manual "empty_page"
+# ── Tentativa 1: Fetch official page ──────────────────────────────────────
+# Captura HTTP status junto com o body para detecção rápida de geo-IP/bot block
+http_out=$(curl -sS -L -A "Mozilla/5.0" -w "\nHTTP_STATUS:%{http_code}" "$OFFICIAL_URL" 2>/dev/null) || true
+http_status=$(echo "$http_out" | grep -o 'HTTP_STATUS:[0-9]*' | cut -d: -f2)
+html=$(echo "$http_out" | sed '/HTTP_STATUS:[0-9]*/d')
+
+# Detectar bloqueio antes de tentar scraping:
+# - HTTP 4xx/5xx
+# - Cloudflare "Error 1007 / 1020 / 403" no body
+# - Lloyds / banco UK retornando página de erro genérica
+_blocked=0
+if [ -n "$http_status" ] && [ "$http_status" -ge 400 ] 2>/dev/null; then
+  _blocked=1
+fi
+if echo "$html" | grep -qiE '(error 10[0-9]{2}|access denied|cf-mitigated|cf-ray|enable javascript and cookies|sorry.{0,40}error occurred|we are sorry an error)'; then
+  _blocked=1
+fi
+if [ "$_blocked" = "1" ]; then
+  echo "[$(date -Iseconds)] search-card-image GEO_BLOCK_DETECTED status=${http_status:-?} skipping_to_bing card=$CARD_NAME url=$OFFICIAL_URL" >>"$LOG"
+  html=""
+fi
+
+[ -z "$html" ] && {
+  # Pular direto para Tentativa 2 (Bing) sem emit_needs_manual ainda
+  :
+}
 
 base_host=$(echo "$OFFICIAL_URL" | sed -E 's#^(https?://[^/]+).*#\1#')
 candidates=$(echo "$html" | grep -oE '(src|data-src|data-lazy-src)="[^"]+\.(png|jpe?g|webp)"' \
