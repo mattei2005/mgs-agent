@@ -2,9 +2,9 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-05-14T13:06:12-04:00",
-    "total_abertas": 62,
-    "total_resolvidas": 23,
+    "ultima_atualizacao": "2026-05-14T13:10:38-04:00",
+    "total_abertas": 61,
+    "total_resolvidas": 24,
     "proximo_id": 74,
     "responsavel": "Rodolfo Mattei"
   },
@@ -96,23 +96,6 @@
         "1password"
       ],
       "contexto": "Único script ativo MGS sem o anti-loop fix. Usa op CLI mas sem set -a/+a. Auditoria 27/04 confirmou todos os 7 scripts em cron já têm fix; runcloud-inventory.sh roda manual."
-    },
-    {
-      "id": "PEND-007",
-      "titulo": "Verificar se Hermes v0.12 native modify_thread substitui patch custom",
-      "categoria": "infra",
-      "prioridade": "alta",
-      "status": "aberta",
-      "tempo_estimado": "15min",
-      "bloqueio": null,
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "hermes",
-        "discord_tool",
-        "patch-custom"
-      ],
-      "contexto": "Patch custom em /root/.hermes/hermes-agent/tools/discord_tool.py adiciona action modify_thread. Hermes v0.12 (já instalado) pode ter native. Se sim, remover patch custom (sobrescrito em git pull)."
     },
     {
       "id": "PEND-008",
@@ -1414,6 +1397,14 @@
       "resolvida_em": "2026-05-14T13:06:12-04:00",
       "resolvida_por": "claude-web",
       "como": "Verificado 14/05: plugin já removido entre 03/05 (criação da pendência) e 14/05. Triangulação dupla: WP REST /plugins (18 plugins listados, nenhum file-manager) + SFTP wp-content/plugins/ (19 entradas, nenhum file-manager) + lookup direto dos 3 slugs conhecidos (wp-file-manager, file-manager-advanced, advanced-file-manager) = not found. mu-plugins/ limpo (só yoast-rest-meta.php). CVE-2020-25213 sem superfície de ataque ativa."
+    },
+    {
+      "id": "PEND-007",
+      "titulo": "Verificar se Hermes v0.12 native modify_thread substitui patch custom",
+      "categoria": "infra",
+      "resolvida_em": "2026-05-14T13:10:38-04:00",
+      "resolvida_por": "claude-web",
+      "como": "Validado 2026-05-14: patch ainda necessário. HEAD Hermes v0.12.0 local (instalado 30/04) NÃO tem modify_thread (grep=0). origin/main upstream (1391 commits à frente) TAMBÉM não tem (grep=0). Upstream NousResearch nunca portou. Documentado em CLAUDE.md Technical Debt com instruções pra reaplicar patch após próximo upgrade (atenção ao refactor discord → discord+discord_admin upstream)."
     }
   ],
   "proximo_id": 86,

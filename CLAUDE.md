@@ -289,6 +289,11 @@ Item 6 (update of `mgs-infra-inventory` SKILL with new skills_hermes counts) was
 
   **Test 4 exception (documented):** For post 61940 (AIB Visa Gold Card), the subtitle `AIB Visa Gold Card provides existing bank customers with premium travel benefits.` was sourced from Raquel's published reference post 8151 rather than LLM-generated. The Test 4 fixture used mock data (invented competitors and benefits for pipeline validation), so an LLM-generated subtitle would have compounded the mock with invented descriptors. Reusing the real reference post's subtitle preserves editorial truth while still exercising the pipeline's subtitle-insertion mechanics.
 - **Slug auto-disambiguation by WP:** when prior drafts/trashed posts/revisions share the same `post_name`, WP appends `-N` to new posts' slugs. Pipeline should either (a) pre-check slug availability via `GET /wp/v2/posts?slug=<s>&status=any,trash,auto-draft` before POST and warn, or (b) accept drift and optionally PUT the canonical slug after cleaning conflicts. Observed on eggbev with `rec-gb-cc-aib-visa-gold-4` (post 61940) due to prior draft `rec-gb-cc-aib-visa-gold-2` (id 54050, 2026-03-02).
+- **Hermes patch custom `modify_thread` (NousResearch/hermes-agent) — necessário.** Validado 2026-05-14 (PEND-007). Patch local em `/root/.hermes/hermes-agent/tools/discord_tool.py` adiciona action `modify_thread` (rename/archive/lock de threads Discord via PATCH `/channels/{id}`). Verificação:
+  - HEAD local v0.12.0 (2026-04-30): `grep modify_thread` = 0 ocorrências.
+  - `origin/main` upstream (1391 commits à frente do HEAD na data da validação): TAMBÉM 0 ocorrências.
+  - Upstream nunca portou. Próximo upgrade Hermes (sync com origin/main) precisa: (a) reaplicar o patch, (b) considerar o refactor `discord` → `discord` + `discord_admin` (commit `81987f035`) — `modify_thread` provavelmente vai pra `_ADMIN_ACTIONS`.
+  - Diff atual = 1 hunk só (`tools/discord_tool.py`): adiciona `_modify_thread()` + 3 entries em `_ACTIONS`, `_ACTION_MANIFEST`, `_REQUIRED_PARAMS`. Reproduzível por `git diff HEAD -- tools/discord_tool.py` dentro de `/root/.hermes/hermes-agent`.
 
 ## How to Resume This Session
 
