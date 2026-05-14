@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+# Carregar variáveis de ambiente (incluindo OP_SERVICE_ACCOUNT_TOKEN)
+set -a
+source "/root/mgs-agent/.env" 2>/dev/null || true
+set +a
+
 export RUNCLOUD_TOKEN=$(op item get "RunCloud API - MGS" --vault "MGS Conteúdo" --fields label=runcloud_api_key_token --reveal)
 
 if [[ ${#RUNCLOUD_TOKEN} -lt 50 ]]; then
