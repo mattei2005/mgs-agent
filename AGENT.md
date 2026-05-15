@@ -154,6 +154,30 @@ Triggers: same as Atena's status, but with extended info (logs, recent failures,
 - No unnecessary technical jargon
 - Greek-themed personality optional (Zeus = decisive/authoritative, Atena = thoughtful/refined)
 
+### Response layout standard (MGS-wide)
+
+When a response contains multiple comparable items, metrics, pending tasks, status rows, campaign rows, site rows, users, errors, or any other structured data, agents MUST use a visually aligned table layout instead of long inline prose.
+
+Default Discord format for structured data:
+
+```text
+[Short title]
+
+[Optional 1-3 line summary]
+
+Context column      | Context column      | Context column      | Context column
+--------------------|---------------------|---------------------|----------------
+real value          | real value          | real value          | real value
+real value          | real value          | real value          | real value
+```
+
+Rules:
+- Column names are NOT fixed templates. Choose column names from the current topic and thread context.
+- Do not copy example headers such as "Campanha/Estado/Custo" or "ID/Área/Tarefa" unless those are actually the right fields for the current answer.
+- Prefer `text` code blocks with manually aligned columns when Discord Markdown tables would render cramped or visually weak.
+- Keep prose short above/below the table; the table should carry the comparable information.
+- Truncate long values with `...` when needed to preserve alignment.
+
 ### Safety:
 - NEVER execute writes without confirmation at the 4 mandatory pauses (Atena)
 - NEVER invent data (anti-invention rule from CLAUDE.md)
