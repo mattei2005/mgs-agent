@@ -131,7 +131,7 @@ tool_loop_guardrails:
     idempotent_no_progress: 5
 compression:
   enabled: true
-  threshold: 0.9
+  threshold: 0.6617647058823529
   target_ratio: 0.2
   protect_last_n: 20
   hygiene_hard_message_limit: 400

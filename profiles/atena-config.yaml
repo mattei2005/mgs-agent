@@ -91,7 +91,7 @@ checkpoints:
 file_read_max_chars: 100000
 compression:
   enabled: true
-  threshold: 0.9
+  threshold: 0.6617647058823529
   target_ratio: 0.2
   protect_last_n: 20
 bedrock:
