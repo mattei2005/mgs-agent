@@ -2,10 +2,10 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-05-14T15:27:15-04:00",
-    "total_abertas": 58,
+    "ultima_atualizacao": "2026-05-15T17:07:09-04:00",
+    "total_abertas": 59,
     "total_resolvidas": 28,
-    "proximo_id": 87,
+    "proximo_id": 88,
     "responsavel": "Rodolfo Mattei"
   },
   "categorias": {
@@ -1032,6 +1032,24 @@
         "async"
       ],
       "contexto": "Form Tier 4 enviado 22/04/2026, sem resposta em 14/05 (22 dias). PEND-008 fechada. Reabrir se chegar retorno. Check inbox/dashboard a cada 2 semanas."
+    },
+    {
+      "id": "PEND-087",
+      "titulo": "Avaliar criação de profile cron-worker em Haiku para crons LLM",
+      "categoria": "infra",
+      "prioridade": "baixa",
+      "status": "aberta",
+      "tempo_estimado": "45min",
+      "bloqueio": "Aguardar aumento real de crons agent-based ou necessidade de isolamento/custo.",
+      "criada_em": "2026-05-15T17:07:09-04:00",
+      "criada_por": "Zeus",
+      "tags": [
+        "hermes",
+        "cron-worker",
+        "haiku",
+        "llm-cost"
+      ],
+      "contexto": "Decisão atual do Rodolfo: manter tudo que precisa de LLM em GPT-5.5/Codex por enquanto. Como 95% dos crons são script-only e há poucos agentes, cron-worker fica apenas como análise futura. Avaliar futuramente se número de agentes/crons LLM crescer."
     }
   ],
   "resolvidas": [
@@ -1388,6 +1406,6 @@
       "como": "Aplicado 14/05: inserido bloco set -a / source .env / set +a entre linha 2 (set -e) e linha 4 (op item get) seguindo padrão canônico de check-pending-reports.sh. Syntax check OK (bash -n). Backup do original: scripts/runcloud-inventory.sh.bak-20260514. Era o último script ativo MGS sem o anti-loop fix (auditoria 27/04 confirmou todos os outros 7 já tinham)."
     }
   ],
-  "proximo_id": 87,
-  "ultima_atualizacao": "2026-05-14T15:27:15-04:00"
+  "proximo_id": 88,
+  "ultima_atualizacao": "2026-05-15T17:07:09-04:00"
 }
