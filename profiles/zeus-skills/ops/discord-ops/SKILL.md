@@ -298,7 +298,7 @@ Ver `references/discord-threads-lifecycle.md` para referência completa.
 - Rodolfo pede ajuste de tom/verbosity/persona operacional do Zeus ou Atena
 - Rodolfo pede uma “indexação”/auditoria de contexto sem mexer em providers de memória
 
-### Ajustes de tom/verbosity e contexto semântico
+### Ajustes de tom/verbosity, layout visual e contexto semântico
 
 Ver `references/hermes-profile-style-context-ops.md` para o padrão validado de:
 - adicionar “Modo executivo curto — teste ativo” no SOUL.md sem colar persona crua de curso;
@@ -306,6 +306,8 @@ Ver `references/hermes-profile-style-context-ops.md` para o padrão validado de:
 - manter `reasoning_effort` inalterado quando o usuário pedir;
 - fazer um manifesto read-only dos arquivos de memória/contexto como equivalente seguro de “indexação” sem mudar memória;
 - rodar warm-up pós-troca de modelo/profile.
+
+Ver também `references/agent-response-layout-standard.md` para o padrão MGS de respostas visuais no Discord: quando houver dados estruturados/comparáveis, usar bloco monoespaçado `text` com colunas alinhadas e separadores; os nomes das colunas devem nascer do contexto da thread, nunca ser copiados de exemplos.
 
 ### ⚠️ PITFALL CRÍTICO: Symlink NÃO versiona conteúdo
 
