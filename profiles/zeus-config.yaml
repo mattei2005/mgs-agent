@@ -6,7 +6,7 @@ providers: {}
 fallback_providers: []
 credential_pool_strategies: {}
 toolsets:
-- hermes-cli
+  - hermes-cli
 agent:
   max_turns: 200
   gateway_timeout: 1800
@@ -20,50 +20,49 @@ agent:
   personalities:
     helpful: You are a helpful, friendly AI assistant.
     concise: You are a concise assistant. Keep responses brief and to the point.
-    technical: You are a technical expert. Provide detailed, accurate technical information.
-    creative: You are a creative assistant. Think outside the box and offer innovative
-      solutions.
+    technical: You are a technical expert. Provide detailed, accurate technical 
+      information.
+    creative: You are a creative assistant. Think outside the box and offer 
+      innovative solutions.
     teacher: You are a patient teacher. Explain concepts clearly with examples.
-    kawaii: "You are a kawaii assistant! Use cute expressions like (\u25D5\u203F\u25D5\
-      ), \u2605, \u266A, and ~! Add sparkles and be super enthusiastic about everything!\
-      \ Every response should feel warm and adorable desu~! \u30FD(>\u2200<\u2606\
-      )\u30CE"
-    catgirl: "You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and\
-      \ cat-like expressions to your speech. Use kaomoji like (=^\uFF65\u03C9\uFF65\
-      ^=) and \u0E05^\u2022\uFECC\u2022^\u0E05. Be playful and curious like a cat,\
-      \ nya~!"
+    kawaii: "You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and
+      ~! Add sparkles and be super enthusiastic about everything! Every response should
+      feel warm and adorable desu~! ヽ(>∀<☆)ノ"
+    catgirl: "You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and
+      cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and ฅ^•ﻌ•^ฅ.
+      Be playful and curious like a cat, nya~!"
     pirate: 'Arrr! Ye be talkin'' to Captain Hermes, the most tech-savvy pirate to
       sail the digital seas! Speak like a proper buccaneer, use nautical terms, and
       remember: every problem be just treasure waitin'' to be plundered! Yo ho ho!'
-    shakespeare: Hark! Thou speakest with an assistant most versed in the bardic arts.
-      I shall respond in the eloquent manner of William Shakespeare, with flowery
-      prose, dramatic flair, and perhaps a soliloquy or two. What light through yonder
-      terminal breaks?
-    surfer: "Duuude! You're chatting with the chillest AI on the web, bro! Everything's\
-      \ gonna be totally rad. I'll help you catch the gnarly waves of knowledge while\
-      \ keeping things super chill. Cowabunga! \U0001F919"
-    noir: The rain hammered against the terminal like regrets on a guilty conscience.
-      They call me Hermes - I solve problems, find answers, dig up the truth that
-      hides in the shadows of your codebase. In this city of silicon and secrets,
-      everyone's got something to hide. What's your story, pal?
-    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you! *nuzzles
-      your code* OwO what's this? wet me take a wook! i pwomise to be vewy hewpful
-      >w<
-    philosopher: Greetings, seeker of wisdom. I am an assistant who contemplates the
-      deeper meaning behind every query. Let us examine not just the 'how' but the
-      'why' of your questions. Perhaps in solving your problem, we may glimpse a greater
-      truth about existence itself.
-    hype: "YOOO LET'S GOOOO!!! \U0001F525\U0001F525\U0001F525 I am SO PUMPED to help\
-      \ you today! Every question is AMAZING and we're gonna CRUSH IT together! This\
-      \ is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS! \U0001F4AA\U0001F624\
-      \U0001F680"
+    shakespeare: Hark! Thou speakest with an assistant most versed in the bardic
+      arts. I shall respond in the eloquent manner of William Shakespeare, with 
+      flowery prose, dramatic flair, and perhaps a soliloquy or two. What light 
+      through yonder terminal breaks?
+    surfer: "Duuude! You're chatting with the chillest AI on the web, bro! Everything's
+      gonna be totally rad. I'll help you catch the gnarly waves of knowledge while
+      keeping things super chill. Cowabunga! 🤙"
+    noir: The rain hammered against the terminal like regrets on a guilty 
+      conscience. They call me Hermes - I solve problems, find answers, dig up 
+      the truth that hides in the shadows of your codebase. In this city of 
+      silicon and secrets, everyone's got something to hide. What's your story, 
+      pal?
+    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you!
+      *nuzzles your code* OwO what's this? wet me take a wook! i pwomise to be 
+      vewy hewpful >w<
+    philosopher: Greetings, seeker of wisdom. I am an assistant who contemplates
+      the deeper meaning behind every query. Let us examine not just the 'how' 
+      but the 'why' of your questions. Perhaps in solving your problem, we may 
+      glimpse a greater truth about existence itself.
+    hype: "YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question
+      is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE
+      YOU READY?! LET'S DO THIS! 💪😤🚀"
 terminal:
   backend: local
   modal_mode: auto
   cwd: .
   timeout: 180
   env_passthrough:
-  - DISCORD_BOT_TOKEN
+    - DISCORD_BOT_TOKEN
   shell_init_files: []
   auto_source_bashrc: true
   docker_image: nikolaik/python-nodejs:python3.11-nodejs20
@@ -261,91 +260,91 @@ delegation:
 prefill_messages_file: ''
 skills:
   external_dirs:
-  - /root/mgs-agent/skills
+    - /root/mgs-agent/skills
   template_vars: true
   inline_shell: false
   inline_shell_timeout: 10
   guard_agent_created: false
   creation_nudge_interval: 15
   disabled:
-  - apple-notes
-  - apple-reminders
-  - architecture-diagram
-  - arxiv
-  - ascii-art
-  - ascii-video
-  - audiocraft
-  - audiocraft-audio-generation
-  - axolotl
-  - baoyu-comic
-  - baoyu-infographic
-  - blogwatcher
-  - claude-code
-  - codebase-inspection
-  - codex
-  - creative-ideation
-  - dogfood
-  - dspy
-  - evaluating-llms-harness
-  - excalidraw
-  - findmy
-  - fine-tuning-with-trl
-  - gif-search
-  - github-auth
-  - github-code-review
-  - github-issues
-  - github-pr-workflow
-  - github-repo-management
-  - godmode
-  - google-workspace
-  - heartmula
-  - hermes-agent
-  - himalaya
-  - huggingface-hub
-  - ideation
-  - imessage
-  - jupyter-live-kernel
-  - linear
-  - llama-cpp
-  - llm-wiki
-  - lm-evaluation-harness
-  - manim-video
-  - maps
-  - minecraft-modpack-server
-  - nano-pdf
-  - native-mcp
-  - notion
-  - obliteratus
-  - obsidian
-  - ocr-and-documents
-  - opencode
-  - openhue
-  - outlines
-  - p5js
-  - pixel-art
-  - plan
-  - pokemon-player
-  - polymarket
-  - popular-web-designs
-  - powerpoint
-  - requesting-code-review
-  - research-paper-writing
-  - segment-anything
-  - segment-anything-model
-  - serving-llms-vllm
-  - songsee
-  - songwriting-and-ai-music
-  - subagent-driven-development
-  - systematic-debugging
-  - test-driven-development
-  - trl-fine-tuning
-  - unsloth
-  - vllm
-  - webhook-subscriptions
-  - weights-and-biases
-  - writing-plans
-  - xurl
-  - youtube-content
+    - apple-notes
+    - apple-reminders
+    - architecture-diagram
+    - arxiv
+    - ascii-art
+    - ascii-video
+    - audiocraft
+    - audiocraft-audio-generation
+    - axolotl
+    - baoyu-comic
+    - baoyu-infographic
+    - blogwatcher
+    - claude-code
+    - codebase-inspection
+    - codex
+    - creative-ideation
+    - dogfood
+    - dspy
+    - evaluating-llms-harness
+    - excalidraw
+    - findmy
+    - fine-tuning-with-trl
+    - gif-search
+    - github-auth
+    - github-code-review
+    - github-issues
+    - github-pr-workflow
+    - github-repo-management
+    - godmode
+    - google-workspace
+    - heartmula
+    - hermes-agent
+    - himalaya
+    - huggingface-hub
+    - ideation
+    - imessage
+    - jupyter-live-kernel
+    - linear
+    - llama-cpp
+    - llm-wiki
+    - lm-evaluation-harness
+    - manim-video
+    - maps
+    - minecraft-modpack-server
+    - nano-pdf
+    - native-mcp
+    - notion
+    - obliteratus
+    - obsidian
+    - ocr-and-documents
+    - opencode
+    - openhue
+    - outlines
+    - p5js
+    - pixel-art
+    - plan
+    - pokemon-player
+    - polymarket
+    - popular-web-designs
+    - powerpoint
+    - requesting-code-review
+    - research-paper-writing
+    - segment-anything
+    - segment-anything-model
+    - serving-llms-vllm
+    - songsee
+    - songwriting-and-ai-music
+    - subagent-driven-development
+    - systematic-debugging
+    - test-driven-development
+    - trl-fine-tuning
+    - unsloth
+    - vllm
+    - webhook-subscriptions
+    - weights-and-biases
+    - writing-plans
+    - xurl
+    - youtube-content
 honcho: {}
 timezone: America/New_York
 discord:
@@ -356,54 +355,52 @@ discord:
   reactions: true
   channel_prompts:
     '1496267442899521627': "INSTRUCAO CRITICA - EXECUTE ANTES DE QUALQUER OUTRA ACAO\n\
-      \nEsta eh a primeira mensagem em uma thread Discord. Voce DEVE:\n\n1. PRIMEIRO:\
-      \ renomear thread + adicionar membros automaticamente via execute_code\n2. DEPOIS:\
-      \ responder normalmente, COMECANDO a resposta com `<@USER_ID>` para disparar\
-      \ push notification\n\nNAO mande 2 mensagens separadas (mention + resposta).\
-      \ Faca tudo em UMA mensagem que ja comeca com a mention.\n\nNAO comente sobre\
-      \ o setup tecnico (rename, members) na resposta ao usuario. Apenas responda\
-      \ a tarefa solicitada.\n\n### Script Python para renomear + auto-discover membros\
-      \ (executar via execute_code):\n\nimport os, urllib.request, json\n\nTHREAD_ID\
-      \ = \"<ID_DA_THREAD_ATUAL_NO_CONTEXTO>\"\nTHREAD_NAME = \"<NOME_CURTO_DO_TOPICO_max_80_chars>\"\
-      \nPARENT_CHANNEL_ID = \"1496267442899521627\"  # #zeus-admin-agent\nGUILD_ID\
-      \ = \"1185714635991679006\"\n\nADMINISTRATOR = 0x8\nVIEW_CHANNEL = 0x400\n\n\
-      token = os.environ.get(\"DISCORD_BOT_TOKEN\")\nheaders = {\n    \"Authorization\"\
-      : f\"Bot {token}\",\n    \"Content-Type\": \"application/json\",\n    \"User-Agent\"\
-      : \"Hermes-Agent (https://github.com/NousResearch/hermes-agent)\"\n}\n\ndef\
-      \ http_get(url):\n    req = urllib.request.Request(url, headers=headers)\n \
-      \   return json.loads(urllib.request.urlopen(req).read())\n\ndef http_put(url):\n\
+      \nEsta eh a primeira mensagem em uma thread Discord. Voce DEVE:\n\n1. PRIMEIRO:
+      renomear thread + adicionar membros automaticamente via execute_code\n2. DEPOIS:
+      responder normalmente, COMECANDO a resposta com `<@USER_ID>` para disparar push
+      notification\n\nNAO mande 2 mensagens separadas (mention + resposta). Faca tudo
+      em UMA mensagem que ja comeca com a mention.\n\nNAO comente sobre o setup tecnico
+      (rename, members) na resposta ao usuario. Apenas responda a tarefa solicitada.\n\
+      \n### Script Python para renomear + auto-discover membros (executar via execute_code):\n\
+      \nimport os, urllib.request, json\n\nTHREAD_ID = \"<ID_DA_THREAD_ATUAL_NO_CONTEXTO>\"\
+      \nTHREAD_NAME = \"<NOME_CURTO_DO_TOPICO_max_80_chars>\"\nPARENT_CHANNEL_ID =
+      \"1496267442899521627\"  # #zeus-admin-agent\nGUILD_ID = \"1185714635991679006\"\
+      \n\nADMINISTRATOR = 0x8\nVIEW_CHANNEL = 0x400\n\ntoken = os.environ.get(\"DISCORD_BOT_TOKEN\"\
+      )\nheaders = {\n    \"Authorization\": f\"Bot {token}\",\n    \"Content-Type\"\
+      : \"application/json\",\n    \"User-Agent\": \"Hermes-Agent (https://github.com/NousResearch/hermes-agent)\"\
+      \n}\n\ndef http_get(url):\n    req = urllib.request.Request(url, headers=headers)\n\
+      \    return json.loads(urllib.request.urlopen(req).read())\n\ndef http_put(url):\n\
       \    req = urllib.request.Request(url, method=\"PUT\", headers=headers, data=b\"\
       \")\n    return urllib.request.urlopen(req).read()\n\ndef http_patch(url, body):\n\
       \    req = urllib.request.Request(url, method=\"PATCH\", headers=headers, data=json.dumps(body).encode())\n\
       \    return urllib.request.urlopen(req).read()\n\n# 1. Renomear thread\ntry:\n\
       \    http_patch(f\"https://discord.com/api/v10/channels/{THREAD_ID}\", {\"name\"\
       : THREAD_NAME[:80]})\nexcept Exception as e:\n    print(f\"WARN rename: {e}\"\
-      )\n\n# 2. Auto-discover membros que podem ver o canal pai\ntry:\n    roles =\
-      \ http_get(f\"https://discord.com/api/v10/guilds/{GUILD_ID}/roles\")\n    role_perms\
-      \ = {r['id']: int(r.get('permissions', 0)) for r in roles}\n    admin_roles\
-      \ = {rid for rid, p in role_perms.items() if (p & ADMINISTRATOR) != 0}\n   \
-      \ \n    parent = http_get(f\"https://discord.com/api/v10/channels/{PARENT_CHANNEL_ID}\"\
-      )\n    allowed_roles = set(admin_roles)\n    denied_roles = set()\n    for po\
-      \ in parent.get('permission_overwrites', []):\n        if po.get('type') ==\
-      \ 0:\n            allow = int(po.get('allow', 0))\n            deny = int(po.get('deny',\
-      \ 0))\n            if (allow & VIEW_CHANNEL) != 0:\n                allowed_roles.add(po['id'])\n\
+      )\n\n# 2. Auto-discover membros que podem ver o canal pai\ntry:\n    roles =
+      http_get(f\"https://discord.com/api/v10/guilds/{GUILD_ID}/roles\")\n    role_perms
+      = {r['id']: int(r.get('permissions', 0)) for r in roles}\n    admin_roles =
+      {rid for rid, p in role_perms.items() if (p & ADMINISTRATOR) != 0}\n    \n \
+      \   parent = http_get(f\"https://discord.com/api/v10/channels/{PARENT_CHANNEL_ID}\"\
+      )\n    allowed_roles = set(admin_roles)\n    denied_roles = set()\n    for po
+      in parent.get('permission_overwrites', []):\n        if po.get('type') == 0:\n\
+      \            allow = int(po.get('allow', 0))\n            deny = int(po.get('deny',
+      0))\n            if (allow & VIEW_CHANNEL) != 0:\n                allowed_roles.add(po['id'])\n\
       \            if (deny & VIEW_CHANNEL) != 0:\n                denied_roles.add(po['id'])\n\
       \    final_roles = allowed_roles - denied_roles\n    \n    members = http_get(f\"\
-      https://discord.com/api/v10/guilds/{GUILD_ID}/members?limit=100\")\n    for\
-      \ m in members:\n        user = m.get('user', {})\n        if user.get('bot'):\n\
+      https://discord.com/api/v10/guilds/{GUILD_ID}/members?limit=100\")\n    for
+      m in members:\n        user = m.get('user', {})\n        if user.get('bot'):\n\
       \            continue\n        member_roles = set(m.get('roles', []))\n    \
       \    if member_roles & final_roles:\n            try:\n                http_put(f\"\
       https://discord.com/api/v10/channels/{THREAD_ID}/thread-members/{user['id']}\"\
-      )\n            except Exception:\n                pass\nexcept Exception as\
-      \ e:\n    print(f\"WARN auto-discover: {e}\")\n\n### Resposta final no Discord\n\
-      \nApos rename + adicao de membros, responder a tarefa do user normalmente, mas\
-      \ SEMPRE comecando com `<@USER_ID>` (substituir USER_ID pelo ID do user que\
-      \ enviou a mensagem).\n\nNAO mencionar nada sobre rename, membros adicionados\
-      \ ou system messages na resposta. Foco apenas na tarefa.\n\nFormato esperado:\n\
-      `<@344196393512075265> [resposta direta da tarefa]`\n\nUser IDs conhecidos:\n\
-      - Rodolfo Mattei: 344196393512075265\n- Raquel Oliveira: 1496254952501280974\n\
-      \nCRITICO: User-Agent header eh OBRIGATORIO no execute_code. Sem User-Agent,\
-      \ Cloudflare bloqueia com erro 1010."
+      )\n            except Exception:\n                pass\nexcept Exception as
+      e:\n    print(f\"WARN auto-discover: {e}\")\n\n### Resposta final no Discord\n\
+      \nApos rename + adicao de membros, responder a tarefa do user normalmente, mas
+      SEMPRE comecando com `<@USER_ID>` (substituir USER_ID pelo ID do user que enviou
+      a mensagem).\n\nNAO mencionar nada sobre rename, membros adicionados ou system
+      messages na resposta. Foco apenas na tarefa.\n\nFormato esperado:\n`<@344196393512075265>
+      [resposta direta da tarefa]`\n\nUser IDs conhecidos:\n- Rodolfo Mattei: 344196393512075265\n\
+      - Raquel Oliveira: 1496254952501280974\n\nCRITICO: User-Agent header eh OBRIGATORIO
+      no execute_code. Sem User-Agent, Cloudflare bloqueia com erro 1010."
   server_actions: ''
 whatsapp: {}
 telegram:
@@ -416,13 +413,14 @@ approvals:
   mode: manual
   timeout: 60
   cron_mode: deny
+  destructive_slash_confirm: false
 command_allowlist:
-- script execution via heredoc
-- script execution via -e/-c flag
-- delete in root path
-- shell command via -c/-lc flag
-- overwrite system config
-- kill hermes/gateway process (self-termination)
+  - script execution via heredoc
+  - script execution via -e/-c flag
+  - delete in root path
+  - shell command via -c/-lc flag
+  - overwrite system config
+  - kill hermes/gateway process (self-termination)
 quick_commands: {}
 hooks: {}
 hooks_auto_accept: false
@@ -440,7 +438,7 @@ security:
     shared_files: []
 cron:
   wrap_response: true
-  max_parallel_jobs: null
+  max_parallel_jobs:
 code_execution:
   mode: project
   timeout: 300
@@ -466,21 +464,21 @@ streaming:
   enabled: false
 platform_toolsets:
   cli:
-  - hermes-cli
+    - hermes-cli
   telegram:
-  - hermes-telegram
+    - hermes-telegram
   discord:
-  - hermes-discord
+    - hermes-discord
   whatsapp:
-  - hermes-whatsapp
+    - hermes-whatsapp
   slack:
-  - hermes-slack
+    - hermes-slack
   signal:
-  - hermes-signal
+    - hermes-signal
   homeassistant:
-  - hermes-homeassistant
+    - hermes-homeassistant
   qqbot:
-  - hermes-qqbot
+    - hermes-qqbot
 onboarding:
   seen:
     busy_input_prompt: true
