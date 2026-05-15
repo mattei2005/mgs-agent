@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-14T05:00:01-04:00",
+    "updated_at": "2026-05-15T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -117,6 +117,11 @@
       "modified_at": "2026-04-25T00:20:32-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/migration-2026-05-14-proximo-id-collision-fix.sh",
+      "size_bytes": 7712,
+      "modified_at": "2026-05-14T13:39:05-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/monitor-anthropic-cost.sh",
       "size_bytes": 3691,
       "modified_at": "2026-05-02T21:58:22-04:00"
@@ -153,13 +158,18 @@
     },
     {
       "path": "/root/mgs-agent/scripts/pendencia-add.sh",
-      "size_bytes": 2399,
-      "modified_at": "2026-05-03T00:40:47-04:00"
+      "size_bytes": 2748,
+      "modified_at": "2026-05-14T13:41:03-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/pendencia-done.sh",
       "size_bytes": 1680,
       "modified_at": "2026-05-03T00:40:48-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/pendencia-historico-add.sh",
+      "size_bytes": 3810,
+      "modified_at": "2026-05-14T13:41:12-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/pendencia-list.sh",
@@ -173,8 +183,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
-      "size_bytes": 2738,
-      "modified_at": "2026-04-27T22:27:00-04:00"
+      "size_bytes": 2874,
+      "modified_at": "2026-05-14T13:06:58-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sync-souls.sh",
@@ -689,6 +699,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/apple/imessage/SKILL.md"
       },
       {
+        "name": "macos-computer-use",
+        "category": "apple",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/apple/macos-computer-use/SKILL.md"
+      },
+      {
         "name": "claude-code",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/claude-code/SKILL.md"
@@ -979,6 +994,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/SKILL.md"
       },
       {
+        "name": "hermes-update",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-update/SKILL.md"
+      },
+      {
         "name": "log-monitor-discord-alert",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md"
@@ -1027,6 +1047,11 @@
         "name": "powerpoint",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/powerpoint/SKILL.md"
+      },
+      {
+        "name": "teams-meeting-pipeline",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/teams-meeting-pipeline/SKILL.md"
       },
       {
         "name": "godmode",
@@ -1140,8 +1165,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "e9e2e00365d132dae6a94a6ca4295006",
-      "modified_at": "2026-05-14T05:00:02-04:00"
+      "md5": "1d6aa9e6d47b9d32ad9c70d35134d7a3",
+      "modified_at": "2026-05-15T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1152,14 +1177,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
       "size_bytes": 335,
-      "md5": "132f200a99848bba92670558ad0d788c",
-      "modified_at": "2026-05-13T08:00:04-04:00"
+      "md5": "0e811a08cd08eb0a190db8fcc9f99e3d",
+      "modified_at": "2026-05-14T08:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 43852,
-      "md5": "49f7e68b1f52005141797f8d198b8e68",
-      "modified_at": "2026-05-13T05:00:04-04:00"
+      "size_bytes": 43151,
+      "md5": "746e5129d69b5140e03a97a96a1c2676",
+      "modified_at": "2026-05-14T05:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1175,15 +1200,15 @@
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
-      "size_bytes": 34608,
-      "md5": "6592eede7c0e289d55d8aff52d9973ea",
-      "modified_at": "2026-05-03T00:40:47-04:00"
+      "size_bytes": 54811,
+      "md5": "310761582b8c0866ac3c33e954cfbbf9",
+      "modified_at": "2026-05-14T15:27:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
-      "size_bytes": 2182,
-      "md5": "309709c9d38502b3acf40cea5969cf80",
-      "modified_at": "2026-05-11T10:30:03-04:00"
+      "size_bytes": 2380,
+      "md5": "200f458a6018d8be23cf7211d0049663",
+      "modified_at": "2026-05-14T22:30:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -1200,8 +1225,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
-      "md5": "59afc65c3937aa78a0de1e9f0c6f467e",
-      "modified_at": "2026-05-14T05:00:02-04:00"
+      "md5": "e4445df2a6535d99f14d50eddf3b4bac",
+      "modified_at": "2026-05-15T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1217,9 +1242,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 8236,
-      "md5": "9ccd5e150734e62ad0a72703ceca23af",
-      "modified_at": "2026-05-13T10:01:08-04:00"
+      "size_bytes": 8600,
+      "md5": "037a57c6dc507f12e3cc3fa761a09a78",
+      "modified_at": "2026-05-14T10:01:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
