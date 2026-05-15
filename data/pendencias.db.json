@@ -2,9 +2,9 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-05-15T17:07:09-04:00",
-    "total_abertas": 59,
-    "total_resolvidas": 28,
+    "ultima_atualizacao": "2026-05-15T17:17:07-04:00",
+    "total_abertas": 50,
+    "total_resolvidas": 37,
     "proximo_id": 88,
     "responsavel": "Rodolfo Mattei"
   },
@@ -258,75 +258,6 @@
       "contexto": "Atena prioriza eficiência sobre cosmético. Causa raiz: peso do EXECUCAO OBRIGATORIA insuficiente vs SOUL inteira priorizando anti-loop."
     },
     {
-      "id": "PEND-021",
-      "titulo": "Migração Lovable Cloud → Supabase próprio (MGS Dashboard)",
-      "categoria": "lovable",
-      "prioridade": "media",
-      "status": "aberta",
-      "tempo_estimado": "8-16h",
-      "bloqueio": null,
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "supabase",
-        "migracao",
-        "lovable",
-        "auth"
-      ],
-      "contexto": "Project Supabase próprio criado 17/04 (Mattei Services Inc, Americas). 58 migrations não copiadas. Lovable atual: ixylaqoamzryyeqmqzjr (managed, sem acesso direto)."
-    },
-    {
-      "id": "PEND-022",
-      "titulo": "Trocar @lovable.dev/cloud-auth-js → auth nativo Supabase",
-      "categoria": "lovable",
-      "prioridade": "media",
-      "status": "aberta",
-      "tempo_estimado": "4h",
-      "bloqueio": "Bloqueado por PEND-021",
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "auth",
-        "supabase",
-        "refactor"
-      ],
-      "contexto": "Dependência proprietária Lovable. Migrar pra @supabase/supabase-js auth nativo."
-    },
-    {
-      "id": "PEND-023",
-      "titulo": "Trocar @lovable.dev/email-js → Resend/SES/Postmark",
-      "categoria": "lovable",
-      "prioridade": "media",
-      "status": "aberta",
-      "tempo_estimado": "1h",
-      "bloqueio": null,
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "email",
-        "resend",
-        "refactor"
-      ],
-      "contexto": "~30 linhas refactor em supabase/functions/process-email-queue/index.ts. Usado pelos 11 templates email transacional."
-    },
-    {
-      "id": "PEND-024",
-      "titulo": "Fix segurança wp_app_password (criptografar pgsodium)",
-      "categoria": "seguranca",
-      "prioridade": "media",
-      "status": "aberta",
-      "tempo_estimado": "1-2h",
-      "bloqueio": "Delegada pro Lovable.dev (14/05/2026) — aguardando ação externa",
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "pgsodium",
-        "wp-credentials",
-        "lovable"
-      ],
-      "contexto": "Senhas WordPress armazenadas em texto puro na tabela content_sites do Supabase Lovable. Vazamento se anon key + bypass RLS. Migrar pra pgsodium encryption. | DELEGADA pro Lovable.dev em 14/05/2026 via mensagem direta. Aguardando resposta com estimativa de tempo e implementação. Não atacar localmente."
-    },
-    {
       "id": "PEND-025",
       "titulo": "Cleanup repos zumbis GitHub (mgsdashboard + -bbdeba00)",
       "categoria": "lovable",
@@ -500,23 +431,6 @@
       "contexto": "Caso real 02/05: Rodolfo mandou 3 msgs em 10s. MSG 1+2 sumiram. Não é queue. Race no Discord adapter / acp_adapter. Raro, fix estrutural pendente."
     },
     {
-      "id": "PEND-035",
-      "titulo": "Migração total operação MGS para produção (90+ RECs/mês)",
-      "categoria": "agente",
-      "prioridade": "media",
-      "status": "aberta",
-      "tempo_estimado": "ongoing",
-      "bloqueio": null,
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "producao",
-        "atena",
-        "scale"
-      ],
-      "contexto": "Volume atual baixo. Meta: 90+ RECs/mês. Validação contínua de pipeline novo."
-    },
-    {
       "id": "PEND-036",
       "titulo": "Tradução Hermes PT-BR",
       "categoria": "infra",
@@ -670,56 +584,6 @@
       "contexto": "Visualização custo Anthropic acumulado por dia/REC/agente. Lê article-tracker.db + monitor-anthropic-cost data."
     },
     {
-      "id": "PEND-045",
-      "titulo": "Compartilhar briefings com Raquel",
-      "categoria": "documentacao",
-      "prioridade": "media",
-      "status": "aberta",
-      "tempo_estimado": "30min",
-      "bloqueio": null,
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "raquel",
-        "briefing",
-        "compartilhamento"
-      ],
-      "contexto": "3 docs já em /root/mgs-agent/docs/: SKILL-EXPORT-RAQUEL.md (68KB), RAQUEL-BRIEFING-REC-EDITORIAL.md, RAQUEL-BRIEFING-REC-EDITORIAL-ZEUS.md. Commit c738b96. Compartilhar via GitHub collab OU PDF OU Google Doc."
-    },
-    {
-      "id": "PEND-046",
-      "titulo": "Reunião com Raquel (pipeline + próxima vertical)",
-      "categoria": "documentacao",
-      "prioridade": "media",
-      "status": "aberta",
-      "tempo_estimado": "1h",
-      "bloqueio": null,
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "raquel",
-        "reuniao"
-      ],
-      "contexto": "Mostrar pipeline atual + decidir qual vertical priorizar pra próximo template."
-    },
-    {
-      "id": "PEND-047",
-      "titulo": "Adicionar Raquel como GitHub collaborator (mattei2005/mgs-agent)",
-      "categoria": "documentacao",
-      "prioridade": "media",
-      "status": "aberta",
-      "tempo_estimado": "5min",
-      "bloqueio": null,
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "github",
-        "raquel",
-        "colaboracao"
-      ],
-      "contexto": "Repo é privado. Convidar Raquel pra ela ler briefings direto."
-    },
-    {
       "id": "PEND-048",
       "titulo": "Adicionar 4 sites SFTP em sites.json",
       "categoria": "infra",
@@ -820,23 +684,6 @@
         "pessoal"
       ],
       "contexto": "Servidor MatteiInc01 manda email a cada SSH. PAM/profile/cron. Apenas filtro Gmail está ativo, fix de raiz pendente."
-    },
-    {
-      "id": "PEND-054",
-      "titulo": "1Password Teams plan vaults estruturados",
-      "categoria": "pessoal",
-      "prioridade": "media",
-      "status": "aberta",
-      "tempo_estimado": "4h",
-      "bloqueio": null,
-      "criada_em": "2026-05-03T04:30:00-04:00",
-      "criada_por": "claude-web",
-      "tags": [
-        "1password",
-        "vaults",
-        "teams"
-      ],
-      "contexto": "Estrutura: personal/business/domains/team-shared. Convidar colaboradores via Teams plan. Audit/revogação."
     },
     {
       "id": "PEND-055",
@@ -1404,8 +1251,188 @@
       "resolvida_em": "2026-05-14T13:44:12-04:00",
       "resolvida_por": "claude-web",
       "como": "Aplicado 14/05: inserido bloco set -a / source .env / set +a entre linha 2 (set -e) e linha 4 (op item get) seguindo padrão canônico de check-pending-reports.sh. Syntax check OK (bash -n). Backup do original: scripts/runcloud-inventory.sh.bak-20260514. Era o último script ativo MGS sem o anti-loop fix (auditoria 27/04 confirmou todos os outros 7 já tinham)."
+    },
+    {
+      "id": "PEND-021",
+      "titulo": "Migração Lovable Cloud → Supabase próprio (MGS Dashboard)",
+      "categoria": "lovable",
+      "prioridade": "media",
+      "status": "descartada",
+      "tempo_estimado": "8-16h",
+      "bloqueio": null,
+      "criada_em": "2026-05-03T04:30:00-04:00",
+      "criada_por": "claude-web",
+      "tags": [
+        "supabase",
+        "migracao",
+        "lovable",
+        "auth"
+      ],
+      "contexto": "Project Supabase próprio criado 17/04 (Mattei Services Inc, Americas). 58 migrations não copiadas. Lovable atual: ixylaqoamzryyeqmqzjr (managed, sem acesso direto).",
+      "resolvida_em": "2026-05-15T17:17:07-04:00",
+      "resolvida_por": "rodolfo",
+      "como": "Descartada por decisão direta do Rodolfo em 2026-05-15."
+    },
+    {
+      "id": "PEND-022",
+      "titulo": "Trocar @lovable.dev/cloud-auth-js → auth nativo Supabase",
+      "categoria": "lovable",
+      "prioridade": "media",
+      "status": "descartada",
+      "tempo_estimado": "4h",
+      "bloqueio": "Bloqueado por PEND-021",
+      "criada_em": "2026-05-03T04:30:00-04:00",
+      "criada_por": "claude-web",
+      "tags": [
+        "auth",
+        "supabase",
+        "refactor"
+      ],
+      "contexto": "Dependência proprietária Lovable. Migrar pra @supabase/supabase-js auth nativo.",
+      "resolvida_em": "2026-05-15T17:17:07-04:00",
+      "resolvida_por": "rodolfo",
+      "como": "Descartada por decisão direta do Rodolfo em 2026-05-15."
+    },
+    {
+      "id": "PEND-023",
+      "titulo": "Trocar @lovable.dev/email-js → Resend/SES/Postmark",
+      "categoria": "lovable",
+      "prioridade": "media",
+      "status": "descartada",
+      "tempo_estimado": "1h",
+      "bloqueio": null,
+      "criada_em": "2026-05-03T04:30:00-04:00",
+      "criada_por": "claude-web",
+      "tags": [
+        "email",
+        "resend",
+        "refactor"
+      ],
+      "contexto": "~30 linhas refactor em supabase/functions/process-email-queue/index.ts. Usado pelos 11 templates email transacional.",
+      "resolvida_em": "2026-05-15T17:17:07-04:00",
+      "resolvida_por": "rodolfo",
+      "como": "Descartada por decisão direta do Rodolfo em 2026-05-15."
+    },
+    {
+      "id": "PEND-024",
+      "titulo": "Fix segurança wp_app_password (criptografar pgsodium)",
+      "categoria": "seguranca",
+      "prioridade": "media",
+      "status": "descartada",
+      "tempo_estimado": "1-2h",
+      "bloqueio": "Delegada pro Lovable.dev (14/05/2026) — aguardando ação externa",
+      "criada_em": "2026-05-03T04:30:00-04:00",
+      "criada_por": "claude-web",
+      "tags": [
+        "pgsodium",
+        "wp-credentials",
+        "lovable"
+      ],
+      "contexto": "Senhas WordPress armazenadas em texto puro na tabela content_sites do Supabase Lovable. Vazamento se anon key + bypass RLS. Migrar pra pgsodium encryption. | DELEGADA pro Lovable.dev em 14/05/2026 via mensagem direta. Aguardando resposta com estimativa de tempo e implementação. Não atacar localmente.",
+      "resolvida_em": "2026-05-15T17:17:07-04:00",
+      "resolvida_por": "rodolfo",
+      "como": "Descartada por decisão direta do Rodolfo em 2026-05-15."
+    },
+    {
+      "id": "PEND-035",
+      "titulo": "Migração total operação MGS para produção (90+ RECs/mês)",
+      "categoria": "agente",
+      "prioridade": "media",
+      "status": "descartada",
+      "tempo_estimado": "ongoing",
+      "bloqueio": null,
+      "criada_em": "2026-05-03T04:30:00-04:00",
+      "criada_por": "claude-web",
+      "tags": [
+        "producao",
+        "atena",
+        "scale"
+      ],
+      "contexto": "Volume atual baixo. Meta: 90+ RECs/mês. Validação contínua de pipeline novo.",
+      "resolvida_em": "2026-05-15T17:17:07-04:00",
+      "resolvida_por": "rodolfo",
+      "como": "Descartada por decisão direta do Rodolfo em 2026-05-15."
+    },
+    {
+      "id": "PEND-045",
+      "titulo": "Compartilhar briefings com Raquel",
+      "categoria": "documentacao",
+      "prioridade": "media",
+      "status": "descartada",
+      "tempo_estimado": "30min",
+      "bloqueio": null,
+      "criada_em": "2026-05-03T04:30:00-04:00",
+      "criada_por": "claude-web",
+      "tags": [
+        "raquel",
+        "briefing",
+        "compartilhamento"
+      ],
+      "contexto": "3 docs já em /root/mgs-agent/docs/: SKILL-EXPORT-RAQUEL.md (68KB), RAQUEL-BRIEFING-REC-EDITORIAL.md, RAQUEL-BRIEFING-REC-EDITORIAL-ZEUS.md. Commit c738b96. Compartilhar via GitHub collab OU PDF OU Google Doc.",
+      "resolvida_em": "2026-05-15T17:17:07-04:00",
+      "resolvida_por": "rodolfo",
+      "como": "Descartada por decisão direta do Rodolfo em 2026-05-15."
+    },
+    {
+      "id": "PEND-046",
+      "titulo": "Reunião com Raquel (pipeline + próxima vertical)",
+      "categoria": "documentacao",
+      "prioridade": "media",
+      "status": "descartada",
+      "tempo_estimado": "1h",
+      "bloqueio": null,
+      "criada_em": "2026-05-03T04:30:00-04:00",
+      "criada_por": "claude-web",
+      "tags": [
+        "raquel",
+        "reuniao"
+      ],
+      "contexto": "Mostrar pipeline atual + decidir qual vertical priorizar pra próximo template.",
+      "resolvida_em": "2026-05-15T17:17:07-04:00",
+      "resolvida_por": "rodolfo",
+      "como": "Descartada por decisão direta do Rodolfo em 2026-05-15."
+    },
+    {
+      "id": "PEND-047",
+      "titulo": "Adicionar Raquel como GitHub collaborator (mattei2005/mgs-agent)",
+      "categoria": "documentacao",
+      "prioridade": "media",
+      "status": "descartada",
+      "tempo_estimado": "5min",
+      "bloqueio": null,
+      "criada_em": "2026-05-03T04:30:00-04:00",
+      "criada_por": "claude-web",
+      "tags": [
+        "github",
+        "raquel",
+        "colaboracao"
+      ],
+      "contexto": "Repo é privado. Convidar Raquel pra ela ler briefings direto.",
+      "resolvida_em": "2026-05-15T17:17:07-04:00",
+      "resolvida_por": "rodolfo",
+      "como": "Descartada por decisão direta do Rodolfo em 2026-05-15."
+    },
+    {
+      "id": "PEND-054",
+      "titulo": "1Password Teams plan vaults estruturados",
+      "categoria": "pessoal",
+      "prioridade": "media",
+      "status": "descartada",
+      "tempo_estimado": "4h",
+      "bloqueio": null,
+      "criada_em": "2026-05-03T04:30:00-04:00",
+      "criada_por": "claude-web",
+      "tags": [
+        "1password",
+        "vaults",
+        "teams"
+      ],
+      "contexto": "Estrutura: personal/business/domains/team-shared. Convidar colaboradores via Teams plan. Audit/revogação.",
+      "resolvida_em": "2026-05-15T17:17:07-04:00",
+      "resolvida_por": "rodolfo",
+      "como": "Descartada por decisão direta do Rodolfo em 2026-05-15."
     }
   ],
   "proximo_id": 88,
-  "ultima_atualizacao": "2026-05-15T17:07:09-04:00"
+  "ultima_atualizacao": "2026-05-15T17:17:07-04:00"
 }
