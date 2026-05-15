@@ -185,13 +185,27 @@ Webhook URL: 1Password → vault `MGS Conteúdo` → item `Discord Webhook - Zeu
 
 ---
 
-## SEÇÃO D — Diagnóstico e Reinicialização de Agente (Gateway Hermes)
+## SEÇÃO D — Diagnóstico, Cron Scheduler e Reinicialização de Agente (Gateway Hermes)
 
 ### Quando usar
 - Agente está online (processo rodando) mas não responde no Discord
 - Mensagens não aparecem como `inbound message` no log
 - Agente travou em loop de rate limit
 - Usuário relata silêncio após período de alta atividade
+- Auditar ou migrar cron jobs Hermes/Linux entre profiles MGS
+
+### Cron-worker architecture / provider pinning
+
+Ver `references/hermes-cron-worker-architecture.md` para o padrão completo de auditoria e migração.
+
+Resumo operacional MGS:
+- `zeus` e `atena` ficam em `gpt-5.5` via `openai-codex` para trabalho principal.
+- Cron com LLM deve rodar no profile dedicado `cron-worker` usando `claude-haiku-4-5-20251001` via `anthropic`.
+- Cron determinístico deve ser script-only ou Hermes `no_agent=True`; não gastar LLM.
+- Para modelos Claude, não confiar em `provider: auto` quando o profile default é `openai-codex`; pin explícito: `provider: anthropic`.
+- Erro `model is not supported when using Codex with a ChatGPT account` para Haiku geralmente indica provider errado, não ID de modelo inválido.
+
+Antes de mudar cron/profile/service, fazer Fase 1 read-only: configs dos profiles, `cron/jobs.json`, `crontab -l`, `systemctl cat`, e reportar sem restart/write.
 
 ### Sintomas típicos
 
@@ -275,12 +289,23 @@ Ver `references/discord-threads-lifecycle.md` para referência completa.
 
 ---
 
-## SEÇÃO E — Versionamento de Profiles (SOUL.md, config.yaml, skills)
+## SEÇÃO E — Versionamento e Edição de Profiles (SOUL.md, config.yaml, skills)
 
 ### Quando usar
 - SOUL.md de algum agente precisa de backup remoto / histórico git
 - Novo agente criado e precisa ter SOUL.md rastreado
 - Skills MGS-específicas precisam ser versionadas no repo
+- Rodolfo pede ajuste de tom/verbosity/persona operacional do Zeus ou Atena
+- Rodolfo pede uma “indexação”/auditoria de contexto sem mexer em providers de memória
+
+### Ajustes de tom/verbosity e contexto semântico
+
+Ver `references/hermes-profile-style-context-ops.md` para o padrão validado de:
+- adicionar “Modo executivo curto — teste ativo” no SOUL.md sem colar persona crua de curso;
+- criar backup e rollback de SOUL.md;
+- manter `reasoning_effort` inalterado quando o usuário pedir;
+- fazer um manifesto read-only dos arquivos de memória/contexto como equivalente seguro de “indexação” sem mudar memória;
+- rodar warm-up pós-troca de modelo/profile.
 
 ### ⚠️ PITFALL CRÍTICO: Symlink NÃO versiona conteúdo
 
