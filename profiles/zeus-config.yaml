@@ -1,7 +1,7 @@
 model:
-  default: claude-sonnet-4-6
-  provider: anthropic
-  base_url: ''
+  default: gpt-5.5
+  provider: openai-codex
+  base_url: 'https://chatgpt.com/backend-api/codex'
 providers: {}
 fallback_providers: []
 credential_pool_strategies: {}
