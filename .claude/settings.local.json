@@ -8,7 +8,11 @@
       "Bash(./scripts/chat-log.sh *)",
       "Bash(./scripts/pendencia-list.sh --stats)",
       "Bash(python3)",
-      "Bash(./scripts/pendencia-list.sh *)"
+      "Bash(./scripts/pendencia-list.sh *)",
+      "Bash(crontab -l)",
+      "Read(//etc/cron.d/**)",
+      "Bash(python3 -c ' *)",
+      "Bash(hermes auth *)"
     ]
   }
 }
