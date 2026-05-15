@@ -163,12 +163,14 @@ git -C /root/.hermes/hermes-agent log --oneline HEAD..origin/main
 
 1. **Timeout do terminal ≠ falha do update** — `hermes update` reinicia gateways e pode levar >60s. Terminal pode dar timeout enquanto o processo ainda roda. Verificar resultado com `hermes --version` após ~15s.
 
-2. **2 commits pendentes logo após update** — normal quando commits são feitos entre o pull do `hermes update` e o momento da verificação. Se forem só fixes menores (ex: browser args), pode ignorar ou rodar `hermes update` novamente.
+2. **2 commits pendentes logo após update** — normal quando commits são feitos entre o pull do `hermes update` e o momento da verificação. Se forem só fixes menores, pode ignorar ou rodar `hermes update` novamente.
 
-3. **Patch local pode ser sobrescrito** — `hermes update` faz `git pull` que pode sobrescrever modificações locais em `gateway/run.py`. Sempre checar `grep "PATCH (MGS Digital Corp)"` após update.
+3. **Patch MGS busy_input_mode — NÃO reaplicar após v0.13.0+** — o patch `PATCH (MGS Digital Corp)` de busy_input_mode/queue foi integrado nativamente no upstream (v0.13.0, 2026-05-07). O upstream agora tem queue mode + steer mode + ack com status detalhado (tempo decorrido, iteração X/Y, tool atual). Nunca mais reaplicar o patch — ele não existe mais no código e a funcionalidade nativa é superior. Verificar com `grep "PATCH (MGS Digital Corp)" gateway/run.py` — se retornar vazio, é o comportamento correto.
 
-4. **Backup antes de major updates (diferença grande de versão)** — para atualizações de 1-2 commits, backup é opcional. Para atualizações com 100+ commits (como v0.12→v0.13 com 864 commits), fazer backup é prudente devido a possíveis migrations de `state.db`.
+4. **Backup antes de major updates (diferença grande de versão)** — para atualizações de 1-2 commits, backup é opcional. Para atualizações com 100+ commits, fazer backup é prudente devido a possíveis migrations de `state.db`. Comando: `tar -czf /root/hermes-profiles-backup-$(date +%Y%m%d).tar.gz /root/.hermes/profiles/` — erro "file changed as we read it" é normal (Atena escrevendo), backup gerado mesmo assim.
 
-5. **Skills novas no backup compare são normais** — skills bundled do Hermes (ex: `apple/macos-computer-use`, `productivity/teams-meeting-pipeline`) podem ser adicionadas pelo próprio update. Não é perda, é ganho.
+5. **Skills novas no backup compare são normais** — skills bundled do Hermes podem ser adicionadas pelo próprio update. Não é perda, é ganho.
 
-6. **Confirmar ambos os gateways ativos** — após restart, verificar `zeus-gateway` E `atena-gateway`. Em casos raros um sobe e o outro não.
+6. **Confirmar ambos os gateways ativos** — após restart, verificar `zeus-gateway` E `atena-gateway`. Em casos raros um sobe e o outro não. Se `deactivating` persistir após 5s, forçar: `systemctl restart zeus-gateway.service`.
+
+7. **Versão permanece igual após update com apenas commits (sem nova tag)** — `hermes --version` pode mostrar a mesma tag (ex: v0.13.0) mesmo após atualizar dezenas de commits. Isso é normal — a tag só muda em releases oficiais. "Up to date" no output confirma que o update foi aplicado.
