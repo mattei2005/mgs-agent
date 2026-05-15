@@ -2,7 +2,7 @@
 name: discord-ops
 description: "Operações do ecossistema de agentes MGS (Zeus/Atena): comunicação inter-agente via Discord, diagnóstico e reinicialização de gateway, versionamento de profiles (SOUL.md, skills) via git, roles managed, e hook git post-commit com notificação via webhook. Cobre IDs de canais/bots, DISCORD_ALLOW_BOTS, TTY check, sessão stale, rate limit, Message Content Intent, symlink pitfall e ciclo cron de sync."
 tags: [discord, inter-agent, messaging, webhook, hook, git, roles, infra, notification, hermes, agent, restart, versioning, soul, profile, systemd, cron]
-related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation]
+related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-update]
 ---
 
 # Discord Ops — Comunicação Inter-Agente, Roles e Webhooks
@@ -264,6 +264,14 @@ Issue upstream: https://github.com/NousResearch/hermes-agent/issues/14905
 /root/mgs-agent/logs/generate-rec.log          # Log do pipeline REC
 /root/mgs-agent/logs/events-audit.jsonl        # Audit trail de eventos
 ```
+
+---
+
+## SEÇÃO F — Threads: Ciclo de Vida e Tokens
+
+Ver `references/discord-threads-lifecycle.md` para referência completa.
+
+**Resumo executivo:** threads arquivadas = zero tokens. Tokens só correm quando chega mensagem nova. Histórico preservado indefinidamente (sem auto-delete). Canal Zeus: archive em 24h.
 
 ---
 
