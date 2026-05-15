@@ -15,6 +15,27 @@ Required:
 - `card_official_url` — official bank page (source of truth)
 - `site_key` — key in `/root/mgs-agent/data/sites.json` (e.g. "eggbev")
 
+## Pre-REC duplicate analysis / candidate selection
+
+Use this section when the user asks for card options, pipeline ideas, or a duplicate check before choosing the next REC (e.g. "quais cartões ainda não fizemos?", "não quero duplicar", "me dá opções para gb-cc-en").
+
+1. Resolve WordPress credentials for the requested `site_key`, but never print credentials.
+2. Query recent WordPress posts via REST with auth when possible:
+   - Prefer `_fields=id,date,status,slug,title,link` to keep output small.
+   - If `status=any` is forbidden by the site, fall back to public published posts and clearly treat the result as a published-content scan.
+3. Classify existing posts by slug pattern:
+   - REC: `rec-{country}-{vertical}-{card_slug}`
+   - P1/apply page: `apply-now-{country}-{vertical}-{card_slug}`
+4. Normalize card slugs before comparing. Watch for WordPress disambiguation suffixes such as `-2` on REC slugs; compare both exact slug and a suffix-stripped version when assessing duplicates.
+5. Report:
+   - RECs already published for that vertical/site.
+   - P1/apply pages that do not yet have matching REC coverage — these are usually the best next candidates because the user flow already exists.
+   - New card opportunities without visible P1, separated from the high-priority list.
+6. Lightly validate official source URLs for recommended candidates with a single `curl -L --max-time 10-12` probe only to avoid obviously dead links (404/403/5xx). Do not start full research or browser scraping during candidate analysis.
+7. In the user-facing answer, keep it strategic and concise: use a table with priority, card name, and why it is worth doing; avoid exposing credentials, internal file paths, scripts, or raw API errors.
+
+> **Pitfall — duplicate checks are not a publishing pipeline:** Do not ask the 4 REC intake questions just to provide options. The intake questions apply when the user chooses a specific card to create/publish. For option analysis, scan existing posts first, return candidates, and wait for the user's selection.
+
 Optional:
 - `status` — `draft` (default) or `publish`. **Always ask the user explicitly
   before starting** — do not assume draft. Include this as one of the 4 intake
