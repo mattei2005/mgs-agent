@@ -1,32 +1,40 @@
 #!/bin/bash
-set -e
+# monitor-anthropic-cost.sh — Monitor de custo simulado GPT-5.5 via OAuth
+#
+# Com OAuth (openai-codex), o custo real é ZERO (incluso na assinatura).
+# Este script calcula o custo HIPOTÉTICO com base nos tokens logados no
+# agent.log do Zeus e da Atena — para referência interna apenas.
+#
+# Fonte de tokens: agent.log (campos session_input_tokens / output_tokens
+# não aparecem no "response ready" — usamos api_calls como proxy de volume).
+#
+# Pricing referência GPT-5.5 (hipotético, sem cobrança real):
+#   Input:  $7.00 / 1M tokens (estimativa — modelo novo sem pricing oficial)
+#   Output: $21.00 / 1M tokens
+#   Fonte: https://openai.com/api/pricing/
+#
+# ATENÇÃO: valores são SIMULADOS. OAuth não gera custo real por token.
 
-THRESHOLD_INFO=5
-THRESHOLD_WARN=15
-THRESHOLD_ALERT=30
+set -e
 
 set -a
 source /root/mgs-agent/.env
 set +a
 
-ADMIN_KEY=""
-for i in 1 2 3; do
-  ADMIN_KEY=$(op item get "Anthropic Admin API Key" --vault "MGS Conteúdo" --fields label=monitorcoastkey --reveal 2>/dev/null)
-  if [[ "$ADMIN_KEY" == sk-ant-admin* ]]; then
-    break
-  fi
-  sleep 5
-done
+ZEUS_LOG="/root/.hermes/profiles/zeus/logs/agent.log"
+ATENA_LOG="/root/.hermes/profiles/atena/logs/agent.log"
 
-if [[ "$ADMIN_KEY" != sk-ant-admin* ]]; then
-  ADMIN_KEY=$(cat /root/.anthropic-admin-key 2>/dev/null)
-fi
+THRESHOLD_INFO=5
+THRESHOLD_WARN=15
+THRESHOLD_ALERT=30
 
-if [[ "$ADMIN_KEY" != sk-ant-admin* ]]; then
-  echo "ERROR: Admin Key not available" >&2
-  exit 1
-fi
+# GPT-5.5 pricing hipotético (USD / 1M tokens)
+# Sem pricing oficial ainda — usando estimativa baseada em o3 ($10/$40)
+# e gpt-4o ($2.50/$10). Ajustar quando OpenAI publicar.
+PRICE_INPUT=7.00
+PRICE_OUTPUT=21.00
 
+# Webhook Discord
 WEBHOOK=""
 for i in 1 2 3; do
   WEBHOOK=$(op item get "Discord Webhook - Alerts Infra Channel" --vault "MGS Conteúdo" --fields label=webhook_url --reveal 2>/dev/null)
@@ -41,67 +49,87 @@ if [[ "$WEBHOOK" != https://* ]]; then
   exit 1
 fi
 
-YESTERDAY=$(date -u -d '1 day ago' +%Y-%m-%dT00:00:00Z)
-TODAY=$(date -u +%Y-%m-%dT00:00:00Z)
+YESTERDAY=$(date -u -d '1 day ago' '+%Y-%m-%d %H:%M:%S')
 
-RAW_AMOUNT=$(curl -s --max-time 15 -H "x-api-key: $ADMIN_KEY" \
-     -H "anthropic-version: 2023-06-01" \
-     "https://api.anthropic.com/v1/organizations/cost_report?starting_at=${YESTERDAY}&ending_at=${TODAY}&bucket_width=1d" \
-     | jq -r '.data[0].results[0].amount // "0"')
+# Contar api_calls nas últimas 24h em cada log
+# Cada api_call ≈ ~2000 tokens input + ~500 tokens output (estimativa média REC)
+# Calibrar conforme dados reais acumularem
+count_api_calls_since() {
+  local logfile="$1"
+  local since="$2"
+  if [[ ! -f "$logfile" ]]; then echo 0; return; fi
+  awk -v since="$since" '
+    /response ready/ {
+      ts = substr($0, 1, 19)
+      if (ts >= since) {
+        match($0, /api_calls=[0-9]+/)
+        if (RSTART) {
+          calls = substr($0, RSTART+10, RLENGTH-10)
+          total += calls + 0
+        }
+      }
+    }
+    END { print (total ? total : 0) }
+  ' "$logfile"
+}
 
-# Anthropic /v1/organizations/cost_report retorna amount em CENTAVOS (USD * 100)
-# Validado empiricamente 02/05/2026 cruzando com CSV oficial Anthropic
-# Antes: DIVISOR=88 (errado, inflava custo em ~14%)
-DIVISOR=100
-COST=$(echo "scale=2; $RAW_AMOUNT / $DIVISOR" | bc)
+ZEUS_CALLS=$(count_api_calls_since "$ZEUS_LOG" "$YESTERDAY")
+ATENA_CALLS=$(count_api_calls_since "$ATENA_LOG" "$YESTERDAY")
+TOTAL_CALLS=$((ZEUS_CALLS + ATENA_CALLS))
 
-USAGE_JSON=$(curl -s --max-time 15 -H "x-api-key: $ADMIN_KEY" \
-     -H "anthropic-version: 2023-06-01" \
-     "https://api.anthropic.com/v1/organizations/usage_report/messages?starting_at=${YESTERDAY}&ending_at=${TODAY}&bucket_width=1d")
+# Estimativa de tokens por api_call (médias empíricas)
+# Input: ~2000 tokens/call (contexto + system prompt + histórico)
+# Output: ~500 tokens/call (resposta média)
+AVG_INPUT_PER_CALL=2000
+AVG_OUTPUT_PER_CALL=500
 
-CACHE_READ=$(echo "$USAGE_JSON" | jq -r '.data[0].results[0].cache_read_input_tokens // 0')
-OUTPUT=$(echo "$USAGE_JSON" | jq -r '.data[0].results[0].output_tokens // 0')
+TOTAL_INPUT=$((TOTAL_CALLS * AVG_INPUT_PER_CALL))
+TOTAL_OUTPUT=$((TOTAL_CALLS * AVG_OUTPUT_PER_CALL))
 
-# Formatação melhor (sempre mostra casas decimais)
-CACHE_READ_M=$(awk "BEGIN {printf \"%.2f\", $CACHE_READ / 1000000}")
-OUTPUT_K=$(awk "BEGIN {printf \"%.0f\", $OUTPUT / 1000}")
+# Custo hipotético
+COST=$(awk -v inp="$TOTAL_INPUT" -v out="$TOTAL_OUTPUT" \
+  -v pi="$PRICE_INPUT" -v po="$PRICE_OUTPUT" \
+  'BEGIN { printf "%.2f", (inp * pi + out * po) / 1000000 }')
+
+TOTAL_INPUT_K=$((TOTAL_INPUT / 1000))
+TOTAL_OUTPUT_K=$((TOTAL_OUTPUT / 1000))
 
 COST_INT=$(echo "$COST" | cut -d. -f1)
 
 if [ "$COST_INT" -ge "$THRESHOLD_ALERT" ]; then
   EMOJI="🔴"
   COLOR=15158332
-  STATUS="ALERTA — Gasto MUITO ALTO"
+  STATUS="ALERTA — Volume MUITO ALTO"
   MENTION="<@344196393512075265>"
 elif [ "$COST_INT" -ge "$THRESHOLD_WARN" ]; then
   EMOJI="🟡"
   COLOR=15844367
-  STATUS="WARN — Gasto acima do normal"
+  STATUS="WARN — Volume acima do normal"
   MENTION=""
 elif [ "$COST_INT" -ge "$THRESHOLD_INFO" ]; then
   EMOJI="🟢"
   COLOR=3066993
-  STATUS="OK — Gasto saudável"
+  STATUS="OK — Volume saudável"
   MENTION=""
 else
   EMOJI="🟢"
   COLOR=3066993
-  STATUS="OK — Gasto baixo"
+  STATUS="OK — Volume baixo"
   MENTION=""
 fi
 
-TITLE="${EMOJI} [ANTHROPIC API] Gasto 24h: \$${COST}"
+TITLE="${EMOJI} [GPT-5.5 OAuth] Custo simulado 24h: \$${COST}"
 
-# Newlines reais (não escapados)
-DESC=$(printf "**Status:** %s\n**Cache reads:** %s M tokens\n**Output:** %s K tokens\n**Auto-reload:** Ativo (\$10 → \$20)" "$STATUS" "$CACHE_READ_M" "$OUTPUT_K")
+DESC=$(printf "**Status:** %s\n**Custo real:** \$0.00 (OAuth — incluso na assinatura)\n**Custo hipotético:** \$%s (se fosse pay-per-token)\n**API calls:** %d (Zeus: %d | Atena: %d)\n**Tokens estimados:** ~%dK input / ~%dK output\n**Pricing ref:** GPT-5.5 \$%.2f/\$%.2f por 1M (estimativa)\n⚠️ Valores simulados — não representa cobrança real" \
+  "$STATUS" "$COST" "$TOTAL_CALLS" "$ZEUS_CALLS" "$ATENA_CALLS" \
+  "$TOTAL_INPUT_K" "$TOTAL_OUTPUT_K" "$PRICE_INPUT" "$PRICE_OUTPUT")
 
 if [ -n "$MENTION" ]; then
-  CONTENT="${MENTION} verificar logs Zeus/Atena"
+  CONTENT="${MENTION} verificar volume Zeus/Atena"
 else
   CONTENT=""
 fi
 
-# jq com --rawfile/--arg lida com newlines corretamente
 PAYLOAD=$(jq -n \
   --arg c "$CONTENT" \
   --arg t "$TITLE" \
@@ -114,8 +142,8 @@ HTTP_CODE=$(curl -s --max-time 15 -X POST -H "Content-Type: application/json" \
   "$WEBHOOK" \
   -o /tmp/discord-response.txt -w "%{http_code}")
 
-echo "Monitor: \$${COST} | Status: ${STATUS} | HTTP: ${HTTP_CODE}"
-echo "Cache: ${CACHE_READ_M}M | Output: ${OUTPUT_K}K tokens"
+echo "Monitor: \$${COST} simulado | API calls: ${TOTAL_CALLS} | HTTP: ${HTTP_CODE}"
+echo "Zeus: ${ZEUS_CALLS} calls | Atena: ${ATENA_CALLS} calls"
 
 if [ "$HTTP_CODE" != "204" ] && [ "$HTTP_CODE" != "200" ]; then
   echo "Discord error response:"
