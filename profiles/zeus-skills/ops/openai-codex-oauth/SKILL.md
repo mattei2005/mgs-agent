@@ -170,6 +170,23 @@ atena/config.yaml:  provider: openai-codex
 ## Referências
 
 - `references/cost-monitoring-gpt-oauth.md` — abordagem de estimativa de custo pós-migração OAuth (sem Admin API)
+- `references/cron-model-pinning.md` — política MGS para pin explícito de modelo/provider em cron jobs após migração para Codex
+
+---
+
+## Política de cron jobs após migração para Codex
+
+Depois que um perfil Hermes é migrado para `openai-codex` + `gpt-5.5`, cron jobs agent-based sem override próprio de `model`/`provider` herdam esse default. Portanto:
+
+1. **Interação principal Zeus/Atena:** manter `openai-codex` + `gpt-5.5`.
+2. **Auxiliares Hermes:** manter `claude-haiku-4-5-20251001` salvo exceção explícita.
+3. **Cron agent-based:** criar/atualizar com pin explícito em Haiku:
+   - `provider: anthropic`
+   - `model: claude-haiku-4-5-20251001`
+4. **Cron determinístico/watchdog:** preferir `script` + `no_agent: true` para não chamar LLM.
+5. **Antes de reativar cron existente:** verificar se `model` ou `provider` estão nulos; se sim, aplicar override antes de `resume/run`.
+
+Regra operacional curta: **cron novo = Haiku por padrão, salvo exceção explícita; script-only = `no_agent: true`.**
 
 ---
 
@@ -202,3 +219,5 @@ atena/config.yaml:  provider: openai-codex
 6. **Custo no Hermes aparece como "included"** — o `usage_pricing.py` detecta `openai-codex` e retorna `billing_mode=subscription_included`. O resumo de sessão no Discord vai mostrar "custo: included" em vez de valor monetário. Normal e correto.
 
 7. **Scripts de monitoramento de custo Anthropic ficam obsoletos** — após migração, `monitor-anthropic-cost.sh` e `track-article-cost.sh` precisam ser adaptados. Ver `references/cost-monitoring-gpt-oauth.md` para a abordagem atual (estimativa via api_calls do agent.log).
+
+8. **Cron sem pin herda o provider do perfil** — após migrar Zeus/Atena para Codex, qualquer cron agent-based com `model: null` ou `provider: null` passa a herdar `openai-codex` + `gpt-5.5`. Auditar e pinçar explicitamente em Haiku antes de reativar/rodar. Ver `references/cron-model-pinning.md`.
