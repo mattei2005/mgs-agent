@@ -170,8 +170,8 @@ auxiliary:
     timeout: 120
     extra_body: {}
   compression:
-    provider: anthropic
-    model: claude-haiku-4-5-20251001
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 300
@@ -213,15 +213,15 @@ auxiliary:
     timeout: 30
     extra_body: {}
   triage_specifier:
-    provider: auto
-    model: ''
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 120
     extra_body: {}
   curator:
-    provider: auto
-    model: ''
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 600

@@ -10,7 +10,7 @@ toolsets:
 agent:
   max_turns: 200
   gateway_timeout: 1800
-  restart_drain_timeout: 60
+  restart_drain_timeout: 240
   service_tier: ''
   tool_use_enforcement: auto
   gateway_timeout_warning: 900
@@ -91,9 +91,10 @@ checkpoints:
 file_read_max_chars: 100000
 compression:
   enabled: true
-  threshold: 0.6617647058823529
-  target_ratio: 0.2
-  protect_last_n: 20
+  threshold: 0.4
+  target_ratio: 0.18
+  protect_last_n: 16
+  hygiene_hard_message_limit: 250
 bedrock:
   region: ''
   discovery:
@@ -126,7 +127,7 @@ auxiliary:
     model: gpt-5.5
     base_url: ''
     api_key: ''
-    timeout: 120
+    timeout: 300
     extra_body: {}
   session_search:
     provider: openai-codex
@@ -158,6 +159,20 @@ auxiliary:
     timeout: 30
     extra_body: {}
   title_generation:
+    provider: openai-codex
+    model: gpt-5.5
+    base_url: ''
+    api_key: ''
+    timeout: 30
+    extra_body: {}
+  triage_specifier:
+    provider: openai-codex
+    model: gpt-5.5
+    base_url: ''
+    api_key: ''
+    timeout: 30
+    extra_body: {}
+  curator:
     provider: openai-codex
     model: gpt-5.5
     base_url: ''
