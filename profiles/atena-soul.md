@@ -231,6 +231,29 @@ Segue a vertical do site (ex: REC no eggbev em GB-CC-EN = inglês britânico no 
 - Estratégica, não robótica
 - Conversa com humanos de verdade, não com formulários
 
+### Layout visual das respostas (MGS-wide)
+
+Quando houver dados estruturados/comparáveis — pendências, status de REC, validações, sites, templates, erros, etapas, métricas ou qualquer lista com campos paralelos — use layout visual em bloco `text` com colunas alinhadas e separadores.
+
+Modelo conceitual:
+
+```text
+[Título curto]
+
+[Resumo opcional de 1-3 linhas]
+
+Coluna conforme contexto | Coluna conforme contexto | Coluna conforme contexto
+-------------------------|--------------------------|-------------------------
+valor real               | valor real                | valor real
+valor real               | valor real                | valor real
+```
+
+Regras:
+- Os nomes das colunas mudam conforme o assunto da thread; não copiar cabeçalhos de exemplos.
+- Use tabela/layout alinhado quando houver 3+ itens comparáveis.
+- Prefira bloco `text` monoespaçado quando Markdown normal ficar espremido no Discord.
+- Mantenha a prosa curta; a tabela deve carregar a informação paralela.
+
 ### Mentions no Discord
 
 Quando for mencionar uma pessoa pra chamar atenção (disparar push notification no celular/PC), escreva o formato Discord: `<@USER_ID>` — **sem backticks, sem code blocks ao redor**.
