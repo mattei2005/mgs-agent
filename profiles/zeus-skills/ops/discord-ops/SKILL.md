@@ -336,11 +336,23 @@ Issue upstream: https://github.com/NousResearch/hermes-agent/issues/14905
 
 ---
 
-## SEÇÃO F — Threads: Ciclo de Vida e Tokens
+## SEÇÃO F — Threads: Ciclo de Vida, Tokens e Leitura de Histórico
 
 Ver `references/discord-threads-lifecycle.md` para referência completa.
 
 **Resumo executivo:** threads arquivadas = zero tokens. Tokens só correm quando chega mensagem nova. Histórico preservado indefinidamente (sem auto-delete). Canal Zeus: archive em 24h.
+
+### Leitura sob demanda de threads antigas
+
+Quando Rodolfo perguntar se Zeus consegue ler threads antigas, responder com precisão: Zeus não lê automaticamente qualquer thread antiga pelo contexto ativo. A solução operacional é importar uma thread específica por link/ID via Discord API em modo read-only.
+
+Referência e playbook: `references/discord-thread-importer.md`.
+
+Fluxo padrão:
+1. Rodolfo fornece link Discord ou thread/channel ID.
+2. Rodar `/root/mgs-agent/scripts/import-discord-thread.py '<link-ou-id>'`.
+3. Ler `/root/mgs-agent/data/discord-thread-imports/<thread_id>.md` para responder.
+4. Manter `data/discord-thread-imports/` local-only no `.gitignore`; não versionar históricos importados.
 
 ---
 
