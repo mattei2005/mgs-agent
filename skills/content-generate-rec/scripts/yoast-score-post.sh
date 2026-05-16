@@ -93,41 +93,50 @@ sudo -u runcloud wp --path="\$WP_PATH" db query \
 
 echo "WPCLI_DONE"
 REMOTE
-chmod +x /tmp/yoast_update_${POST_ID}.sh
+chmod +x "${TMP_DIR}/yoast_update_${POST_ID}.sh"
 
 # SCP
-cat > /tmp/_scp_y${POST_ID}.exp << EOFEXP
+cat > "${TMP_DIR}/scp_y${POST_ID}.exp" << 'EOFEXP'
 #!/usr/bin/expect -f
-set s03 [lindex \$argv 0]; set s01 [lindex \$argv 1]; set timeout 30
-spawn scp -o StrictHostKeyChecking=no -J zeus@46.4.95.117 /tmp/yoast_update_${POST_ID}.sh zeus@162.55.28.178:/tmp/yoast_update_${POST_ID}.sh
-expect "46.4.95.117's password:"; send "\$s03\r"
-expect "162.55.28.178's password:"; send "\$s01\r"
+set s03 [lindex $argv 0]
+set s01 [lindex $argv 1]
+set local_script [lindex $argv 2]
+set remote_script [lindex $argv 3]
+set ssh_opts [lindex $argv 4]
+set timeout 30
+spawn sh -c "scp $ssh_opts -J zeus@46.4.95.117 \"$local_script\" zeus@162.55.28.178:\"$remote_script\""
+expect "46.4.95.117's password:"; send "$s03\r"
+expect "162.55.28.178's password:"; send "$s01\r"
 expect { "100%" { exp_continue } eof {} }
 EOFEXP
-chmod +x /tmp/_scp_y${POST_ID}.exp
-/tmp/_scp_y${POST_ID}.exp "$S03_PASS" "$S01_PASS" > /dev/null 2>&1
+chmod +x "${TMP_DIR}/scp_y${POST_ID}.exp"
+"${TMP_DIR}/scp_y${POST_ID}.exp" "$S03_PASS" "$S01_PASS" "${TMP_DIR}/yoast_update_${POST_ID}.sh" "$REMOTE_SCRIPT" "$SSH_OPTS" > /dev/null 2>&1
 
 # SSH execute
-cat > /tmp/_ssh_y${POST_ID}.exp << EOFEXP
+cat > "${TMP_DIR}/ssh_y${POST_ID}.exp" << 'EOFEXP'
 #!/usr/bin/expect -f
-set s03 [lindex \$argv 0]; set s01 [lindex \$argv 1]; set timeout 90
-spawn ssh -o StrictHostKeyChecking=no -J zeus@46.4.95.117 zeus@162.55.28.178
-expect "46.4.95.117's password:"; send "\$s03\r"
-expect "162.55.28.178's password:"; send "\$s01\r"
+set s03 [lindex $argv 0]
+set s01 [lindex $argv 1]
+set remote_script [lindex $argv 2]
+set ssh_opts [lindex $argv 3]
+set timeout 90
+spawn sh -c "ssh $ssh_opts -J zeus@46.4.95.117 zeus@162.55.28.178"
+expect "46.4.95.117's password:"; send "$s03\r"
+expect "162.55.28.178's password:"; send "$s01\r"
 expect "Made with"
 sleep 3
-send "bash /tmp/yoast_update_${POST_ID}.sh\n"
+send "bash $remote_script; rm -f $remote_script\n"
 sleep 25
 send "exit\r"
 expect eof
 EOFEXP
-chmod +x /tmp/_ssh_y${POST_ID}.exp
-SSH_OUT=$(/tmp/_ssh_y${POST_ID}.exp "$S03_PASS" "$S01_PASS" 2>/dev/null)
+chmod +x "${TMP_DIR}/ssh_y${POST_ID}.exp"
+SSH_OUT=$("${TMP_DIR}/ssh_y${POST_ID}.exp" "$S03_PASS" "$S01_PASS" "$REMOTE_SCRIPT" "$SSH_OPTS" 2>/dev/null)
 
 # ── Step 3: Verify — parse SSH_OUT for indexable row ───────────────────────────
 # Note: _yoast_wpseo_linkdex / content_score are NOT exposed via REST (not in
 # register_post_meta in v4 by design). Verification is done via SSH/DB output.
-cat > /tmp/_parse_idx_$$.py << 'PYEOF'
+cat > "${TMP_DIR}/parse_idx.py" << 'PYEOF'
 import sys, re, os
 pid = os.environ.get("PARSE_ID","")
 data = sys.stdin.read()
