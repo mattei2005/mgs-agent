@@ -460,6 +460,35 @@ def public_verify(url: str) -> Dict[str, Any]:
         return {"http_status": 0, "error": str(e)}
 
 
+def cleanup_extra_media(site_key: str, created_media: List[Dict[str, Any]], post_id: Optional[int], used_media_ids: List[int]) -> Dict[str, Any]:
+    """Delete only media created in this runner execution and not used by the final post.
+
+    This is intentionally conservative: the runner can only auto-delete items it
+    uploaded itself during the current run. The shell helper performs the final
+    WordPress-side safety gates (featured_media/content references/parent post).
+    """
+    used = {int(x) for x in used_media_ids if x}
+    extras = [m for m in created_media if m.get("id") and int(m["id"]) not in used]
+    results: List[Dict[str, Any]] = []
+    for media in extras:
+        try:
+            cmd = [str(WP_SCRIPTS / "delete-media-safe.sh"), site_key, str(media["id"])]
+            if post_id:
+                cmd.append(str(post_id))
+            res = run_json(cmd, timeout=90, allow_fail=True)
+            res["role"] = media.get("role")
+            results.append(res)
+        except Exception as e:
+            results.append({"status": "error", "media_id": media.get("id"), "role": media.get("role"), "reason": str(e)})
+    return {
+        "created_count": len(created_media),
+        "used_count": len([m for m in created_media if m.get("id") and int(m["id"]) in used]),
+        "extra_count": len(extras),
+        "deleted_count": len([r for r in results if r.get("status") == "deleted"]),
+        "items": results,
+    }
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Run deterministic MGS REC pipeline")
     ap.add_argument("--site", required=True)
@@ -480,6 +509,8 @@ def main() -> int:
     steps: List[str] = []
     costs = {"article_api": 0.0, "extract_llm_est": 0.0, "featured_image_est": 0.03, "total_est": 0.0}
     timings: Dict[str, float] = {}
+    created_media: List[Dict[str, Any]] = []
+    artifact_audit: Dict[str, Any] = {"created_count": 0, "used_count": 0, "extra_count": 0, "deleted_count": 0, "items": []}
 
     def tick(name: str, t0: float) -> None:
         timings[name] = round(time.time() - t0, 2)
