@@ -1,6 +1,6 @@
 # Crons MGS — Control Plane
 
-Gerado em: `2026-05-16T01:40:59-04:00`  
+Gerado em: `2026-05-16T01:42:03-04:00`  
 Fonte: `root crontab + script/log stat, read-only`  
 Total MGS ativo no root crontab: **17**
 
@@ -11,19 +11,19 @@ Frequência   | Script                         | Owner          | Risco         
 ------------ | ------------------------------ | -------------- | --------------------------------------- | ----- | ------------------------------------------------------------------------------------------------
 */5 * * * *  | sync-souls.sh                  | Zeus/Infra     | baixo                                   | sim   | 2026-05-16T01:40:08-04:00 synced atena skills/devops
 */15 * * * * | monitor-auto-push.sh           | Zeus/Infra     | baixo                                   | sim   | [2026-05-16T01:30:02-04:00] monitor-auto-push: Concluído. consecutive_failures=0 last_ok=8afedaf
-0 10 * * *   | monitor-yoast-health-eggbev.sh | Atena/Conteúdo | baixo                                   | não   | (sem log útil ainda)
+0 10 * * *   | monitor-yoast-health-eggbev.sh | Atena/Conteúdo | baixo                                   | sim   | (sem log útil ainda)
 */15 * * * * | check-pending-reports.sh       | Zeus/Infra     | baixo                                   | sim   | [2026-05-16 01:30:01] check-pending-reports.sh concluído
 */5 * * * *  | monitor-service-restarts.sh    | Zeus/Infra     | baixo                                   | sim   | 2026-05-16T01:40:19-04:00 [monitor-service-restarts] OK
-0 12 * * *   | monitor-anthropic-cost.sh      | Zeus/Infra     | baixo                                   | não   | (sem log útil ainda)
+0 12 * * *   | monitor-anthropic-cost.sh      | Zeus/Infra     | baixo                                   | sim   | (sem log útil ainda)
 */5 * * * *  | monitor-tool-loops.sh          | Zeus/Infra     | baixo                                   | sim   | Loop detector: 0 alertas enviados
-0 5 * * *    | infra-discovery.sh             | Zeus/Infra     | médio: sobrescreve infra-inventory.json | não   | (sem log útil ainda)
-0 8 * * *    | monitor-hermes-updates.sh      | Zeus/Infra     | baixo                                   | não   | (sem log útil ainda)
+0 5 * * *    | infra-discovery.sh             | Zeus/Infra     | médio: sobrescreve infra-inventory.json | sim   | [01:41:22] === infra-discovery.sh DONE ===
+0 8 * * *    | monitor-hermes-updates.sh      | Zeus/Infra     | baixo                                   | sim   | (sem log útil ainda)
 */15 * * * * | track-article-cost.sh          | Atena/Conteúdo | baixo/médio: escreve SQLite local       | sim   | [2026-05-16T01:30:01-0400] Mode: ALL pending
-0 4 * * *    | cleanup-discord-threads.sh     | Zeus/Infra     | alto: deleta threads arquivadas antigas | não   | (sem log útil ainda)
+0 4 * * *    | cleanup-discord-threads.sh     | Zeus/Infra     | alto: deleta threads arquivadas antigas | sim   | (sem log útil ainda)
 0 * * * *    | cleanup-zombie-sessions.sh     | Zeus/Infra     | médio: fecha sessões Hermes inativas    | sim   | (sem log útil ainda)
-0 3 * * *    | housekeeping-bak-cleanup.sh    | Zeus/Infra     | alto: deleta arquivos .bak antigos      | não   | (sem log útil ainda)
-0 8 * * *    | pendencia-render-md.sh         | Zeus/Ops       | baixo: re-renderiza docs/PENDENCIAS.md  | não   | (sem log útil ainda)
-0 * * * *    | chat-log.sh                    | Zeus/Ops       | baixo: re-renderiza índice              | não   | 2 sessões indexadas
+0 3 * * *    | housekeeping-bak-cleanup.sh    | Zeus/Infra     | alto: deleta arquivos .bak antigos      | sim   | (sem log útil ainda)
+0 8 * * *    | pendencia-render-md.sh         | Zeus/Ops       | baixo: re-renderiza docs/PENDENCIAS.md  | sim   | (sem log útil ainda)
+0 * * * *    | chat-log.sh                    | Zeus/Ops       | baixo: re-renderiza índice              | sim   | 2 sessões indexadas
 */15 * * * * | sync-codex-oauth.sh            | Zeus/Infra     | médio: atualiza auth.json dos profiles  | sim   | [2026-05-16T05:30:01Z] done: all profiles in sync, nothing to do
 10 8 * * *   | cron-control-plane.py          | Zeus/Ops       | baixo: re-renderiza docs/CRONS.md       | sim   | (sem log útil ainda)
 ```
@@ -32,7 +32,7 @@ Frequência   | Script                         | Owner          | Risco         
 
 - Alto risco: `cleanup-discord-threads.sh`, `housekeeping-bak-cleanup.sh`
 - Médio risco: `infra-discovery.sh`, `cleanup-zombie-sessions.sh`, `sync-codex-oauth.sh`
-- Crons sem `flock`: `monitor-yoast-health-eggbev.sh`, `monitor-anthropic-cost.sh`, `infra-discovery.sh`, `monitor-hermes-updates.sh`, `cleanup-discord-threads.sh`, `housekeeping-bak-cleanup.sh`, `pendencia-render-md.sh`, `chat-log.sh`
+- Crons sem `flock`: nenhum
 
 ## Detalhes por cron
 
@@ -59,7 +59,7 @@ Frequência   | Script                         | Owner          | Risco         
 - **Owner:** Atena/Conteúdo
 - **Risco:** baixo
 - **Função:** Monitora saúde Yoast do eggbev: SEO + Readability com baseline, semanal e alerta por degradação.
-- **Comando:** `/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-health-eggbev.log 2>&1`
+- **Comando:** `flock -n /var/lock/monitor_yoast_health_eggbev.lock /root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-health-eggbev.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-yoast-health-eggbev.log`
 - **Último log:** 2026-05-16T00:00:02-04:00 (0 bytes)
 
@@ -86,7 +86,7 @@ Frequência   | Script                         | Owner          | Risco         
 - **Owner:** Zeus/Infra
 - **Risco:** baixo
 - **Função:** Calcula custo hipotético GPT-5.5/OAuth dos agentes; OAuth não gera custo real por token.
-- **Comando:** `/root/mgs-agent/scripts/monitor-anthropic-cost.sh >> /root/mgs-agent/logs/monitor-anthropic-cost.log 2>&1`
+- **Comando:** `flock -n /var/lock/monitor_anthropic_cost.lock /root/mgs-agent/scripts/monitor-anthropic-cost.sh >> /root/mgs-agent/logs/monitor-anthropic-cost.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-anthropic-cost.log`
 - **Último log:** 2026-05-16T00:00:02-04:00 (0 bytes)
 
@@ -104,16 +104,16 @@ Frequência   | Script                         | Owner          | Risco         
 - **Owner:** Zeus/Infra
 - **Risco:** médio: sobrescreve infra-inventory.json
 - **Função:** Regenera data/infra-inventory.json a partir do estado real do sistema.
-- **Comando:** `/root/mgs-agent/scripts/infra-discovery.sh >> /root/mgs-agent/logs/infra-discovery.log 2>&1`
+- **Comando:** `flock -n /var/lock/infra_discovery.lock /root/mgs-agent/scripts/infra-discovery.sh >> /root/mgs-agent/logs/infra-discovery.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/infra-discovery.log`
-- **Último log:** 2026-05-16T00:00:02-04:00 (0 bytes)
+- **Último log:** 2026-05-16T01:41:22-04:00 (568 bytes)
 
 ### `monitor-hermes-updates.sh`
 - **Frequência:** `0 8 * * *`
 - **Owner:** Zeus/Infra
 - **Risco:** baixo
 - **Função:** Verifica updates upstream do Hermes Agent e alerta quando há nova versão.
-- **Comando:** `/root/mgs-agent/scripts/monitor-hermes-updates.sh >> /root/mgs-agent/logs/monitor-hermes-updates.log 2>&1`
+- **Comando:** `flock -n /var/lock/monitor_hermes_updates.lock /root/mgs-agent/scripts/monitor-hermes-updates.sh >> /root/mgs-agent/logs/monitor-hermes-updates.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-hermes-updates.log`
 - **Último log:** 2026-05-16T00:00:02-04:00 (0 bytes)
 
@@ -131,7 +131,7 @@ Frequência   | Script                         | Owner          | Risco         
 - **Owner:** Zeus/Infra
 - **Risco:** alto: deleta threads arquivadas antigas
 - **Função:** Limpa threads Discord arquivadas antigas nos canais da categoria Agents.
-- **Comando:** `/root/mgs-agent/scripts/cleanup-discord-threads.sh >> /root/mgs-agent/logs/cleanup-discord-threads-cron.log 2>&1`
+- **Comando:** `flock -n /var/lock/cleanup_discord_threads.lock /root/mgs-agent/scripts/cleanup-discord-threads.sh >> /root/mgs-agent/logs/cleanup-discord-threads-cron.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/cleanup-discord-threads-cron.log`
 - **Último log:** 2026-05-16T00:00:02-04:00 (0 bytes)
 
@@ -149,7 +149,7 @@ Frequência   | Script                         | Owner          | Risco         
 - **Owner:** Zeus/Infra
 - **Risco:** alto: deleta arquivos .bak antigos
 - **Função:** Remove arquivos .bak antigos com retenção padrão de 15 dias e reporta resumo.
-- **Comando:** `/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh >> /root/mgs-agent/logs/housekeeping-cron.log 2>&1`
+- **Comando:** `flock -n /var/lock/housekeeping_bak_cleanup.lock /root/mgs-agent/scripts/housekeeping-bak-cleanup.sh >> /root/mgs-agent/logs/housekeeping-cron.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/housekeeping-cron.log`
 - **Último log:** 2026-05-16T00:00:02-04:00 (0 bytes)
 
@@ -158,7 +158,7 @@ Frequência   | Script                         | Owner          | Risco         
 - **Owner:** Zeus/Ops
 - **Risco:** baixo: re-renderiza docs/PENDENCIAS.md
 - **Função:** Renderiza docs/PENDENCIAS.md a partir de data/pendencias.db.json.
-- **Comando:** `/root/mgs-agent/scripts/pendencia-render-md.sh >> /root/mgs-agent/logs/pendencia-render.log 2>&1`
+- **Comando:** `flock -n /var/lock/pendencia_render_md.lock /root/mgs-agent/scripts/pendencia-render-md.sh >> /root/mgs-agent/logs/pendencia-render.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/pendencia-render.log`
 - **Último log:** 2026-05-16T00:00:02-04:00 (0 bytes)
 
@@ -167,7 +167,7 @@ Frequência   | Script                         | Owner          | Risco         
 - **Owner:** Zeus/Ops
 - **Risco:** baixo: re-renderiza índice
 - **Função:** Mantém índice Markdown de data/chat-logs/INDEX.md.
-- **Comando:** `/root/mgs-agent/scripts/chat-log.sh --rebuild-index >> /root/mgs-agent/logs/chat-log-rebuild.log 2>&1`
+- **Comando:** `flock -n /var/lock/chat_log_rebuild.lock /root/mgs-agent/scripts/chat-log.sh --rebuild-index >> /root/mgs-agent/logs/chat-log-rebuild.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/chat-log-rebuild.log`
 - **Último log:** 2026-05-16T01:00:01-04:00 (86 bytes)
 
