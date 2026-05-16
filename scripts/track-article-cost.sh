@@ -195,6 +195,9 @@ echo "$PUBLICATIONS" | grep "create-post OK" | while IFS= read -r LINE; do
   # === Insert into SQLite ===
   CALCULATED_AT=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
 
+  TOPIC_SQL=$(sed "s/'/''/g" <<< "$TOPIC")
+  EXCERPT_SQL=$(sed "s/'/''/g" <<< "$EXCERPT")
+
   sqlite3 "$DB" <<EOF
 INSERT OR REPLACE INTO article_publications (
   post_id, site, topic, session_id,
@@ -204,12 +207,12 @@ INSERT OR REPLACE INTO article_publications (
   cost_usd_estimated, cost_calc_method, cost_calculated_at,
   raw_log_excerpt
 ) VALUES (
-  $POST_ID, '$SITE', '$(echo "$TOPIC" | sed "s/'/''/g")', '$SESSION_ID',
+  $POST_ID, '$SITE', '$TOPIC_SQL', '$SESSION_ID',
   '$STARTED_AT_UTC', '$ENDED_AT_UTC', $DURATION_SEC,
   $API_CALLS, $RESPONSE_CHARS,
   $EST_INPUT, 0, 0, $EST_OUTPUT,
   $COST, '$METHOD', '$CALCULATED_AT',
-  '$(echo "$EXCERPT" | sed "s/'/''/g")'
+  '$EXCERPT_SQL'
 );
 EOF
   log "  ✅  Saved post_id=$POST_ID cost=\$$COST (simulated — OAuth, no real charge)"
