@@ -121,11 +121,11 @@ fi
 TITLE="GPT-5.5 OAuth — volume 24h"
 
 if [ "$COST_INT" -ge "$THRESHOLD_ALERT" ]; then
-  SUMMARY="🔴 ALERTA — custo simulado \\$${COST}"
+  SUMMARY="🔴 ALERTA — custo simulado \$${COST}"
 elif [ "$COST_INT" -ge "$THRESHOLD_WARN" ]; then
-  SUMMARY="🟡 WARN — custo simulado \\$${COST}"
+  SUMMARY="🟡 WARN — custo simulado \$${COST}"
 else
-  SUMMARY="🟢 OK — custo simulado \\$${COST}"
+  SUMMARY="🟢 OK — custo simulado \$${COST}"
 fi
 
 if [ -n "$MENTION" ]; then
@@ -139,8 +139,8 @@ PAYLOAD=$(jq -n \
   --arg t "$TITLE" \
   --arg s "$SUMMARY" \
   --arg status "$STATUS" \
-  --arg real "\\$0.00 — OAuth incluso na assinatura" \
-  --arg simulated "\\$${COST} — se fosse pay-per-token" \
+  --arg real "\$0.00 — OAuth incluso na assinatura" \
+  --arg simulated "\$${COST} — se fosse pay-per-token" \
   --arg calls "${TOTAL_CALLS} total | Zeus ${ZEUS_CALLS} | Atena ${ATENA_CALLS}" \
   --arg tokens "~${TOTAL_INPUT_K}K input | ~${TOTAL_OUTPUT_K}K output" \
   --arg pricing "GPT-5.5 \\$${PRICE_INPUT}/\\$${PRICE_OUTPUT} por 1M — estimativa" \
