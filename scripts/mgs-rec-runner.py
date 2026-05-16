@@ -781,6 +781,10 @@ def main() -> int:
                 warnings.append(f"public_verify_not_200: {public_check}")
             steps.append("public_verified")
 
+            artifact_audit = cleanup_extra_media(args.site, created_media, post_id, [card_id or 0, featured_id or 0])
+            if artifact_audit.get("extra_count"):
+                steps.append("extra_media_cleanup_checked")
+
         costs["total_est"] = round(costs["article_api"] + costs["extract_llm_est"] + (0 if args.dry_run else costs["featured_image_est"]), 6)
         result = {
             "success": True,
