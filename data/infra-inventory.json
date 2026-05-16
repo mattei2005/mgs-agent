@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-16T01:41:19-04:00",
+    "updated_at": "2026-05-16T01:42:14-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -26,7 +26,7 @@
       "entry": "*/15 * * * * flock -n /var/lock/monitor_auto_push.lock /root/mgs-agent/scripts/monitor-auto-push.sh >> /root/mgs-agent/logs/monitor-auto-push.log 2>&1"
     },
     {
-      "entry": "0 10 * * * /root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-health-eggbev.log 2>&1"
+      "entry": "0 10 * * * flock -n /var/lock/monitor_yoast_health_eggbev.lock /root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-health-eggbev.log 2>&1"
     },
     {
       "entry": "*/15 * * * * flock -n /var/lock/check_pending_reports.lock /root/mgs-agent/scripts/check-pending-reports.sh >> /root/mgs-agent/logs/check-pending-reports.log 2>&1"
@@ -35,34 +35,34 @@
       "entry": "*/5 * * * * flock -n /var/lock/monitor_service_restarts.lock /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1"
     },
     {
-      "entry": "0 12 * * * /root/mgs-agent/scripts/monitor-anthropic-cost.sh >> /root/mgs-agent/logs/monitor-anthropic-cost.log 2>&1"
+      "entry": "0 12 * * * flock -n /var/lock/monitor_anthropic_cost.lock /root/mgs-agent/scripts/monitor-anthropic-cost.sh >> /root/mgs-agent/logs/monitor-anthropic-cost.log 2>&1"
     },
     {
       "entry": "*/5 * * * * flock -n /var/lock/monitor_tool_loops.lock /root/mgs-agent/scripts/monitor-tool-loops.sh >> /root/mgs-agent/logs/monitor-tool-loops.log 2>&1"
     },
     {
-      "entry": "0 5 * * * /root/mgs-agent/scripts/infra-discovery.sh >> /root/mgs-agent/logs/infra-discovery.log 2>&1"
+      "entry": "0 5 * * * flock -n /var/lock/infra_discovery.lock /root/mgs-agent/scripts/infra-discovery.sh >> /root/mgs-agent/logs/infra-discovery.log 2>&1"
     },
     {
-      "entry": "0 8 * * * /root/mgs-agent/scripts/monitor-hermes-updates.sh >> /root/mgs-agent/logs/monitor-hermes-updates.log 2>&1"
+      "entry": "0 8 * * * flock -n /var/lock/monitor_hermes_updates.lock /root/mgs-agent/scripts/monitor-hermes-updates.sh >> /root/mgs-agent/logs/monitor-hermes-updates.log 2>&1"
     },
     {
       "entry": "*/15 * * * * flock -n /var/lock/track_article_cost.lock /root/mgs-agent/scripts/track-article-cost.sh >> /root/mgs-agent/logs/track-article-cost-cron.log 2>&1"
     },
     {
-      "entry": "0 4 * * * /root/mgs-agent/scripts/cleanup-discord-threads.sh >> /root/mgs-agent/logs/cleanup-discord-threads-cron.log 2>&1"
+      "entry": "0 4 * * * flock -n /var/lock/cleanup_discord_threads.lock /root/mgs-agent/scripts/cleanup-discord-threads.sh >> /root/mgs-agent/logs/cleanup-discord-threads-cron.log 2>&1"
     },
     {
       "entry": "0 * * * * flock -n /var/lock/cleanup_zombie_sessions.lock /root/mgs-agent/scripts/cleanup-zombie-sessions.sh"
     },
     {
-      "entry": "0 3 * * * /root/mgs-agent/scripts/housekeeping-bak-cleanup.sh >> /root/mgs-agent/logs/housekeeping-cron.log 2>&1"
+      "entry": "0 3 * * * flock -n /var/lock/housekeeping_bak_cleanup.lock /root/mgs-agent/scripts/housekeeping-bak-cleanup.sh >> /root/mgs-agent/logs/housekeeping-cron.log 2>&1"
     },
     {
-      "entry": "0 8 * * * /root/mgs-agent/scripts/pendencia-render-md.sh >> /root/mgs-agent/logs/pendencia-render.log 2>&1"
+      "entry": "0 8 * * * flock -n /var/lock/pendencia_render_md.lock /root/mgs-agent/scripts/pendencia-render-md.sh >> /root/mgs-agent/logs/pendencia-render.log 2>&1"
     },
     {
-      "entry": "0 * * * * /root/mgs-agent/scripts/chat-log.sh --rebuild-index >> /root/mgs-agent/logs/chat-log-rebuild.log 2>&1"
+      "entry": "0 * * * * flock -n /var/lock/chat_log_rebuild.lock /root/mgs-agent/scripts/chat-log.sh --rebuild-index >> /root/mgs-agent/logs/chat-log-rebuild.log 2>&1"
     },
     {
       "entry": "*/15 * * * * flock -n /var/lock/sync_codex_oauth.lock /root/mgs-agent/scripts/sync-codex-oauth.sh >> /root/mgs-agent/logs/sync-codex-oauth.log 2>&1"
@@ -1208,9 +1208,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 44018,
-      "md5": "e0a8e0184a0c3e609316a9e774eab3a7",
-      "modified_at": "2026-05-15T05:00:04-04:00"
+      "size_bytes": 45084,
+      "md5": "4d92e23efc8645e8a4b9dcdd319f272e",
+      "modified_at": "2026-05-16T01:41:21-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
