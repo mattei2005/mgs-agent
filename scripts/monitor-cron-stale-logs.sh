@@ -103,10 +103,37 @@ def get_webhook():
     return out if out.startswith('https://') else ''
 
 
-def post_discord(webhook, content):
-    data = json.dumps({'content': content}).encode()
+def post_discord(webhook, payload):
+    data = json.dumps(payload, ensure_ascii=False).encode()
     req = urllib.request.Request(webhook, data=data, method='POST', headers={'Content-Type': 'application/json', 'User-Agent': 'Hermes-Agent (MGS cron stale monitor)'})
     urllib.request.urlopen(req, timeout=10).read()
+
+
+def cron_stale_payload(script, detail):
+    return {
+        'content': f'{MENTION} alerta de cron stale',
+        'embeds': [{
+            'title': 'Cron sem log recente',
+            'color': 15158332,
+            'fields': [
+                {'name': 'Script', 'value': f'`{script}`', 'inline': True},
+                {'name': 'Estado', 'value': 'STALE', 'inline': True},
+                {'name': 'Ação', 'value': 'Verificar cron, script e log.', 'inline': False},
+                {'name': 'Detalhe técnico', 'value': f'```text\n{detail}\n```', 'inline': False},
+            ],
+        }],
+    }
+
+
+def cron_resolved_payload(script):
+    return {
+        'content': '',
+        'embeds': [{
+            'title': 'Cron recuperado',
+            'description': f'`{script}` voltou a atualizar log.',
+            'color': 3066993,
+        }],
+    }
 
 state = load_state()
 state.setdefault('alerts', {})
@@ -165,7 +192,7 @@ for script, detail, last in problems:
     if not webhook:
         webhook = get_webhook()
     if webhook:
-        post_discord(webhook, f'🚨 [INFRA] [CRON-STALE] {MENTION}\n`{script}` está sem log recente.\n{detail}\nAção: verificar cron/script/log.')
+        post_discord(webhook, cron_stale_payload(script, detail))
         alerts_sent += 1
 
 for script, prev in resolved:
