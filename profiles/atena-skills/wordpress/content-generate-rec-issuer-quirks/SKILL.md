@@ -35,13 +35,16 @@ https://www.americanexpress.com/en-gb/sitemap/personal.html
 ```
 This lists all active personal cards with real URLs.
 
-**Known real URLs (as of Apr 2026):**
+**Known real URLs:**
 | Card | URL path |
 |------|----------|
 | BA Premium Plus | `/en-gb/credit-cards/ba-premium-plus-credit-card/` |
 | Platinum Card | `/en-gb/credit-cards/the-platinum-card/` |
 | Gold Card | `/en-gb/credit-cards/american-express-gold-card/` |
 | Preferred Rewards Gold | `/en-gb/credit-cards/preferred-rewards-gold-credit-card/` |
+| Platinum Cashback Everyday / Amex Cashback Everyday | `/en-gb/credit-cards/platinum-cashback-everyday-credit-card/` |
+
+**Naming pitfall:** Users may request “Amex Cashback Everyday Credit Card”, while the official page breadcrumb/title may say “Platinum Cashback Everyday Credit Card” and H1 may render “Amex® Cashback Everyday Credit Card”. Treat these as the same UK product only after confirming the official page text says “full name: Platinum Cashback Everyday Credit Card” or equivalent.
 
 ### Card Image CDN
 Amex hosts card images at a predictable CDN path:
@@ -52,9 +55,15 @@ Example:
 ```
 https://icm.aexp-static.com/Internet/internationalcardshop/en_gb/images/cards/UK_AXP_British_Airways_American_Express_Premium_Plus_Card.png
 ```
-- Images are 480×304px RGBA PNG — landscape orientation, no white borders.
+Known CDN images:
+| Card | CDN image |
+|------|-----------|
+| Platinum Cashback Everyday / Amex Cashback Everyday | `https://icm.aexp-static.com/Internet/internationalcardshop/en_gb/images/cards/UK_AXP_Platinum_Cashback_Everyday_Credit_Card.png` |
+| Platinum Cashback | `https://icm.aexp-static.com/Internet/internationalcardshop/en_gb/images/cards/UK_AXP_Platinum_Cashback_Credit_Card.png` |
+
+- Images are typically 480×304px RGBA PNG — landscape orientation, no white borders.
 - Download with `Referer: https://www.americanexpress.com/`
-- `search-card-image.sh` will return `NEEDS_MANUAL` for Amex (page has no direct `<img>` tags parseable by the script). Skip the script and download CDN image directly via curl.
+- `search-card-image.sh` may return `NEEDS_MANUAL` for Amex (page has no direct `<img>` tags parseable by the script). Prefer the CDN image pattern/direct known URL before Bing fallback.
 
 ### When `search-card-image.sh` returns `NEEDS_MANUAL` for Amex
 1. Try the CDN URL pattern above (construct from card name)
