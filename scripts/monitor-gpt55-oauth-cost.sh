@@ -143,7 +143,7 @@ PAYLOAD=$(jq -n \
   --arg simulated "\$${COST} — se fosse pay-per-token" \
   --arg calls "${TOTAL_CALLS} total | Zeus ${ZEUS_CALLS} | Atena ${ATENA_CALLS}" \
   --arg tokens "~${TOTAL_INPUT_K}K input | ~${TOTAL_OUTPUT_K}K output" \
-  --arg pricing "GPT-5.5 \\$${PRICE_INPUT}/\\$${PRICE_OUTPUT} por 1M — estimativa" \
+  --arg pricing "GPT-5.5 \$${PRICE_INPUT}/\$${PRICE_OUTPUT} por 1M — estimativa" \
   --arg note "Valores simulados; não representa cobrança real." \
   --argjson col "$COLOR" \
   '{
