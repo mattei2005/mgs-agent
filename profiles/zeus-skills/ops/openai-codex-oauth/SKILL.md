@@ -28,7 +28,7 @@ Rodolfo quer trocar o provider de um agente (Zeus/Atena) de Anthropic pay-per-to
 | Zeus (`profiles/zeus/`) | openai-codex | gpt-5.5 | ✅ Migrado |
 | Atena (`profiles/atena/`) | openai-codex | gpt-5.5 | ✅ Migrado |
 
-Modelos auxiliares (compressão, summarização): mantidos em `claude-haiku-4-5` — não migrar, custo é mínimo e o haiku é estável.
+Política atual de custo: Rodolfo decidiu **zero Anthropic/Claude API pay-per-token por padrão**. Não manter Haiku/Sonnet como fallback ou auxiliar sem autorização explícita; preferir GPT-5.5/OAuth, jobs script-only/no_agent, ou outro caminho sem cobrança por token.
 
 ---
 
@@ -135,9 +135,14 @@ model:
   base_url: 'https://chatgpt.com/backend-api/codex'
 ```
 
-### Passo 4 — Modelos auxiliares: MANTER haiku
+### Passo 4 — Modelos auxiliares e fallbacks: bloquear Anthropic salvo autorização explícita
 
-Os modelos auxiliares (compressão de contexto, summarização, etc.) estão configurados como `claude-haiku-4-5` em múltiplos pontos do config. **Não migrar** — o haiku é barato, estável, e não afeta custo mensal significativamente.
+Após a decisão operacional de custo, **não migrar interações principais para GPT mantendo Claude/Haiku por baixo**. Qualquer `provider: anthropic`, `claude-*`, `ANTHROPIC_API_KEY`, `api.anthropic.com` ou biblioteca `anthropic` em serviço ativo deve ser tratado como risco de custo e removido, desligado ou explicitamente aprovado por Rodolfo.
+
+Preferir:
+- `openai-codex` + `gpt-5.5` para agentes interativos;
+- `script` + `no_agent: true` para watchdog/cron determinístico;
+- nenhum fallback pay-per-token silencioso em pipelines de produção.
 
 ### Passo 5 — Reiniciar gateways
 
@@ -171,6 +176,7 @@ atena/config.yaml:  provider: openai-codex
 
 - `references/cost-monitoring-gpt-oauth.md` — abordagem de estimativa de custo pós-migração OAuth (sem Admin API)
 - `references/cron-model-pinning.md` — política MGS para pin explícito de modelo/provider em cron jobs após migração para Codex
+- `references/anthropic-api-decommission.md` — checklist para zerar Anthropic/Claude API pay-per-token em repo, serviços, logs e envs
 
 ---
 
@@ -179,14 +185,12 @@ atena/config.yaml:  provider: openai-codex
 Depois que um perfil Hermes é migrado para `openai-codex` + `gpt-5.5`, cron jobs agent-based sem override próprio de `model`/`provider` herdam esse default. Portanto:
 
 1. **Interação principal Zeus/Atena:** manter `openai-codex` + `gpt-5.5`.
-2. **Auxiliares Hermes:** manter `claude-haiku-4-5-20251001` salvo exceção explícita.
-3. **Cron agent-based:** criar/atualizar com pin explícito em Haiku:
-   - `provider: anthropic`
-   - `model: claude-haiku-4-5-20251001`
+2. **Anthropic/Claude API:** proibida por padrão por custo; usar somente com autorização explícita de Rodolfo.
+3. **Cron agent-based:** evitar se puder; se precisar de raciocínio, preferir provider/model sem cobrança por token conforme configuração vigente. Nunca deixar cron herdar `anthropic`/`claude-*` por acidente.
 4. **Cron determinístico/watchdog:** preferir `script` + `no_agent: true` para não chamar LLM.
-5. **Antes de reativar cron existente:** verificar se `model` ou `provider` estão nulos; se sim, aplicar override antes de `resume/run`.
+5. **Antes de reativar cron existente:** verificar se `model` ou `provider` estão nulos; se sim, aplicar override seguro antes de `resume/run`.
 
-Regra operacional curta: **cron novo = Haiku por padrão, salvo exceção explícita; script-only = `no_agent: true`.**
+Regra operacional curta: **zero Anthropic por padrão; cron novo = script-only/no_agent quando possível; cron com LLM precisa de provider sem pay-per-token ou aprovação explícita.**
 
 ---
 
@@ -218,6 +222,6 @@ Regra operacional curta: **cron novo = Haiku por padrão, salvo exceção explí
 
 6. **Custo no Hermes aparece como "included"** — o `usage_pricing.py` detecta `openai-codex` e retorna `billing_mode=subscription_included`. O resumo de sessão no Discord vai mostrar "custo: included" em vez de valor monetário. Normal e correto.
 
-7. **Scripts de monitoramento de custo Anthropic ficam obsoletos** — após migração, `monitor-gpt55-oauth-cost.sh` e `track-article-cost.sh` usam estimativa via api_calls, não Anthropic Admin API. Ver `references/cost-monitoring-gpt-oauth.md` para a abordagem atual.
+7. **Scripts/serviços com Anthropic devem ser caçados após migração** — após migrar para GPT/OAuth, varrer repo e runtime por `ANTHROPIC_API_KEY`, `api.anthropic.com`, `anthropic.Anthropic`, `claude-*`, `provider: anthropic`. Exemplo real: `mgs-rec-api.service` continuava ativo chamando Claude Sonnet via `api/generate-rec-api.py` mesmo depois dos agentes Zeus/Atena migrarem. Ver `references/anthropic-api-decommission.md`.
 
 8. **Cron sem pin herda o provider do perfil** — após migrar Zeus/Atena para Codex, qualquer cron agent-based com `model: null` ou `provider: null` passa a herdar `openai-codex` + `gpt-5.5`. Auditar e pinçar explicitamente em Haiku antes de reativar/rodar. Ver `references/cron-model-pinning.md`.

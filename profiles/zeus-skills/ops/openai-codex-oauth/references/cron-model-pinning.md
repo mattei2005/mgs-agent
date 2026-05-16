@@ -7,10 +7,7 @@ When a Hermes profile is migrated to `openai-codex` + `gpt-5.5`, agent-based cro
 ## MGS default policy
 
 - Keep interactive Zeus/Atena profiles on `openai-codex` + `gpt-5.5`.
-- Keep Hermes auxiliary models on `claude-haiku-4-5-20251001` unless there is a specific reason to change.
-- For agent-based cron jobs, explicitly pin:
-  - `provider: anthropic`
-  - `model: claude-haiku-4-5-20251001`
+- Do **not** default scheduled work to Anthropic/Claude/Haiku. Rodolfo's current policy is zero pay-per-token Anthropic unless explicitly approved.
 - For deterministic/watchdog cron jobs that do not need reasoning, prefer `script` + `no_agent: true` so no LLM is called.
 
 ## Audit checklist

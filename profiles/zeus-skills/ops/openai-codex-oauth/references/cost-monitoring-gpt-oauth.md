@@ -5,7 +5,7 @@
 Após migrar Zeus/Atena para GPT via OAuth ChatGPT:
 - **Custo real:** $0 por token (incluído na assinatura $100/mês)
 - **OpenAI não tem Admin API de usage** para OAuth/ChatGPT (só para API key regular)
-- **Anthropic Admin API** (`api.anthropic.com/v1/usage`) não é mais relevante
+- **Anthropic Admin API** (`api.anthropic.com/v1/usage`) não é mais relevante e não deve ser chamada sem autorização explícita de Rodolfo
 - O Hermes não expõe tokens totais no `agent.log` — só `api_calls` e `response_chars`
 
 ## Abordagem de estimativa (implementada em 2026-05-15)
