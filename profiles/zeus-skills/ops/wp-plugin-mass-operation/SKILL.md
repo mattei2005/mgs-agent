@@ -325,6 +325,8 @@ Para configuração completa da RunCloud API v3 (autenticação, paginação, in
 
 **`references/runcloud-api-ssh-setup.md`** — endpoints API, IDs de servidores, SSH key vault, Fail2Ban, firewall, sshpass, deploy em massa validado.
 
+Para manutenção segura do inventário RunCloud, ver também **`references/runcloud-inventory-hardening.md`**: paginação `meta.pagination.total_pages`, `--dry-run`/`--json`, token via 1Password sem exposição, tempfiles fora do repo, retry/backoff para 403/429/5xx e checklist de validação.
+
 ### Referência rápida
 
 - **Base URL**: `https://manage.runcloud.io/api/v3`
