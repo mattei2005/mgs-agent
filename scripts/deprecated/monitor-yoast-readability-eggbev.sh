@@ -5,8 +5,8 @@
 # Substituto ativo: /root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh
 # Motivo: monitor unificado cobre SEO + Readability.
 #
-# Segurança: o código antigo usava SSH/expect com StrictHostKeyChecking=no e
-# arquivos previsíveis em /tmp. Manter esse código executável no working tree
+# Segurança: o código antigo usava SSH/expect com host-key checking desativado
+# e arquivos previsíveis em /tmp. Manter esse código executável no working tree
 # aumentava risco sem utilidade operacional. Consultar histórico Git se for
 # necessário auditar a versão antiga.
 
