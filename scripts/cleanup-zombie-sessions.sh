@@ -70,6 +70,10 @@ done
 if [ "$DRY_RUN" -eq 1 ]; then
     echo "[$TIMESTAMP] DRY-RUN total eligible zombie sessions: $TOTAL" >> "$LOG"
     echo "DRY-RUN total eligible zombie sessions: $TOTAL"
+elif [ "$TOTAL" -eq 0 ]; then
+    # Heartbeat obrigatório: o monitor cron-stale depende do mtime do log.
+    # Sem esta linha, execuções saudáveis sem zombies viram falso positivo.
+    echo "[$TIMESTAMP] OK total closed zombie sessions: 0 (grace=${GRACE_MINUTES}min)" >> "$LOG"
 fi
 
 # Truncar log se passar 1000 linhas
