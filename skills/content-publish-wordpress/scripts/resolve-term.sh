@@ -21,7 +21,7 @@ pass=$(jq -r '.password' <<<"$creds")
 
 search=$(jq -rn --arg n "$NAME" '$n|@uri')
 tmp_list=$(mktemp)
-h_list=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp_list" -w '%{http_code}' "$wp/wp-json/wp/v2/$TAX?search=$search&per_page=100" || echo "000")
+h_list=$(wp_curl_auth_http "$tmp_list" "$user" "$pass" "$wp/wp-json/wp/v2/$TAX?search=$search&per_page=100")
 list=$(cat "$tmp_list")
 rm -f "$tmp_list"
 
@@ -49,8 +49,8 @@ fi
 
 body=$(jq -n --arg n "$NAME" '{name:$n}')
 tmp_c=$(mktemp)
-h_c=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp_c" -w '%{http_code}' -H "Content-Type: application/json" \
-  -X POST -d "$body" "$wp/wp-json/wp/v2/$TAX" || echo "000")
+h_c=$(wp_curl_auth_http "$tmp_c" "$user" "$pass" -H "Content-Type: application/json" \
+  -X POST -d "$body" "$wp/wp-json/wp/v2/$TAX")
 resp=$(cat "$tmp_c")
 rm -f "$tmp_c"
 

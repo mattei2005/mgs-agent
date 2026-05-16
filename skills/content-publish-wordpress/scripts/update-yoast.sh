@@ -22,8 +22,8 @@ pass=$(jq -r '.password' <<<"$creds")
 # PUT 1: only meta
 meta_only=$(jq '{meta: .meta}' "$YOAST_JSON")
 tmp1=$(mktemp)
-h1=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp1" -w '%{http_code}' -H "Content-Type: application/json" \
-  -X PUT -d "$meta_only" "$wp/wp-json/wp/v2/posts/$POST_ID" || echo "000")
+h1=$(wp_curl_auth_http "$tmp1" "$user" "$pass" -H "Content-Type: application/json" \
+  -X PUT -d "$meta_only" "$wp/wp-json/wp/v2/posts/$POST_ID")
 r1=$(cat "$tmp1")
 rm -f "$tmp1"
 
@@ -43,8 +43,8 @@ sleep 2
 # PUT 2: title + content + meta to trigger save_post
 full=$(jq '{title: .title, content: .content, meta: .meta}' "$YOAST_JSON")
 tmp2=$(mktemp)
-h2=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp2" -w '%{http_code}' -H "Content-Type: application/json" \
-  -X PUT -d "$full" "$wp/wp-json/wp/v2/posts/$POST_ID" || echo "000")
+h2=$(wp_curl_auth_http "$tmp2" "$user" "$pass" -H "Content-Type: application/json" \
+  -X PUT -d "$full" "$wp/wp-json/wp/v2/posts/$POST_ID")
 r2=$(cat "$tmp2")
 rm -f "$tmp2"
 
@@ -62,7 +62,7 @@ fi
 if [ -n "$VERIFY" ]; then
   sleep 1
   tmp3=$(mktemp)
-  h3=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp3" -w '%{http_code}' "$wp/wp-json/wp/v2/posts/$POST_ID?context=edit" || echo "000")
+  h3=$(wp_curl_auth_http "$tmp3" "$user" "$pass" "$wp/wp-json/wp/v2/posts/$POST_ID?context=edit")
   got=$(cat "$tmp3")
   rm -f "$tmp3"
 

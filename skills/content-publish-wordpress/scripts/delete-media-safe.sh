@@ -33,8 +33,8 @@ user=$(jq -r '.username' <<<"$creds")
 pass=$(jq -r '.password' <<<"$creds")
 
 media_tmp=$(mktemp)
-http=$(wp_curl_auth "$user" "$pass" -sS -o "$media_tmp" -w '%{http_code}' \
-  "$wp/wp-json/wp/v2/media/$MEDIA_ID?context=edit" || echo "000")
+http=$(wp_curl_auth_http "$media_tmp" "$user" "$pass" \
+  "$wp/wp-json/wp/v2/media/$MEDIA_ID?context=edit")
 media_resp=$(cat "$media_tmp")
 rm -f "$media_tmp"
 
@@ -55,8 +55,8 @@ fi
 
 if [ -n "$POST_ID" ]; then
   post_tmp=$(mktemp)
-  post_http=$(wp_curl_auth "$user" "$pass" -sS -o "$post_tmp" -w '%{http_code}' \
-    "$wp/wp-json/wp/v2/posts/$POST_ID?context=edit" || echo "000")
+  post_http=$(wp_curl_auth_http "$post_tmp" "$user" "$pass" \
+    "$wp/wp-json/wp/v2/posts/$POST_ID?context=edit")
   post_resp=$(cat "$post_tmp")
   rm -f "$post_tmp"
   if [ "${post_http:0:1}" = "2" ]; then
@@ -78,8 +78,8 @@ if [ -n "$POST_ID" ]; then
 fi
 
 del_tmp=$(mktemp)
-del_http=$(wp_curl_auth "$user" "$pass" -sS -o "$del_tmp" -w '%{http_code}' \
-  -X DELETE "$wp/wp-json/wp/v2/media/$MEDIA_ID?force=true" || echo "000")
+del_http=$(wp_curl_auth_http "$del_tmp" "$user" "$pass" \
+  -X DELETE "$wp/wp-json/wp/v2/media/$MEDIA_ID?force=true")
 del_resp=$(cat "$del_tmp")
 rm -f "$del_tmp"
 

@@ -26,11 +26,11 @@ case "${FILENAME,,}" in
 esac
 
 tmp=$(mktemp)
-http=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp" -w '%{http_code}' \
+http=$(wp_curl_auth_http "$tmp" "$user" "$pass" \
   -H "Content-Disposition: attachment; filename=\"$FILENAME\"" \
   -H "Content-Type: $mime" \
   --data-binary "@$IMAGE_PATH" \
-  "$wp/wp-json/wp/v2/media" || echo "000")
+  "$wp/wp-json/wp/v2/media")
 resp=$(cat "$tmp")
 rm -f "$tmp"
 
