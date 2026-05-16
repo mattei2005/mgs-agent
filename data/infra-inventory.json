@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-16T16:16:40-04:00",
+    "updated_at": "2026-05-16T16:55:23-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -79,8 +79,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/chat-log.sh",
-      "size_bytes": 5699,
-      "modified_at": "2026-05-03T01:10:25-04:00"
+      "size_bytes": 5710,
+      "modified_at": "2026-05-16T16:39:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/check-pending-reports.sh",
@@ -89,8 +89,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/cleanup-zombie-sessions.sh",
-      "size_bytes": 2811,
-      "modified_at": "2026-05-16T11:53:39-04:00"
+      "size_bytes": 2822,
+      "modified_at": "2026-05-16T16:39:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/cron-control-plane.py",
@@ -124,8 +124,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
-      "size_bytes": 5066,
-      "modified_at": "2026-05-16T12:15:12-04:00"
+      "size_bytes": 5084,
+      "modified_at": "2026-05-16T16:26:58-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/infra-discovery.sh",
@@ -154,13 +154,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh",
-      "size_bytes": 5492,
-      "modified_at": "2026-05-16T12:08:43-04:00"
+      "size_bytes": 5503,
+      "modified_at": "2026-05-16T16:39:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
-      "size_bytes": 7132,
-      "modified_at": "2026-05-16T12:15:58-04:00"
+      "size_bytes": 7143,
+      "modified_at": "2026-05-16T16:39:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
@@ -169,8 +169,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-tool-loops.sh",
-      "size_bytes": 7873,
-      "modified_at": "2026-05-16T12:15:12-04:00"
+      "size_bytes": 7884,
+      "modified_at": "2026-05-16T16:39:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh",
@@ -184,13 +184,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/pendencia-add.sh",
-      "size_bytes": 2748,
-      "modified_at": "2026-05-14T13:41:03-04:00"
+      "size_bytes": 2763,
+      "modified_at": "2026-05-16T16:39:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/pendencia-done.sh",
-      "size_bytes": 1680,
-      "modified_at": "2026-05-03T00:40:48-04:00"
+      "size_bytes": 1695,
+      "modified_at": "2026-05-16T16:39:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/pendencia-historico-add.sh",
@@ -199,18 +199,18 @@
     },
     {
       "path": "/root/mgs-agent/scripts/pendencia-list.sh",
-      "size_bytes": 4146,
-      "modified_at": "2026-05-03T00:40:48-04:00"
+      "size_bytes": 4157,
+      "modified_at": "2026-05-16T16:39:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/pendencia-render-md.sh",
-      "size_bytes": 4744,
-      "modified_at": "2026-05-03T00:40:49-04:00"
+      "size_bytes": 4755,
+      "modified_at": "2026-05-16T16:39:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
-      "size_bytes": 2874,
-      "modified_at": "2026-05-14T13:06:58-04:00"
+      "size_bytes": 5742,
+      "modified_at": "2026-05-16T16:53:02-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sync-codex-oauth.sh",
@@ -219,13 +219,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/sync-souls.sh",
-      "size_bytes": 2168,
-      "modified_at": "2026-04-27T23:07:40-04:00"
+      "size_bytes": 2179,
+      "modified_at": "2026-05-16T16:39:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/track-article-cost.sh",
-      "size_bytes": 8006,
-      "modified_at": "2026-05-16T15:23:02-04:00"
+      "size_bytes": 8017,
+      "modified_at": "2026-05-16T16:39:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
@@ -1211,8 +1211,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "eb6934926742cf240f00f7467d267c15",
-      "modified_at": "2026-05-16T16:15:03-04:00"
+      "md5": "8700cccd174ee52bb0aa915544907019",
+      "modified_at": "2026-05-16T16:45:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1223,8 +1223,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "265352ca44c82afd59319fcc5914ce79",
-      "modified_at": "2026-05-16T16:15:01-04:00"
+      "md5": "732670445951904b706edaf91572fdd0",
+      "modified_at": "2026-05-16T16:45:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
@@ -1234,9 +1234,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 46274,
-      "md5": "7bb4e1fbfe46da3c2eaec0d52bf88c1e",
-      "modified_at": "2026-05-16T15:30:45-04:00"
+      "size_bytes": 46272,
+      "md5": "7df11d9f6630dc133c6b686a4729986a",
+      "modified_at": "2026-05-16T16:16:42-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1278,7 +1278,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
       "md5": "15091d080ba5dc1014d9e99778910db5",
-      "modified_at": "2026-05-16T16:15:01-04:00"
+      "modified_at": "2026-05-16T16:55:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
