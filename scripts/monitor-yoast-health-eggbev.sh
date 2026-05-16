@@ -47,6 +47,7 @@ DAY_OF_WEEK="$(date +%u)"  # 1=Mon ... 7=Sun
 log() { echo "[$(date -Iseconds)] ${LOG_PREFIX}: $*"; }
 
 TMP_DIR="$(mktemp -d /tmp/yoast-health-eggbev.XXXXXX)"
+REMOTE_SCRIPT="/tmp/yoast_health_query_eggbev_$$.sh"
 chmod 700 "$TMP_DIR"
 cleanup() { rm -rf "$TMP_DIR"; }
 trap cleanup EXIT
@@ -88,7 +89,7 @@ log "Credenciais OK."
 # ── Script remoto ─────────────────────────────────────────────────────────────
 # Roda no S01 (eggbev). Busca SEO + Readability em duas queries separadas.
 # Emite "YOAST_DATA:{json}" com ambas as métricas.
-cat > ${TMP_DIR}/yoast_health_query_eggbev.sh << 'EOFREMOTE'
+cat > "${TMP_DIR}/yoast_health_query_eggbev.sh" << 'EOFREMOTE'
 #!/bin/bash
 # Executado remotamente no S01 via SSH.
 # Consulta wp_yoast_indexable para SEO e Readability.
