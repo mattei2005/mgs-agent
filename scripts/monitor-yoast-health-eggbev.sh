@@ -48,6 +48,11 @@ log() { echo "[$(date -Iseconds)] ${LOG_PREFIX}: $*"; }
 
 TMP_DIR="$(mktemp -d /tmp/yoast-health-eggbev.XXXXXX)"
 REMOTE_SCRIPT="/tmp/yoast_health_query_eggbev_$$.sh"
+KNOWN_HOSTS_FILE="/root/.ssh/known_hosts_mgs"
+SSH_OPTS="-o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=${KNOWN_HOSTS_FILE}"
+mkdir -p /root/.ssh
+touch "$KNOWN_HOSTS_FILE"
+chmod 600 "$KNOWN_HOSTS_FILE"
 chmod 700 "$TMP_DIR"
 cleanup() { rm -rf "$TMP_DIR"; }
 trap cleanup EXIT
@@ -173,10 +178,9 @@ set s03 [lindex $argv 0]
 set s01 [lindex $argv 1]
 set local_script [lindex $argv 2]
 set remote_script [lindex $argv 3]
+set ssh_opts [lindex $argv 4]
 set timeout 30
-spawn scp -o StrictHostKeyChecking=no -J zeus@46.4.95.117 \
-    $local_script \
-    zeus@162.55.28.178:$remote_script
+spawn sh -c "scp $ssh_opts -J zeus@46.4.95.117 \"$local_script\" zeus@162.55.28.178:\"$remote_script\""
 expect "46.4.95.117's password:"
 send "$s03\r"
 expect "162.55.28.178's password:"
