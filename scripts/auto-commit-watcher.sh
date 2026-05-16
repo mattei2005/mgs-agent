@@ -35,8 +35,20 @@ while inotifywait -r -e modify,create,delete,move \
   CHANGES=$(git status --porcelain | head -3 | awk '{print $2}' | tr '\n' ' ')
   CHANGES_TRIM=$(echo "$CHANGES" | cut -c1-100)
 
+  # Guardrail: nunca auto-commitar arquivo com nome sensível.
+  # Se aparecer algo suspeito, aborta esta rodada e exige revisão humana.
+  SENSITIVE_CHANGES=$(git status --porcelain | awk '{print $2}' | grep -Ei "$SENSITIVE_PATH_REGEX" || true)
+  if [ -n "$SENSITIVE_CHANGES" ]; then
+    log "BLOQUEADO: arquivo sensível detectado; commit automático abortado"
+    printf '%s\n' "$SENSITIVE_CHANGES" | while IFS= read -r f; do log "  sensitive: $f"; done
+    continue
+  fi
+
   # Add + commit (push acontece via hook 1P existente)
-  git add .
+  git add -A -- . \
+    ':!*.pem' ':!*.key' ':!*.env' ':!.env' ':!**/.env' \
+    ':!*credential*' ':!*secret*' ':!*token*' ':!*password*' \
+    ':!hosts.yml' ':!**/hosts.yml' ':!.npmrc' ':!**/.npmrc' ':!.pypirc' ':!**/.pypirc'
 
   COMMIT_MSG="auto: $CHANGES_TRIM"
 
