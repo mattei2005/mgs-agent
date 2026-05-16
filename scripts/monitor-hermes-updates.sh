@@ -158,6 +158,6 @@ if [[ "$HTTP_CODE" =~ ^2 ]]; then
       breakdown: {features: $f, fixes: $fx, breaking: $br}}' \
     > "$STATE"
 else
-  log "ERROR webhook_failed http=$HTTP_CODE response=$(cat /tmp/hermes-monitor-response.json | head -c 200)"
+  log "ERROR webhook_failed http=$HTTP_CODE response=$(head -c 200 /tmp/hermes-monitor-response.json)"
   exit 1
 fi
