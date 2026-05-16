@@ -14,8 +14,11 @@ Qualquer situação onde um processo periódico grava em log com padrão START/O
 - Alertar via Discord Webhook quando threshold atingido
 - Anti-spam (não repetir alerta a cada ciclo)
 - Mensagem de "RESOLVIDO" quando o sistema se recupera
+- Inventariar, documentar ou padronizar crons MGS existentes sem adicionar custo de LLM
 
-Exemplo validado: `monitor-auto-push.sh` para o auto-push do mgs-agent.
+Exemplos validados:
+- `monitor-auto-push.sh` para o auto-push do mgs-agent.
+- `cron-control-plane.py` para inventário vivo dos crons MGS em `docs/CRONS.md` — ver `references/cron-control-plane.md`.
 
 ---
 
@@ -476,6 +479,23 @@ Aguardo REPORT-INFRA + atualização de `infra-inventory.json`. <@14962961750142
 ## SEÇÃO D — Hardening de Monitors em Produção (checklist obrigatório)
 
 Lições da sessão de auditoria 02/05/2026 — aplicar a todo monitor novo ou existente:
+
+### 0. Cron Control Plane — inventário vivo antes de otimizar
+
+Antes de propor mudanças em crons MGS, gere/consulte o inventário vivo:
+
+```bash
+/root/mgs-agent/scripts/cron-control-plane.py --json | jq .
+/root/mgs-agent/scripts/cron-control-plane.py --write-doc
+```
+
+O documento canônico é `/root/mgs-agent/docs/CRONS.md`. Ele deve listar frequência, script, owner, risco, uso de `flock` e último sinal de log. Ver detalhes em `references/cron-control-plane.md`.
+
+Regras operacionais:
+- Fazer backup do crontab antes de qualquer edição.
+- Remover linhas comentadas `DEPRECATED` quando já houver substituto e arquivo em `scripts/deprecated/`.
+- Todo cron MGS deve usar `flock -n` para evitar execução paralela.
+- Após mudar crontab/scripts de cron, rodar `infra-discovery.sh` e registrar em `events-audit.jsonl`.
 
 ### 1. flock — Proteger contra execuções paralelas
 

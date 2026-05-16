@@ -296,11 +296,10 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   contemporary coworking, urban street with cinematic blur, city at sunset,
   nighttime metropolis).
 - Output: 16:9 JPEG at `/tmp/featured-<slug>.jpg` (auto-compressed via `compress-image.sh`: PNG 2 MB → JPEG ~150 KB, quality 88, max 1280px wide).
-- Upload via `upload-image.sh` → `{id, source_url, mime_type}` — this is the
-  **featured_media**.
-- VALIDATE: the card in the composition must be visually identical to the
-  card_media. If not, regenerate (retry up to 2x). If still broken,
-  abort with a clear message.
+- VALIDATE LOCALLY BEFORE UPLOAD: use `vision_analyze` on `/tmp/featured-<slug>.jpg` and confirm the card in the composition is visually identical to the card_media (issuer design, layout, colours, sample text placement). If not, regenerate (retry up to 2x). If still broken, abort with a clear message.
+- Only after the local vision check passes, upload via `upload-image.sh` → `{id, source_url, mime_type}` — this is the **featured_media**.
+
+> **PITFALL — do not upload failed featured generations:** Gemini can produce a professional-looking image with a generic/altered Amex-style card. Uploading before visual validation leaves orphan media in WordPress and can confuse the final summary. Validate the local `/tmp/featured-<slug>.jpg` first; upload only the approved final image.
 
 ### 4b. Theme HTML quirks (per-site)
 
