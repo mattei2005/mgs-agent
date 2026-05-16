@@ -366,7 +366,7 @@ Fluxo padrão:
 - Rodolfo pede uma “indexação”/auditoria de contexto sem mexer em providers de memória
 - Rodolfo pede validação de acesso GitHub ou varredura completa de repositório privado/público
 
-Para varredura GitHub/repo, ver `references/github-repo-audit.md`: validação segura de PAT via 1Password sem persistir credencial no remote, `GIT_ASKPASS` temporário, checklist de secrets atual+histórico, sintaxe, crons/logs, dependências e relatório executivo.
+Para varredura GitHub/repo, ver `references/github-repo-audit.md`: validação segura de PAT via 1Password sem persistir credencial no remote, `GIT_ASKPASS` temporário, checklist de secrets atual+histórico, varredura de arquivos comprimidos no histórico (`*.tar.gz` com `.env`/profiles), sintaxe, crons/logs, dependências e relatório executivo. Ao reportar achados de secrets, nunca imprimir valores; separar `current tree clean` de `history dirty`, confirmar revogação/exposição externa antes de propor reescrita destrutiva de histórico.
 
 Para hardening iterativo do `/root/mgs-agent`, ver também `references/mgs-repo-hardening-audit.md`: cobre pitfalls duráveis desta classe (`grep -c` gerando `0\n0`, guardrail contra auto-commit de segredos, detecção semântica de erro em cron fresco, SSH `accept-new` + `known_hosts_mgs`, stubs para scripts deprecated e higiene de runtime/backups versionados).
 
