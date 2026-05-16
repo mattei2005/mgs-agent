@@ -84,6 +84,18 @@ Runtime state/log snapshots should usually be ignored, not versioned:
 
 Preserve local copies when removing from Git unless Rodolfo explicitly asks for deletion.
 
+### Dependency/tooling pass without surprise upgrades
+
+After script hardening, run a final dependency/tooling pass. Keep it read-mostly and non-destructive:
+
+- enumerate package manifests first; do not assume a repo-wide package manager;
+- run `npm audit`, `npm outdated`, and `npm test` inside each actual package directory;
+- if `npm test` is the default placeholder, replace it with a deterministic syntax check rather than inventing a broad test suite;
+- do not run `npm audit fix` or major upgrades without explicit approval;
+- for legacy services that use disallowed pay-per-token providers and are already `masked`/`inactive`, replace runnable code with a fail-closed stub instead of leaving dormant credential-reading code.
+
+Detailed recipe: `references/mgs-deps-tooling-audit.md`.
+
 ## Reporting pattern
 
 For multi-step infra hardening reports to Rodolfo, end each partial report with:

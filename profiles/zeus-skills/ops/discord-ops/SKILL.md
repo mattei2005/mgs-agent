@@ -360,6 +360,8 @@ Para hardening iterativo do `/root/mgs-agent`, ver também `references/mgs-repo-
 
 Para hardening pós-auditoria do repo MGS, ver `references/mgs-repo-hardening-audit-2026-05-16.md`: cobre correções reutilizáveis de `grep -c` com `set -e`, guardrails do auto-commit watcher, detecção semântica de erro em cron logs, SSH/SCP com `accept-new` + `known_hosts_mgs`, stubs para scripts deprecated, higiene de backups/runtime e ACK imediato em botões Discord.
 
+Para a fase final de dependências/tooling, ver `references/mgs-deps-tooling-audit.md`: enumeração de manifests, `npm audit/outdated/test` sem upgrades destrutivos, conversão de API legacy Anthropic/FastAPI para stub fail-closed quando o serviço já está masked/inactive, e checklist de validação.
+
 ### Ajustes de tom/verbosity, layout visual e contexto semântico
 
 Ver `references/hermes-profile-style-context-ops.md` para o padrão validado de:

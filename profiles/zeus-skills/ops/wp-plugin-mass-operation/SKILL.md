@@ -331,7 +331,7 @@ Para manutenção segura do inventário RunCloud, ver também **`references/runc
 
 - **Base URL**: `https://manage.runcloud.io/api/v3`
 - **Auth**: `Bearer TOKEN` (via `op item get "RunCloud API - MGS" --vault "MGS Conteúdo" --fields label=runcloud_api_key_token --reveal`)
-- **Paginação**: `?perPage=40&page=N` (máx 40), campo `meta.lastPage`
+- **Paginação**: `?perPage=40&page=N` (máx 40). Preferir `meta.pagination.total_pages`; usar `meta.lastPage` só como fallback legado. A API v3 já retornou `total_pages` e ignorou tentativas de aumentar `perPage` acima do padrão em alguns endpoints.
 - **API v3 NÃO suporta escrita de arquivos** — deploy usa SSH/sshpass
 - **Usuário deploy**: `zeus` (com sudo) nos 3 servidores RunCloud, credenciais no 1Password `"Runcloud Server 0X - IP- zeus Acesso"`
 
