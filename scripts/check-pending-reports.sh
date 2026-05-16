@@ -140,7 +140,7 @@ if (( ${#PENDING_SKILLS[@]} > 0 )); then
     done
 
     # Postar no Discord
-    payload=$(python3 -c "
+    payload=$(python3 - "$ZEUS_MENTION" "$rows" "${#PENDING_SKILLS[@]}" <<'PY'
 import json, sys
 mention, rows, count = sys.argv[1], sys.argv[2], sys.argv[3]
 print(json.dumps({
@@ -155,7 +155,8 @@ print(json.dumps({
     ]
   }]
 }))
-" "$ZEUS_MENTION" "$rows" "${#PENDING_SKILLS[@]}")
+PY
+)
 
     HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
         -H "Content-Type: application/json" \
@@ -167,12 +168,19 @@ print(json.dumps({
         # Atualizar state — marcar como alerted
         for entry in "${PENDING_SKILLS[@]}"; do
             IFS='|' read -r agent skill_name skill_path skill_key <<< "$entry"
-            STATE=$(echo "$STATE" | python3 -c "
+            STATE=$(printf "%s" "$STATE" | python3 - "$skill_key" "$NOW" "$skill_name" "$agent" "$skill_path" <<'PY'
 import json, sys
+skill_key, now, skill_name, agent, skill_path = sys.argv[1:6]
 d = json.load(sys.stdin)
-d.setdefault('alerted', {})['${skill_key}'] = {'alerted_at': ${NOW}, 'skill_name': '${skill_name}', 'agent': '${agent}', 'path': '${skill_path}'}
+d.setdefault('alerted', {})[skill_key] = {
+    'alerted_at': int(now),
+    'skill_name': skill_name,
+    'agent': agent,
+    'path': skill_path,
+}
 print(json.dumps(d, indent=2))
-")
+PY
+)
         done
         echo "$STATE" > "$STATE_FILE"
     else
@@ -200,7 +208,7 @@ if (( ${#RESOLVED_SKILLS[@]} > 0 )); then
         # Buscar commit mais recente do inventário para evidência
         last_commit=$(cd "$BASE_DIR" && git log --oneline -1 -- data/infra-inventory.json 2>/dev/null | awk '{print $1}' || echo "N/A")
 
-        payload=$(python3 -c "
+        payload=$(python3 - "$skill_name" "$agent" "$last_commit" <<'PY'
 import json, sys
 skill_name, agent, last_commit = sys.argv[1:4]
 print(json.dumps({
@@ -215,20 +223,23 @@ print(json.dumps({
     ]
   }]
 }))
-" "$skill_name" "$agent" "$last_commit")
+PY
+)
 
         # Persistir remoção do state ANTES de enviar (idempotência)
-        STATE=$(echo "$STATE" | python3 -c "
+        STATE=$(printf "%s" "$STATE" | python3 - "$skill_key" "$skill_name" "$agent" <<'PY'
 import json, sys, datetime
+skill_key, skill_name, agent = sys.argv[1:4]
 d = json.load(sys.stdin)
-entry = d.get('alerted', {}).pop('${skill_key}', None)
-d.setdefault('resolved', {})['${skill_key}'] = {
+entry = d.get('alerted', {}).pop(skill_key, None)
+d.setdefault('resolved', {})[skill_key] = {
     'resolved_at': datetime.datetime.now(datetime.timezone.utc).isoformat() + 'Z',
-    'skill_name': '${skill_name}',
-    'agent': '${agent}'
+    'skill_name': skill_name,
+    'agent': agent,
 }
 print(json.dumps(d, indent=2))
-")
+PY
+)
         echo "$STATE" > "$STATE_FILE"
 
         HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
