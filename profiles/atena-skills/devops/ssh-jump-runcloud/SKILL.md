@@ -132,7 +132,7 @@ trap 'rm -rf "$TMP_DIR"' EXIT
 cat > "$TMP_DIR/scp.exp" << 'EOF'
 #!/usr/bin/expect -f
 set s03 [lindex $argv 0]; set s01 [lindex $argv 1]; set known_hosts [lindex $argv 2]; set timeout 30
-spawn scp -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=$known_hosts -J zeus@46.4.95.117 /tmp/myfile.php zeus@162.55.28.178:/tmp/myfile.php
+spawn scp -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/root/.ssh/known_hosts_mgs -J zeus@46.4.95.117 /tmp/myfile.php zeus@162.55.28.178:/tmp/myfile.php
 expect "46.4.95.117's password:"; send "$s03\r"
 expect "162.55.28.178's password:"; send "$s01\r"
 expect { "100%" { exp_continue } eof {} }
