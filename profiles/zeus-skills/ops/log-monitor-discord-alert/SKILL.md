@@ -32,10 +32,21 @@ Exemplos validados:
 | Infra crítica (auto-push, deploy) | `#mgs-alerts` (1498132022634483894) | `Discord Webhook - Alerts Infra Channel` |
 | Cobrança operacional ao Zeus | `#zeus-admin-agent` (1496267442899521627) | `Discord Webhook - Zeus Channel` |
 
-**Convenção de prefixo nas mensagens:** `[SITE.COM] [MÉTRICA] descrição`
-- Site primeiro → identifica origem ao escanear canal
-- Métrica segundo → tipo de dado ([YOAST], [BACKUP], [UPTIME], etc.)
-- Exemplo: `[EGGBEV.COM] [YOAST] Relatório semanal (27/04 10h)`
+**Layout obrigatório das mensagens:** usar Discord embed com `fields` estruturados — nunca mandar alerta como texto bruto em `content`, exceto a mention necessária para push.
+- `content`: vazio para info/resolução; `<@344196393512075265> alerta curto` apenas quando precisa push.
+- `embeds[0].title`: título humano curto, sem prefixo poluído.
+- `embeds[0].color`: vermelho `15158332`, amarelo `15844367`, verde `3066993`, azul/info `3447003`.
+- `embeds[0].fields`: dados separados por assunto (`Service`, `Estado`, `Ação`, `Detalhe técnico`, etc.).
+- Detalhes longos vão em campo `Detalhe técnico` com bloco ```text, truncado se necessário.
+- Resoluções usam embed verde simples.
+
+Exemplo mínimo:
+```bash
+PAYLOAD=$(jq -n \
+  --arg service "$SERVICE" \
+  --arg detail "$DETAIL" \
+  '{content:"<@344196393512075265> alerta de infra", embeds:[{title:"Service com falha", color:15158332, fields:[{name:"Service", value:("`"+$service+"`"), inline:true}, {name:"Ação", value:"Investigar log e reiniciar se necessário.", inline:false}, {name:"Detalhe técnico", value:("```text\n"+$detail[:900]+"\n```"), inline:false}]}]}')
+```
 
 **NÃO usar** o webhook `#zeus-admin-agent` para alertas de cron/monitor automatizado. Esse canal é exclusivo para conversa operacional Rodolfo ↔ Zeus, `[REPORT-INFRA]` de agentes, e hook git de commits interativos.
 
@@ -197,7 +208,7 @@ if (( TOTAL_NEW > 0 )); then
     log "Enviando alerta Discord"
     send_discord "$(jq -n \
       --arg n "$NEW_CONSECUTIVE" --arg d "$LAST_DETAIL" --arg t "${LAST_OK_TS:-nunca}" \
-      '{content:"🚨 **PROCESSO FALHANDO**\nFalhas consecutivas: \($n)\nÚltimo erro: \($d)\nÚltimo OK: \($t)\nAção: investigar log"}')"
+      '{content:"<@344196393512075265> alerta de monitor", embeds:[{title:"Processo falhando", color:15158332, fields:[{name:"Falhas consecutivas", value:$n, inline:true}, {name:"Último OK", value:$t, inline:true}, {name:"Último erro", value:("```text\n"+$d[:900]+"\n```"), inline:false}, {name:"Ação", value:"Investigar log do monitor.", inline:false}]}]}')"
   else
     ALERT_TS="$LAST_ALERT"
   fi
@@ -212,7 +223,7 @@ else
     if [[ "$ALERT_WAS_ACTIVE" == "true" ]]; then
       send_discord "$(jq -n \
         --arg n "$CONSECUTIVE" --arg c "${LAST_OK_COMMIT:-?}" --arg t "${LAST_OK_TS:-?}" \
-        '{content:"✅ **PROCESSO RESTABELECIDO**\nApós \($n) falhas, voltou a funcionar.\nÚltimo OK: \($c) em \($t)"}')"
+        '{content:"", embeds:[{title:"Processo restabelecido", color:3066993, fields:[{name:"Falhas anteriores", value:$n, inline:true}, {name:"Último OK", value:("`"+$c+"`"), inline:true}, {name:"Horário", value:$t, inline:false}]}]}')"
     fi
   else
     log "OK: zero falhas na janela de ${WINDOW_MINUTES}min"
@@ -381,8 +392,23 @@ bash /root/mgs-agent/scripts/monitor-service-restarts.sh   # cria entrada no sta
 
 ### Mensagens Discord
 
-- INFO: `⚠️ [INFRA] [RESTART] \`{service}\` reiniciou {N}x nas últimas 24h. Acompanhar.`
-- WARN: `🚨 [INFRA] [RESTART] \`{service}\` reiniciou {N}x nas últimas 24h. Investigar urgente. <@344196393512075265>`
+Usar o layout padrão em embed + fields:
+
+```json
+{
+  "content": "<@344196393512075265> alerta de restart recorrente",
+  "embeds": [{
+    "title": "Service reiniciando em excesso",
+    "color": 15158332,
+    "fields": [
+      {"name": "Service", "value": "`zeus-gateway`", "inline": true},
+      {"name": "Reinícios", "value": "5x", "inline": true},
+      {"name": "Janela", "value": "24h", "inline": true},
+      {"name": "Ação", "value": "Investigar logs e causa do restart.", "inline": false}
+    ]
+  }]
+}
+```
 
 ### Credencial
 
@@ -445,18 +471,10 @@ DIR_AGENT["novo_agente"]="novo_agente"
 
 ### Formato das mensagens Discord
 
-**Alerta:**
-```
-🚨 [PENDING-REPORT] Skills detectadas SEM REPORT-INFRA:
-• `zeus` criou skill `nome-skill`
-  Path: `/root/.hermes/profiles/zeus/skills/ops/nome-skill`
-Aguardo REPORT-INFRA + atualização de `infra-inventory.json`. <@1496296175014252634>
-```
+**Alerta:** embed vermelho com fields `Pendências`, `Ação` e `Itens`.
+`content` deve conter a mention necessária para o Zeus receber o evento: `<@1496296175014252634> pending report detectado`.
 
-**Resolução:**
-```
-✅ [PENDING-REPORT] Skill `nome-skill` (agente: `zeus`) agora está no inventário (commit XXXX). Pendência fechada.
-```
+**Resolução:** embed verde com fields `Skill`, `Agent` e `Inventário`; `content` vazio.
 
 ### Pitfalls específicos do pending-report monitor
 
