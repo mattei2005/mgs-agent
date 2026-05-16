@@ -131,7 +131,7 @@ tool_loop_guardrails:
     idempotent_no_progress: 5
 compression:
   enabled: true
-  threshold: 0.4
+  threshold: 0.6617647058823529
   target_ratio: 0.18
   protect_last_n: 16
   hygiene_hard_message_limit: 250
@@ -155,73 +155,73 @@ bedrock:
     trace: disabled
 auxiliary:
   vision:
-    provider: anthropic
-    model: claude-haiku-4-5-20251001
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 120
     extra_body: {}
     download_timeout: 30
   web_extract:
-    provider: anthropic
-    model: claude-haiku-4-5-20251001
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 120
     extra_body: {}
   compression:
-    provider: anthropic
-    model: claude-haiku-4-5-20251001
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 300
     extra_body: {}
   session_search:
-    provider: anthropic
-    model: claude-haiku-4-5-20251001
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 30
     extra_body: {}
     max_concurrency: 3
   skills_hub:
-    provider: anthropic
-    model: claude-haiku-4-5-20251001
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 30
     extra_body: {}
   approval:
-    provider: anthropic
-    model: claude-haiku-4-5-20251001
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 30
     extra_body: {}
   mcp:
-    provider: anthropic
-    model: claude-haiku-4-5-20251001
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 30
     extra_body: {}
   title_generation:
-    provider: anthropic
-    model: claude-haiku-4-5-20251001
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 30
     extra_body: {}
   triage_specifier:
-    provider: anthropic
-    model: claude-haiku-4-5-20251001
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 120
     extra_body: {}
   curator:
-    provider: anthropic
-    model: claude-haiku-4-5-20251001
+    provider: openai-codex
+    model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 600
