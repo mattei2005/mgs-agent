@@ -142,11 +142,47 @@ Observação: houve commits automáticos intermediários de tempfiles `.runcloud
 - Não commitar runtime/logs/backups de estado quando não forem artefatos deliberados de auditoria.
 - Não reportar sucesso sem validação real.
 
+## Varredura histórica Git — fechamento complementar
+
+Executada em 2026-05-16 18:29 EDT, em modo read-only, sem reescrever histórico e sem imprimir credenciais.
+
+| Check | Resultado |
+|---|---|
+| Commits varridos | 1.058 |
+| Paths únicos no histórico | 398 |
+| Paths atuais rastreados | 194 |
+| Paths apenas no histórico | 204 |
+| Repo GitHub | `mattei2005/mgs-agent`, privado |
+| Acesso público sem autenticação | Bloqueado (`404` via API pública; `git ls-remote` sem credencial falha) |
+| Forks | 0 |
+| Local vs `origin/main` | 0 ahead / 0 behind no fechamento |
+| GitHub Secret Scanning API | Não acessível pelo PAT atual (`403`, permissão insuficiente) |
+
+Achados históricos de credenciais, todos sem valor literal registrado neste documento:
+
+| Achado | Estado |
+|---|---|
+| OP Service Account token antigo em `.env.bak-20260427-001636` | Token atual não bate com o histórico |
+| GitHub PAT antigo em `backups/pre-hermes-upgrade-20260429_104523.tar.gz` | PAT ativo do 1Password não bate; teste direto do token histórico retornou `401` |
+| Anthropic key antiga no mesmo backup `.tar.gz` | Não existe nos `.env` atuais de `mgs-agent`, Zeus ou Atena |
+
+Classificação de artefatos históricos:
+
+| Classe | Qtde | Observação |
+|---|---:|---|
+| Backups / snapshots antigos | 116 | Ficam recuperáveis no histórico, mas fora do working tree atual |
+| Credential/env backup | 6 | Inclui `.env.bak`; risco histórico, não atual |
+| RunCloud tempfiles | 4 | Já removidos; tempfiles atuais vão para `/tmp` |
+| Deprecated / legacy | 5 | Código antigo fora do fluxo atual ou substituído por stub |
+| Data JSON antigos | 27 | State/backups históricos |
+
+Decisão operacional recomendada: não reescrever histórico agora. O ganho é baixo frente ao risco operacional de `filter-repo + force-push`, porque o repo é privado, sem forks, não visível publicamente e os segredos históricos relevantes não batem com os ativos. Se for exigida higiene/compliance máxima, abrir uma etapa separada com backup, freeze de pushes e aprovação explícita para reescrita destrutiva.
+
 ## Pendências opcionais
 
-Estas ações não foram executadas por serem não críticas ou potencialmente destrutivas:
+Estas ações não foram executadas por serem não críticas, dependentes de permissão externa ou potencialmente destrutivas:
 
-1. Instalar e rodar ShellCheck para lint Bash profundo.
-2. Fazer limpeza de histórico Git para remover commits antigos com tempfiles `.runcloud-inventory.*`; exige autorização explícita por reescrever histórico.
+1. Consultar GitHub Secret Scanning Alerts com PAT temporário que tenha permissão `security_events`/admin do repo; revogar o PAT depois.
+2. Fazer limpeza de histórico Git para remover `.env.bak`, backup `.tar.gz` e tempfiles antigos; exige autorização explícita por reescrever histórico.
 3. Revisar documentação histórica que ainda menciona Anthropic/Claude para separar claramente histórico vs. operação atual.
 4. Avaliar substituição definitiva de fluxos com senha/expect por autenticação SSH mais forte, caso ainda existam em caminho ativo.
