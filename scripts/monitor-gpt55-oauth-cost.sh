@@ -36,7 +36,7 @@ PRICE_OUTPUT=21.00
 
 # Webhook Discord
 WEBHOOK=""
-for i in 1 2 3; do
+for _attempt in 1 2 3; do
   WEBHOOK=$(op item get "Discord Webhook - Alerts Infra Channel" --vault "MGS Conteúdo" --fields label=webhook_url --reveal 2>/dev/null)
   if [[ "$WEBHOOK" == https://* ]]; then
     break

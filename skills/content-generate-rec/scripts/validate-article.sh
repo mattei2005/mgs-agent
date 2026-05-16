@@ -73,7 +73,6 @@ if $word_ok && $subtitle_ok; then
   jq -n --argjson c "$count" --argjson mn "$MIN" --argjson mx "$MAX"     --argjson sl "$subtitle_len" --argjson sm "$SUBTITLE_MAX"     '{count:$c, min:$mn, max:$mx, subtitle_chars:$sl, subtitle_max:$sm, status:"PASS"}'
   exit 0
 else
-  status="FAIL"
   jq -n --argjson c "$count" --argjson mn "$MIN" --argjson mx "$MAX"     --argjson sl "$subtitle_len" --argjson sm "$SUBTITLE_MAX"     --arg wok "$([ "$word_ok" = true ] && echo pass || echo fail)"     --arg sok "$([ "$subtitle_ok" = true ] && echo pass || echo fail)"     '{count:$c, min:$mn, max:$mx, word_count:$wok, subtitle_chars:$sl, subtitle_max:$sm, subtitle:$sok, status:"FAIL"}'
   exit 1
 fi

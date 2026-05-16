@@ -6,8 +6,6 @@ set -euo pipefail
 
 DB="/root/mgs-agent/data/pendencias.db.json"
 OUT="/root/mgs-agent/docs/PENDENCIAS.md"
-HISTORICO="/root/mgs-agent/docs/PENDENCIAS-HISTORICO.md"
-
 [[ ! -f "$DB" ]] && { echo "ERRO: $DB não existe"; exit 1; }
 
 mkdir -p "$(dirname "$OUT")"
