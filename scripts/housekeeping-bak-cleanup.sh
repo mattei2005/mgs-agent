@@ -55,7 +55,8 @@ TO_DELETE=$(find /root/.hermes /root/mgs-agent /root/backups /tmp \
     ! -path '*/node_modules/*' \
     2>/dev/null || true)
 
-COUNT=$(printf "%s" "$TO_DELETE" | grep -c "^." || echo 0)
+COUNT=$(printf "%s" "$TO_DELETE" | grep -c "^." || true)
+COUNT="${COUNT:-0}"
 
 if [[ -z "$TO_DELETE" || "$COUNT" -eq 0 ]]; then
     log "Nada a deletar (zero arquivos *.bak* com mais de ${RETENTION_DAYS} dias)"

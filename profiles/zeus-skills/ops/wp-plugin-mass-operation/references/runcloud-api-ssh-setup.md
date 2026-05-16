@@ -99,7 +99,8 @@ result = subprocess.run(
     ['sshpass', '-p', password, 'ssh',
      '-o', 'PreferredAuthentications=password',
      '-o', 'PubkeyAuthentication=no',
-     '-o', 'StrictHostKeyChecking=no',
+     '-o', 'StrictHostKeyChecking=accept-new',
+     '-o', 'UserKnownHostsFile=/root/.ssh/known_hosts_mgs',
      'zeus@162.55.28.178', deploy_script],
     capture_output=True, text=True, timeout=120
 )

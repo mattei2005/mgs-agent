@@ -40,7 +40,7 @@ for IP in 44.208.155.39 3.19.138.131 35.175.97.196 18.116.18.34; do
 done
 
 # Listar raiz do WP via SFTP (confirma credenciais)
-sshpass -p "$PASS" sftp -P 22 -o StrictHostKeyChecking=no wpfiles@$HOST << 'EOF'
+sshpass -p "$PASS" sftp -P 22 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/root/.ssh/known_hosts_mgs wpfiles@$HOST << 'EOF'
 ls
 ls wp-content
 EOF
@@ -50,7 +50,7 @@ EOF
 
 ```bash
 # Verificar arquivos em mu-plugins após deploy
-sshpass -p "$PASS" sftp -P 22 -o StrictHostKeyChecking=no wpfiles@$HOST << 'EOF'
+sshpass -p "$PASS" sftp -P 22 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/root/.ssh/known_hosts_mgs wpfiles@$HOST << 'EOF'
 ls wp-content/mu-plugins
 EOF
 # Nota: usar path RELATIVO (sem /). Path absoluto "/wp-content/..." retorna "File not found".
@@ -74,7 +74,7 @@ Se SFTP é read-only e REST API está em 500:
 - **SSH interativo bloqueado** para `wpfiles` — apenas SFTP funciona.
 - **Path RELATIVO no SFTP** — `ls wp-content/mu-plugins/` funciona; `ls /wp-content/mu-plugins/` retorna "not found".
 - **`mu-plugins` não existe por padrão** — criar via elFinder ou SSH bitnami antes do primeiro deploy.
-- **`StrictHostKeyChecking=no`** necessário na primeira conexão.
+- **Não usar `StrictHostKeyChecking=no`**. Na primeira conexão, usar `StrictHostKeyChecking=accept-new` + `UserKnownHostsFile=/root/.ssh/known_hosts_mgs`.
 - **Sessão WP Admin expira em ~5 min** nos servidores Bitnami.
 - **WPCode snippet = alto risco** sem .pem (incidente real: openzed.com down 18h em 2026-04-25).
   Preferir sempre elFinder `cmd: put` — ver `references/bitnami-mu-plugin-deploy.md`.
