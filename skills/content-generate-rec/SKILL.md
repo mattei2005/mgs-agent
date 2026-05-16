@@ -482,8 +482,9 @@ Mandatory tags (in order), coming from config + card_slug:
 1. `"rec"` — the article type
 2. `"{vertical}"` — e.g. `"cc"`
 3. `"{country}"` — e.g. `"gb"`
-4. `"{card_slug}"` — e.g. `"aib-visa-gold"`
+4. `"{card name words}"` — the card slug converted to spaces, e.g. `"aib visa gold"` (no hyphens)
 5. `"lang_{language}"` — derived from the last segment of `template_key` (e.g. `gb-cc-en` → `"lang_en"`, `mx-cc-es` → `"lang_es"`, `br-loans-pt` → `"lang_pt"`). **Always include. Applies to all sites and verticals.**
+6. `"atena_agent"` — always include on any article published or edited by Atena.
 
 Plus **2–4 SEO tags chosen by the writer** based on the card's main benefits
 (examples: `"travel credit card"`, `"airport lounge access"`, `"no annual fee"`,
@@ -491,6 +492,8 @@ Plus **2–4 SEO tags chosen by the writer** based on the card's main benefits
 name (WP auto-slugs to kebab-case — e.g. `"travel credit card"` →
 slug `travel-credit-card`). If you need the slug explicitly, compute:
 lowercase, spaces → `-`, strip non-alphanumeric.
+
+Total: 8–10 tags.
 
 > **PITFALL — tags CANNOT contain hyphens (CRITICAL):** Tag names must use
 > spaces, never hyphens. Example: `"travel credit card"` ✅, `"travel-credit-card"` ❌.
