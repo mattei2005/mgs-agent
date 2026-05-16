@@ -128,8 +128,12 @@ Use this when the current tree is clean but the session needs to assess whether 
    - authenticated repo visibility/private flag;
    - fork count;
    - secret-scanning alerts if a temporary PAT has `security_events`/admin permissions.
-6. Decision heuristic used for MGS: if repo is private, unauthenticated access is blocked, forks=0, and historical secrets do not match active credentials, prefer no history rewrite. Document the finding and only propose `filter-repo + force-push` as a separate destructive step.
+6. Decision heuristic used for MGS:
+   - If repo is private, unauthenticated access is blocked, forks=0, and historical secrets do not match active credentials, prefer no history rewrite. Document the finding and only propose `filter-repo + force-push` as a separate destructive step.
+   - If active tokens appear in Git history but Rodolfo confirms the repo is private/owner-only and prefers not to rotate working tokens, treat the requested remediation as **exposure cleanup**: remove the sensitive blobs from Git history first. Do not keep arguing for token rotation after that business decision; state the residual risk and proceed with history cleanup if confirmed.
 7. After finding historical credential artifacts, tighten forward guardrails. For MGS auto-commit, the sensitive filename guard should include at least `.env`, key/pem, credential, secret, token, password, webhook, and private.
+8. Hermes safety gate can block `git push --force` even after Rodolfo explicitly confirmed the critical operation. Safe sequence: create `git bundle` backup, stop auto-commit, run `git filter-repo`, validate local history (`high_signal_findings=0`, no `.env`/archive paths, active secret matches=0), restore `origin` if filter-repo removed it, restart auto-commit, then attempt force-push. If the tool blocks force-push, do not retry in-loop; report the exact manual command Rodolfo must run and the expected local/remote HEADs to verify afterward.
+9. `git-filter-repo` may not be preinstalled. Preferred install on Ubuntu VPS: `apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -y -qq git-filter-repo`; verify with `git filter-repo --version`. This is a setup step, not a repo finding.
 
 Useful reporting categories:
 

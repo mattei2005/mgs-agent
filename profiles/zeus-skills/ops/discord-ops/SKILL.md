@@ -132,7 +132,7 @@ PAYLOAD=$(jq -n \
 
 Validação mínima antes de reportar sucesso: `bash -n` no script alterado e dry-run quando existir (`--dry-run`, sem envio Discord). Se o script for monitor cron, evitar disparar alerta real de teste para não sujar o canal; validar payload estrutural/localmente quando possível.
 
-Em execuções multi-etapa de infra para Rodolfo, cada relatório parcial deve terminar com `Próximo passo pendente:` e nomear a próxima ação operacional concreta até o checklist estar concluído.
+Em execuções multi-etapa de infra para Rodolfo, cada relatório parcial, final ou bloqueado deve terminar com `Próximo passo pendente:` e nomear a próxima ação operacional concreta até o checklist estar concluído. Mesmo quando a execução fica bloqueada por safety gate/falta de permissão, declarar o próximo comando/manual action esperado e a evidência que deve ser validada depois.
 
 ---
 
