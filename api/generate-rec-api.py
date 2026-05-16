@@ -426,7 +426,7 @@ def generate_rec(req: GenerateRequest):
         template = load_template(template_key)
         
         # 4. Montar prompt MINI
-        system_prompt = """You are a credit card content writer. Generate a REC (Recommendation) article in HTML/Gutenberg format following the EXACT template provided. Output ONLY the article HTML body (between 450-500 words). No commentary, no markdown wrapping."""
+        system_prompt = """You are a credit card content writer. Generate a REC (Recommendation) article in HTML/Gutenberg format following the EXACT template provided. Output ONLY the article HTML body. Target 465-475 visible words. Hard range 450-500 visible words. Count table text; exclude LazyBlock placeholders. No commentary, no markdown wrapping."""
         
         user_prompt = f"""# CARD DATA
 
