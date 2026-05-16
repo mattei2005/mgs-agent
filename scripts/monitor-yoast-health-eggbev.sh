@@ -218,7 +218,7 @@ expect eof
 EOFEXP
 chmod +x "${TMP_DIR}/yoast_ssh.exp"
 
-SSH_OUT=$("${TMP_DIR}/yoast_ssh.exp" "$S03_PASS" "$S01_PASS" "$REMOTE_SCRIPT" 2>/dev/null)
+SSH_OUT=$("${TMP_DIR}/yoast_ssh.exp" "$S03_PASS" "$S01_PASS" "$REMOTE_SCRIPT" "$SSH_OPTS" 2>/dev/null)
 
 # ── Parse resultado ───────────────────────────────────────────────────────────
 YOAST_LINE=$(echo "$SSH_OUT" | grep "^YOAST_DATA:" | head -1 || true)
