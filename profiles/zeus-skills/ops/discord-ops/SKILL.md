@@ -339,6 +339,9 @@ Ver `references/discord-threads-lifecycle.md` para referência completa.
 - Skills MGS-específicas precisam ser versionadas no repo
 - Rodolfo pede ajuste de tom/verbosity/persona operacional do Zeus ou Atena
 - Rodolfo pede uma “indexação”/auditoria de contexto sem mexer em providers de memória
+- Rodolfo pede validação de acesso GitHub ou varredura completa de repositório privado/público
+
+Para varredura GitHub/repo, ver `references/github-repo-audit.md`: validação segura de PAT via 1Password sem persistir credencial no remote, `GIT_ASKPASS` temporário, checklist de secrets atual+histórico, sintaxe, crons/logs, dependências e relatório executivo.
 
 ### Ajustes de tom/verbosity, layout visual e contexto semântico
 
