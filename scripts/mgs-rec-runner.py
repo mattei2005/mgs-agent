@@ -347,6 +347,35 @@ def pad_content_to_min_words(content: str, current_count: int, min_count: int = 
     return content.rstrip() + "\n\n" + block
 
 
+def trim_content_to_max_words(content: str, current_count: int, max_count: int = 500) -> str:
+    """Deterministically trim prose when the generated article is slightly long.
+
+    Prefer trimming the last normal paragraph before the CTA so the subtitle,
+    LazyBlocks and comparative table structure remain intact.
+    """
+    if current_count <= max_count:
+        return content
+    excess = current_count - max_count
+    paragraph_re = re.compile(r"<!-- wp:paragraph -->\s*<p>(.*?)</p>\s*<!-- /wp:paragraph -->", re.I | re.S)
+    matches = list(paragraph_re.finditer(content))
+    remove_words = excess + 3  # safety margin for validator tokenization
+    for m in reversed(matches[1:]):  # never trim the subtitle/excerpt
+        inner = m.group(1).strip()
+        if "wp:lazyblock" in inner or "<strong>" in inner.lower():
+            continue
+        plain = re.sub(r"<[^>]+>", " ", html.unescape(inner))
+        words = plain.split()
+        if len(words) <= remove_words + 10:
+            continue
+        kept = words[: max(10, len(words) - remove_words)]
+        new_plain = " ".join(kept).rstrip(" ,;:")
+        if not re.search(r"[.!?]$", new_plain):
+            new_plain += "."
+        replacement = f"<!-- wp:paragraph -->\n<p>{html.escape(new_plain)}</p>\n<!-- /wp:paragraph -->"
+        return content[: m.start()] + replacement + content[m.end():]
+    return content
+
+
 def title_meta_focus(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, str, str]:
     # Keep focus <=4 words. Prefer a recognisable product stem.
     words = [w for w in re.sub(r"[^A-Za-z0-9 ]", " ", card_name).split() if w.lower() not in {"credit", "card", "the"}]
@@ -572,8 +601,13 @@ def main() -> int:
         tmp_html = Path(tempfile.gettempdir()) / f"final-{card_slug}.html"
         tmp_html.write_text(content)
         first_validation = validate_html_soft(tmp_html)
-        if first_validation.get("status") != "PASS" and int(first_validation.get("count") or 0) < 450 and first_validation.get("subtitle") == "pass":
-            content = pad_content_to_min_words(content, int(first_validation.get("count") or 0), 450)
+        first_count = int(first_validation.get("count") or 0)
+        if first_validation.get("status") != "PASS" and first_count < 450 and first_validation.get("subtitle") == "pass":
+            content = pad_content_to_min_words(content, first_count, 450)
+            tmp_html.write_text(content)
+        elif first_validation.get("status") != "PASS" and first_count > 500 and first_validation.get("subtitle") == "pass":
+            # Mechanical over-length repair: trim prose once, then validate exact final HTML.
+            content = trim_content_to_max_words(content, first_count, 500)
             tmp_html.write_text(content)
         validation = validate_html(tmp_html)
         subtitle = visible_subtitle(content)
