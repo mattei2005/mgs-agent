@@ -75,6 +75,9 @@ Não usar `approvals.mode: off` sem autorização explícita do Rodolfo.
 1. `python3 -m py_compile gateway/platforms/discord.py` no venv/runtime Hermes.
 2. Validar YAML do profile.
 3. Restart controlado do gateway afetado (`zeus-gateway.service` ou `atena-gateway.service`).
+   - Em conversa via o próprio gateway afetado, não faça restart foreground esperando resposta longa: o turno pode ser interrompido quando o serviço cair.
+   - Preferir disparar restart em background/one-shot, avisar que a validação vem no próximo turno, e depois confirmar com `systemctl is-active`, `ActiveEnterTimestamp` e `journalctl --since`.
+   - Se o process tracker do Hermes perder o `session_id` após restart, não tratar como falha do restart; validar pelo systemd/logs.
 4. Teste real: disparar um comando approvable de baixo risco e clicar `Allow Once`.
 5. Confirmar no log:
 
