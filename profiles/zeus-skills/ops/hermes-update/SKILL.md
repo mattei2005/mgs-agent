@@ -157,6 +157,30 @@ git -C /root/.hermes/hermes-agent log --oneline v0.12.0...v0.13.0 | head -50
 git -C /root/.hermes/hermes-agent log --oneline HEAD..origin/main
 ```
 
+## Review pré-update antes de pedir aprovação
+
+Quando Rodolfo perguntar se vale atualizar, fazer primeiro uma análise read-only e só depois recomendar. Ver detalhe em `references/pre-update-review.md`.
+
+Checklist mínimo:
+
+```bash
+hermes --version 2>&1 | head -20
+cd /root/.hermes/hermes-agent
+git fetch --quiet origin main
+git status --short
+git rev-parse --short HEAD
+git rev-parse --short origin/main
+git diff --shortstat HEAD..origin/main
+git log --oneline --no-merges HEAD..origin/main | head -120
+```
+
+Se houver patches locais (`git status --short` não vazio), exportar `git diff` e testar `git apply --check` contra um worktree temporário em `origin/main` antes de dizer que o update é seguro. Reportar explicitamente:
+- commits atrás e delta de arquivos/linhas
+- features/fixes/docs/manutenção por contagem aproximada
+- melhorias relevantes para a operação MGS
+- risco de conflito com patch local
+- recomendação executiva: atualizar agora, deferir, ou atualizar em janela controlada
+
 ---
 
 ## Pitfalls
