@@ -44,6 +44,12 @@ CUSTOM_LOG = {
     'cleanup-zombie-sessions.sh': '/root/mgs-agent/logs/cleanup-zombies.log',
 }
 
+# Erros semânticos: log fresco não significa cron saudável.
+# Manter padrões específicos para evitar falso positivo em mensagens tipo "zero falhas".
+SEMANTIC_ERROR_RE = re.compile(
+    r'(syntax error|traceback|exception|fatal:|critical|erro crítico|error token|command not found|permission denied|no such file or directory)',
+    re.I,
+)
 
 def run(cmd):
     return subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, check=False).stdout
@@ -109,17 +115,18 @@ def post_discord(webhook, payload):
     urllib.request.urlopen(req, timeout=10).read()
 
 
-def cron_stale_payload(script, detail):
+def cron_problem_payload(script, status, detail):
+    title = 'Cron com erro no log' if status == 'ERROR' else 'Cron sem log recente'
     return {
-        'content': f'{MENTION} alerta de cron stale',
+        'content': f'{MENTION} alerta de cron {status.lower()}',
         'embeds': [{
-            'title': 'Cron sem log recente',
+            'title': title,
             'color': 15158332,
             'fields': [
                 {'name': 'Script', 'value': f'`{script}`', 'inline': True},
-                {'name': 'Estado', 'value': 'STALE', 'inline': True},
+                {'name': 'Estado', 'value': status, 'inline': True},
                 {'name': 'Ação', 'value': 'Verificar cron, script e log.', 'inline': False},
-                {'name': 'Detalhe técnico', 'value': f'```text\n{detail}\n```', 'inline': False},
+                {'name': 'Detalhe técnico', 'value': f'```text\n{detail[:900]}\n```', 'inline': False},
             ],
         }],
     }
