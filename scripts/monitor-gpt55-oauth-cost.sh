@@ -97,22 +97,18 @@ TOTAL_OUTPUT_K=$((TOTAL_OUTPUT / 1000))
 COST_INT=$(echo "$COST" | cut -d. -f1)
 
 if [ "$COST_INT" -ge "$THRESHOLD_ALERT" ]; then
-  EMOJI="🔴"
   COLOR=15158332
   STATUS="ALERTA — Volume MUITO ALTO"
   MENTION="<@344196393512075265>"
 elif [ "$COST_INT" -ge "$THRESHOLD_WARN" ]; then
-  EMOJI="🟡"
   COLOR=15844367
   STATUS="WARN — Volume acima do normal"
   MENTION=""
 elif [ "$COST_INT" -ge "$THRESHOLD_INFO" ]; then
-  EMOJI="🟢"
   COLOR=3066993
   STATUS="OK — Volume saudável"
   MENTION=""
 else
-  EMOJI="🟢"
   COLOR=3066993
   STATUS="OK — Volume baixo"
   MENTION=""
