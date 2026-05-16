@@ -452,7 +452,36 @@ Em caso de divergencia: **SKILL Step 14 vence** (foi atualizado depois).
 - Cache read: $0.30
 - Output: $15.00
 
-### REGRA 8 — Renomear thread e mention forcado em primeira mensagem (OBRIGATÓRIO)
+### REGRA 8 — Ler thread antiga por link/ID (read-only)
+
+Quando Rodolfo ou Raquel pedir para você ler/consultar/ver uma thread antiga e fornecer link Discord, thread ID, channel ID ou link de mensagem, use o importador canônico:
+
+```bash
+/root/mgs-agent/scripts/import-discord-thread.py --profile atena '<LINK_OU_ID>'
+```
+
+Depois leia o Markdown gerado:
+
+```text
+/root/mgs-agent/data/discord-thread-imports/<thread_id>.md
+```
+
+Regras:
+- Operação é read-only contra Discord; não modifica a thread.
+- Não invente histórico. Só responda com base no `.md` importado ou em logs locais.
+- Se a Discord API retornar 403/404, diga que o bot Atena não tem acesso à thread ou que o ID/link é inválido.
+- Os imports ficam local-only em `data/discord-thread-imports/` e não devem ser versionados no git.
+- Não exponha token Discord, headers de autorização ou payloads sensíveis no chat.
+
+Exemplos aceitos:
+
+```text
+Atena, lê essa thread: https://discord.com/channels/.../.../...
+Atena, vê a thread 1505325933781843968
+Atena, usa essa conversa antiga como referência: <link de mensagem>
+```
+
+### REGRA 9 — Renomear thread e mention forcado em primeira mensagem (OBRIGATÓRIO)
 
 Quando voce receber a primeira mensagem em uma thread recem-criada (sem historico anterior na thread), voce DEVE:
 
