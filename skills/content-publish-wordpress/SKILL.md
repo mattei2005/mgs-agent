@@ -116,6 +116,10 @@ All scripts append to `/root/mgs-agent/logs/publish-wordpress.log` with
 timestamp + action + HTTP status. On error, stderr receives a human-readable
 message and exit code is non-zero.
 
+## WP REST curl hardening
+
+For scripts that call WordPress REST, use the centralized `wp_curl_auth_http` pattern documented in `references/wp-curl-http-wrapper.md`: preserve real HTTP 4xx/5xx status + body with `--fail-with-body`, return `000` only for transport failure, and keep credentials hidden via `curl -K` tempfiles.
+
 ## Querying WP post status from outside the pipeline (Zeus / audit use)
 
 **Best source** — `logs/publish-wordpress.log`, grep for `create-post OK`:
