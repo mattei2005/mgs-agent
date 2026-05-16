@@ -46,6 +46,16 @@ S01_PASS=$(op item get 'Runcloud Server 01 - 162.55.28.178- zeus Acesso' \
   --vault 'MGS Conteúdo' --fields password --reveal 2>/dev/null)
 
 WP_PATH="/home/runcloud/webapps/$SITE_KEY"
+TMP_DIR="$(mktemp -d /tmp/yoast-score-post.XXXXXX)"
+REMOTE_SCRIPT="/tmp/yoast_update_${POST_ID}_$$.sh"
+KNOWN_HOSTS_FILE="/root/.ssh/known_hosts_mgs"
+SSH_OPTS="-o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=${KNOWN_HOSTS_FILE}"
+mkdir -p /root/.ssh
+chmod 700 /root/.ssh
+: > "$KNOWN_HOSTS_FILE"
+chmod 600 "$KNOWN_HOSTS_FILE"
+cleanup() { rm -rf "$TMP_DIR"; }
+trap cleanup EXIT
 
 # ── Step 1: Calculate scores via Node ─────────────────────────────────────────
 SCORE_JSON=$(cd "$SCORER_DIR" && node yoast-scorer.js "$WP_URL" "$POST_ID" "$WP_USER" "$WP_PASS" 2>/dev/null)
@@ -60,7 +70,7 @@ SEO_SCORE=$(echo  "$SCORE_JSON" | python3 -c "import sys,json; print(json.load(s
 READ_SCORE=$(echo "$SCORE_JSON" | python3 -c "import sys,json; print(json.load(sys.stdin)['readability_score'])")
 
 # ── Step 2: Write postmeta + update indexable via SSH ─────────────────────────
-cat > /tmp/yoast_update_${POST_ID}.sh << REMOTE
+cat > "${TMP_DIR}/yoast_update_${POST_ID}.sh" << REMOTE
 #!/bin/bash
 WP_PATH="$WP_PATH"
 POST_ID="$POST_ID"
