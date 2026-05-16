@@ -17,6 +17,8 @@ Qualquer situação onde um processo periódico grava em log com padrão START/O
 
 Também usar para gestão de **cron reliability/control plane**: inventariar crons MGS, padronizar `flock`, criar smoke tests seguros, adicionar `--dry-run` em jobs destrutivos e monitorar logs stale. Ver referência validada: `references/cron-control-plane.md`.
 
+Quando o pedido for auditoria/varredura operacional, checar também **erros semânticos em logs recentes** — log fresco não significa cron saudável. Ver `references/cron-semantic-error-audit.md` para o caso validado `grep -c ... || echo 0` que gerava `0\n0` e quebrava aritmética Bash sem acionar stale-log.
+
 Exemplos validados: `monitor-auto-push.sh` para o auto-push do mgs-agent; `cron-control-plane.py`, `cron-smoke-test.sh` e `monitor-cron-stale-logs.sh` para controle dos crons MGS.
 Exemplos validados:
 - `monitor-auto-push.sh` para o auto-push do mgs-agent.
@@ -347,6 +349,10 @@ Após criar os artefatos, atualizar manualmente 3 seções do inventário:
 7. **Regex `[a-f0-9]+` falha silenciosamente em IDs não-hex** — o padrão `grep -oP 'commit=\K[a-f0-9]+'` retorna vazio (e dispara `|| continue`) quando o ID começa com caractere não-hex (ex: `test001` → `t` não é hex → zero match → falha ignorada silenciosamente). Em testes de stress, usar sempre IDs com prefixo hex válido (ex: `dead001`, `cafe001`, `beef001`). Em produção, hashes git reais são sempre hex — não é bug do script, é armadilha nos testes.
 
 8. **Não adicionar o cron manualmente ao crontab** — usar `(crontab -l 2>/dev/null; echo "ENTRY") | crontab -` para preservar entradas existentes. `crontab -l > /tmp/crontab_current.txt && echo "..." >> /tmp/crontab_current.txt && crontab /tmp/crontab_current.txt` também funciona (alternativa usada em 2026-04-26).
+
+9. **`grep -c ... || echo 0` gera bug de `0\n0`** — `grep -c` imprime `0` quando não acha match, mas sai com código 1; o `|| echo 0` imprime outro zero. Em variável usada como número, quebra com `syntax error in expression`. Usar `grep -c ... || true` e fallback separado. Ver `references/cron-semantic-error-audit.md`.
+
+10. **Stale-log monitor não detecta cron rodando com erro** — `mtime` recente só prova execução. Para cron crítico, adicionar semantic scan de `error|erro|fatal|traceback|exception|failed|syntax error` nas últimas linhas e classificar como `RODANDO COM ERRO` se houver matches relevantes.
 
 ---
 
