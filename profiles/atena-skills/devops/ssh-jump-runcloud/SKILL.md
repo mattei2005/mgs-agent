@@ -51,16 +51,24 @@ S03_PASS=$(op item get 'Runcloud Server 03 - 46.4.95.117- zeus Acesso' \
 S01_PASS=$(op item get 'Runcloud Server 01 - 162.55.28.178- zeus Acesso' \
   --vault 'MGS Conteúdo' --fields password --reveal)
 
-# 2. Write expect script for SCP
-cat > /tmp/scp_jump.exp << 'EOFEXP'
+# 2. Write expect script for SCP using accept-new + dedicated known_hosts
+KNOWN_HOSTS_FILE="/root/.ssh/known_hosts_mgs"
+mkdir -p /root/.ssh && chmod 700 /root/.ssh
+: > "$KNOWN_HOSTS_FILE" && chmod 600 "$KNOWN_HOSTS_FILE"
+TMP_DIR="$(mktemp -d /tmp/runcloud-scp.XXXXXX)"
+trap 'rm -rf "$TMP_DIR"' EXIT
+cat > "$TMP_DIR/scp_jump.exp" << 'EOFEXP'
 #!/usr/bin/expect -f
 set s03 [lindex $argv 0]
 set s01 [lindex $argv 1]
+set src [lindex $argv 2]
+set dst [lindex $argv 3]
+set known_hosts [lindex $argv 4]
 set timeout 30
-spawn scp -o StrictHostKeyChecking=no \
+spawn scp -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=$known_hosts \
   -J zeus@46.4.95.117 \
-  /local/path/to/file.php \
-  zeus@162.55.28.178:/tmp/file.php
+  $src \
+  zeus@162.55.28.178:$dst
 expect "46.4.95.117's password:"
 send "$s03\r"
 expect "162.55.28.178's password:"
@@ -70,10 +78,10 @@ expect {
     eof {}
 }
 EOFEXP
-chmod +x /tmp/scp_jump.exp
+chmod +x "$TMP_DIR/scp_jump.exp"
 
 # 3. Run SCP
-/tmp/scp_jump.exp "$S03_PASS" "$S01_PASS"
+"$TMP_DIR/scp_jump.exp" "$S03_PASS" "$S01_PASS" /local/path/to/file.php /tmp/file.php "$KNOWN_HOSTS_FILE"
 ```
 
 ## Step-by-step: Run a command on S01
