@@ -167,14 +167,16 @@ chmod +x "${TMP_DIR}/yoast_health_query_eggbev.sh"
 # ── SCP do script remoto ──────────────────────────────────────────────────────
 log "Enviando script remoto via SCP (S03→S01)..."
 
-cat > ${TMP_DIR}/yoast_scp.exp << 'EOFEXP'
+cat > "${TMP_DIR}/yoast_scp.exp" << 'EOFEXP'
 #!/usr/bin/expect -f
 set s03 [lindex $argv 0]
 set s01 [lindex $argv 1]
+set local_script [lindex $argv 2]
+set remote_script [lindex $argv 3]
 set timeout 30
 spawn scp -o StrictHostKeyChecking=no -J zeus@46.4.95.117 \
-    ${TMP_DIR}/yoast_health_query_eggbev.sh \
-    zeus@162.55.28.178:${TMP_DIR}/yoast_health_query_eggbev.sh
+    $local_script \
+    zeus@162.55.28.178:$remote_script
 expect "46.4.95.117's password:"
 send "$s03\r"
 expect "162.55.28.178's password:"
@@ -184,8 +186,8 @@ expect {
     eof    {}
 }
 EOFEXP
-chmod +x ${TMP_DIR}/yoast_scp.exp
-${TMP_DIR}/yoast_scp.exp "$S03_PASS" "$S01_PASS" > /dev/null 2>&1
+chmod +x "${TMP_DIR}/yoast_scp.exp"
+"${TMP_DIR}/yoast_scp.exp" "$S03_PASS" "$S01_PASS" "${TMP_DIR}/yoast_health_query_eggbev.sh" "$REMOTE_SCRIPT" > /dev/null 2>&1
 log "SCP OK."
 
 # ── SSH execute + captura output ──────────────────────────────────────────────
