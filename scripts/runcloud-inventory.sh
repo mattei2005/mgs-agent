@@ -79,23 +79,34 @@ def api_get(endpoint, params=None):
     if params:
         query = "?" + urllib.parse.urlencode(params)
     url = f"{BASE_URL}{endpoint}{query}"
-    req = urllib.request.Request(
-        url,
-        headers={
-            "Authorization": f"Bearer {TOKEN}",
-            "Accept": "application/json",
-            "User-Agent": "mgs-agent-runcloud-inventory/1.0",
-        },
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=45) as resp:
-            raw = resp.read().decode("utf-8")
-            return json.loads(raw)
-    except urllib.error.HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="replace")[:300]
-        raise RuntimeError(f"RunCloud API HTTP {exc.code} on {endpoint}: {body}") from exc
-    except Exception as exc:
-        raise RuntimeError(f"RunCloud API request failed on {endpoint}: {exc}") from exc
+    last_error = None
+    for attempt in range(1, 5):
+        req = urllib.request.Request(
+            url,
+            headers={
+                "Authorization": f"Bearer {TOKEN}",
+                "Accept": "application/json",
+                "User-Agent": "mgs-agent-runcloud-inventory/1.0",
+            },
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=45) as resp:
+                raw = resp.read().decode("utf-8")
+                return json.loads(raw)
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")[:300]
+            last_error = f"RunCloud API HTTP {exc.code} on {endpoint}: {body}"
+            if exc.code in (403, 429, 500, 502, 503, 504) and attempt < 4:
+                time.sleep(2 * attempt)
+                continue
+            raise RuntimeError(last_error) from exc
+        except Exception as exc:
+            last_error = f"RunCloud API request failed on {endpoint}: {exc}"
+            if attempt < 4:
+                time.sleep(2 * attempt)
+                continue
+            raise RuntimeError(last_error) from exc
+    raise RuntimeError(last_error or f"RunCloud API request failed on {endpoint}")
 
 
 inventory = []
@@ -110,7 +121,13 @@ for server_id, server_name in SERVERS:
         if not isinstance(webapps, list):
             raise RuntimeError(f"Unexpected webapps payload for server {server_name}: data is not list")
         all_webapps.extend(webapps)
-        total_pages = int(data.get("meta", {}).get("lastPage", 1) or 1)
+        meta = data.get("meta", {})
+        pagination = meta.get("pagination", {}) if isinstance(meta, dict) else {}
+        total_pages = int(
+            pagination.get("total_pages")
+            or meta.get("lastPage", 1)
+            or 1
+        )
         if page >= total_pages:
             break
         page += 1
