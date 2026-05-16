@@ -180,20 +180,23 @@ PYTHON_END
       
       if [ "$ELAPSED" -ge "$COOLDOWN_SECONDS" ]; then
         # Postar alerta
-        TITLE="🔴 [LOOP DETECTADO] ${AGENT^} em loop"
+        TITLE="Agent em possível loop"
         if [ "$DETECTION_KIND" = "frequency" ]; then
-          KIND_LABEL="Frequencia alta (sem erros)"
+          KIND_LABEL="Frequência alta sem erros"
         else
           KIND_LABEL="Erros consecutivos"
         fi
-        DESC=$(printf "**Agent:** %s\n**Session:** %s\n**Tool:** \`%s\`\n**Tipo:** %s\n**Contagem:** %s\n**Sugestão:** mandar mensagem ao agent pra parar ou orientar" "$AGENT" "$SESSION_ID" "$TOOL_NAME" "$KIND_LABEL" "$ERROR_COUNT")
         
         PAYLOAD=$(jq -n \
-          --arg c "<@344196393512075265> verificar agent" \
+          --arg c "<@344196393512075265> alerta de loop em agent" \
           --arg t "$TITLE" \
-          --arg d "$DESC" \
+          --arg agent "$AGENT" \
+          --arg session "$SESSION_ID" \
+          --arg tool "$TOOL_NAME" \
+          --arg kind "$KIND_LABEL" \
+          --arg count "$ERROR_COUNT" \
           --argjson col 15158332 \
-          '{content: $c, embeds: [{title: $t, description: $d, color: $col}]}')
+          '{content:$c, embeds:[{title:$t, color:$col, fields:[{name:"Agent", value:$agent, inline:true}, {name:"Session", value:("`"+$session+"`"), inline:true}, {name:"Tool", value:("`"+$tool+"`"), inline:true}, {name:"Tipo", value:$kind, inline:true}, {name:"Contagem", value:$count, inline:true}, {name:"Ação", value:"Mandar mensagem ao agent para parar ou reorientar.", inline:false}]}]}')
         
         curl -s --max-time 15 -X POST -H "Content-Type: application/json" \
           -d "$PAYLOAD" "$WEBHOOK" > /dev/null

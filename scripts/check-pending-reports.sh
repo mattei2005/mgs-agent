@@ -132,20 +132,30 @@ done
 
 # Enviar alertas para skills pendentes
 if (( ${#PENDING_SKILLS[@]} > 0 )); then
-    # Construir mensagem
-    msg="🚨 **[PENDING-REPORT]** Skills detectadas **SEM REPORT-INFRA**:\n"
+    # Construir mensagem estruturada
+    rows=""
     for entry in "${PENDING_SKILLS[@]}"; do
         IFS='|' read -r agent skill_name skill_path skill_key <<< "$entry"
-        msg+="• \`${agent}\` criou skill \`${skill_name}\`\n  Path: \`${skill_path}\`\n"
+        rows+="${agent} | ${skill_name} | ${skill_path}\n"
     done
-    msg+="\nAguardo REPORT-INFRA + atualização de \`infra-inventory.json\`.\n${ZEUS_MENTION}"
 
     # Postar no Discord
     payload=$(python3 -c "
 import json, sys
-msg = sys.argv[1]
-print(json.dumps({'content': msg}))
-" "$msg")
+mention, rows, count = sys.argv[1], sys.argv[2], sys.argv[3]
+print(json.dumps({
+  'content': f'{mention} pending report detectado',
+  'embeds': [{
+    'title': 'Skills sem REPORT-INFRA',
+    'color': 15158332,
+    'fields': [
+      {'name': 'Pendências', 'value': count, 'inline': True},
+      {'name': 'Ação', 'value': 'Enviar REPORT-INFRA e atualizar `infra-inventory.json`.', 'inline': False},
+      {'name': 'Itens', 'value': f'```text\n{rows[:900]}\n```', 'inline': False},
+    ]
+  }]
+}))
+" "$ZEUS_MENTION" "$rows" "${#PENDING_SKILLS[@]}")
 
     HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
         -H "Content-Type: application/json" \
@@ -190,13 +200,22 @@ if (( ${#RESOLVED_SKILLS[@]} > 0 )); then
         # Buscar commit mais recente do inventário para evidência
         last_commit=$(cd "$BASE_DIR" && git log --oneline -1 -- data/infra-inventory.json 2>/dev/null | awk '{print $1}' || echo "N/A")
 
-        resolve_msg="✅ **[PENDING-REPORT]** Skill \`${skill_name}\` (agente: \`${agent}\`) agora está no inventário (commit \`${last_commit}\`). Pendência fechada."
-
         payload=$(python3 -c "
 import json, sys
-msg = sys.argv[1]
-print(json.dumps({'content': msg}))
-" "$resolve_msg")
+skill_name, agent, last_commit = sys.argv[1:4]
+print(json.dumps({
+  'content': '',
+  'embeds': [{
+    'title': 'Pending report resolvido',
+    'color': 3066993,
+    'fields': [
+      {'name': 'Skill', 'value': f'`{skill_name}`', 'inline': True},
+      {'name': 'Agent', 'value': f'`{agent}`', 'inline': True},
+      {'name': 'Inventário', 'value': f'commit `{last_commit}`', 'inline': False},
+    ]
+  }]
+}))
+" "$skill_name" "$agent" "$last_commit")
 
         # Persistir remoção do state ANTES de enviar (idempotência)
         STATE=$(echo "$STATE" | python3 -c "

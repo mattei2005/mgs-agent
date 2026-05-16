@@ -164,13 +164,14 @@ if (( TOTAL_NEW_FAILURES > 0 )); then
     if [[ "$SEND_ALERT" == "true" ]]; then
         ALERT_TS="$NOW_ISO"
         log "Enviando alerta Discord — ${NEW_CONSECUTIVE} falhas consecutivas"
+        PAYLOAD=$(jq -n \
+            --arg n "$NEW_CONSECUTIVE" \
+            --arg detail "$LAST_DETAIL" \
+            --arg ok_ts "${LAST_OK_TS:-nunca}" \
+            '{content:"<@344196393512075265> alerta de auto-push", embeds:[{title:"Auto-push falhando", color:15158332, fields:[{name:"Falhas consecutivas", value:$n, inline:true}, {name:"Último push OK", value:$ok_ts, inline:true}, {name:"Último erro", value:("```text\n"+$detail+"\n```"), inline:false}, {name:"Ação", value:"Investigar `/root/mgs-agent/logs/auto-push.log`.", inline:false}]}]}')
         curl -s -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
-            -d "$(jq -n \
-                --arg n "$NEW_CONSECUTIVE" \
-                --arg detail "$LAST_DETAIL" \
-                --arg ok_ts "${LAST_OK_TS:-nunca}" \
-                '{content: "🚨 **AUTO-PUSH FALHANDO**\nFalhas consecutivas: \($n)\nÚltimo erro: \($detail)\nÚltimo push OK: \($ok_ts)\nAção: investigar `/root/mgs-agent/logs/auto-push.log`"}')" \
+            -d "$PAYLOAD" \
             --max-time 10 >/dev/null
     else
         ALERT_TS="$LAST_ALERT"
@@ -191,13 +192,14 @@ else
         # Enviar "RESOLVIDO" se havia alerta ativo
         if [[ "$ALERT_WAS_ACTIVE" == "true" ]] && [[ -n "$WEBHOOK_URL" ]]; then
             log "Enviando alerta RESOLVIDO para Discord"
+            PAYLOAD=$(jq -n \
+                --arg n "$CONSECUTIVE" \
+                --arg commit "${LAST_OK_COMMIT:-desconhecido}" \
+                --arg ts "${LAST_OK_TS:-desconhecido}" \
+                '{content:"", embeds:[{title:"Auto-push restabelecido", color:3066993, fields:[{name:"Falhas anteriores", value:$n, inline:true}, {name:"Último commit OK", value:("`"+$commit+"`"), inline:true}, {name:"Horário", value:$ts, inline:false}]}]}')
             curl -s -X POST "$WEBHOOK_URL" \
                 -H "Content-Type: application/json" \
-                -d "$(jq -n \
-                    --arg n "$CONSECUTIVE" \
-                    --arg commit "${LAST_OK_COMMIT:-desconhecido}" \
-                    --arg ts "${LAST_OK_TS:-desconhecido}" \
-                    '{content: "✅ **AUTO-PUSH RESTABELECIDO**\nApós \($n) falhas consecutivas, push voltou a funcionar.\nÚltimo commit OK: \($commit) em \($ts)"}')" \
+                -d "$PAYLOAD" \
                 --max-time 10 >/dev/null
         fi
     else

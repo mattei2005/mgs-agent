@@ -105,9 +105,13 @@ WEBHOOK=$(op item get "Discord Webhook - Alerts Infra Channel" \
 
 if [[ "$WEBHOOK" == https://* ]]; then
     HOST=$(hostname)
-    MSG=$(printf '🧹 **[%s] [HOUSEKEEPING]** Limpeza .bak (>%d dias)\n• %d arquivos deletados (%s MB)\n• %d diretórios vazios removidos' \
-        "$HOST" "$RETENTION_DAYS" "$COUNT" "$TOTAL_MB" "$DIRS_REMOVED")
-    PAYLOAD=$(jq -n --arg m "$MSG" '{content: $m}')
+    PAYLOAD=$(jq -n \
+        --arg host "$HOST" \
+        --arg retention "${RETENTION_DAYS} dias" \
+        --arg files "$COUNT" \
+        --arg size "${TOTAL_MB} MB" \
+        --arg dirs "$DIRS_REMOVED" \
+        '{content:"", embeds:[{title:"Housekeeping .bak executado", color:3447003, fields:[{name:"Host", value:$host, inline:true}, {name:"Retenção", value:$retention, inline:true}, {name:"Arquivos deletados", value:$files, inline:true}, {name:"Espaço liberado", value:$size, inline:true}, {name:"Diretórios vazios removidos", value:$dirs, inline:true}]}]}')
     curl -s -X POST "$WEBHOOK" \
         -H "Content-Type: application/json" \
         -d "$PAYLOAD" \
