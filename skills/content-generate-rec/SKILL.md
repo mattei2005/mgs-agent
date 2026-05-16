@@ -41,6 +41,11 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > validation order, deterministic repair lessons, browser/Playwright policy, and
 > Rodolfo → Atena request template, see `references/fast-runner-optimization.md`.
 > Load it when auditing REC speed/cost or tuning the runner.
+>
+> **REFERENCE - artifact audit/cleanup:** For the required post-run media manifest,
+> safe auto-delete gates for extra WordPress media, and final-summary UX rule, see
+> `references/rec-artifact-audit-cleanup.md`. Load it when changing runner media
+> handling, investigating Media Library clutter, or reviewing REC loop/error fallout.
 
 ## Inputs
 
