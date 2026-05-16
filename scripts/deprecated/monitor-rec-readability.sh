@@ -21,7 +21,10 @@ WP_PASS=$(echo "$CREDS" | python3 -c "import sys,json; d=json.load(sys.stdin); p
 
 # Carregar estado
 STATE=$(cat "$STATE_FILE")
+# Variáveis mantidas para compatibilidade do heredoc Python legado abaixo.
+# shellcheck disable=SC2034
 CONSECUTIVE=$(echo "$STATE" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('consecutive_green',0))")
+# shellcheck disable=SC2034
 THRESHOLD=$(echo  "$STATE" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('threshold',5))")
 
 # Buscar RECs gb-cc-en publicados (tags: rec=219, gb=451, cc=214, lang_en=215)
