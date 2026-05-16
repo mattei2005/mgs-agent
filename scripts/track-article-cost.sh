@@ -32,7 +32,7 @@ SCRIPT_LOG="/root/mgs-agent/logs/track-article-cost.log"
 # ⚠️  SINGLE SOURCE OF TRUTH: skills/content-generate-rec/references/pricing.md
 # Sem pricing oficial — estimativa baseada em modelos similares OpenAI
 # Ajustar quando OpenAI publicar pricing oficial do gpt-5.5
-# Se atualizar aqui, atualizar TAMBÉM em monitor-anthropic-cost.sh
+# Se atualizar aqui, atualizar TAMBÉM em monitor-gpt55-oauth-cost.sh
 PRICE_INPUT=7.00
 PRICE_OUTPUT=21.00
 

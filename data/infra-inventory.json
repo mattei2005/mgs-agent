@@ -35,7 +35,7 @@
       "entry": "*/5 * * * * flock -n /var/lock/monitor_service_restarts.lock /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1"
     },
     {
-      "entry": "0 12 * * * flock -n /var/lock/monitor_anthropic_cost.lock /root/mgs-agent/scripts/monitor-anthropic-cost.sh >> /root/mgs-agent/logs/monitor-anthropic-cost.log 2>&1"
+      "entry": "0 12 * * * flock -n /var/lock/monitor_gpt55_oauth_cost.lock /root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh >> /root/mgs-agent/logs/monitor-gpt55-oauth-cost.log 2>&1"
     },
     {
       "entry": "*/5 * * * * flock -n /var/lock/monitor_tool_loops.lock /root/mgs-agent/scripts/monitor-tool-loops.sh >> /root/mgs-agent/logs/monitor-tool-loops.log 2>&1"
@@ -143,7 +143,7 @@
       "modified_at": "2026-05-14T13:39:05-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/monitor-anthropic-cost.sh",
+      "path": "/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh",
       "size_bytes": 4798,
       "modified_at": "2026-05-15T16:00:21-04:00"
     },

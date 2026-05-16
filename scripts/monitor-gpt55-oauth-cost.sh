@@ -1,5 +1,5 @@
 #!/bin/bash
-# monitor-anthropic-cost.sh — Monitor de custo simulado GPT-5.5 via OAuth
+# monitor-gpt55-oauth-cost.sh — Monitor de volume/custo simulado GPT-5.5 via OAuth
 #
 # Com OAuth (openai-codex), o custo real é ZERO (incluso na assinatura).
 # Este script calcula o custo HIPOTÉTICO com base nos tokens logados no

@@ -14,7 +14,7 @@ Frequência   | Script                         | Owner          | Risco         
 0 10 * * *   | monitor-yoast-health-eggbev.sh | Atena/Conteúdo | baixo                                   | sim   | (sem log útil ainda)
 */15 * * * * | check-pending-reports.sh       | Zeus/Infra     | baixo                                   | sim   | [2026-05-16 08:00:01] check-pending-reports.sh concluído
 */5 * * * *  | monitor-service-restarts.sh    | Zeus/Infra     | baixo                                   | sim   | 2026-05-16T08:05:02-04:00 [monitor-service-restarts] OK
-0 12 * * *   | monitor-anthropic-cost.sh      | Zeus/Infra     | baixo                                   | sim   | (sem log útil ainda)
+0 12 * * *   | monitor-gpt55-oauth-cost.sh      | Zeus/Infra     | baixo                                   | sim   | (sem log útil ainda)
 */5 * * * *  | monitor-tool-loops.sh          | Zeus/Infra     | baixo                                   | sim   | Loop detector: 0 alertas enviados
 0 5 * * *    | infra-discovery.sh             | Zeus/Infra     | médio: sobrescreve infra-inventory.json | sim   | [05:00:03] === infra-discovery.sh DONE ===
 0 8 * * *    | monitor-hermes-updates.sh      | Zeus/Infra     | baixo                                   | sim   | [2026-05-16T08:00:03-04:00] OK notified upstream=a91a57fa5 local=db84a78e6 behind=96 days=0 feat=19 fix=44 breaking=0
@@ -81,13 +81,13 @@ Frequência   | Script                         | Owner          | Risco         
 - **Log:** `/root/mgs-agent/logs/monitor-service-restarts.log`
 - **Último log:** 2026-05-16T08:05:02-04:00 (33659 bytes)
 
-### `monitor-anthropic-cost.sh`
+### `monitor-gpt55-oauth-cost.sh`
 - **Frequência:** `0 12 * * *`
 - **Owner:** Zeus/Infra
 - **Risco:** baixo
 - **Função:** Calcula custo hipotético GPT-5.5/OAuth dos agentes; OAuth não gera custo real por token.
-- **Comando:** `flock -n /var/lock/monitor_anthropic_cost.lock /root/mgs-agent/scripts/monitor-anthropic-cost.sh >> /root/mgs-agent/logs/monitor-anthropic-cost.log 2>&1`
-- **Log:** `/root/mgs-agent/logs/monitor-anthropic-cost.log`
+- **Comando:** `flock -n /var/lock/monitor_gpt55_oauth_cost.lock /root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh >> /root/mgs-agent/logs/monitor-gpt55-oauth-cost.log 2>&1`
+- **Log:** `/root/mgs-agent/logs/monitor-gpt55-oauth-cost.log`
 - **Último log:** 2026-05-16T00:00:02-04:00 (0 bytes)
 
 ### `monitor-tool-loops.sh`

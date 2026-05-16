@@ -73,7 +73,7 @@ run_job "housekeeping-bak-cleanup.sh" "dry-run" "RETENTION_DAYS=15 ${BASE}/scrip
 
 # Skip by design
 skip_job "monitor-yoast-health-eggbev.sh" "produção/WordPress + relatório diário; manter horário normal"
-skip_job "monitor-anthropic-cost.sh" "alerta de custo simulado; manter horário normal"
+skip_job "monitor-gpt55-oauth-cost.sh" "alerta de custo simulado; manter horário normal"
 skip_job "infra-discovery.sh" "write em infra-inventory; já validado no deploy"
 skip_job "monitor-cron-stale-logs.sh" "watchdog depende de idade real dos logs; testar via --dry-run separado"
 
