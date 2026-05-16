@@ -659,6 +659,7 @@ def main() -> int:
                 up = run_json([str(WP_SCRIPTS / "upload-image.sh"), args.site, card_local, f"card-{card_slug}{ext}"], timeout=120)
                 tick("card_image_upload_sec", t0)
                 card_id, card_url = int(up["id"]), up["source_url"]
+                created_media.append({"role": "card", "id": card_id, "url": card_url, "filename": f"card-{card_slug}{ext}", "used": True})
                 steps.append("card_image_uploaded")
         else:
             steps.append("card_image_cache_reused")
@@ -691,6 +692,7 @@ def main() -> int:
             upf = run_json([str(WP_SCRIPTS / "upload-image.sh"), args.site, featured_path, f"featured-{card_slug}-final.jpg"], timeout=120)
             tick("featured_upload_sec", t0)
             featured_id, featured_url = int(upf["id"]), upf["source_url"]
+            created_media.append({"role": "featured", "id": featured_id, "url": featured_url, "filename": f"featured-{card_slug}-final.jpg", "used": True, "scene": featured_scene})
             steps.append("featured_uploaded")
 
         # Rebuild and revalidate the exact final HTML after media IDs/URLs are known.
