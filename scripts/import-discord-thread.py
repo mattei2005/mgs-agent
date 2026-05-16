@@ -22,14 +22,32 @@ from pathlib import Path
 from typing import Any
 
 DEFAULT_OUT_DIR = Path("/root/mgs-agent/data/discord-thread-imports")
-ENV_FILES = [Path("/root/.hermes/profiles/zeus/.env"), Path("/root/mgs-agent/.env")]
 API_BASE = "https://discord.com/api/v10"
 USER_AGENT = "Hermes-Agent (https://github.com/NousResearch/hermes-agent)"
 
 
-def load_env_files() -> None:
+def candidate_env_files(profile: str | None = None) -> list[Path]:
+    """Return env files in safest load order for the caller profile."""
+    files: list[Path] = []
+    if profile:
+        files.append(Path(f"/root/.hermes/profiles/{profile}/.env"))
+    current_profile = os.environ.get("HERMES_PROFILE") or os.environ.get("HERMES_PROFILE_NAME")
+    if current_profile and current_profile != profile:
+        files.append(Path(f"/root/.hermes/profiles/{current_profile}/.env"))
+    files.extend([
+        Path("/root/.hermes/profiles/zeus/.env"),
+        Path("/root/mgs-agent/.env"),
+    ])
+    deduped: list[Path] = []
+    for path in files:
+        if path not in deduped:
+            deduped.append(path)
+    return deduped
+
+
+def load_env_files(profile: str | None = None) -> None:
     """Load simple KEY=VALUE entries without overwriting existing env vars."""
-    for env_path in ENV_FILES:
+    for env_path in candidate_env_files(profile):
         if not env_path.exists():
             continue
         try:
@@ -170,9 +188,10 @@ def main() -> int:
     parser.add_argument("thread", help="Link Discord ou ID da thread/canal")
     parser.add_argument("--out-dir", default=str(DEFAULT_OUT_DIR), help=f"Diretório de saída (default: {DEFAULT_OUT_DIR})")
     parser.add_argument("--limit", type=int, default=None, help="Limite máximo de mensagens para importar")
+    parser.add_argument("--profile", choices=["zeus", "atena"], default=None, help="Perfil Hermes preferencial para carregar DISCORD_BOT_TOKEN")
     args = parser.parse_args()
 
-    load_env_files()
+    load_env_files(args.profile)
     token = os.environ.get("DISCORD_BOT_TOKEN")
     if not token:
         raise SystemExit("ERROR: DISCORD_BOT_TOKEN não encontrado no ambiente/.env")
