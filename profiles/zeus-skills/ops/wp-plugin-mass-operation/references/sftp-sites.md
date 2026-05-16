@@ -40,7 +40,7 @@ for IP in 44.208.155.39 3.19.138.131 35.175.97.196 18.116.18.34; do
 done
 
 # Listar raiz do WP via SFTP (confirma credenciais)
-sshpass -p "$PASS" sftp -P 22 -o StrictHostKeyChecking=no wpfiles@$HOST << 'EOF'
+sshpass -p "$PASS" sftp -P 22 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/root/.ssh/known_hosts_mgs wpfiles@$HOST << 'EOF'
 ls
 ls wp-content
 EOF
@@ -50,7 +50,7 @@ EOF
 
 ```bash
 # Verificar arquivos em mu-plugins após deploy
-sshpass -p "$PASS" sftp -P 22 -o StrictHostKeyChecking=no wpfiles@$HOST << 'EOF'
+sshpass -p "$PASS" sftp -P 22 -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/root/.ssh/known_hosts_mgs wpfiles@$HOST << 'EOF'
 ls wp-content/mu-plugins
 EOF
 # Nota: usar path RELATIVO (sem /). Path absoluto "/wp-content/..." retorna "File not found".
