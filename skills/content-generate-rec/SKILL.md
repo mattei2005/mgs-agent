@@ -37,6 +37,11 @@ featured generation, article API, LazyBlock assembly, validation, WP publish,
 Yoast update/scoring, cache save, and public URL verification into one command.
 This reduces agent LLM roundtrips from ~30+ to ~1-3.
 
+> **REFERENCE - fast runner optimization:** For the Amex baseline, runner rollout
+> validation order, deterministic repair lessons, browser/Playwright policy, and
+> Rodolfo → Atena request template, see `references/fast-runner-optimization.md`.
+> Load it when auditing REC speed/cost or tuning the runner.
+
 ## Inputs
 
 Required:

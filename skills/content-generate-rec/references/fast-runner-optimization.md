@@ -1,0 +1,123 @@
+# REC Fast Runner Optimization Notes
+
+Use this reference when optimizing or auditing REC publishing speed/cost, or when Rodolfo asks how to request the next REC so Atena avoids the legacy tool-calling loop.
+
+## Baseline from Amex Cashback Everyday case
+
+Observed legacy Atena/Hermes flow for a normal REC:
+
+- Total session time: ~9m38s.
+- Time after publish confirmation: ~7m42s.
+- Article API incremental cost: ~$0.027174.
+- Legacy reported session estimate: ~$1.2392, but this was an operational/token estimate, not the true incremental API cost under `openai-codex` subscription billing.
+- Browser/Playwright was used locally for research/image fallback.
+- Published output was valid: HTTP 200, Yoast SEO 88, Readability 90.
+
+Conclusion: the article generation API was not the bottleneck. The bottleneck was agent roundtrips: many ReAct/tool-calling steps, repeated validations, browser use, and manual orchestration.
+
+## Deterministic runner pattern
+
+Normal REC requests should go through one deterministic command:
+
+```bash
+/root/mgs-agent/scripts/mgs-rec-runner.py \
+  --site <site_key> \
+  --card "<exact card name>" \
+  --status <draft|publish> \
+  --source-url "<official URL>"
+```
+
+Expected responsibilities of the runner:
+
+- Load site/template config.
+- Check local card cache before browser/research.
+- Use official URL and provided data when available.
+- Generate/assemble article with LazyBlocks.
+- Enforce subtitle <=100 chars.
+- Validate final visible word count 450-500.
+- Apply deterministic padding/repair for mechanical failures instead of asking the LLM again.
+- Create/update WordPress post and Yoast data when not in dry-run.
+- Return one JSON summary with timing, cost estimate, URLs, IDs, validations, and errors.
+
+## Validation sequence for runner changes
+
+Safe rollout order:
+
+1. Create repo backup before modifying REC scripts/API.
+2. `python3 -m py_compile` any changed Python files.
+3. Check `mgs-rec-api.service` health:
+   ```bash
+   systemctl is-active mgs-rec-api.service
+   curl -s http://127.0.0.1:8001/health
+   ```
+4. Run `mgs-rec-runner.py --help`.
+5. Run a cache-HIT `--dry-run` smoke test first.
+6. Only after dry-run succeeds, run a real `--status draft` test with a new card and official URL.
+7. Publish directly only after the draft path is validated end-to-end.
+
+## Mechanical repair lessons
+
+Two common article-validation failures can be fixed deterministically:
+
+- Subtitle too long: rewrite only the first paragraph/subtitle to <=100 chars, preserving `<strong>{card_name}</strong>` when possible.
+- Word count below 450 after subtitle shortening: insert a short generic compliance/comparison paragraph before the CTA/LazyBlock, then re-run validation.
+
+Do not spend another LLM call on these mechanical failures unless deterministic repair fails.
+
+## Playwright/browser policy
+
+Use browser/Playwright as fallback, not as the default path.
+
+Preferred order:
+
+1. Card cache HIT.
+2. Official URL + curl/static extraction if enough.
+3. Provided manual fields (`annual_fee`, `apr`, `benefit`, `competitor`).
+4. Local Playwright fallback for image/search when scripts require it.
+5. External anti-bot/proxy provider only if approved for strong Cloudflare/geo blocks.
+
+Do not do browser-search loops when the user gave a valid official URL.
+
+## Standard request template for Rodolfo -> Atena
+
+Use this when Rodolfo wants a fast normal REC:
+
+```text
+Atena, publique direto um REC no eggbev.
+
+Tipo: REC
+Site: eggbev
+Vertical/template: gb-cc-en
+Status: publish
+Cartão: [NOME EXATO DO CARTÃO]
+URL oficial: [URL OFICIAL DO BANCO/EMISSOR]
+
+Use o mgs-rec-runner determinístico, não o fluxo manual passo a passo.
+Depois me envie o resumo final com:
+Post ID, URL pública, edit link, Yoast, word count, subtitle chars, meta chars, imagens, custo e tempo.
+```
+
+For first validation of a new runner path, change `Status: publish` to `Status: draft`.
+
+Optional fields to reduce research further:
+
+```text
+Annual fee: [...]
+APR: [...]
+Benefits:
+- [...]
+- [...]
+Competitors:
+- [...]
+```
+
+## Reporting standard for optimization audits
+
+When asked to review REC speed/cost, report:
+
+- Step-by-step path actually used.
+- Whether browser/Playwright was used and why.
+- Total duration and post-confirmation duration when available.
+- True incremental API/article cost vs any legacy token/session estimate.
+- The bottleneck: LLM/tool roundtrips, browser fallback, image handling, Yoast/WP, or API generation.
+- Concrete next change, with safe validation status (`dry-run`, `draft`, or `publish`).
