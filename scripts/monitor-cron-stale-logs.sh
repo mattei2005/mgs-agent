@@ -173,11 +173,23 @@ for job in parse_crons():
             detail = f'log age={age//60}min threshold={threshold//60}min path={log_path}'
         else:
             detail = f'age={age//60}min threshold={threshold//60}min'
+            try:
+                tail_lines = p.read_text(errors='ignore').splitlines()[-120:]
+            except Exception as exc:
+                tail_lines = [f'WARN: não consegui ler log para scan semântico: {exc}']
+            for line in reversed(tail_lines):
+                if SEMANTIC_ERROR_RE.search(line):
+                    clean = line.strip()
+                    if len(clean) > 700:
+                        clean = clean[:697] + '...'
+                    status = 'ERROR'
+                    detail = f'erro semântico no log: {clean} | age={age//60}min path={log_path}'
+                    break
     rows.append((script, status, detail))
     key = script
-    if status == 'STALE':
+    if status in ('STALE', 'ERROR'):
         last = int(state['alerts'].get(key, {}).get('last_alert', 0) or 0)
-        problems.append((script, detail, last))
+        problems.append((script, status, detail, last))
     elif key in state['alerts']:
         resolved.append((script, state['alerts'][key].get('detail', '')))
         state['alerts'].pop(key, None)
@@ -192,14 +204,19 @@ webhook = ''
 alerts_sent = 0
 now_iso = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(NOW))
 
-for script, detail, last in problems:
+for script, status, detail, last in problems:
     if NOW - last < ANTI_SPAM:
         continue
-    state['alerts'][script] = {'last_alert': NOW, 'detail': detail, 'first_seen': state['alerts'].get(script, {}).get('first_seen', NOW)}
+    state['alerts'][script] = {
+        'last_alert': NOW,
+        'status': status,
+        'detail': detail,
+        'first_seen': state['alerts'].get(script, {}).get('first_seen', NOW),
+    }
     if not webhook:
         webhook = get_webhook()
     if webhook:
-        post_discord(webhook, cron_stale_payload(script, detail))
+        post_discord(webhook, cron_problem_payload(script, status, detail))
         alerts_sent += 1
 
 for script, prev in resolved:
