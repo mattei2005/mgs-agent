@@ -1,68 +1,43 @@
-# Cron semantic error + auto-commit guardrails — 2026-05-16
+# Cron / auto-commit guardrails — 2026-05-16
 
-## Context
+Contexto: auditoria completa do repo `/root/mgs-agent` encontrou um cron rodando com erro semântico sem acionar stale-log, e risco no auto-commit watcher por `git add .`.
 
-During a repository-wide MGS ops audit, a cron was updating its log regularly but still failing semantically. The stale-log monitor reported OK because it only checked mtime.
+## Técnicas validadas
 
-Validated case:
+### 1. `grep -c ... || echo 0` quebra aritmética Bash
 
-```bash
-PUB_COUNT=$(printf "%s" "$PUBLICATIONS" | grep -c "create-post OK" || echo 0)
-[[ "$PUB_COUNT" -eq 0 ]]
-```
+`grep -c` imprime `0` quando não encontra match, mas sai com código 1. Se usado com `|| echo 0`, a variável vira `0\n0` e `[[ "$N" -eq 0 ]]` quebra com `syntax error in expression`.
 
-When there were zero matches, `grep -c` printed `0` and exited 1, then `|| echo 0` printed another `0`. The variable became `0\n0`, breaking Bash arithmetic with:
-
-```text
-syntax error in expression (error token is "0")
-```
-
-## Fix pattern
-
-Use one numeric source, not `grep -c ... || echo 0`:
+Padrão correto:
 
 ```bash
 COUNT=$(printf "%s" "$TEXT" | grep -c "PATTERN" || true)
 COUNT="${COUNT:-0}"
 ```
 
-or:
+Validação aplicada em `scripts/track-article-cost.sh`: execução real passou com `Pending publications: 0` e exit 0.
 
-```bash
-COUNT=$(grep -c "PATTERN" <<< "$TEXT" || true)
-COUNT="${COUNT:-0}"
+### 2. Stale-log monitor precisa scan semântico
+
+Log fresco só prova que o cron rodou; não prova que rodou saudável. Acrescentar scan das últimas linhas para padrões específicos:
+
+```python
+SEMANTIC_ERROR_RE = re.compile(
+    r'(syntax error|traceback|exception|fatal:|critical|erro crítico|error token|command not found|permission denied|no such file or directory)',
+    re.I,
+)
 ```
 
-## Semantic log monitor pattern
+Evitar falso positivo de erro antigo: quando o log tem marcador de início (`start`, `iniciando`, `===`), analisar só o bloco da execução mais recente.
 
-Stale-log monitors must detect recent errors, not only recent writes.
+### 3. Auto-commit watcher: guardrail antes de `git add -A`
 
-Implementation pattern:
+Risco: `git add .` ou `git add -A` pode commitar arquivo sensível criado fora do `.gitignore`.
 
-1. Read only the last N log lines.
-2. If the log has a clear execution-start marker (`start`, `iniciando`, `===`), scan only the latest execution block.
-3. Match specific failure patterns such as:
-   - `syntax error`
-   - `traceback`
-   - `exception`
-   - `fatal:`
-   - `critical`
-   - `erro crítico`
-   - `error token`
-   - `command not found`
-   - `permission denied`
-   - `no such file or directory`
-4. Avoid broad `error|erro|failed` unless the script’s normal success language is known, because phrases like `zero falhas` and comments can false-positive.
-5. Dry-run should show `ERROR` rows but not send Discord.
-6. After fixing the underlying script, force one clean run into the cron log and re-run dry-run; the monitor should return `problems=0`.
-
-## Auto-commit watcher guardrail
-
-`git add .` in an auto-commit watcher is a future secret-leak risk. Add a pre-commit guardrail before staging:
+Padrão validado:
 
 ```bash
 SENSITIVE_PATH_REGEX='(^|/)(\.env|.*\.pem|.*\.key|id_rsa|id_ed25519|.*credential.*|.*secret.*|.*token.*|.*password.*|hosts\.yml|\.npmrc|\.pypirc)$'
-
 SENSITIVE_CHANGES=$(git status --porcelain | awk '{print $2}' | grep -Ei "$SENSITIVE_PATH_REGEX" || true)
 if [ -n "$SENSITIVE_CHANGES" ]; then
   log "BLOQUEADO: arquivo sensível detectado; commit automático abortado"
@@ -73,31 +48,24 @@ fi
 git add -A -- .
 ```
 
-Important pitfall: do not combine `git add -A -- .` with pathspec excludes for ignored sensitive files like `.env` unless tested. In this environment, an exclusion pathspec including `.env` caused Git to fail with:
+Pitfall validado: não misturar `git add -A -- . ':!.env' ...` quando `.env` já está ignorado; o Git pode abortar com “paths are ignored by one of your .gitignore files: .env”. O guardrail via `git status --porcelain` + `.gitignore` é mais estável.
 
-```text
-The following paths are ignored by one of your .gitignore files:
-.env
-```
+### 4. Validação pós-hardening
 
-The safer pattern is: keep `.gitignore` for ignored files, add the sensitive-name preflight for non-ignored files, then stage normally.
-
-## Validation checklist
+Checklist mínimo após tocar monitores/autocommit:
 
 ```bash
 bash -n scripts/track-article-cost.sh scripts/auto-commit-watcher.sh scripts/monitor-cron-stale-logs.sh
-scripts/track-article-cost.sh >> logs/track-article-cost-cron.log 2>&1
+scripts/track-article-cost.sh
 scripts/monitor-cron-stale-logs.sh --dry-run
 systemctl restart mgs-autocommit.service
 systemctl status mgs-autocommit.service --no-pager --lines=10
 git status -sb
 ```
 
-Expected final state:
+Regenerar inventário quando scripts/cron mudam:
 
-```text
-track-article-cost.sh            | OK
-monitor-cron-stale-logs.sh       | SKIP watchdog self-skip
-problems=0 resolved=0 dry_run=1
-mgs-autocommit.service           | active/running
+```bash
+scripts/infra-discovery.sh >> logs/infra-discovery.log 2>&1
+scripts/cron-control-plane.py --write-doc >> logs/cron-control-plane.log 2>&1
 ```
