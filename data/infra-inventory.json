@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-16T01:47:41-04:00",
+    "updated_at": "2026-05-16T02:00:17-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -66,6 +66,9 @@
     },
     {
       "entry": "10 8 * * * flock -n /var/lock/cron_control_plane.lock /root/mgs-agent/scripts/cron-control-plane.py --write-doc >> /root/mgs-agent/logs/cron-control-plane.log 2>&1"
+    },
+    {
+      "entry": "*/15 * * * * flock -n /var/lock/monitor_cron_stale_logs.lock /root/mgs-agent/scripts/monitor-cron-stale-logs.sh >> /root/mgs-agent/logs/monitor-cron-stale-logs.log 2>&1"
     }
   ],
   "scripts": [
@@ -86,8 +89,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/cleanup-zombie-sessions.sh",
-      "size_bytes": 1744,
-      "modified_at": "2026-05-01T23:58:09-04:00"
+      "size_bytes": 2529,
+      "modified_at": "2026-05-16T01:57:40-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/cron-smoke-test.sh",
+      "size_bytes": 3453,
+      "modified_at": "2026-05-16T01:58:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/deprecated/cleanup-discord-threads.sh",
@@ -111,8 +119,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
-      "size_bytes": 3705,
-      "modified_at": "2026-05-02T14:08:02-04:00"
+      "size_bytes": 4765,
+      "modified_at": "2026-05-16T01:57:39-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/infra-discovery.sh",
@@ -133,6 +141,11 @@
       "path": "/root/mgs-agent/scripts/monitor-auto-push.sh",
       "size_bytes": 9858,
       "modified_at": "2026-05-02T22:57:40-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
+      "size_bytes": 6091,
+      "modified_at": "2026-05-16T01:59:13-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
@@ -1188,8 +1201,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "6a47550f74f3305432cdfaf67e640a5a",
-      "modified_at": "2026-05-16T01:45:02-04:00"
+      "md5": "b861ff4744ae870f6adad275fe427440",
+      "modified_at": "2026-05-16T02:00:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1198,16 +1211,22 @@
       "modified_at": "2026-04-21T11:28:16-04:00"
     },
     {
+      "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
+      "size_bytes": 59,
+      "md5": "bfb0c20e57008e22bf13dcaf84f19473",
+      "modified_at": "2026-05-16T02:00:02-04:00"
+    },
+    {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
       "size_bytes": 330,
-      "md5": "8e31c321d8799e661aa3d614679bd055",
-      "modified_at": "2026-05-15T08:00:04-04:00"
+      "md5": "7f051625578eea98e95f0633f4ed5ec3",
+      "modified_at": "2026-05-16T01:58:25-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 45452,
-      "md5": "1cc1d4678cf56ccf59747bc93dbd10ac",
-      "modified_at": "2026-05-16T01:42:16-04:00"
+      "size_bytes": 45262,
+      "md5": "9d55aa9257985f61fc0bf7fa8340aff1",
+      "modified_at": "2026-05-16T01:47:43-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1249,7 +1268,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
       "md5": "15091d080ba5dc1014d9e99778910db5",
-      "modified_at": "2026-05-16T01:45:02-04:00"
+      "modified_at": "2026-05-16T02:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
