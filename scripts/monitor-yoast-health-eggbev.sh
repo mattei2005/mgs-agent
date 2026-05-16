@@ -191,7 +191,7 @@ expect {
 }
 EOFEXP
 chmod +x "${TMP_DIR}/yoast_scp.exp"
-"${TMP_DIR}/yoast_scp.exp" "$S03_PASS" "$S01_PASS" "${TMP_DIR}/yoast_health_query_eggbev.sh" "$REMOTE_SCRIPT" > /dev/null 2>&1
+"${TMP_DIR}/yoast_scp.exp" "$S03_PASS" "$S01_PASS" "${TMP_DIR}/yoast_health_query_eggbev.sh" "$REMOTE_SCRIPT" "$SSH_OPTS" > /dev/null 2>&1
 log "SCP OK."
 
 # ── SSH execute + captura output ──────────────────────────────────────────────
@@ -202,8 +202,9 @@ cat > "${TMP_DIR}/yoast_ssh.exp" << 'EOFEXP'
 set s03 [lindex $argv 0]
 set s01 [lindex $argv 1]
 set remote_script [lindex $argv 2]
+set ssh_opts [lindex $argv 3]
 set timeout 120
-spawn ssh -o StrictHostKeyChecking=no -J zeus@46.4.95.117 zeus@162.55.28.178
+spawn sh -c "ssh $ssh_opts -J zeus@46.4.95.117 zeus@162.55.28.178"
 expect "46.4.95.117's password:"
 send "$s03\r"
 expect "162.55.28.178's password:"
