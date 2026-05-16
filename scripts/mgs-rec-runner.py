@@ -143,46 +143,10 @@ def fetch_reference_text(url: str) -> Tuple[int, str]:
 
 
 def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Dict[str, Any]:
-    key = load_anthropic_key()
-    if not key:
-        raise RunnerError("ANTHROPIC_API_KEY unavailable for reference extraction")
-    import anthropic  # local import so --dry-run env checks stay lightweight
-
-    client = anthropic.Anthropic(api_key=key)
-    prompt = f"""Extract verified credit-card facts from the reference text.
-Return ONLY compact JSON with this schema:
-{{
-  "card_name": "exact product name",
-  "annual_fee": "fee as stated, or No annual fee",
-  "apr": "representative APR as stated, or N/A",
-  "benefits": ["3-5 factual benefits"],
-  "tag10": "short benefit tag <=25 chars",
-  "tag2": "short benefit tag <=25 chars",
-  "descriptor": "50-100 char card descriptor",
-  "competitors": [{{"name":"real comparable UK credit card","apr":"if known"}}, {{"name":"real comparable UK credit card","apr":"if known"}}]
-}}
-Rules: never invent card benefits. If a fact is absent, use N/A. Competitors may use generally known UK cards in the same segment.
-
-Requested card: {card_name}
-Source URL: {source_url}
-Reference text:
-{text[:12000]}
-"""
-    msg = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=1200,
-        system="You extract structured financial product facts. Output JSON only.",
-        messages=[{"role": "user", "content": prompt}],
+    raise RunnerError(
+        "Anthropic/Claude API disabled by policy. Provide explicit --benefit/--annual-fee facts "
+        "or migrate this extraction path to GPT-5.5/OAuth before running cache-miss RECs."
     )
-    out = msg.content[0].text.strip()
-    out = re.sub(r"^```json\s*|\s*```$", "", out, flags=re.I | re.S).strip()
-    try:
-        data = json.loads(out)
-    except Exception as e:
-        raise RunnerError(f"reference extraction returned invalid JSON: {e}; output={out[:1000]}")
-    if not data.get("benefits") or len(data.get("benefits", [])) < 3:
-        raise RunnerError("reference extraction produced fewer than 3 benefits")
-    return data
 
 
 def build_media_payload(media_id: Optional[int], media_url: Optional[str], title: str) -> str:

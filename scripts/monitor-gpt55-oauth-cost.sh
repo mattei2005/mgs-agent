@@ -118,14 +118,18 @@ else
   MENTION=""
 fi
 
-TITLE="${EMOJI} [GPT-5.5 OAuth] Custo simulado 24h: \$${COST}"
+TITLE="GPT-5.5 OAuth — volume 24h"
 
-DESC=$(printf "**Status:** %s\n**Custo real:** \$0.00 (OAuth — incluso na assinatura)\n**Custo hipotético:** \$%s (se fosse pay-per-token)\n**API calls:** %d (Zeus: %d | Atena: %d)\n**Tokens estimados:** ~%dK input / ~%dK output\n**Pricing ref:** GPT-5.5 \$%.2f/\$%.2f por 1M (estimativa)\n⚠️ Valores simulados — não representa cobrança real" \
-  "$STATUS" "$COST" "$TOTAL_CALLS" "$ZEUS_CALLS" "$ATENA_CALLS" \
-  "$TOTAL_INPUT_K" "$TOTAL_OUTPUT_K" "$PRICE_INPUT" "$PRICE_OUTPUT")
+if [ "$COST_INT" -ge "$THRESHOLD_ALERT" ]; then
+  SUMMARY="🔴 ALERTA — custo simulado \\$${COST}"
+elif [ "$COST_INT" -ge "$THRESHOLD_WARN" ]; then
+  SUMMARY="🟡 WARN — custo simulado \\$${COST}"
+else
+  SUMMARY="🟢 OK — custo simulado \\$${COST}"
+fi
 
 if [ -n "$MENTION" ]; then
-  CONTENT="${MENTION} verificar volume Zeus/Atena"
+  CONTENT="${MENTION} alerta de volume GPT-5.5 OAuth"
 else
   CONTENT=""
 fi
@@ -133,9 +137,32 @@ fi
 PAYLOAD=$(jq -n \
   --arg c "$CONTENT" \
   --arg t "$TITLE" \
-  --arg d "$DESC" \
+  --arg s "$SUMMARY" \
+  --arg status "$STATUS" \
+  --arg real "\\$0.00 — OAuth incluso na assinatura" \
+  --arg simulated "\\$${COST} — se fosse pay-per-token" \
+  --arg calls "${TOTAL_CALLS} total | Zeus ${ZEUS_CALLS} | Atena ${ATENA_CALLS}" \
+  --arg tokens "~${TOTAL_INPUT_K}K input | ~${TOTAL_OUTPUT_K}K output" \
+  --arg pricing "GPT-5.5 \\$${PRICE_INPUT}/\\$${PRICE_OUTPUT} por 1M — estimativa" \
+  --arg note "Valores simulados; não representa cobrança real." \
   --argjson col "$COLOR" \
-  '{content: $c, embeds: [{title: $t, description: $d, color: $col}]}')
+  '{
+    content: $c,
+    embeds: [{
+      title: $t,
+      description: $s,
+      color: $col,
+      fields: [
+        {name: "Status", value: $status, inline: false},
+        {name: "Custo real", value: $real, inline: true},
+        {name: "Custo hipotético", value: $simulated, inline: true},
+        {name: "API calls", value: $calls, inline: false},
+        {name: "Tokens estimados", value: $tokens, inline: false},
+        {name: "Referência", value: $pricing, inline: false},
+        {name: "Nota", value: $note, inline: false}
+      ]
+    }]
+  }')
 
 HTTP_CODE=$(curl -s --max-time 15 -X POST -H "Content-Type: application/json" \
   -d "$PAYLOAD" \
