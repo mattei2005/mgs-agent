@@ -4,9 +4,9 @@
 > Gerado automaticamente a partir de `data/pendencias.db.json`.  
 > Para adicionar/resolver: use scripts em `scripts/pendencia-*.sh`
 
-**Última atualização:** 2026-05-14T15:27:15-04:00  
-**Total abertas:** 58  
-**Total resolvidas:** 28
+**Última atualização:** 2026-05-15T17:17:07-04:00  
+**Total abertas:** 50  
+**Total resolvidas:** 37
 
 ---
 
@@ -15,26 +15,25 @@
 | Prioridade | Quantidade |
 |---|---|
 | 🔴 alta | 0 |
-| 🟡 media | 25 |
-| 🟢 baixa | 33 |
+| 🟡 media | 16 |
+| 🟢 baixa | 34 |
 
 **Por categoria:**
 
-- `agente`: 10
-- `infra`: 8
+- `agente`: 9
+- `infra`: 9
 - `monitor`: 7
 - `conteudo`: 6
 - `skills`: 6
-- `lovable`: 5
-- `documentacao`: 5
-- `pessoal`: 5
 - `externo`: 4
+- `pessoal`: 4
+- `lovable`: 2
+- `documentacao`: 2
 - `app`: 1
-- `seguranca`: 1
 
 ---
 
-## 🟡 MÉDIA (25 itens)
+## 🟡 MÉDIA (16 itens)
 
 | ID | Título | Categoria | Tempo | Bloqueio |
 |---|---|---|---|---|
@@ -50,21 +49,12 @@
 | `PEND-018` | Mudança lógica monitor readability: canário 5/5 → saúde geral site | `conteudo` | 2h | Decidida com Atena, implementação não rolou |
 | `PEND-019` | REGRA 7 (Atena custo Discord) - testar em REC novo após fortalecimento | `agente` | 5min após próximo REC | — |
 | `PEND-020` | REGRA 8 (rename + mention) - Atena ignora apesar de EXECUCAO OBRIGATORIA | `agente` | 1-2h investigação | Comportamental, não técnico |
-| `PEND-021` | Migração Lovable Cloud → Supabase próprio (MGS Dashboard) | `lovable` | 8-16h | — |
-| `PEND-022` | Trocar @lovable.dev/cloud-auth-js → auth nativo Supabase | `lovable` | 4h | Bloqueado por PEND-021 |
-| `PEND-023` | Trocar @lovable.dev/email-js → Resend/SES/Postmark | `lovable` | 1h | — |
-| `PEND-024` | Fix segurança wp_app_password (criptografar pgsodium) | `seguranca` | 1-2h | Delegada pro Lovable.dev (14/05/2026) — aguarda... |
 | `PEND-026` | Preservar última migration kill-switch force_logout_version | `lovable` | 10min | Delegada pro Lovable.dev (14/05/2026) — aguarda... |
 | `PEND-027` | Agente Ares (FB Ads + Google Ads + ChatPion) | `agente` | 40h+ | Após Atena 100% estável em produção |
 | `PEND-028` | Adicionar gestores em authorized-users.json | `agente` | 30min | Quando Ares existir |
-| `PEND-035` | Migração total operação MGS para produção (90+ RECs/mês) | `agente` | ongoing | — |
-| `PEND-045` | Compartilhar briefings com Raquel | `documentacao` | 30min | — |
-| `PEND-046` | Reunião com Raquel (pipeline + próxima vertical) | `documentacao` | 1h | — |
-| `PEND-047` | Adicionar Raquel como GitHub collaborator (mattei2005/mgs-agent) | `documentacao` | 5min | — |
-| `PEND-054` | 1Password Teams plan vaults estruturados | `pessoal` | 4h | — |
 | `PEND-067` | Auto-discover Discord channel_prompts - validar fix em REC real | `agente` | 5min após próximo REC | — |
 
-## 🟢 BAIXA (33 itens)
+## 🟢 BAIXA (34 itens)
 
 | ID | Título | Categoria | Tempo | Bloqueio |
 |---|---|---|---|---|
@@ -101,6 +91,7 @@
 | `PEND-072` | Cost tracking nativo Hermes - revisitar quando upstream adicionar pricing dos modelos atuais | `infra` | 10min validacao | — |
 | `PEND-073` | Confirmar visualmente se duplicacao Atena canal pai vs thread eh preview nativo Discord ou bug real | `agente` | 5min observacao | — |
 | `PEND-086` | Monitorar resposta form Tier 4 Anthropic (enviado 22/04) | `externo` | 5min check periódico | — |
+| `PEND-087` | Avaliar criação de profile cron-worker em Haiku para crons LLM | `infra` | 45min | Aguardar aumento real de crons agent-based ou n... |
 
 ---
 

@@ -1,8 +1,71 @@
 # 📚 Histórico de Pendências Resolvidas — MGS Digital Corp
 
-> Arquivo gerado automaticamente. Total: 28 resolvidas.
+> Arquivo gerado automaticamente. Total: 37 resolvidas.
 
 ---
+
+### ✅ [PEND-021] Migração Lovable Cloud → Supabase próprio (MGS Dashboard)
+
+- **Categoria:** `lovable`
+- **Resolvida em:** 2026-05-15T17:17:07-04:00
+- **Resolvida por:** rodolfo
+- **Como:** Descartada por decisão direta do Rodolfo em 2026-05-15.
+
+### ✅ [PEND-022] Trocar @lovable.dev/cloud-auth-js → auth nativo Supabase
+
+- **Categoria:** `lovable`
+- **Resolvida em:** 2026-05-15T17:17:07-04:00
+- **Resolvida por:** rodolfo
+- **Como:** Descartada por decisão direta do Rodolfo em 2026-05-15.
+
+### ✅ [PEND-023] Trocar @lovable.dev/email-js → Resend/SES/Postmark
+
+- **Categoria:** `lovable`
+- **Resolvida em:** 2026-05-15T17:17:07-04:00
+- **Resolvida por:** rodolfo
+- **Como:** Descartada por decisão direta do Rodolfo em 2026-05-15.
+
+### ✅ [PEND-024] Fix segurança wp_app_password (criptografar pgsodium)
+
+- **Categoria:** `seguranca`
+- **Resolvida em:** 2026-05-15T17:17:07-04:00
+- **Resolvida por:** rodolfo
+- **Como:** Descartada por decisão direta do Rodolfo em 2026-05-15.
+
+### ✅ [PEND-035] Migração total operação MGS para produção (90+ RECs/mês)
+
+- **Categoria:** `agente`
+- **Resolvida em:** 2026-05-15T17:17:07-04:00
+- **Resolvida por:** rodolfo
+- **Como:** Descartada por decisão direta do Rodolfo em 2026-05-15.
+
+### ✅ [PEND-045] Compartilhar briefings com Raquel
+
+- **Categoria:** `documentacao`
+- **Resolvida em:** 2026-05-15T17:17:07-04:00
+- **Resolvida por:** rodolfo
+- **Como:** Descartada por decisão direta do Rodolfo em 2026-05-15.
+
+### ✅ [PEND-046] Reunião com Raquel (pipeline + próxima vertical)
+
+- **Categoria:** `documentacao`
+- **Resolvida em:** 2026-05-15T17:17:07-04:00
+- **Resolvida por:** rodolfo
+- **Como:** Descartada por decisão direta do Rodolfo em 2026-05-15.
+
+### ✅ [PEND-047] Adicionar Raquel como GitHub collaborator (mattei2005/mgs-agent)
+
+- **Categoria:** `documentacao`
+- **Resolvida em:** 2026-05-15T17:17:07-04:00
+- **Resolvida por:** rodolfo
+- **Como:** Descartada por decisão direta do Rodolfo em 2026-05-15.
+
+### ✅ [PEND-054] 1Password Teams plan vaults estruturados
+
+- **Categoria:** `pessoal`
+- **Resolvida em:** 2026-05-15T17:17:07-04:00
+- **Resolvida por:** rodolfo
+- **Como:** Descartada por decisão direta do Rodolfo em 2026-05-15.
 
 ### ✅ [PEND-005] Migrar runcloud-inventory.sh para set -a/+a
 
