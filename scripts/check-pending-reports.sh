@@ -168,10 +168,10 @@ PY
         # Atualizar state — marcar como alerted
         for entry in "${PENDING_SKILLS[@]}"; do
             IFS='|' read -r agent skill_name skill_path skill_key <<< "$entry"
-            STATE=$(printf "%s" "$STATE" | python3 - "$skill_key" "$NOW" "$skill_name" "$agent" "$skill_path" <<'PY'
-import json, sys
+            STATE=$(STATE_JSON="$STATE" python3 - "$skill_key" "$NOW" "$skill_name" "$agent" "$skill_path" <<'PY'
+import json, os, sys
 skill_key, now, skill_name, agent, skill_path = sys.argv[1:6]
-d = json.load(sys.stdin)
+d = json.loads(os.environ["STATE_JSON"])
 d.setdefault('alerted', {})[skill_key] = {
     'alerted_at': int(now),
     'skill_name': skill_name,
@@ -227,10 +227,10 @@ PY
 )
 
         # Persistir remoção do state ANTES de enviar (idempotência)
-        STATE=$(printf "%s" "$STATE" | python3 - "$skill_key" "$skill_name" "$agent" <<'PY'
-import json, sys, datetime
+        STATE=$(STATE_JSON="$STATE" python3 - "$skill_key" "$skill_name" "$agent" <<'PY'
+import json, os, sys, datetime
 skill_key, skill_name, agent = sys.argv[1:4]
-d = json.load(sys.stdin)
+d = json.loads(os.environ["STATE_JSON"])
 entry = d.get('alerted', {}).pop(skill_key, None)
 d.setdefault('resolved', {})[skill_key] = {
     'resolved_at': datetime.datetime.now(datetime.timezone.utc).isoformat() + 'Z',
