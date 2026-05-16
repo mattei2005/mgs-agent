@@ -100,13 +100,14 @@ chmod +x /tmp/remote_cmd.sh
 # 2. SCP the script (use scp_jump.exp pattern above, change paths)
 
 # 3. Execute via SSH expect
-cat > /tmp/run_remote.exp << 'EOFEXP'
+cat > "$TMP_DIR/run_remote.exp" << 'EOFEXP'
 #!/usr/bin/expect -f
 set s03 [lindex $argv 0]
 set s01 [lindex $argv 1]
+set known_hosts [lindex $argv 2]
 set timeout 60
 
-spawn ssh -o StrictHostKeyChecking=no -J zeus@46.4.95.117 zeus@162.55.28.178
+spawn ssh -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=$known_hosts -J zeus@46.4.95.117 zeus@162.55.28.178
 expect "46.4.95.117's password:"
 send "$s03\r"
 expect "162.55.28.178's password:"
@@ -118,8 +119,8 @@ sleep 10        # adjust based on command duration
 send "exit\r"
 expect eof
 EOFEXP
-chmod +x /tmp/run_remote.exp
-/tmp/run_remote.exp "$S03_PASS" "$S01_PASS"
+chmod +x "$TMP_DIR/run_remote.exp"
+"$TMP_DIR/run_remote.exp" "$S03_PASS" "$S01_PASS" "$KNOWN_HOSTS_FILE"
 ```
 
 ## Full deploy workflow (deploy file + verify)
