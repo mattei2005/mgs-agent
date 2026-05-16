@@ -93,21 +93,37 @@ Timeout normal: o comando demora ~60s+ em atualizações grandes — timeout no 
 
 ## Validação pós-update
 
+**Obrigatório após toda atualização Hermes:** não basta `hermes --version` mostrar nova versão. Só reportar sucesso depois de confirmar que não há novo commit pendente, serviços estão ativos, patches locais seguem compatíveis e os testes alvo passam.
+
+Checklist rápido:
+
 ```bash
+repo=/root/.hermes/hermes-agent
+
 # Aguardar ~10s para gateways reiniciarem
 sleep 10
 
-# 1. Versão instalada
-hermes --version
-# Deve mostrar: nova versão + "Up to date" (ou N commits behind se houver commits recentes)
+# 1. Versão instalada e nova checagem upstream
+hermes --version 2>&1 | sed -n '1,25p'
+git -C "$repo" fetch --quiet origin main
+git -C "$repo" rev-parse --short HEAD
+git -C "$repo" rev-parse --short origin/main
+git -C "$repo" rev-list --count HEAD..origin/main   # esperado: 0
 
 # 2. Services ativos
 systemctl is-active zeus-gateway.service atena-gateway.service
 # Esperado: active / active
 
-# 3. Patch local ainda aplicado?
-grep "PATCH (MGS Digital Corp)" /root/.hermes/hermes-agent/gateway/run.py
+# 3. Patches locais preservados e compatíveis
+git -C "$repo" status --short
+git -C "$repo" diff --stat
+
+# 4. Smoke nos arquivos patchados
+py="$repo/venv/bin/python"
+"$py" -m py_compile "$repo/gateway/platforms/discord.py" "$repo/gateway/run.py" "$repo/tools/discord_tool.py"
 ```
+
+Fluxo completo e suite alvo: `references/post-update-validation.md`.
 
 ---
 
@@ -198,3 +214,9 @@ Se houver patches locais (`git status --short` não vazio), exportar `git diff` 
 6. **Confirmar ambos os gateways ativos** — após restart, verificar `zeus-gateway` E `atena-gateway`. Em casos raros um sobe e o outro não. Se `deactivating` persistir após 5s, forçar: `systemctl restart zeus-gateway.service`.
 
 7. **Versão permanece igual após update com apenas commits (sem nova tag)** — `hermes --version` pode mostrar a mesma tag (ex: v0.13.0) mesmo após atualizar dezenas de commits. Isso é normal — a tag só muda em releases oficiais. "Up to date" no output confirma que o update foi aplicado.
+
+8. **Validar depois do update, não só atualizar** — Rodolfo espera garantia operacional pós-update: nova checagem de upstream, serviços, patches locais, smoke tests e suite alvo. Não reportar sucesso até esses checks passarem.
+
+9. **Pytest Discord contaminado por env de produção** — testes unitários com canais fake podem falhar se `DISCORD_ALLOWED_CHANNELS`, `DISCORD_IGNORED_CHANNELS` ou `DISCORD_NO_THREAD_CHANNELS` vierem do ambiente real. Para validação hermética, rodar pytest com `env -u` nesses filtros conforme `references/post-update-validation.md`. Isso testa o código sem alterar config de produção.
+
+10. **OOM durante update/sessões longas** — em VPS pequeno sem swap, `hermes update` + gateway/agent pesado pode acionar OOM killer. Se ocorrer, confirmar que systemd reiniciou os gateways e considerar swapfile como mitigação de infraestrutura; não confundir OOM pós-update com falha de patch local.
