@@ -162,7 +162,7 @@ print("YOAST_DATA:" + json.dumps({
 }), flush=True)
 PYEOF
 EOFREMOTE
-chmod +x ${TMP_DIR}/yoast_health_query_eggbev.sh
+chmod +x "${TMP_DIR}/yoast_health_query_eggbev.sh"
 
 # ── SCP do script remoto ──────────────────────────────────────────────────────
 log "Enviando script remoto via SCP (S03→S01)..."
