@@ -74,7 +74,7 @@ Se SFTP é read-only e REST API está em 500:
 - **SSH interativo bloqueado** para `wpfiles` — apenas SFTP funciona.
 - **Path RELATIVO no SFTP** — `ls wp-content/mu-plugins/` funciona; `ls /wp-content/mu-plugins/` retorna "not found".
 - **`mu-plugins` não existe por padrão** — criar via elFinder ou SSH bitnami antes do primeiro deploy.
-- **Não usar `StrictHostKeyChecking=no`**. Na primeira conexão, usar `StrictHostKeyChecking=accept-new` + `UserKnownHostsFile=/root/.ssh/known_hosts_mgs`.
+- **Não usar `StrictHostKeyChecking` desativado**. Na primeira conexão, usar `StrictHostKeyChecking=accept-new` + `UserKnownHostsFile=/root/.ssh/known_hosts_mgs`.
 - **Sessão WP Admin expira em ~5 min** nos servidores Bitnami.
 - **WPCode snippet = alto risco** sem .pem (incidente real: openzed.com down 18h em 2026-04-25).
   Preferir sempre elFinder `cmd: put` — ver `references/bitnami-mu-plugin-deploy.md`.

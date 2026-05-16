@@ -21,7 +21,7 @@ Quando o pedido for auditoria/varredura operacional, checar também **erros sem�
 
 Para hardening de crons + auto-commit watcher após auditoria de repo, ver `references/cron-autocommit-guardrails-2026-05-16.md`: cobre correção do bug `grep -c`, scan semântico só do bloco de execução mais recente, guardrail contra auto-commit de arquivos sensíveis, pitfall com pathspec Git e `.env` ignorado, e checklist de validação.
 
-Para hardening de monitores que usam SSH/SCP via jump host RunCloud, ver `references/cron-ssh-hardening-2026-05-16.md`: cobre troca de `StrictHostKeyChecking=no` por `accept-new` + `UserKnownHostsFile` dedicado, `mktemp -d` 700, cleanup trap, script remoto único por PID e validação real sem post Discord indevido.
+Para hardening de monitores que usam SSH/SCP via jump host RunCloud, ver `references/cron-ssh-hardening-2026-05-16.md`: cobre troca de `StrictHostKeyChecking` desativado por `accept-new` + `UserKnownHostsFile` dedicado, `mktemp -d` 700, cleanup trap, script remoto único por PID e validação real sem post Discord indevido.
 
 Exemplos validados: `monitor-auto-push.sh` para o auto-push do mgs-agent; `cron-control-plane.py`, `cron-smoke-test.sh` e `monitor-cron-stale-logs.sh` para controle dos crons MGS.
 Exemplos validados:
@@ -360,7 +360,7 @@ Após criar os artefatos, atualizar manualmente 3 seções do inventário:
 
 11. **Auto-commit watcher com `git add .` precisa guardrail de segredo** — antes de staging automático, bloquear nomes sensíveis (`.env`, `*.pem`, `*.key`, `id_rsa`, `*token*`, `*secret*`, `*password*`, `hosts.yml`, `.npmrc`, `.pypirc`). Não tentar resolver isso com pathspec excludes incluindo arquivos ignorados como `.env` sem testar; Git pode abortar o `git add` por arquivo ignorado e derrubar o service. Padrão seguro: `.gitignore` + preflight `git status --porcelain | grep -Ei "$SENSITIVE_PATH_REGEX"` + `git add -A -- .`. Ver `references/cron-autocommit-guardrails-2026-05-16.md`.
 
-12. **Hardening SSH incremental para monitors via jump host** — quando um monitor usa `expect` + senha + `ssh/scp -J`, não trocar direto para chave permanente sem autorização explícita do Rodolfo. Primeiro remover `StrictHostKeyChecking=no` e usar `StrictHostKeyChecking=accept-new` com `UserKnownHostsFile=/root/.ssh/known_hosts_mgs`, `mktemp -d` local com `chmod 700`, `trap cleanup EXIT`, script remoto único (`/tmp/name_$$.sh`) e remoção remota após execução. Validar com execução real controlada e confirmar que não houve post Discord indevido. Ver `references/cron-ssh-hardening-2026-05-16.md`.
+12. **Hardening SSH incremental para monitors via jump host** — quando um monitor usa `expect` + senha + `ssh/scp -J`, não trocar direto para chave permanente sem autorização explícita do Rodolfo. Primeiro remover `StrictHostKeyChecking` desativado e usar `StrictHostKeyChecking=accept-new` com `UserKnownHostsFile=/root/.ssh/known_hosts_mgs`, `mktemp -d` local com `chmod 700`, `trap cleanup EXIT`, script remoto único (`/tmp/name_$$.sh`) e remoção remota após execução. Validar com execução real controlada e confirmar que não houve post Discord indevido. Ver `references/cron-ssh-hardening-2026-05-16.md`.
 
 ---
 
