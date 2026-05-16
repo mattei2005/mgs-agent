@@ -27,7 +27,10 @@ Every call must include a `site_key` matching a key in
 
 ## Scripts
 
-All scripts live in `./scripts/` and must be invoked via absolute path:
+All scripts live in `./scripts/` and must be invoked via absolute path.
+
+HTTP calls must use the centralized `wp_curl_auth_http` wrapper in `scripts/wp-curl-auth.sh` when capturing status codes. This keeps credentials out of argv, preserves 4xx/5xx bodies via `--fail-with-body`, returns real HTTP codes for REST errors, and reserves `000` for transport failures. See `references/wp-rest-curl-hardening.md` for the validation recipe and fake-curl probe.
+
 
 ### `resolve-credentials.sh <site_key>`
 Reads `sites.json`, pulls the WordPress Application Password from 1Password via
