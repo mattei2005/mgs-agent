@@ -35,9 +35,12 @@ Expected responsibilities of the runner:
 - Generate/assemble article with LazyBlocks.
 - Enforce subtitle <=100 chars.
 - Validate final visible word count 450-500.
-- Apply deterministic padding/repair for mechanical failures instead of asking the LLM again.
+- Apply deterministic padding/trim repair for mechanical failures instead of asking the LLM again.
+- Validate article content **before** new WordPress media uploads to avoid orphan media when word-count/SEO validation fails.
+- Rebuild/revalidate the exact final HTML after media IDs/URLs are known.
+- Reuse cached card media when available; support `--card-image-url` as a manual override to skip image search.
+- Return one JSON summary with `timings_sec`, cost estimate, URLs, IDs, validations, and errors.
 - Create/update WordPress post and Yoast data when not in dry-run.
-- Return one JSON summary with timing, cost estimate, URLs, IDs, validations, and errors.
 
 ## Validation sequence for runner changes
 
@@ -116,7 +119,22 @@ Benefits:
 - [...]
 Competitors:
 - [...]
+Card image URL: [...]  # optional; maps to --card-image-url and skips Bing/Playwright image search
 ```
+
+## Current optimized runner behavior (2026-05-16)
+
+The runner now follows this safer/faster order:
+
+1. Load config + cache.
+2. Extract/request/cache card facts.
+3. Generate article via local API.
+4. Assemble and validate content before any new WP media upload.
+5. Upload/reuse card image and generate/upload featured image only after content validation passes.
+6. Rebuild and revalidate final HTML with real media IDs/URLs.
+7. Resolve taxonomy, create post, update Yoast, score, save cache, verify public URL.
+
+A cache-HIT dry-run for `American Express Rewards Credit Card` validated in ~20s with `timings_sec.article_api_sec` around 20s and both pre-upload/final validation around 0.1s each.
 
 ## Reporting standard for optimization audits
 
