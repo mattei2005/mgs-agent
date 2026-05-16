@@ -44,7 +44,7 @@ echo "api_calls=$api_calls | custo estimado=\$${cost_total} (hipotético) | cust
 
 ## Scripts de monitoramento em produção
 
-- `/root/mgs-agent/scripts/monitor-anthropic-cost.sh` — renomeável, conta api_calls 24h Zeus + Atena
+- `/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh` — conta api_calls 24h Zeus + Atena e reporta custo real $0.00 / custo hipotético
 - `/root/mgs-agent/scripts/track-article-cost.sh` — estima tokens por artigo, grava em article-tracker.db
 
 ## Calibração recomendada

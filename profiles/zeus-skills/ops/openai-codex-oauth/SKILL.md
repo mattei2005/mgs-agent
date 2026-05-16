@@ -218,6 +218,6 @@ Regra operacional curta: **cron novo = Haiku por padrão, salvo exceção explí
 
 6. **Custo no Hermes aparece como "included"** — o `usage_pricing.py` detecta `openai-codex` e retorna `billing_mode=subscription_included`. O resumo de sessão no Discord vai mostrar "custo: included" em vez de valor monetário. Normal e correto.
 
-7. **Scripts de monitoramento de custo Anthropic ficam obsoletos** — após migração, `monitor-anthropic-cost.sh` e `track-article-cost.sh` precisam ser adaptados. Ver `references/cost-monitoring-gpt-oauth.md` para a abordagem atual (estimativa via api_calls do agent.log).
+7. **Scripts de monitoramento de custo Anthropic ficam obsoletos** — após migração, `monitor-gpt55-oauth-cost.sh` e `track-article-cost.sh` usam estimativa via api_calls, não Anthropic Admin API. Ver `references/cost-monitoring-gpt-oauth.md` para a abordagem atual.
 
 8. **Cron sem pin herda o provider do perfil** — após migrar Zeus/Atena para Codex, qualquer cron agent-based com `model: null` ou `provider: null` passa a herdar `openai-codex` + `gpt-5.5`. Auditar e pinçar explicitamente em Haiku antes de reativar/rodar. Ver `references/cron-model-pinning.md`.
