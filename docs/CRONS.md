@@ -1,6 +1,6 @@
 # Crons MGS — Control Plane
 
-Gerado em: `2026-05-16T01:58:26-04:00`  
+Gerado em: `2026-05-16T01:59:25-04:00`  
 Fonte: `root crontab + script/log stat, read-only`  
 Total MGS ativo no root crontab: **16**
 
@@ -177,7 +177,7 @@ Frequência   | Script                         | Owner          | Risco         
 - **Função:** Regenera docs/CRONS.md com inventário/status dos crons MGS.
 - **Comando:** `flock -n /var/lock/cron_control_plane.lock /root/mgs-agent/scripts/cron-control-plane.py --write-doc >> /root/mgs-agent/logs/cron-control-plane.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/cron-control-plane.log`
-- **Último log:** arquivo ausente
+- **Último log:** 2026-05-16T01:59:25-04:00 (0 bytes)
 
 ## Comandos úteis
 

@@ -24,6 +24,8 @@ SCRIPTS = BASE / 'scripts'
 
 DESCRIPTIONS = {
     'cron-control-plane.py': 'Regenera docs/CRONS.md com inventário/status dos crons MGS.',
+    'monitor-cron-stale-logs.sh': 'Watchdog que alerta quando logs de crons MGS deixam de atualizar dentro da tolerância esperada.',
+    'cron-smoke-test.sh': 'Smoke test manual dos crons MGS seguros; usa dry-run em scripts de risco.',
     'sync-souls.sh': 'Sincroniza SOUL.md, config.yaml e skills MGS dos profiles Hermes para versionamento no repo.',
     'monitor-auto-push.sh': 'Monitora falhas no auto-push Git do /root/mgs-agent e alerta em #mgs-alerts.',
     'monitor-yoast-health-eggbev.sh': 'Monitora saúde Yoast do eggbev: SEO + Readability com baseline, semanal e alerta por degradação.',
