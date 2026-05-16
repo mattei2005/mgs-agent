@@ -1,8 +1,8 @@
 # Crons MGS — Control Plane
 
-Gerado em: `2026-05-16T01:59:25-04:00`  
+Gerado em: `2026-05-16T01:59:57-04:00`  
 Fonte: `root crontab + script/log stat, read-only`  
-Total MGS ativo no root crontab: **16**
+Total MGS ativo no root crontab: **17**
 
 ## Resumo executivo
 
@@ -24,7 +24,8 @@ Frequência   | Script                         | Owner          | Risco         
 0 8 * * *    | pendencia-render-md.sh         | Zeus/Ops       | baixo: re-renderiza docs/PENDENCIAS.md  | sim   | (sem log útil ainda)
 0 * * * *    | chat-log.sh                    | Zeus/Ops       | baixo: re-renderiza índice              | sim   | 2 sessões indexadas
 */15 * * * * | sync-codex-oauth.sh            | Zeus/Infra     | médio: atualiza auth.json dos profiles  | sim   | [2026-05-16T05:45:01Z] done: all profiles in sync, nothing to do
-10 8 * * *   | cron-control-plane.py          | Zeus/Ops       | baixo: re-renderiza docs/CRONS.md       | sim   | (sem log útil ainda)
+10 8 * * *   | cron-control-plane.py          | Zeus/Ops       | baixo: re-renderiza docs/CRONS.md       | sim   | OK wrote /root/mgs-agent/docs/CRONS.md jobs=16 generated_at=2026-05-16T01:59:25-04:00
+*/15 * * * * | monitor-cron-stale-logs.sh     | Zeus/Infra     | baixo: read-only + alerta Discord       | sim   | [2026-05-16T05:59:57Z] cron-stale check: jobs=17 problems=0 resolved=0 alerts_sent=0
 ```
 
 ## Pontos de atenção
@@ -177,7 +178,16 @@ Frequência   | Script                         | Owner          | Risco         
 - **Função:** Regenera docs/CRONS.md com inventário/status dos crons MGS.
 - **Comando:** `flock -n /var/lock/cron_control_plane.lock /root/mgs-agent/scripts/cron-control-plane.py --write-doc >> /root/mgs-agent/logs/cron-control-plane.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/cron-control-plane.log`
-- **Último log:** 2026-05-16T01:59:25-04:00 (0 bytes)
+- **Último log:** 2026-05-16T01:59:25-04:00 (86 bytes)
+
+### `monitor-cron-stale-logs.sh`
+- **Frequência:** `*/15 * * * *`
+- **Owner:** Zeus/Infra
+- **Risco:** baixo: read-only + alerta Discord
+- **Função:** Watchdog que alerta quando logs de crons MGS deixam de atualizar dentro da tolerância esperada.
+- **Comando:** `flock -n /var/lock/monitor_cron_stale_logs.lock /root/mgs-agent/scripts/monitor-cron-stale-logs.sh >> /root/mgs-agent/logs/monitor-cron-stale-logs.log 2>&1`
+- **Log:** `/root/mgs-agent/logs/monitor-cron-stale-logs.log`
+- **Último log:** 2026-05-16T01:59:57-04:00 (85 bytes)
 
 ## Comandos úteis
 
