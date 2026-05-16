@@ -148,14 +148,13 @@ for line in data.replace('\r','').split('\n'):
         sys.exit(0)
 print("? ?")
 PYEOF
-_IDX=$(echo "$SSH_OUT" | PARSE_ID="$POST_ID" python3 /tmp/_parse_idx_$$.py 2>/dev/null)
-rm -f /tmp/_parse_idx_$$.py
+_IDX=$(echo "$SSH_OUT" | PARSE_ID="$POST_ID" python3 "${TMP_DIR}/parse_idx.py" 2>/dev/null)
 IDX_SEO=$(echo  "$_IDX" | awk '{print $1}')
 IDX_READ=$(echo "$_IDX" | awk '{print $2}')
 WPCLI_OK=$(echo "$SSH_OUT" | grep -c "WPCLI_DONE" || echo "0")
 
 # Cleanup
-rm -f /tmp/yoast_update_${POST_ID}.sh /tmp/_scp_y${POST_ID}.exp /tmp/_ssh_y${POST_ID}.exp
+# Local temp files are removed by the EXIT trap; remote script is removed after execution.
 
 # ── Output ────────────────────────────────────────────────────────────────────
 python3 - << PYEOF
