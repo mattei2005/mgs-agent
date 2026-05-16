@@ -628,8 +628,18 @@ Required fields in the single message:
 - Focus keyword
 - Tags applied (confirm lang_{language} tag presente, lista CSV)
 - Imagens com IDs E URLs completas (card + featured + scene da featured)
+- Auditoria de artefatos: imagens criadas nesta execução, usadas, extras e cleanup aplicado
 - Cost reporting (Step 14 — duração, API calls, custo USD)
 - @Raquel mention (<@1496254952501280974>) for review notification
+
+> **PITFALL — reportar TODAS as imagens criadas (CRITICAL):**
+> Se a execução gerar/uploadar 6 imagens e usar apenas 2, Atena DEVE informar isso no resumo final. Nunca reportar só o erro principal ou só as imagens usadas. O usuário não deve precisar abrir WordPress → Media Library para descobrir órfãs.
+>
+> Regra operacional:
+> - Audit mínimo antes do report final: post existe, featured_media setada, card image presente no conteúdo/LazyBlock, e contagem de media criadas no run.
+> - Cleanup automático pós-publicação: deletar imagens extras somente quando forem uploads da própria execução e não estiverem em `featured_media`, no HTML do post, nem anexadas a outro post.
+> - Se a segurança não for 100%, NÃO deletar; reportar Media IDs e pedir decisão.
+> - Quando usar `mgs-rec-runner.py`, ler `images.artifact_audit` do JSON e refletir no resumo final.
 
 Format example (1 single Discord message):
 
@@ -647,6 +657,7 @@ Format example (1 single Discord message):
 🖼️ Imagens:
 • Card image ID: {card_id} — <{card_url}>
 • Featured image ID: {featured_id} — <{featured_url}> (cena: {featured_scene})
+• Audit: {created_count} criadas | {used_count} usadas | {extra_count} extras | {deleted_count} deletadas
 
 💰 Custo: ${cost} USD ({duration}, {api_calls} API calls)
 
