@@ -50,11 +50,16 @@ for AGENT in zeus atena; do
     KEY="${AGENT}__${SESSION_ID}"
     
     # Analisar ultimos 30 turns: contar erros consecutivos por tool
-    LOOP_DETECTED=$(tail -60 "$SESSION_FILE" 2>/dev/null | python3 << 'PYTHON_END'
+    LOOP_DETECTED=$(python3 - "$SESSION_FILE" << 'PYTHON_END'
 import sys, json
 from collections import defaultdict
 
-lines = sys.stdin.readlines()
+session_file = sys.argv[1]
+try:
+    with open(session_file, "r", encoding="utf-8", errors="ignore") as fh:
+        lines = fh.readlines()[-60:]
+except OSError:
+    lines = []
 tool_calls = []  # lista de (tool_name, has_error)
 
 for line in lines:

@@ -28,7 +28,7 @@ wp_curl_auth() {
   chmod 600 "$temp_cred"
   
   # Garantir limpeza mesmo em caso de erro
-  trap "rm -f '$temp_cred'" RETURN
+  trap 'rm -f "$temp_cred"' RETURN
   
   # Escrever credenciais em formato curl -K (config file)
   # Importante: aspas duplas + escape de caracteres especiais

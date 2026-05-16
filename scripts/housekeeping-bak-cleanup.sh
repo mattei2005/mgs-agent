@@ -50,7 +50,7 @@ fi
 # ─── Coletar arquivos a deletar ANTES de deletar (pra logar/notificar) ──────
 TO_DELETE=$(find /root/.hermes /root/mgs-agent /root/backups /tmp \
     -type f -name "*.bak*" \
-    -mtime +${RETENTION_DAYS} \
+    -mtime +"${RETENTION_DAYS}" \
     ! -path '*/.git/*' \
     ! -path '*/node_modules/*' \
     2>/dev/null || true)
@@ -74,7 +74,7 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
         [[ -z "$f" ]] && continue
         log "  would rm $f"
     done
-    DIRS_CANDIDATE=$(find /root/backups -type d -empty -mtime +${RETENTION_DAYS} -print 2>/dev/null | wc -l)
+    DIRS_CANDIDATE=$(find /root/backups -type d -empty -mtime +"${RETENTION_DAYS}" -print 2>/dev/null | wc -l)
     log "DRY-RUN: ${DIRS_CANDIDATE} diretórios vazios seriam removidos em /root/backups"
     log "=== END DRY-RUN — candidatos ${COUNT} arquivos / ${TOTAL_MB} MB ==="
     exit 0
@@ -93,7 +93,7 @@ echo "$TO_DELETE" | while IFS= read -r f; do
 done
 
 # ─── Limpar diretórios vazios deixados pra trás (snapshots antigos) ─────────
-DIRS_REMOVED=$(find /root/backups -type d -empty -mtime +${RETENTION_DAYS} -delete -print 2>/dev/null | wc -l)
+DIRS_REMOVED=$(find /root/backups -type d -empty -mtime +"${RETENTION_DAYS}" -delete -print 2>/dev/null | wc -l)
 if [[ "$DIRS_REMOVED" -gt 0 ]]; then
     log "Removidos ${DIRS_REMOVED} diretórios vazios em /root/backups"
 fi

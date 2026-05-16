@@ -132,4 +132,4 @@ print(json.dumps({
 }, indent=2))
 PYEOF
 
-echo "[$NOW] SAVE card_slug=$(jq -r .card_slug $JSON_FILE) source=$(jq -r '.source // "browser"' $JSON_FILE)" >> "$LOG_FILE"
+echo "[$NOW] SAVE card_slug=$(jq -r .card_slug "$JSON_FILE") source=$(jq -r '.source // "browser"' "$JSON_FILE")" >> "$LOG_FILE"
