@@ -2,6 +2,7 @@
 set -euo pipefail
 
 # Load env vars (for systemd/cron use)
+# shellcheck source=/dev/null
 [ -f /root/mgs-agent/.env ] && set -a && . /root/mgs-agent/.env && set +a
 
 SITE_KEY="${1:?usage: resolve-credentials.sh <site_key>}"

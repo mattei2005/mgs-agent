@@ -12,6 +12,7 @@ SCORER="/root/mgs-agent/skills/content-generate-rec/scripts/yoast-score-post.sh"
 RESOLVE="/root/mgs-agent/skills/content-publish-wordpress/scripts/resolve-credentials.sh"
 ADENDO_DATE="2026-04-25"
 
+# shellcheck source=/dev/null
 set -a && . /root/mgs-agent/.env && set +a
 
 CREDS=$(bash "$RESOLVE" "$SITE" 2>/dev/null)

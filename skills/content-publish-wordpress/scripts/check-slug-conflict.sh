@@ -2,6 +2,7 @@
 set -euo pipefail
 
 # Load env vars (OP_DEFAULT_VAULT, etc.) — runs under systemd/cron too
+# shellcheck source=/dev/null
 [ -f /root/mgs-agent/.env ] && set -a && . /root/mgs-agent/.env && set +a
 
 # Helper para curl autenticado seguro (não expõe senha em ps aux)

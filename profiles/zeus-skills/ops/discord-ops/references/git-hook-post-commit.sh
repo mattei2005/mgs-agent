@@ -26,6 +26,7 @@ esac
 SCRIPT
   chmod +x "$ASKER"
 
+  # shellcheck source=/dev/null
   [ -f /root/mgs-agent/.env ] && set -a && . /root/mgs-agent/.env && set +a
 
   echo "[$(date -Iseconds)] auto-push START commit=$COMMIT_HASH msg=\"$COMMIT_MSG\"" >>"$LOG"

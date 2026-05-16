@@ -2,6 +2,7 @@
 set -euo pipefail
 
 # Load env vars (OP_DEFAULT_VAULT, etc.) — runs under systemd/cron too
+# shellcheck source=/dev/null
 [ -f /root/mgs-agent/.env ] && set -a && . /root/mgs-agent/.env && set +a
 
 SLUG="${1:?usage: generate-featured-image.sh <slug> <card_image_path>}"

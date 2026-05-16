@@ -195,8 +195,8 @@ echo "$PUBLICATIONS" | grep "create-post OK" | while IFS= read -r LINE; do
   # === Insert into SQLite ===
   CALCULATED_AT=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
 
-  TOPIC_SQL=$(sed "s/'/''/g" <<< "$TOPIC")
-  EXCERPT_SQL=$(sed "s/'/''/g" <<< "$EXCERPT")
+  TOPIC_SQL=${TOPIC//\'/\'\'}
+  EXCERPT_SQL=${EXCERPT//\'/\'\'}
 
   sqlite3 "$DB" <<EOF
 INSERT OR REPLACE INTO article_publications (
