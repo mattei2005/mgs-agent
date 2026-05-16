@@ -817,6 +817,8 @@ def main() -> int:
                 "featured_url": featured_url,
                 "featured_scene": featured_scene,
                 "featured_path": featured_path,
+                "created_media": created_media,
+                "artifact_audit": artifact_audit,
             },
             "yoast": yoast_result,
             "warnings": warnings,
