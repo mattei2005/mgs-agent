@@ -193,10 +193,11 @@ log "SCP OK."
 # ── SSH execute + captura output ──────────────────────────────────────────────
 log "Executando queries no eggbev via SSH (S03→S01)..."
 
-cat > ${TMP_DIR}/yoast_ssh.exp << 'EOFEXP'
+cat > "${TMP_DIR}/yoast_ssh.exp" << 'EOFEXP'
 #!/usr/bin/expect -f
 set s03 [lindex $argv 0]
 set s01 [lindex $argv 1]
+set remote_script [lindex $argv 2]
 set timeout 120
 spawn ssh -o StrictHostKeyChecking=no -J zeus@46.4.95.117 zeus@162.55.28.178
 expect "46.4.95.117's password:"
@@ -205,14 +206,14 @@ expect "162.55.28.178's password:"
 send "$s01\r"
 expect "Made with"
 sleep 3
-send "bash ${TMP_DIR}/yoast_health_query_eggbev.sh\r"
+send "bash $remote_script; rm -f $remote_script\r"
 sleep 55
 send "exit\r"
 expect eof
 EOFEXP
-chmod +x ${TMP_DIR}/yoast_ssh.exp
+chmod +x "${TMP_DIR}/yoast_ssh.exp"
 
-SSH_OUT=$(${TMP_DIR}/yoast_ssh.exp "$S03_PASS" "$S01_PASS" 2>/dev/null)
+SSH_OUT=$("${TMP_DIR}/yoast_ssh.exp" "$S03_PASS" "$S01_PASS" "$REMOTE_SCRIPT" 2>/dev/null)
 
 # ── Parse resultado ───────────────────────────────────────────────────────────
 YOAST_LINE=$(echo "$SSH_OUT" | grep "^YOAST_DATA:" | head -1 || true)
