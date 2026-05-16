@@ -57,12 +57,19 @@ Safe rollout order:
 
 ## Mechanical repair lessons
 
-Two common article-validation failures can be fixed deterministically:
+Common article-validation failures should be fixed deterministically inside the runner before falling back to manual orchestration:
 
 - Subtitle too long: rewrite only the first paragraph/subtitle to <=100 chars, preserving `<strong>{card_name}</strong>` when possible.
 - Word count below 450 after subtitle shortening: insert a short generic compliance/comparison paragraph before the CTA/LazyBlock, then re-run validation.
+- Word count slightly above 500 after API generation: trim prose once from the last normal paragraph before the CTA, never from the subtitle, LazyBlocks, or comparative table, then validate the exact final HTML again. Use a small safety margin (for example, excess + 3 words) because validator tokenization may differ from plain `.split()` counts.
 
 Do not spend another LLM call on these mechanical failures unless deterministic repair fails.
+
+## WordPress term resolution in runner
+
+`resolve-term.sh` can fail with HTTP 400 `term_exists` even when the term is usable and the response body contains `data.term_id`. The deterministic runner should tolerate this by parsing `"term_id": <id>` from stderr/stdout and continuing with that ID instead of aborting publication.
+
+This is especially important for common reusable tags such as `travel credit card`, `no annual fee`, issuer names, and other SEO tags that already exist on eggbev.
 
 ## Playwright/browser policy
 
