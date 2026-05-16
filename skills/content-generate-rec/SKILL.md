@@ -8,6 +8,35 @@ description: Generates a REC (Recommendation) article for a credit card — fetc
 Generates and publishes a REC (Recommendation) article for a credit card to a
 WordPress site, using a per-site template selected from `template_key`.
 
+## Fast Runner default (CRITICAL)
+
+For normal REC requests, Atena must use the deterministic runner instead of
+executing the full workflow manually through many tool-calling turns.
+
+Default command shape:
+
+```bash
+/root/mgs-agent/scripts/mgs-rec-runner.py \
+  --site <site_key> \
+  --card "<exact card name>" \
+  --status <draft|publish> \
+  --source-url "<official URL>"
+```
+
+Operational rule:
+- If the user provides site, REC type, exact card name, status, and official URL,
+  call `mgs-rec-runner.py` directly and return the JSON summary.
+- Do not manually repeat Steps 1-14 unless the runner fails with a clear error.
+- If no official URL is provided and cache MISS is likely, ask for the official
+  URL first; this keeps the process fast and avoids browser-search loops.
+- Use `--dry-run` only for diagnostics requested by Rodolfo/Zeus, not for normal
+  editorial publishing.
+
+Why: the runner consolidates config, cache lookup, image download/upload,
+featured generation, article API, LazyBlock assembly, validation, WP publish,
+Yoast update/scoring, cache save, and public URL verification into one command.
+This reduces agent LLM roundtrips from ~30+ to ~1-3.
+
 ## Inputs
 
 Required:
