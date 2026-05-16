@@ -17,7 +17,7 @@ Qualquer situação onde um processo periódico grava em log com padrão START/O
 
 Também usar para gestão de **cron reliability/control plane**: inventariar crons MGS, padronizar `flock`, criar smoke tests seguros, adicionar `--dry-run` em jobs destrutivos e monitorar logs stale. Ver referência validada: `references/cron-control-plane.md`.
 
-Quando o pedido for auditoria/varredura operacional, checar também **erros semânticos em logs recentes** — log fresco não significa cron saudável. Ver `references/cron-semantic-error-audit.md` para o caso validado `grep -c ... || echo 0` que gerava `0\n0` e quebrava aritmética Bash sem acionar stale-log.
+Quando o pedido for auditoria/varredura operacional, checar também **erros semânticos em logs recentes** — log fresco não significa cron saudável. Ver `references/cron-semantic-error-audit.md` para o caso validado `grep -c ... || echo 0` que gerava `0\n0` e quebrava aritmética Bash sem acionar stale-log. Para a execução validada com hardening de `monitor-cron-stale-logs.sh` e guardrail do `auto-commit-watcher.sh`, ver `references/cron-autocommit-guardrails-2026-05-16.md`.
 
 Exemplos validados: `monitor-auto-push.sh` para o auto-push do mgs-agent; `cron-control-plane.py`, `cron-smoke-test.sh` e `monitor-cron-stale-logs.sh` para controle dos crons MGS.
 Exemplos validados:
@@ -352,7 +352,9 @@ Após criar os artefatos, atualizar manualmente 3 seções do inventário:
 
 9. **`grep -c ... || echo 0` gera bug de `0\n0`** — `grep -c` imprime `0` quando não acha match, mas sai com código 1; o `|| echo 0` imprime outro zero. Em variável usada como número, quebra com `syntax error in expression`. Usar `grep -c ... || true` e fallback separado. Ver `references/cron-semantic-error-audit.md`.
 
-10. **Stale-log monitor não detecta cron rodando com erro** — `mtime` recente só prova execução. Para cron crítico, adicionar semantic scan de `error|erro|fatal|traceback|exception|failed|syntax error` nas últimas linhas e classificar como `RODANDO COM ERRO` se houver matches relevantes.
+10. **Stale-log monitor não detecta cron rodando com erro** — `mtime` recente só prova execução. Para cron crítico, adicionar semantic scan de `syntax error|traceback|exception|fatal:|critical|erro crítico|error token|command not found|permission denied|no such file or directory` nas últimas linhas. Quando houver marcador de início (`start`, `iniciando`, `===`), escanear só o bloco da execução mais recente para não alertar erro antigo já resolvido.
+
+11. **Auto-commit watcher com `git add .` precisa guardrail de segredo** — antes de staging automático, bloquear nomes sensíveis (`.env`, `*.pem`, `*.key`, `id_rsa`, `*token*`, `*secret*`, `*password*`, `hosts.yml`, `.npmrc`, `.pypirc`). Não tentar resolver isso com pathspec excludes incluindo arquivos ignorados como `.env` sem testar; Git pode abortar o `git add` por arquivo ignorado e derrubar o service. Padrão seguro: `.gitignore` + preflight `git status --porcelain | grep -Ei "$SENSITIVE_PATH_REGEX"` + `git add -A -- .`. Ver `references/cron-autocommit-guardrails-2026-05-16.md`.
 
 ---
 
