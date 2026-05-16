@@ -80,11 +80,17 @@ PY
 - `SC2064` in cleanup traps: use a single-quoted trap that expands variables at signal/return time, e.g. `trap 'rm -f "$temp_cred"' RETURN` when the variable is local and still in scope.
 - `SC2034` unused loop variables: rename to `_attempt` or remove unused assignments when harmless.
 - `SC2034` in legacy/deprecated scripts: prefer a scoped `# shellcheck disable=SC2034` with a comment explaining compatibility, rather than refactoring old runtime blindly.
+- `SC1091` for sourced `.env` or local helper scripts: use `# shellcheck source=/dev/null` on the line before the source when runtime resolution is intentional and already validated.
+- `SC2012` for `ls` parsing: replace with `find ... -printf`, `sort`, `head`, and `awk` when listing files for human output.
+- `SC2002` for `cat file | head`: use `head -c N file` or redirect into the command.
+- `SC2001` for `echo "$x" | sed "s/'/''/g"`: use Bash replacement such as `${x//\'/\'\'}` when escaping single quotes for SQL string literals.
 - Quote file arguments passed to `jq`, `du`, `rm`, and similar tools when ShellCheck flags word splitting.
 
 ## Guardrails
 
 - Do not chase every `SC1091` for sourced `.env`/helper files; add `# shellcheck source=/dev/null` only when it improves signal.
+- If Rodolfo says "continue" after a report that leaves notes/info/style, it is acceptable to clear them too, but keep it cosmetic/safe: source comments, `find` instead of `ls`, direct `head` instead of `cat | head`, Bash parameter expansion instead of `echo | sed`, and no payload/credential/routing changes.
+- When a patch attempt fails with "file(s) were NOT modified" or similar verifier warning, do not report those files as changed until re-checked with `git status`, `git diff`, `grep`, or `read_file`. In the user-facing report, explain it plainly as "first patch attempt failed; I reapplied another way and verified".
 - Do not alter credentials, payloads, or webhook routing just to satisfy lint.
 - Do not run destructive scripts as validation. Prefer `--dry-run`, `bash -n`, fake fixtures, or service status checks.
 - Report notes/info/style separately from error/warning; Rodolfo wants the risk split, not a noisy undifferentiated lint dump.

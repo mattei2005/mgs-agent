@@ -48,6 +48,7 @@ real value          | real value          | real value
 - Use `text` code blocks when Discord Markdown tables render cramped or visually weak.
 - Truncate long values with `...` to preserve alignment.
 - Do not wrap mentions that need to ping users inside code blocks.
+- If an internal Hermes/tool warning appears in the UI (for example "File-mutation verifier" or patch validation noise), do **not** assume Rodolfo understands it. Translate it into operational meaning immediately: what happened, whether it affected the result, what you verified afterward, and current state. Avoid repeating the raw warning unless needed as evidence.
 
 ## Files updated in the originating session
 
