@@ -265,6 +265,33 @@ def visible_subtitle(content: str) -> str:
     return re.sub(r"<[^>]+>", "", html.unescape(m.group(1))).strip()
 
 
+def enforce_subtitle_limit(content: str, card_name: str, card_data: Dict[str, Any]) -> str:
+    """Keep first paragraph/excerpt <=100 chars without another LLM call."""
+    subtitle = visible_subtitle(content)
+    if len(subtitle) <= 100:
+        return content
+    annual = (card_data.get("annual_fee") or "").lower()
+    benefits = " ".join(card_data.get("benefits") or []).lower()
+    if "no annual fee" in annual or "no annual fee" in benefits:
+        tail = "offers cashback benefits with no annual fee."
+    elif "travel" in benefits:
+        tail = "offers travel-focused credit card benefits."
+    elif "cashback" in benefits:
+        tail = "offers cashback benefits for eligible spending."
+    else:
+        tail = "offers key credit card benefits and features."
+    # Include bold card name for focus-keyword placement, but cap hard.
+    plain = f"{card_name} {tail}"
+    if len(plain) > 98:
+        # Use a shortened display name but keep recognisable terms.
+        short = " ".join([w for w in card_name.split() if w.lower() not in {"credit", "card"}][:4])
+        plain = f"{short} {tail}"
+    if len(plain) > 98:
+        plain = plain[:95].rsplit(" ", 1)[0] + "."
+    replacement = f"<!-- wp:paragraph -->\n<p><strong>{html.escape(card_name)}</strong> {html.escape(tail)}</p>\n<!-- /wp:paragraph -->"
+    return re.sub(r"<!-- wp:paragraph -->\s*<p>.*?</p>\s*<!-- /wp:paragraph -->", replacement, content, count=1, flags=re.I | re.S)
+
+
 def call_rec_api(payload: Dict[str, Any]) -> Dict[str, Any]:
     req = urllib.request.Request(API_URL, method="POST", data=json.dumps(payload).encode(), headers={"Content-Type": "application/json"})
     try:
@@ -509,6 +536,7 @@ def main() -> int:
         card_block = lazy_credit_card(card_data["card_name"], card_id, card_url, site, card_slug, card_data, button_hex)
         button_block = lazy_button(site, card_slug, button_hex)
         content = assemble_content(api["article_html"], card_block, button_block)
+        content = enforce_subtitle_limit(content, card_data["card_name"], card_data)
         tmp_html = Path(tempfile.gettempdir()) / f"final-{card_slug}.html"
         tmp_html.write_text(content)
         validation = validate_html(tmp_html)
