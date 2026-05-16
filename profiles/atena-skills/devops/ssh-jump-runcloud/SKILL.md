@@ -57,7 +57,7 @@ cat > /tmp/scp_jump.exp << 'EOFEXP'
 set s03 [lindex $argv 0]
 set s01 [lindex $argv 1]
 set timeout 30
-spawn scp -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/root/.ssh/known_hosts_mgs \
+spawn scp -o StrictHostKeyChecking=no \
   -J zeus@46.4.95.117 \
   /local/path/to/file.php \
   zeus@162.55.28.178:/tmp/file.php
@@ -98,7 +98,7 @@ set s03 [lindex $argv 0]
 set s01 [lindex $argv 1]
 set timeout 60
 
-spawn ssh -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/root/.ssh/known_hosts_mgs -J zeus@46.4.95.117 zeus@162.55.28.178
+spawn ssh -o StrictHostKeyChecking=no -J zeus@46.4.95.117 zeus@162.55.28.178
 expect "46.4.95.117's password:"
 send "$s03\r"
 expect "162.55.28.178's password:"
@@ -124,20 +124,15 @@ S03_PASS=$(op item get 'Runcloud Server 03 - 46.4.95.117- zeus Acesso' --vault '
 S01_PASS=$(op item get 'Runcloud Server 01 - 162.55.28.178- zeus Acesso' --vault 'MGS Conteúdo' --fields password --reveal)
 
 # Step 1: SCP file
-KNOWN_HOSTS_FILE="/root/.ssh/known_hosts_mgs"
-mkdir -p /root/.ssh && chmod 700 /root/.ssh
-: > "$KNOWN_HOSTS_FILE" && chmod 600 "$KNOWN_HOSTS_FILE"
-TMP_DIR="$(mktemp -d /tmp/runcloud-deploy.XXXXXX)"
-trap 'rm -rf "$TMP_DIR"' EXIT
-cat > "$TMP_DIR/scp.exp" << 'EOF'
+cat > /tmp/_scp.exp << 'EOF'
 #!/usr/bin/expect -f
-set s03 [lindex $argv 0]; set s01 [lindex $argv 1]; set known_hosts [lindex $argv 2]; set timeout 30
-spawn scp -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/root/.ssh/known_hosts_mgs -J zeus@46.4.95.117 /tmp/myfile.php zeus@162.55.28.178:/tmp/myfile.php
+set s03 [lindex $argv 0]; set s01 [lindex $argv 1]; set timeout 30
+spawn scp -o StrictHostKeyChecking=no -J zeus@46.4.95.117 /tmp/myfile.php zeus@162.55.28.178:/tmp/myfile.php
 expect "46.4.95.117's password:"; send "$s03\r"
 expect "162.55.28.178's password:"; send "$s01\r"
 expect { "100%" { exp_continue } eof {} }
 EOF
-chmod +x "$TMP_DIR/scp.exp" && "$TMP_DIR/scp.exp" "$S03_PASS" "$S01_PASS" "$KNOWN_HOSTS_FILE"
+chmod +x /tmp/_scp.exp && /tmp/_scp.exp "$S03_PASS" "$S01_PASS"
 
 # Step 2: Deploy + verify
 cat > /tmp/verify.sh << 'EOF'

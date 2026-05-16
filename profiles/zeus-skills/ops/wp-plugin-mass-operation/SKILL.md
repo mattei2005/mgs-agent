@@ -222,8 +222,7 @@ def run_wpcli_all_servers(wp_command_template):
 
         result = terminal(
             f'sshpass -p {repr(password)} ssh -o PreferredAuthentications=password '
-            f'-o PubkeyAuthentication=no -o StrictHostKeyChecking=accept-new '
-            f'-o UserKnownHostsFile=/root/.ssh/known_hosts_mgs '
+            f'-o PubkeyAuthentication=no -o StrictHostKeyChecking=no '
             f'zeus@{ip} \'bash -s\' < {script_path}',
             timeout=600
         )
