@@ -146,16 +146,24 @@ PYEOF
   echo "$(date -Iseconds) ${LOG_PREFIX} ${SVC}: NRestarts=${CURRENT_N} delta=${DELTA} level=${ALERT_LEVEL}"
 
   if [[ "${ALERT_LEVEL}" == "info" ]]; then
-    MSG="⚠️ [INFRA] [RESTART] \`${SVC}\` reiniciou ${DELTA}x nas últimas ${WINDOW_HOURS}h. Acompanhar."
+    PAYLOAD=$(jq -n \
+      --arg svc "${SVC}" \
+      --arg delta "${DELTA}x" \
+      --arg window "${WINDOW_HOURS}h" \
+      '{content:"", embeds:[{title:"Service reiniciando acima do normal", color:15844367, fields:[{name:"Service", value:("`"+$svc+"`"), inline:true}, {name:"Reinícios", value:$delta, inline:true}, {name:"Janela", value:$window, inline:true}, {name:"Ação", value:"Acompanhar; investigar se subir para WARN.", inline:false}]}]}')
     curl -s --max-time 15 -X POST "${WEBHOOK_URL}" \
       -H "Content-Type: application/json" \
-      -d "{\"content\": \"${MSG}\"}" > /dev/null
+      -d "${PAYLOAD}" > /dev/null
     echo "$(date -Iseconds) ${LOG_PREFIX} INFO alert enviado para ${SVC}"
   elif [[ "${ALERT_LEVEL}" == "warn" ]]; then
-    MSG="🚨 [INFRA] [RESTART] \`${SVC}\` reiniciou ${DELTA}x nas últimas ${WINDOW_HOURS}h. Investigar urgente. <@344196393512075265>"
+    PAYLOAD=$(jq -n \
+      --arg svc "${SVC}" \
+      --arg delta "${DELTA}x" \
+      --arg window "${WINDOW_HOURS}h" \
+      '{content:"<@***> alerta de restart recorrente", embeds:[{title:"Service reiniciando em excesso", color:15158332, fields:[{name:"Service", value:("`"+$svc+"`"), inline:true}, {name:"Reinícios", value:$delta, inline:true}, {name:"Janela", value:$window, inline:true}, {name:"Ação", value:"Investigar logs e causa do restart.", inline:false}]}]}')
     curl -s --max-time 15 -X POST "${WEBHOOK_URL}" \
       -H "Content-Type: application/json" \
-      -d "{\"content\": \"${MSG}\"}" > /dev/null
+      -d "${PAYLOAD}" > /dev/null
     echo "$(date -Iseconds) ${LOG_PREFIX} WARN alert enviado para ${SVC}"
   fi
 done
