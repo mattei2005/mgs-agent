@@ -46,6 +46,8 @@ DESCRIPTIONS = {
 
 RISK = {
     'cron-control-plane.py': 'baixo: re-renderiza docs/CRONS.md',
+    'monitor-cron-stale-logs.sh': 'baixo: read-only + alerta Discord',
+    'cron-smoke-test.sh': 'baixo/médio: execução manual controlada',
     'sync-souls.sh': 'baixo',
     'monitor-auto-push.sh': 'baixo',
     'monitor-yoast-health-eggbev.sh': 'baixo',
@@ -66,6 +68,8 @@ RISK = {
 
 OWNER = {
     'cron-control-plane.py': 'Zeus/Ops',
+    'monitor-cron-stale-logs.sh': 'Zeus/Infra',
+    'cron-smoke-test.sh': 'Zeus/Ops',
     'monitor-yoast-health-eggbev.sh': 'Atena/Conteúdo',
     'track-article-cost.sh': 'Atena/Conteúdo',
     'pendencia-render-md.sh': 'Zeus/Ops',
