@@ -1,24 +1,33 @@
-# Cron model pinning after OpenAI Codex migration
+# Cron model/provider policy after GPT-5.5 OAuth migration
 
-## Durable lesson
+Current MGS policy (2026-05-16): **zero Anthropic/Claude pay-per-token API by default**.
 
-When a Hermes profile is migrated to `openai-codex` + `gpt-5.5`, agent-based cron jobs that do not specify their own `model`/`provider` inherit the profile default. That means a newly created or existing unpinned cron can start running on GPT/Codex instead of the intended cheap auxiliary model.
+## Defaults
 
-## MGS default policy
+- Interactive Zeus/Atena: `openai-codex` + `gpt-5.5`.
+- Deterministic recurring jobs: `script` + `no_agent: true` or plain Linux cron.
+- LLM-based recurring jobs: require an explicit provider/model decision before activation.
 
-- Keep interactive Zeus/Atena profiles on `openai-codex` + `gpt-5.5`.
-- Do **not** default scheduled work to Anthropic/Claude/Haiku. Rodolfo's current policy is zero pay-per-token Anthropic unless explicitly approved.
-- For deterministic/watchdog cron jobs that do not need reasoning, prefer `script` + `no_agent: true` so no LLM is called.
+## Cost-risk patterns
 
-## Audit checklist
+Flag these in active paths:
 
-When reviewing cron jobs after a provider migration:
+- `provider: anthropic`
+- `claude-*`
+- `ANTHROPIC_API_KEY`
+- `api.anthropic.com`
+- `anthropic.Anthropic`
+- services/listeners wrapping Claude calls, e.g. old `mgs-rec-api.service`
 
-1. List jobs per profile, especially Zeus and Atena.
-2. Flag jobs with `model: null` or `provider: null`.
-3. If the job is agent-based and should be low-cost, update it with explicit Haiku model override before resuming/running it.
-4. If the job is purely script output, convert or recreate as `no_agent: true` where appropriate.
+Historical docs/backups may keep these strings for audit context. Active service units, scripts, crons, profile configs and runtime env files should not.
 
-## Example policy statement
+## Migration approach
 
-"Cron novo = Haiku por padrão, salvo exceção explícita. Script-only = `no_agent: true`."
+1. Prefer converting the job to script-only/no_agent.
+2. If reasoning is required, use GPT-5.5/OAuth or ask Rodolfo before choosing any pay-per-token provider.
+3. Before running or resuming a cron, inspect its model/provider and runtime env.
+4. Validate by checking logs and grepping active paths for cost-risk patterns.
+
+## Do not preserve old Haiku default
+
+Previous guidance suggested `claude-haiku-4-5-20251001` for cheap cron jobs. That is now outdated for MGS because Rodolfo rejected Anthropic pay-per-token usage entirely unless explicitly approved.

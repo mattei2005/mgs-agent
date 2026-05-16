@@ -1,58 +1,54 @@
 # Anthropic API Decommission — MGS
 
-Use when Rodolfo says Anthropic/Claude API is too expensive or asks to ensure no pay-per-token Claude usage remains.
+Use when Rodolfo decides to stop Anthropic/Claude pay-per-token usage, or when a scan finds `ANTHROPIC_API_KEY`, `api.anthropic.com`, `anthropic.Anthropic`, `provider: anthropic`, or `claude-*` in active operational paths.
 
 ## Policy
 
-- Default state: **zero Anthropic/Claude API pay-per-token**.
-- Any use of `provider: anthropic`, `claude-*`, `ANTHROPIC_API_KEY`, `api.anthropic.com`, or Python `anthropic` in an active service is a cost risk.
-- Do not keep Claude/Haiku as a hidden fallback after migrating Zeus/Atena to GPT-5.5/OAuth.
-- If a service must keep Anthropic temporarily, report it as an explicit exception with owner, cost risk, and migration path.
+- Default state: zero Anthropic/Claude pay-per-token API calls.
+- Any exception requires explicit Rodolfo approval.
+- GPT-5.5/OAuth is preferred for agent work; deterministic/script-only paths are preferred for recurring monitors.
 
-## Audit checklist
+## Immediate cutoff checklist
 
-1. Repo/static scan:
-   - `git grep -n -i -E 'ANTHROPIC_API_KEY|api\.anthropic\.com|anthropic\.Anthropic|import anthropic|claude-|provider: anthropic'`
-   - Separate active code/config from historical docs, backups, changelog, and deprecated folders.
-2. Runtime scan:
-   - `systemctl list-units --type=service --state=running`
-   - inspect services under MGS that load `.env` or call Python APIs.
-   - `ss -ltnp` for local APIs (example: `127.0.0.1:8001` mgs-rec-api).
-3. Logs/evidence:
-   - Search recent logs for `https://api.anthropic.com/v1/messages` or Anthropic HTTP client traces.
-   - Redact keys; never print tokens.
-4. Credentials:
-   - Find local env entries only by key name / presence / length.
-   - Remove from active `.env` only after confirming no required production path depends on it, or after Rodolfo explicitly accepts breakage.
+1. Identify active services and listeners that can call Anthropic.
+   - Example: `mgs-rec-api.service` on `127.0.0.1:8001`.
+2. Stop, disable, and mask the service if it exists only to call Claude.
+   - Backup unit outside repo first.
+   - `systemctl stop <service>`
+   - `systemctl disable <service>`
+   - If masking fails because the unit file exists, back up and remove the unit file, `systemctl daemon-reload`, then `systemctl mask <service>`.
+3. Remove `ANTHROPIC_API_KEY=` lines from local runtime `.env` files without printing values.
+   - Back up files outside repo with mode 600.
+   - Never display the key in chat or logs.
+4. Patch active code paths to fail closed before any network call.
+   - Replace Anthropic fallback/extraction with a clear error such as: `Anthropic/Claude API disabled by policy`.
+   - Do not merely rely on a missing key; code should not read credentials or instantiate an Anthropic client.
+5. Validate.
+   - `systemctl show <service> -p LoadState -p UnitFileState -p ActiveState`
+   - `ss -ltnp | grep ':8001' || true`
+   - grep active repo paths for `ANTHROPIC_API_KEY|api.anthropic.com|anthropic.Anthropic|model="claude|MODEL = "claude`.
+   - Run a smoke test that previously would have called Anthropic; expected result is fast fail-closed, not a paid call.
+6. Record in audit log with actions taken and backup location.
 
-## Known MGS pitfall from 2026-05-16
+## Repo scan classification
 
-Renaming cost monitors and migrating agent profiles is not enough. `mgs-rec-api.service` remained active and `api/generate-rec-api.py` still used:
+Treat these as active risk:
+- `api/`, `scripts/`, active `profiles/*config*`, active service units, cron entries, current `.env` files.
 
-- `import anthropic`
-- `ANTHROPIC_API_KEY`
-- `MODEL = "claude-sonnet-4-6"`
-- `anthropic.Anthropic(...).messages.create(...)`
+Treat these as historical context unless referenced by active code:
+- `docs/changelog/`, `docs/PENDENCIAS-HISTORICO.md`, crontab backups, deprecated backups, old audit notes.
 
-`mgs-rec-runner.py` also had an Anthropic fallback for reference extraction when cache/manual facts were missing.
+## MGS case study — 2026-05-16
 
-Operational implication: stopping/removing Anthropic may break the REC fast runner until the generation API is migrated to GPT/OAuth or another no-pay-per-token path. Report that tradeoff clearly before disabling services.
+Findings:
+- `mgs-rec-api.service` was active and calling `https://api.anthropic.com/v1/messages`.
+- `api/generate-rec-api.py` used `anthropic` + `claude-sonnet-4-6`.
+- `scripts/mgs-rec-runner.py` had a cache-miss fallback to Anthropic.
+- Zeus/Atena `.env` contained `ANTHROPIC_API_KEY`.
 
-## Safe response pattern
-
-Use an aligned table:
-
-```text
-Uso Anthropic ainda ativo      Impacto
-────────────────────────────  ─────────────────────────────────────
-mgs-rec-api.service            Gera REC via Claude API real
-scripts/mgs-rec-runner.py      Pode acionar Claude como fallback
-ANTHROPIC_API_KEY em .env      Permite chamadas se algum script usar
-```
-
-Then recommend:
-
-1. Stop/disable active Anthropic services for immediate cost stop.
-2. Neutralize fallback code paths.
-3. Remove local env exposure; keep credential only in 1Password/archive if needed.
-4. Migrate functionality to GPT-5.5/OAuth or deterministic/script-only flow.
+Actions:
+- Stopped/disabled/masked `mgs-rec-api.service`.
+- Removed `ANTHROPIC_API_KEY` from Zeus/Atena local `.env` files without exposing values.
+- Patched `mgs-rec-runner.py` fallback to fail closed.
+- Validated port 8001 closed and no active Anthropic key line in local envs.
+- Dry-run failed in ~0.05s with connection refused/fail-closed and no Anthropic call.

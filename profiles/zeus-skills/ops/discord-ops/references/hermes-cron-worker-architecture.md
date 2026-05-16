@@ -4,18 +4,21 @@ Use this reference when auditing or changing scheduled work for Zeus/Atena.
 
 ## Target architecture
 
+Current policy (2026-05-16): Rodolfo does **not** want Anthropic/Claude pay-per-token usage by default, including Haiku. Use `openai-codex` + `gpt-5.5` for agent work, and prefer deterministic `script` + `no_agent=True` or plain Linux cron for recurring monitors.
+
 | Profile | Purpose | Default model |
 |---|---|---|
 | `zeus` | GM/orchestration, authorization, executive analysis | `gpt-5.5` via `openai-codex` |
 | `atena` | Editorial/content operations | `gpt-5.5` via `openai-codex` |
-| `cron-worker` | Scheduled jobs, watchdogs, cheap recurring routines | `claude-haiku-4-5-20251001` via `anthropic` |
+| `cron-worker` | Scheduled jobs/watchdogs | Prefer script-only/no_agent; any LLM provider needs explicit decision |
 
 ## Durable rules
 
-- New LLM-based cron jobs should live in `cron-worker`, not Zeus/Atena.
+- New recurring jobs should be deterministic script-only whenever possible.
 - If the job is deterministic/script-only, prefer `no_agent=True` or plain Linux cron; do not spend LLM tokens.
 - Zeus/Atena should not accumulate operational crons except explicit documented exceptions.
-- Use provider pinning for Claude models: `provider: anthropic`; do not rely on `provider: auto` when a profile default is `openai-codex`.
+- Do not pin new jobs to `provider: anthropic`/`claude-*` by default. Treat `ANTHROPIC_API_KEY`, `api.anthropic.com`, or `anthropic.Anthropic` in active runtime paths as a cost-risk finding unless explicitly approved by Rodolfo.
+- See `openai-codex-oauth/references/anthropic-api-decommission.md` for the shutdown checklist.
 
 ## Haiku model ID
 
