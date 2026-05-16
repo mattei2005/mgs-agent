@@ -57,7 +57,7 @@ cat > /tmp/scp_jump.exp << 'EOFEXP'
 set s03 [lindex $argv 0]
 set s01 [lindex $argv 1]
 set timeout 30
-spawn scp -o StrictHostKeyChecking=no \
+spawn scp -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/root/.ssh/known_hosts_mgs \
   -J zeus@46.4.95.117 \
   /local/path/to/file.php \
   zeus@162.55.28.178:/tmp/file.php
@@ -98,7 +98,7 @@ set s03 [lindex $argv 0]
 set s01 [lindex $argv 1]
 set timeout 60
 
-spawn ssh -o StrictHostKeyChecking=no -J zeus@46.4.95.117 zeus@162.55.28.178
+spawn ssh -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/root/.ssh/known_hosts_mgs -J zeus@46.4.95.117 zeus@162.55.28.178
 expect "46.4.95.117's password:"
 send "$s03\r"
 expect "162.55.28.178's password:"
