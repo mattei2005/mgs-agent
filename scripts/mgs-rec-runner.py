@@ -470,6 +470,7 @@ def main() -> int:
     ap.add_argument("--apr", default="")
     ap.add_argument("--benefit", action="append", default=[])
     ap.add_argument("--competitor", action="append", default=[], help="Name or JSON object; repeatable")
+    ap.add_argument("--card-image-url", default="", help="Optional direct card image URL; skips search-card-image fallback")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--allow-disambiguation", action="store_true")
     args = ap.parse_args()
@@ -478,6 +479,10 @@ def main() -> int:
     warnings: List[str] = []
     steps: List[str] = []
     costs = {"article_api": 0.0, "extract_llm_est": 0.0, "featured_image_est": 0.03, "total_est": 0.0}
+    timings: Dict[str, float] = {}
+
+    def tick(name: str, t0: float) -> None:
+        timings[name] = round(time.time() - t0, 2)
 
     try:
         site = load_site(args.site)
@@ -544,51 +549,8 @@ def main() -> int:
         card_local = None
         card_src = None
 
-        if not card_id or not card_url:
-            if args.dry_run:
-                steps.append("dry_run_skip_card_upload")
-            else:
-                source_url = card_data.get("card_official_url") or args.source_url
-                if not source_url:
-                    raise RunnerError("No card official URL available for image search")
-                img = run_json([str(GEN_SCRIPTS / "search-card-image.sh"), card_data["card_name"], source_url], timeout=180, allow_fail=True)
-                if img.get("status") != "OK" or not img.get("path"):
-                    raise RunnerError(f"Card image search failed: {json.dumps(img, ensure_ascii=False)[:1000]}")
-                card_local = img["path"]
-                card_src = img.get("source")
-                ext = Path(card_local).suffix or ".png"
-                up = run_json([str(WP_SCRIPTS / "upload-image.sh"), args.site, card_local, f"card-{card_slug}{ext}"], timeout=120)
-                card_id, card_url = int(up["id"]), up["source_url"]
-                steps.append("card_image_uploaded")
-
-        featured_id = None
-        featured_url = None
-        featured_scene = None
-        featured_path = None
-        if args.dry_run:
-            steps.append("dry_run_skip_featured")
-        else:
-            # Need local card image for Gemini; if cache only has uploaded URL, download it to tmp.
-            if not card_local:
-                if not card_url:
-                    raise RunnerError("No card image available for featured generation")
-                suffix = Path(urllib.parse.urlparse(card_url).path).suffix or ".png"
-                card_local = f"/tmp/card-{card_slug}-from-wp{suffix}"
-                urllib.request.urlretrieve(card_url, card_local)
-            feat = run_json([str(GEN_SCRIPTS / "generate-featured-image.sh"), card_slug, card_local], timeout=180)
-            featured_path = feat["path"]
-            featured_scene = feat.get("scene")
-            # Cheap deterministic validation before upload.
-            ident = run(["identify", "-format", "%w %h", featured_path], timeout=20)
-            if ident.returncode != 0:
-                raise RunnerError(f"featured identify failed: {ident.stderr}")
-            w, h = [int(x) for x in ident.stdout.split()[:2]]
-            if w < 1000 or h < 600:
-                raise RunnerError(f"featured image too small: {w}x{h}")
-            upf = run_json([str(WP_SCRIPTS / "upload-image.sh"), args.site, featured_path, f"featured-{card_slug}-final.jpg"], timeout=120)
-            featured_id, featured_url = int(upf["id"]), upf["source_url"]
-            steps.append("featured_uploaded")
-
+        # Generate and mechanically validate content BEFORE any new WP media upload.
+        # This prevents orphan card/featured media when the article later fails word-count/SEO validation.
         api_payload = {
             "site": args.site,
             "card_slug": card_slug,
@@ -599,34 +561,110 @@ def main() -> int:
             "benefits": card_data.get("benefits") or [],
             "competitors": card_data.get("competitors") or [],
         }
+        t0 = time.time()
         api = call_rec_api(api_payload)
+        tick("article_api_sec", t0)
         if not api.get("success"):
             raise RunnerError(f"mgs-rec-api failed: {api}")
         costs["article_api"] = float(api.get("cost_usd") or 0)
         card_data.update(api.get("card_data") or {})
         steps.append("article_generated")
 
-        card_block = lazy_credit_card(card_data["card_name"], card_id, card_url, site, card_slug, card_data, button_hex)
-        button_block = lazy_button(site, card_slug, button_hex)
-        content = assemble_content(api["article_html"], card_block, button_block)
-        content = enforce_subtitle_limit(content, card_data["card_name"], card_data)
-        tmp_html = Path(tempfile.gettempdir()) / f"final-{card_slug}.html"
-        tmp_html.write_text(content)
-        first_validation = validate_html_soft(tmp_html)
-        first_count = int(first_validation.get("count") or 0)
-        if first_validation.get("status") != "PASS" and first_count < 450 and first_validation.get("subtitle") == "pass":
-            content = pad_content_to_min_words(content, first_count, 450)
-            tmp_html.write_text(content)
-        elif first_validation.get("status") != "PASS" and first_count > 500 and first_validation.get("subtitle") == "pass":
-            # Mechanical over-length repair: trim prose once, then validate exact final HTML.
-            content = trim_content_to_max_words(content, first_count, 500)
-            tmp_html.write_text(content)
-        validation = validate_html(tmp_html)
-        subtitle = visible_subtitle(content)
-        subtitle_chars = len(subtitle)
-        if subtitle_chars > 100:
-            raise RunnerError(f"subtitle too long: {subtitle_chars} chars")
-        steps.append("content_validated")
+        def build_and_validate_current(stage: str) -> Tuple[str, Dict[str, Any], int]:
+            t_stage = time.time()
+            card_block = lazy_credit_card(card_data["card_name"], card_id, card_url, site, card_slug, card_data, button_hex)
+            button_block = lazy_button(site, card_slug, button_hex)
+            current = assemble_content(api["article_html"], card_block, button_block)
+            current = enforce_subtitle_limit(current, card_data["card_name"], card_data)
+            tmp_html = Path(tempfile.gettempdir()) / f"final-{card_slug}.html"
+            tmp_html.write_text(current)
+            first_validation = validate_html_soft(tmp_html)
+            first_count = int(first_validation.get("count") or 0)
+            if first_validation.get("status") != "PASS" and first_count < 450 and first_validation.get("subtitle") == "pass":
+                current = pad_content_to_min_words(current, first_count, 450)
+                tmp_html.write_text(current)
+            elif first_validation.get("status") != "PASS" and first_count > 500 and first_validation.get("subtitle") == "pass":
+                current = trim_content_to_max_words(current, first_count, 500)
+                tmp_html.write_text(current)
+            final_validation = validate_html(tmp_html)
+            subtitle = visible_subtitle(current)
+            sub_chars = len(subtitle)
+            if sub_chars > 100:
+                raise RunnerError(f"subtitle too long: {sub_chars} chars")
+            tick(f"validate_{stage}_sec", t_stage)
+            return current, final_validation, sub_chars
+
+        content, validation, subtitle_chars = build_and_validate_current("pre_upload")
+        steps.append("content_validated_pre_upload")
+
+        featured_id = None
+        featured_url = None
+        featured_scene = None
+        featured_path = None
+
+        if not card_id or not card_url:
+            if args.dry_run:
+                steps.append("dry_run_skip_card_upload")
+            else:
+                source_url = card_data.get("card_official_url") or args.source_url
+                if not source_url and not args.card_image_url:
+                    raise RunnerError("No card official URL available for image search")
+                t0 = time.time()
+                if args.card_image_url:
+                    suffix = Path(urllib.parse.urlparse(args.card_image_url).path).suffix or ".png"
+                    card_local = f"/tmp/card-{card_slug}-manual{suffix}"
+                    urllib.request.urlretrieve(args.card_image_url, card_local)
+                    card_src = args.card_image_url
+                    steps.append("card_image_manual_url_used")
+                else:
+                    img = run_json([str(GEN_SCRIPTS / "search-card-image.sh"), card_data["card_name"], source_url], timeout=180, allow_fail=True)
+                    if img.get("status") != "OK" or not img.get("path"):
+                        raise RunnerError(f"Card image search failed: {json.dumps(img, ensure_ascii=False)[:1000]}")
+                    card_local = img["path"]
+                    card_src = img.get("source")
+                tick("card_image_discovery_sec", t0)
+                ext = Path(card_local).suffix or ".png"
+                t0 = time.time()
+                up = run_json([str(WP_SCRIPTS / "upload-image.sh"), args.site, card_local, f"card-{card_slug}{ext}"], timeout=120)
+                tick("card_image_upload_sec", t0)
+                card_id, card_url = int(up["id"]), up["source_url"]
+                steps.append("card_image_uploaded")
+        else:
+            steps.append("card_image_cache_reused")
+
+        if args.dry_run:
+            steps.append("dry_run_skip_featured")
+        else:
+            if not card_local:
+                if not card_url:
+                    raise RunnerError("No card image available for featured generation")
+                suffix = Path(urllib.parse.urlparse(card_url).path).suffix or ".png"
+                card_local = f"/tmp/card-{card_slug}-from-wp{suffix}"
+                t0 = time.time()
+                urllib.request.urlretrieve(card_url, card_local)
+                tick("card_image_download_sec", t0)
+            t0 = time.time()
+            feat = run_json([str(GEN_SCRIPTS / "generate-featured-image.sh"), card_slug, card_local], timeout=180)
+            tick("featured_generate_sec", t0)
+            featured_path = feat["path"]
+            featured_scene = feat.get("scene")
+            t0 = time.time()
+            ident = run(["identify", "-format", "%w %h", featured_path], timeout=20)
+            if ident.returncode != 0:
+                raise RunnerError(f"featured identify failed: {ident.stderr}")
+            w, h = [int(x) for x in ident.stdout.split()[:2]]
+            if w < 1000 or h < 600:
+                raise RunnerError(f"featured image too small: {w}x{h}")
+            tick("featured_local_validate_sec", t0)
+            t0 = time.time()
+            upf = run_json([str(WP_SCRIPTS / "upload-image.sh"), args.site, featured_path, f"featured-{card_slug}-final.jpg"], timeout=120)
+            tick("featured_upload_sec", t0)
+            featured_id, featured_url = int(upf["id"]), upf["source_url"]
+            steps.append("featured_uploaded")
+
+        # Rebuild and revalidate the exact final HTML after media IDs/URLs are known.
+        content, validation, subtitle_chars = build_and_validate_current("final")
+        steps.append("content_validated_final")
 
         title, meta_desc, focus_kw = title_meta_focus(card_data["card_name"], card_data)
         if len(title) > 60 or len(meta_desc) < 120 or len(meta_desc) > 130 or len(focus_kw.split()) > 4:
@@ -723,6 +761,7 @@ def main() -> int:
             "edit_url": edit_url,
             "duration_sec": round(time.time() - started, 2),
             "steps": steps,
+            "timings_sec": timings,
             "cost_usd": costs,
             "card_data": {
                 "card_name": card_data.get("card_name"),
