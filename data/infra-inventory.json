@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-16T02:05:58-04:00",
+    "updated_at": "2026-05-16T02:30:59-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -134,8 +134,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-rec-runner.py",
-      "size_bytes": 31786,
-      "modified_at": "2026-05-16T02:04:07-04:00"
+      "size_bytes": 36002,
+      "modified_at": "2026-05-16T02:29:05-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/migration-2026-05-14-proximo-id-collision-fix.sh",
@@ -1211,8 +1211,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "b861ff4744ae870f6adad275fe427440",
-      "modified_at": "2026-05-16T02:00:03-04:00"
+      "md5": "3ea0442a9c5446acbac19fd8bc9de298",
+      "modified_at": "2026-05-16T02:30:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1223,8 +1223,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "bfb0c20e57008e22bf13dcaf84f19473",
-      "modified_at": "2026-05-16T02:00:02-04:00"
+      "md5": "78eb0060429ec470dd8c3acc00d2dd0e",
+      "modified_at": "2026-05-16T02:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
@@ -1234,9 +1234,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 45965,
-      "md5": "8c3363d069ce9f9ca0e0fa75c2e196e2",
-      "modified_at": "2026-05-16T02:05:33-04:00"
+      "size_bytes": 46265,
+      "md5": "dc9a5ff1a0cbf3a7d3de804efb49cfb9",
+      "modified_at": "2026-05-16T02:06:00-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1278,7 +1278,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
       "md5": "15091d080ba5dc1014d9e99778910db5",
-      "modified_at": "2026-05-16T02:05:02-04:00"
+      "modified_at": "2026-05-16T02:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
