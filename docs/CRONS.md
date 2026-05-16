@@ -1,8 +1,8 @@
 # Crons MGS — Control Plane
 
-Gerado em: `2026-05-16T01:40:19-04:00`  
+Gerado em: `2026-05-16T01:40:59-04:00`  
 Fonte: `root crontab + script/log stat, read-only`  
-Total MGS ativo no root crontab: **16**
+Total MGS ativo no root crontab: **17**
 
 ## Resumo executivo
 
@@ -13,7 +13,7 @@ Frequência   | Script                         | Owner          | Risco         
 */15 * * * * | monitor-auto-push.sh           | Zeus/Infra     | baixo                                   | sim   | [2026-05-16T01:30:02-04:00] monitor-auto-push: Concluído. consecutive_failures=0 last_ok=8afedaf
 0 10 * * *   | monitor-yoast-health-eggbev.sh | Atena/Conteúdo | baixo                                   | não   | (sem log útil ainda)
 */15 * * * * | check-pending-reports.sh       | Zeus/Infra     | baixo                                   | sim   | [2026-05-16 01:30:01] check-pending-reports.sh concluído
-*/5 * * * *  | monitor-service-restarts.sh    | Zeus/Infra     | baixo                                   | sim   | 2026-05-16T01:40:19-04:00 [monitor-service-restarts] atena-gateway: NRestarts=0 delta=0 level=ok
+*/5 * * * *  | monitor-service-restarts.sh    | Zeus/Infra     | baixo                                   | sim   | 2026-05-16T01:40:19-04:00 [monitor-service-restarts] OK
 0 12 * * *   | monitor-anthropic-cost.sh      | Zeus/Infra     | baixo                                   | não   | (sem log útil ainda)
 */5 * * * *  | monitor-tool-loops.sh          | Zeus/Infra     | baixo                                   | sim   | Loop detector: 0 alertas enviados
 0 5 * * *    | infra-discovery.sh             | Zeus/Infra     | médio: sobrescreve infra-inventory.json | não   | (sem log útil ainda)
@@ -25,6 +25,7 @@ Frequência   | Script                         | Owner          | Risco         
 0 8 * * *    | pendencia-render-md.sh         | Zeus/Ops       | baixo: re-renderiza docs/PENDENCIAS.md  | não   | (sem log útil ainda)
 0 * * * *    | chat-log.sh                    | Zeus/Ops       | baixo: re-renderiza índice              | não   | 2 sessões indexadas
 */15 * * * * | sync-codex-oauth.sh            | Zeus/Infra     | médio: atualiza auth.json dos profiles  | sim   | [2026-05-16T05:30:01Z] done: all profiles in sync, nothing to do
+10 8 * * *   | cron-control-plane.py          | Zeus/Ops       | baixo: re-renderiza docs/CRONS.md       | sim   | (sem log útil ainda)
 ```
 
 ## Pontos de atenção
@@ -78,7 +79,7 @@ Frequência   | Script                         | Owner          | Risco         
 - **Função:** Detecta restarts inesperados dos services zeus-gateway, atena-gateway e mgs-autocommit.
 - **Comando:** `flock -n /var/lock/monitor_service_restarts.lock /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-service-restarts.log`
-- **Último log:** 2026-05-16T01:40:19-04:00 (6786 bytes)
+- **Último log:** 2026-05-16T01:40:19-04:00 (6940 bytes)
 
 ### `monitor-anthropic-cost.sh`
 - **Frequência:** `0 12 * * *`
@@ -179,6 +180,15 @@ Frequência   | Script                         | Owner          | Risco         
 - **Log:** `/root/mgs-agent/logs/sync-codex-oauth.log`
 - **Último log:** 2026-05-16T01:30:01-04:00 (4235 bytes)
 
+### `cron-control-plane.py`
+- **Frequência:** `10 8 * * *`
+- **Owner:** Zeus/Ops
+- **Risco:** baixo: re-renderiza docs/CRONS.md
+- **Função:** Regenera docs/CRONS.md com inventário/status dos crons MGS.
+- **Comando:** `flock -n /var/lock/cron_control_plane.lock /root/mgs-agent/scripts/cron-control-plane.py --write-doc >> /root/mgs-agent/logs/cron-control-plane.log 2>&1`
+- **Log:** `/root/mgs-agent/logs/cron-control-plane.log`
+- **Último log:** arquivo ausente
+
 ## Comandos úteis
 
 ```bash
@@ -191,4 +201,3 @@ Frequência   | Script                         | Owner          | Risco         
 # Ver root crontab atual
 crontab -l
 ```
-

@@ -63,6 +63,7 @@ RISK = {
 }
 
 OWNER = {
+    'cron-control-plane.py': 'Zeus/Ops',
     'monitor-yoast-health-eggbev.sh': 'Atena/Conteúdo',
     'track-article-cost.sh': 'Atena/Conteúdo',
     'pendencia-render-md.sh': 'Zeus/Ops',
@@ -231,10 +232,17 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--json', action='store_true')
     ap.add_argument('--markdown', action='store_true')
+    ap.add_argument('--write-doc', action='store_true', help='Escreve docs/CRONS.md atomicamente')
     args = ap.parse_args()
     data = collect()
     if args.json:
         print(json.dumps(data, ensure_ascii=False, indent=2))
+    elif args.write_doc:
+        out = BASE / 'docs' / 'CRONS.md'
+        tmp = out.with_suffix('.md.tmp')
+        tmp.write_text(render_markdown(data), encoding='utf-8')
+        os.replace(tmp, out)
+        print(f"OK wrote {out} jobs={data['count']} generated_at={data['generated_at']}")
     else:
         print(render_markdown(data))
     return 0
