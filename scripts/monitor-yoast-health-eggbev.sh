@@ -46,6 +46,11 @@ DAY_OF_WEEK="$(date +%u)"  # 1=Mon ... 7=Sun
 
 log() { echo "[$(date -Iseconds)] ${LOG_PREFIX}: $*"; }
 
+TMP_DIR="$(mktemp -d /tmp/yoast-health-eggbev.XXXXXX)"
+chmod 700 "$TMP_DIR"
+cleanup() { rm -rf "$TMP_DIR"; }
+trap cleanup EXIT
+
 log "=== Iniciando monitor-yoast-health-eggbev ==="
 log "Data: ${NOW_DATE} | Dia semana: ${DAY_OF_WEEK}"
 
@@ -83,7 +88,7 @@ log "Credenciais OK."
 # ── Script remoto ─────────────────────────────────────────────────────────────
 # Roda no S01 (eggbev). Busca SEO + Readability em duas queries separadas.
 # Emite "YOAST_DATA:{json}" com ambas as métricas.
-cat > /tmp/yoast_health_query_eggbev.sh << 'EOFREMOTE'
+cat > ${TMP_DIR}/yoast_health_query_eggbev.sh << 'EOFREMOTE'
 #!/bin/bash
 # Executado remotamente no S01 via SSH.
 # Consulta wp_yoast_indexable para SEO e Readability.
@@ -156,19 +161,19 @@ print("YOAST_DATA:" + json.dumps({
 }), flush=True)
 PYEOF
 EOFREMOTE
-chmod +x /tmp/yoast_health_query_eggbev.sh
+chmod +x ${TMP_DIR}/yoast_health_query_eggbev.sh
 
 # ── SCP do script remoto ──────────────────────────────────────────────────────
 log "Enviando script remoto via SCP (S03→S01)..."
 
-cat > /tmp/_yoast_scp.exp << 'EOFEXP'
+cat > ${TMP_DIR}/yoast_scp.exp << 'EOFEXP'
 #!/usr/bin/expect -f
 set s03 [lindex $argv 0]
 set s01 [lindex $argv 1]
 set timeout 30
 spawn scp -o StrictHostKeyChecking=no -J zeus@46.4.95.117 \
-    /tmp/yoast_health_query_eggbev.sh \
-    zeus@162.55.28.178:/tmp/yoast_health_query_eggbev.sh
+    ${TMP_DIR}/yoast_health_query_eggbev.sh \
+    zeus@162.55.28.178:${TMP_DIR}/yoast_health_query_eggbev.sh
 expect "46.4.95.117's password:"
 send "$s03\r"
 expect "162.55.28.178's password:"
@@ -178,14 +183,14 @@ expect {
     eof    {}
 }
 EOFEXP
-chmod +x /tmp/_yoast_scp.exp
-/tmp/_yoast_scp.exp "$S03_PASS" "$S01_PASS" > /dev/null 2>&1
+chmod +x ${TMP_DIR}/yoast_scp.exp
+${TMP_DIR}/yoast_scp.exp "$S03_PASS" "$S01_PASS" > /dev/null 2>&1
 log "SCP OK."
 
 # ── SSH execute + captura output ──────────────────────────────────────────────
 log "Executando queries no eggbev via SSH (S03→S01)..."
 
-cat > /tmp/_yoast_ssh.exp << 'EOFEXP'
+cat > ${TMP_DIR}/yoast_ssh.exp << 'EOFEXP'
 #!/usr/bin/expect -f
 set s03 [lindex $argv 0]
 set s01 [lindex $argv 1]
@@ -197,14 +202,14 @@ expect "162.55.28.178's password:"
 send "$s01\r"
 expect "Made with"
 sleep 3
-send "bash /tmp/yoast_health_query_eggbev.sh\r"
+send "bash ${TMP_DIR}/yoast_health_query_eggbev.sh\r"
 sleep 55
 send "exit\r"
 expect eof
 EOFEXP
-chmod +x /tmp/_yoast_ssh.exp
+chmod +x ${TMP_DIR}/yoast_ssh.exp
 
-SSH_OUT=$(/tmp/_yoast_ssh.exp "$S03_PASS" "$S01_PASS" 2>/dev/null)
+SSH_OUT=$(${TMP_DIR}/yoast_ssh.exp "$S03_PASS" "$S01_PASS" 2>/dev/null)
 
 # ── Parse resultado ───────────────────────────────────────────────────────────
 YOAST_LINE=$(echo "$SSH_OUT" | grep "^YOAST_DATA:" | head -1 || true)
@@ -463,7 +468,6 @@ log "Snapshot salvo em $SNAPSHOT_FILE"
 # ── Encerrar se silencioso ────────────────────────────────────────────────────
 if [[ "$SHOULD_POST" == "false" ]]; then
     log "Modo silencioso — encerrando sem post Discord."
-    rm -f /tmp/yoast_health_query_eggbev.sh /tmp/_yoast_scp.exp /tmp/_yoast_ssh.exp
     log "=== Concluído (silencioso). SEO: 🟢${SEO_GREEN}/🟡${SEO_AMBER}/🔴${SEO_RED} | Read: 🟢${READ_GREEN}/🟡${READ_AMBER}/🔴${READ_RED} ==="
     exit 0
 fi
@@ -540,6 +544,5 @@ else
 fi
 
 # ── Cleanup ───────────────────────────────────────────────────────────────────
-rm -f /tmp/yoast_health_query_eggbev.sh /tmp/_yoast_scp.exp /tmp/_yoast_ssh.exp
 
 log "=== Concluído (post_type=${POST_TYPE}). SEO: 🟢${SEO_GREEN}/🟡${SEO_AMBER}/🔴${SEO_RED} | Read: 🟢${READ_GREEN}/🟡${READ_AMBER}/🔴${READ_RED} total=${TOTAL} ==="
