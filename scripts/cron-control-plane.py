@@ -23,6 +23,7 @@ LOGS = BASE / 'logs'
 SCRIPTS = BASE / 'scripts'
 
 DESCRIPTIONS = {
+    'cron-control-plane.py': 'Regenera docs/CRONS.md com inventário/status dos crons MGS.',
     'sync-souls.sh': 'Sincroniza SOUL.md, config.yaml e skills MGS dos profiles Hermes para versionamento no repo.',
     'monitor-auto-push.sh': 'Monitora falhas no auto-push Git do /root/mgs-agent e alerta em #mgs-alerts.',
     'monitor-yoast-health-eggbev.sh': 'Monitora saúde Yoast do eggbev: SEO + Readability com baseline, semanal e alerta por degradação.',
@@ -42,6 +43,7 @@ DESCRIPTIONS = {
 }
 
 RISK = {
+    'cron-control-plane.py': 'baixo: re-renderiza docs/CRONS.md',
     'sync-souls.sh': 'baixo',
     'monitor-auto-push.sh': 'baixo',
     'monitor-yoast-health-eggbev.sh': 'baixo',
