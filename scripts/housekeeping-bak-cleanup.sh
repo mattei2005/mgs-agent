@@ -2,19 +2,33 @@
 # =============================================================================
 # housekeeping-bak-cleanup.sh — Remove arquivos *.bak* mais antigos que N dias
 #
-# Roda diariamente via cron. Cobre 3 locais conhecidos onde patches deixam .bak:
+# Roda diariamente via cron. Cobre locais conhecidos onde patches deixam .bak:
 #   - /root/.hermes/         (configs Hermes, profiles, .env)
 #   - /root/mgs-agent/       (scripts, skills, data)
 #   - /root/backups/         (snapshots pré-update)
+#   - /tmp                  (temporários antigos)
 #
 # Proteções:
 #   - NUNCA deleta canônicos (SOUL.md, config.yaml, .env, *.sh sem .bak)
 #   - find -name "*.bak*" só pega arquivos com .bak no nome
 #   - Loga tudo em /root/mgs-agent/logs/housekeeping.log
 #   - Posta resumo no Discord (#alerts-infra) se algo foi deletado
+#   - --dry-run lista o que seria deletado sem remover nem notificar
 # =============================================================================
 
 set -euo pipefail
+
+DRY_RUN=0
+if [[ "${1:-}" == "--dry-run" ]]; then
+    DRY_RUN=1
+elif [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    echo "Usage: $0 [--dry-run]"
+    exit 0
+elif [[ -n "${1:-}" ]]; then
+    echo "ERROR: argumento desconhecido: $1" >&2
+    echo "Usage: $0 [--dry-run]" >&2
+    exit 2
+fi
 
 RETENTION_DAYS="${RETENTION_DAYS:-15}"
 LOG=/root/mgs-agent/logs/housekeeping.log
@@ -27,7 +41,11 @@ set +a
 
 log() { echo "[$(date -Iseconds)] housekeeping: $*" | tee -a "$LOG"; }
 
-log "=== START — retention=${RETENTION_DAYS} dias ==="
+if [[ "$DRY_RUN" -eq 1 ]]; then
+    log "=== START DRY-RUN — retention=${RETENTION_DAYS} dias ==="
+else
+    log "=== START — retention=${RETENTION_DAYS} dias ==="
+fi
 
 # ─── Coletar arquivos a deletar ANTES de deletar (pra logar/notificar) ──────
 TO_DELETE=$(find /root/.hermes /root/mgs-agent /root/backups /tmp \
@@ -48,6 +66,18 @@ fi
 # Calcular tamanho total antes de deletar
 TOTAL_SIZE=$(echo "$TO_DELETE" | xargs -d '\n' du -cb 2>/dev/null | tail -1 | awk '{print $1}')
 TOTAL_MB=$(echo "scale=2; ${TOTAL_SIZE:-0}/1024/1024" | bc)
+
+if [[ "$DRY_RUN" -eq 1 ]]; then
+    log "DRY-RUN: encontrados ${COUNT} arquivos (${TOTAL_MB} MB). Nada será deletado."
+    echo "$TO_DELETE" | while IFS= read -r f; do
+        [[ -z "$f" ]] && continue
+        log "  would rm $f"
+    done
+    DIRS_CANDIDATE=$(find /root/backups -type d -empty -mtime +${RETENTION_DAYS} -print 2>/dev/null | wc -l)
+    log "DRY-RUN: ${DIRS_CANDIDATE} diretórios vazios seriam removidos em /root/backups"
+    log "=== END DRY-RUN — candidatos ${COUNT} arquivos / ${TOTAL_MB} MB ==="
+    exit 0
+fi
 
 log "Encontrados ${COUNT} arquivos (${TOTAL_MB} MB). Deletando..."
 
