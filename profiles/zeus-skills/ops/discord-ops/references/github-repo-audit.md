@@ -110,9 +110,35 @@ rm -f "$TMPASK"
 - GitHub access may fail via plain HTTPS remote while still being valid via 1Password PAT. Report this as secure on-demand access, not as lack of access.
 - The auto-commit watcher using `git add .` is a future secret-leak risk even when the current scan is clean. Prefer guardrails that abort on suspicious filenames (`.env`, key/pem, credential/secret/token/password/webhook/private) and stage with `git add -A -- .` only after those checks. Do not rely on Git pathspec excludes for ignored `.env` files; Git can reject that pattern and break the watcher.
 - Runtime state/chat-log files committed frequently pollute history; if they are not canonical state, preserve them locally, `git rm --cached`, add to `.gitignore`, then regenerate infra docs/inventory.
-- Historical `.env` backups can survive in two places: as plain deleted files and inside compressed backup archives. A current clean tree is not enough; scan archive members from historical blobs too.
-- When a historical secret is found, verify revocation without disclosure: compare SHA256 hashes internally against current env/profile envs, and for GitHub PATs make an API call that reports only status/login. Treat commented-out token literals as leaks if the token-shaped value is present.
-- Report history risk in two layers: `current tree clean` vs `history dirty`. Recommend revocation/external exposure checks first; history rewrite is destructive and should require explicit approval after repo visibility, forks, and GitHub secret-scanning status are known.
 - For shell counters under `set -e`, avoid `VAR=$(grep -c PATTERN || echo 0)`: `grep -c` prints `0` and exits `1` when no match, yielding `0\n0`. Use `VAR=$(... | grep -c PATTERN || true); VAR=${VAR:-0}`.
+- Cron log health should check semantic failures, not only freshness. A cron can update its log every run while failing internally; scan a recent tail for specific patterns (`syntax error`, `Traceback`, `Exception`, `fatal`, `critical`, `failed`, `falha`, `erro`, `error`) and keep the window short enough to avoid stale false positives after a fix.
+- For Yoast/RunCloud SSH scripts, prefer `mktemp -d`, `trap cleanup EXIT`, `StrictHostKeyChecking=accept-new`, and a dedicated `/root/.ssh/known_hosts_mgs`. Deprecated scripts with risky SSH/expect should become safe stubs if no cron/systemd/pipeline references remain; keep historical code recoverable via Git rather than executable in the working tree.
+
+## Historical Git secret audit pattern
+
+Use this when the current tree is clean but the session needs to assess whether old commits contain secrets or sensitive artifacts.
+
+1. Keep the audit read-only unless Rodolfo explicitly approves destructive history rewriting.
+2. Scan both plain historical blobs and compressed archives stored in history. A clean `git grep` is not enough if old `.tar.gz` backups contain `.env` files.
+3. Never print secret values. Report only type, path/member name, commit, status, length/hash comparison result, and API status.
+4. Compare historical secrets against current secrets internally by hash, then report only booleans such as `current_matches_historical=false`.
+5. Validate external exposure before recommending `git filter-repo`:
+   - unauthenticated GitHub API / `git ls-remote` visibility;
+   - authenticated repo visibility/private flag;
+   - fork count;
+   - secret-scanning alerts if a temporary PAT has `security_events`/admin permissions.
+6. Decision heuristic used for MGS: if repo is private, unauthenticated access is blocked, forks=0, and historical secrets do not match active credentials, prefer no history rewrite. Document the finding and only propose `filter-repo + force-push` as a separate destructive step.
+7. After finding historical credential artifacts, tighten forward guardrails. For MGS auto-commit, the sensitive filename guard should include at least `.env`, key/pem, credential, secret, token, password, webhook, and private.
+
+Useful reporting categories:
+
+| Category | Meaning |
+|---|---|
+| Current tree | Whether any active tracked file contains high-signal secrets |
+| Historical Git | Whether old commits contain recoverable sensitive blobs |
+| External exposure | GitHub privacy, public access, forks, secret-scanning visibility |
+| Credential status | Whether historical values match current active values or API auth succeeds |
+| Rewrite recommendation | Operational tradeoff: compliance hygiene vs. destructive force-push risk |
+
 - Cron log health should check semantic failures, not only freshness. A cron can update its log every run while failing internally; scan a recent tail for specific patterns (`syntax error`, `Traceback`, `Exception`, `fatal`, `critical`, `failed`, `falha`, `erro`, `error`) and keep the window short enough to avoid stale false positives after a fix.
 - For Yoast/RunCloud SSH scripts, prefer `mktemp -d`, `trap cleanup EXIT`, `StrictHostKeyChecking=accept-new`, and a dedicated `/root/.ssh/known_hosts_mgs`. Deprecated scripts with risky SSH/expect should become safe stubs if no cron/systemd/pipeline references remain; keep historical code recoverable via Git rather than executable in the working tree.
