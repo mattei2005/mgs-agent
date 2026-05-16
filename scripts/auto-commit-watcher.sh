@@ -45,10 +45,8 @@ while inotifywait -r -e modify,create,delete,move \
   fi
 
   # Add + commit (push acontece via hook 1P existente)
-  git add -A -- . \
-    ':!*.pem' ':!*.key' ':!*.env' ':!.env' ':!**/.env' \
-    ':!*credential*' ':!*secret*' ':!*token*' ':!*password*' \
-    ':!hosts.yml' ':!**/hosts.yml' ':!.npmrc' ':!**/.npmrc' ':!.pypirc' ':!**/.pypirc'
+  # `git add -A -- .` respeita .gitignore; o guardrail acima bloqueia nomes sensíveis não ignorados.
+  git add -A -- .
 
   COMMIT_MSG="auto: $CHANGES_TRIM"
 
