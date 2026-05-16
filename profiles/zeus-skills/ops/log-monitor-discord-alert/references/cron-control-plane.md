@@ -1,62 +1,67 @@
-# Cron Control Plane — MGS pattern
+# Cron Control Plane — MGS cron reliability pattern
 
-Session-derived pattern for improving cron visibility without adding LLM cost.
+Session pattern validated 2026-05-16 for MGS root crontab operations.
 
 ## When to use
 
-Use when Rodolfo asks what crons exist, whether cron infra can be improved, or when cron inventory is unclear.
+Use this pattern when MGS has multiple Linux cron jobs and Rodolfo asks for inventory, cleanup, reliability hardening, or smoke testing.
 
-## Validated approach
+## Core artifacts
 
-1. Back up root crontab before any edit:
+- `/root/mgs-agent/scripts/cron-control-plane.py`
+  - Read-only inventory/status generator for MGS root crontab jobs.
+  - Parses `crontab -l`, extracts `/root/mgs-agent/scripts/*`, log paths, `flock`, owner/risk metadata, and last useful log signal.
+  - `--write-doc` atomically regenerates `/root/mgs-agent/docs/CRONS.md`.
+- `/root/mgs-agent/docs/CRONS.md`
+  - Human-readable control plane: frequency, script, owner, risk, flock, last log, details per cron.
+- `/root/mgs-agent/scripts/cron-smoke-test.sh`
+  - Manual smoke test for safe/idempotent crons.
+  - Runs destructive/risky jobs only with `--dry-run` when available.
+  - Skips jobs that are production-timed or alert-oriented by design.
+- `/root/mgs-agent/scripts/monitor-cron-stale-logs.sh`
+  - Cron watchdog that alerts when a MGS cron log has not updated within tolerance.
+  - Runs every 15 minutes via root crontab with `flock -n`.
+  - State file: `/root/mgs-agent/data/cron-stale-logs-state.json`.
+
+## Safe implementation sequence
+
+1. Backup crontab before edits:
    ```bash
-   ts=$(date +%Y%m%d-%H%M%S)
-   crontab -l > /root/mgs-agent/data/crontab-backup-pre-<change>-${ts}.txt
+   crontab -l > /root/mgs-agent/data/crontab-backup-pre-<change>-$(date +%Y%m%d-%H%M%S).txt
    ```
-2. Remove obsolete commented `DEPRECATED` cron entries when their scripts already live under `scripts/deprecated/` and replacement is documented.
-3. Create/read a deterministic inventory script instead of relying on manual summaries:
-   - `/root/mgs-agent/scripts/cron-control-plane.py`
-   - read-only by default
-   - outputs JSON (`--json`) and Markdown (`--markdown`)
-   - `--write-doc` atomically writes `/root/mgs-agent/docs/CRONS.md`
-4. Add a daily cron to regenerate the document:
-   ```cron
-   10 8 * * * flock -n /var/lock/cron_control_plane.lock /root/mgs-agent/scripts/cron-control-plane.py --write-doc >> /root/mgs-agent/logs/cron-control-plane.log 2>&1
+2. Modify crontab via temp file, never with fragile heredoc-in-command-substitution.
+3. Add `flock -n /var/lock/<job>.lock` to every MGS cron to prevent overlap.
+4. For high-risk jobs, add `--dry-run` before including them in smoke tests.
+5. Regenerate docs and inventory:
+   ```bash
+   /root/mgs-agent/scripts/cron-control-plane.py --write-doc
+   /root/mgs-agent/scripts/infra-discovery.sh >> /root/mgs-agent/logs/infra-discovery.log 2>&1
    ```
-5. Standardize `flock -n` on all MGS root-crontab entries to prevent overlapping executions.
-6. Run `infra-discovery.sh` after cron changes so `/root/mgs-agent/data/infra-inventory.json` reflects reality.
-7. Append an explicit event to `/root/mgs-agent/logs/events-audit.jsonl` with artifacts and authorization context.
+6. Append structured audit event to `/root/mgs-agent/logs/events-audit.jsonl`.
+7. Validate:
+   ```bash
+   crontab -l | grep -c '/root/mgs-agent/scripts/'
+   crontab -l | grep -c 'flock -n .* /root/mgs-agent/scripts/'
+   /root/mgs-agent/scripts/cron-smoke-test.sh
+   /root/mgs-agent/scripts/monitor-cron-stale-logs.sh --dry-run
+   grep -E 'Total MGS|Crons sem `flock`' /root/mgs-agent/docs/CRONS.md
+   ```
 
-## Validation checklist
+## Operational judgement
 
-```bash
-python3 -m py_compile /root/mgs-agent/scripts/cron-control-plane.py
-/root/mgs-agent/scripts/cron-control-plane.py --json | python3 -m json.tool >/dev/null
-grep -q 'Crons sem `flock`: nenhum' /root/mgs-agent/docs/CRONS.md
-crontab -l | grep -q 'DEPRECATED 2026-04-26' && exit 1 || true
-crontab -l | grep -c '/root/mgs-agent/scripts/'
-crontab -l | grep -c 'flock -n .* /root/mgs-agent/scripts/'
-```
+Do not run every cron blindly. Classify:
 
-Expected after full standardization: MGS script cron count equals MGS flock count.
+- Run now: safe/idempotent local monitors, renderers, sync scripts with safety checks.
+- Dry-run only: scripts that delete, close sessions, rotate state, or mutate auth/config.
+- Skip by design: production reports tied to daily schedule, alert scripts that could spam Discord, or jobs whose correctness depends on real elapsed time.
 
-## Reporting style
+## Thread cleanup lesson
 
-For Rodolfo, report as an operational before/after table:
-
-```text
-Mudança                         | Status
---------------------------------|------------------------------------------------------------
-Crons deprecated comentados      | Removidos do root crontab
-Cron Control Plane               | Criado: /root/mgs-agent/scripts/cron-control-plane.py
-Documento de crons               | Criado: /root/mgs-agent/docs/CRONS.md
-Flock em crons MGS               | Padronizado: N/N crons agora usam flock -n
-Infra inventory                  | Regenerado
-Audit log                        | Registrado
-```
+Discord archived/stopped threads cost zero tokens and are valuable for audit/history. Prefer preserving threads. If a thread cleanup script exists, keep it deprecated/manual-only unless Rodolfo explicitly asks for deletion. Do not schedule automatic deletion just to save tokens.
 
 ## Pitfalls
 
-- Do not use shell heredoc inside command substitution to rewrite crontab. Use backup → intermediate file → validation → `crontab <file>`.
-- Treat deletion-like cleanup crons (`cleanup-discord-threads.sh`, `housekeeping-bak-cleanup.sh`) as high-risk in the inventory even if already approved/running.
-- If auto-commit is active, status may clear within seconds; verify via `git log --oneline` if `git status` is already clean.
+- Empty log files right after creating a new cron can trigger stale-log false positives. Prime the log once or run the job manually before enabling stale monitoring.
+- Some scripts log internally instead of using crontab redirection; map custom logs in the stale monitor (example: `cleanup-zombie-sessions.sh` → `logs/cleanup-zombies.log`).
+- `infra-discovery.sh` rewrites `data/infra-inventory.json`; treat as medium risk but acceptable when user requested inventory regeneration.
+- Auto-commit may push intermediate commits during multi-step changes; final validation still needs `git status --short` and recent log review.

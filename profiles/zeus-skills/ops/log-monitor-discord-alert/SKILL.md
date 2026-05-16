@@ -14,8 +14,10 @@ Qualquer situação onde um processo periódico grava em log com padrão START/O
 - Alertar via Discord Webhook quando threshold atingido
 - Anti-spam (não repetir alerta a cada ciclo)
 - Mensagem de "RESOLVIDO" quando o sistema se recupera
-- Inventariar, documentar ou padronizar crons MGS existentes sem adicionar custo de LLM
 
+Também usar para gestão de **cron reliability/control plane**: inventariar crons MGS, padronizar `flock`, criar smoke tests seguros, adicionar `--dry-run` em jobs destrutivos e monitorar logs stale. Ver referência validada: `references/cron-control-plane.md`.
+
+Exemplos validados: `monitor-auto-push.sh` para o auto-push do mgs-agent; `cron-control-plane.py`, `cron-smoke-test.sh` e `monitor-cron-stale-logs.sh` para controle dos crons MGS.
 Exemplos validados:
 - `monitor-auto-push.sh` para o auto-push do mgs-agent.
 - `cron-control-plane.py` para inventário vivo dos crons MGS em `docs/CRONS.md` — ver `references/cron-control-plane.md`.
@@ -564,6 +566,22 @@ Lessons learned 2026-04-27 (`check-pending-reports.sh` loop de ~120 msgs):
 2. **Separador `:` em arrays shell que carregam `agent:skill_name` causa colisão silenciosa** — usar `|`
 3. **`declare -A RESOLVED_DEDUP`** para dedup dentro de uma execução
 4. **Sempre fazer dry-run manual** após qualquer modificação em monitor com state file
+
+---
+
+## SEÇÃO F — Cron Control Plane e Smoke Tests
+
+Para operações de inventário/reliability dos crons MGS, seguir o padrão em `references/cron-control-plane.md`.
+
+Resumo operacional:
+- Fazer backup de `crontab -l` antes de qualquer alteração.
+- Usar temp file + `crontab <file>`; nunca heredoc dentro de command substitution para editar crontab.
+- Todo cron MGS deve usar `flock -n` para evitar sobreposição.
+- Criar/atualizar `docs/CRONS.md` via `cron-control-plane.py --write-doc`.
+- Jobs destrutivos devem ter `--dry-run` antes de entrarem no smoke test.
+- `cron-smoke-test.sh` deve executar jobs safe, rodar risky em dry-run e marcar skips por design.
+- `monitor-cron-stale-logs.sh` deve alertar quando logs deixam de atualizar dentro da tolerância.
+- Não deletar threads Discord automaticamente para economizar tokens: thread arquivada/parada custa zero e o histórico é valioso para auditoria.
 
 ---
 
