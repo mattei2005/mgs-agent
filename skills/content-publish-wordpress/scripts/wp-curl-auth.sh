@@ -46,3 +46,38 @@ wp_curl_auth() {
 
 # Permite testar standalone:
 # wp_curl_auth user pass -sS https://example.com
+
+
+# Executa request WP REST retornando SEMPRE um HTTP code único no stdout.
+# Preserva o body de erro em $out via --fail-with-body, mas não deixa curl rc=22
+# contaminar o caller com "404\n000". Falha de transporte sem HTTP vira 000.
+# Uso:
+#   http=$(wp_curl_auth_http "$tmp" "$user" "$pass" -H ... -X POST URL)
+wp_curl_auth_http() {
+  local out="$1"
+  local user="$2"
+  local pass="$3"
+  shift 3
+
+  local http rc
+  set +e
+  http=$(wp_curl_auth "$user" "$pass" \
+    --fail-with-body \
+    --connect-timeout "${WP_CURL_CONNECT_TIMEOUT:-15}" \
+    --max-time "${WP_CURL_MAX_TIME:-90}" \
+    --retry "${WP_CURL_RETRY:-2}" \
+    --retry-delay "${WP_CURL_RETRY_DELAY:-1}" \
+    --retry-connrefused \
+    -sS -o "$out" -w '%{http_code}' "$@")
+  rc=$?
+  set -e
+
+  if [[ "$http" =~ ^[0-9]{3}$ ]]; then
+    printf '%s' "$http"
+  elif [[ "$rc" -ne 0 ]]; then
+    printf '000'
+  else
+    printf '%s' "${http:-000}"
+  fi
+  return 0
+}

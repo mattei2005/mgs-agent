@@ -45,8 +45,8 @@ if [ -n "$req_slug" ] && [ "${ALLOW_DISAMBIGUATION:-0}" != "1" ]; then
 fi
 
 tmp=$(mktemp)
-http=$(wp_curl_auth "$user" "$pass" -sS -o "$tmp" -w '%{http_code}' -H "Content-Type: application/json" \
-  -X POST --data-binary "@$POST_JSON" "$wp/wp-json/wp/v2/posts" || echo "000")
+http=$(wp_curl_auth_http "$tmp" "$user" "$pass" -H "Content-Type: application/json" \
+  -X POST --data-binary "@$POST_JSON" "$wp/wp-json/wp/v2/posts")
 resp=$(cat "$tmp")
 rm -f "$tmp"
 
