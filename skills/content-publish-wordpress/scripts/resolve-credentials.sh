@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 # Load env vars (for systemd/cron use)
 [ -f /root/mgs-agent/.env ] && set -a && . /root/mgs-agent/.env && set +a

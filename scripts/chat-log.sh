@@ -13,7 +13,7 @@
 #   ./chat-log.sh --rebuild-index
 #   ./chat-log.sh --fechar  # marca sessão atual como fechada
 
-set -e
+set -euo pipefail
 
 LOG_DIR="/root/mgs-agent/data/chat-logs"
 INDEX="$LOG_DIR/INDEX.md"

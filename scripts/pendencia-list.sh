@@ -10,7 +10,7 @@
 #   ./pendencia-list.sh --json                       # output JSON puro
 #   ./pendencia-list.sh PEND-001                     # uma pendência específica
 
-set -e
+set -euo pipefail
 
 DB="/root/mgs-agent/data/pendencias.db.json"
 [[ ! -f "$DB" ]] && { echo "ERRO: $DB não existe"; exit 1; }

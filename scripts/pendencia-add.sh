@@ -2,7 +2,7 @@
 # pendencia-add.sh — adiciona nova pendência ao DB
 # Uso: ./pendencia-add.sh "titulo" --categoria infra --prioridade alta [--tempo "30min"] [--tags "tag1,tag2"] [--contexto "..."] [--bloqueio "..."]
 
-set -e
+set -euo pipefail
 
 DB="/root/mgs-agent/data/pendencias.db.json"
 [[ ! -f "$DB" ]] && { echo "ERRO: $DB não existe"; exit 1; }
@@ -18,7 +18,8 @@ BLOQUEIO=""
 CRIADA_POR="${USER:-claude}"
 
 # Parse args
-TITULO="$1"
+TITULO="${1:-}"
+[[ -n "$TITULO" ]] || { echo "ERRO: título obrigatório"; exit 1; }
 shift
 
 while [[ $# -gt 0 ]]; do
@@ -34,7 +35,6 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-[[ -z "$TITULO" ]] && { echo "ERRO: título obrigatório"; exit 1; }
 
 # Validações categoria/prioridade
 VALID_CATS="app seguranca infra conteudo skills agente lovable monitor documentacao externo pessoal"

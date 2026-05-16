@@ -2,7 +2,7 @@
 # Detector de loops de tool_calls em sessions ativas
 # Roda via cron a cada 5 minutos
 # Alerta quando 5+ erros consecutivos da mesma tool
-set -e
+set -euo pipefail
 
 THRESHOLD=5
 COOLDOWN_MINUTES=30

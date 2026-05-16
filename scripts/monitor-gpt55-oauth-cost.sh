@@ -15,7 +15,7 @@
 #
 # ATENÇÃO: valores são SIMULADOS. OAuth não gera custo real por token.
 
-set -e
+set -euo pipefail
 
 set -a
 source /root/mgs-agent/.env

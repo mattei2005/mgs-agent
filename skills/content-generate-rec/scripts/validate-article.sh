@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 HTML_FILE="${1:?usage: validate-article.sh <html_file>}"
 MIN=450

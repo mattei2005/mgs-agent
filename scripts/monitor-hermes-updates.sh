@@ -6,7 +6,7 @@
 # Estado: /root/mgs-agent/data/hermes-version-state.json
 # Log: /root/mgs-agent/logs/monitor-hermes-updates.log
 
-set -e
+set -euo pipefail
 set -a
 source /root/mgs-agent/.env 2>/dev/null || true
 set +a

@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 # Helper para curl autenticado seguro (não expõe senha em ps aux)
 source "$(dirname "$0")/wp-curl-auth.sh"

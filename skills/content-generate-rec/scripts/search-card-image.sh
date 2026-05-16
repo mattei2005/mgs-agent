@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 CARD_NAME="${1:?usage: search-card-image.sh <card_name> <card_official_url>}"
 OFFICIAL_URL="${2:?missing card_official_url}"

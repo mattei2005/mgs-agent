@@ -2,12 +2,13 @@
 # pendencia-done.sh — marca pendência como resolvida
 # Uso: ./pendencia-done.sh PEND-001 --como "Publicado via Play Console"
 
-set -e
+set -euo pipefail
 
 DB="/root/mgs-agent/data/pendencias.db.json"
 [[ ! -f "$DB" ]] && { echo "ERRO: $DB não existe"; exit 1; }
 
-ID="$1"
+ID="${1:-}"
+[[ -n "$ID" ]] || { echo "ERRO: ID obrigatório (ex: PEND-001)"; exit 1; }
 shift
 
 COMO=""
@@ -21,7 +22,6 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-[[ -z "$ID" ]] && { echo "ERRO: ID obrigatório (ex: PEND-001)"; exit 1; }
 [[ -z "$COMO" ]] && { echo "ERRO: --como obrigatório"; exit 1; }
 
 TIMESTAMP=$(date -Iseconds)

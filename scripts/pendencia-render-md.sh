@@ -2,7 +2,7 @@
 # pendencia-render-md.sh — gera docs/PENDENCIAS.md a partir do JSON
 # Roda via cron diário 8 AM EST OU manual após mudanças
 
-set -e
+set -euo pipefail
 
 DB="/root/mgs-agent/data/pendencias.db.json"
 OUT="/root/mgs-agent/docs/PENDENCIAS.md"

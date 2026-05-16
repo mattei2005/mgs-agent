@@ -20,7 +20,7 @@
 # Custo: ZERO tokens (parsing local apenas — sem chamada LLM ou API)
 # Frequência: cron */15min
 #
-set -e
+set -euo pipefail
 
 # === Config ===
 PUB_LOG="/root/mgs-agent/logs/publish-wordpress.log"

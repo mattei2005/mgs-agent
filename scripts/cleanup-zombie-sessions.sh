@@ -14,7 +14,7 @@
 #
 # Roda via cron a cada hora.
 
-set -u
+set -euo pipefail
 
 DRY_RUN=0
 if [ "${1:-}" = "--dry-run" ]; then

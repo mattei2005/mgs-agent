@@ -9,7 +9,7 @@
 #
 # Stdout: caminho final do arquivo (pra ser capturado pelo caller)
 
-set -e
+set -euo pipefail
 
 INPUT="${1:?usage: compress-image.sh <path> <card|featured>}"
 TYPE="${2:?usage: compress-image.sh <path> <card|featured>}"

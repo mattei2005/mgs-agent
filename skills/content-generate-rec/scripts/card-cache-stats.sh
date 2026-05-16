@@ -1,6 +1,8 @@
 #!/bin/bash
 # card-cache-stats.sh — mostra estatísticas do cache
 
+set -euo pipefail
+
 CACHE_DB="/root/mgs-agent/data/card-cache.db"
 
 echo "═══ Card Cache Stats ═══"

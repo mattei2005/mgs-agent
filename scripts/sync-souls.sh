@@ -1,7 +1,7 @@
 #!/bin/bash
 # Sync SOUL.md + MGS-specific skills from Hermes profiles to mgs-agent for versioning
 # Runs every 5 min via crontab: */5 * * * * /root/mgs-agent/scripts/sync-souls.sh
-set -e
+set -euo pipefail
 
 PROFILES_DIR="/root/.hermes/profiles"
 TARGET_DIR="/root/mgs-agent/profiles"
