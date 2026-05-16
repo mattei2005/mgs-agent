@@ -110,7 +110,6 @@ done <<<"$abs_candidates" | sort -rn)
 
 # Iterate scored candidates (score > 0) until one passes dimension + aspect filters
 best=""
-best_score=""
 ext=""
 out=""
 
@@ -134,7 +133,7 @@ while IFS= read -r line; do
 
   if ! command -v identify >/dev/null 2>&1; then
     echo "[$(date -Iseconds)] search-card-image WARN identify_unavailable accepting_without_dim_check url=$cand_url" >>"$LOG"
-    best="$cand_url"; best_score="$cand_score"; ext="$cand_ext"; out="$cand_tmp"
+    best="$cand_url"; ext="$cand_ext"; out="$cand_tmp"
     break
   fi
 
@@ -159,7 +158,7 @@ while IFS= read -r line; do
   fi
 
   echo "[$(date -Iseconds)] search-card-image ACCEPT w=${w} h=${h} aspect=${aspect} score=${cand_score} url=$cand_url" >>"$LOG"
-  best="$cand_url"; best_score="$cand_score"; ext="$cand_ext"; out="$cand_tmp"
+  best="$cand_url"; ext="$cand_ext"; out="$cand_tmp"
   break
 done <<<"$scored"
 
