@@ -23,8 +23,8 @@ if [[ -z "$WEBHOOK_URL" ]]; then
     exit 1
 fi
 
-# Mention do Zeus bot user (para notificação)
-ZEUS_MENTION="<@***>"
+# Mention do Rodolfo para push notification
+ZEUS_MENTION="<@344196393512075265>"
 
 # Inicializar state file se não existir
 if [[ ! -f "$STATE_FILE" ]]; then
