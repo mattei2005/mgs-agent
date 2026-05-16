@@ -455,7 +455,7 @@ default_category: {site_config.get('default_category', 'Credit Card')}
 
 # OUTPUT REQUIREMENTS
 
-Generate ONLY the article body in Gutenberg HTML format. 450-500 words HARD LIMIT.
+Generate ONLY the article body in Gutenberg HTML format. Target 465-475 visible words. HARD LIMIT remains 450-500 words.
 
 Structure:
 1. <!-- wp:paragraph --> First paragraph with <strong>{card_data['card_name']}</strong>
