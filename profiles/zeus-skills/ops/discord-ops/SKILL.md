@@ -356,6 +356,8 @@ Ver `references/discord-threads-lifecycle.md` para referência completa.
 
 Para varredura GitHub/repo, ver `references/github-repo-audit.md`: validação segura de PAT via 1Password sem persistir credencial no remote, `GIT_ASKPASS` temporário, checklist de secrets atual+histórico, sintaxe, crons/logs, dependências e relatório executivo.
 
+Para hardening pós-auditoria do repo MGS, ver `references/mgs-repo-hardening-audit-2026-05-16.md`: cobre correções reutilizáveis de `grep -c` com `set -e`, guardrails do auto-commit watcher, detecção semântica de erro em cron logs, SSH/SCP com `accept-new` + `known_hosts_mgs`, stubs para scripts deprecated, higiene de backups/runtime e ACK imediato em botões Discord.
+
 ### Ajustes de tom/verbosity, layout visual e contexto semântico
 
 Ver `references/hermes-profile-style-context-ops.md` para o padrão validado de:
