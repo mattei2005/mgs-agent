@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-16T01:42:14-04:00",
+    "updated_at": "2026-05-16T01:47:41-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -50,9 +50,6 @@
       "entry": "*/15 * * * * flock -n /var/lock/track_article_cost.lock /root/mgs-agent/scripts/track-article-cost.sh >> /root/mgs-agent/logs/track-article-cost-cron.log 2>&1"
     },
     {
-      "entry": "0 4 * * * flock -n /var/lock/cleanup_discord_threads.lock /root/mgs-agent/scripts/cleanup-discord-threads.sh >> /root/mgs-agent/logs/cleanup-discord-threads-cron.log 2>&1"
-    },
-    {
       "entry": "0 * * * * flock -n /var/lock/cleanup_zombie_sessions.lock /root/mgs-agent/scripts/cleanup-zombie-sessions.sh"
     },
     {
@@ -88,14 +85,14 @@
       "modified_at": "2026-05-02T10:28:32-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/cleanup-discord-threads.sh",
-      "size_bytes": 3810,
-      "modified_at": "2026-05-02T21:15:26-04:00"
-    },
-    {
       "path": "/root/mgs-agent/scripts/cleanup-zombie-sessions.sh",
       "size_bytes": 1744,
       "modified_at": "2026-05-01T23:58:09-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/deprecated/cleanup-discord-threads.sh",
+      "size_bytes": 3810,
+      "modified_at": "2026-05-02T21:15:26-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/deprecated/monitor-rec-readability.sh",
@@ -1191,8 +1188,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "a0f60c1458540a6c2e24b19ff1f87762",
-      "modified_at": "2026-05-16T01:30:02-04:00"
+      "md5": "6a47550f74f3305432cdfaf67e640a5a",
+      "modified_at": "2026-05-16T01:45:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1208,9 +1205,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 45084,
-      "md5": "4d92e23efc8645e8a4b9dcdd319f272e",
-      "modified_at": "2026-05-16T01:41:21-04:00"
+      "size_bytes": 45452,
+      "md5": "1cc1d4678cf56ccf59747bc93dbd10ac",
+      "modified_at": "2026-05-16T01:42:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1232,9 +1229,9 @@
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
-      "size_bytes": 2547,
-      "md5": "d9ae74344ff1ba6cd85778372f9e79bb",
-      "modified_at": "2026-05-15T16:00:03-04:00"
+      "size_bytes": 2496,
+      "md5": "9631c64583f23ecc965718f2c0b1b6b6",
+      "modified_at": "2026-05-16T01:45:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -1252,7 +1249,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
       "md5": "15091d080ba5dc1014d9e99778910db5",
-      "modified_at": "2026-05-16T01:40:19-04:00"
+      "modified_at": "2026-05-16T01:45:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
