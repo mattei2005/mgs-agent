@@ -362,6 +362,8 @@ Para hardening pós-auditoria do repo MGS, ver `references/mgs-repo-hardening-au
 
 Para a fase final de dependências/tooling, ver `references/mgs-deps-tooling-audit.md`: enumeração de manifests, `npm audit/outdated/test` sem upgrades destrutivos, conversão de API legacy Anthropic/FastAPI para stub fail-closed quando o serviço já está masked/inactive, e checklist de validação.
 
+Para lint Bash profundo com ShellCheck durante hardening MGS, ver `references/mgs-shellcheck-hardening.md`: instalação aprovada, escopo de scripts rastreados, priorização de error/warning, correção do pitfall `cmd | python <<HEREDOC` (stdin sobrescrito), e formato de validação/relatório.
+
 Para o fechamento pós-hardening, ver `references/mgs-hardening-release-hygiene.md`: classificar referências históricas vs runtime ativo, consolidar release note em `docs/changelog/`, documentar commits fragmentados do auto-commit watcher e validar git/serviços antes do relatório final.
 
 ### Ajustes de tom/verbosity, layout visual e contexto semântico
