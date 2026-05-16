@@ -62,6 +62,8 @@ GIT_ASKPASS="$TMPASK" GITHUB_TOKEN="$TOKEN" GIT_TERMINAL_PROMPT=0 \
 rm -f "$TMPASK"
 ```
 
+Same pattern works for non-interactive `git clone`, `git fetch`, and the one-time post-filter `git push --force`/`--force-with-lease`. If using Claude Code or another non-interactive shell, do not rely on terminal username/password prompts; they fail with `could not read Username for 'https://github.com': No such device or address`.
+
 ## Complete repo audit checklist
 
 1. Scope/state:
@@ -104,6 +106,12 @@ rm -f "$TMPASK"
    - severity, path/line, evidence, operational impact, proposed fix
    - distinguish `sem vazamento ativo`, `risco futuro`, `bug real rodando`, and `higiene`
    - do not recommend destructive history rewrite as the first move; first confirm repo visibility/forks/secret scanning and revocation status, then plan `git filter-repo` only if needed and explicitly approved
+11. Post-rewrite verification:
+   - `git fetch origin main` with PAT + `GIT_ASKPASS`
+   - compare GitHub API `/repos/{owner}/{repo}/commits/main`, local `HEAD`, and `origin/main`
+   - require `git rev-list --left-right --count HEAD...origin/main` = `0 0`
+   - run both path-history checks (`git log --all --name-only`) and object checks (`git rev-list --objects --all`) for sensitive names
+   - optionally perform a fresh authenticated clone in `/tmp` and repeat the greps for an independent remote proof
 
 ## MGS-specific lessons
 
@@ -128,10 +136,16 @@ Use this when the current tree is clean but the session needs to assess whether 
    - authenticated repo visibility/private flag;
    - fork count;
    - secret-scanning alerts if a temporary PAT has `security_events`/admin permissions.
-6. Decision heuristic used for MGS:
-   - If repo is private, unauthenticated access is blocked, forks=0, and historical secrets do not match active credentials, prefer no history rewrite. Document the finding and only propose `filter-repo + force-push` as a separate destructive step.
-   - If active tokens appear in Git history but Rodolfo confirms the repo is private/owner-only and prefers not to rotate working tokens, treat the requested remediation as **exposure cleanup**: remove the sensitive blobs from Git history first. Do not keep arguing for token rotation after that business decision; state the residual risk and proceed with history cleanup if confirmed.
-7. After finding historical credential artifacts, tighten forward guardrails. For MGS auto-commit, the sensitive filename guard should include at least `.env`, key/pem, credential, secret, token, password, webhook, and private.
+6. Decision heuristic used for MGS: if repo is private, unauthenticated access is blocked, forks=0, and historical secrets do not match active credentials, prefer no history rewrite. Document the finding and only propose `filter-repo + force-push` as a separate destructive step.
+7. If Rodolfo explicitly chooses cleanup without token rotation, use `git filter-repo` against exact sensitive paths, then force-update GitHub once. Do **not** rebase/merge the pre-cleanup remote branch back in; that can preserve or reintroduce the old sensitive history.
+8. `git filter-repo` may remove the `origin` remote. Validate/re-add `origin https://github.com/mattei2005/mgs-agent.git` before push.
+9. The MGS auto-push hook/cron cannot publish a rewritten history with normal push. It will fail with non-fast-forward/fetch-first. Treat that as expected after history rewrite; a one-time `git push --force` or `--force-with-lease` is still required.
+10. In non-interactive tools/Claude Code, GitHub HTTPS auth needs the 1Password PAT via temporary `GIT_ASKPASS`; password auth fails. Never persist the token in the remote URL or credential helper.
+11. After force-push, verify with a fresh clone (not ZIP) when Rodolfo wants independent proof: `git log --all --name-only --format=''` and `git rev-list --objects --all` greps for sensitive paths. If piping to `sort`, do not use the pipeline exit code as the grep signal; empty stdout is the signal, or capture grep's exit before `sort`/use `pipefail` carefully.
+12. A pre-rewrite `git bundle` is itself sensitive because it preserves old history. Once GitHub is verified clean, move it outside the repo or delete it; do not leave it under `/root/mgs-agent/backups/` long-term.
+13. After finding historical credential artifacts, tighten forward guardrails. For MGS auto-commit, the sensitive filename guard should include at least `.env`, key/pem, credential, secret, token, password, webhook, and private.
+
+Useful reporting categories:
 8. Hermes safety gate can block `git push --force` even after Rodolfo explicitly confirmed the critical operation. Safe sequence: create `git bundle` backup, stop auto-commit, run `git filter-repo`, validate local history (`high_signal_findings=0`, no `.env`/archive paths, active secret matches=0), restore `origin` if filter-repo removed it, restart auto-commit, then attempt force-push. If the tool blocks force-push, do not retry in-loop; report the exact manual command Rodolfo must run and the expected local/remote HEADs to verify afterward.
 9. `git-filter-repo` may not be preinstalled. Preferred install on Ubuntu VPS: `apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -y -qq git-filter-repo`; verify with `git filter-repo --version`. This is a setup step, not a repo finding.
 
