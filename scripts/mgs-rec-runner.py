@@ -393,9 +393,21 @@ def title_meta_focus(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, st
     return title, meta, focus
 
 
+def resolve_term_id(site_key: str, taxonomy: str, name: str) -> Dict[str, Any]:
+    """Resolve a WP term, tolerating WordPress term_exists races/errors."""
+    p = run([str(WP_SCRIPTS / "resolve-term.sh"), site_key, taxonomy, name], timeout=60)
+    if p.returncode == 0:
+        return json.loads(p.stdout)
+    combined = (p.stderr or "") + "\n" + (p.stdout or "")
+    m = re.search(r'"term_id"\s*:\s*(\d+)', combined)
+    if m:
+        return {"id": int(m.group(1)), "name": name, "slug": slugify(name)}
+    raise RunnerError(f"Command failed rc={p.returncode}: {WP_SCRIPTS / 'resolve-term.sh'} {site_key} {taxonomy} {name}\n{combined[:2000]}")
+
+
 def resolve_terms(site_key: str, site: Dict[str, Any], card_slug: str, card_data: Dict[str, Any]) -> Tuple[int, List[int], List[str]]:
     category_name = site.get("default_category", "Credit Card")
-    cat = run_json([str(WP_SCRIPTS / "resolve-term.sh"), site_key, "categories", category_name], timeout=60)
+    cat = resolve_term_id(site_key, "categories", category_name)
     tags = [
         "rec",
         (site.get("verticals") or ["cc"])[0],
@@ -423,7 +435,7 @@ def resolve_terms(site_key: str, site: Dict[str, Any], card_slug: str, card_data
     ids = []
     names = []
     for t in tags:
-        term = run_json([str(WP_SCRIPTS / "resolve-term.sh"), site_key, "tags", t], timeout=60)
+        term = resolve_term_id(site_key, "tags", t)
         ids.append(int(term["id"]))
         names.append(t)
     return int(cat["id"]), ids, names
