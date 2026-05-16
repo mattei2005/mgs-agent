@@ -2,9 +2,12 @@
 # Auto-commit watcher pro mgs-agent
 # Detecta mudanças e cria commit (push acontece via hook 1P existente)
 
+set -euo pipefail
+
 REPO_DIR="/root/mgs-agent"
 LOG_FILE="/root/mgs-agent/logs/auto-commit-watcher.log"
 DEBOUNCE_SECONDS=10  # espera 10s antes de commitar (evita spam)
+SENSITIVE_PATH_REGEX='(^|/)(\.env|.*\.pem|.*\.key|id_rsa|id_ed25519|.*credential.*|.*secret.*|.*token.*|.*password.*|hosts\.yml|\.npmrc|\.pypirc)$'
 
 mkdir -p "$(dirname "$LOG_FILE")"
 cd "$REPO_DIR" || exit 1
