@@ -1,10 +1,10 @@
 {
   "name": "yoast-scorer",
   "version": "1.0.0",
-  "description": "",
+  "description": "Yoast SEO/readability scorer for MGS WordPress posts",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node -c yoast-scorer.js && node -c deprecated/yoast-score-updater.js"
   },
   "keywords": [],
   "author": "",
