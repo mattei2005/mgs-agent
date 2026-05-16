@@ -479,58 +479,51 @@ date_display = "${DATE_DISPLAY}"
 total        = ${TOTAL}
 is_first     = "${IS_FIRST_RUN}" == "true"
 
-# SEO
 seo_g  = ${SEO_GREEN};  seo_a  = ${SEO_AMBER};  seo_r  = ${SEO_RED};  seo_na  = ${SEO_NA}
-# Readability
 read_g = ${READ_GREEN}; read_a = ${READ_AMBER}; read_r = ${READ_RED}; read_na = ${READ_NA}
-
-# Deltas
 seo_dr = ${SEO_DELTA_RED};   seo_da = ${SEO_DELTA_AMBER};   seo_dg = ${SEO_DELTA_GREEN}
 rd_dr  = ${READ_DELTA_RED};  rd_da  = ${READ_DELTA_AMBER};  rd_dg  = ${READ_DELTA_GREEN}
 
+headers = {
+    "baseline": "Yoast baseline — eggbev.com",
+    "weekly":   "Yoast semanal — eggbev.com",
+    "alert":    "Yoast degradação — eggbev.com",
+}
+colors = {"baseline": 3447003, "weekly": 3066993, "alert": 15158332}
+
 def delta_str(dr, da, dg, first_seo=False):
     if first_seo:
-        return "primeira medição SEO (sem histórico anterior)"
+        return "primeira medição SEO; sem histórico anterior"
     parts = []
-    if dr > 0:  parts.append(f"+{dr} vermelho(s) ⬆️")
-    elif dr < 0: parts.append(f"{dr} vermelho(s) ⬇️")
-    if da > 0:  parts.append(f"+{da} amarelo(s) ⬆️")
-    elif da < 0: parts.append(f"{da} amarelo(s) ⬇️")
-    if dg > 0:  parts.append(f"+{dg} verde(s) ⬆️")
-    elif dg < 0: parts.append(f"{dg} verde(s) ⬇️")
-    return ", ".join(parts) if parts else "sem mudança significativa ✅"
+    if dr > 0:  parts.append(f"+{dr} vermelho(s)")
+    elif dr < 0: parts.append(f"{dr} vermelho(s)")
+    if da > 0:  parts.append(f"+{da} amarelo(s)")
+    elif da < 0: parts.append(f"{da} amarelo(s)")
+    if dg > 0:  parts.append(f"+{dg} verde(s)")
+    elif dg < 0: parts.append(f"{dg} verde(s)")
+    return ", ".join(parts) if parts else "sem mudança significativa"
 
-# Cabeçalho
-headers = {
-    "baseline": f"📊 **[EGGBEV.COM] [YOAST] Baseline ({date_display})**",
-    "weekly":   f"📅 **[EGGBEV.COM] [YOAST] Relatório semanal ({date_display})**",
-    "alert":    f"⚠️ **[EGGBEV.COM] [YOAST] ALERTA degradação ({date_display})**",
-}
-header = headers.get(post_type, f"📊 **[EGGBEV.COM] [YOAST] Saúde ({date_display})**")
-
-lines = [
-    header,
-    f"Total posts publicados: **{total}**",
-    "",
-    "⚠️ *Cada post conta em ambas as métricas (mesmo post pode ser SEO 🟢 + Read 🔴):*",
-    "",
-    f"🎯 **SEO:**        {seo_g}🟢 / {seo_a}🟡 / {seo_r}🔴 / {seo_na}⚪",
-    f"📖 **Readability:** {read_g}🟢 / {read_a}🟡 / {read_r}🔴 / {read_na}⚪",
+prev_has_seo = "${PREV_HAS_SEO:-false}" == "true"
+fields = [
+    {"name": "Data", "value": date_display, "inline": True},
+    {"name": "Posts publicados", "value": str(total), "inline": True},
+    {"name": "SEO", "value": f"🟢 {seo_g} | 🟡 {seo_a} | 🔴 {seo_r} | ⚪ {seo_na}", "inline": False},
+    {"name": "Readability", "value": f"🟢 {read_g} | 🟡 {read_a} | 🔴 {read_r} | ⚪ {read_na}", "inline": False},
+    {"name": "Nota", "value": "Cada post conta em ambas as métricas.", "inline": False},
 ]
-
-# Variação (não mostrar no baseline / primeira run SEO)
 if not is_first:
-    prev_has_seo = "${PREV_HAS_SEO:-false}" == "true"
-    lines.append("")
-    lines.append(f"Variação SEO vs ontem: {delta_str(seo_dr, seo_da, seo_dg, first_seo=not prev_has_seo)}")
-    lines.append(f"Variação Readability vs ontem: {delta_str(rd_dr, rd_da, rd_dg)}")
+    fields.extend([
+        {"name": "Variação SEO vs ontem", "value": delta_str(seo_dr, seo_da, seo_dg, first_seo=not prev_has_seo), "inline": False},
+        {"name": "Variação Readability vs ontem", "value": delta_str(rd_dr, rd_da, rd_dg), "inline": False},
+    ])
+fields.append({"name": "Ação", "value": "Para listar URLs por cor/métrica, pedir no <#1496267571543019653>.", "inline": False})
 
-# CTA
-lines.append("")
-lines.append("💬 Para listar URLs por cor/métrica, peça no <#1496267571543019653>")
-
-print(json.dumps({"content": chr(10).join(lines)}))
+print(json.dumps({
+    "content": "<@344196393512075265> alerta Yoast" if post_type == "alert" else "",
+    "embeds": [{"title": headers.get(post_type, "Yoast health — eggbev.com"), "description": date_display, "color": colors.get(post_type, 3447003), "fields": fields}]
+}))
 PYEOF
+)PYEOF
 )
 
 log "Postando no Discord (tipo=${POST_TYPE})..."

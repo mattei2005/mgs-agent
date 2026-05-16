@@ -114,61 +114,32 @@ if [[ "$BREAKING_COUNT" -gt 0 ]]; then
     sed -E 's/^[a-f0-9]+ //; s/^/• /')
 fi
 
-# 10. Montar mensagem Discord
+# 10. Montar payload Discord estruturado
 BREAKING_HEADER=""
-[[ "$BREAKING_COUNT" -gt 0 ]] && BREAKING_HEADER="🚨 **$BREAKING_COUNT BREAKING CHANGE(S)**"
+[[ "$BREAKING_COUNT" -gt 0 ]] && BREAKING_HEADER="${BREAKING_COUNT} breaking change(s)"
 
-MESSAGE=$(cat <<MSG
-🔔 **Hermes Agent — Update disponível**
-$BREAKING_HEADER
+FEATURES_FIELD="${TOP_FEATURES:-nenhuma feature relevante listada}"
+FIXES_FIELD="${TOP_FIXES:-nenhum fix relevante listado}"
+BREAKING_FIELD="${BREAKING_LIST:-nenhum}"
+TAGS_FIELD="${INTERMEDIATE_TAGS:-nenhuma tag intermediária listada}"
+DIFF_URL="https://github.com/NousResearch/hermes-agent/compare/${LOCAL_SHORT}...${UPSTREAM_SHORT}"
+RELEASE_URL="https://github.com/NousResearch/hermes-agent/releases/tag/${LATEST_TAG}"
 
-📦 **Upstream:** \`$LATEST_TAG\` ($UPSTREAM_SHORT) — $UPSTREAM_DATE
-📍 **Sua versão:** \`$LOCAL_TAG\` ($LOCAL_SHORT) — $LOCAL_DATE
+PAYLOAD=$(jq -n \
+  --arg title "Hermes Agent — update disponível" \
+  --arg upstream "${LATEST_TAG} (${UPSTREAM_SHORT}) — ${UPSTREAM_DATE}" \
+  --arg local "${LOCAL_TAG} (${LOCAL_SHORT}) — ${LOCAL_DATE}" \
+  --arg lag "${DAYS_BEHIND} dias / ${COMMITS_BEHIND} commits atrás" \
+  --arg summary "Features ${FEAT_COUNT} | Fixes ${FIX_COUNT} | Perf ${PERF_COUNT} | Security ${SECURITY_COUNT} | Breaking ${BREAKING_COUNT}" \
+  --arg breaking "$BREAKING_HEADER" \
+  --arg features "$FEATURES_FIELD" \
+  --arg fixes "$FIXES_FIELD" \
+  --arg breaking_list "$BREAKING_FIELD" \
+  --arg tags "$TAGS_FIELD" \
+  --arg diff "$DIFF_URL" \
+  --arg releases "$RELEASE_URL" \
+  '{content:"", embeds:[{title:$title, color:3447003, fields:[{name:"Upstream", value:$upstream, inline:true}, {name:"Versão local", value:$local, inline:true}, {name:"Atraso", value:$lag, inline:false}, {name:"Resumo", value:$summary, inline:false}, {name:"Breaking", value:($breaking_list | if . == "nenhum" then "nenhum" else "```text\\n"+.[:900]+"\\n```" end), inline:false}, {name:"Top features", value:("```text\\n"+$features[:900]+"\\n```"), inline:false}, {name:"Top fixes", value:("```text\\n"+$fixes[:900]+"\\n```"), inline:false}, {name:"Releases", value:$tags, inline:false}, {name:"Links", value:("[Diff completo]("+$diff+") | [Release notes]("+$releases+")"), inline:false}, {name:"Antes de atualizar", value:"Verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`.", inline:false}]}]}')
 
-📊 **$DAYS_BEHIND dias / $COMMITS_BEHIND commits atrás**
-
-🆕 **Resumo de mudanças:**
-🚀 Features: $FEAT_COUNT
-🐛 Bug fixes: $FIX_COUNT
-⚡ Performance: $PERF_COUNT
-🔒 Security: $SECURITY_COUNT
-⚠️ Breaking: $BREAKING_COUNT
-MSG
-)
-
-# Adicionar features se houver
-if [[ -n "$TOP_FEATURES" ]]; then
-  MESSAGE+=$'\n\n**🚀 Top features:**\n```\n'"$TOP_FEATURES"$'\n```'
-fi
-
-# Adicionar fixes se houver
-if [[ -n "$TOP_FIXES" ]]; then
-  MESSAGE+=$'\n**🐛 Top fixes:**\n```\n'"$TOP_FIXES"$'\n```'
-fi
-
-# Breaking changes (priorizado)
-if [[ -n "$BREAKING_LIST" ]]; then
-  MESSAGE+=$'\n**🚨 Breaking changes:**\n```\n'"$BREAKING_LIST"$'\n```'
-fi
-
-# Tags intermediárias
-if [[ -n "$INTERMEDIATE_TAGS" ]]; then
-  MESSAGE+=$'\n**🏷️ Releases entre sua versão e upstream:**\n'"$INTERMEDIATE_TAGS"
-fi
-
-# Links
-MESSAGE+=$'\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/'"$LOCAL_SHORT...$UPSTREAM_SHORT"
-MESSAGE+=$'\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/'"$LATEST_TAG"
-
-# Aviso patch local
-MESSAGE+=$'\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`'
-
-# 11. Enviar webhook (Discord limita a 2000 chars — truncar se necessário)
-if [[ ${#MESSAGE} -gt 1900 ]]; then
-  MESSAGE="${MESSAGE:0:1850}"$'\n\n[...truncated. Ver release notes completo no link acima]'
-fi
-
-PAYLOAD=$(jq -n --arg c "$MESSAGE" '{content: $c, flags: 4}')
 HTTP_CODE=$(curl -s -o /tmp/hermes-monitor-response.json -w '%{http_code}' \
   -X POST "$WEBHOOK" \
   -H "Content-Type: application/json" \
