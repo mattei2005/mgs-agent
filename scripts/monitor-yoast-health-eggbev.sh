@@ -523,7 +523,6 @@ print(json.dumps({
     "embeds": [{"title": headers.get(post_type, "Yoast health — eggbev.com"), "description": date_display, "color": colors.get(post_type, 3447003), "fields": fields}]
 }))
 PYEOF
-)PYEOF
 )
 
 log "Postando no Discord (tipo=${POST_TYPE})..."
