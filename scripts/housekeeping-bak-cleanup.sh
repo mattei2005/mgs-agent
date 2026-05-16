@@ -36,6 +36,7 @@ BASE_DIR=/root/mgs-agent
 
 # Carregar credenciais 1Password
 set -a
+# shellcheck source=/dev/null
 source "${BASE_DIR}/.env" 2>/dev/null || true
 set +a
 

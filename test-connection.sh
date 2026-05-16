@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Helper para curl autenticado seguro (não expõe senha em ps aux)
+# shellcheck source=/dev/null
 source "/root/mgs-agent/skills/content-publish-wordpress/scripts/wp-curl-auth.sh"
 
 SITE="eggbev"

@@ -30,6 +30,7 @@ fi
 
 # ── Load env ───────────────────────────────────────────────────────────────────
 set -a
+# shellcheck source=/dev/null
 source /root/mgs-agent/.env
 set +a
 

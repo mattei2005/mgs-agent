@@ -42,7 +42,10 @@ done
 if [[ "$LISTAR" == "true" ]]; then
   echo "📚 Sessões registradas:"
   echo ""
-  ls -lht "$LOG_DIR"/sessao-*.md 2>/dev/null | awk '{print "  ", $9, "(" $5 " bytes)"}' | head -30
+  find "$LOG_DIR" -maxdepth 1 -type f -name 'sessao-*.md' -printf '%T@ %p %s\n' 2>/dev/null \
+    | sort -nr \
+    | head -30 \
+    | awk '{print "  ", $2, "(" $3 " bytes)"}'
   echo ""
   echo "Index: $INDEX"
   exit 0

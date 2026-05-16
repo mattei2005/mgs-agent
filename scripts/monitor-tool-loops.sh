@@ -9,6 +9,7 @@ COOLDOWN_MINUTES=30
 STATE_FILE="/root/mgs-agent/data/tool-loops-state.json"
 
 set -a
+# shellcheck source=/dev/null
 source /root/mgs-agent/.env
 set +a
 

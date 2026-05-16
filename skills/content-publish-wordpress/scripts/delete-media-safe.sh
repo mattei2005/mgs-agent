@@ -10,6 +10,7 @@ set -euo pipefail
 # - Refuses deletion if media is attached to a different parent post.
 # Credentials are read via resolve-credentials.sh and never printed.
 
+# shellcheck source=/dev/null
 source "$(dirname "$0")/wp-curl-auth.sh"
 
 SITE_KEY="${1:?usage: delete-media-safe.sh <site_key> <media_id> [post_id]}"

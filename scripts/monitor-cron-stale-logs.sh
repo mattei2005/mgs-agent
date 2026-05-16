@@ -19,6 +19,7 @@ DRY_RUN=0
 mkdir -p "$(dirname "$STATE")" "$(dirname "$LOG")"
 
 set -a
+# shellcheck source=/dev/null
 source "${BASE}/.env" 2>/dev/null || true
 set +a
 

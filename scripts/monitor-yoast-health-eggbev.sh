@@ -37,6 +37,7 @@ LOG_PREFIX="monitor-yoast-health-eggbev"
 # Carregar env (OP_SERVICE_ACCOUNT_TOKEN etc)
 # shellcheck source=/dev/null
 set -a
+# shellcheck source=/dev/null
 source "${BASE_DIR}/.env" 2>/dev/null || true
 set +a
 

@@ -5,6 +5,7 @@ set -euo pipefail
 [ -f /root/mgs-agent/.env ] && set -a && . /root/mgs-agent/.env && set +a
 
 # Helper para curl autenticado seguro (não expõe senha em ps aux)
+# shellcheck source=/dev/null
 source "$(dirname "$0")/wp-curl-auth.sh"
 
 SITE_KEY="${1:?usage: check-slug-conflict.sh <site_key> <slug> [post_types_csv]}"

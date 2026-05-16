@@ -11,6 +11,7 @@ STATE_FILE="${BASE_DIR}/data/service-restart-state.json"
 LOG_PREFIX="[monitor-service-restarts]"
 
 set -a
+# shellcheck source=/dev/null
 source "${BASE_DIR}/.env" 2>/dev/null || true
 set +a
 

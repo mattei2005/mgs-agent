@@ -8,6 +8,7 @@
 
 set -euo pipefail
 set -a
+# shellcheck source=/dev/null
 source /root/mgs-agent/.env 2>/dev/null || true
 set +a
 

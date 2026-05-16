@@ -2,6 +2,7 @@
 set -euo pipefail
 
 # Helper para curl autenticado seguro (não expõe senha em ps aux)
+# shellcheck source=/dev/null
 source "$(dirname "$0")/wp-curl-auth.sh"
 
 SITE_KEY="${1:?usage: resolve-term.sh <site_key> <taxonomy> <name> [strict]}"

@@ -34,6 +34,7 @@ esac
 
 # Carregar variáveis de ambiente (incluindo OP_SERVICE_ACCOUNT_TOKEN)
 set -a
+# shellcheck source=/dev/null
 source "${BASE_DIR}/.env" 2>/dev/null || true
 set +a
 
