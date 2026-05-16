@@ -108,17 +108,12 @@ def cache_lookup(card_slug: str) -> Optional[Dict[str, Any]]:
 
 
 def load_anthropic_key() -> Optional[str]:
-    key = os.environ.get("ANTHROPIC_API_KEY", "").strip().strip('"').strip("'")
-    if key.startswith("sk-ant-"):
-        return key
-    for env_path in [ROOT / ".env", Path("/root/.hermes/profiles/atena/.env")]:
-        if not env_path.exists():
-            continue
-        for line in env_path.read_text(errors="ignore").splitlines():
-            if line.strip().startswith("ANTHROPIC_API_KEY="):
-                val = line.split("=", 1)[1].strip().strip('"').strip("'")
-                if val.startswith("sk-ant-"):
-                    return val
+    """Anthropic API is intentionally disabled for MGS runtime.
+
+    Rodolfo decided to stop all pay-per-token Anthropic/Claude API usage.
+    Keep this function as a compatibility stub so older call paths fail closed
+    without reading credentials or making network calls.
+    """
     return None
 
 

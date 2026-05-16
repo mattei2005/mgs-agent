@@ -199,7 +199,7 @@ for script, prev in resolved:
     if not webhook:
         webhook = get_webhook()
     if webhook:
-        post_discord(webhook, f'✅ [INFRA] [CRON-STALE] Resolvido: `{script}` voltou a atualizar log.')
+        post_discord(webhook, cron_resolved_payload(script))
         alerts_sent += 1
 
 state['last_check'] = now_iso
