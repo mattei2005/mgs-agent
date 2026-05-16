@@ -11,6 +11,7 @@ LOG_PREFIX="[$(date '+%Y-%m-%d %H:%M:%S')]"
 
 # Carregar variáveis de ambiente (incluindo OP_SERVICE_ACCOUNT_TOKEN)
 set -a
+# shellcheck source=/dev/null
 source "/root/mgs-agent/.env" 2>/dev/null || true
 set +a
 
@@ -23,9 +24,7 @@ if [[ -z "$WEBHOOK_URL" ]]; then
 fi
 
 # Mention do Zeus bot user (para notificação)
-ZEUS_MENTION="<@344196393512075265>"
-# Canal zeus-admin-agent ID (para contexto no log)
-ZEUS_CHANNEL_ID="1496267442899521627"
+ZEUS_MENTION="<@***>"
 
 # Inicializar state file se não existir
 if [[ ! -f "$STATE_FILE" ]]; then
