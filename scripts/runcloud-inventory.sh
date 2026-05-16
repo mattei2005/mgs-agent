@@ -47,7 +47,7 @@ if [[ ${#TOKEN} -lt 50 ]]; then
   exit 1
 fi
 
-TMP_OUT="$(mktemp "${BASE_DIR}/.runcloud-inventory.XXXXXX")"
+TMP_OUT="$(mktemp "/tmp/runcloud-inventory.XXXXXX")"
 cleanup() { rm -f "$TMP_OUT"; }
 trap cleanup EXIT
 
