@@ -47,7 +47,7 @@ while IFS= read -r fpath; do
         --argjson size "$SIZE" \
         --arg mtime "$MDATE" \
         '. += [{"path": $path, "size_bytes": $size, "modified_at": $mtime}]')
-done < <(find "$REPO/scripts" -maxdepth 2 -type f \( -name "*.sh" -o -name "*.php" -o -name "*.js" \) ! -path "*/node_modules/*" | sort)
+done < <(find "$REPO/scripts" -maxdepth 2 -type f \( -name "*.sh" -o -name "*.py" -o -name "*.php" -o -name "*.js" \) ! -path "*/node_modules/*" | sort)
 
 # ── 4. Skills MGS (/root/mgs-agent/skills/) ─────────────────────────────────
 log "Coletando skills_mgs..."
