@@ -1,0 +1,181 @@
+#!/usr/bin/env bash
+# monitor-cron-stale-logs.sh — Watchdog para detectar crons MGS silenciosos/stale.
+#
+# Roda via cron a cada 15min. Lê o root crontab, identifica jobs MGS e compara
+# mtime do log esperado com uma tolerância por frequência. Alerta no Discord
+# (#alerts-infra) quando um job fica velho demais ou sem log.
+#
+# Modos:
+#   --dry-run   imprime avaliação e não grava state nem envia Discord
+
+set -euo pipefail
+
+BASE="/root/mgs-agent"
+STATE="${BASE}/data/cron-stale-logs-state.json"
+LOG="${BASE}/logs/monitor-cron-stale-logs.log"
+DRY_RUN=0
+[[ "${1:-}" == "--dry-run" ]] && DRY_RUN=1
+
+mkdir -p "$(dirname "$STATE")" "$(dirname "$LOG")"
+
+set -a
+source "${BASE}/.env" 2>/dev/null || true
+set +a
+
+python3 - "$STATE" "$DRY_RUN" <<'PY'
+import json, os, re, subprocess, sys, time, urllib.request
+from pathlib import Path
+
+BASE = Path('/root/mgs-agent')
+STATE = Path(sys.argv[1])
+DRY_RUN = sys.argv[2] == '1'
+NOW = int(time.time())
+ANTI_SPAM = 6 * 3600
+MENTION = '<@344196393512075265>'
+
+# Jobs intencionalmente silenciosos ou que já têm monitor próprio de semântica.
+# Ainda aparecem no CRONS.md; aqui evitamos falso positivo por log vazio/sem output.
+SKIP = {
+    'monitor-cron-stale-logs.sh',
+}
+
+# Logs custom quando o crontab não tem redirect explícito.
+CUSTOM_LOG = {
+    'cleanup-zombie-sessions.sh': '/root/mgs-agent/logs/cleanup-zombies.log',
+}
+
+
+def run(cmd):
+    return subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, check=False).stdout
+
+
+def threshold_seconds(schedule: str) -> int:
+    minute, hour, dom, mon, dow = schedule.split()
+    if minute.startswith('*/5'):
+        return 20 * 60
+    if minute.startswith('*/15'):
+        return 60 * 60
+    if minute == '0' and hour == '*':
+        return 150 * 60
+    return 30 * 3600
+
+
+def parse_crons():
+    out = run(['crontab', '-l'])
+    jobs = []
+    for line in out.splitlines():
+        s = line.strip()
+        if not s or s.startswith('#') or '/root/mgs-agent/scripts/' not in s:
+            continue
+        parts = s.split()
+        if len(parts) < 6:
+            continue
+        schedule = ' '.join(parts[:5])
+        command = ' '.join(parts[5:])
+        m = re.search(r'/root/mgs-agent/scripts/([^\s]+)', command)
+        if not m:
+            continue
+        script = m.group(1)
+        log_m = re.search(r'>>\s*([^\s]+)', command)
+        log_path = log_m.group(1) if log_m else CUSTOM_LOG.get(script, '')
+        jobs.append({'schedule': schedule, 'script': script, 'command': command, 'log_path': log_path})
+    return jobs
+
+
+def load_state():
+    if not STATE.exists():
+        return {'alerts': {}, 'last_check': None}
+    try:
+        return json.loads(STATE.read_text())
+    except Exception:
+        return {'alerts': {}, 'last_check': None}
+
+
+def save_state(state):
+    tmp = STATE.with_suffix('.tmp')
+    tmp.write_text(json.dumps(state, ensure_ascii=False, indent=2) + '\n')
+    os.replace(tmp, STATE)
+
+
+def get_webhook():
+    cmd = ['op', 'item', 'get', 'Discord Webhook - Alerts Infra Channel', '--vault', 'MGS Conteúdo', '--fields', 'label=webhook_url', '--reveal']
+    out = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, check=False).stdout.strip()
+    return out if out.startswith('https://') else ''
+
+
+def post_discord(webhook, content):
+    data = json.dumps({'content': content}).encode()
+    req = urllib.request.Request(webhook, data=data, method='POST', headers={'Content-Type': 'application/json', 'User-Agent': 'Hermes-Agent (MGS cron stale monitor)'})
+    urllib.request.urlopen(req, timeout=10).read()
+
+state = load_state()
+state.setdefault('alerts', {})
+problems = []
+resolved = []
+rows = []
+
+for job in parse_crons():
+    script = job['script']
+    if script in SKIP:
+        rows.append((script, 'SKIP', 'watchdog self-skip'))
+        continue
+    log_path = job['log_path']
+    threshold = threshold_seconds(job['schedule'])
+    status = 'OK'
+    detail = ''
+    age = None
+    if not log_path:
+        # Sem log observável não é falha do cron em si; classifica como skip técnico.
+        rows.append((script, 'SKIP', 'sem log observável'))
+        continue
+    p = Path(log_path)
+    if not p.exists():
+        status = 'STALE'
+        detail = f'log ausente: {log_path}'
+    else:
+        age = NOW - int(p.stat().st_mtime)
+        if age > threshold:
+            status = 'STALE'
+            detail = f'log age={age//60}min threshold={threshold//60}min path={log_path}'
+        else:
+            detail = f'age={age//60}min threshold={threshold//60}min'
+    rows.append((script, status, detail))
+    key = script
+    if status == 'STALE':
+        last = int(state['alerts'].get(key, {}).get('last_alert', 0) or 0)
+        problems.append((script, detail, last))
+    elif key in state['alerts']:
+        resolved.append((script, state['alerts'][key].get('detail', '')))
+        state['alerts'].pop(key, None)
+
+if DRY_RUN:
+    for script, status, detail in rows:
+        print(f'{script:32} | {status:6} | {detail}')
+    print(f'problems={len(problems)} resolved={len(resolved)} dry_run=1')
+    raise SystemExit(0)
+
+webhook = ''
+alerts_sent = 0
+now_iso = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(NOW))
+
+for script, detail, last in problems:
+    if NOW - last < ANTI_SPAM:
+        continue
+    state['alerts'][script] = {'last_alert': NOW, 'detail': detail, 'first_seen': state['alerts'].get(script, {}).get('first_seen', NOW)}
+    if not webhook:
+        webhook = get_webhook()
+    if webhook:
+        post_discord(webhook, f'🚨 [INFRA] [CRON-STALE] {MENTION}\n`{script}` está sem log recente.\n{detail}\nAção: verificar cron/script/log.')
+        alerts_sent += 1
+
+for script, prev in resolved:
+    if not webhook:
+        webhook = get_webhook()
+    if webhook:
+        post_discord(webhook, f'✅ [INFRA] [CRON-STALE] Resolvido: `{script}` voltou a atualizar log.')
+        alerts_sent += 1
+
+state['last_check'] = now_iso
+save_state(state)
+print(f'[{now_iso}] cron-stale check: jobs={len(rows)} problems={len(problems)} resolved={len(resolved)} alerts_sent={alerts_sent}')
+PY

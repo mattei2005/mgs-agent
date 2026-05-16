@@ -1,6 +1,6 @@
 # Crons MGS — Control Plane
 
-Gerado em: `2026-05-16T01:47:41-04:00`  
+Gerado em: `2026-05-16T01:58:26-04:00`  
 Fonte: `root crontab + script/log stat, read-only`  
 Total MGS ativo no root crontab: **16**
 
@@ -8,16 +8,16 @@ Total MGS ativo no root crontab: **16**
 
 ```text
 Frequência   | Script                         | Owner          | Risco                                   | Flock | Último log
------------- | ------------------------------ | -------------- | --------------------------------------- | ----- | --------------------------------------------------------------------------------------------------------
-*/5 * * * *  | sync-souls.sh                  | Zeus/Infra     | baixo                                   | sim   | 2026-05-16T01:45:01-04:00 synced atena skills/devops
+------------ | ------------------------------ | -------------- | --------------------------------------- | ----- | ---------------------------------------------------------------------------------------------------------------------
+*/5 * * * *  | sync-souls.sh                  | Zeus/Infra     | baixo                                   | sim   | 2026-05-16T01:55:01-04:00 synced atena skills/devops
 */15 * * * * | monitor-auto-push.sh           | Zeus/Infra     | baixo                                   | sim   | [2026-05-16T01:45:02-04:00] monitor-auto-push: Concluído. consecutive_failures=0 last_ok=7da326f
 0 10 * * *   | monitor-yoast-health-eggbev.sh | Atena/Conteúdo | baixo                                   | sim   | (sem log útil ainda)
 */15 * * * * | check-pending-reports.sh       | Zeus/Infra     | baixo                                   | sim   | [2026-05-16 01:45:01] check-pending-reports.sh concluído
-*/5 * * * *  | monitor-service-restarts.sh    | Zeus/Infra     | baixo                                   | sim   | 2026-05-16T01:45:02-04:00 [monitor-service-restarts] OK
+*/5 * * * *  | monitor-service-restarts.sh    | Zeus/Infra     | baixo                                   | sim   | 2026-05-16T01:55:01-04:00 [monitor-service-restarts] OK
 0 12 * * *   | monitor-anthropic-cost.sh      | Zeus/Infra     | baixo                                   | sim   | (sem log útil ainda)
 */5 * * * *  | monitor-tool-loops.sh          | Zeus/Infra     | baixo                                   | sim   | Loop detector: 0 alertas enviados
-0 5 * * *    | infra-discovery.sh             | Zeus/Infra     | médio: sobrescreve infra-inventory.json | sim   | [01:42:16] === infra-discovery.sh DONE ===
-0 8 * * *    | monitor-hermes-updates.sh      | Zeus/Infra     | baixo                                   | sim   | (sem log útil ainda)
+0 5 * * *    | infra-discovery.sh             | Zeus/Infra     | médio: sobrescreve infra-inventory.json | sim   | [01:47:43] === infra-discovery.sh DONE ===
+0 8 * * *    | monitor-hermes-updates.sh      | Zeus/Infra     | baixo                                   | sim   | [2026-05-16T01:58:25-04:00] OK notified upstream=70b663504 local=db84a78e6 behind=79 days=0 feat=16 fix=37 breaking=0
 */15 * * * * | track-article-cost.sh          | Atena/Conteúdo | baixo/médio: escreve SQLite local       | sim   | [2026-05-16T01:45:01-0400]   est_input_tokens=66000  est_output_tokens=16500  method=api_calls_estimated
 0 * * * *    | cleanup-zombie-sessions.sh     | Zeus/Infra     | médio: fecha sessões Hermes inativas    | sim   | (sem log útil ainda)
 0 3 * * *    | housekeeping-bak-cleanup.sh    | Zeus/Infra     | alto: deleta arquivos .bak antigos      | sim   | (sem log útil ainda)
@@ -42,7 +42,7 @@ Frequência   | Script                         | Owner          | Risco         
 - **Função:** Sincroniza SOUL.md, config.yaml e skills MGS dos profiles Hermes para versionamento no repo.
 - **Comando:** `flock -n /var/lock/sync_souls.lock /root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/sync-souls.log`
-- **Último log:** 2026-05-16T01:45:01-04:00 (3409 bytes)
+- **Último log:** 2026-05-16T01:55:01-04:00 (3725 bytes)
 
 ### `monitor-auto-push.sh`
 - **Frequência:** `*/15 * * * *`
@@ -78,7 +78,7 @@ Frequência   | Script                         | Owner          | Risco         
 - **Função:** Detecta restarts inesperados dos services zeus-gateway, atena-gateway e mgs-autocommit.
 - **Comando:** `flock -n /var/lock/monitor_service_restarts.lock /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-service-restarts.log`
-- **Último log:** 2026-05-16T01:45:02-04:00 (7287 bytes)
+- **Último log:** 2026-05-16T01:55:01-04:00 (7981 bytes)
 
 ### `monitor-anthropic-cost.sh`
 - **Frequência:** `0 12 * * *`
@@ -96,7 +96,7 @@ Frequência   | Script                         | Owner          | Risco         
 - **Função:** Detecta loops de tool_calls nas sessões Hermes e alerta infra.
 - **Comando:** `flock -n /var/lock/monitor_tool_loops.lock /root/mgs-agent/scripts/monitor-tool-loops.sh >> /root/mgs-agent/logs/monitor-tool-loops.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-tool-loops.log`
-- **Último log:** 2026-05-16T01:45:01-04:00 (714 bytes)
+- **Último log:** 2026-05-16T01:55:01-04:00 (782 bytes)
 
 ### `infra-discovery.sh`
 - **Frequência:** `0 5 * * *`
@@ -105,7 +105,7 @@ Frequência   | Script                         | Owner          | Risco         
 - **Função:** Regenera data/infra-inventory.json a partir do estado real do sistema.
 - **Comando:** `flock -n /var/lock/infra_discovery.lock /root/mgs-agent/scripts/infra-discovery.sh >> /root/mgs-agent/logs/infra-discovery.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/infra-discovery.log`
-- **Último log:** 2026-05-16T01:42:16-04:00 (1136 bytes)
+- **Último log:** 2026-05-16T01:47:43-04:00 (1704 bytes)
 
 ### `monitor-hermes-updates.sh`
 - **Frequência:** `0 8 * * *`
@@ -114,7 +114,7 @@ Frequência   | Script                         | Owner          | Risco         
 - **Função:** Verifica updates upstream do Hermes Agent e alerta quando há nova versão.
 - **Comando:** `flock -n /var/lock/monitor_hermes_updates.lock /root/mgs-agent/scripts/monitor-hermes-updates.sh >> /root/mgs-agent/logs/monitor-hermes-updates.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-hermes-updates.log`
-- **Último log:** 2026-05-16T00:00:02-04:00 (0 bytes)
+- **Último log:** 2026-05-16T01:58:25-04:00 (118 bytes)
 
 ### `track-article-cost.sh`
 - **Frequência:** `*/15 * * * *`
