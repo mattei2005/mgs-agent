@@ -817,12 +817,16 @@ def main() -> int:
         fingerprint_check: Dict[str, Any] = {}
         fp_path = Path(tempfile.gettempdir()) / f"fingerprint-{card_slug}.html"
         fp_path.write_text(content)
+        t0 = time.time()
         fingerprint_check = run_json([str(ROOT / "scripts/rec-fingerprint.py"), "--card-slug", card_slug, "--site", args.site, "--file", str(fp_path)], timeout=30, allow_fail=True)
+        tick("duplicate_fingerprint_check_sec", t0)
         if fingerprint_check.get("status") == "WARN_SIMILAR":
             warnings.append(f"duplicate_content_similarity_warn: max={fingerprint_check.get('max_similarity')} threshold={fingerprint_check.get('threshold')}")
         steps.append("duplicate_fingerprint_checked")
 
+        t0 = time.time()
         title, meta_desc, focus_kw = title_meta_focus(card_data["card_name"], card_data)
+        tick("seo_fields_sec", t0)
         if len(title) > 60 or len(meta_desc) < 120 or len(meta_desc) > 130 or len(focus_kw.split()) > 4:
             raise RunnerError(f"SEO field validation failed title={len(title)} meta={len(meta_desc)} focus_words={len(focus_kw.split())}")
 
@@ -838,7 +842,8 @@ def main() -> int:
             steps.append("dry_run_skip_publish")
         else:
             t0 = time.time()
-            category_id, tag_ids, tag_names = resolve_terms(args.site, site, card_slug, card_data)
+            category_id, tag_ids, tag_names = resolve_terms(args.site, site, card_slug, card_data, term_cache, term_stats)
+            save_term_cache(term_cache)
             tick("wp_resolve_terms_sec", t0)
             post_json = {
                 "status": args.status,
