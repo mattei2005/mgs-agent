@@ -136,7 +136,14 @@ import sys, json; p = json.load(sys.stdin)
 print(p['id'], p['status'], p['slug'], p['title']['rendered'][:80])"
 ```
 
-**eggbev.com REST API quirks (verified 2026-04-23)**:
+**Auditing/listing Atena-published posts on eggbev**:
+When asked for "articles you published" over a date range, do not rely on a single `/posts?tags=<atena_agent>` public REST query. On eggbev, list endpoints and filters can be incomplete because of plugin/theme behavior and older Atena posts may predate the `atena_agent` tag. Use a combined audit pattern:
+1. Query public REST by `tags=atena_agent` for the main list.
+2. Cross-check known/recent publish IDs from logs/session history.
+3. For a bounded range, directly probe likely post IDs with `GET /wp/v2/posts/<id>?_fields=id,date,link,title,status,tags`; direct ID lookup is more reliable than list filters.
+4. Include older confirmed Atena posts even if they lack `atena_agent`, but explicitly note that exception in the user-facing answer.
+
+**eggbev.com REST API quirks (verified 2026-04-23; audit behavior reconfirmed 2026-05-16)**:
 - `Authorization: Basic <base64>` via `-H` fails silently on HTTP/2 (connection drops). Use `-u user:pass` instead.
 - `GET /users/me` returns 401 even with valid app password — auth partially restricted.
 - `?status=draft` / `?status=any` → 401 without working auth session.
