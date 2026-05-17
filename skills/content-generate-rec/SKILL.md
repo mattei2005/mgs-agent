@@ -317,8 +317,9 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
 >
 > **NUNCA fazer (causou perda de $6.37 em 01/05/2026):**
 >   - Wayback Machine para imagens (raramente funciona, sempre custa caro)
->   - Bing/Google image search via **browser_navigate** em loop (usar `search-card-image-bing.py` que roda Playwright LOCAL, não Browserbase — o script faz isso automaticamente)
->   - Tentar dezenas de sites comparadores manualmente
+  - Bing/Google image search via **browser_navigate** em loop (usar `search-card-image-bing.py` que roda Playwright LOCAL, não Browserbase — o script faz isso automaticamente)
+  - Usar Google Images como fallback automático. Por enquanto, manter fallback automático apenas no Bing local porque o script extrai URLs originais via Playwright com menos bloqueio/loop. Google Images pode entrar só como link manual/editorial no resumo quando não houver card image, até existir parser seguro.
+  - Tentar dezenas de sites comparadores manualmente
 >   - Insistir apos script retornar NEEDS_MANUAL
 >   - Variar URLs do mesmo site procurando imagem
 >
@@ -352,12 +353,12 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   office, elegant home interior, rooftop with skyline, airport lounge,
   contemporary coworking, urban street with cinematic blur, city at sunset,
   nighttime metropolis).
-- Output target: 16:9 JPEG at `/tmp/featured-<slug>.jpg` (auto-compressed via `compress-image.sh`: PNG → JPEG, quality 88, max 1280px wide).
-- VALIDATE LOCAL ASPECT RATIO BEFORE UPLOAD: final featured must be 16:9 (for max width 1280, expected 1280x720 or equivalent). If Gemini returns 8:5/16:10 (example: 1280x800), do not silently accept; either regenerate or run the approved crop/pad enforcement in the image pipeline before upload.
+- Output target: strict 16:9 JPEG at `/tmp/featured-<slug>.jpg` (auto-compressed via `compress-image.sh`: PNG → JPEG, quality 88, central crop, final 1280x720 before upload).
+- VALIDATE LOCAL ASPECT RATIO BEFORE UPLOAD: final featured must be strict 16:9 (expected 1280x720 after `compress-image.sh`). If Gemini returns 8:5/16:10 (example: 1280x800), do not silently accept; the approved path is the central-crop enforcement in `compress-image.sh` before upload.
 - VALIDATE LOCALLY BEFORE UPLOAD: use `vision_analyze` on `/tmp/featured-<slug>.jpg` and confirm the card in the composition is visually identical to the card_media (issuer design, layout, colours, sample text placement). If not, regenerate (retry up to 2x). If still broken, abort with a clear message.
 - Only after the local aspect-ratio + vision checks pass, upload via `upload-image.sh` → `{id, source_url, mime_type}` — this is the **featured_media**.
 
-> **PITFALL — prompt does not enforce 16:9 by itself:** Gemini may ignore the requested 16:9 and return 8:5/16:10. `compress-image.sh` historically preserved the generated proportion when resizing to max width 1280, causing outputs like 1280x800. Treat this as a pipeline validation issue, not an editorial choice. Add/keep post-generation aspect enforcement.
+> **PITFALL — prompt does not enforce 16:9 by itself:** Gemini may ignore the requested 16:9 and return 8:5/16:10. `compress-image.sh` is the enforcement layer and must force central crop to 1280x720 before upload. Treat any non-16:9 final file as pipeline failure, not an editorial choice.
 
 > **PITFALL — do not upload failed featured generations:** Gemini can produce a professional-looking image with a generic/altered Amex-style card. Uploading before visual validation leaves orphan media in WordPress and can confuse the final summary. Validate the local `/tmp/featured-<slug>.jpg` first; upload only the approved final image.
 
