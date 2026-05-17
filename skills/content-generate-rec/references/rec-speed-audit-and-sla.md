@@ -92,6 +92,8 @@ Prioritize these fixes before adding more complex infrastructure:
 
 Be direct and operational. Avoid defending the delay. State whether the delay is acceptable, where time went, and what action reduces it.
 
+When the speed discussion happens in a shared Zeus+Atena thread, keep each agent's role distinct: Atena owns the editorial/pipeline self-assessment; Zeus should add evidence, risk framing, and the concrete operational decision/patch. If Rodolfo asks whether both agents are saying the same thing, answer with an alignment table and explicitly call out any delta instead of restating both messages.
+
 Good summary shape:
 
 ```text
