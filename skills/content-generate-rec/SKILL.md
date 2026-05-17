@@ -42,6 +42,18 @@ Operational rule (hard gate):
   a technical audit.
 - If elapsed runner time is >180s, include the slowest `timings_sec` fields in
   the summary. If >300s, label it as an operational incident.
+- For speed audits, always distinguish conversation/thread elapsed time from
+  runner `duration_sec`. A REC can look like 5–10 minutes in Discord while the
+  runner is ~70s because QA, repair, retries, or patching happened outside the
+  deterministic path.
+- During runner performance work, require `unattributed_sec` and
+  `instrumented_total_sec` in the JSON. If `unattributed_sec` is still large,
+  do not claim the bottleneck is solved; add more timing ticks first.
+- Taxonomy term resolution must use the local cache at
+  `/root/mgs-agent/data/wp-term-cache.json` when available and report
+  `term_cache.cache_hits` / `cache_misses` in the result. Repeated stable tags
+  (`rec`, vertical, country, `lang_*`, `atena_agent`, category) should not cause
+  repeated sequential WordPress REST calls.
 
 ### Raquel-facing REC request format (keep it simple)
 
