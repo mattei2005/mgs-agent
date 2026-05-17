@@ -47,7 +47,9 @@ Regras operacionais:
 - Em conversa multi-agente onde Rodolfo impôs gate de segurança, explicação/alinhamento pode ocorrer sem ação; execução, patch, restart, persistência em SOUL/config/skill/script só com autorização explícita.
 - Não ecoar exemplos de mentions dentro de blocos de código se o gateway sanitizar/remover conteúdo; em vez disso, escrever “user mention do bot X, ID Y”.
 
-Pitfall validado: responder “ignorado”, “read-only mantido” ou mencionar o bot destino para corrigir uma mensagem automática ainda gera novo input e prolonga o loop. A melhor resposta para ruído automático é silêncio total.
+Pitfall validado: responder “ignorado”, “read-only mantido”, `[sem resposta operacional]`, `sem ação`, ou mencionar o bot destino para corrigir uma mensagem automática ainda gera novo input e prolonga o loop. A melhor resposta para ruído automático é silêncio total.
+
+Referência do incidente real: `references/discord-agent-loop-incident-2026-05-17.md` — thread `1505532189490811081`, Zeus/Atena, mentions + queued/read-only/(empty) causando ping-pong até lock/archive/delete.
 
 ### Enviando mensagem Zeus → Atena
 
