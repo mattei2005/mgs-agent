@@ -42,6 +42,13 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > Rodolfo → Atena request template, see `references/fast-runner-optimization.md`.
 > Load it when auditing REC speed/cost or tuning the runner.
 >
+> **REFERENCE - fast runner cache-miss fallbacks:** If the requested deterministic
+> runner path fails because legacy Anthropic extraction is disabled, the local
+> article API is unavailable, or `search-card-image.sh` returns an empty failure,
+> see `references/fast-runner-cache-miss-fallbacks.md`. The preferred fix is still
+> to keep using `mgs-rec-runner.py` with explicit official facts and bounded image
+> fallback inputs, not to drift into the full manual step-by-step REC pipeline.
+>
 > **REFERENCE - artifact audit/cleanup:** For the required post-run media manifest,
 > safe auto-delete gates for extra WordPress media, and final-summary UX rule, see
 > `references/rec-artifact-audit-cleanup.md`. Load it when changing runner media
