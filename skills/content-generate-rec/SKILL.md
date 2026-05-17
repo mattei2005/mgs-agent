@@ -32,6 +32,18 @@ Operational rule:
 - Use `--dry-run` only for diagnostics requested by Rodolfo/Zeus, not for normal
   editorial publishing.
 
+### Zeus/Rodolfo operational updates (2026-05-17)
+
+These rules refine normal REC runner execution and final reporting:
+
+1. **Featured image:** final featured image must be strict 16:9. `compress-image.sh` is expected to force a central crop to 1280x720 before upload, and the runner validates the ratio.
+2. **Multi-site same-card flow:** reuse shared official facts/cache across sites, but generate unique copy per site. Do not publish duplicated HTML/body copy.
+3. **Duplicate fingerprint:** when using the runner, read and report `validation.duplicate_fingerprint` from `/root/mgs-agent/scripts/rec-fingerprint.py`. If it warns, do not claim duplicate-control is clean.
+4. **Cost reporting:** report Sonnet-equivalent operational cost via `/root/mgs-agent/scripts/estimate-atena-session-cost.py` / local `state.db`. Never invent or hand-estimate a value such as “US$0.23” without running the cost helper/state query.
+5. **`mgs-rec-api` masked/refused:** do not retry manually or bypass the runner. `mgs-rec-runner.py` handles this by using deterministic local generation and continuing the pipeline.
+6. **REC-only CTA 404:** if the apply/P1 URL returns 404 during REC-only production, report it as `P1 futura ainda não criada`; it is not a blocker unless the task explicitly included P1 creation/validation.
+7. **Google Images:** keep automatic image fallback on Bing local (`search-card-image-bing.py`) because it extracts original URLs through Playwright with fewer blocks/loops. Google Images may be included only as a manual/editorial link until a safe parser exists.
+
 Why: the runner consolidates config, cache lookup, image download/upload,
 featured generation, article API, LazyBlock assembly, validation, WP publish,
 Yoast update/scoring, cache save, and public URL verification into one command.
