@@ -90,6 +90,44 @@ DDGS           yes      no              ddgs Python package installed
 
 Search-only providers can replace browser-based search result discovery, but they cannot replace URL content extraction by themselves. Pair them with `web_extract`, direct Python/curl fetch, or browser automation depending on the target page.
 
+## MGS Brave Search API workflow
+
+When Rodolfo says the Brave key is in 1Password, verify the item shape before testing. Current known MGS item:
+
+```text
+Vault default        ${OP_DEFAULT_VAULT:-MGS Conteúdo}
+Item                 Brave Search API - MGS
+Field label          api key
+Required op flag     --reveal
+```
+
+Pitfalls:
+
+- `--fields api_key` is wrong for the current item; use `--fields "api key"`.
+- Without `--reveal`, 1Password returns a placeholder string, not the secret. Brave will reject it as `SUBSCRIPTION_TOKEN_INVALID`.
+- Do not print the key. Report item/vault/field and `len=N` only.
+- Directly importing `tools.web_tools.web_search_tool()` from Python may not initialize Hermes plugin providers. Validate provider behavior with a real `hermes -p <profile> -z ...` invocation when testing agent runtime behavior.
+
+Quick deterministic probe:
+
+```bash
+bash /root/.hermes/profiles/zeus/skills/ops/hermes-web-tooling/scripts/test-brave-search-mgs.sh \
+  "AIB Visa Gold credit card UK official"
+```
+
+Temporary Hermes runtime test:
+
+```bash
+cd /root/mgs-agent
+set -a; [ -f .env ] && source .env; set +a
+KEY="$(op item get "Brave Search API - MGS" --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" --fields "api key" --reveal)"
+BRAVE_SEARCH_API_KEY="$KEY" hermes -p atena -z "Teste web_search nativo: procure 'AIB Visa Gold credit card UK official' com no máximo 3 resultados e responda só os URLs encontrados."
+```
+
+Brave Images direct endpoint can be tested separately at `https://api.search.brave.com/res/v1/images/search`. Treat image results as candidates only; affiliate/competitor domains can rank above issuer domains.
+
+See `references/brave-search-mgs-2026-05-17.md` for the session-specific command outputs and caveats.
+
 ## MGS recommendation pattern
 
 For Atena image/source search alternatives to Playwright:
@@ -97,11 +135,12 @@ For Atena image/source search alternatives to Playwright:
 ```text
 Need                              Preferred path
 ──────────────────────────────── ─────────────────────────────────────
-Candidate URLs / image discovery  Hermes web_search + low-cost provider first
-Specific static URL fetch         Python/curl/direct HTTP where sufficient
-Structured content extraction     web_extract with Firecrawl/Tavily/Exa/Parallel
+Official/source URL discovery      Hermes web_search + Brave first
+Image candidate discovery          Brave Images API direct endpoint
+Specific static URL fetch          Python/curl/direct HTTP where sufficient
+Structured content extraction      web_extract with Firecrawl/Tavily/Exa/Parallel
 JS-heavy pages / visual checks     Browser/Playwright remains appropriate
-Cost-sensitive pilot              Try Brave Search API before Serper/SerpAPI
+Fallback while benchmarking        Current Playwright Bing flow
 ```
 
 For MGS, start with the cheapest stable native path before a $50/mo provider:
@@ -135,3 +174,5 @@ Then provide:
 ## References
 
 - `references/hermes-web-tooling-2026-05-17.md` — session-derived command outputs and provider conclusions from the MGS Hermes v0.14.0 inspection.
+- `references/brave-search-mgs-2026-05-17.md` — Brave Search API 1Password item shape, direct API tests, Hermes runtime test, and Atena image-search caveats.
+- `scripts/test-brave-search-mgs.sh` — deterministic Brave web-search probe using the MGS 1Password item without printing the key.
