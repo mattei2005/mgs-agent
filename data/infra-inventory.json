@@ -1,8 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-17T05:00:01-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-05-17T12:40:40.522455-04:00",
+    "generated_by": "infra-discovery.sh",
+    "updated_by": "zeus-hermes-news-setup"
   },
   "systemd_services": [
     {
@@ -69,6 +70,10 @@
     },
     {
       "entry": "*/15 * * * * flock -n /var/lock/monitor_cron_stale_logs.lock /root/mgs-agent/scripts/monitor-cron-stale-logs.sh >> /root/mgs-agent/logs/monitor-cron-stale-logs.log 2>&1"
+    },
+    {
+      "entry": "*/5 * * * * flock -n /var/lock/hermes_news_explainer.lock /root/mgs-agent/scripts/hermes-news-explainer.py >> /root/mgs-agent/logs/hermes-news-explainer.log 2>&1",
+      "description": "Polls #alerts-hermes-news and posts Zeus explanation replies for new Hermes announcements."
     }
   ],
   "scripts": [
@@ -246,6 +251,12 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
+      "size_bytes": 7094,
+      "modified_at": "2026-05-17T12:40:06.229471-04:00",
+      "description": "Discord #alerts-hermes-news poller/summarizer for Hermes announcements."
     }
   ],
   "skills_mgs": [
@@ -1335,6 +1346,12 @@
       "size_bytes": 35989,
       "md5": "9be71313e2a746b13e3b1482a80e71a9",
       "modified_at": "2026-05-15T17:35:17-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
+      "size_bytes": 157,
+      "modified_at": "2026-05-17T12:40:13.677433-04:00",
+      "description": "State for Hermes announcements explainer. Tracks last_seen_id and processed reply IDs."
     }
   ],
   "mu_plugin_canonical": {
