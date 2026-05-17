@@ -16,7 +16,7 @@ After publish and before reporting success, validate these items:
 CHECK                         REQUIRED ACTION
 ----------------------------- ------------------------------------------------
 Public REC URL                GET must return HTTP 200
-| CTA/apply URL                 Probe and report status; 404 is expected if P1/apply page is not created yet
+CTA/apply URL                 Probe and report status; 404 is expected if P1/apply page is not created yet
 Featured image                Present; dimensions acceptable; no obvious IA text errors
 Card image                    Present in LazyBlock; correct/legible card
 Artifact audit                created/used/extra/deleted counts reported
@@ -34,12 +34,14 @@ The LazyBlock button URL is not automatically safe just because it follows the e
 https://{domain}/apply-now-{country}-{vertical}-{card_slug}/
 ```
 
-Always probe the generated CTA URL. If it returns 404:
+Always probe the generated CTA URL, but do not classify a 404 as a blocker during REC-only production. The template deliberately points to the eventual P1/apply page.
 
-1. Keep the REC published only if the user explicitly accepts it, or mark as blocker.
-2. Do not say “validated successfully.”
-3. Include the broken CTA URL in the final summary.
-4. Recommend creating/fixing the matching P1/apply page before production rollout.
+If it returns 404:
+
+1. Report `P1/apply not created yet` as informational, not failure.
+2. Do not ask to change the REC CTA unless Rodolfo requests a temporary fallback.
+3. Track it as a P1 coverage gap for later page generation.
+4. Before full funnel/campaign rollout, the matching P1/apply page must exist.
 
 ## Title/claim rule
 
