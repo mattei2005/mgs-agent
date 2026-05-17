@@ -91,6 +91,22 @@ For featured images, flag:
 
 If image is usable but imperfect, report as “acceptable with caveat.” If product text/logo is wrong, recommend replacement before scaling production.
 
+## Correcting an already-published REC
+
+When Zeus/Rodolfo asks Atena to correct a REC that is already live, treat it as a post-publication repair, not a fresh REC generation. Do not recreate images unless the correction explicitly requires it.
+
+Recommended flow:
+
+1. Fetch the public post by direct post ID first. On eggbev, direct `GET /wp-json/wp/v2/posts/<id>` is reliable for published posts.
+2. If authenticated REST with `context=edit` returns `rest_forbidden_context` / 401 for the publishing application password, do not loop on auth. Use the RunCloud SSH / WP-CLI path from `ssh-jump-runcloud` to export raw `post_content` and update the post.
+3. Preserve existing LazyBlock payloads and media IDs unless they are the target of the fix. For text-only corrections, keep the existing `credit-card` and `botao` LazyBlocks intact.
+4. Write the corrected final Gutenberg body to a temp file, validate that exact file with `validate-article.sh`, and only then update the post.
+5. For the update, use WP-CLI / `wp eval-file` to call `wp_update_post()` and update Yoast meta (`_yoast_wpseo_focuskw`, `_yoast_wpseo_metadesc`, `_yoast_wpseo_title`) as needed. Keep `_yoast_wpseo_title` empty unless a user explicitly asks for an override.
+6. Run `yoast-score-post.sh <site_key> <post_id>` after the update and report both SEO and Readability scores.
+7. Re-fetch the public post and validate the actual rendered/public state: public URL 200, title corrected, unsupported claims removed, broken fragment absent, official facts present, CTA status probed, and media IDs unchanged if no images were regenerated.
+
+For product summaries that render as embedded/escaped HTML, such as the Marbles/NewDay summary, unescape before parsing. The useful tables may appear as `&lt;table...&gt;` plus escaped line breaks rather than raw `<table>` elements. Extract APR, APR range, annual fee, cash fee, balance transfer fee, credit limit and repayment terms from the unescaped tables instead of relying only on the visible short product page.
+
 ## Summary severity
 
 Use this severity model in review reports:
