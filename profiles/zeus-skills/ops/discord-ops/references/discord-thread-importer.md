@@ -35,11 +35,16 @@ Arquivos locais:
 
 ## Fluxo operacional recomendado
 
-1. Rodolfo manda: `Zeus, lê essa thread: <link>`.
-2. Extrair link/ID e rodar o importador.
-3. Ler o `.md` importado para responder com base no histórico real.
-4. Se a Discord API retornar 403/404, explicar operacionalmente: bot sem acesso à thread, sem `Read Message History`, ou private thread sem membership.
-5. Não fazer crawler geral por padrão. Importar só a thread explicitamente indicada por Rodolfo.
+1. Rodolfo manda um link/ID de thread ou diz que vai continuar uma conversa de outra thread.
+2. **Não responder que Zeus não consegue ler o link.** A resposta correta é importar a thread por API. Se já existe link/ID explícito, rode o importador imediatamente.
+3. Extrair link/ID e rodar o importador.
+4. Ler o `.md` importado para responder com base no histórico real.
+5. Se a Discord API retornar 403/404, explicar operacionalmente: bot sem acesso à thread, sem `Read Message History`, ou private thread sem membership.
+6. Não fazer crawler geral por padrão. Importar só a thread explicitamente indicada por Rodolfo.
+
+### Frase operacional correta
+
+Quando Rodolfo colar uma thread e pedir continuação, diga em substância: `Vou importar a thread e continuar com base no histórico real.` Em seguida rode `scripts/import-discord-thread.py`. Evite respostas como `não consigo puxar o histórico desse link automaticamente`; isso é impreciso porque existe o importador read-only.
 
 ## Validação mínima ao alterar o script
 

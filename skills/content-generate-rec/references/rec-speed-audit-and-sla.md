@@ -10,6 +10,9 @@ A normal REC should not take 5-8 minutes when the deterministic runner is used c
 - Cache-HIT dry-run can complete in ~0.3s.
 - A recent real runner publish completed in ~66s when provided official facts and a manual card image URL.
 - Featured image generation was around ~8s in that run.
+- Slow real cases included Amex Cashback at ~344s and American Express Rewards at ~444s, driven by agent/session workflow rather than text generation.
+
+The central operational problem is Atena drifting back into manual agent behavior. If the request says `publique direto` and has site/card/status/source, Atena should not inspect the runner code, browse manually, read large skill sections, or run separate upload/Yoast/image steps unless the runner fails with a specific blocker. The intended shape is: one `mgs-rec-runner.py` command → parse JSON → one final summary.
 
 The main delays are usually outside text generation:
 
