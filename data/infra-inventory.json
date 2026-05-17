@@ -1,9 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-17T12:40:40.522455-04:00",
-    "generated_by": "infra-discovery.sh",
-    "updated_by": "zeus-hermes-news-setup"
+    "updated_at": "2026-05-17T12:41:52-04:00",
+    "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
     {
@@ -72,8 +71,7 @@
       "entry": "*/15 * * * * flock -n /var/lock/monitor_cron_stale_logs.lock /root/mgs-agent/scripts/monitor-cron-stale-logs.sh >> /root/mgs-agent/logs/monitor-cron-stale-logs.log 2>&1"
     },
     {
-      "entry": "*/5 * * * * flock -n /var/lock/hermes_news_explainer.lock /root/mgs-agent/scripts/hermes-news-explainer.py >> /root/mgs-agent/logs/hermes-news-explainer.log 2>&1",
-      "description": "Polls #alerts-hermes-news and posts Zeus explanation replies for new Hermes announcements."
+      "entry": "*/5 * * * * flock -n /var/lock/hermes_news_explainer.lock /root/mgs-agent/scripts/hermes-news-explainer.py >> /root/mgs-agent/logs/hermes-news-explainer.log 2>&1"
     }
   ],
   "scripts": [
@@ -133,6 +131,11 @@
       "modified_at": "2026-05-17T00:02:25-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
+      "size_bytes": 7094,
+      "modified_at": "2026-05-17T12:40:06-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
       "size_bytes": 5120,
       "modified_at": "2026-05-16T17:37:26-04:00"
@@ -149,8 +152,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-rec-runner.py",
-      "size_bytes": 43713,
-      "modified_at": "2026-05-17T00:00:09-04:00"
+      "size_bytes": 44871,
+      "modified_at": "2026-05-17T07:40:49-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/migration-2026-05-14-proximo-id-collision-fix.sh",
@@ -251,12 +254,6 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
-      "size_bytes": 7094,
-      "modified_at": "2026-05-17T12:40:06.229471-04:00",
-      "description": "Discord #alerts-hermes-news poller/summarizer for Hermes announcements."
     }
   ],
   "skills_mgs": [
@@ -592,6 +589,11 @@
         "name": "airtable",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/atena/skills/productivity/airtable/SKILL.md"
+      },
+      {
+        "name": "discord-thread-communication",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/atena/skills/productivity/discord-thread-communication/SKILL.md"
       },
       {
         "name": "google-workspace",
@@ -1242,8 +1244,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "8fbce719c6f1ae9a8295949680fd4916",
-      "modified_at": "2026-05-17T05:00:02-04:00"
+      "md5": "c8d61d5a64dbc6eb3f42ba2bdef31ca5",
+      "modified_at": "2026-05-17T12:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1254,8 +1256,14 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "e0ea590bd5972f464c42d6d41ba9e27d",
-      "modified_at": "2026-05-17T05:00:01-04:00"
+      "md5": "a2c708b660721e4f7feed1d7eef3d545",
+      "modified_at": "2026-05-17T12:30:01-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
+      "size_bytes": 157,
+      "md5": "14d139320e84a3a8e849a025e3cf113b",
+      "modified_at": "2026-05-17T12:40:52-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
@@ -1265,9 +1273,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 46426,
-      "md5": "53992eadc31b8e643bd96052c6fbcc0e",
-      "modified_at": "2026-05-16T18:26:14-04:00"
+      "size_bytes": 47796,
+      "md5": "186380660fdf563f4d4348295d968b97",
+      "modified_at": "2026-05-17T12:40:40-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1283,15 +1291,15 @@
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
-      "size_bytes": 57068,
-      "md5": "c3f8fb1ad4b496a9f7c96935aeaf2aa3",
-      "modified_at": "2026-05-15T17:17:07-04:00"
+      "size_bytes": 58200,
+      "md5": "89b8e8e2925fcbdf4090eeed86e685ee",
+      "modified_at": "2026-05-17T12:39:35-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
-      "size_bytes": 2709,
-      "md5": "ff5c12e608f5aeb23933fec69e558a3e",
-      "modified_at": "2026-05-17T05:00:03-04:00"
+      "size_bytes": 2658,
+      "md5": "05f80de9374eb160ecb93b8d0cb800f5",
+      "modified_at": "2026-05-17T05:15:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -1309,7 +1317,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
       "md5": "6d5aec6ff72be4e07a700eb88657d60c",
-      "modified_at": "2026-05-17T05:00:02-04:00"
+      "modified_at": "2026-05-17T12:40:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1325,9 +1333,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 10056,
-      "md5": "17e7aeb167774e254ffcf02615e05fe4",
-      "modified_at": "2026-05-16T15:58:35-04:00"
+      "size_bytes": 10420,
+      "md5": "25f7ce797f856519c7c3ded8cef0018a",
+      "modified_at": "2026-05-17T10:01:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -1337,21 +1345,15 @@
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "size_bytes": 38076,
-      "md5": "0c5f89587f82edee22bcb28f845abc59",
-      "modified_at": "2026-05-16T18:26:12-04:00"
+      "size_bytes": 39659,
+      "md5": "5fe203bb42dbcf88e3ee1d76523d74ea",
+      "modified_at": "2026-05-17T07:40:59-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
       "size_bytes": 35989,
       "md5": "9be71313e2a746b13e3b1482a80e71a9",
       "modified_at": "2026-05-15T17:35:17-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 157,
-      "modified_at": "2026-05-17T12:40:13.677433-04:00",
-      "description": "State for Hermes announcements explainer. Tracks last_seen_id and processed reply IDs."
     }
   ],
   "mu_plugin_canonical": {
