@@ -2,10 +2,10 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-05-15T17:17:07-04:00",
-    "total_abertas": 50,
+    "ultima_atualizacao": "2026-05-17T12:39:18-04:00",
+    "total_abertas": 51,
     "total_resolvidas": 37,
-    "proximo_id": 88,
+    "proximo_id": 89,
     "responsavel": "Rodolfo Mattei"
   },
   "categorias": {
@@ -897,6 +897,27 @@
         "llm-cost"
       ],
       "contexto": "Decisão atual do Rodolfo: manter tudo que precisa de LLM em GPT-5.5/Codex por enquanto. Como 95% dos crons são script-only e há poucos agentes, cron-worker fica apenas como análise futura. Avaliar futuramente se número de agentes/crons LLM crescer."
+    },
+    {
+      "id": "PEND-088",
+      "titulo": "Avaliar Hermes video_gen + Grok/X Search para futuro agente Ares",
+      "categoria": "agente",
+      "prioridade": "media",
+      "status": "aberta",
+      "tempo_estimado": "1h validação + decisão de custo",
+      "bloqueio": "Quando criar/configurar Ares ou agente de campanhas",
+      "criada_em": "2026-05-17T12:39:18-04:00",
+      "criada_por": "Zeus",
+      "tags": [
+        "ares",
+        "ads",
+        "hermes",
+        "video_gen",
+        "grok",
+        "x-search",
+        "campanhas"
+      ],
+      "contexto": "Novidades Hermes v0.14: toolset video_gen nativo, desativado por padrão, com backends plugáveis FAL.ai (Veo 3.1/Pixverse/Kling; requer FAL_KEY) e xAI Grok-Imagine (SuperGrok OAuth ou XAI_API_KEY). Hermes também anunciou X Search automático quando usando assinatura Grok/X compatível. Relevante para futuro agente Ares/campanhas: pesquisar trends/criativos no X e potencialmente gerar/animar criativos em vídeo. Recomendação atual: não habilitar em Zeus/Atena; avaliar em sandbox e impor budget/allowlist antes de liberar em produção."
     }
   ],
   "resolvidas": [
