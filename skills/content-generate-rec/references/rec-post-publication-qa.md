@@ -91,6 +91,23 @@ For featured images, flag:
 
 If image is usable but imperfect, report as “acceptable with caveat.” If product text/logo is wrong, recommend replacement before scaling production.
 
+## Featured image brand-artifact repair
+
+If vision QA flags a generated featured image for malformed brand text/logo artifacts after the post is already live, repair the media state instead of leaving the bad image in place.
+
+Recommended flow:
+
+1. Keep the official card image as the source of truth for logos/text. Do not accept a Gemini-rendered card face when brand text such as Avios, Amex, Mastercard, etc. is misspelled or distorted.
+2. Create a corrected 16:9 featured image by compositing the official card artwork over the approved lifestyle/background scene, or regenerate if compositing is not suitable. Validate the corrected local file with `vision_analyze` before upload.
+3. Upload the corrected image and update the post `featured_media` via authenticated REST.
+4. If the old bad featured image was already referenced by Yoast `og:image`, either:
+   - restore the same old filename/URL with corrected artwork, or
+   - rebuild/refresh Yoast indexable metadata so `og:image`, schema `thumbnailUrl`, and WordPress `featured_media` all point to a live, corrected image.
+5. Delete only the bad media item after confirming it is not the current `featured_media`, not referenced in post content, and not attached elsewhere. Use `delete-media-safe.sh` rather than raw delete.
+6. Re-run `yoast-score-post.sh`, then verify: public URL 200, card image URL 200, featured image URL 200, post `featured_media` correct, and no broken social image URL remains.
+
+Pitfall: replacing `featured_media` alone may not immediately update every Yoast/social-image reference because Yoast indexables/cache can still include the previous media URL. Do not delete the old URL unless the social metadata has been updated or the old URL has been restored with corrected artwork.
+
 ## Correcting an already-published REC
 
 When Zeus/Rodolfo asks Atena to correct a REC that is already live, treat it as a post-publication repair, not a fresh REC generation. Do not recreate images unless the correction explicitly requires it.
