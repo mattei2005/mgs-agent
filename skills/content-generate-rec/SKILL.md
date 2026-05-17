@@ -91,6 +91,13 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > image QA, and severity model), see `references/rec-post-publication-qa.md`.
 > Load it when reviewing a published REC or modifying final validation/reporting.
 >
+> **REFERENCE - REC audit and image fallback validation:** When Zeus/Rodolfo asks
+> to verify a completed Atena REC thread, especially after changing card-image
+> fallback logic, use `references/rec-audit-and-image-fallback-validation.md`.
+> It covers triangulating Atena's report against runner JSON, WP REST, public
+> HTML, media records, cost files, and how to avoid falsely claiming Brave Images
+> was used when the runner shows `card_image_manual_url_used`.
+>
 > **REFERENCE - multi-site REC scaling:** For publishing the same card across
 > multiple MGS sites without duplicate-content problems, see
 > `references/multisite-rec-scaling.md`. Use shared official facts/cache, but
