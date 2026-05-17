@@ -317,9 +317,9 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
 >
 > **NUNCA fazer (causou perda de $6.37 em 01/05/2026):**
 >   - Wayback Machine para imagens (raramente funciona, sempre custa caro)
-  - Bing/Google image search via **browser_navigate** em loop (usar `search-card-image-bing.py` que roda Playwright LOCAL, não Browserbase — o script faz isso automaticamente)
-  - Usar Google Images como fallback automático. Por enquanto, manter fallback automático apenas no Bing local porque o script extrai URLs originais via Playwright com menos bloqueio/loop. Google Images pode entrar só como link manual/editorial no resumo quando não houver card image, até existir parser seguro.
-  - Tentar dezenas de sites comparadores manualmente
+>   - Bing/Google image search via **browser_navigate** em loop (usar `search-card-image-bing.py` que roda Playwright LOCAL, não Browserbase — o script faz isso automaticamente)
+>   - Usar Google Images como fallback automático. Por enquanto, manter fallback automático apenas no Bing local porque o script extrai URLs originais via Playwright com menos bloqueio/loop. Google Images pode entrar só como link manual/editorial no resumo quando não houver card image, até existir parser seguro.
+>   - Tentar dezenas de sites comparadores manualmente
 >   - Insistir apos script retornar NEEDS_MANUAL
 >   - Variar URLs do mesmo site procurando imagem
 >
