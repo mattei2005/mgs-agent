@@ -83,8 +83,8 @@ Prioritize these fixes before adding more complex infrastructure:
 2. For `publique direto` requests, ban pre-runner browser/code-inspection/tool exploration unless the runner returns a specific error requiring it.
 3. Require or strongly prefer official URL in normal requests.
 4. Use `--card-image-url` when a clean official card image URL is provided.
-5. Cache WordPress category/tag IDs per site inside the runner to avoid repeated REST calls.
-6. Add timing ticks around unresolved WordPress stages: term resolution, create-post, update-yoast, yoast-score, cache-save, public-verify, artifact-cleanup, fingerprint-store.
+5. Cache WordPress category/tag IDs per site inside the runner to avoid repeated REST calls. In the 2026-05-17 audit, resolving 9 eggbev terms cold took ~8.51s; the same resolution from `/root/mgs-agent/data/wp-term-cache.json` took ~0.00s. Keep passing `term_cache`/`term_stats` into `resolve_terms`, save the cache after misses, and report cache hits/misses in runner output.
+6. Add timing ticks around unresolved WordPress stages: term resolution, create-post, update-yoast, yoast-score, cache-save, public-verify, artifact-cleanup, fingerprint-store. Also compute `unattributed_sec` so any hidden time is visible instead of hand-waved.
 7. Do not do image correction after publication unless the card/brand/product is actually wrong.
 8. Treat any normal REC above 5 minutes as an incident with a bottleneck report.
 
@@ -104,6 +104,7 @@ Area                         | Evidence                 | Action
 Article generation            | local generation ~0.03s  | not the bottleneck
 Runner dry-run/cache          | ~0.3s                    | cache path is healthy
 Real publish runner           | ~66s                     | baseline should be ~2min
+WP term resolution            | cold ~8.5s / cached ~0s  | keep term cache active
 Image/QA repairs              | extra uploads/corrections| only repair real defects
-WordPress/Yoast/tags          | uninstrumented overhead  | add timing ticks/cache tags
+WordPress/Yoast/tags          | measured per timing tick | optimize slowest stage
 ```
