@@ -6,7 +6,7 @@ Use this reference when reviewing a REC after Atena publishes it, or when tighte
 
 A published REC can be technically successful (post created, Yoast green/yellow, images present) while still being operationally unsafe because the user journey or editorial quality is broken.
 
-Concrete failure found in review: Marbles Credit Card REC published with a valid post and clean media audit, but the CTA URL `/apply-now-gb-cc-marbles-credit-card/` returned 404. The article also had a misleading title using “Rewards” and a dangling final fragment: “Reading the official terms.”
+Concrete failure found in review: Marbles Credit Card REC published with a valid post and clean media audit, but the article had a misleading title using “Rewards” and a dangling final fragment: “Reading the official terms.” The CTA URL `/apply-now-gb-cc-marbles-credit-card/` returned 404, but Rodolfo clarified that this is expected while only REC pages are being created; the REC template intentionally points to the future P1/apply URL.
 
 ## Required post-publication checks
 
@@ -16,7 +16,7 @@ After publish and before reporting success, validate these items:
 CHECK                         REQUIRED ACTION
 ----------------------------- ------------------------------------------------
 Public REC URL                GET must return HTTP 200
-CTA/apply URL                 GET must return HTTP 200, or report BLOCKER
+| CTA/apply URL                 Probe and report status; 404 is expected if P1/apply page is not created yet
 Featured image                Present; dimensions acceptable; no obvious IA text errors
 Card image                    Present in LazyBlock; correct/legible card
 Artifact audit                created/used/extra/deleted counts reported
