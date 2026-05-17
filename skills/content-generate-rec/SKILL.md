@@ -32,6 +32,26 @@ Operational rule:
 - Use `--dry-run` only for diagnostics requested by Rodolfo/Zeus, not for normal
   editorial publishing.
 
+### Raquel-facing REC request format (keep it simple)
+
+When Rodolfo asks what Raquel should send to Atena, provide a short, natural editorial request. Do **not** expose internal implementation details unless this is an explicit technical test/audit.
+
+Preferred format:
+
+```text
+Atena, publique direto um REC no eggbev vertical gb-cc-en do Barclaycard Avios Credit Card.
+
+URL oficial:
+https://www.barclaycard.co.uk/personal/credit-cards/avios
+
+No resumo final, inclua Post ID, URL pública, edit link, Yoast, auditoria de imagens, custo e duração.
+```
+
+Avoid adding routine internals to Raquel-facing prompts:
+- Do not mention `mgs-rec-runner.py`, deterministic runner, Brave Images, Bing fallback, cache MISS, dedupe checks, or WordPress slug `-2` behavior.
+- The skill/script should enforce those details internally. Raquel should only provide the card, site, vertical/status when needed, official URL, and final summary expectations.
+- If the post already exists, WordPress slug disambiguation is acceptable; do not add duplicate-blocking instructions to the normal request template unless Rodolfo specifically asks for duplicate prevention.
+
 ### Zeus/Rodolfo operational updates (2026-05-17)
 
 These rules refine normal REC runner execution and final reporting:
