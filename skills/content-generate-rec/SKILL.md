@@ -58,6 +58,12 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > (REC-only CTA/P1 404 handling, title claim support, complete final sentence,
 > image QA, and severity model), see `references/rec-post-publication-qa.md`.
 > Load it when reviewing a published REC or modifying final validation/reporting.
+>
+> **REFERENCE - multi-site REC scaling:** For publishing the same card across
+> multiple MGS sites without duplicate-content problems, see
+> `references/multisite-rec-scaling.md`. Use shared official facts/cache, but
+> generate unique titles, intros, body copy, meta descriptions, and positioning
+> per site.
 
 ## Inputs
 
