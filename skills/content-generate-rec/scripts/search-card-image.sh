@@ -241,7 +241,7 @@ fi
 base_host=$(echo "$OFFICIAL_URL" | sed -E 's#^(https?://[^/]+).*#\1#')
 candidates=$(echo "$html" | grep -oE '(src|data-src|data-lazy-src)="[^"]+\.(png|jpe?g|webp)"' \
   | sed -E 's/^[^"]+\"([^"]+)\".*/\1/' \
-  | sort -u)
+  | sort -u || true)
 
 abs_candidates=$(while IFS= read -r u; do
   [ -z "$u" ] && continue
