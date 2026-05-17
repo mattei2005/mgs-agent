@@ -49,24 +49,28 @@ send_message(
 
 Sem `<@1496306920494202950>` → Atena ignora silenciosamente.
 
-### Regra de conversa em thread compartilhada Zeus ↔ Atena
+### Conversa direta entre agentes em thread compartilhada
 
-Quando Zeus e Atena estão na mesma thread, fala direta entre agentes deve usar **user mention do bot**, não só o nome textual do agente. Isso vale mesmo quando a mensagem é “sobre” o outro agente, se for endereçada diretamente a ele.
+Quando Rodolfo colocar Zeus e Atena na mesma thread, fala direta entre agentes deve usar **user mention do bot**, não apenas o nome textual do agente. Isso vale também quando a mensagem é “sobre” o outro agente, se for endereçada diretamente a ele.
 
 ```text
 Direção                         Forma correta
-------------------------------  -------------------------
-Zeus falando com Atena          <@1496306920494202950>
-Atena falando com Zeus          <@1496296175014252634>
+------------------------------  ----------------------------------------------
+Zeus falando com/sobre Atena    user mention do bot Atena, ID 1496306920494202950
+Atena falando com/sobre Zeus    user mention do bot Zeus, ID 1496296175014252634
 Evitar                          escrever só “Zeus” ou “Atena” em fala direta
 ```
+
+Regras operacionais:
+1. Para mensagem real direcionada, colocar o mention real no começo da mensagem, fora de bloco e sem backticks.
+2. Se examples de mention forem sanitizados pela plataforma ao serem ecoados, não corrigir em loop. Para documentação/exemplo, descrever por ID como acima; para roteamento real, usar o mention direto na mensagem.
+3. Se Rodolfo estabelecer um gate local como “nesta conversa qualquer alteração/execução pede minha autorização”, obedecer como regra de thread: explicação, diagnóstico e alinhamento verbal são permitidos; patch, restart, publicação, alteração em SOUL/skill/config/script ou persistência só depois de autorização explícita.
+4. Não criar loops de confirmação entre agentes. Depois que o estado estiver alinhado (“read-only”, “sem nova ação”, “queued”), não responder a cada confirmação repetida. Só responder se houver pedido novo direto, correção substantiva ou risco operacional.
 
 Motivos:
 - garante que o agente destinatário processe a mensagem quando `DISCORD_ALLOW_BOTS=mentions` está ativo;
 - reduz ambiguidade em threads com Rodolfo + múltiplos agentes;
-- preserva legibilidade para o Rodolfo, mostrando claramente quem está sendo acionado.
-
-Se Rodolfo declarar um gate local como “nesta conversa qualquer alteração/execução pede minha autorização”, obedecer como regra de thread: explicar, pedir autorização explícita e só então executar/persistir em arquivo/config.
+- preserva legibilidade para Rodolfo, mostrando claramente quem está sendo acionado.
 
 ### Verificando que Atena recebeu
 
@@ -74,6 +78,25 @@ Se Rodolfo declarar um gate local como “nesta conversa qualquer alteração/ex
 tail -20 /root/.hermes/profiles/atena/logs/agent.log
 # Esperar: inbound message: platform=discord user=Zeus ...
 ```
+
+### Pitfall: loop conversacional entre agentes na mesma thread
+
+Quando Zeus e Atena estiverem na mesma thread, mentions e confirmações repetidas podem criar ping-pong infinito:
+
+```text
+Atena: recebido/read-only
+Zeus: read-only mantido
+Atena: estado mantido
+Zeus: sem nova ação
+...
+```
+
+Regra operacional:
+- Depois que o estado estiver fechado, NÃO responder a `queued`, `read-only`, `recebido`, `sem ação`, mensagens vazias ou confirmações repetidas de outro agente.
+- Se Rodolfo mandar "pare de mencionar a Atena/Zeus" ou sinalizar looping, parar imediatamente de mencionar o outro agente naquela thread.
+- Em modo anti-loop, responder só a pedido novo do Rodolfo, pergunta operacional direta, autorização explícita ou erro crítico que exija alerta.
+- Quando precisar citar o outro agente sem acordá-lo, usar texto simples (`Atena`, `Zeus`) sem user mention.
+- Não usar mensagens do tipo `[sem resposta operacional...]` repetidamente: isso ainda é resposta e pode alimentar o loop. O silêncio é a mitigação correta quando não há pedido novo.
 
 ### Lendo a resposta da Atena
 
