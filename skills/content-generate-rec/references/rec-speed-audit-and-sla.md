@@ -68,23 +68,25 @@ When reviewing a slow REC:
 
 1. Confirm whether `mgs-rec-runner.py` was used or the agent drifted into manual workflow.
 2. Read the runner JSON if available and compare `duration_sec`, `steps`, and `timings_sec`.
-3. Separate runner time from agent conversation time. A 66s runner can become a 5-8min user experience if the agent does extra QA, corrections, or summaries manually.
-4. Identify whether the path was cache_hit, request_facts_used, or reference extraction/browser fallback.
-5. Check if image handling caused extra uploads/regenerations.
-6. Check WordPress/Yoast overhead separately from article generation.
-7. Report a table with bottleneck, evidence, and next optimization.
+3. Separate runner time from agent conversation time. A fast runner can become a 5-8min user experience if the agent does extra browsing, code inspection, QA, corrections, or summaries manually.
+4. Check Atena's session transcript/log for anti-patterns: `browser_navigate` before runner, `read_file` on the runner/skills during normal publish, standalone `upload-image.sh`/`generate-featured-image.sh`/`update-yoast.sh` outside the runner, or repeated image uploads.
+5. Identify whether the path was cache_hit, request_facts_used, or reference extraction/browser fallback.
+6. Check if image handling caused extra uploads/regenerations.
+7. Check WordPress/Yoast overhead separately from article generation.
+8. Report a table with bottleneck, evidence, and next optimization.
 
 ## Optimization backlog
 
 Prioritize these fixes before adding more complex infrastructure:
 
-1. Use deterministic runner by default for every complete REC request.
-2. Require or strongly prefer official URL in normal requests.
-3. Use `--card-image-url` when a clean official card image URL is provided.
-4. Cache WordPress category/tag IDs per site inside the runner to avoid repeated REST calls.
-5. Add timing ticks around unresolved WordPress stages: term resolution, create-post, update-yoast, yoast-score, cache-save, public-verify, artifact-cleanup, fingerprint-store.
-6. Do not do image correction after publication unless the card/brand/product is actually wrong.
-7. Treat any normal REC above 5 minutes as an incident with a bottleneck report.
+1. Use deterministic runner by default for every complete REC request; make this a hard execution rule, not a suggestion.
+2. For `publique direto` requests, ban pre-runner browser/code-inspection/tool exploration unless the runner returns a specific error requiring it.
+3. Require or strongly prefer official URL in normal requests.
+4. Use `--card-image-url` when a clean official card image URL is provided.
+5. Cache WordPress category/tag IDs per site inside the runner to avoid repeated REST calls.
+6. Add timing ticks around unresolved WordPress stages: term resolution, create-post, update-yoast, yoast-score, cache-save, public-verify, artifact-cleanup, fingerprint-store.
+7. Do not do image correction after publication unless the card/brand/product is actually wrong.
+8. Treat any normal REC above 5 minutes as an incident with a bottleneck report.
 
 ## Reporting style for Rodolfo
 
