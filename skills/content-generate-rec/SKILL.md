@@ -91,6 +91,13 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > see `references/rec-speed-audit-and-sla.md`. Load it when Rodolfo/Zeus asks
 > about REC bottlenecks, runtime, or speed improvements.
 >
+> **REFERENCE - REC runner telemetry + taxonomy cache:** For the concrete
+> implementation pattern that adds fine-grained `timings_sec`, mandatory
+> `unattributed_sec`, `/root/mgs-agent/data/wp-term-cache.json`, and
+> `term_cache` hit/miss reporting, see
+> `references/rec-runner-telemetry-taxonomy-cache.md`. Load it before auditing or
+> modifying `mgs-rec-runner.py` performance instrumentation.
+>
 > **REFERENCE - fast runner cache-miss fallbacks:** If the requested deterministic
 > runner path fails because legacy Anthropic extraction is disabled, the local
 > article API is unavailable, or `search-card-image.sh` returns an empty failure,
