@@ -610,6 +610,7 @@ def main() -> int:
         timings[name] = round(time.time() - t0, 2)
 
     try:
+        t0 = time.time()
         site = load_site(args.site)
         card_slug = slugify(args.card)
         country = site.get("country", "gb")
@@ -617,12 +618,17 @@ def main() -> int:
         post_slug = f"rec-{country}-{vertical}-{card_slug}"
         edit_url = None
         card_data: Dict[str, Any]
+        term_cache = load_term_cache()
+        term_stats = {"cache_hits": 0, "cache_misses": 0}
 
         color = run_json([str(WP_SCRIPTS / "resolve-button-color.sh"), args.site], timeout=30)
         button_hex = color["hex"]
+        tick("config_load_sec", t0)
         steps.append("config_loaded")
 
+        t0 = time.time()
         cache = cache_lookup(card_slug)
+        tick("card_cache_lookup_sec", t0)
         if cache:
             card_data = {
                 "card_name": cache.get("card_name") or args.card,
