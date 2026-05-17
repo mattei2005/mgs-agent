@@ -656,7 +656,7 @@ Required fields in the single message:
 - Audit mínimo antes do report final: post existe, featured_media setada, card image presente no conteúdo/LazyBlock, contagem de media criadas no run, e CTA/apply URL testada.
 - Cleanup automático pós-publicação: deletar imagens extras somente quando forem uploads da própria execução e não estiverem em `featured_media`, no HTML do post, nem anexadas a outro post.
 - Se a segurança não for 100%, NÃO deletar; reportar Media IDs e pedir decisão.
-- Se a CTA/apply URL retornar 404, isso é BLOCKER: não dizer que a publicação foi validada com sucesso; reportar a URL quebrada e recomendar criar/corrigir a P1.
+- CTA/apply URL 404 em produção REC-only NÃO é blocker: o REC aponta de propósito para a futura P1/apply page. Reporte como `P1 ainda não criada`. Só trate como crítico quando a P1 deveria existir ou quando a tarefa incluiu criar/validar P1.
 - Quando usar `mgs-rec-runner.py`, ler `images.artifact_audit` do JSON e refletir no resumo final.
 
 Format example (1 single Discord message):
