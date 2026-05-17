@@ -778,23 +778,26 @@ All actions append to `/root/mgs-agent/logs/generate-rec.log`.
 
 Apos completar Step 13 (Return summary com mensagem unica), SEMPRE incluir bloco de custo na MESMA mensagem. Zero latencia, sem segunda mensagem, sem esperar cron.
 
-### Regra principal: não inventar USD quando billing é incluído
+### Regra principal: custo operacional Sonnet-equivalente
 
-Antes de aplicar fórmula de preço, leia `billing_provider`, `cost_status`, `estimated_cost_usd` e `actual_cost_usd` no `state.db`.
+Por decisão do Rodolfo, mesmo quando `billing_provider=openai-codex` e `cost_status=included`, Atena deve reportar um **custo operacional estimado em USD** usando a fórmula Sonnet-equivalente abaixo. Isso não é invoice real do Codex/OAuth; é uma métrica conservadora para comparar sessões e detectar desperdício.
 
-- Se `billing_provider=openai-codex` e `cost_status=included`, reporte o custo LLM como **included / não medido em USD**. Não converta tokens para USD usando tabela Anthropic/Sonnet.
-- Se `actual_cost_usd` existir, reporte o real.
-- Se `estimated_cost_usd` existir e `cost_status` não for `included`, reporte como estimado e indique a fonte.
-- Só use tabela de pricing manual quando o provider/modelo realmente corresponder à tabela carregada em `references/pricing.md`.
+Use o helper:
+
+```bash
+/root/mgs-agent/scripts/estimate-atena-session-cost.py --session-id <SESSION_ID>
+```
 
 Formato recomendado:
 
 ```text
-Custo: LLM included/não medido em USD | API/imagem: ${api_cost} | duração: {duration} | tools: {tool_calls}
-Tokens: input {i} | output {o} | cache_read {cr}
+Custo operacional estimado: ${sonnet_equivalent_usd} USD
+Base: Sonnet-equivalente sobre tokens Atena/Codex, não invoice real
+Tokens: input {i} | output {o} | cache_read {cr} | tools {tool_calls}
+Runner/imagem: ${runner_cost}
 ```
 
-> **PITFALL — Codex OAuth não é Sonnet pay-per-token:** Em sessões Atena com `gpt-5.5` via `openai-codex`, o DB pode mostrar milhões de cache tokens e `estimated_cost_usd=0.0`, `cost_status=included`. Nesses casos, valores como “US$0.23 Atena” são estimativas artificiais e não devem ser reportados como custo real.
+> **PITFALL — não usar valores inventados:** Nunca postar “US$0.23 Atena” sem rodar a conta real no `state.db`. Para Marbles, a conta correta sobre as duas sessões foi ~US$1.64, não US$0.23.
 
 ### Como calcular custo na hora (state.db delta)
 
