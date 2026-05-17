@@ -452,21 +452,56 @@ def title_meta_focus(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, st
     return title, meta, focus
 
 
-def resolve_term_id(site_key: str, taxonomy: str, name: str) -> Dict[str, Any]:
+def load_term_cache() -> Dict[str, Any]:
+    if not TERM_CACHE_JSON.exists():
+        return {}
+    try:
+        data = json.loads(TERM_CACHE_JSON.read_text())
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def save_term_cache(cache: Dict[str, Any]) -> None:
+    TERM_CACHE_JSON.parent.mkdir(parents=True, exist_ok=True)
+    tmp = TERM_CACHE_JSON.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(cache, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+    tmp.replace(TERM_CACHE_JSON)
+
+
+def resolve_term_id(site_key: str, taxonomy: str, name: str, term_cache: Optional[Dict[str, Any]] = None, term_stats: Optional[Dict[str, int]] = None) -> Dict[str, Any]:
     """Resolve a WP term, tolerating WordPress term_exists races/errors."""
+    norm = " ".join(name.split()).lower()
+    cache_key = f"{site_key}:{taxonomy}:{norm}"
+    if term_cache is not None and cache_key in term_cache:
+        if term_stats is not None:
+            term_stats["cache_hits"] = term_stats.get("cache_hits", 0) + 1
+        cached = dict(term_cache[cache_key])
+        cached.setdefault("name", name)
+        cached.setdefault("source", "term_cache")
+        return cached
+
+    if term_stats is not None:
+        term_stats["cache_misses"] = term_stats.get("cache_misses", 0) + 1
     p = run([str(WP_SCRIPTS / "resolve-term.sh"), site_key, taxonomy, name], timeout=60)
     if p.returncode == 0:
-        return json.loads(p.stdout)
+        resolved = json.loads(p.stdout)
+        if term_cache is not None:
+            term_cache[cache_key] = {"id": int(resolved["id"]), "name": name, "slug": resolved.get("slug") or slugify(name), "taxonomy": taxonomy, "site_key": site_key}
+        return resolved
     combined = (p.stderr or "") + "\n" + (p.stdout or "")
     m = re.search(r'"term_id"\s*:\s*(\d+)', combined)
     if m:
-        return {"id": int(m.group(1)), "name": name, "slug": slugify(name)}
+        resolved = {"id": int(m.group(1)), "name": name, "slug": slugify(name)}
+        if term_cache is not None:
+            term_cache[cache_key] = {"id": int(resolved["id"]), "name": name, "slug": resolved["slug"], "taxonomy": taxonomy, "site_key": site_key}
+        return resolved
     raise RunnerError(f"Command failed rc={p.returncode}: {WP_SCRIPTS / 'resolve-term.sh'} {site_key} {taxonomy} {name}\n{combined[:2000]}")
 
 
-def resolve_terms(site_key: str, site: Dict[str, Any], card_slug: str, card_data: Dict[str, Any]) -> Tuple[int, List[int], List[str]]:
+def resolve_terms(site_key: str, site: Dict[str, Any], card_slug: str, card_data: Dict[str, Any], term_cache: Optional[Dict[str, Any]] = None, term_stats: Optional[Dict[str, int]] = None) -> Tuple[int, List[int], List[str]]:
     category_name = site.get("default_category", "Credit Card")
-    cat = resolve_term_id(site_key, "categories", category_name)
+    cat = resolve_term_id(site_key, "categories", category_name, term_cache, term_stats)
     tags = [
         "rec",
         (site.get("verticals") or ["cc"])[0],
@@ -494,7 +529,7 @@ def resolve_terms(site_key: str, site: Dict[str, Any], card_slug: str, card_data
     ids = []
     names = []
     for t in tags:
-        term = resolve_term_id(site_key, "tags", t)
+        term = resolve_term_id(site_key, "tags", t, term_cache, term_stats)
         ids.append(int(term["id"]))
         names.append(t)
     return int(cat["id"]), ids, names
