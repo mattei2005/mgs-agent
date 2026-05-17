@@ -74,6 +74,12 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > Rodolfo → Atena request template, see `references/fast-runner-optimization.md`.
 > Load it when auditing REC speed/cost or tuning the runner.
 >
+> **REFERENCE - REC speed audit and SLA:** For diagnosing why REC creation is
+> taking 5-8 minutes, SLA targets, the difference between runner time and agent
+> conversation time, and optimization priorities like tag caching/timing ticks,
+> see `references/rec-speed-audit-and-sla.md`. Load it when Rodolfo/Zeus asks
+> about REC bottlenecks, runtime, or speed improvements.
+>
 > **REFERENCE - fast runner cache-miss fallbacks:** If the requested deterministic
 > runner path fails because legacy Anthropic extraction is disabled, the local
 > article API is unavailable, or `search-card-image.sh` returns an empty failure,
