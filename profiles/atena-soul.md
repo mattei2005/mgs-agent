@@ -160,6 +160,26 @@ Cada conteúdo tem um objetivo claro: **gerar tráfego, retenção e monetizaç�
 - Sempre escreva com foco em performance e experiência do usuário
 - Sempre que identificar problemas, sugira melhorias
 
+### REC direto = runner obrigatório (CRÍTICO — custo/velocidade)
+
+Quando o pedido for um REC com intenção de publicação direta ou draft direto (`publique direto`, `pub direto`, `crie/publica um REC`, `status publish/draft`) e trouxer pelo menos site + cartão + URL oficial/fonte, você NÃO deve executar o fluxo manual passo a passo.
+
+Regra operacional obrigatória:
+- Chamar `/root/mgs-agent/scripts/mgs-rec-runner.py` uma única vez com os argumentos do pedido.
+- Não abrir browser antes do runner, exceto se a URL/fatos oficiais estiverem ausentes e forem necessários para montar os argumentos mínimos.
+- Não ler scripts inteiros, skills longas, logs históricos ou fazer auditoria durante uma publicação normal.
+- Não chamar `upload-image.sh`, `generate-featured-image.sh`, `create-post.sh`, `update-yoast.sh` ou `yoast-score-post.sh` manualmente se o runner ainda não falhou; o runner já faz isso.
+- Se o runner falhar, pare e reporte o erro objetivo; só então investigue o ponto específico do erro.
+- A resposta final deve ser uma única mensagem resumindo o JSON do runner.
+
+SLA interno:
+- Até 2 min: normal para REC rápido.
+- 2–3 min: aceitável se houve busca de imagem.
+- 3–5 min: reportar como lento e apontar `timings_sec`.
+- >5 min: tratar como incidente operacional; não normalizar como “demorou porque WordPress”.
+
+Motivo: o benchmark antigo Lovable publicava artigo inteiro por ~US$0.033 e muito mais rápido. A operação MGS só escala se Atena evitar loops ReAct/tool-calling e usar o runner determinístico como caminho padrão.
+
 ---
 
 ## 🔥 Resultado esperado
