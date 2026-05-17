@@ -303,22 +303,28 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
 >
 > NUNCA usar delegate_task com sites comparadores (finder.com, moneysupermarket.com, comparethemarket.com, totallymoney.com, money.co.uk). Esses sites bloqueiam Browserbase com Cloudflare e geram loop infinito (caso real 01/05: 149 browser_navigate, $6.37 perdidos, nao publicou).
 >
-> **Como o script funciona internamente (2 tentativas automaticas):**
->
-> **Tentativa 1 - Scraping do site oficial (curl + HTML parsing):**
->   - curl com User-Agent residencial na `card_official_url`
->   - Detecta geo-IP/bot block automaticamente: HTTP 4xx/5xx OU body contendo `Error 1007`, `cf-ray`, `we are sorry an error`, `access denied`
->   - Se bloqueio detectado em <1s: pula IMEDIATAMENTE para Tentativa 2 (sem gastar tempo)
->   - Se pagina carrega: extrai e valida candidatos por score + dimensoes (min 200×100px, aspect 1.2-2.2)
->
-> **Tentativa 2 - Bing Images via Playwright LOCAL (`search-card-image-bing.py`):**
->   - Playwright roda headless LOCAL (NAO Browserbase) — sem bloqueio geo-IP, custo ~$0
->   - Busca `{card_name} credit card` no Bing Images, extrai URLs originais via `a.iusc[m]`
->   - Prioriza fontes UK confiáveis: headforpoints.com, backtodefault.com, moneysavingexpert.com
->   - Valida dimensoes e aspect ratio antes de aceitar
->   - Custo: ~15s de CPU local, zero tokens LLM extras
->
-> **Se ambas falharem → NEEDS_MANUAL: PUBLICAR ARTIGO SEM CARD IMAGE.** NAO abortar.
+**Como o script funciona internamente (3 tentativas automaticas):**
+
+**Tentativa 1 - Scraping do site oficial (curl + HTML parsing):**
+  - curl com User-Agent residencial na `card_official_url`
+  - Detecta geo-IP/bot block automaticamente: HTTP 4xx/5xx OU body contendo `Error 1007`, `cf-ray`, `we are sorry an error`, `access denied`
+  - Se bloqueio detectado em <1s: pula IMEDIATAMENTE para Tentativa 2 (sem gastar tempo)
+  - Se pagina carrega: extrai e valida candidatos por score + dimensoes (min 200×100px, aspect 1.2-2.2)
+
+**Tentativa 2 - Brave Images API:**
+  - Usa API oficial Brave sem browser/renderização JS
+  - Chave vem de `BRAVE_SEARCH_API_KEY` ou 1Password: item `Brave Search API - MGS`, vault `MGS Conteúdo`, campo `api key`
+  - Busca `{card_name} credit card image`, ranqueia por host oficial/issuer, termos do cartão, penaliza business quando o card não é business e valida dimensões/aspect ratio
+  - Custo/latência baixos; se falhar, cai automaticamente para Bing local
+
+**Tentativa 3 - Bing Images via Playwright LOCAL (`search-card-image-bing.py`):**
+  - Playwright roda headless LOCAL (NAO Browserbase) — sem bloqueio geo-IP, custo ~$0
+  - Busca `{card_name} credit card` no Bing Images, extrai URLs originais via `a.iusc[m]`
+  - Prioriza fontes UK confiáveis: headforpoints.com, backtodefault.com, moneysavingexpert.com
+  - Valida dimensoes e aspect ratio antes de aceitar
+  - Custo: ~15s de CPU local, zero tokens LLM extras
+
+**Se todas falharem → NEEDS_MANUAL: PUBLICAR ARTIGO SEM CARD IMAGE.** NAO abortar.
 >   - LazyBlock credit-card vai com `imagem` vazio (URL e ID null) - Raquel preenche manualmente
 >   - Featured image AINDA gera normalmente via Step 4 (Gemini compoe usando placeholder)
 >   - Step 13 (return summary) inclui aviso explicito ao Raquel - ver bloco "Card image manual" no template
