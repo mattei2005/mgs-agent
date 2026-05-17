@@ -23,14 +23,25 @@ Default command shape:
   --source-url "<official URL>"
 ```
 
-Operational rule:
+Operational rule (hard gate):
 - If the user provides site, REC type, exact card name, status, and official URL,
   call `mgs-rec-runner.py` directly and return the JSON summary.
+- Treat the rest of this SKILL.md as implementation reference, not as a checklist
+  to manually execute during normal publishing.
 - Do not manually repeat Steps 1-14 unless the runner fails with a clear error.
+- Before the first runner attempt, do NOT open browser, inspect runner code, read
+  long references, or call lower-level scripts (`upload-image.sh`,
+  `generate-featured-image.sh`, `create-post.sh`, `update-yoast.sh`,
+  `yoast-score-post.sh`). Those are runner internals.
 - If no official URL is provided and cache MISS is likely, ask for the official
   URL first; this keeps the process fast and avoids browser-search loops.
 - Use `--dry-run` only for diagnostics requested by Rodolfo/Zeus, not for normal
   editorial publishing.
+- After the runner returns, format one final message from its JSON. Do not run
+  extra QA/repair work unless the JSON shows a real failure or Rodolfo asked for
+  a technical audit.
+- If elapsed runner time is >180s, include the slowest `timings_sec` fields in
+  the summary. If >300s, label it as an operational incident.
 
 ### Raquel-facing REC request format (keep it simple)
 
