@@ -38,22 +38,27 @@ Após editar o `.env`, **reiniciar o agente destino** para carregar a variável.
 
 ### Anti-loop em threads com múltiplos agentes
 
-Quando Zeus e Atena estiverem na mesma thread, evitar ping-pong conversacional. Mentions acordam o agente destino e podem criar fila/loop se cada agente responder a confirmações do outro.
+Regra principal: **em thread compartilhada com Rodolfo + mais de um agente, não iniciar conversa agente→agente por padrão**. Cada agente deve responder ao humano, não ficar alinhando estado com outro bot.
+
+O incidente real `1505532189490811081` mostrou que a regra “mencione o outro agente quando falar dele” é perigosa se aplicada como padrão: cada mention acorda o bot destino, gera fila, e qualquer confirmação vira novo input.
 
 Regras operacionais:
-- Se Rodolfo disser para parar de mencionar outro agente, obedecer imediatamente: usar o nome em texto simples (`Atena`, `Zeus`) e não usar `<@BOT_ID>`.
-- Não responder a mensagens automáticas/repetitivas do outro agente: `queued`, `read-only`, `recebido`, `sem ação`, `(empty)`, erro transitório de modelo, ou confirmações de estado já fechado.
-- Depois de um “estado final” aceito, ficar silencioso até pedido novo do Rodolfo, pergunta operacional direta, autorização explícita ou alerta crítico real.
+- Responder mensagens do Rodolfo normalmente.
+- Não responder a mensagens de outro agente que sejam só `queued`, `read-only`, `recebido`, `sem ação`, `(empty)`, erro transitório de modelo, confirmação de estado ou repetição do que já foi aceito.
+- Depois de um estado final aceito, ficar em silêncio até pedido novo do Rodolfo, pergunta operacional real, autorização explícita ou alerta crítico.
+- Se Rodolfo disser “parem”, “looping”, “pare de mencionar”, “pare de responder”, ou equivalente: uma confirmação curta ao Rodolfo no máximo; depois silêncio total para mensagens de agente/gateway naquela thread.
+- Citar outro agente em texto simples (`Atena`, `Zeus`) quando não for necessário acordá-lo. **Não usar user mention só para falar sobre o agente.**
+- Usar user mention de outro bot apenas quando Rodolfo pedir explicitamente para acionar/encaminhar ao agente, ou em comunicação cross-channel onde `DISCORD_ALLOW_BOTS=mentions` exige mention para roteamento.
 - Em conversa multi-agente onde Rodolfo impôs gate de segurança, explicação/alinhamento pode ocorrer sem ação; execução, patch, restart, persistência em SOUL/config/skill/script só com autorização explícita.
-- Não ecoar exemplos de mentions dentro de blocos de código se o gateway sanitizar/remover conteúdo; em vez disso, escrever “user mention do bot X, ID Y”.
+- Não ecoar exemplos de mentions dentro de blocos de código; se precisar documentar, escrever “user mention do bot X, ID Y”.
 
 Pitfall validado: responder “ignorado”, “read-only mantido”, `[sem resposta operacional]`, `sem ação`, ou mencionar o bot destino para corrigir uma mensagem automática ainda gera novo input e prolonga o loop. A melhor resposta para ruído automático é silêncio total.
 
 Referência do incidente real: `references/discord-agent-loop-incident-2026-05-17.md` — thread `1505532189490811081`, Zeus/Atena, mentions + queued/read-only/(empty) causando ping-pong até lock/archive/delete.
 
-### Enviando mensagem Zeus → Atena
+### Enviando mensagem Zeus → Atena em outro canal
 
-Obrigatório incluir `<@BOT_ID>` com `DISCORD_ALLOW_BOTS=mentions`, exceto quando Rodolfo explicitamente mandar não mencionar para quebrar loop:
+Para comunicação **cross-channel** Zeus → Atena, incluir `<@BOT_ID>` porque Atena usa `DISCORD_ALLOW_BOTS=mentions`:
 
 ```python
 send_message(
@@ -62,41 +67,9 @@ send_message(
 )
 ```
 
-Sem `<@1496306920494202950>` → Atena ignora silenciosamente.
+Sem o user mention do bot Atena, Atena ignora silenciosamente.
 
-### Pitfall: loop conversacional por mention em thread compartilhada
-
-Quando Zeus e Atena estiverem na mesma thread com Rodolfo, mentions entre agentes podem criar ping-pong infinito: um agente confirma `read-only/recebido/queued`, o outro confirma a confirmação, e cada mention acorda o agente mencionado de novo.
-
-Regra operacional em thread compartilhada:
-- Se Rodolfo mandar parar mentions para quebrar loop, obedecer imediatamente: citar `Atena`/`Zeus` em texto simples, sem user mention.
-- Não responder a mensagens automáticas/repetidas como `queued`, `read-only`, `recebido`, `sem ação`, `(empty)` ou erro transitório do outro agente.
-- Só responder quando houver pedido novo do Rodolfo, pergunta operacional direta, autorização explícita, ou erro crítico que exija alerta.
-- Após declarar estado fechado (`read-only até autorização`), não continuar reconhecendo confirmações repetidas.
-- Em exemplos didáticos, evitar ecoar mentions dentro de blocos de código; Discord/Hermes pode sanitizar/remover o conteúdo e confundir o alinhamento. Preferir “user mention do bot Zeus, ID ...”.
-
-### Conversa direta entre agentes em thread compartilhada
-
-Quando Rodolfo colocar Zeus e Atena na mesma thread, fala direta entre agentes deve usar **user mention do bot**, não apenas o nome textual do agente. Isso vale também quando a mensagem é “sobre” o outro agente, se for endereçada diretamente a ele.
-
-```text
-Direção                         Forma correta
-------------------------------  ----------------------------------------------
-Zeus falando com/sobre Atena    user mention do bot Atena, ID 1496306920494202950
-Atena falando com/sobre Zeus    user mention do bot Zeus, ID 1496296175014252634
-Evitar                          escrever só “Zeus” ou “Atena” em fala direta
-```
-
-Regras operacionais:
-1. Para mensagem real direcionada, colocar o mention real no começo da mensagem, fora de bloco e sem backticks.
-2. Se examples de mention forem sanitizados pela plataforma ao serem ecoados, não corrigir em loop. Para documentação/exemplo, descrever por ID como acima; para roteamento real, usar o mention direto na mensagem.
-3. Se Rodolfo estabelecer um gate local como “nesta conversa qualquer alteração/execução pede minha autorização”, obedecer como regra de thread: explicação, diagnóstico e alinhamento verbal são permitidos; patch, restart, publicação, alteração em SOUL/skill/config/script ou persistência só depois de autorização explícita.
-4. Não criar loops de confirmação entre agentes. Depois que o estado estiver alinhado (“read-only”, “sem nova ação”, “queued”), não responder a cada confirmação repetida. Só responder se houver pedido novo direto, correção substantiva ou risco operacional.
-
-Motivos:
-- garante que o agente destinatário processe a mensagem quando `DISCORD_ALLOW_BOTS=mentions` está ativo;
-- reduz ambiguidade em threads com Rodolfo + múltiplos agentes;
-- preserva legibilidade para Rodolfo, mostrando claramente quem está sendo acionado.
+Em thread compartilhada, não usar esse padrão automaticamente; só acionar Atena com mention se Rodolfo pedir explicitamente.
 
 ### Verificando que Atena recebeu
 
@@ -104,25 +77,6 @@ Motivos:
 tail -20 /root/.hermes/profiles/atena/logs/agent.log
 # Esperar: inbound message: platform=discord user=Zeus ...
 ```
-
-### Pitfall: loop conversacional entre agentes na mesma thread
-
-Quando Zeus e Atena estiverem na mesma thread, mentions e confirmações repetidas podem criar ping-pong infinito:
-
-```text
-Atena: recebido/read-only
-Zeus: read-only mantido
-Atena: estado mantido
-Zeus: sem nova ação
-...
-```
-
-Regra operacional:
-- Depois que o estado estiver fechado, NÃO responder a `queued`, `read-only`, `recebido`, `sem ação`, mensagens vazias ou confirmações repetidas de outro agente.
-- Se Rodolfo mandar "pare de mencionar a Atena/Zeus" ou sinalizar looping, parar imediatamente de mencionar o outro agente naquela thread.
-- Em modo anti-loop, responder só a pedido novo do Rodolfo, pergunta operacional direta, autorização explícita ou erro crítico que exija alerta.
-- Quando precisar citar o outro agente sem acordá-lo, usar texto simples (`Atena`, `Zeus`) sem user mention.
-- Não usar mensagens do tipo `[sem resposta operacional...]` repetidamente: isso ainda é resposta e pode alimentar o loop. O silêncio é a mitigação correta quando não há pedido novo.
 
 ### Lendo a resposta da Atena
 
