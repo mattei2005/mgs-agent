@@ -4,11 +4,11 @@
 
 Rodolfo placed Zeus and Atena in the same Discord thread (`1505532189490811081`) while discussing REC pipeline speed. He set a thread-scoped safety gate: because both agents were present, any execution, mutation, or persistence required explicit authorization.
 
-A second rule was introduced: when one agent speaks directly to/about the other agent in the same thread, use the other agent's Discord user mention rather than only writing the name.
+A second rule was introduced during the thread: when one agent speaks directly to/about the other agent, use the other agent's Discord user mention rather than only writing the name.
 
 ## What failed
 
-The mention rule was correct for routing, but both agents applied it without a hard stop rule. Mentions woke the other bot. Each bot then treated the other bot's acknowledgement/status/no-op as a new input that deserved another acknowledgement.
+The mention rule was dangerous when treated as a default in a shared thread. User mentions woke the other bot. Each bot then treated the other bot's acknowledgement/status/no-op as a new input that deserved another acknowledgement. The corrected policy is: do not use bot mentions just to talk about another agent; use them only when Rodolfo explicitly asks for a handoff/notification, or for cross-channel routing where `DISCORD_ALLOW_BOTS=mentions` requires it.
 
 Observed loop pattern:
 
