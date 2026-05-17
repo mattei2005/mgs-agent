@@ -23,31 +23,36 @@ PRICING = {
 
 def main() -> int:
     ap = argparse.ArgumentParser(description='Estimate Atena session cost using Sonnet-equivalent pricing')
-    ap.add_argument('--session-id', default='', help='Atena session id. Defaults to latest session parent/root.')
+    ap.add_argument('--session-id', action='append', default=[], help='Atena session id. Repeat to aggregate multiple sessions. Defaults to latest session parent/root.')
     ap.add_argument('--db', default=str(DB))
     args = ap.parse_args()
 
     con = sqlite3.connect(args.db)
     con.row_factory = sqlite3.Row
     if args.session_id:
-        row = con.execute('SELECT COALESCE(parent_session_id, id) AS root FROM sessions WHERE id=?', (args.session_id,)).fetchone()
-        if not row:
-            raise SystemExit(f'session not found: {args.session_id}')
-        root = row['root']
+        roots = []
+        for sid in args.session_id:
+            row = con.execute('SELECT COALESCE(parent_session_id, id) AS root FROM sessions WHERE id=?', (sid,)).fetchone()
+            if not row:
+                raise SystemExit(f'session not found: {sid}')
+            roots.append(row['root'])
+        roots = sorted(set(roots))
     else:
         row = con.execute('SELECT COALESCE(parent_session_id, id) AS root FROM sessions ORDER BY started_at DESC LIMIT 1').fetchone()
         if not row:
             raise SystemExit('no sessions found')
-        root = row['root']
+        roots = [row['root']]
 
-    rows = con.execute('''
-        SELECT id, model, billing_provider, cost_status,
-               input_tokens, output_tokens, cache_read_tokens, cache_write_tokens,
-               tool_call_count, started_at, COALESCE(ended_at, started_at) AS ended_at
-        FROM sessions
-        WHERE id=? OR parent_session_id=?
-        ORDER BY started_at
-    ''', (root, root)).fetchall()
+    rows = []
+    for root in roots:
+        rows.extend(con.execute('''
+            SELECT id, model, billing_provider, cost_status,
+                   input_tokens, output_tokens, cache_read_tokens, cache_write_tokens,
+                   tool_call_count, started_at, COALESCE(ended_at, started_at) AS ended_at
+            FROM sessions
+            WHERE id=? OR parent_session_id=?
+            ORDER BY started_at
+        ''', (root, root)).fetchall())
     con.close()
 
     totals = {
@@ -66,7 +71,8 @@ def main() -> int:
     start = min(float(r['started_at'] or 0) for r in rows) if rows else 0
     end = max(float(r['ended_at'] or 0) for r in rows) if rows else 0
     out = {
-        'root_session_id': root,
+        'root_session_id': roots[0] if len(roots) == 1 else None,
+        'root_session_ids': roots,
         'session_count': len(rows),
         'models': sorted({r['model'] for r in rows if r['model']}),
         'billing_providers': sorted({r['billing_provider'] for r in rows if r['billing_provider']}),
