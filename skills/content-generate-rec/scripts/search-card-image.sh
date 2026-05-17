@@ -32,8 +32,171 @@ emit_needs_manual() {
   exit 1
 }
 
+get_brave_api_key() {
+  # Prefer explicit env var so cron/systemd can inject it without 1Password.
+  if [ -n "${BRAVE_SEARCH_API_KEY:-}" ]; then
+    printf '%s' "$BRAVE_SEARCH_API_KEY"
+    return 0
+  fi
+
+  # MGS production default: key lives in 1Password. Source .env only for OP token;
+  # never print the returned secret. Field label in 1P is "api key".
+  if command -v op >/dev/null 2>&1; then
+    if [ -f /root/mgs-agent/.env ]; then
+      set +u
+      set -a
+      # shellcheck disable=SC1091
+      source /root/mgs-agent/.env >/dev/null 2>&1 || true
+      set +a
+      set -u
+    fi
+    op item get "Brave Search API - MGS" \
+      --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" \
+      --fields "api key" \
+      --reveal 2>/dev/null || true
+  fi
+}
+
+download_and_validate_candidate() {
+  local cand_url="$1"
+  local cand_ext="$2"
+  local cand_tmp="$3"
+  local origin="$4"
+
+  if ! curl -sS -L -A "Mozilla/5.0" -o "$cand_tmp" "$cand_url" 2>/dev/null; then
+    echo "[$(date -Iseconds)] search-card-image REJECT download_failed origin=$origin url=$cand_url" >>"$LOG"
+    return 1
+  fi
+  [ -s "$cand_tmp" ] || { echo "[$(date -Iseconds)] search-card-image REJECT download_empty origin=$origin url=$cand_url" >>"$LOG"; return 1; }
+
+  if ! command -v identify >/dev/null 2>&1; then
+    echo "[$(date -Iseconds)] search-card-image WARN identify_unavailable accepting_without_dim_check origin=$origin url=$cand_url" >>"$LOG"
+    return 0
+  fi
+
+  dims=$(identify -format '%w %h' "$cand_tmp" 2>/dev/null || echo "")
+  if [ -z "$dims" ]; then
+    echo "[$(date -Iseconds)] search-card-image REJECT identify_failed origin=$origin url=$cand_url" >>"$LOG"
+    return 1
+  fi
+  w=$(echo "$dims" | awk '{print $1}')
+  h=$(echo "$dims" | awk '{print $2}')
+
+  if [ "$w" -lt "$CARD_MIN_WIDTH" ] || [ "$h" -lt "$CARD_MIN_HEIGHT" ]; then
+    echo "[$(date -Iseconds)] search-card-image REJECT too_small origin=$origin w=${w} h=${h} (min ${CARD_MIN_WIDTH}x${CARD_MIN_HEIGHT}) url=$cand_url" >>"$LOG"
+    return 1
+  fi
+
+  aspect=$(awk -v w="$w" -v h="$h" 'BEGIN{ printf "%.3f", w/h }')
+  in_range=$(awk -v a="$aspect" -v lo="$CARD_ASPECT_MIN" -v hi="$CARD_ASPECT_MAX" 'BEGIN{ print (a>=lo && a<=hi) ? "1" : "0" }')
+  if [ "$in_range" != "1" ]; then
+    echo "[$(date -Iseconds)] search-card-image REJECT aspect_out_of_range origin=$origin w=${w} h=${h} aspect=${aspect} (expected ${CARD_ASPECT_MIN}-${CARD_ASPECT_MAX}) url=$cand_url" >>"$LOG"
+    return 1
+  fi
+
+  echo "[$(date -Iseconds)] search-card-image ACCEPT origin=$origin w=${w} h=${h} aspect=${aspect} url=$cand_url" >>"$LOG"
+  return 0
+}
+
+run_brave_fallback() {
+  # ── Tentativa 2: Brave Images API (sem browser) ────────────────────────
+  echo "[$(date -Iseconds)] search-card-image FALLBACK brave_images card=$CARD_NAME" >>"$LOG"
+
+  local brave_key brave_json brave_urls cand_url cand_ext cand_tmp
+  brave_key="$(get_brave_api_key | tr -d '\r\n')"
+  if [ -z "$brave_key" ]; then
+    echo "[$(date -Iseconds)] search-card-image BRAVE_SKIP no_api_key" >>"$LOG"
+    return 1
+  fi
+
+  brave_json=$(python3 - "$CARD_NAME" "$brave_key" <<'PY' 2>>"$LOG" || true
+import json, sys, urllib.parse, urllib.request
+
+card_name, key = sys.argv[1], sys.argv[2]
+query = f'{card_name} credit card image'
+url = 'https://api.search.brave.com/res/v1/images/search?' + urllib.parse.urlencode({
+    'q': query,
+    'count': 10,
+    'country': 'GB',
+    'search_lang': 'en',
+    'safesearch': 'strict',
+})
+req = urllib.request.Request(url, headers={
+    'Accept': 'application/json',
+    'X-Subscription-Token': key,
+    'User-Agent': 'Hermes-Agent MGS card-image-search',
+})
+try:
+    with urllib.request.urlopen(req, timeout=20) as r:
+        data = json.loads(r.read().decode('utf-8', 'ignore'))
+except Exception as exc:
+    print(json.dumps({'status': 'ERROR', 'error': str(exc)}))
+    raise SystemExit(0)
+
+out = []
+for item in data.get('results', []):
+    props = item.get('properties') or {}
+    thumb = item.get('thumbnail') or {}
+    src = props.get('url') or item.get('image') or thumb.get('src')
+    page = item.get('url') or ''
+    title = item.get('title') or ''
+    if src:
+        out.append({'src': src, 'page': page, 'title': title})
+print(json.dumps({'status': 'OK', 'results': out}, ensure_ascii=False))
+PY
+)
+
+  brave_status=$(echo "$brave_json" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('status',''))" 2>/dev/null || echo "")
+  if [ "$brave_status" != "OK" ]; then
+    echo "[$(date -Iseconds)] search-card-image BRAVE_ERROR status=${brave_status:-invalid_response}" >>"$LOG"
+    return 1
+  fi
+
+  brave_urls=$(BRAVE_JSON="$brave_json" python3 - <<'PY'
+import json, os
+try:
+    data = json.loads(os.environ.get('BRAVE_JSON', '{}'))
+except Exception:
+    raise SystemExit(0)
+for r in data.get('results', []):
+    src = r.get('src') or ''
+    if src.startswith('http'):
+        print(src)
+PY
+)
+  if [ -z "$brave_urls" ]; then
+    echo "[$(date -Iseconds)] search-card-image BRAVE_NO_IMAGE_URLS" >>"$LOG"
+    return 1
+  fi
+
+  while IFS= read -r cand_url; do
+    [ -z "$cand_url" ] && continue
+    cand_ext="${cand_url##*.}"; cand_ext="${cand_ext%%\?*}"
+    cand_ext=$(echo "$cand_ext" | tr '[:upper:]' '[:lower:]')
+    case "$cand_ext" in png|jpg|jpeg|webp) ;; *) cand_ext="jpg" ;; esac
+    cand_tmp="/tmp/card-candidate-brave-$slug-$$-$RANDOM.$cand_ext"
+    TEMP_FILES+=("$cand_tmp")
+    if download_and_validate_candidate "$cand_url" "$cand_ext" "$cand_tmp" "brave"; then
+      final_out="/tmp/card-$slug.$cand_ext"
+      mv "$cand_tmp" "$final_out"
+      mime=$(file -b --mime-type "$final_out" 2>/dev/null || echo "image/$cand_ext")
+      echo "[$(date -Iseconds)] search-card-image BRAVE_OK path=$final_out src=$cand_url" >>"$LOG"
+      jq -n --arg p "$final_out" --arg m "$mime" --arg s "$cand_url" \
+        '{path:$p, mime:$m, tier:4, source:$s, status:"OK", provider:"brave_images"}'
+      exit 0
+    fi
+  done <<<"$brave_urls"
+
+  echo "[$(date -Iseconds)] search-card-image BRAVE_NO_VALID_IMAGES" >>"$LOG"
+  return 1
+}
+
 run_bing_fallback() {
-  # ── Tentativa 2: Bing Images via Playwright local ──────────────────────
+  # ── Tentativa 3: Bing Images via Playwright local ──────────────────────
+  if run_brave_fallback; then
+    exit 0
+  fi
+
   echo "[$(date -Iseconds)] search-card-image FALLBACK bing_playwright card=$CARD_NAME" >>"$LOG"
   BING_SCRIPT="$(dirname "$0")/search-card-image-bing.py"
   if [ -f "$BING_SCRIPT" ]; then
