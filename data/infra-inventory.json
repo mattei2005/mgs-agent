@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-16T18:26:12-04:00",
+    "updated_at": "2026-05-17T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -74,8 +74,8 @@
   "scripts": [
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 2088,
-      "modified_at": "2026-05-16T15:26:53-04:00"
+      "size_bytes": 2112,
+      "modified_at": "2026-05-16T18:29:49-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/chat-log.sh",
@@ -123,6 +123,11 @@
       "modified_at": "2026-05-16T16:16:09-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
+      "size_bytes": 3808,
+      "modified_at": "2026-05-17T00:02:25-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
       "size_bytes": 5120,
       "modified_at": "2026-05-16T17:37:26-04:00"
@@ -139,8 +144,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-rec-runner.py",
-      "size_bytes": 36477,
-      "modified_at": "2026-05-16T12:08:01-04:00"
+      "size_bytes": 43713,
+      "modified_at": "2026-05-17T00:00:09-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/migration-2026-05-14-proximo-id-collision-fix.sh",
@@ -211,6 +216,11 @@
       "path": "/root/mgs-agent/scripts/pendencia-render-md.sh",
       "size_bytes": 4697,
       "modified_at": "2026-05-16T17:31:14-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/rec-fingerprint.py",
+      "size_bytes": 4184,
+      "modified_at": "2026-05-16T23:59:05-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
@@ -1045,6 +1055,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-update/SKILL.md"
       },
       {
+        "name": "hermes-web-tooling",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-web-tooling/SKILL.md"
+      },
+      {
         "name": "log-monitor-discord-alert",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md"
@@ -1216,8 +1231,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "9b9bf15260500761658c48c44a51421c",
-      "modified_at": "2026-05-16T18:15:04-04:00"
+      "md5": "8fbce719c6f1ae9a8295949680fd4916",
+      "modified_at": "2026-05-17T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1228,8 +1243,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "219c3c758c277ccd6d250799ff108701",
-      "modified_at": "2026-05-16T18:15:01-04:00"
+      "md5": "e0ea590bd5972f464c42d6d41ba9e27d",
+      "modified_at": "2026-05-17T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
@@ -1240,8 +1255,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 46426,
-      "md5": "e1fa079feade9af2ae4e325fe9b4d47d",
-      "modified_at": "2026-05-16T17:53:03-04:00"
+      "md5": "53992eadc31b8e643bd96052c6fbcc0e",
+      "modified_at": "2026-05-16T18:26:14-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1263,9 +1278,9 @@
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
-      "size_bytes": 2496,
-      "md5": "9631c64583f23ecc965718f2c0b1b6b6",
-      "modified_at": "2026-05-16T01:45:02-04:00"
+      "size_bytes": 2709,
+      "md5": "ff5c12e608f5aeb23933fec69e558a3e",
+      "modified_at": "2026-05-17T05:00:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -1283,7 +1298,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
       "md5": "6d5aec6ff72be4e07a700eb88657d60c",
-      "modified_at": "2026-05-16T18:25:01-04:00"
+      "modified_at": "2026-05-17T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
