@@ -843,8 +843,12 @@ def main() -> int:
         else:
             t0 = time.time()
             category_id, tag_ids, tag_names = resolve_terms(args.site, site, card_slug, card_data, term_cache, term_stats)
-            save_term_cache(term_cache)
             tick("wp_resolve_terms_sec", t0)
+            if term_stats.get("cache_misses", 0):
+                save_term_cache(term_cache)
+            timings["wp_term_cache_hits"] = term_stats.get("cache_hits", 0)
+            timings["wp_term_cache_misses"] = term_stats.get("cache_misses", 0)
+
             post_json = {
                 "status": args.status,
                 "slug": post_slug,
@@ -939,6 +943,9 @@ def main() -> int:
 
         costs["total_est"] = round(costs["article_api"] + costs["extract_llm_est"] + (0 if args.dry_run else costs["featured_image_est"]), 6)
         total_duration_sec = round(time.time() - started, 2)
+        instrumented_total_sec = round(sum(timings.values()), 2)
+        timings["unattributed_sec"] = round(max(total_duration_sec - instrumented_total_sec, 0), 2)
+        timings["instrumented_total_sec"] = instrumented_total_sec
         if total_duration_sec > 300:
             slowest = sorted(timings.items(), key=lambda kv: kv[1], reverse=True)[:5]
             warnings.append(f"sla_incident_runner_over_300s duration_sec={total_duration_sec} slowest={slowest}")
