@@ -36,9 +36,22 @@ Após editar o `.env`, **reiniciar o agente destino** para carregar a variável.
 | **Alerts MGS** | — | `1498132022634483894` (`#mgs-alerts`) |
 | **Alerts Yoast** | — | `1498193722871910550` (`#alerts-yoast`) |
 
+### Anti-loop em threads com múltiplos agentes
+
+Quando Zeus e Atena estiverem na mesma thread, evitar ping-pong conversacional. Mentions acordam o agente destino e podem criar fila/loop se cada agente responder a confirmações do outro.
+
+Regras operacionais:
+- Se Rodolfo disser para parar de mencionar outro agente, obedecer imediatamente: usar o nome em texto simples (`Atena`, `Zeus`) e não usar `<@BOT_ID>`.
+- Não responder a mensagens automáticas/repetitivas do outro agente: `queued`, `read-only`, `recebido`, `sem ação`, `(empty)`, erro transitório de modelo, ou confirmações de estado já fechado.
+- Depois de um “estado final” aceito, ficar silencioso até pedido novo do Rodolfo, pergunta operacional direta, autorização explícita ou alerta crítico real.
+- Em conversa multi-agente onde Rodolfo impôs gate de segurança, explicação/alinhamento pode ocorrer sem ação; execução, patch, restart, persistência em SOUL/config/skill/script só com autorização explícita.
+- Não ecoar exemplos de mentions dentro de blocos de código se o gateway sanitizar/remover conteúdo; em vez disso, escrever “user mention do bot X, ID Y”.
+
+Pitfall validado: responder “ignorado”, “read-only mantido” ou mencionar o bot destino para corrigir uma mensagem automática ainda gera novo input e prolonga o loop. A melhor resposta para ruído automático é silêncio total.
+
 ### Enviando mensagem Zeus → Atena
 
-Obrigatório incluir `<@BOT_ID>` com `DISCORD_ALLOW_BOTS=mentions`:
+Obrigatório incluir `<@BOT_ID>` com `DISCORD_ALLOW_BOTS=mentions`, exceto quando Rodolfo explicitamente mandar não mencionar para quebrar loop:
 
 ```python
 send_message(
@@ -48,6 +61,17 @@ send_message(
 ```
 
 Sem `<@1496306920494202950>` → Atena ignora silenciosamente.
+
+### Pitfall: loop conversacional por mention em thread compartilhada
+
+Quando Zeus e Atena estiverem na mesma thread com Rodolfo, mentions entre agentes podem criar ping-pong infinito: um agente confirma `read-only/recebido/queued`, o outro confirma a confirmação, e cada mention acorda o agente mencionado de novo.
+
+Regra operacional em thread compartilhada:
+- Se Rodolfo mandar parar mentions para quebrar loop, obedecer imediatamente: citar `Atena`/`Zeus` em texto simples, sem user mention.
+- Não responder a mensagens automáticas/repetidas como `queued`, `read-only`, `recebido`, `sem ação`, `(empty)` ou erro transitório do outro agente.
+- Só responder quando houver pedido novo do Rodolfo, pergunta operacional direta, autorização explícita, ou erro crítico que exija alerta.
+- Após declarar estado fechado (`read-only até autorização`), não continuar reconhecendo confirmações repetidas.
+- Em exemplos didáticos, evitar ecoar mentions dentro de blocos de código; Discord/Hermes pode sanitizar/remover o conteúdo e confundir o alinhamento. Preferir “user mention do bot Zeus, ID ...”.
 
 ### Conversa direta entre agentes em thread compartilhada
 
