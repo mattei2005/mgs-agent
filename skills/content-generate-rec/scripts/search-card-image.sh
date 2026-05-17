@@ -263,11 +263,12 @@ scored=$(while IFS= read -r u; do
   [ -z "$u" ] && continue
   score=0
   low=$(echo "$u" | tr '[:upper:]' '[:lower:]')
-  echo "$low" | grep -qE "($kw)" && score=$((score+5))
-  echo "$low" | grep -qE '(card|visa|mastercard|amex|gold|platinum|classic|credit)' && score=$((score+2))
+  low_path=$(echo "$low" | sed -E 's#^https?://[^/]+/?##')
+  echo "$low_path" | grep -qE "($kw)" && score=$((score+5))
+  echo "$low_path" | grep -qE '(card|visa|mastercard|amex|gold|platinum|classic|credit)' && score=$((score+2))
   [[ "$low" == *.png ]] && score=$((score+3))
   [[ "$low" == *.webp ]] && score=$((score+1))
-  echo "$low" | grep -qE '(logo|icon|sprite|favicon|hero|banner)' && score=$((score-4))
+  echo "$low_path" | grep -qE '(logo|icon|sprite|favicon|hero|banner|couple|walking|shop|background|new-fscs)' && score=$((score-4))
   echo "$score $u"
 done <<<"$abs_candidates" | sort -rn)
 
