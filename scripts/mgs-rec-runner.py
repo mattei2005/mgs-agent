@@ -791,7 +791,9 @@ def main() -> int:
         if args.dry_run:
             steps.append("dry_run_skip_publish")
         else:
+            t0 = time.time()
             category_id, tag_ids, tag_names = resolve_terms(args.site, site, card_slug, card_data)
+            tick("wp_resolve_terms_sec", t0)
             post_json = {
                 "status": args.status,
                 "slug": post_slug,
@@ -810,7 +812,9 @@ def main() -> int:
             post_path = Path(tempfile.gettempdir()) / f"rec-post-{card_slug}.json"
             post_path.write_text(json.dumps(post_json, ensure_ascii=False))
             env = {"ALLOW_DISAMBIGUATION": "1"} if args.allow_disambiguation else None
+            t0 = time.time()
             created = run_json([str(WP_SCRIPTS / "create-post.sh"), args.site, str(post_path)], timeout=180, env=env)
+            tick("wp_create_post_sec", t0)
             post_id = int(created["id"])
             public_url = created.get("link") or public_url
             edit_url = f"{site['wp_url']}/wp-admin/post.php?post={post_id}&action=edit"
@@ -819,11 +823,16 @@ def main() -> int:
             yoast_json = {"title": title, "content": content, "meta": post_json["meta"]}
             yoast_path = Path(tempfile.gettempdir()) / f"rec-yoast-{card_slug}.json"
             yoast_path.write_text(json.dumps(yoast_json, ensure_ascii=False))
+            t0 = time.time()
             yoast_update = run_json([str(WP_SCRIPTS / "update-yoast.sh"), args.site, str(post_id), str(yoast_path), "verify"], timeout=180)
+            tick("wp_update_yoast_sec", t0)
             steps.append("yoast_updated")
             try:
+                t0 = time.time()
                 yoast_result = run_json([str(GEN_SCRIPTS / "yoast-score-post.sh"), args.site, str(post_id)], timeout=180, allow_fail=True)
+                tick("yoast_score_sec", t0)
             except Exception as e:
+                tick("yoast_score_sec", t0)
                 warnings.append(f"yoast_score_failed: {e}")
                 yoast_result = {"status": "error", "message": str(e)}
             steps.append("yoast_scored")
@@ -851,25 +860,40 @@ def main() -> int:
             }
             cache_path = Path(tempfile.gettempdir()) / f"cache-save-{card_slug}.json"
             cache_path.write_text(json.dumps(cache_payload, ensure_ascii=False))
+            t0 = time.time()
             run_json([str(GEN_SCRIPTS / "card-cache-save.sh"), str(cache_path)], timeout=60)
+            tick("cache_save_sec", t0)
             steps.append("cache_saved")
+            t0 = time.time()
             public_check = public_verify(public_url)
+            tick("public_verify_sec", t0)
             if public_check.get("http_status") != 200:
                 warnings.append(f"public_verify_not_200: {public_check}")
             steps.append("public_verified")
 
+            t0 = time.time()
             artifact_audit = cleanup_extra_media(args.site, created_media, post_id, [card_id or 0, featured_id or 0])
+            tick("artifact_cleanup_sec", t0)
             if artifact_audit.get("extra_count"):
                 steps.append("extra_media_cleanup_checked")
 
+            t0 = time.time()
             fingerprint_check = run_json([
                 str(ROOT / "scripts/rec-fingerprint.py"), "--card-slug", card_slug, "--site", args.site,
                 "--file", str(fp_path), "--post-id", str(post_id), "--post-url", public_url,
                 "--title", title, "--store"
             ], timeout=30, allow_fail=True) or fingerprint_check
+            tick("duplicate_fingerprint_store_sec", t0)
             steps.append("duplicate_fingerprint_stored")
 
         costs["total_est"] = round(costs["article_api"] + costs["extract_llm_est"] + (0 if args.dry_run else costs["featured_image_est"]), 6)
+        total_duration_sec = round(time.time() - started, 2)
+        if total_duration_sec > 300:
+            slowest = sorted(timings.items(), key=lambda kv: kv[1], reverse=True)[:5]
+            warnings.append(f"sla_incident_runner_over_300s duration_sec={total_duration_sec} slowest={slowest}")
+        elif total_duration_sec > 180:
+            slowest = sorted(timings.items(), key=lambda kv: kv[1], reverse=True)[:5]
+            warnings.append(f"sla_warn_runner_over_180s duration_sec={total_duration_sec} slowest={slowest}")
         result = {
             "success": True,
             "dry_run": args.dry_run,
@@ -880,7 +904,7 @@ def main() -> int:
             "post_id": post_id,
             "public_url": public_url,
             "edit_url": edit_url,
-            "duration_sec": round(time.time() - started, 2),
+            "duration_sec": total_duration_sec,
             "steps": steps,
             "timings_sec": timings,
             "cost_usd": costs,
