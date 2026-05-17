@@ -666,10 +666,14 @@ def main() -> int:
             else:
                 if not args.source_url:
                     raise RunnerError("Cache MISS and no --source-url/benefits supplied")
+                t0 = time.time()
                 status, text = fetch_reference_text(args.source_url)
+                tick("reference_fetch_sec", t0)
                 if status >= 400:
                     raise RunnerError(f"reference_url returned HTTP {status}")
+                t0 = time.time()
                 card_data = extract_card_data_with_llm(args.card, args.source_url, text)
+                tick("reference_extract_llm_sec", t0)
                 card_data["card_official_url"] = args.source_url
                 steps.append("reference_extracted_llm")
                 costs["extract_llm_est"] = 0.02
