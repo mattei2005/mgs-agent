@@ -30,6 +30,7 @@ from typing import Any, Dict, List, Optional, Tuple
 ROOT = Path("/root/mgs-agent")
 SITES_JSON = ROOT / "data/sites.json"
 CACHE_DB = ROOT / "data/card-cache.db"
+TERM_CACHE_JSON = ROOT / "data/wp-term-cache.json"
 GEN_SCRIPTS = ROOT / "skills/content-generate-rec/scripts"
 WP_SCRIPTS = ROOT / "skills/content-publish-wordpress/scripts"
 API_URL = "http://127.0.0.1:8001/generate"
