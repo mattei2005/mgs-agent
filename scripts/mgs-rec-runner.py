@@ -965,6 +965,7 @@ def main() -> int:
             "duration_sec": total_duration_sec,
             "steps": steps,
             "timings_sec": timings,
+            "term_cache": term_stats,
             "cost_usd": costs,
             "card_data": {
                 "card_name": card_data.get("card_name"),
@@ -992,7 +993,11 @@ def main() -> int:
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
     except Exception as e:
-        result = {"success": False, "error": str(e), "duration_sec": round(time.time() - started, 2), "steps": steps, "warnings": warnings}
+        total_duration_sec = round(time.time() - started, 2)
+        instrumented_total_sec = round(sum(timings.values()), 2)
+        timings["unattributed_sec"] = round(max(total_duration_sec - instrumented_total_sec, 0), 2)
+        timings["instrumented_total_sec"] = instrumented_total_sec
+        result = {"success": False, "error": str(e), "duration_sec": total_duration_sec, "steps": steps, "timings_sec": timings, "warnings": warnings}
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 1
 
