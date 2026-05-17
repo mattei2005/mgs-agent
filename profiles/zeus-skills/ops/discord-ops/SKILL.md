@@ -373,6 +373,19 @@ Issue upstream: https://github.com/NousResearch/hermes-agent/issues/14905
 
 Ver `references/discord-threads-lifecycle.md` para referência completa.
 
+### Followed announcement channels com explicação automática
+
+Quando Rodolfo criar um canal que segue anúncios externos (ex: Hermes announcements) e pedir para Zeus explicar automaticamente cada novo post abaixo do anúncio, usar o padrão de poller cron descrito em `references/discord-followed-announcement-explainer.md`.
+
+Resumo operacional:
+- Verificar acesso de Zeus e Atena via Discord API, mas lembrar que acesso ao canal ≠ gateway ouvindo; checar `discord.allowed_channels` separadamente.
+- Preferir poller Zeus com state (`last_seen_id`/`processed`) + reply via `message_reference`, em vez de adicionar o canal ao gateway normal.
+- Manter Atena fora desse fluxo por padrão; é administrativo/Hermes, não editorial.
+- Inicializar state no message atual para não reprocessar histórico/follow setup.
+- Ignorar state runtime no git para evitar auto-commit de churn.
+
+Ver `references/discord-threads-lifecycle.md` para referência completa.
+
 **Resumo executivo:** threads arquivadas = zero tokens. Tokens só correm quando chega mensagem nova. Histórico preservado indefinidamente (sem auto-delete). Canal Zeus: archive em 24h.
 
 ### Leitura sob demanda de threads antigas
