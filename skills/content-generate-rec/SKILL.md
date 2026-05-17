@@ -653,10 +653,11 @@ Required fields in the single message:
 > Se a execução gerar/uploadar 6 imagens e usar apenas 2, Atena DEVE informar isso no resumo final. Nunca reportar só o erro principal ou só as imagens usadas. O usuário não deve precisar abrir WordPress → Media Library para descobrir órfãs.
 >
 > Regra operacional:
-> - Audit mínimo antes do report final: post existe, featured_media setada, card image presente no conteúdo/LazyBlock, e contagem de media criadas no run.
-> - Cleanup automático pós-publicação: deletar imagens extras somente quando forem uploads da própria execução e não estiverem em `featured_media`, no HTML do post, nem anexadas a outro post.
-> - Se a segurança não for 100%, NÃO deletar; reportar Media IDs e pedir decisão.
-> - Quando usar `mgs-rec-runner.py`, ler `images.artifact_audit` do JSON e refletir no resumo final.
+- Audit mínimo antes do report final: post existe, featured_media setada, card image presente no conteúdo/LazyBlock, contagem de media criadas no run, e CTA/apply URL testada.
+- Cleanup automático pós-publicação: deletar imagens extras somente quando forem uploads da própria execução e não estiverem em `featured_media`, no HTML do post, nem anexadas a outro post.
+- Se a segurança não for 100%, NÃO deletar; reportar Media IDs e pedir decisão.
+- Se a CTA/apply URL retornar 404, isso é BLOCKER: não dizer que a publicação foi validada com sucesso; reportar a URL quebrada e recomendar criar/corrigir a P1.
+- Quando usar `mgs-rec-runner.py`, ler `images.artifact_audit` do JSON e refletir no resumo final.
 
 Format example (1 single Discord message):
 
