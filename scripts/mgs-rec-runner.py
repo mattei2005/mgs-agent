@@ -434,10 +434,15 @@ def title_meta_focus(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, st
     words = [w for w in re.sub(r"[^A-Za-z0-9 ]", " ", card_name).split() if w.lower() not in {"credit", "card", "the"}]
     focus = " ".join(words[:3]) if words else card_name[:40]
     no_fee = "no annual fee" in (card_data.get("annual_fee") or "").lower() or any("no annual fee" in b.lower() for b in card_data.get("benefits", []))
-    benefit = "No Fee" if no_fee else "Key Benefits"
-    title = f"{focus}: {benefit} & Rewards"
+    rewards_supported = any(x in " ".join(card_data.get("benefits", [])).lower() for x in ["cashback", "rewards", "points", "miles"])
+    if no_fee:
+        title = f"{focus}: No Annual Fee"
+    elif rewards_supported:
+        title = f"{focus}: Rewards & Fees"
+    else:
+        title = f"{focus}: Benefits & Fees"
     if len(title) > 60:
-        title = f"{focus}: Benefits & Fees"[:60]
+        title = f"{focus}: Card Review"[:60]
     meta = f"{card_name} offers {', '.join(card_data.get('benefits', ['key benefits'])[:2]).lower()}. See fees, APR and how it works."
     if len(meta) > 130:
         meta = meta[:127].rsplit(" ", 1)[0] + "..."
