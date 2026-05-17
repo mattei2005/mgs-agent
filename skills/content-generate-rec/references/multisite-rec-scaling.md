@@ -34,7 +34,33 @@ Generate uniquely per domain/template/audience:
 
 Do not publish identical HTML/body copy across sites.
 
-## Recommended runner mode behavior
+## Fingerprint enforcement
+
+The runner now uses:
+
+```bash
+/root/mgs-agent/scripts/rec-fingerprint.py
+```
+
+Behavior:
+
+1. Normalize candidate HTML into plain lowercase text.
+2. Build 5-word shingles.
+3. Compare against stored fingerprints for the same `card_slug` on other sites.
+4. Warn when similarity is above threshold (`0.35` default).
+5. Store the final published fingerprint with `--store` after publish.
+
+Runner output path:
+
+```text
+validation.duplicate_fingerprint.status
+validation.duplicate_fingerprint.max_similarity
+validation.duplicate_fingerprint.comparisons[]
+```
+
+If status is `WARN_SIMILAR`, Atena must not claim duplicate-control is clean. For now the runner warns but does not block publish; for high-volume rollout, convert the warning into a hard fail or rewrite pass.
+
+## Recommended same-card-multisite behavior
 
 For a future `same-card-multisite` flow:
 
