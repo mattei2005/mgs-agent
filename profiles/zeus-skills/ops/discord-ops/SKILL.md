@@ -49,6 +49,25 @@ send_message(
 
 Sem `<@1496306920494202950>` → Atena ignora silenciosamente.
 
+### Regra de conversa em thread compartilhada Zeus ↔ Atena
+
+Quando Zeus e Atena estão na mesma thread, fala direta entre agentes deve usar **user mention do bot**, não só o nome textual do agente. Isso vale mesmo quando a mensagem é “sobre” o outro agente, se for endereçada diretamente a ele.
+
+```text
+Direção                         Forma correta
+------------------------------  -------------------------
+Zeus falando com Atena          <@1496306920494202950>
+Atena falando com Zeus          <@1496296175014252634>
+Evitar                          escrever só “Zeus” ou “Atena” em fala direta
+```
+
+Motivos:
+- garante que o agente destinatário processe a mensagem quando `DISCORD_ALLOW_BOTS=mentions` está ativo;
+- reduz ambiguidade em threads com Rodolfo + múltiplos agentes;
+- preserva legibilidade para o Rodolfo, mostrando claramente quem está sendo acionado.
+
+Se Rodolfo declarar um gate local como “nesta conversa qualquer alteração/execução pede minha autorização”, obedecer como regra de thread: explicar, pedir autorização explícita e só então executar/persistir em arquivo/config.
+
 ### Verificando que Atena recebeu
 
 ```bash
