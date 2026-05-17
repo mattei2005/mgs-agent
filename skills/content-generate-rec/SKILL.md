@@ -346,9 +346,12 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   office, elegant home interior, rooftop with skyline, airport lounge,
   contemporary coworking, urban street with cinematic blur, city at sunset,
   nighttime metropolis).
-- Output: 16:9 JPEG at `/tmp/featured-<slug>.jpg` (auto-compressed via `compress-image.sh`: PNG 2 MB → JPEG ~150 KB, quality 88, max 1280px wide).
+- Output target: 16:9 JPEG at `/tmp/featured-<slug>.jpg` (auto-compressed via `compress-image.sh`: PNG → JPEG, quality 88, max 1280px wide).
+- VALIDATE LOCAL ASPECT RATIO BEFORE UPLOAD: final featured must be 16:9 (for max width 1280, expected 1280x720 or equivalent). If Gemini returns 8:5/16:10 (example: 1280x800), do not silently accept; either regenerate or run the approved crop/pad enforcement in the image pipeline before upload.
 - VALIDATE LOCALLY BEFORE UPLOAD: use `vision_analyze` on `/tmp/featured-<slug>.jpg` and confirm the card in the composition is visually identical to the card_media (issuer design, layout, colours, sample text placement). If not, regenerate (retry up to 2x). If still broken, abort with a clear message.
-- Only after the local vision check passes, upload via `upload-image.sh` → `{id, source_url, mime_type}` — this is the **featured_media**.
+- Only after the local aspect-ratio + vision checks pass, upload via `upload-image.sh` → `{id, source_url, mime_type}` — this is the **featured_media**.
+
+> **PITFALL — prompt does not enforce 16:9 by itself:** Gemini may ignore the requested 16:9 and return 8:5/16:10. `compress-image.sh` historically preserved the generated proportion when resizing to max width 1280, causing outputs like 1280x800. Treat this as a pipeline validation issue, not an editorial choice. Add/keep post-generation aspect enforcement.
 
 > **PITFALL — do not upload failed featured generations:** Gemini can produce a professional-looking image with a generic/altered Amex-style card. Uploading before visual validation leaves orphan media in WordPress and can confuse the final summary. Validate the local `/tmp/featured-<slug>.jpg` first; upload only the approved final image.
 
