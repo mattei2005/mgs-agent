@@ -40,6 +40,16 @@ Após editar o `.env`, **reiniciar o agente destino** para carregar a variável.
 
 Regra principal: **em thread compartilhada com Rodolfo + mais de um agente, não iniciar conversa agente→agente por padrão**. Cada agente deve responder ao humano, não ficar alinhando estado com outro bot.
 
+#### Review de alinhamento entre agentes, sem acordar bots
+
+Quando Rodolfo pedir para comparar a mensagem de Zeus com a de Atena/Ares/outro agente na mesma thread:
+- Não mencionar o outro bot; usar texto simples (`Atena`, `Zeus`).
+- Importar/ler a thread em modo read-only se a mensagem do outro agente não estiver no contexto ativo.
+- Responder ao Rodolfo com uma matriz curta de alinhamento: `Ponto | Agente A disse | Agente B disse | Alinhamento`.
+- Separar consenso de diferença operacional. Exemplo: “Atena falou como dona do processo; Zeus trouxe evidência técnica e patch concreto.”
+- Se houver divergência, declarar a decisão recomendada sem iniciar conversa agente→agente.
+- Terminar com `Próximo passo pendente:` quando a conversa envolver execução/patch/infra.
+
 O incidente real `1505532189490811081` mostrou que a regra “mencione o outro agente quando falar dele” é perigosa se aplicada como padrão: cada mention acorda o bot destino, gera fila, e qualquer confirmação vira novo input.
 
 Regras operacionais:
