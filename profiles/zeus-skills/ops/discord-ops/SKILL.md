@@ -56,6 +56,17 @@ Pitfall validado: responder “ignorado”, “read-only mantido”, `[sem respo
 
 Referência do incidente real: `references/discord-agent-loop-incident-2026-05-17.md` — thread `1505532189490811081`, Zeus/Atena, mentions + queued/read-only/(empty) causando ping-pong até lock/archive/delete.
 
+Playbook de limpeza pós-incidente: `references/discord-shared-thread-loop-cleanup.md` — usar quando o loop gerou regras ruins/redundantes em SOUL, skills ou memória; consolida a política segura e o checklist para desfazer regras perigosas.
+
+### Limpeza pós-loop de regras persistidas
+
+Se um loop multiagente levou à criação apressada de skills/memórias/regras, tratar como correção operacional, não como aprendizado automático bruto:
+- Auditar mudanças recentes em SOUL, skills e memórias dos agentes envolvidos.
+- Remover regras amplas do tipo “sempre mencionar Zeus/Atena” em thread compartilhada.
+- Consolidar em um único skill guarda-chuva por agente; evitar 2–3 skills estreitas sobre o mesmo incidente.
+- Preservar no máximo uma referência concisa do incidente, com política final segura.
+- Validar que a regra final diferencia thread compartilhada de cross-channel: em thread, texto simples por padrão; cross-channel pode exigir mention para roteamento.
+
 ### Enviando mensagem Zeus → Atena em outro canal
 
 Para comunicação **cross-channel** Zeus → Atena, incluir `<@BOT_ID>` porque Atena usa `DISCORD_ALLOW_BOTS=mentions`:
