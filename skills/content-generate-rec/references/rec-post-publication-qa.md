@@ -96,8 +96,8 @@ If image is usable but imperfect, report as “acceptable with caveat.” If pro
 Use this severity model in review reports:
 
 ```text
-Crítico  User journey broken: CTA/apply 404, post inaccessible, wrong card/product
+Crítico  Post inaccessible, wrong card/product, CTA/apply broken after P1 was supposed to exist
 Alto     Unsupported claim/title, broken final sentence, official facts questionable
-Médio    Image quality/AI artifact, readability yellow, third-party card source
+Médio    Image quality/AI artifact, readability yellow, third-party card source, REC-only CTA points to future 404 P1
 Baixo    Minor phrasing/mechanical text, cosmetic formatting
 ```
