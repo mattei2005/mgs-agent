@@ -768,9 +768,27 @@ All actions append to `/root/mgs-agent/logs/generate-rec.log`.
 - WP publish failure → log full response, abort
 - Yoast verify mismatch → log and surface to user (post still exists, but meta needs manual fix)
 
-## Step 14 - Cost reporting (mandatory after publish)
+### Step 14 - Cost reporting (mandatory after publish)
 
 Apos completar Step 13 (Return summary com mensagem unica), SEMPRE incluir bloco de custo na MESMA mensagem. Zero latencia, sem segunda mensagem, sem esperar cron.
+
+### Regra principal: não inventar USD quando billing é incluído
+
+Antes de aplicar fórmula de preço, leia `billing_provider`, `cost_status`, `estimated_cost_usd` e `actual_cost_usd` no `state.db`.
+
+- Se `billing_provider=openai-codex` e `cost_status=included`, reporte o custo LLM como **included / não medido em USD**. Não converta tokens para USD usando tabela Anthropic/Sonnet.
+- Se `actual_cost_usd` existir, reporte o real.
+- Se `estimated_cost_usd` existir e `cost_status` não for `included`, reporte como estimado e indique a fonte.
+- Só use tabela de pricing manual quando o provider/modelo realmente corresponder à tabela carregada em `references/pricing.md`.
+
+Formato recomendado:
+
+```text
+Custo: LLM included/não medido em USD | API/imagem: ${api_cost} | duração: {duration} | tools: {tool_calls}
+Tokens: input {i} | output {o} | cache_read {cr}
+```
+
+> **PITFALL — Codex OAuth não é Sonnet pay-per-token:** Em sessões Atena com `gpt-5.5` via `openai-codex`, o DB pode mostrar milhões de cache tokens e `estimated_cost_usd=0.0`, `cost_status=included`. Nesses casos, valores como “US$0.23 Atena” são estimativas artificiais e não devem ser reportados como custo real.
 
 ### Como calcular custo na hora (state.db delta)
 
