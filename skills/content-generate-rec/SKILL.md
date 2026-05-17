@@ -53,6 +53,11 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > safe auto-delete gates for extra WordPress media, and final-summary UX rule, see
 > `references/rec-artifact-audit-cleanup.md`. Load it when changing runner media
 > handling, investigating Media Library clutter, or reviewing REC loop/error fallout.
+>
+> **REFERENCE - post-publication QA:** For the required post-publish review checks
+> (CTA/apply URL 200, title claim support, complete final sentence, image QA, and
+> severity model), see `references/rec-post-publication-qa.md`. Load it when
+> reviewing a published REC or modifying final validation/reporting.
 
 ## Inputs
 
