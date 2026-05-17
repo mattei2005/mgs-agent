@@ -109,11 +109,14 @@ run_brave_fallback() {
     return 1
   fi
 
-  brave_json=$(python3 - "$CARD_NAME" "$brave_key" <<'PY' 2>>"$LOG" || true
-import json, sys, urllib.parse, urllib.request
+  brave_json=$(python3 - "$CARD_NAME" "$brave_key" "$OFFICIAL_URL" <<'PY' 2>>"$LOG" || true
+import json, re, sys, urllib.parse, urllib.request
 
-card_name, key = sys.argv[1], sys.argv[2]
+card_name, key, official_url = sys.argv[1], sys.argv[2], sys.argv[3]
 query = f'{card_name} credit card image'
+official_host = (urllib.parse.urlparse(official_url).hostname or '').lower()
+brand = re.sub(r'[^a-z0-9]+', ' ', card_name.lower()).split()[0] if card_name else ''
+terms = [t for t in re.sub(r'[^a-z0-9]+', ' ', card_name.lower()).split() if t not in {'card', 'credit'}]
 url = 'https://api.search.brave.com/res/v1/images/search?' + urllib.parse.urlencode({
     'q': query,
     'count': 10,
@@ -134,14 +137,31 @@ except Exception as exc:
     raise SystemExit(0)
 
 out = []
-for item in data.get('results', []):
+for pos, item in enumerate(data.get('results', []), 1):
     props = item.get('properties') or {}
     thumb = item.get('thumbnail') or {}
     src = props.get('url') or item.get('image') or thumb.get('src')
     page = item.get('url') or ''
     title = item.get('title') or ''
-    if src:
-        out.append({'src': src, 'page': page, 'title': title})
+    if not src:
+        continue
+    src_host = (urllib.parse.urlparse(src).hostname or '').lower()
+    page_host = (urllib.parse.urlparse(page).hostname or '').lower()
+    hay = f'{title} {page} {src}'.lower()
+    score = 100 - pos  # keep Brave order as tie-breaker
+    if official_host and (official_host in src_host or official_host in page_host):
+        score += 60
+    elif brand and (src_host.startswith(brand) or page_host.startswith(brand) or f'.{brand}' in src_host or f'.{brand}' in page_host):
+        score += 35
+    score += sum(6 for t in terms if t in hay)
+    if 'business' in hay and 'business' not in card_name.lower():
+        score -= 25
+    if re.search(r'(logo|icon|sprite|favicon|hero|banner|background)', hay):
+        score -= 20
+    if re.search(r'(walletwisdoms|memivi)', hay):
+        score -= 10
+    out.append({'src': src, 'page': page, 'title': title, 'score': score})
+out.sort(key=lambda x: x.get('score', 0), reverse=True)
 print(json.dumps({'status': 'OK', 'results': out}, ensure_ascii=False))
 PY
 )
