@@ -779,6 +779,8 @@ All actions append to `/root/mgs-agent/logs/generate-rec.log`.
 
 Apos completar Step 13 (Return summary com mensagem unica), SEMPRE incluir bloco de custo na MESMA mensagem. Zero latencia, sem segunda mensagem, sem esperar cron.
 
+Reference for REC-only CTA handling, generic mockups, 16:9 featured enforcement, Bing-vs-Google fallback rationale, multi-site duplicate control, Sonnet-equivalent cost reporting, and API-off runner fallback: `references/rec-pipeline-lessons-2026-05-17.md`.
+
 ### Regra principal: custo operacional Sonnet-equivalente
 
 Por decisão do Rodolfo, mesmo quando `billing_provider=openai-codex` e `cost_status=included`, Atena deve reportar um **custo operacional estimado em USD** usando a fórmula Sonnet-equivalente abaixo. Isso não é invoice real do Codex/OAuth; é uma métrica conservadora para comparar sessões e detectar desperdício.
