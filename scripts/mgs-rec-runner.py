@@ -263,6 +263,100 @@ def call_rec_api(payload: Dict[str, Any]) -> Dict[str, Any]:
         raise RunnerError(f"mgs-rec-api call failed: {e}")
 
 
+def esc_text(value: Any) -> str:
+    return html.escape(str(value or "").strip())
+
+
+def sentence_join(items: List[str], limit: int = 3) -> str:
+    clean = [str(x).strip().rstrip(".") for x in items if str(x).strip()]
+    if not clean:
+        return "key card features"
+    if len(clean[:limit]) == 1:
+        return clean[0]
+    return ", ".join(clean[:limit-1]) + " and " + clean[limit-1]
+
+
+def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict[str, Any]) -> Dict[str, Any]:
+    """Generate a deterministic REC article without the deprecated local API."""
+    name = esc_text(card_data.get("card_name"))
+    annual_fee = esc_text(card_data.get("annual_fee") or "N/A")
+    apr = esc_text(card_data.get("apr") or "N/A")
+    benefits = [str(b).strip() for b in (card_data.get("benefits") or []) if str(b).strip()]
+    competitors = [c.get("name") if isinstance(c, dict) else str(c) for c in (card_data.get("competitors") or [])]
+    competitors = [c.strip() for c in competitors if c and str(c).strip()]
+    comp_a = esc_text(competitors[0] if len(competitors) > 0 else "another card in the same segment")
+    comp_b = esc_text(competitors[1] if len(competitors) > 1 else "a second comparable card")
+    primary_benefit = esc_text(benefits[0] if benefits else "key credit card features")
+    second_benefit = esc_text(benefits[1] if len(benefits) > 1 else "account management tools")
+    third_benefit = esc_text(benefits[2] if len(benefits) > 2 else "everyday payment flexibility")
+    benefit_phrase = esc_text(sentence_join(benefits, 3))
+    descriptor = card_data.get("descriptor") or f"A UK credit card with {annual_fee.lower()} and practical account features."
+    card_data.setdefault("tag10", primary_benefit[:25] or "Card benefits")
+    card_data.setdefault("tag2", annual_fee[:25] if annual_fee != "N/A" else "Credit card")
+    card_data.setdefault("descriptor", descriptor[:100])
+
+    rows = []
+    for label, fee, note in [
+        (name, annual_fee, primary_benefit),
+        (comp_a, "Varies", "Compare eligibility, APR and fees before applying"),
+        (comp_b, "Varies", "Compare benefits and repayment terms carefully"),
+    ]:
+        rows.append(f"<tr><td>{label}</td><td>{esc_text(fee)}</td><td>{esc_text(note)}</td></tr>")
+    table = "".join(rows)
+
+    html_body = f"""<!-- wp:paragraph -->
+<p><strong>{name}</strong> offers {annual_fee.lower()} and practical features for UK applicants.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The {name} is designed for applicants who want a straightforward credit card and prefer to review eligibility before making a full application. Based on the official product information, its core positioning is simple: {benefit_phrase}. Applicants should still compare the card against their own budget, repayment habits and credit profile.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Key Benefits of the Card</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The main benefit is {primary_benefit}. The card also highlights {second_benefit}, which can be useful for people who want easier control over their account. Another relevant feature is {third_benefit}. These points make the card more practical for everyday use than for premium rewards or luxury travel perks.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How Does It Work</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The official product information lists the annual fee as {annual_fee}. APR information is shown as {apr}. As with any credit card, the final cost depends on the applicant's credit limit, interest rate, balance and whether payments are made in full and on time. Paying the statement balance in full is usually the cleanest way to avoid unnecessary interest on purchases where the terms allow it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Comparative Table</h2>
+<!-- /wp:heading -->
+
+<!-- wp:table -->
+<figure class="wp-block-table"><table class="has-fixed-layout" style="font-size:85%"><thead><tr><th>Card</th><th>Annual fee</th><th>Positioning</th></tr></thead><tbody>{table}</tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p>Compared with {comp_a} and {comp_b}, the {name} should be reviewed as a practical credit card option rather than as a premium rewards product. The best choice depends on eligibility, representative APR, fees and how the applicant expects to repay the balance.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Who Is This Card Best For</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>This card may suit applicants who want a simple UK credit card, value online account control and understand the importance of paying on time. It may not be the best fit for someone looking mainly for high-value rewards, travel extras or a guaranteed low APR. Reading the official terms before applying can help confirm fees, rates and repayment conditions.</p>
+<!-- /wp:paragraph -->"""
+    return {
+        "success": True,
+        "article_html": html_body,
+        "cost_usd": 0.0,
+        "duration_sec": 0.0,
+        "card_data": card_data,
+        "generator": "local_deterministic",
+    }
+
+
 def validate_html(path: Path) -> Dict[str, Any]:
     p = run([str(GEN_SCRIPTS / "validate-article.sh"), str(path)], timeout=30)
     try:
@@ -552,13 +646,22 @@ def main() -> int:
             "competitors": card_data.get("competitors") or [],
         }
         t0 = time.time()
-        api = call_rec_api(api_payload)
-        tick("article_api_sec", t0)
-        if not api.get("success"):
-            raise RunnerError(f"mgs-rec-api failed: {api}")
+        try:
+            api = call_rec_api(api_payload)
+            tick("article_api_sec", t0)
+            if not api.get("success"):
+                raise RunnerError(f"mgs-rec-api failed: {api}")
+            steps.append("article_generated_api")
+        except RunnerError as e:
+            # The legacy local API is intentionally masked on current MGS infra.
+            # Do not waste a second runner attempt; generate deterministic HTML
+            # locally from the official facts already supplied to this runner.
+            warnings.append(f"article_api_unavailable_local_generator_used: {str(e)[:300]}")
+            api = generate_article_local(site, card_slug, card_data)
+            tick("article_local_generate_sec", t0)
+            steps.append("article_generated_local")
         costs["article_api"] = float(api.get("cost_usd") or 0)
         card_data.update(api.get("card_data") or {})
-        steps.append("article_generated")
 
         def build_and_validate_current(stage: str) -> Tuple[str, Dict[str, Any], int]:
             t_stage = time.time()
