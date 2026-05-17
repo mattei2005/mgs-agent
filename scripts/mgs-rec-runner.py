@@ -754,6 +754,8 @@ def main() -> int:
             w, h = [int(x) for x in ident.stdout.split()[:2]]
             if w < 1000 or h < 600:
                 raise RunnerError(f"featured image too small: {w}x{h}")
+            if abs((w / h) - (16 / 9)) > 0.01:
+                raise RunnerError(f"featured image not 16:9 after compression: {w}x{h}")
             tick("featured_local_validate_sec", t0)
             t0 = time.time()
             upf = run_json([str(WP_SCRIPTS / "upload-image.sh"), args.site, featured_path, f"featured-{card_slug}-final.jpg"], timeout=120)
@@ -765,6 +767,14 @@ def main() -> int:
         # Rebuild and revalidate the exact final HTML after media IDs/URLs are known.
         content, validation, subtitle_chars = build_and_validate_current("final")
         steps.append("content_validated_final")
+
+        fingerprint_check: Dict[str, Any] = {}
+        fp_path = Path(tempfile.gettempdir()) / f"fingerprint-{card_slug}.html"
+        fp_path.write_text(content)
+        fingerprint_check = run_json([str(ROOT / "scripts/rec-fingerprint.py"), "--card-slug", card_slug, "--site", args.site, "--file", str(fp_path)], timeout=30, allow_fail=True)
+        if fingerprint_check.get("status") == "WARN_SIMILAR":
+            warnings.append(f"duplicate_content_similarity_warn: max={fingerprint_check.get('max_similarity')} threshold={fingerprint_check.get('threshold')}")
+        steps.append("duplicate_fingerprint_checked")
 
         title, meta_desc, focus_kw = title_meta_focus(card_data["card_name"], card_data)
         if len(title) > 60 or len(meta_desc) < 120 or len(meta_desc) > 130 or len(focus_kw.split()) > 4:
@@ -852,6 +862,13 @@ def main() -> int:
             if artifact_audit.get("extra_count"):
                 steps.append("extra_media_cleanup_checked")
 
+            fingerprint_check = run_json([
+                str(ROOT / "scripts/rec-fingerprint.py"), "--card-slug", card_slug, "--site", args.site,
+                "--file", str(fp_path), "--post-id", str(post_id), "--post-url", public_url,
+                "--title", title, "--store"
+            ], timeout=30, allow_fail=True) or fingerprint_check
+            steps.append("duplicate_fingerprint_stored")
+
         costs["total_est"] = round(costs["article_api"] + costs["extract_llm_est"] + (0 if args.dry_run else costs["featured_image_est"]), 6)
         result = {
             "success": True,
@@ -875,7 +892,7 @@ def main() -> int:
                 "competitors": card_data.get("competitors"),
             },
             "seo": {"title": title, "title_chars": len(title), "meta_desc": meta_desc, "meta_chars": len(meta_desc), "focus_kw": focus_kw},
-            "validation": {**validation, "subtitle_chars": subtitle_chars, "public": public_check},
+            "validation": {**validation, "subtitle_chars": subtitle_chars, "public": public_check, "duplicate_fingerprint": fingerprint_check},
             "taxonomy": {"category_id": category_id, "tag_ids": tag_ids, "tag_names": tag_names},
             "images": {
                 "card_id": card_id,
