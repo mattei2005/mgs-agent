@@ -208,7 +208,7 @@ def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Di
         r"(0%|balance transfer|purchase|money transfer|credit limit|eligibility|online|app|manage|contactless|mastercard|protection|fee|APR|representative|offer)",
         re.I,
     )
-    noise_re = re.compile(r"(cookie|privacy|javascript|terms of use|accessibility|complaint|site map)", re.I)
+    noise_re = re.compile(r"(cookie|privacy|javascript|terms of use|accessibility|complaint|site map|error\s*1007|access denied|cloudflare|while you wait)", re.I)
     benefits: List[str] = []
     seen = set()
     for sent in raw_sentences:
