@@ -451,6 +451,8 @@ Para o fechamento pós-hardening, ver `references/mgs-hardening-release-hygiene.
 
 ### Ajustes de tom/verbosity, layout visual e contexto semântico
 
+Ver `references/atena-profile-prompt-slimming.md` quando o objetivo for reduzir latência/loop de leitura da Atena no Discord: manter `SOUL.md` e `channel_prompts` curtos, remover leitura obrigatória de AGENT.md, evitar scripts longos de rename/mention antes de REC direto, sincronizar via `sync-souls.sh` e reiniciar/validar o gateway.
+
 Ver `references/hermes-profile-style-context-ops.md` para o padrão validado de:
 - adicionar “Modo executivo curto — teste ativo” no SOUL.md sem colar persona crua de curso;
 - criar backup e rollback de SOUL.md;

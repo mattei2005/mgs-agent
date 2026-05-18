@@ -177,6 +177,8 @@ git -C /root/.hermes/hermes-agent log --oneline HEAD..origin/main
 
 Quando Rodolfo perguntar se vale atualizar, fazer primeiro uma análise read-only e só depois recomendar. Ver detalhe em `references/pre-update-review.md`.
 
+Para a release Hermes Agent v0.14.0 / v2026.5.16, ver também `references/hermes-2026-05-16-mgs-relevance.md`: ela resume os pontos úteis para MGS (Discord history backfill, file-mutation verifier, LSP diagnostics, cold-start, browser_console, tool-error sanitization, clarify buttons, handoff, Codex app-server) e o posicionamento executivo de que isso ajuda a plataforma, mas não substitui a limpeza da arquitetura REC.
+
 Checklist mínimo:
 
 ```bash
