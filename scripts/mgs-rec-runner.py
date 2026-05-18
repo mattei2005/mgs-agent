@@ -1097,6 +1097,7 @@ def main() -> int:
             "timings_sec": timings,
             "term_cache": term_stats,
             "cost_usd": costs,
+            "template_contract": template_contract,
             "card_data": {
                 "card_name": card_data.get("card_name"),
                 "annual_fee": card_data.get("annual_fee"),
