@@ -317,6 +317,13 @@ def sentence_join(items: List[str], limit: int = 3) -> str:
     return ", ".join(clean[:limit-1]) + " and " + clean[limit-1]
 
 
+def shorten_words(text: str, max_words: int = 12) -> str:
+    words = str(text or "").split()
+    if len(words) <= max_words:
+        return str(text or "").strip()
+    return " ".join(words[:max_words]).rstrip(" ,;:")
+
+
 def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict[str, Any]) -> Dict[str, Any]:
     """Generate a deterministic REC article without the deprecated local API."""
     name = esc_text(card_data.get("card_name"))
