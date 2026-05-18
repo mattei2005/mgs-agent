@@ -85,7 +85,13 @@ O comando:
 - Reinicia os gateways (Zeus e Atena ficam offline ~1-2 min)
 - Preserva crontab e dados em `/root/mgs-agent/`
 
-**Nota:** o terminal vai aguardar aprovação (Command Approval Required) porque reinicia os gateways. Aprovação automática ao confirmar.
+**Smart approval / guardrail:** mesmo com autorização explícita do Rodolfo, `terminal('hermes update')` pode ser bloqueado pelo guardrail local porque reinicia gateways e mata agentes em execução. Se isso acontecer, não retry em loop e não tentar burlar. Reportar o backup já feito, confirmar que serviços seguem ativos e pedir para o Rodolfo rodar manualmente no shell do VPS:
+
+```bash
+hermes update
+```
+
+Depois que o Rodolfo colar o output do update manual, continuar imediatamente com a validação pós-update completa.
 
 Timeout normal: o comando demora ~60s+ em atualizações grandes — timeout no terminal é esperado, não indica falha. O update continua em background.
 

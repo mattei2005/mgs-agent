@@ -52,7 +52,18 @@ systemctl show zeus-gateway.service atena-gateway.service \
 journalctl -u zeus-gateway.service -u atena-gateway.service \
   --since '10 minutes ago' --no-pager \
   | grep -Ei 'traceback|exception|critical|oom|killed|failed with result|main process exited' || true
+
+# 6. Confirm runtime reload, not just repo/package update
+# If the update was run manually in another shell, current gateway PIDs may predate the update.
+# In that case, the code is updated/tested but the running gateway runtime may still be old.
+date '+%Y-%m-%d %H:%M:%S %Z'
+ps -p "$(systemctl show -p MainPID --value zeus-gateway.service)" \
+      -p "$(systemctl show -p MainPID --value atena-gateway.service)" \
+      -o pid,lstart,cmd --no-headers
+stat -c 'repo_mtime=%y' "$repo/pyproject.toml"
 ```
+
+If gateway PIDs started before the manual update completed, report that the repo/package/tests are validated but request a controlled restart of both gateways before calling the live runtime fully updated.
 
 ## Targeted test suite for Discord/gateway patch safety
 
