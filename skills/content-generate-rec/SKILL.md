@@ -807,6 +807,8 @@ Emit EXACTLY ONE summary message to the user. NEVER send two messages (one annou
 Required fields in the single message:
 - Confirmação de publicação (uma linha)
 - Post ID + WordPress edit link + public URL/permalink
+  - If `status=draft`, label the URL as `permalink futuro` or `URL pública futura`; do not imply it is publicly accessible now. Public unauthenticated checks may return 404 for drafts, which is expected.
+  - If `status=publish`, label it as `URL pública` and verify it returns a public 2xx/3xx response.
 - Yoast scores (SEO + Readability) com emoji 🟢/🟡/🔴 conforme score
 - Word count + title char count + SUB-TITLE char count + meta desc char count
 - Focus keyword
