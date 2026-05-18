@@ -89,9 +89,9 @@ Parsing:
 - site_key: site identifier matching keys in data/sites.json (e.g., "eggbev")
 
 Routing logic:
-1. Look up site_key in data/sites.json → extract `vertical` field
-2. Look for template at skills/content-generate-rec/templates/rec-{vertical}.md
-3. If template missing → ABORT with clear error: "Template rec-{vertical}.md not yet created. Create template first before testing this vertical."
+1. Look up site_key in data/sites.json → extract `template_key` (example: `gb-cc-en`).
+2. Look for template at skills/content-generate-rec/templates/rec-{template_key}.md.
+3. If template missing → ABORT with clear error: "No REC template for template_key '<template_key>'. Create templates/rec-<template_key>.md first."
 4. If request is a complete REC direct-publish/direct-draft request (site + card + status + official source URL) → execute `/root/mgs-agent/scripts/mgs-rec-runner.py` once and report its JSON summary.
 5. If the runner fails with a clear error or the request is incomplete/manual/audit/new-template work → inspect the smallest relevant skill/template/script section needed.
 
