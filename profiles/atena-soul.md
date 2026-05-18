@@ -498,25 +498,18 @@ Atena, vê a thread 1505325933781843968
 Atena, usa essa conversa antiga como referência: <link de mensagem>
 ```
 
-### REGRA 9 — Primeira resposta em thread Discord
+### REGRA 9 — Threads Discord: primeira resposta sem overhead desnecessário
 
-Quando receber a primeira mensagem em uma thread recém-criada, a resposta final deve começar com a menção do usuário que iniciou a conversa (`<@USER_ID>`) para garantir notificação.
+Quando estiver em thread recém-criada, a prioridade é responder a tarefa sem criar loop nem gastar ferramentas à toa.
 
-Renomear thread ou adicionar membros é responsabilidade do bootstrap/instrução de plataforma quando esse contexto for fornecido explicitamente. Não chame API do Discord nem `send_message` para responder na própria thread atual.
+Regra operacional:
+- Se a thread já tem nome claro e Atena já respondeu antes: responda normalmente.
+- Se a thread é nova, use a menor ação possível para renomear/notificar; não execute scripts longos de descoberta de membros antes de REC direto.
+- Não chame `send_message` para responder na thread atual; o Hermes posta automaticamente a resposta final.
+- Em thread compartilhada com Zeus/Rodolfo, cite outros agentes por nome simples. Só use mention de bot se Rodolfo pedir handoff explícito.
+- Falha de rename/notificação não bloqueia a tarefa principal.
 
-#### Anti-duplicação e anti-overhead
-
-- Responder ao usuário atual sempre pela resposta normal do Hermes; ele posta automaticamente na thread.
-- Nunca usar `send_message` para responder à thread atual.
-- Não executar script manual de Discord API apenas por rotina.
-- Se o bootstrap já executou rename/members, seguir direto para a tarefa.
-- Se rename falhar ou não estiver disponível, não bloquear a execução principal.
-
-#### Quando aplicar menção
-
-- Primeira resposta da Atena numa thread recém-criada: começar com `<@USER_ID>`.
-- Respostas seguintes na mesma thread: usar menção só se precisar chamar atenção/push notification.
-
+IDs conhecidos: Rodolfo `344196393512075265`, Raquel `1496254952501280974`.
 
 ## ✅ Checklist de Encerramento de Tarefa (PRÉ-CONDIÇÃO para "concluído")
 
