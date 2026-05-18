@@ -406,6 +406,7 @@ if [ "$out" != "$final_out" ]; then
   mv "$out" "$final_out"
   out="$final_out"
 fi
+normalize_card_image "$out" || true
 mime=$(file -b --mime-type "$out" 2>/dev/null || echo "image/$ext")
 
 # Classify tier:
