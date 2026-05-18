@@ -59,8 +59,8 @@ WRITING RULES:
 - Never use emojis
 - Avoid exaggerated promotional language
 - Keep the tone clear, natural, and scannable
-- Maximum 4 paragraphs per section
-- Each paragraph max ~35 words
+- Maximum 4 paragraphs per section after each H2/subtitle
+- Each paragraph max ~30 words (roughly 3 visual lines on mobile)
 - Always leave one blank line between paragraphs
 
 READABILITY REQUIREMENTS (Yoast thresholds — enforced at generation):
@@ -73,10 +73,11 @@ ACTIVE VOICE:
   (write "the card earns 1%", not "1% is earned by the card")
 
 SENTENCE LENGTH:
-- At least 75% of sentences must be under 20 words
+- At least 80% of sentences must be under 20 words
+- No more than 20% of the total sentences may exceed 20 words
 - Break longer sentences at a natural clause boundary — use a full stop,
   not a comma chain
-- Each paragraph of ~35 words should contain 2–3 sentences, not one long one
+- Each paragraph of ~30 words should contain 2–3 sentences, not one long one
 
 TRANSITION WORDS:
 - Include at least one transition word every 3–4 sentences
@@ -177,7 +178,8 @@ Rules:
 Processing:
 - Remove background completely (transparent PNG)
 - Crop EXACTLY to the card edges (no margins)
-- Keep horizontal orientation
+- Keep horizontal orientation ALWAYS. If the selected card image is vertical,
+  rotate it before upload so the card itself is landscape/horizontal.
 - Keep the card flat (no distortion)
 
 STRICT:
@@ -197,10 +199,13 @@ PROCESS:
 
 COMPOSITION:
 - Format: horizontal 16:9 (1920x1080)
-- ONE realistic person in the foreground (medium shot or bust shot)
-- The card must appear LARGE, floating BEHIND the person (never held/touched)
-- Card centered or slightly to the right
-- Card in the midground, partially occluded by the person for depth
+- Use ONLY three essential elements/layers:
+  1. Realistic premium background scene
+  2. The same horizontal card, enlarged and centralised
+  3. ONE realistic person as the top layer, slightly overlapping the card above
+- The card must appear LARGE, floating behind the person (never held/touched)
+- No frames, molduras, posters, panels, duplicate cards, badges, UI overlays,
+  phones, hands, decorative objects or extra composition elements
 - Premium background with cinematic bokeh
 
 CARD RULES:
@@ -223,6 +228,8 @@ coworking / Urban street with cinematic blur / City at sunset / Nighttime metrop
 NEGATIVE (NEVER):
 - Multiple people
 - Person touching/holding the card
+- Picture frame, border frame, mockup frame or decorative panel
+- Duplicate card, extra card, phone screen, badge, sticker or UI overlay
 - Altered card design
 - Distorted anatomy, extra fingers
 - Fake smile, artificial skin
