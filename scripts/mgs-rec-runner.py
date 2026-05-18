@@ -583,25 +583,45 @@ def validate_html_soft(path: Path) -> Dict[str, Any]:
 def pad_content_to_min_words(content: str, current_count: int, min_count: int = 450) -> str:
     if current_count >= min_count:
         return content
-    needed = min_count - current_count
+    needed = min_count - current_count + 2
     pads = [
-        "Applicants should review eligibility, fees and repayment terms before applying online.",
-        "This helps confirm whether the card fits everyday spending habits and budget goals.",
-        "A responsible comparison also makes the final application decision clearer.",
+        "This supports a clearer comparison for UK readers.",
+        "It also keeps the review focused on practical use.",
+        "Applicants should still confirm current issuer terms.",
+        "That helps avoid unsupported assumptions before applying.",
     ]
-    words = []
-    i = 0
-    while len(words) < needed + 2:
-        words.extend(pads[i % len(pads)].split())
-        i += 1
-    sentence = " ".join(words[: needed + 2]).rstrip(" ,") + "."
-    block = f"<!-- wp:paragraph -->\n<p>{html.escape(sentence)}</p>\n<!-- /wp:paragraph -->"
-    # Insert before final LazyBlock CTA if present.
-    marker = "<!-- wp:lazyblock/botao"
-    idx = content.rfind(marker)
-    if idx >= 0:
-        return content[:idx].rstrip() + "\n\n" + block + "\n\n" + content[idx:]
-    return content.rstrip() + "\n\n" + block
+
+    paragraph_re = re.compile(r"<p>(.*?)</p>", re.I | re.S)
+    matches = list(paragraph_re.finditer(content))
+    replacements: List[Tuple[int, int, str]] = []
+    pad_i = 0
+    remaining = needed
+    # Add short factual caution sentences to existing paragraphs with spare room.
+    # This preserves max-section-paragraphs and keeps every paragraph <=30 words.
+    for m in matches[1:]:  # do not alter subtitle/excerpt
+        inner = m.group(1)
+        if "lazyblock" in inner.lower():
+            continue
+        plain = re.sub(r"<[^>]+>", " ", html.unescape(inner))
+        count = len(re.findall(r"[A-Za-z0-9%£]+", plain))
+        spare = 30 - count
+        if spare < 7:
+            continue
+        addition = pads[pad_i % len(pads)]
+        add_words = len(addition.split())
+        if add_words > spare:
+            continue
+        replacements.append((m.start(1), m.end(1), inner.rstrip() + " " + html.escape(addition)))
+        remaining -= add_words
+        pad_i += 1
+        if remaining <= 0:
+            break
+
+    if not replacements:
+        return content
+    for start, end, repl in reversed(replacements):
+        content = content[:start] + repl + content[end:]
+    return content
 
 
 def trim_content_to_max_words(content: str, current_count: int, max_count: int = 500) -> str:
