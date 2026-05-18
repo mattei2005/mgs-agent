@@ -158,6 +158,13 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > to keep using `mgs-rec-runner.py` with explicit official facts and bounded image
 > fallback inputs, not to drift into the full manual step-by-step REC pipeline.
 >
+> **REFERENCE - Zable cache-miss audit:** For the 2026-05-18 case where a valid
+> Zable draft was produced but the workflow drifted into manual recovery after
+> cache MISS + disabled extraction + validator failure, see
+> `references/rec-cache-miss-runner-fallback-zable-2026-05-18.md`. Use it when
+> distinguishing article quality from unresolved cache-miss runner/pipeline
+> quality.
+>
 > **REFERENCE - artifact audit/cleanup:** For the required post-run media manifest,
 > safe auto-delete gates for extra WordPress media, and final-summary UX rule, see
 > `references/rec-artifact-audit-cleanup.md`. Load it when changing runner media
