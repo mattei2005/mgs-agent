@@ -4,8 +4,8 @@
 > Gerado automaticamente a partir de `data/pendencias.db.json`.  
 > Para adicionar/resolver: use scripts em `scripts/pendencia-*.sh`
 
-**Última atualização:** 2026-05-15T17:17:07-04:00  
-**Total abertas:** 50  
+**Última atualização:** 2026-05-17T12:39:18-04:00  
+**Total abertas:** 51  
 **Total resolvidas:** 37
 
 ---
@@ -15,12 +15,12 @@
 | Prioridade | Quantidade |
 |---|---|
 | 🔴 alta | 0 |
-| 🟡 media | 16 |
+| 🟡 media | 17 |
 | 🟢 baixa | 34 |
 
 **Por categoria:**
 
-- `agente`: 9
+- `agente`: 10
 - `infra`: 9
 - `monitor`: 7
 - `conteudo`: 6
@@ -33,7 +33,7 @@
 
 ---
 
-## 🟡 MÉDIA (16 itens)
+## 🟡 MÉDIA (17 itens)
 
 | ID | Título | Categoria | Tempo | Bloqueio |
 |---|---|---|---|---|
@@ -53,6 +53,7 @@
 | `PEND-027` | Agente Ares (FB Ads + Google Ads + ChatPion) | `agente` | 40h+ | Após Atena 100% estável em produção |
 | `PEND-028` | Adicionar gestores em authorized-users.json | `agente` | 30min | Quando Ares existir |
 | `PEND-067` | Auto-discover Discord channel_prompts - validar fix em REC real | `agente` | 5min após próximo REC | — |
+| `PEND-088` | Avaliar Hermes video_gen + Grok/X Search para futuro agente Ares | `agente` | 1h validação + decisão de custo | Quando criar/configurar Ares ou agente de campa... |
 
 ## 🟢 BAIXA (34 itens)
 
