@@ -245,6 +245,7 @@ PY
     if download_and_validate_candidate "$cand_url" "$cand_ext" "$cand_tmp" "brave"; then
       final_out="/tmp/card-$slug.$cand_ext"
       mv "$cand_tmp" "$final_out"
+      normalize_card_image "$final_out" || true
       mime=$(file -b --mime-type "$final_out" 2>/dev/null || echo "image/$cand_ext")
       echo "[$(date -Iseconds)] search-card-image BRAVE_OK path=$final_out src=$cand_url" >>"$LOG"
       jq -n --arg p "$final_out" --arg m "$mime" --arg s "$cand_url" \
