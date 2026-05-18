@@ -73,7 +73,9 @@ When reviewing a slow REC:
 5. Identify whether the path was cache_hit, request_facts_used, or reference extraction/browser fallback.
 6. Check if image handling caused extra uploads/regenerations.
 7. Check WordPress/Yoast overhead separately from article generation.
-8. Report a table with bottleneck, evidence, and next optimization.
+8. For benchmark threads, require final evidence fields: `duration_sec`, `timings_sec`, `term_cache`, `steps`, and `warnings`. If Atena creates the post but omits these fields, classify as “post delivery OK; fast-path benchmark not proven.”
+9. For draft posts, public URL 404 is expected. Verify via WP REST/edit context and media URLs instead, and call the link a future permalink.
+10. Report a table with bottleneck, evidence, and next optimization.
 
 ## Optimization backlog
 
