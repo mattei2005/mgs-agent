@@ -32,6 +32,19 @@ For complete REC direct requests, do not pre-read:
 
 Run the runner first. Inspect only the smallest relevant file or section if the runner fails or the user explicitly asks for a technical audit.
 
+## Role of vertical prompts such as `gb-cc-en`
+
+The vertical prompt is an editorial quality source, not a routine execution dependency.
+
+Load or inspect it only when:
+
+- the runner fails validation;
+- the user asks for editorial/prompt audit;
+- a new vertical/template is being created;
+- quality rules need to be changed.
+
+Do not load it before a normal direct REC publish/draft just because the request mentions the vertical.
+
 ## Reporting
 
 Return one concise summary from the runner JSON:

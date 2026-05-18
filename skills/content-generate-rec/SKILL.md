@@ -15,7 +15,9 @@ executing the full workflow manually through many tool-calling turns.
 
 Short reference for the normal path: `references/rec-direct-runner-fastpath.md`.
 Use that reference instead of reading this full SKILL.md when the request is a
-complete REC direct draft/publish request.
+complete REC direct draft/publish request. Vertical prompts such as `gb-cc-en`
+are editorial quality sources, not routine preflight dependencies; load them
+only for validation failures, prompt/editorial audits, or template changes.
 
 Default command shape:
 
