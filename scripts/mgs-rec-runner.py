@@ -723,6 +723,7 @@ def main() -> int:
         card_url = card_data.get("card_image_uploaded_url")
         card_local = None
         card_src = None
+        card_normalize: Dict[str, Any] = {}
 
         # Generate and mechanically validate content BEFORE any new WP media upload.
         # This prevents orphan card/featured media when the article later fails word-count/SEO validation.
@@ -806,6 +807,8 @@ def main() -> int:
                         raise RunnerError(f"Card image search failed: {json.dumps(img, ensure_ascii=False)[:1000]}")
                     card_local = img["path"]
                     card_src = img.get("source")
+                card_normalize = normalize_card_artwork(card_local)
+                steps.append("card_image_normalized")
                 tick("card_image_discovery_sec", t0)
                 ext = Path(card_local).suffix or ".png"
                 t0 = time.time()
