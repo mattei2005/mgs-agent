@@ -830,6 +830,7 @@ def main() -> int:
                 card_local = f"/tmp/card-{card_slug}-from-wp{suffix}"
                 t0 = time.time()
                 urllib.request.urlretrieve(card_url, card_local)
+                card_normalize = normalize_card_artwork(card_local)
                 tick("card_image_download_sec", t0)
             t0 = time.time()
             feat = run_json([str(GEN_SCRIPTS / "generate-featured-image.sh"), card_slug, card_local], timeout=180)
@@ -1027,6 +1028,7 @@ def main() -> int:
                 "featured_url": featured_url,
                 "featured_scene": featured_scene,
                 "featured_path": featured_path,
+                "card_normalize": card_normalize,
                 "created_media": created_media,
                 "artifact_audit": artifact_audit,
             },
