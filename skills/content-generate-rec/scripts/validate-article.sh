@@ -63,7 +63,7 @@ subtitle_len=${#subtitle}
 SUBTITLE_MAX=100
 
 # Editorial readability/style checks from Atena documentation:
-# - Paragraphs should average <=30 words (roughly max 3 visual lines)
+# - Every paragraph should stay <=30 words (roughly max 3 visual lines)
 # - Each section under one H2 should have max 4 paragraphs
 # - No more than 20% of sentences may exceed 20 words
 style_json=$(python3 - "$HTML_FILE" <<'PYEOF3'
@@ -111,7 +111,7 @@ sent_counts = [wc(s) for s in sentences]
 long_sentences = [n for n in sent_counts if n > 20]
 long_ratio = round((len(long_sentences) / len(sent_counts)) if sent_counts else 0, 4)
 
-ok = avg_para <= 30 and max_para <= 35 and max_section_paragraphs <= 4 and long_ratio <= 0.20
+ok = avg_para <= 30 and max_para <= 30 and max_section_paragraphs <= 4 and long_ratio <= 0.20
 print(json.dumps({
     "avg_paragraph_words": avg_para,
     "max_paragraph_words": max_para,
