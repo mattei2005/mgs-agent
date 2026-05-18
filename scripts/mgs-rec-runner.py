@@ -815,6 +815,8 @@ def main() -> int:
         # This prevents orphan card/featured media when the article later fails word-count/SEO validation.
         api_payload = {
             "site": args.site,
+            "template_key": template_contract["template_key"],
+            "template_contract": template_contract,
             "card_slug": card_slug,
             "card_name": card_data["card_name"],
             "card_official_url": card_data.get("card_official_url") or args.source_url,
