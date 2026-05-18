@@ -29,6 +29,11 @@ Default command shape:
   --source-url "<official URL>"
 ```
 
+Argument mapping pitfall:
+- User-facing `vertical gb-cc-en` is editorial/context only for routine runner calls; do **not** pass `--vertical` to `mgs-rec-runner.py` unless the script later adds that flag.
+- User-facing `URL oficial:` maps to `--source-url`, not `--official-url`.
+- If the runner exits immediately with `unrecognized arguments`, correct the CLI flags once and rerun with the supported shape above; do not switch into broad manual workflow unless the supported runner path fails for a substantive pipeline reason.
+
 Operational rule (hard gate):
 - If the user provides site, REC type, exact card name, status, and official URL,
   call `mgs-rec-runner.py` directly and return the JSON summary.
@@ -801,7 +806,7 @@ Emit EXACTLY ONE summary message to the user. NEVER send two messages (one annou
 
 Required fields in the single message:
 - Confirmação de publicação (uma linha)
-- Post ID + WordPress edit link + public URL
+- Post ID + WordPress edit link + public URL/permalink
 - Yoast scores (SEO + Readability) com emoji 🟢/🟡/🔴 conforme score
 - Word count + title char count + SUB-TITLE char count + meta desc char count
 - Focus keyword
