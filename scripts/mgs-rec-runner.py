@@ -86,6 +86,27 @@ def load_site(site_key: str) -> Dict[str, Any]:
     return site
 
 
+def load_rec_template_contract(site: Dict[str, Any]) -> Dict[str, Any]:
+    """Validate that the site's REC template exists without loading it into Atena's context."""
+    template_key = site.get("template_key")
+    if not template_key:
+        raise RunnerError("Site is missing template_key in sites.json")
+    template_path = REC_TEMPLATES / f"rec-{template_key}.md"
+    if not template_path.exists():
+        raise RunnerError(f"No REC template for template_key '{template_key}'. Create templates/rec-{template_key}.md first.")
+    text = template_path.read_text(errors="ignore")
+    return {
+        "template_key": template_key,
+        "path": str(template_path),
+        "bytes": template_path.stat().st_size,
+        "contract_loaded": True,
+        "has_word_count_gate": "450" in text and "500" in text,
+        "has_paragraph_gate": "30 words" in text or "~30 words" in text,
+        "has_horizontal_card_gate": "horizontal" in text.lower() and "rotate" in text.lower(),
+        "has_featured_three_layer_gate": "three essential" in text.lower() or "three" in text.lower() and "layers" in text.lower(),
+    }
+
+
 def cache_lookup(card_slug: str) -> Optional[Dict[str, Any]]:
     if not CACHE_DB.exists():
         return None
@@ -716,6 +737,7 @@ def main() -> int:
     try:
         t0 = time.time()
         site = load_site(args.site)
+        template_contract = load_rec_template_contract(site)
         card_slug = slugify(args.card)
         country = site.get("country", "gb")
         vertical = (site.get("verticals") or ["cc"])[0]
