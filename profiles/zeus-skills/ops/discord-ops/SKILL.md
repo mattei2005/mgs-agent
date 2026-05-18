@@ -293,6 +293,10 @@ Resumo operacional:
 - Não desligar aprovações globalmente (`mode: off`) sem autorização explícita; isso remove uma camada de segurança.
 - Após patch em runtime Hermes, `py_compile` e restart controlado do gateway afetado são obrigatórios antes de declarar mitigação ativa.
 
+### Gateway routing/restart incident reference
+
+Quando corrigir roteamento entre Zeus/Atena, evitar duplicação de thread ou reiniciar gateway durante conversa ativa, ver `references/discord-gateway-routing-and-restart-incident-2026-05-18.md`.
+
 ### Busy input no Discord: `/queue` vs `/steer`
 
 Quando Rodolfo mandar uma segunda pergunta enquanto Zeus/Atena ainda está processando a primeira:
@@ -359,6 +363,9 @@ Issue upstream: https://github.com/NousResearch/hermes-agent/issues/14905
 
 ### Pitfalls (restart)
 
+- **Não combinar patch + restart + cron/LLM check no mesmo fluxo ativo sem necessidade.** Incidente 2026-05-18: restart de `zeus-gateway` durante uma conversa grande gerou `SIGTERM`, drain de ~106s, mensagens de “Gateway shutting down”, e um cron de pós-check concorreu com o turno seguinte. Para patch urgente de gateway: aplicar mudança mínima, validar sintaxe, fazer `systemctl restart <service>`, checar `systemctl show/is-active` diretamente após voltar, e evitar criar cron LLM entregue na origem como healthcheck; se precisar watchdog, usar script-only/no-agent silencioso.
+- **Restart sob systemd pode ficar `deactivating/stop-sigterm` enquanto drena turno ativo.** Não declarar travamento imediatamente; verificar logs por `Shutdown phase: drain done` e novo `Connected as ...`. Se o usuário está aguardando ação operacional, manter resposta curta e não abrir novos loops de diagnóstico.
+- **Roteamento Zeus/Atena:** se Zeus precisa ler o canal da Atena mas não responder a pedidos editoriais, manter `allowed_channels` incluindo Atena apenas com `require_mention=true`, `thread_require_mention=true` e `free_response_channels` restrito ao canal Zeus. Validar com logs que pedido normal no canal Atena não vira thread duplicada do Zeus.
 - **Não usar `nohup/disown/&`** em terminal foreground — usar `terminal(background=true)`
 - **Sessão zumbi é silenciosa** — Discord mostra online mas sem eventos; detectável só pelo log
 - **`pkill` pelo padrão exato** — `pkill -f "hermes -p atena gateway run"` para não matar outros perfis
