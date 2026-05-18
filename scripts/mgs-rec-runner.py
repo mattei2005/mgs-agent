@@ -899,8 +899,8 @@ def main() -> int:
                 card_data = extract_card_data_with_llm(args.card, args.source_url, text)
                 tick("reference_extract_llm_sec", t0)
                 card_data["card_official_url"] = args.source_url
-                steps.append("reference_extracted_llm")
-                costs["extract_llm_est"] = 0.02
+                steps.append("reference_extracted_deterministic")
+                costs["extract_llm_est"] = 0.0
 
         card_data["card_name"] = card_data.get("card_name") or args.card
         card_id = card_data.get("card_image_uploaded_id")
