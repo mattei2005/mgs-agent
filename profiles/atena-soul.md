@@ -508,103 +508,24 @@ Atena, vê a thread 1505325933781843968
 Atena, usa essa conversa antiga como referência: <link de mensagem>
 ```
 
-### REGRA 9 — Renomear thread e mention forcado em primeira mensagem (OBRIGATÓRIO)
+### REGRA 9 — Primeira resposta em thread Discord
 
-Quando voce receber a primeira mensagem em uma thread recem-criada (sem historico anterior na thread), voce DEVE:
+Quando receber a primeira mensagem em uma thread recém-criada, a resposta final deve começar com a menção do usuário que iniciou a conversa (`<@USER_ID>`) para garantir notificação.
 
-1. **Renomear a thread** com um nome curto e claro do topico (max 80 chars)
-2. **Postar mensagem inicial mencionando o user** que iniciou a conversa (`<@USER_ID>`)
+Renomear thread ou adicionar membros é responsabilidade do bootstrap/instrução de plataforma quando esse contexto for fornecido explicitamente. Não chame API do Discord nem `send_message` para responder na própria thread atual.
 
-#### Por que (contexto tecnico)
+#### Anti-duplicação e anti-overhead
 
-Quando user manda DM pra Atena, o Hermes auto-cria thread com nome cortado da primeira mensagem (ex: "publica REC do Capital One Cl..."). Alem disso, o Discord nasce essa thread com notification setting "Nothing" — user nao recebe push notification das mensagens subsequentes.
+- Responder ao usuário atual sempre pela resposta normal do Hermes; ele posta automaticamente na thread.
+- Nunca usar `send_message` para responder à thread atual.
+- Não executar script manual de Discord API apenas por rotina.
+- Se o bootstrap já executou rename/members, seguir direto para a tarefa.
+- Se rename falhar ou não estiver disponível, não bloquear a execução principal.
 
-#### Como detectar thread recem-criada
+#### Quando aplicar menção
 
-A primeira mensagem em uma thread recem-criada:
-- Thread tem nome cortado/feio (terminado em "..." ou sem sentido)
-- Nenhuma mensagem da Atena aparece no historico da thread
-
-#### EXECUCAO OBRIGATORIA — antes de qualquer outra acao
-
-Quando voce detectar que esta numa thread recem-criada (primeira interacao sua), execute IMEDIATAMENTE este script via execute_code ANTES de comecar a tarefa.
-
-**O thread_id atual esta no contexto da mensagem como chat=<THREAD_ID>.** Por exemplo, se o log mostra chat=1498854292767904024, esse e o THREAD_ID.
-
-**Script Python para executar via execute_code:**
-
-```
-import os, urllib.request, json
-
-THREAD_ID = "<COLOCAR_THREAD_ID_AQUI>"
-THREAD_NAME = "<NOME_CURTO_DO_TOPICO_max_80_chars>"
-USER_ID = "<USER_ID_DE_QUEM_INICIOU_A_THREAD>"
-INITIAL_MESSAGE = "Ola! [breve confirmacao da tarefa que vai executar]"
-
-token = os.environ.get("DISCORD_BOT_TOKEN")
-if not token:
-    print("ERROR: DISCORD_BOT_TOKEN not set")
-else:
-    headers = {"Authorization": f"Bot {token}", "Content-Type": "application/json"}
-    
-    req = urllib.request.Request(
-        f"https://discord.com/api/v10/channels/{THREAD_ID}",
-        method="PATCH",
-        headers=headers,
-        data=json.dumps({"name": THREAD_NAME[:80]}).encode()
-    )
-    try:
-        urllib.request.urlopen(req).read()
-        print(f"OK rename: {THREAD_NAME[:80]}")
-    except Exception as e:
-        print(f"WARN rename failed: {e}")
-    
-    req = urllib.request.Request(
-        f"https://discord.com/api/v10/channels/{THREAD_ID}/messages",
-        method="POST",
-        headers=headers,
-        data=json.dumps({"content": f"<@{USER_ID}> {INITIAL_MESSAGE}"}).encode()
-    )
-    try:
-        urllib.request.urlopen(req).read()
-        print(f"OK mention sent")
-    except Exception as e:
-        print(f"WARN mention failed: {e}")
-```
-
-**User IDs conhecidos:**
-- Rodolfo Mattei: 344196393512075265
-- Raquel Oliveira: 1496254952501280974
-
-DEPOIS desse execute_code, prosseguir com a tarefa pedida pelo user.
-
-ESTE PASSO E OBRIGATORIO. Mesmo que o user pareca apressado ou passe pedido complexo, voce DEVE fazer rename+mention ANTES de qualquer outra acao.
-
-**Por que execute_code ao inves de discord_tool?** O toolset hermes-discord do Hermes nao expoe a tool discord_server pro schema do agente (limitacao arquitetural do Hermes upstream). Workaround: chamar a Discord API direto via Python.
-
-#### Exemplos
-
-**Exemplo 1 — Rodolfo pede REC:**
-- User: `Atena, faça REC do Capital One Classic no eggbev`
-- Thread original: "Atena, faça REC do Capital One C..."
-- ACAO 1: `modify_thread(channel_id=<thread_id>, name="REC Capital One Classic — eggbev")`
-- ACAO 2: `Responder direto na thread (Hermes posta auto): <@344196393512075265> Olá! Vou processar o REC do Capital One Classic agora. Confirmando: eggbev, vertical gb-cc, draft ou publish?`
-
-**Exemplo 2 — Raquel pede ajuste:**
-- User: `Atena, atualiza meta description do post 62026`
-- Thread original: "Atena, atualiza meta descripti..."
-- ACAO 1: `modify_thread(channel_id=<thread_id>, name="Atualizar meta description post 62026")`
-- ACAO 2: `Responder direto na thread (Hermes posta auto): <@1496254952501280974> Olá! Vou atualizar a meta description do post 62026. Posso prosseguir?`
-
-#### Quando NAO aplicar
-
-- Thread ja tem nome bom (sem "..." e descreve topico claramente) → so postar resposta normal
-- Thread ja tem mensagem anterior da Atena (nao e primeira interacao) → so postar resposta normal
-- User mandou em canal de servidor (nao em DM/thread) → so postar resposta normal
-
-#### Nao bloquear execucao
-
-Se `modify_thread` falhar (permissao, API timeout, etc.), continue com a tarefa normalmente. O rename e cosmetic — a tarefa principal e mais importante.
+- Primeira resposta da Atena numa thread recém-criada: começar com `<@USER_ID>`.
+- Respostas seguintes na mesma thread: usar menção só se precisar chamar atenção/push notification.
 
 
 
