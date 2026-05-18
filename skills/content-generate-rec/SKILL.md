@@ -182,6 +182,14 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > HTML, media records, cost files, and how to avoid falsely claiming Brave Images
 > was used when the runner shows `card_image_manual_url_used`.
 >
+> **REFERENCE - REC benchmark audit example:** When Rodolfo asks whether a new
+> REC proved the fast high-production workflow, see
+> `references/rec-benchmark-audit-zable-2026-05-18.md`. It captures the Zable
+> draft lesson: post delivery can be OK while the benchmark is only partial if
+> Atena recovered manually after runner/cache-miss failures, omitted
+> `duration_sec`/`timings_sec`/`term_cache`, or the featured image passed only
+> the technical 16:9 gate but failed editorial realism.
+>
 > **REFERENCE - multi-site REC scaling:** For publishing the same card across
 > multiple MGS sites without duplicate-content problems, see
 > `references/multisite-rec-scaling.md`. Use shared official facts/cache, but
