@@ -163,9 +163,26 @@ query = f'{card_name} credit card image'
 official_host = (urllib.parse.urlparse(official_url).hostname or '').lower()
 brand = re.sub(r'[^a-z0-9]+', ' ', card_name.lower()).split()[0] if card_name else ''
 terms = [t for t in re.sub(r'[^a-z0-9]+', ' ', card_name.lower()).split() if t not in {'card', 'credit'}]
+exact_phrase = re.sub(r'[^a-z0-9]+', ' ', card_name.lower()).strip()
+priority_hosts = {
+    'finder.com': 35,
+    'finder.com/uk': 35,
+    'nerdwallet.com': 25,
+    'moneysavingexpert.com': 25,
+    'headforpoints.com': 25,
+    'backtodefault.com': 25,
+    'which.co.uk': 20,
+}
+hard_noise_hosts = ('play.google.com', 'youtube.com', 'youtu.be', 'facebook.com', 'ytimg.com')
+noise_re = re.compile(
+    r'(app|mobile|phone|screenshot|screen|google\s*play|play\s*store|youtube|ytimg|facebook|'
+    r'hand|hands|person|people|woman|man|avatar|trustpilot|alien|loan|balance\s*transfer|'
+    r'virtual\s*card|apple\s*pay|google\s*pay|what-is-cc-balance|card-hand|hero|banner|background|illustration|landing)'
+)
+clean_card_re = re.compile(r'(credit\s*card\s*review|card\s*review|mastercard|contactless|front|card[-_ ].*\.(png|jpg|jpeg|webp))')
 url = 'https://api.search.brave.com/res/v1/images/search?' + urllib.parse.urlencode({
     'q': query,
-    'count': 10,
+    'count': 20,
     'country': 'GB',
     'search_lang': 'en',
     'safesearch': 'strict',
@@ -196,14 +213,26 @@ for pos, item in enumerate(data.get('results', []), 1):
     hay = f'{title} {page} {src}'.lower()
     score = 100 - pos  # keep Brave order as tie-breaker
     if official_host and (official_host in src_host or official_host in page_host):
-        score += 60
+        score += 25
     elif brand and (src_host.startswith(brand) or page_host.startswith(brand) or f'.{brand}' in src_host or f'.{brand}' in page_host):
-        score += 35
+        score += 20
+    for host, boost in priority_hosts.items():
+        if host in page_host or host in src_host or host in hay:
+            score += boost
+            break
     score += sum(6 for t in terms if t in hay)
+    if exact_phrase and exact_phrase in hay:
+        score += 20
+    if clean_card_re.search(hay):
+        score += 18
     if 'business' in hay and 'business' not in card_name.lower():
         score -= 25
-    if re.search(r'(logo|icon|sprite|favicon|hero|banner|background)', hay):
-        score -= 20
+    if any(h in page_host or h in src_host for h in hard_noise_hosts):
+        score -= 60
+    if noise_re.search(hay):
+        score -= 35
+    if re.search(r'(logo|icon|sprite|favicon)', hay):
+        score -= 25
     if re.search(r'(walletwisdoms|memivi)', hay):
         score -= 10
     out.append({'src': src, 'page': page, 'title': title, 'score': score})
