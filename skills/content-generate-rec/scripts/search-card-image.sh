@@ -273,6 +273,8 @@ run_bing_fallback() {
       bing_path=$(echo "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('path',''))"   2>/dev/null || echo "")
       bing_mime=$(echo "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('mime',''))"   2>/dev/null || echo "")
       bing_src=$(echo  "$bing_result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('source',''))" 2>/dev/null || echo "")
+      [ -n "$bing_path" ] && normalize_card_image "$bing_path" || true
+      [ -n "$bing_path" ] && bing_mime=$(file -b --mime-type "$bing_path" 2>/dev/null || echo "$bing_mime")
       echo "[$(date -Iseconds)] search-card-image BING_OK path=$bing_path src=$bing_src" >>"$LOG"
       jq -n --arg p "$bing_path" --arg m "$bing_mime" --arg s "$bing_src" \
         '{path:$p, mime:$m, tier:4, source:$s, status:"OK"}'
