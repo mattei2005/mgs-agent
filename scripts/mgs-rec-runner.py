@@ -549,11 +549,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Readers should compare the official details with their own credit profile. A soft eligibility check can reduce guesswork.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Reading the official terms before applying can help confirm fees, rates and repayment conditions.</p>
+<p>Readers should compare the official details with their own credit profile and read the official terms before applying.</p>
 <!-- /wp:paragraph -->"""
     return {
         "success": True,
