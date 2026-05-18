@@ -492,6 +492,13 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
 > issuer for Capital One/Barclaycard/HSBC, ou ao processar imagem com problemas
 > conhecidos (rotation, crop, MIME type).
 >
+> **REFERENCE - card image quality ranking:** Quando Raquel/Rodolfo revisar uma
+> imagem como “aceitável, mas não recomendada”, ou quando a busca escolher arte
+> promocional em vez de card limpo, ver
+> `references/card-image-quality-ranking.md`. Ela define a preferência por
+> card-only/product-shot, penalidades para app/celular/pessoa/ícones e o fluxo
+> `--card-image-url` para usar uma imagem direta fornecida pelo time.
+>
 - Upload via `content-publish-wordpress/scripts/upload-image.sh` →
   `{id, source_url, mime_type}` — this is the **card_media**.
 

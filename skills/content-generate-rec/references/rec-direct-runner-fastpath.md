@@ -9,6 +9,10 @@ Use this reference when the user asks for a normal REC direct draft/publish and 
 - Post status: `draft` or `publish`
 - Official source URL
 
+Optional, but preferred when the team already found the best card asset:
+
+- Direct card image URL ending in `.png`, `.jpg`, `.jpeg`, or `.webp`
+
 ## Command
 
 ```bash
