@@ -220,11 +220,20 @@ for pos, item in enumerate(data.get('results', []), 1):
         if host in page_host or host in src_host or host in hay:
             score += boost
             break
-    score += sum(6 for t in terms if t in hay)
+    term_hits = sum(1 for t in terms if t in hay)
+    score += term_hits * 8
     if exact_phrase and exact_phrase in hay:
-        score += 20
+        score += 28
     if clean_card_re.search(hay):
-        score += 18
+        score += 24
+    if re.search(r'(mastercard|contactless|chip|front|card-front)', hay):
+        score += 12
+    # A clean isolated card image is preferable to a technically valid promotional banner.
+    # Review/comparison pages often host the isolated card artwork when issuers don't expose it.
+    if re.search(r'(review|reviews)', hay) and brand and brand in hay:
+        score += 12
+    if re.search(r'(illustration|hero|banner|background|what-is-cc-balance|card-hand|hand|hands|phone|app|screenshot)', hay):
+        score -= 18
     if 'business' in hay and 'business' not in card_name.lower():
         score -= 25
     if any(h in page_host or h in src_host for h in hard_noise_hosts):
@@ -256,7 +265,9 @@ except Exception:
 for r in data.get('results', []):
     src = r.get('src') or ''
     if src.startswith('http'):
-        print(src)
+        title = (r.get('title') or '').replace('\t', ' ')[:180]
+        page = (r.get('page') or '').replace('\t', ' ')[:220]
+        print(f"{int(r.get('score', 0))}\t{src}\t{title}\t{page}")
 PY
 )
   if [ -z "$brave_urls" ]; then
@@ -264,21 +275,23 @@ PY
     return 1
   fi
 
-  while IFS= read -r cand_url; do
+  while IFS=$'\t' read -r cand_score cand_url cand_title cand_page; do
     [ -z "$cand_url" ] && continue
     cand_ext="${cand_url##*.}"; cand_ext="${cand_ext%%\?*}"
     cand_ext=$(echo "$cand_ext" | tr '[:upper:]' '[:lower:]')
     case "$cand_ext" in png|jpg|jpeg|webp) ;; *) cand_ext="jpg" ;; esac
     cand_tmp="/tmp/card-candidate-brave-$slug-$$-$RANDOM.$cand_ext"
     TEMP_FILES+=("$cand_tmp")
+    echo "[$(date -Iseconds)] search-card-image BRAVE_TRY score=${cand_score:-0} title=${cand_title:-} page=${cand_page:-} src=$cand_url" >>"$LOG"
     if download_and_validate_candidate "$cand_url" "$cand_ext" "$cand_tmp" "brave"; then
       final_out="/tmp/card-$slug.$cand_ext"
       mv "$cand_tmp" "$final_out"
       normalize_card_image "$final_out" || true
       mime=$(file -b --mime-type "$final_out" 2>/dev/null || echo "image/$cand_ext")
-      echo "[$(date -Iseconds)] search-card-image BRAVE_OK path=$final_out src=$cand_url" >>"$LOG"
+      echo "[$(date -Iseconds)] search-card-image BRAVE_OK path=$final_out score=${cand_score:-0} src=$cand_url" >>"$LOG"
       jq -n --arg p "$final_out" --arg m "$mime" --arg s "$cand_url" \
-        '{path:$p, mime:$m, tier:4, source:$s, status:"OK", provider:"brave_images"}'
+        --argjson sc "${cand_score:-0}" --arg title "${cand_title:-}" --arg page "${cand_page:-}" \
+        '{path:$p, mime:$m, tier:4, source:$s, status:"OK", provider:"brave_images", selection:{mode:"auto_ranked_card_image", score:$sc, title:$title, page:$page}}'
       exit 0
     fi
   done <<<"$brave_urls"
