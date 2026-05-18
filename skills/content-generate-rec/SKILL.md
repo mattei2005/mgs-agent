@@ -123,6 +123,12 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > enforce it so Atena does not reread full prompts/templates during normal REC
 > production.
 >
+> **REFERENCE - REC prompt over-reading audit:** When Rodolfo/Zeus asks whether
+> Atena's prompt/files are causing reading loops or slow REC starts, see
+> `references/rec-agent-prompt-overreading-audit.md`. It captures the durable
+> lesson that the common failure is over-reading (large skills, AGENT.md, legacy
+> manual REC flow, broad searches), not necessarily a single infinite loop.
+>
 > **REFERENCE - fast runner cache-miss fallbacks:** If the requested deterministic
 > runner path fails because legacy Anthropic extraction is disabled, the local
 > article API is unavailable, or `search-card-image.sh` returns an empty failure,
