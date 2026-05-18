@@ -19,6 +19,19 @@ python3 /root/mgs-agent/scripts/mgs-rec-runner.py \
   --source-url "<official URL>"
 ```
 
+If Rodolfo/Raquel provide a direct clean card image URL, pass it explicitly. The
+runner will use the same normalized card image both for the LazyBlock card image
+and as the reference input for the featured image composition:
+
+```bash
+python3 /root/mgs-agent/scripts/mgs-rec-runner.py \
+  --site <site_key> \
+  --card "<exact card name>" \
+  --status <draft|publish> \
+  --source-url "<official URL>" \
+  --card-image-url "<direct image URL>"
+```
+
 ## Anti-over-reading rule
 
 For complete REC direct requests, do not pre-read:

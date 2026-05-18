@@ -410,6 +410,13 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   2. A PNG from the official bank page (even with background)
   3. A JPG from the official bank page
   4. Only then, a web-search result from an authoritative source
+- Within web-search fallbacks, prefer **clean card-only/product-shot images** over
+  generic promotional illustrations. The best LazyBlock card image is a large,
+  isolated horizontal card with visible issuer/brand, chip/contactless and
+  network mark. Re-rank down app screenshots, phones, people/hands, YouTube or
+  Google Play thumbnails, balance-transfer/loan promos, decorative icons and
+  busy backgrounds. Promotional art is acceptable only as a fallback when no
+  clean card-only image is available.
 - The script logs which priority tier was used. If tier 3 or 4, the log
   notes it so Raquel knows to expect manual review.
 - The image is saved to `/tmp/card-<slug>.<ext>`.
