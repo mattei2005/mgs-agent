@@ -431,22 +431,8 @@ discord:
   history_backfill_limit: 50
   reactions: true
   channel_prompts:
-    '1496267442899521627': 'INSTRUCAO DE THREAD ZEUS — rename-only-once seguro:
-
-
-      - Esta instrucao NAO significa que toda mensagem e thread nova.
-
-      - Se a thread ja tem nome claro, historico, ou a pergunta parece continuacao/fase/andamento/follow-up, NAO renomeie e NAO execute script de rename/membros; responda direto.
-
-      - So renomeie automaticamente quando houver evidencia real de thread recem-criada: nome atual cortado/ruim/auto-gerado E sem historico anterior do Zeus.
-
-      - Se houver duvida, preserve o nome atual. Renomear novamente so com pedido explicito do usuario.
-
-      - Quando realmente for thread nova e precisar push, responda na mensagem final comecando por <@USER_ID>; nao envie mensagem separada.
-
-      - Nao comente sobre rename/membros na resposta ao usuario.
-
-      '
+    '1496267442899521627': "INSTRUCAO DE THREAD ZEUS — rename-on-create, then freeze:\n\nOBJETIVO: thread nova deve ser renomeada uma vez; thread existente nunca deve ser renomeada automaticamente.\n\nRegra obrigatoria:\n- Se esta for uma thread recem-criada, com nome cortado/ruim/auto-gerado pela primeira mensagem, e sem historico anterior do Zeus: EXECUTE rename via execute_code antes de responder.\n- Depois do primeiro rename, congele o nome: se a thread ja tem nome claro, historico, ou a pergunta parece continuacao/fase/andamento/follow-up, NAO renomeie e NAO execute script de rename/membros; responda direto.\n- Contexto curto por restart, pausa, arquivo/desarquivo ou historico parcial NAO significa thread nova.\n- Se houver duvida entre renomear e preservar, preserve. Renomear novamente so com pedido explicito do usuario.\n- Nao envie mensagem separada para mention; o Hermes posta a resposta final na thread.\n- Nao comente sobre rename na resposta ao usuario.\n\nScript de rename para\
+      \ thread comprovadamente nova:\n```python\nimport os, urllib.request, json\nTHREAD_ID = \"<THREAD_ID_ATUAL>\"\nTHREAD_NAME = \"<NOME_CURTO_DO_TOPICO_max_80_chars>\"\ntoken = os.environ.get(\"DISCORD_BOT_TOKEN\")\nheaders = {\"Authorization\": f\"Bot {token}\", \"Content-Type\": \"application/json\", \"User-Agent\": \"Hermes-Agent\"}\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}\",\n    method=\"PATCH\",\n    headers=headers,\n    data=json.dumps({\"name\": THREAD_NAME[:80]}).encode(),\n)\ntry:\n    urllib.request.urlopen(req, timeout=10).read()\n    print(f\"OK rename: {THREAD_NAME[:80]}\")\nexcept Exception as e:\n    print(f\"WARN rename failed: {e}\")\n```\n"
   dm_role_auth_guild: ''
   server_actions: ''
 whatsapp: {}

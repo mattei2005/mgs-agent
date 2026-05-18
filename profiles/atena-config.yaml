@@ -343,22 +343,8 @@ discord:
   auto_thread: true
   reactions: true
   channel_prompts:
-    '1496267571543019653': 'INSTRUCAO DE THREAD ATENA — modo enxuto / rename-only-once:
-
-
-      - Responda na thread atual; nao use send_message para a resposta normal.
-
-      - Se for REC direto completo, nao leia AGENT.md/SKILL/template/runner antes: chame mgs-rec-runner.py uma vez e resuma o JSON.
-
-      - So renomeie automaticamente quando houver evidencia real de thread recem-criada: nome atual cortado/ruim/auto-gerado E sem historico anterior da Atena.
-
-      - Se a thread ja tem nome claro, historico, ou a pergunta parece continuacao/fase/andamento/follow-up, preserve o nome atual e responda direto.
-
-      - Se houver duvida entre renomear e preservar, preserve. Renomear novamente so com pedido explicito do usuario.
-
-      - Em thread com Zeus/Rodolfo, nao mencione outro bot salvo pedido explicito de handoff.
-
-      '
+    '1496267571543019653': "INSTRUCAO DE THREAD ATENA — rename-on-create, then freeze:\n\nOBJETIVO: thread nova deve ser renomeada uma vez; thread existente nunca deve ser renomeada automaticamente.\n\nRegra obrigatoria:\n- Responda na thread atual; nao use send_message para resposta normal.\n- Se for REC direto completo, nao leia AGENT.md/SKILL/template/runner antes: chame mgs-rec-runner.py uma vez e resuma o JSON.\n- Se esta for uma thread recem-criada, com nome cortado/ruim/auto-gerado pela primeira mensagem, e sem historico anterior da Atena: EXECUTE rename via execute_code antes de responder.\n- Depois do primeiro rename, congele o nome: se a thread ja tem nome claro, historico, ou a pergunta parece continuacao/fase/andamento/follow-up, preserve o nome atual e responda direto.\n- Contexto curto por restart, pausa, arquivo/desarquivo ou historico parcial NAO significa thread nova.\n- Se houver duvida entre renomear e preservar, preserve. Renomear novamente so com pedido explicito do\
+      \ usuario.\n- Em thread com Zeus/Rodolfo, nao mencione outro bot salvo pedido explicito de handoff.\n- Nao comente sobre rename na resposta ao usuario.\n\nScript de rename para thread comprovadamente nova:\n```python\nimport os, urllib.request, json\nTHREAD_ID = \"<THREAD_ID_ATUAL>\"\nTHREAD_NAME = \"<NOME_CURTO_DO_TOPICO_max_80_chars>\"\ntoken = os.environ.get(\"DISCORD_BOT_TOKEN\")\nheaders = {\"Authorization\": f\"Bot {token}\", \"Content-Type\": \"application/json\", \"User-Agent\": \"Hermes-Agent\"}\nreq = urllib.request.Request(\n    f\"https://discord.com/api/v10/channels/{THREAD_ID}\",\n    method=\"PATCH\",\n    headers=headers,\n    data=json.dumps({\"name\": THREAD_NAME[:80]}).encode(),\n)\ntry:\n    urllib.request.urlopen(req, timeout=10).read()\n    print(f\"OK rename: {THREAD_NAME[:80]}\")\nexcept Exception as e:\n    print(f\"WARN rename failed: {e}\")\n```\n"
   server_actions: ''
 whatsapp: {}
 telegram:
