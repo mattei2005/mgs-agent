@@ -54,20 +54,28 @@ or recreate the card — it must appear identical in colors, logo, layout and
 proportions.
 
 Scene: $scene.
-Composition:
-- ONE realistic person in the foreground (medium shot or bust shot).
-- The card appears LARGE, floating BEHIND the person (never held or touched).
-- Card centered or slightly to the right, in the midground, partially
-  occluded by the person for depth.
-- Premium background with cinematic bokeh.
+Composition must contain ONLY these three essential layers:
+1. Background scene: one premium realistic environment, no frames, no posters,
+   no picture frames, no extra cards, no UI overlays, no decorative panels.
+2. Credit card: the exact provided card, HORIZONTAL landscape orientation,
+   enlarged, centered, and occupying the central visual area. It must look like
+   a clean physical card overlay, not a vertical/tombstone card and not inside
+   a frame.
+3. Person: ONE realistic person as the top layer, slightly overlapping the upper
+   part of the card. The person must not hold, touch, pinch, or cover the card.
+
+Layer order: background behind everything; large horizontal card centered over
+background; person in front, slightly overlapping above the card.
 
 Style: ultra-realistic commercial photography (full-frame camera), cinematic
 key + soft fill + subtle rim light, realistic card reflections, soft natural
 shadows, premium campaign color grading.
 
-Negative: multiple people, person touching/holding the card, altered card
-design, distorted anatomy, extra fingers, fake smile, cartoon, illustration,
-CGI, 3D render, stock photo look, flat lighting.
+Negative: picture frame, border frame, mockup frame, extra card, duplicate card,
+card held in hand, person touching the card, phone screen, UI overlay, badge,
+sticker, unnecessary objects, altered card design, vertical card orientation,
+distorted anatomy, extra fingers, fake smile, cartoon, illustration, CGI, 3D
+render, stock photo look, flat lighting.
 
 Output: one image, 16:9, photo-realistic.
 PROMPT
