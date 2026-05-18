@@ -87,9 +87,11 @@ For featured images, flag:
 - wrong product/card design
 - distorted logos or unreadable issuer name
 - person holding/touching card if prompt requires floating/behind-person composition
+- floating card with no convincing physical integration when the scene implies a person/card interaction
+- unnatural shadow, translucent layer, pasted-card look, or card covering a person in a way that makes the composite obviously AI-generated
 - non-16:9 dimensions when the site expects strict 16:9
 
-If image is usable but imperfect, report as “acceptable with caveat.” If product text/logo is wrong, recommend replacement before scaling production.
+If image is usable but imperfect, report as “acceptable with caveat.” If product text/logo is wrong, recommend replacement before scaling production. If the image is only a draft for Raquel review, distinguish “OK for draft review” from “approved for publish/scale.”
 
 ## Featured image brand-artifact repair
 
