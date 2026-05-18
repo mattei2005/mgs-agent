@@ -84,8 +84,9 @@ Prioritize these fixes before adding more complex infrastructure:
 1. Use deterministic runner by default for every complete REC request; make this a hard execution rule, not a suggestion.
 2. For `publique direto` requests, ban pre-runner browser/code-inspection/tool exploration unless the runner returns a specific error requiring it.
 3. Require or strongly prefer official URL in normal requests.
-4. Use `--card-image-url` when a clean official card image URL is provided.
-5. Cache WordPress category/tag IDs per site inside the runner to avoid repeated REST calls. In the 2026-05-17 audit, resolving 9 eggbev terms cold took ~8.51s; the same resolution from `/root/mgs-agent/data/wp-term-cache.json` took ~0.00s. Keep passing `term_cache`/`term_stats` into `resolve_terms`, save the cache after misses, and report cache hits/misses in runner output.
+4. Use `--card-image-url` when a clean official/card-only image URL is provided. This is the preferred path when Rodolfo/Raquel already found the best isolated card artwork; the same source feeds the LazyBlock card and the featured-image generator.
+5. Automatic card-image search should prefer isolated card artwork over broad promotional banners/app screenshots/people/YouTube thumbnails. If only a banner/promotional image is found, report it as acceptable-with-caveat instead of silently treating it as the ideal card image.
+6. Cache WordPress category/tag IDs per site inside the runner to avoid repeated REST calls. In the 2026-05-17 audit, resolving 9 eggbev terms cold took ~8.51s; the same resolution from `/root/mgs-agent/data/wp-term-cache.json` took ~0.00s. Keep passing `term_cache`/`term_stats` into `resolve_terms`, save the cache after misses, and report cache hits/misses in runner output.
 6. Add timing ticks around unresolved WordPress stages: term resolution, create-post, update-yoast, yoast-score, cache-save, public-verify, artifact-cleanup, fingerprint-store. Also compute `unattributed_sec` so any hidden time is visible instead of hand-waved.
 7. Do not do image correction after publication unless the card/brand/product is actually wrong.
 8. Treat any normal REC above 5 minutes as an incident with a bottleneck report.

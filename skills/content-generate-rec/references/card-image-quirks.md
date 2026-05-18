@@ -158,6 +158,21 @@ Verify the result with vision_analyze: "Does the card have white borders?" If ye
 
 ---
 
+## Card image selection quality — isolated card beats promotional banner
+
+For LazyBlock/card media, prefer a clean isolated image of the card over a broad promotional banner, app screenshot, person holding a card, Google Play/YouTube thumbnail, or decorative lifestyle graphic.
+
+Selection order:
+1. Official issuer card-only artwork.
+2. Card-only artwork from trusted review/comparison sources when official image is not exposed.
+3. Promotional/banner/app/people imagery only as fallback, reported as acceptable-with-caveat.
+
+`search-card-image.sh` scores Brave candidates accordingly: it boosts exact card-name/card-review/card-front/Mastercard/contactless signals and penalizes app/phone/person/hand/banner/illustration/balance-transfer/YouTube/Facebook/Google Play noise. The output may include `selection.{mode,score,title,page}` so the runner can report why an image was selected.
+
+If Rodolfo/Raquel already found the best card-only image, pass its direct URL through `--card-image-url`; the runner downloads, normalizes, validates dimensions/aspect, uploads it as the card image, and uses the same local source for featured generation.
+
+---
+
 ## WordPress auto-renames duplicate filenames
 
 When you upload a file with a name that already exists in the media library,
