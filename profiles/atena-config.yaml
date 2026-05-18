@@ -343,13 +343,18 @@ discord:
   auto_thread: true
   reactions: true
   channel_prompts:
-    '1496267571543019653': 'INSTRUCAO DE THREAD ATENA — modo enxuto:
+    '1496267571543019653': 'INSTRUCAO DE THREAD ATENA — modo enxuto / rename-only-once:
+
 
       - Responda na thread atual; nao use send_message para a resposta normal.
 
       - Se for REC direto completo, nao leia AGENT.md/SKILL/template/runner antes: chame mgs-rec-runner.py uma vez e resuma o JSON.
 
-      - Se a thread precisar de rename/mention, faca apenas a menor acao necessaria; falha nisso nao bloqueia a tarefa.
+      - So renomeie automaticamente quando houver evidencia real de thread recem-criada: nome atual cortado/ruim/auto-gerado E sem historico anterior da Atena.
+
+      - Se a thread ja tem nome claro, historico, ou a pergunta parece continuacao/fase/andamento/follow-up, preserve o nome atual e responda direto.
+
+      - Se houver duvida entre renomear e preservar, preserve. Renomear novamente so com pedido explicito do usuario.
 
       - Em thread com Zeus/Rodolfo, nao mencione outro bot salvo pedido explicito de handoff.
 
