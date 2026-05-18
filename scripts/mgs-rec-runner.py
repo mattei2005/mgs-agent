@@ -337,7 +337,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     primary_benefit = esc_text(shorten_words(benefits[0] if benefits else "key credit card features", 12))
     second_benefit = esc_text(shorten_words(benefits[1] if len(benefits) > 1 else "account management tools", 12))
     third_benefit = esc_text(shorten_words(benefits[2] if len(benefits) > 2 else "everyday payment flexibility", 12))
-    benefit_phrase = esc_text(shorten_words(sentence_join(benefits, 3), 16))
+    benefit_phrase = esc_text(shorten_words(sentence_join(benefits, 3), 10))
     descriptor = card_data.get("descriptor") or f"A UK credit card with {annual_fee.lower()} and practical account features."
     card_data.setdefault("tag10", primary_benefit[:25] or "Card benefits")
     card_data.setdefault("tag2", annual_fee[:25] if annual_fee != "N/A" else "Credit card")
@@ -422,6 +422,14 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 
 <!-- wp:paragraph -->
 <p>Compared with {comp_b}, it may suit readers who want a simple card rather than a complex benefit package.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The table is a quick orientation tool. It is not a full eligibility check.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Rates and terms can change. Therefore, the official page should remain the final reference.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
