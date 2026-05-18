@@ -4,9 +4,9 @@ Use this reference when `mgs-rec-runner.py` is the requested execution path but 
 
 ## Known runner failure modes
 
-### 1. Anthropic extraction path disabled
+### 1. Cache MISS with legacy Anthropic extraction disabled
 
-Typical runner error:
+Historical runner error:
 
 ```json
 {
@@ -15,15 +15,26 @@ Typical runner error:
 }
 ```
 
-Correct response:
-1. Do not abandon the deterministic runner.
-2. Fetch/verify official facts from the source page with browser tools or another allowed source-of-truth method.
-3. Re-run `mgs-rec-runner.py` with explicit facts:
-   - `--annual-fee "..."`
-   - `--apr "..."`
-   - repeated `--benefit "..."`
-   - repeated `--competitor "..."`
-4. Keep all facts conservative and sourced. If APR or a key fact is not stated precisely, pass the exact official wording rather than inventing a number.
+Current expectation after the 2026-05-18 MBNA patch:
+- `mgs-rec-runner.py` should not call Anthropic/Claude on cache MISS.
+- It should use deterministic source-snippet extraction and continue into local article generation.
+- `steps` should show `reference_extracted_deterministic`, not `reference_extracted_llm`.
+- `cost_usd.extract_llm_est` should remain `0.0` for this path.
+
+Correct response if this error reappears:
+1. Treat it as a runner regression, not an editorial/user prompt problem.
+2. Do not abandon the deterministic runner or switch into broad manual workflow.
+3. Patch/restore the deterministic cache-miss path in `mgs-rec-runner.py`.
+4. Validate with `py_compile` and a safe `--dry-run` for the failing card.
+5. If deterministic extraction returns only bot-block boilerplate, re-run with explicit facts rather than inventing details.
+
+Explicit facts remain the higher-quality fallback:
+- `--annual-fee "..."`
+- `--apr "..."`
+- repeated `--benefit "..."`
+- repeated `--competitor "..."`
+
+Keep all facts conservative and sourced. If APR or a key fact is not stated precisely, pass the exact official wording rather than inventing a number.
 
 Example:
 

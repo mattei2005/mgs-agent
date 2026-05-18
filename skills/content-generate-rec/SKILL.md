@@ -1221,9 +1221,15 @@ Comportamento atual esperado:
 
 **Regra operacional:** Atena não deve fazer uma segunda tentativa só porque a API local está masked. Isso já é tratado dentro do runner.
 
-### Inputs mínimos para cache MISS
+### Inputs mínimos e cache MISS
 
-Quando o cartão ainda não está no cache, passe fatos oficiais suficientes para o runner:
+Quando o cartão ainda não está no cache, o comportamento preferido do runner é:
+1. usar fatos explícitos se forem passados; ou
+2. usar extração determinística conservadora da `--source-url` se fatos não forem passados.
+
+Depois do patch MBNA 2026-05-18, cache MISS **não deve** chamar Anthropic/Claude nem abortar com “Claude API disabled by policy”. Se esse erro reaparecer, tratar como regressão do runner e consultar `references/fast-runner-cache-miss-fallbacks.md`.
+
+Para qualidade editorial máxima, ainda é melhor passar fatos oficiais suficientes quando disponíveis:
 
 ```bash
 --annual-fee "..."
