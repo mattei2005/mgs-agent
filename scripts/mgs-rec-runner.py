@@ -809,6 +809,7 @@ def main() -> int:
         card_url = card_data.get("card_image_uploaded_url")
         card_local = None
         card_src = None
+        card_selection: Dict[str, Any] = {}
         card_normalize: Dict[str, Any] = {}
 
         # Generate and mechanically validate content BEFORE any new WP media upload.
@@ -885,9 +886,17 @@ def main() -> int:
                 t0 = time.time()
                 if args.card_image_url:
                     suffix = Path(urllib.parse.urlparse(args.card_image_url).path).suffix or ".png"
+                    if suffix.lower() not in {".png", ".jpg", ".jpeg", ".webp"}:
+                        suffix = ".png"
                     card_local = f"/tmp/card-{card_slug}-manual{suffix}"
-                    urllib.request.urlretrieve(args.card_image_url, card_local)
+                    req = urllib.request.Request(
+                        args.card_image_url,
+                        headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) MGS-REC-Runner/1.0"},
+                    )
+                    with urllib.request.urlopen(req, timeout=30) as resp:
+                        Path(card_local).write_bytes(resp.read())
                     card_src = args.card_image_url
+                    card_selection = {"mode": "manual_card_image_url", "source": args.card_image_url, "reason": "user_supplied_best_card_art"}
                     steps.append("card_image_manual_url_used")
                 else:
                     img = run_json([str(GEN_SCRIPTS / "search-card-image.sh"), card_data["card_name"], source_url], timeout=180, allow_fail=True)
@@ -895,7 +904,29 @@ def main() -> int:
                         raise RunnerError(f"Card image search failed: {json.dumps(img, ensure_ascii=False)[:1000]}")
                     card_local = img["path"]
                     card_src = img.get("source")
+                    card_selection = {
+                        "mode": (img.get("selection") or {}).get("mode") or "auto_card_image_search",
+                        "provider": img.get("provider"),
+                        "tier": img.get("tier"),
+                        "source": img.get("source"),
+                        "score": (img.get("selection") or {}).get("score"),
+                        "title": (img.get("selection") or {}).get("title"),
+                        "page": (img.get("selection") or {}).get("page"),
+                    }
                 card_normalize = normalize_card_artwork(card_local)
+                try:
+                    ident_card = run(["identify", "-format", "%w %h", card_local], timeout=20)
+                    if ident_card.returncode == 0:
+                        cw, ch = [int(x) for x in ident_card.stdout.split()[:2]]
+                        card_selection.update({"width": cw, "height": ch, "aspect": round(cw / ch, 4) if ch else None})
+                        if cw < 200 or ch < 100:
+                            raise RunnerError(f"card image too small after normalization: {cw}x{ch}")
+                        if not (1.2 <= (cw / ch) <= 2.2):
+                            raise RunnerError(f"card image aspect out of range after normalization: {cw}x{ch}")
+                except RunnerError:
+                    raise
+                except Exception as exc:
+                    warnings.append(f"card_image_dimension_validation_skipped: {exc}")
                 steps.append("card_image_normalized")
                 tick("card_image_discovery_sec", t0)
                 ext = Path(card_local).suffix or ".png"
@@ -1117,6 +1148,8 @@ def main() -> int:
                 "featured_url": featured_url,
                 "featured_scene": featured_scene,
                 "featured_path": featured_path,
+                "card_source": card_src,
+                "card_selection": card_selection,
                 "card_normalize": card_normalize,
                 "created_media": created_media,
                 "artifact_audit": artifact_audit,
