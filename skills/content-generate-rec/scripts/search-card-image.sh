@@ -32,6 +32,52 @@ emit_needs_manual() {
   exit 1
 }
 
+normalize_card_image() {
+  local img_path="$1"
+  [ -f "$img_path" ] || return 1
+  python3 - "$img_path" <<'PY' >>"$LOG" 2>&1 || return 1
+from PIL import Image
+import sys
+
+path = sys.argv[1]
+img = Image.open(path)
+img.load()
+
+rotated = False
+if img.height > img.width:
+    img = img.rotate(-90, expand=True)
+    rotated = True
+
+rgba = img.convert('RGBA')
+pix = rgba.load()
+w, h = rgba.size
+left, right, top, bottom = w, -1, h, -1
+
+for y in range(h):
+    for x in range(w):
+        r, g, b, a = pix[x, y]
+        # Treat transparent and near-white border/padding as background.
+        if a > 20 and not (r > 242 and g > 242 and b > 242):
+            left = min(left, x)
+            right = max(right, x)
+            top = min(top, y)
+            bottom = max(bottom, y)
+
+cropped = False
+if right >= left and bottom >= top:
+    pad = 3
+    box = (max(0, left-pad), max(0, top-pad), min(w, right+pad+1), min(h, bottom+pad+1))
+    if box != (0, 0, w, h):
+        img = img.crop(box)
+        cropped = True
+
+if img.mode not in ('RGB', 'RGBA'):
+    img = img.convert('RGBA')
+img.save(path)
+print(f"search-card-image NORMALIZE path={path} rotated={rotated} cropped={cropped} size={img.width}x{img.height}")
+PY
+}
+
 get_brave_api_key() {
   # Prefer explicit env var so cron/systemd can inject it without 1Password.
   if [ -n "${BRAVE_SEARCH_API_KEY:-}" ]; then
