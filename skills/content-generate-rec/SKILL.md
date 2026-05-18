@@ -139,6 +139,13 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > lesson that the common failure is over-reading (large skills, AGENT.md, legacy
 > manual REC flow, broad searches), not necessarily a single infinite loop.
 >
+> **REFERENCE - REC architecture cleanup and runner contract:** When the REC file
+> organization itself is confusing or Atena alternates between runner and manual
+> workflow, see `references/rec-architecture-cleanup-and-runner-contract.md`.
+> It defines the layer boundary: AGENT/SOUL/config stay short, `template_key`
+> selects `rec-{template_key}.md`, the runner exposes compact `template_contract`
+> JSON, and validators/scripts enforce the rules so Atena does not read more.
+>
 > **REFERENCE - fast runner cache-miss fallbacks:** If the requested deterministic
 > runner path fails because legacy Anthropic extraction is disabled, the local
 > article API is unavailable, or `search-card-image.sh` returns an empty failure,
