@@ -264,6 +264,46 @@ def call_rec_api(payload: Dict[str, Any]) -> Dict[str, Any]:
         raise RunnerError(f"mgs-rec-api call failed: {e}")
 
 
+def normalize_card_artwork(path: str) -> Dict[str, Any]:
+    """Force card artwork to horizontal orientation and crop white padding."""
+    try:
+        from PIL import Image
+    except Exception as e:
+        return {"status": "skipped", "reason": f"PIL unavailable: {e}"}
+
+    img = Image.open(path)
+    img.load()
+    before = {"width": img.width, "height": img.height}
+    rotated = False
+    if img.height > img.width:
+        img = img.rotate(-90, expand=True)
+        rotated = True
+
+    rgba = img.convert("RGBA")
+    pix = rgba.load()
+    w, h = rgba.size
+    left, right, top, bottom = w, -1, h, -1
+    for y in range(h):
+        for x in range(w):
+            r, g, b, a = pix[x, y]
+            if a > 20 and not (r > 242 and g > 242 and b > 242):
+                left, right = min(left, x), max(right, x)
+                top, bottom = min(top, y), max(bottom, y)
+
+    cropped = False
+    if right >= left and bottom >= top:
+        pad = 3
+        box = (max(0, left-pad), max(0, top-pad), min(w, right+pad+1), min(h, bottom+pad+1))
+        if box != (0, 0, w, h):
+            img = img.crop(box)
+            cropped = True
+
+    if img.mode not in ("RGB", "RGBA"):
+        img = img.convert("RGBA")
+    img.save(path)
+    return {"status": "ok", "before": before, "after": {"width": img.width, "height": img.height}, "rotated": rotated, "cropped": cropped}
+
+
 def esc_text(value: Any) -> str:
     return html.escape(str(value or "").strip())
 
