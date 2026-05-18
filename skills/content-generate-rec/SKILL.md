@@ -40,6 +40,10 @@ Operational rule (hard gate):
 - After the runner returns, format one final message from its JSON. Do not run
   extra QA/repair work unless the JSON shows a real failure or Rodolfo asked for
   a technical audit.
+- Anti-over-reading rule: for a complete REC direct-publish request, do not read
+  this full SKILL.md, `AGENT.md`, templates, runner source, or long references as
+  preflight. Use the runner first; inspect only the smallest relevant file/section
+  if the runner fails or the user explicitly asks for a prompt/speed audit.
 - If elapsed runner time is >180s, include the slowest `timings_sec` fields in
   the summary. If >300s, label it as an operational incident.
 - For speed audits, always distinguish conversation/thread elapsed time from
