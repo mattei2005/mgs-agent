@@ -54,7 +54,8 @@ or recreate the card — it must appear identical in colors, logo, layout and
 proportions.
 
 Scene: $scene.
-Composition must contain ONLY these three essential layers:
+Composition must contain ONLY these three essential layers. Any other visual
+object or decorative structure is a failure:
 1. Background scene: one premium realistic environment, no frames, no posters,
    no picture frames, no extra cards, no UI overlays, no decorative panels.
 2. Credit card: the exact provided card, HORIZONTAL landscape orientation,
