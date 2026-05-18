@@ -481,6 +481,14 @@ Step 5 manual writing was DEPRECATED em 29/04/2026. **SEMPRE use Step 5b** (mgs-
 Run `scripts/validate-article.sh <body_html_file>`. If exit != 0, expand or
 trim the article and re-validate. Never publish out-of-range content.
 
+The validator also enforces editorial readability/style:
+- Average paragraph length must be ≤30 words.
+- Each H2 section must contain max 4 paragraphs.
+- No more than 20% of sentences may exceed 20 words.
+
+If this fails, do not publish. Split long paragraphs/sentences and revalidate
+the exact final body.
+
 **Also validate the subtitle (excerpt) length before publishing:**
 The subtitle — the first `<!-- wp:paragraph -->` block, placed before the
 LazyBlock credit-card — is what WordPress renders as the post excerpt. It has
