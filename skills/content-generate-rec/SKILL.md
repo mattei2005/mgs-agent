@@ -425,6 +425,12 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
 - Upload via `content-publish-wordpress/scripts/upload-image.sh` →
   `{id, source_url, mime_type}` — this is the **card_media**.
 
+> **HARD RULE — card image must be horizontal before upload:** If the chosen
+> card artwork is vertical/portrait, rotate the official image 90 degrees to
+> landscape. Do not upload vertical/tombstone card images. After rotation, crop
+> white/transparent padding to the card edges. The runner/search script now
+> normalizes this automatically and reports `images.card_normalize`.
+
 
 
 ### 4. Featured image (composition)
@@ -436,6 +442,11 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   contemporary coworking, urban street with cinematic blur, city at sunset,
   nighttime metropolis).
 - Output target: strict 16:9 JPEG at `/tmp/featured-<slug>.jpg` (auto-compressed via `compress-image.sh`: PNG → JPEG, quality 88, central crop, final 1280x720 before upload).
+- Composition must contain exactly three essential layers: (1) realistic
+  premium background scene, (2) the exact horizontal card enlarged and centered,
+  (3) one realistic person as the top layer slightly overlapping above the card.
+  No frames, molduras, extra panels, duplicate cards, UI overlays, stickers, or
+  unnecessary decorative objects.
 - VALIDATE LOCAL ASPECT RATIO BEFORE UPLOAD: final featured must be strict 16:9 (expected 1280x720 after `compress-image.sh`). If Gemini returns 8:5/16:10 (example: 1280x800), do not silently accept; the approved path is the central-crop enforcement in `compress-image.sh` before upload.
 - VALIDATE LOCALLY BEFORE UPLOAD: use `vision_analyze` on `/tmp/featured-<slug>.jpg` and confirm the card in the composition is visually identical to the card_media (issuer design, layout, colours, sample text placement). If not, regenerate (retry up to 2x). If still broken, abort with a clear message.
 - If a brand/text artifact is discovered only after publication, follow `references/rec-post-publication-qa.md` → “Featured image brand-artifact repair”: corrected 16:9 composite/regeneration, update `featured_media`, keep Yoast/social image URLs live or refreshed, safe-delete only the bad media, then re-verify public URL + image URLs.
