@@ -361,7 +361,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Its official positioning highlights {benefit_phrase}. Those details help readers understand the card before comparing it with nearby alternatives.</p>
+<p>Its official positioning highlights {benefit_phrase}. Those details help readers understand the card before comparing it with nearby alternatives. This supports a cleaner review.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
