@@ -103,6 +103,12 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > see `references/rec-speed-audit-and-sla.md`. Load it when Rodolfo/Zeus asks
 > about REC bottlenecks, runtime, or speed improvements.
 >
+> **REFERENCE - REC editorial/image quality gates:** For Rodolfo's 2026-05-17
+> corrections on paragraph density, max 4 paragraphs per H2, long-sentence ratio,
+> horizontal card image normalization, and three-layer featured composition, see
+> `references/rec-editorial-image-quality-gates-2026-05-17.md`. Load it when
+> tuning validators, image prompts, or auditing Marbles/Barclaycard-style issues.
+>
 > **REFERENCE - REC runner telemetry + taxonomy cache:** For the concrete
 > implementation pattern that adds fine-grained `timings_sec`, mandatory
 > `unattributed_sec`, `/root/mgs-agent/data/wp-term-cache.json`, and
