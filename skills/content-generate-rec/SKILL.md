@@ -116,6 +116,13 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > `references/rec-runner-telemetry-taxonomy-cache.md`. Load it before auditing or
 > modifying `mgs-rec-runner.py` performance instrumentation.
 >
+> **REFERENCE - REC template vs runner boundary:** When auditing prompt/config
+> loops or explaining where `templates/rec-gb-cc-en.md` fits, see
+> `references/rec-template-runner-boundary.md`. It captures the layer boundary:
+> `rec-gb-cc-en.md` is the editorial/visual spec, while the runner/validator must
+> enforce it so Atena does not reread full prompts/templates during normal REC
+> production.
+>
 > **REFERENCE - fast runner cache-miss fallbacks:** If the requested deterministic
 > runner path fails because legacy Anthropic extraction is disabled, the local
 > article API is unavailable, or `search-card-image.sh` returns an empty failure,
