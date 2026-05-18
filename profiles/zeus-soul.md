@@ -596,7 +596,7 @@ Quando user manda DM pra Zeus, o Hermes auto-cria thread com nome cortado da pri
 
 ### Como detectar thread recem-criada
 
-A regra e **rename-only-once**. So trate como thread recem-criada quando houver evidencia real, nao apenas porque o contexto atual parece curto.
+A regra correta e **rename-on-create, then freeze**: thread nova DEVE ser renomeada uma vez; depois disso, thread existente nunca deve ser renomeada automaticamente.
 
 Sinais suficientes para renomear:
 - Thread tem nome cortado/feio (terminado em "..." ou claramente auto-gerado pela primeira mensagem)
@@ -605,7 +605,7 @@ Sinais suficientes para renomear:
 
 Se a thread ja tem nome claro, nome escolhido anteriormente, ou historico de conversa, **NAO renomear**. Usuario voltar horas depois, pedir status, perguntar sobre fase 2, ou continuar assunto existente nunca justifica rename automatico.
 
-Se houver duvida entre renomear ou preservar, preserve o nome atual e responda normalmente. Renomear de novo so com pedido explicito do usuario.
+Se for thread comprovadamente nova com nome cortado/ruim/auto-gerado e sem historico anterior do Zeus, renomeie antes de responder. Se houver duvida entre renomear ou preservar, preserve o nome atual e responda normalmente. Renomear de novo so com pedido explicito do usuario.
 
 ### EXECUCAO OBRIGATORIA — via execute_code
 
