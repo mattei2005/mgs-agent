@@ -15,6 +15,8 @@ LOG = "/root/mgs-agent/logs/generate-rec.log"
 
 # UK review sites that reliably host good card images
 PRIORITY_DOMAINS = [
+    "finder.com",
+    "nerdwallet.com",
     "headforpoints.com",
     "backtodefault.com",
     "moneysavingexpert.com",
@@ -156,6 +158,15 @@ def main():
 
     # -- 3. Score candidates -------------------------------------------------
     kw_pattern = card_slug.replace('-', '|')
+    exact_phrase = re.sub(r'[^a-z0-9]+', ' ', card_name.lower()).strip()
+    clean_card_re = re.compile(
+        r'(credit\s*card\s*review|card\s*review|mastercard|contactless|front|card[-_ ].*\.(png|jpg|jpeg|webp))'
+    )
+    noise_re = re.compile(
+        r'(app|mobile|phone|screenshot|screen|google\s*play|play\s*store|youtube|ytimg|facebook|'
+        r'hand|hands|person|people|woman|man|avatar|trustpilot|alien|loan|balance\s*transfer|'
+        r'virtual\s*card|apple\s*pay|google\s*pay|what-is-cc-balance|card-hand|hero|banner|background|illustration|landing)'
+    )
     scored = []
     for item in urls:
         url  = item['url']
@@ -166,12 +177,16 @@ def main():
         # Priority domain boost
         for domain in PRIORITY_DOMAINS:
             if domain in low:
-                score += 8
+                score += 14
                 break
 
         # Keyword match
         if re.search(kw_pattern, low):  score += 5
         if re.search(kw_pattern, desc): score += 3
+        if exact_phrase and (exact_phrase in low or exact_phrase in desc):
+            score += 12
+        if clean_card_re.search(f"{desc} {low}"):
+            score += 10
 
         # Format bonuses
         if '.webp' in low: score += 2
@@ -179,8 +194,13 @@ def main():
         if '.jpg'  in low or '.jpeg' in low: score += 1
 
         # Penalise noise
-        if re.search(r'(thumb|icon|logo|sprite|favicon|banner|ytimg|youtube|avatar)', low):
-            score -= 4
+        hay = f"{desc} {low}"
+        if re.search(r'(thumb|icon|logo|sprite|favicon)', low):
+            score -= 8
+        if re.search(r'(play\.google\.com|youtube\.com|youtu\.be|facebook\.com|ytimg\.com)', low):
+            score -= 35
+        if noise_re.search(hay):
+            score -= 18
 
         scored.append((score, url))
 
