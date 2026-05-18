@@ -92,16 +92,14 @@ Routing logic:
 1. Look up site_key in data/sites.json → extract `vertical` field
 2. Look for template at skills/content-generate-rec/templates/rec-{vertical}.md
 3. If template missing → ABORT with clear error: "Template rec-{vertical}.md not yet created. Create template first before testing this vertical."
-4. If template exists → execute pipeline per skills/content-generate-rec/SKILL.md
+4. If request is a complete REC direct-publish/direct-draft request (site + card + status + official source URL) → execute `/root/mgs-agent/scripts/mgs-rec-runner.py` once and report its JSON summary.
+5. If the runner fails with a clear error or the request is incomplete/manual/audit/new-template work → inspect the smallest relevant skill/template/script section needed.
 
 Execution rules (MANDATORY):
-- ZERO mock data: Step 2 (Research) ALWAYS uses real WebFetch on card_official_url
-- If Step 2 cannot confirm a key fact (annual fee, APR, key benefits) → ABORT, never invent
-- 4 mandatory pauses for human review (posted to atena-content-agent channel):
-  - After Step 2: show extracted research, await "go" from authorized user
-  - After Step 5: show subtitle + body + word count, await "go"
-  - After Step 11.1: show POST JSON before posting, await "go"
-  - After Step 11.5: show summary + edit_link for visual review
+- Fast path precedence: complete REC direct requests use the deterministic runner first. Do not pre-read full SKILL.md, AGENT.md, vertical templates, runner source, browser pages, or long references before the first runner attempt.
+- ZERO mock data: research must come from the official card URL or verified cache. If key facts (annual fee, APR, key benefits) cannot be confirmed → ABORT, never invent.
+- The legacy 4-pause human review flow applies only to manual REC build, new vertical/template work, first-time pipeline changes, or explicit audit/review requests. It does not apply to routine direct REC requests handled by the runner.
+- For normal runner execution, validation is automatic. Human review happens only if the runner reports failure, Rodolfo/Raquel explicitly asks for review, or the action falls into a higher authorization level.
 
 ### Intent: list_templates
 
