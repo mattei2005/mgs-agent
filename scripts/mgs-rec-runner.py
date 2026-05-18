@@ -334,10 +334,10 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     competitors = [c.strip() for c in competitors if c and str(c).strip()]
     comp_a = esc_text(competitors[0] if len(competitors) > 0 else "another card in the same segment")
     comp_b = esc_text(competitors[1] if len(competitors) > 1 else "a second comparable card")
-    primary_benefit = esc_text(benefits[0] if benefits else "key credit card features")
-    second_benefit = esc_text(benefits[1] if len(benefits) > 1 else "account management tools")
-    third_benefit = esc_text(benefits[2] if len(benefits) > 2 else "everyday payment flexibility")
-    benefit_phrase = esc_text(sentence_join(benefits, 3))
+    primary_benefit = esc_text(shorten_words(benefits[0] if benefits else "key credit card features", 12))
+    second_benefit = esc_text(shorten_words(benefits[1] if len(benefits) > 1 else "account management tools", 12))
+    third_benefit = esc_text(shorten_words(benefits[2] if len(benefits) > 2 else "everyday payment flexibility", 12))
+    benefit_phrase = esc_text(shorten_words(sentence_join(benefits, 3), 16))
     descriptor = card_data.get("descriptor") or f"A UK credit card with {annual_fee.lower()} and practical account features."
     card_data.setdefault("tag10", primary_benefit[:25] or "Card benefits")
     card_data.setdefault("tag2", annual_fee[:25] if annual_fee != "N/A" else "Credit card")
