@@ -483,6 +483,7 @@ trim the article and re-validate. Never publish out-of-range content.
 
 The validator also enforces editorial readability/style:
 - Average paragraph length must be ≤30 words.
+- No individual paragraph may exceed 35 words.
 - Each H2 section must contain max 4 paragraphs.
 - No more than 20% of sentences may exceed 20 words.
 
