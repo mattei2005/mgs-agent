@@ -158,6 +158,13 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > to keep using `mgs-rec-runner.py` with explicit official facts and bounded image
 > fallback inputs, not to drift into the full manual step-by-step REC pipeline.
 >
+> **REFERENCE - MBNA cache-miss patch:** For the 2026-05-18 incident where
+> manual card-image benchmarking did not run because the runner stopped before
+> image handling on cache MISS, see `references/rec-cache-miss-mbna-2026-05-18.md`.
+> Use it when a cache-miss REC fails before `content_validated_pre_upload`, or
+> when validating that `reference_extracted_deterministic` replaced the deprecated
+> Anthropic/Claude extraction path.
+>
 > **REFERENCE - Zable cache-miss audit:** For the 2026-05-18 case where a valid
 > Zable draft was produced but the workflow drifted into manual recovery after
 > cache MISS + disabled extraction + validator failure, see
