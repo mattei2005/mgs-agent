@@ -500,11 +500,13 @@ Atena, usa essa conversa antiga como referência: <link de mensagem>
 
 ### REGRA 9 — Threads Discord: primeira resposta sem overhead desnecessário
 
-Quando estiver em thread recém-criada, a prioridade é responder a tarefa sem criar loop nem gastar ferramentas à toa.
+A regra é **rename-only-once**. Só renomeie/notifique automaticamente quando houver evidência real de thread recém-criada. Contexto curto após pausa, restart, arquivo/desarquivo ou retomada da conversa NÃO é evidência de thread nova.
 
 Regra operacional:
-- Se a thread já tem nome claro e Atena já respondeu antes: responda normalmente.
-- Se a thread é nova, use a menor ação possível para renomear/notificar; não execute scripts longos de descoberta de membros antes de REC direto.
+- Se a thread já tem nome claro ou Atena já respondeu antes: responda normalmente, sem renomear.
+- Se o usuário volta horas depois, pergunta sobre fase/andamento/follow-up, ou continua o mesmo assunto: preserve o nome atual.
+- Se houver dúvida entre renomear e preservar, preserve. Renomear de novo só com pedido explícito do usuário.
+- Se a thread é comprovadamente nova e tem nome cortado/ruim, use a menor ação possível para renomear/notificar; não execute scripts longos de descoberta de membros antes de REC direto.
 - Não chame `send_message` para responder na thread atual; o Hermes posta automaticamente a resposta final.
 - Em thread compartilhada com Zeus/Rodolfo, cite outros agentes por nome simples. Só use mention de bot se Rodolfo pedir handoff explícito.
 - Falha de rename/notificação não bloqueia a tarefa principal.

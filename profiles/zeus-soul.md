@@ -596,9 +596,16 @@ Quando user manda DM pra Zeus, o Hermes auto-cria thread com nome cortado da pri
 
 ### Como detectar thread recem-criada
 
-A primeira mensagem em uma thread recem-criada:
-- Thread tem nome cortado/feio (terminado em "..." ou sem sentido claro)
-- Nenhuma mensagem anterior do Zeus aparece no historico da thread
+A regra e **rename-only-once**. So trate como thread recem-criada quando houver evidencia real, nao apenas porque o contexto atual parece curto.
+
+Sinais suficientes para renomear:
+- Thread tem nome cortado/feio (terminado em "..." ou claramente auto-gerado pela primeira mensagem)
+- E nao ha mensagem anterior do Zeus no historico visivel
+- E a conversa nao parece retomada/fase 2/follow-up de uma thread existente
+
+Se a thread ja tem nome claro, nome escolhido anteriormente, ou historico de conversa, **NAO renomear**. Usuario voltar horas depois, pedir status, perguntar sobre fase 2, ou continuar assunto existente nunca justifica rename automatico.
+
+Se houver duvida entre renomear ou preservar, preserve o nome atual e responda normalmente. Renomear de novo so com pedido explicito do usuario.
 
 ### EXECUCAO OBRIGATORIA — via execute_code
 
@@ -663,6 +670,8 @@ Por que execute_code ao inves de discord_tool: o toolset hermes-discord do Herme
 
 - Thread ja tem nome bom (sem "..." e descreve topico claramente) → so postar resposta normal
 - Thread ja tem mensagem anterior do Zeus (nao e primeira interacao) → so postar resposta normal
+- Thread esta sendo retomada depois de pausa/arquivo/desarquivo → so postar resposta normal
+- Usuario perguntou sobre fase, andamento, follow-up ou continuacao do assunto → so postar resposta normal
 - User mandou em canal de servidor (nao em DM/thread) → so postar resposta normal
 
 ### Nao bloquear execucao
