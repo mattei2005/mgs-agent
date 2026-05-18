@@ -2,10 +2,10 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-05-17T12:39:18-04:00",
-    "total_abertas": 51,
-    "total_resolvidas": 37,
-    "proximo_id": 89,
+    "ultima_atualizacao": "2026-05-18T13:18:07-04:00",
+    "total_abertas": 52,
+    "total_resolvidas": 0,
+    "proximo_id": 90,
     "responsavel": "Rodolfo Mattei"
   },
   "categorias": {
@@ -918,6 +918,25 @@
         "campanhas"
       ],
       "contexto": "Novidades Hermes v0.14: toolset video_gen nativo, desativado por padrão, com backends plugáveis FAL.ai (Veo 3.1/Pixverse/Kling; requer FAL_KEY) e xAI Grok-Imagine (SuperGrok OAuth ou XAI_API_KEY). Hermes também anunciou X Search automático quando usando assinatura Grok/X compatível. Relevante para futuro agente Ares/campanhas: pesquisar trends/criativos no X e potencialmente gerar/animar criativos em vídeo. Recomendação atual: não habilitar em Zeus/Atena; avaliar em sandbox e impor budget/allowlist antes de liberar em produção."
+    },
+    {
+      "id": "PEND-089",
+      "titulo": "Testar Hermes Kanban Orchestrator em paralelo",
+      "categoria": "agente",
+      "prioridade": "baixa",
+      "status": "aberta",
+      "tempo_estimado": "2h",
+      "bloqueio": "Não alterar estrutura operacional Zeus/Atena nem habilitar auto_decompose em produção antes de teste isolado",
+      "criada_em": "2026-05-18T13:18:07-04:00",
+      "criada_por": "zeus",
+      "tags": [
+        "hermes",
+        "kanban",
+        "orquestrador",
+        "multiagente",
+        "teste-isolado"
+      ],
+      "contexto": "Avaliar o novo Hermes Kanban auto-decomposition/orchestrator sem mudar a estrutura atual da MGS. Plano: criar board/perfil de teste ou modo manual, definir descrições de perfis em ambiente controlado, rodar tarefas fake/não críticas, medir roteamento e logs. Não habilitar automação plena nem produção editorial/infra até validação e decisão do Rodolfo."
     }
   ],
   "resolvidas": [
