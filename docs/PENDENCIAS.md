@@ -4,8 +4,8 @@
 > Gerado automaticamente a partir de `data/pendencias.db.json`.  
 > Para adicionar/resolver: use scripts em `scripts/pendencia-*.sh`
 
-**Última atualização:** 2026-05-17T12:39:18-04:00  
-**Total abertas:** 51  
+**Última atualização:** 2026-05-18T13:18:07-04:00  
+**Total abertas:** 52  
 **Total resolvidas:** 37
 
 ---
@@ -16,11 +16,11 @@
 |---|---|
 | 🔴 alta | 0 |
 | 🟡 media | 17 |
-| 🟢 baixa | 34 |
+| 🟢 baixa | 35 |
 
 **Por categoria:**
 
-- `agente`: 10
+- `agente`: 11
 - `infra`: 9
 - `monitor`: 7
 - `conteudo`: 6
@@ -55,7 +55,7 @@
 | `PEND-067` | Auto-discover Discord channel_prompts - validar fix em REC real | `agente` | 5min após próximo REC | — |
 | `PEND-088` | Avaliar Hermes video_gen + Grok/X Search para futuro agente Ares | `agente` | 1h validação + decisão de custo | Quando criar/configurar Ares ou agente de campa... |
 
-## 🟢 BAIXA (34 itens)
+## 🟢 BAIXA (35 itens)
 
 | ID | Título | Categoria | Tempo | Bloqueio |
 |---|---|---|---|---|
@@ -93,6 +93,7 @@
 | `PEND-073` | Confirmar visualmente se duplicacao Atena canal pai vs thread eh preview nativo Discord ou bug real | `agente` | 5min observacao | — |
 | `PEND-086` | Monitorar resposta form Tier 4 Anthropic (enviado 22/04) | `externo` | 5min check periódico | — |
 | `PEND-087` | Avaliar criação de profile cron-worker em Haiku para crons LLM | `infra` | 45min | Aguardar aumento real de crons agent-based ou n... |
+| `PEND-089` | Testar Hermes Kanban Orchestrator em paralelo | `agente` | 2h | Não alterar estrutura operacional Zeus/Atena ne... |
 
 ---
 
