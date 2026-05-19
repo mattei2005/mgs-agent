@@ -178,6 +178,19 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > to keep using `mgs-rec-runner.py` with explicit official facts and bounded image
 > fallback inputs, not to drift into the full manual step-by-step REC pipeline.
 >
+> **Official URL blocked fallback:** If the official issuer URL returns 403,
+> HTTP/2 protocol errors, or bot-blocking in both runner fetch and Chromium, try a
+> bounded reader/render fallback against the SAME official URL before giving up:
+> `https://r.jina.ai/http://https://<official-url>`. Use it only to extract
+> official facts from the issuer page and official terms pages, then rerun
+> `mgs-rec-runner.py` with explicit `--annual-fee`, `--apr`, repeated
+> `--benefit`, and `--competitor` arguments. If the reader exposes official image
+> URLs, pass the selected official card artwork as `--card-image-url`. Keep
+> compliance conservative: if a required fact such as annual fee is not clearly
+> stated in the accessible official source, say so in the draft rather than
+> inventing it. Do not use Brave/Bing/comparator sites as substitutes for
+> financial facts; those are image or secondary-reference fallbacks only.
+>
 > **REFERENCE - MBNA cache-miss patch:** For the 2026-05-18 incident where
 > manual card-image benchmarking did not run because the runner stopped before
 > image handling on cache MISS, see `references/rec-cache-miss-mbna-2026-05-18.md`.
