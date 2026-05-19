@@ -513,6 +513,23 @@ def normalize_card_artwork(path: str, aggressive: bool = False) -> Dict[str, Any
 
     if img.mode not in ("RGB", "RGBA"):
         img = img.convert("RGBA")
+
+    upscaled = False
+    upscale_info: Dict[str, Any] = {}
+    # Manual crops can be visually correct but too small because the source is
+    # a 16:9 thumbnail with the card occupying only the center. For LazyBlock,
+    # rescue those by upscaling the card-only PNG after crop while preserving
+    # transparency. This is deterministic and avoids a new Gemini hallucination
+    # path for card artwork.
+    if aggressive and img.width < 900:
+        old_w, old_h = img.width, img.height
+        scale = 900 / max(1, old_w)
+        new_size = (900, max(1, round(old_h * scale)))
+        img = img.resize(new_size, Image.Resampling.LANCZOS)
+        img = img.filter(ImageFilter.UnsharpMask(radius=1, percent=130, threshold=3))
+        upscaled = True
+        upscale_info = {"before": {"width": old_w, "height": old_h}, "after": {"width": img.width, "height": img.height}, "method": "lanczos_unsharp", "target_width": 900}
+
     img.save(path)
     return {
         "status": "ok",
