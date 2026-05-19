@@ -234,6 +234,12 @@ for pos, item in enumerate(data.get('results', []), 1):
         score += 12
     if re.search(r'(illustration|hero|banner|background|what-is-cc-balance|card-hand|hand|hands|phone|app|screenshot)', hay):
         score -= 18
+    # LazyBlock card image should be product/card artwork, not a contextual scene.
+    # Official issuer pages often rank payment/app lifestyle photos very high;
+    # these are valid marketing assets but bad card images. Force them below the
+    # acceptance threshold unless there is an explicit isolated-card signal.
+    if noise_re.search(hay) and not re.search(r'(card[-_ ]?front|front[-_ ]?card|product|niche-builder|card[-_ ].*\.(png|jpg|jpeg|webp))', hay):
+        score -= 55
     if 'business' in hay and 'business' not in card_name.lower():
         score -= 25
     if any(h in page_host or h in src_host for h in hard_noise_hosts):
@@ -277,6 +283,10 @@ PY
 
   while IFS=$'\t' read -r cand_score cand_url cand_title cand_page; do
     [ -z "$cand_url" ] && continue
+    if [ "${cand_score:-0}" -lt 110 ]; then
+      echo "[$(date -Iseconds)] search-card-image BRAVE_SKIP_LOW_SCORE score=${cand_score:-0} title=${cand_title:-} page=${cand_page:-} src=$cand_url" >>"$LOG"
+      continue
+    fi
     cand_ext="${cand_url##*.}"; cand_ext="${cand_ext%%\?*}"
     cand_ext=$(echo "$cand_ext" | tr '[:upper:]' '[:lower:]')
     case "$cand_ext" in png|jpg|jpeg|webp) ;; *) cand_ext="jpg" ;; esac
