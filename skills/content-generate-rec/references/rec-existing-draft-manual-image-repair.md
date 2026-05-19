@@ -23,8 +23,8 @@ But it does **not** currently expose a `--post-id` / update-existing-post mode. 
 1. Confirm the target post exists and is the expected status via WordPress REST `GET /wp-json/wp/v2/posts/<post_id>?context=edit`.
 2. Download the manual image URL with a normal browser-like User-Agent.
 3. Validate dimensions/aspect ratio locally. Normalize the manual image before upload:
-   - Preferred helper: `/root/mgs-agent/scripts/normalize-card-artwork.py <input> <output.png> --aggressive`
-   - Default helper quality gate requires normalized width >=600px. If it returns `LOW_QUALITY_SOURCE`, stop and request a better card-only source or intentionally switch to automatic fallback; do not upload the low-quality crop.
+   - Preferred helper for simple crop: `/root/mgs-agent/scripts/normalize-card-artwork.py <input> <output.png> --aggressive`
+   - If the normalized crop is still visually poor but the same source worked well in featured, use `skills/content-generate-rec/scripts/generate-clean-card-image.sh <slug> <input>` to create a clean card-only asset from the same manual reference.
    - Use PNG output so rounded card corners keep transparency; JPEG bakes the old thumbnail/background color into ugly corners.
    - For card/LazyBlock image, the final `card_selection` should record:
    - `mode: manual_card_image_url`
