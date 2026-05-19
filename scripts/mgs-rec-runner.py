@@ -1206,11 +1206,6 @@ def main() -> int:
                             raise RunnerError(f"card image too small after normalization: {cw}x{ch}")
                         if not (1.2 <= (cw / ch) <= 2.2):
                             raise RunnerError(f"card image aspect out of range after normalization: {cw}x{ch}")
-                        if args.card_image_url and cw < 600:
-                            raise RunnerError(
-                                f"LOW_QUALITY_SOURCE: manual card image crop is only {cw}x{ch}; "
-                                "provide a higher-resolution card-only image or use automatic fallback"
-                            )
                 except RunnerError:
                     raise
                 except Exception as exc:
