@@ -36,6 +36,10 @@ Default command shape:
 
 Manual image override is mandatory when present in the user request. If the user provides `Imagem do cartão:`, `Imagem manual:`, `card image:`, or any direct image URL, pass it through as `--card-image-url`; automatic search is only valid when no manual image URL was supplied.
 
+Two-path image rule:
+- **Path A — user supplied card image:** use the supplied URL as the source of truth for the LazyBlock card image. Crop/remove external borders or canvas, but preserve the internal card design and colours. Do not run automatic image search unless the manual source fails quality gates and the user approves fallback. Featured image must be contextual/lifestyle and must use the same validated card design; it must not become a card-only/huge isolated card mockup.
+- **Path B — no card image supplied:** use the runner's automatic image search/ranking. Prefer official or authoritative isolated card artwork for the LazyBlock. Validate horizontal orientation, legibility, and card identity. Report the selected source, card image URL/ID, and featured image URL/ID in the final summary.
+
 Argument mapping pitfall:
 - User-facing `vertical gb-cc-en` is editorial/context only for routine runner calls; do **not** pass `--vertical` to `mgs-rec-runner.py` unless the script later adds that flag.
 - User-facing `URL oficial:` maps to `--source-url`, not `--official-url`.
@@ -905,23 +909,35 @@ Format example (1 single Discord message):
 
 @Rodolfo ✅ {Card Name} publicado no {site}!
 
-📄 Post ID: {id}
-🔗 {public_url}
-✏️ Edit: {edit_url}
+```text
+Resumo do REC — {Card Name}
 
-📊 Yoast: SEO {seo}🟢 | Readability {read}🟢
-📝 {words} palavras | Title {title_chars}c | Sub-Title {subtitle_chars}c | Meta {meta_chars}c
-🔍 Focus: "{focus_kw}"
-🏷️ Tags: {tags_csv}
+Campo                         | Resultado
+------------------------------|--------------------------------------------------
+Site                          | {site}
+Vertical                      | {template_key}
+Status                        | {status}
+Post ID                       | {id}
+Yoast SEO                     | {seo} 🟢
+Yoast Readability             | {read} 🟢
+Palavras                      | {words}
+Title/Sub-title/Meta          | {title_chars}c / {subtitle_chars}c / {meta_chars}c
+Focus keyword                 | {focus_kw}
+Tags                          | {tags_csv}
+Origem da imagem do card      | Manual or automática + source
+Imagem destacada              | Contextual/lifestyle, not card-only
+Auditoria de mídia            | {created_count} criadas | {used_count} usadas | {extra_count} extras | {deleted_count} deletadas
+Tempo total                   | {duration_min_sec}
+Custo operacional estimado    | ${total_operational_cost} USD
+```
 
-🖼️ Imagens:
-• Card image ID: {card_id} — <{card_url}>
-• Featured image ID: {featured_id} — <{featured_url}> (cena: {featured_scene})
-• Audit: {created_count} criadas | {used_count} usadas | {extra_count} extras | {deleted_count} deletadas
+**Links**
+- **Editar post:** [Abrir no WordPress]({edit_url})
+- **URL pública/futura:** [Abrir permalink]({public_url})
+- **Card image / LazyBlock:** [Ver imagem do card]({card_url})
+- **Featured image:** [Ver imagem destacada]({featured_url})
 
-💰 Custo: ${cost} USD ({duration}, {api_calls} API calls)
-
-@Raquel artigo pronto para revisão! 👀
+<@1496254952501280974> artigo pronto para revisão! 👀
 
 ---
 
