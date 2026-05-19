@@ -5,8 +5,8 @@ Usage:
   normalize-card-artwork.py <input_image> <output_png> [--aggressive]
 
 - Normal mode: rotate portrait to landscape and trim white/transparent padding.
-- Aggressive mode: additionally crop flat thumbnail/background canvas and keep
-  rounded-card corners transparent in the output PNG.
+- Aggressive mode: additionally crops flat thumbnail/background canvas when safe;
+  it must preserve internal card colours/design and avoid transparency holes.
 """
 from __future__ import annotations
 
@@ -50,7 +50,7 @@ def main() -> int:
     if args.min_width and width < args.min_width:
         raise SystemExit(
             f"LOW_QUALITY_SOURCE: normalized card image is only {width}x{height}; "
-            f"minimum width is {args.min_width}px. Use a higher-resolution card-only image or automatic fallback."
+            f"minimum width is {args.min_width}px. Use a higher-resolution card-only image or request approval before automatic fallback."
         )
     print(json.dumps({'status': 'ok', 'path': str(dst), 'normalize': result, 'width': width, 'height': height}, ensure_ascii=False))
     return 0
