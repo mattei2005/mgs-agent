@@ -195,9 +195,15 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > HTML, media records, cost files, and how to avoid falsely claiming Brave Images
 > was used when the runner shows `card_image_manual_url_used`.
 >
-> **REFERENCE - REC benchmark audit example:** When Rodolfo asks whether a new
+> **REFERENCE - REC benchmark audit examples:** When Rodolfo asks whether a new
 > REC proved the fast high-production workflow, see
-> `references/rec-benchmark-audit-zable-2026-05-18.md`. It captures the Zable
+> `references/rec-benchmark-audit-zable-2026-05-18.md` for the Zable incident and
+> `references/rec-benchmark-audit-lessons.md` for the durable checklist covering
+> runner CLI verification, manual `--card-image-url`, timing, cache-miss,
+> image-quality gates, and cost reporting. Critical gate: a user-supplied image
+> only counts as respected when the exact runner call includes `--card-image-url`
+> and output reports `card_selection.mode == manual_card_image_url`; env vars or
+> `auto_ranked_card_image` mean the manual benchmark failed.
 > draft lesson: post delivery can be OK while the benchmark is only partial if
 > Atena recovered manually after runner/cache-miss failures, omitted
 > `duration_sec`/`timings_sec`/`term_cache`, or the featured image passed only
