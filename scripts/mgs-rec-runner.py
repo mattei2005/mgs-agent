@@ -433,6 +433,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     name = esc_text(card_data.get("card_name"))
     annual_fee = esc_text(card_data.get("annual_fee") or "N/A")
     apr = esc_text(card_data.get("apr") or "N/A")
+    apr_display = esc_text(shorten_words(card_data.get("apr") or "N/A", 8))
     benefits = [str(b).strip() for b in (card_data.get("benefits") or []) if str(b).strip()]
     competitors = [c.get("name") if isinstance(c, dict) else str(c) for c in (card_data.get("competitors") or [])]
     competitors = [c.strip() for c in competitors if c and str(c).strip()]
@@ -497,7 +498,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>The official product information lists the annual fee as {annual_fee}. APR information is shown as {apr}.</p>
+<p>The official product information lists the annual fee as {annual_fee}. APR information is shown as {apr_display}.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
