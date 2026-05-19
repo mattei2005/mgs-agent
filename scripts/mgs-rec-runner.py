@@ -1148,7 +1148,7 @@ def main() -> int:
                         "title": (img.get("selection") or {}).get("title"),
                         "page": (img.get("selection") or {}).get("page"),
                     }
-                card_normalize = normalize_card_artwork(card_local)
+                card_normalize = normalize_card_artwork(card_local, aggressive=bool(args.card_image_url))
                 try:
                     ident_card = run(["identify", "-format", "%w %h", card_local], timeout=20)
                     if ident_card.returncode == 0:
