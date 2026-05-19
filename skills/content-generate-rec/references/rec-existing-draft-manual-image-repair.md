@@ -51,6 +51,11 @@ But it does **not** currently expose a `--post-id` / update-existing-post mode. 
     - `featured_media` equals the new featured ID
     - content contains the new card URL/ID
     - content no longer contains the old automatic card image URL/ID
+12. Run a visual/source-quality gate on the card image itself, not only on the featured image:
+    - download the final LazyBlock card media and inspect dimensions/channel/visual quality;
+    - if the crop is below ~600px wide or text/logos are visibly pixelated, label it `LOW_QUALITY_SOURCE`;
+    - do not call the repair production-ready just because `manual_crop_applied=true` or featured looks good;
+    - featured generation can hide or recreate defects, while LazyBlock exposes the raw crop.
 
 ## Final report requirements
 

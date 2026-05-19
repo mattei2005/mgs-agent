@@ -80,6 +80,21 @@ images.card_normalize.before/after: dimensions before and after crop
 
 If the user explicitly asked for a bordered/manual image to be cropped and `manual_crop_applied=false`, report the caveat; do not claim card-only normalization succeeded.
 
+## Manual crop quality gate
+
+Do not treat `manual_crop_applied=true` as a full visual PASS. It only proves the canvas/border was removed. After aggressive crop, validate source quality separately:
+
+```text
+Gate                                | Action
+------------------------------------|------------------------------------------------------------
+final card width < 600px             | report LOW_QUALITY_SOURCE; ask for better source or use auto fallback
+text/logos visibly pixelated         | report LOW_QUALITY_SOURCE; do not call it production-ready
+PNG alpha/borders clean but image soft| say border fixed, quality still failed
+featured looks good but card poor    | do not infer card quality from featured; Gemini can mask/recreate defects
+```
+
+Lesson from MBNA 62092: YouTube `maxresdefault` was 1280x720, but the actual card occupied only ~442x288 after crop. The PNG transparency/border fix was technically correct, yet the LazyBlock card remained poor because the source was low-resolution/compressed. Recropping the same URL will not recover detail; replace the source with a higher-quality official/comparison-site card-only image.
+
 ## Auto-image fallback lessons
 
 When no manual image is provided, automatic selection should prefer isolated product/card artwork. Penalize or skip contextual marketing assets for LazyBlock:
