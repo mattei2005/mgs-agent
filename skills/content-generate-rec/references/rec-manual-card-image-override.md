@@ -80,7 +80,7 @@ images.card_normalize.before/after: dimensions before and after crop
 
 If the user explicitly asked for a bordered/manual image to be cropped and `manual_crop_applied=false`, report the caveat; do not claim card-only normalization succeeded.
 
-Manual image LazyBlock gate: after aggressive normalization, if the useful card crop is small/rough for an isolated LazyBlock asset, **still use the user-supplied manual image when the request is explicitly a manual-image benchmark or override**. Report a `manual_card_image_low_quality_source` warning and include the pre-upscale useful crop width, but do not silently replace it with automatic search. Automatic fallback may be used only when the manual URL cannot be downloaded, cannot be normalized into a horizontal card, or the user explicitly approves fallback. Do not use Gemini to invent/rebuild card-only artwork.
+Manual image LazyBlock gate: after aggressive normalization, if the useful card crop is small/rough for an isolated LazyBlock asset, report `manual_card_image_low_quality_source` with the pre-upscale useful crop width. Do not silently replace a user-supplied benchmark image with automatic search, but also do not present a low-resolution crop as production-quality. If a better card-only asset is required, ask for/obtain a higher-resolution card-only source or use an explicitly approved enhanced-card workflow. Do not use colour-key transparency on the card interior; crop the flat canvas and apply only a conservative rounded-corner alpha mask so teal/blue details inside the card are not punched out.
 
 ## Manual crop quality gate
 
