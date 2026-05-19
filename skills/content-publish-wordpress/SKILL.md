@@ -118,6 +118,8 @@ message and exit code is non-zero.
 
 ## Safe teardown for benchmark/test articles
 
+See also `references/rec-benchmark-cleanup-helper.md` for a reusable scoped cleanup pattern.
+
 When a user asks to delete a test/draft article and recreate it from scratch, clean only the requested article/card scope:
 
 1. Fetch the post by direct ID with auth and confirm the title/slug matches the requested article before deleting.
