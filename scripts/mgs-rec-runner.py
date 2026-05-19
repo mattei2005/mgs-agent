@@ -514,6 +514,22 @@ def normalize_card_artwork(path: str, aggressive: bool = False) -> Dict[str, Any
     if img.mode not in ("RGB", "RGBA"):
         img = img.convert("RGBA")
 
+    # If upstream/Gemini already produced real transparency but left the card
+    # parked inside a large transparent canvas, crop to the alpha bounding box.
+    # This is the MBNA clean-card failure mode: technically transparent PNG,
+    # visually terrible in WordPress because the asset is mostly empty canvas.
+    if aggressive:
+        rgba = img.convert("RGBA")
+        alpha_box = rgba.getchannel("A").getbbox()
+        if alpha_box and alpha_box != (0, 0, rgba.width, rgba.height):
+            img2, did_crop, info = apply_candidate_crop(rgba, alpha_box, pad_px=3, require_reduction=True)
+            crop_info["alpha_canvas_crop"] = {**info, "applied": did_crop}
+            if did_crop:
+                img = img2
+                cropped = True
+                aggressive_crop_applied = True
+                crop_method = "alpha_canvas_crop"
+
     upscaled = False
     upscale_info: Dict[str, Any] = {}
     # Manual crops can be visually correct but too small because the source is
