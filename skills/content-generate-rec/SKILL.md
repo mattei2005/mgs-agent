@@ -775,10 +775,28 @@ secao "SEO FIELDS") - ver template carregado em Step 1.
 
 | Campo | Limite |
 |---|---|
-| `post_title` | max 60 chars, contem focus keyphrase, SEM suffix de site |
+| `post_title` | max 60 chars, contem focus keyphrase, SEM suffix de site; NUNCA vazio |
 | `_yoast_wpseo_title` | DEIXAR VAZIO (Yoast inherita global template do site) |
 | `_yoast_wpseo_metadesc` | 120-130 chars (sweet spot 128), focus keyphrase nos primeiros 100 chars |
 | `_yoast_wpseo_focuskw` | max 4 palavras, aparece em title + metadesc + 1o paragrafo |
+
+> **PITFALL — post title blank can pass Yoast:** `_yoast_wpseo_title` should
+> normally stay empty for global-template inheritance, but this does **not** mean
+> the WordPress post title can be blank. Yoast scoring can still return green
+> while the saved article title is empty if an update path sends top-level
+> `title: ""`. After any runner repair or Yoast/update path, verify the saved WP
+> post title via REST/context=edit before reporting success.
+
+#### Final-summary character counts (required when requested)
+
+When the user requests detailed fields for Title, Sub-title, and Meta description,
+report each character count as its own explicit field/row:
+- `Título — caracteres`
+- `Sub-title — caracteres`
+- `Meta description — caracteres`
+
+Do not collapse them into a shorthand such as `Title/Sub-title/Meta` when the
+requested summary enumerates those fields individually.
 
 **Pitfalls criticos:**
 - NUNCA preencher `_yoast_wpseo_title` (override quebra consistencia do site - ver post 62026 historico)
