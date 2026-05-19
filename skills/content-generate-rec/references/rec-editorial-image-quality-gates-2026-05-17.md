@@ -36,18 +36,19 @@ If a downloaded or manually supplied card image is vertical/tombstone:
 
 ### Featured image composition gate
 
-The featured image should contain only three essential layers:
+The featured image should be contextual/lifestyle hero art with only essential elements:
 
-1. A realistic premium background scene.
-2. The same horizontal card, enlarged and centered.
-3. One realistic person as the top layer, slightly overlapping the card above.
+1. A realistic premium background or real-use scene.
+2. The same validated horizontal card integrated naturally in context.
+3. One realistic person or real-use element near the card.
 
 Reject/regenerate images containing:
 
+- Card-only mockups or a huge isolated card on a generic background.
+- Redesigned/different card artwork, wrong issuer, wrong colours, or altered layout.
 - Frames, molduras, picture frames, mockup frames or decorative panels.
 - Duplicate cards, extra cards or card fragments.
 - UI overlays, badges, stickers or phone screens.
-- Hands holding/touching/pinching the card.
 - Any unnecessary objects that make the composition look like a collage/mockup rather than a premium realistic ad image.
 
 ## Implementation notes from this correction
