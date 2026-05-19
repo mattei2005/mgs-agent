@@ -480,33 +480,26 @@ def normalize_card_artwork(path: str, aggressive: bool = False) -> Dict[str, Any
             crop_info["aggressive_background_crop"] = {**meta, **info, "applied": did_crop}
             if did_crop:
                 img = img2
-                # Preserve rounded-card corners for LazyBlock by making the
-                # remaining flat background transparent. Limit removal to
-                # edge-connected pixels so similar colors inside the card design
-                # are not punched out.
-                bg = meta.get("background_rgb")
-                if bg:
-                    rgba = img.convert("RGBA")
-                    pix = rgba.load()
-                    w, h = rgba.size
-                    br, bg_g, bb = bg
-                    stack = [(x, 0) for x in range(w)] + [(x, h - 1) for x in range(w)] + [(0, y) for y in range(h)] + [(w - 1, y) for y in range(h)]
-                    seen = set()
-                    removed = 0
-                    while stack:
-                        x, y = stack.pop()
-                        if (x, y) in seen or x < 0 or y < 0 or x >= w or y >= h:
-                            continue
-                        seen.add((x, y))
-                        r, g, b, a = pix[x, y]
-                        dist = ((r - br) ** 2 + (g - bg_g) ** 2 + (b - bb) ** 2) ** 0.5
-                        if a <= 20 or dist <= 48:
-                            if a != 0:
-                                pix[x, y] = (r, g, b, 0)
-                                removed += 1
-                            stack.extend(((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)))
+                # Preserve rounded-card corners without deleting pixels by
+                # colour. The old flood-fill used the flat canvas colour as a
+                # transparency key; MBNA uses similar teal inside the card art,
+                # so that punched transparent holes through the card design.
+                # Apply only a conservative rounded-rectangle alpha mask to the
+                # outside corners and keep the interior artwork intact.
+                rgba = img.convert("RGBA")
+                w, h = rgba.size
+                radius = max(8, int(min(w, h) * 0.055))
+                mask = Image.new("L", (w, h), 0)
+                try:
+                    from PIL import ImageDraw
+                    draw = ImageDraw.Draw(mask)
+                    draw.rounded_rectangle((0, 0, w - 1, h - 1), radius=radius, fill=255)
+                    rgba.putalpha(mask)
                     img = rgba
-                    info["transparent_edge_pixels"] = removed
+                    info["corner_alpha_mask"] = {"applied": True, "radius": radius}
+                except Exception as e:
+                    img = rgba
+                    info["corner_alpha_mask"] = {"applied": False, "error": str(e)}
                 cropped = True
                 aggressive_crop_applied = True
                 crop_method = "background_canvas_crop"
