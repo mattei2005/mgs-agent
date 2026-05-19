@@ -1166,27 +1166,21 @@ def main() -> int:
                     if not (1.2 <= (cw / ch) <= 2.2):
                         raise RunnerError(f"manual card image aspect out of range: {cw}x{ch}")
                     manual_pre_upscale_w = (((card_normalize.get("upscale_info") or {}).get("before") or {}).get("width"))
+                    card_selection = {
+                        "mode": "manual_card_image_url",
+                        "source": args.card_image_url,
+                        "reason": "user_supplied_card_art_normalized",
+                        "width": cw,
+                        "height": ch,
+                        "aspect": round(cw / ch, 4) if ch else None,
+                        "dry_run_validated": True,
+                    }
                     if manual_pre_upscale_w and int(manual_pre_upscale_w) < 600:
-                        warnings.append(f"manual_card_image_would_be_rejected_for_lazyblock: useful crop width {manual_pre_upscale_w}px; automatic card-only fallback would be used")
-                        card_selection = {
-                            "mode": "manual_card_image_rejected_dry_run",
-                            "source": args.card_image_url,
-                            "manual_rejected_reason": f"useful crop width {manual_pre_upscale_w}px below 600px LazyBlock quality gate",
-                            "width": cw,
-                            "height": ch,
-                            "aspect": round(cw / ch, 4) if ch else None,
-                            "dry_run_validated": False,
-                        }
-                    else:
-                        card_selection = {
-                            "mode": "manual_card_image_url",
-                            "source": args.card_image_url,
-                            "reason": "user_supplied_card_art_normalized",
-                            "width": cw,
-                            "height": ch,
-                            "aspect": round(cw / ch, 4) if ch else None,
-                            "dry_run_validated": True,
-                        }
+                        warnings.append(
+                            f"manual_card_image_low_quality_source: useful crop width {manual_pre_upscale_w}px below 600px; "
+                            "manual override would still be used because user supplied an explicit benchmark image"
+                        )
+                        card_selection["quality_warning"] = f"useful crop width {manual_pre_upscale_w}px below 600px before upscale"
                     tick("manual_card_image_validate_sec", t0)
                     steps.append("dry_run_manual_card_image_validated")
                 steps.append("dry_run_skip_card_upload")
