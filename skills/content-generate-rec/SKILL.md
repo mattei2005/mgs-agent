@@ -574,12 +574,7 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   unnecessary decorative objects.
 - VALIDATE LOCAL ASPECT RATIO BEFORE UPLOAD: final featured must be strict 16:9 (expected 1280x720 after `compress-image.sh`). If Gemini returns 8:5/16:10 (example: 1280x800), do not silently accept; the approved path is the central-crop enforcement in `compress-image.sh` before upload.
 - VALIDATE LOCALLY BEFORE UPLOAD: use `vision_analyze` on `/tmp/featured-<slug>.jpg` and confirm the card in the composition is visually identical to the card_media (issuer design, layout, colours, sample text placement). If not, regenerate (retry up to 2x). If still broken, abort with a clear message.
-- VALIDATE COMPOSITION BEFORE UPLOAD: the featured image must contain only three
-  essential layers: (1) a realistic premium background scene, (2) the same
-  horizontal card enlarged and centered, and (3) one realistic person as the top
-  layer slightly overlapping the card above. Reject/regenerate images with
-  frames/molduras, decorative panels, duplicated cards, badges, UI overlays,
-  phone screens, hands holding the card, or extra composition objects.
+- VALIDATE COMPOSITION BEFORE UPLOAD: the featured image must be contextual/lifestyle hero art, not a card-only mockup. It should contain a realistic premium background/use scene, the same validated horizontal card integrated naturally in context, and a realistic person or real-use element near the card. Reject/regenerate images with a huge isolated card, redesigned/different card art, frames/molduras, decorative panels, duplicated cards, badges, UI overlays, phone screens, or extra composition objects.
 - If a brand/text artifact is discovered only after publication, follow `references/rec-post-publication-qa.md` → “Featured image brand-artifact repair”: corrected 16:9 composite/regeneration, update `featured_media`, keep Yoast/social image URLs live or refreshed, safe-delete only the bad media, then re-verify public URL + image URLs.
 - Only after the local aspect-ratio + vision checks pass, upload via `upload-image.sh` → `{id, source_url, mime_type}` — this is the **featured_media**.
 
