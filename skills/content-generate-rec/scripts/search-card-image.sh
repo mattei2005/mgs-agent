@@ -246,6 +246,10 @@ for pos, item in enumerate(data.get('results', []), 1):
         score -= 90
     if 'business' in hay and 'business' not in card_name.lower():
         score -= 25
+    if official_host.endswith('.co.uk') and (page_host.endswith('.ca') or src_host.endswith('.ca') or '.com.au' in page_host or '.com.au' in src_host):
+        score -= 90
+    if official_host.endswith('.co.uk') and brand == 'mbna' and ('mbna.ca' in page_host or 'mbna.ca' in src_host):
+        score = -999
     if any(h in page_host or h in src_host for h in hard_noise_hosts):
         score -= 60
     if noise_re.search(hay):
