@@ -1190,12 +1190,14 @@ def main() -> int:
                     raise RunnerError("No card official URL available for image search")
                 t0 = time.time()
                 if args.card_image_url:
-                    # Manual image URLs are respected only when they normalize
-                    # into a real card-only LazyBlock asset. Do not use Gemini to
-                    # invent/rebuild card artwork: it produced MBNA edge/text
-                    # artifacts. If the user-supplied image is a thumbnail/promo
-                    # whose useful card crop is too small, fall back to automatic
-                    # card-image search for the LazyBlock and report that choice.
+                    # Manual image URLs are a source-of-truth override for the
+                    # LazyBlock card image. Normalize/crop the supplied image,
+                    # but do not use Gemini/AI to recreate an isolated card:
+                    # the MBNA incident proved generated card-only assets can
+                    # change text, edges, shadows, colours, and brand design.
+                    # If the useful crop is too small, keep the manual path
+                    # flagged as LOW_QUALITY_SOURCE; automatic fallback requires
+                    # explicit user approval outside this runner.
                     suffix = ".png"
                     manual_local = f"/tmp/card-{card_slug}-manual{suffix}"
                     req = urllib.request.Request(
@@ -1214,20 +1216,12 @@ def main() -> int:
                         "reason": "user_supplied_card_art_normalized",
                     }
                     if manual_pre_upscale_w and int(manual_pre_upscale_w) < 600:
+                        card_selection["quality_warning"] = f"useful crop width {manual_pre_upscale_w}px below 600px before upscale"
+                        card_selection["quality_status"] = "LOW_QUALITY_SOURCE"
                         warnings.append(
                             f"manual_card_image_low_quality_source: useful crop width {manual_pre_upscale_w}px below 600px; "
-                            "using controlled card-only enhancement for LazyBlock"
+                            "manual source kept as requested; automatic fallback requires user approval"
                         )
-                        enhanced = run_json([str(GEN_SCRIPTS / "generate-card-only-image.sh"), card_slug, manual_local], timeout=180, allow_fail=True)
-                        if enhanced.get("status") == "OK" and enhanced.get("path"):
-                            card_local = enhanced["path"]
-                            card_selection["mode"] = "manual_card_image_url_enhanced"
-                            card_selection["enhanced_from"] = args.card_image_url
-                            card_selection["enhancement_model"] = enhanced.get("model")
-                            steps.append("manual_card_image_enhanced_for_lazyblock")
-                        else:
-                            card_selection["quality_warning"] = f"useful crop width {manual_pre_upscale_w}px below 600px before upscale; enhancement failed"
-                            warnings.append(f"manual_card_image_enhancement_failed: {json.dumps(enhanced, ensure_ascii=False)[:500]}")
                     steps.append("card_image_manual_url_used")
                 else:
                     img = run_json([str(GEN_SCRIPTS / "search-card-image.sh"), card_data["card_name"], source_url], timeout=180, allow_fail=True)
