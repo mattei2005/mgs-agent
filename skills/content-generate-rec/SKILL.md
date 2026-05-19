@@ -196,6 +196,13 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > HTML, media records, cost files, and how to avoid falsely claiming Brave Images
 > was used when the runner shows `card_image_manual_url_used`.
 >
+> **REFERENCE - Manual card image override:** When Rodolfo/Raquel provides
+> `Imagem do cartão:`, `Imagem manual:`, or any direct card image URL in a REC
+> request, use `references/rec-manual-card-image-override.md`. Critical gate:
+> user-supplied card image is an explicit override; the run only passes when
+> output reports `images.card_selection.mode == manual_card_image_url`. Cache
+> hits or automatic search must not override the supplied image.
+>
 > **REFERENCE - REC benchmark audit examples:** When Rodolfo asks whether a new
 > REC proved the fast high-production workflow, see
 > `references/rec-benchmark-audit-zable-2026-05-18.md` for the Zable incident and
