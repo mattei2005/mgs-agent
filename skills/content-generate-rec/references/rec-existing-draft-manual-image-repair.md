@@ -22,11 +22,15 @@ But it does **not** currently expose a `--post-id` / update-existing-post mode. 
 
 1. Confirm the target post exists and is the expected status via WordPress REST `GET /wp-json/wp/v2/posts/<post_id>?context=edit`.
 2. Download the manual image URL with a normal browser-like User-Agent.
-3. Validate dimensions/aspect ratio locally. For card/LazyBlock image, the final `card_selection` should record:
+3. Validate dimensions/aspect ratio locally. Normalize the manual image before upload:
+   - Preferred helper: `/root/mgs-agent/scripts/normalize-card-artwork.py <input> <output.png> --aggressive`
+   - Use PNG output so rounded card corners keep transparency; JPEG bakes the old thumbnail/background color into ugly corners.
+   - For card/LazyBlock image, the final `card_selection` should record:
    - `mode: manual_card_image_url`
    - `source: <manual URL>`
    - width, height, aspect
-4. Upload the manual card image with `content-publish-wordpress/scripts/upload-image.sh`.
+   - `card_normalize.manual_crop_applied: true` when canvas/borders were removed
+4. Upload the normalized manual card image with `content-publish-wordpress/scripts/upload-image.sh`.
 5. Generate the featured image from that exact local manual card file with `content-generate-rec/scripts/generate-featured-image.sh`.
 6. Upload the new featured image.
 7. Fetch the current post content and replace only the `imagem` field inside the `<!-- wp:lazyblock/credit-card {...} /-->` attributes:
