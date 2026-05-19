@@ -540,6 +540,8 @@ def normalize_card_artwork(path: str, aggressive: bool = False) -> Dict[str, Any
         "crop_method": crop_method,
         "manual_crop_applied": aggressive_crop_applied,
         "crop_info": crop_info,
+        "upscaled": upscaled,
+        "upscale_info": upscale_info,
     }
 
 
@@ -1147,11 +1149,6 @@ def main() -> int:
                         raise RunnerError(f"manual card image too small: {cw}x{ch}")
                     if not (1.2 <= (cw / ch) <= 2.2):
                         raise RunnerError(f"manual card image aspect out of range: {cw}x{ch}")
-                    if cw < 600:
-                        raise RunnerError(
-                            f"LOW_QUALITY_SOURCE: manual card image crop is only {cw}x{ch}; "
-                            "provide a higher-resolution card-only image or use automatic fallback"
-                        )
                     card_selection = {
                         "mode": "manual_card_image_url",
                         "source": args.card_image_url,
