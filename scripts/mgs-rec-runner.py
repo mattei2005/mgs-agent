@@ -368,8 +368,15 @@ def call_rec_api(payload: Dict[str, Any]) -> Dict[str, Any]:
         raise RunnerError(f"mgs-rec-api call failed: {e}")
 
 
-def normalize_card_artwork(path: str) -> Dict[str, Any]:
-    """Force card artwork to horizontal orientation and crop white padding."""
+def normalize_card_artwork(path: str, aggressive: bool = False) -> Dict[str, Any]:
+    """Force card artwork to horizontal orientation and crop padding/canvas.
+
+    Normal mode trims transparent/white padding. Aggressive mode is used for
+    manual card-image overrides: it also estimates a flat background from the
+    image edges and crops the dominant canvas around the actual card artwork.
+    This keeps user-supplied thumbnails/banners from entering LazyBlock as a
+    wide frame with a small card in the middle.
+    """
     try:
         from PIL import Image
     except Exception as e:
@@ -383,29 +390,113 @@ def normalize_card_artwork(path: str) -> Dict[str, Any]:
         img = img.rotate(-90, expand=True)
         rotated = True
 
-    rgba = img.convert("RGBA")
-    pix = rgba.load()
-    w, h = rgba.size
-    left, right, top, bottom = w, -1, h, -1
-    for y in range(h):
-        for x in range(w):
-            r, g, b, a = pix[x, y]
-            if a > 20 and not (r > 242 and g > 242 and b > 242):
-                left, right = min(left, x), max(right, x)
-                top, bottom = min(top, y), max(bottom, y)
+    def bbox_from_mask(source: "Image.Image", mode: str) -> Tuple[Optional[Tuple[int, int, int, int]], Dict[str, Any]]:
+        rgba = source.convert("RGBA")
+        pix = rgba.load()
+        w, h = rgba.size
+        left, right, top, bottom = w, -1, h, -1
+        meta: Dict[str, Any] = {"mode": mode}
+
+        bg_rgb: Optional[Tuple[int, int, int]] = None
+        if mode == "background":
+            samples: Dict[Tuple[int, int, int], List[int]] = {}
+            step = max(1, min(w, h) // 80)
+            coords = []
+            for x in range(0, w, step):
+                coords.append((x, 0)); coords.append((x, h - 1))
+            for y in range(0, h, step):
+                coords.append((0, y)); coords.append((w - 1, y))
+            for x, y in coords:
+                r, g, b, a = pix[x, y]
+                if a <= 20:
+                    continue
+                bucket = (r // 16, g // 16, b // 16)
+                cur = samples.setdefault(bucket, [0, 0, 0, 0])
+                cur[0] += 1; cur[1] += r; cur[2] += g; cur[3] += b
+            if samples:
+                count, rr, gg, bb = max(samples.values(), key=lambda v: v[0])
+                bg_rgb = (rr // count, gg // count, bb // count)
+                meta["background_rgb"] = bg_rgb
+
+        for y in range(h):
+            for x in range(w):
+                r, g, b, a = pix[x, y]
+                keep = False
+                if a > 20:
+                    if mode == "white":
+                        keep = not (r > 242 and g > 242 and b > 242)
+                    elif bg_rgb:
+                        br, bg, bb = bg_rgb
+                        dist = ((r - br) ** 2 + (g - bg) ** 2 + (b - bb) ** 2) ** 0.5
+                        keep = dist > 42
+                if keep:
+                    left, right = min(left, x), max(right, x)
+                    top, bottom = min(top, y), max(bottom, y)
+        if right < left or bottom < top:
+            return None, meta
+        return (left, top, right + 1, bottom + 1), meta
+
+    def apply_candidate_crop(source: "Image.Image", box: Tuple[int, int, int, int], *, pad_px: int, require_reduction: bool) -> Tuple["Image.Image", bool, Dict[str, Any]]:
+        w, h = source.size
+        left, top, right, bottom = box
+        crop_box = (max(0, left - pad_px), max(0, top - pad_px), min(w, right + pad_px), min(h, bottom + pad_px))
+        cw, ch = crop_box[2] - crop_box[0], crop_box[3] - crop_box[1]
+        aspect = cw / ch if ch else 0
+        reduction = 1 - ((cw * ch) / (w * h)) if w and h else 0
+        info = {"box": crop_box, "candidate_width": cw, "candidate_height": ch, "candidate_aspect": round(aspect, 4), "area_reduction": round(reduction, 4)}
+        if crop_box == (0, 0, w, h):
+            return source, False, info
+        if not (1.2 <= aspect <= 2.2):
+            info["rejected_reason"] = "aspect_out_of_card_range"
+            return source, False, info
+        if require_reduction and reduction < 0.08:
+            info["rejected_reason"] = "insufficient_canvas_reduction"
+            return source, False, info
+        return source.crop(crop_box), True, info
 
     cropped = False
-    if right >= left and bottom >= top:
-        pad = 3
-        box = (max(0, left-pad), max(0, top-pad), min(w, right+pad+1), min(h, bottom+pad+1))
-        if box != (0, 0, w, h):
-            img = img.crop(box)
+    crop_method = None
+    crop_info: Dict[str, Any] = {}
+
+    # First trim ordinary white/transparent padding.
+    box, meta = bbox_from_mask(img, "white")
+    if box:
+        img2, did_crop, info = apply_candidate_crop(img, box, pad_px=3, require_reduction=False)
+        if did_crop:
+            img = img2
             cropped = True
+            crop_method = "white_or_transparent_trim"
+            crop_info = {**meta, **info}
+
+    # Manual images often have a flat colored thumbnail/canvas around the card.
+    # Crop that only in aggressive mode and only when the detected object still
+    # looks like a horizontal card.
+    aggressive_crop_applied = False
+    if aggressive:
+        box, meta = bbox_from_mask(img, "background")
+        if box:
+            pad = max(4, int(min(img.size) * 0.015))
+            img2, did_crop, info = apply_candidate_crop(img, box, pad_px=pad, require_reduction=True)
+            crop_info["aggressive_background_crop"] = {**meta, **info, "applied": did_crop}
+            if did_crop:
+                img = img2
+                cropped = True
+                aggressive_crop_applied = True
+                crop_method = "background_canvas_crop"
 
     if img.mode not in ("RGB", "RGBA"):
         img = img.convert("RGBA")
     img.save(path)
-    return {"status": "ok", "before": before, "after": {"width": img.width, "height": img.height}, "rotated": rotated, "cropped": cropped}
+    return {
+        "status": "ok",
+        "before": before,
+        "after": {"width": img.width, "height": img.height},
+        "rotated": rotated,
+        "cropped": cropped,
+        "crop_method": crop_method,
+        "manual_crop_applied": aggressive_crop_applied,
+        "crop_info": crop_info,
+    }
 
 
 def esc_text(value: Any) -> str:
