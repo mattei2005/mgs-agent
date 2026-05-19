@@ -50,15 +50,15 @@ breaks the canonical URLs and pollutes the media library.
 ### Delete order
 
 1. Fetch the post to get `featured_media` ID + parse card media ID from content
-2. DELETE `/wp/v2/posts/<id>?force=true`
-3. DELETE `/wp/v2/media/<featured_id>?force=true`
-4. DELETE `/wp/v2/media/<card_id>?force=true`
+2. DELETE `/wp/v2/media/<featured_id>?force=true`
+3. DELETE `/wp/v2/media/<card_id>?force=true`
+4. DELETE `/wp/v2/posts/<id>?force=true`
 
 ```bash
 # Example
-curl -s -u "$WP_USER:$WP_PASS" -X DELETE "$WP_URL/wp-json/wp/v2/posts/62004?force=true"
 curl -s -u "$WP_USER:$WP_PASS" -X DELETE "$WP_URL/wp-json/wp/v2/media/61999?force=true"
 curl -s -u "$WP_USER:$WP_PASS" -X DELETE "$WP_URL/wp-json/wp/v2/media/62000?force=true"
+curl -s -u "$WP_USER:$WP_PASS" -X DELETE "$WP_URL/wp-json/wp/v2/posts/62004?force=true"
 ```
 
 Confirm each DELETE returns `{"deleted":true}` before re-uploading.
