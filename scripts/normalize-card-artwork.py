@@ -14,6 +14,7 @@ import argparse
 import importlib.util
 import json
 from pathlib import Path
+from PIL import Image
 
 RUNNER = Path('/root/mgs-agent/scripts/mgs-rec-runner.py')
 
@@ -32,6 +33,7 @@ def main() -> int:
     ap.add_argument('input_image')
     ap.add_argument('output_png')
     ap.add_argument('--aggressive', action='store_true')
+    ap.add_argument('--min-width', type=int, default=600, help='fail if normalized card is narrower than this; use 0 to disable')
     args = ap.parse_args()
 
     src = Path(args.input_image)
