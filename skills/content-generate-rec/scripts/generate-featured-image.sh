@@ -73,29 +73,35 @@ or recreate the card — it must appear identical in colors, logo, layout and
 proportions.
 
 Scene: $scene.
-Composition must contain ONLY these three essential layers. Any other visual
-object or decorative structure is a failure:
-1. Background scene: one premium realistic environment, no frames, no posters,
-   no picture frames, no extra cards, no UI overlays, no decorative panels.
-2. Credit card: the exact provided card, HORIZONTAL landscape orientation,
-   enlarged, centered, and occupying the central visual area. It must look like
-   a clean physical card overlay, not a vertical/tombstone card and not inside
-   a frame.
-3. Person: ONE realistic person as the top layer, slightly overlapping the upper
-   part of the card. The person must not hold, touch, pinch, or cover the card.
+Visual variation for this run: $visual_brief.
 
-Layer order: background behind everything; large horizontal card centered over
-background; person in front, slightly overlapping above the card.
+Composition rules:
+- The credit card must be the clear protagonist and remain readable.
+- Use the selected visual variation naturally; do not force the same centered-card
+  layout every time.
+- Acceptable variations include: a hand holding the card, card near a generic
+  payment terminal, card beside a phone, card on a budgeting desk, card near a
+  wallet/pocket, shopping/rewards context, travel context, or one person with a
+  large card in the foreground.
+- If a hand is present, fingers may hold the edges but must not cover the issuer
+  logo, chip, contactless icon, or payment network mark.
+- Use only generic props. No competitor logo, no site logo, no branded corner
+  overlay, no blue corner effect copied from another site, no retailer/airline/
+  merchant logos.
+- Keep the scene clean: no duplicate cards, no extra card designs, no UI overlay,
+  no stickers, no badges, no text labels.
 
 Style: ultra-realistic commercial photography (full-frame camera), cinematic
 key + soft fill + subtle rim light, realistic card reflections, soft natural
-shadows, premium campaign color grading.
+shadows, premium editorial color grading. Vary camera angle and distance across
+runs: close-up, flat lay, over-the-shoulder, payment moment, lifestyle portrait,
+or product-focused foreground.
 
-Negative: picture frame, border frame, mockup frame, extra card, duplicate card,
-card held in hand, person touching the card, phone screen, UI overlay, badge,
-sticker, unnecessary objects, altered card design, vertical card orientation,
-distorted anatomy, extra fingers, fake smile, cartoon, illustration, CGI, 3D
-render, stock photo look, flat lighting.
+Negative: competitor branding, Memivi logo, blue corner overlay, picture frame,
+mockup frame, extra card, duplicate card, fingers covering logo/issuer/network,
+phone screen with readable UI, badge, sticker, unnecessary objects, altered card
+design, vertical card orientation, distorted anatomy, extra fingers, fake smile,
+cartoon, illustration, CGI, 3D render, stock photo look, flat lighting.
 
 Output: one image, 16:9, photo-realistic.
 PROMPT
