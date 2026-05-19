@@ -238,7 +238,7 @@ for pos, item in enumerate(data.get('results', []), 1):
     # Official issuer pages often rank payment/app lifestyle photos very high;
     # these are valid marketing assets but bad card images. Force them below the
     # acceptance threshold unless there is an explicit isolated-card signal.
-    isolated_signal = re.search(r'(card[-_ ]?front|front[-_ ]?card|product|niche-builder|card[-_ ].*\.(png|jpg|jpeg|webp))', hay)
+    isolated_signal = re.search(r'(card[-_ ]?front|front[-_ ]?card|product|niche-builder|card[-_][a-z0-9_-]{0,80}\.(png|jpg|jpeg|webp))', hay)
     contextual_noise = re.search(r'(person|people|woman|man|hand|hands|phone|mobile|app|screenshot|screen|apple\s*pay|google\s*pay)', hay)
     if contextual_noise and not isolated_signal:
         score = -999
