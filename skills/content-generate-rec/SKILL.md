@@ -484,6 +484,13 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   Google Play thumbnails, balance-transfer/loan promos, decorative icons and
   busy backgrounds. Promotional art is acceptable only as a fallback when no
   clean card-only image is available.
+- **Do not use promotional/lifestyle official images as LazyBlock card images.**
+  Even when an image comes from the issuer's official page, reject it for the
+  card/LazyBlock slot if it includes a person, hand, table, card reader, passport,
+  shopping scene, background composition, or any non-card object. Official source
+  is not enough; the LazyBlock requirement is isolated horizontal card-only
+  artwork. Such lifestyle images may be candidates for featured-image context,
+  not for the raw card image.
 - The script logs which priority tier was used. If tier 3 or 4, the log
   notes it so Raquel knows to expect manual review.
 - The image is saved to `/tmp/card-<slug>.<ext>`.
