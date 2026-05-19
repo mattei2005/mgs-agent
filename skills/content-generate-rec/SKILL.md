@@ -203,6 +203,14 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > output reports `images.card_selection.mode == manual_card_image_url`. Cache
 > hits or automatic search must not override the supplied image.
 >
+> **REFERENCE - Existing draft manual image repair:** When a user asks to fix an
+> already-created REC draft/post (with `Post ID`) because the manual image was
+> ignored, use `references/rec-existing-draft-manual-image-repair.md`. The normal
+> runner create path must not be rerun unless it supports an explicit update mode;
+> repair the same post by replacing the LazyBlock `imagem`, regenerating featured
+> from the manual source, keeping the requested status, and verifying no new post
+> was created.
+>
 > **REFERENCE - REC benchmark audit examples:** When Rodolfo asks whether a new
 > REC proved the fast high-production workflow, see
 > `references/rec-benchmark-audit-zable-2026-05-18.md` for the Zable incident and
