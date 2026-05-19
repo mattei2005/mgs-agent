@@ -390,6 +390,22 @@ Issue upstream: https://github.com/NousResearch/hermes-agent/issues/14905
 
 Ver `references/discord-threads-lifecycle.md` para referência completa.
 
+### Auto-add de membros em threads: diagnosticar prompt/config antes de culpar Discord
+
+Quando Rodolfo relatar que Atena/Zeus cria threads mas parou de colocar pessoas automaticamente nelas, usar `references/discord-thread-auto-add-members-regression.md`.
+
+Lição validada: o gateway Discord do Hermes cria threads via `_auto_create_thread(...)`, mas não adiciona membros extras por padrão. No setup MGS, o comportamento antigo vinha de um `channel_prompts` bootstrap que fazia rename + auto-discover + `PUT /channels/{THREAD_ID}/thread-members/{uid}` via `execute_code`. Se esse prompt foi simplificado para `rename-on-create, then freeze`, a thread continua sendo criada/renomeada, mas só ficam o usuário autor + bot/agente.
+
+Diagnóstico mínimo:
+- Inspecionar `/root/.hermes/profiles/{atena,zeus}/config.yaml` → `discord.channel_prompts`.
+- Procurar no histórico versionado por `thread-members`, `auto-discover`, `renomear thread + adicionar membros`.
+- Verificar no gateway (`/root/.hermes/hermes-agent/gateway/platforms/discord.py`) se há `thread.add_user`/`thread-members`; se não houver, core não está fazendo auto-add.
+- Consultar Discord API para `GET /channels/{THREAD_ID}/thread-members` e reportar apenas contagem/IDs permitidos; nunca imprimir token/header.
+
+Correção preferida: implementar auto-add determinístico pós-criação no runtime/config (`thread_auto_add_users`/roles) ou restaurar prompt enxuto só para thread comprovadamente nova. Não voltar com script longo em toda resposta/follow-up.
+
+
+
 ### Followed announcement channels com explicação automática
 
 Quando Rodolfo criar um canal que segue anúncios externos (ex: Hermes announcements) e pedir para Zeus explicar automaticamente cada novo post abaixo do anúncio, usar o padrão de poller cron descrito em `references/discord-followed-announcement-explainer.md`.
