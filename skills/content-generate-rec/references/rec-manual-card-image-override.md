@@ -66,9 +66,9 @@ validation.status: PASS
 
 ## Image quality note
 
-A direct image URL can be technically valid but editorially poor (e.g. YouTube thumbnail/banner). If Rodolfo provides it as a benchmark override, respect it and report quality caveats separately. Do not silently replace it with automatic search.
+A direct image URL can be technically valid but editorially poor (e.g. YouTube thumbnail/banner). If Rodolfo provides it as a benchmark override, respect it as the initial source of truth, but do not deliver it as production-ready if it fails the visual quality gate. Report `LOW_QUALITY_SOURCE` / `manual_rejected_reason` and request a better source or explicit approval before any automatic fallback.
 
-Manual images still go through card-art normalization before upload/featured generation. The runner should crop white/transparent padding and, for manual overrides, apply aggressive flat-background canvas crop so a user-supplied thumbnail such as a 1280x720 image with a small centered card becomes card-only artwork for the LazyBlock. Manual normalized card images should be saved/uploaded as PNG so rounded corners can keep transparency; saving the crop as JPEG bakes the flat thumbnail background into ugly corner/border artifacts.
+Manual images still go through card-art normalization before upload/featured generation. The runner should crop white/transparent padding and remove external canvas when safe. For manual overrides, use aggressive flat-background canvas crop only when it does not remove colours/design inside the card. If the canvas/background colour also appears in the card artwork, use a conservative RGB-preserving crop instead. Manual normalized card images should be saved/uploaded as PNG when transparency outside rounded corners is safe; otherwise preserve RGB colours to avoid internal checkerboard holes.
 
 Expected evidence for manual image normalization:
 
@@ -89,7 +89,7 @@ Do not treat `manual_crop_applied=true` as a full visual PASS. It only proves th
 ```text
 Gate                                | Action
 ------------------------------------|------------------------------------------------------------
-final card width < 600px             | report LOW_QUALITY_SOURCE; ask for better source or use auto fallback
+final card width < 600px             | report LOW_QUALITY_SOURCE; ask for better source or request approval before auto fallback
 text/logos visibly pixelated         | report LOW_QUALITY_SOURCE; do not call it production-ready
 PNG alpha/borders clean but image soft| say border fixed, quality still failed
 featured looks good but card poor    | do not infer card quality from featured; Gemini can mask/recreate defects
