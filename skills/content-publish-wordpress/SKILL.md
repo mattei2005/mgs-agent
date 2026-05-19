@@ -116,6 +116,18 @@ All scripts append to `/root/mgs-agent/logs/publish-wordpress.log` with
 timestamp + action + HTTP status. On error, stderr receives a human-readable
 message and exit code is non-zero.
 
+## Safe teardown for benchmark/test articles
+
+When a user asks to delete a test/draft article and recreate it from scratch, clean only the requested article/card scope:
+
+1. Fetch the post by direct ID with auth and confirm the title/slug matches the requested article before deleting.
+2. Delete the post with `force=true`.
+3. Delete only media that is attached to the post or whose slug/title/source URL clearly matches the requested card slug.
+4. Verify the post and deleted media return 404 via WordPress REST.
+5. If the content runner cached product data, remove only the matching card slug rows from `card_cache` and `cache_access_log`.
+6. If server access is available, remove physical upload/cache files matching the specific card slug/post ID only; do not purge broad site cache unless explicitly requested.
+7. If Cloudflare still returns cached uploaded images after origin deletion, report that edge cache may lag; verify origin 404 when possible.
+
 ## WP REST curl hardening
 
 For scripts that call WordPress REST, use the centralized `wp_curl_auth_http` pattern documented in `references/wp-curl-http-wrapper.md`: preserve real HTTP 4xx/5xx status + body with `--fail-with-body`, return `000` only for transport failure, and keep credentials hidden via `curl -K` tempfiles.
