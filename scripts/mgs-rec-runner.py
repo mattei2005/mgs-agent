@@ -1216,9 +1216,18 @@ def main() -> int:
                     if manual_pre_upscale_w and int(manual_pre_upscale_w) < 600:
                         warnings.append(
                             f"manual_card_image_low_quality_source: useful crop width {manual_pre_upscale_w}px below 600px; "
-                            "manual override still used because user supplied an explicit benchmark image"
+                            "using controlled card-only enhancement for LazyBlock"
                         )
-                        card_selection["quality_warning"] = f"useful crop width {manual_pre_upscale_w}px below 600px before upscale"
+                        enhanced = run_json([str(GEN_SCRIPTS / "generate-card-only-image.sh"), card_slug, manual_local], timeout=180, allow_fail=True)
+                        if enhanced.get("status") == "OK" and enhanced.get("path"):
+                            card_local = enhanced["path"]
+                            card_selection["mode"] = "manual_card_image_url_enhanced"
+                            card_selection["enhanced_from"] = args.card_image_url
+                            card_selection["enhancement_model"] = enhanced.get("model")
+                            steps.append("manual_card_image_enhanced_for_lazyblock")
+                        else:
+                            card_selection["quality_warning"] = f"useful crop width {manual_pre_upscale_w}px below 600px before upscale; enhancement failed"
+                            warnings.append(f"manual_card_image_enhancement_failed: {json.dumps(enhanced, ensure_ascii=False)[:500]}")
                     steps.append("card_image_manual_url_used")
                 else:
                     img = run_json([str(GEN_SCRIPTS / "search-card-image.sh"), card_data["card_name"], source_url], timeout=180, allow_fail=True)
