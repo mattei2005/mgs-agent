@@ -1178,7 +1178,7 @@ def main() -> int:
                     if manual_pre_upscale_w and int(manual_pre_upscale_w) < 600:
                         warnings.append(
                             f"manual_card_image_low_quality_source: useful crop width {manual_pre_upscale_w}px below 600px; "
-                            "manual override would still be used because user supplied an explicit benchmark image"
+                            "normal publish would stop and require a better source or explicit automatic fallback approval"
                         )
                         card_selection["quality_warning"] = f"useful crop width {manual_pre_upscale_w}px below 600px before upscale"
                     tick("manual_card_image_validate_sec", t0)
