@@ -9,9 +9,12 @@ Use this reference when the user asks for a normal REC direct draft/publish and 
 - Post status: `draft` or `publish`
 - Official source URL
 
-Optional, but preferred when the team already found the best card asset:
+Manual image override (mandatory when provided by the user):
 
-- Direct card image URL ending in `.png`, `.jpg`, `.jpeg`, or `.webp`
+- If the request contains `Imagem do cartão:`, `Imagem manual:`, `card image:`, or any direct card image URL, pass it explicitly with `--card-image-url`.
+- User-supplied card image is an override, not a suggestion. Automatic image search (official/Brave/Bing/Finder) is only allowed when no manual image URL was supplied.
+- A run that received a manual image in the prompt only passes if the runner JSON shows `images.card_selection.mode` starting with `manual_card_image_url`. If it shows `auto_ranked_card_image` or another automatic mode, treat it as a failed run and report it.
+- If the manual image is low quality but downloadable/valid, use it and warn in the summary. Do not silently replace it with Finder/Brave/Bing.
 
 ## Command
 

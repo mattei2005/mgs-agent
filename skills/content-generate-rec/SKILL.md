@@ -30,8 +30,11 @@ Default command shape:
   --site <site_key> \
   --card "<exact card name>" \
   --status <draft|publish> \
-  --source-url "<official URL>"
+  --source-url "<official URL>" \
+  [--card-image-url "<direct image URL when supplied by the user>"]
 ```
+
+Manual image override is mandatory when present in the user request. If the user provides `Imagem do cartão:`, `Imagem manual:`, `card image:`, or any direct image URL, pass it through as `--card-image-url`; automatic search is only valid when no manual image URL was supplied.
 
 Argument mapping pitfall:
 - User-facing `vertical gb-cc-en` is editorial/context only for routine runner calls; do **not** pass `--vertical` to `mgs-rec-runner.py` unless the script later adds that flag.
