@@ -54,7 +54,8 @@ O incidente real `1505532189490811081` mostrou que a regra “mencione o outro a
 
 Regras operacionais:
 - Responder mensagens do Rodolfo normalmente.
-- Não responder a mensagens de outro agente que sejam só `queued`, `read-only`, `recebido`, `sem ação`, `(empty)`, erro transitório de modelo, confirmação de estado ou repetição do que já foi aceito.
+- Quando Rodolfo responde em reply/menção a uma proposta clara do Zeus com linguagem como “execute”, “ok, execute”, “manda ver”, interpretar como autorização para a ação proposta pelo Zeus. Não deixar uma mensagem intercalada de outro bot redefinir o escopo para uma ação diferente (ex: restart) sem evidência explícita do Rodolfo.
+- Não responder a mensagens de outro agente que sejam só `queued`, `read-only`, `recebido`, `sem ação`, `(empty)`, erro transitório de modelo, confirmação de estado, pedido redundante de confirmação ou repetição do que já foi aceito.
 - Depois de um estado final aceito, ficar em silêncio até pedido novo do Rodolfo, pergunta operacional real, autorização explícita ou alerta crítico.
 - Se Rodolfo disser “parem”, “looping”, “pare de mencionar”, “pare de responder”, ou equivalente: uma confirmação curta ao Rodolfo no máximo; depois silêncio total para mensagens de agente/gateway naquela thread.
 - Citar outro agente em texto simples (`Atena`, `Zeus`) quando não for necessário acordá-lo. **Não usar user mention só para falar sobre o agente.**
