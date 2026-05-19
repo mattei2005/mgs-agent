@@ -24,6 +24,7 @@ But it does **not** currently expose a `--post-id` / update-existing-post mode. 
 2. Download the manual image URL with a normal browser-like User-Agent.
 3. Validate dimensions/aspect ratio locally. Normalize the manual image before upload:
    - Preferred helper: `/root/mgs-agent/scripts/normalize-card-artwork.py <input> <output.png> --aggressive`
+   - Default helper quality gate requires normalized width >=600px. If it returns `LOW_QUALITY_SOURCE`, stop and request a better card-only source or intentionally switch to automatic fallback; do not upload the low-quality crop.
    - Use PNG output so rounded card corners keep transparency; JPEG bakes the old thumbnail/background color into ugly corners.
    - For card/LazyBlock image, the final `card_selection` should record:
    - `mode: manual_card_image_url`

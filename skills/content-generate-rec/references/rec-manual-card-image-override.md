@@ -80,6 +80,8 @@ images.card_normalize.before/after: dimensions before and after crop
 
 If the user explicitly asked for a bordered/manual image to be cropped and `manual_crop_applied=false`, report the caveat; do not claim card-only normalization succeeded.
 
+Manual crop quality gate: after aggressive normalization, a manual card image narrower than 600px must fail with `LOW_QUALITY_SOURCE` instead of being uploaded. A 1280x720 thumbnail can still be low quality if the actual card crop is only ~442px wide; this should not be marked PASS for production LazyBlock use.
+
 ## Manual crop quality gate
 
 Do not treat `manual_crop_applied=true` as a full visual PASS. It only proves the canvas/border was removed. After aggressive crop, validate source quality separately:
