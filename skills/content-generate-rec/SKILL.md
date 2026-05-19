@@ -563,8 +563,9 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   nighttime metropolis).
 - Output target: strict 16:9 JPEG at `/tmp/featured-<slug>.jpg` (auto-compressed via `compress-image.sh`: PNG → JPEG, quality 88, central crop, final 1280x720 before upload).
 - Composition must contain exactly three essential layers: (1) realistic
-  premium background scene, (2) the exact horizontal card enlarged and centered,
-  (3) one realistic person as the top layer slightly overlapping above the card.
+  premium background/lifestyle scene, (2) the exact horizontal card visible in context,
+  (3) one realistic person or real-use element as the top layer slightly overlapping/near the card.
+  The featured image must NOT be a card-only mockup or a huge isolated card on a generic background.
   No frames, molduras, extra panels, duplicate cards, UI overlays, stickers, or
   unnecessary decorative objects.
 - VALIDATE LOCAL ASPECT RATIO BEFORE UPLOAD: final featured must be strict 16:9 (expected 1280x720 after `compress-image.sh`). If Gemini returns 8:5/16:10 (example: 1280x800), do not silently accept; the approved path is the central-crop enforcement in `compress-image.sh` before upload.
