@@ -295,7 +295,9 @@ Resumo operacional:
 
 ### Gateway routing/restart incident reference
 
-Quando corrigir roteamento entre Zeus/Atena, evitar duplicação de thread ou reiniciar gateway durante conversa ativa, ver `references/discord-gateway-routing-and-restart-incident-2026-05-18.md`.
+Quando corrigir roteamento entre Zeus/Atena, evitar duplicação de thread ou reiniciar gateway durante conversa ativa, ver `references/discord-gateway-routing-and-restart-incident-2026-05-18.md` e `references/gateway-restart-coordination.md`.
+
+Regra operacional: Zeus pode manter leitura do canal da Atena, mas não deve free-responder/auto-thread ali sem @Zeus explícito. Durante benchmark ativo, não combine patch + restart + cron/self-check do próprio bot; estabilize serviço primeiro e só depois libere novas threads de conteúdo.
 
 ### Busy input no Discord: `/queue` vs `/steer`
 
