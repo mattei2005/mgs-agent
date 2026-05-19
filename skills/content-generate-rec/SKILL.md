@@ -138,6 +138,12 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > enforce it so Atena does not reread full prompts/templates during normal REC
 > production.
 >
+> **REFERENCE - REC local generator validation repair:** When the runner falls
+> back to `article_generated_local` and fails `editorial_style` before upload or
+> publish, see `references/rec-local-generator-validation-repair.md`. It covers
+> dry-run reproduction, inspecting `/tmp/final-<card-slug>.html`, shortening
+> polluted extracted fields such as APR, and validating `max_paragraph_words <= 30`.
+>
 > **REFERENCE - REC prompt over-reading audit:** When Rodolfo/Zeus asks whether
 > Atena's prompt/files are causing reading loops or slow REC starts, see
 > `references/rec-agent-prompt-overreading-audit.md`. It captures the durable
