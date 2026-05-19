@@ -1093,7 +1093,7 @@ def main() -> int:
                     with urllib.request.urlopen(req, timeout=30) as resp:
                         Path(card_local).write_bytes(resp.read())
                     card_src = args.card_image_url
-                    card_normalize = normalize_card_artwork(card_local)
+                    card_normalize = normalize_card_artwork(card_local, aggressive=True)
                     ident_card = run(["identify", "-format", "%w %h", card_local], timeout=20)
                     if ident_card.returncode != 0:
                         raise RunnerError(f"manual card image identify failed: {ident_card.stderr}")
