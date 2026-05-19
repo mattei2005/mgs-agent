@@ -8,6 +8,7 @@ description: Generates a REC (Recommendation) article for a credit card — fetc
 ## Session-learned references
 
 - `references/manual-card-image-validation-and-teardown.md` — manual card image override rules, strict LazyBlock visual validation, checkerboard/canvas pitfalls, controlled card-only enhancement, and safe teardown checklist for benchmark/test RECs.
+- `references/rec-john-lewis-blocked-source-repair-2026-05-19.md` — blocked official URL fallback via reader-rendered official pages, explicit runner facts, title-blank repair, card-only LazyBlock correction, featured-image repair, and detailed character-count reporting.
 - `references/rec-official-url-blocked-reader-fallback-2026-05-19.md` — official issuer URL 403/HTTP2 fallback using an external reader render of the same official URL, explicit-facts runner invocation, and post-run repair gates for generic local-generator copy.
 
 Generates and publishes a REC (Recommendation) article for a credit card to a
