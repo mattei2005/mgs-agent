@@ -68,7 +68,7 @@ validation.status: PASS
 
 A direct image URL can be technically valid but editorially poor (e.g. YouTube thumbnail/banner). If Rodolfo provides it as a benchmark override, respect it and report quality caveats separately. Do not silently replace it with automatic search.
 
-Manual images still go through card-art normalization before upload/featured generation. The runner should crop white/transparent padding and, for manual overrides, apply aggressive flat-background canvas crop so a user-supplied thumbnail such as a 1280x720 image with a small centered card becomes card-only artwork for the LazyBlock.
+Manual images still go through card-art normalization before upload/featured generation. The runner should crop white/transparent padding and, for manual overrides, apply aggressive flat-background canvas crop so a user-supplied thumbnail such as a 1280x720 image with a small centered card becomes card-only artwork for the LazyBlock. Manual normalized card images should be saved/uploaded as PNG so rounded corners can keep transparency; saving the crop as JPEG bakes the flat thumbnail background into ugly corner/border artifacts.
 
 Expected evidence for manual image normalization:
 
