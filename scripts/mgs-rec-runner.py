@@ -1183,27 +1183,48 @@ def main() -> int:
                     raise RunnerError("No card official URL available for image search")
                 t0 = time.time()
                 if args.card_image_url:
-                    # Manual overrides are normalized to PNG so rounded-card
-                    # transparency survives; JPEG would bake the canvas color
-                    # into the LazyBlock image corners.
+                    # Manual image URLs are respected only when they normalize
+                    # into a real card-only LazyBlock asset. Do not use Gemini to
+                    # invent/rebuild card artwork: it produced MBNA edge/text
+                    # artifacts. If the user-supplied image is a thumbnail/promo
+                    # whose useful card crop is too small, fall back to automatic
+                    # card-image search for the LazyBlock and report that choice.
                     suffix = ".png"
-                    card_local = f"/tmp/card-{card_slug}-manual{suffix}"
+                    manual_local = f"/tmp/card-{card_slug}-manual{suffix}"
                     req = urllib.request.Request(
                         args.card_image_url,
                         headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) MGS-REC-Runner/1.0"},
                     )
                     with urllib.request.urlopen(req, timeout=30) as resp:
-                        Path(card_local).write_bytes(resp.read())
-                    # Manual images that work well for featured can still look
-                    # poor as raw LazyBlock crops. Generate a clean card-only
-                    # asset from the user-supplied reference before upload.
-                    clean = run_json([str(GEN_SCRIPTS / "generate-clean-card-image.sh"), card_slug, card_local], timeout=180)
-                    if clean.get("path"):
-                        card_local = clean["path"]
-                        steps.append("manual_card_clean_asset_generated")
-                    card_src = args.card_image_url
-                    card_selection = {"mode": "manual_card_image_url", "source": args.card_image_url, "reason": "user_supplied_card_art_cleaned", "clean_asset_mode": clean.get("mode"), "clean_asset_attempt": clean.get("attempt")}
-                    steps.append("card_image_manual_url_used")
+                        Path(manual_local).write_bytes(resp.read())
+                    manual_normalize = normalize_card_artwork(manual_local, aggressive=True)
+                    manual_pre_upscale_w = (((manual_normalize.get("upscale_info") or {}).get("before") or {}).get("width"))
+                    use_manual = not manual_pre_upscale_w or int(manual_pre_upscale_w) >= 600
+                    if use_manual:
+                        card_local = manual_local
+                        card_src = args.card_image_url
+                        card_selection = {"mode": "manual_card_image_url", "source": args.card_image_url, "reason": "user_supplied_card_art_normalized"}
+                        steps.append("card_image_manual_url_used")
+                    else:
+                        warnings.append(f"manual_card_image_rejected_for_lazyblock: useful crop width {manual_pre_upscale_w}px; using automatic card-only fallback")
+                        steps.append("manual_card_image_rejected_for_lazyblock")
+                        img = run_json([str(GEN_SCRIPTS / "search-card-image.sh"), card_data["card_name"], source_url], timeout=180, allow_fail=True)
+                        if img.get("status") != "OK" or not img.get("path"):
+                            raise RunnerError(f"Manual image rejected and automatic card image search failed: {json.dumps(img, ensure_ascii=False)[:1000]}")
+                        card_local = img["path"]
+                        card_src = img.get("source")
+                        card_selection = {
+                            "mode": (img.get("selection") or {}).get("mode") or "auto_card_image_search",
+                            "manual_source_url": args.card_image_url,
+                            "manual_rejected_reason": f"useful crop width {manual_pre_upscale_w}px below 600px LazyBlock quality gate",
+                            "provider": img.get("provider"),
+                            "tier": img.get("tier"),
+                            "source": img.get("source"),
+                            "score": (img.get("selection") or {}).get("score"),
+                            "title": (img.get("selection") or {}).get("title"),
+                            "page": (img.get("selection") or {}).get("page"),
+                        }
+                        steps.append("card_image_auto_fallback_after_manual_reject")
                 else:
                     img = run_json([str(GEN_SCRIPTS / "search-card-image.sh"), card_data["card_name"], source_url], timeout=180, allow_fail=True)
                     if img.get("status") != "OK" or not img.get("path"):
@@ -1219,7 +1240,7 @@ def main() -> int:
                         "title": (img.get("selection") or {}).get("title"),
                         "page": (img.get("selection") or {}).get("page"),
                     }
-                card_normalize = normalize_card_artwork(card_local, aggressive=bool(args.card_image_url))
+                card_normalize = normalize_card_artwork(card_local, aggressive=bool(args.card_image_url and card_selection.get("mode") == "manual_card_image_url"))
                 try:
                     ident_card = run(["identify", "-format", "%w %h", card_local], timeout=20)
                     if ident_card.returncode == 0:
