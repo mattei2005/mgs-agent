@@ -177,7 +177,7 @@ hard_noise_hosts = ('play.google.com', 'youtube.com', 'youtu.be', 'facebook.com'
 noise_re = re.compile(
     r'(app|mobile|phone|screenshot|screen|google\s*play|play\s*store|youtube|ytimg|facebook|'
     r'hand|hands|person|people|woman|man|avatar|trustpilot|alien|loan|balance\s*transfer|'
-    r'virtual\s*card|apple\s*pay|google\s*pay|what-is-cc-balance|card-hand|hero|banner|background|illustration|landing)'
+    r'virtual\s*card|virtual-assistant|decline|call-us|support|apple\s*pay|google\s*pay|what-is-cc-balance|card-hand|hero|banner|background|illustration|landing)'
 )
 clean_card_re = re.compile(r'(credit\s*card\s*review|card\s*review|mastercard|contactless|front|card[-_ ].*\.(png|jpg|jpeg|webp))')
 url = 'https://api.search.brave.com/res/v1/images/search?' + urllib.parse.urlencode({
@@ -239,7 +239,7 @@ for pos, item in enumerate(data.get('results', []), 1):
     # these are valid marketing assets but bad card images. Force them below the
     # acceptance threshold unless there is an explicit isolated-card signal.
     isolated_signal = re.search(r'(card[-_ ]?front|front[-_ ]?card|product|niche-builder|card[-_][a-z0-9_-]{0,80}\.(png|jpg|jpeg|webp))', hay)
-    contextual_noise = re.search(r'(person|people|woman|man|hand|hands|phone|mobile|app|screenshot|screen|apple\s*pay|google\s*pay)', hay)
+    contextual_noise = re.search(r'(person|people|woman|man|hand|hands|phone|mobile|app|screenshot|screen|virtual-assistant|decline|call-us|support|apple\s*pay|google\s*pay)', hay)
     if contextual_noise and not isolated_signal:
         score = -999
     elif noise_re.search(hay) and not isolated_signal:
