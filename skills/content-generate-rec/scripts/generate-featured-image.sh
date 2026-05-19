@@ -160,7 +160,7 @@ while [ "$attempt" -le "$max_attempts" ]; do
   SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
   out=$("$SCRIPT_DIR/compress-image.sh" "$out" featured)
 
-  echo "[$(date -Iseconds)] generate-featured-image OK slug=$SLUG scene=$scene attempt=$attempt path=$out" >>"$LOG"
-  jq -n --arg p "$out" --arg s "$scene" --argjson a "$attempt" '{path:$p, scene:$s, attempt:$a}'
+  echo "[$(date -Iseconds)] generate-featured-image OK slug=$SLUG scene=$scene visual_brief=$visual_brief attempt=$attempt path=$out" >>"$LOG"
+  jq -n --arg p "$out" --arg s "$scene" --arg v "$visual_brief" --argjson a "$attempt" '{path:$p, scene:$s, visual_brief:$v, attempt:$a}'
   exit 0
 done
