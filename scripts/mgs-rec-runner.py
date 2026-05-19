@@ -1148,9 +1148,10 @@ def main() -> int:
                     raise RunnerError("No card official URL available for image search")
                 t0 = time.time()
                 if args.card_image_url:
-                    suffix = Path(urllib.parse.urlparse(args.card_image_url).path).suffix or ".png"
-                    if suffix.lower() not in {".png", ".jpg", ".jpeg", ".webp"}:
-                        suffix = ".png"
+                    # Manual overrides are normalized to PNG so rounded-card
+                    # transparency survives; JPEG would bake the canvas color
+                    # into the LazyBlock image corners.
+                    suffix = ".png"
                     card_local = f"/tmp/card-{card_slug}-manual{suffix}"
                     req = urllib.request.Request(
                         args.card_image_url,
