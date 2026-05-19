@@ -821,6 +821,11 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--allow-disambiguation", action="store_true")
     args = ap.parse_args()
+    if not args.card_image_url:
+        args.card_image_url = (
+            os.environ.get("MGS_CARD_IMAGE_URL", "").strip()
+            or os.environ.get("MGS_MANUAL_CARD_IMAGE_URL", "").strip()
+        )
 
     started = time.time()
     warnings: List[str] = []
@@ -904,6 +909,13 @@ def main() -> int:
                 costs["extract_llm_est"] = 0.0
 
         card_data["card_name"] = card_data.get("card_name") or args.card
+        if args.card_image_url:
+            # A user-supplied card image is an explicit override. Do not reuse a
+            # cached/uploaded card image for the same card, otherwise manual
+            # image benchmarks silently fall back to auto/cache media.
+            card_data.pop("card_image_uploaded_id", None)
+            card_data.pop("card_image_uploaded_url", None)
+            steps.append("manual_card_image_override_requested")
         card_id = card_data.get("card_image_uploaded_id")
         card_url = card_data.get("card_image_uploaded_url")
         card_local = None
