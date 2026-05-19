@@ -1195,9 +1195,9 @@ def main() -> int:
                     # but do not use Gemini/AI to recreate an isolated card:
                     # the MBNA incident proved generated card-only assets can
                     # change text, edges, shadows, colours, and brand design.
-                    # If the useful crop is too small, keep the manual path
-                    # flagged as LOW_QUALITY_SOURCE; automatic fallback requires
-                    # explicit user approval outside this runner.
+                    # If the useful crop is too small, stop before upload and
+                    # require a better source or explicit automatic fallback
+                    # approval outside this runner.
                     suffix = ".png"
                     manual_local = f"/tmp/card-{card_slug}-manual{suffix}"
                     req = urllib.request.Request(
