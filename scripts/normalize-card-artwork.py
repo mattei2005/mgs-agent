@@ -45,7 +45,14 @@ def main() -> int:
 
     runner = load_runner()
     result = runner.normalize_card_artwork(str(dst), aggressive=args.aggressive)
-    print(json.dumps({'status': 'ok', 'path': str(dst), 'normalize': result}, ensure_ascii=False))
+    with Image.open(dst) as im:
+        width, height = im.size
+    if args.min_width and width < args.min_width:
+        raise SystemExit(
+            f"LOW_QUALITY_SOURCE: normalized card image is only {width}x{height}; "
+            f"minimum width is {args.min_width}px. Use a higher-resolution card-only image or automatic fallback."
+        )
+    print(json.dumps({'status': 'ok', 'path': str(dst), 'normalize': result, 'width': width, 'height': height}, ensure_ascii=False))
     return 0
 
 
