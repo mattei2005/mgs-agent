@@ -199,13 +199,15 @@ PROCESS:
 
 COMPOSITION:
 - Format: horizontal 16:9 (1920x1080)
+- Create contextual/lifestyle hero art, not a card-only mockup
 - Use ONLY three essential elements/layers:
-  1. Realistic premium background scene
-  2. The same horizontal card, enlarged and centralised
-  3. ONE realistic person as the top layer, slightly overlapping the card above
-- The card must appear LARGE, floating behind the person (never held/touched)
+  1. Realistic premium background or real-use scene
+  2. The same validated horizontal card integrated naturally in context
+  3. ONE realistic person or real-use element near the card
+- The card must be visible and readable, but must NOT become a huge isolated card
+  floating on a generic background
 - No frames, molduras, posters, panels, duplicate cards, badges, UI overlays,
-  phones, hands, decorative objects or extra composition elements
+  phones, decorative objects, redesigned cards or extra composition elements
 - Premium background with cinematic bokeh
 
 CARD RULES:
