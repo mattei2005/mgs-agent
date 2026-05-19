@@ -395,9 +395,11 @@ Ver `references/discord-threads-lifecycle.md` para referência completa.
 
 ### Auto-add de membros em threads: diagnosticar prompt/config antes de culpar Discord
 
-Quando Rodolfo relatar que Atena/Zeus cria threads mas parou de colocar pessoas automaticamente nelas, usar `references/discord-thread-auto-add-members-regression.md`.
+Quando Rodolfo relatar que Atena/Zeus cria threads mas parou de colocar pessoas automaticamente nelas, usar `references/discord-thread-auto-add-members-regression.md`. Para a correção aplicada em 2026-05-19 na Atena, ver `references/discord-thread-auto-add-members-2026-05-19.md`.
 
 Lição validada: o gateway Discord do Hermes cria threads via `_auto_create_thread(...)`, mas não adiciona membros extras por padrão. No setup MGS, o comportamento antigo vinha de um `channel_prompts` bootstrap que fazia rename + auto-discover + `PUT /channels/{THREAD_ID}/thread-members/{uid}` via `execute_code`. Se esse prompt foi simplificado para `rename-on-create, then freeze`, a thread continua sendo criada/renomeada, mas só ficam o usuário autor + bot/agente.
+
+Regra operacional atual: Atena/content threads devem auto-add Raquel (`1496254952501280974`) + Rodolfo (`344196393512075265`). Zeus/admin threads atualmente só exigem Rodolfo. Não adicionar todo mundo do guild/canal; usar política explícita por agente/canal.
 
 Diagnóstico mínimo:
 - Inspecionar `/root/.hermes/profiles/{atena,zeus}/config.yaml` → `discord.channel_prompts`.

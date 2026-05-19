@@ -88,8 +88,15 @@ Fast restoration:
 
 - Reintroduce a bounded `channel_prompts` bootstrap for **new threads only**.
 - Keep the `rename-on-create, then freeze` rule so follow-ups/old threads do not re-run membership logic.
+- Treat "respective people in the agent channel" as the agent's operational membership, not all guild members:
+  - Atena/content threads: Raquel Oliveira (`1496254952501280974`) + Rodolfo Mattei (`344196393512075265`).
+  - Zeus/admin threads: Rodolfo Mattei only, unless a future admin user is explicitly authorized for that channel.
+  - Prefer sourcing this mapping from `/root/mgs-agent/data/authorized-users.json` and/or the profile's explicit config; never auto-add every guild/channel-visible member.
+- Bootstrap script should do both actions in one `execute_code` call: `PATCH /channels/{THREAD_ID}` for rename, then idempotent `PUT /channels/{THREAD_ID}/thread-members/{USER_ID}` for each required user.
 - Use `os.environ.get('DISCORD_BOT_TOKEN')`; never hardcode or print credentials.
 - Log only counts/user IDs/names, not headers.
+- After changing profile config, update both the live profile (`/root/.hermes/profiles/{agent}/config.yaml`) and the versioned copy (`/root/mgs-agent/profiles/{agent}-config.yaml`), validate YAML, then restart the affected gateway and verify `Connected as ...` + `Gateway running with 1 platform(s)`.
+- For the already-broken test thread, manually add the missing user with the same `PUT thread-members` endpoint and verify `GET /channels/{THREAD_ID}/thread-members` shows the expected count.
 
 More robust repair:
 
