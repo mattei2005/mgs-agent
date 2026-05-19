@@ -68,6 +68,18 @@ validation.status: PASS
 
 A direct image URL can be technically valid but editorially poor (e.g. YouTube thumbnail/banner). If Rodolfo provides it as a benchmark override, respect it and report quality caveats separately. Do not silently replace it with automatic search.
 
+Manual images still go through card-art normalization before upload/featured generation. The runner should crop white/transparent padding and, for manual overrides, apply aggressive flat-background canvas crop so a user-supplied thumbnail such as a 1280x720 image with a small centered card becomes card-only artwork for the LazyBlock.
+
+Expected evidence for manual image normalization:
+
+```text
+images.card_normalize.manual_crop_applied: true/false
+images.card_normalize.crop_method: background_canvas_crop | white_or_transparent_trim | null
+images.card_normalize.before/after: dimensions before and after crop
+```
+
+If the user explicitly asked for a bordered/manual image to be cropped and `manual_crop_applied=false`, report the caveat; do not claim card-only normalization succeeded.
+
 ## Auto-image fallback lessons
 
 When no manual image is provided, automatic selection should prefer isolated product/card artwork. Penalize or skip contextual marketing assets for LazyBlock:
