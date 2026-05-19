@@ -35,7 +35,7 @@ Default command shape:
   [--card-image-url "<direct image URL when supplied by the user>"]
 ```
 
-Manual image override is mandatory when present in the user request. If the user provides `Imagem do cartão:`, `Imagem manual:`, `card image:`, or any direct image URL, pass it through as `--card-image-url`; automatic search is only valid when no manual image URL was supplied.
+Manual image override is mandatory when present in the user request. If the user provides `Imagem do cartão:`, `Imagem manual:`, `card image:`, or any direct image URL, pass it through as `--card-image-url`; automatic search is only valid when no manual image URL was supplied. If the request contains a labelled official/source URL plus a second standalone image URL, treat that second URL as the card image override even if the user did not label it explicitly. The final JSON must show `images.card_selection.mode == manual_card_image_url`; if it does not, do not report the REC as clean — repair the same draft or rerun only with `--card-image-url` when creating a new post.
 
 Two-path image rule:
 - **Path A — user supplied card image:** use the supplied URL as the source of truth for the LazyBlock card image. Crop/remove external borders or canvas, but preserve the internal card design and colours. Do not run automatic image search unless the manual source fails quality gates and the user approves fallback. Featured image must be contextual/lifestyle and must use the same validated card design; it must not become a card-only/huge isolated card mockup.
