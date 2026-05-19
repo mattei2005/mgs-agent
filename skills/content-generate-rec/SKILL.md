@@ -884,10 +884,10 @@ Required fields in the single message:
 - Yoast scores (SEO + Readability) com emoji 🟢/🟡/🔴 conforme score
 - Word count + title char count + SUB-TITLE char count + meta desc char count
 - Focus keyword
-- Tags applied (confirm lang_{language} tag presente, lista CSV)
+- Tags applied under a single `Tags:` field, listing ALL tag names exactly as applied; do not replace the list with separate boolean lines such as `Tag Atena` or `Tag de idioma`.
 - Imagens com IDs E URLs completas (card + featured + scene da featured)
 - Auditoria de artefatos: imagens criadas nesta execução, usadas, extras e cleanup aplicado
-- Cost reporting (Step 14 — duração, API calls, custo USD)
+- Cost reporting (Step 14 — duração, API calls, custo USD). If duration is greater than 60 seconds, show it in minutes/seconds (example: `1min01s`), not only raw seconds. The cost line must include total operational estimated cost (Atena/session + runner/image/API when available), not only `runner.cost_usd.total_est`.
 - @Raquel mention (<@1496254952501280974>) for review notification
 
 > **PITFALL — reportar TODAS as imagens criadas (CRITICAL):**
