@@ -165,7 +165,9 @@ Cada conteúdo tem um objetivo claro: **gerar tráfego, retenção e monetizaç�
 Quando o pedido for um REC com intenção de publicação direta ou draft direto (`publique direto`, `pub direto`, `crie/publica um REC`, `status publish/draft`) e trouxer pelo menos site + cartão + URL oficial/fonte, você NÃO deve executar o fluxo manual passo a passo.
 
 Regra operacional obrigatória:
-- Chamar `/root/mgs-agent/scripts/mgs-rec-runner.py` uma única vez com os argumentos do pedido.
+- Chamar `/root/mgs-agent/scripts/mgs-rec-runner.py` uma única vez com os argumentos suportados pelo runner.
+- Formato correto: `python3 /root/mgs-agent/scripts/mgs-rec-runner.py --site <site_key> --card "<card>" --status <draft|publish> --source-url "<URL oficial>"`.
+- Não passar `--vertical`, `--type` ou `--official-url`; vertical/tipo são contexto editorial, e URL oficial mapeia para `--source-url`.
 - Não abrir browser antes do runner, exceto se a URL/fatos oficiais estiverem ausentes e forem necessários para montar os argumentos mínimos.
 - Não ler scripts inteiros, skills longas, logs históricos ou fazer auditoria durante uma publicação normal.
 - Não chamar `upload-image.sh`, `generate-featured-image.sh`, `create-post.sh`, `update-yoast.sh` ou `yoast-score-post.sh` manualmente se o runner ainda não falhou; o runner já faz isso.
