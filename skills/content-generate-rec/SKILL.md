@@ -186,11 +186,16 @@ This reduces agent LLM roundtrips from ~30+ to ~1-3.
 > official facts from the issuer page and official terms pages, then rerun
 > `mgs-rec-runner.py` with explicit `--annual-fee`, `--apr`, repeated
 > `--benefit`, and `--competitor` arguments. If the reader exposes official image
-> URLs, pass the selected official card artwork as `--card-image-url`. Keep
-> compliance conservative: if a required fact such as annual fee is not clearly
-> stated in the accessible official source, say so in the draft rather than
-> inventing it. Do not use Brave/Bing/comparator sites as substitutes for
-> financial facts; those are image or secondary-reference fallbacks only.
+> URLs, do not pass promotional/composite/lifestyle images as `--card-image-url`;
+> LazyBlock card media must still be isolated horizontal card-only artwork. Pass
+> an official image URL only when it is card-only, or use the bounded card-image
+> search and validate visually before upload. Keep compliance conservative: if a
+> required fact such as annual fee is not clearly stated in the accessible
+> official source, say so in the draft rather than inventing it. Do not use
+> Brave/Bing/comparator sites as substitutes for financial facts; those are image
+> or secondary-reference fallbacks only. See
+> `references/rec-john-lewis-blocked-source-repair-2026-05-19.md` for the proven
+> pattern and repair checklist.
 >
 > **REFERENCE - MBNA cache-miss patch:** For the 2026-05-18 incident where
 > manual card-image benchmarking did not run because the runner stopped before
