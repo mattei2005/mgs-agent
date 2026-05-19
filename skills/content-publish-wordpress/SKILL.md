@@ -90,6 +90,14 @@ The `yoast_json_path` file must contain:
 }
 ```
 
+> **PITFALL — top-level `title` must never be blank:** `_yoast_wpseo_title`
+> should usually stay blank so Yoast inherits the global template, but the
+> top-level `title` field in `yoast_json_path` is the WordPress post title that
+> `update-yoast.sh` re-sends to trigger hooks. Never set top-level `title` to
+> `""`; doing so can blank the article title in WordPress while Yoast still
+> scores the content. Always pass the real post title and keep only
+> `meta._yoast_wpseo_title` blank when template inheritance is desired.
+
 ## Workflow a caller should follow
 
 1. `resolve-credentials.sh eggbev` → cache in memory
