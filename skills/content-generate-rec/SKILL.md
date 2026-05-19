@@ -1295,6 +1295,8 @@ Para qualidade editorial máxima, ainda é melhor passar fatos oficiais suficien
 --competitor "..." # repetir 2x
 ```
 
+Se a URL oficial bloquear o runner com 403/HTTP2 e o browser também não carregar, não confundir isso com fallback de imagem. Primeiro tente obter os fatos por uma renderização externa da própria página oficial (ex.: reader endpoint mantendo `URL Source` na URL oficial) e/ou página oficial de termos. Se os fatos forem recuperados, rode novamente com `--annual-fee`, `--apr`, `--benefit` e `--competitor`. Veja `references/rec-official-url-blocked-reader-fallback-2026-05-19.md` para o padrão John Lewis.
+
 Se esses fatos não estiverem disponíveis na URL principal, use URLs oficiais complementares fornecidas pelo Rodolfo (ex: homepage, features, product-summary) antes de rodar o runner.
 
 ### O que o runner ainda faz
