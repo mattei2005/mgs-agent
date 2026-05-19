@@ -989,6 +989,39 @@ def main() -> int:
 
         if not card_id or not card_url:
             if args.dry_run:
+                if args.card_image_url:
+                    t0 = time.time()
+                    suffix = Path(urllib.parse.urlparse(args.card_image_url).path).suffix or ".png"
+                    if suffix.lower() not in {".png", ".jpg", ".jpeg", ".webp"}:
+                        suffix = ".png"
+                    card_local = f"/tmp/card-{card_slug}-manual-dryrun{suffix}"
+                    req = urllib.request.Request(
+                        args.card_image_url,
+                        headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) MGS-REC-Runner/1.0"},
+                    )
+                    with urllib.request.urlopen(req, timeout=30) as resp:
+                        Path(card_local).write_bytes(resp.read())
+                    card_src = args.card_image_url
+                    card_normalize = normalize_card_artwork(card_local)
+                    ident_card = run(["identify", "-format", "%w %h", card_local], timeout=20)
+                    if ident_card.returncode != 0:
+                        raise RunnerError(f"manual card image identify failed: {ident_card.stderr}")
+                    cw, ch = [int(x) for x in ident_card.stdout.split()[:2]]
+                    if cw < 200 or ch < 100:
+                        raise RunnerError(f"manual card image too small: {cw}x{ch}")
+                    if not (1.2 <= (cw / ch) <= 2.2):
+                        raise RunnerError(f"manual card image aspect out of range: {cw}x{ch}")
+                    card_selection = {
+                        "mode": "manual_card_image_url",
+                        "source": args.card_image_url,
+                        "reason": "user_supplied_best_card_art",
+                        "width": cw,
+                        "height": ch,
+                        "aspect": round(cw / ch, 4) if ch else None,
+                        "dry_run_validated": True,
+                    }
+                    tick("manual_card_image_validate_sec", t0)
+                    steps.append("dry_run_manual_card_image_validated")
                 steps.append("dry_run_skip_card_upload")
             else:
                 source_url = card_data.get("card_official_url") or args.source_url
