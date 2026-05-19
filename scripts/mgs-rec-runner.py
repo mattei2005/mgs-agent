@@ -475,7 +475,12 @@ def normalize_card_artwork(path: str, aggressive: bool = False) -> Dict[str, Any
     if aggressive:
         box, meta = bbox_from_mask(img, "background")
         if box:
-            pad = max(4, int(min(img.size) * 0.015))
+            # For flat-background manual thumbnails, crop tight to the detected
+            # card artwork. Padding preserves the original canvas colour as a
+            # visible halo/border around the whole card (MBNA green-border case).
+            # Keep this at zero and rely on the rounded-corner alpha mask below
+            # for clean corners.
+            pad = 0
             img2, did_crop, info = apply_candidate_crop(img, box, pad_px=pad, require_reduction=True)
             crop_info["aggressive_background_crop"] = {**meta, **info, "applied": did_crop}
             if did_crop:
