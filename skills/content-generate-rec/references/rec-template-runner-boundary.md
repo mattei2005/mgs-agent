@@ -12,7 +12,7 @@ Use this reference when auditing why Atena is reading too much before REC execut
 - No more than 20% of sentences over 20 words.
 - UK credit-card tone, structure, tags, subtitle rules and image composition expectations.
 - Card image must stay horizontal; vertical card images must be rotated/cropped before upload.
-- Featured image must follow the three-layer composition: realistic scene, enlarged centered horizontal card, one realistic person slightly overlapping above the card.
+- Featured image must be contextual/lifestyle hero art: realistic scene, the exact validated horizontal card integrated in a real-use context, and a realistic person or real-use element near/overlapping the card. It must NOT be a card-only mockup, a huge isolated card on a generic background, or a redesigned/different card.
 
 It is **not** supposed to make Atena manually execute or reread the full REC workflow during normal publishing.
 

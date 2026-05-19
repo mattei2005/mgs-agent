@@ -14,7 +14,7 @@ Manual image override (mandatory when provided by the user):
 - If the request contains `Imagem do cartão:`, `Imagem manual:`, `card image:`, or any direct card image URL, pass it explicitly with `--card-image-url`.
 - User-supplied card image is an override, not a suggestion. Automatic image search (official/Brave/Bing/Finder) is only allowed when no manual image URL was supplied.
 - A run that received a manual image in the prompt only passes if the runner JSON shows `images.card_selection.mode` starting with `manual_card_image_url`. If it shows `auto_ranked_card_image` or another automatic mode, treat it as a failed run and report it.
-- If the manual image is low quality but downloadable/valid, use it and warn in the summary. Do not silently replace it with Finder/Brave/Bing.
+- If the manual image is downloadable but low quality, keep the manual-image path but apply the manual quality gate before final delivery. If the useful card crop is too small, visibly pixelated, creates internal transparency/checkerboard, or destroys the card design, do **not** present it as production-ready. Stop and report `manual_card_image_low_quality_source` / `manual_rejected_reason`, then ask for approval before falling back to automatic search. Do not silently replace it with Finder/Brave/Bing.
 
 ## Command
 
