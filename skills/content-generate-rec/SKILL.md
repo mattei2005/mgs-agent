@@ -32,6 +32,7 @@ Default command shape:
 Argument mapping pitfall:
 - User-facing `vertical gb-cc-en` is editorial/context only for routine runner calls; do **not** pass `--vertical` to `mgs-rec-runner.py` unless the script later adds that flag.
 - User-facing `URL oficial:` maps to `--source-url`, not `--official-url`.
+- User-facing `Imagem do cartão:`, `Imagem manual:` or `card image:` maps to `--card-image-url "<direct image URL>"`. Do **not** pass manual images only via environment variables; the runner accepts env fallbacks defensively, but the CLI flag is the contract. If a manual image was requested, the final JSON must show `images.card_selection.mode == manual_card_image_url`; otherwise treat the run as failed for the manual-image benchmark.
 - If the runner exits immediately with `unrecognized arguments`, correct the CLI flags once and rerun with the supported shape above; do not switch into broad manual workflow unless the supported runner path fails for a substantive pipeline reason.
 
 Operational rule (hard gate):
