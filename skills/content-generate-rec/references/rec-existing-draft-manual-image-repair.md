@@ -25,8 +25,8 @@ But it does **not** currently expose a `--post-id` / update-existing-post mode. 
 3. Validate dimensions/aspect ratio locally. Normalize the manual image before upload:
    - Preferred helper for simple crop: `/root/mgs-agent/scripts/normalize-card-artwork.py <input> <output.png> --aggressive`
    - If the normalized crop is still visually poor or the useful crop is too small for LazyBlock, do **not** use Gemini to invent/rebuild a card-only asset. The MBNA 62092 repair loop proved this creates edge/text/shadow artifacts. Stop the manual-card repair, fall back to automatic card-only image search only if the user approves, and report `manual_rejected_reason` clearly.
-   - Use PNG output so rounded card corners keep transparency; JPEG bakes the old thumbnail/background color into ugly corners.
-   - For card/LazyBlock image, the final `card_selection` should record:
+    - Use PNG output, but do not apply global transparency/background removal when the background/canvas colour also appears inside the card artwork. In that case, crop the card rectangle and preserve original RGB colours; otherwise the card can get internal transparent/checkerboard holes.
+    - For card/LazyBlock image, the final `card_selection` should record:
    - `mode: manual_card_image_url`
    - `source: <manual URL>`
    - width, height, aspect
