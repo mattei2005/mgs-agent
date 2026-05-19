@@ -453,28 +453,45 @@ discord:
   history_backfill_limit: 50
   reactions: true
   channel_prompts:
-    '1496267442899521627': "INSTRUCAO DE THREAD ZEUS — rename-on-create, then freeze:\n\
-      \nOBJETIVO: thread nova deve ser renomeada uma vez; thread existente nunca deve\
-      \ ser renomeada automaticamente.\n\nRegra obrigatoria:\n- Se esta for uma thread\
-      \ recem-criada, com nome cortado/ruim/auto-gerado pela primeira mensagem, e\
-      \ sem historico anterior do Zeus: EXECUTE rename via execute_code antes de responder.\n\
-      - Depois do primeiro rename, congele o nome: se a thread ja tem nome claro,\
-      \ historico, ou a pergunta parece continuacao/fase/andamento/follow-up, NAO\
-      \ renomeie e NAO execute script de rename/membros; responda direto.\n- Contexto\
-      \ curto por restart, pausa, arquivo/desarquivo ou historico parcial NAO significa\
-      \ thread nova.\n- Se houver duvida entre renomear e preservar, preserve. Renomear\
-      \ novamente so com pedido explicito do usuario.\n- Nao envie mensagem separada\
-      \ para mention; o Hermes posta a resposta final na thread.\n- Nao comente sobre\
-      \ rename na resposta ao usuario.\n\nScript de rename para thread comprovadamente\
+    '1496267442899521627': "INSTRUCAO DE THREAD Zeus — rename-on-create + auto-add\
+      \ members, then freeze:\n\nOBJETIVO: thread nova deve ser renomeada uma vez\
+      \ e receber automaticamente as pessoas respectivas do canal/agente. Thread existente\
+      \ nunca deve ser renomeada nem reprocessada automaticamente.\n\nRegra obrigatoria:\n\
+      - Responda na thread atual; nao use send_message para resposta normal. Hermes\
+      \ posta automaticamente a resposta final.\n- Se esta for uma thread recem-criada,\
+      \ com nome cortado/ruim/auto-gerado pela primeira mensagem, e sem historico\
+      \ anterior da Zeus: EXECUTE o bootstrap via execute_code antes de responder.\n\
+      - O bootstrap deve fazer duas coisas na mesma chamada: (1) renomear a thread;\
+      \ (2) adicionar os usuarios obrigatorios do canal/agente via Discord API PUT\
+      \ /channels/{THREAD_ID}/thread-members/{USER_ID}.\n- Depois do primeiro bootstrap,\
+      \ congele: se a thread ja tem nome claro, historico, ou a pergunta parece continuacao/fase/andamento/follow-up,\
+      \ preserve o nome atual e responda direto.\n- Contexto curto por restart, pausa,\
+      \ arquivo/desarquivo ou historico parcial NAO significa thread nova.\n- Se houver\
+      \ duvida entre executar bootstrap e preservar, preserve. Reprocessar so com\
+      \ pedido explicito do usuario.\n- Em thread com Zeus/Rodolfo/Atena, nao mencione\
+      \ outro bot salvo pedido explicito de handoff.\n- Nao comente sobre rename/auto-add\
+      \ na resposta ao usuario, exceto se o usuario estiver testando especificamente\
+      \ membros/threads.\n\nUsuarios obrigatorios nesta familia de threads:\n- Rodolfo\
+      \ Mattei: 344196393512075265\n\nScript de bootstrap para thread comprovadamente\
       \ nova:\n```python\nimport os, urllib.request, json\nTHREAD_ID = \"<THREAD_ID_ATUAL>\"\
-      \nTHREAD_NAME = \"<NOME_CURTO_DO_TOPICO_max_80_chars>\"\ntoken = os.environ.get(\"\
-      DISCORD_BOT_TOKEN\")\nheaders = {\"Authorization\": f\"Bot {token}\", \"Content-Type\"\
-      : \"application/json\", \"User-Agent\": \"Hermes-Agent\"}\nreq = urllib.request.Request(\n\
-      \    f\"https://discord.com/api/v10/channels/{THREAD_ID}\",\n    method=\"PATCH\"\
-      ,\n    headers=headers,\n    data=json.dumps({\"name\": THREAD_NAME[:80]}).encode(),\n\
-      )\ntry:\n    urllib.request.urlopen(req, timeout=10).read()\n    print(f\"OK\
-      \ rename: {THREAD_NAME[:80]}\")\nexcept Exception as e:\n    print(f\"WARN rename\
-      \ failed: {e}\")\n```\n"
+      \nTHREAD_NAME = \"<NOME_CURTO_DO_TOPICO_max_80_chars>\"\nAUTO_ADD_USER_IDS =\
+      \ ['344196393512075265']\n\ntoken = os.environ.get(\"DISCORD_BOT_TOKEN\")\n\
+      if not token:\n    print(\"ERROR: DISCORD_BOT_TOKEN not set\")\nelse:\n    headers\
+      \ = {\"Authorization\": f\"Bot {token}\", \"Content-Type\": \"application/json\"\
+      , \"User-Agent\": \"Hermes-Agent\"}\n\n    # 1) Rename thread\n    req = urllib.request.Request(\n\
+      \        f\"https://discord.com/api/v10/channels/{THREAD_ID}\",\n        method=\"\
+      PATCH\",\n        headers=headers,\n        data=json.dumps({\"name\": THREAD_NAME[:80]}).encode(),\n\
+      \    )\n    try:\n        urllib.request.urlopen(req, timeout=10).read()\n \
+      \       print(f\"OK rename: {THREAD_NAME[:80]}\")\n    except Exception as e:\n\
+      \        print(f\"WARN rename failed: {type(e).__name__} {e}\")\n\n    # 2)\
+      \ Add required channel users to the thread. Idempotent; 204/201/200 are success.\n\
+      \    added=[]; failed=[]\n    for uid in AUTO_ADD_USER_IDS:\n        req = urllib.request.Request(\n\
+      \            f\"https://discord.com/api/v10/channels/{THREAD_ID}/thread-members/{uid}\"\
+      ,\n            method=\"PUT\",\n            headers=headers,\n            data=b\"\
+      \",\n        )\n        try:\n            urllib.request.urlopen(req, timeout=10).read()\n\
+      \            added.append(uid)\n        except Exception as e:\n           \
+      \ failed.append(f\"{uid}:{type(e).__name__}\")\n    print(json.dumps({\"auto_add_ok\"\
+      : added, \"auto_add_failed\": failed}, ensure_ascii=False))\n```\n"
   dm_role_auth_guild: ''
   server_actions: ''
 whatsapp: {}
