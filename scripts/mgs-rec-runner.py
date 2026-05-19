@@ -1218,9 +1218,9 @@ def main() -> int:
                     if manual_pre_upscale_w and int(manual_pre_upscale_w) < 600:
                         card_selection["quality_warning"] = f"useful crop width {manual_pre_upscale_w}px below 600px before upscale"
                         card_selection["quality_status"] = "LOW_QUALITY_SOURCE"
-                        warnings.append(
+                        raise RunnerError(
                             f"manual_card_image_low_quality_source: useful crop width {manual_pre_upscale_w}px below 600px; "
-                            "manual source kept as requested; automatic fallback requires user approval"
+                            "provide a higher-quality card image or approve automatic fallback"
                         )
                     steps.append("card_image_manual_url_used")
                 else:
