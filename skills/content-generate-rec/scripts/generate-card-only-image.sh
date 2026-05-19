@@ -46,6 +46,43 @@ for part in data.get('candidates',[{}])[0].get('content',{}).get('parts',[]):
     inline = part.get('inlineData') or part.get('inline_data')
     if inline and inline.get('data'):
         pathlib.Path(out).write_bytes(base64.b64decode(inline['data']))
+        # Post-process for LazyBlock: Gemini may return an image with a baked
+        # transparency checkerboard or a large 16:9 canvas. Remove edge-connected
+        # light neutral checkerboard/background, crop tight to the card, then
+        # composite over solid white so WordPress previews and LazyBlock never
+        # show a checkerboard pattern.
+        try:
+            from PIL import Image
+            im = Image.open(out).convert('RGBA')
+            W, H = im.size
+            pix = im.load()
+            def is_bg(px):
+                r, g, b, a = px
+                if a <= 5:
+                    return True
+                neutral = abs(r-g) < 8 and abs(g-b) < 8
+                return neutral and r >= 170 and g >= 170 and b >= 170
+            stack = [(x,0) for x in range(W)] + [(x,H-1) for x in range(W)] + [(0,y) for y in range(H)] + [(W-1,y) for y in range(H)]
+            seen = set()
+            while stack:
+                x, y = stack.pop()
+                if x < 0 or y < 0 or x >= W or y >= H or (x, y) in seen:
+                    continue
+                seen.add((x, y))
+                if is_bg(pix[x, y]):
+                    r, g, b, a = pix[x, y]
+                    pix[x, y] = (r, g, b, 0)
+                    stack.extend(((x+1,y), (x-1,y), (x,y+1), (x,y-1)))
+            bbox = im.getchannel('A').getbbox()
+            if bbox:
+                pad = 12
+                box = (max(0, bbox[0]-pad), max(0, bbox[1]-pad), min(W, bbox[2]+pad), min(H, bbox[3]+pad))
+                im = im.crop(box)
+            bg = Image.new('RGBA', im.size, (255,255,255,255))
+            bg.alpha_composite(im)
+            bg.convert('RGB').save(out)
+        except Exception as e:
+            print(json.dumps({'status':'WARN','warning':f'postprocess_failed: {e}','path':out}), file=sys.stderr)
         print(json.dumps({'status':'OK','path':out,'mode':'manual_card_image_enhanced','model':'gemini-2.5-flash-image'}))
         sys.exit(0)
 print(json.dumps({'status':'ERROR','error':'Gemini returned no image'}))
