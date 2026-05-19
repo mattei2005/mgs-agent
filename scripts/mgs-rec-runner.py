@@ -497,9 +497,11 @@ def normalize_card_artwork(path: str, aggressive: bool = False) -> Dict[str, Any
                     rgba.putalpha(mask)
                     img = rgba
                     info["corner_alpha_mask"] = {"applied": True, "radius": radius}
+                    crop_info["aggressive_background_crop"]["corner_alpha_mask"] = info["corner_alpha_mask"]
                 except Exception as e:
                     img = rgba
                     info["corner_alpha_mask"] = {"applied": False, "error": str(e)}
+                    crop_info["aggressive_background_crop"]["corner_alpha_mask"] = info["corner_alpha_mask"]
                 cropped = True
                 aggressive_crop_applied = True
                 crop_method = "background_canvas_crop"
