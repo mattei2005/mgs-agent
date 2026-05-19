@@ -39,8 +39,27 @@ scenes=(
   "urban street with cinematic blur"
   "city at sunset"
   "nighttime metropolis"
+  "supermarket checkout"
+  "restaurant payment moment"
+  "home budgeting desk"
+  "travel desk with passport and luggage tag"
 )
 scene="${scenes[$RANDOM % ${#scenes[@]}]}"
+
+# Visual variation prevents category pages from looking repetitive. These are
+# generic finance/lifestyle compositions inspired by common editorial patterns,
+# not by any competitor's branded overlays, logos, or corner graphics.
+visual_briefs=(
+  "large centered card floating in front of one confident person, premium editorial composition"
+  "close-up hand holding the card toward the camera, shallow depth of field, fingers do not cover issuer logo or payment network mark"
+  "contactless payment moment with the card near a generic payment terminal, no merchant logos, card remains readable"
+  "card partially entering or leaving a wallet or jacket pocket, lifestyle banking moment, card brand still visible"
+  "flat lay desk scene with card beside smartphone, receipts and coffee, clean budgeting context"
+  "online shopping context with laptop and parcel in background, card in foreground, no visible retailer logos"
+  "travel context with passport, boarding-pass-like generic paper and card, no airline logos"
+  "cashback/rewards context with shopping bag and subtle generic percentage icon, no badges or text labels copied from other sites"
+)
+visual_brief="${visual_briefs[$RANDOM % ${#visual_briefs[@]}]}"
 
 mime=$(file -b --mime-type "$CARD_IMG" 2>/dev/null || echo "image/png")
 b64_tmp=$(mktemp /tmp/gemini-b64-XXXXXX)
