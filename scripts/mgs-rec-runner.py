@@ -1178,8 +1178,15 @@ def main() -> int:
                     )
                     with urllib.request.urlopen(req, timeout=30) as resp:
                         Path(card_local).write_bytes(resp.read())
+                    # Manual images that work well for featured can still look
+                    # poor as raw LazyBlock crops. Generate a clean card-only
+                    # asset from the user-supplied reference before upload.
+                    clean = run_json([str(GEN_SCRIPTS / "generate-clean-card-image.sh"), card_slug, card_local], timeout=180)
+                    if clean.get("path"):
+                        card_local = clean["path"]
+                        steps.append("manual_card_clean_asset_generated")
                     card_src = args.card_image_url
-                    card_selection = {"mode": "manual_card_image_url", "source": args.card_image_url, "reason": "user_supplied_best_card_art"}
+                    card_selection = {"mode": "manual_card_image_url", "source": args.card_image_url, "reason": "user_supplied_card_art_cleaned", "clean_asset_mode": clean.get("mode"), "clean_asset_attempt": clean.get("attempt")}
                     steps.append("card_image_manual_url_used")
                 else:
                     img = run_json([str(GEN_SCRIPTS / "search-card-image.sh"), card_data["card_name"], source_url], timeout=180, allow_fail=True)
