@@ -160,6 +160,17 @@ Verify the result with vision_analyze: "Does the card have white borders?" If ye
 
 ## Card image selection quality — isolated card beats promotional banner
 
+### Manual image override benchmark gate
+
+When the user provides an explicit image URL, the benchmark only passes if the runner receives it through the supported interface, currently `--card-image-url`. Environment variables such as `MGS_MANUAL_CARD_IMAGE_URL` / `MGS_CARD_IMAGE_URL` are not sufficient unless the runner has explicit support for them. Verify `card_selection.mode == manual_card_image_url`; if the output says `auto_ranked_card_image`, the manual-image path failed even if the draft was created.
+
+### LazyBlock rejection signals
+
+For LazyBlock card images, reject or caveat candidates that contain phone/app UI, hand/person, coffee shop/contactless lifestyle scenes, YouTube thumbnails, promo banners, or large 16:9 background padding. These may be acceptable as featured-image source material, but they are weak card images unless cropped/normalized to make the card itself dominant.
+
+See also: `references/rec-benchmark-audit-lessons.md` for full benchmark audit checks.
+
+
 For LazyBlock/card media, prefer a clean isolated image of the card over a broad promotional banner, app screenshot, person holding a card, Google Play/YouTube thumbnail, or decorative lifestyle graphic.
 
 Selection order:
