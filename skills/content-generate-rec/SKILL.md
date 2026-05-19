@@ -536,6 +536,7 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
 >
 - Upload via `content-publish-wordpress/scripts/upload-image.sh` →
   `{id, source_url, mime_type}` — this is the **card_media**.
+- After crop/normalization, validate visual source quality separately from border/transparency success. A card crop below ~600px wide, visibly pixelated logos/text, or a compressed thumbnail should be reported as `LOW_QUALITY_SOURCE` even if `manual_crop_applied=true`. Do not use a good-looking featured image as proof that the raw LazyBlock card image is production-ready; Gemini can mask/recreate defects.
 
 > **HARD RULE — card image must be horizontal before upload:** If the chosen
 > card artwork is vertical/portrait, rotate the official image 90 degrees to
