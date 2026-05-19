@@ -457,7 +457,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     table = "".join(rows)
 
     html_body = f"""<!-- wp:paragraph -->
-<p><strong>{name}</strong> offers {annual_fee.lower()} and practical features for UK applicants. It focuses on borrowing choices for everyday UK readers.</p>
+<p><strong>{name}</strong> offers {annual_fee.lower()}. It gives UK applicants practical features and everyday borrowing choices.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
