@@ -1212,32 +1212,20 @@ def main() -> int:
                         Path(manual_local).write_bytes(resp.read())
                     manual_normalize = normalize_card_artwork(manual_local, aggressive=True)
                     manual_pre_upscale_w = (((manual_normalize.get("upscale_info") or {}).get("before") or {}).get("width"))
-                    use_manual = not manual_pre_upscale_w or int(manual_pre_upscale_w) >= 600
-                    if use_manual:
-                        card_local = manual_local
-                        card_src = args.card_image_url
-                        card_selection = {"mode": "manual_card_image_url", "source": args.card_image_url, "reason": "user_supplied_card_art_normalized"}
-                        steps.append("card_image_manual_url_used")
-                    else:
-                        warnings.append(f"manual_card_image_rejected_for_lazyblock: useful crop width {manual_pre_upscale_w}px; using automatic card-only fallback")
-                        steps.append("manual_card_image_rejected_for_lazyblock")
-                        img = run_json([str(GEN_SCRIPTS / "search-card-image.sh"), card_data["card_name"], source_url], timeout=180, allow_fail=True)
-                        if img.get("status") != "OK" or not img.get("path"):
-                            raise RunnerError(f"Manual image rejected and automatic card image search failed: {json.dumps(img, ensure_ascii=False)[:1000]}")
-                        card_local = img["path"]
-                        card_src = img.get("source")
-                        card_selection = {
-                            "mode": (img.get("selection") or {}).get("mode") or "auto_card_image_search",
-                            "manual_source_url": args.card_image_url,
-                            "manual_rejected_reason": f"useful crop width {manual_pre_upscale_w}px below 600px LazyBlock quality gate",
-                            "provider": img.get("provider"),
-                            "tier": img.get("tier"),
-                            "source": img.get("source"),
-                            "score": (img.get("selection") or {}).get("score"),
-                            "title": (img.get("selection") or {}).get("title"),
-                            "page": (img.get("selection") or {}).get("page"),
-                        }
-                        steps.append("card_image_auto_fallback_after_manual_reject")
+                    card_local = manual_local
+                    card_src = args.card_image_url
+                    card_selection = {
+                        "mode": "manual_card_image_url",
+                        "source": args.card_image_url,
+                        "reason": "user_supplied_card_art_normalized",
+                    }
+                    if manual_pre_upscale_w and int(manual_pre_upscale_w) < 600:
+                        warnings.append(
+                            f"manual_card_image_low_quality_source: useful crop width {manual_pre_upscale_w}px below 600px; "
+                            "manual override still used because user supplied an explicit benchmark image"
+                        )
+                        card_selection["quality_warning"] = f"useful crop width {manual_pre_upscale_w}px below 600px before upscale"
+                    steps.append("card_image_manual_url_used")
                 else:
                     img = run_json([str(GEN_SCRIPTS / "search-card-image.sh"), card_data["card_name"], source_url], timeout=180, allow_fail=True)
                     if img.get("status") != "OK" or not img.get("path"):
