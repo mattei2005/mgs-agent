@@ -39,6 +39,7 @@ Manual image override is mandatory when present in the user request. If the user
 Two-path image rule:
 - **Path A — user supplied card image:** use the supplied URL as the source of truth for the LazyBlock card image. Crop/remove external borders or canvas, but preserve the internal card design and colours. Do not run automatic image search unless the manual source fails quality gates and the user approves fallback. Featured image must be contextual/lifestyle and must use the same validated card design; it must not become a card-only/huge isolated card mockup.
 - **Path B — no card image supplied:** use the runner's automatic image search/ranking. Prefer official or authoritative isolated card artwork for the LazyBlock. Validate horizontal orientation, legibility, and card identity. Report the selected source, card image URL/ID, and featured image URL/ID in the final summary.
+- See `references/rec-mbna-image-pipeline-lessons-2026-05-19.md` for the MBNA incident details: low effective crop resolution, unsafe aggressive background removal, featured-image composition, no AI card-only enhancement, and final-summary formatting.
 
 Argument mapping pitfall:
 - User-facing `vertical gb-cc-en` is editorial/context only for routine runner calls; do **not** pass `--vertical` to `mgs-rec-runner.py` unless the script later adds that flag.
