@@ -886,7 +886,7 @@ Required fields in the single message:
 - Word count + title char count + SUB-TITLE char count + meta desc char count
 - Focus keyword
 - Tags applied under a single `Tags:` field, listing ALL tag names exactly as applied; do not replace the list with separate boolean lines such as `Tag Atena` or `Tag de idioma`.
-- Imagens com IDs E URLs completas (card + featured + scene da featured)
+- Imagens com IDs E URLs completas (card + featured + scene da featured). In Discord summaries, keep links outside the monospaced `text` table as Markdown clickable links; do not bury edit/public/image URLs inside the table.
 - Auditoria de artefatos: imagens criadas nesta execução, usadas, extras e cleanup aplicado
 - Cost reporting (Step 14 — duração, API calls, custo USD). If duration is greater than 60 seconds, show it in minutes/seconds (example: `1min01s`), not only raw seconds. The cost line must include total operational estimated cost (Atena/session + runner/image/API when available), not only `runner.cost_usd.total_est`.
 - @Raquel mention (<@1496254952501280974>) for review notification
