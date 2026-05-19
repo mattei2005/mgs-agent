@@ -24,8 +24,7 @@ But it does **not** currently expose a `--post-id` / update-existing-post mode. 
 2. Download the manual image URL with a normal browser-like User-Agent.
 3. Validate dimensions/aspect ratio locally. Normalize the manual image before upload:
    - Preferred helper for simple crop: `/root/mgs-agent/scripts/normalize-card-artwork.py <input> <output.png> --aggressive`
-   - If the normalized crop is still visually poor but the same source worked well in featured, use `skills/content-generate-rec/scripts/generate-clean-card-image.sh <slug> <input>` to create a clean card-only asset from the same manual reference.
-   - After clean-card generation, run `/root/mgs-agent/scripts/normalize-card-artwork.py <clean-card.png> <clean-card.png> --aggressive` again and verify the alpha bounding box is tight. A transparent PNG with the card parked in the lower-right of a huge canvas is a failure even if WordPress upload succeeds.
+   - If the normalized crop is still visually poor or the useful crop is too small for LazyBlock, do **not** use Gemini to invent/rebuild a card-only asset. The MBNA 62092 repair loop proved this creates edge/text/shadow artifacts. Stop the manual-card repair, fall back to automatic card-only image search only if the user approves, and report `manual_rejected_reason` clearly.
    - Use PNG output so rounded card corners keep transparency; JPEG bakes the old thumbnail/background color into ugly corners.
    - For card/LazyBlock image, the final `card_selection` should record:
    - `mode: manual_card_image_url`
