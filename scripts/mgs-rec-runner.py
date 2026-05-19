@@ -378,7 +378,7 @@ def normalize_card_artwork(path: str, aggressive: bool = False) -> Dict[str, Any
     wide frame with a small card in the middle.
     """
     try:
-        from PIL import Image
+        from PIL import Image, ImageFilter
     except Exception as e:
         return {"status": "skipped", "reason": f"PIL unavailable: {e}"}
 
