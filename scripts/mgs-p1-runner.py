@@ -102,6 +102,27 @@ def post_id_from_public_html(public_html: str, rec_url: str) -> int:
     raise RunnerError(f"Could not detect REC post ID from public HTML: {rec_url}")
 
 
+def p1_slug_from_rec_buttons(public_html: str, rec_raw: str, site_domain: str) -> Optional[str]:
+    """Return the P1 slug already linked from the REC buttons, if present.
+
+    REC pages may be created before the P1 exists. In that case, the REC button
+    URL is the source of truth for the future P1 slug. Do not re-infer a shorter
+    slug from the card name when the REC already points to an apply-now URL.
+    """
+    haystack = "\n".join([public_html or "", rec_raw or ""])
+    candidates: List[str] = []
+    patterns = [
+        rf"https?://{re.escape(site_domain)}/(apply-now-[a-z0-9-]+)/?",
+        r"/(apply-now-[a-z0-9-]+)/?",
+    ]
+    for pat in patterns:
+        for m in re.finditer(pat, haystack, flags=re.I):
+            slug = m.group(1).strip("/").lower()
+            if slug not in candidates:
+                candidates.append(slug)
+    return candidates[0] if candidates else None
+
+
 def resolve_credentials(site_key: str) -> Dict[str, Any]:
     return run_json([str(WP_SCRIPTS / "resolve-credentials.sh"), site_key], timeout=90)
 
@@ -544,10 +565,12 @@ def main() -> int:
             raise RunnerError("Could not resolve REC card image from LazyBlock/cache")
 
         country = site.get("country", "gb"); vertical = (site.get("verticals") or ["cc"])[0]
-        target_slug = f"apply-now-{country}-{vertical}-{card_slug}"
+        inferred_target_slug = f"apply-now-{country}-{vertical}-{card_slug}"
+        rec_button_slug = p1_slug_from_rec_buttons(public_html, rec_raw, site["domain"])
+        target_slug = rec_button_slug or inferred_target_slug
         target_url = f"https://{site['domain']}/{target_slug}/"
         existing_check = requests.get(target_url, timeout=12, headers={"User-Agent": "Mozilla/5.0"})
-        result["existing_p1_check"] = {"url": target_url, "http": existing_check.status_code}
+        result["existing_p1_check"] = {"url": target_url, "http": existing_check.status_code, "slug_source": "rec_button" if rec_button_slug else "inferred", "inferred_slug": inferred_target_slug}
         if existing_check.status_code < 400 and not args.dry_run and not args.update_post_id:
             raise RunnerError(f"Target P1 already exists at {target_url}; pass --update-post-id to update instead of creating a duplicate")
 
