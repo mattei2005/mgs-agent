@@ -82,15 +82,34 @@ Validation results:
 - Buttons pointed to official HSBC URL
 - Button text and siteout matched P1 rules
 
+## Deterministic P1 runner — 2026-05-20
+
+Use `/root/mgs-agent/scripts/mgs-p1-runner.py` for routine GB-CC-EN P1 creation from an existing REC.
+
+Default command shape:
+
+```bash
+python3 /root/mgs-agent/scripts/mgs-p1-runner.py \
+  --site <site_key> \
+  --rec-url "https://domain/rec-gb-cc-card-slug/" \
+  --status <draft|publish> \
+  [--official-url "https://issuer/card-page"]
+```
+
+Operational contract:
+- The runner reads the REC, reuses the isolated REC card image, fetches official facts, generates a new P1 contextual featured image, overlays the exact card artwork, assembles 900-1000 visible words, resolves P1 tags, publishes/updates Yoast, runs scorer, and returns one JSON summary.
+- If `--official-url` is omitted, the runner tries the local card cache by REC slug. If no official URL is available, it fails fast and asks for `--official-url`.
+- Duplicate protection is built in: if the target `/apply-now-gb-cc-<slug>/` already exists, publish mode fails unless `--update-post-id <id>` is provided.
+- Use `--dry-run` for safe validation; it does not upload or publish, but it still generates a local featured image to validate the image path.
+- Current support scope: `template_key=gb-cc-en` only.
+
+Expected speed:
+- Dry run with existing REC/cache: ~20-25s.
+- Normal publish should avoid the old 10-12 minute manual loop and target roughly under 1-2 minutes, depending mostly on image generation/upload and WordPress response time.
+
 ## Operational lesson
 
-Until a deterministic P1 runner exists, create P1 drafts/published posts by reusing proven WordPress publishing utilities from `content-publish-wordpress`, but enforce the P1 template rules manually:
-- Resolve official facts from official source.
-- Reuse REC card image when valid.
-- Generate a new P1 contextual featured image.
-- Insert the P1 featured image after the first paragraph and set it as `featured_media`.
-- Use the requested status (`draft` or `publish`) explicitly; do not force draft if Rodolfo asked for published.
-- Verify via authenticated REST that content contains official URL, featured image, card image, `APPLY NOW`, and `You will be redirected.`
+The manual P1 flow remains fallback only when the runner fails or a non-GB-CC-EN template is requested. In normal GB-CC-EN P1 requests, call the runner once and summarize its JSON instead of manually composing content, images, LazyBlocks, terms, publish calls, Yoast and verification.
 
 ## Barclaycard Avios Plus live publish lesson — 2026-05-20
 
