@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-19T05:00:01-04:00",
+    "updated_at": "2026-05-20T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -151,9 +151,14 @@
       "modified_at": "2026-05-16T02:05:50-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/mgs-p1-runner.py",
+      "size_bytes": 36181,
+      "modified_at": "2026-05-20T02:37:31-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/mgs-rec-runner.py",
-      "size_bytes": 71987,
-      "modified_at": "2026-05-19T02:34:30-04:00"
+      "size_bytes": 71381,
+      "modified_at": "2026-05-19T14:05:23-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/migration-2026-05-14-proximo-id-collision-fix.sh",
@@ -202,8 +207,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/normalize-card-artwork.py",
-      "size_bytes": 2170,
-      "modified_at": "2026-05-19T01:04:43-04:00"
+      "size_bytes": 3130,
+      "modified_at": "2026-05-19T21:51:53-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/pendencia-add.sh",
@@ -316,6 +321,11 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
       },
       {
+        "name": "kanban-codex-lane",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/kanban-codex-lane/SKILL.md"
+      },
+      {
         "name": "opencode",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/opencode/SKILL.md"
@@ -334,6 +344,11 @@
         "name": "ascii-video",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/ascii-video/SKILL.md"
+      },
+      {
+        "name": "baoyu-article-illustrator",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/creative/baoyu-article-illustrator/SKILL.md"
       },
       {
         "name": "baoyu-comic",
@@ -793,6 +808,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
       },
       {
+        "name": "kanban-codex-lane",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/kanban-codex-lane/SKILL.md"
+      },
+      {
         "name": "opencode",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/opencode/SKILL.md"
@@ -811,6 +831,11 @@
         "name": "ascii-video",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/ascii-video/SKILL.md"
+      },
+      {
+        "name": "baoyu-article-illustrator",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/baoyu-article-illustrator/SKILL.md"
       },
       {
         "name": "baoyu-comic",
@@ -1249,8 +1274,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "97e34fe42b4bf0fe2fe096e5b9c93af5",
-      "modified_at": "2026-05-19T05:00:03-04:00"
+      "md5": "e5403738730b8c805a6a0a8b75913dee",
+      "modified_at": "2026-05-20T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1261,14 +1286,14 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 297,
-      "md5": "63ced6f0fd2b2558ffcc4e6e95200de0",
-      "modified_at": "2026-05-19T05:00:01-04:00"
+      "md5": "27addd4e62fbded91cefc388764da6b7",
+      "modified_at": "2026-05-20T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 546,
-      "md5": "fb9e16a07e0ad0f8538cc3c9b3bbc106",
-      "modified_at": "2026-05-19T05:00:02-04:00"
+      "size_bytes": 675,
+      "md5": "495ca3cb56d587c8cc5badfcc77c722e",
+      "modified_at": "2026-05-20T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
@@ -1278,9 +1303,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 47862,
-      "md5": "4fa1766b3173e1af61203fda87eba39b",
-      "modified_at": "2026-05-18T05:00:03-04:00"
+      "size_bytes": 48018,
+      "md5": "3766cd9172db2d3a619db6364abc4c60",
+      "modified_at": "2026-05-19T05:00:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1296,9 +1321,9 @@
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
-      "size_bytes": 59144,
-      "md5": "a6437b810b2b051956da975ed071504a",
-      "modified_at": "2026-05-18T13:18:41-04:00"
+      "size_bytes": 60177,
+      "md5": "047bcc707216fbed42df2f51e545915c",
+      "modified_at": "2026-05-20T01:43:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
@@ -1321,8 +1346,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
-      "md5": "29d491884bf0330ee8729d9219b0648e",
-      "modified_at": "2026-05-19T05:00:02-04:00"
+      "md5": "1fe05c078d29c032ce32abf287aabc71",
+      "modified_at": "2026-05-20T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1338,15 +1363,15 @@
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
-      "size_bytes": 1893,
-      "md5": "fbd22aac6e5c897c98683b721305d6b2",
-      "modified_at": "2026-05-18T23:20:52-04:00"
+      "size_bytes": 2318,
+      "md5": "e66442978a015719a8402ec94bd8022a",
+      "modified_at": "2026-05-19T18:43:58-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 10784,
-      "md5": "74832ba3a7208f78b1a39eb906680dc1",
-      "modified_at": "2026-05-18T10:01:08-04:00"
+      "size_bytes": 11148,
+      "md5": "99d4ac418dc3b6a317a94a58b6f20266",
+      "modified_at": "2026-05-19T10:01:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -1356,9 +1381,9 @@
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "size_bytes": 36954,
-      "md5": "2cbffb72fd76e20c095d4b869899c177",
-      "modified_at": "2026-05-18T22:40:20-04:00"
+      "size_bytes": 37500,
+      "md5": "677ccaf70ad810904057578e3a239e38",
+      "modified_at": "2026-05-20T00:30:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
