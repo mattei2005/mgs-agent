@@ -397,6 +397,9 @@ def fit_word_count(body: str) -> Tuple[str, int]:
         "Also consider how the card would fit alongside any existing borrowing, because multiple credit products can affect affordability and future applications.",
         "If you are unsure, pause before applying and review the issuer’s documents again. A slower decision is usually better than an unsuitable application.",
         "Finally, compare the same product against at least one alternative so the fee, reward structure and repayment terms are easier to judge.",
+        "Think about how often the strongest benefit would be used during a normal year. Occasional use may not justify a fee or a more complex rewards structure.",
+        "Keep the official page open while applying so you can confirm the latest rates, exclusions and reward conditions before submitting personal information.",
+        "If your circumstances change, reassess the card rather than keeping it only for historic benefits. Credit products should continue to match your current budget.",
     ]
     idx = 0
     while wc < 900 and idx < len(filler):
