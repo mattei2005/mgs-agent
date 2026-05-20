@@ -400,6 +400,7 @@ def fit_word_count(body: str) -> Tuple[str, int]:
         "Think about how often the strongest benefit would be used during a normal year. Occasional use may not justify a fee or a more complex rewards structure.",
         "Keep the official page open while applying so you can confirm the latest rates, exclusions and reward conditions before submitting personal information.",
         "If your circumstances change, reassess the card rather than keeping it only for historic benefits. Credit products should continue to match your current budget today.",
+        "Check whether the reward rules still match your travel plans before submitting the application.",
     ]
     idx = 0
     while wc < 900 and idx < len(filler):
