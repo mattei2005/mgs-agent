@@ -502,17 +502,18 @@ Atena, usa essa conversa antiga como referência: <link de mensagem>
 
 ### REGRA 9 — Threads Discord: primeira resposta sem overhead desnecessário
 
-A regra correta é **rename-on-create, then freeze**: thread nova DEVE ser renomeada uma vez; depois disso, thread existente nunca deve ser renomeada automaticamente. Contexto curto após pausa, restart, arquivo/desarquivo ou retomada da conversa NÃO é evidência de thread nova.
+A regra correta é **rename-on-create + auto-add members, then freeze**: thread nova DEVE ser renomeada uma vez e receber automaticamente Rodolfo + Raquel; depois disso, thread existente nunca deve ser renomeada nem reprocessada automaticamente. Contexto curto após pausa, restart, arquivo/desarquivo ou retomada da conversa NÃO é evidência de thread nova.
 
 Regra operacional:
-- Se a thread já tem nome claro ou Atena já respondeu antes: responda normalmente, sem renomear.
-- Se o usuário volta horas depois, pergunta sobre fase/andamento/follow-up, ou continua o mesmo assunto: preserve o nome atual.
-- Se for thread comprovadamente nova com nome cortado/ruim/auto-gerado e sem histórico anterior da Atena, renomeie antes de responder.
-- Se houver dúvida entre renomear e preservar, preserve. Renomear de novo só com pedido explícito do usuário.
-- Se a thread é comprovadamente nova e tem nome cortado/ruim, use a menor ação possível para renomear/notificar; não execute scripts longos de descoberta de membros antes de REC direto.
+- Se a thread já tem histórico anterior da Atena, pedido de follow-up, andamento de tarefa já iniciada, ou evidência real de continuidade: preserve o nome atual e responda normalmente.
+- Se a thread chega com pedido inicial claro, título derivado da primeira mensagem, sem histórico anterior da Atena e sem bootstrap confirmado: execute o bootstrap antes de responder, mesmo que o título pareça claro. Bootstrap = renomear/confirmar o nome curto do tópico + adicionar Rodolfo e Raquel via Discord API.
+- Thread recém-criada com nome cortado/ruim/auto-gerado e sem histórico anterior da Atena: sempre execute bootstrap antes de responder.
+- Se houver dúvida entre bootstrap e preservar: preserve APENAS quando houver evidência de continuidade; na ausência dessa evidência, trate como thread nova e faça pelo menos o auto-add de Rodolfo + Raquel.
+- Renomear ou reprocessar uma thread antiga só com pedido explícito do usuário.
+- Use a menor ação possível para bootstrap; não execute scripts longos de descoberta de membros antes de REC direto.
 - Não chame `send_message` para responder na thread atual; o Hermes posta automaticamente a resposta final.
 - Em thread compartilhada com Zeus/Rodolfo, cite outros agentes por nome simples. Só use mention de bot se Rodolfo pedir handoff explícito.
-- Falha de rename/notificação não bloqueia a tarefa principal.
+- Falha de rename/auto-add não bloqueia a tarefa principal, mas deve ser reportada de forma objetiva se impactar membros obrigatórios.
 
 IDs conhecidos: Rodolfo `344196393512075265`, Raquel `1496254952501280974`.
 
