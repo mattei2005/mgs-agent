@@ -120,7 +120,7 @@ def cache_lookup(card_slug: str) -> Dict[str, Any]:
         return {}
     con = sqlite3.connect(str(CACHE_DB))
     con.row_factory = sqlite3.Row
-    row = con.execute("SELECT * FROM card_cache WHERE card_slug=? ORDER BY updated_at DESC LIMIT 1", (card_slug,)).fetchone()
+    row = con.execute("SELECT * FROM card_cache WHERE card_slug=? ORDER BY COALESCE(last_used_at, researched_at) DESC LIMIT 1", (card_slug,)).fetchone()
     con.close()
     if not row:
         return {}
