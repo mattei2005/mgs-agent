@@ -594,12 +594,16 @@ background removal (rembg or remove.bg API).\n\n- Run `scripts/search-card-image
   contemporary coworking, urban street with cinematic blur, city at sunset,
   nighttime metropolis).
 - Output target: strict 16:9 JPEG at `/tmp/featured-<slug>.jpg` (auto-compressed via `compress-image.sh`: PNG → JPEG, quality 88, central crop, final 1280x720 before upload).
-- Composition must contain exactly three essential layers: (1) realistic
-  premium background/lifestyle scene, (2) the exact horizontal card visible in context,
-  (3) one realistic person or real-use element as the top layer slightly overlapping/near the card.
-  The featured image must NOT be a card-only mockup or a huge isolated card on a generic background.
-  No frames, molduras, extra panels, duplicate cards, UI overlays, stickers, or
-  unnecessary decorative objects.
+- Composition must contain exactly three mandatory layers, with no substitutions:
+  (1) realistic premium contextual/lifestyle scene around the card, (2) the exact
+  card identity preserved from the reference, preferably horizontal and visible as
+  a payment card, and (3) one realistic human character/person present in the
+  scene. A generic real-use object (passport, desk, POS machine, coffee, phone,
+  etc.) may support the scene, but it does **not** replace the required person.
+  The featured image must NOT be a card-only mockup, a generic background with no
+  character, a product-only still life, or a huge isolated card detached from the
+  scenario. No frames, molduras, extra panels, duplicate cards, UI overlays,
+  stickers, or unnecessary decorative objects.
 - VALIDATE LOCAL ASPECT RATIO BEFORE UPLOAD: final featured must be strict 16:9 (expected 1280x720 after `compress-image.sh`). If Gemini returns 8:5/16:10 (example: 1280x800), do not silently accept; the approved path is the central-crop enforcement in `compress-image.sh` before upload.
 - VALIDATE LOCALLY BEFORE UPLOAD: use `vision_analyze` on `/tmp/featured-<slug>.jpg` and confirm the card in the composition is visually identical to the card_media (issuer design, layout, colours, sample text placement). If not, regenerate (retry up to 2x). If still broken, abort with a clear message.
 - VALIDATE COMPOSITION BEFORE UPLOAD: the featured image must be contextual/lifestyle hero art, not a card-only mockup. It should contain a realistic premium background/use scene, the same validated horizontal card integrated naturally in context, and a realistic person or real-use element near the card. Reject/regenerate images with a huge isolated card, redesigned/different card art, frames/molduras, decorative panels, duplicated cards, badges, UI overlays, phone screens, or extra composition objects.
