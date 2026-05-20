@@ -47,12 +47,28 @@ def main() -> int:
     result = runner.normalize_card_artwork(str(dst), aggressive=args.aggressive)
     with Image.open(dst) as im:
         width, height = im.size
+        mode = im.mode
+        alpha_bbox = im.convert('RGBA').getchannel('A').getbbox()
+    aspect = width / max(1, height)
+    if width <= height or not (1.2 <= aspect <= 2.2):
+        raise SystemExit(
+            f"CARD_STANDARD_FAIL: normalized LazyBlock card must be horizontal/card-shaped; "
+            f"got {width}x{height} aspect={aspect:.4f}. Rotate/crop the card-only artwork before upload."
+        )
     if args.min_width and width < args.min_width:
         raise SystemExit(
             f"LOW_QUALITY_SOURCE: normalized card image is only {width}x{height}; "
             f"minimum width is {args.min_width}px. Use a higher-resolution card-only image or request approval before automatic fallback."
         )
-    print(json.dumps({'status': 'ok', 'path': str(dst), 'normalize': result, 'width': width, 'height': height}, ensure_ascii=False))
+    if alpha_bbox and alpha_bbox != (0, 0, width, height):
+        ax0, ay0, ax1, ay1 = alpha_bbox
+        alpha_area_ratio = ((ax1 - ax0) * (ay1 - ay0)) / max(1, width * height)
+        if alpha_area_ratio < 0.78:
+            raise SystemExit(
+                f"CARD_STANDARD_FAIL: normalized card has too much empty transparent canvas "
+                f"({alpha_area_ratio:.2%} useful area). Crop tighter so the card fills the image."
+            )
+    print(json.dumps({'status': 'ok', 'path': str(dst), 'normalize': result, 'width': width, 'height': height, 'aspect': round(aspect, 4), 'mode': mode}, ensure_ascii=False))
     return 0
 
 
