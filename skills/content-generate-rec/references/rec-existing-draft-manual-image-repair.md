@@ -22,10 +22,13 @@ But it does **not** currently expose a `--post-id` / update-existing-post mode. 
 
 1. Confirm the target post exists and is the expected status via WordPress REST `GET /wp-json/wp/v2/posts/<post_id>?context=edit`.
 2. Download the manual image URL with a normal browser-like User-Agent.
-3. Validate dimensions/aspect ratio locally. Normalize the manual image before upload:
-   - Preferred helper for simple crop: `/root/mgs-agent/scripts/normalize-card-artwork.py <input> <output.png> --aggressive`, but only accept aggressive background removal when it does not remove colours/design inside the card. If the canvas/background colour also appears in the card artwork, use a conservative RGB-preserving crop instead.
-   - If the normalized crop is still visually poor or the useful crop is too small for LazyBlock, do **not** use Gemini to invent/rebuild a card-only asset. The MBNA 62092 repair loop proved this creates edge/text/shadow artifacts. Stop the manual-card repair, fall back to automatic card-only image search only if the user approves, and report `manual_rejected_reason` clearly.
-    - Use PNG output, but do not apply global transparency/background removal when the background/canvas colour also appears inside the card artwork. In that case, crop the card rectangle and preserve original RGB colours; otherwise the card can get internal transparent/checkerboard holes.
+3. Validate dimensions/aspect ratio locally. Normalize the manual image before upload — never upload the raw image directly to the LazyBlock:
+   - Required helper: `/root/mgs-agent/scripts/normalize-card-artwork.py <input> <output.png> --aggressive --min-width 600`.
+   - Fixed LazyBlock standard, independent of source: card-only PNG, transparent/no external background, no people, no props, no frames, no shadows, no composition, no large empty canvas, centered, high quality, and always horizontal.
+   - If the source image is portrait/vertical, rotate/adapt it to horizontal and crop to the card bounds while preserving the original card identity/design/colours.
+   - Only accept aggressive background removal when it does not remove colours/design inside the card. If the canvas/background colour also appears in the card artwork, use a conservative RGB-preserving crop instead.
+   - If the normalized crop is still visually poor, not horizontal, has large empty space, has non-card elements, or the useful crop is too small for LazyBlock, do **not** use Gemini to invent/rebuild a card-only asset. Stop the manual-card repair, fall back to automatic card-only image search only if the user approves, and report `manual_rejected_reason` clearly.
+   - Use PNG output, but do not apply global transparency/background removal when the background/canvas colour also appears inside the card artwork. In that case, crop the card rectangle and preserve original RGB colours; otherwise the card can get internal transparent/checkerboard holes.
     - For card/LazyBlock image, the final `card_selection` should record:
    - `mode: manual_card_image_url`
    - `source: <manual URL>`
