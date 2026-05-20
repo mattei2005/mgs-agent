@@ -574,8 +574,7 @@ def main() -> int:
 
         t = ts(); category_id, tag_ids, tag_names = resolve_taxonomy(args.site, site, card_name, card_slug, official_data.get("benefits") or []); timings["taxonomy"] = ts() - t; steps.append("taxonomy_resolved")
 
-        country = site.get("country", "gb"); vertical = (site.get("verticals") or ["cc"])[0]
-        slug = f"apply-now-{country}-{vertical}-{card_slug}"
+        slug = target_slug
         meta = {"_yoast_wpseo_title": "", "_yoast_wpseo_metadesc": metadesc, "_yoast_wpseo_focuskw": focuskw}
         post_json = {
             "title": title,
