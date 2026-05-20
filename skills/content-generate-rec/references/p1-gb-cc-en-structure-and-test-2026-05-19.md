@@ -99,7 +99,8 @@ python3 /root/mgs-agent/scripts/mgs-p1-runner.py \
 Operational contract:
 - The runner reads the REC, reuses the isolated REC card image, fetches official facts, generates a new P1 contextual featured image, overlays the exact card artwork, assembles 900-1000 visible words, resolves P1 tags, publishes/updates Yoast, runs scorer, and returns one JSON summary.
 - If `--official-url` is omitted, the runner tries the local card cache by REC slug. If no official URL is available, it fails fast and asks for `--official-url`.
-- Duplicate protection is built in: if the target `/apply-now-gb-cc-<slug>/` already exists, publish mode fails unless `--update-post-id <id>` is provided.
+- Slug source-of-truth: before creating a P1 from an existing REC, inspect the REC buttons/links for an existing internal `/apply-now-.../` URL. If found, create the P1 with exactly that slug, even if it differs from the slug inferred from card name. Only infer `/apply-now-gb-cc-<card-slug>/` when the REC does not already contain a P1/apply slug.
+- Duplicate protection must run against the REC-derived P1 slug when present; if that target already exists, publish mode fails unless `--update-post-id <id>` is provided.
 - Use `--dry-run` for safe validation; it does not upload or publish, but it still generates a local featured image to validate the image path.
 - Current support scope: `template_key=gb-cc-en` only.
 
