@@ -84,10 +84,35 @@ Validation results:
 
 ## Operational lesson
 
-Until a deterministic P1 runner exists, create P1 drafts by reusing proven WordPress publishing utilities from `content-publish-wordpress`, but enforce the P1 template rules manually:
-- Resolve official facts from official source.
+Until a deterministic P1 runner exists, create P1 drafts/published pages by reusing proven WordPress publishing utilities from `content-publish-wordpress`, but enforce the P1 template rules manually:
+- Resolve official facts from the current official issuer source. Do not blindly reuse the REC CTA URL if it points to the future internal P1 or if the issuer has moved the product URL; verify the current issuer URL before using it as the P1 destination.
 - Reuse REC card image when valid.
 - Generate a new P1 contextual featured image.
 - Insert the P1 featured image after the first paragraph and set it as `featured_media`.
-- Publish as draft for the first tests.
-- Verify via authenticated REST that draft content contains official URL, featured image, card image, `APPLY NOW`, and `You will be redirected.`
+- Honour the requested status (`draft` or `publish`) once the manual validation gates pass.
+- Verify via REST/public checks that content contains the official URL, featured image, card image, `APPLY NOW`, and `You will be redirected.`
+- If `resolve-term.sh` fails with WordPress `term_exists`, parse `term_id` from the error body and continue instead of retrying or recreating the tag.
+
+## Second live published test
+
+Test card: Santander Edge Credit Card
+REC used as source context: `https://eggbev.com/rec-gb-cc-santander-edge/`
+Current official URL used: `https://www.santander.co.uk/personal/credit-cards/santander-edge-credit-card`
+Published P1: Post ID `62168`
+Slug: `apply-now-gb-cc-santander-edge`
+
+Validation results:
+- Status: publish
+- Public URL returned HTTP 200 after creation.
+- Word count: 910
+- Title/subtitle/meta: 42 / 94 / 118 characters
+- Yoast SEO/readability after scorer: 86 / 90
+- Featured media set and inserted after first paragraph.
+- Card LazyBlocks reused REC card media (`card-santander-edge.png`).
+- Buttons pointed to the official Santander URL, not the internal apply URL.
+- Button text and siteout matched P1 rules.
+
+Practical workflow notes from this test:
+- The old cached/REC source URL `https://www.santander.co.uk/personal/credit-cards/edge-credit-card` returned a Santander 404; the current live official page was `/personal/credit-cards/santander-edge-credit-card`.
+- The published REC page exposed the existing card media URL and a broken internal P1 URL, which was useful as source context but not as the final P1 CTA destination.
+- `generate-featured-image.sh` can be used with a `p1-<slug>` slug to create a new contextual P1 image while preserving REC card media for LazyBlocks.
