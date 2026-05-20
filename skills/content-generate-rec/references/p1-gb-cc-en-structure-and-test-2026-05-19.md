@@ -111,6 +111,12 @@ Expected speed:
 
 The manual P1 flow remains fallback only when the runner fails or a non-GB-CC-EN template is requested. In normal GB-CC-EN P1 requests, call the runner once and summarize its JSON instead of manually composing content, images, LazyBlocks, terms, publish calls, Yoast and verification.
 
+If the runner fails on `reference_url fetch failed` because the REC/cache official URL now returns 404, do a bounded lookup on the issuer site for the current product URL and rerun once with `--official-url`. Keep the card name, REC URL and status unchanged. Do not switch to manual publishing unless the corrected official URL also fails or the product facts cannot be verified from an official source.
+
+If the runner fails after uploading P1 media, audit and delete only the orphan media from the failed attempt once the successful rerun has published. Use safe deletion against the specific media ID/source URL from the failed run; do not bulk-delete media by slug.
+
+If the deterministic P1 body lands just below the hard 900-word floor after all filler paragraphs, patch the runner’s bounded filler list with one short, generic compliance-safe sentence and rerun. The goal is still 900-1000 visible words; do not lower the hard limit and do not manually pad the WordPress post after publication.
+
 ## Barclaycard Avios Plus live publish lesson — 2026-05-20
 
 Session card: Barclaycard Avios Plus Card
