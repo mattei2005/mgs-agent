@@ -49,7 +49,24 @@ The first draft had multiple unacceptable defects:
 - WordPress post title was blank because Yoast update was given top-level `title: ""`. Yoast scoring can still pass even when WP title is blank. Always verify the saved title through WP REST after update.
 - The LazyBlock card image used an official promotional/composite image with a person/scene. This violates the card-only requirement. For card/LazyBlock, only isolated horizontal card artwork is acceptable.
 - The featured image placed the card like a badge/crachá and looked low-quality. Featured must be a realistic 16:9 lifestyle composition where the card is naturally placed, not attached to a person.
+- A later replacement featured image was visually acceptable but still failed the user's prompt because it had no human character. Aesthetic quality is not enough: REC featured images must pass all mandatory prompt gates.
 - The final summary omitted separate character counts for title, subtitle and meta description, despite the user requesting detailed fields.
+
+## Featured-image hard gates learned from this repair
+
+For REC featured images, validate the local image before upload against all five gates:
+
+```text
+Gate                          | Required outcome
+------------------------------|---------------------------------------------------------
+Card identity                 | Card design preserved from reference, preferably horizontal
+Human presence                | One realistic person/character is visible in the scene
+Contextual setting            | Scene surrounds the card and connects to real-life use
+Cinematic/humanized style     | Premium editorial look, not sterile product-only art
+Payment-card readability      | Card reads as a card, not a badge/crachá or UI label
+```
+
+Reject and regenerate even a beautiful image if any gate fails. Real-use props such as coffee, desk, POS machine, passport, shopping bags or phone can support the story, but they never replace the required person.
 
 ## Verification checklist after repair
 
