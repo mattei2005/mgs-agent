@@ -422,6 +422,9 @@ def fit_word_count(body: str) -> Tuple[str, int]:
         "Keep the official page open while applying so you can confirm the latest rates, exclusions and reward conditions before submitting personal information.",
         "If your circumstances change, reassess the card rather than keeping it only for historic benefits. Credit products should continue to match your current budget today.",
         "Check whether the reward rules still match your travel plans before submitting the application.",
+        "For balance transfer cards, confirm the transfer window, transfer fee and post-promotional interest rate before moving an existing balance.",
+        "Set a repayment plan before the promotional period ends, because any remaining balance may start accruing interest at the standard variable rate.",
+        "Do not transfer more than you can realistically repay, and remember that missed payments can affect promotional rates and future credit access.",
     ]
     idx = 0
     while wc < 900 and idx < len(filler):
