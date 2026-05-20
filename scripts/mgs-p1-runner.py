@@ -542,6 +542,14 @@ def main() -> int:
         if not card_url or not card_id:
             raise RunnerError("Could not resolve REC card image from LazyBlock/cache")
 
+        country = site.get("country", "gb"); vertical = (site.get("verticals") or ["cc"])[0]
+        target_slug = f"apply-now-{country}-{vertical}-{card_slug}"
+        target_url = f"https://{site['domain']}/{target_slug}/"
+        existing_check = requests.get(target_url, timeout=12, headers={"User-Agent": "Mozilla/5.0"})
+        result["existing_p1_check"] = {"url": target_url, "http": existing_check.status_code}
+        if existing_check.status_code < 400 and not args.dry_run and not args.update_post_id:
+            raise RunnerError(f"Target P1 already exists at {target_url}; pass --update-post-id to update instead of creating a duplicate")
+
         t = ts(); official_data = extract_official_data(card_name, official_url, args.benefit, args.annual_fee or None, args.apr or None); timings["official_facts"] = ts() - t; steps.append("official_facts_extracted")
         # Preserve REC LazyBlock labels when official extraction is generic.
         official_data.setdefault("tag10", parsed.get("tag10"))
