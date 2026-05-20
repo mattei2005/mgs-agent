@@ -2,10 +2,10 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-05-18T13:18:07-04:00",
-    "total_abertas": 52,
-    "total_resolvidas": 37,
-    "proximo_id": 90,
+    "ultima_atualizacao": "2026-05-20T01:42:28-04:00",
+    "total_abertas": 53,
+    "total_resolvidas": 0,
+    "proximo_id": 91,
     "responsavel": "Rodolfo Mattei"
   },
   "categorias": {
@@ -937,6 +937,25 @@
         "teste-isolado"
       ],
       "contexto": "Avaliar o novo Hermes Kanban auto-decomposition/orchestrator sem mudar a estrutura atual da MGS. Plano: criar board/perfil de teste ou modo manual, definir descrições de perfis em ambiente controlado, rodar tarefas fake/não críticas, medir roteamento e logs. Não habilitar automação plena nem produção editorial/infra até validação e decisão do Rodolfo."
+    },
+    {
+      "id": "PEND-090",
+      "titulo": "Testar Browse.sh skills isoladamente do projeto MGS",
+      "categoria": "skills",
+      "prioridade": "baixa",
+      "status": "aberta",
+      "tempo_estimado": "45min",
+      "bloqueio": "Executar apenas em ambiente/sessão isolada, sem instalar skill comunitária em produção antes de revisar o SKILL.md.",
+      "criada_em": "2026-05-20T01:42:28-04:00",
+      "criada_por": "zeus",
+      "tags": [
+        "hermes-update",
+        "browse-sh",
+        "skills",
+        "browser-automation",
+        "teste-isolado"
+      ],
+      "contexto": "Após update Hermes para HEAD 340d2b6de, ficou disponível integração com browse.sh: catálogo Browserbase de 200+ skills comunitárias para automação web por site. Rodolfo pediu registrar para testar depois, isolado do projeto MGS. Fluxo sugerido: hermes skills search <site> --source browse-sh; hermes skills inspect <id>; revisar segurança; testar em sessão isolada; só depois considerar instalação/uso operacional."
     }
   ],
   "resolvidas": [
