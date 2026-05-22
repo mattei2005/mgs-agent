@@ -1,0 +1,5048 @@
+[
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron recuperado",
+        "description": "`monitor-hermes-updates.sh` voltou a atualizar log.",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-22T23:06:30.115000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1507520057662640169",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Hermes Agent — update disponível",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Upstream",
+            "value": "v2026.5.16 (a84cec61c) — 2026-05-22",
+            "inline": true
+          },
+          {
+            "name": "Versão local",
+            "value": "v2026.5.16 (1e71b7180) — 2026-05-22",
+            "inline": true
+          },
+          {
+            "name": "Atraso",
+            "value": "0 dias / 12 commits atrás",
+            "inline": false
+          },
+          {
+            "name": "Resumo",
+            "value": "Features 0 | Fixes 6 | Perf 2 | Security 3 | Breaking 0",
+            "inline": false
+          },
+          {
+            "name": "Breaking",
+            "value": "nenhum",
+            "inline": false
+          },
+          {
+            "name": "Top features",
+            "value": "```text\\nnenhuma feature relevante listada\\n```",
+            "inline": false
+          },
+          {
+            "name": "Top fixes",
+            "value": "```text\\n• refresh short-lived access tokens per request (#30619)\n• supply-chain-audit uses two-dot diff, causing false positives on stale-branch PRs\n• _platform_status must respect is_connected=False, not silently fall back to check_fn\n• wire Nous URL allowlist into refresh / mint persistence sites\n• validate Nous Portal inference_base_url against host allowlist\\n```",
+            "inline": false
+          },
+          {
+            "name": "Releases",
+            "value": "nenhuma tag intermediária listada",
+            "inline": false
+          },
+          {
+            "name": "Links",
+            "value": "[Diff completo](https://github.com/NousResearch/hermes-agent/compare/1e71b7180...a84cec61c) | [Release notes](https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.16)",
+            "inline": false
+          },
+          {
+            "name": "Antes de atualizar",
+            "value": "Verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-22T23:06:13.303000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1507519987147870218",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=8325min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-22T22:45:01.965000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1507514654769807411",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=7965min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-22T16:45:02.232000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1507424058923548793",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "GPT-5.5 OAuth — volume 24h",
+        "description": "🟢 OK — custo simulado $1.25",
+        "color": 3066993,
+        "fields": [
+          {
+            "name": "Status",
+            "value": "OK — Volume baixo",
+            "inline": false
+          },
+          {
+            "name": "Custo real",
+            "value": "$0.00 — OAuth incluso na assinatura",
+            "inline": true
+          },
+          {
+            "name": "Custo hipotético",
+            "value": "$1.25 — se fosse pay-per-token",
+            "inline": true
+          },
+          {
+            "name": "API calls",
+            "value": "51 total | Zeus 16 | Atena 35",
+            "inline": false
+          },
+          {
+            "name": "Tokens estimados",
+            "value": "~102K input | ~25K output",
+            "inline": false
+          },
+          {
+            "name": "Referência",
+            "value": "GPT-5.5 $7.00/$21.00 por 1M — estimativa",
+            "inline": false
+          },
+          {
+            "name": "Nota",
+            "value": "Valores simulados; não representa cobrança real.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-22T16:00:02.052000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1507412733547642971",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=7605min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-22T10:45:02.376000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1507333462561132577",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=7245min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-22T04:45:02.313000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1507242865330487447",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=6885min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-21T22:45:02.049000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1507152267256528897",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=6525min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-21T16:45:01.788000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1507061669195415622",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "GPT-5.5 OAuth — volume 24h",
+        "description": "🟢 OK — custo simulado $0.44",
+        "color": 3066993,
+        "fields": [
+          {
+            "name": "Status",
+            "value": "OK — Volume baixo",
+            "inline": false
+          },
+          {
+            "name": "Custo real",
+            "value": "$0.00 — OAuth incluso na assinatura",
+            "inline": true
+          },
+          {
+            "name": "Custo hipotético",
+            "value": "$0.44 — se fosse pay-per-token",
+            "inline": true
+          },
+          {
+            "name": "API calls",
+            "value": "18 total | Zeus 18 | Atena 0",
+            "inline": false
+          },
+          {
+            "name": "Tokens estimados",
+            "value": "~36K input | ~9K output",
+            "inline": false
+          },
+          {
+            "name": "Referência",
+            "value": "GPT-5.5 $7.00/$21.00 por 1M — estimativa",
+            "inline": false
+          },
+          {
+            "name": "Nota",
+            "value": "Valores simulados; não representa cobrança real.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-21T16:00:02.690000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1507050348358008943",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=6165min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-21T10:45:02.080000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506971073453756467",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=5805min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-21T04:45:02.174000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506880476881621032",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=5445min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-20T22:45:02.147000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506789879802101860",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=5085min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-20T16:45:02.411000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506699283942871082",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "GPT-5.5 OAuth — volume 24h",
+        "description": "🟢 OK — custo simulado $11.29",
+        "color": 3066993,
+        "fields": [
+          {
+            "name": "Status",
+            "value": "OK — Volume saudável",
+            "inline": false
+          },
+          {
+            "name": "Custo real",
+            "value": "$0.00 — OAuth incluso na assinatura",
+            "inline": true
+          },
+          {
+            "name": "Custo hipotético",
+            "value": "$11.29 — se fosse pay-per-token",
+            "inline": true
+          },
+          {
+            "name": "API calls",
+            "value": "461 total | Zeus 44 | Atena 417",
+            "inline": false
+          },
+          {
+            "name": "Tokens estimados",
+            "value": "~922K input | ~230K output",
+            "inline": false
+          },
+          {
+            "name": "Referência",
+            "value": "GPT-5.5 $7.00/$21.00 por 1M — estimativa",
+            "inline": false
+          },
+          {
+            "name": "Nota",
+            "value": "Valores simulados; não representa cobrança real.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-20T16:00:02.083000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506687957946466415",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=4725min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-20T10:45:02.285000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506608686448115742",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=4365min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-20T04:45:01.956000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506518088101920868",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=3990min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-19T22:30:02.836000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506423719952912465",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=3630min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-19T16:30:02.393000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506333121128304760",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "GPT-5.5 OAuth — volume 24h",
+        "description": "🟡 WARN — custo simulado $15.21",
+        "color": 15844367,
+        "fields": [
+          {
+            "name": "Status",
+            "value": "WARN — Volume acima do normal",
+            "inline": false
+          },
+          {
+            "name": "Custo real",
+            "value": "$0.00 — OAuth incluso na assinatura",
+            "inline": true
+          },
+          {
+            "name": "Custo hipotético",
+            "value": "$15.21 — se fosse pay-per-token",
+            "inline": true
+          },
+          {
+            "name": "API calls",
+            "value": "621 total | Zeus 329 | Atena 292",
+            "inline": false
+          },
+          {
+            "name": "Tokens estimados",
+            "value": "~1242K input | ~310K output",
+            "inline": false
+          },
+          {
+            "name": "Referência",
+            "value": "GPT-5.5 $7.00/$21.00 por 1M — estimativa",
+            "inline": false
+          },
+          {
+            "name": "Nota",
+            "value": "Valores simulados; não representa cobrança real.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-19T16:00:01.886000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506325569254723689",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=3270min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-19T10:30:01.702000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506242521263505523",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Housekeeping .bak executado",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Host",
+            "value": "mgs-agent-01",
+            "inline": true
+          },
+          {
+            "name": "Retenção",
+            "value": "15 dias",
+            "inline": true
+          },
+          {
+            "name": "Arquivos deletados",
+            "value": "2",
+            "inline": true
+          },
+          {
+            "name": "Espaço liberado",
+            "value": ".04 MB",
+            "inline": true
+          },
+          {
+            "name": "Diretórios vazios removidos",
+            "value": "0",
+            "inline": true
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-19T07:00:09.731000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506189706709434490",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=2910min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-19T04:30:01.709000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506151924326596668",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=2550min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-18T22:30:02.444000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1506061330442879059",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@1496296175014252634> REPORT-INFRA\n\nOrigem: Zeus\nArquivo: /root/mgs-agent/data/pendencias.db.json\nMudança: adicionada pendência PEND-089 — \"Testar Hermes Kanban Orchestrator em paralelo\".\nMotivo: solicitação do Rodolfo para registrar o teste em backlog sem alterar estrutura Zeus/Atena nem habilitar automação em produção.\nValidação: JSON parse OK; metadata atualizada para total_abertas=52, total_resolvidas=37, proximo_id=90.\nRisco: baixo; alteração apenas em backlog canônico.",
+    "mentions": [
+      {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "avatar": "6ea4690e23ce943e3cbc6eecd1dfd51a",
+        "discriminator": "2591",
+        "public_flags": 0,
+        "flags": 0,
+        "bot": true,
+        "banner": null,
+        "accent_color": null,
+        "global_name": null,
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-18T17:19:08.291000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505983089254338671",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1496296175014252634",
+      "username": "Zeus",
+      "avatar": "6ea4690e23ce943e3cbc6eecd1dfd51a",
+      "discriminator": "2591",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "banner": null,
+      "accent_color": null,
+      "global_name": null,
+      "avatar_decoration_data": null,
+      "collectibles": null,
+      "display_name_styles": null,
+      "banner_color": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=2175min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-18T16:15:02.533000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505966958976172044",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "GPT-5.5 OAuth — volume 24h",
+        "description": "🟢 OK — custo simulado $4.48",
+        "color": 3066993,
+        "fields": [
+          {
+            "name": "Status",
+            "value": "OK — Volume baixo",
+            "inline": false
+          },
+          {
+            "name": "Custo real",
+            "value": "$0.00 — OAuth incluso na assinatura",
+            "inline": true
+          },
+          {
+            "name": "Custo hipotético",
+            "value": "$4.48 — se fosse pay-per-token",
+            "inline": true
+          },
+          {
+            "name": "API calls",
+            "value": "183 total | Zeus 143 | Atena 40",
+            "inline": false
+          },
+          {
+            "name": "Tokens estimados",
+            "value": "~366K input | ~91K output",
+            "inline": false
+          },
+          {
+            "name": "Referência",
+            "value": "GPT-5.5 $7.00/$21.00 por 1M — estimativa",
+            "inline": false
+          },
+          {
+            "name": "Nota",
+            "value": "Valores simulados; não representa cobrança real.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-18T16:00:02.408000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505963183578284124",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-hermes-updates.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=1800min threshold=1800min path=/root/mgs-agent/logs/monitor-hermes-updates.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-18T10:00:02.752000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505872588054990919",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "GPT-5.5 OAuth — volume 24h",
+        "description": "🟡 WARN — custo simulado $24.60",
+        "color": 15844367,
+        "fields": [
+          {
+            "name": "Status",
+            "value": "WARN — Volume acima do normal",
+            "inline": false
+          },
+          {
+            "name": "Custo real",
+            "value": "$0.00 — OAuth incluso na assinatura",
+            "inline": true
+          },
+          {
+            "name": "Custo hipotético",
+            "value": "$24.60 — se fosse pay-per-token",
+            "inline": true
+          },
+          {
+            "name": "API calls",
+            "value": "1004 total | Zeus 786 | Atena 218",
+            "inline": false
+          },
+          {
+            "name": "Tokens estimados",
+            "value": "~2008K input | ~502K output",
+            "inline": false
+          },
+          {
+            "name": "Referência",
+            "value": "GPT-5.5 $7.00/$21.00 por 1M — estimativa",
+            "inline": false
+          },
+          {
+            "name": "Nota",
+            "value": "Valores simulados; não representa cobrança real.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-17T16:00:02.116000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505600794488078448",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@1496296175014252634>\n\n[REPORT-INFRA] Brave Images fallback implementado na Atena\n\n```text\nArtefatos modificados\n────────────────────────────────────────────────────────────────────\n/root/mgs-agent/skills/content-generate-rec/scripts/search-card-image.sh\n/root/mgs-agent/skills/content-generate-rec/SKILL.md\n\nMudança\n────────────────────────────────────────────────────────────────────\n1. search-card-image.sh agora tenta:\n   - site oficial\n   - Brave Images API via 1Password/BRAVE_SEARCH_API_KEY\n   - Bing Playwright local como fallback final\n2. Corrigido false-positive em imagem oficial: host do banco não soma score sozinho.\n3. Corrigido pipefail quando página não tem tags de imagem.\n4. Documentação da skill atualizada para refletir 3 tentativas automáticas.\n\nValidação\n────────────────────────────────────────────────────────────────────\nbash -n: OK\nTeste AIB Visa Gold: OK\nFonte aceita: aibni.co.uk/.../visa-gold-card.png\nProvider: brave_images\nSem credencial exposta no log/chat.\n\nCommits auto-push\n────────────────────────────────────────────────────────────────────\nffca4f1, 76ff4a0, 8071812, 71bd272, d268b0e, 843dee7\n```",
+    "mentions": [
+      {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "avatar": "6ea4690e23ce943e3cbc6eecd1dfd51a",
+        "discriminator": "2591",
+        "public_flags": 0,
+        "flags": 0,
+        "bot": true,
+        "banner": null,
+        "accent_color": null,
+        "global_name": null,
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-17T09:15:58.140000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505499107882700851",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1496296175014252634",
+      "username": "Zeus",
+      "avatar": "6ea4690e23ce943e3cbc6eecd1dfd51a",
+      "discriminator": "2591",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "banner": null,
+      "accent_color": null,
+      "global_name": null,
+      "avatar_decoration_data": null,
+      "collectibles": null,
+      "display_name_styles": null,
+      "banner_color": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Auto-push restabelecido",
+        "color": 3066993,
+        "fields": [
+          {
+            "name": "Falhas anteriores",
+            "value": "4",
+            "inline": true
+          },
+          {
+            "name": "Último commit OK",
+            "value": "`9063ef5`",
+            "inline": true
+          },
+          {
+            "name": "Horário",
+            "value": "2026-05-16T19:45:12-04:00",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-17T00:15:04.900000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505362989128355951",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de auto-push",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Auto-push falhando",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Falhas consecutivas",
+            "value": "3",
+            "inline": true
+          },
+          {
+            "name": "Último push OK",
+            "value": "2026-05-16T18:50:12-04:00",
+            "inline": true
+          },
+          {
+            "name": "Último erro",
+            "value": "```text\n2026-05-16T19:05:11-04:00 commit=65a6854 [START sem OK]\n```",
+            "inline": false
+          },
+          {
+            "name": "Ação",
+            "value": "Investigar `/root/mgs-agent/logs/auto-push.log`.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-16T23:45:04.191000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505355436407132240",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron recuperado",
+        "description": "`monitor-tool-loops.sh` voltou a atualizar log.",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-16T21:45:02.601000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505325230749384845",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> alerta de cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`monitor-tool-loops.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=35min threshold=20min path=/root/mgs-agent/logs/monitor-tool-loops.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-16T21:30:02.504000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505321455469068318",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> teste de layout loop em agent",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "[TESTE] Agent em possível loop",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Agent",
+            "value": "zeus",
+            "inline": true
+          },
+          {
+            "name": "Session",
+            "value": "`20260516_120000_abcd1234`",
+            "inline": true
+          },
+          {
+            "name": "Tool",
+            "value": "`browser_navigate`",
+            "inline": true
+          },
+          {
+            "name": "Tipo",
+            "value": "Frequência alta sem erros",
+            "inline": true
+          },
+          {
+            "name": "Contagem",
+            "value": "23",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Mandar mensagem ao agent para parar ou reorientar.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-16T16:23:53.167000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505244408885284936",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> teste de layout restart recorrente",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "[TESTE] Service reiniciando em excesso",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Service",
+            "value": "`zeus-gateway`",
+            "inline": true
+          },
+          {
+            "name": "Reinícios",
+            "value": "5x",
+            "inline": true
+          },
+          {
+            "name": "Janela",
+            "value": "24h",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Investigar logs e causa do restart.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-16T16:23:52.602000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505244406515499182",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "[TESTE] Hermes Agent — update disponível",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Upstream",
+            "value": "v0.14.0 (a91a57f) — 2026-05-16",
+            "inline": true
+          },
+          {
+            "name": "Versão local",
+            "value": "v0.13.0 (db84a78) — 2026-04-20",
+            "inline": true
+          },
+          {
+            "name": "Atraso",
+            "value": "26 dias / 96 commits atrás",
+            "inline": false
+          },
+          {
+            "name": "Resumo",
+            "value": "Features 19 | Fixes 44 | Perf 3 | Security 0 | Breaking 0",
+            "inline": false
+          },
+          {
+            "name": "Top features",
+            "value": "```text\n• gateway queue improvements\n• Discord thread lifecycle controls\n```",
+            "inline": false
+          },
+          {
+            "name": "Links",
+            "value": "[Diff completo](https://github.com/NousResearch/hermes-agent) | [Release notes](https://github.com/NousResearch/hermes-agent/releases)",
+            "inline": false
+          },
+          {
+            "name": "Antes de atualizar",
+            "value": "Verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-16T16:23:52.225000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505244404934246500",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "[TESTE] GPT-5.5 OAuth — volume 24h",
+        "description": "🟡 WARN — custo simulado $18.08",
+        "color": 15844367,
+        "fields": [
+          {
+            "name": "Status",
+            "value": "WARN — Volume acima do normal",
+            "inline": false
+          },
+          {
+            "name": "Custo real",
+            "value": "$0.00 — OAuth incluso na assinatura",
+            "inline": true
+          },
+          {
+            "name": "Custo hipotético",
+            "value": "$18.08 — se fosse pay-per-token",
+            "inline": true
+          },
+          {
+            "name": "API calls",
+            "value": "738 total | Zeus 665 | Atena 73",
+            "inline": false
+          },
+          {
+            "name": "Tokens estimados",
+            "value": "~1476K input | ~369K output",
+            "inline": false
+          },
+          {
+            "name": "Referência",
+            "value": "GPT-5.5 $7.00/$21.00 por 1M — estimativa",
+            "inline": false
+          },
+          {
+            "name": "Nota",
+            "value": "Valores simulados; não representa cobrança real.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-16T16:23:51.765000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505244403005128826",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "[TESTE] Cron recuperado",
+        "description": "`cleanup-zombie-sessions.sh` voltou a atualizar log.",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-16T16:23:51.292000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505244401020964885",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> teste de layout cron stale",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "[TESTE] Cron sem log recente",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Script",
+            "value": "`cleanup-zombie-sessions.sh`",
+            "inline": true
+          },
+          {
+            "name": "Estado",
+            "value": "STALE",
+            "inline": true
+          },
+          {
+            "name": "Ação",
+            "value": "Verificar cron, script e log.",
+            "inline": false
+          },
+          {
+            "name": "Detalhe técnico",
+            "value": "```text\nlog age=525min threshold=150min path=/root/mgs-agent/logs/cleanup-zombies.log\n```",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-16T16:23:50.789000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505244398911492236",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "[TESTE] Housekeeping .bak executado",
+        "color": 3447003,
+        "fields": [
+          {
+            "name": "Host",
+            "value": "mgs-vps",
+            "inline": true
+          },
+          {
+            "name": "Retenção",
+            "value": "15 dias",
+            "inline": true
+          },
+          {
+            "name": "Arquivos deletados",
+            "value": "2",
+            "inline": true
+          },
+          {
+            "name": "Espaço liberado",
+            "value": "0.42 MB",
+            "inline": true
+          },
+          {
+            "name": "Diretórios vazios removidos",
+            "value": "1",
+            "inline": true
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-16T16:23:50.299000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505244396856147990",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> teste de layout auto-push",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "[TESTE] Auto-push falhando",
+        "color": 15158332,
+        "fields": [
+          {
+            "name": "Falhas consecutivas",
+            "value": "3",
+            "inline": true
+          },
+          {
+            "name": "Último push OK",
+            "value": "2026-05-16T11:45:00-04:00",
+            "inline": true
+          },
+          {
+            "name": "Último erro",
+            "value": "```text\ngit push rejected: non-fast-forward\n```",
+            "inline": false
+          },
+          {
+            "name": "Ação",
+            "value": "Investigar `/root/mgs-agent/logs/auto-push.log`.",
+            "inline": false
+          }
+        ],
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-16T16:23:49.738000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505244394503012385",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟡 [GPT-5.5 OAuth] Custo simulado 24h: $18.08",
+        "description": "**Status:** WARN — Volume acima do normal\n**Custo real:** $0.00 (OAuth — incluso na assinatura)\n**Custo hipotético:** $18.08 (se fosse pay-per-token)\n**API calls:** 738 (Zeus: 665 | Atena: 73)\n**Tokens estimados:** ~1476K input / ~369K output\n**Pricing ref:** GPT-5.5 $7.00/$21.00 por 1M (estimativa)\n⚠️ Valores simulados — não representa cobrança real",
+        "color": 15844367,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-16T16:00:02.591000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505238408614903910",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "✅ [INFRA] [CRON-STALE] Resolvido: `cleanup-zombie-sessions.sh` voltou a atualizar log.",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-16T15:54:16.253000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505236955968049332",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🚨 [INFRA] [CRON-STALE] <@344196393512075265>\n`cleanup-zombie-sessions.sh` está sem log recente.\nlog age=525min threshold=150min path=/root/mgs-agent/logs/cleanup-zombies.log\nAção: verificar cron/script/log.",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-16T15:45:01.851000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505234630637387997",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.5.16` (a91a57fa5) — 2026-05-16\n📍 **Sua versão:** `v2026.5.7` (db84a78e6) — 2026-05-15\n\n📊 **0 dias / 96 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 19\n🐛 Bug fixes: 44\n⚡ Performance: 1\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• add osint-investigation optional skill (closes #355) (#26729)\n• add supports_parallel_tool_calls for MCP servers (#26825)\n• gated X (Twitter) search tool with OAuth-or-API-key auth (#26763)\n• add optional pinggy-tunnel skill\n• tool override flag for replacing built-in tools (closes #11049) (#26759)\n```\n**🐛 Top fixes:**\n```\n• separate OAuth PKCE state from code_verifier\n• merge rapid TEXT follow-ups during active sessions (#4469) (#26822)\n• tighten deprecation detection + sharpen GitHub Models 413 hint\n• detect gh-copilot deprecation and improve GitHub Models 413 errors (#10648)\n• suppress stale direct-key issues when oauth is healthy\n```\n**🏷️ Releases entre sua versão e upstream:**\n• v2026.5.16\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/db84a78e6...a91a57fa5\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.16\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-16T12:00:03.435000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1505178014177165416",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🚨 [INFRA] [CRON-STALE] <@344196393512075265>\n`cleanup-zombie-sessions.sh` está sem log recente.\nlog age=165min threshold=150min path=/root/mgs-agent/logs/cleanup-zombies.log\nAção: verificar cron/script/log.",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-16T09:45:02.172000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505144035017232486",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🧹 **[mgs-agent-01] [HOUSEKEEPING]** Limpeza .bak (>15 dias)\n• 2 arquivos deletados (0 MB)\n• 0 diretórios vazios removidos",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-16T07:00:09.320000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1505102541388517486",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.5.7` (70b663504) — 2026-05-16\n📍 **Sua versão:** `v2026.5.7` (db84a78e6) — 2026-05-15\n\n📊 **0 dias / 79 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 16\n🐛 Bug fixes: 37\n⚡ Performance: 1\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• add optional pinggy-tunnel skill\n• tool override flag for replacing built-in tools (closes #11049) (#26759)\n• darwinian-evolver optional skill\n• show per-skill pages in the left sidebar (#26646)\n• add thinking.type + reasoning_effort mapping for DeepSeek API\n```\n**🐛 Top fixes:**\n```\n• keep Ink displayCursor in sync with fast-echo writes so cursor stops drifting (#26717)\n• retry malformed anthropic stream parser errors\n• Merge pull request #26711 from NousResearch/austin/fix/dashboard-kanban\n• tolerate unreadable dirs when building systemd PATH\n• align Ukrainian Kanban Ready column help\n```\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/db84a78e6...70b663504\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.7\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-16T05:58:25.687000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1505087007225806858",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $3.01",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 3.60 M tokens\n**Output:** 40 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-15T16:00:05.942000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1504876034804289688",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.5.7` (77276070f) — 2026-05-15\n📍 **Sua versão:** `v2026.5.7` (4695d2716) — 2026-05-14\n\n📊 **0 dias / 47 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 11\n🐛 Bug fixes: 20\n⚡ Performance: 1\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• show YOLO mode warning in banner and status bar\n• add SimpleX Chat platform plugin\n• hermes acp --setup-browser bootstraps browser tools for registry installs\n• support name-based lookup for job operations\n• actionable setup message when no FAL backend is reachable (#26222)\n```\n**🐛 Top fixes:**\n```\n• de-dup [plugins.X] tables and stop leaking HERMES_HOME into config.toml\n• keep migrated root keys top-level\n• wrap browser provider network calls with error handling\n• allow only http and https schemes\n• guard split()[0] against whitespace-only command text\n```\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/4695d2716...77276070f\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.7\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-15T12:00:03.932000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1504815628396269670",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $.94",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 1.22 M tokens\n**Output:** 15 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-14T16:00:06.431000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1504513648989831168",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.5.7` (ddb8d8fa8) — 2026-05-14\n📍 **Sua versão:** `v2026.4.30` (f98b5d00a) — 2026-05-02\n\n📊 **12 dias / 1367 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 182\n🐛 Bug fixes: 731\n⚡ Performance: 13\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• add NovitaAI as LLM provider\n• surface quoted reply metadata\n• /subgoal — user-added criteria appended to active /goal (#25449)\n• firecrawl plugin natively supports crawl; delete legacy inline path\n• firecrawl plugin — largest migration (search + async extract + dual auth)\n```\n**🐛 Top fixes:**\n```\n• silence memory provider teardown output leak\n• forward custom_providers to compression model context-length detection\n• keep QQBot reconnect loop alive\n• do not inherit api_mode when delegating across providers\n• make Feishu ws connect override sync to preserve context manager\n```\n**🏷️ Releases entre sua versão e upstream:**\n• v2026.5.7\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/f98b5d00a...ddb8d8fa8\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.7\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-14T12:00:04.142000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1504453241411207201",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $0",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 0.00 M tokens\n**Output:** 0 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-13T16:00:08.425000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1504151269487411200",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.5.7` (942adf617) — 2026-05-13\n📍 **Sua versão:** `v2026.4.30` (f98b5d00a) — 2026-05-02\n\n📊 **11 dias / 1267 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 155\n🐛 Bug fixes: 691\n⚡ Performance: 12\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• rename Alibaba Cloud to Qwen Cloud, reorder picker (#24835)\n• unified client=hermes-client-v<version> tag on every Portal request (#24779)\n• wire clarify tool with inline keyboard buttons on Telegram (#24199)\n• semantic diagnostics from real language servers in write_file/patch (#24168)\n• support externally managed Camofox sessions\n```\n**🐛 Top fixes:**\n```\n• chown .venv to hermes so lazy_deps can install platform packages (#24841)\n• kill long-lived prefix layout — system prompt is now byte-static within a session (#24778)\n• approval DELETE pattern DOTALL flag allows newline bypass\n• clear stale config context_length on model switch\n• use i18n t() for restart drain assertion\n```\n**🏷️ Releases entre sua versão e upstream:**\n• v2026.5.7\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/f98b5d00a...942adf617\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.7\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-13T12:00:03.979000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1504090852861935626",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $0",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 0.00 M tokens\n**Output:** 0 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-12T16:00:07.531000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1503788877872107550",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.5.7` (dd0923bb8) — 2026-05-12\n📍 **Sua versão:** `v2026.4.30` (f98b5d00a) — 2026-05-02\n\n📊 **10 dias / 1196 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 149\n🐛 Bug fixes: 645\n⚡ Performance: 12\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• supply-chain advisory checker + lazy-install framework + tiered install fallback (#24220)\n• refresh cua-driver on `hermes update` + add `install --upgrade` (#24063)\n• resolve markdown links to readable page titles (#24013)\n• expose HERMES_SESSION_ID to agent tools via ContextVar + env (#23847)\n• cross-session 1h prefix cache for Claude on Anthropic / OpenRouter / Nous Portal (#23828)\n```\n**🐛 Top fixes:**\n```\n• unbreak [all] install — drop mistralai while PyPI quarantined (#24205)\n• repair Voice & TTS provider table\n• harden OAuth dashboard and runtime\n• fix comment\n• fix guard\n```\n**🏷️ Releases entre sua versão e upstream:**\n• v2026.5.7\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/f98b5d00a...dd0923bb8\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.7\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-12T12:00:04.337000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1503728466498162821",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $0",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 0.00 M tokens\n**Output:** 0 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-11T16:00:05.803000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1503426482758877405",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.5.7` (64145a199) — 2026-05-11\n📍 **Sua versão:** `v2026.4.30` (f98b5d00a) — 2026-05-02\n\n📊 **9 dias / 1134 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 144\n🐛 Bug fixes: 609\n⚡ Performance: 12\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• add extraDependencyGroups for sealed venv extras (#21817)\n• add hindsight-client as optional dependency (#21818)\n• docker_extra_args + display.timestamps\n• add stocks & finance skill (Yahoo Finance, no API key)\n• add api-testing optional skill (#1800)\n```\n**🐛 Top fixes:**\n```\n• replace chown -R with targeted find in container entrypoint (#23633)\n• cache 402'd providers as unhealthy with TTL to stop per-call retry storms (#23597)\n• typing indicator task not cleaned up after API error\n• warn loudly on YAML parse failure instead of silent default fallback (#23585)\n• three small defensive fixes from PR #1974\n```\n**🏷️ Releases entre sua versão e upstream:**\n• v2026.5.7\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/f98b5d00a...64145a199\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.7\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-11T12:00:04.151000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1503366077852156088",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $0",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 0.00 M tokens\n**Output:** 0 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-10T16:00:04.856000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1503064090921275575",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.5.7` (44cdf555a) — 2026-05-10\n📍 **Sua versão:** `v2026.4.30` (f98b5d00a) — 2026-05-02\n\n📊 **8 dias / 1020 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 123\n🐛 Bug fixes: 566\n⚡ Performance: 10\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• add gpt-5.3-codex-spark model\n• add upstream + timing diagnostics to drop log (#23005)\n• vision_analyze returns pixels to vision-capable models, not aux text (#22955)\n• show rename map in user-visible summary (#22910)\n• richer info panels on the Skills Hub for built-in + optional skills (#22905)\n```\n**🐛 Top fixes:**\n```\n• defensive 128k entry in DEFAULT_CONTEXT_LENGTHS + clarify validation test docstring\n• surface Codex CLI-only models\n• set codex-spark fallback context to 128k\n• restore gpt-5.3-codex-spark fallback context\n• tell background reviewer not to capture transient env failures as skills (#23004)\n```\n**🏷️ Releases entre sua versão e upstream:**\n• v2026.5.7\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/f98b5d00a...44cdf555a\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.7\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-10T12:00:06.076000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1503003698060591125",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $0",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 0.00 M tokens\n**Output:** 0 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-09T16:00:04.560000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1502701701814026448",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.5.7` (f6d45e5df) — 2026-05-09\n📍 **Sua versão:** `v2026.4.30` (f98b5d00a) — 2026-05-02\n\n📊 **7 dias / 892 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 110\n🐛 Bug fixes: 489\n⚡ Performance: 3\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• stream Telegram edits safely\n• add standalone_sender_fn for out-of-process cron delivery\n• add native update prompt cards\n• recognise Shift+Enter as a newline key\n• clean up User env, PATH, Scheduled Task, and portable tooling\n```\n**🐛 Top fixes:**\n```\n• resolve update-check repo from running code, not profile-scoped path\n• exclude infrastructure artifacts when cloning with --clone-all\n• pin UTF-8 encoding when reading source files on Windows\n• replace get_event_loop() with get_running_loop() in async contexts\n• drop caller-controlled author override in kanban_comment\n```\n**🏷️ Releases entre sua versão e upstream:**\n• v2026.5.7\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/f98b5d00a...f6d45e5df\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.7\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-09T12:00:04.703000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1502641304436473926",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "✅ **AUTO-PUSH RESTABELECIDO**\nApós 3 falhas consecutivas, push voltou a funcionar.\nÚltimo commit OK: b56af27 em 2026-05-08T18:00:13-04:00",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-08T22:15:02.706000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1502433678012321963",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🚨 **AUTO-PUSH FALHANDO**\nFalhas consecutivas: 3\nÚltimo erro: 2026-05-08T17:00:11-04:00 commit=6862cbb [START sem OK]\nÚltimo push OK: 2026-05-08T10:00:13-04:00\nAção: investigar `/root/mgs-agent/logs/auto-push.log`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-08T22:00:03.494000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1502429906443702413",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.5.7` (83c23e886) — 2026-05-08\n📍 **Sua versão:** `v2026.4.30` (f98b5d00a) — 2026-05-02\n\n📊 **6 dias / 755 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 82\n🐛 Bug fixes: 424\n⚡ Performance: 1\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• routing intent — deliver=all fans out to every connected channel (#21495)\n• add tooltips and docs link across dashboard (#21541)\n• Merge pull request #20805 from NousResearch/austin-feat-sessions-skills-menu\n• add `specify` — auxiliary LLM fleshes out triage tasks (#21435)\n• add termux doctor fallback guidance for blocked extras\n```\n**🐛 Top fixes:**\n```\n• cleanup for --check-live salvage\n• correct docstring syntax error in check_auth_live\n• detect disabled_client in --check and add --check-live\n• send Nous refresh token via header\n• prevent stale Ollama credentials after provider switch (#21703)\n```\n**🏷️ Releases entre sua versão e upstream:**\n• v2026.5.7\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/f98b5d00a...83c23e886\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.7\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-08T12:00:05.332000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1502278919208833045",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "✅ **AUTO-PUSH RESTABELECIDO**\nApós 3 falhas consecutivas, push voltou a funcionar.\nÚltimo commit OK: 62c2088 em 2026-05-07T18:00:13-04:00",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-07T22:15:02.790000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1502071290498908231",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🚨 **AUTO-PUSH FALHANDO**\nFalhas consecutivas: 3\nÚltimo erro: 2026-05-07T17:00:11-04:00 commit=650827f [START sem OK]\nÚltimo push OK: 2026-05-07T08:00:13-04:00\nAção: investigar `/root/mgs-agent/logs/auto-push.log`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-07T22:00:02.524000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1502067514509623346",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.4.30` (d4de7d417) — 2026-05-03\n📍 **Sua versão:** `v2026.4.30` (f98b5d00a) — 2026-05-02\n\n📊 **5 dias / 542 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 50\n🐛 Bug fixes: 304\n⚡ Performance: 1\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• port Anthropic financial-services skills as optional finance bundle (#21180)\n• --no-skills flag for empty profile creation (#20986)\n• also gate pre-restart \"Gateway restarting\" notification\n• per-platform gateway_restart_notification flag\n• add SearXNG as a native search-only backend\n```\n**🐛 Top fixes:**\n```\n• expose attached image paths in native multimodal text part\n• close TOCTOU window when saving MCP OAuth credentials\n• force light color-scheme on docs iframe\n• route Telegram image documents through photo handling\n• narrow rate-limit catch and move sync state under gateway/\n```\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/f98b5d00a...d4de7d417\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.30\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-07T12:00:05.055000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1501916530181406810",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $0",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 0.00 M tokens\n**Output:** 0 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-06T16:00:08.569000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1501614555032190976",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.4.30` (b045e7a2b) — 2026-05-06\n📍 **Sua versão:** `v2026.4.30` (f98b5d00a) — 2026-05-02\n\n📊 **4 dias / 492 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 41\n🐛 Bug fixes: 286\n⚡ Performance: 1\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• add shop-app personal shopping assistant (optional) (#20702)\n• collapsible sections in startup banner (skills, system prompt, MCP)\n• add Lightpanda engine support with automatic Chrome fallback\n• add x-ai/grok-4.3 to OpenRouter + Nous Portal curated lists (#20497)\n• add deepseek/deepseek-v4-pro to OpenRouter + Nous Portal curated lists (#20495)\n```\n**🐛 Top fixes:**\n```\n• recover classic CLI output after resize\n• reset code element background inside board\n• restore gap before duration when verb segment is hidden\n• stabilize FaceTicker elapsed width to prevent composer drift\n• reduce status-line jitter while scrolling\n```\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/f98b5d00a...b045e7a2b\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.30\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-06T12:00:04.435000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1501554139715604581",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $0",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 0.00 M tokens\n**Output:** 0 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-05T16:00:05.654000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1501252154940457100",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.4.30` (4577f392f) — 2026-05-05\n📍 **Sua versão:** `v2026.4.30` (f98b5d00a) — 2026-05-02\n\n📊 **3 dias / 320 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 21\n🐛 Bug fixes: 232\n⚡ Performance: 0\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• post-write delta lint on write_file + patch, add JSON/YAML/TOML/Python in-process linters (#20191)\n• add 100 new CLI startup tips (#20168)\n• implement threading via app.reply()\n• sharper home-channel toggle contrast, drop → running action (#19916)\n• add hyperframes optional creative skill\n```\n**🐛 Top fixes:**\n```\n• load reply_to_mode from config.yaml for Discord and Telegram\n• preserve dashboard completion summaries\n• protect hub skills by frontmatter name\n• mark end of context summary in role=user fallback\n• prevent React effect cleanup from killing python TUI gateway subprocess\n```\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/f98b5d00a...4577f392f\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.30\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-05T12:00:03.528000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1501191748045766746",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $3.80",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 3.20 M tokens\n**Output:** 27 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-04T16:00:06.216000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1500889769431797954",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.4.30` (6f864f8f9) — 2026-04-27\n📍 **Sua versão:** `v2026.4.30` (f98b5d00a) — 2026-05-02\n\n📊 **2 dias / 204 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 11\n🐛 Bug fixes: 158\n⚡ Performance: 0\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• persist Nous OAuth across profiles via shared token store (#19712)\n• share card render on unlocked badges (#19657)\n• multi-project boards — one install, many kanbans (#19653)\n• workspace kind + path inputs in inline create form (#19679)\n• /new accepts optional session name argument\n```\n**🐛 Top fixes:**\n```\n• add code_file param to skip false-positive ENV/JSON patterns\n• fall back to document on any send_photo failure, not just dim errors\n• enforce worker task-ownership on destructive tool calls (#19713)\n• bump background-review budget to 16 and suppress status leaks (#19710)\n• keep Feishu topic replies from falling back to new threads (local patch)\n```\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/f98b5d00a...6f864f8f9\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.30\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-04T12:00:04.608000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1500829364709884008",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $8.41",
+        "description": "**Status:** OK — Gasto saudável\n**Cache reads:** 8.00 M tokens\n**Output:** 137 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-03T16:00:06.156000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1500527381314801896",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.4.30` (6f2dab248) — 2026-05-03\n📍 **Sua versão:** `v2026.4.30` (f98b5d00a) — 2026-05-02\n\n📊 **1 dias / 51 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 1\n🐛 Bug fixes: 36\n⚡ Performance: 0\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• add response caching support (#19132)\n```\n**🐛 Top fixes:**\n```\n• update tests for resume_pending semantics + add AUTHOR_MAP entries\n• correct ws scheme conversion for https urls\n• send /new response before cancel_session_processing to avoid race (#18912)\n• resume sessions after crash/restart instead of blanket suspend\n• close previous handler in connect() to prevent zombie Socket Mode connections\n```\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/f98b5d00a...6f2dab248\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.30\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-03T12:00:03.377000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1500466971681095910",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "✅ **AUTO-PUSH RESTABELECIDO** (manual)\n\nAlerta anterior foi falso positivo causado por bug no `monitor-auto-push.sh`:\n- Regex de error patterns matchava `timeout`/`error` em mensagens de commit\n- Ex: commit `\"docs: F1 curl timeout fix\"` virava \"erro de push\"\n\nFix aplicado:\n- Monitor agora pula linhas START/OK/SKIP antes de checar regex\n- State resetado: consecutive_failures=0\n- Test confirmou: 0 falhas detectadas pós-fix\n\nPushes funcionando normalmente o tempo todo.",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-03T02:59:24.511000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1500330913215545544",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🚨 **AUTO-PUSH FALHANDO**\nFalhas consecutivas: 3\nÚltimo erro: [2026-05-02T22:10:11-04:00] auto-push START commit=77d0bc3 msg=\"docs: sessão noturna 02/05 — incidente crontab recuperado, F1 curl timeout, F2 flock 7 crons, 23 fixes total\"\nÚltimo push OK: 2026-05-02T22:20:13-04:00\nAção: investigar `/root/mgs-agent/logs/auto-push.log`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-03T02:45:02.490000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1500327297637421197",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $8.41",
+        "description": "**Status:** OK — Gasto saudável\n**Cache reads:** 8.00 M tokens\n**Output:** 137 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-03T01:36:43.198000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1500310103960850564",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $8.44",
+        "description": "**Status:** OK — Gasto saudável\n**Cache reads:** 12.47 M tokens\n**Output:** 61 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-02T16:00:04.770000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1500164987635892305",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🧹 **[mgs-agent-01] [HOUSEKEEPING]** Limpeza .bak (>8 dias)\n• 41 arquivos deletados (.37 MB)\n• 30 diretórios vazios removidos",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-02T14:22:56.391000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1500140541642539279",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.4.30` (5d3be898a) — 2026-05-02\n📍 **Sua versão:** `v2026.4.30` (f98b5d00a) — 2026-05-02\n\n📊 **0 dias / 27 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 0\n🐛 Bug fixes: 20\n⚡ Performance: 0\n🔒 Security: 0\n⚠️ Breaking: 0\n**🐛 Top fixes:**\n```\n• propagate explicit_api_key to _try_openrouter()\n• tighten httpx keepalive and close whatsapp typing-response leak (#18451)\n• finalize remote document downloads inside httpx.AsyncClient context (#18502)\n• config.yaml wins over .env for agent/display/timezone settings (#18764)\n• try fallback providers at init when primary credential pool is exhausted (#17929)\n```\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/f98b5d00a...5d3be898a\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.30\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-02T12:00:02.804000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1500104581412294787",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $0",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 0.00 M tokens\n**Output:** 0 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-05-01T16:00:06.020000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1499802605013172314",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.4.30` (05c63259b) — 2026-05-01\n📍 **Sua versão:** `v2026.4.23` (13c238327) — 2026-04-29\n\n📊 **1 dias / 318 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 56\n🐛 Bug fixes: 187\n⚡ Performance: 0\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• /goal — persistent cross-turn goals (Ralph loop) (#18262)\n• add --yes/-y flag to skip interactive prompts (#18261)\n• auto-delete slash-command system notices after TTL (#18266)\n• add steer and queue slash commands\n• operator-configurable bot admission and mention policy\n```\n**🐛 Top fixes:**\n```\n• Merge pull request #18358 from NousResearch/fix/kanban-buton\n• kanban button\n• send seed message after creating DM topics (#18334)\n• Merge pull request #18281 from NousResearch/bb/fix-tui-docker-ink-v2\n• enforce owner identity check on group slash commands\n```\n**🏷️ Releases entre sua versão e upstream:**\n• v2026.4.30\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/13c238327...05c63259b\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.30\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-01T12:00:04.603000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1499742201092243486",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "[REPORT-INFRA] <@1496296175014252634> <@344196393512075265>\nAção: criada *(retroativo — Atena omitiu o report em 29/04)*\nTipo: skill\nPath: `/root/.hermes/profiles/atena/skills/devops/ssh-jump-runcloud/SKILL.md`\nMotivo: Skill de acesso SSH aos servidores RunCloud via ProxyJump S03→S01 (expect scripts para autenticação com senha). Inclui fallback via WP Plugin Editor quando SSH está bloqueado pelo Cloudflare (ex: eggbev).\nEvidência: commit `8dae700` (2026-04-29 12:05 EDT)",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      },
+      {
+        "id": "1496296175014252634",
+        "username": "Zeus",
+        "avatar": "6ea4690e23ce943e3cbc6eecd1dfd51a",
+        "discriminator": "2591",
+        "public_flags": 0,
+        "flags": 0,
+        "bot": true,
+        "banner": null,
+        "accent_color": null,
+        "global_name": null,
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-05-01T01:16:02.930000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1499580126168485999",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1496296175014252634",
+      "username": "Zeus",
+      "avatar": "6ea4690e23ce943e3cbc6eecd1dfd51a",
+      "discriminator": "2591",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "banner": null,
+      "accent_color": null,
+      "global_name": null,
+      "avatar_decoration_data": null,
+      "collectibles": null,
+      "display_name_styles": null,
+      "banner_color": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $0",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 19.87 M tokens\n**Output:** 218 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-04-30T16:00:08.030000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1499440225577861230",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.4.23` (a845177eb) — 2026-04-30\n📍 **Sua versão:** `v2026.4.23` (13c238327) — 2026-04-29\n\n📊 **0 dias / 159 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 34\n🐛 Bug fixes: 87\n⚡ Performance: 0\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• native send_multiple_images for Telegram, Discord, Slack, Mattermost, Email\n• add support for multiple images sending\n• add Piper as a native local TTS provider (closes #8508) (#17885)\n• add cost-saving tips from April 30 tip-of-the-day (#17841)\n• add --stop and --status flags (#17840)\n```\n**🐛 Top fixes:**\n```\n• also exclude .archive in skills_tool + add author map entry\n• exclude .archive from skill index walk\n• seed defaults on update, create logs/curator dir, defer fire import (#17927)\n• persist user message on transient agent failures (#7100)\n• preserve YAML lists in hermes config set (#17876)\n```\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/13c238327...a845177eb\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.23\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-04-30T12:00:04.940000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1499379814639997043",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $4.20",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 4.29 M tokens\n**Output:** 29 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-04-29T18:46:19.316000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1499119660317147197",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $4.20",
+        "description": "**Status:** OK — Gasto baixo\n**Cache reads:** 4.29 M tokens\n**Output:** 29 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-04-29T16:00:05.425000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1499077826786103538",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.4.23` (20b759cd) — 2026-04-29\n📍 **Sua versão:** `v2026.4.16` (ce089169) — 2026-04-23\n\n📊 **5 dias / 994 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 139\n🐛 Bug fixes: 579\n⚡ Performance: 28\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• notify providers on mid-process session_id rotation (#17409)\n• wire native text + media delivery into send_message\n• native formatting, reply quotes, and reactions\n• Merge pull request #17305 from NousResearch/feat/docker-run-as-host-user\n• per-run reports — run.json + REPORT.md under logs/curator/ (#17307)\n```\n**🐛 Top fixes:**\n```\n• reconcile session.exited against real child exit in poll/wait (#17430)\n• enable Anthropic prompt caching for MiniMax's own models (#17425)\n• add MiniMax-M2.7 pricing for minimax and minimax-cn providers\n• correct SPOILER docstring + AUTHOR_MAP for exiao\n• preserve memory monitor in-flight guard\n```\n**🏷️ Releases entre sua versão e upstream:**\n• v2026.4.23\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/ce089169...20b759cd\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.23\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-04-29T12:00:04.419000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1499017424589160689",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "<@344196393512075265> verificar logs Zeus/Atena",
+    "mentions": [
+      {
+        "id": "344196393512075265",
+        "username": "rodolfomattei",
+        "avatar": "396b174e28b74b2f12d8c7088c60b73c",
+        "discriminator": "0",
+        "public_flags": 0,
+        "flags": 0,
+        "banner": null,
+        "accent_color": null,
+        "global_name": "Rodolfo Mattei",
+        "avatar_decoration_data": null,
+        "collectibles": null,
+        "display_name_styles": null,
+        "banner_color": null,
+        "clan": null,
+        "primary_guild": null
+      }
+    ],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🔴 [ANTHROPIC API] Gasto 24h: $38.73",
+        "description": "**Status:** ALERTA — Gasto MUITO ALTO\n**Cache reads:** 42.74 M tokens\n**Output:** 240 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 15158332,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-04-28T16:00:06.423000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1498715443106549830",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.4.23` (b61d9b29) — 2026-04-28\n📍 **Sua versão:** `v2026.4.16` (ce089169) — 2026-04-23\n\n📊 **4 dias / 848 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 118\n🐛 Bug fixes: 501\n⚡ Performance: 20\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• add tencent-tokenhub provider support\n• harden OpenClaw import with plan-first apply, redaction, and pre-migration backup (#16911)\n• background focus-safe backend — set_value, structured windows, MIME detection\n• cua-driver backend, universal any-model schema\n• add bundled observability/langfuse plugin\n```\n**🐛 Top fixes:**\n```\n• preserve symlinks during atomic file writes (#16743)\n• resolve model aliases during claw migrate (#16745)\n• add insufficient balance to billing patterns\n• preserve nullable schema coercion\n• keep mcp dynamic refresh tasks tracked\n```\n**🏷️ Releases entre sua versão e upstream:**\n• v2026.4.23\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/ce089169...b61d9b29\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.23\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-04-28T12:00:04.138000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1498655035545096347",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🔔 **Hermes Agent — Update disponível**\n\n\n📦 **Upstream:** `v2026.4.23` (8081425a) — 2026-04-27\n📍 **Sua versão:** `v2026.4.16` (ce089169) — 2026-04-23\n\n📊 **4 dias / 776 commits atrás**\n\n🆕 **Resumo de mudanças:**\n🚀 Features: 111\n🐛 Bug fixes: 459\n⚡ Performance: 20\n🔒 Security: 0\n⚠️ Breaking: 0\n\n**🚀 Top features:**\n```\n• make secret redaction off by default (#16794)\n• reaction-based exec approval + mention_user_id\n• add dm_auto_thread config for DM auto-threading\n• port humanizer — strip AI-isms from text (#16787)\n• add pre_approval_request / post_approval_response hooks (#16776)\n```\n**🐛 Top fixes:**\n```\n• MatrixAdapter respects proxy configuration\n• normalize image-only filenames\n• preserve exception tracebacks on E2EE and auth failures\n• add sync timeout, callback diagnostics, and mention-drop logging\n• reconcile pending invites from sync state\n```\n**🏷️ Releases entre sua versão e upstream:**\n• v2026.4.23\n\n🔗 **Diff completo:** https://github.com/NousResearch/hermes-agent/compare/ce089169...8081425a\n🔗 **Release notes:** https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.23\n\n⚠️ Antes de atualizar: verificar conflito com patch local em `/root/mgs-agent/patches/hermes/`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-04-28T06:47:11.372000+00:00",
+    "edited_timestamp": null,
+    "flags": 4,
+    "components": [],
+    "id": "1498576296857440306",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $11.07",
+        "description": "**Status:** OK — Gasto saudável\n**Cache reads:** 12.56 M tokens\n**Output:** 77 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-04-27T16:10:28.593000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1498355664811200703",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $11.07",
+        "description": "**Status:** OK — Gasto saudável\n**Cache reads:** 12.56 M tokens\n**Output:** 77 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-04-27T16:00:12.086000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1498353078993424508",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $11.07",
+        "description": "**Status:** OK — Gasto saudável\n**Cache reads:** 12.56 M tokens\n**Output:** 77 K tokens\n**Auto-reload:** Ativo ($10 → $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-04-27T15:46:16.348000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1498349573654188104",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [
+      {
+        "type": "rich",
+        "title": "🟢 [ANTHROPIC API] Gasto 24h: $11.07",
+        "description": "**Status:** OK — Gasto saudavel\\n**Cache reads:** 12.5M tokens\\n**Output:** 0M tokens\\n**Auto-reload:** Ativo ($10 -> $20)",
+        "color": 3066993,
+        "content_scan_version": 0
+      }
+    ],
+    "timestamp": "2026-04-27T15:44:10.777000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1498349046970974208",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - Alerts Infra Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "⚠️ **[YOAST] ALERTA degradação — eggbev (26/04 23h)**\nTotal posts publicados: **232**\n\n⚠️ *Cada post conta em ambas as métricas (mesmo post pode ser SEO 🟢 + Read 🔴):*\n\n🎯 **SEO:**        158🟢 / 39🟡 / 0🔴 / 35⚪\n📖 **Readability:** 157🟢 / 36🟡 / 39🔴 / 0⚪\n\nVariação SEO vs ontem: -2 vermelho(s) ⬇️, +29 amarelo(s) ⬆️, -62 verde(s) ⬇️\nVariação Readability vs ontem: +32 vermelho(s) ⬆️, +21 amarelo(s) ⬆️, -53 verde(s) ⬇️\n\n💬 Para listar URLs por cor/métrica, peça no <#1496267571543019653>",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-04-27T03:31:53.907000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1498164762381516891",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - MGS Alerts Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  },
+  {
+    "type": 0,
+    "content": "🚨 **AUTO-PUSH FALHANDO**\nFalhas consecutivas: 3\nÚltimo erro: 2026-04-26T21:39:11-04:00 commit=dead001 [START sem OK]\nÚltimo push OK: 2026-04-26T21:38:33-04:00\nAção: investigar `/root/mgs-agent/logs/auto-push.log`",
+    "mentions": [],
+    "mention_roles": [],
+    "attachments": [],
+    "embeds": [],
+    "timestamp": "2026-04-27T01:39:13.616000+00:00",
+    "edited_timestamp": null,
+    "flags": 0,
+    "components": [],
+    "id": "1498136407665803334",
+    "channel_id": "1498132022634483894",
+    "author": {
+      "id": "1498132063830937733",
+      "username": "Webhook - MGS Alerts Channel",
+      "avatar": null,
+      "discriminator": "0000",
+      "public_flags": 0,
+      "flags": 0,
+      "bot": true,
+      "global_name": null,
+      "clan": null,
+      "primary_guild": null
+    },
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "webhook_id": "1498132063830937733"
+  }
+]
