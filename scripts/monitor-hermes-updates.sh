@@ -22,6 +22,8 @@ log() {
   echo "[$(date -Iseconds)] $*" >> "$LOG"
 }
 
+log "START monitor-hermes-updates"
+
 # 1. Buscar webhook via 1Password
 WEBHOOK=""
 for _attempt in 1 2 3; do
@@ -88,8 +90,10 @@ LOCAL_TAG=$(git describe --tags --abbrev=0 "$CURRENT_LOCAL" 2>/dev/null || echo 
 LATEST_TAG=$(git describe --tags --abbrev=0 origin/main 2>/dev/null || echo "n/a")
 
 # Tags intermediárias (até 5)
+LOCAL_BASE_TAG="$(git describe --tags --abbrev=0 "$CURRENT_LOCAL" 2>/dev/null || true)"
 INTERMEDIATE_TAGS=$(git tag --sort=creatordate --contains "$CURRENT_LOCAL" 2>/dev/null | \
-  grep -v "$(git describe --tags --abbrev=0 "$CURRENT_LOCAL" 2>/dev/null)" | head -5 | sed 's/^/• /')
+  { if [[ -n "$LOCAL_BASE_TAG" ]]; then grep -v -- "$LOCAL_BASE_TAG" || true; else cat; fi; } | \
+  head -5 | sed 's/^/• /')
 
 # 9. Categorizar commits por tipo (conventional commits)
 COMMIT_RANGE="$CURRENT_LOCAL..origin/main"
