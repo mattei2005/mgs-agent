@@ -58,7 +58,7 @@ log "backup=$BACKUP_PATH"
 log "repo=$REPO"
 
 log "Pre-state"
-hermes --version 2>&1 | sed -n '1,10p' || true
+"$HERMES_BIN" --version 2>&1 | sed -n '1,10p' || true
 git -C "$REPO" fetch --quiet origin main
 log "HEAD=$(git -C "$REPO" rev-parse --short HEAD) origin=$(git -C "$REPO" rev-parse --short origin/main) behind=$(git -C "$REPO" rev-list --count HEAD..origin/main)"
 git -C "$REPO" status --short
@@ -78,7 +78,7 @@ log "Resetting tracked local changes before update; untracked files preserved"
 git -C "$REPO" reset --hard HEAD
 
 log "Running hermes update"
-hermes update --yes --no-backup
+"$HERMES_BIN" update --yes --no-backup
 
 log "Post-update rev"
 git -C "$REPO" fetch --quiet origin main
