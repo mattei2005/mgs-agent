@@ -1,6 +1,8 @@
---- /root/.hermes/hermes-agent/gateway/platforms/discord.py.bak-auto-thread-members-20260518-231313	2026-05-18 23:13:13.208234081 -0400
-+++ /root/.hermes/hermes-agent/gateway/platforms/discord.py	2026-05-18 23:14:00.792993303 -0400
-@@ -20,7 +20,7 @@
+diff --git a/gateway/platforms/discord.py b/gateway/platforms/discord.py
+index 0d64b24d7..6b7777b24 100644
+--- a/gateway/platforms/discord.py
++++ b/gateway/platforms/discord.py
+@@ -20,7 +20,7 @@ import tempfile
  import threading
  import time
  from collections import defaultdict
@@ -9,7 +11,7 @@
  
  logger = logging.getLogger(__name__)
  
-@@ -3894,6 +3894,76 @@
+@@ -3905,6 +3905,77 @@ class DiscordAdapter(BasePlatformAdapter):
      # Auto-thread helpers
      # ------------------------------------------------------------------
  
@@ -25,7 +27,8 @@
 +        if guild is None or thread is None:
 +            return
 +
-+        bot_user_id = str(getattr(getattr(self, "_client", None), "user", None).id) if getattr(getattr(self, "_client", None), "user", None) else None
++        client_user = getattr(getattr(self, "_client", None), "user", None)
++        bot_user_id = str(getattr(client_user, "id", "")) if client_user else None
 +        target_members = []
 +        seen: Set[int] = set()
 +
@@ -86,7 +89,16 @@
      async def _auto_create_thread(self, message: 'DiscordMessage') -> Optional[Any]:
          """Create a thread from a user message for auto-threading.
  
-@@ -4548,6 +4618,7 @@
+@@ -4550,12 +4621,15 @@ class DiscordAdapter(BasePlatformAdapter):
+         if not is_thread and not isinstance(message.channel, discord.DMChannel):
+             no_thread_channels_raw = os.getenv("DISCORD_NO_THREAD_CHANNELS", "")
+             no_thread_channels = {ch.strip() for ch in no_thread_channels_raw.split(",") if ch.strip()}
+-            skip_thread = bool(channel_ids & no_thread_channels) or is_free_channel
++            # PATCH (MGS Digital Corp): free_response_channels means "respond without mention",
++            # not "force inline". Only no_thread_channels should suppress auto-threading.
++            skip_thread = bool(channel_ids & no_thread_channels)
+             auto_thread = os.getenv("DISCORD_AUTO_THREAD", "true").lower() in {"true", "1", "yes"}
+             is_reply_message = getattr(message, "type", None) == discord.MessageType.reply
              if auto_thread and not skip_thread and not is_voice_linked_channel and not is_reply_message:
                  thread = await self._auto_create_thread(message)
                  if thread:
