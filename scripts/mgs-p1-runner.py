@@ -247,34 +247,20 @@ def ensure_card_local(card_url: str, card_slug: str) -> str:
 
 
 def make_exact_featured(card_path: str, card_slug: str) -> str:
-    # Generate a contextual scene quickly, then blur it and overlay the exact card artwork.
+    # Generate the P1 contextual advertising scene directly. Do not blur the
+    # scene and paste a card-only overlay: P1 requires the visual layer order
+    # scenario -> card -> foreground person, with depth and no cropped card.
     gen = run_json([str(GEN_SCRIPTS / "generate-featured-image.sh"), f"p1-{card_slug}", card_path], timeout=180)
     scene_path = gen.get("path")
     if not scene_path or not Path(scene_path).exists():
         raise RunnerError(f"Featured generator did not create a file: {gen}")
     try:
-        from PIL import Image, ImageFilter
+        from PIL import Image
     except Exception as e:
-        raise RunnerError(f"PIL unavailable for featured composition: {e}")
-    base = Image.open(scene_path).convert("RGBA").resize((1280, 720))
-    bg = base.filter(ImageFilter.GaussianBlur(10))
-    bg.alpha_composite(Image.new("RGBA", bg.size, (0, 0, 0, 80)))
-    card = Image.open(card_path).convert("RGBA")
-    bbox = card.split()[-1].getbbox() or card.getbbox()
-    if bbox:
-        card = card.crop(bbox)
-    w = 760
-    h = max(1, int(card.height * w / card.width))
-    card = card.resize((w, h), Image.Resampling.LANCZOS).rotate(-4, expand=True, resample=Image.Resampling.BICUBIC)
-    shadow = Image.new("RGBA", card.size, (0, 0, 0, 0))
-    sa = card.split()[-1].filter(ImageFilter.GaussianBlur(18))
-    shadow.putalpha(sa.point(lambda p: int(p * 0.55)))
-    x = (1280 - card.width) // 2
-    y = 245
-    bg.alpha_composite(shadow, (x + 18, y + 24))
-    bg.alpha_composite(card, (x, y))
+        raise RunnerError(f"PIL unavailable for featured normalization: {e}")
+    bg = Image.open(scene_path).convert("RGB").resize((1280, 720))
     out = Path(tempfile.gettempdir()) / f"featured-p1-{card_slug}.jpg"
-    bg.convert("RGB").save(out, quality=91, optimize=True)
+    bg.save(out, quality=91, optimize=True)
     return str(out)
 
 
