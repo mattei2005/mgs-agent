@@ -21,6 +21,8 @@ Também usar para gestão de **cron reliability/control plane**: inventariar cro
 
 Quando o pedido for auditoria/varredura operacional, checar também **erros semânticos em logs recentes** — log fresco não significa cron saudável. Ver `references/cron-semantic-error-audit.md` para o caso validado `grep -c ... || echo 0` que gerava `0\n0` e quebrava aritmética Bash sem acionar stale-log.
 
+Para monitores Bash com `set -euo pipefail`, Git e pipelines truncados com `head`, ver `references/cron-pipefail-git-log-monitor.md`: cobre trap temporário de linha/rc, `git log --grep` com flags longas, SIGPIPE `141` e padrão `VAR=$( { ... | head ...; } || true )`.
+
 Para hardening de crons + auto-commit watcher após auditoria de repo, ver `references/cron-autocommit-guardrails-2026-05-16.md`: cobre correção do bug `grep -c`, scan semântico só do bloco de execução mais recente, guardrail contra auto-commit de arquivos sensíveis, pitfall com pathspec Git e `.env` ignorado, e checklist de validação.
 
 Para hardening de monitores que usam SSH/SCP via jump host RunCloud, ver `references/cron-ssh-hardening-2026-05-16.md`: cobre troca de `StrictHostKeyChecking` desativado por `accept-new` + `UserKnownHostsFile` dedicado, `mktemp -d` 700, cleanup trap, script remoto único por PID e validação real sem post Discord indevido.
@@ -358,7 +360,11 @@ Após criar os artefatos, atualizar manualmente 3 seções do inventário:
 
 9. **`grep -c ... || echo 0` gera bug de `0\n0`** — `grep -c` imprime `0` quando não acha match, mas sai com código 1; o `|| echo 0` imprime outro zero. Em variável usada como número, quebra com `syntax error in expression`. Usar `grep -c ... || true` e fallback separado. Ver `references/cron-semantic-error-audit.md`.
 
-10. **Stale-log monitor não detecta cron rodando com erro** — `mtime` recente só prova execução. Para cron crítico, adicionar semantic scan de `syntax error|traceback|exception|fatal:|critical|erro crítico|error token|command not found|permission denied|no such file or directory` nas últimas linhas. Quando houver marcador de início (`start`, `iniciando`, `===`), escanear só o bloco da execução mais recente para não alertar erro antigo já resolvido.
+10. **`set -euo pipefail` + pipelines com `head` podem matar monitor antes de logar erro** — comandos como `git log ... | head -5 | sed ...` podem sair com `141`/SIGPIPE por causa do `head`, e com `pipefail` isso aborta o script inteiro. Em monitores de cron, proteger pipelines de listagem/truncamento com bloco tolerante: `VAR=$( { comando | head -5 | sed ...; } || true )`. Também preferir `log "START ..."` logo após definir a função de log para stale-log distinguir “nunca rodou” de “rodou e abortou cedo”.
+
+11. **Flags combinadas de `git log --grep` não são portáveis como esperado** — `git log ... -iE` pode falhar como `fatal: unrecognized argument: -iE`; usar flags longas separadas para regex/case-insensitive: `--regexp-ignore-case --extended-regexp`. Se o regex usa parênteses/alternância, validar isoladamente; regex inválida com stderr redirecionado vira abort silencioso sob `set -e`.
+
+12. **Stale-log monitor não detecta cron rodando com erro** — `mtime` recente só prova execução. Para cron crítico, adicionar semantic scan de `syntax error|traceback|exception|fatal:|critical|erro crítico|error token|command not found|permission denied|no such file or directory` nas últimas linhas. Quando houver marcador de início (`start`, `iniciando`, `===`), escanear só o bloco da execução mais recente para não alertar erro antigo já resolvido.
 
 11. **Auto-commit watcher com `git add .` precisa guardrail de segredo** — antes de staging automático, bloquear nomes sensíveis (`.env`, `*.pem`, `*.key`, `id_rsa`, `*token*`, `*secret*`, `*password*`, `hosts.yml`, `.npmrc`, `.pypirc`). Não tentar resolver isso com pathspec excludes incluindo arquivos ignorados como `.env` sem testar; Git pode abortar o `git add` por arquivo ignorado e derrubar o service. Padrão seguro: `.gitignore` + preflight `git status --porcelain | grep -Ei "$SENSITIVE_PATH_REGEX"` + `git add -A -- .`. Ver `references/cron-autocommit-guardrails-2026-05-16.md`.
 
