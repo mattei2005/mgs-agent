@@ -105,18 +105,18 @@ PERF_COUNT=$(git log "$COMMIT_RANGE" --oneline --grep="^perf" -E 2>/dev/null | w
 SECURITY_COUNT=$(git log "$COMMIT_RANGE" --oneline --grep="security|sec" --regexp-ignore-case --extended-regexp 2>/dev/null | wc -l)
 
 # Top 5 features
-TOP_FEATURES=$((git log "$COMMIT_RANGE" --oneline --grep="^feat" -E 2>/dev/null | head -5 | \
-  sed -E 's/^[a-f0-9]+ //; s/feat(\([^)]+\))?: //; s/^/• /') || true)
+TOP_FEATURES=$( { git log "$COMMIT_RANGE" --oneline --grep="^feat" -E 2>/dev/null | head -5 | \
+  sed -E 's/^[a-f0-9]+ //; s/feat(\([^)]+\))?: //; s/^/• /'; } || true )
 
 # Top 5 fixes (excluindo chore/docs/test)
-TOP_FIXES=$((git log "$COMMIT_RANGE" --oneline --grep="^fix" -E 2>/dev/null | head -5 | \
-  sed -E 's/^[a-f0-9]+ //; s/fix(\([^)]+\))?: //; s/^/• /') || true)
+TOP_FIXES=$( { git log "$COMMIT_RANGE" --oneline --grep="^fix" -E 2>/dev/null | head -5 | \
+  sed -E 's/^[a-f0-9]+ //; s/fix(\([^)]+\))?: //; s/^/• /'; } || true )
 
 # Breaking changes (se houver)
 BREAKING_LIST=""
 if [[ "$BREAKING_COUNT" -gt 0 ]]; then
-  BREAKING_LIST=$(git log "$COMMIT_RANGE" --oneline --grep="BREAKING\|!:" -E 2>/dev/null | head -5 | \
-    sed -E 's/^[a-f0-9]+ //; s/^/• /')
+  BREAKING_LIST=$( { git log "$COMMIT_RANGE" --oneline --grep="BREAKING\|!:" -E 2>/dev/null | head -5 | \
+    sed -E 's/^[a-f0-9]+ //; s/^/• /'; } || true )
 fi
 
 # 10. Montar payload Discord estruturado
