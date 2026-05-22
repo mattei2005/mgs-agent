@@ -4,6 +4,7 @@ set -euo pipefail
 THREAD_ID="${THREAD_ID:-1507517903791198248}"
 BASE="/root/mgs-agent"
 REPO="/root/.hermes/hermes-agent"
+HERMES_BIN="${HERMES_BIN:-/root/.hermes/profiles/zeus/home/.local/bin/hermes}"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 LOG="$BASE/logs/hermes-update-controlled-${STAMP}.log"
 PATCH_DIR="$BASE/patches/hermes"
@@ -20,7 +21,9 @@ send_discord_report() {
   local status="$1"
   local body="$2"
   set +u
+  set -a
   source /root/.hermes/profiles/zeus/.env 2>/dev/null || true
+  set +a
   set -u
   if [[ -z "${DISCORD_BOT_TOKEN:-}" || -z "${THREAD_ID:-}" ]]; then
     log "WARN discord report skipped: missing token/thread"

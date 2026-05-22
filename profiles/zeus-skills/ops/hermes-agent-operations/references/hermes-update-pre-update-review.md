@@ -81,9 +81,31 @@ cd /
 git -C "$repo" worktree remove --force "$tmp" || rm -rf "$tmp"
 ```
 
+If the failure is only because upstream moved Discord from `gateway/platforms/discord.py` to `plugins/platforms/discord/adapter.py`, run a portability check before blocking the update:
+
+```bash
+set -euo pipefail
+repo=/root/.hermes/hermes-agent
+tmp=/tmp/hermes-update-port-check-manual
+src=/tmp/mgs-local-hermes.patch
+port=/tmp/mgs-local-hermes-plugin-port.patch
+rm -rf "$tmp"
+git -C "$repo" diff > "$src"
+sed 's#gateway/platforms/discord.py#plugins/platforms/discord/adapter.py#g' "$src" > "$port"
+git -C "$repo" worktree add --detach "$tmp" origin/main
+cd "$tmp"
+git apply --check "$port"
+git apply "$port"
+python_bin="$repo/venv/bin/python"; [ -x "$python_bin" ] || python_bin=python3
+"$python_bin" -m py_compile plugins/platforms/discord/adapter.py gateway/run.py tools/discord_tool.py gateway/config.py
+cd /
+git -C "$repo" worktree remove --force "$tmp" || rm -rf "$tmp"
+```
+
 Interpretation:
 - `APPLY_CHECK=OK` means the local patch probably reapplies cleanly after update; still validate behavior after restart.
-- `APPLY_CHECK=FAIL` means update should not proceed until conflicts are inspected manually.
+- `APPLY_CHECK=FAIL` with Discord file removal is not automatically fatal if the port check passes; classify as “controlled update required” because patch must be moved after `hermes update`.
+- `APPLY_CHECK=FAIL` for semantic conflicts or failed `py_compile` means update should not proceed until conflicts are inspected manually.
 
 ## Reporting shape
 
