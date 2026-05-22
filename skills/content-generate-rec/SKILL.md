@@ -325,7 +325,7 @@ file. No skill code changes required.
 
 Current templates:
 - `rec-gb-cc-en.md` — United Kingdom, Credit Cards, English recommendation posts
-- `p1-gb-cc-en.md` — United Kingdom, Credit Cards, English application pages / P1 drafts (initial template; see `references/p1-gb-cc-en-structure-and-test-2026-05-19.md`)
+- `p1-gb-cc-en.md` — United Kingdom, Credit Cards, English application pages / P1 drafts (initial template; see `references/p1-gb-cc-en-structure-and-test-2026-05-19.md`; for P1 featured-image layer/safe-area rules, see `references/p1-featured-image-layered-composition-2026-05-22.md`)
 
 Future (examples, not yet present):
 - `rec-us-cc-en.md`, `rec-mx-cc-es.md`, `rec-de-cc-de`, `rec-br-loans-pt`
