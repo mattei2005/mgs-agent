@@ -102,7 +102,7 @@ FEAT_COUNT=$(git log "$COMMIT_RANGE" --oneline --grep="^feat" -E 2>/dev/null | w
 FIX_COUNT=$(git log "$COMMIT_RANGE" --oneline --grep="^fix" -E 2>/dev/null | wc -l)
 BREAKING_COUNT=$(git log "$COMMIT_RANGE" --oneline --grep="BREAKING\|!:" -E 2>/dev/null | wc -l)
 PERF_COUNT=$(git log "$COMMIT_RANGE" --oneline --grep="^perf" -E 2>/dev/null | wc -l)
-SECURITY_COUNT=$(git log "$COMMIT_RANGE" --oneline --grep="security|sec\\(" -iE 2>/dev/null | wc -l)
+SECURITY_COUNT=$(git log "$COMMIT_RANGE" --oneline --grep="security|sec" --regexp-ignore-case --extended-regexp 2>/dev/null | wc -l)
 
 # Top 5 features
 TOP_FEATURES=$(git log "$COMMIT_RANGE" --oneline --grep="^feat" -E 2>/dev/null | head -5 | \
