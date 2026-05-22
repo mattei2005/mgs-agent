@@ -61,6 +61,10 @@ visual_briefs=(
 )
 visual_brief="${visual_briefs[$RANDOM % ${#visual_briefs[@]}]}"
 
+if [[ "$SLUG" == p1-* ]]; then
+  visual_brief="P1 advertising scene built in literal layers: realistic contextual background with depth, the exact credit card centred and slightly enlarged as the main element, and one realistic person in the foreground with a soft natural overlap over the card without hiding important card details"
+fi
+
 mime=$(file -b --mime-type "$CARD_IMG" 2>/dev/null || echo "image/png")
 b64_tmp=$(mktemp /tmp/gemini-b64-XXXXXX)
 TEMP_FILES+=("$b64_tmp")
@@ -77,6 +81,14 @@ Visual variation for this run: $visual_brief.
 
 Composition rules:
 - The credit card must be the clear protagonist and remain readable.
+- For P1 images, follow the literal layer order: realistic full-scene background
+  with depth → exact centred card fully inside the safe area → realistic person
+  in the foreground with soft natural overlap. It must not look like a card
+  pasted onto a blurred background.
+- The card must never touch or exceed the image edges. Keep a safe margin on
+  all sides, especially the bottom edge. No cropped card corners or overflow.
+- Do not add borders, frames, moulding, stickers, badges, glow outlines, or
+  external graphic effects to the card.
 - Use the selected visual variation naturally; do not force the same centered-card
   layout every time.
 - Acceptable variations include: a hand holding the card, card near a generic

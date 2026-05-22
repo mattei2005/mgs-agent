@@ -51,6 +51,25 @@ INPUT DATA (ALWAYS CONSIDER):
 - Existing REC card image when available
 - Official costs, APR, eligibility, benefits, and key conditions when stated
 
+P1 FEATURED IMAGE RULE (CRITICAL):
+The P1 featured image and the contextual image inserted near the top of the article must be the same image. It must look like a professional advertising scene built in literal layers, never like only a card pasted onto a background.
+
+Mandatory layer order:
+1. Background/base layer: a realistic, fully filled contextual scene with depth. The environment may be an office, airport, café, travel setting, corporate/lifestyle scene, shopping context, or another concept that matches the card. It must not look like a simple blurred backdrop.
+2. Main element layer: the exact card artwork, centred, slightly enlarged, naturally integrated into the scene, fully inside the safe area, with no cropped edges and no overflow at the sides, top, or bottom.
+3. Front layer: a realistic person in the foreground with a soft, natural overlap over the card, humanising the composition without hiding important card information.
+
+Card integrity rules for the P1 image:
+- Never add borders, frames, moulding, stickers, badges, external effects, or graphic elements around the card.
+- Keep the original card shape clean and unchanged.
+- Improve sharpness, resolution, alignment, orientation, and quality when needed.
+- If the source card is vertical, rotate/adapt it to horizontal only when required by the established card standard.
+- Never invent, reconstruct, redraw, recolour, or recreate card details. The visual identity must remain exactly the same as the original card image used in the article.
+
+Visual quality requirements:
+- The final image must have strong depth, excellent realism, excellent resolution, cinematic commercial lighting, natural shadows, sharp main elements, and premium finishing.
+- The card must remain fully inside the image safe area and never extend beyond the bottom edge.
+
 CRITICAL SOURCE RULES:
 - Only use information confirmed by the official issuer page or official issuer documents.
 - Never invent benefits, eligibility requirements, fees, rates, rewards, limits, or approval odds.
