@@ -65,6 +65,13 @@ git -C "$REPO" status --short
 
 log "Saving local Hermes patch"
 git -C "$REPO" diff > "$LOCAL_PATCH"
+if [[ ! -s "$LOCAL_PATCH" ]]; then
+  PREV_PATCH="$(ls -t "$PATCH_DIR"/mgs-discord-local-preupdate-*.patch 2>/dev/null | head -1 || true)"
+  if [[ -n "$PREV_PATCH" && -s "$PREV_PATCH" ]]; then
+    log "No current git diff; reusing previous saved patch: $PREV_PATCH"
+    cp "$PREV_PATCH" "$LOCAL_PATCH"
+  fi
+fi
 # Port current MGS Discord patch from old built-in adapter path to new plugin adapter path.
 sed 's#gateway/platforms/discord.py#plugins/platforms/discord/adapter.py#g' "$LOCAL_PATCH" > "$PORT_PATCH"
 log "local_patch=$LOCAL_PATCH bytes=$(wc -c < "$LOCAL_PATCH")"
