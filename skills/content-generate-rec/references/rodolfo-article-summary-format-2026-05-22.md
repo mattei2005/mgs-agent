@@ -1,43 +1,37 @@
-# Rodolfo article summary format correction — 2026-05-22
+# Rodolfo article summary format — correction log (2026-05-22)
 
-## Context
-During a P1 publish flow, Rodolfo rejected multiple final summaries because Atena kept using monospaced tables/code blocks and verbose field diagnostics despite a prior preference for compact Discord-native summaries.
+## Trigger
+Rodolfo corrected Atena across multiple P1 publication threads because final summaries drifted away from the approved Capital One Classic model. The failures were not about publishing; they were about the final Discord summary format.
 
-## Durable rule
-For Rodolfo-facing final summaries for REC, P1, REC+P1, and SEO articles:
+## Durable lesson
+For any article publication summary requested by Rodolfo, do not improvise a compact status report. Copy the approved emoji-list structure line by line and substitute values only.
 
-- Use a short Discord-native emoji list.
-- Do **not** use monospaced tables or `text` code blocks.
-- Keep one compact message only.
-- Put Raquel mention in the opener when the article is published or ready for review.
-- Use bare angle-bracket links (`<https://...>`) to avoid embeds/previews.
-- Include `REC de origem` for P1 created from an existing REC.
-- Include the complete `Tags` line.
-- Do not include title/subtitle/meta/CTA/microcopy/detailed media audit unless the user asks for a full summary or there was an error/cleanup.
+## Required shape
+- First line for P1: `<@344196393512075265> ✅ P1 do **{card}** publicada no {site}.`
+- No monospaced table/code block.
+- No Markdown masked links for the main URLs; use `<https://...>`.
+- Always include `📄 **Post ID:**` as its own line.
+- Include article URL, edit URL, and REC source URL when applicable.
+- Include site, vertical, status, and slug.
+- Include Yoast SEO and Readability scores.
+- Include public/schema word count and internal validation word count.
+- Include Title plus exact title character count.
+- Include Sub-title plus exact subtitle character count.
+- Include Focus keyphrase.
+- Include Meta description plus exact meta character count.
+- Include all applied tags, especially `lang_*` and `atena_agent`.
+- Include CTA and Microcopy.
+- Include official source and public/redirect validation.
+- Include Images section with P1/REC featured URL, card image URL, and media audit.
+- Include total time and operational cost.
+- End with Raquel mention when published/ready for review.
 
-## Preferred template
+## Common failure patterns to avoid
+- Starting with generic text such as `P1 publicada e validada` instead of the exact card-specific first line.
+- Omitting Post ID as a standalone line.
+- Reporting Title/Sub-title/Meta values but omitting their character counts.
+- Collapsing fields into a table or short checklist.
+- Using a different summary format because the runner returned JSON in a different shape.
 
-```markdown
-✅ {TYPE} do **{card/product}** publicada no {site}. <@1496254952501280974>
-
-📄 **Post ID:** `{post_id}`
-🔗 **Artigo:** <{public_url}>
-✏️ **Edit:** <{edit_url}>
-↩️ **REC de origem:** <{rec_source_url}>
-
-📊 **Yoast:** SEO **{seo_score}** {seo_emoji} | Readability **{readability_score}** {read_emoji}
-📝 **Palavras:** `{word_count}` | **Slug:** `{slug}`
-🏷️ **Tags:** `{tag1}` `{tag2}` `{tag3}` ...
-
-🏦 **Fonte oficial:** <{official_url}>
-🖼️ **Imagem:** <{featured_url}> | **Card:** <{card_url}>
-✅ **Validação:** página pública OK, CTA/redirect OK, mídia OK
-⏱️ **Tempo:** `{duration}` | 💰 **Custo:** `{total_operational_cost}`
-```
-
-## Anti-patterns Rodolfo rejected
-
-- Monospaced tables with columns like `Status | Publicado`.
-- Separate verbose explanations before/after the summary.
-- Repeating links in headings or separate “Hiperlinks” sections.
-- Bloated diagnostics: title chars, meta text, CTA, microcopy, full media audit when publish was normal.
+## Pre-send checklist
+Before sending the final answer, compare the Discord message against the approved template in `SKILL.md`. If any required line is missing, fix the message before sending.
