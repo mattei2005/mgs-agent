@@ -7,6 +7,8 @@ description: Generates a REC (Recommendation) article for a credit card — fetc
 
 ## Session-learned references
 
+- `references/p1-official-page-js-fallback-2026-05-22.md` — P1 runner fallback for JS-heavy official issuer pages: use source-confirmed explicit facts, keep runner deterministic, update existing P1 with `--update-post-id`, and clean up replacement featured media.
+
 - `references/manual-card-image-validation-and-teardown.md` — manual card image override rules, strict LazyBlock visual validation, checkerboard/canvas pitfalls, controlled card-only enhancement, and safe teardown checklist for benchmark/test RECs.
 - `references/p1-gb-cc-en-structure-and-test-2026-05-19.md` — agreed P1 GB-CC-EN structure, image relationship rules, LazyBlock CTA differences from REC, Yoast handling, first HSBC Premier draft validation, the deterministic `/root/mgs-agent/scripts/mgs-p1-runner.py` contract for routine P1 creation from an existing REC, and the rule that any existing `/apply-now-.../` slug already linked from the REC buttons is the source of truth for the P1 slug.
 - `references/p1-runner-existing-rec-repair-2026-05-20.md` — P1 runner repair pattern when an existing REC points to a stale official URL, including rerun with current official URL plus explicit facts, handling current issuer category pages as official sources, expanding under-900-word P1 bodies via deterministic runner logic, and safely deleting unused featured images from failed pre-publication attempts.
