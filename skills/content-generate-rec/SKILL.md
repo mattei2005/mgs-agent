@@ -949,9 +949,12 @@ Default layout (APPROVED MODEL — keep this structure):
 📊 **Yoast:** SEO **{seo_score}** {seo_emoji} | Readability **{readability_score}** {read_emoji}
 📝 **Palavras:** **{public_word_count}** schema público / **{validation_word_count}** validação interna
 🏷️ **Title:** {title}
+🔢 **Title — caracteres:** `{title_chars}`
 💬 **Sub-title:** {subtitle}
+🔢 **Sub-title — caracteres:** `{subtitle_chars}`
 🔍 **Focus:** `{focus_keyphrase}`
 🧾 **Meta:** {meta_description}
+🔢 **Meta description — caracteres:** `{meta_chars}`
 
 🏷️ **Tags:** `{tag1}` `{tag2}` `{tag3}` ...
 
