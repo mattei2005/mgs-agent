@@ -996,41 +996,7 @@ Required fields in the single message:
 - CTA/apply URL 404 em produção REC-only NÃO é blocker: o REC aponta de propósito para a futura P1/apply page. Reporte como `P1 ainda não criada`. Só trate como crítico quando a P1 deveria existir ou quando a tarefa incluiu criar/validar P1.
 - Quando usar `mgs-rec-runner.py`, ler `images.artifact_audit` do JSON e refletir no resumo final.
 
-Format example (1 single Discord message):
-
-@Rodolfo ✅ {Card Name} publicado no {site}!
-
-```text
-Resumo do REC — {Card Name}
-
-Campo                         | Resultado
-------------------------------|--------------------------------------------------
-Site                          | {site}
-Vertical                      | {template_key}
-Status                        | {status}
-Post ID                       | {id}
-Yoast SEO                     | {seo} 🟢
-Yoast Readability             | {read} 🟢
-Palavras                      | {words}
-Title/Sub-title/Meta          | {title_chars}c / {subtitle_chars}c / {meta_chars}c
-Focus keyword                 | {focus_kw}
-Tags                          | {tags_csv}
-Origem da imagem do card      | Manual or automática + source
-Imagem destacada              | Contextual/lifestyle, not card-only
-Auditoria de mídia            | {created_count} criadas | {used_count} usadas | {extra_count} extras | {deleted_count} deletadas
-Tempo total                   | {duration_min_sec}
-Custo operacional estimado    | ${total_operational_cost} USD
-```
-
-**Links**
-- **Editar post:** [Abrir no WordPress]({edit_url})
-- **URL pública/futura:** [Abrir permalink]({public_url})
-- **Card image / LazyBlock:** [Ver imagem do card]({card_url})
-- **Featured image:** [Ver imagem destacada]({featured_url})
-
-<@1496254952501280974> artigo pronto para revisão! 👀
-
----
+The default compact layout above is TEMPLATE A — NORMAL for successful publications.
 
 ### LOGICA DE ESCOLHA (CRITICAL): qual template usar?
 
