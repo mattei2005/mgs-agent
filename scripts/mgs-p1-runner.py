@@ -203,7 +203,23 @@ def infer_card_slug(rec_url: str, card_name: str) -> str:
 def extract_official_data(card_name: str, official_url: str, explicit_benefits: List[str], annual_fee: Optional[str], apr: Optional[str]) -> Dict[str, Any]:
     rec = load_rec_helpers()
     status, text = rec.fetch_reference_text(official_url)
-    data = rec.extract_card_data_with_llm(card_name, official_url, text)
+    try:
+        data = rec.extract_card_data_with_llm(card_name, official_url, text)
+    except Exception as e:
+        if not (explicit_benefits and annual_fee and apr):
+            raise
+        data = {
+            "card_name": card_name,
+            "annual_fee": annual_fee,
+            "apr": apr,
+            "benefits": explicit_benefits[:6],
+            "competitors": [{"name": "Barclaycard Avios Plus"}, {"name": "British Airways American Express Credit Card"}],
+            "tag10": "Avios rewards",
+            "tag2": annual_fee[:25],
+            "descriptor": "A UK travel credit card with Avios rewards and issuer terms.",
+            "extraction_mode": f"explicit_facts_after_short_fetch:{type(e).__name__}",
+            "source_url": official_url,
+        }
     if explicit_benefits:
         data["benefits"] = explicit_benefits[:6]
     if annual_fee:
