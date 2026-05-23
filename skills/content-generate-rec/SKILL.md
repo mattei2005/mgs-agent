@@ -966,40 +966,51 @@ Recommended compact shape:
 • **Imagem P1/REC:** [Abrir featured]({featured_url})
 • **Card image:** [Abrir card]({card_url})
 • **Auditoria:** {media_audit_short}
+#### Rodolfo standard summary format (all article types/sites)
 
-⏱️ **Tempo total:** `{duration}` | 💰 **Custo:** `{cost}`
+For any article summary requested by Rodolfo (REC, P1, REC+P1, SEO, any site), use the concise Discord format below as the default. Keep links inside angle brackets (`<https://...>`) so Discord does not generate embeds/previews. Do not use Markdown masked links for final URLs unless the user explicitly asks, because masked links can still trigger previews and are harder to copy. Do not add a `Hiperlinks:` heading.
+
+Default layout:
+
+```text
+📄 **Post ID:** `{post_id}`
+🔗 **Artigo:** <{public_url}>
+✏️ **Edit:** <{edit_url}>
+↩️ **REC de origem:** <{rec_source_url}>   # only for P1/apply pages that come from a REC
+
+📌 **Site:** `{site}` | **Vertical:** `{vertical}` | **Status:** `{status}`
+🔗 **Slug:** `{slug}`
+
+📊 **Yoast:** SEO **{seo_score}** {seo_emoji} | Readability **{readability_score}** {read_emoji}
+📝 **Palavras:** **{public_word_count}** schema público / **{validation_word_count}** validação interna
+🏷️ **Title:** {title}
+💬 **Sub-title:** {subtitle}
+🔍 **Focus:** `{focus_keyphrase}`
+🧾 **Meta:** {meta_description}
+
+🏷️ **Tags:** `{tag1}` `{tag2}` `{tag3}` ...
+
+🟢 **CTA:** `{cta}` | **Microcopy:** `{microcopy}`
+🏦 **Fonte oficial:** <{official_url}>
+✅ **Página pública:** {public_check} | **Redirect/URL oficial:** {redirect_check}
+
+🖼️ **Imagens:**
+• **Imagem P1/REC:** <{featured_url}>
+• **Card image:** <{card_url}>
+• **Auditoria:** {media_audit_summary}
+
+⏱️ **Tempo total:** `{duration}` | 💰 **Custo:** `{total_operational_cost}`
 ```
 
-Required data points to include somewhere in the compact summary:
-- Site
-- Vertical
-- Status
-- Post ID
-- Slug
-- Yoast SEO
-- Yoast Readability
-- Palavras
-- Title
-- Sub-title
-- Meta description
-- Focus keyword
-- CTA
-- Microcopy
-- Imagem P1/REC clickable link
-- Card image clickable link
-- Auditoria de mídia
-- Fonte oficial
-- Página pública
-- Redirect/URL oficial
-- Tempo total
-- Artigo publicado clickable link
-- Editar no WordPress clickable link
-- REC de origem clickable link when applicable
-- Card imagem clickable link
+Rules:
+- Use `Imagem P1` for P1/apply pages and `Imagem REC` for REC pages.
+- Use `REC de origem` only when there is a real REC source URL; do not write `REC ou P1 de origem`.
+- Always include the complete applied tags list, especially `lang_*` and `atena_agent` when present.
+- If a value is not applicable to a non-REC/P1 article type, keep the format but write `N/A` rather than changing the structure.
+- If duration is over 60 seconds, format as minutes/seconds (example: `1m09s`).
+- Keep the Raquel mention at the end when the article was published or is ready for review.
 
 
-> **PITFALL — duplicate messages waste tokens (CRITICAL):**
-> Atena historically sent 2 messages: one announcing the publish + another summarizing details. This wastes ~500 output tokens per REC and degrades UX (user has to scroll twice through nearly identical content).
 >
 > **The rule is strict:** ONE message after publish. Combine announcement, details, and Raquel mention in a single block.
 
