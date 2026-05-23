@@ -6,6 +6,14 @@ Rodolfo corrected Atena across multiple P1 publication threads because final sum
 ## Durable lesson
 For any article publication summary requested by Rodolfo, do not improvise a compact status report. Copy the approved emoji-list structure line by line and substitute values only.
 
+For P1 outputs from `mgs-p1-runner.py`, do not hand-format from memory. Save the runner JSON to a temp file and render the Discord summary with:
+
+```bash
+python3 /root/mgs-agent/scripts/render-p1-summary.py /tmp/p1-runner.json
+```
+
+Then paste that rendered output as the final answer. This prevents reordering, missing fields, and alternate compact formats.
+
 ## Required shape
 - First line for P1: `<@344196393512075265> ✅ P1 do **{card}** publicada no {site}.`
 - No monospaced table/code block.
