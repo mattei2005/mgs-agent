@@ -929,39 +929,55 @@ Emit EXACTLY ONE summary message to the user. NEVER send two messages (one annou
 
 #### Rodolfo standard summary format (all article types/sites)
 
-See also `references/rodolfo-article-summary-format-2026-05-22.md` for the session correction, accepted template, and rejected anti-patterns.
+#### Rodolfo standard summary format (all article types/sites)
 
-For any article summary requested by Rodolfo (REC, P1, REC+P1, SEO, any site), use the concise Discord-native emoji-list format below as the default. **Do not use monospaced tables/code blocks for final article summaries to Rodolfo.** Keep links inside angle brackets (`<https://...>`) so Discord does not generate embeds/previews. Do not use Markdown masked links for final URLs unless the user explicitly asks. Do not add a `Hiperlinks:` heading.
+For any article summary requested by Rodolfo (REC, P1, REC+P1, SEO, any site), use the Discord-native emoji format approved in thread `1507554479627567115`. Keep links inside angle brackets (`<https://...>`) so Discord does not generate embeds/previews. Do not use Markdown masked links for final URLs unless the user explicitly asks. Do not add a `Hiperlinks:` heading. Do not use monospaced tables/code blocks for this summary.
 
-Default layout (compact, no table):
+Default layout (APPROVED MODEL — keep this structure):
 
 ```markdown
-✅ {TYPE} do **{card/product}** publicada no {site}. <@1496254952501280974>
+<@344196393512075265> ✅ {TYPE} do **{card/product}** publicada no {site}.
 
 📄 **Post ID:** `{post_id}`
 🔗 **Artigo:** <{public_url}>
 ✏️ **Edit:** <{edit_url}>
-↩️ **REC de origem:** <{rec_source_url}>   # P1 only; omit if not applicable
+↩️ **REC de origem:** <{rec_source_url}>
+
+📌 **Site:** `{site}` | **Vertical:** `{vertical}` | **Status:** `{status}`
+🔗 **Slug:** `{slug}`
 
 📊 **Yoast:** SEO **{seo_score}** {seo_emoji} | Readability **{readability_score}** {read_emoji}
-📝 **Palavras:** `{word_count}` | **Slug:** `{slug}`
+📝 **Palavras:** **{public_word_count}** schema público / **{validation_word_count}** validação interna
+🏷️ **Title:** {title}
+💬 **Sub-title:** {subtitle}
+🔍 **Focus:** `{focus_keyphrase}`
+🧾 **Meta:** {meta_description}
+
 🏷️ **Tags:** `{tag1}` `{tag2}` `{tag3}` ...
 
+🟢 **CTA:** `{cta}` | **Microcopy:** `{microcopy}`
 🏦 **Fonte oficial:** <{official_url}>
-🖼️ **Imagem:** <{featured_url}> | **Card:** <{card_url}>
-✅ **Validação:** página pública OK, CTA/redirect OK, mídia OK
-⏱️ **Tempo:** `{duration}` | 💰 **Custo:** `{total_operational_cost}`
+✅ **Página pública:** {public_check} | **Redirect/URL oficial:** {redirect_check}
+
+🖼️ **Imagens:**
+• **Imagem P1/REC:** <{featured_url}>
+• **Card image:** <{card_url}>
+• **Auditoria:** {media_audit_summary}
+
+⏱️ **Tempo total:** `{duration}` | 💰 **Custo:** `{total_operational_cost}`
+
+<@1496254952501280974> {TYPE} publicada e validada.
 ```
 
 Rules:
-- Never use a two-column table or a `text` code block for Rodolfo's final REC/P1/article summaries; he has explicitly rejected that format.
-- Keep the summary short. Do not include title, subtitle, meta description, CTA, microcopy, detailed media audit, or field-by-field diagnostics unless the user asks for “resumo completo” or there was an error/cleanup.
-- Use `Imagem P1` for P1/apply pages and `Imagem REC` for REC pages only if there is room; otherwise `Imagem` is acceptable.
+- Use this exact approved shape from the Capital One Classic thread; do not shorten it into a minimal checklist and do not convert it into a table.
+- Use `Imagem P1` for P1/apply pages and `Imagem REC` for REC pages.
 - Use `REC de origem` only when there is a real REC source URL; do not write `REC ou P1 de origem`. Omit the row when there is no source REC.
 - Always include the complete applied tags list, especially `lang_*` and `atena_agent` when present.
+- Include Title, Sub-title, Focus, Meta, CTA, Microcopy, public/redirect validation, images, media audit, duration and cost.
 - If duration is over 60 seconds, format as minutes/seconds (example: `1m09s`).
-- Keep the Raquel mention in the opener when the article was published or is ready for review.
-- The rule is strict: ONE message after publish. Combine announcement, details, and Raquel mention in a single compact message.
+- Keep the Raquel mention at the end when the article was published or is ready for review.
+- The rule is strict: ONE message after publish. Combine announcement, details, and Raquel mention in a single message.
 
 Required fields in the single message:
 - Confirmação de publicação (uma linha)
