@@ -927,38 +927,75 @@ quando Raquel abrir o editor. Incluir o resultado do scorer no summary final.
 
 Emit EXACTLY ONE summary message to the user. NEVER send two messages (one announcement + one summary). NEVER duplicate information across messages. UMA mensagem com TUDO consolidado.
 
-#### Rodolfo standard summary fields (REC/P1)
+#### Rodolfo standard compact summary (REC/P1)
 
-For any published or drafted REC/P1 summary requested by Rodolfo, keep the field order stable and do not invent new section titles. Use concise clickable link labels instead of raw Markdown URLs. Do not add a `Hiperlinks:` heading; put the final link rows directly after the field list.
+For any published or drafted REC/P1 summary requested by Rodolfo, use a stable, compact Discord-native format. Rodolfo explicitly prefers the shorter emoji-led summary style over long tables or verbose raw URL sections.
 
-Required field order:
-- `Site:`
-- `Vertical:`
-- `Status:`
-- `Post ID:`
-- `Slug:`
-- `Yoast SEO:`
-- `Yoast Readability:`
-- `Palavras:`
-- `Title:`
-- `Sub-title:`
-- `Meta description:`
-- `Focus keyword:`
-- `CTA:`
-- `Microcopy:`
-- `Imagem P1:` or `Imagem REC:` with a short clickable label (example: `[Abrir imagem P1](...)`)
-- `Card image:` with a short clickable label
-- `Auditoria de mídia:`
-- `Fonte oficial:` with a short clickable label when available
-- `Página pública:`
-- `Redirect/URL oficial:`
-- `Tempo total:`
+Formatting rules:
+- Do not use a `Hiperlinks:` heading.
+- Do not print long raw Markdown URLs as the visible link text; use short clickable labels such as `[Abrir artigo]`, `[Editar no WordPress]`, `[Abrir REC]`, `[Abrir card]`.
+- Keep the link rows near the top so the user can act quickly.
+- Use backticks for short scalar values such as IDs, slugs, site, vertical, status, focus keyword, CTA and microcopy.
+- Keep prose minimal. Prefer one compact line for related metadata when it remains readable.
+- For P1 summaries created from a REC, the source row label is always `REC de origem:`. Do not write `REC ou P1 de origem:`.
+- Preserve the Raquel mention when the article was published or is ready for review.
 
-Then add the link rows directly, without a separate heading:
-- `Artigo publicado:` with short clickable label
-- `Editar no WordPress:` with short clickable label
-- `REC de origem:` when the post is a P1 created from a REC; do not write `REC ou P1 de origem`
-- `Card imagem:` with short clickable label
+Recommended compact shape:
+
+```markdown
+📄 **Post ID:** `{post_id}`
+🔗 **Artigo:** [Abrir artigo publicado]({public_url})
+✏️ **Edit:** [Editar no WordPress]({edit_url})
+↩️ **REC de origem:** [Abrir REC]({rec_source_url})
+
+📌 **Site:** `{site}` | **Vertical:** `{vertical}` | **Status:** `{status}`
+🔗 **Slug:** `{slug}`
+
+📊 **Yoast:** SEO **{seo}** {seo_dot} | Readability **{readability}** {readability_dot}
+📝 **Palavras:** **{public_words}** schema público / **{validated_words}** validação interna
+🏷️ **Title:** {title}
+💬 **Sub-title:** {subtitle}
+🔍 **Focus:** `{focus_keyphrase}`
+🧾 **Meta:** {meta_description}
+
+🟢 **CTA:** `{cta}` | **Microcopy:** `{microcopy}`
+🏦 **Fonte oficial:** [Abrir fonte oficial]({official_url})
+✅ **Página pública:** HTTP {public_http} | **Redirect/URL oficial:** {redirect_status}
+
+🖼️ **Imagens:**
+• **Imagem P1/REC:** [Abrir featured]({featured_url})
+• **Card image:** [Abrir card]({card_url})
+• **Auditoria:** {media_audit_short}
+
+⏱️ **Tempo total:** `{duration}` | 💰 **Custo:** `{cost}`
+```
+
+Required data points to include somewhere in the compact summary:
+- Site
+- Vertical
+- Status
+- Post ID
+- Slug
+- Yoast SEO
+- Yoast Readability
+- Palavras
+- Title
+- Sub-title
+- Meta description
+- Focus keyword
+- CTA
+- Microcopy
+- Imagem P1/REC clickable link
+- Card image clickable link
+- Auditoria de mídia
+- Fonte oficial
+- Página pública
+- Redirect/URL oficial
+- Tempo total
+- Artigo publicado clickable link
+- Editar no WordPress clickable link
+- REC de origem clickable link when applicable
+- Card imagem clickable link
 
 
 > **PITFALL — duplicate messages waste tokens (CRITICAL):**
