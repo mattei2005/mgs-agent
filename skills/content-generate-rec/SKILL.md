@@ -971,13 +971,17 @@ Default layout (APPROVED MODEL — keep this structure):
 
 Rules:
 - Use this exact approved shape from the Capital One Classic thread; do not shorten it into a minimal checklist and do not convert it into a table.
+- For P1 summaries, the first line must be exactly this pattern: `<@Rodolfo> ✅ P1 do **{card}** publicada no {site}.` Do not replace it with generic wording like `P1 publicada e validada`, `P1 publicada`, or a checklist title.
+- Always include `📄 **Post ID:**` as its own line. Do not make the edit URL the only place where the post ID appears.
 - Use `Imagem P1` for P1/apply pages and `Imagem REC` for REC pages.
 - Use `REC de origem` only when there is a real REC source URL; do not write `REC ou P1 de origem`. Omit the row when there is no source REC.
 - Always include the complete applied tags list, especially `lang_*` and `atena_agent` when present.
 - Include Title, Sub-title, Focus, Meta, CTA, Microcopy, public/redirect validation, images, media audit, duration and cost.
+- For Title/Sub-title/Meta, include the values in the approved lines and include exact character counts in the same summary. Never omit `Meta description — caracteres`.
 - If duration is over 60 seconds, format as minutes/seconds (example: `1m09s`).
 - Keep the Raquel mention at the end when the article was published or is ready for review.
 - The rule is strict: ONE message after publish. Combine announcement, details, and Raquel mention in a single message.
+- Before sending the final answer, compare the message line-by-line against this template. If any required line is missing, fix the message before sending.
 
 Required fields in the single message:
 - Confirmação de publicação (uma linha)
