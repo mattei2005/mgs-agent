@@ -935,6 +935,8 @@ For any article summary requested by Rodolfo (REC, P1, REC+P1, SEO, any site), u
 
 Reference: `references/rodolfo-article-summary-format-2026-05-22.md` captures the correction log and pre-send checklist from the repeated P1 summary-format failures. Load it if there is any doubt about the approved model.
 
+**P1 hard gate:** after `mgs-p1-runner.py` returns JSON, save that JSON and run `/root/mgs-agent/scripts/render-p1-summary.py <json_file>`. Use the rendered output as the final Discord reply. Do not manually reorder or rewrite the final P1 summary from memory.
+
 Default layout (APPROVED MODEL — keep this structure):
 
 ```markdown
