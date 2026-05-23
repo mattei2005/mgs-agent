@@ -927,6 +927,40 @@ quando Raquel abrir o editor. Incluir o resultado do scorer no summary final.
 
 Emit EXACTLY ONE summary message to the user. NEVER send two messages (one announcement + one summary). NEVER duplicate information across messages. UMA mensagem com TUDO consolidado.
 
+#### Rodolfo standard summary fields (REC/P1)
+
+For any published or drafted REC/P1 summary requested by Rodolfo, keep the field order stable and do not invent new section titles. Use concise clickable link labels instead of raw Markdown URLs. Do not add a `Hiperlinks:` heading; put the final link rows directly after the field list.
+
+Required field order:
+- `Site:`
+- `Vertical:`
+- `Status:`
+- `Post ID:`
+- `Slug:`
+- `Yoast SEO:`
+- `Yoast Readability:`
+- `Palavras:`
+- `Title:`
+- `Sub-title:`
+- `Meta description:`
+- `Focus keyword:`
+- `CTA:`
+- `Microcopy:`
+- `Imagem P1:` or `Imagem REC:` with a short clickable label (example: `[Abrir imagem P1](...)`)
+- `Card image:` with a short clickable label
+- `Auditoria de mídia:`
+- `Fonte oficial:` with a short clickable label when available
+- `Página pública:`
+- `Redirect/URL oficial:`
+- `Tempo total:`
+
+Then add the link rows directly, without a separate heading:
+- `Artigo publicado:` with short clickable label
+- `Editar no WordPress:` with short clickable label
+- `REC de origem:` when the post is a P1 created from a REC; do not write `REC ou P1 de origem`
+- `Card imagem:` with short clickable label
+
+
 > **PITFALL — duplicate messages waste tokens (CRITICAL):**
 > Atena historically sent 2 messages: one announcing the publish + another summarizing details. This wastes ~500 output tokens per REC and degrades UX (user has to scroll twice through nearly identical content).
 >
