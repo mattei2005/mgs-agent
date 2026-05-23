@@ -929,6 +929,8 @@ Emit EXACTLY ONE summary message to the user. NEVER send two messages (one annou
 
 #### Rodolfo standard summary format (all article types/sites)
 
+See also `references/rodolfo-article-summary-format-2026-05-22.md` for the session correction, accepted template, and rejected anti-patterns.
+
 For any article summary requested by Rodolfo (REC, P1, REC+P1, SEO, any site), use the concise Discord-native emoji-list format below as the default. **Do not use monospaced tables/code blocks for final article summaries to Rodolfo.** Keep links inside angle brackets (`<https://...>`) so Discord does not generate embeds/previews. Do not use Markdown masked links for final URLs unless the user explicitly asks. Do not add a `Hiperlinks:` heading.
 
 Default layout (compact, no table):
