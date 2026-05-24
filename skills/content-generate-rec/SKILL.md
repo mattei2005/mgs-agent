@@ -937,6 +937,10 @@ Reference: `references/rodolfo-article-summary-format-2026-05-22.md` captures th
 
 **P1 hard gate:** after `mgs-p1-runner.py` returns JSON, save that JSON and run `/root/mgs-agent/skills/content-generate-rec/scripts/render-p1-summary.py <json_file>`. Use the rendered output as the final Discord reply. Do not manually reorder or rewrite the final P1 summary from memory. This is mandatory because Rodolfo corrected multiple consecutive P1 threads where the publication succeeded but Atena changed the requested summary order/shape.
 
+**P1 official-source hard gate:** do not publish a P1 when the official/source URL has no usable product content. HTTP 200 is not enough: branded "Page not found", issuer error shells, geo-block pages, empty bodies, search pages, or pages without product facts are failures. Stop before publication and ask Raquel in the thread to send the correct official link. Explicit facts, cache data, REC copy, or secondary sources must not override a dead official URL for a publish run.
+
+**P1 REC-card-image hard gate:** when creating a P1 from an existing REC, the card image must come from the REC LazyBlock and already represent the approved cropped/normalized card asset. If the REC LazyBlock image is empty, do not silently inject a cache/manual/external image into the P1. Stop and ask Raquel for the correct card image or repair the REC card image first. Any new card image must pass the same horizontal card-only crop/normalization gate before upload.
+
 **P1 Discord thread title gate:** rename new P1 threads exactly as `P1 {Card Name}`. Do not append the site (`— eggbev`), do not leave the original request text, and do not use a truncated prompt as the thread title.
 
 Default layout (APPROVED MODEL — keep this structure):
