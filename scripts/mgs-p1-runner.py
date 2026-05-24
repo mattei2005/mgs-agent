@@ -230,6 +230,14 @@ def official_source_has_content(official_url: str, text: str) -> Tuple[bool, str
     return True, "ok"
 
 
+def preflight_official_source(official_url: str) -> None:
+    rec = load_rec_helpers()
+    status, text = rec.fetch_reference_text(official_url)
+    has_content, source_reason = official_source_has_content(official_url, text)
+    if not has_content:
+        raise RunnerError(f"Official source URL has no usable product content; ask Raquel/Rodolfo for the correct official link before publishing. url={official_url} reason={source_reason}")
+
+
 def extract_official_data(card_name: str, official_url: str, explicit_benefits: List[str], annual_fee: Optional[str], apr: Optional[str]) -> Dict[str, Any]:
     rec = load_rec_helpers()
     status, text = rec.fetch_reference_text(official_url)
@@ -597,6 +605,7 @@ def main() -> int:
         official_url = args.official_url or cache.get("card_official_url") or ""
         if not official_url:
             raise RunnerError("official URL missing and not found in card cache; pass --official-url")
+        t = ts(); preflight_official_source(official_url); timings["official_source_preflight"] = ts() - t; steps.append("official_source_preflight_passed")
         card_url = parsed.get("card_url")
         card_id = parsed.get("card_id")
         card_image_source = "rec_lazyblock" if card_url and card_id else "missing_from_rec"
