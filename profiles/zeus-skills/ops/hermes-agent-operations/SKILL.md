@@ -291,6 +291,8 @@ Próximo passo: comando exato ou validação pendente.
 
 ## 5. References and support files
 
+Para manutenção de VPS/update com backup, recuperação manual de npm quando self-update quebra, e política de retenção/limpeza de backups, ver `references/vps-update-npm-backup-retention-2026-05-24.md`.
+
 Esta umbrella absorveu as antigas skills especializadas abaixo. Conteúdo detalhado e histórico foi preservado nos arquivos de suporte:
 
 - `references/hermes-update-original-skill.md`
