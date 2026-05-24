@@ -679,7 +679,7 @@ def main() -> int:
             "post": {"id": post.get("id"), "status": post.get("status", args.status), "slug": post.get("slug"), "link": post.get("link"), "edit_url": f"https://{site['domain']}/wp-admin/post.php?post={post.get('id')}&action=edit" if post.get("id") else None},
             "seo": {"title": title, "meta_description": metadesc, "focus_keyphrase": focuskw, "yoast": yoast, "score": score},
             "taxonomy": {"category_id": category_id, "tag_ids": tag_ids, "tag_names": tag_names},
-            "images": {"card_reused_from_rec": True, "featured": featured_media, "media_created": media_created},
+            "images": {"card_reused_from_rec": card_image_source == "rec_lazyblock", "card_image_source": card_image_source, "featured": featured_media, "media_created": media_created},
             "public_verify": verify,
             "cost_usd": {"runner_api_est": 0.0, "featured_image_est": 0.04, "total_est": 0.04},
         })
