@@ -17,6 +17,7 @@ critical enough to encode.
 **Support files:**
 - `references/subtitle-rewrite-patterns.md` — confirmed ≤100-char subtitle examples + cascade fix pattern
 - `references/playwright-local-install.md` — Playwright local: install steps on MGS server, usage pattern for Bing Images scraping, geo-block vs bot-block distinction
+- `references/lloyds-p1-cache-seeding-from-empty-rec-image.md` — P1 runner repair when an existing Lloyds REC has an empty LazyBlock image payload and no card-cache row
 
 ---
 
@@ -296,6 +297,10 @@ Para buscar dados do cartão (features, APR, fees) sem acessar o site oficial:
 - Use web search direta (não browser) — os dados do cartão aparecem em snippets e comparadores UK
 - Fontes confiáveis: headforpoints.com, moneysavingexpert.com, finder.com/uk
 - NÃO usar `delegate_task` com browser toolset — vai bloquear no mesmo Error 1007
+
+### P1 from existing Lloyds REC with empty card image payload
+
+If `mgs-p1-runner.py` fails with `Could not resolve REC card image from LazyBlock/cache`, check whether the REC LazyBlock `imagem` payload has `id: null` and blank `url`. For Lloyds World Elite, use the deterministic cache-seeding workflow in `references/lloyds-p1-cache-seeding-from-empty-rec-image.md`: upload the verified HFP card image, seed `card_cache` with official facts and uploaded media ID/URL, then rerun the P1 runner with explicit `--official-url`, `--annual-fee`, `--apr`, and `--benefit` values. Do not manually recreate the whole P1 unless cache seeding fails.
 
 ---
 
