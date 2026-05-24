@@ -265,6 +265,7 @@ def extract_official_data(card_name: str, official_url: str, explicit_benefits: 
     has_content, source_reason = official_source_has_content(official_url, text)
     if not has_content:
         raise RunnerError(f"Official source URL has no usable product content; ask Raquel/Rodolfo for the correct official link before publishing. url={official_url} reason={source_reason}")
+    rec = load_rec_helpers()
     try:
         data = rec.extract_card_data_with_llm(card_name, official_url, text)
     except Exception as e:
