@@ -200,9 +200,42 @@ def infer_card_slug(rec_url: str, card_name: str) -> str:
     return re.sub(r"-card$", "", slug)
 
 
+def official_source_has_content(official_url: str, text: str) -> Tuple[bool, str]:
+    """Reject issuer URLs that return a branded error/404/search page.
+
+    A URL can return HTTP 200 while serving an error shell (observed with Lloyds).
+    For P1 publish, explicit facts are not allowed to override a dead official URL:
+    the user/Raquel must provide a live official product/terms source first.
+    """
+    clean = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", text))).strip().lower()
+    if not clean or len(clean) < 500:
+        return False, "official source has no meaningful body"
+    error_markers = [
+        "page not found",
+        "we can’t find that page",
+        "we can't find that page",
+        "sorry about this",
+        "try our search tool",
+        "internet banking - error",
+        "we are sorry an error has occurred",
+        "error 1007",
+        "access denied",
+    ]
+    for marker in error_markers:
+        if marker in clean:
+            return False, f"official source appears to be an error page: {marker}"
+    product_terms = [t for t in ["world elite", "mastercard", "credit card", "representative apr", "annual fee", "monthly fee"] if t in clean]
+    if len(product_terms) < 2:
+        return False, "official source does not expose enough product content"
+    return True, "ok"
+
+
 def extract_official_data(card_name: str, official_url: str, explicit_benefits: List[str], annual_fee: Optional[str], apr: Optional[str]) -> Dict[str, Any]:
     rec = load_rec_helpers()
     status, text = rec.fetch_reference_text(official_url)
+    has_content, source_reason = official_source_has_content(official_url, text)
+    if not has_content:
+        raise RunnerError(f"Official source URL has no usable product content; ask Raquel/Rodolfo for the correct official link before publishing. url={official_url} reason={source_reason}")
     try:
         data = rec.extract_card_data_with_llm(card_name, official_url, text)
     except Exception as e:
@@ -564,10 +597,14 @@ def main() -> int:
         official_url = args.official_url or cache.get("card_official_url") or ""
         if not official_url:
             raise RunnerError("official URL missing and not found in card cache; pass --official-url")
-        card_url = parsed.get("card_url") or cache.get("card_image_uploaded_url")
-        card_id = parsed.get("card_id") or cache.get("card_image_uploaded_id")
+        card_url = parsed.get("card_url")
+        card_id = parsed.get("card_id")
+        card_image_source = "rec_lazyblock" if card_url and card_id else "missing_from_rec"
         if not card_url or not card_id:
-            raise RunnerError("Could not resolve REC card image from LazyBlock/cache")
+            # P1 created from an existing REC must not silently inject an external/manual
+            # cache image when the REC card LazyBlock is empty. That bypasses the
+            # card-only normalization/crop gate and hides the issue from Raquel.
+            raise RunnerError("REC card image is missing from the LazyBlock; do not publish P1. Ask Raquel for the correct card image or repair the REC card image first.")
 
         country = site.get("country", "gb"); vertical = (site.get("verticals") or ["cc"])[0]
         inferred_target_slug = f"apply-now-{country}-{vertical}-{card_slug}"
