@@ -7,6 +7,8 @@ description: Generates a REC (Recommendation) article for a credit card — fetc
 
 ## Session-learned references
 
+- `references/p1-official-source-and-card-image-hard-gates-2026-05-24.md` — P1 publication hard gates from the Lloyds incident: official URLs must expose usable product content, REC LazyBlock card image must not be silently replaced by cache/manual/external media, and failures require asking Raquel/Rodolfo for the correct link/image before publishing.
+
 - `references/p1-official-page-js-fallback-2026-05-22.md` — P1 runner fallback for JS-heavy official issuer pages: use source-confirmed explicit facts, keep runner deterministic, update existing P1 with `--update-post-id`, and clean up replacement featured media.
 
 - `references/manual-card-image-validation-and-teardown.md` — manual card image override rules, strict LazyBlock visual validation, checkerboard/canvas pitfalls, controlled card-only enhancement, and safe teardown checklist for benchmark/test RECs.
