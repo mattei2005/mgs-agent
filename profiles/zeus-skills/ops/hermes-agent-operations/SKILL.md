@@ -297,6 +297,7 @@ Esta umbrella absorveu as antigas skills especializadas abaixo. Conteúdo detalh
 - `references/hermes-update-post-update-validation.md`
 - `references/hermes-update-pre-update-review.md`
 - `references/hermes-update-2026-05-16-mgs-relevance.md`
+- `references/mgs-full-maintenance-validation-and-npm-manual-update.md` — full post-maintenance validation checklist + safe manual npm replacement/rollback pattern
 - `references/hermes-web-tooling-original-skill.md`
 - `references/hermes-web-tooling-2026-05-17.md`
 - `references/hermes-web-brave-search-mgs-2026-05-17.md`
