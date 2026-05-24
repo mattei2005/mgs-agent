@@ -230,17 +230,38 @@ def official_source_has_content(official_url: str, text: str) -> Tuple[bool, str
     return True, "ok"
 
 
-def preflight_official_source(official_url: str) -> None:
+def fetch_official_source_text(official_url: str) -> Tuple[int, str, str]:
+    """Fetch official product text, using a reader fallback for issuer geo/bot error shells.
+
+    The canonical URL remains the issuer URL. The reader is only a rendering aid
+    for the same official URL and must still expose product content.
+    """
     rec = load_rec_helpers()
     status, text = rec.fetch_reference_text(official_url)
+    has_content, _ = official_source_has_content(official_url, text)
+    if has_content:
+        return status, text, official_url
+    reader_url = "https://r.jina.ai/http://" + official_url
+    try:
+        r = requests.get(reader_url, timeout=35, headers={"User-Agent": "Mozilla/5.0"})
+        if r.status_code < 400:
+            ok, _reason = official_source_has_content(official_url, r.text)
+            if ok:
+                return r.status_code, r.text, reader_url
+    except Exception:
+        pass
+    return status, text, official_url
+
+
+def preflight_official_source(official_url: str) -> None:
+    status, text, source_fetch_url = fetch_official_source_text(official_url)
     has_content, source_reason = official_source_has_content(official_url, text)
     if not has_content:
         raise RunnerError(f"Official source URL has no usable product content; ask Raquel/Rodolfo for the correct official link before publishing. url={official_url} reason={source_reason}")
 
 
 def extract_official_data(card_name: str, official_url: str, explicit_benefits: List[str], annual_fee: Optional[str], apr: Optional[str]) -> Dict[str, Any]:
-    rec = load_rec_helpers()
-    status, text = rec.fetch_reference_text(official_url)
+    status, text, source_fetch_url = fetch_official_source_text(official_url)
     has_content, source_reason = official_source_has_content(official_url, text)
     if not has_content:
         raise RunnerError(f"Official source URL has no usable product content; ask Raquel/Rodolfo for the correct official link before publishing. url={official_url} reason={source_reason}")
