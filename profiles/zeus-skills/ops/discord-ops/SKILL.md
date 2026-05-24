@@ -42,9 +42,11 @@ Regra principal: **em thread compartilhada com Rodolfo + mais de um agente, não
 
 #### Review de alinhamento entre agentes, sem acordar bots
 
-Quando Rodolfo pedir para comparar a mensagem de Zeus com a de Atena/Ares/outro agente na mesma thread:
+Quando Rodolfo pedir para comparar, acompanhar ou validar a resposta de Zeus/Atena/Ares/outro agente na mesma thread:
 - Não mencionar o outro bot; usar texto simples (`Atena`, `Zeus`).
-- Importar/ler a thread em modo read-only se a mensagem do outro agente não estiver no contexto ativo.
+- Primeiro importar/ler a thread em modo read-only se a mensagem do outro agente não estiver no contexto ativo **ou se houver qualquer chance de ela já ter chegado enquanto Zeus processava**. Não postar “aguardando/monitor ativo” antes de fazer essa checagem.
+- Se Rodolfo disser “acompanhe a resposta quando ela responder”, trate como uma tarefa de observação: checar a thread atual primeiro; só configurar monitor se a resposta ainda não existir de fato. Se configurar monitor/cron, remover assim que a resposta for capturada ou se o usuário apontar que já respondeu.
+- Evitar resposta prematura que concorra com a resposta do outro agente. O fluxo correto é: ler estado atual da thread → avaliar mensagem existente → responder com veredito; não anunciar que vai avaliar depois quando a evidência já está disponível.
 - Responder ao Rodolfo com uma matriz curta de alinhamento: `Ponto | Agente A disse | Agente B disse | Alinhamento`.
 - Separar consenso de diferença operacional. Exemplo: “Atena falou como dona do processo; Zeus trouxe evidência técnica e patch concreto.”
 - Se houver divergência, declarar a decisão recomendada sem iniciar conversa agente→agente.
