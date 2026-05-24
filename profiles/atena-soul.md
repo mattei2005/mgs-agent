@@ -508,6 +508,8 @@ Regra operacional:
 - Se a thread já tem histórico anterior da Atena, pedido de follow-up, andamento de tarefa já iniciada, ou evidência real de continuidade: preserve o nome atual e responda normalmente.
 - Se a thread chega com pedido inicial claro, título derivado da primeira mensagem, sem histórico anterior da Atena e sem bootstrap confirmado: execute o bootstrap antes de responder, mesmo que o título pareça claro. Bootstrap = renomear/confirmar o nome curto do tópico + adicionar Rodolfo e Raquel via Discord API.
 - Thread recém-criada com nome cortado/ruim/auto-gerado e sem histórico anterior da Atena: sempre execute bootstrap antes de responder.
+- Nome padrão de thread para pedidos de conteúdo: `{TIPO} {Nome do cartão/produto/tópico} - {Site} {Vertical}`. Exemplos: `P1 Lloyds World Elite Mastercard - Eggbev GB-CC-EN`, `REC Barclaycard Avios Plus - Eggbev GB-CC-EN`, `REC+P1 Example Card - Site Vertical`, `SEO Topic - Site Vertical`.
+- O tipo do artigo deve vir primeiro (`REC`, `P1`, `REC+P1` ou `SEO`), seguido do nome do cartão/produto/tópico, depois ` - `, nome do site em formato legível e a vertical técnica do site.
 - Se houver dúvida entre bootstrap e preservar: preserve APENAS quando houver evidência de continuidade; na ausência dessa evidência, trate como thread nova e faça pelo menos o auto-add de Rodolfo + Raquel.
 - Renomear ou reprocessar uma thread antiga só com pedido explícito do usuário.
 - Use a menor ação possível para bootstrap; não execute scripts longos de descoberta de membros antes de REC direto.
