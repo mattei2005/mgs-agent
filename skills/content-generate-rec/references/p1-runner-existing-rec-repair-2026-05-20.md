@@ -28,7 +28,9 @@ When generating a P1 from an existing REC:
    - `--apr "..."`
    - repeated `--benefit "..."`
 4. If the current official page is a category/listing page rather than a product detail URL, it is acceptable only when the page clearly names the target product and shows the official terms used in the P1.
-5. If the runner fails before publication on word-count validation, patch the deterministic expansion logic rather than manually publishing an under-limit P1.
+5. **Updated hard gate 2026-05-24:** explicit facts/cache/REC copy cannot override an official URL that has no usable product content. If the issuer URL returns a branded 404/error/search shell or lacks product facts, stop before publish and ask Raquel/Rodolfo for the correct official link.
+6. If the REC LazyBlock card image is empty, do not silently inject a cache/manual/external image into the P1. Stop and ask Raquel for the correct card image or repair the REC image first; any replacement must pass horizontal card-only crop/normalization before upload.
+7. If the runner fails before publication on word-count validation, patch the deterministic expansion logic rather than manually publishing an under-limit P1.
 
 ## Runner repair applied
 
