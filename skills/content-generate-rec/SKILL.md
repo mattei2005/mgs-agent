@@ -7,6 +7,8 @@ description: Generates a REC (Recommendation) article for a credit card — fetc
 
 ## Session-learned references
 
+- `references/rec-p1-global-editorial-alignment-2026-05-26.md` — REC+P1 orchestration rule from Rodolfo: the pair needs global editorial planning/validation; REC gets the strongest confirmed benefits and main attention hooks, while P1 complements and expands without conflicting or duplicating.
+
 - `references/p1-official-source-and-card-image-hard-gates-2026-05-24.md` — P1 publication hard gates from the Lloyds incident: official URLs must expose usable product content, REC LazyBlock card image must not be silently replaced by cache/manual/external media, and failures require asking Raquel/Rodolfo for the correct link/image before publishing.
 
 - `references/p1-official-page-js-fallback-2026-05-22.md` — P1 runner fallback for JS-heavy official issuer pages: use source-confirmed explicit facts, keep runner deterministic, update existing P1 with `--update-post-id`, and clean up replacement featured media.
