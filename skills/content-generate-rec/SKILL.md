@@ -7,11 +7,15 @@ description: Generates a REC (Recommendation) article for a credit card — fetc
 
 ## Session-learned references
 
+- `references/rec-p1-publish-sequential-orchestration-2026-05-26.md` — Rodolfo correction: when REC+P1 is requested as published and inputs are complete, publish the REC first, then publish the P1 from the REC URL; do not block or reduce to REC-only.
+
 - `references/rec-p1-global-editorial-alignment-2026-05-26.md` — REC+P1 orchestration rule from Rodolfo: the pair needs global editorial planning/validation; REC gets the strongest confirmed benefits and main attention hooks, while P1 complements and expands without conflicting or duplicating.
 
 - `references/rec-p1-runner-audit-hard-gates-2026-05-26.md` — Runner audit findings from repeated REC/P1 mistakes: `Review` must be a hard blocker, competitors cannot be hardcoded, REC public verification must prove CTA/source/images instead of only HTTP 200, Yoast score failures must not be reported as clean success, and deterministic local fallback must not hide generic editorial copy.
 
-- `references/vitality-rec-p1-low-res-manual-card-and-draft-p1-2026-05-26.md` — Vitality Amex REC+P1 benchmark lessons: explicit user-approved low-res manual card exceptions, Amex rendered extraction via Playwright locator text, draft REC `?p=<id>` handoff to P1 via authenticated REST, and draft public-verification semantics.
+- `references/vitality-rec-p1-card-copy-meta-punctuation-2026-05-26.md` — Rodolfo correction from the Vitality REC+P1 draft: meta descriptions need clean final punctuation, card `texto` should be short/commercial and end with a period, card tags must be one real benefit each, and generic tags such as `Card features` are blocked.
+
+- `references/p1-official-source-and-card-image-hard-gates-2026-05-24.md`
 
 - `references/p1-official-source-and-card-image-hard-gates-2026-05-24.md` — P1 publication hard gates from the Lloyds incident: official URLs must expose usable product content, REC LazyBlock card image must not be silently replaced by cache/manual/external media, and failures require asking Raquel/Rodolfo for the correct link/image before publishing.
 
@@ -68,6 +72,12 @@ Argument mapping pitfall:
 Operational rule (hard gate):
 - If the user provides site, REC type, exact card name, status, and official URL,
   call `mgs-rec-runner.py` directly and return the JSON summary.
+- If the user asks for REC+P1 with status published/publish and provides site,
+  card/product, and official URL, treat it as two sequential jobs: publish the
+  REC first with `mgs-rec-runner.py`, then publish the P1 with
+  `mgs-p1-runner.py --rec-url <published_rec_url> --official-url <official_url>`.
+  Do not block just because REC+P1 is a combined ask, and do not silently reduce
+  the request to REC-only. See `references/rec-p1-publish-sequential-orchestration-2026-05-26.md`.
 - Treat the rest of this SKILL.md as implementation reference, not as a checklist
   to manually execute during normal publishing.
 - Do not manually repeat Steps 1-14 unless the runner fails with a clear error.
