@@ -7,7 +7,10 @@ description: Generates a REC (Recommendation) article for a credit card — fetc
 
 ## Session-learned references
 
+- `references/rec-p1-card-image-competitor-descriptor-hard-gates-2026-05-26.md` — Rodolfo correction: LazyBlock card images must be card-only with no external background/moldura; REC comparative tables need real competitor cards/facts, never generic placeholders; card `texto` must be commercial and benefit-led, not generic issuer/account wording.
+
 - `references/article-final-summary-format-rodolfo-2026-05-26.md` — Rodolfo-approved final Discord summary format for REC, P1 and REC+P1. Use this exact emoji/line-break/order template after runner completion; replace only the placeholder values with real data.
+- `references/article-final-summary-renderer-2026-05-26.md` — Deterministic renderer workflow for final article summaries: runner JSON → `/root/mgs-agent/scripts/render-article-summary.py` → paste exact Discord output. Use for REC, P1 and REC+P1 instead of hand-formatting.
 
 - `references/rec-p1-publish-sequential-orchestration-2026-05-26.md` — Rodolfo correction: when REC+P1 is requested as published and inputs are complete, publish the REC first, then publish the P1 from the REC URL; do not block or reduce to REC-only.
 
@@ -782,6 +785,21 @@ and embedding the full media object including `description.rendered` and
 - `tag10` — first short benefit tag (≤25 chars). Must be one real benefit/feature only; no semicolons, commas, or combined facts. Never use generic labels such as `Card features`, `Card benefits`, or `Credit card`.
 - `tag2` — second short benefit tag (≤25 chars). Same rule: one real benefit/feature only; no semicolons, commas, or combined facts.
 - `texto` — the short descriptor sentence (ideal ≤70 chars, hard cap 100 chars). Must be commercial/attractive, mention a real differentiator, and end with a period.
+
+### Yoast Readability hard gate for REC
+
+After creating, editing, publishing, or manually repairing a REC, always run the Yoast scorer and treat Readability `<71` as not ready. Do not mark the article final while Readability is yellow/red.
+
+If Readability is `<71`, repair before final reporting:
+- Preserve all LazyBlocks exactly.
+- Rewrite only visible paragraphs/table copy.
+- Keep REC word count 450–500 and subtitle ≤100 chars.
+- Target transition words at ~25–33% of sentences.
+- Convert avoidable passive voice into active phrasing.
+- Compact comparison/table cells so Yoast does not read them as long pseudo-sentences.
+- Re-run `validate-article.sh` on the exact final body, update WordPress, then run `yoast-score-post.sh` until Readability is green.
+
+Detailed example: see `yoast-wordpress/references/rec-readability-repair-2026-05-26.md`.
 - `botao-texto` — `"How to Apply"`
 - `siteXfora` — `"You will remain on this website."`
 - `botao-url` — `"https://{domain}/apply-now-{country}-{vertical}-{card-slug}/"`

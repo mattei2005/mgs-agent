@@ -701,7 +701,7 @@ def card_ui_descriptor(card_data: Dict[str, Any], fallback: str) -> str:
     joined = " ".join(benefits).lower()
     if "cashback" in joined:
         desc = "Earn cashback on eligible purchases."
-    elif "avios" in joined or "travel" in joined:
+    elif any(term in joined for term in ["avios", "travel", "points", "marriott", "bonvoy", "elite night"]):
         desc = "Earn travel rewards on eligible spend."
     elif "no annual fee" in joined or "no fee" in joined:
         desc = "A no-annual-fee card for everyday spend."
@@ -720,15 +720,30 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     apr = esc_text(card_data.get("apr") or "N/A")
     apr_display = esc_text(shorten_words(card_data.get("apr") or "N/A", 8))
     benefits = [str(b).strip() for b in (card_data.get("benefits") or []) if str(b).strip()]
-    competitors = [c.get("name") if isinstance(c, dict) else str(c) for c in (card_data.get("competitors") or [])]
-    competitors = [c.strip() for c in competitors if c and str(c).strip()]
-    comp_a = esc_text(competitors[0] if len(competitors) > 0 else "another card in the same segment")
-    comp_b = esc_text(competitors[1] if len(competitors) > 1 else "a second comparable card")
+    raw_competitors = card_data.get("competitors") or []
+    competitor_rows = []
+    for c in raw_competitors:
+        if isinstance(c, dict):
+            cname = str(c.get("name") or "").strip()
+            cfee = str(c.get("annual_fee") or c.get("fee") or "").strip()
+            cbenefit = str(c.get("benefit") or c.get("key_benefit") or c.get("positioning") or "").strip()
+        else:
+            cname, cfee, cbenefit = str(c).strip(), "", ""
+        if cname and not re.search(r"another card|second comparable|same segment", cname, re.I):
+            competitor_rows.append({"name": cname, "annual_fee": cfee, "benefit": cbenefit})
+    if len(competitor_rows) < 2:
+        raise RunnerError("REC Comparative Table requires two real same-segment competitor cards; generic placeholders are blocked")
+    comp_a = esc_text(competitor_rows[0]["name"])
+    comp_b = esc_text(competitor_rows[1]["name"])
+    comp_a_fee = esc_text(competitor_rows[0].get("annual_fee") or "Check issuer terms")
+    comp_b_fee = esc_text(competitor_rows[1].get("annual_fee") or "Check issuer terms")
+    comp_a_note = esc_text(shorten_words(competitor_rows[0].get("benefit") or "Real same-segment comparison option", 10))
+    comp_b_note = esc_text(shorten_words(competitor_rows[1].get("benefit") or "Real same-segment comparison option", 10))
     primary_benefit = esc_text(shorten_words(benefits[0] if benefits else "key credit card features", 12))
     second_benefit = esc_text(shorten_words(benefits[1] if len(benefits) > 1 else "account management tools", 12))
     third_benefit = esc_text(shorten_words(benefits[2] if len(benefits) > 2 else "everyday payment flexibility", 12))
     benefit_phrase = esc_text(shorten_words(sentence_join(benefits, 3), 10))
-    descriptor = card_data.get("descriptor") or f"A UK credit card with {annual_fee.lower()} and practical account features."
+    descriptor = card_data.get("descriptor") or primary_benefit
     card_data["tag10"] = card_ui_tag(card_data.get("tag10") or primary_benefit, "Cashback rewards")
     card_data["tag2"] = card_ui_tag(card_data.get("tag2") or annual_fee, "No annual fee")
     card_data["descriptor"] = card_ui_descriptor(card_data, descriptor)
@@ -736,8 +751,8 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     rows = []
     for label, fee, note in [
         (name, annual_fee, primary_benefit),
-        (comp_a, "Varies", "Compare eligibility, APR and fees before applying"),
-        (comp_b, "Varies", "Compare benefits and repayment terms carefully"),
+        (comp_a, comp_a_fee, comp_a_note),
+        (comp_b, comp_b_fee, comp_b_note),
     ]:
         rows.append(f"<tr><td>{label}</td><td>{esc_text(fee)}</td><td>{esc_text(note)}</td></tr>")
     table = "".join(rows)

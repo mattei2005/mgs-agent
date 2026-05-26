@@ -433,7 +433,7 @@ def card_ui_descriptor(card_data: Dict[str, Any], fallback: str) -> str:
     joined = " ".join(benefits).lower()
     if "cashback" in joined:
         desc = "Earn cashback on eligible purchases."
-    elif "avios" in joined or "travel" in joined:
+    elif any(term in joined for term in ["avios", "travel", "points", "marriott", "bonvoy", "elite night"]):
         desc = "Earn travel rewards on eligible spend."
     elif "no annual fee" in joined or "no fee" in joined:
         desc = "A no-annual-fee card for everyday spend."
