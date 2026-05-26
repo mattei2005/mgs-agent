@@ -9,6 +9,10 @@ description: Generates a REC (Recommendation) article for a credit card — fetc
 
 - `references/rec-p1-global-editorial-alignment-2026-05-26.md` — REC+P1 orchestration rule from Rodolfo: the pair needs global editorial planning/validation; REC gets the strongest confirmed benefits and main attention hooks, while P1 complements and expands without conflicting or duplicating.
 
+- `references/rec-p1-runner-audit-hard-gates-2026-05-26.md` — Runner audit findings from repeated REC/P1 mistakes: `Review` must be a hard blocker, competitors cannot be hardcoded, REC public verification must prove CTA/source/images instead of only HTTP 200, Yoast score failures must not be reported as clean success, and deterministic local fallback must not hide generic editorial copy.
+
+- `references/vitality-rec-p1-low-res-manual-card-and-draft-p1-2026-05-26.md` — Vitality Amex REC+P1 benchmark lessons: explicit user-approved low-res manual card exceptions, Amex rendered extraction via Playwright locator text, draft REC `?p=<id>` handoff to P1 via authenticated REST, and draft public-verification semantics.
+
 - `references/p1-official-source-and-card-image-hard-gates-2026-05-24.md` — P1 publication hard gates from the Lloyds incident: official URLs must expose usable product content, REC LazyBlock card image must not be silently replaced by cache/manual/external media, and failures require asking Raquel/Rodolfo for the correct link/image before publishing.
 
 - `references/p1-official-page-js-fallback-2026-05-22.md` — P1 runner fallback for JS-heavy official issuer pages: use source-confirmed explicit facts, keep runner deterministic, update existing P1 with `--update-post-id`, and clean up replacement featured media.
@@ -49,7 +53,7 @@ Default command shape:
 Manual image override is mandatory when present in the user request. If the user provides `Imagem do cartão:`, `Imagem manual:`, `card image:`, or any direct image URL, pass it through as `--card-image-url`; automatic search is only valid when no manual image URL was supplied. If the request contains a labelled official/source URL plus a second standalone image URL, treat that second URL as the card image override even if the user did not label it explicitly. The final JSON must show `images.card_selection.mode == manual_card_image_url`; if it does not, do not report the REC as clean — repair the same draft or rerun only with `--card-image-url` when creating a new post.
 
 Two-path image rule:
-- **Path A — user supplied card image:** use the supplied URL as the source of truth, but NEVER upload it raw to the LazyBlock. First normalize it into the fixed LazyBlock card standard: card-only PNG, transparent/no external background, no people, no props, no frames, no shadows, no composition, no large empty canvas, centered, high quality, and always horizontal. If the source is portrait/vertical, rotate/adapt to horizontal and crop to the card bounds while preserving the original card identity/design/colours. Do not run automatic image search unless the manual source fails quality gates and the user approves fallback. Featured image must be contextual/lifestyle and must use the same validated horizontal card design; it must not become a card-only/huge isolated card mockup.
+- **Path A — user supplied card image:** use the supplied URL as the source of truth, but NEVER upload it raw to the LazyBlock. First normalize it into the fixed LazyBlock card standard: card-only PNG, transparent/no external background, no people, no props, no frames, no shadows, no composition, no large empty canvas, centered, high quality, and always horizontal. If the source is portrait/vertical, rotate/adapt to horizontal and crop to the card bounds while preserving the original card identity/design/colours. Do not run automatic image search unless the manual source fails quality gates and the user approves fallback. Featured image must be contextual/lifestyle and must use the same validated horizontal card design; it must not become a card-only/huge isolated card mockup. If the manual source is below the normal source-quality threshold (for example useful crop width under 600px), stop by default. Only continue with that same low-res manual image when Rodolfo/Raquel explicitly approve it as a visual benchmark; mark the run as a user-approved exception, keep the warning in the summary, and do not treat it as a canonical rule change until they confirm the result is acceptable.
 - **Path B — no card image supplied:** use the runner's automatic image search/ranking, but the exact same fixed LazyBlock standard applies before upload: card-only PNG, transparent/no external background, no people, no props, no frames, no shadows, no composition, no large empty canvas, centered, high quality, and always horizontal. Prefer official or authoritative isolated card artwork. Validate horizontal orientation, legibility, and card identity. Report the selected source, card image URL/ID, and featured image URL/ID in the final summary.
 
 Hard gate for every LazyBlock card image, independent of origin: never upload a raw source image directly. The accepted output is only the normalized card-only asset. A raw manual image, a lifestyle image, a portrait card, a card inside a banner, or a card with large empty space is a pipeline failure until normalized or rejected.
@@ -461,7 +465,7 @@ Esta regra eh apenas para o cenario "URL fornecida" (preferred workflow).
   - 2 short benefit tags for LazyBlock (`tag10`, `tag2` — max ~25 chars each)
   - One short card descriptor sentence for LazyBlock `texto` field (50–100 chars)
 - Identify 2 real competitor cards from the same country/segment
-  (for the Comparative Table section).
+  (for the Comparative Table section). Competitors must come from the official/source research, cache, explicit user/runner arguments, or a vetted same-segment candidate scan. **Never inject fixed fallback competitors** such as Barclaycard/Tesco just to fill the table; if real competitors are not available, use neutral comparison language or stop for better inputs.
 
 > **PITFALL — major bank sites block curl/Python (CRITICAL):** Large UK/US
 > banks (HSBC, Barclays, Lloyds, etc.) deploy bot-detection that returns
@@ -752,9 +756,9 @@ and embedding the full media object including `description.rendered` and
   Apply `encodeURIComponent` to the JSON string before embedding.
 - `categoria` — `"{default_category}"` from sites.json (e.g. "Credit Card")
 - `titulo` — exact card_name
-- `tag10` — first short benefit tag (≤25 chars)
-- `tag2` — second short benefit tag (≤25 chars)
-- `texto` — the short descriptor sentence (50–100 chars)
+- `tag10` — first short benefit tag (≤25 chars). Must be one real benefit/feature only; no semicolons, commas, or combined facts. Never use generic labels such as `Card features`, `Card benefits`, or `Credit card`.
+- `tag2` — second short benefit tag (≤25 chars). Same rule: one real benefit/feature only; no semicolons, commas, or combined facts.
+- `texto` — the short descriptor sentence (ideal ≤70 chars, hard cap 100 chars). Must be commercial/attractive, mention a real differentiator, and end with a period.
 - `botao-texto` — `"How to Apply"`
 - `siteXfora` — `"You will remain on this website."`
 - `botao-url` — `"https://{domain}/apply-now-{country}-{vertical}-{card-slug}/"`
@@ -799,10 +803,12 @@ secao "SEO FIELDS") - ver template carregado em Step 1.
 
 | Campo | Limite |
 |---|---|
-| `post_title` | max 60 chars, contem focus keyphrase, SEM suffix de site; NUNCA vazio |
+| `post_title` | max 60 chars, contem focus keyphrase, SEM suffix de site; NUNCA vazio; NUNCA contém `Review` |
 | `_yoast_wpseo_title` | DEIXAR VAZIO (Yoast inherita global template do site) |
-| `_yoast_wpseo_metadesc` | 120-130 chars (sweet spot 128), focus keyphrase nos primeiros 100 chars |
+| `_yoast_wpseo_metadesc` | 120-130 chars (sweet spot 128), focus keyphrase nos primeiros 100 chars; NUNCA contém `Review`; must end with clean punctuation (`.` preferred, `...` only if unavoidable); never allow broken punctuation like `.,...`, `,...`, `..`, or lowercase sentence starts after a period |
 | `_yoast_wpseo_focuskw` | max 4 palavras, aparece em title + metadesc + 1o paragrafo |
+
+> **PITFALL — `Review` é bloqueio, não preferência:** Rodolfo corrigiu repetidamente que REC/P1 não devem usar a palavra `Review`. Antes de publicar ou reportar sucesso, validar `post_title`, subtítulo/excerpt e meta description case-insensitively. Se qualquer campo contiver `Review`, reparar antes de publicar; não chamar o artigo de validado.
 
 > **PITFALL — post title blank can pass Yoast:** `_yoast_wpseo_title` should
 > normally stay empty for global-template inheritance, but this does **not** mean
@@ -941,6 +947,8 @@ For any article summary requested by Rodolfo (REC, P1, REC+P1, SEO, any site), u
 Reference: `references/rodolfo-article-summary-format-2026-05-22.md` captures the correction log and pre-send checklist from the repeated P1 summary-format failures. Load it if there is any doubt about the approved model.
 
 **P1 hard gate:** after `mgs-p1-runner.py` returns JSON, save that JSON and run `/root/mgs-agent/skills/content-generate-rec/scripts/render-p1-summary.py <json_file>`. Use the rendered output as the final Discord reply. Do not manually reorder or rewrite the final P1 summary from memory. This is mandatory because Rodolfo corrected multiple consecutive P1 threads where the publication succeeded but Atena changed the requested summary order/shape.
+
+**P1 from draft REC:** if the REC source is still a draft, its public permalink may be `https://site/?p=<id>` and unauthenticated public GET can return 404. The P1 runner/workflow must parse the `p` post ID and load the REC through authenticated WP REST instead of treating the public 404 as a missing REC. For draft outputs, label URLs as draft/future permalinks and do not use public 404 as a hard failure; keep strict public verification for `publish`.
 
 **P1 official-source hard gate:** do not publish a P1 when the official/source URL has no usable product content. HTTP 200 is not enough: branded "Page not found", issuer error shells, geo-block pages, empty bodies, search pages, or pages without product facts are failures. Stop before publication and ask Raquel in the thread to send the correct official link. Explicit facts, cache data, REC copy, or secondary sources must not override a dead official URL for a publish run.
 
@@ -1108,6 +1116,8 @@ All actions append to `/root/mgs-agent/logs/generate-rec.log`.
 - Gemini composition fails after 2 retries → abort
 - WP publish failure → log full response, abort
 - Yoast verify mismatch → log and surface to user (post still exists, but meta needs manual fix)
+- Yoast scorer failed or returned poor scores for a publication-quality request → do **not** report the article as clean/fully validated. Distinguish `Yoast meta saved` from `Yoast score green`; repair or report the exception explicitly.
+- Public verify only confirms HTTP 200/bytes → insufficient for a clean success report. Verify rendered CTA/source URL, expected card image, featured image, and public availability where applicable before calling REC/P1 validated.
 
 ### Step 14 - Cost reporting (mandatory after publish)
 

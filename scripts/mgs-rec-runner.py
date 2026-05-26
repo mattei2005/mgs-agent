@@ -34,6 +34,7 @@ TERM_CACHE_JSON = ROOT / "data/wp-term-cache.json"
 GEN_SCRIPTS = ROOT / "skills/content-generate-rec/scripts"
 REC_TEMPLATES = ROOT / "skills/content-generate-rec/templates"
 WP_SCRIPTS = ROOT / "skills/content-publish-wordpress/scripts"
+FEATURED_AUDIT_SCRIPT = ROOT / "scripts/audit-featured-image.py"
 API_URL = "http://127.0.0.1:8001/generate"
 HEALTH_URL = "http://127.0.0.1:8001/health"
 
@@ -160,9 +161,98 @@ def fetch_reference_text(url: str) -> Tuple[int, str]:
         with urllib.request.urlopen(req, timeout=20) as r:
             status = getattr(r, "status", 200)
             body = r.read(1_500_000).decode("utf-8", errors="ignore")
-            return status, strip_html_to_text(body)
+            text = strip_html_to_text(body)
+            if len(text) < 500 and "americanexpress.com" in url.lower():
+                try:
+                    from playwright.sync_api import sync_playwright
+                    with sync_playwright() as p:
+                        browser = p.chromium.launch(headless=True)
+                        context = browser.new_context(
+                            user_agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                            viewport={"width": 1366, "height": 1000},
+                        )
+                        page = context.new_page()
+                        page.goto(url, wait_until="domcontentloaded", timeout=45000)
+                        for label in ("Accept All", "Accept all", "I Accept"):
+                            try:
+                                page.get_by_role("button", name=label).click(timeout=2500)
+                                break
+                            except Exception:
+                                pass
+                        page.wait_for_timeout(2000)
+                        rendered = page.locator("body").inner_text(timeout=10000) or ""
+                        browser.close()
+                    rendered_text = re.sub(r"\s+", " ", html.unescape(rendered)).strip()[:18000]
+                    if len(rendered_text) > len(text):
+                        return status, rendered_text
+                except Exception:
+                    pass
+            return status, text
     except Exception as e:
         raise RunnerError(f"reference_url fetch failed: {url} ({e})")
+
+
+def meaningful_card_terms(card_name: str) -> List[str]:
+    stop = {"credit", "card", "the", "and", "visa", "mastercard", "platinum", "classic", "gold"}
+    terms = []
+    for word in re.sub(r"[^A-Za-z0-9 ]", " ", card_name).lower().split():
+        if len(word) >= 3 and word not in stop and word not in terms:
+            terms.append(word)
+    return terms[:6]
+
+
+def official_source_has_content(card_name: str, official_url: str, text: str) -> Tuple[bool, str]:
+    """Reject HTTP-200 official pages that are error shells or not product-specific."""
+    clean = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", text or ""))).strip().lower()
+    if not clean or len(clean) < 500:
+        return False, "official source has no meaningful body"
+    error_markers = [
+        "page not found", "we can’t find that page", "we can't find that page",
+        "sorry about this", "try our search tool", "we are sorry an error has occurred",
+        "error 1007", "access denied", "cloudflare", "temporarily unavailable",
+    ]
+    for marker in error_markers:
+        if marker in clean:
+            return False, f"official source appears to be an error page: {marker}"
+    product_terms = [
+        "credit card", "representative apr", "annual fee", "monthly fee", "balance transfer",
+        "purchase rate", "eligibility", "apply", "rewards", "cashback", "avios", "mastercard", "visa",
+    ]
+    product_hits = [t for t in product_terms if t in clean]
+    name_terms = meaningful_card_terms(card_name)
+    name_hits = [t for t in name_terms if t in clean]
+    if len(product_hits) < 2:
+        return False, "official source does not expose enough product content"
+    if name_terms and not name_hits:
+        return False, "official source does not mention the requested product/issuer terms"
+    return True, "ok"
+
+
+def validate_no_review(fields: Dict[str, str]) -> None:
+    offenders = [name for name, value in fields.items() if re.search(r"\breview\b", value or "", flags=re.I)]
+    if offenders:
+        raise RunnerError("Review hard gate failed in " + ", ".join(offenders))
+
+
+def validate_taxonomy_names(tag_names: List[str], expected_lang: str) -> None:
+    bad = [t for t in tag_names if "-" in t]
+    if bad:
+        raise RunnerError(f"Tag names must use spaces, not hyphens: {bad}")
+    required = {"atena_agent", f"lang_{expected_lang}"}
+    missing = sorted(required - set(tag_names))
+    if missing:
+        raise RunnerError(f"Missing mandatory tags: {missing}")
+
+
+def validate_yoast_score(score: Dict[str, Any]) -> None:
+    if not score or score.get("status") not in {"ok", "success", "OK"}:
+        raise RunnerError(f"Yoast scorer failed or returned non-ok status: {score}")
+    seo = score.get("seo_score")
+    read = score.get("readability_score")
+    if seo is None or read is None:
+        raise RunnerError(f"Yoast scorer missing scores: {score}")
+    if int(seo) < 70 or int(read) < 70:
+        raise RunnerError(f"Yoast scores below green threshold: seo={seo} readability={read}")
 
 
 def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Dict[str, Any]:
@@ -229,7 +319,7 @@ def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Di
         # Conservative fallback still derived from the source page URL/name; do
         # not claim specific rates that were not extracted.
         benefits.extend([
-            f"Review the official {card_name} page before applying.",
+            f"Check the official {card_name} page before applying.",
             "Check eligibility, fees and repayment terms before submitting an application.",
             "Use the issuer's online account tools to manage the card if approved.",
         ])
@@ -245,7 +335,7 @@ def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Di
         "annual_fee": annual_fee,
         "apr": apr,
         "benefits": benefits,
-        "competitors": [{"name": "Barclaycard Platinum"}, {"name": "Tesco Bank Credit Card"}],
+        "competitors": [],
         "tag10": tag10[:25],
         "tag2": tag2[:25],
         "descriptor": descriptor[:100],
@@ -284,9 +374,9 @@ def lazy_credit_card(card_name: str, card_id: Optional[int], card_url: Optional[
         "imagem": build_media_payload(card_id, card_url, f"card-{card_slug}"),
         "categoria": site.get("default_category", "Credit Card"),
         "titulo": card_name,
-        "tag10": (card_data.get("tag10") or "Card benefits")[:25],
-        "tag2": (card_data.get("tag2") or card_data.get("annual_fee") or "Credit card")[:25],
-        "texto": (card_data.get("descriptor") or f"Learn more about the {card_name}.")[:100],
+        "tag10": card_ui_tag(card_data.get("tag10"), "Cashback rewards"),
+        "tag2": card_ui_tag(card_data.get("tag2") or card_data.get("annual_fee"), "No annual fee"),
+        "texto": card_ui_descriptor(card_data, card_data.get("descriptor") or f"Learn more about the {card_name}."),
         "botao-texto": "How to Apply",
         "siteXfora": "You will remain on this website.",
         "botao-url": f"https://{domain}/apply-now-{country}-{vertical}-{card_slug}/",
@@ -581,6 +671,46 @@ def shorten_words(text: str, max_words: int = 12) -> str:
     return " ".join(words[:max_words]).rstrip(" ,;:")
 
 
+def clean_sentence_punctuation(text: str) -> str:
+    text = re.sub(r"\s+", " ", str(text or "")).strip()
+    text = re.sub(r"\s+([,.;:!?])", r"\1", text)
+    text = re.sub(r"([,;:])\s*\.\.\.$", "...", text)
+    text = re.sub(r"\.\s*\.\.\.$", "...", text)
+    text = re.sub(r",\s*\.$", ".", text)
+    text = re.sub(r",\s*\.\.\.$", "...", text)
+    if text and not re.search(r"(\.|!|\?|\.\.\.)$", text):
+        text += "."
+    return text
+
+
+def card_ui_tag(text: Any, fallback: str = "Cashback rewards") -> str:
+    """Short single-benefit LazyBlock tag; never join multiple facts with punctuation."""
+    value = html.unescape(str(text or "")).strip()
+    value = re.split(r"[;,.]|\s+ and \s+", value, maxsplit=1, flags=re.I)[0].strip()
+    value = re.sub(r"\bcard features\b", "", value, flags=re.I).strip()
+    if not value or value.lower() in {"credit card", "card benefits", "features"}:
+        value = fallback
+    value = re.sub(r"\s+", " ", value).strip(" .;:,!")
+    return value[:25].rstrip(" .;:,")
+
+
+def card_ui_descriptor(card_data: Dict[str, Any], fallback: str) -> str:
+    benefits = [str(b) for b in (card_data.get("benefits") or [])]
+    joined = " ".join(benefits).lower()
+    if "cashback" in joined:
+        desc = "Earn cashback on eligible purchases."
+    elif "avios" in joined or "travel" in joined:
+        desc = "Earn travel rewards on eligible spend."
+    elif "no annual fee" in joined or "no fee" in joined:
+        desc = "A no-annual-fee card for everyday spend."
+    else:
+        desc = fallback
+    desc = clean_sentence_punctuation(desc)
+    if len(desc) > 70:
+        desc = desc[:69].rsplit(" ", 1)[0].rstrip(" ,;:") + "."
+    return desc
+
+
 def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict[str, Any]) -> Dict[str, Any]:
     """Generate a deterministic REC article without the deprecated local API."""
     name = esc_text(card_data.get("card_name"))
@@ -597,9 +727,9 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     third_benefit = esc_text(shorten_words(benefits[2] if len(benefits) > 2 else "everyday payment flexibility", 12))
     benefit_phrase = esc_text(shorten_words(sentence_join(benefits, 3), 10))
     descriptor = card_data.get("descriptor") or f"A UK credit card with {annual_fee.lower()} and practical account features."
-    card_data.setdefault("tag10", primary_benefit[:25] or "Card benefits")
-    card_data.setdefault("tag2", annual_fee[:25] if annual_fee != "N/A" else "Credit card")
-    card_data.setdefault("descriptor", descriptor[:100])
+    card_data["tag10"] = card_ui_tag(card_data.get("tag10") or primary_benefit, "Cashback rewards")
+    card_data["tag2"] = card_ui_tag(card_data.get("tag2") or annual_fee, "No annual fee")
+    card_data["descriptor"] = card_ui_descriptor(card_data, descriptor)
 
     rows = []
     for label, fee, note in [
@@ -615,7 +745,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>The {name} is built for applicants who want a clear credit card option. It should be reviewed against budget, eligibility and repayment habits.</p>
+<p>The {name} is built for applicants who want a clear credit card option. It should be checked against budget, eligibility and repayment habits.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -623,7 +753,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>This keeps the review focused on practical value, not unsupported promotional claims or unclear product assumptions.</p>
+<p>This keeps the guide focused on practical value, not unsupported promotional claims or unclear product assumptions.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -740,7 +870,7 @@ def pad_content_to_min_words(content: str, current_count: int, min_count: int = 
     needed = min_count - current_count + 2
     pads = [
         "This supports a clearer comparison for UK readers.",
-        "It also keeps the review focused on practical use.",
+        "It also keeps the guide focused on practical use.",
         "Applicants should still confirm current issuer terms.",
         "That helps avoid unsupported assumptions before applying.",
     ]
@@ -820,12 +950,13 @@ def title_meta_focus(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, st
     else:
         title = f"{focus}: Benefits & Fees"
     if len(title) > 60:
-        title = f"{focus}: Card Review"[:60]
+        title = f"{focus}: Benefits"[:60]
     meta = f"{card_name} offers {', '.join(card_data.get('benefits', ['key benefits'])[:2]).lower()}. See fees, APR and how it works."
     if len(meta) > 130:
-        meta = meta[:127].rsplit(" ", 1)[0] + "..."
+        meta = clean_sentence_punctuation(meta[:127].rsplit(" ", 1)[0] + "...")
     if len(meta) < 120:
-        meta = (meta + " Compare before applying.")[:130]
+        meta = clean_sentence_punctuation((meta + " Compare before applying.")[:130])
+    meta = clean_sentence_punctuation(meta)
     return title, meta, focus
 
 
@@ -922,13 +1053,33 @@ def card_name_issuer(name: str) -> str:
     return ""
 
 
-def public_verify(url: str) -> Dict[str, Any]:
+def public_verify(url: str, *, apply_url: str = "", card_url: str = "", featured_url: str = "") -> Dict[str, Any]:
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        req = urllib.request.Request(url + ("?nocache=1" if "?" not in url else "&nocache=1"), headers={"User-Agent": "Mozilla/5.0", "Cache-Control": "no-cache"})
         with urllib.request.urlopen(req, timeout=20) as r:
-            return {"http_status": getattr(r, "status", 200), "bytes": len(r.read(200000))}
+            body = r.read(500000).decode("utf-8", errors="ignore")
+            status = getattr(r, "status", 200)
+        checks = {
+            "http_status": status,
+            "bytes": len(body),
+            "contains_how_to_apply": "How to Apply" in body or "HOW TO APPLY" in body,
+            "contains_microcopy": "You will remain on this website." in body,
+            "contains_apply_url": bool(apply_url and apply_url in body),
+            "contains_card": bool(card_url and card_url in body),
+            "contains_featured": bool(featured_url and featured_url in body),
+        }
+        checks["ok"] = (
+            status == 200
+            and checks["bytes"] > 5000
+            and checks["contains_how_to_apply"]
+            and checks["contains_microcopy"]
+            and checks["contains_apply_url"]
+            and checks["contains_card"]
+            and checks["contains_featured"]
+        )
+        return checks
     except Exception as e:
-        return {"http_status": 0, "error": str(e)}
+        return {"http_status": 0, "ok": False, "error": str(e)}
 
 
 def cleanup_extra_media(site_key: str, created_media: List[Dict[str, Any]], post_id: Optional[int], used_media_ids: List[int]) -> Dict[str, Any]:
@@ -1062,6 +1213,18 @@ def main() -> int:
                 costs["extract_llm_est"] = 0.0
 
         card_data["card_name"] = card_data.get("card_name") or args.card
+        source_to_check = args.source_url or card_data.get("card_official_url") or ""
+        if source_to_check:
+            t0 = time.time()
+            status_check, source_text = fetch_reference_text(source_to_check)
+            tick("official_source_content_gate_sec", t0)
+            if status_check >= 400:
+                raise RunnerError(f"official source returned HTTP {status_check}: {source_to_check}")
+            source_ok, source_reason = official_source_has_content(card_data["card_name"], source_to_check, source_text)
+            if not source_ok:
+                raise RunnerError(f"Official source URL has no usable product content; ask Raquel/Rodolfo for the correct official link. url={source_to_check} reason={source_reason}")
+            card_data["card_official_url"] = source_to_check
+            steps.append("official_source_content_gate_passed")
         if args.card_image_url:
             # A user-supplied card image is an explicit override. Do not reuse a
             # cached/uploaded card image for the same card, otherwise manual
@@ -1139,6 +1302,7 @@ def main() -> int:
         featured_url = None
         featured_scene = None
         featured_path = None
+        featured_audit = None
 
         if not card_id or not card_url:
             if args.dry_run:
@@ -1195,9 +1359,10 @@ def main() -> int:
                     # but do not use Gemini/AI to recreate an isolated card:
                     # the MBNA incident proved generated card-only assets can
                     # change text, edges, shadows, colours, and brand design.
-                    # If the useful crop is too small, stop before upload and
-                    # require a better source or explicit automatic fallback
-                    # approval outside this runner.
+                    # If the useful crop is too small, stop before upload by
+                    # default. A one-off editorial benchmark can explicitly
+                    # allow the supplied low-res manual image via env var while
+                    # keeping the normal gate strict.
                     suffix = ".png"
                     manual_local = f"/tmp/card-{card_slug}-manual{suffix}"
                     req = urllib.request.Request(
@@ -1218,10 +1383,16 @@ def main() -> int:
                     if manual_pre_upscale_w and int(manual_pre_upscale_w) < 600:
                         card_selection["quality_warning"] = f"useful crop width {manual_pre_upscale_w}px below 600px before upscale"
                         card_selection["quality_status"] = "LOW_QUALITY_SOURCE"
-                        raise RunnerError(
-                            f"manual_card_image_low_quality_source: useful crop width {manual_pre_upscale_w}px below 600px; "
-                            "provide a higher-quality card image or approve automatic fallback"
-                        )
+                        if os.environ.get("MGS_ALLOW_LOW_QUALITY_MANUAL_CARD") == "1":
+                            warnings.append(
+                                f"manual_card_image_low_quality_source_allowed_by_user: useful crop width {manual_pre_upscale_w}px below 600px"
+                            )
+                            steps.append("manual_card_image_low_quality_source_user_approved")
+                        else:
+                            raise RunnerError(
+                                f"manual_card_image_low_quality_source: useful crop width {manual_pre_upscale_w}px below 600px; "
+                                "provide a higher-quality card image or approve automatic fallback"
+                            )
                     steps.append("card_image_manual_url_used")
                 else:
                     img = run_json([str(GEN_SCRIPTS / "search-card-image.sh"), card_data["card_name"], source_url], timeout=180, allow_fail=True)
@@ -1292,6 +1463,19 @@ def main() -> int:
                 raise RunnerError(f"featured image not 16:9 after compression: {w}x{h}")
             tick("featured_local_validate_sec", t0)
             t0 = time.time()
+            featured_audit = run_json([
+                str(FEATURED_AUDIT_SCRIPT),
+                "--featured", featured_path,
+                "--card", card_local,
+                "--mode", "rec",
+                "--card-name", card_data.get("card_name") or args.card,
+                "--require-person",
+            ], timeout=150)
+            tick("featured_semantic_audit_sec", t0)
+            if not featured_audit.get("ok"):
+                raise RunnerError(f"featured_semantic_audit_failed: {featured_audit}")
+            steps.append("featured_semantic_audited")
+            t0 = time.time()
             upf = run_json([str(WP_SCRIPTS / "upload-image.sh"), args.site, featured_path, f"featured-{card_slug}-final.jpg"], timeout=120)
             tick("featured_upload_sec", t0)
             featured_id, featured_url = int(upf["id"]), upf["source_url"]
@@ -1300,6 +1484,7 @@ def main() -> int:
 
         # Rebuild and revalidate the exact final HTML after media IDs/URLs are known.
         content, validation, subtitle_chars = build_and_validate_current("final")
+        validate_no_review({"body": content, "subtitle": visible_subtitle(content)})
         steps.append("content_validated_final")
 
         fingerprint_check: Dict[str, Any] = {}
@@ -1315,8 +1500,9 @@ def main() -> int:
         t0 = time.time()
         title, meta_desc, focus_kw = title_meta_focus(card_data["card_name"], card_data)
         tick("seo_fields_sec", t0)
-        if len(title) > 60 or len(meta_desc) < 120 or len(meta_desc) > 130 or len(focus_kw.split()) > 4:
-            raise RunnerError(f"SEO field validation failed title={len(title)} meta={len(meta_desc)} focus_words={len(focus_kw.split())}")
+        validate_no_review({"title": title, "meta_desc": meta_desc, "focus_kw": focus_kw})
+        if len(title) > 60 or focus_kw.lower() not in title.lower() or len(meta_desc) < 120 or len(meta_desc) > 130 or len(focus_kw.split()) > 4:
+            raise RunnerError(f"SEO field validation failed title={len(title)} meta={len(meta_desc)} focus_words={len(focus_kw.split())} focus_in_title={focus_kw.lower() in title.lower()}")
 
         category_id = None
         tag_ids: List[int] = []
@@ -1331,6 +1517,7 @@ def main() -> int:
         else:
             t0 = time.time()
             category_id, tag_ids, tag_names = resolve_terms(args.site, site, card_slug, card_data, term_cache, term_stats)
+            validate_taxonomy_names(tag_names, site.get("language", "en"))
             tick("wp_resolve_terms_sec", t0)
             if term_stats.get("cache_misses", 0):
                 save_term_cache(term_cache)
@@ -1374,10 +1561,10 @@ def main() -> int:
                 t0 = time.time()
                 yoast_result = run_json([str(GEN_SCRIPTS / "yoast-score-post.sh"), args.site, str(post_id)], timeout=180, allow_fail=True)
                 tick("yoast_score_sec", t0)
+                validate_yoast_score(yoast_result)
             except Exception as e:
                 tick("yoast_score_sec", t0)
-                warnings.append(f"yoast_score_failed: {e}")
-                yoast_result = {"status": "error", "message": str(e)}
+                raise RunnerError(f"yoast_score_failed: {e}")
             steps.append("yoast_scored")
 
             cache_payload = {
@@ -1408,10 +1595,11 @@ def main() -> int:
             tick("cache_save_sec", t0)
             steps.append("cache_saved")
             t0 = time.time()
-            public_check = public_verify(public_url)
+            apply_url = f"https://{site['domain']}/apply-now-{country}-{vertical}-{card_slug}/"
+            public_check = public_verify(public_url, apply_url=apply_url, card_url=card_url or "", featured_url=featured_url or "")
             tick("public_verify_sec", t0)
-            if public_check.get("http_status") != 200:
-                warnings.append(f"public_verify_not_200: {public_check}")
+            if not public_check.get("ok"):
+                raise RunnerError(f"public_verify_failed: {public_check}")
             steps.append("public_verified")
 
             t0 = time.time()
@@ -1442,6 +1630,7 @@ def main() -> int:
             warnings.append(f"sla_warn_runner_over_180s duration_sec={total_duration_sec} slowest={slowest}")
         result = {
             "success": True,
+            "status_detail": "ok_with_non_blocking_warnings" if warnings else "fully_validated",
             "dry_run": args.dry_run,
             "site": args.site,
             "status": args.status,
@@ -1473,6 +1662,7 @@ def main() -> int:
                 "featured_url": featured_url,
                 "featured_scene": featured_scene,
                 "featured_path": featured_path,
+                "featured_audit": featured_audit,
                 "card_source": card_src,
                 "card_selection": card_selection,
                 "card_normalize": card_normalize,

@@ -278,7 +278,9 @@ Examples:
 - MUST mention 2 real benefits of the card (no invented data)
 - Tone: direct, factual, no clickbait, no "click here"
 - British spelling for UK cards
-- No ellipsis, no trailing "..."
+- Always end with a clean sentence-ending punctuation mark: period (`.`) preferred, ellipsis (`...`) acceptable only when unavoidable
+- Never output broken combined punctuation such as `.,...`, `,...`, `..`, `... .`, or lowercase sentence starts after a period
+- No ellipsis, no trailing "..." unless a strict character trim genuinely requires it
 - Count the EXACT character length before finalising — never estimate
 
 Examples:

@@ -32,6 +32,7 @@ CACHE_DB = ROOT / "data/card-cache.db"
 GEN_SCRIPTS = ROOT / "skills/content-generate-rec/scripts"
 WP_SCRIPTS = ROOT / "skills/content-publish-wordpress/scripts"
 REC_RUNNER = ROOT / "scripts/mgs-rec-runner.py"
+FEATURED_AUDIT_SCRIPT = ROOT / "scripts/audit-featured-image.py"
 
 
 class RunnerError(Exception):
@@ -200,37 +201,86 @@ def infer_card_slug(rec_url: str, card_name: str) -> str:
     return re.sub(r"-card$", "", slug)
 
 
-def official_source_has_content(official_url: str, text: str) -> Tuple[bool, str]:
-    """Reject issuer URLs that return a branded error/404/search page.
+def meaningful_card_terms(card_name: str) -> List[str]:
+    stop = {"credit", "card", "the", "and", "visa", "mastercard", "platinum", "classic", "gold"}
+    terms: List[str] = []
+    for word in re.sub(r"[^A-Za-z0-9 ]", " ", card_name).lower().split():
+        if len(word) >= 3 and word not in stop and word not in terms:
+            terms.append(word)
+    return terms[:6]
 
-    A URL can return HTTP 200 while serving an error shell (observed with Lloyds).
-    For P1 publish, explicit facts are not allowed to override a dead official URL:
-    the user/Raquel must provide a live official product/terms source first.
-    """
-    clean = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", text))).strip().lower()
+
+def official_source_has_content(official_url: str, text: str, card_name: str = "") -> Tuple[bool, str]:
+    """Reject issuer URLs that return a branded error/404/search page or generic category page."""
+    clean = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", text or ""))).strip().lower()
     if not clean or len(clean) < 500:
         return False, "official source has no meaningful body"
     error_markers = [
-        "page not found",
-        "we can’t find that page",
-        "we can't find that page",
-        "sorry about this",
-        "try our search tool",
-        "internet banking - error",
-        "we are sorry an error has occurred",
-        "error 1007",
-        "access denied",
+        "page not found", "we can’t find that page", "we can't find that page",
+        "sorry about this", "try our search tool", "internet banking - error",
+        "we are sorry an error has occurred", "error 1007", "access denied",
+        "cloudflare", "temporarily unavailable",
     ]
     for marker in error_markers:
         if marker in clean:
             return False, f"official source appears to be an error page: {marker}"
-    product_terms = [t for t in ["world elite", "mastercard", "credit card", "representative apr", "annual fee", "monthly fee"] if t in clean]
-    if len(product_terms) < 2:
+    product_terms = [
+        "credit card", "representative apr", "annual fee", "monthly fee", "purchase rate",
+        "eligibility", "apply", "rewards", "cashback", "avios", "mastercard", "visa",
+    ]
+    product_hits = [t for t in product_terms if t in clean]
+    if len(product_hits) < 2:
         return False, "official source does not expose enough product content"
+    name_terms = meaningful_card_terms(card_name) if card_name else []
+    if name_terms and not any(t in clean for t in name_terms):
+        return False, "official source does not mention the requested product/issuer terms"
     return True, "ok"
 
 
-def fetch_official_source_text(official_url: str) -> Tuple[int, str, str]:
+def validate_no_review(fields: Dict[str, str]) -> None:
+    offenders = [name for name, value in fields.items() if re.search(r"\breview\b", value or "", flags=re.I)]
+    if offenders:
+        raise RunnerError("Review hard gate failed in " + ", ".join(offenders))
+
+
+def compact_focus(card_name: str) -> str:
+    words = [w for w in re.sub(r"[^A-Za-z0-9 ]", " ", card_name).split() if w.lower() not in {"credit", "card", "the"}]
+    return " ".join(words[:3]) if words else card_name[:40]
+
+
+def validate_seo_fields(title: str, meta: str, focus: str) -> None:
+    validate_no_review({"title": title, "meta": meta, "focus": focus})
+    if len(title) > 60 or not title.strip():
+        raise RunnerError(f"P1 title length invalid: {len(title)}")
+    if focus.lower() not in title.lower():
+        raise RunnerError(f"P1 title missing focus keyphrase: {focus}")
+    if len(meta) < 120 or len(meta) > 130:
+        raise RunnerError(f"P1 meta length invalid: {len(meta)}")
+    if len(focus.split()) > 4:
+        raise RunnerError(f"P1 focus keyphrase too long: {focus}")
+
+
+def validate_taxonomy_names(tag_names: List[str], expected_lang: str) -> None:
+    bad = [t for t in tag_names if "-" in t]
+    if bad:
+        raise RunnerError(f"Tag names must use spaces, not hyphens: {bad}")
+    missing = sorted({"atena_agent", f"lang_{expected_lang}"} - set(tag_names))
+    if missing:
+        raise RunnerError(f"Missing mandatory tags: {missing}")
+
+
+def validate_yoast_score(score: Dict[str, Any]) -> None:
+    if not score or score.get("status") not in {"ok", "success", "OK"}:
+        raise RunnerError(f"Yoast scorer failed or returned non-ok status: {score}")
+    seo = score.get("seo_score")
+    read = score.get("readability_score")
+    if seo is None or read is None:
+        raise RunnerError(f"Yoast scorer missing scores: {score}")
+    if int(seo) < 70 or int(read) < 70:
+        raise RunnerError(f"Yoast scores below green threshold: seo={seo} readability={read}")
+
+
+def fetch_official_source_text(official_url: str, card_name: str = "") -> Tuple[int, str, str]:
     """Fetch official product text, using a reader fallback for issuer geo/bot error shells.
 
     The canonical URL remains the issuer URL. The reader is only a rendering aid
@@ -238,14 +288,14 @@ def fetch_official_source_text(official_url: str) -> Tuple[int, str, str]:
     """
     rec = load_rec_helpers()
     status, text = rec.fetch_reference_text(official_url)
-    has_content, _ = official_source_has_content(official_url, text)
+    has_content, _ = official_source_has_content(official_url, text, card_name)
     if has_content:
         return status, text, official_url
     reader_url = "https://r.jina.ai/http://" + official_url
     try:
         r = requests.get(reader_url, timeout=35, headers={"User-Agent": "Mozilla/5.0"})
         if r.status_code < 400:
-            ok, _reason = official_source_has_content(official_url, r.text)
+            ok, _reason = official_source_has_content(official_url, r.text, card_name)
             if ok:
                 return r.status_code, r.text, reader_url
     except Exception:
@@ -253,16 +303,16 @@ def fetch_official_source_text(official_url: str) -> Tuple[int, str, str]:
     return status, text, official_url
 
 
-def preflight_official_source(official_url: str) -> None:
-    status, text, source_fetch_url = fetch_official_source_text(official_url)
-    has_content, source_reason = official_source_has_content(official_url, text)
+def preflight_official_source(official_url: str, card_name: str = "") -> None:
+    status, text, source_fetch_url = fetch_official_source_text(official_url, card_name)
+    has_content, source_reason = official_source_has_content(official_url, text, card_name)
     if not has_content:
         raise RunnerError(f"Official source URL has no usable product content; ask Raquel/Rodolfo for the correct official link before publishing. url={official_url} reason={source_reason}")
 
 
 def extract_official_data(card_name: str, official_url: str, explicit_benefits: List[str], annual_fee: Optional[str], apr: Optional[str]) -> Dict[str, Any]:
-    status, text, source_fetch_url = fetch_official_source_text(official_url)
-    has_content, source_reason = official_source_has_content(official_url, text)
+    status, text, source_fetch_url = fetch_official_source_text(official_url, card_name)
+    has_content, source_reason = official_source_has_content(official_url, text, card_name)
     if not has_content:
         raise RunnerError(f"Official source URL has no usable product content; ask Raquel/Rodolfo for the correct official link before publishing. url={official_url} reason={source_reason}")
     rec = load_rec_helpers()
@@ -276,7 +326,7 @@ def extract_official_data(card_name: str, official_url: str, explicit_benefits: 
             "annual_fee": annual_fee,
             "apr": apr,
             "benefits": explicit_benefits[:6],
-            "competitors": [{"name": "Barclaycard Avios Plus"}, {"name": "British Airways American Express Credit Card"}],
+            "competitors": [],
             "tag10": "Avios rewards",
             "tag2": annual_fee[:25],
             "descriptor": "A UK travel credit card with Avios rewards and issuer terms.",
@@ -356,15 +406,54 @@ def media_payload(media_id: int, media_url: str, title: str) -> str:
     return urllib.parse.quote(json.dumps(obj, separators=(",", ":")), safe="")
 
 
+def clean_sentence_punctuation(text: Any) -> str:
+    text = re.sub(r"\s+", " ", str(text or "")).strip()
+    text = re.sub(r"\s+([,.;:!?])", r"\1", text)
+    text = re.sub(r"([,;:])\s*\.\.\.$", "...", text)
+    text = re.sub(r"\.\s*\.\.\.$", "...", text)
+    text = re.sub(r",\s*\.$", ".", text)
+    text = re.sub(r",\s*\.\.\.$", "...", text)
+    if text and not re.search(r"(\.|!|\?|\.\.\.)$", text):
+        text += "."
+    return text
+
+
+def card_ui_tag(text: Any, fallback: str = "Cashback rewards") -> str:
+    value = html.unescape(str(text or "")).strip()
+    value = re.split(r"[;,.]|\s+ and \s+", value, maxsplit=1, flags=re.I)[0].strip()
+    value = re.sub(r"\bcard features\b", "", value, flags=re.I).strip()
+    if not value or value.lower() in {"credit card", "card benefits", "features"}:
+        value = fallback
+    value = re.sub(r"\s+", " ", value).strip(" .;:,!")
+    return value[:25].rstrip(" .;:,")
+
+
+def card_ui_descriptor(card_data: Dict[str, Any], fallback: str) -> str:
+    benefits = [str(b) for b in (card_data.get("benefits") or [])]
+    joined = " ".join(benefits).lower()
+    if "cashback" in joined:
+        desc = "Earn cashback on eligible purchases."
+    elif "avios" in joined or "travel" in joined:
+        desc = "Earn travel rewards on eligible spend."
+    elif "no annual fee" in joined or "no fee" in joined:
+        desc = "A no-annual-fee card for everyday spend."
+    else:
+        desc = fallback
+    desc = clean_sentence_punctuation(desc)
+    if len(desc) > 70:
+        desc = desc[:69].rsplit(" ", 1)[0].rstrip(" ,;:") + "."
+    return desc
+
+
 def lazy_credit_card_p1(site: Dict[str, Any], card_name: str, card_slug: str, card_id: int, card_url: str, card_data: Dict[str, Any], official_url: str, button_hex: str) -> str:
     b = rand_block_id()
     payload = {
         "imagem": media_payload(card_id, card_url, f"card-{card_slug}"),
         "categoria": site.get("default_category", "Credit Card"),
         "titulo": card_name,
-        "tag10": (card_data.get("tag10") or "Card benefits")[:25],
-        "tag2": (card_data.get("tag2") or card_data.get("annual_fee") or "Credit card")[:25],
-        "texto": (card_data.get("descriptor") or f"Learn more about the {card_name}.")[:100],
+        "tag10": card_ui_tag(card_data.get("tag10"), "Cashback rewards"),
+        "tag2": card_ui_tag(card_data.get("tag2") or card_data.get("annual_fee"), "No annual fee"),
+        "texto": card_ui_descriptor(card_data, card_data.get("descriptor") or f"Learn more about the {card_name}."),
         "botao-texto": "APPLY NOW",
         "siteXfora": "You will be redirected.",
         "botao-url": official_url,
@@ -388,7 +477,7 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
     apr = card_data.get("apr") or "the representative APR shown by the issuer"
     benefits = [b for b in (card_data.get("benefits") or []) if b][:6]
     while len(benefits) < 4:
-        benefits.append("Review the official issuer page for the latest confirmed benefit details.")
+        benefits.append("Check the official issuer page for the latest confirmed benefit details.")
     tag10 = "Avios rewards" if any("avios" in b.lower() for b in benefits) else (card_data.get("tag10") or "Card benefits")
     tag2 = "Travel perks" if any("lounge" in b.lower() or "travel" in b.lower() for b in benefits) else (card_data.get("tag2") or "Credit card")
     card_data["tag10"] = tag10[:25]
@@ -440,12 +529,12 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
         ("How to Maximise the Benefits", [
             "Start with normal spending that you can repay comfortably. This keeps the card’s benefits connected to existing behaviour rather than unnecessary borrowing.",
             "Pay close attention to payment dates and statement balances. Otherwise, interest or fees can quickly reduce the value of any reward or travel benefit.",
-            "Review reward rules regularly, especially if the card has a welcome bonus, annual target or travel voucher. Terms can change, and availability may vary.",
+            "Check reward rules regularly, especially if the card has a welcome bonus, annual target or travel voucher. Terms can change, and availability may vary.",
         ]),
         ("How to Apply", [
             "Select the apply button to continue to the official issuer website. You will be redirected, and the application will continue away from this site.",
             "The issuer may ask for personal, financial and employment information. It may also run checks before confirming whether the product is available to you.",
-            "Before submitting, review the latest official rates, terms and conditions. Do not rely on any outdated offer or third-party summary if the issuer has changed the details.",
+            "Before submitting, check the latest official rates, terms and conditions. Do not rely on any outdated offer or third-party summary if the issuer has changed the details.",
         ]),
         ("Is This Card Right for You?", [
             f"The {card_name} may suit users who can use its confirmed benefits regularly and repay responsibly. It is not suitable simply because rewards are available.",
@@ -481,7 +570,7 @@ def fit_word_count(body: str) -> Tuple[str, int]:
     wc = visible_word_count(body)
     filler = [
         "Also consider how the card would fit alongside any existing borrowing, because multiple credit products can affect affordability and future applications.",
-        "If you are unsure, pause before applying and review the issuer’s documents again. A slower decision is usually better than an unsuitable application.",
+        "If you are unsure, pause before applying and check the issuer’s documents again. A slower decision is usually better than an unsuitable application.",
         "Finally, compare the same product against at least one alternative so the fee, reward structure and repayment terms are easier to judge.",
         "Think about how often the strongest benefit would be used during a normal year. Occasional use may not justify a fee or a more complex rewards structure.",
         "Keep the official page open while applying so you can confirm the latest rates, exclusions and reward conditions before submitting personal information.",
@@ -505,19 +594,21 @@ def fit_word_count(body: str) -> Tuple[str, int]:
 
 
 def title_and_meta(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, str, str]:
-    title = f"{card_name}: Costs, Rewards and How to Apply"
+    focus = compact_focus(card_name)
+    title = f"{focus}: Costs, Rewards and How to Apply"
     if len(title) > 60:
-        title = f"{card_name}: Costs and How to Apply"
+        title = f"{focus}: Costs and How to Apply"
     if len(title) > 60:
-        title = f"{card_name}: How to Apply"
-    meta = f"{card_name} application guide with key costs, rewards, eligibility notes and official issuer apply link."
+        title = f"{focus}: How to Apply"
+    meta = f"{focus} application guide with key costs, rewards, eligibility notes and official issuer apply link before you continue."
     if len(meta) > 130:
-        meta = f"{card_name} guide with key costs, rewards, eligibility notes and official apply link."
+        meta = f"{focus} guide with key costs, rewards, eligibility notes and official issuer apply link before you continue."
     if len(meta) < 120:
-        meta = meta.rstrip(".") + " before you continue."
+        meta = meta.rstrip(".") + " and compare the issuer terms first."
     if len(meta) > 130:
         meta = meta[:127].rsplit(" ", 1)[0] + "."
-    return title, meta, card_name
+    validate_seo_fields(title, meta, focus)
+    return title, meta, focus
 
 
 def resolve_term(site_key: str, taxonomy: str, name: str) -> int:
@@ -581,15 +672,24 @@ def public_verify(url: str, official_url: str, featured_url: str, card_url: str)
     r = requests.get(url + ("?nocache=1" if "?" not in url else "&nocache=1"), timeout=25, headers={"User-Agent": "Mozilla/5.0", "Cache-Control": "no-cache"})
     html_text = r.text
     m = re.search(r'"wordCount":(\d+)', html_text)
-    return {
+    checks = {
         "http": r.status_code,
         "contains_apply_now": "APPLY NOW" in html_text,
         "contains_redirected": "You will be redirected." in html_text,
         "contains_official_url": official_url in html_text,
-        "contains_featured": featured_url in html_text,
-        "contains_card": card_url in html_text,
+        "contains_featured": bool(featured_url and featured_url in html_text),
+        "contains_card": bool(card_url and card_url in html_text),
         "yoast_schema_word_count": int(m.group(1)) if m else None,
     }
+    checks["ok"] = (
+        checks["http"] == 200
+        and checks["contains_apply_now"]
+        and checks["contains_redirected"]
+        and checks["contains_official_url"]
+        and checks["contains_featured"]
+        and checks["contains_card"]
+    )
+    return checks
 
 
 def main() -> int:
@@ -616,7 +716,17 @@ def main() -> int:
         if site.get("template_key") != "gb-cc-en":
             raise RunnerError("P1 runner currently supports template_key gb-cc-en only")
 
-        t = ts(); public_html = get_public(args.rec_url); rec_id = post_id_from_public_html(public_html, args.rec_url); rec = wp_get_post(args.site, rec_id); timings["fetch_rec"] = ts() - t; steps.append("rec_loaded")
+        t = ts()
+        rec_id_match = re.search(r"[?&]p=(\d+)", args.rec_url)
+        if rec_id_match:
+            rec_id = int(rec_id_match.group(1))
+            rec = wp_get_post(args.site, rec_id)
+            public_html = f"<body class='postid-{rec_id}'>" + (rec.get("content", {}).get("rendered") or rec.get("content", {}).get("raw") or "") + "</body>"
+        else:
+            public_html = get_public(args.rec_url)
+            rec_id = post_id_from_public_html(public_html, args.rec_url)
+            rec = wp_get_post(args.site, rec_id)
+        timings["fetch_rec"] = ts() - t; steps.append("rec_loaded")
         rec_raw = rec.get("content", {}).get("raw") or ""
         rec_rendered = rec.get("content", {}).get("rendered") or ""
         rec_title = rec.get("title", {}).get("raw") or rec.get("title", {}).get("rendered") or ""
@@ -627,7 +737,7 @@ def main() -> int:
         official_url = args.official_url or cache.get("card_official_url") or ""
         if not official_url:
             raise RunnerError("official URL missing and not found in card cache; pass --official-url")
-        t = ts(); preflight_official_source(official_url); timings["official_source_preflight"] = ts() - t; steps.append("official_source_preflight_passed")
+        t = ts(); preflight_official_source(official_url, card_name); timings["official_source_preflight"] = ts() - t; steps.append("official_source_preflight_passed")
         card_url = parsed.get("card_url")
         card_id = parsed.get("card_id")
         card_image_source = "rec_lazyblock" if card_url and card_id else "missing_from_rec"
@@ -655,6 +765,20 @@ def main() -> int:
 
         t = ts(); card_path = ensure_card_local(card_url, card_slug); featured_path = make_exact_featured(card_path, card_slug); timings["featured_image"] = ts() - t; steps.append("featured_generated_exact_overlay")
 
+        t = ts()
+        featured_audit = run_json([
+            str(FEATURED_AUDIT_SCRIPT),
+            "--featured", featured_path,
+            "--card", card_path,
+            "--mode", "p1",
+            "--card-name", card_name,
+            "--require-person",
+        ], timeout=150)
+        timings["featured_semantic_audit"] = ts() - t
+        if not featured_audit.get("ok"):
+            raise RunnerError(f"featured_semantic_audit_failed: {featured_audit}")
+        steps.append("featured_semantic_audited")
+
         if args.dry_run:
             featured_media = {"id": None, "source_url": featured_path, "dry_run_local_path": featured_path}
         else:
@@ -666,10 +790,11 @@ def main() -> int:
         # For dry-run, use placeholder id in body so validation can still run.
         body, validation = generate_p1_body(site, card_name, card_slug, official_data, official_url, featured_id or 999999, featured_url, int(card_id), card_url, button_hex)
         title, metadesc, focuskw = title_and_meta(card_name, official_data)
+        validate_no_review({"body": body, "subtitle": validation.get("subtitle", ""), "title": title, "meta": metadesc})
         result["content_validation"] = {**validation, "title_chars": len(title), "meta_chars": len(metadesc), "focus_keyphrase": focuskw}
         steps.append("content_assembled")
 
-        t = ts(); category_id, tag_ids, tag_names = resolve_taxonomy(args.site, site, card_name, card_slug, official_data.get("benefits") or []); timings["taxonomy"] = ts() - t; steps.append("taxonomy_resolved")
+        t = ts(); category_id, tag_ids, tag_names = resolve_taxonomy(args.site, site, card_name, card_slug, official_data.get("benefits") or []); validate_taxonomy_names(tag_names, site.get("language") or "en"); timings["taxonomy"] = ts() - t; steps.append("taxonomy_resolved")
 
         slug = target_slug
         meta = {"_yoast_wpseo_title": "", "_yoast_wpseo_metadesc": metadesc, "_yoast_wpseo_focuskw": focuskw}
@@ -692,8 +817,11 @@ def main() -> int:
             t = ts(); post = create_or_update_post(args.site, post_json, args.update_post_id or None); timings["wp_publish"] = ts() - t; steps.append("post_published" if not args.update_post_id else "post_updated")
             post_id = int(post["id"])
             t = ts(); yoast = update_yoast(args.site, post_id, title, body, meta); timings["yoast_update"] = ts() - t; steps.append("yoast_verified")
-            t = ts(); score = run_json([str(GEN_SCRIPTS / "yoast-score-post.sh"), args.site, str(post_id)], timeout=180, allow_fail=True); timings["yoast_score"] = ts() - t; steps.append("yoast_scored")
-            t = ts(); verify = public_verify(post["link"], official_url, featured_url, card_url); timings["public_verify"] = ts() - t; steps.append("public_verified")
+            t = ts(); score = run_json([str(GEN_SCRIPTS / "yoast-score-post.sh"), args.site, str(post_id)], timeout=180, allow_fail=True); validate_yoast_score(score); timings["yoast_score"] = ts() - t; steps.append("yoast_scored")
+            t = ts(); verify = public_verify(post["link"], official_url, featured_url, card_url); timings["public_verify"] = ts() - t
+            if not verify.get("ok"):
+                raise RunnerError(f"public_verify_failed: {verify}")
+            steps.append("public_verified")
         else:
             post = {"id": None, "link": f"https://{site['domain']}/{slug}/", "slug": slug, "status": args.status}
             steps.append("dry_run_no_publish")
@@ -701,6 +829,7 @@ def main() -> int:
         duration = ts() - started
         result.update({
             "ok": True,
+            "status_detail": "fully_validated" if not args.dry_run else "dry_run_validated",
             "steps": steps,
             "duration_sec": round(duration, 3),
             "timings_sec": {k: round(v, 3) for k, v in timings.items()},
@@ -710,7 +839,7 @@ def main() -> int:
             "post": {"id": post.get("id"), "status": post.get("status", args.status), "slug": post.get("slug"), "link": post.get("link"), "edit_url": f"https://{site['domain']}/wp-admin/post.php?post={post.get('id')}&action=edit" if post.get("id") else None},
             "seo": {"title": title, "meta_description": metadesc, "focus_keyphrase": focuskw, "yoast": yoast, "score": score},
             "taxonomy": {"category_id": category_id, "tag_ids": tag_ids, "tag_names": tag_names},
-            "images": {"card_reused_from_rec": card_image_source == "rec_lazyblock", "card_image_source": card_image_source, "featured": featured_media, "media_created": media_created},
+            "images": {"card_reused_from_rec": card_image_source == "rec_lazyblock", "card_image_source": card_image_source, "featured": featured_media, "featured_audit": featured_audit, "media_created": media_created},
             "public_verify": verify,
             "cost_usd": {"runner_api_est": 0.0, "featured_image_est": 0.04, "total_est": 0.04},
         })

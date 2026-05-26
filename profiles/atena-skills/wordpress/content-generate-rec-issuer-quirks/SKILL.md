@@ -47,6 +47,9 @@ This lists all active personal cards with real URLs.
 
 **Naming pitfall:** Users may request “Amex Cashback Everyday Credit Card”, while the official page breadcrumb/title may say “Platinum Cashback Everyday Credit Card” and H1 may render “Amex® Cashback Everyday Credit Card”. Treat these as the same UK product only after confirming the official page text says “full name: Platinum Cashback Everyday Credit Card” or equivalent.
 
+### Official page extraction
+Amex UK product pages can return little or no useful text to curl/urllib while loading correctly in a rendered browser. For runner/source validation, use a bounded Playwright local render fallback on `americanexpress.com` pages when stripped HTML text is under the content gate. Important: Amex disables `Page.evaluate`/`eval` in the page context, so extract rendered text with Playwright locators such as `page.locator("body").inner_text()` after `domcontentloaded`, not `page.evaluate("document.body.innerText")`.
+
 ### Card Image CDN
 Amex hosts card images at a predictable CDN path:
 ```
