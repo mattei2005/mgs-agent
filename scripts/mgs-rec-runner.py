@@ -822,11 +822,11 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:table -->
 
 <!-- wp:paragraph -->
-<p>Compared with {comp_a}, the {name} should be judged on fees, eligibility and daily usefulness.</p>
+<p>Compared with {comp_a}, the {name} is more focused on {primary_benefit}.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Compared with {comp_b}, it may suit readers who want a simple card rather than a complex benefit package.</p>
+<p>Compared with {comp_b}, it targets the same rewards market but keeps the focus on {third_benefit}.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
