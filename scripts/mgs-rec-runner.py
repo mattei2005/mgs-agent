@@ -1636,6 +1636,7 @@ def main() -> int:
             "dry_run": args.dry_run,
             "site": args.site,
             "status": args.status,
+            "official_url": args.source_url,
             "card_slug": card_slug,
             "post_slug": post_slug,
             "post_id": post_id,

@@ -1,25 +1,34 @@
 # Rodolfo-approved final summary format for REC, P1 and REC+P1
 
+## Why this exists
+
+Rodolfo corrected Atena because final article summaries were changing from one article to the next. The requirement is not merely to include the right fields; the final Discord output must replicate his approved structure exactly.
+
 ## Classification
 
 Category: **Pipeline / Orchestration**.
 
-Canonical purpose: final Discord summary after article runner completion. This rule controls how Atena reports completed REC, P1 and REC+P1 jobs to Rodolfo.
+Canonical purpose: final Discord summary after article runner completion for REC, P1 and REC+P1 jobs.
+
+Deterministic implementation: `/root/mgs-agent/scripts/render-article-summary.py`.
 
 ## Hard rule
 
-When reporting a completed REC, P1 or REC+P1 article job, keep the format **exactly** as Rodolfo provided:
+When reporting a completed REC, P1 or REC+P1 article job:
 
 - Keep the same emojis.
 - Keep the same line breaks.
 - Keep the same order.
 - Keep the same labels.
+- Keep the same spacing, including `🔗 P1 :` and `📊  Yoast`.
 - Keep the same bullet character `•`.
 - Do not convert to a table.
 - Do not add an intro sentence.
-- Do not add extra fields.
+- Do not add mentions unless the current approved template includes them.
+- Do not add extra audit/status fields.
+- Do not restyle with bold, code formatting, or alternate Markdown.
 - Replace only the placeholder values with real data from the runner/validation.
-- The backticks in Rodolfo's examples only indicate placeholders to be filled; real values do not need placeholder wording.
+- The backticks in Rodolfo's examples indicate placeholders to be filled; they are not a request to preserve placeholder wording.
 
 ## REC summary template
 
@@ -115,6 +124,6 @@ When reporting a completed REC, P1 or REC+P1 article job, keep the format **exac
 - If runner time is up to 60 seconds, show seconds.
 - If runner time is above 60 seconds, show minutes.
 
-## Important replacement rule
+## Replacement rule
 
-The template is literal in structure and dynamic only in values. For example, replace `numero do post` with the real post ID and `link` with the real URL; do not leave placeholder text in production summaries.
+The template is literal in structure and dynamic only in values. Replace `numero do post` with the real post ID, `link` with the real URL, etc. Do not leave placeholder text in production summaries.

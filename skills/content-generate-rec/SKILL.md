@@ -92,10 +92,17 @@ Operational rule (hard gate):
 - Use `--dry-run` only for diagnostics requested by Rodolfo/Zeus, not for normal
   editorial publishing.
 - After the runner returns, format one final message from its JSON using
-  `references/article-final-summary-format-rodolfo-2026-05-26.md`. Keep
-  Rodolfo's exact emojis, labels, order and line breaks; replace only the
-  placeholder values with real data. Do not add intro text, extra fields, tables,
-  or alternate layouts. Do not run
+  `scripts/render-article-summary.py`:
+  - REC: `python3 /root/mgs-agent/scripts/render-article-summary.py --type rec <rec-json>`
+  - P1: `python3 /root/mgs-agent/scripts/render-article-summary.py --type p1 <p1-json>`
+  - REC+P1: `python3 /root/mgs-agent/scripts/render-article-summary.py --type rec-p1 <rec-json> <p1-json>`
+  The renderer is the deterministic implementation of
+  `references/article-final-summary-format-rodolfo-2026-05-26.md`. This is a
+  **hard output gate** for REC, P1 and REC+P1: keep Rodolfo's exact emojis,
+  labels, order, line breaks, spacing and bullet style; replace only the
+  placeholder values with real data. Do not add intro text, mentions, tables,
+  extra fields, markdown restyling, audit sections, or alternate layouts unless
+  Rodolfo explicitly updates the template for that request. Do not run
   extra QA/repair work unless the JSON shows a real failure or Rodolfo asked for
   a technical audit.
 - Anti-over-reading rule: for a complete REC direct-publish request, do not read
@@ -958,11 +965,11 @@ Emit EXACTLY ONE summary message to the user. NEVER send two messages (one annou
 
 #### Rodolfo standard summary format (all article types/sites)
 
-For any article summary requested by Rodolfo (REC, P1, REC+P1, SEO, any site), use the Discord-native emoji format approved in thread `1507554479627567115`. Keep links inside angle brackets (`<https://...>`) so Discord does not generate embeds/previews. Do not use Markdown masked links for final URLs unless the user explicitly asks. Do not add a `Hiperlinks:` heading. Do not use monospaced tables/code blocks for this summary.
+For completed REC, P1 and REC+P1 runner jobs, the canonical final Discord output is `references/article-final-summary-format-rodolfo-2026-05-26.md`. Copy that approved structure exactly: same emojis, labels, order, spacing, bullets and line breaks; replace only placeholder values with runner/validation data. Do not add an intro sentence, mentions, tables, extra fields, code blocks, masked links or alternate Markdown unless Rodolfo explicitly updates the template for that request.
 
-Reference: `references/rodolfo-article-summary-format-2026-05-22.md` captures the correction log and pre-send checklist from the repeated P1 summary-format failures. Load it if there is any doubt about the approved model.
+Historical correction log: `references/rodolfo-article-summary-format-2026-05-22.md` is retained only as background. If it conflicts with the 2026-05-26 reference, the 2026-05-26 reference wins.
 
-**P1 hard gate:** after `mgs-p1-runner.py` returns JSON, save that JSON and run `/root/mgs-agent/skills/content-generate-rec/scripts/render-p1-summary.py <json_file>`. Use the rendered output as the final Discord reply. Do not manually reorder or rewrite the final P1 summary from memory. This is mandatory because Rodolfo corrected multiple consecutive P1 threads where the publication succeeded but Atena changed the requested summary order/shape.
+**P1 hard gate:** after `mgs-p1-runner.py` returns JSON, save that JSON and run `/root/mgs-agent/scripts/render-article-summary.py --type p1 <json_file>` (the legacy wrapper `/root/mgs-agent/skills/content-generate-rec/scripts/render-p1-summary.py <json_file>` calls the same renderer). Use the rendered output as the final Discord reply. Do not manually reorder or rewrite the final P1 summary from memory.
 
 **P1 from draft REC:** if the REC source is still a draft, its public permalink may be `https://site/?p=<id>` and unauthenticated public GET can return 404. The P1 runner/workflow must parse the `p` post ID and load the REC through authenticated WP REST instead of treating the public 404 as a missing REC. For draft outputs, label URLs as draft/future permalinks and do not use public 404 as a hard failure; keep strict public verification for `publish`.
 
@@ -972,72 +979,7 @@ Reference: `references/rodolfo-article-summary-format-2026-05-22.md` captures th
 
 **P1 Discord thread title gate:** rename new P1 threads exactly as `P1 {Card Name}`. Do not append the site (`— eggbev`), do not leave the original request text, and do not use a truncated prompt as the thread title.
 
-Default layout (APPROVED MODEL — keep this structure):
-
-```markdown
-<@344196393512075265> ✅ {TYPE} do **{card/product}** publicada no {site}.
-
-📄 **Post ID:** `{post_id}`
-🔗 **Artigo:** <{public_url}>
-✏️ **Edit:** <{edit_url}>
-↩️ **REC de origem:** <{rec_source_url}>
-
-📌 **Site:** `{site}` | **Vertical:** `{vertical}` | **Status:** `{status}`
-🔗 **Slug:** `{slug}`
-
-📊 **Yoast:** SEO **{seo_score}** {seo_emoji} | Readability **{readability_score}** {read_emoji}
-📝 **Palavras:** **{public_word_count}** schema público / **{validation_word_count}** validação interna
-🏷️ **Title:** {title}
-🔢 **Title — caracteres:** `{title_chars}`
-💬 **Sub-title:** {subtitle}
-🔢 **Sub-title — caracteres:** `{subtitle_chars}`
-🔍 **Focus:** `{focus_keyphrase}`
-🧾 **Meta:** {meta_description}
-🔢 **Meta description — caracteres:** `{meta_chars}`
-
-🏷️ **Tags:** `{tag1}` `{tag2}` `{tag3}` ...
-
-🟢 **CTA:** `{cta}` | **Microcopy:** `{microcopy}`
-🏦 **Fonte oficial:** <{official_url}>
-✅ **Página pública:** {public_check} | **Redirect/URL oficial:** {redirect_check}
-
-🖼️ **Imagens:**
-• **Imagem P1/REC:** <{featured_url}>
-• **Card image:** <{card_url}>
-• **Auditoria:** {media_audit_summary}
-
-⏱️ **Tempo total:** `{duration}` | 💰 **Custo:** `{total_operational_cost}`
-
-<@1496254952501280974> {TYPE} publicada e validada.
-```
-
-Rules:
-- Use this exact approved shape from the Capital One Classic thread; do not shorten it into a minimal checklist and do not convert it into a table.
-- For P1 summaries, the first line must be exactly this pattern: `<@Rodolfo> ✅ P1 do **{card}** publicada no {site}.` Do not replace it with generic wording like `P1 publicada e validada`, `P1 publicada`, or a checklist title.
-- Always include `📄 **Post ID:**` as its own line. Do not make the edit URL the only place where the post ID appears.
-- Use `Imagem P1` for P1/apply pages and `Imagem REC` for REC pages.
-- Use `REC de origem` only when there is a real REC source URL; do not write `REC ou P1 de origem`. Omit the row when there is no source REC.
-- Always include the complete applied tags list, especially `lang_*` and `atena_agent` when present.
-- Include Title, Sub-title, Focus, Meta, CTA, Microcopy, public/redirect validation, images, media audit, duration and cost.
-- For Title/Sub-title/Meta, include the values in the approved lines and include exact character counts in the same summary. Never omit `Meta description — caracteres`.
-- If duration is over 60 seconds, format as minutes/seconds (example: `1m09s`).
-- Keep the Raquel mention at the end when the article was published or is ready for review.
-- The rule is strict: ONE message after publish. Combine announcement, details, and Raquel mention in a single message.
-- Before sending the final answer, compare the message line-by-line against this template. If any required line is missing, fix the message before sending.
-
-Required fields in the single message:
-- Confirmação de publicação (uma linha)
-- Post ID + WordPress edit link + public URL/permalink
-  - If `status=draft`, label the URL as `permalink futuro` or `URL pública futura`; do not imply it is publicly accessible now. Public unauthenticated checks may return 404 for drafts, which is expected.
-  - If `status=publish`, label it as `URL pública` and verify it returns a public 2xx/3xx response.
-- Yoast scores (SEO + Readability) com emoji 🟢/🟡/🔴 conforme score
-- Word count + title char count + SUB-TITLE char count + meta desc char count
-- Focus keyword
-- Tags applied under a single `Tags:` field, listing ALL tag names exactly as applied; do not replace the list with separate boolean lines such as `Tag Atena` or `Tag de idioma`.
-- Imagens com IDs E URLs completas (card + featured + scene da featured). In Discord summaries, keep links outside the monospaced `text` table as Markdown clickable links; do not bury edit/public/image URLs inside the table.
-- Auditoria de artefatos: imagens criadas nesta execução, usadas, extras e cleanup aplicado
-- Cost reporting (Step 14 — duração, API calls, custo USD). If duration is greater than 60 seconds, show it in minutes/seconds (example: `1min01s`), not only raw seconds. The cost line must include total operational estimated cost (Atena/session + runner/image/API when available), not only `runner.cost_usd.total_est`.
-- @Raquel mention (<@1496254952501280974>) for review notification
+Legacy 2026-05-22 layout removed from the active instructions because it conflicts with Rodolfo's 2026-05-26 approved model. For REC, P1 and REC+P1 runner completions, use only `references/article-final-summary-format-rodolfo-2026-05-26.md` as the output template.
 
 > **PITFALL — reportar TODAS as imagens criadas (CRITICAL):**
 > Se a execução gerar/uploadar 6 imagens e usar apenas 2, Atena DEVE informar isso no resumo final. Nunca reportar só o erro principal ou só as imagens usadas. O usuário não deve precisar abrir WordPress → Media Library para descobrir órfãs.
@@ -1049,51 +991,9 @@ Required fields in the single message:
 - CTA/apply URL 404 em produção REC-only NÃO é blocker: o REC aponta de propósito para a futura P1/apply page. Reporte como `P1 ainda não criada`. Só trate como crítico quando a P1 deveria existir ou quando a tarefa incluiu criar/validar P1.
 - Quando usar `mgs-rec-runner.py`, ler `images.artifact_audit` do JSON e refletir no resumo final.
 
-The default compact layout above is TEMPLATE A — NORMAL for successful publications.
+### Final summary template selection (CRITICAL)
 
-### LOGICA DE ESCOLHA (CRITICAL): qual template usar?
-
-**Voce DEVE escolher UM template e usar SO ele. NUNCA combinar os dois.**
-
-- Se publicacao foi 100% OK (incluindo card image): usar **TEMPLATE A — NORMAL** (acima)
-- Se Circuit Breaker disparou (card image NAO publicada): usar **TEMPLATE B — SEM IMAGEM** (abaixo)
-
-Como detectar qual template usar:
-- `card_image_id` foi preenchido com numero valido + upload retornou 200? → **TEMPLATE A**
-- `card_image_id` ficou null / Step 3 abortou apos 2 tentativas / blacklist? → **TEMPLATE B**
-
----
-
-### TEMPLATE B — Circuit Breaker disparou (publicado SEM card image)
-
-Use ESTE template (e SO este, nao combinar com Template A) quando o Step 3 nao conseguiu obter a imagem do cartao:
-
-```
-@Rodolfo ⚠️ {Card Name} publicado no {site} (SEM card image)
-
-📄 Post ID: {id}
-🔗 {public_url}
-✏️ Edit: {edit_url}
-
-📊 Yoast: SEO {seo}🟢 | Readability {read}🟢
-📝 {words} palavras | Title {title_chars}c | Sub-Title {subtitle_chars}c | Meta {meta_chars}c
-🔍 Focus: "{focus_kw}"
-🏷️ Tags: {tags_csv}
-
-🖼️ Imagens:
-• ⚠️ Card image: NAO PUBLICADA (issuer bloqueia automacao ou imagem rejeitada)
-• Featured image ID: {featured_id} — <{featured_url}> (cena: {featured_scene})
-
-💰 Custo: ${cost} USD ({duration}, {api_calls} API calls)
-
-⚠️ @Raquel ATENCAO: card image precisa upload manual!
-   Issuer: {issuer_name}
-   Motivo: {reason} (ex: Cloudflare bot block, blacklisted issuer, image quality)
-   Google Images: <https://www.google.com/search?q={card_slug_url_encoded}&udm=2>
-   Acao: editar post {id} no WP, abrir LazyBlock credit-card, fazer upload da imagem do cartao
-```
-
-**NUNCA** envie uma segunda mensagem com versão "resumida" do mesmo conteúdo. UMA MENSAGEM SÓ.
+For successful REC, P1 and REC+P1 runner completions, use only `references/article-final-summary-format-rodolfo-2026-05-26.md`. If the card image is missing, Yoast failed, or any hard validation gate failed, do not use the success template as-is; report the objective failure/blocker instead of claiming a completed article job. **NUNCA** envie uma segunda mensagem com versão "resumida" do mesmo conteúdo. UMA MENSAGEM SÓ.
 
 ## Scripts
 
