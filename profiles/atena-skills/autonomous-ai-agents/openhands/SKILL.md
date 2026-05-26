@@ -138,21 +138,17 @@ On the MGS Atena host, the local wrapper is:
 /root/mgs-agent/scripts/run-openhands-atena.sh
 ```
 
-Current MGS policy: **do not auto-resolve or use Anthropic/Claude API keys for OpenHands**. The previous Anthropic/Sonnet wrapper was removed because MGS defaults to zero Anthropic/Claude pay-per-token usage unless Rodolfo explicitly approves an exception.
+Current MGS policy: **GPT-5.5/OpenAI-Codex OAuth for everything by default**. Do not use Anthropic, Claude, Haiku, OpenRouter, or any other provider unless Rodolfo explicitly approves an exception.
 
-The wrapper also refuses to silently use ambient OpenAI/LiteLLM credentials. It fails closed unless `MGS_OPENHANDS_BACKEND_APPROVED=1` and a non-Anthropic LiteLLM backend are explicitly supplied through environment variables:
+The wrapper is GPT-5.5 only:
 
 ```
-MGS_OPENHANDS_BACKEND_APPROVED=1 \
-LLM_MODEL="openrouter/openai/gpt-4o-mini" \
-LLM_API_KEY="<approved-non-anthropic-key>" \
-LLM_BASE_URL="https://openrouter.ai/api/v1" \
 /root/mgs-agent/scripts/run-openhands-atena.sh -t 'Print exactly OPENHANDS_OK and then finish.'
 ```
 
-Anthropic/Claude is blocked by default. An exception requires explicit Rodolfo approval and `ALLOW_ANTHROPIC_OPENHANDS=1`.
+It reads the existing Atena `openai-codex` OAuth access token from `/root/.hermes/profiles/atena/auth.json`, sets `LLM_MODEL=openai/gpt-5.5`, sets `LLM_BASE_URL=https://chatgpt.com/backend-api/codex`, suppresses the banner, and runs OpenHands in headless JSON mode. It does not print credentials.
 
-If no approved non-Anthropic backend is available, do **not** claim that a task was checked with OpenHands. Use Hermes-native `delegate_task` or report that OpenHands is installed but lacks an approved backend.
+If OpenHands/Codex returns auth errors, do **not** switch provider. Fix the OpenAI-Codex OAuth auth for Atena, then retry.
 
 ## Verification
 
@@ -166,9 +162,9 @@ terminal(
 )
 ```
 
-If `run-openhands-atena.sh` exits with code `2`, that is the correct fail-closed state: OpenHands is installed, but no approved non-Anthropic backend is configured. Do not bypass this by fetching Anthropic from 1Password or by passing Hermes Codex OAuth tokens directly into OpenHands.
+If `run-openhands-atena.sh` reports a Codex OAuth/auth/stream error, that is the correct fail-closed state for provider problems. Do not bypass this by fetching Anthropic from 1Password or switching to another provider.
 
-With an approved non-Anthropic backend, the JSONL stream must end with a `FinishAction` whose `action.message` mentions `OPENHANDS_OK`.
+The JSONL stream must include an agent `MessageEvent` with `OPENHANDS_OK`, no `ConversationErrorEvent`, and `Agent initialized with model: openai/gpt-5.5` before you claim OpenHands is ready.
 
 ## Related
 
