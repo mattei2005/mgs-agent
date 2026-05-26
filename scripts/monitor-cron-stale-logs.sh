@@ -41,9 +41,7 @@ SKIP = {
 }
 
 # Logs custom quando o crontab não tem redirect explícito.
-CUSTOM_LOG = {
-    'cleanup-zombie-sessions.sh': '/root/mgs-agent/logs/cleanup-zombies.log',
-}
+CUSTOM_LOG = {}
 
 # Erros semânticos: log fresco não significa cron saudável.
 # Manter padrões específicos para evitar falso positivo em mensagens tipo "zero falhas".

@@ -7,7 +7,7 @@
 # Protecoes:
 # - So fecha sessoes inativas ha >30min (grace period)
 # - Marca end_reason = 'cleanup_zombie_cron' pra distinguir
-# - Loga tudo em /root/mgs-agent/logs/cleanup-zombies.log
+# - Loga tudo em /root/mgs-agent/logs/cleanup-zombie-sessions.log
 # - --dry-run conta elegiveis sem atualizar state.db
 #
 # Reverter: comentar linha do cron + (opcional) restaurar end_reason=NULL
@@ -28,7 +28,7 @@ elif [ -n "${1:-}" ]; then
     exit 2
 fi
 
-LOG="/root/mgs-agent/logs/cleanup-zombies.log"
+LOG="/root/mgs-agent/logs/cleanup-zombie-sessions.log"
 TIMESTAMP=$(date '+%Y-%m-%dT%H:%M:%S%z')
 GRACE_MINUTES=30
 TOTAL=0
