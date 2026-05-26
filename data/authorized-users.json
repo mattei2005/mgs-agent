@@ -1,6 +1,6 @@
 {
   "_comment": "Authorization registry for MGS Agents (Zeus, Atena). Discord-only notifications. Authorization is by Discord ID individual (not by Discord role).",
-  "_updated": "2026-04-22",
+  "_updated": "2026-05-26",
   "discord_server": {
     "name": "MGS Digital Corp",
     "guild_id": "1185714635991679006"
@@ -68,6 +68,35 @@
           "discord_role": "Super Admin",
           "access_level": "full",
           "added": "2026-04-22",
+          "added_by": "zeus"
+        }
+      ]
+    },
+    "ares": {
+      "name": "Ares",
+      "type": "Acquisition / Paid Media Agent",
+      "discord_channel_id": "1508853425952133180",
+      "discord_channel_name": "ares-acquisition-agent",
+      "authorized_user_discord_ids": [
+        "344196393512075265"
+      ],
+      "allowed_intents": [
+        "ads_status",
+        "campaign_report",
+        "creative_analysis",
+        "budget_analysis",
+        "tracking_diagnostics",
+        "chatpion_analysis",
+        "read_only_audit"
+      ],
+      "_authorized_users_detail": [
+        {
+          "discord_id": "344196393512075265",
+          "discord_username": "rodolfomattei",
+          "name": "Rodolfo Mattei",
+          "discord_role": "Super Admin",
+          "access_level": "full",
+          "added": "2026-05-26",
           "added_by": "zeus"
         }
       ]
