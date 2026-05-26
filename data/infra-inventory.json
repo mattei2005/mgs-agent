@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-25T05:00:01-04:00",
+    "updated_at": "2026-05-26T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -50,7 +50,7 @@
       "entry": "*/15 * * * * flock -n /var/lock/track_article_cost.lock /root/mgs-agent/scripts/track-article-cost.sh >> /root/mgs-agent/logs/track-article-cost-cron.log 2>&1"
     },
     {
-      "entry": "0 * * * * flock -n /var/lock/cleanup_zombie_sessions.lock /root/mgs-agent/scripts/cleanup-zombie-sessions.sh"
+      "entry": "0 * * * * flock -n /var/lock/cleanup_zombie_sessions.lock /root/mgs-agent/scripts/cleanup-zombie-sessions.sh >> /root/mgs-agent/logs/cleanup-zombie-sessions.log 2>&1"
     },
     {
       "entry": "0 3 * * * flock -n /var/lock/housekeeping_bak_cleanup.lock /root/mgs-agent/scripts/housekeeping-bak-cleanup.sh >> /root/mgs-agent/logs/housekeeping-cron.log 2>&1"
@@ -344,6 +344,11 @@
         "name": "opencode",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/opencode/SKILL.md"
+      },
+      {
+        "name": "openhands",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/openhands/SKILL.md"
       },
       {
         "name": "architecture-diagram",
@@ -721,6 +726,11 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
       },
       {
+        "name": "hermes-s6-container-supervision",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/hermes-s6-container-supervision/SKILL.md"
+      },
+      {
         "name": "node-inspect-debugger",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/atena/skills/software-development/node-inspect-debugger/SKILL.md"
@@ -831,6 +841,11 @@
         "name": "opencode",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/opencode/SKILL.md"
+      },
+      {
+        "name": "openhands",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/openhands/SKILL.md"
       },
       {
         "name": "architecture-diagram",
@@ -1218,6 +1233,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
       },
       {
+        "name": "hermes-s6-container-supervision",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/hermes-s6-container-supervision/SKILL.md"
+      },
+      {
         "name": "node-inspect-debugger",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/node-inspect-debugger/SKILL.md"
@@ -1279,8 +1299,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "4aadaaa3f0beb6aa0b4f293ee72edf71",
-      "modified_at": "2026-05-25T05:00:02-04:00"
+      "md5": "e8cb677e70b5e35dc88b8173d00bf4b2",
+      "modified_at": "2026-05-26T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1290,27 +1310,27 @@
     },
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
-      "size_bytes": 59,
-      "md5": "e7082b0fc6ef32b7b1d6febfa279272b",
-      "modified_at": "2026-05-25T05:00:01-04:00"
+      "size_bytes": 297,
+      "md5": "9c46c118dfb766a465a4a42005f40d2a",
+      "modified_at": "2026-05-26T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 1578,
-      "md5": "721f68f326e8814e9ccdd1c036701c1b",
-      "modified_at": "2026-05-25T05:00:02-04:00"
+      "size_bytes": 1707,
+      "md5": "930d81aa7ac66b55604908e28b1a5929",
+      "modified_at": "2026-05-26T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 330,
-      "md5": "96a2069a541b3507fb430fa1c3c95f35",
-      "modified_at": "2026-05-24T08:00:02-04:00"
+      "size_bytes": 332,
+      "md5": "23a0a86d9492e15f5ab5410d23d7b09a",
+      "modified_at": "2026-05-25T08:00:06-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 49096,
-      "md5": "59995c3fab4a686111578fe5e328f985",
-      "modified_at": "2026-05-24T05:00:03-04:00"
+      "md5": "fa593f630cfafa6740a191b1491b77d1",
+      "modified_at": "2026-05-25T05:00:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1351,8 +1371,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 965,
-      "md5": "f73c9d1ef87838d0a21b5d18c6a7effc",
-      "modified_at": "2026-05-25T05:00:02-04:00"
+      "md5": "bd764eb03f2073a1a61b62693a1f45d2",
+      "modified_at": "2026-05-26T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1374,9 +1394,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 12968,
-      "md5": "ad3b3da428af21733c84fc4790351ed4",
-      "modified_at": "2026-05-24T10:01:08-04:00"
+      "size_bytes": 13332,
+      "md5": "0988cd5cf3d7f93cf96ba02b608ae00a",
+      "modified_at": "2026-05-25T10:01:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
