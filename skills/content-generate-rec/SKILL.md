@@ -7,6 +7,8 @@ description: Generates a REC (Recommendation) article for a credit card — fetc
 
 ## Session-learned references
 
+- `references/article-final-summary-format-rodolfo-2026-05-26.md` — Rodolfo-approved final Discord summary format for REC, P1 and REC+P1. Use this exact emoji/line-break/order template after runner completion; replace only the placeholder values with real data.
+
 - `references/rec-p1-publish-sequential-orchestration-2026-05-26.md` — Rodolfo correction: when REC+P1 is requested as published and inputs are complete, publish the REC first, then publish the P1 from the REC URL; do not block or reduce to REC-only.
 
 - `references/rec-p1-global-editorial-alignment-2026-05-26.md` — REC+P1 orchestration rule from Rodolfo: the pair needs global editorial planning/validation; REC gets the strongest confirmed benefits and main attention hooks, while P1 complements and expands without conflicting or duplicating.
@@ -89,7 +91,11 @@ Operational rule (hard gate):
   URL first; this keeps the process fast and avoids browser-search loops.
 - Use `--dry-run` only for diagnostics requested by Rodolfo/Zeus, not for normal
   editorial publishing.
-- After the runner returns, format one final message from its JSON. Do not run
+- After the runner returns, format one final message from its JSON using
+  `references/article-final-summary-format-rodolfo-2026-05-26.md`. Keep
+  Rodolfo's exact emojis, labels, order and line breaks; replace only the
+  placeholder values with real data. Do not add intro text, extra fields, tables,
+  or alternate layouts. Do not run
   extra QA/repair work unless the JSON shows a real failure or Rodolfo asked for
   a technical audit.
 - Anti-over-reading rule: for a complete REC direct-publish request, do not read

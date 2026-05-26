@@ -77,48 +77,29 @@ def main():
     cost_str = f"US${float(cost):.2f}" if isinstance(cost, (int, float)) else (str(cost) if cost else "n/a")
 
     public_http = get(data, "public_verify.http")
-    public_check = f"HTTP {public_http}" if public_http else "Verificado"
-    redirect_ok = "Verificado" if get(data, "public_verify.contains_redirected") and get(data, "public_verify.contains_official_url") else "Verificar"
-    media_audit = "P1 OK / card reutilizado do REC / featured presente / card presente na página pública" if get(data, "images.card_reused_from_rec") else "P1 OK / featured presente / card presente na página pública"
+    words = public_words or validation_words or "n/a"
+    tags_line = ", ".join(str(t) for t in tags) if isinstance(tags, list) else str(tags or "")
 
     lines = [
-        f"{RODOLFO} ✅ P1 do **{card}** publicada no {site}.",
+        f"📄 P1 Post ID: {post_id}",
+        f"🔗 P1 : {public_url}",
+        f"✏️ Edit P1: {edit_url}",
+        f"🔗 Slug: {slug}",
+        f"📌 Status: {status}",
         "",
-        f"📄 **Post ID:** `{post_id}`",
-        f"🔗 **Artigo:** <{public_url}>",
-        f"✏️ **Edit:** <{edit_url}>",
-    ]
-    if rec_url:
-        lines.append(f"↩️ **REC de origem:** <{rec_url}>")
-    lines += [
+        "📄 P1",
+        f"📊  Yoast: SEO {seo_score} / Readability {read_score}",
+        f"• Validação: {words} palavras / subtitle {subtitle_chars} chars / público HTTP {public_http or 'n/a'}",
+        f"• Title: {title} — {title_chars} chars",
+        f"• Focus: {focus}",
+        f"• Meta Description: {meta}- {meta_chars} chars",
+        f"• Tags: {tags_line}",
+        f"• Imagem Card: {card_url}",
+        f"• Imagem Featured: {featured_url}",
+        f"• Fonte oficial: {official_url}",
         "",
-        f"📌 **Site:** `{site}` | **Vertical:** `GB / CC / EN` | **Status:** `{status_label}`",
-        f"🔗 **Slug:** `{slug}`",
-        "",
-        f"📊 **Yoast:** SEO **{seo_score}** {score_emoji(seo_score)} | Readability **{read_score}** {score_emoji(read_score)}",
-        f"📝 **Palavras:** **{public_words}** schema público / **{validation_words}** validação interna",
-        f"🏷️ **Title:** {title}",
-        f"🔢 **Title — caracteres:** `{title_chars}`",
-        f"💬 **Sub-title:** {subtitle}",
-        f"🔢 **Sub-title — caracteres:** `{subtitle_chars}`",
-        f"🔍 **Focus:** `{focus}`",
-        f"🧾 **Meta:** {meta}",
-        f"🔢 **Meta description — caracteres:** `{meta_chars}`",
-        "",
-        f"🏷️ **Tags:** {tags_line}",
-        "",
-        "🟢 **CTA:** `APPLY NOW` | **Microcopy:** `You will be redirected.`",
-        f"🏦 **Fonte oficial:** <{official_url}>",
-        f"✅ **Página pública:** {public_check} | **Redirect/URL oficial:** {redirect_ok}",
-        "",
-        "🖼️ **Imagens:**",
-        f"• **Imagem P1:** <{featured_url}>",
-        f"• **Card image:** <{card_url}>",
-        f"• **Auditoria:** {media_audit}",
-        "",
-        f"⏱️ **Tempo total:** `{duration}` | 💰 **Custo:** `{cost_str}`",
-        "",
-        f"{RAQUEL} P1 publicada e validada.",
+        f"⏱️ Tempo total dos runners: P1 {duration}",
+        f"💰 Custo estimado: P1 {cost_str}",
     ]
     print("\n".join(lines))
 

@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 """Render Rodolfo-approved P1 Discord summary from mgs-p1-runner JSON.
 
-Deterministic formatter for final Discord replies. Use this after a successful
-mgs-p1-runner run instead of hand-formatting from memory.
-
+This is intentionally deterministic: no LLM reordering, no compact variants.
 Usage:
-  python3 /root/mgs-agent/skills/content-generate-rec/scripts/render-p1-summary.py /tmp/p1-runner.json
-  cat /tmp/p1-runner.json | python3 /root/mgs-agent/skills/content-generate-rec/scripts/render-p1-summary.py
+  python3 scripts/render-p1-summary.py /tmp/p1-runner.json
+  cat /tmp/p1-runner.json | python3 scripts/render-p1-summary.py
 """
 import json
 import sys
@@ -14,7 +12,6 @@ from pathlib import Path
 
 RODOLFO = "<@344196393512075265>"
 RAQUEL = "<@1496254952501280974>"
-
 
 def fmt_duration(seconds):
     try:
@@ -24,7 +21,6 @@ def fmt_duration(seconds):
     if seconds >= 60:
         return f"{seconds//60}m{seconds%60:02d}s"
     return f"{seconds}s"
-
 
 def score_emoji(score):
     try:
@@ -37,7 +33,6 @@ def score_emoji(score):
         return "🟡"
     return "🔴"
 
-
 def get(d, path, default=None):
     cur = d
     for p in path.split('.'):
@@ -45,7 +40,6 @@ def get(d, path, default=None):
             return default
         cur = cur[p]
     return cur
-
 
 def main():
     if len(sys.argv) > 1 and sys.argv[1] not in ("-", "--"):
@@ -55,68 +49,59 @@ def main():
 
     card = get(data, "card.name") or data.get("card") or ""
     site = data.get("site", "")
+    post_id = get(data, "post.id")
+    public_url = get(data, "post.link")
+    edit_url = get(data, "post.edit_url")
+    rec_url = get(data, "rec_source.url") or data.get("rec_url", "")
     status = get(data, "post.status") or data.get("status_requested", "")
     status_label = "Publicado" if status == "publish" else status
-
-    title = get(data, "seo.title") or ""
-    subtitle = get(data, "content_validation.subtitle") or ""
-    meta = get(data, "seo.meta_description") or ""
-    tags = get(data, "taxonomy.tag_names", []) or []
-    tags_line = " ".join(f"`{t}`" for t in tags)
-
+    slug = get(data, "post.slug")
     seo_score = get(data, "seo.score.seo_score")
     read_score = get(data, "seo.score.readability_score")
-    public_http = get(data, "public_verify.http")
-    public_check = f"HTTP {public_http}" if public_http else "Verificado"
-    redirect_ok = "Verificado" if get(data, "public_verify.contains_redirected") and get(data, "public_verify.contains_official_url") else "Verificar"
-    media_audit = "P1 OK / card reutilizado do REC / featured presente / card presente na página pública" if get(data, "images.card_reused_from_rec") else "P1 OK / featured presente / card presente na página pública"
-
+    public_words = get(data, "public_verify.yoast_schema_word_count")
+    validation_words = get(data, "content_validation.word_count")
+    title = get(data, "seo.title")
+    title_chars = get(data, "content_validation.title_chars", len(title) if title else "")
+    subtitle = get(data, "content_validation.subtitle")
+    subtitle_chars = get(data, "content_validation.subtitle_chars", len(subtitle) if subtitle else "")
+    focus = get(data, "seo.focus_keyphrase") or get(data, "content_validation.focus_keyphrase")
+    meta = get(data, "seo.meta_description")
+    meta_chars = len(meta) if meta else ""
+    tags = get(data, "taxonomy.tag_names", [])
+    tags_line = " ".join(f"`{t}`" for t in tags)
+    official_url = data.get("official_url", "")
+    featured_url = get(data, "images.featured.source_url")
+    card_url = get(data, "card.image_url")
+    duration = fmt_duration(data.get("duration_sec"))
     cost = get(data, "cost_usd.total_est")
     cost_str = f"US${float(cost):.2f}" if isinstance(cost, (int, float)) else (str(cost) if cost else "n/a")
 
-    lines = [
-        f"{RODOLFO} ✅ P1 do **{card}** publicada no {site}.",
-        "",
-        f"📄 **Post ID:** `{get(data, 'post.id')}`",
-        f"🔗 **Artigo:** <{get(data, 'post.link')}>",
-        f"✏️ **Edit:** <{get(data, 'post.edit_url')}>",
-    ]
-    rec_url = get(data, "rec_source.url") or data.get("rec_url", "")
-    if rec_url:
-        lines.append(f"↩️ **REC de origem:** <{rec_url}>")
+    public_http = get(data, "public_verify.http")
+    words = public_words or validation_words or "n/a"
+    tags_line = ", ".join(str(t) for t in tags) if isinstance(tags, list) else str(tags or "")
 
-    lines += [
+    lines = [
+        f"📄 P1 Post ID: {post_id}",
+        f"🔗 P1 : {public_url}",
+        f"✏️ Edit P1: {edit_url}",
+        f"🔗 Slug: {slug}",
+        f"📌 Status: {status}",
         "",
-        f"📌 **Site:** `{site}` | **Vertical:** `GB / CC / EN` | **Status:** `{status_label}`",
-        f"🔗 **Slug:** `{get(data, 'post.slug')}`",
+        "📄 P1",
+        f"📊  Yoast: SEO {seo_score} / Readability {read_score}",
+        f"• Validação: {words} palavras / subtitle {subtitle_chars} chars / público HTTP {public_http or 'n/a'}",
+        f"• Title: {title} — {title_chars} chars",
+        f"• Focus: {focus}",
+        f"• Meta Description: {meta}- {meta_chars} chars",
+        f"• Tags: {tags_line}",
+        f"• Imagem Card: {card_url}",
+        f"• Imagem Featured: {featured_url}",
+        f"• Fonte oficial: {official_url}",
         "",
-        f"📊 **Yoast:** SEO **{seo_score}** {score_emoji(seo_score)} | Readability **{read_score}** {score_emoji(read_score)}",
-        f"📝 **Palavras:** **{get(data, 'public_verify.yoast_schema_word_count')}** schema público / **{get(data, 'content_validation.word_count')}** validação interna",
-        f"🏷️ **Title:** {title}",
-        f"🔢 **Title — caracteres:** `{get(data, 'content_validation.title_chars', len(title) if title else '')}`",
-        f"💬 **Sub-title:** {subtitle}",
-        f"🔢 **Sub-title — caracteres:** `{get(data, 'content_validation.subtitle_chars', len(subtitle) if subtitle else '')}`",
-        f"🔍 **Focus:** `{get(data, 'seo.focus_keyphrase') or get(data, 'content_validation.focus_keyphrase')}`",
-        f"🧾 **Meta:** {meta}",
-        f"🔢 **Meta description — caracteres:** `{len(meta) if meta else ''}`",
-        "",
-        f"🏷️ **Tags:** {tags_line}",
-        "",
-        "🟢 **CTA:** `APPLY NOW` | **Microcopy:** `You will be redirected.`",
-        f"🏦 **Fonte oficial:** <{data.get('official_url', '')}>",
-        f"✅ **Página pública:** {public_check} | **Redirect/URL oficial:** {redirect_ok}",
-        "",
-        "🖼️ **Imagens:**",
-        f"• **Imagem P1:** <{get(data, 'images.featured.source_url')}>",
-        f"• **Card image:** <{get(data, 'card.image_url')}>",
-        f"• **Auditoria:** {media_audit}",
-        "",
-        f"⏱️ **Tempo total:** `{fmt_duration(data.get('duration_sec'))}` | 💰 **Custo:** `{cost_str}`",
-        "",
-        f"{RAQUEL} P1 publicada e validada.",
+        f"⏱️ Tempo total dos runners: P1 {duration}",
+        f"💰 Custo estimado: P1 {cost_str}",
     ]
     print("\n".join(lines))
-
 
 if __name__ == "__main__":
     main()
