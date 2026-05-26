@@ -57,7 +57,7 @@ visual_briefs=(
   "flat lay desk scene with card beside smartphone, receipts and coffee, clean budgeting context"
   "online shopping context with laptop and parcel in background, card in foreground, no visible retailer logos"
   "travel context with passport, boarding-pass-like generic paper and card, no airline logos"
-  "cashback/rewards context with shopping bag and subtle generic percentage icon, no badges or text labels copied from other sites"
+  "cashback/rewards context with shopping bag, hotel loyalty vibe and premium lifestyle props, no graphic icons, badges or text overlays"
 )
 visual_brief="${visual_briefs[$RANDOM % ${#visual_briefs[@]}]}"
 

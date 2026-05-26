@@ -277,6 +277,7 @@ def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Di
         m = re.search(pat, clean, flags=re.I)
         if m:
             annual_fee = m.group(0).strip(" .;:")
+            annual_fee = re.split(r"\b(?:Representative|APR|Purchase|Assumed|Credit\s+Limit)\b", annual_fee, maxsplit=1, flags=re.I)[0].strip(" .;:")
             break
 
     # APR / representative rate.
@@ -290,6 +291,7 @@ def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Di
         m = re.search(pat, clean, flags=re.I)
         if m:
             apr = m.group(0).strip(" .;:")[:140]
+            apr = re.split(r"\b(?:Assumed\s+Credit\s+Limit|Credit\s+limit|About\s+this|Eligibility)\b", apr, maxsplit=1, flags=re.I)[0].strip(" .;:")
             break
 
     # Benefits: source sentences with product/offer terms. Avoid boilerplate.
