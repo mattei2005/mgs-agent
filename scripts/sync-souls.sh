@@ -48,3 +48,13 @@ for category in wordpress devops; do
             && echo "$(date -Iseconds) synced atena skills/$category"
     fi
 done
+
+# Atena: OpenHands skill customizada por política MGS de custo/provider.
+# Não sincronizar a categoria inteira autonomous-ai-agents para evitar vendor skills enormes.
+if [ -d "$PROFILES_DIR/atena/skills/autonomous-ai-agents/openhands" ]; then
+    mkdir -p "$TARGET_DIR/atena-skills/autonomous-ai-agents"
+    rsync -a --delete \
+        "$PROFILES_DIR/atena/skills/autonomous-ai-agents/openhands/" \
+        "$TARGET_DIR/atena-skills/autonomous-ai-agents/openhands/" \
+        && echo "$(date -Iseconds) synced atena skills/autonomous-ai-agents/openhands"
+fi
