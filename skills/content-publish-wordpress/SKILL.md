@@ -124,6 +124,20 @@ All scripts append to `/root/mgs-agent/logs/publish-wordpress.log` with
 timestamp + action + HTTP status. On error, stderr receives a human-readable
 message and exit code is non-zero.
 
+## REC publish/readiness gate for status changes
+
+When changing an existing REC from `draft` to `publish`, or updating a published REC, the caller must run the same readiness checks used by the REC pipeline before reporting success.
+
+Minimum gate for REC posts:
+1. Run `validate-article.sh` on the exact final body when content changed.
+2. Run `yoast-score-post.sh <site_key> <post_id>` after the update/status change.
+3. Treat Yoast Readability `<71` as not ready; repair before final reporting unless Rodolfo/Raquel explicitly approves the exception.
+4. Preserve LazyBlocks exactly during any readability repair.
+5. Keep REC word count `450–500` and subtitle/excerpt `≤100` characters.
+6. For yellow/red readability, use the REC repair reference in `content-generate-rec/references/rec-readability-repair-2026-05-26.md`.
+
+This prevents a manual REST status flip from bypassing the editorial/Yoast hard gate.
+
 ## Safe teardown for benchmark/test articles
 
 See also `references/rec-benchmark-cleanup-helper.md` for a reusable scoped cleanup pattern.
