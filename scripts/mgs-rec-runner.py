@@ -1185,8 +1185,11 @@ def main() -> int:
     created_media: List[Dict[str, Any]] = []
     artifact_audit: Dict[str, Any] = {"created_count": 0, "used_count": 0, "extra_count": 0, "deleted_count": 0, "items": []}
 
-    def tick(name: str, t0: float) -> None:
-        timings[name] = round(time.time() - t0, 2)
+    def tick(name: str, t0: float, add: bool = False) -> None:
+        elapsed = time.time() - t0
+        if add:
+            elapsed += float(timings.get(name, 0) or 0)
+        timings[name] = round(elapsed, 2)
 
     try:
         t0 = time.time()
@@ -1493,33 +1496,44 @@ def main() -> int:
                 urllib.request.urlretrieve(card_url, card_local)
                 card_normalize = normalize_card_artwork(card_local)
                 tick("card_image_download_sec", t0)
-            t0 = time.time()
-            feat = run_json([str(GEN_SCRIPTS / "generate-featured-image.sh"), card_slug, card_local], timeout=180)
-            tick("featured_generate_sec", t0)
-            featured_path = feat["path"]
-            featured_scene = feat.get("scene")
-            t0 = time.time()
-            ident = run(["identify", "-format", "%w %h", featured_path], timeout=20)
-            if ident.returncode != 0:
-                raise RunnerError(f"featured identify failed: {ident.stderr}")
-            w, h = [int(x) for x in ident.stdout.split()[:2]]
-            if w < 1000 or h < 600:
-                raise RunnerError(f"featured image too small: {w}x{h}")
-            if abs((w / h) - (16 / 9)) > 0.01:
-                raise RunnerError(f"featured image not 16:9 after compression: {w}x{h}")
-            tick("featured_local_validate_sec", t0)
-            t0 = time.time()
-            featured_audit = run_json([
-                str(FEATURED_AUDIT_SCRIPT),
-                "--featured", featured_path,
-                "--card", card_local,
-                "--mode", "rec",
-                "--card-name", card_data.get("card_name") or args.card,
-                "--require-person",
-            ], timeout=150)
-            tick("featured_semantic_audit_sec", t0)
-            if not featured_audit.get("ok"):
-                raise RunnerError(f"featured_semantic_audit_failed: {featured_audit}")
+            featured_path = None
+            featured_scene = None
+            featured_audit = None
+            featured_failures: List[str] = []
+            for featured_attempt in range(1, 4):
+                t0 = time.time()
+                feat = run_json([str(GEN_SCRIPTS / "generate-featured-image.sh"), card_slug, card_local], timeout=180)
+                tick("featured_generate_sec", t0, add=True)
+                featured_path = feat["path"]
+                featured_scene = feat.get("scene")
+                t0 = time.time()
+                ident = run(["identify", "-format", "%w %h", featured_path], timeout=20)
+                if ident.returncode != 0:
+                    raise RunnerError(f"featured identify failed: {ident.stderr}")
+                w, h = [int(x) for x in ident.stdout.split()[:2]]
+                if w < 1000 or h < 600:
+                    raise RunnerError(f"featured image too small: {w}x{h}")
+                if abs((w / h) - (16 / 9)) > 0.01:
+                    raise RunnerError(f"featured image not 16:9 after compression: {w}x{h}")
+                tick("featured_local_validate_sec", t0, add=True)
+                t0 = time.time()
+                featured_audit = run_json([
+                    str(FEATURED_AUDIT_SCRIPT),
+                    "--featured", featured_path,
+                    "--card", card_local,
+                    "--mode", "rec",
+                    "--card-name", card_data.get("card_name") or args.card,
+                    "--require-person",
+                ], timeout=150, allow_fail=True)
+                tick("featured_semantic_audit_sec", t0, add=True)
+                if featured_audit.get("ok"):
+                    if featured_attempt > 1:
+                        warnings.append(f"featured_semantic_audit_passed_after_retry:{featured_attempt}")
+                    break
+                reasons = featured_audit.get("blocking_reasons") or []
+                featured_failures.append(f"attempt {featured_attempt}: {', '.join(map(str, reasons))}")
+            if not featured_audit or not featured_audit.get("ok"):
+                raise RunnerError("featured_semantic_audit_failed_after_retries: " + " | ".join(featured_failures))
             steps.append("featured_semantic_audited")
             t0 = time.time()
             upf = run_json([str(WP_SCRIPTS / "upload-image.sh"), args.site, featured_path, f"featured-{card_slug}-final.jpg"], timeout=120)

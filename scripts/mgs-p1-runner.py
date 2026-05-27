@@ -649,6 +649,9 @@ def fit_word_count(body: str) -> Tuple[str, int]:
         "Confirm the product’s specific promotional window, fees and post-promotional rate before relying on any headline offer.",
         "Set a repayment plan before the promotional period ends, because any remaining balance may start accruing interest at the standard variable rate.",
         "Do not spend more than you can realistically repay, and remember that missed payments can affect promotional rates and future credit access.",
+        "For travel-focused cards, estimate the cash value of lounge access, foreign-spend savings and insurance discounts against the monthly fee before applying.",
+        "If a cashback cap applies, compare that cap with your usual monthly spending so the expected return remains realistic rather than theoretical.",
+        "Keep evidence of the offer terms that applied when you submitted the application, because issuers may update promotions, eligibility wording or reward rules later.",
     ]
     idx = 0
     while wc < 900 and idx < len(filler):
@@ -837,20 +840,31 @@ def main() -> int:
         official_data.setdefault("tag2", parsed.get("tag2"))
         official_data.setdefault("descriptor", parsed.get("descriptor"))
 
-        t = ts(); card_path = ensure_card_local(card_url, card_slug); featured_path = make_exact_featured(card_path, card_slug); timings["featured_image"] = ts() - t; steps.append("featured_generated_exact_overlay")
-
-        t = ts()
-        featured_audit = run_json([
-            str(FEATURED_AUDIT_SCRIPT),
-            "--featured", featured_path,
-            "--card", card_path,
-            "--mode", "p1",
-            "--card-name", card_name,
-            "--require-person",
-        ], timeout=150)
-        timings["featured_semantic_audit"] = ts() - t
-        if not featured_audit.get("ok"):
-            raise RunnerError(f"featured_semantic_audit_failed: {featured_audit}")
+        card_path = ensure_card_local(card_url, card_slug)
+        featured_path = None
+        featured_audit = None
+        featured_failures: List[str] = []
+        for featured_attempt in range(1, 4):
+            t = ts(); featured_path = make_exact_featured(card_path, card_slug); timings["featured_image"] = timings.get("featured_image", 0) + (ts() - t)
+            t = ts()
+            featured_audit = run_json([
+                str(FEATURED_AUDIT_SCRIPT),
+                "--featured", featured_path,
+                "--card", card_path,
+                "--mode", "p1",
+                "--card-name", card_name,
+                "--require-person",
+            ], timeout=150, allow_fail=True)
+            timings["featured_semantic_audit"] = timings.get("featured_semantic_audit", 0) + (ts() - t)
+            if featured_audit.get("ok"):
+                if featured_attempt > 1:
+                    result.setdefault("warnings", []).append(f"featured_semantic_audit_passed_after_retry:{featured_attempt}")
+                break
+            reasons = featured_audit.get("blocking_reasons") or []
+            featured_failures.append(f"attempt {featured_attempt}: {', '.join(map(str, reasons))}")
+        if not featured_audit or not featured_audit.get("ok") or not featured_path:
+            raise RunnerError("featured_semantic_audit_failed_after_retries: " + " | ".join(featured_failures))
+        steps.append("featured_generated_exact_overlay")
         steps.append("featured_semantic_audited")
 
         if args.dry_run:
