@@ -13,6 +13,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import time
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -46,6 +48,33 @@ def duration(seconds: Any) -> str:
     if total > 60:
         return f"{total // 60}m{total % 60:02d}s"
     return f"{total}s"
+
+
+def operation_duration(data: Mapping[str, Any], override_seconds: Any = None) -> str:
+    """User-perceived elapsed time. Prefer explicit operation elapsed seconds.
+
+    Runner duration is only a fallback for older JSON; final summaries should pass
+    --operation-seconds or include operation_duration_sec/operation_elapsed_sec.
+    """
+    value = override_seconds
+    if value in (None, ""):
+        value = first(data, "operation_duration_sec", "operation_elapsed_sec", "total_elapsed_sec", "duration_sec")
+    return duration(value)
+
+
+def operation_duration_from_started(started_at: str | None) -> float | None:
+    if not started_at:
+        return None
+    text = started_at.strip()
+    try:
+        if text.endswith("Z"):
+            text = text[:-1] + "+00:00"
+        return max(0.0, time.time() - datetime.fromisoformat(text).timestamp())
+    except Exception:
+        try:
+            return max(0.0, time.time() - float(started_at))
+        except Exception:
+            return None
 
 
 def cost(value: Any) -> str:
@@ -171,7 +200,7 @@ def render_block(data: Mapping[str, Any], kind: str) -> list[str]:
     ]
 
 
-def render_rec(data: Mapping[str, Any]) -> str:
+def render_rec(data: Mapping[str, Any], operation_seconds: Any = None) -> str:
     lines = [
         f"📄 REC Post ID: {post_id(data)}",
         f"🔗 REC: {no_embed_url(public_url(data))}",
@@ -181,13 +210,13 @@ def render_rec(data: Mapping[str, Any]) -> str:
         "",
         *render_block(data, "rec"),
         "",
-        f"⏱️ Tempo total dos runners: REC {duration(first(data, 'duration_sec'))}",
+        f"⏱️ Tempo total da operação: {operation_duration(data, operation_seconds)}",
         f"💰 Custo estimado: REC {cost(first(data, 'cost_usd.total_est'))}",
     ]
     return "\n".join(lines)
 
 
-def render_p1(data: Mapping[str, Any]) -> str:
+def render_p1(data: Mapping[str, Any], operation_seconds: Any = None) -> str:
     lines = [
         f"📄 P1 Post ID: {post_id(data)}",
         f"🔗 P1 : {no_embed_url(public_url(data))}",
@@ -197,13 +226,13 @@ def render_p1(data: Mapping[str, Any]) -> str:
         "",
         *render_block(data, "p1"),
         "",
-        f"⏱️ Tempo total dos runners: P1 {duration(first(data, 'duration_sec'))}",
+        f"⏱️ Tempo total da operação: {operation_duration(data, operation_seconds)}",
         f"💰 Custo estimado: P1 {cost(first(data, 'cost_usd.total_est'))}",
     ]
     return "\n".join(lines)
 
 
-def render_rec_p1(rec: Mapping[str, Any], p1: Mapping[str, Any]) -> str:
+def render_rec_p1(rec: Mapping[str, Any], p1: Mapping[str, Any], operation_seconds: Any = None) -> str:
     rec_cost = first(rec, "cost_usd.total_est")
     p1_cost = first(p1, "cost_usd.total_est")
     try:
@@ -227,7 +256,7 @@ def render_rec_p1(rec: Mapping[str, Any], p1: Mapping[str, Any]) -> str:
         "",
         *render_block(p1, "p1"),
         "",
-        f"⏱️ Tempo total dos runners: REC {duration(first(rec, 'duration_sec'))} + P1 {duration(first(p1, 'duration_sec'))}",
+        f"⏱️ Tempo total da operação: {duration(operation_seconds) if operation_seconds not in (None, '') else duration((float(first(rec, 'duration_sec', default=0) or 0) + float(first(p1, 'duration_sec', default=0) or 0)))}",
         f"💰 Custo estimado: REC {cost(rec_cost)} + P1 {cost(p1_cost)} = {total_cost}",
     ]
     return "\n".join(lines)
@@ -237,20 +266,25 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("paths", nargs="+")
     parser.add_argument("--type", choices=["rec", "p1", "rec-p1"], required=True)
+    parser.add_argument("--operation-seconds", type=float, default=None, help="User-perceived elapsed seconds from request receipt to final summary")
+    parser.add_argument("--started-at", default=None, help="ISO timestamp or epoch captured when the user request was received")
     args = parser.parse_args()
+    operation_seconds = args.operation_seconds
+    if operation_seconds is None:
+        operation_seconds = operation_duration_from_started(args.started_at)
 
     if args.type == "rec":
         if len(args.paths) != 1:
             parser.error("--type rec requires exactly 1 JSON path")
-        print(render_rec(load_json(args.paths[0])))
+        print(render_rec(load_json(args.paths[0]), operation_seconds))
     elif args.type == "p1":
         if len(args.paths) != 1:
             parser.error("--type p1 requires exactly 1 JSON path")
-        print(render_p1(load_json(args.paths[0])))
+        print(render_p1(load_json(args.paths[0]), operation_seconds))
     else:
         if len(args.paths) != 2:
             parser.error("--type rec-p1 requires REC JSON path and P1 JSON path")
-        print(render_rec_p1(load_json(args.paths[0]), load_json(args.paths[1])))
+        print(render_rec_p1(load_json(args.paths[0]), load_json(args.paths[1]), operation_seconds))
     return 0
 
 

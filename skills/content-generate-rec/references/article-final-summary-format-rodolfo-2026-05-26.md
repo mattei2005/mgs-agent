@@ -51,7 +51,7 @@ When reporting a completed REC, P1 or REC+P1 article job:
 • Imagem Featured: link da featured imagem
 • Fonte oficial: link oficial do artigo utilizada
 
-⏱️ Tempo total dos runners: REC tempo que foi feito se passar de 60 segundos colocar em minutos
+⏱️ Tempo total da operação: tempo total percebido desde o pedido ate o resumo final
 💰 Custo estimado: REC gasto do rec
 ```
 
@@ -75,7 +75,7 @@ When reporting a completed REC, P1 or REC+P1 article job:
 • Imagem Featured: link da featured imagem
 • Fonte oficial: link oficial do artigo utilizada
 
-⏱️ Tempo total dos runners: P1 tempo que foi feito se passar de 60 segundos colocar em minutos
+⏱️ Tempo total da operação: tempo total percebido desde o pedido ate o resumo final
 💰 Custo estimado: P1 gasto p1
 ```
 
@@ -116,14 +116,17 @@ When reporting a completed REC, P1 or REC+P1 article job:
 • Imagem Featured: link da featured imagem
 • Fonte oficial: link oficial do artigo utilizada
 
-⏱️ Tempo total dos runners: REC tempo que foi feito + P1 tempo que foi feito se passar de 60 segundos colocar em minutos
+⏱️ Tempo total da operação: tempo total percebido desde o pedido ate o resumo final
 💰 Custo estimado: REC gasto do rec + P1 gasto p1 = total de gastos
 ```
 
 ## Duration formatting
 
-- If runner time is up to 60 seconds, show seconds.
-- If runner time is above 60 seconds, show minutes.
+- The final summary must report **tempo total da operação**, not only successful runner duration.
+- Tempo total da operação means the user-perceived elapsed time from receiving the publish request to sending the final summary, including retries, failed attempts, repairs, validation, cleanup, and agent overhead.
+- If a runner-only duration is useful for diagnostics, it may be included separately only when explicitly requested; it must not replace the main total time.
+- If operation time is up to 60 seconds, show seconds.
+- If operation time is above 60 seconds, show minutes.
 
 ## Replacement rule
 
