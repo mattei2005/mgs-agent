@@ -94,4 +94,5 @@ if self._busy_input_mode == "queue":
 - Não confundir `/steer` com fila. `/steer` é intra-turn guidance.
 - Não registrar como “Discord dropou mensagem” quando aparece `Delivered /steer`; a mensagem chegou e foi consumida como guidance.
 - Não trocar globalmente tratamento de PHOTO/bursts: mídia ainda precisa de merge para álbuns/captions. A mudança alvo é texto normal durante busy queue.
+- Discord text batching não pode agrupar mensagens curtas sequenciais. O batch deve ficar restrito a chunks perto do limite de split (~1900/2000 chars) ou a uma batch já aberta; caso contrário, perguntas curtas como “Dubai?” + “São Paulo?” viram um único evento ancorado na primeira mensagem, e a segunda resposta aparece respondendo/quotando a pergunta errada.
 - Mudança em Hermes runtime é patch local; reportar/validar e lembrar que updates do Hermes podem sobrescrever.

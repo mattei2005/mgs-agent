@@ -1,5 +1,5 @@
 diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
-index efe0b5d1d..9ba5f31b8 100644
+index efe0b5d1d..f21cf84d1 100644
 --- a/plugins/platforms/discord/adapter.py
 +++ b/plugins/platforms/discord/adapter.py
 @@ -20,7 +20,7 @@ import tempfile
@@ -269,7 +269,30 @@ index efe0b5d1d..9ba5f31b8 100644
                      parent_channel_id = str(message.channel.id)
                      is_thread = True
                      thread_id = str(thread.id)
-@@ -6081,6 +6290,11 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
+@@ -4832,9 +5041,19 @@ class DiscordAdapter(BasePlatformAdapter):
+         if thread_id:
+             self._threads.mark(thread_id)
+ 
+-        # Only batch plain text messages — commands, media, etc. dispatch
+-        # immediately since they won't be split by the Discord client.
+-        if msg_type == MessageType.TEXT and self._text_batch_delay_seconds > 0:
++        # Only batch likely Discord client-side split chunks.  Short rapid
++        # sequential messages must stay as separate turns so each assistant
++        # answer replies to the correct user message.  The previous behavior
++        # batched every text message for 0.6s, which collapsed questions like
++        # "Dubai?" + "São Paulo?" into one event anchored to the first message.
++        _batch_key = self._text_batch_key(event) if msg_type == MessageType.TEXT else ""
++        _has_open_batch = bool(_batch_key and _batch_key in self._pending_text_batches)
++        _looks_like_split_chunk = len(event.text or "") >= self._SPLIT_THRESHOLD
++        if (
++            msg_type == MessageType.TEXT
++            and self._text_batch_delay_seconds > 0
++            and (_has_open_batch or _looks_like_split_chunk)
++        ):
+             self._enqueue_text_event(event)
+         else:
+             await self.handle_message(event)
+@@ -6081,6 +6300,11 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
          os.environ["DISCORD_FREE_RESPONSE_CHANNELS"] = str(frc)
      if "auto_thread" in discord_cfg and not os.getenv("DISCORD_AUTO_THREAD"):
          os.environ["DISCORD_AUTO_THREAD"] = str(discord_cfg["auto_thread"]).lower()
