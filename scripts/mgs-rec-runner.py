@@ -328,9 +328,25 @@ def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Di
         benefits = benefits[:3]
 
     lower_benefits = " ".join(benefits).lower()
-    tag10 = "Balance transfers" if "balance transfer" in lower_benefits else "Card features"
-    tag2 = "0% offers" if "0%" in lower_benefits else (annual_fee[:25] if annual_fee != "N/A" else "Check terms")
-    descriptor = f"A UK credit card with issuer terms and online account features."
+    if "amazon" in lower_benefits or "amazon" in card_name.lower():
+        tag10 = "Amazon rewards"
+        descriptor = "Earn Amazon rewards on eligible spending."
+    elif "nectar" in lower_benefits or "nectar" in card_name.lower():
+        tag10 = "Nectar points"
+        descriptor = "Earn Nectar points on eligible spending."
+    elif "balance transfer" in lower_benefits:
+        tag10 = "Balance transfers"
+        descriptor = "Move balances with a focused transfer offer."
+    elif "cashback" in lower_benefits:
+        tag10 = "Cashback rewards"
+        descriptor = "Earn cashback on eligible purchases."
+    elif any(t in lower_benefits for t in ["avios", "travel", "points"]):
+        tag10 = "Travel rewards"
+        descriptor = "Earn travel rewards on eligible spend."
+    else:
+        tag10 = "Card benefits"
+        descriptor = shorten_words(benefits[0], 9).rstrip(" ,;:") + "."
+    tag2 = "0% purchases" if "0%" in lower_benefits and "purchase" in lower_benefits else (annual_fee[:25] if annual_fee != "N/A" else "Check official terms")
 
     return {
         "card_name": card_name,
@@ -434,8 +450,12 @@ def enforce_subtitle_limit(content: str, card_name: str, card_data: Dict[str, An
         tail = "offers travel-focused credit card benefits."
     elif "cashback" in benefits:
         tail = "offers cashback benefits for eligible spending."
+    elif "amazon" in benefits or "amazon" in card_name.lower():
+        tail = "rewards Amazon spending and key purchases."
+    elif "points" in benefits or "rewards" in benefits:
+        tail = "highlights its main rewards before you apply."
     else:
-        tail = "offers key credit card benefits and features."
+        tail = "highlights its confirmed costs and benefits."
     # Include bold card name for focus-keyword placement, but cap hard.
     plain = f"{card_name} {tail}"
     if len(plain) > 98:
@@ -735,8 +755,11 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
         raise RunnerError("REC Comparative Table requires two real same-segment competitor cards; generic placeholders are blocked")
     comp_a = esc_text(competitor_rows[0]["name"])
     comp_b = esc_text(competitor_rows[1]["name"])
-    comp_a_fee = esc_text(competitor_rows[0].get("annual_fee") or "Check issuer terms")
-    comp_b_fee = esc_text(competitor_rows[1].get("annual_fee") or "Check issuer terms")
+    missing_comp_fees = [c["name"] for c in competitor_rows[:2] if not c.get("annual_fee")]
+    if missing_comp_fees:
+        raise RunnerError("REC Comparative Table requires researched annual_fee for competitors: " + ", ".join(missing_comp_fees))
+    comp_a_fee = esc_text(competitor_rows[0]["annual_fee"])
+    comp_b_fee = esc_text(competitor_rows[1]["annual_fee"])
     comp_a_note = esc_text(shorten_words(competitor_rows[0].get("benefit") or "Real same-segment comparison option", 10))
     comp_b_note = esc_text(shorten_words(competitor_rows[1].get("benefit") or "Real same-segment comparison option", 10))
     primary_benefit = esc_text(shorten_words(benefits[0] if benefits else "key credit card features", 12))
@@ -758,11 +781,11 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     table = "".join(rows)
 
     html_body = f"""<!-- wp:paragraph -->
-<p><strong>{name}</strong> offers {annual_fee.lower()}. It gives UK applicants practical features and everyday borrowing choices.</p>
+<p><strong>{name}</strong> highlights {primary_benefit} with {annual_fee.lower()}.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>The {name} is built for applicants who want a clear credit card option. It should be checked against budget, eligibility and repayment habits.</p>
+<p>The {name} should be judged by its own strongest use case, not by a generic credit card checklist.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -826,7 +849,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Compared with {comp_b}, it targets the same rewards market but keeps the focus on {third_benefit}.</p>
+<p>Compared with {comp_b}, it belongs to a different rewards ecosystem and keeps the focus on {third_benefit}.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->

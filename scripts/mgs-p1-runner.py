@@ -472,6 +472,59 @@ def wp_heading(text: str) -> str:
     return f"<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">{html.escape(text)}</h2>\n<!-- /wp:heading -->"
 
 
+def infer_p1_positioning(card_name: str, benefits: List[str]) -> Dict[str, str]:
+    """Return benefit-specific P1 copy so scaled pages do not read as duplicated templates."""
+    joined = " ".join(benefits).lower()
+    name_l = card_name.lower()
+    if "amazon" in joined or "amazon" in name_l:
+        return {
+            "subtitle_tail": "is built for Amazon shoppers who want rewards, a welcome gift and 0% purchases.",
+            "use_case": "people who already spend through Amazon and want those purchases to generate direct reward value",
+            "value_focus": "Amazon-linked benefits, the app-first setup and the main repayment points",
+            "reward_heading": "Amazon Rewards and Purchase Value",
+            "reward_1": "The reward structure is tied to Amazon rather than airline miles or hotel status. That makes the value easier to understand for regular Amazon customers.",
+            "reward_2": "Compare the Amazon earn rate with your normal basket size and monthly repayment habits before applying.",
+            "reward_3": "Prime members should also consider whether eligible shopping events are moments when they would naturally spend and repay responsibly.",
+            "max_1": "Start with Amazon and everyday spending that you can repay comfortably. This keeps the card’s benefits connected to existing behaviour rather than unnecessary borrowing.",
+            "max_2": "Pay close attention to payment dates and statement balances. Otherwise, interest can quickly reduce the value of the gift-card offer and rewards.",
+            "max_3": "Check reward rules regularly, especially around Prime events, the welcome gift and the 12-month earn-rate period. Terms can change, and availability may vary.",
+            "right_1": "For Amazon-focused spending, estimate how often you will use Amazon, whether you have Prime and how quickly you can repay purchases.",
+            "right_2": "Check whether the reward rules still match your shopping habits before submitting the application.",
+            "right_3": "A careful comparison should include Amazon reward use, repayment behaviour, app access and total cost. This keeps the decision practical rather than driven only by headline benefits.",
+        }
+    if any(t in joined for t in ["avios", "lounge", "hotel", "travel", "companion voucher"]):
+        return {
+            "subtitle_tail": "connects travel rewards with costs, eligibility and application steps.",
+            "use_case": "travellers who can realistically use the card’s confirmed travel rewards",
+            "value_focus": "travel benefits, annual cost, eligibility and repayment considerations",
+            "reward_heading": "Travel Rewards and Real-World Value",
+            "reward_1": "Travel rewards only matter when routes, hotel stays or partner redemptions match your plans.",
+            "reward_2": "Check whether the strongest travel benefit would be used often enough to justify any fee or spending target.",
+            "reward_3": "Occasional travellers may need to compare the same card against simpler cashback or no-fee alternatives.",
+            "max_1": "Start with trips or travel spending you already planned. Avoid creating extra spend only to trigger rewards.",
+            "max_2": "Track payment dates and statement balances so interest does not erase the value of travel rewards.",
+            "max_3": "Review redemption rules, partner availability and voucher conditions before relying on headline travel value.",
+            "right_1": "Estimate how many trips or partner redemptions you would realistically use in a normal year.",
+            "right_2": "Check whether the travel rules still match your plans before submitting the application.",
+            "right_3": "A careful comparison should include reward use, repayment behaviour, travel plans and total cost.",
+        }
+    return {
+        "subtitle_tail": "explains its confirmed benefits, costs and application steps before you apply.",
+        "use_case": "users whose normal spending matches the card’s confirmed strongest benefit",
+        "value_focus": "confirmed benefits, costs, eligibility and repayment considerations",
+        "reward_heading": "Rewards and Everyday Value",
+        "reward_1": "The real value depends on how often you would use the confirmed benefit in ordinary spending.",
+        "reward_2": "Compare the benefit with your repayment habits so interest does not outweigh the card’s value.",
+        "reward_3": "A simpler card may be better if the headline feature does not match your routine.",
+        "max_1": "Start with spending you can repay comfortably. Benefits should follow existing behaviour, not create extra borrowing.",
+        "max_2": "Pay close attention to payment dates and statement balances so fees or interest do not reduce value.",
+        "max_3": "Check the official rules regularly because terms, exclusions and availability can change.",
+        "right_1": "Estimate how often you would use the strongest confirmed benefit during a normal year.",
+        "right_2": "Check whether the rules still match your needs before submitting the application.",
+        "right_3": "A careful comparison should include benefit use, repayment behaviour and total cost.",
+    }
+
+
 def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_data: Dict[str, Any], official_url: str, featured_id: int, featured_url: str, card_id: int, card_url: str, button_hex: str) -> Tuple[str, Dict[str, Any]]:
     fee = card_data.get("annual_fee") or "the official fee shown by the issuer"
     apr = card_data.get("apr") or "the representative APR shown by the issuer"
@@ -482,9 +535,10 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
     tag2 = "Travel perks" if any("lounge" in b.lower() or "travel" in b.lower() for b in benefits) else (card_data.get("tag2") or "Credit card")
     card_data["tag10"] = tag10[:25]
     card_data["tag2"] = tag2[:25]
-    card_data["descriptor"] = card_data.get("descriptor") or f"Application support for the {card_name}."
+    positioning = infer_p1_positioning(card_name, benefits)
+    card_data["descriptor"] = card_data.get("descriptor") or positioning["subtitle_tail"].replace("is built for ", "").rstrip(".").capitalize() + "."
 
-    subtitle = f"{card_name} earns rewards and explains key costs before you apply."
+    subtitle = f"{card_name} {positioning['subtitle_tail']}"
     if len(subtitle) > 100:
         subtitle = f"{card_name} explains key costs and benefits before you apply."
     if len(subtitle) > 100:
@@ -493,9 +547,9 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
     blocks: List[str] = [wp_paragraph(subtitle)]
     blocks.append(f'<!-- wp:image {{"id":{featured_id},"sizeSlug":"large","linkDestination":"none"}} -->\n<figure class="wp-block-image size-large"><img src="{featured_url}" alt="{html.escape(card_name)} application support" class="wp-image-{featured_id}"/></figure>\n<!-- /wp:image -->')
     intro = [
-        f"The {card_name} is designed for users who want to understand the card clearly before continuing to the issuer. This page summarises the main official points in a practical way.",
+        f"The {card_name} is most relevant for {positioning['use_case']}. This page focuses on the {positioning['value_focus']}.",
         f"Applications, eligibility checks and final lending decisions are handled by the issuer, not by {site.get('domain')}. Therefore, the button sends you to the official card page.",
-        f"Before applying, compare the rewards, fees and repayment implications. A card can be useful only when its benefits fit your normal spending and budget.",
+        f"Before applying, compare the card’s main benefits with your real spending. A card can be useful only when its benefits fit your normal budget.",
         "Use this page as a decision-support step, then read the issuer’s latest summary box and terms before submitting any application.",
     ]
     blocks.extend(wp_paragraph(p) for p in intro)
@@ -516,10 +570,10 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
             f"The official source also references {apr}. Interest charges may reduce or outweigh reward value if balances are not managed carefully.",
             "Users should read the summary box, reward rules and exclusions before applying. In particular, check whether any welcome offer has spending thresholds or time limits.",
         ]),
-        ("Rewards and Travel Benefits", [
-            "Rewards can support future travel or account value when used consistently. However, the real value depends on redemption options, availability and personal travel habits.",
-            "If the card includes travel benefits, check how often you would actually use them. A benefit is only meaningful when it fits your plans, not just because it sounds premium.",
-            "For example, a voucher or lounge discount may be useful for frequent travellers. Occasional users may need to compare the same fee against simpler card alternatives.",
+        (positioning["reward_heading"], [
+            positioning["reward_1"],
+            positioning["reward_2"],
+            positioning["reward_3"],
         ]),
         ("Requirements to Qualify for the Card", [
             "The issuer does not guarantee acceptance. It may assess credit history, income, affordability, existing borrowing and other information before making a decision.",
@@ -527,9 +581,9 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
             "Only apply if the monthly cost, possible interest charges and repayment obligations fit your situation. Responsible use matters more than earning any reward.",
         ]),
         ("How to Maximise the Benefits", [
-            "Start with normal spending that you can repay comfortably. This keeps the card’s benefits connected to existing behaviour rather than unnecessary borrowing.",
-            "Pay close attention to payment dates and statement balances. Otherwise, interest or fees can quickly reduce the value of any reward or travel benefit.",
-            "Check reward rules regularly, especially if the card has a welcome bonus, annual target or travel voucher. Terms can change, and availability may vary.",
+            positioning["max_1"],
+            positioning["max_2"],
+            positioning["max_3"],
         ]),
         ("How to Apply", [
             "Select the apply button to continue to the official issuer website. You will be redirected, and the application will continue away from this site.",
@@ -539,7 +593,7 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
         ("Is This Card Right for You?", [
             f"The {card_name} may suit users who can use its confirmed benefits regularly and repay responsibly. It is not suitable simply because rewards are available.",
             "If the fee, APR or eligibility conditions do not fit your situation, compare other cards before applying. A lower-cost product may sometimes be more practical.",
-            "A careful comparison should include reward use, repayment behaviour, travel plans and total cost. This keeps the decision practical rather than driven only by headline benefits.",
+            positioning["right_3"],
         ]),
     ]
     for heading, paras in sections:
@@ -575,10 +629,10 @@ def fit_word_count(body: str) -> Tuple[str, int]:
         "Think about how often the strongest benefit would be used during a normal year. Occasional use may not justify a fee or a more complex rewards structure.",
         "Keep the official page open while applying so you can confirm the latest rates, exclusions and reward conditions before submitting personal information.",
         "If your circumstances change, reassess the card rather than keeping it only for historic benefits. Credit products should continue to match your current budget today.",
-        "Check whether the reward rules still match your travel plans before submitting the application.",
-        "For balance transfer cards, confirm the transfer window, transfer fee and post-promotional interest rate before moving an existing balance.",
+        "Check whether the reward rules still match your spending habits before submitting the application.",
+        "Confirm the product’s specific promotional window, fees and post-promotional rate before relying on any headline offer.",
         "Set a repayment plan before the promotional period ends, because any remaining balance may start accruing interest at the standard variable rate.",
-        "Do not transfer more than you can realistically repay, and remember that missed payments can affect promotional rates and future credit access.",
+        "Do not spend more than you can realistically repay, and remember that missed payments can affect promotional rates and future credit access.",
     ]
     idx = 0
     while wc < 900 and idx < len(filler):

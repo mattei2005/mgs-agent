@@ -44,9 +44,10 @@ img = Image.open(path)
 img.load()
 
 rotated = False
-if img.height > img.width:
-    img = img.rotate(-90, expand=True)
-    rotated = True
+# Preserve the issuer's real card orientation. Some UK issuers publish vertical
+# card artwork (for example Amazon Barclaycard). Rotating it makes the card look
+# fake and can force the selector toward phone/app compositions that merely have
+# a landscape aspect ratio. The hard gate is card-only, not phone/banner-shaped.
 
 rgba = img.convert('RGBA')
 pix = rgba.load()
@@ -136,6 +137,12 @@ download_and_validate_candidate() {
   aspect=$(awk -v w="$w" -v h="$h" 'BEGIN{ printf "%.3f", w/h }')
   in_range=$(awk -v a="$aspect" -v lo="$CARD_ASPECT_MIN" -v hi="$CARD_ASPECT_MAX" 'BEGIN{ print (a>=lo && a<=hi) ? "1" : "0" }')
   if [ "$in_range" != "1" ]; then
+    cand_low=$(echo "$cand_url" | tr '[:upper:]' '[:lower:]')
+    is_portrait_card=$(awk -v a="$aspect" 'BEGIN{ print (a>=0.55 && a<=0.85) ? "1" : "0" }')
+    if [ "$is_portrait_card" = "1" ] && echo "$cand_low" | grep -qE '(card-images|card).*card' && ! echo "$cand_low" | grep -qE '(phone|mobile|app|screen|screenshot|at-a-glance|rewards-work|hero|banner|background)'; then
+      echo "[$(date -Iseconds)] search-card-image ACCEPT portrait_card_only origin=$origin w=${w} h=${h} aspect=${aspect} url=$cand_url" >>"$LOG"
+      return 0
+    fi
     echo "[$(date -Iseconds)] search-card-image REJECT aspect_out_of_range origin=$origin w=${w} h=${h} aspect=${aspect} (expected ${CARD_ASPECT_MIN}-${CARD_ASPECT_MAX}) url=$cand_url" >>"$LOG"
     return 1
   fi
@@ -394,10 +401,16 @@ scored=$(while IFS= read -r u; do
   low=$(echo "$u" | tr '[:upper:]' '[:lower:]')
   low_path=$(echo "$low" | sed -E 's#^https?://[^/]+/?##')
   echo "$low_path" | grep -qE "($kw)" && score=$((score+5))
+  for term in $(echo "$slug" | tr '-' ' '); do
+    if [ "$term" != "card" ] && echo "$low_path" | grep -q "$term"; then
+      score=$((score+6))
+    fi
+  done
   echo "$low_path" | grep -qE '(card|visa|mastercard|amex|gold|platinum|classic|credit)' && score=$((score+2))
+  echo "$low_path" | grep -qE '(card-images/.+card|card-images/new|card-front|front)' && score=$((score+12))
   [[ "$low" == *.png ]] && score=$((score+3))
   [[ "$low" == *.webp ]] && score=$((score+1))
-  echo "$low_path" | grep -qE '(logo|icon|sprite|favicon|hero|banner|couple|walking|shop|background|new-fscs)' && score=$((score-4))
+  echo "$low_path" | grep -qE '(logo|icon|sprite|favicon|hero|banner|couple|walking|shop|background|new-fscs|phone|mobile|app|screen|screenshot|at-a-glance|rewards-work)' && score=$((score-30))
   echo "$score $u"
 done <<<"$abs_candidates" | sort -rn)
 
@@ -446,8 +459,14 @@ while IFS= read -r line; do
   aspect=$(awk -v w="$w" -v h="$h" 'BEGIN{ printf "%.3f", w/h }')
   in_range=$(awk -v a="$aspect" -v lo="$CARD_ASPECT_MIN" -v hi="$CARD_ASPECT_MAX" 'BEGIN{ print (a>=lo && a<=hi) ? "1" : "0" }')
   if [ "$in_range" != "1" ]; then
-    echo "[$(date -Iseconds)] search-card-image REJECT aspect_out_of_range w=${w} h=${h} aspect=${aspect} (expected ${CARD_ASPECT_MIN}-${CARD_ASPECT_MAX}) url=$cand_url" >>"$LOG"
-    continue
+    cand_low=$(echo "$cand_url" | tr '[:upper:]' '[:lower:]')
+    is_portrait_card=$(awk -v a="$aspect" 'BEGIN{ print (a>=0.55 && a<=0.85) ? "1" : "0" }')
+    if [ "$is_portrait_card" = "1" ] && echo "$cand_low" | grep -qE '(card-images|card).*card' && ! echo "$cand_low" | grep -qE '(phone|mobile|app|screen|screenshot|at-a-glance|rewards-work|hero|banner|background)'; then
+      echo "[$(date -Iseconds)] search-card-image ACCEPT portrait_card_only w=${w} h=${h} aspect=${aspect} score=${cand_score} url=$cand_url" >>"$LOG"
+    else
+      echo "[$(date -Iseconds)] search-card-image REJECT aspect_out_of_range w=${w} h=${h} aspect=${aspect} (expected ${CARD_ASPECT_MIN}-${CARD_ASPECT_MAX}) url=$cand_url" >>"$LOG"
+      continue
+    fi
   fi
 
   echo "[$(date -Iseconds)] search-card-image ACCEPT w=${w} h=${h} aspect=${aspect} score=${cand_score} url=$cand_url" >>"$LOG"

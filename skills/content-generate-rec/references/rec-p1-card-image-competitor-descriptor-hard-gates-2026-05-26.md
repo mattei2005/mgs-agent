@@ -56,11 +56,29 @@ Examples:
 - `0% interest on purchases for up to 12 months.`
 - `Earn Marriott Bonvoy points, elite nights and travel rewards.`
 
+### 4. Opening copy and section uniqueness
+
+REC subtitles, P1 subtitles and repeated P1 sections must be product-specific, not card-name substitutions inside a generic sentence.
+
+Blocked examples:
+- `{Card Name} offers key credit card benefits and features.`
+- `{Card Name} earns rewards and explains key costs before you apply.`
+- generic P1 sections about travel, balance transfers or rewards when those are not the product's real positioning.
+
+Correct pattern:
+- use a real primary benefit or product hook in the first sentence;
+- adapt section examples and triggers to the card's confirmed features;
+- for Amazon-style cards, mention Amazon rewards, gift-card welcome offers, Prime event boosts, app-first setup or 0% purchases when confirmed;
+- for travel cards, mention the actual travel currency/perk;
+- for cashback/build-credit cards, mention the real cashback, eligibility or credit-building angle.
+
 ## Validation checklist
 
 Before reporting a REC/P1 as corrected or validated:
 1. Verify the raw WP content uses the approved card-only media ID/URL in every LazyBlock card component.
 2. Verify public/cache-busted page HTML no longer contains the rejected card image URL.
 3. Verify REC table contains only real competitor card names and real benefits/fees.
-4. Verify no LazyBlock `texto` contains generic issuer/account wording.
-5. Re-run Yoast scoring after content repair and do not report clean success if scores are below green unless Rodolfo explicitly accepts the exception.
+4. Verify competitor annual-fee cells are fully researched; never publish `Check issuer terms` when a public fee exists.
+5. Verify no LazyBlock `texto` contains generic issuer/account wording.
+6. Verify REC and P1 openings are benefit-led and not reused with only the card name changed.
+7. Re-run Yoast scoring after content repair and do not report clean success if scores are below green unless Rodolfo explicitly accepts the exception.
