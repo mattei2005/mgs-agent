@@ -334,6 +334,9 @@ def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Di
     elif "nectar" in lower_benefits or "nectar" in card_name.lower():
         tag10 = "Nectar points"
         descriptor = "Earn Nectar points on eligible spending."
+    elif "low interest" in lower_benefits or "low rate" in lower_benefits or "12.9%" in lower_benefits:
+        tag10 = "Low interest rate"
+        descriptor = "Lower-rate credit with simple fees."
     elif "balance transfer" in lower_benefits:
         tag10 = "Balance transfers"
         descriptor = "Move balances with a focused transfer offer."
@@ -344,9 +347,9 @@ def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Di
         tag10 = "Travel rewards"
         descriptor = "Earn travel rewards on eligible spend."
     else:
-        tag10 = "Card benefits"
+        tag10 = "Confirmed benefits"
         descriptor = shorten_words(benefits[0], 9).rstrip(" ,;:") + "."
-    tag2 = "0% purchases" if "0%" in lower_benefits and "purchase" in lower_benefits else (annual_fee[:25] if annual_fee != "N/A" else "Check official terms")
+    tag2 = "0% purchases" if "0%" in lower_benefits and "purchase" in lower_benefits else (annual_fee[:25] if annual_fee != "N/A" else "Official terms")
 
     return {
         "card_name": card_name,
@@ -758,10 +761,13 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     missing_comp_fees = [c["name"] for c in competitor_rows[:2] if not c.get("annual_fee")]
     if missing_comp_fees:
         raise RunnerError("REC Comparative Table requires researched annual_fee for competitors: " + ", ".join(missing_comp_fees))
+    missing_comp_benefits = [c["name"] for c in competitor_rows[:2] if not c.get("benefit")]
+    if missing_comp_benefits:
+        raise RunnerError("REC Comparative Table requires researched benefit/positioning for competitors: " + ", ".join(missing_comp_benefits))
     comp_a_fee = esc_text(competitor_rows[0]["annual_fee"])
     comp_b_fee = esc_text(competitor_rows[1]["annual_fee"])
-    comp_a_note = esc_text(shorten_words(competitor_rows[0].get("benefit") or "Real same-segment comparison option", 10))
-    comp_b_note = esc_text(shorten_words(competitor_rows[1].get("benefit") or "Real same-segment comparison option", 10))
+    comp_a_note = esc_text(shorten_words(competitor_rows[0]["benefit"], 10))
+    comp_b_note = esc_text(shorten_words(competitor_rows[1]["benefit"], 10))
     primary_benefit = esc_text(shorten_words(benefits[0] if benefits else "key credit card features", 12))
     second_benefit = esc_text(shorten_words(benefits[1] if len(benefits) > 1 else "account management tools", 12))
     third_benefit = esc_text(shorten_words(benefits[2] if len(benefits) > 2 else "everyday payment flexibility", 12))

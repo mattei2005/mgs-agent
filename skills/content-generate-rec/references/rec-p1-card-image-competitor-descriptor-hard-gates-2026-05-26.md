@@ -70,7 +70,18 @@ Correct pattern:
 - adapt section examples and triggers to the card's confirmed features;
 - for Amazon-style cards, mention Amazon rewards, gift-card welcome offers, Prime event boosts, app-first setup or 0% purchases when confirmed;
 - for travel cards, mention the actual travel currency/perk;
-- for cashback/build-credit cards, mention the real cashback, eligibility or credit-building angle.
+- for cashback/build-credit cards, mention the real cashback, eligibility or credit-building angle;
+- for low-APR/no-fee cards, do not force `rewards` language; focus on rate control, annual fee, overseas fees, balance-transfer rules and repayment fit.
+
+### 5. REC/P1 semantic duplication gate
+
+Before publishing or repairing scaled REC/P1 pages, scan the opening, `How Does It Work`, `Benefits`, `Requirements`, `How to Apply`, `How to Maximise` and final-fit sections for template reuse. The structure may remain consistent, but the reasoning, examples and benefit framing must change with the card's actual proposition.
+
+Blocked patterns:
+- introductions that only swap the card name;
+- P1 subtitles using a repeated sentence frame;
+- reward/travel/balance-transfer paragraphs on products whose main hook is low APR, no annual fee or overseas purchase fees;
+- REC comparative tables with `Check issuer terms` or `Real same-segment comparison option` in any visible cell.
 
 ## Validation checklist
 
@@ -78,7 +89,8 @@ Before reporting a REC/P1 as corrected or validated:
 1. Verify the raw WP content uses the approved card-only media ID/URL in every LazyBlock card component.
 2. Verify public/cache-busted page HTML no longer contains the rejected card image URL.
 3. Verify REC table contains only real competitor card names and real benefits/fees.
-4. Verify competitor annual-fee cells are fully researched; never publish `Check issuer terms` when a public fee exists.
+4. Verify competitor annual-fee and positioning cells are fully researched; never publish `Check issuer terms` or `Real same-segment comparison option`.
 5. Verify no LazyBlock `texto` contains generic issuer/account wording.
 6. Verify REC and P1 openings are benefit-led and not reused with only the card name changed.
-7. Re-run Yoast scoring after content repair and do not report clean success if scores are below green unless Rodolfo explicitly accepts the exception.
+7. Verify P1 body sections are adapted to the product's real proposition, not generic rewards/travel copy.
+8. Re-run Yoast scoring after content repair and do not report clean success if scores are below green unless Rodolfo explicitly accepts the exception.

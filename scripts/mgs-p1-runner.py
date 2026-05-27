@@ -492,6 +492,22 @@ def infer_p1_positioning(card_name: str, benefits: List[str]) -> Dict[str, str]:
             "right_2": "Check whether the reward rules still match your shopping habits before submitting the application.",
             "right_3": "A careful comparison should include Amazon reward use, repayment behaviour, app access and total cost. This keeps the decision practical rather than driven only by headline benefits.",
         }
+    if any(t in joined for t in ["low interest", "low rate", "12.9%", "no annual fee", "foreign transaction"]):
+        return {
+            "subtitle_tail": "suits users prioritising low rates, no annual fee and overseas purchases.",
+            "use_case": "users who care more about lower representative rates and simple fees than points or premium perks",
+            "value_focus": "representative APR, annual fee, overseas purchase fees and repayment considerations",
+            "reward_heading": "Low-Rate and Overseas Purchase Value",
+            "reward_1": "The product is best judged through cost control rather than rewards. The representative APR and annual fee shape the value proposition.",
+            "reward_2": "No foreign transaction fee on purchases can help abroad, but cash withdrawals and local fees need separate checks.",
+            "reward_3": "A rewards card may be better for users who pay in full and care more about cashback, miles or points.",
+            "max_1": "Start with planned spending and a realistic repayment plan. The lower-rate positioning only helps when balances stay manageable.",
+            "max_2": "Use overseas purchase benefits carefully and avoid assuming cash withdrawals receive the same fee treatment.",
+            "max_3": "Check the official summary box for the final personal rate, balance transfer rules and any fees before applying.",
+            "right_1": "Estimate whether rate control, no annual fee and overseas purchase use matter more than rewards in a normal year.",
+            "right_2": "Check whether the final APR and credit limit still match your budget before submitting the application.",
+            "right_3": "A careful comparison should include repayment behaviour, overseas use, annual fee, final APR and whether rewards are actually more important.",
+        }
     if any(t in joined for t in ["avios", "lounge", "hotel", "travel", "companion voucher"]):
         return {
             "subtitle_tail": "connects travel rewards with costs, eligibility and application steps.",
@@ -649,14 +665,18 @@ def fit_word_count(body: str) -> Tuple[str, int]:
 
 def title_and_meta(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, str, str]:
     focus = compact_focus(card_name)
-    title = f"{focus}: Costs, Rewards and How to Apply"
+    joined = " ".join(card_data.get("benefits") or []).lower()
+    low_rate = any(t in joined for t in ["low interest", "low rate", "12.9%", "no annual fee", "foreign transaction"])
+    title = f"{focus}: Low Rate Costs and How to Apply" if low_rate else f"{focus}: Costs, Rewards and How to Apply"
     if len(title) > 60:
         title = f"{focus}: Costs and How to Apply"
     if len(title) > 60:
         title = f"{focus}: How to Apply"
-    meta = f"{focus} application guide with key costs, rewards, eligibility notes and official issuer apply link before you continue."
+    meta = (f"{focus} application guide focused on rates, annual fee, overseas purchases, eligibility notes and official issuer apply link."
+            if low_rate else
+            f"{focus} application guide with key costs, rewards, eligibility notes and official issuer apply link before you continue.")
     if len(meta) > 130:
-        meta = f"{focus} guide with key costs, rewards, eligibility notes and official issuer apply link before you continue."
+        meta = f"{focus} guide with key costs, eligibility notes and official issuer apply link before you continue."
     if len(meta) < 120:
         meta = meta.rstrip(".") + " and compare the issuer terms first."
     if len(meta) > 130:
