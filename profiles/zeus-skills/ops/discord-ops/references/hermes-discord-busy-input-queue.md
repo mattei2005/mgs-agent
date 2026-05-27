@@ -7,6 +7,7 @@ Em Discord gateway, o usuário pode enviar nova mensagem enquanto o agente ainda
 - `/steer <texto>`: injeta orientação no turno em andamento após o próximo tool call.
 - `/queue <texto>` ou `/q <texto>`: enfileira um novo turno FIFO, separado da resposta atual.
 - Mensagem normal enquanto o agente está busy: comportamento controlado por `display.busy_input_mode`.
+- Regra de interpretação MGS: quando Rodolfo manda duas perguntas/mensagens em sequência, o agente deve responder cada uma em ordem. Uma mensagem posterior com “confirma antes de executar” ou equivalente vale para a ação/checagem daquela mensagem posterior; não cancela nem reinterpreta a pergunta anterior.
 
 ## Diagnóstico validado
 
