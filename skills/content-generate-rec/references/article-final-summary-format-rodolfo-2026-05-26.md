@@ -27,6 +27,7 @@ When reporting a completed REC, P1 or REC+P1 article job:
 - Do not add mentions unless the current approved template includes them.
 - Do not add extra audit/status fields.
 - Do not restyle with bold, code formatting, or alternate Markdown.
+- Suppress Discord embeds/previews in every final summary URL by wrapping rendered URLs in angle brackets (`<https://...>`). This applies to public URLs, edit URLs, card images, featured images, and official source URLs.
 - Replace only the placeholder values with real data from the runner/validation.
 - The backticks in Rodolfo's examples indicate placeholders to be filled; they are not a request to preserve placeholder wording.
 

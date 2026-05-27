@@ -54,6 +54,18 @@ def cost(value: Any) -> str:
     return str(value) if value not in (None, "") else "n/a"
 
 
+def no_embed_url(value: Any) -> str:
+    """Wrap Discord URLs in angle brackets to suppress embeds/previews."""
+    if value in (None, ""):
+        return ""
+    text = str(value)
+    if text.startswith("<") and text.endswith(">"):
+        return text
+    if text.startswith("http://") or text.startswith("https://"):
+        return f"<{text}>"
+    return text
+
+
 def tags(data: Mapping[str, Any]) -> str:
     raw = first(data, "taxonomy.tag_names", default=[])
     if isinstance(raw, list):
@@ -153,17 +165,17 @@ def render_block(data: Mapping[str, Any], kind: str) -> list[str]:
         f"• Focus: {focus(data)}",
         f"• Meta Description: {meta(data)}- {meta_chars(data)} chars",
         f"• Tags: {tags(data)}",
-        f"• Imagem Card: {card_image(data)}",
-        f"• Imagem Featured: {featured_image(data)}",
-        f"• Fonte oficial: {official_url(data)}",
+        f"• Imagem Card: {no_embed_url(card_image(data))}",
+        f"• Imagem Featured: {no_embed_url(featured_image(data))}",
+        f"• Fonte oficial: {no_embed_url(official_url(data))}",
     ]
 
 
 def render_rec(data: Mapping[str, Any]) -> str:
     lines = [
         f"📄 REC Post ID: {post_id(data)}",
-        f"🔗 REC: {public_url(data)}",
-        f"✏️ Edit REC: {edit_url(data)}",
+        f"🔗 REC: {no_embed_url(public_url(data))}",
+        f"✏️ Edit REC: {no_embed_url(edit_url(data))}",
         f"🔗 Slug: {slug(data)}",
         f"📌 Status: {status(data)}",
         "",
@@ -178,8 +190,8 @@ def render_rec(data: Mapping[str, Any]) -> str:
 def render_p1(data: Mapping[str, Any]) -> str:
     lines = [
         f"📄 P1 Post ID: {post_id(data)}",
-        f"🔗 P1 : {public_url(data)}",
-        f"✏️ Edit P1: {edit_url(data)}",
+        f"🔗 P1 : {no_embed_url(public_url(data))}",
+        f"✏️ Edit P1: {no_embed_url(edit_url(data))}",
         f"🔗 Slug: {slug(data)}",
         f"📌 Status: {status(data)}",
         "",
@@ -200,14 +212,14 @@ def render_rec_p1(rec: Mapping[str, Any], p1: Mapping[str, Any]) -> str:
         total_cost = "n/a"
     lines = [
         f"📄 REC Post ID: {post_id(rec)}",
-        f"🔗 REC: {public_url(rec)}",
-        f"✏️ Edit REC: {edit_url(rec)}",
+        f"🔗 REC: {no_embed_url(public_url(rec))}",
+        f"✏️ Edit REC: {no_embed_url(edit_url(rec))}",
         f"🔗 Slug: {slug(rec)}",
         f"📌 Status: {status(rec)}",
         "",
         f"📄 P1 Post ID: {post_id(p1)}",
-        f"🔗 P1 : {public_url(p1)}",
-        f"✏️ Edit P1: {edit_url(p1)}",
+        f"🔗 P1 : {no_embed_url(public_url(p1))}",
+        f"✏️ Edit P1: {no_embed_url(edit_url(p1))}",
         f"🔗 Slug: {slug(p1)}",
         f"📌 Status: {status(p1)}",
         "",
