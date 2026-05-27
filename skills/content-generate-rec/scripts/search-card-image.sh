@@ -44,10 +44,14 @@ img = Image.open(path)
 img.load()
 
 rotated = False
-# Preserve the issuer's real card orientation. Some UK issuers publish vertical
-# card artwork (for example Amazon Barclaycard). Rotating it makes the card look
-# fake and can force the selector toward phone/app compositions that merely have
-# a landscape aspect ratio. The hard gate is card-only, not phone/banner-shaped.
+# MGS LazyBlock card image rule: the card slot must always receive horizontal
+# card artwork. Some issuers publish vertical card art (for example Amazon
+# Barclaycard); rotate that official card-only artwork 90 degrees without
+# resizing or stretching. This applies only to the card image itself, never to
+# the featured image composition.
+if img.height > img.width:
+    img = img.rotate(90, expand=True)
+    rotated = True
 
 rgba = img.convert('RGBA')
 pix = rgba.load()
@@ -140,7 +144,7 @@ download_and_validate_candidate() {
     cand_low=$(echo "$cand_url" | tr '[:upper:]' '[:lower:]')
     is_portrait_card=$(awk -v a="$aspect" 'BEGIN{ print (a>=0.55 && a<=0.85) ? "1" : "0" }')
     if [ "$is_portrait_card" = "1" ] && echo "$cand_low" | grep -qE '(card-images|card).*card' && ! echo "$cand_low" | grep -qE '(phone|mobile|app|screen|screenshot|at-a-glance|rewards-work|hero|banner|background)'; then
-      echo "[$(date -Iseconds)] search-card-image ACCEPT portrait_card_only origin=$origin w=${w} h=${h} aspect=${aspect} url=$cand_url" >>"$LOG"
+      echo "[$(date -Iseconds)] search-card-image ACCEPT portrait_card_only_rotate_to_horizontal origin=$origin w=${w} h=${h} aspect=${aspect} url=$cand_url" >>"$LOG"
       return 0
     fi
     echo "[$(date -Iseconds)] search-card-image REJECT aspect_out_of_range origin=$origin w=${w} h=${h} aspect=${aspect} (expected ${CARD_ASPECT_MIN}-${CARD_ASPECT_MAX}) url=$cand_url" >>"$LOG"
@@ -462,7 +466,7 @@ while IFS= read -r line; do
     cand_low=$(echo "$cand_url" | tr '[:upper:]' '[:lower:]')
     is_portrait_card=$(awk -v a="$aspect" 'BEGIN{ print (a>=0.55 && a<=0.85) ? "1" : "0" }')
     if [ "$is_portrait_card" = "1" ] && echo "$cand_low" | grep -qE '(card-images|card).*card' && ! echo "$cand_low" | grep -qE '(phone|mobile|app|screen|screenshot|at-a-glance|rewards-work|hero|banner|background)'; then
-      echo "[$(date -Iseconds)] search-card-image ACCEPT portrait_card_only w=${w} h=${h} aspect=${aspect} score=${cand_score} url=$cand_url" >>"$LOG"
+      echo "[$(date -Iseconds)] search-card-image ACCEPT portrait_card_only_rotate_to_horizontal w=${w} h=${h} aspect=${aspect} score=${cand_score} url=$cand_url" >>"$LOG"
     else
       echo "[$(date -Iseconds)] search-card-image REJECT aspect_out_of_range w=${w} h=${h} aspect=${aspect} (expected ${CARD_ASPECT_MIN}-${CARD_ASPECT_MAX}) url=$cand_url" >>"$LOG"
       continue

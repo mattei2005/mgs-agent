@@ -11,17 +11,20 @@ Use this for REC and P1 creation, repair, audit, or runner/template changes when
 The card component image must contain exclusively the credit card itself.
 
 Allowed:
-- isolated horizontal card artwork;
+- isolated horizontal card artwork only;
+- issuer-published portrait/vertical card artwork only after rotating it 90° to horizontal without stretching or changing proportions;
 - transparent/no external background;
 - no visible canvas outside the card;
 - no props, hands, people, graphic backgrounds, frames, shadows, external borders or decorative moulding.
 
 Blocked:
+- a vertical card left vertical in the LazyBlock card slot;
+- a distorted card resized/stretched to fake horizontal orientation;
 - a card placed over a coloured/artistic background;
 - a card inside a banner, frame, phone, mockup, lifestyle scene, or promotional image;
 - visible padding/canvas, abstract shapes, shadows or external border/moldura around the card.
 
-If an automatic image search returns a visually attractive card-on-background image, it is still invalid for the LazyBlock slot until it is cropped/masked to card-only or replaced.
+If an automatic image search returns a visually attractive card-on-background image, it is still invalid for the LazyBlock slot until it is cropped/masked to card-only or replaced. If the only valid issuer asset is vertical, rotate the clean card-only image horizontally; do not leave it vertical.
 
 ### 2. REC comparative table
 
@@ -93,4 +96,7 @@ Before reporting a REC/P1 as corrected or validated:
 5. Verify no LazyBlock `texto` contains generic issuer/account wording.
 6. Verify REC and P1 openings are benefit-led and not reused with only the card name changed.
 7. Verify P1 body sections are adapted to the product's real proposition, not generic rewards/travel copy.
-8. Re-run Yoast scoring after content repair and do not report clean success if scores are below green unless Rodolfo explicitly accepts the exception.
+8. Verify P1 subtitle/excerpt is <=100 characters exactly, counting spaces and punctuation; if it exceeds 100, rewrite it before publication.
+9. Verify REC copy is recommendation-led and commercially attractive without unsupported claims.
+10. Verify P1 copy is deeper and more explanatory than REC, with richer product-specific context and a natural/human tone.
+11. Re-run Yoast scoring after content repair and do not report clean success if scores are below green unless Rodolfo explicitly accepts the exception.

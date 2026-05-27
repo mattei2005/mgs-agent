@@ -787,19 +787,19 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     table = "".join(rows)
 
     html_body = f"""<!-- wp:paragraph -->
-<p><strong>{name}</strong> highlights {primary_benefit} with {annual_fee.lower()}.</p>
+<p><strong>{name}</strong> gives Amazon shoppers a direct rewards route with {annual_fee.lower()}.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>The {name} should be judged by its own strongest use case, not by a generic credit card checklist.</p>
+<p>It is most interesting when Amazon purchases are already part of the monthly budget.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Its official positioning highlights {benefit_phrase}. Those details help readers understand the card before comparing it with nearby alternatives.</p>
+<p>The hook is clear: {benefit_phrase}. That makes the card easier to assess before moving into the deeper application page.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>This keeps the guide focused on practical value, not unsupported promotional claims or unclear product assumptions.</p>
+<p>For the right shopper, the value is practical rather than flashy: rewards, a welcome offer and purchase flexibility in one place.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -807,19 +807,19 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>The main benefit is {primary_benefit}. This gives the card a clear role for everyday applicants.</p>
+<p>The main benefit is {primary_benefit}. It gives the card a clear shopping-led reason to exist.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Another point is {second_benefit}. It can help people who prefer simple account control and fewer surprises.</p>
+<p>Another point is {second_benefit}. This supports users who want the card to fit into normal online shopping, not a complex rewards strategy.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>The card also includes {third_benefit}. This may support regular spending when repayments stay organised.</p>
+<p>The card also includes {third_benefit}. That can add useful breathing room for planned purchases when repayments stay organised.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>These features make the card practical. It is not presented here as a premium travel or luxury rewards product.</p>
+<p>Overall, the card is better framed as an Amazon value card than as a premium travel or luxury rewards product.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->

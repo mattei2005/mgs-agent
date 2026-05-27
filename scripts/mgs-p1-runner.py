@@ -478,19 +478,19 @@ def infer_p1_positioning(card_name: str, benefits: List[str]) -> Dict[str, str]:
     name_l = card_name.lower()
     if "amazon" in joined or "amazon" in name_l:
         return {
-            "subtitle_tail": "is built for Amazon shoppers who want rewards, a welcome gift and 0% purchases.",
+            "subtitle_tail": "turns Amazon shopping into rewards, a welcome gift and 0% purchases.",
             "use_case": "people who already spend through Amazon and want those purchases to generate direct reward value",
             "value_focus": "Amazon-linked benefits, the app-first setup and the main repayment points",
             "reward_heading": "Amazon Rewards and Purchase Value",
-            "reward_1": "The reward structure is tied to Amazon rather than airline miles or hotel status. That makes the value easier to understand for regular Amazon customers.",
-            "reward_2": "Compare the Amazon earn rate with your normal basket size and monthly repayment habits before applying.",
-            "reward_3": "Prime members should also consider whether eligible shopping events are moments when they would naturally spend and repay responsibly.",
-            "max_1": "Start with Amazon and everyday spending that you can repay comfortably. This keeps the card’s benefits connected to existing behaviour rather than unnecessary borrowing.",
-            "max_2": "Pay close attention to payment dates and statement balances. Otherwise, interest can quickly reduce the value of the gift-card offer and rewards.",
-            "max_3": "Check reward rules regularly, especially around Prime events, the welcome gift and the 12-month earn-rate period. Terms can change, and availability may vary.",
-            "right_1": "For Amazon-focused spending, estimate how often you will use Amazon, whether you have Prime and how quickly you can repay purchases.",
+            "reward_1": "This is not a miles card trying to feel premium. Its value is simpler: frequent Amazon shoppers can turn familiar purchases into direct rewards.",
+            "reward_2": "The key question is how much of your normal basket already goes through Amazon, because that is where the card can feel more useful.",
+            "reward_3": "Prime members should look closely at eligible shopping events such as Prime Day, when the temporary boost can make planned purchases more rewarding.",
+            "max_1": "Use it first for Amazon and everyday purchases you were already going to make. That keeps the reward value connected to real behaviour, not extra borrowing.",
+            "max_2": "Treat the welcome gift and rewards as a bonus, not a reason to carry a balance. Interest can wipe out the benefit quickly if repayment slips.",
+            "max_3": "Recheck the reward rules around Prime events, the welcome gift and the first-year earn rate so you know exactly which purchases count.",
+            "right_1": "For Amazon-focused spending, estimate how often you actually buy on Amazon, whether you have Prime and how fast you usually repay purchases.",
             "right_2": "Check whether the reward rules still match your shopping habits before submitting the application.",
-            "right_3": "A careful comparison should include Amazon reward use, repayment behaviour, app access and total cost. This keeps the decision practical rather than driven only by headline benefits.",
+            "right_3": "A strong fit usually means regular Amazon use, comfort with app-based account management and a repayment plan that protects the reward value.",
         }
     if any(t in joined for t in ["low interest", "low rate", "12.9%", "no annual fee", "foreign transaction"]):
         return {
@@ -556,7 +556,7 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
 
     subtitle = f"{card_name} {positioning['subtitle_tail']}"
     if len(subtitle) > 100:
-        subtitle = f"{card_name} explains key costs and benefits before you apply."
+        subtitle = f"{card_name} highlights real benefits, costs and application steps."
     if len(subtitle) > 100:
         subtitle = subtitle[:97].rsplit(" ", 1)[0] + "."
 
