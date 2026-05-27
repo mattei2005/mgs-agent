@@ -6,6 +6,8 @@ Use this for REC and P1 creation, repair, audit, or runner/template changes when
 
 ## Durable rules from Rodolfo
 
+Related scale-prevention reference: `references/rec-p1-scale-quality-gates-2026-05-27.md` captures the 2026-05-27 escalation about repeated REC/P1 errors, horizontal card normalization, 100-character subtitle enforcement and REC-vs-P1 tone differentiation.
+
 ### 1. LazyBlock card image
 
 The card component image must contain exclusively the credit card itself.
@@ -28,10 +30,24 @@ If an automatic image search returns a visually attractive card-on-background im
 
 ### 2. REC comparative table
 
-The Comparative Table must not use generic placeholders such as:
+The Comparative Table must use exactly three columns, in this order:
+1. `Card`
+2. `Annual fee`
+3. `Positioning`
+
+Do not add extra columns unless Rodolfo/Raquel explicitly request a one-off exception. Blocked extra columns include:
+- `Representative APR`;
+- `Intro Offer`;
+- `Credit Score Needed`;
+- `Reward Type`;
+- any other fourth/fifth comparison column.
+
+The table must not use generic placeholders such as:
 - `another card in the same segment`;
 - `a second comparable card`;
 - `Varies` as a substitute for researched annual fee when facts are available;
+- `Check issuer terms`;
+- `Real same-segment comparison option`;
 - generic notes like `Compare eligibility, APR and fees before applying` as the main table value.
 
 The table must use real market cards from the same country and coherent segment. For each competitor, use real card names and real comparable facts/benefits. If two real competitors are not available from cache, explicit inputs, official-source research, or a bounded vetted same-segment scan, stop or request inputs instead of publishing a fake comparison.
@@ -85,6 +101,20 @@ Blocked patterns:
 - P1 subtitles using a repeated sentence frame;
 - reward/travel/balance-transfer paragraphs on products whose main hook is low APR, no annual fee or overseas purchase fees;
 - REC comparative tables with `Check issuer terms` or `Real same-segment comparison option` in any visible cell.
+
+### 6. Commercial tone without hype
+
+REC and P1 copy must not be merely technical or institutional. The content should feel like a strategic recommendation while staying factual and compliant.
+
+Correct tone:
+- subtly enthusiastic;
+- benefit-led;
+- modern and human;
+- commercially attractive;
+- specific to the card’s real strengths;
+- never exaggerated or unsupported.
+
+REC should create fast interest and highlight why the card is worth comparing. P1 should go deeper, develop the same differentiators with more context, and avoid robotic section reuse.
 
 ## Validation checklist
 

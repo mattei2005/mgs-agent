@@ -787,11 +787,11 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     table = "".join(rows)
 
     html_body = f"""<!-- wp:paragraph -->
-<p><strong>{name}</strong> gives Amazon shoppers a direct rewards route with {annual_fee.lower()}.</p>
+<p><strong>{name}</strong> gives readers a clear reason to compare it, with {annual_fee.lower()} and a focused value proposition.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>It is most interesting when Amazon purchases are already part of the monthly budget.</p>
+<p>It is most interesting when its strongest benefit already matches the reader’s normal spending or borrowing habits.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -799,7 +799,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>For the right shopper, the value is practical rather than flashy: rewards, a welcome offer and purchase flexibility in one place.</p>
+<p>For the right user, the value should feel practical, easy to understand and useful before the deeper application step.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -807,11 +807,11 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>The main benefit is {primary_benefit}. It gives the card a clear shopping-led reason to exist.</p>
+<p>The main benefit is {primary_benefit}. It gives the card a clear reason to stand out in its segment.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Another point is {second_benefit}. This supports users who want the card to fit into normal online shopping, not a complex rewards strategy.</p>
+<p>Another point is {second_benefit}. This supports users who want the card to fit into real spending decisions, not a generic checklist.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -819,7 +819,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Overall, the card is better framed as an Amazon value card than as a premium travel or luxury rewards product.</p>
+<p>Overall, the card should be framed around its real practical value rather than forced into a generic rewards or premium-card story.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -855,7 +855,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Compared with {comp_b}, it belongs to a different rewards ecosystem and keeps the focus on {third_benefit}.</p>
+<p>Compared with {comp_b}, it has a different value proposition and keeps the focus on {third_benefit}.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
