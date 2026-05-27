@@ -43,6 +43,21 @@ Padrao obrigatorio para THREAD_NAME:
 
 If the user asks a new question about the next step inside a thread that already has a correct descriptive name, the agent must not rename the thread again. Treat follow-ups, doubts, corrections, "próximo step", phase/status questions, and resumed archived/paused threads as existing context unless the user explicitly requests a rename.
 
+## Pitfall validated: deterministic gateway title can still look unrenamed
+
+Do not rely only on the LLM prompt/bootstrap for rename-on-create. Hermes creates the Discord thread before the agent responds, so the runtime title generator must produce an operational title immediately. Raw first-word titles such as `Me liste todos os artigos que voce ja` or `Falamos bastante sobre correcoes...` look like no rename happened.
+
+The MGS runtime patch is stored at `/root/mgs-agent/patches/hermes/discord-deterministic-thread-rename-auto-add-users.patch` and updates `plugins/platforms/discord/adapter.py::_auto_thread_name_from_message(...)` with heuristics for:
+- Article requests: `REC+P1 The Royal Bank Credit Card - Eggbev GB-CC-EN`
+- Article listings: `Lista Artigos Eggbev GB-CC-EN`
+- Correction/follow-up prep: `Correções recentes REC+P1`
+
+Validation after changing this patch:
+1. `python3 -m py_compile plugins/platforms/discord/adapter.py`
+2. Import/call `_auto_thread_name_from_message(...)` on real sample prompts.
+3. Restart affected gateways and check `Connected as ...` / `Gateway running`.
+4. For existing bad fresh threads, PATCH the thread name via Discord API and verify `GET /channels/{thread_id}`.
+
 ## Token fallback in bootstrap snippets
 
 `execute_code` may not receive `DISCORD_BOT_TOKEN` because Hermes can refuse provider/bot credential passthrough. Do not encode this as "execute_code cannot use Discord". The durable fix is: bootstrap snippets should first try `os.environ.get('DISCORD_BOT_TOKEN')`, then read the active profile `.env` internally without printing token/header.
