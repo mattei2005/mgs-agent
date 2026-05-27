@@ -41,7 +41,7 @@ index d39601546..8314a7b74 100644
                      _record_delivery(result)
  
 diff --git a/gateway/run.py b/gateway/run.py
-index a2e41c609..030113583 100644
+index a2e41c609..8694523d4 100644
 --- a/gateway/run.py
 +++ b/gateway/run.py
 @@ -67,8 +67,8 @@ _PLATFORM_CONNECT_TIMEOUT_SECS_DEFAULT = 30.0
@@ -118,7 +118,36 @@ index a2e41c609..030113583 100644
              # Emit agent:end hook
              await self.hooks.emit("agent:end", {
                  **hook_ctx,
-@@ -17852,6 +17877,13 @@ class GatewayRunner:
+@@ -17709,6 +17734,28 @@ class GatewayRunner:
+                 pending_event = None
+                 pending = None
+ 
++            if (
++                pending_event is not None
++                and source.platform == Platform.DISCORD
++                and result
++                and not result.get("interrupted")
++                and adapter
++                and session_key
++            ):
++                # Discord reply anchors are visual and strict: if we drain a
++                # queued follow-up inside this _run_agent() call, the outer
++                # BasePlatformAdapter send path still belongs to the original
++                # event and can quote the wrong user message. Requeue the
++                # pending event so base.py sends the first answer, then spawns a
++                # fresh _process_message_background(pending_event) with the
++                # pending message as the active event/anchor.
++                adapter._pending_messages[session_key] = pending_event
++                logger.info(
++                    "Queued Discord follow-up for session %s: deferring to platform drain to preserve reply anchor.",
++                    session_key or "?",
++                )
++                return result
++
+             if pending_event or pending:
+                 logger.debug("Processing pending message: '%s...'", pending[:40])
+ 
+@@ -17852,6 +17899,13 @@ class GatewayRunner:
                      event_message_id=next_message_id,
                      channel_prompt=next_channel_prompt,
                  )
