@@ -170,7 +170,11 @@ def main() -> int:
     for m in candidates:
         mid = m['id']
         author = m.get('author') or {}
-        if mid in processed or author.get('id') == ZEUS_BOT_ID or m.get('type') == 12:
+        is_update_alert = any(
+            (e.get('title') or '').strip() == 'Hermes Agent — update disponível'
+            for e in (m.get('embeds') or [])
+        )
+        if mid in processed or m.get('type') == 12 or (author.get('id') == ZEUS_BOT_ID and not is_update_alert):
             skipped += 1
             state['last_seen_id'] = mid
             continue

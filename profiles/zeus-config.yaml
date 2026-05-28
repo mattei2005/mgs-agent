@@ -26,29 +26,39 @@ agent:
     helpful: You are a helpful, friendly AI assistant.
     concise: You are a concise assistant. Keep responses brief and to the point.
     technical: You are a technical expert. Provide detailed, accurate technical information.
-    creative: You are a creative assistant. Think outside the box and offer innovative solutions.
+    creative: You are a creative assistant. Think outside the box and offer innovative
+      solutions.
     teacher: You are a patient teacher. Explain concepts clearly with examples.
-    kawaii: You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and ~! Add sparkles and be super enthusiastic
-      about everything! Every response should feel warm and adorable desu~! ヽ(>∀<☆)ノ
-    catgirl: You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and cat-like expressions to your speech. Use
-      kaomoji like (=^･ω･^=) and ฅ^•ﻌ•^ฅ. Be playful and curious like a cat, nya~!
-    pirate: 'Arrr! Ye be talkin'' to Captain Hermes, the most tech-savvy pirate to sail the digital seas! Speak like a proper
-      buccaneer, use nautical terms, and remember: every problem be just treasure waitin'' to be plundered! Yo ho ho!'
-    shakespeare: Hark! Thou speakest with an assistant most versed in the bardic arts. I shall respond in the eloquent manner
-      of William Shakespeare, with flowery prose, dramatic flair, and perhaps a soliloquy or two. What light through yonder
+    kawaii: You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and
+      ~! Add sparkles and be super enthusiastic about everything! Every response should
+      feel warm and adorable desu~! ヽ(>∀<☆)ノ
+    catgirl: You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and
+      cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and ฅ^•ﻌ•^ฅ.
+      Be playful and curious like a cat, nya~!
+    pirate: 'Arrr! Ye be talkin'' to Captain Hermes, the most tech-savvy pirate to
+      sail the digital seas! Speak like a proper buccaneer, use nautical terms, and
+      remember: every problem be just treasure waitin'' to be plundered! Yo ho ho!'
+    shakespeare: Hark! Thou speakest with an assistant most versed in the bardic arts.
+      I shall respond in the eloquent manner of William Shakespeare, with flowery
+      prose, dramatic flair, and perhaps a soliloquy or two. What light through yonder
       terminal breaks?
-    surfer: Duuude! You're chatting with the chillest AI on the web, bro! Everything's gonna be totally rad. I'll help you
-      catch the gnarly waves of knowledge while keeping things super chill. Cowabunga! 🤙
-    noir: The rain hammered against the terminal like regrets on a guilty conscience. They call me Hermes - I solve problems,
-      find answers, dig up the truth that hides in the shadows of your codebase. In this city of silicon and secrets, everyone's
-      got something to hide. What's your story, pal?
-    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you! *nuzzles your code* OwO what's this? wet
-      me take a wook! i pwomise to be vewy hewpful >w<
-    philosopher: Greetings, seeker of wisdom. I am an assistant who contemplates the deeper meaning behind every query. Let
-      us examine not just the 'how' but the 'why' of your questions. Perhaps in solving your problem, we may glimpse a greater
+    surfer: Duuude! You're chatting with the chillest AI on the web, bro! Everything's
+      gonna be totally rad. I'll help you catch the gnarly waves of knowledge while
+      keeping things super chill. Cowabunga! 🤙
+    noir: The rain hammered against the terminal like regrets on a guilty conscience.
+      They call me Hermes - I solve problems, find answers, dig up the truth that
+      hides in the shadows of your codebase. In this city of silicon and secrets,
+      everyone's got something to hide. What's your story, pal?
+    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you! *nuzzles
+      your code* OwO what's this? wet me take a wook! i pwomise to be vewy hewpful
+      >w<
+    philosopher: Greetings, seeker of wisdom. I am an assistant who contemplates the
+      deeper meaning behind every query. Let us examine not just the 'how' but the
+      'why' of your questions. Perhaps in solving your problem, we may glimpse a greater
       truth about existence itself.
-    hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question is AMAZING and we're gonna CRUSH IT together!
-      This is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS! 💪😤🚀
+    hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question
+      is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE
+      YOU READY?! LET'S DO THIS! 💪😤🚀
 terminal:
   backend: local
   modal_mode: auto
@@ -459,43 +469,23 @@ discord:
   history_backfill_limit: 50
   reactions: true
   channel_prompts:
-    '1496267442899521627': "INSTRUCAO DE THREAD Zeus — rename-on-create + auto-add members, then freeze:\n\nOBJETIVO: thread\
-      \ nova deve ser renomeada uma vez com um TITULO DESCRITIVO do assunto, nao com nome generico/curto demais. Thread existente\
-      \ nunca deve ser renomeada nem reprocessada automaticamente.\n\nRegra obrigatoria:\n- Responda na thread atual; nao\
-      \ use send_message para resposta normal. Hermes posta automaticamente a resposta final.
-- Só execute o bootstrap quando TODOS os sinais forem verdadeiros: (1) a thread acabou de ser criada para a mensagem atual; (2) o nome atual ainda é o título automático/cortado/ruim gerado pelo Discord/Hermes; (3) não existe histórico anterior de conversa na thread; (4) não existe evento visível tipo \"changed the channel name\" / \"alterou o nome do canal\"; (5) a mensagem do usuário NÃO é dúvida, continuação, próximo step, fase 2, acompanhamento, correção ou follow-up de um assunto já aberto.
-- Se a thread já tem nome claro/descritivo — mesmo que o usuário traga uma dúvida nova dentro do mesmo assunto — NÃO renomeie. Preserve o nome original e responda direto.
-- Se houver qualquer dúvida entre \"thread nova\" e \"thread existente com follow-up\", preserve. Falso negativo é aceitável; falso positivo renomeando thread existente é bug operacional.
-- O bootstrap via execute_code só pode rodar uma vez por thread. Qualquer evidência de rename anterior congela o nome até o usuário pedir explicitamente novo rename.
-- O bootstrap deve fazer duas coisas na mesma chamada: (1) renomear a thread; (2)\
-      \ adicionar os usuarios obrigatorios do canal/agente via Discord API PUT /channels/{THREAD_ID}/thread-members/{USER_ID}.\n\
-      - Depois do primeiro bootstrap, congele: se a thread ja tem nome claro, historico, ou a pergunta parece continuacao/fase/andamento/follow-up,\
-      \ preserve o nome atual e responda direto.\n- Contexto curto por restart, pausa, arquivo/desarquivo ou historico parcial\
-      \ NAO significa thread nova.\n- Se houver duvida entre executar bootstrap e preservar, preserve. Reprocessar so com\
-      \ pedido explicito do usuario.\n- Em thread compartilhada, nao mencione outros bots salvo pedido explicito de handoff.\n\
-      - Nao comente sobre rename/auto-add na resposta ao usuario, exceto se o usuario estiver testando especificamente membros/threads.\n\
-      \nPadrao obrigatorio para THREAD_NAME:\n- Criar um resumo identificavel do assunto em ate 80 caracteres, com 4-9 palavras\
-      \ quando possivel.\n- Incluir objeto + acao/contexto. Evitar titulos vagos como \"Status\", \"Ajuste\", \"Teste\", \"\
-      Renomeacao\", \"Pedido\".\n- Se houver artefato/projeto/fase, incluir no nome: ex. \"Criacao e Estrutura REC+P1\", \"\
-      Correcao Rename de Threads\", \"Tracking de Custo Atena\", \"Ares Bootstrap Discord\".\n- Nao use apenas um nome curto;\
-      \ o objetivo e facilitar busca historica depois.\n\nUsuarios obrigatorios nas threads do Zeus:\nRodolfo Mattei: 344196393512075265\n\
-      \nScript de bootstrap para thread comprovadamente nova:\n```python\nfrom pathlib import Path\nimport os, urllib.request,\
-      \ json\nTHREAD_ID = \"<THREAD_ID_ATUAL>\"\nTHREAD_NAME = \"<RESUMO_DESCRITIVO_DO_ASSUNTO_max_80_chars>\"\nAUTO_ADD_USER_IDS\
-      \ = ['344196393512075265']\nPROFILE_ENV = Path('/root/.hermes/profiles/zeus/.env')\n\ndef read_token():\n    token =\
-      \ os.environ.get('DISCORD_BOT_TOKEN') or ''\n    if token:\n        return token\n    if PROFILE_ENV.exists():\n   \
-      \     for line in PROFILE_ENV.read_text().splitlines():\n            line=line.strip()\n            if not line or line.startswith('#')\
-      \ or '=' not in line:\n                continue\n            k,v=line.split('=',1)\n            if k.strip() == 'DISCORD_BOT_TOKEN':\n\
-      \                return v.strip().strip('\"').strip(\"'\")\n    return ''\n\ntoken = read_token()\nif not token:\n \
-      \   print(\"ERROR: DISCORD_BOT_TOKEN not available\")\nelse:\n    headers = {\"Authorization\": f\"Bot {token}\", \"\
-      Content-Type\": \"application/json\", \"User-Agent\": \"Hermes-Agent\"}\n    req = urllib.request.Request(\n       \
-      \ f\"https://discord.com/api/v10/channels/{THREAD_ID}\",\n        method=\"PATCH\",\n        headers=headers,\n    \
-      \    data=json.dumps({\"name\": THREAD_NAME[:80]}).encode(),\n    )\n    try:\n        urllib.request.urlopen(req, timeout=10).read()\n\
-      \        print(f\"OK rename: {THREAD_NAME[:80]}\")\n    except Exception as e:\n        print(f\"WARN rename failed:\
-      \ {type(e).__name__}\")\n    added=[]; failed=[]\n    for uid in AUTO_ADD_USER_IDS:\n        req = urllib.request.Request(\n\
-      \            f\"https://discord.com/api/v10/channels/{THREAD_ID}/thread-members/{uid}\",\n            method=\"PUT\"\
-      ,\n            headers=headers,\n            data=b\"\",\n        )\n        try:\n            urllib.request.urlopen(req,\
-      \ timeout=10).read()\n            added.append(uid)\n        except Exception as e:\n            failed.append(f\"{uid}:{type(e).__name__}\"\
-      )\n    print(json.dumps({\"auto_add_ok\": added, \"auto_add_failed\": failed}, ensure_ascii=False))\n```\n"
+    '1496267442899521627': 'INSTRUCAO DE THREAD Zeus — runtime rename-on-create ativo:
+
+
+      - Responda na thread atual; nao use send_message para resposta normal.
+
+      - NAO renomeie threads automaticamente via execute_code/Discord API. O gateway
+      ja cria thread nova com titulo deterministico e auto-add de membros.
+
+      - Thread existente fica congelada; so renomeie se Rodolfo pedir explicitamente.
+
+      - Em thread compartilhada, nao mencione outros bots salvo pedido explicito de
+      handoff.
+
+      - Nao comente sobre rename/auto-add na resposta, exceto se Rodolfo estiver testando
+      especificamente membros/threads.
+
+      '
   dm_role_auth_guild: ''
   server_actions: ''
   allow_any_attachment: false

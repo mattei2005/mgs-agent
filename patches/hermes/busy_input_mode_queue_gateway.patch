@@ -1,36 +1,13 @@
---- /root/.hermes/hermes-agent/gateway/run.py.bak_busymode_20260424_002222	2026-04-24 00:22:22.552904277 -0400
-+++ /root/.hermes/hermes-agent/gateway/run.py	2026-04-24 00:24:06.046074374 -0400
-@@ -1568,6 +1568,33 @@
-         from gateway.platforms.base import merge_pending_message_event
-         merge_pending_message_event(adapter._pending_messages, session_key, event)
- 
-+        # PATCH (MGS Digital Corp) — busy_input_mode queue support in gateway
-+        # Original Hermes only supports queue mode during gateway drain (restart/shutdown).
-+        # This patch extends queue mode to normal task execution, matching CLI behavior.
-+        # When config display.busy_input_mode = "queue", new messages don't interrupt
-+        # the running agent — they're queued (already done above via merge_pending_message_event)
-+        # and acknowledged with a different message. The agent finishes current task,
-+        # then automatically processes the queued message as next turn.
-+        if self._busy_input_mode == "queue":
-+            thread_meta = {"thread_id": event.source.thread_id} if event.source.thread_id else None
-+            # Debounce queued-ack: only one ack per 30s per session to avoid spam
-+            _QUEUE_ACK_COOLDOWN = 30
-+            now = time.time()
-+            last_ack = self._busy_ack_ts.get(session_key, 0)
-+            if now - last_ack >= _QUEUE_ACK_COOLDOWN:
-+                self._busy_ack_ts[session_key] = now
-+                try:
-+                    await adapter._send_with_retry(
-+                        chat_id=event.source.chat_id,
-+                        content="⏳ Message queued — I'll process it after the current task completes.",
-+                        reply_to=event.message_id,
-+                        metadata=thread_meta,
-+                    )
-+                except Exception as e:
-+                    logger.debug("Failed to send queue-ack: %s", e)
-+            return True
-+        # END PATCH (MGS)
-+
-         # Interrupt the running agent — this aborts in-flight tool calls and
-         # causes the agent loop to exit at the next check point.
-         running_agent = self._running_agents.get(session_key)
+--- a/gateway/run.py
++++ b/gateway/run.py
+@@ -3092,8 +3092,12 @@ class GatewayRunner:
+     def _queue_or_replace_pending_event(self, session_key: str, event: MessageEvent) -> None:
+         adapter = self.adapters.get(event.source.platform)
+         if not adapter:
+             return
+-        merge_pending_message_event(adapter._pending_messages, session_key, event)
++        # PATCH (MGS Digital Corp): in busy_input_mode=queue, normal Discord
++        # follow-ups must behave like /queue: one full turn per user message,
++        # FIFO, with no merge/replace.  The old single-slot merge caused two
++        # quick questions to collapse into one pending turn.
++        self._enqueue_fifo(session_key, event, adapter)

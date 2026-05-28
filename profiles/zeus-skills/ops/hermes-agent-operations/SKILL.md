@@ -19,9 +19,9 @@ Use esta skill para qualquer operação de Hermes Agent no ambiente MGS: atualiz
 
 ## Ambiente MGS conhecido
 
-- Profiles principais: `/root/.hermes/profiles/zeus/` e `/root/.hermes/profiles/atena/`.
+- Profiles principais: `/root/.hermes/profiles/zeus/`, `/root/.hermes/profiles/atena/` e `/root/.hermes/profiles/ares/`.
 - Checkout Hermes: `/root/.hermes/hermes-agent`.
-- Gateways systemd: `zeus-gateway.service` e `atena-gateway.service`.
+- Gateways systemd: `zeus-gateway.service`, `atena-gateway.service` e `ares-gateway.service`.
 - Projeto MGS: `/root/mgs-agent/`.
 - Alguns comandos de restart em Zeus podem interromper a sessão atual; planejar janela quando necessário.
 
@@ -72,6 +72,8 @@ Se o guardrail bloquear por reiniciar gateways/matar sessões, não tentar burla
 
 ### Validação pós-update obrigatória
 
+When Rodolfo says the backup/update is already done, stop recommending an update window and switch directly to post-update verification. See `references/hermes-v15-post-update-validation-2026-05-28.md` for the v15 validation evidence shape and path-migration pitfall.
+
 Só reportar sucesso depois de confirmar upstream, serviços, patches/smokes e testes alvo:
 
 ```bash
@@ -93,6 +95,9 @@ Checklist/suite detalhada: `references/hermes-update-post-update-validation.md`.
 
 ### Pitfalls de update
 
+- Pós-update com restart dos gateways MGS: quando o comando roda dentro do próprio Zeus, `systemctl restart zeus-gateway.service ...` pode timeoutar ou deixar Zeus em `deactivating` porque a conversa/tool atual mantém o processo antigo vivo. Não reportar falha sem checar estado vivo. Validar Atena/Ares, agendar finalização externa via `systemd-run` se necessário, depois diferenciar falhas históricas do restart de erros pós-start. Playbook: `references/post-update-gateway-restart-validation.md`.
+- Pós-update de Discord/thread MGS: não validar apenas com `grep modify_thread`. O patch antigo pode ter sido substituído por rename-on-create determinístico em `plugins/platforms/discord/adapter.py` (`_auto_thread_name_from_message`, `_auto_create_thread`) e auto-add (`_auto_add_parent_channel_members_to_thread`). Validar a capability real: scan por helpers/comentários `PATCH (MGS Digital Corp)`, `py_compile`, serviço ativo, e variáveis `DISCORD_THREAD_AUTO_ADD_USERS` nos profiles/processos vivos de Zeus/Atena/Ares. Se `modify_thread=0` mas esses helpers existem, não reportar “patch perdido” sem checar o novo caminho.
+- Após `hermes update`, `systemd` pode mostrar falhas `status=1/FAILURE` durante restart controlado. Diferenciar incidente ativo de histórico: confirmar PIDs atuais, uptime do serviço, memória atual/peak, logs posteriores e se há novo traceback/OOM. Só alertar como loop se houver falhas repetidas depois do novo start.
 - Timeout do terminal não prova falha; `hermes update` pode seguir em background. Verificar depois com versão, commits e serviços.
 - Se `hermes update` oficial travar/timeoutar sem output, **não repetir em loop**. Rodar verificação de estado; se ainda estiver atrasado, executar atualização manual controlada: backup já feito → `git stash push -u` dos patches locais → `git fetch origin main` → `git pull --ff-only origin main` → restaurar stash/patch local → limpar `__pycache__` → reinstalar dependências (`venv/bin/python -m pip install -e '.[all]'`) → `npm install`/build web quando aplicável → remover `.update_check` dos profiles → validar commit HEAD/origin, `hermes --version`, `py_compile` e serviços.
 - Antes de update manual com patch local MGS, salvar `git diff` em backup e testar `git apply --check` contra `origin/main` em worktree temporário. Se aplicar limpo, o risco é controlado; se não aplicar, portar patch antes de atualizar.
@@ -179,7 +184,7 @@ Ver detalhes: `references/hermes-web-brave-search-mgs-2026-05-17.md` e `referenc
 
 ## 3. Providers, modelos e OpenAI Codex OAuth
 
-Use quando Rodolfo quiser trocar provider de Zeus/Atena, usar GPT via assinatura ChatGPT, reduzir custo Anthropic/Claude, autenticar `openai-codex`, validar cron jobs após migração, ou auditar chamadas LLM pagas.
+Use quando Rodolfo quiser trocar provider de Zeus/Atena/Ares, usar GPT via assinatura ChatGPT, reduzir custo Anthropic/Claude, autenticar `openai-codex`, validar cron jobs após migração, ou auditar chamadas LLM pagas.
 
 ### Fatos essenciais
 
@@ -256,13 +261,20 @@ grep "provider:\|default:" /root/.hermes/profiles/zeus/config.yaml /root/.hermes
 
 Referências: `references/openai-codex-cron-model-pinning.md`, `references/openai-codex-anthropic-api-decommission.md`, `references/openai-codex-cost-monitoring-gpt-oauth.md`.
 
+### Purge total Anthropic/Claude quando Rodolfo exigir GPT-5.5 para tudo
+
+Quando Rodolfo disser “GPT-5.5 pra tudo”, “zero Anthropic”, “deleta de tudo” ou equivalente, usar o playbook `references/openai-codex-gpt55-all-profiles-purge.md`. Regra operacional: depois de confirmação crítica, limpar **root + profiles + backups/snapshots**, não só `config.yaml`. Validar `providers.anthropic=false`, `credential_pool.anthropic=false`, `active_provider=openai-codex`, auxiliares pinados em `openai-codex/gpt-5.5`, scan de `sk-ant-*` real igual a zero fora do código-fonte/testes/docs upstream, e gateways reconectados.
+
 ### Pitfalls de provider/OAuth
 
 - `hermes model --status` não existe; verificar config/auth diretamente.
 - Endpoint Codex não lista modelos via API (`/codex/models` pode retornar 400; `/backend-api/models` 403).
 - Token expira; refresh deve ser automático, mas falhas exigem novo `hermes model` e recópia para profiles.
 - Não manter Claude/Haiku como fallback silencioso após decisão de custo.
-- Alguns serviços fora do gateway podem continuar chamando Anthropic mesmo depois de migrar Zeus/Atena.
+- Quando limpar Anthropic/Claude, remover também `credential_pool.anthropic`, root `~/.hermes/auth.json`, root `~/.hermes/.env`, snapshots/backups com credenciais e espelhos versionados em `/root/mgs-agent/profiles/`; só limpar `providers.anthropic` nos profiles é insuficiente.
+- Alguns serviços fora do gateway podem continuar chamando Anthropic mesmo depois de migrar Zeus/Atena/Ares.
+- OpenHands “funcionando” não basta: se wrapper/trajectory usa `anthropic/claude-*` + API key 1Password, isso é uma falha de custo/governança salvo autorização explícita de Rodolfo. Diagnóstico canônico: `references/atena-openhands-provider-diagnostic.md`.
+- Para OpenHands na Atena/Zeus, a política correta é **GPT-5.5/OpenAI-Codex OAuth para tudo por padrão**. Não sugerir “backend não-Anthropic aprovado” genérico, OpenRouter, Haiku ou Claude como workaround. Se OpenHands precisar de compatibilidade com Codex, forçar `openai/gpt-5.5`, usar OAuth do profile sem imprimir token e validar o modelo real no output. Playbook: `references/openhands-gpt55-codex-wrapper.md`.
 
 ## 4. Reporting templates
 
@@ -301,6 +313,7 @@ Esta umbrella absorveu as antigas skills especializadas abaixo. Conteúdo detalh
 
 - `references/hermes-update-original-skill.md`
 - `references/hermes-update-post-update-validation.md`
+- `references/post-update-gateway-restart-validation.md` — validar update/restart Zeus+Atena+Ares quando Zeus reinicia a si mesmo; finalizer via systemd-run, distinção entre falha histórica de restart e erro ativo pós-start.
 - `references/hermes-update-pre-update-review.md`
 - `references/hermes-update-2026-05-16-mgs-relevance.md`
 - `references/mgs-full-maintenance-validation-and-npm-manual-update.md` — full post-maintenance validation checklist + safe manual npm replacement/rollback pattern
@@ -312,3 +325,5 @@ Esta umbrella absorveu as antigas skills especializadas abaixo. Conteúdo detalh
 - `references/openai-codex-cron-model-pinning.md`
 - `references/openai-codex-anthropic-api-decommission.md`
 - `references/openai-codex-cost-monitoring-gpt-oauth.md`
+- `references/atena-openhands-provider-diagnostic.md` — diagnosticar OpenHands da Atena: funcionalidade vs. provider/modelo/custo, wrapper e trajectories sem vazar credenciais
+- `references/openhands-gpt55-codex-wrapper.md` — padrão MGS para OpenHands com GPT-5.5/OpenAI-Codex OAuth, bloqueio de fallback provider e validação real do runtime model

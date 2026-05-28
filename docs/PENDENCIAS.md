@@ -50,7 +50,7 @@
 | `PEND-019` | REGRA 7 (Atena custo Discord) - testar em REC novo após fortalecimento | `agente` | 5min após próximo REC | — |
 | `PEND-020` | REGRA 8 (rename + mention) - Atena ignora apesar de EXECUCAO OBRIGATORIA | `agente` | 1-2h investigação | Comportamental, não técnico |
 | `PEND-026` | Preservar última migration kill-switch force_logout_version | `lovable` | 10min | Delegada pro Lovable.dev (14/05/2026) — aguarda... |
-| `PEND-027` | Agente Ares (FB Ads + Google Ads + ChatPion) | `agente` | 40h+ | Após Atena 100% estável em produção |
+| `PEND-027` | Agente Ares (FB Ads + Google Ads + receita via dashboards/GAM) | `agente` | 40h+ | Após Atena 100% estável em produção |
 | `PEND-028` | Adicionar gestores em authorized-users.json | `agente` | 30min | Quando Ares existir |
 | `PEND-067` | Auto-discover Discord channel_prompts - validar fix em REC real | `agente` | 5min após próximo REC | — |
 | `PEND-088` | Avaliar Hermes video_gen + Grok/X Search para futuro agente Ares | `agente` | 1h validação + decisão de custo | Quando criar/configurar Ares ou agente de campa... |

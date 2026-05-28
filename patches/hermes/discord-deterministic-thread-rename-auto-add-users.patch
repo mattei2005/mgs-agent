@@ -1,5 +1,5 @@
 diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
-index efe0b5d1d..f21cf84d1 100644
+index c58afffcd..0ed79e28e 100644
 --- a/plugins/platforms/discord/adapter.py
 +++ b/plugins/platforms/discord/adapter.py
 @@ -20,7 +20,7 @@ import tempfile
@@ -11,7 +11,7 @@ index efe0b5d1d..f21cf84d1 100644
  
  logger = logging.getLogger(__name__)
  
-@@ -3907,23 +3907,229 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3941,23 +3941,241 @@ class DiscordAdapter(BasePlatformAdapter):
      # Auto-thread helpers
      # ------------------------------------------------------------------
  
@@ -133,10 +133,10 @@ index efe0b5d1d..f21cf84d1 100644
 +    def _auto_thread_name_from_message(self, content: str) -> str:
 +        """Return a deterministic, cleaned Discord auto-thread title.
 +
-+        PATCH (MGS Digital Corp): agent channels need rename-on-create without
-+        relying on a later LLM/tool step. This strips bot mentions/names and
-+        common filler, then applies a few operational topic heuristics before
-+        falling back to a compact title-cased summary of the first words.
++        PATCH (MGS Digital Corp): agent channels use rename-on-create only.
++        Keep this conservative: prefer object + action/context, avoid generic
++        category guesses, and fall back to a cleaned first-message summary when
++        confidence is low.
 +        """
 +        text = content or ""
 +        text = re.sub(r"<@[!&]?\d+>", "", text)
@@ -148,9 +148,38 @@ index efe0b5d1d..f21cf84d1 100644
 +
 +        lowered = text.casefold()
 +
-+        # MGS agent-channel heuristics: when the first message is phrased as a
-+        # request, the raw first words make the thread look "not renamed". Keep
-+        # deterministic rename-on-create, but produce an operational title.
++        def cap_words(value: str, max_words: int = 8) -> str:
++            value = re.sub(r"\s+", " ", value).strip(" \t\n\r:;,.!?—-–")
++            words = value.split()
++            if len(words) > max_words:
++                value = " ".join(words[:max_words])
++            value = value[:77].rstrip(" \t\n\r:;,.!?—-–")
++            return (value[:1].upper() + value[1:]) if value else "Hermes"
++
++        # Explicit operational subjects. These are narrow by design: avoid broad
++        # catches like "erro" -> "Diagnóstico de erro", which produced vague titles.
++        agent_match = re.search(r"\b(zeus|atena|ares)\b", lowered)
++        agent = agent_match.group(1).capitalize() if agent_match else ""
++        if agent and any(word in lowered for word in ("status", "funcion", "saude", "saúde", "hoje", "online")):
++            return f"{agent} status operacional"[:80]
++        if agent and any(word in lowered for word in ("erro", "falha", "bug", "trav", "diagnost")):
++            return f"{agent} diagnóstico de erro"[:80]
++
++        if "krea" in lowered and any(word in lowered for word in ("pago", "custo", "billing", "servico", "serviço")):
++            return "Krea2 custo e billing"
++        if "precisamos conversar" in lowered and any(word in lowered for word in ("comportamento", "comportamentos", "errado", "errados")):
++            return "Revisão comportamento dos agentes"
++        if "padroniz" in lowered and any(word in lowered for word in ("atena", "zeus", "ares", "agente", "agentes", "thread", "threads")):
++            return "Padronização comportamento dos agentes"[:80]
++        if "thread" in lowered and any(word in lowered for word in ("renome", "rename", "titulo", "título", "nome")):
++            return "Regras de rename de threads"
++        if "thread" in lowered and "auto" in lowered and "add" in lowered:
++            return "Auto-add em threads Discord"
++        if "tracking" in lowered and "custo" in lowered:
++            return "Tracking de custo" if not agent else f"{agent} tracking de custo"
++        if "autoriz" in lowered or "aprova" in lowered or "libera" in lowered or "nega" in lowered:
++            return "Autorização de acesso"
++
 +        site_match = re.search(r"\b(eggbev|nice-homes|jewelsblast|financesmint|financeway|financesall)\b", lowered)
 +        vertical_match = re.search(r"\b([a-z]{2}-[a-z0-9]+-[a-z]{2})\b", lowered)
 +        site_label = site_match.group(1).replace("-", " ").title().replace(" ", "") if site_match else ""
@@ -163,68 +192,51 @@ index efe0b5d1d..f21cf84d1 100644
 +            article_type = "P1"
 +        elif re.search(r"\brec\b", lowered):
 +            article_type = "REC"
-+        if article_type and site_label and vertical_label and any(word in lowered for word in ("crie", "criar", "faca", "faça", "fazer")):
++
++        if article_type and any(word in lowered for word in ("crie", "criar", "faca", "faça", "fazer", "novo", "mais um")):
++            product = ""
 +            product_match = re.search(
 +                r"\b(?:do|da|de)\s+([^\n]+?)(?:\s+url\b|\s+status\b|\s+imagem\b|$)",
 +                text,
 +                flags=re.IGNORECASE,
 +            )
-+            product = product_match.group(1).strip(" .,:;!?—-–") if product_match else ""
-+            product = re.sub(r"\s+", " ", product)
++            if product_match:
++                product = product_match.group(1)
++                product = re.sub(r"\s+(?:no|na|em)\s+(?:eggbev|nice-homes|jewelsblast|financesmint|financeway|financesall)\b.*$", "", product, flags=re.IGNORECASE)
++                product = re.sub(r"\b[a-z]{2}-[a-z0-9]+-[a-z]{2}\b", "", product, flags=re.IGNORECASE)
++                product = re.sub(r"\s+", " ", product).strip(" .,:;!?—-–")
++            suffix = " ".join(part for part in (site_label, vertical_label) if part)
++            if product and suffix:
++                return f"{article_type} {product} - {suffix}"[:80]
 +            if product:
-+                return f"{article_type} {product} - {site_label} {vertical_label}"[:80]
++                return f"{article_type} {product}"[:80]
++            if suffix:
++                return f"Novo {article_type} - {suffix}"[:80]
++            return f"Novo {article_type}"[:80]
 +
 +        if any(word in lowered for word in ("liste", "lista", "listar")) and "artigo" in lowered:
 +            suffix = " ".join(part for part in (site_label, vertical_label) if part)
-+            return (f"Lista Artigos {suffix}" if suffix else "Lista de Artigos")[:80]
++            return (f"Lista de artigos {suffix}" if suffix else "Lista de artigos")[:80]
 +
 +        if any(word in lowered for word in ("correcao", "correcoes", "correção", "correções")):
 +            if "rec+p1" in lowered or ("rec" in lowered and "p1" in lowered):
-+                return "Correções recentes REC+P1"
-+            return "Correções recentes de artigos"
++                return "Correções REC+P1"
++            return "Correções de artigos"
 +
-+        if "rec+p1" in lowered and any(word in lowered for word in ("pedir", "fazer", "criar", "novo", "mais um")):
-+            return "Preparação novo REC+P1"
-+
-+        heuristics = [
-+            (("thread", "renome"), "Correção rename de threads"),
-+            (("thread", "rename"), "Correção rename de threads"),
-+            (("auto", "add", "thread"), "Correção auto-add em threads"),
-+            (("diagnost", "atena"), "Diagnóstico Atena"),
-+            (("diagnost", "zeus"), "Diagnóstico Zeus"),
-+            (("status", "tracking"), "Status tracking de custo"),
-+            (("custo", "tracking"), "Tracking de custo"),
-+            (("autoriz",), "Autorização de acesso"),
-+            (("aprova",), "Aprovação de acesso"),
-+            (("nega",), "Negativa de acesso"),
-+            (("erro",), "Diagnóstico de erro"),
-+            (("falha",), "Diagnóstico de falha"),
-+        ]
-+        for needles, title in heuristics:
-+            if all(needle in lowered for needle in needles):
-+                return title[:80]
-+
-+        stop_prefixes = (
-+            "por favor", "pf", "pode", "voce pode", "você pode", "me diz", "me fala",
-+            "qual o", "qual é o", "qual a", "qual é a", "quais", "como", "porque", "por que",
-+            "estou", "eu estou", "to", "tô",
-+        )
++        # Conservative fallback: remove prompt filler, preserve the actual subject.
 +        compact = text
-+        compact_lower = compact.casefold()
-+        for prefix in stop_prefixes:
-+            if compact_lower.startswith(prefix + " "):
-+                compact = compact[len(prefix):].strip(" \t\n\r:;,.!?—-–")
++        fallback_patterns = [
++            r"^(?:por favor|pf|pode|voce pode|você pode|me diz|me fala)\s+",
++            r"^(?:verifique|verifica|confira|cheque|veja)\s+(?:de novo\s+)?(?:como\s+(?:esta|está)\s+)?",
++            r"^(?:qual\s+(?:o|a|é o|é a)|quais|como)\s+",
++            r"^(?:estou|eu estou|to|tô)\s+",
++        ]
++        for pattern in fallback_patterns:
++            new_compact = re.sub(pattern, "", compact, flags=re.IGNORECASE).strip(" \t\n\r:;,.!?—-–")
++            if new_compact != compact:
++                compact = new_compact
 +                break
-+
-+        words = compact.split()
-+        if len(words) > 8:
-+            compact = " ".join(words[:8])
-+        compact = compact[:77].rstrip(" \t\n\r:;,.!?—-–")
-+        if not compact:
-+            compact = "Hermes"
-+        if len(text) > len(compact):
-+            compact = compact.rstrip(".")
-+        return compact[:1].upper() + compact[1:]
++        return cap_words(compact)
 +
      async def _auto_create_thread(self, message: 'DiscordMessage') -> Optional[Any]:
          """Create a thread from a user message for auto-threading.
@@ -252,7 +264,7 @@ index efe0b5d1d..f21cf84d1 100644
  
          try:
              thread = await message.create_thread(name=thread_name, auto_archive_duration=1440)
-@@ -4552,12 +4758,15 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4586,12 +4804,15 @@ class DiscordAdapter(BasePlatformAdapter):
          if not is_thread and not isinstance(message.channel, discord.DMChannel):
              no_thread_channels_raw = os.getenv("DISCORD_NO_THREAD_CHANNELS", "")
              no_thread_channels = {ch.strip() for ch in no_thread_channels_raw.split(",") if ch.strip()}
@@ -269,7 +281,7 @@ index efe0b5d1d..f21cf84d1 100644
                      parent_channel_id = str(message.channel.id)
                      is_thread = True
                      thread_id = str(thread.id)
-@@ -4832,9 +5041,19 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4871,9 +5092,19 @@ class DiscordAdapter(BasePlatformAdapter):
          if thread_id:
              self._threads.mark(thread_id)
  
@@ -292,7 +304,7 @@ index efe0b5d1d..f21cf84d1 100644
              self._enqueue_text_event(event)
          else:
              await self.handle_message(event)
-@@ -6081,6 +6300,11 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
+@@ -6120,6 +6351,11 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
          os.environ["DISCORD_FREE_RESPONSE_CHANNELS"] = str(frc)
      if "auto_thread" in discord_cfg and not os.getenv("DISCORD_AUTO_THREAD"):
          os.environ["DISCORD_AUTO_THREAD"] = str(discord_cfg["auto_thread"]).lower()

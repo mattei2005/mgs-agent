@@ -1,8 +1,8 @@
 #!/bin/bash
 # Monitor de updates do Hermes Agent (NousResearch upstream)
 # Frequência: 1×/dia (8 AM EST/EDT via cron — servidor está em America/New_York)
-# Custo: ZERO tokens (apenas git fetch + Discord webhook)
-# Canal destino: Alerts Infra Channel
+# Custo: ZERO tokens no monitor (git fetch + Discord Bot API); explicação roda no cron hermes-news-explainer
+# Canal destino: #alerts-hermes-news (via Zeus Bot API)
 # Estado: /root/mgs-agent/data/hermes-version-state.json
 # Log: /root/mgs-agent/logs/monitor-hermes-updates.log
 
@@ -15,6 +15,8 @@ set +a
 LOG="/root/mgs-agent/logs/monitor-hermes-updates.log"
 STATE="/root/mgs-agent/data/hermes-version-state.json"
 HERMES_DIR="/root/.hermes/hermes-agent"
+TARGET_CHANNEL_ID="1505609056771899644"  # #alerts-hermes-news
+ZEUS_PROFILE_ENV="/root/.hermes/profiles/zeus/.env"
 
 mkdir -p "$(dirname "$LOG")" "$(dirname "$STATE")"
 
@@ -22,20 +24,18 @@ log() {
   echo "[$(date -Iseconds)] $*" >> "$LOG"
 }
 
+trap 'rc=$?; log "ERROR unexpected_exit rc=$rc line=$LINENO"' ERR
+
 log "START monitor-hermes-updates"
 
-# 1. Buscar webhook via 1Password
-WEBHOOK=""
-for _attempt in 1 2 3; do
-  WEBHOOK=$(op item get "Discord Webhook - Alerts Infra Channel" \
-    --vault "MGS Conteúdo" \
-    --fields label=webhook_url --reveal 2>/dev/null)
-  [[ "$WEBHOOK" == https://* ]] && break
-  sleep 2
-done
+# 1. Buscar token do Zeus Bot para postar no canal Hermes updates
+DISCORD_TOKEN="${DISCORD_BOT_TOKEN:-}"
+if [[ -z "$DISCORD_TOKEN" && -f "$ZEUS_PROFILE_ENV" ]]; then
+  DISCORD_TOKEN=$(grep -E '^DISCORD_BOT_TOKEN=' "$ZEUS_PROFILE_ENV" | head -1 | cut -d= -f2- | sed -e 's/^"//' -e 's/"$//' -e "s/^'//" -e "s/'$//")
+fi
 
-if [[ "$WEBHOOK" != https://* ]]; then
-  log "ERROR: webhook unavailable after 3 retries"
+if [[ -z "$DISCORD_TOKEN" ]]; then
+  log "ERROR: Discord bot token unavailable"
   exit 1
 fi
 
@@ -147,9 +147,10 @@ PAYLOAD=$(jq -n \
 
 HTTP_CODE=$(curl -s -o /tmp/hermes-monitor-response.json -w '%{http_code}' \
   --max-time 15 \
-  -X POST "$WEBHOOK" \
+  -X POST "https://discord.com/api/v10/channels/${TARGET_CHANNEL_ID}/messages" \
+  -H "Authorization: Bot ${DISCORD_TOKEN}" \
   -H "Content-Type: application/json" \
-  -d "$PAYLOAD")
+  -d "$PAYLOAD" || true)
 
 if [[ "$HTTP_CODE" =~ ^2 ]]; then
   log "OK notified upstream=$UPSTREAM_SHORT local=$LOCAL_SHORT behind=$COMMITS_BEHIND days=$DAYS_BEHIND feat=$FEAT_COUNT fix=$FIX_COUNT breaking=$BREAKING_COUNT"
@@ -163,6 +164,6 @@ if [[ "$HTTP_CODE" =~ ^2 ]]; then
       breakdown: {features: $f, fixes: $fx, breaking: $br}}' \
     > "$STATE"
 else
-  log "ERROR webhook_failed http=$HTTP_CODE response=$(head -c 200 /tmp/hermes-monitor-response.json)"
+  log "ERROR discord_post_failed http=$HTTP_CODE response=$(head -c 200 /tmp/hermes-monitor-response.json)"
   exit 1
 fi

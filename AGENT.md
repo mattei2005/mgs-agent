@@ -418,6 +418,7 @@ Skills criadas em `/root/.hermes/profiles/{agent}/skills/` nas categorias abaixo
 
 - **Zeus:** `ops/`
 - **Atena:** `wordpress/`, `devops/`
+- **Ares:** `growth/`
 
 Se uma skill nova for criada em outra categoria com relevância operacional MGS (ex: `zeus/skills/data-science/`), o agente deve:
 1. Reportar via `[REPORT-INFRA]` como já é regra
@@ -430,6 +431,7 @@ Quando qualquer agente **cria** uma skill nova em uma categoria MGS-específica 
 Categorias MGS-específicas que disparam REPORT-INFRA:
 - **Zeus:** `skills/ops/`
 - **Atena:** `skills/wordpress/`, `skills/devops/`
+- **Ares:** `skills/growth/`
 
 Formato obrigatório:
 ```
@@ -445,7 +447,7 @@ Após postar REPORT-INFRA, atualizar `/root/mgs-agent/data/infra-inventory.json`
 ```json
 {
   "name": "<nome da skill>",
-  "category": "<ops|wordpress|devops>",
+  "category": "<ops|wordpress|devops|growth>",
   "skill_md": "<path completo>",
   "purpose": "<propósito>",
   "reference_implementation": "<script ou cron que usa, se aplicável>"

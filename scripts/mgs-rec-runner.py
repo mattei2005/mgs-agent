@@ -16,7 +16,6 @@ import html
 import json
 import os
 import re
-import sqlite3
 import subprocess
 import sys
 import tempfile
@@ -29,14 +28,14 @@ from typing import Any, Dict, List, Optional, Tuple
 
 ROOT = Path("/root/mgs-agent")
 SITES_JSON = ROOT / "data/sites.json"
-CACHE_DB = ROOT / "data/card-cache.db"
 TERM_CACHE_JSON = ROOT / "data/wp-term-cache.json"
 GEN_SCRIPTS = ROOT / "skills/content-generate-rec/scripts"
 REC_TEMPLATES = ROOT / "skills/content-generate-rec/templates"
 WP_SCRIPTS = ROOT / "skills/content-publish-wordpress/scripts"
 FEATURED_AUDIT_SCRIPT = ROOT / "scripts/audit-featured-image.py"
-API_URL = "http://127.0.0.1:8001/generate"
-HEALTH_URL = "http://127.0.0.1:8001/health"
+# Legacy mgs-rec-api (old FastAPI/Anthropic path) is intentionally disabled.
+# REC content is generated locally from the current official facts supplied to
+# this runner; do not attempt the masked service or report noisy API warnings.
 
 LOG_PREFIX = "mgs-rec-runner"
 
@@ -106,29 +105,6 @@ def load_rec_template_contract(site: Dict[str, Any]) -> Dict[str, Any]:
         "has_horizontal_card_gate": "horizontal" in text.lower() and "rotate" in text.lower(),
         "has_featured_three_layer_gate": "three essential" in text.lower() or "three" in text.lower() and "layers" in text.lower(),
     }
-
-
-def cache_lookup(card_slug: str) -> Optional[Dict[str, Any]]:
-    if not CACHE_DB.exists():
-        return None
-    con = sqlite3.connect(str(CACHE_DB))
-    con.row_factory = sqlite3.Row
-    now = now_iso()
-    row = con.execute(
-        "SELECT * FROM card_cache WHERE card_slug=? AND (expires_at IS NULL OR expires_at > ?)",
-        (card_slug, now),
-    ).fetchone()
-    con.close()
-    if not row:
-        return None
-    d = dict(row)
-    for src, dst in [("benefits_json", "benefits"), ("competitors_json", "competitors")]:
-        if d.get(src):
-            try:
-                d[dst] = json.loads(d[src])
-            except Exception:
-                d[dst] = []
-    return d
 
 
 def load_anthropic_key() -> Optional[str]:
@@ -330,10 +306,10 @@ def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Di
     lower_benefits = " ".join(benefits).lower()
     if "amazon" in lower_benefits or "amazon" in card_name.lower():
         tag10 = "Amazon rewards"
-        descriptor = "Earn Amazon rewards on eligible spending."
+        descriptor = "Turn routine Amazon spending into useful rewards."
     elif "nectar" in lower_benefits or "nectar" in card_name.lower():
         tag10 = "Nectar points"
-        descriptor = "Earn Nectar points on eligible spending."
+        descriptor = "Turn regular Nectar spending into useful points."
     elif "low interest" in lower_benefits or "low rate" in lower_benefits or "12.9%" in lower_benefits:
         tag10 = "Low interest rate"
         descriptor = "Lower-rate credit with simple fees."
@@ -345,7 +321,7 @@ def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Di
         descriptor = "Earn cashback on eligible purchases."
     elif any(t in lower_benefits for t in ["avios", "travel", "points"]):
         tag10 = "Travel rewards"
-        descriptor = "Earn travel rewards on eligible spend."
+        descriptor = "Make regular trips and bookings feel more rewarding."
     else:
         tag10 = "Confirmed benefits"
         descriptor = shorten_words(benefits[0], 9).rstrip(" ,;:") + "."
@@ -395,8 +371,8 @@ def lazy_credit_card(card_name: str, card_id: Optional[int], card_url: Optional[
         "imagem": build_media_payload(card_id, card_url, f"card-{card_slug}"),
         "categoria": site.get("default_category", "Credit Card"),
         "titulo": card_name,
-        "tag10": card_ui_tag(card_data.get("tag10"), "Cashback rewards"),
-        "tag2": card_ui_tag(card_data.get("tag2") or card_data.get("annual_fee"), "No annual fee"),
+        "tag10": card_ui_tag(card_data.get("tag10"), "Cashback rewards", card_name=card_name, annual_fee=str(card_data.get("annual_fee") or "")),
+        "tag2": card_ui_tag(card_data.get("tag2") or card_data.get("annual_fee"), "No annual fee", card_name=card_name, annual_fee=str(card_data.get("annual_fee") or "")),
         "texto": card_ui_descriptor(card_data, card_data.get("descriptor") or f"Learn more about the {card_name}."),
         "botao-texto": "How to Apply",
         "siteXfora": "You will remain on this website.",
@@ -452,7 +428,7 @@ def enforce_subtitle_limit(content: str, card_name: str, card_data: Dict[str, An
     elif "travel" in benefits:
         tail = "offers travel-focused credit card benefits."
     elif "cashback" in benefits:
-        tail = "offers cashback benefits for eligible spending."
+        tail = "can return value on routine spending."
     elif "amazon" in benefits or "amazon" in card_name.lower():
         tail = "rewards Amazon spending and key purchases."
     elif "points" in benefits or "rewards" in benefits:
@@ -471,18 +447,6 @@ def enforce_subtitle_limit(content: str, card_name: str, card_data: Dict[str, An
     return re.sub(r"<!-- wp:paragraph -->\s*<p>.*?</p>\s*<!-- /wp:paragraph -->", replacement, content, count=1, flags=re.I | re.S)
 
 
-def call_rec_api(payload: Dict[str, Any]) -> Dict[str, Any]:
-    req = urllib.request.Request(API_URL, method="POST", data=json.dumps(payload).encode(), headers={"Content-Type": "application/json"})
-    try:
-        with urllib.request.urlopen(req, timeout=90) as r:
-            return json.loads(r.read().decode())
-    except urllib.error.HTTPError as e:
-        body = e.read().decode(errors="ignore")
-        raise RunnerError(f"mgs-rec-api HTTP {e.code}: {body[:1000]}")
-    except Exception as e:
-        raise RunnerError(f"mgs-rec-api call failed: {e}")
-
-
 def normalize_card_artwork(path: str, aggressive: bool = False) -> Dict[str, Any]:
     """Force card artwork to horizontal orientation and crop padding/canvas.
 
@@ -493,7 +457,7 @@ def normalize_card_artwork(path: str, aggressive: bool = False) -> Dict[str, Any
     wide frame with a small card in the middle.
     """
     try:
-        from PIL import Image, ImageFilter
+        from PIL import Image, ImageFilter, ImageDraw
     except Exception as e:
         return {"status": "skipped", "reason": f"PIL unavailable: {e}"}
 
@@ -501,6 +465,60 @@ def normalize_card_artwork(path: str, aggressive: bool = False) -> Dict[str, Any
     img.load()
     before = {"width": img.width, "height": img.height}
     rotated = False
+
+    # Manual URLs sometimes point to a full article/banner image: white canvas,
+    # headline text and a portrait card placed on one side. The LazyBlock must
+    # receive only the card artwork. If a red portrait card is detected inside a
+    # landscape manual image, extract that object, mask the rounded corners and
+    # rotate it to horizontal before the normal trim/upscale path.
+    portrait_card_extracted = False
+    portrait_extract_info: Dict[str, Any] = {}
+    if aggressive and img.width > img.height:
+        rgba0 = img.convert("RGBA")
+        pix0 = rgba0.load()
+        xs: List[int] = []
+        ys: List[int] = []
+        x_min_scan = int(rgba0.width * 0.45)
+        for y in range(rgba0.height):
+            for x in range(x_min_scan, rgba0.width):
+                r, g, b, a = pix0[x, y]
+                if a > 20 and r > 115 and g < 135 and b < 135 and r > g * 1.15 and r > b * 1.15:
+                    xs.append(x); ys.append(y)
+        if len(xs) > 200:
+            raw_left, raw_top, raw_right, raw_bottom = min(xs), min(ys), max(xs) + 1, max(ys) + 1
+            raw_w, raw_h = raw_right - raw_left, raw_bottom - raw_top
+            # Red-pixel bounds often sit next to banner waves/white edges. Do
+            # not expand them; inset slightly so decorative background doesn't
+            # survive as a notch after rotation in the LazyBlock.
+            inset_x = max(2, int(raw_w * 0.08))
+            inset_y = max(2, int(raw_h * 0.035))
+            left = min(raw_right - 1, raw_left + inset_x)
+            top = min(raw_bottom - 1, raw_top + inset_y)
+            right = max(left + 1, raw_right - inset_x)
+            bottom = max(top + 1, raw_bottom - inset_y)
+            cw, ch = right - left, bottom - top
+            aspect = cw / ch if ch else 0
+            area_ratio = (cw * ch) / max(1, rgba0.width * rgba0.height)
+            if 0.45 <= aspect <= 0.85 and 0.04 <= area_ratio <= 0.60:
+                card = rgba0.crop((left, top, right, bottom))
+                mask = Image.new("L", card.size, 0)
+                radius = max(5, int(min(card.size) * 0.055))
+                ImageDraw.Draw(mask).rounded_rectangle((0, 0, card.width - 1, card.height - 1), radius=radius, fill=255)
+                isolated = Image.new("RGBA", card.size, (0, 0, 0, 0))
+                isolated.paste(card, (0, 0), mask)
+                img = isolated.rotate(90, expand=True, resample=Image.Resampling.BICUBIC)
+                rotated = True
+                portrait_card_extracted = True
+                portrait_extract_info = {
+                    "applied": True,
+                    "box": [left, top, right, bottom],
+                    "candidate_width": cw,
+                    "candidate_height": ch,
+                    "candidate_aspect": round(aspect, 4),
+                    "area_ratio": round(area_ratio, 4),
+                    "red_pixels": len(xs),
+                    "corner_alpha_mask": {"applied": True, "radius": radius},
+                }
     if img.height > img.width:
         img = img.rotate(-90, expand=True)
         rotated = True
@@ -645,6 +663,11 @@ def normalize_card_artwork(path: str, aggressive: bool = False) -> Dict[str, Any
                 aggressive_crop_applied = True
                 crop_method = "alpha_canvas_crop"
 
+    if portrait_card_extracted:
+        cropped = True
+        crop_method = "portrait_card_extracted_from_banner"
+        crop_info["portrait_card_extract"] = portrait_extract_info
+
     upscaled = False
     upscale_info: Dict[str, Any] = {}
     # Manual crops can be visually correct but too small because the source is
@@ -660,6 +683,28 @@ def normalize_card_artwork(path: str, aggressive: bool = False) -> Dict[str, Any
         img = img.filter(ImageFilter.UnsharpMask(radius=1, percent=130, threshold=3))
         upscaled = True
         upscale_info = {"before": {"width": old_w, "height": old_h}, "after": {"width": img.width, "height": img.height}, "method": "lanczos_unsharp", "target_width": 900}
+
+    # Page-context safety for banner-derived cards: avoid edge-to-edge fragile
+    # transparency that the LazyBlock/container can expose as clipped sides,
+    # semicircle notches or black-background artifacts. Put the corrected card on
+    # a neutral presentation canvas with breathing room before upload/featured
+    # generation.
+    if aggressive and portrait_card_extracted:
+        card_rgba = img.convert("RGBA")
+        alpha_box = card_rgba.getchannel("A").getbbox()
+        if alpha_box:
+            card_rgba = card_rgba.crop(alpha_box)
+        canvas_w, canvas_h = 900, 528
+        max_w, max_h = 760, 470
+        scale = min(max_w / max(1, card_rgba.width), max_h / max(1, card_rgba.height), 1.0)
+        fitted = card_rgba.resize((max(1, round(card_rgba.width * scale)), max(1, round(card_rgba.height * scale))), Image.Resampling.LANCZOS)
+        fitted = fitted.filter(ImageFilter.UnsharpMask(radius=0.8, percent=110, threshold=3))
+        canvas = Image.new("RGB", (canvas_w, canvas_h), "#f3f4f6")
+        x = (canvas_w - fitted.width) // 2
+        y = (canvas_h - fitted.height) // 2
+        canvas.paste(fitted, (x, y), fitted)
+        img = canvas
+        crop_info["lazyblock_presentation_canvas"] = {"applied": True, "width": canvas_w, "height": canvas_h, "background": "#f3f4f6", "card_box": [x, y, x + fitted.width, y + fitted.height]}
 
     img.save(path)
     return {
@@ -708,24 +753,102 @@ def clean_sentence_punctuation(text: str) -> str:
     return text
 
 
-def card_ui_tag(text: Any, fallback: str = "Cashback rewards") -> str:
-    """Short single-benefit LazyBlock tag; never join multiple facts with punctuation."""
+GENERIC_VISIBLE_VALUE_RE = re.compile(
+    r"\b(not stated|not provided|not available|n/?a|unknown|check issuer terms|check terms|official product page|latest confirmed benefit details)\b",
+    re.I,
+)
+
+
+def is_generic_visible_value(value: Any) -> bool:
+    raw = html.unescape(str(value or "")).strip()
+    if not raw:
+        return True
+    return bool(GENERIC_VISIBLE_VALUE_RE.search(raw))
+
+
+def require_specific_visible_value(value: Any, field: str) -> str:
+    raw = html.unescape(str(value or "")).strip()
+    if is_generic_visible_value(raw):
+        raise RunnerError(f"{field} is generic/unusable for visible content: {raw!r}; fetch the official fact or provide verified request facts")
+    return raw
+
+
+def card_ui_tag(text: Any, fallback: str = "Cashback rewards", *, card_name: str = "", annual_fee: str = "") -> str:
+    """Short benefit-led LazyBlock tag. Block numeric fragments and redundant category labels."""
     value = html.unescape(str(text or "")).strip()
-    value = re.split(r"[;,.]|\s+ and \s+", value, maxsplit=1, flags=re.I)[0].strip()
+    # Split only on semicolon/comma/"and". Do not split decimal values like 2.99.
+    value = re.split(r"[;,]|\s+ and \s+", value, maxsplit=1, flags=re.I)[0].strip()
     value = re.sub(r"\bcard features\b", "", value, flags=re.I).strip()
-    if not value or value.lower() in {"credit card", "card benefits", "features"}:
+    value = re.sub(r"\s+", " ", value).strip(" .;:,!")
+    low = value.lower()
+    name_low = (card_name or "").lower()
+    fee_low = (annual_fee or "").lower()
+    bad = (
+        is_generic_visible_value(value)
+        or low in {"credit card", "card benefits", "features", "official terms", "transfer fee", "annual fee"}
+        or bool(re.fullmatch(r"[0-9.£%\s]+", value))
+        or ("fee" in low and bool(re.search(r"\d", low)))
+        or (low in {"balance transfer", "balance transfers"} and "balance transfer" in name_low)
+        or (low == "no fees" and any(t in fee_low for t in ["fee", "2.99", "annual", "minimum"]))
+    )
+    if bad:
         value = fallback
     value = re.sub(r"\s+", " ", value).strip(" .;:,!")
+    if is_generic_visible_value(value) or re.fullmatch(r"[0-9.£%\s]+", value):
+        raise RunnerError(f"LazyBlock tag is generic/unusable: {value!r}")
     return value[:25].rstrip(" .;:,")
+
+
+def derive_lazyblock_tags(card_name: str, benefits: List[str], annual_fee: str = "") -> Tuple[str, str, str]:
+    """Choose commercial, non-redundant card tags and descriptor from current benefits."""
+    joined = " ".join([card_name] + benefits).lower()
+    fee_low = (annual_fee or "").lower()
+    tags: List[str] = []
+    descriptor = "Designed around confirmed benefits and practical repayment use."
+
+    month = re.search(r"0%[^.]{0,80}?(\d{1,2})\s*months?", joined)
+    if ("balance transfer" in joined or "0% balance" in joined) and month:
+        tags.append(f"{month.group(1)} mo 0%")
+        descriptor = "Helps move existing card debt into a clearer repayment window."
+    elif "balance transfer" in joined or "0% balance" in joined:
+        tags.append("0% transfers")
+        descriptor = "Helps move existing card debt into a clearer repayment plan."
+    if "no nationwide fees" in joined or "purchases abroad" in joined or "foreign transaction" in joined or "abroad" in joined:
+        tags.append("No FX fees")
+    if "0%" in joined and "purchase" in joined:
+        tags.append("0% purchases")
+    if "cashback" in joined:
+        tags.append("Cashback")
+        descriptor = "Makes routine spending feel more rewarding."
+    if "1% back" in joined or "0.5% back" in joined or "rewards" in joined:
+        tags.append("Rewards back")
+        descriptor = "Turns planned spending into practical Rewards value."
+    if any(t in joined for t in ["avios", "travel", "lounge", "hotel", "points"]):
+        tags.append("Travel rewards")
+        descriptor = "Makes trips and overseas spending feel easier to use."
+    if "no annual fee" in joined or ("annual fee" in fee_low and "£0" in fee_low and "£84" not in fee_low and "monthly" not in fee_low):
+        tags.append("No annual fee")
+
+    clean: List[str] = []
+    for tag in tags:
+        try:
+            t = card_ui_tag(tag, tag, card_name=card_name, annual_fee=annual_fee)
+        except RunnerError:
+            continue
+        if t.lower() not in [x.lower() for x in clean]:
+            clean.append(t)
+    while len(clean) < 2:
+        clean.append("Everyday value" if not clean else "Apply online")
+    return clean[0], clean[1], descriptor
 
 
 def card_ui_descriptor(card_data: Dict[str, Any], fallback: str) -> str:
     benefits = [str(b) for b in (card_data.get("benefits") or [])]
     joined = " ".join(benefits).lower()
     if "cashback" in joined:
-        desc = "Earn cashback on eligible purchases."
+        desc = "Get value back from routine spending."
     elif any(term in joined for term in ["avios", "travel", "points", "marriott", "bonvoy", "elite night"]):
-        desc = "Earn travel rewards on eligible spend."
+        desc = "Make regular trips and bookings feel more rewarding."
     elif "no annual fee" in joined or "no fee" in joined:
         desc = "A no-annual-fee card for everyday spend."
     else:
@@ -736,13 +859,101 @@ def card_ui_descriptor(card_data: Dict[str, Any], fallback: str) -> str:
     return desc
 
 
+def perceived_benefit_item(raw: str, *, card_name: str = "") -> str:
+    """Convert a technical extracted fact into a short user-perceived REC benefit."""
+    text = re.sub(r"\s+", " ", str(raw or "")).strip().rstrip(".")
+    low = text.lower()
+    name_low = card_name.lower()
+    if not text:
+        return "A clearer way to judge whether the card fits planned spending"
+    if "foreign transaction" in low or "abroad" in low or "overseas" in low:
+        return "Using the card abroad can feel more convenient when eligible purchases avoid the usual foreign transaction fee"
+    if "travel" in low and ("reward" in low or "rewards" in low or "partner" in low):
+        return "Trips, hotel bookings, transport or partner spending can turn into rewards when they already fit your routine"
+    if "15%" in low and "reward" in low:
+        return "Up to 15% back with chosen partner retailers can make travel or everyday partner purchases feel more worthwhile"
+    if "1%" in low and ("supermarket" in low or "rewards" in low):
+        return "Supermarket spending can return 1% in Rewards when it is part of your normal routine"
+    if "0.5%" in low and ("petrol" in low or "elsewhere" in low or "rewards" in low):
+        return "Everyday purchases outside supermarkets can still build 0.5% back in Rewards over time"
+    if "credit limit" in low or "£5,000" in low:
+        return "A higher minimum credit limit can support bigger planned purchases when approval and repayment discipline line up"
+    if "annual fee" in low and ("no" in low or "£0" in low):
+        return "No annual fee makes the card easier to keep for occasional travel or partner rewards without adding a yearly cost"
+    if "0%" in low and "balance" in low:
+        return text
+    if "balance transfer" in low:
+        return "Moving existing card debt can create more breathing room when the transfer window and fee support a realistic repayment plan"
+    if "reward" in low or "cashback" in low or "points" in low:
+        return "The reward value matters most when it comes from spending you already planned to make"
+    if "fee" in low or "apr" in low:
+        return f"{text}. This should be checked against the way you expect to spend and repay"
+    if "travel" in name_low:
+        return f"{text}. The practical value is strongest when it supports trips, overseas purchases or partner spending already planned"
+    return text
+
+
+def rec_top_of_page_copy(card_name: str, benefits: List[str], annual_fee_raw: str, apr_raw: str) -> Dict[str, Any]:
+    joined = " ".join([card_name] + benefits).lower()
+    primary = perceived_benefit_item(shorten_words(benefits[0] if benefits else "key credit card benefits", 18), card_name=card_name)
+    second = perceived_benefit_item(shorten_words(benefits[1] if len(benefits) > 1 else "repayment flexibility", 18), card_name=card_name)
+    third = perceived_benefit_item(shorten_words(benefits[2] if len(benefits) > 2 else "clearer budgeting", 18), card_name=card_name)
+    if "balance transfer" in joined or "0% balance" in joined:
+        month = re.search(r"0%[^.]{0,80}?(\d{1,2})\s*months?", joined)
+        months = f"{month.group(1)} months" if month else "months"
+        return {
+            "summary": f"{card_name} offers up to {months} interest-free balance transfers.",
+            "opening_1": f"<strong>{html.escape(card_name)}</strong> is built for people who want to cut interest pressure on existing card debt and organise repayments with more control.",
+            "opening_2": f"Its strongest hook is {html.escape(primary.lower())}, giving borrowers more time to simplify monthly payments before interest starts building again.",
+            "opening_3": f"The transfer fee matters — {html.escape(annual_fee_raw)} — but the trade-off can make sense when the interest-free window creates real savings and breathing room.",
+            "benefits_intro": "Some of the main advantages include:",
+            "benefit_items": [
+                primary,
+                "More time to organise repayments with less financial pressure",
+                second,
+                "Ability to consolidate multiple balances into one card",
+                "Better monthly budgeting and repayment visibility",
+            ],
+            "fee_context": f"The {html.escape(annual_fee_raw)} is the main trade-off. It should be weighed against the interest saved during the promotional period.",
+            "best_for_1": f"This card may suit UK consumers carrying balances on higher-interest cards who want more time to repay debt in a structured way.",
+            "best_for_2": "It works best when the user has a clear repayment target and wants fewer payments, less interest pressure and better visibility month to month.",
+        }
+    if any(t in joined for t in ["travel", "foreign transaction", "overseas", "hotel", "reward", "partner retailer"]):
+        return {
+            "summary": f"{card_name} links rewards, partner offers and fee-free overseas purchases.",
+            "opening_1": f"<strong>{html.escape(card_name)}</strong> can make more sense when rewards already fit your routine.",
+            "opening_2": "The value is easier to picture in real situations: booking a trip, paying abroad or using participating brands.",
+            "opening_3": f"One of the strongest attractions is practical: {html.escape(primary[0].lower() + primary[1:] if primary else '')}.",
+            "benefits_intro": "In practical use, the main benefits can feel like this:",
+            "benefit_items": [primary, second, third],
+            "fee_context": f"Cost context: {html.escape(annual_fee_raw)}. APR: {html.escape(shorten_words(apr_raw, 6))}.",
+            "best_for_1": "This card may suit you if rewards connect with purchases you already make during the year.",
+            "best_for_2": "It is less convincing if you would spend more only to chase rewards.",
+        }
+    return {
+        "summary": f"{card_name} is worth comparing when its strongest benefit matches a real spending or repayment need.",
+        "opening_1": f"<strong>{html.escape(card_name)}</strong> works best when you can picture exactly where the main benefit fits into everyday use.",
+        "opening_2": "The value should feel practical before the application starts: lower friction, clearer costs, better rewards use or a repayment plan that makes sense.",
+        "opening_3": f"The strongest hook is {html.escape(primary[0].lower() + primary[1:] if primary else '')}.",
+        "benefits_intro": "In practical use, the main benefits can feel like this:",
+        "benefit_items": [primary, second, third],
+        "fee_context": f"The cost context is {html.escape(annual_fee_raw)}, with APR shown as {html.escape(shorten_words(apr_raw, 8))}; the benefit only matters if it survives normal repayment behaviour.",
+        "best_for_1": f"This card may suit you if your normal spending or borrowing pattern makes its strongest benefit useful in practice.",
+        "best_for_2": "It may not fit you if you need a different fee profile, reward structure or repayment approach.",
+    }
+
+
 def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict[str, Any]) -> Dict[str, Any]:
     """Generate a deterministic REC article without the deprecated local API."""
     name = esc_text(card_data.get("card_name"))
-    annual_fee = esc_text(card_data.get("annual_fee") or "N/A")
-    apr = esc_text(card_data.get("apr") or "N/A")
-    apr_display = esc_text(shorten_words(card_data.get("apr") or "N/A", 8))
-    benefits = [str(b).strip() for b in (card_data.get("benefits") or []) if str(b).strip()]
+    annual_fee_raw = require_specific_visible_value(card_data.get("annual_fee"), "annual_fee")
+    apr_raw = require_specific_visible_value(card_data.get("apr"), "apr")
+    annual_fee = esc_text(annual_fee_raw)
+    apr = esc_text(apr_raw)
+    apr_display = esc_text(shorten_words(apr_raw, 8))
+    benefits = [str(b).strip() for b in (card_data.get("benefits") or []) if str(b).strip() and not is_generic_visible_value(b)]
+    if len(benefits) < 3:
+        raise RunnerError("REC requires at least 3 specific benefits extracted from official/request facts; generic fallback benefits are blocked")
     raw_competitors = card_data.get("competitors") or []
     competitor_rows = []
     for c in raw_competitors:
@@ -773,9 +984,10 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     third_benefit = esc_text(shorten_words(benefits[2] if len(benefits) > 2 else "everyday payment flexibility", 12))
     benefit_phrase = esc_text(shorten_words(sentence_join(benefits, 3), 10))
     descriptor = card_data.get("descriptor") or primary_benefit
-    card_data["tag10"] = card_ui_tag(card_data.get("tag10") or primary_benefit, "Cashback rewards")
-    card_data["tag2"] = card_ui_tag(card_data.get("tag2") or annual_fee, "No annual fee")
-    card_data["descriptor"] = card_ui_descriptor(card_data, descriptor)
+    tag10, tag2, default_descriptor = derive_lazyblock_tags(str(card_data.get("card_name") or name), benefits, annual_fee_raw)
+    card_data["tag10"] = tag10
+    card_data["tag2"] = tag2
+    card_data["descriptor"] = card_ui_descriptor(card_data, default_descriptor)
 
     rows = []
     for label, fee, note in [
@@ -786,20 +998,23 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
         rows.append(f"<tr><td>{label}</td><td>{esc_text(fee)}</td><td>{esc_text(note)}</td></tr>")
     table = "".join(rows)
 
+    top_copy = rec_top_of_page_copy(str(card_data.get("card_name") or name), benefits, annual_fee_raw, apr_raw)
+    benefit_items = "".join(f"<!-- wp:list-item -->\n<li>{html.escape(str(item))}</li>\n<!-- /wp:list-item -->\n" for item in top_copy["benefit_items"][:5])
+
     html_body = f"""<!-- wp:paragraph -->
-<p><strong>{name}</strong> gives readers a clear reason to compare it, with {annual_fee.lower()} and a focused value proposition.</p>
+<p>{html.escape(top_copy['summary'])}</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>It is most interesting when its strongest benefit already matches the reader’s normal spending or borrowing habits.</p>
+<p>{top_copy['opening_1']}</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>The hook is clear: {benefit_phrase}. That makes the card easier to assess before moving into the deeper application page.</p>
+<p>{top_copy['opening_2']}</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>For the right user, the value should feel practical, easy to understand and useful before the deeper application step.</p>
+<p>{top_copy['opening_3']}</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -807,19 +1022,15 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>The main benefit is {primary_benefit}. It gives the card a clear reason to stand out in its segment.</p>
+<p>{top_copy['benefits_intro']}</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p>Another point is {second_benefit}. This supports users who want the card to fit into real spending decisions, not a generic checklist.</p>
-<!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul>{benefit_items}</ul>
+<!-- /wp:list -->
 
 <!-- wp:paragraph -->
-<p>The card also includes {third_benefit}. That can add useful breathing room for planned purchases when repayments stay organised.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Overall, the card should be framed around its real practical value rather than forced into a generic rewards or premium-card story.</p>
+<p>{top_copy['fee_context']}</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -827,19 +1038,19 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>The official product information lists the annual fee as {annual_fee}. APR information is shown as {apr_display}.</p>
+<p>The issuer lists the annual-fee context as {annual_fee}. APR: {apr_display}.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>The final cost depends on credit limit, interest rate and repayment behaviour. Paying on time remains central.</p>
+<p>Your final cost depends on the credit limit, rate and repayment behaviour. Paying on time keeps the rewards more useful.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Applicants should check the latest terms before applying. Fees, rates and eligibility rules can change.</p>
+<p>You should check the latest terms before applying because fees, rates and eligibility rules can change.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Used carefully, the card can support routine purchases. Carrying a balance may increase the total cost.</p>
+<p>Used carefully, the card can support routine purchases without making rewards harder to justify.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -850,20 +1061,32 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <figure class="wp-block-table"><table class="has-fixed-layout" style="font-size:85%"><thead><tr><th>Card</th><th>Annual fee</th><th>Positioning</th></tr></thead><tbody>{table}</tbody></table></figure>
 <!-- /wp:table -->
 
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How to Use It in Practice</h2>
+<!-- /wp:heading -->
+
 <!-- wp:paragraph -->
-<p>Compared with {comp_a}, the {name} is more focused on {primary_benefit}.</p>
+<p>Use the card where the benefit is easiest to feel: planned purchases, trips or spending categories already in your budget.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Compared with {comp_b}, it has a different value proposition and keeps the focus on {third_benefit}.</p>
+<p>If the benefit needs extra spending to feel useful, the card becomes less persuasive.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>The table is a quick orientation tool. It is not a full eligibility check.</p>
+<p>Before applying, compare the benefit with the fee, APR and repayment plan.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">What to Check Before Applying</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Check whether the strongest benefit is something you would use naturally.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Rates and terms can change. Therefore, the official page should remain the final reference.</p>
+<p>Separate everyday purchases, travel use, cash withdrawals and carried balances. Each can change the real value.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
@@ -871,15 +1094,15 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>This card may suit applicants who want a straightforward UK credit card. It is best assessed with realistic repayment plans.</p>
+<p>{top_copy['best_for_1']}</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>It may not fit someone seeking premium rewards, travel perks or a guaranteed low APR. Other cards may compete better there.</p>
+<p>{top_copy['best_for_2']}</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Readers should compare the official details with their own credit profile and read the official terms before applying.</p>
+<p>Compare the official details with your own credit profile before applying.</p>
 <!-- /wp:paragraph -->"""
     return {
         "success": True,
@@ -915,10 +1138,15 @@ def pad_content_to_min_words(content: str, current_count: int, min_count: int = 
         return content
     needed = min_count - current_count + 2
     pads = [
-        "This supports a clearer comparison for UK readers.",
-        "It also keeps the guide focused on practical use.",
-        "Applicants should still confirm current issuer terms.",
-        "That helps avoid unsupported assumptions before applying.",
+        "That can make planned spending easier to judge before applying.",
+        "The card works best when its strongest feature matches real monthly behaviour.",
+        "You should still confirm current issuer terms before committing.",
+        "The final offer can vary after credit assessment.",
+        "Repayment behaviour remains central to card value.",
+        "Current pricing should be checked before application.",
+        "The card should match planned spending needs.",
+        "Eligibility is assessed by the issuer directly.",
+        "You should compare alternatives before applying.",
     ]
 
     paragraph_re = re.compile(r"<p>(.*?)</p>", re.I | re.S)
@@ -988,8 +1216,11 @@ def title_meta_focus(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, st
     words = [w for w in re.sub(r"[^A-Za-z0-9 ]", " ", card_name).split() if w.lower() not in {"credit", "card", "the"}]
     focus = " ".join(words[:3]) if words else card_name[:40]
     no_fee = "no annual fee" in (card_data.get("annual_fee") or "").lower() or any("no annual fee" in b.lower() for b in card_data.get("benefits", []))
-    rewards_supported = any(x in " ".join(card_data.get("benefits", [])).lower() for x in ["cashback", "rewards", "points", "miles"])
-    if no_fee:
+    joined = " ".join(card_data.get("benefits", [])).lower()
+    rewards_supported = any(x in joined for x in ["cashback", "rewards", "points", "miles"])
+    if "balance transfer" in joined or "0% balance" in joined:
+        title = f"{focus}: 0% Balance Transfer"
+    elif no_fee:
         title = f"{focus}: No Annual Fee"
     elif rewards_supported:
         title = f"{focus}: Rewards & Fees"
@@ -997,7 +1228,10 @@ def title_meta_focus(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, st
         title = f"{focus}: Benefits & Fees"
     if len(title) > 60:
         title = f"{focus}: Benefits"[:60]
-    meta = f"{card_name} offers {', '.join(card_data.get('benefits', ['key benefits'])[:2]).lower()}. See fees, APR and how it works."
+    if "balance transfer" in joined or "0% balance" in joined:
+        meta = f"{card_name} offers 0% balance transfers, interest savings and repayment breathing room. See fees, APR and how it works."
+    else:
+        meta = f"{card_name} offers {', '.join(card_data.get('benefits', ['key benefits'])[:2]).lower()}. See fees, APR and how it works."
     if len(meta) > 130:
         meta = clean_sentence_punctuation(meta[:127].rsplit(" ", 1)[0] + "...")
     if len(meta) < 120:
@@ -1209,57 +1443,39 @@ def main() -> int:
         tick("config_load_sec", t0)
         steps.append("config_loaded")
 
-        t0 = time.time()
-        cache = cache_lookup(card_slug)
-        tick("card_cache_lookup_sec", t0)
-        if cache:
+        benefits = args.benefit or []
+        competitors: List[Dict[str, str]] = []
+        for c in args.competitor:
+            try:
+                obj = json.loads(c)
+                if isinstance(obj, dict):
+                    competitors.append(obj)
+            except Exception:
+                competitors.append({"name": c})
+        if benefits and args.annual_fee:
             card_data = {
-                "card_name": cache.get("card_name") or args.card,
-                "card_official_url": cache.get("card_official_url") or args.source_url,
-                "annual_fee": cache.get("annual_fee"),
-                "apr": cache.get("apr"),
-                "benefits": cache.get("benefits") or [],
-                "competitors": cache.get("competitors") or [],
-                "tag10": cache.get("tag10"),
-                "tag2": cache.get("tag2"),
-                "descriptor": cache.get("descriptor"),
-                "card_image_uploaded_id": cache.get("card_image_uploaded_id"),
-                "card_image_uploaded_url": cache.get("card_image_uploaded_url"),
+                "card_name": args.card,
+                "card_official_url": args.source_url,
+                "annual_fee": args.annual_fee,
+                "apr": args.apr or "N/A",
+                "benefits": benefits,
+                "competitors": competitors,
             }
-            steps.append("cache_hit")
+            steps.append("request_facts_used")
         else:
-            benefits = args.benefit or []
-            competitors: List[Dict[str, str]] = []
-            for c in args.competitor:
-                try:
-                    obj = json.loads(c)
-                    if isinstance(obj, dict): competitors.append(obj)
-                except Exception:
-                    competitors.append({"name": c})
-            if benefits and args.annual_fee:
-                card_data = {
-                    "card_name": args.card,
-                    "card_official_url": args.source_url,
-                    "annual_fee": args.annual_fee,
-                    "apr": args.apr or "N/A",
-                    "benefits": benefits,
-                    "competitors": competitors,
-                }
-                steps.append("request_facts_used")
-            else:
-                if not args.source_url:
-                    raise RunnerError("Cache MISS and no --source-url/benefits supplied")
-                t0 = time.time()
-                status, text = fetch_reference_text(args.source_url)
-                tick("reference_fetch_sec", t0)
-                if status >= 400:
-                    raise RunnerError(f"reference_url returned HTTP {status}")
-                t0 = time.time()
-                card_data = extract_card_data_with_llm(args.card, args.source_url, text)
-                tick("reference_extract_llm_sec", t0)
-                card_data["card_official_url"] = args.source_url
-                steps.append("reference_extracted_deterministic")
-                costs["extract_llm_est"] = 0.0
+            if not args.source_url:
+                raise RunnerError("official source URL required; editorial card-cache is disabled for production content")
+            t0 = time.time()
+            status, text = fetch_reference_text(args.source_url)
+            tick("reference_fetch_sec", t0)
+            if status >= 400:
+                raise RunnerError(f"reference_url returned HTTP {status}")
+            t0 = time.time()
+            card_data = extract_card_data_with_llm(args.card, args.source_url, text)
+            tick("reference_extract_llm_sec", t0)
+            card_data["card_official_url"] = args.source_url
+            steps.append("reference_extracted_deterministic")
+            costs["extract_llm_est"] = 0.0
 
         card_data["card_name"] = card_data.get("card_name") or args.card
         source_to_check = args.source_url or card_data.get("card_official_url") or ""
@@ -1303,20 +1519,9 @@ def main() -> int:
             "competitors": card_data.get("competitors") or [],
         }
         t0 = time.time()
-        try:
-            api = call_rec_api(api_payload)
-            tick("article_api_sec", t0)
-            if not api.get("success"):
-                raise RunnerError(f"mgs-rec-api failed: {api}")
-            steps.append("article_generated_api")
-        except RunnerError as e:
-            # The legacy local API is intentionally masked on current MGS infra.
-            # Do not waste a second runner attempt; generate deterministic HTML
-            # locally from the official facts already supplied to this runner.
-            warnings.append(f"article_api_unavailable_local_generator_used: {str(e)[:300]}")
-            api = generate_article_local(site, card_slug, card_data)
-            tick("article_local_generate_sec", t0)
-            steps.append("article_generated_local")
+        api = generate_article_local(site, card_slug, card_data)
+        tick("article_local_generate_sec", t0)
+        steps.append("article_generated_local")
         costs["article_api"] = float(api.get("cost_usd") or 0)
         card_data.update(api.get("card_data") or {})
 
@@ -1399,8 +1604,13 @@ def main() -> int:
                 steps.append("dry_run_skip_card_upload")
             else:
                 source_url = card_data.get("card_official_url") or args.source_url
+                if args.status == "publish" and not args.card_image_url:
+                    raise RunnerError(
+                        "card_image_required_for_publish: no approved manual card image URL supplied. "
+                        "Ask Raquel/Rodolfo for the correct card image before publishing; automatic image fallback is disabled for production."
+                    )
                 if not source_url and not args.card_image_url:
-                    raise RunnerError("No card official URL available for image search")
+                    raise RunnerError("No card official URL available for draft image search")
                 t0 = time.time()
                 if args.card_image_url:
                     # Manual image URLs are a source-of-truth override for the
@@ -1430,18 +1640,16 @@ def main() -> int:
                         "reason": "user_supplied_card_art_normalized",
                     }
                     if manual_pre_upscale_w and int(manual_pre_upscale_w) < 600:
+                        # Scope update, Rodolfo 2026-05-27: small manual card images may be
+                        # acceptable after normalization inside the card UI. Treat size as a
+                        # quality warning, not a publishing blocker. Identity/semantics still
+                        # remain hard gates.
                         card_selection["quality_warning"] = f"useful crop width {manual_pre_upscale_w}px below 600px before upscale"
-                        card_selection["quality_status"] = "LOW_QUALITY_SOURCE"
-                        if os.environ.get("MGS_ALLOW_LOW_QUALITY_MANUAL_CARD") == "1":
-                            warnings.append(
-                                f"manual_card_image_low_quality_source_allowed_by_user: useful crop width {manual_pre_upscale_w}px below 600px"
-                            )
-                            steps.append("manual_card_image_low_quality_source_user_approved")
-                        else:
-                            raise RunnerError(
-                                f"manual_card_image_low_quality_source: useful crop width {manual_pre_upscale_w}px below 600px; "
-                                "provide a higher-quality card image or approve automatic fallback"
-                            )
+                        card_selection["quality_status"] = "LOW_QUALITY_SOURCE_ALLOWED_MANUAL"
+                        warnings.append(
+                            f"manual_card_image_low_quality_source_allowed: useful crop width {manual_pre_upscale_w}px below 600px; manual image accepted after normalization"
+                        )
+                        steps.append("manual_card_image_low_quality_source_allowed")
                     steps.append("card_image_manual_url_used")
                 else:
                     img = run_json([str(GEN_SCRIPTS / "search-card-image.sh"), card_data["card_name"], source_url], timeout=180, allow_fail=True)
@@ -1523,7 +1731,6 @@ def main() -> int:
                     "--card", card_local,
                     "--mode", "rec",
                     "--card-name", card_data.get("card_name") or args.card,
-                    "--require-person",
                 ], timeout=150, allow_fail=True)
                 tick("featured_semantic_audit_sec", t0, add=True)
                 if featured_audit.get("ok"):
@@ -1556,6 +1763,20 @@ def main() -> int:
         if fingerprint_check.get("status") == "WARN_SIMILAR":
             warnings.append(f"duplicate_content_similarity_warn: max={fingerprint_check.get('max_similarity')} threshold={fingerprint_check.get('threshold')}")
         steps.append("duplicate_fingerprint_checked")
+
+        t0 = time.time()
+        qa_check = run_json([
+            str(ROOT / "scripts/qa-content-validator.py"),
+            "--type", "rec",
+            "--file", str(fp_path),
+            "--card", card_data["card_name"],
+        ], timeout=30, allow_fail=True)
+        tick("semantic_qa_check_sec", t0)
+        if qa_check.get("status") == "BLOCK":
+            raise RunnerError(f"semantic_qa_blocked: {qa_check}")
+        if qa_check.get("status") == "WARN":
+            warnings.append(f"semantic_qa_warn: {qa_check.get('warnings')}")
+        steps.append("semantic_qa_checked")
 
         t0 = time.time()
         title, meta_desc, focus_kw = title_meta_focus(card_data["card_name"], card_data)
@@ -1627,33 +1848,6 @@ def main() -> int:
                 raise RunnerError(f"yoast_score_failed: {e}")
             steps.append("yoast_scored")
 
-            cache_payload = {
-                "card_slug": card_slug,
-                "card_name": card_data["card_name"],
-                "card_official_url": card_data.get("card_official_url") or args.source_url,
-                "country": country,
-                "vertical": vertical,
-                "language": site.get("language", "en"),
-                "annual_fee": card_data.get("annual_fee"),
-                "apr": card_data.get("apr"),
-                "benefits": card_data.get("benefits") or [],
-                "tag10": card_data.get("tag10"),
-                "tag2": card_data.get("tag2"),
-                "descriptor": card_data.get("descriptor"),
-                "competitors": card_data.get("competitors") or [],
-                "card_image_local_path": card_local,
-                "card_image_url_orig": card_src,
-                "card_image_uploaded_id": card_id,
-                "card_image_uploaded_url": card_url,
-                "ttl_days": 30,
-                "source": "mgs-rec-runner",
-            }
-            cache_path = Path(tempfile.gettempdir()) / f"cache-save-{card_slug}.json"
-            cache_path.write_text(json.dumps(cache_payload, ensure_ascii=False))
-            t0 = time.time()
-            run_json([str(GEN_SCRIPTS / "card-cache-save.sh"), str(cache_path)], timeout=60)
-            tick("cache_save_sec", t0)
-            steps.append("cache_saved")
             t0 = time.time()
             apply_url = f"https://{site['domain']}/apply-now-{country}-{vertical}-{card_slug}/"
             public_check = public_verify(public_url, apply_url=apply_url, card_url=card_url or "", featured_url=featured_url or "")
@@ -1714,7 +1908,7 @@ def main() -> int:
                 "competitors": card_data.get("competitors"),
             },
             "seo": {"title": title, "title_chars": len(title), "meta_desc": meta_desc, "meta_chars": len(meta_desc), "focus_kw": focus_kw},
-            "validation": {**validation, "subtitle_chars": subtitle_chars, "public": public_check, "duplicate_fingerprint": fingerprint_check},
+            "validation": {**validation, "subtitle_chars": subtitle_chars, "public": public_check, "duplicate_fingerprint": fingerprint_check, "semantic_qa": qa_check},
             "taxonomy": {"category_id": category_id, "tag_ids": tag_ids, "tag_names": tag_names},
             "images": {
                 "card_id": card_id,
@@ -1740,7 +1934,20 @@ def main() -> int:
         instrumented_total_sec = round(sum(timings.values()), 2)
         timings["unattributed_sec"] = round(max(total_duration_sec - instrumented_total_sec, 0), 2)
         timings["instrumented_total_sec"] = instrumented_total_sec
-        result = {"success": False, "error": str(e), "duration_sec": total_duration_sec, "steps": steps, "timings_sec": timings, "warnings": warnings}
+        failure_cleanup = None
+        if created_media and not args.dry_run:
+            t_cleanup = time.time()
+            try:
+                # If the runner fails after uploading media but before a clean final report,
+                # delete only media created by this execution. This prevents orphan card images
+                # like the Nationwide 62295 incident.
+                failure_cleanup = cleanup_extra_media(args.site, created_media, None, [])
+                tick("failure_media_cleanup_sec", t_cleanup)
+                steps.append("failure_media_cleanup_attempted")
+            except Exception as cleanup_exc:
+                failure_cleanup = {"error": str(cleanup_exc), "created_media": created_media}
+                warnings.append(f"failure_media_cleanup_failed: {cleanup_exc}")
+        result = {"success": False, "error": str(e), "duration_sec": total_duration_sec, "steps": steps, "timings_sec": timings, "warnings": warnings, "images": {"created_media": created_media, "failure_cleanup": failure_cleanup}}
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 1
 

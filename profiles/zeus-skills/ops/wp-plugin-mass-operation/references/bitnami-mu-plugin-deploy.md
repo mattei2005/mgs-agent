@@ -143,6 +143,18 @@ curl -s -u "$AUTH_USER:$APP_PASS" -X POST "$API/plugins" \
 ```
 
 ## Remover WP File Manager pós-deploy
+
+### Regra operacional — plugin temporário, não permanente
+
+WP File Manager (`wp-file-manager/file_folder_manager`) é uma ferramenta temporária de deploy para sites Bitnami/AWS sem SSH de escrita. Se for instalado/ativado para elFinder, ele deve ser desativado e deletado no mesmo fluxo, depois de validar MD5/REST/API do deploy.
+
+Se Rodolfo perguntar depois “quem instalou o File Manager?”, não responder de memória e não assumir que a pergunta é sobre a última publicação/REC. Auditar sessões/logs/docs/filesystem e responder a pergunta de proveniência diretamente. Ver também `references/wp-file-manager-provenance-audit.md`.
+
+Padrões históricos úteis:
+- `session_20260425_031415_6d7b13` mostra Zeus instalando WP File Manager via REST em pelo menos `finanzas.cliquet.com` durante Fase 2.5.
+- `openzed.com` teve uso manual pelo Rodolfo para recovery; Zeus registrou remoção em 2026-04-26 (`commit 5a0476a`).
+- Presença atual do plugin em site MGS deve ser tratada como resíduo de deploy até prova contrária; validar e remover, não normalizar como plugin permanente.
+
 ```bash
 # 1. Desativar
 curl -s -u "$AUTH_USER:$APP_PASS" -X POST "$API/plugins/wp-file-manager/file_folder_manager" \

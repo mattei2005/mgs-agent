@@ -57,15 +57,18 @@ log "═══ track-article-cost.sh start (GPT-5.5 OAuth mode) ═══"
 
 if [[ -n "$TARGET_POST_ID" ]]; then
   log "Mode: SINGLE post_id=$TARGET_POST_ID"
-  PUBLICATIONS=$(grep "create-post OK" "$PUB_LOG" | grep "id=${TARGET_POST_ID}\b")
+  # grep exits 1 when there are no matches; under set -e that must mean
+  # "nothing pending", not "cron failed".
+  PUBLICATIONS=$(grep "create-post OK" "$PUB_LOG" 2>/dev/null | grep "id=${TARGET_POST_ID}\b" || true)
 else
   log "Mode: ALL pending"
-  ALL=$(grep "create-post OK" "$PUB_LOG")
+  ALL=$(grep "create-post OK" "$PUB_LOG" 2>/dev/null || true)
   PUBLICATIONS=""
   while IFS= read -r line; do
-    pid=$(echo "$line" | grep -oE 'id=[0-9]+' | cut -d= -f2)
+    [[ -z "$line" ]] && continue
+    pid=$(echo "$line" | grep -oE 'id=[0-9]+' | cut -d= -f2 || true)
     [[ -z "$pid" ]] && continue
-    exists=$(sqlite3 "$DB" "SELECT post_id FROM article_publications WHERE post_id=$pid;")
+    exists=$(sqlite3 "$DB" "SELECT post_id FROM article_publications WHERE post_id=$pid;" || true)
     [[ -z "$exists" ]] && PUBLICATIONS+="$line"$'\n'
   done <<< "$ALL"
 fi

@@ -58,3 +58,12 @@ if [ -d "$PROFILES_DIR/atena/skills/autonomous-ai-agents/openhands" ]; then
         "$TARGET_DIR/atena-skills/autonomous-ai-agents/openhands/" \
         && echo "$(date -Iseconds) synced atena skills/autonomous-ai-agents/openhands"
 fi
+
+# Ares: growth/ (skills de aquisição paga, criativos e operações ads MGS)
+mkdir -p "$TARGET_DIR/ares-skills"
+if [ -d "$PROFILES_DIR/ares/skills/growth" ]; then
+    rsync -a --delete \
+        "$PROFILES_DIR/ares/skills/growth/" \
+        "$TARGET_DIR/ares-skills/growth/" \
+        && echo "$(date -Iseconds) synced ares skills/growth"
+fi

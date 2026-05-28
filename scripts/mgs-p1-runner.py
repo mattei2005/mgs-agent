@@ -14,7 +14,6 @@ import json
 import os
 import random
 import re
-import sqlite3
 import string
 import subprocess
 import sys
@@ -28,7 +27,6 @@ import requests
 
 ROOT = Path("/root/mgs-agent")
 SITES_JSON = ROOT / "data/sites.json"
-CACHE_DB = ROOT / "data/card-cache.db"
 GEN_SCRIPTS = ROOT / "skills/content-generate-rec/scripts"
 WP_SCRIPTS = ROOT / "skills/content-publish-wordpress/scripts"
 REC_RUNNER = ROOT / "scripts/mgs-rec-runner.py"
@@ -135,25 +133,6 @@ def wp_get_post(site_key: str, post_id: int, fields: str = "id,title,content,fea
     if r.status_code >= 400:
         raise RunnerError(f"WP GET post failed {r.status_code}: {r.text[:800]}")
     return r.json()
-
-
-def cache_lookup(card_slug: str) -> Dict[str, Any]:
-    if not CACHE_DB.exists():
-        return {}
-    con = sqlite3.connect(str(CACHE_DB))
-    con.row_factory = sqlite3.Row
-    row = con.execute("SELECT * FROM card_cache WHERE card_slug=? ORDER BY COALESCE(last_used_at, researched_at) DESC LIMIT 1", (card_slug,)).fetchone()
-    con.close()
-    if not row:
-        return {}
-    d = dict(row)
-    for src, dst in [("benefits_json", "benefits"), ("competitors_json", "competitors")]:
-        if d.get(src):
-            try:
-                d[dst] = json.loads(d[src])
-            except Exception:
-                d[dst] = []
-    return d
 
 
 def parse_card_from_rec(raw: str, rendered: str, rec_title: str) -> Dict[str, Any]:
@@ -397,6 +376,20 @@ def upload_image(site_key: str, image_path: str, filename: str) -> Dict[str, Any
     return run_json([str(WP_SCRIPTS / "upload-image.sh"), site_key, image_path, filename], timeout=120)
 
 
+def cleanup_created_media(site_key: str, media_created: List[Dict[str, Any]]) -> Dict[str, Any]:
+    results: List[Dict[str, Any]] = []
+    for media in media_created:
+        mid = media.get("id")
+        if not mid:
+            continue
+        try:
+            res = run_json([str(WP_SCRIPTS / "delete-media-safe.sh"), site_key, str(mid)], timeout=90, allow_fail=True)
+            results.append({"id": mid, "role": media.get("role"), "result": res})
+        except Exception as exc:
+            results.append({"id": mid, "role": media.get("role"), "error": str(exc)})
+    return {"created_count": len(media_created), "attempted_count": len(results), "items": results}
+
+
 def rand_block_id() -> str:
     return "".join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
 
@@ -418,14 +411,90 @@ def clean_sentence_punctuation(text: Any) -> str:
     return text
 
 
-def card_ui_tag(text: Any, fallback: str = "Cashback rewards") -> str:
+GENERIC_VISIBLE_VALUE_RE = re.compile(
+    r"\b(not stated|not provided|not available|n/?a|unknown|check issuer terms|check terms|official product page|latest confirmed benefit details)\b",
+    re.I,
+)
+
+
+def is_generic_visible_value(value: Any) -> bool:
+    raw = html.unescape(str(value or "")).strip()
+    if not raw:
+        return True
+    return bool(GENERIC_VISIBLE_VALUE_RE.search(raw))
+
+
+def require_specific_visible_value(value: Any, field: str) -> str:
+    raw = html.unescape(str(value or "")).strip()
+    if is_generic_visible_value(raw):
+        raise RunnerError(f"{field} is generic/unusable for visible content: {raw!r}; fetch the official fact or provide verified request facts")
+    return raw
+
+
+def card_ui_tag(text: Any, fallback: str = "Cashback rewards", *, card_name: str = "", annual_fee: str = "") -> str:
+    """Short benefit-led LazyBlock tag. Block numeric fragments and redundant category labels."""
     value = html.unescape(str(text or "")).strip()
-    value = re.split(r"[;,.]|\s+ and \s+", value, maxsplit=1, flags=re.I)[0].strip()
+    # Split only on semicolon/comma/"and". Do not split decimal values like 2.99.
+    value = re.split(r"[;,]|\s+ and \s+", value, maxsplit=1, flags=re.I)[0].strip()
     value = re.sub(r"\bcard features\b", "", value, flags=re.I).strip()
-    if not value or value.lower() in {"credit card", "card benefits", "features"}:
+    value = re.sub(r"\s+", " ", value).strip(" .;:,!")
+    low = value.lower()
+    name_low = (card_name or "").lower()
+    fee_low = (annual_fee or "").lower()
+    bad = (
+        is_generic_visible_value(value)
+        or low in {"credit card", "card benefits", "features", "official terms", "transfer fee", "annual fee"}
+        or bool(re.fullmatch(r"[0-9.£%\s]+", value))
+        or ("fee" in low and bool(re.search(r"\d", low)))
+        or (low in {"balance transfer", "balance transfers"} and "balance transfer" in name_low)
+        or (low == "no fees" and any(t in fee_low for t in ["fee", "2.99", "annual", "minimum"]))
+    )
+    if bad:
         value = fallback
     value = re.sub(r"\s+", " ", value).strip(" .;:,!")
+    if is_generic_visible_value(value) or re.fullmatch(r"[0-9.£%\s]+", value):
+        raise RunnerError(f"LazyBlock tag is generic/unusable: {value!r}")
     return value[:25].rstrip(" .;:,")
+
+
+def derive_lazyblock_tags(card_name: str, benefits: List[str], annual_fee: str = "") -> Tuple[str, str, str]:
+    """Choose commercial, non-redundant card tags and descriptor from current benefits."""
+    joined = " ".join([card_name] + benefits).lower()
+    fee_low = (annual_fee or "").lower()
+    tags: List[str] = []
+    descriptor = "Designed around confirmed benefits and practical repayment use."
+
+    month = re.search(r"0%[^.]{0,80}?(\d{1,2})\s*months?", joined)
+    if ("balance transfer" in joined or "0% balance" in joined) and month:
+        tags.append(f"{month.group(1)} mo 0%")
+        descriptor = "Helps move existing card debt into a clearer repayment window."
+    elif "balance transfer" in joined or "0% balance" in joined:
+        tags.append("0% transfers")
+        descriptor = "Helps move existing card debt into a clearer repayment plan."
+    if "no nationwide fees" in joined or "purchases abroad" in joined or "foreign transaction" in joined or "abroad" in joined:
+        tags.append("No FX fees")
+    if "0%" in joined and "purchase" in joined:
+        tags.append("0% purchases")
+    if "cashback" in joined:
+        tags.append("Cashback")
+        descriptor = "Turns eligible everyday spending into cashback value."
+    if any(t in joined for t in ["avios", "travel", "lounge", "hotel", "points"]):
+        tags.append("Travel rewards")
+        descriptor = "Connects planned travel spending with usable card rewards."
+    if "no annual fee" in joined or ("annual fee" in fee_low and "0" in fee_low):
+        tags.append("No annual fee")
+
+    clean: List[str] = []
+    for tag in tags:
+        try:
+            t = card_ui_tag(tag, tag, card_name=card_name, annual_fee=annual_fee)
+        except RunnerError:
+            continue
+        if t.lower() not in [x.lower() for x in clean]:
+            clean.append(t)
+    while len(clean) < 2:
+        clean.append("Everyday value" if not clean else "Apply online")
+    return clean[0], clean[1], descriptor
 
 
 def card_ui_descriptor(card_data: Dict[str, Any], fallback: str) -> str:
@@ -434,7 +503,7 @@ def card_ui_descriptor(card_data: Dict[str, Any], fallback: str) -> str:
     if "cashback" in joined:
         desc = "Earn cashback on eligible purchases."
     elif any(term in joined for term in ["avios", "travel", "points", "marriott", "bonvoy", "elite night"]):
-        desc = "Earn travel rewards on eligible spend."
+        desc = "Make regular trips and bookings feel more rewarding."
     elif "no annual fee" in joined or "no fee" in joined:
         desc = "A no-annual-fee card for everyday spend."
     else:
@@ -451,8 +520,8 @@ def lazy_credit_card_p1(site: Dict[str, Any], card_name: str, card_slug: str, ca
         "imagem": media_payload(card_id, card_url, f"card-{card_slug}"),
         "categoria": site.get("default_category", "Credit Card"),
         "titulo": card_name,
-        "tag10": card_ui_tag(card_data.get("tag10"), "Cashback rewards"),
-        "tag2": card_ui_tag(card_data.get("tag2") or card_data.get("annual_fee"), "No annual fee"),
+        "tag10": card_ui_tag(card_data.get("tag10"), "Cashback rewards", card_name=card_name, annual_fee=str(card_data.get("annual_fee") or "")),
+        "tag2": card_ui_tag(card_data.get("tag2") or card_data.get("annual_fee"), "No annual fee", card_name=card_name, annual_fee=str(card_data.get("annual_fee") or "")),
         "texto": card_ui_descriptor(card_data, card_data.get("descriptor") or f"Learn more about the {card_name}."),
         "botao-texto": "APPLY NOW",
         "siteXfora": "You will be redirected.",
@@ -492,15 +561,47 @@ def infer_p1_positioning(card_name: str, benefits: List[str]) -> Dict[str, str]:
             "right_2": "Check whether the reward rules still match your shopping habits before submitting the application.",
             "right_3": "A strong fit usually means regular Amazon use, comfort with app-based account management and a repayment plan that protects the reward value.",
         }
+    if any(t in joined or t in name_l for t in ["balance transfer", "0% balance", "balance-transfer"]):
+        return {
+            "subtitle_tail": "helps reduce interest pressure and simplify repayments by moving existing card debt into one clearer plan.",
+            "use_case": "people who are juggling existing card debt, interest charges or multiple repayments and want a clearer route to pay the balance down",
+            "value_focus": "interest relief, repayment simplification, transfer fee, promotional window and the discipline needed before interest returns",
+            "reward_heading": "Debt Relief, Interest Pressure and Repayment Control",
+            "reward_1": "The strongest value is practical: a balance-transfer window can reduce interest pressure while you organise existing debt into a more manageable repayment plan.",
+            "reward_2": "The transfer fee still matters, so the emotional relief only becomes real value when the fee is smaller than the interest likely to be avoided.",
+            "reward_3": "This card should be framed as a repayment tool first. Purchases and extra spending need to stay secondary so the transferred balance remains the priority.",
+            "max_1": "Start with the total debt being moved, then divide it by the promotional months to set a monthly repayment target before applying.",
+            "max_2": "Use the card to simplify repayments, not to create a new spending habit that competes with the transferred balance.",
+            "max_3": "Check the summary box for the transfer deadline, transfer fee, post-promotional APR and any purchase-rate rules before relying on the offer.",
+            "right_1": "This card is most useful when you have existing card debt and a realistic plan to clear or reduce it before interest returns.",
+            "right_2": "Compare it with another balance-transfer option by total repayment cost, monthly target and the practical length of the 0% window.",
+            "right_3": "A good fit usually means the transfer fee, promotional period and monthly repayment target all support the same goal: fewer interest charges and simpler debt organisation.",
+        }
+    if any(t in joined or t in name_l for t in ["avios", "lounge", "hotel", "travel", "companion voucher", "travel spending", "travel reward"]):
+        return {
+            "subtitle_tail": "can make travel, overseas purchases and partner spending feel more useful when they already fit your routine.",
+            "use_case": "people who already book trips, hotels, transport or overseas purchases and want those costs to create more practical value",
+            "value_focus": "travel rewards, partner value, foreign purchase fees, annual cost and repayment behaviour",
+            "reward_heading": "Travel Rewards That Feel Useful in Real Trips",
+            "reward_1": "If you already pay for flights, hotels, transport or travel bookings during the year, earning value on those purchases can help your travel budget go further.",
+            "reward_2": "Using the card abroad without extra foreign transaction fees can make everyday travel spending feel more predictable and easier to manage.",
+            "reward_3": "The strongest fit is someone who wants rewards as a useful bonus on travel spending they already planned, not a reason to stretch the trip budget.",
+            "max_1": "Use it where the travel or partner value is clear: flights, hotels, transport, travel agents or selected retailers you were already planning to use.",
+            "max_2": "Keep repayments current so interest does not erase the travel value, foreign-fee saving or cashback you expected from the trip.",
+            "max_3": "Check participating brands, travel categories, foreign purchase rules and exclusions before relying on headline value.",
+            "right_1": "Estimate how much travel, partner and overseas spending would realistically go on the card in a normal year.",
+            "right_2": "Check whether the participating brands and overseas purchase rules still match your plans before applying.",
+            "right_3": "A good fit usually means regular travel or partner spending, no need to carry debt, and enough discipline to preserve the reward value.",
+        }
     if any(t in joined for t in ["low interest", "low rate", "12.9%", "no annual fee", "foreign transaction"]):
         return {
-            "subtitle_tail": "suits users prioritising low rates, no annual fee and overseas purchases.",
-            "use_case": "users who care more about lower representative rates and simple fees than points or premium perks",
+            "subtitle_tail": "may suit people who want simpler costs, lower-rate positioning and practical overseas purchase value.",
+            "use_case": "people who care more about predictable costs and simple fees than points or premium perks",
             "value_focus": "representative APR, annual fee, overseas purchase fees and repayment considerations",
             "reward_heading": "Low-Rate and Overseas Purchase Value",
-            "reward_1": "The product is best judged through cost control rather than rewards. The representative APR and annual fee shape the value proposition.",
-            "reward_2": "No foreign transaction fee on purchases can help abroad, but cash withdrawals and local fees need separate checks.",
-            "reward_3": "A rewards card may be better for users who pay in full and care more about cashback, miles or points.",
+            "reward_1": "The product is best judged through cost control rather than reward chasing. The representative APR and annual fee shape how manageable it may feel over time.",
+            "reward_2": "No foreign transaction fee on purchases can make overseas spending more predictable, although cash withdrawals and local fees still need separate checks.",
+            "reward_3": "A rewards card may be better if you always pay in full and care more about cashback, miles or points.",
             "max_1": "Start with planned spending and a realistic repayment plan. The lower-rate positioning only helps when balances stay manageable.",
             "max_2": "Use overseas purchase benefits carefully and avoid assuming cash withdrawals receive the same fee treatment.",
             "max_3": "Check the official summary box for the final personal rate, balance transfer rules and any fees before applying.",
@@ -508,25 +609,9 @@ def infer_p1_positioning(card_name: str, benefits: List[str]) -> Dict[str, str]:
             "right_2": "Check whether the final APR and credit limit still match your budget before submitting the application.",
             "right_3": "A careful comparison should include repayment behaviour, overseas use, annual fee, final APR and whether rewards are actually more important.",
         }
-    if any(t in joined for t in ["avios", "lounge", "hotel", "travel", "companion voucher"]):
-        return {
-            "subtitle_tail": "connects travel rewards with costs, eligibility and application steps.",
-            "use_case": "travellers who can realistically use the card’s confirmed travel rewards",
-            "value_focus": "travel benefits, annual cost, eligibility and repayment considerations",
-            "reward_heading": "Travel Rewards and Real-World Value",
-            "reward_1": "Travel rewards only matter when routes, hotel stays or partner redemptions match your plans.",
-            "reward_2": "Check whether the strongest travel benefit would be used often enough to justify any fee or spending target.",
-            "reward_3": "Occasional travellers may need to compare the same card against simpler cashback or no-fee alternatives.",
-            "max_1": "Start with trips or travel spending you already planned. Avoid creating extra spend only to trigger rewards.",
-            "max_2": "Track payment dates and statement balances so interest does not erase the value of travel rewards.",
-            "max_3": "Review redemption rules, partner availability and voucher conditions before relying on headline travel value.",
-            "right_1": "Estimate how many trips or partner redemptions you would realistically use in a normal year.",
-            "right_2": "Check whether the travel rules still match your plans before submitting the application.",
-            "right_3": "A careful comparison should include reward use, repayment behaviour, travel plans and total cost.",
-        }
     return {
         "subtitle_tail": "explains its confirmed benefits, costs and application steps before you apply.",
-        "use_case": "users whose normal spending matches the card’s confirmed strongest benefit",
+        "use_case": "people whose normal spending matches the card’s confirmed strongest benefit",
         "value_focus": "confirmed benefits, costs, eligibility and repayment considerations",
         "reward_heading": "Rewards and Everyday Value",
         "reward_1": "The real value depends on how often you would use the confirmed benefit in ordinary spending.",
@@ -541,40 +626,92 @@ def infer_p1_positioning(card_name: str, benefits: List[str]) -> Dict[str, str]:
     }
 
 
-def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_data: Dict[str, Any], official_url: str, featured_id: int, featured_url: str, card_id: int, card_url: str, button_hex: str) -> Tuple[str, Dict[str, Any]]:
-    fee = card_data.get("annual_fee") or "the official fee shown by the issuer"
-    apr = card_data.get("apr") or "the representative APR shown by the issuer"
-    benefits = [b for b in (card_data.get("benefits") or []) if b][:6]
-    while len(benefits) < 4:
-        benefits.append("Check the official issuer page for the latest confirmed benefit details.")
-    tag10 = "Avios rewards" if any("avios" in b.lower() for b in benefits) else (card_data.get("tag10") or "Card benefits")
-    tag2 = "Travel perks" if any("lounge" in b.lower() or "travel" in b.lower() for b in benefits) else (card_data.get("tag2") or "Credit card")
-    card_data["tag10"] = tag10[:25]
-    card_data["tag2"] = tag2[:25]
-    positioning = infer_p1_positioning(card_name, benefits)
-    card_data["descriptor"] = card_data.get("descriptor") or positioning["subtitle_tail"].replace("is built for ", "").rstrip(".").capitalize() + "."
+def p1_perceived_benefit(raw: str, *, card_name: str = "") -> str:
+    text = re.sub(r"\s+", " ", str(raw or "")).strip().rstrip(".")
+    low = text.lower()
+    name_low = card_name.lower()
+    if not text:
+        return "Use the card only where the main benefit clearly matches your normal spending."
+    if "foreign transaction" in low or "abroad" in low or "overseas" in low:
+        return "During international trips, eligible card purchases can avoid the usual foreign transaction fee, making everyday travel spending feel easier to predict."
+    if "15%" in low and "reward" in low:
+        return "Up to 15% back with chosen partner retailers matters most when those partners match travel, transport or everyday purchases you already planned."
+    if "annual fee" in low and ("no" in low or "£0" in low):
+        return "With no annual fee, the card can be easier to keep for occasional travel or partner rewards without needing heavy monthly use to justify a yearly cost."
+    if "travel" in low and ("reward" in low or "partner" in low):
+        return "Travel rewards are most useful when they attach to real plans — hotels, transport, trips or partner spending — rather than encouraging extra purchases."
+    if "reward" in low or "cashback" in low or "points" in low:
+        if "2,500" in low or "welcome" in low:
+            return "The welcome bonus can feel useful after your first transaction, as long as the card already fits purchases you planned to make."
+        if "pay with rewards" in low or "offset" in low:
+            return "Using points to offset purchases can make rewards feel more practical than collecting points with no clear everyday use."
+        if "mastercard" in low or "online" in low or "recurring" in low:
+            return "Earning points across familiar Mastercard purchases can make ordinary spending feel more rewarding over time."
+        return "The reward only becomes real value when it comes from spending you would have made anyway and can repay comfortably."
+    if "fee" in low or "apr" in low:
+        return f"{text}. Read this as part of the total cost, because interest or fees can quickly reduce any benefit."
+    if "travel" in name_low:
+        return f"{text}. In practice, this matters most when it supports planned trips, overseas purchases or partner spending."
+    return text
 
-    subtitle = f"{card_name} {positioning['subtitle_tail']}"
+
+def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_data: Dict[str, Any], official_url: str, featured_id: int, featured_url: str, card_id: int, card_url: str, button_hex: str) -> Tuple[str, Dict[str, Any]]:
+    fee = require_specific_visible_value(card_data.get("annual_fee"), "annual_fee")
+    apr = require_specific_visible_value(card_data.get("apr"), "apr")
+    benefits = [b for b in (card_data.get("benefits") or []) if b and not is_generic_visible_value(b)][:6]
+    if len(benefits) < 4:
+        raise RunnerError("P1 requires at least 4 specific benefits/facts; generic benefit padding is blocked")
+    tag10, tag2, descriptor_default = derive_lazyblock_tags(card_name, benefits, fee)
+    card_data["tag10"] = tag10
+    card_data["tag2"] = tag2
+    positioning = infer_p1_positioning(card_name, benefits)
+    card_data["descriptor"] = card_data.get("descriptor") or descriptor_default
+
+    if "balance transfer" in " ".join([card_name] + benefits).lower():
+        subtitle = f"{card_name} helps reduce interest pressure while giving transferred debt a clearer repayment plan."
+    else:
+        subtitle = f"{card_name} helps match confirmed card benefits with the way you actually plan to spend and repay."
     if len(subtitle) > 100:
-        subtitle = f"{card_name} highlights real benefits, costs and application steps."
+        if "balance transfer" in " ".join([card_name] + benefits).lower():
+            subtitle = f"{card_name} helps organise card debt before interest returns."
+        else:
+            subtitle = f"{card_name} helps you judge real value before applying."
     if len(subtitle) > 100:
         subtitle = subtitle[:97].rsplit(" ", 1)[0] + "."
 
     blocks: List[str] = [wp_paragraph(subtitle)]
     blocks.append(f'<!-- wp:image {{"id":{featured_id},"sizeSlug":"large","linkDestination":"none"}} -->\n<figure class="wp-block-image size-large"><img src="{featured_url}" alt="{html.escape(card_name)} application support" class="wp-image-{featured_id}"/></figure>\n<!-- /wp:image -->')
-    intro = [
-        f"The {card_name} is most relevant for {positioning['use_case']}. This page focuses on the {positioning['value_focus']}.",
-        f"Applications, eligibility checks and final lending decisions are handled by the issuer, not by {site.get('domain')}. Therefore, the button sends you to the official card page.",
-        f"Before applying, compare the card’s main benefits with your real spending. A card can be useful only when its benefits fit your normal budget.",
-        "Use this page as a decision-support step, then read the issuer’s latest summary box and terms before submitting any application.",
-    ]
+    if "balance transfer" in " ".join([card_name] + benefits).lower():
+        intro = [
+            f"The {card_name} is most relevant when existing card debt needs fewer interest charges, fewer moving parts and a clearer repayment path.",
+            "The point is not only the application process; it is whether the offer can turn costly balances into a plan that feels easier to control.",
+            f"Compare the transfer fee, promotional window and APR context — {fee}, {apr} — against the interest that could be avoided.",
+            "Before applying, read the official summary box with a realistic monthly repayment target, not only the headline 0% period.",
+        ]
+    elif any(t in " ".join([card_name] + benefits).lower() for t in ["travel", "foreign transaction", "overseas", "hotel", "partner retailer", "reward"]):
+        intro = [
+            f"The {card_name} is most relevant when travel, overseas purchases or participating brands already fit your normal spending plans.",
+            "The value is not about chasing perks. It is about making trips, bookings and eligible purchases you already planned return something useful.",
+            f"Start with the product-specific numbers: {fee}, {apr}, then judge whether the travel and reward rules fit your actual routine.",
+            f"Before applying, check the official {card_name} page against the trips, brands and repayment pattern you expect to use.",
+        ]
+    else:
+        intro = [
+            f"The {card_name} is most relevant for {positioning['use_case']}.",
+            f"This guide focuses on the {positioning['value_focus']} and how those details affect real use.",
+            f"Start with the product-specific numbers: {fee}, {apr}, then compare them with the use case you have in mind.",
+            "The card should solve a specific need, not simply add another credit line.",
+        ]
     blocks.extend(wp_paragraph(p) for p in intro)
     card_block = lazy_credit_card_p1(site, card_name, card_slug, card_id, card_url, card_data, official_url, button_hex)
     blocks.append(card_block)
 
     sections: List[Tuple[str, List[str]]] = [
         ("Main Benefits", [
-            benefits[0], benefits[1], benefits[2], benefits[3],
+            p1_perceived_benefit(benefits[0], card_name=card_name),
+            p1_perceived_benefit(benefits[1], card_name=card_name),
+            p1_perceived_benefit(benefits[2], card_name=card_name),
+            p1_perceived_benefit(benefits[3], card_name=card_name),
         ]),
         ("How Does It Work", [
             f"The card works like a standard credit card for eligible purchases. However, its main value depends on how the stated benefits match your usual spending.",
@@ -582,9 +719,9 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
             "If rewards are attached to spending, they should come from purchases you already planned to make. Avoid spending more simply to chase points, vouchers or bonuses.",
         ]),
         ("Costs, Fees and Key Conditions", [
-            f"The official source states {fee}. This cost should be weighed against the benefits you realistically expect to use.",
-            f"The official source also references {apr}. Interest charges may reduce or outweigh reward value if balances are not managed carefully.",
-            "Users should read the summary box, reward rules and exclusions before applying. In particular, check whether any welcome offer has spending thresholds or time limits.",
+            f"Start with the stated cost: {fee}. Judge that cost against the specific benefit you expect to use, rather than against a generic rewards promise.",
+            f"The APR context is {apr}. If a balance remains after any promotional period, interest can change the value calculation quickly.",
+            f"For the {card_name}, the safest reading is the current issuer summary box: confirm fees, timing rules, exclusions and any promotional deadlines before applying.",
         ]),
         (positioning["reward_heading"], [
             positioning["reward_1"],
@@ -592,9 +729,9 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
             positioning["reward_3"],
         ]),
         ("Requirements to Qualify for the Card", [
-            "The issuer does not guarantee acceptance. It may assess credit history, income, affordability, existing borrowing and other information before making a decision.",
-            "An eligibility check can help users understand whether acceptance is likely before submitting a full application. Follow the issuer’s own process and guidance.",
-            "Only apply if the monthly cost, possible interest charges and repayment obligations fit your situation. Responsible use matters more than earning any reward.",
+            f"For the {card_name}, eligibility is tied to the issuer’s credit and affordability checks, so the product should be considered only if the likely credit limit and repayment plan fit the intended use.",
+            f"Use any issuer eligibility checker to test the {positioning['value_focus']} against your own circumstances before a full application.",
+            f"The practical question is whether the {card_name} still makes sense after fees, APR, existing borrowing and repayment timing are considered together.",
         ]),
         ("How to Maximise the Benefits", [
             positioning["max_1"],
@@ -602,12 +739,12 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
             positioning["max_3"],
         ]),
         ("How to Apply", [
-            "Select the apply button to continue to the official issuer website. You will be redirected, and the application will continue away from this site.",
-            "The issuer may ask for personal, financial and employment information. It may also run checks before confirming whether the product is available to you.",
-            "Before submitting, check the latest official rates, terms and conditions. Do not rely on any outdated offer or third-party summary if the issuer has changed the details.",
+            f"Use the apply button only after checking the current issuer page for the {card_name}; the application itself continues away from {site.get('domain')}.",
+            f"Have income, address and borrowing details ready, then compare the issuer’s final offer with the {positioning['value_focus']} that made the card relevant in the first place.",
+            f"If the official page shows different fees, APR, transfer terms or reward rules from what you expected, pause and reassess before submitting personal information.",
         ]),
         ("Is This Card Right for You?", [
-            f"The {card_name} may suit users who can use its confirmed benefits regularly and repay responsibly. It is not suitable simply because rewards are available.",
+            f"The {card_name} may suit you if you can use its confirmed benefits regularly and repay responsibly. It is not suitable simply because rewards are available.",
             "If the fee, APR or eligibility conditions do not fit your situation, compare other cards before applying. A lower-cost product may sometimes be more practical.",
             positioning["right_3"],
         ]),
@@ -669,17 +806,27 @@ def fit_word_count(body: str) -> Tuple[str, int]:
 def title_and_meta(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, str, str]:
     focus = compact_focus(card_name)
     joined = " ".join(card_data.get("benefits") or []).lower()
-    low_rate = any(t in joined for t in ["low interest", "low rate", "12.9%", "no annual fee", "foreign transaction"])
-    title = f"{focus}: Low Rate Costs and How to Apply" if low_rate else f"{focus}: Costs, Rewards and How to Apply"
+    travel_reward = any(t in joined or t in card_name.lower() for t in ["travel", "hotel", "foreign transaction", "travel spending", "rewards"])
+    low_rate = (not travel_reward) and any(t in joined for t in ["low interest", "low rate", "12.9%", "no annual fee", "foreign transaction"])
+    if travel_reward:
+        title = f"{focus}: Travel Rewards and How to Apply"
+    else:
+        title = f"{focus}: Low Rate Costs and How to Apply" if low_rate else f"{focus}: Costs, Rewards and How to Apply"
     if len(title) > 60:
         title = f"{focus}: Costs and How to Apply"
     if len(title) > 60:
         title = f"{focus}: How to Apply"
-    meta = (f"{focus} application guide focused on rates, annual fee, overseas purchases, eligibility notes and official issuer apply link."
+    if travel_reward:
+        meta = f"{focus} guide to travel rewards, overseas purchase value, key costs and official issuer apply link before you continue."
+    else:
+        meta = (f"{focus} application guide focused on rates, annual fee, overseas purchases, eligibility notes and official issuer apply link."
             if low_rate else
             f"{focus} application guide with key costs, rewards, eligibility notes and official issuer apply link before you continue.")
     if len(meta) > 130:
-        meta = f"{focus} guide with key costs, eligibility notes and official issuer apply link before you continue."
+        if travel_reward:
+            meta = f"{focus} guide to travel rewards, overseas purchase value, key costs and official apply link before you continue."
+        else:
+            meta = f"{focus} guide with key costs, eligibility notes and official issuer apply link before you continue."
     if len(meta) < 120:
         meta = meta.rstrip(".") + " and compare the issuer terms first."
     if len(meta) > 130:
@@ -810,10 +957,9 @@ def main() -> int:
         parsed = parse_card_from_rec(rec_raw, rec_rendered, rec_title)
         card_name = args.card or parsed["card_name"]
         card_slug = infer_card_slug(args.rec_url, card_name)
-        cache = cache_lookup(card_slug)
-        official_url = args.official_url or cache.get("card_official_url") or ""
+        official_url = args.official_url or ""
         if not official_url:
-            raise RunnerError("official URL missing and not found in card cache; pass --official-url")
+            raise RunnerError("official URL missing; pass --official-url. Editorial card-cache is disabled for production content")
         t = ts(); preflight_official_source(official_url, card_name); timings["official_source_preflight"] = ts() - t; steps.append("official_source_preflight_passed")
         card_url = parsed.get("card_url")
         card_id = parsed.get("card_id")
@@ -835,10 +981,9 @@ def main() -> int:
             raise RunnerError(f"Target P1 already exists at {target_url}; pass --update-post-id to update instead of creating a duplicate")
 
         t = ts(); official_data = extract_official_data(card_name, official_url, args.benefit, args.annual_fee or None, args.apr or None); timings["official_facts"] = ts() - t; steps.append("official_facts_extracted")
-        # Preserve REC LazyBlock labels when official extraction is generic.
-        official_data.setdefault("tag10", parsed.get("tag10"))
-        official_data.setdefault("tag2", parsed.get("tag2"))
-        official_data.setdefault("descriptor", parsed.get("descriptor"))
+        # Do not preserve REC LazyBlock labels by default; P1 derives fresh labels from current official/request facts.
+        for key in ("tag10", "tag2", "descriptor"):
+            official_data.pop(key, None)
 
         card_path = ensure_card_local(card_url, card_slug)
         featured_path = None
@@ -879,7 +1024,23 @@ def main() -> int:
         body, validation = generate_p1_body(site, card_name, card_slug, official_data, official_url, featured_id or 999999, featured_url, int(card_id), card_url, button_hex)
         title, metadesc, focuskw = title_and_meta(card_name, official_data)
         validate_no_review({"body": body, "subtitle": validation.get("subtitle", ""), "title": title, "meta": metadesc})
-        result["content_validation"] = {**validation, "title_chars": len(title), "meta_chars": len(metadesc), "focus_keyphrase": focuskw}
+        body_path = Path(tempfile.gettempdir()) / f"p1-qa-{card_slug}.html"
+        rec_compare_path = Path(tempfile.gettempdir()) / f"p1-qa-rec-compare-{card_slug}.html"
+        body_path.write_text(body)
+        rec_compare_path.write_text("\n\n".join([rec_raw, rec_rendered]))
+        t = ts()
+        semantic_qa = run_json([
+            str(ROOT / "scripts/qa-content-validator.py"),
+            "--type", "p1",
+            "--file", str(body_path),
+            "--card", card_name,
+            "--compare-file", str(rec_compare_path),
+        ], timeout=30, allow_fail=True)
+        timings["semantic_qa"] = ts() - t
+        if semantic_qa.get("status") == "BLOCK":
+            raise RunnerError(f"semantic_qa_blocked: {semantic_qa}")
+        steps.append("semantic_qa_checked")
+        result["content_validation"] = {**validation, "title_chars": len(title), "meta_chars": len(metadesc), "focus_keyphrase": focuskw, "semantic_qa": semantic_qa}
         steps.append("content_assembled")
 
         t = ts(); category_id, tag_ids, tag_names = resolve_taxonomy(args.site, site, card_name, card_slug, official_data.get("benefits") or []); validate_taxonomy_names(tag_names, site.get("language") or "en"); timings["taxonomy"] = ts() - t; steps.append("taxonomy_resolved")
@@ -932,7 +1093,14 @@ def main() -> int:
             "cost_usd": {"runner_api_est": 0.0, "featured_image_est": 0.04, "total_est": 0.04},
         })
     except Exception as e:
-        result.update({"ok": False, "error": str(e), "steps": steps, "duration_sec": round(ts() - started, 3), "timings_sec": {k: round(v, 3) for k, v in timings.items()}})
+        failure_cleanup = None
+        if media_created and not args.dry_run:
+            try:
+                failure_cleanup = cleanup_created_media(args.site, media_created)
+                steps.append("failure_media_cleanup_attempted")
+            except Exception as cleanup_exc:
+                failure_cleanup = {"error": str(cleanup_exc), "media_created": media_created}
+        result.update({"ok": False, "error": str(e), "steps": steps, "duration_sec": round(ts() - started, 3), "timings_sec": {k: round(v, 3) for k, v in timings.items()}, "images": {"media_created": media_created, "failure_cleanup": failure_cleanup}})
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 1
     print(json.dumps(result, ensure_ascii=False, indent=2))

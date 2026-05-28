@@ -1,0 +1,20 @@
+{
+  "name": "mgs-canva-local-automation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Automacao local assistida para Canva MGS: login local, auditoria e preparacao de download de criativos.",
+  "scripts": {
+    "setup": "npx playwright install chromium",
+    "login": "node scripts/login-check.js",
+    "audit": "node scripts/folder-audit.js",
+    "design:audit": "node scripts/design-export-audit.js",
+    "download:pilot": "node scripts/folder-download-pilot.js",
+    "download:safe": "node scripts/folder-download-safe.js",
+    "download:visible": "node scripts/folder-download-visible.js",
+    "download:v2": "node scripts/folder-download-v2.js",
+    "download:from-manifest": "node scripts/folder-download-from-manifest.js"
+  },
+  "dependencies": {
+    "playwright": "^1.57.0"
+  }
+}

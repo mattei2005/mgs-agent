@@ -11,9 +11,14 @@ related_skills: [mgs-infra-inventory, log-monitor-discord-alert, shell-cron-env-
 - Preciso instalar, ativar, desativar ou deletar um plugin em todos os 31 sites
 - Preciso rodar um comando WP-CLI de plugin (ex: imagify bulk-optimize, yoast reindex) em massa
 - Preciso verificar se um plugin está instalado/ativo em todos os sites
+- Rodolfo pergunta se Zeus/Atena instalou um plugin ou se ele já estava presente — fazer auditoria de proveniência, não responder por memória
 - Recebeu REPORT-INFRA de um agente e precisa atualizar o inventário de infra
 - Auditoria da operação MGS (o que existe, onde, quem criou)
 - Onboarding de novo agente — verificar o que já existe
+
+### Referência rápida — proveniência WP File Manager
+
+Quando a pergunta for "foi você que instalou o File Manager?", não pivotar para o último REC/P1 nem explicar publicação. Auditar evidências e responder a pergunta de accountability diretamente. Ver `references/wp-file-manager-provenance-audit.md`.
 
 ---
 

@@ -595,102 +595,24 @@ Outputs grandes de tools (terminal, execute_code, browser_*) inflam o contexto e
 
 
 
-## REGRA — Renomear thread e mention forcado em primeira mensagem (OBRIGATÓRIO)
+## REGRA — Threads Discord: rename-on-create conservador
 
-Quando voce receber a primeira mensagem em uma thread recem-criada (sem historico anterior na thread), voce DEVE:
+O gateway Hermes cria threads novas já com título determinístico e auto-add de membros. Zeus NÃO deve renomear threads automaticamente via `execute_code`, Discord API ou `send_message` em resposta normal.
 
-1. **Renomear a thread** com um titulo descritivo/resumo claro do assunto (max 80 chars; nao curto demais nem generico)
-2. **Postar mensagem inicial mencionando o user** que iniciou a conversa (`<@USER_ID>`)
+Regra atual:
+- Thread nova: o gateway escolhe um título curto e descritivo no nascimento da thread.
+- Thread existente: nome congelado. Só renomear se Rodolfo pedir explicitamente.
+- Follow-up, fase 2, status, retomada ou correção dentro de thread já aberta: responder sem alterar nome.
+- Em dúvida entre preservar ou renomear: preservar.
 
-### Por que (contexto tecnico)
+Padrão de título no gateway:
+- Usar objeto + ação/contexto, com até 80 caracteres.
+- Evitar títulos vagos como `Status`, `Ajuste`, `Teste`, `Pedido`, `Diagnóstico de erro`.
+- Preferir títulos como `Atena status operacional`, `Ares diagnóstico de erro`, `Regras de rename de threads`, `Tracking de custo`, `REC+P1 Lloyds World Elite - Eggbev GB-CC-EN`.
+- Se o gateway não tiver confiança para classificar, usar resumo limpo da primeira mensagem em vez de inventar categoria.
 
-Quando user manda DM pra Zeus, o Hermes auto-cria thread com nome cortado da primeira mensagem (ex: "Zeus, qual o status do..."). Alem disso, o Discord nasce essa thread com notification setting "Nothing" — user nao recebe push notification das mensagens subsequentes.
+Mention forçado:
+- Só é obrigatório na primeira mensagem de threads novas criadas proativamente por Zeus para alerta/briefing/report.
+- Em resposta normal dentro da thread atual, não usar `send_message`; responder diretamente no turno.
+- Em thread já existente, não mencionar Rodolfo de novo salvo alerta crítico/push necessário.
 
-### Como detectar thread recem-criada
-
-A regra correta e **rename-on-create, then freeze**: thread nova DEVE ser renomeada uma vez; depois disso, thread existente nunca deve ser renomeada automaticamente.
-
-Sinais suficientes para renomear:
-- Thread tem nome cortado/feio (terminado em "..." ou claramente auto-gerado pela primeira mensagem)
-- E nao ha mensagem anterior do Zeus no historico visivel
-- E a conversa nao parece retomada/fase 2/follow-up de uma thread existente
-
-Se a thread ja tem nome claro, nome escolhido anteriormente, ou historico de conversa, **NAO renomear**. Usuario voltar horas depois, pedir status, perguntar sobre fase 2, ou continuar assunto existente nunca justifica rename automatico.
-
-Se for thread comprovadamente nova com nome cortado/ruim/auto-gerado e sem historico anterior do Zeus, renomeie antes de responder. Se houver duvida entre renomear ou preservar, preserve o nome atual e responda normalmente. Renomear de novo so com pedido explicito do usuario.
-
-
-### Padrão de nome da thread
-
-O nome deve ser um resumo identificavel do assunto para busca historica: objeto + acao/contexto. Evitar nomes vagos/curtos demais como "Status", "Ajuste", "Teste". Exemplos bons: "Criacao e Estrutura REC+P1", "Correcao Rename de Threads", "Tracking de Custo Atena".
-
-### EXECUCAO OBRIGATORIA — via execute_code
-
-O thread_id atual esta no contexto como chat=<THREAD_ID>.
-
-Script Python para executar via execute_code:
-
-```
-import os, urllib.request, json
-
-THREAD_ID = "<COLOCAR_THREAD_ID_AQUI>"
-THREAD_NAME = "<RESUMO_DESCRITIVO_DO_ASSUNTO_max_80_chars>"
-USER_ID = "<USER_ID_DE_QUEM_INICIOU_A_THREAD>"
-INITIAL_MESSAGE = "Ola! [breve confirmacao da tarefa que vai executar]"
-
-token = os.environ.get("DISCORD_BOT_TOKEN")
-if not token:
-    print("ERROR: DISCORD_BOT_TOKEN not set")
-else:
-    headers = {"Authorization": f"Bot {token}", "Content-Type": "application/json"}
-    
-    req = urllib.request.Request(
-        f"https://discord.com/api/v10/channels/{THREAD_ID}",
-        method="PATCH",
-        headers=headers,
-        data=json.dumps({"name": THREAD_NAME[:80]}).encode()
-    )
-    try:
-        urllib.request.urlopen(req).read()
-        print(f"OK rename: {THREAD_NAME[:80]}")
-    except Exception as e:
-        print(f"WARN rename failed: {e}")
-    
-    req = urllib.request.Request(
-        f"https://discord.com/api/v10/channels/{THREAD_ID}/messages",
-        method="POST",
-        headers=headers,
-        data=json.dumps({"content": f"<@{USER_ID}> {INITIAL_MESSAGE}"}).encode()
-    )
-    try:
-        urllib.request.urlopen(req).read()
-        print(f"OK mention sent")
-    except Exception as e:
-        print(f"WARN mention failed: {e}")
-```
-
-User IDs conhecidos:
-- Rodolfo Mattei: 344196393512075265
-- Raquel Oliveira: 1496254952501280974
-
-Por que execute_code ao inves de discord_tool: o toolset hermes-discord do Hermes nao expoe a tool discord_server pro schema do agente (limitacao arquitetural). Workaround: chamar Discord API direto via Python.
-
-### Exemplos
-
-**Exemplo 1 — Rodolfo pede status:**
-- User: `Zeus, qual o status do tracking de custo?`
-- Thread original: `Zeus, qual o status do tracki...`
-- ACAO 1: `modify_thread(channel_id=<thread_id>, name="Status tracking de custo")`
-- ACAO 2: `send_message(channel_id=<thread_id>, content="<@344196393512075265> Status atual: 15 artigos no DB, $34.29 acumulado...")`
-
-### Quando NAO aplicar
-
-- Thread ja tem nome bom (sem "..." e descreve topico claramente) → so postar resposta normal
-- Thread ja tem mensagem anterior do Zeus (nao e primeira interacao) → so postar resposta normal
-- Thread esta sendo retomada depois de pausa/arquivo/desarquivo → so postar resposta normal
-- Usuario perguntou sobre fase, andamento, follow-up ou continuacao do assunto → so postar resposta normal
-- User mandou em canal de servidor (nao em DM/thread) → so postar resposta normal
-
-### Nao bloquear execucao
-
-Se `modify_thread` falhar (permissao, API timeout, etc.), continue com a tarefa normalmente. O rename e cosmetic — a tarefa principal e mais importante.

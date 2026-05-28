@@ -60,9 +60,17 @@ visual_briefs=(
   "cashback/rewards context with shopping bag, hotel loyalty vibe and premium lifestyle props, no graphic icons, badges or text overlays"
 )
 visual_brief="${visual_briefs[$RANDOM % ${#visual_briefs[@]}]}"
+mode_label="REC featured image"
+mode_distinction="This is the REC featured image: it should feel like a quick commercial recommendation hook, lifestyle/payment/rewards oriented, not an application explainer."
 
 if [[ "$SLUG" == p1-* ]]; then
-  visual_brief="P1 advertising scene built in literal layers: realistic contextual background with depth, the exact credit card centred and slightly enlarged as the main element, and one realistic person in the foreground with a soft natural overlap over the card without hiding important card details"
+  # P1 must not look like a reused REC hero. Force a different intent and
+  # composition family: application/deep-dive support, more explanatory and
+  # decision-oriented, with distinct background/framing from the REC image.
+  mode_label="P1 featured image"
+  scene="application review desk or modern advisory office"
+  visual_brief="P1 application/deep-dive support scene: realistic person reviewing card details on a desk or in an advisory setting, exact card centred but not in the same lifestyle/payment composition as REC, different background and framing, calm decision-oriented mood"
+  mode_distinction="This is the P1 featured image. It must be visually distinct from the REC featured image for the same card: different scene, framing, background/foreground treatment and editorial intent. Do not recreate the REC lifestyle/payment hook."
 fi
 
 mime=$(file -b --mime-type "$CARD_IMG" 2>/dev/null || echo "image/png")
@@ -77,7 +85,9 @@ or recreate the card — it must appear identical in colors, logo, layout and
 proportions.
 
 Scene: $scene.
+Image role: $mode_label.
 Visual variation for this run: $visual_brief.
+Role-specific distinction: $mode_distinction.
 
 Composition rules:
 - The credit card must be the clear protagonist and remain readable.

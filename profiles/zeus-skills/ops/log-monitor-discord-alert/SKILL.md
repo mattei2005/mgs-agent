@@ -19,6 +19,8 @@ Também usar quando um canal Discord precisa de automação idempotente via poll
 
 Também usar para gestão de **cron reliability/control plane**: inventariar crons MGS, padronizar `flock`, criar smoke tests seguros, adicionar `--dry-run` em jobs destrutivos e monitorar logs stale. Ver referência validada: `references/cron-control-plane.md`.
 
+Quando Rodolfo pedir uma checagem geral pós-update/restart (“verifica se tudo está funcionando”, “verifica todos os crons”), usar o checklist amplo em `references/full-operational-audit-after-update.md`: serviços, crons, stale-log dry-run, smoke test, recursos VPS, provider/modelo, git/autocommit e distinção entre falha histórica de restart vs problema ativo.
+
 Quando o pedido for auditoria/varredura operacional, checar também **erros semânticos em logs recentes** — log fresco não significa cron saudável. Ver `references/cron-semantic-error-audit.md` para o caso validado `grep -c ... || echo 0` que gerava `0\n0` e quebrava aritmética Bash sem acionar stale-log.
 
 Quando um stale-log parece falso positivo, verificar primeiro se há **divergência entre o redirect do crontab e o `LOG=...` interno do script**. O stale monitor usa o redirect quando existe; `CUSTOM_LOG` só cobre jobs sem redirect. Ver `references/cron-log-path-canonicalization.md` para o padrão de correção e validação.
@@ -42,6 +44,7 @@ Exemplos validados:
 |---|---|---|
 | Saúde Yoast SEO/Readability | `#alerts-yoast` (1498193722871910550) | `Discord Webhook - Alerts Yoast Channel` |
 | Infra crítica (auto-push, deploy) | `#mgs-alerts` (1498132022634483894) | `Discord Webhook - Alerts Infra Channel` |
+| Updates do Hermes Agent | `#alerts-hermes-news` (1505609056771899644) | Zeus Bot API (`DISCORD_BOT_TOKEN` do profile zeus) |
 | Cobrança operacional ao Zeus | `#zeus-admin-agent` (1496267442899521627) | `Discord Webhook - Zeus Channel` |
 
 **Layout obrigatório das mensagens:** usar Discord embed com `fields` estruturados — nunca mandar alerta como texto bruto em `content`, exceto a mention necessária para push.
@@ -376,7 +379,9 @@ Após criar os artefatos, atualizar manualmente 3 seções do inventário:
 
 13. **Auto-commit watcher com `git add .` precisa guardrail de segredo**
 
-12. **Hardening SSH incremental para monitors via jump host** — quando um monitor usa `expect` + senha + `ssh/scp -J`, não trocar direto para chave permanente sem autorização explícita do Rodolfo. Primeiro remover `StrictHostKeyChecking` desativado e usar `StrictHostKeyChecking=accept-new` com `UserKnownHostsFile=/root/.ssh/known_hosts_mgs`, `mktemp -d` local com `chmod 700`, `trap cleanup EXIT`, script remoto único (`/tmp/name_$$.sh`) e remoção remota após execução. Validar com execução real controlada e confirmar que não houve post Discord indevido. Ver `references/cron-ssh-hardening-2026-05-16.md`.
+13. **Auto-commit ativo não garante commit/push saudável** — em auditoria geral, sempre checar `/root/mgs-agent/logs/auto-commit-watcher.log`, `/root/mgs-agent/logs/auto-push.log` e `git status --short`. O serviço pode estar `active` mas bloqueando todas as rodadas por guardrail de arquivo sensível. Se o bloqueio for por nome de documentação contendo `token`, `password`, `secret`, `webhook` ou `credential`, escanear padrões reais de segredo sem imprimir conteúdo; se não houver segredo, recomendar renomear o arquivo para remover a palavra sensível em vez de relaxar o guardrail.
+
+14. **Hardening SSH incremental para monitors via jump host** — quando um monitor usa `expect` + senha + `ssh/scp -J`, não trocar direto para chave permanente sem autorização explícita do Rodolfo. Primeiro remover `StrictHostKeyChecking` desativado e usar `StrictHostKeyChecking=accept-new` com `UserKnownHostsFile=/root/.ssh/known_hosts_mgs`, `mktemp -d` local com `chmod 700`, `trap cleanup EXIT`, script remoto único (`/tmp/name_$$.sh`) e remoção remota após execução. Validar com execução real controlada e confirmar que não houve post Discord indevido. Ver `references/cron-ssh-hardening-2026-05-16.md`.
 
 ---
 

@@ -49,9 +49,11 @@ Quando Rodolfo pedir para comparar, acompanhar ou validar a resposta de Zeus/Ate
 - Se Rodolfo disser “acompanhe a resposta quando ela responder”, trate como uma tarefa de observação: checar a thread atual primeiro; só configurar monitor se a resposta ainda não existir de fato. Se configurar monitor/cron, remover assim que a resposta for capturada ou se o usuário apontar que já respondeu.
 - Evitar resposta prematura que concorra com a resposta do outro agente. O fluxo correto é: ler estado atual da thread → avaliar mensagem existente → responder com veredito; não anunciar que vai avaliar depois quando a evidência já está disponível.
 - Responder ao Rodolfo com uma matriz curta de alinhamento: `Ponto | Agente A disse | Agente B disse | Alinhamento`.
+- Quando Rodolfo pedir “leia tudo na thread X e veja se faz sentido”, importar a thread em modo read-only e validar claims operacionais contra evidência real antes do veredito: arquivos citados, links no SKILL.md, scripts/runner existentes, commits mencionados e estado git quando relevante. Se outro agente disser “verifiquei”, “salvei”, “linkei” ou “commit criado”, tratar isso como claim verificável, não como fato.
+- Separar claramente `conceito correto` de `implementação pronta`: ex. REC+P1 pode estar certo como desenho/orquestração, mas ainda não estar operacional se falta runner, renderer ou hard gate automatizado.
 - Separar consenso de diferença operacional. Exemplo: “Atena falou como dona do processo; Zeus trouxe evidência técnica e patch concreto.”
 - Se houver divergência, declarar a decisão recomendada sem iniciar conversa agente→agente.
-- Terminar com `Próximo passo pendente:` quando a conversa envolver execução/patch/infra.
+- Terminar com `Próximo passo pendente:` quando a conversa envolver execução/patch/infra ou quando o veredito concluir que a ideia faz sentido mas ainda falta implementação/teste.
 
 O incidente real `1505532189490811081` mostrou que a regra “mencione o outro agente quando falar dele” é perigosa se aplicada como padrão: cada mention acorda o bot destino, gera fila, e qualquer confirmação vira novo input.
 
@@ -80,6 +82,23 @@ Se um loop multiagente levou à criação apressada de skills/memórias/regras, 
 - Consolidar em um único skill guarda-chuva por agente; evitar 2–3 skills estreitas sobre o mesmo incidente.
 - Preservar no máximo uma referência concisa do incidente, com política final segura.
 - Validar que a regra final diferencia thread compartilhada de cross-channel: em thread, texto simples por padrão; cross-channel pode exigir mention para roteamento.
+
+### Criando/ativando novo agente Discord (Zeus/Atena/Ares)
+
+Quando criar um novo agente Hermes no Discord, validar o token próprio no 1Password antes de escrever `.env` ou subir systemd. Ver `references/new-discord-agent-1p-flow.md`.
+
+Checklist curto:
+- O item `Discord Bot - <Agent>` deve ter campo customizado `discord_bot_token` não vazio; reportar só `len=X`, nunca o valor.
+- O item `Discord Webhook - <Agent> Channel` pode ter `webhook_url` e `canal`, mas webhook **não** substitui bot token.
+- Usar `set -a; source /root/mgs-agent/.env; set +a` antes de `op`, para exportar `OP_SERVICE_ACCOUNT_TOKEN`.
+- Se `op://MGS Conteúdo/...` falhar por acento/espaço, resolver `vault_id`/`item_id` e usar referência por ID.
+- Instalar `/etc/systemd/system/<agent>-gateway.service` exige confirmação crítica explícita; só depois validar `systemctl is-active` + logs.
+
+### Novo agente Discord/Hermes — bootstrap de bot, token e service
+
+Quando criar um novo agente MGS com bot/canal próprios (ex: Ares), seguir o playbook `references/new-discord-agent-bootstrap.md`. Ele cobre: scopes OAuth2 (`bot` + `applications.commands`), permissões mínimas, campo 1Password `discord_bot_token`, `.env`, service systemd pelo template Zeus/Atena, e validação separada de gateway online vs bot realmente membro do servidor/canal.
+
+Pitfall crítico validado: `Connected as <Agent>#...` prova token/gateway, mas não prova acesso ao servidor. Se `GET /channels/<channel_id>` com o token do novo bot retorna `403 Missing Access` e `GET /guilds/<guild_id>/members/<bot_id>` com bot admin retorna `404 Unknown Member`, o bot ainda não foi convidado ao servidor ou o invite não concluiu.
 
 ### Enviando mensagem Zeus → Atena em outro canal
 
@@ -146,6 +165,7 @@ Zeus responde com máximo 2 linhas:
 | Tipo | Canal | Webhook 1Password |
 |---|---|---|
 | Infra crítica (auto-push, deploy) | `#mgs-alerts` (1498132022634483894) | `Discord Webhook - Alerts Infra Channel` |
+| Updates do Hermes Agent | `#alerts-hermes-news` (1505609056771899644) | Zeus Bot API (`DISCORD_BOT_TOKEN` do profile zeus) |
 | Saúde Yoast/Readability | `#alerts-yoast` (1498193722871910550) | `Discord Webhook - Alerts Yoast Channel` |
 | Operacional Zeus | `#zeus-admin-agent` (1496267442899521627) | `Discord Webhook - Zeus Channel` |
 
@@ -297,6 +317,19 @@ Resumo operacional:
 - Não desligar aprovações globalmente (`mode: off`) sem autorização explícita; isso remove uma camada de segurança.
 - Após patch em runtime Hermes, `py_compile` e restart controlado do gateway afetado são obrigatórios antes de declarar mitigação ativa.
 
+### Discord mostrando retry/TTFB técnico em toda mensagem
+
+Quando Rodolfo relatar que Zeus/Atena está postando mensagens técnicas como `Retrying in ...`, `No first byte from provider in 45s`, rate-limit waits, ou falhas auxiliares dentro das threads, tratar como **ruído de status callback**, não como motivo automático para trocar modelo/provider.
+
+Padrão correto:
+- Confirmar o sintoma no print/logs (`agent.log`/`errors.log`) e distinguir: retry interno pode continuar, mas não deve poluir Discord.
+- Corrigir no gateway em `_prepare_gateway_status_message(...)`, aplicando a supressão de status ruidoso também para `Platform.DISCORD`.
+- Manter logs completos; só suprimir o envio ao chat.
+- Atualizar teste de gateway para cobrir Telegram + Discord.
+- Rodar `py_compile` + pytest do filtro e reiniciar os gateways afetados.
+
+Referência detalhada: `references/discord-provider-retry-noise-filter.md`.
+
 ### Gateway routing/restart incident reference
 
 Quando corrigir roteamento entre Zeus/Atena, evitar duplicação de thread ou reiniciar gateway durante conversa ativa, ver `references/discord-gateway-routing-and-restart-incident-2026-05-18.md` e `references/gateway-restart-coordination.md`.
@@ -323,6 +356,20 @@ Referência detalhada: `references/hermes-discord-busy-input-queue.md`.
 | Múltiplos `Retrying request` (waits 21s, 45s, 56s) | Rate limit Anthropic |
 | Gateway reiniciou mas parou de receber após reconexão | Sessão zumbi pós-restart |
 | Canal principal responde inline e não cria threads, apesar de `auto_thread: true` | Upstream Hermes pode estar pulando auto-thread em `free_response_channels` |
+
+### Adding a user to a private Discord thread
+
+When Rodolfo asks to add Raquel or another user to a Zeus/Atena thread, use Discord API `PUT /channels/{thread_id}/thread-members/{user_id}`. If it returns `403 Missing Access`, the likely cause is that the user is not in the parent channel yet; report that clearly, then retry the same PUT after Rodolfo grants parent-channel access. Do not claim the thread add succeeded until the API returns `204`.
+
+### Descriptive thread rename: títulos úteis para busca histórica
+
+Quando Rodolfo reclamar que threads estão "mal renomeadas", "curtas demais", "difíceis de identificar" ou pedir correção de rename em Zeus/Atena/Ares, usar `references/discord-thread-descriptive-rename.md`.
+
+Regra operacional: `THREAD_NAME` deve ser um resumo identificável do assunto (objeto + ação/contexto), não só um nome curto. Evitar títulos genéricos como `Status`, `Ajuste`, `Teste`, `Renomeacao`, `Pedido`. Exemplos bons: `Criacao e Estrutura REC+P1`, `Correcao Rename de Threads`, `Tracking de Custo Atena`, `REC+P1 Lloyds World Elite - Eggbev`.
+
+Pitfall validado: snippets de bootstrap via `execute_code` podem não receber `DISCORD_BOT_TOKEN` por bloqueio de env passthrough. O fix durável é tentar env primeiro e depois ler o `.env` do profile ativo internamente, sem imprimir token/header.
+
+Se mudar config do Zeus estando dentro do Zeus, evitar matar a resposta corrente: agendar `systemctl restart zeus-gateway.service` com `systemd-run --on-active=<delay>` e, se necessário, agendar validação separada para log local.
 
 ### Regressão/quirk: `free_response_channels` pode desativar auto-thread
 
@@ -432,6 +479,8 @@ Quando Rodolfo relatar que Atena/Zeus cria threads mas parou de colocar pessoas 
 
 Lição validada: o gateway Discord do Hermes cria threads via `_auto_create_thread(...)`, mas não adiciona membros extras por padrão. No setup MGS, o comportamento antigo vinha de um `channel_prompts` bootstrap que fazia rename + auto-discover + `PUT /channels/{THREAD_ID}/thread-members/{uid}` via `execute_code`. Se esse prompt foi simplificado para `rename-on-create, then freeze`, a thread continua sendo criada/renomeada, mas só ficam o usuário autor + bot/agente.
 
+Pitfall 2026-05-26: `execute_code` pode não receber `DISCORD_BOT_TOKEN`; o env passthrough bloqueia credenciais de provider/bot por segurança. Se logs mostrarem `env passthrough: refusing ... DISCORD_BOT_TOKEN` ou `ERROR: DISCORD_BOT_TOKEN not set`, o bootstrap em prompt não consegue chamar Discord API. Preferir correção no runtime/gateway ou script shell que carregue o `.env` autorizado fora do sandbox, e validar com API/logs antes de declarar auto-add corrigido.
+
 Regra operacional atual: Atena/content threads devem auto-add Raquel (`1496254952501280974`) + Rodolfo (`344196393512075265`). Zeus/admin threads atualmente só exigem Rodolfo. Não adicionar todo mundo do guild/canal; usar política explícita por agente/canal.
 
 Diagnóstico mínimo:
@@ -443,6 +492,10 @@ Diagnóstico mínimo:
 Correção preferida: implementar auto-add determinístico pós-criação no runtime/config (`thread_auto_add_users`/roles) ou restaurar prompt enxuto só para thread comprovadamente nova. Não voltar com script longo em toda resposta/follow-up.
 
 
+
+### Bootstrap de novo agente Discord/Hermes
+
+Quando criar ou colocar online um novo agente MGS no Discord (bot/app OAuth, item 1Password, `.env`, canal privado, systemd service e smoke test), usar `references/new-discord-agent-bootstrap.md`. Ele cobre scopes OAuth, campos 1Password (`discord_bot_token`, `webhook_url`), validação de guild/channel access, overwrite de permissões, template systemd e `DISCORD_THREAD_AUTO_ADD_USERS` para auto-add do Rodolfo em threads sem depender de bootstrap via `execute_code`.
 
 ### Followed announcement channels com explicação automática
 
@@ -523,6 +576,10 @@ Ver `references/hermes-profile-style-context-ops.md` para o padrão validado de:
 
 Ver também `references/agent-response-layout-standard.md` para o padrão MGS de respostas visuais no Discord: quando houver dados estruturados/comparáveis, usar bloco monoespaçado `text` com colunas alinhadas e separadores; os nomes das colunas devem nascer do contexto da thread, nunca ser copiados de exemplos.
 
+Quando Rodolfo pedir para aplicar padrões de Zeus/Atena em agente novo/existente (ex: Ares) ou reclamar de tabelas Markdown cruas `|---|---|`, usar `references/mgs-agent-profile-pattern-rollout.md`. Esse playbook cobre auditoria comparativa SOUL/config/autorização/systemd, regra de layout `text`, sync de skills MGS-específicas (`Ares: growth/`) e o cuidado de double-confirm antes de editar `AGENT.md`.
+
+Quando Rodolfo pedir para aplicar padrões do Zeus/Atena ao Ares ou outro agente novo, usar `references/agent-profile-parity-audit.md`: auditar SOUL/config ativos e cópias em `/root/mgs-agent/profiles/`, autorização, systemd, thread behavior, REPORT-INFRA, no-secret, validação e sync de skills MGS-específicas. O padrão visual `|---|---| porém em tabela` deve ser traduzido para bloco `text` alinhado, não tabela Markdown crua.
+
 ### ⚠️ PITFALL CRÍTICO: Symlink NÃO versiona conteúdo
 
 ```bash
@@ -598,10 +655,17 @@ git -C /root/mgs-agent diff  # vazio se symlink, diff real se arquivo
 
 ### Adicionar novo agente ao sync
 
-1. Adicionar no loop `for agent in zeus atena NOVO_AGENTE`
-2. Adicionar bloco rsync para categorias de skills do novo agente
-3. Rodar manualmente uma vez para criar o arquivo inicial
-4. Confirmar cron: `crontab -l | grep sync-souls`
+1. Adicionar no loop `for agent in zeus atena NOVO_AGENTE` para SOUL.md.
+2. Adicionar o agente no loop de `config.yaml` quando o profile tiver config versionada.
+3. Adicionar bloco `rsync -a --delete` só para categorias MGS-específicas do novo agente; não sincronizar a árvore inteira de skills bundled/hub.
+4. Rodar manualmente uma vez para criar os arquivos iniciais.
+5. Confirmar cron: `crontab -l | grep sync-souls`.
+6. Se a categoria virar política MGS-wide em `/root/mgs-agent/AGENT.md`, fazer double-confirm antes de editar, porque AGENT.md é Critical Subset.
+
+Categorias seletivas conhecidas:
+- Zeus: `ops/`
+- Atena: `wordpress/`, `devops/`, e `autonomous-ai-agents/openhands` como exceção pontual
+- Ares: `growth/`
 
 ### Política de extensão de skills
 
