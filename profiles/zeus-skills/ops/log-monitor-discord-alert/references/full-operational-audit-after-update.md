@@ -47,4 +47,4 @@ Use compact status tables:
 - `Hermes cron list` count 0 is OK when MGS uses Linux crontab for operational monitors.
 - `monitor-yoast-health-eggbev` can fail transiently if 1Password lookup returns empty; if a manual rerun gets credentials, SSH, SQL and snapshot OK, classify the prior error as resolved.
 - `mgs-autocommit.service` may be active while committing nothing because the security guardrail blocks a suspicious path. This is a real operational pending item because repo changes stop being pushed.
-- Docs with names like `new-discord-agent-1p-flow.md` can trigger the guardrail even when they contain no secret. Prefer renaming to `new-discord-agent-1password-credential-flow.md` or similar after confirmation.
+- Docs with names like `new-discord-agent-bot-token-1password.md` can trigger the guardrail even when they contain no secret. Prefer renaming to `new-discord-agent-1password-credential-flow.md` or similar after confirmation.
