@@ -56,8 +56,9 @@ Notas:
 
 - `download:pilot`: somente 3–5 itens para validar seletores; não é final para pastas grandes se salvar só por nome.
 - `download:v2`: versão automática com rolagem lenta e `safeName(nome)__designId.ext`; útil quando a coleta retorna o total esperado.
-- `download:from-manifest`: preferido para retomar pasta grande quando já existe lista-mestre de `designId`; usa manifest antigo como fonte, copia OKs de V2 e baixa apenas faltantes/erros em `downloads_V3`.
+- `download:from-manifest`: preferido para retomar pasta grande quando já existe lista-mestre de `designId`; usa manifest antigo como fonte, copia OKs de V2 e baixa apenas faltantes/erros em `downloads_V3`. Não usar como primeiro comando de pasta nova sem manifest fonte válido.
 - `download:visible`: modo assistido por tela visível; usar só para diagnóstico/resgate pequeno, não como plano principal de pastas 200+ itens porque Rodolfo não quer ficar babysitting no PC.
+- Para pasta nova, gerar/coletar primeiro com `download:v2` ou audit. Se Rodolfo pedir “com 999 na frente”, lembrar que `999` pode virar nome/pasta de saída conforme assinatura do script; depois validar o JSON real e não assumir que foi limite.
 - Para grandes backlogs, manter uma lista-mestre (`name`, `designId`) separada do manifest de download; se o arquivo fonte zerar/perder, recriar por script seed com dados compactados em vez de colar JSON gigante no chat.
 
 ## Sequência segura

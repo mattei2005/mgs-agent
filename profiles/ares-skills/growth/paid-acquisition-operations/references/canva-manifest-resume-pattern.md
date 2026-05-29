@@ -50,3 +50,23 @@ erros                         | 0 ou lista explícita
 arquivos únicos no disco      | igual a status OK
 nomes                         | 100% com __designId.ext
 ```
+
+## Pasta nova vs retomada por manifest
+
+Para uma pasta nova (ex.: NICOLAS), não começar com `download:from-manifest` se ainda não existir JSON fonte válido. Esse modo depende de uma lista-mestre/manifest anterior com `{name, designId}`; se o arquivo estiver vazio/inválido, ele deve falhar com "Manifest fonte inválido ou vazio". Primeiro gerar lista/manifest via `download:v2`/audit/coleta; só depois usar `download:from-manifest` para retry/retomada.
+
+Validação mínima quando chegam dois arquivos V2:
+
+```text
+Arquivo                         | Validação
+--------------------------------|------------------------------------------------
+download-v2-designs_<GESTOR>    | total coletado, designId ausente/duplicado
+download-v2-manifest_<OUT>      | status OK/erro, formatos, arquivos, designId
+Comparação designs x manifest   | IDs iguais, interseção 100%, nenhum faltante
+```
+
+Pitfall observado: comando com argumento `999` pode virar nome/pasta de saída (`downloads_V2/999` e `download-v2-manifest_999.json`), não necessariamente limite. Ao receber esse manifest, validar pelo conteúdo real e avisar que a pasta de saída ficou como `999`.
+
+Antes de tratar V2 como final, confirmar o total real da pasta Canva. Se a coleta retornar só 60 itens, isso só é aceitável se o Canva mostrar 60 designs; se houver mais, é o mesmo problema de virtual scroll do GEORGE e a lista-mestre está incompleta.
+
+Retry de erros: enquanto cada rodada `errors` continuar recuperando arquivos, vale repetir. Só declarar exceção manual quando os mesmos poucos designs persistirem sem progresso, especialmente erros "menu abriu sem opção Baixar".
