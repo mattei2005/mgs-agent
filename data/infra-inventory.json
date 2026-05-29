@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-28T05:00:01-04:00",
+    "updated_at": "2026-05-29T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -157,18 +157,18 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-p1-runner.py",
-      "size_bytes": 65421,
-      "modified_at": "2026-05-27T22:47:15-04:00"
+      "size_bytes": 66071,
+      "modified_at": "2026-05-28T13:45:04-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-rec-p1-orchestrator.py",
-      "size_bytes": 12185,
-      "modified_at": "2026-05-27T18:28:44-04:00"
+      "size_bytes": 14243,
+      "modified_at": "2026-05-28T15:17:08-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-rec-runner.py",
-      "size_bytes": 94268,
-      "modified_at": "2026-05-27T22:54:07-04:00"
+      "size_bytes": 98905,
+      "modified_at": "2026-05-28T17:44:05-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-updates.sh",
@@ -257,8 +257,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/qa-content-validator.py",
-      "size_bytes": 14371,
-      "modified_at": "2026-05-27T22:47:58-04:00"
+      "size_bytes": 14927,
+      "modified_at": "2026-05-28T13:31:49-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/rec-fingerprint.py",
@@ -1831,8 +1831,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "afec1afcd2848bc4dbaaca4433420ffb",
-      "modified_at": "2026-05-28T05:00:02-04:00"
+      "md5": "33f6b893b0f3cac902c850a8603f77a1",
+      "modified_at": "2026-05-29T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1843,26 +1843,26 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "ea6b7e3f6a8f154077d2c907c452c7f3",
-      "modified_at": "2026-05-28T05:00:01-04:00"
+      "md5": "677a22816b339a616d8f316a4304c3bc",
+      "modified_at": "2026-05-29T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 2744,
-      "md5": "7b8ab123d6c981d899933c4c06c0e222",
-      "modified_at": "2026-05-28T05:00:01-04:00"
+      "size_bytes": 2873,
+      "md5": "f382c491d2b425c4afe9ba331fa59277",
+      "modified_at": "2026-05-29T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 331,
-      "md5": "e9608cde816b5a38d14e5adc9d2ea6a4",
-      "modified_at": "2026-05-27T09:31:04-04:00"
+      "size_bytes": 146,
+      "md5": "16c81df78f9d78627f642c1dbfbce954",
+      "modified_at": "2026-05-28T18:28:46-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 68408,
-      "md5": "b54ddcd5b552f6e317cf488619dd23d6",
-      "modified_at": "2026-05-27T09:33:45-04:00"
+      "size_bytes": 68720,
+      "md5": "fcf378ea7e414e6e299ccd3a8a241e60",
+      "modified_at": "2026-05-28T05:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1902,9 +1902,9 @@
     },
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
-      "size_bytes": 965,
-      "md5": "5448d444bb4cf291e650708c433875b5",
-      "modified_at": "2026-05-28T05:00:02-04:00"
+      "size_bytes": 992,
+      "md5": "b6361beeb4fc3be4d0d3343e18e0cd4f",
+      "modified_at": "2026-05-29T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1920,15 +1920,15 @@
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
-      "size_bytes": 4963,
-      "md5": "10350b743b7e78b4ff91d2f35c525d57",
-      "modified_at": "2026-05-27T21:12:15-04:00"
+      "size_bytes": 5289,
+      "md5": "dc2d29d087db0ff06a5f37c54a98b10f",
+      "modified_at": "2026-05-28T13:43:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 14060,
-      "md5": "3c98e37aa64f13163517852f49237058",
-      "modified_at": "2026-05-27T10:01:08-04:00"
+      "size_bytes": 14424,
+      "md5": "4881f9f6a27274600c823fdcd3cf98de",
+      "modified_at": "2026-05-28T18:30:40-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -1950,9 +1950,9 @@
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
-      "size_bytes": 38082,
-      "md5": "921893977ed4fd52ec2a02c29aa610e3",
-      "modified_at": "2026-05-27T14:01:36-04:00"
+      "size_bytes": 34751,
+      "md5": "623ac3396cc6af7307cd81cde8746175",
+      "modified_at": "2026-05-28T17:13:19-04:00"
     }
   ],
   "mu_plugin_canonical": {
