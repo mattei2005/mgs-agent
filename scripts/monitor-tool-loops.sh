@@ -246,14 +246,15 @@ PYTHON_END
           --argjson col 15158332 \
           '{content:$c, embeds:[{title:$t, color:$col, fields:[{name:"Agent", value:$agent, inline:true}, {name:"Session", value:("`"+$session+"`"), inline:true}, {name:"Tool", value:("`"+$tool+"`"), inline:true}, {name:"Tipo", value:$kind, inline:true}, {name:"Contagem", value:$count, inline:true}, {name:"Ação", value:"Mandar mensagem ao agent para parar ou reorientar.", inline:false}]}]}')
         
-        curl -s --max-time 15 -X POST -H "Content-Type: application/json" \
-          -d "$PAYLOAD" "$WEBHOOK" > /dev/null
-        
-        # Atualizar state
-        jq --arg k "$KEY" --argjson n "$NOW" '. + {($k): $n}' "$STATE_FILE" > "${STATE_FILE}.tmp" && mv "${STATE_FILE}.tmp" "$STATE_FILE"
-        
-        ALERTS_SENT=$((ALERTS_SENT + 1))
-        echo "ALERT: $AGENT/$SESSION_ID - $TOOL_NAME ($ERROR_COUNT erros)"
+        if post_alert_payload "$PAYLOAD" "${AGENT}/${SESSION_ID}/${TOOL_NAME}"; then
+          # Atualizar state apenas após envio ou dry-run bem-sucedido
+          jq --arg k "$KEY" --argjson n "$NOW" '. + {($k): $n}' "$STATE_FILE" > "${STATE_FILE}.tmp" && mv "${STATE_FILE}.tmp" "$STATE_FILE"
+          ALERTS_SENT=$((ALERTS_SENT + 1))
+          echo "ALERT: $AGENT/$SESSION_ID - $TOOL_NAME ($ERROR_COUNT erros)"
+        else
+          EXIT_CODE=2
+          echo "FAILED_ALERT: $AGENT/$SESSION_ID - $TOOL_NAME ($ERROR_COUNT erros)" >&2
+        fi
       else
         REMAINING=$(( (COOLDOWN_SECONDS - ELAPSED) / 60 ))
         echo "COOLDOWN: $AGENT/$SESSION_ID - aguarda ${REMAINING}min"
@@ -262,4 +263,18 @@ PYTHON_END
   done < <(find "$SESSIONS_DIR" -maxdepth 1 -name "*.jsonl" -mmin -10 -type f)
 done
 
+if [[ "${MGS_FORCE_TOOL_LOOP_ALERT:-0}" == "1" ]]; then
+  PAYLOAD=$(jq -n \
+    --arg c "<@344196393512075265> alerta de loop em agent" \
+    '{content:$c, embeds:[{title:"Agent em possível loop", color:15158332, fields:[{name:"Agent", value:"synthetic", inline:true}, {name:"Session", value:"`synthetic-test`", inline:true}, {name:"Tool", value:"`synthetic_tool`", inline:true}, {name:"Tipo", value:"Teste sintético", inline:true}, {name:"Contagem", value:"5", inline:true}, {name:"Ação", value:"Teste local do caminho de alerta.", inline:false}]}]}')
+  if post_alert_payload "$PAYLOAD" "synthetic"; then
+    ALERTS_SENT=$((ALERTS_SENT + 1))
+    echo "ALERT: synthetic/tool-loops"
+  else
+    EXIT_CODE=2
+    echo "FAILED_ALERT: synthetic/tool-loops" >&2
+  fi
+fi
+
 echo "Loop detector: $ALERTS_SENT alertas enviados"
+exit "$EXIT_CODE"
