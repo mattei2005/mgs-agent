@@ -69,4 +69,14 @@ Pitfall observado: comando com argumento `999` pode virar nome/pasta de saída (
 
 Antes de tratar V2 como final, confirmar o total real da pasta Canva. Se a coleta retornar só 60 itens, isso só é aceitável se o Canva mostrar 60 designs; se houver mais, é o mesmo problema de virtual scroll do GEORGE e a lista-mestre está incompleta.
 
+### NICOLAS V3: manifest parcial + Cloudflare + IDs extras
+
+Quando a pasta tem downloads parciais válidos mas os manifests estão errados/incompletos, não montar seed a partir de lista colada no Discord. Ler os arquivos reais no disco (`output/downloads_V2/<GESTOR>` e eventuais pastas acidentais como `999`), extrair `designId` do sufixo `__designId.ext`, copiar para `output/downloads_V3/<GESTOR>` e gerar seed por IDs únicos.
+
+Se Playwright/Chromium cair em loop de Cloudflare no Canva, não insistir abrindo novos perfis. Pedir para Rodolfo abrir Chrome normal com `--remote-debugging-port=9222`, passar Cloudflare/login manualmente e conectar o script via `chromium.connectOverCDP('http://127.0.0.1:9222')` à aba Canva já aberta.
+
+Pitfall: coletar IDs por regex no HTML inteiro pode capturar IDs extras de cache/preview. Exemplo NICOLAS: `342/334` coletados e `283` pendentes, quando o correto era `334/334` e `275`. Nesses casos, não baixar; filtrar master para IDs com `name` ou `url` de linha real e só prosseguir quando `master limpo = total Canva` e `pendentes = total Canva - seed OK`.
+
+Detalhes e comandos de diagnóstico/filtro: `references/canva-nicolas-v3-cdp-recovery.md`.
+
 Retry de erros: enquanto cada rodada `errors` continuar recuperando arquivos, vale repetir. Só declarar exceção manual quando os mesmos poucos designs persistirem sem progresso, especialmente erros "menu abriu sem opção Baixar".
