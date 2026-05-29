@@ -71,6 +71,23 @@ Cross-corpus boilerplate audit reference: `references/rec-p1-cross-corpus-boiler
 
 Do not choose between many old reference files during normal production. If a rule matters, it belongs in the contract or in runtime validation.
 
+## Architecture triage / explaining the file surface
+
+When Rodolfo sends GitHub/file-search screenshots or asks what a REC/P1 file list means, answer as architecture triage, not as production execution. Separate the surfaces clearly:
+
+```text
+Editorial active     -> contracts/gb-cc-en.md; templates only if explicitly still used/derived
+Runtime              -> mgs-rec-runner.py, mgs-p1-runner.py, mgs-rec-p1-orchestrator.py, validators
+Publishing/infra     -> content-publish-wordpress/SKILL.md + WordPress scripts
+Historical/reference -> references/*.md and references/archive/*
+Technical cache      -> sites.json, wp-term-cache.json, rec-fingerprints.db
+Editorial cache      -> data/card-cache.db; not allowed as production content source
+```
+
+If asked whether `references/*.md` are a cache for redoing articles, say no: they are lesson logs / incident references / historical rule evidence. The reusable production source should be the active contract and runtime gates, not a flat pile of dated references. The actual dangerous editorial cache is `data/card-cache.db`, because it can preserve facts/positioning and influence future articles if used.
+
+When counting “route files” for a refactor or Lovable-style architecture map, do not inflate the core route with every helper. Count central route files first; add auxiliary files only if imported/called in the real flow or if they carry operational authority. `content-publish-wordpress/SKILL.md` exists and should be counted as publishing/infra authority, not REC/P1 editorial authority.
+
 ## Rule consolidation / anti-bola-de-neve
 
 When a REC/P1 session produces several corrections, repairs or new rule candidates, do not let the library turn into a long flat list of active one-off instructions. Use references as incident evidence only, then promote approved durable behavior into the active contract and/or runtime validators.
