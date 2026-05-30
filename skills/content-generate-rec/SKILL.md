@@ -265,7 +265,7 @@ If the official page extraction cannot produce enough structured facts, pass cur
 
 If extraction returns a generic visible fact like `N/A`, do not publish that value and do not infer a better one. Fetch the official fact or pass a verified request fact. For rewards cards, make benefit copy vary by benefit type (welcome bonus, Pay with Rewards/offset, Mastercard acceptance, recurring payments, partner rewards, general points) so the P1 does not repeat one generic reward-value sentence.
 
-If REC fails, P1 must not start. Treat this as the desired safety behavior, not a partial success.
+If REC fails, P1 must not start. Treat this as the desired safety behavior, not a partial success. For dry-runs, report this explicitly: `contract_preflight_passed` plus REC failure means the universal-contract/P1-v2 plumbing may be healthy while REC facts/comparison gates are correctly blocking. Do not bypass REC blockers just to demonstrate P1; either supply verified facts/competitors or choose a card/URL that passes REC gates.
 
 REC→P1 handoff must be minimal:
 
