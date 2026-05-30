@@ -1889,13 +1889,17 @@ def main() -> int:
                 raise RunnerError(f"yoast_score_failed: {e}")
             steps.append("yoast_scored")
 
-            t0 = time.time()
-            apply_url = f"https://{site['domain']}/apply-now-{country}-{vertical}-{card_slug}/"
-            public_check = public_verify(public_url, apply_url=apply_url, card_url=card_url or "", featured_url=featured_url or "")
-            tick("public_verify_sec", t0)
-            if not public_check.get("ok"):
-                raise RunnerError(f"public_verify_failed: {public_check}")
-            steps.append("public_verified")
+            if args.status == "publish":
+                t0 = time.time()
+                apply_url = f"https://{site['domain']}/apply-now-{country}-{vertical}-{card_slug}/"
+                public_check = public_verify(public_url, apply_url=apply_url, card_url=card_url or "", featured_url=featured_url or "")
+                tick("public_verify_sec", t0)
+                if not public_check.get("ok"):
+                    raise RunnerError(f"public_verify_failed: {public_check}")
+                steps.append("public_verified")
+            else:
+                public_check = {"ok": True, "skipped": "draft_not_public", "url": public_url}
+                steps.append("draft_public_verify_skipped")
 
             t0 = time.time()
             artifact_audit = cleanup_extra_media(args.site, created_media, post_id, [card_id or 0, featured_id or 0])
