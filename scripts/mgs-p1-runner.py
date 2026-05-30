@@ -242,23 +242,25 @@ def official_source_has_content(official_url: str, text: str, card_name: str = "
     clean = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", text or ""))).strip().lower()
     if not clean or len(clean) < 500:
         return False, "official source has no meaningful body"
+    product_terms = [
+        "credit card", "representative apr", "annual fee", "monthly fee", "purchase rate",
+        "eligibility", "apply", "rewards", "cashback", "avios", "mastercard", "visa",
+    ]
+    product_hits = [t for t in product_terms if t in clean]
+    name_terms = meaningful_card_terms(card_name) if card_name else []
     error_markers = [
         "page not found", "we can’t find that page", "we can't find that page",
-        "sorry about this", "try our search tool", "internet banking - error",
+        "try our search tool", "internet banking - error",
         "we are sorry an error has occurred", "error 1007", "access denied",
         "cloudflare", "temporarily unavailable",
     ]
     for marker in error_markers:
         if marker in clean:
             return False, f"official source appears to be an error page: {marker}"
-    product_terms = [
-        "credit card", "representative apr", "annual fee", "monthly fee", "purchase rate",
-        "eligibility", "apply", "rewards", "cashback", "avios", "mastercard", "visa",
-    ]
-    product_hits = [t for t in product_terms if t in clean]
+    if "sorry about this" in clean and len(product_hits) < 2 and not any(t in clean for t in name_terms):
+        return False, "official source appears to be an error page: sorry about this"
     if len(product_hits) < 2:
         return False, "official source does not expose enough product content"
-    name_terms = meaningful_card_terms(card_name) if card_name else []
     if name_terms and not any(t in clean for t in name_terms):
         return False, "official source does not mention the requested product/issuer terms"
     return True, "ok"
