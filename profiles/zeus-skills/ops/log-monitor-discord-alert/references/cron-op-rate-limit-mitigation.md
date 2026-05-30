@@ -1,16 +1,47 @@
 # Cron monitors: reduzir pressão no `op` sem cache de credenciais
 
-## Contexto
+## Quando usar
 
-Quando vários crons MGS chamam `op item get` diretamente para buscar webhooks/segredos, o 1Password CLI pode rate-limitar e causar cascata: auto-push, Yoast e monitores deixam de reportar ou passam a alertar por erro de credencial.
+Use quando vários crons/monitores MGS falham com `Too many requests` do 1Password CLI (`op`) ou quando alertas diferentes aparecem em cascata (auto-push, Yoast, watchdog de cron, webhooks). Trate como problema de **pressão no control plane de credenciais**, não como falha isolada de Git/webhook/Yoast.
 
-A correção preferida antes de cachear segredos é reduzir chamadas desnecessárias ao `op`.
+## Princípios de segurança
 
-## Padrão recomendado
+- Não hardcode webhook URLs, GitHub PATs, RunCloud passwords ou application passwords em scripts/`.env` para “resolver rápido”.
+- Não criar cache local de credenciais (`/run/secrets`, `/run/mgs-agent/secrets`, etc.) sem aprovação explícita de Rodolfo; isso muda o modelo de segurança.
+- Antes de retries manuais que dependem do `op`, fazer um probe único e reportar só `len=X`/erro redigido; nunca imprimir segredo.
 
-### 1. Stagger de crons que chamam `op`
+Probe seguro:
 
-Espalhar horários para evitar rajadas simultâneas. Exemplo validado:
+```bash
+set -a; . /root/mgs-agent/.env 2>/dev/null; set +a
+v=$(op item get 'Discord Webhook - Alerts Infra Channel' \
+  --vault 'MGS Conteúdo' --fields label=webhook_url --reveal 2>/tmp/operr.$$ || true)
+err=$(cat /tmp/operr.$$); rm -f /tmp/operr.$$
+printf 'len=%s err=%s\n' "${#v}" "$(printf '%s' "$err" | sed -E 's/[A-Za-z0-9_]{12,}/[REDACTED]/g')"
+```
+
+## Mitigação preferida, em ordem
+
+### 1. Inventariar chamadas `op`
+
+```bash
+crontab -l
+# Depois buscar em scripts por:
+# op item get | op read | helpers de retry tipo op_get_retry
+```
+
+Classifique cada chamada:
+
+```text
+Tipo                     Ação
+-----------------------  ------------------------------------------------
+Necessária para checar   manter, mas reduzir retries/espalhar horário
+Só necessária para alerta mover para o caminho de alerta real
+```
+
+### 2. Stagger de crons
+
+Espalhar horários para evitar rajadas simultâneas. Exemplo validado MGS:
 
 ```cron
 1-56/5 * * * *       monitor-service-restarts.sh
@@ -22,16 +53,15 @@ Espalhar horários para evitar rajadas simultâneas. Exemplo validado:
 17 3 * * *           housekeeping-bak-cleanup.sh
 ```
 
-Sempre fazer backup do crontab antes de editar:
+Crontab edit safety:
+- Backup primeiro em `/root/mgs-agent/data/crontab-backup-YYYYMMDD-HHMMSS.txt`.
+- Gerar arquivo intermediário.
+- Validar linhas esperadas e formato básico dos 5 campos.
+- Aplicar com `crontab <file>`.
+- Mostrar diff antes/depois.
+- Nunca usar `cmd | python3 <<EOF` nem heredoc dentro de command substitution para editar crontab; stdin collisions podem corromper/apagar entradas.
 
-```bash
-TS=$(date +%Y%m%d-%H%M%S)
-crontab -l > "/root/mgs-agent/data/crontab-backup-${TS}.txt"
-```
-
-Editar via arquivo intermediário, validar linhas esperadas e aplicar com `crontab <arquivo>`. Nunca usar heredoc dentro de command substitution para editar crontab.
-
-### 2. Buscar webhook somente quando houver alerta
+### 3. Lazy-load de webhook apenas quando houver alerta
 
 Monitores frequentes não devem chamar `op` em estado saudável.
 
@@ -39,16 +69,21 @@ Fluxo correto:
 
 ```text
 1. Executar verificação local sem `op`.
-2. Se não houver alerta pendente -> sair exit 0.
-3. Se houver alerta real e fora de cooldown -> buscar webhook uma vez.
-4. Postar no Discord com até 2 retries de curl.
+2. Aplicar anti-spam/cooldown sem `op`.
+3. Se não houver alerta pendente -> exit 0 sem tocar no 1Password.
+4. Se houver alerta real e fora do cooldown -> buscar webhook uma vez.
+5. Postar no Discord com até 2 retries de curl.
 ```
 
-Isso transforma monitores `*/5` de dezenas de chamadas `op` por hora para zero em operação normal.
+Aplica especialmente a:
+- `monitor-service-restarts.sh`: calcular `NRestarts`/delta primeiro; só buscar webhook dentro do ramo `info`/`warn`.
+- `monitor-tool-loops.sh`: escanear sessões primeiro; só buscar webhook se houver loop real fora de cooldown.
 
-### 3. Falha de `op` durante alerta real
+Impacto validado: monitores `*/5` em estado saudável caem de dezenas de chamadas `op`/hora para zero.
 
-Não perder alerta silenciosamente. Se `op` falhar exatamente quando um alerta precisa ser enviado:
+### 4. Falha de `op` durante alerta real
+
+Não perder alerta silenciosamente. Se `op` falhar exatamente quando havia alerta para enviar:
 
 ```text
 - logar em /var/log/mgs-agent/<script>-failed-alerts.log
@@ -56,9 +91,17 @@ Não perder alerta silenciosamente. Se `op` falhar exatamente quando um alerta p
 - sair com exit 2
 ```
 
-Sem alerta real, falha do `op` não deve ocorrer porque o script não deve chamar `op`.
+`exit 0` = saudável/sem alerta. `exit 1` = erro normal de script. `exit 2` = alerta real não entregue e salvo em fallback local.
 
-### 4. Testes obrigatórios
+### 5. Reduzir retries agressivos onde `op` é necessário para a checagem
+
+Se o monitor realmente precisa de vários segredos para operar (ex.: Yoast precisa webhook + credenciais RunCloud), evitar loop por segredo que vira 9 chamadas em 15s. Preferir:
+- 1 tentativa por segredo no ciclo; ou
+- backoff global e abort limpo ao detectar rate limit.
+
+Não consolidar itens do vault nem cachear segredos sem autorização explícita.
+
+## Testes obrigatórios após patch
 
 Para cada monitor alterado:
 
@@ -81,20 +124,32 @@ chmod +x "$TMPD/op"
 PATH="$TMPD:$PATH" script.sh
 wc -l /tmp/mgs-opcalls.log   # esperado: 0
 
-# alerta sintético em dry-run
-MGS_DRY_RUN=1 MGS_WEBHOOK_URL_OVERRIDE=https://example.invalid/webhook \
-  MGS_FORCE_<MONITOR>_ALERT=1 script.sh
+# alerta sintético em dry-run: deve detectar sem postar real
+MGS_FORCE_*_ALERT=1 MGS_DRY_RUN=1 MGS_WEBHOOK_URL_OVERRIDE=https://example.invalid/webhook script.sh
 
-# falha de op durante alerta
-MGS_FORCE_<MONITOR>_ALERT=1 MGS_FORCE_OP_FAIL=1 script.sh
-# esperado: exit 2 + pending-alerts/*.json
+# falha de op durante alerta: deve exit 2 + fallback local
+MGS_FORCE_*_ALERT=1 MGS_FORCE_OP_FAIL=1 script.sh
+ls /var/log/mgs-agent/pending-alerts/
+tail /var/log/mgs-agent/*failed-alerts.log
 ```
 
-Variáveis de teste (`MGS_FORCE_*`) são hooks locais para validação; não devem alterar o comportamento normal do cron.
+## Auditoria pós-correção
 
-## Pitfalls
+Rodar:
 
-- Não reduzir segurança colocando webhook/PAT/senha hardcoded em script ou `.env`.
-- Cache de credenciais em `/run/secrets` é mudança de modelo de segurança; só aplicar com aprovação explícita.
-- Se o auto-commit watcher bloquear arquivos de documentação por palavras como `password`, `token`, `secret`, `webhook` ou nomes de provider, preferir renomear o arquivo para termo neutro em vez de relaxar guardrail.
-- `op` retries agressivos pioram rate limit. Para alerta real, use uma tentativa de `op`; retries ficam no `curl` do webhook.
+```bash
+/root/mgs-agent/scripts/monitor-cron-stale-logs.sh --dry-run
+for f in /root/mgs-agent/logs/*.log; do
+  c=$(tail -n 120 "$f" 2>/dev/null | grep -Ei 'error|erro|fatal|traceback|exception|failed|falha|critical|syntax error|permission denied|too many requests|rate-limited' | wc -l)
+  [ "$c" -gt 0 ] && printf '%4s %s\n' "$c" "$f"
+done
+```
+
+Se um erro antigo era o último bloco do log (ex.: Yoast falhou às 10:00 mas depois não rodou), executar o cron manualmente quando for seguro/idempotente, depois rodar o stale watchdog real para emitir resolução.
+
+## Pitfall: auto-commit guardrail por nome de arquivo
+
+O auto-commit pode ficar ativo mas bloqueado se um arquivo de documentação tiver nome com `token|password|secret|webhook|credential|1password`. Antes de relaxar guardrail:
+1. Escanear o arquivo por padrões reais de segredo sem imprimir valores.
+2. Se não houver segredo e for documentação, renomear para termo menos sensível (ex.: `cron-op-rate-limit-mitigation.md` em vez de `cron-1password-rate-limit-mitigation.md`).
+3. Confirmar `git status`, auto-commit e auto-push.
