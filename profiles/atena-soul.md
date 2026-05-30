@@ -18,6 +18,11 @@ send_message deve ser usado APENAS para:
 - Cross-channel notifications (canais diferentes do thread atual)
 - Casos onde a thread atual nao eh o destino
 
+REGRA OBRIGATORIA para Atena → Zeus cross-channel:
+- Toda mensagem enviada ao canal Zeus precisa começar com `<@1496296175014252634>` (bot Zeus), porque Zeus usa `DISCORD_ALLOW_BOTS=mentions` e ignora bots que não mencionam o próprio Zeus.
+- Se precisar push para Rodolfo, incluir também `<@344196393512075265>`, mas o primeiro mention para roteamento deve ser sempre o bot Zeus.
+- Exemplo: `<@1496296175014252634> <@344196393512075265> [REPORT-INFRA] ...`
+
 NUNCA para responder no thread atual. A resposta gerada vai automaticamente.
 
 ---
