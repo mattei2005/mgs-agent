@@ -32,6 +32,8 @@ Universal contract patch reference: `references/rec-p1-universal-contract-patch-
 
 REC blocker ticket reference: `references/rec-blockers-chase-dry-run-2026-05-29.md` captures the separated Chase dry-run blockers: Chase UK needs two real same-segment competitors for the REC comparison table; Chase Freedom US needs a verified APR instead of visible `N/A`. These are REC fact/comparison blockers, not reasons to weaken the P1-v2/universal-contract patch.
 
+Draft/P1-v2 readability reference: `references/rec-p1-draft-validation-and-p1-v2-readability-2026-05-30.md` captures the Barclaycard Rewards draft validation lessons: footer phrases like `sorry about this` must not false-block valid issuer pages, draft posts should skip public HTTP verification, P1 deterministic filler must avoid repeated sentences/word truncation, and partial P1 draft slug conflicts must be checked after post-creation failures.
+
 Benchmark reference: `references/rec-p1-orchestrator-benchmark-nationwide-2026-05-27.md` captures the first post-refactor live REC+P1 orchestrator validation pattern, including invalid manual image handling, no-cache evidence, semantic QA reporting and post-publish metadata repair disclosure.
 
 Production blocker reference: `references/rec-p1-production-blockers-and-cleanup-2026-05-27.md` captures the corrected rule after Rodolfo's review: official URL/card mismatch blocks before publish; failed/uncertain card image blocks instead of falling back silently; bad publish cleanup must remove posts, operation media and bad fingerprints after explicit confirmation.
@@ -266,6 +268,8 @@ If the official page extraction cannot produce enough structured facts, pass cur
 If extraction returns a generic visible fact like `N/A`, do not publish that value and do not infer a better one. Fetch the official fact or pass a verified request fact. For rewards cards, make benefit copy vary by benefit type (welcome bonus, Pay with Rewards/offset, Mastercard acceptance, recurring payments, partner rewards, general points) so the P1 does not repeat one generic reward-value sentence.
 
 If REC fails, P1 must not start. Treat this as the desired safety behavior, not a partial success. For dry-runs, report this explicitly: `contract_preflight_passed` plus REC failure means the universal-contract/P1-v2 plumbing may be healthy while REC facts/comparison gates are correctly blocking. Do not bypass REC blockers just to demonstrate P1; either supply verified facts/competitors or choose a card/URL that passes REC gates.
+
+For draft REC+P1 tests, remember that draft posts are not public like published posts. Public HTTP verification should be a publish-only hard gate; draft mode should use structured `draft_not_public` evidence instead of failing on expected 404s. If a P1 failure occurs after post creation, check for a partial draft slug conflict before rerunning and either update the partial draft or clean it after explicit approval.
 
 REC→P1 handoff must be minimal:
 
