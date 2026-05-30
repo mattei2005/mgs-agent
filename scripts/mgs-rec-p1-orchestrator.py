@@ -22,7 +22,8 @@ from urllib.parse import urlparse
 ROOT = Path("/root/mgs-agent")
 REC_RUNNER = ROOT / "scripts/mgs-rec-runner.py"
 P1_RUNNER = ROOT / "scripts/mgs-p1-runner.py"
-CONTRACT = ROOT / "skills/content-generate-rec/contracts/gb-cc-en.md"
+CONTRACT_REC = ROOT / "skills/content-generate-rec/contracts/cc-rec.md"
+CONTRACT_P1 = ROOT / "skills/content-generate-rec/contracts/cc-p1.md"
 
 
 class OrchestratorError(Exception):
@@ -121,6 +122,8 @@ def build_rec_cmd(args: argparse.Namespace) -> List[str]:
         "--status", args.status,
         "--source-url", args.official_url,
     ]
+    if args.lang:
+        cmd += ["--lang", args.lang]
     if args.card_image_url:
         cmd += ["--card-image-url", args.card_image_url]
     if args.annual_fee:
@@ -147,6 +150,8 @@ def build_p1_cmd(args: argparse.Namespace, rec_url: str) -> List[str]:
         "--official-url", args.official_url,
         "--card", args.card,
     ]
+    if args.lang:
+        cmd += ["--lang", args.lang]
     if args.annual_fee:
         cmd += ["--annual-fee", args.annual_fee]
     if args.apr:
@@ -210,8 +215,10 @@ def official_product_preflight(card_name: str, official_url: str) -> None:
 
 def validate_contract_preflight(args: argparse.Namespace) -> List[str]:
     warnings: List[str] = []
-    if not CONTRACT.exists():
-        raise OrchestratorError(f"Missing active editorial contract: {CONTRACT}")
+    if not CONTRACT_REC.exists():
+        raise OrchestratorError(f"Missing active REC editorial contract: {CONTRACT_REC}")
+    if not CONTRACT_P1.exists():
+        raise OrchestratorError(f"Missing active P1 editorial contract: {CONTRACT_P1}")
     if not args.official_url:
         raise OrchestratorError("--official-url is required; editorial card-cache is disabled for REC+P1 production")
     official_product_preflight(args.card, args.official_url)
@@ -238,6 +245,7 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--allow-disambiguation", action="store_true")
     ap.add_argument("--timeout", type=int, default=2400)
+    ap.add_argument("--lang", default="", help="Output language for the article (e.g. en, es, pt, tr). Optional; falls back to the site's configured language.")
     args = ap.parse_args()
 
     started = time.time()
@@ -254,7 +262,8 @@ def main() -> int:
         "official_url": args.official_url,
         "policy": {
             "editorial_cache": "disabled",
-            "contract": str(CONTRACT),
+            "contract_rec": str(CONTRACT_REC),
+            "contract_p1": str(CONTRACT_P1),
             "rec_p1_model": "one operation, two separate generations",
         },
     }

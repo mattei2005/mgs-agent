@@ -31,6 +31,7 @@ SITES_JSON = ROOT / "data/sites.json"
 TERM_CACHE_JSON = ROOT / "data/wp-term-cache.json"
 GEN_SCRIPTS = ROOT / "skills/content-generate-rec/scripts"
 REC_TEMPLATES = ROOT / "skills/content-generate-rec/templates"
+REC_UNIVERSAL_CONTRACT = ROOT / "skills/content-generate-rec/contracts/cc-rec.md"
 WP_SCRIPTS = ROOT / "skills/content-publish-wordpress/scripts"
 FEATURED_AUDIT_SCRIPT = ROOT / "scripts/audit-featured-image.py"
 # Legacy mgs-rec-api (old FastAPI/Anthropic path) is intentionally disabled.
@@ -87,13 +88,18 @@ def load_site(site_key: str) -> Dict[str, Any]:
 
 
 def load_rec_template_contract(site: Dict[str, Any]) -> Dict[str, Any]:
-    """Validate that the site's REC template exists without loading it into Atena's context."""
-    template_key = site.get("template_key")
-    if not template_key:
-        raise RunnerError("Site is missing template_key in sites.json")
-    template_path = REC_TEMPLATES / f"rec-{template_key}.md"
-    if not template_path.exists():
-        raise RunnerError(f"No REC template for template_key '{template_key}'. Create templates/rec-{template_key}.md first.")
+    """Resolve the REC editorial contract. Prefers the universal `cc-rec.md`; falls back
+    to the per-site `templates/rec-{template_key}.md` for legacy compatibility."""
+    if REC_UNIVERSAL_CONTRACT.exists():
+        template_path = REC_UNIVERSAL_CONTRACT
+        template_key = "cc-universal"
+    else:
+        template_key = site.get("template_key")
+        if not template_key:
+            raise RunnerError("Site is missing template_key in sites.json and universal cc-rec.md is absent")
+        template_path = REC_TEMPLATES / f"rec-{template_key}.md"
+        if not template_path.exists():
+            raise RunnerError(f"No REC template for template_key '{template_key}'. Create templates/rec-{template_key}.md or contracts/cc-rec.md first.")
     text = template_path.read_text(errors="ignore")
     return {
         "template_key": template_key,
@@ -101,7 +107,7 @@ def load_rec_template_contract(site: Dict[str, Any]) -> Dict[str, Any]:
         "bytes": template_path.stat().st_size,
         "contract_loaded": True,
         "has_word_count_gate": "450" in text and "500" in text,
-        "has_paragraph_gate": "30 words" in text or "~30 words" in text,
+        "has_paragraph_gate": "30 words" in text or "~30 words" in text or "25-35 words" in text or "30-35 words" in text,
         "has_horizontal_card_gate": "horizontal" in text.lower() and "rotate" in text.lower(),
         "has_featured_three_layer_gate": "three essential" in text.lower() or "three" in text.lower() and "layers" in text.lower(),
     }
@@ -1404,6 +1410,7 @@ def main() -> int:
     ap.add_argument("--card-image-url", default="", help="Optional direct card image URL; skips search-card-image fallback")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--allow-disambiguation", action="store_true")
+    ap.add_argument("--lang", default="", help="Output language (en/es/pt/tr). Overrides site.language when set.")
     args = ap.parse_args()
     if not args.card_image_url:
         args.card_image_url = (
@@ -1428,6 +1435,8 @@ def main() -> int:
     try:
         t0 = time.time()
         site = load_site(args.site)
+        if args.lang:
+            site["language"] = args.lang
         template_contract = load_rec_template_contract(site)
         card_slug = slugify(args.card)
         country = site.get("country", "gb")

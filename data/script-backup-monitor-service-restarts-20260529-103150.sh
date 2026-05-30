@@ -15,62 +15,14 @@ set -a
 source "${BASE_DIR}/.env" 2>/dev/null || true
 set +a
 
-LOG_DIR="/var/log/mgs-agent"
-FAILED_ALERTS_LOG="${LOG_DIR}/monitor-service-restarts-failed-alerts.log"
-PENDING_ALERTS_DIR="${LOG_DIR}/pending-alerts"
-WEBHOOK_URL=""
-WEBHOOK_FETCHED=0
-EXIT_CODE=0
+# Buscar webhook do 1Password
+WEBHOOK_URL=$(op item get 'Discord Webhook - Alerts Infra Channel' \
+  --vault 'MGS Conteúdo' --fields label=webhook_url 2>/dev/null || true)
 
-record_failed_alert() {
-  local payload="$1" reason="$2"
-  local ts file
-  ts=$(date -Iseconds)
-  mkdir -p "$PENDING_ALERTS_DIR" || return 2
-  file="${PENDING_ALERTS_DIR}/monitor-service-restarts-$(date +%Y%m%d-%H%M%S)-$$.json"
-  printf '%s reason=%s file=%s\n' "$ts" "$reason" "$file" >> "$FAILED_ALERTS_LOG" || return 2
-  printf '%s\n' "$payload" > "$file" || return 2
-  return 0
-}
-
-fetch_webhook_once() {
-  if [[ "$WEBHOOK_FETCHED" == "1" ]]; then
-    [[ "$WEBHOOK_URL" == https://* ]]
-    return $?
-  fi
-  WEBHOOK_FETCHED=1
-  if [[ "${MGS_FORCE_OP_FAIL:-0}" == "1" ]]; then
-    WEBHOOK_URL=""
-    return 1
-  fi
-  if [[ -n "${MGS_WEBHOOK_URL_OVERRIDE:-}" ]]; then
-    WEBHOOK_URL="$MGS_WEBHOOK_URL_OVERRIDE"
-  else
-    WEBHOOK_URL=$(op item get 'Discord Webhook - Alerts Infra Channel' --vault 'MGS Conteúdo' --fields label=webhook_url --reveal 2>/dev/null || true)
-  fi
-  [[ "$WEBHOOK_URL" == https://* ]]
-}
-
-post_alert_payload() {
-  local payload="$1" reason="${2:-alert}" http_status attempt
-  if ! fetch_webhook_once; then
-    record_failed_alert "$payload" "op_unavailable:${reason}" || return 2
-    return 2
-  fi
-  if [[ "${MGS_DRY_RUN:-0}" == "1" ]]; then
-    echo "$(date -Iseconds) ${LOG_PREFIX} DRY_RUN: would post alert (${reason})"
-    return 0
-  fi
-  for attempt in 1 2; do
-    http_status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 -X POST -H "Content-Type: application/json" -d "$payload" "$WEBHOOK_URL" 2>/dev/null || echo "000")
-    if [[ "$http_status" =~ ^2 ]]; then
-      return 0
-    fi
-    sleep 2
-  done
-  record_failed_alert "$payload" "curl_failed:${reason}:http=${http_status}" || return 2
-  return 2
-}
+if [[ -z "${WEBHOOK_URL}" ]]; then
+  echo "$(date -Iseconds) ${LOG_PREFIX} ERROR: webhook_url vazio (1P indisponível?)" >&2
+  exit 1
+fi
 
 SERVICES=("zeus-gateway" "atena-gateway" "mgs-autocommit")
 THRESHOLD_INFO=3
@@ -200,38 +152,21 @@ PYEOF
       --arg delta "${DELTA}x" \
       --arg window "${WINDOW_HOURS}h" \
       '{content:"", embeds:[{title:"Service reiniciando acima do normal", color:15844367, fields:[{name:"Service", value:("`"+$svc+"`"), inline:true}, {name:"Reinícios", value:$delta, inline:true}, {name:"Janela", value:$window, inline:true}, {name:"Ação", value:"Acompanhar; investigar se subir para WARN.", inline:false}]}]}')
-    if post_alert_payload "$PAYLOAD" "${SVC}:info"; then
-      echo "$(date -Iseconds) ${LOG_PREFIX} INFO alert enviado para ${SVC}"
-    else
-      EXIT_CODE=2
-      echo "$(date -Iseconds) ${LOG_PREFIX} FAILED_ALERT INFO para ${SVC}" >&2
-    fi
+    curl -s --max-time 15 -X POST "${WEBHOOK_URL}" \
+      -H "Content-Type: application/json" \
+      -d "${PAYLOAD}" > /dev/null
+    echo "$(date -Iseconds) ${LOG_PREFIX} INFO alert enviado para ${SVC}"
   elif [[ "${ALERT_LEVEL}" == "warn" ]]; then
     PAYLOAD=$(jq -n \
       --arg svc "${SVC}" \
       --arg delta "${DELTA}x" \
       --arg window "${WINDOW_HOURS}h" \
       '{content:"<@***> alerta de restart recorrente", embeds:[{title:"Service reiniciando em excesso", color:15158332, fields:[{name:"Service", value:("`"+$svc+"`"), inline:true}, {name:"Reinícios", value:$delta, inline:true}, {name:"Janela", value:$window, inline:true}, {name:"Ação", value:"Investigar logs e causa do restart.", inline:false}]}]}')
-    if post_alert_payload "$PAYLOAD" "${SVC}:warn"; then
-      echo "$(date -Iseconds) ${LOG_PREFIX} WARN alert enviado para ${SVC}"
-    else
-      EXIT_CODE=2
-      echo "$(date -Iseconds) ${LOG_PREFIX} FAILED_ALERT WARN para ${SVC}" >&2
-    fi
+    curl -s --max-time 15 -X POST "${WEBHOOK_URL}" \
+      -H "Content-Type: application/json" \
+      -d "${PAYLOAD}" > /dev/null
+    echo "$(date -Iseconds) ${LOG_PREFIX} WARN alert enviado para ${SVC}"
   fi
 done
 
-if [[ "${MGS_FORCE_SERVICE_RESTART_ALERT:-0}" == "1" ]]; then
-  PAYLOAD=$(jq -n \
-    --arg c "<@344196393512075265> alerta de restart recorrente" \
-    '{content:$c, embeds:[{title:"Service reiniciando em excesso", color:15158332, fields:[{name:"Service", value:"`synthetic-service`", inline:true}, {name:"Reinícios", value:"5x", inline:true}, {name:"Janela", value:"24h", inline:true}, {name:"Ação", value:"Teste local do caminho de alerta.", inline:false}]}]}')
-  if post_alert_payload "$PAYLOAD" "synthetic"; then
-    echo "$(date -Iseconds) ${LOG_PREFIX} WARN alert enviado para synthetic-service"
-  else
-    EXIT_CODE=2
-    echo "$(date -Iseconds) ${LOG_PREFIX} FAILED_ALERT WARN para synthetic-service" >&2
-  fi
-fi
-
 echo "$(date -Iseconds) ${LOG_PREFIX} OK"
-exit "$EXIT_CODE"

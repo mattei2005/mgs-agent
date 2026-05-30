@@ -11,15 +11,24 @@ Use this skill when Rodolfo/Raquel asks Atena to create, update, audit or report
 
 This skill is now intentionally short. It is an operational routing guide, not the editorial rulebook.
 
-Active editorial rules live in:
+Active editorial specs/contracts live in:
 
 ```text
-/root/mgs-agent/skills/content-generate-rec/contracts/gb-cc-en.md
+/root/mgs-agent/skills/content-generate-rec/contracts/cc-rec.md
+/root/mgs-agent/skills/content-generate-rec/contracts/cc-p1.md
 ```
+
+Legacy vertical contract/template files such as `contracts/gb-cc-en.md` and `templates/rec-*.md` may remain on disk for rollback or migration context, but the universal specs are the intended active surface when present.
+
+Important architecture note: these markdown contracts are versioned editorial specs and telemetry/preflight inputs for deterministic Python runners. They are not runtime LLM prompts unless Rodolfo explicitly approves a separate LLM-generation migration.
 
 Historical lessons live in `references/` and `references/archive/`. They are not active production rules unless a rule has been promoted into the contract or runtime validators.
 
 Refactor sequencing reference: `references/rec-p1-refactor-sequencing-no-cache.md` captures the durable process rule for REC/P1 architecture changes: active content map first, one current ordered plan, REC+P1 as one business request/two technical generations, and no editorial card-cache in production.
+
+Deterministic contracts / P1-v2 language reference: `references/rec-p1-deterministic-contracts-and-p1-v2-lang-2026-05-29.md` captures the correction from the universal-contract refactor: `cc-rec.md`/`cc-p1.md` are versioned specs/telemetry inputs, not runtime LLM prompts; REC/P1 remain deterministic Python unless Rodolfo explicitly approves paid LLM generation; P1 `--lang` support must produce fully localized visible runner copy for `en/es/pt/tr` and abort unsupported languages.
+
+Universal contract patch reference: `references/rec-p1-universal-contract-patch-application-2026-05-29.md` captures the workflow for applying ZIP-delivered REC+P1 runner refactors: map dev filenames to production script paths, preserve legacy templates for rollback, stop on first failing dry-run when instructed, and verify that runners actually load the new contracts rather than only compiling or reporting policy paths.
 
 Benchmark reference: `references/rec-p1-orchestrator-benchmark-nationwide-2026-05-27.md` captures the first post-refactor live REC+P1 orchestrator validation pattern, including invalid manual image handling, no-cache evidence, semantic QA reporting and post-publish metadata repair disclosure.
 

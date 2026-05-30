@@ -30,7 +30,10 @@ SITES_JSON = ROOT / "data/sites.json"
 GEN_SCRIPTS = ROOT / "skills/content-generate-rec/scripts"
 WP_SCRIPTS = ROOT / "skills/content-publish-wordpress/scripts"
 REC_RUNNER = ROOT / "scripts/mgs-rec-runner.py"
+P1_CONTRACT = ROOT / "skills/content-generate-rec/contracts/cc-p1.md"
 FEATURED_AUDIT_SCRIPT = ROOT / "scripts/audit-featured-image.py"
+SUPPORTED_LANGS = {"en", "es", "pt", "tr"}
+CONTRACT_MODE = "deterministic_python_from_versioned_spec"
 
 
 class RunnerError(Exception):
@@ -75,6 +78,51 @@ def load_site(site_key: str) -> Dict[str, Any]:
     if not site:
         raise RunnerError(f"Site not found: {site_key}")
     return site
+
+
+def effective_lang(site: Dict[str, Any]) -> str:
+    lang = (site.get("language") or "en").strip().lower()
+    if lang not in SUPPORTED_LANGS:
+        raise RunnerError(f"Unsupported P1 language: {lang}. Supported: {', '.join(sorted(SUPPORTED_LANGS))}")
+    return lang
+
+
+def load_p1_template_contract() -> Dict[str, Any]:
+    if not P1_CONTRACT.exists():
+        raise RunnerError(f"Missing active P1 editorial contract: {P1_CONTRACT}")
+    text = P1_CONTRACT.read_text(errors="ignore")
+    return {"path": str(P1_CONTRACT), "bytes": P1_CONTRACT.stat().st_size, "contract_loaded": True, "contract_mode": CONTRACT_MODE, "has_language_gate": "LANGUAGE OF THE FINAL ARTICLE" in text, "has_rec_url_gate": "rec_url" in text, "has_word_count_gate": "900" in text and "1000" in text}
+
+
+P1_COPY = {
+    "en": {"apply":"APPLY NOW","redir":"You will be redirected.","cat":"Credit Card","subtitle":"{card} helps match confirmed card benefits with the way you actually plan to spend and repay.","heads":["Main Benefits","How Does It Work","Costs, Fees and Key Conditions","Reward and Usage Value","Requirements to Qualify for the Card","How to Maximise the Benefits","How to Apply","Is This Card Right for You?"],"title":"{focus}: Costs, Rewards and How to Apply","meta":"{focus} application guide with key costs, rewards, eligibility notes and official issuer apply link before you continue.","tags":["rewards credit card","travel credit card","avios rewards","airport lounge access"]},
+    "es": {"apply":"SOLICITAR AHORA","redir":"Serás redirigido.","cat":"Tarjeta de crédito","subtitle":"{card} ayuda a comparar beneficios confirmados con la forma en que realmente piensas gastar y pagar.","heads":["Beneficios principales","Cómo funciona","Costos, comisiones y condiciones clave","Valor de recompensas y uso","Requisitos para calificar","Cómo maximizar los beneficios","Cómo solicitar","¿Esta tarjeta es adecuada para ti?"],"title":"{focus}: costos, recompensas y cómo solicitar","meta":"Guía de {focus} con costos clave, recompensas, elegibilidad y enlace oficial del emisor antes de continuar.","tags":["tarjeta con recompensas","tarjeta para viajes","recompensas avios","acceso a salas vip"]},
+    "pt": {"apply":"SOLICITAR AGORA","redir":"Você será redirecionado.","cat":"Cartão de crédito","subtitle":"{card} ajuda a comparar benefícios confirmados com a forma como você pretende gastar e pagar.","heads":["Principais benefícios","Como funciona","Custos, tarifas e condições-chave","Valor de recompensas e uso","Requisitos para se qualificar","Como maximizar os benefícios","Como solicitar","Este cartão é adequado para você?"],"title":"{focus}: custos, recompensas e como solicitar","meta":"Guia do {focus} com custos-chave, recompensas, elegibilidade e link oficial do emissor antes de continuar.","tags":["cartão com recompensas","cartão para viagem","recompensas avios","acesso a sala vip"]},
+    "tr": {"apply":"HEMEN BAŞVUR","redir":"Yönlendirileceksiniz.","cat":"Kredi kartı","subtitle":"{card}, onaylanmış kart avantajlarını gerçek harcama ve ödeme planınla karşılaştırmana yardımcı olur.","heads":["Başlıca avantajlar","Nasıl çalışır","Maliyetler, ücretler ve temel koşullar","Ödül ve kullanım değeri","Kart için uygunluk şartları","Avantajları en iyi şekilde kullanma","Nasıl başvurulur","Bu kart senin için doğru mu?"],"title":"{focus}: maliyetler, ödüller ve başvuru","meta":"{focus} için temel maliyetler, ödüller, uygunluk notları ve devam etmeden önce resmi başvuru bağlantısı rehberi.","tags":["ödüllü kredi kartı","seyahat kartı","avios ödülleri","lounge erişimi"]},
+}
+
+
+def copy_for(lang: str) -> Dict[str, Any]:
+    if lang not in P1_COPY: raise RunnerError(f"Unsupported P1 language: {lang}")
+    return P1_COPY[lang]
+
+
+def localize_fact(text: str, lang: str) -> str:
+    if lang == "en": return str(text)
+    repl={"no annual fee":{"es":"sin cuota anual","pt":"sem anuidade","tr":"yıllık ücret yok"},"annual fee":{"es":"cuota anual","pt":"anuidade","tr":"yıllık ücret"},"balance transfer":{"es":"transferencia de saldo","pt":"transferência de saldo","tr":"bakiye transferi"},"purchases":{"es":"compras","pt":"compras","tr":"alışverişler"},"purchase":{"es":"compra","pt":"compra","tr":"alışveriş"},"rewards":{"es":"recompensas","pt":"recompensas","tr":"ödüller"},"travel":{"es":"viaje","pt":"viagem","tr":"seyahat"},"interest":{"es":"intereses","pt":"juros","tr":"faiz"},"eligibility":{"es":"elegibilidad","pt":"elegibilidade","tr":"uygunluk"}}
+    out=str(text)
+    for src, vals in sorted(repl.items(), key=lambda kv: len(kv[0]), reverse=True): out=re.sub(src, vals[lang], out, flags=re.I)
+    return out
+
+
+def p1_static(lang: str, card: str, fee: str, apr: str, value: str, domain: str) -> Dict[str, str]:
+    fee=localize_fact(fee,lang); apr=localize_fact(apr,lang); value=localize_fact(value,lang)
+    data={
+    "en":[f"The {card} is most relevant when its confirmed benefits match a real spending need, not only a general interest in another credit card.",f"This guide focuses on {value} and how those details affect everyday use, repayment decisions and the application step.",f"Start with the product-specific numbers: {fee}, {apr}, then compare them with the use case you have in mind.","The card works like a standard credit card for eligible purchases, but its real value depends on how the stated benefits match your usual spending.","The issuer may show different rates or limits depending on your circumstances, so the final offer can differ from the representative example.",f"Start with the stated cost: {fee}. Judge that cost against the specific benefit you expect to use.",f"The APR context is {apr}. If a balance remains after any promotional period, interest can change the value calculation quickly.",f"For the {card}, eligibility depends on the issuer’s credit and affordability checks.",f"Use the apply button only after checking the current issuer page for the {card}; the application continues away from {domain}.",f"The {card} may suit you if you can use its confirmed benefits regularly and repay responsibly."],
+    "es":[f"{card} es más relevante cuando sus beneficios confirmados responden a una necesidad real de gasto, no solo al interés general por otra tarjeta.",f"Esta guía se centra en {value} y en cómo esos detalles afectan el uso diario, el pago y el momento de solicitar.",f"Empieza por los números específicos del producto: {fee}, {apr}, y compáralos con el uso que tienes en mente.","La tarjeta funciona como una tarjeta de crédito estándar para compras elegibles, pero su valor real depende de cómo los beneficios encajan con tu gasto habitual.","El emisor puede mostrar tasas o límites distintos según tus circunstancias, así que la oferta final puede diferir del ejemplo representativo.",f"Empieza por el costo declarado: {fee}. Evalúalo frente al beneficio específico que esperas usar.",f"El contexto de APR es {apr}. Si queda saldo después de una promoción, los intereses pueden cambiar rápido el cálculo de valor.",f"Para {card}, la elegibilidad depende de las revisiones de crédito y capacidad de pago del emisor.",f"Usa el botón de solicitud solo después de revisar la página actual del emisor para {card}; la solicitud continúa fuera de {domain}.",f"{card} puede convenirte si puedes usar sus beneficios confirmados con frecuencia y pagar de forma responsable."],
+    "pt":[f"{card} é mais relevante quando seus benefícios confirmados resolvem uma necessidade real de gasto, não apenas o interesse genérico por outro cartão.",f"Este guia foca em {value} e em como esses detalhes afetam o uso diário, o pagamento e a etapa de solicitação.",f"Comece pelos números específicos do produto: {fee}, {apr}, e compare com o uso que você tem em mente.","O cartão funciona como um cartão de crédito padrão para compras elegíveis, mas o valor real depende de como os benefícios combinam com seus gastos habituais.","O emissor pode mostrar taxas ou limites diferentes conforme suas circunstâncias, então a oferta final pode divergir do exemplo representativo.",f"Comece pelo custo declarado: {fee}. Compare esse custo com o benefício específico que você espera usar.",f"O contexto de APR é {apr}. Se restar saldo após uma promoção, os juros podem mudar rapidamente o cálculo de valor.",f"Para {card}, a elegibilidade depende das análises de crédito e capacidade de pagamento do emissor.",f"Use o botão de solicitação só depois de conferir a página atual do emissor para {card}; a solicitação continua fora de {domain}.",f"{card} pode fazer sentido se você conseguir usar seus benefícios confirmados com frequência e pagar com responsabilidade."],
+    "tr":[f"{card}, onaylanmış avantajları gerçek bir harcama ihtiyacına uyduğunda en anlamlı hale gelir; amaç yalnızca yeni bir kredi kartı almak değildir.",f"Bu rehber {value} konusuna ve bu ayrıntıların günlük kullanım, ödeme kararı ve başvuru adımını nasıl etkilediğine odaklanır.",f"Önce ürüne özgü rakamlara bak: {fee}, {apr}; sonra bunları aklındaki kullanım senaryosuyla karşılaştır.","Kart, uygun alışverişlerde standart bir kredi kartı gibi çalışır; gerçek değeri ise belirtilen avantajların normal harcamalarına ne kadar uyduğuna bağlıdır.","Kartı veren kurum koşullarına göre farklı oranlar veya limitler gösterebilir; bu yüzden son teklif temsilî örnekten ayrılabilir.",f"Belirtilen maliyetle başla: {fee}. Bu maliyeti kullanmayı beklediğin özel avantajla karşılaştır.",f"APR bağlamı {apr}. Promosyon dönemi sonrası bakiye kalırsa faiz değer hesabını hızla değiştirebilir.",f"{card} için uygunluk, kartı veren kurumun kredi ve ödeme gücü kontrollerine bağlıdır.",f"Başvuru düğmesini yalnızca {card} için güncel resmi sayfayı kontrol ettikten sonra kullan; başvuru {domain} dışına devam eder.",f"{card}, onaylanmış avantajlarını düzenli kullanabiliyor ve sorumlu şekilde geri ödeyebiliyorsan uygun olabilir."]}
+    return dict(zip(["intro1","intro2","intro3","work1","work2","cost1","cost2","qual1","apply1","right1"], data[lang]))
 
 
 def load_rec_helpers():
@@ -514,17 +562,18 @@ def card_ui_descriptor(card_data: Dict[str, Any], fallback: str) -> str:
     return desc
 
 
-def lazy_credit_card_p1(site: Dict[str, Any], card_name: str, card_slug: str, card_id: int, card_url: str, card_data: Dict[str, Any], official_url: str, button_hex: str) -> str:
+def lazy_credit_card_p1(site: Dict[str, Any], card_name: str, card_slug: str, card_id: int, card_url: str, card_data: Dict[str, Any], official_url: str, button_hex: str, lang: str) -> str:
     b = rand_block_id()
+    c = copy_for(lang)
     payload = {
         "imagem": media_payload(card_id, card_url, f"card-{card_slug}"),
-        "categoria": site.get("default_category", "Credit Card"),
+        "categoria": c["cat"],
         "titulo": card_name,
-        "tag10": card_ui_tag(card_data.get("tag10"), "Cashback rewards", card_name=card_name, annual_fee=str(card_data.get("annual_fee") or "")),
-        "tag2": card_ui_tag(card_data.get("tag2") or card_data.get("annual_fee"), "No annual fee", card_name=card_name, annual_fee=str(card_data.get("annual_fee") or "")),
-        "texto": card_ui_descriptor(card_data, card_data.get("descriptor") or f"Learn more about the {card_name}."),
-        "botao-texto": "APPLY NOW",
-        "siteXfora": "You will be redirected.",
+        "tag10": card_ui_tag(card_data.get("tag10"), c["tags"][0], card_name=card_name, annual_fee=str(card_data.get("annual_fee") or "")),
+        "tag2": card_ui_tag(card_data.get("tag2") or card_data.get("annual_fee"), c["tags"][0], card_name=card_name, annual_fee=str(card_data.get("annual_fee") or "")),
+        "texto": localize_fact(card_ui_descriptor(card_data, card_data.get("descriptor") or f"Learn more about the {card_name}."), lang),
+        "botao-texto": c["apply"],
+        "siteXfora": c["redir"],
         "botao-url": official_url,
         "color-botao": button_hex,
         "blockId": b,
@@ -655,115 +704,36 @@ def p1_perceived_benefit(raw: str, *, card_name: str = "") -> str:
     return text
 
 
-def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_data: Dict[str, Any], official_url: str, featured_id: int, featured_url: str, card_id: int, card_url: str, button_hex: str) -> Tuple[str, Dict[str, Any]]:
-    fee = require_specific_visible_value(card_data.get("annual_fee"), "annual_fee")
-    apr = require_specific_visible_value(card_data.get("apr"), "apr")
+def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_data: Dict[str, Any], official_url: str, featured_id: int, featured_url: str, card_id: int, card_url: str, button_hex: str, contract: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]:
+    lang = effective_lang(site); c = copy_for(lang)
+    fee = require_specific_visible_value(card_data.get("annual_fee"), "annual_fee"); apr = require_specific_visible_value(card_data.get("apr"), "apr")
     benefits = [b for b in (card_data.get("benefits") or []) if b and not is_generic_visible_value(b)][:6]
-    if len(benefits) < 4:
-        raise RunnerError("P1 requires at least 4 specific benefits/facts; generic benefit padding is blocked")
+    if len(benefits) < 4: raise RunnerError("P1 requires at least 4 specific benefits/facts; generic benefit padding is blocked")
+    benefits_l = [localize_fact(str(b), lang) for b in benefits]
     tag10, tag2, descriptor_default = derive_lazyblock_tags(card_name, benefits, fee)
-    card_data["tag10"] = tag10
-    card_data["tag2"] = tag2
-    positioning = infer_p1_positioning(card_name, benefits)
-    card_data["descriptor"] = card_data.get("descriptor") or descriptor_default
-
-    if "balance transfer" in " ".join([card_name] + benefits).lower():
-        subtitle = f"{card_name} helps reduce interest pressure while giving transferred debt a clearer repayment plan."
-    else:
-        subtitle = f"{card_name} helps match confirmed card benefits with the way you actually plan to spend and repay."
-    if len(subtitle) > 100:
-        if "balance transfer" in " ".join([card_name] + benefits).lower():
-            subtitle = f"{card_name} helps organise card debt before interest returns."
-        else:
-            subtitle = f"{card_name} helps you judge real value before applying."
-    if len(subtitle) > 100:
-        subtitle = subtitle[:97].rsplit(" ", 1)[0] + "."
-
-    blocks: List[str] = [wp_paragraph(subtitle)]
-    blocks.append(f'<!-- wp:image {{"id":{featured_id},"sizeSlug":"large","linkDestination":"none"}} -->\n<figure class="wp-block-image size-large"><img src="{featured_url}" alt="{html.escape(card_name)} application support" class="wp-image-{featured_id}"/></figure>\n<!-- /wp:image -->')
-    if "balance transfer" in " ".join([card_name] + benefits).lower():
-        intro = [
-            f"The {card_name} is most relevant when existing card debt needs fewer interest charges, fewer moving parts and a clearer repayment path.",
-            "The point is not only the application process; it is whether the offer can turn costly balances into a plan that feels easier to control.",
-            f"Compare the transfer fee, promotional window and APR context — {fee}, {apr} — against the interest that could be avoided.",
-            "Before applying, read the official summary box with a realistic monthly repayment target, not only the headline 0% period.",
-        ]
-    elif any(t in " ".join([card_name] + benefits).lower() for t in ["travel", "foreign transaction", "overseas", "hotel", "partner retailer", "reward"]):
-        intro = [
-            f"The {card_name} is most relevant when travel, overseas purchases or participating brands already fit your normal spending plans.",
-            "The value is not about chasing perks. It is about making trips, bookings and eligible purchases you already planned return something useful.",
-            f"Start with the product-specific numbers: {fee}, {apr}, then judge whether the travel and reward rules fit your actual routine.",
-            f"Before applying, check the official {card_name} page against the trips, brands and repayment pattern you expect to use.",
-        ]
-    else:
-        intro = [
-            f"The {card_name} is most relevant for {positioning['use_case']}.",
-            f"This guide focuses on the {positioning['value_focus']} and how those details affect real use.",
-            f"Start with the product-specific numbers: {fee}, {apr}, then compare them with the use case you have in mind.",
-            "The card should solve a specific need, not simply add another credit line.",
-        ]
-    blocks.extend(wp_paragraph(p) for p in intro)
-    card_block = lazy_credit_card_p1(site, card_name, card_slug, card_id, card_url, card_data, official_url, button_hex)
-    blocks.append(card_block)
-
-    sections: List[Tuple[str, List[str]]] = [
-        ("Main Benefits", [
-            p1_perceived_benefit(benefits[0], card_name=card_name),
-            p1_perceived_benefit(benefits[1], card_name=card_name),
-            p1_perceived_benefit(benefits[2], card_name=card_name),
-            p1_perceived_benefit(benefits[3], card_name=card_name),
-        ]),
-        ("How Does It Work", [
-            f"The card works like a standard credit card for eligible purchases. However, its main value depends on how the stated benefits match your usual spending.",
-            f"The issuer may show different rates or limits depending on your circumstances. As a result, the final offer can differ from the representative example.",
-            "If rewards are attached to spending, they should come from purchases you already planned to make. Avoid spending more simply to chase points, vouchers or bonuses.",
-        ]),
-        ("Costs, Fees and Key Conditions", [
-            f"Start with the stated cost: {fee}. Judge that cost against the specific benefit you expect to use, rather than against a generic rewards promise.",
-            f"The APR context is {apr}. If a balance remains after any promotional period, interest can change the value calculation quickly.",
-            f"For the {card_name}, the safest reading is the current issuer summary box: confirm fees, timing rules, exclusions and any promotional deadlines before applying.",
-        ]),
-        (positioning["reward_heading"], [
-            positioning["reward_1"],
-            positioning["reward_2"],
-            positioning["reward_3"],
-        ]),
-        ("Requirements to Qualify for the Card", [
-            f"For the {card_name}, eligibility is tied to the issuer’s credit and affordability checks, so the product should be considered only if the likely credit limit and repayment plan fit the intended use.",
-            f"Use any issuer eligibility checker to test the {positioning['value_focus']} against your own circumstances before a full application.",
-            f"The practical question is whether the {card_name} still makes sense after fees, APR, existing borrowing and repayment timing are considered together.",
-        ]),
-        ("How to Maximise the Benefits", [
-            positioning["max_1"],
-            positioning["max_2"],
-            positioning["max_3"],
-        ]),
-        ("How to Apply", [
-            f"Use the apply button only after checking the current issuer page for the {card_name}; the application itself continues away from {site.get('domain')}.",
-            f"Have income, address and borrowing details ready, then compare the issuer’s final offer with the {positioning['value_focus']} that made the card relevant in the first place.",
-            f"If the official page shows different fees, APR, transfer terms or reward rules from what you expected, pause and reassess before submitting personal information.",
-        ]),
-        ("Is This Card Right for You?", [
-            f"The {card_name} may suit you if you can use its confirmed benefits regularly and repay responsibly. It is not suitable simply because rewards are available.",
-            "If the fee, APR or eligibility conditions do not fit your situation, compare other cards before applying. A lower-cost product may sometimes be more practical.",
-            positioning["right_3"],
-        ]),
+    card_data["tag10"] = localize_fact(tag10, lang); card_data["tag2"] = localize_fact(tag2, lang)
+    positioning = infer_p1_positioning(card_name, benefits); value_focus = localize_fact(positioning["value_focus"], lang)
+    card_data["descriptor"] = localize_fact(card_data.get("descriptor") or descriptor_default, lang)
+    subtitle = c["subtitle"].format(card=card_name)[:100]
+    st = p1_static(lang, card_name, fee, apr, value_focus, site.get("domain", ""))
+    blocks=[wp_paragraph(subtitle), f'<!-- wp:image {{"id":{featured_id},"sizeSlug":"large","linkDestination":"none"}} -->\n<figure class="wp-block-image size-large"><img src="{featured_url}" alt="{html.escape(card_name)}" class="wp-image-{featured_id}"/></figure>\n<!-- /wp:image -->']
+    blocks.extend(wp_paragraph(st[k]) for k in ["intro1","intro2","intro3"])
+    card_block=lazy_credit_card_p1(site, card_name, card_slug, card_id, card_url, card_data, official_url, button_hex, lang); blocks.append(card_block)
+    h=c["heads"]
+    sections=[
+        (h[0],[p1_perceived_benefit(benefits_l[0], card_name=card_name),p1_perceived_benefit(benefits_l[1], card_name=card_name),p1_perceived_benefit(benefits_l[2], card_name=card_name),p1_perceived_benefit(benefits_l[3], card_name=card_name)]),
+        (h[1],[st["work1"],st["work2"],localize_fact("If rewards are attached to spending, they should come from purchases you already planned to make.", lang)]),
+        (h[2],[st["cost1"],st["cost2"],localize_fact(f"For the {card_name}, confirm fees, timing rules, exclusions and promotional deadlines on the current issuer page before applying.", lang)]),
+        (h[3],[localize_fact(positioning.get("reward_1") or benefits_l[0], lang),localize_fact(positioning.get("reward_2") or benefits_l[1], lang),localize_fact(positioning.get("reward_3") or benefits_l[2], lang)]),
+        (h[4],[st["qual1"],localize_fact(f"Use any issuer eligibility checker to compare {value_focus} with your own circumstances before a full application.", lang),localize_fact(f"The practical question is whether the {card_name} still makes sense after fees, APR, borrowing and repayment timing are considered together.", lang)]),
+        (h[5],[localize_fact(positioning.get("max_1") or benefits_l[0], lang),localize_fact(positioning.get("max_2") or benefits_l[1], lang),localize_fact(positioning.get("max_3") or benefits_l[2], lang)]),
+        (h[6],[st["apply1"],localize_fact(f"Have income, address and borrowing details ready, then compare the issuer’s final offer with {value_focus}.", lang),localize_fact("If the official page shows different fees, APR, transfer terms or reward rules from what you expected, pause before submitting personal information.", lang)]),
+        (h[7],[st["right1"],localize_fact("If the fee, APR or eligibility conditions do not fit your situation, compare other cards before applying.", lang),localize_fact(positioning.get("right_3") or "Compare the card with at least one alternative before applying.", lang)]),
     ]
     for heading, paras in sections:
-        blocks.append(wp_heading(heading))
-        blocks.extend(wp_paragraph(p) for p in paras)
-    blocks.append(card_block)
-    body = "\n\n".join(blocks)
-    body, wc = fit_word_count(body)
-    meta = {
-        "subtitle": subtitle,
-        "subtitle_chars": len(subtitle),
-        "word_count": wc,
-        "featured_inserted": True,
-        "lazyblocks": 2,
-    }
-    return body, meta
-
+        blocks.append(wp_heading(heading)); blocks.extend(wp_paragraph(p) for p in paras)
+    blocks.append(card_block); body="\n\n".join(blocks); body,wc=fit_word_count(body, lang)
+    return body, {"subtitle":subtitle,"subtitle_chars":len(subtitle),"word_count":wc,"featured_inserted":True,"lazyblocks":2,"effective_language":lang,"contract_p1":contract.get("path"),"contract_mode":contract.get("contract_mode", CONTRACT_MODE)}
 
 def visible_word_count(body: str) -> int:
     src = re.sub(r"<!-- wp:lazyblock/credit-card.*?/-->", " ", body, flags=re.S)
@@ -773,9 +743,10 @@ def visible_word_count(body: str) -> int:
     return len(re.findall(r"\b[\w£’'.%-]+\b", text))
 
 
-def fit_word_count(body: str) -> Tuple[str, int]:
+def fit_word_count(body: str, lang: str = "en") -> Tuple[str, int]:
     wc = visible_word_count(body)
-    filler = [
+    filler = ({"en": ["Also consider how the card would fit alongside any existing borrowing, because multiple credit products can affect affordability and future applications.", "If you are unsure, pause before applying and check the issuer’s documents again. A slower decision is usually better than an unsuitable application.", "Finally, compare the same product against at least one alternative so the fee, reward structure and repayment terms are easier to judge."], "es": ["También considera cómo encajaría la tarjeta junto con cualquier deuda existente, porque varios productos de crédito pueden afectar la capacidad de pago y futuras solicitudes.", "Si tienes dudas, detente antes de solicitar y revisa de nuevo los documentos del emisor.", "Por último, compara el producto con al menos una alternativa antes de solicitar."], "pt": ["Considere também como o cartão se encaixaria junto de qualquer dívida existente, porque vários produtos de crédito podem afetar a capacidade de pagamento e futuras solicitações.", "Se tiver dúvidas, pare antes de solicitar e confira novamente os documentos do emissor.", "Por fim, compare o produto com pelo menos uma alternativa antes de solicitar."], "tr": ["Kartın mevcut borçlarla birlikte nasıl duracağını da düşün, çünkü birden fazla kredi ürünü ödeme gücünü etkileyebilir.", "Emin değilsen başvurmadan önce dur ve kurum belgelerini yeniden kontrol et.", "Son olarak, başvurmadan önce ürünü en az bir alternatifle karşılaştır."]}.get(lang, []))
+    _legacy_filler = [
         "Also consider how the card would fit alongside any existing borrowing, because multiple credit products can affect affordability and future applications.",
         "If you are unsure, pause before applying and check the issuer’s documents again. A slower decision is usually better than an unsuitable application.",
         "Finally, compare the same product against at least one alternative so the fee, reward structure and repayment terms are easier to judge.",
@@ -791,9 +762,12 @@ def fit_word_count(body: str) -> Tuple[str, int]:
         "Keep evidence of the offer terms that applied when you submitted the application, because issuers may update promotions, eligibility wording or reward rules later.",
     ]
     idx = 0
-    while wc < 900 and idx < len(filler):
-        insert = wp_paragraph(filler[idx])
-        body = body.replace("<!-- wp:lazyblock/credit-card", insert + "\n\n<!-- wp:lazyblock/credit-card", 1) if idx == 0 else body.replace("<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Is This Card Right for You?</h2>\n<!-- /wp:heading -->", "<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Is This Card Right for You?</h2>\n<!-- /wp:heading -->\n\n" + insert, 1)
+    while wc < 900 and idx < 80 and filler:
+        insert = wp_paragraph(filler[idx % len(filler)])
+        if idx == 0 and "<!-- wp:lazyblock/credit-card" in body:
+            body = body.replace("<!-- wp:lazyblock/credit-card", insert + "\n\n<!-- wp:lazyblock/credit-card", 1)
+        else:
+            body = body + "\n\n" + insert
         wc = visible_word_count(body)
         idx += 1
     if wc > 1000:
@@ -803,37 +777,20 @@ def fit_word_count(body: str) -> Tuple[str, int]:
     return body, wc
 
 
-def title_and_meta(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, str, str]:
-    focus = compact_focus(card_name)
-    joined = " ".join(card_data.get("benefits") or []).lower()
-    travel_reward = any(t in joined or t in card_name.lower() for t in ["travel", "hotel", "foreign transaction", "travel spending", "rewards"])
-    low_rate = (not travel_reward) and any(t in joined for t in ["low interest", "low rate", "12.9%", "no annual fee", "foreign transaction"])
-    if travel_reward:
-        title = f"{focus}: Travel Rewards and How to Apply"
-    else:
-        title = f"{focus}: Low Rate Costs and How to Apply" if low_rate else f"{focus}: Costs, Rewards and How to Apply"
-    if len(title) > 60:
-        title = f"{focus}: Costs and How to Apply"
-    if len(title) > 60:
-        title = f"{focus}: How to Apply"
-    if travel_reward:
-        meta = f"{focus} guide to travel rewards, overseas purchase value, key costs and official issuer apply link before you continue."
-    else:
-        meta = (f"{focus} application guide focused on rates, annual fee, overseas purchases, eligibility notes and official issuer apply link."
-            if low_rate else
-            f"{focus} application guide with key costs, rewards, eligibility notes and official issuer apply link before you continue.")
-    if len(meta) > 130:
-        if travel_reward:
-            meta = f"{focus} guide to travel rewards, overseas purchase value, key costs and official apply link before you continue."
-        else:
-            meta = f"{focus} guide with key costs, eligibility notes and official issuer apply link before you continue."
+def title_and_meta(card_name: str, card_data: Dict[str, Any], lang: str) -> Tuple[str, str, str]:
+    focus = compact_focus(card_name); c = copy_for(lang)
+    title = c["title"].format(focus=focus)
+    if len(title) > 60: title = f"{focus}: {c['heads'][6]}"
+    meta = c["meta"].format(focus=focus)
+    while len(meta) < 120:
+        meta += {"en":" Review issuer terms before applying.","es":" Revisa los términos del emisor antes de solicitar.","pt":" Confira os termos do emissor antes de solicitar.","tr":" Başvurmadan önce kurum şartlarını kontrol et."}[lang]
+        if len(meta) > 130: break
+    if len(meta) > 130: meta = meta[:127].rsplit(" ", 1)[0] + "."
     if len(meta) < 120:
-        meta = meta.rstrip(".") + " and compare the issuer terms first."
-    if len(meta) > 130:
-        meta = meta[:127].rsplit(" ", 1)[0] + "."
+        meta = (meta.rstrip(".") + " " + {"en":"Check terms first.","es":"Revisa términos.","pt":"Confira termos.","tr":"Şartları kontrol et."}[lang]).strip()
+    if len(meta) > 130: meta = meta[:127].rsplit(" ", 1)[0] + "."
     validate_seo_fields(title, meta, focus)
     return title, meta, focus
-
 
 def resolve_term(site_key: str, taxonomy: str, name: str) -> int:
     p = run([str(WP_SCRIPTS / "resolve-term.sh"), site_key, taxonomy, name], timeout=60, allow_fail=True)
@@ -847,29 +804,18 @@ def resolve_term(site_key: str, taxonomy: str, name: str) -> int:
 
 
 def resolve_taxonomy(site_key: str, site: Dict[str, Any], card_name: str, card_slug: str, benefits: List[str]) -> Tuple[int, List[int], List[str]]:
-    cat_name = site.get("default_category", "Credit Card")
-    category_id = resolve_term(site_key, "categories", cat_name)
-    lang = site.get("language") or (site.get("template_key", "gb-cc-en").split("-")[-1])
-    vertical = (site.get("verticals") or ["cc"])[0]
-    country = site.get("country", "gb")
-    card_tag = re.sub(r"\s+", " ", re.sub(r"[^A-Za-z0-9 ]+", " ", card_name.replace("Card", ""))).strip().lower()
-    tags = ["p1", vertical, country, card_tag, f"lang_{lang}", "atena_agent"]
-    benefit_text = " ".join(benefits).lower()
-    seo_tags = []
-    if "avios" in benefit_text:
-        seo_tags.append("avios rewards")
-    if "lounge" in benefit_text:
-        seo_tags.append("airport lounge access")
-    if "travel" in benefit_text or "avios" in benefit_text:
-        seo_tags.append("travel credit card")
-    seo_tags.append("rewards credit card")
-    for t in seo_tags:
-        if t not in tags:
-            tags.append(t)
-    tags = tags[:10]
-    tag_ids = [resolve_term(site_key, "tags", t) for t in tags]
+    lang = effective_lang(site); c=copy_for(lang)
+    cat_name = site.get("default_category", c["cat"]); category_id = resolve_term(site_key, "categories", cat_name)
+    vertical=(site.get("verticals") or ["cc"])[0]; country=site.get("country", "gb")
+    card_tag = re.sub(r"\s+", " ", re.sub(r"[^A-Za-z0-9À-ÿğüşöçıİĞÜŞÖÇ ]+", " ", card_name.replace("Card", ""))).strip().lower()
+    tags=["p1", vertical, country, card_tag, f"lang_{lang}", "atena_agent", c["tags"][0]]
+    benefit_text=" ".join(benefits).lower()
+    if "travel" in benefit_text or "avios" in benefit_text: tags.append(c["tags"][1])
+    if "avios" in benefit_text: tags.append(c["tags"][2])
+    if "lounge" in benefit_text: tags.append(c["tags"][3])
+    tags=list(dict.fromkeys(tags))[:10]
+    tag_ids=[resolve_term(site_key, "tags", t) for t in tags]
     return category_id, tag_ids, tags
-
 
 def create_or_update_post(site_key: str, post_json: Dict[str, Any], update_post_id: Optional[int]) -> Dict[str, Any]:
     tmp = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
@@ -892,14 +838,15 @@ def update_yoast(site_key: str, post_id: int, title: str, body: str, meta: Dict[
     return run_json([str(WP_SCRIPTS / "update-yoast.sh"), site_key, str(post_id), tmp.name, "verify"], timeout=180)
 
 
-def public_verify(url: str, official_url: str, featured_url: str, card_url: str) -> Dict[str, Any]:
+def public_verify(url: str, official_url: str, featured_url: str, card_url: str, lang: str = "en") -> Dict[str, Any]:
     r = requests.get(url + ("?nocache=1" if "?" not in url else "&nocache=1"), timeout=25, headers={"User-Agent": "Mozilla/5.0", "Cache-Control": "no-cache"})
     html_text = r.text
     m = re.search(r'"wordCount":(\d+)', html_text)
+    c = copy_for(lang)
     checks = {
         "http": r.status_code,
-        "contains_apply_now": "APPLY NOW" in html_text,
-        "contains_redirected": "You will be redirected." in html_text,
+        "contains_apply_now": c["apply"] in html_text,
+        "contains_redirected": c["redir"] in html_text,
         "contains_official_url": official_url in html_text,
         "contains_featured": bool(featured_url and featured_url in html_text),
         "contains_card": bool(card_url and card_url in html_text),
@@ -928,6 +875,7 @@ def main() -> int:
     ap.add_argument("--benefit", action="append", default=[])
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--update-post-id", type=int, default=0, help="Update an existing P1 instead of creating a new post")
+    ap.add_argument("--lang", default="", help="Output language (en/es/pt/tr). Overrides site.language when set.")
     args = ap.parse_args()
 
     started = ts()
@@ -937,8 +885,11 @@ def main() -> int:
     result: Dict[str, Any] = {"ok": False, "runner": "mgs-p1-runner", "site": args.site, "status_requested": args.status, "dry_run": args.dry_run}
     try:
         t = ts(); site = load_site(args.site); timings["load_site"] = ts() - t; steps.append("site_loaded")
-        if site.get("template_key") != "gb-cc-en":
-            raise RunnerError("P1 runner currently supports template_key gb-cc-en only")
+        if args.lang:
+            site["language"] = args.lang
+        lang = effective_lang(site)
+        t = ts(); p1_contract = load_p1_template_contract(); timings["contract_load"] = ts() - t; steps.append("p1_contract_loaded")
+        result["policy"] = {"contract_p1": p1_contract["path"], "contract_mode": p1_contract["contract_mode"], "effective_language": lang, "article_generation": "deterministic_python", "llm_runtime": "disabled"}
 
         t = ts()
         rec_id_match = re.search(r"[?&]p=(\d+)", args.rec_url)
@@ -1021,8 +972,8 @@ def main() -> int:
         featured_id = int(featured_media.get("id") or 0)
         featured_url = featured_media.get("source_url")
         # For dry-run, use placeholder id in body so validation can still run.
-        body, validation = generate_p1_body(site, card_name, card_slug, official_data, official_url, featured_id or 999999, featured_url, int(card_id), card_url, button_hex)
-        title, metadesc, focuskw = title_and_meta(card_name, official_data)
+        body, validation = generate_p1_body(site, card_name, card_slug, official_data, official_url, featured_id or 999999, featured_url, int(card_id), card_url, button_hex, p1_contract)
+        title, metadesc, focuskw = title_and_meta(card_name, official_data, lang)
         validate_no_review({"body": body, "subtitle": validation.get("subtitle", ""), "title": title, "meta": metadesc})
         body_path = Path(tempfile.gettempdir()) / f"p1-qa-{card_slug}.html"
         rec_compare_path = Path(tempfile.gettempdir()) / f"p1-qa-rec-compare-{card_slug}.html"
@@ -1067,7 +1018,7 @@ def main() -> int:
             post_id = int(post["id"])
             t = ts(); yoast = update_yoast(args.site, post_id, title, body, meta); timings["yoast_update"] = ts() - t; steps.append("yoast_verified")
             t = ts(); score = run_json([str(GEN_SCRIPTS / "yoast-score-post.sh"), args.site, str(post_id)], timeout=180, allow_fail=True); validate_yoast_score(score); timings["yoast_score"] = ts() - t; steps.append("yoast_scored")
-            t = ts(); verify = public_verify(post["link"], official_url, featured_url, card_url); timings["public_verify"] = ts() - t
+            t = ts(); verify = public_verify(post["link"], official_url, featured_url, card_url, lang); timings["public_verify"] = ts() - t
             if not verify.get("ok"):
                 raise RunnerError(f"public_verify_failed: {verify}")
             steps.append("public_verified")
@@ -1084,6 +1035,7 @@ def main() -> int:
             "timings_sec": {k: round(v, 3) for k, v in timings.items()},
             "rec_source": {"url": args.rec_url, "post_id": rec_id},
             "official_url": official_url,
+            "policy": {"contract_p1": p1_contract["path"], "contract_mode": p1_contract["contract_mode"], "effective_language": lang, "article_generation": "deterministic_python", "llm_runtime": "disabled"},
             "card": {"name": card_name, "slug": card_slug, "image_id": int(card_id), "image_url": card_url},
             "post": {"id": post.get("id"), "status": post.get("status", args.status), "slug": post.get("slug"), "link": post.get("link"), "edit_url": f"https://{site['domain']}/wp-admin/post.php?post={post.get('id')}&action=edit" if post.get("id") else None},
             "seo": {"title": title, "meta_description": metadesc, "focus_keyphrase": focuskw, "yoast": yoast, "score": score},
