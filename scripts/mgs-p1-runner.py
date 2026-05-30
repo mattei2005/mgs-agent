@@ -716,7 +716,9 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
     card_data["tag10"] = localize_fact(tag10, lang); card_data["tag2"] = localize_fact(tag2, lang)
     positioning = infer_p1_positioning(card_name, benefits); value_focus = localize_fact(positioning["value_focus"], lang)
     card_data["descriptor"] = localize_fact(card_data.get("descriptor") or descriptor_default, lang)
-    subtitle = c["subtitle"].format(card=card_name)[:100]
+    subtitle = c["subtitle"].format(card=card_name)
+    if len(subtitle) > 100:
+        subtitle = subtitle[:97].rsplit(" ", 1)[0].rstrip(" ,;:") + "."
     st = p1_static(lang, card_name, fee, apr, value_focus, site.get("domain", ""))
     blocks=[wp_paragraph(subtitle), f'<!-- wp:image {{"id":{featured_id},"sizeSlug":"large","linkDestination":"none"}} -->\n<figure class="wp-block-image size-large"><img src="{featured_url}" alt="{html.escape(card_name)}" class="wp-image-{featured_id}"/></figure>\n<!-- /wp:image -->']
     blocks.extend(wp_paragraph(st[k]) for k in ["intro1","intro2","intro3"])
