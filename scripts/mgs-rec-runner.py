@@ -188,14 +188,6 @@ def official_source_has_content(card_name: str, official_url: str, text: str) ->
     clean = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", text or ""))).strip().lower()
     if not clean or len(clean) < 500:
         return False, "official source has no meaningful body"
-    error_markers = [
-        "page not found", "we can’t find that page", "we can't find that page",
-        "sorry about this", "try our search tool", "we are sorry an error has occurred",
-        "error 1007", "access denied", "cloudflare", "temporarily unavailable",
-    ]
-    for marker in error_markers:
-        if marker in clean:
-            return False, f"official source appears to be an error page: {marker}"
     product_terms = [
         "credit card", "representative apr", "annual fee", "monthly fee", "balance transfer",
         "purchase rate", "eligibility", "apply", "rewards", "cashback", "avios", "mastercard", "visa",
@@ -203,6 +195,19 @@ def official_source_has_content(card_name: str, official_url: str, text: str) ->
     product_hits = [t for t in product_terms if t in clean]
     name_terms = meaningful_card_terms(card_name)
     name_hits = [t for t in name_terms if t in clean]
+    error_markers = [
+        "page not found", "we can’t find that page", "we can't find that page",
+        "try our search tool", "we are sorry an error has occurred",
+        "error 1007", "access denied", "cloudflare", "temporarily unavailable",
+    ]
+    for marker in error_markers:
+        if marker in clean:
+            return False, f"official source appears to be an error page: {marker}"
+    # Some issuer pages include support/footer copy like "we're truly sorry about this"
+    # while the product body is valid. Treat the phrase as an error marker only when
+    # the page does not otherwise expose product-specific terms.
+    if "sorry about this" in clean and len(product_hits) < 2 and not name_hits:
+        return False, "official source appears to be an error page: sorry about this"
     if len(product_hits) < 2:
         return False, "official source does not expose enough product content"
     if name_terms and not name_hits:
