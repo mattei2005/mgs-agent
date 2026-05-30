@@ -124,6 +124,10 @@ def build_rec_cmd(args: argparse.Namespace) -> List[str]:
     ]
     if args.lang:
         cmd += ["--lang", args.lang]
+        if args.allow_language_override:
+            cmd.append("--allow-language-override")
+        if args.allow_language_override:
+            cmd.append("--allow-language-override")
     if args.card_image_url:
         cmd += ["--card-image-url", args.card_image_url]
     if args.annual_fee:
@@ -245,7 +249,8 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--allow-disambiguation", action="store_true")
     ap.add_argument("--timeout", type=int, default=2400)
-    ap.add_argument("--lang", default="", help="Output language for the article (e.g. en, es, pt, tr). Optional; falls back to the site's configured language.")
+    ap.add_argument("--lang", default="", help="Debug-only language override. Production language comes from site.language.")
+    ap.add_argument("--allow-language-override", action="store_true", help="Allow --lang in dry-run/draft debug. Publish aborts if it conflicts with site.language.")
     args = ap.parse_args()
 
     started = time.time()
@@ -269,6 +274,8 @@ def main() -> int:
     }
 
     try:
+        if args.lang and not args.allow_language_override:
+            raise OrchestratorError("--lang is debug-only. Use site.language for production, or pass --allow-language-override for dry-run/draft debugging.")
         warnings.extend(validate_contract_preflight(args))
         steps.append("contract_preflight_passed")
 

@@ -1410,7 +1410,8 @@ def main() -> int:
     ap.add_argument("--card-image-url", default="", help="Optional direct card image URL; skips search-card-image fallback")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--allow-disambiguation", action="store_true")
-    ap.add_argument("--lang", default="", help="Output language (en/es/pt/tr). Overrides site.language when set.")
+    ap.add_argument("--lang", default="", help="Debug-only language override. Production language comes from site.language.")
+    ap.add_argument("--allow-language-override", action="store_true", help="Allow --lang in dry-run/draft debug. Publish aborts if it conflicts with site.language.")
     args = ap.parse_args()
     if not args.card_image_url:
         args.card_image_url = (
@@ -1435,8 +1436,14 @@ def main() -> int:
     try:
         t0 = time.time()
         site = load_site(args.site)
+        canonical_language = (site.get("language") or "").strip().lower()
         if args.lang:
-            site["language"] = args.lang
+            requested_language = args.lang.strip().lower()
+            if not args.allow_language_override:
+                raise RunnerError("--lang is debug-only. Use site.language for production, or pass --allow-language-override for dry-run/draft debugging.")
+            if args.status == "publish" and canonical_language and requested_language != canonical_language:
+                raise RunnerError(f"language_override_conflicts_with_site_language: site.language={canonical_language} --lang={requested_language}; publish blocked")
+            site["language"] = requested_language
         template_contract = load_rec_template_contract(site)
         card_slug = slugify(args.card)
         country = site.get("country", "gb")
