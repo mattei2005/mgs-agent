@@ -747,37 +747,68 @@ def visible_word_count(body: str) -> int:
 
 def fit_word_count(body: str, lang: str = "en") -> Tuple[str, int]:
     wc = visible_word_count(body)
-    filler = ({"en": ["Also consider how the card would fit alongside any existing borrowing, because multiple credit products can affect affordability and future applications.", "If you are unsure, pause before applying and check the issuer’s documents again. A slower decision is usually better than an unsuitable application.", "Finally, compare the same product against at least one alternative so the fee, reward structure and repayment terms are easier to judge."], "es": ["También considera cómo encajaría la tarjeta junto con cualquier deuda existente, porque varios productos de crédito pueden afectar la capacidad de pago y futuras solicitudes.", "Si tienes dudas, detente antes de solicitar y revisa de nuevo los documentos del emisor.", "Por último, compara el producto con al menos una alternativa antes de solicitar."], "pt": ["Considere também como o cartão se encaixaria junto de qualquer dívida existente, porque vários produtos de crédito podem afetar a capacidade de pagamento e futuras solicitações.", "Se tiver dúvidas, pare antes de solicitar e confira novamente os documentos do emissor.", "Por fim, compare o produto com pelo menos uma alternativa antes de solicitar."], "tr": ["Kartın mevcut borçlarla birlikte nasıl duracağını da düşün, çünkü birden fazla kredi ürünü ödeme gücünü etkileyebilir.", "Emin değilsen başvurmadan önce dur ve kurum belgelerini yeniden kontrol et.", "Son olarak, başvurmadan önce ürünü en az bir alternatifle karşılaştır."]}.get(lang, []))
-    _legacy_filler = [
-        "Also consider how the card would fit alongside any existing borrowing, because multiple credit products can affect affordability and future applications.",
-        "If you are unsure, pause before applying and check the issuer’s documents again. A slower decision is usually better than an unsuitable application.",
-        "Finally, compare the same product against at least one alternative so the fee, reward structure and repayment terms are easier to judge.",
-        "Think about how often the strongest benefit would be used during a normal year. Occasional use may not justify a fee or a more complex rewards structure.",
-        "Keep the official page open while applying so you can confirm the latest rates, exclusions and reward conditions before submitting personal information.",
-        "If your circumstances change, reassess the card rather than keeping it only for historic benefits. Credit products should continue to match your current budget today.",
+    localized = {
+        "en": [
+            "Also consider existing borrowing before applying, because another credit product can affect affordability and future applications.",
+            "If you are unsure, pause and check the issuer documents again before submitting personal details.",
+            "Compare at least one alternative so the fee, reward structure and repayment terms are easier to judge.",
+        ],
+        "es": [
+            "También considera cómo encajaría la tarjeta junto con cualquier deuda existente antes de solicitar.",
+            "Si tienes dudas, detente y revisa de nuevo los documentos del emisor.",
+            "Compara al menos una alternativa antes de enviar la solicitud.",
+        ],
+        "pt": [
+            "Considere também como o cartão se encaixaria junto de qualquer dívida existente antes de solicitar.",
+            "Se tiver dúvidas, pare e confira novamente os documentos do emissor.",
+            "Compare ao menos uma alternativa antes de enviar a solicitação.",
+        ],
+        "tr": [
+            "Başvurmadan önce kartın mevcut borçlarla birlikte nasıl duracağını da düşün.",
+            "Emin değilsen kişisel bilgileri göndermeden önce kurum belgelerini yeniden kontrol et.",
+            "Başvurmadan önce ürünü en az bir alternatifle karşılaştır.",
+        ],
+    }.get(lang, [])
+    generic_extra = [
+        "Think about how often the strongest benefit would be used during a normal year.",
+        "Occasional use may not justify a fee or a more complex rewards structure.",
+        "Keep the official page open while applying so you can confirm the latest rates and exclusions.",
+        "If your circumstances change, reassess the card rather than keeping it only for historic benefits.",
+        "Credit products should continue to match your current budget and repayment habits.",
         "Check whether the reward rules still match your spending habits before submitting the application.",
-        "Confirm the product’s specific promotional window, fees and post-promotional rate before relying on any headline offer.",
-        "Set a repayment plan before the promotional period ends, because any remaining balance may start accruing interest at the standard variable rate.",
-        "Do not spend more than you can realistically repay, and remember that missed payments can affect promotional rates and future credit access.",
-        "For travel-focused cards, estimate the cash value of lounge access, foreign-spend savings and insurance discounts against the monthly fee before applying.",
-        "If a cashback cap applies, compare that cap with your usual monthly spending so the expected return remains realistic rather than theoretical.",
-        "Keep evidence of the offer terms that applied when you submitted the application, because issuers may update promotions, eligibility wording or reward rules later.",
+        "Confirm the product’s specific fees and standard rate before relying on any headline offer.",
+        "Set a repayment plan early if you expect to carry a balance beyond the statement date.",
+        "Do not spend more than you can realistically repay from normal monthly income.",
+        "Missed payments can affect promotional rates, borrowing costs and future credit access.",
+        "For travel-focused cards, estimate foreign-spend savings against your expected trips.",
+        "If a cashback cap applies, compare that cap with your usual monthly spending.",
+        "Keep evidence of the offer terms that applied when you submitted the application.",
+        "Issuer terms can change, so the final check should happen immediately before applying.",
+        "The best fit is usually the card that solves a specific spending pattern.",
+        "A simple benefit can be more valuable than a larger reward you rarely use.",
     ]
-    idx = 0
-    while wc < 900 and idx < 80 and filler:
-        insert = wp_paragraph(filler[idx % len(filler)])
-        if idx == 0 and "<!-- wp:lazyblock/credit-card" in body:
+    filler = localized + generic_extra
+    used = {re.sub(r"\s+", " ", s).strip().lower() for s in re.findall(r"[^.!?]+[.!?]", re.sub(r"<[^>]+>", " ", html.unescape(body)))}
+    inserted = False
+    for sentence in filler:
+        if wc >= 900:
+            break
+        norm = re.sub(r"\s+", " ", sentence).strip().lower()
+        if norm in used:
+            continue
+        insert = wp_paragraph(sentence)
+        if not inserted and "<!-- wp:lazyblock/credit-card" in body:
             body = body.replace("<!-- wp:lazyblock/credit-card", insert + "\n\n<!-- wp:lazyblock/credit-card", 1)
+            inserted = True
         else:
             body = body + "\n\n" + insert
+        used.add(norm)
         wc = visible_word_count(body)
-        idx += 1
     if wc > 1000:
         raise RunnerError(f"P1 body word count above hard limit: {wc}")
     if wc < 900:
         raise RunnerError(f"P1 body word count below hard limit after expansion: {wc}")
     return body, wc
-
 
 def title_and_meta(card_name: str, card_data: Dict[str, Any], lang: str) -> Tuple[str, str, str]:
     focus = compact_focus(card_name); c = copy_for(lang)
