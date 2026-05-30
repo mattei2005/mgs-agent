@@ -1158,6 +1158,12 @@ def pad_content_to_min_words(content: str, current_count: int, min_count: int = 
         "The card should match planned spending needs.",
         "Eligibility is assessed by the issuer directly.",
         "You should compare alternatives before applying.",
+        "That keeps the recommendation tied to practical use.",
+        "The strongest value appears in regular travel spending.",
+        "Costs matter most if balances are carried month to month.",
+        "Cashback value depends on eligible purchase behaviour.",
+        "Overseas spending benefits depend on how often you travel.",
+        "Application checks should happen before any formal submission.",
     ]
 
     paragraph_re = re.compile(r"<p>(.*?)</p>", re.I | re.S)
