@@ -142,6 +142,8 @@ This prevents a manual REST status flip from bypassing the editorial/Yoast hard 
 
 See also `references/rec-benchmark-cleanup-helper.md` for a reusable scoped cleanup pattern.
 
+For failed REC+P1 runs that created duplicate drafts or media before a later validation/readability failure, use `references/rec-p1-failed-run-cleanup.md`. Key pitfall: draft posts are production editorial state; cleanup must remove/verify both created posts and scoped media, otherwise WP can retain duplicate RECs, P1 drafts with `featured_media=0`, or HTML referencing deleted media.
+
 When a user asks to delete a test/draft article and recreate it from scratch, clean only the requested article/card scope:
 
 1. Fetch the post by direct ID with auth and confirm the title/slug matches the requested article before deleting.
