@@ -150,6 +150,22 @@ Allowed technical caches/data:
 
 Transition rule: until the runners are fully refactored, always pass the current official URL explicitly. If runner output shows content came from `card-cache`, `cache_hit`, or missing official URL fallback from cache, report it as a migration blocker instead of claiming clean production success.
 
+## Production language policy
+
+Production language is canonical from the site/vertical config (`site.language` in `data/sites.json`). Do not use `--lang` in normal REC, P1 or REC+P1 production commands.
+
+`--lang` is debug-only. It may be used only with `--allow-language-override` for dry-run/draft debugging where Rodolfo explicitly wants to test a language path without changing `sites.json`. For `status=publish`, if the requested `--lang` conflicts with `site.language`, the runner/orchestrator must abort instead of publishing cross-language content into the wrong vertical.
+
+When validating this policy, test both gates:
+
+```bash
+python3 scripts/mgs-rec-p1-orchestrator.py --site <site> --card "<card>" --official-url "<url>" --lang es --dry-run
+# expected: aborts because --lang is debug-only unless --allow-language-override is present
+
+python3 scripts/mgs-rec-runner.py --site <site-with-language-en> --card "Test" --source-url "https://example.com" --status publish --lang es --allow-language-override --dry-run
+# expected: aborts because site.language=en conflicts with --lang=es for publish
+```
+
 ## Normal REC operation
 
 Use the REC runner. Do not manually reproduce the whole workflow unless the runner fails with a clear error and Rodolfo approves the fallback.
@@ -169,7 +185,7 @@ Command shape:
 
 Requirements:
 
-- Load/follow `contracts/gb-cc-en.md` for editorial rules.
+- Load/follow `contracts/cc-rec.md` when present; legacy `contracts/gb-cc-en.md` / `templates/rec-*.md` are rollback or migration context unless the universal contract is absent.
 - Use current official source.
 - Do not rely on editorial cache.
 - Treat REC top-of-page as a monetisation surface: the title/summary and first 1-2 paragraphs appear before the mobile ad and before the card, so they must carry the strongest commercial intent keywords and user pain/outcome before any generic explanation.
@@ -200,7 +216,7 @@ Command shape:
 
 Requirements:
 
-- Load/follow `contracts/gb-cc-en.md` for P1 rules.
+- Load/follow `contracts/cc-p1.md` when present; legacy `contracts/gb-cc-en.md` / `templates/p1-*.md` are rollback or migration context unless the universal contract is absent.
 - P1 must use current official source facts.
 - P1 must not copy REC body/opening/benefit prose.
 - P1 must not reuse full sentences, deterministic filler, or application/eligibility boilerplate from older same-vertical P1s. Cross-corpus repetition is a production blocker even when REC↔P1 similarity passes.
