@@ -1025,10 +1025,14 @@ def main() -> int:
             post_id = int(post["id"])
             t = ts(); yoast = update_yoast(args.site, post_id, title, body, meta); timings["yoast_update"] = ts() - t; steps.append("yoast_verified")
             t = ts(); score = run_json([str(GEN_SCRIPTS / "yoast-score-post.sh"), args.site, str(post_id)], timeout=180, allow_fail=True); validate_yoast_score(score); timings["yoast_score"] = ts() - t; steps.append("yoast_scored")
-            t = ts(); verify = public_verify(post["link"], official_url, featured_url, card_url, lang); timings["public_verify"] = ts() - t
-            if not verify.get("ok"):
-                raise RunnerError(f"public_verify_failed: {verify}")
-            steps.append("public_verified")
+            if args.status == "publish":
+                t = ts(); verify = public_verify(post["link"], official_url, featured_url or "", card_url or "", lang); timings["public_verify"] = ts() - t
+                if not verify.get("ok"):
+                    raise RunnerError(f"public_verify_failed: {verify}")
+                steps.append("public_verified")
+            else:
+                verify = {"ok": True, "skipped": "draft_not_public", "url": post.get("link")}
+                steps.append("draft_public_verify_skipped")
         else:
             post = {"id": None, "link": f"https://{site['domain']}/{slug}/", "slug": slug, "status": args.status}
             steps.append("dry_run_no_publish")
