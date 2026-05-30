@@ -126,8 +126,6 @@ def build_rec_cmd(args: argparse.Namespace) -> List[str]:
         cmd += ["--lang", args.lang]
         if args.allow_language_override:
             cmd.append("--allow-language-override")
-        if args.allow_language_override:
-            cmd.append("--allow-language-override")
     if args.card_image_url:
         cmd += ["--card-image-url", args.card_image_url]
     if args.annual_fee:
@@ -156,6 +154,8 @@ def build_p1_cmd(args: argparse.Namespace, rec_url: str) -> List[str]:
     ]
     if args.lang:
         cmd += ["--lang", args.lang]
+        if args.allow_language_override:
+            cmd.append("--allow-language-override")
     if args.annual_fee:
         cmd += ["--annual-fee", args.annual_fee]
     if args.apr:
