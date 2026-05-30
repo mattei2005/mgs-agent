@@ -1164,6 +1164,8 @@ def pad_content_to_min_words(content: str, current_count: int, min_count: int = 
     matches = list(paragraph_re.finditer(content))
     replacements: List[Tuple[int, int, str]] = []
     pad_i = 0
+    used_pad_sentences = set(re.findall(r"[^.!?]+[.!?]", re.sub(r"<[^>]+>", " ", html.unescape(content))))
+    used_pad_sentences = {re.sub(r"\s+", " ", s).strip().lower() for s in used_pad_sentences}
     remaining = needed
     # Add short factual caution sentences to existing paragraphs with spare room.
     # This preserves max-section-paragraphs and keeps every paragraph <=30 words.
@@ -1176,13 +1178,25 @@ def pad_content_to_min_words(content: str, current_count: int, min_count: int = 
         spare = 30 - count
         if spare < 7:
             continue
-        addition = pads[pad_i % len(pads)]
-        add_words = len(addition.split())
-        if add_words > spare:
+        addition = ""
+        add_words = 0
+        for _ in range(len(pads)):
+            candidate = pads[pad_i % len(pads)]
+            pad_i += 1
+            norm = re.sub(r"\s+", " ", candidate).strip().lower()
+            if norm in used_pad_sentences:
+                continue
+            candidate_words = len(candidate.split())
+            if candidate_words > spare:
+                continue
+            addition = candidate
+            add_words = candidate_words
+            used_pad_sentences.add(norm)
+            break
+        if not addition:
             continue
         replacements.append((m.start(1), m.end(1), inner.rstrip() + " " + html.escape(addition)))
         remaining -= add_words
-        pad_i += 1
         if remaining <= 0:
             break
 
