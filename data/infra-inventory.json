@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-05-29T05:00:01-04:00",
+    "updated_at": "2026-05-30T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -23,28 +23,28 @@
       "entry": "*/5 * * * * flock -n /var/lock/sync_souls.lock /root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1"
     },
     {
-      "entry": "*/15 * * * * flock -n /var/lock/monitor_auto_push.lock /root/mgs-agent/scripts/monitor-auto-push.sh >> /root/mgs-agent/logs/monitor-auto-push.log 2>&1"
+      "entry": "11,26,41,56 * * * * flock -n /var/lock/monitor_auto_push.lock /root/mgs-agent/scripts/monitor-auto-push.sh >> /root/mgs-agent/logs/monitor-auto-push.log 2>&1"
     },
     {
-      "entry": "0 10 * * * flock -n /var/lock/monitor_yoast_health_eggbev.lock /root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-health-eggbev.log 2>&1"
+      "entry": "23 10 * * * flock -n /var/lock/monitor_yoast_health_eggbev.lock /root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-health-eggbev.log 2>&1"
     },
     {
-      "entry": "*/15 * * * * flock -n /var/lock/check_pending_reports.lock /root/mgs-agent/scripts/check-pending-reports.sh >> /root/mgs-agent/logs/check-pending-reports.log 2>&1"
+      "entry": "7,22,37,52 * * * * flock -n /var/lock/check_pending_reports.lock /root/mgs-agent/scripts/check-pending-reports.sh >> /root/mgs-agent/logs/check-pending-reports.log 2>&1"
     },
     {
-      "entry": "*/5 * * * * flock -n /var/lock/monitor_service_restarts.lock /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1"
+      "entry": "1-56/5 * * * * flock -n /var/lock/monitor_service_restarts.lock /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1"
     },
     {
-      "entry": "0 12 * * * flock -n /var/lock/monitor_gpt55_oauth_cost.lock /root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh >> /root/mgs-agent/logs/monitor-gpt55-oauth-cost.log 2>&1"
+      "entry": "47 12 * * * flock -n /var/lock/monitor_gpt55_oauth_cost.lock /root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh >> /root/mgs-agent/logs/monitor-gpt55-oauth-cost.log 2>&1"
     },
     {
-      "entry": "*/5 * * * * flock -n /var/lock/monitor_tool_loops.lock /root/mgs-agent/scripts/monitor-tool-loops.sh >> /root/mgs-agent/logs/monitor-tool-loops.log 2>&1"
+      "entry": "3-58/5 * * * * flock -n /var/lock/monitor_tool_loops.lock /root/mgs-agent/scripts/monitor-tool-loops.sh >> /root/mgs-agent/logs/monitor-tool-loops.log 2>&1"
     },
     {
       "entry": "0 5 * * * flock -n /var/lock/infra_discovery.lock /root/mgs-agent/scripts/infra-discovery.sh >> /root/mgs-agent/logs/infra-discovery.log 2>&1"
     },
     {
-      "entry": "0 8 * * * flock -n /var/lock/monitor_hermes_updates.lock /root/mgs-agent/scripts/monitor-hermes-updates.sh >> /root/mgs-agent/logs/monitor-hermes-updates.log 2>&1"
+      "entry": "37 */2 * * * flock -n /var/lock/monitor_hermes_updates.lock /root/mgs-agent/scripts/monitor-hermes-updates.sh >> /root/mgs-agent/logs/monitor-hermes-updates.log 2>&1"
     },
     {
       "entry": "*/15 * * * * flock -n /var/lock/track_article_cost.lock /root/mgs-agent/scripts/track-article-cost.sh >> /root/mgs-agent/logs/track-article-cost-cron.log 2>&1"
@@ -53,7 +53,7 @@
       "entry": "0 * * * * flock -n /var/lock/cleanup_zombie_sessions.lock /root/mgs-agent/scripts/cleanup-zombie-sessions.sh >> /root/mgs-agent/logs/cleanup-zombie-sessions.log 2>&1"
     },
     {
-      "entry": "0 3 * * * flock -n /var/lock/housekeeping_bak_cleanup.lock /root/mgs-agent/scripts/housekeeping-bak-cleanup.sh >> /root/mgs-agent/logs/housekeeping-cron.log 2>&1"
+      "entry": "17 3 * * * flock -n /var/lock/housekeeping_bak_cleanup.lock /root/mgs-agent/scripts/housekeeping-bak-cleanup.sh >> /root/mgs-agent/logs/housekeeping-cron.log 2>&1"
     },
     {
       "entry": "0 8 * * * flock -n /var/lock/pendencia_render_md.lock /root/mgs-agent/scripts/pendencia-render-md.sh >> /root/mgs-agent/logs/pendencia-render.log 2>&1"
@@ -157,18 +157,18 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-p1-runner.py",
-      "size_bytes": 66071,
-      "modified_at": "2026-05-28T13:45:04-04:00"
+      "size_bytes": 75859,
+      "modified_at": "2026-05-30T00:26:04-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-rec-p1-orchestrator.py",
-      "size_bytes": 14243,
-      "modified_at": "2026-05-28T15:17:08-04:00"
+      "size_bytes": 15306,
+      "modified_at": "2026-05-30T00:03:14-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-rec-runner.py",
-      "size_bytes": 98905,
-      "modified_at": "2026-05-28T17:44:05-04:00"
+      "size_bytes": 101967,
+      "modified_at": "2026-05-30T00:20:55-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-updates.sh",
@@ -202,13 +202,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
-      "size_bytes": 6270,
-      "modified_at": "2026-05-16T17:37:26-04:00"
+      "size_bytes": 8626,
+      "modified_at": "2026-05-29T10:32:37-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-tool-loops.sh",
-      "size_bytes": 8045,
-      "modified_at": "2026-05-16T17:37:26-04:00"
+      "size_bytes": 10381,
+      "modified_at": "2026-05-29T10:29:58-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh",
@@ -1831,8 +1831,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "33f6b893b0f3cac902c850a8603f77a1",
-      "modified_at": "2026-05-29T05:00:01-04:00"
+      "md5": "0175b91c13e0b3ba7ff5471348158407",
+      "modified_at": "2026-05-30T04:56:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1843,26 +1843,26 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "677a22816b339a616d8f316a4304c3bc",
-      "modified_at": "2026-05-29T05:00:01-04:00"
+      "md5": "7722c1cfe8d09d7411b0862f072b3c85",
+      "modified_at": "2026-05-30T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 2873,
-      "md5": "f382c491d2b425c4afe9ba331fa59277",
-      "modified_at": "2026-05-29T05:00:01-04:00"
+      "size_bytes": 3518,
+      "md5": "00808effa5d5a834753ceca57fa531a1",
+      "modified_at": "2026-05-30T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 146,
-      "md5": "16c81df78f9d78627f642c1dbfbce954",
-      "modified_at": "2026-05-28T18:28:46-04:00"
+      "size_bytes": 330,
+      "md5": "29e01432aadcda0fefcb7c46ce70aedb",
+      "modified_at": "2026-05-30T04:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 68720,
-      "md5": "fcf378ea7e414e6e299ccd3a8a241e60",
-      "modified_at": "2026-05-28T05:00:04-04:00"
+      "md5": "086b0c9f32d9dd36ee76b33a22329554",
+      "modified_at": "2026-05-29T05:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1903,8 +1903,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 992,
-      "md5": "b6361beeb4fc3be4d0d3343e18e0cd4f",
-      "modified_at": "2026-05-29T05:00:01-04:00"
+      "md5": "2e2761ebbb41eefb78bdb6b660e2caba",
+      "modified_at": "2026-05-30T04:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1920,15 +1920,15 @@
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
-      "size_bytes": 5289,
-      "md5": "dc2d29d087db0ff06a5f37c54a98b10f",
-      "modified_at": "2026-05-28T13:43:20-04:00"
+      "size_bytes": 5503,
+      "md5": "c5022a15c4d92130ab547820f35183a2",
+      "modified_at": "2026-05-30T00:19:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 14424,
-      "md5": "4881f9f6a27274600c823fdcd3cf98de",
-      "modified_at": "2026-05-28T18:30:40-04:00"
+      "size_bytes": 14788,
+      "md5": "f0d6947cdbb5c2af34c6ceccfca2a9b0",
+      "modified_at": "2026-05-29T21:49:55-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -1944,9 +1944,9 @@
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "size_bytes": 38763,
-      "md5": "a3048be18cd34a99b44956ca5e308a76",
-      "modified_at": "2026-05-27T14:01:36-04:00"
+      "size_bytes": 39227,
+      "md5": "e6922c195b8655cd37eaf5a533618c74",
+      "modified_at": "2026-05-30T00:36:05-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
