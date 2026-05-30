@@ -786,6 +786,16 @@ def fit_word_count(body: str, lang: str = "en") -> Tuple[str, int]:
         "Issuer terms can change, so the final check should happen immediately before applying.",
         "The best fit is usually the card that solves a specific spending pattern.",
         "A simple benefit can be more valuable than a larger reward you rarely use.",
+        "Look at everyday groceries, fuel, subscriptions and travel costs before estimating value.",
+        "If the card is mainly for trips, compare airport, hotel and overseas purchase habits.",
+        "If the card is mainly for cashback, check whether excluded transactions affect your plan.",
+        "If the card is mainly for protection, remember that section 75 rules have limits.",
+        "A card with no obvious fee can still be expensive when balances are carried.",
+        "The official eligibility checker is useful because it avoids a full application too early.",
+        "Use the card only where the confirmed benefit is stronger than your current option.",
+        "Review the statement cycle so rewards and repayments are easier to track.",
+        "The practical question is whether the card improves purchases you already make.",
+        "Avoid treating rewards as a reason to create extra spending.",
     ]
     filler = localized + generic_extra
     used = {re.sub(r"\s+", " ", s).strip().lower() for s in re.findall(r"[^.!?]+[.!?]", re.sub(r"<[^>]+>", " ", html.unescape(body)))}
