@@ -512,6 +512,42 @@ Ver `references/discord-threads-lifecycle.md` para referência completa.
 
 **Resumo executivo:** threads arquivadas = zero tokens. Tokens só correm quando chega mensagem nova. Histórico preservado indefinidamente (sem auto-delete). Canal Zeus: archive em 24h.
 
+### Contexto perdido em thread ativa: verificar `session_reset` antes de culpar Discord
+
+Quando Rodolfo relatar que um agente “perdeu contexto da thread”, respondeu como se fosse conversa nova, ou ignorou mensagens anteriores dentro da mesma thread, diagnosticar primeiro a sessão Hermes, não a thread Discord.
+
+Checklist read-only:
+
+```bash
+# Config do profile afetado
+python3 - <<'PY'
+import yaml
+p='/root/.hermes/profiles/ares/config.yaml'  # trocar profile
+c=yaml.safe_load(open(p)) or {}
+print(c.get('session_reset'))
+print((c.get('discord') or {}).get('history_backfill'), (c.get('discord') or {}).get('history_backfill_limit'))
+PY
+
+# Sessão associada à thread e se ela reiniciou com history=0
+grep -n "THREAD_ID\|Session expiry\|conversation turn: session=.*history=" /root/.hermes/profiles/ares/logs/agent.log | tail -120
+```
+
+Sinais de causa raiz:
+- `Session expiry done` perto do horário diário configurado (`session_reset.at_hour`).
+- Nova mensagem na mesma `thread_id/chat` cria novo `session_id` com `history=0`.
+- `sessions/sessions.json` mostra a thread apontando para sessão nova, enquanto sessões antigas foram `expiry_finalized=true`.
+
+Interpretação operacional: Discord preservou a thread; quem zerou contexto foi o Hermes por política de reset/expiração. Para threads operacionais longas (Canva/downloads/campanhas), o padrão recomendado é evitar reset diário rígido e usar expiração por inatividade maior:
+
+```yaml
+session_reset:
+  mode: idle
+  idle_minutes: 10080   # 7 dias, ajustar por perfil
+  at_hour: 4
+```
+
+Aplicar mudança de config e restart de gateway só com autorização explícita quando afetar serviço ativo. Após restart, validar `systemctl is-active <agent>-gateway.service` e log com `Connected as ...` + próxima mensagem entrando com histórico esperado.
+
 ### Leitura sob demanda de threads antigas
 
 Quando Rodolfo perguntar se Zeus consegue ler threads antigas, responder com precisão: Zeus não lê automaticamente qualquer thread antiga pelo contexto ativo. A solução operacional é importar uma thread específica por link/ID via Discord API em modo read-only.
