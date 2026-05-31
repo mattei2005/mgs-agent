@@ -1,5 +1,5 @@
 diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
-index c58afffcd..0ed79e28e 100644
+index 12cf05c38..121269f63 100644
 --- a/plugins/platforms/discord/adapter.py
 +++ b/plugins/platforms/discord/adapter.py
 @@ -20,7 +20,7 @@ import tempfile
@@ -11,7 +11,7 @@ index c58afffcd..0ed79e28e 100644
  
  logger = logging.getLogger(__name__)
  
-@@ -3941,23 +3941,241 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -3941,23 +3941,255 @@ class DiscordAdapter(BasePlatformAdapter):
      # Auto-thread helpers
      # ------------------------------------------------------------------
  
@@ -164,6 +164,20 @@ index c58afffcd..0ed79e28e 100644
 +            return f"{agent} status operacional"[:80]
 +        if agent and any(word in lowered for word in ("erro", "falha", "bug", "trav", "diagnost")):
 +            return f"{agent} diagnóstico de erro"[:80]
++        if agent and any(phrase in lowered for phrase in (
++            "perdendo contexto",
++            "perdeu contexto",
++            "perda de contexto",
++            "sem contexto",
++            "zerou contexto",
++            "contexto da thread",
++            "contexto dessa thread",
++            "contexto da conversa",
++            "contexto dessa conversa",
++        )):
++            if "thread" in lowered:
++                return f"{agent} perda de contexto em thread"[:80]
++            return f"{agent} perda de contexto"[:80]
 +
 +        if "krea" in lowered and any(word in lowered for word in ("pago", "custo", "billing", "servico", "serviço")):
 +            return "Krea2 custo e billing"
@@ -171,7 +185,7 @@ index c58afffcd..0ed79e28e 100644
 +            return "Revisão comportamento dos agentes"
 +        if "padroniz" in lowered and any(word in lowered for word in ("atena", "zeus", "ares", "agente", "agentes", "thread", "threads")):
 +            return "Padronização comportamento dos agentes"[:80]
-+        if "thread" in lowered and any(word in lowered for word in ("renome", "rename", "titulo", "título", "nome")):
++        if "thread" in lowered and any(word in lowered for word in ("renome", "renom", "rename", "titulo", "título", "nome")):
 +            return "Regras de rename de threads"
 +        if "thread" in lowered and "auto" in lowered and "add" in lowered:
 +            return "Auto-add em threads Discord"
@@ -228,7 +242,7 @@ index c58afffcd..0ed79e28e 100644
 +        fallback_patterns = [
 +            r"^(?:por favor|pf|pode|voce pode|você pode|me diz|me fala)\s+",
 +            r"^(?:verifique|verifica|confira|cheque|veja)\s+(?:de novo\s+)?(?:como\s+(?:esta|está)\s+)?",
-+            r"^(?:qual\s+(?:o|a|é o|é a)|quais|como)\s+",
++            r"^(?:qual\s+(?:o|a|é o|é a)|quais|como|por\s+que|porque)\s+",
 +            r"^(?:estou|eu estou|to|tô)\s+",
 +        ]
 +        for pattern in fallback_patterns:
@@ -264,7 +278,7 @@ index c58afffcd..0ed79e28e 100644
  
          try:
              thread = await message.create_thread(name=thread_name, auto_archive_duration=1440)
-@@ -4586,12 +4804,15 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4586,12 +4818,15 @@ class DiscordAdapter(BasePlatformAdapter):
          if not is_thread and not isinstance(message.channel, discord.DMChannel):
              no_thread_channels_raw = os.getenv("DISCORD_NO_THREAD_CHANNELS", "")
              no_thread_channels = {ch.strip() for ch in no_thread_channels_raw.split(",") if ch.strip()}
@@ -281,7 +295,7 @@ index c58afffcd..0ed79e28e 100644
                      parent_channel_id = str(message.channel.id)
                      is_thread = True
                      thread_id = str(thread.id)
-@@ -4871,9 +5092,19 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4871,9 +5106,19 @@ class DiscordAdapter(BasePlatformAdapter):
          if thread_id:
              self._threads.mark(thread_id)
  
@@ -304,7 +318,7 @@ index c58afffcd..0ed79e28e 100644
              self._enqueue_text_event(event)
          else:
              await self.handle_message(event)
-@@ -6120,6 +6351,11 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
+@@ -6137,6 +6382,11 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
          os.environ["DISCORD_FREE_RESPONSE_CHANNELS"] = str(frc)
      if "auto_thread" in discord_cfg and not os.getenv("DISCORD_AUTO_THREAD"):
          os.environ["DISCORD_AUTO_THREAD"] = str(discord_cfg["auto_thread"]).lower()
