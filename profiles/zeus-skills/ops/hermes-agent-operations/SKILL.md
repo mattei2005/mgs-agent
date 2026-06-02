@@ -26,6 +26,7 @@ Referência rápida adicionada: `references/hermes-staged-update-validation-mgs.
 - Gateways systemd: `zeus-gateway.service`, `atena-gateway.service` e `ares-gateway.service`.
 - Projeto MGS: `/root/mgs-agent/`.
 - Alguns comandos de restart em Zeus podem interromper a sessão atual; planejar janela quando necessário.
+- Padrão MGS para próximos restarts de Zeus/Atena/Ares: preferir `/restart` no próprio agente/thread ou restart gracioso via SIGUSR1/Hermes gateway restart, porque drena execuções em andamento e preserva melhor sessão/thread. `systemctl restart` fica como fallback para agente travado/offline, falha do `/restart` ou emergência operacional.
 
 ## 1. Update seguro do Hermes
 
