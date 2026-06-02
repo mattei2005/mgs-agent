@@ -182,6 +182,28 @@ index 12cf05c38..121269f63 100644
 +
 +        if "krea" in lowered and any(word in lowered for word in ("pago", "custo", "billing", "servico", "serviço")):
 +            return "Krea2 custo e billing"
++
++        # MGS operational subjects. These catch open-ended questions whose raw
++        # first sentence would otherwise become a useless title like
++        # "Poderiamos atualizar o hermes dessa vez em base".
++        if "hermes" in raw_lowered and any(word in raw_lowered for word in (
++            "atualiz", "update", "upgrade", "versao", "versão", "release", "v15", "v16"
++        )):
++            return "Atualização do Hermes Agent"
++        if "hermes" in raw_lowered and any(word in raw_lowered for word in (
++            "config", "setup", "instal", "provider", "modelo", "model", "oauth", "codex"
++        )):
++            return "Configuração do Hermes Agent"
++        if "hermes" in raw_lowered and any(word in raw_lowered for word in (
++            "erro", "falha", "bug", "trav", "diagnost", "log", "status"
++        )):
++            return "Diagnóstico do Hermes Agent"
++        if any(word in lowered for word in ("reinicia", "reiniciar", "restart", "reboot")) and any(
++            word in lowered for word in ("agente", "agentes", "zeus", "atena", "ares", "gateway", "gateways")
++        ):
++            return "Restart dos agentes"
++        if "gateway" in lowered and any(word in lowered for word in ("discord", "thread", "rote", "routing", "mensagem")):
++            return "Gateway Discord dos agentes"
 +        if "precisamos conversar" in lowered and any(word in lowered for word in ("comportamento", "comportamentos", "errado", "errados")):
 +            return "Revisão comportamento dos agentes"
 +        if "padroniz" in lowered and any(word in lowered for word in ("atena", "zeus", "ares", "agente", "agentes", "thread", "threads")):
@@ -208,7 +230,7 @@ index 12cf05c38..121269f63 100644
 +        elif re.search(r"\brec\b", lowered):
 +            article_type = "REC"
 +
-+        if article_type and any(word in lowered for word in ("crie", "criar", "faca", "faça", "fazer", "novo", "mais um")):
++        if article_type and any(word in lowered for word in ("crie", "cria", "criar", "faca", "faça", "faz", "fazer", "novo", "mais um")):
 +            product = ""
 +            product_match = re.search(
 +                r"\b(?:do|da|de)\s+([^\n]+?)(?:\s+url\b|\s+status\b|\s+imagem\b|$)",
