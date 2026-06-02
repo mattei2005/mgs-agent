@@ -1,7 +1,7 @@
 ---
 name: hermes-agent-operations
 description: "Umbrella operacional para Hermes Agent no VPS MGS: updates seguros, inspeção/configuração de web tooling, providers/modelos OAuth, políticas de custo, validação de gateways Zeus/Atena e cuidados pós-migração."
-tags: [hermes, operations, update, providers, oauth, web-search, web-extract, gateway, zeus, atena, mgs]
+tags: [hermes, operations, update, providers, oauth, web-search, web-extract, gateway, zeus, atena, mgs, memory, honcho]
 related_skills: [discord-ops, log-monitor-discord-alert]
 ---
 
@@ -312,7 +312,15 @@ Próximo passo: comando exato ou validação pendente.
 
 When Rodolfo asks to start a new MGS agent/profile (Ares or future agents), use `references/mgs-new-agent-bootstrap.md`. Core rule: clone profile/config as needed, but immediately blank any inherited Discord bot token; do not create/enable the systemd gateway until the agent has its own dedicated bot token and Rodolfo confirms the Critical Subset system-file write.
 
-## 6. References and support files
+## 6. Agent memory / conclusion layers
+
+When Rodolfo asks to evaluate or configure external memory infrastructure such as Honcho for Zeus/Atena/Ares, use `references/honcho-managed-memory-spike.md`.
+
+Operational rule: treat Honcho-like systems as a conclusion/insight layer over sanitized history, not as source of truth. Canonical facts remain in JSON/DB/Git/WordPress/audit logs; procedures remain in Hermes skills; stable preferences remain in Hermes memory. Zeus may use Honcho to generate hypotheses, but must validate them against canonical MGS sources before reporting or acting.
+
+Managed Honcho default for first spike: use only synthetic or sanitized data; store `HONCHO_API_KEY` in 1Password (`MGS Conteúdo` → `Honcho API - MGS` → `api key`); never paste or print the key. Self-hosting requires a separate infra decision because it introduces Docker/Postgres+pgvector/Redis/services.
+
+## 7. References and support files
 
 Para manutenção de VPS/update com backup, recuperação manual de npm quando self-update quebra, e política de retenção/limpeza de backups, ver `references/vps-update-npm-backup-retention-2026-05-24.md`.
 
@@ -336,3 +344,4 @@ Esta umbrella absorveu as antigas skills especializadas abaixo. Conteúdo detalh
 - `references/openai-codex-cost-monitoring-gpt-oauth.md`
 - `references/atena-openhands-provider-diagnostic.md` — diagnosticar OpenHands da Atena: funcionalidade vs. provider/modelo/custo, wrapper e trajectories sem vazar credenciais
 - `references/openhands-gpt55-codex-wrapper.md` — padrão MGS para OpenHands com GPT-5.5/OpenAI-Codex OAuth, bloqueio de fallback provider e validação real do runtime model
+- `references/honcho-managed-memory-spike.md` — avaliação/configuração de Honcho como camada managed de conclusões sobre histórico sanitizado; inclui política de fonte de verdade, 1Password/API key e smoke test sintético
