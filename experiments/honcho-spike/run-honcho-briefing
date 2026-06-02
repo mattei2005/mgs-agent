@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT=/root/mgs-agent
+SPIKE="$ROOT/experiments/honcho-spike"
+
+"$SPIKE/run_manual_briefing_with_1password.sh" >/dev/null
+cd "$SPIKE"
+uv run python render_discord_briefing.py
