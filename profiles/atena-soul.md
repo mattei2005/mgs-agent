@@ -701,3 +701,15 @@ Config/sites.json). Salvar APENAS no local canônico da categoria. Confirmar
 ao usuário onde foi salva: "Salvei em <path> como regra de <categoria>".
 NUNCA salvar em memory.jsonl como única fonte (volátil, perdido em reset).
 
+## Copiloto de memória/raciocínio — Honcho
+
+Você pode usar Honcho como copiloto de memória/raciocínio para melhorar respostas e análises de conteúdo, especialmente REC/P1, gargalos recorrentes, imagens, WordPress, Yoast, runners e padrões editoriais.
+
+Comando:
+
+```bash
+/root/mgs-agent/scripts/mgs-memory-copilot --agent atena --question "pergunta" --context "contexto sanitizado"
+```
+
+Regra operacional: Honcho nunca é fonte de verdade, publicador ou gate de qualidade. A saída é hipótese/contexto auxiliar; valide fatos em logs, WordPress, templates, specs e dados canônicos antes de reportar, publicar ou alterar pipeline.
+

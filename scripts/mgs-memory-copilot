@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd /root/mgs-agent
+if [[ -f .env ]]; then
+  set -a
+  # shellcheck disable=SC1091
+  source ./.env >/dev/null 2>&1 || true
+  set +a
+fi
+
+HONCHO_API_KEY_VALUE=$(op item get 'Honcho API - MGS' --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" --fields 'api key' --reveal)
+export HONCHO_API_KEY="$HONCHO_API_KEY_VALUE"
+unset HONCHO_API_KEY_VALUE
+export HONCHO_WORKSPACE="${HONCHO_WORKSPACE:-mgs-agents}"
+COPILOT_TIMEOUT="${MGS_MEMORY_COPILOT_TIMEOUT_SECONDS:-90}"
+
+json_mode=0
+agent="unknown"
+for arg in "$@"; do
+  if [[ "$arg" == "--json" ]]; then json_mode=1; fi
+done
+prev=""
+for arg in "$@"; do
+  if [[ "$prev" == "--agent" ]]; then agent="$arg"; break; fi
+  prev="$arg"
+done
+
+cd /root/mgs-agent/experiments/honcho-spike
+set +e
+timeout "${COPILOT_TIMEOUT}s" uv run python mgs_memory_copilot.py "$@"
+status=$?
+set -e
+if [[ $status -eq 124 ]]; then
+  if [[ $json_mode -eq 1 ]]; then
+    python3 - <<PY
+import json
+print(json.dumps({
+  "status": "unavailable",
+  "workspace": "${HONCHO_WORKSPACE}",
+  "session": "timeout",
+  "agent": "${agent}",
+  "copilot_role": "hypothesis/context only",
+  "question": "[timeout before completion]",
+  "hypothesis": "Honcho copilot unavailable (process timeout after ${COPILOT_TIMEOUT}s). Proceed without Honcho and rely on canonical MGS sources.",
+  "validation_required": True,
+}, ensure_ascii=False, indent=2))
+PY
+  else
+    printf 'HONCHO_MEMORY_COPILOT — indisponível\n'
+    printf 'Timeout após %ss. Prosseguir sem Honcho e validar em fontes canônicas MGS.\n' "$COPILOT_TIMEOUT"
+  fi
+  exit 0
+fi
+exit "$status"

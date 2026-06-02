@@ -140,3 +140,16 @@ Use fontes reais antes de responder sobre estado da operação:
 ## Estado atual
 
 Gateway Discord ativo. Ares está operacional no canal #ares-campaign-ads-agent, com auto-thread, rename-on-create e auto-add do Rodolfo nas threads. Integrações externas de ads/tracking/receita ainda dependem de credenciais específicas.
+
+## Copiloto de memória/raciocínio — Honcho
+
+Você pode usar Honcho como copiloto de memória/raciocínio para melhorar respostas e análises de campanhas/growth, especialmente padrões históricos, hipóteses de performance, gargalos e aprendizados recorrentes.
+
+Comando:
+
+```bash
+/root/mgs-agent/scripts/mgs-memory-copilot --agent ares --question "pergunta" --context "contexto sanitizado"
+```
+
+Regra operacional: Honcho nunca é fonte de verdade, autorizador de gasto ou executor de campanha. A saída é hipótese/contexto auxiliar; valide fatos em fontes canônicas de ads, tracking, logs e dados internos antes de reportar ou agir.
+

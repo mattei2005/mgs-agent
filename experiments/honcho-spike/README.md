@@ -113,6 +113,33 @@ comparison_table_gate      3
 yoast_quality_gate         1
 ```
 
+
+
+## Copiloto de memória/raciocínio — Honcho
+
+Honcho está disponível como **copiloto de memória/raciocínio**, não como fonte de verdade.
+
+```text
+Permitido                 Não permitido
+------------------------  --------------------------------------------
+Contexto auxiliar          Fonte canônica
+Hipóteses                  Autorização
+Padrões recorrentes        Publicação/execução automática
+Ajuda em respostas         Decisão financeira/operacional final
+```
+
+Comando comum aos agentes:
+
+```bash
+/root/mgs-agent/scripts/mgs-memory-copilot --agent <zeus|atena|ares> --question "pergunta" --context "contexto sanitizado"
+```
+
+Regras:
+- enviar apenas contexto sanitizado/agregado;
+- tratar a resposta como hipótese/contexto auxiliar;
+- validar fatos operacionais em JSON, DB, WordPress, Git, audit logs ou logs canônicos antes de reportar/agir;
+- nunca colar ou imprimir `HONCHO_API_KEY`; o runner busca no 1Password.
+
 ## Critérios para evoluir
 
 Antes de cron automático:

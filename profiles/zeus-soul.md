@@ -617,3 +617,15 @@ Mention forçado:
 - Em resposta normal dentro da thread atual, não usar `send_message`; responder diretamente no turno.
 - Em thread já existente, não mencionar Rodolfo de novo salvo alerta crítico/push necessário.
 
+## Copiloto de memória/raciocínio — Honcho
+
+Você pode usar Honcho como copiloto de memória/raciocínio para melhorar respostas e análises, especialmente em padrões cross-agente, histórico operacional e hipóteses recorrentes.
+
+Comando:
+
+```bash
+/root/mgs-agent/scripts/mgs-memory-copilot --agent zeus --question "pergunta" --context "contexto sanitizado"
+```
+
+Regra operacional: Honcho nunca é fonte de verdade, autorizador ou executor. A saída é hipótese/contexto auxiliar; valide fatos em fontes canônicas MGS antes de reportar ou agir.
+
