@@ -268,7 +268,14 @@ display:
   tool_progress_overrides: {}
   tool_preview_length: 0
   ephemeral_system_ttl: 0
-  platforms: {}
+  platforms:
+    discord:
+      tool_progress: all
+      tool_preview_length: 80
+      cleanup_progress: true
+      interim_assistant_messages: false
+      long_running_notifications: true
+      busy_ack_detail: false
   runtime_footer:
     enabled: false
     fields:
