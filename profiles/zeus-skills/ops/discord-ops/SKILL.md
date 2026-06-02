@@ -363,11 +363,20 @@ When Rodolfo asks to add Raquel or another user to a Zeus/Atena thread, use Disc
 
 ### Descriptive thread rename: títulos úteis para busca histórica
 
-Quando Rodolfo reclamar que threads estão "mal renomeadas", "curtas demais", "difíceis de identificar" ou pedir correção de rename em Zeus/Atena/Ares, usar `references/discord-thread-descriptive-rename.md`.
+Quando Rodolfo reclamar que threads estão "mal renomeadas", "curtas demais", "difíceis de identificar", "não foi renomeado", ou pedir correção de rename em Zeus/Atena/Ares, usar `references/discord-thread-descriptive-rename.md`.
 
-Regra operacional: `THREAD_NAME` deve ser um resumo identificável do assunto (objeto + ação/contexto), não só um nome curto. Evitar títulos genéricos como `Status`, `Ajuste`, `Teste`, `Renomeacao`, `Pedido`. Exemplos bons: `Criacao e Estrutura REC+P1`, `Correcao Rename de Threads`, `Tracking de Custo Atena`, `REC+P1 Lloyds World Elite - Eggbev`.
+Regra operacional: `THREAD_NAME` deve ser um resumo identificável do assunto (objeto + ação/contexto), não só um nome curto nem a primeira frase limpa. Evitar títulos genéricos como `Status`, `Ajuste`, `Teste`, `Renomeacao`, `Pedido`, e também fallbacks literais como `Poderiamos atualizar o hermes dessa vez em base`. Exemplos bons: `Atualização do Hermes Agent`, `Configuração do Hermes Agent`, `Diagnóstico do Hermes Agent`, `Restart dos agentes`, `Gateway Discord dos agentes`, `Criacao e Estrutura REC+P1`, `Correcao Rename de Threads`, `Tracking de Custo Atena`, `REC+P1 Lloyds World Elite - Eggbev`.
+
+Diagnóstico/correção atual para runtime rename-on-create:
+- Verificar os 3 profiles (`zeus`, `atena`, `ares`) em `/root/.hermes/profiles/{profile}/config.yaml`: `discord.auto_thread`, `thread_auto_add_users`, `channel_prompts`, `free_response_channels`, `thread_require_mention`.
+- O rename semântico fica no runtime compartilhado `/root/.hermes/hermes-agent/plugins/platforms/discord/adapter.py`, método `_auto_thread_name_from_message(...)`; não nos prompts dos agentes.
+- Se o gateway criou thread com título literal ruim, corrigir a heurística determinística nesse método e atualizar também `/root/mgs-agent/patches/hermes/discord-deterministic-thread-rename-auto-add-users.patch` para sobreviver a updates.
+- Validar sem restart: `python3 -m py_compile plugins/platforms/discord/adapter.py` e teste local extraindo/chamando `_auto_thread_name_from_message` com exemplos reais. Confirmar que `MainPID`/`ExecMainStartTimestamp` dos 3 serviços não mudaram quando Rodolfo pediu “não reinicia ainda”.
+- Só reiniciar `zeus-gateway`, `atena-gateway`, `ares-gateway` após autorização explícita; a mudança no arquivo não entra nos processos ativos antes do restart.
 
 Pitfall validado: snippets de bootstrap via `execute_code` podem não receber `DISCORD_BOT_TOKEN` por bloqueio de env passthrough. O fix durável é tentar env primeiro e depois ler o `.env` do profile ativo internamente, sem imprimir token/header.
+
+Pitfall validado: mover rename do agente para o runtime eliminou token/loop, mas pode virar “não renomeado” se a heurística só limpar a primeira frase. Tratar isso como falha de classificação semântica, não como falha de auto-thread. Melhorar regras conservadoras por classe operacional (Hermes update/config/diagnóstico, restart de agentes, gateway Discord, REC/P1) em vez de voltar para bootstrap LLM/execute_code.
 
 Se mudar config do Zeus estando dentro do Zeus, evitar matar a resposta corrente: agendar `systemctl restart zeus-gateway.service` com `systemd-run --on-active=<delay>` e, se necessário, agendar validação separada para log local.
 
