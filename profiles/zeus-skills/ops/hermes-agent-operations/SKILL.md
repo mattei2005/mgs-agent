@@ -7,7 +7,9 @@ related_skills: [discord-ops, log-monitor-discord-alert]
 
 # Hermes Agent Operations — MGS Umbrella
 
-Use esta skill para qualquer operação de Hermes Agent no ambiente MGS: atualizar o Hermes, avaliar release notes, validar gateways, configurar/inspecionar web tooling, trocar providers/modelos, autenticar OpenAI Codex OAuth, auditar custo de LLM ou investigar regressões operacionais de Zeus/Atena.
+Use esta skill para qualquer operação envolvendo Hermes Agent no VPS MGS: update, rollback, configuração, providers/modelos, OAuth, web tooling, gateway Discord, health-checks, migração de runtime e troubleshooting operacional.
+
+Referência rápida adicionada: `references/hermes-staged-update-validation-mgs.md` cobre o workflow MGS de update/restart em fases: pré-check read-only, backup, preservação/compatibilidade de patches locais, validação de gateways/crons/testes e relatório executivo com ressalvas.
 
 ## Postura operacional
 
