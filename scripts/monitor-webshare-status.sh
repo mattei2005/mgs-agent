@@ -93,16 +93,26 @@ raw = Path(sys.argv[1]).read_text(errors="ignore")
 text = html.unescape(raw).replace('\\"', '"').replace('\\/', '/')
 
 status_values = {"operational", "under_maintenance", "degraded_performance", "partial_outage", "full_outage"}
+
+# Components are listed once with id/name and status appears separately in affected_components/component_impacts.
+id_to_name = {}
+for m in re.finditer(r'\{[^{}]{0,700}"id":"([^"]+)"[^{}]{0,700}"name":"([^"]+)"[^{}]{0,700}"status_page_id"', text):
+    id_to_name[m.group(1)] = m.group(2)
+
+component_status = {}
+for m in re.finditer(r'"component_id":"([^"]+)"[^{}]{0,500}"(?:current_status|status)":"([a-z_]+)"', text):
+    cid, status = m.group(1), m.group(2)
+    if status in status_values:
+        # Prefer the most severe/latest observed status over operational.
+        old = component_status.get(cid)
+        priority = {"operational": 0, "degraded_performance": 1, "partial_outage": 2, "full_outage": 3, "under_maintenance": 4}
+        if old is None or priority.get(status, 0) >= priority.get(old, 0):
+            component_status[cid] = status
+
 components = []
-seen = set()
-for m in re.finditer(r'\{[^{}]{0,1500}"name":"([^"]+)"[^{}]{0,1500}"status":"([a-z_]+)"[^{}]{0,1500}\}', text):
-    name, status = m.group(1), m.group(2)
-    if status not in status_values:
-        continue
-    key = (name, status)
-    if key not in seen:
-        seen.add(key)
-        components.append({"name": name, "status": status})
+for cid, status in component_status.items():
+    components.append({"name": id_to_name.get(cid, cid), "status": status})
+components.sort(key=lambda c: c["name"])
 
 maintenance_components = [c for c in components if c["status"] == "under_maintenance"]
 maintenance_status_hits = bool(re.search(r'"status":"maintenance_in_progress"', text))
