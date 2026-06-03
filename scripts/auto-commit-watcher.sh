@@ -8,6 +8,7 @@ REPO_DIR="/root/mgs-agent"
 LOG_FILE="/root/mgs-agent/logs/auto-commit-watcher.log"
 DEBOUNCE_SECONDS=10  # espera 10s antes de commitar (evita spam)
 SENSITIVE_PATH_REGEX='(^|/)(\.env|.*\.pem|.*\.key|id_rsa|id_ed25519|.*credential.*|.*secret.*|.*token.*|.*password.*|.*webhook.*|.*private.*|hosts\.yml|\.npmrc|\.pypirc)$'
+SENSITIVE_ALLOWLIST_REGEX='(^|/)honcho_sanitized_secret_scan\.py$'
 
 mkdir -p "$(dirname "$LOG_FILE")"
 cd "$REPO_DIR" || exit 1
@@ -25,6 +26,12 @@ while inotifywait -r -e modify,create,delete,move \
   log "Mudança detectada"
   sleep "$DEBOUNCE_SECONDS"
 
+  CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
+  if [ "$CURRENT_BRANCH" != "main" ]; then
+    log "BLOQUEADO: branch atual=$CURRENT_BRANCH; auto-commit só roda na main"
+    continue
+  fi
+
   # Verifica se há algo pra commitar
   if git diff --quiet && git diff --cached --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
     log "Working tree limpo, skipping"
@@ -37,7 +44,7 @@ while inotifywait -r -e modify,create,delete,move \
 
   # Guardrail: nunca auto-commitar arquivo com nome sensível.
   # Se aparecer algo suspeito, aborta esta rodada e exige revisão humana.
-  SENSITIVE_CHANGES=$(git status --porcelain | awk '{print $2}' | grep -Ei "$SENSITIVE_PATH_REGEX" || true)
+  SENSITIVE_CHANGES=$(git status --porcelain | awk '{print $2}' | grep -Ei "$SENSITIVE_PATH_REGEX" | grep -Eiv "$SENSITIVE_ALLOWLIST_REGEX" || true)
   if [ -n "$SENSITIVE_CHANGES" ]; then
     log "BLOQUEADO: arquivo sensível detectado; commit automático abortado"
     printf '%s\n' "$SENSITIVE_CHANGES" | while IFS= read -r f; do log "  sensitive: $f"; done

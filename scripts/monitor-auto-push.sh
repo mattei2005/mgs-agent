@@ -127,9 +127,34 @@ if grep -q "auto-push OK" "$PUSH_LOG"; then
     LAST_OK_TS="$(echo "$LAST_OK_LINE" | grep -oP '\[\K[^\]]+' | head -1)" || true
 fi
 
+# ─── Detectar divergência estrutural do repo ──────────────────────────────────
+# O log sozinho não basta: se o watcher estiver em branch lateral, ou travado
+# antes de commitar, o log pode parecer OK enquanto GitHub/main fica velho.
+REPO_FAILURES=()
+CURRENT_BRANCH="$(git -C "$BASE_DIR" rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown)"
+if [[ "$CURRENT_BRANCH" != "main" ]]; then
+    REPO_FAILURES+=("repo branch=$CURRENT_BRANCH [esperado main]")
+fi
+
+# Fetch é read-only; se falhar, registrar como falha de saúde.
+if git -C "$BASE_DIR" fetch --quiet origin main 2>/dev/null; then
+    LOCAL_HEAD="$(git -C "$BASE_DIR" rev-parse --short HEAD 2>/dev/null || echo unknown)"
+    ORIGIN_MAIN="$(git -C "$BASE_DIR" rev-parse --short origin/main 2>/dev/null || echo unknown)"
+    if [[ "$CURRENT_BRANCH" == "main" && "$LOCAL_HEAD" != "$ORIGIN_MAIN" ]]; then
+        REPO_FAILURES+=("main local=$LOCAL_HEAD origin/main=$ORIGIN_MAIN [push pendente]")
+    fi
+else
+    REPO_FAILURES+=("git fetch origin/main falhou [não foi possível validar GitHub]")
+fi
+
+DIRTY_COUNT="$(git -C "$BASE_DIR" status --porcelain=v1 2>/dev/null | wc -l | tr -d ' ')"
+if [[ "${DIRTY_COUNT:-0}" != "0" ]]; then
+    REPO_FAILURES+=("working tree sujo: ${DIRTY_COUNT} mudança(s) não commitadas")
+fi
+
 # ─── Contabilizar falhas ──────────────────────────────────────────────────────
-TOTAL_NEW_FAILURES=$(( ${#NEW_FAILURES[@]} + ${#EXPLICIT_ERRORS[@]} ))
-ALL_FAILURE_DETAILS=("${NEW_FAILURES[@]}" "${EXPLICIT_ERRORS[@]}")
+TOTAL_NEW_FAILURES=$(( ${#NEW_FAILURES[@]} + ${#EXPLICIT_ERRORS[@]} + ${#REPO_FAILURES[@]} ))
+ALL_FAILURE_DETAILS=("${NEW_FAILURES[@]}" "${EXPLICIT_ERRORS[@]}" "${REPO_FAILURES[@]}")
 
 # ─── Lógica de estado ─────────────────────────────────────────────────────────
 ALERT_WAS_ACTIVE=false
