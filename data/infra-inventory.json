@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-03T14:29:48-04:00",
+    "updated_at": "2026-06-03T14:40:40-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -72,6 +72,9 @@
     },
     {
       "entry": "*/5 * * * * flock -n /var/lock/hermes_news_explainer.lock /root/mgs-agent/scripts/hermes-news-explainer.py >> /root/mgs-agent/logs/hermes-news-explainer.log 2>&1"
+    },
+    {
+      "entry": "4-54/10 * * * * flock -n /var/lock/monitor_webshare_status.lock /root/mgs-agent/scripts/monitor-webshare-status.sh >> /root/mgs-agent/logs/monitor-webshare-status.log 2>&1"
     }
   ],
   "scripts": [
@@ -82,8 +85,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 2112,
-      "modified_at": "2026-05-16T18:29:49-04:00"
+      "size_bytes": 2444,
+      "modified_at": "2026-06-03T10:12:32-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/chat-log.sh",
@@ -133,7 +136,7 @@
     {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
       "size_bytes": 2162,
-      "modified_at": "2026-06-02T20:18:36-04:00"
+      "modified_at": "2026-06-03T10:11:41-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
@@ -143,7 +146,7 @@
     {
       "path": "/root/mgs-agent/scripts/hermes-mgs-patch-watchdog.sh",
       "size_bytes": 309,
-      "modified_at": "2026-06-02T20:19:20-04:00"
+      "modified_at": "2026-06-03T10:11:41-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
@@ -192,8 +195,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-auto-push.sh",
-      "size_bytes": 10214,
-      "modified_at": "2026-05-16T17:37:26-04:00"
+      "size_bytes": 11613,
+      "modified_at": "2026-06-03T10:12:32-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
@@ -219,6 +222,11 @@
       "path": "/root/mgs-agent/scripts/monitor-tool-loops.sh",
       "size_bytes": 10381,
       "modified_at": "2026-05-29T10:29:58-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/monitor-webshare-status.sh",
+      "size_bytes": 8386,
+      "modified_at": "2026-06-03T14:40:13-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh",
@@ -293,7 +301,7 @@
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
       "size_bytes": 5415,
-      "modified_at": "2026-06-02T20:18:51-04:00"
+      "modified_at": "2026-06-03T10:11:41-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/run-openhands-atena.sh",
@@ -336,29 +344,114 @@
   "skills_hermes": {
     "ares": [
       {
-        "name": "apple-notes",
+        "name": "apple-macos-automation",
         "category": "apple",
-        "skill_md": "/root/.hermes/profiles/ares/skills/apple/apple-notes/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/apple/apple-macos-automation/SKILL.md"
+      },
+      {
+        "name": "apple-notes",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/apple-notes/SKILL.md"
       },
       {
         "name": "apple-reminders",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/ares/skills/apple/apple-reminders/SKILL.md"
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/apple-reminders/SKILL.md"
+      },
+      {
+        "name": "arxiv",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/arxiv/SKILL.md"
+      },
+      {
+        "name": "blogwatcher",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/blogwatcher/SKILL.md"
+      },
+      {
+        "name": "codebase-inspection",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/codebase-inspection/SKILL.md"
       },
       {
         "name": "findmy",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/ares/skills/apple/findmy/SKILL.md"
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/findmy/SKILL.md"
+      },
+      {
+        "name": "gif-search",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/gif-search/SKILL.md"
+      },
+      {
+        "name": "github-auth",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/github-auth/SKILL.md"
+      },
+      {
+        "name": "github-code-review",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/github-code-review/SKILL.md"
+      },
+      {
+        "name": "github-issues",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/github-issues/SKILL.md"
+      },
+      {
+        "name": "github-pr-workflow",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/github-pr-workflow/SKILL.md"
+      },
+      {
+        "name": "github-repo-management",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/github-repo-management/SKILL.md"
+      },
+      {
+        "name": "heartmula",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/heartmula/SKILL.md"
       },
       {
         "name": "imessage",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/ares/skills/apple/imessage/SKILL.md"
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/imessage/SKILL.md"
+      },
+      {
+        "name": "llm-wiki",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/llm-wiki/SKILL.md"
       },
       {
         "name": "macos-computer-use",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/ares/skills/apple/macos-computer-use/SKILL.md"
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/macos-computer-use/SKILL.md"
+      },
+      {
+        "name": "polymarket",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/polymarket/SKILL.md"
+      },
+      {
+        "name": "songsee",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/songsee/SKILL.md"
+      },
+      {
+        "name": "songwriting-and-ai-music",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/songwriting-and-ai-music/SKILL.md"
+      },
+      {
+        "name": "spotify",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/spotify/SKILL.md"
+      },
+      {
+        "name": "youtube-content",
+        "category": ".archive",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/youtube-content/SKILL.md"
       },
       {
         "name": "claude-code",
@@ -481,11 +574,6 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/creative/sketch/SKILL.md"
       },
       {
-        "name": "songwriting-and-ai-music",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/songwriting-and-ai-music/SKILL.md"
-      },
-      {
         "name": "touchdesigner-mcp",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/ares/skills/creative/touchdesigner-mcp/SKILL.md"
@@ -531,34 +619,9 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/gaming/pokemon-player/SKILL.md"
       },
       {
-        "name": "codebase-inspection",
+        "name": "github-workflows",
         "category": "github",
-        "skill_md": "/root/.hermes/profiles/ares/skills/github/codebase-inspection/SKILL.md"
-      },
-      {
-        "name": "github-auth",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/ares/skills/github/github-auth/SKILL.md"
-      },
-      {
-        "name": "github-code-review",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/ares/skills/github/github-code-review/SKILL.md"
-      },
-      {
-        "name": "github-issues",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/ares/skills/github/github-issues/SKILL.md"
-      },
-      {
-        "name": "github-pr-workflow",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/ares/skills/github/github-pr-workflow/SKILL.md"
-      },
-      {
-        "name": "github-repo-management",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/ares/skills/github/github-repo-management/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/github/github-workflows/SKILL.md"
       },
       {
         "name": "paid-acquisition-operations",
@@ -571,29 +634,9 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/mcp/native-mcp/SKILL.md"
       },
       {
-        "name": "gif-search",
+        "name": "media-operations",
         "category": "media",
-        "skill_md": "/root/.hermes/profiles/ares/skills/media/gif-search/SKILL.md"
-      },
-      {
-        "name": "heartmula",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/ares/skills/media/heartmula/SKILL.md"
-      },
-      {
-        "name": "songsee",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/ares/skills/media/songsee/SKILL.md"
-      },
-      {
-        "name": "spotify",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/ares/skills/media/spotify/SKILL.md"
-      },
-      {
-        "name": "youtube-content",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/ares/skills/media/youtube-content/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/media/media-operations/SKILL.md"
       },
       {
         "name": "lm-evaluation-harness",
@@ -736,24 +779,9 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/red-teaming/godmode/SKILL.md"
       },
       {
-        "name": "arxiv",
+        "name": "research-intelligence",
         "category": "research",
-        "skill_md": "/root/.hermes/profiles/ares/skills/research/arxiv/SKILL.md"
-      },
-      {
-        "name": "blogwatcher",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/ares/skills/research/blogwatcher/SKILL.md"
-      },
-      {
-        "name": "llm-wiki",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/ares/skills/research/llm-wiki/SKILL.md"
-      },
-      {
-        "name": "polymarket",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/ares/skills/research/polymarket/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/research/research-intelligence/SKILL.md"
       },
       {
         "name": "research-paper-writing",
@@ -838,59 +866,19 @@
     ],
     "atena": [
       {
-        "name": "apple-notes",
+        "name": "apple-services",
         "category": "apple",
-        "skill_md": "/root/.hermes/profiles/atena/skills/apple/apple-notes/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/atena/skills/apple/apple-services/SKILL.md"
       },
       {
-        "name": "apple-reminders",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/atena/skills/apple/apple-reminders/SKILL.md"
-      },
-      {
-        "name": "findmy",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/atena/skills/apple/findmy/SKILL.md"
-      },
-      {
-        "name": "imessage",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/atena/skills/apple/imessage/SKILL.md"
-      },
-      {
-        "name": "macos-computer-use",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/atena/skills/apple/macos-computer-use/SKILL.md"
-      },
-      {
-        "name": "claude-code",
+        "name": "autonomous-coding-agents",
         "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/claude-code/SKILL.md"
-      },
-      {
-        "name": "codex",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/codex/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/autonomous-coding-agents/SKILL.md"
       },
       {
         "name": "hermes-agent",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
-      },
-      {
-        "name": "kanban-codex-lane",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/kanban-codex-lane/SKILL.md"
-      },
-      {
-        "name": "opencode",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/opencode/SKILL.md"
-      },
-      {
-        "name": "openhands",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/openhands/SKILL.md"
       },
       {
         "name": "architecture-diagram",
@@ -998,16 +986,6 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/data-science/jupyter-live-kernel/SKILL.md"
       },
       {
-        "name": "kanban-orchestrator",
-        "category": "devops",
-        "skill_md": "/root/.hermes/profiles/atena/skills/devops/kanban-orchestrator/SKILL.md"
-      },
-      {
-        "name": "kanban-worker",
-        "category": "devops",
-        "skill_md": "/root/.hermes/profiles/atena/skills/devops/kanban-worker/SKILL.md"
-      },
-      {
         "name": "kanban-workflows",
         "category": "devops",
         "skill_md": "/root/.hermes/profiles/atena/skills/devops/kanban-workflows/SKILL.md"
@@ -1043,34 +1021,9 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/gaming/pokemon-player/SKILL.md"
       },
       {
-        "name": "codebase-inspection",
+        "name": "github-workflows",
         "category": "github",
-        "skill_md": "/root/.hermes/profiles/atena/skills/github/codebase-inspection/SKILL.md"
-      },
-      {
-        "name": "github-auth",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/atena/skills/github/github-auth/SKILL.md"
-      },
-      {
-        "name": "github-code-review",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/atena/skills/github/github-code-review/SKILL.md"
-      },
-      {
-        "name": "github-issues",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/atena/skills/github/github-issues/SKILL.md"
-      },
-      {
-        "name": "github-pr-workflow",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/atena/skills/github/github-pr-workflow/SKILL.md"
-      },
-      {
-        "name": "github-repo-management",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/atena/skills/github/github-repo-management/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/atena/skills/github/github-workflows/SKILL.md"
       },
       {
         "name": "native-mcp",
@@ -1263,34 +1216,9 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/social-media/xurl/SKILL.md"
       },
       {
-        "name": "debugging-hermes-tui-commands",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/debugging-hermes-tui-commands/SKILL.md"
-      },
-      {
-        "name": "hermes-agent-skill-authoring",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
-      },
-      {
-        "name": "hermes-s6-container-supervision",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/hermes-s6-container-supervision/SKILL.md"
-      },
-      {
-        "name": "node-inspect-debugger",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/node-inspect-debugger/SKILL.md"
-      },
-      {
         "name": "plan",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/atena/skills/software-development/plan/SKILL.md"
-      },
-      {
-        "name": "python-debugpy",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/python-debugpy/SKILL.md"
       },
       {
         "name": "requesting-code-review",
@@ -1342,37 +1270,132 @@
       {
         "name": "apple-notes",
         "category": "apple",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/apple/apple-notes/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/apple/apple-notes/SKILL.md"
       },
       {
         "name": "apple-reminders",
         "category": "apple",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/apple/apple-reminders/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/apple/apple-reminders/SKILL.md"
       },
       {
         "name": "findmy",
         "category": "apple",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/apple/findmy/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/apple/findmy/SKILL.md"
       },
       {
         "name": "imessage",
         "category": "apple",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/apple/imessage/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/apple/imessage/SKILL.md"
       },
       {
         "name": "macos-computer-use",
         "category": "apple",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/apple/macos-computer-use/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/apple/macos-computer-use/SKILL.md"
       },
       {
         "name": "claude-code",
         "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/claude-code/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/autonomous-ai-agents/claude-code/SKILL.md"
       },
       {
         "name": "codex",
         "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/codex/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/autonomous-ai-agents/codex/SKILL.md"
+      },
+      {
+        "name": "opencode",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/autonomous-ai-agents/opencode/SKILL.md"
+      },
+      {
+        "name": "ascii-art",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/ascii-art/SKILL.md"
+      },
+      {
+        "name": "baoyu-article-illustrator",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/baoyu-article-illustrator/SKILL.md"
+      },
+      {
+        "name": "baoyu-comic",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/baoyu-comic/SKILL.md"
+      },
+      {
+        "name": "baoyu-infographic",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/baoyu-infographic/SKILL.md"
+      },
+      {
+        "name": "songwriting-and-ai-music",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/songwriting-and-ai-music/SKILL.md"
+      },
+      {
+        "name": "codebase-inspection",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/codebase-inspection/SKILL.md"
+      },
+      {
+        "name": "github-auth",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-auth/SKILL.md"
+      },
+      {
+        "name": "github-code-review",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-code-review/SKILL.md"
+      },
+      {
+        "name": "github-issues",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-issues/SKILL.md"
+      },
+      {
+        "name": "github-pr-workflow",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-pr-workflow/SKILL.md"
+      },
+      {
+        "name": "github-repo-management",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-repo-management/SKILL.md"
+      },
+      {
+        "name": "heartmula",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/media/heartmula/SKILL.md"
+      },
+      {
+        "name": "huggingface-hub",
+        "category": "mlops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/huggingface-hub/SKILL.md"
+      },
+      {
+        "name": "llama-cpp",
+        "category": "inference",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/inference/llama-cpp/SKILL.md"
+      },
+      {
+        "name": "vllm",
+        "category": "inference",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/inference/vllm/SKILL.md"
+      },
+      {
+        "name": "audiocraft",
+        "category": "models",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/models/audiocraft/SKILL.md"
+      },
+      {
+        "name": "requesting-code-review",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/requesting-code-review/SKILL.md"
+      },
+      {
+        "name": "ai-coding-agents",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/ai-coding-agents/SKILL.md"
       },
       {
         "name": "hermes-agent",
@@ -1385,11 +1408,6 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/kanban-codex-lane/SKILL.md"
       },
       {
-        "name": "opencode",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/opencode/SKILL.md"
-      },
-      {
         "name": "openhands",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/openhands/SKILL.md"
@@ -1400,29 +1418,14 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/architecture-diagram/SKILL.md"
       },
       {
-        "name": "ascii-art",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/ascii-art/SKILL.md"
-      },
-      {
         "name": "ascii-video",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/ascii-video/SKILL.md"
       },
       {
-        "name": "baoyu-article-illustrator",
+        "name": "baoyu-visual-content",
         "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/baoyu-article-illustrator/SKILL.md"
-      },
-      {
-        "name": "baoyu-comic",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/baoyu-comic/SKILL.md"
-      },
-      {
-        "name": "baoyu-infographic",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/baoyu-infographic/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/baoyu-visual-content/SKILL.md"
       },
       {
         "name": "claude-design",
@@ -1485,11 +1488,6 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/sketch/SKILL.md"
       },
       {
-        "name": "songwriting-and-ai-music",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/songwriting-and-ai-music/SKILL.md"
-      },
-      {
         "name": "touchdesigner-mcp",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/touchdesigner-mcp/SKILL.md"
@@ -1535,34 +1533,9 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/gaming/pokemon-player/SKILL.md"
       },
       {
-        "name": "codebase-inspection",
+        "name": "github-operations",
         "category": "github",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/github/codebase-inspection/SKILL.md"
-      },
-      {
-        "name": "github-auth",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-auth/SKILL.md"
-      },
-      {
-        "name": "github-code-review",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-code-review/SKILL.md"
-      },
-      {
-        "name": "github-issues",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-issues/SKILL.md"
-      },
-      {
-        "name": "github-pr-workflow",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-pr-workflow/SKILL.md"
-      },
-      {
-        "name": "github-repo-management",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-repo-management/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-operations/SKILL.md"
       },
       {
         "name": "native-mcp",
@@ -1570,14 +1543,14 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/mcp/native-mcp/SKILL.md"
       },
       {
+        "name": "ai-music-audio-generation",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/media/ai-music-audio-generation/SKILL.md"
+      },
+      {
         "name": "gif-search",
         "category": "media",
         "skill_md": "/root/.hermes/profiles/zeus/skills/media/gif-search/SKILL.md"
-      },
-      {
-        "name": "heartmula",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/media/heartmula/SKILL.md"
       },
       {
         "name": "songsee",
@@ -1605,16 +1578,6 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/evaluation/weights-and-biases/SKILL.md"
       },
       {
-        "name": "huggingface-hub",
-        "category": "mlops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/huggingface-hub/SKILL.md"
-      },
-      {
-        "name": "llama-cpp",
-        "category": "inference",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/inference/llama-cpp/SKILL.md"
-      },
-      {
         "name": "obliteratus",
         "category": "inference",
         "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/inference/obliteratus/SKILL.md"
@@ -1625,14 +1588,9 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/inference/outlines/SKILL.md"
       },
       {
-        "name": "vllm",
-        "category": "inference",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/inference/vllm/SKILL.md"
-      },
-      {
-        "name": "audiocraft",
-        "category": "models",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/models/audiocraft/SKILL.md"
+        "name": "llm-inference-serving",
+        "category": "mlops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/llm-inference-serving/SKILL.md"
       },
       {
         "name": "segment-anything",
@@ -1688,6 +1646,11 @@
         "name": "airtable",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/airtable/SKILL.md"
+      },
+      {
+        "name": "apple-automation",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/apple-automation/SKILL.md"
       },
       {
         "name": "google-workspace",
@@ -1800,11 +1763,6 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/python-debugpy/SKILL.md"
       },
       {
-        "name": "requesting-code-review",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/requesting-code-review/SKILL.md"
-      },
-      {
         "name": "spike",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/spike/SKILL.md"
@@ -1846,8 +1804,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "0cb54696ddf47cf05903057da0d3d09a",
-      "modified_at": "2026-06-03T04:56:02-04:00"
+      "md5": "eb101672d95c8d491b178495f2d20042",
+      "modified_at": "2026-06-03T14:26:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1858,26 +1816,26 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "caa6b3ae2527860f105305a5405c313a",
-      "modified_at": "2026-06-03T05:00:01-04:00"
+      "md5": "f4f1ff56c97244b9b5845c107be84d31",
+      "modified_at": "2026-06-03T14:30:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 6227,
-      "md5": "05c8a05013b7d6998f181e61e6aff299",
-      "modified_at": "2026-06-03T05:00:01-04:00"
+      "size_bytes": 6485,
+      "md5": "c24ea3d2e4091b2983d8785bbf349411",
+      "modified_at": "2026-06-03T14:40:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 330,
-      "md5": "91a809731f066e48282ec14766a52666",
-      "modified_at": "2026-06-02T20:37:03-04:00"
+      "size_bytes": 332,
+      "md5": "1e587200d823b909dc5ebacbe0329077",
+      "modified_at": "2026-06-03T14:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 68752,
-      "md5": "e1464ac468a3762d87a4645a722429f4",
-      "modified_at": "2026-06-02T05:00:04-04:00"
+      "size_bytes": 69241,
+      "md5": "dfbef5b15c6754175532bb33be5d8bd0",
+      "modified_at": "2026-06-03T14:29:48-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1899,9 +1857,9 @@
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
-      "size_bytes": 2836,
-      "md5": "6defa85707d00646baba938761116041",
-      "modified_at": "2026-05-22T18:45:02-04:00"
+      "size_bytes": 2996,
+      "md5": "f530c5e4e831a728579bbcadfea33d17",
+      "modified_at": "2026-06-03T14:29:49-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -1918,8 +1876,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1052,
-      "md5": "8daa73c6000ac2e77002709cfa806f76",
-      "modified_at": "2026-06-03T04:56:01-04:00"
+      "md5": "3df99ee324f2fed7eecf03394de85b2c",
+      "modified_at": "2026-06-03T14:36:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1934,6 +1892,12 @@
       "modified_at": "2026-04-27T12:02:17-04:00"
     },
     {
+      "path": "/root/mgs-agent/data/webshare-status-state.json",
+      "size_bytes": 682,
+      "md5": "eb6ed9715da6d493527d75647f40afa7",
+      "modified_at": "2026-06-03T14:40:18-04:00"
+    },
+    {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
       "size_bytes": 5503,
       "md5": "c5022a15c4d92130ab547820f35183a2",
@@ -1941,9 +1905,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 15880,
-      "md5": "e8caa5311cbacea1d35aed4072d50ce4",
-      "modified_at": "2026-06-02T10:24:07-04:00"
+      "size_bytes": 16244,
+      "md5": "3ed3b49633d034093493d14514db766a",
+      "modified_at": "2026-06-03T10:24:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -1955,19 +1919,19 @@
       "path": "/root/mgs-agent/profiles/ares-soul.md",
       "size_bytes": 9545,
       "md5": "190c48dafec5e21416d4e16e860a647a",
-      "modified_at": "2026-06-02T19:55:30-04:00"
+      "modified_at": "2026-06-03T10:11:41-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
       "size_bytes": 41240,
       "md5": "2f7d47b11e6a84facaf43df570458953",
-      "modified_at": "2026-06-02T19:55:55-04:00"
+      "modified_at": "2026-06-03T10:11:41-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
       "size_bytes": 35618,
       "md5": "94bd10e43c3aa56cb601e232727526c0",
-      "modified_at": "2026-06-02T19:55:30-04:00"
+      "modified_at": "2026-06-03T10:11:41-04:00"
     }
   ],
   "mu_plugin_canonical": {
