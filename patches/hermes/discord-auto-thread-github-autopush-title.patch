@@ -1,0 +1,12 @@
+diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
+--- a/plugins/platforms/discord/adapter.py
++++ b/plugins/platforms/discord/adapter.py
+@@ -4127,6 +4127,8 @@ class DiscordAdapter(BasePlatformAdapter):
+             return f"{agent} diagnóstico de erro"
+         if agent and any(p in lowered for p in ("perdendo contexto", "perdeu contexto", "perda de contexto", "sem contexto", "zerou contexto", "contexto da thread")):
+             return f"{agent} perda de contexto em thread" if "thread" in lowered else f"{agent} perda de contexto"
++        if "github" in lowered and any(w in lowered for w in ("push", "auto-push", "autopush", "atualiz", "sync", "sincroniz")):
++            return "GitHub auto-push"
+         if "hermes" in raw_lowered and any(w in raw_lowered for w in ("atualiz", "update", "upgrade", "versao", "versão", "release")):
+             return "Atualização do Hermes Agent"
+         if "hermes" in raw_lowered and any(w in raw_lowered for w in ("config", "setup", "instal", "provider", "modelo", "model", "oauth", "codex")):
