@@ -30,6 +30,28 @@ apply_patch_if_needed() {
     return 0
   fi
 
+  # Some MGS patch bundles are supersets/composites after manual ports. In that
+  # state `git apply --reverse --check` can fail because context drifted, even
+  # though the required production invariants are already present. Treat those
+  # known invariant-positive states as applied so the watchdog remains useful
+  # instead of false-failing forever.
+  case "$name" in
+    discord-deterministic-thread-rename-auto-add-users.patch)
+      if grep -q "def _auto_thread_name_from_message" "$REPO/plugins/platforms/discord/adapter.py" \
+        && grep -q "DISCORD_THREAD_AUTO_ADD_USERS" "$REPO/plugins/platforms/discord/adapter.py" \
+        && grep -q "Auto-thread member sync" "$REPO/plugins/platforms/discord/adapter.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
+    planned-restart-auto-resume-active-sessions.patch)
+      if grep -q "planned restarts, keep the marker" "$REPO/gateway/run.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
+  esac
+
   fail "patch does not apply cleanly and is not already applied: $name"
 }
 
