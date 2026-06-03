@@ -374,6 +374,17 @@ Referência detalhada: `references/hermes-discord-busy-input-queue.md`.
 When Rodolfo asks to add Raquel or another user to a Zeus/Atena thread, use Discord API `PUT /channels/{thread_id}/thread-members/{user_id}`. If it returns `403 Missing Access`, the likely cause is that the user is not in the parent channel yet; report that clearly, then retry the same PUT after Rodolfo grants parent-channel access. Do not claim the thread add succeeded until the API returns `204`.
 
 
+### Diagnóstico de título ruim em auto-thread
+
+Quando Rodolfo perguntar por que uma thread não foi renomeada, ou por que o título ficou genérico/truncado, não assumir erro de Discord/permissão. Ver `references/discord-auto-thread-title-diagnostics.md`.
+
+Resumo operacional:
+- O título da thread Discord é escolhido pelo gateway no momento de criação (`_auto_create_thread` / `_auto_thread_name_from_message`), antes da resposta do agente.
+- Logs de `Auxiliary title_generation` depois da resposta normalmente são título interno de sessão Hermes; não significam que o Discord thread title foi atualizado.
+- Validar via Discord API o `name` atual da thread e comparar com a primeira mensagem/inbound log.
+- Se não houver regra semântica para a família do pedido (ex: `github + push/autopush`), o fallback usa os primeiros termos limpos da mensagem; isso é “renomeou mal”, não “não renomeou”.
+- Correção preferida: regra class-level no `_auto_thread_name_from_message(...)` e, se necessário, rename pós-resposta idempotente via `PATCH /channels/{thread_id}` sem sobrescrever rename manual do usuário/moderador.
+
 ### Regressão/quirk: `free_response_channels` pode desativar auto-thread
 
 Quando Rodolfo relatar que está falando no canal principal e o agente responde ali mesmo sem abrir thread, não assumir que `auto_thread` foi desligado. Diagnóstico validado em 2026-05-22 no Zeus:
