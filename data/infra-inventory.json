@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-03T05:00:01-04:00",
+    "updated_at": "2026-06-03T14:29:48-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -1006,6 +1006,11 @@
         "name": "kanban-worker",
         "category": "devops",
         "skill_md": "/root/.hermes/profiles/atena/skills/devops/kanban-worker/SKILL.md"
+      },
+      {
+        "name": "kanban-workflows",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/atena/skills/devops/kanban-workflows/SKILL.md"
       },
       {
         "name": "ssh-jump-runcloud",
