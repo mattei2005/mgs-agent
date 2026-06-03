@@ -20,7 +20,7 @@ Use when Rodolfo asks to start a new MGS agent (e.g. Ares) after creating the Di
    - `discord.allowed_channels: <new_channel_id>`
    - `discord.free_response_channels: <new_channel_id>`
    - `discord.auto_thread: true`
-   - channel prompt should use the same rename-on-create + auto-add/freeze pattern as Zeus/Atena, scoped to the new channel.
+   - channel prompt should keep replies in-thread and use the same auto-add policy as Zeus/Atena, scoped to the new channel.
 5. Create a concise `<profile>/SOUL.md` with role, mission, authority, safety, communication style, and relation to Zeus/Atena.
 6. Update `/root/mgs-agent/data/authorized-users.json` with a new `agents.<agent>` entry. Use the actual Discord channel name from API, not a guessed name.
 7. Append an audit event to `/root/mgs-agent/logs/events-audit.jsonl`.

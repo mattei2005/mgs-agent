@@ -18,11 +18,11 @@ The apparent `[sem texto]` message was the Discord technical thread-reference/cr
 
 ## Root cause
 
-The current Atena `channel_prompts` only performed rename-on-create. The older bootstrap behavior that discovered/added members had been removed during prompt slimming. Hermes core auto-thread creates the thread but does not add arbitrary additional members by default.
+The older bootstrap behavior that discovered/added members had been removed during prompt slimming. Hermes core auto-thread creates the thread but does not add arbitrary additional members by default.
 
 ## Applied repair pattern
 
-1. Patch Atena `channel_prompts` to keep `rename-on-create, then freeze` but include an auto-add bootstrap for new threads only.
+1. Patch Atena thread bootstrap/config to include auto-add for new threads only.
 2. Include explicit required thread users:
    - Raquel Oliveira: `1496254952501280974`
    - Rodolfo Mattei: `344196393512075265`

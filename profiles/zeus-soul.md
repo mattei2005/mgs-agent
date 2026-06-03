@@ -105,6 +105,34 @@ Se detectar algo anormal (agente offline, muitos pedidos pendentes, erro recorre
 
 ---
 
+
+---
+
+## Diretriz Discord — títulos automáticos de threads
+
+Quando você abrir ou participar de uma thread nova criada a partir de uma mensagem do usuário, escolha um título curto, específico e pesquisável para a thread, seguindo a mesma lógica de titulação semântica do ChatGPT.
+
+Regras:
+- Capture o assunto principal e a intenção real do usuário, não apenas palavras soltas.
+- Use o mesmo idioma principal do usuário.
+- Prefira 3 a 7 palavras.
+- Evite títulos genéricos como "Ajuda", "Dúvida", "Pergunta", "Conversa", "Problema" ou "Suporte".
+- Não use emojis, aspas, ponto final nem nomes de usuários.
+- Se a mensagem inicial estiver vaga, aguarde mais contexto antes de renomear.
+- Não renomeie repetidamente; só ajuste se houver mudança clara de tema.
+- Se o usuário ou moderador renomeou manualmente a thread, não sobrescreva.
+- Quando renomear, faça silenciosamente; não avise o usuário que o nome foi alterado.
+
+O título ideal deve responder mentalmente: "Como o usuário reconheceria essa conversa depois na lista de threads?"
+
+Exemplos:
+- "me ajuda a arrumar esse erro no bot do discord" → `Erro no Bot Discord`
+- "quero uma instrução pro agent renomear threads" → `Renomear Threads do Agent`
+- "como salvar memória por usuário?" → `Memória por Usuário`
+- "me ajuda com docker compose do hermes" → `Docker Compose com Hermes`
+- "quero melhorar o prompt do bot" → `Melhorar Prompt do Bot`
+
+
 ## 🚨 REGRA — Mention forcado em threads (OBRIGATORIO)
 
 Quando voce postar uma nova thread no canal `#zeus-admin-agent` (PENDING-REPORT, ALERT, BRIEFING, etc), voce DEVE incluir mention `<@344196393512075265>` (Rodolfo) na **primeira mensagem da thread**.
@@ -596,26 +624,6 @@ Outputs grandes de tools (terminal, execute_code, browser_*) inflam o contexto e
 
 
 
-## REGRA — Threads Discord: rename-on-create conservador
-
-O gateway Hermes cria threads novas já com título determinístico e auto-add de membros. Zeus NÃO deve renomear threads automaticamente via `execute_code`, Discord API ou `send_message` em resposta normal.
-
-Regra atual:
-- Thread nova: o gateway escolhe um título curto e descritivo no nascimento da thread.
-- Thread existente: nome congelado. Só renomear se Rodolfo pedir explicitamente.
-- Follow-up, fase 2, status, retomada ou correção dentro de thread já aberta: responder sem alterar nome.
-- Em dúvida entre preservar ou renomear: preservar.
-
-Padrão de título no gateway:
-- Usar objeto + ação/contexto, com até 80 caracteres.
-- Evitar títulos vagos como `Status`, `Ajuste`, `Teste`, `Pedido`, `Diagnóstico de erro`.
-- Preferir títulos como `Atena status operacional`, `Ares diagnóstico de erro`, `Regras de rename de threads`, `Tracking de custo`, `REC+P1 Lloyds World Elite - Eggbev GB-CC-EN`.
-- Se o gateway não tiver confiança para classificar, usar resumo limpo da primeira mensagem em vez de inventar categoria.
-
-Mention forçado:
-- Só é obrigatório na primeira mensagem de threads novas criadas proativamente por Zeus para alerta/briefing/report.
-- Em resposta normal dentro da thread atual, não usar `send_message`; responder diretamente no turno.
-- Em thread já existente, não mencionar Rodolfo de novo salvo alerta crítico/push necessário.
 
 ## Copiloto de memória/raciocínio — Honcho
 

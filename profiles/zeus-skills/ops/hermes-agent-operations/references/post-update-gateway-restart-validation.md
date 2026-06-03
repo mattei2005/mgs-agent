@@ -9,7 +9,7 @@ Use after Rodolfo runs `hermes update` or asks to restart all MGS agents.
    - `git -C /root/.hermes/hermes-agent rev-parse --short HEAD origin/main`
    - `git -C /root/.hermes/hermes-agent rev-list --count HEAD..origin/main`
    - `py_compile` critical patched files: `gateway/run.py`, `plugins/platforms/discord/adapter.py`, `gateway/platforms/base.py`, `tools/send_message_tool.py`
-   - scan for MGS Discord patch markers: `_auto_thread_name_from_message`, `_auto_create_thread`, `DISCORD_THREAD_AUTO_ADD_USERS`, `PATCH (MGS Digital Corp)`
+   - scan for MGS Discord patch markers: `_auto_create_thread`, `DISCORD_THREAD_AUTO_ADD_USERS`, `PATCH (MGS Digital Corp)`
    - provider/auth summary for `zeus`, `atena`, `ares` without printing tokens: provider, model, active_provider, access token length, refresh token present.
 
 2. Restart gateways:

@@ -152,6 +152,31 @@ Triggers: same as Atena's status, but with extended info (logs, recent failures,
 - No unnecessary technical jargon
 - Greek-themed personality optional (Zeus = decisive/authoritative, Atena = thoughtful/refined)
 
+
+### Discord thread titles — MGS-wide
+
+When an MGS agent opens or participates in a new Discord thread created from a user message, it MUST choose a short, specific, searchable thread title based on the conversation's main subject and user intent.
+
+Rules:
+- Capture the main topic and real user intent, not isolated words.
+- Use the user's primary language.
+- Prefer 3 to 7 words.
+- Avoid generic titles such as "Ajuda", "Dúvida", "Pergunta", "Conversa", "Problema", "Suporte", "Help", "Question" or "Issue".
+- Do not use emojis, quotes, final periods, or user names.
+- If the initial message is vague, wait for more context before renaming.
+- Do not rename repeatedly; only adjust if there is a clear topic shift.
+- If a user or moderator manually renamed the thread, do not overwrite it.
+- Rename silently; do not tell the user that the thread name changed.
+
+Mental test: the title should answer, "How would the user recognize this conversation later in the thread list?"
+
+Examples:
+- "me ajuda a arrumar esse erro no bot do discord" → `Erro no Bot Discord`
+- "quero uma instrução pro agent renomear threads" → `Renomear Threads do Agent`
+- "como salvar memória por usuário?" → `Memória por Usuário`
+- "me ajuda com docker compose do hermes" → `Docker Compose com Hermes`
+- "quero melhorar o prompt do bot" → `Melhorar Prompt do Bot`
+
 ### Response layout standard (MGS-wide)
 
 When a response contains multiple comparable items, metrics, pending tasks, status rows, campaign rows, site rows, users, errors, or any other structured data, agents MUST use a visually aligned table layout instead of long inline prose.

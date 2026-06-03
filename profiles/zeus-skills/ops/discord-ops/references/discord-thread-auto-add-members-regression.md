@@ -87,7 +87,7 @@ Agora o prompt só renomeia a thread. O gateway Hermes cria a thread, mas não a
 Fast restoration:
 
 - Reintroduce a bounded `channel_prompts` bootstrap for **new threads only**.
-- Keep the `rename-on-create, then freeze` rule so follow-ups/old threads do not re-run membership logic.
+- Keep auto-add logic scoped to newly created threads so follow-ups/old threads do not re-run membership logic.
 - Treat "respective people in the agent channel" as the agent's operational membership, not all guild members:
   - Atena/content threads: Raquel Oliveira (`1496254952501280974`) + Rodolfo Mattei (`344196393512075265`).
   - Zeus/admin threads: Rodolfo Mattei only, unless a future admin user is explicitly authorized for that channel.

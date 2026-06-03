@@ -279,6 +279,7 @@ Webhook URL: 1Password → vault `MGS Conteúdo` → item `Discord Webhook - Zeu
 5. **Identidade git compartilhada:** não filtrar por `%an/%ae` — usar TTY check
 6. **`mapfile` em commits vazios:** `diff-tree` retorna vazio para `--allow-empty`; embed aparece sem lista de arquivos (inofensivo)
 7. **Não testar via `terminal()` do Zeus:** subshell não tem TTY; testar via SSH direto do Rodolfo
+8. **Commit local ≠ upload GitHub:** ao reportar commits para Rodolfo, diferenciar explicitamente `commit local`, `push/upload para GitHub`, `upstream configurado` e `auto-push confirmado`. Se a branch não tem upstream (`git rev-parse --abbrev-ref --symbolic-full-name @{u}` falha), dizer que o commit ainda não está confirmado no GitHub e nomear o comando de push necessário, em vez de usar só o termo técnico “upstream”.
 
 ---
 
@@ -372,24 +373,6 @@ Referência detalhada: `references/hermes-discord-busy-input-queue.md`.
 
 When Rodolfo asks to add Raquel or another user to a Zeus/Atena thread, use Discord API `PUT /channels/{thread_id}/thread-members/{user_id}`. If it returns `403 Missing Access`, the likely cause is that the user is not in the parent channel yet; report that clearly, then retry the same PUT after Rodolfo grants parent-channel access. Do not claim the thread add succeeded until the API returns `204`.
 
-### Descriptive thread rename: títulos úteis para busca histórica
-
-Quando Rodolfo reclamar que threads estão "mal renomeadas", "curtas demais", "difíceis de identificar", "não foi renomeado", ou pedir correção de rename em Zeus/Atena/Ares, usar `references/discord-thread-descriptive-rename.md`.
-
-Regra operacional: `THREAD_NAME` deve ser um resumo identificável do assunto (objeto + ação/contexto), não só um nome curto nem a primeira frase limpa. Evitar títulos genéricos como `Status`, `Ajuste`, `Teste`, `Renomeacao`, `Pedido`, e também fallbacks literais como `Poderiamos atualizar o hermes dessa vez em base`. Exemplos bons: `Atualização do Hermes Agent`, `Configuração do Hermes Agent`, `Diagnóstico do Hermes Agent`, `Restart dos agentes`, `Gateway Discord dos agentes`, `Criacao e Estrutura REC+P1`, `Correcao Rename de Threads`, `Tracking de Custo Atena`, `REC+P1 Lloyds World Elite - Eggbev`.
-
-Diagnóstico/correção atual para runtime rename-on-create:
-- Verificar os 3 profiles (`zeus`, `atena`, `ares`) em `/root/.hermes/profiles/{profile}/config.yaml`: `discord.auto_thread`, `thread_auto_add_users`, `channel_prompts`, `free_response_channels`, `thread_require_mention`.
-- O rename semântico fica no runtime compartilhado `/root/.hermes/hermes-agent/plugins/platforms/discord/adapter.py`, método `_auto_thread_name_from_message(...)`; não nos prompts dos agentes.
-- Se o gateway criou thread com título literal ruim, corrigir a heurística determinística nesse método e atualizar também `/root/mgs-agent/patches/hermes/discord-deterministic-thread-rename-auto-add-users.patch` para sobreviver a updates.
-- Validar sem restart: `python3 -m py_compile plugins/platforms/discord/adapter.py` e teste local extraindo/chamando `_auto_thread_name_from_message` com exemplos reais. Confirmar que `MainPID`/`ExecMainStartTimestamp` dos 3 serviços não mudaram quando Rodolfo pediu “não reinicia ainda”.
-- Só reiniciar `zeus-gateway`, `atena-gateway`, `ares-gateway` após autorização explícita; a mudança no arquivo não entra nos processos ativos antes do restart.
-
-Pitfall validado: snippets de bootstrap via `execute_code` podem não receber `DISCORD_BOT_TOKEN` por bloqueio de env passthrough. O fix durável é tentar env primeiro e depois ler o `.env` do profile ativo internamente, sem imprimir token/header.
-
-Pitfall validado: mover rename do agente para o runtime eliminou token/loop, mas pode virar “não renomeado” se a heurística só limpar a primeira frase. Tratar isso como falha de classificação semântica, não como falha de auto-thread. Melhorar regras conservadoras por classe operacional (Hermes update/config/diagnóstico, restart de agentes, gateway Discord, REC/P1) em vez de voltar para bootstrap LLM/execute_code.
-
-Se mudar config do Zeus estando dentro do Zeus, evitar matar a resposta corrente: agendar `systemctl restart zeus-gateway.service` com `systemd-run --on-active=<delay>` e, se necessário, agendar validação separada para log local.
 
 ### Regressão/quirk: `free_response_channels` pode desativar auto-thread
 
@@ -497,7 +480,7 @@ Ver `references/discord-threads-lifecycle.md` para referência completa.
 
 Quando Rodolfo relatar que Atena/Zeus cria threads mas parou de colocar pessoas automaticamente nelas, usar `references/discord-thread-auto-add-members-regression.md`. Para a correção aplicada em 2026-05-19 na Atena, ver `references/discord-thread-auto-add-members-2026-05-19.md`.
 
-Lição validada: o gateway Discord do Hermes cria threads via `_auto_create_thread(...)`, mas não adiciona membros extras por padrão. No setup MGS, o comportamento antigo vinha de um `channel_prompts` bootstrap que fazia rename + auto-discover + `PUT /channels/{THREAD_ID}/thread-members/{uid}` via `execute_code`. Se esse prompt foi simplificado para `rename-on-create, then freeze`, a thread continua sendo criada/renomeada, mas só ficam o usuário autor + bot/agente.
+Lição validada: o gateway Discord do Hermes cria threads via `_auto_create_thread(...)`, mas não adiciona membros extras por padrão. No setup MGS, o comportamento antigo vinha de um `channel_prompts` bootstrap que fazia auto-discover + `PUT /channels/{THREAD_ID}/thread-members/{uid}` via `execute_code`. Se esse prompt/config for simplificado demais, a thread continua sendo criada, mas só ficam o usuário autor + bot/agente.
 
 Pitfall 2026-05-26: `execute_code` pode não receber `DISCORD_BOT_TOKEN`; o env passthrough bloqueia credenciais de provider/bot por segurança. Se logs mostrarem `env passthrough: refusing ... DISCORD_BOT_TOKEN` ou `ERROR: DISCORD_BOT_TOKEN not set`, o bootstrap em prompt não consegue chamar Discord API. Preferir correção no runtime/gateway ou script shell que carregue o `.env` autorizado fora do sandbox, e validar com API/logs antes de declarar auto-add corrigido.
 

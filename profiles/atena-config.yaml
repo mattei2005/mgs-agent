@@ -476,21 +476,13 @@ discord:
   history_backfill_limit: 300
   reactions: true
   channel_prompts:
-    '1496267571543019653': 'INSTRUCAO DE THREAD Atena — runtime rename-on-create ativo:
+    '1496267571543019653': 'INSTRUCAO DE THREAD Atena:
 
 
       - Responda na thread atual; nao use send_message para resposta normal.
 
       - Se for REC direto completo, nao leia AGENT.md/SKILL/template/runner antes:
       chame mgs-rec-runner.py uma vez e resuma o JSON.
-
-      - NAO renomeie threads automaticamente via execute_code/Discord API. O gateway
-      ja cria thread nova com titulo deterministico e auto-add de Raquel + Rodolfo.
-
-      - Thread existente fica congelada; so renomeie se Rodolfo/Raquel pedir explicitamente.
-
-      - Nao comente sobre rename/auto-add na resposta, exceto se o usuario estiver
-      testando especificamente membros/threads.
 
       '
   dm_role_auth_guild: ''

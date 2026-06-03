@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-02T05:00:01-04:00",
+    "updated_at": "2026-06-03T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -131,9 +131,19 @@
       "modified_at": "2026-05-16T16:16:09-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
+      "size_bytes": 2162,
+      "modified_at": "2026-06-02T20:18:36-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
       "size_bytes": 3808,
       "modified_at": "2026-05-17T00:02:25-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/hermes-mgs-patch-watchdog.sh",
+      "size_bytes": 309,
+      "modified_at": "2026-06-02T20:19:20-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
@@ -282,8 +292,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
-      "size_bytes": 5508,
-      "modified_at": "2026-05-22T19:30:24-04:00"
+      "size_bytes": 5415,
+      "modified_at": "2026-06-02T20:18:51-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/run-openhands-atena.sh",
@@ -1831,8 +1841,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "3e5d82cd1c4e84464d8a451521af4209",
-      "modified_at": "2026-06-02T04:56:02-04:00"
+      "md5": "0cb54696ddf47cf05903057da0d3d09a",
+      "modified_at": "2026-06-03T04:56:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1843,26 +1853,26 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "b27d02c5df895b69fd5e8dda8309b2b3",
-      "modified_at": "2026-06-02T05:00:01-04:00"
+      "md5": "caa6b3ae2527860f105305a5405c313a",
+      "modified_at": "2026-06-03T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 5582,
-      "md5": "4e9f989dae1f8d13545c849b6ba74ead",
-      "modified_at": "2026-06-02T05:00:02-04:00"
+      "size_bytes": 6227,
+      "md5": "05c8a05013b7d6998f181e61e6aff299",
+      "modified_at": "2026-06-03T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 329,
-      "md5": "49f21d8b0b13c3040a0ce7ca81317dbf",
-      "modified_at": "2026-06-01T20:37:02-04:00"
+      "size_bytes": 330,
+      "md5": "91a809731f066e48282ec14766a52666",
+      "modified_at": "2026-06-02T20:37:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 68751,
-      "md5": "92b0f25adb32e13aee9639b948074c8f",
-      "modified_at": "2026-06-01T05:00:04-04:00"
+      "size_bytes": 68752,
+      "md5": "e1464ac468a3762d87a4645a722429f4",
+      "modified_at": "2026-06-02T05:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1902,9 +1912,9 @@
     },
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
-      "size_bytes": 1026,
-      "md5": "20c7e50932a070af425e71d2a8001b79",
-      "modified_at": "2026-06-02T04:56:01-04:00"
+      "size_bytes": 1052,
+      "md5": "8daa73c6000ac2e77002709cfa806f76",
+      "modified_at": "2026-06-03T04:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1926,9 +1936,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 15516,
-      "md5": "3384a177756e20f569d1d003cee80732",
-      "modified_at": "2026-05-31T10:24:08-04:00"
+      "size_bytes": 15880,
+      "md5": "e8caa5311cbacea1d35aed4072d50ce4",
+      "modified_at": "2026-06-02T10:24:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -1938,21 +1948,21 @@
     },
     {
       "path": "/root/mgs-agent/profiles/ares-soul.md",
-      "size_bytes": 7473,
-      "md5": "ad7fa7a94d9de6d3f24175643454edd0",
-      "modified_at": "2026-05-27T14:01:36-04:00"
+      "size_bytes": 9545,
+      "md5": "190c48dafec5e21416d4e16e860a647a",
+      "modified_at": "2026-06-02T19:55:30-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "size_bytes": 39227,
-      "md5": "e6922c195b8655cd37eaf5a533618c74",
-      "modified_at": "2026-05-30T00:36:05-04:00"
+      "size_bytes": 41240,
+      "md5": "2f7d47b11e6a84facaf43df570458953",
+      "modified_at": "2026-06-02T19:55:55-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
-      "size_bytes": 34751,
-      "md5": "623ac3396cc6af7307cd81cde8746175",
-      "modified_at": "2026-05-28T17:13:19-04:00"
+      "size_bytes": 35618,
+      "md5": "94bd10e43c3aa56cb601e232727526c0",
+      "modified_at": "2026-06-02T19:55:30-04:00"
     }
   ],
   "mu_plugin_canonical": {

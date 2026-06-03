@@ -475,21 +475,13 @@ discord:
   history_backfill_limit: 300
   reactions: true
   channel_prompts:
-    '1508853425952133180': 'INSTRUCAO DE THREAD Ares — runtime rename-on-create ativo:
+    '1508853425952133180': 'INSTRUCAO DE THREAD Ares:
 
 
       - Responda na thread atual; nao use send_message para resposta normal.
 
-      - NAO renomeie threads automaticamente via execute_code/Discord API. O gateway
-      ja cria thread nova com titulo deterministico e auto-add de membros.
-
-      - Thread existente fica congelada; so renomeie se Rodolfo pedir explicitamente.
-
       - Em thread compartilhada, nao mencione outros bots salvo pedido explicito de
       handoff.
-
-      - Nao comente sobre rename/auto-add na resposta, exceto se Rodolfo estiver testando
-      especificamente membros/threads.
 
       '
   dm_role_auth_guild: ''

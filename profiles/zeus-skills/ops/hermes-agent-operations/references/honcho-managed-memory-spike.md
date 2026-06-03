@@ -86,9 +86,33 @@ print(zeus.chat(
 
 Self-host is safer for real operational memory, but requires Docker/Postgres+pgvector/Redis and LLM provider configuration. Treat Docker/service installation on the VPS as a separate infrastructure action requiring normal MGS confirmation and validation.
 
+## Sanitized operational-log evaluation pattern
+
+After the synthetic smoke test passes, run a second manual evaluation with small sanitized datasets before considering any recurring pipeline. For the targeted-rounds pattern and first MGS results, see `references/honcho-targeted-rounds-2026-06-02.md`.
+
+Key lesson from first evaluation: Honcho is more useful on deterministic, domain-shaped aggregates than on raw log excerpts. Generate category counts plus 2–4 sanitized examples per category before ingestion, especially for REC/P1/content and gateway reliability.
+
+1. Build a capped dataset from canonical local sources such as `/root/mgs-agent/logs/events-audit.jsonl`, `/root/.hermes/profiles/atena/logs/errors.log`, and `/root/.hermes/profiles/zeus/logs/errors.log`.
+2. Aggressively sanitize before ingestion:
+   - redact Honcho/API/token patterns such as `hch-v3-*`, `sk-*`, `ghp_*`, `github_pat_*`, `AKIA*`;
+   - redact `password=`, `token=`, `secret=`, `api_key=`, `authorization=` style fields;
+   - redact URLs containing embedded credentials;
+   - truncate long payload-ish lines;
+   - keep only operational/error terms needed for the test (`error`, `warn`, `fail`, `restart`, `authorization`, `approval`, `pending`, `timeout`, `rate`, `loop`, agent names, pipeline terms).
+3. Run a local anti-secret scan on the serialized dataset before sending anything to Honcho. Abort if any secret-like pattern matches. Reusable scanner: `scripts/honcho_sanitized_secret_scan.py`.
+4. Ingest the policy as the first message: sanitized MGS operational events only; no credentials; Honcho conclusions are hypotheses; Zeus must validate against canonical logs before reporting or acting.
+5. Ask three validation queries:
+   - “What operational risks or recurring patterns should Zeus investigate? Return concise bullets and mark uncertainty.”
+   - “Is there evidence of a confirmed incident, or only hypotheses requiring canonical validation?”
+   - “What should Zeus do next operationally before alerting Rodolfo?”
+6. Validate Honcho’s suggestions against canonical logs before reporting. Classify each suggestion as: confirmed pattern, plausible but needs frequency check, false positive, or security control working as designed.
+
+Good sign: Honcho identifies patterns such as repeated tool misuse, provider 503s, or safety blocks and still states that these are hypotheses requiring validation. Bad sign: it asserts an incident as confirmed from sanitized excerpts alone.
+
 ## Pitfalls
 
 - Do not let Honcho become source of truth for authorization, publication state, credentials, or incident status.
-- Do not paste API keys into Discord. Report only item/field and presence/length if needed.
+- Do not paste API keys into Discord. Report only item/field and presence/length if needed. If a key was pasted even in a private channel, treat it as compromised: revoke, recreate, update 1Password, then re-run the smoke test from 1Password.
+- Do not hardcode the key in example scripts. Use a small local runner that pulls `MGS Conteúdo` → `Honcho API - MGS` → `api key` via `op item get --reveal`, exports `HONCHO_API_KEY`, and unsets the temporary shell variable.
 - Do not evaluate quality on a single happy-path answer. Compare against `session_search`/logs on a real question using sanitized excerpts.
 - If using managed Honcho, default to synthetic/sanitized event summaries, not raw Discord transcripts.

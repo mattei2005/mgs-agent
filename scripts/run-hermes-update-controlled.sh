@@ -91,13 +91,8 @@ log "Post-update rev"
 git -C "$REPO" fetch --quiet origin main
 log "HEAD=$(git -C "$REPO" rev-parse --short HEAD) origin=$(git -C "$REPO" rev-parse --short origin/main) behind=$(git -C "$REPO" rev-list --count HEAD..origin/main)"
 
-log "Applying MGS Discord patch to plugin adapter"
-if [[ -s "$PORT_PATCH" ]]; then
-  git -C "$REPO" apply --check "$PORT_PATCH"
-  git -C "$REPO" apply "$PORT_PATCH"
-else
-  log "WARN empty port patch; skipping apply"
-fi
+log "Applying canonical MGS Hermes patches"
+BASE="$BASE" REPO="$REPO" LOG="$LOG" "$BASE/scripts/ensure-hermes-mgs-patches.sh"
 
 log "Compiling critical Hermes files"
 PYBIN="$REPO/venv/bin/python"
