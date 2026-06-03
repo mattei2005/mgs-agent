@@ -33,6 +33,7 @@ Para hardening de monitores que usam SSH/SCP via jump host RunCloud, ver `refere
 
 - `references/cron-op-rate-limit-mitigation.md`: primeiro aplicar stagger; depois mover busca de webhook/segredo para o caminho de alerta real, mantendo execução saudável sem `op`, fallback local de alertas pendentes e `exit 2` quando `op` falhar durante alerta.
 - `references/cron-enospc-recovery.md`: recuperação pós-ENOSPC/disco cheio para crons MGS — distinguir erro histórico de ativo, reconstruir state JSON corrompido, rodar monitors manualmente em modo seguro/dry-run e limpar stale-alert state.
+- `references/external-status-page-maintenance-monitor.md`: padrão validado para crons que monitoram status pages externas (ex: incident.io/Webshare), detectam manutenção ativa sem falso positivo por labels estáticos, alertam `#alerts-infra` só em transição e registram resolução.
 
 Exemplos validados: `monitor-auto-push.sh` para o auto-push do mgs-agent; `cron-control-plane.py`, `cron-smoke-test.sh` e `monitor-cron-stale-logs.sh` para controle dos crons MGS.
 Exemplos validados:
