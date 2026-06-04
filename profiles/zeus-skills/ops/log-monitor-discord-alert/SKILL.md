@@ -19,6 +19,8 @@ Também usar quando um canal Discord precisa de automação idempotente via poll
 
 Também usar para gestão de **cron reliability/control plane**: inventariar crons MGS, padronizar `flock`, criar smoke tests seguros, adicionar `--dry-run` em jobs destrutivos e monitorar logs stale. Ver referência validada: `references/cron-control-plane.md`.
 
+Também usar quando Rodolfo pedir uma visão executiva da operação MGS antes de ativar alertas programados: criar primeiro um collector read-only + briefing manual Discord-safe, validar escopo/sinal/ruído por 1–2 dias, e só depois propor cron/entrega automática. Ver `references/ops-control-plane-briefing.md`. Runtime snapshots `data/*-latest.{md,json}` devem ficar local-only/ignorados; se auto-commit rastrear por acidente, usar `git rm --cached` para remover do Git sem apagar do disco.
+
 Quando Rodolfo pedir para começar um **Ops Control Plane / dashboard / briefing executivo** amplo, começar com collector determinístico read-only e sob demanda — não cron/alerta. Se ele excluir um agente explicitamente (ex: “Atena deixa por último e me avise antes”), tratar como gate duro: não ler logs/config/profile desse agente e declarar a exclusão no relatório. Ver `references/mgs-ops-control-plane-readonly.md`.
 
 Quando Rodolfo pedir uma checagem geral pós-update/restart (“verifica se tudo está funcionando”, “verifica todos os crons”), usar o checklist amplo em `references/full-operational-audit-after-update.md`: serviços, crons, stale-log dry-run, smoke test, recursos VPS, provider/modelo, git/autocommit e distinção entre falha histórica de restart vs problema ativo.
