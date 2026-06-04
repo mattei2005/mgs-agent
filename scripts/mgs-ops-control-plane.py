@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""MGS Ops Control Plane v1 — read-only executive collector.
-
-Scope v1 intentionally excludes Atena-specific inspection. Rodolfo asked to leave
-Atena for last and be notified before touching it.
-"""
+"""MGS Ops Control Plane v1 — read-only executive collector."""
 from __future__ import annotations
 
 import json
@@ -20,9 +16,9 @@ BASE = pathlib.Path('/root/mgs-agent')
 LOGS = BASE / 'logs'
 DATA = BASE / 'data'
 PROFILES = pathlib.Path('/root/.hermes/profiles')
-EXCLUDED_AGENTS = {'atena'}
-AGENTS = ['zeus', 'ares']
-SERVICES = ['zeus-gateway.service', 'ares-gateway.service', 'mgs-autocommit.service']
+EXCLUDED_AGENTS: set[str] = set()
+AGENTS = ['zeus', 'atena', 'ares']
+SERVICES = ['zeus-gateway.service', 'atena-gateway.service', 'ares-gateway.service', 'mgs-autocommit.service']
 
 
 def run(cmd: list[str] | str, timeout: int = 20, cwd: str | None = None) -> dict[str, Any]:
@@ -185,7 +181,7 @@ def render(report: dict[str, Any]) -> str:
     lines: list[str] = []
     lines.append('MGS Ops Control Plane v1')
     lines.append(f'Gerado em: {report["generated_at"]}')
-    lines.append('Escopo: Zeus, Ares, crons, git, infra local. Atena excluída por gate do Rodolfo.')
+    lines.append('Escopo: Zeus, Atena, Ares, crons, git, infra local.')
     lines.append('')
     lines.append('Atenção executiva')
     lines.append('-' * 72)
