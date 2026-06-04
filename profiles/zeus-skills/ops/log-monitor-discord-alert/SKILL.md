@@ -19,6 +19,8 @@ Também usar quando um canal Discord precisa de automação idempotente via poll
 
 Também usar para gestão de **cron reliability/control plane**: inventariar crons MGS, padronizar `flock`, criar smoke tests seguros, adicionar `--dry-run` em jobs destrutivos e monitorar logs stale. Ver referência validada: `references/cron-control-plane.md`.
 
+Quando Rodolfo pedir para começar um **Ops Control Plane / dashboard / briefing executivo** amplo, começar com collector determinístico read-only e sob demanda — não cron/alerta. Se ele excluir um agente explicitamente (ex: “Atena deixa por último e me avise antes”), tratar como gate duro: não ler logs/config/profile desse agente e declarar a exclusão no relatório. Ver `references/mgs-ops-control-plane-readonly.md`.
+
 Quando Rodolfo pedir uma checagem geral pós-update/restart (“verifica se tudo está funcionando”, “verifica todos os crons”), usar o checklist amplo em `references/full-operational-audit-after-update.md`: serviços, crons, stale-log dry-run, smoke test, recursos VPS, provider/modelo, git/autocommit e distinção entre falha histórica de restart vs problema ativo.
 
 Quando o pedido for auditoria/varredura operacional, checar também **erros semânticos em logs recentes** — log fresco não significa cron saudável. Ver `references/cron-semantic-error-audit.md` para o caso validado `grep -c ... || echo 0` que gerava `0\n0` e quebrava aritmética Bash sem acionar stale-log.
