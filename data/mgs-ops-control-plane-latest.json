@@ -1,0 +1,120 @@
+{
+  "generated_at": "2026-06-04T12:24:13-04:00",
+  "scope": {
+    "agents": [
+      "zeus",
+      "atena",
+      "ares"
+    ],
+    "excluded_agents": []
+  },
+  "services": [
+    {
+      "service": "zeus-gateway",
+      "active": "active",
+      "main_pid": "1025185",
+      "restarts": "0",
+      "since": "Thu 2026-06-04 11:15:29 EDT",
+      "memory": "836722688"
+    },
+    {
+      "service": "atena-gateway",
+      "active": "active",
+      "main_pid": "1025017",
+      "restarts": "0",
+      "since": "Thu 2026-06-04 11:11:27 EDT",
+      "memory": "199729152"
+    },
+    {
+      "service": "ares-gateway",
+      "active": "active",
+      "main_pid": "1025515",
+      "restarts": "0",
+      "since": "Thu 2026-06-04 11:18:13 EDT",
+      "memory": "98918400"
+    },
+    {
+      "service": "mgs-autocommit",
+      "active": "active",
+      "main_pid": "923538",
+      "restarts": "0",
+      "since": "Wed 2026-06-03 10:13:12 EDT",
+      "memory": "20004864"
+    }
+  ],
+  "failed_units": [],
+  "disk": [
+    "/dev/sda1        38G   19G   18G  51% /",
+    "/dev/sda1        38G   19G   18G  51% /"
+  ],
+  "git": {
+    "branch": "main",
+    "head": "479217c",
+    "dirty_lines": [
+      "M scripts/mgs-ops-briefing.py"
+    ],
+    "upstream": "",
+    "ahead_behind": "",
+    "recent": [
+      "479217c auto: scripts/mgs-ops-briefing.py",
+      "82510b4 auto: scripts/mgs-ops-control-plane.py",
+      "62341b5 auto: profiles/zeus-skills/ops/log-monitor-discord-alert/SKILL.md profiles/zeus-skills/ops/log-monitor-dis",
+      "72d409b auto: scripts/mgs-ops-control-plane.py",
+      "6914af5 auto: scripts/mgs-ops-control-plane.py"
+    ]
+  },
+  "cron": {
+    "entries": 19,
+    "last_stale_check": "[2026-06-04T16:15:01Z] cron-stale check: jobs=19 problems=0 resolved=0 alerts_sent=0",
+    "stale_summary": {
+      "jobs": "19",
+      "problems": "0",
+      "resolved": "0",
+      "alerts_sent": "0"
+    }
+  },
+  "pending": {
+    "pending_approvals": 0,
+    "pending_report_alerted": 0
+  },
+  "monitors": {
+    "monitor-auto-push.log": "[2026-06-04T12:11:01-04:00] monitor-auto-push: Concluído. consecutive_failures=0 last_ok=d099ee6",
+    "monitor-tool-loops.log": "Loop detector: 0 alertas enviados",
+    "monitor-service-restarts.log": "2026-06-04T12:21:01-04:00 [monitor-service-restarts] OK",
+    "check-pending-reports.log": "[2026-06-04 12:22:01] check-pending-reports.sh concluído",
+    "monitor-webshare-status.log": "[2026-06-04T08:07:02-04:00] monitor-webshare-status: OK completed mode=normal",
+    "monitor-gpt55-oauth-cost.log": "sem log"
+  },
+  "agent_errors": {
+    "zeus": [
+      " Tool terminal returned error (37.47s): {\"output\": \"........................................................................ [ 31%]\\n.............................................................F.F.....FFF [ 62%]\\n..........................",
+      " Tool terminal returned error (37.08s): {\"output\": \"........................................................................ [ 31%]\\n.....................................................................FFF [ 62%]\\n..........................",
+      "06:44,973 WARNING [20260604_110637_d74f92b1] agent.tool_executor: Tool skill_view returned error (0.01s): {\"success\": false, \"error\": \"Skill 'hermes-agent' is disabled. Enable it with `hermes skills` or inspect the files directly on disk.\"}",
+      "Tool terminal returned error (330.42s): {\"output\": \"[2026-06-04T11:09:57-04:00] START controlled Hermes update\\n[2026-06-04T11:09:57-04:00] backup=/root/hermes-profiles-backup-20260604-110732.tar.gz\\n[2026-06-04T11:09:57-04:00] repo=/root/.",
+      ": Tool terminal returned error (2.34s): {\"output\": \"== time ==\\n2026-06-04T11:15:56-04:00\\n\\n== hermes/rev ==\\nHermes Agent v0.15.1 (2026.5.29)\\nProject: /root/.hermes/hermes-agent\\nPython: 3.11.15\\nOpenAI SDK: 2.24.0\\nUp to date\\nHEAD=3041",
+      " Tool terminal returned error (39.11s): {\"output\": \"== collect/check tests cwd ==\\ntests/gateway/test_gateway_shutdown.py::test_cancel_background_tasks_cancels_inflight_message_processing\\ntests/gateway/test_gateway_shutdown.py::test_cleanu",
+      " Tool terminal returned error (36.90s): {\"output\": \"== full targeted gateway pytest after local test alignment ==\\n........................................................................ [ 47%]\\n............................................",
+      " Tool terminal returned error (36.70s): {\"output\": \"........................................................................ [ 47%]\\n..................................................................F..... [ 94%]\\n........                  "
+    ],
+    "atena": [
+      "sqlite3.OperationalError: disk I/O error",
+      "14:15:08,322 WARNING [20260603_141430_b559e4] agent.tool_executor: Tool skill_view returned error (0.16s): {\"success\": false, \"error\": \"Skill 'github-auth' is disabled. Enable it with `hermes skills` or inspect the files directly on disk.\"}",
+      "8,323 WARNING [20260603_141430_b559e4] agent.tool_executor: Tool skill_view returned error (0.15s): {\"success\": false, \"error\": \"Skill 'github-code-review' is disabled. Enable it with `hermes skills` or inspect the files directly on disk.\"}",
+      ":15:08,323 WARNING [20260603_141430_b559e4] agent.tool_executor: Tool skill_view returned error (0.16s): {\"success\": false, \"error\": \"Skill 'github-issues' is disabled. Enable it with `hermes skills` or inspect the files directly on disk.\"}",
+      "8,324 WARNING [20260603_141430_b559e4] agent.tool_executor: Tool skill_view returned error (0.17s): {\"success\": false, \"error\": \"Skill 'github-pr-workflow' is disabled. Enable it with `hermes skills` or inspect the files directly on disk.\"}",
+      "ol skill_manage returned error (0.09s): {\"success\": false, \"error\": \"Found 220 matches for old_string. Provide more context to make it unique, or use replace_all=True.\", \"file_preview\": \"---\\nname: hermes-agent\\ndescription: \\\"Configure, ex",
+      "Tool skill_view returned error (0.07s): {\"success\": false, \"error\": \"Ambiguous skill name 'sketch': 2 skills match across your local skills dir and external_dirs. Refusing to guess — load one explicitly by its categorized path.\", \"matches\":",
+      "026-06-03 14:18:30,239 WARNING [20260603_141430_b559e4] agent.tool_executor: Tool skill_view returned error (0.08s): {\"success\": false, \"error\": \"Skill 'apple-services' is not supported on this platform.\", \"readiness_status\": \"unsupported\"}"
+    ],
+    "ares": [
+      "Traceback (most recent call last):",
+      "sqlite3.OperationalError: disk I/O error",
+      "2026-06-01 10:06:52,665 WARNING gateway.channel_directory: Channel directory: failed to write: [Errno 28] No space left on device",
+      "2026-06-01 10:07:17,983 ERROR [20260601_093807_6a65abdc] gateway.run: kanban dispatcher: tick failed on board default",
+      "Traceback (most recent call last):",
+      "sqlite3.OperationalError: disk I/O error",
+      "ol execute_code returned error (5.65s): {\"status\": \"error\", \"output\": \"\\n--- stderr ---\\n  File \\\"/tmp/hermes_sandbox_2rxu2nwp/script.py\\\", line 5\\n    n-debugpy requesting-code-review research-paper-writing segment-anything-model serving-l",
+      "ol execute_code returned error (5.96s): {\"status\": \"error\", \"output\": \"\\n--- stderr ---\\n  File \\\"/tmp/hermes_sandbox_exw0pczb/script.py\\\", line 3\\n    script='python3 - <<\\\\'PY\\\\'\\\\nfrom pathlib import Path\\\\nimport re\\\\nroot=Path(\\\"/root/"
+    ]
+  }
+}
