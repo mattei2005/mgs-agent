@@ -1,5 +1,5 @@
 **MGS Ops Briefing**
-Gerado em: `2026-06-04T12:24:13-04:00`
+Gerado em: `2026-06-04T12:24:33-04:00`
 
 **Atenção executiva**
 - 1 arquivo(s) dirty no repo MGS
@@ -19,7 +19,7 @@ mgs-autocommit  OK     active | r=0 | pid=923538
 Crons         OK       jobs=19 stale=0                           
 Autorizações  OK       pendentes=0                               
 REPORT-INFRA  OK       pendentes=0                               
-Git dirty     ATENÇÃO  branch=main head=479217c                  
+Git dirty     ATENÇÃO  branch=main head=bba015f                  
 Disco         OK       /dev/sda1        38G   19G   18G  51% / | 
 ```
 

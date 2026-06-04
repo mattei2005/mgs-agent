@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-04T12:24:13-04:00",
+  "generated_at": "2026-06-04T12:24:33-04:00",
   "scope": {
     "agents": [
       "zeus",
@@ -15,7 +15,7 @@
       "main_pid": "1025185",
       "restarts": "0",
       "since": "Thu 2026-06-04 11:15:29 EDT",
-      "memory": "836722688"
+      "memory": "841191424"
     },
     {
       "service": "atena-gateway",
@@ -39,7 +39,7 @@
       "main_pid": "923538",
       "restarts": "0",
       "since": "Wed 2026-06-03 10:13:12 EDT",
-      "memory": "20004864"
+      "memory": "20045824"
     }
   ],
   "failed_units": [],
@@ -49,18 +49,18 @@
   ],
   "git": {
     "branch": "main",
-    "head": "479217c",
+    "head": "bba015f",
     "dirty_lines": [
-      "M scripts/mgs-ops-briefing.py"
+      "M .gitignore"
     ],
     "upstream": "",
     "ahead_behind": "",
     "recent": [
+      "bba015f auto: scripts/mgs-ops-briefing.py data/mgs-ops-briefing-latest.md data/mgs-ops-control-plane-latest.json",
       "479217c auto: scripts/mgs-ops-briefing.py",
       "82510b4 auto: scripts/mgs-ops-control-plane.py",
       "62341b5 auto: profiles/zeus-skills/ops/log-monitor-discord-alert/SKILL.md profiles/zeus-skills/ops/log-monitor-dis",
-      "72d409b auto: scripts/mgs-ops-control-plane.py",
-      "6914af5 auto: scripts/mgs-ops-control-plane.py"
+      "72d409b auto: scripts/mgs-ops-control-plane.py"
     ]
   },
   "cron": {
