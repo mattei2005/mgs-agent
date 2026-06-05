@@ -1,0 +1,247 @@
+# MGS — Operating Model Atual
+
+> Status: fonte primária do CEO, capturada a partir da explicação do Rodolfo.  
+> Dono da informação: Rodolfo Mattei.  
+> Uso: base para redesenhar a arquitetura MGS OS antes de reorganizar agentes, arquivos e rotas.
+
+---
+
+## 1. Sócios e liderança
+
+```text
+Pessoa        Papel atual
+------------ ---------------------------------------------------------------
+Rodolfo       CEO; gestão geral, financeiro, estrutura, WordPress, pixels,
+              aprovação/relacionamento com redes, estratégia e arquitetura.
+Geizian       Sócio; acompanha e gerencia os gestores, rotina diária de
+              campanhas, custos e performance.
+```
+
+---
+
+## 2. Estrutura humana atual
+
+```text
+Grupo                         Responsabilidade
+----------------------------- ------------------------------------------------
+Raquel                        Produção/conteúdo; cuida da Atena no futuro.
+5 gestores                    Gestão de conteúdo/campanhas/sites; acompanham
+                              campanhas, custos, ROI e contato operacional.
+Kelly                         Criativos; produz assets em ferramentas AI/Canva
+                              para gestores usarem nas campanhas.
+Rodolfo + Geizian + gestores  Acessam dashboards de monetização/ROI/campanhas.
+```
+
+---
+
+## 3. Sites, verticais e conteúdo
+
+A MGS opera mais de 30 sites em vários países, nichos e idiomas. Cada site pode ter uma ou mais verticais.
+
+Exemplo de vertical:
+
+```text
+Site      País             Nicho              Idioma
+-------- ----------------- ------------------ -------
+EggBev    GB/Reino Unido   Credit Cards/CC    EN
+```
+
+Fluxo estrutural de site:
+
+```text
+Etapa                         Descrição
+----------------------------- ------------------------------------------------
+1. WordPress                  Configurar instalação, tema/home, plugins e base.
+2. Categorias                 Criar categorias conforme vertical/nicho.
+3. Conteúdo REC/P1            Raquel publica conteúdo comercial principal.
+4. Artigos SEO                Quando há mais categorias, publicar artigos SEO
+                              de aproximadamente 1.200 palavras para preencher.
+5. Conteúdo diário            Raquel mantém produção e preenchimento diário.
+6. Aprovação em rede          Sites são enviados para aprovação nas redes de
+                              AdManager/AdX via parceiros.
+```
+
+---
+
+## 4. Monetização e redes
+
+A MGS trabalha com redes/parceiros de AdManager/AdX, principalmente Smart Bidding e ActiveView.
+
+```text
+Rede/empresa       Papel atual
+----------------- -------------------------------------------------------------
+Smart Bidding      Central principal atual. Dashboard com sites, campanhas,
+                   ROI, features operacionais, blocos de anúncio, APIs e
+                   permissões. Também tem time de AdOps no Discord.
+ActiveView         Rede/tecnologia ainda relevante em alguns sites. A maior
+                   parte foi migrada/concentrada na Smart Bidding.
+Google/AdX         Origem dos pagamentos via ecossistema de monetização.
+```
+
+### 4.1 Dashboard Smart Bidding
+
+A dash da Smart Bidding é fonte operacional para:
+
+- lista de sites;
+- campanhas;
+- ROI;
+- features de análise;
+- criação/gestão de blocos de anúncio;
+- API/permissões;
+- tecnologia concentrada dos sites migrados.
+
+Acessos: Rodolfo, Geizian e gestores.
+
+### 4.2 ActiveView — exceção atual
+
+Os únicos sites que ainda não tiveram a tecnologia migrada para Smart Bidding são:
+
+```text
+- openzed
+- cliquet
+- respectivos subdomínios
+```
+
+Todo o restante está concentrado/operado via Smart Bidding, ainda que tenha origem histórica em ActiveView.
+
+---
+
+## 5. AdOps e precificação
+
+A Smart Bidding mantém canais no Discord com time de AdOps. Rodolfo e gestores usam esses canais para acompanhar:
+
+- aprovação dos sites;
+- funcionamento das regras;
+- alteração de precificação dos blocos de anúncio;
+- performance da monetização;
+- se o time de AdOps está trabalhando corretamente;
+- ajustes de preço e regras dos blocos.
+
+Essa área pertence à camada de **Monetização / AdOps / Revenue Operations**.
+
+---
+
+## 6. Aquisição e campanhas
+
+Canais atuais de aquisição:
+
+```text
+Canal             Uso
+---------------- --------------------------------------------------------------
+Facebook Ads      Canal principal de compra de mídia e análise de gastos.
+Google Ads        Canal de aquisição pago.
+SMS               Usado em sites de financiamento de carro para envio a usuários.
+```
+
+Fluxo operacional:
+
+1. Kelly cria criativos com ferramentas AI e Canva.
+2. Kelly sobe os criativos na pasta Canva do gestor.
+3. Gestor acessa a pasta, pega os criativos e sobe campanhas.
+4. Geizian acompanha gestores diariamente.
+5. Rodolfo acompanha visão geral, custos, ROI e financeiro.
+
+---
+
+## 7. Criativos e ferramentas AI
+
+Ferramentas citadas:
+
+```text
+Ferramenta       Uso atual
+--------------- ---------------------------------------------------------------
+ChatGPT          Criativos estáticos e apoio criativo.
+TopView.ai       Criação de vídeos.
+Canva            Organização/entrega de criativos para gestores.
+Grok/outras AIs  Potenciais fontes futuras via API para agente de criativos.
+```
+
+Necessidade futura: agente especializado em criação de criativos, com acesso controlado a APIs/ferramentas compatíveis.
+
+---
+
+## 8. Financeiro e fechamento
+
+Rodolfo é responsável pelo financeiro.
+
+Ciclo mensal:
+
+```text
+Período analisado           Dia 1 ao dia 30
+Pagamento Google            Entre dia 21 e dia 23
+Fonte de controle           Planilha financeira do Rodolfo
+```
+
+Conferências feitas por Rodolfo:
+
+- gastos no Facebook Business Manager;
+- gastos por conta de anúncio;
+- tráfego inválido por site;
+- relatórios Smart Bidding;
+- relatórios ActiveView;
+- comissões;
+- salários;
+- despesas da empresa;
+- fechamento e pagamentos.
+
+Essa camada deve virar **Finance / BI / Executive Reporting** no MGS OS.
+
+---
+
+## 9. Rotina de gestão
+
+A empresa tem reuniões diárias internas. Nessas reuniões são acompanhados:
+
+- campanhas;
+- custos;
+- performance;
+- ROI;
+- gestores;
+- problemas operacionais;
+- demandas de sites/conteúdo/campanhas.
+
+---
+
+## 10. Agentes atuais e planejados
+
+```text
+Agente               Papel pretendido
+------------------- -----------------------------------------------------------
+Zeus                 General Manager/orquestrador; estrutura, governança,
+                     autorização, auditoria, roteamento e visão executiva.
+Atena                Nova gestora de conteúdo/agente de conteúdo; Raquel deve
+                     cuidar/supervisionar.
+Ares                 Gerenciador de campanhas; análise, criação e operação de
+                     campanhas de aquisição.
+Agente de Criativos  Futuro agente para criação de criativos usando ChatGPT,
+                     Grok ou outras AIs com API/acesso permitido.
+```
+
+---
+
+## 11. Implicação para a nova arquitetura
+
+A arquitetura da MGS deve ser desenhada por áreas reais da empresa, não apenas por agentes.
+
+Áreas candidatas derivadas da operação real:
+
+```text
+Área alvo                     Origem operacional
+----------------------------- ------------------------------------------------
+Executive / Management        Rodolfo, Geizian, reuniões, decisões, estratégia
+Content Operations            Raquel, gestores, REC/P1, SEO, WordPress conteúdo
+Growth / Media Buying         Gestores, Facebook Ads, Google Ads, SMS
+Creative Operations           Kelly, Canva, ChatGPT, TopView.ai, futuro agente
+Revenue / AdOps               Smart Bidding, ActiveView, AdManager, AdX, blocos
+Finance / BI                  Fechamento, planilhas, ROI, relatórios, custos
+Tech / WordPress / Infra      Sites, plugins, pixels, Hermes, agentes, scripts
+Security / Access             Permissões, credenciais, acesso a dashboards/APIs
+```
+
+---
+
+## 12. Regra de migração
+
+Este documento é uma captura da operação real. Ele deve orientar a reorganização, mas não substitui automaticamente os arquivos existentes.
+
+Próxima etapa: criar o diagrama-alvo do MGS OS e depois o inventário de migração arquivo por arquivo.
