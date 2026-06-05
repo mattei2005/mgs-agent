@@ -32,3 +32,9 @@ If Zeus has Atena's content channel in `allowed_channels` and `require_mention=f
 ## Communication rule after user frustration
 
 If the user reports that the system is freezing/travando, stop optional automation immediately, check service state, remove pending scheduled checks if present, and report only concrete status plus the next safe action. Do not continue explaining long background context before stabilizing the service.
+
+## Restart interruption recovery expectation
+
+If a gateway restart/SIGTERM interrupts an active turn, the system should return to the same Discord thread after reconnect and post a deterministic recovery/closure message. Rodolfo should not have to prompt Zeus to continue after a restart that Zeus initiated or coordinated.
+
+Use `references/gateway-restart-recovery-checkpoint.md` for the implementation pattern: write a profile-local checkpoint before shutdown notification, recover it on startup after Discord reconnect, send one idempotent status message, and mark delivered to avoid duplicates. Keep this recovery deterministic; do not launch a heavy LLM cron/self-check from the same restarting bot unless explicitly approved.
