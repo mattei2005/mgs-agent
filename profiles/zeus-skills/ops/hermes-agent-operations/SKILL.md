@@ -79,7 +79,9 @@ Se o guardrail bloquear por reiniciar gateways/matar sessões, não tentar burla
 
 When Rodolfo says the backup/update is already done, stop recommending an update window and switch directly to post-update verification. See `references/hermes-v15-post-update-validation-2026-05-28.md` for the v15 validation evidence shape and path-migration pitfall.
 
-Só reportar sucesso depois de confirmar upstream, serviços, patches/smokes e testes alvo:
+Só reportar sucesso depois de confirmar upstream, serviços, patches/smokes e testes alvo.
+
+**Regra MGS pós-update:** toda conclusão de update deve incluir automaticamente, sem Rodolfo precisar pedir: (1) se deu tudo certo ou pendências, (2) status vivo dos gateways, (3) validação OpenAI Codex auth em root + Zeus/Atena/Ares sem imprimir tokens, (4) backup criado/apagado e disco, (5) delta desde a versão/commit anterior — commits aplicados, highlights por impacto MGS, e o que não mudou.
 
 ```bash
 repo=/root/.hermes/hermes-agent
