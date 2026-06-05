@@ -1,5 +1,5 @@
 diff --git a/gateway/run.py b/gateway/run.py
-index 45d8f6a7a..70aa3f822 100644
+index 45d8f6a7a..db2ec5da2 100644
 --- a/gateway/run.py
 +++ b/gateway/run.py
 @@ -67,8 +67,8 @@ _PLATFORM_CONNECT_TIMEOUT_SECS_DEFAULT = 30.0
@@ -131,7 +131,37 @@ index 45d8f6a7a..70aa3f822 100644
  
          # Declare at outer scope so the audio-file-paths handling block below
          # remains safe when ``event.media_urls`` is empty (no inner block runs).
-@@ -9586,6 +9623,14 @@ class GatewayRunner:
+@@ -9438,6 +9475,29 @@ class GatewayRunner:
+         )
+ 
+         try:
++            # PATCH (MGS Digital Corp): kick off GPT-style Discord thread title
++            # generation before the agent response is ready. This is best-effort
++            # and non-blocking; the existing post-response auto-title remains as
++            # a fallback for sessions where this early pass fails.
++            if source.platform == Platform.DISCORD and source.chat_type == "thread":
++                try:
++                    _pre_model, _pre_runtime = self._resolve_session_agent_runtime(
++                        source=source,
++                        session_key=session_key,
++                        user_config=_load_gateway_config(),
++                    )
++                    _pre_main_runtime = dict(_pre_runtime or {})
++                    _pre_main_runtime["model"] = _pre_model
++                    self._schedule_discord_thread_pre_response_title(
++                        source,
++                        session_entry.session_id,
++                        message_text,
++                        history,
++                        main_runtime=_pre_main_runtime,
++                    )
++                except Exception:
++                    logger.debug("Discord pre-response title scheduling failed", exc_info=True)
++
+             # Emit agent:start hook
+             hook_ctx = {
+                 "platform": source.platform.value if source.platform else "",
+@@ -9586,6 +9646,14 @@ class GatewayRunner:
              if _footer_line and response and not agent_result.get("already_sent"):
                  response = f"{response}\n\n{_footer_line}"
  
@@ -146,7 +176,7 @@ index 45d8f6a7a..70aa3f822 100644
              # Emit agent:end hook
              await self.hooks.emit("agent:end", {
                  **hook_ctx,
-@@ -13503,6 +13548,68 @@ class GatewayRunner:
+@@ -13503,6 +13571,140 @@ class GatewayRunner:
  
          future.add_done_callback(_log_rename_failure)
  
@@ -212,10 +242,82 @@ index 45d8f6a7a..70aa3f822 100644
 +
 +        future.add_done_callback(_log_discord_rename_failure)
 +
++    def _discord_actionable_title_message(self, message: str) -> str:
++        """Return only the actionable Discord user prompt for title guards.
++
++        PATCH (MGS Digital Corp): Discord gateway prompts may include read-only
++        history/backfill before the current request. Title generation/overwrite
++        safety must compare against the user's current prompt, not the enriched
++        gateway message, or first-message fallback titles look manual.
++        """
++        text = re.split(r"\[New message[^\]]*\]\n", message or "")[-1].strip()
++        text = re.sub(r"^\[[^\]]+\]\s*", "", text).strip()
++        return text or (message or "").strip()
++
++    def _schedule_discord_thread_pre_response_title(
++        self,
++        source: SessionSource,
++        session_id: str,
++        message: str,
++        history: list,
++        main_runtime: Optional[dict] = None,
++    ) -> None:
++        """Generate/rename a Discord thread title before the final response.
++
++        This mirrors ChatGPT-like UX: the thread is renamed while the agent is
++        still thinking instead of only after the assistant response is ready.
++        The work runs in a daemon thread and never blocks the user-facing turn.
++        """
++        if source.platform != Platform.DISCORD or source.chat_type != "thread" or not source.chat_id:
++            return
++        if not self._session_db or not session_id or not message:
++            return
++        user_msg_count = sum(1 for m in (history or []) if isinstance(m, dict) and m.get("role") == "user")
++        if user_msg_count > 0:
++            return
++        clean_message = self._discord_actionable_title_message(message)
++        if not clean_message:
++            return
++
++        def _worker() -> None:
++            try:
++                from agent.title_generator import generate_title
++                title = generate_title(
++                    clean_message,
++                    "",
++                    timeout=20.0,
++                    main_runtime=main_runtime,
++                )
++                if not title:
++                    return
++                try:
++                    self._session_db.set_session_title(session_id, title)
++                except Exception:
++                    logger.debug("Pre-response Discord title: session title write failed", exc_info=True)
++                logger.info(
++                    "Pre-response GPT-style thread title generated: thread=%s title=%r",
++                    source.chat_id,
++                    title,
++                )
++                self._schedule_discord_thread_title_rename(
++                    source,
++                    session_id,
++                    title,
++                    clean_message,
++                )
++            except Exception:
++                logger.debug("Pre-response Discord thread title generation failed", exc_info=True)
++
++        threading.Thread(
++            target=_worker,
++            daemon=True,
++            name="discord-pre-response-title",
++        ).start()
++
      _TELEGRAM_CAPABILITY_HINT_COOLDOWN_S = 300.0
  
      def _should_send_telegram_capability_hint(self, source: SessionSource) -> bool:
-@@ -18473,6 +18580,20 @@ class GatewayRunner:
+@@ -18473,6 +18675,19 @@ class GatewayRunner:
                              effective_session_id,
                              title,
                          )
@@ -225,8 +327,7 @@ index 45d8f6a7a..70aa3f822 100644
 +                        # safety, compare the current thread name against only the
 +                        # actionable user prompt, otherwise first-message fallback
 +                        # titles look "manual" and GPT-style rename gets skipped.
-+                        _discord_title_message = re.split(r"\[New message[^\]]*\]\n", message)[-1].strip()
-+                        _discord_title_message = re.sub(r"^\[[^\]]+\]\s*", "", _discord_title_message).strip()
++                        _discord_title_message = self._discord_actionable_title_message(message)
 +                        maybe_auto_title_kwargs["title_callback"] = lambda title: self._schedule_discord_thread_title_rename(
 +                            source,
 +                            effective_session_id,
@@ -236,7 +337,7 @@ index 45d8f6a7a..70aa3f822 100644
                      maybe_auto_title(
                          self._session_db,
                          effective_session_id,
-@@ -18957,6 +19078,28 @@ class GatewayRunner:
+@@ -18957,6 +19172,28 @@ class GatewayRunner:
                  pending_event = None
                  pending = None
  
@@ -265,7 +366,7 @@ index 45d8f6a7a..70aa3f822 100644
              if pending_event or pending:
                  logger.debug("Processing pending message: '%s...'", pending[:40])
  
-@@ -19100,6 +19243,13 @@ class GatewayRunner:
+@@ -19100,6 +19337,13 @@ class GatewayRunner:
                      event_message_id=next_message_id,
                      channel_prompt=next_channel_prompt,
                  )
