@@ -310,6 +310,12 @@ dashboard:
   oauth:
     client_id: ''
     portal_url: ''
+  basic_auth:
+    username: ''
+    password_hash: ''
+    password: ''
+    secret: ''
+    session_ttl_seconds: 0
   public_url: ''
 privacy:
   redact_pii: false
@@ -518,6 +524,20 @@ discord:
   server_actions: ''
   allow_any_attachment: false
   max_attachment_bytes: 33554432
+  voice_fx:
+    enabled: false
+    ambient_enabled: true
+    ambient_path: ''
+    ambient_gain: 0.18
+    duck_gain: 0.06
+    speech_gain: 1.0
+    ack_enabled: true
+    ack_phrases:
+    - Let me look into that.
+    - One moment.
+    - Checking on that now.
+    - Give me a sec.
+    - On it.
   thread_auto_add_users:
   - '344196393512075265'
 whatsapp: {}
@@ -629,6 +649,7 @@ onboarding:
 updates:
   pre_update_backup: false
   backup_keep: 5
+  non_interactive_local_changes: stash
 lsp:
   enabled: true
   wait_mode: document
@@ -651,7 +672,7 @@ secrets:
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 5
 paste_collapse_char_threshold: 2000
-_config_version: 26
+_config_version: 27
 session_reset:
   mode: both
   idle_minutes: 1440
