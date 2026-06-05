@@ -126,16 +126,26 @@ Essa área pertence à camada de **Monetização / AdOps / Revenue Operations**.
 
 ---
 
-## 6. Aquisição e campanhas
+## 6. Aquisição, arbitragem e campanhas
 
-Canais atuais de aquisição:
+Google Ads e Facebook Ads são canais onde a MGS compra tráfego para enviar para os sites. A estratégia central é arbitragem: comprar tráfego, monetizar nos sites e medir ROI.
+
+Canais/estratégias atuais:
 
 ```text
-Canal             Uso
----------------- --------------------------------------------------------------
-Facebook Ads      Canal principal de compra de mídia e análise de gastos.
-Google Ads        Canal de aquisição pago.
-SMS               Usado em sites de financiamento de carro para envio a usuários.
+Canal/estratégia       Uso
+--------------------- ----------------------------------------------------------
+Facebook Ads           Compra de tráfego para arbitragem e envio aos sites.
+Google Ads             Compra de tráfego para arbitragem e envio aos sites.
+ChatPion modificado    Estratégia Facebook/Messenger. O developer da Smart
+                       Bidding modificou o ChatPion inteiro para a operação.
+Quiz                   Estratégia usada em Facebook/Google; pode capturar e-mail,
+                       SMS ou enviar direto sem captura.
+Tráfego direto         Estratégia usada em Google e Facebook.
+E-mail                 Estratégia/camada de monetização e reaproveitamento.
+SMS                    Estratégia/camada de monetização e reaproveitamento;
+                       também usado em nichos como financiamento de carro.
+TikTok                 Canal potencial/futuro para Ares se operar campanhas.
 ```
 
 Fluxo operacional:
@@ -193,7 +203,11 @@ Conferências feitas por Rodolfo:
 - despesas da empresa;
 - fechamento e pagamentos.
 
-Essa camada deve virar **Finance / BI / Executive Reporting** no MGS OS.
+Google paga Smart Bidding e ActiveView. Smart Bidding/ActiveView retiram o revenue share deles e pagam a MGS.
+
+Rodolfo recebe os relatórios, alimenta a planilha com gastos, receitas, despesas, salários e comissões. A planilha calcula ROI e o fechamento detalhado. No fim do mês, a empresa sabe quanto cada gestor recebe, quanto deve ser pago em despesas e quanto os sócios recebem.
+
+Essa camada deve virar **Finance / BI / Executive Reporting** no MGS OS, com Rodolfo como dono atual.
 
 ---
 
