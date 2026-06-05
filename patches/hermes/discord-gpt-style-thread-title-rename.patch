@@ -1,5 +1,5 @@
 diff --git a/gateway/run.py b/gateway/run.py
-index 45d8f6a7a..5b9c2938e 100644
+index 45d8f6a7a..70aa3f822 100644
 --- a/gateway/run.py
 +++ b/gateway/run.py
 @@ -67,8 +67,8 @@ _PLATFORM_CONNECT_TIMEOUT_SECS_DEFAULT = 30.0
@@ -215,21 +215,28 @@ index 45d8f6a7a..5b9c2938e 100644
      _TELEGRAM_CAPABILITY_HINT_COOLDOWN_S = 300.0
  
      def _should_send_telegram_capability_hint(self, source: SessionSource) -> bool:
-@@ -18473,6 +18580,13 @@ class GatewayRunner:
+@@ -18473,6 +18580,20 @@ class GatewayRunner:
                              effective_session_id,
                              title,
                          )
 +                    elif source.platform == Platform.DISCORD and source.chat_type == "thread":
++                        # PATCH (MGS Digital Corp): ``message`` may include Discord
++                        # history backfill/read-only context. For title overwrite
++                        # safety, compare the current thread name against only the
++                        # actionable user prompt, otherwise first-message fallback
++                        # titles look "manual" and GPT-style rename gets skipped.
++                        _discord_title_message = re.split(r"\[New message[^\]]*\]\n", message)[-1].strip()
++                        _discord_title_message = re.sub(r"^\[[^\]]+\]\s*", "", _discord_title_message).strip()
 +                        maybe_auto_title_kwargs["title_callback"] = lambda title: self._schedule_discord_thread_title_rename(
 +                            source,
 +                            effective_session_id,
 +                            title,
-+                            message,
++                            _discord_title_message,
 +                        )
                      maybe_auto_title(
                          self._session_db,
                          effective_session_id,
-@@ -18957,6 +19071,28 @@ class GatewayRunner:
+@@ -18957,6 +19078,28 @@ class GatewayRunner:
                  pending_event = None
                  pending = None
  
@@ -258,7 +265,7 @@ index 45d8f6a7a..5b9c2938e 100644
              if pending_event or pending:
                  logger.debug("Processing pending message: '%s...'", pending[:40])
  
-@@ -19100,6 +19236,13 @@ class GatewayRunner:
+@@ -19100,6 +19243,13 @@ class GatewayRunner:
                      event_message_id=next_message_id,
                      channel_prompt=next_channel_prompt,
                  )
