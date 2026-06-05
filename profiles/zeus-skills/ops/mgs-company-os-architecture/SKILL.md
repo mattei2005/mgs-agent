@@ -92,19 +92,37 @@ Minimum sections:
 
 ### 3. Recommended initial MGS areas
 
-Use these as the starting proposal, not immutable law:
+Use the CEO-described real operating model as the starting point. The current canonical proposal is:
 
 ```text
-Area             Function
---------------- ---------------------------------------------------------------
-Executive/Ops    Governance, priorities, authorizations, audit, coordination
-Content          REC, P1, WordPress, editorial QA, publishing
-Growth/Ads       Acquisition, campaigns, tracking, funnels, paid media
-Tech/Infra       VPS, Hermes, bots, crons, patches, WordPress technical services
-Data/BI          Metrics, reports, cost, performance, operational intelligence
-Finance          Revenue, costs, ROI, monetization, economics
-Security         Access, credentials, hardening, permissions, risk policy
+Area                         Function
+---------------------------- -------------------------------------------------
+Executive / Management        Direction, strategy, priorities, daily meetings,
+                              decisions, coordination and governance.
+Content Operations            REC/P1, SEO support articles, categories,
+                              WordPress editorial, daily content and QA.
+Growth / Media Buying         Facebook Ads, Google Ads, SMS, media buyers,
+                              campaign costs, acquisition and ROI.
+Creative Operations           Kelly, Canva, ChatGPT, TopView.ai, Grok/other AI,
+                              static/video creatives and asset handoff.
+Revenue / AdOps               Smart Bidding, ActiveView, AdManager/AdX,
+                              approval, ad blocks, pricing rules and AdOps.
+Finance / BI                  Financial close, spreadsheets, revenue, costs,
+                              invalid traffic, commissions, salaries and ROI.
+Tech / WordPress / Infra      WordPress setup, plugins, pixels, VPS, Hermes,
+                              agents, crons, scripts, patches and monitoring.
+Security / Access             Credentials, tokens, user permissions, dashboards,
+                              APIs, hardening and risk policy.
 ```
+
+Durable MGS facts from the CEO explanation:
+- Rodolfo and Geizian are partners. Rodolfo owns management, finance, WordPress/technical structure, pixels, partner-network relationship and strategy. Geizian manages the content/campaign managers day to day.
+- Raquel owns Content Operations and should supervise Atena.
+- Kelly owns creative production and currently uses AI/Canva workflows for managers.
+- There are five managers operating sites/campaigns and interacting with AdOps.
+- Smart Bidding is the main operational dashboard for sites, campaigns, ROI, ad blocks, APIs and permissions.
+- ActiveView is now an exception/legacy-active network: only `openzed`, `cliquet`, and their subdomains are not technologically migrated to Smart Bidding.
+- Finance runs monthly: period day 1–30, Google payment around day 21–23, Rodolfo checks Facebook Business Manager spend, invalid traffic, Smart Bidding/ActiveView reports, commissions, salaries and expenses in his spreadsheet.
 
 ### 4. Recommended agent map
 
@@ -218,3 +236,4 @@ Before reporting completion of a company-OS step:
 ## References
 
 - `references/company-os-blueprint-session-2026-06-05.md` — session-specific origin: Bruno course context, current `/root/mgs-agent` structural counts, and first blueprint pattern.
+- `references/company-os-ceo-operating-model-2026-06-05.md` — CEO-described real MGS operating model: partners, Raquel/Kelly/gestores, Smart Bidding/ActiveView, finance cycle, campaigns, creative flow, and agent implications.
