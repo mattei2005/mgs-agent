@@ -1,5 +1,5 @@
 diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
-index fa0f81c9b..49fa21c95 100644
+index fa0f81c9b..eac674cf4 100644
 --- a/plugins/platforms/discord/adapter.py
 +++ b/plugins/platforms/discord/adapter.py
 @@ -20,7 +20,7 @@ import tempfile
@@ -68,7 +68,7 @@ index fa0f81c9b..49fa21c95 100644
  
          except discord.Forbidden:
              logger.debug("[%s] Missing permissions to fetch channel history", self.name)
-@@ -4151,23 +4183,229 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4151,23 +4183,214 @@ class DiscordAdapter(BasePlatformAdapter):
      # Auto-thread helpers
      # ------------------------------------------------------------------
  
@@ -207,26 +207,11 @@ index fa0f81c9b..49fa21c95 100644
 +
 +        def clean_title(value: str, max_words: int = 8) -> str:
 +            value = re.sub(r"\s+", " ", value).strip(" \t\n\r:;,.!?—-–")
-+            value = re.sub(
-+                r"^(me ajuda a|me ajuda com|me ajuda|quero|preciso|precisa|pode|tem como|como eu faço para|como faço para|como)\b[\s,.:;!?—-]*",
-+                "",
-+                value,
-+                flags=re.IGNORECASE,
-+            ).strip()
 +            words = value.split()
 +            if len(words) > max_words:
 +                value = " ".join(words[:max_words])
 +            value = value[:77].rstrip(" \t\n\r:;,.!?—-–")
-+            small = {"a", "as", "o", "os", "de", "da", "das", "do", "dos", "e", "em", "no", "na", "nos", "nas", "por", "para", "com"}
-+            parts = []
-+            for i, word in enumerate(value.split()):
-+                if i and word.casefold() in small:
-+                    parts.append(word.casefold())
-+                elif word.isupper() or re.search(r"\d", word):
-+                    parts.append(word)
-+                else:
-+                    parts.append(word[:1].upper() + word[1:])
-+            return " ".join(parts) if parts else "Hermes"
++            return (value[:1].upper() + value[1:]) if value else "Hermes"
 +
 +        agent_match = re.search(r"\b(zeus|atena|ares)\b", raw_lowered)
 +        agent = agent_match.group(1).capitalize() if agent_match else ""
@@ -309,7 +294,7 @@ index fa0f81c9b..49fa21c95 100644
  
          try:
              thread = await message.create_thread(name=thread_name, auto_archive_duration=1440)
-@@ -4192,6 +4430,100 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4192,6 +4415,100 @@ class DiscordAdapter(BasePlatformAdapter):
                  )
                  return None
  
@@ -410,7 +395,7 @@ index fa0f81c9b..49fa21c95 100644
      async def create_handoff_thread(
          self,
          parent_chat_id: str,
-@@ -4720,6 +5052,7 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4720,6 +5037,7 @@ class DiscordAdapter(BasePlatformAdapter):
          if is_thread:
              thread_id = str(message.channel.id)
              parent_channel_id = self._get_parent_channel_id(message.channel)
@@ -418,7 +403,7 @@ index fa0f81c9b..49fa21c95 100644
  
          is_voice_linked_channel = False
  
-@@ -4802,12 +5135,15 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4802,12 +5120,15 @@ class DiscordAdapter(BasePlatformAdapter):
          if not is_thread and not isinstance(message.channel, discord.DMChannel):
              no_thread_channels_raw = os.getenv("DISCORD_NO_THREAD_CHANNELS", "")
              no_thread_channels = {ch.strip() for ch in no_thread_channels_raw.split(",") if ch.strip()}
@@ -435,7 +420,7 @@ index fa0f81c9b..49fa21c95 100644
                      parent_channel_id = str(message.channel.id)
                      is_thread = True
                      thread_id = str(thread.id)
-@@ -5087,9 +5423,19 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -5087,9 +5408,19 @@ class DiscordAdapter(BasePlatformAdapter):
          if thread_id:
              self._threads.mark(thread_id)
  
@@ -458,7 +443,7 @@ index fa0f81c9b..49fa21c95 100644
              self._enqueue_text_event(event)
          else:
              await self.handle_message(event)
-@@ -6409,6 +6755,11 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
+@@ -6409,6 +6740,11 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
          os.environ["DISCORD_FREE_RESPONSE_CHANNELS"] = str(frc)
      if "auto_thread" in discord_cfg and not os.getenv("DISCORD_AUTO_THREAD"):
          os.environ["DISCORD_AUTO_THREAD"] = str(discord_cfg["auto_thread"]).lower()
