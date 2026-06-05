@@ -54,6 +54,8 @@ Manual card image quality reference: `references/manual-card-image-quality-and-l
 
 Rule consolidation / flow review reference: `references/rec-p1-rule-consolidation-and-flow-review-2026-05-28.md` captures Rodolfo's anti-bola-de-neve correction: after multiple REC/P1 repairs or new rules, produce a reviewable initial flow for Rodolfo/Raquel and consolidate approved lessons into the active contract/runtime gates rather than letting references become competing production rule sources.
 
+Atena restructure placement reference: `references/atena-restructure-rule-placement-and-rec-p1-quality-2026-06-05.md` captures Rodolfo/Raquel's rebuild classification rules: finish SOUL first before SKILL, treat REC+P1 as one business request while keeping REC/P1 contracts separate, put anti-repetition/card-specificity as SOUL+contracts+validator, put final report character counts in SKILL/renderer, and keep image cleanup details in SKILL/runners rather than SOUL.
+
 Featured image separation reference: `references/rec-p1-featured-image-separation-2026-05-28.md` captures Rodolfo's correction that REC and P1 must not share the same featured image; they need distinct media IDs, URLs and visual concepts, with REST/public verification before success is reported.
 
 Featured card identity overlay repair reference: `references/featured-card-identity-overlay-repair-2026-05-28.md` captures the durable RBS Reward Black workaround: when generative featured images alter card identity, add a second card, or produce CGI/prohibited artifacts, generate/select a no-card realistic background and overlay the validated real card asset locally, then audit before publish.
