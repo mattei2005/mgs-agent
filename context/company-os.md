@@ -1,232 +1,385 @@
 # MGS OS — Arquitetura Organizacional e Operacional
 
-> Status: **proposta inicial**  
-> Dono: Zeus  
-> Aprovador: Rodolfo Mattei  
-> Escopo: organizar a MGS como empresa operacional antes de expandir agentes, rotas e automações.
+> Status: **proposta canônica v0.2**  
+> Base: modelo operacional real explicado por Rodolfo Mattei.  
+> Dono executivo: Rodolfo Mattei.  
+> Orquestração: Zeus.  
+> Regra: este documento orienta a reorganização; não altera automaticamente agentes, scripts, permissões ou produção.
 
 ---
 
-## 1. Objetivo
+## 1. Por que este documento existe
 
-Este documento define a camada canônica de organização da MGS Digital Corp: áreas, responsabilidades, agentes, fontes de verdade, rotas, permissões e governança.
+A MGS cresceu como operação real: sites, WordPress, conteúdo, campanhas, gestores, monetização, financeiro, Smart Bidding, ActiveView, criações, agentes e automações.
 
-Ele não substitui automaticamente scripts, skills, dados ou prompts existentes. A função inicial é servir como blueprint para migração incremental e segura.
+A próxima fase exige organizar a empresa como um **sistema operacional empresarial** antes de expandir agentes.
 
----
+Objetivo do MGS OS:
 
-## 2. Princípios operacionais
-
-1. **Empresa antes de agente** — agentes executam dentro da arquitetura da empresa, não definem a empresa sozinhos.
-2. **Fonte de verdade explícita** — cada assunto deve ter um local oficial de leitura/escrita.
-3. **Separação de responsabilidades** — cada agente tem área, limites e autoridade claros.
-4. **Governança auditável** — mudanças em produção, permissões, dinheiro, publicação e infra devem deixar rastro.
-5. **Migração incremental** — não quebrar operação real para reorganizar estrutura.
-6. **Segurança por padrão** — credenciais, tokens, produção e permissões exigem controle explícito.
-7. **Rodolfo decide; Zeus orquestra** — decisões estratégicas e autorizações sensíveis passam pelo CEO.
+1. separar áreas da empresa;
+2. definir quem cuida do quê;
+3. mapear fontes de verdade;
+4. padronizar rotas de pedidos;
+5. controlar permissões e riscos;
+6. encaixar Zeus, Atena, Ares e agentes futuros dentro da estrutura real;
+7. permitir crescimento sem bagunça operacional.
 
 ---
 
-## 3. Áreas oficiais da MGS
+## 2. Princípios do MGS OS
 
 ```text
-Área             Função central
---------------- ---------------------------------------------------------------
-Executive/Ops    Governança, prioridades, autorizações, auditoria e coordenação
-Content          Produção editorial, REC, P1, WordPress e qualidade de conteúdo
-Growth/Ads       Aquisição, campanhas, tracking, funis e mídia paga
-Tech/Infra       VPS, Hermes, bots, crons, patches, WordPress técnico e serviços
-Data/BI          Métricas, relatórios, custos, performance e inteligência operacional
-Finance          Receita, custos, ROI, monetização e análise econômica
-Security         Acessos, credenciais, hardening, permissões e políticas de risco
+Princípio                     Regra prática
+----------------------------- ------------------------------------------------
+Empresa antes de agente        Primeiro definimos áreas, rotas e autoridade.
+Fonte de verdade explícita     Cada dado importante tem um local oficial.
+Humano dono, agente executor    Agentes não substituem autoridade humana sem regra.
+Migração incremental           Nada de mover/remover arquivos produtivos em massa.
+Segurança por padrão           Credenciais, permissões e produção exigem controle.
+Auditoria sempre               Decisões, acessos e mudanças relevantes deixam rastro.
+ROI e operação conectados      Conteúdo, campanha e monetização precisam conversar.
 ```
 
 ---
 
-## 4. Mapa inicial de agentes
+## 3. Sócios e liderança
 
 ```text
-Agente   Área primária    Papel
--------  --------------- ------------------------------------------------------
-Zeus     Executive/Ops    General Manager, governança, roteamento e auditoria
-Atena    Content          Produção editorial, REC/P1, publicação e QA WordPress
-Ares     Growth/Ads       Campanhas, aquisição, anúncios, tracking e funis
-Futuros  A definir        Especialistas subordinados ao mapa MGS OS
+Pessoa        Papel atual
+------------ ---------------------------------------------------------------
+Rodolfo       CEO; gestão geral, financeiro, estrutura WordPress, pixels,
+              relacionamento com redes, estratégia e arquitetura operacional.
+Geizian       Sócio; acompanha gestores, rotina diária de campanhas, custos,
+              performance e execução junto ao time.
 ```
-
-### 4.1 Regra de autoridade
-
-- **Zeus** coordena e autoriza, mas não deve virar executor operacional de conteúdo/campanha por padrão.
-- **Atena** executa conteúdo e WordPress conforme playbooks aprovados.
-- **Ares** executa Growth/Ads conforme playbooks aprovados.
-- Agente novo só deve ser criado depois de existir área, missão, fontes de verdade e limites.
 
 ---
 
-## 5. Fontes de verdade atuais
+## 4. Áreas oficiais da MGS
+
+```text
+Área                         Função central
+---------------------------- -------------------------------------------------
+Executive / Management        Direção, estratégia, prioridades, reuniões,
+                              decisões, coordenação geral e governança.
+Content Operations            Produção de conteúdo, REC/P1, SEO, categorias,
+                              WordPress editorial e rotina de publicação.
+Growth / Media Buying         Campanhas, Facebook Ads, Google Ads, SMS,
+                              gestores, custos, ROI e aquisição.
+Creative Operations           Criativos estáticos, vídeos, Canva, ChatGPT,
+                              TopView.ai e futuro agente de criativos.
+Revenue / AdOps               Smart Bidding, ActiveView, AdManager, AdX,
+                              blocos de anúncio, precificação e monetização.
+Finance / BI                  Fechamento financeiro, planilhas, relatórios,
+                              custos, receita, comissões, salários e ROI.
+Tech / WordPress / Infra      WordPress técnico, sites, plugins, pixels,
+                              VPS, Hermes, bots, crons, scripts e patches.
+Security / Access             Credenciais, acessos, permissões, dashboards,
+                              APIs, hardening e política de risco.
+```
+
+---
+
+## 5. Pessoas e responsabilidades atuais
+
+```text
+Pessoa/grupo       Área principal             Responsabilidade
+------------------ -------------------------- ---------------------------------
+Rodolfo            Executive / Finance / Tech Gestão geral, financeiro,
+                                              arquitetura, WordPress, pixels,
+                                              redes, decisões e prioridades.
+Geizian            Executive / Growth         Gestão dos gestores, rotina de
+                                              campanhas, custos e performance.
+Raquel             Content Operations         Produção de conteúdo; supervisão
+                                              operacional da Atena.
+5 gestores         Growth / Content           Operam sites/campanhas, acompanham
+                                              custos, ROI e contato com AdOps.
+Kelly              Creative Operations        Produção de criativos com AI/Canva
+                                              para gestores usarem em campanhas.
+Smart Bidding      Revenue / AdOps            Rede/parceira; dash, AdOps,
+                                              blocos, ROI e tecnologia.
+ActiveView         Revenue / AdOps            Rede/tecnologia ainda relevante em
+                                              openzed, cliquet e subdomínios.
+```
+
+---
+
+## 6. Modelo operacional de sites
+
+A MGS opera mais de 30 sites em múltiplos países, nichos e idiomas. Cada combinação operacional pode ser tratada como uma vertical.
+
+Exemplo:
+
+```text
+Site      País             Nicho              Idioma
+-------- ----------------- ------------------ -------
+EggBev    GB/Reino Unido   Credit Cards/CC    EN
+```
+
+Fluxo estrutural de um site:
+
+```text
+Etapa       Responsável provável       Descrição
+---------- --------------------------- ----------------------------------------
+Setup       Tech / WordPress / Rodolfo Instalar/configurar WordPress, plugins,
+                                       home, categorias e pixels.
+Conteúdo    Content / Raquel / Atena   Publicar REC/P1 e preencher categorias.
+SEO         Content                    Artigos de ~1.200 palavras quando há
+                                       categorias adicionais a preencher.
+Aprovação   Revenue / Rodolfo          Enviar site para aprovação nas redes.
+Blocos      Revenue / AdOps            Criar/ajustar blocos de anúncio e regras.
+Campanhas   Growth / gestores / Ares   Rodar Facebook Ads, Google Ads ou SMS.
+ROI         Growth + Revenue + Finance Acompanhar custo, receita e performance.
+```
+
+---
+
+## 7. Monetização e AdOps
+
+```text
+Sistema/rede       Papel no MGS OS
+----------------- -------------------------------------------------------------
+Smart Bidding      Fonte operacional principal para sites, campanhas, ROI,
+                   blocos de anúncio, APIs, permissões e tecnologia migrada.
+ActiveView         Exceção/legado operacional para openzed, cliquet e seus
+                   subdomínios ainda não migrados tecnologicamente.
+AdManager/AdX      Camada de monetização Google por trás das redes/parceiros.
+Discord AdOps      Canal operacional com Smart Bidding para regras, aprovação,
+                   precificação e acompanhamento dos blocos.
+```
+
+Regra canônica inicial:
+
+- Smart Bidding é a fonte principal de monetização/ROI.
+- ActiveView deve ser tratada como exceção ativa apenas para openzed, cliquet e subdomínios.
+- Alterações de blocos, regras e precificação pertencem a Revenue / AdOps.
+- Impactos financeiros pertencem a Finance / BI.
+
+---
+
+## 8. Aquisição, campanhas e criativos
+
+```text
+Camada                 Ferramentas / canais
+---------------------- --------------------------------------------------------
+Media buying           Facebook Ads, Google Ads, SMS
+Criativos estáticos    ChatGPT, Canva
+Vídeos                 TopView.ai
+Criativos futuros      ChatGPT, Grok ou outras AIs com API/acesso permitido
+Gestão                 Geizian + gestores; Ares no futuro
+```
+
+Fluxo atual de criativos:
+
+```text
+1. Kelly cria assets usando AI/Canva.
+2. Kelly sobe na pasta Canva do gestor.
+3. Gestor pega o criativo.
+4. Gestor sobe a campanha.
+5. Geizian acompanha execução/performance.
+6. Rodolfo acompanha visão geral, ROI e financeiro.
+```
+
+Fluxo alvo com agentes:
+
+```text
+Creative Agent -> cria/organiza criativos
+Ares           -> analisa/sobe/acompanha campanhas conforme permissão
+Zeus           -> monitora, audita, escala exceções e reporta para Rodolfo
+```
+
+---
+
+## 9. Financeiro e BI
+
+Rodolfo é o dono atual do financeiro.
+
+```text
+Item                     Regra atual
+------------------------ ------------------------------------------------------
+Período analisado         Dia 1 ao dia 30
+Pagamento Google          Entre dia 21 e dia 23
+Controle principal        Planilha financeira do Rodolfo
+Conferência de mídia      Facebook Business Manager e contas de anúncio
+Conferência de receita    Smart Bidding / ActiveView / relatórios
+Conferência de risco      Tráfego inválido por site
+Saídas financeiras        Comissões, salários e despesas da empresa
+```
+
+No MGS OS, Finance / BI deve conectar:
+
+- gasto por campanha;
+- receita por site/vertical;
+- tráfego inválido;
+- ROI;
+- comissões;
+- salários;
+- despesas;
+- fechamento mensal.
+
+---
+
+## 10. Agentes no MGS OS
+
+```text
+Agente               Área primária             Papel
+------------------- -------------------------- --------------------------------
+Zeus                 Executive / Management    General Manager, orquestrador,
+                                              governança, autorizações,
+                                              auditoria, roteamento e reports.
+Atena                Content Operations        Gestora/agente de conteúdo;
+                                              REC/P1, SEO, WordPress editorial,
+                                              sob supervisão da Raquel.
+Ares                 Growth / Media Buying     Campanhas, análise, criação e
+                                              operação de aquisição.
+Agente de Criativos  Creative Operations       Criativos estáticos/vídeos via
+                                              ChatGPT, Grok, TopView.ai, Canva
+                                              ou outras APIs aprovadas.
+Futuros agentes      Área específica           Só devem nascer com área, dono,
+                                              fontes, permissões e rotas claras.
+```
+
+---
+
+## 11. Fontes de verdade atuais
 
 ```text
 Assunto                  Fonte atual
 ------------------------ ------------------------------------------------------
 Empresa                  /root/mgs-agent/context/company.md
-Sites/verticais          /root/mgs-agent/context/sites.md
-Config técnica sites     /root/mgs-agent/data/sites.json
-Equipe                   /root/mgs-agent/context/team.md
-Permissões               /root/mgs-agent/data/authorized-users.json
-Processos                /root/mgs-agent/context/processes.md
-Monetização              /root/mgs-agent/context/monetization.md
-Aquisição                /root/mgs-agent/context/acquisition.md
-Segurança                /root/mgs-agent/context/security-policies.md
-Crons                    /root/mgs-agent/docs/CRONS.md
-Pendências               /root/mgs-agent/docs/PENDENCIAS.md
-Changelog                /root/mgs-agent/docs/CHANGELOG.md + docs/changelog/
-Conteúdo REC/P1          /root/mgs-agent/skills/content-generate-rec/
-Publicação WordPress     /root/mgs-agent/skills/content-publish-wordpress/
-Scripts operacionais     /root/mgs-agent/scripts/
-Patches Hermes/MGS       /root/mgs-agent/patches/hermes/
-Audit log                /root/mgs-agent/logs/events-audit.jsonl
+Modelo real atual         /root/mgs-agent/context/company-current-operating-model.md
+Arquitetura MGS OS        /root/mgs-agent/context/company-os.md
+Sites/verticais           /root/mgs-agent/context/sites.md
+Config técnica sites      /root/mgs-agent/data/sites.json
+Equipe                    /root/mgs-agent/context/team.md
+Permissões                /root/mgs-agent/data/authorized-users.json
+Processos                 /root/mgs-agent/context/processes.md
+Monetização               /root/mgs-agent/context/monetization.md
+Aquisição                 /root/mgs-agent/context/acquisition.md
+Segurança                 /root/mgs-agent/context/security-policies.md
+Crons                     /root/mgs-agent/docs/CRONS.md
+Pendências                /root/mgs-agent/docs/PENDENCIAS.md
+Conteúdo REC/P1           /root/mgs-agent/skills/content-generate-rec/
+Publicação WordPress      /root/mgs-agent/skills/content-publish-wordpress/
+Scripts operacionais      /root/mgs-agent/scripts/
+Patches Hermes/MGS        /root/mgs-agent/patches/hermes/
+Audit log                 /root/mgs-agent/logs/events-audit.jsonl
 ```
 
 ---
 
-## 6. Fontes de verdade alvo
-
-A estrutura alvo deve separar conceito, operação e runtime.
+## 12. Fontes de verdade alvo
 
 ```text
-Camada                 Local alvo sugerido
----------------------- --------------------------------------------------------
-Arquitetura empresa     /root/mgs-agent/context/company-os.md
-Áreas                   /root/mgs-agent/context/areas/
-Rotas                   /root/mgs-agent/context/routes.md
-Agentes                 /root/mgs-agent/context/agent-map.md
-Fontes de verdade       /root/mgs-agent/context/sources-of-truth.md
-Permissões              /root/mgs-agent/context/permissions-matrix.md + data/authorized-users.json
-Playbooks               /root/mgs-agent/context/playbooks/
-Dados operacionais      /root/mgs-agent/data/
-Automações              /root/mgs-agent/scripts/
-Skills por função       /root/mgs-agent/skills/
-Docs históricas         /root/mgs-agent/docs/
-Legado/arquivo morto    /root/mgs-agent/archive/ ou data/deprecated/ conforme caso
+Documento alvo                        Função
+------------------------------------- -----------------------------------------
+context/company-os.md                  Arquitetura geral da empresa.
+context/areas.md                       Áreas, donos e responsabilidades.
+context/agent-map.md                   Agentes, escopos, limites e supervisores.
+context/routes.md                      Roteamento de pedidos/eventos.
+context/sources-of-truth.md            Onde cada dado deve ser lido/escrito.
+context/permissions-matrix.md          Matriz de autoridade e permissões.
+context/playbooks/                     Playbooks por área/processo.
+data/*.json                            Estado/dados operacionais.
+scripts/                               Automações executáveis.
+skills/                                Procedimentos reutilizáveis de agentes.
+docs/                                  Histórico, changelog, pendências e crons.
 ```
-
-Regra: `context/` explica como a empresa funciona; `data/` guarda estado/dados; `scripts/` executa; `skills/` ensina agente a executar; `docs/` documenta histórico, pendências e mudanças.
 
 ---
 
-## 7. Rotas operacionais iniciais
+## 13. Rotas operacionais iniciais
 
 ```text
-Pedido/evento                         Rota primária      Escala para Zeus?
-------------------------------------- ------------------ -----------------------
-Pedido de conteúdo REC/P1             Atena              Se envolver prioridade, erro crítico ou permissão
-Publicação/edição WordPress           Atena              Se envolver risco, credencial, rollback ou incidente
-Campanha/anúncio/tracking             Ares               Se envolver budget, acesso ou decisão estratégica
-Usuário externo pedindo acesso        Zeus               Sempre
-Erro de agente/bot/Hermes             Tech/Infra + Zeus  Sempre se afetar operação
-Mudança em permissões                 Zeus               Sempre; exige confirmação de Rodolfo
-Mudança em produção/site              Dono da área        Zeus se alto risco
-Relatório executivo                   Zeus               Zeus consolida
-Custo/token/API                       Data/BI + Zeus     Se anormal ou crescente
-Credencial/token/segredo              Security + Zeus    Sempre
+Pedido/evento                          Rota primária          Escala para Zeus?
+-------------------------------------- ---------------------- -----------------
+Criar/editar REC/P1                    Atena / Content        Se prioridade,
+                                                              erro ou exceção.
+Publicar/ajustar WordPress editorial   Atena / Content        Se risco técnico.
+Montar site/plugin/pixel               Tech / Rodolfo         Sim se produção.
+Criar criativo                         Kelly / Creative       Futuro: agente de
+                                                              criativos.
+Subir/analisar campanha                Gestor / Ares          Se budget, risco
+                                                              ou decisão.
+Ajustar blocos/preço AdOps             Revenue / SmartBidding Sim se impacto ROI.
+Conferir ROI                           Growth + Revenue + BI  Sim em anomalias.
+Fechamento financeiro                  Rodolfo / Finance      Zeus reporta se
+                                                              houver automação.
+Autorizar usuário externo              Zeus                   Sempre Rodolfo.
+Mexer em credencial/API/dashboard      Security / Zeus        Sempre Rodolfo.
+Erro de agente/Hermes/VPS              Tech / Zeus            Sempre se crítico.
 ```
 
 ---
 
-## 8. Matriz inicial de permissões
+## 14. Matriz inicial de autoridade
 
 ```text
-Tipo de ação                         Quem pode propor       Quem aprova
------------------------------------- ---------------------- --------------------
-Criar conteúdo                       Atena                  Playbook ou Rodolfo
-Publicar conteúdo                    Atena                  Conforme regra editorial vigente
-Criar campanha                       Ares                   Rodolfo até política formal existir
-Alterar budget                       Ares/Zeus              Rodolfo
-Autorizar usuário externo            Zeus                   Rodolfo
-Alterar authorized-users.json         Zeus                   Rodolfo confirmado
-Editar prompts/SOUL/config agente     Zeus/Tech             Rodolfo se crítico
-Restart gateway/agente               Zeus/Tech             Rodolfo quando em thread ativa/sensível
-Alterar crons/scripts produtivos      Zeus/Tech             Rodolfo se risco operacional
-Mexer em credenciais                 Security/Zeus          Rodolfo; nunca expor segredo
-Remover arquivo estrutural            Zeus/Tech             Rodolfo após plano de migração
+Ação                                  Pode executar/propor      Aprovação
+------------------------------------- ------------------------ -----------------
+Conteúdo REC/P1                       Atena/Raquel             Playbook/Raquel
+Artigo SEO                            Atena/Raquel             Playbook/Raquel
+Publicação WordPress editorial        Atena                    Regra editorial
+Setup técnico WordPress/site          Rodolfo/Tech             Rodolfo
+Campanhas Facebook/Google/SMS         Gestores/Ares            Geizian/Rodolfo
+Criativos                             Kelly/Creative Agent     Gestor/Rodolfo
+Budget de mídia                       Gestores/Ares            Rodolfo/Geizian
+Blocos e regras AdOps                 Smart Bidding/Revenue    Rodolfo/gestor
+Fechamento financeiro                 Rodolfo                  Rodolfo
+Permissão de usuário externo          Zeus                     Rodolfo confirmado
+Credenciais/tokens                    Security/Zeus            Rodolfo confirmado
+Alterar agente/config/runtime         Zeus/Tech                Rodolfo se crítico
+Remover/mover arquivo estrutural       Zeus/Tech                Rodolfo aprovado
 ```
 
 ---
 
-## 9. Classificação de arquivos
+## 15. Classificação de arquivos da reestruturação
 
 ```text
 Classe        Definição                                      Exemplo
------------- ---------------------------------------------- --------------------
-Canônico      Fonte oficial atual                            context/*.md, data/sites.json
-Runtime       Estado gerado/atualizado pela operação          data/*-state.json, logs/*.jsonl
-Automação     Código/script usado pela operação               scripts/*.sh, scripts/*.py
-Skill         Procedimento reutilizável para agente           skills/*/SKILL.md
-Histórico     Registro de mudança, decisão ou fechamento      docs/changelog/*
-Backup        Cópia de segurança temporária ou pré-migração   backups/*
-Legado        Mantido por referência, não usado ativamente     data/deprecated/*
+------------ ---------------------------------------------- -------------------
+Canônico      Fonte oficial atual                            context/*.md
+Runtime       Estado gerado pela operação                     data/*-state.json
+Automação     Script/código ativo                             scripts/*.sh/.py
+Skill         Procedimento de agente                          skills/*/SKILL.md
+Histórico     Changelog/fechamento/registro                   docs/changelog/*
+Backup        Cópia pré-migração                              backups/*
+Legado        Mantido por referência, não ativo                data/deprecated/*
 Experimento   Spike/prova de conceito                         experiments/*
-Patch local   Customização MGS em Hermes/runtime              patches/hermes/*
+Patch local   Customização Hermes/MGS                         patches/hermes/*
+Sensível      Segredo/config com credencial                    .env, tokens
 ```
 
 ---
 
-## 10. Plano de migração seguro
-
-### Fase 1 — Blueprint
-
-- Criar este documento.
-- Validar áreas, agentes e rotas com Rodolfo.
-- Não alterar runtime.
-
-### Fase 2 — Inventário classificado
-
-- Classificar arquivos atuais em: canônico, runtime, automação, histórico, backup, legado, experimento, patch.
-- Produzir tabela de migração por arquivo/pasta.
-- Não mover nada ainda.
-
-### Fase 3 — Separação de contexto
-
-- Criar `context/areas/`, `context/routes.md`, `context/sources-of-truth.md`, `context/agent-map.md`, `context/permissions-matrix.md`.
-- Migrar conteúdo conceitual duplicado de forma controlada.
-- Manter redirects/notas nos arquivos antigos quando necessário.
-
-### Fase 4 — Ajuste dos agentes
-
-- Atualizar Zeus/Atena/Ares para lerem as novas fontes canônicas.
-- Validar comportamento em Discord e logs.
-- Não remover contexto antigo até estabilidade comprovada.
-
-### Fase 5 — Limpeza
-
-- Arquivar backups antigos e experimentos não ativos.
-- Consolidar docs duplicadas.
-- Remover apenas com aprovação explícita.
-
----
-
-## 11. Decisões pendentes para Rodolfo
+## 16. Plano de execução
 
 ```text
-Decisão                                      Opção recomendada por Zeus
-------------------------------------------- -----------------------------------
-Áreas iniciais                              Usar as 7 áreas deste documento
-Zeus como GM/orquestrador                   Sim
-Atena restrita a Content/WordPress           Sim
-Ares restrito a Growth/Ads                   Sim
-Criar camada context/areas + routes          Sim
-Migrar sem quebrar arquivos atuais           Sim
-Remover legado automaticamente               Não; só após plano aprovado
+Fase   Entregável                                  Regra
+------ ------------------------------------------- -----------------------------
+0      Captura do modelo real                      Concluído em company-current-operating-model.md
+1      Company OS real                             Este documento
+2      Arquivos separados por área/rota/fonte       Criar sem quebrar antigos
+3      Inventário classificado                     Uma linha por arquivo/pasta
+4      Plano de migração                           Manter/mover/arquivar/etc.
+5      Ajuste de agentes                           Um agente por vez
+6      Validação operacional                       Discord, logs, scripts
+7      Limpeza                                     Só com aprovação explícita
 ```
 
 ---
 
-## 12. Próximo passo após aprovação deste blueprint
+## 17. Próxima ação concreta
 
-Gerar o inventário classificado de `/root/mgs-agent` com uma linha por pasta/arquivo estrutural relevante:
+Criar os documentos separados derivados deste MGS OS:
 
 ```text
-Path | Classe | Dono | Área | Status | Ação recomendada
+context/areas.md
+context/agent-map.md
+context/routes.md
+context/sources-of-truth.md
+context/permissions-matrix.md
 ```
 
-Ações possíveis: `manter`, `mover`, `renomear`, `consolidar`, `arquivar`, `remover depois`, `não tocar`.
+Esses documentos serão a base que Zeus, Atena, Ares e agentes futuros deverão consultar depois da aprovação.
