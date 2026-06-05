@@ -26,6 +26,8 @@ Historical lessons live in `references/` and `references/archive/`. They are not
 
 Refactor sequencing reference: `references/rec-p1-refactor-sequencing-no-cache.md` captures the durable process rule for REC/P1 architecture changes: active content map first, one current ordered plan, REC+P1 as one business request/two technical generations, and no editorial card-cache in production.
 
+Atena rebuild boundary reference: `references/atena-rebuild-soul-skill-contract-boundaries-2026-06-05.md` captures Rodolfo's correction for rebuilding Atena cleanly: SOUL holds identity/principles only; SKILL holds REC+P1 operations and exact report format; contracts hold article structure; runners/validators enforce image/WordPress gates; references/archive holds incident history. Normal production is REC+P1 as one request, not separate REC then P1.
+
 Deterministic contracts / P1-v2 language reference: `references/rec-p1-deterministic-contracts-and-p1-v2-lang-2026-05-29.md` captures the correction from the universal-contract refactor: `cc-rec.md`/`cc-p1.md` are versioned specs/telemetry inputs, not runtime LLM prompts; REC/P1 remain deterministic Python unless Rodolfo explicitly approves paid LLM generation; visible runner copy must be fully localized for supported site languages and abort unsupported languages.
 
 Universal contract patch reference: `references/rec-p1-universal-contract-patch-application-2026-05-29.md` captures the workflow for applying ZIP-delivered REC+P1 runner refactors: map dev filenames to production script paths, preserve legacy templates for rollback, stop on first failing dry-run when instructed, and verify that runners actually load the new contracts rather than only compiling or reporting policy paths.
