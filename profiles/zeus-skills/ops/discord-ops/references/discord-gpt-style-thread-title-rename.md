@@ -52,15 +52,21 @@ In `gateway/run.py`:
 
 - Add `_rename_discord_thread_for_session_title(...)` coroutine.
 - Add `_schedule_discord_thread_title_rename(...)`, mirroring the existing Telegram topic auto-title callback pattern.
-- In the `maybe_auto_title_kwargs` block after first exchange:
+- In the `maybe_auto_title_kwargs` block after first exchange, pass a **clean actionable user message** to the Discord rename guard, not the whole gateway prompt/backfill:
 
 ```python
 elif source.platform == Platform.DISCORD and source.chat_type == "thread":
+    # `message` may include Discord history backfill/read-only context. For
+    # overwrite safety, compare the current thread name against only the
+    # actionable user prompt; otherwise first-message fallback titles can look
+    # "manual" and GPT-style rename gets skipped.
+    _discord_title_message = re.split(r"\[New message[^\]]*\]\n", message)[-1].strip()
+    _discord_title_message = re.sub(r"^\[[^\]]+\]\s*", "", _discord_title_message).strip()
     maybe_auto_title_kwargs["title_callback"] = lambda title: self._schedule_discord_thread_title_rename(
         source,
         effective_session_id,
         title,
-        message,
+        _discord_title_message,
     )
 ```
 
@@ -81,6 +87,19 @@ Manual/GPT title like "Horário Dubai Alemanha"                  -> generic=Fals
 Fallback like "Faca varredura na vps e liste todos os"           -> generic=True
 ```
 
+Test the enriched Discord prompt cleanup too. Regression signature: logs show a good GPT title was generated but rename skipped with `reason=non-generic current title` even though the current title is just the initial fallback. Simulate a prompt containing read-only history plus `[New message ...]` and verify the extracted message is only the actionable user text and the fallback title returns `generic=True`.
+
+Example validated regression:
+
+```text
+Thread:       1512462156837159110
+User prompt:  o que voce acha que da pra melhorar na MGS ?
+Fallback:     O que voce acha que da pra melhorar
+GPT title:    Melhorias Operacionais na MGS
+Bad log:      GPT-style thread title skipped ... reason=non-generic current title
+Fix proof:    extracted actionable prompt + fallback guard => generic=True
+```
+
 ## Activation and reporting
 
 If Rodolfo asks to prepare without restart, write the patch to disk and save a reapply patch under `/root/mgs-agent/patches/hermes/`, but do **not** restart. Report clearly:
@@ -99,4 +118,6 @@ If he authorizes activation, restart affected gateways only after syntax validat
 - Do not claim the behavior is active until the gateway has restarted; Python runtime still uses code loaded in memory.
 - Do not rely only on hardcoded `_auto_thread_name_from_message` rules. That repeats the original bug: only known topics look intelligent.
 - Do not overwrite short, specific manual thread titles.
+- Do not pass full Discord backfill/history prompts into the manual-title guard. The guard must compare against the clean actionable user message only; otherwise fallback titles derived from the first prompt can be misclassified as manual and block the correct GPT-style rename.
+- When a user says “it still did not work” and provides a thread ID, verify the exact `GPT-style thread title ...` log for that thread before changing heuristics. A skip log with `generated='<good title>'` proves the LLM title worked and the bug is in the rename/guard layer.
 - Do not add a cron/LLM self-check for this during the same restart unless explicitly needed; it can collide with gateway drain and confuse the active thread.
