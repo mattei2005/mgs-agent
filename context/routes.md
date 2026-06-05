@@ -13,10 +13,12 @@ Editar/publicar conteúdo WordPress      Raquel / Content       Atena        Zeu
 Criar artigo SEO                        Raquel / Content       Atena        Zeus se prioridade conflita
 Montar/configurar site WordPress        Rodolfo / Tech         Zeus coord.  Rodolfo aprova
 Configurar pixel                         Rodolfo / Tech/Growth  Ares futuro  Rodolfo aprova
-Criar criativo estático                  Kelly / Creative       Futuro agent Gestor/Rodolfo
-Criar vídeo                              Kelly / Creative       Futuro agent Gestor/Rodolfo
+Criar criativo estático                  Kelly / Creative       Kelly agent  Gestor/Rodolfo
+Criar vídeo                              Kelly / Creative       Kelly agent  Gestor/Rodolfo
 Subir campanha Facebook                  Gestor / Growth        Ares futuro  Geizian/Rodolfo
 Subir campanha Google                    Gestor / Growth        Ares futuro  Geizian/Rodolfo
+Subir campanha TikTok                    Gestor / Growth        Ares futuro  Geizian/Rodolfo
+Operar ChatPion/quiz/tráfego direto      Gestor / Growth        Ares futuro  Geizian/Rodolfo
 Enviar SMS                               Gestor / Growth        Ares futuro  Geizian/Rodolfo
 Analisar ROI campanha                    Growth + Revenue       Ares futuro  Zeus se anomalia
 Ajustar blocos/preço AdOps               Revenue / SmartBidding N/A          Rodolfo/gestor

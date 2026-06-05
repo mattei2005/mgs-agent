@@ -10,8 +10,8 @@
 ---------------------------- ---------------------- ---------------------------------------------
 Executive / Management        Rodolfo + Geizian      Direção, prioridades, reuniões e governança
 Content Operations            Raquel                 Conteúdo, REC/P1, SEO e WordPress editorial
-Growth / Media Buying         Geizian + gestores     Campanhas, custos, aquisição e ROI
-Creative Operations           Kelly                  Criativos, Canva, AI estática/vídeo
+Growth / Media Buying         Geizian + gestores     Campanhas, arbitragem, custos, aquisição e ROI
+Creative Operations           Kelly                  Criativos, Canva, ChatGPT, TopView.ai e AIs
 Revenue / AdOps               Rodolfo + gestores     Smart Bidding, ActiveView, AdX e blocos
 Finance / BI                  Rodolfo                Fechamento, custos, receita, ROI e pagamentos
 Tech / WordPress / Infra      Rodolfo + Zeus/Tech    Sites, plugins, pixels, Hermes, VPS e scripts
@@ -25,10 +25,10 @@ Estratégia, prioridades, reuniões diárias, decisões finais, criação/remoç
 REC/P1, artigos SEO, preenchimento de categorias, WordPress editorial, qualidade editorial e operação da Atena sob supervisão da Raquel.
 
 ## Growth / Media Buying
-Facebook Ads, Google Ads, SMS, análise de campanhas, custos, ROI, gestores e operação futura do Ares.
+Facebook Ads, Google Ads, TikTok, SMS, ChatPion, quiz e tráfego direto, análise de campanhas, custos, ROI, gestores e operação futura do Ares.
 
 ## Creative Operations
-Criativos estáticos, vídeos, assets para campanhas, Canva, ChatGPT, TopView.ai, Grok e futuro agente de criativos.
+Criativos estáticos, vídeos, assets para campanhas, Canva, ChatGPT, TopView.ai, Grok se testado/aprovado e futuro agente de criativos.
 
 ## Revenue / AdOps
 Smart Bidding, ActiveView, AdManager/AdX, aprovação de sites, blocos de anúncio, precificação, regras e Discord AdOps.

@@ -80,7 +80,11 @@ Google/AdX         Origem dos pagamentos via ecossistema de monetização.
 
 ### 4.1 Dashboard Smart Bidding
 
-A dash da Smart Bidding é fonte operacional para:
+A dash da Smart Bidding é fonte operacional principal de monetização/ROI.
+
+Observação: a lista abaixo é exemplificativa, não exaustiva. A tecnologia deles tem mais features além das listadas aqui.
+
+Exemplos de uso:
 
 - lista de sites;
 - campanhas;
@@ -88,7 +92,8 @@ A dash da Smart Bidding é fonte operacional para:
 - features de análise;
 - criação/gestão de blocos de anúncio;
 - API/permissões;
-- tecnologia concentrada dos sites migrados.
+- tecnologia concentrada dos sites migrados;
+- relatórios e dados operacionais enviados para fechamento financeiro.
 
 Acessos: Rodolfo, Geizian e gestores.
 
@@ -153,7 +158,9 @@ Ferramenta       Uso atual
 ChatGPT          Criativos estáticos e apoio criativo.
 TopView.ai       Criação de vídeos.
 Canva            Organização/entrega de criativos para gestores.
-Grok/outras AIs  Potenciais fontes futuras via API para agente de criativos.
+Grok             Ainda não testado; candidato futuro por possível integração
+                 com Hermes/API.
+Outras AIs       Ferramentas futuras possíveis para criação de criativos.
 ```
 
 Necessidade futura: agente especializado em criação de criativos, com acesso controlado a APIs/ferramentas compatíveis.
@@ -179,6 +186,8 @@ Conferências feitas por Rodolfo:
 - tráfego inválido por site;
 - relatórios Smart Bidding;
 - relatórios ActiveView;
+- percentual de tráfego inválido enviado pela Smart Bidding/ActiveView, pois
+  a monetização usa o AdManager/AdX deles;
 - comissões;
 - salários;
 - despesas da empresa;
@@ -207,14 +216,16 @@ A empresa tem reuniões diárias internas. Nessas reuniões são acompanhados:
 ```text
 Agente               Papel pretendido
 ------------------- -----------------------------------------------------------
-Zeus                 General Manager/orquestrador; estrutura, governança,
-                     autorização, auditoria, roteamento e visão executiva.
-Atena                Nova gestora de conteúdo/agente de conteúdo; Raquel deve
+Zeus                 Manager geral de tudo; olha todos os agentes, faz updates,
+                     instalações, verifica problemas, dá indicações de melhoria,
+                     governa, audita, roteia e reporta.
+Atena                Gestora/agente de conteúdo; produz conteúdos. Raquel deve
                      cuidar/supervisionar.
-Ares                 Gerenciador de campanhas; análise, criação e operação de
-                     campanhas de aquisição.
-Agente de Criativos  Futuro agente para criação de criativos usando ChatGPT,
-                     Grok ou outras AIs com API/acesso permitido.
+Ares                 Agente de campanhas para qualquer ferramenta de aquisição:
+                     Facebook Ads, Google Ads, TikTok e demais canais.
+Kelly                Futuro agente de criativos; criação de criativos usando
+                     ChatGPT, TopView.ai, Canva, Grok se testado/aprovado ou
+                     outras AIs com API/acesso permitido.
 ```
 
 ---
@@ -233,9 +244,12 @@ Content Operations            Raquel, gestores, REC/P1, SEO, WordPress conteúdo
 Growth / Media Buying         Gestores, Facebook Ads, Google Ads, SMS
 Creative Operations           Kelly, Canva, ChatGPT, TopView.ai, futuro agente
 Revenue / AdOps               Smart Bidding, ActiveView, AdManager, AdX, blocos
-Finance / BI                  Fechamento, planilhas, ROI, relatórios, custos
-Tech / WordPress / Infra      Sites, plugins, pixels, Hermes, agentes, scripts
-Security / Access             Permissões, credenciais, acesso a dashboards/APIs
+Finance / BI                  Rodolfo recebe relatórios, alimenta planilhas,
+                              acompanha ROI, gastos, receitas, custos
+Tech / WordPress / Infra      Rodolfo gerencia sites, WordPress, servidor,
+                              instalações, plugins, pixels, Hermes e scripts
+Security / Access             1Password, permissões, credenciais, acesso a
+                              dashboards/APIs
 ```
 
 ---

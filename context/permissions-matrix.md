@@ -24,7 +24,7 @@ Criar REC/P1                          Atena / Raquel           Playbook/Raquel
 Editar REC/P1                          Atena / Raquel           Playbook/Raquel
 Publicar WordPress editorial           Atena                    Regra editorial
 Criar artigo SEO                       Atena / Raquel           Playbook/Raquel
-Criar criativo                         Kelly / futuro agente    Kelly/gestor/Rodolfo
+Criar criativo                         Kelly / agente Kelly     Kelly/gestor/Rodolfo
 Subir campanha                         Gestor / Ares futuro     Geizian/Rodolfo
 Alterar budget                         Gestor / Ares futuro     Rodolfo/Geizian
 Configurar pixel                       Rodolfo/Tech             Rodolfo

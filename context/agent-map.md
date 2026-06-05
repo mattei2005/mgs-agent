@@ -11,7 +11,7 @@ Agente               Área primária             Supervisor humano    Papel
 Zeus                 Executive / Management    Rodolfo             GM/orquestrador/auditoria
 Atena                Content Operations        Raquel              Conteúdo, REC/P1, WordPress
 Ares                 Growth / Media Buying     Geizian/Rodolfo     Campanhas, análise e aquisição
-Agente de Criativos  Creative Operations       Kelly/Rodolfo       Criativos estáticos/vídeos
+Kelly                Creative Operations       Kelly/Rodolfo       Criativos estáticos/vídeos
 ```
 
 ## Zeus
@@ -23,7 +23,7 @@ Agente de Content Operations: REC/P1, SEO, WordPress editorial e QA, sob supervi
 ## Ares
 Agente de Growth / Media Buying: análise, criação e operação de campanhas conforme permissão. Escala para Zeus quando envolver budget, credenciais, ROI anormal, tracking/pixel/site ou autorização externa.
 
-## Agente de Criativos
+## Kelly — agente de criativos
 Futuro agente de Creative Operations: criativos estáticos, vídeos, assets e organização de entregas por gestor/site/campanha usando ferramentas aprovadas.
 
 ## Regra para agentes futuros

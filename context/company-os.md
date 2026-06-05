@@ -64,14 +64,14 @@ Executive / Management        Direção, estratégia, prioridades, reuniões,
                               decisões, coordenação geral e governança.
 Content Operations            Produção de conteúdo, REC/P1, SEO, categorias,
                               WordPress editorial e rotina de publicação.
-Growth / Media Buying         Campanhas, Facebook Ads, Google Ads, SMS,
+Growth / Media Buying         Campanhas, Facebook Ads, Google Ads, TikTok, SMS, ChatPion, quiz e tráfego direto,
                               gestores, custos, ROI e aquisição.
 Creative Operations           Criativos estáticos, vídeos, Canva, ChatGPT,
                               TopView.ai e futuro agente de criativos.
 Revenue / AdOps               Smart Bidding, ActiveView, AdManager, AdX,
                               blocos de anúncio, precificação e monetização.
-Finance / BI                  Fechamento financeiro, planilhas, relatórios,
-                              custos, receita, comissões, salários e ROI.
+Finance / BI                  Relatórios recebidos, planilhas alimentadas por Rodolfo,
+                              custos, receita, comissões, salários, despesas e ROI.
 Tech / WordPress / Infra      WordPress técnico, sites, plugins, pixels,
                               VPS, Hermes, bots, crons, scripts e patches.
 Security / Access             Credenciais, acessos, permissões, dashboards,
@@ -128,7 +128,7 @@ SEO         Content                    Artigos de ~1.200 palavras quando há
                                        categorias adicionais a preencher.
 Aprovação   Revenue / Rodolfo          Enviar site para aprovação nas redes.
 Blocos      Revenue / AdOps            Criar/ajustar blocos de anúncio e regras.
-Campanhas   Growth / gestores / Ares   Rodar Facebook Ads, Google Ads ou SMS.
+Campanhas   Growth / gestores / Ares   Rodar Facebook Ads, Google Ads, TikTok, SMS, ChatPion, quiz ou tráfego direto.
 ROI         Growth + Revenue + Finance Acompanhar custo, receita e performance.
 ```
 
@@ -162,7 +162,7 @@ Regra canônica inicial:
 ```text
 Camada                 Ferramentas / canais
 ---------------------- --------------------------------------------------------
-Media buying           Facebook Ads, Google Ads, SMS
+Media buying           Facebook Ads, Google Ads, TikTok, SMS, ChatPion, quiz e tráfego direto
 Criativos estáticos    ChatGPT, Canva
 Vídeos                 TopView.ai
 Criativos futuros      ChatGPT, Grok ou outras AIs com API/acesso permitido
@@ -232,8 +232,8 @@ Atena                Content Operations        Gestora/agente de conteúdo;
                                               sob supervisão da Raquel.
 Ares                 Growth / Media Buying     Campanhas, análise, criação e
                                               operação de aquisição.
-Agente de Criativos  Creative Operations       Criativos estáticos/vídeos via
-                                              ChatGPT, Grok, TopView.ai, Canva
+Kelly                Creative Operations       Criativos estáticos/vídeos via
+                                              ChatGPT, TopView.ai, Canva, Grok se testado/aprovado
                                               ou outras APIs aprovadas.
 Futuros agentes      Área específica           Só devem nascer com área, dono,
                                               fontes, permissões e rotas claras.

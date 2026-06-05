@@ -36,7 +36,7 @@ Audit trail                       logs/events-audit.jsonl
 Executive / Management        company-os, areas, routes, audit log, pendências
 Content Operations            content skills, WordPress, sites.json, processes
 Growth / Media Buying         dashboards de ads, Smart Bidding, planilhas, Ares
-Creative Operations           Canva, ChatGPT, TopView.ai, pastas dos gestores
+Creative Operations           Canva, ChatGPT, TopView.ai, Grok se aprovado, pastas dos gestores
 Revenue / AdOps               Smart Bidding, ActiveView, Discord AdOps, reports
 Finance / BI                  planilha financeira, Smart Bidding, FB BM, reports
 Tech / WordPress / Infra      scripts, crons, patches, Hermes, WordPress, logs
@@ -44,7 +44,7 @@ Security / Access             authorized-users, 1Password, policies, audit log
 ```
 
 ## Fontes externas críticas
-Smart Bidding, ActiveView, Facebook Business Manager, Google Ads, Google/AdX, Canva, ChatGPT, TopView.ai, Discord AdOps, planilha financeira e 1Password.
+Smart Bidding, ActiveView, Facebook Business Manager, Google Ads, TikTok Ads se usado, Google/AdX, Canva, ChatGPT, TopView.ai, Discord AdOps, planilha financeira e 1Password.
 
 ## Regra de conflito
 Fala recente do Rodolfo vence arquivo antigo; dashboard externo validado vence arquivo antigo; `authorized-users.json` vence memória; Smart Bidding vence ActiveView exceto `openzed`, `cliquet` e subdomínios; credenciais vêm do 1Password e nunca são expostas.
