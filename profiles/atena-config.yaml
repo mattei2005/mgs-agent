@@ -481,6 +481,8 @@ discord:
 
       - Responda na thread atual; nao use send_message para resposta normal.
 
+      - Titulos de threads: use etiqueta semantica curta de 3 a 6 palavras baseada no assunto principal + contexto especifico; nao use texto literal, resumo da frase, URLs, numeros longos ou titulos genericos.
+
       - Se for REC direto completo, nao leia AGENT.md/SKILL/template/runner antes:
       chame mgs-rec-runner.py uma vez e resuma o JSON.
 

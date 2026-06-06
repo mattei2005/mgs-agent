@@ -110,27 +110,34 @@ Se detectar algo anormal (agente offline, muitos pedidos pendentes, erro recorre
 
 ## Diretriz Discord — títulos automáticos de threads
 
-Quando você abrir ou participar de uma thread nova criada a partir de uma mensagem do usuário, escolha um título curto, específico e pesquisável para a thread, seguindo a mesma lógica de titulação semântica do ChatGPT.
+Quando você criar, abrir ou participar de uma thread nova, crie/renomeie a thread com uma etiqueta curta baseada no assunto principal da intenção do usuário — não no texto literal e não em um resumo da mensagem.
+
+Formato final: `[Assunto principal] + [contexto específico]`.
 
 Regras:
-- Capture o assunto principal e a intenção real do usuário, não apenas palavras soltas.
+- Identifique a intenção principal: dúvida técnica, problema, pedido de email, análise de imagem, Excel, anúncio, código, compra, saúde, financeiro etc.
+- Ignore detalhes pequenos: números longos, URLs, prints, frases inteiras, nomes irrelevantes e texto copiado.
+- Use formato de título, não frase completa.
+- Prefira 3 a 6 palavras.
 - Use o mesmo idioma principal do usuário.
-- Prefira 3 a 7 palavras.
-- Evite títulos genéricos como "Ajuda", "Dúvida", "Pergunta", "Conversa", "Problema" ou "Suporte".
+- Priorize substantivos e contexto específico.
+- Inclua marca, produto ou sistema quando isso for importante para reconhecer o assunto.
+- Evite títulos genéricos como "Ajuda", "Dúvida", "Pergunta", "Conversa", "Problema", "Suporte" ou "Análise".
 - Não use emojis, aspas, ponto final nem nomes de usuários.
 - Se a mensagem inicial estiver vaga, aguarde mais contexto antes de renomear.
-- Não renomeie repetidamente; só ajuste se houver mudança clara de tema.
+- Se a conversa mudar claramente de assunto, renomeie para o novo assunto; se for continuação do mesmo tema, mantenha o nome.
 - Se o usuário ou moderador renomeou manualmente a thread, não sobrescreva.
 - Quando renomear, faça silenciosamente; não avise o usuário que o nome foi alterado.
 
 O título ideal deve responder mentalmente: "Como o usuário reconheceria essa conversa depois na lista de threads?"
 
-Exemplos:
-- "me ajuda a arrumar esse erro no bot do discord" → `Erro no Bot Discord`
-- "quero uma instrução pro agent renomear threads" → `Renomear Threads do Agent`
-- "como salvar memória por usuário?" → `Memória por Usuário`
-- "me ajuda com docker compose do hermes" → `Docker Compose com Hermes`
-- "quero melhorar o prompt do bot" → `Melhorar Prompt do Bot`
+Exemplos bons:
+- "Como eu faço inspect element no Chrome?" → `Inspect Element Chrome`
+- "Preciso montar um Excel com nome do peptide, mg, diluição..." → `Planilha de Peptídeos`
+- "Minha conta do Claude foi banida por disputa no cartão..." → `Apelo Banimento Claude`
+- "Conectei meu Cronus Zen e pede firmware..." → `Erro Firmware Cronus Zen`
+- "Me ajuda a escrever um email pesado pro Google..." → `Email Reclamação Google Ads`
+- "me ajuda a arrumar esse erro no bot do discord" → `Erro Bot Discord`
 
 
 ## 🚨 REGRA — Mention forcado em threads (OBRIGATORIO)
