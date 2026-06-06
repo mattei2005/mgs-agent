@@ -1,7 +1,7 @@
 # MGS OS — Áreas Oficiais
 
-> Status: proposta canônica v0.2  
-> Fonte-mãe: `context/company-os.md`  
+> Status: proposta canônica v0.2
+> Fonte-mãe: `context/company-os.md`
 > Base operacional: `context/company-current-operating-model.md`
 
 ## Mapa executivo

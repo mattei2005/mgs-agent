@@ -1,8 +1,8 @@
 # MGS OS — Matriz de Permissões e Autoridade
 
-> Status: proposta canônica v0.2  
-> Fonte-mãe: `context/company-os.md`  
-> Base operacional: `context/company-current-operating-model.md`  
+> Status: proposta canônica v0.2
+> Fonte-mãe: `context/company-os.md`
+> Base operacional: `context/company-current-operating-model.md`
 > Regra: permissões reais continuam em `data/authorized-users.json`.
 
 ## Níveis de decisão

@@ -1,7 +1,7 @@
 # Plano de Reestruturação — MGS OS
 
-> Status: plano de execução v0.2, alinhado ao modelo operacional real.  
-> Base: `context/company-current-operating-model.md` e `context/company-os.md`.  
+> Status: plano de execução v0.2, alinhado ao modelo operacional real.
+> Base: `context/company-current-operating-model.md` e `context/company-os.md`.
 > Regra: nenhuma automação/agente/arquivo produtivo será removido ou movido sem inventário, aprovação e validação.
 
 ---
