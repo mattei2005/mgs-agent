@@ -13,7 +13,7 @@ Zeus                 Executive / Management    Rodolfo                  GM, orqu
 Atena                Content Operations        Raquel                   Conteúdo, REC/P1, WordPress.
 Ares                 Growth / Media Buying     Rodolfo + Geizian +      Campanhas, análise e aquisição.
                                                 gestores treinados
-Kelly                Creative Operations       Kelly + Geizian +        Criativos estáticos/vídeos.
+Hera                 Creative Operations       Kelly + Geizian +        Criativos estáticos/vídeos.
                                                 Rodolfo
 Futuros agentes      Área específica           Dono definido            Só com escopo e permissão.
 ```
@@ -83,11 +83,11 @@ Escala para Zeus/Rodolfo quando envolver:
 - autorização externa;
 - risco financeiro/reputacional.
 
-## Kelly — agente de criativos
+## Hera — agente de criativos
 
-Futuro agente de Creative Operations, nomeado por causa da Kelly humana: criativos estáticos, vídeos, assets e organização de entregas por gestor/site/campanha usando ferramentas aprovadas.
+Futuro agente de Creative Operations: criativos estáticos, vídeos, assets e organização de entregas por gestor/site/campanha usando ferramentas aprovadas.
 
-Usuários previstos: Rodolfo, Geizian e Kelly. Kelly humana é responsável por criar criativos para os gestores; Geizian orienta e apoia; Rodolfo mantém decisão final de ferramenta/estrutura.
+Usuários previstos: Rodolfo, Geizian e Kelly. Kelly humana comanda a frente criativa e é responsável por criar criativos para os gestores; Geizian orienta e apoia; Rodolfo mantém decisão final de ferramenta/estrutura.
 
 Escopo inicial provável:
 

@@ -94,7 +94,7 @@ Raquel             Content Operations         Produção de conteúdo; supervis�
                                               operacional da Atena.
 5 gestores         Growth / Content           Operam sites/campanhas, acompanham
                                               custos, ROI e contato com AdOps.
-Kelly              Creative Operations        Produção de criativos com AI/Canva
+Kelly              Creative Operations        Pessoa responsável por criativos com AI/Canva
                                               para gestores usarem em campanhas.
 Smart Bidding      Revenue / AdOps            Rede/parceira; dash, AdOps,
                                               blocos, ROI e tecnologia.
@@ -232,7 +232,7 @@ Atena                Content Operations        Gestora/agente de conteúdo;
                                               sob supervisão da Raquel.
 Ares                 Growth / Media Buying     Campanhas, análise, criação e
                                               operação de aquisição.
-Kelly                Creative Operations       Criativos estáticos/vídeos via
+Hera                 Creative Operations       Criativos estáticos/vídeos via
                                               ChatGPT, TopView.ai, Canva, Grok se testado/aprovado
                                               ou outras APIs aprovadas.
 Futuros agentes      Área específica           Só devem nascer com área, dono,

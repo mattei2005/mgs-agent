@@ -25,9 +25,9 @@ Criar REC/P1                          Atena / Raquel           Playbook/Raquel.
 Editar REC/P1                          Atena / Raquel           Playbook/Raquel.
 Publicar WordPress editorial           Atena                    Regra editorial.
 Criar artigo SEO                       Atena / Raquel           Playbook/Raquel.
-Criar criativo                         Kelly / agente Kelly     Kelly/gestor/Rodolfo.
-Subir campanha                         Gestor / Ares futuro     Geizian/Rodolfo.
-Alterar budget                         Gestor / Ares futuro     Rodolfo/Geizian.
+Criar criativo                         Hera / Kelly humana      Kelly/gestor/Rodolfo.
+Subir campanha                         Ares / gestores          Geizian/Rodolfo.
+Alterar budget                         Ares / gestores          Rodolfo/Geizian.
 Configurar pixel                       Rodolfo/Tech             Rodolfo.
 Montar site WordPress                  Rodolfo/Tech             Rodolfo.
 Ajustar blocos AdOps                   Smart Bidding/gestor     Rodolfo/gestor.
