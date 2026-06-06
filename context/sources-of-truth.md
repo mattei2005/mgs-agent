@@ -1,7 +1,12 @@
 # MGS OS — Fontes de Verdade
 
-> Status: proposta canônica v0.1  
-> Fonte-mãe: `context/company-os.md`
+> Status: proposta canônica v0.2  
+> Fonte-mãe: `context/company-os.md`  
+> Base operacional: `context/company-current-operating-model.md`
+
+## Princípio
+
+Cada dado importante da MGS deve ter uma fonte oficial. Agentes podem consultar várias fontes, mas não devem inventar nem tratar prompt/memória como fonte única da empresa.
 
 ## Fontes canônicas internas
 
@@ -44,7 +49,62 @@ Security / Access             authorized-users, 1Password, policies, audit log
 ```
 
 ## Fontes externas críticas
-Smart Bidding, ActiveView, Facebook Business Manager, Google Ads, TikTok Ads se usado, Google/AdX, Canva, ChatGPT, TopView.ai, Discord AdOps, planilha financeira e 1Password.
+
+```text
+Fonte externa                  Uso operacional
+------------------------------ ------------------------------------------------
+Smart Bidding                   Sites, campanhas, ROI, blocos, tecnologia, reports.
+ActiveView                      Exceção ativa: openzed, cliquet e subdomínios.
+Facebook Business Manager       Gastos de campanha e contas de anúncio.
+Google Ads                      Campanhas/aquisição quando usado.
+TikTok Ads                      Canal potencial/futuro para Ares.
+Google / AdX                    Camada de pagamento/monetização via parceiros.
+Canva                           Organização e entrega de criativos.
+ChatGPT                         Apoio a criativos/conteúdo conforme escopo aprovado.
+TopView.ai                      Criação de vídeos.
+Grok                            Candidato futuro se testado/aprovado.
+Discord AdOps                   Comunicação operacional com Smart Bidding.
+Planilha financeira             Fechamento mensal e ROI consolidado.
+1Password                       Credenciais e tokens; nunca expor em chat.
+```
 
 ## Regra de conflito
-Fala recente do Rodolfo vence arquivo antigo; dashboard externo validado vence arquivo antigo; `authorized-users.json` vence memória; Smart Bidding vence ActiveView exceto `openzed`, `cliquet` e subdomínios; credenciais vêm do 1Password e nunca são expostas.
+
+```text
+Conflito                                      Vence
+-------------------------------------------- ----------------------------------
+Fala recente do Rodolfo vs arquivo antigo      Fala recente do Rodolfo.
+Dashboard externo validado vs arquivo antigo   Dashboard externo validado.
+Permissão em memória vs authorized-users.json   authorized-users.json.
+Smart Bidding vs ActiveView                    Smart Bidding, exceto openzed/cliquet/subdomínios.
+Credencial em qualquer fonte vs 1Password       1Password.
+Prompt de agente vs company-os/context          company-os/context.
+```
+
+## Regra de escrita
+
+```text
+Tipo de dado                   Onde escrever
+------------------------------ ------------------------------------------------
+Permissões operacionais         data/authorized-users.json
+Decisão/evento relevante        logs/events-audit.jsonl
+Conhecimento estrutural         context/*.md
+Procedimento reutilizável       skills/*/SKILL.md
+Automação executável            scripts/
+Histórico/plano/pendência       docs/
+Config técnica de sites         data/sites.json
+Credenciais                     1Password, nunca arquivos/chat
+```
+
+## Arquivos que exigem cuidado especial
+
+```text
+Fonte                           Regra
+------------------------------- ------------------------------------------------
+data/authorized-users.json       Não alterar sem decisão confirmada de Rodolfo.
+data/sites.json                  Não alterar sem plano técnico claro.
+.env / tokens / credentials      Não ler/expor no chat; uso interno controlado.
+scripts/ produtivos              Validar antes/depois; manter rollback.
+crons/monitores                  Evitar loops; mudança pequena e auditável.
+patches/hermes/                  Não mexer sem entender impacto no runtime.
+```
