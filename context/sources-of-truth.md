@@ -41,7 +41,7 @@ Audit trail                       logs/events-audit.jsonl
 Executive / Management        company-os, areas, routes, audit log, pendências
 Content Operations            content skills, WordPress, sites.json, processes
 Growth / Media Buying         dashboards de ads, Smart Bidding, planilhas, Ares
-Creative Operations           Canva, ChatGPT, TopView.ai, Grok se aprovado, pastas dos gestores
+Creative Operations           Canva, Google Drive de criativos aprovados, ChatGPT, TopView.ai, Grok se aprovado, pastas dos gestores
 Revenue / AdOps               Smart Bidding, ActiveView, Discord AdOps, reports
 Finance / BI                  planilha financeira, Smart Bidding, FB BM, reports
 Tech / WordPress / Infra      scripts, crons, patches, Hermes, WordPress, logs
@@ -59,7 +59,8 @@ Facebook Business Manager       Gastos de campanha e contas de anúncio.
 Google Ads                      Campanhas/aquisição quando usado.
 TikTok Ads                      Canal potencial/futuro para Ares.
 Google / AdX                    Camada de pagamento/monetização via parceiros.
-Canva                           Organização e entrega de criativos.
+Canva                           Organização e criação inicial de criativos.
+Google Drive                     Pasta oficial de criativos aprovados para Ares usar em campanhas.
 ChatGPT                         Apoio a criativos/conteúdo conforme escopo aprovado.
 TopView.ai                      Criação de vídeos.
 Grok                            Candidato futuro se testado/aprovado.

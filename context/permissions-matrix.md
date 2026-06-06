@@ -26,6 +26,8 @@ Editar REC/P1                          Atena / Raquel           Playbook/Raquel.
 Publicar WordPress editorial           Atena                    Regra editorial.
 Criar artigo SEO                       Atena / Raquel           Playbook/Raquel.
 Criar criativo                         Hera / Kelly humana      Kelly/gestor/Rodolfo.
+Salvar criativo aprovado no Drive       Hera                     Kelly/Rodolfo/Geizian.
+Ler criativo aprovado no Drive          Ares                     Escopo de campanha aprovado.
 Subir campanha                         Ares / gestores          Geizian/Rodolfo.
 Alterar budget                         Ares / gestores          Rodolfo/Geizian.
 Configurar pixel                       Rodolfo/Tech             Rodolfo.
