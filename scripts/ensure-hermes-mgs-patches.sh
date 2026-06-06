@@ -45,7 +45,7 @@ apply_patch_if_needed() {
       fi
       ;;
     planned-restart-auto-resume-active-sessions.patch)
-      if grep -q "planned restarts, keep the marker" "$REPO/gateway/run.py"; then
+      if grep -q "service-manager restarts while a chat task is active" "$REPO/gateway/run.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi

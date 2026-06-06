@@ -92,13 +92,17 @@ index f11686ccd..859bda915 100644
 +                # Normally clear the pre-drain resume_pending markers so sessions
 +                # that completed during the drain window don't carry a stale flag.
 +                #
-+                # PATCH (MGS Digital Corp): for planned restarts, keep the marker
-+                # for sessions that were active at restart time.  Discord can drop
-+                # the final response during adapter disconnect even when the model
-+                # turn technically completed; keeping resume_pending lets startup
-+                # synthesize an internal continuation in the same thread without
-+                # requiring the human to send "retoma".
-+                if not self._restart_requested:
++                # PATCH (MGS Digital Corp): for planned restarts AND external
++                # service-manager restarts while a chat task is active, keep the
++                # marker for sessions that were active at shutdown time. Discord
++                # can drop the final response during adapter disconnect even when
++                # the model turn technically completed; keeping resume_pending lets
++                # startup synthesize an internal continuation in the same thread
++                # without requiring the human to send "retoma".
++                _service_managed_shutdown_with_active_sessions = bool(
++                    os.environ.get("INVOCATION_ID") and _pre_drain_keys
++                )
++                if not self._restart_requested and not _service_managed_shutdown_with_active_sessions:
 +                    for _sk in _pre_drain_keys:
 +                        if _sk not in self._running_agents:
 +                            try:
@@ -110,7 +114,7 @@ index f11686ccd..859bda915 100644
 +                                )
 +                elif _pre_drain_keys:
 +                    logger.info(
-+                        "Keeping resume_pending for %d planned-restart active session(s) "
++                        "Keeping resume_pending for %d restart/service-shutdown active session(s) "
 +                        "so startup auto-resumes without user nudge.",
 +                        len(_pre_drain_keys),
 +                    )
