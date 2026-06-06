@@ -72,8 +72,8 @@ grep -q "DISCORD_THREAD_AUTO_ADD_USERS" "$REPO/plugins/platforms/discord/adapter
   || fail "missing Discord explicit thread auto-add support"
 grep -q "Auto-thread member sync" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord auto-thread member sync log marker"
-grep -q "planned restarts, keep the marker" "$REPO/gateway/run.py" \
-  || fail "missing planned restart auto-resume marker"
+grep -q "service-manager restarts while a chat task is active" "$REPO/gateway/run.py" \
+  || fail "missing restart/service-manager auto-resume marker"
 
 PYBIN="$REPO/venv/bin/python"
 [[ -x "$PYBIN" ]] || PYBIN="python3"
