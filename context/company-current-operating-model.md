@@ -25,11 +25,24 @@ Geizian       Sócio; acompanha e gerencia os gestores, rotina diária de
 Grupo                         Responsabilidade
 ----------------------------- ------------------------------------------------
 Raquel                        Produção/conteúdo; cuida da Atena no futuro.
-5 gestores                    Gestão de conteúdo/campanhas/sites; acompanham
+Gestores                      Gestão de conteúdo/campanhas/sites; acompanham
                               campanhas, custos, ROI e contato operacional.
 Kelly                         Criativos; produz assets em ferramentas AI/Canva
                               para gestores usarem nas campanhas.
 Rodolfo + Geizian + gestores  Acessam dashboards de monetização/ROI/campanhas.
+```
+
+Gestores e códigos usados em `UTM_medium` para rastrear receita/lucro por gestor:
+
+```text
+Gestor     Código
+---------  ------
+Icaro      g001
+Geizian    g002
+Isliago    g003
+Joe        g004
+Kelly      g005
+Nicolas    g006
 ```
 
 ---
@@ -207,7 +220,18 @@ Google paga Smart Bidding e ActiveView. Smart Bidding/ActiveView retiram o reven
 
 Rodolfo recebe os relatórios, alimenta a planilha com gastos, receitas, despesas, salários e comissões. A planilha calcula ROI e o fechamento detalhado. No fim do mês, a empresa sabe quanto cada gestor recebe, quanto deve ser pago em despesas e quanto os sócios recebem.
 
-Essa camada deve virar **Finance / BI / Executive Reporting** no MGS OS, com Rodolfo como dono atual.
+Regra atual de remuneração dos gestores:
+
+```text
+Base salarial                 R$ 3.000
+Até R$ 100.000 lucro líquido   7% sobre lucro líquido
+A partir de R$ 100.000         10% sobre lucro líquido
+Regra contra duplicidade       Não paga salário + comissão; paga o maior valor.
+Exemplo R$ 45.000 lucro líquido 45.000 * 7% = R$ 3.150; recebe R$ 3.150.
+Ponto de virada aproximado     ~R$ 42.857 de lucro líquido para superar R$ 3.000.
+```
+
+Essa regra pertence à camada **Finance / BI / Executive Reporting**.
 
 ---
 
