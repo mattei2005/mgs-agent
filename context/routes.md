@@ -29,6 +29,7 @@ Configurar pixel Facebook/Google Ads    Rodolfo / Tech/Growth          Zeus apoi
 Criar criativo estático                 Kelly + Geizian / Creative     Hera         Rodolfo se padrão/ferramenta.
 Criar/editar vídeo                      Kelly + Geizian / Creative     Hera         Rodolfo se padrão/ferramenta.
 Organizar criativos Canva/Drive         Kelly + Geizian / Creative     Hera         Rodolfo se estrutura mudar.
+Disponibilizar criativo aprovado ao Ares Kelly + Geizian / Creative     Hera         Ares usa em testes.
 Criar/subir campanha Facebook Ads       Rodolfo + Geizian + gestores   Ares         Budget/risco escala Rodolfo.
 Criar/subir campanha Google Ads         Rodolfo + Geizian + gestores   Ares         Budget/risco escala Rodolfo.
 Criar/subir campanha TikTok Ads         Rodolfo + Geizian + gestores   Ares         Futuro; Rodolfo aprova.
@@ -67,6 +68,18 @@ Agente                         Hera
 ```
 
 Kelly é a responsável humana por criar criativos para os gestores. Geizian orienta e apoia. Rodolfo mantém decisão final sobre ferramentas, estrutura e padrões.
+
+Fluxo Hera → Drive → Ares:
+
+```text
+1. Kelly, Rodolfo, Geizian ou gestor pede criativos.
+2. Hera cria variações nos formatos necessários, ex.: feed e stories para Facebook/Instagram.
+3. Kelly avalia/aprova o criativo.
+4. Hera salva o criativo aprovado na pasta correta do Google Drive.
+5. Ares acessa essa pasta para usar os criativos em testes de campanhas novas.
+```
+
+Regra: Ares precisa ter acesso de leitura às pastas de criativos aprovados no Drive. Hera organiza/escreve os assets aprovados; Ares consome para campanha.
 
 ## Growth / Campaigns — Ares
 
