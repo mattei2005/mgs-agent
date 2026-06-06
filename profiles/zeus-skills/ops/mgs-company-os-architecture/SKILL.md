@@ -130,9 +130,10 @@ Security / Access             Credentials, tokens, user permissions, dashboards,
 Durable MGS facts from the CEO explanation:
 - Rodolfo and Geizian are partners. Rodolfo owns management, finance, WordPress/technical structure, pixels, partner-network relationship, strategy, and also directly acts in Growth/Ares setup. Geizian manages the campaign/site managers day to day and also participates in Growth, Creative support, and Revenue/AdOps.
 - Raquel owns Content Operations and should supervise Atena.
-- Kelly owns creative production and currently uses AI/Canva workflows for managers. Geizian also orients/supports Kelly in Creative Operations.
-- There are six gestores with tracking codes used in `utm_medium`: Icaro `g001`, Geizian `g002`, Isliago `g003`, Joe `g004`, Kelly `g005`, Nicolas `g006`.
+- Kelly is the human owner of creative production and currently uses AI/Canva workflows for gestores. Geizian also orients/supports Kelly in Creative Operations. The creative agent name is **Hera**, not Kelly.
+- There are six gestores with tracking codes used in `UTM_medium`: Icaro `g001`, Geizian `g002`, Isliago `g003`, Joe `g004`, Kelly `g005`, Nicolas `g006`.
 - Geizian is both partner/coordinator and an operating gestor (`g002`): he also launches/tests campaigns for some sites.
+- The campaign agent is **Ares** only. Do not use `Aris`. Do not label it `Ares futuro`; if needed, describe status separately as `em configuração` / `implantação progressiva`.
 - Smart Bidding is the main operational dashboard for sites, campaigns, ROI, ad blocks, APIs and permissions.
 - ActiveView is now an exception/legacy-active network: only `openzed`, `cliquet`, and their subdomains are not technologically migrated to Smart Bidding.
 - Finance runs monthly: period day 1–30, Google payment around day 21–23, Rodolfo checks Facebook Business Manager spend, invalid traffic, Smart Bidding/ActiveView reports, commissions, salaries and expenses in his spreadsheet.
@@ -143,10 +144,15 @@ Durable MGS facts from the CEO explanation:
 ```text
 Agent   Primary area    Role
 ------- --------------- ------------------------------------------------------
-Zeus    Executive/Ops   General Manager, governance, routing, audit, escalation
-Atena   Content         Editorial production, REC/P1, WordPress, content QA
-Ares    Growth/Ads      Campaign management/creation/analysis after approval
-Kelly   Creative        Creative assets, Canva/Drive taxonomy, static/video flows
+Zeus    Executive/Ops   General Manager, governance, routing, audit, escalation;
+                        controlled by Rodolfo only by default.
+Atena   Content         Editorial production, REC/P1, WordPress, content QA;
+                        Raquel supervises.
+Ares    Growth/Ads      Campaign management, creation, analysis, acquisition;
+                        Rodolfo + Geizian first, trained gestores after testing.
+Hera    Creative        Creative assets, videos, Canva/Drive organization and
+                        naming taxonomy; Kelly is the human creative lead.
+Future  TBD             Specialist agents created only after mission/scope exist
 Future  TBD             Specialist agents created only after mission/scope exist
 ```
 
@@ -188,6 +194,10 @@ Phase 5   Agent reference updates          one agent at a time, validated after 
 Phase 6   Operational validation           Discord, logs, crons, agents, runtime
 Phase 7   Cleanup/archival                 explicit Rodolfo approval per block
 ```
+
+When Rodolfo says to review files one by one, do **not** jump to inventory or migration. Present the current file, accept corrections, patch it, then move to the next.
+
+When Rodolfo corrects naming or ownership (e.g. `Ares` not `Aris`, `Hera` not `Kelly agent`), search canonical context files for stale variants and clean them up. Explain that search as stale-term cleanup, not as re-litigating the user's correction.
 
 Sequencing pitfall: after `company-current-operating-model.md` and `company-os.md` are drafted, **do not jump straight to inventory**. Review the derived files one by one with Rodolfo first: `areas.md`, `agent-map.md`, `routes.md`, `sources-of-truth.md`, and `permissions-matrix.md`. Inventory starts only after those derived docs are accepted as the current canonical proposal.
 
@@ -265,4 +275,5 @@ Before reporting completion of a company-OS step:
 
 - `references/company-os-blueprint-session-2026-06-05.md` — session-specific origin: Bruno course context, current `/root/mgs-agent` structural counts, and first blueprint pattern.
 - `references/company-os-ceo-operating-model-2026-06-05.md` — CEO-described real MGS operating model: partners, Raquel/Kelly/gestores, Smart Bidding/ActiveView, finance cycle, campaigns, creative flow, and agent implications.
+- `references/company-os-routing-growth-creative-2026-06-06.md` — routing clarifications for Ares, Hera, gestores/UTM codes, ChatPion/DigitalTrChat/Messenger, quiz/SMS Funnel, Revenue/AdOps and gestor commission.
 - `references/company-os-gestores-ares-finance-2026-06-06.md` — gestor codes (`utm_medium`), Ares staged access, Creative/Kelly agent context, Zeus-only control, and gestor commission rules for Finance/BI.
