@@ -83,7 +83,9 @@ Escala para Zeus/Rodolfo quando envolver:
 
 ## Kelly — agente de criativos
 
-Futuro agente de Creative Operations: criativos estáticos, vídeos, assets e organização de entregas por gestor/site/campanha usando ferramentas aprovadas.
+Futuro agente de Creative Operations, nomeado por causa da Kelly humana: criativos estáticos, vídeos, assets e organização de entregas por gestor/site/campanha usando ferramentas aprovadas.
+
+Usuários previstos: Rodolfo, Geizian e Kelly. Kelly humana é responsável por criar criativos para os gestores; Geizian orienta e apoia; Rodolfo mantém decisão final de ferramenta/estrutura.
 
 Escopo inicial provável:
 
