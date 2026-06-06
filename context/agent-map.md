@@ -80,6 +80,7 @@ Escala para Zeus/Rodolfo quando envolver:
 - ROI anormal;
 - tracking/pixel/site;
 - dashboard externo;
+- Google Drive com criativos aprovados;
 - autorização externa;
 - risco financeiro/reputacional.
 
@@ -92,9 +93,11 @@ Usuários previstos: Rodolfo, Geizian e Kelly. Kelly humana comanda a frente cri
 Escopo inicial provável:
 
 ```text
-Entrada   Pedido de criativo por site/campanha/vertical.
+Entrada   Pedido de criativo por site/campanha/vertical/formato.
 Processo  Gerar/organizar assets em ferramenta aprovada.
-Saída     Criativo entregue ao gestor no formato/local combinado.
+Aprovação Kelly avalia/aprova criativos quando for fluxo dela.
+Saída     Criativo aprovado salvo na pasta correta do Google Drive.
+Consumo   Ares lê a pasta e usa o asset em testes de campanhas novas.
 Controle  Kelly/Rodolfo aprovam ferramentas e padrões.
 ```
 
