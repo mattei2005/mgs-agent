@@ -7,13 +7,15 @@
 ## Visão geral
 
 ```text
-Agente               Área primária             Supervisor humano    Papel
-------------------- -------------------------- ------------------- ------------------------------
-Zeus                 Executive / Management    Rodolfo             GM, orquestração, auditoria.
-Atena                Content Operations        Raquel              Conteúdo, REC/P1, WordPress.
-Ares                 Growth / Media Buying     Geizian/Rodolfo     Campanhas, análise e aquisição.
-Kelly                Creative Operations       Kelly/Rodolfo       Criativos estáticos/vídeos.
-Futuros agentes      Área específica           Dono definido        Só com escopo e permissão.
+Agente               Área primária             Supervisor/usuários       Papel
+------------------- -------------------------- ------------------------ ------------------------------
+Zeus                 Executive / Management    Rodolfo                  GM, orquestração, auditoria.
+Atena                Content Operations        Raquel                   Conteúdo, REC/P1, WordPress.
+Ares                 Growth / Media Buying     Rodolfo + Geizian +      Campanhas, análise e aquisição.
+                                                gestores treinados
+Kelly                Creative Operations       Kelly + Geizian +        Criativos estáticos/vídeos.
+                                                Rodolfo
+Futuros agentes      Área específica           Dono definido            Só com escopo e permissão.
 ```
 
 ## Zeus
@@ -43,7 +45,31 @@ Escala para Zeus quando houver:
 
 ## Ares
 
-Agente planejado de Growth / Media Buying: análise, criação e operação de campanhas conforme permissão aprovada.
+Agente de Growth / Media Buying: gerenciar, criar, analisar e operar campanhas conforme permissão aprovada.
+
+Usuários previstos:
+
+```text
+Fase        Quem conversa com Ares
+---------- ------------------------------------------------------------------
+Inicial     Rodolfo e Geizian.
+Depois      Gestores treinados, após Ares estar aprovado, rodando e testado.
+```
+
+Gestores/códigos de rastreamento:
+
+```text
+Gestor     Código UTM_medium
+---------  -----------------
+Icaro      g001
+Geizian    g002
+Isliago    g003
+Joe        g004
+Kelly      g005
+Nicolas    g006
+```
+
+O código do gestor é usado no `UTM_medium` para rastrear receita/lucro por gestor, site e campanha.
 
 Escala para Zeus/Rodolfo quando envolver:
 
