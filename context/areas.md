@@ -7,18 +7,18 @@
 ## Mapa executivo
 
 ```text
-|Área                         Dono humano atual       Função central
-|---------------------------- ---------------------- ---------------------------------------------
-|Executive / Management        Rodolfo + Geizian      Direção, prioridades, reuniões e governança.
-|Content Operations            Raquel                 Conteúdo, REC/P1, SEO e WordPress editorial.
-|Growth / Media Buying         Rodolfo + Geizian +    Campanhas, arbitragem, custos, aquisição e ROI.
-|                             gestores
-|Creative Operations           Kelly + Geizian        Criativos, Canva, ChatGPT, TopView.ai e AIs.
-|Revenue / AdOps               Rodolfo + Geizian +    Smart Bidding, ActiveView, AdX, blocos e regras.
-|                             gestores
-|Finance / BI                  Rodolfo                Fechamento, custos, receita, ROI e pagamentos.
-|Tech / WordPress / Infra      Rodolfo + Zeus/Tech    Sites, plugins, pixels, Hermes, VPS e scripts.
-|Security / Access             Rodolfo + Zeus         Credenciais, acessos, permissões e risco.
+Área                         Dono humano atual          Função central
+---------------------------- ------------------------- ---------------------------------------------
+Executive / Management        Rodolfo + Geizian         Direção, prioridades, reuniões e governança.
+Content Operations            Raquel                    Conteúdo, REC/P1, SEO e WordPress editorial.
+Growth / Media Buying         Rodolfo + Geizian +       Campanhas, arbitragem, custos, aquisição e ROI.
+                              gestores
+Creative Operations           Kelly + Geizian           Criativos, Canva, ChatGPT, TopView.ai e AIs.
+Revenue / AdOps               Rodolfo + Geizian +       Smart Bidding, ActiveView, AdX, blocos e regras.
+                              gestores
+Finance / BI                  Rodolfo                   Fechamento, custos, receita, ROI e pagamentos.
+Tech / WordPress / Infra      Rodolfo + Zeus/Tech       Sites, plugins, pixels, Hermes, VPS e scripts.
+Security / Access             Rodolfo + Zeus            Credenciais, acessos, permissões e risco.
 ```
 
 ## Executive / Management
@@ -37,13 +37,13 @@ Escala para Zeus quando houver erro crítico, risco técnico, conflito de priori
 
 Facebook Ads, Google Ads, TikTok, SMS, ChatPion, quiz, tráfego direto, análise de campanhas, custos, ROI, gestores e operação futura do Ares.
 
-Geizian acompanha gestores no dia a dia. Rodolfo acompanha visão geral, budget, ROI e impacto financeiro.
+Rodolfo também atua diretamente na configuração e direção estratégica da área, incluindo a preparação do Ares. Geizian acompanha gestores no dia a dia. Rodolfo acompanha visão geral, budget, ROI e impacto financeiro.
 
 ## Creative Operations
 
 Criativos estáticos, vídeos, assets para campanhas, Canva, ChatGPT, TopView.ai, Grok se testado/aprovado e futuro agente de criativos.
 
-Kelly é a dona humana atual da produção criativa. O fluxo atual termina na entrega dos assets nas pastas Canva dos gestores.
+Kelly é a dona humana atual da produção criativa. Geizian também atua orientando e apoiando Kelly nessa frente. O fluxo atual termina na entrega dos assets nas pastas Canva dos gestores.
 
 ## Revenue / AdOps
 
