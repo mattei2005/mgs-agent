@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-05T05:00:01-04:00",
+    "updated_at": "2026-06-06T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -1648,6 +1648,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md"
       },
       {
+        "name": "mgs-company-os-architecture",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-company-os-architecture/SKILL.md"
+      },
+      {
         "name": "wp-plugin-mass-operation",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/SKILL.md"
@@ -1819,8 +1824,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "a55c4cc5f4e89406d10df56e7fde5afe",
-      "modified_at": "2026-06-05T04:56:02-04:00"
+      "md5": "f2331204ff07f7e929f0d451d4ad03fa",
+      "modified_at": "2026-06-06T04:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1831,26 +1836,26 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "932155568d2a328251f96d61b0b1991e",
-      "modified_at": "2026-06-05T05:00:01-04:00"
+      "md5": "84b128e51a6a99128c761886a218db24",
+      "modified_at": "2026-06-06T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 7621,
-      "md5": "7e6553322ac05b8edbb7c879f44a132b",
-      "modified_at": "2026-06-05T05:00:01-04:00"
+      "size_bytes": 8008,
+      "md5": "9e9f2bb002826f3e67041695619ddf97",
+      "modified_at": "2026-06-06T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 330,
-      "md5": "855ab84171c012f7180403a2ae07ecd5",
-      "modified_at": "2026-06-04T20:37:02-04:00"
+      "size_bytes": 328,
+      "md5": "4eb01849e3da9eb326227c1ebc1dc3d1",
+      "modified_at": "2026-06-05T20:37:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 68235,
-      "md5": "193d00c2cd49e0a9f74366a27f365fe7",
-      "modified_at": "2026-06-04T05:00:05-04:00"
+      "size_bytes": 68964,
+      "md5": "b2cb0f644a5e4d8ab6d6add5b1ce233b",
+      "modified_at": "2026-06-05T05:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1878,9 +1883,9 @@
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
-      "size_bytes": 2996,
-      "md5": "f530c5e4e831a728579bbcadfea33d17",
-      "modified_at": "2026-06-03T14:29:49-04:00"
+      "size_bytes": 3236,
+      "md5": "be4495e2e0469c643d67213e98800342",
+      "modified_at": "2026-06-05T16:22:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -1897,8 +1902,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1052,
-      "md5": "80d74e7aa946dd355c2260046de97a97",
-      "modified_at": "2026-06-05T04:56:01-04:00"
+      "md5": "db1d60c166ecb1ed2596c64500df7d1a",
+      "modified_at": "2026-06-06T04:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1915,8 +1920,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "8ac1a435680987dfdd388df728cf5b10",
-      "modified_at": "2026-06-04T20:07:02-04:00"
+      "md5": "ad43a338efd593e83ad91c042b69ef9c",
+      "modified_at": "2026-06-05T20:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -1926,9 +1931,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 16608,
-      "md5": "d21a004438e89c43ae42cfd69fcb0d87",
-      "modified_at": "2026-06-04T10:24:07-04:00"
+      "size_bytes": 16972,
+      "md5": "0fa89cb326472ce390c36e5764b22641",
+      "modified_at": "2026-06-05T10:24:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
