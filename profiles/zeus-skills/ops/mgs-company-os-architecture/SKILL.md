@@ -90,6 +90,18 @@ Minimum sections:
 12. Next step after approval
 ```
 
+After the blueprint is in place, keep the derived docs aligned rather than letting each drift:
+
+```text
+context/areas.md
+context/agent-map.md
+context/routes.md
+context/sources-of-truth.md
+context/permissions-matrix.md
+```
+
+If Rodolfo answers “ok” after a recommendation to perform a low-risk additive Company OS step, treat it as approval to execute that step. Still do not move/remove runtime files or alter agents without explicit scope/approval.
+
 ### 3. Recommended initial MGS areas
 
 Use the CEO-described real operating model as the starting point. The current canonical proposal is:
@@ -155,15 +167,22 @@ Pitfall: do not let `SOUL.md`, ad-hoc prompts, or individual skills become the o
 
 ### 6. Safe migration stages
 
-Use staged gates:
+Use staged gates. If `company-current-operating-model.md` and `company-os.md` already exist, do **not** keep using the generic initial order; first reconcile the plan/status with the actual completed artifacts.
+
+Recommended current-stage sequence:
 
 ```text
-Phase 1   Blueprint                     no runtime changes
-Phase 2   Classified inventory           one line per relevant path
-Phase 3   New canonical context files     additive only
-Phase 4   Agent reference updates         controlled, validated after each agent
-Phase 5   Cleanup/archival                explicit Rodolfo approval per block
+Phase 0   Capture real operating model    company-current-operating-model.md
+Phase 1   Company OS blueprint             company-os.md, marked proposal/canonical as appropriate
+Phase 2   Derived canonical context docs   areas, agent-map, routes, sources-of-truth, permissions
+Phase 3   Classified inventory             one line per relevant path
+Phase 4   Migration plan by block          explicit action/risk per file or folder
+Phase 5   Agent reference updates          one agent at a time, validated after each
+Phase 6   Operational validation           Discord, logs, crons, agents, runtime
+Phase 7   Cleanup/archival                 explicit Rodolfo approval per block
 ```
+
+Pitfall: old restructuring plans may say “next step: update company-os.md” even after that has already been done, or may duplicate “create derived docs” both before and after inventory. When reviewing the plan, update statuses and remove duplicated phases before proceeding.
 
 Never combine broad reorganization with gateway restarts, cron rewrites, or production changes unless Rodolfo explicitly authorizes that combined scope.
 
