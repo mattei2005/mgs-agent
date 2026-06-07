@@ -1,78 +1,227 @@
 # MGS Digital Corp
 
+> Status: visão geral v0.2
+> Fonte-mãe: `context/company-os.md`
+> Base operacional: `context/company-current-operating-model.md`
+
 ## O que é
 
-MGS Digital Corp é uma empresa de mídia digital focada em publicação de conteúdo em múltiplos nichos e mercados. O modelo é **publisher em escala**: dezenas de sites micro-nichados gerando receita via monetização com Google AdSense, AdX e redes parceiras.
+MGS Digital Corp é uma empresa de mídia digital focada em publicação, aquisição paga, monetização display e operação de múltiplos sites/verticais.
+
+O modelo é **publisher em escala**: vários sites micro-nichados geram receita por meio de tráfego pago, conteúdo, funis de aquisição e monetização com parceiros de AdOps.
+
+A empresa opera como um sistema dividido por áreas:
+
+```text
+Área                         Função
+---------------------------- -------------------------------------------------
+Content Operations            Conteúdo, REC/P1, SEO e WordPress editorial.
+Growth / Media Buying         Campanhas, tráfego pago, ROI e gestores.
+Creative Operations           Criativos, vídeos, Canva, Drive e assets.
+Revenue / AdOps               Monetização, blocos, redes e performance AdX.
+Finance / BI                  ROI, gastos, receitas, comissões e fechamento.
+Tech / WordPress / Infra      Sites, pixels, integrações, automações e agentes.
+Security / Access             Permissões, credenciais, auditoria e acessos.
+Executive / Management        Direção, prioridades, governança e decisões.
+```
 
 ## Modelo de negócio
 
-### Receita (monetização)
-A receita vem de publicidade display + outras estratégias:
-- Blocos de anúncio via Google AdX/GAM360 (redes parceiras)
-- Push notifications
-- SMS marketing
-- Email marketing
+### Receita / monetização
 
-### Custo (aquisição)
-O tráfego pago vem de:
-- Facebook Ads (pode direcionar pro site ou pro Messenger)
-- Google Ads (sempre direto pro site)
+A receita vem principalmente de publicidade display e monetização via parceiros.
 
-### Ferramenta de conversão
-- **ChatPion** — bot no Messenger, usado junto com campanhas FB Ads com objetivo MSG (não é custo, é camada de conversão)
-
-### Funil típico
-
-**Via FB Ads direto pro site:**
-```
-Ad FB → clique → site MGS → navega REC → P1 → CTA → site final
+```text
+Camada                        Uso
+----------------------------- ------------------------------------------------
+Smart Bidding                 Central principal de monetização/AdOps.
+Google AdX / Ad Manager       Camada de monetização via parceiros.
+ActiveView                    Exceção ativa para openzed, cliquet e subdomínios.
+Blocos de anúncio             Configurados por parceiros/AdOps nos sites.
+SMS / Messenger / broadcast   Estratégias de retorno de usuário para os sites.
 ```
 
-**Via FB Ads → Messenger (ChatPion):**
-```
-Ad FB → Messenger → bot envia fluxo → user clica botão → site MGS → REC → P1 → site final
+Smart Bidding é a central principal. ActiveView permanece como exceção operacional para `openzed`, `cliquet` e respectivos subdomínios.
+
+### Custo / aquisição
+
+A aquisição vem principalmente de mídia paga e funis próprios.
+
+```text
+Canal / estratégia            Uso
+----------------------------- ------------------------------------------------
+Facebook Ads                  Campanhas para site, Messenger, quiz ou outros fluxos.
+Google Ads                    Campanhas diretas para site/quiz quando usado.
+TikTok Ads                    Canal potencial/futuro, não foco atual.
+Messenger / ChatPion          Estratégia Facebook Ads com bot e páginas conectadas.
+Quiz + SMS                    Tráfego direto com captura de telefone e SMS Funnel.
+UTM_medium                    Código de atribuição por gestor.
 ```
 
-**Via Google Ads:**
+Hoje os sources principais são Facebook Ads e Google Ads. TikTok Ads deve ficar documentado como canal potencial/futuro.
+
+## Funis operacionais
+
+### Via Facebook Ads direto para site
+
+```text
+Ad Facebook → clique → site MGS → conteúdo/REC/P1 → anúncios display → receita
 ```
-Ad Google → clique → site MGS direto → REC → P1 → site final
+
+### Via Google Ads direto para site ou quiz
+
+```text
+Ad Google → clique → site/quiz → conteúdo ou captura → anúncios display → receita
 ```
 
-Durante a navegação, o usuário vê anúncios (AdSense/AdX) — fonte primária de receita.
+### Via Facebook Ads → Messenger / ChatPion
 
-## Entidade
+ChatPion, no contexto MGS, é operado via dashboard DigitalTrChat.
 
-- **MGS Digital Corp** — empresa principal
+```text
+1. Rodolfo/Geizian criam usuários por vertical no DigitalTrChat.
+2. Gestor acessa o usuário da vertical.
+3. Gestor conecta um segurador/perfil Facebook.
+4. Dentro do segurador existem várias páginas Facebook.
+5. Gestor configura os flows no Bot Manager.
+6. Campanha Facebook Ads roda com objetivo Messenger.
+7. Usuário clica no anúncio e abre o Messenger.
+8. Bot envia drip nas primeiras 24h.
+9. Depois entra broadcast configurado via Smart Bidding.
+10. Mensagens levam o usuário para sites MGS monetizados.
+```
+
+Limite importante: **Ares não configura ChatPion/DigitalTrChat**. O cadastro de usuários é feito por Rodolfo e Geizian. Os gestores fazem a configuração operacional dos usuários/flows.
+
+### Via quiz + SMS
+
+```text
+Ad Facebook/Google → quiz → captura nome/telefone/email → SMS Funnel → link → site MGS → anúncios display → receita
+```
+
+Rodolfo monta a estrutura e configuração do quiz/SMS. O SMS Funnel envia mensagens alguns minutos depois do cadastro, com CTA e link para um dos sites.
+
+## Equipe operacional
+
+```text
+Pessoa / grupo                Função
+----------------------------- ------------------------------------------------
+Rodolfo                       CEO, estratégia, Finance/BI, WordPress, pixels,
+                              arquitetura, Revenue/AdOps e configuração de Ares.
+Geizian                       Parceiro/gestor operacional; acompanha gestores,
+                              sobe/testa campanhas, apoia Creative e Revenue/AdOps.
+Raquel                        Content Operations; acompanha Atena e conteúdo.
+Kelly                         Creative Operations; cria criativos para gestores.
+Gestores                      Operam campanhas, páginas, criativos e verticais.
+Smart Bidding                 Parceiro de monetização/AdOps e tecnologia.
+```
+
+Gestores e códigos usados no `UTM_medium`:
+
+```text
+Gestor     Código
+---------  ------
+Icaro      g001
+Geizian    g002
+Isliago    g003
+Joe        g004
+Kelly      g005
+Nicolas    g006
+```
+
+O `UTM_medium` permite atribuir receita/lucro por gestor, site e campanha.
+
+## Agentes AI
+
+Agentes AI são multiplicadores operacionais. Eles não substituem aprovação humana em áreas sensíveis; coordenam, executam dentro de escopo e escalam quando houver risco.
+
+```text
+Agente      Área                         Papel
+----------  --------------------------- --------------------------------------
+Zeus        Executive / Management       GM/orquestrador/auditor. Só Rodolfo
+                                         conversa por padrão.
+Atena       Content Operations           REC/P1, SEO, conteúdo e WordPress.
+Ares        Growth / Media Buying        Campanhas, análise, ROI e operação
+                                         de mídia dentro de escopo aprovado.
+Hera        Creative Operations          Criativos, vídeos, assets e Drive.
+```
+
+Regras principais:
+
+```text
+Zeus     Controle somente Rodolfo. Outras pessoas só entram se Rodolfo pedir.
+Atena    Conteúdo/REC/P1/WordPress editorial com supervisão humana.
+Ares     Campanhas. Não configura ChatPion, quiz ou SMS Funnel.
+Hera     Criativos. Pode gerenciar Drive de criativos aprovados.
+```
+
+## Creative Operations e Drive
+
+O fluxo de criativos deve preservar uma fonte oficial de assets aprovados.
+
+```text
+1. Kelly/Rodolfo/Geizian/gestor pede criativo.
+2. Hera cria variações, por exemplo feed e stories para Facebook/Instagram.
+3. Kelly ou responsável avalia/aprova.
+4. Hera salva o criativo aprovado na pasta correta do Google Drive.
+5. Ares acessa o Drive para usar e gerenciar criativos em testes de campanhas.
+```
+
+Ares e Hera devem ter leitura/escrita no Drive de criativos aprovados para conseguir gerenciar os assets de campanha.
+
+## Finance / BI
+
+Finance e BI ficam sob responsabilidade do Rodolfo.
+
+```text
+Fonte / dado                   Uso
+----------------------------- ------------------------------------------------
+Planilha financeira             Fechamento mensal, ROI, gastos e receitas.
+UTM_medium                      Atribuição por gestor.
+Reports de parceiros            Receita, performance e validação externa.
+Facebook/Google dashboards      Gastos, campanhas e performance.
+```
+
+Comissões dos gestores devem ser calculadas na planilha financeira. A regra operacional atual é:
+
+```text
+Base salarial                  R$ 3.000
+Até R$ 100.000 lucro líquido    7% sobre lucro líquido
+A partir de R$ 100.000          10% sobre lucro líquido
+Regra                           Não soma salário + comissão; paga o maior valor.
+```
 
 ## Escala atual
 
-- ~24 domínios ativos
-- ~60 verticais (combinações país + nicho + idioma)
-- **10 países:** US, GB, DE, ES, MX, AR, ZA, CA, TR, BR
-- **7 idiomas:** EN, ES, DE, FR, TR, PT (Portugal), BR (Brasil)
-- **4 nichos:** CC (cartões de crédito — core), GAME, JOB, CAR
+A escala exata deve ser consultada em `context/sites.md` e `data/sites.json`.
 
-Detalhamento completo em `sites.md`.
+Em nível executivo, a MGS opera:
+
+```text
+Sites/verticais     Múltiplos sites e verticais por país/nicho/idioma.
+Mercados            US, GB, DE, ES, MX, AR, ZA, CA, TR, BR e outros conforme operação.
+Nichos              Cartões/crédito, games, jobs, carros e outras verticais ativas.
+Modelo              Sites micro-nichados com aquisição paga e monetização display.
+```
 
 ## Filosofia
 
 ### Escala por multiplicação, não por concentração
-Em vez de um site grande com dezenas de milhões de visitas, MGS opera **múltiplos sites micro-nichados** em paralelo. Se um site cai, 23 seguem operando. Se um nicho satura, outros 3 continuam crescendo. Diversificação real.
+
+MGS opera múltiplos sites e verticais em paralelo. Se um site cai, outros seguem operando. Se um nicho satura, outros continuam sendo testados.
 
 ### Replicação + localização
-Um playbook editorial, técnico e de monetização testado e aprovado é **replicado com adaptação local** em cada mercado: mesmo modelo de REC+P1 funciona em EN-US, EN-GB, ES-MX, DE-DE, BR, etc. Localiza linguagem, adapta produto, mantém estrutura.
+
+Um playbook editorial, técnico e de monetização testado é replicado com adaptação local por mercado, idioma e nicho.
 
 ### Stack full-funnel verticalizada
-MGS opera **todas as pontas do funil**: cria o conteúdo, traz o tráfego pago (FB/Google/ChatPion), monetiza com display. Não depende de intermediários. Cada vertical é um micro-negócio autossuficiente.
 
-### Leverage humano via skills
-Equipe enxuta opera 24 sites e 60 verticais porque **cada pessoa tem skills bem definidas**: gestor cuida de ads, redatora cuida de conteúdo, criativos vêm de quem entende de criativo. Ninguém faz de tudo — todo mundo faz o que faz melhor.
+A empresa opera conteúdo, tráfego, criativos, funis, monetização e análise financeira. Isso reduz dependência operacional e acelera testes.
 
-### Agentes AI como multiplicadores
-A próxima camada de leverage são os **agentes AI** (Zeus, Atena, Ares). Não substituem equipe — **multiplicam capacidade**. Automatizam o repetitivo (criação de REC, análise de sites, setup de campanha) pra equipe focar em criatividade, estratégia e decisões críticas.
+### Leverage humano + agentes
 
-### Padrão editorial canônico
-Conteúdo segue **regras editoriais estritas** (personas João e Marcos, tom consistente, templates por vertical). Isso garante que **qualidade não caia** conforme escala cresce — que é o risco #1 de publisher em volume.
+A equipe humana toma decisões, aprova riscos e executa julgamento. Os agentes AI multiplicam capacidade, padronizam execução e reduzem trabalho repetitivo.
 
 ### Velocidade de iteração
-Modelo permite **testar nichos rapidamente**: abre site novo, roda campanha, mede resposta em semanas. Se funciona, escala. Se não, descontinua e realoca budget. Experimentação de baixo custo, aprendizado contínuo.
+
+O modelo permite testar sites, campanhas, criativos e funis rapidamente. O que funciona escala; o que não funciona é ajustado ou descontinuado.
