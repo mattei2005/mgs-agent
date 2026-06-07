@@ -385,6 +385,12 @@ When Rodolfo asks to add Raquel or another user to a Zeus/Atena thread, use Disc
 
 Quando Rodolfo perguntar por que uma thread não foi renomeada, ou por que o título ficou genérico/truncado, não assumir erro de Discord/permissão. Ver `references/discord-auto-thread-title-diagnostics.md`.
 
+### Regra MGS: não renomear thread já aberta por follow-up curto
+
+Thread Discord já aberta deve manter o nome enquanto tiver o mesmo objetivo operacional até ser finalizada. Não renomear automaticamente por mensagens curtas (`ok`, `executa`, `continua`) nem por replies a uma mensagem anterior: nesses casos, usar o conteúdo citado/reply como contexto principal e continuar o assunto existente. Só considerar rename quando a conversa mudar claramente de objetivo e houver contexto forte; nunca por fallback semântico fraco, idioma errado ou interpretação de uma confirmação isolada.
+
+Pitfall validado: Rodolfo respondeu `Ok` em reply a um status de execução da Fase 4, mas Zeus tratou como mensagem solta e renomeou a thread para um assunto errado/em espanhol. Correção: em reply, resolver primeiro o contexto citado; se a thread já existe e o objetivo continua, não mexer no título. Referência: `references/discord-open-thread-rename-pitfall-2026-06-07.md`.
+
 Resumo operacional:
 - O título inicial da thread Discord é escolhido pelo gateway no momento de criação (`_auto_create_thread` / `_auto_thread_name_from_message`), antes da resposta do agente.
 - Logs de `Auxiliary title_generation` depois da resposta são o título GPT-style interno de sessão Hermes. Se esse título não estiver conectado a um callback de rename Discord, a UI do Discord continuará mostrando fallback/truncamento.
