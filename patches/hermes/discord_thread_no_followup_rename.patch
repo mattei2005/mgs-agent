@@ -1,0 +1,163 @@
+diff --git a/gateway/run.py b/gateway/run.py
+index 14dc362a4..092de4131 100644
+--- a/gateway/run.py
++++ b/gateway/run.py
+@@ -6564,17 +6564,35 @@ class GatewayRunner:
+ 
+             if not timed_out:
+                 # Drain completed gracefully — all running sessions finished.
+-                # Clear the pre-drain resume_pending markers so sessions that
+-                # completed during the drain window don't carry a stale flag.
+-                for _sk in _pre_drain_keys:
+-                    if _sk not in self._running_agents:
+-                        try:
+-                            self.session_store.clear_resume_pending(_sk)
+-                        except Exception as _e:
+-                            logger.debug(
+-                                "clear_resume_pending after drain failed for %s: %s",
+-                                _sk, _e,
+-                            )
++                # Normally clear the pre-drain resume_pending markers so sessions
++                # that completed during the drain window don't carry a stale flag.
++                #
++                # PATCH (MGS Digital Corp): for planned restarts AND external
++                # service-manager restarts while a chat task is active, keep the
++                # marker for sessions that were active at shutdown time. Discord
++                # can drop the final response during adapter disconnect even when
++                # the model turn technically completed; keeping resume_pending lets
++                # startup synthesize an internal continuation in the same thread
++                # without requiring the human to send "retoma".
++                _service_managed_shutdown_with_active_sessions = bool(
++                    os.environ.get("INVOCATION_ID") and _pre_drain_keys
++                )
++                if not self._restart_requested and not _service_managed_shutdown_with_active_sessions:
++                    for _sk in _pre_drain_keys:
++                        if _sk not in self._running_agents:
++                            try:
++                                self.session_store.clear_resume_pending(_sk)
++                            except Exception as _e:
++                                logger.debug(
++                                    "clear_resume_pending after drain failed for %s: %s",
++                                    _sk, _e,
++                                )
++                elif _pre_drain_keys:
++                    logger.info(
++                        "Keeping resume_pending for %d restart/service-shutdown active session(s) "
++                        "so startup auto-resumes without user nudge.",
++                        len(_pre_drain_keys),
++                    )
+ 
+             if timed_out:
+                 logger.warning(
+@@ -13649,6 +13667,98 @@ class GatewayRunner:
+ 
+         future.add_done_callback(_log_rename_failure)
+ 
++    def _is_discord_thread_lane(self, source: SessionSource) -> bool:
++        """Return True when a gateway session maps to a Discord thread."""
++        return (
++            source.platform == Platform.DISCORD
++            and (source.chat_type == "thread" or bool(source.thread_id))
++            and bool(source.chat_id or source.thread_id)
++        )
++
++    def _sanitize_discord_thread_title(self, title: str) -> str:
++        """Return a Discord-safe thread title from an auto-generated session title."""
++        cleaned = re.sub(r"\s+", " ", str(title or "")).strip(" \t\n\r:;,.!?—-–")
++        if not cleaned:
++            return "Assunto da Thread"
++        # Discord channel/thread names are capped at 100 chars. Keep a little
++        # room and avoid churn from trailing ellipsis when possible.
++        if len(cleaned) > 90:
++            cleaned = cleaned[:87].rstrip(" \t\n\r:;,.!?—-–") + "..."
++        return cleaned
++
++    async def _rename_discord_thread_for_session_title(
++        self,
++        source: SessionSource,
++        session_id: str,
++        title: str,
++    ) -> None:
++        """Best-effort rename of a Discord thread when Hermes auto-titles a session."""
++        if not self._is_discord_thread_lane(source):
++            return
++        adapter = self.adapters.get(source.platform) if getattr(self, "adapters", None) else None
++        client = getattr(adapter, "_client", None) if adapter is not None else None
++        if client is None:
++            return
++        thread_id = str(source.thread_id or source.chat_id or "").strip()
++        if not thread_id:
++            return
++        thread_name = self._sanitize_discord_thread_title(title)
++        try:
++            channel = client.get_channel(int(thread_id))
++            if channel is None:
++                channel = await client.fetch_channel(int(thread_id))
++            if channel is None or not hasattr(channel, "edit"):
++                return
++            current_name = str(getattr(channel, "name", "") or "").strip()
++            if current_name == thread_name:
++                return
++            await channel.edit(name=thread_name, reason="Hermes auto-generated session title")
++            logger.info(
++                "Discord thread renamed from auto-generated title: thread=%s session=%s name=%r previous=%r",
++                thread_id,
++                session_id,
++                thread_name,
++                current_name,
++            )
++        except Exception:
++            logger.debug("Failed to rename Discord thread for auto-generated title", exc_info=True)
++
++    def _schedule_discord_thread_title_rename(
++        self,
++        source: SessionSource,
++        session_id: str,
++        title: str,
++    ) -> None:
++        """Schedule a Discord thread rename from the auto-title background thread."""
++        if not title or not self._is_discord_thread_lane(source):
++            return
++        try:
++            loop = asyncio.get_running_loop()
++        except RuntimeError:
++            loop = getattr(self, "_gateway_loop", None)
++        if loop is None or loop.is_closed():
++            return
++        try:
++            copied_source = dataclasses.replace(source)
++        except Exception:
++            copied_source = source
++        future = safe_schedule_threadsafe(
++            self._rename_discord_thread_for_session_title(copied_source, session_id, title),
++            loop,
++            logger=logger,
++            log_message="Discord thread title rename failed to schedule",
++        )
++        if future is None:
++            return
++
++        def _log_rename_failure(fut) -> None:
++            try:
++                fut.result()
++            except Exception:
++                logger.debug("Discord thread title rename failed", exc_info=True)
++
++        future.add_done_callback(_log_rename_failure)
++
+     _TELEGRAM_CAPABILITY_HINT_COOLDOWN_S = 300.0
+ 
+     def _should_send_telegram_capability_hint(self, source: SessionSource) -> bool:
+@@ -18683,6 +18793,12 @@ class GatewayRunner:
+                             effective_session_id,
+                             title,
+                         )
++                    # Discord threads are named when the thread is created. Do not
++                    # attach the Hermes session auto-title callback here: a long-lived
++                    # Discord thread can start a new Hermes session after idle/reset,
++                    # and the callback would rename an already-open thread based on a
++                    # later follow-up. MGS policy: once a Discord thread exists, the
++                    # agent must not rename it again.
+                     maybe_auto_title(
+                         self._session_db,
+                         effective_session_id,
