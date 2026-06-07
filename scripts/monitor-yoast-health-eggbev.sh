@@ -28,6 +28,18 @@
 
 set -euo pipefail
 
+DRY_RUN=0
+if [[ "${1:-}" == "--dry-run" ]]; then
+    DRY_RUN=1
+elif [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    echo "Usage: $0 [--dry-run]"
+    exit 0
+elif [[ -n "${1:-}" ]]; then
+    echo "ERROR: argumento desconhecido: $1" >&2
+    echo "Usage: $0 [--dry-run]" >&2
+    exit 2
+fi
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_DIR="$(dirname "$SCRIPT_DIR")"
 SNAPSHOT_FILE="${BASE_DIR}/data/yoast-health-eggbev-snapshots.json"
@@ -78,11 +90,14 @@ op_get_retry() {
     return 1
 }
 
-WEBHOOK_URL="$(op_get_retry 'Discord Webhook - Alerts Yoast Channel' 'MGS Conteúdo' 'label=webhook_url')" || true
+WEBHOOK_URL=""
+if [[ "$DRY_RUN" -eq 0 ]]; then
+    WEBHOOK_URL="$(op_get_retry 'Discord Webhook - Alerts Yoast Channel' 'MGS Conteúdo' 'label=webhook_url')" || true
+fi
 S03_PASS="$(op_get_retry 'Runcloud Server 03 - 46.4.95.117- zeus Acesso' 'MGS Conteúdo' 'password')" || true
 S01_PASS="$(op_get_retry 'Runcloud Server 01 - 162.55.28.178- zeus Acesso' 'MGS Conteúdo' 'password')" || true
 
-if [[ -z "$WEBHOOK_URL" ]]; then
+if [[ "$DRY_RUN" -eq 0 && -z "$WEBHOOK_URL" ]]; then
     log "ERRO CRÍTICO: Webhook URL vazio após 3 tentativas — abortando"
     exit 1
 fi
@@ -435,6 +450,11 @@ print('true' if d.get('seo') is not None else 'false')
     else
         log "Estável ou melhora — silencioso (sem post)"
     fi
+fi
+
+if [[ "$DRY_RUN" -eq 1 ]]; then
+    log "DRY-RUN: não salva snapshot e não posta Discord. post_type=${POST_TYPE} should_post=${SHOULD_POST} total=${TOTAL} SEO=G${SEO_GREEN}/A${SEO_AMBER}/R${SEO_RED} READ=G${READ_GREEN}/A${READ_AMBER}/R${READ_RED}"
+    exit 0
 fi
 
 # ── Salvar snapshot atual ─────────────────────────────────────────────────────

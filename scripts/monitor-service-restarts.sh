@@ -72,7 +72,7 @@ post_alert_payload() {
   return 2
 }
 
-SERVICES=("zeus-gateway" "atena-gateway" "mgs-autocommit")
+SERVICES=("zeus-gateway" "atena-gateway" "ares-gateway" "hera-gateway" "mgs-autocommit")
 THRESHOLD_INFO=3
 THRESHOLD_WARN=5
 ANTI_SPAM_HOURS=12

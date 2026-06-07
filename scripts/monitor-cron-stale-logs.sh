@@ -46,7 +46,7 @@ CUSTOM_LOG = {}
 # Erros semânticos: log fresco não significa cron saudável.
 # Manter padrões específicos para evitar falso positivo em mensagens tipo "zero falhas".
 SEMANTIC_ERROR_RE = re.compile(
-    r'(syntax error|traceback|exception|fatal:|critical|erro crítico|error token|command not found|permission denied|no such file or directory)',
+    r'(syntax error|traceback|exception|fatal:|critical|erro crítico|(^|\\b)(error|erro):|error token|command not found|permission denied|no such file or directory)',
     re.I,
 )
 

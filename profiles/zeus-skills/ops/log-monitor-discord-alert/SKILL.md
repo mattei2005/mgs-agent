@@ -19,6 +19,8 @@ Também usar quando um canal Discord precisa de automação idempotente via poll
 
 Também usar para gestão de **cron reliability/control plane**: inventariar crons MGS, padronizar `flock`, criar smoke tests seguros, adicionar `--dry-run` em jobs destrutivos e monitorar logs stale. Ver referência validada: `references/cron-control-plane.md`.
 
+Quando Rodolfo pedir melhoria de crons de backup/housekeeping, especialmente limpeza de `.bak`/snapshots, separar criação de backup e cleanup, preservar sempre o último backup por família, excluir segredos por padrão e validar com dry-run + archive real. Ver `references/cron-backup-housekeeping-preserve-latest.md`.
+
 Também usar quando Rodolfo pedir uma visão executiva da operação MGS antes de ativar alertas programados: criar primeiro um collector read-only + briefing manual Discord-safe, validar escopo/sinal/ruído por 1–2 dias, e só depois propor cron/entrega automática. Ver `references/ops-control-plane-briefing.md`. Runtime snapshots `data/*-latest.{md,json}` devem ficar local-only/ignorados; se auto-commit rastrear por acidente, usar `git rm --cached` para remover do Git sem apagar do disco.
 
 Quando Rodolfo pedir para começar um **Ops Control Plane / dashboard / briefing executivo** amplo, começar com collector determinístico read-only e sob demanda — não cron/alerta. Se ele excluir um agente explicitamente (ex: “Atena deixa por último e me avise antes”), tratar como gate duro: não ler logs/config/profile desse agente e declarar a exclusão no relatório. Ver `references/mgs-ops-control-plane-readonly.md`.
@@ -35,9 +37,12 @@ Para hardening de crons + auto-commit watcher após auditoria de repo, ver `refe
 
 Para hardening de monitores que usam SSH/SCP via jump host RunCloud, ver `references/cron-ssh-hardening-2026-05-16.md`: cobre troca de `StrictHostKeyChecking` desativado por `accept-new` + `UserKnownHostsFile` dedicado, `mktemp -d` 700, cleanup trap, script remoto único (`/tmp/name_$$.sh`) e remoção remota após execução. Validar com execução real controlada e confirmar que não houve post Discord indevido.
 
+Para crons de backup/housekeeping e hardening em lote de crons existentes, ver `references/cron-backup-housekeeping-preserve-latest.md`: cobre split entre criação de backup e limpeza, preservação do último backup por família, snapshot seguro a cada 3 dias com exclusão de segredos, smoke-test expandido, cleanup de sessions por última mensagem, backup antes de sync de `auth.json` e escrita atômica de inventários.
+
 - `references/cron-op-rate-limit-mitigation.md`: primeiro aplicar stagger; depois mover busca de webhook/segredo para o caminho de alerta real, mantendo execução saudável sem `op`, fallback local de alertas pendentes e `exit 2` quando `op` falhar durante alerta.
 - `references/cron-enospc-recovery.md`: recuperação pós-ENOSPC/disco cheio para crons MGS — distinguir erro histórico de ativo, reconstruir state JSON corrompido, rodar monitors manualmente em modo seguro/dry-run e limpar stale-alert state.
 - `references/external-status-page-maintenance-monitor.md`: padrão validado para crons que monitoram status pages externas (ex: incident.io/Webshare), detectam manutenção ativa sem falso positivo por labels estáticos, alertam `#alerts-infra` só em transição e registram resolução.
+- `references/cron-backup-housekeeping-preserve-latest.md`: padrão validado para separar criação de backup (`mgs-safety-backup.sh`) de limpeza (`housekeeping-bak-cleanup.sh`), preservar sempre o último backup por família, validar tar/manifest sem segredos, e endurecer crons relacionados com `--dry-run`, escrita atômica, lazy webhook, semantic log scan e smoke test sem skips fixos.
 
 Exemplos validados: `monitor-auto-push.sh` para o auto-push do mgs-agent; `cron-control-plane.py`, `cron-smoke-test.sh` e `monitor-cron-stale-logs.sh` para controle dos crons MGS.
 Exemplos validados:

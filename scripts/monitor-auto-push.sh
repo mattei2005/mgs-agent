@@ -8,6 +8,18 @@
 
 set -euo pipefail
 
+DRY_RUN=0
+if [[ "${1:-}" == "--dry-run" ]]; then
+    DRY_RUN=1
+elif [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+    echo "Usage: $0 [--dry-run]"
+    exit 0
+elif [[ -n "${1:-}" ]]; then
+    echo "ERROR: argumento desconhecido: $1" >&2
+    echo "Usage: $0 [--dry-run]" >&2
+    exit 2
+fi
+
 # ─── Paths ───────────────────────────────────────────────────────────────────
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_DIR="$(dirname "$SCRIPT_DIR")"
@@ -24,17 +36,21 @@ set -a
 source "${BASE_DIR}/.env" 2>/dev/null || true
 set +a
 
-WEBHOOK_URL="$(op item get "Discord Webhook - Alerts Infra Channel" \
-    --vault 'MGS Conteúdo' \
-    --fields label=webhook_url \
-    --reveal 2>/dev/null)"
-
-# ─── Fail-fast loud — se webhook vier vazio, gritar no syslog ─────────────
-if [[ -z "${WEBHOOK_URL:-}" ]]; then
-    echo "[$(date -Iseconds)] monitor-auto-push: FATAL — WEBHOOK_URL is empty (1Password lookup falhou? item renomeado?)" >&2
-    logger -t monitor-auto-push "FATAL: WEBHOOK_URL empty — check 1Password item name"
-    exit 2
-fi
+WEBHOOK_URL=""
+get_webhook() {
+    if [[ -n "$WEBHOOK_URL" ]]; then
+        return 0
+    fi
+    WEBHOOK_URL="$(op item get "Discord Webhook - Alerts Infra Channel" \
+        --vault 'MGS Conteúdo' \
+        --fields label=webhook_url \
+        --reveal 2>/dev/null || true)"
+    if [[ "$WEBHOOK_URL" != https://* ]]; then
+        echo "[$(date -Iseconds)] monitor-auto-push: FATAL — WEBHOOK_URL vazio/inválido (1Password lookup falhou?)" >&2
+        logger -t monitor-auto-push "FATAL: WEBHOOK_URL empty — check 1Password item name"
+        return 2
+    fi
+}
 
 
 NOW_ISO="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
@@ -149,12 +165,20 @@ fi
 
 DIRTY_COUNT="$(git -C "$BASE_DIR" status --porcelain=v1 2>/dev/null | wc -l | tr -d ' ')"
 if [[ "${DIRTY_COUNT:-0}" != "0" ]]; then
-    REPO_FAILURES+=("working tree sujo: ${DIRTY_COUNT} mudança(s) não commitadas")
+    log "INFO: working tree tem ${DIRTY_COUNT} mudança(s) local(is); não conta como falha porque auto-commit pode estar em debounce/guardrail"
 fi
 
 # ─── Contabilizar falhas ──────────────────────────────────────────────────────
 TOTAL_NEW_FAILURES=$(( ${#NEW_FAILURES[@]} + ${#EXPLICIT_ERRORS[@]} + ${#REPO_FAILURES[@]} ))
 ALL_FAILURE_DETAILS=("${NEW_FAILURES[@]}" "${EXPLICIT_ERRORS[@]}" "${REPO_FAILURES[@]}")
+
+if [[ "$DRY_RUN" -eq 1 ]]; then
+    log "DRY-RUN: total_failures=${TOTAL_NEW_FAILURES} starts_sem_ok=${#NEW_FAILURES[@]} explicit_errors=${#EXPLICIT_ERRORS[@]} repo_failures=${#REPO_FAILURES[@]} last_ok=${LAST_OK_COMMIT:-n/a} dirty=${DIRTY_COUNT:-0}"
+    if (( TOTAL_NEW_FAILURES > 0 )); then
+        printf '%s\n' "${ALL_FAILURE_DETAILS[@]}" | sed 's/^/[DRY-RUN] /'
+    fi
+    exit 0
+fi
 
 # ─── Lógica de estado ─────────────────────────────────────────────────────────
 ALERT_WAS_ACTIVE=false
@@ -190,6 +214,7 @@ if (( TOTAL_NEW_FAILURES > 0 )); then
     if [[ "$SEND_ALERT" == "true" ]]; then
         ALERT_TS="$NOW_ISO"
         log "Enviando alerta Discord — ${NEW_CONSECUTIVE} falhas consecutivas"
+        get_webhook || exit 2
         PAYLOAD=$(jq -n \
             --arg n "$NEW_CONSECUTIVE" \
             --arg detail "$LAST_DETAIL" \
@@ -216,8 +241,9 @@ else
         log "RESOLVIDO: zero falhas detectadas (anterior: ${CONSECUTIVE} consecutivas)"
 
         # Enviar "RESOLVIDO" se havia alerta ativo
-        if [[ "$ALERT_WAS_ACTIVE" == "true" ]] && [[ -n "$WEBHOOK_URL" ]]; then
+        if [[ "$ALERT_WAS_ACTIVE" == "true" ]]; then
             log "Enviando alerta RESOLVIDO para Discord"
+            get_webhook || exit 2
             PAYLOAD=$(jq -n \
                 --arg n "$CONSECUTIVE" \
                 --arg commit "${LAST_OK_COMMIT:-desconhecido}" \

@@ -66,16 +66,18 @@ run_job "pendencia-render-md.sh" "safe" "${BASE}/scripts/pendencia-render-md.sh"
 run_job "chat-log.sh --rebuild-index" "safe" "${BASE}/scripts/chat-log.sh --rebuild-index"
 run_job "sync-codex-oauth.sh --dry-run" "dry-run" "${BASE}/scripts/sync-codex-oauth.sh --dry-run"
 run_job "cron-control-plane.py" "safe" "${BASE}/scripts/cron-control-plane.py --write-doc"
+run_job "monitor-cron-stale-logs.sh --dry-run" "dry-run" "${BASE}/scripts/monitor-cron-stale-logs.sh --dry-run"
+run_job "monitor-gpt55-oauth-cost.sh --dry-run" "dry-run" "${BASE}/scripts/monitor-gpt55-oauth-cost.sh --dry-run"
+run_job "monitor-yoast-health-eggbev.sh --dry-run" "dry-run" "${BASE}/scripts/monitor-yoast-health-eggbev.sh --dry-run"
+run_job "mgs-safety-backup.sh --dry-run" "dry-run" "${BASE}/scripts/mgs-safety-backup.sh --dry-run"
+run_job "infra-discovery.sh" "safe" "${BASE}/scripts/infra-discovery.sh"
 
 # Risky/write-heavy: dry-run when possible
 run_job "cleanup-zombie-sessions.sh" "dry-run" "${BASE}/scripts/cleanup-zombie-sessions.sh --dry-run"
 run_job "housekeeping-bak-cleanup.sh" "dry-run" "RETENTION_DAYS=15 ${BASE}/scripts/housekeeping-bak-cleanup.sh --dry-run"
 
 # Skip by design
-skip_job "monitor-yoast-health-eggbev.sh" "produção/WordPress + relatório diário; manter horário normal"
-skip_job "monitor-gpt55-oauth-cost.sh" "alerta de custo simulado; manter horário normal"
-skip_job "infra-discovery.sh" "write em infra-inventory; já validado no deploy"
-skip_job "monitor-cron-stale-logs.sh" "watchdog depende de idade real dos logs; testar via --dry-run separado"
+# Nenhum skip fixo: jobs que poderiam postar/deletar rodam em --dry-run acima.
 
 printf '\nResumo: runs=%d skips=%d fails=%d log=%s\n' "$RUNS" "$SKIPS" "$FAILS" "$LOG"
 echo "[$TS] SUMMARY runs=${RUNS} skips=${SKIPS} fails=${FAILS}" >> "$LOG"

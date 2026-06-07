@@ -47,10 +47,11 @@ ENDPOINT="https://chatgpt.com/backend-api/codex/responses"
 python3 - "$GLOBAL_AUTH" "$PROFILES_DIR" "$ALERT_FILE" "$ENDPOINT" "$DRY_RUN" <<'PYEOF'
 import json
 import os
+import shutil
 import sys
 import tempfile
-import urllib.request
 import urllib.error
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -142,13 +143,36 @@ def safety_check(access_token):
     except Exception:
         return None, "error"
 
+def validate_auth_payload(data):
+    """Fail closed if the candidate auth payload is malformed before touching disk."""
+    state = get_codex_state(data)
+    if state is None:
+        raise ValueError("candidate auth missing valid openai-codex state")
+    parse_iso(state["last_refresh"])
+    encoded = json.dumps(data, indent=2, ensure_ascii=False)
+    if len(encoded) < 200:
+        raise ValueError("candidate auth unexpectedly small")
+    return encoded
+
+def backup_existing_auth(path, profile_name):
+    backup_dir = Path("/root/mgs-agent/backups/auth-sync")
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    safe_profile = "".join(ch for ch in profile_name if ch.isalnum() or ch in ("-", "_")) or "profile"
+    dest = backup_dir / f"auth-{safe_profile}-{ts}.json"
+    shutil.copy2(path, dest)
+    os.chmod(dest, 0o600)
+    return str(dest)
+
 def atomic_write(path, data):
-    """Write JSON to a tempfile in same dir, chmod 0600, then os.replace."""
+    """Validate JSON, write tempfile in same dir, chmod 0600, then os.replace."""
+    encoded = validate_auth_payload(data)
     dirpath = os.path.dirname(path) or "."
     fd, tmp = tempfile.mkstemp(dir=dirpath, prefix=".sync-codex.", suffix=".tmp")
     try:
         with os.fdopen(fd, "w") as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
+            f.write(encoded)
+            f.write("\n")
         os.chmod(tmp, 0o600)
         os.replace(tmp, path)
     except Exception:
@@ -275,8 +299,9 @@ for name, p_path, p_auth, p_state in to_sync:
     if DRY_RUN:
         log(f"[DRY-RUN] would update {name}: last_refresh {p_state['last_refresh']} → {global_lr_str}")
     else:
+        backup_path = backup_existing_auth(p_path, name)
         atomic_write(p_path, new_auth)
-        log(f"sync: {name} updated atomically (last_refresh → {global_lr_str})")
+        log(f"sync: {name} backup_created={backup_path} updated atomically (last_refresh → {global_lr_str})")
         synced_count += 1
 
 if DRY_RUN:

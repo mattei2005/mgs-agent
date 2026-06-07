@@ -8,6 +8,8 @@ set -euo pipefail
 
 REPO="/root/mgs-agent"
 OUT="$REPO/data/infra-inventory.json"
+TMP_OUT="$(mktemp "${OUT}.tmp.XXXXXX")"
+trap 'rm -f "$TMP_OUT"' EXIT
 NOW=$(date -Iseconds)
 
 log() { echo "[$(date '+%H:%M:%S')] $*"; }
@@ -17,7 +19,7 @@ log "=== infra-discovery.sh START ==="
 # ── 1. Systemd services ──────────────────────────────────────────────────────
 log "Coletando systemd services..."
 SERVICES_JSON="[]"
-for svc in zeus-gateway atena-gateway mgs-autocommit; do
+for svc in zeus-gateway atena-gateway ares-gateway hera-gateway mgs-autocommit; do
     STATUS=$(systemctl is-active "${svc}.service" 2>/dev/null || echo "unknown")
     SERVICES_JSON=$(echo "$SERVICES_JSON" | jq \
         --arg name "${svc}.service" \
@@ -145,7 +147,11 @@ jq -n \
             "md5": $mu_md5,
             "lines": $mu_lines
         }
-    }' > "$OUT"
+    }' > "$TMP_OUT"
+
+jq -e . "$TMP_OUT" >/dev/null
+mv "$TMP_OUT" "$OUT"
+trap - EXIT
 
 SKILLS_MGS_COUNT=$(echo "$SKILLS_MGS_JSON" | jq 'length')
 SKILLS_HERMES_COUNTS=$(echo "$SKILLS_HERMES_JSON" | jq '[to_entries[] | "\(.key)=\(.value|length)"] | join(", ")')
