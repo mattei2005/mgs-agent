@@ -151,7 +151,6 @@ Cadastro de usuários           Rodolfo + Geizian.
 Usuários por vertical           Rodolfo + Geizian.
 Acesso aos usuários             Gestores conforme vertical/campanha.
 Configuração operacional        Gestores.
-Configuração operacional        Gestores.
 Fluxos/bot/messages             Gestores conforme playbook e estrutura existente.
 Broadcast Smart Bidding         Parceiro/estrutura Smart Bidding + gestores.
 Escala/decisão crítica          Rodolfo/Geizian.
