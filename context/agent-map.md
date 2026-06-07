@@ -97,7 +97,7 @@ Entrada   Pedido de criativo por site/campanha/vertical/formato.
 Processo  Gerar/organizar assets em ferramenta aprovada.
 Aprovação Kelly avalia/aprova criativos quando for fluxo dela.
 Saída     Criativo aprovado salvo na pasta correta do Google Drive.
-Consumo   Ares lê a pasta e usa o asset em testes de campanhas novas.
+Consumo   Ares lê/escreve na pasta e usa/gerencia o asset em testes de campanhas novas.
 Controle  Kelly/Rodolfo aprovam ferramentas e padrões.
 ```
 
