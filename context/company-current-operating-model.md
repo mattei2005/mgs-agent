@@ -78,15 +78,15 @@ Etapa                         Descrição
 
 ## 4. Monetização e redes
 
-A MGS trabalha com redes/parceiros de AdManager/AdX, principalmente Smart Bidding e ActiveView.
+A MGS trabalha com redes/parceiros de AdManager/AdX, principalmente Smart Bidding e ActiveView. As duas são empresas parceiras do Google com suas próprias redes AdX/Ad Manager, onde sites são adicionados e blocos de anúncio são criados.
 
 ```text
 Rede/empresa       Papel atual
 ----------------- -------------------------------------------------------------
 Smart Bidding      Parceiro Google/AdX principal. Dashboard com sites,
-                   campanhas, ROI, tecnologia, relatórios e gerenciamento
-                   preferencial dos sites MGS.
-                   permissões. Também tem time de AdOps no Discord.
+                   campanhas, ROI, tecnologia, relatórios, blocos de anúncio,
+                   APIs, permissões e gerenciamento preferencial dos sites MGS.
+                   Também tem time de AdOps no Discord.
 ActiveView         Rede/tecnologia ainda relevante em alguns sites. A maior
                    parte foi migrada/concentrada na Smart Bidding.
 Google/AdX         Origem dos pagamentos via ecossistema de monetização.
