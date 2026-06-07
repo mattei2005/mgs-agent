@@ -15,6 +15,8 @@ A empresa opera como um sistema dividido por áreas:
 ```text
 Área                         Função
 ---------------------------- -------------------------------------------------
+Executive / Management        Direção, prioridades, governança e decisões.
+Office / Follow-up             Cobrança e acompanhamento de tarefas pendentes.
 Content Operations            Conteúdo, REC/P1, SEO e WordPress editorial.
 Growth / Media Buying         Campanhas, tráfego pago, ROI e gestores.
 Creative Operations           Criativos, vídeos, Canva, Drive e assets.
@@ -22,8 +24,9 @@ Revenue / AdOps               Monetização, blocos, redes e performance AdX.
 Finance / BI                  ROI, gastos, receitas, comissões e fechamento.
 Tech / WordPress / Infra      Sites, pixels, integrações, automações e agentes.
 Security / Access             Permissões, credenciais, auditoria e acessos.
-Executive / Management        Direção, prioridades, governança e decisões.
 ```
+
+Este arquivo é a visão executiva da empresa. Para decisões detalhadas de rota, permissão e fonte de verdade, usar `context/company-os.md`, `context/routes.md`, `context/sources-of-truth.md` e `context/permissions-matrix.md`.
 
 ## Modelo de negócio
 
@@ -123,8 +126,11 @@ Ially                         Gerente do escritório; cobra/acompanha tarefas
                               pendentes dos gestores e follow-up operacional.
 Raquel                        Content Operations; acompanha Atena e conteúdo.
 Kelly                         Creative Operations; cria criativos para gestores.
-Gestores                      Operam campanhas, páginas, criativos e verticais.
+Gestores                      Operam campanhas, páginas, verticais e rotinas
+                              definidas por Growth/Revenue/AdOps.
 Smart Bidding                 Parceiro de monetização/AdOps e tecnologia.
+ActiveView                    Parceiro AdX/Ad Manager em exceção ativa para
+                              openzed, cliquet e respectivos subdomínios.
 ```
 
 Gestores e códigos usados no `UTM_medium`:
@@ -165,6 +171,8 @@ Atena    Conteúdo/REC/P1/WordPress editorial com supervisão humana.
 Ares     Campanhas. Não configura ChatPion, quiz ou SMS Funnel.
 Hera     Criativos. Pode gerenciar Drive de criativos aprovados.
 ```
+
+Agentes seguem o desenho da empresa, não o contrário: cada agente deve ter área, fonte de verdade, escopo, permissão e escalação definidos antes de assumir operação real.
 
 ## Creative Operations e Drive
 
