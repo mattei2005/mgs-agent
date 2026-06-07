@@ -233,6 +233,29 @@ Phase 2 audit pattern after docs appear reviewed:
 7. Register a concise audit event and validate with `git diff --check`.
 ```
 
+Phase 3 inventory pattern:
+
+```text
+1. Before generating inventory, clean unrelated repo dirt that could contaminate
+   the next block. If `profiles/zeus-skills/...` is dirty, review it as a
+   separate hygiene block, keep useful skill/procedure updates, fix obvious
+   renames, run a secret scan, commit/push, then continue.
+2. Treat `docs/mgs-structure-inventory.md` as read-only classification only:
+   no moves, no deletes, no runtime writes.
+3. If the inventory file already exists, update it in place instead of creating
+   a duplicate. Include current counts for top-level areas and classify:
+   `context/`, `profiles/`, `data/`, `scripts/`, `docs/`, `skills/`,
+   `patches/`, `api/`, `tools/`, `backups/`, `experiments/`, `logs/`, and
+   root-sensitive files such as `.env`, `AGENT.md`, `CLAUDE.md`, and `*.bak`.
+4. Separate action recommendations by class: `manter`, `não tocar`, `revisar
+   depois`, `arquivar depois`, `alterar só com plano`, `append-only/consulta`.
+5. Validate the inventory with required-section checks, `git diff --check`, and
+   a secret scan over the diff. Then verify auto-push via `logs/auto-push.log`
+   and `HEAD == origin/main` rather than assuming manual `git push` works.
+6. Report Fase 3 as complete only after the repo is clean and the file is on
+   origin/main.
+```
+
 Pitfall: old restructuring plans may say “next step: update company-os.md” even after that has already been done, or may duplicate “create derived docs” both before and after inventory. When reviewing the plan, update statuses and remove duplicated phases before proceeding.
 
 Never combine broad reorganization with gateway restarts, cron rewrites, or production changes unless Rodolfo explicitly authorizes that combined scope.
