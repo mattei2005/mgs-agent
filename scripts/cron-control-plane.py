@@ -37,12 +37,14 @@ DESCRIPTIONS = {
     'monitor-hermes-updates.sh': 'Verifica updates upstream do Hermes Agent e alerta quando há nova versão.',
     'track-article-cost.sh': 'Calcula custo hipotético por artigo publicado e grava data/article-tracker.db.',
     'cleanup-discord-threads.sh': 'Limpa threads Discord arquivadas antigas nos canais da categoria Agents.',
-    'cleanup-zombie-sessions.sh': 'Fecha sessões Hermes zumbis/inativas há mais de 30 minutos.',
+    'cleanup-zombie-sessions.sh': 'Fecha sessões Hermes zumbis/inativas usando última atividade real, com grace padrão de 180 minutos.',
     'housekeeping-bak-cleanup.sh': 'Remove backups antigos (.bak/.backup/.old/.orig/~) com retenção padrão de 15 dias, preservando sempre o último por família.',
     'mgs-safety-backup.sh': 'Cria snapshot operacional seguro no máximo a cada 3 dias, excluindo segredos conhecidos e preservando o último backup.',
     'pendencia-render-md.sh': 'Renderiza docs/PENDENCIAS.md a partir de data/pendencias.db.json.',
     'chat-log.sh': 'Mantém índice Markdown de data/chat-logs/INDEX.md.',
     'sync-codex-oauth.sh': 'Sincroniza tokens OAuth Codex do auth global para profiles Hermes com safety check.',
+    'hermes-news-explainer.py': 'Lê anúncios no canal Hermes News e posta explicação executiva do Zeus em PT-BR, com estado anti-duplicata.',
+    'monitor-webshare-status.sh': 'Monitora status.webshare.io e alerta infra quando detectar manutenção/incidente relevante.',
 }
 
 RISK = {
@@ -66,6 +68,8 @@ RISK = {
     'pendencia-render-md.sh': 'baixo: re-renderiza docs/PENDENCIAS.md',
     'chat-log.sh': 'baixo: re-renderiza índice',
     'sync-codex-oauth.sh': 'médio: atualiza auth.json dos profiles',
+    'hermes-news-explainer.py': 'baixo/médio: consulta Discord e pode postar explicação automática',
+    'monitor-webshare-status.sh': 'baixo: consulta status público + alerta Discord se anomalia',
 }
 
 OWNER = {
