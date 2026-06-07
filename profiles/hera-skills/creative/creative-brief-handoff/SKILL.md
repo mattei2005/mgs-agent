@@ -1,7 +1,7 @@
 ---
 name: creative-brief-handoff
 description: Use quando a Hera receber um pedido criativo e precisar transformar em brief operacional, variações criativas, naming de assets, status de revisão e pacote limpo de handoff para o Ares sem executar campanhas.
-version: 1.3.0
+version: 1.4.0
 author: MGS Digital Corp
 license: Proprietary
 metadata:
@@ -41,7 +41,7 @@ Use esta skill quando o usuário pedir para a Hera:
 - adaptar uma ideia para feed, stories, reels, shorts ou banners;
 - organizar ou nomear assets de Canva/Drive;
 - reestruturar criativos baixados do Canva em `MGS-CRIATIVOS/UPLOAD CANVAS`;
-- validar taxonomia `CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}`;
+- validar taxonomia por vertical/operação; `CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}` é exemplo/piloto;
 - preparar criativos aprovados para o Ares;
 - preparar criativos organizados para uso direto por Kelly, Geizian ou gestores;
 - analisar um criativo antes do uso em campanha;
@@ -179,7 +179,7 @@ fora_de_escopo         Pedido pertence a Ares, Atena, Zeus ou humano.
 
 Não marque como `aprovado` ou `pronto_para_ares` se não houver aprovação explícita ou se o asset final não estiver definido.
 
-## Drive/Canva — reestruturação CC_US_ES
+## Drive/Canva — reestruturação multivertical
 
 Pasta raiz oficial informada por Rodolfo:
 
@@ -188,7 +188,7 @@ MGS-CRIATIVOS
 https://drive.google.com/drive/folders/14ica5TVauTrzAxcl4T-ViJorF89vRKIl
 ```
 
-Estrutura oficial:
+Estrutura de referência por vertical/operação. `CC_US_ES` é exemplo/piloto; outras verticais devem ser organizadas na pasta correta do Drive:
 
 ```text
 MGS-CRIATIVOS/
@@ -212,7 +212,7 @@ MGS-CRIATIVOS/
 
 `UPLOAD CANVAS` é bruto/original. Não apagar, não sobrescrever e não mover em massa sem plano aprovado.
 
-Tamanhos oficiais:
+Tamanhos oficiais de referência para `CC_US_ES`; outras verticais podem ser ajustadas conforme necessidade real:
 
 ```text
 Placement  Dimensão   Aspect ratio  Com pessoa  Sem pessoa
@@ -289,7 +289,15 @@ Nunca assuma que todo criativo precisa passar pelo Ares. Ares é consumidor opci
 
 Use nomes previsíveis, sem acento e sem espaço.
 
-Para a operação piloto `CC_US_ES`, o padrão oficial alinhado com o Ares é:
+O Drive tem várias verticais/operações. Identifique a operação correta e aplique a taxonomia correspondente.
+
+Modelo geral:
+
+```text
+{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+```
+
+Exemplo/piloto `CC_US_ES`, já alinhado com o Ares:
 
 ```text
 CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
@@ -316,7 +324,7 @@ VARIANT     Sequencial 01, 02, 03...
 ext         Extensão real do arquivo.
 ```
 
-Dicionário inicial de `ANGLE` para `CC_US_ES`:
+Dicionário inicial de `ANGLE` para `CC_US_ES` — exemplo/piloto; outras verticais podem ter dicionário próprio conforme o uso real:
 
 ```text
 APROBACION

@@ -12,7 +12,7 @@ Sua fonte operacional principal é:
 
 Esse documento define sua arquitetura, missão, limites, fluxo, estados de pedido, padrão de entrega e integração com Zeus, Ares, Atena, Kelly e Geizian. Quando houver dúvida, siga esse documento e escale para Zeus/Rodolfo se houver conflito.
 
-Status atual do documento: **proposta operacional v0.4 alinhada com Creative Ops, pedidos naturais e melhoria contínua em canal**.
+Status atual do documento: **proposta operacional v0.5 alinhada com Creative Ops multivertical, pedidos naturais e melhoria contínua em canal**.
 
 ## Identidade
 
@@ -214,9 +214,17 @@ Status:
 Pendência:
 ```
 
-## Naming oficial — CC_US_ES
+## Naming por vertical/operação
 
-Para a operação piloto `CC_US_ES`, siga o padrão alinhado com o Ares:
+O Drive tem várias verticais/operações. Identifique a vertical correta pelo pedido, pasta, idioma, país e contexto. Use `CC_US_ES` como exemplo/piloto já alinhado com Ares, não como única operação.
+
+Modelo geral:
+
+```text
+{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+```
+
+Exemplo/piloto `CC_US_ES`:
 
 ```text
 CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
@@ -242,11 +250,11 @@ P_ORIENT    Para CC_US_ES, somente PV, NV, PS ou NS.
 VARIANT     Sequencial 01, 02, 03...
 ```
 
-Dicionário inicial de `ANGLE`: `APROBACION`, `SIN_VERIFICACION`, `LIMITE_ALTO`, `SIN_CREDITO`, `MAL_CREDITO`, `CASHBACK`, `RECOMPENSAS`, `COMPARACION`, `WALLET`, `URGENCIA`, `UNKNOWN`.
+Dicionário inicial de `ANGLE` para `CC_US_ES` como exemplo/piloto: `APROBACION`, `SIN_VERIFICACION`, `LIMITE_ALTO`, `SIN_CREDITO`, `MAL_CREDITO`, `CASHBACK`, `RECOMPENSAS`, `COMPARACION`, `WALLET`, `URGENCIA`, `UNKNOWN`.
 
 Não coloque tamanho/dimensão no nome. Dimensão, aspect ratio e placement ficam no inventário.
 
-## Drive/Canva — CC_US_ES
+## Drive/Canva — multivertical
 
 Pasta raiz oficial informada por Rodolfo:
 
@@ -255,7 +263,7 @@ MGS-CRIATIVOS
 https://drive.google.com/drive/folders/14ica5TVauTrzAxcl4T-ViJorF89vRKIl
 ```
 
-Estrutura oficial:
+Estrutura de referência por vertical/operação. `CC_US_ES` é o exemplo/piloto; outras verticais devem usar a pasta correta existente no Drive e seguir o mesmo princípio:
 
 ```text
 MGS-CRIATIVOS/
@@ -279,7 +287,7 @@ MGS-CRIATIVOS/
 
 `UPLOAD CANVAS` é material bruto/original. Não apagar, não sobrescrever e não tratar como organizado.
 
-P_ORIENT oficial para CC_US_ES:
+P_ORIENT oficial para `CC_US_ES` como referência inicial:
 
 ```text
 Código  Significado
@@ -290,7 +298,7 @@ PS      pessoa square / feed
 NS      sem pessoa square / feed
 ```
 
-Tamanhos oficiais:
+Tamanhos oficiais de referência para `CC_US_ES`; ajuste outras verticais conforme necessidade real:
 
 ```text
 Placement  Dimensão   Com pessoa  Sem pessoa
@@ -320,7 +328,7 @@ campaign_owner   Ares, Kelly, Geizian, gestor específico ou UNKNOWN
 source           HERA_GENERATED / CANVA / HUMAN_UPLOAD
 ```
 
-Ares e humanos devem consumir assets organizados em `CC_US_ES/IMG` ou `CC_US_ES/VID`. Se humano usar sem Ares, registre `used_by=HUMAN` e `campaign_owner` quando conhecido.
+Ares e humanos devem consumir assets organizados na pasta da vertical/operação correta. Se humano usar sem Ares, registre `used_by=HUMAN` e `campaign_owner` quando conhecido. Se a vertical ainda não tiver padrão fechado, use `CC_US_ES` como referência e ajuste com a prática no canal.
 
 ## Relação com outros agentes
 

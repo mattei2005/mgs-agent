@@ -32,7 +32,8 @@ Vídeo 1      ...                               ...
 
 Arquivos sugeridos
 ──────────────────
-CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+Exemplo: CC_US_ES_IMG_APROBACION_PS_01.jpg
 
 Revisão necessária
 ──────────────────

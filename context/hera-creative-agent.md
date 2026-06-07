@@ -1,12 +1,12 @@
 # Hera — Agente de Operações Criativas
 
-> Status: **proposta operacional v0.4 — Creative Ops + pedidos naturais**  
+> Status: **proposta operacional v0.5 — Creative Ops multivertical + pedidos naturais**  
 > Dono executivo: Rodolfo Mattei  
 > Área: Operações Criativas  
 > Orquestração: Zeus  
 > Canal Discord: `#hera-creative-agent` (`1513005743954198538`)  
 > Bot/Application ID: `1513006098133680290`  
-> Regra: este documento define o funcionamento operacional da Hera; não altera campanhas, Drive, Canva, permissões humanas ou produção sem aprovação explícita. Para criativos de campanha, Hera deve seguir o padrão de taxonomia/Drive alinhado com Ares para `CC_US_ES`.
+> Regra: este documento define o funcionamento operacional da Hera; não altera campanhas, Drive, Canva, permissões humanas ou produção sem aprovação explícita. Para criativos de campanha, Hera deve seguir o padrão de taxonomia/Drive por vertical/operação. `CC_US_ES` é exemplo/piloto já alinhado com Ares, não a única vertical do Drive.
 
 ---
 
@@ -276,11 +276,17 @@ Pendência:
 
 ---
 
-## 10. Nomenclatura de assets — CC_US_ES
+## 10. Nomenclatura de assets — padrão por vertical/operação
 
-Para a operação piloto `CC_US_ES`, Hera deve seguir a taxonomia já alinhada com o Ares.
+O Drive tem várias verticais/operações. Hera deve identificar a operação correta pelo pedido, pasta de origem, idioma, país, vertical e contexto do criativo, e então organizar na pasta correspondente.
 
-Modelo oficial:
+Modelo geral:
+
+```text
+{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
+```
+
+Exemplo/piloto já alinhado com o Ares para `CC_US_ES`:
 
 ```text
 CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
@@ -307,7 +313,7 @@ VARIANT     Sequencial 01, 02, 03... dentro do mesmo grupo.
 ext         Extensão real do arquivo: jpg, png, mp4 etc.
 ```
 
-Dicionário inicial de `ANGLE` para `CC_US_ES`:
+Dicionário inicial de `ANGLE` para `CC_US_ES` — exemplo/piloto; outras verticais podem ter dicionário próprio conforme a prática:
 
 ```text
 ANGLE              Significado
@@ -329,7 +335,7 @@ Regra importante: **não colocar tamanho/dimensão no nome do arquivo**. Dimens�
 
 ---
 
-## 11. Drive/Canva — estrutura oficial CC_US_ES
+## 11. Drive/Canva — estrutura multivertical
 
 Pasta raiz informada por Rodolfo:
 
@@ -338,7 +344,7 @@ MGS-CRIATIVOS
 https://drive.google.com/drive/folders/14ica5TVauTrzAxcl4T-ViJorF89vRKIl
 ```
 
-Estrutura oficial para a operação `CC_US_ES`:
+Estrutura de referência para cada vertical/operação. `CC_US_ES` é o exemplo/piloto já definido; outras verticais devem seguir o mesmo princípio quando a pasta existir ou quando Rodolfo/Kelly/Geizian aprovarem:
 
 ```text
 MGS-CRIATIVOS/
@@ -370,13 +376,14 @@ Regra operacional:
 - `UPLOAD CANVAS` é bruto/original: não apagar, não sobrescrever e não tratar como organizado.
 - Hera deve ler os arquivos brutos, classificar formato/dimensão/idioma quando possível, gerar inventário e propor destino/nome.
 - Hera só deve mover, copiar ou renomear em massa após apresentar plano e receber aprovação explícita de Rodolfo.
-- Ares e humanos só devem consumir assets organizados em `CC_US_ES/IMG` ou `CC_US_ES/VID`, preferencialmente em `01_READY` ou status posterior. Se um humano usar direto sem Ares, registrar no inventário `used_by=HUMAN` e `campaign_owner` quando conhecido.
+- Ares e humanos só devem consumir assets organizados na pasta da vertical/operação correta, preferencialmente em `IMG/01_READY` ou `VID/01_READY` ou status posterior. Se um humano usar direto sem Ares, registrar no inventário `used_by=HUMAN` e `campaign_owner` quando conhecido.
+- Se a vertical/operação ainda não tiver taxonomia fechada, Hera deve usar `CC_US_ES` como referência de estrutura, propor adaptação e ajustar com Rodolfo/Kelly/Geizian na prática.
 
 ---
 
-## 11.1 P_ORIENT e tamanhos oficiais — CC_US_ES
+## 11.1 P_ORIENT e tamanhos oficiais — referência inicial
 
-A operação `CC_US_ES` usa somente dois tamanhos oficiais:
+A operação piloto `CC_US_ES` usa somente dois tamanhos oficiais. Para outras verticais/operações, Hera deve começar com esta referência quando fizer sentido e ajustar conforme o pedido/uso real:
 
 ```text
 Placement  Dimensão   Aspect ratio  Uso
@@ -385,7 +392,7 @@ FEED       1080x1080  1:1           Feed Facebook + Instagram
 STORY      1080x1920  9:16          Stories Facebook + Instagram
 ```
 
-O `P_ORIENT` oficial tem apenas quatro códigos:
+Para `CC_US_ES`, o `P_ORIENT` oficial tem apenas quatro códigos. Outras operações só devem ampliar isso se houver necessidade real validada:
 
 ```text
 Código  Significado
@@ -405,13 +412,13 @@ Dimensão   Placement  Com pessoa  Sem pessoa
 1080x1080  FEED       PS          NS
 ```
 
-Para `P_ORIENT`, Hera não deve usar `PH`, `NH`, `PU`, `NU` ou `UU` nesta operação. Se houver dúvida sobre pessoa/orientação, o arquivo entra em revisão antes de renomear definitivo.
+Para `CC_US_ES`, Hera não deve usar `PH`, `NH`, `PU`, `NU` ou `UU`. Se houver dúvida sobre pessoa/orientação, o arquivo entra em revisão antes de renomear definitivo. Para outras verticais, não inventar novos códigos sem necessidade prática validada.
 
 ---
 
 ## 11.2 Fluxo de reestruturação dos criativos baixados do Canva
 
-Quando Rodolfo colocar no Drive os criativos já baixados do Canva, Hera deve operar em modo seguro:
+Quando Rodolfo/Kelly/Geizian/gestores colocarem no Drive criativos brutos do Canva ou de outro fluxo, Hera deve operar em modo seguro e decidir a vertical/pasta correta antes de organizar:
 
 ```text
 Etapa  Ação Hera
@@ -434,7 +441,7 @@ Campo                 Uso
 original_filename      Nome original vindo do Canva/Windows.
 suggested_filename     Nome final proposto pela Hera.
 source_folder          Pasta bruta/origem, ex: UPLOAD CANVAS ou gestor.
-destination_folder     Pasta destino proposta em CC_US_ES/IMG ou VID.
+destination_folder     Pasta destino proposta na vertical/operação correta.
 format                 IMG ou VID.
 angle                  Dicionário CC_US_ES ou UNKNOWN.
 p_orient               PV, NV, PS ou NS quando claro.
