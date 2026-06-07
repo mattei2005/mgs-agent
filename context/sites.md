@@ -1,6 +1,6 @@
 # Sites e Verticais — MGS
 
-> Status: proposta canônica v0.2
+> Status: proposta canônica v0.3
 > Fonte-mãe: `context/company-os.md`
 > Base operacional: `context/company-current-operating-model.md`
 > Regra: este arquivo é conceitual. Dados técnicos/automação ficam em `data/sites.json`.
@@ -21,6 +21,16 @@ Este arquivo serve para entender a operação e o portfólio. Ele não substitui
 ```
 
 `data/sites.json` é a fonte técnica usada por pipelines automatizados, credenciais, templates, WordPress e publicação. Atualmente ele pode conter apenas sites já integrados ao pipeline automatizado; isso não significa que os outros sites não existam operacionalmente.
+
+Resumo operacional atual:
+
+```text
+Camada                         Status
+------------------------------ ------------------------------------------------
+Portfólio conceitual            Lista sites/domínios/subdomínios e verticais MGS.
+Automação em data/sites.json    Lista apenas sites prontos para pipeline automático.
+WordPress/dashboards externos   Vencem para estado técnico real quando validados.
+```
 
 ---
 
