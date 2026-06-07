@@ -12,7 +12,8 @@
 Pessoa        Papel atual
 ------------ ---------------------------------------------------------------
 Rodolfo       CEO; gestão geral, financeiro, estrutura, WordPress, pixels,
-              aprovação/relacionamento com redes, estratégia e arquitetura.
+              aprovação/relacionamento com redes, estratégia, arquitetura e
+              comando da operação dos agentes AI.
 Geizian       Sócio; acompanha e gerencia os gestores, rotina diária de
               campanhas, custos e performance.
 ```
@@ -29,6 +30,8 @@ Gestores                      Gestão de conteúdo/campanhas/sites; acompanham
                               campanhas, custos, ROI e contato operacional.
 Kelly                         Criativos; produz assets em ferramentas AI/Canva
                               para gestores usarem nas campanhas.
+Ially                         Gerente do escritório; cobra e acompanha tarefas
+                              pendentes dos gestores e follow-up operacional.
 Rodolfo + Geizian + gestores  Acessam dashboards de monetização/ROI/campanhas.
 ```
 
