@@ -102,7 +102,7 @@ context/permissions-matrix.md
 
 If Rodolfo answers “ok” after a recommendation or execution report for a low-risk additive Company OS step, treat it as approval/continuation for that same phase/block context. If the message is a reply, anchor interpretation to the quoted message and previous execution report before acting. Still do not move/remove runtime files or alter agents without explicit scope/approval.
 
-Discord thread discipline for Company OS work: do not rename an already-open restructuring thread while it keeps the same objective. Short messages like `Ok`, `vamos continuar`, or `prossegue` never trigger a thread rename and should inherit the current Company OS sequence until Rodolfo explicitly finalizes or changes objective.
+Discord thread discipline for Company OS work: do not rename an already-open restructuring thread while it keeps the same objective. Short messages like `Ok`, `vamos continuar`, or `prossegue` never trigger a thread rename and should inherit the current Company OS sequence until Rodolfo explicitly finalizes or changes objective. If a title ever truly needs to be created/changed because of a clear durable topic change, keep it in the dominant language of the workstream/user message — normally PT-BR for Rodolfo's MGS OS threads. Never translate an active PT-BR restructuring thread title into Spanish/English because of a generic title heuristic.
 
 ### 3. Recommended initial MGS areas
 
@@ -394,7 +394,7 @@ Avoid overexplaining. Give an operational opinion and the next concrete step.
 ## Pitfalls
 
 - **Losing long-thread context**: in Company OS/restructuring threads, treat the thread as a persistent workstream until Rodolfo explicitly finalizes or changes objective. A short reply like “Ok”, “continue”, or “próximo” inherits the quoted/previous block context (phase, block, file) and must not be treated as a new standalone topic.
-- **Renaming an active restructuring thread**: do not auto-rename an already-open Company OS thread while the objective is still the same. Never rename based on a short reply or quoted status. Thread title changes only make sense before/at creation or after a clear new objective with strong context.
+- **Renaming an active restructuring thread**: do not auto-rename an already-open Company OS thread while the objective is still the same. Never rename based on a short reply or quoted status. Thread title changes only make sense before/at creation or after a clear new objective with strong context. If a rename is genuinely required, preserve the workstream language; do not translate a PT-BR Company OS title into Spanish/English.
 - **Moving before mapping**: creates broken imports, stale references, and agent confusion.
 - **Treating current structure as garbage**: many existing MGS files are production-critical and should be wrapped, not replaced.
 - **Letting agent prompts be the architecture**: prompts should consume the company OS, not be the only source of it.
@@ -412,6 +412,7 @@ Avoid overexplaining. Give an operational opinion and the next concrete step.
 - `references/company-os-phase4-context-continuity-crons-2026-06-07.md` — padrão capturado na Fase 4 sequencial: continuidade de contexto em thread longa, “ok continue” como avanço de bloco, revisão de `docs/CRONS.md` sem alterar runtime/crontab, e correções de metadados via `cron-control-plane.py`.
 - `references/company-os-thread-continuity-2026-06-07.md` — pitfall de continuidade em threads longas de reestruturação: replies curtos herdam o bloco anterior, thread aberta não deve ser renomeada enquanto mantiver o objetivo, e o report deve continuar no formato executivo por fase/bloco.
 - `references/company-os-thread-context-pitfall-2026-06-07.md` — correção de contexto em threads longas: thread de reestruturação mantém objetivo/nome até finalização, replies curtos herdam o bloco/fase citado, e `Ok`/`vamos continuar` não são novo assunto.
+- `references/company-os-thread-title-language-pitfall-2026-06-07.md` — correção específica de título/idioma em thread longa: não renomear thread ativa por reply curto e nunca traduzir título PT-BR para espanhol/inglês por heurística genérica.
 
 ## Verification Checklist
 
