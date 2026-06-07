@@ -10,6 +10,7 @@
 Área                         Dono humano atual          Função central
 ---------------------------- ------------------------- ---------------------------------------------
 Executive / Management        Rodolfo + Geizian         Direção, prioridades, reuniões e governança.
+Office / Follow-up             Ially                     Cobrança e acompanhamento de tarefas dos gestores.
 Content Operations            Raquel                    Conteúdo, REC/P1, SEO e WordPress editorial.
 Growth / Media Buying         Rodolfo + Geizian +       Campanhas, arbitragem, custos, aquisição e ROI.
                               gestores
@@ -25,7 +26,13 @@ Security / Access             Rodolfo + Zeus            Credenciais, acessos, pe
 
 Direção estratégica, prioridades, reuniões diárias, decisões finais, criação/remoção de áreas e agentes, governança e resolução de conflitos entre áreas.
 
-Rodolfo mantém autoridade final. Geizian acompanha a rotina de gestores, campanhas, custos e performance.
+Rodolfo mantém autoridade final e comanda a operação dos agentes AI. Geizian é sócio de Rodolfo e acompanha a rotina de gestores, campanhas, custos e performance.
+
+## Office / Follow-up
+
+Cobrança e acompanhamento de tarefas pendentes dos gestores, follow-up operacional e apoio à disciplina de execução do escritório.
+
+Ially é a gerente do escritório responsável por cobrar tarefas pedidas aos gestores quando atrasam, demoram ou não são executadas.
 
 ## Content Operations
 
