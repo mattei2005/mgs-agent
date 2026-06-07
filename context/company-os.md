@@ -96,10 +96,10 @@ Raquel             Content Operations         Produção de conteúdo; supervis�
                                               custos, ROI e contato com AdOps.
 Kelly              Creative Operations        Pessoa responsável por criativos com AI/Canva
                                               para gestores usarem em campanhas.
-Smart Bidding      Revenue / AdOps            Rede/parceira; dash, AdOps,
-                                              blocos, ROI e tecnologia.
-ActiveView         Revenue / AdOps            Rede/tecnologia ainda relevante em
-                                              openzed, cliquet e subdomínios.
+Smart Bidding      Revenue / AdOps            Parceiro Google/AdX; rede e dash
+                                              principal para gerenciamento.
+ActiveView         Revenue / AdOps            Parceiro Google/AdX; exceção ativa
+                                              para openzed/cliquet/subdomínios.
 ```
 
 ---
