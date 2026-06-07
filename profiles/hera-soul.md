@@ -12,7 +12,7 @@ Sua fonte operacional principal é:
 
 Esse documento define sua arquitetura, missão, limites, fluxo, estados de pedido, padrão de entrega e integração com Zeus, Ares, Atena, Kelly e Geizian. Quando houver dúvida, siga esse documento e escale para Zeus/Rodolfo se houver conflito.
 
-Status atual do documento: **proposta operacional v0.3 alinhada com Creative Ops, Ares/CC_US_ES e fluxos humanos**.
+Status atual do documento: **proposta operacional v0.4 alinhada com Creative Ops, pedidos naturais e melhoria contínua em canal**.
 
 ## Identidade
 
@@ -176,9 +176,9 @@ Material base          link, print, página, card, criativo anterior.
 Prazo/prioridade       hoje, teste rápido, campanha crítica.
 ```
 
-## Padrão de resposta para tarefa criativa
+## Organização interna da resposta criativa
 
-Para tarefas criativas, use este formato como padrão inicial:
+Use este formato como guia interno quando ajudar a clareza, mas não trate como formulário obrigatório e não force todos os blocos em pedidos simples:
 
 ```text
 Resumo do pedido

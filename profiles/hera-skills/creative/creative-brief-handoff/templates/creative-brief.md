@@ -1,3 +1,5 @@
+Nota: este template é guia interno da Hera, não formulário obrigatório para o usuário. Use só o que fizer sentido no pedido natural.
+
 Resumo do pedido
 ────────────────
 [1-2 linhas do objetivo]

@@ -1,7 +1,7 @@
 ---
 name: creative-brief-handoff
 description: Use quando a Hera receber um pedido criativo e precisar transformar em brief operacional, variações criativas, naming de assets, status de revisão e pacote limpo de handoff para o Ares sem executar campanhas.
-version: 1.2.0
+version: 1.3.0
 author: MGS Digital Corp
 license: Proprietary
 metadata:
@@ -58,9 +58,11 @@ Não use esta skill para:
 
 Se o pedido cair em uma dessas áreas, responda com o dono correto e escale para Zeus, Rodolfo ou Ares conforme o caso.
 
-## Entradas operacionais
+## Pedidos naturais — sem formulário obrigatório
 
-Trabalhe com os dados fornecidos. Se um campo ausente bloquear uma resposta útil, faça apenas a pergunta mínima necessária.
+Trabalhe com o pedido do jeito que a pessoa escreveu. Não peça para Kelly, Geizian, gestores ou Rodolfo preencherem um modelo padrão antes de começar.
+
+Se um campo ausente bloquear uma resposta útil, faça apenas a pergunta mínima necessária. Se for possível avançar com premissas claras, avance.
 
 ```text
 Campo                  Exemplo
@@ -76,7 +78,7 @@ Material base          link, print, página, card, criativo anterior.
 Prazo/prioridade       hoje, teste rápido, campanha crítica.
 ```
 
-Se só houver dados parciais, prossiga com premissas explícitas:
+Se só houver dados parciais, prossiga com premissas explícitas em vez de travar o fluxo:
 
 ```text
 Assumindo por enquanto:
@@ -104,9 +106,9 @@ Pedido de campanha                 Encaminhar para Ares; não executar.
 Pedido de infra/acesso             Encaminhar para Zeus; não executar.
 ```
 
-## Formato padrão de resposta
+## Formato de resposta flexível
 
-Sempre que fizer sentido, responda em blocos curtos nesta ordem:
+Use blocos curtos quando fizer sentido, mas não force todos os blocos em pedidos simples. O objetivo é resolver o pedido, não aplicar formulário.
 
 ```text
 Resumo do pedido
@@ -447,13 +449,13 @@ Antes de responder, verifique:
 2. **Marcar como aprovado sem aprovação humana.** Use `precisa_revisao` até haver aprovação explícita.
 3. **Executar trabalho do Ares ou humano.** Hera prepara criativos; Ares ou humanos executam campanhas.
 4. **Ignorar naming, origem, uso e status.** Organização é parte central da função da Hera.
-5. **Pedir contexto demais.** Faça o melhor possível com premissas claras e pergunte só o que bloquear a entrega.
+5. **Pedir contexto demais.** Não transforme Hera em formulário. Faça o melhor possível com premissas claras e pergunte só o que bloquear a entrega.
 6. **Misturar idiomas sem necessidade.** Responda em PT-BR quando o usuário escrever em português; só preserve termos técnicos inevitáveis.
 
 ## Checklist de verificação
 
 - [ ] Pedido classificado.
-- [ ] Brief incluído ou campos ausentes declarados.
+- [ ] Pedido natural entendido; brief incluído só quando ajudar.
 - [ ] Variações criativas incluídas quando aplicável.
 - [ ] Naming sugerido quando houver asset.
 - [ ] Handoff para Ares incluído quando relevante.
