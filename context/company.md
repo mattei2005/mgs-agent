@@ -29,19 +29,27 @@ Executive / Management        Direção, prioridades, governança e decisões.
 
 ### Receita / monetização
 
-A receita vem principalmente de publicidade display e monetização via parceiros.
+A receita vem principalmente de publicidade display via redes AdX/Ad Manager operadas por parceiros do Google.
+
+Smart Bidding e ActiveView são empresas parceiras do Google. Cada uma tem sua própria rede AdX/Ad Manager, onde os sites são adicionados e onde os blocos de anúncio são criados para o site começar a monetizar.
 
 ```text
 Camada                        Uso
 ----------------------------- ------------------------------------------------
-Smart Bidding                 Central principal de monetização/AdOps.
-Google AdX / Ad Manager       Camada de monetização via parceiros.
-ActiveView                    Exceção ativa para openzed, cliquet e subdomínios.
-Blocos de anúncio             Configurados por parceiros/AdOps nos sites.
+Smart Bidding                 Parceiro Google/AdX principal da MGS; rede onde
+                              a maior parte dos sites deve ser gerenciada.
+ActiveView                    Parceiro Google/AdX usado como exceção ativa para
+                              openzed, cliquet e respectivos subdomínios.
+Google AdX / Ad Manager       Ambiente onde parceiros adicionam sites, URLs e
+                              criam blocos de anúncio.
+Dashboard Smart Bidding       Dashboard mais completa; preferida para concentrar
+                              gerenciamento dos sites.
+Dashboard ActiveView          Dashboard alternativa da AV; menos usada pela MGS.
+Blocos de anúncio             Criados/configurados dentro das redes dos parceiros.
 SMS / Messenger / broadcast   Estratégias de retorno de usuário para os sites.
 ```
 
-Smart Bidding é a central principal. ActiveView permanece como exceção operacional para `openzed`, `cliquet` e respectivos subdomínios.
+A MGS tem alguns sites dentro da rede da Smart Bidding e alguns sites dentro da rede da ActiveView. Como a dashboard da Smart Bidding é mais completa, a preferência operacional é concentrar o gerenciamento dos sites nela. Os sites `openzed`, `cliquet` e respectivos subdomínios ainda seguem no controle/tecnologia da ActiveView.
 
 ### Custo / aquisição
 
@@ -107,9 +115,12 @@ Rodolfo monta a estrutura e configuração do quiz/SMS. O SMS Funnel envia mensa
 Pessoa / grupo                Função
 ----------------------------- ------------------------------------------------
 Rodolfo                       CEO, estratégia, Finance/BI, WordPress, pixels,
-                              arquitetura, Revenue/AdOps e configuração de Ares.
-Geizian                       Parceiro/gestor operacional; acompanha gestores,
-                              sobe/testa campanhas, apoia Creative e Revenue/AdOps.
+                              arquitetura, Revenue/AdOps e comando da operação
+                              de agentes AI.
+Geizian                       Sócio de Rodolfo; acompanha gestores, sobe/testa
+                              campanhas, apoia Creative e Revenue/AdOps.
+Ially                         Gerente do escritório; cobra/acompanha tarefas
+                              pendentes dos gestores e follow-up operacional.
 Raquel                        Content Operations; acompanha Atena e conteúdo.
 Kelly                         Creative Operations; cria criativos para gestores.
 Gestores                      Operam campanhas, páginas, criativos e verticais.
