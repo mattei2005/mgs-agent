@@ -20,12 +20,13 @@ A reorganização deve preservar a operação atual. Primeiro criamos a camada c
 Item                                      Status
 ---------------------------------------- ---------------------------------------
 Modelo operacional real                   Concluído em context/company-current-operating-model.md
-Arquitetura MGS OS                         Criada como proposta canônica v0.2 em context/company-os.md
-Documentos derivados                       Em criação/revisão
-Inventário classificado                    Pendente
-Migração de arquivos produtivos            Não iniciada
-Ajuste de agentes                          Não iniciado
-Limpeza/consolidação                        Não iniciada
+Arquitetura MGS OS                         Concluída como proposta operacional atual
+Documentos derivados                       Concluídos como proposta operacional atual
+Inventário classificado                    Concluído em docs/mgs-structure-inventory.md
+Fase 4 — revisão contextual                Concluída nos blocos 1–7
+Migração física de arquivos produtivos      Não iniciada; exige plano específico
+Ajuste de agentes                          Próximo gate: Fase 5
+Limpeza/consolidação                        Não iniciada; só com aprovação explícita
 ```
 
 ---
