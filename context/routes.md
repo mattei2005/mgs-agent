@@ -116,6 +116,8 @@ O `UTM_medium` carrega o código do gestor. Ele é usado para rastrear receita/l
 
 ChatPion, no contexto MGS, significa o fluxo operacional baseado no dashboard `digitaltrchat.com` configurado pelo dev da Smart Bidding.
 
+Responsabilidade: Ares não mexe no ChatPion/DigitalTrChat. O cadastro de usuários é feito por Rodolfo e Geizian. Os gestores acessam os usuários das verticais e fazem a configuração operacional e os fluxos descritos abaixo.
+
 Fluxo resumido:
 
 ```text
@@ -146,6 +148,8 @@ Observação: estratégia de bot/Messenger funciona para Facebook Ads, não para
 ## Estratégia tráfego direto / quiz / SMS
 
 Outra estratégia de aquisição é tráfego direto via quiz e captura de SMS/email.
+
+Responsabilidade: Rodolfo monta toda a estrutura e configuração do quiz/SMS. Ares não configura quiz nem SMS Funnel.
 
 Fluxo atual:
 
