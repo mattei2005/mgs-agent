@@ -266,7 +266,7 @@ Atena                Gestora/agente de conteúdo; produz conteúdos. Raquel deve
 Ares                 Agente de campanhas para mídia paga/aquisição:
                      Facebook Ads, Google Ads, TikTok e demais canais aprovados.
                      Não configura ChatPion/DigitalTrChat, quiz ou SMS Funnel.
-Hera                 Futuro agente de criativos; criação de criativos usando
+Hera                 Agente planejado/em implantação de criativos; criação de criativos usando
                      ChatGPT, TopView.ai, Canva, Grok se testado/aprovado ou
                      outras AIs com API/acesso permitido. Kelly permanece como
                      pessoa/gestora humana da frente de criativos.
