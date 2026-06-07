@@ -48,9 +48,9 @@ Rodolfo também atua diretamente na configuração e direção estratégica da �
 
 ## Creative Operations
 
-Criativos estáticos, vídeos, assets para campanhas, Canva, ChatGPT, TopView.ai, Grok se testado/aprovado e futuro agente de criativos.
+Criativos estáticos, vídeos, assets para campanhas, Canva, Google Drive de criativos aprovados, ChatGPT, TopView.ai, Grok se testado/aprovado e Hera.
 
-Kelly é a dona humana atual da produção criativa. Geizian também atua orientando e apoiando Kelly nessa frente. O fluxo atual termina na entrega dos assets nas pastas Canva dos gestores.
+Kelly é a dona humana atual da produção criativa. Geizian também atua orientando e apoiando Kelly nessa frente. O fluxo aprovado termina com os assets salvos no Google Drive de criativos aprovados, onde Hera e Ares podem ler/escrever para gerenciar criativos de campanha.
 
 ## Revenue / AdOps
 
