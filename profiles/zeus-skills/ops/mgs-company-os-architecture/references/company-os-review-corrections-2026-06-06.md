@@ -1,65 +1,87 @@
-# Company OS review corrections — 2026-06-06
+# Company OS Review Corrections — 2026-06-06
 
-Session-specific details captured while Rodolfo reviewed `context/company.md` and the derived Company OS docs.
+Session-specific notes from Rodolfo's iterative review of MGS Company OS docs.
 
-## Durable corrections
+## Durable workflow lesson
 
-- Use **Ares** only. `Aris` was a typo; do not preserve it as an alias.
-- Do not call Ares “future Ares.” If status matters, say `em configuração` or `implantação progressiva` separately.
-- Creative agent name is **Hera**. Kelly is the human gestor/creative lead (`g005`).
-- Rodolfo controls Zeus by default. Other employees enter Zeus threads only if Rodolfo explicitly asks.
-- Rodolfo commands the whole AI-agent operation, not just Ares.
-- Geizian is Rodolfo's **sócio**, not merely “partner” in the loose vendor sense. He is also gestor `g002` and launches/tests campaigns.
-- Ially is the office manager who follows up/cobra gestores when tasks requested from them are late or not done.
+When Rodolfo corrects one document, do not treat it as isolated. A correction can affect already-reviewed files and create contradictions. Before continuing:
 
-## Smart Bidding / ActiveView monetization wording
+1. Identify the concept corrected.
+2. Search previously reviewed canonical docs for stale terms/old assumptions.
+3. Patch cascade conflicts before moving to the next file.
+4. Report the cascade in a short table.
 
-Smart Bidding and ActiveView should be described as Google partner companies with their own AdX/Ad Manager networks. Sites are added inside those networks and ad blocks are created there so sites can monetize.
+Use this for ownership, agent scope, partner/network definitions, access rules, source-of-truth changes, and naming corrections.
 
-Operational nuance:
+## Review style lesson
+
+Rodolfo does not want to infer what matters from raw files. For each document, show:
+
+- file status;
+- operational decisions to validate;
+- the file/excerpt only when requested;
+- your own operational recommendation.
+
+If he says the review is confusing, switch to decision-level validation: “you only need to confirm whether these statements are true.”
+
+## Corrections captured
+
+### Smart Bidding / ActiveView
+
+Smart Bidding and ActiveView are Google partner companies. Each has its own AdX / Google Ad Manager network. Sites are added to those networks and ad blocks are created there before monetization starts.
+
+MGS has some sites in Smart Bidding and some in ActiveView. The Smart Bidding dashboard is preferred because it is more complete and centralizes management. ActiveView remains active mainly for `openzed`, `cliquet`, and their subdomains while they remain on AV technology/control.
+
+Do not reduce this to “Smart Bidding is monetization and ActiveView is legacy.” The important distinction is partner network + dashboard preference + exceptions.
+
+### Team / roles
+
+- Geizian is Rodolfo's sócio, not merely “partner” or “operational partner.”
+- Rodolfo commands the operation of all AI agents, not only Ares.
+- Ially is the office manager. She follows up/cobra gestores when tasks requested from them are late, slow, or not done.
+
+### Agents and scope
+
+- Ares = campaign agent only. Do not use “Aris.” Do not say “Ares futuro”; if needed, say `em configuração` or `implantação progressiva`.
+- Ares does not configure ChatPion/DigitalTrChat, quiz, or SMS Funnel.
+- ChatPion/DigitalTrChat users are created by Rodolfo/Geizian; gestores access users and configure operational flows.
+- Quiz/SMS structure/configuration is built by Rodolfo.
+- Hera = creative agent. Kelly is the human creative lead/gestora (`g005`).
+- Ares and Hera both need read/write access to the approved-creatives Google Drive so they can manage and use creative assets.
+
+### Gestores and Finance/BI
+
+Gestores and `utm_medium` codes:
 
 ```text
-Smart Bidding dashboard   Preferred/main dashboard because it is more complete.
-ActiveView dashboard      Exists, but MGS prefers concentrating management in SB.
-AV exception              openzed, cliquet and respective subdomains still use AV tech/control.
+Icaro    g001
+Geizian  g002
+Isliago  g003
+Joe      g004
+Kelly    g005
+Nicolas  g006
 ```
 
-Avoid oversimplifying this as “Smart Bidding is the central network and ActiveView is just exception” without explaining both are Google partners/AdX networks.
+`utm_medium` is the attribution source for gestor revenue/profit.
 
-## Ares / ChatPion / quiz boundaries
-
-Ares owns campaigns, not every acquisition-adjacent system.
+Gestor compensation belongs in Finance/BI docs:
 
 ```text
-Ares                  Campaign management/creation/analysis/ROI.
-ChatPion/DigitalTrChat Rodolfo+Geizian create users; gestores configure users/flows.
-Quiz/SMS Funnel       Rodolfo creates/configures the structure.
+Base salary                 R$3,000
+Up to R$100,000 net profit   7% commission
+At/above R$100,000           10% commission
+Rule                         Pay salary OR commission, whichever is higher; do not pay both.
 ```
 
-Ares may use outputs/assets/strategy context from these flows, but does not configure ChatPion, DigitalTrChat, quiz, or SMS Funnel.
-
-## Creative Drive handoff
+## Files usually affected by these corrections
 
 ```text
-1. Kelly/Rodolfo/Geizian/gestor requests creative.
-2. Hera creates feed/stories/video/static variations.
-3. Kelly or responsible human approves.
-4. Hera saves approved creative to the correct Google Drive folder.
-5. Ares reads/writes/manages approved creatives in Drive for campaign tests.
-```
-
-Hera and Ares both need read/write access to the approved-creatives Drive.
-
-## Review workflow preference
-
-When presenting files for Rodolfo review, do not just paste raw technical docs and ask “review.” First say what decisions he must confirm. If he asks for the file, paste/excerpt the file, but still include a short checklist of operational confirmations.
-
-Good prompt:
-
-```text
-Você só precisa validar estas decisões:
-- Ares = campanhas only.
-- Hera = criativos + Drive.
-- ChatPion = Rodolfo/Geizian/gestores; sem Ares.
-- Quiz/SMS = Rodolfo.
+context/company.md
+context/company-os.md
+context/company-current-operating-model.md
+context/areas.md
+context/agent-map.md
+context/routes.md
+context/sources-of-truth.md
+context/permissions-matrix.md
 ```

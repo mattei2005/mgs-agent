@@ -204,6 +204,8 @@ When Rodolfo says to review files one by one, do **not** jump to inventory or mi
 
 When Rodolfo corrects naming or ownership (e.g. `Ares` not `Aris`, `Hera` not `Kelly agent`), search canonical context files for stale variants and clean them up. Explain that search as stale-term cleanup, not as re-litigating the user's correction.
 
+Cascading correction rule: any correction made while reviewing one file can invalidate previously reviewed files. Before moving to the next file, search/patch the already-reviewed Company OS docs for conflicts, stale terms, and contradictory ownership/routes. Typical cascade targets are `company-os.md`, `company-current-operating-model.md`, `areas.md`, `agent-map.md`, `routes.md`, `sources-of-truth.md`, `permissions-matrix.md`, and the current file under review. Report the cascade explicitly in a short table.
+
 Sequencing pitfall: after `company-current-operating-model.md` and `company-os.md` are drafted, **do not jump straight to inventory**. Review the derived files one by one with Rodolfo first: `areas.md`, `agent-map.md`, `routes.md`, `sources-of-truth.md`, and `permissions-matrix.md`. Inventory starts only after those derived docs are accepted as the current canonical proposal.
 
 Pitfall: old restructuring plans may say “next step: update company-os.md” even after that has already been done, or may duplicate “create derived docs” both before and after inventory. When reviewing the plan, update statuses and remove duplicated phases before proceeding.
