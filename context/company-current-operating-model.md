@@ -281,7 +281,7 @@ A arquitetura da MGS deve ser desenhada por áreas reais da empresa, não apenas
 Executive / Management        Rodolfo, Geizian, reuniões, decisões, estratégia
 Content Operations            Raquel, gestores, REC/P1, SEO, WordPress conteúdo
 Growth / Media Buying         Gestores, Facebook Ads, Google Ads, SMS
-Creative Operations           Kelly, Canva, ChatGPT, TopView.ai, futuro agente
+Creative Operations           Kelly, Canva, ChatGPT, TopView.ai, Hera
 Revenue / AdOps               Smart Bidding, ActiveView, AdManager, AdX, blocos
 Finance / BI                  Rodolfo recebe relatórios, alimenta planilhas,
                               acompanha ROI, gastos, receitas, custos
