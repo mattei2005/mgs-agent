@@ -67,7 +67,7 @@ Content Operations            Produção de conteúdo, REC/P1, SEO, categorias,
 Growth / Media Buying         Campanhas, Facebook Ads, Google Ads, TikTok, SMS, ChatPion, quiz e tráfego direto,
                               gestores, custos, ROI e aquisição.
 Creative Operations           Criativos estáticos, vídeos, Canva, ChatGPT,
-                              TopView.ai e futuro agente de criativos.
+                              TopView.ai, Hera e Google Drive de criativos.
 Revenue / AdOps               Smart Bidding, ActiveView, AdManager, AdX,
                               blocos de anúncio, precificação e monetização.
 Finance / BI                  Relatórios recebidos, planilhas alimentadas por Rodolfo,
