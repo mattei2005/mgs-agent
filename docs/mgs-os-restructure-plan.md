@@ -236,14 +236,15 @@ Só depois de tudo validado e com aprovação explícita:
 
 ## Próximo passo imediato
 
-Revisar/aprovar os documentos derivados da camada canônica:
+A Fase 4 contextual está concluída. O próximo passo é abrir a **Fase 5 — Ajustar agentes**, com gate explícito antes de alterar qualquer profile.
 
 ```text
-context/areas.md
-context/agent-map.md
-context/routes.md
-context/sources-of-truth.md
-context/permissions-matrix.md
+Próximo bloco                  Fase 5 — Zeus primeiro
+Arquivo provável               profiles/zeus/SOUL.md ou fonte equivalente do profile
+Objetivo                       Fazer Zeus consumir MGS OS como fonte gerencial
+                               principal, sem apagar contexto antigo.
+Validação obrigatória           Diff + secret scan + resposta teste no Discord/logs.
+Escopo proibido                 Crontab, tokens, runtime, permissões e limpeza.
 ```
 
-Depois disso, gerar o inventário classificado antes de qualquer migração de arquivos ou ajuste de agentes.
+Minha recomendação operacional: começar por Zeus, porque ele é o orquestrador e precisa refletir corretamente a arquitetura antes de Atena/Ares/Hera herdarem rotas e limites.
