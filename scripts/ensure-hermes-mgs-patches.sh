@@ -84,8 +84,14 @@ grep -q "semantic_fallback_title" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord semantic title fallback"
 grep -q "Formatação de Tabelas" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord table-formatting title classifier"
+grep -q "Erro Sistema Operacional" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord OS-error title classifier"
 grep -q "service-manager restarts while a chat task is active" "$REPO/gateway/run.py" \
   || fail "missing restart/service-manager auto-resume marker"
+grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
+  || fail "missing Discord post-response thread rename callback"
+grep -q "Discord thread renamed from auto-generated title" "$REPO/gateway/run.py" \
+  || fail "missing Discord thread rename audit log marker"
 
 PYBIN="$REPO/venv/bin/python"
 [[ -x "$PYBIN" ]] || PYBIN="python3"
