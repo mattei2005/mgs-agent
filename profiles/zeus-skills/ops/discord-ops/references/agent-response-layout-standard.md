@@ -50,6 +50,22 @@ real value          | real value          | real value
 - Do not wrap mentions that need to ping users inside code blocks.
 - If an internal Hermes/tool warning appears in the UI (for example "File-mutation verifier" or patch validation noise), do **not** assume Rodolfo understands it. Translate it into operational meaning immediately: what happened, whether it affected the result, what you verified afterward, and current state. Avoid repeating the raw warning unless needed as evidence.
 
+## Post-update / regression audit checklist
+
+When Rodolfo notices raw Markdown tables after a Hermes update, do not assume the Hermes renderer changed. First distinguish:
+
+```text
+Layer                     | What to verify
+--------------------------|-----------------------------------------------------
+Runtime renderer           | Discord adapter usually sends Markdown as-is
+Profile prompt/SOUL        | Each active agent has the aligned `text` table rule
+Agent behavior             | The agent may have ignored an existing rule
+Config sync                | Active profile and `/root/mgs-agent/profiles/*` match
+New agents                 | Check newer profiles too; they may lack old style rules
+```
+
+Audit all active MGS agents (Zeus, Atena, Ares, Hera, future agents) for the style rule, not only the agent that made the bad response. In the 2026-06-07 post-update audit, Zeus/Atena/Ares had the rule but Hera did not; the correct fix was adding the rule to Hera's SOUL and syncing/versioning it, not changing Hermes runtime.
+
 ## Files updated in the originating session
 
 - `/root/mgs-agent/AGENT.md` — MGS-wide master rule.
