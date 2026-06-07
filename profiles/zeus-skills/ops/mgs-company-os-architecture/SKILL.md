@@ -128,13 +128,14 @@ Security / Access             Credentials, tokens, user permissions, dashboards,
 ```
 
 Durable MGS facts from the CEO explanation:
-- Rodolfo and Geizian are partners. Rodolfo owns management, finance, WordPress/technical structure, pixels, partner-network relationship, strategy, and also directly acts in Growth/Ares setup. Geizian manages the campaign/site managers day to day and also participates in Growth, Creative support, and Revenue/AdOps.
+- Rodolfo and Geizian are sócios/partners. Rodolfo owns management, finance, WordPress/technical structure, pixels, partner-network relationship, strategy, and commands the AI-agent operation as a whole (not just Ares). Geizian manages the campaign/site managers day to day, launches/tests campaigns himself as gestor `g002`, and also participates in Growth, Creative support, and Revenue/AdOps.
+- Ially is the office manager who follows up/cobranzas with gestores when requested tasks are late or not done.
 - Raquel owns Content Operations and should supervise Atena.
 - Kelly is the human owner of creative production and currently uses AI/Canva workflows for gestores. Geizian also orients/supports Kelly in Creative Operations. The creative agent name is **Hera**, not Kelly.
 - There are six gestores with tracking codes used in `UTM_medium`: Icaro `g001`, Geizian `g002`, Isliago `g003`, Joe `g004`, Kelly `g005`, Nicolas `g006`.
 - Geizian is both partner/coordinator and an operating gestor (`g002`): he also launches/tests campaigns for some sites.
 - The campaign agent is **Ares** only. Do not use `Aris`. Do not label it `Ares futuro`; if needed, describe status separately as `em configuração` / `implantação progressiva`.
-- Smart Bidding is the main operational dashboard for sites, campaigns, ROI, ad blocks, APIs and permissions.
+- Smart Bidding and ActiveView are Google partner companies with their own AdX/Ad Manager networks. Sites are added to those networks and ad blocks are created there before monetization starts. The Smart Bidding dashboard is the preferred/main management dashboard because it is more complete and centralizes management, even for visibility across sites.
 - ActiveView is now an exception/legacy-active network: only `openzed`, `cliquet`, and their subdomains are not technologically migrated to Smart Bidding.
 - Finance runs monthly: period day 1–30, Google payment around day 21–23, Rodolfo checks Facebook Business Manager spend, invalid traffic, Smart Bidding/ActiveView reports, commissions, salaries and expenses in his spreadsheet.
 - Gestor compensation matters to Finance/BI: base salary is R$3,000, but commission replaces salary when higher. Commission is 7% of net profit up to R$100,000 and 10% once the gestor reaches R$100,000 net profit. Do not double-pay salary + commission.
@@ -163,8 +164,8 @@ Future  TBD             Specialist agents created only after mission/scope exist
 Rules:
 - **Agent creation follows company architecture**. Do not create a new agent until its area, mission, sources of truth, permissions, and escalation paths are explicit.
 - Zeus is controlled only by Rodolfo. Other company members join Zeus threads only when Rodolfo explicitly asks Zeus to include them.
-- Ares/Aris starts under Rodolfo + Geizian control, then managers get access only after the agent is tested, approved, and the gestores are trained on how to open threads and interact with it.
-- The future creative agent is named Kelly because of Kelly's human creative role; Rodolfo, Geizian, and Kelly may interact with/request creative work according to approved scope.
+- Ares starts under Rodolfo + Geizian control, then gestores get access only after the agent is tested, approved, and the gestores are trained on how to open threads and interact with it.
+- The creative agent is **Hera**. Kelly is the human creative lead/gestora (`g005`), not the agent name. Rodolfo, Geizian, Kelly and gestores may request creative work according to approved scope.
 
 ### 5. Sources-of-truth distinction
 
@@ -240,18 +241,24 @@ Use `não tocar` for sensitive live state such as `data/sites.json`, `data/autho
 
 ### 8. Executive communication pattern
 
-When reporting to Rodolfo, be direct and structured. Prefer aligned monospace tables for comparable data.
+When asking Rodolfo to review a document, do not make him infer what matters from the raw file. Always separate:
+
+```text
+1. What changed / current file status.
+2. The 5–10 operational decisions he actually needs to validate.
+3. The full or excerpted file only if he asked to see it.
+```
+
+If Rodolfo says the review is confusing, switch from file content to decision-level validation: “you only need to confirm whether these statements are true.”
 
 Good pattern:
 
 ```text
-Parte                         Veredito
------------------------------ --------------------------------------------------
-Existe estrutura?              Sim.
-Está centralizada como empresa? Não.
-Dá para reaproveitar?           Sim, bastante.
-Precisa trocar tudo?            Não.
-Precisa reorganizar?            Sim.
+Decisão                         Confirmação
+------------------------------- ------------------------------------------------
+Ares                            Campanhas only; no ChatPion/quiz/SMS.
+Hera                            Criativos + Drive.
+Google Drive                    Source of approved creatives; Hera/Ares R/W.
 ```
 
 Avoid overexplaining. Give an operational opinion and the next concrete step.
@@ -284,3 +291,4 @@ Before reporting completion of a company-OS step:
 - `references/company-os-routes-review-2026-06-06.md` — route/scope corrections: Ares vs Hera naming, gestores/UTM codes, ChatPion/quiz/SMS boundaries, Drive creative handoff, commission model, and review sequencing.
 - `references/company-os-routing-growth-creative-2026-06-06.md` — routing clarifications for Ares, Hera, gestores/UTM codes, ChatPion/DigitalTrChat/Messenger, quiz/SMS Funnel, Revenue/AdOps and gestor commission.
 - `references/company-os-gestores-ares-finance-2026-06-06.md` — gestor codes (`utm_medium`), Ares staged access, Creative/Kelly agent context, Zeus-only control, and gestor commission rules for Finance/BI.
+- `references/company-os-review-corrections-2026-06-06.md` — latest corrections from document review: Smart Bidding/ActiveView as Google partner AdX networks, Geizian as sócio, Ially office-manager role, Ares/Hera/Drive boundaries, and decision-level review style.
