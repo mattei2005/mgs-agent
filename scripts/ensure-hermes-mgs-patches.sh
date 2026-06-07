@@ -70,6 +70,7 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
 apply_patch_if_needed "discord-deterministic-thread-rename-auto-add-users.patch"
 apply_patch_if_needed "planned-restart-auto-resume-active-sessions.patch"
+apply_patch_if_needed "discord-post-response-thread-title-rename.patch"
 
 # Invariants that must survive every Hermes update. If any grep fails, the
 # update is not production-safe for MGS gateways.
