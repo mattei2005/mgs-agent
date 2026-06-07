@@ -213,7 +213,8 @@ Etapa   Ação
 4       Parceiro cria/configura blocos na rede AdX/Ad Manager.
 5       Rodolfo/Tech instala ou valida blocos no site.
 6       Receita começa a aparecer em dashboard Smart Bidding ou ActiveView.
-7       Reports alimentam Finance / BI.
+7       Google paga as parceiras; elas retiram revenue share e repassam a MGS.
+8       Reports alimentam Finance / BI.
 ```
 
 Regra atual:
@@ -237,11 +238,14 @@ Fonte / dado                   Uso
 ------------------------------ ------------------------------------------------
 Smart Bidding reports           Receita/performance.
 ActiveView reports              Receita/performance de sites ainda na AV.
+Tráfego inválido                Risco e ajuste no fechamento.
 Facebook Business Manager       Custo de mídia.
 Google Ads                      Custo de mídia quando usado.
 UTM_medium                      Atribuição por gestor.
 Planilha financeira             ROI, lucro líquido, despesas, salários e comissões.
 ```
+
+Rodolfo confere reports Smart Bidding/ActiveView, custos de mídia, tráfego inválido, comissões, salários e despesas. A planilha financeira validada por Rodolfo é a fonte final de ROI, lucro líquido, comissões e fechamento.
 
 Comissão dos gestores:
 
