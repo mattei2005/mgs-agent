@@ -144,7 +144,7 @@ O `UTM_medium` permite atribuir receita/lucro por gestor, site e campanha.
 
 ## Agentes AI
 
-Agentes AI são multiplicadores operacionais. Eles não substituem aprovação humana em áreas sensíveis; coordenam, executam dentro de escopo e escalam quando houver risco.
+Agentes AI são multiplicadores operacionais. Rodolfo comanda a operação dos agentes AI como um todo. Eles não substituem aprovação humana em áreas sensíveis; coordenam, executam dentro de escopo e escalam quando houver risco.
 
 ```text
 Agente      Área                         Papel

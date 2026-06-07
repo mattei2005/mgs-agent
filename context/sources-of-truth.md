@@ -54,8 +54,8 @@ Security / Access             authorized-users, 1Password, policies, audit log
 ```text
 Fonte externa                  Uso operacional
 ------------------------------ ------------------------------------------------
-Smart Bidding                   Parceiro Google/AdX; rede e dashboard principal de gerenciamento MGS, com sites, campanhas, ROI, blocos, tecnologia e reports.
-ActiveView                      Parceiro Google/AdX; exceção ativa para openzed, cliquet e subdomínios.
+Smart Bidding                   Parceiro Google/AdX/Ad Manager principal da MGS; rede e dashboard principal de gerenciamento, com sites, campanhas, ROI, blocos, tecnologia e reports.
+ActiveView                      Parceiro Google/AdX/Ad Manager; exceção ativa para openzed, cliquet e subdomínios.
 Facebook Business Manager       Gastos de campanha e contas de anúncio.
 Google Ads                      Campanhas/aquisição quando usado.
 TikTok Ads                      Canal potencial/futuro para Ares.
