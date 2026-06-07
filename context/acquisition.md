@@ -1,6 +1,6 @@
 # Aquisição de Tráfego — MGS
 
-> Status: proposta canônica v0.2
+> Status: proposta canônica v0.3
 > Fonte-mãe: `context/company-os.md`
 > Base operacional: `context/company-current-operating-model.md`
 
@@ -138,7 +138,7 @@ Fluxo:
 
 ## ChatPion / DigitalTrChat — Messenger
 
-ChatPion/DigitalTrChat é estratégia de Messenger/Facebook usada com campanhas de objetivo MSG.
+ChatPion/DigitalTrChat é estratégia de Messenger/Facebook usada com campanhas de objetivo MSG. No contexto MGS, o ChatPion operacional roda pelo dashboard `digitaltrchat.com`, configurado pelo dev da Smart Bidding.
 
 Limite crítico: Ares não configura ChatPion/DigitalTrChat.
 
@@ -151,31 +151,52 @@ Cadastro de usuários           Rodolfo + Geizian.
 Usuários por vertical           Rodolfo + Geizian.
 Acesso aos usuários             Gestores conforme vertical/campanha.
 Configuração operacional        Gestores.
+Configuração operacional        Gestores.
 Fluxos/bot/messages             Gestores conforme playbook e estrutura existente.
+Broadcast Smart Bidding         Parceiro/estrutura Smart Bidding + gestores.
 Escala/decisão crítica          Rodolfo/Geizian.
 ```
 
 Fluxo típico:
-
 ```text
-1. Campanha Facebook Ads com objetivo MSG.
-2. Usuário clica no anúncio.
-3. Messenger abre conversa.
-4. ChatPion/DigitalTrChat dispara fluxo configurado.
-5. Fluxo usa botões/CTAs/mensagens sequenciais.
-6. Usuário clica e vai para site MGS monetizado.
-7. Receita/performance é acompanhada por site/campanha/gestor.
+1. Admin MGS entra no DigitalTrChat.
+2. Cria usuários por site/vertical.
+3. Gestor loga com o usuário da vertical.
+4. Gestor conecta um segurador/perfil Facebook.
+5. O segurador tem várias páginas Facebook conectadas.
+6. Em Bot Manager, configura flows de mensagens.
+7. Campanha roda no Facebook Ads com objetivo Messenger/MSG.
+8. Usuário clica no anúncio e abre Messenger com mensagem JSON pré-definida.
+9. Usuário entra no drip de mensagens nas primeiras 24h.
+10. Depois pode seguir para broadcast via Smart Bidding.
+11. Usuário clica e vai para site MGS monetizado.
+12. Receita/performance é acompanhada por site/campanha/gestor.
 ```
+
+Observação: estratégia de bot/Messenger funciona para Facebook Ads, não para Google Ads.
 
 ---
 
 ## Quiz + SMS / SMS Funnel
 
-Quiz + SMS é estratégia separada de aquisição/reaproveitamento. Pode capturar e-mail/SMS ou enviar usuário para destino aprovado.
+Quiz + SMS é estratégia separada de aquisição/reaproveitamento. Pode capturar nome, telefone e, se usado, e-mail antes de enviar o usuário para destino aprovado.
 
 Responsabilidade: Rodolfo monta/configura a estrutura do quiz/SMS. Ares não configura quiz nem SMS Funnel.
 
 SMS Funnel é ferramenta externa usada para envio de SMS quando a estratégia exige.
+
+Fluxo típico:
+```text
+1. Campanha roda no Facebook Ads ou Google Ads.
+2. Usuário clica no anúncio.
+3. Usuário abre o quiz.
+4. Usuário responde perguntas.
+5. Usuário preenche nome, telefone e, se usado, e-mail.
+6. SMS Funnel envia SMS após alguns minutos.
+7. SMS tem CTA e link.
+8. Clique abre artigo/site MGS.
+9. Receita vem da monetização do site.
+```
 
 ---
 
