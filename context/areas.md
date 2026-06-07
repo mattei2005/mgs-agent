@@ -49,7 +49,7 @@ Kelly é a dona humana atual da produção criativa. Geizian também atua orient
 
 Smart Bidding, ActiveView, AdManager/AdX, aprovação de sites, blocos de anúncio, precificação, regras e Discord AdOps.
 
-Regra atual: Smart Bidding é a central principal. ActiveView é exceção ativa para `openzed`, `cliquet` e respectivos subdomínios. Rodolfo, Geizian e gestores atuam na interface operacional com AdOps, blocos, regras e performance.
+Regra atual: Smart Bidding e ActiveView são parceiros Google/AdX. A dashboard da Smart Bidding é a central principal de gerenciamento por ser mais completa. ActiveView permanece como exceção ativa para `openzed`, `cliquet` e respectivos subdomínios. Rodolfo, Geizian e gestores atuam na interface operacional com AdOps, blocos, regras e performance.
 
 ## Finance / BI
 
