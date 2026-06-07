@@ -169,6 +169,7 @@ Rules:
 - Zeus is controlled only by Rodolfo. Other company members join Zeus threads only when Rodolfo explicitly asks Zeus to include them.
 - Ares starts under Rodolfo + Geizian control, then gestores get access only after the agent is tested, approved, and the gestores are trained on how to open threads and interact with it.
 - The creative agent is **Hera**. Kelly is the human creative lead/gestora (`g005`), not the agent name. Rodolfo, Geizian, Kelly and gestores may request creative work according to approved scope.
+- Hera is Creative Operations, not merely an Ares handoff assistant. Hera creates static/image and video creatives, organizes Drive/Canva assets, and maintains naming/inventory even when Kelly, Geizian or gestores create assets themselves and run campaigns manually without Ares. Ares is an optional consumer of approved assets, not the only destination.
 
 ### 5. Sources-of-truth distinction
 
@@ -508,5 +509,6 @@ Before reporting completion of a company-OS step:
 - `references/company-os-doc-review-format-sites-crons-2026-06-07.md` — review-format and cascade lessons: SOUL-style summaries, send full docs as attachments, avoid duplicated conflict sections in domain docs, sites list update/count validation, and CRONS.md generated-doc review pattern.
 - `references/company-os-review-style-sites-2026-06-07.md` — review-format correction (SOUL-style summaries and full-file attachments instead of inline dumps), cascade-check expectations, and updated conceptual sites list notes.
 - `references/hera-operational-architecture-bootstrap-2026-06-06.md` — sequence correction after Hera technical bootstrap: gateway online is not production-ready; create operational diagram/context doc, align SOUL, create skills/templates, then controlled tests before opening to Kelly/Geizian/gestores.
+- `references/hera-creative-ops-ares-taxonomy-alignment-2026-06-07.md` — Hera/Ares Creative Ops alignment: Hera creates and organizes static/video creatives, supports human-created assets, Ares is an optional consumer, and CC_US_ES Drive/Canva taxonomy/inventory fields must be synchronized across Hera context/SOUL/skills/templates.
 - `references/company-os-cascade-consistency-review-2026-06-06.md` — cascade consistency checklist for sequential context-file review: stale-term cleanup, Ares/Hera/SB/AV/Ially/gestor-code boundaries, and file-display pattern when Rodolfo asks to review raw content.
 - `references/company-os-team-acquisition-monetization-2026-06-06.md` — approved/validated team and acquisition rewrites plus monetization v0.2 notes; includes Rodolfo's cascade-consistency expectation and verification checklist for stale/conflicting concepts.
