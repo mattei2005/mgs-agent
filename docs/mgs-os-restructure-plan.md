@@ -131,17 +131,36 @@ Arquivos sensíveis ou runtime ativo seguem como `não tocar` até existir plano
 
 ---
 
-## Fase 4 — Plano de migração por bloco
+## Fase 4 — Revisão contextual por bloco
 
-Para cada arquivo/pasta relevante, decidir destino e risco.
+```text
+Status: concluída
+Escopo: arquivos conceituais/controle; sem migração física de runtime.
+```
 
-Regras:
+Blocos executados:
+
+```text
+Bloco   Arquivo / área                         Resultado
+------  -------------------------------------- ---------------------------------
+1       context/company.md                      Visão geral alinhada ao MGS OS.
+2       context/team.md + agent-map             Equipe, gestores, agentes e acesso.
+3       context/acquisition.md                  Ares, Ads, ChatPion, quiz/SMS.
+4       context/monetization.md                 Smart Bidding, ActiveView, AdOps.
+5       context/processes.md                    Fluxos operacionais consolidados.
+6       context/sites.md                        Sites/verticais e limite data/sites.
+7       docs/CRONS.md + cron-control-plane      Inventário de crons sem alterar runtime.
+```
+
+Regras mantidas:
 
 - nada de movimento em massa;
-- migrar por blocos pequenos;
-- manter rollback;
-- validar depois de cada bloco;
-- registrar decisões relevantes.
+- nenhuma alteração de crontab/runtime na revisão de `docs/CRONS.md`;
+- validação depois de cada bloco;
+- audit log em `logs/events-audit.jsonl`;
+- auto-push verificado com `HEAD == origin/main`.
+
+Observação: Fase 4 concluiu a revisão contextual inicial. Migração física, limpeza, arquivamento ou alteração de agentes ficam para fases/gates próprios.
 
 ---
 
