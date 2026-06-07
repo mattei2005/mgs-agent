@@ -34,9 +34,9 @@ Criar/subir campanha Facebook Ads       Rodolfo + Geizian + gestores   Ares     
 Criar/subir campanha Google Ads         Rodolfo + Geizian + gestores   Ares         Budget/risco escala Rodolfo.
 Criar/subir campanha TikTok Ads         Rodolfo + Geizian + gestores   Ares         Futuro; Rodolfo aprova.
 Analisar ROI campanha                   Growth + Revenue + Finance     Ares         Zeus/Rodolfo se anomalia.
-Configurar estratégia ChatPion/Messenger Growth / SmartBidding Dev      Ares coord.  Rodolfo/Geizian.
-Configurar quiz + captura SMS/email      Growth                         Ares coord.  Rodolfo/Geizian.
-Operar SMS Funnel                        Growth                         Ares coord.  Rodolfo/Geizian.
+Configurar estratégia ChatPion/Messenger Rodolfo + Geizian + gestores   N/A          Sem Ares.
+Configurar quiz + captura SMS/email      Rodolfo / Growth               N/A          Rodolfo.
+Operar SMS Funnel                        Rodolfo / Growth               N/A          Rodolfo.
 Ajustar blocos/preço AdOps              Revenue / SmartBidding         N/A          Rodolfo/Geizian/gestor.
 Aprovar site em rede AdX/SmartBidding    Revenue / Rodolfo              Zeus apoio   Rodolfo.
 Fechamento financeiro                   Rodolfo / Finance              Zeus report  Rodolfo.
@@ -94,6 +94,8 @@ Agente                          Ares
 ```
 
 Ares gerencia, cria, analisa e opera campanhas conforme permissão aprovada. Gestores entram depois de Ares estar testado, aprovado e depois de treinamento.
+
+Limite: Ares não configura ChatPion/DigitalTrChat, SMS Funnel ou estrutura de quiz. Ares pode usar campanhas/estratégias resultantes desses fluxos, mas a configuração dessas estruturas fica com Rodolfo, Geizian e gestores conforme o caso.
 
 ## Gestores e rastreamento por UTM_medium
 
