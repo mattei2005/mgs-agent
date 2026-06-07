@@ -206,8 +206,8 @@ def render_markdown(data: dict[str, Any]) -> str:
 
     return f"""# Crons MGS — Control Plane
 
-Gerado em: `{data['generated_at']}`  
-Fonte: `{data['source']}`  
+Gerado em: `{data['generated_at']}`
+Fonte: `{data['source']}`
 Total MGS ativo no root crontab: **{data['count']}**
 
 ## Resumo executivo

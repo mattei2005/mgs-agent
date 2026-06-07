@@ -1,7 +1,7 @@
 # Crons MGS — Control Plane
 
-Gerado em: `2026-06-07T11:20:19-04:00`  
-Fonte: `root crontab + script/log stat, read-only`  
+Gerado em: `2026-06-07T11:20:34-04:00`
+Fonte: `root crontab + script/log stat, read-only`
 Total MGS ativo no root crontab: **20**
 
 ## Resumo executivo
