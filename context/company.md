@@ -1,6 +1,6 @@
 # MGS Digital Corp
 
-> Status: visão geral v0.2
+> Status: visão geral v0.3
 > Fonte-mãe: `context/company-os.md`
 > Base operacional: `context/company-current-operating-model.md`
 
