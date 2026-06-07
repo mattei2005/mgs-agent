@@ -79,7 +79,7 @@ Fluxo Hera → Drive → Ares:
 5. Ares acessa essa pasta para usar os criativos em testes de campanhas novas.
 ```
 
-Regra: Ares precisa ter acesso de leitura às pastas de criativos aprovados no Drive. Hera organiza/escreve os assets aprovados; Ares consome para campanha.
+Regra: Ares e Hera podem ler e escrever nas pastas de criativos aprovados no Drive para conseguir gerenciar os criativos. Hera organiza/escreve os assets aprovados; Ares consome, organiza quando necessário e usa em campanhas/testes.
 
 ## Growth / Campaigns — Ares
 
