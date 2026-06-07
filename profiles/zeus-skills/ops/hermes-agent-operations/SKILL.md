@@ -288,7 +288,46 @@ Quando Rodolfo disser “GPT-5.5 pra tudo”, “zero Anthropic”, “deleta de
 - OpenHands “funcionando” não basta: se wrapper/trajectory usa `anthropic/claude-*` + API key 1Password, isso é uma falha de custo/governança salvo autorização explícita de Rodolfo. Diagnóstico canônico: `references/atena-openhands-provider-diagnostic.md`.
 - Para OpenHands na Atena/Zeus, a política correta é **GPT-5.5/OpenAI-Codex OAuth para tudo por padrão**. Não sugerir “backend não-Anthropic aprovado” genérico, OpenRouter, Haiku ou Claude como workaround. Se OpenHands precisar de compatibilidade com Codex, forçar `openai/gpt-5.5`, usar OAuth do profile sem imprimir token e validar o modelo real no output. Playbook: `references/openhands-gpt55-codex-wrapper.md`.
 
-## 4. Reporting templates
+## 4. Context compression / Codex gpt-5.5 notices
+
+Use quando Rodolfo perguntar sobre mensagens do Hermes como:
+
+```text
+ℹ Codex gpt-5.5 caps context at 272K, so auto-compaction was raised to 85% (from X%)...
+```
+
+Interpretação correta: isso é um aviso de inicialização/primeiro turno, não erro e não alerta de que a thread já chegou a 85%. O Hermes detecta `openai-codex/gpt-5.5` e auto-eleva o threshold de compactação para 85% porque a rota Codex limita a janela em ~272K tokens; a mensagem apenas explica que mudou de `compression.threshold` antigo para `0.85`.
+
+Workflow recomendado MGS:
+
+1. Explicar de forma executiva: auto-compaction resume a conversa só quando o contexto fica grande; 85% usa mais janela antes de resumir.
+2. Se Rodolfo quiser manter o comportamento mas remover o aviso repetitivo, **não desativar a compactação** e **não desligar o auto-raise como primeira opção**. Definir o threshold global do profile para o mesmo valor do auto-raise:
+
+```bash
+hermes config set compression.threshold 0.85
+```
+
+3. Validar no arquivo do profile, porque versões atuais do CLI têm `hermes config show`, mas não necessariamente `hermes config get`:
+
+```bash
+grep -n -A8 '^compression:' /root/.hermes/profiles/zeus/config.yaml
+hermes config check
+```
+
+4. Se Rodolfo pedir explicitamente 90%/95%, aí desligar o auto-raise e setar manualmente:
+
+```bash
+hermes config set compression.codex_gpt55_autoraise false
+hermes config set compression.threshold 0.90   # ou 0.95
+```
+
+Pitfalls:
+
+- Não confundir “auto-compaction was raised” com “a compactação acabou de rodar”. É startup notice.
+- Para MGS, 85% é a recomendação segura: em 272K, compacta em ~231K e deixa ~40.8K de folga. 90% deixa ~27.2K; 95% só ~13.6K e é arriscado com tool outputs/system prompt.
+- Se uma sessão já aberta ainda mostrar o aviso, validar em nova sessão/novo init antes de concluir que a configuração falhou.
+
+## 5. Reporting templates
 
 ### Resposta executiva para tooling web
 
@@ -306,6 +345,8 @@ Depois: tabela de toolsets, tabela de backends, recomendação direta e `Próxim
 
 ### Resposta executiva para update
 
+Use **blocos `text` com colunas alinhadas** para qualquer matriz de status/validação/novidades. Não usar tabela Markdown crua (`|---|---|`) em Discord: Rodolfo considera visualmente regressivo e já corrigiu esse padrão. Cabeçalhos devem nascer do contexto real do update; não copiar exemplos.
+
 ```text
 Resumo: atualizar agora / deferir / janela controlada.
 Evidências: commits atrás, highlights, risco local, backup/checks.
@@ -313,7 +354,19 @@ Impacto: gateways offline ~1-2 min; Zeus pode interromper sessão ativa.
 Próximo passo: comando exato ou validação pendente.
 ```
 
-## 5. New MGS agent bootstrap
+Exemplo de matriz final:
+
+```text
+Item                    | Estado
+------------------------|-------------------------------
+Hermes                  | v0.16.0 / behind 0
+Gateways                | Zeus/Atena/Ares/Hera active
+Patches MGS             | guard OK / py_compile OK
+Backup                  | removido ou path preservado
+Pendência               | nenhuma ou ação concreta
+```
+
+## 6. New MGS agent bootstrap
 
 When Rodolfo asks to start a new MGS agent/profile (Ares, Hera or future agents), use `references/mgs-new-agent-bootstrap.md`. Core rule: clone profile/config as needed, but immediately blank any inherited Discord bot token; do not create/enable the systemd gateway until the agent has its own dedicated bot token and Rodolfo confirms the Critical Subset system-file write.
 
@@ -333,7 +386,7 @@ After the Discord application/bot exists and the token is stored securely, use `
 
 Session-specific Hera bootstrap notes live in `references/mgs-new-agent-bootstrap-hera-2026-06-06.md`, including the confirmed Hera channel ID, bot IDs, safe Phase 1 validation shape, and the pitfall that broad inherited skill sync can accidentally version hundreds of bundled creative skills.
 
-## 6. Agent memory / conclusion layers
+## 7. Agent memory / conclusion layers
 
 When Rodolfo asks to evaluate or configure external memory infrastructure such as Honcho for Zeus/Atena/Ares, use `references/honcho-managed-memory-spike.md`. For the validated manual briefing command and renderer, use `references/honcho-manual-briefing-command-2026-06-02.md`.
 
@@ -349,7 +402,7 @@ Manual briefing command now exists for on-demand use only:
 
 This command regenerates sanitized datasets, runs targeted Honcho rounds, builds a Zeus deterministic assessment, and renders Discord-safe Markdown. Do not schedule it as cron until each domain summarizer is deterministic enough and the final report preserves source counts/evidence. The final briefing should label Honcho outputs as hypotheses and use Zeus/canonical counters for operational conclusions.
 
-## 7. Git / auto-commit / auto-push do `/root/mgs-agent`
+## 8. Git / auto-commit / auto-push do `/root/mgs-agent`
 
 Quando o GitHub `main` parecer velho apesar de haver commits/mudanças recentes no VPS, não assumir falha do GitHub. Validar a cadeia completa: branch atual, `HEAD` vs `origin/main`, dirty tree, `mgs-autocommit.service`, `scripts/auto-commit-watcher.sh`, `.git/hooks/post-commit` e `scripts/monitor-auto-push.sh`. Playbook: `references/mgs-agent-auto-commit-auto-push-repair.md`.
 
@@ -360,7 +413,7 @@ Pitfalls duráveis:
 - Guardrail de nome sensível deve bloquear credenciais reais sem travar ferramentas defensivas com nomes como `*_secret_scan.py`.
 - Monitor deve checar estado Git vivo, não só linhas de `auto-push.log`.
 
-## 8. References and support files
+## 9. References and support files
 
 Para manutenção de VPS/update com backup, recuperação manual de npm quando self-update quebra, e política de retenção/limpeza de backups, ver `references/vps-update-npm-backup-retention-2026-05-24.md`.
 
