@@ -139,19 +139,20 @@ ROI         Growth + Revenue + Finance Acompanhar custo, receita e performance.
 ```text
 Sistema/rede       Papel no MGS OS
 ----------------- -------------------------------------------------------------
-Smart Bidding      Fonte operacional principal para sites, campanhas, ROI,
-                   blocos de anúncio, APIs, permissões e tecnologia migrada.
-ActiveView         Exceção/legado operacional para openzed, cliquet e seus
-                   subdomínios ainda não migrados tecnologicamente.
-AdManager/AdX      Camada de monetização Google por trás das redes/parceiros.
+Smart Bidding      Fonte operacional principal para gerenciamento de sites,
+                   campanhas, ROI, blocos, tecnologia e relatórios.
+ActiveView         Exceção ativa para openzed, cliquet e seus subdomínios,
+                   quando ainda estiverem na tecnologia/rede AV.
+AdManager/AdX      Camada de monetização Google dentro das redes parceiras
+                   Smart Bidding e ActiveView.
 Discord AdOps      Canal operacional com Smart Bidding para regras, aprovação,
                    precificação e acompanhamento dos blocos.
 ```
 
 Regra canônica inicial:
 
-- Smart Bidding é a fonte principal de monetização/ROI.
-- ActiveView deve ser tratada como exceção ativa apenas para openzed, cliquet e subdomínios.
+- Smart Bidding é a dashboard/rede principal de gerenciamento operacional.
+- ActiveView deve ser tratada como exceção ativa apenas para sites que ainda estejam na tecnologia AV: openzed, cliquet e subdomínios.
 - Alterações de blocos, regras e precificação pertencem a Revenue / AdOps.
 - Impactos financeiros pertencem a Finance / BI.
 
