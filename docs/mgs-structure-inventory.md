@@ -1,9 +1,9 @@
 # Inventário Classificado — MGS OS
 
-> Status: inventário read-only v0.1  
-> Data: 2026-06-06  
+> Status: inventário read-only v0.2  
+> Data: 2026-06-07 01:28 EDT  
 > Escopo: `/root/mgs-agent`  
-> Regra: este documento **não move, remove nem altera runtime**. Ele apenas classifica e recomenda próximos passos.
+> Regra: este documento **não move, remove nem altera runtime**. Ele apenas classifica a estrutura atual e recomenda próximos passos.
 
 ---
 
@@ -12,68 +12,150 @@
 ```text
 Bloco                         Classe principal        Veredito
 ----------------------------- ---------------------- ---------------------------------------------
-context/                      canônico/conceitual     revisar e alinhar por fases
- data/                         runtime/operacional     não tocar sem plano específico
- docs/                         histórico/planos        manter; revisar documentos de controle
- scripts/                      automação produtiva     não mexer sem validação/rollback
- skills/                       procedimentos           manter; revisar só quando skill for usada
- patches/                      patch local             não tocar sem entender impacto runtime
- backups/                      backup                  manter por enquanto; arquivar depois
- experiments/                  experimento             manter; revisar baixo risco depois
- tools/                        ferramenta auxiliar      revisar quando entrar em fluxo operacional
- api/                          API/runtime             não tocar sem plano técnico
- logs/                         audit/runtime           não tocar; usar só para consulta
+context/                      canônico/conceitual     manter; base Company OS atual
+profiles/                     config/skills agentes   manter; versiona SOUL/config/skills próprios
+data/                         runtime/operacional     não tocar sem plano específico
+scripts/                      automação produtiva     não mexer em massa; validar por script
+skills/                       procedimentos globais    manter; revisar só quando skill for usada
+docs/                         histórico/planos        manter; atualizar docs de controle
+patches/                      patch local Hermes      não tocar sem entender impacto runtime
+api/                          API/runtime             não tocar sem plano técnico
+tools/                        ferramenta auxiliar      revisar quando entrar em fluxo operacional
+backups/                      backup                  preservar último por família; arquivar depois
+experiments/                  experimento             baixo risco, mas não limpar ainda
+logs/                         audit/runtime           não editar; consultar com filtros
+.env / auth / credenciais     sensível/não-versionar   nunca expor; não versionar
 ```
 
 ---
 
-## Inventário principal
+## Contagem estrutural atual
 
 ```text
-Path                                      Classe        Área provável              Status        Ação recomendada
----------------------------------------- ------------- -------------------------- ------------- ---------------------------
-context/                                  canônico      Executive / MGS OS          ativo         manter; alinhar por documento
-context/company-os.md                     canônico      Executive / MGS OS          revisado      manter como proposta canônica
-context/company-current-operating-model.md canônico     Executive / MGS OS          revisado      manter como fonte CEO
-context/areas.md                          canônico      Executive / MGS OS          revisado      manter
-context/agent-map.md                      canônico      Executive / MGS OS          revisado      manter
-context/routes.md                         canônico      Executive / MGS OS          aprovado      manter
-context/sources-of-truth.md               canônico      Executive / MGS OS          aprovado      manter
-context/permissions-matrix.md             canônico      Security / Access           aprovado      manter
-context/company.md                        canônico      Empresa                    legado ativo   revisar depois
-context/sites.md                          canônico      Sites / Verticais           legado ativo   revisar depois
-context/team.md                           canônico      Equipe / Access             legado ativo   revisar depois
-context/processes.md                      canônico      Processos                   legado ativo   revisar depois
-context/monetization.md                   canônico      Revenue / AdOps             legado ativo   revisar depois
-context/acquisition.md                    canônico      Growth / Media Buying       legado ativo   revisar depois
-context/security-policies.md              canônico      Security / Access           legado ativo   revisar depois
+Path                         Arquivos detectados     Observação
+---------------------------- ---------------------- ---------------------------------------------
+context/                     15                     camada canônica/conceitual MGS OS
+data/                        102                    runtime, states, caches e bancos locais
+docs/                        28                     planos, changelog, CRONS, inventários
+scripts/                     2689                   inclui yoast-scorer/ com muitos arquivos
+skills/                      118                    skills globais Content/WordPress
+profiles/                    142                    SOUL/config/skills versionadas dos agentes
+patches/                     32                     patches Hermes/MGS
+backups/                     34                     backups manuais e safety snapshots
+experiments/                 584                    spike Honcho/experimentos
+tools/                       13                     automações auxiliares
+api/                         5                      API local + usage.db
+logs/                        543                    logs rotacionados/audit/runtime
 ```
 
+---
+
+## Inventário principal — context/
+
 ```text
 Path                                      Classe        Área provável              Status        Ação recomendada
 ---------------------------------------- ------------- -------------------------- ------------- ---------------------------
-data/                                     runtime       operação                   ativo         não tocar em massa
-data/sites.json                          runtime       Tech / WordPress           ativo         não tocar; fonte técnica
-data/authorized-users.json               sensível      Security / Access           ativo         não tocar sem confirmação
+context/                                  canônico      Executive / MGS OS          ativo         manter
+context/company-current-operating-model.md canônico     Executive / MGS OS          revisado      manter como fonte CEO
+context/company-os.md                     canônico      Executive / MGS OS          proposta atual manter
+context/areas.md                          canônico      Executive / MGS OS          auditado      manter
+context/agent-map.md                      canônico      Executive / MGS OS          auditado      manter
+context/routes.md                         canônico      Executive / MGS OS          auditado      manter
+context/sources-of-truth.md               canônico      Executive / MGS OS          auditado      manter
+context/permissions-matrix.md             canônico      Security / Access           auditado      manter
+context/hera-creative-agent.md            canônico      Creative / Hera             novo/ativo    manter; revisar após testes Hera
+context/company.md                        canônico      Empresa                    legado ativo   revisar em bloco conceitual
+context/sites.md                          canônico      Sites / Verticais           legado ativo   revisar em bloco conceitual
+context/team.md                           canônico      Equipe / Access             legado ativo   revisar em bloco conceitual
+context/processes.md                      canônico      Processos                   legado ativo   revisar em bloco conceitual
+context/monetization.md                   canônico      Revenue / AdOps             legado ativo   revisar em bloco conceitual
+context/acquisition.md                    canônico      Growth / Media Buying       legado ativo   revisar em bloco conceitual
+context/security-policies.md              canônico      Security / Access           ativo         revisar depois
+```
+
+---
+
+## Inventário principal — profiles/
+
+```text
+Path                                      Classe        Área provável              Status        Ação recomendada
+---------------------------------------- ------------- -------------------------- ------------- ---------------------------
+profiles/                                 versão agente Agents / Hermes            ativo         manter; não editar em massa
+profiles/zeus-soul.md                     config        Executive / Zeus            ativo         manter; ajustar só por governança
+profiles/zeus-config.yaml                 config        Executive / Zeus            ativo         não tocar sem plano Hermes
+profiles/zeus-skills/                     skill         Zeus / Ops                  ativo         manter; commitar mudanças úteis
+profiles/atena-soul.md                    config        Content / Atena             ativo         manter; ajustar depois de Company OS
+profiles/atena-config.yaml                config        Content / Atena             ativo         não tocar sem plano Hermes
+profiles/atena-skills/                    skill         Content / Atena             ativo         manter
+profiles/ares-soul.md                     config        Growth / Ares               ativo         revisar quando Ares avançar
+profiles/ares-config.yaml                 config        Growth / Ares               ativo         não tocar sem plano Hermes
+profiles/ares-skills/                     skill         Growth / Ares               ativo         manter
+profiles/hera-soul.md                     config        Creative / Hera             novo/ativo    manter; revisar após testes controlados
+profiles/hera-config.yaml                 config        Creative / Hera             novo/ativo    não tocar sem plano Hermes
+profiles/hera-skills/                     skill         Creative / Hera             novo/ativo    manter; revisar após testes
+profiles/*bak*                            backup        Agents / Hermes             histórico     manter por enquanto
+```
+
+---
+
+## Inventário principal — data/
+
+```text
+Path                                      Classe        Área provável              Status        Ação recomendada
+---------------------------------------- ------------- -------------------------- ------------- ---------------------------
+data/                                     runtime       Operação                   ativo         não tocar em massa
+data/sites.json                          runtime       Tech / WordPress           ativo         fonte técnica; não tocar sem plano
+data/authorized-users.json               sensível      Security / Access           ativo         fonte autorização; exige confirmação
 data/article-tracker.db                  runtime       Content                    ativo         não tocar
-data/card-cache.db                       runtime       Content                    ativo         não tocar
+data/card-cache.db                       runtime/cache Content                    ativo         não tocar
 data/rec-fingerprints.db                 runtime       Content                    ativo         não tocar
 data/wp-term-cache.json                   runtime/cache Content / WordPress        ativo         não tocar
 data/lazyblock-*.json                    runtime/config Content / WordPress        ativo         revisar só com pipeline
 data/*-state.json                        runtime       Monitores / crons           ativo         não tocar sem plano
- data/*backup*                            backup        Tech / Infra                histórico     manter; arquivar depois
- data/deprecated/                         legado        variável                   legado        revisar depois
- data/backups/                            backup        Tech / Infra                histórico     manter; arquivar depois
- data/card-images-cache/                  cache         Content                    cache         não tocar agora
- data/chat-logs/                          histórico     Agents / Discord            histórico     manter
+data/infra-inventory.json                inventário    Tech / Infra                ativo         manter; atualizar via script
+data/pendencias.db.json                  runtime       Executive / Ops             ativo         não tocar sem plano
+data/discord-thread-imports/             histórico     Agents / Discord            histórico     manter
+data/chat-logs/                          histórico     Agents / Discord            histórico     manter
+data/card-images-cache/                  cache         Content                    cache         não tocar agora
+data/backups/                            backup        Tech / Infra                histórico     manter; arquivar depois
+data/deprecated/                         legado        variável                   legado        revisar depois
 ```
+
+---
+
+## Inventário principal — scripts/
+
+```text
+Path                                      Classe        Área provável              Status        Ação recomendada
+---------------------------------------- ------------- -------------------------- ------------- ---------------------------
+scripts/                                  automação     Tech / Infra                ativo         não mexer em massa
+scripts/cron-control-plane.py             automação     Tech / Infra                ativo         manter; controlar via dry-run/teste
+scripts/cron-smoke-test.sh                automação     Tech / Infra                ativo         manter
+scripts/housekeeping-bak-cleanup.sh       automação     Tech / Infra                ativo         manter; já preserva último backup
+scripts/mgs-safety-backup.sh              automação     Tech / Infra                ativo         manter; backup periódico seguro
+scripts/monitor-*.sh                      automação     Tech / Monitoring           ativo         revisar só por incidente
+scripts/mgs-rec-runner.py                 automação     Content                    ativo         não tocar agora
+scripts/mgs-p1-runner.py                  automação     Content                    ativo         não tocar agora
+scripts/mgs-rec-p1-orchestrator.py        automação     Content                    ativo         não tocar agora
+scripts/mgs-ops-control-plane.py          automação     Executive / Ops             ativo         não tocar agora
+scripts/mgs-ops-briefing.py               automação     Executive / Ops             ativo         não tocar agora
+scripts/sync-souls.sh                     automação     Agents / Hermes             ativo         alterar só com validação completa
+scripts/pendencia-*.sh                    automação     Ops                         ativo         manter
+scripts/mu-plugins/                       automação     WordPress                   ativo         não tocar sem plano
+scripts/yoast-scorer/                     automação     Content / SEO               ativo         não tocar agora
+scripts/deprecated/                       legado        Tech / Infra                legado        revisar depois
+```
+
+---
+
+## Inventário principal — docs/
 
 ```text
 Path                                      Classe        Área provável              Status        Ação recomendada
 ---------------------------------------- ------------- -------------------------- ------------- ---------------------------
 docs/                                     histórico     Executive / Tech            ativo         manter
-docs/mgs-os-restructure-plan.md           plano         Executive / MGS OS          revisado      manter
-docs/mgs-structure-inventory.md           inventário    Executive / MGS OS          novo          manter
+docs/mgs-os-restructure-plan.md           plano         Executive / MGS OS          atualizado    manter
+docs/mgs-structure-inventory.md           inventário    Executive / MGS OS          v0.2          manter; base Fase 3
 docs/CRONS.md                             operacional   Tech / Infra                ativo         revisar sem alterar runtime
 docs/PENDENCIAS.md                        operacional   Executive / Ops             ativo         manter; revisar depois
 docs/PENDENCIAS-HISTORICO.md              histórico     Executive / Ops             histórico     manter
@@ -84,24 +166,12 @@ docs/rec-p1-*                             histórico     Content                
 docs/rule-classification.md               doc           Tech / Ops                  ativo         revisar depois
 docs/site-counting.md                     doc           Sites / BI                  ativo         revisar depois
 docs/skills-naming-convention.md          doc           Skills / Ops                ativo         revisar depois
+docs/CHECKPOINT-FASE-3.md                 histórico     Content / antigo            legado        revisar/arquivar depois
 ```
 
-```text
-Path                                      Classe        Área provável              Status        Ação recomendada
----------------------------------------- ------------- -------------------------- ------------- ---------------------------
-scripts/                                  automação     Tech / Infra                ativo         não mexer em massa
-scripts/monitor-*.sh                      automação     Tech / Monitoring           ativo         revisar só por incidente
-scripts/mgs-rec-runner.py                 automação     Content                    ativo         não tocar agora
-scripts/mgs-p1-runner.py                  automação     Content                    ativo         não tocar agora
-scripts/mgs-rec-p1-orchestrator.py        automação     Content                    ativo         não tocar agora
-scripts/cron-control-plane.py             automação     Tech / Infra                ativo         não tocar agora
-scripts/mgs-ops-control-plane.py          automação     Executive / Ops             ativo         não tocar agora
-scripts/mgs-ops-briefing.py               automação     Executive / Ops             ativo         não tocar agora
-scripts/pendencia-*.sh                    automação     Ops                         ativo         manter
-scripts/deprecated/                       legado        Tech / Infra                legado        revisar depois
-scripts/mu-plugins/                       automação     WordPress                   ativo         não tocar sem plano
-scripts/yoast-scorer/                     automação     Content / SEO               ativo         não tocar agora
-```
+---
+
+## Inventário principal — skills, patches, api, tools
 
 ```text
 Path                                      Classe        Área provável              Status        Ação recomendada
@@ -111,15 +181,31 @@ skills/content-generate-rec/              skill         Content / Atena         
 skills/content-publish-wordpress/         skill         Content / WordPress         ativo         não tocar agora
 patches/                                  patch local   Tech / Hermes              ativo         não tocar sem plano
 patches/hermes/                           patch local   Tech / Hermes              ativo         não tocar sem plano
-backups/                                  backup        Tech / Infra                histórico     manter; arquivar depois
-experiments/                              experimento   variável                   baixo risco    revisar depois
-tools/                                    ferramenta    Tech / Creative             auxiliar      revisar quando necessário
-tools/canva-local-automation/             ferramenta    Creative / Hera             auxiliar      revisar antes de usar
 api/                                      runtime/API   Tech / Content              ativo         não tocar sem plano
 api/generate-rec-api.py                   runtime/API   Content / WordPress         ativo         não tocar agora
 api/usage.db                              runtime       API                         ativo         não tocar
-logs/                                     logs          Audit / Runtime             ativo         não tocar; consultar só
-logs/events-audit.jsonl                   audit log     Security / Ops              ativo         não tocar; fonte audit
+tools/                                    ferramenta    Tech / Creative             auxiliar      revisar quando necessário
+tools/canva-local-automation/             ferramenta    Creative / Hera             auxiliar      revisar antes de usar
+```
+
+---
+
+## Inventário principal — backups, experiments, logs e raiz
+
+```text
+Path                                      Classe        Área provável              Status        Ação recomendada
+---------------------------------------- ------------- -------------------------- ------------- ---------------------------
+backups/                                  backup        Tech / Infra                histórico     manter; arquivar depois
+backups/safety/                           backup        Tech / Infra                ativo         manter último snapshot válido
+experiments/                              experimento   variável                   baixo risco    manter; revisar depois
+experiments/honcho-spike/                 experimento   AI / memória               legado/aux     revisar depois
+logs/                                     logs          Audit / Runtime             ativo         não editar; consultar só
+logs/events-audit.jsonl                   audit log     Security / Ops              ativo         append-only/consulta
+logs/*.log                                runtime       Tech / Infra                ativo         consultar com filtros
+.env                                      sensível      Security / Access           ativo         não versionar; nunca expor
+AGENT.md / CLAUDE.md                      prompt/doc    Agents / Legacy             ativo         revisar só com plano
+*.bak / *~ raiz                           backup        Tech / Infra                histórico     housekeeping controla
+inventario-webapps.json                   inventário    WordPress / Infra           histórico     revisar depois
 ```
 
 ---
@@ -129,11 +215,14 @@ logs/events-audit.jsonl                   audit log     Security / Ops          
 ```text
 Path                                      Motivo
 ---------------------------------------- -------------------------------------------------------
+.env / auth.json / tokens / credentials   Segredos; nunca expor em chat nem versionar.
 data/authorized-users.json                Fonte operacional de autorização; exige Rodolfo.
 data/sites.json                           Fonte técnica dos sites; alteração pode quebrar pipeline.
-.env / tokens / credentials               Segredos; nunca expor em chat.
+profiles/*-config.yaml                    Config Hermes/gateway; risco de agente offline.
+profiles/*-soul.md                        Comportamento de agente; alterar um agente por vez.
 scripts/monitor-*                         Monitores/crons; risco de spam/loop se mal editado.
 scripts/mgs-*-runner.py                   Pipeline de conteúdo; risco operacional.
+scripts/sync-souls.sh                     Sincroniza SOUL/config/skills versionadas; risco de sujeira.
 patches/hermes/                           Patch runtime Hermes/MGS; risco sistêmico.
 api/                                      Pode estar ligado a runtime/API.
 logs/events-audit.jsonl                   Audit trail; append-only/consulta.
@@ -142,7 +231,26 @@ logs/*.log                                Runtime; consultar com filtros, não e
 
 ---
 
-## Próximos blocos recomendados
+## Ações recomendadas por classe
+
+```text
+Classe                  Regra
+----------------------- -------------------------------------------------------
+canônico/context        revisar por bloco pequeno e cascata semântica
+runtime/data            não tocar sem plano específico, backup e validação
+config/profile          alterar um agente por vez, validar gateway/logs
+script/automação        dry-run/bash -n/teste real controlado antes de commitar
+skill                   editar quando usada ou quando bug operacional aparecer
+patch local             só mexer com plano técnico e rollback
+backup                  não apagar agora; arquivar depois preservando último
+experimento             baixo risco, mas classificar antes de remover
+logs                    consulta/read-only; nunca limpar sem política aprovada
+sensível                não versionar, não expor, não colar em chat
+```
+
+---
+
+## Próximos blocos recomendados para Fase 4
 
 ```text
 Ordem   Bloco                         Motivo
@@ -154,17 +262,24 @@ Ordem   Bloco                         Motivo
 5       context/processes.md           Consolidar rotas operacionais revisadas.
 6       context/sites.md               Revisar sites/verticais depois do modelo de áreas.
 7       docs/CRONS.md                  Revisar inventário de crons sem alterar crontab.
+8       profiles/hera-*                Revisar depois de teste controlado da Hera.
+9       profiles/ares-*                Revisar quando Ares avançar operacionalmente.
+10      backups/                       Arquivar/limpar só após política aprovada.
 ```
 
 ---
 
-## Regra para a Fase 4
+## Gate para Fase 4
 
-A Fase 4 só deve começar depois de Rodolfo aprovar este inventário. A migração deve ser por bloco pequeno, nesta ordem sugerida:
+A Fase 4 só deve começar depois de Rodolfo aprovar este inventário como base de trabalho.
 
 ```text
-1. Apenas arquivos context/*.md conceituais.
+Regra de migração
+-----------------
+1. Começar por arquivos context/*.md conceituais.
 2. Depois docs operacionais.
 3. Depois skills, se necessário.
-4. Scripts/runtime/data só com plano específico e validação.
+4. Profiles de agentes só um por vez.
+5. Scripts/runtime/data só com plano específico, backup, dry-run e validação.
+6. Remoção/limpeza só depois de classificar e preservar rollback.
 ```
