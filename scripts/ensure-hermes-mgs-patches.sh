@@ -72,6 +72,10 @@ grep -q "DISCORD_THREAD_AUTO_ADD_USERS" "$REPO/plugins/platforms/discord/adapter
   || fail "missing Discord explicit thread auto-add support"
 grep -q "Auto-thread member sync" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord auto-thread member sync log marker"
+grep -q "semantic_fallback_title" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord semantic title fallback"
+grep -q "Formatação de Tabelas" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord table-formatting title classifier"
 grep -q "service-manager restarts while a chat task is active" "$REPO/gateway/run.py" \
   || fail "missing restart/service-manager auto-resume marker"
 
