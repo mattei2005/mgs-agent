@@ -24,7 +24,7 @@ Use when Rodolfo asks to start a new MGS agent (e.g. Ares) after creating the Di
 5. Create a concise `<profile>/SOUL.md` with role, mission, authority, safety, communication style, and relation to Zeus/Atena.
 6. Update `/root/mgs-agent/data/authorized-users.json` with a new `agents.<agent>` entry. Use the actual Discord channel name from API, not a guessed name.
 7. Append an audit event to `/root/mgs-agent/logs/events-audit.jsonl`.
-8. Update `/root/mgs-agent/scripts/sync-souls.sh` to include the new profile in both SOUL.md and config.yaml sync loops; run it once and validate the generated `profiles/<agent>-soul.md` and `profiles/<agent>-config.yaml`.
+8. Update `/root/mgs-agent/scripts/sync-souls.sh` to include the new profile in both SOUL.md and config.yaml sync loops; run it once and validate the generated `profiles/<agent>-soul.md` and `profiles/<agent>-config.yaml`. Do **not** add broad skill-category sync for the new agent by default: cloned profiles may contain many bundled/hub skills, and syncing them can accidentally version hundreds of inherited files. Add selective skill sync only after the agent has custom MGS-specific skills worth versioning.
 9. Validate:
    ```bash
    hermes profile show <agent>
@@ -43,3 +43,5 @@ Use when Rodolfo asks to start a new MGS agent (e.g. Ares) after creating the Di
 - The Discord channel ID is not enough for registry quality. Query the Discord API read-only and record the actual channel name.
 - Do not start the new profile's gateway with Zeus/Atena credentials as a smoke test. Validation can stop at profile/config/auth checks until the real bot exists.
 - `sync-souls.sh` only versioned Zeus/Atena originally. New persistent agents must be added or their SOUL/config will not be versioned.
+- Avoid broad inherited skill sync on new agents. Cloning from Zeus/root can bring bundled creative/productivity/etc. skills; syncing a whole category like `hera/skills/creative` may commit hundreds of non-MGS files. Keep initial versioning to SOUL/config; add custom skill sync later and narrowly.
+- Auto-commit can race with bootstrap mistakes. After running `sync-souls.sh`, check `git status --short` before final report; if accidental files were committed, remove them cleanly and verify origin/main is synchronized before saying the repo is clean.

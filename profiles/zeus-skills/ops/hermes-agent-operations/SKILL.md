@@ -315,7 +315,9 @@ Próximo passo: comando exato ou validação pendente.
 
 ## 5. New MGS agent bootstrap
 
-When Rodolfo asks to start a new MGS agent/profile (Ares or future agents), use `references/mgs-new-agent-bootstrap.md`. Core rule: clone profile/config as needed, but immediately blank any inherited Discord bot token; do not create/enable the systemd gateway until the agent has its own dedicated bot token and Rodolfo confirms the Critical Subset system-file write.
+When Rodolfo asks to start a new MGS agent/profile (Ares, Hera, or future agents), use `references/mgs-new-agent-bootstrap.md`. Core rule: clone profile/config as needed, but immediately blank any inherited Discord bot token; do not create/enable the systemd gateway until the agent has its own dedicated bot token and Rodolfo confirms the Critical Subset system-file write.
+
+Session-specific Hera bootstrap notes live in `references/mgs-new-agent-bootstrap-hera-2026-06-06.md`, including the confirmed Hera channel ID, bot IDs, safe Phase 1 validation shape, and the pitfall that broad inherited skill sync can accidentally version hundreds of bundled creative skills.
 
 ## 6. Agent memory / conclusion layers
 
