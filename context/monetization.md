@@ -69,12 +69,16 @@ A dashboard da Smart Bidding é a principal para a operação MGS.
 Usos:
 
 - visualizar receita/performance por site;
+- acompanhar ROI e tecnologia dos sites concentrados/migrados;
 - acompanhar blocos e configurações operacionais;
+- consultar APIs/permissões quando aplicável;
 - centralizar visão dos sites quando possível;
 - apoiar análise de ROI com Growth e Finance;
 - comunicar ajustes com o time de AdOps da Smart Bidding.
 
 Mesmo quando há mais de uma rede parceira, a preferência operacional é usar Smart Bidding como dashboard central quando o site/tecnologia permitir.
+
+Acessos operacionais: Rodolfo, Geizian e gestores conforme necessidade/escopo.
 
 ---
 
@@ -109,6 +113,8 @@ Mudança crítica                Escala Rodolfo.
 ```
 
 Ajustes de blocos, precificação, regras, wrappers ou tecnologia de anúncio não devem ser tratados como alteração simples de conteúdo. Eles afetam receita, performance, UX e risco financeiro.
+
+Canal operacional: a Smart Bidding mantém comunicação de AdOps no Discord. Rodolfo e gestores usam esses canais para acompanhar aprovação de sites, regras, precificação, performance e se o time de AdOps está executando os ajustes combinados.
 
 ---
 
