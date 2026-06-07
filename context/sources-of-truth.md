@@ -97,6 +97,9 @@ Procedimento reutilizável       skills/*/SKILL.md
 Automação executável            scripts/
 Histórico/plano/pendência       docs/
 Config técnica de sites         data/sites.json
+Criativos aprovados             Google Drive de criativos aprovados
+Atribuição por gestor            UTM_medium nos links/campanhas
+Comissões/fechamento             Planilha financeira do Rodolfo
 Credenciais                     1Password, nunca arquivos/chat
 ```
 
