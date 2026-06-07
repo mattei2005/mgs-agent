@@ -90,12 +90,14 @@ Pessoa/grupo       Área principal             Responsabilidade
 ------------------ -------------------------- ---------------------------------
 Rodolfo            Executive / Finance / Tech Gestão geral, financeiro,
                                               arquitetura, WordPress, pixels,
-                                              redes, decisões e prioridades.
-Geizian            Executive / Growth         Gestão dos gestores, rotina de
-                                              campanhas, custos e performance.
+                                              redes, agentes, decisões e prioridades.
+Geizian            Executive / Growth         Sócio; gestão dos gestores, rotina
+                                              de campanhas, custos e performance.
+Ially              Office / Follow-up         Gerente do escritório; cobrança e
+                                              acompanhamento de tarefas dos gestores.
 Raquel             Content Operations         Produção de conteúdo; supervisão
                                               operacional da Atena.
-5 gestores         Growth / Content           Operam sites/campanhas, acompanham
+Gestores           Growth / Content           Operam sites/campanhas, acompanham
                                               custos, ROI e contato com AdOps.
 Kelly              Creative Operations        Pessoa responsável por criativos com AI/Canva
                                               para gestores usarem em campanhas.
