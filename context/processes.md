@@ -153,22 +153,28 @@ Regras:
 
 ## Fluxo ChatPion / DigitalTrChat — Messenger
 
-ChatPion/DigitalTrChat é estratégia Facebook/Messenger usada principalmente com campanhas de objetivo MSG.
+ChatPion/DigitalTrChat é estratégia Facebook/Messenger usada principalmente com campanhas de objetivo MSG. No contexto MGS, o ChatPion operacional roda pelo dashboard `digitaltrchat.com`, configurado pelo dev da Smart Bidding.
 
 Limite crítico: Ares não configura ChatPion/DigitalTrChat.
 
 ```text
 Etapa   Ação
 ------- -----------------------------------------------------------------------
-1       Rodolfo/Geizian criam usuários por vertical quando necessário.
-2       Gestor acessa usuário da vertical/campanha.
-3       Gestor configura fluxo operacional no ChatPion/DigitalTrChat.
-4       Campanha Facebook Ads usa objetivo MSG.
-5       Usuário clica no anúncio e abre Messenger.
-6       Bot dispara fluxo/mensagens/CTAs.
-7       Usuário clica e vai para site MGS monetizado.
-8       Receita/performance é acompanhada por site/campanha/gestor.
+1       Admin MGS entra no DigitalTrChat.
+2       Rodolfo/Geizian criam usuários por site/vertical quando necessário.
+3       Gestor loga com o usuário da vertical/campanha.
+4       Gestor conecta um segurador/perfil Facebook.
+5       O segurador tem páginas Facebook conectadas.
+6       Gestor configura flows em Bot Manager.
+7       Campanha Facebook Ads usa objetivo Messenger/MSG.
+8       Usuário clica no anúncio e abre Messenger com mensagem JSON.
+9       Usuário entra no drip de mensagens nas primeiras 24h.
+10      Depois pode seguir para broadcast via Smart Bidding.
+11      Usuário clica e vai para site MGS monetizado.
+12      Receita/performance é acompanhada por site/campanha/gestor.
 ```
+
+Observação: estratégia de bot/Messenger funciona para Facebook Ads, não para Google Ads.
 
 Escala para Rodolfo/Geizian quando envolver usuário novo, estrutura nova, risco de conta, mudança crítica ou problema de entrega.
 
@@ -183,11 +189,15 @@ Responsabilidade: Rodolfo monta/configura a estrutura do quiz/SMS. Ares não con
 ```text
 Etapa   Ação
 ------- -----------------------------------------------------------------------
-1       Rodolfo define estrutura do quiz e destino.
-2       Quiz coleta ou direciona conforme estratégia.
-3       SMS Funnel envia mensagens quando aplicável.
-4       CTA leva usuário para site/fluxo aprovado.
-5       Performance entra em análise de Growth/Finance.
+1       Rodolfo define estrutura do quiz, destino e coleta.
+2       Campanha roda no Facebook Ads ou Google Ads.
+3       Usuário clica no anúncio e abre o quiz.
+4       Usuário responde perguntas.
+5       Usuário preenche nome, telefone e, se usado, e-mail.
+6       SMS Funnel envia SMS após alguns minutos quando aplicável.
+7       SMS/CTA leva usuário para artigo/site/fluxo aprovado.
+8       Receita vem da monetização do site.
+9       Performance entra em análise de Growth/Finance.
 ```
 
 ---
