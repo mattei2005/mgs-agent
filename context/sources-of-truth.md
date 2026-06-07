@@ -80,7 +80,7 @@ Conflito                                      Vence
 Fala recente do Rodolfo vs arquivo antigo      Fala recente do Rodolfo.
 Dashboard externo validado vs arquivo antigo   Dashboard externo validado.
 Permissão em memória vs authorized-users.json   authorized-users.json.
-Smart Bidding vs ActiveView                    Smart Bidding, exceto openzed/cliquet/subdomínios.
+Smart Bidding vs ActiveView                    Smart Bidding como dashboard principal; ActiveView vence só nos sites ainda na tecnologia AV (`openzed`, `cliquet` e subdomínios).
 Credencial em qualquer fonte vs 1Password       1Password.
 Prompt de agente vs company-os/context          company-os/context.
 Criativo em ferramenta vs Drive aprovado         Google Drive de criativos aprovados.

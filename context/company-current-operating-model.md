@@ -83,8 +83,9 @@ A MGS trabalha com redes/parceiros de AdManager/AdX, principalmente Smart Biddin
 ```text
 Rede/empresa       Papel atual
 ----------------- -------------------------------------------------------------
-Smart Bidding      Central principal atual. Dashboard com sites, campanhas,
-                   ROI, features operacionais, blocos de anúncio, APIs e
+Smart Bidding      Parceiro Google/AdX principal. Dashboard com sites,
+                   campanhas, ROI, tecnologia, relatórios e gerenciamento
+                   preferencial dos sites MGS.
                    permissões. Também tem time de AdOps no Discord.
 ActiveView         Rede/tecnologia ainda relevante em alguns sites. A maior
                    parte foi migrada/concentrada na Smart Bidding.
