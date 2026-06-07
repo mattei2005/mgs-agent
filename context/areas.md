@@ -42,7 +42,7 @@ Escala para Zeus quando houver erro crítico, risco técnico, conflito de priori
 
 ## Growth / Media Buying
 
-Facebook Ads, Google Ads, TikTok, SMS, ChatPion, quiz, tráfego direto, análise de campanhas, custos, ROI, gestores e operação do Ares.
+Facebook Ads, Google Ads, TikTok, SMS, ChatPion, quiz, tráfego direto, análise de campanhas, custos, ROI, gestores e operação do Ares dentro do escopo aprovado de campanhas.
 
 Rodolfo também atua diretamente na configuração e direção estratégica da área, incluindo a preparação do Ares. Geizian acompanha gestores no dia a dia. Rodolfo acompanha visão geral, budget, ROI e impacto financeiro.
 

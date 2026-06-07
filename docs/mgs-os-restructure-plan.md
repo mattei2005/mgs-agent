@@ -67,17 +67,26 @@ A fala do Rodolfo virou a fonte primária do modelo atual da MGS.
 ## Fase 1 — Arquitetura MGS OS
 
 ```text
-Status: concluída/parcial
+Status: concluída como proposta operacional atual
 Saída:  context/company-os.md
 ```
 
 O `company-os.md` consolida a estrutura real da empresa em áreas, agentes, fontes, rotas e permissões iniciais.
 
-Pendente nesta fase: Rodolfo aprovar ou ajustar o documento como base canônica.
+Status operacional: base suficiente para avançar para inventário, mantendo ajustes futuros por correção/cascata quando Rodolfo apontar mudanças.
 
 ---
 
 ## Fase 2 — Documentos derivados canônicos
+
+```text
+Status: concluída como proposta operacional atual
+Saídas: context/areas.md
+        context/agent-map.md
+        context/routes.md
+        context/sources-of-truth.md
+        context/permissions-matrix.md
+```
 
 Criar/revisar os arquivos separados que os agentes deverão consultar depois da aprovação:
 
