@@ -1,4 +1,4 @@
-# MGS New Agent Discord Bot Access + Gateway Activation
+# MGS New Agent Discord Bot Token + Gateway Activation
 
 Session-derived reference for bringing a newly bootstrapped MGS Hermes profile online as a Discord bot after the profile/config/SOUL already exist.
 

@@ -215,6 +215,24 @@ Cross-file semantic audit rule: after any material correction from Rodolfo, run 
 
 Sequencing pitfall: after `company-current-operating-model.md` and `company-os.md` are drafted, **do not jump straight to inventory**. Review the derived files one by one with Rodolfo first: `areas.md`, `agent-map.md`, `routes.md`, `sources-of-truth.md`, and `permissions-matrix.md`. Inventory starts only after those derived docs are accepted as the current canonical proposal.
 
+Already-reviewed-docs pitfall: before telling Rodolfo to review the five derived docs again, verify whether they were already reviewed/updated. Use session history and git/file status (`git log -- <file>`, status lines like `proposta canônica v0.x`) to distinguish “not reviewed yet” from “needs quick consistency audit.” If the docs were already worked through, do **not** restart manual review from `areas.md`; run a cross-file consistency audit, patch only real inconsistencies, mark Phase 2 as the current operational proposal, and proceed to Phase 3 inventory.
+
+Phase 2 audit pattern after docs appear reviewed:
+
+```text
+1. Check stale terms: Aris, Ares futuro, Kelly agent, agente Kelly, Creative Agent.
+2. Check required current concepts: Hera, Ares, Atena, Zeus, Smart Bidding,
+   ActiveView, Geizian, Ially, gestores g001–g006.
+3. Semantically inspect Ares scope flags around ChatPion/DigitalTrChat,
+   quiz, SMS Funnel, AdOps/site setup and pixel setup.
+4. Semantically inspect Hera scope flags around campaign execution, budget,
+   pixel and Business Manager.
+5. Patch only ambiguous or conflicting language.
+6. Update `docs/mgs-os-restructure-plan.md` to show Fase 1/Fase 2 as
+   “concluída como proposta operacional atual” when the audit passes.
+7. Register a concise audit event and validate with `git diff --check`.
+```
+
 Pitfall: old restructuring plans may say “next step: update company-os.md” even after that has already been done, or may duplicate “create derived docs” both before and after inventory. When reviewing the plan, update statuses and remove duplicated phases before proceeding.
 
 Never combine broad reorganization with gateway restarts, cron rewrites, or production changes unless Rodolfo explicitly authorizes that combined scope.

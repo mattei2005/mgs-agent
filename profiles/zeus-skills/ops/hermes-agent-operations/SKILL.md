@@ -317,7 +317,7 @@ Próximo passo: comando exato ou validação pendente.
 
 When Rodolfo asks to start a new MGS agent/profile (Ares, Hera or future agents), use `references/mgs-new-agent-bootstrap.md`. Core rule: clone profile/config as needed, but immediately blank any inherited Discord bot token; do not create/enable the systemd gateway until the agent has its own dedicated bot token and Rodolfo confirms the Critical Subset system-file write.
 
-After the profile/SOUL/config exist and Rodolfo has created the Discord application/bot, use `references/mgs-new-agent-discord-bot-access-gateway.md` for the live activation path: Discord OAuth permissions, 1Password token retrieval via MGS service-account env, token/API validation without leaking secrets, channel `403 Missing Access` diagnosis, Message Content Intent pitfall, systemd service creation, and end-to-end Discord validation.
+After the profile/SOUL/config exist and Rodolfo has created the Discord application/bot, use `references/mgs-new-agent-discord-bot-token-gateway.md` for the live activation path: Discord OAuth permissions, 1Password token retrieval via MGS service-account env, token/API validation without leaking secrets, channel `403 Missing Access` diagnosis, Message Content Intent pitfall, systemd service creation, and end-to-end Discord validation.
 
 Additional validated Hera bootstrap notes live in `references/mgs-hera-discord-bootstrap-2026-06-06.md`: 1Password token retrieval with project service-account env, channel `403 Missing Access` validation/fix, Discord Developer Portal `Message Content Intent` requirement, and stopping/disabling the service to avoid restart loops until privileged intents are enabled.
 
@@ -329,7 +329,7 @@ Critical pitfalls for new Discord agent gateways:
 - Hermes Discord gateway needs Discord Developer Portal → Bot → Privileged Gateway Intents → **Message Content Intent = ON**. If absent, logs show `discord.errors.PrivilegedIntentsRequired`; stop/disable/reset-failed the service until Rodolfo enables it, then start again.
 - Only report end-to-end success after a real Discord mention test in the new agent channel produces an agent response, not just because systemd is `active`.
 
-After the Discord application/bot exists and the token is stored securely, use `references/mgs-new-agent-discord-bot-access-gateway.md` for the phase-2 workflow: record app/bot IDs and permissions integer, fetch the token via 1Password service-account env without printing it, validate `/users/@me`, validate guild/channel access, handle `403 Missing Access`, then request explicit Critical Subset confirmation before creating systemd.
+After the Discord application/bot exists and the token is stored securely, use `references/mgs-new-agent-discord-bot-token-gateway.md` for the phase-2 workflow: record app/bot IDs and permissions integer, fetch the token via 1Password service-account env without printing it, validate `/users/@me`, validate guild/channel access, handle `403 Missing Access`, then request explicit Critical Subset confirmation before creating systemd.
 
 Session-specific Hera bootstrap notes live in `references/mgs-new-agent-bootstrap-hera-2026-06-06.md`, including the confirmed Hera channel ID, bot IDs, safe Phase 1 validation shape, and the pitfall that broad inherited skill sync can accidentally version hundreds of bundled creative skills.
 

@@ -36,7 +36,7 @@ Use when Rodolfo asks to start a new MGS agent (e.g. Ares) after creating the Di
    PY
    ```
 10. Do **not** create/enable the systemd gateway until there is a dedicated bot token for that agent. Creating `/etc/systemd/system/<agent>-gateway.service` is a system-file write and requires Critical Subset confirmation.
-11. After Rodolfo creates the Discord application/bot and saves the token in 1Password or the profile `.env`, continue with `references/mgs-new-agent-discord-bot-access-gateway.md` for token validation, channel-access validation, Message Content Intent, systemd activation, and live Discord test.
+11. After Rodolfo creates the Discord application/bot and saves the token in 1Password or the profile `.env`, continue with `references/mgs-new-agent-discord-bot-token-gateway.md` for token validation, channel-access validation, Message Content Intent, systemd activation, and live Discord test.
 
 ## Pitfalls
 
