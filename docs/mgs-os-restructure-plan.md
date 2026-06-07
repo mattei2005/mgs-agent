@@ -106,13 +106,16 @@ Regra: esta fase é aditiva. Não move, remove ou substitui arquivo produtivo.
 
 ## Fase 3 — Inventário classificado
 
-Gerar inventário dos arquivos estruturais atuais:
-
 ```text
-Path | Classe | Área | Dono | Status | Ação recomendada
+Status: concluída
+Saída:  docs/mgs-structure-inventory.md
 ```
 
-Classes permitidas:
+O inventário classificado foi criado como mapa de risco da estrutura `/root/mgs-agent`.
+
+Regra: o inventário é read-only. Ele classifica e recomenda, mas não move, remove nem altera runtime.
+
+Classes usadas:
 
 ```text
 canônico | runtime | automação | skill | histórico | backup | legado | experimento | patch | sensível/não-versionar
@@ -124,7 +127,7 @@ Ações permitidas:
 manter | não tocar | mover | renomear | consolidar | arquivar | remover depois | revisar com Rodolfo
 ```
 
-Regra: arquivos sensíveis ou runtime ativo entram como `não tocar` até existir plano específico aprovado.
+Arquivos sensíveis ou runtime ativo seguem como `não tocar` até existir plano específico aprovado.
 
 ---
 
