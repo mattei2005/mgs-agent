@@ -1,5 +1,5 @@
 diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
-index fa0f81c9b..1a34ece28 100644
+index fa0f81c9b..884979200 100644
 --- a/plugins/platforms/discord/adapter.py
 +++ b/plugins/platforms/discord/adapter.py
 @@ -20,7 +20,7 @@ import tempfile
@@ -68,7 +68,7 @@ index fa0f81c9b..1a34ece28 100644
  
          except discord.Forbidden:
              logger.debug("[%s] Missing permissions to fetch channel history", self.name)
-@@ -4151,23 +4183,268 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4151,23 +4183,270 @@ class DiscordAdapter(BasePlatformAdapter):
      # Auto-thread helpers
      # ------------------------------------------------------------------
  
@@ -312,6 +312,8 @@ index fa0f81c9b..1a34ece28 100644
 +            return "Banimento Conta Claude"
 +        if any(w in lowered for w in ("horario", "horário", "horarios", "horários", "timezone", "fuso")) and any(w in lowered for w in ("espanha", "spain")):
 +            return "Conversão Horários Espanha"
++        if any(w in lowered for w in ("erro", "falha", "bug", "problema")) and any(w in lowered for w in ("sistema operacional", "operating system", "linux", "ubuntu", "vps", "servidor")):
++            return "Erro Sistema Operacional"
 +
 +        site_match = re.search(r"\b(eggbev|nice-homes|jewelsblast|financesmint|financeway|financesall)\b", lowered)
 +        vertical_match = re.search(r"\b([a-z]{2}-[a-z0-9]+-[a-z]{2})\b", lowered)
@@ -348,7 +350,7 @@ index fa0f81c9b..1a34ece28 100644
  
          try:
              thread = await message.create_thread(name=thread_name, auto_archive_duration=1440)
-@@ -4802,12 +5079,15 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4802,12 +5081,15 @@ class DiscordAdapter(BasePlatformAdapter):
          if not is_thread and not isinstance(message.channel, discord.DMChannel):
              no_thread_channels_raw = os.getenv("DISCORD_NO_THREAD_CHANNELS", "")
              no_thread_channels = {ch.strip() for ch in no_thread_channels_raw.split(",") if ch.strip()}
@@ -365,7 +367,7 @@ index fa0f81c9b..1a34ece28 100644
                      parent_channel_id = str(message.channel.id)
                      is_thread = True
                      thread_id = str(thread.id)
-@@ -5087,9 +5367,19 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -5087,9 +5369,19 @@ class DiscordAdapter(BasePlatformAdapter):
          if thread_id:
              self._threads.mark(thread_id)
  
@@ -388,7 +390,7 @@ index fa0f81c9b..1a34ece28 100644
              self._enqueue_text_event(event)
          else:
              await self.handle_message(event)
-@@ -6409,6 +6699,11 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
+@@ -6409,6 +6701,11 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
          os.environ["DISCORD_FREE_RESPONSE_CHANNELS"] = str(frc)
      if "auto_thread" in discord_cfg and not os.getenv("DISCORD_AUTO_THREAD"):
          os.environ["DISCORD_AUTO_THREAD"] = str(discord_cfg["auto_thread"]).lower()

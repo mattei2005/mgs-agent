@@ -28,6 +28,7 @@ def test_auto_thread_title_uses_semantic_examples_not_first_phrase():
         "preciso criar uma invoice": "Geração de Invoices",
         "me ajuda com o código do lazy blocks": "Código Lazy Blocks",
         "claude baniu minha conta": "Banimento Conta Claude",
+        "existe algum erro no sistema operacional ?": "Erro Sistema Operacional",
     }
 
     for message, expected in examples.items():

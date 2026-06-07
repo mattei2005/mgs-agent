@@ -50,6 +50,13 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    discord-post-response-thread-title-rename.patch)
+      if grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
+        && grep -q "Discord thread renamed from auto-generated title" "$REPO/gateway/run.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
   esac
 
   fail "patch does not apply cleanly and is not already applied: $name"
