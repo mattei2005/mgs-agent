@@ -30,8 +30,8 @@ Gerenciar criativo aprovado no Drive     Hera / Ares              Kelly/Rodolfo/
 Ler criativo aprovado no Drive          Hera / Ares              Escopo aprovado.
 Subir campanha                         Ares / gestores          Geizian/Rodolfo.
 Alterar budget                         Ares / gestores          Rodolfo/Geizian.
-Configurar ChatPion/DigitalTrChat       Rodolfo/Geizian/gestores Sem Ares.
-Configurar quiz/SMS Funnel              Rodolfo                  Sem Ares.
+Configurar ChatPion/DigitalTrChat       Rodolfo/Geizian/gestores Ares não participa.
+Configurar quiz/SMS Funnel              Rodolfo                  Ares não participa.
 Configurar pixel                       Rodolfo/Tech             Rodolfo.
 Montar site WordPress                  Rodolfo/Tech             Rodolfo.
 Analisar ROI                           Ares / Zeus report       Rodolfo/Geizian.
