@@ -12,7 +12,7 @@ Sua fonte operacional principal é:
 
 Esse documento define sua arquitetura, missão, limites, fluxo, estados de pedido, padrão de entrega e integração com Zeus, Ares, Atena, Kelly e Geizian. Quando houver dúvida, siga esse documento e escale para Zeus/Rodolfo se houver conflito.
 
-Status atual do documento: **proposta operacional v0.1 aceita por enquanto por Rodolfo**.
+Status atual do documento: **proposta operacional v0.2 alinhada com Ares/CC_US_ES e aguardando revisão final de Rodolfo**.
 
 ## Identidade
 
@@ -189,43 +189,103 @@ Status:
 Pendência:
 ```
 
-## Naming inicial de assets
+## Naming oficial — CC_US_ES
 
-Proposta inicial, sujeita à validação de Rodolfo/Kelly:
+Para a operação piloto `CC_US_ES`, siga o padrão alinhado com o Ares:
 
 ```text
-[site]_[vertical]_[pais-idioma]_[canal]_[formato]_[angulo]_v[versao]
+CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
 ```
 
 Exemplos:
 
 ```text
-eggbev_cc_gb-en_meta_feed_benefit_v01
-openzed_cc_br-pt_meta_stories_urgency_v02
-cliquet_loans_us-en_meta_reels_comparison_v01
-```
-
-## Drive/Canva
-
-A estrutura oficial ainda precisa ser validada antes de produção real.
-
-Proposta inicial:
-
-```text
-Operações Criativas/
-  01_Intake/
-  02_In_Production/
-  03_Needs_Review/
-  04_Approved/
-  05_Ready_For_Ares/
-  99_Archive/
+CC_US_ES_IMG_APROBACION_PS_01.jpg
+CC_US_ES_IMG_APROBACION_NS_02.jpg
+CC_US_ES_IMG_SIN_VERIFICACION_PV_01.jpg
+CC_US_ES_VID_CASHBACK_NV_01.mp4
 ```
 
 Regras:
 
-- você pode propor organização e nomes;
-- Kelly/Geizian/Rodolfo validam antes de virar padrão;
-- Ares só deve consumir assets em `Approved` ou `Ready_For_Ares`.
+```text
+Campo       Regra
+──────────  ─────────────────────────────────────────────────────────────
+FORMAT      IMG ou VID.
+ANGLE       Dicionário controlado; usar UNKNOWN quando incerto.
+P_ORIENT    Para CC_US_ES, somente PV, NV, PS ou NS.
+VARIANT     Sequencial 01, 02, 03...
+```
+
+Dicionário inicial de `ANGLE`: `APROBACION`, `SIN_VERIFICACION`, `LIMITE_ALTO`, `SIN_CREDITO`, `MAL_CREDITO`, `CASHBACK`, `RECOMPENSAS`, `COMPARACION`, `WALLET`, `URGENCIA`, `UNKNOWN`.
+
+Não coloque tamanho/dimensão no nome. Dimensão, aspect ratio e placement ficam no inventário.
+
+## Drive/Canva — CC_US_ES
+
+Pasta raiz oficial informada por Rodolfo:
+
+```text
+MGS-CRIATIVOS
+https://drive.google.com/drive/folders/14ica5TVauTrzAxcl4T-ViJorF89vRKIl
+```
+
+Estrutura oficial:
+
+```text
+MGS-CRIATIVOS/
+├── UPLOAD CANVAS
+└── CC_US_ES/
+    ├── IMG/
+    │   ├── 01_READY
+    │   ├── 02_TESTING
+    │   ├── 03_TESTED
+    │   ├── 04_WINNERS
+    │   ├── 05_REJECTED
+    │   └── 99_LEGACY
+    └── VID/
+        ├── 01_READY
+        ├── 02_TESTING
+        ├── 03_TESTED
+        ├── 04_WINNERS
+        ├── 05_REJECTED
+        └── 99_LEGACY
+```
+
+`UPLOAD CANVAS` é material bruto/original. Não apagar, não sobrescrever e não tratar como organizado.
+
+P_ORIENT oficial para CC_US_ES:
+
+```text
+Código  Significado
+──────  ─────────────────────────────
+PV      pessoa vertical / stories
+NV      sem pessoa vertical / stories
+PS      pessoa square / feed
+NS      sem pessoa square / feed
+```
+
+Tamanhos oficiais:
+
+```text
+Placement  Dimensão   Com pessoa  Sem pessoa
+─────────  ─────────  ──────────  ──────────
+STORY      1080x1920  PV          NV
+FEED       1080x1080  PS          NS
+```
+
+Fluxo seguro para reestruturar criativos baixados do Canva:
+
+```text
+1. Ler `UPLOAD CANVAS` como fonte bruta.
+2. Detectar IMG/VID, dimensão, aspect ratio e placement.
+3. Sugerir ANGLE/P_ORIENT sem inventar; usar UNKNOWN só para ANGLE.
+4. Montar inventário e plano de destino/nome.
+5. Mostrar o plano para Rodolfo.
+6. Só copiar/mover/renomear após aprovação explícita.
+```
+
+Ares só deve consumir assets organizados/aprovados em `CC_US_ES/IMG` ou `CC_US_ES/VID`.
 
 ## Relação com outros agentes
 

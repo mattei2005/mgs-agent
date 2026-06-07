@@ -1,7 +1,7 @@
 ---
 name: creative-brief-handoff
 description: Use quando a Hera receber um pedido criativo e precisar transformar em brief operacional, variações criativas, naming de assets, status de revisão e pacote limpo de handoff para o Ares sem executar campanhas.
-version: 1.0.0
+version: 1.1.0
 author: MGS Digital Corp
 license: Proprietary
 metadata:
@@ -40,6 +40,8 @@ Use esta skill quando o usuário pedir para a Hera:
 - escrever roteiros de vídeo ou quebra de cenas;
 - adaptar uma ideia para feed, stories, reels, shorts ou banners;
 - organizar ou nomear assets de Canva/Drive;
+- reestruturar criativos baixados do Canva em `MGS-CRIATIVOS/UPLOAD CANVAS`;
+- validar taxonomia `CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}`;
 - preparar criativos aprovados para o Ares;
 - analisar um criativo antes do uso em campanha;
 - transformar um pedido solto em etapas estruturadas de produção.
@@ -173,29 +175,134 @@ fora_de_escopo         Pedido pertence a Ares, Atena, Zeus ou humano.
 
 Não marque como `aprovado` ou `pronto_para_ares` se não houver aprovação explícita ou se o asset final não estiver definido.
 
+## Drive/Canva — reestruturação CC_US_ES
+
+Pasta raiz oficial informada por Rodolfo:
+
+```text
+MGS-CRIATIVOS
+https://drive.google.com/drive/folders/14ica5TVauTrzAxcl4T-ViJorF89vRKIl
+```
+
+Estrutura oficial:
+
+```text
+MGS-CRIATIVOS/
+├── UPLOAD CANVAS
+└── CC_US_ES/
+    ├── IMG/
+    │   ├── 01_READY
+    │   ├── 02_TESTING
+    │   ├── 03_TESTED
+    │   ├── 04_WINNERS
+    │   ├── 05_REJECTED
+    │   └── 99_LEGACY
+    └── VID/
+        ├── 01_READY
+        ├── 02_TESTING
+        ├── 03_TESTED
+        ├── 04_WINNERS
+        ├── 05_REJECTED
+        └── 99_LEGACY
+```
+
+`UPLOAD CANVAS` é bruto/original. Não apagar, não sobrescrever e não mover em massa sem plano aprovado.
+
+Tamanhos oficiais:
+
+```text
+Placement  Dimensão   Aspect ratio  Com pessoa  Sem pessoa
+─────────  ─────────  ────────────  ──────────  ──────────
+STORY      1080x1920  9:16          PV          NV
+FEED       1080x1080  1:1           PS          NS
+```
+
+Fluxo seguro:
+
+```text
+Etapa  Ação
+─────  ─────────────────────────────────────────────────────────────
+1      Ler os arquivos brutos em `UPLOAD CANVAS`.
+2      Detectar IMG/VID, dimensão, aspect ratio e placement.
+3      Sugerir ANGLE/P_ORIENT sem inventar.
+4      Gerar inventário e plano de renomeação/destino.
+5      Mostrar o plano para Rodolfo.
+6      Só copiar/mover/renomear após aprovação explícita.
+```
+
+Inventário mínimo para plano de reestruturação:
+
+```text
+original_filename
+suggested_filename
+source_folder
+destination_folder
+format
+angle
+p_orient
+variant
+width
+height
+aspect_ratio
+placement_fit
+language
+manager/source
+canva_design_id
+asset_drive_id
+status
+notes
+```
+
 ## Naming de arquivos e assets
 
 Use nomes previsíveis, sem acento e sem espaço.
 
-Padrão recomendado:
+Para a operação piloto `CC_US_ES`, o padrão oficial alinhado com o Ares é:
 
 ```text
-[site]_[vertical]_[pais-idioma]_[canal]_[formato]_[angulo]_v[numero]
+CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
 ```
 
 Exemplos:
 
 ```text
-openzed_creditcard_uk-en_meta_feed_benefit_v01
-openzed_creditcard_uk-en_meta_story_urgency_v02
-cliquet_loan_br-pt_meta_reels_curiosity_v01
+CC_US_ES_IMG_APROBACION_PS_01.jpg
+CC_US_ES_IMG_APROBACION_NS_02.jpg
+CC_US_ES_IMG_SIN_VERIFICACION_PV_01.jpg
+CC_US_ES_VID_CASHBACK_NV_01.mp4
 ```
 
-Se o pedido ainda não tiver todos os dados, use placeholders claros:
+Campos:
 
 ```text
-[site]_unknown_br-pt_meta_feed_test_v01
+Campo       Regra
+──────────  ─────────────────────────────────────────────────────────────
+FORMAT      IMG ou VID.
+ANGLE       Dicionário controlado por operação; usar UNKNOWN se incerto.
+P_ORIENT    Para CC_US_ES, apenas PV, NV, PS ou NS.
+VARIANT     Sequencial 01, 02, 03...
+ext         Extensão real do arquivo.
 ```
+
+Dicionário inicial de `ANGLE` para `CC_US_ES`:
+
+```text
+APROBACION
+SIN_VERIFICACION
+LIMITE_ALTO
+SIN_CREDITO
+MAL_CREDITO
+CASHBACK
+RECOMPENSAS
+COMPARACION
+WALLET
+URGENCIA
+UNKNOWN
+```
+
+`UNKNOWN` é permitido para `ANGLE`, mas exige observação no inventário. Não use UNKNOWN para `P_ORIENT`; se pessoa/orientação estiver incerta, marque o asset para revisão.
+
+Para outras operações ainda não padronizadas, use um naming provisório e declare que precisa validação de Rodolfo/Kelly antes de virar padrão.
 
 ## Padrão para criativo estático
 

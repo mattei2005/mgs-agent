@@ -13,8 +13,10 @@ Observações/risco:
 
 Arquivos
 ────────
-Nome sugerido:
-Versão:
+Nome sugerido (CC_US_ES):
+P_ORIENT:
+ANGLE:
+Versão/variant:
 Pasta/status Drive:
 Material base:
 

@@ -1,12 +1,12 @@
 # Hera — Agente de Operações Criativas
 
-> Status: **proposta operacional v0.1**  
+> Status: **proposta operacional v0.2 — alinhada com Ares/CC_US_ES**  
 > Dono executivo: Rodolfo Mattei  
 > Área: Operações Criativas  
 > Orquestração: Zeus  
 > Canal Discord: `#hera-creative-agent` (`1513005743954198538`)  
 > Bot/Application ID: `1513006098133680290`  
-> Regra: este documento define o funcionamento operacional da Hera; não altera campanhas, Drive, Canva, permissões humanas ou produção sem aprovação explícita.
+> Regra: este documento define o funcionamento operacional da Hera; não altera campanhas, Drive, Canva, permissões humanas ou produção sem aprovação explícita. Para criativos de campanha, Hera deve seguir o padrão de taxonomia/Drive alinhado com Ares para `CC_US_ES`.
 
 ---
 
@@ -239,45 +239,180 @@ Pendência:
 
 ---
 
-## 10. Nomenclatura inicial de assets
+## 10. Nomenclatura de assets — CC_US_ES
 
-Proposta inicial, sujeita à revisão de Rodolfo/Kelly:
+Para a operação piloto `CC_US_ES`, Hera deve seguir a taxonomia já alinhada com o Ares.
+
+Modelo oficial:
 
 ```text
-[site]_[vertical]_[pais-idioma]_[canal]_[formato]_[angulo]_v[versao]
+CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
 ```
 
 Exemplos:
 
 ```text
-eggbev_cc_gb-en_meta_feed_benefit_v01
-openzed_cc_br-pt_meta_stories_urgency_v02
-cliquet_loans_us-en_meta_reels_comparison_v01
+CC_US_ES_IMG_APROBACION_PS_01.jpg
+CC_US_ES_IMG_APROBACION_NS_02.jpg
+CC_US_ES_IMG_SIN_VERIFICACION_PV_01.jpg
+CC_US_ES_VID_CASHBACK_NV_01.mp4
 ```
+
+Campos:
+
+```text
+Campo       Regra
+──────────  ─────────────────────────────────────────────────────────────
+FORMAT      IMG ou VID.
+ANGLE       Dicionário controlado por operação; usar UNKNOWN se incerto.
+P_ORIENT    Apenas PV, NV, PS ou NS para CC_US_ES.
+VARIANT     Sequencial 01, 02, 03... dentro do mesmo grupo.
+ext         Extensão real do arquivo: jpg, png, mp4 etc.
+```
+
+Dicionário inicial de `ANGLE` para `CC_US_ES`:
+
+```text
+ANGLE              Significado
+─────────────────  ─────────────────────────────────────────────────────
+APROBACION          Aprovação / pré-aprovação.
+SIN_VERIFICACION    Sem verificação / baixa fricção.
+LIMITE_ALTO         Limite alto.
+SIN_CREDITO         Sem crédito / histórico limitado.
+MAL_CREDITO         Crédito ruim / negativado.
+CASHBACK            Cashback / recompensas.
+RECOMPENSAS         Benefícios, pontos, milhas.
+COMPARACION         Comparativo / escolha entre cartões.
+WALLET              Uso cotidiano / carteira / pagamento do dia a dia.
+URGENCIA            Aprovação rápida / necessidade imediata.
+UNKNOWN             Ângulo incerto; exige observação no inventário.
+```
+
+Regra importante: **não colocar tamanho/dimensão no nome do arquivo**. Dimensão, aspect ratio e placement ficam no inventário.
 
 ---
 
-## 11. Drive/Canva — regra inicial
+## 11. Drive/Canva — estrutura oficial CC_US_ES
 
-Status: **a definir antes de produção real**.
-
-Proposta de estrutura:
+Pasta raiz informada por Rodolfo:
 
 ```text
-Operações Criativas/
-  01_Intake/
-  02_In_Production/
-  03_Needs_Review/
-  04_Approved/
-  05_Ready_For_Ares/
-  99_Archive/
+MGS-CRIATIVOS
+https://drive.google.com/drive/folders/14ica5TVauTrzAxcl4T-ViJorF89vRKIl
+```
+
+Estrutura oficial para a operação `CC_US_ES`:
+
+```text
+MGS-CRIATIVOS/
+└── CC_US_ES/
+    ├── IMG/
+    │   ├── 01_READY
+    │   ├── 02_TESTING
+    │   ├── 03_TESTED
+    │   ├── 04_WINNERS
+    │   ├── 05_REJECTED
+    │   └── 99_LEGACY
+    └── VID/
+        ├── 01_READY
+        ├── 02_TESTING
+        ├── 03_TESTED
+        ├── 04_WINNERS
+        ├── 05_REJECTED
+        └── 99_LEGACY
+```
+
+Área de entrada para material baixado do Canva:
+
+```text
+MGS-CRIATIVOS/UPLOAD CANVAS
 ```
 
 Regra operacional:
 
-- Hera pode propor organização e nomes.
-- Kelly/Geizian/Rodolfo validam antes de virar padrão.
-- Ares só deve consumir assets em `Approved` ou `Ready_For_Ares`.
+- `UPLOAD CANVAS` é bruto/original: não apagar, não sobrescrever e não tratar como organizado.
+- Hera deve ler os arquivos brutos, classificar formato/dimensão/idioma quando possível, gerar inventário e propor destino/nome.
+- Hera só deve mover, copiar ou renomear em massa após apresentar plano e receber aprovação explícita de Rodolfo.
+- Ares só deve consumir assets já organizados e aprovados em `CC_US_ES/IMG` ou `CC_US_ES/VID`, preferencialmente em `01_READY` ou status posterior.
+
+---
+
+## 11.1 P_ORIENT e tamanhos oficiais — CC_US_ES
+
+A operação `CC_US_ES` usa somente dois tamanhos oficiais:
+
+```text
+Placement  Dimensão   Aspect ratio  Uso
+─────────  ─────────  ────────────  ─────────────────────────────
+FEED       1080x1080  1:1           Feed Facebook + Instagram
+STORY      1080x1920  9:16          Stories Facebook + Instagram
+```
+
+O `P_ORIENT` oficial tem apenas quatro códigos:
+
+```text
+Código  Significado
+──────  ─────────────────────────────────
+PV      pessoa vertical / stories
+NV      sem pessoa vertical / stories
+PS      pessoa square / feed
+NS      sem pessoa square / feed
+```
+
+Mapeamento:
+
+```text
+Dimensão   Placement  Com pessoa  Sem pessoa
+─────────  ─────────  ──────────  ──────────
+1080x1920  STORY      PV          NV
+1080x1080  FEED       PS          NS
+```
+
+Para `P_ORIENT`, Hera não deve usar `PH`, `NH`, `PU`, `NU` ou `UU` nesta operação. Se houver dúvida sobre pessoa/orientação, o arquivo entra em revisão antes de renomear definitivo.
+
+---
+
+## 11.2 Fluxo de reestruturação dos criativos baixados do Canva
+
+Quando Rodolfo colocar no Drive os criativos já baixados do Canva, Hera deve operar em modo seguro:
+
+```text
+Etapa  Ação Hera
+─────  ─────────────────────────────────────────────────────────────
+1      Ler `MGS-CRIATIVOS/UPLOAD CANVAS` como fonte bruta/original.
+2      Identificar IMG/VID, dimensão, aspect ratio e placement provável.
+3      Tentar inferir idioma/operação/gestor/origem sem inventar.
+4      Sugerir `ANGLE`; se incerto, usar `UNKNOWN` + nota.
+5      Sugerir `P_ORIENT` somente quando pessoa/orientação estiver clara.
+6      Montar inventário com origem, nome original, destino e motivo.
+7      Gerar plano de cópia/movimento/renomeação.
+8      Aguardar aprovação explícita de Rodolfo antes de alterar o Drive.
+```
+
+Inventário mínimo recomendado:
+
+```text
+Campo                 Uso
+────────────────────  ─────────────────────────────────────────────────
+original_filename      Nome original vindo do Canva/Windows.
+suggested_filename     Nome final proposto pela Hera.
+source_folder          Pasta bruta/origem, ex: UPLOAD CANVAS ou gestor.
+destination_folder     Pasta destino proposta em CC_US_ES/IMG ou VID.
+format                 IMG ou VID.
+angle                  Dicionário CC_US_ES ou UNKNOWN.
+p_orient               PV, NV, PS ou NS quando claro.
+variant                01, 02, 03...
+width                  Largura detectada.
+height                 Altura detectada.
+aspect_ratio           1:1, 9:16 etc.
+placement_fit          FEED ou STORY.
+language               ES/EN/PT quando detectável.
+manager/source         Gestor/pasta de origem quando houver.
+canva_design_id        ID do Canva se preservado no arquivo/manifest.
+asset_drive_id         ID no Drive após upload/cópia.
+status                 RAW, REVIEW, READY, TESTING, TESTED, WINNER etc.
+notes                  Dúvidas, exceções e justificativas.
+```
 
 ---
 

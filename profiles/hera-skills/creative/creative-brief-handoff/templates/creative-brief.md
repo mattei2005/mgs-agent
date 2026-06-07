@@ -26,7 +26,7 @@ Vídeo 1      ...                               ...
 
 Arquivos sugeridos
 ──────────────────
-[site]_[vertical]_[pais-idioma]_[canal]_[formato]_[angulo]_v01
+CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
 
 Revisão necessária
 ──────────────────
