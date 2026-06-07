@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-06T05:00:01-04:00",
+    "updated_at": "2026-06-07T00:31:40-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -75,6 +75,9 @@
     },
     {
       "entry": "7 8,14,20 * * * flock -n /var/lock/monitor_webshare_status.lock /root/mgs-agent/scripts/monitor-webshare-status.sh >> /root/mgs-agent/logs/monitor-webshare-status.log 2>&1"
+    },
+    {
+      "entry": "41 3 * * * flock -n /var/lock/mgs_safety_backup.lock /root/mgs-agent/scripts/mgs-safety-backup.sh >> /root/mgs-agent/logs/mgs-safety-backup-cron.log 2>&1"
     }
   ],
   "scripts": [
@@ -135,8 +138,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
-      "size_bytes": 3258,
-      "modified_at": "2026-06-03T15:18:03-04:00"
+      "size_bytes": 4414,
+      "modified_at": "2026-06-06T20:32:06-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
@@ -155,8 +158,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
-      "size_bytes": 5120,
-      "modified_at": "2026-05-16T17:37:26-04:00"
+      "size_bytes": 9285,
+      "modified_at": "2026-06-07T00:29:26-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/import-discord-thread.py",
@@ -192,6 +195,11 @@
       "path": "/root/mgs-agent/scripts/mgs-rec-runner.py",
       "size_bytes": 101967,
       "modified_at": "2026-05-30T00:20:55-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/mgs-safety-backup.sh",
+      "size_bytes": 5684,
+      "modified_at": "2026-06-07T00:30:27-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-updates.sh",
@@ -325,8 +333,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/sync-souls.sh",
-      "size_bytes": 3080,
-      "modified_at": "2026-05-27T11:54:47-04:00"
+      "size_bytes": 3592,
+      "modified_at": "2026-06-06T23:50:36-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/track-article-cost.sh",
@@ -1276,6 +1284,548 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/yuanbao/SKILL.md"
       }
     ],
+    "hera": [
+      {
+        "name": "apple-notes",
+        "category": "apple",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/apple/apple-notes/SKILL.md"
+      },
+      {
+        "name": "apple-reminders",
+        "category": "apple",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/apple/apple-reminders/SKILL.md"
+      },
+      {
+        "name": "findmy",
+        "category": "apple",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/apple/findmy/SKILL.md"
+      },
+      {
+        "name": "imessage",
+        "category": "apple",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/apple/imessage/SKILL.md"
+      },
+      {
+        "name": "macos-computer-use",
+        "category": "apple",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/apple/macos-computer-use/SKILL.md"
+      },
+      {
+        "name": "claude-code",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/autonomous-ai-agents/claude-code/SKILL.md"
+      },
+      {
+        "name": "codex",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/autonomous-ai-agents/codex/SKILL.md"
+      },
+      {
+        "name": "opencode",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/autonomous-ai-agents/opencode/SKILL.md"
+      },
+      {
+        "name": "ascii-art",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/ascii-art/SKILL.md"
+      },
+      {
+        "name": "baoyu-article-illustrator",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/baoyu-article-illustrator/SKILL.md"
+      },
+      {
+        "name": "baoyu-comic",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/baoyu-comic/SKILL.md"
+      },
+      {
+        "name": "baoyu-infographic",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/baoyu-infographic/SKILL.md"
+      },
+      {
+        "name": "songwriting-and-ai-music",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/songwriting-and-ai-music/SKILL.md"
+      },
+      {
+        "name": "codebase-inspection",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/github/codebase-inspection/SKILL.md"
+      },
+      {
+        "name": "github-auth",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/github/github-auth/SKILL.md"
+      },
+      {
+        "name": "github-code-review",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/github/github-code-review/SKILL.md"
+      },
+      {
+        "name": "github-issues",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/github/github-issues/SKILL.md"
+      },
+      {
+        "name": "github-pr-workflow",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/github/github-pr-workflow/SKILL.md"
+      },
+      {
+        "name": "github-repo-management",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/github/github-repo-management/SKILL.md"
+      },
+      {
+        "name": "heartmula",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/media/heartmula/SKILL.md"
+      },
+      {
+        "name": "huggingface-hub",
+        "category": "mlops",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/mlops/huggingface-hub/SKILL.md"
+      },
+      {
+        "name": "llama-cpp",
+        "category": "inference",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/mlops/inference/llama-cpp/SKILL.md"
+      },
+      {
+        "name": "vllm",
+        "category": "inference",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/mlops/inference/vllm/SKILL.md"
+      },
+      {
+        "name": "audiocraft",
+        "category": "models",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/mlops/models/audiocraft/SKILL.md"
+      },
+      {
+        "name": "requesting-code-review",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/software-development/requesting-code-review/SKILL.md"
+      },
+      {
+        "name": "ai-coding-agents",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/hera/skills/autonomous-ai-agents/ai-coding-agents/SKILL.md"
+      },
+      {
+        "name": "hermes-agent",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/hera/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
+      },
+      {
+        "name": "kanban-codex-lane",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/hera/skills/autonomous-ai-agents/kanban-codex-lane/SKILL.md"
+      },
+      {
+        "name": "openhands",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/hera/skills/autonomous-ai-agents/openhands/SKILL.md"
+      },
+      {
+        "name": "architecture-diagram",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/architecture-diagram/SKILL.md"
+      },
+      {
+        "name": "ascii-video",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/ascii-video/SKILL.md"
+      },
+      {
+        "name": "baoyu-visual-content",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/baoyu-visual-content/SKILL.md"
+      },
+      {
+        "name": "claude-design",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/claude-design/SKILL.md"
+      },
+      {
+        "name": "comfyui",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/comfyui/SKILL.md"
+      },
+      {
+        "name": "creative-brief-handoff",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md"
+      },
+      {
+        "name": "creative-ideation",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/creative-ideation/SKILL.md"
+      },
+      {
+        "name": "design-md",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/design-md/SKILL.md"
+      },
+      {
+        "name": "excalidraw",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/excalidraw/SKILL.md"
+      },
+      {
+        "name": "humanizer",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/humanizer/SKILL.md"
+      },
+      {
+        "name": "manim-video",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/manim-video/SKILL.md"
+      },
+      {
+        "name": "p5js",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/p5js/SKILL.md"
+      },
+      {
+        "name": "pixel-art",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/pixel-art/SKILL.md"
+      },
+      {
+        "name": "popular-web-designs",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/popular-web-designs/SKILL.md"
+      },
+      {
+        "name": "pretext",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/pretext/SKILL.md"
+      },
+      {
+        "name": "sketch",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/sketch/SKILL.md"
+      },
+      {
+        "name": "touchdesigner-mcp",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/touchdesigner-mcp/SKILL.md"
+      },
+      {
+        "name": "jupyter-live-kernel",
+        "category": "data-science",
+        "skill_md": "/root/.hermes/profiles/hera/skills/data-science/jupyter-live-kernel/SKILL.md"
+      },
+      {
+        "name": "kanban-orchestrator",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/hera/skills/devops/kanban-orchestrator/SKILL.md"
+      },
+      {
+        "name": "kanban-worker",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/hera/skills/devops/kanban-worker/SKILL.md"
+      },
+      {
+        "name": "webhook-subscriptions",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/hera/skills/devops/webhook-subscriptions/SKILL.md"
+      },
+      {
+        "name": "dogfood",
+        "category": "",
+        "skill_md": "/root/.hermes/profiles/hera/skills/dogfood/SKILL.md"
+      },
+      {
+        "name": "himalaya",
+        "category": "email",
+        "skill_md": "/root/.hermes/profiles/hera/skills/email/himalaya/SKILL.md"
+      },
+      {
+        "name": "minecraft-modpack-server",
+        "category": "gaming",
+        "skill_md": "/root/.hermes/profiles/hera/skills/gaming/minecraft-modpack-server/SKILL.md"
+      },
+      {
+        "name": "pokemon-player",
+        "category": "gaming",
+        "skill_md": "/root/.hermes/profiles/hera/skills/gaming/pokemon-player/SKILL.md"
+      },
+      {
+        "name": "github-operations",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/hera/skills/github/github-operations/SKILL.md"
+      },
+      {
+        "name": "native-mcp",
+        "category": "mcp",
+        "skill_md": "/root/.hermes/profiles/hera/skills/mcp/native-mcp/SKILL.md"
+      },
+      {
+        "name": "ai-music-audio-generation",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/hera/skills/media/ai-music-audio-generation/SKILL.md"
+      },
+      {
+        "name": "gif-search",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/hera/skills/media/gif-search/SKILL.md"
+      },
+      {
+        "name": "songsee",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/hera/skills/media/songsee/SKILL.md"
+      },
+      {
+        "name": "spotify",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/hera/skills/media/spotify/SKILL.md"
+      },
+      {
+        "name": "youtube-content",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/hera/skills/media/youtube-content/SKILL.md"
+      },
+      {
+        "name": "lm-evaluation-harness",
+        "category": "evaluation",
+        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/evaluation/lm-evaluation-harness/SKILL.md"
+      },
+      {
+        "name": "weights-and-biases",
+        "category": "evaluation",
+        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/evaluation/weights-and-biases/SKILL.md"
+      },
+      {
+        "name": "obliteratus",
+        "category": "inference",
+        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/inference/obliteratus/SKILL.md"
+      },
+      {
+        "name": "outlines",
+        "category": "inference",
+        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/inference/outlines/SKILL.md"
+      },
+      {
+        "name": "llm-inference-serving",
+        "category": "mlops",
+        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/llm-inference-serving/SKILL.md"
+      },
+      {
+        "name": "segment-anything",
+        "category": "models",
+        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/models/segment-anything/SKILL.md"
+      },
+      {
+        "name": "dspy",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/research/dspy/SKILL.md"
+      },
+      {
+        "name": "axolotl",
+        "category": "training",
+        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/training/axolotl/SKILL.md"
+      },
+      {
+        "name": "trl-fine-tuning",
+        "category": "training",
+        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/training/trl-fine-tuning/SKILL.md"
+      },
+      {
+        "name": "unsloth",
+        "category": "training",
+        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/training/unsloth/SKILL.md"
+      },
+      {
+        "name": "obsidian",
+        "category": "note-taking",
+        "skill_md": "/root/.hermes/profiles/hera/skills/note-taking/obsidian/SKILL.md"
+      },
+      {
+        "name": "discord-ops",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/hera/skills/ops/discord-ops/SKILL.md"
+      },
+      {
+        "name": "hermes-agent-operations",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/hera/skills/ops/hermes-agent-operations/SKILL.md"
+      },
+      {
+        "name": "log-monitor-discord-alert",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/hera/skills/ops/log-monitor-discord-alert/SKILL.md"
+      },
+      {
+        "name": "mgs-company-os-architecture",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/hera/skills/ops/mgs-company-os-architecture/SKILL.md"
+      },
+      {
+        "name": "wp-plugin-mass-operation",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/hera/skills/ops/wp-plugin-mass-operation/SKILL.md"
+      },
+      {
+        "name": "airtable",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/airtable/SKILL.md"
+      },
+      {
+        "name": "apple-automation",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/apple-automation/SKILL.md"
+      },
+      {
+        "name": "google-workspace",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/google-workspace/SKILL.md"
+      },
+      {
+        "name": "linear",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/linear/SKILL.md"
+      },
+      {
+        "name": "maps",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/maps/SKILL.md"
+      },
+      {
+        "name": "nano-pdf",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/nano-pdf/SKILL.md"
+      },
+      {
+        "name": "notion",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/notion/SKILL.md"
+      },
+      {
+        "name": "ocr-and-documents",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/ocr-and-documents/SKILL.md"
+      },
+      {
+        "name": "powerpoint",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/powerpoint/SKILL.md"
+      },
+      {
+        "name": "teams-meeting-pipeline",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/teams-meeting-pipeline/SKILL.md"
+      },
+      {
+        "name": "godmode",
+        "category": "red-teaming",
+        "skill_md": "/root/.hermes/profiles/hera/skills/red-teaming/godmode/SKILL.md"
+      },
+      {
+        "name": "arxiv",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/hera/skills/research/arxiv/SKILL.md"
+      },
+      {
+        "name": "blogwatcher",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/hera/skills/research/blogwatcher/SKILL.md"
+      },
+      {
+        "name": "llm-wiki",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/hera/skills/research/llm-wiki/SKILL.md"
+      },
+      {
+        "name": "polymarket",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/hera/skills/research/polymarket/SKILL.md"
+      },
+      {
+        "name": "research-paper-writing",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/hera/skills/research/research-paper-writing/SKILL.md"
+      },
+      {
+        "name": "openhue",
+        "category": "smart-home",
+        "skill_md": "/root/.hermes/profiles/hera/skills/smart-home/openhue/SKILL.md"
+      },
+      {
+        "name": "xurl",
+        "category": "social-media",
+        "skill_md": "/root/.hermes/profiles/hera/skills/social-media/xurl/SKILL.md"
+      },
+      {
+        "name": "debugging-hermes-tui-commands",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/debugging-hermes-tui-commands/SKILL.md"
+      },
+      {
+        "name": "hermes-agent-skill-authoring",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/hermes-agent-skill-authoring/SKILL.md"
+      },
+      {
+        "name": "hermes-s6-container-supervision",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/hermes-s6-container-supervision/SKILL.md"
+      },
+      {
+        "name": "local-browser-automation",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/local-browser-automation/SKILL.md"
+      },
+      {
+        "name": "node-inspect-debugger",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/node-inspect-debugger/SKILL.md"
+      },
+      {
+        "name": "plan",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/plan/SKILL.md"
+      },
+      {
+        "name": "python-debugpy",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/python-debugpy/SKILL.md"
+      },
+      {
+        "name": "spike",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/spike/SKILL.md"
+      },
+      {
+        "name": "subagent-driven-development",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/subagent-driven-development/SKILL.md"
+      },
+      {
+        "name": "systematic-debugging",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/systematic-debugging/SKILL.md"
+      },
+      {
+        "name": "test-driven-development",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/test-driven-development/SKILL.md"
+      },
+      {
+        "name": "writing-plans",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/writing-plans/SKILL.md"
+      },
+      {
+        "name": "yuanbao",
+        "category": "",
+        "skill_md": "/root/.hermes/profiles/hera/skills/yuanbao/SKILL.md"
+      }
+    ],
     "zeus": [
       {
         "name": "apple-notes",
@@ -1817,15 +2367,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
-      "size_bytes": 3107,
-      "md5": "613c21857c85f18806737c64fecaa070",
-      "modified_at": "2026-05-26T13:39:19-04:00"
+      "size_bytes": 5086,
+      "md5": "fe95cbb18ea3bd40fb665add4f45c128",
+      "modified_at": "2026-06-06T23:00:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
-      "size_bytes": 358,
-      "md5": "f2331204ff07f7e929f0d451d4ad03fa",
-      "modified_at": "2026-06-06T04:56:01-04:00"
+      "size_bytes": 417,
+      "md5": "64088970660b84000a5d7ebaa4a3815c",
+      "modified_at": "2026-06-07T00:26:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -1836,26 +2386,26 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "84b128e51a6a99128c761886a218db24",
-      "modified_at": "2026-06-06T05:00:01-04:00"
+      "md5": "d9b0956c22e37f9aa8b49e865b67c1aa",
+      "modified_at": "2026-06-07T00:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 8008,
-      "md5": "9e9f2bb002826f3e67041695619ddf97",
-      "modified_at": "2026-06-06T05:00:02-04:00"
+      "size_bytes": 8395,
+      "md5": "0e9cc7851246b899fa13dd5e277e3768",
+      "modified_at": "2026-06-07T00:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 328,
-      "md5": "4eb01849e3da9eb326227c1ebc1dc3d1",
-      "modified_at": "2026-06-05T20:37:01-04:00"
+      "size_bytes": 330,
+      "md5": "5daea7eda656ec4191e9a881e9a0d42a",
+      "modified_at": "2026-06-06T20:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 68964,
-      "md5": "b2cb0f644a5e4d8ab6d6add5b1ce233b",
-      "modified_at": "2026-06-05T05:00:04-04:00"
+      "size_bytes": 69153,
+      "md5": "001abff320dca0a5344f052d023368c2",
+      "modified_at": "2026-06-06T05:00:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -1883,9 +2433,9 @@
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
-      "size_bytes": 3236,
-      "md5": "be4495e2e0469c643d67213e98800342",
-      "modified_at": "2026-06-05T16:22:02-04:00"
+      "size_bytes": 3176,
+      "md5": "155afb0cfe8e787fe70206cdaee9430c",
+      "modified_at": "2026-06-06T05:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -1902,8 +2452,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1052,
-      "md5": "db1d60c166ecb1ed2596c64500df7d1a",
-      "modified_at": "2026-06-06T04:56:01-04:00"
+      "md5": "fa6f53b645c29386f18ce005c6936222",
+      "modified_at": "2026-06-07T00:31:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -1920,8 +2470,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "ad43a338efd593e83ad91c042b69ef9c",
-      "modified_at": "2026-06-05T20:07:02-04:00"
+      "md5": "80ae1909b0d2021842e597fe68b57f94",
+      "modified_at": "2026-06-06T20:07:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -1931,9 +2481,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 16972,
-      "md5": "0fa89cb326472ce390c36e5764b22641",
-      "modified_at": "2026-06-05T10:24:07-04:00"
+      "size_bytes": 17336,
+      "md5": "8061eb4c92fc4cfece01926f66c6f969",
+      "modified_at": "2026-06-06T10:24:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -1943,21 +2493,27 @@
     },
     {
       "path": "/root/mgs-agent/profiles/ares-soul.md",
-      "size_bytes": 9545,
-      "md5": "190c48dafec5e21416d4e16e860a647a",
-      "modified_at": "2026-06-03T10:11:41-04:00"
+      "size_bytes": 10172,
+      "md5": "25fda0e82633dac5849bc4f2f1e5374a",
+      "modified_at": "2026-06-06T16:20:00-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "size_bytes": 41240,
-      "md5": "2f7d47b11e6a84facaf43df570458953",
-      "modified_at": "2026-06-03T10:11:41-04:00"
+      "size_bytes": 41867,
+      "md5": "25b8c001261881add421c0d1acb444dc",
+      "modified_at": "2026-06-06T16:20:00-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/profiles/hera-soul.md",
+      "size_bytes": 11433,
+      "md5": "04d44cff2e5f312e8619845c28adcf96",
+      "modified_at": "2026-06-07T00:12:23-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
-      "size_bytes": 35618,
-      "md5": "94bd10e43c3aa56cb601e232727526c0",
-      "modified_at": "2026-06-03T10:11:41-04:00"
+      "size_bytes": 36245,
+      "md5": "23115c2e540507400a0907a193066091",
+      "modified_at": "2026-06-06T16:20:00-04:00"
     }
   ],
   "mu_plugin_canonical": {
