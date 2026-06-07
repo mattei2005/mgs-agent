@@ -478,6 +478,7 @@ Avoid overexplaining. Give an operational opinion and the next concrete step.
 
 ## Referências operacionais
 
+- `references/hera-ares-creative-taxonomy-sync-2026-06-07.md` — sincronização Hera/Ares quando a taxonomia, Drive e Canva forem definidos em thread do Ares: Hera deve herdar a taxonomia CC_US_ES, `MGS-CRIATIVOS`, `UPLOAD CANVAS`, `P_ORIENT` PV/NV/PS/NS, inventário e gate de plano aprovado antes de renomear/mover criativos.
 - `references/hera-creative-agent-bootstrap-ptbr.md` — padrão capturado na criação da Hera: sequência segura de bootstrap de agente MGS, padronização PT-BR para SOUL/docs/skills/templates e regra de anexar arquivos longos como `MEDIA:/path`.
 - `references/company-os-phase3-inventory-phase4-company-2026-06-07.md` — padrão capturado na execução da Fase 3/Fase 4: inventário como mapa de risco, como explicar a revisão para Rodolfo, cobertura mínima do inventário v0.2 e padrão de primeiro bloco `context/company.md`.
 - `references/company-os-phase4-context-continuity-crons-2026-06-07.md` — padrão capturado na Fase 4 sequencial: continuidade de contexto em thread longa, “ok continue” como avanço de bloco, revisão de `docs/CRONS.md` sem alterar runtime/crontab, e correções de metadados via `cron-control-plane.py`.
