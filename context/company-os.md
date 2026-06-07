@@ -48,7 +48,8 @@ ROI e operação conectados      Conteúdo, campanha e monetização precisam co
 Pessoa        Papel atual
 ------------ ---------------------------------------------------------------
 Rodolfo       CEO; gestão geral, financeiro, estrutura WordPress, pixels,
-              relacionamento com redes, estratégia e arquitetura operacional.
+              relacionamento com redes, estratégia, arquitetura operacional
+              e comando da operação dos agentes AI.
 Geizian       Sócio; acompanha gestores, rotina diária de campanhas, custos,
               performance e execução junto ao time.
 ```
@@ -62,6 +63,8 @@ Geizian       Sócio; acompanha gestores, rotina diária de campanhas, custos,
 ---------------------------- -------------------------------------------------
 Executive / Management        Direção, estratégia, prioridades, reuniões,
                               decisões, coordenação geral e governança.
+Office / Follow-up             Cobrança, acompanhamento de tarefas pendentes
+                              dos gestores e disciplina operacional.
 Content Operations            Produção de conteúdo, REC/P1, SEO, categorias,
                               WordPress editorial e rotina de publicação.
 Growth / Media Buying         Campanhas, Facebook Ads, Google Ads, TikTok, SMS, ChatPion, quiz e tráfego direto,
