@@ -323,12 +323,28 @@ Phase 5 Atena reconstruction gate pattern:
 5. Never put runner commands, Yoast char limits, slug logic, WordPress steps,
    image implementation details, or long bug-history lessons into SOUL. Put them
    in SKILL/contracts/code validations as appropriate.
-6. Rodolfo should continue design/review in the Atena reconstruction thread,
-   mark files explicitly approved (`SOUL aprovado`, `SKILL aprovado`, etc.),
-   then ask Zeus to read/apply. Zeus cannot assume live cross-thread context.
-7. Only apply after backup + diff + secret scan + audit log + auto-push +
-   validation, preserving runners/scripts unless a specific targeted bug fix is
-   approved.
+6. When patching Atena SOUL, keep live and versioned files identical:
+   `/root/.hermes/profiles/atena/SOUL.md` and
+   `/root/mgs-agent/profiles/atena-soul.md`. Create timestamped rollback backups
+   for both before editing.
+7. If the current SOUL lists stale skill status such as `content-generate-p1` or
+   `content-generate-rec-and-p1` as “em desenvolvimento”, replace that with a
+   layer statement: detailed operations live in `content-generate-rec`,
+   `content-publish-wordpress`, contracts and runners. SOUL must not become a
+   brittle feature/status registry.
+8. After a SOUL-only alignment, validate at minimum: live/versioned cmp,
+   `git diff --check`, secret scan on added lines, stale skill-status scan,
+   audit log, auto-push and `HEAD == origin/main`.
+9. If Rodolfo asks whether Atena should be notified, post a concise operational
+   note in the Atena reconstruction thread explaining what changed and what did
+   not change, then continue review there. Do not create a second parallel design
+   thread.
+10. Rodolfo should continue design/review in the Atena reconstruction thread,
+    mark files explicitly approved (`SOUL aprovado`, `SKILL aprovado`, etc.),
+    then ask Zeus to read/apply. Zeus cannot assume live cross-thread context.
+11. Only apply deeper SKILL/contracts changes after backup + diff + secret scan +
+    audit log + auto-push + validation, preserving runners/scripts unless a
+    specific targeted bug fix is approved.
 ```
 
 Detailed runbook: `references/company-os-phase5-atena-reconstruction-thread-2026-06-07.md`.
