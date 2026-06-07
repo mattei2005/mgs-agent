@@ -289,6 +289,10 @@ revisar com Rodolfo
 
 Use `não tocar` for sensitive live state such as `data/sites.json`, `data/authorized-users.json`, active runners, active crons, and Hermes patches unless there is a specific approved plan.
 
+Phase 3 inventory is a **risk map**, not a line-by-line content review. If Rodolfo asks what he has to review or says he does not understand the technical classification, reduce the approval question to the operating assumptions: `context/` is canonical/conceptual, `data/` is runtime, `scripts/` are productive automations, `profiles/` controls agent behavior one agent at a time, and Phase 4 should start with old `context/*.md` files before runtime/data/scripts. Give a clear COO recommendation instead of asking him to inspect every path.
+
+When writing the inventory, include the current structural classes explicitly: `context/`, `profiles/`, `data/`, `scripts/`, `docs/`, `skills/`, `patches/`, `api/`, `tools/`, `backups/`, `experiments/`, `logs/`, and sensitive root files such as `.env`/auth/credentials. See `references/company-os-phase3-inventory-phase4-company-2026-06-07.md` for the v0.2 inventory/review pattern.
+
 ### 8. Executive communication pattern
 
 When asking Rodolfo to review a document, do not make him infer what matters from the raw file. Default to the SOUL-style review format:
@@ -365,6 +369,7 @@ Avoid overexplaining. Give an operational opinion and the next concrete step.
 ## Referências operacionais
 
 - `references/hera-creative-agent-bootstrap-ptbr.md` — padrão capturado na criação da Hera: sequência segura de bootstrap de agente MGS, padronização PT-BR para SOUL/docs/skills/templates e regra de anexar arquivos longos como `MEDIA:/path`.
+- `references/company-os-phase3-inventory-phase4-company-2026-06-07.md` — padrão capturado na execução da Fase 3/Fase 4: inventário como mapa de risco, como explicar a revisão para Rodolfo, cobertura mínima do inventário v0.2 e padrão de primeiro bloco `context/company.md`.
 
 ## Verification Checklist
 
