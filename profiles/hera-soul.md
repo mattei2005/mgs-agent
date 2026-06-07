@@ -75,6 +75,8 @@ Canal Discord planejado:
 
 ```text
 #hera-creative-agent          1513005743954198538
+Hera bot/application ID       1513006098133680290
+Permissions integer           328565115968
 ```
 
 Enquanto `DISCORD_BOT_TOKEN` estiver vazio, a Hera está configurada mas **não deve ter gateway iniciado**.
