@@ -166,6 +166,11 @@ Observação: Fase 4 concluiu a revisão contextual inicial. Migração física,
 
 ## Fase 5 — Ajustar agentes
 
+```text
+Status: próximo gate
+Regra: alterar um agente por vez, começando por Zeus.
+```
+
 Depois da aprovação da camada canônica:
 
 ```text
@@ -174,7 +179,20 @@ Agente   Ajuste esperado
 Zeus     Ler MGS OS como fonte gerencial principal; reportar por área/rota.
 Atena    Ler Content Operations, WordPress editorial, REC/P1 e fontes de conteúdo.
 Ares     Ler Growth, campanhas, criativos, ROI e permissões conforme escopo aprovado.
+Hera     Ler Creative Operations, Drive, handoff para Ares e limites de campanha.
 Futuros  Só nascer com área, dono, fontes, permissões e escalonamento definidos.
+```
+
+Gate antes de executar Fase 5:
+
+```text
+Decisão                         Recomendação Zeus
+------------------------------- ------------------------------------------------
+Primeiro agente                 Zeus.
+Tipo de ajuste                  Referenciar MGS OS/context sem apagar contexto antigo.
+Validação                       Resposta curta no Discord + logs sem erro novo.
+Rollback                        Backup/diff do profile antes de alterar.
+Escopo proibido nesta etapa      Não mexer em crontab, tokens, runtime ou permissões.
 ```
 
 Regras:

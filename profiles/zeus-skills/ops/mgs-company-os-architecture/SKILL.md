@@ -205,6 +205,8 @@ Phase 7   Cleanup/archival                 explicit Rodolfo approval per block
 
 When Rodolfo says to review files one by one, do **not** jump to inventory or migration. Present the current file, accept corrections, patch it, then move to the next.
 
+In a long-running Company OS restructuring thread, preserve thread context aggressively. If Rodolfo replies with a short acknowledgement such as “Ok”, “continue”, “vamos continuar”, or “próximo”, inherit the quoted/recent block context and execute the next recommended low-risk block. Do not treat the message as a new topic, do not re-plan from scratch, and do not rename the existing thread while the objective is still the same.
+
 Long-running Company OS threads have persistent objective continuity. A short reply such as “ok”, “continue”, or “vamos continuar” usually approves/continues the current block; if it is a Discord reply, use the quoted/replied message as the primary context anchor. Do not reinterpret a short reply as a new topic, and do not rename an already-open restructuring thread while the objective is still the same. Thread title changes belong only at thread creation or after an explicit, strong topic change — never from a vague message or reply.
 
 When Rodolfo corrects naming or ownership (e.g. `Ares` not `Aris`, `Hera` not `Kelly agent`), search canonical context files for stale variants and clean them up. Explain that search as stale-term cleanup, not as re-litigating the user's correction.
@@ -250,7 +252,7 @@ Phase 3 inventory pattern:
    a duplicate. Include current counts for top-level areas and classify:
    `context/`, `profiles/`, `data/`, `scripts/`, `docs/`, `skills/`,
    `patches/`, `api/`, `tools/`, `backups/`, `experiments/`, `logs/`, and
-   root-sensitive files such as `.env`, `AGENT.md`, `CLAUDE.md`, and `*.bak`.
+   root-sensitive files such as `.env`, `AGENT.md`, and `*.bak`.
 4. Separate action recommendations by class: `manter`, `não tocar`, `revisar
    depois`, `arquivar depois`, `alterar só com plano`, `append-only/consulta`.
 5. Validate the inventory with required-section checks, `git diff --check`, and
@@ -258,6 +260,37 @@ Phase 3 inventory pattern:
    and `HEAD == origin/main` rather than assuming manual `git push` works.
 6. Report Fase 3 as complete only after the repo is clean and the file is on
    origin/main.
+```
+
+Phase 4 context-file/block pattern:
+
+```text
+1. Work one approved block at a time; for context files, change conceptual docs
+   only unless Rodolfo explicitly expands scope.
+2. After every material correction, run cross-file semantic checks for stale
+   names, Ares/Hera boundaries, SB/AV exceptions, gestor codes, Finance/BI and
+   source-of-truth conflicts.
+3. Report each block with: arquivo principal, status/version, validation, secret
+   scan, audit log, auto-push, HEAD=origin, and repo state.
+4. If Rodolfo says “ok continue”, immediately proceed to the next recommended
+   block. Do not ask him to restate the plan.
+5. After `docs/CRONS.md` / Bloco 7, update `docs/mgs-os-restructure-plan.md` to
+   mark the completed blocks and define the Fase 5 gate before changing agents.
+```
+
+CRONS.md review pattern:
+
+```text
+1. Treat `docs/CRONS.md` as generated documentation from the live root crontab.
+2. Do not alter crontab/runtime during documentary review unless explicitly
+   authorized.
+3. If generated content is stale/wrong, patch `scripts/cron-control-plane.py`
+   metadata first, then regenerate `docs/CRONS.md`.
+4. Validate: total jobs, all jobs use flock, no `não classificado`, no `Sem
+   descrição cadastrada`, `git diff --check`, secret scan on added lines, audit
+   log, auto-push, HEAD=origin.
+5. Known correction: `cleanup-zombie-sessions.sh` uses last real activity with
+   default 180min grace, not the older 30min description.
 ```
 
 Pitfall: old restructuring plans may say “next step: update company-os.md” even after that has already been done, or may duplicate “create derived docs” both before and after inventory. When reviewing the plan, update statuses and remove duplicated phases before proceeding.
@@ -376,6 +409,7 @@ Avoid overexplaining. Give an operational opinion and the next concrete step.
 
 - `references/hera-creative-agent-bootstrap-ptbr.md` — padrão capturado na criação da Hera: sequência segura de bootstrap de agente MGS, padronização PT-BR para SOUL/docs/skills/templates e regra de anexar arquivos longos como `MEDIA:/path`.
 - `references/company-os-phase3-inventory-phase4-company-2026-06-07.md` — padrão capturado na execução da Fase 3/Fase 4: inventário como mapa de risco, como explicar a revisão para Rodolfo, cobertura mínima do inventário v0.2 e padrão de primeiro bloco `context/company.md`.
+- `references/company-os-phase4-context-continuity-crons-2026-06-07.md` — padrão capturado na Fase 4 sequencial: continuidade de contexto em thread longa, “ok continue” como avanço de bloco, revisão de `docs/CRONS.md` sem alterar runtime/crontab, e correções de metadados via `cron-control-plane.py`.
 - `references/company-os-thread-continuity-2026-06-07.md` — pitfall de continuidade em threads longas de reestruturação: replies curtos herdam o bloco anterior, thread aberta não deve ser renomeada enquanto mantiver o objetivo, e o report deve continuar no formato executivo por fase/bloco.
 - `references/company-os-thread-context-pitfall-2026-06-07.md` — correção de contexto em threads longas: thread de reestruturação mantém objetivo/nome até finalização, replies curtos herdam o bloco/fase citado, e `Ok`/`vamos continuar` não são novo assunto.
 
