@@ -8,7 +8,7 @@ TARGET_DIR="/root/mgs-agent/profiles"
 mkdir -p "$TARGET_DIR"
 
 # ── SOUL.md sync ───────────────────────────────────────────────────────────
-for agent in zeus atena ares; do
+for agent in zeus atena ares hera; do
     SOURCE="$PROFILES_DIR/$agent/SOUL.md"
     TARGET="$TARGET_DIR/$agent-soul.md"
     if [ -f "$SOURCE" ] && [ "$SOURCE" -nt "$TARGET" ]; then
@@ -17,10 +17,10 @@ for agent in zeus atena ares; do
     fi
 done
 
-# ── Config.yaml sync (Zeus + Atena + Ares) ─────────────────────────────────
+# ── Config.yaml sync (Zeus + Atena + Ares + Hera) ──────────────────────────
 # Adicionado 2026-04-27 (Item 23) — sincroniza configs do Hermes
 # Mantem permissao 600 no destino
-for agent in zeus atena ares; do
+for agent in zeus atena ares hera; do
     SOURCE="$PROFILES_DIR/$agent/config.yaml"
     TARGET="$TARGET_DIR/$agent-config.yaml"
     if [ -f "$SOURCE" ] && { [ ! -f "$TARGET" ] || [ "$SOURCE" -nt "$TARGET" ]; }; then
