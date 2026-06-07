@@ -127,6 +127,7 @@ Fonte                         Uso
 ----------------------------- ------------------------------------------------
 Smart Bidding reports          Receita/performance dos sites na rede SB.
 ActiveView reports             Receita/performance dos sites ainda na AV.
+Tráfego inválido               Percentual por site/rede para fechamento e risco.
 Facebook Business Manager      Custo de mídia.
 Google Ads                     Custo de mídia quando usado.
 Planilha financeira Rodolfo    Fechamento, ROI, salários, comissões e despesas.
@@ -134,6 +135,8 @@ UTM_medium                     Atribuição de receita/lucro por gestor.
 ```
 
 Finance / BI pertence ao Rodolfo. Reports de monetização alimentam a planilha financeira, junto com custos de mídia, despesas, salários e comissões.
+
+Fechamento: Rodolfo confere reports Smart Bidding/ActiveView, gastos de mídia, tráfego inválido, comissões, salários e despesas. A planilha financeira validada por Rodolfo vence em caso de divergência sobre ROI ou comissão.
 
 ---
 
