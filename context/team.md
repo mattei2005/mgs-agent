@@ -1,12 +1,12 @@
 # Equipe MGS
 
-> Status: proposta canônica v0.2
+> Status: proposta canônica v0.3
 > Fonte-mãe: `context/company-os.md`
 > Base operacional: `context/company-current-operating-model.md`
 
 ## Princípio
 
-Este arquivo descreve a equipe humana e o acesso esperado aos agentes. Permissões executáveis continuam tendo como fonte de verdade `data/authorized-users.json`.
+Este arquivo descreve a equipe humana, responsabilidades e acesso esperado aos agentes. Ele não concede permissão por si só: permissões executáveis continuam tendo como fonte de verdade `data/authorized-users.json`.
 
 ---
 
@@ -66,7 +66,7 @@ Ially               Office / Follow-up                      Gerente do escritór
 
 ## Growth / Media Buying — gestores
 
-Gestores operam campanhas, acompanham custos/ROI e usam código próprio no `UTM_medium` para atribuição de receita/lucro por gestor, site e campanha.
+Gestores operam campanhas e rotinas de Growth/Revenue conforme escopo aprovado, acompanham custos/ROI e usam código próprio no `UTM_medium` para atribuição de receita/lucro por gestor, site e campanha.
 
 ```text
 Gestor     Código UTM_medium    Observações
@@ -101,6 +101,7 @@ Regra de atribuição: o `UTM_medium` carrega o código do gestor. Esse código 
 - Cria/organiza criativos, vídeos e assets conforme escopo aprovado.
 - Pode ler/escrever no Google Drive de criativos aprovados.
 - Disponibiliza assets aprovados para Ares usar em testes/campanhas.
+- Não sobe campanhas, não altera budget, não configura pixel e não mexe em Business Manager.
 
 ---
 
@@ -116,6 +117,8 @@ Ares     Growth / Media Buying    Rodolfo + Geizian inicialmente; gestores entra
                                   depois de teste, aprovação e treinamento.
 Hera     Creative Operations      Rodolfo, Geizian e Kelly conforme escopo criativo.
 ```
+
+Acesso humano esperado não substitui o registry operacional. Para acesso real, consultar `data/authorized-users.json`.
 
 ### Zeus
 
