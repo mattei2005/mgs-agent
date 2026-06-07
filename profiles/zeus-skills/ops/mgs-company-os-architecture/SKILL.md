@@ -100,7 +100,9 @@ context/sources-of-truth.md
 context/permissions-matrix.md
 ```
 
-If Rodolfo answers “ok” after a recommendation to perform a low-risk additive Company OS step, treat it as approval to execute that step. Still do not move/remove runtime files or alter agents without explicit scope/approval.
+If Rodolfo answers “ok” after a recommendation or execution report for a low-risk additive Company OS step, treat it as approval/continuation for that same phase/block context. If the message is a reply, anchor interpretation to the quoted message and previous execution report before acting. Still do not move/remove runtime files or alter agents without explicit scope/approval.
+
+Discord thread discipline for Company OS work: do not rename an already-open restructuring thread while it keeps the same objective. Short messages like `Ok`, `vamos continuar`, or `prossegue` never trigger a thread rename and should inherit the current Company OS sequence until Rodolfo explicitly finalizes or changes objective.
 
 ### 3. Recommended initial MGS areas
 
@@ -370,6 +372,7 @@ Avoid overexplaining. Give an operational opinion and the next concrete step.
 
 - `references/hera-creative-agent-bootstrap-ptbr.md` — padrão capturado na criação da Hera: sequência segura de bootstrap de agente MGS, padronização PT-BR para SOUL/docs/skills/templates e regra de anexar arquivos longos como `MEDIA:/path`.
 - `references/company-os-phase3-inventory-phase4-company-2026-06-07.md` — padrão capturado na execução da Fase 3/Fase 4: inventário como mapa de risco, como explicar a revisão para Rodolfo, cobertura mínima do inventário v0.2 e padrão de primeiro bloco `context/company.md`.
+- `references/company-os-thread-context-pitfall-2026-06-07.md` — correção de contexto em threads longas: thread de reestruturação mantém objetivo/nome até finalização, replies curtos herdam o bloco/fase citado, e `Ok`/`vamos continuar` não são novo assunto.
 
 ## Verification Checklist
 
