@@ -1,6 +1,6 @@
 # Monetização — MGS
 
-> Status: proposta canônica v0.2
+> Status: proposta canônica v0.3
 > Fonte-mãe: `context/company-os.md`
 > Base operacional: `context/company-current-operating-model.md`
 
@@ -24,12 +24,14 @@ Parceiro        Papel operacional
 Smart Bidding   Empresa parceira Google com rede AdX/Ad Manager própria.
                 É a central principal/preferida de gerenciamento da MGS,
                 porque a dashboard é mais completa e concentra melhor os sites,
-                blocos, reports e visão operacional.
+                blocos, reports, ROI, tecnologia, permissões e visão operacional.
 ActiveView      Empresa parceira Google com rede AdX/Ad Manager própria.
                 Tem dashboard própria, mas é menos usada pela MGS atualmente.
                 Permanece como exceção ativa para openzed, cliquet e seus
                 respectivos subdomínios.
 Google / AdX    Camada de pagamento/monetização por trás das redes parceiras.
+                Google paga as parceiras; as parceiras retiram o revenue share
+                delas e repassam a MGS conforme reports/fechamento.
 ```
 
 Regra canônica:
