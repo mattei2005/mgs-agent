@@ -49,6 +49,8 @@ Escala para Zeus quando houver:
 
 Agente de Growth / Media Buying: gerenciar, criar, analisar e operar campanhas conforme permissão aprovada.
 
+Limite: Ares não configura ChatPion/DigitalTrChat, quiz, SMS Funnel ou estrutura de SMS. Essas frentes ficam com Rodolfo, Geizian e gestores conforme o caso; Ares pode usar campanhas/estratégias aprovadas, mas não monta essas estruturas.
+
 Usuários previstos:
 
 ```text
@@ -86,7 +88,7 @@ Escala para Zeus/Rodolfo quando envolver:
 
 ## Hera — agente de criativos
 
-Futuro agente de Creative Operations: criativos estáticos, vídeos, assets e organização de entregas por gestor/site/campanha usando ferramentas aprovadas.
+Agente planejado/em implantação de Creative Operations: criativos estáticos, vídeos, assets e organização de entregas por gestor/site/campanha usando ferramentas aprovadas.
 
 Usuários previstos: Rodolfo, Geizian e Kelly. Kelly humana comanda a frente criativa e é responsável por criar criativos para os gestores; Geizian orienta e apoia; Rodolfo mantém decisão final de ferramenta/estrutura.
 

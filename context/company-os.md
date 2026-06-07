@@ -133,7 +133,7 @@ SEO         Content                    Artigos de ~1.200 palavras quando há
                                        categorias adicionais a preencher.
 Aprovação   Revenue / Rodolfo          Enviar site para aprovação nas redes.
 Blocos      Revenue / AdOps            Criar/ajustar blocos de anúncio e regras.
-Campanhas   Growth / gestores / Ares   Rodar Facebook Ads, Google Ads, TikTok, SMS, ChatPion, quiz ou tráfego direto.
+Campanhas   Growth / gestores / Ares   Rodar/analisar campanhas de mídia paga e tráfego direto conforme escopo aprovado.
 ROI         Growth + Revenue + Finance Acompanhar custo, receita e performance.
 ```
 
@@ -168,29 +168,32 @@ Regra canônica inicial:
 ```text
 Camada                 Ferramentas / canais
 ---------------------- --------------------------------------------------------
-Media buying           Facebook Ads, Google Ads, TikTok, SMS, ChatPion, quiz e tráfego direto
-Criativos estáticos    ChatGPT, Canva
-Vídeos                 TopView.ai
-Criativos futuros      ChatGPT, Grok ou outras AIs com API/acesso permitido
-Gestão                 Geizian + gestores; Ares no futuro
+Media buying           Facebook Ads, Google Ads, TikTok e tráfego direto
+ChatPion/Messenger     DigitalTrChat/ChatPion; cadastro por Rodolfo/Geizian e configuração operacional por gestores
+Quiz/SMS               Estrutura montada/configurada por Rodolfo usando SMS Funnel quando aplicável
+Criativos estáticos    Hera, Kelly humana, ChatGPT, Canva
+Vídeos                 Hera, TopView.ai
+Criativos futuros      Grok ou outras AIs com API/acesso permitido
+Gestão                 Rodolfo + Geizian + gestores; Ares em implantação progressiva para campanhas
 ```
 
-Fluxo atual de criativos:
+Fluxo de criativos:
 
 ```text
-1. Kelly cria assets usando AI/Canva.
-2. Kelly sobe na pasta Canva do gestor.
-3. Gestor pega o criativo.
-4. Gestor sobe a campanha.
-5. Geizian acompanha execução/performance.
-6. Rodolfo acompanha visão geral, ROI e financeiro.
+1. Kelly humana pede/cria/avalia criativos para gestores.
+2. Hera cria/organiza assets usando ferramentas aprovadas.
+3. Kelly/Rodolfo/gestor aprovam conforme o fluxo.
+4. Hera salva o criativo aprovado na pasta correta do Google Drive.
+5. Ares lê/escreve no Drive de criativos aprovados e usa/gerencia assets em testes/campanhas.
+6. Geizian acompanha execução/performance.
+7. Rodolfo acompanha visão geral, ROI e financeiro.
 ```
 
 Fluxo alvo com agentes:
 
 ```text
-Creative Agent -> cria/organiza criativos
-Ares           -> analisa/sobe/acompanha campanhas conforme permissão
+Hera           -> cria/organiza criativos aprovados no Drive
+Ares           -> analisa/sobe/acompanha campanhas conforme permissão; não configura ChatPion, quiz ou SMS Funnel
 Zeus           -> monitora, audita, escala exceções e reporta para Rodolfo
 ```
 
@@ -303,8 +306,8 @@ Criar/editar REC/P1                    Atena / Content        Se prioridade,
                                                               erro ou exceção.
 Publicar/ajustar WordPress editorial   Atena / Content        Se risco técnico.
 Montar site/plugin/pixel               Tech / Rodolfo         Sim se produção.
-Criar criativo                         Kelly / Creative       Futuro: agente de
-                                                              criativos.
+Criar criativo                         Hera / Kelly humana    Escala se risco ou
+                                                              ferramenta nova.
 Subir/analisar campanha                Gestor / Ares          Se budget, risco
                                                               ou decisão.
 Ajustar blocos/preço AdOps             Revenue / SmartBidding Sim se impacto ROI.
@@ -327,8 +330,8 @@ Conteúdo REC/P1                       Atena/Raquel             Playbook/Raquel
 Artigo SEO                            Atena/Raquel             Playbook/Raquel
 Publicação WordPress editorial        Atena                    Regra editorial
 Setup técnico WordPress/site          Rodolfo/Tech             Rodolfo
-Campanhas Facebook/Google/SMS         Gestores/Ares            Geizian/Rodolfo
-Criativos                             Kelly/Creative Agent     Gestor/Rodolfo
+Campanhas Facebook/Google/TikTok      Gestores/Ares            Geizian/Rodolfo
+Criativos                             Hera/Kelly humana        Gestor/Rodolfo
 Budget de mídia                       Gestores/Ares            Rodolfo/Geizian
 Blocos e regras AdOps                 Smart Bidding/Revenue    Rodolfo/gestor
 Fechamento financeiro                 Rodolfo                  Rodolfo
