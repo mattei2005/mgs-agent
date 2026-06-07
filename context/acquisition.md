@@ -1,101 +1,225 @@
-# Aquisição de tráfego
+# Aquisição de Tráfego — MGS
 
-## Canais de aquisição paga
+> Status: proposta canônica v0.2
+> Fonte-mãe: `context/company-os.md`
+> Base operacional: `context/company-current-operating-model.md`
 
-MGS usa 2 canais principais pra trazer usuários aos sites:
+## Princípio
 
-### 1. Facebook Ads
-Principal canal de aquisição. Campanhas geridas pelos gestores.
+Aquisição é a frente que compra ou direciona tráfego para sites MGS, mede performance por gestor/site/campanha e conecta campanha, criativo, tracking e monetização.
 
-**Objetivos de campanha:**
-- **Link clicks** — direciona direto pro site MGS
-- **Messages (MSG)** — direciona pro Messenger (onde ChatPion opera — ver seção Conversão)
+Ares pertence a esta área, mas com limite claro: Ares é agente de campanhas. Ele não configura ChatPion/DigitalTrChat, quiz, SMS Funnel ou estrutura de SMS.
 
-**Business Managers:**
-- **Digital Trust** (#155263197283282) — linha de crédito US
-- **Zion Media** (#1114638070120676) — Canada
+---
 
-### 2. Google Ads
-Campanhas sempre direcionadas **direto pro site MGS** (sem bot intermediário).
+## Canais de aquisição
 
-**Contas:**
-- Mattei MX 1
-- Mattei MX 2
-- Mattei MX3
-
-## Ferramenta de conversão: ChatPion (Messenger bot)
-
-**ChatPion não é canal de aquisição** — é **ferramenta de conversão** que opera junto com campanhas FB Ads de objetivo MSG.
-
-### Como funciona
-
-1. MGS tem páginas no Facebook por nicho/idioma
-2. Campanhas FB Ads são configuradas com objetivo "mensagem" (MSG)
-3. User clica no anúncio → abre conversa no Messenger
-4. ChatPion intercepta → dispara fluxo montado previamente na ferramenta
-5. Fluxo: mensagens sequenciais com botões/CTAs
-6. User clica no botão → abre URL do site MGS
-7. No site, consome conteúdo e gera receita (AdSense/AdX)
-
-### Configuração
-
-- Bot opera por página FB (uma página = um fluxo)
-- Fluxo é montado dentro do ChatPion, conectado à página
-- Primeiras 24h: sequência de mensagens agressiva
-- Depois: 1 mensagem diária via MCT (Multi-Channel Tool)
-- Idiomas: EN, ES, BR, DE, IT, TR, LV
-- Nichos ativos: cartões de crédito, vagas de emprego
-
-### Contas operacionais
-
-Múltiplas contas de disparo por site (ex: `disparosconecta`, `disparosmarevelx`, `disparoshelixenit`).
-
-## Ferramentas auxiliares
-
-### AdsPower
-Antidetect browser com proxies por instância. Usado pra operar múltiplas contas FB (contingência).
-
-### Keitaro
-Tracker/TDS. Exemplos:
-- `tarjeta.wantabrand.com`
-
-### Push alerts
-Alertas push específicos para nicho de cartões de crédito.
-
-## Funil de aquisição
-
-### Via FB Ads direto pro site (link clicks)
-```
-Ad FB → clique → site MGS → REC → P1 → CTA → site final do produto
+```text
+Canal / estratégia             Uso operacional
+------------------------------ ------------------------------------------------
+Facebook Ads                   Canal principal para campanhas de link click,
+                               Messenger/MSG e outras estratégias aprovadas.
+Google Ads                     Campanhas direcionadas principalmente para sites
+                               MGS ou fluxos aprovados.
+TikTok Ads                     Canal potencial/futuro para testes com Ares.
+Tráfego direto                 Estratégia de envio direto para sites MGS.
+ChatPion / Messenger           Estratégia Facebook/Messenger; não é escopo do Ares.
+Quiz + SMS                     Estratégia montada/configurada por Rodolfo;
+                               SMS Funnel pode ser usado para envio de SMS.
 ```
 
-### Via FB Ads → Messenger (ChatPion)
-```
-Ad FB (MSG) → Messenger → bot dispara fluxo → user clica botão → site MGS → REC → P1 → site final
+---
+
+## Gestores e rastreamento
+
+Cada gestor tem um código usado no `UTM_medium`. Esse código permite atribuir receita/lucro por gestor, site e campanha, inclusive quando vários gestores rodam o mesmo site.
+
+```text
+Gestor     Código UTM_medium
+---------  -----------------
+Icaro      g001
+Geizian    g002
+Isliago    g003
+Joe        g004
+Kelly      g005
+Nicolas    g006
 ```
 
-### Via Google Ads
+Geizian tem duplo papel: é sócio/gestor operacional e também roda/testa campanhas como gestor `g002`.
+
+Regra de tracking: `UTM_medium` deve carregar o código do gestor. Variações/sufixos operacionais podem existir em campanhas específicas, mas o código base do gestor precisa permanecer identificável.
+
+---
+
+## Facebook Ads
+
+Facebook Ads é uma das principais fontes de aquisição da MGS.
+
+Objetivos usados:
+
+```text
+Objetivo       Destino / uso
+------------- ------------------------------------------------
+Link clicks    Envia usuário direto para site MGS ou URL aprovada.
+Messages/MSG   Envia usuário para Messenger, onde ChatPion/DigitalTrChat opera.
 ```
-Ad Google → clique → site MGS direto → REC → P1 → site final
+
+Operação típica:
+
+1. Gestor escolhe site/vertical/campanha.
+2. Gestor usa criativo aprovado no Google Drive.
+3. Campanha recebe tracking com `UTM_medium` do gestor.
+4. Usuário clica e entra no fluxo/site.
+5. Receita é acompanhada por site/campanha/gestor.
+6. ROI é acompanhado por gestor, Geizian e Rodolfo.
+
+---
+
+## Google Ads
+
+Google Ads é usado para campanhas de aquisição, normalmente enviando direto para sites MGS ou fluxos aprovados.
+
+Regra: custos, conversão, receita e ROI precisam ser reconciliados com as fontes de monetização e a planilha financeira.
+
+---
+
+## TikTok Ads
+
+TikTok Ads é canal potencial/futuro para testes. Deve entrar no escopo do Ares apenas quando houver estrutura, criativos, tracking, budget e validação operacional aprovados.
+
+---
+
+## Ares — agente de campanhas
+
+Ares é o agente de Growth / Media Buying.
+
+```text
+Escopo de Ares                  Status
+------------------------------- ------------------------------------------------
+Criar/analisar campanhas         Sim, conforme escopo aprovado.
+Gerenciar campanhas              Sim, conforme permissão aprovada.
+Analisar ROI/performance          Sim.
+Usar criativos aprovados          Sim, via Google Drive.
+Ler/escrever Drive de criativos   Sim, para organizar/usar assets de campanha.
+Configurar ChatPion/DigitalTrChat Não.
+Configurar quiz/SMS Funnel        Não.
+Configurar estrutura SMS          Não.
+Alterar budget crítico            Escala Rodolfo/Geizian.
 ```
+
+Acesso humano ao Ares:
+
+```text
+Fase        Quem conversa com Ares
+---------- ------------------------------------------------------------
+Inicial     Rodolfo e Geizian.
+Depois      Gestores treinados, após Ares estar aprovado, testado e
+            com treinamento de uso concluído.
+```
+
+---
+
+## Google Drive de criativos
+
+O Google Drive de criativos aprovados é a fonte operacional para assets usados em campanhas.
+
+Fluxo:
+
+```text
+1. Kelly/Rodolfo/Geizian/gestor pede criativo.
+2. Hera cria ou organiza o asset.
+3. Kelly/responsável aprova conforme o caso.
+4. Hera salva o criativo aprovado na pasta correta do Google Drive.
+5. Ares acessa o Drive para usar/gerenciar assets em testes e campanhas.
+6. Gestores também usam os assets aprovados nas campanhas.
+```
+
+---
+
+## ChatPion / DigitalTrChat — Messenger
+
+ChatPion/DigitalTrChat é estratégia de Messenger/Facebook usada com campanhas de objetivo MSG.
+
+Limite crítico: Ares não configura ChatPion/DigitalTrChat.
+
+Responsabilidades:
+
+```text
+Parte                         Responsável
+----------------------------- ------------------------------------------------
+Cadastro de usuários           Rodolfo + Geizian.
+Usuários por vertical           Rodolfo + Geizian.
+Acesso aos usuários             Gestores conforme vertical/campanha.
+Configuração operacional        Gestores.
+Fluxos/bot/messages             Gestores conforme playbook e estrutura existente.
+Escala/decisão crítica          Rodolfo/Geizian.
+```
+
+Fluxo típico:
+
+```text
+1. Campanha Facebook Ads com objetivo MSG.
+2. Usuário clica no anúncio.
+3. Messenger abre conversa.
+4. ChatPion/DigitalTrChat dispara fluxo configurado.
+5. Fluxo usa botões/CTAs/mensagens sequenciais.
+6. Usuário clica e vai para site MGS monetizado.
+7. Receita/performance é acompanhada por site/campanha/gestor.
+```
+
+---
+
+## Quiz + SMS / SMS Funnel
+
+Quiz + SMS é estratégia separada de aquisição/reaproveitamento. Pode capturar e-mail/SMS ou enviar usuário para destino aprovado.
+
+Responsabilidade: Rodolfo monta/configura a estrutura do quiz/SMS. Ares não configura quiz nem SMS Funnel.
+
+SMS Funnel é ferramenta externa usada para envio de SMS quando a estratégia exige.
+
+---
 
 ## Operação típica do gestor
 
-Os gestores trabalham com:
-- Criação de campanhas (FB/Google)
-- Criativos preparados pela Kelly (+ Geizian quando precisa)
-- Segmentação por país, idade, interesse
-- Otimização de budget por ROAS
-- Monitoramento diário
-- Ajustes em criativos e públicos
+Gestores trabalham com:
+
+- criação e acompanhamento de campanhas;
+- uso de criativos aprovados;
+- segmentação por país, idade, interesse, vertical e público;
+- tracking com `UTM_medium` próprio;
+- otimização de budget dentro de escopo aprovado;
+- monitoramento diário de custo, receita e ROI;
+- ajustes em criativos, públicos, campanhas e links conforme playbook;
+- uso de ChatPion/DigitalTrChat quando a campanha for Messenger/MSG.
+
+---
 
 ## Pixels e tracking
 
-- GTM (Google Tag Manager) setado em cada site
-- Pixels Meta por vertical
-- Tracking de gestor via `utm_medium`:
-  - `g001-d` = Ícaro
-  - `g003-d` = Isliago
-  - (outros mapeados)
-- Anti-duplicação via `pageview_index=1` (sessionStorage)
-- UTM propagation via WP Code Snippets
+```text
+Item                         Uso
+---------------------------- ------------------------------------------------
+GTM                          Google Tag Manager em sites conforme setup técnico.
+Meta Pixel                   Pixel por vertical/site/campanha quando aplicável.
+UTM_medium                   Código do gestor.
+UTM propagation              Propagação de UTMs em WordPress/snippets quando aplicável.
+pageview/session tracking     Anti-duplicação e controle de pageviews quando aplicável.
+```
+
+Alterações em pixels, GTM ou tracking crítico escalam para Rodolfo/Tech.
+
+---
+
+## Escalonamento
+
+```text
+Situação                                  Escalar para
+----------------------------------------- -----------------------------------
+Budget relevante ou risco financeiro       Rodolfo/Geizian
+ROI anormal                                Rodolfo/Geizian
+Pixel/GTM/tracking quebrado                Rodolfo/Tech
+Credencial/dashboard externo               Rodolfo
+Criativo sem aprovação                     Kelly/Rodolfo/Geizian
+Uso de Ares por gestor ainda não treinado   Rodolfo/Geizian
+ChatPion/quiz/SMS envolvendo Ares           Corrigir rota; Ares não configura
+```
