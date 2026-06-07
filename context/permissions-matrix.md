@@ -32,6 +32,8 @@ Subir campanha                         Ares / gestores          Geizian/Rodolfo.
 Alterar budget                         Ares / gestores          Rodolfo/Geizian.
 Configurar pixel                       Rodolfo/Tech             Rodolfo.
 Montar site WordPress                  Rodolfo/Tech             Rodolfo.
+Analisar ROI                           Ares / Zeus report       Rodolfo/Geizian.
+Cobrar tarefa pendente de gestor        Ially                    Geizian/Rodolfo se escalar.
 Ajustar blocos AdOps                   Smart Bidding/gestor     Rodolfo/gestor.
 Fechamento financeiro                  Rodolfo                  Rodolfo.
 Autorizar usuário externo              Zeus                     Rodolfo confirmado.
