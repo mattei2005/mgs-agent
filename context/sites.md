@@ -181,6 +181,8 @@ Artigo SEO                Conteúdo de apoio/categoria/long-tail.
 
 Para operações automatizadas, Atena deve consultar `data/sites.json`. Se o site não estiver no JSON, não assumir que está pronto para pipeline automático.
 
+Regra prática: ausência em `data/sites.json` bloqueia automação, não bloqueia existência operacional do site. Para ativar um site no pipeline, antes é necessário validar credenciais, WordPress, template, categoria, usuário publicador, caminho técnico e política de publicação.
+
 ---
 
 ## Relação com campanhas
@@ -216,6 +218,19 @@ Blocos de anúncio          Monetização via Smart Bidding/ActiveView.
 ```
 
 A stack real pode variar por site. A fonte técnica deve ser validada em `data/sites.json`, WordPress, RunCloud/VPS, Cloudflare ou dashboard externo conforme o caso.
+
+Responsabilidade por camada:
+
+```text
+Camada                         Dono / fonte
+------------------------------ ------------------------------------------------
+Site WordPress / setup técnico  Rodolfo / Tech / WordPress.
+Conteúdo editorial              Raquel / Atena / Content Operations.
+Campanhas e tráfego             Gestores / Ares conforme escopo aprovado.
+Criativos aprovados             Kelly / Hera / Google Drive.
+Monetização / blocos            Smart Bidding ou ActiveView + Rodolfo/AdOps.
+Financeiro / ROI                Rodolfo / planilha financeira.
+```
 
 ---
 
