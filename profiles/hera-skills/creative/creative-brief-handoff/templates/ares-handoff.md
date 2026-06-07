@@ -1,4 +1,4 @@
-Handoff Hera → Ares
+Handoff / Uso Final Hera
 ───────────────────
 Asset/link:
 Formato:
@@ -9,6 +9,9 @@ Copy principal:
 CTA:
 Status de aprovação:
 Aprovador:
+Created_by:
+Used_by:
+Campaign_owner:
 Observações/risco:
 
 Arquivos
@@ -33,4 +36,5 @@ Pendências
 [ ] Asset final no Drive/Canva
 [ ] Aprovação humana registrada
 [ ] Contexto da oferta confirmado
-[ ] Pronto para Ares
+[ ] Pronto para Ares, se Ares participar
+[ ] Pronto para uso humano direto, se campanha for manual

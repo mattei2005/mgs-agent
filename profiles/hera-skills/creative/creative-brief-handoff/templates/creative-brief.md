@@ -15,6 +15,10 @@ Material base:
 Prazo/prioridade:
 Risco/observação:
 Status:
+Created_by:
+Requested_by:
+Used_by:
+Campaign_owner:
 
 Variações criativas
 ───────────────────
@@ -39,4 +43,8 @@ Handoff para Ares
 Uso sugerido:
 Formato:
 Status:
+Created_by:
+Requested_by:
+Used_by:
+Campaign_owner:
 Pendência:

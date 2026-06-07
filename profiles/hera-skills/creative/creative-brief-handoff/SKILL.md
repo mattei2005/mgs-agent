@@ -1,7 +1,7 @@
 ---
 name: creative-brief-handoff
 description: Use quando a Hera receber um pedido criativo e precisar transformar em brief operacional, variações criativas, naming de assets, status de revisão e pacote limpo de handoff para o Ares sem executar campanhas.
-version: 1.1.0
+version: 1.2.0
 author: MGS Digital Corp
 license: Proprietary
 metadata:
@@ -16,7 +16,7 @@ metadata:
 
 Use esta skill quando a Hera receber qualquer pedido relacionado à produção criativa da MGS: criativos estáticos, roteiros de vídeo, hooks, copies de anúncio, organização de Canva/Drive, variações por formato ou preparação de assets para o Ares.
 
-A entrega não deve ser só “ideias criativas”. A Hera deve produzir um pacote operacional: brief, variações, nomes de arquivos, status, pontos de aprovação e instruções de handoff.
+A entrega não deve ser só “ideias criativas”. A Hera deve produzir um pacote operacional: brief, variações, nomes de arquivos, status, pontos de aprovação, organização no Drive e instruções de uso. Handoff para Ares é importante quando a campanha passa pelo Ares, mas humanos também podem usar os assets diretamente.
 
 Fonte canônica:
 
@@ -27,7 +27,7 @@ Fonte canônica:
 Regra central:
 
 ```text
-Hera cria e organiza criativos. Ares executa campanhas.
+Hera cria e organiza criativos. Ares executa campanhas quando envolvido; Kelly, Geizian e gestores também podem usar assets diretamente.
 ```
 
 ## Quando usar
@@ -43,6 +43,7 @@ Use esta skill quando o usuário pedir para a Hera:
 - reestruturar criativos baixados do Canva em `MGS-CRIATIVOS/UPLOAD CANVAS`;
 - validar taxonomia `CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}`;
 - preparar criativos aprovados para o Ares;
+- preparar criativos organizados para uso direto por Kelly, Geizian ou gestores;
 - analisar um criativo antes do uso em campanha;
 - transformar um pedido solto em etapas estruturadas de produção.
 
@@ -97,7 +98,8 @@ Pedido de copy                     Entregar opções de hook, texto e CTA.
 Pedido visual                      Entregar conceito, layout e instruções de arte.
 Pedido de vídeo                    Entregar roteiro por cena + texto na tela.
 Pedido de organização              Entregar nomes, status e estrutura de pasta.
-Handoff para Ares                  Entregar pacote mínimo com status aprovado.
+Handoff para Ares                  Entregar pacote mínimo quando Ares participar.
+Uso humano direto                  Entregar asset organizado sem forçar Ares no fluxo.
 Pedido de campanha                 Encaminhar para Ares; não executar.
 Pedido de infra/acesso             Encaminhar para Zeus; não executar.
 ```
@@ -249,9 +251,37 @@ language
 manager/source
 canva_design_id
 asset_drive_id
+created_by
+requested_by
+used_by
+campaign_owner
+source
 status
 notes
 ```
+
+## Origem e uso dos assets
+
+Classifique a origem e o consumidor antes de montar o plano.
+
+```text
+Origem                         Tratamento
+─────────────────────────────  ─────────────────────────────────────────────
+HERA_GENERATED                 Nomear e colocar direto no fluxo organizado.
+HUMAN_UPLOAD                   Validar, inventariar e propor organização.
+CANVA                          Tratar como bruto/original antes de organizar.
+KELLY / GEIZIAN / GESTOR       Registrar como `created_by` quando conhecido.
+```
+
+```text
+Uso final                      Tratamento
+─────────────────────────────  ─────────────────────────────────────────────
+ARES                           Incluir handoff completo para campanha via Ares.
+HUMAN                          Organizar para uso direto por humano/campanha manual.
+UNKNOWN                        Manter em revisão até contexto suficiente.
+```
+
+Nunca assuma que todo criativo precisa passar pelo Ares. Ares é consumidor opcional; Creative Ops continua responsável pelo padrão mesmo quando a campanha é humana.
 
 ## Naming de arquivos e assets
 
@@ -343,7 +373,7 @@ CTA:
 
 ## Handoff para Ares
 
-Só entregue handoff para Ares quando houver material suficiente para campanha ou teste.
+Só entregue handoff para Ares quando Ares participar e houver material suficiente para campanha ou teste. Se o uso for humano, entregue um pacote de uso direto com o mesmo nível de organização.
 
 Pacote mínimo:
 
@@ -356,10 +386,13 @@ Objetivo da campanha:
 Copy principal:
 CTA:
 Status de aprovação:
+Created_by:
+Used_by:
+Campaign_owner:
 Observações/risco:
 ```
 
-Se faltar algum item, declare como pendência.
+Se faltar algum item, declare como pendência. Se Ares não estiver envolvido, marque `used_by=HUMAN` ou `UNKNOWN` em vez de inventar handoff.
 
 Exemplo:
 
@@ -402,6 +435,8 @@ Antes de responder, verifique:
 - O CTA está coerente com a etapa do funil?
 - Há variações úteis, não só texto genérico?
 - O naming está consistente?
+- A origem (`created_by/source`) está registrada quando conhecida?
+- O consumidor (`used_by/campaign_owner`) está registrado quando conhecido?
 - O status está correto?
 - Se houver handoff para Ares, ele tem o pacote mínimo?
 - Algum limite de escopo foi respeitado?
@@ -410,8 +445,8 @@ Antes de responder, verifique:
 
 1. **Responder só com ideias soltas.** Hera precisa entregar pacote operacional, não brainstorm genérico.
 2. **Marcar como aprovado sem aprovação humana.** Use `precisa_revisao` até haver aprovação explícita.
-3. **Executar trabalho do Ares.** Hera prepara criativos; Ares executa campanhas.
-4. **Ignorar naming e status.** Organização é parte central da função da Hera.
+3. **Executar trabalho do Ares ou humano.** Hera prepara criativos; Ares ou humanos executam campanhas.
+4. **Ignorar naming, origem, uso e status.** Organização é parte central da função da Hera.
 5. **Pedir contexto demais.** Faça o melhor possível com premissas claras e pergunte só o que bloquear a entrega.
 6. **Misturar idiomas sem necessidade.** Responda em PT-BR quando o usuário escrever em português; só preserve termos técnicos inevitáveis.
 
