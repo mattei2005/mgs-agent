@@ -1,6 +1,6 @@
 # Processos e Fluxos de Trabalho — MGS
 
-> Status: proposta canônica v0.2
+> Status: proposta canônica v0.3
 > Fonte-mãe: `context/company-os.md`
 > Base operacional: `context/company-current-operating-model.md`
 
