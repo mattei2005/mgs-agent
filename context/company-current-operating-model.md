@@ -263,8 +263,9 @@ Zeus                 Manager geral de tudo; olha todos os agentes, faz updates,
                      governa, audita, roteia e reporta.
 Atena                Gestora/agente de conteúdo; produz conteúdos. Raquel deve
                      cuidar/supervisionar.
-Ares                 Agente de campanhas para qualquer ferramenta de aquisição:
-                     Facebook Ads, Google Ads, TikTok e demais canais.
+Ares                 Agente de campanhas para mídia paga/aquisição:
+                     Facebook Ads, Google Ads, TikTok e demais canais aprovados.
+                     Não configura ChatPion/DigitalTrChat, quiz ou SMS Funnel.
 Hera                 Futuro agente de criativos; criação de criativos usando
                      ChatGPT, TopView.ai, Canva, Grok se testado/aprovado ou
                      outras AIs com API/acesso permitido. Kelly permanece como

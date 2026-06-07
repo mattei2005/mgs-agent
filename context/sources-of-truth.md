@@ -87,6 +87,7 @@ Prompt de agente vs company-os/context          company-os/context.
 Criativo em ferramenta vs Drive aprovado         Google Drive de criativos aprovados.
 Comissão em conversa vs planilha financeira      Planilha financeira validada por Rodolfo.
 Atribuição de gestor vs UTM_medium               UTM_medium da campanha/link.
+Ares vs ChatPion/quiz/SMS                         Ares não configura ChatPion/DigitalTrChat, quiz ou SMS Funnel.
 ```
 
 ## Regra de escrita
