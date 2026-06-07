@@ -67,11 +67,3 @@ if [ -d "$PROFILES_DIR/ares/skills/growth" ]; then
         "$TARGET_DIR/ares-skills/growth/" \
         && echo "$(date -Iseconds) synced ares skills/growth"
 fi
-# Hera: creative/ (skills de Creative Operations MGS)
-mkdir -p "$TARGET_DIR/hera-skills"
-if [ -d "$PROFILES_DIR/hera/skills/creative" ]; then
-    rsync -a --delete \
-        "$PROFILES_DIR/hera/skills/creative/" \
-        "$TARGET_DIR/hera-skills/creative/" \
-        && echo "$(date -Iseconds) synced hera skills/creative"
-fi
