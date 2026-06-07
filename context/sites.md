@@ -1,116 +1,227 @@
-# Sites e verticais
+# Sites e Verticais — MGS
 
-## Como funciona
+> Status: proposta canônica v0.2
+> Fonte-mãe: `context/company-os.md`
+> Base operacional: `context/company-current-operating-model.md`
+> Regra: este arquivo é conceitual. Dados técnicos/automação ficam em `data/sites.json`.
 
-Cada domínio MGS é um **site**. Dentro de cada site, operamos uma ou mais **verticais** — combinação de **país + nicho + idioma**.
+## Princípio
 
-Formato da vertical: `{PAIS}-{NICHO}-{LINGUA}`
+Cada domínio MGS é um site. Dentro de cada site, a empresa pode operar uma ou mais verticais, definidas por país, nicho e idioma.
 
-Exemplos:
-- `US-CC-EN` = Estados Unidos / cartões de crédito / inglês
-- `GB-CC-EN` = Reino Unido / cartões de crédito / inglês
-- `MX-CC-ES` = México / cartões de crédito / espanhol
-- `BR-GAME-BR` = Brasil / games / português brasileiro
-- `DE-CC-DE` = Alemanha / cartões de crédito / alemão
-
-## Convenção de idioma
-
-- `EN` = inglês (variante depende do país: US-EN, GB-EN, CA-EN, ZA-EN)
-- `ES` = espanhol (variante depende do país: US-ES, MX-ES, ES-ES, AR-ES)
-- `DE` = alemão (Alemanha)
-- `FR` = francês (Canadá ou Europa)
-- `TR` = turco (Turquia)
-- `PT` = português de Portugal
-- `BR` = português do Brasil
-
-## Sites ativos
-
-### Nicho: Cartões de Crédito (CC)
-
-#### Sites multi-idioma (mesmo domínio serve várias verticais)
-
-| Domínio | Verticais |
-|---------|-----------|
-| lyzmo.com | US-CC-EN, GB-CC-EN |
-| finanzas.lyzmo.com | US-CC-ES |
-| eggbev.com | US-CC-EN, GB-CC-EN |
-| finanzas.eggbev.com | US-CC-ES |
-| ducapes.com | US-CC-ES |
-| finance.ducapes.com | US-CC-EN |
-| finance.topfeed.fun | US-CC-EN, GB-CC-EN |
-| finanzas.topfeed.fun | US-CC-ES |
-| zuout.com | US-CC-EN, GB-CC-EN |
-| finanzas.zuout.com | US-CC-ES |
-| zytiva.com | US-CC-EN, GB-CC-EN |
-| finanzas.zytiva.com | ES-CC-ES, US-CC-ES |
-| newsoun.com | US-CC-EN, GB-CC-EN |
-| finanzas.newsoun.com | US-CC-ES |
-| de.newsoun.com | DE-CC-DE |
-| openzed.com | US-CC-EN, GB-CC-EN |
-| finanzas.openzed.com | ES-CC-ES, US-CC-ES |
-| cliquet.com | US-CC-EN, GB-CC-EN |
-| finanzas.cliquet.com | US-CC-ES |
-| wantabrand.com | US-CC-ES |
-| finance.wantabrand.com | US-CC-EN, GB-CC-EN |
-| fincgriffin.com | GB-CC-EN, TR-CC-TR, ES-CC-ES | (1) |
-| financeadx.com | US-CC-EN, US-CC-ES, CA-CC-EN, CA-CC-FR, MX-CC-ES, ZA-CC-EN, AR-CC-ES |
-| marevelx.com | DE-CC-DE, US-CC-EN, US-CC-ES, MX-CC-ES |
-| helixenit.net | DE-CC-DE, US-CC-EN, US-CC-ES, MX-CC-ES |
-| infinitynexx.com | US-CC-EN, US-CC-ES, MX-CC-ES |
-| vizioid.com | US-CC-EN, US-CC-ES, MX-CC-ES |
-| xyvlov.com | DE-CC-DE, US-CC-EN, US-CC-ES, MX-CC-ES |
-
-### Nicho: Games (GAME)
-
-| Domínio | Verticais |
-|---------|-----------|
-| gamezonead.com | BR-GAME-BR, MX-GAME-ES |
-
-### Nicho: Vagas de Emprego (JOB)
-
-| Domínio | Verticais |
-|---------|-----------|
-| seuprimeiroempregoam.com | US-JOB-EN |
-| empleo.seuprimeiroempregoam.com | ES-JOB-ES |
-
-### Nicho: Carros (CAR)
-
-| Domínio | Verticais |
-|---------|-----------|
-| creditoparaveiculo.com | BR-CAR-BR |
-
-## Observações sobre subdomínios
-
-MGS tem histórico misto de organização de idiomas:
-- **Sites novos (multi-idioma no mesmo domínio):** exemplo `financeadx.com` roda 7 verticais no mesmo domínio
-- **Sites antigos (legacy, subdomínio por idioma):** exemplo `finanzas.eggbev.com` pra ES, `de.newsoun.com` pra DE
-
-Não existe padrão rígido — cada site foi configurado quando foi criado e se manteve.
-
-## Fonte de verdade programática
-
-Para dados sempre atualizados (status ativo/inativo, configs técnicas, pixel IDs, etc), consulte:
-
+```text
+Formato de vertical: {PAIS}-{NICHO}-{IDIOMA}
+Exemplo: GB-CC-EN = Reino Unido / cartão de crédito / inglês
 ```
+
+Este arquivo serve para entender a operação e o portfólio. Ele não substitui:
+
+```text
 /root/mgs-agent/data/sites.json
 ```
 
-Agentes devem usar o JSON pra operações (criar artigo, subir campanha) e este arquivo markdown pra **contexto conceitual** (entender o domínio e a vertical).
-
-## Stack técnica dos sites
-
-- WordPress com tema custom
-- Yoast SEO
-- WP Rocket (cache)
-- Lazy Blocks (blocos customizados)
-- Cloudflare Pro (DNS/CDN)
-- Active Campaign (email capture + automação)
-- SMS lead capture
-- Rec pages: `/rec-{vertical}-{card-name}/`
-- P1 pages: páginas how-to-apply
+`data/sites.json` é a fonte técnica usada por pipelines automatizados, credenciais, templates, WordPress e publicação. Atualmente ele pode conter apenas sites já integrados ao pipeline automatizado; isso não significa que os outros sites não existam operacionalmente.
 
 ---
 
-## Notas operacionais
+## Convenção de vertical
 
-(1) **fincgriffin: deploy manual.** Servidor hospedado em infra de terceiros (ADX) sem acesso SSH/API/SFTP. Agentes (Atena, Zeus) NAO operam neste site. Toda atualizacao de plugins, mu-plugins ou conteudo eh feita manualmente pelo Rodolfo via WP-Admin. Nao incluido em `data/sites.json` (que eh registro de pipelines ativos automatizados).
+```text
+Código     Significado
+---------  ------------------------------------------------
+CC         Credit Cards / cartões de crédito
+GAME       Games
+JOB        Vagas de emprego / jobs
+CAR        Carros / veículos
+```
+
+## Convenção de idioma
+
+```text
+Código     Idioma
+---------  ------------------------------------------------
+EN         Inglês; variante depende do país.
+ES         Espanhol; variante depende do país.
+DE         Alemão.
+FR         Francês.
+TR         Turco.
+PT         Português de Portugal.
+BR         Português do Brasil.
+```
+
+Observação: a operação usa histórico misto. Alguns sites usam domínio principal multi-idioma; outros usam subdomínios por idioma/mercado.
+
+---
+
+## Sites e verticais conceituais
+
+### Cartões de Crédito — CC
+
+```text
+Domínio                         Verticais conceituais
+------------------------------  ---------------------------------------------------
+lyzmo.com                       US-CC-EN, GB-CC-EN
+finanzas.lyzmo.com              US-CC-ES
+eggbev.com                      US-CC-EN, GB-CC-EN
+finanzas.eggbev.com             US-CC-ES
+ducapes.com                     US-CC-ES
+finance.ducapes.com             US-CC-EN
+finance.topfeed.fun             US-CC-EN, GB-CC-EN
+finanzas.topfeed.fun            US-CC-ES
+zuout.com                       US-CC-EN, GB-CC-EN
+finanzas.zuout.com              US-CC-ES
+zytiva.com                      US-CC-EN, GB-CC-EN
+finanzas.zytiva.com             ES-CC-ES, US-CC-ES
+newsoun.com                     US-CC-EN, GB-CC-EN
+finanzas.newsoun.com            US-CC-ES
+de.newsoun.com                  DE-CC-DE
+openzed.com                     US-CC-EN, GB-CC-EN
+finanzas.openzed.com            ES-CC-ES, US-CC-ES
+cliquet.com                     US-CC-EN, GB-CC-EN
+finanzas.cliquet.com            US-CC-ES
+wantabrand.com                  US-CC-ES
+finance.wantabrand.com          US-CC-EN, GB-CC-EN
+fincgriffin.com                 GB-CC-EN, TR-CC-TR, ES-CC-ES
+financeadx.com                  US-CC-EN, US-CC-ES, CA-CC-EN, CA-CC-FR, MX-CC-ES
+                                ZA-CC-EN, AR-CC-ES
+marevelx.com                    DE-CC-DE, US-CC-EN, US-CC-ES, MX-CC-ES
+helixenit.net                   DE-CC-DE, US-CC-EN, US-CC-ES, MX-CC-ES
+infinitynexx.com                US-CC-EN, US-CC-ES, MX-CC-ES
+vizioid.com                     US-CC-EN, US-CC-ES, MX-CC-ES
+xyvlov.com                      DE-CC-DE, US-CC-EN, US-CC-ES, MX-CC-ES
+wavesbee.com                    US-CC-EN
+finanzas.wavesbee.com           US-CC-ES
+conectageral.com                US-CC-EN
+finanzas.conectageral.com       US-CC-ES
+portalrelevante.com             US-CC-EN
+finanzas.portalrelevante.com    US-CC-ES
+```
+
+### Games — GAME
+
+```text
+Domínio                         Verticais conceituais
+------------------------------  ---------------------------------------------------
+gamingadx.com                   US-GAME-EN, BR-GAME-BR, MX-GAME-ES
+gamezonead.com                  US-GAME-EN, BR-GAME-BR, MX-GAME-ES
+gamehubad.com                   US-GAME-EN, BR-GAME-BR, MX-GAME-ES
+```
+
+### Carros / Veículos — CAR
+
+```text
+Domínio                         Verticais conceituais
+------------------------------  ---------------------------------------------------
+fincgriffin.com                 US-CAR-EN
+creditoparaveiculo.com          BR-CAR-BR, PT-CAR-PT
+financiamentoautoadx.com        BR-CAR-BR, PT-CAR-PT
+financiarveiculo.com            BR-CAR-BR, PT-CAR-PT
+autocreditadx.com               US-CAR-EN, MX-CAR-ES
+carcreditad.com                 US-CAR-EN, MX-CAR-ES
+autolendpro.com                 US-CAR-EN, MX-CAR-ES
+```
+
+### Vagas de Emprego — JOB
+
+```text
+Domínio                         Verticais conceituais
+------------------------------  ---------------------------------------------------
+seuprimeiroempregoam.com        US-JOB-EN
+empleo.seuprimeiroempregoam.com  ES-JOB-ES
+```
+
+---
+
+## Sites na Smart Bidding e ActiveView
+
+Smart Bidding e ActiveView são empresas parceiras Google com redes AdX/Ad Manager próprias. O site precisa estar adicionado à rede correta e ter blocos configurados para monetizar.
+
+Regra operacional atual:
+
+```text
+Smart Bidding   Dashboard principal/preferida da MGS.
+ActiveView      Exceção ativa para openzed, cliquet e seus subdomínios.
+```
+
+Sites/subdomínios AV conhecidos:
+
+```text
+openzed.com
+finanzas.openzed.com
+cliquet.com
+finanzas.cliquet.com
+```
+
+Se houver dúvida entre este arquivo e dashboards externos validados, vence a fonte operacional validada: Smart Bidding, ActiveView ou planilha/relatório confirmado por Rodolfo.
+
+---
+
+## Relação com conteúdo
+
+Atena usa sites/verticais para gerar e publicar conteúdo conforme escopo aprovado.
+
+```text
+Conteúdo                  Uso
+------------------------  ------------------------------------------------------
+REC                       Recomendação/artigo comercial.
+P1                        Página de continuação/conversão.
+REC + P1                  Fluxo combinado.
+Artigo SEO                Conteúdo de apoio/categoria/long-tail.
+```
+
+Para operações automatizadas, Atena deve consultar `data/sites.json`. Se o site não estiver no JSON, não assumir que está pronto para pipeline automático.
+
+---
+
+## Relação com campanhas
+
+Gestores e Ares usam sites/verticais como destino de campanhas.
+
+```text
+Item                       Regra
+-------------------------  -----------------------------------------------------
+UTM_medium                 Deve carregar código do gestor.
+Criativos                  Devem vir do Google Drive de criativos aprovados.
+Pixel/GTM/tracking          Escala Rodolfo/Tech quando houver risco.
+ROI                        Deve conectar custo de campanha + receita do site.
+```
+
+Ares pode trabalhar com campanhas e análise de performance, mas não configura ChatPion/DigitalTrChat, quiz, SMS Funnel, blocos AdOps ou estrutura técnica do site sem escopo/aprovação.
+
+---
+
+## Stack técnica padrão dos sites
+
+```text
+Camada                     Uso
+-------------------------  -----------------------------------------------------
+WordPress                  CMS principal dos sites.
+Tema custom                Estrutura visual/funcional.
+Yoast SEO                  SEO editorial.
+WP Rocket                  Cache/performance quando instalado.
+Lazy Blocks                Blocos customizados, incluindo estruturas de anúncio.
+Cloudflare                 DNS/CDN conforme site.
+GTM / pixels               Tracking e integração com ads.
+Blocos de anúncio          Monetização via Smart Bidding/ActiveView.
+```
+
+A stack real pode variar por site. A fonte técnica deve ser validada em `data/sites.json`, WordPress, RunCloud/VPS, Cloudflare ou dashboard externo conforme o caso.
+
+---
+
+## Observações operacionais
+
+### Subdomínios e histórico
+
+A MGS tem histórico misto de organização:
+
+```text
+Modelo novo / multi-idioma       Um domínio pode servir várias verticais.
+Modelo legacy / subdomínio        Subdomínio por idioma/mercado.
+```
+
+Não existe padrão rígido universal. Cada site deve ser tratado conforme sua configuração real.
+
+### fincgriffin.com
+
+`fincgriffin.com` é exceção operacional conhecida: deploy manual em infra de terceiros/ADX, sem acesso SSH/API/SFTP para agentes. Zeus/Atena não devem assumir operação automatizada nesse site. Atualizações de plugins, mu-plugins ou conteúdo são feitas manualmente por Rodolfo via WP-Admin, salvo nova decisão.

@@ -163,6 +163,7 @@ Future  TBD             Specialist agents created only after mission/scope exist
 
 Rules:
 - **Agent creation follows company architecture**. Do not create a new agent until its area, mission, sources of truth, permissions, and escalation paths are explicit.
+- After a new agent is technically online, do **not** jump straight to a real operational task. First create/validate the agent's operational diagram/context document (for Hera this is `context/hera-creative-agent.md`), then align SOUL.md, create class-level skills/templates, and only then run controlled production-like tests.
 - Zeus is controlled only by Rodolfo. Other company members join Zeus threads only when Rodolfo explicitly asks Zeus to include them.
 - Ares starts under Rodolfo + Geizian control, then gestores get access only after the agent is tested, approved, and the gestores are trained on how to open threads and interact with it.
 - The creative agent is **Hera**. Kelly is the human creative lead/gestora (`g005`), not the agent name. Rodolfo, Geizian, Kelly and gestores may request creative work according to approved scope.
@@ -204,7 +205,11 @@ When Rodolfo says to review files one by one, do **not** jump to inventory or mi
 
 When Rodolfo corrects naming or ownership (e.g. `Ares` not `Aris`, `Hera` not `Kelly agent`), search canonical context files for stale variants and clean them up. Explain that search as stale-term cleanup, not as re-litigating the user's correction.
 
-Cascading correction rule: any correction made while reviewing one file can invalidate previously reviewed files. Before moving to the next file, search/patch the already-reviewed Company OS docs for conflicts, stale terms, and contradictory ownership/routes. Typical cascade targets are `company.md`, `company-os.md`, `company-current-operating-model.md`, `areas.md`, `agent-map.md`, `routes.md`, `sources-of-truth.md`, `permissions-matrix.md`, `docs/mgs-os-restructure-plan.md`, `docs/mgs-structure-inventory.md`, and the current file under review. Report the cascade explicitly in a short table.
+Cascading correction rule: any correction made while reviewing one file can invalidate previously reviewed files. Before marking the current file as ready for Rodolfo review, search/patch the already-reviewed Company OS docs for conflicts, stale terms, redundant sections, duplicated governance sections, and contradictory ownership/routes. Typical cascade targets are `company-os.md`, `company-current-operating-model.md`, `areas.md`, `agent-map.md`, `routes.md`, `sources-of-truth.md`, `permissions-matrix.md`, `team.md`, `acquisition.md`, `monetization.md`, `processes.md`, `sites.md`, and the current file under review. Report the cascade explicitly in a short table. Do this **before** sending the next file for review, not after Rodolfo finds the inconsistency.
+
+Avoid duplicating global rules inside every domain file. Conflict/source precedence belongs primarily in `sources-of-truth.md`; domain files like `sites.md` should stay focused on their content and carry only a short pointer such as “this file is conceptual; `data/sites.json` wins for automation.” If you notice a repeated `## Regra de conflito` section in a domain file, consider removing it after confirming the rule already exists in `sources-of-truth.md`.
+
+Consistency audit rule: after applying a conceptual correction, do not only validate the current file. Run a cross-document consistency check for stale names (`Aris`, `Ares futuro`, `Kelly agent`/`agente Kelly`/`Creative Agent`), Ares overreach into ChatPion/quiz/SMS/AdOps/site setup, SB/AV ownership, gestor codes, Hera/Drive/Kelly boundaries, Ially/follow-up, and `data/sites.json` vs `sites.md` automation boundaries. Use regex/scripts as guardrails, but inspect flagged snippets semantically before reporting; negative statements like “Ares não configura ChatPion” are correct, not conflicts.
 
 Cross-file semantic audit rule: after any material correction from Rodolfo, run a semantic consistency check across the already-touched Company OS docs. Do not rely only on `git diff --check`; whitespace validation is necessary but not sufficient. Verify naming, scope, ownership, routes, permissions, sources of truth, and finance/BI implications. If conflicts are found, patch them before asking to proceed. See `references/company-os-cross-file-consistency-audit-2026-06-06.md` for the checklist and reporting pattern.
 
@@ -245,15 +250,52 @@ Use `não tocar` for sensitive live state such as `data/sites.json`, `data/autho
 
 ### 8. Executive communication pattern
 
-When asking Rodolfo to review a document, do not make him infer what matters from the raw file. Always separate:
+When asking Rodolfo to review a document, do not make him infer what matters from the raw file. Default to the SOUL-style review format:
+
+```text
+1. O que faz sentido.
+2. O que está demais / arriscado.
+3. O que falta.
+4. Pontos para Rodolfo classificar/corrigir.
+```
+
+Do **not** paste long files into chat for review. If Rodolfo asks to “show the file” or wants to read it like the screenshot example, send the current file as a native attachment (`MEDIA:/tmp/<review-file>.md`) so he can click/open it. Only paste the full file inline if he explicitly asks for inline content.
+
+Always separate:
 
 ```text
 1. What changed / current file status.
 2. The 5–10 operational decisions he actually needs to validate.
-3. The full or excerpted file only if he asked to see it.
+3. An attached file copy when he wants to inspect the whole artifact.
 ```
 
 If Rodolfo says the review is confusing, switch from file content to decision-level validation: “you only need to confirm whether these statements are true.”
+
+```text
+Arquivo: path/to/file.md
+
+O que faz sentido
+-----------------
+- keep / correct operational points
+
+O que está demais / arriscado
+-----------------------------
+- overlong, redundant, risky, or wrong points
+
+O que falta
+-----------
+- missing concepts / rules / operational details
+
+Pontos para Rodolfo classificar/corrigir
+----------------------------------------
+1. concrete decisions for Rodolfo
+```
+
+If Rodolfo asks to “show the file” or wants to read it whole, **do not paste the entire markdown into chat**. Create/send it as a native attachment (`MEDIA:/tmp/...md`) so he can click and open the full file, matching the Discord preview/card style he prefers. Use a concise note plus the attachment. Inline full-file dumps are hard to read and should be avoided unless he explicitly asks to paste content.
+
+If Rodolfo says the review is confusing, switch from raw file content to decision-level validation: “you only need to confirm whether these statements are true.”
+
+If Rodolfo asks to review the raw file, **send it as a `MEDIA:/absolute/path` attachment** instead of pasting long markdown into Discord. He explicitly prefers attachments for SOUL/context/skill review files; paste only short excerpts or decision tables in chat.
 
 Good pattern:
 
@@ -277,8 +319,13 @@ Avoid overexplaining. Give an operational opinion and the next concrete step.
 - **Updating agents too early**: validate blueprint with Rodolfo before changing Zeus/Atena/Ares behavior.
 - **Skipping derived-doc approval**: after creating `areas.md`, `agent-map.md`, `routes.md`, `sources-of-truth.md`, and `permissions-matrix.md`, review/approve them one by one with Rodolfo before Phase 3 inventory. Do not treat the older canonical/runtime files listed inside `sources-of-truth.md` as Phase 2 manual-review targets; they belong in Phase 3 classification.
 - **Over-assigning Ares**: Ares owns campaigns, not every acquisition-adjacent system. ChatPion/DigitalTrChat is configured by Rodolfo/Geizian/gestores; quiz/SMS/SMS Funnel setup is Rodolfo.
+- **Duplicating source-of-truth rules everywhere**: detailed `Regra de conflito` sections belong mainly in `context/sources-of-truth.md`. Domain files like `sites.md`, `team.md`, `acquisition.md`, etc. may have a short note about their role, but avoid repeating full conflict matrices unless the file specifically governs source priority. Redundant rules make review harder and create drift.
 
-## Verification checklist
+## Referências operacionais
+
+- `references/hera-creative-agent-bootstrap-ptbr.md` — padrão capturado na criação da Hera: sequência segura de bootstrap de agente MGS, padronização PT-BR para SOUL/docs/skills/templates e regra de anexar arquivos longos como `MEDIA:/path`.
+
+## Verification Checklist
 
 Before reporting completion of a company-OS step:
 
@@ -297,4 +344,8 @@ Before reporting completion of a company-OS step:
 - `references/company-os-routing-growth-creative-2026-06-06.md` — routing clarifications for Ares, Hera, gestores/UTM codes, ChatPion/DigitalTrChat/Messenger, quiz/SMS Funnel, Revenue/AdOps and gestor commission.
 - `references/company-os-gestores-ares-finance-2026-06-06.md` — gestor codes (`utm_medium`), Ares staged access, Creative/Kelly agent context, Zeus-only control, and gestor commission rules for Finance/BI.
 - `references/company-os-review-corrections-2026-06-06.md` — latest corrections from document review: Smart Bidding/ActiveView as Google partner AdX networks, Geizian as sócio, Ially office-manager role, Ares/Hera/Drive boundaries, and decision-level review style.
+- `references/company-os-doc-review-format-sites-crons-2026-06-07.md` — review-format and cascade lessons: SOUL-style summaries, send full docs as attachments, avoid duplicated conflict sections in domain docs, sites list update/count validation, and CRONS.md generated-doc review pattern.
+- `references/company-os-review-style-sites-2026-06-07.md` — review-format correction (SOUL-style summaries and full-file attachments instead of inline dumps), cascade-check expectations, and updated conceptual sites list notes.
+- `references/hera-operational-architecture-bootstrap-2026-06-06.md` — sequence correction after Hera technical bootstrap: gateway online is not production-ready; create operational diagram/context doc, align SOUL, create skills/templates, then controlled tests before opening to Kelly/Geizian/gestores.
+- `references/company-os-cascade-consistency-review-2026-06-06.md` — cascade consistency checklist for sequential context-file review: stale-term cleanup, Ares/Hera/SB/AV/Ially/gestor-code boundaries, and file-display pattern when Rodolfo asks to review raw content.
 - `references/company-os-team-acquisition-monetization-2026-06-06.md` — approved/validated team and acquisition rewrites plus monetization v0.2 notes; includes Rodolfo's cascade-consistency expectation and verification checklist for stale/conflicting concepts.

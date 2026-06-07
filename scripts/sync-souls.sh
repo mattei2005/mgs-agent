@@ -67,3 +67,10 @@ if [ -d "$PROFILES_DIR/ares/skills/growth" ]; then
         "$TARGET_DIR/ares-skills/growth/" \
         && echo "$(date -Iseconds) synced ares skills/growth"
 fi
+
+# Hera: skill customizada Creative Brief + Handoff.
+# Não sincronizar a categoria creative inteira para evitar vendor/bundled skills enormes.
+if [ -d "$PROFILES_DIR/hera/skills/creative/creative-brief-handoff" ]; then
+    mkdir -p "$TARGET_DIR/hera-skills/creative"
+    rsync -a --delete         "$PROFILES_DIR/hera/skills/creative/creative-brief-handoff/"         "$TARGET_DIR/hera-skills/creative/creative-brief-handoff/"         && echo "$(date -Iseconds) synced hera skills/creative/creative-brief-handoff"
+fi

@@ -24,7 +24,7 @@ Use when Rodolfo asks to start a new MGS agent (e.g. Ares) after creating the Di
 5. Create a concise `<profile>/SOUL.md` with role, mission, authority, safety, communication style, and relation to Zeus/Atena.
 6. Update `/root/mgs-agent/data/authorized-users.json` with a new `agents.<agent>` entry. Use the actual Discord channel name from API, not a guessed name.
 7. Append an audit event to `/root/mgs-agent/logs/events-audit.jsonl`.
-8. Update `/root/mgs-agent/scripts/sync-souls.sh` to include the new profile in both SOUL.md and config.yaml sync loops; run it once and validate the generated `profiles/<agent>-soul.md` and `profiles/<agent>-config.yaml`. Do **not** add broad skill-category sync for the new agent by default: cloned profiles may contain many bundled/hub skills, and syncing them can accidentally version hundreds of inherited files. Add selective skill sync only after the agent has custom MGS-specific skills worth versioning.
+8. Update `/root/mgs-agent/scripts/sync-souls.sh` to include the new profile in both SOUL.md and config.yaml sync loops; run it once and validate the generated `profiles/<agent>-soul.md` and `profiles/<agent>-config.yaml`. Do **not** automatically sync/version bundled or vendor skill categories from the cloned profile; only add MGS-specific custom skill sync blocks when that agent actually has custom MGS skills. Do **not** add broad skill-category sync for the new agent by default: cloned profiles may contain many bundled/hub skills, and syncing them can accidentally version hundreds of inherited files. Add selective skill sync only after the agent has custom MGS-specific skills worth versioning.
 9. Validate:
    ```bash
    hermes profile show <agent>
@@ -36,6 +36,7 @@ Use when Rodolfo asks to start a new MGS agent (e.g. Ares) after creating the Di
    PY
    ```
 10. Do **not** create/enable the systemd gateway until there is a dedicated bot token for that agent. Creating `/etc/systemd/system/<agent>-gateway.service` is a system-file write and requires Critical Subset confirmation.
+11. After Rodolfo creates the Discord application/bot and saves the token in 1Password or the profile `.env`, continue with `references/mgs-new-agent-discord-bot-gateway.md` for token validation, channel-access validation, Message Content Intent, systemd activation, and live Discord test.
 
 ## Pitfalls
 
