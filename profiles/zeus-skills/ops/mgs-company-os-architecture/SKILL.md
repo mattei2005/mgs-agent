@@ -150,8 +150,12 @@ Atena   Content         Editorial production, REC/P1, WordPress, content QA;
                         Raquel supervises.
 Ares    Growth/Ads      Campaign management, creation, analysis, acquisition;
                         Rodolfo + Geizian first, trained gestores after testing.
+                        Ares does not configure ChatPion/DigitalTrChat, quiz,
+                        or SMS Funnel.
 Hera    Creative        Creative assets, videos, Canva/Drive organization and
                         naming taxonomy; Kelly is the human creative lead.
+                        Hera and Ares both need read/write access to the
+                        approved-creatives Drive so campaigns can use assets.
 Future  TBD             Specialist agents created only after mission/scope exist
 Future  TBD             Specialist agents created only after mission/scope exist
 ```
@@ -260,6 +264,8 @@ Avoid overexplaining. Give an operational opinion and the next concrete step.
 - **Mixing concept and runtime**: `context/` is not `data/`; `docs/` is not `scripts/`.
 - **Deleting backups/experiments too early**: classify first, archive later, delete only after explicit approval.
 - **Updating agents too early**: validate blueprint with Rodolfo before changing Zeus/Atena/Ares behavior.
+- **Skipping derived-doc approval**: after creating `areas.md`, `agent-map.md`, `routes.md`, `sources-of-truth.md`, and `permissions-matrix.md`, review/approve them one by one with Rodolfo before Phase 3 inventory. Do not treat the older canonical/runtime files listed inside `sources-of-truth.md` as Phase 2 manual-review targets; they belong in Phase 3 classification.
+- **Over-assigning Ares**: Ares owns campaigns, not every acquisition-adjacent system. ChatPion/DigitalTrChat is configured by Rodolfo/Geizian/gestores; quiz/SMS/SMS Funnel setup is Rodolfo.
 
 ## Verification checklist
 
@@ -275,5 +281,6 @@ Before reporting completion of a company-OS step:
 
 - `references/company-os-blueprint-session-2026-06-05.md` — session-specific origin: Bruno course context, current `/root/mgs-agent` structural counts, and first blueprint pattern.
 - `references/company-os-ceo-operating-model-2026-06-05.md` — CEO-described real MGS operating model: partners, Raquel/Kelly/gestores, Smart Bidding/ActiveView, finance cycle, campaigns, creative flow, and agent implications.
+- `references/company-os-routes-review-2026-06-06.md` — route/scope corrections: Ares vs Hera naming, gestores/UTM codes, ChatPion/quiz/SMS boundaries, Drive creative handoff, commission model, and review sequencing.
 - `references/company-os-routing-growth-creative-2026-06-06.md` — routing clarifications for Ares, Hera, gestores/UTM codes, ChatPion/DigitalTrChat/Messenger, quiz/SMS Funnel, Revenue/AdOps and gestor commission.
 - `references/company-os-gestores-ares-finance-2026-06-06.md` — gestor codes (`utm_medium`), Ares staged access, Creative/Kelly agent context, Zeus-only control, and gestor commission rules for Finance/BI.
