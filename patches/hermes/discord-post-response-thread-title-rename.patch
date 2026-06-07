@@ -105,12 +105,12 @@ index 40721eada..d7f237120 100644
                              effective_session_id,
                              title,
                          )
-+                    elif self._is_discord_thread_lane(source):
-+                        maybe_auto_title_kwargs["title_callback"] = lambda title: self._schedule_discord_thread_title_rename(
-+                            source,
-+                            effective_session_id,
-+                            title,
-+                        )
++                    # Discord threads are named when the thread is created. Do not
++                    # attach the Hermes session auto-title callback here: a long-lived
++                    # Discord thread can start a new Hermes session after idle/reset,
++                    # and the callback would rename an already-open thread based on a
++                    # later follow-up. MGS policy: once a Discord thread exists, the
++                    # agent must not rename it again.
                      maybe_auto_title(
                          self._session_db,
                          effective_session_id,
