@@ -1,40 +1,40 @@
 # Crons MGS — Control Plane
 
-Gerado em: `2026-06-07T00:31:40-04:00`  
+Gerado em: `2026-06-07T00:32:33-04:00`  
 Fonte: `root crontab + script/log stat, read-only`  
 Total MGS ativo no root crontab: **20**
 
 ## Resumo executivo
 
 ```text
-Frequência          | Script                         | Owner          | Risco                                   | Flock | Último log
-------------------- | ------------------------------ | -------------- | --------------------------------------- | ----- | -------------------------------------------------------------------------------------------------
-*/5 * * * *         | sync-souls.sh                  | Zeus/Infra     | baixo                                   | sim   | 2026-06-07T00:30:02-04:00 synced hera skills/creative/creative-brief-handoff
-11,26,41,56 * * * * | monitor-auto-push.sh           | Zeus/Infra     | baixo                                   | sim   | [2026-06-07T00:26:01-04:00] monitor-auto-push: Concluído. consecutive_failures=6 last_ok=n/a
-23 10 * * *         | monitor-yoast-health-eggbev.sh | Atena/Conteúdo | baixo                                   | sim   | (sem log útil ainda)
-7,22,37,52 * * * *  | check-pending-reports.sh       | Zeus/Infra     | baixo                                   | sim   | [2026-06-07 00:22:01] check-pending-reports.sh concluído
-1-56/5 * * * *      | monitor-service-restarts.sh    | Zeus/Infra     | baixo                                   | sim   | 2026-06-07T00:31:01-04:00 [monitor-service-restarts] OK
-47 12 * * *         | monitor-gpt55-oauth-cost.sh    | Zeus/Infra     | baixo                                   | sim   | (sem log útil ainda)
-3-58/5 * * * *      | monitor-tool-loops.sh          | Zeus/Infra     | baixo                                   | sim   | Loop detector: 0 alertas enviados
-0 5 * * *           | infra-discovery.sh             | Zeus/Infra     | médio: sobrescreve infra-inventory.json | sim   | (sem log útil ainda)
-37 8,14,20 * * *    | monitor-hermes-updates.sh      | Zeus/Infra     | baixo                                   | sim   | (sem log útil ainda)
-*/15 * * * *        | track-article-cost.sh          | Atena/Conteúdo | baixo/médio: escreve SQLite local       | sim   | [2026-06-07T00:30:01-0400] Nothing to process. Exit.
-0 * * * *           | cleanup-zombie-sessions.sh     | Zeus/Infra     | médio: fecha sessões Hermes inativas    | sim   | (sem log útil ainda)
-17 3 * * *          | housekeeping-bak-cleanup.sh    | Zeus/Infra     | alto: deleta arquivos .bak antigos      | sim   | (sem log útil ainda)
-0 8 * * *           | pendencia-render-md.sh         | Zeus/Ops       | baixo: re-renderiza docs/PENDENCIAS.md  | sim   | (sem log útil ainda)
-0 * * * *           | chat-log.sh                    | Zeus/Ops       | baixo: re-renderiza índice              | sim   | (sem log útil ainda)
-*/15 * * * *        | sync-codex-oauth.sh            | Zeus/Infra     | médio: atualiza auth.json dos profiles  | sim   | [2026-06-07T04:30:02Z] done: all profiles in sync, nothing to do
-10 8 * * *          | cron-control-plane.py          | Zeus/Ops       | baixo: re-renderiza docs/CRONS.md       | sim   | (sem log útil ainda)
-*/15 * * * *        | monitor-cron-stale-logs.sh     | Zeus/Infra     | baixo: read-only + alerta Discord       | sim   | [2026-06-07T04:30:02Z] cron-stale check: jobs=19 problems=0 resolved=0 alerts_sent=0
-*/5 * * * *         | hermes-news-explainer.py       | Zeus/Infra     | não classificado                        | sim   | 2026-06-07T04:30:02.311342Z done posted=0 skipped=0 candidates=0 last_seen_id=1512979462772359208
-7 8,14,20 * * *     | monitor-webshare-status.sh     | Zeus/Infra     | não classificado                        | sim   | (sem log útil ainda)
-41 3 * * *          | mgs-safety-backup.sh           | Zeus/Infra     | não classificado                        | sim   | (sem log útil ainda)
+Frequência          | Script                         | Owner          | Risco                                                        | Flock | Último log
+------------------- | ------------------------------ | -------------- | ------------------------------------------------------------ | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*/5 * * * *         | sync-souls.sh                  | Zeus/Infra     | baixo                                                        | sim   | 2026-06-07T00:30:02-04:00 synced hera skills/creative/creative-brief-handoff
+11,26,41,56 * * * * | monitor-auto-push.sh           | Zeus/Infra     | baixo                                                        | sim   | [2026-06-07T00:26:01-04:00] monitor-auto-push: Concluído. consecutive_failures=6 last_ok=n/a
+23 10 * * *         | monitor-yoast-health-eggbev.sh | Atena/Conteúdo | baixo                                                        | sim   | (sem log útil ainda)
+7,22,37,52 * * * *  | check-pending-reports.sh       | Zeus/Infra     | baixo                                                        | sim   | [2026-06-07 00:22:01] check-pending-reports.sh concluído
+1-56/5 * * * *      | monitor-service-restarts.sh    | Zeus/Infra     | baixo                                                        | sim   | 2026-06-07T00:31:01-04:00 [monitor-service-restarts] OK
+47 12 * * *         | monitor-gpt55-oauth-cost.sh    | Zeus/Infra     | baixo                                                        | sim   | (sem log útil ainda)
+3-58/5 * * * *      | monitor-tool-loops.sh          | Zeus/Infra     | baixo                                                        | sim   | Loop detector: 0 alertas enviados
+0 5 * * *           | infra-discovery.sh             | Zeus/Infra     | médio: sobrescreve infra-inventory.json                      | sim   | [00:31:44] === infra-discovery.sh DONE ===
+37 8,14,20 * * *    | monitor-hermes-updates.sh      | Zeus/Infra     | baixo                                                        | sim   | (sem log útil ainda)
+*/15 * * * *        | track-article-cost.sh          | Atena/Conteúdo | baixo/médio: escreve SQLite local                            | sim   | [2026-06-07T00:30:01-0400] Nothing to process. Exit.
+0 * * * *           | cleanup-zombie-sessions.sh     | Zeus/Infra     | médio: fecha sessões Hermes inativas                         | sim   | (sem log útil ainda)
+17 3 * * *          | housekeeping-bak-cleanup.sh    | Zeus/Infra     | alto: deleta backups antigos, preservando último por família | sim   | (sem log útil ainda)
+0 8 * * *           | pendencia-render-md.sh         | Zeus/Ops       | baixo: re-renderiza docs/PENDENCIAS.md                       | sim   | (sem log útil ainda)
+0 * * * *           | chat-log.sh                    | Zeus/Ops       | baixo: re-renderiza índice                                   | sim   | (sem log útil ainda)
+*/15 * * * *        | sync-codex-oauth.sh            | Zeus/Infra     | médio: atualiza auth.json dos profiles                       | sim   | [2026-06-07T04:30:02Z] done: all profiles in sync, nothing to do
+10 8 * * *          | cron-control-plane.py          | Zeus/Ops       | baixo: re-renderiza docs/CRONS.md                            | sim   | OK wrote /root/mgs-agent/docs/CRONS.md jobs=20 generated_at=2026-06-07T00:31:40-04:00
+*/15 * * * *        | monitor-cron-stale-logs.sh     | Zeus/Infra     | baixo: read-only + alerta Discord                            | sim   | [2026-06-07T04:30:02Z] cron-stale check: jobs=19 problems=0 resolved=0 alerts_sent=0
+*/5 * * * *         | hermes-news-explainer.py       | Zeus/Infra     | não classificado                                             | sim   | 2026-06-07T04:30:02.311342Z done posted=0 skipped=0 candidates=0 last_seen_id=1512979462772359208
+7 8,14,20 * * *     | monitor-webshare-status.sh     | Zeus/Infra     | não classificado                                             | sim   | (sem log útil ainda)
+41 3 * * *          | mgs-safety-backup.sh           | Zeus/Infra     | médio: cria tar.gz local, exclui segredos por padrão         | sim   | [2026-06-07T00:32:33-04:00] mgs-safety-backup: SKIP: último backup ainda dentro do intervalo de 3 dias: /root/mgs-agent/backups/safety/mgs-safety-20260607-003036.tar.gz
 ```
 
 ## Pontos de atenção
 
 - Alto risco: `housekeeping-bak-cleanup.sh`
-- Médio risco: `infra-discovery.sh`, `cleanup-zombie-sessions.sh`, `sync-codex-oauth.sh`
+- Médio risco: `infra-discovery.sh`, `cleanup-zombie-sessions.sh`, `sync-codex-oauth.sh`, `mgs-safety-backup.sh`
 - Crons sem `flock`: nenhum
 
 ## Detalhes por cron
@@ -109,7 +109,7 @@ Frequência          | Script                         | Owner          | Risco  
 - **Função:** Regenera data/infra-inventory.json a partir do estado real do sistema.
 - **Comando:** `flock -n /var/lock/infra_discovery.lock /root/mgs-agent/scripts/infra-discovery.sh >> /root/mgs-agent/logs/infra-discovery.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/infra-discovery.log`
-- **Último log:** 2026-06-07T00:00:17-04:00 (0 bytes)
+- **Último log:** 2026-06-07T00:31:44-04:00 (589 bytes)
 
 ### `monitor-hermes-updates.sh`
 - **Frequência:** `37 8,14,20 * * *`
@@ -141,8 +141,8 @@ Frequência          | Script                         | Owner          | Risco  
 ### `housekeeping-bak-cleanup.sh`
 - **Frequência:** `17 3 * * *`
 - **Owner:** Zeus/Infra
-- **Risco:** alto: deleta arquivos .bak antigos
-- **Função:** Remove arquivos .bak antigos com retenção padrão de 15 dias e reporta resumo.
+- **Risco:** alto: deleta backups antigos, preservando último por família
+- **Função:** Remove backups antigos (.bak/.backup/.old/.orig/~) com retenção padrão de 15 dias, preservando sempre o último por família.
 - **Comando:** `flock -n /var/lock/housekeeping_bak_cleanup.lock /root/mgs-agent/scripts/housekeeping-bak-cleanup.sh >> /root/mgs-agent/logs/housekeeping-cron.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/housekeeping-cron.log`
 - **Último log:** 2026-06-07T00:00:17-04:00 (0 bytes)
@@ -181,7 +181,7 @@ Frequência          | Script                         | Owner          | Risco  
 - **Função:** Regenera docs/CRONS.md com inventário/status dos crons MGS.
 - **Comando:** `flock -n /var/lock/cron_control_plane.lock /root/mgs-agent/scripts/cron-control-plane.py --write-doc >> /root/mgs-agent/logs/cron-control-plane.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/cron-control-plane.log`
-- **Último log:** 2026-06-07T00:00:17-04:00 (0 bytes)
+- **Último log:** 2026-06-07T00:31:40-04:00 (86 bytes)
 
 ### `monitor-cron-stale-logs.sh`
 - **Frequência:** `*/15 * * * *`
@@ -213,11 +213,11 @@ Frequência          | Script                         | Owner          | Risco  
 ### `mgs-safety-backup.sh`
 - **Frequência:** `41 3 * * *`
 - **Owner:** Zeus/Infra
-- **Risco:** não classificado
-- **Função:** Sem descrição cadastrada.
+- **Risco:** médio: cria tar.gz local, exclui segredos por padrão
+- **Função:** Cria snapshot operacional seguro no máximo a cada 3 dias, excluindo segredos conhecidos e preservando o último backup.
 - **Comando:** `flock -n /var/lock/mgs_safety_backup.lock /root/mgs-agent/scripts/mgs-safety-backup.sh >> /root/mgs-agent/logs/mgs-safety-backup-cron.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/mgs-safety-backup-cron.log`
-- **Último log:** arquivo ausente
+- **Último log:** 2026-06-07T00:32:33-04:00 (170 bytes)
 
 ## Comandos úteis
 
