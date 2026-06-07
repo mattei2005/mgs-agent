@@ -278,6 +278,32 @@ Phase 4 context-file/block pattern:
    mark the completed blocks and define the Fase 5 gate before changing agents.
 ```
 
+Phase 5 Zeus SOUL alignment pattern:
+
+```text
+1. First gate is Zeus only unless Rodolfo explicitly expands scope.
+2. Patch both live and versioned SOUL files:
+   /root/.hermes/profiles/zeus/SOUL.md
+   /root/mgs-agent/profiles/zeus-soul.md
+3. Create timestamped backups before editing and keep live/versioned files identical.
+4. Add a top-level `MGS OS — fonte gerencial principal` section that points Zeus
+   at `/root/mgs-agent/context/` and relevant runtime/docs sources instead of
+   duplicating all company architecture inside SOUL.
+5. Encode source precedence: data/runtime/logs/WordPress/crontab/services for
+   live technical state; context/MGS OS for managerial structure; SOUL for
+   posture/channel/safety/behavior.
+6. Clean stale wording while there: no `futuramente Ares`; no hardcoded stale
+   model identity like `Claude Sonnet` when MGS policy says GPT-5.5/OpenAI-Codex.
+7. Update `docs/mgs-os-restructure-plan.md` to mark Zeus concluded and the next
+   agent gate, normally Atena.
+8. Validate: diff check, secret scan on added lines, stale-term scan, live/versioned
+   cmp, audit log, auto-push, HEAD=origin, repo clean.
+9. Do not touch crontab, tokens, runtime/systemd, permissions, cleanup/migration,
+   or Discord thread title in the initial Zeus gate.
+```
+
+Detailed runbook: `references/company-os-phase5-zeus-soul-alignment-2026-06-07.md`.
+
 CRONS.md review pattern:
 
 ```text
