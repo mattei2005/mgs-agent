@@ -205,6 +205,8 @@ Phase 7   Cleanup/archival                 explicit Rodolfo approval per block
 
 When Rodolfo says to review files one by one, do **not** jump to inventory or migration. Present the current file, accept corrections, patch it, then move to the next.
 
+Long-running Company OS threads have persistent objective continuity. A short reply such as “ok”, “continue”, or “vamos continuar” usually approves/continues the current block; if it is a Discord reply, use the quoted/replied message as the primary context anchor. Do not reinterpret a short reply as a new topic, and do not rename an already-open restructuring thread while the objective is still the same. Thread title changes belong only at thread creation or after an explicit, strong topic change — never from a vague message or reply.
+
 When Rodolfo corrects naming or ownership (e.g. `Ares` not `Aris`, `Hera` not `Kelly agent`), search canonical context files for stale variants and clean them up. Explain that search as stale-term cleanup, not as re-litigating the user's correction.
 
 Cascading correction rule: any correction made while reviewing one file can invalidate previously reviewed files. Before marking the current file as ready for Rodolfo review, search/patch the already-reviewed Company OS docs for conflicts, stale terms, redundant sections, duplicated governance sections, and contradictory ownership/routes. Typical cascade targets are `company-os.md`, `company-current-operating-model.md`, `areas.md`, `agent-map.md`, `routes.md`, `sources-of-truth.md`, `permissions-matrix.md`, `team.md`, `acquisition.md`, `monetization.md`, `processes.md`, `sites.md`, and the current file under review. Report the cascade explicitly in a short table. Do this **before** sending the next file for review, not after Rodolfo finds the inconsistency.
@@ -358,6 +360,8 @@ Avoid overexplaining. Give an operational opinion and the next concrete step.
 
 ## Pitfalls
 
+- **Losing long-thread context**: in Company OS/restructuring threads, treat the thread as a persistent workstream until Rodolfo explicitly finalizes or changes objective. A short reply like “Ok”, “continue”, or “próximo” inherits the quoted/previous block context (phase, block, file) and must not be treated as a new standalone topic.
+- **Renaming an active restructuring thread**: do not auto-rename an already-open Company OS thread while the objective is still the same. Never rename based on a short reply or quoted status. Thread title changes only make sense before/at creation or after a clear new objective with strong context.
 - **Moving before mapping**: creates broken imports, stale references, and agent confusion.
 - **Treating current structure as garbage**: many existing MGS files are production-critical and should be wrapped, not replaced.
 - **Letting agent prompts be the architecture**: prompts should consume the company OS, not be the only source of it.
@@ -372,6 +376,7 @@ Avoid overexplaining. Give an operational opinion and the next concrete step.
 
 - `references/hera-creative-agent-bootstrap-ptbr.md` — padrão capturado na criação da Hera: sequência segura de bootstrap de agente MGS, padronização PT-BR para SOUL/docs/skills/templates e regra de anexar arquivos longos como `MEDIA:/path`.
 - `references/company-os-phase3-inventory-phase4-company-2026-06-07.md` — padrão capturado na execução da Fase 3/Fase 4: inventário como mapa de risco, como explicar a revisão para Rodolfo, cobertura mínima do inventário v0.2 e padrão de primeiro bloco `context/company.md`.
+- `references/company-os-thread-continuity-2026-06-07.md` — pitfall de continuidade em threads longas de reestruturação: replies curtos herdam o bloco anterior, thread aberta não deve ser renomeada enquanto mantiver o objetivo, e o report deve continuar no formato executivo por fase/bloco.
 - `references/company-os-thread-context-pitfall-2026-06-07.md` — correção de contexto em threads longas: thread de reestruturação mantém objetivo/nome até finalização, replies curtos herdam o bloco/fase citado, e `Ok`/`vamos continuar` não são novo assunto.
 
 ## Verification Checklist
