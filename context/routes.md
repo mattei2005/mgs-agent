@@ -168,17 +168,19 @@ Fluxo atual:
 
 Ferramenta atual de SMS: `SMS Funnel` (`app2.smsfunnel.com.br`).
 
-## Revenue / AdOps / Smart Bidding
+## Revenue / AdOps / Smart Bidding / ActiveView
 
-Ajustar blocos/preço AdOps e aprovar site em rede fazem parte da camada AdX/Smart Bidding.
+Ajustar blocos/preço AdOps e aprovar site em rede fazem parte da camada AdX/Ad Manager dos parceiros Google: Smart Bidding e ActiveView.
+
+A dashboard da Smart Bidding é a principal para gerenciamento por ser mais completa. ActiveView permanece como exceção para `openzed`, `cliquet` e respectivos subdomínios enquanto esses sites ainda estiverem na tecnologia/rede AV.
 
 Fluxo resumido para site novo:
 
 ```text
 1. Rodolfo monta o site inteiro.
-2. Site é enviado para aprovação na Smart Bidding/AdX.
+2. Site é enviado para aprovação no parceiro/rede correto: Smart Bidding por padrão ou ActiveView nas exceções.
 3. URLs monetizáveis são enviadas para cadastro.
-4. Smart Bidding configura blocos de anúncio no site.
+4. Parceiro configura blocos de anúncio no site.
 5. Rodolfo configura pixel.
 6. Rodolfo cria contas/campanhas em Facebook Ads ou Google Ads.
 7. Campanhas iniciam conforme estratégia de tráfego.
