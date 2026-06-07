@@ -304,6 +304,35 @@ Phase 5 Zeus SOUL alignment pattern:
 
 Detailed runbook: `references/company-os-phase5-zeus-soul-alignment-2026-06-07.md`.
 
+Phase 5 Atena reconstruction gate pattern:
+
+```text
+1. Do not apply the Zeus SOUL-alignment pattern directly to Atena. Atena is a
+   production content agent with REC/P1/REC+P1, WordPress, images, Yoast,
+   runners, contracts and historical bug references.
+2. Before patching Atena, read the prior Atena reconstruction thread when
+   Rodolfo references it (known thread id: 1512539907468558477) and reconcile
+   what was approved there with the live VPS state.
+3. Treat Atena's rebuild as layer separation, not a full code rewrite:
+   SOUL = identity/governance; SKILL = operating procedure; contracts = article
+   product specs; scripts/runners = factory/implementation; references =
+   historical lessons to archive/distill, not active competing rules.
+4. SOUL additions should stay high-level: Content Operations, Raquel supervision,
+   complete request means authorization, escalation to Zeus, and boundaries
+   against campaigns/creative/AdOps/infra/permissions/finance.
+5. Never put runner commands, Yoast char limits, slug logic, WordPress steps,
+   image implementation details, or long bug-history lessons into SOUL. Put them
+   in SKILL/contracts/code validations as appropriate.
+6. Rodolfo should continue design/review in the Atena reconstruction thread,
+   mark files explicitly approved (`SOUL aprovado`, `SKILL aprovado`, etc.),
+   then ask Zeus to read/apply. Zeus cannot assume live cross-thread context.
+7. Only apply after backup + diff + secret scan + audit log + auto-push +
+   validation, preserving runners/scripts unless a specific targeted bug fix is
+   approved.
+```
+
+Detailed runbook: `references/company-os-phase5-atena-reconstruction-thread-2026-06-07.md`.
+
 CRONS.md review pattern:
 
 ```text
