@@ -39,6 +39,7 @@ Audit trail                       logs/events-audit.jsonl
 Área                         Fontes principais
 ---------------------------- -------------------------------------------------
 Executive / Management        company-os, areas, routes, audit log, pendências
+Office / Follow-up             pendências, tarefas operacionais, cobranças e follow-up com gestores
 Content Operations            content skills, WordPress, sites.json, processes
 Growth / Media Buying         dashboards de ads, Smart Bidding, UTM_medium, planilhas, Ares
 Creative Operations           Canva, Google Drive de criativos aprovados, ChatGPT, TopView.ai, Grok se aprovado, pastas dos gestores
