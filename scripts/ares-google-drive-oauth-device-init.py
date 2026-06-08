@@ -78,7 +78,14 @@ def post_form(url: str, data: dict[str, str]) -> dict[str, Any]:
 
 
 def save_refresh_token(item_name: str, vault: str, refresh_token: str) -> None:
-    proc = subprocess.run(["op", "item", "edit", item_name, "--vault", vault, f"refresh_token={refresh_token}"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False)
+    # Use stdin/template instead of assignment args so the token is never exposed
+    # in process argv and special characters cannot break op's field parser.
+    proc = subprocess.run(["op", "item", "edit", item_name, "--vault", vault, "refresh_token[password]"], input=json.dumps({"value": refresh_token}), stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False)
+    if proc.returncode != 0:
+        # Fallback to assignment syntax. The token may appear in argv briefly, but
+        # this keeps the one-time OAuth flow recoverable if stdin JSON is not
+        # accepted by the installed op CLI version.
+        proc = subprocess.run(["op", "item", "edit", item_name, "--vault", vault, f"refresh_token[password]={refresh_token}"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False)
     if proc.returncode != 0:
         raise RuntimeError(f"failed to save refresh_token to 1Password: {proc.stderr[:300]}")
 
