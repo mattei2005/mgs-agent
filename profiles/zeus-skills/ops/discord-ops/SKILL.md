@@ -171,7 +171,7 @@ Zeus responde com máximo 2 linhas:
 | Infra crítica (auto-push, deploy) | `#mgs-alerts` (1498132022634483894) | `Discord Webhook - Alerts Infra Channel` |
 | Updates do Hermes Agent | `#alerts-hermes-news` (1505609056771899644) | Zeus Bot API (`DISCORD_BOT_TOKEN` do profile zeus) |
 | Saúde Yoast/Readability | `#alerts-yoast` (1498193722871910550) | `Discord Webhook - Alerts Yoast Channel` |
-| Operacional Zeus | `#alerts-infra` (1496267442899521627) | `Discord Webhook - Zeus Channel` |
+| REPORT-INFRA / alertas infra | `#alerts-infra` (1498132022634483894) | `Discord Webhook - Alerts Infra Channel` |
 
 **NÃO usar** o webhook `#alerts-infra` para alertas automáticos de cron/monitor. Reservado para conversa operacional Rodolfo↔Zeus e commits interativos; `[REPORT-INFRA]` de agentes deve ir para `#alerts-infra` (1498132022634483894). Se um Hermes cron script-only já estiver preso a uma thread por `deliver=origin`, mudar o cron para `deliver=local` e fazer o script enviar embed próprio para `#alerts-infra`; não tentar “embelezar” stdout bruto na thread. Ver skill `log-monitor-discord-alert` → `references/hermes-cron-script-only-alert-routing.md`.
 
@@ -272,7 +272,7 @@ Localização: `/root/mgs-agent/.git/hooks/post-commit`
 
 Instalar: copiar conteúdo do arquivo de referência `references/git-hook-post-commit.sh` para o hook e `chmod +x`.
 
-Webhook URL: 1Password → vault `MGS Conteúdo` → item `Discord Webhook - Zeus Channel` → campo `label=webhook_url` (não `url`).
+Webhook URL: 1Password → vault `MGS Conteúdo` → item `Discord Webhook - Alerts Infra Channel` → campo `label=webhook_url` (não `url`) para REPORT-INFRA/alertas; usar `Discord Webhook - Zeus Channel` apenas para hook de commit interativo quando explicitamente aplicável.
 
 ### Pitfalls do hook
 

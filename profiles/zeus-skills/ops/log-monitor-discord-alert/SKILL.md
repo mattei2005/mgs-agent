@@ -60,7 +60,7 @@ Exemplos validados:
 | Saúde Yoast SEO/Readability | `#alerts-yoast` (1498193722871910550) | `Discord Webhook - Alerts Yoast Channel` |
 | Infra crítica (auto-push, deploy) | `#mgs-alerts` (1498132022634483894) | `Discord Webhook - Alerts Infra Channel` |
 | Updates do Hermes Agent | `#alerts-hermes-news` (1505609056771899644) | Zeus Bot API (`DISCORD_BOT_TOKEN` do profile zeus) |
-| Cobrança operacional ao Zeus | `#alerts-infra` (1496267442899521627) | `Discord Webhook - Zeus Channel` |
+| REPORT-INFRA / cobrança operacional ao Zeus | `#alerts-infra` (1498132022634483894) | `Discord Webhook - Alerts Infra Channel` |
 
 **Layout obrigatório das mensagens:** usar Discord embed com `fields` estruturados — nunca mandar alerta como texto bruto em `content`, exceto a mention necessária para push.
 - `content`: vazio para info/resolução; `<@344196393512075265> alerta curto` apenas quando precisa push.
@@ -366,7 +366,7 @@ Após criar os artefatos, atualizar manualmente 3 seções do inventário:
 
 2. **`os.environ` em `execute_code` não propaga para `terminal()`** — variáveis setadas com `os.environ[...] = ...` em Python NÃO chegam nos subprocessos do `terminal()`. Para credenciais 1Password dentro de `execute_code`, chamar `terminal("op item get ... --reveal")` diretamente e usar o output como string Python. Não tentar setar via `os.environ` e usar em `terminal()` subsequente.
 
-2. **Campo do webhook no 1Password é `webhook_url`, não `url`** — o item "Discord Webhook - Zeus Channel" tem campo `label=webhook_url`. Usar `--fields label=webhook_url --reveal` (não `--fields label=url`).
+2. **Campo do webhook no 1Password é `webhook_url`, não `url`** — os itens "Discord Webhook - Alerts Infra Channel" e "Discord Webhook - Zeus Channel" usam campo `label=webhook_url`. Para REPORT-INFRA/alertas, usar Alerts Infra. Usar `--fields label=webhook_url --reveal` (não `--fields label=url`).
 
 3. **Sempre exportar `OP_SERVICE_ACCOUNT_TOKEN` antes do `op` em scripts shell** — scripts executados via cron não têm a env do `.env` carregada automaticamente. O `source "${BASE_DIR}/.env"` no início do script é obrigatório. Usar o padrão `set -a / source / set +a` descrito em `references/shell-env-crontab-patterns.md` (padrão canônico MGS para scripts que invocam `op`). Para segurança ao modificar crontab via script, ver a seção "Padrão Proibido" no mesmo arquivo.
 
