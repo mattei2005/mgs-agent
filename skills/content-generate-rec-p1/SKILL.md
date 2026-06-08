@@ -544,10 +544,8 @@ Formato mínimo obrigatório quando fallback manual for necessário:
 
 📄 REC
 📊 Yoast: SEO `<pontuacao>` / Readability `<pontuacao>`
-• Validação: `<quantidade de palavras>` palavras / subtitle `<quantidade de chars>` chars / público HTTP `<codigo ou evidência draft>`
+• Validação: `<quantidade de palavras>` palavras / subtitle `<quantidade de chars>` chars / excerpt `<quantidade de chars>` chars / público HTTP `<codigo ou evidência draft>`
 • Title: `<titulo>` — `<quantidade de chars>` chars
-• Subtitle: `<subtitle>` — `<quantidade de chars>` chars
-• Excerpt: `<excerpt>` — `<quantidade de chars>` chars
 • Focus: `<palavra chave usada>`
 • Meta Description: `<texto que foi inserido>` — `<quantidade de chars>` chars
 • Tags: `<tags>`
@@ -557,10 +555,8 @@ Formato mínimo obrigatório quando fallback manual for necessário:
 
 📄 P1
 📊 Yoast: SEO `<pontuacao>` / Readability `<pontuacao>`
-• Validação: `<quantidade de palavras>` palavras / subtitle `<quantidade de chars>` chars / público HTTP `<codigo ou evidência draft>`
+• Validação: `<quantidade de palavras>` palavras / subtitle `<quantidade de chars>` chars / excerpt `<quantidade de chars>` chars / público HTTP `<codigo ou evidência draft>`
 • Title: `<titulo>` — `<quantidade de chars>` chars
-• Subtitle: `<subtitle>` — `<quantidade de chars>` chars
-• Excerpt: `<excerpt>` — `<quantidade de chars>` chars
 • Focus: `<palavra chave usada>`
 • Meta Description: `<texto que foi inserido>` — `<quantidade de chars>` chars
 • Tags: `<tags>`
