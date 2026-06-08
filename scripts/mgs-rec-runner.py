@@ -305,14 +305,10 @@ def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Di
             break
 
     if len(benefits) < 3:
-        # Conservative fallback still derived from the source page URL/name; do
-        # not claim specific rates that were not extracted.
-        benefits.extend([
-            f"Check the official {card_name} page before applying.",
-            "Check eligibility, fees and repayment terms before submitting an application.",
-            "Use the issuer's online account tools to manage the card if approved.",
-        ])
-        benefits = benefits[:3]
+        raise RunnerError(
+            "Insufficient confirmed card benefits extracted from the official source; "
+            "do not pad with generic guidance. Ask for a better official URL or explicit verified benefits."
+        )
 
     lower_benefits = " ".join(benefits).lower()
     if "amazon" in lower_benefits or "amazon" in card_name.lower():
@@ -378,13 +374,15 @@ def lazy_credit_card(card_name: str, card_id: Optional[int], card_url: Optional[
     vertical = (site.get("verticals") or ["cc"])[0]
     domain = site["domain"]
     block_id = rand_block_id()
+    annual_fee = str(card_data.get("annual_fee") or "")
+    tag10, tag2, descriptor = derive_lazyblock_tags(card_name, [str(b) for b in (card_data.get("benefits") or [])], annual_fee)
     payload = {
         "imagem": build_media_payload(card_id, card_url, f"card-{card_slug}"),
         "categoria": site.get("default_category", "Credit Card"),
         "titulo": card_name,
-        "tag10": card_ui_tag(card_data.get("tag10"), "Cashback rewards", card_name=card_name, annual_fee=str(card_data.get("annual_fee") or "")),
-        "tag2": card_ui_tag(card_data.get("tag2") or card_data.get("annual_fee"), "No annual fee", card_name=card_name, annual_fee=str(card_data.get("annual_fee") or "")),
-        "texto": card_ui_descriptor(card_data, card_data.get("descriptor") or f"Learn more about the {card_name}."),
+        "tag10": card_ui_tag(card_data.get("tag10"), tag10, card_name=card_name, annual_fee=annual_fee),
+        "tag2": card_ui_tag(card_data.get("tag2"), tag2, card_name=card_name, annual_fee=annual_fee),
+        "texto": card_ui_descriptor(card_data, card_data.get("descriptor") or descriptor),
         "botao-texto": "How to Apply",
         "siteXfora": "You will remain on this website.",
         "botao-url": f"https://{domain}/apply-now-{country}-{vertical}-{card_slug}/",
