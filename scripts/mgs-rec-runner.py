@@ -1259,6 +1259,12 @@ def title_meta_focus(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, st
     if len(meta) < 130:
         meta = clean_sentence_punctuation((meta.rstrip(".") + " Check official issuer terms before applying.")[:140])
     meta = clean_sentence_punctuation(meta)
+    if len(meta) > 140:
+        meta = meta[:140].rstrip(" ,;:.") + "."
+        if len(meta) > 140:
+            meta = meta[:139].rstrip(" ,;:.") + "."
+    if len(meta) < 130:
+        meta = clean_sentence_punctuation((meta.rstrip(".") + " Check official issuer terms before applying.")[:140])
     if not (130 <= len(meta) <= 140):
         raise RunnerError(f"REC meta description outside contract v2 range 130-140 chars: {len(meta)}")
     return title, meta, focus
