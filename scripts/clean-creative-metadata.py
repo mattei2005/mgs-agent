@@ -49,7 +49,8 @@ ALLOWED_STRUCTURAL_TAGS = {
     'CompressorID', 'SourceImageWidth', 'SourceImageHeight', 'ColorProfiles',
     'ColorPrimaries', 'TransferCharacteristics', 'MatrixCoefficients',
     'VideoFullRangeFlag', 'BufferSize', 'MaxBitrate', 'AverageBitrate',
-    'VideoFrameRate',
+    'VideoFrameRate', 'Balance', 'AudioFormat', 'AudioChannels',
+    'AudioBitsPerSample', 'AudioSampleRate',
 }
 
 
