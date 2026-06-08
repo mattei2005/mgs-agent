@@ -735,24 +735,63 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
     if len(subtitle) > 100:
         subtitle = subtitle[:97].rsplit(" ", 1)[0].rstrip(" ,;:") + "."
     st = p1_static(lang, card_name, fee, apr, value_focus, site.get("domain", ""))
-    blocks=[wp_paragraph(subtitle), f'<!-- wp:image {{"id":{featured_id},"sizeSlug":"large","linkDestination":"none"}} -->\n<figure class="wp-block-image size-large"><img src="{featured_url}" alt="{html.escape(card_name)}" class="wp-image-{featured_id}"/></figure>\n<!-- /wp:image -->']
-    blocks.extend(wp_paragraph(st[k]) for k in ["intro1","intro2","intro3"])
-    card_block=lazy_credit_card_p1(site, card_name, card_slug, card_id, card_url, card_data, official_url, button_hex, lang); blocks.append(card_block)
-    h=c["heads"]
-    sections=[
-        (h[0],[p1_perceived_benefit(benefits_l[0], card_name=card_name),p1_perceived_benefit(benefits_l[1], card_name=card_name),p1_perceived_benefit(benefits_l[2], card_name=card_name),p1_perceived_benefit(benefits_l[3], card_name=card_name)]),
-        (h[1],[st["work1"],st["work2"],localize_fact("If rewards are attached to spending, they should come from purchases you already planned to make.", lang)]),
-        (h[2],[st["cost1"],st["cost2"],localize_fact(f"For the {card_name}, confirm fees, timing rules, exclusions and promotional deadlines on the current issuer page before applying.", lang)]),
-        (h[3],[localize_fact(positioning.get("reward_1") or benefits_l[0], lang),localize_fact(positioning.get("reward_2") or benefits_l[1], lang),localize_fact(positioning.get("reward_3") or benefits_l[2], lang)]),
-        (h[4],[st["qual1"],localize_fact(f"Use any issuer eligibility checker to compare {value_focus} with your own circumstances before a full application.", lang),localize_fact(f"The practical question is whether the {card_name} still makes sense after fees, APR, borrowing and repayment timing are considered together.", lang)]),
-        (h[5],[localize_fact(positioning.get("max_1") or benefits_l[0], lang),localize_fact(positioning.get("max_2") or benefits_l[1], lang),localize_fact(positioning.get("max_3") or benefits_l[2], lang)]),
-        (h[6],[st["apply1"],localize_fact(f"Have income, address and borrowing details ready, then compare the issuer’s final offer with {value_focus}.", lang),localize_fact("If the official page shows different fees, APR, transfer terms or reward rules from what you expected, pause before submitting personal information.", lang)]),
-        (h[7],[st["right1"],localize_fact("If the fee, APR or eligibility conditions do not fit your situation, compare other cards before applying.", lang),localize_fact(positioning.get("right_3") or "Compare the card with at least one alternative before applying.", lang)]),
+    card_block = lazy_credit_card_p1(site, card_name, card_slug, card_id, card_url, card_data, official_url, button_hex, lang)
+
+    def benefit_para(raw: str, idx: int) -> str:
+        base = p1_perceived_benefit(raw, card_name=card_name)
+        if idx == 0:
+            return f"{base} This is the first point to judge because it defines whether the product solves a real spending need."
+        if idx == 1:
+            return f"{base} The practical value depends on using the feature without creating unnecessary purchases or carrying avoidable debt."
+        if idx == 2:
+            return f"{base} Compare this benefit with your current card so the difference is specific, not just promotional."
+        return f"{base} It should support the main use case rather than distract from costs, repayment and eligibility."
+
+    cost_paras = [
+        st["cost1"],
+        st["cost2"],
+        localize_fact(f"For the {card_name}, confirm fees, APR, exclusions, promotional timing and any reward rules on the current issuer page before applying.", lang),
     ]
-    for heading, paras in sections:
-        blocks.append(wp_heading(heading)); blocks.extend(wp_paragraph(p) for p in paras)
-    blocks.append(card_block); body="\n\n".join(blocks); body,wc=fit_word_count(body, lang)
-    return body, {"subtitle":subtitle,"subtitle_chars":len(subtitle),"word_count":wc,"featured_inserted":True,"lazyblocks":2,"effective_language":lang,"contract_p1":contract.get("path"),"contract_mode":contract.get("contract_mode", CONTRACT_MODE)}
+    req_paras = [
+        st["qual1"],
+        localize_fact(f"Use any issuer eligibility checker to compare {value_focus} with your own circumstances before a full application.", lang),
+        localize_fact("Approval, credit limit and final terms are decided by the issuer, so this page should help you prepare rather than promise an outcome.", lang),
+    ]
+
+    blocks = [
+        wp_paragraph(subtitle),
+        f'<!-- wp:image {{"id":{featured_id},"sizeSlug":"large","linkDestination":"none"}} -->\n<figure class="wp-block-image size-large"><img src="{featured_url}" alt="{html.escape(card_name)}" class="wp-image-{featured_id}"/></figure>\n<!-- /wp:image -->',
+        wp_paragraph(st["intro1"]),
+        wp_paragraph(st["intro2"]),
+        wp_paragraph(st["intro3"]),
+        card_block,
+        wp_details("Benefícios", [benefit_para(benefits_l[0],0), benefit_para(benefits_l[1],1), benefit_para(benefits_l[2],2), benefit_para(benefits_l[3],3)]),
+        wp_details("Quem deveria usar", [
+            localize_fact(f"The {card_name} is most useful when {value_focus} fits spending you already expect to make.", lang),
+            localize_fact("It may suit readers who want to compare benefits, cost and application requirements before leaving for the official issuer page.", lang),
+            localize_fact("It is less suitable when the strongest benefit would require extra spending or when repayment discipline is uncertain.", lang),
+        ]),
+        wp_heading("Como funciona o cartão" if lang == "pt" else c["heads"][1]),
+        wp_paragraph(st["work1"]),
+        wp_paragraph(st["work2"]),
+        wp_paragraph(localize_fact("If rewards, cashback, points or travel benefits apply, they should be judged through ordinary purchases and realistic repayment behaviour.", lang)),
+        wp_heading("Como solicitar o cartão" if lang == "pt" else c["heads"][6]),
+        wp_paragraph(st["apply1"]),
+        wp_paragraph(localize_fact(f"Have income, address and borrowing details ready, then compare the issuer’s final offer with {value_focus}.", lang)),
+        wp_paragraph(localize_fact("If the official page shows different fees, APR, transfer terms or reward rules from what you expected, pause before submitting personal information.", lang)),
+        wp_details("APR, taxas e custos" if lang == "pt" else c["heads"][2], cost_paras),
+        wp_details("Requisitos para solicitar" if lang == "pt" else c["heads"][4], req_paras),
+        wp_heading(c["heads"][7]),
+        wp_paragraph(st["right1"]),
+        wp_paragraph(localize_fact("If the fee, APR or eligibility conditions do not fit your situation, compare other cards before applying.", lang)),
+        wp_paragraph(localize_fact(positioning.get("right_3") or "Compare the card with at least one alternative before applying.", lang)),
+        card_block,
+    ]
+    body = "\n\n".join(blocks)
+    body, wc = fit_word_count(body, lang)
+    keyword_count = count_keyword_occurrences(card_name, body)
+    return body, {"subtitle":subtitle,"subtitle_chars":len(subtitle),"word_count":wc,"featured_inserted":True,"lazyblocks":2,"details_blocks":4,"effective_language":lang,"contract_p1":contract.get("path"),"contract_mode":contract.get("contract_mode", CONTRACT_MODE),"keyword_count_body":keyword_count}
+
 
 def visible_word_count(body: str) -> int:
     src = re.sub(r"<!-- wp:lazyblock/credit-card.*?/-->", " ", body, flags=re.S)
