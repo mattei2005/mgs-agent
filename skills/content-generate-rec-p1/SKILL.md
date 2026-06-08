@@ -586,9 +586,17 @@ Bloquear antes de publicar/reportar sucesso quando:
 - dado essencial não está confirmado;
 - runner/orchestrator indica uso de cache editorial indevido;
 - idioma de produção conflita com `data/sites.json`;
+- o artigo mistura idiomas, por exemplo corpo em inglês com headings/details em português como `Benefícios` ou `Quem deveria usar`;
 - imagem do card falha em identidade/qualidade;
 - featured REC e P1 são iguais;
+- a featured image mostra o cartão cortado, ocluído por pessoa/objeto/camada, ou sem bordas/cantos/logo críticos totalmente visíveis;
 - REC e P1 repetem frases/parágrafos demais;
+- benefícios aparecem como labels genéricos em vez de funcionalidades reais do produto, por exemplo `Main benefit`, `Financial value`, `Usage convenience` ou `Complementary benefit`;
+- category/tag/descriptor interpreta mal um fato confirmado, por exemplo transformar `Clubcard points` em `Travel rewards` sem benefício de viagem confirmado;
+- REC/P1 contêm `reader`, `readers` ou `users` como tratamento editorial ao público em vez de segunda pessoa (`you`/`your`), salvo ocorrência técnica inevitável fora do corpo editorial;
+- REC ou P1 não contém exatamente um LazyBlock de card válido no fluxo normal;
+- CTA final não renderiza como botão/LazyBlock válido ou aparece apenas como hyperlink simples/CSS solto;
+- headings/details vazios aparecem no HTML final;
 - title/subtitle/excerpt/meta ficam fora dos limites e não foram reparados;
 - WordPress/Yoast/public HTTP ou evidência draft não confirma o estado esperado;
 - runner/orchestrator retorna erro não resolvido.
