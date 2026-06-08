@@ -202,10 +202,8 @@ def render_block(data: Mapping[str, Any], kind: str) -> list[str]:
     return [
         f"📄 {article_type(data, kind)}",
         f"📊  Yoast: SEO {seo_score(data)} / Readability {readability_score(data)}",
-        f"• Validação: {word_count(data)} palavras / subtitle {subtitle_chars(data)} chars / público HTTP {public_http(data)}",
+        f"• Validação: {word_count(data)} palavras / subtitle {subtitle_chars(data)} chars / excerpt {excerpt_chars(data)} chars / público HTTP {public_http(data)}",
         f"• Title: {title(data)} — {title_chars(data)} chars",
-        f"• Subtitle: {subtitle(data)} — {subtitle_chars(data)} chars",
-        f"• Excerpt: {excerpt(data)} — {excerpt_chars(data)} chars",
         f"• Focus: {focus(data)}",
         f"• Meta Description: {meta(data)}- {meta_chars(data)} chars",
         f"• Tags: {tags(data)}",
