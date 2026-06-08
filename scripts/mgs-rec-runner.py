@@ -1538,7 +1538,7 @@ def main() -> int:
             first_validation = validate_html_soft(tmp_html)
             first_count = int(first_validation.get("count") or 0)
             if first_validation.get("status") != "PASS" and first_count < 450 and first_validation.get("subtitle") == "pass":
-                current = pad_content_to_min_words(current, first_count, 450)
+                current = pad_content_to_min_words(current, first_count, 470)
                 tmp_html.write_text(current)
             elif first_validation.get("status") != "PASS" and first_count > 500 and first_validation.get("subtitle") == "pass":
                 current = trim_content_to_max_words(current, first_count, 500)
