@@ -895,7 +895,7 @@ def title_and_meta(card_name: str, card_data: Dict[str, Any], lang: str) -> Tupl
         title = c["title"].format(focus=focus)
     if len(title) > 60: title = f"{focus}: {c['heads'][6]}"
     meta = f"{card_name} guide with costs, benefits, eligibility notes and official issuer apply link before you continue." if lang == "en" else c["meta"].format(focus=card_name)
-    additions = {"en":" Review issuer terms before applying.","es":" Revisa los términos del emisor antes de solicitar.","pt":" Confira os termos do emissor antes de solicitar.","tr":" Başvurmadan önce kurum şartlarını kontrol et."}
+    additions = {"en":" Check issuer terms before applying.","es":" Revisa los términos del emisor antes de solicitar.","pt":" Confira os termos do emissor antes de solicitar.","tr":" Başvurmadan önce kurum şartlarını kontrol et."}
     while len(meta) < 130:
         candidate = meta.rstrip(".") + additions[lang]
         if len(candidate) > 150:

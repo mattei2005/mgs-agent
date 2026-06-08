@@ -1059,7 +1059,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
         wp_h2(labels["final"]),
         wp_p(conclusion),
         wp_p("Use this recommendation as a first filter, then compare the official page with your budget, spending habits and repayment plan with more confidence."),
-        wp_p("Review the latest official conditions before deciding, because rates and benefits can change over time."),
+        wp_p("Check the latest official conditions before deciding, because rates and benefits can change over time."),
     ])
     html_body = "\n\n".join(blocks)
     return {
@@ -1223,7 +1223,7 @@ def title_meta_focus(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, st
             remaining = 130 - len(meta)
             if remaining <= 0:
                 break
-            meta = clean_sentence_punctuation((meta.rstrip(".") + " Review official terms.")[:140])
+            meta = clean_sentence_punctuation((meta.rstrip(".") + " Check official terms.")[:140])
             break
     if len(meta) < 130:
         meta = clean_sentence_punctuation((meta.rstrip(".") + " Review official issuer terms before applying.")[:140])
