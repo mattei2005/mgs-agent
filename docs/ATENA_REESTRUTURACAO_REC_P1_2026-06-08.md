@@ -240,6 +240,7 @@ Correção aplicada:
 - P1 não adiciona mais `rewards credit card` por default.
 - `purchase credit card` só entra quando houver oferta de compra 0%, interest-free, introdutória ou promocional confirmada.
 - Validação por monkeypatch confirmou que cartão com “everyday purchases” não recebe tag falsa de rewards/purchase, enquanto cartão com oferta promocional de compra recebe `purchase credit card`.
+- Revisão adicional após questionamento do Rodolfo removeu fallback visual falso na P1: LazyBlock não usa mais `Avios rewards`, `rewards credit card` ou travel/cashback como fallback quando o cartão não tem esse benefício confirmado. `tag10`, `tag2` e descriptor agora derivam dos benefícios confirmados do cartão.
 
 ## Observação de escopo
 
