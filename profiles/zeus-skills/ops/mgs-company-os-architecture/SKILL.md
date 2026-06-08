@@ -325,12 +325,17 @@ Phase 5 Hera Creative Ops alignment pattern:
    and adapt per operation as the real workflow stabilizes.
 6. Inventory should track origin and consumer, at minimum: `created_by`,
    `requested_by`, `used_by`, `campaign_owner`, and `source`.
-7. When aligning Hera files, patch live + versioned SOUL/skill/templates, verify
+7. Creative metadata is a first-class handoff gate: Hera should clean assets
+   before Drive/handoff, and Ares should verify/clean before campaign use. The
+   canonical wrapper is `/root/mgs-agent/scripts/clean-creative-metadata.sh`;
+   avoid deploying ExifCleaner/Electron on the VPS for agent workflows.
+8. When aligning Hera files, patch live + versioned SOUL/skill/templates, verify
    live/versioned equality, validate with `git diff --check` and secret scan,
-   restart `hera-gateway.service`, confirm Discord connected, and audit log.
+   restart/reload `hera-gateway.service` when SOUL changes, confirm Discord
+   connected, and audit log.
 ```
 
-Detailed runbook: `references/hera-creative-ops-natural-requests-2026-06-07.md`.
+Detailed runbooks: `references/hera-creative-ops-natural-requests-2026-06-07.md` and `references/creative-metadata-sanitizer-hera-ares-2026-06-08.md`.
 
 Phase 5 Atena reconstruction gate pattern:
 
@@ -507,6 +512,7 @@ Avoid overexplaining. Give an operational opinion and the next concrete step.
 ## Referências operacionais
 
 - `references/hera-ares-creative-taxonomy-sync-2026-06-07.md` — sincronização Hera/Ares quando a taxonomia, Drive e Canva forem definidos em thread do Ares: Hera deve herdar a taxonomia CC_US_ES, `MGS-CRIATIVOS`, `UPLOAD CANVAS`, `P_ORIENT` PV/NV/PS/NS, inventário e gate de plano aprovado antes de renomear/mover criativos.
+- `references/creative-metadata-sanitizer-hera-ares-2026-06-08.md` — implementação do gate server-side de limpeza de metadados para criativos Hera/Ares: usar ExifTool/mat2 via wrapper MGS, validar com PNG malicioso `PNG:Comment`, atualizar context/SOUL/docs, auditar e reportar infra.
 - `references/hera-creative-agent-bootstrap-ptbr.md` — padrão capturado na criação da Hera: sequência segura de bootstrap de agente MGS, padronização PT-BR para SOUL/docs/skills/templates e regra de anexar arquivos longos como `MEDIA:/path`.
 - `references/company-os-phase3-inventory-phase4-company-2026-06-07.md` — padrão capturado na execução da Fase 3/Fase 4: inventário como mapa de risco, como explicar a revisão para Rodolfo, cobertura mínima do inventário v0.2 e padrão de primeiro bloco `context/company.md`.
 - `references/company-os-phase4-context-continuity-crons-2026-06-07.md` — padrão capturado na Fase 4 sequencial: continuidade de contexto em thread longa, “ok continue” como avanço de bloco, revisão de `docs/CRONS.md` sem alterar runtime/crontab, e correções de metadados via `cron-control-plane.py`.
