@@ -511,7 +511,7 @@ Se alguma tentativa pode ter subido mídia antes de falhar, cleanup deve procura
 
 Ao finalizar REC+P1, responder em uma única mensagem.
 
-Disciplina de formato para Rodolfo: não transformar uma melhoria opcional em “falha” do relatório. Se o relatório já mostra `subtitle <chars>` na linha de validação, isso conta como evidência de validação do subtitle; só marcar como pendência se o formato aprovado exigir também o texto explícito em linha própria. Linhas como `Subtitle: <texto>` e `Excerpt: <texto>` são úteis para QA editorial, mas devem ser tratadas como complemento/versão expandida, não como blocker automático, salvo pedido explícito de Rodolfo/Raquel ou regra ativa do renderer.
+Disciplina de formato para Rodolfo: usar o formato enxuto aprovado. Se o relatório mostra `subtitle <chars>` e `excerpt <chars>` na linha de validação, isso conta como evidência desses campos. Não adicionar linhas próprias `Subtitle: <texto>` ou `Excerpt: <texto>` no relatório padrão REC+P1, salvo pedido explícito de versão expandida para QA editorial.
 
 Usar o renderer determinístico sempre que existir output JSON compatível:
 
