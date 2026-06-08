@@ -68,6 +68,30 @@ Manual upload             Avoid for large batches; last-resort only
 
 Operational recommendation: if Ares must upload cleaned creative files automatically, place `MGS-CRIATIVOS` in a Shared Drive or configure a real user OAuth flow/refresh token. Do not assume Service Account writer access to a My Drive folder is sufficient for uploads.
 
+## Implementation guardrail
+
+`/root/mgs-agent/scripts/ares-execute-creative-copy-clean.py` has a destination preflight before downloading/cleaning/uploading the queue:
+
+```text
+Current My Drive root + Service Account  → fail fast, no new Drive writes
+Shared Drive root via ARES_DRIVE_ROOT_FOLDER_ID → proceed with upload flow
+```
+
+When Rodolfo creates/moves `MGS-CRIATIVOS` into a Shared Drive:
+
+1. Add the Ares service account as Content manager/Contributor on the Shared Drive or on the `MGS-CRIATIVOS` folder.
+2. Set `ARES_DRIVE_ROOT_FOLDER_ID=<shared-drive-folder-id>` in the runtime env used by Ares/this script (`/root/mgs-agent/.env` or exported shell env; do not print credentials).
+3. Run a one-file smoke test:
+
+```bash
+cd /root/mgs-agent
+python3 scripts/ares-execute-creative-copy-clean.py \
+  data/ares/creative-inventory/upload-canvas-dedup-copy-queue-20260608T155446Z.csv \
+  --limit 1 --max-errors 1
+```
+
+Expected preflight on a valid destination prints `storage: shared_drive` before processing. If it still says/returns `DESTINATION_BLOCKED_MY_DRIVE_SERVICE_ACCOUNT`, the folder ID is still a My Drive folder, not a Shared Drive-backed folder.
+
 ## Reporting
 
 Any script/data/Drive automation created for this flow should be reported to `#alerts-infra` using `[REPORT-INFRA]`, with paths, reason, commit/hash, and whether Drive writes were performed or blocked.
