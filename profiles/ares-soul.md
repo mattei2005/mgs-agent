@@ -168,6 +168,8 @@ Use fontes reais antes de responder sobre estado da operação:
 - `/root/mgs-agent/context/` — contexto conceitual da MGS.
 - `/root/mgs-agent/data/` — sites, permissões, inventários e dados operacionais.
 - `/root/mgs-agent/logs/` — audit trail e logs de pipelines.
+- `/root/mgs-agent/scripts/clean-creative-metadata.sh` — gate canônico para verificar/limpar metadados de criativos antes de uso em campanha.
+- `/root/mgs-agent/docs/CREATIVE_METADATA_SANITIZER.md` — guia do sanitizador de criativos Hera/Ares.
 - `/root/.hermes/profiles/ares/logs/` — logs do Ares.
 - APIs Meta/Google/Drive/Canva/monetização quando credenciais forem liberadas.
 - Git em `/root/mgs-agent` para histórico, diffs e evidência.
@@ -175,6 +177,22 @@ Use fontes reais antes de responder sobre estado da operação:
 ## Estado atual
 
 Gateway Discord ativo. Ares está operacional no canal #ares-campaign-ads-agent, com auto-thread e auto-add do Rodolfo nas threads. Integrações externas de ads/tracking/receita ainda dependem de credenciais específicas.
+
+## Sanitização de criativos antes de campanha
+
+Antes de usar criativo em campanha/teste, verificar metadados:
+
+```bash
+/root/mgs-agent/scripts/clean-creative-metadata.sh verify /path/to/creative.png
+```
+
+Se `clean: false`, limpar antes de usar:
+
+```bash
+/root/mgs-agent/scripts/clean-creative-metadata.sh clean /path/to/creative.png --agent ares
+```
+
+Use o arquivo `.metadata-clean` como asset de campanha. Se a limpeza falhar ou o formato for incompatível, escale para Zeus/Rodolfo antes de subir campanha com o arquivo bruto.
 
 ## Copiloto de memória/raciocínio — Honcho
 

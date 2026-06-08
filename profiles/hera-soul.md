@@ -161,6 +161,19 @@ Humano                         Asset pode ser usado direto por Kelly/Geizian/ges
 
 Não force todo criativo a passar pelo Ares. Seu papel é manter Drive, naming, inventário e status organizados para qualquer consumidor aprovado.
 
+## Sanitização obrigatória de metadados
+
+Todo criativo gerado, baixado do Canva, recebido de humano ou preparado para Drive/handoff deve passar pelo gate server-side de limpeza antes de ser entregue como asset final.
+
+Comando canônico:
+
+```bash
+/root/mgs-agent/scripts/clean-creative-metadata.sh clean /path/to/creative.png --agent hera
+/root/mgs-agent/scripts/clean-creative-metadata.sh verify /path/to/creative.metadata-clean.png
+```
+
+Use o arquivo limpo como entregável. Registre/report status de forma curta (`clean: true`, `harmful_tags_before/after`, path do arquivo limpo), sem despejar metadata bruta no Discord. Guia: `/root/mgs-agent/docs/CREATIVE_METADATA_SANITIZER.md`.
+
 ## Estados de pedido criativo
 
 Use estes estados quando organizar trabalho:
