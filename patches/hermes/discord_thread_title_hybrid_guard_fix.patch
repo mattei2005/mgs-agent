@@ -233,7 +233,7 @@ index 14dc362a4..c64d0efbd 100644
                          self._session_db,
                          effective_session_id,
 diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
-index 3d97274ea..a1b16fd58 100644
+index 3d97274ea..a4580ff55 100644
 --- a/plugins/platforms/discord/adapter.py
 +++ b/plugins/platforms/discord/adapter.py
 @@ -20,7 +20,7 @@ import tempfile
@@ -313,7 +313,7 @@ index 3d97274ea..a1b16fd58 100644
  
          except discord.Forbidden:
              logger.debug("[%s] Missing permissions to fetch channel history", self.name)
-@@ -4151,26 +4187,288 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4151,26 +4187,294 @@ class DiscordAdapter(BasePlatformAdapter):
      # Auto-thread helpers
      # ------------------------------------------------------------------
  
@@ -538,6 +538,12 @@ index 3d97274ea..a1b16fd58 100644
 +            if any(w in lowered for w in ("video", "vídeo")):
 +                return "Criativo de Vídeo"
 +            return "Pedido de Criativo"
++        if any(w in lowered for w in ("imagem", "foto", "arte", "video", "vídeo")) and any(w in lowered for w in ("anuncio", "anúncio", "ads", "campanha", "facebook", "meta", "google")):
++            return "Criativo de Anúncio"
++        if any(w in lowered for w in ("imagem", "foto", "arte")) and any(w in lowered for w in ("crie", "cria", "criar", "faca", "faça", "faz", "fazer")):
++            return "Criativo de Imagem"
++        if any(w in lowered for w in ("video", "vídeo")) and any(w in lowered for w in ("crie", "cria", "criar", "faca", "faça", "faz", "fazer")):
++            return "Criativo de Vídeo"
 +        if any(w in lowered for w in ("autoriz", "aprova", "libera", "nega")):
 +            return "Autorização de acesso"
 +        if "status da empresa" in lowered or "status da mgs" in lowered:
@@ -613,7 +619,7 @@ index 3d97274ea..a1b16fd58 100644
              return thread
          except Exception as direct_error:
              display_name = getattr(getattr(message, "author", None), "display_name", None) or "unknown user"
-@@ -4182,6 +4480,11 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4182,6 +4486,11 @@ class DiscordAdapter(BasePlatformAdapter):
                      auto_archive_duration=1440,
                      reason=reason,
                  )
@@ -625,7 +631,7 @@ index 3d97274ea..a1b16fd58 100644
                  return thread
              except Exception as fallback_error:
                  logger.warning(
-@@ -4802,12 +5105,15 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -4802,12 +5111,15 @@ class DiscordAdapter(BasePlatformAdapter):
          if not is_thread and not isinstance(message.channel, discord.DMChannel):
              no_thread_channels_raw = os.getenv("DISCORD_NO_THREAD_CHANNELS", "")
              no_thread_channels = {ch.strip() for ch in no_thread_channels_raw.split(",") if ch.strip()}
@@ -642,7 +648,7 @@ index 3d97274ea..a1b16fd58 100644
                      parent_channel_id = str(message.channel.id)
                      is_thread = True
                      thread_id = str(thread.id)
-@@ -5087,9 +5393,19 @@ class DiscordAdapter(BasePlatformAdapter):
+@@ -5087,9 +5399,19 @@ class DiscordAdapter(BasePlatformAdapter):
          if thread_id:
              self._threads.mark(thread_id)
  
@@ -665,7 +671,7 @@ index 3d97274ea..a1b16fd58 100644
              self._enqueue_text_event(event)
          else:
              await self.handle_message(event)
-@@ -6410,6 +6726,11 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
+@@ -6410,6 +6732,11 @@ def _apply_yaml_config(yaml_cfg: dict, discord_cfg: dict) -> dict | None:
          os.environ["DISCORD_FREE_RESPONSE_CHANNELS"] = str(frc)
      if "auto_thread" in discord_cfg and not os.getenv("DISCORD_AUTO_THREAD"):
          os.environ["DISCORD_AUTO_THREAD"] = str(discord_cfg["auto_thread"]).lower()
