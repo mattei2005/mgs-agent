@@ -212,9 +212,9 @@ def parse_card_from_rec(raw: str, rendered: str, rec_title: str) -> Dict[str, An
         "card_name": card_name,
         "card_url": card_url,
         "card_id": int(card_id) if card_id else None,
-        "tag10": payload.get("tag10") or "Card benefits",
-        "tag2": payload.get("tag2") or "Credit card",
-        "descriptor": payload.get("texto") or f"Learn more about the {card_name}.",
+        "tag10": payload.get("tag10"),
+        "tag2": payload.get("tag2"),
+        "descriptor": payload.get("texto"),
     }
 
 
