@@ -39,7 +39,7 @@ def has(pattern: str, text: str) -> bool:
     return re.search(pattern, text) is not None
 
 
-def proposal(row: dict[str, str]) -> dict[str, str]:
+def proposal(row: dict[str, str], md5_vertical: dict[str, tuple[str, str]]) -> dict[str, str]:
     text = norm(row["relative_path"] + " " + row["original_filename"])
     jobs = has(r"\b(EMPREGO|JOB|JOBS|TRABALHO|TRABAJOS?|ALMACEN|REPARTIDORES?|MEDICAMENTOS|CONTRATANDO|VACANTES?|HORA|HR)\b", text)
     cc = has(r"\b(TARJETA|CARD|CREDITO|CREDIT|KREDIT|KREDITKARTE|CARTAO|LIMITE|LIMIT|VISA|MASTERCARD|APROBADA|APPROVED|GENEHMIGT)\b", text)
@@ -52,6 +52,10 @@ def proposal(row: dict[str, str]) -> dict[str, str]:
         vertical = "CC"
         confidence = "high"
         reason = "credit-card keyword"
+    elif row.get("md5_checksum") in md5_vertical:
+        vertical, inherited_reason = md5_vertical[row["md5_checksum"]]
+        confidence = "medium"
+        reason = "duplicate MD5 inherits " + inherited_reason
     elif top in VISUAL_CC_TOP_FOLDERS:
         vertical = "CC"
         confidence = "medium"
