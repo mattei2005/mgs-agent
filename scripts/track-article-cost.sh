@@ -29,7 +29,7 @@ DB="/root/mgs-agent/data/article-tracker.db"
 SCRIPT_LOG="/root/mgs-agent/logs/track-article-cost.log"
 
 # GPT-5.5 pricing hipotético (USD / 1M tokens)
-# ⚠️  SINGLE SOURCE OF TRUTH: skills/content-generate-rec/references/pricing.md
+# ⚠️  SINGLE SOURCE OF TRUTH: skills/content-generate-rec-p1/references/pricing.md
 # Sem pricing oficial — estimativa baseada em modelos similares OpenAI
 # Ajustar quando OpenAI publicar pricing oficial do gpt-5.5
 # Se atualizar aqui, atualizar TAMBÉM em monitor-gpt55-oauth-cost.sh
