@@ -66,6 +66,10 @@ data/backup-*/
 *.lock
 *.pid
 
+# ─── Secrets locais (não versionar) ───────────────────────────
+.secrets/
+secrets/
+
 # ─── Outros temporários ───────────────────────────────────────
 .tmp/
 tmp/

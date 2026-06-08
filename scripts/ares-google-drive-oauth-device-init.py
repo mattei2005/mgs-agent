@@ -22,6 +22,7 @@ from typing import Any
 
 DEFAULT_VAULT = os.environ.get("OP_DEFAULT_VAULT", "MGS Conteúdo")
 DEFAULT_ITEM = os.environ.get("ARES_DRIVE_OAUTH_OP_ITEM", "Google OAuth - Ares Drive")
+TOKEN_FILE = os.environ.get("ARES_DRIVE_OAUTH_TOKEN_FILE", "/root/mgs-agent/.secrets/ares-google-drive-oauth.json")
 SCOPES = "https://www.googleapis.com/auth/drive"
 
 
