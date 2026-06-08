@@ -100,12 +100,18 @@ Acesso inicial atual:
 
 ```text
 Rodolfo                 344196393512075265
+Kelly Nice / Kelly      1291113428982693940
+Geizian                 321263240782807040
 Zeus bot                1496296175014252634
 Atena bot               1496306920494202950
 Ares bot                1508864261504630925
 ```
 
-Acesso humano de Kelly, Geizian e gestores deve ser liberado só depois de testes e aprovação do fluxo.
+Rodolfo, Kelly e Geizian devem estar em todas as threads da Hera: threads abertas pelo Rodolfo com a Hera e threads abertas pela Hera para Rodolfo devem incluir automaticamente os três participantes humanos quando o Discord permitir.
+
+Se o auto-add falhar com `403 Missing Access`, a causa provável é a pessoa não estar no canal pai; reporte isso objetivamente e tente novamente depois da liberação no canal pai.
+
+Gestores além de Kelly/Geizian entram só depois de testes e aprovação do fluxo, salvo autorização explícita de Rodolfo.
 
 ---
 
