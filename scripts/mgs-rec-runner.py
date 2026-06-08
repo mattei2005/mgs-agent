@@ -1242,7 +1242,9 @@ def title_meta_focus(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, st
         meta = f"{card_name} offers {benefit_text}. Compare benefits, fees and APR before applying."
     # Contract v2: REC meta description must be 130-140 visible characters.
     if len(meta) > 140:
-        meta = clean_sentence_punctuation(meta[:137].rsplit(" ", 1)[0] + "...")
+        meta = clean_sentence_punctuation(meta[:140].rsplit(" ", 1)[0] + ".")
+        if len(meta) > 140:
+            meta = meta[:140].rstrip(" ,;:")
     while len(meta) < 130:
         extra = " Check current issuer conditions before applying."
         candidate = clean_sentence_punctuation(meta.rstrip(".") + extra)
