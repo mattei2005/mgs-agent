@@ -52,7 +52,7 @@ apply_patch_if_needed() {
       ;;
     discord-post-response-thread-title-rename.patch)
       if grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
-        && grep -q "Discord thread renamed from auto-generated title" "$REPO/gateway/run.py"; then
+        && grep -Eq "Discord thread renamed from auto-generated title|Discord GPT-style thread title applied" "$REPO/gateway/run.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
@@ -90,7 +90,7 @@ grep -q "service-manager restarts while a chat task is active" "$REPO/gateway/ru
   || fail "missing restart/service-manager auto-resume marker"
 grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
   || fail "missing Discord post-response thread rename callback"
-grep -q "Discord thread renamed from auto-generated title" "$REPO/gateway/run.py" \
+grep -Eq "Discord thread renamed from auto-generated title|Discord GPT-style thread title applied" "$REPO/gateway/run.py" \
   || fail "missing Discord thread rename audit log marker"
 
 PYBIN="$REPO/venv/bin/python"
