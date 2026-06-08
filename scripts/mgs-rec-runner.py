@@ -852,8 +852,17 @@ def derive_lazyblock_tags(card_name: str, benefits: List[str], annual_fee: str =
             continue
         if t.lower() not in [x.lower() for x in clean]:
             clean.append(t)
-    while len(clean) < 2:
-        clean.append("Everyday value" if not clean else "Apply online")
+    for benefit in benefits:
+        candidate = re.sub(r"\s+", " ", str(benefit or "")).strip(" .;:,!")[:25].rstrip(" .;:,")
+        if candidate and candidate.lower() not in [x.lower() for x in clean]:
+            try:
+                clean.append(card_ui_tag(candidate, candidate, card_name=card_name, annual_fee=annual_fee))
+            except RunnerError:
+                pass
+        if len(clean) >= 2:
+            break
+    if len(clean) < 2:
+        raise RunnerError("Could not derive two LazyBlock tags from confirmed card benefits; do not use generic fallback labels")
     return clean[0], clean[1], descriptor
 
 
