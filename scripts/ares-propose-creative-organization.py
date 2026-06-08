@@ -90,7 +90,19 @@ def main() -> int:
     ap.add_argument("--out-dir", default="/root/mgs-agent/data/ares/creative-inventory")
     args = ap.parse_args()
     rows = list(csv.DictReader(open(args.inventory_csv, encoding="utf-8")))
-    proposed = [proposal(r) for r in rows]
+    md5_vertical: dict[str, tuple[str, str]] = {}
+    for r in rows:
+        checksum = r.get("md5_checksum") or ""
+        if not checksum:
+            continue
+        text = norm(r["relative_path"] + " " + r["original_filename"])
+        if has(r"\b(EMPREGO|JOB|JOBS|TRABALHO|TRABAJOS?|ALMACEN|REPARTIDORES?|MEDICAMENTOS|CONTRATANDO|VACANTES?|HORA|HR)\b", text):
+            md5_vertical[checksum] = ("JOBS", "jobs keyword")
+        elif has(r"\b(TARJETA|CARD|CREDITO|CREDIT|KREDIT|KREDITKARTE|CARTAO|LIMITE|LIMIT|VISA|MASTERCARD|APROBADA|APPROVED|GENEHMIGT)\b", text):
+            md5_vertical[checksum] = ("CC", "credit-card keyword")
+        elif r["source_top_folder"] in VISUAL_CC_TOP_FOLDERS:
+            md5_vertical.setdefault(checksum, ("CC", "homogeneous CC top-folder visual sample"))
+    proposed = [proposal(r, md5_vertical) for r in rows]
     stamp = dt.datetime.now(dt.UTC).strftime("%Y%m%dT%H%M%SZ")
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
