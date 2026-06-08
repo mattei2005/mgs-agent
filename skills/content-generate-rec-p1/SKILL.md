@@ -350,6 +350,7 @@ REC e P1 não podem terminar com a mesma featured image.
 Featured REC -> imagem contextual própria do REC.
 Featured P1  -> imagem contextual própria da P1, diferente da REC.
 Imagem interna P1 -> pode reutilizar a featured da P1 após a primeira frase inicial/subtítulo.
+Card isolado -> ativo separado do LazyBlock REC/P1; pode ser referência/base visual, mas não é a featured final.
 ```
 
 Antes de reportar sucesso em REC+P1, validar:
