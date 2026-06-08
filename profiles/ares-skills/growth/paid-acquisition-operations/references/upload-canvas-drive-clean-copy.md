@@ -63,10 +63,16 @@ After `exiftool -all=`, MP4 files still expose structural QuickTime/container fi
 
 The sanitizer gate should not treat those structural MP4 fields as harmful after cleaning. For video privacy verification, ExifTool harmful-tag count is the gate; `mat2 --show` may still list structural MP4 fields and should not block `clean=true` when ExifTool harmful tags are zero.
 
+Additional ExifTool groups can appear after cleaning, e.g. `Track1:ImageWidth`, `Track1:ImageHeight`, `Track1:XResolution`, `Track1:YResolution`, `Track1:BitDepth`. These are also structural video/image-stream fields, not privacy metadata. If a single MP4 blocks with a small harmful-tag count after cleaning, reproduce on that exact file, inspect ExifTool output, add only clearly structural tags to the allowlist, then verify the cleaned file returns `clean: true` before resuming the bulk queue.
+
 ## Execution guardrails
 
 - `UPLOAD_CANVAS` remains RAW and unchanged.
 - Never expose OAuth refresh tokens, client secrets, Service Account JSON, or Drive file IDs unless operationally necessary.
-- Record every upload in an execution report CSV with queue ID, source ID, destination ID, hashes, status, and error if any.
+- Before starting or resuming the full executor, check for an existing `ares-execute-creative-copy-clean.py` process. Do not launch a second full executor in parallel; Drive uploads are not globally locked and a brief overlap can create duplicate destination files even if the report is resumable by `queue_id`.
+- If a Hermes background session is lost but the OS process is still running, attach monitoring with a lightweight watcher process instead of starting a new executor.
+- Record every upload in an execution report CSV with queue ID, source ID, destination ID, hashes, and status.
+- Summaries must count unique uploaded `queue_id`s, not raw `UPLOADED` rows, because retries/overlaps can duplicate report rows.
 - Use resumable execution: already uploaded queue IDs should be skipped on rerun.
+- If duplicate Drive files may have been created, report the risk and consolidate with evidence before deleting anything; do not auto-delete without Rodolfo's confirmation.
 - REPORT-INFRA is required when adding scripts/data or persistent Drive automation artifacts.
