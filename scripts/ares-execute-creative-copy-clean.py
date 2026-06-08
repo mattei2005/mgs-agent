@@ -199,9 +199,9 @@ class Drive:
         }
         return self.request(f"https://www.googleapis.com/drive/v3/files/{ROOT_FOLDER_ID}?" + urllib.parse.urlencode(params)) or {}
 
-    def preflight_destination(self) -> dict[str, Any]:
+    def preflight_destination(self, auth_mode: str) -> dict[str, Any]:
         meta = self.root_metadata()
-        if not meta.get("driveId"):
+        if auth_mode == "service_account" and not meta.get("driveId"):
             owner = ", ".join(o.get("emailAddress", "") for o in meta.get("owners", []) if o.get("emailAddress"))
             raise RuntimeError(
                 "DESTINATION_BLOCKED_MY_DRIVE_SERVICE_ACCOUNT: "
@@ -302,9 +302,10 @@ def append_report(path: Path, row: dict[str, str]) -> None:
 
 def process_queue(args: argparse.Namespace) -> dict[str, Any]:
     load_env()
-    global ROOT_FOLDER_ID, OP_ITEM
+    global ROOT_FOLDER_ID, OP_ITEM, OAUTH_OP_ITEM
     ROOT_FOLDER_ID = os.environ.get("ARES_DRIVE_ROOT_FOLDER_ID", ROOT_FOLDER_ID)
     OP_ITEM = os.environ.get("ARES_DRIVE_OP_ITEM", OP_ITEM)
+    OAUTH_OP_ITEM = os.environ.get("ARES_DRIVE_OAUTH_OP_ITEM", OAUTH_OP_ITEM)
     token, auth_mode = build_access_token()
     drive = Drive(token)
     root_meta = drive.preflight_destination(auth_mode)
