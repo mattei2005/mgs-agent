@@ -98,6 +98,8 @@ def get_access_token(sa: dict[str, Any]) -> str:
         + b64url(json.dumps(claim, separators=(",", ":")).encode())
     ).encode()
     key = serialization.load_pem_private_key(sa["private_key"].encode(), password=None)
+    if not isinstance(key, rsa.RSAPrivateKey):
+        raise RuntimeError("Service account private key is not RSA")
     signature = key.sign(signing_input, padding.PKCS1v15(), hashes.SHA256())
     jwt = signing_input.decode() + "." + b64url(signature)
     body = urllib.parse.urlencode(
