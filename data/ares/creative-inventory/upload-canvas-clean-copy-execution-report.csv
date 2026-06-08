@@ -14,3 +14,17 @@ harmful_tags: 0
 clean: false
  "
 2026-06-08T16:00:22.121433+00:00,f836d5ef81e0ef02,ERROR,1EhrfjAaVWo6gmyQQFHiaV6Ms_AkN_hkn,,MGS-CRIATIVOS/JOBS_US_ES/VID/LANDSCAPE/UNKNOWN/01_READY_CANDIDATE,FEED-4 Your Story.mp4,,,,HTTP Error 403: Forbidden
+2026-06-08T16:02:23.383611+00:00,f836d5ef81e0ef02,ERROR,1EhrfjAaVWo6gmyQQFHiaV6Ms_AkN_hkn,,MGS-CRIATIVOS/JOBS_US_ES/VID/LANDSCAPE/UNKNOWN/01_READY_CANDIDATE,FEED-4 Your Story.mp4,,,,"HTTP Error 403: Forbidden {
+  ""error"": {
+    ""code"": 403,
+    ""message"": ""Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead."",
+    ""errors"": [
+      {
+        ""message"": ""Service Accounts do not have storage quota. Leverage shared drives (https://developers.google.com/workspace/drive/api/guides/about-shareddrives), or use OAuth delegation (http://support.google.com/a/answer/7281227) instead."",
+        ""domain"": ""usageLimits"",
+        ""reason"": ""storageQuotaExceeded""
+      }
+    ]
+  }
+}
+"
