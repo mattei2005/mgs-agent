@@ -148,6 +148,10 @@ def verify(path: Path) -> dict[str, Any]:
     # mat2 --show normally says "No metadata found" for clean files. Some
     # unsupported formats return non-zero; in that case ExifTool is the gate.
     mat2_reports_metadata = bool(mat2_excerpt and 'No metadata found' not in mat2_excerpt and 'is not supported' not in mat2_excerpt)
+    if str(info.get('mime_type', '')).startswith('video/') and harmful == 0:
+        # mat2 reports MP4 structural/container fields as metadata even after
+        # ExifTool strips privacy metadata. ExifTool is the privacy gate for video.
+        mat2_reports_metadata = False
     info['clean'] = harmful == 0 and not mat2_reports_metadata
     info['mat2_reports_metadata'] = mat2_reports_metadata
     return info
