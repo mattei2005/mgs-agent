@@ -378,7 +378,17 @@ Phase 5 Atena reconstruction gate pattern:
 11. Only apply deeper SKILL/contracts changes after backup + diff + secret scan +
     audit log + auto-push + validation, preserving runners/scripts unless a
     specific targeted bug fix is approved.
-12. When Raquel/Rodolfo revise REC/P1 editorial contracts, compare the new
+12. If Rodolfo/Raquel approve new REC/P1 editorial contracts, do not stop at
+    writing `contracts/cc-rec.md` and `contracts/cc-p1.md`. Immediately map and
+    patch the deterministic runners/validators that must honor those contracts
+    before declaring the phase ready for production. Contract-runner drift is a
+    real operational risk.
+13. For the current REC/P1 contract v2 baseline: P1 keyword count is 5–8 visible
+    editorial uses; REC meta is 130–140 chars; P1 meta is 130–150 chars; P1 uses
+    Details blocks; the card image can repeat in REC/P1 LazyBlocks but featured
+    images must differ; long image composition rules belong in a reference file,
+    not duplicated inside every contract.
+```
     contract against live deterministic runners/validators before calling the
     system production-ready. A contract update is an editorial source-of-truth
     change; runner compatibility is a separate technical gate.
@@ -554,4 +564,5 @@ Before reporting completion of a company-OS step:
 - `references/hera-creative-ops-ares-taxonomy-alignment-2026-06-07.md` — Hera/Ares Creative Ops alignment: Hera creates and organizes static/video creatives, supports human-created assets, Ares is an optional consumer, and CC_US_ES Drive/Canva taxonomy/inventory fields must be synchronized across Hera context/SOUL/skills/templates.
 - `references/company-os-cascade-consistency-review-2026-06-06.md` — cascade consistency checklist for sequential context-file review: stale-term cleanup, Ares/Hera/SB/AV/Ially/gestor-code boundaries, and file-display pattern when Rodolfo asks to review raw content.
 - `references/company-os-team-acquisition-monetization-2026-06-06.md` — approved/validated team and acquisition rewrites plus monetization v0.2 notes; includes Rodolfo's cascade-consistency expectation and verification checklist for stale/conflicting concepts.
+- `references/atena-rec-p1-contract-v2-runner-alignment-2026-06-08.md` — Atena REC/P1 contract v2 decisions and runner-alignment pattern: REC meta 130–140, P1 keyword 5–8 visible uses, P1 Details blocks, card-image vs featured-image distinction, and dry-run/unit validation before production.
 - `references/atena-rec-p1-contract-v2-runner-gate-2026-06-08.md` — REC/P1 contract v2 decisions from Raquel/Rodolfo, including P1 keyword 5-8, REC meta 130-140, new REC/P1 structures, slug cleanup, featured-image reference split, and the required runner/validator migration gate before production use.
