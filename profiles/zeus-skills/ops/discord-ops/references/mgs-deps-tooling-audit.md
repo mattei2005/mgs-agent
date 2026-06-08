@@ -62,7 +62,7 @@ Before reporting success:
 ```bash
 npm test
 npm audit --audit-level=moderate
-python3 -m py_compile api/generate-rec-api.py scripts/*.py skills/content-generate-rec/scripts/*.py
+python3 -m py_compile api/generate-rec-api.py scripts/*.py skills/content-generate-rec-p1/scripts/*.py
 python3 api/generate-rec-api.py   # should return rc=2 for disabled stub, not crash
 scripts/monitor-cron-stale-logs.sh --dry-run
 systemctl is-active zeus-gateway.service mgs-autocommit.service

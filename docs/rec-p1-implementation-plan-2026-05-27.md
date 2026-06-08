@@ -32,7 +32,7 @@ Implement the approved target architecture without rebuilding the entire system 
 
 | File | Purpose | Priority |
 |---|---|---:|
-| `skills/content-generate-rec/contracts/gb-cc-en.md` | Active editorial contract for GB credit-card REC/P1 | P0 |
+| `skills/content-generate-rec-p1/contracts/gb-cc-en.md` | Active editorial contract for GB credit-card REC/P1 | P0 |
 | `scripts/mgs-rec-p1-orchestrator.py` | Coordinates REC runner + P1 runner as one operation | P1 |
 | `scripts/qa-content-validator.py` | Semantic/editorial QA checks beyond current hard gates | P1 |
 | `docs/rec-p1-refactor-test-report-YYYY-MM-DD.md` | Benchmark results after implementation | P2 |
@@ -41,12 +41,12 @@ Implement the approved target architecture without rebuilding the entire system 
 
 | File | Change | Priority |
 |---|---|---:|
-| `skills/content-generate-rec/SKILL.md` | Reduce to routing/how-to; remove active editorial sprawl and cache instructions | P0 |
+| `skills/content-generate-rec-p1/SKILL.md` | Reduce to routing/how-to; remove active editorial sprawl and cache instructions | P0 |
 | `scripts/mgs-rec-runner.py` | Remove editorial card-cache lookup/save from production path; load/apply contract; preserve technical gates | P0 |
 | `scripts/mgs-p1-runner.py` | Remove editorial card-cache lookup; avoid REC prose as editorial input; load/apply contract | P0 |
 | `scripts/rec-fingerprint.py` | Redesign scope or add modes for cross-card REC and P1 checks | P1 |
-| `skills/content-generate-rec/templates/rec-gb-cc-en.md` | Mark as derived/legacy or align with contract | P1 |
-| `skills/content-generate-rec/templates/p1-gb-cc-en.md` | Mark as derived/legacy or align with contract | P1 |
+| `skills/content-generate-rec-p1/templates/rec-gb-cc-en.md` | Mark as derived/legacy or align with contract | P1 |
+| `skills/content-generate-rec-p1/templates/p1-gb-cc-en.md` | Mark as derived/legacy or align with contract | P1 |
 
 ## 5. Files/directories to archive or demote
 
@@ -54,10 +54,10 @@ Do not delete permanently in the first pass. Move or mark as historical after im
 
 | Path | Action | Reason |
 |---|---|---|
-| `skills/content-generate-rec/references/*.md` | Move to `references/archive/` or add clear historical header | Prevent active-rule confusion |
-| `skills/content-generate-rec/scripts/card-cache-lookup.sh` | Keep for audit/debug only or move to archive | Must not influence production content |
-| `skills/content-generate-rec/scripts/card-cache-save.sh` | Keep for audit/debug only or move to archive | Stop saving editorial facts |
-| `skills/content-generate-rec/scripts/card-cache-stats.sh` | Keep for audit/debug only or move to archive | No longer production-relevant |
+| `skills/content-generate-rec-p1/references/*.md` | Move to `references/archive/` or add clear historical header | Prevent active-rule confusion |
+| `skills/content-generate-rec-p1/scripts/card-cache-lookup.sh` | Keep for audit/debug only or move to archive | Must not influence production content |
+| `skills/content-generate-rec-p1/scripts/card-cache-save.sh` | Keep for audit/debug only or move to archive | Stop saving editorial facts |
+| `skills/content-generate-rec-p1/scripts/card-cache-stats.sh` | Keep for audit/debug only or move to archive | No longer production-relevant |
 | `data/card-cache.db` | Keep as historical/debug initially; do not query in production | Avoid destructive deletion; remove runtime authority |
 
 ## 6. Editorial cache removal plan
@@ -101,7 +101,7 @@ Target:
 Create:
 
 ```text
-skills/content-generate-rec/contracts/gb-cc-en.md
+skills/content-generate-rec-p1/contracts/gb-cc-en.md
 ```
 
 Minimum sections:

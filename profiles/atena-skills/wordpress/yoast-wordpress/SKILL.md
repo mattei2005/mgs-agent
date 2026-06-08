@@ -57,7 +57,7 @@ Yoast stores scores in **two layers**:
 
 Server-side scoring uses the `@yoastseo` npm library. Entry point:
 ```bash
-bash /root/mgs-agent/skills/content-generate-rec/scripts/yoast-score-post.sh eggbev <post_id>
+bash /root/mgs-agent/skills/content-generate-rec-p1/scripts/yoast-score-post.sh eggbev <post_id>
 ```
 See `references/yoast-score-architecture.md` for full Node.js API pitfalls.
 

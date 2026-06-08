@@ -128,7 +128,7 @@ For multi-site scale, each site article should generate fresh editorial copy fro
 Target path:
 
 ```text
-/root/mgs-agent/skills/content-generate-rec/contracts/gb-cc-en.md
+/root/mgs-agent/skills/content-generate-rec-p1/contracts/gb-cc-en.md
 ```
 
 ### 6.1 Common rules

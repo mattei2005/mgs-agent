@@ -56,7 +56,7 @@ Acquisition              context/acquisition.md
 Security                 context/security-policies.md
 Crons/ops                docs/CRONS.md, scripts/monitor-*.sh
 Pendency tracking        docs/PENDENCIAS.md, docs/PENDENCIAS-HISTORICO.md
-REC/P1 content           skills/content-generate-rec/, scripts/mgs-rec-runner.py
+REC/P1 content           skills/content-generate-rec-p1/, scripts/mgs-rec-runner.py
 WordPress publishing     skills/content-publish-wordpress/
 Audit/state              data/infra-inventory.json, data/mgs-ops-control-plane-latest.json
 ```

@@ -88,7 +88,7 @@ Yoast analysis runs in the browser via JS. Server-side equivalent uses `@yoastse
 
 Entry point:
 ```bash
-bash /root/mgs-agent/skills/content-generate-rec/scripts/yoast-score-post.sh eggbev <post_id>
+bash /root/mgs-agent/skills/content-generate-rec-p1/scripts/yoast-score-post.sh eggbev <post_id>
 ```
 
 Output:

@@ -30,14 +30,14 @@ The biggest production risk is `card-cache.db`: both REC and P1 runners currentl
 | Atena SOUL | `/root/.hermes/profiles/atena/SOUL.md` | 38 KB | Agent behavior/persona/rules | Partial behavioral authority |
 | Atena config/channel prompt | `/root/.hermes/profiles/atena/config.yaml` | 19 KB | Discord behavior, shortcuts, skill dirs, model | Operational authority |
 | MGS AGENT | `/root/mgs-agent/AGENT.md` | 18 KB | Global governance and safety | Global authority |
-| REC skill | `skills/content-generate-rec/SKILL.md` | 1,366 lines / 88 KB | Mixed routing, references, old workflows, cache rules, reporting | High Atena-context authority, not directly runner runtime |
-| REC template | `skills/content-generate-rec/templates/rec-gb-cc-en.md` | 293 lines / 11 KB | REC editorial/SEO template | Read by REC runner |
-| P1 template | `skills/content-generate-rec/templates/p1-gb-cc-en.md` | 369 lines / 15 KB | P1 editorial/SEO template | Not clearly read by P1 runner in current audited lines |
-| References | `skills/content-generate-rec/references/*.md` | 54 files | Incident lessons / corrections / historical rules | Not read by runners by filename |
+| REC skill | `skills/content-generate-rec-p1/SKILL.md` | 1,366 lines / 88 KB | Mixed routing, references, old workflows, cache rules, reporting | High Atena-context authority, not directly runner runtime |
+| REC template | `skills/content-generate-rec-p1/templates/rec-gb-cc-en.md` | 293 lines / 11 KB | REC editorial/SEO template | Read by REC runner |
+| P1 template | `skills/content-generate-rec-p1/templates/p1-gb-cc-en.md` | 369 lines / 15 KB | P1 editorial/SEO template | Not clearly read by P1 runner in current audited lines |
+| References | `skills/content-generate-rec-p1/references/*.md` | 54 files | Incident lessons / corrections / historical rules | Not read by runners by filename |
 | REC runner | `scripts/mgs-rec-runner.py` | 1,749 lines / 85 KB | REC runtime and publication | Direct runtime authority |
 | P1 runner | `scripts/mgs-p1-runner.py` | 943 lines / 53 KB | P1 runtime and publication | Direct runtime authority |
-| Card cache scripts | `skills/content-generate-rec/scripts/card-cache-*.sh` | 3 scripts | Lookup/save/stats for card cache | Runtime helper authority when called |
-| Other helper scripts | `skills/content-generate-rec/scripts/*` | 12 scripts total | Images, validation, Yoast, search | Runtime helper authority |
+| Card cache scripts | `skills/content-generate-rec-p1/scripts/card-cache-*.sh` | 3 scripts | Lookup/save/stats for card cache | Runtime helper authority when called |
+| Other helper scripts | `skills/content-generate-rec-p1/scripts/*` | 12 scripts total | Images, validation, Yoast, search | Runtime helper authority |
 | Sites config | `data/sites.json` | small | Site config/template key/domain | Runtime authority |
 | Card cache DB | `data/card-cache.db` | database | Cached card facts/editorial metadata | Runtime authority today, should be removed |
 | WP term cache | `data/wp-term-cache.json` | data | Category/tag ID cache | Technical runtime authority only |
@@ -65,7 +65,7 @@ The biggest production risk is `card-cache.db`: both REC and P1 runners currentl
 Observed runtime behavior from `scripts/mgs-rec-runner.py`:
 
 1. Loads `data/sites.json`.
-2. Resolves `template_key` and reads `skills/content-generate-rec/templates/rec-{template_key}.md`.
+2. Resolves `template_key` and reads `skills/content-generate-rec-p1/templates/rec-{template_key}.md`.
 3. Defines/uses `CACHE_DB = data/card-cache.db`.
 4. Calls `cache_lookup(card_slug)` early in execution.
 5. Merges cached fields such as `card_official_url` when available.
@@ -156,7 +156,7 @@ Target role: reduce `SKILL.md` to a short routing guide:
 
 ### REC template
 
-Path: `skills/content-generate-rec/templates/rec-gb-cc-en.md`
+Path: `skills/content-generate-rec-p1/templates/rec-gb-cc-en.md`
 
 Current role:
 
@@ -170,7 +170,7 @@ Target:
 
 ### P1 template
 
-Path: `skills/content-generate-rec/templates/p1-gb-cc-en.md`
+Path: `skills/content-generate-rec-p1/templates/p1-gb-cc-en.md`
 
 Current role:
 
@@ -185,7 +185,7 @@ Target:
 
 ## 9. References findings
 
-Current count: 54 markdown files under `skills/content-generate-rec/references/`.
+Current count: 54 markdown files under `skills/content-generate-rec-p1/references/`.
 
 Recent references include multiple overlapping incident/rule files:
 
