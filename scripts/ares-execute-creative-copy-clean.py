@@ -338,40 +338,52 @@ def process_queue(args: argparse.Namespace) -> dict[str, Any]:
             stats["manual_review_skipped"] += 1
             append_report(report_path, {"ts_utc": dt.datetime.now(dt.UTC).isoformat(), "queue_id": qid, "status": "SKIPPED_MANUAL_REVIEW", "source_drive_id": row["source_drive_id"], "destination_folder": row["destination_folder"], "destination_filename": row["destination_filename"]})
             continue
-        try:
-            with tempfile.TemporaryDirectory(prefix="ares-clean-", dir=str(tmp_root)) as td:
-                tdp = Path(td)
-                ext = Path(row["original_filename"]).suffix or Path(row["destination_filename"]).suffix
-                raw = tdp / f"raw{ext}"
-                drive.download(row["source_drive_id"], raw)
-                raw_sha = sha256_file(raw)
-                clean, _verify_out = clean_and_verify(raw, tdp)
-                clean_sha = sha256_file(clean)
-                parent = drive.ensure_path(row["destination_folder"])
-                mime = mimetypes.guess_type(row["destination_filename"])[0] or "application/octet-stream"
-                dest_id = drive.upload_resumable(parent, row["destination_filename"], clean, mime)
-                append_report(report_path, {
-                    "ts_utc": dt.datetime.now(dt.UTC).isoformat(),
-                    "queue_id": qid,
-                    "status": "UPLOADED",
-                    "source_drive_id": row["source_drive_id"],
-                    "dest_drive_id": dest_id,
-                    "destination_folder": row["destination_folder"],
-                    "destination_filename": row["destination_filename"],
-                    "source_sha256": raw_sha,
-                    "clean_sha256": clean_sha,
-                    "bytes_clean": str(clean.stat().st_size),
-                })
-                stats["uploaded"] += 1
-                if stats["uploaded"] % 25 == 0:
-                    print(json.dumps({"progress_uploaded": stats["uploaded"], "queue_id": qid, "ts": dt.datetime.now(dt.UTC).isoformat()}), flush=True)
-        except Exception as e:
-            error_text = describe_exception(e)
-            stats["errors"] += 1
-            append_report(report_path, {"ts_utc": dt.datetime.now(dt.UTC).isoformat(), "queue_id": qid, "status": "ERROR", "source_drive_id": row.get("source_drive_id", ""), "destination_folder": row.get("destination_folder", ""), "destination_filename": row.get("destination_filename", ""), "error": error_text[:1000]})
-            print(json.dumps({"error_queue_id": qid, "error": error_text[:500]}), flush=True)
-            if stats["errors"] >= args.max_errors:
+        item_attempt = 0
+        while item_attempt < 2:
+            try:
+                with tempfile.TemporaryDirectory(prefix="ares-clean-", dir=str(tmp_root)) as td:
+                    tdp = Path(td)
+                    ext = Path(row["original_filename"]).suffix or Path(row["destination_filename"]).suffix
+                    raw = tdp / f"raw{ext}"
+                    drive.download(row["source_drive_id"], raw)
+                    raw_sha = sha256_file(raw)
+                    clean, _verify_out = clean_and_verify(raw, tdp)
+                    clean_sha = sha256_file(clean)
+                    parent = drive.ensure_path(row["destination_folder"])
+                    mime = mimetypes.guess_type(row["destination_filename"])[0] or "application/octet-stream"
+                    dest_id = drive.upload_resumable(parent, row["destination_filename"], clean, mime)
+                    append_report(report_path, {
+                        "ts_utc": dt.datetime.now(dt.UTC).isoformat(),
+                        "queue_id": qid,
+                        "status": "UPLOADED",
+                        "source_drive_id": row["source_drive_id"],
+                        "dest_drive_id": dest_id,
+                        "destination_folder": row["destination_folder"],
+                        "destination_filename": row["destination_filename"],
+                        "source_sha256": raw_sha,
+                        "clean_sha256": clean_sha,
+                        "bytes_clean": str(clean.stat().st_size),
+                    })
+                    stats["uploaded"] += 1
+                    if stats["uploaded"] % 25 == 0:
+                        print(json.dumps({"progress_uploaded": stats["uploaded"], "queue_id": qid, "ts": dt.datetime.now(dt.UTC).isoformat()}), flush=True)
+                    break
+            except Exception as e:
+                error_text = describe_exception(e)
+                if auth_mode == "oauth_user" and "HTTP Error 401" in error_text and item_attempt == 0:
+                    token, _auth_mode = build_access_token()
+                    drive.token = token
+                    item_attempt += 1
+                    print(json.dumps({"auth_refreshed": True, "retry_queue_id": qid, "ts": dt.datetime.now(dt.UTC).isoformat()}), flush=True)
+                    continue
+                stats["errors"] += 1
+                append_report(report_path, {"ts_utc": dt.datetime.now(dt.UTC).isoformat(), "queue_id": qid, "status": "ERROR", "source_drive_id": row.get("source_drive_id", ""), "destination_folder": row.get("destination_folder", ""), "destination_filename": row.get("destination_filename", ""), "error": error_text[:1000]})
+                print(json.dumps({"error_queue_id": qid, "error": error_text[:500]}), flush=True)
+                if stats["errors"] >= args.max_errors:
+                    break
                 break
+        if stats["errors"] >= args.max_errors:
+            break
     return dict(stats)
 
 
