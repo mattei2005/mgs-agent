@@ -9,7 +9,7 @@ diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/ad
 -            skip_thread = bool(channel_ids & no_thread_channels)
 +            # not "force inline". Only no_thread_channels or control-plane reports
 +            # should suppress auto-threading. REPORT-INFRA belongs inline in the
-+            # Zeus admin channel; creating a fresh thread for each report pollutes
++            # infra alert channel; creating a fresh thread for each report pollutes
 +            # Discord and hides the operational feed.
 +            is_report_infra_message = "[report-infra]" in raw_content.casefold()
 +            skip_thread = bool(channel_ids & no_thread_channels) or is_report_infra_message
@@ -28,7 +28,7 @@ diff --git a/tests/gateway/test_discord_free_response.py b/tests/gateway/test_di
  
  @pytest.mark.asyncio
 +async def test_discord_report_infra_skips_auto_thread(adapter, monkeypatch):
-+    """MGS REPORT-INFRA control-plane messages must stay inline in Zeus admin channel."""
++    """MGS REPORT-INFRA control-plane messages must stay inline in infra alerts."""
 +    monkeypatch.delenv("DISCORD_AUTO_THREAD", raising=False)
 +    monkeypatch.setenv("DISCORD_REQUIRE_MENTION", "true")
 +    monkeypatch.setenv("DISCORD_FREE_RESPONSE_CHANNELS", "123")
