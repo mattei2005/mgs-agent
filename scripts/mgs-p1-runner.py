@@ -893,13 +893,17 @@ def title_and_meta(card_name: str, card_data: Dict[str, Any], lang: str) -> Tupl
     title = c["title"].format(focus=focus)
     if len(title) > 60: title = f"{focus}: {c['heads'][6]}"
     meta = c["meta"].format(focus=focus)
-    while len(meta) < 120:
-        meta += {"en":" Review issuer terms before applying.","es":" Revisa los términos del emisor antes de solicitar.","pt":" Confira os termos do emissor antes de solicitar.","tr":" Başvurmadan önce kurum şartlarını kontrol et."}[lang]
-        if len(meta) > 130: break
-    if len(meta) > 130: meta = meta[:127].rsplit(" ", 1)[0] + "."
-    if len(meta) < 120:
-        meta = (meta.rstrip(".") + " " + {"en":"Check terms first.","es":"Revisa términos.","pt":"Confira termos.","tr":"Şartları kontrol et."}[lang]).strip()
-    if len(meta) > 130: meta = meta[:127].rsplit(" ", 1)[0] + "."
+    additions = {"en":" Review issuer terms before applying.","es":" Revisa los términos del emisor antes de solicitar.","pt":" Confira os termos do emissor antes de solicitar.","tr":" Başvurmadan önce kurum şartlarını kontrol et."}
+    while len(meta) < 130:
+        candidate = meta.rstrip(".") + additions[lang]
+        if len(candidate) > 150:
+            break
+        meta = candidate
+    if len(meta) > 150:
+        meta = meta[:147].rsplit(" ", 1)[0] + "."
+    if len(meta) < 130:
+        meta = (meta.rstrip(".") + " " + {"en":"Check official issuer terms first.","es":"Revisa términos oficiales.","pt":"Confira termos oficiais.","tr":"Resmi şartları kontrol et."}[lang]).strip()
+    if len(meta) > 150: meta = meta[:147].rsplit(" ", 1)[0] + "."
     validate_seo_fields(title, meta, focus)
     return title, meta, focus
 
