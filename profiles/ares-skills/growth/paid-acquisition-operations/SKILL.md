@@ -267,6 +267,7 @@ MGS-CRIATIVOS/<OPERATION>/<IMG|VID>/<FEED|STORY|LANDSCAPE|UNKNOWN>/<LANG>/<STATU
 ```
 
 Detalhes, pitfall de OAuth/Service Account e sanitizer MP4: `references/upload-canvas-drive-clean-copy.md`.
+Para filas longas já aprovadas, usar o padrão de controlador/resume sem upload paralelo: `references/drive-bulk-upload-controller.md`.
 
 ## Credenciais Google Drive
 

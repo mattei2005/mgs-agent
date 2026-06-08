@@ -69,10 +69,15 @@ Additional ExifTool groups can appear after cleaning, e.g. `Track1:ImageWidth`, 
 
 - `UPLOAD_CANVAS` remains RAW and unchanged.
 - Never expose OAuth refresh tokens, client secrets, Service Account JSON, or Drive file IDs unless operationally necessary.
-- Before starting or resuming the full executor, check for an existing `ares-execute-creative-copy-clean.py` process. Do not launch a second full executor in parallel; Drive uploads are not globally locked and a brief overlap can create duplicate destination files even if the report is resumable by `queue_id`.
-- If a Hermes background session is lost but the OS process is still running, attach monitoring with a lightweight watcher process instead of starting a new executor.
-- Record every upload in an execution report CSV with queue ID, source ID, destination ID, hashes, and status.
-- Summaries must count unique uploaded `queue_id`s, not raw `UPLOADED` rows, because retries/overlaps can duplicate report rows.
+- Record every upload in an execution report CSV with queue ID, source ID, destination ID, hashes, status, and error if any.
+- Use resumable execution: already uploaded queue IDs should be skipped on rerun.
+- Before starting/resuming a long Drive upload, check for an active executor for the exact same script + queue. Do not run parallel uploaders.
+- If an overlap happened, compute progress by unique successful `queue_id`, not raw `UPLOADED` rows, then consolidate duplicate impact before deleting anything.
+- If Rodolfo gives full autonomy or gets confused by background process noise, reduce technical narration: fix/resume safely and report concise operational status/final results.
+- `exit 143` from an intentionally killed duplicate process is not a Drive failure; treat it as cleanup noise unless the real executor stopped.
+- For a reusable controller/watcher pattern, see `references/drive-bulk-upload-controller.md`.
+- REPORT-INFRA is required when adding scripts/data or persistent Drive automation artifacts.
+
 - Use resumable execution: already uploaded queue IDs should be skipped on rerun.
 - If duplicate Drive files may have been created, report the risk and consolidate with evidence before deleting anything; do not auto-delete without Rodolfo's confirmation.
 - REPORT-INFRA is required when adding scripts/data or persistent Drive automation artifacts.
