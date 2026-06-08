@@ -304,9 +304,14 @@ def build_summary(rows: list[dict[str, Any]], folder_count: int) -> dict[str, An
         by_ext[row["extension"] or "no_ext"] += 1
         by_format[fmt] += 1
         by_vertical[row["vertical_guess"]] += 1
+        by_language[row["language_guess"]] += 1
         by_placement[row["placement_fit"] or "UNKNOWN"] += 1
         dim = f"{row['width']}x{row['height']}" if row["width"] and row["height"] else "unknown"
         by_dimension[dim] += 1
+        if row.get("md5_checksum"):
+            by_md5[row["md5_checksum"]] += 1
+    duplicate_groups = sum(1 for count in by_md5.values() if count > 1)
+    duplicate_files = sum(count for count in by_md5.values() if count > 1)
     return {
         "generated_at_utc": dt.datetime.now(dt.UTC).isoformat(),
         "source": "MGS-CRIATIVOS/UPLOAD_CANVAS",
@@ -317,8 +322,11 @@ def build_summary(rows: list[dict[str, Any]], folder_count: int) -> dict[str, An
         "by_format": dict(by_format.most_common()),
         "by_extension": dict(by_ext.most_common()),
         "by_vertical_guess": dict(by_vertical.most_common()),
+        "by_language_guess": dict(by_language.most_common()),
         "by_placement_fit": dict(by_placement.most_common()),
         "by_dimension_top20": dict(by_dimension.most_common(20)),
+        "duplicate_md5_groups": duplicate_groups,
+        "duplicate_md5_files": duplicate_files,
         "by_top_folder": dict(sorted(by_top.items())),
     }
 
