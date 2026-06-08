@@ -975,7 +975,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     second = perceived_benefit_item(shorten_words(benefits[1], 18), card_name=str(card_data.get("card_name") or name))
     third = perceived_benefit_item(shorten_words(benefits[2], 18), card_name=str(card_data.get("card_name") or name))
     fourth = perceived_benefit_item(shorten_words(benefits[3], 18), card_name=str(card_data.get("card_name") or name))
-    benefit_values = [primary, second, third, fourth]
+    benefit_values = [shorten_words(x, 20) for x in [primary, second, third, fourth]]
 
     descriptor = card_data.get("descriptor") or primary
     tag10, tag2, default_descriptor = derive_lazyblock_tags(str(card_data.get("card_name") or name), benefits, annual_fee_raw)
@@ -1028,30 +1028,37 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
         "Approval, limit and final terms depend on the issuer's assessment",
     ]
 
+    lang = (site.get("language") or "en").strip().lower()
+    labels = {
+        "pt": {"benefits":"Benefícios do {name}","points":"Pontos a considerar","profile":"Para quem o {name} é indicado","proscons":"Prós e Contras","pros":"Prós","cons":"Contras","final":"Vale avançar para a próxima análise?","bt":["Benefício principal","Valor financeiro","Conveniência de uso","Benefício complementar"]},
+        "es": {"benefits":"Beneficios de {name}","points":"Puntos a considerar","profile":"Para quién se recomienda {name}","proscons":"Pros y contras","pros":"Pros","cons":"Contras","final":"¿Vale la pena seguir con la próxima página?","bt":["Beneficio principal","Valor financiero","Conveniencia de uso","Beneficio complementario"]},
+        "en": {"benefits":"Benefits of {name}","points":"Points to Consider","profile":"Who {name} Is Recommended For","proscons":"Pros and Cons","pros":"Pros","cons":"Cons","final":"Is it worth moving to the next step?","bt":["Main benefit","Financial value","Usage convenience","Complementary benefit"]},
+    }.get(lang, {})
+    if not labels:
+        labels = {"benefits":"Benefits of {name}","points":"Points to Consider","profile":"Who {name} Is Recommended For","proscons":"Pros and Cons","pros":"Pros","cons":"Cons","final":"Is it worth moving to the next step?","bt":["Main benefit","Financial value","Usage convenience","Complementary benefit"]}
     blocks = [
         wp_p(f"<strong>{name}</strong> is worth a closer look when its confirmed benefits match a real {html.escape(angle)} need."),
         wp_p(opening_2),
-        wp_p(f"Before applying, it is important to compare the main benefits with costs, APR and the way you expect to use the card."),
-        wp_h2(f"Benefícios do {name}"),
+        wp_p("Before applying, compare the main benefits with costs, APR and the way you expect to use the card."),
+        wp_h2(labels["benefits"].format(name=name)),
     ]
-    benefit_titles = ["Benefício principal", "Valor financeiro", "Conveniência de uso", "Benefício complementar"]
-    for title, benefit in zip(benefit_titles, benefit_values):
+    for title, benefit in zip(labels["bt"], benefit_values):
         blocks.append(wp_h3(title))
-        blocks.append(wp_p(f"{html.escape(benefit)}. This matters because a card should turn a confirmed feature into practical value, not just add another product to compare."))
+        blocks.append(wp_p(f"{html.escape(benefit)}. This turns a confirmed feature into practical value for the reader."))
     blocks.extend([
-        wp_h2("Pontos a Considerar"),
+        wp_h2(labels["points"]),
         wp_list(points),
-        wp_h2(f"Para quem o {name} é indicado"),
-        wp_p(f"This card may suit readers who can use its confirmed benefits naturally and compare the costs before submitting an application."),
-        wp_p("It is less convincing when the main benefit would require extra spending, unclear repayment behaviour or assumptions not confirmed by the issuer."),
-        wp_h2("Prós e Contras"),
-        wp_h3("Prós"),
+        wp_h2(labels["profile"].format(name=name)),
+        wp_p("This card may suit readers who can use its confirmed benefits naturally before applying."),
+        wp_p("It is less convincing when the main benefit would require extra spending or unclear repayment behaviour."),
+        wp_h2(labels["proscons"]),
+        wp_h3(labels["pros"]),
         wp_list(pros),
-        wp_h3("Contras"),
+        wp_h3(labels["cons"]),
         wp_list(cons),
-        wp_h2("Vale avançar para a próxima análise?"),
+        wp_h2(labels["final"]),
         wp_p(conclusion),
-        wp_p("Review the latest official conditions before making a decision, because rates, requirements and benefits can change over time."),
+        wp_p("Review the latest official conditions before deciding, because rates and benefits can change over time."),
     ])
     html_body = "\n\n".join(blocks)
     return {
