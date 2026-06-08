@@ -520,7 +520,8 @@ Regras obrigatórias dentro do contract ativo:
 
 * Criar imagem publicitária premium, hiper-realista e compatível com campanhas de bancos/fintechs.
 * Usar apenas 1 pessoa, com aparência real, expressão autêntica e contexto aspiracional.
-* Manter o cartão como produto principal, preservando design, cores, logotipo, tipografia, bandeira e proporções.
+* Manter o cartão como produto principal dentro da composição destacada, preservando design, cores, logotipo, tipografia, bandeira e proporções.
+* Usar a imagem do card isolado apenas como referência/base visual para preservar o cartão; ela não é a imagem destacada final.
 * Usar cenário diferente a cada geração.
 * A imagem destacada do REC deve ser diferente da imagem destacada da P1.
 * Formato técnico: 1920 × 1080, 16:9 horizontal.

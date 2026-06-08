@@ -5,9 +5,11 @@ Esta referência guarda a diretriz completa de composição visual para imagens 
 Uso operacional:
 
 - REC usa uma imagem destacada contextual própria.
-- P1 usa outra imagem contextual própria, obrigatoriamente diferente da imagem do REC.
+- P1 usa outra imagem destacada contextual própria, obrigatoriamente diferente da imagem destacada do REC.
+- A imagem do card isolado é um ativo separado: ela aparece no LazyBlock do REC/P1 e pode servir como referência visual para gerar as imagens destacadas.
 - A imagem do card isolado pode ser a mesma no LazyBlock do REC e da P1.
-- O cartão deve preservar identidade real: cores, logotipo, tipografia, bandeira, acabamento e proporções.
+- Nas imagens destacadas, o cartão deve preservar identidade real: cores, logotipo, tipografia, bandeira, acabamento e proporções.
+- Mesmo usando o mesmo cartão como referência, REC e P1 devem ter pessoa, cenário, composição e campanha visual diferentes.
 
 ---
 
@@ -50,7 +52,7 @@ Gerar identificação emocional antes mesmo do usuário perceber o produto.
 
 ## 2. Plano Intermediário — Cartão (Produto Principal)
 
-O cartão é o elemento central da campanha.
+O cartão é o elemento central da campanha. Use a imagem do card isolado como referência/base visual quando disponível, mas a imagem destacada final deve ser uma composição publicitária própria.
 
 ### Regras
 

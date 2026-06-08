@@ -464,11 +464,12 @@ A imagem destacada da P1 deve seguir a mesma diretriz visual completa usada no R
 
 Regras específicas da P1:
 
-* A imagem da P1 deve ser obrigatoriamente diferente da imagem utilizada no REC.
+* A imagem destacada da P1 deve ser obrigatoriamente diferente da imagem destacada utilizada no REC.
 * Usar novo cenário, nova pessoa, nova composição e nova campanha visual.
-* Usar o mesmo cartão, preservando sua identidade real.
+* Usar o mesmo cartão como produto/referência visual, preservando sua identidade real.
+* A imagem do card isolado pode ser a mesma usada no LazyBlock do REC/P1, mas ela não é a imagem destacada final.
 * A imagem principal exibida após o excerpt pode reutilizar a própria imagem destacada da P1.
-* Bloquear imagem P1 que seja visualmente igual ou excessivamente parecida com a imagem REC.
+* Bloquear imagem P1 que seja visualmente igual ou excessivamente parecida com a imagem destacada REC.
 
 ---
 
