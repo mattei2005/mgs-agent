@@ -515,10 +515,12 @@ Usar o renderer determinístico sempre que existir output JSON compatível:
 python3 /root/mgs-agent/scripts/render-article-summary.py --type rec-p1 <rec-json> <p1-json>
 ```
 
+Regra operacional: em REC+P1 normal, não montar relatório final manualmente se houver JSON dos runners. O renderer é obrigatório para evitar omissão de campos como Subtitle, Excerpt, tempo detalhado e custos. Se o renderer falhar, corrigir o JSON/renderer ou declarar o motivo antes de usar fallback manual.
+
 O formato manual só é permitido se:
 
 - o renderer não suportar algum campo ainda;
-- o renderer falhar;
+- o renderer falhar e o motivo for informado;
 - ou a operação for auditoria/reparo sem JSON completo.
 
 Formato mínimo obrigatório quando fallback manual for necessário:
