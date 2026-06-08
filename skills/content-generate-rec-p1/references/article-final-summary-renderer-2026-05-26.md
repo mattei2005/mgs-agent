@@ -27,7 +27,7 @@ The legacy P1 wrapper remains valid but should be treated as compatibility only:
 
 ```bash
 python3 /root/mgs-agent/scripts/render-p1-summary.py <p1-json>
-python3 /root/mgs-agent/skills/content-generate-rec/scripts/render-p1-summary.py <p1-json>
+python3 /root/mgs-agent/skills/content-generate-rec-p1/scripts/render-p1-summary.py <p1-json>
 ```
 
 ## Hard gates
@@ -45,7 +45,7 @@ Before treating the formatter as fixed, run syntax checks plus a small sample fo
 python3 -m py_compile \
   /root/mgs-agent/scripts/render-article-summary.py \
   /root/mgs-agent/scripts/render-p1-summary.py \
-  /root/mgs-agent/skills/content-generate-rec/scripts/render-p1-summary.py
+  /root/mgs-agent/skills/content-generate-rec-p1/scripts/render-p1-summary.py
 
 python3 /root/mgs-agent/scripts/render-article-summary.py --type rec /tmp/rec.json
 python3 /root/mgs-agent/scripts/render-article-summary.py --type p1 /tmp/p1.json

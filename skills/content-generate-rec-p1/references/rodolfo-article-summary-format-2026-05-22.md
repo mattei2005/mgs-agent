@@ -9,7 +9,7 @@ For any article publication summary requested by Rodolfo, do not improvise a com
 For P1 outputs from `mgs-p1-runner.py`, do not hand-format from memory. Save the runner JSON to a temp file and render the Discord summary with:
 
 ```bash
-python3 /root/mgs-agent/skills/content-generate-rec/scripts/render-p1-summary.py /tmp/p1-runner.json
+python3 /root/mgs-agent/skills/content-generate-rec-p1/scripts/render-p1-summary.py /tmp/p1-runner.json
 ```
 
 Then paste that rendered output as the final answer. This prevents reordering, missing fields, and alternate compact formats.

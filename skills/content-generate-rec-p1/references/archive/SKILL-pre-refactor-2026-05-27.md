@@ -957,7 +957,7 @@ de SEO e legibilidade e gravá-los no banco. Elimina o ponto cinza na lista de p
 (aparece quando os scores não estão no postmeta).
 
 ```bash
-bash /root/mgs-agent/skills/content-generate-rec/scripts/yoast-score-post.sh \
+bash /root/mgs-agent/skills/content-generate-rec-p1/scripts/yoast-score-post.sh \
   <site_key> <post_id>
 ```
 
@@ -1006,7 +1006,7 @@ For completed REC, P1 and REC+P1 runner jobs, the canonical final Discord output
 
 Historical correction log: `references/rodolfo-article-summary-format-2026-05-22.md` is retained only as background. If it conflicts with the 2026-05-26 reference, the 2026-05-26 reference wins.
 
-**P1 hard gate:** after `mgs-p1-runner.py` returns JSON, save that JSON and run `/root/mgs-agent/scripts/render-article-summary.py --type p1 <json_file>` (the legacy wrapper `/root/mgs-agent/skills/content-generate-rec/scripts/render-p1-summary.py <json_file>` calls the same renderer). Use the rendered output as the final Discord reply. Do not manually reorder or rewrite the final P1 summary from memory.
+**P1 hard gate:** after `mgs-p1-runner.py` returns JSON, save that JSON and run `/root/mgs-agent/scripts/render-article-summary.py --type p1 <json_file>` (the legacy wrapper `/root/mgs-agent/skills/content-generate-rec-p1/scripts/render-p1-summary.py <json_file>` calls the same renderer). Use the rendered output as the final Discord reply. Do not manually reorder or rewrite the final P1 summary from memory.
 
 **P1 from draft REC:** if the REC source is still a draft, its public permalink may be `https://site/?p=<id>` and unauthenticated public GET can return 404. The P1 runner/workflow must parse the `p` post ID and load the REC through authenticated WP REST instead of treating the public 404 as a missing REC. For draft outputs, label URLs as draft/future permalinks and do not use public 404 as a hard failure; keep strict public verification for `publish`.
 
@@ -1229,7 +1229,7 @@ ANTES de pesquisar o cartao no site oficial (Step 2), SEMPRE consultar o card ca
 
 2. Executar:
 
-    bash /root/mgs-agent/skills/content-generate-rec/scripts/card-cache-lookup.sh "$CARD_SLUG"
+    bash /root/mgs-agent/skills/content-generate-rec-p1/scripts/card-cache-lookup.sh "$CARD_SLUG"
 
 Output:
    HIT  -> JSON completo com card_name, annual_fee, apr, benefits, competitors, etc
@@ -1306,7 +1306,7 @@ Apos completar Step 2 (research) e Step 3 (card image upload), SEMPRE salvar dad
 
 2. Salvar no cache:
 
-    bash /root/mgs-agent/skills/content-generate-rec/scripts/card-cache-save.sh /tmp/cache-save-${CARD_SLUG}.json
+    bash /root/mgs-agent/skills/content-generate-rec-p1/scripts/card-cache-save.sh /tmp/cache-save-${CARD_SLUG}.json
 
 ### Politica de TTL
 

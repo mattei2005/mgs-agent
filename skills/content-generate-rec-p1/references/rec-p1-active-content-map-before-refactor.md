@@ -37,12 +37,12 @@ Minimum components to map:
 - Atena `SOUL.md`
 - MGS `AGENT.md`
 - Atena Discord channel prompt
-- `skills/content-generate-rec/SKILL.md`
+- `skills/content-generate-rec-p1/SKILL.md`
 - `templates/rec-gb-cc-en.md`
 - `templates/p1-gb-cc-en.md`
 - `scripts/mgs-rec-runner.py`
 - `scripts/mgs-p1-runner.py`
-- `skills/content-generate-rec/scripts/card-cache-*`
+- `skills/content-generate-rec-p1/scripts/card-cache-*`
 - `data/card-cache.db`
 - `data/wp-term-cache.json`
 - `data/rec-fingerprints.db`

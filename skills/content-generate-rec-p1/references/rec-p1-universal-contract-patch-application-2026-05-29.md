@@ -19,7 +19,7 @@ When applying external REC/P1 runner patches:
    - `rec.py` -> `scripts/mgs-rec-runner.py`
    - `p1.py` -> `scripts/mgs-p1-runner.py`
    - `orch.py` -> `scripts/mgs-rec-p1-orchestrator.py`
-   - `skills/content-generate-rec/contracts/*.md` -> same contracts path in repo
+   - `skills/content-generate-rec-p1/contracts/*.md` -> same contracts path in repo
 3. If the repo working tree is dirty, do not block automatically, but state that unrelated files exist and only modify the patch targets.
 4. Keep legacy `templates/rec-*.md` on disk unless Rodolfo explicitly asks to delete/archive them; they are rollback material even if the new runner stops loading them.
 5. Back up overwritten production files to `/tmp/.../backups/<timestamp>/` before replacement.

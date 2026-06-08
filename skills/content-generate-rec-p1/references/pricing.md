@@ -40,7 +40,7 @@ PRICE_CACHE_READ=0.30
 PRICE_OUTPUT=15.00
 ```
 
-### Local 3: skills/content-generate-rec/SKILL.md (Step 14, linha ~720)
+### Local 3: skills/content-generate-rec-p1/SKILL.md (Step 14, linha ~720)
 ```python
 atena_cost = (i*3.00 + o*15.00 + cr*0.30 + cw*3.75) / 1_000_000
 ```

@@ -102,7 +102,7 @@ Interpretation: it will not catch Raquel's complaint class: generic phrases repe
 
 ### E — References `.md`
 
-List references under `/root/mgs-agent/skills/content-generate-rec/references/`, recent modifications, and grep runners for exact reference filenames.
+List references under `/root/mgs-agent/skills/content-generate-rec-p1/references/`, recent modifications, and grep runners for exact reference filenames.
 
 Known baseline from 2026-05-27:
 - 53 reference `.md` files existed.

@@ -63,7 +63,7 @@ Observed pattern:
 - Direct Bing fallback script succeeds:
 
 ```bash
-python3 /root/mgs-agent/skills/content-generate-rec/scripts/search-card-image-bing.py "<Card Name>"
+python3 /root/mgs-agent/skills/content-generate-rec-p1/scripts/search-card-image-bing.py "<Card Name>"
 ```
 
 Correct response:

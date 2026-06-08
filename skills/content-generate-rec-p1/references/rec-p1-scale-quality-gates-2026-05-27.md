@@ -107,7 +107,7 @@ Required checks:
 Changes made in the pipeline after the correction:
 - `scripts/mgs-rec-runner.py`: REC opening copy made more recommendation-led and product-specific.
 - `scripts/mgs-p1-runner.py`: P1 Amazon subtitle shortened and Amazon sections made more natural/product-specific.
-- `skills/content-generate-rec/scripts/search-card-image.sh`: official portrait card art is accepted only as clean card-only input and normalized to horizontal output via 90° rotation.
+- `skills/content-generate-rec-p1/scripts/search-card-image.sh`: official portrait card art is accepted only as clean card-only input and normalized to horizontal output via 90° rotation.
 - `references/rec-p1-card-image-competitor-descriptor-hard-gates-2026-05-26.md`: updated with horizontal-image, 100-character subtitle and REC/P1 tone gates.
 
 ## Verification recipe

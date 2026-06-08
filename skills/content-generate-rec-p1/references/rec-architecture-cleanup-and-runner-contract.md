@@ -34,7 +34,7 @@ Read the larger files only when:
 
 ## Template contract
 
-`sites.json[site_key].template_key` is the selector. For eggbev this is `gb-cc-en`, so the template file is `skills/content-generate-rec/templates/rec-gb-cc-en.md`.
+`sites.json[site_key].template_key` is the selector. For eggbev this is `gb-cc-en`, so the template file is `skills/content-generate-rec-p1/templates/rec-gb-cc-en.md`.
 
 The template is not a routine Atena reading dependency. It is the editorial/visual contract that the runner/API/validator must enforce. The runner should validate that the template exists and expose a compact `template_contract` in its JSON rather than forcing Atena to load the full prompt.
 
