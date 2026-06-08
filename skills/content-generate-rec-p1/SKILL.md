@@ -203,6 +203,8 @@ Se houver conflito entre reference antiga e contract ativo, o contract ativo ven
 
 Para contexto da reestruturação REC/P1 v2 validada em 2026-06-08 — incluindo meta REC 130–140, keyword P1 5–8, separação card isolado vs featured image e sequência de validação runner/QA — ver `references/rec-p1-contract-v2-restructure-2026-06-08.md`.
 
+Para a revisão de tags/fallbacks baseada em benefícios reais e o alinhamento do formato final REC+P1 entre SKILL, runners e renderer — ver `references/rec-p1-benefit-based-tags-and-report-format-2026-06-08.md`.
+
 Para a revisão de taxonomia WordPress/tags feita antes do primeiro teste real — incluindo distinção entre tags WordPress e tags visuais do LazyBlock, remoção do default arriscado `rewards credit card` na P1 e padrão de verificação por monkeypatch sem tocar WordPress — ver `references/rec-p1-wordpress-taxonomy-tags-2026-06-08.md`.
 
 ---
