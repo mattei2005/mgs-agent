@@ -446,15 +446,21 @@ def enforce_subtitle_limit(content: str, card_name: str, card_data: Dict[str, An
         tail = "highlights its main rewards before you apply."
     else:
         tail = "highlights its confirmed costs and benefits."
-    # Include bold card name for focus-keyword placement, but cap hard.
-    plain = f"{card_name} {tail}"
+    # Include a recognisable display name for focus context, but cap hard.
+    display_name = card_name
+    plain = f"{display_name} {tail}"
     if len(plain) > 98:
         # Use a shortened display name but keep recognisable terms.
-        short = " ".join([w for w in card_name.split() if w.lower() not in {"credit", "card"}][:4])
-        plain = f"{short} {tail}"
+        display_name = " ".join([w for w in card_name.split() if w.lower() not in {"credit", "card"}][:4])
+        plain = f"{display_name} {tail}"
     if len(plain) > 98:
         plain = plain[:95].rsplit(" ", 1)[0] + "."
-    replacement = f"<!-- wp:paragraph -->\n<p><strong>{html.escape(card_name)}</strong> {html.escape(tail)}</p>\n<!-- /wp:paragraph -->"
+        if plain.startswith(display_name):
+            tail = plain[len(display_name):].strip()
+        else:
+            display_name = " ".join(plain.split()[:4])
+            tail = plain[len(display_name):].strip()
+    replacement = f"<!-- wp:paragraph -->\n<p><strong>{html.escape(display_name)}</strong> {html.escape(tail)}</p>\n<!-- /wp:paragraph -->"
     return re.sub(r"<!-- wp:paragraph -->\s*<p>.*?</p>\s*<!-- /wp:paragraph -->", replacement, content, count=1, flags=re.I | re.S)
 
 
