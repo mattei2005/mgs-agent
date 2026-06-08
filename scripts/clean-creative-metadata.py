@@ -36,6 +36,20 @@ ALLOWED_STRUCTURAL_TAGS = {
     'BitsPerSample', 'SamplesPerPixel', 'XResolution', 'YResolution',
     'ResolutionUnit', 'ExifByteOrder', 'CurrentIPTCDigest', 'BackgroundColor',
     'Warning', 'Error',
+    # MP4/QuickTime structural/container fields that remain after -all= and are
+    # required to describe/play the video. These are not privacy metadata.
+    'MajorBrand', 'MinorVersion', 'CompatibleBrands', 'MediaDataSize',
+    'MediaDataOffset', 'MovieHeaderVersion', 'TimeScale', 'Duration',
+    'PreferredRate', 'PreferredVolume', 'MatrixStructure', 'PreviewTime',
+    'PreviewDuration', 'PosterTime', 'SelectionTime', 'SelectionDuration',
+    'CurrentTime', 'NextTrackID', 'TrackHeaderVersion', 'TrackID',
+    'TrackDuration', 'TrackLayer', 'TrackVolume', 'MediaHeaderVersion',
+    'MediaTimeScale', 'MediaDuration', 'MediaLanguageCode', 'HandlerType',
+    'HandlerVendorID', 'HandlerDescription', 'GraphicsMode', 'OpColor',
+    'CompressorID', 'SourceImageWidth', 'SourceImageHeight', 'ColorProfiles',
+    'ColorPrimaries', 'TransferCharacteristics', 'MatrixCoefficients',
+    'VideoFullRangeFlag', 'BufferSize', 'MaxBitrate', 'AverageBitrate',
+    'VideoFrameRate',
 }
 
 
@@ -92,6 +106,8 @@ def harmful_exiftool_tags(path: Path) -> dict[str, Any]:
         else:
             group, tag = '', key
         if group in ALLOWED_EXIFTOOL_GROUPS:
+            continue
+        if tag in {'CreateDate', 'ModifyDate', 'TrackCreateDate', 'TrackModifyDate', 'MediaCreateDate', 'MediaModifyDate'} and str(value).startswith('0000:00:00'):
             continue
         if tag in ALLOWED_STRUCTURAL_TAGS:
             continue
