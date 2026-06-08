@@ -530,6 +530,12 @@ def derive_lazyblock_tags(card_name: str, benefits: List[str], annual_fee: str =
     if "cashback" in joined:
         tags.append("Cashback")
         descriptor = "Turns eligible everyday spending into cashback value."
+    if any(term in joined for term in ["visa", "mastercard", "broad acceptance", "accepted worldwide", "payment network"]):
+        tags.append("Broad acceptance")
+    if any(term in joined for term in ["online account", "mobile app", "digital wallet", "account management"]):
+        tags.append("Digital tools")
+    if any(term in joined for term in ["security", "fraud", "purchase protection"]):
+        tags.append("Security features")
     if any(t in joined for t in ["avios", "travel", "lounge", "hotel", "points"]):
         tags.append("Travel rewards")
         descriptor = "Connects planned travel spending with usable card rewards."
