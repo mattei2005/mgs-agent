@@ -167,6 +167,23 @@ def guess_vertical(path: str, name: str) -> tuple[str, str, str]:
     return "UNKNOWN", "insufficient evidence", ""
 
 
+def guess_language(path: str, name: str) -> tuple[str, str]:
+    text = normalize_text(path + " " + name)
+    if re.search(r"\b(INGLES|ENGLISH|\bEN\b)", text):
+        return "EN", "folder/name keyword"
+    if re.search(r"\b(ESPANHOL|ESPANOL|SPANISH|\bES\b)", text):
+        return "ES", "folder/name keyword"
+    if re.search(r"\b(ALEMAO|ALEMAN|GERMAN|DEUTSCH|\bDE\b)", text):
+        return "DE", "folder/name keyword"
+    if re.search(r"\b(PORTUGUES|PORTUGUESE|\bPT\b|\bBR\b)", text):
+        return "PT", "folder/name keyword"
+    if re.search(r"\b(FRANCES|FRENCH|FRANCAIS|\bFR\b)", text):
+        return "FR", "folder/name keyword"
+    if re.search(r"\b(TURCO|TURKISH|\bTR\b)", text):
+        return "TR", "folder/name keyword"
+    return "UNKNOWN", "insufficient evidence"
+
+
 def format_kind(mime: str, extension: str) -> str:
     ext = (extension or "").lower()
     if mime.startswith("image/") or ext in {"png", "jpg", "jpeg", "webp", "gif"}:
@@ -230,6 +247,7 @@ def inventory(client: DriveClient) -> tuple[list[dict[str, Any]], dict[str, Any]
             except ValueError:
                 width_i = height_i = None
             vertical, vertical_reason, vertical_keyword = guess_vertical(rel_path, child["name"])
+            language, language_reason = guess_language(rel_path, child["name"])
             fmt = format_kind(child.get("mimeType", ""), ext)
             rows.append(
                 {
