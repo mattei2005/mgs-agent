@@ -357,7 +357,7 @@ Phase 5 Atena reconstruction gate pattern:
    for both before editing.
 7. If the current SOUL lists stale skill status such as `content-generate-p1` or
    `content-generate-rec-and-p1` as “em desenvolvimento”, replace that with a
-   layer statement: detailed operations live in `content-generate-rec`,
+   layer statement: detailed REC+P1 operations live in `content-generate-rec-p1`,
    `content-publish-wordpress`, contracts and runners. SOUL must not become a
    brittle feature/status registry.
 8. After a SOUL-only alignment, validate at minimum: live/versioned cmp,
