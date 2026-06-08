@@ -378,6 +378,15 @@ Phase 5 Atena reconstruction gate pattern:
 11. Only apply deeper SKILL/contracts changes after backup + diff + secret scan +
     audit log + auto-push + validation, preserving runners/scripts unless a
     specific targeted bug fix is approved.
+12. When Raquel/Rodolfo revise REC/P1 editorial contracts, compare the new
+    contract against live deterministic runners/validators before calling the
+    system production-ready. A contract update is an editorial source-of-truth
+    change; runner compatibility is a separate technical gate.
+13. If the new contract requires structures the runner does not yet emit
+    (e.g. REC H3 benefits/pros-cons/final CTA, P1 WordPress Details blocks,
+    P1 5-8 keyword occurrences, REC meta 130-140 chars), apply the contract
+    first only if approved, then report the runner migration as the next phase
+    before any real production REC+P1.
 ```
 
 Detailed runbook: `references/company-os-phase5-atena-reconstruction-thread-2026-06-07.md`.
