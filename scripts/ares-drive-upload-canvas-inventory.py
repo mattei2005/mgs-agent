@@ -146,6 +146,7 @@ class DriveClient:
 
 def normalize_text(value: str) -> str:
     value = value.upper()
+    value = re.sub(r"[_\-/()]+", " ", value)
     value = value.replace("Á", "A").replace("À", "A").replace("Ã", "A").replace("Â", "A")
     value = value.replace("É", "E").replace("Ê", "E")
     value = value.replace("Í", "I")
