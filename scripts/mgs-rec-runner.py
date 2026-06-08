@@ -433,7 +433,7 @@ def enforce_subtitle_limit(content: str, card_name: str, card_data: Dict[str, An
     annual = (card_data.get("annual_fee") or "").lower()
     benefits = " ".join(card_data.get("benefits") or []).lower()
     if "balance transfer" in benefits or "0% balance" in benefits:
-        tail = "can help organise existing card debt with a 0% transfer window."
+        tail = "can support 36 months interest free on existing card debt."
     elif "no annual fee" in annual or "no annual fee" in benefits:
         tail = "offers confirmed benefits with no annual fee."
     elif "travel" in benefits:
@@ -1009,7 +1009,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     joined = " ".join([str(card_data.get("card_name") or name)] + benefits).lower()
     if "balance transfer" in joined or "0% balance" in joined:
         angle = "repayment breathing room"
-        opening_2 = "Its main appeal is the chance to organise existing card debt with more clarity, as long as the transfer fee and repayment plan make sense."
+        opening_2 = "Its main appeal is reducing interest pressure while repayments stay clear, as long as the transfer fee and repayment plan make sense."
         conclusion = "If that repayment window matches your budget, the next page can help you check the application path and official conditions in more detail."
     elif any(t in joined for t in ["cashback", "reward", "rewards", "points", "miles", "avios"]):
         angle = "reward value"
