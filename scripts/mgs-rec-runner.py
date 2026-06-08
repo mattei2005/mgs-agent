@@ -432,8 +432,10 @@ def enforce_subtitle_limit(content: str, card_name: str, card_data: Dict[str, An
         return content
     annual = (card_data.get("annual_fee") or "").lower()
     benefits = " ".join(card_data.get("benefits") or []).lower()
-    if "no annual fee" in annual or "no annual fee" in benefits:
-        tail = "offers cashback benefits with no annual fee."
+    if "balance transfer" in benefits or "0% balance" in benefits:
+        tail = "can help organise existing card debt with a 0% transfer window."
+    elif "no annual fee" in annual or "no annual fee" in benefits:
+        tail = "offers confirmed benefits with no annual fee."
     elif "travel" in benefits:
         tail = "offers travel-focused credit card benefits."
     elif "cashback" in benefits:
@@ -838,7 +840,7 @@ def derive_lazyblock_tags(card_name: str, benefits: List[str], annual_fee: str =
     if "1% back" in joined or "0.5% back" in joined or "rewards" in joined:
         tags.append("Rewards back")
         descriptor = "Turns planned spending into practical Rewards value."
-    if any(t in joined for t in ["avios", "travel", "lounge", "hotel", "points"]):
+    if any(t in joined for t in ["avios", "travel", "lounge", "hotel"]):
         tags.append("Travel rewards")
         descriptor = "Makes trips and overseas spending feel easier to use."
     if "no annual fee" in joined or ("annual fee" in fee_low and "£0" in fee_low and "£84" not in fee_low and "monthly" not in fee_low):
@@ -871,8 +873,10 @@ def card_ui_descriptor(card_data: Dict[str, Any], fallback: str) -> str:
     joined = " ".join(benefits).lower()
     if "cashback" in joined:
         desc = "Get value back from routine spending."
-    elif any(term in joined for term in ["avios", "travel", "points", "marriott", "bonvoy", "elite night"]):
+    elif any(term in joined for term in ["avios", "travel", "marriott", "bonvoy", "elite night"]):
         desc = "Make regular trips and bookings feel more rewarding."
+    elif "points" in joined:
+        desc = "Collect points on eligible everyday spending."
     elif "no annual fee" in joined or "no fee" in joined:
         desc = "A no-annual-fee card for everyday spend."
     else:
@@ -904,7 +908,7 @@ def perceived_benefit_item(raw: str, *, card_name: str = "") -> str:
         return "A higher minimum credit limit can support bigger planned purchases when approval and repayment discipline line up"
     if "annual fee" in low and ("no" in low or "£0" in low):
         return "No annual fee makes the card easier to keep for occasional use without adding a yearly cost"
-    if "0%" in low and "balance" in low:
+    if "0%" in low and ("balance" in low or "money transfer" in low):
         return text
     if "balance transfer" in low:
         return "Moving existing card debt can create more breathing room when the transfer window and fee support a realistic repayment plan"
