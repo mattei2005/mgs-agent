@@ -1042,9 +1042,15 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
         wp_p("Before applying, compare the main benefits with costs, APR and the way you expect to use the card."),
         wp_h2(labels["benefits"].format(name=name)),
     ]
-    for title, benefit in zip(labels["bt"], benefit_values):
+    benefit_tails = [
+        "This helps connect the feature with a real spending decision.",
+        "This matters most when the value survives normal costs and repayment.",
+        "This can make daily use easier without changing your budget only for rewards.",
+        "This supports the main use case without distracting from issuer conditions.",
+    ]
+    for title, benefit, tail in zip(labels["bt"], benefit_values, benefit_tails):
         blocks.append(wp_h3(title))
-        blocks.append(wp_p(f"{html.escape(benefit)}. This turns a confirmed feature into practical value for the reader."))
+        blocks.append(wp_p(f"{html.escape(benefit)}. {tail}"))
     blocks.extend([
         wp_h2(labels["points"]),
         wp_list(points),
