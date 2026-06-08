@@ -175,7 +175,7 @@ Dimensão  | Sem pessoa | Com pessoa | Orientation
 
 ## Canva → Drive de criativos
 
-Quando Rodolfo pedir para organizar criativos que estão em pastas do Canva e jogar no Google Drive, operar como pipeline **read-only primeiro** e escolher o caminho conforme o plano/acesso Canva.
+Quando Rodolfo pedir para organizar criativos que estão em pastas do Canva e jogar no Google Drive, operar como pipeline **read-only primeiro** e escolher o caminho conforme o plano/acesso Canva. Para lotes já extraídos do Canva e enviados ao Drive em `UPLOAD_CANVAS`, usar o fluxo de inventário visual/proposta antes de qualquer write: `references/upload-canvas-drive-inventory-workflow.md`.
 
 ### Caminho oficial: Canva Connect API
 
@@ -257,6 +257,7 @@ Preferir **Google Service Account** em vez de e-mail pessoal. Fluxo:
 3. Compartilhar `MGS-CRIATIVOS` com o e-mail da Service Account.
 4. Começar como Viewer; Editor só quando Rodolfo explicitamente quiser testar write.
 5. Validar sem expor segredos: item encontrado, JSON parseado, private key presente, folder acessível, permissões/capabilities, filhos listados.
+6. Para organização de criativos já enviados ao Drive, primeiro inventariar em read-only e gerar proposta; só copiar/mover/renomear/limpar em Drive após aprovação explícita.
 
 Reportar algo como:
 
