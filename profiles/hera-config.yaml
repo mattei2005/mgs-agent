@@ -2,6 +2,11 @@ model:
   default: gpt-5.5
   provider: openai-codex
   base_url: https://chatgpt.com/backend-api/codex
+image_gen:
+  provider: openai-codex
+  model: gpt-image-2-medium
+  openai-codex:
+    model: gpt-image-2-medium
 providers: {}
 fallback_providers: []
 credential_pool_strategies: {}
