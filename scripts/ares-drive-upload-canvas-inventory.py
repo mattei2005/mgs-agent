@@ -349,8 +349,8 @@ def write_outputs(rows: list[dict[str, Any]], summary: dict[str, Any], out_dir: 
 
 def render_markdown(summary: dict[str, Any]) -> str:
     lines = ["# UPLOAD_CANVAS inventory summary", "", f"Generated UTC: {summary['generated_at_utc']}", "", "## Totals", ""]
-    lines += [f"- Files: {summary['files']}", f"- Folders: {summary['folders']}", f"- Bytes: {summary['bytes']}", ""]
-    for key in ["by_format", "by_extension", "by_vertical_guess", "by_placement_fit", "by_dimension_top20"]:
+    lines += [f"- Files: {summary['files']}", f"- Folders: {summary['folders']}", f"- Bytes: {summary['bytes']}", f"- Duplicate MD5 groups: {summary['duplicate_md5_groups']}", f"- Duplicate MD5 files: {summary['duplicate_md5_files']}", ""]
+    for key in ["by_format", "by_extension", "by_vertical_guess", "by_language_guess", "by_placement_fit", "by_dimension_top20"]:
         lines += [f"## {key}", "", "```text"]
         data = summary.get(key, {})
         for k, v in data.items():
