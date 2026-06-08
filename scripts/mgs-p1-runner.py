@@ -27,10 +27,10 @@ import requests
 
 ROOT = Path("/root/mgs-agent")
 SITES_JSON = ROOT / "data/sites.json"
-GEN_SCRIPTS = ROOT / "skills/content-generate-rec/scripts"
+GEN_SCRIPTS = ROOT / "skills/content-generate-rec-p1/scripts"
 WP_SCRIPTS = ROOT / "skills/content-publish-wordpress/scripts"
 REC_RUNNER = ROOT / "scripts/mgs-rec-runner.py"
-P1_CONTRACT = ROOT / "skills/content-generate-rec/contracts/cc-p1.md"
+P1_CONTRACT = ROOT / "skills/content-generate-rec-p1/contracts/cc-p1.md"
 FEATURED_AUDIT_SCRIPT = ROOT / "scripts/audit-featured-image.py"
 SUPPORTED_LANGS = {"en", "es", "pt", "tr"}
 CONTRACT_MODE = "deterministic_python_from_versioned_spec"

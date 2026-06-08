@@ -22,8 +22,8 @@ from urllib.parse import urlparse
 ROOT = Path("/root/mgs-agent")
 REC_RUNNER = ROOT / "scripts/mgs-rec-runner.py"
 P1_RUNNER = ROOT / "scripts/mgs-p1-runner.py"
-CONTRACT_REC = ROOT / "skills/content-generate-rec/contracts/cc-rec.md"
-CONTRACT_P1 = ROOT / "skills/content-generate-rec/contracts/cc-p1.md"
+CONTRACT_REC = ROOT / "skills/content-generate-rec-p1/contracts/cc-rec.md"
+CONTRACT_P1 = ROOT / "skills/content-generate-rec-p1/contracts/cc-p1.md"
 
 
 class OrchestratorError(Exception):

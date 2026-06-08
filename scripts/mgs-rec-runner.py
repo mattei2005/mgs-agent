@@ -29,9 +29,9 @@ from typing import Any, Dict, List, Optional, Tuple
 ROOT = Path("/root/mgs-agent")
 SITES_JSON = ROOT / "data/sites.json"
 TERM_CACHE_JSON = ROOT / "data/wp-term-cache.json"
-GEN_SCRIPTS = ROOT / "skills/content-generate-rec/scripts"
-REC_TEMPLATES = ROOT / "skills/content-generate-rec/templates"
-REC_UNIVERSAL_CONTRACT = ROOT / "skills/content-generate-rec/contracts/cc-rec.md"
+GEN_SCRIPTS = ROOT / "skills/content-generate-rec-p1/scripts"
+REC_TEMPLATES = ROOT / "skills/content-generate-rec-p1/templates"
+REC_UNIVERSAL_CONTRACT = ROOT / "skills/content-generate-rec-p1/contracts/cc-rec.md"
 WP_SCRIPTS = ROOT / "skills/content-publish-wordpress/scripts"
 FEATURED_AUDIT_SCRIPT = ROOT / "scripts/audit-featured-image.py"
 # Legacy mgs-rec-api (old FastAPI/Anthropic path) is intentionally disabled.
