@@ -441,7 +441,39 @@ O relatório final deve incluir:
 
 Essas evidências devem vir de runner JSON, REST API, Yoast meta endpoint/script ou renderer determinístico. Não estimar score nem reutilizar score antigo.
 
-A tag `atena_agent` deve estar presente em artigos criados/editados pela Atena quando o pipeline suportar essa marcação.
+### WordPress taxonomy/tags
+
+Tags WordPress são taxonomia operacional do post, não são as tags visuais exibidas no LazyBlock.
+
+Todo artigo REC/P1 criado ou editado pela Atena deve ter, quando o pipeline suportar taxonomia:
+
+```text
+Obrigatórias:
+- rec ou p1
+- vertical do site, ex: cc
+- país do site, ex: gb
+- tag limpa do cartão/produto
+- lang_<idioma>, ex: lang_en
+- atena_agent
+```
+
+Tags comerciais opcionais só podem entrar quando forem sustentadas por benefícios/fatos confirmados no pedido atual ou na fonte oficial:
+
+```text
+- no annual fee
+- cashback rewards
+- rewards credit card
+- travel credit card
+- avios rewards
+- airport lounge access
+- balance transfer
+- purchase credit card
+- issuer, ex: hsbc / barclaycard / lloyds
+```
+
+Não adicionar tag comercial genérica por default. Exemplo: não aplicar `rewards credit card` em P1 se o cartão não tiver benefício de rewards/cashback/points confirmado.
+
+Os runners devem resolver/criar essas tags via WordPress REST antes de criar o post e incluir os IDs em `post_json.tags`. O output JSON do runner deve expor `taxonomy.tag_names` e `taxonomy.tag_ids` para auditoria e relatório final.
 
 ---
 
