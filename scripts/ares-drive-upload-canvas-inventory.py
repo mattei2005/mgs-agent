@@ -271,6 +271,9 @@ def inventory(client: DriveClient) -> tuple[list[dict[str, Any]], dict[str, Any]
                     "vertical_confidence": "medium" if vertical != "UNKNOWN" else "low",
                     "vertical_reason": vertical_reason,
                     "vertical_keyword": vertical_keyword,
+                    "language_guess": language,
+                    "language_confidence": "medium" if language != "UNKNOWN" else "low",
+                    "language_reason": language_reason,
                     "status": "RAW_IN_UPLOAD_CANVAS",
                     "proposed_action": "INVENTORY_ONLY_NO_DRIVE_CHANGE",
                     "notes": "",
@@ -285,8 +288,10 @@ def build_summary(rows: list[dict[str, Any]], folder_count: int) -> dict[str, An
     by_ext = collections.Counter()
     by_format = collections.Counter()
     by_vertical = collections.Counter()
+    by_language = collections.Counter()
     by_placement = collections.Counter()
     by_dimension = collections.Counter()
+    by_md5: dict[str, int] = collections.Counter()
     total_bytes = 0
     for row in rows:
         size = int(row["size_bytes"] or 0)
