@@ -147,6 +147,19 @@ def subtitle_chars(data: Mapping[str, Any]) -> Any:
     return first(data, "content_validation.subtitle_chars", "validation.subtitle_chars", default=(len(subtitle) if subtitle else ""))
 
 
+def subtitle(data: Mapping[str, Any]) -> Any:
+    return first(data, "content_validation.subtitle", "validation.subtitle")
+
+
+def excerpt(data: Mapping[str, Any]) -> Any:
+    return first(data, "content_validation.excerpt", "validation.excerpt", "post.excerpt.rendered", "excerpt", "content_validation.subtitle", "validation.subtitle")
+
+
+def excerpt_chars(data: Mapping[str, Any]) -> Any:
+    e = excerpt(data)
+    return first(data, "content_validation.excerpt_chars", "validation.excerpt_chars", default=(len(str(e)) if e else ""))
+
+
 def public_http(data: Mapping[str, Any]) -> Any:
     return first(data, "public_verify.http", "public_verify.http_status", "validation.public.http", "validation.public.http_status")
 
@@ -191,6 +204,8 @@ def render_block(data: Mapping[str, Any], kind: str) -> list[str]:
         f"📊  Yoast: SEO {seo_score(data)} / Readability {readability_score(data)}",
         f"• Validação: {word_count(data)} palavras / subtitle {subtitle_chars(data)} chars / público HTTP {public_http(data)}",
         f"• Title: {title(data)} — {title_chars(data)} chars",
+        f"• Subtitle: {subtitle(data)} — {subtitle_chars(data)} chars",
+        f"• Excerpt: {excerpt(data)} — {excerpt_chars(data)} chars",
         f"• Focus: {focus(data)}",
         f"• Meta Description: {meta(data)}- {meta_chars(data)} chars",
         f"• Tags: {tags(data)}",

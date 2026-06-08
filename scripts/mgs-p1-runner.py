@@ -1176,7 +1176,7 @@ def main() -> int:
         if semantic_qa.get("status") == "BLOCK":
             raise RunnerError(f"semantic_qa_blocked: {semantic_qa}")
         steps.append("semantic_qa_checked")
-        result["content_validation"] = {**validation, "title_chars": len(title), "meta_chars": len(metadesc), "focus_keyphrase": focuskw, "keyword_count_total": keyword_count_total, "semantic_qa": semantic_qa}
+        result["content_validation"] = {**validation, "excerpt": validation.get("subtitle", ""), "excerpt_chars": len(validation.get("subtitle", "")), "title_chars": len(title), "meta_chars": len(metadesc), "focus_keyphrase": focuskw, "keyword_count_total": keyword_count_total, "semantic_qa": semantic_qa}
         steps.append("content_assembled")
 
         t = ts(); category_id, tag_ids, tag_names = resolve_taxonomy(args.site, site, card_name, card_slug, official_data.get("benefits") or []); validate_taxonomy_names(tag_names, site.get("language") or "en"); timings["taxonomy"] = ts() - t; steps.append("taxonomy_resolved")

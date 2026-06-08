@@ -1934,7 +1934,7 @@ def main() -> int:
                 "competitors": card_data.get("competitors"),
             },
             "seo": {"title": title, "title_chars": len(title), "meta_desc": meta_desc, "meta_chars": len(meta_desc), "focus_kw": focus_kw},
-            "validation": {**validation, "subtitle_chars": subtitle_chars, "public": public_check, "duplicate_fingerprint": fingerprint_check, "semantic_qa": qa_check},
+            "validation": {**validation, "subtitle": visible_subtitle(content), "subtitle_chars": subtitle_chars, "excerpt": visible_subtitle(content), "excerpt_chars": subtitle_chars, "public": public_check, "duplicate_fingerprint": fingerprint_check, "semantic_qa": qa_check},
             "taxonomy": {"category_id": category_id, "tag_ids": tag_ids, "tag_names": tag_names},
             "images": {
                 "card_id": card_id,
