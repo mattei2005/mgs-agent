@@ -68,6 +68,33 @@ Manual upload             Avoid for large batches; last-resort only
 
 Operational recommendation: if Ares must upload cleaned creative files automatically, place `MGS-CRIATIVOS` in a Shared Drive or configure a real user OAuth flow/refresh token. Do not assume Service Account writer access to a My Drive folder is sufficient for uploads.
 
+## Personal Google Drive OAuth path
+
+If `MGS-CRIATIVOS` must stay in Rodolfo's personal Google Drive, use user OAuth instead of Service Account. The execution script supports:
+
+```bash
+ARES_DRIVE_AUTH_MODE=oauth
+ARES_DRIVE_OAUTH_OP_ITEM="Google OAuth - Ares Drive"
+```
+
+1Password item expected: `Google OAuth - Ares Drive` in vault `MGS Conteúdo`, with fields:
+
+```text
+client_id
+client_secret
+refresh_token
+```
+
+Helper created for the initial authorization:
+
+```bash
+/root/mgs-agent/scripts/ares-google-drive-oauth-device-init.py
+```
+
+Preferred OAuth client type for a headless VPS: **TVs and Limited Input devices**. The helper prints a Google verification URL/code, Rodolfo approves Drive access in the browser, and the script stores `refresh_token` back into 1Password without printing it.
+
+If Google Cloud does not allow the device-flow client type, fallback is a Desktop OAuth client plus a one-time manual/loopback auth code exchange; do not paste refresh tokens in Discord.
+
 ## Reporting
 
 Any script/data/Drive automation created for this flow should be reported to `#alerts-infra` using `[REPORT-INFRA]`, with paths, reason, commit/hash, and whether Drive writes were performed or blocked.
