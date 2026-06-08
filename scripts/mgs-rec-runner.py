@@ -955,173 +955,112 @@ def rec_top_of_page_copy(card_name: str, benefits: List[str], annual_fee_raw: st
 
 
 def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict[str, Any]) -> Dict[str, Any]:
-    """Generate a deterministic REC article without the deprecated local API."""
+    """Generate a deterministic REC article aligned to cc-rec.md v2.
+
+    REC v2 is a short recommendation page: attraction, perceived benefits,
+    points to consider, ideal profile, pros/cons and a soft transition to P1.
+    Keep this generator factual and benefit-led; do not use competitor-example
+    tables as the primary structure.
+    """
     name = esc_text(card_data.get("card_name"))
     annual_fee_raw = require_specific_visible_value(card_data.get("annual_fee"), "annual_fee")
     apr_raw = require_specific_visible_value(card_data.get("apr"), "apr")
     annual_fee = esc_text(annual_fee_raw)
     apr = esc_text(apr_raw)
-    apr_display = esc_text(shorten_words(apr_raw, 8))
     benefits = [str(b).strip() for b in (card_data.get("benefits") or []) if str(b).strip() and not is_generic_visible_value(b)]
-    if len(benefits) < 3:
-        raise RunnerError("REC requires at least 3 specific benefits extracted from official/request facts; generic fallback benefits are blocked")
-    raw_competitors = card_data.get("competitors") or []
-    competitor_rows = []
-    for c in raw_competitors:
-        if isinstance(c, dict):
-            cname = str(c.get("name") or "").strip()
-            cfee = str(c.get("annual_fee") or c.get("fee") or "").strip()
-            cbenefit = str(c.get("benefit") or c.get("key_benefit") or c.get("positioning") or "").strip()
-        else:
-            cname, cfee, cbenefit = str(c).strip(), "", ""
-        if cname and not re.search(r"another card|second comparable|same segment", cname, re.I):
-            competitor_rows.append({"name": cname, "annual_fee": cfee, "benefit": cbenefit})
-    if len(competitor_rows) < 2:
-        raise RunnerError("REC Comparative Table requires two real same-segment competitor cards; generic placeholders are blocked")
-    comp_a = esc_text(competitor_rows[0]["name"])
-    comp_b = esc_text(competitor_rows[1]["name"])
-    missing_comp_fees = [c["name"] for c in competitor_rows[:2] if not c.get("annual_fee")]
-    if missing_comp_fees:
-        raise RunnerError("REC Comparative Table requires researched annual_fee for competitors: " + ", ".join(missing_comp_fees))
-    missing_comp_benefits = [c["name"] for c in competitor_rows[:2] if not c.get("benefit")]
-    if missing_comp_benefits:
-        raise RunnerError("REC Comparative Table requires researched benefit/positioning for competitors: " + ", ".join(missing_comp_benefits))
-    comp_a_fee = esc_text(competitor_rows[0]["annual_fee"])
-    comp_b_fee = esc_text(competitor_rows[1]["annual_fee"])
-    comp_a_note = esc_text(shorten_words(competitor_rows[0]["benefit"], 10))
-    comp_b_note = esc_text(shorten_words(competitor_rows[1]["benefit"], 10))
-    primary_benefit = esc_text(shorten_words(benefits[0] if benefits else "key credit card features", 12))
-    second_benefit = esc_text(shorten_words(benefits[1] if len(benefits) > 1 else "account management tools", 12))
-    third_benefit = esc_text(shorten_words(benefits[2] if len(benefits) > 2 else "everyday payment flexibility", 12))
-    benefit_phrase = esc_text(shorten_words(sentence_join(benefits, 3), 10))
-    descriptor = card_data.get("descriptor") or primary_benefit
+    if len(benefits) < 4:
+        raise RunnerError("REC v2 requires at least 4 specific benefits/facts extracted from official/request facts; generic fallback benefits are blocked")
+
+    primary = perceived_benefit_item(shorten_words(benefits[0], 18), card_name=str(card_data.get("card_name") or name))
+    second = perceived_benefit_item(shorten_words(benefits[1], 18), card_name=str(card_data.get("card_name") or name))
+    third = perceived_benefit_item(shorten_words(benefits[2], 18), card_name=str(card_data.get("card_name") or name))
+    fourth = perceived_benefit_item(shorten_words(benefits[3], 18), card_name=str(card_data.get("card_name") or name))
+    benefit_values = [primary, second, third, fourth]
+
+    descriptor = card_data.get("descriptor") or primary
     tag10, tag2, default_descriptor = derive_lazyblock_tags(str(card_data.get("card_name") or name), benefits, annual_fee_raw)
     card_data["tag10"] = tag10
     card_data["tag2"] = tag2
-    card_data["descriptor"] = card_ui_descriptor(card_data, default_descriptor)
+    card_data["descriptor"] = card_ui_descriptor(card_data, default_descriptor if not descriptor else str(descriptor))
 
-    rows = []
-    for label, fee, note in [
-        (name, annual_fee, primary_benefit),
-        (comp_a, comp_a_fee, comp_a_note),
-        (comp_b, comp_b_fee, comp_b_note),
-    ]:
-        rows.append(f"<tr><td>{label}</td><td>{esc_text(fee)}</td><td>{esc_text(note)}</td></tr>")
-    table = "".join(rows)
+    joined = " ".join([str(card_data.get("card_name") or name)] + benefits).lower()
+    if "balance transfer" in joined or "0% balance" in joined:
+        angle = "repayment breathing room"
+        opening_2 = "Its main appeal is the chance to organise existing card debt with more clarity, as long as the transfer fee and repayment plan make sense."
+        conclusion = "If that repayment window matches your budget, the next page can help you review the application path and official conditions in more detail."
+    elif any(t in joined for t in ["cashback", "reward", "rewards", "points", "miles", "avios"]):
+        angle = "reward value"
+        opening_2 = "Its main appeal is easier to understand when rewards come from purchases you already planned, instead of extra spending created only to chase benefits."
+        conclusion = "If those rewards fit your routine, the next page explains the costs, requirements and application step before you leave this site."
+    elif any(t in joined for t in ["foreign transaction", "abroad", "overseas", "travel", "lounge"]):
+        angle = "travel value"
+        opening_2 = "Its main appeal is practical travel use, especially when the confirmed benefits support trips, overseas purchases or services you would already use."
+        conclusion = "If that travel use feels realistic, the next page goes deeper into requirements, costs and the official application route."
+    else:
+        angle = "practical value"
+        opening_2 = "Its main appeal depends on how the confirmed features fit your normal spending, repayment habits and expectations before applying."
+        conclusion = "If that value matches your profile, the next page gives a deeper look before you move to the official issuer step."
 
-    top_copy = rec_top_of_page_copy(str(card_data.get("card_name") or name), benefits, annual_fee_raw, apr_raw)
-    benefit_items = "".join(f"<!-- wp:list-item -->\n<li>{html.escape(str(item))}</li>\n<!-- /wp:list-item -->\n" for item in top_copy["benefit_items"][:5])
+    def wp_h2(text: str) -> str:
+        return f'<!-- wp:heading -->\n<h2 class="wp-block-heading">{html.escape(text)}</h2>\n<!-- /wp:heading -->'
 
-    html_body = f"""<!-- wp:paragraph -->
-<p>{html.escape(top_copy['summary'])}</p>
-<!-- /wp:paragraph -->
+    def wp_h3(text: str) -> str:
+        return f'<!-- wp:heading {{"level":3}} -->\n<h3 class="wp-block-heading">{html.escape(text)}</h3>\n<!-- /wp:heading -->'
 
-<!-- wp:paragraph -->
-<p>{top_copy['opening_1']}</p>
-<!-- /wp:paragraph -->
+    def wp_p(text: str) -> str:
+        return f'<!-- wp:paragraph -->\n<p>{text}</p>\n<!-- /wp:paragraph -->'
 
-<!-- wp:paragraph -->
-<p>{top_copy['opening_2']}</p>
-<!-- /wp:paragraph -->
+    def wp_list(items: List[str]) -> str:
+        inner = "".join(f'<!-- wp:list-item -->\n<li>{html.escape(str(item))}</li>\n<!-- /wp:list-item -->\n' for item in items if str(item).strip())
+        return f'<!-- wp:list -->\n<ul>{inner}</ul>\n<!-- /wp:list -->'
 
-<!-- wp:paragraph -->
-<p>{top_copy['opening_3']}</p>
-<!-- /wp:paragraph -->
+    points = [
+        f"Cost context: {annual_fee}. Compare this with the benefit you expect to use most.",
+        f"APR context: {esc_text(shorten_words(apr_raw, 10))}. Carrying a balance can reduce the value of rewards or perks.",
+        "Final conditions can vary after the issuer checks eligibility, affordability and current product rules.",
+    ]
+    pros = benefit_values[:4]
+    if len(pros) < 5 and "no annual fee" in joined:
+        pros.append("No annual fee can make the card easier to keep when usage is occasional")
+    cons = [
+        "Benefits only create value when they match real spending habits",
+        "Rates, fees or eligibility rules can change on the issuer page",
+        "Approval, limit and final terms depend on the issuer's assessment",
+    ]
 
-<!-- wp:heading -->
-<h2 class="wp-block-heading">Key Benefits of the Card</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>{top_copy['benefits_intro']}</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:list -->
-<ul>{benefit_items}</ul>
-<!-- /wp:list -->
-
-<!-- wp:paragraph -->
-<p>{top_copy['fee_context']}</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2 class="wp-block-heading">How Does It Work</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>The issuer lists the annual-fee context as {annual_fee}. APR: {apr_display}.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Your final cost depends on the credit limit, rate and repayment behaviour. Paying on time keeps the rewards more useful.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>You should check the latest terms before applying because fees, rates and eligibility rules can change.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Used carefully, the card can support routine purchases without making rewards harder to justify.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2 class="wp-block-heading">Comparative Table</h2>
-<!-- /wp:heading -->
-
-<!-- wp:table -->
-<figure class="wp-block-table"><table class="has-fixed-layout" style="font-size:85%"><thead><tr><th>Card</th><th>Annual fee</th><th>Positioning</th></tr></thead><tbody>{table}</tbody></table></figure>
-<!-- /wp:table -->
-
-<!-- wp:heading -->
-<h2 class="wp-block-heading">How to Use It in Practice</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Use the card where the benefit is easiest to feel: planned purchases, trips or spending categories already in your budget.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>If the benefit needs extra spending to feel useful, the card becomes less persuasive.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Before applying, compare the benefit with the fee, APR and repayment plan.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2 class="wp-block-heading">What to Check Before Applying</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Check whether the strongest benefit is something you would use naturally.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Separate everyday purchases, travel use, cash withdrawals and carried balances. Each can change the real value.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2 class="wp-block-heading">Who Is This Card Best For</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>{top_copy['best_for_1']}</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>{top_copy['best_for_2']}</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Compare the official details with your own credit profile before applying.</p>
-<!-- /wp:paragraph -->"""
+    blocks = [
+        wp_p(f"<strong>{name}</strong> is worth a closer look when its confirmed benefits match a real {html.escape(angle)} need."),
+        wp_p(opening_2),
+        wp_p(f"Before applying, it is important to compare the main benefits with costs, APR and the way you expect to use the card."),
+        wp_h2(f"Benefícios do {name}"),
+    ]
+    benefit_titles = ["Benefício principal", "Valor financeiro", "Conveniência de uso", "Benefício complementar"]
+    for title, benefit in zip(benefit_titles, benefit_values):
+        blocks.append(wp_h3(title))
+        blocks.append(wp_p(f"{html.escape(benefit)}. This matters because a card should turn a confirmed feature into practical value, not just add another product to compare."))
+    blocks.extend([
+        wp_h2("Pontos a Considerar"),
+        wp_list(points),
+        wp_h2(f"Para quem o {name} é indicado"),
+        wp_p(f"This card may suit readers who can use its confirmed benefits naturally and compare the costs before submitting an application."),
+        wp_p("It is less convincing when the main benefit would require extra spending, unclear repayment behaviour or assumptions not confirmed by the issuer."),
+        wp_h2("Prós e Contras"),
+        wp_h3("Prós"),
+        wp_list(pros),
+        wp_h3("Contras"),
+        wp_list(cons),
+        wp_h2("Vale avançar para a próxima análise?"),
+        wp_p(conclusion),
+        wp_p("Review the latest official conditions before making a decision, because rates, requirements and benefits can change over time."),
+    ])
+    html_body = "\n\n".join(blocks)
     return {
         "success": True,
         "article_html": html_body,
         "cost_usd": 0.0,
         "duration_sec": 0.0,
         "card_data": card_data,
-        "generator": "local_deterministic",
+        "generator": "local_deterministic_rec_contract_v2",
     }
 
 
