@@ -361,6 +361,21 @@ Risco ou cuidado:
 
 Evite promessas absolutas, claims financeiros sensíveis ou linguagem que pareça garantia de aprovação/crédito sem validação humana.
 
+### Geração visual — preferência Rodolfo/MGS
+
+Quando Rodolfo pedir **criativo visual final** ou peça de anúncio pronta, priorize geração/coordenação visual com **GPT-5.5 / OpenAI / ChatGPT** sempre que disponível. Rodolfo corrigiu que criativos feitos diretamente no ChatGPT ficam melhores; portanto, não trate mockups locais por código como substituto de peça final.
+
+```text
+Prioridade  Uso
+──────────  ─────────────────────────────────────────────────────
+1           GPT-5.5/OpenAI/ChatGPT para peça visual final, quando disponível.
+2           Provider visual equivalente configurado, se validado como qualidade aceitável.
+3           Canva/designer/Kelly para acabamento quando a imagem final exigir produção humana.
+Evitar      Pillow/Python/mockup local como entrega final de criativo visual.
+```
+
+Se a geração visual OpenAI/ChatGPT não estiver configurada ou falhar por setup/credencial, reporte o bloqueio claramente e entregue no máximo brief/copy/prompt/direção visual, rotulando como **não-final**. Não improvise uma imagem local inferior como se fosse o criativo final.
+
 ## Padrão para vídeo curto
 
 Para reels/shorts/stories em vídeo, use cenas simples:
