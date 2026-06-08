@@ -178,6 +178,21 @@ while [ "$attempt" -le "$max_attempts" ]; do
 
   echo "$img_b64" | base64 -d >"$out"
 
+  # Preserve card identity deterministically: Gemini may alter small card text,
+  # so compose the exact provided card artwork over the generated scene before
+  # compression/semantic audit.
+  composite_card=$(mktemp /tmp/featured-card-overlay-XXXXXX.png)
+  composite_shadow=$(mktemp /tmp/featured-card-shadow-XXXXXX.png)
+  composite_out=$(mktemp /tmp/featured-composite-XXXXXX.png)
+  TEMP_FILES+=("$composite_card" "$composite_shadow" "$composite_out")
+  convert "$CARD_IMG" -resize '760x430>' "$composite_card"
+  convert "$composite_card" -background black -shadow 35x18+0+18 "$composite_shadow"
+  convert "$out" -resize 1920x1080^ -gravity center -extent 1920x1080 \
+    "$composite_shadow" -gravity center -geometry +0+34 -compose over -composite \
+    "$composite_card" -gravity center -geometry +0+0 -compose over -composite \
+    "$composite_out"
+  cp "$composite_out" "$out"
+
   # Comprimir PNG -> JPEG (reduz ~94%, qualidade visual mantida)
   SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
   out=$("$SCRIPT_DIR/compress-image.sh" "$out" featured)
