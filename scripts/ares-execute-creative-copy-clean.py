@@ -311,10 +311,11 @@ def append_report(path: Path, row: dict[str, str]) -> None:
 
 def process_queue(args: argparse.Namespace) -> dict[str, Any]:
     load_env()
-    global ROOT_FOLDER_ID, OP_ITEM, OAUTH_OP_ITEM
+    global ROOT_FOLDER_ID, OP_ITEM, OAUTH_OP_ITEM, OAUTH_TOKEN_FILE
     ROOT_FOLDER_ID = os.environ.get("ARES_DRIVE_ROOT_FOLDER_ID", ROOT_FOLDER_ID)
     OP_ITEM = os.environ.get("ARES_DRIVE_OP_ITEM", OP_ITEM)
     OAUTH_OP_ITEM = os.environ.get("ARES_DRIVE_OAUTH_OP_ITEM", OAUTH_OP_ITEM)
+    OAUTH_TOKEN_FILE = os.environ.get("ARES_DRIVE_OAUTH_TOKEN_FILE", OAUTH_TOKEN_FILE)
     token, auth_mode = build_access_token()
     drive = Drive(token)
     root_meta = drive.preflight_destination(auth_mode)
