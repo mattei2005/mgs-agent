@@ -250,16 +250,19 @@ Referência operacional: `references/canva-local-automation.md`.
 
 ## Credenciais Google Drive
 
-Preferir **Google Service Account** em vez de e-mail pessoal. Fluxo:
+Preferir **Google Service Account** em vez de e-mail pessoal para leitura/inventário. Fluxo:
 
 1. Criar Service Account.
 2. Guardar JSON no 1Password.
 3. Compartilhar `MGS-CRIATIVOS` com o e-mail da Service Account.
 4. Começar como Viewer; Editor só quando Rodolfo explicitamente quiser testar write.
 5. Validar sem expor segredos: item encontrado, JSON parseado, private key presente, folder acessível, permissões/capabilities, filhos listados.
-6. Para organização de criativos já enviados ao Drive, primeiro inventariar em read-only e gerar proposta; só copiar/mover/renomear/limpar em Drive após aprovação explícita.
+6. Antes de prometer upload/cópia de arquivos com Service Account, validar o tipo de Drive. Em pasta normal de **My Drive**, Service Account pode ter `can_add_children=true` mas ainda falhar upload com `403 storageQuotaExceeded` porque não tem quota. Para upload automatizado, preferir Shared Drive ou OAuth de usuário real.
+
+Referência de pipeline e pitfall de quota: `references/drive-creative-clean-copy-quota.md`.
 
 Reportar algo como:
+
 
 ```text
 Item 1Password | Encontrado
