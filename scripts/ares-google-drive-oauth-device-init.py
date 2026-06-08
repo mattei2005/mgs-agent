@@ -78,9 +78,9 @@ def post_form(url: str, data: dict[str, str]) -> dict[str, Any]:
         return obj
 
 
-def save_refresh_token(item_name: str, vault: str, refresh_token: str) -> None:
-    # Use a temporary 1Password item template so the token is never exposed in
-    # process argv and special characters cannot break op's assignment parser.
+def save_refresh_token(item_name: str, vault: str, refresh_token: str) -> str:
+    # First try 1Password. If the service account can read but not update the
+    # item, fall back to a root-only local secret file that is gitignored.
     import tempfile
 
     item = op_item_json(item_name, vault)
@@ -104,8 +104,17 @@ def save_refresh_token(item_name: str, vault: str, refresh_token: str) -> None:
             os.remove(template_path)
         except OSError:
             pass
-    if proc.returncode != 0:
-        raise RuntimeError(f"failed to save refresh_token to 1Password: {proc.stderr[:300]}")
+    if proc.returncode == 0:
+        return "1password"
+
+    token_path = Path(TOKEN_FILE)
+    token_path.parent.mkdir(parents=True, mode=0o700, exist_ok=True)
+    tmp_path = token_path.with_suffix(token_path.suffix + ".tmp")
+    tmp_path.write_text(json.dumps({"refresh_token": refresh_token}, ensure_ascii=False), encoding="utf-8")
+    os.chmod(tmp_path, 0o600)
+    os.replace(tmp_path, token_path)
+    os.chmod(token_path, 0o600)
+    return "local_file"
 
 
 def main() -> int:
@@ -156,8 +165,11 @@ def main() -> int:
         refresh_token = token.get("refresh_token")
         if not refresh_token:
             raise RuntimeError("Google did not return refresh_token; revoke prior grant or use prompt/consent flow with offline access")
-        save_refresh_token(args.item, vault, refresh_token)
-        print(f"OAuth ready: refresh_token saved to 1Password item '{args.item}' (len={len(refresh_token)}).")
+        save_target = save_refresh_token(args.item, vault, refresh_token)
+        if save_target == "1password":
+            print(f"OAuth ready: refresh_token saved to 1Password item '{args.item}' (len={len(refresh_token)}).")
+        else:
+            print(f"OAuth ready: refresh_token saved to local root-only secret file (len={len(refresh_token)}).")
         return 0
 
     raise RuntimeError("authorization timed out before approval")
