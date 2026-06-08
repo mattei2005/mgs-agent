@@ -724,7 +724,15 @@ def p1_perceived_benefit(raw: str, *, card_name: str = "") -> str:
 
 def count_keyword_occurrences(card_name: str, *texts: str) -> int:
     pattern = re.compile(r"\b" + re.escape(card_name).replace(r"\ ", r"\s+") + r"\b", re.I)
-    return sum(len(pattern.findall(t or "")) for t in texts)
+    total = 0
+    for raw in texts:
+        txt = raw or ""
+        txt = re.sub(r"<!--\s*wp:lazyblock/.*?/-->", " ", txt, flags=re.S)
+        txt = re.sub(r"<figure.*?</figure>", " ", txt, flags=re.S)
+        txt = html.unescape(re.sub(r"<[^>]+>", " ", txt))
+        txt = re.sub(r"<!--.*?-->", " ", txt, flags=re.S)
+        total += len(pattern.findall(txt))
+    return total
 
 
 def validate_p1_keyword_count(card_name: str, title: str, subtitle: str, body: str, meta: str) -> int:
