@@ -721,6 +721,18 @@ def p1_perceived_benefit(raw: str, *, card_name: str = "") -> str:
     return text
 
 
+
+def count_keyword_occurrences(card_name: str, *texts: str) -> int:
+    pattern = re.compile(r"\b" + re.escape(card_name).replace(r"\ ", r"\s+") + r"\b", re.I)
+    return sum(len(pattern.findall(t or "")) for t in texts)
+
+
+def validate_p1_keyword_count(card_name: str, title: str, subtitle: str, body: str, meta: str) -> int:
+    total = count_keyword_occurrences(card_name, title, subtitle, body, meta)
+    if total < 5 or total > 8:
+        raise RunnerError(f"P1 keyword count outside contract v2 range 5-8: {total}")
+    return total
+
 def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_data: Dict[str, Any], official_url: str, featured_id: int, featured_url: str, card_id: int, card_url: str, button_hex: str, contract: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]:
     lang = effective_lang(site); c = copy_for(lang)
     fee = require_specific_visible_value(card_data.get("annual_fee"), "annual_fee"); apr = require_specific_visible_value(card_data.get("apr"), "apr")
