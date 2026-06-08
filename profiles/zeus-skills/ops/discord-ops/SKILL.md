@@ -378,18 +378,38 @@ Referência detalhada: `references/hermes-discord-busy-input-queue.md`.
 
 ### Adding a user to a private Discord thread
 
-When Rodolfo asks to add Raquel or another user to a Zeus/Atena thread, use Discord API `PUT /channels/{thread_id}/thread-members/{user_id}`. Do this even when no dedicated `discord_admin` tool is loaded: load the bot token from the active profile `.env` inside a terminal/shell command, call Discord API directly, and never print the token. If it returns `403 Missing Access`, the likely cause is that the user is not in the parent channel yet; report that clearly, then retry the same PUT after Rodolfo grants parent-channel access. Do not claim the thread add succeeded until the API returns `204`.
+When Rodolfo asks to add Raquel/Kelly/Geizian/gestor or another approved person to a Zeus/Atena/Hera thread, use Discord API `PUT /channels/{thread_id}/thread-members/{user_id}`. Do this even when no dedicated `discord_admin` tool is loaded: load the bot token from the active profile `.env` inside a terminal/shell command, call Discord API directly, and never print the token. If it returns `403 Missing Access`, the likely cause is that the user is not in the parent channel yet; report that clearly, then retry the same PUT after Rodolfo grants parent-channel access. Do not claim the thread add succeeded until the API returns `204`; verify with `GET /channels/{thread_id}/thread-members/{user_id}` returning `200` when possible.
+
+Operational correction validated on Hera: if the agent replied “não consigo adicionar pessoas na thread”, fix the profile so future requests are executable, not just manually handled once:
+- Add the explicit user ID to `discord.thread_auto_add_users` in `config.yaml` for automatic inclusion in new threads.
+- If `.env` already defines `DISCORD_THREAD_AUTO_ADD_USERS`, update `.env` too; runtime env takes precedence over config hydration (`config.yaml` only sets env when the env var is absent).
+- Ensure the Discord platform toolset includes `terminal` (or another safe API-capable tool) if the agent must execute explicit add-member requests from chat.
+- Add a short channel prompt/SOUL rule: on Rodolfo’s natural-language “adiciona X na thread”, call the Discord API and confirm only after HTTP 204/GET 200; on 403, report Missing Access/parent-channel access needed.
+- Restart the affected gateway and verify `systemctl is-active`, `Connected as ...`, `✓ discord connected`, and that `/proc/<pid>/environ` has the updated auto-add env value length without printing secrets.
 
 
 ### Diagnóstico de título ruim em auto-thread
 
 Quando Rodolfo perguntar por que uma thread não foi renomeada, ou por que o título ficou genérico/truncado, não assumir erro de Discord/permissão. Ver `references/discord-auto-thread-title-diagnostics.md`.
 
-### Regra MGS: nunca renomear thread já aberta
+### Regra MGS: renomear thread nova uma vez; nunca renomear thread já aberta
 
-Thread Discord já aberta/renomeada deve manter o nome até ser finalizada. O agente pode definir/renomear o título no nascimento da thread; depois disso, **não deve mudar mais o nome daquela thread**, mesmo se houver pausa longa, session reset, follow-up curto, reply a mensagem anterior ou nova pergunta ainda relacionada ao mesmo assunto. Em thread existente, usar o contexto da thread/reply como assunto principal e responder sem tocar no título. Se a conversa mudar completamente de objetivo, abrir/usar outra thread em vez de renomear a atual.
+Política correta tem dois estágios:
 
-Pitfall validado: Rodolfo respondeu `Ok` em reply a um status de execução da Fase 4, mas Zeus tratou como mensagem solta e renomeou a thread para um assunto errado/em espanhol. Correção: em reply, resolver primeiro o contexto citado; se a thread já existe e o objetivo continua, não mexer no título. Referência: `references/discord-open-thread-rename-pitfall-2026-06-07.md`.
+1. **Thread nova auto-criada pelo bot:** pode nascer com título provisório/determinístico e receber **um único rename semântico pós-primeira resposta** estilo ChatGPT, quando o título LLM ficar disponível.
+2. **Thread já aberta/renomeada:** deve manter o nome até ser finalizada. Não renomear por follow-up, pausa longa, session reset, reply curto, pergunta nova dentro da mesma thread ou novo auto-title interno da sessão Hermes.
+
+Guardrails esperados para o rename semântico de thread nova:
+- Só aplicar em thread Discord auto-criada pelo bot atual.
+- Só aplicar enquanto a thread ainda é recente (janela curta pós-criação; ex. até ~30 min).
+- Só sobrescrever se o nome atual ainda bate com o título inicial determinístico derivado da primeira mensagem.
+- Nunca sobrescrever título manual/específico, thread criada por humano ou thread antiga reativada por reset/follow-up.
+
+Em thread existente, usar o contexto da thread/reply como assunto principal e responder sem tocar no título. Se a conversa mudar completamente de objetivo, abrir/usar outra thread em vez de renomear a atual.
+
+Pitfall validado 1: Rodolfo respondeu `Ok` em reply a um status de execução da Fase 4, mas Zeus tratou como mensagem solta e renomeou a thread para um assunto errado/em espanhol. Correção: em reply, resolver primeiro o contexto citado; se a thread já existe e o objetivo continua, não mexer no título. Referência: `references/discord-open-thread-rename-pitfall-2026-06-07.md`.
+
+Pitfall validado 2: remover totalmente o callback Discord de auto-title evita renomear thread antiga, mas também quebra o comportamento desejado para thread nova. Correção: restaurar callback apenas com guardrails de thread nova. Ver `references/discord-gpt-style-thread-title-rename.md` e `references/discord-new-thread-title-guardrails-2026-06-07.md`.
 
 Resumo operacional:
 - O título inicial da thread Discord é escolhido pelo gateway no momento de criação (`_auto_create_thread` / `_auto_thread_name_from_message`), antes da resposta do agente.

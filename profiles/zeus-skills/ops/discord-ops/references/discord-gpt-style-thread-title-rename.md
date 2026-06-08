@@ -32,10 +32,16 @@ If only layer 1 is connected to Discord thread naming, titles look intelligent o
 Use a hybrid:
 
 - Keep deterministic pre-create rules for fast/critical MGS cases.
-- After the first response, let Hermes/GPT-style `maybe_auto_title(...)` generate the semantic session title.
-- Add a Discord `title_callback` in `gateway/run.py` that schedules a best-effort Discord thread rename.
-- Add adapter method `rename_thread_title(...)` that edits the Discord thread name.
-- Preserve manual/moderator titles by only overwriting generic or first-message-derived titles.
+- After the first response in a **newly auto-created thread**, let Hermes/GPT-style `maybe_auto_title(...)` generate the semantic session title.
+- Add/keep a Discord `title_callback` in `gateway/run.py` that schedules a best-effort Discord thread rename, but gate it tightly.
+- Do **not** solve old-thread rename bugs by removing the Discord callback entirely; that breaks the expected new-thread semantic rename.
+- Preserve manual/moderator/existing-thread titles by only overwriting when all guardrails pass:
+  - source is a Discord thread;
+  - thread is bot-owned / auto-created by the current bot;
+  - thread is recent (short post-creation window, e.g. ~30 minutes);
+  - current name still equals the deterministic first-message title from `_auto_thread_name_from_message(clean_actionable_user_message)`;
+  - generated title differs and is Discord-safe.
+- If any guardrail fails, skip silently/log at info/debug and never mutate the thread name.
 
 ## Patch shape
 
