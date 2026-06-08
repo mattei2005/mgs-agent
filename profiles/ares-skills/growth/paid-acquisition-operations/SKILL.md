@@ -248,16 +248,46 @@ Quando a API privada não for viável e o Canva bloquear automação no VPS, usa
 
 Referência operacional: `references/canva-local-automation.md`.
 
+### UPLOAD_CANVAS → Drive organizado com limpeza de metadata
+
+Quando Rodolfo subir criativos brutos para `MGS-CRIATIVOS/UPLOAD_CANVAS`, a ordem correta é **organizar logicamente antes de limpar/copiar**:
+
+1. Manter `UPLOAD_CANVAS` como RAW/original intacto.
+2. Gerar inventário read-only recursivo.
+3. Classificar por vertical/operação → `IMG/VID` → placement/tamanho → idioma → status; gestor/origem fica em metadado, não como estrutura final.
+4. Deduplicar por checksum antes de limpar/copiar.
+5. Montar fila de cópia com destino proposto.
+6. Após aprovação explícita de Rodolfo para Drive write, baixar cada canônico, limpar metadata localmente, verificar `clean=true`, criar pastas destino e subir a versão limpa.
+7. Registrar relatório com source/destination IDs, hashes e status; parar em erro recorrente/quota/auth.
+
+Destino recomendado:
+
+```text
+MGS-CRIATIVOS/<OPERATION>/<IMG|VID>/<FEED|STORY|LANDSCAPE|UNKNOWN>/<LANG>/<STATUS>/
+```
+
+Detalhes, pitfall de OAuth/Service Account e sanitizer MP4: `references/upload-canvas-drive-clean-copy.md`.
+
 ## Credenciais Google Drive
 
-Preferir **Google Service Account** em vez de e-mail pessoal para leitura/inventário. Fluxo:
+Preferir **Google Service Account** para leitura e inventário. Para write/upload em `My Drive` pessoal, validar quota antes: Service Account pode falhar com `403 storageQuotaExceeded` porque não tem armazenamento próprio. Se o destino estiver em My Drive pessoal, usar OAuth de usuário real ou mover a operação para Shared Drive.
+
+Fluxo Service Account/read-only:
 
 1. Criar Service Account.
 2. Guardar JSON no 1Password.
 3. Compartilhar `MGS-CRIATIVOS` com o e-mail da Service Account.
 4. Começar como Viewer; Editor só quando Rodolfo explicitamente quiser testar write.
 5. Validar sem expor segredos: item encontrado, JSON parseado, private key presente, folder acessível, permissões/capabilities, filhos listados.
-6. Antes de prometer upload/cópia de arquivos com Service Account, validar o tipo de Drive. Em pasta normal de **My Drive**, Service Account pode ter `can_add_children=true` mas ainda falhar upload com `403 storageQuotaExceeded` porque não tem quota. Para upload automatizado, preferir Shared Drive ou OAuth de usuário real.
+
+Fluxo OAuth/write em My Drive:
+
+1. OAuth Desktop app com scope mínimo necessário, normalmente `https://www.googleapis.com/auth/drive` para upload/cópia.
+2. Refresh token e client secret ficam em arquivo root-only/permissão 600 ou vault; nunca imprimir no chat.
+3. Script deve aceitar modo por `.env`, ex.: `ARES_DRIVE_AUTH_MODE=oauth`, e reportar apenas `auth_mode=oauth_user`, `storage=my_drive`, capabilities e status.
+4. Fazer smoke test com 1 arquivo antes da fila completa.
+5. Antes de rodar centenas de uploads usando quota pessoal de Rodolfo, pedir aprovação explícita de escopo.
+
 
 Referência de pipeline e pitfall de quota: `references/drive-creative-clean-copy-quota.md`.
 
