@@ -93,6 +93,48 @@ Report CSV                   append source/dest IDs, hashes, status, error
 
 If the current destination is My Drive, do not keep retrying uploads. Create/move to Shared Drive or configure OAuth, then run a one-file smoke test before the full queue.
 
+## Personal Google Drive OAuth pattern
+
+When Rodolfo confirms there is no Workspace/Shared Drive option and the files must remain in a personal Drive, the correct fix is **real-user OAuth**, not more Service Account permission changes.
+
+Runtime pattern:
+
+```text
+ARES_DRIVE_AUTH_MODE=oauth
+ARES_DRIVE_OAUTH_OP_ITEM=<1Password item containing OAuth fields>
+```
+
+1Password item fields expected:
+
+```text
+client_id
+client_secret
+refresh_token
+```
+
+Recommended authorization flow for a headless VPS:
+
+1. Create a Google OAuth client suitable for limited-input/device authorization if available.
+2. Store `client_id` and `client_secret` in 1Password; never paste them in Discord.
+3. Run a helper that prints only the Google verification URL/code.
+4. Rodolfo approves Drive access in his browser with the personal account that owns the folder.
+5. Helper saves `refresh_token` back into 1Password without printing it.
+6. Batch script refreshes access tokens at runtime and proceeds against the same My Drive folder.
+
+If Google Cloud does not offer device-flow client type in the project, fallback is Desktop OAuth plus one-time manual/loopback auth-code exchange. The durable rule is the same: tokens go to 1Password, not chat/logs; report only item title and `len=X`.
+
+After OAuth is configured, validate in this order:
+
+```text
+Step                         Expected result
+---------------------------|-----------------------------------------------
+py_compile/script syntax     OK
+OAuth token refresh          access token obtained, token not printed
+Drive files.get root         storage=my_drive, auth_mode=oauth
+--limit 1 smoke test         1 cleaned file uploaded, destination ID recorded
+Full queue                   run only after smoke test passes
+```
+
 ## User-facing recommendation
 
 For Rodolfo, summarize as:
@@ -106,8 +148,14 @@ Service Account em My Drive    não resolve upload
 Manual                         evitar em lote grande
 ```
 
-End reports with the concrete pending choice/action, e.g.:
+End reports with the concrete pending action. If Shared Drive is still an option:
 
 ```text
 Próximo passo pendente: escolher Shared Drive ou OAuth; depois eu rodo smoke test de 1 arquivo e só então libero a fila completa.
+```
+
+If Rodolfo already confirmed it must stay in personal Google Drive:
+
+```text
+Próximo passo pendente: criar/configurar o OAuth client, salvar client_id/client_secret no 1Password, aprovar o device/consent flow, validar refresh token e rodar smoke test de 1 arquivo.
 ```

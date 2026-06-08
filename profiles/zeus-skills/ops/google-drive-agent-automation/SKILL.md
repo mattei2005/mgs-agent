@@ -90,14 +90,18 @@ Report CSV                  Record source ID, destination ID, hashes, status, er
 Large run                   Resume-safe; skip already uploaded IDs
 ```
 
-Use env overrides rather than hardcoding replacement folder IDs when possible:
+Use env overrides rather than hardcoding replacement folder IDs/auth choices when possible:
 
 ```text
 ARES_DRIVE_ROOT_FOLDER_ID=<shared-drive-backed MGS-CRIATIVOS folder id>
-ARES_DRIVE_OP_ITEM=<1Password item title if different>
+ARES_DRIVE_OP_ITEM=<1Password Service Account item title if different>
+ARES_DRIVE_AUTH_MODE=oauth              # when the destination must stay in personal My Drive
+ARES_DRIVE_OAUTH_OP_ITEM="Google OAuth - Ares Drive"
 ```
 
-Never print Service Account JSON, OAuth refresh tokens, access tokens, or 1Password field values. Report only item names and non-secret metadata.
+If Rodolfo says the folder must stay in his personal Google Drive, stop pushing Shared Drive as the only path. Switch the recommendation to **real-user OAuth** using his current account quota. The durable setup is: OAuth client credentials + refresh token stored in 1Password, script refreshes access tokens at runtime, and the batch still uses the same one-file smoke-test gate before the full run.
+
+Never print Service Account JSON, OAuth refresh tokens, access tokens, client secrets, or 1Password field values. Report only item names and non-secret metadata such as `len=X`.
 
 ## Validation checklist
 
