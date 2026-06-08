@@ -1232,7 +1232,7 @@ def title_meta_focus(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, st
             meta = clean_sentence_punctuation((meta.rstrip(".") + " Check official terms.")[:140])
             break
     if len(meta) < 130:
-        meta = clean_sentence_punctuation((meta.rstrip(".") + " Review official issuer terms before applying.")[:140])
+        meta = clean_sentence_punctuation((meta.rstrip(".") + " Check official issuer terms before applying.")[:140])
     meta = clean_sentence_punctuation(meta)
     if not (130 <= len(meta) <= 140):
         raise RunnerError(f"REC meta description outside contract v2 range 130-140 chars: {len(meta)}")
@@ -1791,7 +1791,7 @@ def main() -> int:
         title, meta_desc, focus_kw = title_meta_focus(card_data["card_name"], card_data)
         tick("seo_fields_sec", t0)
         validate_no_review({"title": title, "meta_desc": meta_desc, "focus_kw": focus_kw})
-        if len(title) > 60 or focus_kw.lower() not in title.lower() or len(meta_desc) < 120 or len(meta_desc) > 130 or len(focus_kw.split()) > 4:
+        if len(title) > 60 or focus_kw.lower() not in title.lower() or len(meta_desc) < 130 or len(meta_desc) > 140 or len(focus_kw.split()) > 4:
             raise RunnerError(f"SEO field validation failed title={len(title)} meta={len(meta_desc)} focus_words={len(focus_kw.split())} focus_in_title={focus_kw.lower() in title.lower()}")
 
         category_id = None
