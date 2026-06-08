@@ -32,8 +32,9 @@ from typing import Any
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding, rsa
 
-ROOT_FOLDER_ID = "14ica5TVauTrzAxcl4T-ViJorF89vRKIl"
-OP_ITEM = "Google Service Account - Ares Drive"
+DEFAULT_ROOT_FOLDER_ID = "14ica5TVauTrzAxcl4T-ViJorF89vRKIl"
+ROOT_FOLDER_ID = os.environ.get("ARES_DRIVE_ROOT_FOLDER_ID", DEFAULT_ROOT_FOLDER_ID)
+OP_ITEM = os.environ.get("ARES_DRIVE_OP_ITEM", "Google Service Account - Ares Drive")
 DEFAULT_VAULT = os.environ.get("OP_DEFAULT_VAULT", "MGS Conteúdo")
 SCOPES = "https://www.googleapis.com/auth/drive"
 FOLDER_MIME = "application/vnd.google-apps.folder"
