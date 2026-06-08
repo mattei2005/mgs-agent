@@ -1304,7 +1304,7 @@ def resolve_terms(site_key: str, site: Dict[str, Any], card_slug: str, card_data
         if "no annual fee" in lb or "no fee" in lb: extras.append("no annual fee")
         if "travel" in lb: extras.append("travel credit card")
         if "balance transfer" in lb: extras.append("balance transfer")
-        if "purchase" in lb: extras.append("purchase credit card")
+        if ("purchase" in lb or "purchases" in lb) and ("0%" in lb or "interest free" in lb or "introductory" in lb or "promotional" in lb): extras.append("purchase credit card")
     issuer = card_name_issuer(card_data.get("card_name") or "")
     if issuer:
         extras.append(issuer)

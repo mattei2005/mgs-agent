@@ -962,7 +962,7 @@ def resolve_taxonomy(site_key: str, site: Dict[str, Any], card_name: str, card_s
         extras.append("no annual fee")
     if "balance transfer" in benefit_text:
         extras.append("balance transfer")
-    if "purchase" in benefit_text:
+    if ("purchase" in benefit_text or "purchases" in benefit_text) and any(term in benefit_text for term in ["0%", "interest free", "introductory", "promotional"]):
         extras.append("purchase credit card")
     issuer = card_name_issuer(card_name)
     if issuer:
