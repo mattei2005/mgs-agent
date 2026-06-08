@@ -93,6 +93,8 @@ grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
   || fail "missing Discord post-response thread rename callback"
 grep -Eq "Discord thread renamed from auto-generated title|Discord GPT-style thread title applied" "$REPO/gateway/run.py" \
   || fail "missing Discord thread rename audit log marker"
+grep -q "Auto-thread skipped for REPORT-INFRA control-plane message" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord REPORT-INFRA inline/no-thread guard"
 
 PYBIN="$REPO/venv/bin/python"
 [[ -x "$PYBIN" ]] || PYBIN="python3"
