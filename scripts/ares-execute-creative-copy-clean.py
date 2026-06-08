@@ -98,6 +98,14 @@ def oauth_credentials() -> dict[str, str]:
             for k in ("client_id", "client_secret", "refresh_token"):
                 if obj.get(k):
                     creds[k] = obj[k]
+    token_file = Path(OAUTH_TOKEN_FILE)
+    if token_file.exists():
+        try:
+            token_data = json.loads(token_file.read_text(encoding="utf-8"))
+        except Exception:
+            token_data = {}
+        if token_data.get("refresh_token"):
+            creds["refresh_token"] = token_data["refresh_token"]
     missing = [k for k in ("client_id", "client_secret", "refresh_token") if not creds.get(k)]
     if missing:
         raise RuntimeError(f"OAuth item {OAUTH_OP_ITEM} missing fields: {', '.join(missing)}")
