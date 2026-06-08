@@ -467,7 +467,7 @@ Tags comerciais opcionais só podem entrar quando forem sustentadas por benefíc
 - avios rewards
 - airport lounge access
 - balance transfer
-- purchase credit card
+- purchase credit card, somente quando houver oferta de compra 0%, interest-free, introdutória ou promocional confirmada
 - issuer, ex: hsbc / barclaycard / lloyds
 ```
 
