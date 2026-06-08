@@ -207,6 +207,8 @@ Para a revisão de tags/fallbacks baseada em benefícios reais e o alinhamento d
 
 Para a revisão de taxonomia WordPress/tags feita antes do primeiro teste real — incluindo distinção entre tags WordPress e tags visuais do LazyBlock, remoção do default arriscado `rewards credit card` na P1 e padrão de verificação por monkeypatch sem tocar WordPress — ver `references/rec-p1-wordpress-taxonomy-tags-2026-06-08.md`.
 
+Para as correções operacionais aprendidas no publish Tesco Balance Transfer — incluindo hostname no preflight oficial, uso de imagem oficial genérica Tesco, quatro fatos mínimos em request-facts mode, keywords iniciais de balance transfer, overlay determinístico de card em featured image e reparos de meta/P1 repetição — ver `references/tesco-balance-transfer-runner-fixes-2026-06-08.md`.
+
 ---
 
 ## Fluxo operacional REC+P1
