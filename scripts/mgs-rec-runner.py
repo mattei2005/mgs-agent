@@ -1010,7 +1010,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
     if "balance transfer" in joined or "0% balance" in joined:
         angle = "repayment breathing room"
         opening_2 = "Its main appeal is the chance to organise existing card debt with more clarity, as long as the transfer fee and repayment plan make sense."
-        conclusion = "If that repayment window matches your budget, the next page can help you review the application path and official conditions in more detail."
+        conclusion = "If that repayment window matches your budget, the next page can help you check the application path and official conditions in more detail."
     elif any(t in joined for t in ["cashback", "reward", "rewards", "points", "miles", "avios"]):
         angle = "reward value"
         opening_2 = "Its main appeal is easier to understand when rewards come from purchases you already planned, instead of extra spending created only to chase benefits."
