@@ -79,10 +79,11 @@ TEMP_FILES+=("$b64_tmp")
 base64 -w0 "$CARD_IMG" | tr -d '\n' > "$b64_tmp"
 
 prompt=$(cat <<PROMPT
-You must compose a photo-realistic 16:9 (1920x1080) horizontal image using the
-EXACT credit card provided as the reference image. Do NOT redesign, recolor,
-or recreate the card — it must appear identical in colors, logo, layout and
-proportions.
+You must compose a photo-realistic 16:9 (1920x1080) horizontal lifestyle/finance
+background scene. The exact credit card will be composited separately by the
+pipeline after generation. Do NOT generate, draw, recreate, duplicate, or place
+any credit card, debit card, payment card, bank card, card-shaped mockup, badge,
+or card-like rectangle in the scene.
 
 Scene: $scene.
 Image role: $mode_label.
@@ -90,27 +91,22 @@ Visual variation for this run: $visual_brief.
 Role-specific distinction: $mode_distinction.
 
 Composition rules:
-- The credit card must be the clear protagonist and remain readable.
-- For P1 images, follow the literal layer order: realistic full-scene background
-  with depth → exact centred card fully inside the safe area → realistic person
-  in the foreground with soft natural overlap. It must not look like a card
-  pasted onto a blurred background.
-- The card must never touch or exceed the image edges. Keep a safe margin on
-  all sides, especially the bottom edge. No cropped card corners or overflow.
+- Leave a clean natural central foreground area where the pipeline can later
+  place the exact card. Do not put any object shaped like a payment card there.
+- For P1 images, follow this intent: realistic full-scene background with depth,
+  calm decision-oriented desk/advisory mood, and no generated card object.
 - Do not add borders, frames, moulding, stickers, badges, glow outlines, or
-  external graphic effects to the card.
+  external graphic effects.
 - Use the selected visual variation naturally; do not force the same centered-card
   layout every time.
-- Acceptable variations include: a hand holding the card, card near a generic
-  payment terminal, card beside a phone, card on a budgeting desk, card near a
-  wallet/pocket, shopping/rewards context, travel context, or one person with a
-  large card in the foreground.
-- If a hand is present, fingers may hold the edges but must not cover the issuer
-  logo, chip, contactless icon, or payment network mark.
+- Acceptable variations include: generic payment terminal in the background,
+  smartphone, receipts, coffee, budgeting desk, wallet, shopping/rewards context,
+  travel context, or one person in a realistic finance/lifestyle setting.
+- If a hand is present, it must not hold a card or card-like object.
 - Use only generic props. No competitor logo, no site logo, no branded corner
   overlay, no blue corner effect copied from another site, no retailer/airline/
   merchant logos.
-- Keep the scene clean: no duplicate cards, no extra card designs, no UI overlay,
+- Keep the scene clean: no cards, no duplicate cards, no extra card designs, no UI overlay,
   no stickers, no badges, no text labels.
 
 Style: ultra-realistic commercial photography (full-frame camera), cinematic
@@ -119,11 +115,12 @@ shadows, premium editorial color grading. Vary camera angle and distance across
 runs: close-up, flat lay, over-the-shoulder, payment moment, lifestyle portrait,
 or product-focused foreground.
 
-Negative: competitor branding, Memivi logo, blue corner overlay, picture frame,
-mockup frame, extra card, duplicate card, fingers covering logo/issuer/network,
-phone screen with readable UI, badge, sticker, unnecessary objects, altered card
-design, vertical card orientation, distorted anatomy, extra fingers, fake smile,
-cartoon, illustration, CGI, 3D render, stock photo look, flat lighting.
+Negative: credit card, debit card, payment card, bank card, card-like rectangle,
+competitor branding, Memivi logo, blue corner overlay, picture frame, mockup frame,
+extra card, duplicate card, phone screen with readable UI, badge, sticker,
+unnecessary objects, altered card design, vertical card orientation, distorted
+anatomy, extra fingers, fake smile, cartoon, illustration, CGI, 3D render, stock
+photo look, flat lighting.
 
 Output: one image, 16:9, photo-realistic.
 PROMPT
