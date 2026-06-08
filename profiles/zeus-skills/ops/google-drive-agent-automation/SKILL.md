@@ -101,6 +101,19 @@ ARES_DRIVE_OAUTH_OP_ITEM="Google OAuth - Ares Drive"
 
 If Rodolfo says the folder must stay in his personal Google Drive, stop pushing Shared Drive as the only path. Switch the recommendation to **real-user OAuth** using his current account quota. The durable setup is: OAuth client credentials + refresh token stored in 1Password, script refreshes access tokens at runtime, and the batch still uses the same one-file smoke-test gate before the full run.
 
+OAuth setup pitfall validated on Google personal Drive: a **TVs and Limited Input devices** client may reject the full Drive scope with `invalid_scope` for device flow:
+
+```text
+https://www.googleapis.com/auth/drive      → invalid_scope in device flow
+https://www.googleapis.com/auth/drive.file → device flow may start, but access is narrower
+```
+
+Operational handling:
+1. Try the already-created device-flow client once more if Rodolfo asks; do not force a new client before verifying.
+2. If only `drive.file` works, warn that it may upload new/app-created files but may not fully access an existing `MGS-CRIATIVOS` tree; validate with a one-file smoke test before full batch.
+3. If full-folder access is required and device flow rejects full Drive scope, fall back to **Desktop app OAuth** and a one-time manual browser/code exchange.
+4. Keep token handling secret: never paste `client_secret`, `refresh_token`, access token, or authorization URLs containing returned codes into Discord unless the code is explicitly safe/short-lived and the user needs to provide it.
+
 Never print Service Account JSON, OAuth refresh tokens, access tokens, client secrets, or 1Password field values. Report only item names and non-secret metadata such as `len=X`.
 
 ## Validation checklist
@@ -115,3 +128,4 @@ Never print Service Account JSON, OAuth refresh tokens, access tokens, client se
 ## References
 
 - `references/service-account-my-drive-quota.md` — concrete MGS/Ares incident pattern and reusable Drive API probes.
+- `references/personal-my-drive-oauth-device-flow.md` — personal Google Drive OAuth setup notes, device-flow `invalid_scope` pitfall, `drive.file` limitation, and Desktop app fallback.
