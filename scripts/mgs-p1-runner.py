@@ -733,6 +733,8 @@ def p1_perceived_benefit(raw: str, *, card_name: str = "") -> str:
             return "Earning points across familiar Mastercard purchases can make ordinary spending feel more rewarding over time."
         return "The reward only becomes real value when it comes from spending you would have made anyway and can repay comfortably."
     if "fee" in low or "apr" in low:
+        if "money transfer" in low:
+            return f"{text}. Compare this cost with the cash-flow reason for moving money before relying on the offer."
         return f"{text}. Read this as part of the total cost, because interest or fees can quickly reduce any benefit."
     if "travel" in name_low:
         return f"{text}. In practice, this matters most when it supports planned trips, overseas purchases or partner spending."
