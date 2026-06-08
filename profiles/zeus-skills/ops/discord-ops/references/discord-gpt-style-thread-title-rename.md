@@ -126,4 +126,6 @@ If he authorizes activation, restart affected gateways only after syntax validat
 - Do not overwrite short, specific manual thread titles.
 - Do not pass full Discord backfill/history prompts into the manual-title guard. The guard must compare against the clean actionable user message only; otherwise fallback titles derived from the first prompt can be misclassified as manual and block the correct GPT-style rename.
 - When a user says “it still did not work” and provides a thread ID, verify the exact `GPT-style thread title ...` log for that thread before changing heuristics. A skip log with `generated='<good title>'` proves the LLM title worked and the bug is in the rename/guard layer.
+- Do not “fix” old-thread accidental renames by removing the Discord auto-title callback globally. That prevents new threads from getting the required semantic rename. Fix with bot-owned/recent/initial-title guardrails instead.
+- If Rodolfo says “thread nova”, treat that as a correction signal: new-thread semantic rename is still expected even though old/open threads are immutable.
 - Do not add a cron/LLM self-check for this during the same restart unless explicitly needed; it can collide with gateway drain and confuse the active thread.
