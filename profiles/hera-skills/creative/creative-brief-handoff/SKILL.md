@@ -262,6 +262,44 @@ status
 notes
 ```
 
+## Sanitização obrigatória de metadados
+
+Todo criativo gerado, baixado do Canva, recebido de Kelly/Geizian/gestor ou preparado para Drive/handoff deve passar pelo gate server-side de limpeza antes de virar asset final.
+
+Comandos canônicos:
+
+```bash
+/root/mgs-agent/scripts/clean-creative-metadata.sh clean /path/to/creative.png --agent hera
+/root/mgs-agent/scripts/clean-creative-metadata.sh verify /path/to/creative.metadata-clean.png
+```
+
+Regras operacionais:
+
+```text
+Origem/etapa                     Regra
+───────────────────────────────  ─────────────────────────────────────────────
+Criativo criado pela Hera         Limpar antes de handoff/Drive/entrega final.
+Criativo baixado do Canva         Tratar como bruto; limpar antes de organizar.
+Criativo recebido de humano       Limpar antes de virar entregável final.
+Handoff para Ares ou humano       Usar sempre o arquivo `.metadata-clean.*`.
+```
+
+Reporte apenas status curto, sem despejar metadata bruta no Discord:
+
+```text
+clean: true
+harmful_tags_before: N
+harmful_tags_after: 0
+clean_path: /path/to/creative.metadata-clean.png
+```
+
+Referências locais:
+
+```text
+/root/mgs-agent/docs/CREATIVE_METADATA_SANITIZER.md
+/root/mgs-agent/logs/creative-metadata-sanitizer.jsonl
+```
+
 ## Origem e uso dos assets
 
 Classifique a origem e o consumidor antes de montar o plano.
