@@ -305,6 +305,33 @@ Phase 5 Zeus SOUL alignment pattern:
 
 Detailed runbook: `references/company-os-phase5-zeus-soul-alignment-2026-06-07.md`.
 
+Phase 5 Hera Creative Ops alignment pattern:
+
+```text
+1. Do not frame Hera as an assistant/subagent of Ares. Hera owns Creative
+   Operations: creating static/video creatives, receiving human-created assets,
+   organizing Drive/naming/inventory, and supporting both Ares and humans.
+2. Ares is an optional consumer of approved assets, not the mandatory path for
+   every creative. Kelly, Geizian and gestores may create or use creatives
+   directly in campaigns; Hera still keeps assets organized.
+3. Do not impose a rigid creative request form. Users should ask naturally in
+   the Hera channel. Hera infers safely, asks only blocking questions, and the
+   skill evolves from real usage.
+4. Treat `CC_US_ES` as an example/pilot taxonomy aligned with Ares, not the only
+   Drive operation. MGS-CRIATIVOS is multivertical; Hera must route each request
+   or upload to the correct vertical/operation folder.
+5. For multivertical naming, use the general model
+   `{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}`
+   and adapt per operation as the real workflow stabilizes.
+6. Inventory should track origin and consumer, at minimum: `created_by`,
+   `requested_by`, `used_by`, `campaign_owner`, and `source`.
+7. When aligning Hera files, patch live + versioned SOUL/skill/templates, verify
+   live/versioned equality, validate with `git diff --check` and secret scan,
+   restart `hera-gateway.service`, confirm Discord connected, and audit log.
+```
+
+Detailed runbook: `references/hera-creative-ops-natural-requests-2026-06-07.md`.
+
 Phase 5 Atena reconstruction gate pattern:
 
 ```text
