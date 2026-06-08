@@ -268,7 +268,7 @@ Aquisição                 /root/mgs-agent/context/acquisition.md
 Segurança                 /root/mgs-agent/context/security-policies.md
 Crons                     /root/mgs-agent/docs/CRONS.md
 Pendências                /root/mgs-agent/docs/PENDENCIAS.md
-Conteúdo REC/P1           /root/mgs-agent/skills/content-generate-rec/
+Conteúdo REC/P1           /root/mgs-agent/skills/content-generate-rec-p1/
 Publicação WordPress      /root/mgs-agent/skills/content-publish-wordpress/
 Scripts operacionais      /root/mgs-agent/scripts/
 Patches Hermes/MGS        /root/mgs-agent/patches/hermes/

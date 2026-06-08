@@ -90,7 +90,7 @@ Parsing:
 
 Routing logic:
 1. Look up site_key in data/sites.json → extract `template_key` (example: `gb-cc-en`).
-2. Look for template at skills/content-generate-rec/templates/rec-{template_key}.md.
+2. Look for template at skills/content-generate-rec-p1/templates/rec-{template_key}.md.
 3. If template missing → ABORT with clear error: "No REC template for template_key '<template_key>'. Create templates/rec-<template_key>.md first."
 4. If request is a complete REC direct-publish/direct-draft request (site + card + status + official source URL) → execute `/root/mgs-agent/scripts/mgs-rec-runner.py` once and report its JSON summary.
 5. If the runner fails with a clear error or the request is incomplete/manual/audit/new-template work → inspect the smallest relevant skill/template/script section needed.
@@ -105,7 +105,7 @@ Execution rules (MANDATORY):
 
 Triggers: "templates", "que templates eu tenho", "lista verticais", "list templates"
 
-Action: list contents of skills/content-generate-rec/templates/*.md
+Action: list contents of skills/content-generate-rec-p1/templates/*.md
 
 ### Intent: list_sites
 

@@ -11,12 +11,12 @@ Automated pipeline for generating and publishing credit card recommendation (REC
 - **Credentials**: 1Password Service Account token in `/root/mgs-agent/.env` (never read or exposed). Default vault `MGS Conteúdo` via `OP_DEFAULT_VAULT`. Both shell scripts source `.env` at startup so they work under `systemd`/`cron` too.
 - **Image generation**: Google Gemini 2.5 Flash Image API, Tier 1 Prepay ($300 credits, valid through Jul 2026).
 - **Skills**:
-  - `content-generate-rec` — fetches card data, generates composition image, assembles article from per-country/language/vertical templates.
+  - `content-generate-rec-p1` — fetches card data, generates composition image, assembles article from per-country/language/vertical templates.
   - `content-publish-wordpress` — reusable WordPress publishing utility (media upload, post create/update, Yoast meta, term resolution).
 
 ## Key Files
 
-### `skills/content-generate-rec/`
+### `skills/content-generate-rec-p1/`
 - `SKILL.md` — skill definition and trigger conditions
 - `scripts/generate-featured-image.sh` — Gemini 16:9 composition with card overlay; tempfile-based payload (`--rawfile` + `curl -d @file`), unified `cleanup_temps` trap
 - `scripts/search-card-image.sh` — tiered image search/download for card visual
@@ -308,7 +308,7 @@ working on this repository. State is reconstructed from:
 
 ## Next Steps
 
-- Execute Test 4 (end-to-end): run `content-generate-rec` against a real card slug, verify the WP post is created with correct article body, featured image, and Yoast meta.
+- Execute Test 4 (end-to-end): run `content-generate-rec-p1` against a real card slug, verify the WP post is created with correct article body, featured image, and Yoast meta.
 - ~~Add minimum-dimension filter to `scripts/search-card-image.sh` tier 2~~ **DONE** (commit `8cd3310`).
 
 ## Sistema de Pendências MGS

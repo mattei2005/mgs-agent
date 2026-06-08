@@ -9,7 +9,7 @@
 |---|---|---|
 | **1. Identidade / Comportamento global** | `SOUL.md` | "Sempre mencionar Raquel ao publicar", "tag atena_agent em tudo" |
 | **2. Pipeline / Orquestração** | `skills/<nome>/SKILL.md` | "Step 12 = yoast-score-post.sh", "delete imagem antes de delete post" |
-| **3. Geração de conteúdo (formato/voz/estrutura)** | `skills/content-generate-rec/templates/<vertical>.md` | Active voice, transition words, word count, tags por idioma |
+| **3. Geração de conteúdo (formato/voz/estrutura)** | `skills/content-generate-rec-p1/templates/<vertical>.md` | Active voice, transition words, word count, tags por idioma |
 | **4. Configuração específica por site** | `data/sites.json` | URLs, pixel IDs, default_button_color, idioma do site |
 
 ## 🎯 Como decidir

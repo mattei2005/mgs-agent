@@ -177,7 +177,7 @@ docs/CHECKPOINT-FASE-3.md                 histórico     Content / antigo       
 Path                                      Classe        Área provável              Status        Ação recomendada
 ---------------------------------------- ------------- -------------------------- ------------- ---------------------------
 skills/                                   skill         Agents                     ativo         manter
-skills/content-generate-rec/              skill         Content / Atena             ativo         não tocar agora
+skills/content-generate-rec-p1/              skill         Content / Atena             ativo         não tocar agora
 skills/content-publish-wordpress/         skill         Content / WordPress         ativo         não tocar agora
 patches/                                  patch local   Tech / Hermes              ativo         não tocar sem plano
 patches/hermes/                           patch local   Tech / Hermes              ativo         não tocar sem plano
