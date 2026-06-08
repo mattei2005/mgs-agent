@@ -1058,6 +1058,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
         wp_list(cons),
         wp_h2(labels["final"]),
         wp_p(conclusion),
+        wp_p("Use this recommendation as a first filter, then compare the official page with your budget, spending habits and repayment plan."),
         wp_p("Review the latest official conditions before deciding, because rates and benefits can change over time."),
     ])
     html_body = "\n\n".join(blocks)
