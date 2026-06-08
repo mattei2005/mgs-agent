@@ -100,7 +100,7 @@ print(f"Passive candidates: {len(passives)}")
 ## Step 4 — Validate before publishing
 
 ```bash
-bash /root/mgs-agent/skills/content-generate-rec-p1/scripts/validate-article.sh /tmp/rewritten.html
+bash /root/mgs-agent/skills/content-generate-rec/scripts/validate-article.sh /tmp/rewritten.html
 ```
 
 Expected: `{"status": "PASS", "count": 450-500, "subtitle_chars": <=100}`
@@ -123,7 +123,7 @@ Verify response includes `"status":"publish"` and a new `"modified"` timestamp.
 ## Step 6 — Re-score
 
 ```bash
-bash /root/mgs-agent/skills/content-generate-rec-p1/scripts/yoast-score-post.sh <site_key> <post_id>
+bash /root/mgs-agent/skills/content-generate-rec/scripts/yoast-score-post.sh <site_key> <post_id>
 ```
 
 Expected: `readability_score >= 71` (green). If still yellow/red, re-diagnose.
