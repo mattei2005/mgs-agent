@@ -209,6 +209,8 @@ Para a revisão de taxonomia WordPress/tags feita antes do primeiro teste real �
 
 Para as correções operacionais aprendidas no publish Tesco Balance Transfer — incluindo hostname no preflight oficial, uso de imagem oficial genérica Tesco, quatro fatos mínimos em request-facts mode, keywords iniciais de balance transfer, overlay determinístico de card em featured image e reparos de meta/P1 repetição — ver `references/tesco-balance-transfer-runner-fixes-2026-06-08.md`.
 
+Para a disciplina de formato do relatório final REC+P1 — especialmente não chamar de “faltou subtitle” quando o relatório já traz `subtitle <chars>` na validação, e tratar linhas explícitas `Subtitle:`/`Excerpt:` como complemento de QA salvo pedido contrário — ver `references/rec-p1-report-format-discipline-2026-06-08.md`.
+
 ---
 
 ## Fluxo operacional REC+P1
