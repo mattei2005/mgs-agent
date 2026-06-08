@@ -213,6 +213,8 @@ Para as lições pós-reestruturação sobre formato final preferido por Rodolfo
 
 Para a disciplina de formato do relatório final REC+P1 — especialmente não chamar de “faltou subtitle” quando o relatório já traz `subtitle <chars>` na validação, e tratar linhas explícitas `Subtitle:`/`Excerpt:` como complemento de QA salvo pedido contrário — ver `references/rec-p1-report-format-discipline-2026-06-08.md`.
 
+Para os quality gates derivados do feedback editorial da Raquel/Rodolfo no teste Tesco — incluindo `Clubcard points` não virar `Travel rewards`, bloqueio de labels genéricos em benefícios, idioma misto, LazyBlock/CTA inválido, card duplicado e featured com cartão ocluído — ver `references/tesco-rec-p1-raquel-feedback-quality-gates-2026-06-08.md`.
+
 ---
 
 ## Fluxo operacional REC+P1
