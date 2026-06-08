@@ -932,16 +932,46 @@ def resolve_term(site_key: str, taxonomy: str, name: str) -> int:
     raise RunnerError(f"Could not resolve {taxonomy} term {name}: {out[:800]}")
 
 
+def card_name_issuer(name: str) -> str:
+    low = name.lower()
+    if "american express" in low or "amex" in low:
+        return "american express"
+    for issuer in ["barclaycard", "hsbc", "lloyds", "halifax", "natwest", "mbna", "capital one", "tesco bank", "santander"]:
+        if issuer in low:
+            return issuer
+    return ""
+
+
 def resolve_taxonomy(site_key: str, site: Dict[str, Any], card_name: str, card_slug: str, benefits: List[str]) -> Tuple[int, List[int], List[str]]:
     lang = effective_lang(site); c=copy_for(lang)
     cat_name = site.get("default_category", c["cat"]); category_id = resolve_term(site_key, "categories", cat_name)
     vertical=(site.get("verticals") or ["cc"])[0]; country=site.get("country", "gb")
     card_tag = re.sub(r"\s+", " ", re.sub(r"[^A-Za-z0-9À-ÿğüşöçıİĞÜŞÖÇ ]+", " ", card_name.replace("Card", ""))).strip().lower()
-    tags=["p1", vertical, country, card_tag, f"lang_{lang}", "atena_agent", c["tags"][0]]
+    tags=["p1", vertical, country, card_tag, f"lang_{lang}", "atena_agent"]
     benefit_text=" ".join(benefits).lower()
-    if "travel" in benefit_text or "avios" in benefit_text: tags.append(c["tags"][1])
-    if "avios" in benefit_text: tags.append(c["tags"][2])
-    if "lounge" in benefit_text: tags.append(c["tags"][3])
+    extras: List[str] = []
+    if any(term in benefit_text for term in ["cashback", "rewards", "reward", "points"]):
+        extras.append(c["tags"][0])
+    if "travel" in benefit_text or "avios" in benefit_text:
+        extras.append(c["tags"][1])
+    if "avios" in benefit_text:
+        extras.append(c["tags"][2])
+    if "lounge" in benefit_text:
+        extras.append(c["tags"][3])
+    if "no annual fee" in benefit_text or "no fee" in benefit_text:
+        extras.append("no annual fee")
+    if "balance transfer" in benefit_text:
+        extras.append("balance transfer")
+    if "purchase" in benefit_text:
+        extras.append("purchase credit card")
+    issuer = card_name_issuer(card_name)
+    if issuer:
+        extras.append(issuer)
+    for tag in extras:
+        if tag and tag not in tags:
+            tags.append(tag)
+        if len(tags) >= 10:
+            break
     tags=list(dict.fromkeys(tags))[:10]
     tag_ids=[resolve_term(site_key, "tags", t) for t in tags]
     return category_id, tag_ids, tags
