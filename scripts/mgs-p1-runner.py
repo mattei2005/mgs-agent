@@ -283,7 +283,8 @@ def validate_seo_fields(title: str, meta: str, focus: str) -> None:
         raise RunnerError(f"P1 title length invalid: {len(title)}")
     if focus.lower() not in title.lower():
         raise RunnerError(f"P1 title missing focus keyphrase: {focus}")
-    if len(meta) < 120 or len(meta) > 130:
+    # Contract v2: P1 meta description must be 130-150 visible characters.
+    if len(meta) < 130 or len(meta) > 150:
         raise RunnerError(f"P1 meta length invalid: {len(meta)}")
     if len(focus.split()) > 4:
         raise RunnerError(f"P1 focus keyphrase too long: {focus}")
@@ -588,8 +589,22 @@ def wp_paragraph(text: str) -> str:
     return f"<!-- wp:paragraph -->\n<p>{html.escape(text)}</p>\n<!-- /wp:paragraph -->"
 
 
+def wp_paragraph_raw(inner_html: str) -> str:
+    return f"<!-- wp:paragraph -->\n<p>{inner_html}</p>\n<!-- /wp:paragraph -->"
+
+
 def wp_heading(text: str) -> str:
     return f"<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">{html.escape(text)}</h2>\n<!-- /wp:heading -->"
+
+
+def wp_details(summary: str, paragraphs: List[str]) -> str:
+    inner = "\n\n".join(wp_paragraph(p) for p in paragraphs if str(p).strip())
+    return (
+        '<!-- wp:details -->\n'
+        '<details class="wp-block-details"><summary>' + html.escape(summary) + '</summary>\n'
+        + inner +
+        '\n</details>\n<!-- /wp:details -->'
+    )
 
 
 def infer_p1_positioning(card_name: str, benefits: List[str]) -> Dict[str, str]:
