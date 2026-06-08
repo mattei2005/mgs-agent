@@ -111,8 +111,10 @@ https://www.googleapis.com/auth/drive.file → device flow may start, but access
 Operational handling:
 1. Try the already-created device-flow client once more if Rodolfo asks; do not force a new client before verifying.
 2. If only `drive.file` works, warn that it may upload new/app-created files but may not fully access an existing `MGS-CRIATIVOS` tree; validate with a one-file smoke test before full batch.
-3. If full-folder access is required and device flow rejects full Drive scope, fall back to **Desktop app OAuth** and a one-time manual browser/code exchange.
-4. Keep token handling secret: never paste `client_secret`, `refresh_token`, access token, or authorization URLs containing returned codes into Discord unless the code is explicitly safe/short-lived and the user needs to provide it.
+3. For one-person/personal Drive use, keep OAuth app in **Testing** and add Rodolfo's Google account as a Test user; do not push Production/verification unless the app is public.
+4. If full-folder access is required and device flow rejects full Drive scope, fall back to **Desktop app OAuth** and a one-time manual browser/code exchange.
+5. If Google approval succeeds but 1Password cannot update the item, save `refresh_token` to a root-only gitignored local secret file and teach the runtime loader to combine `client_id`/`client_secret` from 1Password with that local token.
+6. Keep token handling secret: never paste `client_secret`, `refresh_token`, access token, or authorization URLs containing returned codes into Discord unless the code is explicitly safe/short-lived and the user needs to provide it.
 
 Never print Service Account JSON, OAuth refresh tokens, access tokens, client secrets, or 1Password field values. Report only item names and non-secret metadata such as `len=X`.
 
