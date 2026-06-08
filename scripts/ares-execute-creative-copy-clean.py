@@ -256,6 +256,9 @@ def append_report(path: Path, row: dict[str, str]) -> None:
 
 def process_queue(args: argparse.Namespace) -> dict[str, Any]:
     load_env()
+    global ROOT_FOLDER_ID, OP_ITEM
+    ROOT_FOLDER_ID = os.environ.get("ARES_DRIVE_ROOT_FOLDER_ID", ROOT_FOLDER_ID)
+    OP_ITEM = os.environ.get("ARES_DRIVE_OP_ITEM", OP_ITEM)
     token = access_token(service_account())
     drive = Drive(token)
     root_meta = drive.preflight_destination()
@@ -323,7 +326,11 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--max-errors", type=int, default=20)
     args = ap.parse_args()
-    summary = process_queue(args)
+    try:
+        summary = process_queue(args)
+    except Exception as e:
+        print(json.dumps({"done": False, "blocked": True, "error": describe_exception(e)}, ensure_ascii=False, indent=2))
+        return 2
     print(json.dumps({"done": True, "summary": summary, "report_csv": args.report_csv}, ensure_ascii=False, indent=2))
     return 0 if not summary.get("errors") else 2
 
