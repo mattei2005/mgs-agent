@@ -204,7 +204,10 @@ def official_product_preflight(card_name: str, official_url: str) -> None:
         title = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", title_m.group(1) if title_m else "")).strip().lower()
         if title:
             distinctive = [w for w in re.findall(r"[a-z0-9]+", name_l) if w not in {"credit", "card", "the", "and", "uk"}]
-            title_and_path = title + " " + parsed.path.lower().replace("-", " ")
+            # Include hostname so issuer tokens present in the official domain
+            # (e.g. tescobank.com) do not create a false mismatch when the
+            # page title is a generic product name.
+            title_and_path = title + " " + parsed.netloc.lower().replace("-", " ") + " " + parsed.path.lower().replace("-", " ")
             missing = [w for w in distinctive if w not in title_and_path]
             if len(missing) >= max(2, len(distinctive) // 2):
                 raise OrchestratorError(
