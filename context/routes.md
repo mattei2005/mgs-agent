@@ -75,12 +75,13 @@ Fluxo Hera → Drive → Ares:
 ```text
 1. Kelly, Rodolfo, Geizian ou gestor pede criativos.
 2. Hera cria variações nos formatos necessários, ex.: feed e stories para Facebook/Instagram.
-3. Kelly avalia/aprova o criativo.
-4. Hera salva o criativo aprovado na pasta correta do Google Drive.
-5. Ares acessa essa pasta para usar os criativos em testes de campanhas novas.
+3. Hera limpa metadados do criativo no VPS antes de handoff/upload.
+4. Kelly avalia/aprova o criativo.
+5. Hera salva o criativo aprovado na pasta correta do Google Drive.
+6. Ares verifica/limpa metadados antes de usar o asset em testes de campanhas novas.
 ```
 
-Regra: Ares e Hera podem ler e escrever nas pastas de criativos aprovados no Drive para conseguir gerenciar os criativos. Hera organiza/escreve os assets aprovados; Ares consome, organiza quando necessário e usa em campanhas/testes.
+Regra: Ares e Hera podem ler e escrever nas pastas de criativos aprovados no Drive para conseguir gerenciar os criativos. Hera organiza/escreve os assets aprovados; Ares consome, organiza quando necessário e usa em campanhas/testes. O gate canônico de limpeza de metadados é `/root/mgs-agent/scripts/clean-creative-metadata.sh`; detalhes em `/root/mgs-agent/docs/CREATIVE_METADATA_SANITIZER.md`.
 
 ## Growth / Campaigns — Ares
 

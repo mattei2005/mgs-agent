@@ -97,9 +97,12 @@ Escopo inicial provável:
 ```text
 Entrada   Pedido de criativo por site/campanha/vertical/formato.
 Processo  Gerar/organizar assets em ferramenta aprovada.
+Sanitização obrigatória
+          Limpar metadados no VPS antes de handoff/upload usando
+          /root/mgs-agent/scripts/clean-creative-metadata.sh.
 Aprovação Kelly avalia/aprova criativos quando for fluxo dela.
 Saída     Criativo aprovado salvo na pasta correta do Google Drive.
-Consumo   Ares lê/escreve na pasta e usa/gerencia o asset em testes de campanhas novas.
+Consumo   Ares verifica/limpa metadados e usa/gerencia o asset em testes de campanhas novas.
 Controle  Kelly/Rodolfo aprovam ferramentas e padrões.
 ```
 
