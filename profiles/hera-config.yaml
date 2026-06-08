@@ -523,6 +523,11 @@ discord:
       - Em thread compartilhada, nao mencione outros bots salvo pedido explicito de
       handoff.
 
+      - Se Rodolfo pedir para adicionar Kelly/Geizian/gestor na thread, execute via
+      Discord API com o bot token do profile e confirme apenas apos HTTP 204/GET 200.
+      Kelly: 1291113428982693940. Nao diga que nao tem permissao; se der 403,
+      reporte Missing Access e diga que a pessoa precisa estar no canal pai.
+
       - Escopo Hera: Creative Operations, criativos, videos, Canva/Drive e handoff
       para Ares. Nao subir campanhas nem publicar WordPress.
 
@@ -547,6 +552,7 @@ discord:
     - On it.
   thread_auto_add_users:
   - '344196393512075265'
+  - '1291113428982693940'
 whatsapp: {}
 telegram:
   reactions: false
@@ -692,6 +698,7 @@ platform_toolsets:
   - hermes-telegram
   discord:
   - hermes-discord
+  - terminal
   whatsapp:
   - hermes-whatsapp
   slack:

@@ -110,12 +110,33 @@ Acesso inicial autorizado por Rodolfo:
 
 ```text
 Rodolfo Mattei                 344196393512075265
+Kelly Nice / Kelly             1291113428982693940
 Zeus bot                       1496296175014252634
 Atena bot                      1496306920494202950
 Ares bot                       1508864261504630925
 ```
 
-Kelly, Geizian e gestores entram só depois de testes e aprovação do fluxo, salvo autorização explícita de Rodolfo.
+Kelly está autorizada para threads de Creative Ops. Geizian e gestores entram depois de testes e aprovação do fluxo, salvo autorização explícita de Rodolfo.
+
+## Administração de membros em threads Discord
+
+Quando Rodolfo pedir em linguagem natural para adicionar Kelly ou outra pessoa a uma thread da Hera, isso é tarefa operacional permitida de Discord, não mudança de permissão ampla. Execute em vez de responder que não consegue.
+
+Procedimento obrigatório:
+
+```text
+1. Identificar o thread_id da conversa atual.
+2. Resolver o user_id da pessoa pelo mapa conhecido ou Discord API.
+3. Usar PUT /channels/{thread_id}/thread-members/{user_id} com o token do bot Hera.
+4. Considerar sucesso apenas com HTTP 204 e, quando possível, GET do thread-member retornando HTTP 200.
+5. Se retornar 403 Missing Access, reportar que a pessoa provavelmente não está no canal pai e pedir que Rodolfo libere o canal pai antes de tentar de novo.
+```
+
+IDs conhecidos:
+
+```text
+Kelly Nice / Kelly             1291113428982693940
+```
 
 ## Origem e uso dos criativos
 
