@@ -1096,6 +1096,7 @@ def main() -> int:
         # For dry-run, use placeholder id in body so validation can still run.
         body, validation = generate_p1_body(site, card_name, card_slug, official_data, official_url, featured_id or 999999, featured_url, int(card_id), card_url, button_hex, p1_contract)
         title, metadesc, focuskw = title_and_meta(card_name, official_data, lang)
+        keyword_count_total = validate_p1_keyword_count(card_name, title, validation.get("subtitle", ""), body, metadesc)
         validate_no_review({"body": body, "subtitle": validation.get("subtitle", ""), "title": title, "meta": metadesc})
         body_path = Path(tempfile.gettempdir()) / f"p1-qa-{card_slug}.html"
         rec_compare_path = Path(tempfile.gettempdir()) / f"p1-qa-rec-compare-{card_slug}.html"
@@ -1113,7 +1114,7 @@ def main() -> int:
         if semantic_qa.get("status") == "BLOCK":
             raise RunnerError(f"semantic_qa_blocked: {semantic_qa}")
         steps.append("semantic_qa_checked")
-        result["content_validation"] = {**validation, "title_chars": len(title), "meta_chars": len(metadesc), "focus_keyphrase": focuskw, "semantic_qa": semantic_qa}
+        result["content_validation"] = {**validation, "title_chars": len(title), "meta_chars": len(metadesc), "focus_keyphrase": focuskw, "keyword_count_total": keyword_count_total, "semantic_qa": semantic_qa}
         steps.append("content_assembled")
 
         t = ts(); category_id, tag_ids, tag_names = resolve_taxonomy(args.site, site, card_name, card_slug, official_data.get("benefits") or []); validate_taxonomy_names(tag_names, site.get("language") or "en"); timings["taxonomy"] = ts() - t; steps.append("taxonomy_resolved")
