@@ -228,6 +228,19 @@ Checklist do teste:
 8. Fazer verificação pública/preview do draft.
 9. Só depois liberar publicação real.
 
+## Addendum — Taxonomia WordPress / tags
+
+Após revisão antes do primeiro teste real, foi identificado que a inclusão de tags WordPress existia nos runners, mas a regra não estava suficientemente explícita na SKILL REC+P1 e a P1 tinha uma tag comercial padrão arriscada.
+
+Correção aplicada:
+
+- Documentada a regra `WordPress taxonomy/tags` em `/root/mgs-agent/skills/content-generate-rec-p1/SKILL.md`.
+- REC e P1 devem ter tags obrigatórias: `rec` ou `p1`, vertical, país, tag limpa do cartão/produto, `lang_<idioma>` e `atena_agent`.
+- Tags comerciais opcionais só entram quando sustentadas por benefícios/fatos confirmados.
+- P1 não adiciona mais `rewards credit card` por default.
+- `purchase credit card` só entra quando houver oferta de compra 0%, interest-free, introdutória ou promocional confirmada.
+- Validação por monkeypatch confirmou que cartão com “everyday purchases” não recebe tag falsa de rewards/purchase, enquanto cartão com oferta promocional de compra recebe `purchase credit card`.
+
 ## Observação de escopo
 
 O arquivo abaixo pertence ao contexto/thread Ares `1508906079642456084` e não faz parte desta reestruturação Atena/REC-P1:
