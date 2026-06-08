@@ -50,7 +50,7 @@ ALLOWED_STRUCTURAL_TAGS = {
     'ColorPrimaries', 'TransferCharacteristics', 'MatrixCoefficients',
     'VideoFullRangeFlag', 'BufferSize', 'MaxBitrate', 'AverageBitrate',
     'VideoFrameRate', 'Balance', 'AudioFormat', 'AudioChannels',
-    'AudioBitsPerSample', 'AudioSampleRate',
+    'AudioBitsPerSample', 'AudioSampleRate', 'PixelAspectRatio',
 }
 
 
