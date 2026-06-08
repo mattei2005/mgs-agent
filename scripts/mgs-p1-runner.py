@@ -890,9 +890,11 @@ def fit_word_count(body: str, lang: str = "en") -> Tuple[str, int]:
 
 def title_and_meta(card_name: str, card_data: Dict[str, Any], lang: str) -> Tuple[str, str, str]:
     focus = compact_focus(card_name); c = copy_for(lang)
-    title = c["title"].format(focus=focus)
+    title = f"{card_name}: {c['heads'][6]}"
+    if len(title) > 60:
+        title = c["title"].format(focus=focus)
     if len(title) > 60: title = f"{focus}: {c['heads'][6]}"
-    meta = c["meta"].format(focus=focus)
+    meta = f"{card_name} guide with costs, benefits, eligibility notes and official issuer apply link before you continue." if lang == "en" else c["meta"].format(focus=card_name)
     additions = {"en":" Review issuer terms before applying.","es":" Revisa los términos del emisor antes de solicitar.","pt":" Confira os termos do emissor antes de solicitar.","tr":" Başvurmadan önce kurum şartlarını kontrol et."}
     while len(meta) < 130:
         candidate = meta.rstrip(".") + additions[lang]
