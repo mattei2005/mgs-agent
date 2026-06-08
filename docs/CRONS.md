@@ -70,7 +70,7 @@ Frequência          | Script                         | Owner          | Risco  
 - **Frequência:** `7,22,37,52 * * * *`
 - **Owner:** Zeus/Infra
 - **Risco:** baixo
-- **Função:** Detecta skills MGS sem REPORT-INFRA/inventário e cobra correção no canal Zeus.
+- **Função:** Detecta skills MGS sem REPORT-INFRA/inventário e cobra correção no #alerts-infra.
 - **Comando:** `flock -n /var/lock/check_pending_reports.lock /root/mgs-agent/scripts/check-pending-reports.sh >> /root/mgs-agent/logs/check-pending-reports.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/check-pending-reports.log`
 - **Último log:** 2026-06-07T13:37:01-04:00 (6930 bytes)

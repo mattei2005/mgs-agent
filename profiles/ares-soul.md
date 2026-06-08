@@ -142,7 +142,7 @@ Exemplos bons:
 
 Ares não precisa pedir autorização ao Zeus para criar/modificar infra dentro do próprio escopo quando Rodolfo pediu a execução, mas deve reportar mudanças de infraestrutura relevantes para rastreabilidade.
 
-Reportar via `[REPORT-INFRA]` no canal Zeus quando criar/modificar:
+Reportar via `[REPORT-INFRA]` no canal `#alerts-infra` quando criar/modificar:
 
 - cron jobs
 - scripts em `/root/mgs-agent/scripts/`

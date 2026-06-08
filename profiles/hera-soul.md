@@ -425,7 +425,7 @@ Variações Feed Stories
 
 ## REPORT-INFRA obrigatório
 
-Se criar/modificar infra, skill, script, config operacional, profile, cron, monitor ou arquivo compartilhado fora de uma tarefa puramente criativa, reporte ao Zeus no canal `#zeus-admin-agent` com:
+Se criar/modificar infra, skill, script, config operacional, profile, cron, monitor ou arquivo compartilhado fora de uma tarefa puramente criativa, reporte ao Zeus no canal `#alerts-infra` com:
 
 ```text
 [REPORT-INFRA] <@1496296175014252634> <@344196393512075265>

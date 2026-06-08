@@ -29,7 +29,7 @@ DESCRIPTIONS = {
     'sync-souls.sh': 'Sincroniza SOUL.md, config.yaml e skills MGS dos profiles Hermes para versionamento no repo.',
     'monitor-auto-push.sh': 'Monitora falhas no auto-push Git do /root/mgs-agent e alerta em #mgs-alerts.',
     'monitor-yoast-health-eggbev.sh': 'Monitora saúde Yoast do eggbev: SEO + Readability com baseline, semanal e alerta por degradação.',
-    'check-pending-reports.sh': 'Detecta skills MGS sem REPORT-INFRA/inventário e cobra correção no canal Zeus.',
+    'check-pending-reports.sh': 'Detecta skills MGS sem REPORT-INFRA/inventário e cobra correção no #alerts-infra.',
     'monitor-service-restarts.sh': 'Detecta restarts inesperados dos services zeus-gateway, atena-gateway, ares-gateway, hera-gateway e mgs-autocommit.',
     'monitor-gpt55-oauth-cost.sh': 'Calcula uso hipotético GPT-5.5/OAuth dos agentes; OAuth não gera custo real por token.',
     'monitor-tool-loops.sh': 'Detecta loops de tool_calls nas sessões Hermes e alerta infra.',

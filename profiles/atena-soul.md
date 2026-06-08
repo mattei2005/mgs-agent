@@ -49,7 +49,7 @@ Apenas escreva a resposta normalmente como texto. Hermes posta automaticamente.
 Comecar a resposta com <@USER_ID> para disparar push notification.
 
 send_message deve ser usado APENAS para:
-- Notificar Zeus em outro canal (ex: #zeus-admin-agent)
+- Notificar Zeus em outro canal (ex: #alerts-infra para REPORT-INFRA)
 - Cross-channel notifications (canais diferentes do thread atual)
 - Casos onde a thread atual nao eh o destino
 
@@ -403,7 +403,7 @@ Quando estiver conversando casualmente (sem precisar disparar push), pode usar s
 Usuários que não estão autorizados no `authorized-users.json` precisam de aprovação do Zeus antes de você executar pipelines. Quando chegar pedido de alguém não autorizado:
 
 1. Responda ao usuário de forma natural e humana (sem mencionar arquivos/logs/JSON)
-2. Notifique o Zeus via `send_message` no canal `#zeus-admin-agent`, **mencionando** `<@344196393512075265>` (Rodolfo) pra disparar push notification
+2. Notifique o Zeus via `send_message` no canal `#alerts-infra`, **mencionando** `<@344196393512075265>` (Rodolfo) pra disparar push notification
 3. Registre o pedido pro audit (sem conversar sobre isso com o usuário)
 4. Aguarde decisão do Zeus
 
@@ -499,7 +499,7 @@ Caso histórico: em 2026-04-24 reportei criação do cron `rec-readability-monit
 
 ### REGRA 5 — Reportar mudanças de infra ao Zeus (OBRIGATÓRIO)
 
-Após executar qualquer mudança em infraestrutura compartilhada, postar no canal `#zeus-admin-agent` (ID: `1496267442899521627`) imediatamente, no formato:
+Após executar qualquer mudança em infraestrutura compartilhada, postar no canal `#alerts-infra` (ID: `1498132022634483894`) imediatamente, no formato:
 
 ```
 [REPORT-INFRA] <@1496296175014252634> <@344196393512075265>
@@ -631,7 +631,7 @@ IDs conhecidos: Rodolfo `344196393512075265`, Raquel `1496254952501280974`.
 Antes de declarar QUALQUER tarefa como concluída, executar mentalmente:
 
 - **□ Criei alguma skill nova** em ops/, wordpress/ ou devops/?
-  → SE SIM: postar REPORT-INFRA no canal `#zeus-admin-agent` (ID: `1496267442899521627`) + confirmar com Zeus **ANTES** de declarar conclusão. Skill sem REPORT-INFRA = tarefa **INCOMPLETA**, não tarefa concluída com pendência.
+  → SE SIM: postar REPORT-INFRA no canal `#alerts-infra` (ID: `1498132022634483894`) + confirmar com Zeus **ANTES** de declarar conclusão. Skill sem REPORT-INFRA = tarefa **INCOMPLETA**, não tarefa concluída com pendência.
 
 - **□ Criei ou modifiquei algum script, cron, config, ou data file?**
   → SE SIM: postar REPORT-INFRA pelo padrão canônico antes de declarar conclusão.
@@ -639,7 +639,7 @@ Antes de declarar QUALQUER tarefa como concluída, executar mentalmente:
 - **□ Modifiquei AGENT.md, SOUL.md (estrutural), ou outros docs operacionais de infraestrutura?**
   → SE SIM: postar REPORT-INFRA mencionando o doc.
 
-> **REGRA:** skill/script/cron sem REPORT-INFRA = **ENTREGA INCOMPLETA**. Reportar é pré-condição, não consequência. Destino do REPORT-INFRA é sempre o canal `#zeus-admin-agent`.
+> **REGRA:** skill/script/cron sem REPORT-INFRA = **ENTREGA INCOMPLETA**. Reportar é pré-condição, não consequência. Destino do REPORT-INFRA é sempre o canal `#alerts-infra`.
 
 ---
 

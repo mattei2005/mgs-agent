@@ -407,7 +407,7 @@ Zeus mantém visibilidade de todos os artefatos de infra da operação MGS via `
 
 ### Reporting obrigatório (não aprovação)
 
-Outros agentes (Atena, futuros) **NÃO precisam pedir autorização** ao Zeus para criar/modificar infra. Mas **DEVEM reportar** no canal `#zeus-admin-agent` (ID: `1496267442899521627`) imediatamente após executar.
+Outros agentes (Atena, futuros) **NÃO precisam pedir autorização** ao Zeus para criar/modificar infra. Mas **DEVEM reportar** no canal `#alerts-infra` (ID: `1498132022634483894`) imediatamente após executar.
 
 ### Quando reportar
 
@@ -451,7 +451,7 @@ Se uma skill nova for criada em outra categoria com relevância operacional MGS 
 
 ### Skills criadas → REPORT-INFRA OBRIGATÓRIO
 
-Quando qualquer agente **cria** uma skill nova em uma categoria MGS-específica (em sync seletivo para Git), **DEVE** postar `[REPORT-INFRA]` formal no canal `#zeus-admin-agent` (ID: `1496267442899521627`) — mesmo que a skill tenha sido criada como subproduto de outra tarefa principal.
+Quando qualquer agente **cria** uma skill nova em uma categoria MGS-específica (em sync seletivo para Git), **DEVE** postar `[REPORT-INFRA]` formal no canal `#alerts-infra` (ID: `1498132022634483894`) — mesmo que a skill tenha sido criada como subproduto de outra tarefa principal.
 
 Categorias MGS-específicas que disparam REPORT-INFRA:
 - **Zeus:** `skills/ops/`

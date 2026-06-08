@@ -144,7 +144,7 @@ NOT `monitor-yoast-readability-*` (v1 name, readability-only).
 6. Add to crontab (DEPRECATED-comment the old cron)
 7. Update `/root/mgs-agent/data/infra-inventory.json`
 8. Commit
-9. Post REPORT-INFRA to zeus-admin-agent channel (ID: `1496267442899521627`)
+9. Post REPORT-INFRA to #alerts-infra channel (ID: `1498132022634483894`)
 
 ---
 

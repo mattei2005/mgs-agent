@@ -15,16 +15,16 @@ set -a
 source "/root/mgs-agent/.env" 2>/dev/null || true
 set +a
 
-# Buscar webhook via 1Password (canal Zeus — alerta operacional ao Zeus, não infra)
-WEBHOOK_URL=$(op item get "Discord Webhook - Zeus Channel" --vault "MGS Conteúdo" --fields label=webhook_url 2>/dev/null || true)
+# Buscar webhook via 1Password (#alerts-infra — alerts/REPORT-INFRA operacionais)
+WEBHOOK_URL=$(op item get "Discord Webhook - Alerts Infra Channel" --vault "MGS Conteúdo" --fields label=webhook_url 2>/dev/null || true)
 
 if [[ -z "$WEBHOOK_URL" ]]; then
     echo "${LOG_PREFIX} ERRO: Não foi possível obter WEBHOOK_URL do 1Password. Abortando."
     exit 1
 fi
 
-# Mention do Rodolfo para push notification
-ZEUS_MENTION="<@344196393512075265>"
+# Mentions: Zeus para roteamento do bot + Rodolfo para push notification
+ZEUS_MENTION="<@1496296175014252634> <@344196393512075265>"
 
 # Inicializar state file se não existir
 if [[ ! -f "$STATE_FILE" ]]; then
