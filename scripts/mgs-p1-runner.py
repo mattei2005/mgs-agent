@@ -351,15 +351,16 @@ def extract_official_data(card_name: str, official_url: str, explicit_benefits: 
     except Exception as e:
         if not (explicit_benefits and annual_fee and apr):
             raise
+        tag10, tag2, descriptor = derive_lazyblock_tags(card_name, explicit_benefits[:6], annual_fee)
         data = {
             "card_name": card_name,
             "annual_fee": annual_fee,
             "apr": apr,
             "benefits": explicit_benefits[:6],
             "competitors": [],
-            "tag10": "Avios rewards",
-            "tag2": annual_fee[:25],
-            "descriptor": "A UK travel credit card with Avios rewards and issuer terms.",
+            "tag10": tag10,
+            "tag2": tag2,
+            "descriptor": descriptor,
             "extraction_mode": f"explicit_facts_after_short_fetch:{type(e).__name__}",
             "source_url": official_url,
         }
@@ -568,13 +569,15 @@ def card_ui_descriptor(card_data: Dict[str, Any], fallback: str) -> str:
 def lazy_credit_card_p1(site: Dict[str, Any], card_name: str, card_slug: str, card_id: int, card_url: str, card_data: Dict[str, Any], official_url: str, button_hex: str, lang: str) -> str:
     b = rand_block_id()
     c = copy_for(lang)
+    annual_fee = str(card_data.get("annual_fee") or "")
+    tag10, tag2, descriptor = derive_lazyblock_tags(card_name, [str(b) for b in (card_data.get("benefits") or [])], annual_fee)
     payload = {
         "imagem": media_payload(card_id, card_url, f"card-{card_slug}"),
         "categoria": c["cat"],
         "titulo": card_name,
-        "tag10": card_ui_tag(card_data.get("tag10"), c["tags"][0], card_name=card_name, annual_fee=str(card_data.get("annual_fee") or "")),
-        "tag2": card_ui_tag(card_data.get("tag2") or card_data.get("annual_fee"), c["tags"][0], card_name=card_name, annual_fee=str(card_data.get("annual_fee") or "")),
-        "texto": localize_fact(card_ui_descriptor(card_data, card_data.get("descriptor") or f"Learn more about the {card_name}."), lang),
+        "tag10": card_ui_tag(card_data.get("tag10"), tag10, card_name=card_name, annual_fee=annual_fee),
+        "tag2": card_ui_tag(card_data.get("tag2"), tag2, card_name=card_name, annual_fee=annual_fee),
+        "texto": localize_fact(card_ui_descriptor(card_data, card_data.get("descriptor") or descriptor), lang),
         "botao-texto": c["apply"],
         "siteXfora": c["redir"],
         "botao-url": official_url,
