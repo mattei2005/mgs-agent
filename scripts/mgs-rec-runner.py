@@ -890,7 +890,7 @@ def perceived_benefit_item(raw: str, *, card_name: str = "") -> str:
     if "credit limit" in low or "£5,000" in low:
         return "A higher minimum credit limit can support bigger planned purchases when approval and repayment discipline line up"
     if "annual fee" in low and ("no" in low or "£0" in low):
-        return "No annual fee makes the card easier to keep for occasional travel or partner rewards without adding a yearly cost"
+        return "No annual fee makes the card easier to keep for occasional use without adding a yearly cost"
     if "0%" in low and "balance" in low:
         return text
     if "balance transfer" in low:
