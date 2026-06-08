@@ -70,7 +70,7 @@ def post_form(url: str, data: dict[str, str]) -> dict[str, Any]:
     except urllib.error.HTTPError as e:
         raw = e.read().decode(errors="ignore")
         try:
-            obj = json.loads(raw)
+            obj: dict[str, Any] = json.loads(raw)
         except Exception:
             obj = {"error": raw[:500]}
         obj["http_status"] = e.code
@@ -91,7 +91,7 @@ def main() -> int:
     args = ap.parse_args()
 
     load_env()
-    vault = os.environ.get("OP_DEFAULT_VAULT", args.vault)
+    vault = os.environ.get("OP_DEFAULT_VAULT") or args.vault or DEFAULT_VAULT
     item = op_item_json(args.item, vault)
     creds = item_fields(item)
     missing = [k for k in ("client_id", "client_secret") if not creds.get(k)]
