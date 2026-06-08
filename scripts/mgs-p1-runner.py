@@ -747,6 +747,10 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
     if len(subtitle) > 100:
         subtitle = subtitle[:97].rsplit(" ", 1)[0].rstrip(" ,;:") + "."
     st = p1_static(lang, card_name, fee, apr, value_focus, site.get("domain", ""))
+    # Contract v2 keeps keyword use controlled (5-8 total). Keep the first
+    # introduction mention, then use natural references in later sections.
+    for _k in ("qual1", "apply1", "right1"):
+        st[_k] = st[_k].replace(card_name, "the card")
     card_block = lazy_credit_card_p1(site, card_name, card_slug, card_id, card_url, card_data, official_url, button_hex, lang)
 
     def benefit_para(raw: str, idx: int) -> str:
@@ -762,7 +766,7 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
     cost_paras = [
         st["cost1"],
         st["cost2"],
-        localize_fact(f"For the {card_name}, confirm fees, APR, exclusions, promotional timing and any reward rules on the current issuer page before applying.", lang),
+        localize_fact("For this card, confirm fees, APR, exclusions, promotional timing and any reward rules on the current issuer page before applying.", lang),
     ]
     req_paras = [
         st["qual1"],
@@ -779,7 +783,7 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
         card_block,
         wp_details("Benefícios", [benefit_para(benefits_l[0],0), benefit_para(benefits_l[1],1), benefit_para(benefits_l[2],2), benefit_para(benefits_l[3],3)]),
         wp_details("Quem deveria usar", [
-            localize_fact(f"The {card_name} is most useful when {value_focus} fits spending you already expect to make.", lang),
+            localize_fact(f"This card is most useful when {value_focus} fits spending you already expect to make.", lang),
             localize_fact("It may suit readers who want to compare benefits, cost and application requirements before leaving for the official issuer page.", lang),
             localize_fact("It is less suitable when the strongest benefit would require extra spending or when repayment discipline is uncertain.", lang),
         ]),
