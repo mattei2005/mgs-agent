@@ -190,6 +190,16 @@ class Drive:
         raise RuntimeError("upload finished without final response")
 
 
+def describe_exception(exc: Exception) -> str:
+    if isinstance(exc, urllib.error.HTTPError):
+        try:
+            body = exc.read().decode(errors="ignore")
+        except Exception:
+            body = ""
+        return f"HTTP Error {exc.code}: {exc.reason} {body}"[:2000]
+    return str(exc)[:2000]
+
+
 def clean_and_verify(src: Path, out_dir: Path) -> tuple[Path, str]:
     out = out_dir / f"{src.stem}.metadata-clean{src.suffix}"
     proc = subprocess.run([SANITIZER, "clean", str(src), "--out", str(out), "--agent", "ares"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False, timeout=900)
@@ -273,9 +283,10 @@ def process_queue(args: argparse.Namespace) -> dict[str, Any]:
                 if stats["uploaded"] % 25 == 0:
                     print(json.dumps({"progress_uploaded": stats["uploaded"], "queue_id": qid, "ts": dt.datetime.now(dt.UTC).isoformat()}), flush=True)
         except Exception as e:
+            error_text = describe_exception(e)
             stats["errors"] += 1
-            append_report(report_path, {"ts_utc": dt.datetime.now(dt.UTC).isoformat(), "queue_id": qid, "status": "ERROR", "source_drive_id": row.get("source_drive_id", ""), "destination_folder": row.get("destination_folder", ""), "destination_filename": row.get("destination_filename", ""), "error": str(e)[:1000]})
-            print(json.dumps({"error_queue_id": qid, "error": str(e)[:500]}), flush=True)
+            append_report(report_path, {"ts_utc": dt.datetime.now(dt.UTC).isoformat(), "queue_id": qid, "status": "ERROR", "source_drive_id": row.get("source_drive_id", ""), "destination_folder": row.get("destination_folder", ""), "destination_filename": row.get("destination_filename", ""), "error": error_text[:1000]})
+            print(json.dumps({"error_queue_id": qid, "error": error_text[:500]}), flush=True)
             if stats["errors"] >= args.max_errors:
                 break
     return dict(stats)
