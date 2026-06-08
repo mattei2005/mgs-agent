@@ -1199,14 +1199,29 @@ def title_meta_focus(card_name: str, card_data: Dict[str, Any]) -> Tuple[str, st
     if len(title) > 60:
         title = f"{focus}: Benefits"[:60]
     if "balance transfer" in joined or "0% balance" in joined:
-        meta = f"{card_name} offers 0% balance transfers, interest savings and repayment breathing room. See fees, APR and how it works."
+        meta = f"{card_name} offers 0% balance transfer value, fees and APR context to compare before applying."
     else:
-        meta = f"{card_name} offers {', '.join(card_data.get('benefits', ['key benefits'])[:2]).lower()}. See fees, APR and how it works."
-    if len(meta) > 130:
-        meta = clean_sentence_punctuation(meta[:127].rsplit(" ", 1)[0] + "...")
-    if len(meta) < 120:
-        meta = clean_sentence_punctuation((meta + " Compare before applying.")[:130])
+        benefit_text = ", ".join(card_data.get('benefits', ['key benefits'])[:2]).lower()
+        meta = f"{card_name} offers {benefit_text}. Compare benefits, fees and APR before applying."
+    # Contract v2: REC meta description must be 130-140 visible characters.
+    if len(meta) > 140:
+        meta = clean_sentence_punctuation(meta[:137].rsplit(" ", 1)[0] + "...")
+    while len(meta) < 130:
+        extra = " Check current issuer conditions before applying."
+        candidate = clean_sentence_punctuation(meta.rstrip(".") + extra)
+        if len(candidate) <= 140:
+            meta = candidate
+        else:
+            remaining = 130 - len(meta)
+            if remaining <= 0:
+                break
+            meta = clean_sentence_punctuation((meta.rstrip(".") + " Review official terms.")[:140])
+            break
+    if len(meta) < 130:
+        meta = clean_sentence_punctuation((meta.rstrip(".") + " Review official issuer terms before applying.")[:140])
     meta = clean_sentence_punctuation(meta)
+    if not (130 <= len(meta) <= 140):
+        raise RunnerError(f"REC meta description outside contract v2 range 130-140 chars: {len(meta)}")
     return title, meta, focus
 
 
