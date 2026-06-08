@@ -201,6 +201,8 @@ A P1 precisa aprofundar sem copiar o REC.
 
 Se houver conflito entre reference antiga e contract ativo, o contract ativo vence.
 
+Para contexto da reestruturação REC/P1 v2 validada em 2026-06-08 — incluindo meta REC 130–140, keyword P1 5–8, separação card isolado vs featured image e sequência de validação runner/QA — ver `references/rec-p1-contract-v2-restructure-2026-06-08.md`.
+
 ---
 
 ## Fluxo operacional REC+P1
