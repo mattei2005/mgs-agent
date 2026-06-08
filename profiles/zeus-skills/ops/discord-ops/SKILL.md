@@ -173,7 +173,7 @@ Zeus responde com máximo 2 linhas:
 | Saúde Yoast/Readability | `#alerts-yoast` (1498193722871910550) | `Discord Webhook - Alerts Yoast Channel` |
 | Operacional Zeus | `#zeus-admin-agent` (1496267442899521627) | `Discord Webhook - Zeus Channel` |
 
-**NÃO usar** o webhook `#zeus-admin-agent` para alertas automáticos de cron/monitor. Reservado para conversa operacional Rodolfo↔Zeus, `[REPORT-INFRA]` de agentes, e commits interativos.
+**NÃO usar** o webhook `#zeus-admin-agent` para alertas automáticos de cron/monitor. Reservado para conversa operacional Rodolfo↔Zeus, `[REPORT-INFRA]` de agentes, e commits interativos. Se um Hermes cron script-only já estiver preso a uma thread por `deliver=origin`, mudar o cron para `deliver=local` e fazer o script enviar embed próprio para `#alerts-infra`; não tentar “embelezar” stdout bruto na thread. Ver skill `log-monitor-discord-alert` → `references/hermes-cron-script-only-alert-routing.md`.
 
 ### Layout de alertas automáticos via webhook
 

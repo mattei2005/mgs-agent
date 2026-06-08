@@ -21,6 +21,8 @@ Também usar para gestão de **cron reliability/control plane**: inventariar cro
 
 Quando Rodolfo pedir melhoria de crons de backup/housekeeping, especialmente limpeza de `.bak`/snapshots, separar criação de backup e cleanup, preservar sempre o último backup por família, excluir segredos por padrão e validar com dry-run + archive real. Ver `references/cron-backup-housekeeping-preserve-latest.md`.
 
+Quando um Hermes `cronjob` script-only (`no_agent=true`) estiver entregando log bruto em thread/canal errado, tratar como problema de roteamento + stdout bruto: mudar `deliver` para `local`, deixar sucesso silencioso, e fazer o próprio script mandar embed limpo para `#alerts-infra` via webhook com state anti-spam. Ver `references/hermes-cron-script-only-alert-routing.md`.
+
 Também usar quando Rodolfo pedir uma visão executiva da operação MGS antes de ativar alertas programados: criar primeiro um collector read-only + briefing manual Discord-safe, validar escopo/sinal/ruído por 1–2 dias, e só depois propor cron/entrega automática. Ver `references/ops-control-plane-briefing.md`. Runtime snapshots `data/*-latest.{md,json}` devem ficar local-only/ignorados; se auto-commit rastrear por acidente, usar `git rm --cached` para remover do Git sem apagar do disco.
 
 Quando Rodolfo pedir para começar um **Ops Control Plane / dashboard / briefing executivo** amplo, começar com collector determinístico read-only e sob demanda — não cron/alerta. Se ele excluir um agente explicitamente (ex: “Atena deixa por último e me avise antes”), tratar como gate duro: não ler logs/config/profile desse agente e declarar a exclusão no relatório. Ver `references/mgs-ops-control-plane-readonly.md`.
@@ -359,6 +361,8 @@ Após criar os artefatos, atualizar manualmente 3 seções do inventário:
    - Env var: `HERMES_BACKGROUND_NOTIFICATIONS=error`
    
    Modos disponíveis: `all` (padrão — sempre entrega), `result` (só ao terminar), `error` (só se exit ≠ 0), `off` (silêncio total). O modo `error` é o ideal para o canal Zeus: silêncio em sucesso, alerta em falha. Código em `gateway/run.py` → `_load_background_notifications_mode()`.
+
+1b. **Hermes cron `deliver=origin` + `no_agent=true` despeja stdout bruto na thread de criação** — para watchdogs script-only, `origin` não significa “canal certo”; significa “mesmo Discord target onde o job nasceu”, frequentemente uma thread operacional. Como `no_agent=true` entrega stdout literal, qualquer `echo`/`tail` vira mensagem feia no Discord (`Cronjob Response`, job_id, log cru, split). Padrão MGS: `cronjob(update, deliver="local")`, script com sucesso silencioso (`stdout=0`, `stderr=0`), e alerta próprio via webhook embed para `#alerts-infra`. Ver `references/hermes-cron-script-only-alert-routing.md`.
 
 2. **`os.environ` em `execute_code` não propaga para `terminal()`** — variáveis setadas com `os.environ[...] = ...` em Python NÃO chegam nos subprocessos do `terminal()`. Para credenciais 1Password dentro de `execute_code`, chamar `terminal("op item get ... --reveal")` diretamente e usar o output como string Python. Não tentar setar via `os.environ` e usar em `terminal()` subsequente.
 
