@@ -146,6 +146,26 @@ class Drive:
         self.folder_cache[(parent_id, name)] = folder_id
         return folder_id
 
+    def root_metadata(self) -> dict[str, Any]:
+        params = {
+            "fields": "id,name,driveId,ownedByMe,owners(emailAddress,displayName),capabilities(canAddChildren,canEdit,canModifyContent)",
+            "supportsAllDrives": "true",
+        }
+        return self.request(f"https://www.googleapis.com/drive/v3/files/{ROOT_FOLDER_ID}?" + urllib.parse.urlencode(params)) or {}
+
+    def preflight_destination(self) -> dict[str, Any]:
+        meta = self.root_metadata()
+        if not meta.get("driveId"):
+            owner = ", ".join(o.get("emailAddress", "") for o in meta.get("owners", []) if o.get("emailAddress"))
+            raise RuntimeError(
+                "DESTINATION_BLOCKED_MY_DRIVE_SERVICE_ACCOUNT: "
+                f"root '{meta.get('name', ROOT_FOLDER_ID)}' is a My Drive folder owned by {owner or 'unknown owner'}. "
+                "Google Service Accounts do not have storage quota for file uploads in My Drive. "
+                "Move/use MGS-CRIATIVOS in a Shared Drive and set ARES_DRIVE_ROOT_FOLDER_ID to that Shared Drive folder id, "
+                "or switch this script to a real-user OAuth token."
+            )
+        return meta
+
     def ensure_path(self, folder_path: str) -> str:
         parts = folder_path.split("/")
         if not parts or parts[0] != "MGS-CRIATIVOS":
@@ -238,6 +258,8 @@ def process_queue(args: argparse.Namespace) -> dict[str, Any]:
     load_env()
     token = access_token(service_account())
     drive = Drive(token)
+    root_meta = drive.preflight_destination()
+    print(json.dumps({"preflight_destination": {"name": root_meta.get("name"), "root_folder_id": ROOT_FOLDER_ID, "drive_id": root_meta.get("driveId"), "storage": "shared_drive"}}, ensure_ascii=False), flush=True)
     rows = list(csv.DictReader(open(args.queue_csv, encoding="utf-8")))
     if args.limit:
         rows = rows[: args.limit]
