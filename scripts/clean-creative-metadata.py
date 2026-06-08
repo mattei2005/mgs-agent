@@ -34,7 +34,8 @@ ALLOWED_STRUCTURAL_TAGS = {
     'ImageSize', 'Megapixels', 'ColorType', 'BitDepth', 'Compression', 'Filter',
     'Interlace', 'ColorComponents', 'YCbCrSubSampling', 'EncodingProcess',
     'BitsPerSample', 'SamplesPerPixel', 'XResolution', 'YResolution',
-    'ResolutionUnit', 'ExifByteOrder', 'CurrentIPTCDigest', 'Warning', 'Error',
+    'ResolutionUnit', 'ExifByteOrder', 'CurrentIPTCDigest', 'BackgroundColor',
+    'Warning', 'Error',
 }
 
 
@@ -60,8 +61,14 @@ def sha256(path: Path) -> str:
 def mime_type(path: Path) -> str:
     if shutil.which('file'):
         cp = run(['file', '--brief', '--mime-type', str(path)], check=False)
-        return cp.stdout.strip() or 'unknown'
-    return 'unknown'
+        if cp.stdout.strip():
+            return cp.stdout.strip()
+    # Fallback for minimal containers where `file` is unavailable.
+    try:
+        raw = exiftool_json(path)
+        return str(raw.get('File:MIMEType') or raw.get('MIMEType') or 'unknown')
+    except Exception:
+        return 'unknown'
 
 
 def safe_output_path(src: Path) -> Path:
