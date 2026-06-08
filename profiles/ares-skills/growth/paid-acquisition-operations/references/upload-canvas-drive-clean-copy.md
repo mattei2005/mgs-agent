@@ -59,7 +59,7 @@ can_add_children/can_edit: true/false
 
 ## Metadata sanitizer MP4 pitfall
 
-After `exiftool -all=`, MP4 files still expose structural QuickTime/container fields. These are required for playback and are not privacy metadata. Examples include `MajorBrand`, `Duration`, `VideoFrameRate`, and for audio tracks `AudioFormat`, `AudioChannels`, `AudioSampleRate`.
+After `exiftool -all=`, MP4 files still expose structural QuickTime/container fields. These are required for playback and are not privacy metadata. Examples include `MajorBrand`, `Duration`, `VideoFrameRate`, `PixelAspectRatio`, and for audio tracks `AudioFormat`, `AudioChannels`, `AudioSampleRate`.
 
 The sanitizer gate should not treat those structural MP4 fields as harmful after cleaning. For video privacy verification, ExifTool harmful-tag count is the gate; `mat2 --show` may still list structural MP4 fields and should not block `clean=true` when ExifTool harmful tags are zero.
 
