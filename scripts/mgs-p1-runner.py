@@ -95,7 +95,7 @@ def load_p1_template_contract() -> Dict[str, Any]:
 
 
 P1_COPY = {
-    "en": {"apply":"APPLY NOW","redir":"You will be redirected.","cat":"Credit Card","subtitle":"{card} helps match confirmed card benefits with the way you actually plan to spend and repay.","heads":["Main Benefits","How Does It Work","Costs, Fees and Key Conditions","Reward and Usage Value","Requirements to Qualify for the Card","How to Maximise the Benefits","How to Apply","Is This Card Right for You?"],"title":"{focus}: Costs, Rewards and How to Apply","meta":"{focus} application guide with key costs, rewards, eligibility notes and official issuer apply link before you continue.","tags":["rewards credit card","travel credit card","avios rewards","airport lounge access"]},
+    "en": {"apply":"APPLY NOW","redir":"You will be redirected.","cat":"Credit Card","subtitle":"{card} helps match confirmed card benefits with the way you actually plan to spend and repay.","heads":["Main Benefits","How Does It Work","Costs, Fees and Key Conditions","Reward and Usage Value","Requirements to Qualify for the Card","How to Maximise the Benefits","How to Apply","Is This Card Right for You?"],"title":"{focus}: Costs, Benefits and How to Apply","meta":"{focus} application guide with key costs, benefits, eligibility notes and official issuer apply link before you continue.","tags":[]},
     "es": {"apply":"SOLICITAR AHORA","redir":"Serás redirigido.","cat":"Tarjeta de crédito","subtitle":"{card} ayuda a comparar beneficios confirmados con la forma en que realmente piensas gastar y pagar.","heads":["Beneficios principales","Cómo funciona","Costos, comisiones y condiciones clave","Valor de recompensas y uso","Requisitos para calificar","Cómo maximizar los beneficios","Cómo solicitar","¿Esta tarjeta es adecuada para ti?"],"title":"{focus}: costos, recompensas y cómo solicitar","meta":"Guía de {focus} con costos clave, recompensas, elegibilidad y enlace oficial del emisor antes de continuar.","tags":["tarjeta con recompensas","tarjeta para viajes","recompensas avios","acceso a salas vip"]},
     "pt": {"apply":"SOLICITAR AGORA","redir":"Você será redirecionado.","cat":"Cartão de crédito","subtitle":"{card} ajuda a comparar benefícios confirmados com a forma como você pretende gastar e pagar.","heads":["Principais benefícios","Como funciona","Custos, tarifas e condições-chave","Valor de recompensas e uso","Requisitos para se qualificar","Como maximizar os benefícios","Como solicitar","Este cartão é adequado para você?"],"title":"{focus}: custos, recompensas e como solicitar","meta":"Guia do {focus} com custos-chave, recompensas, elegibilidade e link oficial do emissor antes de continuar.","tags":["cartão com recompensas","cartão para viagem","recompensas avios","acesso a sala vip"]},
     "tr": {"apply":"HEMEN BAŞVUR","redir":"Yönlendirileceksiniz.","cat":"Kredi kartı","subtitle":"{card}, onaylanmış kart avantajlarını gerçek harcama ve ödeme planınla karşılaştırmana yardımcı olur.","heads":["Başlıca avantajlar","Nasıl çalışır","Maliyetler, ücretler ve temel koşullar","Ödül ve kullanım değeri","Kart için uygunluk şartları","Avantajları en iyi şekilde kullanma","Nasıl başvurulur","Bu kart senin için doğru mu?"],"title":"{focus}: maliyetler, ödüller ve başvuru","meta":"{focus} için temel maliyetler, ödüller, uygunluk notları ve devam etmeden önce resmi başvuru bağlantısı rehberi.","tags":["ödüllü kredi kartı","seyahat kartı","avios ödülleri","lounge erişimi"]},
@@ -536,9 +536,9 @@ def derive_lazyblock_tags(card_name: str, benefits: List[str], annual_fee: str =
         tags.append("Digital tools")
     if any(term in joined for term in ["security", "fraud", "purchase protection"]):
         tags.append("Security features")
-    if any(t in joined for t in ["avios", "travel", "lounge", "hotel", "points"]):
+    if any(t in joined for t in ["avios", "lounge", "hotel", "airline miles", "airport lounge", "travel insurance"]):
         tags.append("Travel rewards")
-        descriptor = "Connects planned travel spending with usable card rewards."
+        descriptor = "Connects confirmed travel benefits with planned card use."
     if "no annual fee" in joined or ("annual fee" in fee_low and "0" in fee_low):
         tags.append("No annual fee")
 
@@ -569,8 +569,10 @@ def card_ui_descriptor(card_data: Dict[str, Any], fallback: str) -> str:
     joined = " ".join(benefits).lower()
     if "cashback" in joined:
         desc = "Earn cashback on eligible purchases."
-    elif any(term in joined for term in ["avios", "travel", "points", "marriott", "bonvoy", "elite night"]):
-        desc = "Make regular trips and bookings feel more rewarding."
+    elif any(term in joined for term in ["avios", "marriott", "bonvoy", "elite night", "airport lounge", "travel insurance"]):
+        desc = "Connect confirmed travel benefits with planned card use."
+    elif "points" in joined:
+        desc = "Collect points only where the issuer confirms eligible spending."
     elif "no annual fee" in joined or "no fee" in joined:
         desc = "A no-annual-fee card for everyday spend."
     else:
@@ -614,12 +616,29 @@ def wp_paragraph_raw(inner_html: str) -> str:
 def wp_heading(text: str) -> str:
     return f"<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">{html.escape(text)}</h2>\n<!-- /wp:heading -->"
 
+def wp_h3(text: str) -> str:
+    return f'<!-- wp:heading {{"level":3}} -->\n<h3 class="wp-block-heading">{html.escape(text)}</h3>\n<!-- /wp:heading -->'
+
+
+def benefit_heading_from_fact(raw: str) -> str:
+    text = re.sub(r"\s+", " ", html.unescape(str(raw or ""))).strip(" .;:,!")
+    text = re.sub(r"^(benefit|feature|perk)\s*[:\-–—]\s*", "", text, flags=re.I)
+    parts = re.split(r"\s+(?:with|subject to|depending on|after|before)\s+|[.;]", text, maxsplit=1, flags=re.I)
+    heading = parts[0].strip(" .;:,!") if parts else text
+    if len(heading) > 72:
+        heading = heading[:72].rsplit(" ", 1)[0].rstrip(" .;:,!")
+    forbidden = {"main benefit", "financial value", "usage convenience", "complementary benefit", "benefícios", "quem deveria usar"}
+    if not heading or heading.lower() in forbidden or is_generic_visible_value(heading):
+        raise RunnerError(f"Cannot derive specific P1 heading from confirmed fact: {raw!r}")
+    return heading
+
+
 
 def wp_details(summary: str, paragraphs: List[str]) -> str:
     inner = "\n\n".join(wp_paragraph(p) for p in paragraphs if str(p).strip())
     return (
         '<!-- wp:details -->\n'
-        '<details class="wp-block-details"><summary>' + html.escape(summary) + '</summary>\n'
+        '<details class="wp-block-details"><summary><strong>' + html.escape(summary) + '</strong></summary>\n'
         + inner +
         '\n</details>\n<!-- /wp:details -->'
     )
@@ -802,39 +821,49 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
         localize_fact("Approval, credit limit and final terms are decided by the issuer, so this page should help you prepare rather than promise an outcome.", lang),
     ]
 
+    benefit_headings = [benefit_heading_from_fact(b) for b in benefits_l[:4]]
     blocks = [
         wp_paragraph(subtitle),
-        f'<!-- wp:image {{"id":{featured_id},"sizeSlug":"large","linkDestination":"none"}} -->\n<figure class="wp-block-image size-large"><img src="{featured_url}" alt="{html.escape(card_name)}" class="wp-image-{featured_id}"/></figure>\n<!-- /wp:image -->',
+        f'<!-- wp:image {{"id":{featured_id},"sizeSlug":"large","linkDestination":"none"}} -->
+<figure class="wp-block-image size-large"><img src="{featured_url}" alt="{html.escape(card_name)}" class="wp-image-{featured_id}"/></figure>
+<!-- /wp:image -->',
         wp_paragraph(st["intro1"]),
         wp_paragraph(st["intro2"]),
         wp_paragraph(st["intro3"]),
         card_block,
-        wp_details("Benefícios", [benefit_para(benefits_l[0],0), benefit_para(benefits_l[1],1), benefit_para(benefits_l[2],2), benefit_para(benefits_l[3],3)]),
-        wp_details("Quem deveria usar", [
-            localize_fact(f"This card is most useful when {value_focus} fits spending you already expect to make.", lang),
-            localize_fact("It may suit readers who want to compare benefits, cost and application requirements before leaving for the official issuer page.", lang),
-            localize_fact("It is less suitable when the strongest benefit would require extra spending or when repayment discipline is uncertain.", lang),
-        ]),
-        wp_heading("Como funciona o cartão" if lang == "pt" else c["heads"][1]),
+        wp_heading(c["heads"][0]),
+    ]
+    for idx, (title, raw_benefit) in enumerate(zip(benefit_headings, benefits_l[:4])):
+        blocks.append(wp_h3(title))
+        blocks.append(wp_paragraph(benefit_para(raw_benefit, idx)))
+    blocks.extend([
+        wp_heading("Who Should Use This Card" if lang == "en" else c["heads"][7]),
+        wp_paragraph(localize_fact(f"This card is most useful when {value_focus} fits spending you already expect to make.", lang)),
+        wp_paragraph(localize_fact("It may suit you when the confirmed benefits, cost and application requirements match the decision you are trying to make.", lang)),
+        wp_paragraph(localize_fact("It is less suitable when the strongest benefit would require extra spending or when repayment discipline is uncertain.", lang)),
+        wp_heading(c["heads"][1]),
         wp_paragraph(st["work1"]),
         wp_paragraph(st["work2"]),
-        wp_paragraph(localize_fact("If rewards, cashback, points or travel benefits apply, they should be judged through ordinary purchases and realistic repayment behaviour.", lang)),
-        wp_heading("Como solicitar o cartão" if lang == "pt" else c["heads"][6]),
+        wp_paragraph(localize_fact("Judge each benefit through ordinary purchases, realistic repayments and the official conditions shown by the issuer.", lang)),
+        wp_heading(c["heads"][6]),
         wp_paragraph(st["apply1"]),
         wp_paragraph(localize_fact(f"Have income, address and borrowing details ready, then compare the issuer’s final offer with {value_focus}.", lang)),
-        wp_paragraph(localize_fact("If the official page shows different fees, APR, transfer terms or reward rules from what you expected, pause before submitting personal information.", lang)),
-        wp_details("APR, taxas e custos" if lang == "pt" else c["heads"][2], cost_paras),
-        wp_details("Requisitos para solicitar" if lang == "pt" else c["heads"][4], req_paras),
+        wp_paragraph(localize_fact("If the official page shows different fees, APR, transfer terms or benefit rules from what you expected, pause before submitting personal information.", lang)),
+        wp_heading(c["heads"][2]),
+        *[wp_paragraph(p) for p in cost_paras],
+        wp_heading(c["heads"][4]),
+        *[wp_paragraph(p) for p in req_paras],
         wp_heading(c["heads"][7]),
         wp_paragraph(st["right1"]),
         wp_paragraph(localize_fact("If the fee, APR or eligibility conditions do not fit your situation, compare other cards before applying.", lang)),
         wp_paragraph(localize_fact(positioning.get("right_3") or "Compare the card with at least one alternative before applying.", lang)),
-        card_block,
-    ]
-    body = "\n\n".join(blocks)
+    ])
+    body = "
+
+".join(blocks)
     body, wc = fit_word_count(body, lang)
     keyword_count = count_keyword_occurrences(card_name, body)
-    return body, {"subtitle":subtitle,"subtitle_chars":len(subtitle),"word_count":wc,"featured_inserted":True,"lazyblocks":2,"details_blocks":4,"effective_language":lang,"contract_p1":contract.get("path"),"contract_mode":contract.get("contract_mode", CONTRACT_MODE),"keyword_count_body":keyword_count}
+    return body, {"subtitle":subtitle,"subtitle_chars":len(subtitle),"word_count":wc,"featured_inserted":True,"lazyblocks":1,"details_blocks":0,"effective_language":lang,"contract_p1":contract.get("path"),"contract_mode":contract.get("contract_mode", CONTRACT_MODE),"keyword_count_body":keyword_count}
 
 
 def visible_word_count(body: str) -> int:
