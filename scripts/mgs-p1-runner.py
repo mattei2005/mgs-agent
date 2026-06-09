@@ -824,9 +824,7 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
     benefit_headings = [benefit_heading_from_fact(b) for b in benefits_l[:4]]
     blocks = [
         wp_paragraph(subtitle),
-        f'<!-- wp:image {{"id":{featured_id},"sizeSlug":"large","linkDestination":"none"}} -->
-<figure class="wp-block-image size-large"><img src="{featured_url}" alt="{html.escape(card_name)}" class="wp-image-{featured_id}"/></figure>
-<!-- /wp:image -->',
+        f'<!-- wp:image {{"id":{featured_id},"sizeSlug":"large","linkDestination":"none"}} -->\n<figure class="wp-block-image size-large"><img src="{featured_url}" alt="{html.escape(card_name)}" class="wp-image-{featured_id}"/></figure>\n<!-- /wp:image -->',
         wp_paragraph(st["intro1"]),
         wp_paragraph(st["intro2"]),
         wp_paragraph(st["intro3"]),
