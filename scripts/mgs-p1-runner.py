@@ -856,9 +856,7 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
         wp_paragraph(localize_fact("If the fee, APR or eligibility conditions do not fit your situation, compare other cards before applying.", lang)),
         wp_paragraph(localize_fact(positioning.get("right_3") or "Compare the card with at least one alternative before applying.", lang)),
     ])
-    body = "
-
-".join(blocks)
+    body = "\n\n".join(blocks)
     body, wc = fit_word_count(body, lang)
     keyword_count = count_keyword_occurrences(card_name, body)
     return body, {"subtitle":subtitle,"subtitle_chars":len(subtitle),"word_count":wc,"featured_inserted":True,"lazyblocks":1,"details_blocks":0,"effective_language":lang,"contract_p1":contract.get("path"),"contract_mode":contract.get("contract_mode", CONTRACT_MODE),"keyword_count_body":keyword_count}
