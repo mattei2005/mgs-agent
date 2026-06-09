@@ -657,11 +657,11 @@ def infer_p1_positioning(card_name: str, benefits: List[str]) -> Dict[str, str]:
     """
     clean = [re.sub(r"\s+", " ", str(b or "")).strip(" .;:,!") for b in benefits if str(b or "").strip()]
     primary = clean[0] if clean else "the confirmed product benefits"
-    combined = "; ".join(clean[:3]) if clean else primary
+    value_focus = benefit_heading_from_fact(primary)
     return {
         "subtitle_tail": f"explains {primary.lower()} and the official costs before you apply.",
         "use_case": f"people comparing whether {primary.lower()} solves their current card need",
-        "value_focus": combined,
+        "value_focus": value_focus,
         "reward_heading": benefit_heading_from_fact(primary),
         "reward_1": primary,
         "reward_2": clean[1] if len(clean) > 1 else primary,
