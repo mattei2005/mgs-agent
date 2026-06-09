@@ -947,14 +947,12 @@ def resolve_taxonomy(site_key: str, site: Dict[str, Any], card_name: str, card_s
     tags=["p1", vertical, country, card_tag, f"lang_{lang}", "atena_agent"]
     benefit_text=" ".join(benefits).lower()
     extras: List[str] = []
-    if any(term in benefit_text for term in ["cashback", "rewards", "reward", "points"]):
-        extras.append(c["tags"][0])
-    if "travel" in benefit_text or "avios" in benefit_text:
-        extras.append(c["tags"][1])
+    if "cashback" in benefit_text:
+        extras.append("cashback rewards")
     if "avios" in benefit_text:
-        extras.append(c["tags"][2])
+        extras.append("avios rewards")
     if "lounge" in benefit_text:
-        extras.append(c["tags"][3])
+        extras.append("airport lounge access")
     if "no annual fee" in benefit_text or "no fee" in benefit_text:
         extras.append("no annual fee")
     if "balance transfer" in benefit_text:
