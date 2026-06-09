@@ -65,9 +65,32 @@ The sanitizer gate should not treat those structural MP4 fields as harmful after
 
 Additional ExifTool groups can appear after cleaning, e.g. `Track1:ImageWidth`, `Track1:ImageHeight`, `Track1:XResolution`, `Track1:YResolution`, `Track1:BitDepth`. These are also structural video/image-stream fields, not privacy metadata. If a single MP4 blocks with a small harmful-tag count after cleaning, reproduce on that exact file, inspect ExifTool output, add only clearly structural tags to the allowlist, then verify the cleaned file returns `clean: true` before resuming the bulk queue.
 
+## Manual Drive reorg / duplicate comparison pitfall
+
+When Rodolfo manually reorganizes Drive after an automated pass, treat his current folder structure as the new source of truth. Example observed structure:
+
+```text
+MGS-CRIATIVOS/UPLOAD_CANVAS/
+├── cartao de credito/
+│   ├── imagens/
+│   └── videos/
+└── emprego/
+    ├── imagens/
+    └── videos/
+```
+
+If he says he moved everything into `00_REVIEW` and asks to delete `01_READY_CANDIDATE`, trash those folders in Drive (reversible trash, not permanent delete) and verify `remaining_ready_candidate_count=0`. Also honor explicit cleanup of obsolete structural folders such as `CC_REVIEW/IMG/FEED/UNKNOWN` after he says files were moved.
+
+For duplicate checks between the manually reorganized `UPLOAD_CANVAS` and cleaned organized folders (`CC_REVIEW`, `JOBS_US_ES`), do **not** rely only on MD5/checksum: cleaned files have different hashes after metadata stripping. Run two layers:
+
+1. exact MD5/checksum match when available;
+2. normalized filename match (`__dupnameNNN` and `.metadata-clean` removed, whitespace/case normalized) as the practical comparison for cleaned-vs-raw Drive files.
+
+Report both counts clearly, e.g. `MD5 duplicates=0` can coexist with `normalized-name duplicates=N`; explain that metadata cleaning changes checksum.
+
 ## Execution guardrails
 
-- `UPLOAD_CANVAS` remains RAW and unchanged.
+- `UPLOAD_CANVAS` remains RAW and unchanged unless Rodolfo explicitly changes the structure and instructs cleanup.
 - Never expose OAuth refresh tokens, client secrets, Service Account JSON, or Drive file IDs unless operationally necessary.
 - Record every upload in an execution report CSV with queue ID, source ID, destination ID, hashes, status, and error if any.
 - Use resumable execution: already uploaded queue IDs should be skipped on rerun.
