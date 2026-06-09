@@ -104,6 +104,7 @@ Quando Rodolfo pedir uma **revisão geral pós-update** (funcionalidades, crons,
 
 ### Pitfalls de update
 
+- Quando Hermes mostrar profiles com `_config_version` antigo após update, usar migração controlada por profile: backup pequeno de `config.yaml`/`SOUL.md`/`auth.json`, `hermes -p <profile> config migrate`, validação provider/model/auth/gateways/patch guard, sync dos mirrors em `/root/mgs-agent/profiles/`, restart gracioso só dos gateways migrados e audit log. Playbook: `references/hermes-profile-config-migration-mgs.md`.
 - Pós-update com restart dos gateways MGS: quando o comando roda dentro do próprio Zeus, `systemctl restart zeus-gateway.service ...` pode timeoutar ou deixar Zeus em `deactivating` porque a conversa/tool atual mantém o processo antigo vivo. Não reportar falha sem checar estado vivo. Validar Atena/Ares, agendar finalização externa via `systemd-run` se necessário, depois diferenciar falhas históricas do restart de erros pós-start. Playbook: `references/post-update-gateway-restart-validation.md`.
 - Update parcial com `ENOSPC`: se o disco enche durante `hermes update`, não repetir às cegas. Checar HEAD/upstream/behind, limpar backups redundantes mantendo o backup mais recente, reparar dependências (`uv pip install -e '.[all]'`, `npm install`, `ui-tui npm install`) sem reiniciar serviços, compilar arquivos críticos, e só então dar o comando separado de restart. Playbook: `references/hermes-update-enospc-controlled-recovery.md`.
 - Após `hermes update`, `systemd` pode mostrar falhas `status=1/FAILURE` durante restart controlado. Diferenciar incidente ativo de histórico: confirmar PIDs atuais, uptime do serviço, memória atual/peak, logs posteriores e se há novo traceback/OOM. Só alertar como loop se houver falhas repetidas depois do novo start.
@@ -373,7 +374,7 @@ Depois: tabela de toolsets, tabela de backends, recomendação direta e `Próxim
 
 ### Resposta executiva para update
 
-Use **blocos `text` com colunas alinhadas** para qualquer matriz de status/validação/novidades. Não usar tabela Markdown crua (`|---|---|`) em Discord: Rodolfo considera visualmente regressivo e já corrigiu esse padrão. Cabeçalhos devem nascer do contexto real do update; não copiar exemplos.
+Use **blocos `text` com colunas alinhadas** para qualquer matriz de status/validação/novidades. Não usar tabela Markdown crua (`|---|---|`) em Discord: Rodolfo considera visualmente regressivo e já corrigiu esse padrão. Cabeçalhos devem nascer do contexto real do update; não copiar exemplos. Se houver drift de estilo ou dúvida sobre renderização de tabelas, ver `references/discord-table-format-and-standards-drift.md`.
 
 **Se Rodolfo apontar regressão visual/legibilidade após update** (ex.: “por que não está em tabela?” ou “voltou aos padrões?”), não trate como mera preferência de resposta. Faça auditoria de padrões: config viva dos profiles, backups/snapshots, SOUL/style rules, gateways e patch guard. Se o problema for regra permissiva no SOUL, fortaleça a regra para “não usar tabela Markdown crua no Discord; usar bloco `text` alinhado” nos agentes afetados. Detalhe em `references/discord-table-format-and-standards-drift-2026-06-09.md`.
 
@@ -463,6 +464,8 @@ Esta umbrella absorveu as antigas skills especializadas abaixo. Conteúdo detalh
 - `references/hermes-web-tooling-2026-05-17.md`
 - `references/hermes-web-brave-search-mgs-2026-05-17.md`
 - `scripts/test-brave-search-mgs.sh`
+- `references/hermes-profile-config-migration-mgs.md` — migração controlada de `config.yaml` por profile após update Hermes: backup pequeno, `hermes -p <profile> config migrate`, validação provider/model/auth/gateway/patch guard, sync dos mirrors MGS, restart gracioso e audit log.
+- `references/discord-table-format-and-standards-drift.md` — padrão MGS para tabelas em Discord: blocos `text` alinhados, nunca Markdown table crua para respostas operacionais; inclui workflow para corrigir drift de SOUL/estilo.
 - `references/openai-codex-oauth-original-skill.md`
 - `references/openai-codex-cron-model-pinning.md`
 - `references/openai-codex-anthropic-api-decommission.md`
