@@ -26,9 +26,9 @@ A introdução deve apresentar os principais atrativos do cartão sem revelar to
 
 ## 2. Idioma do Artigo
 
-Todo o conteúdo deve ser produzido no idioma informado em {lang}.
+O idioma do artigo vem da configuração operacional do site/vertical aprovado no pedido, não de uma variável editorial solta.
 
-Devem seguir esse idioma:
+Devem seguir o idioma configurado para o site/vertical:
 
 * Título;
 * Excerpt;
@@ -36,8 +36,10 @@ Devem seguir esse idioma:
 * Subtítulos;
 * Corpo do texto;
 * CTA;
-* Meta description.
-* Slug
+* Meta description;
+* Slug.
+
+Se houver conflito entre site/vertical e idioma solicitado, bloquear antes de publicar.
 
 ---
 
@@ -309,7 +311,9 @@ Prioridade sugerida:
 3. Conveniência;
 4. Benefício complementar.
 
-Outras combinações também podem ser utilizadas, desde que reflitam os diferenciais reais do cartão e mantenham uma hierarquia lógica para o leitor.
+Essa prioridade é apenas orientação editorial. Ela não deve virar título fixo, label genérico ou template rígido.
+
+Cada H3 de benefício deve ser derivado de uma funcionalidade/benefício real do cartão atual. Outras combinações também podem ser utilizadas, desde que reflitam os diferenciais reais do cartão e mantenham uma hierarquia lógica para o leitor.
 
 A ordem pode variar conforme o produto.
 

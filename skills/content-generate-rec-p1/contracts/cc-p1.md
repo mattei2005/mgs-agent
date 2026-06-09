@@ -253,43 +253,29 @@ A estrutura do artigo deve seguir a seguinte ordem:
 
 **LAZYBLOCKS** (utilizar exatamente o mesmo componente e as mesmas diretrizes editoriais definidas no Contract Editorial do REC, mudando apenas texto do botão, link do botão e siteout)
 
-### Bloco Details (Benefícios)
+### Seção de benefícios reais
 
-Utilizar um bloco **Details** do WordPress com o título:
+Apresentar os principais benefícios do cartão em seções normais do WordPress, sem bloco Details/accordion/hambúrguer.
 
-**Benefícios**
+Cada subtítulo de benefício deve vir de uma funcionalidade/benefício real confirmado do cartão atual, nunca de label genérico ou exemplo fixo.
 
-Dentro desse bloco, apresentar os principais benefícios do cartão de forma explicativa e orientada ao valor percebido.
+A seção deve aprofundar o que o cartão realmente oferece, sem repetir frases genéricas do REC. Explicar funcionamento prático, impacto para a pessoa e situações de uso relacionadas ao cartão específico.
 
-Observação obrigatória: este bloco deve falar mais sobre o que o cartão realmente oferece. Não repetir frases genéricas do REC; aprofundar benefícios confirmados, funcionamento prático, impacto para o usuário e situações de uso relacionadas ao cartão específico.
+### Seção de público recomendado
 
-### Bloco Details (Quem deveria usar)
-
-Utilizar um bloco **Details** do WordPress com o título:
-
-**Quem deveria usar**
-
-Dentro desse bloco, explicar quais perfis de usuários podem aproveitar melhor o cartão.
+Explicar quais perfis podem aproveitar melhor o cartão, usando o idioma do site/vertical e sem headings hardcoded em português quando o artigo for em outro idioma.
 
 ### H2 Como funciona o cartão
 
 ### H2 Como solicitar o cartão
 
-### Bloco Details (APR, taxas e custos)
+### Seção de APR, taxas e custos
 
-Utilizar um bloco **Details** do WordPress com o título:
+Apresentar APR, juros, tarifas e demais custos relevantes, apenas quando houver confirmação oficial.
 
-**APR, taxas e custos**
+### Seção de requisitos para solicitar
 
-Dentro desse bloco, apresentar APR, juros, tarifas e demais custos relevantes, apenas quando houver confirmação oficial.
-
-### Bloco Details (Requisitos para solicitar)
-
-Utilizar um bloco **Details** do WordPress com o título:
-
-**Requisitos para solicitar**
-
-Dentro desse bloco, informar os requisitos oficiais para solicitação do cartão, quando disponíveis.
+Informar os requisitos oficiais para solicitação do cartão, quando disponíveis.
 
 ### H2 FINAL
 
@@ -338,7 +324,9 @@ Também é importante antecipar os temas que serão aprofundados ao longo do art
 
 ## 13. LazyBlocks
 
-Utilizar exatamente as mesmas diretrizes editoriais definidas no Contract Editorial do REC.
+Utilizar o mesmo bloco de card aprovado no REC (`credit-card_ANTIGO`), mas com campos próprios para a função da P1. Não copiar automaticamente as mesmas tags/texto do REC.
+
+A P1 deve conter exatamente um LazyBlock de card válido e exatamente um LazyBlock de botão final `botao normal`.
 
 O componente deve permanecer visualmente idêntico.
 
