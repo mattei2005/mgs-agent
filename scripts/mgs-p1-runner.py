@@ -623,7 +623,7 @@ def wp_h3(text: str) -> str:
 def benefit_heading_from_fact(raw: str) -> str:
     text = re.sub(r"\s+", " ", html.unescape(str(raw or ""))).strip(" .;:,!")
     text = re.sub(r"^(benefit|feature|perk)\s*[:\-–—]\s*", "", text, flags=re.I)
-    parts = re.split(r"\s+(?:with|subject to|depending on|after|before)\s+|[.;]", text, maxsplit=1, flags=re.I)
+    parts = re.split(r"\s+(?:with|subject to|depending on|after|before)\s+|;|\.\s+", text, maxsplit=1, flags=re.I)
     heading = parts[0].strip(" .;:,!") if parts else text
     if len(heading) > 72:
         heading = heading[:72].rsplit(" ", 1)[0].rstrip(" .;:,!")
