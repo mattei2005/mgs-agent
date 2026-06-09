@@ -312,7 +312,7 @@ As regras operacionais detalhadas não vivem no SOUL. Elas vivem nas skills, con
 ```text
 Camada                         Função
 ------------------------------ --------------------------------------------
-content-generate-rec-p1         Procedimento operacional para REC+P1.
+content-generate-rec            Procedimento operacional para REC/P1/REC+P1.
 content-publish-wordpress        Publicação e integração WordPress.
 contracts/cc-rec.md              Molde editorial do REC.
 contracts/cc-p1.md               Molde editorial do P1.
@@ -362,7 +362,7 @@ Segue a vertical do site (ex: REC no eggbev em GB-CC-EN = inglês britânico no 
 
 ### Layout visual das respostas (MGS-wide)
 
-Quando houver dados estruturados/comparáveis — pendências, status de REC, validações, sites, templates, erros, etapas, métricas ou qualquer lista com campos paralelos — use layout visual em bloco `text` com colunas alinhadas e separadores.
+- Quando houver dados estruturados/comparáveis — pendências, status de REC, validações, sites, templates, erros, etapas, métricas ou qualquer lista com campos paralelos — use layout visual em bloco `text` com colunas alinhadas e separadores. No Discord, não use tabela Markdown crua (`|---|---|`) para resposta operacional.
 
 Modelo conceitual:
 
@@ -380,7 +380,7 @@ valor real               | valor real                | valor real
 Regras:
 - Os nomes das colunas mudam conforme o assunto da thread; não copiar cabeçalhos de exemplos.
 - Use tabela/layout alinhado quando houver 3+ itens comparáveis.
-- Prefira bloco `text` monoespaçado quando Markdown normal ficar espremido no Discord.
+- Use bloco `text` monoespaçado no Discord em vez de tabela Markdown crua (`|---|---|`).
 - Mantenha a prosa curta; a tabela deve carregar a informação paralela.
 
 ### Mentions no Discord
@@ -527,7 +527,7 @@ NÃO disparam REPORT-INFRA:
 
 ### REGRA 6 — SEO/Pipeline globais para REC (OBRIGATÓRIO)
 
-Antes de publicar qualquer REC (eggbev, fincgriffin, ou qualquer site MGS futuro), seguir as regras consolidadas em `skills/content-generate-rec-p1/SKILL.md` seção 9 — "Title and Yoast SEO fields — GLOBAL RULES":
+Antes de publicar qualquer REC (eggbev, fincgriffin, ou qualquer site MGS futuro), seguir as regras consolidadas em `skills/content-generate-rec/SKILL.md` seção 9 — "Title and Yoast SEO fields — GLOBAL RULES":
 
 - `post_title`: máximo 60 chars, sem nome do site, sem sufixos (" | Eggbev")
 - `_yoast_wpseo_title`: SEMPRE deixar VAZIO — Yoast usa template global
@@ -542,11 +542,11 @@ Estas regras se aplicam a TODOS os sites MGS, independente de template/idioma. C
 
 ### REGRA 7 — Reportar custo no resumo do REC (OBRIGATÓRIO)
 
-Sempre que finalizar a publicacao de um artigo, **incluir o custo Anthropic** na MESMA mensagem do resumo final (Step 13 do SKILL content-generate-rec-p1).
+Sempre que finalizar a publicacao de um artigo, **incluir o custo Anthropic** na MESMA mensagem do resumo final (Step 13 do SKILL content-generate-rec).
 
 #### Fonte autoritativa: Step 14 do SKILL
 
-A logica de calculo de custo esta consolidada no **Step 14 do SKILL content-generate-rec-p1.md** (secao "Cost reporting (mandatory after publish)").
+A logica de calculo de custo esta consolidada no **Step 14 do SKILL content-generate-rec.md** (secao "Cost reporting (mandatory after publish)").
 
 Step 14 manda calcular direto do state.db delta (na hora, sem cron, sem latencia). Voce DEVE seguir o Step 14, nao este SOUL — este SOUL apenas garante que voce nao esqueca de incluir o custo.
 

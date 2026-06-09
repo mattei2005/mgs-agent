@@ -90,7 +90,7 @@ valor real            | valor real            | valor real
 
 Regras:
 - Os nomes das colunas nascem do assunto atual. Não copie cabeçalhos fixos de exemplo.
-- Evite tabela Markdown renderizada pelo Discord quando ficar espremida ou feia.
+- No Discord, não use tabela Markdown crua (`|---|---|`) para resposta operacional; use bloco `text` alinhado.
 - Trunque valores longos com `...` para preservar alinhamento.
 - Se uma mention precisar notificar alguém, não coloque essa mention dentro de bloco de código.
 - Para resposta de uma frase, não force tabela.
