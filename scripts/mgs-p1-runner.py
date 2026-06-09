@@ -649,87 +649,29 @@ def benefit_heading_from_fact(raw: str) -> str:
 
 
 def infer_p1_positioning(card_name: str, benefits: List[str]) -> Dict[str, str]:
-    """Return benefit-specific P1 copy so scaled pages do not read as duplicated templates."""
-    joined = " ".join(benefits).lower()
-    name_l = card_name.lower()
-    if "amazon" in joined or "amazon" in name_l:
-        return {
-            "subtitle_tail": "turns Amazon shopping into rewards, a welcome gift and 0% purchases.",
-            "use_case": "people who already spend through Amazon and want those purchases to generate direct reward value",
-            "value_focus": "Amazon-linked benefits, the app-first setup and the main repayment points",
-            "reward_heading": "Amazon Rewards and Purchase Value",
-            "reward_1": "This is not a miles card trying to feel premium. Its value is simpler: frequent Amazon shoppers can turn familiar purchases into direct rewards.",
-            "reward_2": "The key question is how much of your normal basket already goes through Amazon, because that is where the card can feel more useful.",
-            "reward_3": "Prime members should look closely at eligible shopping events such as Prime Day, when the temporary boost can make planned purchases more rewarding.",
-            "max_1": "Use it first for Amazon and everyday purchases you were already going to make. That keeps the reward value connected to real behaviour, not extra borrowing.",
-            "max_2": "Treat the welcome gift and rewards as a bonus, not a reason to carry a balance. Interest can wipe out the benefit quickly if repayment slips.",
-            "max_3": "Recheck the reward rules around Prime events, the welcome gift and the first-year earn rate so you know exactly which purchases count.",
-            "right_1": "For Amazon-focused spending, estimate how often you actually buy on Amazon, whether you have Prime and how fast you usually repay purchases.",
-            "right_2": "Check whether the reward rules still match your shopping habits before submitting the application.",
-            "right_3": "A strong fit usually means regular Amazon use, comfort with app-based account management and a repayment plan that protects the reward value.",
-        }
-    if any(t in joined or t in name_l for t in ["balance transfer", "0% balance", "balance-transfer"]):
-        return {
-            "subtitle_tail": "helps reduce interest pressure and simplify repayments by moving existing card debt into one clearer plan.",
-            "use_case": "people who are juggling existing card debt, interest charges or multiple repayments and want a clearer route to pay the balance down",
-            "value_focus": "interest relief, repayment simplification, transfer fee, promotional window and the discipline needed before interest returns",
-            "reward_heading": "Debt Relief, Interest Pressure and Repayment Control",
-            "reward_1": "The strongest value is practical: a balance-transfer window can reduce interest pressure while you organise existing debt into a more manageable repayment plan.",
-            "reward_2": "The transfer fee still matters, so the emotional relief only becomes real value when the fee is smaller than the interest likely to be avoided.",
-            "reward_3": "This card should be framed as a repayment tool first. Purchases and extra spending need to stay secondary so the transferred balance remains the priority.",
-            "max_1": "Start with the total debt being moved, then divide it by the promotional months to set a monthly repayment target before applying.",
-            "max_2": "Use the card to simplify repayments, not to create a new spending habit that competes with the transferred balance.",
-            "max_3": "Check the summary box for the transfer deadline, transfer fee, post-promotional APR and any purchase-rate rules before relying on the offer.",
-            "right_1": "This card is most useful when you have existing card debt and a realistic plan to clear or reduce it before interest returns.",
-            "right_2": "Compare it with another balance-transfer option by total repayment cost, monthly target and the practical length of the 0% window.",
-            "right_3": "A good fit usually means the transfer fee, promotional period and monthly repayment target all support the same goal: fewer interest charges and simpler debt organisation.",
-        }
-    if any(t in joined or t in name_l for t in ["avios", "lounge", "hotel", "travel", "companion voucher", "travel spending", "travel reward"]):
-        return {
-            "subtitle_tail": "can make travel, overseas purchases and partner spending feel more useful when they already fit your routine.",
-            "use_case": "people who already book trips, hotels, transport or overseas purchases and want those costs to create more practical value",
-            "value_focus": "travel rewards, partner value, foreign purchase fees, annual cost and repayment behaviour",
-            "reward_heading": "Travel Rewards That Feel Useful in Real Trips",
-            "reward_1": "If you already pay for flights, hotels, transport or travel bookings during the year, earning value on those purchases can help your travel budget go further.",
-            "reward_2": "Using the card abroad without extra foreign transaction fees can make everyday travel spending feel more predictable and easier to manage.",
-            "reward_3": "The strongest fit is someone who wants rewards as a useful bonus on travel spending they already planned, not a reason to stretch the trip budget.",
-            "max_1": "Use it where the travel or partner value is clear: flights, hotels, transport, travel agents or selected retailers you were already planning to use.",
-            "max_2": "Keep repayments current so interest does not erase the travel value, foreign-fee saving or cashback you expected from the trip.",
-            "max_3": "Check participating brands, travel categories, foreign purchase rules and exclusions before relying on headline value.",
-            "right_1": "Estimate how much travel, partner and overseas spending would realistically go on the card in a normal year.",
-            "right_2": "Check whether the participating brands and overseas purchase rules still match your plans before applying.",
-            "right_3": "A good fit usually means regular travel or partner spending, no need to carry debt, and enough discipline to preserve the reward value.",
-        }
-    if any(t in joined for t in ["low interest", "low rate", "12.9%", "no annual fee", "foreign transaction"]):
-        return {
-            "subtitle_tail": "may suit people who want simpler costs, lower-rate positioning and practical overseas purchase value.",
-            "use_case": "people who care more about predictable costs and simple fees than points or premium perks",
-            "value_focus": "representative APR, annual fee, overseas purchase fees and repayment considerations",
-            "reward_heading": "Low-Rate and Overseas Purchase Value",
-            "reward_1": "The product is best judged through cost control rather than reward chasing. The representative APR and annual fee shape how manageable it may feel over time.",
-            "reward_2": "No foreign transaction fee on purchases can make overseas spending more predictable, although cash withdrawals and local fees still need separate checks.",
-            "reward_3": "A rewards card may be better if you always pay in full and care more about cashback, miles or points.",
-            "max_1": "Start with planned spending and a realistic repayment plan. The lower-rate positioning only helps when balances stay manageable.",
-            "max_2": "Use overseas purchase benefits carefully and avoid assuming cash withdrawals receive the same fee treatment.",
-            "max_3": "Check the official summary box for the final personal rate, balance transfer rules and any fees before applying.",
-            "right_1": "Estimate whether rate control, no annual fee and overseas purchase use matter more than rewards in a normal year.",
-            "right_2": "Check whether the final APR and credit limit still match your budget before submitting the application.",
-            "right_3": "A careful comparison should include repayment behaviour, overseas use, annual fee, final APR and whether rewards are actually more important.",
-        }
+    """Return minimal article positioning from current confirmed facts only.
+
+    Keep category-specific sales copy out of the runner. The runner can decide
+    structure, but benefit depth must come from the facts extracted for the
+    current card instead of reusable travel/rewards/cashback templates.
+    """
+    clean = [re.sub(r"\s+", " ", str(b or "")).strip(" .;:,!") for b in benefits if str(b or "").strip()]
+    primary = clean[0] if clean else "the confirmed product benefits"
+    combined = "; ".join(clean[:3]) if clean else primary
     return {
-        "subtitle_tail": "explains its confirmed benefits, costs and application steps before you apply.",
-        "use_case": "people whose normal spending matches the card’s confirmed strongest benefit",
-        "value_focus": "confirmed benefits, costs, eligibility and repayment considerations",
-        "reward_heading": "Rewards and Everyday Value",
-        "reward_1": "The real value depends on how often you would use the confirmed benefit in ordinary spending.",
-        "reward_2": "Compare the benefit with your repayment habits so interest does not outweigh the card’s value.",
-        "reward_3": "A simpler card may be better if the headline feature does not match your routine.",
-        "max_1": "Start with spending you can repay comfortably. Benefits should follow existing behaviour, not create extra borrowing.",
-        "max_2": "Pay close attention to payment dates and statement balances so fees or interest do not reduce value.",
-        "max_3": "Check the official rules regularly because terms, exclusions and availability can change.",
-        "right_1": "Estimate how often you would use the strongest confirmed benefit during a normal year.",
-        "right_2": "Check whether the rules still match your needs before submitting the application.",
-        "right_3": "A careful comparison should include benefit use, repayment behaviour and total cost.",
+        "subtitle_tail": f"explains {primary.lower()} and the official costs before you apply.",
+        "use_case": f"people comparing whether {primary.lower()} solves their current card need",
+        "value_focus": combined,
+        "reward_heading": benefit_heading_from_fact(primary),
+        "reward_1": primary,
+        "reward_2": clean[1] if len(clean) > 1 else primary,
+        "reward_3": clean[2] if len(clean) > 2 else primary,
+        "max_1": primary,
+        "max_2": clean[1] if len(clean) > 1 else primary,
+        "max_3": clean[2] if len(clean) > 2 else primary,
+        "right_1": f"Start with whether {primary.lower()} matches the reason you are considering the card.",
+        "right_2": "Check the official page before applying so fees, APR, eligibility and benefit rules are current.",
+        "right_3": "A good fit depends on confirmed benefits, total cost and realistic repayment behaviour matching your situation.",
     }
 
 
