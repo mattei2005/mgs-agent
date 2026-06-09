@@ -537,7 +537,7 @@ def derive_lazyblock_tags(card_name: str, benefits: List[str], annual_fee: str =
     if any(term in joined for term in ["security", "fraud", "purchase protection"]):
         tags.append("Security features")
     if any(t in joined for t in ["avios", "lounge", "hotel", "airline miles", "airport lounge", "travel insurance"]):
-        descriptor = shorten_words(benefits[0], 12).rstrip(" ,;:") + "."
+        descriptor = re.sub(r"\s+", " ", str(benefits[0] if benefits else descriptor)).strip(" .;:,!")[:70].rstrip(" ,;:") + "."
     if "no annual fee" in joined or ("annual fee" in fee_low and "0" in fee_low):
         tags.append("No annual fee")
 
@@ -646,16 +646,6 @@ def benefit_heading_from_fact(raw: str) -> str:
         raise RunnerError(f"Cannot derive specific P1 heading from confirmed fact: {raw!r}")
     return heading
 
-
-
-def wp_details(summary: str, paragraphs: List[str]) -> str:
-    inner = "\n\n".join(wp_paragraph(p) for p in paragraphs if str(p).strip())
-    return (
-        '<!-- wp:details -->\n'
-        '<details class="wp-block-details"><summary><strong>' + html.escape(summary) + '</strong></summary>\n'
-        + inner +
-        '\n</details>\n<!-- /wp:details -->'
-    )
 
 
 def infer_p1_positioning(card_name: str, benefits: List[str]) -> Dict[str, str]:
