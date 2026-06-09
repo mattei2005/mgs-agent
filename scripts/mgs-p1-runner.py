@@ -814,6 +814,7 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
     for _k in ("qual1", "apply1", "right1"):
         st[_k] = st[_k].replace(card_name, "the card")
     card_block = lazy_credit_card_p1(site, card_name, card_slug, card_id, card_url, card_data, official_url, button_hex, lang)
+    button_block = lazy_button_p1(official_url, button_hex, lang)
 
     def benefit_para(raw: str, idx: int) -> str:
         base = p1_perceived_benefit(raw, card_name=card_name)
@@ -870,15 +871,16 @@ def generate_p1_body(site: Dict[str, Any], card_name: str, card_slug: str, card_
         wp_paragraph(st["right1"]),
         wp_paragraph(localize_fact("If the fee, APR or eligibility conditions do not fit your situation, compare other cards before applying.", lang)),
         wp_paragraph(localize_fact(positioning.get("right_3") or "Compare the card with at least one alternative before applying.", lang)),
+        button_block,
     ])
     body = "\n\n".join(blocks)
     body, wc = fit_word_count(body, lang)
     keyword_count = count_keyword_occurrences(card_name, body)
-    return body, {"subtitle":subtitle,"subtitle_chars":len(subtitle),"word_count":wc,"featured_inserted":True,"lazyblocks":1,"details_blocks":0,"effective_language":lang,"contract_p1":contract.get("path"),"contract_mode":contract.get("contract_mode", CONTRACT_MODE),"keyword_count_body":keyword_count}
+    return body, {"subtitle":subtitle,"subtitle_chars":len(subtitle),"word_count":wc,"featured_inserted":True,"lazyblocks":2,"card_lazyblocks":1,"button_lazyblocks":1,"details_blocks":0,"effective_language":lang,"contract_p1":contract.get("path"),"contract_mode":contract.get("contract_mode", CONTRACT_MODE),"keyword_count_body":keyword_count}
 
 
 def visible_word_count(body: str) -> int:
-    src = re.sub(r"<!-- wp:lazyblock/credit-card.*?/-->", " ", body, flags=re.S)
+    src = re.sub(r"<!-- wp:lazyblock/.*?/-->", " ", body, flags=re.S)
     src = re.sub(r"<figure.*?</figure>", " ", src, flags=re.S)
     text = html.unescape(re.sub(r"<[^>]+>", " ", src))
     text = re.sub(r"<!--.*?-->", " ", text, flags=re.S)
