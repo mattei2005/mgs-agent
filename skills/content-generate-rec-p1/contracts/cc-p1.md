@@ -29,9 +29,9 @@ A P1 deve complementar o REC, expandindo os temas apresentados anteriormente sem
 
 ## 2. Idioma do Artigo
 
-Todo o conteúdo deve ser produzido no idioma informado em `{lang}`.
+O idioma do artigo vem da configuração operacional do site/vertical aprovado no pedido, não de uma variável editorial solta.
 
-Devem seguir esse idioma:
+Devem seguir o idioma configurado para o site/vertical:
 
 * Título;
 * Excerpt;
@@ -40,8 +40,9 @@ Devem seguir esse idioma:
 * CTA;
 * Meta description;
 * Slug;
-* Details;
 * Avisos.
+
+Se houver conflito entre site/vertical e idioma solicitado, bloquear antes de publicar.
 
 ---
 
@@ -412,7 +413,7 @@ Nunca sugerir aprovação garantida.
 
 ## 17. APR, Taxas e Custos
 
-Esta seção deve ser criada em formato Details.
+Esta seção deve ser criada em seção normal do WordPress, sem bloco Details/accordion/hambúrguer.
 
 Exibir apenas:
 
@@ -428,7 +429,7 @@ Somente quando houver confirmação oficial.
 
 ## 18. Requisitos para Solicitar
 
-Esta seção deve ser criada em formato Details.
+Esta seção deve ser criada em seção normal do WordPress, sem bloco Details/accordion/hambúrguer.
 
 Pode incluir:
 
@@ -489,10 +490,10 @@ Antes de finalizar, validar:
 * Imagem posicionada após o excerpt;
 * Introdução posicionada após a imagem;
 * LazyBlocks posicionados após a introdução;
-* Benefits Details presentes;
-* Who Should Use Details presentes;
-* APR Details presentes quando aplicável;
-* Requirements Details presentes quando aplicável;
+* Seções de benefícios reais presentes;
+* Seção de público recomendado presente;
+* Seção de APR/taxas/custos presente quando aplicável;
+* Seção de requisitos presente quando aplicável;
 * Nenhuma informação inventada;
 * Nenhuma promessa de aprovação;
 * CTA suave;
