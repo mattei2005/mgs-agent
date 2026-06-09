@@ -769,7 +769,11 @@ def p1_perceived_benefit(raw: str, *, card_name: str = "") -> str:
     if "fee" in low or "apr" in low:
         if "money transfer" in low:
             return f"{text}. Compare this cost with the cash-flow reason for moving money before relying on the offer."
-        return f"{text}. Read this as part of the total cost, because interest or fees can quickly reduce any benefit."
+        if "balance transfer" in low:
+            return f"{text}. Compare the transfer fee with the interest you expect to avoid during the promotional window."
+        if "apr" in low:
+            return f"{text}. This matters most after any promotional period ends or if a balance remains unpaid."
+        return f"{text}. Treat this cost as part of the decision, not as a separate detail."
     if "travel" in name_low:
         return f"{text}. In practice, this matters most when it supports planned trips, overseas purchases or partner spending."
     return text
