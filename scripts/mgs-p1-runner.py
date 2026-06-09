@@ -605,6 +605,21 @@ def lazy_credit_card_p1(site: Dict[str, Any], card_name: str, card_slug: str, ca
     return "<!-- wp:lazyblock/credit-card " + json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + " /-->"
 
 
+def lazy_button_p1(official_url: str, button_hex: str, lang: str) -> str:
+    """Final CTA must be the approved LazyBlock `botao normal`, not custom HTML."""
+    b = rand_block_id()
+    c = copy_for(lang)
+    payload = {
+        "texto-botao": c["apply"],
+        "link-botao": official_url,
+        "cor-botao": button_hex,
+        "texto-pequeno": c["redir"],
+        "blockId": b,
+        "blockUniqueClass": f"lazyblock-botao-{b}",
+    }
+    return "<!-- wp:lazyblock/botao " + json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + " /-->"
+
+
 def wp_paragraph(text: str) -> str:
     return f"<!-- wp:paragraph -->\n<p>{html.escape(text)}</p>\n<!-- /wp:paragraph -->"
 
