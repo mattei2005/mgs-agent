@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-08T05:00:01-04:00",
+    "updated_at": "2026-06-09T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -90,6 +90,41 @@
   ],
   "scripts": [
     {
+      "path": "/root/mgs-agent/scripts/ares-build-creative-copy-queue.py",
+      "size_bytes": 8954,
+      "modified_at": "2026-06-08T11:54:36-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-drive-thumbnail-sampler.py",
+      "size_bytes": 8849,
+      "modified_at": "2026-06-08T11:37:55-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-drive-upload-canvas-inventory.py",
+      "size_bytes": 16270,
+      "modified_at": "2026-06-08T11:34:31-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-execute-creative-copy-clean.py",
+      "size_bytes": 20133,
+      "modified_at": "2026-06-08T16:00:27-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-google-drive-oauth-desktop-init.py",
+      "size_bytes": 7042,
+      "modified_at": "2026-06-08T14:40:40-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-google-drive-oauth-device-init.py",
+      "size_bytes": 7515,
+      "modified_at": "2026-06-08T14:24:33-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-propose-creative-organization.py",
+      "size_bytes": 5671,
+      "modified_at": "2026-06-08T11:43:21-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/audit-featured-image.py",
       "size_bytes": 8632,
       "modified_at": "2026-05-26T15:30:32-04:00"
@@ -108,6 +143,16 @@
       "path": "/root/mgs-agent/scripts/check-pending-reports.sh",
       "size_bytes": 8828,
       "modified_at": "2026-06-07T21:39:19-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/clean-creative-metadata.py",
+      "size_bytes": 13031,
+      "modified_at": "2026-06-08T16:16:22-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/clean-creative-metadata.sh",
+      "size_bytes": 120,
+      "modified_at": "2026-06-08T11:14:48-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/cleanup-zombie-sessions.sh",
@@ -191,18 +236,18 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-p1-runner.py",
-      "size_bytes": 75865,
-      "modified_at": "2026-06-07T22:51:01-04:00"
+      "size_bytes": 75031,
+      "modified_at": "2026-06-08T21:58:13-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-rec-p1-orchestrator.py",
-      "size_bytes": 15312,
-      "modified_at": "2026-06-07T22:51:02-04:00"
+      "size_bytes": 15566,
+      "modified_at": "2026-06-08T16:17:35-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-rec-runner.py",
-      "size_bytes": 101976,
-      "modified_at": "2026-06-07T22:50:59-04:00"
+      "size_bytes": 105447,
+      "modified_at": "2026-06-08T21:57:30-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-safety-backup.sh",
@@ -311,8 +356,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/render-article-summary.py",
-      "size_bytes": 10496,
-      "modified_at": "2026-05-27T14:19:42-04:00"
+      "size_bytes": 11069,
+      "modified_at": "2026-06-08T17:15:32-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/render-p1-summary.py",
@@ -2196,6 +2241,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/SKILL.md"
       },
       {
+        "name": "google-drive-agent-automation",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/SKILL.md"
+      },
+      {
         "name": "hermes-agent-operations",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/SKILL.md"
@@ -2382,8 +2432,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "cd2cc36d5376b1ee6d3c354e19253c4c",
-      "modified_at": "2026-06-08T04:56:01-04:00"
+      "md5": "7d7627cb3ffc0d2f0981033546036840",
+      "modified_at": "2026-06-09T04:56:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -2394,32 +2444,32 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "f030fd1ff7023351f8fc01ddc5ff2d12",
-      "modified_at": "2026-06-08T05:00:02-04:00"
+      "md5": "a3844e342734c5d6df9426ba5a94d9fc",
+      "modified_at": "2026-06-09T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "8cc4fe02dba6b284cbe7fe68b6cf5d43",
-      "modified_at": "2026-06-08T02:51:53-04:00"
+      "md5": "7122288adb82877c456294c223aab3c9",
+      "modified_at": "2026-06-09T02:52:51-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 9040,
-      "md5": "add535834e064b8c3810102efe1ebb2f",
-      "modified_at": "2026-06-08T05:00:02-04:00"
+      "size_bytes": 9685,
+      "md5": "10cec9207a9e3b538b96ba9031ef2254",
+      "modified_at": "2026-06-09T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 328,
-      "md5": "92b9707fe8084172b8136272bbf229ab",
-      "modified_at": "2026-06-07T20:37:02-04:00"
+      "size_bytes": 332,
+      "md5": "02c7e225e11af0fb552bbe317e882e9e",
+      "modified_at": "2026-06-08T20:37:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 89186,
-      "md5": "74138ccea279a2d502ae91b17af48ea2",
-      "modified_at": "2026-06-07T22:53:40-04:00"
+      "size_bytes": 89401,
+      "md5": "bcd21c42327b1cebfb27be04265e59a4",
+      "modified_at": "2026-06-08T05:00:06-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -2466,8 +2516,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1520,
-      "md5": "4c7c92510591d0460ef9a7f08490a8fe",
-      "modified_at": "2026-06-08T04:56:01-04:00"
+      "md5": "4f1f9d9206953de7e075bacc0292ba23",
+      "modified_at": "2026-06-09T04:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -2484,20 +2534,20 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "e6e8efd07967b39cf9fe66d4dda3ec35",
-      "modified_at": "2026-06-07T20:07:02-04:00"
+      "md5": "f8846e506c45a02c34366e0b501370bf",
+      "modified_at": "2026-06-08T20:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
-      "size_bytes": 5503,
-      "md5": "c5022a15c4d92130ab547820f35183a2",
-      "modified_at": "2026-05-30T00:19:20-04:00"
+      "size_bytes": 5892,
+      "md5": "acf7550bbd45badb3439382f76e7f9b9",
+      "modified_at": "2026-06-08T16:32:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 17700,
-      "md5": "c3277f087fabc79a376fe27beb18b141",
-      "modified_at": "2026-06-07T10:24:07-04:00"
+      "size_bytes": 18064,
+      "md5": "a2c9d79b007a4d323d7a236ffcd4a467",
+      "modified_at": "2026-06-08T10:24:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -2507,9 +2557,9 @@
     },
     {
       "path": "/root/mgs-agent/profiles/ares-soul.md",
-      "size_bytes": 10183,
-      "md5": "5ab70ba2a6f94715dd6d4b5f642ac7e9",
-      "modified_at": "2026-06-07T21:39:19-04:00"
+      "size_bytes": 10964,
+      "md5": "dbef2754155f53bc6665076cfe59619b",
+      "modified_at": "2026-06-08T11:20:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
@@ -2519,9 +2569,9 @@
     },
     {
       "path": "/root/mgs-agent/profiles/hera-soul.md",
-      "size_bytes": 18182,
-      "md5": "fa6e7114d56c417fc6614264d97a235f",
-      "modified_at": "2026-06-07T21:39:19-04:00"
+      "size_bytes": 18870,
+      "md5": "3aa4e26191108ef300c93f483a1bdf83",
+      "modified_at": "2026-06-08T11:20:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
