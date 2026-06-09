@@ -272,6 +272,10 @@ Quando Rodolfo der autonomia explícita para resolver a fila inteira, reduza nar
 Long-runs com centenas de uploads exigem controle de processo único, refresh OAuth em `401`, reconciliação por `queue_id` e limpeza auditada de duplicados: `references/drive-clean-copy-long-run-recovery.md`.
 Para filas longas já aprovadas, usar o padrão de controlador/resume sem upload paralelo: `references/drive-bulk-upload-controller.md`.
 
+### Duplicadas visuais no Drive
+
+Quando Rodolfo pedir para identificar criativos iguais com nomes diferentes em `UPLOAD_CANVAS`, faça primeiro análise read-only por comparação visual, não por nome nem apenas MD5. Gere CSV auditável com grupos, `KEEP` e `TRASH_DUPLICATE`; só envie duplicadas para a lixeira depois de confirmação explícita. Para detalhes do fluxo, OAuth fallback e formato de relatório, usar `references/drive-visual-duplicate-cleanup.md`.
+
 ## Credenciais Google Drive
 
 Preferir **Google Service Account** para leitura e inventário. Para write/upload em `My Drive` pessoal, validar quota antes: Service Account pode falhar com `403 storageQuotaExceeded` porque não tem armazenamento próprio. Se o destino estiver em My Drive pessoal, usar OAuth de usuário real ou mover a operação para Shared Drive.
