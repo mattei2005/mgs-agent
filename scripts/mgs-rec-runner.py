@@ -977,6 +977,27 @@ def rec_top_of_page_copy(card_name: str, benefits: List[str], annual_fee_raw: st
     }
 
 
+
+def benefit_heading_from_fact(raw: str) -> str:
+    """Create a visible benefit heading from the confirmed fact itself.
+
+    Do not use fixed editorial buckets such as Main benefit / Financial value.
+    The heading must remain anchored to the product fact currently extracted.
+    """
+    text = re.sub(r"\s+", " ", html.unescape(str(raw or ""))).strip(" .;:,!")
+    text = re.sub(r"^(benefit|feature|perk)\s*[:\-–—]\s*", "", text, flags=re.I)
+    # Keep exact numbers/terms (0%, months, APR, named programs) but trim long legal clauses.
+    parts = re.split(r"\s+(?:with|subject to|depending on|after|before)\s+|[.;]", text, maxsplit=1, flags=re.I)
+    heading = parts[0].strip(" .;:,!") if parts else text
+    if len(heading) > 72:
+        heading = heading[:72].rsplit(" ", 1)[0].rstrip(" .;:,!")
+    if not heading or is_generic_visible_value(heading):
+        raise RunnerError(f"Cannot derive benefit heading from confirmed fact: {raw!r}")
+    forbidden = {"main benefit", "financial value", "usage convenience", "complementary benefit", "benefício principal", "valor financeiro", "conveniência de uso", "benefício complementar"}
+    if heading.lower() in forbidden:
+        raise RunnerError(f"Generic benefit heading blocked: {heading!r}")
+    return heading
+
 def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict[str, Any]) -> Dict[str, Any]:
     """Generate a deterministic REC article aligned to cc-rec.md v2.
 
@@ -1011,7 +1032,7 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
         angle = "repayment breathing room"
         opening_2 = "Its main appeal is reducing interest pressure while repayments stay clear, as long as the transfer fee and repayment plan make sense."
         conclusion = "If that repayment window matches your budget, the next page can help you check the application path and official conditions in more detail."
-    elif any(t in joined for t in ["cashback", "reward", "rewards", "points", "miles", "avios"]):
+    elif any(t in joined for t in ["cashback", "reward", "rewards", "miles", "avios"]):
         angle = "reward value"
         opening_2 = "Its main appeal is easier to understand when rewards come from purchases you already planned, instead of extra spending created only to chase benefits."
         conclusion = "If those rewards fit your routine, the next page explains the costs, requirements and application step before you leave this site."
@@ -1051,43 +1072,30 @@ def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict
         "Approval, limit and final terms depend on the issuer's assessment",
     ]
 
-    lang = (site.get("language") or "en").strip().lower()
-    labels = {
-        "pt": {"benefits":"Benefícios do {name}","points":"Pontos a considerar","profile":"Para quem o {name} é indicado","proscons":"Prós e Contras","pros":"Prós","cons":"Contras","final":"Vale avançar para a próxima análise?","bt":["Benefício principal","Valor financeiro","Conveniência de uso","Benefício complementar"]},
-        "es": {"benefits":"Beneficios de {name}","points":"Puntos a considerar","profile":"Para quién se recomienda {name}","proscons":"Pros y contras","pros":"Pros","cons":"Contras","final":"¿Vale la pena seguir con la próxima página?","bt":["Beneficio principal","Valor financiero","Conveniencia de uso","Beneficio complementario"]},
-        "en": {"benefits":"Benefits of {name}","points":"Points to Consider","profile":"Who {name} Is Recommended For","proscons":"Pros and Cons","pros":"Pros","cons":"Cons","final":"Is it worth moving to the next step?","bt":["Main benefit","Financial value","Usage convenience","Complementary benefit"]},
-    }.get(lang, {})
-    if not labels:
-        labels = {"benefits":"Benefits of {name}","points":"Points to Consider","profile":"Who {name} Is Recommended For","proscons":"Pros and Cons","pros":"Pros","cons":"Cons","final":"Is it worth moving to the next step?","bt":["Main benefit","Financial value","Usage convenience","Complementary benefit"]}
+    benefit_headings = [benefit_heading_from_fact(b) for b in benefits[:4]]
     blocks = [
-        wp_p(f"<strong>{name}</strong> is worth a closer look when its confirmed benefits match a real {html.escape(angle)} need."),
+        wp_p(f"<strong>{name}</strong> is worth reviewing when the confirmed product details match what you need from a credit card."),
         wp_p(opening_2),
-        wp_p("Before applying, compare the main benefits with costs, APR and the way you expect to use the card."),
-        wp_h2(labels["benefits"].format(name=name)),
+        wp_p("Before applying, compare the confirmed benefits with the costs, APR and repayment behaviour the issuer requires."),
+        wp_h2(f"Benefits of {name}"),
     ]
-    benefit_tails = [
-        "This helps connect the feature with a real spending decision.",
-        "This matters most when the value survives normal costs and repayment.",
-        "This can make daily use easier without changing your budget only for rewards.",
-        "This supports the main use case without distracting from issuer conditions.",
-    ]
-    for title, benefit, tail in zip(labels["bt"], benefit_values, benefit_tails):
+    for title, benefit in zip(benefit_headings, benefit_values):
         blocks.append(wp_h3(title))
-        blocks.append(wp_p(f"{html.escape(benefit)}. {tail}"))
+        blocks.append(wp_p(html.escape(benefit)))
     blocks.extend([
-        wp_h2(labels["points"]),
+        wp_h2("Points to Consider"),
         wp_list(points),
-        wp_h2(labels["profile"].format(name=name)),
-        wp_p("This card may suit readers who can use its confirmed benefits naturally before applying."),
-        wp_p("It is less convincing when the main benefit would require extra spending or unclear repayment behaviour."),
-        wp_h2(labels["proscons"]),
-        wp_h3(labels["pros"]),
+        wp_h2(f"Who {name} Is Recommended For"),
+        wp_p("This card may make sense when the confirmed benefits solve a specific spending, repayment or cost-control need."),
+        wp_p("It is less convincing when the strongest feature would require extra spending, unclear repayment behaviour or assumptions not confirmed by the issuer."),
+        wp_h2("Pros and Cons"),
+        wp_h3("Pros"),
         wp_list(pros),
-        wp_h3(labels["cons"]),
+        wp_h3("Cons"),
         wp_list(cons),
-        wp_h2(labels["final"]),
+        wp_h2("Is it worth moving to the next step?"),
         wp_p(conclusion),
-        wp_p("Use this recommendation as a first filter, then compare the official page with your budget, spending habits and repayment plan with more confidence."),
+        wp_p("Use this recommendation as a first filter, then compare the official page with your budget, spending habits and repayment plan."),
         wp_p("Check the latest official conditions before deciding, because rates and benefits can change over time."),
     ])
     html_body = "\n\n".join(blocks)
