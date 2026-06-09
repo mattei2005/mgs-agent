@@ -688,7 +688,7 @@ def p1_perceived_benefit(raw: str, *, card_name: str = "") -> str:
     if "annual fee" in low and ("no" in low or "£0" in low):
         return "With no annual fee, the card can be easier to keep for occasional travel or partner rewards without needing heavy monthly use to justify a yearly cost."
     if "travel" in low and ("reward" in low or "partner" in low):
-        return "Travel rewards are most useful when they attach to real plans — hotels, transport, trips or partner spending — rather than encouraging extra purchases."
+        return f"{text}. Use this only where the official travel-related benefit matches purchases you already planned."
     if "reward" in low or "cashback" in low or "points" in low:
         if "2,500" in low or "welcome" in low:
             return "The welcome bonus can feel useful after your first transaction, as long as the card already fits purchases you planned to make."
