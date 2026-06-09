@@ -34,3 +34,54 @@ Avoid:
 - Keep Rodolfo's report format lean unless he explicitly asks to expand it.
 - Treat `Subtitle:` and `Excerpt:` lines as useful QA additions, not automatic blockers.
 - If adding fields to the renderer/SKILL, explain exactly what is being added and why before calling it required.
+
+## Approved REC+P1 final report shape
+
+Rodolfo later specified the preferred production report format. Use this shape for renderer output or manual fallback when JSON is incomplete:
+
+```text
+📄 REC Post ID: `<numero do post>`
+🔗 REC: `<link>`
+✏️ Edit REC: `<link>`
+🔗 Slug: `<slug>`
+📌 Status: `<status>`
+
+📄 P1 Post ID: `<numero do post>`
+🔗 P1: `<link>`
+✏️ Edit P1: `<link>`
+🔗 Slug: `<slug>`
+📌 Status: `<status>`
+
+📄 REC
+📊  Yoast: SEO `<pontuacao>` / Readability `<pontuacao>`
+• Validação: `<palavras>` palavras / subtitle `<chars>` chars / excerpt `<chars>` chars / público HTTP `<codigo ou evidência draft>`
+• Title: `<titulo>` — `<chars>` chars
+• Focus: `<palavra chave usada>`
+• Meta Description: `<texto que foi inserido>` — `<chars>` chars
+• Tags: `<tags>`
+• Imagem Card: `<link da imagem do card>`
+• Imagem Featured: `<link da featured image>`
+• Fonte oficial: `<link oficial utilizado>`
+
+📄 P1
+📊  Yoast: SEO `<pontuacao>` / Readability `<pontuacao>`
+• Validação: `<palavras>` palavras / subtitle `<chars>` chars / excerpt `<chars>` chars / público HTTP `<codigo ou evidência draft>`
+• Title: `<titulo>` — `<chars>` chars
+• Focus: `<palavra chave usada>`
+• Meta Description: `<texto que foi inserido>` — `<chars>` chars
+• Tags: `<tags>`
+• Imagem Card: `<link da imagem do card>`
+• Imagem Featured: `<link da featured image>`
+• Fonte oficial: `<link oficial utilizado>`
+
+⏱️ Tempo total dos runners: REC `<tempo>` + P1 `<tempo>`
+💰 Custo estimado: REC `<custo REC>` + P1 `<custo P1>` = `<total>`
+```
+
+Formatting notes:
+
+- Keep the two post identity blocks first, before validation details.
+- Keep REC and P1 validation as separate repeated sections.
+- Use `Meta Description: <texto> — <chars> chars`; avoid a hyphen glued to the text.
+- If a runner duration exceeds 60 seconds, display it in minutes in a legible way.
+- Include estimated cost per runner plus total when cost metadata exists; if unavailable, say unavailable rather than inventing.
