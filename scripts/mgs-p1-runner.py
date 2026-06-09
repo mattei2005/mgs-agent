@@ -537,8 +537,7 @@ def derive_lazyblock_tags(card_name: str, benefits: List[str], annual_fee: str =
     if any(term in joined for term in ["security", "fraud", "purchase protection"]):
         tags.append("Security features")
     if any(t in joined for t in ["avios", "lounge", "hotel", "airline miles", "airport lounge", "travel insurance"]):
-        tags.append("Travel rewards")
-        descriptor = "Connects confirmed travel benefits with planned card use."
+        descriptor = shorten_words(benefits[0], 12).rstrip(" ,;:") + "."
     if "no annual fee" in joined or ("annual fee" in fee_low and "0" in fee_low):
         tags.append("No annual fee")
 

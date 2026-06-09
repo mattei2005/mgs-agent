@@ -326,9 +326,9 @@ def extract_card_data_with_llm(card_name: str, source_url: str, text: str) -> Di
     elif "cashback" in lower_benefits:
         tag10 = "Cashback rewards"
         descriptor = "Earn cashback on eligible purchases."
-    elif any(t in lower_benefits for t in ["avios", "travel", "points"]):
-        tag10 = "Travel rewards"
-        descriptor = "Make regular trips and bookings feel more rewarding."
+    elif any(t in lower_benefits for t in ["avios", "travel", "lounge", "hotel", "airline miles", "travel insurance"]):
+        tag10 = shorten_words(benefits[0], 4).rstrip(" ,;:.")
+        descriptor = shorten_words(benefits[0], 12).rstrip(" ,;:") + "."
     else:
         tag10 = "Confirmed benefits"
         descriptor = shorten_words(benefits[0], 9).rstrip(" ,;:") + "."
@@ -843,12 +843,9 @@ def derive_lazyblock_tags(card_name: str, benefits: List[str], annual_fee: str =
         tags.append("Digital tools")
     if any(term in joined for term in ["security", "fraud", "purchase protection"]):
         tags.append("Security features")
-    if "1% back" in joined or "0.5% back" in joined or "rewards" in joined:
-        tags.append("Rewards back")
-        descriptor = "Turns planned spending into practical Rewards value."
-    if any(t in joined for t in ["avios", "travel", "lounge", "hotel"]):
-        tags.append("Travel rewards")
-        descriptor = "Makes trips and overseas spending feel easier to use."
+    if "1% back" in joined or "0.5% back" in joined:
+        tags.append("Cashback")
+        descriptor = shorten_words(benefits[0], 12).rstrip(" ,;:") + "."
     if "no annual fee" in joined or ("annual fee" in fee_low and "£0" in fee_low and "£84" not in fee_low and "monthly" not in fee_low):
         tags.append("No annual fee")
 
