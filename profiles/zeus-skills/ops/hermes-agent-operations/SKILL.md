@@ -375,6 +375,8 @@ Depois: tabela de toolsets, tabela de backends, recomendação direta e `Próxim
 
 Use **blocos `text` com colunas alinhadas** para qualquer matriz de status/validação/novidades. Não usar tabela Markdown crua (`|---|---|`) em Discord: Rodolfo considera visualmente regressivo e já corrigiu esse padrão. Cabeçalhos devem nascer do contexto real do update; não copiar exemplos.
 
+**Se Rodolfo apontar regressão visual/legibilidade após update** (ex.: “por que não está em tabela?” ou “voltou aos padrões?”), não trate como mera preferência de resposta. Faça auditoria de padrões: config viva dos profiles, backups/snapshots, SOUL/style rules, gateways e patch guard. Se o problema for regra permissiva no SOUL, fortaleça a regra para “não usar tabela Markdown crua no Discord; usar bloco `text` alinhado” nos agentes afetados. Detalhe em `references/discord-table-format-and-standards-drift-2026-06-09.md`.
+
 ```text
 Resumo: atualizar agora / deferir / janela controlada.
 Evidências: commits atrás, highlights, risco local, backup/checks.
