@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-09T05:00:01-04:00",
+    "updated_at": "2026-06-10T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -200,6 +200,11 @@
       "modified_at": "2026-05-17T00:02:25-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/finalize-zeus-restart-post-update-20260609.sh",
+      "size_bytes": 2598,
+      "modified_at": "2026-06-09T09:29:31-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/hermes-mgs-patch-watchdog.sh",
       "size_bytes": 4288,
       "modified_at": "2026-06-07T20:49:50-04:00"
@@ -345,6 +350,11 @@
       "modified_at": "2026-05-16T17:31:14-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/post-reboot-health-20260609.sh",
+      "size_bytes": 4395,
+      "modified_at": "2026-06-09T10:05:35-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/qa-content-validator.py",
       "size_bytes": 14927,
       "modified_at": "2026-05-28T13:31:49-04:00"
@@ -363,6 +373,11 @@
       "path": "/root/mgs-agent/scripts/render-p1-summary.py",
       "size_bytes": 412,
       "modified_at": "2026-05-26T19:07:03-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/restart-hermes-gateways-post-update-20260609.sh",
+      "size_bytes": 950,
+      "modified_at": "2026-06-09T09:27:01-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
@@ -905,6 +920,11 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/software-development/requesting-code-review/SKILL.md"
       },
       {
+        "name": "simplify-code",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/ares/skills/software-development/simplify-code/SKILL.md"
+      },
+      {
         "name": "spike",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/ares/skills/software-development/spike/SKILL.md"
@@ -1295,6 +1315,11 @@
         "name": "requesting-code-review",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/atena/skills/software-development/requesting-code-review/SKILL.md"
+      },
+      {
+        "name": "simplify-code",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/simplify-code/SKILL.md"
       },
       {
         "name": "spike",
@@ -1849,6 +1874,11 @@
         "skill_md": "/root/.hermes/profiles/hera/skills/software-development/python-debugpy/SKILL.md"
       },
       {
+        "name": "simplify-code",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/simplify-code/SKILL.md"
+      },
+      {
         "name": "spike",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/hera/skills/software-development/spike/SKILL.md"
@@ -2391,6 +2421,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/python-debugpy/SKILL.md"
       },
       {
+        "name": "simplify-code",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/simplify-code/SKILL.md"
+      },
+      {
         "name": "spike",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/spike/SKILL.md"
@@ -2432,8 +2467,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "7d7627cb3ffc0d2f0981033546036840",
-      "modified_at": "2026-06-09T04:56:02-04:00"
+      "md5": "1c1fe4658b0c79490ab05b26f153a7fa",
+      "modified_at": "2026-06-10T04:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -2444,32 +2479,32 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "a3844e342734c5d6df9426ba5a94d9fc",
-      "modified_at": "2026-06-09T05:00:01-04:00"
+      "md5": "b1e5131c526196ee1d8dd0d02c58e204",
+      "modified_at": "2026-06-10T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "7122288adb82877c456294c223aab3c9",
-      "modified_at": "2026-06-09T02:52:51-04:00"
+      "md5": "39586b02b4d0282418c95ad7c415438b",
+      "modified_at": "2026-06-10T02:53:41-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 9685,
-      "md5": "10cec9207a9e3b538b96ba9031ef2254",
-      "modified_at": "2026-06-09T05:00:01-04:00"
+      "size_bytes": 10330,
+      "md5": "4237a031852bb908d73d1ce2d80c439b",
+      "modified_at": "2026-06-10T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 332,
-      "md5": "02c7e225e11af0fb552bbe317e882e9e",
-      "modified_at": "2026-06-08T20:37:03-04:00"
+      "size_bytes": 329,
+      "md5": "cb93e172ca2a98b417c2c994d913e512",
+      "modified_at": "2026-06-09T20:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 89401,
-      "md5": "bcd21c42327b1cebfb27be04265e59a4",
-      "modified_at": "2026-06-08T05:00:06-04:00"
+      "size_bytes": 91068,
+      "md5": "af16e8e22fbcf96367fc76f975632c44",
+      "modified_at": "2026-06-09T05:00:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -2516,8 +2551,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1520,
-      "md5": "4f1f9d9206953de7e075bacc0292ba23",
-      "modified_at": "2026-06-09T04:56:01-04:00"
+      "md5": "2e95522c236b59b7ccf1a39fec140276",
+      "modified_at": "2026-06-10T04:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -2534,8 +2569,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "f8846e506c45a02c34366e0b501370bf",
-      "modified_at": "2026-06-08T20:07:02-04:00"
+      "md5": "28484dbf248fbb69e1c9141bdabe19b1",
+      "modified_at": "2026-06-09T20:07:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -2545,9 +2580,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 18064,
-      "md5": "a2c9d79b007a4d323d7a236ffcd4a467",
-      "modified_at": "2026-06-08T10:24:07-04:00"
+      "size_bytes": 18428,
+      "md5": "dd25caa30726f1c22cf5193e185fe290",
+      "modified_at": "2026-06-09T10:24:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -2557,27 +2592,27 @@
     },
     {
       "path": "/root/mgs-agent/profiles/ares-soul.md",
-      "size_bytes": 10964,
-      "md5": "dbef2754155f53bc6665076cfe59619b",
-      "modified_at": "2026-06-08T11:20:01-04:00"
+      "size_bytes": 10995,
+      "md5": "f65b7b7b0ae4b6cf4c860700af49ae4f",
+      "modified_at": "2026-06-09T11:35:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "size_bytes": 44561,
-      "md5": "a279884e9dee201ae0f843639df6512e",
-      "modified_at": "2026-06-07T22:51:24-04:00"
+      "size_bytes": 44646,
+      "md5": "0ad94c983c484f325830ee8a4b39eb88",
+      "modified_at": "2026-06-09T11:35:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/hera-soul.md",
       "size_bytes": 18870,
-      "md5": "3aa4e26191108ef300c93f483a1bdf83",
-      "modified_at": "2026-06-08T11:20:01-04:00"
+      "md5": "0926a3ef1570ecb6b51bc14d0023328a",
+      "modified_at": "2026-06-09T11:35:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
-      "size_bytes": 39015,
-      "md5": "a04d849a724049faad27bb9d22f6eb39",
-      "modified_at": "2026-06-07T21:40:01-04:00"
+      "size_bytes": 39149,
+      "md5": "27d3c4c0988ea8393f6c0e1bba89b448",
+      "modified_at": "2026-06-09T11:35:01-04:00"
     }
   ],
   "mu_plugin_canonical": {
