@@ -215,6 +215,13 @@ auxiliary:
     api_key: ''
     timeout: 30
     extra_body: {}
+  tts_audio_tags:
+    provider: auto
+    model: ''
+    base_url: ''
+    api_key: ''
+    timeout: 30
+    extra_body: {}
   triage_specifier:
     provider: openai-codex
     model: gpt-5.5
@@ -331,6 +338,11 @@ tts:
   openai:
     model: gpt-4o-mini-tts
     voice: alloy
+  gemini:
+    model: gemini-2.5-flash-preview-tts
+    voice: Kore
+    audio_tags: false
+    persona_prompt_file: ''
   xai:
     voice_id: eve
     language: en
@@ -377,6 +389,7 @@ context:
 memory:
   memory_enabled: true
   user_profile_enabled: true
+  write_approval: false
   memory_char_limit: 2200
   user_char_limit: 1375
   provider: ''
@@ -406,6 +419,7 @@ skills:
   inline_shell: false
   inline_shell_timeout: 10
   guard_agent_created: false
+  write_approval: false
   creation_nudge_interval: 15
   disabled:
   - apple-notes
@@ -567,13 +581,14 @@ approvals:
   destructive_slash_confirm: false
   gateway_timeout: 900
 command_allowlist:
+- execute_code
 - script execution via heredoc
 - overwrite system config
-- delete in root path
 - script execution via -e/-c flag
-- shell command via -c/-lc flag
-- stop/restart system service
+- delete in root path
 - kill hermes/gateway process (self-termination)
+- stop/restart system service
+- shell command via -c/-lc flag
 quick_commands: {}
 hooks: {}
 hooks_auto_accept: false
