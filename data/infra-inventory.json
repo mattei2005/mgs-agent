@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-10T05:00:01-04:00",
+    "updated_at": "2026-06-11T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -380,9 +380,24 @@
       "modified_at": "2026-06-09T09:27:01-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/restart-validate-hermes-agents-20260610-a8.sh",
+      "size_bytes": 1392,
+      "modified_at": "2026-06-10T16:40:14-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/restart-validate-hermes-agents-20260610.sh",
+      "size_bytes": 1480,
+      "modified_at": "2026-06-10T12:30:23-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
       "size_bytes": 5772,
       "modified_at": "2026-05-16T17:37:26-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/run-hermes-update-all-agents-20260610.sh",
+      "size_bytes": 6739,
+      "modified_at": "2026-06-10T12:10:11-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
@@ -450,6 +465,21 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/.archive/arxiv/SKILL.md"
       },
       {
+        "name": "claude-code",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/autonomous-ai-agents/claude-code/SKILL.md"
+      },
+      {
+        "name": "codex",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/autonomous-ai-agents/codex/SKILL.md"
+      },
+      {
+        "name": "opencode",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/autonomous-ai-agents/opencode/SKILL.md"
+      },
+      {
         "name": "blogwatcher",
         "category": ".archive",
         "skill_md": "/root/.hermes/profiles/ares/skills/.archive/blogwatcher/SKILL.md"
@@ -458,6 +488,81 @@
         "name": "codebase-inspection",
         "category": ".archive",
         "skill_md": "/root/.hermes/profiles/ares/skills/.archive/codebase-inspection/SKILL.md"
+      },
+      {
+        "name": "architecture-diagram",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/creative/architecture-diagram/SKILL.md"
+      },
+      {
+        "name": "ascii-art",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/creative/ascii-art/SKILL.md"
+      },
+      {
+        "name": "ascii-video",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/creative/ascii-video/SKILL.md"
+      },
+      {
+        "name": "baoyu-infographic",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/creative/baoyu-infographic/SKILL.md"
+      },
+      {
+        "name": "claude-design",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/creative/claude-design/SKILL.md"
+      },
+      {
+        "name": "design-md",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/creative/design-md/SKILL.md"
+      },
+      {
+        "name": "excalidraw",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/creative/excalidraw/SKILL.md"
+      },
+      {
+        "name": "manim-video",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/creative/manim-video/SKILL.md"
+      },
+      {
+        "name": "p5js",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/creative/p5js/SKILL.md"
+      },
+      {
+        "name": "popular-web-designs",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/creative/popular-web-designs/SKILL.md"
+      },
+      {
+        "name": "pretext",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/creative/pretext/SKILL.md"
+      },
+      {
+        "name": "sketch",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/creative/sketch/SKILL.md"
+      },
+      {
+        "name": "touchdesigner-mcp",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/creative/touchdesigner-mcp/SKILL.md"
+      },
+      {
+        "name": "kanban-orchestrator",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/devops/kanban-orchestrator/SKILL.md"
+      },
+      {
+        "name": "kanban-worker",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/devops/kanban-worker/SKILL.md"
       },
       {
         "name": "findmy",
@@ -515,9 +620,69 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/.archive/macos-computer-use/SKILL.md"
       },
       {
+        "name": "weights-and-biases",
+        "category": "evaluation",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/mlops/evaluation/weights-and-biases/SKILL.md"
+      },
+      {
+        "name": "huggingface-hub",
+        "category": "mlops",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/mlops/huggingface-hub/SKILL.md"
+      },
+      {
+        "name": "llama-cpp",
+        "category": "inference",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/mlops/inference/llama-cpp/SKILL.md"
+      },
+      {
         "name": "polymarket",
         "category": ".archive",
         "skill_md": "/root/.hermes/profiles/ares/skills/.archive/polymarket/SKILL.md"
+      },
+      {
+        "name": "nano-pdf",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/productivity/nano-pdf/SKILL.md"
+      },
+      {
+        "name": "ocr-and-documents",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/productivity/ocr-and-documents/SKILL.md"
+      },
+      {
+        "name": "powerpoint",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/productivity/powerpoint/SKILL.md"
+      },
+      {
+        "name": "research-paper-writing",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/research/research-paper-writing/SKILL.md"
+      },
+      {
+        "name": "requesting-code-review",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/software-development/requesting-code-review/SKILL.md"
+      },
+      {
+        "name": "simplify-code",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/software-development/simplify-code/SKILL.md"
+      },
+      {
+        "name": "spike",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/software-development/spike/SKILL.md"
+      },
+      {
+        "name": "systematic-debugging",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/software-development/systematic-debugging/SKILL.md"
+      },
+      {
+        "name": "test-driven-development",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/ares/skills/.archive/software-development/test-driven-development/SKILL.md"
       },
       {
         "name": "songsee",
@@ -540,14 +705,9 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/.archive/youtube-content/SKILL.md"
       },
       {
-        "name": "claude-code",
+        "name": "coding-agent-cli-orchestration",
         "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/ares/skills/autonomous-ai-agents/claude-code/SKILL.md"
-      },
-      {
-        "name": "codex",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/ares/skills/autonomous-ai-agents/codex/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/autonomous-ai-agents/coding-agent-cli-orchestration/SKILL.md"
       },
       {
         "name": "hermes-agent",
@@ -555,34 +715,19 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
       },
       {
+        "name": "kanban-agent-operations",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/ares/skills/autonomous-ai-agents/kanban-agent-operations/SKILL.md"
+      },
+      {
         "name": "kanban-codex-lane",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/ares/skills/autonomous-ai-agents/kanban-codex-lane/SKILL.md"
       },
       {
-        "name": "opencode",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/ares/skills/autonomous-ai-agents/opencode/SKILL.md"
-      },
-      {
         "name": "openhands",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/ares/skills/autonomous-ai-agents/openhands/SKILL.md"
-      },
-      {
-        "name": "architecture-diagram",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/architecture-diagram/SKILL.md"
-      },
-      {
-        "name": "ascii-art",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/ascii-art/SKILL.md"
-      },
-      {
-        "name": "ascii-video",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/ascii-video/SKILL.md"
       },
       {
         "name": "baoyu-article-illustrator",
@@ -595,19 +740,14 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/creative/baoyu-comic/SKILL.md"
       },
       {
-        "name": "baoyu-infographic",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/baoyu-infographic/SKILL.md"
-      },
-      {
-        "name": "claude-design",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/claude-design/SKILL.md"
-      },
-      {
         "name": "comfyui",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/ares/skills/creative/comfyui/SKILL.md"
+      },
+      {
+        "name": "creative-coding-media-pipelines",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/ares/skills/creative/creative-coding-media-pipelines/SKILL.md"
       },
       {
         "name": "creative-ideation",
@@ -615,29 +755,9 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/creative/creative-ideation/SKILL.md"
       },
       {
-        "name": "design-md",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/design-md/SKILL.md"
-      },
-      {
-        "name": "excalidraw",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/excalidraw/SKILL.md"
-      },
-      {
         "name": "humanizer",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/ares/skills/creative/humanizer/SKILL.md"
-      },
-      {
-        "name": "manim-video",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/manim-video/SKILL.md"
-      },
-      {
-        "name": "p5js",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/p5js/SKILL.md"
       },
       {
         "name": "pixel-art",
@@ -645,39 +765,14 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/creative/pixel-art/SKILL.md"
       },
       {
-        "name": "popular-web-designs",
+        "name": "visual-design-and-prototyping",
         "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/popular-web-designs/SKILL.md"
-      },
-      {
-        "name": "pretext",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/pretext/SKILL.md"
-      },
-      {
-        "name": "sketch",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/sketch/SKILL.md"
-      },
-      {
-        "name": "touchdesigner-mcp",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/ares/skills/creative/touchdesigner-mcp/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/creative/visual-design-and-prototyping/SKILL.md"
       },
       {
         "name": "jupyter-live-kernel",
         "category": "data-science",
         "skill_md": "/root/.hermes/profiles/ares/skills/data-science/jupyter-live-kernel/SKILL.md"
-      },
-      {
-        "name": "kanban-orchestrator",
-        "category": "devops",
-        "skill_md": "/root/.hermes/profiles/ares/skills/devops/kanban-orchestrator/SKILL.md"
-      },
-      {
-        "name": "kanban-worker",
-        "category": "devops",
-        "skill_md": "/root/.hermes/profiles/ares/skills/devops/kanban-worker/SKILL.md"
       },
       {
         "name": "webhook-subscriptions",
@@ -730,21 +825,6 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/mlops/evaluation/lm-evaluation-harness/SKILL.md"
       },
       {
-        "name": "weights-and-biases",
-        "category": "evaluation",
-        "skill_md": "/root/.hermes/profiles/ares/skills/mlops/evaluation/weights-and-biases/SKILL.md"
-      },
-      {
-        "name": "huggingface-hub",
-        "category": "mlops",
-        "skill_md": "/root/.hermes/profiles/ares/skills/mlops/huggingface-hub/SKILL.md"
-      },
-      {
-        "name": "llama-cpp",
-        "category": "inference",
-        "skill_md": "/root/.hermes/profiles/ares/skills/mlops/inference/llama-cpp/SKILL.md"
-      },
-      {
         "name": "obliteratus",
         "category": "inference",
         "skill_md": "/root/.hermes/profiles/ares/skills/mlops/inference/obliteratus/SKILL.md"
@@ -758,6 +838,11 @@
         "name": "vllm",
         "category": "inference",
         "skill_md": "/root/.hermes/profiles/ares/skills/mlops/inference/vllm/SKILL.md"
+      },
+      {
+        "name": "mlops-model-lifecycle",
+        "category": "mlops",
+        "skill_md": "/root/.hermes/profiles/ares/skills/mlops/mlops-model-lifecycle/SKILL.md"
       },
       {
         "name": "audiocraft",
@@ -820,6 +905,11 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/productivity/airtable/SKILL.md"
       },
       {
+        "name": "document-and-office-operations",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/ares/skills/productivity/document-and-office-operations/SKILL.md"
+      },
+      {
         "name": "google-workspace",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/ares/skills/productivity/google-workspace/SKILL.md"
@@ -835,24 +925,9 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/productivity/maps/SKILL.md"
       },
       {
-        "name": "nano-pdf",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/ares/skills/productivity/nano-pdf/SKILL.md"
-      },
-      {
         "name": "notion",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/ares/skills/productivity/notion/SKILL.md"
-      },
-      {
-        "name": "ocr-and-documents",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/ares/skills/productivity/ocr-and-documents/SKILL.md"
-      },
-      {
-        "name": "powerpoint",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/ares/skills/productivity/powerpoint/SKILL.md"
       },
       {
         "name": "teams-meeting-pipeline",
@@ -868,11 +943,6 @@
         "name": "research-intelligence",
         "category": "research",
         "skill_md": "/root/.hermes/profiles/ares/skills/research/research-intelligence/SKILL.md"
-      },
-      {
-        "name": "research-paper-writing",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/ares/skills/research/research-paper-writing/SKILL.md"
       },
       {
         "name": "openhue",
@@ -915,34 +985,14 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/software-development/python-debugpy/SKILL.md"
       },
       {
-        "name": "requesting-code-review",
+        "name": "software-delivery-methods",
         "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/ares/skills/software-development/requesting-code-review/SKILL.md"
-      },
-      {
-        "name": "simplify-code",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/ares/skills/software-development/simplify-code/SKILL.md"
-      },
-      {
-        "name": "spike",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/ares/skills/software-development/spike/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/software-development/software-delivery-methods/SKILL.md"
       },
       {
         "name": "subagent-driven-development",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/ares/skills/software-development/subagent-driven-development/SKILL.md"
-      },
-      {
-        "name": "systematic-debugging",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/ares/skills/software-development/systematic-debugging/SKILL.md"
-      },
-      {
-        "name": "test-driven-development",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/ares/skills/software-development/test-driven-development/SKILL.md"
       },
       {
         "name": "writing-plans",
@@ -962,6 +1012,156 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/apple/apple-services/SKILL.md"
       },
       {
+        "name": "architecture-diagram",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/creative/architecture-diagram/SKILL.md"
+      },
+      {
+        "name": "ascii-art",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/creative/ascii-art/SKILL.md"
+      },
+      {
+        "name": "ascii-video",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/creative/ascii-video/SKILL.md"
+      },
+      {
+        "name": "baoyu-infographic",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/creative/baoyu-infographic/SKILL.md"
+      },
+      {
+        "name": "claude-design",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/creative/claude-design/SKILL.md"
+      },
+      {
+        "name": "excalidraw",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/creative/excalidraw/SKILL.md"
+      },
+      {
+        "name": "popular-web-designs",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/creative/popular-web-designs/SKILL.md"
+      },
+      {
+        "name": "pretext",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/creative/pretext/SKILL.md"
+      },
+      {
+        "name": "sketch",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/creative/sketch/SKILL.md"
+      },
+      {
+        "name": "songwriting-and-ai-music",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/creative/songwriting-and-ai-music/SKILL.md"
+      },
+      {
+        "name": "gif-search",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/media/gif-search/SKILL.md"
+      },
+      {
+        "name": "heartmula",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/media/heartmula/SKILL.md"
+      },
+      {
+        "name": "songsee",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/media/songsee/SKILL.md"
+      },
+      {
+        "name": "youtube-content",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/media/youtube-content/SKILL.md"
+      },
+      {
+        "name": "lm-evaluation-harness",
+        "category": "evaluation",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/mlops/evaluation/lm-evaluation-harness/SKILL.md"
+      },
+      {
+        "name": "weights-and-biases",
+        "category": "evaluation",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/mlops/evaluation/weights-and-biases/SKILL.md"
+      },
+      {
+        "name": "huggingface-hub",
+        "category": "mlops",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/mlops/huggingface-hub/SKILL.md"
+      },
+      {
+        "name": "llama-cpp",
+        "category": "inference",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/mlops/inference/llama-cpp/SKILL.md"
+      },
+      {
+        "name": "vllm",
+        "category": "inference",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/mlops/inference/vllm/SKILL.md"
+      },
+      {
+        "name": "audiocraft",
+        "category": "models",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/mlops/models/audiocraft/SKILL.md"
+      },
+      {
+        "name": "segment-anything",
+        "category": "models",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/mlops/models/segment-anything/SKILL.md"
+      },
+      {
+        "name": "arxiv",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/research/arxiv/SKILL.md"
+      },
+      {
+        "name": "blogwatcher",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/research/blogwatcher/SKILL.md"
+      },
+      {
+        "name": "llm-wiki",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/research/llm-wiki/SKILL.md"
+      },
+      {
+        "name": "polymarket",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/research/polymarket/SKILL.md"
+      },
+      {
+        "name": "requesting-code-review",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/software-development/requesting-code-review/SKILL.md"
+      },
+      {
+        "name": "simplify-code",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/software-development/simplify-code/SKILL.md"
+      },
+      {
+        "name": "spike",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/software-development/spike/SKILL.md"
+      },
+      {
+        "name": "systematic-debugging",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/software-development/systematic-debugging/SKILL.md"
+      },
+      {
+        "name": "test-driven-development",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/atena/skills/.archive/software-development/test-driven-development/SKILL.md"
+      },
+      {
         "name": "autonomous-coding-agents",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/autonomous-coding-agents/SKILL.md"
@@ -972,19 +1172,9 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
       },
       {
-        "name": "architecture-diagram",
+        "name": "ascii-media",
         "category": "creative",
-        "skill_md": "/root/.hermes/profiles/atena/skills/creative/architecture-diagram/SKILL.md"
-      },
-      {
-        "name": "ascii-art",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/atena/skills/creative/ascii-art/SKILL.md"
-      },
-      {
-        "name": "ascii-video",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/atena/skills/creative/ascii-video/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/atena/skills/creative/ascii-media/SKILL.md"
       },
       {
         "name": "baoyu-article-illustrator",
@@ -997,14 +1187,9 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/baoyu-comic/SKILL.md"
       },
       {
-        "name": "baoyu-infographic",
+        "name": "baoyu-visual-content",
         "category": "creative",
-        "skill_md": "/root/.hermes/profiles/atena/skills/creative/baoyu-infographic/SKILL.md"
-      },
-      {
-        "name": "claude-design",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/atena/skills/creative/claude-design/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/atena/skills/creative/baoyu-visual-content/SKILL.md"
       },
       {
         "name": "comfyui",
@@ -1022,9 +1207,9 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/design-md/SKILL.md"
       },
       {
-        "name": "excalidraw",
+        "name": "html-design-prototyping",
         "category": "creative",
-        "skill_md": "/root/.hermes/profiles/atena/skills/creative/excalidraw/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/atena/skills/creative/html-design-prototyping/SKILL.md"
       },
       {
         "name": "humanizer",
@@ -1047,29 +1232,14 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/pixel-art/SKILL.md"
       },
       {
-        "name": "popular-web-designs",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/atena/skills/creative/popular-web-designs/SKILL.md"
-      },
-      {
-        "name": "pretext",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/atena/skills/creative/pretext/SKILL.md"
-      },
-      {
-        "name": "sketch",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/atena/skills/creative/sketch/SKILL.md"
-      },
-      {
-        "name": "songwriting-and-ai-music",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/atena/skills/creative/songwriting-and-ai-music/SKILL.md"
-      },
-      {
         "name": "touchdesigner-mcp",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/atena/skills/creative/touchdesigner-mcp/SKILL.md"
+      },
+      {
+        "name": "visual-diagramming",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/atena/skills/creative/visual-diagramming/SKILL.md"
       },
       {
         "name": "jupyter-live-kernel",
@@ -1122,49 +1292,14 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/mcp/native-mcp/SKILL.md"
       },
       {
-        "name": "gif-search",
+        "name": "media-operations",
         "category": "media",
-        "skill_md": "/root/.hermes/profiles/atena/skills/media/gif-search/SKILL.md"
-      },
-      {
-        "name": "heartmula",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/atena/skills/media/heartmula/SKILL.md"
-      },
-      {
-        "name": "songsee",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/atena/skills/media/songsee/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/atena/skills/media/media-operations/SKILL.md"
       },
       {
         "name": "spotify",
         "category": "media",
         "skill_md": "/root/.hermes/profiles/atena/skills/media/spotify/SKILL.md"
-      },
-      {
-        "name": "youtube-content",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/atena/skills/media/youtube-content/SKILL.md"
-      },
-      {
-        "name": "lm-evaluation-harness",
-        "category": "evaluation",
-        "skill_md": "/root/.hermes/profiles/atena/skills/mlops/evaluation/lm-evaluation-harness/SKILL.md"
-      },
-      {
-        "name": "weights-and-biases",
-        "category": "evaluation",
-        "skill_md": "/root/.hermes/profiles/atena/skills/mlops/evaluation/weights-and-biases/SKILL.md"
-      },
-      {
-        "name": "huggingface-hub",
-        "category": "mlops",
-        "skill_md": "/root/.hermes/profiles/atena/skills/mlops/huggingface-hub/SKILL.md"
-      },
-      {
-        "name": "llama-cpp",
-        "category": "inference",
-        "skill_md": "/root/.hermes/profiles/atena/skills/mlops/inference/llama-cpp/SKILL.md"
       },
       {
         "name": "obliteratus",
@@ -1177,19 +1312,14 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/mlops/inference/outlines/SKILL.md"
       },
       {
-        "name": "vllm",
-        "category": "inference",
-        "skill_md": "/root/.hermes/profiles/atena/skills/mlops/inference/vllm/SKILL.md"
+        "name": "mlops-evaluation-tracking",
+        "category": "mlops",
+        "skill_md": "/root/.hermes/profiles/atena/skills/mlops/mlops-evaluation-tracking/SKILL.md"
       },
       {
-        "name": "audiocraft",
-        "category": "models",
-        "skill_md": "/root/.hermes/profiles/atena/skills/mlops/models/audiocraft/SKILL.md"
-      },
-      {
-        "name": "segment-anything",
-        "category": "models",
-        "skill_md": "/root/.hermes/profiles/atena/skills/mlops/models/segment-anything/SKILL.md"
+        "name": "mlops-inference-serving",
+        "category": "mlops",
+        "skill_md": "/root/.hermes/profiles/atena/skills/mlops/mlops-inference-serving/SKILL.md"
       },
       {
         "name": "dspy",
@@ -1272,24 +1402,9 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/red-teaming/godmode/SKILL.md"
       },
       {
-        "name": "arxiv",
+        "name": "research-intelligence",
         "category": "research",
-        "skill_md": "/root/.hermes/profiles/atena/skills/research/arxiv/SKILL.md"
-      },
-      {
-        "name": "blogwatcher",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/atena/skills/research/blogwatcher/SKILL.md"
-      },
-      {
-        "name": "llm-wiki",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/atena/skills/research/llm-wiki/SKILL.md"
-      },
-      {
-        "name": "polymarket",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/atena/skills/research/polymarket/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/atena/skills/research/research-intelligence/SKILL.md"
       },
       {
         "name": "research-paper-writing",
@@ -1312,34 +1427,14 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/software-development/plan/SKILL.md"
       },
       {
-        "name": "requesting-code-review",
+        "name": "software-quality-workflows",
         "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/requesting-code-review/SKILL.md"
-      },
-      {
-        "name": "simplify-code",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/simplify-code/SKILL.md"
-      },
-      {
-        "name": "spike",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/spike/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/software-quality-workflows/SKILL.md"
       },
       {
         "name": "subagent-driven-development",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/atena/skills/software-development/subagent-driven-development/SKILL.md"
-      },
-      {
-        "name": "systematic-debugging",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/systematic-debugging/SKILL.md"
-      },
-      {
-        "name": "test-driven-development",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/atena/skills/software-development/test-driven-development/SKILL.md"
       },
       {
         "name": "writing-plans",
@@ -1404,6 +1499,11 @@
         "skill_md": "/root/.hermes/profiles/hera/skills/.archive/autonomous-ai-agents/opencode/SKILL.md"
       },
       {
+        "name": "architecture-diagram",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/architecture-diagram/SKILL.md"
+      },
+      {
         "name": "ascii-art",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/ascii-art/SKILL.md"
@@ -1424,9 +1524,29 @@
         "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/baoyu-infographic/SKILL.md"
       },
       {
+        "name": "popular-web-designs",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/popular-web-designs/SKILL.md"
+      },
+      {
+        "name": "sketch",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/sketch/SKILL.md"
+      },
+      {
         "name": "songwriting-and-ai-music",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/hera/skills/.archive/creative/songwriting-and-ai-music/SKILL.md"
+      },
+      {
+        "name": "kanban-orchestrator",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/devops/kanban-orchestrator/SKILL.md"
+      },
+      {
+        "name": "kanban-worker",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/devops/kanban-worker/SKILL.md"
       },
       {
         "name": "codebase-inspection",
@@ -1459,9 +1579,34 @@
         "skill_md": "/root/.hermes/profiles/hera/skills/.archive/github/github-repo-management/SKILL.md"
       },
       {
+        "name": "gif-search",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/media/gif-search/SKILL.md"
+      },
+      {
         "name": "heartmula",
         "category": "media",
         "skill_md": "/root/.hermes/profiles/hera/skills/.archive/media/heartmula/SKILL.md"
+      },
+      {
+        "name": "songsee",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/media/songsee/SKILL.md"
+      },
+      {
+        "name": "youtube-content",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/media/youtube-content/SKILL.md"
+      },
+      {
+        "name": "lm-evaluation-harness",
+        "category": "evaluation",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/mlops/evaluation/lm-evaluation-harness/SKILL.md"
+      },
+      {
+        "name": "weights-and-biases",
+        "category": "evaluation",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/mlops/evaluation/weights-and-biases/SKILL.md"
       },
       {
         "name": "huggingface-hub",
@@ -1484,9 +1629,64 @@
         "skill_md": "/root/.hermes/profiles/hera/skills/.archive/mlops/models/audiocraft/SKILL.md"
       },
       {
+        "name": "nano-pdf",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/productivity/nano-pdf/SKILL.md"
+      },
+      {
+        "name": "ocr-and-documents",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/productivity/ocr-and-documents/SKILL.md"
+      },
+      {
+        "name": "powerpoint",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/productivity/powerpoint/SKILL.md"
+      },
+      {
+        "name": "arxiv",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/research/arxiv/SKILL.md"
+      },
+      {
+        "name": "blogwatcher",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/research/blogwatcher/SKILL.md"
+      },
+      {
+        "name": "polymarket",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/research/polymarket/SKILL.md"
+      },
+      {
+        "name": "node-inspect-debugger",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/software-development/node-inspect-debugger/SKILL.md"
+      },
+      {
+        "name": "python-debugpy",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/software-development/python-debugpy/SKILL.md"
+      },
+      {
         "name": "requesting-code-review",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/hera/skills/.archive/software-development/requesting-code-review/SKILL.md"
+      },
+      {
+        "name": "simplify-code",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/software-development/simplify-code/SKILL.md"
+      },
+      {
+        "name": "spike",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/software-development/spike/SKILL.md"
+      },
+      {
+        "name": "test-driven-development",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/hera/skills/.archive/software-development/test-driven-development/SKILL.md"
       },
       {
         "name": "ai-coding-agents",
@@ -1507,11 +1707,6 @@
         "name": "openhands",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/hera/skills/autonomous-ai-agents/openhands/SKILL.md"
-      },
-      {
-        "name": "architecture-diagram",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/architecture-diagram/SKILL.md"
       },
       {
         "name": "ascii-video",
@@ -1574,19 +1769,9 @@
         "skill_md": "/root/.hermes/profiles/hera/skills/creative/pixel-art/SKILL.md"
       },
       {
-        "name": "popular-web-designs",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/popular-web-designs/SKILL.md"
-      },
-      {
         "name": "pretext",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/hera/skills/creative/pretext/SKILL.md"
-      },
-      {
-        "name": "sketch",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/sketch/SKILL.md"
       },
       {
         "name": "touchdesigner-mcp",
@@ -1599,14 +1784,9 @@
         "skill_md": "/root/.hermes/profiles/hera/skills/data-science/jupyter-live-kernel/SKILL.md"
       },
       {
-        "name": "kanban-orchestrator",
+        "name": "kanban-workflows",
         "category": "devops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/devops/kanban-orchestrator/SKILL.md"
-      },
-      {
-        "name": "kanban-worker",
-        "category": "devops",
-        "skill_md": "/root/.hermes/profiles/hera/skills/devops/kanban-worker/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/hera/skills/devops/kanban-workflows/SKILL.md"
       },
       {
         "name": "webhook-subscriptions",
@@ -1649,34 +1829,14 @@
         "skill_md": "/root/.hermes/profiles/hera/skills/media/ai-music-audio-generation/SKILL.md"
       },
       {
-        "name": "gif-search",
+        "name": "media-content-tools",
         "category": "media",
-        "skill_md": "/root/.hermes/profiles/hera/skills/media/gif-search/SKILL.md"
-      },
-      {
-        "name": "songsee",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/hera/skills/media/songsee/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/hera/skills/media/media-content-tools/SKILL.md"
       },
       {
         "name": "spotify",
         "category": "media",
         "skill_md": "/root/.hermes/profiles/hera/skills/media/spotify/SKILL.md"
-      },
-      {
-        "name": "youtube-content",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/hera/skills/media/youtube-content/SKILL.md"
-      },
-      {
-        "name": "lm-evaluation-harness",
-        "category": "evaluation",
-        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/evaluation/lm-evaluation-harness/SKILL.md"
-      },
-      {
-        "name": "weights-and-biases",
-        "category": "evaluation",
-        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/evaluation/weights-and-biases/SKILL.md"
       },
       {
         "name": "obliteratus",
@@ -1692,6 +1852,11 @@
         "name": "llm-inference-serving",
         "category": "mlops",
         "skill_md": "/root/.hermes/profiles/hera/skills/mlops/llm-inference-serving/SKILL.md"
+      },
+      {
+        "name": "ml-evaluation-and-tracking",
+        "category": "mlops",
+        "skill_md": "/root/.hermes/profiles/hera/skills/mlops/ml-evaluation-and-tracking/SKILL.md"
       },
       {
         "name": "segment-anything",
@@ -1759,6 +1924,11 @@
         "skill_md": "/root/.hermes/profiles/hera/skills/productivity/apple-automation/SKILL.md"
       },
       {
+        "name": "document-processing",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/document-processing/SKILL.md"
+      },
+      {
         "name": "google-workspace",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/hera/skills/productivity/google-workspace/SKILL.md"
@@ -1774,24 +1944,9 @@
         "skill_md": "/root/.hermes/profiles/hera/skills/productivity/maps/SKILL.md"
       },
       {
-        "name": "nano-pdf",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/nano-pdf/SKILL.md"
-      },
-      {
         "name": "notion",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/hera/skills/productivity/notion/SKILL.md"
-      },
-      {
-        "name": "ocr-and-documents",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/ocr-and-documents/SKILL.md"
-      },
-      {
-        "name": "powerpoint",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/hera/skills/productivity/powerpoint/SKILL.md"
       },
       {
         "name": "teams-meeting-pipeline",
@@ -1804,29 +1959,19 @@
         "skill_md": "/root/.hermes/profiles/hera/skills/red-teaming/godmode/SKILL.md"
       },
       {
-        "name": "arxiv",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/hera/skills/research/arxiv/SKILL.md"
-      },
-      {
-        "name": "blogwatcher",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/hera/skills/research/blogwatcher/SKILL.md"
-      },
-      {
         "name": "llm-wiki",
         "category": "research",
         "skill_md": "/root/.hermes/profiles/hera/skills/research/llm-wiki/SKILL.md"
       },
       {
-        "name": "polymarket",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/hera/skills/research/polymarket/SKILL.md"
-      },
-      {
         "name": "research-paper-writing",
         "category": "research",
         "skill_md": "/root/.hermes/profiles/hera/skills/research/research-paper-writing/SKILL.md"
+      },
+      {
+        "name": "research-sources",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/hera/skills/research/research-sources/SKILL.md"
       },
       {
         "name": "openhue",
@@ -1859,29 +2004,9 @@
         "skill_md": "/root/.hermes/profiles/hera/skills/software-development/local-browser-automation/SKILL.md"
       },
       {
-        "name": "node-inspect-debugger",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/node-inspect-debugger/SKILL.md"
-      },
-      {
         "name": "plan",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/hera/skills/software-development/plan/SKILL.md"
-      },
-      {
-        "name": "python-debugpy",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/python-debugpy/SKILL.md"
-      },
-      {
-        "name": "simplify-code",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/simplify-code/SKILL.md"
-      },
-      {
-        "name": "spike",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/spike/SKILL.md"
       },
       {
         "name": "subagent-driven-development",
@@ -1892,11 +2017,6 @@
         "name": "systematic-debugging",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/hera/skills/software-development/systematic-debugging/SKILL.md"
-      },
-      {
-        "name": "test-driven-development",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/hera/skills/software-development/test-driven-development/SKILL.md"
       },
       {
         "name": "writing-plans",
@@ -1951,6 +2071,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/autonomous-ai-agents/opencode/SKILL.md"
       },
       {
+        "name": "architecture-diagram",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/architecture-diagram/SKILL.md"
+      },
+      {
         "name": "ascii-art",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/ascii-art/SKILL.md"
@@ -1971,9 +2096,49 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/baoyu-infographic/SKILL.md"
       },
       {
+        "name": "claude-design",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/claude-design/SKILL.md"
+      },
+      {
+        "name": "design-md",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/design-md/SKILL.md"
+      },
+      {
+        "name": "excalidraw",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/excalidraw/SKILL.md"
+      },
+      {
+        "name": "popular-web-designs",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/popular-web-designs/SKILL.md"
+      },
+      {
+        "name": "sketch",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/sketch/SKILL.md"
+      },
+      {
         "name": "songwriting-and-ai-music",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/songwriting-and-ai-music/SKILL.md"
+      },
+      {
+        "name": "kanban-orchestrator",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/devops/kanban-orchestrator/SKILL.md"
+      },
+      {
+        "name": "kanban-worker",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/devops/kanban-worker/SKILL.md"
+      },
+      {
+        "name": "himalaya",
+        "category": "email",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/email/himalaya/SKILL.md"
       },
       {
         "name": "codebase-inspection",
@@ -2006,9 +2171,34 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-repo-management/SKILL.md"
       },
       {
+        "name": "gif-search",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/media/gif-search/SKILL.md"
+      },
+      {
         "name": "heartmula",
         "category": "media",
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/media/heartmula/SKILL.md"
+      },
+      {
+        "name": "songsee",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/media/songsee/SKILL.md"
+      },
+      {
+        "name": "youtube-content",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/media/youtube-content/SKILL.md"
+      },
+      {
+        "name": "lm-evaluation-harness",
+        "category": "evaluation",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/evaluation/lm-evaluation-harness/SKILL.md"
+      },
+      {
+        "name": "weights-and-biases",
+        "category": "evaluation",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/evaluation/weights-and-biases/SKILL.md"
       },
       {
         "name": "huggingface-hub",
@@ -2031,9 +2221,99 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/models/audiocraft/SKILL.md"
       },
       {
+        "name": "obsidian",
+        "category": "note-taking",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/note-taking/obsidian/SKILL.md"
+      },
+      {
+        "name": "airtable",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/airtable/SKILL.md"
+      },
+      {
+        "name": "google-workspace",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/google-workspace/SKILL.md"
+      },
+      {
+        "name": "nano-pdf",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/nano-pdf/SKILL.md"
+      },
+      {
+        "name": "notion",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/notion/SKILL.md"
+      },
+      {
+        "name": "ocr-and-documents",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/ocr-and-documents/SKILL.md"
+      },
+      {
+        "name": "powerpoint",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/powerpoint/SKILL.md"
+      },
+      {
+        "name": "teams-meeting-pipeline",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/teams-meeting-pipeline/SKILL.md"
+      },
+      {
+        "name": "arxiv",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/research/arxiv/SKILL.md"
+      },
+      {
+        "name": "blogwatcher",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/research/blogwatcher/SKILL.md"
+      },
+      {
+        "name": "llm-wiki",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/research/llm-wiki/SKILL.md"
+      },
+      {
+        "name": "polymarket",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/research/polymarket/SKILL.md"
+      },
+      {
+        "name": "node-inspect-debugger",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/node-inspect-debugger/SKILL.md"
+      },
+      {
+        "name": "python-debugpy",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/python-debugpy/SKILL.md"
+      },
+      {
         "name": "requesting-code-review",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/requesting-code-review/SKILL.md"
+      },
+      {
+        "name": "simplify-code",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/simplify-code/SKILL.md"
+      },
+      {
+        "name": "spike",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/spike/SKILL.md"
+      },
+      {
+        "name": "systematic-debugging",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/systematic-debugging/SKILL.md"
+      },
+      {
+        "name": "test-driven-development",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/test-driven-development/SKILL.md"
       },
       {
         "name": "ai-coding-agents",
@@ -2056,11 +2336,6 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/openhands/SKILL.md"
       },
       {
-        "name": "architecture-diagram",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/architecture-diagram/SKILL.md"
-      },
-      {
         "name": "ascii-video",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/ascii-video/SKILL.md"
@@ -2069,11 +2344,6 @@
         "name": "baoyu-visual-content",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/baoyu-visual-content/SKILL.md"
-      },
-      {
-        "name": "claude-design",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/claude-design/SKILL.md"
       },
       {
         "name": "comfyui",
@@ -2086,14 +2356,9 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/creative-ideation/SKILL.md"
       },
       {
-        "name": "design-md",
+        "name": "creative-output-design",
         "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/design-md/SKILL.md"
-      },
-      {
-        "name": "excalidraw",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/excalidraw/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/creative-output-design/SKILL.md"
       },
       {
         "name": "humanizer",
@@ -2116,19 +2381,9 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/pixel-art/SKILL.md"
       },
       {
-        "name": "popular-web-designs",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/popular-web-designs/SKILL.md"
-      },
-      {
         "name": "pretext",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/pretext/SKILL.md"
-      },
-      {
-        "name": "sketch",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/sketch/SKILL.md"
       },
       {
         "name": "touchdesigner-mcp",
@@ -2141,14 +2396,9 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/data-science/jupyter-live-kernel/SKILL.md"
       },
       {
-        "name": "kanban-orchestrator",
+        "name": "kanban-workflows",
         "category": "devops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/devops/kanban-orchestrator/SKILL.md"
-      },
-      {
-        "name": "kanban-worker",
-        "category": "devops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/devops/kanban-worker/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/devops/kanban-workflows/SKILL.md"
       },
       {
         "name": "webhook-subscriptions",
@@ -2159,11 +2409,6 @@
         "name": "dogfood",
         "category": "",
         "skill_md": "/root/.hermes/profiles/zeus/skills/dogfood/SKILL.md"
-      },
-      {
-        "name": "himalaya",
-        "category": "email",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/email/himalaya/SKILL.md"
       },
       {
         "name": "minecraft-modpack-server",
@@ -2191,34 +2436,14 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/media/ai-music-audio-generation/SKILL.md"
       },
       {
-        "name": "gif-search",
+        "name": "media-content-processing",
         "category": "media",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/media/gif-search/SKILL.md"
-      },
-      {
-        "name": "songsee",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/media/songsee/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/media/media-content-processing/SKILL.md"
       },
       {
         "name": "spotify",
         "category": "media",
         "skill_md": "/root/.hermes/profiles/zeus/skills/media/spotify/SKILL.md"
-      },
-      {
-        "name": "youtube-content",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/media/youtube-content/SKILL.md"
-      },
-      {
-        "name": "lm-evaluation-harness",
-        "category": "evaluation",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/evaluation/lm-evaluation-harness/SKILL.md"
-      },
-      {
-        "name": "weights-and-biases",
-        "category": "evaluation",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/evaluation/weights-and-biases/SKILL.md"
       },
       {
         "name": "obliteratus",
@@ -2234,6 +2459,11 @@
         "name": "llm-inference-serving",
         "category": "mlops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/llm-inference-serving/SKILL.md"
+      },
+      {
+        "name": "mlops-evaluation-and-tracking",
+        "category": "mlops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/mlops-evaluation-and-tracking/SKILL.md"
       },
       {
         "name": "segment-anything",
@@ -2259,11 +2489,6 @@
         "name": "unsloth",
         "category": "training",
         "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/training/unsloth/SKILL.md"
-      },
-      {
-        "name": "obsidian",
-        "category": "note-taking",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/note-taking/obsidian/SKILL.md"
       },
       {
         "name": "discord-ops",
@@ -2296,19 +2521,14 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/SKILL.md"
       },
       {
-        "name": "airtable",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/airtable/SKILL.md"
-      },
-      {
         "name": "apple-automation",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/apple-automation/SKILL.md"
       },
       {
-        "name": "google-workspace",
+        "name": "documents-and-presentations",
         "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/google-workspace/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/documents-and-presentations/SKILL.md"
       },
       {
         "name": "linear",
@@ -2321,29 +2541,9 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/maps/SKILL.md"
       },
       {
-        "name": "nano-pdf",
+        "name": "productivity-workspace-apis",
         "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/nano-pdf/SKILL.md"
-      },
-      {
-        "name": "notion",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/notion/SKILL.md"
-      },
-      {
-        "name": "ocr-and-documents",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/ocr-and-documents/SKILL.md"
-      },
-      {
-        "name": "powerpoint",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/powerpoint/SKILL.md"
-      },
-      {
-        "name": "teams-meeting-pipeline",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/teams-meeting-pipeline/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/productivity-workspace-apis/SKILL.md"
       },
       {
         "name": "godmode",
@@ -2351,24 +2551,9 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/red-teaming/godmode/SKILL.md"
       },
       {
-        "name": "arxiv",
+        "name": "research-intelligence-workflows",
         "category": "research",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/research/arxiv/SKILL.md"
-      },
-      {
-        "name": "blogwatcher",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/research/blogwatcher/SKILL.md"
-      },
-      {
-        "name": "llm-wiki",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/research/llm-wiki/SKILL.md"
-      },
-      {
-        "name": "polymarket",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/research/polymarket/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/research/research-intelligence-workflows/SKILL.md"
       },
       {
         "name": "research-paper-writing",
@@ -2406,44 +2591,19 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/local-browser-automation/SKILL.md"
       },
       {
-        "name": "node-inspect-debugger",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/node-inspect-debugger/SKILL.md"
-      },
-      {
         "name": "plan",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/plan/SKILL.md"
       },
       {
-        "name": "python-debugpy",
+        "name": "software-development-methods",
         "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/python-debugpy/SKILL.md"
-      },
-      {
-        "name": "simplify-code",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/simplify-code/SKILL.md"
-      },
-      {
-        "name": "spike",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/spike/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/software-development-methods/SKILL.md"
       },
       {
         "name": "subagent-driven-development",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/subagent-driven-development/SKILL.md"
-      },
-      {
-        "name": "systematic-debugging",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/systematic-debugging/SKILL.md"
-      },
-      {
-        "name": "test-driven-development",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/test-driven-development/SKILL.md"
       },
       {
         "name": "writing-plans",
@@ -2467,8 +2627,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "1c1fe4658b0c79490ab05b26f153a7fa",
-      "modified_at": "2026-06-10T04:56:01-04:00"
+      "md5": "0e0dcd62eab7f83293283d74631afd6b",
+      "modified_at": "2026-06-11T04:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -2479,32 +2639,32 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "b1e5131c526196ee1d8dd0d02c58e204",
-      "modified_at": "2026-06-10T05:00:01-04:00"
+      "md5": "d8e37ce81680b849911595325b4997b8",
+      "modified_at": "2026-06-11T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "39586b02b4d0282418c95ad7c415438b",
-      "modified_at": "2026-06-10T02:53:41-04:00"
+      "md5": "365c9b29cab4eaed7a45bd8dfb3f75cc",
+      "modified_at": "2026-06-11T02:55:34-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 10330,
-      "md5": "4237a031852bb908d73d1ce2d80c439b",
-      "modified_at": "2026-06-10T05:00:01-04:00"
+      "size_bytes": 10975,
+      "md5": "665ed77b82a45dec39f432c87d083b61",
+      "modified_at": "2026-06-11T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 329,
-      "md5": "cb93e172ca2a98b417c2c994d913e512",
-      "modified_at": "2026-06-09T20:37:02-04:00"
+      "size_bytes": 327,
+      "md5": "46006fb978e73bb22aac4144ca42e1f1",
+      "modified_at": "2026-06-10T20:37:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 91068,
-      "md5": "af16e8e22fbcf96367fc76f975632c44",
-      "modified_at": "2026-06-09T05:00:05-04:00"
+      "size_bytes": 92361,
+      "md5": "a925f4cb77f94330ad38edb3dcaa0916",
+      "modified_at": "2026-06-10T05:00:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -2551,8 +2711,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 1520,
-      "md5": "2e95522c236b59b7ccf1a39fec140276",
-      "modified_at": "2026-06-10T04:56:01-04:00"
+      "md5": "3f618212db78dc8e54cb3e15f40a92f9",
+      "modified_at": "2026-06-11T04:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -2569,8 +2729,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "28484dbf248fbb69e1c9141bdabe19b1",
-      "modified_at": "2026-06-09T20:07:01-04:00"
+      "md5": "db0acb7b21238f0fb5e2b0517c53c680",
+      "modified_at": "2026-06-10T20:07:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -2580,9 +2740,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 18428,
-      "md5": "dd25caa30726f1c22cf5193e185fe290",
-      "modified_at": "2026-06-09T10:24:08-04:00"
+      "size_bytes": 18792,
+      "md5": "6b99e78a40b060348f2d4375565d19e3",
+      "modified_at": "2026-06-10T10:24:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
