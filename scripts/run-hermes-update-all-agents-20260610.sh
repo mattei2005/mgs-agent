@@ -102,7 +102,17 @@ if [[ -f "$REPO/ui-tui/package.json" ]]; then
 fi
 
 log "Applying canonical MGS Hermes patches"
-BASE="$BASE" REPO="$REPO" LOG="$LOG" "$BASE/scripts/ensure-hermes-mgs-patches.sh"
+if ! BASE="$BASE" REPO="$REPO" LOG="$LOG" "$BASE/scripts/ensure-hermes-mgs-patches.sh"; then
+  log "Patch guard failed on canonical patches; trying saved pre-update local diff before failing"
+  if [[ -s "$LOCAL_PATCH" ]] && git -C "$REPO" apply --check "$LOCAL_PATCH" >/dev/null 2>&1; then
+    log "Applying saved local pre-update patch: $LOCAL_PATCH"
+    git -C "$REPO" apply "$LOCAL_PATCH"
+    BASE="$BASE" REPO="$REPO" LOG="$LOG" "$BASE/scripts/ensure-hermes-mgs-patches.sh"
+  else
+    log "Saved local patch not applicable: $LOCAL_PATCH"
+    exit 1
+  fi
+fi
 
 log "Compiling critical files"
 "$PYBIN" -m py_compile \
