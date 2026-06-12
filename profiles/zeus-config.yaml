@@ -215,6 +215,13 @@ auxiliary:
     api_key: ''
     timeout: 30
     extra_body: {}
+  tts_audio_tags:
+    provider: auto
+    model: ''
+    base_url: ''
+    api_key: ''
+    timeout: 30
+    extra_body: {}
   triage_specifier:
     provider: openai-codex
     model: gpt-5.5
@@ -331,6 +338,11 @@ tts:
   openai:
     model: gpt-4o-mini-tts
     voice: alloy
+  gemini:
+    model: gemini-2.5-flash-preview-tts
+    voice: Kore
+    audio_tags: false
+    persona_prompt_file: ''
   xai:
     voice_id: eve
     language: en
@@ -377,6 +389,7 @@ context:
 memory:
   memory_enabled: true
   user_profile_enabled: true
+  write_approval: false
   memory_char_limit: 2200
   user_char_limit: 1375
   provider: ''
@@ -406,6 +419,7 @@ skills:
   inline_shell: false
   inline_shell_timeout: 10
   guard_agent_created: false
+  write_approval: false
   creation_nudge_interval: 15
   disabled:
   - apple-notes
@@ -680,7 +694,7 @@ secrets:
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 5
 paste_collapse_char_threshold: 2000
-_config_version: 28
+_config_version: 29
 session_reset:
   mode: both
   idle_minutes: 1440
