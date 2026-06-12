@@ -106,7 +106,7 @@ Pick small deterministic probes; do not run full production workflows unless ask
 
 - Web search: use the MGS Brave probe script from this skill.
 - TTS: generate a tiny MP3 and verify file size/header.
-- Image generation: verify **per profile**, not just globally. Hera may be configured correctly while Zeus still falls back to FAL and fails. Summarize `image_gen` for Zeus/Atena/Ares/Hera, then run a tiny `hermes -p <profile> -t image_gen -z ...` only for profiles that are expected to generate images. If Zeus is unconfigured, report it as a functional gap and propose aligning it to Hera (`openai-codex` / `gpt-image-2-medium`) before applying.
+- Image generation: verify **per profile**, not just globally. Hera is the only MGS agent currently expected to generate creative/image assets; Zeus is GM/admin and **does not need image_gen**. Summarize `image_gen` for Zeus/Atena/Ares/Hera, but only treat missing/broken config as a functional gap for profiles whose role requires image generation (currently Hera). Run a tiny `hermes -p <profile> -t image_gen -z ...` only for expected image profiles or when Rodolfo explicitly asks. Do **not** label Zeus image_gen as a failure just because it is unset.
 - MGS OS: parse `data/sites.json` and `data/authorized-users.json`; confirm context files exist; report pending approvals count.
 
 ## Backup inventory after cleanup
