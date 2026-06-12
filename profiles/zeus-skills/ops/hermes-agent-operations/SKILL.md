@@ -301,6 +301,8 @@ Use quando um agente MGS, especialmente Hera/Creative Ops, já conversa em `gpt-
 
 Regra MGS de papel: geração de criativos/imagens é responsabilidade da Hera. Zeus é GM/admin e não precisa de `image_gen`; ausência de `image_gen` no Zeus é estado esperado, não falha funcional. Só configurar Zeus para imagem se Rodolfo pedir explicitamente que Zeus passe a gerar imagem.
 
+Não rodar smoke test de `image_generate` no perfil Zeus por padrão: isso aciona o fallback FAL sem chave, registra erro esperado nos logs e gera ruído de diagnóstico. Para validar imagem, usar Hera (`hermes -p hera -t image_gen ...`) ou apenas verificar a config se o objetivo for revisar Zeus.
+
 Regra principal: **chat/raciocínio e geração de imagem são configurações separadas**. `model.provider: openai-codex` não seleciona automaticamente o backend de imagem. Se `image_gen.provider` estiver ausente, o Hermes mantém fallback histórico para FAL mesmo com plugin `openai-codex` registrado.
 
 Config MGS recomendada para Hera:
