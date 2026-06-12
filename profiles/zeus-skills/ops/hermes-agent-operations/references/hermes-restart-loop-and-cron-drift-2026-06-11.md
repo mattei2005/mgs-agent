@@ -34,13 +34,15 @@ Good pattern:
 
 ## Cron drift discovered
 
-During recovery, root crontab had one operational monitor intentionally/destructively commented out:
+During recovery, root crontab had one operational monitor commented out:
 
 ```text
 # DESARMADO 20260611 pos-update v0.16 -> 1-56/5 * * * * flock -n /var/lock/monitor_service_restarts.lock /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1
 ```
 
 Result: root crons dropped from 20 to 19 active entries, while `monitor-cron-stale-logs` still reported `problems=0` because it accepted the new count. Future post-restart reviews must compare against `docs/CRONS.md`, not just the live crontab count.
+
+**Governance correction from Rodolfo:** do not automatically "fix" a commented/disabled cron. It may be intentionally disabled as part of incident recovery. Treat cron drift as a decision point: report what differs, state whether the script only alerts or mutates state, then ask Rodolfo before re-enabling or disabling. The `monitor-service-restarts` script only alerts; it does not restart services, but restoring it is still Rodolfo's decision.
 
 ## Required post-restart review checks
 
@@ -62,11 +64,13 @@ hermes -p zeus cron list
 /root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh
 ```
 
-Expected root cron line:
+If Rodolfo confirms the restart monitor should be enabled, the expected root cron line is:
 
 ```cron
 1-56/5 * * * * flock -n /var/lock/monitor_service_restarts.lock /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1
 ```
+
+If it is disabled/commented, do **not** restore automatically. First report the drift and ask whether to keep it disabled or re-enable it.
 
 ## Reporting guidance
 
