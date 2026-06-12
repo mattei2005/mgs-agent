@@ -272,6 +272,24 @@ Quando Rodolfo der autonomia explícita para resolver a fila inteira, reduza nar
 Long-runs com centenas de uploads exigem controle de processo único, refresh OAuth em `401`, reconciliação por `queue_id` e limpeza auditada de duplicados: `references/drive-clean-copy-long-run-recovery.md`.
 Para filas longas já aprovadas, usar o padrão de controlador/resume sem upload paralelo: `references/drive-bulk-upload-controller.md`.
 
+### Continuação de classificação após limpeza de duplicatas
+
+Quando a pasta RAW tiver sido parcialmente ajustada a pedido explícito de Rodolfo — por exemplo, vídeos duplicados movidos de `cartao de credito/videos` para `videos2` — sempre recomeçar a classificação com inventário Drive read-only fresco. Não reutilizar CSV anterior para proposta final.
+
+Antes de propor organização final, gerar uma checagem de anomalias/visual para:
+
+```text
+Caso                                | Ação
+------------------------------------|--------------------------------------------------
+JOBS dentro de cartao de credito    | Confirmar visualmente; não forçar como CC
+Idioma UNKNOWN                      | Marcar revisão ou confirmar visualmente
+Placement UNKNOWN / sem dimensão    | Marcar revisão técnica; não inventar placement
+Duplicata MD5 ou mesmo design Canva | Validar visualmente e propor holding folder
+videos2/imagens2 já existentes      | Incluir na auditoria RAW e nos totais
+```
+
+Se Rodolfo pedir explicitamente para mover duplicatas para uma pasta holding (`videos2`, `imagens2`), a sequência segura é: preflight de contagens, sinal de duplicata por design ID/MD5, validação visual em contact sheet, mover via Drive parents PATCH, recontar source/destination e verificar duplicatas restantes. Detalhes: `references/upload-canvas-classification-continuation.md`.
+
 ### Duplicadas visuais no Drive
 
 Quando Rodolfo pedir para identificar criativos iguais com nomes diferentes em `UPLOAD_CANVAS`, faça primeiro análise read-only por comparação visual, não por nome nem apenas MD5. Gere CSV auditável com grupos, `KEEP` e `TRASH_DUPLICATE`; só envie duplicadas para a lixeira depois de confirmação explícita. Para detalhes do fluxo, OAuth fallback e formato de relatório, usar `references/drive-visual-duplicate-cleanup.md`.

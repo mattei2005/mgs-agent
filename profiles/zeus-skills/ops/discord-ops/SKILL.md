@@ -56,7 +56,34 @@ Em canal/thread do Zeus, mensagens de Raquel ou outros participantes podem chega
 - Quando Rodolfo pedir “leia tudo na thread X e veja se faz sentido”, importar a thread em modo read-only e validar claims operacionais contra evidência real antes do veredito: arquivos citados, links no SKILL.md, scripts/runner existentes, commits mencionados e estado git quando relevante. Se outro agente disser “verifiquei”, “salvei”, “linkei” ou “commit criado”, tratar isso como claim verificável, não como fato.
 - Separar claramente `conceito correto` de `implementação pronta`: ex. REC+P1 pode estar certo como desenho/orquestração, mas ainda não estar operacional se falta runner, renderer ou hard gate automatizado.
 - Separar consenso de diferença operacional. Exemplo: “Atena falou como dona do processo; Zeus trouxe evidência técnica e patch concreto.”
-- **Escopo por agente/thread antes de reportar pendências:** ao validar `git status` ou arquivos modificados durante revisão de Atena/Zeus/Ares/Hera, não cite alterações de outro agente como “observação” do assunto atual sem checar se pertencem a outra thread/fluxo. Exemplo validado: `data/ares/creative-inventory/upload-canvas-clean-copy-execution-report.csv` pertence à thread Ares `1508906079642456084` e não deve aparecer em report de reestruturação Atena/REC-P1. Transparência é boa, mas ruído cross-scope confunde o CEO.
+### Escopo por agente/thread antes de reportar pendências
+
+Ao validar `git status` ou arquivos modificados durante revisão de Atena/Zeus/Ares/Hera, não cite alterações de outro agente como “observação” do assunto atual sem checar se pertencem a outra thread/fluxo. Exemplo validado: `data/ares/creative-inventory/upload-canvas-clean-copy-execution-report.csv` pertence à thread Ares `1508906079642456084` e não deve aparecer em report de reestruturação Atena/REC-P1. Transparência é boa, mas ruído cross-scope confunde o CEO.
+
+Regra prática:
+1. Identificar o escopo ativo da thread antes de mencionar arquivos fora dele.
+2. Se um arquivo modificado for de outro agente/área, só reportar se ele bloquear a ação atual.
+3. Caso o usuário corrija o escopo, incorporar imediatamente e manter os reports seguintes restritos ao escopo correto.
+
+### Recuperar e consolidar continuidade de thread grande
+
+Quando Rodolfo disser que quer “continuar de onde paramos” em uma thread longa:
+1. Importar a thread inteira/maior limite via `import-discord-thread.py --profile zeus --limit 1000 '<id-ou-link>'`.
+2. Resumir o histórico em fases, não mensagem por mensagem.
+3. Identificar a última decisão útil, a última execução registrada e o próximo passo operacional.
+4. Verificar documentos de resumo já existentes e corrigir contradições/supersedências. Exemplo: um resumo inicial dizia que P1 usaria `wp:details`, mas a decisão final Tesco/Raquel removeu `details/accordion` e fixou `credit-card_ANTIGO` + `botao normal`.
+5. Registrar audit log quando atualizar docs/resumos derivados.
+
+Formato preferido de report para Rodolfo:
+
+```text
+Thread importada     <id>
+Mensagens lidas      <n>
+Tema                 <tema>
+Ponto atual          <última decisão útil>
+Arquivos afetados    <lista curta>
+Próximo passo        <ação concreta>
+```
 - Se houver divergência, declarar a decisão recomendada sem iniciar conversa agente→agente.
 - Terminar com `Próximo passo pendente:` quando a conversa envolver execução/patch/infra ou quando o veredito concluir que a ideia faz sentido mas ainda falta implementação/teste.
 
@@ -600,15 +627,24 @@ Aplicar mudança de config e restart de gateway só com autorização explícita
 
 ### Leitura sob demanda de threads antigas
 
-Quando Rodolfo perguntar se Zeus consegue ler threads antigas, responder com precisão: Zeus não lê automaticamente qualquer thread antiga pelo contexto ativo. A solução operacional é importar uma thread específica por link/ID via Discord API em modo read-only.
+### Leitura sob demanda de threads antigas
 
-Referência e playbook: `references/discord-thread-importer.md`.
+Quando Rodolfo perguntar se Zeus consegue ler threads antigas, responder com precisão: Zeus não lê automaticamente qualquer thread antiga pelo contexto ativo, **mas consegue importar uma thread específica por link/ID em modo read-only**. Não diga “não consigo ler thread por ID” quando há um ID/link disponível — execute o importador primeiro.
+
+Referências e playbooks:
+- `references/discord-thread-importer.md`
+- `references/discord-thread-import-readonly-correction-2026-06-12.md` — correção validada após Zeus responder incorretamente que não conseguia ler thread por ID.
 
 Fluxo padrão:
 1. Rodolfo fornece link Discord ou thread/channel ID.
-2. Rodar `/root/mgs-agent/scripts/import-discord-thread.py '<link-ou-id>'`.
-3. Ler `/root/mgs-agent/data/discord-thread-imports/<thread_id>.md` para responder.
-4. Manter `data/discord-thread-imports/` local-only no `.gitignore`; não versionar históricos importados.
+2. Rodar `/root/mgs-agent/scripts/import-discord-thread.py --profile zeus --limit 1000 '<link-ou-id>'`.
+3. Ler `/root/mgs-agent/data/discord-thread-imports/<thread_id>.md` ou `.json` para responder.
+4. Se a conversa for grande, preferir `--limit 1000` em vez de `--limit 200` para não perder o começo.
+5. Reportar contagem de mensagens, período, snapshot e modo read-only.
+6. Manter `data/discord-thread-imports/` local-only no `.gitignore`; não versionar históricos importados.
+
+Pitfall crítico: separar “não recebo automaticamente o histórico completo na janela ativa” de “não consigo ler histórico”. A primeira frase é verdadeira; a segunda é falsa quando o bot tem acesso e o importador está disponível.
+5. Manter `data/discord-thread-imports/` local-only no `.gitignore`; não versionar históricos importados.
 
 ---
 
