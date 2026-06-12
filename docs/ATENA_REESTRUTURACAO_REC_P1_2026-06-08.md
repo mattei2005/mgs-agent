@@ -127,18 +127,20 @@ Arquivo:
 
 - `/root/mgs-agent/scripts/mgs-p1-runner.py`
 
-Mudanças:
+Mudanças iniciais:
 
 - Geração de P1 alinhada ao contract v2.
-- Adicionados blocos Details:
-  - Benefits Details
-  - Who Should Use Details
-  - APR / fees / costs
-  - Requirements to Qualify for the Card
-- Mantidos 2 LazyBlocks.
 - Keyword count validado em 5–8 usos.
 - Contagem de keyword ajustada para texto visível, ignorando JSON/LazyBlock/figures.
 - Título/meta ajustados para usar o nome completo do cartão quando couber.
+
+Correção posterior após teste Tesco/Raquel:
+
+- Removida a abordagem de `wp:details` / accordion / menu hambúrguer como padrão da P1.
+- P1 deve conter exatamente 1 LazyBlock `credit-card_ANTIGO` e 1 LazyBlock final `botao normal`.
+- O card da P1 usa o mesmo bloco aprovado do REC, mas com campos/copy próprios para aplicação/conversão externa; não copia automaticamente o conteúdo do REC.
+- O botão final da P1 deve apontar para a URL oficial do emissor; o botão final do REC aponta para a P1 interna.
+- P1 não duplica mais card no fim do artigo.
 
 ### Orchestrator
 
