@@ -106,8 +106,41 @@ Pick small deterministic probes; do not run full production workflows unless ask
 
 - Web search: use the MGS Brave probe script from this skill.
 - TTS: generate a tiny MP3 and verify file size/header.
-- Image generation: for Hera, run a tiny `hermes -p hera -t image_gen -z ...` generation and verify PNG dimensions/size.
+- Image generation: verify **per profile**, not just globally. Hera may be configured correctly while Zeus still falls back to FAL and fails. Summarize `image_gen` for Zeus/Atena/Ares/Hera, then run a tiny `hermes -p <profile> -t image_gen -z ...` only for profiles that are expected to generate images. If Zeus is unconfigured, report it as a functional gap and propose aligning it to Hera (`openai-codex` / `gpt-image-2-medium`) before applying.
 - MGS OS: parse `data/sites.json` and `data/authorized-users.json`; confirm context files exist; report pending approvals count.
+
+## Backup inventory after cleanup
+
+When Rodolfo asks "quais backups tem" after a cleanup/recovery, do not reuse earlier report numbers. Re-scan live state and separate **large restorable profile/backups** from small manifests/patches/crontab backups:
+
+```bash
+du -sh /root/mgs-agent/backups /root/.hermes/backups /root/backups 2>/dev/null
+python3 - <<'PY'
+import os, time
+roots=['/root/mgs-agent','/root/.hermes','/root']
+rows=[]; seen=set()
+for root in roots:
+    for dirpath, dirnames, filenames in os.walk(root):
+        if any(skip in dirpath for skip in ['/node_modules/','/.git/','/venv/','/.cache/uv/']):
+            dirnames[:] = []
+            continue
+        for fn in filenames:
+            p=os.path.join(dirpath, fn)
+            if p in seen: continue
+            seen.add(p)
+            if not any(tok in fn.lower() for tok in ['backup','bak','preupdate','snapshot','.tar','.tgz','.gz','.zip','.patch']):
+                continue
+            try: st=os.stat(p)
+            except OSError: continue
+            if st.st_size >= 10*1024*1024:
+                rows.append((st.st_size, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(st.st_mtime)), p))
+for size, mt, p in sorted(rows, reverse=True):
+    print(f'{size/1024/1024:8.1f} MB | {mt} | {p}')
+print('large_backup_count=', len(rows))
+PY
+```
+
+Report disk (`df -h /`) and explicitly say when `large_backup_count=0`; otherwise stale pre-cleanup numbers can mislead Rodolfo.
 
 ## Delta / "what came new"
 
