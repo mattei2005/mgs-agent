@@ -18,6 +18,7 @@ agent:
   task_completion_guidance: true
   environment_probe: true
   environment_hint: ''
+  coding_context: auto
   gateway_timeout_warning: 900
   clarify_timeout: 600
   gateway_notify_interval: 600
@@ -249,6 +250,13 @@ auxiliary:
     base_url: ''
     api_key: ''
     timeout: 600
+    extra_body: {}
+  monitor:
+    provider: auto
+    model: ''
+    base_url: ''
+    api_key: ''
+    timeout: 60
     extra_body: {}
   session_search:
     provider: openai-codex
@@ -582,14 +590,15 @@ approvals:
   destructive_slash_confirm: false
   gateway_timeout: 900
 command_allowlist:
-- script execution via heredoc
+- script execution via -e/-c flag
+- shell command via -c/-lc flag
 - overwrite system config
-- stop/restart system service
+- script execution via heredoc
 - delete in root path
+- execute_code
+- stop/restart system service
 - kill hermes/gateway process (self-termination)
 - hermes update (restarts gateway, kills running agents)
-- shell command via -c/-lc flag
-- script execution via -e/-c flag
 quick_commands: {}
 hooks: {}
 hooks_auto_accept: false
