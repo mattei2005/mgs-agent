@@ -105,7 +105,7 @@ Do not treat references to Claude/Anthropic inside disabled bundled skills, mode
 Pick small deterministic probes; do not run full production workflows unless asked.
 
 - Web search: use the MGS Brave probe script from this skill.
-- TTS: generate a tiny MP3 and verify file size/header.
+- TTS: do **not** generate or send audio to Rodolfo by default. Rodolfo does not find automatic audio useful; only run a tiny MP3 file/header check when he explicitly asks to validate TTS, and do not attach/send the audio unless requested.
 - Image generation: verify **per profile**, not just globally. Hera is the only MGS agent currently expected to generate creative/image assets; Zeus is GM/admin and **does not need image_gen**. Summarize `image_gen` for Zeus/Atena/Ares/Hera, but only treat missing/broken config as a functional gap for profiles whose role requires image generation (currently Hera). Run a tiny `hermes -p <profile> -t image_gen -z ...` only for expected image profiles or when Rodolfo explicitly asks. Do **not** label Zeus image_gen as a failure just because it is unset.
 - MGS OS: parse `data/sites.json` and `data/authorized-users.json`; confirm context files exist; report pending approvals count.
 
