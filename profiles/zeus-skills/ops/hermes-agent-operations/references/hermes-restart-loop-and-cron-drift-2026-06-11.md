@@ -31,6 +31,7 @@ Good pattern:
 4. The script should restart Atena/Ares/Hera first, then Zeus last, log final statuses, and exit.
 5. After Zeus resumes, inspect the finalizer log and `systemctl show` before doing anything else.
 6. If Zeus is stuck in `deactivating`, use one explicit recovery/finalizer path; do not schedule a new full multi-agent restart every resume.
+7. Runtime guard now required: startup auto-resume must synthesize an `Internal restart recovery checkpoint` message that explicitly says `Do not re-run` prior side-effecting requests (`restart/update/deploy`). Empty auto-resume events are unsafe because they can make the agent continue/reexecute the previous command.
 
 ## Cron drift discovered
 
