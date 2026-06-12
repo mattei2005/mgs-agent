@@ -246,6 +246,43 @@ Correção aplicada:
 - Validação por monkeypatch confirmou que cartão com “everyday purchases” não recebe tag falsa de rewards/purchase, enquanto cartão com oferta promocional de compra recebe `purchase credit card`.
 - Revisão adicional após questionamento do Rodolfo removeu fallback visual falso na P1: LazyBlock não usa mais `Avios rewards`, `rewards credit card` ou travel/cashback como fallback quando o cartão não tem esse benefício confirmado. `tag10`, `tag2` e descriptor agora derivam dos benefícios confirmados do cartão.
 
+## Addendum — Revisão Tesco / Raquel / runners finais
+
+Após teste real com `Tesco Bank Balance Transfer Credit Card`, Rodolfo e Raquel identificaram problemas que exigiam ajuste nos runners/contracts antes de avançar:
+
+- A validação da imagem deve começar no **card isolado**; se o card isolado vier cortado, LazyBlock e featured herdam o erro.
+- REC e P1 usam o mesmo bloco aprovado `credit-card_ANTIGO`, mas com copy/campos próprios para cada etapa; não copiar automaticamente REC → P1.
+- O CTA final deve ser o LazyBlock `botao normal`, não HTML/CSS manual nem hyperlink comum.
+- Benefícios e H3 do REC devem nascer dos fatos reais do cartão atual, nunca de buckets fixos como `Main benefit`, `Financial value`, `Usage convenience` ou `Complementary benefit`.
+- Exemplos dados na conversa não devem virar conteúdo fixo em runner/contract.
+- `Clubcard points` não pode ser interpretado como `Travel rewards`; `points` sozinho não basta para inferir viagem.
+- Remover `{lang}` como variável editorial solta; idioma vem da configuração site/vertical.
+- P1 não deve usar `wp:details`/accordion/menu hambúrguer como padrão no corpo.
+- Bloquear estrutura suja: H2 vazio, CSS/HTML solto de componente, frases fragmentadas, bloco duplicado e idioma misto.
+- P1 deve aprofundar o núcleo do produto, especialmente em balance transfer: janela 0%, taxas, APR após promoção, plano de pagamento e perfil adequado.
+
+Resultado aplicado na conversa:
+
+```text
+Commit registrado na thread: f24cd25
+Arquivos finais citados:
+- scripts/mgs-rec-runner.py
+- scripts/mgs-p1-runner.py
+- skills/content-generate-rec-p1/contracts/cc-rec.md
+- skills/content-generate-rec-p1/contracts/cc-p1.md
+```
+
+Validação final citada na thread:
+
+```text
+REC H3 genérico: removido
+P1 credit-card LazyBlock: 1
+P1 botao normal LazyBlock: 1
+Details/accordion: 0
+Travel rewards falso: 0
+Português hardcoded: 0
+```
+
 ## Observação de escopo
 
 O arquivo abaixo pertence ao contexto/thread Ares `1508906079642456084` e não faz parte desta reestruturação Atena/REC-P1:
