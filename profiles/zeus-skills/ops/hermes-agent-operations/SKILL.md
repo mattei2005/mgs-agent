@@ -299,6 +299,8 @@ Quando Rodolfo disser “GPT-5.5 pra tudo”, “zero Anthropic”, “deleta de
 
 Use quando um agente MGS, especialmente Hera/Creative Ops, já conversa em `gpt-5.5` via `openai-codex`, mas falha ao gerar imagem ou pede `OPENAI_API_KEY`/`FAL_KEY`.
 
+Regra MGS de papel: geração de criativos/imagens é responsabilidade da Hera. Zeus é GM/admin e não precisa de `image_gen`; ausência de `image_gen` no Zeus é estado esperado, não falha funcional. Só configurar Zeus para imagem se Rodolfo pedir explicitamente que Zeus passe a gerar imagem.
+
 Regra principal: **chat/raciocínio e geração de imagem são configurações separadas**. `model.provider: openai-codex` não seleciona automaticamente o backend de imagem. Se `image_gen.provider` estiver ausente, o Hermes mantém fallback histórico para FAL mesmo com plugin `openai-codex` registrado.
 
 Config MGS recomendada para Hera:
