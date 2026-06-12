@@ -77,6 +77,7 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
 apply_patch_if_needed "discord-deterministic-thread-rename-auto-add-users.patch"
 apply_patch_if_needed "planned-restart-auto-resume-active-sessions.patch"
+apply_patch_if_needed "restart-recovery-checkpoint-idempotent.patch"
 apply_patch_if_needed "discord-post-response-thread-title-rename.patch"
 apply_patch_if_needed "discord-report-infra-no-auto-thread.patch"
 
