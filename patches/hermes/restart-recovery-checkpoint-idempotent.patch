@@ -1,8 +1,8 @@
 diff --git a/gateway/run.py b/gateway/run.py
+index 817c8441b..d2cf5d303 100644
 --- a/gateway/run.py
 +++ b/gateway/run.py
-@@ -4499,10 +4499,13 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
-         ``resume_pending`` already preserves the transcript AND the existing
+@@ -4500,8 +4500,11 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
          ``_is_resume_pending`` branch in ``_handle_message_with_agent``
          injects a reason-aware recovery system note on the next turn.  This
          method closes the UX gap by synthesizing that next turn once
@@ -13,7 +13,13 @@ diff --git a/gateway/run.py b/gateway/run.py
 +        incident, empty auto-resume events could cause an agent to re-execute
 +        the pre-restart instruction (for example another gateway restart)
 +        instead of merely reporting recovery state.
+ 
+         Adapters that are not yet ready (adapter missing from
+         ``self.adapters``) are skipped silently; their sessions stay
 @@ -4554,11 +4557,19 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+                 )
+                 continue
+ 
 -            # Empty-text internal event — the _is_resume_pending branch in
 +            # Internal recovery checkpoint — the _is_resume_pending branch in
              # _handle_message_with_agent prepends the proper reason-aware
