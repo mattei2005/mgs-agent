@@ -166,7 +166,7 @@ Com cartão de teste `AIB Visa Gold Card`:
 
 ### P1 unit generation
 
-Com cartão de teste `AIB Visa Gold Card`:
+Com cartão de teste `AIB Visa Gold Card` na validação inicial:
 
 - word count: 904
 - Details blocks: 4
@@ -174,6 +174,8 @@ Com cartão de teste `AIB Visa Gold Card`:
 - keyword total: 5
 - title: `AIB Visa Gold Card: How to Apply`
 - meta chars: 150
+
+Observação: essa validação foi supersedida pela revisão Tesco/Raquel posterior. O estado final aprovado remove `wp:details`/accordion como padrão e exige 1 LazyBlock `credit-card_ANTIGO` + 1 LazyBlock `botao normal` na P1.
 
 ### P1 semantic QA
 
