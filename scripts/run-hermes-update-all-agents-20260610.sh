@@ -131,7 +131,7 @@ log "HEAD=$(git -C "$REPO" rev-parse --short HEAD) origin=$(git -C "$REPO" rev-p
 git -C "$REPO" status --short | sed -n '1,120p'
 
 log "Restarting all MGS gateways"
-systemctl restart "${SERVICES[@]}"
+systemctl restart --no-block "${SERVICES[@]}"
 sleep 20
 
 log "Validating services"
