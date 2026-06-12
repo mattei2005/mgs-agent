@@ -96,6 +96,10 @@ grep -q "Erro Sistema Operacional" "$REPO/plugins/platforms/discord/adapter.py" 
   || fail "missing Discord OS-error title classifier"
 grep -q "service-manager restarts while a chat task is active" "$REPO/gateway/run.py" \
   || fail "missing restart/service-manager auto-resume marker"
+grep -q "Internal restart recovery checkpoint" "$REPO/gateway/run.py" \
+  || fail "missing idempotent restart recovery checkpoint"
+grep -q "Do not re-run" "$REPO/gateway/run.py" \
+  || fail "missing restart recovery anti-reexecution instruction"
 grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
   || fail "missing Discord post-response thread rename callback"
 grep -Eq "Discord thread renamed from auto-generated title|Discord GPT-style thread title applied" "$REPO/gateway/run.py" \
