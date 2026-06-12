@@ -112,17 +112,19 @@ fi
 
 # Processar cada service
 for SVC in "${SERVICES[@]}"; do
-  # Obter NRestarts atual
+  # Obter NRestarts atual e timestamp real do último start ativo
   NRESTARTS_RAW=$(systemctl show "${SVC}.service" -p NRestarts 2>/dev/null || echo "NRestarts=0")
   CURRENT_N=$(echo "${NRESTARTS_RAW}" | cut -d= -f2)
+  ACTIVE_ENTER_RAW=$(systemctl show "${SVC}.service" -p ActiveEnterTimestamp --value 2>/dev/null || true)
 
-  # Calcular delta e verificar thresholds via Python
+  # Calcular delta, verificar thresholds e detectar restart limpo/manual via ActiveEnterTimestamp
   ALERT=$(python3 - <<PYEOF
 import json, datetime, sys
 
 STATE_FILE = "${STATE_FILE}"
 SVC = "${SVC}"
 CURRENT_N = int("${CURRENT_N}")
+CURRENT_ACTIVE_ENTER = """${ACTIVE_ENTER_RAW}""".strip()
 THRESHOLD_INFO = ${THRESHOLD_INFO}
 THRESHOLD_WARN = ${THRESHOLD_WARN}
 ANTI_SPAM_HOURS = ${ANTI_SPAM_HOURS}
@@ -139,6 +141,14 @@ svc_state = state["services"].get(SVC, {
   "last_alert_sent": None,
   "last_alert_level": None
 })
+
+previous_active_enter = svc_state.get("last_active_enter_timestamp")
+restart_changed = bool(previous_active_enter and CURRENT_ACTIVE_ENTER and previous_active_enter != CURRENT_ACTIVE_ENTER)
+restart_previous = previous_active_enter or "baseline_initialized"
+if CURRENT_ACTIVE_ENTER:
+  svc_state["last_active_enter_timestamp"] = CURRENT_ACTIVE_ENTER
+  if restart_changed:
+    svc_state["last_restart_detected_at"] = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None).isoformat() + "Z"
 
 baseline = svc_state.get("baseline_nrestarts", 0)
 window_start_str = svc_state.get("window_start", datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None).isoformat() + "Z")
@@ -183,16 +193,19 @@ with open(STATE_FILE, "w") as f:
   json.dump(state, f, indent=2)
 
 if alert_needed:
-  print(f"{level}:{delta}")
+  print(f"{level}|{delta}|{int(restart_changed)}|{restart_previous}|{CURRENT_ACTIVE_ENTER}")
 else:
-  print(f"ok:{delta}")
+  print(f"ok|{delta}|{int(restart_changed)}|{restart_previous}|{CURRENT_ACTIVE_ENTER}")
 PYEOF
   )
 
-  ALERT_LEVEL=$(echo "${ALERT}" | cut -d: -f1)
-  DELTA=$(echo "${ALERT}" | cut -d: -f2)
+  ALERT_LEVEL=$(echo "${ALERT}" | cut -d'|' -f1)
+  DELTA=$(echo "${ALERT}" | cut -d'|' -f2)
+  RESTART_CHANGED=$(echo "${ALERT}" | cut -d'|' -f3)
+  RESTART_PREVIOUS=$(echo "${ALERT}" | cut -d'|' -f4)
+  RESTART_CURRENT=$(echo "${ALERT}" | cut -d'|' -f5-)
 
-  echo "$(date -Iseconds) ${LOG_PREFIX} ${SVC}: NRestarts=${CURRENT_N} delta=${DELTA} level=${ALERT_LEVEL}"
+  echo "$(date -Iseconds) ${LOG_PREFIX} ${SVC}: NRestarts=${CURRENT_N} delta=${DELTA} level=${ALERT_LEVEL} active_enter_changed=${RESTART_CHANGED}"
 
   if [[ "${ALERT_LEVEL}" == "info" ]]; then
     PAYLOAD=$(jq -n \
@@ -211,12 +224,26 @@ PYEOF
       --arg svc "${SVC}" \
       --arg delta "${DELTA}x" \
       --arg window "${WINDOW_HOURS}h" \
-      '{content:"<@***> alerta de restart recorrente", embeds:[{title:"Service reiniciando em excesso", color:15158332, fields:[{name:"Service", value:("`"+$svc+"`"), inline:true}, {name:"Reinícios", value:$delta, inline:true}, {name:"Janela", value:$window, inline:true}, {name:"Ação", value:"Investigar logs e causa do restart.", inline:false}]}]}')
+      '{content:"<@344196393512075265> alerta de restart recorrente", embeds:[{title:"Service reiniciando em excesso", color:15158332, fields:[{name:"Service", value:("`"+$svc+"`"), inline:true}, {name:"Reinícios", value:$delta, inline:true}, {name:"Janela", value:$window, inline:true}, {name:"Ação", value:"Investigar logs e causa do restart.", inline:false}]}]}')
     if post_alert_payload "$PAYLOAD" "${SVC}:warn"; then
       echo "$(date -Iseconds) ${LOG_PREFIX} WARN alert enviado para ${SVC}"
     else
       EXIT_CODE=2
       echo "$(date -Iseconds) ${LOG_PREFIX} FAILED_ALERT WARN para ${SVC}" >&2
+    fi
+  fi
+
+  if [[ "${RESTART_CHANGED}" == "1" ]]; then
+    PAYLOAD=$(jq -n \
+      --arg svc "${SVC}" \
+      --arg prev "${RESTART_PREVIOUS}" \
+      --arg curr "${RESTART_CURRENT}" \
+      '{content:"<@344196393512075265> restart de serviço detectado", embeds:[{title:"Service reiniciado detectado", color:3447003, fields:[{name:"Service", value:("`"+$svc+"`"), inline:true}, {name:"Start anterior", value:("`"+$prev+"`"), inline:false}, {name:"Start atual", value:("`"+$curr+"`"), inline:false}, {name:"Ação", value:"Restart limpo detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço.", inline:false}]}]}')
+    if post_alert_payload "$PAYLOAD" "${SVC}:active_enter_changed"; then
+      echo "$(date -Iseconds) ${LOG_PREFIX} RESTART alert enviado para ${SVC}"
+    else
+      EXIT_CODE=2
+      echo "$(date -Iseconds) ${LOG_PREFIX} FAILED_ALERT RESTART para ${SVC}" >&2
     fi
   fi
 done
