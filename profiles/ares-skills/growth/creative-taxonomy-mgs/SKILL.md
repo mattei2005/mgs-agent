@@ -293,14 +293,16 @@ performance_label: GOOD, BAD, INCONCLUSIVE, UNKNOWN
 3. Extrair dimensão e calcular orientation/placement.
 4. Para vídeos, não classificar por thumbnail/frame inicial apenas: amostrar múltiplos frames, porque conteúdo/CTA pode aparecer só depois de alguns segundos.
 5. Script canônico para vídeos: `/root/mgs-agent/scripts/ares-drive-video-frame-sampler.py` com frames padrão em `0.5s`, `2.0s`, `3.2s`, `4.5s` e `6.0s`.
-6. Para piloto de nomenclatura, selecionar amostra balanceada, gerar contact sheet e propor CSV antes do backlog completo; ver `references/upload-canvas-pilot-naming-review.md`.
-7. Detectar idioma/país por texto visível, nome, pasta e/ou OCR quando disponível; evidência visual pode corrigir o guess automático.
-8. Classificar vertical por evidência visual/textual; se incerto, `UNKNOWN`.
-9. Classificar pessoa/orientação usando apenas `PV`, `PH`, `NV`, `NH`; FEED 1:1 entra como `HORIZONTAL` para fins de nome.
-10. Sugerir `ANGLE` somente com evidência suficiente; se incerto, `UNKNOWN` + baixa confiança.
-11. Gerar plano de renomeação/cópia em CSV/JSON com `confidence` e `notes`.
-12. Mostrar proposta ao Rodolfo antes de qualquer alteração em Drive/campanha.
-13. Após aprovação, executar cópia/renomeação com logs e validação.
+6. Chamar o artefato visual de vídeo de **timeline de frames** ou **imagem de revisão**; evitar o termo “sheet” com Rodolfo, porque ele pode entender como Google Sheet/planilha.
+7. Para piloto de nomenclatura, selecionar uma amostra balanceada pequena para validar o método; uma vez validado, escalar para o lote completo restante, não ficar repetindo novas amostras pequenas.
+8. Não criar Google Sheet/planilha para esse fluxo salvo pedido explícito; usar CSV/JSON local como log/plano técnico e explicar se algum arquivo é apenas evidência local.
+9. Detectar idioma/país por texto visível, nome, pasta e/ou OCR quando disponível; evidência visual pode corrigir o guess automático.
+10. Classificar vertical por evidência visual/textual; se incerto, `UNKNOWN`.
+11. Classificar pessoa/orientação usando apenas `PV`, `PH`, `NV`, `NH`; FEED 1:1 entra como `HORIZONTAL` para fins de nome.
+12. Sugerir `ANGLE` somente com evidência suficiente; se incerto, `UNKNOWN` + baixa confiança.
+13. Gerar plano de renomeação/cópia em CSV/JSON com `confidence` e `notes`.
+14. Mostrar proposta ao Rodolfo antes de qualquer alteração em Drive/campanha.
+15. Após aprovação, executar cópia/renomeação com logs e validação.
 
 ## Sanitização antes de campanha
 
@@ -359,6 +361,7 @@ Plano aprovado antes de write              | Sim
 - `paid-acquisition-operations`
 - `references/source-taxonomy-empire.md` — resumo da taxonomia original enviada por Rodolfo e decisões incorporadas
 - `references/upload-canvas-pilot-naming-review.md` — fluxo validado para testar nomenclatura em 3 IMG + 3 VID antes de escalar para o backlog
+- `references/upload-canvas-video-multiframe-review.md` — regra operacional para classificar vídeos por timeline de frames, evitar erro de thumbnail inicial e escalar para lote completo
 - `/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/references/cc-us-es-setup.md`
 - `/root/.hermes/profiles/ares/ops/cc_us_es_operating_spec.md`
 - `/root/mgs-agent/docs/CREATIVE_METADATA_SANITIZER.md`
