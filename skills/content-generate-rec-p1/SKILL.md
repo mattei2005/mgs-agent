@@ -628,3 +628,7 @@ References/archive              Histórico, não regra ativa por padrão.
 ```
 
 Se o estado real dos runners/scripts ainda não cumprir algum ponto desta SKILL, reportar como pendência técnica de migração. Não inventar que o sistema faz algo que ainda não faz.
+
+### REC runner: `cc-rec.md` como hard requirement
+
+No `scripts/mgs-rec-runner.py`, `load_rec_template_contract` deve usar `skills/content-generate-rec-p1/contracts/cc-rec.md` como contract universal obrigatório (`template_key=cc-universal`). Não reintroduzir fallback para `templates/rec-{template_key}.md`: se `cc-rec.md` faltar, o runner deve falhar com `RunnerError` claro e auditável. Detalhe e checklist de validação: `references/rec-runner-template-fallback-removal-2026-06-13.md`.
