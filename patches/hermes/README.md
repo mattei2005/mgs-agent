@@ -52,3 +52,28 @@ systemctl restart zeus-gateway atena-gateway
 - Issue reportada em: https://github.com/NousResearch/hermes-agent/issues/14905
 - PR submetido: [se aplicável]
 
+
+## discord-new-thread-ai-title-once.patch
+
+### Problema
+Threads Discord nasciam com título provisório determinístico de `adapter.py::_auto_thread_name_from_message()`, mas o callback de `agent/title_generator.py` estava desligado para Discord para evitar re-renomear threads antigas após idle/reset.
+
+### Solução
+Manter o título provisório na criação e permitir exatamente um rename por IA após a primeira resposta, com fail-closed:
+- `adapter.py::_remember_auto_thread_initial_title()` salva em memória o título provisório realmente usado por thread_id.
+- `run.py::_discord_thread_safe_to_autorename()` só autoriza rename se a thread é recente, pertence ao bot e o nome atual ainda iguala o provisório salvo.
+- `run.py::_discord_title_message_from_gateway_text()` remove channel_context e prefixo `[Nome]` antes de enviar texto ao `title_generator.py`.
+- Após rename bem-sucedido, o cache por thread é removido com `pop()`.
+
+### Reaplicação após update
+```bash
+cd /root/.hermes/hermes-agent
+git apply /root/mgs-agent/patches/hermes/discord-new-thread-ai-title-once.patch
+python3 -m py_compile plugins/platforms/discord/adapter.py gateway/run.py
+/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh
+```
+
+### Validação
+1. Thread nova Discord: nasce com título provisório.
+2. Após primeira resposta: log `Discord thread renamed from auto-generated title`.
+3. Follow-up na mesma thread: não deve renomear novamente; se o cache já foi consumido, skip por `no_provisional_title_record` é esperado.
