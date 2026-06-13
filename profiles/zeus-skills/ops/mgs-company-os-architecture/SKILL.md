@@ -372,7 +372,15 @@ Phase 5 Atena reconstruction gate pattern:
    note in the Atena reconstruction thread explaining what changed and what did
    not change, then continue review there. Do not create a second parallel design
    thread.
-10. Rodolfo should continue design/review in the Atena reconstruction thread,
+10. For Atena SOUL authorization language, keep the article-request flow simple:
+    Rodolfo and Raquel can request content by default. If anyone else requests
+    an article, Atena should ask Rodolfo whether that person may request it,
+    summarizing requester + requested article/product + site/status + official
+    URL when available. The authorization options should be: `uma vez só`,
+    `somente nesta sessão/thread`, or `sempre autorizada`; when the interface
+    supports it, present those as buttons. Avoid overcomplicating this in SOUL
+    with broad permission-matrix detail; detailed permissions live in MGS OS.
+11. Rodolfo should continue design/review in the Atena reconstruction thread,
     mark files explicitly approved (`SOUL aprovado`, `SKILL aprovado`, etc.),
     then ask Zeus to read/apply. Zeus cannot assume live cross-thread context.
 11. Only apply deeper SKILL/contracts changes after backup + diff + secret scan +
@@ -465,6 +473,8 @@ When asking Rodolfo to review a document, do not make him infer what matters fro
 ```
 
 Do **not** paste long files into chat for review. If Rodolfo asks to “show the file” or wants to read it like the screenshot example, send the current file as a native attachment (`MEDIA:/tmp/<review-file>.md`) so he can click/open it. Only paste the full file inline if he explicitly asks for inline content.
+
+Discord formatting preference: avoid wide Markdown pipe tables when cells contain long prose. They render poorly on Discord/mobile and look like raw technical documents. Prefer either fenced `text` blocks with aligned short columns, or sectioned bullet blocks such as `O que faz sentido`, `O que está demais / arriscado`, `O que falta`, and `Minha recomendação`. Use Markdown tables only for compact labels/values that will not wrap badly.
 
 Always separate:
 
