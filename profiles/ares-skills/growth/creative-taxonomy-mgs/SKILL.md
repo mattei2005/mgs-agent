@@ -291,15 +291,16 @@ performance_label: GOOD, BAD, INCONCLUSIVE, UNKNOWN
 1. Inventariar arquivos em modo read-only.
 2. Validar formato real (`IMG`/`VID`) por arquivo, não por nome.
 3. Extrair dimensão e calcular orientation/placement.
-4. Para vídeos, não classificar por thumbnail/frame inicial apenas: amostrar múltiplos frames (ex.: ~0.5s, ~2s, ~4s e ~70% do vídeo), porque conteúdo/CTA pode aparecer só depois de alguns segundos.
-5. Para piloto de nomenclatura, selecionar amostra balanceada, gerar contact sheet e propor CSV antes do backlog completo; ver `references/upload-canvas-pilot-naming-review.md`.
-6. Detectar idioma/país por texto visível, nome, pasta e/ou OCR quando disponível; evidência visual pode corrigir o guess automático.
-6. Classificar vertical por evidência visual/textual; se incerto, `UNKNOWN`.
-7. Classificar pessoa/orientação usando apenas `PV`, `PH`, `NV`, `NH`; FEED 1:1 entra como `HORIZONTAL` para fins de nome.
-8. Sugerir `ANGLE` somente com evidência suficiente; se incerto, `UNKNOWN` + baixa confiança.
-9. Gerar plano de renomeação/cópia em CSV/JSON com `confidence` e `notes`.
-10. Mostrar proposta ao Rodolfo antes de qualquer alteração em Drive/campanha.
-11. Após aprovação, executar cópia/renomeação com logs e validação.
+4. Para vídeos, não classificar por thumbnail/frame inicial apenas: amostrar múltiplos frames, porque conteúdo/CTA pode aparecer só depois de alguns segundos.
+5. Script canônico para vídeos: `/root/mgs-agent/scripts/ares-drive-video-frame-sampler.py` com frames padrão em `0.5s`, `2.0s`, `3.2s`, `4.5s` e `6.0s`.
+6. Para piloto de nomenclatura, selecionar amostra balanceada, gerar contact sheet e propor CSV antes do backlog completo; ver `references/upload-canvas-pilot-naming-review.md`.
+7. Detectar idioma/país por texto visível, nome, pasta e/ou OCR quando disponível; evidência visual pode corrigir o guess automático.
+8. Classificar vertical por evidência visual/textual; se incerto, `UNKNOWN`.
+9. Classificar pessoa/orientação usando apenas `PV`, `PH`, `NV`, `NH`; FEED 1:1 entra como `HORIZONTAL` para fins de nome.
+10. Sugerir `ANGLE` somente com evidência suficiente; se incerto, `UNKNOWN` + baixa confiança.
+11. Gerar plano de renomeação/cópia em CSV/JSON com `confidence` e `notes`.
+12. Mostrar proposta ao Rodolfo antes de qualquer alteração em Drive/campanha.
+13. Após aprovação, executar cópia/renomeação com logs e validação.
 
 ## Sanitização antes de campanha
 
