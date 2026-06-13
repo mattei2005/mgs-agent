@@ -90,7 +90,7 @@ def extract_frame(video: Path, second: float, out: Path) -> bool:
 def make_sheet(row: dict[str, str], frames: list[tuple[float, Path]], out_path: Path) -> None:
     thumb_w, thumb_h, label_h = 260, 462, 82
     cols = len(frames)
-    sheet = Image.new("RGB", (cols * thumb_w, thumb_h + label_h + 44), color="white")
+    sheet = Image.new("RGB", (cols * thumb_w, thumb_h + label_h + 44), color="white")  # type: ignore[arg-type]
     draw = ImageDraw.Draw(sheet)
     try:
         font = ImageFont.truetype("DejaVuSans.ttf", 12)
