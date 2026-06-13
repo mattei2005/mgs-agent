@@ -291,8 +291,9 @@ performance_label: GOOD, BAD, INCONCLUSIVE, UNKNOWN
 1. Inventariar arquivos em modo read-only.
 2. Validar formato real (`IMG`/`VID`) por arquivo, não por nome.
 3. Extrair dimensão e calcular orientation/placement.
-4. Para piloto de nomenclatura, selecionar amostra balanceada, gerar contact sheet e propor CSV antes do backlog completo; ver `references/upload-canvas-pilot-naming-review.md`.
-5. Detectar idioma/país por texto visível, nome, pasta e/ou OCR quando disponível; evidência visual pode corrigir o guess automático.
+4. Para vídeos, não classificar por thumbnail/frame inicial apenas: amostrar múltiplos frames (ex.: ~0.5s, ~2s, ~4s e ~70% do vídeo), porque conteúdo/CTA pode aparecer só depois de alguns segundos.
+5. Para piloto de nomenclatura, selecionar amostra balanceada, gerar contact sheet e propor CSV antes do backlog completo; ver `references/upload-canvas-pilot-naming-review.md`.
+6. Detectar idioma/país por texto visível, nome, pasta e/ou OCR quando disponível; evidência visual pode corrigir o guess automático.
 6. Classificar vertical por evidência visual/textual; se incerto, `UNKNOWN`.
 7. Classificar pessoa/orientação usando apenas `PV`, `PH`, `NV`, `NH`; FEED 1:1 entra como `HORIZONTAL` para fins de nome.
 8. Sugerir `ANGLE` somente com evidência suficiente; se incerto, `UNKNOWN` + baixa confiança.
