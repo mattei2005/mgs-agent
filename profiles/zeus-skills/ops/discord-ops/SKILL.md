@@ -136,6 +136,10 @@ Pitfall crítico validado: `Connected as <Agent>#...` prova token/gateway, mas n
 
 Quando Rodolfo pedir “anexa aqui”, não responda apenas caminhos `MEDIA:/path` como texto esperando que o Discord converta se houver risco de truncamento ou múltiplos arquivos grandes. Para arquivos fonte/logs grandes, criar um pacote único em `/tmp` (`tar -czf /tmp/nome.tar.gz ...`) e colocar `MEDIA:/tmp/nome.tar.gz` sozinho/claramente na resposta final. Validar tamanho e conteúdo antes de responder. Se o envio anterior apareceu como texto no Discord, corrigir imediatamente com pacote único anexável.
 
+### Enviar/anexar arquivos no Discord
+
+Quando Rodolfo pedir em linguagem natural “manda/envia/anexa esse arquivo”, entregar como **anexo nativo do Discord**, não como texto contendo `MEDIA:/path`. Pitfall validado: final response com `MEDIA:/root/.../title_generator.py` apareceu literalmente no chat. Use o caminho de envio que realmente faz upload; se necessário, copie para `/tmp`, gere uma variante `.txt` para source code e/ou `.tar.gz` com o original, envie para o target exato da thread e, se Rodolfo disser que não chegou, liste/valide o target antes de retry. Referência: `references/discord-file-attachments-and-thread-title-rename-2026-06-13.md`.
+
 ### Enviando mensagem Zeus → Atena em outro canal
 
 Para comunicação **cross-channel** Zeus → Atena, incluir `<@BOT_ID>` porque Atena usa `DISCORD_ALLOW_BOTS=mentions`:
@@ -423,6 +427,8 @@ Operational correction validated on Hera: if the agent replied “não consigo a
 ### Diagnóstico de título ruim em auto-thread
 
 Quando Rodolfo perguntar por que uma thread não foi renomeada, ou por que o título ficou genérico/truncado, não assumir erro de Discord/permissão. Ver `references/discord-auto-thread-title-diagnostics.md`.
+
+Pitfall validado em 2026-06-13: não recomputar em `run.py` o título provisório da thread a partir do `message` do gateway para decidir se pode renomear. Esse texto pode vir mutado com `[Rodolfo Mattei]`, `[READ-ONLY RECENT CHANNEL CONTEXT]`, `[New message — ACTIONABLE USER REQUEST]`, enriquecimento de mídia/documento/STT ou batching; não há garantia byte-a-byte com o `message.content` usado em `adapter.py:_auto_create_thread`. A solução segura é salvar no adapter o `thread_name` provisório exato usado na criação (`thread_id -> thread_name`) e, no guard de rename por IA, comparar o nome atual do Discord contra esse valor salvo. Se o valor não existir, falhar fechado e não renomear. Detalhe: `references/discord-file-attachments-and-thread-title-rename-2026-06-13.md`.
 
 Localização atual da lógica de nome de thread Discord no Hermes MGS:
 - `/root/.hermes/hermes-agent/plugins/platforms/discord/adapter.py` é o arquivo principal do adapter Discord plugin.
