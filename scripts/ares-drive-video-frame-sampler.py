@@ -126,6 +126,7 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--seconds", default="0.5,2.0,3.2,4.5,6.0")
     ap.add_argument("--out-dir", default=str(DEFAULT_OUT_DIR))
+    ap.add_argument("--discard-videos", action="store_true", help="Delete downloaded video files after extracting frames to save disk")
     args = ap.parse_args()
 
     seconds = parse_seconds(args.seconds)
@@ -179,6 +180,13 @@ def main() -> int:
                 item_frames.append((second, frame_path))
         sheet_path = sheet_dir / f"{safe_id}_timeline.jpg"
         make_sheet(row, item_frames, sheet_path)
+        video_kept = True
+        if args.discard_videos:
+            try:
+                video_path.unlink()
+                video_kept = False
+            except FileNotFoundError:
+                video_kept = False
         manifest["items"].append(
             {
                 "drive_id_sha256_12": hashlib.sha256(fid.encode()).hexdigest()[:12],
