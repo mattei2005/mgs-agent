@@ -41,6 +41,8 @@ Ordem | Etapa
 
 ## Taxonomia base de criativos
 
+Para qualquer trabalho de nomenclatura, renomeação, inventário ou classificação de criativos, carregar também a skill dedicada `creative-taxonomy-mgs`. Ela é a fonte operacional detalhada para campos, P_ORIENT, status, inventário mínimo, Drive e metadata gate.
+
 Modelo preferencial:
 
 ```text
@@ -55,6 +57,8 @@ Regras:
 - Se o ângulo for incerto, usar `UNKNOWN` e preencher `notes`.
 - Não inventar classificação confiante sem evidência.
 - Nome limpo, uppercase, sem acento, com underscore.
+
+Pitfall: não deixar a taxonomia viva apenas como spec solto ou comentário de sessão. Quando Rodolfo pedir para “criar a skill”/“execute” sobre taxonomia já estabilizada, criar ou atualizar a skill classe `creative-taxonomy-mgs` e apontar esta umbrella para ela, em vez de criar uma skill estreita por sessão.
 
 ### P_ORIENT
 
