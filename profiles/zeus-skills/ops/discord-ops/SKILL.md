@@ -132,6 +132,10 @@ Quando criar um novo agente MGS com bot/canal próprios (ex: Ares), seguir o pla
 
 Pitfall crítico validado: `Connected as <Agent>#...` prova token/gateway, mas não prova acesso ao servidor. Se `GET /channels/<channel_id>` com o token do novo bot retorna `403 Missing Access` e `GET /guilds/<guild_id>/members/<bot_id>` com bot admin retorna `404 Unknown Member`, o bot ainda não foi convidado ao servidor ou o invite não concluiu.
 
+### Enviar arquivos grandes/anexos no Discord
+
+Quando Rodolfo pedir “anexa aqui”, não responda apenas caminhos `MEDIA:/path` como texto esperando que o Discord converta se houver risco de truncamento ou múltiplos arquivos grandes. Para arquivos fonte/logs grandes, criar um pacote único em `/tmp` (`tar -czf /tmp/nome.tar.gz ...`) e colocar `MEDIA:/tmp/nome.tar.gz` sozinho/claramente na resposta final. Validar tamanho e conteúdo antes de responder. Se o envio anterior apareceu como texto no Discord, corrigir imediatamente com pacote único anexável.
+
 ### Enviando mensagem Zeus → Atena em outro canal
 
 Para comunicação **cross-channel** Zeus → Atena, incluir `<@BOT_ID>` porque Atena usa `DISCORD_ALLOW_BOTS=mentions`:
@@ -444,7 +448,17 @@ Em thread existente, usar o contexto da thread/reply como assunto principal e re
 
 Pitfall validado 1: Rodolfo respondeu `Ok` em reply a um status de execução da Fase 4, mas Zeus tratou como mensagem solta e renomeou a thread para um assunto errado/em espanhol. Correção: em reply, resolver primeiro o contexto citado; se a thread já existe e o objetivo continua, não mexer no título. Referência: `references/discord-open-thread-rename-pitfall-2026-06-07.md`.
 
-Pitfall validado 2: remover totalmente o callback Discord de auto-title evita renomear thread antiga, mas também quebra o comportamento desejado para thread nova. Correção: restaurar callback apenas com guardrails de thread nova. Ver `references/discord-gpt-style-thread-title-rename.md` e `references/discord-new-thread-title-guardrails-2026-06-07.md`.
+Pitfall validado 2: remover totalmente o callback Discord de auto-title evita renomear thread antiga, mas também quebra o comportamento desejado para thread nova. Correção: restaurar callback apenas com guardrails de thread nova. Ver `references/discord-gpt-style-thread-title-rename.md`, `references/discord-new-thread-title-guardrails-2026-06-07.md` e `references/discord-new-thread-ai-title-once-guard.md`.
+
+### Correção preferida: título IA uma vez após a primeira resposta
+
+Quando Rodolfo pedir para corrigir thread title “burro”/regex/hardcoded no Discord, não mexer em `_auto_thread_name_from_message(...)` como solução primária. Ela deve continuar gerando o nome provisório porque Discord cria a thread antes da resposta. A correção correta é no `gateway/run.py`: conectar o `title_callback` do Discord ao `maybe_auto_title(...)` pós-primeira resposta, mas proteger o rename com `_discord_thread_safe_to_autorename(...)`.
+
+Guardrails mínimos:
+- `maybe_auto_title(...)` já só tenta título nas primeiras trocas; manter esse filtro.
+- A thread Discord deve ser nova (`channel.created_at` dentro de janela curta, ex. 30 min), bloqueando follow-up depois de idle/reset.
+- O nome atual da thread deve ainda ser o provisório calculado por `adapter._auto_thread_name_from_message(primeira_mensagem_acionável)`, sanitizado via `_sanitize_discord_thread_title(...)`; se divergir, assumir rename manual/IA anterior e não editar.
+- A validação deve rodar imediatamente antes de `channel.edit(...)`, porque o auto-title roda em background thread e agenda coroutine async.
 
 Resumo operacional:
 - O título inicial da thread Discord é escolhido pelo gateway no momento de criação (`_auto_create_thread` / `_auto_thread_name_from_message`), antes da resposta do agente.
