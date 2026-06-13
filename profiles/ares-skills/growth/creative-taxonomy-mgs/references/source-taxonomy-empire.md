@@ -33,7 +33,7 @@ VARIANT    | 01, 02, 03...
 ## P_ORIENT recebido
 
 ```text
-Código | Significado
+Código | Significado original
 -------|-------------------------------------
 PV     | pessoa vertical
 NV     | sem pessoa vertical
@@ -46,16 +46,29 @@ NU     | sem pessoa orientação desconhecida
 UU     | pessoa/orientação desconhecidas
 ```
 
+## Decisão atual de Rodolfo
+
+A regra MGS final usa somente:
+
+```text
+PV, PH, NV, NH
+```
+
+Códigos desconsiderados/removidos de nomes finais:
+
+```text
+PS, NS, PU, NU, UU
+```
+
 ## Decisões operacionais incorporadas
 
 - Status não entra no nome do arquivo.
 - Status fica em pasta ou metadado/inventário.
 - IDs, origem, gestor, page_id, drive_id, meta_creative_id e campaign_id ficam no inventário.
 - Se não houver certeza do ângulo, usar `UNKNOWN` e nota.
-- `person` deve ser `PERSON`, `NO_PERSON` ou `UNKNOWN`.
-- `orientation` deve ser `VERTICAL`, `HORIZONTAL`, `SQUARE` ou `UNKNOWN`.
-- `P_ORIENT` é a combinação compacta de pessoa + orientação.
-- Para operações com escopo menor, restringir códigos aceitos no nome final. Ex.: `CC_US_ES` usa só `PV`, `NV`, `PS`, `NS` porque a operação tem Story vertical e Feed square.
+- `person` deve ser `PERSON`, `NO_PERSON` ou `UNKNOWN` no inventário.
+- Para o nome final, `P_ORIENT` aceita apenas `PV`, `PH`, `NV`, `NH`.
+- `orientation` do nome final deve ser tratada como `VERTICAL` ou `HORIZONTAL`; square/unknown vai para revisão ou é mapeado operacionalmente como horizontal quando aprovado.
 
 ## Uso futuro
 

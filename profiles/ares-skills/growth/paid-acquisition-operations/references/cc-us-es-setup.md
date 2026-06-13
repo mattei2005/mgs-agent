@@ -86,9 +86,9 @@ Exemplos:
 
 ```text
 CC_US_ES_IMG_APROBACION_NV_01.jpg
-CC_US_ES_IMG_SIN_VERIFICACION_PS_01.jpg
+CC_US_ES_IMG_SIN_VERIFICACION_PH_01.jpg
 CC_US_ES_VID_LIMITE_ALTO_PV_01.mp4
-CC_US_ES_IMG_CASHBACK_NS_02.png
+CC_US_ES_IMG_CASHBACK_NH_02.png
 ```
 
 ## Ângulos iniciais para CC_US_ES
@@ -127,7 +127,7 @@ Mapeamento:
 ```text
 Tamanho   | Sem pessoa | Com pessoa | Orientation | placement_fit
 ----------|------------|------------|-------------|--------------
-1080x1080 | NS         | PS         | SQUARE      | FEED
+1080x1080 | NH         | PH         | HORIZONTAL  | FEED
 1080x1920 | NV         | PV         | VERTICAL    | STORY
 ```
 

@@ -66,15 +66,12 @@ Pitfall: não deixar a taxonomia viva apenas como spec solto ou comentário de s
 Código | Person    | Orientation
 -------|-----------|------------
 PV     | PERSON    | VERTICAL
-NV     | NO_PERSON | VERTICAL
 PH     | PERSON    | HORIZONTAL
+NV     | NO_PERSON | VERTICAL
 NH     | NO_PERSON | HORIZONTAL
-PS     | PERSON    | SQUARE
-NS     | NO_PERSON | SQUARE
-PU     | PERSON    | UNKNOWN
-NU     | NO_PERSON | UNKNOWN
-UU     | UNKNOWN   | UNKNOWN
 ```
+
+Regra atual de Rodolfo: usar somente `PV`, `PH`, `NV`, `NH`. Códigos `PS`, `NS`, `PU`, `NU`, `UU` foram desconsiderados e não devem entrar em nomes finais. Para detalhes, carregar `creative-taxonomy-mgs`.
 
 ## Estrutura Drive recomendada
 
@@ -171,7 +168,7 @@ Mapeamento quando só há FEED/STORY:
 ```text
 Dimensão  | Sem pessoa | Com pessoa | Orientation
 ----------|------------|------------|------------
-1080x1080 | NS         | PS         | SQUARE
+1080x1080 | NH         | PH         | HORIZONTAL
 1080x1920 | NV         | PV         | VERTICAL
 ```
 

@@ -45,10 +45,10 @@ Exemplos:
 
 ```text
 CC_CA_FR_IMG_APPROBATION_NV_01.jpg
-CC_CA_FR_IMG_WALLET_NS_01.png
+CC_CA_FR_IMG_WALLET_NH_01.png
 CC_CA_FR_VID_SANS_VERIFICATION_PV_01.mp4
 CC_US_ES_IMG_APROBACION_NV_01.jpg
-CC_US_ES_VID_LIMITE_ALTO_PV_01.mp4
+CC_US_ES_VID_LIMITE_ALTO_PH_01.mp4
 ```
 
 ## Campos do nome
@@ -148,34 +148,35 @@ UNKNOWN               | Ângulo incerto; exige note
 
 `P_ORIENT` combina presença de pessoa + orientação visual.
 
-Código completo:
+Regra oficial MGS definida por Rodolfo: usar **somente** `PV`, `PH`, `NV`, `NH`. Códigos de square ou orientação desconhecida ficam desconsiderados e não devem entrar em nome final.
 
 ```text
 Código | Pessoa     | Orientação
 -------|------------|------------
 PV     | PERSON     | VERTICAL
-NV     | NO_PERSON  | VERTICAL
 PH     | PERSON     | HORIZONTAL
+NV     | NO_PERSON  | VERTICAL
 NH     | NO_PERSON  | HORIZONTAL
-PS     | PERSON     | SQUARE
-NS     | NO_PERSON  | SQUARE
-PU     | PERSON     | UNKNOWN
-NU     | NO_PERSON  | UNKNOWN
-UU     | UNKNOWN    | UNKNOWN
 ```
 
-Para operações que só usam Feed e Story, como o piloto `CC_US_ES`, restringir aos códigos efetivamente usados:
+Códigos removidos/desconsiderados:
 
 ```text
-Código | Pessoa     | Orientação | Placement
--------|------------|------------|----------
-PV     | PERSON     | VERTICAL   | STORY
-NV     | NO_PERSON  | VERTICAL   | STORY
-PS     | PERSON     | SQUARE     | FEED
-NS     | NO_PERSON  | SQUARE     | FEED
+PS, NS, PU, NU, UU
 ```
 
-Se pessoa ou orientação não puderem ser determinados com segurança, marcar revisão no inventário em vez de criar nome final incorreto.
+Para operações Meta comuns, tratar o placement como vertical ou horizontal para fins de nome:
+
+```text
+Código | Pessoa     | Orientação | Uso típico
+-------|------------|------------|-------------------------
+PV     | PERSON     | VERTICAL   | Story/Reels vertical
+NV     | NO_PERSON  | VERTICAL   | Story/Reels vertical
+PH     | PERSON     | HORIZONTAL | Feed/landscape/não vertical
+NH     | NO_PERSON  | HORIZONTAL | Feed/landscape/não vertical
+```
+
+Se pessoa ou orientação não puderem ser determinados com segurança, marcar revisão no inventário em vez de criar nome final incorreto. Não usar código `UNKNOWN` no nome final.
 
 ## Orientation, placement e dimensões
 
@@ -186,10 +187,10 @@ Mapeamento comum para Meta:
 ```text
 Placement | Dimensão típica | Aspect ratio | Orientation
 ----------|-----------------|--------------|------------
-FEED      | 1080x1080       | 1:1          | SQUARE
+FEED      | 1080x1080       | 1:1          | HORIZONTAL
 STORY     | 1080x1920       | 9:16         | VERTICAL
 LANDSCAPE | 1080x608        | ~16:9        | HORIZONTAL
-UNKNOWN   | desconhecida     | desconhecido | UNKNOWN
+UNKNOWN   | desconhecida     | desconhecido | REVIEW
 ```
 
 ## Status e ciclo de vida
@@ -280,7 +281,7 @@ Valores usuais:
 
 ```text
 person: PERSON, NO_PERSON, UNKNOWN
-orientation: VERTICAL, HORIZONTAL, SQUARE, UNKNOWN
+orientation: VERTICAL, HORIZONTAL, REVIEW
 status: READY, TESTING, TESTED, WINNER, REJECTED, LEGACY, REVIEW
 performance_label: GOOD, BAD, INCONCLUSIVE, UNKNOWN
 ```
