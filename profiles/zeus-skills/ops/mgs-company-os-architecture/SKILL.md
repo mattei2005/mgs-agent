@@ -396,6 +396,15 @@ Phase 5 Atena reconstruction gate pattern:
     Details blocks; the card image can repeat in REC/P1 LazyBlocks but featured
     images must differ; long image composition rules belong in a reference file,
     not duplicated inside every contract.
+14. When applying Atena SOUL Phase 1 packages, validate the content against the
+    latest Rodolfo correction before applying — not just bash syntax, SHA, line
+    count, or secret scan. The current simple article-request authorization model
+    is: Rodolfo/Raquel execute directly; anyone else triggers a Rodolfo approval
+    choice with three options: `Uma vez só`, `Somente nesta sessão`, or `Sempre
+    autorizada` (buttons when supported). Avoid staging temporary SOUL files under
+    `/root/mgs-agent/profiles/` because auto-commit may version them before
+    cleanup; use `/tmp` for staging and write only final live/versioned files.
+    See `references/atena-soul-phase1-application-2026-06-12.md`.
 ```
     contract against live deterministic runners/validators before calling the
     system production-ready. A contract update is an editorial source-of-truth
@@ -576,3 +585,4 @@ Before reporting completion of a company-OS step:
 - `references/company-os-team-acquisition-monetization-2026-06-06.md` — approved/validated team and acquisition rewrites plus monetization v0.2 notes; includes Rodolfo's cascade-consistency expectation and verification checklist for stale/conflicting concepts.
 - `references/atena-rec-p1-contract-v2-runner-alignment-2026-06-08.md` — Atena REC/P1 contract v2 decisions and runner-alignment pattern: REC meta 130–140, P1 keyword 5–8 visible uses, P1 Details blocks, card-image vs featured-image distinction, and dry-run/unit validation before production.
 - `references/atena-rec-p1-contract-v2-runner-gate-2026-06-08.md` — REC/P1 contract v2 decisions from Raquel/Rodolfo, including P1 keyword 5-8, REC meta 130-140, new REC/P1 structures, slug cleanup, featured-image reference split, and the required runner/validator migration gate before production use.
+- `references/atena-soul-phase1-application-2026-06-12.md` — SOUL-only application lesson: validate final content against Rodolfo's latest authorization correction, write live+versioned files directly, avoid temp files inside auto-commit paths, restart/validate Atena, and keep Phase 2 runner/template changes separate.
