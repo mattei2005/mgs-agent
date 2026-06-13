@@ -291,13 +291,14 @@ performance_label: GOOD, BAD, INCONCLUSIVE, UNKNOWN
 1. Inventariar arquivos em modo read-only.
 2. Validar formato real (`IMG`/`VID`) por arquivo, não por nome.
 3. Extrair dimensão e calcular orientation/placement.
-4. Detectar idioma por texto visível, nome, pasta e/ou OCR quando disponível.
-5. Classificar vertical por evidência visual/textual; se incerto, `UNKNOWN`.
-6. Classificar pessoa/orientação; se incerto, marcar revisão.
-7. Sugerir `ANGLE` somente com evidência suficiente.
-8. Gerar plano de renomeação/cópia em CSV/JSON.
-9. Mostrar proposta ao Rodolfo antes de qualquer alteração em Drive/campanha.
-10. Após aprovação, executar cópia/renomeação com logs e validação.
+4. Para piloto de nomenclatura, selecionar amostra balanceada, gerar contact sheet e propor CSV antes do backlog completo; ver `references/upload-canvas-pilot-naming-review.md`.
+5. Detectar idioma/país por texto visível, nome, pasta e/ou OCR quando disponível; evidência visual pode corrigir o guess automático.
+6. Classificar vertical por evidência visual/textual; se incerto, `UNKNOWN`.
+7. Classificar pessoa/orientação usando apenas `PV`, `PH`, `NV`, `NH`; FEED 1:1 entra como `HORIZONTAL` para fins de nome.
+8. Sugerir `ANGLE` somente com evidência suficiente; se incerto, `UNKNOWN` + baixa confiança.
+9. Gerar plano de renomeação/cópia em CSV/JSON com `confidence` e `notes`.
+10. Mostrar proposta ao Rodolfo antes de qualquer alteração em Drive/campanha.
+11. Após aprovação, executar cópia/renomeação com logs e validação.
 
 ## Sanitização antes de campanha
 
@@ -355,6 +356,7 @@ Plano aprovado antes de write              | Sim
 
 - `paid-acquisition-operations`
 - `references/source-taxonomy-empire.md` — resumo da taxonomia original enviada por Rodolfo e decisões incorporadas
+- `references/upload-canvas-pilot-naming-review.md` — fluxo validado para testar nomenclatura em 3 IMG + 3 VID antes de escalar para o backlog
 - `/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/references/cc-us-es-setup.md`
 - `/root/.hermes/profiles/ares/ops/cc_us_es_operating_spec.md`
 - `/root/mgs-agent/docs/CREATIVE_METADATA_SANITIZER.md`
