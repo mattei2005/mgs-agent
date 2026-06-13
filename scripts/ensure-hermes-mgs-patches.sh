@@ -57,6 +57,14 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    discord-new-thread-ai-title-once.patch)
+      if grep -q "_remember_auto_thread_initial_title" "$REPO/plugins/platforms/discord/adapter.py" \
+        && grep -q "_discord_thread_safe_to_autorename" "$REPO/gateway/run.py" \
+        && grep -q "_discord_title_message_from_gateway_text" "$REPO/gateway/run.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     discord-report-infra-no-auto-thread.patch)
       if grep -q "Auto-thread skipped for REPORT-INFRA control-plane message" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "is_report_infra_message" "$REPO/plugins/platforms/discord/adapter.py"; then
@@ -79,6 +87,7 @@ apply_patch_if_needed "discord-deterministic-thread-rename-auto-add-users.patch"
 apply_patch_if_needed "planned-restart-auto-resume-active-sessions.patch"
 apply_patch_if_needed "restart-recovery-checkpoint-idempotent.patch"
 apply_patch_if_needed "discord-post-response-thread-title-rename.patch"
+apply_patch_if_needed "discord-new-thread-ai-title-once.patch"
 apply_patch_if_needed "discord-report-infra-no-auto-thread.patch"
 
 # Invariants that must survive every Hermes update. If any grep fails, the
