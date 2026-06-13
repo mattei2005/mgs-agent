@@ -114,6 +114,12 @@ grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
   || fail "missing Discord post-response thread rename callback"
 grep -Eq "Discord thread renamed from auto-generated title|Discord GPT-style thread title applied" "$REPO/gateway/run.py" \
   || fail "missing Discord thread rename audit log marker"
+grep -q "_remember_auto_thread_initial_title" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord exact provisional title memory"
+grep -q "_discord_thread_safe_to_autorename" "$REPO/gateway/run.py" \
+  || fail "missing Discord one-time AI title rename guard"
+grep -q "_discord_title_message_from_gateway_text" "$REPO/gateway/run.py" \
+  || fail "missing Discord title-generator text cleanup"
 grep -q "Auto-thread skipped for REPORT-INFRA control-plane message" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord REPORT-INFRA inline/no-thread guard"
 
