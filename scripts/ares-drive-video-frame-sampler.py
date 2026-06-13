@@ -195,7 +195,8 @@ def main() -> int:
                 "language_guess": row.get("language_guess"),
                 "placement_fit": row.get("placement_fit"),
                 "duration_seconds": duration,
-                "video_local": str(video_path),
+                "video_local": str(video_path) if video_kept else "discarded_after_frame_extraction",
+                "video_kept": video_kept,
                 "sheet": str(sheet_path),
                 "frames": [str(p) for _, p in item_frames],
             }
