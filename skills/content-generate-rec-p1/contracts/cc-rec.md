@@ -300,6 +300,8 @@ Os exemplos acima são apenas referências. Outros ângulos podem ser utilizados
 
 Embora exista um eixo principal, nenhum benefício relevante deve ser ignorado. Todos os benefícios importantes e verificáveis do cartão devem ser considerados e apresentados quando agregarem valor à análise. Os demais benefícios podem aparecer como apoio e complementar a argumentação, mas não devem competir com o eixo principal nem desviar o foco central do artigo.
 
+Para o mapa de categorias e a experiência-alvo de cada tipo de cartão (cashback, balance transfer, travel, premium, secured, digital bank, entre outros), consulte `references/category-experience-map.md` ao definir o eixo principal e variar a narrativa entre artigos. Esse mapa traz, por categoria, a sensação que o texto deve evocar e as cautelas específicas.
+
 ---
 
 ## 14. Seleção dos Benefícios

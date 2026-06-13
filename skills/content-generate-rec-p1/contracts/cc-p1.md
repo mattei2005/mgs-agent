@@ -477,6 +477,8 @@ Evitar repetir:
 
 Aprofundar o conteúdo sem reutilizar blocos inteiros do REC.
 
+Para variar o ângulo e a experiência-alvo segundo a categoria real do cartão (cashback, balance transfer, travel, premium, secured, digital bank, entre outros), consulte `references/category-experience-map.md`. A P1 deve aprofundar a experiência da categoria sem repetir as construções do REC.
+
 ---
 
 ## 21. Checklist Final

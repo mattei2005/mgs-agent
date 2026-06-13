@@ -201,19 +201,7 @@ A P1 precisa aprofundar sem copiar o REC.
 
 Se houver conflito entre reference antiga e contract ativo, o contract ativo vence.
 
-Para contexto da reestruturação REC/P1 v2 validada em 2026-06-08 — incluindo meta REC 130–140, keyword P1 5–8, separação card isolado vs featured image e sequência de validação runner/QA — ver `references/rec-p1-contract-v2-restructure-2026-06-08.md`.
-
-Para a revisão de tags/fallbacks baseada em benefícios reais e o alinhamento do formato final REC+P1 entre SKILL, runners e renderer — ver `references/rec-p1-benefit-based-tags-and-report-format-2026-06-08.md`.
-
-Para a revisão de taxonomia WordPress/tags feita antes do primeiro teste real — incluindo distinção entre tags WordPress e tags visuais do LazyBlock, remoção do default arriscado `rewards credit card` na P1 e padrão de verificação por monkeypatch sem tocar WordPress — ver `references/rec-p1-wordpress-taxonomy-tags-2026-06-08.md`.
-
-Para as correções operacionais aprendidas no publish Tesco Balance Transfer — incluindo hostname no preflight oficial, uso de imagem oficial genérica Tesco, quatro fatos mínimos em request-facts mode, keywords iniciais de balance transfer, overlay determinístico de card em featured image e reparos de meta/P1 repetição — ver `references/tesco-balance-transfer-runner-fixes-2026-06-08.md`.
-
-Para as lições pós-reestruturação sobre formato final preferido por Rodolfo, renderer obrigatório, análise de lentidão de run REC+P1 e metas de tempo operacional — ver `references/rec-p1-post-restructure-validation-and-latency-2026-06-08.md`.
-
-Para a disciplina de formato do relatório final REC+P1 — especialmente não chamar de “faltou subtitle” quando o relatório já traz `subtitle <chars>` na validação, e tratar linhas explícitas `Subtitle:`/`Excerpt:` como complemento de QA salvo pedido contrário — ver `references/rec-p1-report-format-discipline-2026-06-08.md`.
-
-Para os quality gates derivados do feedback editorial da Raquel/Rodolfo no teste Tesco — incluindo `Clubcard points` não virar `Travel rewards`, bloqueio de labels genéricos em benefícios, idioma misto, LazyBlock/CTA inválido, card duplicado e featured com cartão ocluído — ver `references/tesco-rec-p1-raquel-feedback-quality-gates-2026-06-08.md`.
+As decisões e lições de cada incidente (reestruturação v2, tags por benefício, taxonomia WordPress, correções do teste Tesco, latência, formato de relatório e os quality gates do feedback da Raquel) ficam registradas em `references/`. Consulte a pasta quando precisar do detalhe histórico de uma decisão; nenhuma dessas notas é regra ativa por si — a regra ativa vive nos contracts, nos runners e nos validators.
 
 ---
 
