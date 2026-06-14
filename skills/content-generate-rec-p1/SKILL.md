@@ -668,3 +668,5 @@ Regras para revisar/aplicar pacote de Fase 3:
 8. Controlar tamanho do prompt (hard gate conservador, ex.: <= 90k chars) porque o CLI recebe `-z` como argumento e há limite prático de argv.
 
 Detalhes do probe validado, riscos e pontos de encaixe: `references/fase3-hermes-cli-llm-design-2026-06-14.md`.
+
+Lições operacionais adicionais da revisão Rodolfo/Claude/Zeus para Fase 3 (3.0.1, 3.1 e desenho 3.2): `references/fase3-rec-llm-integration-lessons-2026-06-14.md`. Use essa referência ao revisar pacotes que introduzem GPT-5.5 no REC runner, especialmente para: validação contra VPS real, regra final sem fallback automático, parser/telemetria do Hermes CLI, decisão de não paralelizar inicialmente, preservação de `tag10`/`tag2`/`descriptor`, e cuidado com retry de gates pós-geração.
