@@ -51,7 +51,7 @@ Rodolfo approves the multi-frame method and asks to proceed with the full video 
 - Use only `PV`, `PH`, `NV`, `NH` for final `P_ORIENT`.
 - For `UNKNOWN` placement/orientation, do not force a final filename; route to review.
 - If OCR corrects the filename/folder language guess, note that explicitly in `notes`.
-- If multiple videos map to the same proposed name, assign deterministic variants (`01`, `02`, ...), but keep the original path and sheet reference for audit.
+- If multiple videos map to the same proposed name, assign deterministic variants (`001`, `002`, ...), keep the original path and timeline reference for audit, and never emit 2-digit variants in final filenames.
 
 ## Reporting
 
