@@ -273,6 +273,8 @@ Quando Rodolfo der autonomia explícita para resolver a fila inteira, reduza nar
 Long-runs com centenas de uploads exigem controle de processo único, refresh OAuth em `401`, reconciliação por `queue_id` e limpeza auditada de duplicados: `references/drive-clean-copy-long-run-recovery.md`.
 Para filas longas já aprovadas, usar o padrão de controlador/resume sem upload paralelo: `references/drive-bulk-upload-controller.md`.
 
+Quando a nomenclatura já foi normalizada e Rodolfo disser para executar a organização final, seguir `references/upload-canvas-final-organization-after-naming.md`: inventário fresco, classificação visual dos pendentes, validação de variante 3 dígitos, fila final executor-compatible (`original_filename` obrigatório), dedup MD5, clean-copy com report e validação por status.
+
 ### Continuação de classificação após limpeza de duplicatas
 
 Quando a pasta RAW tiver sido parcialmente ajustada a pedido explícito de Rodolfo — por exemplo, vídeos duplicados movidos de `cartao de credito/videos` para `videos2` — sempre recomeçar a classificação com inventário Drive read-only fresco. Não reutilizar CSV anterior para proposta final.
