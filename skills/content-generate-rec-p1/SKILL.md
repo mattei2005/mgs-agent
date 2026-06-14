@@ -663,7 +663,7 @@ Regras para revisar/aplicar pacote de Fase 3:
 4. Registrar no JSON: modo, provider/profile/model, `prompt_chars`, duração, rc, regenerações e fallback.
 5. Fatos oficiais continuam vindo do fluxo determinístico atual; o modelo só transforma fatos confirmados em narrativa.
 6. Manter todos os gates atuais depois do LLM: word count, LazyBlocks, Yoast, title/meta/focus, no-cache, fingerprint/anti-repetição e renderer.
-7. Fallback determinístico é aceitável para draft/teste, mas para `publish` deve bloquear por padrão salvo flag explícita de override.
+7. **Sem fallback automático em nenhum status.** Draft e publish usam a mesma lógica. Default = LLM. Se o LLM falhar (rc!=0, timeout, sem marcador, gate reprovado): 1 regeneração; se falhar de novo, **bloqueia** (não publica, não cai em determinístico). O gerador determinístico só roda com flag explícita de debug/reversão (`--rec-body-mode deterministic` / `--p1-body-mode deterministic`), nunca como fallback automático.
 8. Controlar tamanho do prompt (hard gate conservador, ex.: <= 90k chars) porque o CLI recebe `-z` como argumento e há limite prático de argv.
 
 Detalhes do probe validado, riscos e pontos de encaixe: `references/fase3-hermes-cli-llm-design-2026-06-14.md`.

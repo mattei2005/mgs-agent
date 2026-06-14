@@ -1,5 +1,10 @@
 # Fase 3 — Hermes CLI one-shot para geração editorial LLM
 
+> **STATUS: superseded.** O desenho oficial e completo da Fase 3 é `FASE3-DESENHO-v2`
+> (entregue pelo Claude, aprovado por Rodolfo + Zeus). Este arquivo é uma nota de probe/encaixe
+> anterior; mantido só como histórico do teste do Hermes CLI. Em qualquer divergência, vale o v2.
+> A regra de fallback abaixo já foi corrigida para a regra final (sem fallback automático).
+
 Contexto: após a Fase 2, REC e P1 ficaram com uma única autoridade editorial (`contracts/cc-rec.md` e `contracts/cc-p1.md`), mas o corpo dos artigos ainda é gerado por Python determinístico (`generate_article_local` no REC e `generate_p1_body` no P1). Isso limita variação e foi identificado como causa raiz dos conteúdos repetidos.
 
 ## Estado confirmado
@@ -44,9 +49,14 @@ Usar Hermes CLI one-shot primeiro, em vez de construir cliente Codex OAuth novo.
 7. Manter fatos oficiais fora do modelo: fee/APR/benefícios vêm do fluxo atual; o LLM só escreve narrativa a partir de fatos confirmados.
 8. Todos os gates atuais continuam depois da geração: word count, LazyBlocks, Yoast, title/meta/focus, no-cache, fingerprint/anti-repetição e renderer.
 
-## Fallback determinístico
+## Fallback determinístico (REGRA FINAL — corrigida)
 
-Fallback determinístico é aceitável para draft/teste, marcado explicitamente no relatório. Para `publish`, não publicar fallback determinístico por padrão: bloquear salvo flag explícita (`--allow-deterministic-fallback-publish` ou equivalente). Motivo: publicar fallback reintroduz a causa raiz dos repetidos que a Fase 3 busca corrigir.
+NÃO existe fallback automático em nenhum status. Draft e publish usam a MESMA lógica.
+Default = LLM. Se o LLM falhar (rc!=0, timeout, sem marcador, gate reprovado): 1 regeneração;
+se falhar de novo, BLOQUEIA — não publica e não cai em determinístico. O gerador determinístico
+só roda com flag explícita de debug/reversão (`--rec-body-mode deterministic` /
+`--p1-body-mode deterministic`), nunca automático. Motivo: qualquer fallback automático para o
+determinístico reintroduz a causa raiz dos repetidos que a Fase 3 corrige.
 
 ## Pontos de encaixe prováveis
 
