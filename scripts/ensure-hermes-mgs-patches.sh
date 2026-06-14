@@ -50,6 +50,13 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    restart-recovery-checkpoint-idempotent.patch)
+      if grep -q "Internal restart recovery checkpoint" "$REPO/gateway/run.py" \
+        && grep -q "Do not re-run" "$REPO/gateway/run.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     discord-post-response-thread-title-rename.patch)
       if grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
         && grep -Eq "Discord thread renamed from auto-generated title|Discord GPT-style thread title applied" "$REPO/gateway/run.py"; then
