@@ -49,6 +49,8 @@ Then repair the auto-push layer and commit it on `main`.
 - `.git/hooks/post-commit` should push `origin HEAD:main` only when current branch is `main`; if branch is not `main`, log an explicit failure instead of silently pushing the wrong ref.
 - `monitor-auto-push.sh` must validate repo health, not just push-log lines: current branch, `HEAD` vs `origin/main`, dirty tree count, and fetchability of `origin/main`.
 - Ignore transient state/rescue files such as `data/git-rescue-*/` and `data/hermes-news-explainer-state.json.*` so runtime state does not enter commits.
+- Under `set -euo pipefail`, avoid `git status --porcelain | head -N | ...`: with many dirty files the producer can receive SIGPIPE and the watcher exits `141`, causing a systemd restart loop. Capture status once (`STATUS_OUTPUT=$(git status --porcelain -- <filtered pathspecs>)`) and derive commit messages/guardrails from that variable.
+- If adding ignores for a directory that already has tracked files (example: heavy generated Ares video frame samples), do not use broad `git add -A -- .` from the watcher. Stage only the paths returned by the filtered `git status`, otherwise Git may error with “paths are ignored” and restart the service.
 
 ## Validation
 
