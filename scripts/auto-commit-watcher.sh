@@ -10,6 +10,14 @@ DEBOUNCE_SECONDS=10  # espera 10s antes de commitar (evita spam)
 SENSITIVE_PATH_REGEX='(^|/)(\.env|.*\.pem|.*\.key|id_rsa|id_ed25519|.*credential.*|.*secret.*|.*token.*|.*password.*|.*webhook.*|.*private.*|hosts\.yml|\.npmrc|\.pypirc)$'
 SENSITIVE_ALLOWLIST_REGEX='(^|/)honcho_sanitized_secret_scan\.py$'
 
+# Não commitar artefatos/runtime state que mudam em loop ou são pesados.
+# Importante: aplicar o mesmo pathspec em `git status` e `git add`.
+GIT_PATHSPECS=(
+  "."
+  ":(exclude)data/*-state.json"
+  ":(exclude)data/ares/creative-inventory/video-frame-samples-full/**"
+)
+
 mkdir -p "$(dirname "$LOG_FILE")"
 cd "$REPO_DIR" || exit 1
 
@@ -32,19 +40,24 @@ while inotifywait -r -e modify,create,delete,move \
     continue
   fi
 
+  # Captura o status uma única vez. Evita pipelines com `head` sob
+  # `set -o pipefail`: quando há muitas mudanças, o produtor do pipe pode
+  # receber SIGPIPE e derrubar o watcher com exit 141, gerando restart loop.
+  STATUS_OUTPUT=$(git status --porcelain -- "${GIT_PATHSPECS[@]}")
+
   # Verifica se há algo pra commitar
-  if git diff --quiet && git diff --cached --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
+  if [ -z "$STATUS_OUTPUT" ]; then
     log "Working tree limpo, skipping"
     continue
   fi
 
-  # Lista arquivos modificados pra mensagem
-  CHANGES=$(git status --porcelain | head -3 | awk '{print $2}' | tr '\n' ' ')
-  CHANGES_TRIM=$(echo "$CHANGES" | cut -c1-100)
+  # Lista arquivos modificados pra mensagem sem fechar pipe prematuramente.
+  CHANGES=$(printf '%s\n' "$STATUS_OUTPUT" | awk 'NR<=3 {print $2}' | tr '\n' ' ')
+  CHANGES_TRIM=$(printf '%s' "$CHANGES" | cut -c1-100)
 
   # Guardrail: nunca auto-commitar arquivo com nome sensível.
   # Se aparecer algo suspeito, aborta esta rodada e exige revisão humana.
-  SENSITIVE_CHANGES=$(git status --porcelain | awk '{print $2}' | grep -Ei "$SENSITIVE_PATH_REGEX" | grep -Eiv "$SENSITIVE_ALLOWLIST_REGEX" || true)
+  SENSITIVE_CHANGES=$(printf '%s\n' "$STATUS_OUTPUT" | awk '{print $2}' | grep -Ei "$SENSITIVE_PATH_REGEX" | grep -Eiv "$SENSITIVE_ALLOWLIST_REGEX" || true)
   if [ -n "$SENSITIVE_CHANGES" ]; then
     log "BLOQUEADO: arquivo sensível detectado; commit automático abortado"
     printf '%s\n' "$SENSITIVE_CHANGES" | while IFS= read -r f; do log "  sensitive: $f"; done
@@ -52,8 +65,9 @@ while inotifywait -r -e modify,create,delete,move \
   fi
 
   # Add + commit (push acontece via hook 1P existente)
-  # `git add -A -- .` respeita .gitignore; o guardrail acima bloqueia nomes sensíveis não ignorados.
-  git add -A -- .
+  # `git add -A -- <pathspecs>` respeita .gitignore e os excludes acima;
+  # o guardrail bloqueia nomes sensíveis não ignorados.
+  git add -A -- "${GIT_PATHSPECS[@]}"
 
   COMMIT_MSG="auto: $CHANGES_TRIM"
 

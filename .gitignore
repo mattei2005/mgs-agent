@@ -49,6 +49,7 @@ data/anthropic-cost-state.json
 data/tool-loops-state.json
 data/cron-stale-logs-state.json
 data/hermes-news-explainer-state.json
+data/*-state.json
 data/mgs-ops-briefing-latest.md
 data/mgs-ops-control-plane-latest.json
 data/chat-logs/
@@ -61,6 +62,9 @@ api/usage.db
 # ─── Backups antigos (snapshots Hetzner cobrem) ───────────────
 backups/
 data/backup-*/
+
+# ─── Ares generated media samples (pesados/runtime) ─────────────
+data/ares/creative-inventory/video-frame-samples-full/
 
 # ─── Lockfiles internos do Hermes ─────────────────────────────
 *.lock
