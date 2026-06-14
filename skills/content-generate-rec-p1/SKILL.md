@@ -633,6 +633,20 @@ Se o estado real dos runners/scripts ainda não cumprir algum ponto desta SKILL,
 
 No `scripts/mgs-rec-runner.py`, `load_rec_template_contract` deve usar `skills/content-generate-rec-p1/contracts/cc-rec.md` como contract universal obrigatório (`template_key=cc-universal`). Não reintroduzir fallback para `templates/rec-{template_key}.md`: se `cc-rec.md` faltar, o runner deve falhar com `RunnerError` claro e auditável. Detalhe e checklist de validação: `references/rec-runner-template-fallback-removal-2026-06-13.md`.
 
-### Aplicação de pacotes de migração REC+P1
+### Aplicação e revisão de pacotes de migração REC+P1
 
-Quando Rodolfo enviar pacote/script de refactor da Atena para REC+P1, tratar como mudança auditável: revisar o script, registrar `git status`/HEAD/origin e hashes dos alvos antes, rodar exatamente com as travas, validar independentemente depois, commitar somente o diff esperado e separar dirty state preexistente no report. Para o padrão completo validado na Fase 2, ver `references/fase2-migration-package-ops-2026-06-14.md`.
+Quando Rodolfo enviar pacote/script de refactor da Atena para REC+P1 — especialmente quando vier de outro LLM/Claude — tratar como mudança auditável e **revisar o mérito**, não só executar as travas.
+
+Fluxo obrigatório:
+
+1. Revisar o script e o arquivo editado/staging antes de rodar.
+2. Registrar `git status`, HEAD/origin/remote e hashes dos alvos antes.
+3. Confirmar que o pacote faz sentido contra a arquitetura atual: contracts universais `cc-rec.md`/`cc-p1.md`, sem `sites.json.template_key`, sem templates legados ativos e sem cache editorial como fonte.
+4. Rodar exatamente com as travas quando estiver coerente.
+5. Validar independentemente depois: hashes, grep pós-mudança, smoke tests, presença/ausência de arquivos, JSON parseável e diff esperado.
+6. Usar grep **amplo e semântico** para resíduos documentais, não só os padrões do script. Exemplo para AGENT.md/routing: `template_key|templates/rec|templates/p1|rec-gb-cc-en|gb-cc-en|4 mandatory pauses|verified cache|rec_create|list_templates`.
+7. Committar somente o diff esperado; se auto-commit capturar staging/artefato temporário, remover em commit corretivo sem reescrever histórico remoto.
+8. Separar dirty state preexistente no report final.
+9. Se sobrar resíduo documental que possa confundir Atena/Claude, pausar e recomendar micro-pacote corretivo antes de declarar a fase “100% fechada”.
+
+Para o padrão completo validado na Fase 2 e a lição do Pacote 4/4.1, ver `references/fase2-migration-package-ops-2026-06-14.md`.
