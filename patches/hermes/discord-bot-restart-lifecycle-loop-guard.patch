@@ -1,0 +1,63 @@
+--- a/gateway/run.py
++++ b/gateway/run.py
+@@ -4005,12 +4005,32 @@
+                 _parsed = _parse_session_key(session_key)
+                 if not _parsed:
+                     continue
+                 platform_str = _parsed["platform"]
+                 chat_id = _parsed["chat_id"]
+                 thread_id = _parsed.get("thread_id")
++
++            # MGS multi-agent guard: do not send gateway lifecycle notices into
++            # Discord sessions whose origin was another MGS bot. Those notices are
++            # useful for humans but can wake the destination bot and create a
++            # bot↔bot loop while the source gateway is draining/restarting.
++            if platform_str == "discord" and source is not None:
++                origin_user_id = str(getattr(source, "user_id", "") or "")
++                if origin_user_id in {
++                    "1496296175014252634",  # Zeus
++                    "1496306920494202950",  # Atena
++                    "1508864261504630925",  # Ares
++                    "1513006098133680290",  # Hera
++                }:
++                    logger.info(
++                        "Shutdown notification suppressed for bot-originated Discord session: chat=%s thread=%s user=%s",
++                        chat_id,
++                        thread_id,
++                        origin_user_id,
++                    )
++                    continue
+ 
+             # Deduplicate only identical delivery targets. Thread/topic-aware
+             # platforms can share a parent chat while still routing to distinct
+             # destinations via metadata.
+             dedup_key = (platform_str, chat_id, str(thread_id) if thread_id else None)
+             if dedup_key in notified:
+--- a/plugins/platforms/discord/adapter.py
++++ b/plugins/platforms/discord/adapter.py
+@@ -894,12 +894,25 @@
+                 #   "all"      — accept all bot messages
+                 # Must run BEFORE the user allowlist check so that bots
+                 # permitted by DISCORD_ALLOW_BOTS are not rejected for
+                 # not being in DISCORD_ALLOWED_USERS (fixes #4466).
+                 _role_authorized = False
+                 if getattr(message.author, "bot", False):
++                    _bot_content = (message.content or "").strip()
++                    if _bot_content.startswith((
++                        "⚠️ Gateway restarting",
++                        "⚠️ Gateway shutting down",
++                        "⏳ Gateway is restarting",
++                    )):
++                        logger.info(
++                            "[%s] Ignoring gateway lifecycle notice from bot author=%s channel=%s",
++                            self.name,
++                            getattr(message.author, "id", None),
++                            getattr(message.channel, "id", None),
++                        )
++                        return
+                     allow_bots = os.getenv("DISCORD_ALLOW_BOTS", "none").lower().strip()
+                     if allow_bots == "none":
+                         return
+                     elif allow_bots == "mentions":
+                         if not self._client.user or self._client.user not in message.mentions:
+                             return
