@@ -44,11 +44,11 @@ Modelo base:
 Exemplos:
 
 ```text
-CC_CA_FR_IMG_APPROBATION_NV_01.jpg
-CC_CA_FR_IMG_WALLET_NH_01.png
-CC_CA_FR_VID_SANS_VERIFICATION_PV_01.mp4
-CC_US_ES_IMG_APROBACION_NV_01.jpg
-CC_US_ES_VID_LIMITE_ALTO_PH_01.mp4
+CC_CA_FR_IMG_APPROBATION_NV_001.jpg
+CC_CA_FR_IMG_WALLET_NH_001.png
+CC_CA_FR_VID_SANS_VERIFICATION_PV_001.mp4
+CC_US_ES_IMG_APROBACION_NV_001.jpg
+CC_US_ES_VID_LIMITE_ALTO_PH_001.mp4
 ```
 
 ## Campos do nome
@@ -62,7 +62,7 @@ LANG       | Idioma do criativo: EN, ES, FR, DE, PT etc.
 FORMAT     | IMG ou VID
 ANGLE      | Ângulo controlado por operação/idioma
 P_ORIENT   | Código compacto de pessoa + orientação
-VARIANT    | Sequência 2 dígitos: 01, 02, 03...
+VARIANT    | Sequência 3 dígitos: 001, 002, 003... até 999
 ext        | Extensão real do arquivo: jpg, png, mp4 etc.
 ```
 

@@ -1,6 +1,6 @@
 # Hermes/MGS post-update full system review
 
-Use when Rodolfo asks for a broad post-update audit: "confere se tudo no sistema está funcionando", "todas as funcionalidades, crons e patches", "padrões dos agentes" and "o que veio de novo".
+Use when Rodolfo asks for a broad post-update audit or an operational sweep: "confere tudo", "confere se tudo no sistema está funcionando", "todas as funcionalidades, crons e patches", "padrões dos agentes" and "o que veio de novo".
 
 ## Scope
 

@@ -9,10 +9,10 @@ Do not classify a video from the Drive thumbnail or first frame only. Some Canva
 Observed example:
 
 ```text
-Old mistaken name     | CC_DE_DE_VID_UNKNOWN_NV_01.mp4
+Old mistaken name     | CC_DE_DE_VID_UNKNOWN_NV_001.mp4
 Reason for mistake    | initial thumbnail/frame looked weak/unclear
 Multi-frame finding   | text appeared later: Credit Card / APPROVED FOR YOU / LIMIT FROM $6,550.00
-Corrected name        | CC_US_EN_VID_APROBACION_NV_01.mp4
+Corrected name        | CC_US_EN_VID_APROBACION_NV_001.mp4
 Correct angle         | APROBACION
 Correct P_ORIENT      | NV
 ```

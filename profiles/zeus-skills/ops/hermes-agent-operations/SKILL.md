@@ -298,7 +298,9 @@ Quando Rodolfo disser “GPT-5.5 pra tudo”, “zero Anthropic”, “deleta de
 
 ## 4. Image generation / OpenAI-Codex OAuth
 
-Use quando um agente MGS, especialmente Hera/Creative Ops, já conversa em `gpt-5.5` via `openai-codex`, mas falha ao gerar imagem ou pede `OPENAI_API_KEY`/`FAL_KEY`.
+Use quando um agente MGS, especialmente Hera/Creative Ops, já conversa em `gpt-5.5` via `openai-codex`, mas falha ao gerar imagem ou pede `OPENAI_API_KEY`/`FAL_KEY`. Também use em revisões gerais tipo “confere tudo” para validar que o perfil esperado para imagem (Hera) consegue gerar um arquivo real.
+
+Validação prática preferida para smoke test de imagem: depois do `hermes -p hera -t image_gen ...` retornar um caminho, verificar arquivo com `stat` e dimensões via Python/Pillow (`Image.open(path).width/height/format`). Não depender de utilitários opcionais como `file`; a evidência suficiente é path existente, tamanho >0 e dimensões/formato válidos.
 
 Regra MGS de papel: geração de criativos/imagens é responsabilidade da Hera. Zeus é GM/admin e não precisa de `image_gen`; ausência de `image_gen` no Zeus é estado esperado, não falha funcional. Só configurar Zeus para imagem se Rodolfo pedir explicitamente que Zeus passe a gerar imagem.
 

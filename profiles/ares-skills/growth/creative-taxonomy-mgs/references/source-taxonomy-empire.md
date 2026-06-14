@@ -11,9 +11,9 @@ Resumo do arquivo enviado por Rodolfo (`taxonomia_criativos_empire_1.txt`) e dec
 Exemplos recebidos:
 
 ```text
-CC_CA_FR_IMG_APPROBATION_NV_01.jpg
-CC_CA_FR_IMG_WALLET_NV_01.jpg
-CC_CA_FR_VID_SANS_VERIFICATION_PV_01.mp4
+CC_CA_FR_IMG_APPROBATION_NV_001.jpg
+CC_CA_FR_IMG_WALLET_NV_001.jpg
+CC_CA_FR_VID_SANS_VERIFICATION_PV_001.mp4
 ```
 
 ## Campos recebidos
@@ -27,7 +27,7 @@ LANG       | FR, EN, ES etc.
 FORMAT     | IMG ou VID
 ANGLE      | APPROBATION, SANS_VERIFICATION, LIMITE_HAUT, CHOIX, WALLET, UNKNOWN...
 P_ORIENT   | pessoa + orientação
-VARIANT    | 01, 02, 03...
+VARIANT    | 001, 002, 003... até 999
 ```
 
 ## P_ORIENT recebido
