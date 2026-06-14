@@ -650,3 +650,20 @@ Fluxo obrigatório:
 9. Se sobrar resíduo documental que possa confundir Atena/Claude, pausar e recomendar micro-pacote corretivo antes de declarar a fase “100% fechada”.
 
 Para o padrão completo validado na Fase 2 e a lição do Pacote 4/4.1, ver `references/fase2-migration-package-ops-2026-06-14.md`.
+
+### Fase 3: geração editorial via GPT-5.5/Codex OAuth
+
+A Fase 3 deve tratar a geração do corpo dos artigos como mudança arquitetural auditável: REC e P1 ainda têm geradores Python determinísticos (`generate_article_local` e `generate_p1_body`) que causam baixa variação entre cartões da mesma categoria. O caminho preferido inicialmente é Hermes CLI one-shot com perfil `atena` (`openai-codex`/`gpt-5.5`), não cliente Codex OAuth novo, desde que o pacote implemente parser rígido, timeout, telemetria e gates pós-geração.
+
+Regras para revisar/aplicar pacote de Fase 3:
+
+1. Usar CLI como lista de argumentos, nunca `shell=True`: `/root/.local/bin/hermes -p atena -z <prompt>`.
+2. Exigir marcadores fixos de saída e aceitar somente HTML dentro dos marcadores; sem marcador = falha/regeneração única.
+3. Máximo de 1 geração + 1 regeneração por artigo; sem loop ReAct ou patching ao vivo.
+4. Registrar no JSON: modo, provider/profile/model, `prompt_chars`, duração, rc, regenerações e fallback.
+5. Fatos oficiais continuam vindo do fluxo determinístico atual; o modelo só transforma fatos confirmados em narrativa.
+6. Manter todos os gates atuais depois do LLM: word count, LazyBlocks, Yoast, title/meta/focus, no-cache, fingerprint/anti-repetição e renderer.
+7. Fallback determinístico é aceitável para draft/teste, mas para `publish` deve bloquear por padrão salvo flag explícita de override.
+8. Controlar tamanho do prompt (hard gate conservador, ex.: <= 90k chars) porque o CLI recebe `-z` como argumento e há limite prático de argv.
+
+Detalhes do probe validado, riscos e pontos de encaixe: `references/fase3-hermes-cli-llm-design-2026-06-14.md`.
