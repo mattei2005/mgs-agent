@@ -96,6 +96,7 @@ apply_patch_if_needed "restart-recovery-checkpoint-idempotent.patch"
 apply_patch_if_needed "discord-post-response-thread-title-rename.patch"
 apply_patch_if_needed "discord-new-thread-ai-title-once.patch"
 apply_patch_if_needed "discord-thread-title-deduplicate-safe-autorename.patch"
+apply_patch_if_needed "discord-bot-gateway-lifecycle-loop-guard.patch"
 apply_patch_if_needed "discord-report-infra-no-auto-thread.patch"
 
 # Invariants that must survive every Hermes update. If any grep fails, the
@@ -145,6 +146,10 @@ grep -q "_discord_title_message_from_gateway_text" "$REPO/gateway/run.py" \
   || fail "unsafe legacy Discord rename reason still present"
 grep -q "Auto-thread skipped for REPORT-INFRA control-plane message" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord REPORT-INFRA inline/no-thread guard"
+grep -q "Ignoring gateway lifecycle notice from bot" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord bot lifecycle notice ignore guard"
+grep -q "Shutdown notification suppressed for bot-originated Discord session" "$REPO/gateway/run.py" \
+  || fail "missing Discord bot-originated shutdown notification suppressor"
 
 PYBIN="$REPO/venv/bin/python"
 [[ -x "$PYBIN" ]] || PYBIN="python3"

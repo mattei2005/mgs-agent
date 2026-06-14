@@ -81,3 +81,8 @@ python3 -m py_compile plugins/platforms/discord/adapter.py gateway/run.py
 
 ### Hotfix 2026-06-14 — dedupe guard
 `discord-thread-title-deduplicate-safe-autorename.patch` removes a contiguous duplicate legacy block that could be left by older patch layering: duplicate `_is_discord_thread_lane`, duplicate `_sanitize_discord_thread_title`, unsafe `_rename_discord_thread_for_session_title` with reason `Hermes auto-generated session title`, and duplicate scheduler. `ensure-hermes-mgs-patches.sh` now enforces exactly one copy of each title function and zero legacy unsafe reason occurrences.
+
+
+## discord-bot-gateway-lifecycle-loop-guard.patch
+
+Hotfix 2026-06-14: prevents MGS bot↔bot loops during gateway restarts. `run.py` suppresses shutdown/restart notices for active Discord sessions whose origin user is another MGS bot, and `adapter.py` ignores gateway lifecycle notice text from bot authors even when `DISCORD_ALLOW_BOTS` permits inter-agent messages.
