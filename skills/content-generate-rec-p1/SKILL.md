@@ -632,3 +632,7 @@ Se o estado real dos runners/scripts ainda não cumprir algum ponto desta SKILL,
 ### REC runner: `cc-rec.md` como hard requirement
 
 No `scripts/mgs-rec-runner.py`, `load_rec_template_contract` deve usar `skills/content-generate-rec-p1/contracts/cc-rec.md` como contract universal obrigatório (`template_key=cc-universal`). Não reintroduzir fallback para `templates/rec-{template_key}.md`: se `cc-rec.md` faltar, o runner deve falhar com `RunnerError` claro e auditável. Detalhe e checklist de validação: `references/rec-runner-template-fallback-removal-2026-06-13.md`.
+
+### Aplicação de pacotes de migração REC+P1
+
+Quando Rodolfo enviar pacote/script de refactor da Atena para REC+P1, tratar como mudança auditável: revisar o script, registrar `git status`/HEAD/origin e hashes dos alvos antes, rodar exatamente com as travas, validar independentemente depois, commitar somente o diff esperado e separar dirty state preexistente no report. Para o padrão completo validado na Fase 2, ver `references/fase2-migration-package-ops-2026-06-14.md`.
