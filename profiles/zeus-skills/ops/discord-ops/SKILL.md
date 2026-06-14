@@ -95,6 +95,7 @@ Regras operacionais:
 - Não responder a mensagens de outro agente que sejam só `queued`, `read-only`, `recebido`, `sem ação`, `(empty)`, erro transitório de modelo, confirmação de estado, pedido redundante de confirmação ou repetição do que já foi aceito.
 - Depois de um estado final aceito, ficar em silêncio até pedido novo do Rodolfo, pergunta operacional real, autorização explícita ou alerta crítico.
 - Se Rodolfo disser “parem”, “looping”, “pare de mencionar”, “pare de responder”, ou equivalente: uma confirmação curta ao Rodolfo no máximo; depois silêncio total para mensagens de agente/gateway naquela thread.
+- Durante restart/drain, mensagens automáticas de lifecycle (`⚠️ Gateway restarting`, `⚠️ Gateway shutting down`, `⏳ Gateway is restarting...`) não devem acordar outros bots MGS em threads compartilhadas. O runtime deve suprimir notificações de shutdown para sessões Discord originadas por bot e o adapter Discord deve ignorar lifecycle notices vindos de bot antes de `DISCORD_ALLOW_BOTS`. Validar por log `Ignoring gateway lifecycle notice from bot` / `Shutdown notification suppressed for bot-originated Discord session`. Detalhe: `references/discord-thread-title-dedupe-and-restart-loop-2026-06-14.md`.
 - Citar outro agente em texto simples (`Atena`, `Zeus`) quando não for necessário acordá-lo. **Não usar user mention só para falar sobre o agente.**
 - Usar user mention de outro bot apenas quando Rodolfo pedir explicitamente para acionar/encaminhar ao agente, ou em comunicação cross-channel onde `DISCORD_ALLOW_BOTS=mentions` exige mention para roteamento.
 - Em conversa multi-agente onde Rodolfo impôs gate de segurança, explicação/alinhamento pode ocorrer sem ação; execução, patch, restart, persistência em SOUL/config/skill/script só com autorização explícita.
@@ -463,6 +464,26 @@ Guardrails esperados para o rename semântico de thread nova:
 - Nunca sobrescrever título manual/específico, thread criada por humano ou thread antiga reativada por reset/follow-up.
 
 Em thread existente, usar o contexto da thread/reply como assunto principal e responder sem tocar no título. Se a conversa mudar completamente de objetivo, abrir/usar outra thread em vez de renomear a atual.
+
+#### Pitfall crítico: função segura pode estar sobrescrita por duplicata posterior
+
+Incidente validado em 2026-06-14: `_discord_thread_safe_to_autorename(...)` existia e estava correta, mas uma segunda definição posterior de `_rename_discord_thread_for_session_title(...)` em `gateway/run.py` sobrescrevia a versão segura. Sintoma: log de rename indevido após pausa/session reset e reason efetivo `Hermes auto-generated session title` em vez de `MGS AI-generated session title`.
+
+Ao diagnosticar rename indevido, não basta ler a primeira ocorrência da função. Sempre contar definições e reasons antes de patch/restart:
+
+```bash
+RUN=/root/.hermes/hermes-agent/gateway/run.py
+python3 -m py_compile "$RUN"
+grep -c 'async def _rename_discord_thread_for_session_title' "$RUN"
+grep -c 'def _schedule_discord_thread_title_rename' "$RUN"
+grep -c 'async def _discord_thread_safe_to_autorename' "$RUN"
+grep -c 'def _is_discord_thread_lane' "$RUN"
+grep -c 'def _sanitize_discord_thread_title' "$RUN"
+grep -c 'MGS AI-generated session title' "$RUN"
+grep -c 'Hermes auto-generated session title' "$RUN" || true
+```
+
+Estado correto: todos os helpers/rename/schedule/guard = `1`, reason MGS = `1`, reason Hermes legado = `0`. Se houver duplicatas, fazer backup, cortar apenas o bloco duplicado contíguo e revalidar antes de reiniciar. Detalhe completo: `references/discord-thread-title-dedupe-and-restart-loop-2026-06-14.md`.
 
 Pitfall validado 1: Rodolfo respondeu `Ok` em reply a um status de execução da Fase 4, mas Zeus tratou como mensagem solta e renomeou a thread para um assunto errado/em espanhol. Correção: em reply, resolver primeiro o contexto citado; se a thread já existe e o objetivo continua, não mexer no título. Referência: `references/discord-open-thread-rename-pitfall-2026-06-07.md`.
 
