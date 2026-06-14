@@ -645,11 +645,12 @@ Fluxo obrigatório:
 4. Rodar exatamente com as travas quando estiver coerente.
 5. Validar independentemente depois: hashes, grep pós-mudança, smoke tests, presença/ausência de arquivos, JSON parseável e diff esperado.
 6. Usar grep **amplo e semântico** para resíduos documentais, não só os padrões do script. Exemplo para AGENT.md/routing: `template_key|templates/rec|templates/p1|rec-gb-cc-en|gb-cc-en|4 mandatory pauses|verified cache|rec_create|list_templates`.
-7. Committar somente o diff esperado; se auto-commit capturar staging/artefato temporário, remover em commit corretivo sem reescrever histórico remoto.
-8. Separar dirty state preexistente no report final.
-9. Se sobrar resíduo documental que possa confundir Atena/Claude, pausar e recomendar micro-pacote corretivo antes de declarar a fase “100% fechada”.
+7. Quando o pacote vier de Claude/outro LLM com arquivos copiados fora da VPS, tratar a cópia externa como potencialmente stale: gerar/usar tar + SHA do estado real, validar contra a SKILL ativa e references reais, e não aceitar “grep zero” externo sem confirmação local. Se surgir design/reference paralelo, marcar como `superseded` ou consolidar antes de codar.
+8. Committar somente o diff esperado; se auto-commit capturar staging/artefato temporário, remover em commit corretivo sem reescrever histórico remoto.
+9. Separar dirty state preexistente no report final.
+10. Se sobrar resíduo documental que possa confundir Atena/Claude, pausar e recomendar micro-pacote corretivo antes de declarar a fase “100% fechada”.
 
-Para o padrão completo validado na Fase 2 e a lição do Pacote 4/4.1, ver `references/fase2-migration-package-ops-2026-06-14.md`.
+Para o padrão completo validado na Fase 2 e as lições dos Pacotes 4/4.1/3.0.1, ver `references/fase2-migration-package-ops-2026-06-14.md` e `references/fase3-hermes-cli-llm-design-2026-06-14.md`.
 
 ### Fase 3: geração editorial via GPT-5.5/Codex OAuth
 
