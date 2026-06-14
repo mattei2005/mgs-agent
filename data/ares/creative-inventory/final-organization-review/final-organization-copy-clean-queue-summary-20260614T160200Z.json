@@ -1,0 +1,34 @@
+{
+  "generated_at_utc": "2026-06-14T15:57:51.024536+00:00",
+  "input_files": 840,
+  "queue_rows": 807,
+  "skipped_duplicate_rows": 2,
+  "remaining_review_rows": 31,
+  "by_source_bucket": {
+    "visual_review_promoted": 275,
+    "canonical_3digit": 532
+  },
+  "by_format": {
+    "IMG": 169,
+    "VID": 638
+  },
+  "by_language": {
+    "ES": 271,
+    "EN": 460,
+    "DE": 76
+  },
+  "by_angle": {
+    "LIMITE_ALTO": 269,
+    "RECOMPENSAS": 31,
+    "APROBACION": 507
+  },
+  "files": {
+    "queue_csv": "/root/mgs-agent/data/ares/creative-inventory/final-organization-review/final-organization-copy-clean-queue-20260614T160200Z.csv",
+    "skipped_duplicates_csv": "/root/mgs-agent/data/ares/creative-inventory/final-organization-review/final-organization-dedup-skipped-20260614T160200Z.csv",
+    "remaining_review_csv": "/root/mgs-agent/data/ares/creative-inventory/final-organization-review/final-organization-remaining-review-20260614T160200Z.csv"
+  },
+  "sha256": {
+    "queue_csv": "d469c41615fb55b0fe5a9a1e7640a2b43a05b8b2bd8f814e79f09f59a33f5f98",
+    "remaining_review_csv": "3094661f2c09fad1cf8f28989767c4591db93c1e8ec8faabd8453c6f1567ecea"
+  }
+}
