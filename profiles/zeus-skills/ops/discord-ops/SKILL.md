@@ -444,6 +444,18 @@ Política correta tem dois estágios:
 1. **Thread nova auto-criada pelo bot:** pode nascer com título provisório/determinístico e receber **um único rename semântico pós-primeira resposta** estilo ChatGPT, quando o título LLM ficar disponível.
 2. **Thread já aberta/renomeada:** deve manter o nome até ser finalizada. Não renomear por follow-up, pausa longa, session reset, reply curto, pergunta nova dentro da mesma thread ou novo auto-title interno da sessão Hermes.
 
+#### Pitfall validado: duplicata de função sobrescrevendo trava segura
+
+Ao corrigir rename de thread em `/root/.hermes/hermes-agent/gateway/run.py`, não validar só a presença de `_discord_thread_safe_to_autorename(...)`. Python usa a **última definição** de um método dentro da classe; se houver uma segunda `_rename_discord_thread_for_session_title(...)` abaixo da versão segura, ela sobrescreve a primeira e pode ignorar a trava.
+
+Checklist obrigatório antes de restart:
+- `grep -n "def _is_discord_thread_lane\|def _sanitize_discord_thread_title\|async def _rename_discord_thread_for_session_title\|def _schedule_discord_thread_title_rename" /root/.hermes/hermes-agent/gateway/run.py`
+- Confirmar contagens esperadas depois do patch: exatamente 1 para `_discord_thread_safe_to_autorename`, `_rename_discord_thread_for_session_title`, `_schedule_discord_thread_title_rename`, `_is_discord_thread_lane` e `_sanitize_discord_thread_title`.
+- Confirmar reasons: `"MGS AI-generated session title"` = 1 e `"Hermes auto-generated session title"` = 0 quando a versão insegura antiga foi removida.
+- Se qualquer grep divergir, **parar e reverter do backup antes de restart**. Não atualizar patch reaplicável nem reiniciar gateways até o gate passar.
+
+Incidente validado: o patch tinha colado um bloco contíguo duplicado com `_is_discord_thread_lane`, `_sanitize_discord_thread_title`, uma `_rename_discord_thread_for_session_title` insegura (sem `await self._discord_thread_safe_to_autorename`, reason `Hermes auto-generated session title`) e um `_schedule_discord_thread_title_rename` duplicado. A correção segura foi remover o bloco duplicado contíguo inteiro, preservando as versões boas anteriores.
+
 Guardrails esperados para o rename semântico de thread nova:
 - Só aplicar em thread Discord auto-criada pelo bot atual.
 - Só aplicar enquanto a thread ainda é recente (janela curta pós-criação; ex. até ~30 min).
