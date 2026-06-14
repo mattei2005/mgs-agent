@@ -95,6 +95,7 @@ apply_patch_if_needed "planned-restart-auto-resume-active-sessions.patch"
 apply_patch_if_needed "restart-recovery-checkpoint-idempotent.patch"
 apply_patch_if_needed "discord-post-response-thread-title-rename.patch"
 apply_patch_if_needed "discord-new-thread-ai-title-once.patch"
+apply_patch_if_needed "discord-thread-title-deduplicate-safe-autorename.patch"
 apply_patch_if_needed "discord-report-infra-no-auto-thread.patch"
 
 # Invariants that must survive every Hermes update. If any grep fails, the
@@ -127,6 +128,21 @@ grep -q "_discord_thread_safe_to_autorename" "$REPO/gateway/run.py" \
   || fail "missing Discord one-time AI title rename guard"
 grep -q "_discord_title_message_from_gateway_text" "$REPO/gateway/run.py" \
   || fail "missing Discord title-generator text cleanup"
+
+[[ $(grep -c "async def _rename_discord_thread_for_session_title" "$REPO/gateway/run.py") == "1" ]] \
+  || fail "duplicate/absent Discord thread rename function"
+[[ $(grep -c "def _schedule_discord_thread_title_rename" "$REPO/gateway/run.py") == "1" ]] \
+  || fail "duplicate/absent Discord thread title scheduler"
+[[ $(grep -c "async def _discord_thread_safe_to_autorename" "$REPO/gateway/run.py") == "1" ]] \
+  || fail "duplicate/absent Discord safe autorename guard"
+[[ $(grep -c "def _is_discord_thread_lane" "$REPO/gateway/run.py") == "1" ]] \
+  || fail "duplicate/absent Discord thread-lane helper"
+[[ $(grep -c "def _sanitize_discord_thread_title" "$REPO/gateway/run.py") == "1" ]] \
+  || fail "duplicate/absent Discord title sanitizer"
+[[ $(grep -c "MGS AI-generated session title" "$REPO/gateway/run.py") == "1" ]] \
+  || fail "missing/duplicate MGS Discord rename reason"
+[[ $(grep -c "Hermes auto-generated session title" "$REPO/gateway/run.py") == "0" ]] \
+  || fail "unsafe legacy Discord rename reason still present"
 grep -q "Auto-thread skipped for REPORT-INFRA control-plane message" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord REPORT-INFRA inline/no-thread guard"
 

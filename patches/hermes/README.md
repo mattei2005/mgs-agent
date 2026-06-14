@@ -77,3 +77,7 @@ python3 -m py_compile plugins/platforms/discord/adapter.py gateway/run.py
 1. Thread nova Discord: nasce com título provisório.
 2. Após primeira resposta: log `Discord thread renamed from auto-generated title`.
 3. Follow-up na mesma thread: não deve renomear novamente; se o cache já foi consumido, skip por `no_provisional_title_record` é esperado.
+
+
+### Hotfix 2026-06-14 — dedupe guard
+`discord-thread-title-deduplicate-safe-autorename.patch` removes a contiguous duplicate legacy block that could be left by older patch layering: duplicate `_is_discord_thread_lane`, duplicate `_sanitize_discord_thread_title`, unsafe `_rename_discord_thread_for_session_title` with reason `Hermes auto-generated session title`, and duplicate scheduler. `ensure-hermes-mgs-patches.sh` now enforces exactly one copy of each title function and zero legacy unsafe reason occurrences.

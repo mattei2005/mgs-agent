@@ -1,0 +1,107 @@
+--- a/gateway/run.py
++++ b/gateway/run.py
+@@ -10779,104 +10779,12 @@
+                 fut.result()
+             except Exception:
+                 logger.debug("Discord thread title rename failed", exc_info=True)
+ 
+         future.add_done_callback(_log_rename_failure)
+ 
+-    def _is_discord_thread_lane(self, source: SessionSource) -> bool:
+-        """Return True when a gateway session maps to a Discord thread."""
+-        return (
+-            source.platform == Platform.DISCORD
+-            and (source.chat_type == "thread" or bool(source.thread_id))
+-            and bool(source.chat_id or source.thread_id)
+-        )
+-
+-    def _sanitize_discord_thread_title(self, title: str) -> str:
+-        """Return a Discord-safe thread title from an auto-generated session title."""
+-        cleaned = re.sub(r"\s+", " ", str(title or "")).strip(" \t\n\r:;,.!?—-–")
+-        if not cleaned:
+-            return "Assunto da Thread"
+-        # Discord channel/thread names are capped at 100 chars. Keep a little
+-        # room and avoid churn from trailing ellipsis when possible.
+-        if len(cleaned) > 90:
+-            cleaned = cleaned[:87].rstrip(" \t\n\r:;,.!?—-–") + "..."
+-        return cleaned
+-
+-    async def _rename_discord_thread_for_session_title(
+-        self,
+-        source: SessionSource,
+-        session_id: str,
+-        title: str,
+-    ) -> None:
+-        """Best-effort rename of a Discord thread when Hermes auto-titles a session."""
+-        if not self._is_discord_thread_lane(source):
+-            return
+-        adapter = self.adapters.get(source.platform) if getattr(self, "adapters", None) else None
+-        client = getattr(adapter, "_client", None) if adapter is not None else None
+-        if client is None:
+-            return
+-        thread_id = str(source.thread_id or source.chat_id or "").strip()
+-        if not thread_id:
+-            return
+-        thread_name = self._sanitize_discord_thread_title(title)
+-        try:
+-            channel = client.get_channel(int(thread_id))
+-            if channel is None:
+-                channel = await client.fetch_channel(int(thread_id))
+-            if channel is None or not hasattr(channel, "edit"):
+-                return
+-            current_name = str(getattr(channel, "name", "") or "").strip()
+-            if current_name == thread_name:
+-                return
+-            await channel.edit(name=thread_name, reason="Hermes auto-generated session title")
+-            logger.info(
+-                "Discord thread renamed from auto-generated title: thread=%s session=%s name=%r previous=%r",
+-                thread_id,
+-                session_id,
+-                thread_name,
+-                current_name,
+-            )
+-        except Exception:
+-            logger.debug("Failed to rename Discord thread for auto-generated title", exc_info=True)
+-
+-    def _schedule_discord_thread_title_rename(
+-        self,
+-        source: SessionSource,
+-        session_id: str,
+-        title: str,
+-    ) -> None:
+-        """Schedule a Discord thread rename from the auto-title background thread."""
+-        if not title or not self._is_discord_thread_lane(source):
+-            return
+-        try:
+-            loop = asyncio.get_running_loop()
+-        except RuntimeError:
+-            loop = getattr(self, "_gateway_loop", None)
+-        if loop is None or loop.is_closed():
+-            return
+-        try:
+-            copied_source = dataclasses.replace(source)
+-        except Exception:
+-            copied_source = source
+-        future = safe_schedule_threadsafe(
+-            self._rename_discord_thread_for_session_title(copied_source, session_id, title),
+-            loop,
+-            logger=logger,
+-            log_message="Discord thread title rename failed to schedule",
+-        )
+-        if future is None:
+-            return
+-
+-        def _log_rename_failure(fut) -> None:
+-            try:
+-                fut.result()
+-            except Exception:
+-                logger.debug("Discord thread title rename failed", exc_info=True)
+-
+-        future.add_done_callback(_log_rename_failure)
+-
+     _TELEGRAM_CAPABILITY_HINT_COOLDOWN_S = 300.0
+ 
+     def _should_send_telegram_capability_hint(self, source: SessionSource) -> bool:
+         """Rate-limit the BotFather Threads Settings screenshot.
+ 
+         If a user sends /topic repeatedly while Threads Settings are still
