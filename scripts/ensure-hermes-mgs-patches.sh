@@ -72,6 +72,13 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    discord-bot-gateway-lifecycle-loop-guard.patch)
+      if grep -q "Shutdown notification suppressed for bot-originated Discord session" "$REPO/gateway/run.py" \
+        && grep -q "Ignoring gateway lifecycle notice from bot" "$REPO/plugins/platforms/discord/adapter.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     discord-report-infra-no-auto-thread.patch)
       if grep -q "Auto-thread skipped for REPORT-INFRA control-plane message" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "is_report_infra_message" "$REPO/plugins/platforms/discord/adapter.py"; then
