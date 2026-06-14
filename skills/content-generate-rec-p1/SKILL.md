@@ -642,7 +642,8 @@ Fluxo obrigatório:
 1. Revisar o script e o arquivo editado/staging antes de rodar.
 2. Registrar `git status`, HEAD/origin/remote e hashes dos alvos antes.
 3. Confirmar que o pacote faz sentido contra a arquitetura atual: contracts universais `cc-rec.md`/`cc-p1.md`, sem `sites.json.template_key`, sem templates legados ativos e sem cache editorial como fonte.
-4. Rodar exatamente com as travas quando estiver coerente.
+4. Para pacotes Fase 3 que alteram REC LLM no `mgs-rec-runner.py`, revisar também `references/fase3-rec-llm-runner-lessons-2026-06-14.md` antes de aplicar: telemetria precisa chegar ao JSON final, falhas devem manter `body_generation` plano, prompts devem respeitar `validate-article.sh`, e default-path change deve ser revertido se smoke real falhar.
+5. Rodar exatamente com as travas quando estiver coerente.
 5. Validar independentemente depois: hashes, grep pós-mudança, smoke tests, presença/ausência de arquivos, JSON parseável e diff esperado.
 6. Usar grep **amplo e semântico** para resíduos documentais, não só os padrões do script. Exemplo para AGENT.md/routing: `template_key|templates/rec|templates/p1|rec-gb-cc-en|gb-cc-en|4 mandatory pauses|verified cache|rec_create|list_templates`.
 7. Quando o pacote vier de Claude/outro LLM com arquivos copiados fora da VPS, tratar a cópia externa como potencialmente stale: gerar/usar tar + SHA do estado real, validar contra a SKILL ativa e references reais, e não aceitar “grep zero” externo sem confirmação local. Se surgir design/reference paralelo, marcar como `superseded` ou consolidar antes de codar.
