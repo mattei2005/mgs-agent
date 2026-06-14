@@ -65,9 +65,14 @@ while inotifywait -r -e modify,create,delete,move \
   fi
 
   # Add + commit (push acontece via hook 1P existente)
-  # `git add -A -- <pathspecs>` respeita .gitignore e os excludes acima;
-  # o guardrail bloqueia nomes sensíveis não ignorados.
-  git add -A -- "${GIT_PATHSPECS[@]}"
+  # Stage somente os paths retornados pelo status filtrado. Evita `git add .`
+  # tocar diretórios ignorados que ainda têm histórico versionado.
+  while IFS= read -r status_line; do
+    [ -n "$status_line" ] || continue
+    path=$(printf '%s\n' "$status_line" | awk '{print $2}')
+    [ -n "$path" ] || continue
+    git add -A -- "$path"
+  done <<< "$STATUS_OUTPUT"
 
   COMMIT_MSG="auto: $CHANGES_TRIM"
 
