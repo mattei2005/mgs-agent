@@ -15,8 +15,10 @@ Never update Hermes "over the top" without this sequence:
 7. Run `/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh` and fail closed if a critical invariant is missing.
 8. Compile critical files touched by Discord/gateway/tools patches.
 9. Validate gateway/systemd state and logs.
-10. Restart gateways only when the update path explicitly includes restart approval; otherwise report that new code is staged but not active in running gateways.
-11. Produce an artifact directory with report/evidence files.
+10. Write `final-report.md` before any gateway restart, because restarting Zeus can terminate the current turn before a Discord reply is delivered.
+11. Restart gateways only when the update path explicitly includes restart approval; otherwise report that new code is staged but not active in running gateways.
+12. On recovery after a restart checkpoint, do not re-run update/restart; read the latest update artifact and deliver the final report in the thread.
+13. Produce an artifact directory with report/evidence files.
 
 ## Critical MGS surface
 
