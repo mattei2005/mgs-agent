@@ -1,130 +1,278 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-THREAD_ID="${THREAD_ID:-1507517903791198248}"
-BASE="/root/mgs-agent"
-REPO="/root/.hermes/hermes-agent"
-HERMES_BIN="${HERMES_BIN:-/root/.hermes/profiles/zeus/home/.local/bin/hermes}"
-STAMP="$(date +%Y%m%d-%H%M%S)"
-LOG="$BASE/logs/hermes-update-controlled-${STAMP}.log"
-PATCH_DIR="$BASE/patches/hermes"
-LOCAL_PATCH="$PATCH_DIR/mgs-discord-local-preupdate-${STAMP}.patch"
-PORT_PATCH="$PATCH_DIR/mgs-discord-plugin-port-${STAMP}.patch"
-BACKUP_PATH="${BACKUP_PATH:-/root/hermes-profiles-backup-20260522-192610.tar.gz}"
-mkdir -p "$PATCH_DIR" "$(dirname "$LOG")"
+# MGS controlled Hermes update
+# Rule: backup + pre diff + upstream patch dry-run + update + post compare + MGS guard + validation.
+# Defaults are conservative: no gateway restart unless RESTART_GATEWAYS=1.
 
+BASE="${BASE:-/root/mgs-agent}"
+REPO="${REPO:-/root/.hermes/hermes-agent}"
+HERMES_BIN="${HERMES_BIN:-/root/.hermes/profiles/zeus/home/.local/bin/hermes}"
+PATCH_DIR="$BASE/patches/hermes"
+ENSURE_SCRIPT="$BASE/scripts/ensure-hermes-mgs-patches.sh"
+STAMP="${STAMP:-$(date +%Y%m%d-%H%M%S)}"
+REPORT_ROOT="${REPORT_ROOT:-$BASE/reports/hermes-updates}"
+REPORT_DIR="${REPORT_DIR:-$REPORT_ROOT/$STAMP}"
+LOG="$REPORT_DIR/run.log"
+PRECHECK_ONLY="${PRECHECK_ONLY:-0}"
+NO_UPDATE="${NO_UPDATE:-0}"
+RESTART_GATEWAYS="${RESTART_GATEWAYS:-0}"
+GATEWAY_SERVICES="${GATEWAY_SERVICES:-zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service}"
+
+mkdir -p "$REPORT_DIR" "$PATCH_DIR"
 exec > >(tee -a "$LOG") 2>&1
 
 log() { printf '[%s] %s\n' "$(date -Iseconds)" "$*"; }
-
-send_discord_report() {
-  local status="$1"
-  local body="$2"
-  set +u
-  set -a
-  source /root/.hermes/profiles/zeus/.env 2>/dev/null || true
-  set +a
-  set -u
-  if [[ -z "${DISCORD_BOT_TOKEN:-}" || -z "${THREAD_ID:-}" ]]; then
-    log "WARN discord report skipped: missing token/thread"
-    return 0
-  fi
-  python3 - "$THREAD_ID" "$status" "$body" <<'PY'
-import json, os, sys, urllib.request
-thread_id, status, body = sys.argv[1:4]
-token = os.environ.get('DISCORD_BOT_TOKEN','')
-content = f"{status}\n\n{body}"
-req = urllib.request.Request(
-    f"https://discord.com/api/v10/channels/{thread_id}/messages",
-    method="POST",
-    headers={"Authorization": f"Bot {token}", "Content-Type": "application/json", "User-Agent": "Hermes-Agent"},
-    data=json.dumps({"content": content[:1900]}, ensure_ascii=False).encode(),
-)
-urllib.request.urlopen(req, timeout=15).read()
-PY
+run_capture() {
+  local outfile="$1"; shift
+  log "CAPTURE $outfile :: $*"
+  { "$@"; } > "$REPORT_DIR/$outfile" 2>&1 || true
 }
-
 fail() {
   local rc=$?
   log "FAILED rc=$rc line=${BASH_LINENO[0]}"
-  tail_summary="$(tail -60 "$LOG" | sed 's/`/'"'"'/g' | tail -40)"
-  send_discord_report "❌ Hermes update controlado FALHOU" "Log: $LOG\nBackup: $BACKUP_PATH\n\n\`\`\`text\n${tail_summary}\n\`\`\`" || true
+  log "Artifacts preserved in $REPORT_DIR"
   exit "$rc"
 }
 trap fail ERR
 
-log "START controlled Hermes update"
-log "backup=$BACKUP_PATH"
-log "repo=$REPO"
+require_path() {
+  [[ -e "$1" ]] || { log "Missing required path: $1"; exit 1; }
+}
 
-log "Pre-state"
-"$HERMES_BIN" --version 2>&1 | sed -n '1,10p' || true
-git -C "$REPO" fetch --quiet origin main
-log "HEAD=$(git -C "$REPO" rev-parse --short HEAD) origin=$(git -C "$REPO" rev-parse --short origin/main) behind=$(git -C "$REPO" rev-list --count HEAD..origin/main)"
-git -C "$REPO" status --short
-
-log "Saving local Hermes patch"
-git -C "$REPO" diff > "$LOCAL_PATCH"
-if [[ ! -s "$LOCAL_PATCH" ]]; then
-  PREV_PATCH="$(ls -t "$PATCH_DIR"/mgs-discord-local-preupdate-*.patch 2>/dev/null | head -1 || true)"
-  if [[ -n "$PREV_PATCH" && -s "$PREV_PATCH" ]]; then
-    log "No current git diff; reusing previous saved patch: $PREV_PATCH"
-    cp "$PREV_PATCH" "$LOCAL_PATCH"
+profile_backup() {
+  local out="$REPORT_DIR/hermes-profiles-backup-$STAMP.tar.gz"
+  log "Creating profiles backup: $out"
+  tar --warning=no-file-changed \
+    --exclude='*/logs/*' \
+    --exclude='*/image_cache/*' \
+    --exclude='*/audio_cache/*' \
+    --exclude='*/__pycache__/*' \
+    -czf "$out" /root/.hermes/profiles/ || true
+  if [[ ! -s "$out" ]]; then
+    log "Profiles backup failed or empty: $out"
+    exit 1
   fi
-fi
-# Port current MGS Discord patch from old built-in adapter path to new plugin adapter path.
-sed 's#gateway/platforms/discord.py#plugins/platforms/discord/adapter.py#g' "$LOCAL_PATCH" > "$PORT_PATCH"
-log "local_patch=$LOCAL_PATCH bytes=$(wc -c < "$LOCAL_PATCH")"
-log "port_patch=$PORT_PATCH bytes=$(wc -c < "$PORT_PATCH")"
+  ls -lh "$out" | tee "$REPORT_DIR/backup-size.txt"
+}
 
-if [[ ! -s "$LOCAL_PATCH" ]]; then
-  log "WARN no local patch captured"
-fi
+snapshot_pre_state() {
+  log "Collecting pre-update state"
+  run_capture pre-hermes-version.txt "$HERMES_BIN" --version
+  git -C "$REPO" fetch --quiet origin main
+  {
+    echo "repo=$REPO"
+    echo "head=$(git -C "$REPO" rev-parse HEAD)"
+    echo "head_short=$(git -C "$REPO" rev-parse --short HEAD)"
+    echo "origin_main=$(git -C "$REPO" rev-parse origin/main)"
+    echo "origin_main_short=$(git -C "$REPO" rev-parse --short origin/main)"
+    echo "behind=$(git -C "$REPO" rev-list --count HEAD..origin/main)"
+    echo "ahead=$(git -C "$REPO" rev-list --count origin/main..HEAD)"
+  } | tee "$REPORT_DIR/pre-revisions.txt"
+  git -C "$REPO" status --short > "$REPORT_DIR/pre-git-status.txt"
+  git -C "$REPO" diff > "$REPORT_DIR/pre-local-diff.patch"
+  git -C "$REPO" diff --stat > "$REPORT_DIR/pre-local-diff-stat.txt"
+  git -C "$REPO" ls-files --others --exclude-standard > "$REPORT_DIR/pre-untracked-files.txt"
+  run_capture pre-systemd-active.txt systemctl is-active $GATEWAY_SERVICES
+  run_capture pre-systemd-show.txt systemctl show $GATEWAY_SERVICES -p Id -p ActiveState -p MainPID -p NRestarts -p ExecMainStatus --no-pager
+  run_capture pre-crontab-root.txt crontab -l
+  if command -v hermes >/dev/null 2>&1; then
+    run_capture pre-hermes-cron-list.txt hermes cron list
+  else
+    run_capture pre-hermes-cron-list.txt "$HERMES_BIN" cron list
+  fi
+}
 
-log "Resetting tracked local changes before update; untracked files preserved"
-git -C "$REPO" reset --hard HEAD
+snapshot_profiles_sanitized() {
+  log "Collecting sanitized profile config/auth presence"
+  python3 - <<'PY' > "$REPORT_DIR/pre-profiles-sanitized.txt"
+import json, pathlib, yaml
+for name in ['zeus','atena','ares','hera']:
+    base = pathlib.Path('/root/.hermes/profiles')/name
+    print(f'[{name}]')
+    cfg = base/'config.yaml'
+    if cfg.exists():
+        try:
+            data = yaml.safe_load(cfg.read_text()) or {}
+        except Exception as e:
+            print('  config_parse_error:', type(e).__name__)
+            data = {}
+        model = data.get('model') or {}
+        print('  model.provider:', model.get('provider'))
+        print('  model.default:', model.get('default'))
+        print('  compression.threshold:', (data.get('compression') or {}).get('threshold'))
+        print('  toolsets:', ','.join(data.get('toolsets') or []))
+    else:
+        print('  config: missing')
+    auth = base/'auth.json'
+    if auth.exists():
+        try:
+            a=json.loads(auth.read_text())
+            providers=a.get('providers') or {}
+            print('  active_provider:', a.get('active_provider'))
+            print('  openai_codex_present:', 'openai-codex' in providers)
+            p=providers.get('openai-codex') or {}
+            toks=p.get('tokens') or {}
+            print('  openai_codex_access_len:', len(toks.get('access_token') or ''))
+            print('  openai_codex_refresh_present:', bool(toks.get('refresh_token')))
+        except Exception as e:
+            print('  auth_parse_error:', type(e).__name__)
+    else:
+        print('  auth: missing')
+PY
+}
 
-log "Running hermes update"
-"$HERMES_BIN" update --yes --no-backup
+check_patches_against_upstream() {
+  log "Checking canonical MGS patches against origin/main in temporary worktree"
+  local wt="$REPORT_DIR/upstream-worktree"
+  git -C "$REPO" worktree add --detach "$wt" origin/main > "$REPORT_DIR/worktree-add.txt" 2>&1
+  local rc=0
+  {
+    shopt -s nullglob
+    for patch in "$PATCH_DIR"/*.patch; do
+      name="$(basename "$patch")"
+      case "$name" in
+        mgs-local-*|local-preupdate-*|mgs-discord-local-preupdate-*|mgs-discord-plugin-port-*|mgs-local-preupdate-*|mgs-local-final-*|mgs-local-apply-*)
+          echo "SKIP archive/local snapshot $name"
+          continue
+          ;;
+      esac
+      if git -C "$wt" apply --check "$patch" >/tmp/mgs-patch-check.out 2>&1; then
+        echo "OK apply-clean $name"
+      else
+        echo "DRIFT $name"
+        sed 's/^/  /' /tmp/mgs-patch-check.out
+        rc=1
+      fi
+    done
+  } | tee "$REPORT_DIR/pre-upstream-patch-check.txt"
+  git -C "$REPO" worktree remove --force "$wt" >> "$REPORT_DIR/worktree-add.txt" 2>&1 || true
+  if [[ "$rc" != 0 ]]; then
+    log "Patch check found drift. This is not always fatal if invariants already exist, but update must be treated as controlled/manual. See pre-upstream-patch-check.txt"
+  fi
+}
 
-log "Post-update rev"
-git -C "$REPO" fetch --quiet origin main
-log "HEAD=$(git -C "$REPO" rev-parse --short HEAD) origin=$(git -C "$REPO" rev-parse --short origin/main) behind=$(git -C "$REPO" rev-list --count HEAD..origin/main)"
+run_update() {
+  if [[ "$PRECHECK_ONLY" == "1" || "$NO_UPDATE" == "1" ]]; then
+    log "Skipping mutation: PRECHECK_ONLY=$PRECHECK_ONLY NO_UPDATE=$NO_UPDATE"
+    return 0
+  fi
+  log "Saving tracked local diff to canonical archive"
+  cp "$REPORT_DIR/pre-local-diff.patch" "$PATCH_DIR/mgs-local-preupdate-$STAMP.patch"
+  log "Resetting tracked local changes before update; untracked files preserved"
+  git -C "$REPO" reset --hard HEAD
+  log "Running Hermes update with built-in backup disabled because MGS backup already exists"
+  "$HERMES_BIN" update --yes --no-backup
+}
 
-log "Applying canonical MGS Hermes patches"
-BASE="$BASE" REPO="$REPO" LOG="$LOG" "$BASE/scripts/ensure-hermes-mgs-patches.sh"
+post_validate() {
+  log "Collecting post-update state"
+  git -C "$REPO" fetch --quiet origin main
+  run_capture post-hermes-version.txt "$HERMES_BIN" --version
+  {
+    echo "head=$(git -C "$REPO" rev-parse HEAD)"
+    echo "head_short=$(git -C "$REPO" rev-parse --short HEAD)"
+    echo "origin_main=$(git -C "$REPO" rev-parse origin/main)"
+    echo "origin_main_short=$(git -C "$REPO" rev-parse --short origin/main)"
+    echo "behind=$(git -C "$REPO" rev-list --count HEAD..origin/main)"
+    echo "ahead=$(git -C "$REPO" rev-list --count origin/main..HEAD)"
+  } | tee "$REPORT_DIR/post-revisions.txt"
+  git -C "$REPO" status --short > "$REPORT_DIR/post-git-status.txt"
+  git -C "$REPO" diff --stat > "$REPORT_DIR/post-local-diff-stat.txt"
 
-log "Compiling critical Hermes files"
-PYBIN="$REPO/venv/bin/python"
-[[ -x "$PYBIN" ]] || PYBIN="python3"
-"$PYBIN" -m py_compile \
-  "$REPO/plugins/platforms/discord/adapter.py" \
-  "$REPO/gateway/run.py" \
-  "$REPO/gateway/config.py" \
-  "$REPO/tools/send_message_tool.py" \
-  "$REPO/tools/discord_tool.py"
+  log "Running MGS patch guard"
+  BASE="$BASE" REPO="$REPO" LOG="$REPORT_DIR/patch-guard.log" "$ENSURE_SCRIPT"
 
-log "Status after patch"
-git -C "$REPO" status --short
+  log "Compiling critical files"
+  local pybin="$REPO/venv/bin/python"
+  [[ -x "$pybin" ]] || pybin="python3"
+  "$pybin" -m py_compile \
+    "$REPO/plugins/platforms/discord/adapter.py" \
+    "$REPO/gateway/run.py" \
+    "$REPO/gateway/config.py" \
+    "$REPO/tools/terminal_tool.py" \
+    "$REPO/tools/file_tools.py" \
+    > "$REPORT_DIR/py-compile.log" 2>&1
 
-log "Restarting gateways"
-systemctl restart zeus-gateway.service atena-gateway.service
-sleep 15
+  run_capture post-systemd-active.txt systemctl is-active $GATEWAY_SERVICES
+  run_capture post-systemd-show.txt systemctl show $GATEWAY_SERVICES -p Id -p ActiveState -p MainPID -p NRestarts -p ExecMainStatus --no-pager
+}
 
-log "Validating services"
-systemctl is-active --quiet zeus-gateway.service
-systemctl is-active --quiet atena-gateway.service
-systemctl is-active --quiet mgs-autocommit.service
-systemctl show zeus-gateway.service atena-gateway.service -p Id -p ActiveState -p MainPID -p NRestarts -p ExecMainStatus --no-pager
+restart_if_requested() {
+  if [[ "$RESTART_GATEWAYS" != "1" ]]; then
+    log "Gateway restart not requested. Set RESTART_GATEWAYS=1 to restart after validation."
+    return 0
+  fi
+  log "Restarting gateways with --no-block: $GATEWAY_SERVICES"
+  systemctl restart --no-block $GATEWAY_SERVICES
+  sleep 20
+  systemctl is-active $GATEWAY_SERVICES | tee "$REPORT_DIR/post-restart-active.txt"
+  systemctl show $GATEWAY_SERVICES -p Id -p ActiveState -p MainPID -p NRestarts -p ExecMainStatus --no-pager | tee "$REPORT_DIR/post-restart-systemd-show.txt"
+}
 
-log "Validating gateway logs"
-tail -80 /root/.hermes/profiles/zeus/logs/agent.log | grep -E 'Connected as|Gateway running|discord connected' | tail -10 || true
-tail -80 /root/.hermes/profiles/atena/logs/agent.log | grep -E 'Connected as|Gateway running|discord connected' | tail -10 || true
+write_summary() {
+  local pre_head post_head pre_behind post_behind backup_file
+  pre_head="$(grep '^head_short=' "$REPORT_DIR/pre-revisions.txt" 2>/dev/null | cut -d= -f2 || true)"
+  post_head="$(grep '^head_short=' "$REPORT_DIR/post-revisions.txt" 2>/dev/null | cut -d= -f2 || true)"
+  pre_behind="$(grep '^behind=' "$REPORT_DIR/pre-revisions.txt" 2>/dev/null | cut -d= -f2 || true)"
+  post_behind="$(grep '^behind=' "$REPORT_DIR/post-revisions.txt" 2>/dev/null | cut -d= -f2 || true)"
+  backup_file="$(ls -1 "$REPORT_DIR"/hermes-profiles-backup-*.tar.gz 2>/dev/null | head -1 || true)"
+  cat > "$REPORT_DIR/final-report.md" <<EOF
+# Hermes controlled update report — $STAMP
 
-FINAL_HEAD="$(git -C "$REPO" rev-parse --short HEAD)"
-FINAL_ORIGIN="$(git -C "$REPO" rev-parse --short origin/main)"
-FINAL_BEHIND="$(git -C "$REPO" rev-list --count HEAD..origin/main)"
-STATUS_SHORT="$(git -C "$REPO" status --short | sed -n '1,20p')"
+```text
+Report dir        $REPORT_DIR
+Pre HEAD          ${pre_head:-unknown}
+Post HEAD         ${post_head:-not-run}
+Pre behind        ${pre_behind:-unknown}
+Post behind       ${post_behind:-not-run}
+Backup            ${backup_file:-missing}
+Patch guard       $REPORT_DIR/patch-guard.log
+Restart gateways  $RESTART_GATEWAYS
+Precheck only      $PRECHECK_ONLY
+```
 
-log "DONE controlled Hermes update"
-send_discord_report "✅ Hermes update controlado concluído" "\`\`\`text\nHEAD: $FINAL_HEAD\norigin/main: $FINAL_ORIGIN\nbehind: $FINAL_BEHIND\nServiços: zeus active / atena active / autocommit active\nPatch MGS: aplicado em plugins/platforms/discord/adapter.py\npy_compile: OK\nBackup: $BACKUP_PATH\nLog: $LOG\n\nGit status:\n${STATUS_SHORT:-clean}\n\`\`\`\nPróximo passo pendente: testar na prática uma nova thread Zeus e uma nova thread Atena para confirmar auto-thread + auto-add." || true
+Required evidence files:
+
+```text
+pre-revisions.txt
+pre-git-status.txt
+pre-local-diff.patch
+pre-upstream-patch-check.txt
+pre-profiles-sanitized.txt
+post-revisions.txt
+post-git-status.txt
+post-local-diff-stat.txt
+patch-guard.log
+py-compile.log
+post-systemd-active.txt
+```
+EOF
+  log "Summary written: $REPORT_DIR/final-report.md"
+}
+
+main() {
+  require_path "$REPO/.git"
+  require_path "$PATCH_DIR"
+  require_path "$ENSURE_SCRIPT"
+  log "START MGS controlled Hermes update"
+  log "REPORT_DIR=$REPORT_DIR"
+  log "PRECHECK_ONLY=$PRECHECK_ONLY NO_UPDATE=$NO_UPDATE RESTART_GATEWAYS=$RESTART_GATEWAYS"
+  profile_backup
+  snapshot_pre_state
+  snapshot_profiles_sanitized
+  check_patches_against_upstream
+  if [[ "$PRECHECK_ONLY" == "1" ]]; then
+    post_validate
+    write_summary
+    log "DONE precheck only"
+    return 0
+  fi
+  run_update
+  post_validate
+  restart_if_requested
+  write_summary
+  log "DONE MGS controlled Hermes update"
+}
+
+main "$@"
