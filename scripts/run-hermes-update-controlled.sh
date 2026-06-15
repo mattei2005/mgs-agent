@@ -29,9 +29,45 @@ run_capture() {
   log "CAPTURE $outfile :: $*"
   { "$@"; } > "$REPORT_DIR/$outfile" 2>&1 || true
 }
+write_failure_summary() {
+  local rc="$1"
+  local pre_head post_head pre_behind post_behind backup_file tail_file
+  pre_head="$(grep '^head_short=' "$REPORT_DIR/pre-revisions.txt" 2>/dev/null | cut -d= -f2 || true)"
+  post_head="$(grep '^head_short=' "$REPORT_DIR/post-revisions.txt" 2>/dev/null | cut -d= -f2 || true)"
+  pre_behind="$(grep '^behind=' "$REPORT_DIR/pre-revisions.txt" 2>/dev/null | cut -d= -f2 || true)"
+  post_behind="$(grep '^behind=' "$REPORT_DIR/post-revisions.txt" 2>/dev/null | cut -d= -f2 || true)"
+  backup_file="$(ls -1 "$REPORT_DIR"/hermes-profiles-backup-*.tar.gz 2>/dev/null | head -1 || true)"
+  tail_file="$REPORT_DIR/failure-tail.txt"
+  tail -120 "$LOG" > "$tail_file" 2>/dev/null || true
+  cat > "$REPORT_DIR/final-report.md" <<EOF
+# Hermes controlled update report — $STAMP
+
+Status: FAILED
+
+Report summary:
+
+    Report dir        $REPORT_DIR
+    Exit code         $rc
+    Pre HEAD          ${pre_head:-unknown}
+    Post HEAD         ${post_head:-not-run}
+    Pre behind        ${pre_behind:-unknown}
+    Post behind       ${post_behind:-not-run}
+    Backup            ${backup_file:-missing}
+    Patch guard       $REPORT_DIR/patch-guard.log
+    Failure tail      $tail_file
+    Restart gateways  $RESTART_GATEWAYS
+    Allow patch drift $ALLOW_PATCH_DRIFT
+    Precheck only      $PRECHECK_ONLY
+
+This report is written even on failure so Zeus can recover after gateway restart
+and report the true terminal state instead of going silent.
+EOF
+}
 fail() {
   local rc=$?
+  trap - ERR
   log "FAILED rc=$rc line=${BASH_LINENO[0]}"
+  write_failure_summary "$rc" || true
   log "Artifacts preserved in $REPORT_DIR"
   exit "$rc"
 }
@@ -332,7 +368,7 @@ main() {
   check_patches_against_upstream || patch_check_rc=$?
   if [[ "$patch_check_rc" != 0 && "$PRECHECK_ONLY" != "1" && "$ALLOW_PATCH_DRIFT" != "1" ]]; then
     log "FAIL-CLOSED: canonical patch drift detected before update. Set ALLOW_PATCH_DRIFT=1 only after manual port/review."
-    exit 1
+    false
   fi
   if [[ "$PRECHECK_ONLY" == "1" ]]; then
     readonly_invariant_check || log "WARN read-only invariant check found missing markers; inspect $REPORT_DIR/pre-readonly-invariants.txt"

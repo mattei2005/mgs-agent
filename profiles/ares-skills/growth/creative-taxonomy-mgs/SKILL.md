@@ -313,7 +313,8 @@ performance_label: GOOD, BAD, INCONCLUSIVE, UNKNOWN
 15. Antes de executar qualquer rename/copy, validar que `VARIANT` está em 3 dígitos (`001-999`) em todos os nomes finais e corrigir qualquer saída legada de script que ainda gere `01`, `02`, etc.
 16. Mostrar proposta ao Rodolfo antes de qualquer alteração em Drive/campanha.
 17. Após aprovação, executar cópia/renomeação com logs e validação.
-18. Se Rodolfo pedir para corrigir criativos já feitos, executar a correção no Drive, validar por novo scan que não restam nomes finais com 2 dígitos, e atualizar artefatos locais/propostas para o mesmo padrão.
+18. Se Rodolfo pedir para corrigir criativos já feitos, executar a correção no Drive quando a ação for segura e já autorizada, validar por novo scan que não restam nomes finais com 2 dígitos, colisões de filename na mesma pasta ou sufixos técnicos como `__dupnameNNN`, e atualizar artefatos locais/propostas para o mesmo padrão.
+19. Para colisões de nome já existentes em `01_READY_CANDIDATE`, manter um nome canônico por variante e renomear as cópias conflitantes para a próxima variante livre com 3 dígitos. Simular antes para garantir zero colisões pós-plano e registrar `old_name`, `new_name`, `drive_id`, `verified_name` e relatório hash.
 
 ## Sanitização antes de campanha
 
