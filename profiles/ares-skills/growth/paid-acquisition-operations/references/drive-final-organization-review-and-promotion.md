@@ -44,4 +44,6 @@ Promotion semantics                   | Move/rename cleaned copy
 
 ## 1Password/OAuth rate-limit handling
 
-If `op item get` hits rate-limit during a long Drive session, do not mark the operation failed. Persist the queue/report paths, then retry with a bounded background process (for example every 15 minutes with a max attempt count). Report the pending process ID and validate final status when it completes. The durable lesson is the bounded retry pattern, not the temporary rate-limit itself.
+If `op item get` hits rate-limit during a long Drive session, do not mark the operation failed. Persist the queue/report paths, then retry with a bounded background process using slow backoff. Do not retry aggressively: repeated 1Password calls extend the block.
+
+Durable fix for Ares Drive OAuth: the shared executor `/root/mgs-agent/scripts/ares-execute-creative-copy-clean.py` reads OAuth client fields from `/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json` before calling 1Password. If the cache is missing, one successful 1Password read primes it as chmod `600`; future clean-copy/promote runs reuse the cache and only refresh Google OAuth tokens directly with Google. The separate token file `/root/mgs-agent/.secrets/ares-google-drive-oauth.json` can still override the refresh token. Never print either file's contents.
