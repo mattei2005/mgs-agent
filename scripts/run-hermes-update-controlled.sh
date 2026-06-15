@@ -19,6 +19,9 @@ NO_UPDATE="${NO_UPDATE:-0}"
 RESTART_GATEWAYS="${RESTART_GATEWAYS:-0}"
 ALLOW_PATCH_DRIFT="${ALLOW_PATCH_DRIFT:-0}"
 GATEWAY_SERVICES="${GATEWAY_SERVICES:-zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service}"
+# Default update-review Discord thread. Override per run if update is launched from another thread.
+MGS_UPDATE_REPORT_THREAD_ID="${MGS_UPDATE_REPORT_THREAD_ID:-1516073108535120086}"
+SEND_DISCORD_REPORT="${SEND_DISCORD_REPORT:-1}"
 
 mkdir -p "$REPORT_DIR" "$PATCH_DIR"
 exec > >(tee -a "$LOG") 2>&1
@@ -63,6 +66,40 @@ This report is written even on failure so Zeus can recover after gateway restart
 and report the true terminal state instead of going silent.
 EOF
 }
+send_discord_report_file() {
+  local status="$1"
+  local file="${2:-$REPORT_DIR/final-report.md}"
+  [[ "$SEND_DISCORD_REPORT" == "1" ]] || return 0
+  [[ -n "${MGS_UPDATE_REPORT_THREAD_ID:-}" ]] || return 0
+  [[ -s "$file" ]] || return 0
+  set +u
+  set -a
+  source /root/.hermes/profiles/zeus/.env 2>/dev/null || true
+  source /root/mgs-agent/.env 2>/dev/null || true
+  set +a
+  set -u
+  if [[ -z "${DISCORD_BOT_TOKEN:-}" ]]; then
+    log "WARN Discord report skipped: missing DISCORD_BOT_TOKEN"
+    return 0
+  fi
+  python3 - "$MGS_UPDATE_REPORT_THREAD_ID" "$status" "$file" <<'PYDISCORD'
+import json, os, sys, urllib.request
+thread_id, status, path = sys.argv[1:4]
+token = os.environ.get('DISCORD_BOT_TOKEN','')
+text = open(path, encoding='utf-8', errors='replace').read()
+content = f"{status}\n\n{text}"
+if len(content) > 1900:
+    content = content[:1850] + "\n\n…[truncated; see report file on VPS]"
+req = urllib.request.Request(
+    f"https://discord.com/api/v10/channels/{thread_id}/messages",
+    method="POST",
+    headers={"Authorization": f"Bot {token}", "Content-Type": "application/json", "User-Agent": "MGS-Hermes-Update"},
+    data=json.dumps({"content": content}, ensure_ascii=False).encode(),
+)
+urllib.request.urlopen(req, timeout=20).read()
+PYDISCORD
+}
+
 fail() {
   local rc=$?
   trap - ERR
@@ -352,6 +389,7 @@ Required evidence files:
     post-systemd-active.txt
 EOF
   log "Summary written: $REPORT_DIR/final-report.md"
+  send_discord_report_file "✅ Hermes update report" "$REPORT_DIR/final-report.md" || true
 }
 
 main() {
