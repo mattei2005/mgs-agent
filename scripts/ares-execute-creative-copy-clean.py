@@ -37,6 +37,7 @@ ROOT_FOLDER_ID = os.environ.get("ARES_DRIVE_ROOT_FOLDER_ID", DEFAULT_ROOT_FOLDER
 OP_ITEM = os.environ.get("ARES_DRIVE_OP_ITEM", "Google Service Account - Ares Drive")
 OAUTH_OP_ITEM = os.environ.get("ARES_DRIVE_OAUTH_OP_ITEM", "Google OAuth - Ares Drive")
 OAUTH_TOKEN_FILE = os.environ.get("ARES_DRIVE_OAUTH_TOKEN_FILE", "/root/mgs-agent/.secrets/ares-google-drive-oauth.json")
+OAUTH_CREDENTIALS_FILE = os.environ.get("ARES_DRIVE_OAUTH_CREDENTIALS_FILE", "/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json")
 DEFAULT_VAULT = os.environ.get("OP_DEFAULT_VAULT", "MGS Conteúdo")
 SCOPES = "https://www.googleapis.com/auth/drive"
 FOLDER_MIME = "application/vnd.google-apps.folder"
