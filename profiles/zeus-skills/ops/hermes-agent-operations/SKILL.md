@@ -34,6 +34,23 @@ Referência rápida adicionada: `references/hermes-staged-update-validation-mgs.
 
 Use quando Rodolfo pedir atualização do Hermes ou quando monitor detectar nova versão.
 
+**Regra permanente MGS aprovada por Rodolfo:** nenhum update Hermes é considerado concluído sem backup + diff/snapshot pré-update + comparação pós-update + guard de patches/invariantes MGS + validação runtime real. O playbook canônico é `references/hermes-controlled-update-rule-mgs.md` e o script padrão é `/root/mgs-agent/scripts/run-hermes-update-controlled.sh`.
+
+Comandos padrão:
+
+```bash
+# Pré-check/dry-run sem mutar o checkout vivo
+PRECHECK_ONLY=1 /root/mgs-agent/scripts/run-hermes-update-controlled.sh
+
+# Update controlado sem reiniciar gateways
+RESTART_GATEWAYS=0 /root/mgs-agent/scripts/run-hermes-update-controlled.sh
+
+# Update controlado com restart pós-validação
+RESTART_GATEWAYS=1 /root/mgs-agent/scripts/run-hermes-update-controlled.sh
+```
+
+Falha fechada: se backup, patch guard, py_compile, comparação pós-update ou invariantes críticos falharem, não declarar sucesso e não reiniciar gateways em produção sem portar/corrigir manualmente. O script também falha antes de mutar se o dry-run de patches canônicos contra `origin/main` detectar drift; `ALLOW_PATCH_DRIFT=1` só pode ser usado após revisão/port manual explícita.
+
 ### Pré-check mínimo
 
 ```bash
@@ -461,6 +478,7 @@ Esta umbrella absorveu as antigas skills especializadas abaixo. Conteúdo detalh
 
 - `references/hermes-update-original-skill.md`
 - `references/hermes-update-post-update-validation.md`
+- `references/hermes-controlled-update-rule-mgs.md` — regra permanente MGS aprovada por Rodolfo: backup + diff/snapshot pré-update + comparação pós-update + guard de patches/invariantes + validação runtime real antes de considerar update concluído.
 - `references/hermes-manual-no-restart-update-patch-drift.md` — atualização manual sem restart automático: backup/diff, pull ff-only, reaplicar patches MGS, lidar com patch context drift, limpar `.update_check`, validar testes e pedir restart separado.
 - `references/hermes-update-enospc-partial-update-recovery.md` — recuperar update parcial após `ENOSPC`: liberar espaço, distinguir repo atualizado vs. dependências falhas, reparar npm/uv, compilar e só então reiniciar gateways.
 - `references/post-update-gateway-restart-validation.md` — validar update/restart Zeus+Atena+Ares quando Zeus reinicia a si mesmo; finalizer via systemd-run, distinção entre falha histórica de restart e erro ativo pós-start.
