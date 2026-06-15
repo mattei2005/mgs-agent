@@ -378,6 +378,10 @@ main() {
   fi
   run_update
   post_validate
+  # Write a durable success report before gateway restart. Restarting Zeus can
+  # terminate this process before it has a chance to speak in Discord; the
+  # recovery turn must read this report and deliver it instead of going silent.
+  write_summary
   restart_if_requested
   write_summary
   log "DONE MGS controlled Hermes update"
