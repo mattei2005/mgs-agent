@@ -12,9 +12,10 @@ for attempt in $(seq 1 16); do
   if ARES_DRIVE_AUTH_MODE=oauth /root/mgs-agent/scripts/ares-promote-review-ready.py "$QUEUE" --report-csv "$REPORT" >> "$LOG" 2>&1; then
     echo "[$(date -Is)] promotion_done" >> "$LOG"
     exit 0
+  else
+    rc=$?
+    echo "[$(date -Is)] attempt_failed rc=$rc" >> "$LOG"
   fi
-  rc=$?
-  echo "[$(date -Is)] attempt_failed rc=$rc" >> "$LOG"
   sleep 1800
 done
 echo "[$(date -Is)] promotion_failed_after_retries" >> "$LOG"
