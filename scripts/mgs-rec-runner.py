@@ -1001,6 +1001,277 @@ def benefit_heading_from_fact(raw: str) -> str:
         raise RunnerError(f"Generic benefit heading blocked: {heading!r}")
     return heading
 
+# ============================================================================
+# Fase 3 — Pacote 3.2A: geração do CORPO REC via GPT-5.5 (Hermes CLI one-shot)
+# Inserido por aplicar-fase3-pacote32a.sh. NÃO altera microcopy (tag10/tag2/
+# descriptor continuam derivados em Python — isso é o 3.2B).
+# ============================================================================
+HERMES_BIN_REC = "/root/.local/bin/hermes"
+REC_CATEGORY_MAP = ROOT / "skills/content-generate-rec-p1/references/category-experience-map.md"
+REC_LLM_MARKER_START = "<<<MGS_ARTICLE_HTML_START>>>"
+REC_LLM_MARKER_END = "<<<MGS_ARTICLE_HTML_END>>>"
+REC_LLM_PROMPT_HARD_LIMIT = 90000
+REC_LLM_CALL_TIMEOUT = 180
+
+
+def _rec_llm_parse_marked_html(stdout: str) -> Dict[str, Any]:
+    """Fail-closed parser: accept ONLY content between the exact markers, exactly once."""
+    n_start = stdout.count(REC_LLM_MARKER_START)
+    n_end = stdout.count(REC_LLM_MARKER_END)
+    if n_start == 0 or n_end == 0:
+        return {"ok": False, "reason": "no_marker"}
+    if n_start > 1 or n_end > 1:
+        return {"ok": False, "reason": "multiple_markers"}
+    start = stdout.index(REC_LLM_MARKER_START) + len(REC_LLM_MARKER_START)
+    end = stdout.index(REC_LLM_MARKER_END)
+    if end <= start:
+        return {"ok": False, "reason": "markers_out_of_order"}
+    body = stdout[start:end].strip()
+    if not body:
+        return {"ok": False, "reason": "empty_html"}
+    if body.startswith("```") or body.endswith("```"):
+        return {"ok": False, "reason": "markdown_fence"}
+    return {"ok": True, "html": body}
+
+
+def _rec_llm_build_prompt(card_data: Dict[str, Any], lang: str, contract_text: str, category_map_text: str) -> str:
+    """Build the REC body prompt. Facts come from card_data; GPT writes narrative only."""
+    name = str(card_data.get("card_name") or "")
+    annual_fee = str(card_data.get("annual_fee") or "")
+    apr = str(card_data.get("apr") or "")
+    benefits = [str(b).strip() for b in (card_data.get("benefits") or []) if str(b).strip()]
+    benefits_block = "\n".join(f"- {b}" for b in benefits)
+    return f"""You are writing the BODY of a REC credit-card article for MGS.
+
+Follow this editorial contract exactly:
+--- BEGIN CONTRACT (cc-rec.md) ---
+{contract_text}
+--- END CONTRACT ---
+
+Use this category experience map to choose the dominant angle and vary the narrative
+between articles (do NOT copy it literally; it is guidance, not text to reproduce):
+--- BEGIN CATEGORY MAP ---
+{category_map_text}
+--- END CATEGORY MAP ---
+
+CONFIRMED FACTS (use ONLY these; never invent numbers, fees, APR, periods or benefits):
+- Card name: {name}
+- Annual fee: {annual_fee}
+- APR: {apr}
+- Language: write the entire article in {lang}
+- Benefits / facts:
+{benefits_block}
+
+WRITING RULES:
+- Use the card name in H2/H3 headings where natural (e.g. "Benefits of {name}"),
+  never generic labels like "Benefits of the Card".
+- Neutral, non-judgemental financial tone. Do NOT use judgemental terms about the
+  reader (e.g. "impulsive spender", "bad with money"). Describe profiles neutrally.
+- Use ONLY the confirmed facts above. Never invent a number, fee, APR, period or benefit.
+- No promises of approval/limit. No superlatives like "best" or "guaranteed".
+- FORBIDDEN WORD: never use the word "review" anywhere — not in headings, paragraphs, list
+  items or the subtitle. It is a hard-blocked term. Use alternatives: "check", "compare",
+  "look at", "read", "consider", "go over". (e.g. "Check the latest conditions", not "Review...")
+
+HARD STRUCTURAL LIMITS — the article is automatically REJECTED if any is violated. These are
+checked by a validator that strips HTML tags, splits paragraphs by <p>/<li> blocks, splits
+sentences on . ! ?, and counts only word-tokens. Respect every one with margin:
+
+1. WORD COUNT: total visible words MUST be 450-500. Aim for 465-490 (comfortably inside the band).
+2. SUBTITLE: the FIRST <p> is the excerpt. It MUST be <= 100 characters. Aim for 85-95 chars,
+   one short sentence. (It ALSO counts as a paragraph for rule 3, so keep it short in words too.)
+3. PARAGRAPH LENGTH: EVERY paragraph (<p> and <li>) MUST be <= 30 words, and the AVERAGE across
+   all paragraphs MUST be <= 30. Aim for 18-26 words per paragraph. Split long thoughts into
+   two short paragraphs rather than one long one.
+4. SECTION SIZE: NO section may have more than 4 paragraphs — and the INTRO counts as a section.
+   The validator treats every group of paragraphs as a section: the paragraphs BEFORE the first
+   <h2> are the "intro" section, then each <h2> starts a new section. So:
+   - Put EXACTLY 2 paragraphs before the first <h2>: the <=100-char subtitle <p>, then ONE short
+     context <p>. Then immediately open the first <h2>. Do NOT put 3+ paragraphs before the first <h2>.
+   - Under each <h2>, use at most 4 paragraphs (aim for 2-3).
+5. LONG-SENTENCE RATIO: at most 20% of ALL sentences may exceed 20 words. So keep most sentences
+   <= 18 words; only a small minority may be longer. Prefer short, direct sentences.
+6. Vary the editorial angle per the category map; a specific editorial heading is fine, but
+   every heading and paragraph must still obey rules 1-5.
+
+QA CONTENT GATES (a separate validator rejects the article if any of these is violated):
+
+A) BENEFIT-LED OPENING (write the article AROUND the card's primary benefit, not around a keyword list):
+   STEP 1 — From the confirmed facts, identify the card's PRIMARY benefit (what it is mainly FOR).
+   STEP 2 — Open the article by explaining that primary benefit concretely, in your own words.
+   STEP 3 — Use the EXACT financial terms from the facts when they are material to the benefit.
+     Do NOT paraphrase a material term into a vaguer one. Specifically, if the card has a 0% interest
+     period, write "0% interest" or "interest-free" — never "0% offer" or "0% starting point" as the
+     only phrase, because that loses the actual benefit term.
+   For a BALANCE-TRANSFER card, the primary benefit is: helping you manage existing card debt /
+   repayments during a 0% interest period measured in months. So the opening sentences should
+   naturally explain that this card lets you move a balance transfer onto a 0% interest period for
+   a number of months, easing existing card debt / repayments / interest pressure — using the
+   confirmed numbers. Write it naturally and DIFFERENTLY for each card; never reuse a fixed sentence
+   structure. The terms appear because they ARE the benefit, not because they are a checklist.
+   (If the card's primary benefit is something else — cashback, rewards, travel, purchase offer —
+   open around THAT real benefit instead, with its exact terms.)
+
+B) NO GENERIC/CLICHE OPENINGS — never start with phrases like: "if you are looking for",
+   "this card is designed for people who want", "choosing the right credit card",
+   "credit cards can be a useful way", "a credit card can help you manage", "whether you are looking to".
+   Open with something specific to THIS card and its confirmed facts.
+
+C) NO IMPERSONAL AUDIENCE LANGUAGE — never use "the reader", "readers should", "users who",
+   "may suit users", "applicants should", "applicants whose". Address the person as "you".
+
+D) NO GENERIC FINANCE FILLER OR WEAK BENEFIT COPY — never use these phrases: "make the most of
+   your spending", "manage your finances more effectively", "enjoy a range of benefits", "valuable
+   benefits and features", "help you reach your financial goals", "suit your lifestyle", "peace of
+   mind", "simple and convenient way", "eligible spend", "the product presents", "confirmed benefits
+   and costs", "real practical value", "functionalities relevant". Describe the actual benefit in
+   plain, concrete words instead.
+
+D2) STAY ON THE PRIMARY BENEFIT — if the card is a balance-transfer card, keep balance transfer as
+   the MAIN axis of the article. Do not reframe it around rewards, points, Clubcard or travel even
+   if a minor reward exists; mention a secondary benefit briefly, but the article's spine is the
+   primary benefit identified in section A.
+
+E) NO PLACEHOLDERS OR EXTRACTION-FAILURE TEXT — never write "check terms", "check issuer terms",
+   "not stated on the official product page", "todo", "tbd", or similar. If a fact is not in the
+   confirmed list, simply do not mention it (you may note that a benefit type is not confirmed,
+   as long as you do not use the word "review").
+
+Self-check before you output: confirm the word "review" appears NOWHERE; confirm the opening ~4
+sentences naturally cover the balance-transfer offer AND the borrower situation (gate A); confirm
+no generic/cliche opening, no "the reader/users who/applicants" language, no finance filler, no
+placeholder text; count the first <p> characters (<=100); confirm EXACTLY 2 paragraphs before the
+first <h2>; no paragraph over 30 words; no section (intro included) over 4 paragraphs; long
+sentences rare (<=20% over 20 words).
+
+OUTPUT CONTRACT (MANDATORY):
+- Output ONLY the article body as WordPress-style HTML blocks (<p>, <h2>, <h3>, <ul><li>).
+- The FIRST element must be the <= 95-char subtitle <p>.
+- Do NOT include the card image, LazyBlocks, buttons, title, meta, or any prose outside the article.
+- Do NOT explain what you did. No preamble, no markdown fences.
+- Wrap the ENTIRE HTML body between these exact markers, nothing before or after:
+{REC_LLM_MARKER_START}
+...your HTML body here...
+{REC_LLM_MARKER_END}
+"""
+
+
+def _rec_llm_call_once(prompt: str) -> Dict[str, Any]:
+    """One-shot Hermes CLI call. List args, no shell, timeout. Returns telemetry + stdout."""
+    t0 = time.time()
+    try:
+        proc = subprocess.run(
+            [HERMES_BIN_REC, "-p", "atena", "-z", prompt],
+            text=True, capture_output=True, timeout=REC_LLM_CALL_TIMEOUT,
+        )
+        return {
+            "rc": proc.returncode,
+            "stdout": proc.stdout or "",
+            "stderr": proc.stderr or "",
+            "duration_sec": round(time.time() - t0, 2),
+            "timed_out": False,
+        }
+    except subprocess.TimeoutExpired:
+        return {"rc": None, "stdout": "", "stderr": "", "duration_sec": round(time.time() - t0, 2), "timed_out": True}
+
+
+def generate_rec_body_llm(site: Dict[str, Any], card_slug: str, card_data: Dict[str, Any], telemetry_sink: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """Generate the REC body via GPT-5.5 (Hermes CLI). Facts from card_data; GPT writes prose.
+
+    Mirrors generate_article_local's return shape so the rest of the pipeline is unchanged.
+    The structural LazyBlock metadata (tag10/tag2/descriptor) is still derived in Python here
+    exactly like the deterministic path (that becomes GPT-written only in Pacote 3.2B).
+    NO automatic fallback: on parse failure, regenerate once; if it still fails, raise.
+    """
+    # --- facts validation (reuse the same rule as the deterministic generator) ---
+    name = esc_text(card_data.get("card_name"))
+    annual_fee_raw = require_specific_visible_value(card_data.get("annual_fee"), "annual_fee")
+    apr_raw = require_specific_visible_value(card_data.get("apr"), "apr")
+    benefits = [str(b).strip() for b in (card_data.get("benefits") or []) if str(b).strip() and not is_generic_visible_value(b)]
+    if len(benefits) < 4:
+        raise RunnerError("REC v2 requires at least 4 specific benefits/facts extracted from official/request facts; generic fallback benefits are blocked")
+
+    # --- preserve structural LazyBlock metadata derivation (IDENTICAL to deterministic path) ---
+    # NOTE: 3.2A keeps microcopy deterministic; 3.2B will move this to GPT with a strict validator.
+    primary = perceived_benefit_item(shorten_words(benefits[0], 18), card_name=str(card_data.get("card_name") or name))
+    descriptor = card_data.get("descriptor") or primary
+    tag10, tag2, default_descriptor = derive_lazyblock_tags(str(card_data.get("card_name") or name), benefits, annual_fee_raw)
+    card_data["tag10"] = tag10
+    card_data["tag2"] = tag2
+    card_data["descriptor"] = card_ui_descriptor(card_data, default_descriptor if not descriptor else str(descriptor))
+
+    # --- build prompt (contract + category map read-only) ---
+    if not REC_UNIVERSAL_CONTRACT.exists():
+        raise RunnerError(f"REC universal contract not found: {REC_UNIVERSAL_CONTRACT}")
+    contract_text = REC_UNIVERSAL_CONTRACT.read_text(errors="ignore")
+    category_map_text = REC_CATEGORY_MAP.read_text(errors="ignore") if REC_CATEGORY_MAP.exists() else ""
+    lang = (site.get("language") or "en").strip().lower() or "en"
+    prompt = _rec_llm_build_prompt(card_data, lang, contract_text, category_map_text)
+
+    if len(prompt) > REC_LLM_PROMPT_HARD_LIMIT:
+        raise RunnerError(f"REC LLM prompt too large: {len(prompt)} > {REC_LLM_PROMPT_HARD_LIMIT} chars")
+
+    # --- generate: 1 attempt + 1 regeneration on parse/call failure; then BLOCK (no fallback) ---
+    attempts = []
+    article_html = None
+    last_reason = None
+    for attempt in range(2):  # attempt 0 = first, attempt 1 = single regeneration
+        call = _rec_llm_call_once(prompt)
+        rec = {"attempt": attempt, "rc": call["rc"], "duration_sec": call["duration_sec"], "timed_out": call["timed_out"], "stdout_chars": len(call["stdout"])}
+        if call["timed_out"]:
+            last_reason = "timeout"
+            rec["reason"] = "timeout"
+            attempts.append(rec)
+            continue
+        if call["rc"] != 0:
+            last_reason = f"rc_{call['rc']}"
+            rec["reason"] = last_reason
+            attempts.append(rec)
+            continue
+        parsed = _rec_llm_parse_marked_html(call["stdout"])
+        rec["parse_ok"] = parsed.get("ok", False)
+        if parsed.get("ok"):
+            article_html = parsed["html"]
+            attempts.append(rec)
+            break
+        last_reason = parsed.get("reason")
+        rec["reason"] = last_reason
+        attempts.append(rec)
+
+    body_generation = {
+        "mode": "llm",
+        "provider": "hermes-cli",
+        "profile": "atena",
+        "model": "gpt-5.5/openai-codex",
+        "prompt_chars": len(prompt),
+        "regeneration_count": max(0, len(attempts) - 1),
+        "attempts": attempts,
+        "duration_sec": round(sum(a.get("duration_sec", 0) for a in attempts), 2),
+    }
+
+    if article_html is None:
+        body_generation["blocked_reason"] = last_reason or "unknown"
+        if telemetry_sink is not None:
+            telemetry_sink.clear()
+            telemetry_sink.update(body_generation)
+            telemetry_sink["generator"] = "llm_hermes_cli_rec"
+        raise RunnerError(f"REC body generation via GPT-5.5 failed after regeneration (reason={last_reason}); no automatic fallback. Use --rec-body-mode deterministic to debug.")
+
+    if telemetry_sink is not None:
+        telemetry_sink.clear()
+        telemetry_sink.update(body_generation)
+        telemetry_sink["generator"] = "llm_hermes_cli_rec"
+    return {
+        "success": True,
+        "article_html": article_html,
+        "cost_usd": 0.0,
+        "duration_sec": body_generation["duration_sec"],
+        "card_data": card_data,
+        "generator": "llm_hermes_cli_rec",
+        "body_generation": body_generation,
+    }
+
+
 def generate_article_local(site: Dict[str, Any], card_slug: str, card_data: Dict[str, Any]) -> Dict[str, Any]:
     """Generate a deterministic REC article aligned to cc-rec.md v2.
 
@@ -1446,6 +1717,7 @@ def main() -> int:
     ap.add_argument("--allow-disambiguation", action="store_true")
     ap.add_argument("--lang", default="", help="Debug-only language override. Production language comes from site.language.")
     ap.add_argument("--allow-language-override", action="store_true", help="Allow --lang in dry-run/draft debug. Publish aborts if it conflicts with site.language.")
+    ap.add_argument("--rec-body-mode", choices=["llm", "deterministic"], default="llm", help="llm (default) = GPT-5.5 via Hermes CLI writes the body. deterministic = legacy Python generator (debug/reversal only).")
     args = ap.parse_args()
     if not args.card_image_url:
         args.card_image_url = (
@@ -1459,6 +1731,7 @@ def main() -> int:
     costs = {"article_api": 0.0, "extract_llm_est": 0.0, "featured_image_est": 0.03, "total_est": 0.0}
     timings: Dict[str, float] = {}
     created_media: List[Dict[str, Any]] = []
+    rec_body_telemetry: Dict[str, Any] = {}
     artifact_audit: Dict[str, Any] = {"created_count": 0, "used_count": 0, "extra_count": 0, "deleted_count": 0, "items": []}
 
     def tick(name: str, t0: float, add: bool = False) -> None:
@@ -1569,9 +1842,26 @@ def main() -> int:
             "competitors": card_data.get("competitors") or [],
         }
         t0 = time.time()
-        api = generate_article_local(site, card_slug, card_data)
-        tick("article_local_generate_sec", t0)
-        steps.append("article_generated_local")
+        if args.rec_body_mode == "deterministic":
+            api = generate_article_local(site, card_slug, card_data)
+            tick("article_local_generate_sec", t0)
+            steps.append("article_generated_local")
+            rec_body_telemetry = {
+                "mode": "deterministic", "provider": "local_python", "profile": None,
+                "model": None, "prompt_chars": 0,
+                "duration_sec": float(api.get("duration_sec") or 0.0), "regeneration_count": 0,
+            }
+        else:
+            api = generate_rec_body_llm(site, card_slug, card_data, telemetry_sink=rec_body_telemetry)
+            tick("article_llm_generate_sec", t0)
+            steps.append("article_generated_llm")
+            rec_body_telemetry = api.get("body_generation") or rec_body_telemetry
+            if args.dry_run:
+                try:
+                    _bp = Path(tempfile.gettempdir()) / f"rec-body-{card_slug}.html"
+                    _bp.write_text(api.get("article_html") or "", encoding="utf-8")
+                except Exception:
+                    pass
         costs["article_api"] = float(api.get("cost_usd") or 0)
         card_data.update(api.get("card_data") or {})
 
@@ -1953,6 +2243,11 @@ def main() -> int:
             "timings_sec": timings,
             "term_cache": term_stats,
             "cost_usd": costs,
+            "generator": api.get("generator"),
+            "body_generation": rec_body_telemetry or api.get("body_generation"),
+            "article_body_chars": len(api.get("article_html") or ""),
+            "article_body_preview": (api.get("article_html") or "")[:500],
+            "article_body_file": (str(Path(tempfile.gettempdir()) / f"rec-body-{card_slug}.html") if (args.dry_run and args.rec_body_mode == "llm") else None),
             "template_contract": template_contract,
             "card_data": {
                 "card_name": card_data.get("card_name"),
@@ -2001,7 +2296,7 @@ def main() -> int:
             except Exception as cleanup_exc:
                 failure_cleanup = {"error": str(cleanup_exc), "created_media": created_media}
                 warnings.append(f"failure_media_cleanup_failed: {cleanup_exc}")
-        result = {"success": False, "error": str(e), "duration_sec": total_duration_sec, "steps": steps, "timings_sec": timings, "warnings": warnings, "images": {"created_media": created_media, "failure_cleanup": failure_cleanup}}
+        result = {"success": False, "error": str(e), "duration_sec": total_duration_sec, "steps": steps, "timings_sec": timings, "warnings": warnings, "body_generation": rec_body_telemetry or None, "images": {"created_media": created_media, "failure_cleanup": failure_cleanup}}
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 1
 
