@@ -150,6 +150,11 @@ snapshot_pre_state() {
   git -C "$REPO" status --short > "$REPORT_DIR/pre-git-status.txt"
   git -C "$REPO" diff > "$REPORT_DIR/pre-local-diff.patch"
   git -C "$REPO" diff --stat > "$REPORT_DIR/pre-local-diff-stat.txt"
+  git -C "$REPO" diff --cached > "$REPORT_DIR/pre-local-diff-cached.patch"
+  git -C "$REPO" diff --cached --stat > "$REPORT_DIR/pre-local-diff-cached-stat.txt"
+  git -C "$REPO" diff --name-only -- '*.py' > "$REPORT_DIR/pre-python-files.txt"
+  git -C "$REPO" diff --cached --name-only -- '*.py' >> "$REPORT_DIR/pre-python-files.txt"
+  sort -u "$REPORT_DIR/pre-python-files.txt" -o "$REPORT_DIR/pre-python-files.txt"
   git -C "$REPO" ls-files --others --exclude-standard > "$REPORT_DIR/pre-untracked-files.txt"
   run_capture pre-systemd-active.txt systemctl is-active $GATEWAY_SERVICES
   run_capture pre-systemd-show.txt systemctl show $GATEWAY_SERVICES -p Id -p ActiveState -p MainPID -p NRestarts -p ExecMainStatus --no-pager
@@ -306,6 +311,7 @@ run_update() {
   fi
   log "Saving tracked local diff to canonical archive"
   cp "$REPORT_DIR/pre-local-diff.patch" "$PATCH_DIR/mgs-local-preupdate-$STAMP.patch"
+  cp "$REPORT_DIR/pre-local-diff-cached.patch" "$PATCH_DIR/mgs-local-preupdate-cached-$STAMP.patch"
   log "Resetting tracked local changes before update; untracked files preserved"
   git -C "$REPO" reset --hard HEAD
   log "Running Hermes update with built-in backup disabled because MGS backup already exists"
@@ -406,6 +412,43 @@ sys.exit(rc)
 PYCOMPARE
 }
 
+
+compare_python_patch_surface() {
+  log "Comparing critical Python patch surface pre vs post"
+  git -C "$REPO" diff --name-only -- '*.py' > "$REPORT_DIR/post-python-files.txt"
+  git -C "$REPO" diff --cached --name-only -- '*.py' >> "$REPORT_DIR/post-python-files.txt"
+  sort -u "$REPORT_DIR/post-python-files.txt" -o "$REPORT_DIR/post-python-files.txt"
+  git -C "$REPO" diff --cached --stat > "$REPORT_DIR/post-local-diff-cached-stat.txt"
+  git -C "$REPO" diff --cached > "$REPORT_DIR/post-local-diff-cached.patch"
+  python3 - "$REPORT_DIR/pre-python-files.txt" "$REPORT_DIR/post-python-files.txt" "$REPORT_DIR/post-python-files-compare.txt" <<'PYFILES'
+import sys, pathlib
+pre=pathlib.Path(sys.argv[1]); post=pathlib.Path(sys.argv[2]); out=pathlib.Path(sys.argv[3])
+pre_set=set(pre.read_text().splitlines()) if pre.exists() else set()
+post_set=set(post.read_text().splitlines()) if post.exists() else set()
+critical={
+ 'gateway/run.py',
+ 'plugins/platforms/discord/adapter.py',
+ 'tests/gateway/test_discord_free_response.py',
+ 'tests/gateway/test_restart_resume_pending.py',
+}
+lines=[]
+lines.append('pre_python_files=' + ','.join(sorted(pre_set)))
+lines.append('post_python_files=' + ','.join(sorted(post_set)))
+missing=sorted((pre_set & critical) - post_set)
+new=sorted(post_set - pre_set)
+for f in sorted(critical):
+    lines.append(('OK ' if f in post_set else 'MISSING ') + f)
+if missing:
+    lines.append('FAIL missing_preexisting_critical=' + ','.join(missing))
+if new:
+    lines.append('WARN new_post_python_files=' + ','.join(new))
+rc=1 if missing else 0
+out.write_text('\n'.join(lines)+'\n')
+print('\n'.join(lines))
+sys.exit(rc)
+PYFILES
+}
+
 post_validate() {
   log "Collecting post-update state"
   git -C "$REPO" fetch --quiet origin main
@@ -420,6 +463,7 @@ post_validate() {
   } | tee "$REPORT_DIR/post-revisions.txt"
   git -C "$REPO" status --short > "$REPORT_DIR/post-git-status.txt"
   git -C "$REPO" diff --stat > "$REPORT_DIR/post-local-diff-stat.txt"
+  git -C "$REPO" diff --cached --stat > "$REPORT_DIR/post-local-diff-cached-stat.txt"
 
   log "Running MGS patch guard"
   BASE="$BASE" REPO="$REPO" LOG="$REPORT_DIR/patch-guard.log" "$ENSURE_SCRIPT"
@@ -427,6 +471,7 @@ post_validate() {
   snapshot_profiles_sanitized post
   compare_profiles_backup_to_live
   readonly_invariant_check post
+  compare_python_patch_surface
 
   log "Compiling critical files"
   local pybin="$REPO/venv/bin/python"
@@ -483,6 +528,8 @@ Required evidence files:
     pre-revisions.txt
     pre-git-status.txt
     pre-local-diff.patch
+    pre-local-diff-cached.patch
+    pre-python-files.txt
     pre-upstream-patch-check.txt
     pre-profiles-sanitized.txt
     post-profiles-sanitized.txt
@@ -491,6 +538,9 @@ Required evidence files:
     post-revisions.txt
     post-git-status.txt
     post-local-diff-stat.txt
+    post-local-diff-cached-stat.txt
+    post-python-files.txt
+    post-python-files-compare.txt
     patch-guard.log
     py-compile.log
     post-systemd-active.txt
@@ -533,4 +583,5 @@ main() {
 }
 
 main "$@"
+
 
