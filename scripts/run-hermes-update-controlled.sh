@@ -17,6 +17,7 @@ LOG="$REPORT_DIR/run.log"
 PRECHECK_ONLY="${PRECHECK_ONLY:-0}"
 NO_UPDATE="${NO_UPDATE:-0}"
 RESTART_GATEWAYS="${RESTART_GATEWAYS:-0}"
+ALLOW_PATCH_DRIFT="${ALLOW_PATCH_DRIFT:-0}"
 GATEWAY_SERVICES="${GATEWAY_SERVICES:-zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service}"
 
 mkdir -p "$REPORT_DIR" "$PATCH_DIR"
@@ -186,15 +187,23 @@ check_patches_against_upstream() {
   git -C "$REPO" worktree add --detach "$wt" origin/main > "$REPORT_DIR/worktree-add.txt" 2>&1
   local rc=0
   {
-    shopt -s nullglob
-    for patch in "$PATCH_DIR"/*.patch; do
-      name="$(basename "$patch")"
-      case "$name" in
-        mgs-local-*|local-preupdate-*|mgs-discord-local-preupdate-*|mgs-discord-plugin-port-*|mgs-local-preupdate-*|mgs-local-final-*|mgs-local-apply-*)
-          echo "SKIP archive/local snapshot $name"
-          continue
-          ;;
-      esac
+    local canonical_patches=(
+      "discord-deterministic-thread-rename-auto-add-users.patch"
+      "planned-restart-auto-resume-active-sessions.patch"
+      "restart-recovery-checkpoint-idempotent.patch"
+      "discord-post-response-thread-title-rename.patch"
+      "discord-new-thread-ai-title-once.patch"
+      "discord-thread-title-deduplicate-safe-autorename.patch"
+      "discord-bot-gateway-lifecycle-loop-guard.patch"
+      "discord-report-infra-no-auto-thread.patch"
+    )
+    for name in "${canonical_patches[@]}"; do
+      patch="$PATCH_DIR/$name"
+      if [[ ! -s "$patch" ]]; then
+        echo "MISSING $name"
+        rc=1
+        continue
+      fi
       if git -C "$wt" apply --check "$patch" >/tmp/mgs-patch-check.out 2>&1; then
         echo "OK apply-clean $name"
       else
@@ -208,6 +217,7 @@ check_patches_against_upstream() {
   if [[ "$rc" != 0 ]]; then
     log "Patch check found drift. This is not always fatal if invariants already exist, but update must be treated as controlled/manual. See pre-upstream-patch-check.txt"
   fi
+  return "$rc"
 }
 
 run_update() {
@@ -278,33 +288,32 @@ write_summary() {
   cat > "$REPORT_DIR/final-report.md" <<EOF
 # Hermes controlled update report — $STAMP
 
-```text
-Report dir        $REPORT_DIR
-Pre HEAD          ${pre_head:-unknown}
-Post HEAD         ${post_head:-not-run}
-Pre behind        ${pre_behind:-unknown}
-Post behind       ${post_behind:-not-run}
-Backup            ${backup_file:-missing}
-Patch guard       $REPORT_DIR/patch-guard.log
-Restart gateways  $RESTART_GATEWAYS
-Precheck only      $PRECHECK_ONLY
-```
+Report summary:
+
+    Report dir        $REPORT_DIR
+    Pre HEAD          ${pre_head:-unknown}
+    Post HEAD         ${post_head:-not-run}
+    Pre behind        ${pre_behind:-unknown}
+    Post behind       ${post_behind:-not-run}
+    Backup            ${backup_file:-missing}
+    Patch guard       $REPORT_DIR/patch-guard.log
+    Restart gateways  $RESTART_GATEWAYS
+    Allow patch drift $ALLOW_PATCH_DRIFT
+    Precheck only      $PRECHECK_ONLY
 
 Required evidence files:
 
-```text
-pre-revisions.txt
-pre-git-status.txt
-pre-local-diff.patch
-pre-upstream-patch-check.txt
-pre-profiles-sanitized.txt
-post-revisions.txt
-post-git-status.txt
-post-local-diff-stat.txt
-patch-guard.log
-py-compile.log
-post-systemd-active.txt
-```
+    pre-revisions.txt
+    pre-git-status.txt
+    pre-local-diff.patch
+    pre-upstream-patch-check.txt
+    pre-profiles-sanitized.txt
+    post-revisions.txt
+    post-git-status.txt
+    post-local-diff-stat.txt
+    patch-guard.log
+    py-compile.log
+    post-systemd-active.txt
 EOF
   log "Summary written: $REPORT_DIR/final-report.md"
 }
@@ -315,11 +324,16 @@ main() {
   require_path "$ENSURE_SCRIPT"
   log "START MGS controlled Hermes update"
   log "REPORT_DIR=$REPORT_DIR"
-  log "PRECHECK_ONLY=$PRECHECK_ONLY NO_UPDATE=$NO_UPDATE RESTART_GATEWAYS=$RESTART_GATEWAYS"
+  log "PRECHECK_ONLY=$PRECHECK_ONLY NO_UPDATE=$NO_UPDATE RESTART_GATEWAYS=$RESTART_GATEWAYS ALLOW_PATCH_DRIFT=$ALLOW_PATCH_DRIFT"
   profile_backup
   snapshot_pre_state
   snapshot_profiles_sanitized
-  check_patches_against_upstream
+  patch_check_rc=0
+  check_patches_against_upstream || patch_check_rc=$?
+  if [[ "$patch_check_rc" != 0 && "$PRECHECK_ONLY" != "1" && "$ALLOW_PATCH_DRIFT" != "1" ]]; then
+    log "FAIL-CLOSED: canonical patch drift detected before update. Set ALLOW_PATCH_DRIFT=1 only after manual port/review."
+    exit 1
+  fi
   if [[ "$PRECHECK_ONLY" == "1" ]]; then
     readonly_invariant_check || log "WARN read-only invariant check found missing markers; inspect $REPORT_DIR/pre-readonly-invariants.txt"
     write_summary

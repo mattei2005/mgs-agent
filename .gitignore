@@ -84,3 +84,7 @@ tmp/
 # ─── Rescue/temp state files ───────────────────────────────────
 data/git-rescue-*/
 data/hermes-news-explainer-state.json.*
+# ─── Hermes update reports/backups (runtime, may contain sensitive auth snapshots) ──
+reports/hermes-updates/
+*.tar.gz
+
