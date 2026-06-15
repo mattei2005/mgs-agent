@@ -38,6 +38,20 @@ Facts pack atual do REC deve vir de `card_data`: `card_name`, `annual_fee`, `apr
 
 Para GPT, `bad` ou `len > limite` deve virar rejeição com reason, não fallback/corte. Reutilizar apenas normalização, `is_generic_visible_value`, regex de número solto e lista de genéricos, sem os comportamentos de fallback/truncamento.
 
+## 3.2B — microcopy LazyBlock via GPT
+
+Ao revisar pacote 3.2B, checar contra o runner real:
+
+- `lazy_credit_card` precisa ter branch explícito de modo, preferencialmente `use_llm_microcopy=(args.rec_body_mode == "llm")`; não usar apenas estado implícito em `card_data` para decidir fluxo.
+- No modo LLM, `lazy_credit_card` deve usar `card_data["tag10"]`, `card_data["tag2"]` e `card_data["descriptor"]` **já validados** diretamente; não chamar `derive_lazyblock_tags`, `card_ui_tag` ou `card_ui_descriptor`, porque eles re-derivam/fazem fallback/cortam.
+- No modo deterministic, preservar o caminho antigo intacto.
+- O validador strict de microcopy deve ser guardrail negativo, mas precisa bloquear benefício comercial ausente dos fatos: termos como travel/trips/abroad/lounge/hotel, cashback, rewards, points/Clubcard/Nectar/Avios/miles só podem aparecer se o facts pack sustentar o mesmo grupo. Isso não é catálogo de permitidos; é bloqueio de claim comercial inventada.
+- Facts pack para `unsupported_number`/microcopy: `card_name + annual_fee + apr + benefits`; não incluir `source_url`, `competitors` ou HTML bruto para não liberar números irrelevantes.
+- Regeneração v1 do 3.2B deve ficar dentro de `generate_rec_body_llm` para falha de parser HTML/JSON ou validator strict da microcopy. Não prometer retry dos gates finais (`validate-article.sh`/`qa-content-validator.py`) sem pacote separado de feedback loop.
+- Prompt de saída deve dizer que o HTML fica nos marcadores de artigo e o JSON nos marcadores de microcopy, sem prose fora dos dois blocos; evitar frase contraditória como “nothing before or after” se haverá JSON depois.
+
+Teste mínimo antes de aplicar no real: dry build em cópia sem `git add`, `py_compile`, NatWest + Tesco em modo LLM na cópia, `body_generation.microcopy_generation.source == "llm"`, microcopies diferentes, corpos ainda passando `validate-article.sh` e `qa-content-validator.py`, e runner real com SHA intacto até aprovação do Rodolfo.
+
 ## Revisão de pacote 3.2A — pitfall crítico
 
 Ao revisar pacote que insere `generate_rec_body_llm`, confirmar que o retorno `api` propaga telemetria para o JSON final do runner.
