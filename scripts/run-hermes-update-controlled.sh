@@ -162,8 +162,9 @@ snapshot_pre_state() {
 }
 
 snapshot_profiles_sanitized() {
-  log "Collecting sanitized profile config/auth presence"
-  python3 - <<'PY' > "$REPORT_DIR/pre-profiles-sanitized.txt"
+  local prefix="${1:-pre}"
+  log "Collecting sanitized profile config/auth presence ($prefix)"
+  python3 - <<'PY' > "$REPORT_DIR/${prefix}-profiles-sanitized.txt"
 import json, pathlib, re
 
 def yaml_value(text, key_path):
@@ -224,7 +225,8 @@ PY
 }
 
 readonly_invariant_check() {
-  log "Running read-only MGS invariant check"
+  local prefix="${1:-pre}"
+  log "Running read-only MGS invariant check ($prefix)"
   local adapter="$REPO/plugins/platforms/discord/adapter.py"
   local runpy="$REPO/gateway/run.py"
   local rc=0
@@ -251,10 +253,10 @@ readonly_invariant_check() {
         rc=1
       fi
     done
-  } | tee "$REPORT_DIR/pre-readonly-invariants.txt"
+  } | tee "$REPORT_DIR/${prefix}-readonly-invariants.txt"
   local pybin="$REPO/venv/bin/python"
   [[ -x "$pybin" ]] || pybin="python3"
-  "$pybin" -m py_compile "$adapter" "$runpy" > "$REPORT_DIR/pre-readonly-py-compile.log" 2>&1 || rc=1
+  "$pybin" -m py_compile "$adapter" "$runpy" > "$REPORT_DIR/${prefix}-readonly-py-compile.log" 2>&1 || rc=1
   return "$rc"
 }
 
@@ -310,6 +312,100 @@ run_update() {
   "$HERMES_BIN" update --yes --no-backup
 }
 
+
+compare_profiles_backup_to_live() {
+  log "Comparing live critical profile files against pre-update backup"
+  local backup_file
+  backup_file="$(ls -1 "$REPORT_DIR"/hermes-profiles-backup-*.tar.gz 2>/dev/null | head -1 || true)"
+  if [[ -z "$backup_file" || ! -s "$backup_file" ]]; then
+    log "Missing backup for profile comparison"
+    return 1
+  fi
+  python3 - "$backup_file" "$REPORT_DIR/post-backup-live-profile-compare.txt" <<'PYCOMPARE'
+import tarfile, sys, pathlib, tempfile, json, hashlib, re, difflib
+backup=pathlib.Path(sys.argv[1]); out=pathlib.Path(sys.argv[2])
+profiles=['zeus','atena','ares','hera']
+files=['config.yaml','SOUL.md','auth.json']
+root=pathlib.Path('/root/.hermes/profiles')
+rc=0
+lines=[]
+
+def sha(p):
+    return hashlib.sha256(p.read_bytes()).hexdigest()[:12] if p.exists() else 'missing'
+
+def sanitize_auth(text):
+    try:
+        d=json.loads(text)
+    except Exception as e:
+        return {'parse_error': type(e).__name__}
+    out={'active_provider': d.get('active_provider'), 'providers': {}}
+    for k,v in sorted((d.get('providers') or {}).items()):
+        item={}
+        if isinstance(v, dict):
+            item['auth_mode']=v.get('auth_mode')
+            toks=v.get('tokens') or {}
+            if isinstance(toks, dict):
+                item['access_token_len_present']=bool(toks.get('access_token'))
+                item['refresh_token_present']=bool(toks.get('refresh_token'))
+        out['providers'][k]=item
+    return out
+
+with tempfile.TemporaryDirectory() as td_s:
+    td=pathlib.Path(td_s)
+    with tarfile.open(backup, 'r:gz') as tf:
+        members={m.name:m for m in tf.getmembers()}
+        wanted=[]
+        for prof in profiles:
+            for fn in files:
+                for prefix in ['root/.hermes/profiles', './root/.hermes/profiles']:
+                    name=f'{prefix}/{prof}/{fn}'
+                    if name in members:
+                        wanted.append(members[name])
+        tf.extractall(td, members=wanted)
+    lines.append(f'backup={backup}')
+    for prof in profiles:
+        lines.append(f'[{prof}]')
+        for fn in files:
+            bp=None
+            for cand in [td/'root/.hermes/profiles'/prof/fn, td/'./root/.hermes/profiles'/prof/fn]:
+                if cand.exists():
+                    bp=cand; break
+            lp=root/prof/fn
+            if not bp or not lp.exists():
+                lines.append(f'  FAIL {fn}: backup_present={bool(bp)} live_present={lp.exists()}')
+                rc=1
+                continue
+            if fn=='auth.json':
+                b=sanitize_auth(bp.read_text(errors='replace'))
+                l=sanitize_auth(lp.read_text(errors='replace'))
+                same=(b==l)
+                lines.append(f'  {"OK" if same else "FAIL"} {fn}: sanitized_same={same}')
+                if not same:
+                    lines.append(f'    backup_sanitized={b}')
+                    lines.append(f'    live_sanitized={l}')
+                    rc=1
+            else:
+                same=(bp.read_bytes()==lp.read_bytes())
+                lines.append(f'  {"OK" if same else "FAIL"} {fn}: same={same} backup_sha={sha(bp)} live_sha={sha(lp)}')
+                if not same:
+                    rc=1
+                    # Keep detailed diff out of chat-sized report; file remains local and excludes obvious secret-looking lines.
+                    b=bp.read_text(errors='replace').splitlines()
+                    l=lp.read_text(errors='replace').splitlines()
+                    diff=[]
+                    for line in difflib.unified_diff(b,l,fromfile=f'backup/{prof}/{fn}',tofile=f'live/{prof}/{fn}',n=1):
+                        if re.search(r'(token|secret|password|api[_-]?key|authorization|credential)', line, re.I):
+                            diff.append('[REDACTED secret-like diff line]')
+                        else:
+                            diff.append(line[:240])
+                    for line in diff[:80]:
+                        lines.append('    '+line)
+out.write_text('\n'.join(lines)+'\n')
+print('\n'.join(lines))
+sys.exit(rc)
+PYCOMPARE
+}
+
 post_validate() {
   log "Collecting post-update state"
   git -C "$REPO" fetch --quiet origin main
@@ -327,6 +423,10 @@ post_validate() {
 
   log "Running MGS patch guard"
   BASE="$BASE" REPO="$REPO" LOG="$REPORT_DIR/patch-guard.log" "$ENSURE_SCRIPT"
+
+  snapshot_profiles_sanitized post
+  compare_profiles_backup_to_live
+  readonly_invariant_check post
 
   log "Compiling critical files"
   local pybin="$REPO/venv/bin/python"
@@ -385,6 +485,9 @@ Required evidence files:
     pre-local-diff.patch
     pre-upstream-patch-check.txt
     pre-profiles-sanitized.txt
+    post-profiles-sanitized.txt
+    post-backup-live-profile-compare.txt
+    post-readonly-invariants.txt
     post-revisions.txt
     post-git-status.txt
     post-local-diff-stat.txt
@@ -405,7 +508,7 @@ main() {
   log "PRECHECK_ONLY=$PRECHECK_ONLY NO_UPDATE=$NO_UPDATE RESTART_GATEWAYS=$RESTART_GATEWAYS ALLOW_PATCH_DRIFT=$ALLOW_PATCH_DRIFT"
   profile_backup
   snapshot_pre_state
-  snapshot_profiles_sanitized
+  snapshot_profiles_sanitized pre
   patch_check_rc=0
   check_patches_against_upstream || patch_check_rc=$?
   if [[ "$patch_check_rc" != 0 && "$PRECHECK_ONLY" != "1" && "$ALLOW_PATCH_DRIFT" != "1" ]]; then
@@ -430,3 +533,4 @@ main() {
 }
 
 main "$@"
+
