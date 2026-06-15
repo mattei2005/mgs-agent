@@ -83,9 +83,48 @@ def service_account() -> dict[str, Any]:
     raise RuntimeError("service account JSON not found")
 
 
+def read_json_file(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def write_secret_json(path: Path, data: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    os.chmod(tmp, 0o600)
+    tmp.replace(path)
+    os.chmod(path, 0o600)
+
+
 def oauth_credentials() -> dict[str, str]:
-    item = op_item_json(OAUTH_OP_ITEM)
+    """Return Drive OAuth credentials with a root-only local cache.
+
+    1Password is the source of truth, but long Drive batches should not call it
+    repeatedly. The cache file contains only this integration's OAuth client
+    fields and is chmod 600; refresh_token remains overridable by the token file.
+    """
     creds: dict[str, str] = {}
+
+    cache_file = Path(OAUTH_CREDENTIALS_FILE)
+    cached = read_json_file(cache_file)
+    for k in ("client_id", "client_secret", "refresh_token"):
+        if cached.get(k):
+            creds[k] = str(cached[k])
+
+    token_file = Path(OAUTH_TOKEN_FILE)
+    token_data = read_json_file(token_file)
+    if token_data.get("refresh_token"):
+        creds["refresh_token"] = str(token_data["refresh_token"])
+
+    if all(creds.get(k) for k in ("client_id", "client_secret", "refresh_token")):
+        return creds
+
+    item = op_item_json(OAUTH_OP_ITEM)
     for field in item.get("fields", []):
         label = (field.get("label") or field.get("id") or "").lower().replace(" ", "_").replace("-", "_")
         val = field.get("value") or ""
@@ -99,17 +138,15 @@ def oauth_credentials() -> dict[str, str]:
             for k in ("client_id", "client_secret", "refresh_token"):
                 if obj.get(k):
                     creds[k] = obj[k]
-    token_file = Path(OAUTH_TOKEN_FILE)
-    if token_file.exists():
-        try:
-            token_data = json.loads(token_file.read_text(encoding="utf-8"))
-        except Exception:
-            token_data = {}
-        if token_data.get("refresh_token"):
-            creds["refresh_token"] = token_data["refresh_token"]
+
+    if token_data.get("refresh_token"):
+        creds["refresh_token"] = str(token_data["refresh_token"])
+
     missing = [k for k in ("client_id", "client_secret", "refresh_token") if not creds.get(k)]
     if missing:
         raise RuntimeError(f"OAuth item {OAUTH_OP_ITEM} missing fields: {', '.join(missing)}")
+
+    write_secret_json(cache_file, {k: creds[k] for k in ("client_id", "client_secret", "refresh_token")})
     return creds
 
 
@@ -312,11 +349,12 @@ def append_report(path: Path, row: dict[str, str]) -> None:
 
 def process_queue(args: argparse.Namespace) -> dict[str, Any]:
     load_env()
-    global ROOT_FOLDER_ID, OP_ITEM, OAUTH_OP_ITEM, OAUTH_TOKEN_FILE
+    global ROOT_FOLDER_ID, OP_ITEM, OAUTH_OP_ITEM, OAUTH_TOKEN_FILE, OAUTH_CREDENTIALS_FILE
     ROOT_FOLDER_ID = os.environ.get("ARES_DRIVE_ROOT_FOLDER_ID", ROOT_FOLDER_ID)
     OP_ITEM = os.environ.get("ARES_DRIVE_OP_ITEM", OP_ITEM)
     OAUTH_OP_ITEM = os.environ.get("ARES_DRIVE_OAUTH_OP_ITEM", OAUTH_OP_ITEM)
     OAUTH_TOKEN_FILE = os.environ.get("ARES_DRIVE_OAUTH_TOKEN_FILE", OAUTH_TOKEN_FILE)
+    OAUTH_CREDENTIALS_FILE = os.environ.get("ARES_DRIVE_OAUTH_CREDENTIALS_FILE", OAUTH_CREDENTIALS_FILE)
     token, auth_mode = build_access_token()
     drive = Drive(token)
     root_meta = drive.preflight_destination(auth_mode)
