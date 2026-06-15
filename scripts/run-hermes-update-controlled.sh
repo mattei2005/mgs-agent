@@ -65,6 +65,10 @@ Report summary:
 This report is written even on failure so Zeus can recover after gateway restart
 and report the true terminal state instead of going silent.
 EOF
+  # send_discord_report_file is defined below; call may fail if function is not loaded yet in older shells.
+  if declare -F send_discord_report_file >/dev/null 2>&1; then
+    send_discord_report_file "❌ Hermes update FALHOU" "$REPORT_DIR/final-report.md" || true
+  fi
 }
 send_discord_report_file() {
   local status="$1"
