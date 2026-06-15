@@ -86,22 +86,45 @@ snapshot_pre_state() {
 snapshot_profiles_sanitized() {
   log "Collecting sanitized profile config/auth presence"
   python3 - <<'PY' > "$REPORT_DIR/pre-profiles-sanitized.txt"
-import json, pathlib, yaml
+import json, pathlib, re
+
+def yaml_value(text, key_path):
+    # Minimal dependency-free extractor for the simple nested keys we report.
+    lines = text.splitlines()
+    if len(key_path) == 1:
+        pat = re.compile(rf'^\s*{re.escape(key_path[0])}:\s*(.*)$')
+        for line in lines:
+            m = pat.match(line)
+            if m:
+                return m.group(1).strip().strip('"\'') or '<present>'
+        return None
+    parent, child = key_path
+    in_parent = False
+    parent_indent = 0
+    for line in lines:
+        if re.match(rf'^\s*{re.escape(parent)}:\s*$', line):
+            in_parent = True
+            parent_indent = len(line) - len(line.lstrip())
+            continue
+        if in_parent:
+            indent = len(line) - len(line.lstrip())
+            if line.strip() and indent <= parent_indent:
+                in_parent = False
+            m = re.match(rf'^\s*{re.escape(child)}:\s*(.*)$', line)
+            if in_parent and m:
+                return m.group(1).strip().strip('"\'') or '<present>'
+    return None
+
 for name in ['zeus','atena','ares','hera']:
     base = pathlib.Path('/root/.hermes/profiles')/name
     print(f'[{name}]')
     cfg = base/'config.yaml'
     if cfg.exists():
-        try:
-            data = yaml.safe_load(cfg.read_text()) or {}
-        except Exception as e:
-            print('  config_parse_error:', type(e).__name__)
-            data = {}
-        model = data.get('model') or {}
-        print('  model.provider:', model.get('provider'))
-        print('  model.default:', model.get('default'))
-        print('  compression.threshold:', (data.get('compression') or {}).get('threshold'))
-        print('  toolsets:', ','.join(data.get('toolsets') or []))
+        text = cfg.read_text(errors='replace')
+        print('  model.provider:', yaml_value(text, ['model','provider']))
+        print('  model.default:', yaml_value(text, ['model','default']))
+        print('  compression.threshold:', yaml_value(text, ['compression','threshold']))
+        print('  config_present: true')
     else:
         print('  config: missing')
     auth = base/'auth.json'
@@ -120,6 +143,41 @@ for name in ['zeus','atena','ares','hera']:
     else:
         print('  auth: missing')
 PY
+}
+
+readonly_invariant_check() {
+  log "Running read-only MGS invariant check"
+  local adapter="$REPO/plugins/platforms/discord/adapter.py"
+  local runpy="$REPO/gateway/run.py"
+  local rc=0
+  {
+    for spec in \
+      "$adapter::def _auto_thread_name_from_message" \
+      "$adapter::DISCORD_THREAD_AUTO_ADD_USERS" \
+      "$adapter::Auto-thread member sync" \
+      "$adapter::Auto-thread skipped for REPORT-INFRA control-plane message" \
+      "$adapter::Ignoring gateway lifecycle notice from bot" \
+      "$runpy::service-manager restarts while a chat task is active" \
+      "$runpy::Internal restart recovery checkpoint" \
+      "$runpy::Do not re-run" \
+      "$runpy::_schedule_discord_thread_title_rename" \
+      "$runpy::_discord_thread_safe_to_autorename" \
+      "$runpy::_discord_title_message_from_gateway_text" \
+      "$runpy::Shutdown notification suppressed for bot-originated Discord session"; do
+      file="${spec%%::*}"
+      needle="${spec#*::}"
+      if [[ -f "$file" ]] && grep -q "$needle" "$file"; then
+        echo "OK $needle"
+      else
+        echo "MISSING $needle in $file"
+        rc=1
+      fi
+    done
+  } | tee "$REPORT_DIR/pre-readonly-invariants.txt"
+  local pybin="$REPO/venv/bin/python"
+  [[ -x "$pybin" ]] || pybin="python3"
+  "$pybin" -m py_compile "$adapter" "$runpy" > "$REPORT_DIR/pre-readonly-py-compile.log" 2>&1 || rc=1
+  return "$rc"
 }
 
 check_patches_against_upstream() {
@@ -263,7 +321,7 @@ main() {
   snapshot_profiles_sanitized
   check_patches_against_upstream
   if [[ "$PRECHECK_ONLY" == "1" ]]; then
-    post_validate
+    readonly_invariant_check || log "WARN read-only invariant check found missing markers; inspect $REPORT_DIR/pre-readonly-invariants.txt"
     write_summary
     log "DONE precheck only"
     return 0
