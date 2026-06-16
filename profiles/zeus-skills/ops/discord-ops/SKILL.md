@@ -710,16 +710,24 @@ Pitfall crítico: separar “não recebo automaticamente o histórico completo n
 
 ## SEÇÃO G — Importar histórico de thread antiga por link/ID
 
-Quando Rodolfo/Raquel pedir para Zeus ou Atena ler uma thread antiga, use o importador read-only canônico por link/ID. Ver `references/discord-thread-history-import.md`.
+Quando Rodolfo/Raquel pedir para Zeus, Atena, Ares, Hera ou outro agente MGS ler uma thread antiga, use o importador read-only canônico por link/ID. Ver `references/discord-thread-history-import.md`.
 
 Comandos padrão:
 
 ```bash
 /root/mgs-agent/scripts/import-discord-thread.py --profile zeus '<LINK_OU_ID>'
 /root/mgs-agent/scripts/import-discord-thread.py --profile atena '<LINK_OU_ID>'
+/root/mgs-agent/scripts/import-discord-thread.py --profile ares '<LINK_OU_ID>'
+/root/mgs-agent/scripts/import-discord-thread.py --profile hera '<LINK_OU_ID>'
 ```
 
-Pitfall: usar o `--profile` correto evita tentar acessar private threads com o token do bot errado. Os snapshots em `data/discord-thread-imports/` são local-only e não devem ser versionados.
+O importador aceita nomes de profile seguros (`[A-Za-z0-9_-]+`) e carrega `/root/.hermes/profiles/<profile>/.env`; portanto, ao diagnosticar “não consigo ler thread por ID”, primeiro tente o profile do agente afetado, não apenas Zeus/Atena.
+
+Pitfalls:
+- Usar o `--profile` correto evita tentar acessar private threads com o token do bot errado.
+- Se `GET /channels/<thread_id>` retornar `403 Missing Access`, é uma limitação de permissão do bot/profile naquela thread/canal; reporte isso claramente e não invente conteúdo.
+- Não confundir `403 Missing Access` para enviar mensagem no canal Zeus/home com incapacidade de ler uma thread acessível: são permissões separadas.
+- Os snapshots em `data/discord-thread-imports/` são local-only e não devem ser versionados.
 
 ---
 
