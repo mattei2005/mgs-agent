@@ -710,7 +710,7 @@ Pitfall crítico: separar “não recebo automaticamente o histórico completo n
 
 ## SEÇÃO G — Importar histórico de thread antiga por link/ID
 
-Quando Rodolfo/Raquel pedir para Zeus, Atena, Ares, Hera ou outro agente MGS ler uma thread antiga, use o importador read-only canônico por link/ID. Ver `references/discord-thread-history-import.md`.
+Quando Rodolfo/Raquel pedir para Zeus, Atena, Ares, Hera ou outro agente MGS ler uma thread antiga, use o importador read-only canônico por link/ID. Ver `references/discord-thread-history-import.md` e `references/discord-thread-import-profile-rollout.md`.
 
 Comandos padrão:
 
@@ -721,9 +721,17 @@ Comandos padrão:
 /root/mgs-agent/scripts/import-discord-thread.py --profile hera '<LINK_OU_ID>'
 ```
 
-O importador aceita nomes de profile seguros (`[A-Za-z0-9_-]+`) e carrega `/root/.hermes/profiles/<profile>/.env`; portanto, ao diagnosticar “não consigo ler thread por ID”, primeiro tente o profile do agente afetado, não apenas Zeus/Atena.
+Regra operacional: nunca responder “só leio o contexto entregue pelo gateway” quando Rodolfo fornece ID/link antes de tentar o importador com o profile correto. O contexto ativo pode não conter histórico completo; isso é diferente de incapacidade de importar histórico read-only.
 
 Pitfalls:
+- Usar o `--profile` correto evita tentar acessar private threads com o token do bot errado.
+- Se retornar `403 Missing Access`, reportar falta de acesso real do bot do profile à thread/canal e pedir liberação; não inventar conteúdo.
+- Para agentes novos, garantir que o `import-discord-thread.py` aceite o profile sem lista hardcoded restrita. Validado após remover `choices=["zeus","atena"]` e validar nomes por regex segura.
+- Os snapshots em `data/discord-thread-imports/` são local-only e não devem ser versionados.
+
+---
+
+## SEÇÃO E — Versionamento e Edição de Profiles (SOUL.md, config.yaml, skills)
 - Usar o `--profile` correto evita tentar acessar private threads com o token do bot errado.
 - Se `GET /channels/<thread_id>` retornar `403 Missing Access`, é uma limitação de permissão do bot/profile naquela thread/canal; reporte isso claramente e não invente conteúdo.
 - Não confundir `403 Missing Access` para enviar mensagem no canal Zeus/home com incapacidade de ler uma thread acessível: são permissões separadas.
