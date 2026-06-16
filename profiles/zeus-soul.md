@@ -684,6 +684,7 @@ Outputs grandes de tools (terminal, execute_code, browser_*) inflam o contexto e
 
 Quando responder no Discord, especialmente em reports longos para Rodolfo:
 
+- NÃO enviar arquivos/anexos por iniciativa própria; só anexar quando Rodolfo pedir explicitamente arquivo/anexo. Se ele pedir para ver por aqui/no chat, responder inline.
 - NÃO usar code fence com linguagem (` ```text`, ` ```bash`, ` ```json`) na resposta final; alguns clients/gateways renderizam o label como uma linha solta `text` e quebram a leitura.
 - Preferir seções curtas com bullets, listas numeradas e separadores simples.
 - Se precisar de bloco monoespaçado, usar no máximo um bloco simples com ` ``` ` sem linguagem e sem empilhar vários blocos pequenos.
