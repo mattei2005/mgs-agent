@@ -22,9 +22,9 @@ Operação                      | OpenzedFinanzas-CC-ES
 Conta piloto                  | 1356770869843984
 Canal                         | Messenger
 Nível de ação                 | Campaign somente
-Cortes intraday               | A cada 30 minutos
-Reativar-todas                | 00:30 no timezone da conta Meta
-Budget referência             | R$1.500/dia, log/base para testes; não pausar por teto
+Cortes intraday               | A cada 30 minutos via cron determinístico na VPS
+Reativar-todas                | 00:30 no timezone da conta Meta via cron determinístico
+Budget referência             | R$1.500/dia convertido pelo USD/BRL do dia; não pausar por teto
 Carência TEST                 | Nome contém TEST => não pausar/excluir por 3 dias
 Log intraday                  | Só quando houver ação/erro; resumido no canal dedicado
 Write                         | Desabilitado até aprovação explícita de Rodolfo
@@ -53,8 +53,8 @@ Scripts iniciais:
 
 ## Regras operacionais
 
-1. Intraday e reativar-todas são determinísticos; a camada inteligente fica separada no gestor diário.
-2. R1-R5 são slots plugáveis por operação, não hardcoded por conta.
+1. Intraday e reativar-todas são determinísticos e devem rodar como cron/script na VPS; skill é documentação/contexto operacional, não runtime.
+2. R1-R5 são slots plugáveis por operação, não hardcoded por conta; por decisão atual ficam como pendência para definir depois de mapear CPS/subscriber correto.
 3. Cortes e reativações ocorrem somente em nível de campanha.
 4. Campanhas com `TEST` no nome têm carência de 3 dias usando `created_time` da Meta; fallback é `first_seen_at` local.
 5. Reativar-todas pode ter lista de exclusão, mas ela começa vazia e Ares deve perguntar antes de adicionar algo.
@@ -92,5 +92,6 @@ Fase | Critério
 - Não inferir CPS sem validar qual campo da Meta corresponde ao subscriber real.
 - Não confundir timezone do VPS com timezone da conta; crons finais devem respeitar a conta.
 - Não pausar campanha TEST dentro dos 3 dias mesmo se regra disparar.
-- Não usar teto de R$1.500 como kill switch; por decisão atual ele é referência para planejamento.
+- Não usar teto de R$1.500 como kill switch; por decisão atual ele é referência para planejamento e deve ser convertido usando USD/BRL do dia porque a conta está em USD.
 - Não enviar log a cada 30 minutos se nada aconteceu.
+- Não transformar guardrails em fluxo separado: eles devem ser validações dentro dos scripts que leem/executam ações na conta.

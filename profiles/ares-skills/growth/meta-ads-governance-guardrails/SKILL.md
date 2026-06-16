@@ -11,7 +11,9 @@ metadata:
 
 # Meta Ads Governance & Guardrails — Ares/MGS
 
-Use esta skill quando o assunto for permissão, segurança, budget, tokens, logs, rate limits ou autorização para operação Meta Ads do Ares.
+Status operacional: **não usar como fluxo separado/runtime**. Rodolfo definiu que os guardrails devem fazer parte dos próprios scripts/fluxos de organização e execução na conta. Esta skill fica apenas como referência temporária até ser consolidada em `meta-ads-intraday-operations` ou removida com confirmação explícita.
+
+Use esta skill somente como referência de segurança quando o assunto for permissão, segurança, budget, tokens, logs, rate limits ou autorização para operação Meta Ads do Ares.
 
 ## Princípios
 
