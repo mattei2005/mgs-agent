@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-16T00:29:05-04:00",
+    "updated_at": "2026-06-16T05:00:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -130,6 +130,26 @@
       "modified_at": "2026-06-08T14:24:33-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/ares-meta-auth-check.py",
+      "size_bytes": 1662,
+      "modified_at": "2026-06-16T00:20:06-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-common.py",
+      "size_bytes": 3220,
+      "modified_at": "2026-06-16T00:22:04-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-fetch-campaigns.py",
+      "size_bytes": 2045,
+      "modified_at": "2026-06-16T00:22:26-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
+      "size_bytes": 1339,
+      "modified_at": "2026-06-16T00:20:16-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/ares-promote-review-ready.py",
       "size_bytes": 6295,
       "modified_at": "2026-06-14T23:43:23-04:00"
@@ -215,6 +235,11 @@
       "modified_at": "2026-05-16T16:16:09-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/discord-response-lint.py",
+      "size_bytes": 3074,
+      "modified_at": "2026-06-15T23:31:30-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
       "size_bytes": 8559,
       "modified_at": "2026-06-14T13:29:42-04:00"
@@ -266,8 +291,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/import-discord-thread.py",
-      "size_bytes": 7917,
-      "modified_at": "2026-05-16T18:25:57-04:00"
+      "size_bytes": 8088,
+      "modified_at": "2026-06-15T20:26:48-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/infra-discovery.sh",
@@ -446,8 +471,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
-      "size_bytes": 5415,
-      "modified_at": "2026-06-03T10:11:41-04:00"
+      "size_bytes": 24153,
+      "modified_at": "2026-06-15T19:19:16-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/run-openhands-atena.sh",
@@ -473,26 +498,6 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-common.py",
-      "size_bytes": 3220,
-      "modified_at": "2026-06-16T00:22:04-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-auth-check.py",
-      "size_bytes": 1662,
-      "modified_at": "2026-06-16T00:20:06-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-fetch-campaigns.py",
-      "size_bytes": 2045,
-      "modified_at": "2026-06-16T00:22:26-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
-      "size_bytes": 1339,
-      "modified_at": "2026-06-16T00:20:16-04:00"
     }
   ],
   "skills_mgs": [
@@ -875,6 +880,16 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/creative-taxonomy-mgs/SKILL.md"
       },
       {
+        "name": "meta-ads-governance-guardrails",
+        "category": "growth",
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-governance-guardrails/SKILL.md"
+      },
+      {
+        "name": "meta-ads-intraday-operations",
+        "category": "growth",
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
+      },
+      {
         "name": "paid-acquisition-operations",
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md"
@@ -1073,20 +1088,6 @@
         "name": "yuanbao",
         "category": "",
         "skill_md": "/root/.hermes/profiles/ares/skills/yuanbao/SKILL.md"
-      },
-      {
-        "name": "meta-ads-intraday-operations",
-        "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "purpose": "Operação intraday Meta Ads via cron/script VPS: reativar-todas, cortes R1-R5 pendentes, carência TEST, logs e auditoria.",
-        "reference_implementation": "/root/mgs-agent/scripts/ares-meta-*.py"
-      },
-      {
-        "name": "meta-ads-governance-guardrails",
-        "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-governance-guardrails/SKILL.md",
-        "purpose": "Referência temporária de guardrails Meta Ads; não-runtime. Guardrails devem ficar embutidos nos scripts/fluxos operacionais.",
-        "reference_implementation": "/root/mgs-agent/scripts/ares-meta-*.py"
       }
     ],
     "atena": [
@@ -2711,8 +2712,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "73e60455e802283da51dc57faa05ea47",
-      "modified_at": "2026-06-15T04:56:02-04:00"
+      "md5": "b95bdc7b78e2adeeeb4414ca748ba61b",
+      "modified_at": "2026-06-16T04:56:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -2723,32 +2724,32 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "7f114622bcc952c546aac134fc18b312",
-      "modified_at": "2026-06-15T05:00:01-04:00"
+      "md5": "499483291cc1c4ab9a217500d704a852",
+      "modified_at": "2026-06-16T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "cad1697846199df268fdde996e0b67f1",
-      "modified_at": "2026-06-15T02:58:57-04:00"
+      "md5": "c6a403b153c45667d06af41bc0f8f412",
+      "modified_at": "2026-06-16T03:00:23-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 12910,
-      "md5": "733948723723cd63151c5d8cc6b18daf",
-      "modified_at": "2026-06-15T05:00:01-04:00"
+      "size_bytes": 13555,
+      "md5": "5a6bcc06c4dadbab558bcdbf3745ab33",
+      "modified_at": "2026-06-16T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 327,
-      "md5": "ad70f96d6065e96c812621e23e3a4da9",
-      "modified_at": "2026-06-14T20:37:02-04:00"
+      "size_bytes": 328,
+      "md5": "77359002ef3aab0a0e9180da77bcde17",
+      "modified_at": "2026-06-15T20:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 100538,
-      "md5": "d61c4264d0d2ec5b6779ada05ec3729d",
-      "modified_at": "2026-06-14T05:00:05-04:00"
+      "size_bytes": 102656,
+      "md5": "4c27e43b98b275d42859d2c912ebc37f",
+      "modified_at": "2026-06-16T00:29:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -2795,8 +2796,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2239,
-      "md5": "0e63420f0ad5355fab72a2ae2bc22b16",
-      "modified_at": "2026-06-15T04:56:02-04:00"
+      "md5": "5f02e7e784c5bfbf4f4d0d3d9bb45b75",
+      "modified_at": "2026-06-16T04:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -2813,8 +2814,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "602548d37d751dd833e7db3e029470a1",
-      "modified_at": "2026-06-14T20:07:02-04:00"
+      "md5": "2d4e3b6dfb9f3f873f1819555d254566",
+      "modified_at": "2026-06-15T20:07:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -2824,9 +2825,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 20248,
-      "md5": "499faa2c12efd0bc2b9dc35e2d686ea2",
-      "modified_at": "2026-06-14T10:24:08-04:00"
+      "size_bytes": 20612,
+      "md5": "9bbdb18fc8cf236930d16be662b5632a",
+      "modified_at": "2026-06-15T10:24:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -2848,15 +2849,15 @@
     },
     {
       "path": "/root/mgs-agent/profiles/hera-soul.md",
-      "size_bytes": 18870,
-      "md5": "0926a3ef1570ecb6b51bc14d0023328a",
-      "modified_at": "2026-06-09T11:35:01-04:00"
+      "size_bytes": 19556,
+      "md5": "0c0e7e202ce0596109a982bebc0d9772",
+      "modified_at": "2026-06-15T20:31:43-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
-      "size_bytes": 39740,
-      "md5": "05a349047cefbf0e00ce26f32c5f255f",
-      "modified_at": "2026-06-12T01:39:45-04:00"
+      "size_bytes": 41357,
+      "md5": "ea0ece58789373e1a0fab876f6c35cd0",
+      "modified_at": "2026-06-15T23:31:16-04:00"
     }
   ],
   "mu_plugin_canonical": {
