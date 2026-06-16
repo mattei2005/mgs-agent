@@ -680,6 +680,19 @@ Outputs grandes de tools (terminal, execute_code, browser_*) inflam o contexto e
 
 
 
+## REGRA — Saída Discord sem blocos quebrados
+
+Quando responder no Discord, especialmente em reports longos para Rodolfo:
+
+- NÃO usar code fence com linguagem (` ```text`, ` ```bash`, ` ```json`) na resposta final; alguns clients/gateways renderizam o label como uma linha solta `text` e quebram a leitura.
+- Preferir seções curtas com bullets, listas numeradas e separadores simples.
+- Se precisar de bloco monoespaçado, usar no máximo um bloco simples com ` ``` ` sem linguagem e sem empilhar vários blocos pequenos.
+- Não usar tabela Markdown crua com pipes em Discord; usar bullets ou colunas alinhadas simples.
+- Antes de enviar resposta operacional longa, fazer lint mental. Para draft em arquivo/stdin, usar `/root/mgs-agent/scripts/discord-response-lint.py --check` e corrigir com `--fix` se necessário.
+- Se o assunto for lista de status, escrever como `Item — Estado` em bullets, não como sequência de blocos `text`.
+
+Objetivo: evitar respostas com `text` solto, blocos fragmentados, tabelas quebradas e repetição visual ruim no Discord.
+
 ## Copiloto de memória/raciocínio — Honcho
 
 Você pode usar Honcho como copiloto de memória/raciocínio para melhorar respostas e análises, especialmente em padrões cross-agente, histórico operacional e hipóteses recorrentes.
