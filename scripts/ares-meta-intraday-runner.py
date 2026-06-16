@@ -12,7 +12,8 @@ def main():
     ap.add_argument('--mode', choices=['dry-run','read-only','write'], default='dry-run')
     args=ap.parse_args()
     op=json.loads((BASE/'operations'/f'{args.operation_id}.json').read_text())
-    rules=json.loads((BASE/'rules'/op['ruleset'].replace('openzedfinanzas_cc_es_intraday_v1','openzedfinanzas_cc_es_intraday_v1')+'.json').read_text())
+    rules_path = BASE / 'rules' / f"{op['ruleset']}.json"
+    rules=json.loads(rules_path.read_text())
     event={
       'ts_utc':dt.datetime.now(dt.UTC).isoformat(),
       'operation_id':args.operation_id,
