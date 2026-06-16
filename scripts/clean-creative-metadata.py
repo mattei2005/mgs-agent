@@ -51,6 +51,12 @@ ALLOWED_STRUCTURAL_TAGS = {
     'VideoFullRangeFlag', 'BufferSize', 'MaxBitrate', 'AverageBitrate',
     'VideoFrameRate', 'Balance', 'AudioFormat', 'AudioChannels',
     'AudioBitsPerSample', 'AudioSampleRate', 'PixelAspectRatio',
+    # ExifTool groups some QuickTime structural track descriptors under TrackN.
+    # They remain after stripping metadata and are needed to describe/play media,
+    # not privacy metadata.
+    'CleanApertureDimensions', 'ProductionApertureDimensions',
+    'EncodedPixelsDimensions', 'HandlerClass', 'CompressorName',
+    'PurchaseFileFormat',
 }
 
 
