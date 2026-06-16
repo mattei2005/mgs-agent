@@ -87,10 +87,15 @@ audit(){ printf '{"ts":"%s","event":"%s","actor":"mgs-gateway-restart-finalizer"
 log "START detached gateway restart finalizer agents=$AGENT_LIST reason=\$REASON"
 audit "gateway_restart_finalizer_started" "agents=$AGENT_LIST log=\$LOG"
 for agent in $AGENT_LIST; do
+  [[ "\$agent" == "zeus" ]] && continue
   svc="\${agent}-gateway.service"
-  log "restart \$svc"
-  systemctl restart --no-block "\$svc"
+  log "restart \$svc (detached finalizer, blocking inside external job)"
+  systemctl restart "\$svc"
 done
+if [[ " $AGENT_LIST " == *" zeus "* ]]; then
+  log "restart zeus-gateway.service last (--no-block so this finalizer is not killed by its own caller)"
+  systemctl restart --no-block zeus-gateway.service
+fi
 log "Validation is intentionally file-only; no foreground Discord/tool polling."
 systemctl show $(printf '%s-gateway.service ' "${ORDERED_AGENTS[@]}") -p Id -p ActiveState -p SubState -p MainPID -p NRestarts -p ExecMainStatus -p ExecMainStartTimestamp --no-pager || true
 for agent in $AGENT_LIST; do
