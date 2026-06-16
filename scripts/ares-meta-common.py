@@ -24,7 +24,7 @@ def get_token_from_1password(item_name=TOKEN_ITEM_DEFAULT):
         if res.returncode == 0 and token:
             return token, field
     # fallback: JSON and common field labels
-    cmd = f"set -a; [ -f /root/mgs-agent/.env ] && . /root/mgs-agent/.env; set +a; op item get {shell_quote(item_name)} --format json --reveal"
+    cmd = f"set -a; [ -f /root/mgs-agent/.env ] && . /root/mgs-agent/.env; set +a; op item get {shell_quote(item_name)} --vault {shell_quote(os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo'))} --format json --reveal"
     res = subprocess.run(['bash','-lc',cmd], text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30)
     if res.returncode != 0:
         raise RuntimeError('1Password item not readable or not found')
