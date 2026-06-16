@@ -415,14 +415,24 @@ Referência detalhada: `references/hermes-discord-busy-input-queue.md`.
 
 ### Adding a user to a private Discord thread
 
-When Rodolfo asks to add Raquel/Kelly/Geizian/gestor or another approved person to a Zeus/Atena/Hera thread, use Discord API `PUT /channels/{thread_id}/thread-members/{user_id}`. Do this even when no dedicated `discord_admin` tool is loaded: load the bot token from the active profile `.env` inside a terminal/shell command, call Discord API directly, and never print the token. If it returns `403 Missing Access`, the likely cause is that the user is not in the parent channel yet; report that clearly, then retry the same PUT after Rodolfo grants parent-channel access. Do not claim the thread add succeeded until the API returns `204`; verify with `GET /channels/{thread_id}/thread-members/{user_id}` returning `200` when possible.
+When Rodolfo asks to add Raquel/Kelly/Geizian/gestor or another approved person to a Zeus/Atena/Ares/Hera thread, use Discord API `PUT /channels/{thread_id}/thread-members/{user_id}`. Do this even when no dedicated `discord_admin` tool is loaded: load the bot token from the active profile `.env` inside a terminal/shell command, call Discord API directly, and never print the token. If it returns `403 Missing Access`, the likely cause is that the bot lacks access to the thread or the user is not in the parent channel yet; report that clearly, then retry the same PUT after Rodolfo grants parent-channel access. Do not claim the thread add succeeded until the API returns `204`; verify with `GET /channels/{thread_id}/thread-members/{user_id}` returning `200` when possible.
 
-Operational correction validated on Hera: if the agent replied “não consigo adicionar pessoas na thread”, fix the profile so future requests are executable, not just manually handled once:
-- Add the explicit user ID to `discord.thread_auto_add_users` in `config.yaml` for automatic inclusion in new threads.
+Canonical helper now available for agents/profiles that have shell access:
+
+```bash
+/root/mgs-agent/scripts/discord-add-thread-member.sh --profile <agent> --thread <thread_id> --user <user_id>
+```
+
+Operational correction validated on Hera and Ares: if the agent replied “não consigo adicionar pessoas na thread”, fix the profile so future requests are executable, not just manually handled once:
+- Add the explicit user IDs to `discord.thread_auto_add_users` in `config.yaml` for automatic inclusion in new threads.
 - If `.env` already defines `DISCORD_THREAD_AUTO_ADD_USERS`, update `.env` too; runtime env takes precedence over config hydration (`config.yaml` only sets env when the env var is absent).
-- Ensure the Discord platform toolset includes `terminal` (or another safe API-capable tool) if the agent must execute explicit add-member requests from chat.
-- Add a short channel prompt/SOUL rule: on Rodolfo’s natural-language “adiciona X na thread”, call the Discord API and confirm only after HTTP 204/GET 200; on 403, report Missing Access/parent-channel access needed.
-- Restart the affected gateway and verify `systemctl is-active`, `Connected as ...`, `✓ discord connected`, and that `/proc/<pid>/environ` has the updated auto-add env value length without printing secrets.
+- Add a short channel prompt/SOUL rule: on Rodolfo’s natural-language “adiciona X na thread”, call `/root/mgs-agent/scripts/discord-add-thread-member.sh --profile <agent> --thread <thread_id> --user <user_id>` or the equivalent Discord API directly, and confirm only after HTTP 204/GET 200; on 403, report Missing Access/parent-channel access needed.
+- Restart the affected gateway and verify `systemctl is-active`, `Connected as ...`, `✓ discord connected`, and that `/proc/<pid>/environ` has the updated auto-add env value length/count without printing secrets.
+- Record the authorization/profile change in `events-audit.jsonl` and check live config equals versioned config before reporting completion.
+
+Pitfall: avoid rewriting full `config.yaml` with PyYAML for small profile edits unless necessary; it can reformat unrelated fields and generate noisy auto-commits. Prefer targeted patches, or restore from backup and reapply minimal textual edits before final validation. Auto-push/auto-commit may capture intermediate config states, so inspect recent commits/status if the edit was iterative.
+
+Session reference: `references/discord-thread-member-autonomy-ares-hera-2026-06-16.md`.
 
 
 ### Diagnóstico de título ruim em auto-thread
