@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-06-16T04:28:29.657792+00:00",
+  "updated_at": "2026-06-16T04:34:02.067659+00:00",
   "operation_id": "OpenzedFinanzas-CC-ES",
   "items": [
     {
       "id": "R1-R5",
       "status": "pending_later",
-      "note": "Definir regras de corte depois de mapear CPS/subscriber correto na Meta."
+      "note": "Definir regras R1 a R5 mais tarde."
     },
     {
       "id": "fx-rate-source",
@@ -21,6 +21,31 @@
       "id": "governance-skill",
       "status": "pending_cleanup_decision",
       "note": "Rodolfo indicou que guardrails devem fazer parte do fluxo, não skill separada. Manter como não-runtime até consolidar/remover com confirmação."
+    },
+    {
+      "id": "meta-metrics",
+      "status": "pending_later",
+      "note": "Definir métricas/dados da Meta e mapear CPS/subscriber correto."
+    },
+    {
+      "id": "campaign-analysis-map",
+      "status": "pending_later",
+      "note": "Análise e mapeamento das campanhas da conta."
+    },
+    {
+      "id": "creative-taxonomy",
+      "status": "pending_later",
+      "note": "Organização de taxonomia dos criativos."
+    },
+    {
+      "id": "management-crons",
+      "status": "pending_later",
+      "note": "Criação de crons para gerenciamento da conta."
+    },
+    {
+      "id": "account-management-rules-HOA",
+      "status": "pending_later",
+      "note": "Definir regras de gestão da conta; quando entrar nesse tema, lembrar Rodolfo sobre HOA."
     }
   ]
 }
