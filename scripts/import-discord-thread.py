@@ -188,8 +188,15 @@ def main() -> int:
     parser.add_argument("thread", help="Link Discord ou ID da thread/canal")
     parser.add_argument("--out-dir", default=str(DEFAULT_OUT_DIR), help=f"Diretório de saída (default: {DEFAULT_OUT_DIR})")
     parser.add_argument("--limit", type=int, default=None, help="Limite máximo de mensagens para importar")
-    parser.add_argument("--profile", choices=["zeus", "atena"], default=None, help="Perfil Hermes preferencial para carregar DISCORD_BOT_TOKEN")
+    parser.add_argument(
+        "--profile",
+        default=None,
+        help="Perfil Hermes preferencial para carregar DISCORD_BOT_TOKEN (ex: zeus, atena, ares, hera)",
+    )
     args = parser.parse_args()
+
+    if args.profile and not re.fullmatch(r"[a-zA-Z0-9_-]+", args.profile):
+        raise SystemExit("ERROR: nome de profile inválido")
 
     load_env_files(args.profile)
     token = os.environ.get("DISCORD_BOT_TOKEN")
