@@ -41,6 +41,8 @@ def lint(text: str) -> list[str]:
         issues.append("raw Markdown pipe table detected; use aligned plain text blocks/bullets for Discord")
     if "```text" in text or "```bash" in text or "```json" in text:
         issues.append("explicit ```text/```bash/```json fence detected; avoid language tags in Discord replies")
+    if MEDIA_ATTACHMENT_RE.search(text):
+        issues.append("MEDIA attachment directive detected; only send attachments when Rodolfo explicitly asks for an attachment/file")
     return issues
 
 
