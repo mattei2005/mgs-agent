@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-16T00:23:20-04:00",
+    "updated_at": "2026-06-16T00:29:05-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -1078,14 +1078,14 @@
         "name": "meta-ads-intraday-operations",
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "purpose": "Operação intraday Meta Ads do Ares: reativar-todas, cortes R1-R5, carência TEST, logs e auditoria.",
+        "purpose": "Operação intraday Meta Ads via cron/script VPS: reativar-todas, cortes R1-R5 pendentes, carência TEST, logs e auditoria.",
         "reference_implementation": "/root/mgs-agent/scripts/ares-meta-*.py"
       },
       {
         "name": "meta-ads-governance-guardrails",
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-governance-guardrails/SKILL.md",
-        "purpose": "Guardrails e permissionamento para Ares operar Meta Ads: token, budget, rate limit, auditoria e transição read-only/dry-run/write.",
+        "purpose": "Referência temporária de guardrails Meta Ads; não-runtime. Guardrails devem ficar embutidos nos scripts/fluxos operacionais.",
         "reference_implementation": "/root/mgs-agent/scripts/ares-meta-*.py"
       }
     ],
