@@ -21,10 +21,12 @@
     ]
   },
   "daily_spend_reference_cap": {
-    "amount": 1500.0,
-    "currency": "BRL",
-    "action": "log_only_no_pause",
-    "future_use": "creative_test_budget_planning"
+    "amount_brl": 1500.0,
+    "account_currency": "USD",
+    "conversion_policy": "convert_BRL_to_account_currency_using_daily_USD_BRL_rate",
+    "action": "reference_only_no_pause",
+    "future_use": "creative_test_budget_planning",
+    "rate_source_status": "pending_definition"
   },
   "metrics": {
     "primary_candidate": "CPS",
@@ -34,5 +36,10 @@
       "Lovable ROI geral"
     ]
   },
-  "ruleset": "openzedfinanzas_cc_es_intraday_v1"
+  "ruleset": "openzedfinanzas_cc_es_intraday_v1",
+  "scheduler_policy": {
+    "intraday": "vps_cron_deterministic_no_skill_runtime",
+    "reactivate_all": "vps_cron_deterministic_no_skill_runtime",
+    "agent_skill_usage": "documentation_and_operator_context_only"
+  }
 }

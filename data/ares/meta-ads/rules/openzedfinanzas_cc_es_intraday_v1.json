@@ -7,7 +7,7 @@
     {
       "id": "R1",
       "enabled": false,
-      "status": "pending_definition",
+      "status": "pending_later",
       "description": "Aguardando regra de Rodolfo",
       "metric_source": null,
       "metric_name": null,
@@ -18,12 +18,13 @@
       "exclusions": [
         "TEST_grace_3_days",
         "reactivate_exclusion_list"
-      ]
+      ],
+      "notes": "Rodolfo pediu deixar R1-R5 como pendência para vermos mais tarde."
     },
     {
       "id": "R2",
       "enabled": false,
-      "status": "pending_definition",
+      "status": "pending_later",
       "description": "Aguardando regra de Rodolfo",
       "metric_source": null,
       "metric_name": null,
@@ -34,12 +35,13 @@
       "exclusions": [
         "TEST_grace_3_days",
         "reactivate_exclusion_list"
-      ]
+      ],
+      "notes": "Rodolfo pediu deixar R1-R5 como pendência para vermos mais tarde."
     },
     {
       "id": "R3",
       "enabled": false,
-      "status": "pending_definition",
+      "status": "pending_later",
       "description": "Aguardando regra de Rodolfo",
       "metric_source": null,
       "metric_name": null,
@@ -50,12 +52,13 @@
       "exclusions": [
         "TEST_grace_3_days",
         "reactivate_exclusion_list"
-      ]
+      ],
+      "notes": "Rodolfo pediu deixar R1-R5 como pendência para vermos mais tarde."
     },
     {
       "id": "R4",
       "enabled": false,
-      "status": "pending_definition",
+      "status": "pending_later",
       "description": "Aguardando regra de Rodolfo",
       "metric_source": null,
       "metric_name": null,
@@ -66,12 +69,13 @@
       "exclusions": [
         "TEST_grace_3_days",
         "reactivate_exclusion_list"
-      ]
+      ],
+      "notes": "Rodolfo pediu deixar R1-R5 como pendência para vermos mais tarde."
     },
     {
       "id": "R5",
       "enabled": false,
-      "status": "pending_definition",
+      "status": "pending_later",
       "description": "Aguardando regra de Rodolfo",
       "metric_source": null,
       "metric_name": null,
@@ -82,7 +86,8 @@
       "exclusions": [
         "TEST_grace_3_days",
         "reactivate_exclusion_list"
-      ]
+      ],
+      "notes": "Rodolfo pediu deixar R1-R5 como pendência para vermos mais tarde."
     }
   ],
   "reactivate_all": {
@@ -92,5 +97,7 @@
     "scope": "all_paused_campaigns",
     "exclusion_list": [],
     "ask_before_adding_exclusion": true
-  }
+  },
+  "rules_definition_status": "R1_R5_pending_for_later_with_Rodolfo",
+  "next_action": "map_CPS_metric_first_then_define_R1_R5"
 }

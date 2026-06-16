@@ -1,0 +1,26 @@
+{
+  "updated_at": "2026-06-16T04:28:29.657792+00:00",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "items": [
+    {
+      "id": "R1-R5",
+      "status": "pending_later",
+      "note": "Definir regras de corte depois de mapear CPS/subscriber correto na Meta."
+    },
+    {
+      "id": "fx-rate-source",
+      "status": "pending",
+      "note": "Escolher fonte oficial para USD/BRL diário usado para converter teto BRL em moeda da conta USD."
+    },
+    {
+      "id": "discord-log-channel",
+      "status": "pending",
+      "note": "Aguardar canal/modelo visual do Rodolfo; intraday log só quando houver ação/erro."
+    },
+    {
+      "id": "governance-skill",
+      "status": "pending_cleanup_decision",
+      "note": "Rodolfo indicou que guardrails devem fazer parte do fluxo, não skill separada. Manter como não-runtime até consolidar/remover com confirmação."
+    }
+  ]
+}

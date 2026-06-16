@@ -7,7 +7,14 @@
       "operation_id": "OpenzedFinanzas-CC-ES",
       "channel": "Messenger",
       "currency_expected": "BRL",
-      "daily_spend_reference_cap": 1500.0,
+      "daily_spend_reference_cap": {
+        "amount_brl": 1500.0,
+        "action": "reference_only_no_pause",
+        "account_currency": "USD",
+        "conversion_policy": "convert_BRL_to_account_currency_using_daily_USD_BRL_rate",
+        "rate_source_status": "pending_definition",
+        "rate_cache_path": "/root/mgs-agent/data/ares/meta-ads/cache/fx-rates/"
+      },
       "daily_spend_reference_cap_action": "log_only_no_pause",
       "timezone_source": "meta_ad_account_timezone",
       "cut_level": "campaign",
@@ -22,8 +29,7 @@
         "timezone_offset_hours_utc": 2,
         "account_status": 1,
         "business_name": "Mattei Services Inc"
-      },
-      "daily_spend_reference_cap_note": "User defined R$1.5k as pilot reference; Meta account currency detected as USD, conversion/meaning must be confirmed before budget automation."
+      }
     }
   ]
 }
