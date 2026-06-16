@@ -20,6 +20,8 @@ Regra prática:
 - Estrutura da empresa: `context/company-os.md`
 - Áreas oficiais: `context/areas.md`
 - Agentes: `context/agent-map.md`
+- Mapa operacional Ares: `context/ares-operational-map.md`
+- Mapa operacional Hera: `context/hera-operational-map.md`
 - Rotas/handoffs: `context/routes.md`
 - Fontes de verdade: `context/sources-of-truth.md`
 - Permissões conceituais: `context/permissions-matrix.md`
@@ -276,10 +278,14 @@ Regra prática:
   - `profiles/ares-config.yaml`
   - `profiles/ares-skills/`
 - Usa principalmente:
+  - `context/ares-operational-map.md`
   - `context/acquisition.md`
   - `context/routes.md`
   - `scripts/ares-*.py`
   - `data/ares/`
+
+- Regra HOT:
+  - Antes de usar `search_files` amplo para `drive`, `campaign`, `meta`, `creative`, `CC_*`, `UPLOAD`, `pixel`, `budget` ou `roi`, abrir `context/ares-operational-map.md` e escolher a fonte específica.
 
 ### Hera
 
