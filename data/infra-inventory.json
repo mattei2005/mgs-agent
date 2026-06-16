@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-15T05:00:01-04:00",
+    "updated_at": "2026-06-16T00:23:20-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -473,6 +473,26 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-common.py",
+      "size_bytes": 3220,
+      "modified_at": "2026-06-16T00:22:04-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-auth-check.py",
+      "size_bytes": 1662,
+      "modified_at": "2026-06-16T00:20:06-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-fetch-campaigns.py",
+      "size_bytes": 2045,
+      "modified_at": "2026-06-16T00:22:26-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
+      "size_bytes": 1339,
+      "modified_at": "2026-06-16T00:20:16-04:00"
     }
   ],
   "skills_mgs": [
@@ -1053,6 +1073,20 @@
         "name": "yuanbao",
         "category": "",
         "skill_md": "/root/.hermes/profiles/ares/skills/yuanbao/SKILL.md"
+      },
+      {
+        "name": "meta-ads-intraday-operations",
+        "category": "growth",
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "purpose": "Operação intraday Meta Ads do Ares: reativar-todas, cortes R1-R5, carência TEST, logs e auditoria.",
+        "reference_implementation": "/root/mgs-agent/scripts/ares-meta-*.py"
+      },
+      {
+        "name": "meta-ads-governance-guardrails",
+        "category": "growth",
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-governance-guardrails/SKILL.md",
+        "purpose": "Guardrails e permissionamento para Ares operar Meta Ads: token, budget, rate limit, auditoria e transição read-only/dry-run/write.",
+        "reference_implementation": "/root/mgs-agent/scripts/ares-meta-*.py"
       }
     ],
     "atena": [
