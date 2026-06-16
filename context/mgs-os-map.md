@@ -299,10 +299,14 @@ Regra prática:
   - `profiles/hera-config.yaml`
   - `profiles/hera-skills/`
 - Usa principalmente:
+  - `context/hera-operational-map.md`
   - `context/hera-creative-agent.md`
   - `docs/CREATIVE_METADATA_SANITIZER.md`
   - `scripts/clean-creative-metadata.sh`
   - `tools/canva-local-automation/`
+
+- Regra HOT:
+  - Antes de usar `search_files` amplo para `drive`, `creative`, `canva`, `UPLOAD`, `metadata`, `CC_*` ou `ares`, abrir `context/hera-operational-map.md` e escolher a fonte específica.
 
 ## 5. Mapa por pasta
 
