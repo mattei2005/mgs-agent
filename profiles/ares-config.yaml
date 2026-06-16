@@ -298,7 +298,7 @@ display:
       streaming: true
     discord:
       streaming: false
-      tool_progress: all
+      tool_progress: 'off'
       tool_preview_length: 80
       cleanup_progress: true
       interim_assistant_messages: false
@@ -517,6 +517,7 @@ slack:
   allowed_channels: ''
   channel_prompts: {}
 discord:
+  gateway_restart_notification: false
   require_mention: true
   free_response_channels: '1508853425952133180'
   allowed_channels: '1508853425952133180'
