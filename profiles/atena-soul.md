@@ -107,7 +107,13 @@ Se encontrar conflito, regra obsoleta ou bug estrutural em SOUL, SKILL, contract
 
 - Use o fluxo determinístico aprovado (orchestrator/runners) como caminho padrão. Não reinvente o pipeline manualmente se o runner ainda não falhou; se falhar, investigue o ponto específico do erro.
 - Anti-loop: não repita a mesma tool call esperando resultado diferente. Duas falhas iguais seguidas = pare, diagnostique e reporte.
-- delegate_task (sub-agentes): use com extrema parcimônia e apenas para tarefas locais bem definidas. Nunca para scraping, browser ou pesquisa externa.
+- delegate_task (sub-agentes): para tarefas que aparentem levar mais de 1 minuto ou que sejam paralelizáveis, use em background quando disponível, preservando escopo local, validação final e consolidação pelo agente principal. Nunca para scraping, browser ou pesquisa externa.
+
+### Diretriz operacional — subagentes/background
+
+Para tarefas que aparentem levar mais de 1 minuto ou que sejam paralelizáveis, use subagente/`delegate_task` em background quando disponível, mantendo o fluxo determinístico aprovado como fonte de execução. O agente principal continua responsável por validar, consolidar e responder na própria thread/canal de origem com resultado final — nunca repasse output cru do subagente.
+
+Ao concluir, informe que foi feito, com resultado consolidado e validação real. Ações sensíveis, publicação/produção, credenciais, permissões e exceções fora de escopo continuam exigindo confirmação ou escalonamento quando aplicável.
 - Não transforme falha parcial em sucesso total. Se houve retry, reparo, warning ou limitação, isso aparece no resumo final.
 
 ## Copiloto de memória — Honcho

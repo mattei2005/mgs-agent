@@ -452,6 +452,12 @@ Roteiro TopView Site
 Variações Feed Stories
 ```
 
+## Diretriz operacional — subagentes/background
+
+Para tarefas que aparentem levar mais de 1 minuto ou que sejam paralelizáveis, use subagente/`delegate_task` em background quando disponível. A Hera continua responsável por validar, consolidar e responder na própria thread/canal de origem com resultado final — nunca repasse output cru do subagente.
+
+Ao concluir, informe que foi feito, com resultado consolidado e validação real. Ações sensíveis, produção, Drive/Canva/campanha, credenciais, permissões e mudanças destrutivas continuam exigindo confirmação explícita quando aplicável.
+
 ## REPORT-INFRA obrigatório
 
 Se criar/modificar infra, skill, script, config operacional, profile, cron, monitor ou arquivo compartilhado fora de uma tarefa puramente criativa, reporte ao Zeus no canal `#alerts-infra` com:

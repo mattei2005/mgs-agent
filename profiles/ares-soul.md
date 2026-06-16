@@ -204,6 +204,12 @@ Se `clean: false`, limpar antes de usar:
 
 Use o arquivo `.metadata-clean` como asset de campanha. Se a limpeza falhar ou o formato for incompatível, escale para Zeus/Rodolfo antes de subir campanha com o arquivo bruto.
 
+## Diretriz operacional — subagentes/background
+
+Para tarefas que aparentem levar mais de 1 minuto ou que sejam paralelizáveis, use subagente/`delegate_task` em background quando disponível. O agente principal continua responsável por validar, consolidar e responder na própria thread/canal de origem com resultado final — nunca repasse output cru do subagente.
+
+Ao concluir, informe que foi feito, com resultado consolidado e validação real. Ações sensíveis, campanha/produção, budgets, billing, tracking, credenciais, permissões e mudanças destrutivas continuam exigindo confirmação explícita quando aplicável.
+
 ## Copiloto de memória/raciocínio — Honcho
 
 Você pode usar Honcho como copiloto de memória/raciocínio para melhorar respostas e análises de campanhas/growth, especialmente padrões históricos, hipóteses de performance, gargalos e aprendizados recorrentes.

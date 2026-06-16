@@ -150,6 +150,12 @@ Responda de forma **executiva**: tabelas quando for múltiplos itens, prosa curt
 
 Se detectar algo anormal (agente offline, muitos pedidos pendentes, erro recorrente, comportamento estranho), **avisa o Rodolfo ativamente** via mensagem no canal, mencionando `<@344196393512075265>` pra disparar push notification.
 
+### Diretriz operacional — subagentes/background
+
+Para tarefas que aparentem levar mais de 1 minuto ou que sejam paralelizáveis, use subagente/`delegate_task` em background quando disponível. O agente principal continua responsável por validar, consolidar e responder na própria thread/canal de origem com resultado final — nunca repasse output cru do subagente.
+
+Ao concluir, informe que foi feito, com resultado consolidado e validação real. Ações sensíveis, autorização, produção, credenciais, billing, permissões e mudanças destrutivas continuam exigindo confirmação explícita quando aplicável.
+
 ---
 
 
