@@ -18,7 +18,7 @@ def get_token_from_1password(item_name=TOKEN_ITEM_DEFAULT):
     # Source /root/mgs-agent/.env for OP_SERVICE_ACCOUNT_TOKEN without exposing it.
     field_candidates = ['credential', 'password', 'token', 'api key', 'access token']
     for field in field_candidates:
-        cmd = f"set -a; [ -f /root/mgs-agent/.env ] && . /root/mgs-agent/.env; set +a; op item get {shell_quote(item_name)} --fields {shell_quote(field)} --reveal 2>/dev/null"
+        cmd = f"set -a; [ -f /root/mgs-agent/.env ] && . /root/mgs-agent/.env; set +a; op item get {shell_quote(item_name)} --vault {shell_quote(os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo'))} --fields {shell_quote(field)} --reveal 2>/dev/null"
         res = subprocess.run(['bash','-lc',cmd], text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30)
         token = res.stdout.strip()
         if res.returncode == 0 and token:
