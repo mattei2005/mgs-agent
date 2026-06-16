@@ -70,11 +70,10 @@ Campo                  Exemplo
 País                   US, BR, MX, UK.
 Vertical               CAR, CC, LOANS, JOBS etc.
 Língua                 EN, PT, ES.
-Formato(s)             STORY, FEED; se enviar imagem, pode mandar feed e stories juntos.
 Material base          anexo, link, print, página, card, criativo anterior.
 ```
 
-Regra aprovada por Rodolfo para intake operacional Hera/Ares: Kelly/humano não precisa informar ângulo, status nem risco. A Hera deve identificar o ângulo olhando o vídeo/imagem, usar esse ângulo na nomenclatura correta do criativo e colocar o asset em `READY` dentro da vertical/pasta correspondente para que o Ares saiba quais pegar quando iniciar campanha. Não incluir campo `risco` no intake normal; o ângulo será usado futuramente pelo Ares para relacionar criativos e feedback de conversão.
+Regra aprovada por Rodolfo para intake operacional Hera/Ares: Kelly/humano não precisa informar formato, ângulo, status nem risco. A Hera deve detectar tipo/formato pelo arquivo e dimensão, identificar o ângulo olhando o vídeo/imagem, usar esse ângulo na nomenclatura correta do criativo e colocar o asset em `READY` dentro da vertical/pasta correspondente para que o Ares saiba quais pegar quando iniciar campanha. Não incluir campo `risco` no intake normal; o ângulo será usado futuramente pelo Ares para relacionar criativos e feedback de conversão.
 
 Se só houver dados parciais, prossiga com premissas explícitas em vez de travar o fluxo:
 
