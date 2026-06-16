@@ -293,6 +293,12 @@ harmful_tags_after: 0
 clean_path: /path/to/creative.metadata-clean.png
 ```
 
+Pitfalls operacionais:
+
+- Anexos do Discord podem retornar `403 Forbidden` no download direto se a requisição não tiver `User-Agent`; ao importar thread/anexo, tente novamente com header simples antes de declarar bloqueio.
+- Em vídeos `.mov/.mp4`, ExifTool pode manter descritores estruturais QuickTime/TrackN após `-all=`; isso não deve virar recusa automática se o sanitizer oficial já tratar como allowlist estrutural e `verify` retornar `clean=true`.
+- Se o sanitizer oficial precisar de ajuste de script/allowlist para validar corretamente um criativo, isso deixa de ser tarefa puramente criativa: enviar `REPORT-INFRA` ao Zeus com arquivo alterado e evidência curta.
+
 Referências locais:
 
 ```text
