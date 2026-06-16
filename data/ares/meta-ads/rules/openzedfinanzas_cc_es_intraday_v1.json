@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "ruleset": "openzedfinanzas_cc_es_intraday_v1",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "mode": "dry_run_until_write_approved",
+  "rules": [
+    {
+      "id": "R1",
+      "enabled": false,
+      "status": "pending_definition",
+      "description": "Aguardando regra de Rodolfo",
+      "metric_source": null,
+      "metric_name": null,
+      "window": null,
+      "condition": null,
+      "action": "pause_campaign",
+      "priority": 1,
+      "exclusions": [
+        "TEST_grace_3_days",
+        "reactivate_exclusion_list"
+      ]
+    },
+    {
+      "id": "R2",
+      "enabled": false,
+      "status": "pending_definition",
+      "description": "Aguardando regra de Rodolfo",
+      "metric_source": null,
+      "metric_name": null,
+      "window": null,
+      "condition": null,
+      "action": "pause_campaign",
+      "priority": 2,
+      "exclusions": [
+        "TEST_grace_3_days",
+        "reactivate_exclusion_list"
+      ]
+    },
+    {
+      "id": "R3",
+      "enabled": false,
+      "status": "pending_definition",
+      "description": "Aguardando regra de Rodolfo",
+      "metric_source": null,
+      "metric_name": null,
+      "window": null,
+      "condition": null,
+      "action": "pause_campaign",
+      "priority": 3,
+      "exclusions": [
+        "TEST_grace_3_days",
+        "reactivate_exclusion_list"
+      ]
+    },
+    {
+      "id": "R4",
+      "enabled": false,
+      "status": "pending_definition",
+      "description": "Aguardando regra de Rodolfo",
+      "metric_source": null,
+      "metric_name": null,
+      "window": null,
+      "condition": null,
+      "action": "pause_campaign",
+      "priority": 4,
+      "exclusions": [
+        "TEST_grace_3_days",
+        "reactivate_exclusion_list"
+      ]
+    },
+    {
+      "id": "R5",
+      "enabled": false,
+      "status": "pending_definition",
+      "description": "Aguardando regra de Rodolfo",
+      "metric_source": null,
+      "metric_name": null,
+      "window": null,
+      "condition": null,
+      "action": "pause_campaign",
+      "priority": 5,
+      "exclusions": [
+        "TEST_grace_3_days",
+        "reactivate_exclusion_list"
+      ]
+    }
+  ],
+  "reactivate_all": {
+    "enabled": true,
+    "time": "00:30",
+    "timezone": "meta_ad_account_timezone",
+    "scope": "all_paused_campaigns",
+    "exclusion_list": [],
+    "ask_before_adding_exclusion": true
+  }
+}

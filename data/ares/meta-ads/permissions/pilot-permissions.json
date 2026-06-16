@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "pilot": "OpenzedFinanzas-CC-ES",
+  "users": [
+    {
+      "name": "Rodolfo Mattei",
+      "role": "owner",
+      "can_authorize_write": true,
+      "can_modify_budget": false,
+      "can_modify_billing": false
+    }
+  ],
+  "guards": {
+    "budget_changes": "explicit_confirmation_required",
+    "billing": "double_confirm_required",
+    "token_exposure": "forbidden",
+    "campaign_pause_reactivate": "Rodolfo_only_during_pilot"
+  }
+}

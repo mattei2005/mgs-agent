@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "accounts": [
+    {
+      "account_id": "1356770869843984",
+      "meta_account_ref": "act_1356770869843984",
+      "operation_id": "OpenzedFinanzas-CC-ES",
+      "channel": "Messenger",
+      "currency_expected": "BRL",
+      "daily_spend_reference_cap": 1500.0,
+      "daily_spend_reference_cap_action": "log_only_no_pause",
+      "timezone_source": "meta_ad_account_timezone",
+      "cut_level": "campaign",
+      "budget_type": "daily",
+      "pilot_write_authorizer": "Rodolfo Mattei",
+      "write_mode": "disabled_until_explicit_approval",
+      "token_1password_item": "Token Meta API"
+    }
+  ]
+}
