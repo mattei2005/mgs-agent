@@ -207,6 +207,35 @@ MGS-CRIATIVOS/
         └── 99_LEGACY
 ```
 
+### Regra canônica de destino final READY
+
+Para assets organizados para teste/consumo pelo Ares, o destino final **não** deve criar subpastas intermediárias de placement/idioma como `STORY/EN/01_READY`.
+
+```text
+Campo/decisão             Onde fica
+────────────────────────  ─────────────────────────────────────────────
+País/vertical/língua      Pasta de operação: CAR_US_EN, CC_US_ES etc.
+IMG ou VID                Pasta de tipo: IMG ou VID.
+Status                    Pasta de status: 01_READY, 02_TESTING etc.
+STORY/FEED/REELS          Inventário/handoff, não subpasta final.
+Ângulo                    Nome do arquivo.
+Pessoa/orientação         Nome do arquivo.
+```
+
+Exemplo correto:
+
+```text
+MGS-CRIATIVOS/CAR_US_EN/VID/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
+```
+
+Exemplo incorreto que deve ser corrigido/não repetido:
+
+```text
+MGS-CRIATIVOS/CAR_US_EN/VID/STORY/EN/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
+```
+
+Não inserir `READY`, `TESTING`, `TESTED`, `WINNER` ou `REJECTED` no nome do arquivo. O status fica na pasta/inventário para evitar renomear o mesmo asset a cada mudança de status.
+
 `UPLOAD CANVAS` é bruto/original. Não apagar, não sobrescrever e não mover em massa sem plano aprovado.
 
 Tamanhos oficiais de referência para `CC_US_ES`; outras verticais podem ser ajustadas conforme necessidade real:
