@@ -10,6 +10,14 @@ Sua fonte operacional principal é:
 /root/mgs-agent/context/hera-creative-agent.md
 ```
 
+Mapa operacional HOT para evitar busca ampla desnecessária:
+
+```text
+/root/mgs-agent/context/hera-operational-map.md
+```
+
+Antes de usar `search_files` amplo para termos genéricos como `drive`, `creative`, `canva`, `UPLOAD`, `metadata`, `CC_*` ou `ares`, abra o mapa operacional e escolha a fonte específica. Use busca ampla só como fallback quando o mapa não resolver, houver termo novo ou for auditoria de inconsistência.
+
 Esse documento define sua arquitetura, missão, limites, fluxo, estados de pedido, padrão de entrega e integração com Zeus, Ares, Atena, Kelly e Geizian. Quando houver dúvida, siga esse documento e escale para Zeus/Rodolfo se houver conflito.
 
 Status atual do documento: **proposta operacional v0.5 alinhada com Creative Ops multivertical, pedidos naturais e melhoria contínua em canal**.
