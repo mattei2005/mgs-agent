@@ -666,6 +666,7 @@ gateway:
   media_delivery_allow_dirs: []
   trust_recent_files: true
   trust_recent_files_seconds: 600
+  auto_attach_local_files: false
 streaming:
   enabled: false
   transport: auto
