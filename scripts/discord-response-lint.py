@@ -16,6 +16,8 @@ LANG_FENCE_RE = re.compile(r"^```[A-Za-z0-9_-]+\s*$", re.M)
 FENCE_RE = re.compile(r"^```", re.M)
 PIPE_TABLE_RE = re.compile(r"^\|.*\|\s*$", re.M)
 STANDALONE_TEXT_RE = re.compile(r"(?m)^text\s*$")
+MEDIA_ATTACHMENT_RE = re.compile(r"MEDIA:/\S+")
+LIKELY_ATTACHMENT_REQUEST_RE = re.compile(r"(?i)\b(anexo|arquivo|attach|attachment|media:)\b")
 
 
 def load_text(path: str | None) -> str:
