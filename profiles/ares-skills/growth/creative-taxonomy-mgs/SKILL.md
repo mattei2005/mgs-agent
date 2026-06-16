@@ -312,10 +312,11 @@ performance_label: GOOD, BAD, INCONCLUSIVE, UNKNOWN
 14. Gerar plano de renomeação/cópia em CSV/JSON com `confidence` e `notes`.
 15. Antes de executar qualquer rename/copy, validar que `VARIANT` está em 3 dígitos (`001-999`) em todos os nomes finais e corrigir qualquer saída legada de script que ainda gere `01`, `02`, etc.
 16. Quando houver itens em `00_REVIEW`, revisar ativamente com evidência visual/contact sheet/timeline e tomar decisão operacional: promover para `01_READY_CANDIDATE`, mover para `05_REJECTED`, ou manter em review somente com motivo concreto. Não deixar `00_REVIEW` como pendência genérica se os arquivos estão acessíveis no Drive.
-17. Para backlog originado de `UPLOAD_CANVAS`, aplicar decisões finais sobre a cópia limpa/organizada (`dest_drive_id`/review copy), preservando o RAW (`source_drive_id`) em `UPLOAD_CANVAS`. Se tocar o RAW por engano, restaurar o parent original antes de finalizar.
-18. Mostrar proposta ao Rodolfo antes de qualquer alteração em Drive/campanha quando a ação não estiver coberta por uma autorização já dada.
-19. Após aprovação, executar cópia/renomeação com logs e validação.
-20. Se Rodolfo pedir para corrigir criativos já feitos, executar a correção no Drive, validar por novo scan que não restam nomes finais com 2 dígitos, e atualizar artefatos locais/propostas para o mesmo padrão.
+15. Antes de executar qualquer rename/copy, validar que `VARIANT` está em 3 dígitos (`001-999`) em todos os nomes finais e corrigir qualquer saída legada de script que ainda gere `01`, `02`, etc.
+16. Mostrar proposta ao Rodolfo antes de qualquer alteração em Drive/campanha.
+17. Após aprovação, executar cópia/renomeação com logs e validação.
+18. Em fluxos RAW → clean-copy, preservar `UPLOAD_CANVAS` como fonte original. Ao agir sobre itens revisados, usar o ID da cópia limpa (`dest_drive_id` nos reports de copy-clean), não o `source_drive_id` do RAW, salvo pedido explícito para mexer no RAW.
+19. Se Rodolfo pedir para corrigir criativos já feitos, executar a correção no Drive, validar por novo scan que não restam nomes finais com 2 dígitos, e atualizar artefatos locais/propostas para o mesmo padrão.
 19. Para colisões de nome já existentes em `01_READY_CANDIDATE`, manter um nome canônico por variante e renomear as cópias conflitantes para a próxima variante livre com 3 dígitos. Simular antes para garantir zero colisões pós-plano e registrar `old_name`, `new_name`, `drive_id`, `verified_name` e relatório hash.
 
 ## Sanitização antes de campanha
@@ -371,7 +372,9 @@ Plano aprovado antes de write              | Sim
 6. Deixar pessoa/orientação desconhecida virar nome final: melhor revisar antes.
 7. Deixar script legado emitir variantes `01-99`: isso quebra ordenação alfabética quando passa de 99 ou mistura lotes. O padrão MGS é sempre `001-999`; valide CSVs, propostas e reports antes de Drive write.
 8. Usar `VARIANT` com 2 dígitos: quebra ordenação quando surgem `_100+`; corrigir para 3 dígitos em nomes reais, propostas e inventários.
-9. Fazer replace global em relatórios de auditoria sem preservar `old_name`: pode destruir evidência da mudança. Ao normalizar logs, preservar ou reconstruir o valor antigo em campo próprio.
+8. Fazer replace global em relatórios de auditoria sem preservar `old_name`: pode destruir evidência da mudança. Ao normalizar logs, preservar ou reconstruir o valor antigo em campo próprio.
+9. Confundir RAW com cópia final: `UPLOAD_CANVAS` é fonte original, enquanto pastas por operação carregam derivados limpos/renomeados. MD5 diferente entre RAW e final é esperado após limpeza de metadata; isso não significa que o asset não veio do RAW.
+10. Agir no ID errado em revisão final: reports de copy-clean costumam ter `source_drive_id`=RAW e `dest_drive_id`=cópia limpa. Promoção para `01_READY`, rejeição e rename final devem usar `dest_drive_id`; se o RAW for movido por engano, restaurar o RAW antes de encerrar.
 10. Dizer que não consegue revisar assets do Drive quando existe acesso/pipeline Drive: se os arquivos estão em `MGS-CRIATIVOS`, inventarie, gere evidência visual e revise. Só reporte bloqueio real de permissão/credencial.
 11. Fechar `00_REVIEW` movendo RAW em vez da cópia limpa: `UPLOAD_CANVAS` é origem preservada; decisões finais devem agir sobre a cópia limpa em review/final. Conferir `source_drive_id` vs `dest_drive_id` nos relatórios antes de PATCH no Drive.
 

@@ -274,6 +274,8 @@ Long-runs com centenas de uploads exigem controle de processo único, refresh OA
 Para filas longas já aprovadas, usar o padrão de controlador/resume sem upload paralelo: `references/drive-bulk-upload-controller.md`.
 Para etapa final de organização, backlog `00_REVIEW`, promoção posterior para `01_READY_CANDIDATE`, validação de report e retry bounded quando 1Password/OAuth rate-limit bloquear, usar `references/drive-final-organization-review-and-promotion.md`. Nunca tratar `00_REVIEW` como pronto para campanha.
 
+Para o fechamento final da organização Drive — promover `01_READY_CANDIDATE` para `01_READY`, zerar `REVIEW`, preservar `UPLOAD_CANVAS` como RAW e explicar a diferença entre RAW e cópias limpas — seguir `references/drive-final-ready-promotion-and-raw-preservation.md`. Pitfall crítico: em reports de clean-copy, `source_drive_id` é normalmente o RAW em `UPLOAD_CANVAS`; ações de promoção/rejeição devem recair sobre o `dest_drive_id` da cópia limpa, salvo pedido explícito de mexer no RAW.
+
 Quando a nomenclatura já foi normalizada e Rodolfo disser para executar a organização final, seguir `references/upload-canvas-final-organization-after-naming.md`: inventário fresco, classificação visual dos pendentes, validação de variante 3 dígitos, fila final executor-compatible (`original_filename` obrigatório), dedup MD5, clean-copy com report e validação por status.
 
 ### Continuação de classificação após limpeza de duplicatas
