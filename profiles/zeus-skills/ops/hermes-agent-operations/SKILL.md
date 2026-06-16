@@ -404,7 +404,13 @@ Depois: tabela de toolsets, tabela de backends, recomendação direta e `Próxim
 
 ### Resposta executiva para update
 
-Use **blocos `text` com colunas alinhadas** para qualquer matriz de status/validação/novidades. Não usar tabela Markdown crua (`|---|---|`) em Discord: Rodolfo considera visualmente regressivo e já corrigiu esse padrão. Cabeçalhos devem nascer do contexto real do update; não copiar exemplos. Se houver drift de estilo ou dúvida sobre renderização de tabelas, ver `references/discord-table-format-and-standards-drift.md`.
+Use formato executivo legível para Discord. Não usar tabela Markdown crua (`|---|---|`): Rodolfo considera visualmente regressivo e já corrigiu esse padrão. Também **não usar code fences com linguagem** como ` ```text`, ` ```bash` ou ` ```json` em respostas finais no Discord; eles podem renderizar labels soltos como `text` e quebrar a leitura. Preferir bullets/seções curtas; se precisar de monospace, usar no máximo um bloco simples com ` ``` ` sem linguagem. Cabeçalhos devem nascer do contexto real do update; não copiar exemplos. Se houver drift de estilo ou dúvida sobre renderização, ver `references/discord-table-format-and-standards-drift.md` e `references/discord-response-lint-and-honcho-coverage-2026-06-15.md`.
+
+Quando a resposta longa foi redigida em arquivo/stdin antes de enviar, validar quando prático com:
+
+```bash
+python3 /root/mgs-agent/scripts/discord-response-lint.py --check < draft.md
+```
 
 **Se Rodolfo apontar regressão visual/legibilidade após update** (ex.: “por que não está em tabela?” ou “voltou aos padrões?”), não trate como mera preferência de resposta. Faça auditoria de padrões: config viva dos profiles, backups/snapshots, SOUL/style rules, gateways e patch guard. Se o problema for regra permissiva no SOUL, fortaleça a regra para “não usar tabela Markdown crua no Discord; usar bloco `text` alinhado” nos agentes afetados. Detalhe em `references/discord-table-format-and-standards-drift-2026-06-09.md`.
 
@@ -449,9 +455,11 @@ Session-specific Hera bootstrap notes live in `references/mgs-new-agent-bootstra
 
 ## 8. Agent memory / conclusion layers
 
-When Rodolfo asks to evaluate or configure external memory infrastructure such as Honcho for Zeus/Atena/Ares, use `references/honcho-managed-memory-spike.md`. For the validated manual briefing command and renderer, use `references/honcho-manual-briefing-command-2026-06-02.md`.
+When Rodolfo asks to evaluate or configure external memory infrastructure such as Honcho for Zeus/Atena/Ares/Hera, use `references/honcho-managed-memory-spike.md`, `references/honcho-manual-briefing-command-2026-06-02.md`, and the session-specific coverage note `references/discord-response-lint-and-honcho-coverage-2026-06-15.md`.
 
 Operational rule: treat Honcho-like systems as a conclusion/insight layer over sanitized history, not as source of truth. Canonical facts remain in JSON/DB/Git/WordPress/audit logs; procedures remain in Hermes skills; stable preferences remain in Hermes memory. Zeus may use Honcho to generate hypotheses, but must validate them against canonical MGS sources before reporting or acting.
+
+Coverage audit pitfall: do not equate `honcho: {}` in a profile config with full operational integration. Check all three layers before answering whether an agent is configured: (1) profile config contains Honcho stanza, (2) agent SOUL contains the Honcho role/rules, and (3) `/root/mgs-agent/scripts/mgs-memory-copilot` / `experiments/honcho-spike/mgs_memory_copilot.py` supports that agent in `AGENT_PROFILES`. As of the 2026-06-15 audit, Zeus/Atena/Ares were supported as copilots; Hera had `honcho: {}` but lacked wrapper/SOUL integration.
 
 Managed Honcho default for first spike: use only synthetic or sanitized data; store `HONCHO_API_KEY` in 1Password (`MGS Conteúdo` → `Honcho API - MGS` → `api key`); never paste or print the key. Self-hosting requires a separate infra decision because it introduces Docker/Postgres+pgvector/Redis/services.
 
