@@ -14,7 +14,16 @@
       "budget_type": "daily",
       "pilot_write_authorizer": "Rodolfo Mattei",
       "write_mode": "disabled_until_explicit_approval",
-      "token_1password_item": "Token Meta API"
+      "token_1password_item": "Token Meta API",
+      "meta_detected": {
+        "name": "OpenzedFinanzas-ES-CC-ES-03",
+        "currency": "USD",
+        "timezone_name": "Europe/Madrid",
+        "timezone_offset_hours_utc": 2,
+        "account_status": 1,
+        "business_name": "Mattei Services Inc"
+      },
+      "daily_spend_reference_cap_note": "User defined R$1.5k as pilot reference; Meta account currency detected as USD, conversion/meaning must be confirmed before budget automation."
     }
   ]
 }
