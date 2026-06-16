@@ -221,6 +221,45 @@ Status / Pasta       | Uso
 
 Para organização bruta de backlog, pode existir `UPLOAD_CANVAS` como RAW. Essa pasta deve ser preservada intacta salvo pedido explícito do Rodolfo para mover/deletar duplicatas.
 
+## Entrada operacional via Hera
+
+Fluxo aprovado por Rodolfo para entrada de criativos novos:
+
+- Gestores/Kelly enviam o criativo como anexo no Discord da Hera.
+- A mensagem deve informar obrigatoriamente `PAIS`, `VERTICAL` e `LINGUA`.
+- Hera não deve inventar esses campos; eles são fonte oficial vinda do gestor/Kelly.
+- Se faltar qualquer campo obrigatório, Hera deve pedir correção antes de enviar para processamento.
+- O nome original do arquivo pode ser livre/Canva; a nomenclatura oficial é gerada depois pelo Ares.
+- Hera atua como porta de entrada e organização inicial; Ares atua no tratamento técnico, sanitização, classificação e nomenclatura de aquisição.
+
+Formato recomendado para envio no Discord da Hera:
+
+```text
+País: US
+Vertical: CC
+Língua: ES
+[anexo]
+```
+
+Formato curto aceito:
+
+```text
+US | CC | ES
+[anexo]
+```
+
+Pasta de entrada recomendada no Drive:
+
+```text
+MGS-CRIATIVOS/
+└── CRIATIVOS_ENVIADOS/
+    └── <VERTICAL>_<COUNTRY>_<LANG>/
+        ├── KELLY/
+        └── GESTORES/
+```
+
+Depois da entrada, Ares deve preservar o original/inbox, criar cópia limpa, classificar por OCR/visão, aplicar o nome final e enviar a cópia tratada para as pastas operacionais já existentes. Criativos vindos de `UPLOAD_CANVAS` já tratados continuam como backlog/artefato existente e não devem ser confundidos com novos uploads via Hera.
+
 ## Estrutura Drive recomendada
 
 Estrutura por operação, não por site:
