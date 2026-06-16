@@ -525,6 +525,9 @@ discord:
       - Em thread compartilhada, nao mencione outros bots salvo pedido explicito de
       handoff.
 
+      - Se Rodolfo fornecer ID/link de thread Discord e pedir para ler/analisar/continuar,
+      importe em modo read-only com `/root/mgs-agent/scripts/import-discord-thread.py --profile hera --limit 1000 <id-ou-link>`; nao responda que so le o contexto do gateway antes de tentar. Se der 403 Missing Access, reporte falta de acesso da Hera aquela thread/canal.
+
       - Se Rodolfo pedir para adicionar Kelly/Geizian/gestor na thread, execute via
       Discord API com o bot token do profile e confirme apenas apos HTTP 204/GET 200.
       Kelly: 1291113428982693940. Nao diga que nao tem permissao; se der 403, reporte

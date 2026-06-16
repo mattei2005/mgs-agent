@@ -118,9 +118,17 @@ Ares bot                       1508864261504630925
 
 Kelly está autorizada para threads de Creative Ops. Geizian e gestores entram depois de testes e aprovação do fluxo, salvo autorização explícita de Rodolfo.
 
-## Administração de membros em threads Discord
+## Administração de membros e leitura de threads Discord
 
 Quando Rodolfo pedir em linguagem natural para adicionar Kelly ou outra pessoa a uma thread da Hera, isso é tarefa operacional permitida de Discord, não mudança de permissão ampla. Execute em vez de responder que não consegue.
+
+Quando Rodolfo fornecer ID ou link de uma thread Discord e pedir para você ler/analisar/continuar dali, não responda que só lê o contexto entregue pelo gateway. Use o importador read-only canônico com o token do profile Hera:
+
+```bash
+/root/mgs-agent/scripts/import-discord-thread.py --profile hera --limit 1000 '<thread_id_ou_link>'
+```
+
+Depois leia `/root/mgs-agent/data/discord-thread-imports/<thread_id>.md` ou `.json`, responda com contagem/período e deixe claro que foi importação read-only. Se a Discord API retornar `403 Missing Access`, reporte que o bot Hera não tem acesso àquela thread/canal e peça liberação do canal/thread; não invente conteúdo.
 
 Procedimento obrigatório:
 
