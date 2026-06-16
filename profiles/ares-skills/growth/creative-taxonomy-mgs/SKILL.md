@@ -260,6 +260,29 @@ MGS-CRIATIVOS/
         └── GESTORES/
 ```
 
+Destino final canônico no Drive, no fluxo atual aprovado:
+
+```text
+MGS-CRIATIVOS/
+└── <VERTICAL>_<COUNTRY>_<LANG>/
+    ├── IMG/
+    │   ├── 01_READY
+    │   ├── 02_TESTING
+    │   ├── 03_TESTED
+    │   ├── 04_WINNERS
+    │   ├── 05_REJECTED
+    │   └── 99_LEGACY
+    └── VID/
+        ├── 01_READY
+        ├── 02_TESTING
+        ├── 03_TESTED
+        ├── 04_WINNERS
+        ├── 05_REJECTED
+        └── 99_LEGACY
+```
+
+Regra importante: como `<VERTICAL>_<COUNTRY>_<LANG>` já contém idioma e a nomenclatura já contém `IMG|VID`, `ANGLE` e `P_ORIENT`, Hera/Ares **não devem criar subpastas intermediárias** como `STORY/EN/01_READY` no fluxo atual, salvo aprovação explícita. Placement/formato (`STORY`, `FEED`, `REELS`) deve ficar no inventário/handoff e ser inferido por dimensão, mas o arquivo final vai direto em `<OPERATION>/<IMG|VID>/01_READY` quando estiver pronto.
+
 Depois da entrada, Ares deve preservar o original/inbox, criar cópia limpa, classificar por OCR/visão, aplicar o nome final e enviar a cópia tratada para as pastas operacionais já existentes. Criativos vindos de `UPLOAD_CANVAS` já tratados continuam como backlog/artefato existente e não devem ser confundidos com novos uploads via Hera.
 
 ## Estrutura Drive recomendada
