@@ -71,6 +71,14 @@ The first deliverable should usually be:
 /root/mgs-agent/context/company-os.md
 ```
 
+For ongoing operation, also maintain a lightweight navigation map:
+
+```text
+/root/mgs-agent/context/mgs-os-map.md
+```
+
+Purpose of `mgs-os-map.md`: a map-of-maps for Zeus to choose the right source before broad searching. It should map question classes to canonical files/folders/agents (e.g. “Atena fez X?” → Atena logs + article tracker + WP; “permissão real?” → `data/authorized-users.json`; “cron ativo?” → `docs/CRONS.md` + crontab real). Keep the full map in `context/`, not embedded wholesale in SOUL. SOUL should carry only a compact pointer/rule: consult `context/mgs-os-map.md` before `search_files` for structure-related questions.
+
 Mark it clearly as a **proposal** until Rodolfo approves it as canonical.
 
 Minimum sections:
@@ -572,6 +580,7 @@ Before reporting completion of a company-OS step:
 ## References
 
 - `references/company-os-blueprint-session-2026-06-05.md` — session-specific origin: Bruno course context, current `/root/mgs-agent` structural counts, and first blueprint pattern.
+- `references/mgs-os-map-hot-pointer-2026-06-15.md` — map-of-maps pattern: full `/root/mgs-agent/context/mgs-os-map.md` for navigation plus compact HOT pointer in Zeus SOUL, reducing broad search without inflating SOUL.
 - `references/company-os-ceo-operating-model-2026-06-05.md` — CEO-described real MGS operating model: partners, Raquel/Kelly/gestores, Smart Bidding/ActiveView, finance cycle, campaigns, creative flow, and agent implications.
 - `references/company-os-routes-review-2026-06-06.md` — route/scope corrections: Ares vs Hera naming, gestores/UTM codes, ChatPion/quiz/SMS boundaries, Drive creative handoff, commission model, and review sequencing.
 - `references/company-os-routing-growth-creative-2026-06-06.md` — routing clarifications for Ares, Hera, gestores/UTM codes, ChatPion/DigitalTrChat/Messenger, quiz/SMS Funnel, Revenue/AdOps and gestor commission.

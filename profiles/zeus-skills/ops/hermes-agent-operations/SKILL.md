@@ -404,7 +404,9 @@ Depois: tabela de toolsets, tabela de backends, recomendação direta e `Próxim
 
 ### Resposta executiva para update
 
-Use formato executivo legível para Discord. Não usar tabela Markdown crua (`|---|---|`): Rodolfo considera visualmente regressivo e já corrigiu esse padrão. Também **não usar code fences com linguagem** como ` ```text`, ` ```bash` ou ` ```json` em respostas finais no Discord; eles podem renderizar labels soltos como `text` e quebrar a leitura. Preferir bullets/seções curtas; se precisar de monospace, usar no máximo um bloco simples com ` ``` ` sem linguagem. Cabeçalhos devem nascer do contexto real do update; não copiar exemplos. Se houver drift de estilo ou dúvida sobre renderização, ver `references/discord-table-format-and-standards-drift.md` e `references/discord-response-lint-and-honcho-coverage-2026-06-15.md`.
+Use **blocos simples sem language tag** ou bullets curtos para qualquer matriz de status/validação/novidades. Não usar tabela Markdown crua (`|---|---|`) em Discord: Rodolfo considera visualmente regressivo e já corrigiu esse padrão. Não usar fences com linguagem como ` ```text`, ` ```bash` ou ` ```json` em respostas Discord: em algumas renderizações isso vaza uma linha solta `text` e quebra a leitura. Cabeçalhos devem nascer do contexto real do update; não copiar exemplos. Se houver drift de estilo ou dúvida sobre renderização de tabelas, ver `references/discord-table-format-and-standards-drift.md`.
+
+Regra de anexos para Rodolfo: **nunca enviar arquivo/anexo por iniciativa própria**. Se ele pedir “mostra por aqui”, “no chat” ou apenas pedir explicação/review, responder inline. Só enviar `MEDIA:/...`/anexo quando ele pedir explicitamente arquivo/anexo. Para documentos longos, oferecer resumo inline e perguntar se quer anexo. O guard local `/root/mgs-agent/scripts/discord-response-lint.py --check` deve acusar language-tagged fences, linha solta `text`, tabela Markdown crua e diretivas `MEDIA:/...` em drafts.
 
 Quando a resposta longa foi redigida em arquivo/stdin antes de enviar, validar quando prático com:
 
@@ -507,7 +509,8 @@ Esta umbrella absorveu as antigas skills especializadas abaixo. Conteúdo detalh
 - `references/hermes-web-brave-search-mgs-2026-05-17.md`
 - `scripts/test-brave-search-mgs.sh`
 - `references/hermes-profile-config-migration-mgs.md` — migração controlada de `config.yaml` por profile após update Hermes: backup pequeno, `hermes -p <profile> config migrate`, validação provider/model/auth/gateway/patch guard, sync dos mirrors MGS, restart gracioso e audit log.
-- `references/discord-table-format-and-standards-drift.md` — padrão MGS para tabelas em Discord: blocos `text` alinhados, nunca Markdown table crua para respostas operacionais; inclui workflow para corrigir drift de SOUL/estilo.
+- `references/discord-table-format-and-standards-drift.md` — padrão MGS para tabelas em Discord: blocos simples/alinhados sem tabela Markdown crua para respostas operacionais; inclui workflow para corrigir drift de SOUL/estilo.
+- `references/discord-output-and-attachment-guard-2026-06-15.md` — correção de saída Discord quebrada por language-tagged fences/linha solta `text` e regra forte contra anexos não solicitados; inclui uso de `/root/mgs-agent/scripts/discord-response-lint.py`.
 - `references/openai-codex-oauth-original-skill.md`
 - `references/openai-codex-cron-model-pinning.md`
 - `references/openai-codex-anthropic-api-decommission.md`
