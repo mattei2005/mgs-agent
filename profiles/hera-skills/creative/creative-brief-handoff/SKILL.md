@@ -67,16 +67,14 @@ Se um campo ausente bloquear uma resposta útil, faça apenas a pergunta mínima
 ```text
 Campo                  Exemplo
 ─────────────────────  ─────────────────────────────────────────────────
-Site/projeto           openzed, cliquet, eggbev etc.
-Objetivo               teste de campanha, escala, remarketing, criativo novo.
-Oferta/produto         cartão, empréstimo, app, quiz, benefício.
-Canal/formato          Facebook feed, stories, reels, TikTok, YouTube shorts.
-Público/país/idioma    UK/en, BR/pt, MX/es.
-Ângulo desejado        urgência, benefício, comparação, curiosidade, prova.
-CTA                    Apply now, Saiba mais, Ver opções etc.
-Material base          link, print, página, card, criativo anterior.
-Prazo/prioridade       hoje, teste rápido, campanha crítica.
+País                   US, BR, MX, UK.
+Vertical               CAR, CC, LOANS, JOBS etc.
+Língua                 EN, PT, ES.
+Formato(s)             STORY, FEED; se enviar imagem, pode mandar feed e stories juntos.
+Material base          anexo, link, print, página, card, criativo anterior.
 ```
+
+Regra aprovada por Rodolfo para intake operacional Hera/Ares: Kelly/humano não precisa informar ângulo, status nem risco. A Hera deve identificar o ângulo olhando o vídeo/imagem, usar esse ângulo na nomenclatura correta do criativo e colocar o asset em `READY` dentro da vertical/pasta correspondente para que o Ares saiba quais pegar quando iniciar campanha. Não incluir campo `risco` no intake normal; o ângulo será usado futuramente pelo Ares para relacionar criativos e feedback de conversão.
 
 Se só houver dados parciais, prossiga com premissas explícitas em vez de travar o fluxo:
 

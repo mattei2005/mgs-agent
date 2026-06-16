@@ -313,6 +313,28 @@ Phase 5 Zeus SOUL alignment pattern:
 
 Detailed runbook: `references/company-os-phase5-zeus-soul-alignment-2026-06-07.md`.
 
+Phase 5 agent HOT operational map pattern:
+
+```text
+1. When an agent repeatedly performs broad `search_files` calls for generic
+   operational terms (`drive`, `creative`, `meta`, `UPLOAD`, `CC_*`, etc.), add
+   a compact HOT map under `/root/mgs-agent/context/<agent>-operational-map.md`.
+2. The HOT map should route natural-language asks to first canonical sources:
+   context docs, SOUL, class-level skills, runtime data, scripts, logs, handoff
+   rules, boundaries and validation checks.
+3. Patch `/root/mgs-agent/context/mgs-os-map.md` so Zeus knows the new map, and
+   patch both live + versioned SOUL files with a short pointer instructing the
+   agent to open the HOT map before broad search.
+4. Validate live/versioned SOUL equality, `git diff --check`, secret scan, audit
+   log, gateway restart if SOUL changed, service active state, auto-push and
+   `HEAD == origin/main`.
+5. Do not roll out automatically to agents whose operating model is being
+   rebuilt. If Rodolfo excludes an agent such as Atena during reconstruction,
+   leave it untouched.
+```
+
+Detailed runbook: `references/agent-hot-operational-maps-2026-06-16.md`.
+
 Phase 5 Hera Creative Ops alignment pattern:
 
 ```text
