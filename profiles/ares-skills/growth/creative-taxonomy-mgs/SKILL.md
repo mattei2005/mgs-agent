@@ -231,6 +231,8 @@ Fluxo aprovado por Rodolfo para entrada de criativos novos:
 - Se faltar qualquer campo obrigatório, Hera deve pedir correção antes de enviar para processamento.
 - O nome original do arquivo pode ser livre/Canva; a nomenclatura oficial é gerada depois pelo Ares.
 - Hera atua como porta de entrada e organização inicial; Ares atua no tratamento técnico, sanitização, classificação e nomenclatura de aquisição.
+- Quando Hera receber um upload válido com `PAIS`, `VERTICAL`, `LINGUA` e anexo, ela deve fazer um único handoff mencionando o Ares (`<@1508864261504630925>`) com os campos estruturados e link/contexto do anexo/processamento.
+- Para evitar loop entre agentes, Hera não deve mencionar Ares para confirmações, agradecimentos, status sem ação ou mensagens sem anexo/campos obrigatórios; Ares não deve responder a confirmações da Hera.
 
 Formato recomendado para envio no Discord da Hera:
 
