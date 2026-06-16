@@ -34,6 +34,7 @@ Fontes canônicas por função:
 ```text
 Arquivo                                      Função
 -------------------------------------------- ---------------------------------------------
+/root/mgs-agent/context/mgs-os-map.md        Mapa operacional rápido: pergunta → fonte/pasta/agente certo.
 /root/mgs-agent/context/company-os.md        Arquitetura empresarial MGS OS.
 /root/mgs-agent/context/areas.md             Áreas oficiais e fronteiras operacionais.
 /root/mgs-agent/context/agent-map.md         Mapa Zeus/Atena/Ares/Hera e futuros agentes.
