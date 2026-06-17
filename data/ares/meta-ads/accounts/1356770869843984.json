@@ -6,7 +6,7 @@
       "meta_account_ref": "act_1356770869843984",
       "operation_id": "OpenzedFinanzas-CC-ES",
       "channel": "Messenger",
-      "currency_expected": "BRL",
+      "currency_expected": "USD",
       "daily_spend_reference_cap": {
         "amount_brl": 1500.0,
         "action": "reference_only_no_pause",
@@ -29,6 +29,16 @@
         "timezone_offset_hours_utc": 2,
         "account_status": 1,
         "business_name": "Mattei Services Inc"
+      },
+      "account_currency": "USD",
+      "region": "Europe",
+      "gdpr_sensitive": true,
+      "intraday_metric_policy": {
+        "primary_metric": "MO",
+        "MO": "actions.complete_registration",
+        "CPMO": "spend / MO",
+        "use_subs_for_intraday": false,
+        "reason": "Spain/Europe operation; subscribe is not reliably exposed by Meta due to GDPR/regional privacy constraints."
       }
     }
   ]
