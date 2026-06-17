@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-17T04:13:00.421936+00:00",
+  "updated_at": "2026-06-17T04:36:06.786990+00:00",
   "operation_id": "OpenzedFinanzas-CC-ES",
   "items": [
     {
@@ -44,8 +44,18 @@
     },
     {
       "id": "account-management-rules-HOA",
-      "status": "pending_later",
-      "note": "Definir regras de gestão da conta; quando entrar nesse tema, lembrar Rodolfo sobre HOA."
+      "status": "pending_tomorrow",
+      "note": "Definir regras de gestão da conta; lembrar Rodolfo sobre HOA quando retomar o tema."
+    },
+    {
+      "id": "tomorrow-crons-logs-reports",
+      "status": "pending_tomorrow",
+      "note": "Ativar/validar crons: logs intraday, reativar todas e análise diária/relatórios."
+    },
+    {
+      "id": "campaign-cloning-skill",
+      "status": "pending_tomorrow",
+      "note": "Criar skill operacional para clonar campanhas Meta Ads com segurança, dry-run e aprovação antes de write."
     }
   ]
 }
