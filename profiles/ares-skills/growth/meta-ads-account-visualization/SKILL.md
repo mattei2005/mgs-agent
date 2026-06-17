@@ -59,6 +59,19 @@ id,name,status,object_type,effective_object_story_id
 
 ## Métricas canônicas atuais
 
+### Operações Europa/GDPR
+
+```text
+Métrica | Definição
+--------|------------------------------------------------------------
+MO      | actions.complete_registration
+CPMO    | spend / MO; se MO=0, CPMO nulo/não comparável
+```
+
+Para Espanha/Europa, não usar subscribe como norte intraday quando a Meta não expõe esse dado de forma confiável por GDPR/burocracias regionais. O norte operacional passa a ser `Complete Registration` no Ads Manager.
+
+### Operações onde subscribe é confiável
+
 ```text
 Métrica | Definição
 --------|------------------------------------------------------------

@@ -54,51 +54,41 @@ Scripts iniciais:
 ## Regras operacionais
 
 1. Intraday e reativar-todas são determinísticos e devem rodar como cron/script na VPS; skill é documentação/contexto operacional, não runtime.
-2. R1-R5 são slots plugáveis por operação, não hardcoded por conta; defaults iniciais definidos por Rodolfo em CAD, pendentes de mapping real de M0/CPM0/Subs/CPS e calibração por conta antes de write.
-3. Cortes e reativações ocorrem somente em nível de campanha.
+2. R1-R5 são slots plugáveis por operação, não hardcoded por conta; para conta/Business Manager em USD, thresholds ficam em USD.
+3. Em operações Europa/GDPR, usar `MO = actions.complete_registration` e `CPMO = spend / MO` como norte intraday, porque a Meta pode não expor subscribe de forma confiável. Não usar `subs/CPS` como métrica primária dessas operações.
+4. Cortes e reativações ocorrem somente em nível de campanha.
 4. Campanhas com `TEST` no nome têm carência de 3 dias usando `created_time` da Meta; fallback é `first_seen_at` local; durante essa carência ficam imunes a todas as regras R1-R5.
 5. COST_CAP não pausa por CPS; o bid cap controla custo. Regra de CPS aplica pausa só quando a condição/bid strategy permitir, especialmente LOWEST_COST.
 6. Reativar-todas pode ter lista de exclusão, mas ela começa vazia e Ares deve perguntar antes de adicionar algo.
 7. Teto diário de R$1.500 é referência/log/base para testes de criativos; não pausar tudo ao bater o teto.
 8. Log intraday no Discord deve ser resumido e enviado só quando houver ação/erro, salvo Rodolfo mudar a política.
 
-## Defaults R1-R5 atuais
+## Defaults R1-R5 atuais — OpenzedFinanzas-CC-ES / Europa / USD
 
 ```text
 Regra | Condição                                                   | Ação
 ------|------------------------------------------------------------|--------------------
-R1    | M0 = 0 e spend > CAD 7.00                                  | pausar campanha
-R2    | M0 > 0 e CPM0 > CAD 7.00                                   | pausar campanha
-R3    | Subs = 0 e spend > CAD 5.00                                | pausar campanha
-R4    | LOWEST_COST + CPS >= CAD 2.55 + subs >= 1 + spend >= CAD 5 | pausar campanha
-R5    | campanha pausada + CPS < CAD 2.40 + subs >= 2              | reativar campanha
+R1    | MO = 0 e spend > USD 5.00                                  | pausar campanha
+R2    | MO > 0 e CPMO > USD 3.25                                   | pausar campanha
+R3    | MO = 1 e spend > USD 5.00                                  | pausar campanha
+R4    | LOWEST_COST + MO >= 2 + CPMO > USD 3.00 + spend >= USD 8.00| pausar campanha
+R5    | campanha pausada + MO >= 2 + CPMO < USD 2.50               | reativar campanha
 ```
 
-Exceções: campanha `TEST` com menos de 3 dias ativos é imune a todas as regras; `COST_CAP` não pausa por CPS.
+Exceções: campanha `TEST` com menos de 3 dias ativos é imune a todas as regras; `COST_CAP` não pausa por regra de custo.
 
 ## Métricas Meta atuais
 
 ```text
 Métrica | Definição
 --------|------------------------------------------------------------
-CPS     | spend / subs
-subs    | primeira action válida encontrada na ordem de prioridade abaixo
+MO      | actions.complete_registration
+CPMO    | spend / MO
 ```
 
-Ordem canônica para `subs`:
+Em operações Europa/GDPR, `MO/CPMO` são a métrica primária do intraday porque a informação de subscribe pode não aparecer de forma confiável na Meta. Se `MO = 0`, `CPMO` fica nulo/não comparável.
 
-```text
-Prioridade | Meta action type
------------|------------------------------------------------------------
-1          | onsite_conversion.messaging_conversation_started_7d
-2          | onsite_conversion.total_messaging_connection
-3          | complete_registration
-4          | offsite_complete_registration_add_meta_leads
-5          | lead
-6          | offsite_conversion.fb_pixel_lead
-```
-
-Se nenhuma action válida for encontrada, `subs = 0`. Para evitar divisão por zero, `CPS` fica nulo/não comparável quando `subs = 0`; R4/R5 já exigem `subs >= 1`/`subs >= 2` antes da comparação de CPS. `M0` e `CPM0` continuam pendentes de definição/mapping real.
+Para operações fora da Europa onde subscribe é confiável, usar mapping separado de `subs/CPS` conforme operação específica, sem misturar com o ruleset Europa.
 
 ## Segurança e autorização
 
