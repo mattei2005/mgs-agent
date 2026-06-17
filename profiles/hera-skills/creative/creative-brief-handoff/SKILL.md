@@ -336,6 +336,7 @@ Referências da skill:
 
 ```text
 references/drive-ready-destination-correction.md — correção canônica: READY fica em pasta de status; STORY/FEED/REELS ficam no inventário/handoff, não em subpasta final.
+references/video-variation-gpt-grok-workflow.md — workflow para comparar variação de vídeo com GPT/OpenAI e Grok/xAI a partir de anexo Discord, incluindo import read-only, contact sheet, geração e sanitização.
 ```
 
 ## Origem e uso dos assets
