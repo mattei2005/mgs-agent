@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-17T05:00:01-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-06-17T12:30:29-04:00",
+    "generated_by": "zeus"
   },
   "systemd_services": [
     {
@@ -86,9 +86,28 @@
     },
     {
       "entry": "41 3 * * * flock -n /var/lock/mgs_safety_backup.lock /root/mgs-agent/scripts/mgs-safety-backup.sh >> /root/mgs-agent/logs/mgs-safety-backup-cron.log 2>&1"
+    },
+    {
+      "entry": "Hermes cron profile=ares id=709a29c99b3f schedule=\"0 9 * * *\" script=ares-meta-token-expiry-alert.sh no_agent=true deliver=discord:1498132022634483894",
+      "id": "709a29c99b3f",
+      "profile": "ares",
+      "name": "Ares Meta token expiry alert",
+      "schedule": "0 9 * * *",
+      "script": "/root/.hermes/profiles/ares/scripts/ares-meta-token-expiry-alert.sh",
+      "next_run_at": "2026-06-18T09:00:00-04:00",
+      "state": "scheduled",
+      "enabled": true,
+      "no_agent": true,
+      "deliver": "discord:1498132022634483894"
     }
   ],
   "scripts": [
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-token-expiry-alert.sh",
+      "size_bytes": 99,
+      "sha256": "a8155dc58704798a1952fba0ee876486ff904a88e26a92776f31bc1be7f86be4",
+      "modified_at": "2026-06-17T12:28:58-04:00"
+    },
     {
       "path": "/root/mgs-agent/scripts/ares-build-creative-copy-queue.py",
       "size_bytes": 8954,
@@ -150,14 +169,20 @@
       "modified_at": "2026-06-16T00:20:16-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/ares-promote-review-ready.py",
-      "size_bytes": 6295,
-      "modified_at": "2026-06-14T23:43:23-04:00"
+      "path": "/root/mgs-agent/scripts/ares-meta-token-expiry-alert.py",
+      "size_bytes": 4357,
+      "sha256": "eeb0375162cb16a9561c2e94523710b8dac2ec36aa1ccb85e2f6ee182c250ab0",
+      "modified_at": "2026-06-17T12:28:32-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-promote-review-ready-retry.sh",
       "size_bytes": 1094,
       "modified_at": "2026-06-14T23:50:55-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-promote-review-ready.py",
+      "size_bytes": 6295,
+      "modified_at": "2026-06-14T23:43:23-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-propose-creative-organization.py",
@@ -246,8 +271,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
-      "size_bytes": 8559,
-      "modified_at": "2026-06-14T13:29:42-04:00"
+      "size_bytes": 10116,
+      "modified_at": "2026-06-17T12:17:04-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
@@ -485,24 +510,24 @@
       "modified_at": "2026-06-10T12:30:23-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
-      "size_bytes": 5772,
-      "modified_at": "2026-05-16T17:37:26-04:00"
-    },
-    {
       "path": "/root/mgs-agent/scripts/run-hermes-update-all-agents-20260610.sh",
       "size_bytes": 7229,
       "modified_at": "2026-06-12T08:37:14-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
-      "size_bytes": 24153,
-      "modified_at": "2026-06-15T19:19:16-04:00"
+      "size_bytes": 28214,
+      "modified_at": "2026-06-17T12:20:26-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/run-openhands-atena.sh",
       "size_bytes": 3277,
       "modified_at": "2026-05-26T13:57:27-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
+      "size_bytes": 5772,
+      "modified_at": "2026-05-16T17:37:26-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sync-codex-oauth.sh",
