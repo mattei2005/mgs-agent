@@ -383,12 +383,16 @@ Quando Rodolfo relatar que Zeus/Atena está postando mensagens técnicas como `R
 
 Quando Rodolfo quiser a UX de “atividade ao vivo” no Discord — tool calls visíveis enquanto o agente trabalha e removidos quando a resposta final chega — usar `references/discord-live-tool-trace-cleanup.md`.
 
+Correção MGS validada: **não confundir live progress com poluição de Discord**. Para Rodolfo, “poluição” normalmente significa loop/conversa infinita entre agentes, ACK/status chatter ou bot acordando outro bot sem necessidade — não breadcrumbs curtos de progresso. Ver `references/discord-live-progress-vs-agent-loop-pollution-2026-06-16.md`.
+
 Resumo operacional:
 - Ativar `display.platforms.discord.tool_progress: all` e `tool_preview_length` adequado por profile.
 - Ativar `display.platforms.discord.cleanup_progress: true` para apagar breadcrumbs após sucesso.
+- Manter `interim_assistant_messages: false` quando o objetivo for progresso limpo sem conversa extra.
 - Garantir que o adapter Discord implemente `delete_message`; sem isso o runner desativa cleanup silenciosamente.
 - Aplicar config nos profiles ativos e nas cópias versionadas em `/root/mgs-agent/profiles/*-config.yaml`.
-- Validar com `py_compile` + parse YAML/AST sem restart; pedir autorização separada para reiniciar gateways.
+- Validar YAML/valores efetivos, registrar audit log e reiniciar gateways por restart seguro/detached quando a mudança precisar entrar em runtime; Zeus por último.
+- Não desligar live progress como “anti-poluição” se o problema real for loop entre agentes; corrija filtros/mentions/lifecycle notices no fluxo multiagente.
 
 Padrão correto:
 - Confirmar o sintoma no print/logs (`agent.log`/`errors.log`) e distinguir: retry interno pode continuar, mas não deve poluir Discord.
