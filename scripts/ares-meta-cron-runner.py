@@ -14,6 +14,7 @@ import argparse
 import datetime as dt
 import importlib.util
 import json
+import re
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -78,6 +79,25 @@ def derive_metrics(row: dict) -> dict:
     mo = action_value(row, 'complete_registration')
     cpmo = None if mo <= 0 else spend / mo
     return {'spend': spend, 'MO': mo, 'CPMO': cpmo}
+
+
+def page_id_from_name(name: str | None) -> str:
+    m = re.search(r'\(\s*pg[_-]?(\d+)\s*\)', str(name or ''), re.I)
+    return f"pg_{m.group(1)}" if m else 'não identificado'
+
+
+def country_vertical_from_name(name: str | None, op_cfg: dict) -> str:
+    text = str(name or '')
+    # Ex.: "Carla Rojas - US - ESP - (pg_22068) - 3" => country US; vertical from operation CC.
+    m = re.search(r'\s-\s([A-Z]{2})\s-\s', text)
+    country = m.group(1) if m else str(op_cfg.get('country') or 'NA')
+    vertical = str(op_cfg.get('vertical') or 'NA')
+    return f'{country} / {vertical}'
+
+
+def fmt_account_title(account_name: str, tz: ZoneInfo, label: str) -> str:
+    now = utc_now().astimezone(tz)
+    return f'{account_name} — {now.strftime("%Y-%m-%d")} — {now.strftime("%H:%M %Z")} — {label}'
 
 
 def cmp_value(actual, op: str, expected) -> bool:
@@ -156,6 +176,13 @@ def fetch_campaigns(common, token: str, account_id: str) -> dict[str, dict]:
     fields = 'id,name,status,effective_status,created_time,updated_time,bid_strategy,daily_budget,lifetime_budget,objective'
     rows = graph_get_all(common, token, f'act_{account_id}/campaigns', {'fields': fields, 'limit': 200})
     return {r['id']: r for r in rows if r.get('id')}
+
+
+def fetch_account_name(common, token: str, account_id: str) -> str:
+    status, payload, _headers = common.graph_get(f'act_{account_id}', token, {'fields': 'name,account_id'})
+    if 200 <= status < 300 and isinstance(payload, dict):
+        return str(payload.get('name') or f'act_{account_id}')
+    return f'act_{account_id}'
 
 
 def fetch_adset_bid_strategies(common, token: str, account_id: str) -> dict[str, str]:
@@ -240,7 +267,9 @@ def run_intraday(args) -> int:
         'candidates': [],
         'errors': [],
     }
+    account_name = f'act_{args.account_id}'
     try:
+        account_name = fetch_account_name(common, token, args.account_id)
         campaigns = fetch_campaigns(common, token, args.account_id)
         adset_bids = fetch_adset_bid_strategies(common, token, args.account_id)
         insights = fetch_today_insights(common, token, args.account_id)
@@ -257,12 +286,15 @@ def run_intraday(args) -> int:
                 if excluded:
                     continue
                 if match:
+                    campaign_name = campaign.get('name') or row.get('campaign_name')
                     event['candidates'].append({
+                        'pg_id': page_id_from_name(campaign_name),
+                        'country_vertical': country_vertical_from_name(campaign_name, op_cfg),
                         'rule': rule.get('id'),
+                        'status': campaign.get('effective_status'),
                         'action': rule.get('action'),
                         'campaign_id': cid,
-                        'campaign_name': campaign.get('name') or row.get('campaign_name'),
-                        'effective_status': campaign.get('effective_status'),
+                        'campaign_name': campaign_name,
                         'bid_strategy': campaign.get('bid_strategy') or 'UNKNOWN',
                         'spend': round(metrics['spend'], 2),
                         'MO': int(metrics['MO']) if float(metrics['MO']).is_integer() else metrics['MO'],
@@ -275,13 +307,13 @@ def run_intraday(args) -> int:
         event['errors'].append(str(e)[:1000])
     audit = audit_write('intraday', event)
     if event['errors']:
-        print(output_table('Intraday Meta — ERRO', [{'erro': event['errors'][0], 'audit': str(audit)}], [('erro', 'Erro'), ('audit', 'Audit')], prefix='<@344196393512075265> erro no cron intraday Meta.'))
+        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — ERRO'), [{'erro': event['errors'][0], 'audit': str(audit)}], [('erro', 'Erro'), ('audit', 'Audit')], prefix='<@344196393512075265> erro no cron intraday Meta.'))
         return 0
     if event['candidates']:
         rows = event['candidates']
         for r in rows:
             r['CPMO'] = '' if r['CPMO'] is None else r['CPMO']
-        print(output_table('Intraday Meta — dry-run com ações candidatas', rows, [('rule','Regra'),('action','Ação'),('campaign_name','Campanha'),('spend','Spend'),('MO','MO'),('CPMO','CPMO'),('mode','Modo')], prefix='<@344196393512075265> dry-run intraday encontrou ações candidatas. Nenhum write foi executado.'))
+        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — dry-run'), rows, [('pg_id','PG ID'),('country_vertical','País/Vertical'),('rule','Regra usada'),('status','Status')], prefix='<@344196393512075265> dry-run intraday encontrou ações candidatas. Nenhum write foi executado.'))
     return 0
 
 
@@ -301,7 +333,9 @@ def run_reactivate_all(args) -> int:
         'errors': [],
         'exclusion_list': op_cfg.get('reactivate_exclusion_list') or [],
     }
+    account_name = f'act_{args.account_id}'
     try:
+        account_name = fetch_account_name(common, token, args.account_id)
         campaigns = fetch_campaigns(common, token, args.account_id)
         exclusions = set(op_cfg.get('reactivate_exclusion_list') or [])
         for campaign in campaigns.values():
@@ -309,11 +343,15 @@ def run_reactivate_all(args) -> int:
                 continue
             if campaign.get('id') in exclusions or campaign.get('name') in exclusions:
                 continue
+            campaign_name = campaign.get('name')
             event['candidates'].append({
+                'pg_id': page_id_from_name(campaign_name),
+                'country_vertical': country_vertical_from_name(campaign_name, op_cfg),
+                'rule': 'reativar-todas',
+                'status': campaign.get('effective_status'),
                 'action': 'reactivate_campaign',
                 'campaign_id': campaign.get('id'),
-                'campaign_name': campaign.get('name'),
-                'effective_status': campaign.get('effective_status'),
+                'campaign_name': campaign_name,
                 'mode': 'dry_run_no_write',
             })
         event['summary'] = {'campaigns_seen': len(campaigns), 'candidate_count': len(event['candidates'])}
@@ -321,10 +359,10 @@ def run_reactivate_all(args) -> int:
         event['errors'].append(str(e)[:1000])
     audit = audit_write('reactivate-all', event)
     if event['errors']:
-        print(output_table('Reativar-todas Meta — ERRO', [{'erro': event['errors'][0], 'audit': str(audit)}], [('erro','Erro'),('audit','Audit')], prefix='<@344196393512075265> erro no cron reativar-todas Meta.'))
+        print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — ERRO'), [{'erro': event['errors'][0], 'audit': str(audit)}], [('erro','Erro'),('audit','Audit')], prefix='<@344196393512075265> erro no cron reativar-todas Meta.'))
         return 0
     if event['candidates']:
-        print(output_table('Reativar-todas Meta — dry-run com candidatas', event['candidates'], [('action','Ação'),('campaign_name','Campanha'),('effective_status','Status'),('mode','Modo')], prefix='<@344196393512075265> dry-run reativar-todas encontrou campanhas pausadas. Nenhum write foi executado.'))
+        print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — dry-run'), event['candidates'], [('pg_id','PG ID'),('country_vertical','País/Vertical'),('rule','Regra usada'),('status','Status')], prefix='<@344196393512075265> dry-run reativar-todas encontrou campanhas pausadas. Nenhum write foi executado.'))
     return 0
 
 
