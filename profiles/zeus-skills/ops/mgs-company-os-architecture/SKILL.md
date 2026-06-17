@@ -579,6 +579,7 @@ Avoid overexplaining. Give an operational opinion and the next concrete step.
 
 ## Referências operacionais
 
+- `references/hera-natural-gpt-grok-backend-routing-2026-06-16.md` — padrão de Creative Ops para Hera aceitar pedidos naturais de backend (“com GPT”, “com Grok”, “os dois”, “avatar/vídeo”), mantendo Hera como dona de criativos e tratando GPT/OpenAI-Codex e Grok/xAI como ferramentas, não como agentes separados.
 - `references/hera-ares-creative-taxonomy-sync-2026-06-07.md` — sincronização Hera/Ares quando a taxonomia, Drive e Canva forem definidos em thread do Ares: Hera deve herdar a taxonomia CC_US_ES, `MGS-CRIATIVOS`, `UPLOAD CANVAS`, `P_ORIENT` PV/NV/PS/NS, inventário e gate de plano aprovado antes de renomear/mover criativos.
 - `references/creative-metadata-sanitizer-hera-ares-2026-06-08.md` — implementação do gate server-side de limpeza de metadados para criativos Hera/Ares: usar ExifTool/mat2 via wrapper MGS, validar com PNG malicioso `PNG:Comment`, atualizar context/SOUL/docs, auditar e reportar infra.
 - `references/hera-creative-agent-bootstrap-ptbr.md` — padrão capturado na criação da Hera: sequência segura de bootstrap de agente MGS, padronização PT-BR para SOUL/docs/skills/templates e regra de anexar arquivos longos como `MEDIA:/path`.

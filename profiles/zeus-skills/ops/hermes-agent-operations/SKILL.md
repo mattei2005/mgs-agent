@@ -321,6 +321,8 @@ Quando Rodolfo disser “GPT-5.5 pra tudo”, “zero Anthropic”, “deleta de
 
 Use quando um agente MGS, especialmente Hera/Creative Ops, já conversa em `gpt-5.5` via `openai-codex`, mas falha ao gerar imagem ou pede `OPENAI_API_KEY`/`FAL_KEY`. Também use em revisões gerais tipo “confere tudo” para validar que o perfil esperado para imagem (Hera) consegue gerar um arquivo real.
 
+Para rollout Grok/xAI com OAuth SuperGrok em Creative Ops, mantendo GPT e Grok disponíveis por pedido natural (“faz com GPT”, “faz com Grok”, “faz nos dois”), use `references/grok-xai-oauth-creative-media-rollout-2026-06-16.md`. Regra central: não trocar automaticamente o provider de imagem padrão da Hera se o objetivo é ter GPT + Grok lado a lado; manter `image_gen.provider: openai-codex` para GPT e usar wrapper explícito/`video_gen.provider: xai` para Grok imagem/vídeo/avatar.
+
 Validação prática preferida para smoke test de imagem: depois do `hermes -p hera -t image_gen ...` retornar um caminho, verificar arquivo com `stat` e dimensões via Python/Pillow (`Image.open(path).width/height/format`). Não depender de utilitários opcionais como `file`; a evidência suficiente é path existente, tamanho >0 e dimensões/formato válidos.
 
 Regra MGS de papel: geração de criativos/imagens é responsabilidade da Hera. Zeus é GM/admin e não precisa de `image_gen`; ausência de `image_gen` no Zeus é estado esperado, não falha funcional. Só configurar Zeus para imagem se Rodolfo pedir explicitamente que Zeus passe a gerar imagem.
@@ -547,6 +549,7 @@ Esta umbrella absorveu as antigas skills especializadas abaixo. Conteúdo detalh
 - `references/openai-codex-anthropic-api-decommission.md`
 - `references/openai-codex-cost-monitoring-gpt-oauth.md`
 - `references/hermes-image-gen-openai-codex-mgs.md` — configurar image generation via `openai-codex`/ChatGPT OAuth para perfis MGS como Hera; separa modelo de chat (`gpt-5.5`) de backend de imagem, evita fallback FAL sem `FAL_KEY`, e inclui smoke test real com `hermes -p <profile> -t image_gen -z ...`.
+- `references/grok-xai-oauth-creative-media-rollout-2026-06-16.md` — rollout MGS de Grok/xAI via OAuth SuperGrok para Creative Ops: OAuth manual-paste, cópia segura de `providers.xai-oauth` entre profiles, configuração Hera GPT+Grok lado a lado, wrapper `/root/mgs-agent/scripts/mgs-grok-generate.py`, smoke tests reais de imagem/vídeo e pitfall de ignorar `data/generated/` no Git.
 - `references/atena-openhands-provider-diagnostic.md` — diagnosticar OpenHands da Atena: funcionalidade vs. provider/modelo/custo, wrapper e trajectories sem vazar credenciais
 - `references/openhands-gpt55-codex-wrapper.md` — padrão MGS para OpenHands com GPT-5.5/OpenAI-Codex OAuth, bloqueio de fallback provider e validação real do runtime model
 - `references/honcho-managed-memory-spike.md` — avaliação/configuração de Honcho como camada managed de conclusões sobre histórico sanitizado; inclui política de fonte de verdade, 1Password/API key, smoke test sintético e ingestão manual de logs sanitizados.
