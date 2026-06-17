@@ -51,12 +51,50 @@ def shell_quote(s):
     import shlex
     return shlex.quote(str(s))
 
-def graph_get(path, token, params=None):
+def _throttle_before_request():
+    """Cross-process soft throttle to avoid Meta API bursts."""
+    if MIN_INTERVAL_SECONDS <= 0:
+        return
+    THROTTLE_STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with THROTTLE_STATE_PATH.open('a+') as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
+        fh.seek(0)
+        try:
+            state = json.loads(fh.read() or '{}')
+        except Exception:
+            state = {}
+        now = time.monotonic()
+        last = float(state.get('last_request_monotonic') or 0)
+        wait = MIN_INTERVAL_SECONDS - (now - last)
+        if wait > 0:
+            time.sleep(wait)
+            now = time.monotonic()
+        fh.seek(0)
+        fh.truncate()
+        fh.write(json.dumps({'last_request_monotonic': now, 'min_interval_seconds': MIN_INTERVAL_SECONDS}))
+        fh.flush()
+        fcntl.flock(fh, fcntl.LOCK_UN)
+
+def is_rate_limit_response(status, payload):
+    err = payload.get('error') if isinstance(payload, dict) else None
+    if status == 429:
+        return True
+    if isinstance(err, dict):
+        code = err.get('code')
+        message = str(err.get('message') or '').lower()
+        if code in RATE_LIMIT_CODES:
+            return True
+        if any(pattern in message for pattern in RATE_LIMIT_MESSAGE_PATTERNS):
+            return True
+    return False
+
+def _graph_get_once(path, token, params=None):
     params=dict(params or {})
     params['access_token']=token
     url=f'https://graph.facebook.com/{GRAPH_VERSION}/{path.lstrip("/")}?'+urllib.parse.urlencode(params)
     req=urllib.request.Request(url, headers={'User-Agent':'mgs-ares-meta-ads/0.1'})
     try:
+        _throttle_before_request()
         with urllib.request.urlopen(req, timeout=45) as resp:
             body=resp.read().decode('utf-8', 'replace')
             return resp.status, json.loads(body), dict(resp.headers)
@@ -65,6 +103,38 @@ def graph_get(path, token, params=None):
         try: payload=json.loads(body)
         except Exception: payload={'raw':body[:1000]}
         return e.code, payload, dict(e.headers)
+
+def graph_get(path, token, params=None):
+    """GET Meta Graph with burst throttling and bounded rate-limit backoff.
+
+    Backoff sequence starts at 30s and doubles, capped at 10 minutes total
+    sleep. If Meta still rate-limits after that, return a structured error so
+    the caller/agent can stop and alert the current channel.
+    """
+    total_sleep = 0
+    next_sleep = RATE_LIMIT_INITIAL_SLEEP
+    attempts = 0
+    while True:
+        attempts += 1
+        status, payload, headers = _graph_get_once(path, token, params)
+        if not is_rate_limit_response(status, payload):
+            return status, payload, headers
+        if total_sleep >= RATE_LIMIT_MAX_TOTAL_SLEEP:
+            payload = {
+                'error': {
+                    'message': 'Meta API rate limit persisted after bounded backoff; stopped to avoid hammering the API.',
+                    'type': 'AresRateLimitExceeded',
+                    'code': 'ARES_RATE_LIMIT_EXHAUSTED',
+                    'attempts': attempts,
+                    'total_sleep_seconds': total_sleep,
+                    'last_meta_error': safe_meta_error(payload),
+                }
+            }
+            return status, payload, headers
+        sleep_for = min(next_sleep, RATE_LIMIT_MAX_TOTAL_SLEEP - total_sleep)
+        time.sleep(sleep_for)
+        total_sleep += sleep_for
+        next_sleep *= 2
 
 def safe_meta_error(payload):
     err=payload.get('error') if isinstance(payload,dict) else None
