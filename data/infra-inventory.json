@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-17T17:55:54-04:00",
+    "updated_at": "2026-06-17T18:01:05-04:00",
     "generated_by": "zeus"
   },
   "systemd_services": [
@@ -2820,6 +2820,26 @@
       "validated_at": "2026-06-17T17:55:54-04:00",
       "validation": "Hera GET /channels/1498132022634483894 => HTTP 200; Zeus GET overwrite allow=379968 deny=0",
       "reason": "Acesso da Hera ao #alerts-infra para REPORT-INFRA autorizado por Rodolfo"
+    }
+  ],
+  "oauth_auth_states": [
+    {
+      "profile": "hera",
+      "provider": "xai-oauth",
+      "status": "logged_in",
+      "auth_store": "/root/.hermes/profiles/hera/auth.json",
+      "auth_store_size_bytes": 9024,
+      "auth_store_modified_at": "2026-06-17T17:51:45-04:00",
+      "validated_by": "zeus",
+      "validated_at": "2026-06-17T18:01:05-04:00",
+      "validation": "hermes -p hera auth status xai-oauth => logged in; mgs-grok-generate wrapper produced JPEG artifact",
+      "test_artifact": {
+        "path": "/root/mgs-agent/data/generated/hera/daniel-safari/grok-auth-test/grok-image-20260617-175946.jpg",
+        "size_bytes": 251270,
+        "sha256": "544ccb614ff02f5b65559441e515541a234493382c43fe1710277df67969d968",
+        "format": "jpeg",
+        "modified_at": "2026-06-17T17:59:47-04:00"
+      }
     }
   ],
   "data_files": [
