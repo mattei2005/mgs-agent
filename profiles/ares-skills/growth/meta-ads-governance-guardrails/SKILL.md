@@ -74,12 +74,15 @@ Token Meta API | OK     | <campo>     | <número>
 
 Nunca colocar o valor do token na resposta, em arquivo de log, em traceback ou em comando impresso.
 
-## Rate limit e cache
+## Rate limit, throttling e cache
 
 - Intraday roda a cada 30m, não em loop contínuo.
+- Todas as chamadas Meta API devem passar por `/root/mgs-agent/scripts/ares-meta-common.py`.
+- Espaçamento mínimo entre chamadas: `ARES_META_MIN_INTERVAL_SECONDS`, default `0.75s`, com lock cross-process para evitar rajadas simultâneas.
+- Ao detectar rate limit, parar a sequência normal e aplicar backoff acumulado: `30s → 60s → 120s → 240s → 150s`, total máximo `600s`.
+- Se continuar rate-limit após 10 minutos acumulados, parar e alertar Rodolfo no canal/thread atual quando interativo; em cron, retornar erro estruturado `ARES_RATE_LIMIT_EXHAUSTED` para entrega pelo scheduler/gateway.
 - Cachear insights por janela de execução.
-- Se Meta retornar erro/rate-limit, não executar ação cega; registrar erro e alertar.
-- Preferir buscar campos necessários de uma vez.
+- Preferir buscar campos necessários de uma vez, mas evitar payloads pesados em massa como `adcreatives.object_story_spec` para muitos itens.
 
 ## Aprovação para mudanças sensíveis
 
