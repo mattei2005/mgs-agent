@@ -110,7 +110,7 @@ def image(args: argparse.Namespace) -> dict:
     url = item.get("url") or body.get("url")
     b64 = item.get("b64_json") or body.get("b64_json")
     ts = time.strftime("%Y%m%d-%H%M%S")
-    out = Path(args.output_dir).expanduser() / f"grok-image-{ts}.png"
+    out = Path(args.output_dir).expanduser() / f"grok-image-{ts}.img"
     if url:
         size = _download(url, out, timeout=args.timeout)
     elif b64:
@@ -120,6 +120,15 @@ def image(args: argparse.Namespace) -> dict:
         size = len(raw)
     else:
         raise RuntimeError(f"xAI image response has no url/b64_json: {json.dumps(body)[:800]}")
+
+    # xAI may return JPEG bytes even for OpenAI-compatible image endpoints.
+    # Rename by magic bytes so Drive/Discord consumers see the correct type.
+    head = out.read_bytes()[:12]
+    ext = ".jpg" if head.startswith(b"\xff\xd8\xff") else ".png" if head.startswith(b"\x89PNG") else ".img"
+    final = out.with_suffix(ext)
+    if final != out:
+        out.replace(final)
+        out = final
     return {
         "ok": True,
         "kind": "image",
