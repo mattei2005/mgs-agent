@@ -1,12 +1,23 @@
 #!/usr/bin/env python3
 """Common helpers for Ares Meta Ads operations. Never print tokens."""
 from __future__ import annotations
-import json, os, subprocess, sys, time, urllib.parse, urllib.request
+import fcntl, json, os, subprocess, sys, time, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 
 BASE = Path('/root/mgs-agent/data/ares/meta-ads')
 GRAPH_VERSION = os.environ.get('ARES_META_GRAPH_VERSION', 'v20.0')
 TOKEN_ITEM_DEFAULT = 'Token Meta API'
+RATE_LIMIT_CODES = {4, 17, 32, 613, 80004}
+RATE_LIMIT_MESSAGE_PATTERNS = (
+    'rate limit',
+    'too many calls',
+    'reduce the amount of data',
+    'temporarily blocked',
+)
+MIN_INTERVAL_SECONDS = float(os.environ.get('ARES_META_MIN_INTERVAL_SECONDS', '0.75'))
+RATE_LIMIT_MAX_TOTAL_SLEEP = int(os.environ.get('ARES_META_RATE_LIMIT_MAX_TOTAL_SLEEP', '600'))
+RATE_LIMIT_INITIAL_SLEEP = int(os.environ.get('ARES_META_RATE_LIMIT_INITIAL_SLEEP', '30'))
+THROTTLE_STATE_PATH = BASE / 'cache' / 'meta-api-throttle-state.json'
 
 def load_json(path):
     return json.loads(Path(path).read_text())
