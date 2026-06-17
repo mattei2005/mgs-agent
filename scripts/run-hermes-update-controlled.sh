@@ -19,9 +19,11 @@ NO_UPDATE="${NO_UPDATE:-0}"
 RESTART_GATEWAYS="${RESTART_GATEWAYS:-0}"
 ALLOW_PATCH_DRIFT="${ALLOW_PATCH_DRIFT:-0}"
 GATEWAY_SERVICES="${GATEWAY_SERVICES:-zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service}"
-# Default update-review Discord thread. Override per run if update is launched from another thread.
-MGS_UPDATE_REPORT_THREAD_ID="${MGS_UPDATE_REPORT_THREAD_ID:-1516073108535120086}"
-SEND_DISCORD_REPORT="${SEND_DISCORD_REPORT:-1}"
+# Discord report delivery is opt-in. Do not hardcode a thread here: updates may be
+# launched from any active Rodolfo/Zeus thread, and accidental delivery to an old
+# thread creates confusing duplicate update reports.
+MGS_UPDATE_REPORT_THREAD_ID="${MGS_UPDATE_REPORT_THREAD_ID:-}"
+SEND_DISCORD_REPORT="${SEND_DISCORD_REPORT:-0}"
 
 mkdir -p "$REPORT_DIR" "$PATCH_DIR"
 exec > >(tee -a "$LOG") 2>&1
