@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "operation_id": "OpenzedFinanzas-CC-ES",
   "country": "ES",
   "country_name": "Spain",
@@ -31,7 +31,7 @@
   "metrics": {
     "mapping_id": "openzedfinanzas_cc_es_metrics_v1",
     "mapping_path": "/root/mgs-agent/data/ares/meta-ads/metrics/openzedfinanzas_cc_es_metrics_v1.json",
-    "meta_mapping_status": "subs_and_CPS_defined_M0_CPM0_pending",
+    "meta_mapping_status": "MO_CPMO_defined_for_europe_gdpr",
     "subs": {
       "definition": "First valid action found in priority order; if none found, subs = 0.",
       "type": "count",
@@ -55,19 +55,41 @@
       "currency": "account_or_ruleset_currency_after_normalization",
       "division_by_zero_policy": "null_not_comparable; R4/R5 require subs thresholds before CPS comparison"
     },
-    "pending_metrics": [
-      "M0",
-      "CPM0"
-    ],
+    "pending_metrics": [],
     "future_external_sources": [
       "Lovable ROI drip",
       "Lovable ROI geral"
-    ]
+    ],
+    "MO": {
+      "definition": "actions.complete_registration",
+      "type": "count",
+      "action_type": "complete_registration",
+      "missing_policy": 0,
+      "europe_gdpr_primary": true
+    },
+    "CPMO": {
+      "definition": "spend / MO",
+      "formula": {
+        "numerator": "spend",
+        "denominator": "MO"
+      },
+      "currency": "USD",
+      "division_by_zero_policy": "null_not_comparable"
+    },
+    "intraday_primary_metrics": [
+      "MO",
+      "CPMO",
+      "spend"
+    ],
+    "use_subs_for_intraday_rules": false
   },
   "ruleset": "openzedfinanzas_cc_es_intraday_v1",
   "scheduler_policy": {
     "intraday": "vps_cron_deterministic_no_skill_runtime",
     "reactivate_all": "vps_cron_deterministic_no_skill_runtime",
     "agent_skill_usage": "documentation_and_operator_context_only"
-  }
+  },
+  "region": "Europe",
+  "gdpr_sensitive": true,
+  "account_currency": "USD"
 }

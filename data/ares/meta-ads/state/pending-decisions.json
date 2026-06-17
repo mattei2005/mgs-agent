@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-06-17T03:29:17.995502+00:00",
+  "updated_at": "2026-06-17T04:13:00.421936+00:00",
   "operation_id": "OpenzedFinanzas-CC-ES",
   "items": [
     {
       "id": "R1-R5",
-      "status": "defined_preliminary_pending_dry_run_and_account_calibration",
-      "note": "R1-R5 definidos por Rodolfo com thresholds CAD iniciais; validar mapping M0/CPM0/Subs/CPS e calibrar por conta antes de write."
+      "status": "MO_CPMO_USD_rules_proposed_pending_dry_run",
+      "note": "Ruleset atualizada para USD e métricas MO/CPMO; valores propostos aguardam dry-run e confirmação antes de write."
     },
     {
       "id": "fx-rate-source",
@@ -24,8 +24,8 @@
     },
     {
       "id": "meta-metrics",
-      "status": "subs_CPS_defined_M0_CPM0_pending",
-      "note": "Subs definido como primeira action válida na ordem Rodolfo; CPS=spend/subs. Ainda falta definir/mapear M0 e CPM0 antes de write."
+      "status": "MO_CPMO_defined_for_europe_gdpr",
+      "note": "Para operação Europa/GDPR, usar MO=actions.complete_registration e CPMO=spend/MO; não usar subs/CPS como norte intraday."
     },
     {
       "id": "campaign-analysis-map",

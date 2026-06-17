@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "mapping_id": "openzedfinanzas_cc_es_metrics_v1",
   "operation_id": "OpenzedFinanzas-CC-ES",
   "source": "Meta Ads insights actions/action_values where applicable",
@@ -28,11 +28,33 @@
       },
       "currency": "account_or_ruleset_currency_after_normalization",
       "division_by_zero_policy": "null_not_comparable; R4/R5 require subs thresholds before CPS comparison"
+    },
+    "MO": {
+      "definition": "actions.complete_registration",
+      "type": "count",
+      "action_type": "complete_registration",
+      "missing_policy": 0,
+      "europe_gdpr_primary": true
+    },
+    "CPMO": {
+      "definition": "spend / MO",
+      "formula": {
+        "numerator": "spend",
+        "denominator": "MO"
+      },
+      "currency": "USD",
+      "division_by_zero_policy": "null_not_comparable"
     }
   },
-  "pending_metrics": [
-    "M0",
-    "CPM0"
-  ],
-  "notes": "M0 and CPM0 still require definition/source mapping before full write automation."
+  "pending_metrics": [],
+  "notes": "For Europe/GDPR operations, intraday rules use MO=actions.complete_registration and CPMO=spend/MO, not subs/CPS.",
+  "updated_at": "2026-06-17T04:13:00.420827+00:00",
+  "europe_gdpr_policy": {
+    "applies_to_operation_ids": [
+      "OpenzedFinanzas-CC-ES"
+    ],
+    "use_subs_for_intraday_rules": false,
+    "use_MO_as_primary_result": true,
+    "reason": "Subscribe data is not reliably available in Meta for Europe/GDPR operations."
+  }
 }

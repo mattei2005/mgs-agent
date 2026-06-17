@@ -1,0 +1,226 @@
+{
+  "generated_at_utc": "2026-06-17T04:13:00.420340+00:00",
+  "basis": "recalculated from saved Meta read-only month audit; no new Meta API call",
+  "account_id": "1356770869843984",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "period": {
+    "since": "2026-06-01",
+    "until": "2026-06-17",
+    "timezone": "Europe/Madrid"
+  },
+  "currency": "USD",
+  "europe_gdpr_policy": {
+    "use_subs": false,
+    "primary_result_metric": "MO",
+    "reason": "Europe/GDPR operations do not expose subscribe reliably in Meta; use complete_registration/MO as operational north star."
+  },
+  "metric_mapping": {
+    "MO": "actions.complete_registration",
+    "CPMO": "spend / MO",
+    "division_by_zero": "null_not_comparable_when_MO_0"
+  },
+  "stats": {
+    "daily_spend_rows": 85,
+    "daily_zero_MO_rows": 0,
+    "daily_positive_MO_rows": 85,
+    "zero_MO_spend_usd_pct": {},
+    "CPMO_usd_pct_all_daily": {
+      "25": 1.319,
+      "50": 1.6711,
+      "60": 1.9004,
+      "70": 2.0249,
+      "75": 2.0818,
+      "80": 2.2104,
+      "90": 2.4347
+    },
+    "CPMO_usd_pct_active_daily": {
+      "25": 1.6586,
+      "50": 2.0536,
+      "60": 2.1311,
+      "70": 2.3129,
+      "75": 2.3684,
+      "80": 2.4078,
+      "90": 3.1611
+    },
+    "M0_eq_1_spend_usd_pct_all": {},
+    "M0_eq_1_spend_usd_pct_active": {}
+  },
+  "recommended_rules_usd": {
+    "R1_MO_eq_0_spend_gt": 5.0,
+    "R2_MO_gt_0_CPMO_gt": 3.25,
+    "R3_MO_eq_1_spend_gt": 5.0,
+    "R4_LOWEST_COST_MO_gte": 2,
+    "R4_LOWEST_COST_CPMO_gt": 3.0,
+    "R4_LOWEST_COST_spend_gte": 8.0,
+    "R5_paused_MO_gte": 2,
+    "R5_paused_CPMO_lt": 2.5
+  },
+  "campaign_perf": [
+    {
+      "campaign_id": "120248290564270604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 3",
+      "status": "ACTIVE",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 601.96,
+      "MO": 301.0,
+      "CPMO_usd": 2.0,
+      "CPM_usd": 15.27,
+      "impressions": 39423
+    },
+    {
+      "campaign_id": "120248290297180604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 1",
+      "status": "ACTIVE",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 598.77,
+      "MO": 353.0,
+      "CPMO_usd": 1.7,
+      "CPM_usd": 15.31,
+      "impressions": 39122
+    },
+    {
+      "campaign_id": "120248290564430604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 4",
+      "status": "ACTIVE",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 567.78,
+      "MO": 294.0,
+      "CPMO_usd": 1.93,
+      "CPM_usd": 14.93,
+      "impressions": 38032
+    },
+    {
+      "campaign_id": "120248290564290604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 5",
+      "status": "ACTIVE",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 542.52,
+      "MO": 283.0,
+      "CPMO_usd": 1.92,
+      "CPM_usd": 16.69,
+      "impressions": 32514
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "status": "ACTIVE",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 518.53,
+      "MO": 225.0,
+      "CPMO_usd": 2.3,
+      "CPM_usd": 15.43,
+      "impressions": 33613
+    },
+    {
+      "campaign_id": "120247501687800604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 5",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 498.1,
+      "MO": 349.0,
+      "CPMO_usd": 1.43,
+      "CPM_usd": 12.88,
+      "impressions": 38669
+    },
+    {
+      "campaign_id": "120247501687530604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 2",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 487.51,
+      "MO": 361.0,
+      "CPMO_usd": 1.35,
+      "CPM_usd": 11.31,
+      "impressions": 43088
+    },
+    {
+      "campaign_id": "120247501679760604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 1",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 481.94,
+      "MO": 320.0,
+      "CPMO_usd": 1.51,
+      "CPM_usd": 12.03,
+      "impressions": 40053
+    },
+    {
+      "campaign_id": "120247501687790604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 4",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 457.52,
+      "MO": 293.0,
+      "CPMO_usd": 1.56,
+      "CPM_usd": 15.0,
+      "impressions": 30498
+    },
+    {
+      "campaign_id": "120247501687810604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 3",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 446.28,
+      "MO": 275.0,
+      "CPMO_usd": 1.62,
+      "CPM_usd": 13.29,
+      "impressions": 33569
+    },
+    {
+      "campaign_id": "120246399685010604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 2",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 22.97,
+      "MO": 30.0,
+      "CPMO_usd": 0.77,
+      "CPM_usd": 9.82,
+      "impressions": 2339
+    },
+    {
+      "campaign_id": "120246399685000604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 4",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 22.92,
+      "MO": 22.0,
+      "CPMO_usd": 1.04,
+      "CPM_usd": 11.47,
+      "impressions": 1999
+    },
+    {
+      "campaign_id": "120246398703950604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 1",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 21.46,
+      "MO": 25.0,
+      "CPMO_usd": 0.86,
+      "CPM_usd": 10.43,
+      "impressions": 2058
+    },
+    {
+      "campaign_id": "120246399684980604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 5",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 20.74,
+      "MO": 18.0,
+      "CPMO_usd": 1.15,
+      "CPM_usd": 9.82,
+      "impressions": 2113
+    },
+    {
+      "campaign_id": "120246399684990604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 3",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 20.4,
+      "MO": 29.0,
+      "CPMO_usd": 0.7,
+      "CPM_usd": 10.3,
+      "impressions": 1980
+    }
+  ],
+  "source_audit_dir": "/root/mgs-agent/data/ares/meta-ads/audit/month-analysis-1356770869843984-20260617T035954Z"
+}
