@@ -120,6 +120,11 @@ fi
 
 # ── 8. Montar JSON final ──────────────────────────────────────────────────────
 log "Montando JSON final..."
+DISCORD_PERMISSIONS_JSON='[]'
+if [ -f "$OUT" ]; then
+    DISCORD_PERMISSIONS_JSON=$(jq -c '.discord_permissions // []' "$OUT")
+fi
+
 jq -n \
     --arg updated_at "$NOW" \
     --arg mu_md5 "$MU_MD5" \
@@ -130,6 +135,7 @@ jq -n \
     --argjson skills_mgs "$SKILLS_MGS_JSON" \
     --argjson skills_hermes "$SKILLS_HERMES_JSON" \
     --argjson data_files "$DATA_JSON" \
+    --argjson discord_permissions "$DISCORD_PERMISSIONS_JSON" \
     '{
         "_meta": {
             "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
@@ -141,6 +147,7 @@ jq -n \
         "scripts": $scripts,
         "skills_mgs": $skills_mgs,
         "skills_hermes": $skills_hermes,
+        "discord_permissions": $discord_permissions,
         "data_files": $data_files,
         "mu_plugin_canonical": {
             "path": "scripts/mu-plugins/yoast-rest-meta.php",
