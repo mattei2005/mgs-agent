@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "policy_id": "ares_meta_api_rate_limit_policy_v1",
+  "created_by": "Ares",
+  "status": "active",
+  "scope": "all Meta Graph API calls made through /root/mgs-agent/scripts/ares-meta-common.py",
+  "request_spacing": {
+    "min_interval_seconds_default": 0.75,
+    "env_override": "ARES_META_MIN_INTERVAL_SECONDS",
+    "purpose": "avoid bursts; balance campaign creation/analysis speed with rate-limit safety"
+  },
+  "rate_limit_backoff": {
+    "initial_sleep_seconds": 30,
+    "multiplier": 2,
+    "max_total_sleep_seconds": 600,
+    "sequence_seconds": [30, 60, 120, 240, 150],
+    "behavior": "stop after total backoff reaches 10 minutes; return structured rate_limit_exhausted error for alerting"
+  },
+  "rate_limit_detection": {
+    "http_status": [429],
+    "meta_error_codes": [4, 17, 32, 613, 80004],
+    "message_patterns": ["rate limit", "too many calls", "reduce the amount of data", "temporarily blocked"]
+  },
+  "alert_policy": {
+    "interactive_session": "agent reports in current channel/thread",
+    "autonomous_run": "script returns non-success with rate_limit_exhausted and writes audit/log for scheduler delivery"
+  }
+}
