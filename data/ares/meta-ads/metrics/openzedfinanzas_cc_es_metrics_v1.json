@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "mapping_id": "openzedfinanzas_cc_es_metrics_v1",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "source": "Meta Ads insights actions/action_values where applicable",
+  "defined_by": "Rodolfo Mattei",
+  "defined_at": "2026-06-17T03:29:00.334019+00:00",
+  "metrics": {
+    "subs": {
+      "definition": "First valid action found in priority order; if none found, subs = 0.",
+      "type": "count",
+      "action_priority": [
+        "onsite_conversion.messaging_conversation_started_7d",
+        "onsite_conversion.total_messaging_connection",
+        "complete_registration",
+        "offsite_complete_registration_add_meta_leads",
+        "lead",
+        "offsite_conversion.fb_pixel_lead"
+      ],
+      "selection_policy": "first_valid_action_in_priority_order",
+      "missing_policy": 0
+    },
+    "CPS": {
+      "definition": "spend / subs",
+      "formula": {
+        "numerator": "spend",
+        "denominator": "subs"
+      },
+      "currency": "account_or_ruleset_currency_after_normalization",
+      "division_by_zero_policy": "null_not_comparable; R4/R5 require subs thresholds before CPS comparison"
+    }
+  },
+  "pending_metrics": [
+    "M0",
+    "CPM0"
+  ],
+  "notes": "M0 and CPM0 still require definition/source mapping before full write automation."
+}

@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "operation_id": "OpenzedFinanzas-CC-ES",
   "country": "ES",
   "country_name": "Spain",
@@ -29,8 +29,36 @@
     "rate_source_status": "pending_definition"
   },
   "metrics": {
-    "primary_candidate": "CPS",
-    "meta_mapping_status": "pending_discovery",
+    "mapping_id": "openzedfinanzas_cc_es_metrics_v1",
+    "mapping_path": "/root/mgs-agent/data/ares/meta-ads/metrics/openzedfinanzas_cc_es_metrics_v1.json",
+    "meta_mapping_status": "subs_and_CPS_defined_M0_CPM0_pending",
+    "subs": {
+      "definition": "First valid action found in priority order; if none found, subs = 0.",
+      "type": "count",
+      "action_priority": [
+        "onsite_conversion.messaging_conversation_started_7d",
+        "onsite_conversion.total_messaging_connection",
+        "complete_registration",
+        "offsite_complete_registration_add_meta_leads",
+        "lead",
+        "offsite_conversion.fb_pixel_lead"
+      ],
+      "selection_policy": "first_valid_action_in_priority_order",
+      "missing_policy": 0
+    },
+    "CPS": {
+      "definition": "spend / subs",
+      "formula": {
+        "numerator": "spend",
+        "denominator": "subs"
+      },
+      "currency": "account_or_ruleset_currency_after_normalization",
+      "division_by_zero_policy": "null_not_comparable; R4/R5 require subs thresholds before CPS comparison"
+    },
+    "pending_metrics": [
+      "M0",
+      "CPM0"
+    ],
     "future_external_sources": [
       "Lovable ROI drip",
       "Lovable ROI geral"
