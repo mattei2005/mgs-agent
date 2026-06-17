@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-17T16:07:53-04:00",
+    "updated_at": "2026-06-17T17:38:55-04:00",
     "generated_by": "zeus"
   },
   "systemd_services": [
@@ -2976,6 +2976,13 @@
       "md5": "f1d0e4f5a643bbbc643797520d386b4c",
       "modified_at": "2026-06-17T15:31:48-04:00",
       "sha256": "8bbc4883777d426ff22de17a5f888a8a888b64ce748fe74927809781bfaf5056"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/state/pending-decisions.json",
+      "size_bytes": 2353,
+      "md5": "2ec306b1e2d15eea73839de94e06be63",
+      "modified_at": "2026-06-17T17:38:20-04:00",
+      "sha256": "9b66bec110dc122e49a79cc9447524662e79b4d20dc8f91463ab23ef0c0fcb62"
     }
   ],
   "mu_plugin_canonical": {
