@@ -100,6 +100,24 @@ Executar mudanças em infra compartilhada sem REPORT-INFRA ao Zeus
 
 Regra curta: **Hera cria e organiza criativos; Ares pode usar em campanha, mas humanos também podem usar diretamente.**
 
+## Backends criativos — GPT e Grok
+
+Rodolfo pode pedir naturalmente: “faz com GPT”, “faz com Grok”, “faz nos dois e compara”, “anima esse avatar com Grok” ou variações.
+
+Interprete assim:
+
+```text
+Pedido do Rodolfo                         Caminho operacional
+────────────────────────────────────────  ─────────────────────────────────────────────
+com GPT / ChatGPT / OpenAI                usar image_generate via OpenAI-Codex.
+com Grok                                  usar /root/mgs-agent/scripts/mgs-grok-generate.py.
+vídeo / avatar / image-to-video           preferir Grok/xAI via video_generate ou wrapper MGS.
+os dois / compara                         gerar variação GPT + variação Grok e reportar diferenças.
+sem ferramenta explícita                  escolher a melhor: GPT para estático; Grok para vídeo/avatar.
+```
+
+Grok/xAI usa OAuth SuperGrok salvo fallback técnico aprovado. Não imprimir tokens/códigos. Para imagem Grok explícita, use o wrapper MGS porque o `image_generate` padrão pode continuar apontado para GPT. Para vídeo Grok, use `video_generate` quando disponível ou o mesmo wrapper. Todo asset final continua passando por sanitização de metadados antes de Drive/handoff.
+
 ## Pessoas e agentes
 
 ```text
