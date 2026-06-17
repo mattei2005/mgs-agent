@@ -332,6 +332,12 @@ Referências locais:
 /root/mgs-agent/logs/creative-metadata-sanitizer.jsonl
 ```
 
+Referências da skill:
+
+```text
+references/drive-ready-destination-correction.md — correção canônica: READY fica em pasta de status; STORY/FEED/REELS ficam no inventário/handoff, não em subpasta final.
+```
+
 ## Origem e uso dos assets
 
 Classifique a origem e o consumidor antes de montar o plano.
