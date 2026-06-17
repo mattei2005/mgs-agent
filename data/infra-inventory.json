@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-17T12:30:29-04:00",
+    "updated_at": "2026-06-17T15:23:06-04:00",
     "generated_by": "zeus"
   },
   "systemd_services": [
@@ -942,7 +942,11 @@
       {
         "name": "meta-ads-intraday-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "sha256": "b8739d8b02d6b296cc982928e2aebff217c547db001534722b9de98423b6f6db",
+        "versioned_sha256": "b8739d8b02d6b296cc982928e2aebff217c547db001534722b9de98423b6f6db",
+        "modified_at": "2026-06-17T15:21:13-04:00"
       },
       {
         "name": "paid-acquisition-operations",
@@ -2913,6 +2917,13 @@
       "size_bytes": 43510,
       "md5": "313356aeb86d41db526f68507a56ec4e",
       "modified_at": "2026-06-16T19:23:39-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/rules/openzedfinanzas_cc_es_intraday_v1.json",
+      "size_bytes": 6602,
+      "md5": "7c17874a9ac93b58be59b7f2324a3bbc",
+      "modified_at": "2026-06-17T15:21:09-04:00",
+      "sha256": "bec41b11537195bb31454c1cbe16a824dba4f72ec4fdc330eb2b3017b8fbccbf"
     }
   ],
   "mu_plugin_canonical": {

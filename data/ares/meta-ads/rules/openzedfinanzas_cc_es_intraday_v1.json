@@ -113,7 +113,7 @@
       "id": "R4",
       "enabled": true,
       "status": "proposed_pending_dry_run",
-      "description": "LOWEST_COST with MO >= 2, CPMO > USD 3.00 and spend >= USD 8.00 => pause campaign",
+      "description": "LOWEST_COST with MO >= 2, CPMO > USD 2.00 and spend >= USD 8.00 => pause campaign",
       "metric_source": "meta_insights_actions_complete_registration",
       "metric_name": [
         "MO",
@@ -136,7 +136,7 @@
           {
             "metric": "CPMO",
             "op": "gt",
-            "value": 3.0,
+            "value": 2.0,
             "currency": "USD"
           },
           {
@@ -241,5 +241,6 @@
     "MO_action_type": "complete_registration",
     "CPMO_formula": "spend / MO",
     "intraday_policy": "Europe/GDPR uses MO/CPMO, not subs/CPS"
-  }
+  },
+  "updated_at": "2026-06-17T19:21:09.520730+00:00"
 }

@@ -71,7 +71,7 @@ Regra | Condição                                                   | Ação
 R1    | MO = 0 e spend > USD 5.00                                  | pausar campanha
 R2    | MO > 0 e CPMO > USD 3.25                                   | pausar campanha
 R3    | MO = 1 e spend > USD 5.00                                  | pausar campanha
-R4    | LOWEST_COST + MO >= 2 + CPMO > USD 3.00 + spend >= USD 8.00| pausar campanha
+R4    | LOWEST_COST + MO >= 2 + CPMO > USD 2.00 + spend >= USD 8.00| pausar campanha
 R5    | campanha pausada + MO >= 2 + CPMO < USD 2.50               | reativar campanha
 ```
 
