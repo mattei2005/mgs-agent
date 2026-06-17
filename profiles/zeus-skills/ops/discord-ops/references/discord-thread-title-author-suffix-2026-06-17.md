@@ -43,5 +43,19 @@ Antes de restart:
 ## Pitfall
 Não interpretar esse tipo de pedido como autorização para “melhorar” ou recalibrar título. Neste caso, a dificuldade anterior foi deixar a renomeação boa; a mudança correta é cirúrgica e aditiva. Qualquer alteração no classificador/heurística pode regredir o padrão aprovado.
 
+## Guard pós-update obrigatório
+Este patch não pode ficar apenas como arquivo em `/root/mgs-agent/patches/hermes/discord-thread-title-author-suffix.patch`. Para sobreviver a updates Hermes, ele deve entrar na lista canônica de patches/invariantes de:
+- `/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh`
+- `/root/mgs-agent/scripts/run-hermes-update-controlled.sh` (`canonical_patches` do precheck em worktree)
+
+Invariantes mínimos além do `py_compile`:
+- `adapter.py` contém `_first_name_for_thread_title` e `_append_thread_author_suffix`.
+- `adapter.py::_auto_create_thread(...)` chama `_append_thread_author_suffix(...)` depois de `_auto_thread_name_from_message(...)`.
+- `run.py` contém `_first_name_for_discord_thread_title` e `_append_discord_thread_author_suffix`.
+- `run.py::_rename_discord_thread_for_session_title(...)` chama `_append_discord_thread_author_suffix(title, source)` antes de `channel.edit(...)`.
+- `git apply --reverse --check discord-thread-title-author-suffix.patch` deve passar no runtime vivo; se `git apply --check` passa, o patch está AUSENTE e reaplicável.
+
+Pitfall validado: em update Hermes recente, o patch do sufixo existia e aplicava limpo, mas não estava no guard canônico. O relatório pós-update marcou os patches antigos como OK e a função `Título - PrimeiroNome` sumiu do runtime. Todo ajuste novo de título Discord deve atualizar procedimento + guard no mesmo ato.
+
 ## Restart
 Restart de Zeus/Atena/Ares/Hera deve seguir o contrato seguro MGS: finalizer externo via `/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh`, Zeus por último, sem polling foreground na thread ativa.
