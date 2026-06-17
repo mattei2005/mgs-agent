@@ -1,6 +1,8 @@
+diff --git a/gateway/run.py b/gateway/run.py
+index db865ff5c..436665f09 100644
 --- a/gateway/run.py
 +++ b/gateway/run.py
-@@ -83,6 +83,11 @@ _MOBILE_CHAT_NOISY_STATUS_RE = re.compile(
+@@ -83,6 +83,12 @@ _MOBILE_CHAT_NOISY_STATUS_RE = re.compile(
      r"|no\s+first\s+byte\s+from\s+provider\s+in\s+\d"
      r"|max\s+retries\s+\(\d+\).*(?:trying\s+fallback|exhausted|invalid\s+responses)"
      r"|stream\s+(?:drop|drop\s+mid\s+tool-call).+retry\s+\d"
@@ -13,13 +15,15 @@
      r"|stale\s+connections\s+from\s+a\s+previous\s+provider\s+issue"
      r")",
      re.IGNORECASE | re.DOTALL,
-@@ -1974,6 +1974,7 @@ def _normalize_empty_agent_response(
+@@ -1971,6 +1982,7 @@ def _normalize_empty_agent_response(
      response: str,
      *,
      history_len: int = 0,
 +    platform: Any = None,
  ) -> str:
-@@ -2009,7 +2010,14 @@ def _normalize_empty_agent_response(
+     """Normalize empty/None agent responses into user-facing messages.
+ 
+@@ -2003,7 +2015,14 @@ def _normalize_empty_agent_response(
      if api_calls > 0 and not agent_result.get("interrupted"):
          if agent_result.get("partial"):
              err = agent_result.get("error", "processing incomplete")
@@ -32,17 +36,26 @@
 +                logger.info("Suppressing Discord Codex incomplete terminal notice")
 +                return ""
 +            return f"⚠️ Processing stopped: {err_text[:200]}. Try again."
-@@ -9032,7 +9040,7 @@ class GatewayRunner(...):
+         return (
+             "⚠️ Processing completed but no response was generated. "
+             "This may be a transient error — try sending your message again."
+@@ -9025,7 +9044,7 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+             # the case where agent did work but returned no text. Fix for #18765.
              if not _intentional_silence:
                  response = _normalize_empty_agent_response(
 -                    agent_result, response, history_len=len(history),
 +                    agent_result, response, history_len=len(history), platform=source.platform,
                  )
+                 response = _sanitize_gateway_final_response(source.platform, response)
+ 
+diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
+index 1d9892677..3b0bec92f 100644
 --- a/plugins/platforms/discord/adapter.py
 +++ b/plugins/platforms/discord/adapter.py
-@@ -38,6 +38,78 @@
+@@ -38,6 +38,78 @@ _DISCORD_COMMAND_SYNC_MAX_RATE_LIMIT_SLEEP_SECONDS = 30.0
+ # at or below this limit at registration time.
  _DISCORD_MAX_APP_COMMANDS = 100
-+
+ 
 +_DISCORD_BOT_LOOP_NOISE_MARKERS = frozenset({
 +    "sem acao pendente",
 +    "sem ação pendente",
@@ -84,13 +97,22 @@
 +
 +
 +def _is_discord_bot_loop_noise(message: Any, client_user: Any = None) -> bool:
-+    """Return True for low-information bot messages that can cause bot loops."""
++    """Return True for low-information bot messages that can cause bot loops.
++
++    DISCORD_ALLOW_BOTS=mentions is needed for explicit cross-agent handoffs, but
++    once a task is complete a mentioned bot may emit acknowledgements/status
++    chatter ("Sem ação pendente", 👍, retry notices). Those messages should stay
++    visible in Discord/logs, but must not wake another MGS bot and create a
++    ping-pong loop. Keep the filter narrow: never suppress messages with
++    attachments/embeds or substantive text.
++    """
 +    if not getattr(getattr(message, "author", None), "bot", False):
 +        return False
 +    if getattr(message, "attachments", None):
 +        return False
 +    if getattr(message, "embeds", None):
 +        return False
++
 +    text = str(getattr(message, "content", "") or "").strip()
 +    if not text:
 +        return False
@@ -105,11 +127,12 @@
 +    if normalized.startswith(_DISCORD_BOT_LOOP_NOISE_PREFIXES):
 +        return True
 +    return False
-@@ -905,6 +985,14 @@
-                 if getattr(message.author, "bot", False):
-                     _bot_content = (message.content or "").strip()
-                     if _bot_content.startswith((
-@@
++
+ try:
+     import discord
+     from discord import Message as DiscordMessage, Intents
+@@ -916,6 +988,14 @@ class DiscordAdapter(BasePlatformAdapter):
+                             getattr(message.channel, "id", None),
                          )
                          return
 +                    if _is_discord_bot_loop_noise(message, getattr(self._client, "user", None)):
@@ -121,3 +144,147 @@
 +                        )
 +                        return
                      allow_bots = os.getenv("DISCORD_ALLOW_BOTS", "none").lower().strip()
+                     if allow_bots == "none":
+                         return
+diff --git a/tests/gateway/test_discord_bot_filter.py b/tests/gateway/test_discord_bot_filter.py
+index 90dc9f8de..f4e54458b 100644
+--- a/tests/gateway/test_discord_bot_filter.py
++++ b/tests/gateway/test_discord_bot_filter.py
+@@ -2,7 +2,9 @@
+ 
+ import os
+ import unittest
+-from unittest.mock import MagicMock
++from unittest.mock import MagicMock, patch
++
++from plugins.platforms.discord.adapter import _is_discord_bot_loop_noise
+ 
+ 
+ def _make_author(*, bot: bool = False, is_self: bool = False):
+@@ -21,6 +23,7 @@ def _make_message(*, author=None, content="hello", mentions=None, is_dm=False):
+     msg.author = author or _make_author()
+     msg.content = content
+     msg.attachments = []
++    msg.embeds = []
+     msg.mentions = mentions or []
+     if is_dm:
+         import discord
+@@ -47,6 +50,8 @@ class TestDiscordBotFilter(unittest.TestCase):
+             return False  # own messages always ignored
+ 
+         if getattr(message.author, "bot", False):
++            if _is_discord_bot_loop_noise(message, client_user):
++                return False
+             allow = allow_bots.lower().strip()
+             if allow == "none":
+                 return False
+@@ -99,8 +104,9 @@ class TestDiscordBotFilter(unittest.TestCase):
+ 
+     def test_default_is_none(self):
+         """Default behavior (no env var) should be 'none'."""
+-        default = os.getenv("DISCORD_ALLOW_BOTS", "none")
+-        self.assertEqual(default, "none")
++        with patch.dict(os.environ, {}, clear=True):
++            default = os.getenv("DISCORD_ALLOW_BOTS", "none")
++            self.assertEqual(default, "none")
+ 
+     def test_case_insensitive(self):
+         """Allow_bots value should be case-insensitive."""
+@@ -111,6 +117,41 @@ class TestDiscordBotFilter(unittest.TestCase):
+         self.assertFalse(self._run_filter(msg, "NONE"))
+         self.assertFalse(self._run_filter(msg, "None"))
+ 
++    def test_allow_bots_mentions_rejects_loop_noise_even_with_mention(self):
++        """Mention-gated bot handoff must not wake agents for no-action chatter."""
++        our_user = _make_author(is_self=True)
++        bot = _make_author(bot=True)
++        for content in (
++            "<@99999> Sem ação pendente.",
++            "<@99999> Silêncio operacional.",
++            "<@99999> 👍",
++            "<@99999> ⚠️ Empty response from model — retrying (1/3)",
++            "<@99999> ❌ Model returned no content after all retries. No fallback providers configured.",
++            "<@99999> Codex response remained incomplete after 3 continuation attempts",
++        ):
++            with self.subTest(content=content):
++                msg = _make_message(author=bot, content=content, mentions=[our_user])
++                self.assertFalse(self._run_filter(msg, "mentions", our_user))
++
++    def test_allow_bots_mentions_keeps_substantive_handoff(self):
++        """Substantive bot-to-bot instructions still pass when explicitly mentioned."""
++        our_user = _make_author(is_self=True)
++        bot = _make_author(bot=True)
++        msg = _make_message(
++            author=bot,
++            content="<@99999> por favor validar o arquivo no Drive e reportar o destino final",
++            mentions=[our_user],
++        )
++        self.assertTrue(self._run_filter(msg, "mentions", our_user))
++
++    def test_loop_noise_with_attachment_is_not_suppressed_by_noise_filter(self):
++        """Attachments/embeds may carry real payloads; do not suppress them here."""
++        our_user = _make_author(is_self=True)
++        bot = _make_author(bot=True)
++        msg = _make_message(author=bot, content="<@99999> Sem ação pendente.", mentions=[our_user])
++        msg.attachments = [MagicMock()]
++        self.assertTrue(self._run_filter(msg, "mentions", our_user))
++
+ 
+ if __name__ == "__main__":
+     unittest.main()
+diff --git a/tests/gateway/test_telegram_noise_filter.py b/tests/gateway/test_telegram_noise_filter.py
+index b5cbf820b..3d7c3c288 100644
+--- a/tests/gateway/test_telegram_noise_filter.py
++++ b/tests/gateway/test_telegram_noise_filter.py
+@@ -2,6 +2,7 @@
+ 
+ from gateway.config import Platform
+ from gateway.run import (
++    _normalize_empty_agent_response,
+     _prepare_gateway_status_message,
+     _sanitize_gateway_final_response,
+ )
+@@ -23,14 +24,40 @@ def test_telegram_status_suppresses_auxiliary_and_retry_noise():
+         assert _prepare_gateway_status_message(Platform.TELEGRAM, "warn", message) is None
+ 
+ 
+-def test_non_telegram_status_is_unchanged():
+-    """The Telegram quieting policy must not hide CLI/Discord diagnostics."""
++def test_mobile_chat_status_noise_is_filtered_but_local_is_unchanged():
++    """Mobile chat status noise should stay out of Telegram/Discord, not local logs."""
+     message = "⏳ Retrying in 4.2s (attempt 1/3)..."
+ 
+-    assert _prepare_gateway_status_message(Platform.DISCORD, "lifecycle", message) == message
++    assert _prepare_gateway_status_message(Platform.DISCORD, "lifecycle", message) is None
+     assert _prepare_gateway_status_message("local", "lifecycle", message) == message
+ 
+ 
++def test_discord_status_suppresses_codex_empty_and_incomplete_noise():
++    """Codex retry/incomplete notices are internal diagnostics, not Discord replies."""
++    noisy_messages = [
++        "⚠️ Empty response from model — retrying (1/3)",
++        "❌ Model returned no content after all retries. No fallback providers configured.",
++        "Codex response remained incomplete after 3 continuation attempts",
++        "⚠️ Processing stopped: Codex response remained incomplete after 3 continuation attempts. Try again.",
++    ]
++    for message in noisy_messages:
++        assert _prepare_gateway_status_message(Platform.DISCORD, "warn", message) is None
++
++
++def test_discord_final_response_suppresses_codex_incomplete_terminal_notice():
++    """A partial Codex continuation failure should not become a loop-triggering Discord post."""
++    result = {
++        "api_calls": 1,
++        "partial": True,
++        "error": "Codex response remained incomplete after 3 continuation attempts",
++    }
++
++    assert _normalize_empty_agent_response(result, "", platform=Platform.DISCORD) == ""
++    assert "Processing stopped" in _normalize_empty_agent_response(
++        result, "", platform=Platform.TELEGRAM
++    )
++
++
+ def test_telegram_status_sanitizes_raw_provider_security_errors():
+     """Provider policy/security bodies should be replaced before chat delivery."""
+     raw = (
