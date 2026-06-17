@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-17T15:46:19-04:00",
+    "updated_at": "2026-06-17T15:52:24-04:00",
     "generated_by": "zeus"
   },
   "systemd_services": [
@@ -578,9 +578,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
-      "size_bytes": 16328,
-      "modified_at": "2026-06-17T15:45:19-04:00",
-      "sha256": "3fc453648fbbca7a45968b97b212870a7df3061b8079ce9908d9e4af61216b3f"
+      "size_bytes": 16702,
+      "modified_at": "2026-06-17T15:51:17-04:00",
+      "sha256": "2a1efe91d26e15866715195cd0dc873799c5f90974f08c359bff684180293575"
     },
     {
       "path": "/root/.hermes/profiles/ares/scripts/ares-meta-intraday-cron.sh",

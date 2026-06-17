@@ -100,6 +100,16 @@ def fmt_account_title(account_name: str, tz: ZoneInfo, label: str) -> str:
     return f'{account_name} — {now.strftime("%Y-%m-%d")} — {now.strftime("%H:%M %Z")} — {label}'
 
 
+def rule_display(rule: dict) -> str:
+    rid = str(rule.get('id') or '').upper()
+    desc = str(rule.get('description') or '').strip()
+    if rid and desc:
+        # Keep Discord table readable but preserve the R-number explicitly.
+        short = desc.split('=>', 1)[0].strip()
+        return f'{rid} — {short}'
+    return rid or 'não identificada'
+
+
 def cmp_value(actual, op: str, expected) -> bool:
     if actual is None:
         return False
@@ -290,7 +300,7 @@ def run_intraday(args) -> int:
                     event['candidates'].append({
                         'pg_id': page_id_from_name(campaign_name),
                         'country_vertical': country_vertical_from_name(campaign_name, op_cfg),
-                        'rule': rule.get('id'),
+                        'rule': rule_display(rule),
                         'status': campaign.get('effective_status'),
                         'action': rule.get('action'),
                         'campaign_id': cid,
@@ -347,7 +357,7 @@ def run_reactivate_all(args) -> int:
             event['candidates'].append({
                 'pg_id': page_id_from_name(campaign_name),
                 'country_vertical': country_vertical_from_name(campaign_name, op_cfg),
-                'rule': 'reativar-todas',
+                'rule': 'reativar-todas — fora R1-R5',
                 'status': campaign.get('effective_status'),
                 'action': 'reactivate_campaign',
                 'campaign_id': campaign.get('id'),
