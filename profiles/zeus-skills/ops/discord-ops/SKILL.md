@@ -475,6 +475,10 @@ Política correta tem dois estágios:
 1. **Thread nova auto-criada pelo bot:** pode nascer com título provisório/determinístico e receber **um único rename semântico pós-primeira resposta** estilo ChatGPT, quando o título LLM ficar disponível.
 2. **Thread já aberta/renomeada:** deve manter o nome até ser finalizada. Não renomear por follow-up, pausa longa, session reset, reply curto, pergunta nova dentro da mesma thread ou novo auto-title interno da sessão Hermes.
 
+#### Sufixo do autor sem alterar o padrão aprovado
+
+Quando Rodolfo pedir para acrescentar o nome de quem abriu a thread, preservar 100% da lógica de título existente e aplicar apenas um pós-processamento final: `Título Base - PrimeiroNome`. Não mexer em heurística, prompt, idioma, tamanho-alvo, guardrails, nem regra de thread antiga. O sufixo deve usar só o primeiro nome humano (`display_name`/`source.user_name`), sem ID/mention/sobrenome, truncando somente a base se necessário para respeitar o limite de 100 caracteres do Discord. Detalhe e checklist: `references/discord-thread-title-author-suffix-2026-06-17.md`.
+
 #### Pitfall validado: duplicata de função sobrescrevendo trava segura
 
 Ao corrigir rename de thread em `/root/.hermes/hermes-agent/gateway/run.py`, não validar só a presença de `_discord_thread_safe_to_autorename(...)`. Python usa a **última definição** de um método dentro da classe; se houver uma segunda `_rename_discord_thread_for_session_title(...)` abaixo da versão segura, ela sobrescreve a primeira e pode ignorar a trava.
