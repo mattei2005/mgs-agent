@@ -1,0 +1,86 @@
+--- a/plugins/platforms/discord/adapter.py
++++ b/plugins/platforms/discord/adapter.py
+@@ -4599,6 +4599,29 @@
+             self._auto_thread_initial_titles = titles
+         titles[thread_id] = thread_name
+ 
++    def _first_name_for_thread_title(self, display_name: Any) -> str:
++        """Return the short first-name suffix for MGS Discord thread titles."""
++        name = re.sub(r"\s+", " ", str(display_name or "")).strip(" \t\n\r:;,.!?—-–")
++        if not name:
++            return ""
++        token = re.split(r"[\s@#|/\\]+", name, maxsplit=1)[0]
++        token = re.sub(r"[^0-9A-Za-zÀ-ÖØ-öø-ÿ_-]", "", token).strip("_-.")
++        return token[:24]
++
++    def _append_thread_author_suffix(self, title: str, display_name: Any) -> str:
++        """Append ` - FirstName` without changing the base title logic."""
++        base = re.sub(r"\s+", " ", str(title or "")).strip(" \t\n\r:;,.!?—-–") or "Assunto da Thread"
++        first_name = self._first_name_for_thread_title(display_name)
++        if not first_name:
++            return base[:90].rstrip(" \t\n\r:;,.!?—-–") or "Assunto da Thread"
++        suffix = f" - {first_name}"
++        if base.endswith(suffix):
++            return base
++        max_base = max(1, 100 - len(suffix))
++        if len(base) > max_base:
++            base = base[:max_base].rstrip(" \t\n\r:;,.!?—-–")
++        return f"{base}{suffix}"
++
+     def _auto_thread_name_from_message(self, content: str) -> str:
+         """Return a deterministic, descriptive Discord auto-thread title.
+ 
+@@ -4733,7 +4756,11 @@
+         Returns the created thread object, or ``None`` on failure.
+         """
+         content = (message.content or "").strip()
+-        thread_name = self._auto_thread_name_from_message(content)
++        base_thread_name = self._auto_thread_name_from_message(content)
++        thread_name = self._append_thread_author_suffix(
++            base_thread_name,
++            getattr(getattr(message, "author", None), "display_name", None),
++        )
+ 
+         try:
+             thread = await message.create_thread(name=thread_name, auto_archive_duration=1440)
+--- a/gateway/run.py
++++ b/gateway/run.py
+@@ -10946,6 +10946,29 @@
+         text = re.sub(r"^\[[^\]\n]{1,100}\]\s*", "", text).strip()
+         return text or str(message or "").strip()
+ 
++    def _first_name_for_discord_thread_title(self, display_name: str) -> str:
++        """Return the short first-name suffix for MGS Discord thread titles."""
++        name = re.sub(r"\s+", " ", str(display_name or "")).strip(" \t\n\r:;,.!?—-–")
++        if not name:
++            return ""
++        token = re.split(r"[\s@#|/\\]+", name, maxsplit=1)[0]
++        token = re.sub(r"[^0-9A-Za-zÀ-ÖØ-öø-ÿ_-]", "", token).strip("_-.")
++        return token[:24]
++
++    def _append_discord_thread_author_suffix(self, title: str, source: SessionSource) -> str:
++        """Append ` - FirstName` to the chosen title without changing base naming."""
++        base = self._sanitize_discord_thread_title(title)
++        first_name = self._first_name_for_discord_thread_title(getattr(source, "user_name", "") or "")
++        if not first_name:
++            return base
++        suffix = f" - {first_name}"
++        if base.endswith(suffix):
++            return base
++        max_base = max(1, 100 - len(suffix))
++        if len(base) > max_base:
++            base = base[:max_base].rstrip(" \t\n\r:;,.!?—-–")
++        return f"{base}{suffix}"
++
+     async def _discord_thread_safe_to_autorename(
+         self,
+         source: SessionSource,
+@@ -11047,7 +11070,7 @@
+         thread_id = str(source.thread_id or source.chat_id or "").strip()
+         if not thread_id:
+             return
+-        thread_name = self._sanitize_discord_thread_title(title)
++        thread_name = self._append_discord_thread_author_suffix(title, source)
+         try:
+             channel = client.get_channel(int(thread_id))
+             if channel is None:
