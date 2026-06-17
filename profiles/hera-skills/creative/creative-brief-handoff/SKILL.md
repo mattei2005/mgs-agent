@@ -477,11 +477,39 @@ CTA:
 
 Só entregue handoff para Ares quando Ares participar e houver material suficiente para campanha ou teste. Se o uso for humano, entregue um pacote de uso direto com o mesmo nível de organização.
 
+### Regra de handoff único Hera → Ares
+
+Quando houver upload de criativo novo para tratamento pelo Ares, a Hera deve validar antes de mencionar Ares. A menção ao Ares acontece **uma única vez** por upload válido; depois do handoff, não mencionar Ares para confirmações, status, “ok”, “recebido”, “sem pendência” ou mensagens de acompanhamento. Ares só deve voltar a responder Hera se Rodolfo pedir explicitamente.
+
+Campos obrigatórios para upload válido:
+
+```text
+Campo       Regra
+──────────  ─────────────────────────────────────────────
+País        Obrigatório. Ex.: US, CA, MX, BR.
+Vertical    Obrigatório. Ex.: CC, CAR, EMP, JOB, APP, GAME.
+Língua      Obrigatório. Ex.: EN, ES, FR, PT.
+Anexo       Obrigatório. Imagem/vídeo enviado no Discord.
+```
+
+Formatos aceitos do remetente:
+
+```text
+Completo    País: US / Vertical: CC / Língua: ES / [anexo]
+Curto       US | CC | ES / [anexo]
+```
+
+Se faltar país, vertical, língua ou anexo, pedir correção ao remetente antes de processar; não inventar esses campos e não mencionar Ares. Handoff válido deve conter no mínimo: país, vertical, língua, origem/remetente e link/contexto do anexo.
+
 Pacote mínimo:
 
 ```text
 Asset/link:
 Formato:
+País:
+Vertical:
+Língua:
+Origem/remetente:
 Site/projeto:
 Objetivo da campanha:
 Ângulo criativo:
