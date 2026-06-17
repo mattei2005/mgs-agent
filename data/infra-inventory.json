@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-17T18:01:05-04:00",
+    "updated_at": "2026-06-17T18:05:22-04:00",
     "generated_by": "zeus"
   },
   "systemd_services": [
@@ -310,6 +310,21 @@
       "path": "/root/mgs-agent/scripts/finalize-zeus-restart-post-update-20260609.sh",
       "size_bytes": 2598,
       "modified_at": "2026-06-09T09:29:31-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/hera-youtube-reference-download.sh",
+      "size_bytes": 1730,
+      "sha256": "8e8a33a574c022983dce12b536de90fe71729e97de21409e824754f8ab8aef98",
+      "modified_at": "2026-06-17T18:04:28-04:00",
+      "owner": "hera",
+      "purpose": "Download/analyze YouTube reference videos using private Hera cookies file; fails closed when cookies are absent",
+      "validated_at": "2026-06-17T18:05:22-04:00",
+      "validations": [
+        "bash -n OK",
+        "mode executable",
+        "uvx/ffmpeg/ffprobe present",
+        "no-cookie execution exits 3 with safe expected-path message"
+      ]
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-mgs-patch-watchdog.sh",
