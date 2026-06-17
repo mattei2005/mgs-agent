@@ -1,0 +1,339 @@
+{
+  "generated_at_utc": "2026-06-17T03:59:58.411975+00:00",
+  "account_id": "1356770869843984",
+  "period": {
+    "since": "2026-06-01",
+    "until": "2026-06-17",
+    "timezone": "Europe/Madrid",
+    "note": "current month to date; Meta time_range inclusive"
+  },
+  "token_report": {
+    "item": "Token Meta API",
+    "field": "credential",
+    "len": 293
+  },
+  "checks": [
+    {
+      "name": "insights_campaign_month_summary",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/month-analysis-1356770869843984-20260617T035954Z/insights_campaign_month_summary.json",
+      "count": 15,
+      "paging_present": true
+    },
+    {
+      "name": "insights_campaign_month_daily",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/month-analysis-1356770869843984-20260617T035954Z/insights_campaign_month_daily.json",
+      "count": 142,
+      "paging_present": true
+    },
+    {
+      "name": "campaigns_light",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/month-analysis-1356770869843984-20260617T035954Z/campaigns_light.json",
+      "count": 15,
+      "paging_present": true
+    },
+    {
+      "name": "adsets_light",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/month-analysis-1356770869843984-20260617T035954Z/adsets_light.json",
+      "count": 30,
+      "paging_present": true
+    },
+    {
+      "name": "account",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/month-analysis-1356770869843984-20260617T035954Z/account.json"
+    }
+  ],
+  "fx": {
+    "ok": true,
+    "usd_cad": 1.399083,
+    "source": "open.er-api.com latest/USD",
+    "time_last_update_utc": "Wed, 17 Jun 2026 00:02:31 +0000"
+  },
+  "stats": {
+    "all_daily_spend_positive_rows": 85,
+    "active_daily_spend_positive_rows": 35,
+    "zero_sub_spend_usd_pct_all": {},
+    "zero_sub_spend_usd_pct_active": {},
+    "cps_usd_pct_all": {
+      "25": 1.6111,
+      "50": 2.2504,
+      "60": 2.8862,
+      "70": 24.347,
+      "75": 37.7967,
+      "80": 43.15,
+      "90": 63.904
+    },
+    "cps_usd_pct_active": {
+      "25": 2.2629,
+      "50": 24.9325,
+      "60": 39.51,
+      "70": 46.27,
+      "75": 58.6025,
+      "80": 73.898,
+      "90": 101.744
+    },
+    "spend_positive_sub_daily_usd_pct": {
+      "25": 45.12,
+      "50": 56.4,
+      "75": 84.16,
+      "90": 104.714
+    },
+    "m0_positive_rows": 30,
+    "m0_zero_spend_rows": 55
+  },
+  "campaign_perf": [
+    {
+      "campaign_id": "120248290564270604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 3",
+      "status": "ACTIVE",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 601.96,
+      "subs": 7.0,
+      "subs_source": "onsite_conversion.messaging_conversation_started_7d",
+      "cps_usd": 85.99,
+      "m0": 14.0,
+      "cpm0_usd": 43.0,
+      "cpm_usd": 15.27,
+      "impressions": 39423
+    },
+    {
+      "campaign_id": "120248290297180604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 1",
+      "status": "ACTIVE",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 598.77,
+      "subs": 7.0,
+      "subs_source": "onsite_conversion.messaging_conversation_started_7d",
+      "cps_usd": 85.54,
+      "m0": 15.0,
+      "cpm0_usd": 39.92,
+      "cpm_usd": 15.31,
+      "impressions": 39122
+    },
+    {
+      "campaign_id": "120248290564430604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 4",
+      "status": "ACTIVE",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 567.78,
+      "subs": 5.0,
+      "subs_source": "onsite_conversion.messaging_conversation_started_7d",
+      "cps_usd": 113.56,
+      "m0": 11.0,
+      "cpm0_usd": 51.62,
+      "cpm_usd": 14.93,
+      "impressions": 38032
+    },
+    {
+      "campaign_id": "120248290564290604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 5",
+      "status": "ACTIVE",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 542.52,
+      "subs": 11.0,
+      "subs_source": "onsite_conversion.messaging_conversation_started_7d",
+      "cps_usd": 49.32,
+      "m0": 22.0,
+      "cpm0_usd": 24.66,
+      "cpm_usd": 16.69,
+      "impressions": 32514
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "status": "ACTIVE",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 518.53,
+      "subs": 5.0,
+      "subs_source": "onsite_conversion.messaging_conversation_started_7d",
+      "cps_usd": 103.71,
+      "m0": 10.0,
+      "cpm0_usd": 51.85,
+      "cpm_usd": 15.43,
+      "impressions": 33613
+    },
+    {
+      "campaign_id": "120247501687800604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 5",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 498.1,
+      "subs": 5.0,
+      "subs_source": "onsite_conversion.messaging_conversation_started_7d",
+      "cps_usd": 99.62,
+      "m0": 10.0,
+      "cpm0_usd": 49.81,
+      "cpm_usd": 12.88,
+      "impressions": 38669
+    },
+    {
+      "campaign_id": "120247501687530604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 2",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 487.51,
+      "subs": 2.0,
+      "subs_source": "onsite_conversion.messaging_conversation_started_7d",
+      "cps_usd": 243.75,
+      "m0": 4.0,
+      "cpm0_usd": 121.88,
+      "cpm_usd": 11.31,
+      "impressions": 43088
+    },
+    {
+      "campaign_id": "120247501679760604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 1",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 481.94,
+      "subs": 4.0,
+      "subs_source": "onsite_conversion.messaging_conversation_started_7d",
+      "cps_usd": 120.48,
+      "m0": 8.0,
+      "cpm0_usd": 60.24,
+      "cpm_usd": 12.03,
+      "impressions": 40053
+    },
+    {
+      "campaign_id": "120247501687790604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 4",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 457.52,
+      "subs": 4.0,
+      "subs_source": "onsite_conversion.messaging_conversation_started_7d",
+      "cps_usd": 114.38,
+      "m0": 8.0,
+      "cpm0_usd": 57.19,
+      "cpm_usd": 15.0,
+      "impressions": 30498
+    },
+    {
+      "campaign_id": "120247501687810604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 3",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 446.28,
+      "subs": 2.0,
+      "subs_source": "onsite_conversion.messaging_conversation_started_7d",
+      "cps_usd": 223.14,
+      "m0": 4.0,
+      "cpm0_usd": 111.57,
+      "cpm_usd": 13.29,
+      "impressions": 33569
+    },
+    {
+      "campaign_id": "120246399685010604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 2",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 22.97,
+      "subs": 30.0,
+      "subs_source": "complete_registration",
+      "cps_usd": 0.77,
+      "m0": 0,
+      "cpm0_usd": null,
+      "cpm_usd": 9.82,
+      "impressions": 2339
+    },
+    {
+      "campaign_id": "120246399685000604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 4",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 22.92,
+      "subs": 22.0,
+      "subs_source": "complete_registration",
+      "cps_usd": 1.04,
+      "m0": 0,
+      "cpm0_usd": null,
+      "cpm_usd": 11.47,
+      "impressions": 1999
+    },
+    {
+      "campaign_id": "120246398703950604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 1",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 21.46,
+      "subs": 25.0,
+      "subs_source": "complete_registration",
+      "cps_usd": 0.86,
+      "m0": 0,
+      "cpm0_usd": null,
+      "cpm_usd": 10.43,
+      "impressions": 2058
+    },
+    {
+      "campaign_id": "120246399684980604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 5",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 20.74,
+      "subs": 18.0,
+      "subs_source": "complete_registration",
+      "cps_usd": 1.15,
+      "m0": 0,
+      "cpm0_usd": null,
+      "cpm_usd": 9.82,
+      "impressions": 2113
+    },
+    {
+      "campaign_id": "120246399684990604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 3",
+      "status": "PAUSED",
+      "bid_strategy": "UNKNOWN",
+      "spend_usd": 20.4,
+      "subs": 29.0,
+      "subs_source": "complete_registration",
+      "cps_usd": 0.7,
+      "m0": 0,
+      "cpm0_usd": null,
+      "cpm_usd": 10.3,
+      "impressions": 1980
+    }
+  ],
+  "recommendations": {
+    "usd": {
+      "R1_spend_gt_if_M0_eq_0": 5.0,
+      "R2_CPM0_gt_if_M0_gt_0": 4.5,
+      "R3_spend_gt_if_subs_eq_0": 4.0,
+      "R4_LOWEST_COST_CPS_gte": 2.0,
+      "R4_spend_gte": 4.0,
+      "R5_reactivate_CPS_lt": 1.5,
+      "R5_reactivate_subs_gte": 2
+    },
+    "cad": {
+      "R1_spend_gt_if_M0_eq_0": 7.0,
+      "R2_CPM0_gt_if_M0_gt_0": 6.3,
+      "R3_spend_gt_if_subs_eq_0": 5.6,
+      "R4_LOWEST_COST_CPS_gte": 2.8,
+      "R4_spend_gte": 5.6,
+      "R5_reactivate_CPS_lt": 2.1,
+      "R5_reactivate_subs_gte": 2.8
+    },
+    "rationale": "Thresholds are based on month-to-date distributions, active campaign CPS, and desire to cut losers earlier while preserving campaigns that show subs. M0/CPM0 uses provisional message-start mapping pending explicit confirmation."
+  },
+  "metric_assumptions": {
+    "subs_priority": [
+      "onsite_conversion.messaging_conversation_started_7d",
+      "onsite_conversion.total_messaging_connection",
+      "complete_registration",
+      "offsite_complete_registration_add_meta_leads",
+      "lead",
+      "offsite_conversion.fb_pixel_lead"
+    ],
+    "M0_provisional": "onsite_conversion.messaging_conversation_started_7d + onsite_conversion.total_messaging_connection",
+    "CPM0_provisional": "spend / M0"
+  },
+  "raw_audit_dir": "/root/mgs-agent/data/ares/meta-ads/audit/month-analysis-1356770869843984-20260617T035954Z"
+}
