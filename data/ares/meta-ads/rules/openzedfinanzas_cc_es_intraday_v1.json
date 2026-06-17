@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "ruleset": "openzedfinanzas_cc_es_intraday_v1",
   "operation_id": "OpenzedFinanzas-CC-ES",
   "mode": "dry_run_until_write_approved",
@@ -35,7 +35,8 @@
         "TEST_grace_3_days",
         "reactivate_exclusion_list"
       ],
-      "notes": "Default inicial informado por Rodolfo; validar mapping de M0 na conta antes de write."
+      "notes": "Default inicial informado por Rodolfo; validar mapping de M0 na conta antes de write.",
+      "id": "R1"
     },
     {
       "enabled": true,
@@ -68,13 +69,14 @@
         "TEST_grace_3_days",
         "reactivate_exclusion_list"
       ],
-      "notes": "Default inicial informado por Rodolfo; validar mapping de M0/CPM0 antes de write."
+      "notes": "Default inicial informado por Rodolfo; validar mapping de M0/CPM0 antes de write.",
+      "id": "R2"
     },
     {
       "enabled": true,
       "status": "defined_preliminary",
       "description": "Subs = 0 and spend > CAD 5.00 => pause campaign",
-      "metric_source": "meta_insights_or_mapped_external_metric",
+      "metric_source": "meta_insights_actions_priority_mapping",
       "metric_name": [
         "Subs",
         "spend"
@@ -101,13 +103,14 @@
         "TEST_grace_3_days",
         "reactivate_exclusion_list"
       ],
-      "notes": "Default inicial informado por Rodolfo; validar subscriber real antes de write."
+      "notes": "Default inicial informado por Rodolfo; validar subscriber real antes de write.",
+      "id": "R3"
     },
     {
       "enabled": true,
       "status": "defined_preliminary",
       "description": "LOWEST_COST with CPS >= CAD 2.55, subs >= 1 and spend >= CAD 5.00 => pause campaign",
-      "metric_source": "meta_insights_or_mapped_external_metric",
+      "metric_source": "meta_insights_actions_priority_mapping",
       "metric_name": [
         "bid_strategy",
         "CPS",
@@ -148,13 +151,14 @@
         "reactivate_exclusion_list",
         "COST_CAP_no_CPS_pause"
       ],
-      "notes": "COST_CAP excluído de pausa por CPS."
+      "notes": "COST_CAP excluído de pausa por CPS. CPS calculado como spend/subs; se subs=0, CPS fica nulo/não comparável.",
+      "id": "R4"
     },
     {
       "enabled": true,
       "status": "defined_preliminary",
       "description": "Paused campaign with CPS < CAD 2.40 and subs >= 2 => reactivate campaign",
-      "metric_source": "meta_insights_or_mapped_external_metric",
+      "metric_source": "meta_insights_actions_priority_mapping",
       "metric_name": [
         "effective_status",
         "CPS",
@@ -187,7 +191,8 @@
         "TEST_grace_3_days",
         "reactivate_exclusion_list"
       ],
-      "notes": "Reativação seletiva por performance, separada do reativar-todas 00:30."
+      "notes": "Reativação seletiva por performance, separada do reativar-todas 00:30. CPS calculado como spend/subs; se subs=0, CPS fica nulo/não comparável.",
+      "id": "R5"
     }
   ],
   "reactivate_all": {
@@ -198,8 +203,8 @@
     "exclusion_list": [],
     "ask_before_adding_exclusion": true
   },
-  "rules_definition_status": "R1_R5_defined_by_Rodolfo_preliminary_pending_account_calibration",
-  "next_action": "map_Meta_fields_for_M0_CPM0_Subs_CPS_and_run_dry_run_before_write",
+  "rules_definition_status": "R1_R5_defined_subs_CPS_mapped_M0_CPM0_pending",
+  "next_action": "define_or_discover_M0_CPM0_then_run_data_dry_run_before_write",
   "threshold_currency": "CAD",
   "calibration_policy": "Thresholds are initial defaults; adjust after account/ad-account analysis before controlled write.",
   "global_exceptions": [
@@ -224,5 +229,19 @@
       "effect": "do_not_pause_by_CPS_rules",
       "rationale": "Bid cap controls cost."
     }
-  ]
+  ],
+  "metric_mapping": {
+    "mapping_id": "openzedfinanzas_cc_es_metrics_v1",
+    "mapping_path": "/root/mgs-agent/data/ares/meta-ads/metrics/openzedfinanzas_cc_es_metrics_v1.json",
+    "subs_action_priority": [
+      "onsite_conversion.messaging_conversation_started_7d",
+      "onsite_conversion.total_messaging_connection",
+      "complete_registration",
+      "offsite_complete_registration_add_meta_leads",
+      "lead",
+      "offsite_conversion.fb_pixel_lead"
+    ],
+    "CPS_formula": "spend / subs",
+    "CPS_division_by_zero_policy": "null_not_comparable"
+  }
 }
