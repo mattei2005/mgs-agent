@@ -347,6 +347,37 @@ hermes -p hera -t image_gen -z "Teste interno: use image_generate para gerar uma
 
 Só reportar sucesso depois de verificar arquivo gerado/dimensões. Não pedir `OPENAI_API_KEY` se o provider `openai-codex` de imagem estiver disponível e o profile já tiver OAuth Codex válido. Detalhes e pitfalls: `references/hermes-image-gen-openai-codex-mgs.md`.
 
+## 4.1 xAI/Grok Imagine rollout for image, video, and avatars
+
+Use when Rodolfo wants Grok/xAI used for Creative Ops, especially image/video/avatar generation across MGS.
+
+Key operational rule: **SuperGrok subscription is not enough by itself**. Hermes must have usable xAI credentials in the profile/gateway context: either xAI Grok OAuth (`xai-oauth`, via `hermes model` / `hermes auth add xai-oauth`) or `XAI_API_KEY` sourced securely. For production, prefer storing an API key in 1Password (`MGS Conteúdo` → `xAI API - MGS` → field `api key`) and injecting it without printing.
+
+Hermes has bundled xAI providers:
+
+```text
+Capability      Provider/config              Models / surface
+--------------  ---------------------------  ----------------------------------
+Image           image_gen.provider: xai       grok-imagine-image, quality
+Video           video_gen.provider: xai       grok-imagine-video, 1.5 preview
+X Search        x_search toolset              Grok/X search via xAI creds
+```
+
+Rollout pattern:
+
+1. Verify credential presence without exposing secrets: auth status for `xai-oauth`, `XAI_API_KEY` presence/len, or 1Password item/field presence.
+2. Configure by role, not by blanket behavior:
+   - Hera owns creative production; enable `image_gen`/`video_gen` for Grok production.
+   - Ares can consume/search/iterate campaign creatives but does not become Creative Ops owner.
+   - Zeus may enable for audit/smoke tests, not daily creative work.
+   - Atena stays out of generic Grok creative production unless explicitly approved.
+3. Enable `video_gen` per profile/platform; it is disabled by default.
+4. Run real smoke tests before declaring production-ready: one image, one text-to-video, one avatar/reference-to-video using an approved test image.
+5. Log requester/profile/provider/model/duration/resolution/output/estimated cost and enforce budget guardrails before broad team usage.
+6. For real-person avatar/likeness, require approved source image and permission; clean metadata before Drive/handoff.
+
+Detailed session/runbook: `references/mgs-grok-imagine-rollout-2026-06-16.md`.
+
 ## 5. Context compression / Codex gpt-5.5 notices
 
 Use quando Rodolfo perguntar sobre mensagens do Hermes como:
