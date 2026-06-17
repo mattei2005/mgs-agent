@@ -1,0 +1,123 @@
+--- a/gateway/run.py
++++ b/gateway/run.py
+@@ -83,6 +83,11 @@ _MOBILE_CHAT_NOISY_STATUS_RE = re.compile(
+     r"|no\s+first\s+byte\s+from\s+provider\s+in\s+\d"
+     r"|max\s+retries\s+\(\d+\).*(?:trying\s+fallback|exhausted|invalid\s+responses)"
+     r"|stream\s+(?:drop|drop\s+mid\s+tool-call).+retry\s+\d"
++    r"|empty\s+response\s+from\s+model\s+[—-]\s+retrying"
++    r"|model\s+returning\s+empty\s+responses"
++    r"|model\s+returned\s+no\s+content\s+after\s+all\s+retries"
++    r"|no\s+fallback\s+providers\s+configured"
++    r"|codex\s+response\s+(?:remained\s+)?incomplete"
++    r"|processing\s+stopped:\s+codex\s+response\s+(?:remained\s+)?incomplete"
+     r"|stale\s+connections\s+from\s+a\s+previous\s+provider\s+issue"
+     r")",
+     re.IGNORECASE | re.DOTALL,
+@@ -1974,6 +1974,7 @@ def _normalize_empty_agent_response(
+     response: str,
+     *,
+     history_len: int = 0,
++    platform: Any = None,
+ ) -> str:
+@@ -2009,7 +2010,14 @@ def _normalize_empty_agent_response(
+     if api_calls > 0 and not agent_result.get("interrupted"):
+         if agent_result.get("partial"):
+             err = agent_result.get("error", "processing incomplete")
+-            return f"⚠️ Processing stopped: {str(err)[:200]}. Try again."
++            err_text = str(err)
++            if (
++                _gateway_platform_value(platform) == "discord"
++                and "codex response remained incomplete" in err_text.casefold()
++            ):
++                logger.info("Suppressing Discord Codex incomplete terminal notice")
++                return ""
++            return f"⚠️ Processing stopped: {err_text[:200]}. Try again."
+@@ -9032,7 +9040,7 @@ class GatewayRunner(...):
+             if not _intentional_silence:
+                 response = _normalize_empty_agent_response(
+-                    agent_result, response, history_len=len(history),
++                    agent_result, response, history_len=len(history), platform=source.platform,
+                 )
+--- a/plugins/platforms/discord/adapter.py
++++ b/plugins/platforms/discord/adapter.py
+@@ -38,6 +38,78 @@
+ _DISCORD_MAX_APP_COMMANDS = 100
++
++_DISCORD_BOT_LOOP_NOISE_MARKERS = frozenset({
++    "sem acao pendente",
++    "sem ação pendente",
++    "sem resposta operacional necessaria",
++    "sem resposta operacional necessária",
++    "sem resposta operacional",
++    "sem acao",
++    "sem ação",
++    "silencio operacional",
++    "silêncio operacional",
++    "confirmado",
++    "recebido",
++    "encerrado",
++    "fechado",
++    "ok",
++    "okay",
++    "feito",
++    "concluido",
++    "concluído",
++    "done",
++    "no action pending",
++    "no pending action",
++    "operational silence",
++    "👍",
++    "✅",
++    "👌",
++})
++
++_DISCORD_BOT_LOOP_NOISE_PREFIXES = (
++    "⚠️ empty response from model",
++    "empty response from model",
++    "⚠️ no reply: the model returned empty content",
++    "no reply: the model returned empty content",
++    "❌ model returned no content after all retries",
++    "model returned no content after all retries",
++    "codex response remained incomplete",
++    "⚠️ processing stopped: codex response remained incomplete",
++)
++
++
++def _is_discord_bot_loop_noise(message: Any, client_user: Any = None) -> bool:
++    """Return True for low-information bot messages that can cause bot loops."""
++    if not getattr(getattr(message, "author", None), "bot", False):
++        return False
++    if getattr(message, "attachments", None):
++        return False
++    if getattr(message, "embeds", None):
++        return False
++    text = str(getattr(message, "content", "") or "").strip()
++    if not text:
++        return False
++    text = re.sub(r"<@[!&]?\d+>", "", text)
++    text = re.sub(r"<#\d+>", "", text)
++    normalized = " ".join(text.strip().casefold().split())
++    normalized = normalized.strip(" .!?:;,-—–")
++    if not normalized:
++        return False
++    if normalized in _DISCORD_BOT_LOOP_NOISE_MARKERS:
++        return True
++    if normalized.startswith(_DISCORD_BOT_LOOP_NOISE_PREFIXES):
++        return True
++    return False
+@@ -905,6 +985,14 @@
+                 if getattr(message.author, "bot", False):
+                     _bot_content = (message.content or "").strip()
+                     if _bot_content.startswith((
+@@
+                         )
+                         return
++                    if _is_discord_bot_loop_noise(message, getattr(self._client, "user", None)):
++                        logger.info(
++                            "[%s] Ignoring low-information bot loop-noise from author=%s channel=%s",
++                            self.name,
++                            getattr(message.author, "id", None),
++                            getattr(message.channel, "id", None),
++                        )
++                        return
+                     allow_bots = os.getenv("DISCORD_ALLOW_BOTS", "none").lower().strip()
