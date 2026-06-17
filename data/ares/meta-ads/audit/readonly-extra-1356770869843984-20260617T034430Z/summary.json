@@ -1,0 +1,43 @@
+{
+  "checked_at_utc": "2026-06-17T03:44:37.875602+00:00",
+  "account_id": "1356770869843984",
+  "token_item": "Token Meta API",
+  "token_field": "credential",
+  "token_len": 293,
+  "checks": [
+    {
+      "name": "assigned_users_with_business",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/readonly-extra-1356770869843984-20260617T034430Z/assigned_users_with_business.json",
+      "count": 3,
+      "paging_present": true
+    },
+    {
+      "name": "adcreatives",
+      "ok": false,
+      "http_status": 500,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/readonly-extra-1356770869843984-20260617T034430Z/adcreatives.json",
+      "error": {
+        "message": "Please reduce the amount of data you're asking for, then retry your request",
+        "code": 1
+      }
+    },
+    {
+      "name": "customconversions",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/readonly-extra-1356770869843984-20260617T034430Z/customconversions.json",
+      "count": 0,
+      "paging_present": false
+    },
+    {
+      "name": "adspixels",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/readonly-extra-1356770869843984-20260617T034430Z/adspixels.json",
+      "count": 1,
+      "paging_present": true
+    }
+  ]
+}
