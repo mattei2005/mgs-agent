@@ -57,8 +57,8 @@ Scripts iniciais:
 2. R1-R5 são slots plugáveis por operação, não hardcoded por conta; para conta/Business Manager em USD, thresholds ficam em USD.
 3. Em operações Europa/GDPR, usar `MO = actions.complete_registration` e `CPMO = spend / MO` como norte intraday, porque a Meta pode não expor subscribe de forma confiável. Não usar `subs/CPS` como métrica primária dessas operações.
 4. Cortes e reativações ocorrem somente em nível de campanha.
-4. Campanhas com `TEST` no nome têm carência de 3 dias usando `created_time` da Meta; fallback é `first_seen_at` local; durante essa carência ficam imunes a todas as regras R1-R5.
-5. COST_CAP não pausa por CPS; o bid cap controla custo. Regra de CPS aplica pausa só quando a condição/bid strategy permitir, especialmente LOWEST_COST.
+5. Campanhas com `TEST` no nome têm carência de 3 dias usando `created_time` da Meta; fallback é `first_seen_at` local; durante essa carência ficam imunes a todas as regras R1-R5.
+6. COST_CAP não pausa por regra de custo (`CPS`/`CPMO`); o bid cap controla custo. Regra de custo aplica pausa só quando a condição/bid strategy permitir, especialmente LOWEST_COST.
 6. Reativar-todas pode ter lista de exclusão, mas ela começa vazia e Ares deve perguntar antes de adicionar algo.
 7. Teto diário de R$1.500 é referência/log/base para testes de criativos; não pausar tudo ao bater o teto.
 8. Log intraday no Discord deve ser resumido e enviado só quando houver ação/erro, salvo Rodolfo mudar a política.
