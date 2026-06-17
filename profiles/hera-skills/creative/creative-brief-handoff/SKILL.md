@@ -18,6 +18,8 @@ Use esta skill quando a Hera receber qualquer pedido relacionado à produção c
 
 A entrega não deve ser só “ideias criativas”. A Hera deve produzir um pacote operacional: brief, variações, nomes de arquivos, status, pontos de aprovação, organização no Drive e instruções de uso. Handoff para Ares é importante quando a campanha passa pelo Ares, mas humanos também podem usar os assets diretamente.
 
+Para criação de imagem/vídeo, Hera deve operar como profissional de criação: entender a referência, extrair linguagem visual, decidir abordagem, executar com as ferramentas disponíveis, validar o resultado e só então entregar. Se uma referência, provider ou asset base for essencial e estiver bloqueado, pare antes de gerar o final e reporte o bloqueio com evidência curta.
+
 Fonte canônica:
 
 ```text
@@ -45,6 +47,7 @@ Use esta skill quando o usuário pedir para a Hera:
 - preparar criativos aprovados para o Ares;
 - preparar criativos organizados para uso direto por Kelly, Geizian ou gestores;
 - analisar um criativo antes do uso em campanha;
+- analisar Facebook/Meta Ad Library como fonte de benchmarking criativo, inventário e inspiração;
 - transformar um pedido solto em etapas estruturadas de produção.
 
 Não use esta skill para:
@@ -63,6 +66,17 @@ Se o pedido cair em uma dessas áreas, responda com o dono correto e escale para
 Trabalhe com o pedido do jeito que a pessoa escreveu. Não peça para Kelly, Geizian, gestores ou Rodolfo preencherem um modelo padrão antes de começar.
 
 Se um campo ausente bloquear uma resposta útil, faça apenas a pergunta mínima necessária. Se for possível avançar com premissas claras, avance.
+
+### Correção operacional: referência antes de criação
+
+Quando o pedido incluir **referência visual/vídeo** (“usa esse Shorts”, “aqui está a referência”, “faz parecido com este vídeo”), a referência vira pré-requisito de criação. Antes de gerar variações finais:
+
+1. baixar/importar/analisar a referência real ou seus frames;
+2. se a referência estiver bloqueada, parar e reportar o bloqueio com próximo passo concreto;
+3. não improvisar arte final apenas com thumbnail/metadados quando o usuário pediu para seguir a referência;
+4. se o usuário pedir GPT vs Grok, validar os dois backends antes de rotular os outputs.
+
+Rodolfo corrigiu explicitamente que, quando uma referência/Grok falhar, a Hera deve **reportar para resolver antes de começar**, não produzir vídeo “no escuro”.
 
 ```text
 Campo                  Exemplo
@@ -325,18 +339,22 @@ Pitfalls operacionais:
 - Em vídeos `.mov/.mp4`, ExifTool pode manter descritores estruturais QuickTime/TrackN após `-all=`; isso não deve virar recusa automática se o sanitizer oficial já tratar como allowlist estrutural e `verify` retornar `clean=true`.
 - Se o sanitizer oficial precisar de ajuste de script/allowlist para validar corretamente um criativo, isso deixa de ser tarefa puramente criativa: enviar `REPORT-INFRA` ao Zeus com arquivo alterado e evidência curta.
 
-Referências locais:
+Referências da skill:
 
 ```text
 /root/mgs-agent/docs/CREATIVE_METADATA_SANITIZER.md
-/root/mgs-agent/logs/creative-metadata-sanitizer.jsonl
-```
-
+/root/mgs-agent/scripts/clean-creative-metadata.sh
 Referências da skill:
 
 ```text
 references/drive-ready-destination-correction.md — correção canônica: READY fica em pasta de status; STORY/FEED/REELS ficam no inventário/handoff, não em subpasta final.
+references/human-upload-ready-drive-handoff.md — fluxo validado para upload humano via Discord → import/read attachment quando `.mov` não entra no gateway → detecção de formato/ângulo → limpeza de metadata → upload verificado em READY → inventário/handoff Ares.
 references/video-variation-gpt-grok-workflow.md — workflow para comparar variação de vídeo com GPT/OpenAI e Grok/xAI a partir de anexo Discord, incluindo import read-only, contact sheet, geração e sanitização.
+references/safari-invitation-video-reference-workflow.md — workflow validado para convite animado com referência YouTube/anexo, incluindo regra de não produzir antes de validar a referência, fallback por anexo Discord, YouTube cookies/proxy persistente, Grok real via wrapper e dados fixos legíveis.
+references/meta-ad-library-creative-intake.md — fluxo para analisar/baixar referências da Meta/Facebook Ad Library com Playwright/API, validar token sem expor segredo e interpretar erros comuns.
+```
+```
+references/meta-ad-library-creative-intake.md — fluxo para analisar/baixar referências da Meta/Facebook Ad Library com Playwright/API, validar token sem expor segredo e interpretar erros comuns.
 ```
 
 ## Origem e uso dos assets
@@ -473,6 +491,22 @@ Cena final
 CTA:
 ```
 
+### Gate obrigatório para vídeo com referência externa ou backend específico
+
+Quando o usuário pedir vídeo criativo baseado em **referência externa** (YouTube Shorts/Reels/TikTok/link) ou exigir backend específico (**GPT/OpenAI** e/ou **Grok/xAI**), não comece a produzir a peça final antes de validar os pré-requisitos.
+
+```text
+Etapa  Regra
+─────  ─────────────────────────────────────────────────────────────
+1      Capturar/analisar a referência real: vídeo, frames ou anexo.
+2      Se o vídeo externo exigir login/cookie/anti-bot, tentar rotas técnicas razoáveis; se continuar bloqueado, parar e reportar o bloqueio antes de criar.
+3      Validar backend solicitado: GPT/OpenAI via image_generate; Grok/xAI via wrapper oficial ou video_generate, conforme pedido.
+4      Se Grok/xAI estiver sem autenticação, não substituir por GPT/local e não rotular como Grok.
+5      Só produzir a versão final depois que referência e backends mínimos estiverem resolvidos ou o usuário aprovar explicitamente seguir com fallback.
+```
+
+Regra prática: se o pedido é “faça igual/ inspirado neste link” e o link não foi visto de verdade, o status correto é `bloqueado`, não `em_criacao`. Entregue evidência curta do bloqueio e a ação necessária para desbloquear.
+
 ## Handoff para Ares
 
 Só entregue handoff para Ares quando Ares participar e houver material suficiente para campanha ou teste. Se o uso for humano, entregue um pacote de uso direto com o mesmo nível de organização.
@@ -553,6 +587,26 @@ Pedido com risco legal/compliance            Escalar para Rodolfo/Zeus.
 Pedido sem oferta ou site definido           Pedir contexto mínimo.
 Pedido com asset final ausente               Marcar como precisa_revisao.
 ```
+
+## Hard gate — referência, backend e pré-requisitos antes de produzir
+
+Quando o pedido criativo exigir uma referência externa específica, comparação entre backends (ex.: GPT vs Grok), ou um asset/estilo que depende de insumo visual, **não produza uma versão aproximada no escuro** se a referência/backend estiver bloqueado.
+
+Fluxo obrigatório:
+
+```text
+1. Validar acesso real à referência/asset/backend antes de criar.
+2. Se a referência não puder ser lida integralmente, tentar rotas razoáveis: import/download, oEmbed/thumbnail/frame, browser/headless, cookies/sessão autenticada quando permitido.
+3. Se o backend solicitado estiver sem autenticação/credencial, abrir o fluxo de reauth/configuração ou pedir o artefato necessário.
+4. Se ainda estiver bloqueado, parar a produção e reportar o blocker com evidência curta e próximo passo concreto.
+5. Só produzir depois que o insumo crítico estiver acessível ou depois de o usuário aprovar explicitamente trabalhar com fallback parcial.
+```
+
+Regra de qualidade: se Rodolfo pedir “faça com GPT e Grok”, a entrega deve especificar claramente qual asset veio de qual backend. Não rotular uma versão local/GPT como Grok. Se Grok estiver bloqueado, dizer `Grok bloqueado` e resolver a autenticação antes de prometer comparação.
+
+Para vídeos de convite/peças inspiradas em referência, primeiro analisar a referência e extrair linguagem visual/ritmo/composição; depois gerar o criativo. O usuário corrigiu explicitamente que começar a criar antes de resolver a referência é erro operacional.
+
+Ver também: `references/video-reference-and-backend-gating.md` e `references/personal-invitation-video-workflow.md`.
 
 ## Checklist de qualidade
 

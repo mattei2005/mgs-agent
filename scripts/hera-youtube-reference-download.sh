@@ -12,27 +12,57 @@ fi
 
 OUT_DIR="${2:-/root/mgs-agent/data/references/hera/youtube}"
 COOKIE_FILE="${HERA_YOUTUBE_COOKIES:-/root/.hermes/profiles/hera/secrets/youtube-cookies.txt}"
-
-if [[ ! -s "$COOKIE_FILE" ]]; then
-  cat >&2 <<EOF
-ERROR: YouTube cookies file not found or empty: $COOKIE_FILE
-
-Provide a Netscape-format cookies.txt exported from a logged-in browser, then run again.
-Do not paste cookies into chat; attach as a file or store securely.
-EOF
-  exit 3
-fi
+PROFILE_DIR="${HERA_YOUTUBE_PROFILE:-/root/.hermes/profiles/hera/browser-profiles/youtube-chromium}"
+PROBE_SCRIPT="/root/mgs-agent/scripts/hera-youtube-persistent-browser.py"
 
 mkdir -p "$OUT_DIR"
 VIDEO_OUT="$OUT_DIR/reference.%(ext)s"
 
-uvx yt-dlp \
-  --cookies "$COOKIE_FILE" \
-  --user-agent 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36' \
-  -f 'bv*[height<=1080]+ba/b[height<=1080]/b' \
-  --merge-output-format mp4 \
-  -o "$VIDEO_OUT" \
-  "$URL"
+# Plan A: persistent Chromium profile. This preserves YouTube state across runs.
+# On a headless VPS we probe via Xvfb/headful Chromium; if the profile is logged in
+# and trusted, yt-dlp can reuse Chromium cookies from the same profile.
+if [[ -x "$PROBE_SCRIPT" ]] && command -v xvfb-run >/dev/null 2>&1; then
+  if xvfb-run -a "$PROBE_SCRIPT" "$URL" --headed --out-dir "$OUT_DIR/persistent-probe" >/tmp/hera-youtube-persistent-probe.log 2>&1; then
+    if uvx yt-dlp \
+      --cookies-from-browser "chromium:$PROFILE_DIR" \
+      --user-agent 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36' \
+      -f 'bv*[height<=1080]+ba/b[height<=1080]/b' \
+      --merge-output-format mp4 \
+      -o "$VIDEO_OUT" \
+      "$URL"; then
+      :
+    else
+      echo "WARN: persistent Chromium profile was probed, but yt-dlp could not download with browser cookies; trying cookies.txt fallback if present." >&2
+    fi
+  else
+    echo "WARN: persistent Chromium profile did not pass player probe; trying cookies.txt fallback if present." >&2
+    tail -40 /tmp/hera-youtube-persistent-probe.log >&2 || true
+  fi
+fi
+
+# Plan B fallback: explicit Netscape cookies file, if configured.
+if ! find "$OUT_DIR" -maxdepth 1 -type f -name 'reference.*' -size +0c | grep -q .; then
+  if [[ ! -s "$COOKIE_FILE" ]]; then
+    cat >&2 <<EOF
+ERROR: YouTube reference is blocked for the persistent Chromium profile and cookies file is missing/empty.
+profile: $PROFILE_DIR
+cookies: $COOKIE_FILE
+
+Options:
+1. Log the persistent Chromium profile into YouTube once; or
+2. Provide a Netscape-format cookies.txt exported from a logged-in browser.
+Do not paste cookies into chat; attach as a file or store securely.
+EOF
+    exit 3
+  fi
+  uvx yt-dlp \
+    --cookies "$COOKIE_FILE" \
+    --user-agent 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36' \
+    -f 'bv*[height<=1080]+ba/b[height<=1080]/b' \
+    --merge-output-format mp4 \
+    -o "$VIDEO_OUT" \
+    "$URL"
+fi
 
 VIDEO_PATH="$(find "$OUT_DIR" -maxdepth 1 -type f -name 'reference.*' | sort | tail -1)"
 if [[ -z "$VIDEO_PATH" || ! -s "$VIDEO_PATH" ]]; then

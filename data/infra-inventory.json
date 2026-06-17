@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-17T18:05:22-04:00",
+    "updated_at": "2026-06-17T18:52:50-04:00",
     "generated_by": "zeus"
   },
   "systemd_services": [
@@ -23,7 +23,7 @@
     },
     {
       "name": "mgs-autocommit.service",
-      "status": "active"
+      "status": "inactive\nunknown"
     }
   ],
   "crons": [
@@ -86,55 +86,9 @@
     },
     {
       "entry": "41 3 * * * flock -n /var/lock/mgs_safety_backup.lock /root/mgs-agent/scripts/mgs-safety-backup.sh >> /root/mgs-agent/logs/mgs-safety-backup-cron.log 2>&1"
-    },
-    {
-      "entry": "Hermes cron profile=ares id=709a29c99b3f schedule=\"0 9 * * *\" script=ares-meta-token-expiry-alert.sh no_agent=true deliver=discord:1498132022634483894",
-      "id": "709a29c99b3f",
-      "profile": "ares",
-      "name": "Ares Meta token expiry alert",
-      "schedule": "0 9 * * *",
-      "script": "/root/.hermes/profiles/ares/scripts/ares-meta-token-expiry-alert.sh",
-      "next_run_at": "2026-06-18T09:00:00-04:00",
-      "state": "scheduled",
-      "enabled": true,
-      "no_agent": true,
-      "deliver": "discord:1498132022634483894"
-    },
-    {
-      "entry": "Hermes cron profile=ares id=aa9e01a5ec4a schedule=\"every 30m\" script=ares-meta-intraday-cron.sh no_agent=true deliver=discord:1516887105543077949",
-      "id": "aa9e01a5ec4a",
-      "profile": "ares",
-      "name": "Ares Meta intraday R1-R5 dry-run",
-      "schedule": "every 30m",
-      "script": "/root/.hermes/profiles/ares/scripts/ares-meta-intraday-cron.sh",
-      "next_run_at": "2026-06-17T16:01:32.486217-04:00",
-      "state": "scheduled",
-      "enabled": true,
-      "no_agent": true,
-      "deliver": "discord:1516887105543077949"
-    },
-    {
-      "entry": "Hermes cron profile=ares id=c6c737070d3f schedule=\"30 18 * * *\" script=ares-meta-reactivate-all-cron.sh no_agent=true deliver=discord:1516887105543077949",
-      "id": "c6c737070d3f",
-      "profile": "ares",
-      "name": "Ares Meta reativar-todas dry-run",
-      "schedule": "30 18 * * *",
-      "intended_local_time": "00:30 Europe/Madrid / 18:30 America/New_York during EDT",
-      "script": "/root/.hermes/profiles/ares/scripts/ares-meta-reactivate-all-cron.sh",
-      "next_run_at": "2026-06-17T18:30:00-04:00",
-      "state": "scheduled",
-      "enabled": true,
-      "no_agent": true,
-      "deliver": "discord:1516887105543077949"
     }
   ],
   "scripts": [
-    {
-      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-token-expiry-alert.sh",
-      "size_bytes": 99,
-      "sha256": "a8155dc58704798a1952fba0ee876486ff904a88e26a92776f31bc1be7f86be4",
-      "modified_at": "2026-06-17T12:28:58-04:00"
-    },
     {
       "path": "/root/mgs-agent/scripts/ares-build-creative-copy-queue.py",
       "size_bytes": 8954,
@@ -186,6 +140,11 @@
       "modified_at": "2026-06-16T23:51:34-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
+      "size_bytes": 17170,
+      "modified_at": "2026-06-17T16:06:55-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/ares-meta-fetch-campaigns.py",
       "size_bytes": 2045,
       "modified_at": "2026-06-16T00:22:26-04:00"
@@ -198,18 +157,17 @@
     {
       "path": "/root/mgs-agent/scripts/ares-meta-token-expiry-alert.py",
       "size_bytes": 4357,
-      "sha256": "eeb0375162cb16a9561c2e94523710b8dac2ec36aa1ccb85e2f6ee182c250ab0",
       "modified_at": "2026-06-17T12:28:32-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-promote-review-ready-retry.sh",
-      "size_bytes": 1094,
-      "modified_at": "2026-06-14T23:50:55-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-promote-review-ready.py",
       "size_bytes": 6295,
       "modified_at": "2026-06-14T23:43:23-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-promote-review-ready-retry.sh",
+      "size_bytes": 1094,
+      "modified_at": "2026-06-14T23:50:55-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-propose-creative-organization.py",
@@ -312,18 +270,59 @@
       "modified_at": "2026-06-09T09:29:31-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/hera-youtube-reference-download.sh",
-      "size_bytes": 1730,
-      "sha256": "8e8a33a574c022983dce12b536de90fe71729e97de21409e824754f8ab8aef98",
-      "modified_at": "2026-06-17T18:04:28-04:00",
+      "path": "/root/mgs-agent/scripts/hera-youtube-capture-frames.py",
+      "size_bytes": 3134,
+      "sha256": "aaef1a8b6c276f110de4be5eea14dc92a3784913d129dbab2994858be78c7181",
+      "modified_at": "2026-06-17T18:44:59-04:00",
       "owner": "hera",
-      "purpose": "Download/analyze YouTube reference videos using private Hera cookies file; fails closed when cookies are absent",
-      "validated_at": "2026-06-17T18:05:22-04:00",
+      "purpose": "Capture validated frames/contact sheet from YouTube Shorts using persistent Chromium profile",
+      "validated_at": "2026-06-17T18:52:50-04:00",
+      "validations": [
+        "py_compile OK",
+        "no secret literal detected",
+        "persistent Chromium validation produced 8 frames + contact_sheet for PCdygSACl_4"
+      ]
+    },
+    {
+      "path": "/root/mgs-agent/scripts/hera-youtube-login-browser.sh",
+      "size_bytes": 2963,
+      "sha256": "b8f1b95f254730c2b573ff8f41625a2f5b18937c97c341d9834fdc24583d4cc3",
+      "modified_at": "2026-06-17T18:29:31-04:00",
+      "owner": "hera",
+      "purpose": "Open Hera persistent Chromium profile for YouTube login/bootstrap",
+      "validated_at": "2026-06-17T18:52:50-04:00",
       "validations": [
         "bash -n OK",
-        "mode executable",
-        "uvx/ffmpeg/ffprobe present",
-        "no-cookie execution exits 3 with safe expected-path message"
+        "no secret literal detected",
+        "persistent Chromium validation produced 8 frames + contact_sheet for PCdygSACl_4"
+      ]
+    },
+    {
+      "path": "/root/mgs-agent/scripts/hera-youtube-persistent-browser.py",
+      "size_bytes": 6214,
+      "sha256": "1f7da2243e5f429556085eb581d8ff4ad5e24e6a46a2bb8f62cf7769280d5ce6",
+      "modified_at": "2026-06-17T18:23:06-04:00",
+      "owner": "hera",
+      "purpose": "Probe YouTube reference access through persistent Chromium without printing cookies",
+      "validated_at": "2026-06-17T18:52:50-04:00",
+      "validations": [
+        "py_compile OK",
+        "no secret literal detected",
+        "persistent Chromium validation produced 8 frames + contact_sheet for PCdygSACl_4"
+      ]
+    },
+    {
+      "path": "/root/mgs-agent/scripts/hera-youtube-reference-download.sh",
+      "size_bytes": 3379,
+      "sha256": "4677cae9eb369a290f5698a4a94b842ee843c68e747111ecb48a93f22fae030e",
+      "modified_at": "2026-06-17T18:25:40-04:00",
+      "owner": "hera",
+      "purpose": "Download/analyze YouTube references using private cookies; fail-closed if absent",
+      "validated_at": "2026-06-17T18:52:50-04:00",
+      "validations": [
+        "bash -n OK",
+        "no secret literal detected",
+        "persistent Chromium validation produced 8 frames + contact_sheet for PCdygSACl_4"
       ]
     },
     {
@@ -368,8 +367,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/infra-discovery.sh",
-      "size_bytes": 7024,
-      "modified_at": "2026-06-07T00:39:32-04:00"
+      "size_bytes": 7479,
+      "modified_at": "2026-06-17T18:00:44-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
@@ -552,24 +551,24 @@
       "modified_at": "2026-06-10T12:30:23-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
+      "size_bytes": 5772,
+      "modified_at": "2026-05-16T17:37:26-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/run-hermes-update-all-agents-20260610.sh",
       "size_bytes": 7229,
       "modified_at": "2026-06-12T08:37:14-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
-      "size_bytes": 28214,
-      "modified_at": "2026-06-17T12:20:26-04:00"
+      "size_bytes": 29730,
+      "modified_at": "2026-06-17T13:13:21-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/run-openhands-atena.sh",
       "size_bytes": 3277,
       "modified_at": "2026-05-26T13:57:27-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
-      "size_bytes": 5772,
-      "modified_at": "2026-05-16T17:37:26-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sync-codex-oauth.sh",
@@ -590,24 +589,6 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
-      "size_bytes": 17170,
-      "modified_at": "2026-06-17T16:06:55-04:00",
-      "sha256": "bec5fa7efeccffb9003e607b8d4e71775172744ff000dc93681f9d9e8cde08c9"
-    },
-    {
-      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-intraday-cron.sh",
-      "size_bytes": 201,
-      "modified_at": "2026-06-17T15:30:50-04:00",
-      "sha256": "103a6526d3cd762300a34c836c581db7ad08806affd537f9763eb874d4bc5904"
-    },
-    {
-      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-reactivate-all-cron.sh",
-      "size_bytes": 207,
-      "modified_at": "2026-06-17T15:30:54-04:00",
-      "sha256": "d3f5e793065f0f81917342a540dd30812f819691193a6a4950c4f546241e72af"
     }
   ],
   "skills_mgs": [
@@ -1002,11 +983,7 @@
       {
         "name": "meta-ads-intraday-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "sha256": "b8739d8b02d6b296cc982928e2aebff217c547db001534722b9de98423b6f6db",
-        "versioned_sha256": "b8739d8b02d6b296cc982928e2aebff217c547db001534722b9de98423b6f6db",
-        "modified_at": "2026-06-17T15:21:13-04:00"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
       },
       {
         "name": "paid-acquisition-operations",
@@ -1935,7 +1912,21 @@
       {
         "name": "creative-brief-handoff",
         "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md",
+        "versioned_skill_md": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/SKILL.md",
+        "sha256": "3a115814bb3a97ab3b96aba3d0ff37bfcba11922755bbdaea0b76e140330abc5",
+        "versioned_sha256": "3a115814bb3a97ab3b96aba3d0ff37bfcba11922755bbdaea0b76e140330abc5",
+        "modified_at": "2026-06-17T18:42:54-04:00",
+        "references": [
+          {
+            "path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/youtube-reference-grok-creative-workflow.md",
+            "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/youtube-reference-grok-creative-workflow.md",
+            "sha256": "d83894e9484d2ba59e4eb6ded8c543f2b0a66760350fc25743946fa28c98bb1b",
+            "versioned_sha256": "d83894e9484d2ba59e4eb6ded8c543f2b0a66760350fc25743946fa28c98bb1b",
+            "modified_at": "2026-06-17T18:50:41-04:00",
+            "purpose": "Validated YouTube/Shorts reference workflow via persistent Chromium before Grok creative generation"
+          }
+        ]
       },
       {
         "name": "creative-ideation",
@@ -2867,8 +2858,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "646fca2659eb75b3f25e9cf41d8b812e",
-      "modified_at": "2026-06-17T04:56:01-04:00"
+      "md5": "0ba849b6c7443ce0f1af2556df41461c",
+      "modified_at": "2026-06-17T18:26:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -2879,32 +2870,32 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "10f68955aa33f302ea54b33948ab4813",
-      "modified_at": "2026-06-17T05:00:02-04:00"
+      "md5": "48765664b0d0ecafc3a834f590701166",
+      "modified_at": "2026-06-17T18:30:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "ad4cd8b22245bbcbab5210d32182d649",
-      "modified_at": "2026-06-17T03:01:46-04:00"
+      "md5": "f975ab830bb43efea68e9e601d285d9e",
+      "modified_at": "2026-06-17T15:02:45-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 14071,
-      "md5": "cb1d33213b1ad452bdb59f92e56c4c1f",
-      "modified_at": "2026-06-17T05:00:02-04:00"
+      "size_bytes": 14587,
+      "md5": "84cfd8c0c2d7b2cd77d0e74e91a1845e",
+      "modified_at": "2026-06-17T18:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 330,
-      "md5": "8eecdd4a548488ed5de1c8748262d7f3",
-      "modified_at": "2026-06-16T20:37:02-04:00"
+      "size_bytes": 328,
+      "md5": "c0f974cd07f71b89f0109077af524f33",
+      "modified_at": "2026-06-17T14:37:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 102359,
-      "md5": "90cd1f02857999e4880ff49d8623a73c",
-      "modified_at": "2026-06-16T05:00:05-04:00"
+      "size_bytes": 105459,
+      "md5": "4283e6b0cd9d143f3ccf79e200fcb70d",
+      "modified_at": "2026-06-17T18:26:42-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -2951,8 +2942,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2239,
-      "md5": "54969d214210c209c47fcc2b6f7ef807",
-      "modified_at": "2026-06-17T04:56:01-04:00"
+      "md5": "160ac35bfef50842024a73926d65162a",
+      "modified_at": "2026-06-17T18:26:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -2969,8 +2960,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "b622b71f362d5f982322305399b0ae92",
-      "modified_at": "2026-06-16T20:07:02-04:00"
+      "md5": "474b5b0256fc829052359fbff0e08701",
+      "modified_at": "2026-06-17T14:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -2980,9 +2971,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 20976,
-      "md5": "b178a0890a9d5acda49808fc03c98657",
-      "modified_at": "2026-06-16T10:24:08-04:00"
+      "size_bytes": 21340,
+      "md5": "a48a630b073c5a8c1b3785b2595b665d",
+      "modified_at": "2026-06-17T10:24:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -3004,36 +2995,15 @@
     },
     {
       "path": "/root/mgs-agent/profiles/hera-soul.md",
-      "size_bytes": 23525,
-      "md5": "7083aba1ff188b5ca35dca677ccb4bce",
-      "modified_at": "2026-06-16T20:59:56-04:00"
+      "size_bytes": 24888,
+      "md5": "2a9b3da28d93c1396261b90f9fce8a26",
+      "modified_at": "2026-06-17T17:51:33-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
       "size_bytes": 43510,
       "md5": "313356aeb86d41db526f68507a56ec4e",
       "modified_at": "2026-06-16T19:23:39-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/rules/openzedfinanzas_cc_es_intraday_v1.json",
-      "size_bytes": 6602,
-      "md5": "7c17874a9ac93b58be59b7f2324a3bbc",
-      "modified_at": "2026-06-17T15:21:09-04:00",
-      "sha256": "bec41b11537195bb31454c1cbe16a824dba4f72ec4fdc330eb2b3017b8fbccbf"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json",
-      "size_bytes": 3711,
-      "md5": "f1d0e4f5a643bbbc643797520d386b4c",
-      "modified_at": "2026-06-17T15:31:48-04:00",
-      "sha256": "8bbc4883777d426ff22de17a5f888a8a888b64ce748fe74927809781bfaf5056"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/state/pending-decisions.json",
-      "size_bytes": 2353,
-      "md5": "2ec306b1e2d15eea73839de94e06be63",
-      "modified_at": "2026-06-17T17:38:20-04:00",
-      "sha256": "9b66bec110dc122e49a79cc9447524662e79b4d20dc8f91463ab23ef0c0fcb62"
     }
   ],
   "mu_plugin_canonical": {
