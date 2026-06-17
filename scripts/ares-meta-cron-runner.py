@@ -86,6 +86,13 @@ def page_id_from_name(name: str | None) -> str:
     return f"pg_{m.group(1)}" if m else 'não identificado'
 
 
+def page_name_from_campaign(name: str | None) -> str:
+    text = str(name or '').strip()
+    # Ex.: "Carla Rojas - US - ESP - (pg_22068) - 3" => "Carla Rojas".
+    m = re.match(r'(.+?)\s-\s[A-Z]{2}\s-\s', text)
+    return m.group(1).strip() if m else 'não identificado'
+
+
 def country_vertical_from_name(name: str | None, op_cfg: dict) -> str:
     text = str(name or '')
     # Ex.: "Carla Rojas - US - ESP - (pg_22068) - 3" => country US; vertical from operation CC.
@@ -299,6 +306,7 @@ def run_intraday(args) -> int:
                     campaign_name = campaign.get('name') or row.get('campaign_name')
                     event['candidates'].append({
                         'pg_id': page_id_from_name(campaign_name),
+                        'page_name': page_name_from_campaign(campaign_name),
                         'country_vertical': country_vertical_from_name(campaign_name, op_cfg),
                         'rule': rule_display(rule),
                         'status': campaign.get('effective_status'),
@@ -323,7 +331,7 @@ def run_intraday(args) -> int:
         rows = event['candidates']
         for r in rows:
             r['CPMO'] = '' if r['CPMO'] is None else r['CPMO']
-        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — dry-run'), rows, [('pg_id','PG ID'),('country_vertical','País/Vertical'),('rule','Regra usada'),('status','Status')], prefix='<@344196393512075265> dry-run intraday encontrou ações candidatas. Nenhum write foi executado.'))
+        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — dry-run'), rows, [('pg_id','PG ID'),('page_name','Nome da página'),('country_vertical','País/Vertical'),('rule','Regra usada'),('status','Status')], prefix='<@344196393512075265> dry-run intraday encontrou ações candidatas. Nenhum write foi executado.'))
     return 0
 
 
@@ -356,6 +364,7 @@ def run_reactivate_all(args) -> int:
             campaign_name = campaign.get('name')
             event['candidates'].append({
                 'pg_id': page_id_from_name(campaign_name),
+                'page_name': page_name_from_campaign(campaign_name),
                 'country_vertical': country_vertical_from_name(campaign_name, op_cfg),
                 'rule': 'reativar-todas',
                 'status': campaign.get('effective_status'),
@@ -372,7 +381,7 @@ def run_reactivate_all(args) -> int:
         print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — ERRO'), [{'erro': event['errors'][0], 'audit': str(audit)}], [('erro','Erro'),('audit','Audit')], prefix='<@344196393512075265> erro no cron reativar-todas Meta.'))
         return 0
     if event['candidates']:
-        print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — dry-run'), event['candidates'], [('pg_id','PG ID'),('country_vertical','País/Vertical'),('rule','Regra usada'),('status','Status')], prefix='<@344196393512075265> dry-run reativar-todas encontrou campanhas pausadas. Nenhum write foi executado.'))
+        print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — dry-run'), event['candidates'], [('pg_id','PG ID'),('page_name','Nome da página'),('country_vertical','País/Vertical'),('rule','Regra usada'),('status','Status')], prefix='<@344196393512075265> dry-run reativar-todas encontrou campanhas pausadas. Nenhum write foi executado.'))
     return 0
 
 
