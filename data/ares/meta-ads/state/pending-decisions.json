@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-06-16T04:34:02.067659+00:00",
+  "updated_at": "2026-06-17T03:26:03.179677+00:00",
   "operation_id": "OpenzedFinanzas-CC-ES",
   "items": [
     {
       "id": "R1-R5",
-      "status": "pending_later",
-      "note": "Definir regras R1 a R5 mais tarde."
+      "status": "defined_preliminary_pending_dry_run_and_account_calibration",
+      "note": "R1-R5 definidos por Rodolfo com thresholds CAD iniciais; validar mapping M0/CPM0/Subs/CPS e calibrar por conta antes de write."
     },
     {
       "id": "fx-rate-source",
@@ -24,8 +24,8 @@
     },
     {
       "id": "meta-metrics",
-      "status": "pending_later",
-      "note": "Definir métricas/dados da Meta e mapear CPS/subscriber correto."
+      "status": "pending_mapping_before_write",
+      "note": "Mapear fontes reais de M0, CPM0, Subs e CPS na Meta/integrações antes de executar pausas/reativações."
     },
     {
       "id": "campaign-analysis-map",

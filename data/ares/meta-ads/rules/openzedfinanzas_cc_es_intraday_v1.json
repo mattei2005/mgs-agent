@@ -1,93 +1,193 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "ruleset": "openzedfinanzas_cc_es_intraday_v1",
   "operation_id": "OpenzedFinanzas-CC-ES",
   "mode": "dry_run_until_write_approved",
   "rules": [
     {
-      "id": "R1",
-      "enabled": false,
-      "status": "pending_later",
-      "description": "Aguardando regra de Rodolfo",
-      "metric_source": null,
-      "metric_name": null,
-      "window": null,
-      "condition": null,
+      "enabled": true,
+      "status": "defined_preliminary",
+      "description": "M0 = 0 and spend > CAD 7.00 => pause campaign",
+      "metric_source": "meta_insights_or_mapped_external_metric",
+      "metric_name": [
+        "M0",
+        "spend"
+      ],
+      "window": "intraday_current_day",
+      "condition": {
+        "all": [
+          {
+            "metric": "M0",
+            "op": "eq",
+            "value": 0
+          },
+          {
+            "metric": "spend",
+            "op": "gt",
+            "value": 7.0,
+            "currency": "CAD"
+          }
+        ]
+      },
       "action": "pause_campaign",
       "priority": 1,
       "exclusions": [
         "TEST_grace_3_days",
         "reactivate_exclusion_list"
       ],
-      "notes": "Rodolfo pediu deixar R1-R5 como pendência para vermos mais tarde."
+      "notes": "Default inicial informado por Rodolfo; validar mapping de M0 na conta antes de write."
     },
     {
-      "id": "R2",
-      "enabled": false,
-      "status": "pending_later",
-      "description": "Aguardando regra de Rodolfo",
-      "metric_source": null,
-      "metric_name": null,
-      "window": null,
-      "condition": null,
+      "enabled": true,
+      "status": "defined_preliminary",
+      "description": "M0 > 0 and CPM0 > CAD 7.00 => pause campaign",
+      "metric_source": "meta_insights_or_mapped_external_metric",
+      "metric_name": [
+        "M0",
+        "CPM0"
+      ],
+      "window": "intraday_current_day",
+      "condition": {
+        "all": [
+          {
+            "metric": "M0",
+            "op": "gt",
+            "value": 0
+          },
+          {
+            "metric": "CPM0",
+            "op": "gt",
+            "value": 7.0,
+            "currency": "CAD"
+          }
+        ]
+      },
       "action": "pause_campaign",
       "priority": 2,
       "exclusions": [
         "TEST_grace_3_days",
         "reactivate_exclusion_list"
       ],
-      "notes": "Rodolfo pediu deixar R1-R5 como pendência para vermos mais tarde."
+      "notes": "Default inicial informado por Rodolfo; validar mapping de M0/CPM0 antes de write."
     },
     {
-      "id": "R3",
-      "enabled": false,
-      "status": "pending_later",
-      "description": "Aguardando regra de Rodolfo",
-      "metric_source": null,
-      "metric_name": null,
-      "window": null,
-      "condition": null,
+      "enabled": true,
+      "status": "defined_preliminary",
+      "description": "Subs = 0 and spend > CAD 5.00 => pause campaign",
+      "metric_source": "meta_insights_or_mapped_external_metric",
+      "metric_name": [
+        "Subs",
+        "spend"
+      ],
+      "window": "intraday_current_day",
+      "condition": {
+        "all": [
+          {
+            "metric": "Subs",
+            "op": "eq",
+            "value": 0
+          },
+          {
+            "metric": "spend",
+            "op": "gt",
+            "value": 5.0,
+            "currency": "CAD"
+          }
+        ]
+      },
       "action": "pause_campaign",
       "priority": 3,
       "exclusions": [
         "TEST_grace_3_days",
         "reactivate_exclusion_list"
       ],
-      "notes": "Rodolfo pediu deixar R1-R5 como pendência para vermos mais tarde."
+      "notes": "Default inicial informado por Rodolfo; validar subscriber real antes de write."
     },
     {
-      "id": "R4",
-      "enabled": false,
-      "status": "pending_later",
-      "description": "Aguardando regra de Rodolfo",
-      "metric_source": null,
-      "metric_name": null,
-      "window": null,
-      "condition": null,
+      "enabled": true,
+      "status": "defined_preliminary",
+      "description": "LOWEST_COST with CPS >= CAD 2.55, subs >= 1 and spend >= CAD 5.00 => pause campaign",
+      "metric_source": "meta_insights_or_mapped_external_metric",
+      "metric_name": [
+        "bid_strategy",
+        "CPS",
+        "Subs",
+        "spend"
+      ],
+      "window": "intraday_current_day",
+      "condition": {
+        "all": [
+          {
+            "field": "bid_strategy",
+            "op": "eq",
+            "value": "LOWEST_COST"
+          },
+          {
+            "metric": "CPS",
+            "op": "gte",
+            "value": 2.55,
+            "currency": "CAD"
+          },
+          {
+            "metric": "Subs",
+            "op": "gte",
+            "value": 1
+          },
+          {
+            "metric": "spend",
+            "op": "gte",
+            "value": 5.0,
+            "currency": "CAD"
+          }
+        ]
+      },
       "action": "pause_campaign",
       "priority": 4,
       "exclusions": [
         "TEST_grace_3_days",
-        "reactivate_exclusion_list"
+        "reactivate_exclusion_list",
+        "COST_CAP_no_CPS_pause"
       ],
-      "notes": "Rodolfo pediu deixar R1-R5 como pendência para vermos mais tarde."
+      "notes": "COST_CAP excluído de pausa por CPS."
     },
     {
-      "id": "R5",
-      "enabled": false,
-      "status": "pending_later",
-      "description": "Aguardando regra de Rodolfo",
-      "metric_source": null,
-      "metric_name": null,
-      "window": null,
-      "condition": null,
-      "action": "pause_campaign",
+      "enabled": true,
+      "status": "defined_preliminary",
+      "description": "Paused campaign with CPS < CAD 2.40 and subs >= 2 => reactivate campaign",
+      "metric_source": "meta_insights_or_mapped_external_metric",
+      "metric_name": [
+        "effective_status",
+        "CPS",
+        "Subs"
+      ],
+      "window": "intraday_current_day",
+      "condition": {
+        "all": [
+          {
+            "field": "effective_status",
+            "op": "eq",
+            "value": "PAUSED"
+          },
+          {
+            "metric": "CPS",
+            "op": "lt",
+            "value": 2.4,
+            "currency": "CAD"
+          },
+          {
+            "metric": "Subs",
+            "op": "gte",
+            "value": 2
+          }
+        ]
+      },
+      "action": "reactivate_campaign",
       "priority": 5,
       "exclusions": [
         "TEST_grace_3_days",
         "reactivate_exclusion_list"
       ],
-      "notes": "Rodolfo pediu deixar R1-R5 como pendência para vermos mais tarde."
+      "notes": "Reativação seletiva por performance, separada do reativar-todas 00:30."
     }
   ],
   "reactivate_all": {
@@ -98,6 +198,31 @@
     "exclusion_list": [],
     "ask_before_adding_exclusion": true
   },
-  "rules_definition_status": "R1_R5_pending_for_later_with_Rodolfo",
-  "next_action": "map_CPS_metric_first_then_define_R1_R5"
+  "rules_definition_status": "R1_R5_defined_by_Rodolfo_preliminary_pending_account_calibration",
+  "next_action": "map_Meta_fields_for_M0_CPM0_Subs_CPS_and_run_dry_run_before_write",
+  "threshold_currency": "CAD",
+  "calibration_policy": "Thresholds are initial defaults; adjust after account/ad-account analysis before controlled write.",
+  "global_exceptions": [
+    {
+      "id": "TEST_grace_3_days",
+      "condition": {
+        "campaign_name_contains": "TEST",
+        "active_age_days_lt": 3
+      },
+      "effect": "immune_to_all_intraday_rules",
+      "source_preference": [
+        "meta_created_time",
+        "first_seen_at"
+      ]
+    },
+    {
+      "id": "COST_CAP_no_CPS_pause",
+      "condition": {
+        "bid_strategy": "COST_CAP",
+        "rule_metric": "CPS"
+      },
+      "effect": "do_not_pause_by_CPS_rules",
+      "rationale": "Bid cap controls cost."
+    }
+  ]
 }
