@@ -1,0 +1,68 @@
+{
+  "checked_at_utc": "2026-06-17T03:44:04.880760+00:00",
+  "account_id": "1356770869843984",
+  "token_item": "Token Meta API",
+  "token_field": "credential",
+  "token_len": 293,
+  "checks": [
+    {
+      "name": "account",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/readonly-access-1356770869843984-20260617T034404Z/account.json"
+    },
+    {
+      "name": "campaigns",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/readonly-access-1356770869843984-20260617T034404Z/campaigns.json",
+      "count": 15,
+      "paging_present": true
+    },
+    {
+      "name": "adsets",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/readonly-access-1356770869843984-20260617T034404Z/adsets.json",
+      "count": 30,
+      "paging_present": true
+    },
+    {
+      "name": "ads",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/readonly-access-1356770869843984-20260617T034404Z/ads.json",
+      "count": 90,
+      "paging_present": true
+    },
+    {
+      "name": "insights_campaign_today",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/readonly-access-1356770869843984-20260617T034404Z/insights_campaign_today.json",
+      "count": 5,
+      "paging_present": true
+    },
+    {
+      "name": "insights_campaign_last_7d",
+      "ok": true,
+      "http_status": 200,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/readonly-access-1356770869843984-20260617T034404Z/insights_campaign_last_7d.json",
+      "count": 10,
+      "paging_present": true
+    },
+    {
+      "name": "assigned_users",
+      "ok": false,
+      "http_status": 400,
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/readonly-access-1356770869843984-20260617T034404Z/assigned_users.json",
+      "error": {
+        "message": "(#100) For field 'assigned_users': The parameter business is required",
+        "type": "OAuthException",
+        "code": 100,
+        "fbtrace_id": "AlhJ5t11FExAKOGI5YdbUBr"
+      }
+    }
+  ],
+  "derived_report": "/root/mgs-agent/data/ares/meta-ads/reports/readonly-access-summary-1356770869843984-20260617T034404Z.json"
+}
