@@ -357,7 +357,7 @@ def run_reactivate_all(args) -> int:
             event['candidates'].append({
                 'pg_id': page_id_from_name(campaign_name),
                 'country_vertical': country_vertical_from_name(campaign_name, op_cfg),
-                'rule': 'reativar-todas — fora R1-R5',
+                'rule': 'reativar-todas',
                 'status': campaign.get('effective_status'),
                 'action': 'reactivate_campaign',
                 'campaign_id': campaign.get('id'),
