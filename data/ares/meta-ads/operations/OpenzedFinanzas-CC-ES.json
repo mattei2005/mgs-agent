@@ -91,5 +91,25 @@
   },
   "region": "Europe",
   "gdpr_sensitive": true,
-  "account_currency": "USD"
+  "account_currency": "USD",
+  "discord_log_channel": {
+    "name": "logs-aquisicao",
+    "id": "1516887105543077949",
+    "policy": "cron stdout delivered here only on proposed actions/errors"
+  },
+  "scheduler_jobs": {
+    "intraday": {
+      "job_id": "aa9e01a5ec4a",
+      "schedule": "every 30m",
+      "deliver": "discord:1516887105543077949",
+      "mode": "dry_run_no_write"
+    },
+    "reactivate_all": {
+      "job_id": "c6c737070d3f",
+      "schedule": "30 18 * * * America/New_York (00:30 Europe/Madrid current offset)",
+      "deliver": "discord:1516887105543077949",
+      "mode": "dry_run_no_write"
+    }
+  },
+  "updated_at": "2026-06-17T19:31:48.155950+00:00"
 }

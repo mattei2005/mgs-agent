@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-17T15:23:06-04:00",
+    "updated_at": "2026-06-17T15:33:07-04:00",
     "generated_by": "zeus"
   },
   "systemd_services": [
@@ -99,6 +99,33 @@
       "enabled": true,
       "no_agent": true,
       "deliver": "discord:1498132022634483894"
+    },
+    {
+      "entry": "Hermes cron profile=ares id=aa9e01a5ec4a schedule=\"every 30m\" script=ares-meta-intraday-cron.sh no_agent=true deliver=discord:1516887105543077949",
+      "id": "aa9e01a5ec4a",
+      "profile": "ares",
+      "name": "Ares Meta intraday R1-R5 dry-run",
+      "schedule": "every 30m",
+      "script": "/root/.hermes/profiles/ares/scripts/ares-meta-intraday-cron.sh",
+      "next_run_at": "2026-06-17T16:01:32.486217-04:00",
+      "state": "scheduled",
+      "enabled": true,
+      "no_agent": true,
+      "deliver": "discord:1516887105543077949"
+    },
+    {
+      "entry": "Hermes cron profile=ares id=c6c737070d3f schedule=\"30 18 * * *\" script=ares-meta-reactivate-all-cron.sh no_agent=true deliver=discord:1516887105543077949",
+      "id": "c6c737070d3f",
+      "profile": "ares",
+      "name": "Ares Meta reativar-todas dry-run",
+      "schedule": "30 18 * * *",
+      "intended_local_time": "00:30 Europe/Madrid / 18:30 America/New_York during EDT",
+      "script": "/root/.hermes/profiles/ares/scripts/ares-meta-reactivate-all-cron.sh",
+      "next_run_at": "2026-06-17T18:30:00-04:00",
+      "state": "scheduled",
+      "enabled": true,
+      "no_agent": true,
+      "deliver": "discord:1516887105543077949"
     }
   ],
   "scripts": [
@@ -548,6 +575,24 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
+      "size_bytes": 14365,
+      "modified_at": "2026-06-17T15:30:46-04:00",
+      "sha256": "31f7874fa51c92c58e644d2d5e2972a15973536b10335e35e0467d76caebb268"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-intraday-cron.sh",
+      "size_bytes": 201,
+      "modified_at": "2026-06-17T15:30:50-04:00",
+      "sha256": "103a6526d3cd762300a34c836c581db7ad08806affd537f9763eb874d4bc5904"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-reactivate-all-cron.sh",
+      "size_bytes": 207,
+      "modified_at": "2026-06-17T15:30:54-04:00",
+      "sha256": "d3f5e793065f0f81917342a540dd30812f819691193a6a4950c4f546241e72af"
     }
   ],
   "skills_mgs": [
@@ -2924,6 +2969,13 @@
       "md5": "7c17874a9ac93b58be59b7f2324a3bbc",
       "modified_at": "2026-06-17T15:21:09-04:00",
       "sha256": "bec41b11537195bb31454c1cbe16a824dba4f72ec4fdc330eb2b3017b8fbccbf"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json",
+      "size_bytes": 3711,
+      "md5": "f1d0e4f5a643bbbc643797520d386b4c",
+      "modified_at": "2026-06-17T15:31:48-04:00",
+      "sha256": "8bbc4883777d426ff22de17a5f888a8a888b64ce748fe74927809781bfaf5056"
     }
   ],
   "mu_plugin_canonical": {
