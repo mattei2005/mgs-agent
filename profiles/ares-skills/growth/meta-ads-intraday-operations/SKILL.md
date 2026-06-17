@@ -54,12 +54,51 @@ Scripts iniciais:
 ## Regras operacionais
 
 1. Intraday e reativar-todas são determinísticos e devem rodar como cron/script na VPS; skill é documentação/contexto operacional, não runtime.
-2. R1-R5 são slots plugáveis por operação, não hardcoded por conta; por decisão atual ficam como pendência para definir depois de mapear CPS/subscriber correto.
+2. R1-R5 são slots plugáveis por operação, não hardcoded por conta; defaults iniciais definidos por Rodolfo em CAD, pendentes de mapping real de M0/CPM0/Subs/CPS e calibração por conta antes de write.
 3. Cortes e reativações ocorrem somente em nível de campanha.
-4. Campanhas com `TEST` no nome têm carência de 3 dias usando `created_time` da Meta; fallback é `first_seen_at` local.
-5. Reativar-todas pode ter lista de exclusão, mas ela começa vazia e Ares deve perguntar antes de adicionar algo.
-6. Teto diário de R$1.500 é referência/log/base para testes de criativos; não pausar tudo ao bater o teto.
-7. Log intraday no Discord deve ser resumido e enviado só quando houver ação/erro, salvo Rodolfo mudar a política.
+4. Campanhas com `TEST` no nome têm carência de 3 dias usando `created_time` da Meta; fallback é `first_seen_at` local; durante essa carência ficam imunes a todas as regras R1-R5.
+5. COST_CAP não pausa por CPS; o bid cap controla custo. Regra de CPS aplica pausa só quando a condição/bid strategy permitir, especialmente LOWEST_COST.
+6. Reativar-todas pode ter lista de exclusão, mas ela começa vazia e Ares deve perguntar antes de adicionar algo.
+7. Teto diário de R$1.500 é referência/log/base para testes de criativos; não pausar tudo ao bater o teto.
+8. Log intraday no Discord deve ser resumido e enviado só quando houver ação/erro, salvo Rodolfo mudar a política.
+
+## Defaults R1-R5 atuais
+
+```text
+Regra | Condição                                                   | Ação
+------|------------------------------------------------------------|--------------------
+R1    | M0 = 0 e spend > CAD 7.00                                  | pausar campanha
+R2    | M0 > 0 e CPM0 > CAD 7.00                                   | pausar campanha
+R3    | Subs = 0 e spend > CAD 5.00                                | pausar campanha
+R4    | LOWEST_COST + CPS >= CAD 2.55 + subs >= 1 + spend >= CAD 5 | pausar campanha
+R5    | campanha pausada + CPS < CAD 2.40 + subs >= 2              | reativar campanha
+```
+
+Exceções: campanha `TEST` com menos de 3 dias ativos é imune a todas as regras; `COST_CAP` não pausa por CPS.
+
+## Métricas Meta atuais
+
+```text
+Métrica | Definição
+--------|------------------------------------------------------------
+CPS     | spend / subs
+subs    | primeira action válida encontrada na ordem de prioridade abaixo
+```
+
+Ordem canônica para `subs`:
+
+```text
+Prioridade | Meta action type
+-----------|------------------------------------------------------------
+1          | onsite_conversion.messaging_conversation_started_7d
+2          | onsite_conversion.total_messaging_connection
+3          | complete_registration
+4          | offsite_complete_registration_add_meta_leads
+5          | lead
+6          | offsite_conversion.fb_pixel_lead
+```
+
+Se nenhuma action válida for encontrada, `subs = 0`. Para evitar divisão por zero, `CPS` fica nulo/não comparável quando `subs = 0`; R4/R5 já exigem `subs >= 1`/`subs >= 2` antes da comparação de CPS. `M0` e `CPM0` continuam pendentes de definição/mapping real.
 
 ## Segurança e autorização
 
