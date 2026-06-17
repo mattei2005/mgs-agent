@@ -1,0 +1,94 @@
+{
+  "generated_at_utc": "2026-06-17T03:45:11.010671+00:00",
+  "account": {
+    "name": "OpenzedFinanzas-ES-CC-ES-03",
+    "account_id": "1356770869843984",
+    "account_status": 1,
+    "currency": "USD",
+    "timezone_name": "Europe/Madrid",
+    "timezone_offset_hours_utc": 2,
+    "business_name": "Mattei Services Inc",
+    "amount_spent": "656028",
+    "balance": "80174",
+    "spend_cap": "0"
+  },
+  "inventory": {
+    "campaigns": 15,
+    "campaign_status": {
+      "ACTIVE": 5,
+      "PAUSED": 10
+    },
+    "adsets": 30,
+    "adset_status": {
+      "ACTIVE": 10,
+      "CAMPAIGN_PAUSED": 20
+    },
+    "ads": 90,
+    "ad_status": {
+      "PAUSED": 7,
+      "ACTIVE": 26,
+      "CAMPAIGN_PAUSED": 57
+    },
+    "assigned_users": 3,
+    "pixels": 1,
+    "custom_conversions": 0
+  },
+  "insights": {
+    "today_campaign_rows": 5,
+    "last_7d_campaign_rows": 10,
+    "subs_sources_today": [
+      "complete_registration"
+    ],
+    "subs_sources_last_7d": [
+      "complete_registration",
+      "onsite_conversion.messaging_conversation_started_7d"
+    ],
+    "today_rows": [
+      {
+        "campaign": "Patricia Flores - US - ESP - (pg_22069) - 5",
+        "spend": 9.16,
+        "subs": 15.0,
+        "subs_source": "complete_registration",
+        "cps": 0.61,
+        "cpm": 18.96
+      },
+      {
+        "campaign": "Patricia Flores - US - ESP - (pg_22069) - 1",
+        "spend": 8.32,
+        "subs": 3.0,
+        "subs_source": "complete_registration",
+        "cps": 2.77,
+        "cpm": 14.52
+      },
+      {
+        "campaign": "Patricia Flores - US - ESP - (pg_22069) - 2",
+        "spend": 7.98,
+        "subs": 1.0,
+        "subs_source": "complete_registration",
+        "cps": 7.98,
+        "cpm": 9.83
+      },
+      {
+        "campaign": "Patricia Flores - US - ESP - (pg_22069) - 4",
+        "spend": 6.98,
+        "subs": 6.0,
+        "subs_source": "complete_registration",
+        "cps": 1.16,
+        "cpm": 20.77
+      },
+      {
+        "campaign": "Patricia Flores - US - ESP - (pg_22069) - 3",
+        "spend": 6.93,
+        "subs": 2.0,
+        "subs_source": "complete_registration",
+        "cps": 3.46,
+        "cpm": 13.15
+      }
+    ]
+  },
+  "access_paths": {
+    "main_audit_dir": "/root/mgs-agent/data/ares/meta-ads/audit/readonly-access-1356770869843984-20260617T034404Z",
+    "extra_audit_dir": "/root/mgs-agent/data/ares/meta-ads/audit/readonly-extra-1356770869843984-20260617T034430Z",
+    "derived_report": "/root/mgs-agent/data/ares/meta-ads/reports/readonly-access-summary-1356770869843984-20260617T034404Z.json"
+  }
+}
