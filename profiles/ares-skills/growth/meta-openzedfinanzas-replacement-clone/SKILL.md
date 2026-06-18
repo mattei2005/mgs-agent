@@ -174,6 +174,26 @@ Campanhas parciais criadas nas alternativas 1 e 3 foram marcadas `DELETED` e ver
 
 Próximo clone real depende de Rodolfo/usuário autenticando a conta no Ads Manager para remover o pending action.
 
+## Prioridade operacional: clonar, não criar do zero
+
+Correção explícita do Rodolfo: para esta operação, replacement deve priorizar **clone nativo** como os buyers fazem, não criação do zero de campaign/adset/ad. Criação from-zero pode falhar para este usuário/token e só ser viável em outro contexto de System User; não usar isso como prova de que o clone é impossível.
+
+Fluxo preferido para nova tentativa:
+
+```text
+Ordem | Caminho
+------|------------------------------------------------------------
+1     | Tentar Meta native copy endpoints (`/copies`) preservando PAUSED
+2     | Se campaign `deep_copy` for grande demais, tentar adset-level async copy
+3     | Se copy falhar por `standard_enhancements`, suprimir/normalizar creative features
+4     | Só usar rebuild manual de creative/ad como fallback para contornar campo legado
+5     | Validar GET e deletar qualquer cópia rasa/parcial sem adsets/ads esperados
+```
+
+Pitfall validado: `/<campaign_id>/copies` sem `deep_copy` cria só uma campanha vazia. Não considerar isso clone bem-sucedido; verificar contagem de adsets/ads antes de manter.
+
+Detalhe de sessão e erros Meta de copy nativo: `references/native-copy-standard-enhancements-2026-06-18.md`.
+
 ## Correção aprendida com playbook externo de clone
 
 Rodolfo trouxe um playbook de outro agente para criação/clonagem Meta. A diferença crítica contra a primeira implementação local é:
