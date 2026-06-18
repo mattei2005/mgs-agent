@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-17T23:45:50-04:00",
+    "updated_at": "2026-06-18T00:04:22-04:00",
     "generated_by": "zeus"
   },
   "systemd_services": [
@@ -102,10 +102,10 @@
       "deliver": "discord:1498132022634483894"
     },
     {
-      "entry": "Hermes cron profile=ares id=0598c0dc469f schedule=\"0 2,6,9,12,16 * * *\" script=ares-meta-hoa-manager.sh no_agent=true deliver=discord:1516887105543077949",
+      "entry": "Hermes cron profile=ares id=0598c0dc469f schedule=\"0 2,6,9,12,16 * * *\" script=ares-meta-hoa-manager.sh no_agent=true repeat=20 deliver=discord:1516887105543077949",
       "id": "0598c0dc469f",
       "profile": "ares",
-      "name": "Ares Meta HOA gestor dry-run",
+      "name": "Ares Meta HOA gestor read-only 4d",
       "schedule": "0 2,6,9,12,16 * * *",
       "intended_local_times": "08:00,12:00,15:00,18:00,22:00 Europe/Madrid during CEST",
       "script": "/root/.hermes/profiles/ares/scripts/ares-meta-hoa-manager.sh",
@@ -113,8 +113,10 @@
       "state": "scheduled",
       "enabled": true,
       "no_agent": true,
-      "repeat": "forever",
-      "deliver": "discord:1516887105543077949"
+      "repeat": 20,
+      "completed": 0,
+      "deliver": "discord:1516887105543077949",
+      "mode": "read-only/always-output"
     }
   ],
   "scripts": [
@@ -627,9 +629,15 @@
     },
     {
       "path": "/root/.hermes/profiles/ares/scripts/ares-meta-hoa-manager.sh",
-      "size_bytes": 191,
-      "modified_at": "2026-06-17T23:43:34-04:00",
-      "sha256": "742389fdb1bdd8cce0b29a4285f42853f9775420c3e7b8fbac38c2eba7bb1f99"
+      "size_bytes": 207,
+      "modified_at": "2026-06-17T23:55:43-04:00",
+      "sha256": "5749a99243bce55413799281b0073d9961fd0437880432b19e6d66cd5b5c13c0"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-replacement-clone.py",
+      "size_bytes": 17797,
+      "modified_at": "2026-06-18T00:01:20-04:00",
+      "sha256": "be5f0394b63fefec875f2c5350a3d17ad58893e454d78e2345b6b304776a551f"
     }
   ],
   "skills_mgs": [
@@ -1233,6 +1241,15 @@
         "name": "yuanbao",
         "category": "",
         "skill_md": "/root/.hermes/profiles/ares/skills/yuanbao/SKILL.md"
+      },
+      {
+        "name": "meta-openzedfinanzas-replacement-clone",
+        "category": "growth",
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
+        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
+        "sha256": "7c6b00b661043db414bd7b79b47a38e775e880c6c29fb99f3f14c55831e4eb47",
+        "versioned_sha256": "7c6b00b661043db414bd7b79b47a38e775e880c6c29fb99f3f14c55831e4eb47",
+        "modified_at": "2026-06-18T00:02:42-04:00"
       }
     ],
     "atena": [
@@ -3056,17 +3073,17 @@
     },
     {
       "path": "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v1.json",
-      "size_bytes": 2889,
-      "md5": "4e6c2bf35f70a521ff16a43a22f3c04a",
-      "modified_at": "2026-06-17T23:43:14-04:00",
-      "sha256": "4eda75a75f6db32960fe2b28bcb4e416dbd60998f34e3c7bfbc8ab63369f52e0"
+      "size_bytes": 3635,
+      "md5": "bb4c528212658c4c97252b63a9de1435",
+      "modified_at": "2026-06-18T00:02:54-04:00",
+      "sha256": "d78d0ab9bf661763b993623818c673521c8d0f9c759b130d620dbfe89463db72"
     },
     {
       "path": "/root/mgs-agent/data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json",
-      "size_bytes": 4578,
-      "md5": "0eb401c963c9b094a6699f88b5f86b2f",
-      "modified_at": "2026-06-17T23:43:47-04:00",
-      "sha256": "8e2ae5457fe98a7353dde66a14bb8cb9d5c5c2b1023d6c25c8551da06bc14cdd"
+      "size_bytes": 5474,
+      "md5": "078463f14be446bb070ea2a584101345",
+      "modified_at": "2026-06-18T00:02:54-04:00",
+      "sha256": "c14b2c4e11c41777f3a4f20253f4b49f01479dba93a4d3d7932ecf805b582903"
     },
     {
       "path": "/root/mgs-agent/data/ares/meta-ads/reports/hoa-cpmo-baseline-7d.json",

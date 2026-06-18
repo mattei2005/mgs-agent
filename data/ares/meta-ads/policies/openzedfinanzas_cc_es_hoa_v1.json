@@ -65,7 +65,18 @@
     "start_time_policy": "schedule replacement campaign for next day around 01:00 in account timezone",
     "controlled_write": "requires_explicit_Rodolfo_approval_before_Meta_write",
     "loser_final_action": "delete_if_Meta_supports_else_archive",
-    "archive_fallback": true
+    "archive_fallback": true,
+    "last_clone_attempt": {
+      "status": "blocked_by_meta_pending_account_authentication",
+      "error_code": 31,
+      "error_subcode": 3858385,
+      "partial_campaigns_cleaned": [
+        "120248889706550604",
+        "120248889834980604",
+        "120248889873410604"
+      ],
+      "audit": "/root/mgs-agent/data/ares/meta-ads/audit/clone/clone-attempt-20260618T040141Z.json"
+    }
   },
   "daily_creative_doc": {
     "path": "/root/mgs-agent/data/ares/meta-ads/reports/creative-performance-ledger.json",
@@ -76,5 +87,14 @@
     "target_cpmo_usd": 2.0,
     "instruction": "CPMO alvo fixado por Rodolfo; Ares deve otimizar para conseguir USD 2.00"
   },
-  "updated_at": "2026-06-18T03:43:14.143470+00:00"
+  "updated_at": "2026-06-18T04:02:54.683294+00:00",
+  "campaign_naming": {
+    "replacement_pattern": "<Nome página> - <País> - <Idioma> - (<pg_id>) - RPL - <YYYYMMDD> - <seq>",
+    "example": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - 01",
+    "notes": [
+      "RPL identifica replacement",
+      "YYYYMMDD é data de início no timezone da conta",
+      "seq começa em 01"
+    ]
+  }
 }

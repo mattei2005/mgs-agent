@@ -114,10 +114,12 @@
       "schedule": "0 2,6,9,12,16 * * * America/New_York (08:00,12:00,15:00,18:00,22:00 Europe/Madrid current offset)",
       "deliver": "discord:1516887105543077949",
       "mode": "read_only_dry_run_no_write",
-      "script": "ares-meta-hoa-manager.sh"
+      "script": "ares-meta-hoa-manager.sh",
+      "repeat": "20 times",
+      "reports": "always_output_each_checkpoint"
     }
   },
-  "updated_at": "2026-06-18T03:43:47.235022+00:00",
+  "updated_at": "2026-06-18T04:02:54.683713+00:00",
   "hoa_policy": {
     "status": "read_only_dry_run_implemented",
     "policy_path": "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v1.json",
@@ -136,6 +138,28 @@
     "target_cpmo_usd": 2.0,
     "daily_account_cap_usd": 300.0,
     "creative_test_pool_usd": 60.0,
-    "loser_final_action": "delete_if_possible_else_archive"
+    "loser_final_action": "delete_if_possible_else_archive",
+    "duration": "4_days_20_runs",
+    "reports": "always_output_each_checkpoint"
+  },
+  "campaign_naming": {
+    "replacement_pattern": "<Nome página> - <País> - <Idioma> - (<pg_id>) - RPL - <YYYYMMDD> - <seq>",
+    "example": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - 01",
+    "notes": [
+      "RPL identifica replacement",
+      "YYYYMMDD é data de início no timezone da conta",
+      "seq começa em 01"
+    ]
+  },
+  "last_replacement_clone_attempt": {
+    "status": "blocked_by_meta_pending_account_authentication",
+    "error_code": 31,
+    "error_subcode": 3858385,
+    "partial_campaigns_cleaned": [
+      "120248889706550604",
+      "120248889834980604",
+      "120248889873410604"
+    ],
+    "audit": "/root/mgs-agent/data/ares/meta-ads/audit/clone/clone-attempt-20260618T040141Z.json"
   }
 }
