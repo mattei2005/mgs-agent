@@ -1,0 +1,32 @@
+{
+  "created_at": "2026-06-18T21:55:22.789522+00:00",
+  "mode": "controlled_write_videoid_clone",
+  "graph_version": "v25.0",
+  "token_field": "credential",
+  "token_len": 198,
+  "account_id": "1356770869843984",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "loser_campaign_id": "120248940367540604",
+  "daily_budget_usd": 25.0,
+  "start_time_local": "2026-06-19T01:00:00+02:00",
+  "creative_mode": "video_data_minimal",
+  "steps": [],
+  "created": {},
+  "errors": [],
+  "source_campaign": {
+    "id": "120248940367540604",
+    "name": "Elena Santana - US - ESP - (pg_22091) - 4",
+    "status": "ACTIVE",
+    "effective_status": "ACTIVE",
+    "objective": "OUTCOME_SALES",
+    "buying_type": "AUCTION",
+    "daily_budget": "10000",
+    "bid_strategy": "COST_CAP",
+    "special_ad_categories": [
+      "FINANCIAL_PRODUCTS_SERVICES"
+    ],
+    "source_campaign_id": "120248940291730604",
+    "smart_promotion_type": "GUIDED_CREATION"
+  },
+  "final_error": "{\"status\": 400, \"error\": {\"message\": \"Meta API rate limit persisted after bounded backoff; stopped to avoid hammering the API.\", \"type\": \"AresRateLimitExceeded\", \"code\": \"ARES_RATE_LIMIT_EXHAUSTED\"}}"
+}
