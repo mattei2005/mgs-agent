@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-18T14:12:46-04:00",
+    "updated_at": "2026-06-18T15:37:43-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -141,8 +141,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-common.py",
-      "size_bytes": 6497,
-      "modified_at": "2026-06-16T23:51:34-04:00"
+      "size_bytes": 6855,
+      "modified_at": "2026-06-18T15:33:38-04:00",
+      "sha256": "ba8f988e49cfc39ac7ca1d7f2ae95677095194b290f4d8189a9cc1580c8413c5"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
