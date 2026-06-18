@@ -197,6 +197,7 @@ def main():
     ap.add_argument('--daily-budget-usd', type=float, default=25.0)
     ap.add_argument('--creative-count', type=int, default=3)
     ap.add_argument('--creative-mode', choices=['video_data', 'video_data_minimal', 'asset_feed_videoid'], default='video_data')
+    ap.add_argument('--omit-instagram-user-id', action='store_true', help='Do not copy instagram_user_id from source creative; useful when token/ad account lacks IG asset access.')
     ap.add_argument('--dry-run', action='store_true')
     args = ap.parse_args()
 
@@ -365,7 +366,7 @@ def main():
         for idx, w in enumerate(winners, 1):
             src_creative = (w['source_ad'] or {}).get('creative') or {}
             oss = src_creative.get('object_story_spec') or {}
-            instagram_user_id = oss.get('instagram_user_id')
+            instagram_user_id = None if args.omit_instagram_user_id else oss.get('instagram_user_id')
             creative_params, asset = build_creative_params(src_creative, idx, page_id, instagram_user_id, start_local, args.creative_mode)
             st, payload, _ = graph_post(common, f'act_{args.account_id}/adcreatives', token, creative_params)
             audit['steps'].append({'step': 'create_adcreative', 'mode': args.creative_mode, 'source_creative_id': src_creative.get('id'), 'asset': asset, 'status': st, 'payload': payload})
