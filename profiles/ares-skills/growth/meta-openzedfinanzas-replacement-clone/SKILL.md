@@ -174,11 +174,36 @@ Campanhas parciais criadas nas alternativas 1 e 3 foram marcadas `DELETED` e ver
 
 Próximo clone real depende de Rodolfo/usuário autenticando a conta no Ads Manager para remover o pending action.
 
+## Correção aprendida com playbook externo de clone
+
+Rodolfo trouxe um playbook de outro agente para criação/clonagem Meta. A diferença crítica contra a primeira implementação local é:
+
+```text
+Rota antiga local                | Rota correta para Messenger/replacement
+---------------------------------|------------------------------------------------
+Reaproveitar object_story_spec bruto | Não usar object_story_spec bruto de campanha antiga
+Reaproveitar asset_feed_spec bruto   | Recriar creative a partir de video_id ou image_hash
+Fallback com creative_id legado      | Evitar como rota padrão, especialmente cross-page
+Graph v20.0                          | Preferir v25.0 para o fluxo de criação se validado
+Recriar messenger_doc como link      | Não usar messenger_doc como destino externo
+```
+
+Para `clone-source` na mesma página:
+1. Ler ads ativos da source.
+2. Extrair `video_id` para vídeos ou `image_hash` para imagens.
+3. Criar novos adcreatives com `object_story_spec` mínimo contendo `page_id` e asset (`video_data.video_id` ou `link_data.image_hash` quando aplicável), mais `degrees_of_freedom_spec` e `page_welcome_message` seguro.
+4. Em Messenger, `page_welcome_message` deve usar `is_user_editing=true` e não enviar `template_id` nem `template_version`.
+5. Não enviar `standard_enhancements`.
+6. Exigir 3 ads utilizáveis; se criar menos de 3, arquivar/deletar a campanha parcial.
+
+Read-only em 2026-06-18 confirmou que os 3 creatives winners atuais possuem `asset_feed_spec.videos` com `video_id` disponível, então há insumo para trocar o script para uma rota baseada em `video_id`, não em `messenger_doc`/creative bruto. Auditoria: `/root/mgs-agent/data/ares/meta-ads/audit/clone/creative-asset-inspect-readonly.json`.
+
 ## Pitfalls
 
-- Se a Meta retornar `code=31/subcode=3858385`, parar: a conta precisa de autenticação humana no Ads Manager antes de criar/modificar anúncios.
+- `code=31/subcode=3858385` pode aparecer como mensagem genérica de autenticação na API mesmo quando Ads Manager manual não mostra checkpoint; antes de concluir checkpoint humano, testar se o payload está usando a rota correta (`video_id`/`image_hash`) e Graph version compatível.
 - A campanha original tem budget USD 100; replacement precisa forçar USD 25, nunca copiar o budget original.
-- Criativos Advantage/DCO podem rejeitar recriação de `asset_feed_spec`; script tenta criar novo adcreative e, se a Meta recusar, usa fallback com `creative_id` existente para manter a campanha PAUSED construída. Reportar fallback explicitamente.
-- Não ativar a campanha no ato do clone. Começar PAUSED e validar estrutura.
+- Criativos Advantage/DCO/Messenger podem rejeitar recriação de `asset_feed_spec` bruto por `messenger_doc`; não insistir nesse caminho.
+- Não usar `creative_id` de outra página como rota padrão. Para criativo de outra página, reconstruir por Drive/asset autorizado.
+- Não ativar a campanha no ato do clone. Começar PAUSED e validar estrutura, salvo autorização explícita para ACTIVE.
 - Não deletar/arquivar loser antes de clone e validação.
 - Não imprimir token Meta nem payload com token em logs.

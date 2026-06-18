@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-18T00:13:24-04:00",
+    "updated_at": "2026-06-18T00:43:11-04:00",
     "generated_by": "zeus"
   },
   "systemd_services": [
@@ -1253,9 +1253,9 @@
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
         "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
-        "sha256": "95f495985043d833b4469e3332cfd0721663ca95b61f4ae1bd61247814f8b50b",
-        "versioned_sha256": "95f495985043d833b4469e3332cfd0721663ca95b61f4ae1bd61247814f8b50b",
-        "modified_at": "2026-06-18T00:11:58-04:00"
+        "sha256": "90305a718adb527bddcad20da823d85f55cf9718cc707aaa685e007be4ec08f9",
+        "versioned_sha256": "90305a718adb527bddcad20da823d85f55cf9718cc707aaa685e007be4ec08f9",
+        "modified_at": "2026-06-18T00:42:23-04:00"
       }
     ],
     "atena": [
@@ -3104,6 +3104,13 @@
       "md5": "a0af3318e55269824d3096e23dac510a",
       "modified_at": "2026-06-18T00:11:37-04:00",
       "sha256": "87f6646ad57cef1795e82a32ddb8a3b7b631d0adcc395262f8dc50f12d84c07d"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/creative-asset-inspect-readonly.json",
+      "size_bytes": 2054,
+      "md5": "c4a8ad63c28b9d5c2b5b4742312bf75a",
+      "modified_at": "2026-06-18T00:41:59-04:00",
+      "sha256": "6ae9804d3fae38d9d1d4abbfd7af952e3fc5d172cc2a96980ee166ec85ab55c6"
     }
   ],
   "mu_plugin_canonical": {
