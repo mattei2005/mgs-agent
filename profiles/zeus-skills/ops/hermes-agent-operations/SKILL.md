@@ -482,6 +482,8 @@ When Rodolfo wants to migrate the whole MGS/Hermes operation to a new VPS, use `
 
 Do not call the cutover complete until the target has Zeus/Atena/Ares/Hera `active` + `enabled`, crons active, Codex auth present, patch guard OK, and the old VPS has gateways inactive/disabled, crontab empty, and zero Hermes/gateway processes. Validate `mgs-autocommit.service` separately; post-commit auto-push existing is not enough if the watcher service is missing.
 
+When Rodolfo asks for a persistent “compare TUDO” verification after migration, run the deep manifest workflow in `references/mgs-vps-migration-deep-file-comparison.md`: compare `/root/mgs-agent`, Hermes profiles, Hermes checkout, systemd units and crontabs by SHA256/size; copy any historical old-VPS-only `backups/`, `tmp/` or `data/backups/` artifacts to production; disable **all** old-VPS services including `mgs-autocommit`; then classify remaining differences as runtime-only vs. risky before final reporting.
+
 Post-migration finalization must also close the Git/runtime loop: install `inotify-tools` if needed, recreate/enable `/etc/systemd/system/mgs-autocommit.service`, secret-scan dirty files before staging, commit/push controlled migration state, clean or ignore runtime artifacts, and prove end-to-end with a create/delete auto-commit + auto-push smoke test. Detailed playbook: `references/mgs-hostinger-post-migration-autocommit-finalization-2026-06-18.md`.
 
 ## 8. New MGS agent bootstrap
