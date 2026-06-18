@@ -65,8 +65,14 @@ def _throttle_before_request():
             state = {}
         now = time.monotonic()
         last = float(state.get('last_request_monotonic') or 0)
+        # time.monotonic() is process/boot-local. If the VPS rebooted after the
+        # throttle state was persisted, a previous high monotonic value can be
+        # greater than the current boot's value and would otherwise sleep for
+        # days while holding the cross-process lock.
+        if last > now:
+            last = 0
         wait = MIN_INTERVAL_SECONDS - (now - last)
-        if wait > 0:
+        if 0 < wait <= MIN_INTERVAL_SECONDS:
             time.sleep(wait)
             now = time.monotonic()
         fh.seek(0)
