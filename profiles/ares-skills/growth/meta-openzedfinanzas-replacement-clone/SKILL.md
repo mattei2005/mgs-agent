@@ -198,6 +198,8 @@ Para `clone-source` na mesma página:
 
 Read-only em 2026-06-18 confirmou que os 3 creatives winners atuais possuem `asset_feed_spec.videos` com `video_id` disponível, então há insumo para trocar o script para uma rota baseada em `video_id`, não em `messenger_doc`/creative bruto. Auditoria: `/root/mgs-agent/data/ares/meta-ads/audit/clone/creative-asset-inspect-readonly.json`.
 
+Tentativa controlada posterior criou com sucesso campanha PAUSED, adset PAUSED e adcreative novo usando `video_id + image_url` de thumbnail, sem `messenger_doc`. O bloqueio remanescente ficou no `POST /ads`: `code=31/subcode=3858385`. Ou seja, a rota de criativo foi corrigida; a camada de criação do ad via API continua bloqueada para o token/app atual. Auditoria principal: `/root/mgs-agent/data/ares/meta-ads/audit/clone/clone-videoid-failed-20260618T044855Z.json`. Campanha parcial `120248892823990604` foi marcada `DELETED` e verificada via GET.
+
 ## Pitfalls
 
 - `code=31/subcode=3858385` pode aparecer como mensagem genérica de autenticação na API mesmo quando Ads Manager manual não mostra checkpoint; antes de concluir checkpoint humano, testar se o payload está usando a rota correta (`video_id`/`image_hash`) e Graph version compatível.

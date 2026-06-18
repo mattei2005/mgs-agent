@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-18T00:43:11-04:00",
+    "updated_at": "2026-06-18T00:50:20-04:00",
     "generated_by": "zeus"
   },
   "systemd_services": [
@@ -644,6 +644,12 @@
       "size_bytes": 11280,
       "modified_at": "2026-06-18T00:10:42-04:00",
       "sha256": "c04857d02cf82f5e44e263b63da87df882c6d1752fd952d3693f25eaed8ec01b"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-replacement-clone-videoid.py",
+      "size_bytes": 21551,
+      "modified_at": "2026-06-18T00:48:49-04:00",
+      "sha256": "ad4a6cb230eb2a0092f9a08c5bfcf3fcd3aca79d185b3024bd405909f469a72d"
     }
   ],
   "skills_mgs": [
@@ -1253,9 +1259,9 @@
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
         "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
-        "sha256": "90305a718adb527bddcad20da823d85f55cf9718cc707aaa685e007be4ec08f9",
-        "versioned_sha256": "90305a718adb527bddcad20da823d85f55cf9718cc707aaa685e007be4ec08f9",
-        "modified_at": "2026-06-18T00:42:23-04:00"
+        "sha256": "1f1223e93a8c1dc4d00ede7c0aa3d432c74bea1e6063b72712ea98a372df4d7d",
+        "versioned_sha256": "1f1223e93a8c1dc4d00ede7c0aa3d432c74bea1e6063b72712ea98a372df4d7d",
+        "modified_at": "2026-06-18T00:49:36-04:00"
       }
     ],
     "atena": [
@@ -3111,6 +3117,13 @@
       "md5": "c4a8ad63c28b9d5c2b5b4742312bf75a",
       "modified_at": "2026-06-18T00:41:59-04:00",
       "sha256": "6ae9804d3fae38d9d1d4abbfd7af952e3fc5d172cc2a96980ee166ec85ab55c6"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/clone-videoid-failed-20260618T044855Z.json",
+      "size_bytes": 6796,
+      "md5": "859e3376b83357b4abe9c6d1ac3cf476",
+      "modified_at": "2026-06-18T00:49:12-04:00",
+      "sha256": "abe5ce1fff734ce0a2f5c4afa0743a5ff60e28bd67bd3b16f8a7c20c5427e6a7"
     }
   ],
   "mu_plugin_canonical": {
