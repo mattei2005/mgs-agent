@@ -1,0 +1,46 @@
+{
+  "created_at": "2026-06-18T22:37:20.215638+00:00",
+  "mode": "native_copy_one_campaign_elena_fast",
+  "token_field": "credential",
+  "token_len": 198,
+  "source_campaign_id": "120248940367540604",
+  "steps": [
+    {
+      "step": "get_source_campaign",
+      "status": 200,
+      "payload": {
+        "id": "120248940367540604",
+        "name": "Elena Santana - US - ESP - (pg_22091) - 4",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "daily_budget": "10000"
+      }
+    },
+    {
+      "step": "get_source_adsets",
+      "status": 400,
+      "payload": {
+        "message": "User request limit reached",
+        "type": "OAuthException",
+        "code": 17,
+        "error_subcode": 2446079,
+        "fbtrace_id": "A8qM3DRe3MJCscEIbOillO9"
+      }
+    },
+    {
+      "step": "get_source_ads",
+      "status": 400,
+      "payload": {
+        "message": "User request limit reached",
+        "type": "OAuthException",
+        "code": 17,
+        "error_subcode": 2446079,
+        "fbtrace_id": "A5NSxKNHrQPa_xUNJne2QFO"
+      }
+    }
+  ],
+  "cleanups": [],
+  "created": {},
+  "result": "failed",
+  "final_error": "source_missing_adset_ads"
+}
