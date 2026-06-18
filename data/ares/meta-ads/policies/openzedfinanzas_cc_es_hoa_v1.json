@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "account_id": "1356770869843984",
+  "timezone": "Europe/Madrid",
+  "status": "draft_read_only_pending_implementation",
+  "coexistence": {
+    "intraday_R1_R5": "separate_deterministic_cron_every_30m",
+    "HOA": "separate_manager_layer_checkpoints",
+    "policy": "intraday_and_HOA_must_coexist_initially"
+  },
+  "checkpoints": ["08:00", "12:00", "15:00", "18:00", "22:00"],
+  "metrics": {
+    "europe_primary_count": "MO",
+    "MO_action_type": "complete_registration",
+    "primary_cost": "CPMO",
+    "CPMO_formula": "spend_usd / MO"
+  },
+  "hoa_weights": {
+    "today": 0.5,
+    "yesterday": 0.3,
+    "day_before_yesterday": 0.2
+  },
+  "bad_day_gates": {
+    "minimum_spend_usd": 5.0,
+    "minimum_MO": 2,
+    "bad_days_required_for_replacement": 2,
+    "bad_days_definition": "2 complete bad days out of the last 3 complete days"
+  },
+  "initial_cpmo_baseline": {
+    "source": "/root/mgs-agent/data/ares/meta-ads/reports/hoa-cpmo-baseline-7d.json",
+    "range_timezone": "Europe/Madrid",
+    "account_CPMO_7d_usd": 1.9744,
+    "suggested_initial_CPMO_target_usd": 2.27,
+    "method": "7d account CPMO * 1.15 buffer, floored at USD 2.00; requires Rodolfo approval before enforcement"
+  },
+  "budget": {
+    "daily_account_cap_brl": 1500.0,
+    "conversion": "convert_to_usd_daily",
+    "creative_test_share": 0.2,
+    "creative_test_policy": "only launch tests when there is available test budget; otherwise only mention in 22:00 report",
+    "new_campaign_daily_budget_max_usd": 25.0,
+    "never_create_campaign_above_usd": 25.0
+  },
+  "replacement": {
+    "flow": [
+      "map_loser_campaigns",
+      "identify_best_account_level_creatives_by_lowest_CPMO_last_3_days",
+      "clone_full_structure_campaign_adset_creatives",
+      "validate_clone",
+      "archive_or_delete_loser_after_clone_validation"
+    ],
+    "same_page_required": true,
+    "creative_source_scope": "entire_account_not_only_campaign_or_page",
+    "creative_ranking_metric": "lowest_CPMO",
+    "creative_window_days": 3,
+    "creatives_per_new_campaign": 3,
+    "start_time_policy": "schedule replacement campaign for next day around 01:00 in account timezone",
+    "controlled_write": "requires_explicit_Rodolfo_approval_before_Meta_write"
+  },
+  "daily_creative_doc": {
+    "path": "/root/mgs-agent/data/ares/meta-ads/reports/creative-performance-ledger.json",
+    "update_time": "22:00 Europe/Madrid",
+    "purpose": "persist best creatives so Ares does not need to hit Meta API repeatedly"
+  }
+}

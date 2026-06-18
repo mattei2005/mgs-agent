@@ -363,12 +363,25 @@ Pitfalls específicos:
 Regra inicial discutida para CPA ponderado:
 
 ```text
-CPA ponderado = Hoje 50% + Ontem 30% + D-2 20%
+HOA ponderado = Hoje 50% + Ontem 30% + D-2 20%
 ```
+
+Decisões atuais para OpenzedFinanzas/Europa:
+
+- Intraday R1-R5 e HOA são camadas separadas e devem coexistir inicialmente.
+- HOA roda nos checkpoints `08:00`, `12:00`, `15:00`, `18:00`, `22:00` no timezone da conta.
+- Europa/GDPR usa `MO=complete_registration` e `CPMO=spend/MO`, não CPS/subs.
+- “Dia ruim” para replacement exige dia completo, gasto mínimo `USD 5.00` e `MO >= 2`; replacement requer 2 dias completos ruins.
+- Budget total de referência: `R$1.500/dia` convertido para USD; 20% reservado para testes de criativos novos.
+- Campanha nova nunca deve ser criada com budget maior que `USD 25/dia` inicialmente.
+- Replacement deve: mapear loser → identificar melhores criativos da conta inteira por menor CPMO nos últimos 3 dias → clonar campanha/adset/criativos do zero → validar clone → arquivar/deletar loser. O clone deve usar a mesma página, mas pode usar criativo vencedor de outra página.
+- Campanhas de replacement devem ser programadas para o dia seguinte, preferencialmente `01:00` no timezone da conta.
+- Cada campanha nova deve ter exatamente 3 criativos.
+- Se não houver espaço de budget para testes, não executar; avisar só no relatório final das 22h.
 
 Guardrails:
 
-- Não cortar teste antes de janela mínima definida (ex.: 3 dias) sem autorização.
+- Não cortar teste antes de janela mínima definida sem autorização.
 - Exigir gasto mínimo/volume antes de avaliar criativo.
 - Separar **pausar** de **substituir/replacement**.
 - No começo o Ares recomenda; não executa automaticamente.

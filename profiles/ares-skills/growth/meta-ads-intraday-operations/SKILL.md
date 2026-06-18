@@ -43,12 +43,17 @@ Write                         | Desabilitado até aprovação explícita de Rodo
 /root/mgs-agent/data/ares/meta-ads/permissions/   # permissionamento/guardrails
 ```
 
-Scripts iniciais:
+Scripts iniciais / cron:
 
 ```text
 /root/mgs-agent/scripts/ares-meta-common.py
 /root/mgs-agent/scripts/ares-meta-auth-check.py
 /root/mgs-agent/scripts/ares-meta-intraday-runner.py
+/root/mgs-agent/scripts/ares-meta-cron-runner.py                 # intraday + reativar-todas dry-run/no-write
+/root/mgs-agent/scripts/ares-meta-token-expiry-alert.py          # watchdog de expiração do Token Meta API
+/root/.hermes/profiles/ares/scripts/ares-meta-intraday-cron.sh   # wrapper Hermes script-only
+/root/.hermes/profiles/ares/scripts/ares-meta-reactivate-all-cron.sh
+/root/.hermes/profiles/ares/scripts/ares-meta-token-expiry-alert.sh
 ```
 
 ## Regras operacionais
@@ -62,6 +67,8 @@ Scripts iniciais:
 6. Reativar-todas pode ter lista de exclusão, mas ela começa vazia e Ares deve perguntar antes de adicionar algo.
 7. Teto diário de R$1.500 é referência/log/base para testes de criativos; não pausar tudo ao bater o teto.
 8. Log intraday no Discord deve ser resumido e enviado só quando houver ação/erro, salvo Rodolfo mudar a política.
+9. Logs dos crons Meta em `logs-aquisicao` devem usar título com `nome da conta — dia — horário no timezone da conta — tipo do cron` e tabela alinhada com estas colunas base: `PG ID`, `Nome da página`, `País/Vertical`, `Regra usada`, `Status`. Extrair `PG ID` do padrão `(pg_12345)` no nome da campanha e `Nome da página` do trecho inicial antes de ` - <país> - `. Em `Regra usada`, intraday deve mostrar o identificador e a descrição curta (`R1 — ...`, `R2 — ...`, `R3 — ...`, `R4 — ...`, `R5 — ...`). O cron diário separado deve mostrar só `reativar-todas` — não rotular como `fora R1-R5`, porque a distinção já está no tipo do cron/título.
+10. Intraday R1-R5 e HOA são camadas separadas e devem coexistir inicialmente. HOA roda como camada de gestor/tráfego nos checkpoints 08:00, 12:00, 15:00, 18:00 e 22:00 no timezone da conta, usando MO/CPMO em operações Europa/GDPR.
 
 ## Defaults R1-R5 atuais — OpenzedFinanzas-CC-ES / Europa / USD
 
@@ -90,6 +97,26 @@ Em operações Europa/GDPR, `MO/CPMO` são a métrica primária do intraday porq
 
 Para operações fora da Europa onde subscribe é confiável, usar mapping separado de `subs/CPS` conforme operação específica, sem misturar com o ruleset Europa.
 
+## Formato de log dos crons
+
+Quando configurar ou ajustar crons Meta Ads do Ares (`intraday` e `reativar-todas`), o log operacional deve ir para o canal `logs-aquisicao` quando configurado para a operação. O formato preferido por Rodolfo é uma tabela curta, com título contendo conta, dia e horário da conta.
+
+```text
+<Nome da conta> — <YYYY-MM-DD> — <HH:MM TZ> — <Tipo do cron>
+
+PG ID    | País/Vertical | Regra usada    | Status
+---------|---------------|----------------|-------
+pg_22068 | US / CC       | reativar-todas | PAUSED
+```
+
+Regras de formatação:
+- Extrair `PG ID` do nome da campanha quando houver padrão `(pg_12345)`.
+- `País/Vertical`: país do nome da campanha quando disponível + vertical da operação.
+- `Regra usada`: `R1`–`R5` no intraday; `reativar-todas` no cron diário.
+- `Status`: `effective_status` atual da campanha.
+- Se não houver ação candidata nem erro, o cron fica silencioso e salva apenas audit JSON local.
+- Sempre declarar `dry_run_no_write` no audit enquanto controlled-write não estiver aprovado; não precisa poluir a tabela principal com essa coluna.
+
 ## Segurança e autorização
 
 - Nunca expor token Meta no chat.
@@ -116,6 +143,9 @@ Fase | Critério
 
 - `references/openzedfinanzas-cc-es-pilot.md` — decisões, estrutura criada, validações read-only e lições reutilizáveis do primeiro piloto Meta Messenger.
 - `references/threshold-calibration.md` — método read-only de baixa carga para analisar mês da conta e sugerir thresholds R1-R5 sem pedir payload pesado da Meta API.
+- `references/openzedfinanzas-cron-logging-2026-06-17.md` — detalhe da configuração dos crons intraday/reativar-todas e formato de tabela corrigido por Rodolfo para `logs-aquisicao`.
+- `references/threshold-calibration.md` — método read-only de baixa carga para analisar mês da conta e sugerir thresholds R1-R5 sem pedir payload pesado da Meta API.
+- `references/cron-log-format-logs-aquisicao.md` — formato validado por Rodolfo para logs dos crons Meta em `logs-aquisicao`: título conta/dia/horário e colunas `PG ID`, `País/Vertical`, `Regra usada`, `Status`.
 
 ## Pitfalls
 

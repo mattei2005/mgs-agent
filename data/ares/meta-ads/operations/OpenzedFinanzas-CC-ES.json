@@ -111,5 +111,21 @@
       "mode": "dry_run_no_write"
     }
   },
-  "updated_at": "2026-06-17T19:31:48.155950+00:00"
+  "updated_at": "2026-06-18T03:32:51.926391+00:00",
+  "hoa_policy": {
+    "status": "draft_read_only_pending_implementation",
+    "policy_path": "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v1.json",
+    "checkpoints": [
+      "08:00",
+      "12:00",
+      "15:00",
+      "18:00",
+      "22:00"
+    ],
+    "timezone": "Europe/Madrid",
+    "coexists_with_intraday": true,
+    "initial_suggested_cpmo_target_usd": 2.27,
+    "new_campaign_budget_max_usd": 25.0,
+    "replacement_start_time": "next_day_01:00_account_timezone"
+  }
 }

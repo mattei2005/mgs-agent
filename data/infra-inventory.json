@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-17T18:52:50-04:00",
+    "updated_at": "2026-06-17T23:35:04-04:00",
     "generated_by": "zeus"
   },
   "systemd_services": [
@@ -86,6 +86,20 @@
     },
     {
       "entry": "41 3 * * * flock -n /var/lock/mgs_safety_backup.lock /root/mgs-agent/scripts/mgs-safety-backup.sh >> /root/mgs-agent/logs/mgs-safety-backup-cron.log 2>&1"
+    },
+    {
+      "entry": "Hermes cron profile=ares id=709a29c99b3f schedule=\"once at 2026-08-09 12:09\" script=ares-meta-token-expiry-alert.sh no_agent=true deliver=discord:1498132022634483894",
+      "id": "709a29c99b3f",
+      "profile": "ares",
+      "name": "Ares Meta token expiry alert - 7d before expiry",
+      "schedule": "once at 2026-08-09 12:09",
+      "script": "/root/.hermes/profiles/ares/scripts/ares-meta-token-expiry-alert.sh",
+      "next_run_at": "2026-08-09T12:09:54-04:00",
+      "state": "scheduled",
+      "enabled": true,
+      "no_agent": true,
+      "repeat": "once",
+      "deliver": "discord:1498132022634483894"
     }
   ],
   "scripts": [
@@ -983,12 +997,20 @@
       {
         "name": "meta-ads-intraday-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "sha256": "bcf1d8d5b1a0f69c6b48889613f5ca58545baa754bc6ad690bab5afffe07f100",
+        "versioned_sha256": "bcf1d8d5b1a0f69c6b48889613f5ca58545baa754bc6ad690bab5afffe07f100",
+        "modified_at": "2026-06-17T23:33:04-04:00"
       },
       {
         "name": "paid-acquisition-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md",
+        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/paid-acquisition-operations/SKILL.md",
+        "sha256": "b9c4962e6d3ea85c68a34bd4c075a19865e3664dbfb174c256b586798c2385d9",
+        "versioned_sha256": "b9c4962e6d3ea85c68a34bd4c075a19865e3664dbfb174c256b586798c2385d9",
+        "modified_at": "2026-06-17T23:33:17-04:00"
       },
       {
         "name": "native-mcp",
@@ -3004,6 +3026,27 @@
       "size_bytes": 43510,
       "md5": "313356aeb86d41db526f68507a56ec4e",
       "modified_at": "2026-06-16T19:23:39-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v1.json",
+      "size_bytes": 2551,
+      "md5": "878d1aadc0d617d49d8bf9bfd6aeebe6",
+      "modified_at": "2026-06-17T23:32:41-04:00",
+      "sha256": "ea71b57fab312dadb51207fe4866f849c687ee8da2ccb06b2810d1a56466966a"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json",
+      "size_bytes": 4213,
+      "md5": "e5f90cc12482102fef3f1e93d0fc0420",
+      "modified_at": "2026-06-17T23:32:51-04:00",
+      "sha256": "b4c2bb6f38acc9891306f3192adf7c3ff1dcb3137c3686f19ee070e6244cf7fc"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/reports/hoa-cpmo-baseline-7d.json",
+      "size_bytes": 1701,
+      "md5": "a8fa7b0c993f84ef75761f05f2975aff",
+      "modified_at": "2026-06-17T23:32:20-04:00",
+      "sha256": "4480ca256776e511e903607944594ba2dfc2fd56b45f631d49d14e360022ed14"
     }
   ],
   "mu_plugin_canonical": {
