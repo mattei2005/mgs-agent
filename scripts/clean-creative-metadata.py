@@ -35,6 +35,7 @@ ALLOWED_STRUCTURAL_TAGS = {
     'Interlace', 'ColorComponents', 'YCbCrSubSampling', 'EncodingProcess',
     'BitsPerSample', 'SamplesPerPixel', 'XResolution', 'YResolution',
     'ResolutionUnit', 'ExifByteOrder', 'CurrentIPTCDigest', 'BackgroundColor',
+    'JFIFVersion',
     'Warning', 'Error',
     # MP4/QuickTime structural/container fields that remain after -all= and are
     # required to describe/play the video. These are not privacy metadata.
