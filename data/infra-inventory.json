@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-18T18:29:15.935418-04:00",
+    "updated_at": "2026-06-18T18:32:42.819646-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -223,8 +223,12 @@
     },
     {
       "path": "/root/mgs-agent/scripts/clean-creative-metadata.py",
-      "size_bytes": 13375,
-      "modified_at": "2026-06-16T15:33:15-04:00"
+      "size_bytes": 13394,
+      "modified_at": "2026-06-18T18:30:36.980212-04:00",
+      "sha256": "7cf0f13798064269e7c0f82096150d6e940150668b769bae48d07c9a734e27b4",
+      "agent": "hera",
+      "purpose": "Creative metadata sanitizer/gate for Hera/Ares assets",
+      "last_report": "JFIFVersion structural allowlist + mat2 validation for Meta Ad Library JPG delivery"
     },
     {
       "path": "/root/mgs-agent/scripts/clean-creative-metadata.sh",
@@ -3188,8 +3192,34 @@
       "binary": "/usr/bin/exiftool",
       "binary_exists": true,
       "purpose": "Metadata inspection/sanitization checks for creative assets",
-      "known_pending": "JPEG sanitizer still returned clean=false after harmful_tags removal; do not treat JPEG outputs as final deliverables until Hera resolves sanitizer/allowlist.",
-      "updated_at": "2026-06-18T18:29:15.935418-04:00"
+      "known_pending": "resolved: JFIFVersion treated as structural JPEG/JFIF metadata; 10 Meta Library JPGs verified clean=true/harmful_tags=0 after sanitization.",
+      "updated_at": "2026-06-18T18:32:42.819646-04:00"
+    },
+    {
+      "id": "hera-creative-sanitizer-mat2",
+      "agent": "hera",
+      "manager": "apt",
+      "source_report": "REPORT-INFRA Hera creative sanitizer clean JPG gate",
+      "package": "mat2",
+      "version": "0.13.4-2.1",
+      "binary": "/usr/bin/mat2",
+      "binary_exists": true,
+      "purpose": "Second-pass metadata removal/verification for clean creative asset delivery",
+      "updated_at": "2026-06-18T18:32:42.819646-04:00"
+    }
+  ],
+  "runtime_artifacts": [
+    {
+      "id": "hera-meta-library-first10-clean-zip-2026-06-18",
+      "agent": "hera",
+      "path": "/tmp/hera-meta-library-test/utua_first10_2026-06-18T22-29-47-519Z/utua_meta_library_first10_clean.zip",
+      "type": "temporary_zip",
+      "sha256": "ec3ba172fde784a000ea7e496175bf5ce97101c739d43b02ad3c6c9da997b0c9",
+      "size_bytes": 393048,
+      "source": "/tmp/hera-meta-library-test/",
+      "validation": "unzip -l OK; 10 JPGs verify clean=true and harmful_tags=0",
+      "git_tracked": false,
+      "updated_at": "2026-06-18T18:32:42.819646-04:00"
     }
   ]
 }
