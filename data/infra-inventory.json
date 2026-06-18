@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-18T13:33:13-04:00",
+    "updated_at": "2026-06-18T14:12:46-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -23,7 +23,7 @@
     },
     {
       "name": "mgs-autocommit.service",
-      "status": "inactive\nunknown"
+      "status": "active"
     }
   ],
   "crons": [
@@ -206,8 +206,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 3224,
-      "modified_at": "2026-06-13T21:16:14-04:00"
+      "size_bytes": 3450,
+      "modified_at": "2026-06-18T14:12:11-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/chat-log.sh",
@@ -2838,8 +2838,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "528a34c735c5b4f6db0b7e34132b3106",
-      "modified_at": "2026-06-18T13:26:04-04:00"
+      "md5": "bb44f316e6c6d9bed22c605224c761d2",
+      "modified_at": "2026-06-18T14:11:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -2850,8 +2850,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "4b55f3ba4256bfd367d855443560b954",
-      "modified_at": "2026-06-18T13:30:01-04:00"
+      "md5": "3d819abb25cd1421df52202991bdcd3f",
+      "modified_at": "2026-06-18T14:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -2862,8 +2862,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 14974,
-      "md5": "0ad1acbfb5b5efe7b3f19028c5547eec",
-      "modified_at": "2026-06-18T13:30:01-04:00"
+      "md5": "5e46573fc4f6954656c5044b214838f2",
+      "modified_at": "2026-06-18T14:10:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
@@ -2874,8 +2874,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 106835,
-      "md5": "847b24f600af416cbd08a5073274af44",
-      "modified_at": "2026-06-18T05:00:05-04:00"
+      "md5": "699bb6ae75d8840719808576f8564f5a",
+      "modified_at": "2026-06-18T13:33:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -2922,8 +2922,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2239,
-      "md5": "b0eddfea193d3c395d54a2a2b96e42e3",
-      "modified_at": "2026-06-18T13:31:01-04:00"
+      "md5": "11055abe6dfe00f855115e2bd08cc86b",
+      "modified_at": "2026-06-18T14:11:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -2940,8 +2940,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "0dbca544d91b120fc3981e643e705111",
-      "modified_at": "2026-06-18T08:07:01-04:00"
+      "md5": "e9ad8293c224e52a9c4c4d8e50eb30b7",
+      "modified_at": "2026-06-18T14:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
