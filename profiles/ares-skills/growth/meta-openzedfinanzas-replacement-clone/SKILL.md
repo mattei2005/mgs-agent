@@ -176,23 +176,36 @@ Próximo clone real depende de Rodolfo/usuário autenticando a conta no Ads Mana
 
 ## Prioridade operacional: clonar, não criar do zero
 
-Correção explícita do Rodolfo: para esta operação, replacement deve priorizar **clone nativo** como os buyers fazem, não criação do zero de campaign/adset/ad. Criação from-zero pode falhar para este usuário/token e só ser viável em outro contexto de System User; não usar isso como prova de que o clone é impossível.
+Correção explícita do Rodolfo: para esta operação, replacement deve priorizar **clone nativo** como os buyers fazem, não criação do zero de campaign/adset/ad. Criação from-zero pode falhar para este usuário/token e só ser viável em outro contexto de System User; **não usar criação do zero como prova, teste principal ou resposta operacional quando Rodolfo pedir clone**.
+
+Regra de interpretação do escopo:
+- Campanhas `ACTIVE` e `PAUSED/OFF` são fontes válidas de clone. `PAUSED` não é deletada.
+- Ares deve conseguir listar e analisar todas as campanhas visíveis da conta, ligadas ou desligadas, e escolher a melhor base conforme as regras de performance quando o fluxo estiver estabilizado.
+- Para testes iniciais de clone, se Rodolfo disser "qualquer uma da conta", tentar qualquer campanha viável; basta uma funcionar para desbloquear o método e depois voltar ao ranking/regras.
+- Só considerar sucesso se o clone/copy trouxer estrutura utilizável com adsets/ads. Uma cópia rasa de campaign sem adsets/ads é artefato parcial e deve ser deletada/verificada.
 
 Fluxo preferido para nova tentativa:
 
 ```text
 Ordem | Caminho
 ------|------------------------------------------------------------
-1     | Tentar Meta native copy endpoints (`/copies`) preservando PAUSED
-2     | Se campaign `deep_copy` for grande demais, tentar adset-level async copy
-3     | Se copy falhar por `standard_enhancements`, suprimir/normalizar creative features
-4     | Só usar rebuild manual de creative/ad como fallback para contornar campo legado
-5     | Validar GET e deletar qualquer cópia rasa/parcial sem adsets/ads esperados
+1     | Validar token e listar campanhas/adsets/ads incluindo OFF/PAUSED
+2     | Tentar Meta native copy endpoints (`/copies`) preservando PAUSED
+3     | Se campaign `deep_copy` falhar em uma source, testar outras campaigns da conta
+4     | Se campaign rasa copiar só shell, não chamar de sucesso; testar adset/ad copy nativo
+5     | Se copy falhar por `standard_enhancements`, suprimir/normalizar creative features
+6     | Só usar rebuild manual de creative/ad como diagnóstico separado, nunca como substituto do clone pedido
+7     | Validar GET e deletar qualquer cópia rasa/parcial sem adsets/ads esperados
 ```
 
-Pitfall validado: `/<campaign_id>/copies` sem `deep_copy` cria só uma campanha vazia. Não considerar isso clone bem-sucedido; verificar contagem de adsets/ads antes de manter.
+Pitfalls validados:
+- `/<campaign_id>/copies` sem `deep_copy` cria só uma campanha vazia. Não considerar isso clone bem-sucedido; verificar contagem de adsets/ads antes de manter.
+- Em 2026-06-18, `/<campaign_id>/copies deep_copy=true` falhou nas 20 campaigns visíveis com `code=100/subcode=1885194`; adset copy raso/deep também falhou em Elena com `1885501`/`1885194`. Isso não significa que campanhas estão invisíveis; significa que o payload público simples ainda não reproduz o clone do Ads Manager/buyers.
+- Se o usuário corrigir "não é para criar do zero", parar de misturar fallback from-zero no relatório e responder apenas sobre clone/copy nativo.
 
-Detalhe de sessão e erros Meta de copy nativo: `references/native-copy-standard-enhancements-2026-06-18.md`.
+Detalhes de sessão e erros Meta de copy nativo:
+- `references/native-copy-standard-enhancements-2026-06-18.md`
+- `references/native-copy-all-campaigns-probe-2026-06-18.md`
 
 ## Correção aprendida com playbook externo de clone
 
