@@ -1,0 +1,140 @@
+{
+  "created_at": "2026-06-18T21:54:03.688015+00:00",
+  "mode": "page_adset_permission_probe",
+  "token_field": "credential",
+  "token_len": 198,
+  "results": [
+    {
+      "label": "Elena Santana",
+      "source_campaign_id": "120248940367540604",
+      "source_campaign_status": 200,
+      "source_campaign_name": "Elena Santana - US - ESP - (pg_22091) - 4",
+      "source_adsets_status": 200,
+      "source_adset_id": "120248940367380604",
+      "page_id": "990898360783030",
+      "create_campaign_status": 200,
+      "create_campaign_payload": {
+        "id": "120248946191440604"
+      },
+      "create_adset_status": 200,
+      "create_adset_payload": {
+        "id": "120248946191800604"
+      },
+      "adset_permission_ok": true,
+      "cleanup": {
+        "campaign_id": "120248946191440604",
+        "delete_status": 200,
+        "verify_status": 200,
+        "verify": {
+          "id": "120248946191440604",
+          "name": "Elena Santana - US - ESP - (pg_22091) - 4 - PERMISSION-PROBE 20260618T215403Z",
+          "status": "DELETED",
+          "effective_status": "DELETED",
+          "daily_budget": "2500"
+        }
+      }
+    },
+    {
+      "label": "Patricia Flores",
+      "source_campaign_id": "120248290564280604",
+      "source_campaign_status": 200,
+      "source_campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "source_adsets_status": 200,
+      "source_adset_id": "120248290564350604",
+      "page_id": "1063171606876651",
+      "create_campaign_status": 200,
+      "create_campaign_payload": {
+        "id": "120248946193860604"
+      },
+      "create_adset_status": 400,
+      "create_adset_payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 1487202,
+        "fbtrace_id": "AyuBbicCI2U8UpH-UAnhPw4"
+      },
+      "adset_permission_ok": false,
+      "cleanup": {
+        "campaign_id": "120248946193860604",
+        "delete_status": 200,
+        "verify_status": 200,
+        "verify": {
+          "id": "120248946193860604",
+          "name": "Patricia Flores - US - ESP - (pg_22069) - 2 - PERMISSION-PROBE 20260618T215403Z",
+          "status": "DELETED",
+          "effective_status": "DELETED",
+          "daily_budget": "2500"
+        }
+      }
+    },
+    {
+      "label": "Carla Rojas",
+      "source_campaign_id": "120247501687810604",
+      "source_campaign_status": 200,
+      "source_campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 3",
+      "source_adsets_status": 200,
+      "source_adset_id": "120247501687840604",
+      "page_id": "1037297262803284",
+      "create_campaign_status": 200,
+      "create_campaign_payload": {
+        "id": "120248946194650604"
+      },
+      "create_adset_status": 400,
+      "create_adset_payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 1487202,
+        "fbtrace_id": "AqOUYrTNV9F9O4NUxwzZGN2"
+      },
+      "adset_permission_ok": false,
+      "cleanup": {
+        "campaign_id": "120248946194650604",
+        "delete_status": 200,
+        "verify_status": 200,
+        "verify": {
+          "id": "120248946194650604",
+          "name": "Carla Rojas - US - ESP - (pg_22068) - 3 - PERMISSION-PROBE 20260618T215403Z",
+          "status": "DELETED",
+          "effective_status": "DELETED",
+          "daily_budget": "2500"
+        }
+      }
+    },
+    {
+      "label": "Gabriela Lopez",
+      "source_campaign_id": "120246399685010604",
+      "source_campaign_status": 200,
+      "source_campaign_name": "Gabriela López - US - ESP - (pg_22037) - 2",
+      "source_adsets_status": 200,
+      "source_adset_id": "120246399685080604",
+      "page_id": "1097045910150412",
+      "create_campaign_status": 200,
+      "create_campaign_payload": {
+        "id": "120248946196380604"
+      },
+      "create_adset_status": 400,
+      "create_adset_payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 1487202,
+        "fbtrace_id": "AIp1JJvRqDLujzuUSClw2oD"
+      },
+      "adset_permission_ok": false,
+      "cleanup": {
+        "campaign_id": "120248946196380604",
+        "delete_status": 200,
+        "verify_status": 200,
+        "verify": {
+          "id": "120248946196380604",
+          "name": "Gabriela López - US - ESP - (pg_22037) - 2 - PERMISSION-PROBE 20260618T215403Z",
+          "status": "DELETED",
+          "effective_status": "DELETED",
+          "daily_budget": "2500"
+        }
+      }
+    }
+  ]
+}
