@@ -159,6 +159,19 @@ Audits:
 /root/mgs-agent/data/ares/meta-ads/audit/clone/cleanup-partial-120248889873410604.json
 ```
 
+Nova tentativa com até 3 alternativas em `/root/mgs-agent/scripts/ares-meta-clone-troubleshoot-3alts.py` confirmou o bloqueio:
+
+```text
+Alternativa | Método                                      | Resultado
+------------|---------------------------------------------|-------------------------------
+1           | build exato: campaign + adsets + 3 ads       | bloqueou em create_ad code=31/subcode=3858385
+2           | Meta native campaign copies endpoint         | bloqueou code=100/subcode=1885194
+3           | campaign+adset manual + ad copies endpoint   | bloqueou ad copy code=100/subcode=3858504
+```
+
+Auditoria: `/root/mgs-agent/data/ares/meta-ads/audit/clone/clone-troubleshoot-3alts-20260618T041137Z.json`.
+Campanhas parciais criadas nas alternativas 1 e 3 foram marcadas `DELETED` e verificadas via GET. Não tentar novas variações até a conta ser autenticada no Ads Manager ou Rodolfo confirmar outro usuário/token/ad account.
+
 Próximo clone real depende de Rodolfo/usuário autenticando a conta no Ads Manager para remover o pending action.
 
 ## Pitfalls

@@ -1,0 +1,145 @@
+{
+  "created_at": "2026-06-18T04:10:50.161280+00:00",
+  "source_campaign_id": "120248290564280604",
+  "goal": "create one paused replacement campaign in requested format",
+  "max_alternatives": 3,
+  "alternatives": [
+    {
+      "alternative": 1,
+      "name": "exact custom build: campaign+adsets+3 ads",
+      "exit_code": 1,
+      "stdout": {
+        "status": "partial_failed",
+        "audit": "/root/mgs-agent/data/ares/meta-ads/audit/clone/clone-attempt-20260618T041050Z.json",
+        "created_campaign_id": "120248890339780604",
+        "step": "create_ad"
+      },
+      "stderr_tail": "",
+      "result": "failed"
+    },
+    {
+      "alternative": 2,
+      "name": "Meta native campaign copies endpoint",
+      "status": 400,
+      "payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 1885194,
+        "fbtrace_id": "AWcMPcjgHhJq1TM9y5tazr6"
+      },
+      "created_campaign_id": null,
+      "result": "failed_or_not_exact"
+    },
+    {
+      "alternative": 3,
+      "name": "manual campaign+adset then ad copies",
+      "campaign_create_status": 200,
+      "campaign_payload": {
+        "id": "120248890347590604"
+      },
+      "adset_create_status": 200,
+      "adset_payload": {
+        "id": "120248890348590604"
+      },
+      "ad_copy_results": [
+        {
+          "source_ad_id": "120248290564590604",
+          "status": 400,
+          "payload": {
+            "message": "Invalid parameter",
+            "type": "OAuthException",
+            "code": 100,
+            "error_subcode": 3858504,
+            "fbtrace_id": "A-V3PL3B_TfkXh3yyqXlVoF"
+          }
+        },
+        {
+          "source_ad_id": "120248290297210604",
+          "status": 400,
+          "payload": {
+            "message": "Invalid parameter",
+            "type": "OAuthException",
+            "code": 100,
+            "error_subcode": 3858504,
+            "fbtrace_id": "ABI5gE8EQOOb16lwNPpCmDS"
+          }
+        },
+        {
+          "source_ad_id": "120248290564610604",
+          "status": 400,
+          "payload": {
+            "message": "Invalid parameter",
+            "type": "OAuthException",
+            "code": 100,
+            "error_subcode": 3858504,
+            "fbtrace_id": "A_Kf5JDTaH3h4TXf_0kk_cv"
+          }
+        }
+      ],
+      "verification": {
+        "campaign_status": 200,
+        "campaign": {
+          "id": "120248890347590604",
+          "name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - ADCOPY",
+          "status": "PAUSED",
+          "effective_status": "PAUSED",
+          "daily_budget": "2500",
+          "start_time": "2026-06-19T01:00:00+0200",
+          "objective": "OUTCOME_SALES"
+        },
+        "ads_status": 200,
+        "ads": [],
+        "adsets_status": 200,
+        "adsets": [
+          {
+            "id": "120248890348590604",
+            "name": "Conjunto RPL - Ad Copy",
+            "status": "PAUSED",
+            "effective_status": "IN_PROCESS"
+          }
+        ]
+      },
+      "result": "failed_or_not_exact"
+    }
+  ],
+  "cleanups": [
+    {
+      "campaign_id": "120248890339780604",
+      "reason": "alt1_failed_or_not_exact",
+      "delete_status": 200,
+      "delete_payload": {
+        "success": true
+      },
+      "verify_status": 200,
+      "verify": {
+        "id": "120248890339780604",
+        "name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - 01",
+        "status": "DELETED",
+        "effective_status": "DELETED",
+        "daily_budget": "2500"
+      }
+    },
+    {
+      "campaign_id": "120248890347590604",
+      "reason": "alt3_not_exact_or_failed",
+      "delete_status": 200,
+      "delete_payload": {
+        "success": true
+      },
+      "verify_status": 200,
+      "verify": {
+        "id": "120248890347590604",
+        "name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - ADCOPY",
+        "status": "DELETED",
+        "effective_status": "DELETED",
+        "daily_budget": "2500"
+      }
+    }
+  ],
+  "final": {
+    "success": false,
+    "campaign_id": null,
+    "blocker": "No alternative could create ads; likely Meta pending account authentication/action required"
+  }
+}
