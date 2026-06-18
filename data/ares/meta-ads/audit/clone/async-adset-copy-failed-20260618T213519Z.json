@@ -1,0 +1,113 @@
+{
+  "created_at": "2026-06-18T21:35:19.205735+00:00",
+  "mode": "asyncbatch_adset_deep_copy",
+  "source_campaign": "120248940367540604",
+  "source_adset": "120248940367380604",
+  "token_len": 198,
+  "steps": [
+    {
+      "step": "campaign_copy_shallow",
+      "status": 200,
+      "payload": {
+        "copied_campaign_id": "120248945870430604",
+        "ad_object_ids": [
+          {
+            "ad_object_type": "campaign",
+            "source_id": "120248940367540604",
+            "copied_id": "120248945870430604"
+          }
+        ]
+      },
+      "id": "120248945870430604"
+    },
+    {
+      "step": "asyncbatch_submit",
+      "status": 200,
+      "payload": {
+        "async_sessions": [
+          {
+            "id": "2631668430564160",
+            "name": "async_copy_adset_1"
+          }
+        ]
+      }
+    }
+  ],
+  "verifications": [
+    {
+      "after_sleep": 10,
+      "verification": {
+        "campaign": {
+          "id": "120248945870430604",
+          "name": "Elena Santana - US - ESP - (pg_22091) - 4 - Copia",
+          "status": "PAUSED",
+          "effective_status": "IN_PROCESS",
+          "start_time": "1970-01-01T00:59:59+0100",
+          "daily_budget": "2500"
+        },
+        "ads": [],
+        "adsets": [],
+        "statuses": [
+          200,
+          200,
+          200
+        ]
+      }
+    },
+    {
+      "after_sleep": 30,
+      "verification": {
+        "campaign": {
+          "id": "120248945870430604",
+          "name": "Elena Santana - US - ESP - (pg_22091) - 4 - Copia",
+          "status": "PAUSED",
+          "effective_status": "PAUSED",
+          "start_time": "1970-01-01T00:59:59+0100",
+          "daily_budget": "2500"
+        },
+        "ads": [],
+        "adsets": [],
+        "statuses": [
+          200,
+          200,
+          200
+        ]
+      }
+    },
+    {
+      "after_sleep": 60,
+      "verification": {
+        "campaign": {
+          "id": "120248945870430604",
+          "name": "Elena Santana - US - ESP - (pg_22091) - 4 - Copia",
+          "status": "PAUSED",
+          "effective_status": "PAUSED",
+          "start_time": "1970-01-01T00:59:59+0100",
+          "daily_budget": "2500"
+        },
+        "ads": [],
+        "adsets": [],
+        "statuses": [
+          200,
+          200,
+          200
+        ]
+      }
+    }
+  ],
+  "cleanup": {
+    "status": 200,
+    "payload": {
+      "success": true
+    }
+  },
+  "cleanup_verify": {
+    "status": 200,
+    "payload": {
+      "id": "120248945870430604",
+      "status": "DELETED",
+      "effective_status": "DELETED",
+      "daily_budget": "2500"
+    }
+  }
+}
