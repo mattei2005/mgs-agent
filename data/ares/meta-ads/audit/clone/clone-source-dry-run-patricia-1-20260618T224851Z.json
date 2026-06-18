@@ -1,0 +1,539 @@
+{
+  "created_at": "2026-06-18T22:48:53.777989+00:00",
+  "mode": "clone_source_dry_run_get_only_no_writes",
+  "graph_version": "v25.0",
+  "token_field": "credential",
+  "token_len": 198,
+  "source_campaign": {
+    "id": "120248290297180604",
+    "name": "Patricia Flores - US - ESP - (pg_22069) - 1",
+    "status": "PAUSED",
+    "effective_status": "PAUSED",
+    "objective": "OUTCOME_SALES",
+    "buying_type": "AUCTION",
+    "daily_budget": "10000",
+    "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+    "special_ad_categories": [
+      "FINANCIAL_PRODUCTS_SERVICES"
+    ],
+    "source_campaign_id": "120247501687800604",
+    "smart_promotion_type": "GUIDED_CREATION",
+    "special_ad_category_country": [
+      "ES"
+    ]
+  },
+  "source_adsets_count": 2,
+  "source_ads_count": 6,
+  "selected_assets": [
+    {
+      "source_ad_id": "120248290297200604",
+      "source_ad_name": "Ad - 3",
+      "source_creative_id": "26395266633481910",
+      "asset": {
+        "kind": "video",
+        "video_id": "979764601344710",
+        "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/715650235_1530166178492243_8675354081048739694_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=100&ccb=1-7&_nc_sid=b696e2&_nc_ohc=tqfx5lzFyyQQ7kNvwF8dz30&_nc_oc=Adq-EJ1IBdJqMW-FTiQGrh0emA1NFC4B8OnPqK1AuwtAK2glSO3Cdj-EGfPXszOiPeqCuHycZrJMEIxUgueRO8cp&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=ANIILHsEAAAA&_nc_gid=iktu2O_FD34zMQTv8DqmfA&_nc_tpa=Q5bMBQGwhvE1bhjYsMU8kZf-SnfADM6_f2ptvRYCvoR953Ldl_hUdQm8AR9T1ufbZZ3504lJwYxdEvao&oh=00_Af9t1AzzDq1EPSIUroeDRK86gOgn4VToO0Okxiy_Xvs6YQ&oe=6A3A4B5F"
+      }
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "source_ad_name": "Ad - 1",
+      "source_creative_id": "2231676334252509",
+      "asset": {
+        "kind": "image",
+        "image_hash": "09716886bbeeb208ad766b7e9f013b4a"
+      }
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "source_ad_name": "Ad - 2",
+      "source_creative_id": "1018755007258886",
+      "asset": {
+        "kind": "video",
+        "video_id": "2018825615667950",
+        "thumbnail_url": "https://scontent-lga3-1.xx.fbcdn.net/v/t15.5256-10/721348360_4542078662704726_3770361300680237516_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=110&ccb=1-7&_nc_sid=b696e2&_nc_ohc=1lzbfq0fPuMQ7kNvwEThVgp&_nc_oc=AdrfM9zUjwLjnHPE3mmw5O5Zka4Lk32ZtR3ZUbyrlbs0RtLCmYBapYfIM2-QqIiTnTbmPkKteThwZPQcodUAeqpd&_nc_zt=23&_nc_ht=scontent-lga3-1.xx&edm=ANIILHsEAAAA&_nc_gid=iktu2O_FD34zMQTv8DqmfA&_nc_tpa=Q5bMBQHnWF5Yv4jL0DoZR8JVPqqRja2UClGAhV-R5aSGm-4neuWxDVl5ZBnevPM2H0zYdKLzjT5obsMm&oh=00_Af-HixUjAhVSXHT4utU2zvRYtLvNWmffos36kV0H4EDlOg&oe=6A3A4C74"
+      }
+    }
+  ],
+  "payloads": {
+    "api_base": "https://graph.facebook.com/v25.0",
+    "would_post": {
+      "act_1356770869843984/campaigns": {
+        "name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260620 - DRYRUN",
+        "objective": "OUTCOME_SALES",
+        "buying_type": "AUCTION",
+        "status": "PAUSED",
+        "daily_budget": "2500",
+        "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+        "special_ad_categories": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ],
+        "special_ad_category_country": [
+          "ES"
+        ],
+        "start_time": "2026-06-20T01:00:00+0200"
+      },
+      "act_1356770869843984/adsets": [
+        {
+          "name": "Conjunto 02 - IMAGENS - RPL 20260620",
+          "campaign_id": "<NEW_CAMPAIGN_ID>",
+          "status": "PAUSED",
+          "billing_event": "IMPRESSIONS",
+          "optimization_goal": "OFFSITE_CONVERSIONS",
+          "destination_type": "MESSENGER",
+          "targeting": {
+            "age_max": 65,
+            "age_min": 18,
+            "age_range": [
+              18,
+              65
+            ],
+            "geo_locations": {
+              "countries": [
+                "ES"
+              ],
+              "location_types": [
+                "home",
+                "recent"
+              ]
+            },
+            "brand_safety_content_filter_levels": [
+              "FACEBOOK_RELAXED",
+              "AN_RELAXED"
+            ],
+            "targeting_automation": {
+              "advantage_audience": 1
+            }
+          },
+          "promoted_object": {
+            "pixel_id": "629060785934493",
+            "custom_event_type": "COMPLETE_REGISTRATION",
+            "page_id": "1063171606876651",
+            "smart_pse_enabled": false
+          },
+          "attribution_spec": [
+            {
+              "event_type": "CLICK_THROUGH",
+              "window_days": 1
+            }
+          ],
+          "start_time": "2026-06-20T01:00:00+0200",
+          "bid_strategy": null,
+          "bid_amount": null
+        },
+        {
+          "name": "Conjunto 01 - VÍDEOS - RPL 20260620",
+          "campaign_id": "<NEW_CAMPAIGN_ID>",
+          "status": "PAUSED",
+          "billing_event": "IMPRESSIONS",
+          "optimization_goal": "OFFSITE_CONVERSIONS",
+          "destination_type": "MESSENGER",
+          "targeting": {
+            "age_max": 65,
+            "age_min": 18,
+            "age_range": [
+              18,
+              65
+            ],
+            "geo_locations": {
+              "countries": [
+                "ES"
+              ],
+              "location_types": [
+                "home",
+                "recent"
+              ]
+            },
+            "brand_safety_content_filter_levels": [
+              "FACEBOOK_RELAXED",
+              "AN_RELAXED"
+            ],
+            "targeting_automation": {
+              "advantage_audience": 1
+            }
+          },
+          "promoted_object": {
+            "pixel_id": "629060785934493",
+            "custom_event_type": "COMPLETE_REGISTRATION",
+            "page_id": "1063171606876651",
+            "smart_pse_enabled": false
+          },
+          "attribution_spec": [
+            {
+              "event_type": "CLICK_THROUGH",
+              "window_days": 1
+            }
+          ],
+          "start_time": "2026-06-20T01:00:00+0200",
+          "bid_strategy": null,
+          "bid_amount": null
+        }
+      ],
+      "act_1356770869843984/adcreatives": [
+        {
+          "name": "RPL clone-source 20260620 01",
+          "object_story_spec": {
+            "page_id": "1063171606876651",
+            "video_data": {
+              "video_id": "979764601344710",
+              "message": "Hola, toca el botón para continuar.",
+              "title": "TARJETA DE CRÉDITO DISPONIBLE ✅",
+              "image_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/715650235_1530166178492243_8675354081048739694_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=100&ccb=1-7&_nc_sid=b696e2&_nc_ohc=tqfx5lzFyyQQ7kNvwF8dz30&_nc_oc=Adq-EJ1IBdJqMW-FTiQGrh0emA1NFC4B8OnPqK1AuwtAK2glSO3Cdj-EGfPXszOiPeqCuHycZrJMEIxUgueRO8cp&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=ANIILHsEAAAA&_nc_gid=iktu2O_FD34zMQTv8DqmfA&_nc_tpa=Q5bMBQGwhvE1bhjYsMU8kZf-SnfADM6_f2ptvRYCvoR953Ldl_hUdQm8AR9T1ufbZZ3504lJwYxdEvao&oh=00_Af9t1AzzDq1EPSIUroeDRK86gOgn4VToO0Okxiy_Xvs6YQ&oe=6A3A4B5F",
+              "call_to_action": {
+                "type": "APPLY_NOW",
+                "value": {
+                  "app_destination": "MESSENGER"
+                }
+              }
+            }
+          },
+          "page_welcome_message": {
+            "is_user_editing": true
+          },
+          "degrees_of_freedom_spec": {
+            "creative_features_spec": {}
+          }
+        },
+        {
+          "name": "RPL clone-source 20260620 02",
+          "object_story_spec": {
+            "page_id": "1063171606876651",
+            "link_data": {
+              "image_hash": "09716886bbeeb208ad766b7e9f013b4a",
+              "message": "Hola, toca el botón para continuar.",
+              "name": "TARJETA DE CRÉDITO DISPONIBLE ✅",
+              "call_to_action": {
+                "type": "APPLY_NOW",
+                "value": {
+                  "app_destination": "MESSENGER"
+                }
+              }
+            }
+          },
+          "page_welcome_message": {
+            "is_user_editing": true
+          },
+          "degrees_of_freedom_spec": {
+            "creative_features_spec": {}
+          }
+        },
+        {
+          "name": "RPL clone-source 20260620 03",
+          "object_story_spec": {
+            "page_id": "1063171606876651",
+            "video_data": {
+              "video_id": "2018825615667950",
+              "message": "Hola, toca el botón para continuar.",
+              "title": "TARJETA DE CRÉDITO DISPONIBLE ✅",
+              "image_url": "https://scontent-lga3-1.xx.fbcdn.net/v/t15.5256-10/721348360_4542078662704726_3770361300680237516_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=110&ccb=1-7&_nc_sid=b696e2&_nc_ohc=1lzbfq0fPuMQ7kNvwEThVgp&_nc_oc=AdrfM9zUjwLjnHPE3mmw5O5Zka4Lk32ZtR3ZUbyrlbs0RtLCmYBapYfIM2-QqIiTnTbmPkKteThwZPQcodUAeqpd&_nc_zt=23&_nc_ht=scontent-lga3-1.xx&edm=ANIILHsEAAAA&_nc_gid=iktu2O_FD34zMQTv8DqmfA&_nc_tpa=Q5bMBQHnWF5Yv4jL0DoZR8JVPqqRja2UClGAhV-R5aSGm-4neuWxDVl5ZBnevPM2H0zYdKLzjT5obsMm&oh=00_Af-HixUjAhVSXHT4utU2zvRYtLvNWmffos36kV0H4EDlOg&oe=6A3A4C74",
+              "call_to_action": {
+                "type": "APPLY_NOW",
+                "value": {
+                  "app_destination": "MESSENGER"
+                }
+              }
+            }
+          },
+          "page_welcome_message": {
+            "is_user_editing": true
+          },
+          "degrees_of_freedom_spec": {
+            "creative_features_spec": {}
+          }
+        }
+      ],
+      "act_1356770869843984/ads": [
+        {
+          "name": "Ad RPL 01 - clone-source video",
+          "adset_id": "<NEW_ADSET_ID_FOR_SOURCE_ADSET_120248290297250604>",
+          "status": "PAUSED",
+          "creative": {
+            "creative_id": "<NEW_CREATIVE_ID_1>"
+          }
+        },
+        {
+          "name": "Ad RPL 02 - clone-source image",
+          "adset_id": "<NEW_ADSET_ID_FOR_SOURCE_ADSET_120248290297260604>",
+          "status": "PAUSED",
+          "creative": {
+            "creative_id": "<NEW_CREATIVE_ID_2>"
+          }
+        },
+        {
+          "name": "Ad RPL 03 - clone-source video",
+          "adset_id": "<NEW_ADSET_ID_FOR_SOURCE_ADSET_120248290297250604>",
+          "status": "PAUSED",
+          "creative": {
+            "creative_id": "<NEW_CREATIVE_ID_3>"
+          }
+        }
+      ]
+    }
+  },
+  "checklist": {
+    "creative_from_video_id_or_image_hash": true,
+    "creative_without_messenger_doc": true,
+    "creative_without_standard_enhancements": true,
+    "degrees_of_freedom_not_reactivating_standard_enhancements": true,
+    "page_welcome_message_is_user_editing_true_no_template": true,
+    "graph_v25": true,
+    "exactly_3_ads": true,
+    "would_use_paused": true,
+    "no_object_story_spec_raw_reuse": true,
+    "no_legacy_creative_id_reuse": true
+  },
+  "discarded_source_fields": [
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "standard_enhancements",
+      "where": "creative/degrees_of_freedom_spec or nested source",
+      "reason": "obsolete; causes subcode 3858504; never sent"
+    },
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "degrees_of_freedom_spec source",
+      "where": "creative.degrees_of_freedom_spec",
+      "reason": "source feature config not reused; rebuilt safely without standard_enhancements"
+    },
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "asset_feed_spec.asset_customization_rules",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "asset_feed_spec.optimization_type",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "asset_feed_spec.additional_data",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "asset_feed_spec.link_urls",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "asset_feed_spec.ad_formats",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "asset_feed_spec.reasons_to_shop",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "asset_feed_spec.shops_bundle",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "effective_object_story_id",
+      "where": "creative",
+      "reason": "legacy/source identity metadata not reused; no creative_id reuse"
+    },
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "id",
+      "where": "creative",
+      "reason": "legacy/source identity metadata not reused; no creative_id reuse"
+    },
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "name",
+      "where": "creative",
+      "reason": "legacy/source identity metadata not reused; no creative_id reuse"
+    },
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "object_type",
+      "where": "creative",
+      "reason": "legacy/source identity metadata not reused; no creative_id reuse"
+    },
+    {
+      "source_ad_id": "120248290297200604",
+      "field": "object_story_spec.instagram_user_id",
+      "where": "creative.object_story_spec",
+      "reason": "not required for page-only Messenger creative; avoids IG asset permission blocker"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "standard_enhancements",
+      "where": "creative/degrees_of_freedom_spec or nested source",
+      "reason": "obsolete; causes subcode 3858504; never sent"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "degrees_of_freedom_spec source",
+      "where": "creative.degrees_of_freedom_spec",
+      "reason": "source feature config not reused; rebuilt safely without standard_enhancements"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "asset_feed_spec.asset_customization_rules",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "asset_feed_spec.optimization_type",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "asset_feed_spec.additional_data",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "asset_feed_spec.link_urls",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "asset_feed_spec.ad_formats",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "asset_feed_spec.reasons_to_shop",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "asset_feed_spec.shops_bundle",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "effective_object_story_id",
+      "where": "creative",
+      "reason": "legacy/source identity metadata not reused; no creative_id reuse"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "id",
+      "where": "creative",
+      "reason": "legacy/source identity metadata not reused; no creative_id reuse"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "name",
+      "where": "creative",
+      "reason": "legacy/source identity metadata not reused; no creative_id reuse"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "object_type",
+      "where": "creative",
+      "reason": "legacy/source identity metadata not reused; no creative_id reuse"
+    },
+    {
+      "source_ad_id": "120248290297230604",
+      "field": "object_story_spec.instagram_user_id",
+      "where": "creative.object_story_spec",
+      "reason": "not required for page-only Messenger creative; avoids IG asset permission blocker"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "standard_enhancements",
+      "where": "creative/degrees_of_freedom_spec or nested source",
+      "reason": "obsolete; causes subcode 3858504; never sent"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "degrees_of_freedom_spec source",
+      "where": "creative.degrees_of_freedom_spec",
+      "reason": "source feature config not reused; rebuilt safely without standard_enhancements"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "asset_feed_spec.asset_customization_rules",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "asset_feed_spec.optimization_type",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "asset_feed_spec.additional_data",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "asset_feed_spec.link_urls",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "asset_feed_spec.ad_formats",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "asset_feed_spec.reasons_to_shop",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "asset_feed_spec.shops_bundle",
+      "where": "creative.asset_feed_spec",
+      "reason": "raw DCO/placement/messenger_doc metadata not reused in clone-source rebuild"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "effective_object_story_id",
+      "where": "creative",
+      "reason": "legacy/source identity metadata not reused; no creative_id reuse"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "id",
+      "where": "creative",
+      "reason": "legacy/source identity metadata not reused; no creative_id reuse"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "name",
+      "where": "creative",
+      "reason": "legacy/source identity metadata not reused; no creative_id reuse"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "object_type",
+      "where": "creative",
+      "reason": "legacy/source identity metadata not reused; no creative_id reuse"
+    },
+    {
+      "source_ad_id": "120248290297210604",
+      "field": "object_story_spec.instagram_user_id",
+      "where": "creative.object_story_spec",
+      "reason": "not required for page-only Messenger creative; avoids IG asset permission blocker"
+    }
+  ]
+}
