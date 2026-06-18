@@ -1,19 +1,24 @@
-# MGS VPS migration — deep file comparison and standby audit
+# MGS VPS migration — deep file comparison / standby audit
 
-Use this reference after a full VPS migration/cutover when Rodolfo asks to prove that the old VPS and new VPS really match, especially with language like “compara TUDO”, “arquivo por arquivo”, or “sou chato e persistente”.
+Use this reference when Rodolfo asks to re-check a VPS migration, especially with wording like “olha de novo”, “TUDO”, “seja detalhista”, or when he is worried about drift between old and new VPS.
 
-## Goal
+## Lesson from Hostinger cutover review — 2026-06-18
 
-Prove that the production VPS has all operationally relevant state from the old VPS, while preserving the intended difference between:
+A normal post-cutover health check is not enough for Rodolfo when he asks for “TUDO”. Do a fresh comparison, not a recap of the previous validation.
 
-- **New VPS / production**: gateways, crons, autocommit and monitors active.
-- **Old VPS / standby**: gateways, crons and autocommit disabled/inactive, zero Hermes/gateway processes.
+The useful pattern was:
 
-Do not require byte-identical runtime state for active vs standby. Runtime files such as PIDs, locks, SQLite WAL/SHM, channel caches and monitor state will diverge by design.
+1. Generate new manifests on both hosts.
+2. Compare SHA256/size/mode for stable surfaces.
+3. Classify expected runtime drift vs real missing files.
+4. Pull/restore missing historical archive files when safe.
+5. Keep the old VPS in standby: gateways/crons/autocommit inactive + disabled.
+6. Re-run manifests after corrections.
+7. Report remaining differences explicitly.
 
-## Scope to compare
+## Manifest scope
 
-Minimum roots:
+Compare at least:
 
 ```text
 /root/mgs-agent
@@ -22,102 +27,73 @@ Minimum roots:
 /root/.hermes/profiles/ares
 /root/.hermes/profiles/hera
 /root/.hermes/hermes-agent
-/etc/systemd/system/{zeus,atena,ares,hera}-gateway.service
-/etc/systemd/system/mgs-autocommit.service
+/etc/systemd/system/{zeus,atena,ares,hera,mgs-autocommit}.service
 root crontab
 ```
 
-Critical files that should normally match exactly unless intentionally changed after cutover:
+Also capture non-secret runtime facts:
 
 ```text
-/root/.hermes/profiles/{zeus,atena,ares,hera}/config.yaml
-/root/.hermes/profiles/{zeus,atena,ares,hera}/auth.json
-/root/mgs-agent/AGENT.md
-/root/mgs-agent/context/mgs-os-map.md
-/root/mgs-agent/context/company-os.md
-/root/mgs-agent/data/authorized-users.json
-/root/mgs-agent/data/sites.json
-systemd gateway unit files for Zeus/Atena/Ares/Hera
+hostname, public IP, OS, timezone, disk, memory
+hermes --version
+mgs-agent git HEAD/branch/dirty
+hermes-agent git HEAD/dirty
+service active/enabled/PID/restarts
+failed units count
+profile model/provider/auth presence with token lengths only
+package versions: node, npm, python3, uv, op
 ```
 
-## Manifest pattern
+## Expected differences — do not treat as migration failure
 
-Generate JSON manifests on both hosts with path, type, size and SHA256. Exclude volatile/cache-heavy paths from equality scoring, not from operational reasoning:
+These are normal when comparing active production Hostinger to standby Hetzner:
 
 ```text
-.git/
-logs/
-sessions/
-audio_cache/
-image_cache/
-cron/output/
-__pycache__/
-.pytest_cache/
-node_modules/
-venv/
-.venv/
-data/browser-profiles/
-data/generated/
+gateway.pid / gateway.lock          active host only
+state.db / state.db-wal / state.db-shm runtime SQLite state
+gateway_state.json                  live gateway state
+channel_directory.json              Discord runtime/cache
+crontab 36 vs 0                     production active vs standby disabled
+.clean_shutdown / restart flags     old-host shutdown residue
+Pulse runtime under profile home    local audio/session cache
+logs, sessions, image/audio cache   volatile runtime
 ```
 
-For large files, either hash if practical or record `LARGE:<size>` consistently. Never print secrets. It is acceptable to compare `auth.json` by SHA256/size only, not content.
+## Real findings worth correcting
 
-## Interpreting differences
+From the 2026-06-18 review, the second detailed pass found issues a first pass missed:
 
-Expected differences after successful cutover:
+- `/root/mgs-agent/backups`, `/root/mgs-agent/tmp`, and some historical `data/backups` existed only on Hetzner. Pull them to Hostinger if keeping rollback/history matters.
+- `mgs-autocommit.service` on the old VPS can be `inactive` but still `enabled`; disable it too.
+- A failed transient systemd unit on old VPS can remain after migration; run `systemctl reset-failed` after verifying it is historical.
+- Stable profile surfaces may drift after production resumes. If using Hetzner as rollback standby, sync stable files from Hostinger to Hetzner: `config.yaml`, `auth.json`, `SOUL.md`, `skills/`, `discord_threads.json`, `.skills_prompt_snapshot.json`.
+- Runtime state files like `data/hermes-mgs-patch-watchdog-state.json` should not keep Git dirty. If already tracked and purely runtime, remove from tracking with `git rm --cached` while keeping the local file.
 
-```text
-Hostinger-only gateway.pid / state.db-wal / state.db-shm — active production runtime.
-Hostinger-vs-Hetzner gateway.lock / gateway_state.json — per-host runtime state.
-channel_directory.json — Discord cache/runtime may differ.
-crontab: production has active crons, standby should have 0 lines.
-.clean_shutdown / .restart_pending / .restart_failure_counts on old VPS — stale shutdown/restart markers.
-data/*-state.json — monitor state changes on the live production host.
-skill usage files / USER.md — may change during active session after cutover.
-```
+## Safe old-host standby contract
 
-Potentially important differences that should be resolved or explicitly classified:
-
-```text
-Old VPS has backups/tmp/data-backups not present on production.
-Old VPS service is inactive but still enabled.
-Core configs/auth/context differ unexpectedly.
-Git HEAD differs and production has dirty tree.
-Systemd unit hash differs without an intentional production-only change.
-```
-
-## Corrective actions that proved useful
-
-If the old VPS contains historical artifacts not present on production, copy them to the new host before declaring the comparison complete, especially:
-
-```text
-/root/mgs-agent/backups/
-/root/mgs-agent/tmp/
-/root/mgs-agent/data/backups/
-/root/mgs-agent/data/mgs-gateway-restart-finalizer-*.sh
-```
-
-Use `rsync -a` over SSH with credentials pulled from 1Password into environment/stdin only; never print the password. After copying, regenerate the production manifest and compare again.
-
-If the old VPS has any MGS service `enabled`, disable it for standby:
+After any mirror/sync to old VPS, immediately enforce:
 
 ```bash
-systemctl stop zeus-gateway atena-gateway ares-gateway hera-gateway mgs-autocommit 2>/dev/null || true
-systemctl disable zeus-gateway atena-gateway ares-gateway hera-gateway mgs-autocommit >/dev/null 2>&1 || true
-systemctl reset-failed zeus-gateway atena-gateway ares-gateway hera-gateway mgs-autocommit 2>/dev/null || true
+systemctl disable --now zeus-gateway atena-gateway ares-gateway hera-gateway mgs-autocommit
+systemctl reset-failed
+crontab -l  # should be empty / 0 lines for standby
+pgrep -af 'hermes|gateway'  # should show 0 relevant old-agent processes
 ```
 
-## Final evidence shape
+The old VPS may keep files for rollback, but must not run agents, crons, or autocommit.
 
-Report with counts and classification:
+## Reporting shape Rodolfo expects
+
+Report in this structure:
 
 ```text
-Files compared: hostinger=N, hetzner=N, common=N, identical=N, different=N, only_hostinger=N, only_hetzner=N.
-Critical configs/auth/context: match.
-Production services: active/enabled.
-Standby services: inactive/disabled, crontab=0, process_count=0.
-Remaining differences: runtime-only / expected, with examples.
-Actions taken: copied missing historical artifacts, disabled old autocommit, updated audit/report-infra if applicable.
+Escopo checado
+Achados reais e ações tomadas
+Comparação final: counts + critical_not_match + review_diff
+Arquivos críticos que matcham
+Diferenças restantes e why expected
+Estado operacional Hostinger vs Hetzner
+Conclusão direta
 ```
 
-Important: if artifacts are copied or services disabled, update audit log and send REPORT-INFRA before claiming final completion.
+Use explicit language: “critical_not_match=0”, “review_diff=0”, “review_only_hetzner=0”. If anything remains, name the exact path and why it is safe or not safe.

@@ -357,6 +357,7 @@ Pitfalls específicos:
 - Não pausar campanha com `TEST` no nome durante carência de 3 dias; preferir `created_time` da Meta, fallback para `first_seen_at` local.
 - Não enviar log intraday a cada 30 minutos se nada aconteceu, salvo política explícita diferente.
 - Não reportar leitura Meta como sucesso sem HTTP real da Graph API e sem ocultar token no relatório.
+- Se scripts Meta/cron começarem a dar timeout segurando `meta-api-throttle-state.json`, verificar drift de `time.monotonic()` persistido após reboot antes de culpar Graph/API. Corrigir o throttle para zerar `last_request_monotonic` quando `last > now` e limitar sleep ao intervalo configurado. Referência: `references/meta-api-throttle-monotonic-reboot.md`.
 
 ## Regras de decisão de campanha
 
