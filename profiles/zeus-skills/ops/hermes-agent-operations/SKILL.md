@@ -482,6 +482,8 @@ When Rodolfo wants to migrate the whole MGS/Hermes operation to a new VPS, use `
 
 Do not call the cutover complete until the target has Zeus/Atena/Ares/Hera `active` + `enabled`, crons active, Codex auth present, patch guard OK, and the old VPS has gateways inactive/disabled, crontab empty, and zero Hermes/gateway processes. Validate `mgs-autocommit.service` separately; post-commit auto-push existing is not enough if the watcher service is missing.
 
+Post-migration finalization must also close the Git/runtime loop: install `inotify-tools` if needed, recreate/enable `/etc/systemd/system/mgs-autocommit.service`, secret-scan dirty files before staging, commit/push controlled migration state, clean or ignore runtime artifacts, and prove end-to-end with a create/delete auto-commit + auto-push smoke test. Detailed playbook: `references/mgs-hostinger-post-migration-autocommit-finalization-2026-06-18.md`.
+
 ## 8. New MGS agent bootstrap
 
 When Rodolfo asks to start a new MGS agent/profile (Ares, Hera or future agents), use `references/mgs-new-agent-bootstrap.md`. Core rule: clone profile/config as needed, but immediately blank any inherited Discord bot token; do not create/enable the systemd gateway until the agent has its own dedicated bot token and Rodolfo confirms the Critical Subset system-file write.
