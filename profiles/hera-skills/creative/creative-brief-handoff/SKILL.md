@@ -356,6 +356,7 @@ references/meta-ad-library-playwright-browser-download.md — workflow de prova 
 ```
 ```
 references/meta-ad-library-creative-intake.md — fluxo para analisar/baixar referências da Meta/Facebook Ad Library com Playwright/API, validar token sem expor segredo e interpretar erros comuns.
+references/meta-ad-library-playwright-download-packaging.md — workflow validado para baixar imagens/vídeos da Meta Ad Library via Playwright, sanitizar e entregar ZIP com inventário.
 ```
 
 ## Origem e uso dos assets

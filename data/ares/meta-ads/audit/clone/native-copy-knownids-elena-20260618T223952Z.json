@@ -1,0 +1,60 @@
+{
+  "created_at": "2026-06-18T22:39:52.137300+00:00",
+  "mode": "native_copy_known_ids_elena_after_wait",
+  "source_campaign_id": "120248940367540604",
+  "source_adset_id": "120248940367380604",
+  "source_ad_ids": [
+    "120248940367500604",
+    "120248940367400604",
+    "120248940367390604"
+  ],
+  "steps": [
+    {
+      "step": "campaign_copy_shallow",
+      "status": 200,
+      "payload": {
+        "copied_campaign_id": "120248947444990604",
+        "ad_object_ids": [
+          {
+            "ad_object_type": "campaign",
+            "source_id": "120248940367540604",
+            "copied_id": "120248947444990604"
+          }
+        ]
+      },
+      "id": "120248947444990604"
+    },
+    {
+      "step": "adset_copy_shallow",
+      "status": 400,
+      "payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 1885501,
+        "fbtrace_id": "AS9BYsaJ4cL5MYj2SpW98Jy"
+      },
+      "id": null
+    }
+  ],
+  "created": {
+    "campaign_id": "120248947444990604",
+    "adset_id": null
+  },
+  "cleanups": [
+    {
+      "campaign_id": "120248947444990604",
+      "delete_status": 200,
+      "verify_status": 200,
+      "verify": {
+        "id": "120248947444990604",
+        "name": "Elena Santana - US - ESP - (pg_22091) - 4 - KNOWNID COPY 20260618T223952Z",
+        "status": "DELETED",
+        "effective_status": "DELETED",
+        "daily_budget": "10000"
+      }
+    }
+  ],
+  "result": "failed",
+  "final_error": "adset_copy_failed"
+}
