@@ -372,9 +372,10 @@ Decisões atuais para OpenzedFinanzas/Europa:
 - HOA roda nos checkpoints `08:00`, `12:00`, `15:00`, `18:00`, `22:00` no timezone da conta.
 - Europa/GDPR usa `MO=complete_registration` e `CPMO=spend/MO`, não CPS/subs.
 - “Dia ruim” para replacement exige dia completo, gasto mínimo `USD 5.00` e `MO >= 2`; replacement requer 2 dias completos ruins.
-- Budget total de referência: `R$1.500/dia` convertido para USD; 20% reservado para testes de criativos novos.
+- Budget total de referência: `USD 300/dia`; 20% (`USD 60/dia`) reservado para testes de criativos novos.
+- CPMO alvo inicial do HOA: `USD 2.00`; Ares deve otimizar para chegar nele.
 - Campanha nova nunca deve ser criada com budget maior que `USD 25/dia` inicialmente.
-- Replacement deve: mapear loser → identificar melhores criativos da conta inteira por menor CPMO nos últimos 3 dias → clonar campanha/adset/criativos do zero → validar clone → arquivar/deletar loser. O clone deve usar a mesma página, mas pode usar criativo vencedor de outra página.
+- Replacement deve: mapear loser → identificar melhores criativos da conta inteira por menor CPMO nos últimos 3 dias → clonar campanha/adset/criativos do zero → validar clone → deletar a loser se a Meta/API permitir; se não permitir delete, arquivar. O clone deve usar a mesma página, mas pode usar criativo vencedor de outra página.
 - Campanhas de replacement devem ser programadas para o dia seguinte, preferencialmente `01:00` no timezone da conta.
 - Cada campanha nova deve ter exatamente 3 criativos.
 - Se não houver espaço de budget para testes, não executar; avisar só no relatório final das 22h.

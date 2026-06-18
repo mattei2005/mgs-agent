@@ -3,13 +3,19 @@
   "operation_id": "OpenzedFinanzas-CC-ES",
   "account_id": "1356770869843984",
   "timezone": "Europe/Madrid",
-  "status": "draft_read_only_pending_implementation",
+  "status": "read_only_dry_run_implemented",
   "coexistence": {
     "intraday_R1_R5": "separate_deterministic_cron_every_30m",
     "HOA": "separate_manager_layer_checkpoints",
     "policy": "intraday_and_HOA_must_coexist_initially"
   },
-  "checkpoints": ["08:00", "12:00", "15:00", "18:00", "22:00"],
+  "checkpoints": [
+    "08:00",
+    "12:00",
+    "15:00",
+    "18:00",
+    "22:00"
+  ],
   "metrics": {
     "europe_primary_count": "MO",
     "MO_action_type": "complete_registration",
@@ -35,12 +41,13 @@
     "method": "7d account CPMO * 1.15 buffer, floored at USD 2.00; requires Rodolfo approval before enforcement"
   },
   "budget": {
-    "daily_account_cap_brl": 1500.0,
-    "conversion": "convert_to_usd_daily",
+    "conversion": "not_needed_cap_now_usd",
     "creative_test_share": 0.2,
     "creative_test_policy": "only launch tests when there is available test budget; otherwise only mention in 22:00 report",
     "new_campaign_daily_budget_max_usd": 25.0,
-    "never_create_campaign_above_usd": 25.0
+    "never_create_campaign_above_usd": 25.0,
+    "daily_account_cap_usd": 300.0,
+    "creative_test_pool_usd": 60.0
   },
   "replacement": {
     "flow": [
@@ -56,11 +63,18 @@
     "creative_window_days": 3,
     "creatives_per_new_campaign": 3,
     "start_time_policy": "schedule replacement campaign for next day around 01:00 in account timezone",
-    "controlled_write": "requires_explicit_Rodolfo_approval_before_Meta_write"
+    "controlled_write": "requires_explicit_Rodolfo_approval_before_Meta_write",
+    "loser_final_action": "delete_if_Meta_supports_else_archive",
+    "archive_fallback": true
   },
   "daily_creative_doc": {
     "path": "/root/mgs-agent/data/ares/meta-ads/reports/creative-performance-ledger.json",
     "update_time": "22:00 Europe/Madrid",
     "purpose": "persist best creatives so Ares does not need to hit Meta API repeatedly"
-  }
+  },
+  "hoa": {
+    "target_cpmo_usd": 2.0,
+    "instruction": "CPMO alvo fixado por Rodolfo; Ares deve otimizar para conseguir USD 2.00"
+  },
+  "updated_at": "2026-06-18T03:43:14.143470+00:00"
 }

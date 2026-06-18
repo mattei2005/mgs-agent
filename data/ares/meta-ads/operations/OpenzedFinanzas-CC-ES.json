@@ -21,12 +21,11 @@
     ]
   },
   "daily_spend_reference_cap": {
-    "amount_brl": 1500.0,
+    "amount_usd": 300.0,
     "account_currency": "USD",
-    "conversion_policy": "convert_BRL_to_account_currency_using_daily_USD_BRL_rate",
-    "action": "reference_only_no_pause",
-    "future_use": "creative_test_budget_planning",
-    "rate_source_status": "pending_definition"
+    "action": "cap_for_budget_allocator_and_test_space",
+    "creative_test_share": 0.2,
+    "creative_test_pool_usd": 60.0
   },
   "metrics": {
     "mapping_id": "openzedfinanzas_cc_es_metrics_v1",
@@ -109,11 +108,18 @@
       "schedule": "30 18 * * * America/New_York (00:30 Europe/Madrid current offset)",
       "deliver": "discord:1516887105543077949",
       "mode": "dry_run_no_write"
+    },
+    "hoa_manager": {
+      "job_id": "0598c0dc469f",
+      "schedule": "0 2,6,9,12,16 * * * America/New_York (08:00,12:00,15:00,18:00,22:00 Europe/Madrid current offset)",
+      "deliver": "discord:1516887105543077949",
+      "mode": "read_only_dry_run_no_write",
+      "script": "ares-meta-hoa-manager.sh"
     }
   },
-  "updated_at": "2026-06-18T03:32:51.926391+00:00",
+  "updated_at": "2026-06-18T03:43:47.235022+00:00",
   "hoa_policy": {
-    "status": "draft_read_only_pending_implementation",
+    "status": "read_only_dry_run_implemented",
     "policy_path": "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v1.json",
     "checkpoints": [
       "08:00",
@@ -126,6 +132,10 @@
     "coexists_with_intraday": true,
     "initial_suggested_cpmo_target_usd": 2.27,
     "new_campaign_budget_max_usd": 25.0,
-    "replacement_start_time": "next_day_01:00_account_timezone"
+    "replacement_start_time": "next_day_01:00_account_timezone",
+    "target_cpmo_usd": 2.0,
+    "daily_account_cap_usd": 300.0,
+    "creative_test_pool_usd": 60.0,
+    "loser_final_action": "delete_if_possible_else_archive"
   }
 }

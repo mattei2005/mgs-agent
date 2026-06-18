@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-17T23:35:04-04:00",
+    "updated_at": "2026-06-17T23:45:50-04:00",
     "generated_by": "zeus"
   },
   "systemd_services": [
@@ -100,6 +100,21 @@
       "no_agent": true,
       "repeat": "once",
       "deliver": "discord:1498132022634483894"
+    },
+    {
+      "entry": "Hermes cron profile=ares id=0598c0dc469f schedule=\"0 2,6,9,12,16 * * *\" script=ares-meta-hoa-manager.sh no_agent=true deliver=discord:1516887105543077949",
+      "id": "0598c0dc469f",
+      "profile": "ares",
+      "name": "Ares Meta HOA gestor dry-run",
+      "schedule": "0 2,6,9,12,16 * * *",
+      "intended_local_times": "08:00,12:00,15:00,18:00,22:00 Europe/Madrid during CEST",
+      "script": "/root/.hermes/profiles/ares/scripts/ares-meta-hoa-manager.sh",
+      "next_run_at": "2026-06-18T02:00:00-04:00",
+      "state": "scheduled",
+      "enabled": true,
+      "no_agent": true,
+      "repeat": "forever",
+      "deliver": "discord:1516887105543077949"
     }
   ],
   "scripts": [
@@ -603,6 +618,18 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
+      "size_bytes": 13930,
+      "modified_at": "2026-06-17T23:43:03-04:00",
+      "sha256": "f5b554c7c3de4b46593b163ab8a6809bd609e8f967e5862391635fc6fe7c1677"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-hoa-manager.sh",
+      "size_bytes": 191,
+      "modified_at": "2026-06-17T23:43:34-04:00",
+      "sha256": "742389fdb1bdd8cce0b29a4285f42853f9775420c3e7b8fbac38c2eba7bb1f99"
     }
   ],
   "skills_mgs": [
@@ -999,18 +1026,18 @@
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
         "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "sha256": "bcf1d8d5b1a0f69c6b48889613f5ca58545baa754bc6ad690bab5afffe07f100",
-        "versioned_sha256": "bcf1d8d5b1a0f69c6b48889613f5ca58545baa754bc6ad690bab5afffe07f100",
-        "modified_at": "2026-06-17T23:33:04-04:00"
+        "sha256": "f8829114f4c4b4e6679a3d91504bba123d1fd3f33d22bd47d4b20187aef3ea9e",
+        "versioned_sha256": "f8829114f4c4b4e6679a3d91504bba123d1fd3f33d22bd47d4b20187aef3ea9e",
+        "modified_at": "2026-06-17T23:44:31-04:00"
       },
       {
         "name": "paid-acquisition-operations",
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md",
         "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/paid-acquisition-operations/SKILL.md",
-        "sha256": "b9c4962e6d3ea85c68a34bd4c075a19865e3664dbfb174c256b586798c2385d9",
-        "versioned_sha256": "b9c4962e6d3ea85c68a34bd4c075a19865e3664dbfb174c256b586798c2385d9",
-        "modified_at": "2026-06-17T23:33:17-04:00"
+        "sha256": "9c4a10cc3b4ec0ed3924bf3deb6636af67702ab7d67ec0b7b909f4abcae35368",
+        "versioned_sha256": "9c4a10cc3b4ec0ed3924bf3deb6636af67702ab7d67ec0b7b909f4abcae35368",
+        "modified_at": "2026-06-17T23:44:09-04:00"
       },
       {
         "name": "native-mcp",
@@ -3029,17 +3056,17 @@
     },
     {
       "path": "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v1.json",
-      "size_bytes": 2551,
-      "md5": "878d1aadc0d617d49d8bf9bfd6aeebe6",
-      "modified_at": "2026-06-17T23:32:41-04:00",
-      "sha256": "ea71b57fab312dadb51207fe4866f849c687ee8da2ccb06b2810d1a56466966a"
+      "size_bytes": 2889,
+      "md5": "4e6c2bf35f70a521ff16a43a22f3c04a",
+      "modified_at": "2026-06-17T23:43:14-04:00",
+      "sha256": "4eda75a75f6db32960fe2b28bcb4e416dbd60998f34e3c7bfbc8ab63369f52e0"
     },
     {
       "path": "/root/mgs-agent/data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json",
-      "size_bytes": 4213,
-      "md5": "e5f90cc12482102fef3f1e93d0fc0420",
-      "modified_at": "2026-06-17T23:32:51-04:00",
-      "sha256": "b4c2bb6f38acc9891306f3192adf7c3ff1dcb3137c3686f19ee070e6244cf7fc"
+      "size_bytes": 4578,
+      "md5": "0eb401c963c9b094a6699f88b5f86b2f",
+      "modified_at": "2026-06-17T23:43:47-04:00",
+      "sha256": "8e2ae5457fe98a7353dde66a14bb8cb9d5c5c2b1023d6c25c8551da06bc14cdd"
     },
     {
       "path": "/root/mgs-agent/data/ares/meta-ads/reports/hoa-cpmo-baseline-7d.json",

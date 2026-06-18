@@ -24,7 +24,7 @@ Canal                         | Messenger
 Nível de ação                 | Campaign somente
 Cortes intraday               | A cada 30 minutos via cron determinístico na VPS
 Reativar-todas                | 00:30 no timezone da conta Meta via cron determinístico
-Budget referência             | R$1.500/dia convertido pelo USD/BRL do dia; não pausar por teto
+Budget referência             | USD 300/dia; 20% (USD 60/dia) reservado para teste de criativos
 Carência TEST                 | Nome contém TEST => não pausar/excluir por 3 dias
 Log intraday                  | Só quando houver ação/erro; resumido no canal dedicado
 Write                         | Desabilitado até aprovação explícita de Rodolfo
@@ -65,7 +65,7 @@ Scripts iniciais / cron:
 5. Campanhas com `TEST` no nome têm carência de 3 dias usando `created_time` da Meta; fallback é `first_seen_at` local; durante essa carência ficam imunes a todas as regras R1-R5.
 6. COST_CAP não pausa por regra de custo (`CPS`/`CPMO`); o bid cap controla custo. Regra de custo aplica pausa só quando a condição/bid strategy permitir, especialmente LOWEST_COST.
 6. Reativar-todas pode ter lista de exclusão, mas ela começa vazia e Ares deve perguntar antes de adicionar algo.
-7. Teto diário de R$1.500 é referência/log/base para testes de criativos; não pausar tudo ao bater o teto.
+7. Teto diário de USD 300 é referência/log/base para orçamento; 20% (USD 60) fica reservado para testes de criativos novos quando houver espaço de budget.
 8. Log intraday no Discord deve ser resumido e enviado só quando houver ação/erro, salvo Rodolfo mudar a política.
 9. Logs dos crons Meta em `logs-aquisicao` devem usar título com `nome da conta — dia — horário no timezone da conta — tipo do cron` e tabela alinhada com estas colunas base: `PG ID`, `Nome da página`, `País/Vertical`, `Regra usada`, `Status`. Extrair `PG ID` do padrão `(pg_12345)` no nome da campanha e `Nome da página` do trecho inicial antes de ` - <país> - `. Em `Regra usada`, intraday deve mostrar o identificador e a descrição curta (`R1 — ...`, `R2 — ...`, `R3 — ...`, `R4 — ...`, `R5 — ...`). O cron diário separado deve mostrar só `reativar-todas` — não rotular como `fora R1-R5`, porque a distinção já está no tipo do cron/título.
 10. Intraday R1-R5 e HOA são camadas separadas e devem coexistir inicialmente. HOA roda como camada de gestor/tráfego nos checkpoints 08:00, 12:00, 15:00, 18:00 e 22:00 no timezone da conta, usando MO/CPMO em operações Europa/GDPR.
