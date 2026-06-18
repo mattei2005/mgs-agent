@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-06-18T19:32:52.374065+00:00",
+  "mode": "focused_post_ads_retest_no_backoff",
+  "graph_version": "v25.0",
+  "token_field": "credential",
+  "token_len": 191,
+  "steps": [
+    {
+      "step": "get_source_campaign",
+      "status": 400,
+      "payload": {
+        "message": "Error validating application. Application has been deleted.",
+        "type": "OAuthException",
+        "code": 190,
+        "fbtrace_id": "AWIlgUpxc7o35nJY1SfnJDp"
+      }
+    }
+  ],
+  "created": {},
+  "cleanups": [],
+  "exception": "source_campaign_unreadable"
+}
