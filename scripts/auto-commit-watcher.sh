@@ -16,6 +16,9 @@ GIT_PATHSPECS=(
   "."
   ":(exclude)data/*-state.json"
   ":(exclude)data/ares/creative-inventory/video-frame-samples-full/**"
+  ":(exclude)data/browser-profiles/**"
+  ":(exclude)data/ares/meta-ads/audit/token-debug-*.json"
+  ":(exclude)data/mgs-gateway-restart-finalizer-*.sh"
 )
 
 mkdir -p "$(dirname "$LOG_FILE")"

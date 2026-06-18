@@ -1,0 +1,146 @@
+{
+  "created_at": "2026-06-18T04:47:06.739410+00:00",
+  "mode": "controlled_write_videoid_clone",
+  "graph_version": "v25.0",
+  "token_field": "credential",
+  "token_len": 195,
+  "account_id": "1356770869843984",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "loser_campaign_id": "120248290564280604",
+  "daily_budget_usd": 25.0,
+  "start_time_local": "2026-06-19T01:00:00+02:00",
+  "creative_mode": "asset_feed_videoid",
+  "steps": [
+    {
+      "step": "create_campaign",
+      "status": 200,
+      "payload": {
+        "id": "120248892589610604"
+      }
+    },
+    {
+      "step": "create_adset",
+      "source_adset_id": "120248290564350604",
+      "status": 200,
+      "payload": {
+        "id": "120248892595970604"
+      }
+    },
+    {
+      "step": "create_adcreative",
+      "mode": "asset_feed_videoid",
+      "source_creative_id": "1878134753167706",
+      "asset": {
+        "kind": "video",
+        "id": "1772519430789363"
+      },
+      "status": 500,
+      "payload": {
+        "error": {
+          "message": "An unknown error has occurred.",
+          "type": "OAuthException",
+          "code": 1,
+          "fbtrace_id": "ACFT_OQ0PsgwgPWMoyLXZpf"
+        }
+      }
+    }
+  ],
+  "created": {
+    "campaign_id": "120248892589610604",
+    "adsets": [
+      "120248892595970604"
+    ]
+  },
+  "errors": [
+    {
+      "step": "create_adcreative",
+      "source_creative_id": "1878134753167706",
+      "error": {
+        "message": "An unknown error has occurred.",
+        "type": "OAuthException",
+        "code": 1,
+        "fbtrace_id": "ACFT_OQ0PsgwgPWMoyLXZpf"
+      }
+    }
+  ],
+  "source_campaign": {
+    "id": "120248290564280604",
+    "name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+    "objective": "OUTCOME_SALES",
+    "buying_type": "AUCTION",
+    "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+    "status": "ACTIVE",
+    "effective_status": "ACTIVE",
+    "daily_budget": "10000",
+    "special_ad_categories": [
+      "FINANCIAL_PRODUCTS_SERVICES"
+    ],
+    "source_campaign_id": "120248290297180604",
+    "smart_promotion_type": "GUIDED_CREATION"
+  },
+  "source_adsets_count": 2,
+  "winner_selection": [
+    {
+      "ad_id": "120248290564590604",
+      "ad_name": "Ad - 3",
+      "campaign_id": "120248290564430604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 4",
+      "spend": 9.36,
+      "MO": 7.0,
+      "CPMO": 1.3371,
+      "creative_id": "1878134753167706",
+      "asset": {
+        "kind": "video",
+        "id": "1772519430789363"
+      }
+    },
+    {
+      "ad_id": "120248290297210604",
+      "ad_name": "Ad - 2",
+      "campaign_id": "120248290297180604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 1",
+      "spend": 108.9,
+      "MO": 70.0,
+      "CPMO": 1.5557,
+      "creative_id": "1018755007258886",
+      "asset": {
+        "kind": "video",
+        "id": "2018825615667950"
+      }
+    },
+    {
+      "ad_id": "120248290564610604",
+      "ad_name": "Ad - 2",
+      "campaign_id": "120248290564270604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 3",
+      "spend": 102.2,
+      "MO": 58.0,
+      "CPMO": 1.7621,
+      "creative_id": "1829542905087157",
+      "asset": {
+        "kind": "video",
+        "id": "1514281823499945"
+      }
+    }
+  ],
+  "new_campaign_name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - 01",
+  "cleanups": [
+    {
+      "campaign_id": "120248892589610604",
+      "reason": "exception:RuntimeError",
+      "delete_status": 200,
+      "delete_payload": {
+        "success": true
+      },
+      "verify_status": 200,
+      "verify": {
+        "id": "120248892589610604",
+        "name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - 01",
+        "status": "DELETED",
+        "effective_status": "DELETED",
+        "daily_budget": "2500"
+      }
+    }
+  ],
+  "final_error": "create_adcreative_failed"
+}

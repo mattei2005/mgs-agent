@@ -91,3 +91,11 @@ reports/hermes-updates/
 
 # Generated AI media artifacts (local smoke/ops outputs)
 data/generated/
+
+# Browser profiles/cookies are runtime and may contain local session data
+/browser-profiles/
+data/browser-profiles/
+
+# Sensitive/debug runtime artifacts: never version automatically
+data/ares/meta-ads/audit/token-debug-*.json
+data/mgs-gateway-restart-finalizer-*.sh

@@ -64,6 +64,10 @@ Ao validar `git status` ou arquivos modificados durante revisão de Atena/Zeus/A
 
 Quando Rodolfo disser que marcou um agente dentro da thread/canal de outro agente e esperava resposta (ex.: Ares marcado em thread da Hera), tratar como roteamento de gateway, não como falha do modelo. O agente marcado só receberá o evento se o canal pai/thread estiver em `discord.allowed_channels` efetivo dele; `thread_require_mention=true` sozinho não basta.
 
+### Challenges por IP de datacenter em fluxos Ares/Hera
+
+Quando Rodolfo suspeitar que Hetzner/VPS/datacenter IP está causando bloqueio em YouTube/Hera ou Meta/Ares, não responder de memória nem propor migração de VPS como primeira ação. Importar a thread afetada em modo read-only, separar `browser consumer anti-bot` de `Marketing API endpoint trust`, e usar o teste de isolamento: mesma conta/token/payload/script, mudando apenas a origem de rede via proxy residencial/AdsPower. Para o playbook completo, ver `references/datacenter-ip-browser-api-challenge-diagnostics-2026-06-18.md`.
+
 Padrão seguro para habilitar cross-agent por mention:
 - Adicionar o canal do outro agente em `allowed_channels` do agente chamado.
 - Manter `free_response_channels` restrito ao canal próprio do agente para evitar resposta livre fora da área dele.
@@ -199,7 +203,9 @@ for m in s.get('messages', []):
 "
 ```
 
-### Formato REPORT-INFRA (Atena → Zeus)
+### Formato REPORT-INFRA (Atena/Ares/Hera → Zeus)
+
+Ao processar `[REPORT-INFRA]`, seguir o playbook operacional em `references/report-infra-processing-playbook.md`: validar artefatos/hashes/crons, atualizar `infra-inventory.json` quando aplicável, registrar audit log, commitar só arquivos relevantes e responder apenas com o ACK canônico curto.
 
 Dois user mentions: bot Zeus (para `DISCORD_ALLOW_BOTS=mentions`) + Rodolfo (push notification):
 
@@ -212,10 +218,41 @@ Motivo: contexto
 Evidência: hash de commit ou output de comando
 ```
 
+### Processamento Zeus de REPORT-INFRA
+
+Ao receber `[REPORT-INFRA]`, Zeus deve processar antes de responder:
+1. Validar evidência mínima sem expor segredo: `py_compile`, `bash -n`, `python3 -m json.tool`, `sha256sum`, e leitura sanitizada de `~/.hermes/profiles/<agent>/cron/jobs.json` quando houver Hermes cron job.
+2. Conferir semanticamente a mudança principal quando houver regra/threshold: ex. localizar a regra R4 e confirmar `CPMO gt 2.0 USD`, não apenas comparar hash.
+3. Atualizar `/root/mgs-agent/data/infra-inventory.json` preservando a ordem existente. Evitar reconstruir/sortear listas inteiras porque isso gera diff gigante e ruído; faça merge pontual por `path`/`id`.
+4. Para mudanças runtime sem arquivo versionado direto — permission overwrite Discord, auth store OAuth, acesso de bot a canal — validar via API/status real e registrar em seção manual do inventário (`discord_permissions`, `oauth_auth_states`, etc.). Se criar seção manual nova, patchar `scripts/infra-discovery.sh` para preservar essa seção em futuras regenerações.
+5. Para scripts fora do repo, como `/root/.hermes/profiles/<agent>/scripts/*.sh`, registrar no inventário com `path`, `size_bytes`, `modified_at` e `sha256`, mas não tentar `git add` fora de `/root/mgs-agent`.
+6. Para wrappers secret-backed no repo, validar tanto o caminho positivo quando possível quanto o fail-closed sem segredo: `bash -n`, modo executável, comandos requeridos presentes, e execução sem segredo retornando erro seguro sem vazar credenciais/cookies. Registrar path esperado do segredo, não o conteúdo.
+7. Para REPORT-INFRA de skill/reference/memória de outro profile, validar runtime **e** cópia versionada: rodar `sync-souls.sh` quando aplicável, comparar SHA do arquivo em `/root/.hermes/profiles/<agent>/skills/...` com `/root/mgs-agent/profiles/<agent>-skills/...`, validar scripts citados e registrar memória como runtime-only em audit log — não tentar versionar memory store.
+8. Para Hermes crons, registrar `profile`, `id`, `name`, `schedule`, `script`, `next_run_at`, `enabled`, `state`, `no_agent` e `deliver`. Se o cron usa horário de outra região via conversão (ex. `00:30 Europe/Madrid` como `18:30 America/New_York` durante EDT), anotar `intended_local_time` para não parecer schedule errado.
+9. Acrescentar evento compacto em `/root/mgs-agent/logs/events-audit.jsonl` com paths, validações e `inventory_updated=true`. O log é local-only; não precisa aparecer no commit se estiver ignorado.
+10. Commitar apenas arquivos relevantes dentro do repo (`infra-inventory.json`, scripts/data/skills versionados afetados). Não incluir state files, audit debug, finalizers, auth stores, cookies, generated artifacts, browser profiles, memory files ou mudanças de outro fluxo no mesmo commit. Se `sync-souls.sh` trouxer referências não relacionadas, deixe-as unstaged.
+11. Responder só após commit/validação final, máximo 2 linhas.
+
+Referências:
+- Runtime permissions/OAuth/wrappers com segredo: `references/report-infra-runtime-permissions-auth-and-secret-wrappers-2026-06-17.md`.
+- Profile skill/reference/memory updates: `references/report-infra-profile-skill-memory-updates-2026-06-17.md`.
+
 Zeus responde com máximo 2 linhas:
 - `✅ Registrado.`
 - `✅ Registrado. Inventário atualizado (commit XXXX).`
 - `❌ Erro ao processar: {motivo}`
+
+### Processamento Zeus de REPORT-INFRA com cron Hermes de outro profile
+
+Quando um agente reportar criação/modificação de cron Hermes `no_agent` + script wrapper em outro profile (ex: Ares):
+1. Validar evidência mínima sem expor segredo: `py_compile` do script real, `bash -n` do wrapper, `sha256sum` dos paths reportados e leitura sanitizada do `~/.hermes/profiles/<agent>/cron/jobs.json` para confirmar `id`, `enabled`, `state`, `next_run_at`, `script`, `no_agent` e `deliver`.
+2. Atualizar `/root/mgs-agent/data/infra-inventory.json` com:
+   - script versionado em `/root/mgs-agent/scripts/...`;
+   - wrapper/profile script fora do repo, se for parte runtime do cron;
+   - registro do cron Hermes com `profile`, `id`, `schedule`, `script`, `next_run_at`, `state`, `enabled`, `no_agent` e `deliver`.
+3. Registrar `report_infra_processed` em `events-audit.jsonl` com validações executadas.
+4. Commitar somente os artefatos versionáveis relevantes (`data/infra-inventory.json` e script em `/root/mgs-agent/scripts/...`). Não tentar `git add` path fora do repo; registre-o no inventário.
+5. Responder só depois do processamento completo, no formato curto acima.
 
 ### Convenção de canal Discord por tipo de alerta
 
@@ -455,6 +492,16 @@ Pitfall: avoid rewriting full `config.yaml` with PyYAML for small profile edits 
 Session reference: `references/discord-thread-member-autonomy-ares-hera-2026-06-16.md`.
 
 
+#### Conferência pós-update/restart não é só “online”
+
+Quando Rodolfo pedir para “conferir tudo de novo” após update, limpeza ou restart Hermes, não responder apenas que gateways estão `active/running`. Se a preocupação declarada for perda de configuração/patch local, validar e reportar explicitamente a recuperação da superfície local:
+- comparar todos os markers/funções do `pre-local-diff.patch` e `pre-local-diff-cached.patch` contra o runtime vivo;
+- rodar `ensure-hermes-mgs-patches.sh`, `py_compile` e testes alvo;
+- separar `runtime íntegro` de `higiene de patch artifact`;
+- dizer claramente quantos markers foram conferidos e quantos faltam, ex.: `35/35 OK, missing=0`.
+
+Pitfall validado: responder “Zeus/Atena/Ares/Hera online” quando Rodolfo perguntou se “recuperou tudo que estava fora” é incompleto e irrita, porque ele já sabe que os serviços estão online; a pergunta é sobre integridade dos patches/configs locais.
+
 ### Diagnóstico de título ruim em auto-thread
 
 Quando Rodolfo perguntar por que uma thread não foi renomeada, ou por que o título ficou genérico/truncado, não assumir erro de Discord/permissão. Ver `references/discord-auto-thread-title-diagnostics.md`.
@@ -478,6 +525,8 @@ Política correta tem dois estágios:
 #### Sufixo do autor sem alterar o padrão aprovado
 
 Quando Rodolfo pedir para acrescentar o nome de quem abriu a thread, preservar 100% da lógica de título existente e aplicar apenas um pós-processamento final: `Título Base - PrimeiroNome`. Não mexer em heurística, prompt, idioma, tamanho-alvo, guardrails, nem regra de thread antiga. O sufixo deve usar só o primeiro nome humano (`display_name`/`source.user_name`), sem ID/mention/sobrenome, truncando somente a base se necessário para respeitar o limite de 100 caracteres do Discord. Detalhe e checklist: `references/discord-thread-title-author-suffix-2026-06-17.md`.
+
+Pitfall pós-update validado: documentar o sufixo em skill/referência não protege runtime. O patch `discord-thread-title-author-suffix.patch` precisa estar no guard canônico de Hermes (`ensure-hermes-mgs-patches.sh` e update controlado) e a validação pós-update deve procurar `_append_thread_author_suffix` no adapter e `_append_discord_thread_author_suffix` no gateway. Se o título voltar sem ` - PrimeiroNome`, auditar primeiro perda de patch local pós-update antes de mexer na heurística de título.
 
 #### Pitfall validado: duplicata de função sobrescrevendo trava segura
 

@@ -236,6 +236,7 @@ readonly_invariant_check() {
   log "Running read-only MGS invariant check ($prefix)"
   local adapter="$REPO/plugins/platforms/discord/adapter.py"
   local runpy="$REPO/gateway/run.py"
+  local basepy="$REPO/gateway/platforms/base.py"
   local rc=0
   {
     for spec in \
@@ -250,7 +251,15 @@ readonly_invariant_check() {
       "$runpy::_schedule_discord_thread_title_rename" \
       "$runpy::_discord_thread_safe_to_autorename" \
       "$runpy::_discord_title_message_from_gateway_text" \
-      "$runpy::Shutdown notification suppressed for bot-originated Discord session"; do
+      "$runpy::Shutdown notification suppressed for bot-originated Discord session" \
+      "$basepy::AUTO_ATTACH_LOCAL_FILES_ENV" \
+      "$basepy::_auto_attach_local_files_enabled" \
+      "$runpy::codex response remained incomplete" \
+      "$adapter::_DISCORD_BOT_LOOP_NOISE_MARKERS" \
+      "$adapter::_is_discord_bot_loop_noise" \
+      "$adapter::_append_thread_author_suffix" \
+      "$runpy::_append_discord_thread_author_suffix" \
+      "$adapter::async def delete_message"; do
       file="${spec%%::*}"
       needle="${spec#*::}"
       if [[ -f "$file" ]] && grep -q "$needle" "$file"; then
@@ -263,7 +272,7 @@ readonly_invariant_check() {
   } | tee "$REPORT_DIR/${prefix}-readonly-invariants.txt"
   local pybin="$REPO/venv/bin/python"
   [[ -x "$pybin" ]] || pybin="python3"
-  "$pybin" -m py_compile "$adapter" "$runpy" > "$REPORT_DIR/${prefix}-readonly-py-compile.log" 2>&1 || rc=1
+  "$pybin" -m py_compile "$adapter" "$runpy" "$basepy" > "$REPORT_DIR/${prefix}-readonly-py-compile.log" 2>&1 || rc=1
   return "$rc"
 }
 
@@ -282,6 +291,7 @@ check_patches_against_upstream() {
       "discord-thread-title-deduplicate-safe-autorename.patch"
       "discord-bot-gateway-lifecycle-loop-guard.patch"
       "discord-report-infra-no-auto-thread.patch"
+      "discord-thread-title-author-suffix.patch"
     )
     for name in "${canonical_patches[@]}"; do
       patch="$PATCH_DIR/$name"
@@ -306,6 +316,40 @@ check_patches_against_upstream() {
   return "$rc"
 }
 
+check_local_diff_against_upstream() {
+  log "Checking saved live local diffs against origin/main in temporary worktree"
+  local wt="$REPORT_DIR/local-diff-worktree"
+  git -C "$REPO" worktree add --detach "$wt" origin/main > "$REPORT_DIR/local-diff-worktree-add.txt" 2>&1
+  local rc=0
+  {
+    local patch label
+    for label in cached unstaged; do
+      if [[ "$label" == "cached" ]]; then
+        patch="$REPORT_DIR/pre-local-diff-cached.patch"
+      else
+        patch="$REPORT_DIR/pre-local-diff.patch"
+      fi
+      if [[ ! -s "$patch" ]]; then
+        echo "SKIP empty $label local diff"
+        continue
+      fi
+      if git -C "$wt" apply --check "$patch" >/tmp/mgs-local-diff-check.out 2>&1; then
+        echo "OK apply-clean $label local diff"
+      else
+        echo "DRIFT $label local diff"
+        sed 's/^/  /' /tmp/mgs-local-diff-check.out
+        rc=1
+      fi
+    done
+  } | tee "$REPORT_DIR/pre-local-diff-upstream-check.txt"
+  git -C "$REPO" worktree remove --force "$wt" >> "$REPORT_DIR/local-diff-worktree-add.txt" 2>&1 || true
+  if [[ "$rc" != 0 ]]; then
+    log "Live local diff does not apply cleanly to origin/main. Update must stop before mutation; manual port is required."
+  fi
+  return "$rc"
+}
+
+
 run_update() {
   if [[ "$PRECHECK_ONLY" == "1" || "$NO_UPDATE" == "1" ]]; then
     log "Skipping mutation: PRECHECK_ONLY=$PRECHECK_ONLY NO_UPDATE=$NO_UPDATE"
@@ -318,6 +362,38 @@ run_update() {
   git -C "$REPO" reset --hard HEAD
   log "Running Hermes update with built-in backup disabled because MGS backup already exists"
   "$HERMES_BIN" update --yes --no-backup
+}
+
+
+restore_saved_local_diffs() {
+  if [[ "$PRECHECK_ONLY" == "1" || "$NO_UPDATE" == "1" ]]; then
+    return 0
+  fi
+  log "Restoring saved pre-update local patch surface"
+  local rc=0
+  local patch label
+  for label in cached unstaged; do
+    if [[ "$label" == "cached" ]]; then
+      patch="$REPORT_DIR/pre-local-diff-cached.patch"
+    else
+      patch="$REPORT_DIR/pre-local-diff.patch"
+    fi
+    [[ -s "$patch" ]] || { echo "SKIP empty $label local diff" | tee -a "$REPORT_DIR/restore-local-diffs.txt"; continue; }
+    if git -C "$REPO" apply --reverse --check "$patch" >/tmp/mgs-restore-local.out 2>&1; then
+      echo "OK already-present $label local diff" | tee -a "$REPORT_DIR/restore-local-diffs.txt"
+    elif git -C "$REPO" apply --check "$patch" >/tmp/mgs-restore-local.out 2>&1; then
+      git -C "$REPO" apply "$patch"
+      echo "OK restored $label local diff" | tee -a "$REPORT_DIR/restore-local-diffs.txt"
+    else
+      echo "FAIL cannot restore $label local diff from $patch" | tee -a "$REPORT_DIR/restore-local-diffs.txt"
+      sed 's/^/  /' /tmp/mgs-restore-local.out | tee -a "$REPORT_DIR/restore-local-diffs.txt"
+      rc=1
+    fi
+  done
+  if [[ "$rc" != 0 ]]; then
+    log "FAIL-CLOSED: saved pre-update local diff did not restore cleanly. Manual port required before validation/restart."
+    return "$rc"
+  fi
 }
 
 
@@ -422,29 +498,59 @@ compare_python_patch_surface() {
   sort -u "$REPORT_DIR/post-python-files.txt" -o "$REPORT_DIR/post-python-files.txt"
   git -C "$REPO" diff --cached --stat > "$REPORT_DIR/post-local-diff-cached-stat.txt"
   git -C "$REPO" diff --cached > "$REPORT_DIR/post-local-diff-cached.patch"
-  python3 - "$REPORT_DIR/pre-python-files.txt" "$REPORT_DIR/post-python-files.txt" "$REPORT_DIR/post-python-files-compare.txt" <<'PYFILES'
-import sys, pathlib
+  python3 - "$REPORT_DIR/pre-python-files.txt" "$REPORT_DIR/post-python-files.txt" "$REPORT_DIR/post-python-files-compare.txt" "$REPORT_DIR/pre-local-diff.patch" "$REPORT_DIR/pre-local-diff-cached.patch" "$REPO" <<'PYFILES'
+import sys, pathlib, re
 pre=pathlib.Path(sys.argv[1]); post=pathlib.Path(sys.argv[2]); out=pathlib.Path(sys.argv[3])
+pre_patch=pathlib.Path(sys.argv[4]); pre_cached=pathlib.Path(sys.argv[5]); repo=pathlib.Path(sys.argv[6])
 pre_set=set(pre.read_text().splitlines()) if pre.exists() else set()
 post_set=set(post.read_text().splitlines()) if post.exists() else set()
-critical={
- 'gateway/run.py',
- 'plugins/platforms/discord/adapter.py',
- 'tests/gateway/test_discord_free_response.py',
- 'tests/gateway/test_restart_resume_pending.py',
-}
+critical={'gateway/run.py','plugins/platforms/discord/adapter.py','gateway/platforms/base.py','tests/gateway/test_discord_free_response.py','tests/gateway/test_restart_resume_pending.py'}
 lines=[]
 lines.append('pre_python_files=' + ','.join(sorted(pre_set)))
 lines.append('post_python_files=' + ','.join(sorted(post_set)))
 missing=sorted((pre_set & critical) - post_set)
 new=sorted(post_set - pre_set)
 for f in sorted(critical):
-    lines.append(('OK ' if f in post_set else 'MISSING ') + f)
+    if f in pre_set or f in post_set:
+        lines.append(('OK ' if f in post_set else 'MISSING ') + f)
 if missing:
     lines.append('FAIL missing_preexisting_critical=' + ','.join(missing))
 if new:
     lines.append('WARN new_post_python_files=' + ','.join(new))
-rc=1 if missing else 0
+live_text=[]
+for rel in sorted((pre_set | post_set | critical)):
+    p=repo/rel
+    if p.exists() and p.suffix=='.py':
+        live_text.append(p.read_text(errors='replace'))
+live='\n'.join(live_text)
+markers=[]
+for patch in [pre_patch, pre_cached]:
+    if not patch.exists():
+        continue
+    for line in patch.read_text(errors='replace').splitlines():
+        if not line.startswith('+') or line.startswith('+++'):
+            continue
+        s=line[1:]
+        for pat in [r'\b(?:async\s+def|def)\s+([A-Za-z_][A-Za-z0-9_]*)\b', r'\bclass\s+([A-Za-z_][A-Za-z0-9_]*)\b']:
+            m=re.search(pat, s)
+            if m:
+                markers.append(m.group(1))
+        for q in ['AUTO_ATTACH_LOCAL_FILES_ENV','DISCORD_THREAD_AUTO_ADD_USERS','Auto-thread member sync','semantic_fallback_title','Formatação de Tabelas','Erro Sistema Operacional','service-manager restarts while a chat task is active','Internal restart recovery checkpoint','Do not re-run','_remember_auto_thread_initial_title','_discord_title_message_from_gateway_text','Shutdown notification suppressed for bot-originated Discord session','Ignoring gateway lifecycle notice from bot','Auto-thread skipped for REPORT-INFRA control-plane message','_DISCORD_BOT_LOOP_NOISE_MARKERS','_DISCORD_BOT_LOOP_NOISE_EXACT','codex response remained incomplete','_append_thread_author_suffix','_append_discord_thread_author_suffix','async def delete_message']:
+            if q in s:
+                markers.append(q)
+seen=[]
+for x in markers:
+    if x not in seen:
+        seen.append(x)
+missing_markers=[]
+for x in seen:
+    ok=x in live
+    lines.append(('OK marker ' if ok else 'FAIL marker ') + x)
+    if not ok:
+        missing_markers.append(x)
+if missing_markers:
+    lines.append('FAIL missing_preupdate_markers=' + ','.join(missing_markers))
+rc=1 if (missing or missing_markers) else 0
 out.write_text('\n'.join(lines)+'\n')
 print('\n'.join(lines))
 sys.exit(rc)
@@ -563,6 +669,12 @@ main() {
   snapshot_profiles_sanitized pre
   patch_check_rc=0
   check_patches_against_upstream || patch_check_rc=$?
+  local_diff_check_rc=0
+  check_local_diff_against_upstream || local_diff_check_rc=$?
+  if [[ "$local_diff_check_rc" != 0 && "$PRECHECK_ONLY" != "1" ]]; then
+    log "FAIL-CLOSED: live local diff would not restore cleanly on origin/main. Manual port required before update."
+    false
+  fi
   if [[ "$patch_check_rc" != 0 && "$PRECHECK_ONLY" != "1" && "$ALLOW_PATCH_DRIFT" != "1" ]]; then
     log "FAIL-CLOSED: canonical patch drift detected before update. Set ALLOW_PATCH_DRIFT=1 only after manual port/review."
     false
@@ -574,6 +686,7 @@ main() {
     return 0
   fi
   run_update
+  restore_saved_local_diffs
   post_validate
   # Write a durable success report before gateway restart. Restarting Zeus can
   # terminate this process before it has a chance to speak in Discord; the

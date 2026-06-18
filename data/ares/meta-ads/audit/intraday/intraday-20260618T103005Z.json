@@ -1,0 +1,52 @@
+{
+  "ts_utc": "2026-06-18T10:30:02.642941+00:00",
+  "job": "intraday",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "account_id": "1356770869843984",
+  "mode": "dry_run",
+  "write_enabled": false,
+  "token_report": {
+    "item": "Token Meta API",
+    "field": "credential",
+    "len": 198
+  },
+  "timezone": "Europe/Madrid",
+  "candidates": [
+    {
+      "pg_id": "pg_22069",
+      "page_name": "Patricia Flores",
+      "country_vertical": "US / CC",
+      "rule": "R2 — MO > 0 and CPMO > USD 3.25",
+      "status": "ACTIVE",
+      "action": "pause_campaign",
+      "campaign_id": "120248290564270604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 3",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "spend": 36.58,
+      "MO": 10,
+      "CPMO": 3.66,
+      "mode": "dry_run_no_write"
+    },
+    {
+      "pg_id": "pg_22069",
+      "page_name": "Patricia Flores",
+      "country_vertical": "US / CC",
+      "rule": "R2 — MO > 0 and CPMO > USD 3.25",
+      "status": "ACTIVE",
+      "action": "pause_campaign",
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "spend": 38.58,
+      "MO": 11,
+      "CPMO": 3.51,
+      "mode": "dry_run_no_write"
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "campaigns_seen": 15,
+    "insight_rows": 5,
+    "candidate_count": 2
+  }
+}

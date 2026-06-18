@@ -86,6 +86,13 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    discord-thread-title-author-suffix.patch)
+      if grep -q "_append_thread_author_suffix" "$REPO/plugins/platforms/discord/adapter.py" \
+        && grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
   esac
 
   fail "patch does not apply cleanly and is not already applied: $name"
@@ -105,6 +112,7 @@ apply_patch_if_needed "discord-new-thread-ai-title-once.patch"
 apply_patch_if_needed "discord-thread-title-deduplicate-safe-autorename.patch"
 apply_patch_if_needed "discord-bot-gateway-lifecycle-loop-guard.patch"
 apply_patch_if_needed "discord-report-infra-no-auto-thread.patch"
+apply_patch_if_needed "discord-thread-title-author-suffix.patch"
 
 # Invariants that must survive every Hermes update. If any grep fails, the
 # update is not production-safe for MGS gateways.
@@ -158,10 +166,28 @@ grep -q "Ignoring gateway lifecycle notice from bot" "$REPO/plugins/platforms/di
 grep -q "Shutdown notification suppressed for bot-originated Discord session" "$REPO/gateway/run.py" \
   || fail "missing Discord bot-originated shutdown notification suppressor"
 
+grep -q "AUTO_ATTACH_LOCAL_FILES_ENV" "$REPO/gateway/platforms/base.py" \
+  || fail "missing Discord/local file auto-attach safety gate"
+grep -q "_auto_attach_local_files_enabled" "$REPO/gateway/platforms/base.py" \
+  || fail "missing local file auto-attach helper"
+grep -q "codex response remained incomplete" "$REPO/gateway/run.py" \
+  || fail "missing Discord Codex incomplete/no-content noise filter"
+grep -q "_DISCORD_BOT_LOOP_NOISE_MARKERS" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord multi-agent loop-noise marker set"
+grep -q "_is_discord_bot_loop_noise" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord multi-agent loop-noise filter"
+grep -q "_append_thread_author_suffix" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord initial thread author suffix"
+grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run.py" \
+  || fail "missing Discord AI title author suffix"
+grep -q "async def delete_message" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord delete_message cleanup_progress support"
+
 PYBIN="$REPO/venv/bin/python"
 [[ -x "$PYBIN" ]] || PYBIN="python3"
 "$PYBIN" -m py_compile \
   "$REPO/plugins/platforms/discord/adapter.py" \
-  "$REPO/gateway/run.py"
+  "$REPO/gateway/run.py" \
+  "$REPO/gateway/platforms/base.py"
 
 log "OK Hermes MGS patches present and py_compile passed"

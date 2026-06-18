@@ -491,6 +491,25 @@ Cena final
 CTA:
 ```
 
+### Convites pessoais em vídeo — integração profissional de foto e texto
+
+Quando o vídeo for convite pessoal/familiar com foto de criança/pessoa e referência visual, trate como **composição por slides/cenas**, não como fundo + foto quadrada + caixas de texto.
+
+Regras obrigatórias:
+
+```text
+Item                       Regra de qualidade
+─────────────────────────  ─────────────────────────────────────────────
+Foto da pessoa/criança      Integrar em elemento do cenário: para-brisa, círculo, porta-retrato, placa, janela etc.
+Máscara da foto             Acompanhar o formato real do elemento; nunca entregar foto quadrada/retangular colada se o cenário pede curva/círculo.
+Textos                      Usar placas, fitas, madeira, pergaminho, folhas ou elementos do tema; evitar caixas brancas/TXT sobreposto.
+Estrutura                   Preferir slides: 1) hero/foto, 2) convite, 3) dados fixos e legíveis.
+Dados críticos              Data, horário e endereço devem ficar estáveis tempo suficiente para leitura em celular.
+Validação                   Gerar contact sheet e checar se foto/textos parecem parte do design antes de entregar.
+```
+
+Se o usuário disser que “os fundos ficaram bons” mas criticar foto/texto, preserve o fundo aprovado e refaça **layout/compositing**, não gere novo conceito do zero. Ver detalhe em `references/personal-invitation-video-workflow.md`.
+
 ### Gate obrigatório para vídeo com referência externa ou backend específico
 
 Quando o usuário pedir vídeo criativo baseado em **referência externa** (YouTube Shorts/Reels/TikTok/link) ou exigir backend específico (**GPT/OpenAI** e/ou **Grok/xAI**), não comece a produzir a peça final antes de validar os pré-requisitos.
@@ -627,12 +646,14 @@ Antes de responder, verifique:
 
 ## Armadilhas comuns
 
-1. **Responder só com ideias soltas.** Hera precisa entregar pacote operacional, não brainstorm genérico.
+- **Responder só com ideias soltas.** Hera precisa entregar pacote operacional, não brainstorm genérico.
 2. **Marcar como aprovado sem aprovação humana.** Use `precisa_revisao` até haver aprovação explícita.
 3. **Executar trabalho do Ares ou humano.** Hera prepara criativos; Ares ou humanos executam campanhas.
 4. **Ignorar naming, origem, uso e status.** Organização é parte central da função da Hera.
 5. **Pedir contexto demais.** Não transforme Hera em formulário. Faça o melhor possível com premissas claras e pergunte só o que bloquear a entrega.
 6. **Misturar idiomas sem necessidade.** Responda em PT-BR quando o usuário escrever em português; só preserve termos técnicos inevitáveis.
+7. **Foto pessoal em quadrado por cima de fundo ilustrado.** Em convite/vídeo pessoal, recortar a foto no formato do elemento visual do cenário; se há para-brisa, círculo, medalhão ou porta-retrato, a foto deve viver ali.
+8. **Texto parecendo TXT/caixa colada.** Para convites e vídeos temáticos, texto precisa virar peça visual do tema: placa, madeira, pergaminho, fita, folha, balão etc.; validar contact sheet antes de entregar.
 
 ## Checklist de verificação
 

@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-18T00:50:20-04:00",
-    "generated_by": "zeus"
+    "updated_at": "2026-06-18T13:33:13-04:00",
+    "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
     {
@@ -86,37 +86,6 @@
     },
     {
       "entry": "41 3 * * * flock -n /var/lock/mgs_safety_backup.lock /root/mgs-agent/scripts/mgs-safety-backup.sh >> /root/mgs-agent/logs/mgs-safety-backup-cron.log 2>&1"
-    },
-    {
-      "entry": "Hermes cron profile=ares id=709a29c99b3f schedule=\"once at 2026-08-09 12:09\" script=ares-meta-token-expiry-alert.sh no_agent=true deliver=discord:1498132022634483894",
-      "id": "709a29c99b3f",
-      "profile": "ares",
-      "name": "Ares Meta token expiry alert - 7d before expiry",
-      "schedule": "once at 2026-08-09 12:09",
-      "script": "/root/.hermes/profiles/ares/scripts/ares-meta-token-expiry-alert.sh",
-      "next_run_at": "2026-08-09T12:09:54-04:00",
-      "state": "scheduled",
-      "enabled": true,
-      "no_agent": true,
-      "repeat": "once",
-      "deliver": "discord:1498132022634483894"
-    },
-    {
-      "entry": "Hermes cron profile=ares id=0598c0dc469f schedule=\"0 2,6,9,12,16 * * *\" script=ares-meta-hoa-manager.sh no_agent=true repeat=20 deliver=discord:1516887105543077949",
-      "id": "0598c0dc469f",
-      "profile": "ares",
-      "name": "Ares Meta HOA gestor read-only 4d",
-      "schedule": "0 2,6,9,12,16 * * *",
-      "intended_local_times": "08:00,12:00,15:00,18:00,22:00 Europe/Madrid during CEST",
-      "script": "/root/.hermes/profiles/ares/scripts/ares-meta-hoa-manager.sh",
-      "next_run_at": "2026-06-18T02:00:00-04:00",
-      "state": "scheduled",
-      "enabled": true,
-      "no_agent": true,
-      "repeat": 20,
-      "completed": 0,
-      "deliver": "discord:1516887105543077949",
-      "mode": "read-only/always-output"
     }
   ],
   "scripts": [
@@ -166,6 +135,11 @@
       "modified_at": "2026-06-16T00:20:06-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/ares-meta-clone-troubleshoot-3alts.py",
+      "size_bytes": 11280,
+      "modified_at": "2026-06-18T00:10:42-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/ares-meta-common.py",
       "size_bytes": 6497,
       "modified_at": "2026-06-16T23:51:34-04:00"
@@ -181,9 +155,24 @@
       "modified_at": "2026-06-16T00:22:26-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
+      "size_bytes": 13930,
+      "modified_at": "2026-06-17T23:43:03-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
       "size_bytes": 1339,
       "modified_at": "2026-06-16T00:20:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-replacement-clone-videoid.py",
+      "size_bytes": 21551,
+      "modified_at": "2026-06-18T00:48:49-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-replacement-clone.py",
+      "size_bytes": 17797,
+      "modified_at": "2026-06-18T00:01:20-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-token-expiry-alert.py",
@@ -191,14 +180,14 @@
       "modified_at": "2026-06-17T12:28:32-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/ares-promote-review-ready.py",
-      "size_bytes": 6295,
-      "modified_at": "2026-06-14T23:43:23-04:00"
-    },
-    {
       "path": "/root/mgs-agent/scripts/ares-promote-review-ready-retry.sh",
       "size_bytes": 1094,
       "modified_at": "2026-06-14T23:50:55-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-promote-review-ready.py",
+      "size_bytes": 6295,
+      "modified_at": "2026-06-14T23:43:23-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-propose-creative-organization.py",
@@ -303,58 +292,22 @@
     {
       "path": "/root/mgs-agent/scripts/hera-youtube-capture-frames.py",
       "size_bytes": 3134,
-      "sha256": "aaef1a8b6c276f110de4be5eea14dc92a3784913d129dbab2994858be78c7181",
-      "modified_at": "2026-06-17T18:44:59-04:00",
-      "owner": "hera",
-      "purpose": "Capture validated frames/contact sheet from YouTube Shorts using persistent Chromium profile",
-      "validated_at": "2026-06-17T18:52:50-04:00",
-      "validations": [
-        "py_compile OK",
-        "no secret literal detected",
-        "persistent Chromium validation produced 8 frames + contact_sheet for PCdygSACl_4"
-      ]
+      "modified_at": "2026-06-17T18:44:59-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hera-youtube-login-browser.sh",
       "size_bytes": 2963,
-      "sha256": "b8f1b95f254730c2b573ff8f41625a2f5b18937c97c341d9834fdc24583d4cc3",
-      "modified_at": "2026-06-17T18:29:31-04:00",
-      "owner": "hera",
-      "purpose": "Open Hera persistent Chromium profile for YouTube login/bootstrap",
-      "validated_at": "2026-06-17T18:52:50-04:00",
-      "validations": [
-        "bash -n OK",
-        "no secret literal detected",
-        "persistent Chromium validation produced 8 frames + contact_sheet for PCdygSACl_4"
-      ]
+      "modified_at": "2026-06-17T18:29:31-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hera-youtube-persistent-browser.py",
       "size_bytes": 6214,
-      "sha256": "1f7da2243e5f429556085eb581d8ff4ad5e24e6a46a2bb8f62cf7769280d5ce6",
-      "modified_at": "2026-06-17T18:23:06-04:00",
-      "owner": "hera",
-      "purpose": "Probe YouTube reference access through persistent Chromium without printing cookies",
-      "validated_at": "2026-06-17T18:52:50-04:00",
-      "validations": [
-        "py_compile OK",
-        "no secret literal detected",
-        "persistent Chromium validation produced 8 frames + contact_sheet for PCdygSACl_4"
-      ]
+      "modified_at": "2026-06-17T18:23:06-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hera-youtube-reference-download.sh",
       "size_bytes": 3379,
-      "sha256": "4677cae9eb369a290f5698a4a94b842ee843c68e747111ecb48a93f22fae030e",
-      "modified_at": "2026-06-17T18:25:40-04:00",
-      "owner": "hera",
-      "purpose": "Download/analyze YouTube references using private cookies; fail-closed if absent",
-      "validated_at": "2026-06-17T18:52:50-04:00",
-      "validations": [
-        "bash -n OK",
-        "no secret literal detected",
-        "persistent Chromium validation produced 8 frames + contact_sheet for PCdygSACl_4"
-      ]
+      "modified_at": "2026-06-17T18:25:40-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-mgs-patch-watchdog.sh",
@@ -582,11 +535,6 @@
       "modified_at": "2026-06-10T12:30:23-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
-      "size_bytes": 5772,
-      "modified_at": "2026-05-16T17:37:26-04:00"
-    },
-    {
       "path": "/root/mgs-agent/scripts/run-hermes-update-all-agents-20260610.sh",
       "size_bytes": 7229,
       "modified_at": "2026-06-12T08:37:14-04:00"
@@ -600,6 +548,11 @@
       "path": "/root/mgs-agent/scripts/run-openhands-atena.sh",
       "size_bytes": 3277,
       "modified_at": "2026-05-26T13:57:27-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
+      "size_bytes": 5772,
+      "modified_at": "2026-05-16T17:37:26-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sync-codex-oauth.sh",
@@ -620,36 +573,6 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
-      "size_bytes": 13930,
-      "modified_at": "2026-06-17T23:43:03-04:00",
-      "sha256": "f5b554c7c3de4b46593b163ab8a6809bd609e8f967e5862391635fc6fe7c1677"
-    },
-    {
-      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-hoa-manager.sh",
-      "size_bytes": 207,
-      "modified_at": "2026-06-17T23:55:43-04:00",
-      "sha256": "5749a99243bce55413799281b0073d9961fd0437880432b19e6d66cd5b5c13c0"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-replacement-clone.py",
-      "size_bytes": 17797,
-      "modified_at": "2026-06-18T00:01:20-04:00",
-      "sha256": "be5f0394b63fefec875f2c5350a3d17ad58893e454d78e2345b6b304776a551f"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-clone-troubleshoot-3alts.py",
-      "size_bytes": 11280,
-      "modified_at": "2026-06-18T00:10:42-04:00",
-      "sha256": "c04857d02cf82f5e44e263b63da87df882c6d1752fd952d3693f25eaed8ec01b"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-replacement-clone-videoid.py",
-      "size_bytes": 21551,
-      "modified_at": "2026-06-18T00:48:49-04:00",
-      "sha256": "ad4a6cb230eb2a0092f9a08c5bfcf3fcd3aca79d185b3024bd405909f469a72d"
     }
   ],
   "skills_mgs": [
@@ -666,11 +589,6 @@
   ],
   "skills_hermes": {
     "ares": [
-      {
-        "name": "apple-macos-automation",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/ares/skills/apple/apple-macos-automation/SKILL.md"
-      },
       {
         "name": "apple-notes",
         "category": ".archive",
@@ -927,6 +845,11 @@
         "skill_md": "/root/.hermes/profiles/ares/skills/.archive/youtube-content/SKILL.md"
       },
       {
+        "name": "apple-macos-automation",
+        "category": "apple",
+        "skill_md": "/root/.hermes/profiles/ares/skills/apple/apple-macos-automation/SKILL.md"
+      },
+      {
         "name": "coding-agent-cli-orchestration",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/ares/skills/autonomous-ai-agents/coding-agent-cli-orchestration/SKILL.md"
@@ -1044,20 +967,17 @@
       {
         "name": "meta-ads-intraday-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "sha256": "f8829114f4c4b4e6679a3d91504bba123d1fd3f33d22bd47d4b20187aef3ea9e",
-        "versioned_sha256": "f8829114f4c4b4e6679a3d91504bba123d1fd3f33d22bd47d4b20187aef3ea9e",
-        "modified_at": "2026-06-17T23:44:31-04:00"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
+      },
+      {
+        "name": "meta-openzedfinanzas-replacement-clone",
+        "category": "growth",
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md"
       },
       {
         "name": "paid-acquisition-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md",
-        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/paid-acquisition-operations/SKILL.md",
-        "sha256": "9c4a10cc3b4ec0ed3924bf3deb6636af67702ab7d67ec0b7b909f4abcae35368",
-        "versioned_sha256": "9c4a10cc3b4ec0ed3924bf3deb6636af67702ab7d67ec0b7b909f4abcae35368",
-        "modified_at": "2026-06-17T23:44:09-04:00"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md"
       },
       {
         "name": "native-mcp",
@@ -1253,23 +1173,9 @@
         "name": "yuanbao",
         "category": "",
         "skill_md": "/root/.hermes/profiles/ares/skills/yuanbao/SKILL.md"
-      },
-      {
-        "name": "meta-openzedfinanzas-replacement-clone",
-        "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
-        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
-        "sha256": "1f1223e93a8c1dc4d00ede7c0aa3d432c74bea1e6063b72712ea98a372df4d7d",
-        "versioned_sha256": "1f1223e93a8c1dc4d00ede7c0aa3d432c74bea1e6063b72712ea98a372df4d7d",
-        "modified_at": "2026-06-18T00:49:36-04:00"
       }
     ],
     "atena": [
-      {
-        "name": "apple-services",
-        "category": "apple",
-        "skill_md": "/root/.hermes/profiles/atena/skills/apple/apple-services/SKILL.md"
-      },
       {
         "name": "architecture-diagram",
         "category": "creative",
@@ -1419,6 +1325,11 @@
         "name": "test-driven-development",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/atena/skills/.archive/software-development/test-driven-development/SKILL.md"
+      },
+      {
+        "name": "apple-services",
+        "category": "apple",
+        "skill_md": "/root/.hermes/profiles/atena/skills/apple/apple-services/SKILL.md"
       },
       {
         "name": "autonomous-coding-agents",
@@ -1990,21 +1901,7 @@
       {
         "name": "creative-brief-handoff",
         "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md",
-        "versioned_skill_md": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/SKILL.md",
-        "sha256": "3a115814bb3a97ab3b96aba3d0ff37bfcba11922755bbdaea0b76e140330abc5",
-        "versioned_sha256": "3a115814bb3a97ab3b96aba3d0ff37bfcba11922755bbdaea0b76e140330abc5",
-        "modified_at": "2026-06-17T18:42:54-04:00",
-        "references": [
-          {
-            "path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/youtube-reference-grok-creative-workflow.md",
-            "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/youtube-reference-grok-creative-workflow.md",
-            "sha256": "d83894e9484d2ba59e4eb6ded8c543f2b0a66760350fc25743946fa28c98bb1b",
-            "versioned_sha256": "d83894e9484d2ba59e4eb6ded8c543f2b0a66760350fc25743946fa28c98bb1b",
-            "modified_at": "2026-06-17T18:50:41-04:00",
-            "purpose": "Validated YouTube/Shorts reference workflow via persistent Chromium before Grok creative generation"
-          }
-        ]
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md"
       },
       {
         "name": "creative-ideation",
@@ -2699,6 +2596,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-operations/SKILL.md"
       },
       {
+        "name": "meta-ads-api-operations",
+        "category": "growth",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/growth/meta-ads-api-operations/SKILL.md"
+      },
+      {
         "name": "native-mcp",
         "category": "mcp",
         "skill_md": "/root/.hermes/profiles/zeus/skills/mcp/native-mcp/SKILL.md"
@@ -2936,8 +2838,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "0ba849b6c7443ce0f1af2556df41461c",
-      "modified_at": "2026-06-17T18:26:02-04:00"
+      "md5": "528a34c735c5b4f6db0b7e34132b3106",
+      "modified_at": "2026-06-18T13:26:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -2948,32 +2850,32 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "48765664b0d0ecafc3a834f590701166",
-      "modified_at": "2026-06-17T18:30:01-04:00"
+      "md5": "4b55f3ba4256bfd367d855443560b954",
+      "modified_at": "2026-06-18T13:30:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "f975ab830bb43efea68e9e601d285d9e",
-      "modified_at": "2026-06-17T15:02:45-04:00"
+      "md5": "ab1c1633f662eda552483831d94df3ae",
+      "modified_at": "2026-06-18T09:02:59-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 14587,
-      "md5": "84cfd8c0c2d7b2cd77d0e74e91a1845e",
-      "modified_at": "2026-06-17T18:30:02-04:00"
+      "size_bytes": 14974,
+      "md5": "0ad1acbfb5b5efe7b3f19028c5547eec",
+      "modified_at": "2026-06-18T13:30:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 328,
-      "md5": "c0f974cd07f71b89f0109077af524f33",
-      "modified_at": "2026-06-17T14:37:04-04:00"
+      "size_bytes": 330,
+      "md5": "f8839dc9aac371c892d1faffe9920fa2",
+      "modified_at": "2026-06-18T08:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 105459,
-      "md5": "4283e6b0cd9d143f3ccf79e200fcb70d",
-      "modified_at": "2026-06-17T18:26:42-04:00"
+      "size_bytes": 106835,
+      "md5": "847b24f600af416cbd08a5073274af44",
+      "modified_at": "2026-06-18T05:00:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -3020,8 +2922,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2239,
-      "md5": "160ac35bfef50842024a73926d65162a",
-      "modified_at": "2026-06-17T18:26:01-04:00"
+      "md5": "b0eddfea193d3c395d54a2a2b96e42e3",
+      "modified_at": "2026-06-18T13:31:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -3038,8 +2940,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "474b5b0256fc829052359fbff0e08701",
-      "modified_at": "2026-06-17T14:07:02-04:00"
+      "md5": "0dbca544d91b120fc3981e643e705111",
+      "modified_at": "2026-06-18T08:07:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -3049,9 +2951,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 21340,
-      "md5": "a48a630b073c5a8c1b3785b2595b665d",
-      "modified_at": "2026-06-17T10:24:08-04:00"
+      "size_bytes": 21704,
+      "md5": "530224f8f02257ad922c1c766e28c26b",
+      "modified_at": "2026-06-18T10:24:08-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
@@ -3082,48 +2984,6 @@
       "size_bytes": 43510,
       "md5": "313356aeb86d41db526f68507a56ec4e",
       "modified_at": "2026-06-16T19:23:39-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v1.json",
-      "size_bytes": 3635,
-      "md5": "bb4c528212658c4c97252b63a9de1435",
-      "modified_at": "2026-06-18T00:02:54-04:00",
-      "sha256": "d78d0ab9bf661763b993623818c673521c8d0f9c759b130d620dbfe89463db72"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json",
-      "size_bytes": 5474,
-      "md5": "078463f14be446bb070ea2a584101345",
-      "modified_at": "2026-06-18T00:02:54-04:00",
-      "sha256": "c14b2c4e11c41777f3a4f20253f4b49f01479dba93a4d3d7932ecf805b582903"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/reports/hoa-cpmo-baseline-7d.json",
-      "size_bytes": 1701,
-      "md5": "a8fa7b0c993f84ef75761f05f2975aff",
-      "modified_at": "2026-06-17T23:32:20-04:00",
-      "sha256": "4480ca256776e511e903607944594ba2dfc2fd56b45f631d49d14e360022ed14"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/clone-troubleshoot-3alts-20260618T041137Z.json",
-      "size_bytes": 4204,
-      "md5": "a0af3318e55269824d3096e23dac510a",
-      "modified_at": "2026-06-18T00:11:37-04:00",
-      "sha256": "87f6646ad57cef1795e82a32ddb8a3b7b631d0adcc395262f8dc50f12d84c07d"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/creative-asset-inspect-readonly.json",
-      "size_bytes": 2054,
-      "md5": "c4a8ad63c28b9d5c2b5b4742312bf75a",
-      "modified_at": "2026-06-18T00:41:59-04:00",
-      "sha256": "6ae9804d3fae38d9d1d4abbfd7af952e3fc5d172cc2a96980ee166ec85ab55c6"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/clone-videoid-failed-20260618T044855Z.json",
-      "size_bytes": 6796,
-      "md5": "859e3376b83357b4abe9c6d1ac3cf476",
-      "modified_at": "2026-06-18T00:49:12-04:00",
-      "sha256": "abe5ce1fff734ce0a2f5c4afa0743a5ff60e28bd67bd3b16f8a7c20c5427e6a7"
     }
   ],
   "mu_plugin_canonical": {

@@ -1,0 +1,266 @@
+{
+  "created_at": "2026-06-18T04:10:50.939886+00:00",
+  "mode": "controlled_write_create_paused_campaign",
+  "account_id": "1356770869843984",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "loser_campaign_id": "120248290564280604",
+  "daily_budget_usd": 25.0,
+  "max_budget_guardrail_usd": 25.0,
+  "start_time_local": "2026-06-19T01:00:00+02:00",
+  "steps": [
+    {
+      "step": "create_campaign",
+      "status": 200,
+      "payload": {
+        "id": "120248890339780604"
+      }
+    },
+    {
+      "step": "create_adset",
+      "source_adset_id": "120248290564460604",
+      "status": 200,
+      "payload": {
+        "id": "120248890340280604"
+      }
+    },
+    {
+      "step": "create_adset",
+      "source_adset_id": "120248290297250604",
+      "status": 200,
+      "payload": {
+        "id": "120248890341180604"
+      }
+    },
+    {
+      "step": "create_adset",
+      "source_adset_id": "120248290564370604",
+      "status": 200,
+      "payload": {
+        "id": "120248890341980604"
+      }
+    },
+    {
+      "step": "create_adcreative",
+      "source_creative_id": "1878134753167706",
+      "status": 400,
+      "payload": {
+        "error": {
+          "message": "Invalid parameter",
+          "type": "OAuthException",
+          "code": 100,
+          "error_subcode": 1815765,
+          "is_transient": false,
+          "error_user_title": "Estás usando un enlace externo no válido",
+          "error_user_msg": "El enlace de tu anuncio contiene https://fb.com/messenger_doc/, pero no es válido como destino de un sitio web externo.",
+          "fbtrace_id": "AnJFAEumY11FfM6-yCT1vMT"
+        }
+      }
+    },
+    {
+      "step": "create_adcreative_fallback_existing",
+      "source_creative_id": "1878134753167706",
+      "reason": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 1815765,
+        "fbtrace_id": "AnJFAEumY11FfM6-yCT1vMT"
+      }
+    },
+    {
+      "step": "create_ad",
+      "source_ad_id": "120248290564590604",
+      "status": 200,
+      "payload": {
+        "error": {
+          "message": "This request requires the user to take a pending action",
+          "type": "OAuthException",
+          "code": 31,
+          "error_subcode": 3858385,
+          "is_transient": false,
+          "error_user_title": "Autentica tu cuenta",
+          "error_user_msg": "Creemos que alguien puede haber intentado acceder a tu cuenta sin permiso. Por tu seguridad, no podrás crear ni modificar anuncios hasta que autentiques tu cuenta en el Administrador de anuncios. Tus anuncios actuales seguirán en circulación con normalidad.",
+          "fbtrace_id": "Aix_2Spy2OpS78cx5lUDiIS"
+        }
+      },
+      "new_creative_id": null,
+      "used_existing_creative_fallback": true
+    }
+  ],
+  "created": {
+    "campaign_id": "120248890339780604",
+    "adsets": {
+      "120248290564460604": "120248890340280604",
+      "120248290297250604": "120248890341180604",
+      "120248290564370604": "120248890341980604"
+    }
+  },
+  "errors": [
+    {
+      "step": "create_ad",
+      "source_ad_id": "120248290564590604",
+      "error": {
+        "message": "This request requires the user to take a pending action",
+        "type": "OAuthException",
+        "code": 31,
+        "error_subcode": 3858385,
+        "fbtrace_id": "Aix_2Spy2OpS78cx5lUDiIS"
+      }
+    }
+  ],
+  "source_campaign": {
+    "id": "120248290564280604",
+    "name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+    "status": "ACTIVE",
+    "effective_status": "ACTIVE",
+    "objective": "OUTCOME_SALES",
+    "buying_type": "AUCTION",
+    "daily_budget": "10000",
+    "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+    "special_ad_categories": [
+      "FINANCIAL_PRODUCTS_SERVICES"
+    ],
+    "source_campaign_id": "120248290297180604",
+    "smart_promotion_type": "GUIDED_CREATION"
+  },
+  "source_adsets": [
+    {
+      "id": "120248290564350604",
+      "name": "Conjunto 01 - VÍDEOS",
+      "campaign_id": "120248290564280604",
+      "status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "billing_event": "IMPRESSIONS",
+      "optimization_goal": "OFFSITE_CONVERSIONS",
+      "destination_type": "MESSENGER",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "ES"
+          ],
+          "location_types": [
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        }
+      },
+      "promoted_object": {
+        "pixel_id": "629060785934493",
+        "custom_event_type": "COMPLETE_REGISTRATION",
+        "page_id": "1063171606876651",
+        "smart_pse_enabled": false
+      },
+      "attribution_spec": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 7
+        },
+        {
+          "event_type": "VIEW_THROUGH",
+          "window_days": 1
+        }
+      ],
+      "start_time": "2026-06-11T04:02:00+0200"
+    },
+    {
+      "id": "120248290564260604",
+      "name": "Conjunto 02 - IMAGENS",
+      "campaign_id": "120248290564280604",
+      "status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "billing_event": "IMPRESSIONS",
+      "optimization_goal": "OFFSITE_CONVERSIONS",
+      "destination_type": "MESSENGER",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "ES"
+          ],
+          "location_types": [
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        }
+      },
+      "promoted_object": {
+        "pixel_id": "629060785934493",
+        "custom_event_type": "COMPLETE_REGISTRATION",
+        "page_id": "1063171606876651",
+        "smart_pse_enabled": false
+      },
+      "attribution_spec": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 7
+        },
+        {
+          "event_type": "VIEW_THROUGH",
+          "window_days": 1
+        }
+      ],
+      "start_time": "2026-06-11T04:02:00+0200"
+    }
+  ],
+  "winner_selection": [
+    {
+      "ad_id": "120248290564590604",
+      "ad_name": "Ad - 3",
+      "campaign_id": "120248290564430604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 4",
+      "spend": 9.36,
+      "MO": 7.0,
+      "CPMO": 1.3371,
+      "creative_id": "1878134753167706",
+      "adset_id": "120248290564460604"
+    },
+    {
+      "ad_id": "120248290297210604",
+      "ad_name": "Ad - 2",
+      "campaign_id": "120248290297180604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 1",
+      "spend": 107.98,
+      "MO": 70.0,
+      "CPMO": 1.5426,
+      "creative_id": "1018755007258886",
+      "adset_id": "120248290297250604"
+    },
+    {
+      "ad_id": "120248290564610604",
+      "ad_name": "Ad - 2",
+      "campaign_id": "120248290564270604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 3",
+      "spend": 101.54,
+      "MO": 58.0,
+      "CPMO": 1.7507,
+      "creative_id": "1829542905087157",
+      "adset_id": "120248290564370604"
+    }
+  ],
+  "new_campaign_name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - 01"
+}

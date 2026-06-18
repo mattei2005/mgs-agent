@@ -1,0 +1,3685 @@
+{
+  "campaign_id": "120248290564280604",
+  "created_at": "2026-06-18T03:56:22.846583+00:00",
+  "campaign_status": 200,
+  "campaign": {
+    "id": "120248290564280604",
+    "name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+    "status": "ACTIVE",
+    "effective_status": "ACTIVE",
+    "objective": "OUTCOME_SALES",
+    "buying_type": "AUCTION",
+    "created_time": "2026-06-11T03:31:09+0200",
+    "updated_time": "2026-06-11T03:31:09+0200",
+    "start_time": "2026-06-11T04:02:00+0200",
+    "daily_budget": "10000",
+    "budget_remaining": "8815",
+    "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+    "special_ad_categories": [
+      "FINANCIAL_PRODUCTS_SERVICES"
+    ],
+    "source_campaign_id": "120248290297180604",
+    "smart_promotion_type": "GUIDED_CREATION"
+  },
+  "adsets_status": 200,
+  "adsets": [
+    {
+      "id": "120248290564350604",
+      "name": "Conjunto 01 - VÍDEOS",
+      "campaign_id": "120248290564280604",
+      "status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "billing_event": "IMPRESSIONS",
+      "optimization_goal": "OFFSITE_CONVERSIONS",
+      "destination_type": "MESSENGER",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "ES"
+          ],
+          "location_types": [
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        }
+      },
+      "promoted_object": {
+        "pixel_id": "629060785934493",
+        "custom_event_type": "COMPLETE_REGISTRATION",
+        "page_id": "1063171606876651",
+        "smart_pse_enabled": false
+      },
+      "attribution_spec": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 7
+        },
+        {
+          "event_type": "VIEW_THROUGH",
+          "window_days": 1
+        }
+      ],
+      "start_time": "2026-06-11T04:02:00+0200",
+      "created_time": "2026-06-11T03:31:10+0200",
+      "updated_time": "2026-06-11T03:31:29+0200"
+    },
+    {
+      "id": "120248290564260604",
+      "name": "Conjunto 02 - IMAGENS",
+      "campaign_id": "120248290564280604",
+      "status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "billing_event": "IMPRESSIONS",
+      "optimization_goal": "OFFSITE_CONVERSIONS",
+      "destination_type": "MESSENGER",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "ES"
+          ],
+          "location_types": [
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        }
+      },
+      "promoted_object": {
+        "pixel_id": "629060785934493",
+        "custom_event_type": "COMPLETE_REGISTRATION",
+        "page_id": "1063171606876651",
+        "smart_pse_enabled": false
+      },
+      "attribution_spec": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 7
+        },
+        {
+          "event_type": "VIEW_THROUGH",
+          "window_days": 1
+        }
+      ],
+      "start_time": "2026-06-11T04:02:00+0200",
+      "created_time": "2026-06-11T03:31:10+0200",
+      "updated_time": "2026-06-11T03:31:28+0200"
+    }
+  ],
+  "ads_status": 200,
+  "ads": [
+    {
+      "id": "120248290564580604",
+      "name": "Ad - 2",
+      "campaign_id": "120248290564280604",
+      "adset_id": "120248290564350604",
+      "status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "creative": {
+        "id": "1312919013798508",
+        "name": "{{product.name}} 2026-06-10-a2bf0579ba2fb04caccb8431fdbd4086",
+        "object_story_spec": {
+          "page_id": "1063171606876651",
+          "instagram_user_id": "17841416270865123"
+        },
+        "effective_object_story_id": "1063171606876651_122115715514812470",
+        "object_type": "SHARE",
+        "asset_feed_spec": {
+          "videos": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_facd34815b9ba909e_1781141007221",
+                  "id": "120248290442360604"
+                }
+              ],
+              "video_id": "1546508323749199",
+              "thumbnail_url": "https://scontent-xxc1-1.xx.fbcdn.net/v/t15.5256-10/721348360_4542078662704726_3770361300680237516_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=110&ccb=1-7&_nc_sid=b696e2&_nc_ohc=QsRGIB9SMVcQ7kNvwEBCpxA&_nc_oc=AdrM3JlpV2Qsm4RCaDH8e6E02fpSjfiu4roxFStAL6qgHf0BOIqeDeDt7AVeuniQPfe7S-hDPsMDho3MOFzn4fC5&_nc_zt=23&_nc_ht=scontent-xxc1-1.xx&edm=ANIILHsEAAAA&_nc_gid=7a2O_p2ObHIU1zYAerFg0Q&_nc_tpa=Q5bMBQEMlMnwG8uqZ-UxAKU0AmJ8o1ZFoEBWk1sGlIyzTPNa8LqpsczyVTX419_rFS_JJljfABTuo1hl&oh=00_Af-Jw_NS3Fk6m2QUOlRFrwOtqs3-1s5YL92VMBehl3r8Ig&oe=6A393334"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fe601203a2b801b49_1781141007223",
+                  "id": "120248290442350604"
+                }
+              ],
+              "video_id": "1721331225984371",
+              "thumbnail_url": "https://scontent-xxc1-1.xx.fbcdn.net/v/t15.5256-10/720086051_1677073446944453_1446620916804433839_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=106&ccb=1-7&_nc_sid=b696e2&_nc_ohc=4SRp9vGIVEsQ7kNvwHHImrk&_nc_oc=AdqF4hnrj1gy_51tycF2bjvbly54L6n35XJEJ7QyGRnWWMMOevpXzrqvabkyixNkkN7D2OFV4aBjkKvuAaTZZ7Gh&_nc_zt=23&_nc_ht=scontent-xxc1-1.xx&edm=ANIILHsEAAAA&_nc_gid=7a2O_p2ObHIU1zYAerFg0Q&_nc_tpa=Q5bMBQGcrEGnQR70H5njQ-ERuZV80LVa89d4DgOr4UOb1NLWDOl-Bup6KZM9y0t82wGAorn1up9gtH83&oh=00_Af8q8KJYGRayXaeO11se-SVHcmWHlAq-j2ds0YpsOYUe6g&oe=6A39395F"
+            }
+          ],
+          "bodies": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f7dcb13d6659be6b4_1781141007223",
+                  "id": "120248290442340604"
+                },
+                {
+                  "name": "placement_asset_fededf60aaff2469d_1781141007221",
+                  "id": "120248290442400604"
+                }
+              ],
+              "text": ""
+            }
+          ],
+          "call_to_action_types": [
+            "APPLY_NOW"
+          ],
+          "descriptions": [
+            {
+              "text": "⭐️⭐️⭐️⭐️⭐️"
+            }
+          ],
+          "link_urls": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f849ac64e176ac7ba_1781141007222",
+                  "id": "120248290442370604"
+                },
+                {
+                  "name": "placement_asset_f9dd8a4cd7f83aeaa_1781141007224",
+                  "id": "120248290442380604"
+                }
+              ],
+              "website_url": "https://fb.com/messenger_doc/",
+              "display_url": ""
+            }
+          ],
+          "titles": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fd3b497a9916bd954_1781141007224",
+                  "id": "120248290442390604"
+                },
+                {
+                  "name": "placement_asset_fe8e1fc111994fe51_1781141007221",
+                  "id": "120248290442410604"
+                }
+              ],
+              "text": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+            }
+          ],
+          "ad_formats": [
+            "AUTOMATIC_FORMAT"
+          ],
+          "asset_customization_rules": [
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13,
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram",
+                  "audience_network",
+                  "messenger"
+                ],
+                "facebook_positions": [
+                  "story",
+                  "facebook_reels",
+                  "facebook_reels_overlay"
+                ],
+                "instagram_positions": [
+                  "story",
+                  "reels"
+                ],
+                "messenger_positions": [
+                  "story"
+                ],
+                "audience_network_positions": [
+                  "classic",
+                  "rewarded_video"
+                ]
+              },
+              "video_label": {
+                "name": "placement_asset_fe601203a2b801b49_1781141007223",
+                "id": "120248290442350604"
+              },
+              "body_label": {
+                "name": "placement_asset_f7dcb13d6659be6b4_1781141007223",
+                "id": "120248290442340604"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f9dd8a4cd7f83aeaa_1781141007224",
+                "id": "120248290442380604"
+              },
+              "title_label": {
+                "name": "placement_asset_fd3b497a9916bd954_1781141007224",
+                "id": "120248290442390604"
+              },
+              "priority": 1
+            },
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13
+              },
+              "video_label": {
+                "name": "placement_asset_facd34815b9ba909e_1781141007221",
+                "id": "120248290442360604"
+              },
+              "body_label": {
+                "name": "placement_asset_fededf60aaff2469d_1781141007221",
+                "id": "120248290442400604"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f849ac64e176ac7ba_1781141007222",
+                "id": "120248290442370604"
+              },
+              "title_label": {
+                "name": "placement_asset_fe8e1fc111994fe51_1781141007221",
+                "id": "120248290442410604"
+              },
+              "priority": 2
+            }
+          ],
+          "optimization_type": "PLACEMENT",
+          "additional_data": {
+            "multi_share_end_card": false,
+            "page_welcome_message": "{\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"¡Hola! Para continuar, haz clic en RECIBIR TARJETA abajo ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"💳 RECIBIR TARJETA\"}]}}},\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"template_id\":\"1356112476425469\",\"is_user_editing\":false}",
+            "is_click_to_message": false
+          },
+          "reasons_to_shop": false,
+          "shops_bundle": false
+        }
+      },
+      "tracking_specs": [
+        {
+          "action.type": [
+            "offsite_conversion"
+          ],
+          "fb_pixel": [
+            "629060785934493"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "conversion_id": [
+            "25121374170893585",
+            "26486708381006849",
+            "26619396587739383",
+            "26699871946381481",
+            "26711101385253361",
+            "26923380547330844",
+            "27135953452727679",
+            "27169897759336151",
+            "27205836475694169",
+            "27214792254840766",
+            "27406090242413842",
+            "27428664416797618",
+            "27533094489648922",
+            "27579356088356024",
+            "27639915378995780",
+            "27643002911972231",
+            "27712238498362570",
+            "27762650623318781",
+            "36057640910550733",
+            "36075662475411828",
+            "36427742170203501"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "conversion_id": [
+            "28253169440939655"
+          ]
+        },
+        {
+          "action.type": [
+            "whatsapp"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "messenger"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "post_interaction_gross"
+          ],
+          "page": [
+            "1063171606876651"
+          ],
+          "post": [
+            "122115715514812470"
+          ]
+        },
+        {
+          "action.type": [
+            "link_click"
+          ],
+          "post": [
+            "122115715514812470"
+          ],
+          "post.wall": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "post_engagement"
+          ],
+          "page": [
+            "1063171606876651"
+          ],
+          "post": [
+            "122115715514812470"
+          ]
+        }
+      ],
+      "conversion_specs": [
+        {
+          "action.type": [
+            "offsite_conversion"
+          ],
+          "conversion_id": [
+            "26958060993880517"
+          ]
+        }
+      ],
+      "created_time": "2026-06-11T03:31:14+0200",
+      "updated_time": "2026-06-18T00:17:42+0200"
+    },
+    {
+      "id": "120248290564550604",
+      "name": "Ad - 2",
+      "campaign_id": "120248290564280604",
+      "adset_id": "120248290564260604",
+      "status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "creative": {
+        "id": "1534426268275196",
+        "name": "{{product.name}} 2026-06-10-5843879ba2159f1134c816d1ed2769f8",
+        "object_story_spec": {
+          "page_id": "1063171606876651",
+          "instagram_user_id": "17841416270865123"
+        },
+        "effective_object_story_id": "1063171606876651_122115715106812470",
+        "object_type": "SHARE",
+        "asset_feed_spec": {
+          "images": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f4e5a777c452db9b0_1781141274015",
+                  "id": "120248290535140604"
+                }
+              ],
+              "hash": "f8f6d99327ce3a1c506b545a8d234cb7"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f5d71ca0511e8e51a_1781141274016",
+                  "id": "120248290535100604"
+                }
+              ],
+              "hash": "8135fe8a60061ec254acc95872697e55"
+            }
+          ],
+          "bodies": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f24ded479fd3156b5_1781141274020",
+                  "id": "120248290535110604"
+                },
+                {
+                  "name": "placement_asset_fa5ee20c9ed6e8ebd_1781141274017",
+                  "id": "120248290535120604"
+                }
+              ],
+              "text": ""
+            }
+          ],
+          "call_to_action_types": [
+            "APPLY_NOW"
+          ],
+          "descriptions": [
+            {
+              "text": "⭐️⭐️⭐️⭐️⭐️"
+            }
+          ],
+          "link_urls": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f0fe6b8716da7181b_1781141274019",
+                  "id": "120248290535150604"
+                },
+                {
+                  "name": "placement_asset_f66bc555d4e828e6c_1781141274020",
+                  "id": "120248290535160604"
+                }
+              ],
+              "website_url": "https://fb.com/messenger_doc/",
+              "display_url": ""
+            }
+          ],
+          "titles": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fc722058276436275_1781141274018",
+                  "id": "120248290535090604"
+                },
+                {
+                  "name": "placement_asset_f3659ccdd3bab79bf_1781141274020",
+                  "id": "120248290535130604"
+                }
+              ],
+              "text": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+            }
+          ],
+          "ad_formats": [
+            "AUTOMATIC_FORMAT"
+          ],
+          "asset_customization_rules": [
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13,
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram",
+                  "audience_network",
+                  "messenger"
+                ],
+                "facebook_positions": [
+                  "story",
+                  "facebook_reels"
+                ],
+                "instagram_positions": [
+                  "story",
+                  "reels"
+                ],
+                "messenger_positions": [
+                  "story"
+                ],
+                "audience_network_positions": [
+                  "classic"
+                ]
+              },
+              "image_label": {
+                "name": "placement_asset_f5d71ca0511e8e51a_1781141274016",
+                "id": "120248290535100604"
+              },
+              "body_label": {
+                "name": "placement_asset_f24ded479fd3156b5_1781141274020",
+                "id": "120248290535110604"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f66bc555d4e828e6c_1781141274020",
+                "id": "120248290535160604"
+              },
+              "title_label": {
+                "name": "placement_asset_f3659ccdd3bab79bf_1781141274020",
+                "id": "120248290535130604"
+              },
+              "priority": 1
+            },
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13
+              },
+              "image_label": {
+                "name": "placement_asset_f4e5a777c452db9b0_1781141274015",
+                "id": "120248290535140604"
+              },
+              "body_label": {
+                "name": "placement_asset_fa5ee20c9ed6e8ebd_1781141274017",
+                "id": "120248290535120604"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f0fe6b8716da7181b_1781141274019",
+                "id": "120248290535150604"
+              },
+              "title_label": {
+                "name": "placement_asset_fc722058276436275_1781141274018",
+                "id": "120248290535090604"
+              },
+              "priority": 2
+            }
+          ],
+          "optimization_type": "PLACEMENT",
+          "additional_data": {
+            "multi_share_end_card": false,
+            "page_welcome_message": "{\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"¡Hola! Para continuar, haz clic en RECIBIR TARJETA abajo ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"💳 RECIBIR TARJETA\"}]}}},\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"template_id\":\"1356112476425469\",\"is_user_editing\":false}",
+            "is_click_to_message": false
+          },
+          "reasons_to_shop": false,
+          "shops_bundle": false
+        }
+      },
+      "tracking_specs": [
+        {
+          "action.type": [
+            "offsite_conversion"
+          ],
+          "fb_pixel": [
+            "629060785934493"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "conversion_id": [
+            "25121374170893585",
+            "26486708381006849",
+            "26619396587739383",
+            "26699871946381481",
+            "26711101385253361",
+            "26923380547330844",
+            "27135953452727679",
+            "27169897759336151",
+            "27205836475694169",
+            "27214792254840766",
+            "27406090242413842",
+            "27428664416797618",
+            "27533094489648922",
+            "27579356088356024",
+            "27639915378995780",
+            "27643002911972231",
+            "27712238498362570",
+            "27762650623318781",
+            "36057640910550733",
+            "36075662475411828",
+            "36427742170203501"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "conversion_id": [
+            "28253169440939655"
+          ]
+        },
+        {
+          "action.type": [
+            "whatsapp"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "messenger"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "post_interaction_gross"
+          ],
+          "page": [
+            "1063171606876651"
+          ],
+          "post": [
+            "122115715106812470"
+          ]
+        },
+        {
+          "action.type": [
+            "post_engagement"
+          ],
+          "page": [
+            "1063171606876651"
+          ],
+          "post": [
+            "122115715106812470"
+          ]
+        },
+        {
+          "action.type": [
+            "link_click"
+          ],
+          "post": [
+            "122115715106812470"
+          ],
+          "post.wall": [
+            "1063171606876651"
+          ]
+        }
+      ],
+      "conversion_specs": [
+        {
+          "action.type": [
+            "offsite_conversion"
+          ],
+          "conversion_id": [
+            "26958060993880517"
+          ]
+        }
+      ],
+      "created_time": "2026-06-11T03:31:14+0200",
+      "updated_time": "2026-06-18T00:17:42+0200"
+    },
+    {
+      "id": "120248290564500604",
+      "name": "Ad - 3",
+      "campaign_id": "120248290564280604",
+      "adset_id": "120248290564260604",
+      "status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "creative": {
+        "id": "36217155544597549",
+        "name": "{{product.name}} 2026-06-10-1059d89adf38eb6cf86489b0ebb252d5",
+        "object_story_spec": {
+          "page_id": "1063171606876651",
+          "instagram_user_id": "17841416270865123"
+        },
+        "effective_object_story_id": "1063171606876651_122115715040812470",
+        "object_type": "SHARE",
+        "asset_feed_spec": {
+          "images": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f2577e6c02b250f94_1781141312739",
+                  "id": "120248290549020604"
+                }
+              ],
+              "hash": "21f91a3d005d18170c4c8d0a0d01aac7"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f3c578c4ed2c486b5_1781141312740",
+                  "id": "120248290549090604"
+                }
+              ],
+              "hash": "916fdfedfca81e4aed0e764b1b2dfd68"
+            }
+          ],
+          "bodies": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fe115c0b57671f872_1781141312741",
+                  "id": "120248290549040604"
+                },
+                {
+                  "name": "placement_asset_fd4e495cd46fab559_1781141312743",
+                  "id": "120248290549050604"
+                }
+              ],
+              "text": ""
+            }
+          ],
+          "call_to_action_types": [
+            "APPLY_NOW"
+          ],
+          "descriptions": [
+            {
+              "text": "⭐️⭐️⭐️⭐️⭐️"
+            }
+          ],
+          "link_urls": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fc2886fcf6658166f_1781141312744",
+                  "id": "120248290549060604"
+                },
+                {
+                  "name": "placement_asset_ff750caa7870e3d40_1781141312743",
+                  "id": "120248290549070604"
+                }
+              ],
+              "website_url": "https://fb.com/messenger_doc/",
+              "display_url": ""
+            }
+          ],
+          "titles": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fee1d72af24ecf3d3_1781141312742",
+                  "id": "120248290549030604"
+                },
+                {
+                  "name": "placement_asset_fcb5547abcc931f15_1781141312744",
+                  "id": "120248290549080604"
+                }
+              ],
+              "text": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+            }
+          ],
+          "ad_formats": [
+            "AUTOMATIC_FORMAT"
+          ],
+          "asset_customization_rules": [
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13,
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram",
+                  "audience_network",
+                  "messenger"
+                ],
+                "facebook_positions": [
+                  "story",
+                  "facebook_reels"
+                ],
+                "instagram_positions": [
+                  "story",
+                  "reels"
+                ],
+                "messenger_positions": [
+                  "story"
+                ],
+                "audience_network_positions": [
+                  "classic"
+                ]
+              },
+              "image_label": {
+                "name": "placement_asset_f3c578c4ed2c486b5_1781141312740",
+                "id": "120248290549090604"
+              },
+              "body_label": {
+                "name": "placement_asset_fd4e495cd46fab559_1781141312743",
+                "id": "120248290549050604"
+              },
+              "link_url_label": {
+                "name": "placement_asset_fc2886fcf6658166f_1781141312744",
+                "id": "120248290549060604"
+              },
+              "title_label": {
+                "name": "placement_asset_fcb5547abcc931f15_1781141312744",
+                "id": "120248290549080604"
+              },
+              "priority": 1
+            },
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13
+              },
+              "image_label": {
+                "name": "placement_asset_f2577e6c02b250f94_1781141312739",
+                "id": "120248290549020604"
+              },
+              "body_label": {
+                "name": "placement_asset_fe115c0b57671f872_1781141312741",
+                "id": "120248290549040604"
+              },
+              "link_url_label": {
+                "name": "placement_asset_ff750caa7870e3d40_1781141312743",
+                "id": "120248290549070604"
+              },
+              "title_label": {
+                "name": "placement_asset_fee1d72af24ecf3d3_1781141312742",
+                "id": "120248290549030604"
+              },
+              "priority": 2
+            }
+          ],
+          "optimization_type": "PLACEMENT",
+          "additional_data": {
+            "multi_share_end_card": false,
+            "page_welcome_message": "{\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"¡Hola! Para continuar, haz clic en RECIBIR TARJETA abajo ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"💳 RECIBIR TARJETA\"}]}}},\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"template_id\":\"1356112476425469\",\"is_user_editing\":false}",
+            "is_click_to_message": false
+          },
+          "reasons_to_shop": false,
+          "shops_bundle": false
+        }
+      },
+      "tracking_specs": [
+        {
+          "action.type": [
+            "offsite_conversion"
+          ],
+          "fb_pixel": [
+            "629060785934493"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "conversion_id": [
+            "25121374170893585",
+            "26486708381006849",
+            "26619396587739383",
+            "26699871946381481",
+            "26711101385253361",
+            "26923380547330844",
+            "27135953452727679",
+            "27169897759336151",
+            "27205836475694169",
+            "27214792254840766",
+            "27406090242413842",
+            "27428664416797618",
+            "27533094489648922",
+            "27579356088356024",
+            "27639915378995780",
+            "27643002911972231",
+            "27712238498362570",
+            "27762650623318781",
+            "36057640910550733",
+            "36075662475411828",
+            "36427742170203501"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "conversion_id": [
+            "28253169440939655"
+          ]
+        },
+        {
+          "action.type": [
+            "whatsapp"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "messenger"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "link_click"
+          ],
+          "post": [
+            "122115715040812470"
+          ],
+          "post.wall": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "post_engagement"
+          ],
+          "page": [
+            "1063171606876651"
+          ],
+          "post": [
+            "122115715040812470"
+          ]
+        },
+        {
+          "action.type": [
+            "post_interaction_gross"
+          ],
+          "page": [
+            "1063171606876651"
+          ],
+          "post": [
+            "122115715040812470"
+          ]
+        }
+      ],
+      "conversion_specs": [
+        {
+          "action.type": [
+            "offsite_conversion"
+          ],
+          "conversion_id": [
+            "26958060993880517"
+          ]
+        }
+      ],
+      "created_time": "2026-06-11T03:31:14+0200",
+      "updated_time": "2026-06-18T00:17:42+0200"
+    },
+    {
+      "id": "120248290564400604",
+      "name": "Ad - 3",
+      "campaign_id": "120248290564280604",
+      "adset_id": "120248290564350604",
+      "status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "creative": {
+        "id": "1398448152335270",
+        "name": "{{product.name}} 2026-06-10-a387a8b3792bd6536318345912d2e059",
+        "object_story_spec": {
+          "page_id": "1063171606876651",
+          "instagram_user_id": "17841416270865123"
+        },
+        "effective_object_story_id": "1063171606876651_122115715454812470",
+        "object_type": "SHARE",
+        "asset_feed_spec": {
+          "videos": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f21561c2c2eda9782_1781141041094",
+                  "id": "120248290453300604"
+                }
+              ],
+              "video_id": "1682010279590582",
+              "thumbnail_url": "https://scontent-xxc1-1.xx.fbcdn.net/v/t15.5256-10/715650235_1530166178492243_8675354081048739694_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=100&ccb=1-7&_nc_sid=b696e2&_nc_ohc=tqfx5lzFyyQQ7kNvwFebvMf&_nc_oc=AdpdKiIOAOKMw3exMlwgi9UJV6b6ajH8bk_dBgdiWbrzq5gJ_h03I_3fGoFnD0Mp6bTiyeYVNxP0XpA3UjJStCu7&_nc_zt=23&_nc_ht=scontent-xxc1-1.xx&edm=ANIILHsEAAAA&_nc_gid=7a2O_p2ObHIU1zYAerFg0Q&_nc_tpa=Q5bMBQG4TuJRynxjKKmUgcwwSEU0yIQt1hV5HRExCJ_26BEnedx2p5zYhi92Is4ofu6xQxr3K3aRd8kp&oh=00_Af9zokojXn783fhNB3kyZalWN_vH9WxCPZWtMzo_A5OjLw&oe=6A39321F"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f54e075f642ee1ac2_1781141041096",
+                  "id": "120248290453280604"
+                }
+              ],
+              "video_id": "1081876931684821",
+              "thumbnail_url": "https://scontent-xxc1-1.xx.fbcdn.net/v/t15.5256-10/721465983_883124101475383_9046808695728816232_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=111&ccb=1-7&_nc_sid=b696e2&_nc_ohc=99aOb7pIV74Q7kNvwEzDVeF&_nc_oc=AdopbDNzwiXM9hw6GTnUOxun61jFtwmuO31fsqS94bdtzg4CCYIANSHP94kAjr_co1d4eHT7w0CapASGNgED5QQM&_nc_zt=23&_nc_ht=scontent-xxc1-1.xx&edm=ANIILHsEAAAA&_nc_gid=7a2O_p2ObHIU1zYAerFg0Q&_nc_tpa=Q5bMBQF6vU8RgpWHEJVAxDxfyTD7EEX9KXK-reGrXlX3nH9RMJlJX8Drhiyc9lJMmghWFYrIJZlhCDUY&oh=00_Af-ZPB3K2HLpZQ73z9eWcVjENVD4AcKzKo3ee-Ivx2b0Fg&oe=6A39316B"
+            }
+          ],
+          "bodies": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f20909c008c181aca_1781141041095",
+                  "id": "120248290453230604"
+                },
+                {
+                  "name": "placement_asset_f046f55cb5619ba2d_1781141041097",
+                  "id": "120248290453290604"
+                }
+              ],
+              "text": ""
+            }
+          ],
+          "call_to_action_types": [
+            "APPLY_NOW"
+          ],
+          "descriptions": [
+            {
+              "text": "⭐️⭐️⭐️⭐️⭐️"
+            }
+          ],
+          "link_urls": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fdf102fc6dbf77c65_1781141041095",
+                  "id": "120248290453260604"
+                },
+                {
+                  "name": "placement_asset_f304ae2f37317c233_1781141041097",
+                  "id": "120248290453270604"
+                }
+              ],
+              "website_url": "https://fb.com/messenger_doc/",
+              "display_url": ""
+            }
+          ],
+          "titles": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f2e1f7f983920a43d_1781141041097",
+                  "id": "120248290453240604"
+                },
+                {
+                  "name": "placement_asset_ffea9c0ed23a31948_1781141041095",
+                  "id": "120248290453250604"
+                }
+              ],
+              "text": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+            }
+          ],
+          "ad_formats": [
+            "AUTOMATIC_FORMAT"
+          ],
+          "asset_customization_rules": [
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13,
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram",
+                  "audience_network",
+                  "messenger"
+                ],
+                "facebook_positions": [
+                  "story",
+                  "facebook_reels",
+                  "facebook_reels_overlay"
+                ],
+                "instagram_positions": [
+                  "story",
+                  "reels"
+                ],
+                "messenger_positions": [
+                  "story"
+                ],
+                "audience_network_positions": [
+                  "classic",
+                  "rewarded_video"
+                ]
+              },
+              "video_label": {
+                "name": "placement_asset_f54e075f642ee1ac2_1781141041096",
+                "id": "120248290453280604"
+              },
+              "body_label": {
+                "name": "placement_asset_f046f55cb5619ba2d_1781141041097",
+                "id": "120248290453290604"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f304ae2f37317c233_1781141041097",
+                "id": "120248290453270604"
+              },
+              "title_label": {
+                "name": "placement_asset_f2e1f7f983920a43d_1781141041097",
+                "id": "120248290453240604"
+              },
+              "priority": 1
+            },
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13
+              },
+              "video_label": {
+                "name": "placement_asset_f21561c2c2eda9782_1781141041094",
+                "id": "120248290453300604"
+              },
+              "body_label": {
+                "name": "placement_asset_f20909c008c181aca_1781141041095",
+                "id": "120248290453230604"
+              },
+              "link_url_label": {
+                "name": "placement_asset_fdf102fc6dbf77c65_1781141041095",
+                "id": "120248290453260604"
+              },
+              "title_label": {
+                "name": "placement_asset_ffea9c0ed23a31948_1781141041095",
+                "id": "120248290453250604"
+              },
+              "priority": 2
+            }
+          ],
+          "optimization_type": "PLACEMENT",
+          "additional_data": {
+            "multi_share_end_card": false,
+            "page_welcome_message": "{\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"¡Hola! Para continuar, haz clic en RECIBIR TARJETA abajo ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"💳 RECIBIR TARJETA\"}]}}},\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"template_id\":\"1356112476425469\",\"is_user_editing\":false}",
+            "is_click_to_message": false
+          },
+          "reasons_to_shop": false,
+          "shops_bundle": false
+        }
+      },
+      "tracking_specs": [
+        {
+          "action.type": [
+            "offsite_conversion"
+          ],
+          "fb_pixel": [
+            "629060785934493"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "conversion_id": [
+            "25121374170893585",
+            "26486708381006849",
+            "26619396587739383",
+            "26699871946381481",
+            "26711101385253361",
+            "26923380547330844",
+            "27135953452727679",
+            "27169897759336151",
+            "27205836475694169",
+            "27214792254840766",
+            "27406090242413842",
+            "27428664416797618",
+            "27533094489648922",
+            "27579356088356024",
+            "27639915378995780",
+            "27643002911972231",
+            "27712238498362570",
+            "27762650623318781",
+            "36057640910550733",
+            "36075662475411828",
+            "36427742170203501"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "conversion_id": [
+            "28253169440939655"
+          ]
+        },
+        {
+          "action.type": [
+            "whatsapp"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "messenger"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "post_interaction_gross"
+          ],
+          "page": [
+            "1063171606876651"
+          ],
+          "post": [
+            "122115715454812470"
+          ]
+        },
+        {
+          "action.type": [
+            "link_click"
+          ],
+          "post": [
+            "122115715454812470"
+          ],
+          "post.wall": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "post_engagement"
+          ],
+          "page": [
+            "1063171606876651"
+          ],
+          "post": [
+            "122115715454812470"
+          ]
+        }
+      ],
+      "conversion_specs": [
+        {
+          "action.type": [
+            "offsite_conversion"
+          ],
+          "conversion_id": [
+            "26958060993880517"
+          ]
+        }
+      ],
+      "created_time": "2026-06-11T03:31:14+0200",
+      "updated_time": "2026-06-18T00:17:42+0200"
+    },
+    {
+      "id": "120248290564310604",
+      "name": "Ad - 1",
+      "campaign_id": "120248290564280604",
+      "adset_id": "120248290564350604",
+      "status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "creative": {
+        "id": "911433228648162",
+        "name": "{{product.name}} 2026-06-10-c3f5e73ea1832080f26253f202b1a13b",
+        "object_story_spec": {
+          "page_id": "1063171606876651",
+          "instagram_user_id": "17841416270865123"
+        },
+        "effective_object_story_id": "1063171606876651_122115715760812470",
+        "object_type": "SHARE",
+        "asset_feed_spec": {
+          "videos": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f7fc89abf54b21494_1781140970639",
+                  "id": "120248290434790604"
+                }
+              ],
+              "video_id": "1736729214122712",
+              "thumbnail_url": "https://scontent-xxc1-1.xx.fbcdn.net/v/t15.5256-10/718553829_2130864311170543_6223298843470619201_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=107&ccb=1-7&_nc_sid=b696e2&_nc_ohc=JYUSbdIVW8oQ7kNvwHZJfUl&_nc_oc=Adpt8OKWCSWcOjDMYZhc5sD-kYHpTlwFTTvayqwuw5MaX9ap-iZK2Uok6xgdVoEAJsyrE6cNgUsCH4X-hkKkhjhM&_nc_zt=23&_nc_ht=scontent-xxc1-1.xx&edm=ANIILHsEAAAA&_nc_gid=7a2O_p2ObHIU1zYAerFg0Q&_nc_tpa=Q5bMBQEYjXKSKIP0ltL2XcK2K6GgNhffoH8fREqWOtGaiiz3Da6VmxBpX7m96pYB56egKVnH-08Q83wY&oh=00_Af9iESdfaoiT2UM2VoESLrq78uklx0Zog5a2K-CYSRUntA&oe=6A3938AD"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fff41a62b8177388e_1781140970642",
+                  "id": "120248290434800604"
+                }
+              ],
+              "video_id": "2189729218442722",
+              "thumbnail_url": "https://scontent-xxc1-1.xx.fbcdn.net/v/t15.5256-10/721465989_1844314766529158_6360267753799162557_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=101&ccb=1-7&_nc_sid=b696e2&_nc_ohc=m_Cg6LQbXUUQ7kNvwG1ViTi&_nc_oc=Adom_YtRQKkQsBZvfjE4ve0wL8eC-iuCevpeWASRH5w7wAJbgzal8wgb6D8g7cKSQNRlYnWaclS15M7y33LquCQQ&_nc_zt=23&_nc_ht=scontent-xxc1-1.xx&edm=ANIILHsEAAAA&_nc_gid=7a2O_p2ObHIU1zYAerFg0Q&_nc_tpa=Q5bMBQELrS2dcbW4oypYf03mITMXf9JU5BU8SiykbcfyQXfK5QXU7t7aWsqv8f6Y8q0oAjKDFfC6ZhYr&oh=00_Af-TaxxD2gOACP6qKq5FNGNgrV1dI0qQcQVIikoaq_gF2A&oe=6A3932A8"
+            }
+          ],
+          "bodies": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f5c3846293e38f388_1781140970640",
+                  "id": "120248290434810604"
+                },
+                {
+                  "name": "placement_asset_f3d67f237622c777b_1781140970643",
+                  "id": "120248290434820604"
+                }
+              ],
+              "text": ""
+            }
+          ],
+          "call_to_action_types": [
+            "APPLY_NOW"
+          ],
+          "descriptions": [
+            {
+              "text": "⭐️⭐️⭐️⭐️⭐️"
+            }
+          ],
+          "link_urls": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f2c80a2e3c728696d_1781140970641",
+                  "id": "120248290434830604"
+                },
+                {
+                  "name": "placement_asset_f0ec00c7fd2b6fee5_1781140970644",
+                  "id": "120248290434850604"
+                }
+              ],
+              "website_url": "https://fb.com/messenger_doc/",
+              "display_url": ""
+            }
+          ],
+          "titles": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fa0d1b96ef94bec05_1781140970644",
+                  "id": "120248290434780604"
+                },
+                {
+                  "name": "placement_asset_fa89cac61e12a3901_1781140970640",
+                  "id": "120248290434840604"
+                }
+              ],
+              "text": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+            }
+          ],
+          "ad_formats": [
+            "AUTOMATIC_FORMAT"
+          ],
+          "asset_customization_rules": [
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13,
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram",
+                  "audience_network",
+                  "messenger"
+                ],
+                "facebook_positions": [
+                  "story",
+                  "facebook_reels",
+                  "facebook_reels_overlay"
+                ],
+                "instagram_positions": [
+                  "story",
+                  "reels"
+                ],
+                "messenger_positions": [
+                  "story"
+                ],
+                "audience_network_positions": [
+                  "classic",
+                  "rewarded_video"
+                ]
+              },
+              "video_label": {
+                "name": "placement_asset_fff41a62b8177388e_1781140970642",
+                "id": "120248290434800604"
+              },
+              "body_label": {
+                "name": "placement_asset_f3d67f237622c777b_1781140970643",
+                "id": "120248290434820604"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f0ec00c7fd2b6fee5_1781140970644",
+                "id": "120248290434850604"
+              },
+              "title_label": {
+                "name": "placement_asset_fa0d1b96ef94bec05_1781140970644",
+                "id": "120248290434780604"
+              },
+              "priority": 1
+            },
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13
+              },
+              "video_label": {
+                "name": "placement_asset_f7fc89abf54b21494_1781140970639",
+                "id": "120248290434790604"
+              },
+              "body_label": {
+                "name": "placement_asset_f5c3846293e38f388_1781140970640",
+                "id": "120248290434810604"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f2c80a2e3c728696d_1781140970641",
+                "id": "120248290434830604"
+              },
+              "title_label": {
+                "name": "placement_asset_fa89cac61e12a3901_1781140970640",
+                "id": "120248290434840604"
+              },
+              "priority": 2
+            }
+          ],
+          "optimization_type": "PLACEMENT",
+          "additional_data": {
+            "multi_share_end_card": false,
+            "page_welcome_message": "{\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"¡Hola! Para continuar, haz clic en RECIBIR TARJETA abajo ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"💳 RECIBIR TARJETA\"}]}}},\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"template_id\":\"1356112476425469\",\"is_user_editing\":false}",
+            "is_click_to_message": false
+          },
+          "reasons_to_shop": false,
+          "shops_bundle": false
+        }
+      },
+      "tracking_specs": [
+        {
+          "action.type": [
+            "offsite_conversion"
+          ],
+          "fb_pixel": [
+            "629060785934493"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "conversion_id": [
+            "25121374170893585",
+            "26486708381006849",
+            "26619396587739383",
+            "26699871946381481",
+            "26711101385253361",
+            "26923380547330844",
+            "27135953452727679",
+            "27169897759336151",
+            "27205836475694169",
+            "27214792254840766",
+            "27406090242413842",
+            "27428664416797618",
+            "27533094489648922",
+            "27579356088356024",
+            "27639915378995780",
+            "27643002911972231",
+            "27712238498362570",
+            "27762650623318781",
+            "36057640910550733",
+            "36075662475411828",
+            "36427742170203501"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "conversion_id": [
+            "28253169440939655"
+          ]
+        },
+        {
+          "action.type": [
+            "whatsapp"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "messenger"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "link_click"
+          ],
+          "post": [
+            "122115715760812470"
+          ],
+          "post.wall": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "post_interaction_gross"
+          ],
+          "page": [
+            "1063171606876651"
+          ],
+          "post": [
+            "122115715760812470"
+          ]
+        },
+        {
+          "action.type": [
+            "post_engagement"
+          ],
+          "page": [
+            "1063171606876651"
+          ],
+          "post": [
+            "122115715760812470"
+          ]
+        }
+      ],
+      "conversion_specs": [
+        {
+          "action.type": [
+            "offsite_conversion"
+          ],
+          "conversion_id": [
+            "26958060993880517"
+          ]
+        }
+      ],
+      "created_time": "2026-06-11T03:31:14+0200",
+      "updated_time": "2026-06-18T00:17:42+0200"
+    },
+    {
+      "id": "120248290564490604",
+      "name": "Ad - 1",
+      "campaign_id": "120248290564280604",
+      "adset_id": "120248290564260604",
+      "status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "creative": {
+        "id": "1790118875284313",
+        "name": "{{product.name}} 2026-06-10-1e0625e0e7ca52876d72cb0b31a5d300",
+        "object_story_spec": {
+          "page_id": "1063171606876651",
+          "instagram_user_id": "17841416270865123"
+        },
+        "effective_object_story_id": "1063171606876651_122115715178812470",
+        "object_type": "SHARE",
+        "asset_feed_spec": {
+          "images": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f16f749b6db3e0261_1781141176471",
+                  "id": "120248290496960604"
+                }
+              ],
+              "hash": "09716886bbeeb208ad766b7e9f013b4a"
+            },
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f9b07d0b167b5ee08_1781141176469",
+                  "id": "120248290496950604"
+                }
+              ],
+              "hash": "f8e5333e738e7ab63b4f5d1e083539b6"
+            }
+          ],
+          "bodies": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f5bd721ddd28e93c2_1781141176473",
+                  "id": "120248290497000604"
+                },
+                {
+                  "name": "placement_asset_f9811e67ec748ebc8_1781141176477",
+                  "id": "120248290497010604"
+                }
+              ],
+              "text": ""
+            }
+          ],
+          "call_to_action_types": [
+            "APPLY_NOW"
+          ],
+          "descriptions": [
+            {
+              "text": "⭐️⭐️⭐️⭐️⭐️"
+            }
+          ],
+          "link_urls": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_f983e9e7bf4bbee35_1781141176477",
+                  "id": "120248290496980604"
+                },
+                {
+                  "name": "placement_asset_f80a013f2bc9926f7_1781141176476",
+                  "id": "120248290496990604"
+                }
+              ],
+              "website_url": "https://fb.com/messenger_doc/",
+              "display_url": ""
+            }
+          ],
+          "titles": [
+            {
+              "adlabels": [
+                {
+                  "name": "placement_asset_fd7f3e57071c41447_1781141176475",
+                  "id": "120248290496970604"
+                },
+                {
+                  "name": "placement_asset_f4e05376783bab5e2_1781141176477",
+                  "id": "120248290497020604"
+                }
+              ],
+              "text": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+            }
+          ],
+          "ad_formats": [
+            "AUTOMATIC_FORMAT"
+          ],
+          "asset_customization_rules": [
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13,
+                "publisher_platforms": [
+                  "facebook",
+                  "instagram",
+                  "audience_network",
+                  "messenger"
+                ],
+                "facebook_positions": [
+                  "story",
+                  "facebook_reels"
+                ],
+                "instagram_positions": [
+                  "story",
+                  "reels"
+                ],
+                "messenger_positions": [
+                  "story"
+                ],
+                "audience_network_positions": [
+                  "classic"
+                ]
+              },
+              "image_label": {
+                "name": "placement_asset_f16f749b6db3e0261_1781141176471",
+                "id": "120248290496960604"
+              },
+              "body_label": {
+                "name": "placement_asset_f9811e67ec748ebc8_1781141176477",
+                "id": "120248290497010604"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f983e9e7bf4bbee35_1781141176477",
+                "id": "120248290496980604"
+              },
+              "title_label": {
+                "name": "placement_asset_f4e05376783bab5e2_1781141176477",
+                "id": "120248290497020604"
+              },
+              "priority": 1
+            },
+            {
+              "customization_spec": {
+                "age_max": 65,
+                "age_min": 13
+              },
+              "image_label": {
+                "name": "placement_asset_f9b07d0b167b5ee08_1781141176469",
+                "id": "120248290496950604"
+              },
+              "body_label": {
+                "name": "placement_asset_f5bd721ddd28e93c2_1781141176473",
+                "id": "120248290497000604"
+              },
+              "link_url_label": {
+                "name": "placement_asset_f80a013f2bc9926f7_1781141176476",
+                "id": "120248290496990604"
+              },
+              "title_label": {
+                "name": "placement_asset_fd7f3e57071c41447_1781141176475",
+                "id": "120248290496970604"
+              },
+              "priority": 2
+            }
+          ],
+          "optimization_type": "PLACEMENT",
+          "additional_data": {
+            "multi_share_end_card": false,
+            "page_welcome_message": "{\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"¡Hola! Para continuar, haz clic en RECIBIR TARJETA abajo ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"💳 RECIBIR TARJETA\"}]}}},\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"template_id\":\"1356112476425469\",\"is_user_editing\":false}",
+            "is_click_to_message": false
+          },
+          "reasons_to_shop": false,
+          "shops_bundle": false
+        }
+      },
+      "tracking_specs": [
+        {
+          "action.type": [
+            "offsite_conversion"
+          ],
+          "fb_pixel": [
+            "629060785934493"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "conversion_id": [
+            "25121374170893585",
+            "26486708381006849",
+            "26619396587739383",
+            "26699871946381481",
+            "26711101385253361",
+            "26923380547330844",
+            "27135953452727679",
+            "27169897759336151",
+            "27205836475694169",
+            "27214792254840766",
+            "27406090242413842",
+            "27428664416797618",
+            "27533094489648922",
+            "27579356088356024",
+            "27639915378995780",
+            "27643002911972231",
+            "27712238498362570",
+            "27762650623318781",
+            "36057640910550733",
+            "36075662475411828",
+            "36427742170203501"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "onsite_conversion"
+          ],
+          "conversion_id": [
+            "28253169440939655"
+          ]
+        },
+        {
+          "action.type": [
+            "whatsapp"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "messenger"
+          ],
+          "page": [
+            "1063171606876651"
+          ]
+        },
+        {
+          "action.type": [
+            "post_interaction_gross"
+          ],
+          "page": [
+            "1063171606876651"
+          ],
+          "post": [
+            "122115715178812470"
+          ]
+        },
+        {
+          "action.type": [
+            "post_engagement"
+          ],
+          "page": [
+            "1063171606876651"
+          ],
+          "post": [
+            "122115715178812470"
+          ]
+        },
+        {
+          "action.type": [
+            "link_click"
+          ],
+          "post": [
+            "122115715178812470"
+          ],
+          "post.wall": [
+            "1063171606876651"
+          ]
+        }
+      ],
+      "conversion_specs": [
+        {
+          "action.type": [
+            "offsite_conversion"
+          ],
+          "conversion_id": [
+            "26958060993880517"
+          ]
+        }
+      ],
+      "created_time": "2026-06-11T03:31:14+0200",
+      "updated_time": "2026-06-17T23:27:20+0200"
+    }
+  ],
+  "ad_insights_status": 200,
+  "ad_insights": [
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564310604",
+      "ad_name": "Ad - 1",
+      "spend": "6.86",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "2"
+        },
+        {
+          "action_type": "link_click",
+          "value": "7"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "post_reaction",
+          "value": "3"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "10"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "2"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "2"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "2"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "116"
+        },
+        {
+          "action_type": "post_interaction_gross",
+          "value": "3"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "116"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "10"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "post_interaction_net",
+          "value": "3"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "10"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "2"
+        },
+        {
+          "action_type": "view_content",
+          "value": "10"
+        },
+        {
+          "action_type": "onsite_conversion.post_net_like",
+          "value": "3"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "10"
+        },
+        {
+          "action_type": "video_view",
+          "value": "106"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "10"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "10"
+        }
+      ],
+      "date_start": "2026-06-15",
+      "date_stop": "2026-06-15"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564400604",
+      "ad_name": "Ad - 3",
+      "spend": "3.54",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "1"
+        },
+        {
+          "action_type": "link_click",
+          "value": "6"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "13"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "2"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "2"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "3"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "52"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "52"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "13"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "13"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "1"
+        },
+        {
+          "action_type": "view_content",
+          "value": "13"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "13"
+        },
+        {
+          "action_type": "video_view",
+          "value": "46"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "13"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "13"
+        }
+      ],
+      "date_start": "2026-06-15",
+      "date_stop": "2026-06-15"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564490604",
+      "ad_name": "Ad - 1",
+      "spend": "4.68",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "1"
+        },
+        {
+          "action_type": "link_click",
+          "value": "5"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "3"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "1"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "2"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "5"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "5"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "3"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "3"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "1"
+        },
+        {
+          "action_type": "view_content",
+          "value": "3"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "3"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "3"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "3"
+        }
+      ],
+      "date_start": "2026-06-15",
+      "date_stop": "2026-06-15"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564500604",
+      "ad_name": "Ad - 3",
+      "spend": "1.82",
+      "actions": [
+        {
+          "action_type": "link_click",
+          "value": "6"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "8"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "1"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "6"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "6"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "8"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "8"
+        },
+        {
+          "action_type": "view_content",
+          "value": "8"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "8"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "8"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "8"
+        }
+      ],
+      "date_start": "2026-06-15",
+      "date_stop": "2026-06-15"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564550604",
+      "ad_name": "Ad - 2",
+      "spend": "5.81",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "1"
+        },
+        {
+          "action_type": "link_click",
+          "value": "9"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "6"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "1"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "3"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "9"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "9"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "6"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "6"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "1"
+        },
+        {
+          "action_type": "view_content",
+          "value": "6"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "6"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "6"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "6"
+        }
+      ],
+      "date_start": "2026-06-15",
+      "date_stop": "2026-06-15"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564580604",
+      "ad_name": "Ad - 2",
+      "spend": "52.68",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "27"
+        },
+        {
+          "action_type": "link_click",
+          "value": "105"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "27"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "27"
+        },
+        {
+          "action_type": "post_reaction",
+          "value": "19"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_conversation_replied_7d",
+          "value": "2"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "70"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "27"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "27"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "19"
+        },
+        {
+          "action_type": "onsite_conversion.total_messaging_connection",
+          "value": "2"
+        },
+        {
+          "action_type": "onsite_conversion.post_unlike",
+          "value": "2"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "1088"
+        },
+        {
+          "action_type": "post_interaction_gross",
+          "value": "20"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "1088"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_welcome_message_view",
+          "value": "4"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "70"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "27"
+        },
+        {
+          "action_type": "post_interaction_net",
+          "value": "22"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_first_reply",
+          "value": "2"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "70"
+        },
+        {
+          "action_type": "post",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "27"
+        },
+        {
+          "action_type": "view_content",
+          "value": "70"
+        },
+        {
+          "action_type": "onsite_conversion.post_net_like",
+          "value": "17"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "70"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_conversation_started_7d",
+          "value": "2"
+        },
+        {
+          "action_type": "video_view",
+          "value": "963"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "70"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "70"
+        }
+      ],
+      "date_start": "2026-06-15",
+      "date_stop": "2026-06-15"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564310604",
+      "ad_name": "Ad - 1",
+      "spend": "10",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "2"
+        },
+        {
+          "action_type": "link_click",
+          "value": "12"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "post_reaction",
+          "value": "2"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "19"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "4"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "4"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "3"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "135"
+        },
+        {
+          "action_type": "post_interaction_gross",
+          "value": "2"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "135"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "19"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "post_interaction_net",
+          "value": "2"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "19"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "2"
+        },
+        {
+          "action_type": "view_content",
+          "value": "19"
+        },
+        {
+          "action_type": "onsite_conversion.post_net_like",
+          "value": "2"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "19"
+        },
+        {
+          "action_type": "video_view",
+          "value": "121"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "19"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "19"
+        }
+      ],
+      "date_start": "2026-06-16",
+      "date_stop": "2026-06-16"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564400604",
+      "ad_name": "Ad - 3",
+      "spend": "1.64",
+      "actions": [
+        {
+          "action_type": "link_click",
+          "value": "3"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "2"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "17"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "17"
+        },
+        {
+          "action_type": "video_view",
+          "value": "14"
+        }
+      ],
+      "date_start": "2026-06-16",
+      "date_stop": "2026-06-16"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564490604",
+      "ad_name": "Ad - 1",
+      "spend": "4.61",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "1"
+        },
+        {
+          "action_type": "link_click",
+          "value": "8"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "3"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "8"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "8"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "3"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "3"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "1"
+        },
+        {
+          "action_type": "view_content",
+          "value": "3"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "3"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "3"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "3"
+        }
+      ],
+      "date_start": "2026-06-16",
+      "date_stop": "2026-06-16"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564500604",
+      "ad_name": "Ad - 3",
+      "spend": "2.47",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "1"
+        },
+        {
+          "action_type": "link_click",
+          "value": "4"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "2"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "1"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "4"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "4"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "2"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "2"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "1"
+        },
+        {
+          "action_type": "view_content",
+          "value": "2"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "2"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "2"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "2"
+        }
+      ],
+      "date_start": "2026-06-16",
+      "date_stop": "2026-06-16"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564550604",
+      "ad_name": "Ad - 2",
+      "spend": "17.27",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "8"
+        },
+        {
+          "action_type": "link_click",
+          "value": "27"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "8"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "8"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "26"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "10"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "10"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "2"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "27"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "27"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "26"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "8"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "26"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "8"
+        },
+        {
+          "action_type": "view_content",
+          "value": "26"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "26"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "26"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "26"
+        }
+      ],
+      "date_start": "2026-06-16",
+      "date_stop": "2026-06-16"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564580604",
+      "ad_name": "Ad - 2",
+      "spend": "45.62",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "13"
+        },
+        {
+          "action_type": "link_click",
+          "value": "83"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "13"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "13"
+        },
+        {
+          "action_type": "post_reaction",
+          "value": "13"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "47"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "17"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "17"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "16"
+        },
+        {
+          "action_type": "onsite_conversion.post_unlike",
+          "value": "1"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "882"
+        },
+        {
+          "action_type": "post_interaction_gross",
+          "value": "13"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "882"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "47"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "13"
+        },
+        {
+          "action_type": "post_interaction_net",
+          "value": "14"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "47"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "13"
+        },
+        {
+          "action_type": "view_content",
+          "value": "47"
+        },
+        {
+          "action_type": "onsite_conversion.post_net_like",
+          "value": "12"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "47"
+        },
+        {
+          "action_type": "video_view",
+          "value": "786"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "47"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "47"
+        }
+      ],
+      "date_start": "2026-06-16",
+      "date_stop": "2026-06-16"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564310604",
+      "ad_name": "Ad - 1",
+      "spend": "10.66",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "3"
+        },
+        {
+          "action_type": "link_click",
+          "value": "19"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "3"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "3"
+        },
+        {
+          "action_type": "post_reaction",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "19"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "5"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "5"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "1"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "153"
+        },
+        {
+          "action_type": "post_interaction_gross",
+          "value": "2"
+        },
+        {
+          "action_type": "comment",
+          "value": "1"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "153"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "19"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "3"
+        },
+        {
+          "action_type": "post_interaction_net",
+          "value": "2"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "19"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "3"
+        },
+        {
+          "action_type": "view_content",
+          "value": "19"
+        },
+        {
+          "action_type": "onsite_conversion.post_net_comment",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_conversion.post_net_like",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "19"
+        },
+        {
+          "action_type": "video_view",
+          "value": "132"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "19"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "19"
+        }
+      ],
+      "date_start": "2026-06-17",
+      "date_stop": "2026-06-17"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564400604",
+      "ad_name": "Ad - 3",
+      "spend": "5.23",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "2"
+        },
+        {
+          "action_type": "link_click",
+          "value": "9"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "7"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "2"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "2"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "1"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "101"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "101"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "7"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "7"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "2"
+        },
+        {
+          "action_type": "view_content",
+          "value": "7"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "7"
+        },
+        {
+          "action_type": "video_view",
+          "value": "92"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "7"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "7"
+        }
+      ],
+      "date_start": "2026-06-17",
+      "date_stop": "2026-06-17"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564490604",
+      "ad_name": "Ad - 1",
+      "spend": "5.71",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "3"
+        },
+        {
+          "action_type": "link_click",
+          "value": "12"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "3"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "3"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "6"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "1"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "2"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "12"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "12"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "6"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "3"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "6"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "3"
+        },
+        {
+          "action_type": "view_content",
+          "value": "6"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "6"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "6"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "6"
+        }
+      ],
+      "date_start": "2026-06-17",
+      "date_stop": "2026-06-17"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564500604",
+      "ad_name": "Ad - 3",
+      "spend": "5.69",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "1"
+        },
+        {
+          "action_type": "link_click",
+          "value": "3"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "7"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "2"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "3"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "3"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "7"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "7"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "1"
+        },
+        {
+          "action_type": "view_content",
+          "value": "7"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "7"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "7"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "7"
+        }
+      ],
+      "date_start": "2026-06-17",
+      "date_stop": "2026-06-17"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564550604",
+      "ad_name": "Ad - 2",
+      "spend": "5.27",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "2"
+        },
+        {
+          "action_type": "link_click",
+          "value": "10"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "4"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "1"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "4"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "11"
+        },
+        {
+          "action_type": "post_interaction_gross",
+          "value": "1"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "11"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "4"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "post_interaction_net",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "4"
+        },
+        {
+          "action_type": "post",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "2"
+        },
+        {
+          "action_type": "view_content",
+          "value": "4"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "4"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "4"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "4"
+        }
+      ],
+      "date_start": "2026-06-17",
+      "date_stop": "2026-06-17"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564580604",
+      "ad_name": "Ad - 2",
+      "spend": "5.26",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "2"
+        },
+        {
+          "action_type": "link_click",
+          "value": "13"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "post_reaction",
+          "value": "3"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "15"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "2"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "2"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "9"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "115"
+        },
+        {
+          "action_type": "post_interaction_gross",
+          "value": "3"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "115"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "15"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "2"
+        },
+        {
+          "action_type": "post_interaction_net",
+          "value": "3"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "15"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "2"
+        },
+        {
+          "action_type": "view_content",
+          "value": "15"
+        },
+        {
+          "action_type": "onsite_conversion.post_net_like",
+          "value": "3"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "15"
+        },
+        {
+          "action_type": "video_view",
+          "value": "99"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "15"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "15"
+        }
+      ],
+      "date_start": "2026-06-17",
+      "date_stop": "2026-06-17"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564310604",
+      "ad_name": "Ad - 1",
+      "spend": "0.01",
+      "actions": [
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "1"
+        }
+      ],
+      "date_start": "2026-06-18",
+      "date_stop": "2026-06-18"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564490604",
+      "ad_name": "Ad - 1",
+      "spend": "0.18",
+      "date_start": "2026-06-18",
+      "date_stop": "2026-06-18"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564550604",
+      "ad_name": "Ad - 2",
+      "spend": "2.16",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "1"
+        },
+        {
+          "action_type": "link_click",
+          "value": "5"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "1"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "1"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "1"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "5"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "5"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "1"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "1"
+        },
+        {
+          "action_type": "view_content",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "1"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "1"
+        }
+      ],
+      "date_start": "2026-06-18",
+      "date_stop": "2026-06-18"
+    },
+    {
+      "campaign_id": "120248290564280604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "ad_id": "120248290564580604",
+      "ad_name": "Ad - 2",
+      "spend": "9.5",
+      "actions": [
+        {
+          "action_type": "offsite_complete_registration_add_meta_leads",
+          "value": "4"
+        },
+        {
+          "action_type": "link_click",
+          "value": "17"
+        },
+        {
+          "action_type": "omni_complete_registration",
+          "value": "4"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_complete_registration",
+          "value": "4"
+        },
+        {
+          "action_type": "post_reaction",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_content_view_add_20_s_calls",
+          "value": "6"
+        },
+        {
+          "action_type": "landing_page_view",
+          "value": "4"
+        },
+        {
+          "action_type": "omni_landing_page_view",
+          "value": "4"
+        },
+        {
+          "action_type": "onsite_conversion.messaging_block",
+          "value": "2"
+        },
+        {
+          "action_type": "post_engagement",
+          "value": "155"
+        },
+        {
+          "action_type": "post_interaction_gross",
+          "value": "1"
+        },
+        {
+          "action_type": "page_engagement",
+          "value": "155"
+        },
+        {
+          "action_type": "onsite_web_view_content",
+          "value": "6"
+        },
+        {
+          "action_type": "complete_registration",
+          "value": "4"
+        },
+        {
+          "action_type": "post_interaction_net",
+          "value": "1"
+        },
+        {
+          "action_type": "onsite_web_app_view_content",
+          "value": "6"
+        },
+        {
+          "action_type": "offsite_complete_registration_add_20_s_calls",
+          "value": "4"
+        },
+        {
+          "action_type": "view_content",
+          "value": "6"
+        },
+        {
+          "action_type": "onsite_conversion.post_net_like",
+          "value": "1"
+        },
+        {
+          "action_type": "offsite_content_view_add_meta_leads",
+          "value": "6"
+        },
+        {
+          "action_type": "video_view",
+          "value": "137"
+        },
+        {
+          "action_type": "omni_view_content",
+          "value": "6"
+        },
+        {
+          "action_type": "offsite_conversion.fb_pixel_view_content",
+          "value": "6"
+        }
+      ],
+      "date_start": "2026-06-18",
+      "date_stop": "2026-06-18"
+    }
+  ]
+}

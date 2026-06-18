@@ -1,0 +1,164 @@
+{
+  "created_at": "2026-06-18T14:59:19.450293+00:00",
+  "mode": "controlled_write_videoid_clone",
+  "graph_version": "v25.0",
+  "token_field": "credential",
+  "token_len": 198,
+  "account_id": "1356770869843984",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "loser_campaign_id": "120248290564280604",
+  "daily_budget_usd": 25.0,
+  "start_time_local": "2026-06-19T01:00:00+02:00",
+  "creative_mode": "video_data_minimal",
+  "steps": [
+    {
+      "step": "create_campaign",
+      "status": 200,
+      "payload": {
+        "id": "120248930643730604"
+      }
+    },
+    {
+      "step": "create_adset",
+      "source_adset_id": "120248290564350604",
+      "status": 200,
+      "payload": {
+        "id": "120248930644020604"
+      }
+    },
+    {
+      "step": "create_adcreative",
+      "mode": "video_data_minimal",
+      "source_creative_id": "1878134753167706",
+      "asset": {
+        "kind": "video",
+        "id": "1772519430789363",
+        "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/715650235_1530166178492243_8675354081048739694_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=100&ccb=1-7&_nc_sid=b696e2&_nc_ohc=tqfx5lzFyyQQ7kNvwHe4bAf&_nc_oc=AdqthaPBsIJdfa8Y2n2LGAGGsHnB39R-RM5QdMzduDe-Uj_Q_BetcaEKcDvBJOfJ5QU&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=AOgd6ZUEAAAA&_nc_gid=zD8JhAHPk83GsA0eTOMLZA&_nc_tpa=Q5bMBQFSqxOjiNzu8EyJLz47n_lbndzO78OU2RKG4JwAJzd3hPGhNoxxTj-liAAinYjfWbDGy47tdWyx&oh=00_Af9WyUY-kSJzt9RC57mzcY2BPlkHMa-TOnOsRR5gn0qXWw&oe=6A39DADF"
+      },
+      "status": 200,
+      "payload": {
+        "id": "27886898124229114"
+      }
+    },
+    {
+      "step": "create_ad",
+      "source_ad_id": "120248290564590604",
+      "new_creative_id": "27886898124229114",
+      "status": 200,
+      "payload": {
+        "error": {
+          "message": "This request requires the user to take a pending action",
+          "type": "OAuthException",
+          "code": 31,
+          "error_subcode": 3858385,
+          "is_transient": false,
+          "error_user_title": "Autentica tu cuenta",
+          "error_user_msg": "Creemos que alguien puede haber intentado acceder a tu cuenta sin permiso. Por tu seguridad, no podrás crear ni modificar anuncios hasta que autentiques tu cuenta en el Administrador de anuncios. Tus anuncios actuales seguirán en circulación con normalidad.",
+          "fbtrace_id": "A85ZoFbc7JMI7OIqRLHgvw3"
+        }
+      }
+    }
+  ],
+  "created": {
+    "campaign_id": "120248930643730604",
+    "adsets": [
+      "120248930644020604"
+    ]
+  },
+  "errors": [
+    {
+      "step": "create_ad",
+      "source_ad_id": "120248290564590604",
+      "error": {
+        "message": "This request requires the user to take a pending action",
+        "type": "OAuthException",
+        "code": 31,
+        "error_subcode": 3858385,
+        "fbtrace_id": "A85ZoFbc7JMI7OIqRLHgvw3"
+      }
+    }
+  ],
+  "source_campaign": {
+    "id": "120248290564280604",
+    "name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+    "status": "ACTIVE",
+    "effective_status": "ACTIVE",
+    "objective": "OUTCOME_SALES",
+    "buying_type": "AUCTION",
+    "daily_budget": "10000",
+    "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+    "special_ad_categories": [
+      "FINANCIAL_PRODUCTS_SERVICES"
+    ],
+    "source_campaign_id": "120248290297180604",
+    "smart_promotion_type": "GUIDED_CREATION"
+  },
+  "source_adsets_count": 2,
+  "winner_selection": [
+    {
+      "ad_id": "120248290564590604",
+      "ad_name": "Ad - 3",
+      "campaign_id": "120248290564430604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 4",
+      "spend": 9.38,
+      "MO": 7.0,
+      "CPMO": 1.34,
+      "creative_id": "1878134753167706",
+      "asset": {
+        "kind": "video",
+        "id": "1772519430789363",
+        "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/715650235_1530166178492243_8675354081048739694_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=100&ccb=1-7&_nc_sid=b696e2&_nc_ohc=tqfx5lzFyyQQ7kNvwHe4bAf&_nc_oc=AdqthaPBsIJdfa8Y2n2LGAGGsHnB39R-RM5QdMzduDe-Uj_Q_BetcaEKcDvBJOfJ5QU&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=AOgd6ZUEAAAA&_nc_gid=zD8JhAHPk83GsA0eTOMLZA&_nc_tpa=Q5bMBQFSqxOjiNzu8EyJLz47n_lbndzO78OU2RKG4JwAJzd3hPGhNoxxTj-liAAinYjfWbDGy47tdWyx&oh=00_Af9WyUY-kSJzt9RC57mzcY2BPlkHMa-TOnOsRR5gn0qXWw&oe=6A39DADF"
+      }
+    },
+    {
+      "ad_id": "120248290564410604",
+      "ad_name": "Ad - 1",
+      "campaign_id": "120248290564430604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 4",
+      "spend": 104.5,
+      "MO": 64.0,
+      "CPMO": 1.6328,
+      "creative_id": "1013257701201962",
+      "asset": {
+        "kind": "video",
+        "id": "3530391967118542",
+        "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/718553829_2130864311170543_6223298843470619201_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=107&ccb=1-7&_nc_sid=b696e2&_nc_ohc=JYUSbdIVW8oQ7kNvwHkenNJ&_nc_oc=Adr1KpBoi5oLj9g8mF9cfXqZcI_OtWnTj96-RcIkp-jNcgXA-E-oZwmT8FLRuwOX26Q&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=AOgd6ZUEAAAA&_nc_gid=zD8JhAHPk83GsA0eTOMLZA&_nc_tpa=Q5bMBQH4EjQ6CnPlZvqzB7VTJpIsib8qLHsq5-r23tFubIS0oENX4W5LwLzRk8JItyIL7aP92cvOud5c&oh=00_Af8jg6hwHoEsExbMQv6LUfkMoXmMQhZugZ2QWy4N0J4LDw&oe=6A39E16D"
+      }
+    },
+    {
+      "ad_id": "120248290297210604",
+      "ad_name": "Ad - 2",
+      "campaign_id": "120248290297180604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 1",
+      "spend": 150.77,
+      "MO": 86.0,
+      "CPMO": 1.7531,
+      "creative_id": "1018755007258886",
+      "asset": {
+        "kind": "video",
+        "id": "2018825615667950",
+        "thumbnail_url": "https://scontent-lga3-1.xx.fbcdn.net/v/t15.5256-10/721348360_4542078662704726_3770361300680237516_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=110&ccb=1-7&_nc_sid=b696e2&_nc_ohc=QsRGIB9SMVcQ7kNvwEdH2ay&_nc_oc=Ado2h3WSCP-GwKR6aaFpHm6clFhenpPAH04u5HSpOYJl96UKkEuNB8JBlXpCbSU-08Q&_nc_zt=23&_nc_ht=scontent-lga3-1.xx&edm=AOgd6ZUEAAAA&_nc_gid=zD8JhAHPk83GsA0eTOMLZA&_nc_tpa=Q5bMBQGj-74Anby2JNCZ6kXX0KxSjQPV51topk8Zf7YTNrZhPR4yFTOVRPI-dEJlknt15TUCgPPfp_A8&oh=00_Af8aefAcUnYULr1PiCHccnxkCSibXkp2Yj4Anfgj7ILJYw&oe=6A39DBF4"
+      }
+    }
+  ],
+  "new_campaign_name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - 01",
+  "cleanups": [
+    {
+      "campaign_id": "120248930643730604",
+      "reason": "exception:RuntimeError",
+      "delete_status": 200,
+      "delete_payload": {
+        "success": true
+      },
+      "verify_status": 200,
+      "verify": {
+        "id": "120248930643730604",
+        "name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - 01",
+        "status": "DELETED",
+        "effective_status": "DELETED",
+        "daily_budget": "2500"
+      }
+    }
+  ],
+  "final_error": "create_ad_failed"
+}

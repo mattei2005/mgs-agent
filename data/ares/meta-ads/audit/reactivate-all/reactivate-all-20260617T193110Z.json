@@ -1,0 +1,91 @@
+{
+  "ts_utc": "2026-06-17T19:31:10.371543+00:00",
+  "job": "reactivate_all",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "account_id": "1356770869843984",
+  "mode": "dry_run",
+  "write_enabled": false,
+  "token_report": {
+    "item": "Token Meta API",
+    "field": "credential",
+    "len": 195
+  },
+  "candidates": [
+    {
+      "action": "reactivate_campaign",
+      "campaign_id": "120247501687810604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 3",
+      "effective_status": "PAUSED",
+      "mode": "dry_run_no_write"
+    },
+    {
+      "action": "reactivate_campaign",
+      "campaign_id": "120247501687800604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 5",
+      "effective_status": "PAUSED",
+      "mode": "dry_run_no_write"
+    },
+    {
+      "action": "reactivate_campaign",
+      "campaign_id": "120247501687790604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 4",
+      "effective_status": "PAUSED",
+      "mode": "dry_run_no_write"
+    },
+    {
+      "action": "reactivate_campaign",
+      "campaign_id": "120247501687530604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 2",
+      "effective_status": "PAUSED",
+      "mode": "dry_run_no_write"
+    },
+    {
+      "action": "reactivate_campaign",
+      "campaign_id": "120247501679760604",
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 1",
+      "effective_status": "PAUSED",
+      "mode": "dry_run_no_write"
+    },
+    {
+      "action": "reactivate_campaign",
+      "campaign_id": "120246399685010604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 2",
+      "effective_status": "PAUSED",
+      "mode": "dry_run_no_write"
+    },
+    {
+      "action": "reactivate_campaign",
+      "campaign_id": "120246399685000604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 4",
+      "effective_status": "PAUSED",
+      "mode": "dry_run_no_write"
+    },
+    {
+      "action": "reactivate_campaign",
+      "campaign_id": "120246399684990604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 3",
+      "effective_status": "PAUSED",
+      "mode": "dry_run_no_write"
+    },
+    {
+      "action": "reactivate_campaign",
+      "campaign_id": "120246399684980604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 5",
+      "effective_status": "PAUSED",
+      "mode": "dry_run_no_write"
+    },
+    {
+      "action": "reactivate_campaign",
+      "campaign_id": "120246398703950604",
+      "campaign_name": "Gabriela López - US - ESP - (pg_22037) - 1",
+      "effective_status": "PAUSED",
+      "mode": "dry_run_no_write"
+    }
+  ],
+  "errors": [],
+  "exclusion_list": [],
+  "summary": {
+    "campaigns_seen": 15,
+    "candidate_count": 10
+  }
+}
