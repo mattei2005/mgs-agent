@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-18T16:59:49-04:00",
+    "updated_at": "2026-06-18T18:29:15.935418-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -2992,5 +2992,204 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "system_packages": [
+    {
+      "id": "hera-meta-library-playwright-runtime-deps",
+      "agent": "hera",
+      "manager": "apt/playwright",
+      "source_report": "REPORT-INFRA Hera Meta/Facebook Ad Library runtime validation",
+      "commandline": "apt-get install --no-install-recommends <playwright chromium deps> via Playwright install-deps",
+      "packages_count": 33,
+      "packages": [
+        {
+          "name": "libasound2t64",
+          "version": "1.2.11-1ubuntu0.2",
+          "status": "installed"
+        },
+        {
+          "name": "libatk-bridge2.0-0t64",
+          "version": "2.52.0-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libatk1.0-0t64",
+          "version": "2.52.0-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libatspi2.0-0t64",
+          "version": "2.52.0-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libcairo2",
+          "version": "1.18.0-3build1",
+          "status": "installed"
+        },
+        {
+          "name": "libcups2t64",
+          "version": "2.4.7-1.2ubuntu7.14",
+          "status": "installed"
+        },
+        {
+          "name": "libdbus-1-3",
+          "version": "1.14.10-4ubuntu4.1",
+          "status": "installed"
+        },
+        {
+          "name": "libdrm2",
+          "version": "2.4.125-1ubuntu0.1~24.04.2",
+          "status": "installed"
+        },
+        {
+          "name": "libgbm1",
+          "version": "25.2.8-0ubuntu0.24.04.2",
+          "status": "installed"
+        },
+        {
+          "name": "libglib2.0-0t64",
+          "version": "2.80.0-6ubuntu3.8",
+          "status": "installed"
+        },
+        {
+          "name": "libnspr4",
+          "version": "2:4.35-1.1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libnss3",
+          "version": "2:3.98-1ubuntu0.1",
+          "status": "installed"
+        },
+        {
+          "name": "libpango-1.0-0",
+          "version": "1.52.1+ds-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libx11-6",
+          "version": "2:1.8.7-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libxcb1",
+          "version": "1.15-1ubuntu2",
+          "status": "installed"
+        },
+        {
+          "name": "libxcomposite1",
+          "version": "1:0.4.5-1build3",
+          "status": "installed"
+        },
+        {
+          "name": "libxdamage1",
+          "version": "1:1.1.6-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libxext6",
+          "version": "2:1.3.4-1build2",
+          "status": "installed"
+        },
+        {
+          "name": "libxfixes3",
+          "version": "1:6.0.0-2build1",
+          "status": "installed"
+        },
+        {
+          "name": "libxkbcommon0",
+          "version": "1.6.0-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libxrandr2",
+          "version": "2:1.5.2-2build1",
+          "status": "installed"
+        },
+        {
+          "name": "xvfb",
+          "version": "2:21.1.12-1ubuntu1.6",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-noto-color-emoji",
+          "version": "2.047-0ubuntu0.24.04.1",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-unifont",
+          "version": "1:15.1.01-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libfontconfig1",
+          "version": "2.15.0-1.1ubuntu2",
+          "status": "installed"
+        },
+        {
+          "name": "libfreetype6",
+          "version": "2.13.2+dfsg-1ubuntu0.1",
+          "status": "installed"
+        },
+        {
+          "name": "xfonts-cyrillic",
+          "version": "1:1.0.5+nmu1",
+          "status": "installed"
+        },
+        {
+          "name": "xfonts-scalable",
+          "version": "1:1.0.3-1.3",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-liberation",
+          "version": "1:2.1.5-3",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-ipafont-gothic",
+          "version": "00303-21ubuntu1",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-wqy-zenhei",
+          "version": "0.9.45-8",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-tlwg-loma-otf",
+          "version": "1:0.7.3-1",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-freefont-ttf",
+          "version": "20211204+svn4273-2",
+          "status": "installed"
+        }
+      ],
+      "missing_packages": [],
+      "runtime_validation": {
+        "node_playwright_project": "/tmp/hera-meta-library-test",
+        "playwright_version": "1.61.0",
+        "chromium_executable": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+        "chromium_executable_exists": true
+      },
+      "purpose": "Hera validation of Meta/Facebook Ad Library via Playwright/Chromium",
+      "updated_at": "2026-06-18T18:29:15.935418-04:00"
+    },
+    {
+      "id": "hera-creative-sanitizer-exiftool",
+      "agent": "hera",
+      "manager": "apt",
+      "source_report": "REPORT-INFRA Hera creative sanitizer runtime validation",
+      "package": "libimage-exiftool-perl",
+      "version": "12.76+dfsg-1",
+      "binary": "/usr/bin/exiftool",
+      "binary_exists": true,
+      "purpose": "Metadata inspection/sanitization checks for creative assets",
+      "known_pending": "JPEG sanitizer still returned clean=false after harmful_tags removal; do not treat JPEG outputs as final deliverables until Hera resolves sanitizer/allowlist.",
+      "updated_at": "2026-06-18T18:29:15.935418-04:00"
+    }
+  ]
 }
