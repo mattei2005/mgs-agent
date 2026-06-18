@@ -1,0 +1,81 @@
+{
+  "created_at": "2026-06-18T22:14:01.360372+00:00",
+  "mode": "native-copy-only-no-from-zero",
+  "token_field": "credential",
+  "token_len": 198,
+  "source_campaign_id": "120248290564280604",
+  "source_adset_id": "120248290564350604",
+  "steps": [
+    {
+      "step": "campaign_native_copy_shallow",
+      "status": 200,
+      "payload": {
+        "copied_campaign_id": "120248946675860604",
+        "ad_object_ids": [
+          {
+            "ad_object_type": "campaign",
+            "source_id": "120248290564280604",
+            "copied_id": "120248946675860604"
+          }
+        ]
+      }
+    },
+    {
+      "step": "verify_campaign_copy",
+      "status": 200,
+      "payload": {
+        "id": "120248946675860604",
+        "name": "Patricia Flores - US - ESP - (pg_22069) - 2 - RPL COPYONLY 20260618T221401Z",
+        "status": "PAUSED",
+        "effective_status": "PAUSED",
+        "daily_budget": "10000"
+      }
+    },
+    {
+      "step": "adset_native_copy_deep_False",
+      "status": 400,
+      "payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 1487202,
+        "fbtrace_id": "Al6JYU_7iV_UIcUAJ_7RdN_"
+      },
+      "copied_adset_id": null
+    },
+    {
+      "step": "adset_native_copy_deep_True",
+      "status": 400,
+      "payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 1885194,
+        "fbtrace_id": "A94NmdYdrjYiooQz2zrO1tV"
+      },
+      "copied_adset_id": null
+    }
+  ],
+  "created": {
+    "campaign_copy_id": "120248946675860604"
+  },
+  "cleanups": [
+    {
+      "campaign_id": "120248946675860604",
+      "delete_status": 200,
+      "delete_payload": {
+        "success": true
+      },
+      "verify_status": 200,
+      "verify": {
+        "id": "120248946675860604",
+        "name": "Patricia Flores - US - ESP - (pg_22069) - 2 - RPL COPYONLY 20260618T221401Z",
+        "status": "DELETED",
+        "effective_status": "DELETED",
+        "daily_budget": "10000"
+      }
+    }
+  ],
+  "result": "failed_native_copy_only",
+  "final_error": "no_adset_copy_id"
+}
