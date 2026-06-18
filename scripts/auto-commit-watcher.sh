@@ -8,7 +8,7 @@ REPO_DIR="/root/mgs-agent"
 LOG_FILE="/root/mgs-agent/logs/auto-commit-watcher.log"
 DEBOUNCE_SECONDS=10  # espera 10s antes de commitar (evita spam)
 SENSITIVE_PATH_REGEX='(^|/)(\.env|.*\.pem|.*\.key|id_rsa|id_ed25519|.*credential.*|.*secret.*|.*token.*|.*password.*|.*webhook.*|.*private.*|hosts\.yml|\.npmrc|\.pypirc)$'
-SENSITIVE_ALLOWLIST_REGEX='(^|/)honcho_sanitized_secret_scan\.py$'
+SENSITIVE_ALLOWLIST_REGEX='(^|/)(honcho_sanitized_secret_scan\.py|report-infra-runtime-permissions-auth-and-secret-wrappers-2026-06-17\.md)$'
 
 # Não commitar artefatos/runtime state que mudam em loop ou são pesados.
 # Importante: aplicar o mesmo pathspec em `git status` e `git add`.
