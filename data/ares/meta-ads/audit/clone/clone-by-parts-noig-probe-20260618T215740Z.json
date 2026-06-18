@@ -1,0 +1,1183 @@
+{
+  "created_at": "2026-06-18T21:57:40.750760+00:00",
+  "mode": "clone-by-parts-elena-no-ig-probe-cleanup",
+  "token_field": "credential",
+  "token_len": 198,
+  "source_campaign_id": "120248940367540604",
+  "source_adset_id": "120248940367380604",
+  "steps": [
+    {
+      "step": "get_source_campaign",
+      "status": 200,
+      "payload": {
+        "id": "120248940367540604",
+        "name": "Elena Santana - US - ESP - (pg_22091) - 4",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "objective": "OUTCOME_SALES",
+        "buying_type": "AUCTION",
+        "bid_strategy": "COST_CAP",
+        "special_ad_categories": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ]
+      }
+    },
+    {
+      "step": "get_source_adset",
+      "status": 200,
+      "payload": {
+        "id": "120248940367380604",
+        "name": "Conjunto 02 - VÍDEOS",
+        "billing_event": "IMPRESSIONS",
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "destination_type": "MESSENGER",
+        "targeting": {
+          "age_max": 65,
+          "age_min": 18,
+          "age_range": [
+            18,
+            65
+          ],
+          "geo_locations": {
+            "countries": [
+              "ES"
+            ],
+            "location_types": [
+              "home",
+              "recent"
+            ]
+          },
+          "brand_safety_content_filter_levels": [
+            "FACEBOOK_RELAXED",
+            "AN_RELAXED"
+          ],
+          "targeting_automation": {
+            "advantage_audience": 1
+          }
+        },
+        "promoted_object": {
+          "pixel_id": "629060785934493",
+          "custom_event_type": "COMPLETE_REGISTRATION",
+          "page_id": "990898360783030",
+          "smart_pse_enabled": false
+        },
+        "bid_amount": 200
+      }
+    },
+    {
+      "step": "get_source_ads",
+      "status": 200,
+      "payload": {
+        "data": [
+          {
+            "id": "120248940367500604",
+            "name": "Ad - 1",
+            "status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "creative": {
+              "id": "1710921573663723",
+              "name": "{{product.name}} 2026-06-18-9561ed5b4f34e52685baa3b0d8b3cf62",
+              "object_story_spec": {
+                "page_id": "990898360783030",
+                "instagram_user_id": "17841419022356111"
+              },
+              "asset_feed_spec": {
+                "videos": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f7fc89abf54b21494_1781140970639",
+                        "id": "120248290434790604"
+                      }
+                    ],
+                    "video_id": "1032453536136559",
+                    "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/718553829_2130864311170543_6223298843470619201_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5fad0e&_nc_ohc=JYUSbdIVW8oQ7kNvwHkenNJ&_nc_oc=Adr1KpBoi5oLj9g8mF9cfXqZcI_OtWnTj96-RcIkp-jNcgXA-E-oZwmT8FLRuwOX26Q&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=ruBRZ9JP7Kfi4azPtu8tjA&_nc_ss=7a22e&oh=00_Af-Xh4RiI6u9l2klzmDiHacJADMO9tzcPOjoO26I6fKgUA&oe=6A3A19AD"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fff41a62b8177388e_1781140970642",
+                        "id": "120248290434800604"
+                      }
+                    ],
+                    "video_id": "2026369584631725",
+                    "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/721465989_1844314766529158_6360267753799162557_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=5fad0e&_nc_ohc=m_Cg6LQbXUUQ7kNvwF46z_-&_nc_oc=AdqQ5gBIsqDa2aS0sTFrGhVjaLqCiWtfePENxOd2pap6Ct7Vfei68QMOPKTY7QuEoL4&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=ruBRZ9JP7Kfi4azPtu8tjA&_nc_ss=7a22e&oh=00_Af8goBiwClt8c2AisO2Icu8vAkiV6gcqcLnrBqGTvCbM-g&oe=6A3A13A8"
+                  }
+                ],
+                "bodies": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f5c3846293e38f388_1781140970640",
+                        "id": "120248290434810604"
+                      },
+                      {
+                        "name": "placement_asset_f3d67f237622c777b_1781140970643",
+                        "id": "120248290434820604"
+                      }
+                    ],
+                    "text": ""
+                  }
+                ],
+                "call_to_action_types": [
+                  "APPLY_NOW"
+                ],
+                "descriptions": [
+                  {
+                    "text": "⭐️⭐️⭐️⭐️⭐️"
+                  }
+                ],
+                "link_urls": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f2c80a2e3c728696d_1781140970641",
+                        "id": "120248290434830604"
+                      },
+                      {
+                        "name": "placement_asset_f0ec00c7fd2b6fee5_1781140970644",
+                        "id": "120248290434850604"
+                      }
+                    ],
+                    "website_url": "https://fb.com/messenger_doc/",
+                    "display_url": ""
+                  }
+                ],
+                "titles": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fa0d1b96ef94bec05_1781140970644",
+                        "id": "120248290434780604"
+                      },
+                      {
+                        "name": "placement_asset_fa89cac61e12a3901_1781140970640",
+                        "id": "120248290434840604"
+                      }
+                    ],
+                    "text": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+                  }
+                ],
+                "ad_formats": [
+                  "AUTOMATIC_FORMAT"
+                ],
+                "asset_customization_rules": [
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13,
+                      "publisher_platforms": [
+                        "facebook",
+                        "instagram",
+                        "audience_network",
+                        "messenger"
+                      ],
+                      "facebook_positions": [
+                        "story",
+                        "facebook_reels",
+                        "facebook_reels_overlay"
+                      ],
+                      "instagram_positions": [
+                        "story",
+                        "reels"
+                      ],
+                      "messenger_positions": [
+                        "story"
+                      ],
+                      "audience_network_positions": [
+                        "classic",
+                        "rewarded_video"
+                      ]
+                    },
+                    "video_label": {
+                      "name": "placement_asset_fff41a62b8177388e_1781140970642",
+                      "id": "120248290434800604"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f3d67f237622c777b_1781140970643",
+                      "id": "120248290434820604"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_f0ec00c7fd2b6fee5_1781140970644",
+                      "id": "120248290434850604"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_fa0d1b96ef94bec05_1781140970644",
+                      "id": "120248290434780604"
+                    },
+                    "priority": 1
+                  },
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13
+                    },
+                    "video_label": {
+                      "name": "placement_asset_f7fc89abf54b21494_1781140970639",
+                      "id": "120248290434790604"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f5c3846293e38f388_1781140970640",
+                      "id": "120248290434810604"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_f2c80a2e3c728696d_1781140970641",
+                      "id": "120248290434830604"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_fa89cac61e12a3901_1781140970640",
+                      "id": "120248290434840604"
+                    },
+                    "priority": 2
+                  }
+                ],
+                "optimization_type": "PLACEMENT",
+                "additional_data": {
+                  "multi_share_end_card": false,
+                  "page_welcome_message": "{\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"¡Hola! Para continuar, haz clic en RECIBIR TARJETA abajo ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"💳 RECIBIR TARJETA\"}]}}},\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"template_id\":\"859170230569199\",\"is_user_editing\":false}",
+                  "is_click_to_message": false
+                },
+                "reasons_to_shop": false,
+                "shops_bundle": false
+              }
+            }
+          },
+          {
+            "id": "120248940367400604",
+            "name": "Ad - 2",
+            "status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "creative": {
+              "id": "2416649352137237",
+              "name": "{{product.name}} 2026-06-18-88d0b6f0310b35e970805ed991014f28",
+              "object_story_spec": {
+                "page_id": "990898360783030",
+                "instagram_user_id": "17841419022356111"
+              },
+              "asset_feed_spec": {
+                "videos": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_facd34815b9ba909e_1781141007221",
+                        "id": "120248290442360604"
+                      }
+                    ],
+                    "video_id": "1010043841612177",
+                    "thumbnail_url": "https://scontent-lga3-1.xx.fbcdn.net/v/t15.5256-10/721348360_4542078662704726_3770361300680237516_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5fad0e&_nc_ohc=1lzbfq0fPuMQ7kNvwGntzc4&_nc_oc=AdpEF3TIOgoLGrQdL0SOkKGDtJ031U_v29oxI-CnKyFKlQxyAC5qixfz0iWeQLsAhGU&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lga3-1.xx&_nc_gid=ruBRZ9JP7Kfi4azPtu8tjA&_nc_ss=7a22e&oh=00_Af-f-nDgwsHdyvTD0dBNprk2_g8LPo5EhqG_dYGyEZxgQQ&oe=6A3A1434"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fe601203a2b801b49_1781141007223",
+                        "id": "120248290442350604"
+                      }
+                    ],
+                    "video_id": "993660510089780",
+                    "thumbnail_url": "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/720086051_1677073446944453_1446620916804433839_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5fad0e&_nc_ohc=mpD6tws6vekQ7kNvwGpbVCb&_nc_oc=AdrNEWhsQa_Sg1OLd8V_RZEXxQ0_B5GmEFw3hkdvFbnDwXdbMNZI7iqmsLF4wLqEg3A&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&_nc_gid=ruBRZ9JP7Kfi4azPtu8tjA&_nc_ss=7a22e&oh=00_Af_sExSo0Ua70yP2Z7iLrmdeMJMhsTd-RcK0EjiiWe9Hhw&oe=6A3A1A5F"
+                  }
+                ],
+                "bodies": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f7dcb13d6659be6b4_1781141007223",
+                        "id": "120248290442340604"
+                      },
+                      {
+                        "name": "placement_asset_fededf60aaff2469d_1781141007221",
+                        "id": "120248290442400604"
+                      }
+                    ],
+                    "text": ""
+                  }
+                ],
+                "call_to_action_types": [
+                  "APPLY_NOW"
+                ],
+                "descriptions": [
+                  {
+                    "text": "⭐️⭐️⭐️⭐️⭐️"
+                  }
+                ],
+                "link_urls": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f849ac64e176ac7ba_1781141007222",
+                        "id": "120248290442370604"
+                      },
+                      {
+                        "name": "placement_asset_f9dd8a4cd7f83aeaa_1781141007224",
+                        "id": "120248290442380604"
+                      }
+                    ],
+                    "website_url": "https://fb.com/messenger_doc/",
+                    "display_url": ""
+                  }
+                ],
+                "titles": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fd3b497a9916bd954_1781141007224",
+                        "id": "120248290442390604"
+                      },
+                      {
+                        "name": "placement_asset_fe8e1fc111994fe51_1781141007221",
+                        "id": "120248290442410604"
+                      }
+                    ],
+                    "text": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+                  }
+                ],
+                "ad_formats": [
+                  "AUTOMATIC_FORMAT"
+                ],
+                "asset_customization_rules": [
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13,
+                      "publisher_platforms": [
+                        "facebook",
+                        "instagram",
+                        "audience_network",
+                        "messenger"
+                      ],
+                      "facebook_positions": [
+                        "story",
+                        "facebook_reels",
+                        "facebook_reels_overlay"
+                      ],
+                      "instagram_positions": [
+                        "story",
+                        "reels"
+                      ],
+                      "messenger_positions": [
+                        "story"
+                      ],
+                      "audience_network_positions": [
+                        "classic",
+                        "rewarded_video"
+                      ]
+                    },
+                    "video_label": {
+                      "name": "placement_asset_fe601203a2b801b49_1781141007223",
+                      "id": "120248290442350604"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f7dcb13d6659be6b4_1781141007223",
+                      "id": "120248290442340604"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_f9dd8a4cd7f83aeaa_1781141007224",
+                      "id": "120248290442380604"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_fd3b497a9916bd954_1781141007224",
+                      "id": "120248290442390604"
+                    },
+                    "priority": 1
+                  },
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13
+                    },
+                    "video_label": {
+                      "name": "placement_asset_facd34815b9ba909e_1781141007221",
+                      "id": "120248290442360604"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_fededf60aaff2469d_1781141007221",
+                      "id": "120248290442400604"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_f849ac64e176ac7ba_1781141007222",
+                      "id": "120248290442370604"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_fe8e1fc111994fe51_1781141007221",
+                      "id": "120248290442410604"
+                    },
+                    "priority": 2
+                  }
+                ],
+                "optimization_type": "PLACEMENT",
+                "additional_data": {
+                  "multi_share_end_card": false,
+                  "page_welcome_message": "{\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"¡Hola! Para continuar, haz clic en RECIBIR TARJETA abajo ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"💳 RECIBIR TARJETA\"}]}}},\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"template_id\":\"859170230569199\",\"is_user_editing\":false}",
+                  "is_click_to_message": false
+                },
+                "reasons_to_shop": false,
+                "shops_bundle": false
+              }
+            }
+          },
+          {
+            "id": "120248940367560604",
+            "name": "Ad - 3",
+            "status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "creative": {
+              "id": "27262287090090407",
+              "name": "{{product.name}} 2026-06-18-33060d041995510f501cd2717e1f4eda",
+              "object_story_spec": {
+                "page_id": "990898360783030",
+                "instagram_user_id": "17841419022356111"
+              },
+              "asset_feed_spec": {
+                "videos": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f21561c2c2eda9782_1781141041094",
+                        "id": "120248290453300604"
+                      }
+                    ],
+                    "video_id": "1394435732733385",
+                    "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/715650235_1530166178492243_8675354081048739694_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5fad0e&_nc_ohc=tqfx5lzFyyQQ7kNvwHe4bAf&_nc_oc=AdqthaPBsIJdfa8Y2n2LGAGGsHnB39R-RM5QdMzduDe-Uj_Q_BetcaEKcDvBJOfJ5QU&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=ruBRZ9JP7Kfi4azPtu8tjA&_nc_ss=7a22e&oh=00_Af8GbZCvdNrk0wdFplxofYDLOzdCeh7PZq2aHTSNUMe1jw&oe=6A3A131F"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f54e075f642ee1ac2_1781141041096",
+                        "id": "120248290453280604"
+                      }
+                    ],
+                    "video_id": "1032811729099298",
+                    "thumbnail_url": "https://scontent-lga3-1.xx.fbcdn.net/v/t15.5256-10/721465983_883124101475383_9046808695728816232_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5fad0e&_nc_ohc=99aOb7pIV74Q7kNvwGkFgTX&_nc_oc=Adorb5CZ_iqYzRofLyatFkKstN0PHHDldJoG4ivdberWXqBK4bG_LLoTgOAOEF0GDG8&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lga3-1.xx&_nc_gid=ruBRZ9JP7Kfi4azPtu8tjA&_nc_ss=7a22e&oh=00_Af_S6_mUMNpWqYnbSR-V5plGX-xnJaXYgS3bAIYt6vHnug&oe=6A3A126B"
+                  }
+                ],
+                "bodies": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f20909c008c181aca_1781141041095",
+                        "id": "120248290453230604"
+                      },
+                      {
+                        "name": "placement_asset_f046f55cb5619ba2d_1781141041097",
+                        "id": "120248290453290604"
+                      }
+                    ],
+                    "text": ""
+                  }
+                ],
+                "call_to_action_types": [
+                  "APPLY_NOW"
+                ],
+                "descriptions": [
+                  {
+                    "text": "⭐️⭐️⭐️⭐️⭐️"
+                  }
+                ],
+                "link_urls": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fdf102fc6dbf77c65_1781141041095",
+                        "id": "120248290453260604"
+                      },
+                      {
+                        "name": "placement_asset_f304ae2f37317c233_1781141041097",
+                        "id": "120248290453270604"
+                      }
+                    ],
+                    "website_url": "https://fb.com/messenger_doc/",
+                    "display_url": ""
+                  }
+                ],
+                "titles": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f2e1f7f983920a43d_1781141041097",
+                        "id": "120248290453240604"
+                      },
+                      {
+                        "name": "placement_asset_ffea9c0ed23a31948_1781141041095",
+                        "id": "120248290453250604"
+                      }
+                    ],
+                    "text": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+                  }
+                ],
+                "ad_formats": [
+                  "AUTOMATIC_FORMAT"
+                ],
+                "asset_customization_rules": [
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13,
+                      "publisher_platforms": [
+                        "facebook",
+                        "instagram",
+                        "audience_network",
+                        "messenger"
+                      ],
+                      "facebook_positions": [
+                        "story",
+                        "facebook_reels",
+                        "facebook_reels_overlay"
+                      ],
+                      "instagram_positions": [
+                        "story",
+                        "reels"
+                      ],
+                      "messenger_positions": [
+                        "story"
+                      ],
+                      "audience_network_positions": [
+                        "classic",
+                        "rewarded_video"
+                      ]
+                    },
+                    "video_label": {
+                      "name": "placement_asset_f54e075f642ee1ac2_1781141041096",
+                      "id": "120248290453280604"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f046f55cb5619ba2d_1781141041097",
+                      "id": "120248290453290604"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_f304ae2f37317c233_1781141041097",
+                      "id": "120248290453270604"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_f2e1f7f983920a43d_1781141041097",
+                      "id": "120248290453240604"
+                    },
+                    "priority": 1
+                  },
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13
+                    },
+                    "video_label": {
+                      "name": "placement_asset_f21561c2c2eda9782_1781141041094",
+                      "id": "120248290453300604"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f20909c008c181aca_1781141041095",
+                      "id": "120248290453230604"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_fdf102fc6dbf77c65_1781141041095",
+                      "id": "120248290453260604"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_ffea9c0ed23a31948_1781141041095",
+                      "id": "120248290453250604"
+                    },
+                    "priority": 2
+                  }
+                ],
+                "optimization_type": "PLACEMENT",
+                "additional_data": {
+                  "multi_share_end_card": false,
+                  "page_welcome_message": "{\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"¡Hola! Para continuar, haz clic en RECIBIR TARJETA abajo ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"💳 RECIBIR TARJETA\"}]}}},\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"template_id\":\"859170230569199\",\"is_user_editing\":false}",
+                  "is_click_to_message": false
+                },
+                "reasons_to_shop": false,
+                "shops_bundle": false
+              }
+            }
+          },
+          {
+            "id": "120248940367300604",
+            "name": "Ad - 1",
+            "status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "creative": {
+              "id": "1424497936364679",
+              "name": "{{product.name}} 2026-06-18-d557473569129112f8105a2272607098",
+              "object_story_spec": {
+                "page_id": "990898360783030",
+                "instagram_user_id": "17841419022356111"
+              },
+              "asset_feed_spec": {
+                "videos": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f7fc89abf54b21494_1781140970639",
+                        "id": "120248290434790604"
+                      }
+                    ],
+                    "video_id": "1316494596742812",
+                    "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/718553829_2130864311170543_6223298843470619201_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5fad0e&_nc_ohc=JYUSbdIVW8oQ7kNvwHkenNJ&_nc_oc=Adr1KpBoi5oLj9g8mF9cfXqZcI_OtWnTj96-RcIkp-jNcgXA-E-oZwmT8FLRuwOX26Q&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=ruBRZ9JP7Kfi4azPtu8tjA&_nc_ss=7a22e&oh=00_Af-Xh4RiI6u9l2klzmDiHacJADMO9tzcPOjoO26I6fKgUA&oe=6A3A19AD"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fff41a62b8177388e_1781140970642",
+                        "id": "120248290434800604"
+                      }
+                    ],
+                    "video_id": "2060400241541669",
+                    "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/721465989_1844314766529158_6360267753799162557_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=5fad0e&_nc_ohc=m_Cg6LQbXUUQ7kNvwF46z_-&_nc_oc=AdqQ5gBIsqDa2aS0sTFrGhVjaLqCiWtfePENxOd2pap6Ct7Vfei68QMOPKTY7QuEoL4&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=ruBRZ9JP7Kfi4azPtu8tjA&_nc_ss=7a22e&oh=00_Af8goBiwClt8c2AisO2Icu8vAkiV6gcqcLnrBqGTvCbM-g&oe=6A3A13A8"
+                  }
+                ],
+                "bodies": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f5c3846293e38f388_1781140970640",
+                        "id": "120248290434810604"
+                      },
+                      {
+                        "name": "placement_asset_f3d67f237622c777b_1781140970643",
+                        "id": "120248290434820604"
+                      }
+                    ],
+                    "text": ""
+                  }
+                ],
+                "call_to_action_types": [
+                  "APPLY_NOW"
+                ],
+                "descriptions": [
+                  {
+                    "text": "⭐️⭐️⭐️⭐️⭐️"
+                  }
+                ],
+                "link_urls": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f2c80a2e3c728696d_1781140970641",
+                        "id": "120248290434830604"
+                      },
+                      {
+                        "name": "placement_asset_f0ec00c7fd2b6fee5_1781140970644",
+                        "id": "120248290434850604"
+                      }
+                    ],
+                    "website_url": "https://fb.com/messenger_doc/",
+                    "display_url": ""
+                  }
+                ],
+                "titles": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fa0d1b96ef94bec05_1781140970644",
+                        "id": "120248290434780604"
+                      },
+                      {
+                        "name": "placement_asset_fa89cac61e12a3901_1781140970640",
+                        "id": "120248290434840604"
+                      }
+                    ],
+                    "text": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+                  }
+                ],
+                "ad_formats": [
+                  "AUTOMATIC_FORMAT"
+                ],
+                "asset_customization_rules": [
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13,
+                      "publisher_platforms": [
+                        "facebook",
+                        "instagram",
+                        "audience_network",
+                        "messenger"
+                      ],
+                      "facebook_positions": [
+                        "story",
+                        "facebook_reels",
+                        "facebook_reels_overlay"
+                      ],
+                      "instagram_positions": [
+                        "story",
+                        "reels"
+                      ],
+                      "messenger_positions": [
+                        "story"
+                      ],
+                      "audience_network_positions": [
+                        "classic",
+                        "rewarded_video"
+                      ]
+                    },
+                    "video_label": {
+                      "name": "placement_asset_fff41a62b8177388e_1781140970642",
+                      "id": "120248290434800604"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f3d67f237622c777b_1781140970643",
+                      "id": "120248290434820604"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_f0ec00c7fd2b6fee5_1781140970644",
+                      "id": "120248290434850604"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_fa0d1b96ef94bec05_1781140970644",
+                      "id": "120248290434780604"
+                    },
+                    "priority": 1
+                  },
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13
+                    },
+                    "video_label": {
+                      "name": "placement_asset_f7fc89abf54b21494_1781140970639",
+                      "id": "120248290434790604"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f5c3846293e38f388_1781140970640",
+                      "id": "120248290434810604"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_f2c80a2e3c728696d_1781140970641",
+                      "id": "120248290434830604"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_fa89cac61e12a3901_1781140970640",
+                      "id": "120248290434840604"
+                    },
+                    "priority": 2
+                  }
+                ],
+                "optimization_type": "PLACEMENT",
+                "additional_data": {
+                  "multi_share_end_card": false,
+                  "page_welcome_message": "{\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"¡Hola! Para continuar, haz clic en RECIBIR TARJETA abajo ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"💳 RECIBIR TARJETA\"}]}}},\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"template_id\":\"859170230569199\",\"is_user_editing\":false}",
+                  "is_click_to_message": false
+                },
+                "reasons_to_shop": false,
+                "shops_bundle": false
+              }
+            }
+          },
+          {
+            "id": "120248940367420604",
+            "name": "Ad - 3",
+            "status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "creative": {
+              "id": "1165937042364589",
+              "name": "{{product.name}} 2026-06-18-bf2f38e9a6a26e9e1790b3d04abd0928",
+              "object_story_spec": {
+                "page_id": "990898360783030",
+                "instagram_user_id": "17841419022356111"
+              },
+              "asset_feed_spec": {
+                "videos": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f21561c2c2eda9782_1781141041094",
+                        "id": "120248290453300604"
+                      }
+                    ],
+                    "video_id": "27882222524704100",
+                    "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/715650235_1530166178492243_8675354081048739694_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5fad0e&_nc_ohc=tqfx5lzFyyQQ7kNvwHe4bAf&_nc_oc=AdqthaPBsIJdfa8Y2n2LGAGGsHnB39R-RM5QdMzduDe-Uj_Q_BetcaEKcDvBJOfJ5QU&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&_nc_gid=ruBRZ9JP7Kfi4azPtu8tjA&_nc_ss=7a22e&oh=00_Af8GbZCvdNrk0wdFplxofYDLOzdCeh7PZq2aHTSNUMe1jw&oe=6A3A131F"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f54e075f642ee1ac2_1781141041096",
+                        "id": "120248290453280604"
+                      }
+                    ],
+                    "video_id": "2426031561703393",
+                    "thumbnail_url": "https://scontent-lga3-1.xx.fbcdn.net/v/t15.5256-10/721465983_883124101475383_9046808695728816232_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5fad0e&_nc_ohc=99aOb7pIV74Q7kNvwGkFgTX&_nc_oc=Adorb5CZ_iqYzRofLyatFkKstN0PHHDldJoG4ivdberWXqBK4bG_LLoTgOAOEF0GDG8&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lga3-1.xx&_nc_gid=ruBRZ9JP7Kfi4azPtu8tjA&_nc_ss=7a22e&oh=00_Af_S6_mUMNpWqYnbSR-V5plGX-xnJaXYgS3bAIYt6vHnug&oe=6A3A126B"
+                  }
+                ],
+                "bodies": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f20909c008c181aca_1781141041095",
+                        "id": "120248290453230604"
+                      },
+                      {
+                        "name": "placement_asset_f046f55cb5619ba2d_1781141041097",
+                        "id": "120248290453290604"
+                      }
+                    ],
+                    "text": ""
+                  }
+                ],
+                "call_to_action_types": [
+                  "APPLY_NOW"
+                ],
+                "descriptions": [
+                  {
+                    "text": "⭐️⭐️⭐️⭐️⭐️"
+                  }
+                ],
+                "link_urls": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fdf102fc6dbf77c65_1781141041095",
+                        "id": "120248290453260604"
+                      },
+                      {
+                        "name": "placement_asset_f304ae2f37317c233_1781141041097",
+                        "id": "120248290453270604"
+                      }
+                    ],
+                    "website_url": "https://fb.com/messenger_doc/",
+                    "display_url": ""
+                  }
+                ],
+                "titles": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f2e1f7f983920a43d_1781141041097",
+                        "id": "120248290453240604"
+                      },
+                      {
+                        "name": "placement_asset_ffea9c0ed23a31948_1781141041095",
+                        "id": "120248290453250604"
+                      }
+                    ],
+                    "text": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+                  }
+                ],
+                "ad_formats": [
+                  "AUTOMATIC_FORMAT"
+                ],
+                "asset_customization_rules": [
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13,
+                      "publisher_platforms": [
+                        "facebook",
+                        "instagram",
+                        "audience_network",
+                        "messenger"
+                      ],
+                      "facebook_positions": [
+                        "story",
+                        "facebook_reels",
+                        "facebook_reels_overlay"
+                      ],
+                      "instagram_positions": [
+                        "story",
+                        "reels"
+                      ],
+                      "messenger_positions": [
+                        "story"
+                      ],
+                      "audience_network_positions": [
+                        "classic",
+                        "rewarded_video"
+                      ]
+                    },
+                    "video_label": {
+                      "name": "placement_asset_f54e075f642ee1ac2_1781141041096",
+                      "id": "120248290453280604"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f046f55cb5619ba2d_1781141041097",
+                      "id": "120248290453290604"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_f304ae2f37317c233_1781141041097",
+                      "id": "120248290453270604"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_f2e1f7f983920a43d_1781141041097",
+                      "id": "120248290453240604"
+                    },
+                    "priority": 1
+                  },
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13
+                    },
+                    "video_label": {
+                      "name": "placement_asset_f21561c2c2eda9782_1781141041094",
+                      "id": "120248290453300604"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f20909c008c181aca_1781141041095",
+                      "id": "120248290453230604"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_fdf102fc6dbf77c65_1781141041095",
+                      "id": "120248290453260604"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_ffea9c0ed23a31948_1781141041095",
+                      "id": "120248290453250604"
+                    },
+                    "priority": 2
+                  }
+                ],
+                "optimization_type": "PLACEMENT",
+                "additional_data": {
+                  "multi_share_end_card": false,
+                  "page_welcome_message": "{\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"¡Hola! Para continuar, haz clic en RECIBIR TARJETA abajo ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"💳 RECIBIR TARJETA\"}]}}},\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"template_id\":\"859170230569199\",\"is_user_editing\":false}",
+                  "is_click_to_message": false
+                },
+                "reasons_to_shop": false,
+                "shops_bundle": false
+              }
+            }
+          },
+          {
+            "id": "120248940367480604",
+            "name": "Ad - 2",
+            "status": "ACTIVE",
+            "effective_status": "ACTIVE",
+            "creative": {
+              "id": "1679278363326933",
+              "name": "{{product.name}} 2026-06-18-c46d56aaffefafa35ac6e372634823cd",
+              "object_story_spec": {
+                "page_id": "990898360783030",
+                "instagram_user_id": "17841419022356111"
+              },
+              "asset_feed_spec": {
+                "videos": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_facd34815b9ba909e_1781141007221",
+                        "id": "120248290442360604"
+                      }
+                    ],
+                    "video_id": "4304231793223440",
+                    "thumbnail_url": "https://scontent-lga3-1.xx.fbcdn.net/v/t15.5256-10/721348360_4542078662704726_3770361300680237516_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5fad0e&_nc_ohc=1lzbfq0fPuMQ7kNvwGntzc4&_nc_oc=AdpEF3TIOgoLGrQdL0SOkKGDtJ031U_v29oxI-CnKyFKlQxyAC5qixfz0iWeQLsAhGU&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lga3-1.xx&_nc_gid=ruBRZ9JP7Kfi4azPtu8tjA&_nc_ss=7a22e&oh=00_Af-f-nDgwsHdyvTD0dBNprk2_g8LPo5EhqG_dYGyEZxgQQ&oe=6A3A1434"
+                  },
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fe601203a2b801b49_1781141007223",
+                        "id": "120248290442350604"
+                      }
+                    ],
+                    "video_id": "1063977799633595",
+                    "thumbnail_url": "https://scontent-lga3-3.xx.fbcdn.net/v/t15.5256-10/720086051_1677073446944453_1446620916804433839_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5fad0e&_nc_ohc=mpD6tws6vekQ7kNvwGpbVCb&_nc_oc=AdrNEWhsQa_Sg1OLd8V_RZEXxQ0_B5GmEFw3hkdvFbnDwXdbMNZI7iqmsLF4wLqEg3A&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-lga3-3.xx&_nc_gid=ruBRZ9JP7Kfi4azPtu8tjA&_nc_ss=7a22e&oh=00_Af_sExSo0Ua70yP2Z7iLrmdeMJMhsTd-RcK0EjiiWe9Hhw&oe=6A3A1A5F"
+                  }
+                ],
+                "bodies": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f7dcb13d6659be6b4_1781141007223",
+                        "id": "120248290442340604"
+                      },
+                      {
+                        "name": "placement_asset_fededf60aaff2469d_1781141007221",
+                        "id": "120248290442400604"
+                      }
+                    ],
+                    "text": ""
+                  }
+                ],
+                "call_to_action_types": [
+                  "APPLY_NOW"
+                ],
+                "descriptions": [
+                  {
+                    "text": "⭐️⭐️⭐️⭐️⭐️"
+                  }
+                ],
+                "link_urls": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_f849ac64e176ac7ba_1781141007222",
+                        "id": "120248290442370604"
+                      },
+                      {
+                        "name": "placement_asset_f9dd8a4cd7f83aeaa_1781141007224",
+                        "id": "120248290442380604"
+                      }
+                    ],
+                    "website_url": "https://fb.com/messenger_doc/",
+                    "display_url": ""
+                  }
+                ],
+                "titles": [
+                  {
+                    "adlabels": [
+                      {
+                        "name": "placement_asset_fd3b497a9916bd954_1781141007224",
+                        "id": "120248290442390604"
+                      },
+                      {
+                        "name": "placement_asset_fe8e1fc111994fe51_1781141007221",
+                        "id": "120248290442410604"
+                      }
+                    ],
+                    "text": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+                  }
+                ],
+                "ad_formats": [
+                  "AUTOMATIC_FORMAT"
+                ],
+                "asset_customization_rules": [
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13,
+                      "publisher_platforms": [
+                        "facebook",
+                        "instagram",
+                        "audience_network",
+                        "messenger"
+                      ],
+                      "facebook_positions": [
+                        "story",
+                        "facebook_reels",
+                        "facebook_reels_overlay"
+                      ],
+                      "instagram_positions": [
+                        "story",
+                        "reels"
+                      ],
+                      "messenger_positions": [
+                        "story"
+                      ],
+                      "audience_network_positions": [
+                        "classic",
+                        "rewarded_video"
+                      ]
+                    },
+                    "video_label": {
+                      "name": "placement_asset_fe601203a2b801b49_1781141007223",
+                      "id": "120248290442350604"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_f7dcb13d6659be6b4_1781141007223",
+                      "id": "120248290442340604"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_f9dd8a4cd7f83aeaa_1781141007224",
+                      "id": "120248290442380604"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_fd3b497a9916bd954_1781141007224",
+                      "id": "120248290442390604"
+                    },
+                    "priority": 1
+                  },
+                  {
+                    "customization_spec": {
+                      "age_max": 65,
+                      "age_min": 13
+                    },
+                    "video_label": {
+                      "name": "placement_asset_facd34815b9ba909e_1781141007221",
+                      "id": "120248290442360604"
+                    },
+                    "body_label": {
+                      "name": "placement_asset_fededf60aaff2469d_1781141007221",
+                      "id": "120248290442400604"
+                    },
+                    "link_url_label": {
+                      "name": "placement_asset_f849ac64e176ac7ba_1781141007222",
+                      "id": "120248290442370604"
+                    },
+                    "title_label": {
+                      "name": "placement_asset_fe8e1fc111994fe51_1781141007221",
+                      "id": "120248290442410604"
+                    },
+                    "priority": 2
+                  }
+                ],
+                "optimization_type": "PLACEMENT",
+                "additional_data": {
+                  "multi_share_end_card": false,
+                  "page_welcome_message": "{\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false,\"message_data\":{\"message\":{\"template_type\":\"text_with_buttons\",\"attachment\":{\"type\":\"template\",\"payload\":{\"template_type\":\"button\",\"text\":\"¡Hola! Para continuar, haz clic en RECIBIR TARJETA abajo ⤵️\",\"buttons\":[{\"type\":\"postback\",\"payload\":\"GET_STARTED_PAYLOAD\",\"title\":\"💳 RECIBIR TARJETA\"}]}}},\"performance_booster_enabled\":true,\"ctm_deprecate_quick_replies_enabled\":false},\"type\":\"JSON_SETUP\",\"template_id\":\"859170230569199\",\"is_user_editing\":false}",
+                  "is_click_to_message": false
+                },
+                "reasons_to_shop": false,
+                "shops_bundle": false
+              }
+            }
+          }
+        ],
+        "paging": {
+          "cursors": {
+            "before": "QVFIU2pZAWjB1ZAW9KaTdNeVBLQ0hjNEowNWZAPZAFRHS1ItY0J0ZAXQxRmQ2UDNVOTJ2NS16X3JXb0ZAWQ0MyMU85U0ZASUlVab2tLajIwVnpET2dzT2pjcTlIRWtn",
+            "after": "QVFIU1hYNkF3VHdGRVZAFYVVRdXZAoc1lfdGhkTkZAod3JvQWc2SGZAPQkwxVnNoSGxQNF9wRFl1N2ZAHUHpod210YWdzOWljcnFFVUpwdXFlYjFrbHdLd0psbHd3"
+          }
+        }
+      }
+    },
+    {
+      "step": "create_campaign",
+      "status": 200,
+      "payload": {
+        "id": "120248946344170604"
+      }
+    },
+    {
+      "step": "create_adset",
+      "status": 200,
+      "payload": {
+        "id": "120248946344690604"
+      }
+    },
+    {
+      "step": "create_adcreative",
+      "source_ad_id": "120248940367500604",
+      "status": 200,
+      "payload": {
+        "id": "36495492843399205"
+      }
+    },
+    {
+      "step": "create_ad",
+      "source_ad_id": "120248940367500604",
+      "new_creative_id": "36495492843399205",
+      "status": 200,
+      "payload": {
+        "error": {
+          "message": "This request requires the user to take a pending action",
+          "type": "OAuthException",
+          "code": 31,
+          "error_subcode": 3858385,
+          "is_transient": false,
+          "error_user_title": "Autentica tu cuenta",
+          "error_user_msg": "Creemos que alguien puede haber intentado acceder a tu cuenta sin permiso. Por tu seguridad, no podrás crear ni modificar anuncios hasta que autentiques tu cuenta en el Administrador de anuncios. Tus anuncios actuales seguirán en circulación con normalidad.",
+          "fbtrace_id": "A3L7c0jRuPhGROLbVAYGym1"
+        }
+      }
+    }
+  ],
+  "created": {
+    "campaign_id": "120248946344170604",
+    "adset_id": "120248946344690604"
+  },
+  "cleanups": [
+    {
+      "campaign_id": "120248946344170604",
+      "delete_status": 200,
+      "delete_payload": {
+        "success": true
+      },
+      "verify_status": 200,
+      "verify": {
+        "id": "120248946344170604",
+        "name": "Elena Santana - US - ESP - (pg_22091) - 4 - RPL - 20260619 - NOIG-PROBE",
+        "status": "DELETED",
+        "effective_status": "DELETED",
+        "daily_budget": "2500"
+      }
+    }
+  ],
+  "result": "failed",
+  "final_error": "create_ad_failed"
+}
