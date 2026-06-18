@@ -1,0 +1,114 @@
+{
+  "created_at": "2026-06-18T22:53:11.011702+00:00",
+  "mode": "controlled_exec_stepwise",
+  "graph_version": "v25.0",
+  "token_field": "credential",
+  "token_len": 198,
+  "precheck": {
+    "dry_run_audit": "/root/mgs-agent/data/ares/meta-ads/audit/clone/clone-source-dry-run-patricia-1-20260618T224851Z.json",
+    "thumbnail_checks": [
+      {
+        "creative_index": 1,
+        "asset_type": "video",
+        "has_video_id": true,
+        "image_url_present": true,
+        "placeholder_suspected": false,
+        "url_check": {
+          "ok": true,
+          "status": 200,
+          "content_type": "image/jpeg",
+          "content_length": "7381"
+        }
+      },
+      {
+        "creative_index": 2,
+        "asset_type": "image",
+        "has_image_hash": true,
+        "image_hash": "09716886bbeeb208ad766b7e9f013b4a"
+      },
+      {
+        "creative_index": 3,
+        "asset_type": "video",
+        "has_video_id": true,
+        "image_url_present": true,
+        "placeholder_suspected": false,
+        "url_check": {
+          "ok": true,
+          "status": 200,
+          "content_type": "image/jpeg",
+          "content_length": "1147"
+        }
+      }
+    ],
+    "thumbnail_all_ok": true,
+    "adset_mapping": [
+      {
+        "ad_index": 1,
+        "asset_type": "video",
+        "source_adset_id": "120248290297250604",
+        "source_adset_name": "Conjunto 01 - VÍDEOS",
+        "mapping_ok": true
+      },
+      {
+        "ad_index": 2,
+        "asset_type": "image",
+        "source_adset_id": "120248290297260604",
+        "source_adset_name": "Conjunto 02 - IMAGENS",
+        "mapping_ok": true
+      },
+      {
+        "ad_index": 3,
+        "asset_type": "video",
+        "source_adset_id": "120248290297250604",
+        "source_adset_name": "Conjunto 01 - VÍDEOS",
+        "mapping_ok": true
+      }
+    ],
+    "adset_mapping_all_ok": true
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "POST /campaigns",
+      "post_status": 200,
+      "post_payload": {
+        "id": "120248947698060604"
+      },
+      "request_payload": {
+        "name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260620 - DRYRUN",
+        "objective": "OUTCOME_SALES",
+        "buying_type": "AUCTION",
+        "status": "PAUSED",
+        "daily_budget": "2500",
+        "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+        "special_ad_categories": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ],
+        "special_ad_category_country": [
+          "ES"
+        ],
+        "start_time": "2026-06-20T01:00:00+0200"
+      },
+      "get_status": 200,
+      "get_payload": {
+        "id": "120248947698060604",
+        "name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260620 - DRYRUN",
+        "status": "PAUSED",
+        "effective_status": "PAUSED",
+        "objective": "OUTCOME_SALES",
+        "buying_type": "AUCTION",
+        "start_time": "1970-01-01T00:59:59+0100",
+        "daily_budget": "2500",
+        "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+        "special_ad_categories": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ]
+      }
+    }
+  ],
+  "created": {
+    "campaign_id": "120248947698060604"
+  },
+  "payloads_from_dry_run": "/root/mgs-agent/data/ares/meta-ads/audit/clone/clone-source-dry-run-patricia-1-20260618T224851Z.json",
+  "status": "paused_after_step_1_campaign_created"
+}
