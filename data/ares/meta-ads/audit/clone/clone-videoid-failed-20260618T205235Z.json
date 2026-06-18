@@ -1,0 +1,136 @@
+{
+  "created_at": "2026-06-18T20:52:35.360558+00:00",
+  "mode": "controlled_write_videoid_clone",
+  "graph_version": "v25.0",
+  "token_field": "credential",
+  "token_len": 198,
+  "account_id": "1356770869843984",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "loser_campaign_id": "120248290564280604",
+  "daily_budget_usd": 25.0,
+  "start_time_local": "2026-06-19T01:00:00+02:00",
+  "creative_mode": "video_data",
+  "steps": [
+    {
+      "step": "create_campaign",
+      "status": 200,
+      "payload": {
+        "id": "120248944890340604"
+      }
+    },
+    {
+      "step": "create_adset",
+      "source_adset_id": "120248290564350604",
+      "status": 400,
+      "payload": {
+        "error": {
+          "message": "Invalid parameter",
+          "type": "OAuthException",
+          "code": 100,
+          "error_subcode": 1487202,
+          "is_transient": false,
+          "error_user_title": "El permiso de la página es insuficiente para publicar anuncios",
+          "error_user_msg": "Necesitas acceso para crear anuncios para esta Página. Envía una solicitud de acceso a alguien con control total de la página, o selecciona una página diferente si está disponible. Más información en https://www.facebook.com/business/help/183277585892925?id=420299598837059",
+          "fbtrace_id": "Am89vLmuhanQSzFKE-7TJaD"
+        }
+      }
+    }
+  ],
+  "created": {
+    "campaign_id": "120248944890340604"
+  },
+  "errors": [
+    {
+      "step": "create_adset",
+      "error": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 1487202,
+        "fbtrace_id": "Am89vLmuhanQSzFKE-7TJaD"
+      }
+    }
+  ],
+  "source_campaign": {
+    "id": "120248290564280604",
+    "name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+    "status": "PAUSED",
+    "effective_status": "PAUSED",
+    "objective": "OUTCOME_SALES",
+    "buying_type": "AUCTION",
+    "daily_budget": "10000",
+    "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+    "special_ad_categories": [
+      "FINANCIAL_PRODUCTS_SERVICES"
+    ],
+    "source_campaign_id": "120248290297180604",
+    "smart_promotion_type": "GUIDED_CREATION"
+  },
+  "source_adsets_count": 2,
+  "winner_selection": [
+    {
+      "ad_id": "120248290564590604",
+      "ad_name": "Ad - 3",
+      "campaign_id": "120248290564430604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 4",
+      "spend": 9.55,
+      "MO": 7.0,
+      "CPMO": 1.3643,
+      "creative_id": "1878134753167706",
+      "asset": {
+        "kind": "video",
+        "id": "1772519430789363",
+        "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/715650235_1530166178492243_8675354081048739694_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=100&ccb=1-7&_nc_sid=b696e2&_nc_ohc=tqfx5lzFyyQQ7kNvwF8dz30&_nc_oc=Adq-EJ1IBdJqMW-FTiQGrh0emA1NFC4B8OnPqK1AuwtAK2glSO3Cdj-EGfPXszOiPeqCuHycZrJMEIxUgueRO8cp&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=AOgd6ZUEAAAA&_nc_gid=9F3h1Gv9jJYcTgVDxGU9AQ&_nc_tpa=Q5bMBQHpKI2z4TIJFBSwLfOOGbZi48B3AMzK90qsRP_IL9xmZgEV4Vy65mYDvO-YX5IOLz1lOsQlOsny&oh=00_Af-lmN2DIAYsii0NSL29xvMCsWsB82MFijNiiqfBEBre0w&oe=6A3A131F"
+      }
+    },
+    {
+      "ad_id": "120248290564410604",
+      "ad_name": "Ad - 1",
+      "campaign_id": "120248290564430604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 4",
+      "spend": 129.68,
+      "MO": 81.0,
+      "CPMO": 1.601,
+      "creative_id": "1013257701201962",
+      "asset": {
+        "kind": "video",
+        "id": "3530391967118542",
+        "thumbnail_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/718553829_2130864311170543_6223298843470619201_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=107&ccb=1-7&_nc_sid=b696e2&_nc_ohc=JYUSbdIVW8oQ7kNvwEUBRT3&_nc_oc=Ado8sl004MSHWMFh7jjYPkYEZtRYEaVXKV2DhygibSMgOtbUlz2NA2qckzOZGpWwvR6nNfBBWJudDKlc_o5ObNFr&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=AOgd6ZUEAAAA&_nc_gid=9F3h1Gv9jJYcTgVDxGU9AQ&_nc_tpa=Q5bMBQH1tSPMJJrKu-v0GMSyBG65L4cP6ZnpP0zEMrg-ja6ieFEyU3bAXui7quBENGfk-kE992EigInz&oh=00_Af9EA-SaEE3k7Fl4JDAzvZoIjKAt8kqTFMdz6mQk9eLw6g&oe=6A3A19AD"
+      }
+    },
+    {
+      "ad_id": "120248290564520604",
+      "ad_name": "Ad - 3",
+      "campaign_id": "120248290564290604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 5",
+      "spend": 13.4,
+      "MO": 8.0,
+      "CPMO": 1.675,
+      "creative_id": "1030695076068267",
+      "asset": {
+        "kind": "image",
+        "id": "21f91a3d005d18170c4c8d0a0d01aac7"
+      }
+    }
+  ],
+  "new_campaign_name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - 01",
+  "cleanups": [
+    {
+      "campaign_id": "120248944890340604",
+      "reason": "exception:RuntimeError",
+      "delete_status": 200,
+      "delete_payload": {
+        "success": true
+      },
+      "verify_status": 200,
+      "verify": {
+        "id": "120248944890340604",
+        "name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - 01",
+        "status": "DELETED",
+        "effective_status": "DELETED",
+        "daily_budget": "2500"
+      }
+    }
+  ],
+  "final_error": "create_adset_failed"
+}
