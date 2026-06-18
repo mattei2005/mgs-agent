@@ -352,6 +352,7 @@ references/human-upload-ready-drive-handoff.md — fluxo validado para upload hu
 references/video-variation-gpt-grok-workflow.md — workflow para comparar variação de vídeo com GPT/OpenAI e Grok/xAI a partir de anexo Discord, incluindo import read-only, contact sheet, geração e sanitização.
 references/safari-invitation-video-reference-workflow.md — workflow validado para convite animado com referência YouTube/anexo, incluindo regra de não produzir antes de validar a referência, fallback por anexo Discord, YouTube cookies/proxy persistente, Grok real via wrapper e dados fixos legíveis.
 references/meta-ad-library-creative-intake.md — fluxo para analisar/baixar referências da Meta/Facebook Ad Library com Playwright/API, validar token sem expor segredo e interpretar erros comuns.
+references/meta-ad-library-playwright-browser-download.md — workflow de prova de vida e download via Chromium/Playwright quando `curl` recebe challenge/403 mas o browser consegue renderizar Library, IDs, imagens e vídeos.
 ```
 ```
 references/meta-ad-library-creative-intake.md — fluxo para analisar/baixar referências da Meta/Facebook Ad Library com Playwright/API, validar token sem expor segredo e interpretar erros comuns.
