@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-06-18T21:29:28.495775+00:00",
+  "mode": "native_campaign_copy_endpoint",
+  "source_campaign_id": "120248940367540604",
+  "graph_version": "v25.0",
+  "token_field": "credential",
+  "token_len": 198,
+  "steps": [
+    {
+      "step": "campaign_copies",
+      "status": 400,
+      "payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 1885194,
+        "fbtrace_id": "AJ25tBvmIUufRDKTBdEXeVa"
+      }
+    }
+  ],
+  "source_read": {
+    "status": 200,
+    "payload": {
+      "id": "120248940367540604",
+      "name": "Elena Santana - US - ESP - (pg_22091) - 4",
+      "status": "ACTIVE",
+      "effective_status": "ACTIVE",
+      "daily_budget": "10000",
+      "objective": "OUTCOME_SALES"
+    }
+  },
+  "created_campaign_id": null
+}
