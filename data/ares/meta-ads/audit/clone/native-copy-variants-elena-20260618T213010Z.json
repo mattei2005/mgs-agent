@@ -1,0 +1,49 @@
+{
+  "created_at": "2026-06-18T21:30:10.426435+00:00",
+  "source": "120248940367540604",
+  "token_len": 198,
+  "token_field": "credential",
+  "variants": [
+    {
+      "variant": "status_only",
+      "params": {
+        "status_option": "PAUSED"
+      },
+      "status": 200,
+      "payload": {
+        "copied_campaign_id": "120248945729890604",
+        "ad_object_ids": [
+          {
+            "ad_object_type": "campaign",
+            "source_id": "120248940367540604",
+            "copied_id": "120248945729890604"
+          }
+        ]
+      },
+      "created_campaign_id": "120248945729890604",
+      "guardrail_update": {
+        "status": 200,
+        "payload": {
+          "success": true
+        }
+      },
+      "verification": {
+        "campaign": {
+          "id": "120248945729890604",
+          "name": "Elena Santana - US - ESP - (pg_22091) - 4 - Copia",
+          "status": "PAUSED",
+          "effective_status": "IN_PROCESS",
+          "start_time": "1970-01-01T00:59:59+0100",
+          "daily_budget": "2500"
+        },
+        "ads": [],
+        "adsets": [],
+        "statuses": [
+          200,
+          200,
+          200
+        ]
+      }
+    }
+  ]
+}
