@@ -1,0 +1,67 @@
+{
+  "ts_utc": "2026-06-18T20:51:08.389438+00:00",
+  "job": "intraday",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "account_id": "1356770869843984",
+  "mode": "dry_run",
+  "write_enabled": false,
+  "token_report": {
+    "item": "Token Meta API",
+    "field": "credential",
+    "len": 198
+  },
+  "timezone": "Europe/Madrid",
+  "candidates": [
+    {
+      "pg_id": "pg_22069",
+      "page_name": "Patricia Flores",
+      "country_vertical": "US / CC",
+      "rule": "R5 — Paused campaign with MO >= 2 and CPMO < USD 2.50",
+      "status": "PAUSED",
+      "action": "reactivate_campaign",
+      "campaign_id": "120248290297180604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 1",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "spend": 79.86,
+      "MO": 36,
+      "CPMO": 2.22,
+      "mode": "dry_run_no_write"
+    },
+    {
+      "pg_id": "pg_22069",
+      "page_name": "Patricia Flores",
+      "country_vertical": "US / CC",
+      "rule": "R5 — Paused campaign with MO >= 2 and CPMO < USD 2.50",
+      "status": "PAUSED",
+      "action": "reactivate_campaign",
+      "campaign_id": "120248290564290604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 5",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "spend": 54.28,
+      "MO": 28,
+      "CPMO": 1.94,
+      "mode": "dry_run_no_write"
+    },
+    {
+      "pg_id": "pg_22069",
+      "page_name": "Patricia Flores",
+      "country_vertical": "US / CC",
+      "rule": "R5 — Paused campaign with MO >= 2 and CPMO < USD 2.50",
+      "status": "PAUSED",
+      "action": "reactivate_campaign",
+      "campaign_id": "120248290564430604",
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 4",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "spend": 109.39,
+      "MO": 68,
+      "CPMO": 1.61,
+      "mode": "dry_run_no_write"
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "campaigns_seen": 20,
+    "insight_rows": 5,
+    "candidate_count": 3
+  }
+}

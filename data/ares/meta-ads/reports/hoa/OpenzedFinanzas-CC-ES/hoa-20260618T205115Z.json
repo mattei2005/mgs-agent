@@ -1,0 +1,152 @@
+{
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "account_id": "1356770869843984",
+  "account_name": "OpenzedFinanzas-ES-CC-ES-03",
+  "created_at": "2026-06-18T20:51:15.176477+00:00",
+  "local_time": "2026-06-18T22:51:12.975477+02:00",
+  "checkpoint": "22:51",
+  "mode": "read_only_dry_run_no_meta_write",
+  "target_cpmo_usd": 2.0,
+  "daily_cap_usd": 300.0,
+  "creative_test_pool_usd": 60.0,
+  "today_spend_usd": 386.79,
+  "budget_left_usd": 0.0,
+  "test_budget_left_usd": 0.0,
+  "watch_count": 5,
+  "watch_rows": [
+    {
+      "pg_id": "pg_22069",
+      "page_name": "Patricia Flores",
+      "campaign": "Patricia Flores - US - ESP - (pg_22069) - 1",
+      "hoa_cpmo": "2.30",
+      "target": "2.00",
+      "bad_days": "1/2 completos",
+      "pacing": "estável",
+      "status": "watchlist",
+      "reason": "D-1 CPMO alto; hoje CPMO alto"
+    },
+    {
+      "pg_id": "pg_22069",
+      "page_name": "Patricia Flores",
+      "campaign": "Patricia Flores - US - ESP - (pg_22069) - 3",
+      "hoa_cpmo": "2.60",
+      "target": "2.00",
+      "bad_days": "1/2 completos",
+      "pacing": "estável",
+      "status": "watchlist",
+      "reason": "D-1 CPMO alto; hoje CPMO alto"
+    },
+    {
+      "pg_id": "pg_22069",
+      "page_name": "Patricia Flores",
+      "campaign": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "hoa_cpmo": "3.13",
+      "target": "2.00",
+      "bad_days": "2/2 completos",
+      "pacing": "estável",
+      "status": "replacement candidate",
+      "reason": "D-1 CPMO alto; D-2 CPMO alto; hoje CPMO alto"
+    },
+    {
+      "pg_id": "pg_22069",
+      "page_name": "Patricia Flores",
+      "campaign": "Patricia Flores - US - ESP - (pg_22069) - 5",
+      "hoa_cpmo": "2.13",
+      "target": "2.00",
+      "bad_days": "1/2 completos",
+      "pacing": "estável",
+      "status": "watchlist",
+      "reason": "D-2 CPMO alto"
+    },
+    {
+      "pg_id": "pg_22069",
+      "page_name": "Patricia Flores",
+      "campaign": "Patricia Flores - US - ESP - (pg_22069) - 4",
+      "hoa_cpmo": "1.93",
+      "target": "2.00",
+      "bad_days": "2/2 completos",
+      "pacing": "estável",
+      "status": "replacement candidate",
+      "reason": "D-1 CPMO alto; D-2 CPMO alto"
+    }
+  ],
+  "campaigns": {
+    "120247501687530604": {
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 2",
+      "today": {
+        "spend": 0,
+        "MO": 0,
+        "CPMO": null
+      },
+      "weighted_CPMO": null,
+      "bad_complete_days": 0,
+      "pacing": "sem volume"
+    },
+    "120247501687800604": {
+      "campaign_name": "Carla Rojas - US - ESP - (pg_22068) - 5",
+      "today": {
+        "spend": 0,
+        "MO": 0,
+        "CPMO": null
+      },
+      "weighted_CPMO": null,
+      "bad_complete_days": 0,
+      "pacing": "sem volume"
+    },
+    "120248290297180604": {
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 1",
+      "today": {
+        "spend": 79.86,
+        "MO": 36.0,
+        "CPMO": 2.2183333333333333
+      },
+      "weighted_CPMO": 2.298322222222222,
+      "bad_complete_days": 1,
+      "pacing": "estável"
+    },
+    "120248290564270604": {
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 3",
+      "today": {
+        "spend": 69.34,
+        "MO": 24.0,
+        "CPMO": 2.8891666666666667
+      },
+      "weighted_CPMO": 2.6037842902711326,
+      "bad_complete_days": 1,
+      "pacing": "estável"
+    },
+    "120248290564280604": {
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 2",
+      "today": {
+        "spend": 73.92,
+        "MO": 23.0,
+        "CPMO": 3.213913043478261
+      },
+      "weighted_CPMO": 3.1335288294314383,
+      "bad_complete_days": 2,
+      "pacing": "estável"
+    },
+    "120248290564290604": {
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 5",
+      "today": {
+        "spend": 54.28,
+        "MO": 28.0,
+        "CPMO": 1.9385714285714286
+      },
+      "weighted_CPMO": 2.128024948735475,
+      "bad_complete_days": 1,
+      "pacing": "estável"
+    },
+    "120248290564430604": {
+      "campaign_name": "Patricia Flores - US - ESP - (pg_22069) - 4",
+      "today": {
+        "spend": 109.39,
+        "MO": 68.0,
+        "CPMO": 1.6086764705882353
+      },
+      "weighted_CPMO": 1.9292645510835913,
+      "bad_complete_days": 2,
+      "pacing": "estável"
+    }
+  }
+}
