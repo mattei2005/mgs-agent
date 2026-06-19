@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T11:49:59-04:00",
+    "updated_at": "2026-06-19T11:52:27-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -3482,12 +3482,13 @@
       "type": "reference",
       "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/video-gpt-grok-precedent.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/video-gpt-grok-precedent.md",
-      "size_bytes": 2721,
-      "sha256": "94e6840c77fe29345719fa6630e69e8baf9901b5e2d03b5acdf3738145d286ba",
+      "size_bytes": 3799,
+      "sha256": "7fe844b321ead3fb699f13895c800a6115df9d7f093a4c9b6e81e0329cfe46be",
       "runtime_versioned_sha_match": true,
       "source_thread_id": "1516611205517807680",
-      "updated_at": "2026-06-19T11:42:40-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; imported thread 1516611205517807680 exists read-only with 20 messages; documents GPT preview vs Grok preview precedent; linked precedent reference for thread 1516611205517807680"
+      "updated_at": "2026-06-19T11:52:27-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; imported thread files exist; screenshot evidence documented; separates GPT keyframe/preview from real video; prohibits robotic TTS as substitute for person speaking",
+      "known_pending": "Recover exact technical recipe before attempting to reproduce final generation quality from the old thread."
     }
   ]
 }

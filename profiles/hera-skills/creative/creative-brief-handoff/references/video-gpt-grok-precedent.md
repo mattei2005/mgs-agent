@@ -6,15 +6,38 @@ Use esta referência quando Rodolfo/Geizian/Kelly/gestores pedirem variação de
 
 Antes de afirmar que “não há caminho GPT para vídeo” ou pedir autorização excepcional para Grok, a Hera deve verificar o precedente operacional e a forma real de entrega possível.
 
-Em operação anterior, a Hera entregou um pacote comparativo:
+Em operação anterior, registrada na thread `1516611205517807680` / `Variações de vídeo com GPT e Grok`, a Hera entregou um pacote comparativo com estes sinais visíveis nos screenshots de Rodolfo:
 
 ```text
-GPT preview   = versão mais limpa/polida, visual mais premium, oferta forte.
-Grok preview  = versão mais dinâmica/social, mais próxima da referência em movimento.
-V003 híbrida  = candidata quando Rodolfo quer combinar clareza GPT + dinâmica Grok.
+Pedido original:
+"faça uma variação desse vídeo, use o gpt e o grok, faça um de cada"
+
+GPT preview:
+CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001_GPT_PREVIEW
+Descrição entregue: versão mais limpa/polida, estilo anúncio premium,
+texto forte para "NO DOWN PAYMENT / $299/mo / APPLY TODAY".
+Também houve keyframe limpo:
+CAR_US_EN_IMG_NO_DOWN_PAYMENT_PV_001_GPT_KEYFRAME.png
+
+Grok preview:
+CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_002_GROK_PREVIEW
+Descrição entregue: versão mais dinâmica, mais próxima do vídeo original,
+com movimento de showroom e CTA "DRIVE TODAY".
+
+Validação na thread:
+ambos marcados como clean: true.
 ```
 
-Isso não significa que todo preview GPT seja vídeo cinematográfico real. O padrão aceito operacionalmente é: GPT pode ser usado como **preview criativo polido** quando a ferramenta disponível gera keyframes/imagens e o pacote é rotulado corretamente. Grok tende a servir melhor para motion/dinâmica social quando disponível.
+Isso não significa que todo preview GPT seja vídeo cinematográfico real. O precedente mostra que o GPT funcionou como **peça/preview polido com keyframe forte e visual premium**, enquanto o Grok foi descrito como o caminho mais **dinâmico/social**. Para não repetir erro, a Hera deve separar claramente:
+
+```text
+GPT keyframe/preview polido      aceitável como direção visual/capa/peça premium, se rotulado.
+GPT imagem com zoom              não aceitável como “vídeo real” nem como tentativa final.
+Grok vídeo dinâmico              caminho preferencial quando o objetivo é movimento/showroom.
+Grok com TTS robótico externo    não aceitável para vídeo de vendedor falando.
+```
+
+Grok tende a servir melhor para motion/dinâmica social quando disponível, mas só deve ser entregue se a voz/cena respeitar o pedido. Se a pessoa precisa falar, não mascarar com TTS robótico por cima.
 
 ## Regra de resposta
 
