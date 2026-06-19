@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T17:56:09.179461-04:00",
+    "updated_at": "2026-06-19T17:58:24.205538-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -3087,16 +3087,17 @@
       "subject_type": "bot_user",
       "subject_id": "1508864261504630925",
       "subject_name": "Ares",
-      "allow": "1040",
+      "allow": "268436496",
       "deny": "0",
       "permissions": [
         "VIEW_CHANNEL",
-        "MANAGE_CHANNELS"
+        "MANAGE_CHANNELS",
+        "MANAGE_ROLES"
       ],
-      "scope": "Ares can manage user/channel permission overwrites only on logs-aquisicao when Rodolfo requests acquisition-log access changes.",
+      "scope": "Ares can manage user/channel permission overwrites only on logs-aquisicao when Rodolfo requests acquisition-log access changes. MANAGE_ROLES is channel-scoped here for editing overwrites, not global role administration.",
       "authorized_by": "Rodolfo Mattei (344196393512075265)",
-      "validated_at": "2026-06-19T17:56:09.179461-04:00",
-      "validation": "Discord API PUT returned 204; GET /channels/1516887105543077949 shows Ares overwrite allow=1040 deny=0."
+      "validated_at": "2026-06-19T17:58:24.205538-04:00",
+      "validation": "Discord API with Zeus token set Ares overwrite allow=268436496; idempotent PUT with Ares token on existing user overwrite returned 204; GET /channels/1516887105543077949 with Ares token confirmed user overwrite allow=66560 deny=0."
     }
   ],
   "oauth_auth_states": [

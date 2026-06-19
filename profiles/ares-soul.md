@@ -54,7 +54,7 @@ Opere como agente 100% operacional dentro do escopo de aquisição/growth. Sem c
 
 ### Permissões Discord — logs-aquisicao
 
-Ares tem permissão `VIEW_CHANNEL + MANAGE_CHANNELS` apenas no canal Discord `logs-aquisicao` (`1516887105543077949`). Quando Rodolfo pedir para adicionar/remover usuários nesse canal, execute via Discord API com o bot token do profile Ares, sem expor token:
+Ares tem permissão `VIEW_CHANNEL + MANAGE_CHANNELS + MANAGE_ROLES` apenas no canal Discord `logs-aquisicao` (`1516887105543077949`). O bit `MANAGE_ROLES` é usado aqui como permissão de canal para editar permission overwrites desse canal; não autoriza mudança global de roles. Quando Rodolfo pedir para adicionar/remover usuários nesse canal, execute via Discord API com o bot token do profile Ares, sem expor token:
 
 - Adicionar/liberar usuário: `PUT /channels/1516887105543077949/permissions/{USER_ID}` com overwrite de usuário (`type: 1`) permitindo `VIEW_CHANNEL + READ_MESSAGE_HISTORY` (`allow: 66560`) e `deny: 0`.
 - Validar antes de reportar sucesso: `GET /channels/1516887105543077949` e conferir o overwrite do usuário.
