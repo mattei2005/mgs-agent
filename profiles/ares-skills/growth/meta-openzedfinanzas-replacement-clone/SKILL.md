@@ -163,7 +163,7 @@ Para OpenzedFinanzas EU/Spain, valores observados nos adsets Patricia/Elena:
 
 Pitfalls validados:
 - `code=100/subcode=1487202` pode esconder erro de permissão de Página. Capturar raw HTTP body/headers; o corpo completo pode conter `error_user_title: El permiso de la página es insuficiente...`. Nesse caso, parar: precisa acesso de criação de anúncios na Página, não mais tentativa de campo.
-- `code=100/subcode=1885501` em Elena indicou janela de atribuição inválida. A Meta exigiu `(1,0)`: usar `attribution_spec=[{"event_type":"CLICK_THROUGH","window_days":1}]` e remover `VIEW_THROUGH` nesse create flow, mesmo que a source reporte 7d click + 1d view.
+- `code=100/subcode=1885501` em Elena indicou janela de atribuição inválida **no contexto novo incompleto**. Não trocar automaticamente para `(1,0)` quando a source UI/API mostra `7-day click + 1-day view`; isso é sinal de que a campanha/adset novo ainda não espelha o contexto da source. Primeiro corrigir paridade de campaign/adset (COST_CAP, bid_amount, `smart_promotion_type`, pacing, DSA/regional, promoted_object, targeting) e só mudar attribution se Rodolfo aprovar conscientemente um replacement não-fiel.
 - Sempre deletar/verificar campaign parcial quando o adset falha e a campaign não será reutilizada no próximo checkpoint.
 
 ## Script canônico
@@ -249,6 +249,8 @@ Clone fiel / source mirror       | espelhar a estrutura real da campanha source:
 Se a conta estiver sob gestão 100% Ares, o padrão oficial deve ser **Replacement Ares 1x3**; campanhas manuais existentes servem como fonte de performance/assets/aprendizado, não como estrutura obrigatória. Se Rodolfo pedir clone fiel de uma campanha manual, então a source decide quantidade de adsets, attribution, DSA, regional compliance, targeting e demais campos graváveis.
 
 Referência detalhada: `references/ares-standard-vs-source-mirror-2026-06-19.md`.
+
+Referência Elena UI→API/source mirror: `references/elena-ui-api-source-mirror-2026-06-19.md`.
 
 Correção anterior do Rodolfo: quando o pedido for clone fiel, priorizar **clone/source mirror** como os buyers/Ads Manager fazem, não criação from-zero genérica. Criação from-zero pode falhar para este usuário/token e só ser viável em outro contexto de System User; **não usar criação do zero genérica como prova, teste principal ou resposta operacional quando Rodolfo pedir clone fiel**.
 
