@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T11:42:40-04:00",
+    "updated_at": "2026-06-19T11:43:24-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -599,6 +599,19 @@
       "agent": "ares",
       "purpose": "Controlled Meta API asyncbatch/adset copy probe for Elena campaign clone; creates paused shallow copy and cleans up on failure/incomplete clone",
       "last_report": "probe controlado de clone Meta API asyncbatch/adset copy para campanha Elena solicitado por Rodolfo"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-creativeparam-probe.py",
+      "size_bytes": 9999,
+      "modified_at": "2026-06-19T11:41:11.650408-04:00",
+      "sha256": "e8d0aaa5e8b8644c9d17d47afae5c548ffdd78dcf1c71037caf47e4754a89bfd",
+      "agent": "ares",
+      "purpose": "Controlled Meta asyncbatch adset deep-copy probe with creative_parameters variants excluding deprecated standard_enhancements; paused shells cleaned unless success criteria pass",
+      "last_report": "probe controlado para testar clone Meta asyncbatch com creative_parameters sem standard_enhancements",
+      "evidence": {
+        "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/elena-asyncbatch-creativeparam-probe-20260619T154243Z.json",
+        "audit_sha256": "05762d5af1469afc987abfb3066b1c308e2c2137285897bc40a9203b40ddee86"
+      }
     }
   ],
   "skills_mgs": [
