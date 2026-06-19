@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T12:22:39-04:00",
+    "updated_at": "2026-06-19T12:52:35-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -86,6 +86,91 @@
     },
     {
       "entry": "41 3 * * * flock -n /var/lock/mgs_safety_backup.lock /root/mgs-agent/scripts/mgs-safety-backup.sh >> /root/mgs-agent/logs/mgs-safety-backup-cron.log 2>&1"
+    },
+    {
+      "profile": "ares",
+      "id": "aa9e01a5ec4a",
+      "name": "Ares Meta intraday R1-R5 dry-run",
+      "schedule": {
+        "kind": "interval",
+        "minutes": 30,
+        "display": "every 30m"
+      },
+      "script": "ares-meta-intraday-cron.sh",
+      "next_run_at": "2026-06-19T13:21:21.111884-04:00",
+      "enabled": true,
+      "state": "scheduled",
+      "no_agent": true,
+      "deliver": "discord:1516887105543077949",
+      "repeat": {
+        "times": null,
+        "completed": 47
+      },
+      "source": "/root/.hermes/profiles/ares/cron/jobs.json",
+      "last_report": "Rodolfo pediu para arrumar crons Meta pausados; auth-check Meta validou token/app atual OK",
+      "validated_at": "2026-06-19T12:52:35-04:00",
+      "validation": {
+        "auth_check_ok": true,
+        "auth_check_http_status": 200,
+        "account_id": "1356770869843984"
+      }
+    },
+    {
+      "profile": "ares",
+      "id": "c6c737070d3f",
+      "name": "Ares Meta reativar-todas dry-run",
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 18 * * *",
+        "display": "30 18 * * *"
+      },
+      "script": "ares-meta-reactivate-all-cron.sh",
+      "next_run_at": "2026-06-19T18:30:00-04:00",
+      "enabled": true,
+      "state": "scheduled",
+      "no_agent": true,
+      "deliver": "discord:1516887105543077949",
+      "repeat": {
+        "times": null,
+        "completed": 1
+      },
+      "source": "/root/.hermes/profiles/ares/cron/jobs.json",
+      "last_report": "Rodolfo pediu para arrumar crons Meta pausados; auth-check Meta validou token/app atual OK",
+      "validated_at": "2026-06-19T12:52:35-04:00",
+      "validation": {
+        "auth_check_ok": true,
+        "auth_check_http_status": 200,
+        "account_id": "1356770869843984"
+      },
+      "intended_local_time": "00:30 Europe/Madrid (stored as 18:30 America/New_York during EDT)"
+    },
+    {
+      "profile": "ares",
+      "id": "0598c0dc469f",
+      "name": "Ares Meta HOA gestor read-only 4d",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 2,6,9,12,16 * * *",
+        "display": "0 2,6,9,12,16 * * *"
+      },
+      "script": "ares-meta-hoa-manager.sh",
+      "next_run_at": "2026-06-19T16:00:00-04:00",
+      "enabled": true,
+      "state": "scheduled",
+      "no_agent": true,
+      "deliver": "discord:1516887105543077949",
+      "repeat": {
+        "times": 20,
+        "completed": 4
+      },
+      "source": "/root/.hermes/profiles/ares/cron/jobs.json",
+      "last_report": "Rodolfo pediu para arrumar crons Meta pausados; auth-check Meta validou token/app atual OK",
+      "validated_at": "2026-06-19T12:52:35-04:00",
+      "validation": {
+        "auth_check_ok": true,
+        "auth_check_http_status": 200,
+        "account_id": "1356770869843984"
+      }
     }
   ],
   "scripts": [
