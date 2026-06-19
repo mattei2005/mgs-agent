@@ -371,11 +371,132 @@
       },
       "error_user_msg": null,
       "error_user_title": null
+    },
+    {
+      "step": "2d_DSA_regional_compliance",
+      "action": "POST /adsets first only with DSA + regional_regulated_categories",
+      "created_at": "2026-06-19T01:50:43.013863+00:00",
+      "request_payload": {
+        "name": "Conjunto 02 - IMAGENS - RPL 20260620",
+        "campaign_id": "120248947698060604",
+        "status": "PAUSED",
+        "billing_event": "IMPRESSIONS",
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "optimization_sub_event": "NONE",
+        "destination_type": "MESSENGER",
+        "targeting": {
+          "age_max": 65,
+          "age_min": 18,
+          "age_range": [
+            18,
+            65
+          ],
+          "geo_locations": {
+            "countries": [
+              "ES"
+            ],
+            "location_types": [
+              "home",
+              "recent"
+            ]
+          },
+          "brand_safety_content_filter_levels": [
+            "FACEBOOK_RELAXED",
+            "AN_RELAXED"
+          ],
+          "targeting_automation": {
+            "advantage_audience": 1
+          }
+        },
+        "promoted_object": {
+          "pixel_id": "629060785934493",
+          "custom_event_type": "COMPLETE_REGISTRATION",
+          "page_id": "1063171606876651",
+          "smart_pse_enabled": false
+        },
+        "attribution_spec": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 7
+          },
+          {
+            "event_type": "VIEW_THROUGH",
+            "window_days": 1
+          }
+        ],
+        "start_time": "2026-06-19T23:00:00Z",
+        "bid_strategy": null,
+        "bid_amount": null,
+        "is_dynamic_creative": false,
+        "use_new_app_click": false,
+        "dsa_beneficiary": "Openzed",
+        "dsa_payor": "Openzed",
+        "regional_regulated_categories": [
+          "SPAIN_FINSERV",
+          "VOLUNTARY_VERIFICATION"
+        ]
+      },
+      "request_form_without_token": {
+        "name": "Conjunto 02 - IMAGENS - RPL 20260620",
+        "campaign_id": "120248947698060604",
+        "status": "PAUSED",
+        "billing_event": "IMPRESSIONS",
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "optimization_sub_event": "NONE",
+        "destination_type": "MESSENGER",
+        "targeting": "{\"age_max\": 65, \"age_min\": 18, \"age_range\": [18, 65], \"geo_locations\": {\"countries\": [\"ES\"], \"location_types\": [\"home\", \"recent\"]}, \"brand_safety_content_filter_levels\": [\"FACEBOOK_RELAXED\", \"AN_RELAXED\"], \"targeting_automation\": {\"advantage_audience\": 1}}",
+        "promoted_object": "{\"pixel_id\": \"629060785934493\", \"custom_event_type\": \"COMPLETE_REGISTRATION\", \"page_id\": \"1063171606876651\", \"smart_pse_enabled\": false}",
+        "attribution_spec": "[{\"event_type\": \"CLICK_THROUGH\", \"window_days\": 7}, {\"event_type\": \"VIEW_THROUGH\", \"window_days\": 1}]",
+        "start_time": "2026-06-19T23:00:00Z",
+        "is_dynamic_creative": "false",
+        "use_new_app_click": "false",
+        "dsa_beneficiary": "Openzed",
+        "dsa_payor": "Openzed",
+        "regional_regulated_categories": "[\"SPAIN_FINSERV\", \"VOLUNTARY_VERIFICATION\"]"
+      },
+      "post_status": 400,
+      "post_payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 1487202,
+        "fbtrace_id": "AEZDpJHVH4iGwiKQqUy6JZN"
+      },
+      "error_user_msg": null,
+      "error_user_title": null,
+      "raw_http_response": {
+        "status": 400,
+        "headers": {
+          "debug-link": "https://www.meta.com/debug/?mid=b9833711ad2b192a1e308b91bb3283b8",
+          "error-mid": "b9833711ad2b192a1e308b91bb3283b8",
+          "Vary": "Accept-Encoding",
+          "x-business-use-case-usage": "{\"1356770869843984\":[{\"type\":\"ads_management\",\"call_count\":1,\"total_cputime\":6,\"total_time\":9,\"estimated_time_to_regain_access\":0,\"ads_api_access_tier\":\"development_access\"}]}",
+          "Content-Type": "text/javascript; charset=UTF-8",
+          "WWW-Authenticate": "OAuth \"Facebook Platform\" \"invalid_request\" \"Invalid parameter\"",
+          "Access-Control-Allow-Origin": "*",
+          "facebook-api-version": "v25.0",
+          "Strict-Transport-Security": "max-age=15552000; preload",
+          "Pragma": "no-cache",
+          "Cache-Control": "no-store",
+          "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+          "x-fb-request-id": "AEZDpJHVH4iGwiKQqUy6JZN",
+          "x-fb-trace-id": "G0qIp4RhHV+",
+          "x-fb-rev": "1041769153",
+          "X-FB-Debug": "ggcn4ffqI+Dq6WZjfGv/yozpRbh+ISctD1jTvGeqv0rbssBuSc55fcHvhj90in5viT5HPa+tOvGjFhBk/N1o0g==",
+          "Date": "Fri, 19 Jun 2026 01:50:42 GMT",
+          "Proxy-Status": "http_request_error; e_proxy=\"AcTGRCZdHbBkTsoB3pQc3Q-c9UiKHkkhZx7FllYNXDCcHa9MhcSzLA6ueeOYeQMhtPxWzrShSnjy-BR-_1Wwdw\"; e_fb_twtaskhandle=\"AcTk_b8c2hx1HyIjNzFEXxDoQJcd-XY3gB71L9Y41EWjTf4HRNI_8zgC7cD2Fqf8m2KCUvoBFBLZpNqA1oGqa8PlC6W4iltkj8rHUQymBUZLxtk\"; e_upip=\"AcTC6OBSmeLCOESa7L--JnOTNt8jzMeIr851T1-JFE9IHPEMPGMQW2toos49Q3j2W-XCZ0iEQal033svsceyZrLGbEbHY8pDlUulZ-c1bYM\"; e_fb_zone=\"AcQuHsl7j4Anhod9DOCBhflhouabV6x5ZjWi2sDUlFFPhfPmBjYz3wp2KTqrr5AV\"; e_clientaddr=\"AcQkPAMmK9XkhWZF6wWokAUnyM_ndHBMr4Mn67q4XaPzbhPp832UDAPZtvDUfl6o86uKGFCl2b03vCFoSJoUXDpitNgrwxon8Q0sJZ_rqgx-UfmGegO6HA\"; e_fb_vipaddr=\"AcSvmX5XLPA9yVd9cgiyyPRTNJKumiAZLn3YqPddpJSCrya37mri5FpOA6ELXIwqEIqyAIZzuSqqEM_49kIaDFplXv4OBpJsfyG8bg\", http_request_error; e_proxy=\"AcTOCFyX2lz2fyDeK69kO7KE2AQumxjtx0oa1SmKZUg8sai6_ETCUFxWgmj-lq6dKf4P7DGBa5JjIiPYaCE\"; e_fb_twtaskhandle=\"AcSSjHY1GPabWWvpXXURy-y3aSe8ykZ9XEKLTZE9IeQvsv4_RjbapVPv71ThRHpUxcezyhDlSyt56YE-ZAKZ0nwlA_8ualjHwotn4xoed1LAlg\"; e_upip=\"AcTSZZH0h-OIZEkMrBBBtWWmQAr3JSZjmCiv_VU906wmxJG8Oh6vVYjHDB_dlEKT4gTb1cjsDH71jkNP4wL4tDk4NaCuLp7zyKsZFg\"; e_fb_zone=\"AcTUVYriLC83FRKqZteYDyY1kJcwdqG98Yo0xB8GG0LsLT95gdNOOyK8G9fO4ap9\"; e_clientaddr=\"AcQdZzw_tPyA-wRL4JVPTXtkjyApldg4WJtvHESnLmRfsxyR96oLlQI47zcuByv0Ak7EUgFjnKNDjg4smktuM3UJQ8rwx6HRm3jz34itO_4GbUn_PQ\"; e_fb_vipaddr=\"AcQ7E7e0AhteEDlN_t8uHKS5qEgGQi8JK_dF8P-oMiE3zTarT7A3HrhVJXpTuHjxAvBtX88sk5bBJuBo6FG0aAtXmrpfxdygzMMq\", http_request_error; e_proxy=\"AcSfiXTDPbe8s0p68A82lJP-UqmkAJoXFzFj68OqGWLEyM3p_IPNUSFMZiacRm--ycUP2FtuK4CnP3c\"; e_fb_twtaskhandle=\"AcSJWLX_Dxh1vIG-IAxKetLOngKvG-aZsocTVBcWct9dL5Bd-etm3AEdbDHNGPLQrzNO8RxMYKF9OtAqN883zL472Ms63zv4cwfD9A\"; e_upip=\"AcTHivvHTkacno4Weq2t9vN0nRj-Vi3s_IA1IZT2HOx30lO-lWbDMcxouhU8dE0gA8duCNpAXGEkF_jY9HPKzVeE6tZDT4sERl6F\"; e_fb_zone=\"AcTmo4UouC3RSQX40srU6tZitSfKDBIyKu5fPMZB_t1ddq9jp6FCNjhXZZP5-w\"; e_clientaddr=\"AcRd4AtTV4v9E4hZHWHzh5LI_nBjz3UiOultSjDHzsRNLuHQr4C2Y4yFp3bi3PbqfpVQiozEUm68vdjbD3LMPQnTdMg5Cg\"; e_fb_vipaddr=\"AcQ3XgBoqemrHEIw92ibS2rZjWfR650dZ9QXn-vA0_vgV1Zu1BCUdiyBzTNvBZMrsqsKzCcd-QeYWLHVdGYgO32c_FOi8DSqyw\"",
+          "X-FB-Connection-Quality": "EXCELLENT; q=0.9, rtt=11, rtx=0, c=10, mss=1380, tbw=3470, tp=-1, tpl=-1, uplat=818, ullat=0",
+          "Alt-Svc": "h3=\":443\"; ma=86400",
+          "Connection": "close",
+          "Content-Length": "582"
+        },
+        "raw_body": "{\"error\":{\"message\":\"Invalid parameter\",\"type\":\"OAuthException\",\"code\":100,\"error_subcode\":1487202,\"is_transient\":false,\"error_user_title\":\"El permiso de la p\\u00e1gina es insuficiente para publicar anuncios\",\"error_user_msg\":\"Necesitas acceso para crear anuncios para esta P\\u00e1gina. Env\\u00eda una solicitud de acceso a alguien con control total de la p\\u00e1gina, o selecciona una p\\u00e1gina diferente si est\\u00e1 disponible. M\\u00e1s informaci\\u00f3n en https:\\/\\/www.facebook.com\\/business\\/help\\/183277585892925?id=420299598837059\",\"fbtrace_id\":\"AEZDpJHVH4iGwiKQqUy6JZN\"}}"
+      }
     }
   ],
   "created": {
     "campaign_id": "120248947698060604"
   },
   "payloads_from_dry_run": "/root/mgs-agent/data/ares/meta-ads/audit/clone/clone-source-dry-run-patricia-1-20260618T224851Z.json",
-  "status": "stopped_step_2c_failed"
+  "status": "stopped_step_2d_failed"
 }
