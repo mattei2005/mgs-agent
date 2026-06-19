@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-18T18:32:42.819646-04:00",
+    "updated_at": "2026-06-18T21:46:48-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -579,6 +579,15 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-source-mirror.py",
+      "size_bytes": 21951,
+      "modified_at": "2026-06-18T21:43:35.292210-04:00",
+      "sha256": "d64f6b8a867bc03d8f996a768463d75ad7ee90a8f298858f6162362593d1f8bd",
+      "agent": "ares",
+      "purpose": "Read-only Meta source mirror diagnostics for clone EU/financial DSA compliance and source-vs-payload diff",
+      "last_report": "diagnóstico read-only source mirror para clone Meta EU/financeiro com DSA/compliance e diff source-vs-payload"
     }
   ],
   "skills_mgs": [
@@ -2990,6 +2999,16 @@
       "size_bytes": 43510,
       "md5": "313356aeb86d41db526f68507a56ec4e",
       "modified_at": "2026-06-16T19:23:39-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/source-mirror-120248290297180604-20260619T014543Z.json",
+      "size_bytes": 214193,
+      "md5": "f6a411696b1e08f5e836e2a313f2b43e",
+      "modified_at": "2026-06-18T21:45:43.309143-04:00",
+      "sha256": "c43c65cb53de3407b0725f529f242763e0c5566ef644ebf16b60e668af6d6061",
+      "agent": "ares",
+      "purpose": "Audit artifact for Meta clone source mirror 120248290297180604",
+      "last_report": "source mirror 20260619T014543Z for clone diagnostics"
     }
   ],
   "mu_plugin_canonical": {
