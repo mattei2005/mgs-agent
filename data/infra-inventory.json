@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T11:15:38-04:00",
+    "updated_at": "2026-06-19T11:27:09-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -3333,11 +3333,11 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/SKILL.md",
-      "size_bytes": 34878,
-      "sha256": "aad40b66dfa966f15a9c9668a0e64cb69e46d6a79908256c98dafe1a53e6e714",
+      "size_bytes": 36088,
+      "sha256": "7b4b126dc4c45b18251fd6f7c8a38c0c8c36ceefebf7e93cbd0c46c3b2eac465",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:15:38-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; provider policy GPT/OpenAI default, Grok/xAI only explicit/authorized"
+      "updated_at": "2026-06-19T11:27:09-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
     },
     {
       "profile": "hera",
@@ -3350,6 +3350,78 @@
       "runtime_versioned_sha_match": true,
       "updated_at": "2026-06-19T11:15:38-04:00",
       "validation": "runtime/versioned SHA match; secret scan negative; provider policy GPT/OpenAI default, Grok/xAI only explicit/authorized"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/verticals/CAR.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/verticals/CAR.md",
+      "size_bytes": 5622,
+      "sha256": "cef84eb5de333bf415d5c4049b4548a12d51c8a614511c45496f2ff0b658652b",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:27:09-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/verticals/CC.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/verticals/CC.md",
+      "size_bytes": 3215,
+      "sha256": "9148668a2d1cd37fd72c34ddfbd0dcfa85690183efd53f31d8d927d039e05b95",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:27:09-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/verticals/GAME.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/verticals/GAME.md",
+      "size_bytes": 3105,
+      "sha256": "edeb3a31eaaf56af231b508f4f96d2b4b14d198bdcd1adc798b7ce83032cac10",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:27:09-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/formats/video.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/formats/video.md",
+      "size_bytes": 3523,
+      "sha256": "9f4752c2c1be555d0e4e2a52895dfb9acb55074cb1f0f3ba4f8aecf003d62b5f",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:27:09-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/formats/image.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/formats/image.md",
+      "size_bytes": 2220,
+      "sha256": "7504f1b17cc175b859d6f876cc93dd116c73c9234ea0f190136f8efbb99f5c65",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:27:09-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/continuous-learning.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/continuous-learning.md",
+      "size_bytes": 2999,
+      "sha256": "e3fc7d5214a0be25c11b6a61364b3696f90a2e54a0a0d00a6000bf0162432faa",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:27:09-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
     }
   ]
 }
