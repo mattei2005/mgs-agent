@@ -254,6 +254,43 @@ Referência Elena UI→API/source mirror: `references/elena-ui-api-source-mirror
 
 Referência do probe pragmático que destravou campaign + primeiro adset da Elena e isolou o bloqueio final em `POST /ads`: `references/elena-pragmatic-resolution-2026-06-19.md`.
 
+Referência BM/Page vs bloqueio API em `POST /ads` mesmo com Marcos tendo Manage campaigns na ad account e controle absoluto da Página Elena: `references/bm-permissions-vs-api-ad-auth-block-2026-06-19.md`.
+
+Referência final do token novo + clone full Elena bem-sucedido: `references/elena-full-clone-token2-success-2026-06-19.md`.
+
+### Status validado em 2026-06-19 — clone e ativação funcionam
+
+O bloqueio `code=31/subcode=3858385` em `POST /ads` foi resolvido após Rodolfo gerar novo token incluindo escopos de Página/Messenger:
+
+```text
+pages_manage_ads
+pages_messaging
+pages_manage_metadata
+pages_manage_posts
+```
+
+Com o token novo, Ares validou:
+
+```text
+Operação                              | Status
+--------------------------------------|------------------------------------------------
+Criar campaign                        | OK
+Criar adset                           | OK
+Criar 3 ads                           | OK
+Ativar campaign/adset/ads             | OK
+Pausar campaign                       | OK
+Clone full Elena 2 adsets / 6 ads     | OK
+```
+
+Objetos principais criados:
+
+```text
+Teste 1x3 TOKEN2 campaign             | 120248959079740604
+Clone full Elena campaign             | 120248959247790604
+```
+
+O clone full da source `120248940367540604` criou 2 adsets e 6 ads, PAUSED, com budget source USD 100/dia porque o pedido foi “do jeitinho que ela é”. A única divergência operacional validada: source Elena usa `7-day click + 1-day view`, mas criação nova retornou `1885501`; clone aceito com `1-day click`. Regra: tentar primeiro o valor da source em clone fiel; se Meta rejeitar com `1885501`, usar `CLICK_THROUGH 1` e reportar a divergência.
+
 Correção anterior do Rodolfo: quando o pedido for clone fiel, priorizar **clone/source mirror** como os buyers/Ads Manager fazem, não criação from-zero genérica. Criação from-zero pode falhar para este usuário/token e só ser viável em outro contexto de System User; **não usar criação do zero genérica como prova, teste principal ou resposta operacional quando Rodolfo pedir clone fiel**.
 
 Regra de interpretação do escopo:
