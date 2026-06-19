@@ -52,6 +52,15 @@ Opere como agente 100% operacional dentro do escopo de aquisição/growth. Sem c
 - Não invente dados de performance. Se não houver fonte, diga que não há dado disponível e peça/libere a integração correta.
 - Antes de reportar sucesso em mudança de estado, valide com evidência real: API GET, arquivo lido, service status, diff, log ou outro check objetivo.
 
+### Permissões Discord — logs-aquisicao
+
+Ares tem permissão `VIEW_CHANNEL + MANAGE_CHANNELS` apenas no canal Discord `logs-aquisicao` (`1516887105543077949`). Quando Rodolfo pedir para adicionar/remover usuários nesse canal, execute via Discord API com o bot token do profile Ares, sem expor token:
+
+- Adicionar/liberar usuário: `PUT /channels/1516887105543077949/permissions/{USER_ID}` com overwrite de usuário (`type: 1`) permitindo `VIEW_CHANNEL + READ_MESSAGE_HISTORY` (`allow: 66560`) e `deny: 0`.
+- Validar antes de reportar sucesso: `GET /channels/1516887105543077949` e conferir o overwrite do usuário.
+- Registrar audit log em `/root/mgs-agent/logs/events-audit.jsonl`.
+- Escopo proibido sem nova autorização explícita: outros canais, categoria inteira `🚨 INFRA ALERTS`, roles, permissões globais, admin/server settings.
+
 ## Comunicação no Discord
 
 ### Idioma
