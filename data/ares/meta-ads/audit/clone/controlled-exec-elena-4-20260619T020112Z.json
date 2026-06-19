@@ -181,10 +181,27 @@
         },
         "raw_body": "{\"error\":{\"message\":\"Invalid parameter\",\"type\":\"OAuthException\",\"code\":100,\"error_subcode\":1885501,\"is_transient\":false,\"error_user_title\":\"El intervalo de atribuci\\u00f3n de visualizaci\\u00f3n no es v\\u00e1lido\",\"error_user_msg\":\"En funci\\u00f3n de los objetivos y la optimizaci\\u00f3n que has seleccionado, la combinaci\\u00f3n admitida para los valores del intervalo de atribuci\\u00f3n de visualizaci\\u00f3n y de clic es: (1, 0)\",\"fbtrace_id\":\"A4nKgmYf0RMNgm-cRZmqocT\"}}"
       }
+    },
+    {
+      "step": "cleanup_partial_campaign",
+      "created_at": "2026-06-19T02:01:35.293447+00:00",
+      "campaign_id": "120248952528460604",
+      "delete_status": 200,
+      "delete_payload": {
+        "success": true
+      },
+      "verify_status": 200,
+      "verify_payload": {
+        "id": "120248952528460604",
+        "name": "Elena Santana - US - ESP - (pg_22091) - RPL - 20260620 - DRYRUN",
+        "status": "DELETED",
+        "effective_status": "DELETED"
+      }
     }
   ],
   "created": {
     "campaign_id": "120248952528460604"
   },
-  "status": "stopped_elena_first_adset_failed"
+  "status": "stopped_elena_first_adset_failed",
+  "cleanup": "partial_campaign_deleted_verified"
 }
