@@ -107,6 +107,43 @@ def fmt_account_title(account_name: str, tz: ZoneInfo, label: str) -> str:
     return f'{account_name} — {now.strftime("%Y-%m-%d")} — {now.strftime("%H:%M %Z")} — {label}'
 
 
+def recommendation_id(tz: ZoneInfo, seq: int) -> str:
+    now = utc_now().astimezone(tz)
+    return f'REC-{now.strftime("%Y%m%d-%H%M")}-{seq:02d}'
+
+
+def management_scope(op_cfg: dict) -> dict:
+    return op_cfg.get('management_scope') or {}
+
+
+def manual_hold_pg_ids(op_cfg: dict) -> set[str]:
+    scope = management_scope(op_cfg)
+    return {str(x.get('pg_id')) for x in (scope.get('manual_holds') or []) if x.get('pg_id')}
+
+
+def active_focus_pg_ids(op_cfg: dict) -> set[str]:
+    scope = management_scope(op_cfg)
+    return {str(x.get('pg_id')) for x in (scope.get('active_focus') or []) if x.get('pg_id')}
+
+
+def simulated_action_label(action: str | None) -> str:
+    mapping = {
+        'pause_campaign': 'eu pausaria',
+        'reactivate_campaign': 'eu reativaria',
+        'replace_campaign': 'eu substituiria',
+    }
+    return mapping.get(str(action or ''), f'eu faria {action}' if action else 'avaliar')
+
+
+def is_in_management_scope(op_cfg: dict, pg_id: str) -> tuple[bool, str | None]:
+    if pg_id in manual_hold_pg_ids(op_cfg):
+        return False, 'manual_hold'
+    focus = active_focus_pg_ids(op_cfg)
+    if focus and pg_id not in focus:
+        return False, 'outside_active_focus'
+    return True, None
+
+
 def rule_display(rule: dict) -> str:
     rid = str(rule.get('id') or '').upper()
     desc = str(rule.get('description') or '').strip()
@@ -304,13 +341,22 @@ def run_intraday(args) -> int:
                     continue
                 if match:
                     campaign_name = campaign.get('name') or row.get('campaign_name')
+                    pg_id = page_id_from_name(campaign_name)
+                    in_scope, scope_reason = is_in_management_scope(op_cfg, pg_id)
+                    if not in_scope:
+                        event.setdefault('skipped_scope', []).append({'campaign_id': cid, 'campaign_name': campaign_name, 'pg_id': pg_id, 'reason': scope_reason})
+                        break
+                    seq = len(event['candidates']) + 1
                     event['candidates'].append({
-                        'pg_id': page_id_from_name(campaign_name),
+                        'rec_id': recommendation_id(tz, seq),
+                        'pg_id': pg_id,
                         'page_name': page_name_from_campaign(campaign_name),
                         'country_vertical': country_vertical_from_name(campaign_name, op_cfg),
                         'rule': rule_display(rule),
                         'status': campaign.get('effective_status'),
                         'action': rule.get('action'),
+                        'simulated_action': simulated_action_label(rule.get('action')),
+                        'reason': rule_display(rule),
                         'campaign_id': cid,
                         'campaign_name': campaign_name,
                         'bid_strategy': campaign.get('bid_strategy') or 'UNKNOWN',
@@ -331,7 +377,8 @@ def run_intraday(args) -> int:
         rows = event['candidates']
         for r in rows:
             r['CPMO'] = '' if r['CPMO'] is None else r['CPMO']
-        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — dry-run'), rows, [('pg_id','PG ID'),('page_name','Nome da página'),('country_vertical','País/Vertical'),('rule','Regra usada'),('status','Status')], prefix='<@344196393512075265> dry-run intraday encontrou ações candidatas. Nenhum write foi executado.'))
+        prefix = '<@344196393512075265> dry-run intraday: ações simuladas. Responda na thread com `REC... feito`, `ignorar` ou `segurar`. Nenhum write foi executado.'
+        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — decisões simuladas'), rows, [('rec_id','ID'),('pg_id','PG ID'),('page_name','Nome da página'),('simulated_action','Ação sugerida'),('reason','Motivo'),('status','Status')], prefix=prefix))
     return 0
 
 
@@ -355,20 +402,27 @@ def run_reactivate_all(args) -> int:
     try:
         account_name = fetch_account_name(common, token, args.account_id)
         campaigns = fetch_campaigns(common, token, args.account_id)
-        exclusions = set(op_cfg.get('reactivate_exclusion_list') or [])
+        exclusions = set(op_cfg.get('reactivate_exclusion_list') or []) | manual_hold_pg_ids(op_cfg)
         for campaign in campaigns.values():
             if campaign.get('effective_status') != 'PAUSED':
                 continue
-            if campaign.get('id') in exclusions or campaign.get('name') in exclusions:
-                continue
             campaign_name = campaign.get('name')
+            pg_id = page_id_from_name(campaign_name)
+            in_scope, scope_reason = is_in_management_scope(op_cfg, pg_id)
+            if campaign.get('id') in exclusions or campaign.get('name') in exclusions or pg_id in exclusions or not in_scope:
+                event.setdefault('skipped_scope', []).append({'campaign_id': campaign.get('id'), 'campaign_name': campaign_name, 'pg_id': pg_id, 'reason': 'manual_hold_or_exclusion' if pg_id in exclusions else scope_reason})
+                continue
+            seq = len(event['candidates']) + 1
             event['candidates'].append({
-                'pg_id': page_id_from_name(campaign_name),
+                'rec_id': recommendation_id(ZoneInfo(args.account_tz or 'Europe/Madrid'), seq),
+                'pg_id': pg_id,
                 'page_name': page_name_from_campaign(campaign_name),
                 'country_vertical': country_vertical_from_name(campaign_name, op_cfg),
                 'rule': 'reativar-todas',
+                'reason': 'campanha pausada dentro do escopo; simularia reativação',
                 'status': campaign.get('effective_status'),
                 'action': 'reactivate_campaign',
+                'simulated_action': simulated_action_label('reactivate_campaign'),
                 'campaign_id': campaign.get('id'),
                 'campaign_name': campaign_name,
                 'mode': 'dry_run_no_write',
@@ -381,7 +435,8 @@ def run_reactivate_all(args) -> int:
         print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — ERRO'), [{'erro': event['errors'][0], 'audit': str(audit)}], [('erro','Erro'),('audit','Audit')], prefix='<@344196393512075265> erro no cron reativar-todas Meta.'))
         return 0
     if event['candidates']:
-        print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — dry-run'), event['candidates'], [('pg_id','PG ID'),('page_name','Nome da página'),('country_vertical','País/Vertical'),('rule','Regra usada'),('status','Status')], prefix='<@344196393512075265> dry-run reativar-todas encontrou campanhas pausadas. Nenhum write foi executado.'))
+        prefix = '<@344196393512075265> dry-run reativar-todas: ações simuladas. Responda na thread com `REC... feito`, `ignorar` ou `segurar`. Nenhum write foi executado.'
+        print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — decisões simuladas'), event['candidates'], [('rec_id','ID'),('pg_id','PG ID'),('page_name','Nome da página'),('simulated_action','Ação sugerida'),('reason','Motivo'),('status','Status')], prefix=prefix))
     return 0
 
 

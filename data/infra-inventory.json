@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T12:52:35-04:00",
+    "updated_at": "2026-06-19T14:28:13-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -97,22 +97,23 @@
         "display": "every 30m"
       },
       "script": "ares-meta-intraday-cron.sh",
-      "next_run_at": "2026-06-19T13:21:21.111884-04:00",
+      "next_run_at": "2026-06-19T14:54:17.224559-04:00",
       "enabled": true,
       "state": "scheduled",
       "no_agent": true,
       "deliver": "discord:1516887105543077949",
       "repeat": {
         "times": null,
-        "completed": 47
+        "completed": 50
       },
       "source": "/root/.hermes/profiles/ares/cron/jobs.json",
-      "last_report": "Rodolfo pediu para arrumar crons Meta pausados; auth-check Meta validou token/app atual OK",
-      "validated_at": "2026-06-19T12:52:35-04:00",
+      "last_report": "crons Meta em fase read-only/dry-run com decisões simuladas; jobs enabled=true/state=scheduled",
+      "validated_at": "2026-06-19T14:28:13-04:00",
       "validation": {
-        "auth_check_ok": true,
-        "auth_check_http_status": 200,
-        "account_id": "1356770869843984"
+        "py_compile": "OK",
+        "json_tool": "OK",
+        "wrappers_local_execution": "OK",
+        "all_writes_disabled_by_policy": true
       }
     },
     {
@@ -135,12 +136,13 @@
         "completed": 1
       },
       "source": "/root/.hermes/profiles/ares/cron/jobs.json",
-      "last_report": "Rodolfo pediu para arrumar crons Meta pausados; auth-check Meta validou token/app atual OK",
-      "validated_at": "2026-06-19T12:52:35-04:00",
+      "last_report": "crons Meta em fase read-only/dry-run com decisões simuladas; jobs enabled=true/state=scheduled",
+      "validated_at": "2026-06-19T14:28:13-04:00",
       "validation": {
-        "auth_check_ok": true,
-        "auth_check_http_status": 200,
-        "account_id": "1356770869843984"
+        "py_compile": "OK",
+        "json_tool": "OK",
+        "wrappers_local_execution": "OK",
+        "all_writes_disabled_by_policy": true
       },
       "intended_local_time": "00:30 Europe/Madrid (stored as 18:30 America/New_York during EDT)"
     },
@@ -164,12 +166,13 @@
         "completed": 4
       },
       "source": "/root/.hermes/profiles/ares/cron/jobs.json",
-      "last_report": "Rodolfo pediu para arrumar crons Meta pausados; auth-check Meta validou token/app atual OK",
-      "validated_at": "2026-06-19T12:52:35-04:00",
+      "last_report": "crons Meta em fase read-only/dry-run com decisões simuladas; jobs enabled=true/state=scheduled",
+      "validated_at": "2026-06-19T14:28:13-04:00",
       "validation": {
-        "auth_check_ok": true,
-        "auth_check_http_status": 200,
-        "account_id": "1356770869843984"
+        "py_compile": "OK",
+        "json_tool": "OK",
+        "wrappers_local_execution": "OK",
+        "all_writes_disabled_by_policy": true
       }
     }
   ],
@@ -232,8 +235,12 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
-      "size_bytes": 17170,
-      "modified_at": "2026-06-17T16:06:55-04:00"
+      "size_bytes": 19910,
+      "modified_at": "2026-06-19T14:25:49.813838-04:00",
+      "sha256": "93c730db348092a29857590bc5de7f4c7c6178202e1ce89a248bc5492bde9412",
+      "agent": "ares",
+      "purpose": "Ares Meta cron runner read-only/dry-run simulated decisions for intraday/reactivate-all with REC IDs, scoped focus and manual holds",
+      "last_report": "ajustar crons Meta para fase read-only/dry-run com decisões simuladas, IDs REC, foco Elena pg_22091 e hold Patricia pg_22069"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-fetch-campaigns.py",
@@ -242,8 +249,12 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
-      "size_bytes": 13930,
-      "modified_at": "2026-06-17T23:43:03-04:00"
+      "size_bytes": 15930,
+      "modified_at": "2026-06-19T14:25:49.813838-04:00",
+      "sha256": "92b296d366786b97d46ff6911f79f7b105f8cfeadddc8e538482c636d5120c37",
+      "agent": "ares",
+      "purpose": "Ares Meta HOA manager read-only/dry-run simulated decisions with REC IDs, Elena pg_22091 focus and Patricia pg_22069 manual hold",
+      "last_report": "ajustar crons Meta para fase read-only/dry-run com decisões simuladas, IDs REC, foco Elena pg_22091 e hold Patricia pg_22069"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
@@ -3223,6 +3234,26 @@
       "agent": "ares",
       "type": "meta_ads_audit",
       "purpose": "Auditoria de probes Meta API clone Elena solicitados por Rodolfo; campanhas temporárias deletadas/verificadas quando criadas; nenhum token exposto"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json",
+      "size_bytes": 6207,
+      "md5": "fb1c2512438a48fb954d67e170adccb3",
+      "modified_at": "2026-06-19T14:24:56.493783-04:00",
+      "sha256": "c22511ed0c755376c941837b6bb58181a34bf593d7d950006eba7970483d9615",
+      "agent": "ares",
+      "type": "meta_ads_operation_policy",
+      "purpose": "Meta OpenzedFinanzas CC ES read-only/dry-run operation/policy with simulated decisions, REC IDs, Elena pg_22091 active focus and Patricia pg_22069 manual hold"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v1.json",
+      "size_bytes": 4350,
+      "md5": "6e9b9c21b2eca6ee317d61e17c4ee316",
+      "modified_at": "2026-06-19T14:24:56.494783-04:00",
+      "sha256": "94557551cd58b0e4cfe94737d0ac2e13f773720318cdd2b2f0de83eafca815e3",
+      "agent": "ares",
+      "type": "meta_ads_operation_policy",
+      "purpose": "Meta OpenzedFinanzas CC ES read-only/dry-run operation/policy with simulated decisions, REC IDs, Elena pg_22091 active focus and Patricia pg_22069 manual hold"
     }
   ],
   "mu_plugin_canonical": {

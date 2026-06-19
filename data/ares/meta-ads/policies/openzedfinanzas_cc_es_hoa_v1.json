@@ -87,7 +87,7 @@
     "target_cpmo_usd": 2.0,
     "instruction": "CPMO alvo fixado por Rodolfo; Ares deve otimizar para conseguir USD 2.00"
   },
-  "updated_at": "2026-06-18T04:02:54.683294+00:00",
+  "updated_at": "2026-06-19T17:30:00-04:00",
   "campaign_naming": {
     "replacement_pattern": "<Nome página> - <País> - <Idioma> - (<pg_id>) - RPL - <YYYYMMDD> - <seq>",
     "example": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - 01",
@@ -96,5 +96,25 @@
       "YYYYMMDD é data de início no timezone da conta",
       "seq começa em 01"
     ]
+  },
+  "management_scope": {
+    "read_scope": "entire_account",
+    "reporting_mode": "simulated_decisions_read_only",
+    "write_enabled": false,
+    "active_focus": [
+      {
+        "pg_id": "pg_22091",
+        "page_name": "Elena Santana",
+        "reason": "current active page/campaign set under observation"
+      }
+    ],
+    "manual_holds": [
+      {
+        "pg_id": "pg_22069",
+        "page_name": "Patricia Flores",
+        "reason": "paused manually/by manager due page saturation; do not recommend reactivation unless Rodolfo clears hold"
+      }
+    ],
+    "decision_response_channel_policy": "Rodolfo replies in the report thread with feito/ignorar/segurar/nao mexer; Ares validates by API on next read"
   }
 }

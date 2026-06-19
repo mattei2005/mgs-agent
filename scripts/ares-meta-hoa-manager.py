@@ -64,6 +64,39 @@ def country_vertical_from_name(name: str | None, op_cfg: dict) -> str:
     return f'{country} / {vertical}' if country else vertical
 
 
+def recommendation_id(now_local: datetime, seq: int) -> str:
+    return f'REC-{now_local.strftime("%Y%m%d-%H%M")}-{seq:02d}'
+
+
+def simulated_action_for_hoa(replacement: bool, today_bad: bool, pacing: str) -> str:
+    if replacement and pacing != 'melhorando':
+        return 'eu substituiria'
+    if today_bad:
+        return 'eu pausaria/seguraria'
+    return 'eu manteria em observação'
+
+
+def management_scope(op_cfg: dict) -> dict:
+    return op_cfg.get('management_scope') or {}
+
+
+def manual_hold_pg_ids(op_cfg: dict) -> set[str]:
+    return {str(x.get('pg_id')) for x in (management_scope(op_cfg).get('manual_holds') or []) if x.get('pg_id')}
+
+
+def active_focus_pg_ids(op_cfg: dict) -> set[str]:
+    return {str(x.get('pg_id')) for x in (management_scope(op_cfg).get('active_focus') or []) if x.get('pg_id')}
+
+
+def is_in_management_scope(op_cfg: dict, pg_id: str) -> tuple[bool, str | None]:
+    if pg_id in manual_hold_pg_ids(op_cfg):
+        return False, 'manual_hold'
+    focus = active_focus_pg_ids(op_cfg)
+    if focus and pg_id not in focus:
+        return False, 'outside_active_focus'
+    return True, None
+
+
 def mo_from_actions(actions) -> float:
     total = 0.0
     for a in actions or []:
@@ -273,13 +306,27 @@ def main() -> int:
         replacement = bad_complete >= 2
         watch = replacement or today_bad or (weighted_cpmo is not None and weighted_cpmo > cpmo_target)
         if watch:
+            pg_id = page_id_from_name(cname)
+            in_scope, scope_reason = is_in_management_scope(op_cfg, pg_id)
+            if not in_scope:
+                snapshot_campaigns[cid] = {
+                    'campaign_name': cname,
+                    'today': today_m,
+                    'weighted_CPMO': weighted_cpmo,
+                    'bad_complete_days': bad_complete,
+                    'pacing': pacing,
+                    'scope_skip': scope_reason,
+                }
+                continue
             status = 'replacement candidate' if replacement and pacing != 'melhorando' else ('hold: pacing melhora' if replacement else 'watchlist')
             reasons = []
             if y_bad: reasons.append(f'D-1 {y_reason}')
             if d2_bad: reasons.append(f'D-2 {d2_reason}')
             if today_bad: reasons.append(f'hoje {today_reason}')
+            seq = len(watch_rows) + 1
             watch_rows.append({
-                'pg_id': page_id_from_name(cname),
+                'rec_id': recommendation_id(now_local, seq),
+                'pg_id': pg_id,
                 'page_name': page_name_from_campaign(cname),
                 'campaign': cname,
                 'hoa_cpmo': fmt_money(weighted_cpmo),
@@ -287,6 +334,7 @@ def main() -> int:
                 'bad_days': f'{bad_complete}/2 completos',
                 'pacing': pacing,
                 'status': status,
+                'suggested_action': simulated_action_for_hoa(replacement, today_bad, pacing),
                 'reason': '; '.join(reasons) or 'HOA acima alvo',
             })
         snapshot_campaigns[cid] = {
@@ -332,12 +380,12 @@ def main() -> int:
     if not rows and not args.always_output and not is_final:
         return 0
     if not rows and is_final:
-        rows = [{'pg_id':'-', 'page_name':'-', 'hoa_cpmo':'-', 'target':fmt_money(cpmo_target), 'bad_days':'0/2 completos', 'pacing':'sem watchlist', 'status': budget_status}]
+        rows = [{'rec_id':'-', 'pg_id':'-', 'page_name':'-', 'suggested_action':'nenhuma ação', 'reason':'sem watchlist', 'hoa_cpmo':'-', 'target':fmt_money(cpmo_target), 'bad_days':'0/2 completos', 'pacing':'sem watchlist', 'status': budget_status}]
     print(output_table(
         title,
         rows,
-        [('pg_id','PG ID'),('page_name','Nome da página'),('hoa_cpmo','HOA CPMO'),('target','Alvo'),('bad_days','Dias ruins'),('pacing','Pacing'),('status','Status')],
-        prefix='<@344196393512075265> HOA checkpoint read-only. Nenhum write foi executado.'
+        [('rec_id','ID'),('pg_id','PG ID'),('page_name','Nome da página'),('suggested_action','Ação sugerida'),('reason','Motivo'),('hoa_cpmo','HOA CPMO'),('target','Alvo'),('status','Status')],
+        prefix='<@344196393512075265> HOA checkpoint read-only: decisões simuladas. Responda na thread com `REC... feito`, `ignorar` ou `segurar`. Nenhum write foi executado.'
     ))
     return 0
 
