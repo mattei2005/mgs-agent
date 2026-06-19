@@ -122,6 +122,49 @@ Falha `100/1487202`                        | Tratar como campo/regra compliance 
 ```
 
 Detalhe de sessão DSA/1487202: `references/eu-dsa-adset-diagnostic-2026-06-19.md`.
+Detalhe source mirror EU/financeiro, page permission e attribution blockers: `references/eu-finserv-source-mirror-and-adset-errors-2026-06-19.md`.
+
+## Source mirror obrigatório antes de writes EU/financeiro
+
+Antes de qualquer `POST /campaigns`, `/adsets`, `/adcreatives` ou `/ads` em campanhas EU/financeiro, rodar o mirror read-only:
+
+```bash
+/root/mgs-agent/scripts/ares-meta-source-mirror.py \
+  --source-campaign-id <campaign_id> \
+  --source-adset-id <adset_1> \
+  --source-adset-id <adset_2> \
+  --source-ad-id <winner_1> \
+  --source-ad-id <winner_2> \
+  --source-ad-id <winner_3> \
+  --ads-count 3 \
+  --daily-budget-usd 25
+```
+
+Regra aprendida com correção do Rodolfo: não testar payload mínimo nem reportar “não achei” campos sem antes fazer GET explícito e diff source-vs-payload. Default GET da Meta esconde campos de compliance.
+
+Campos de compliance que devem ser confirmados por API e copiados exatamente no adset quando existirem:
+
+```text
+dsa_beneficiary
+dsa_payor
+regional_regulated_categories
+special_ad_categories / special_ad_category_country
+```
+
+Para OpenzedFinanzas EU/Spain, valores observados nos adsets Patricia/Elena:
+
+```json
+{
+  "dsa_beneficiary": "Openzed",
+  "dsa_payor": "Openzed",
+  "regional_regulated_categories": ["SPAIN_FINSERV", "VOLUNTARY_VERIFICATION"]
+}
+```
+
+Pitfalls validados:
+- `code=100/subcode=1487202` pode esconder erro de permissão de Página. Capturar raw HTTP body/headers; o corpo completo pode conter `error_user_title: El permiso de la página es insuficiente...`. Nesse caso, parar: precisa acesso de criação de anúncios na Página, não mais tentativa de campo.
+- `code=100/subcode=1885501` em Elena indicou janela de atribuição inválida. A Meta exigiu `(1,0)`: usar `attribution_spec=[{"event_type":"CLICK_THROUGH","window_days":1}]` e remover `VIEW_THROUGH` nesse create flow, mesmo que a source reporte 7d click + 1d view.
+- Sempre deletar/verificar campaign parcial quando o adset falha e a campaign não será reutilizada no próximo checkpoint.
 
 ## Script canônico
 
