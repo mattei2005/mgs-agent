@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T10:50:18-04:00",
+    "updated_at": "2026-06-19T11:15:38-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -367,8 +367,10 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-grok-generate.py",
-      "size_bytes": 8584,
-      "modified_at": "2026-06-16T20:59:20-04:00"
+      "size_bytes": 8607,
+      "modified_at": "2026-06-19T11:05:57-04:00",
+      "sha256": "7bfedee4d7b404168b37668c0fbe7ee78ba22f144a8b69f5f35ce8157f56997b",
+      "validation": "python3 -m py_compile OK; --help OK; xAI credential resolver provider=xai-oauth sanitized"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-ops-briefing.py",
@@ -3322,6 +3324,32 @@
       "validation": "unzip -l OK; 10 JPGs verify clean=true and harmful_tags=0",
       "git_tracked": false,
       "updated_at": "2026-06-18T18:32:42.819646-04:00"
+    }
+  ],
+  "profile_skill_references": [
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "skill",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/SKILL.md",
+      "size_bytes": 34878,
+      "sha256": "aad40b66dfa966f15a9c9668a0e64cb69e46d6a79908256c98dafe1a53e6e714",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:15:38-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; provider policy GPT/OpenAI default, Grok/xAI only explicit/authorized"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/video-variation-gpt-grok-workflow.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/video-variation-gpt-grok-workflow.md",
+      "size_bytes": 3393,
+      "sha256": "d79dbe59193fb728acdf82556fcd9671e9a657d69e41620b3365cf99542b66cc",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:15:38-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; provider policy GPT/OpenAI default, Grok/xAI only explicit/authorized"
     }
   ]
 }

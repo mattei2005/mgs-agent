@@ -23,9 +23,18 @@ Use quando Rodolfo pedir uma variação de um vídeo e comparar `GPT` versus `Gr
    ```
    Use visão no contact sheet para identificar oferta, idioma, ângulo, CTA e problemas visuais.
 
-4. Para a comparação solicitada:
+4. Regra de provider:
+   - Se o solicitante não especificar ferramenta, use **GPT/OpenAI como padrão** para criação.
+   - Só use **Grok/xAI** quando o solicitante pedir Grok explicitamente, pedir GPT+Grok/comparação, ou autorizar Grok como fallback.
+
+5. Para a comparação solicitada:
    - **GPT/OpenAI**: gerar um keyframe/peça estática vertical com `image_generate`, priorizando composição limpa, oferta legível e estilo polido.
    - **Grok/xAI**: gerar vídeo com `video_generate`. Pode usar o keyframe GPT como `image_url` para uma variação animada polida, e/ou um frame do vídeo original como `image_url` para uma variação mais fiel/dinâmica.
+
+6. Autenticação Grok/xAI em Discord/headless:
+   - Use `HERMES_HOME=/root/.hermes/profiles/hera hermes auth add xai-oauth --manual-paste`.
+   - Se rodar em background, **não use `watch_patterns`**, porque isso envia aviso técnico `Callback URL:` para a thread. Use `process.poll/log` internamente e responda ao usuário só com o link limpo.
+   - Após o usuário enviar o código/URL, use `process.submit` no processo aberto e valide com comando real do wrapper antes de dizer que Grok está liberado.
 
 5. Baixe URLs remotas de vídeo para caminho local antes de entregar no Discord, porque o handoff final deve apontar para arquivo local verificável quando possível.
 

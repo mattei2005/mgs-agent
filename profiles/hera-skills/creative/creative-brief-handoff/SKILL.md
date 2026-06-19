@@ -350,6 +350,8 @@ Referências da skill:
 references/drive-ready-destination-correction.md — correção canônica: READY fica em pasta de status; STORY/FEED/REELS ficam no inventário/handoff, não em subpasta final.
 references/human-upload-ready-drive-handoff.md — fluxo validado para upload humano via Discord → import/read attachment quando `.mov` não entra no gateway → detecção de formato/ângulo → limpeza de metadata → upload verificado em READY → inventário/handoff Ares.
 references/video-variation-gpt-grok-workflow.md — workflow para comparar variação de vídeo com GPT/OpenAI e Grok/xAI a partir de anexo Discord, incluindo import read-only, contact sheet, geração e sanitização.
+references/video-provider-default-and-oauth-pitfalls.md — correções de sessão: GPT/OpenAI como provider padrão quando não especificado; variação real de vídeo não é overlay; OAuth Grok/xAI em Discord/headless sem vazamento de Callback URL; wrapper Grok usando venv Hermes.
+references/video-copy-variation-from-existing-asset.md — workflow para criar variação rápida de copy em vídeo existente mantendo o mesmo carro/produto, validando contact sheet, valores/oferta e metadata limpa.
 references/safari-invitation-video-reference-workflow.md — workflow validado para convite animado com referência YouTube/anexo, incluindo regra de não produzir antes de validar a referência, fallback por anexo Discord, YouTube cookies/proxy persistente, Grok real via wrapper e dados fixos legíveis.
 references/meta-ad-library-creative-intake.md — fluxo para analisar/baixar referências da Meta/Facebook Ad Library com Playwright/API, validar token sem expor segredo e interpretar erros comuns.
 references/meta-ad-library-playwright-browser-download.md — workflow de prova de vida e download via Chromium/Playwright quando `curl` recebe challenge/403 mas o browser consegue renderizar Library, IDs, imagens e vídeos.
@@ -462,12 +464,15 @@ Evite promessas absolutas, claims financeiros sensíveis ou linguagem que pareç
 
 Quando Rodolfo pedir **criativo visual final** ou peça de anúncio pronta, priorize geração/coordenação visual com **GPT-5.5 / OpenAI / ChatGPT** sempre que disponível. Rodolfo corrigiu que criativos feitos diretamente no ChatGPT ficam melhores; portanto, não trate mockups locais por código como substituto de peça final.
 
+Regra explícita de provider padrão: se o pedido **não especificar GPT, Grok ou comparação**, use **GPT/OpenAI/ChatGPT como padrão** para criação visual e roteiro criativo. Só use Grok quando o solicitante pedir Grok explicitamente, pedir comparação GPT+Grok, ou autorizar Grok como fallback.
+
 ```text
 Prioridade  Uso
 ──────────  ─────────────────────────────────────────────────────
 1           GPT-5.5/OpenAI/ChatGPT para peça visual final, quando disponível.
-2           Provider visual equivalente configurado, se validado como qualidade aceitável.
-3           Canva/designer/Kelly para acabamento quando a imagem final exigir produção humana.
+2           Grok/xAI somente quando solicitado explicitamente ou comparação aprovada.
+3           Provider visual equivalente configurado, se validado como qualidade aceitável.
+4           Canva/designer/Kelly para acabamento quando a imagem final exigir produção humana.
 Evitar      Pillow/Python/mockup local como entrega final de criativo visual.
 ```
 
@@ -493,6 +498,24 @@ Cena final
 CTA:
 ```
 
+### Variação de vídeo não é só legenda/overlay
+
+Quando o pedido for “faça uma variação desse criativo/vídeo”, trate como recriação criativa, não como edição superficial, salvo se o usuário pedir explicitamente apenas trocar legenda/copy no mesmo vídeo.
+
+```text
+Pedido/sinal do usuário                         Interpretação operacional
+──────────────────────────────────────────────  ─────────────────────────────────────────────
+“variação desse criativo”                       Nova peça com linguagem derivada da referência.
+“mesma oferta / mesmos gatilhos”                Manter promessa/copy central, não necessariamente reaproveitar frames.
+“mantendo o carro”                              Preservar tipo/cor/modelo aproximado do carro como referência visual.
+“outra pessoa, outro cenário, outra voz”        Recriar vídeo do zero: novo apresentador, novo ambiente e nova narração.
+“só troca a copy/legenda”                       Aí sim é permitido editar o mesmo vídeo com overlay.
+```
+
+Antes de entregar uma variação final, confirme que há mudança real em pelo menos 3 dimensões quando o usuário pediu recriação: pessoa/apresentador, cenário, enquadramentos/cenas, voz/narração, ritmo/movimento, props/ambiente. Se o resultado for apenas imagem animada, slideshow ou motion leve por limitação de backend, rotule claramente como **preview**, não como vídeo final profissional.
+
+Para anúncios de financiamento/auto com gatilhos fortes, mantenha a oferta legível e curta, mas evite alterar o valor ou a promessa. Exemplo de checagem obrigatória: `Sem Entrada`, `Parcelas a partir de R$299`, `Score Baixo`, `CTA` aparecem corretos e sem erro de leitura.
+
 ### Convites pessoais em vídeo — integração profissional de foto e texto
 
 Quando o vídeo for convite pessoal/familiar com foto de criança/pessoa e referência visual, trate como **composição por slides/cenas**, não como fundo + foto quadrada + caixas de texto.
@@ -511,6 +534,23 @@ Validação                   Gerar contact sheet e checar se foto/textos parece
 ```
 
 Se o usuário disser que “os fundos ficaram bons” mas criticar foto/texto, preserve o fundo aprovado e refaça **layout/compositing**, não gere novo conceito do zero. Ver detalhe em `references/personal-invitation-video-workflow.md`.
+
+### Variação rápida de copy em vídeo existente
+
+Quando o usuário enviar um vídeo base/anexo e pedir uma **variação mantendo o mesmo carro/produto**, trate o asset original como referência obrigatória antes de editar.
+
+Fluxo mínimo:
+
+```text
+1. Baixar/importar o anexo real.
+2. Gerar contact sheet do original e analisar produto, cenas, textos e áreas seguras.
+3. Trocar apenas a copy/overlay quando o pedido for variação rápida, sem alterar o carro/produto.
+4. Gerar contact sheet da variação e validar visualmente a oferta exata antes de entregar.
+5. Se houver valores monetários, confirmar no preview que `R$299`, `R$399` etc. não perderam símbolo/dígito por escaping de ferramenta.
+6. Sanitizar metadata e entregar somente `.metadata-clean.*`.
+```
+
+Ver detalhe em `references/video-copy-variation-from-existing-asset.md`.
 
 ### Gate obrigatório para vídeo com referência externa ou backend específico
 

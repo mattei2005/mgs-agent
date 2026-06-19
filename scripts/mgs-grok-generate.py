@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/root/.hermes/hermes-agent/venv/bin/python3
 """MGS Grok/xAI media generator.
 
 Operational wrapper for Hera/Zeus to call Grok Imagine via Hermes-managed
