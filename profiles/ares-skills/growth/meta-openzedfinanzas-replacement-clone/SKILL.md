@@ -252,6 +252,8 @@ Referência detalhada: `references/ares-standard-vs-source-mirror-2026-06-19.md`
 
 Referência Elena UI→API/source mirror: `references/elena-ui-api-source-mirror-2026-06-19.md`.
 
+Referência do probe pragmático que destravou campaign + primeiro adset da Elena e isolou o bloqueio final em `POST /ads`: `references/elena-pragmatic-resolution-2026-06-19.md`.
+
 Correção anterior do Rodolfo: quando o pedido for clone fiel, priorizar **clone/source mirror** como os buyers/Ads Manager fazem, não criação from-zero genérica. Criação from-zero pode falhar para este usuário/token e só ser viável em outro contexto de System User; **não usar criação do zero genérica como prova, teste principal ou resposta operacional quando Rodolfo pedir clone fiel**.
 
 Regra de interpretação do escopo:
@@ -354,7 +356,8 @@ Use códigos (`31/3858385`, `1487202`, `1815199`, `190`) como evidência curta e
 ## Pitfalls
 
 - Nunca aplicar “payload padrão Ares” e chamar de clone fiel. Se a source tem 2 adsets/6 ads, criar 1 adset/3 ads é **replacement Ares 1x3**, não clone estrutural. Declare o modo antes de escrever.
-- Não trocar campos da source por sugestão de erro genérico da Meta. Ex.: Elena mostrava `7-day click, 1-day view` na UI/API; a resposta `1885501` sugerindo `(1,0)` indica contexto de criação incompleto, não autorização para alterar a attribution da source.
+- Não trocar campos da source por sugestão de erro genérico da Meta quando o objetivo declarado for clone fiel. Ex.: Elena mostrava `7-day click, 1-day view` na UI/API; a resposta `1885501` sugerindo `(1,0)` inicialmente indica contexto de criação incompleto, não autorização automática para alterar a attribution da source.
+- Exceção de diagnóstico pragmático: se Rodolfo pedir para “resolver não importa como” ou aceitar um teste não-fiel só para destravar a camada API, `attribution_spec=[CLICK_THROUGH 1]` passou para o primeiro adset Elena com DSA/regional/COST_CAP/bid_amount corretos. Rotular isso como workaround diagnóstico, não clone fiel nem padrão permanente.
 - Em conta EU/financeiro, fazer GET explícito de compliance antes de POST: `dsa_beneficiary`, `dsa_payor`, `regional_regulated_categories`, `special_ad_categories`, `special_ad_category_country`. Defaults da API escondem campos.
 - Se a Meta retornar erro de permissão de página (`El permiso de la página es insuficiente para publicar anuncios`), parar. Não resolver mudando payload.
 - Se uma campaign criada voltar `start_time=1970`, tratar como campanha mãe malformada/suspeita antes de debugar adset.
