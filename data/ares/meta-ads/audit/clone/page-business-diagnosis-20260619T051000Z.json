@@ -1,0 +1,153 @@
+{
+  "created_at": "2026-06-19T05:36:09.622233+00:00",
+  "mode": "read_only_page_business_deeper_diagnosis",
+  "checks": {
+    "me_accounts": {
+      "status": 400,
+      "payload": {
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (perms)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AN_On4_fbHrvpYNW-kkpRsU"
+        }
+      },
+      "headers": {
+        "facebook-api-version": "v25.0",
+        "WWW-Authenticate": "OAuth \"Facebook Platform\" \"invalid_request\" \"(#100) Tried accessing nonexisting field (perms)\""
+      }
+    },
+    "page_elena_basic": {
+      "status": 200,
+      "payload": {
+        "id": "990898360783030",
+        "name": "Elena Santana",
+        "verification_status": "not_verified",
+        "can_post": false,
+        "is_published": true,
+        "access_token": "EAACUZAV8CGXYBRwcNVuGx6HpWA1ZATjMeL9ZA7q9ZB9tOrpfhUMH5PcC5vBQG2DoiAyKIH2EYCTi0fB1HleLoUcVJZBvsPBF9IuO6WWPnLzB13yYaaCZAnyYSHyTxMNbfl6gljK4lpy9uufv2IOqz4Png7oZBd4ZB7nZB8jzecNqOkum8gZAlZAYI00emux1i80r3ADnwSv"
+      },
+      "headers": {
+        "facebook-api-version": "v25.0"
+      }
+    },
+    "business_users": {
+      "status": 200,
+      "payload": {
+        "data": [
+          {
+            "id": "122115063404951597",
+            "name": "Marcos Silva Arruda",
+            "email": "tomas0thayanna@nextcloudmailbr.com",
+            "role": "EMPLOYEE"
+          },
+          {
+            "id": "122133597303069441",
+            "name": "Roosevelt Mattei",
+            "email": "roomattei2013@gmail.com",
+            "role": "ADMIN"
+          }
+        ],
+        "paging": {
+          "cursors": {
+            "before": "QVFIU2U5WlpUblA1d19OaENPM0dIVVRuRHZAkUC13OGs0eEwxSDFZARmQwTnZAseWtzOFc4NjBockFYVkJZAeEpJaUpkQmFrbTJyd3hBVVJQSjBXWWVHVXI4ZA3hn",
+            "after": "QVFIUzRxeVR1ZA1BNSVNUdnM3QXJjeEdlV2xFcm9LdHNRcTdweGRPeGJEUDNmNF9YX2ZAvT3lSVlFqMzRlVWdEdGRQYmRLa2RSMjJia0RGU1Juckt5T2RReDJB"
+          }
+        }
+      },
+      "headers": {
+        "facebook-api-version": "v25.0"
+      }
+    },
+    "business_owned_pages": {
+      "status": 200,
+      "payload": {
+        "data": []
+      },
+      "headers": {
+        "facebook-api-version": "v25.0"
+      }
+    },
+    "business_client_pages": {
+      "status": 200,
+      "payload": {
+        "data": []
+      },
+      "headers": {
+        "facebook-api-version": "v25.0"
+      }
+    },
+    "assigned_users_business_param": {
+      "status": 200,
+      "payload": {
+        "data": [
+          {
+            "id": "122331069266202790",
+            "name": "Erick Salvador",
+            "tasks": [
+              "DRAFT",
+              "ANALYZE",
+              "ADVERTISE"
+            ],
+            "permitted_tasks": [
+              "MANAGE",
+              "ADVERTISE",
+              "ANALYZE",
+              "FB_EMPLOYEE_DSO_ADVERTISE",
+              "CREATIVE",
+              "DRAFT",
+              "AA_ANALYZE"
+            ]
+          },
+          {
+            "id": "122115063404951597",
+            "name": "Marcos Silva Arruda",
+            "tasks": [
+              "DRAFT",
+              "ANALYZE",
+              "ADVERTISE"
+            ],
+            "permitted_tasks": [
+              "MANAGE",
+              "ADVERTISE",
+              "ANALYZE",
+              "FB_EMPLOYEE_DSO_ADVERTISE",
+              "CREATIVE",
+              "DRAFT",
+              "AA_ANALYZE"
+            ]
+          },
+          {
+            "id": "122316371408213207",
+            "name": "Rodolfo Mattei",
+            "tasks": [
+              "DRAFT",
+              "ANALYZE",
+              "ADVERTISE",
+              "MANAGE"
+            ],
+            "permitted_tasks": [
+              "MANAGE",
+              "ADVERTISE",
+              "ANALYZE",
+              "FB_EMPLOYEE_DSO_ADVERTISE",
+              "CREATIVE",
+              "DRAFT",
+              "AA_ANALYZE"
+            ]
+          }
+        ],
+        "paging": {
+          "cursors": {
+            "before": "QVFIU2ZADUnp6LXNWNERWNl9jTWNYWllwa2hkRFk3Q091U0hjdjVtemtLMFRydmhtV2pTbVF1QnBWM0duRllVeGJfcklMbGtGblo3QWRWY2I4ZAzRSX1h3NklB",
+            "after": "QVFIU1VoeHR0aHZAETEpkdk1WdHlvWE1VQy1hNDRPOXViUThJZAENLd3hSbWFwNEJ6aWo1TFh1aTREekhveWUzbVd4RzhOcUdaeGpBNkItNkpOeG9lX2V4UGF3"
+          }
+        }
+      },
+      "headers": {
+        "facebook-api-version": "v25.0",
+        "x-business-use-case-usage": "{\"1356770869843984\":[{\"type\":\"ads_management\",\"call_count\":1,\"total_cputime\":1,\"total_time\":4,\"estimated_time_to_regain_access\":0,\"ads_api_access_tier\":\"development_access\"}]}"
+      }
+    }
+  }
+}
