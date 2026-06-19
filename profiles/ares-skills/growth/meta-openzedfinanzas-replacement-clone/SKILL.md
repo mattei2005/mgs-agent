@@ -262,6 +262,8 @@ Referência da correção crítica de Rodolfo sobre clone perfeito e attribution
 
 Referência do teste da hipótese Zeus `attribution_setting=7d_click_1d_view` / `use_unified_attribution_setting`: `references/attribution-setting-probe-2026-06-19.md`.
 
+Referência da descoberta do caminho API de draft/copy (`addraft_id` + `asyncadcopies`) e bloqueio de capability do app: `references/addraft-asyncadcopies-probe-2026-06-19.md`.
+
 ### Status validado em 2026-06-19 — clone funcional e ativação funcionam
 
 O bloqueio `code=31/subcode=3858385` em `POST /ads` foi resolvido após Rodolfo gerar novo token incluindo escopos de Página/Messenger:

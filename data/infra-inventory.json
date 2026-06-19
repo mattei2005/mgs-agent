@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T02:47:21-04:00",
+    "updated_at": "2026-06-19T03:12:26-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -989,9 +989,9 @@
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
         "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
-        "sha256": "371ab531867889131706cb004e065bc722e50164bda3aa2ecc95064796bcd4c2",
-        "versioned_sha256": "371ab531867889131706cb004e065bc722e50164bda3aa2ecc95064796bcd4c2",
-        "modified_at": "2026-06-19T02:46:22.601786-04:00",
+        "sha256": "bfc6b850a3b7a7c6abfcb9d754533286f7a76886eba76e562c9397322d65dc8c",
+        "versioned_sha256": "bfc6b850a3b7a7c6abfcb9d754533286f7a76886eba76e562c9397322d65dc8c",
+        "modified_at": "2026-06-19T03:11:26.910579-04:00",
         "references": [
           {
             "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/elena-full-clone-token2-success-2026-06-19.md",
@@ -1008,9 +1008,17 @@
             "versioned_sha256": "4624ec711fdc163195a0679be021568525e9d3a821bd34e8bd36aa8bb536c3c2",
             "modified_at": "2026-06-19T02:46:17.523782-04:00",
             "purpose": "Operational learning: attribution_setting/use_unified_attribution_setting probe for Elena 7/1 perfect clone hypothesis"
+          },
+          {
+            "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/addraft-asyncadcopies-probe-2026-06-19.md",
+            "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/references/addraft-asyncadcopies-probe-2026-06-19.md",
+            "sha256": "f9c4886b4b5e0862343f06797ddf683a34cb0769aac75084436c24c589add098",
+            "versioned_sha256": "f9c4886b4b5e0862343f06797ddf683a34cb0769aac75084436c24c589add098",
+            "modified_at": "2026-06-19T03:11:21.058573-04:00",
+            "purpose": "Operational learning: API draft/copy flow for Elena 7/1 perfect clone and app capability block on addrafts"
           }
         ],
-        "last_report": "registrar teste da hipótese attribution_setting/use_unified_attribution_setting para clone perfeito Elena 7/1"
+        "last_report": "registrar descoberta do fluxo API de draft/copy para clone perfeito Elena 7/1 e bloqueio de capability do app em addrafts"
       },
       {
         "name": "paid-acquisition-operations",
