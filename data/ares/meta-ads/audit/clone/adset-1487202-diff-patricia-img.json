@@ -1,0 +1,322 @@
+{
+  "mode": "diagnose_adset_1487202_get_only",
+  "token_field": "credential",
+  "token_len": 198,
+  "source_adset_id": "120248290297260604",
+  "source_adset": {
+    "id": "120248290297260604",
+    "name": "Conjunto 02 - IMAGENS",
+    "account_id": "1356770869843984",
+    "campaign_id": "120248290297180604",
+    "created_time": "2026-06-11T03:31:10+0200",
+    "updated_time": "2026-06-11T03:31:29+0200",
+    "status": "ACTIVE",
+    "configured_status": "ACTIVE",
+    "effective_status": "CAMPAIGN_PAUSED",
+    "billing_event": "IMPRESSIONS",
+    "optimization_goal": "OFFSITE_CONVERSIONS",
+    "destination_type": "MESSENGER",
+    "promoted_object": {
+      "pixel_id": "629060785934493",
+      "custom_event_type": "COMPLETE_REGISTRATION",
+      "page_id": "1063171606876651",
+      "smart_pse_enabled": false
+    },
+    "attribution_spec": [
+      {
+        "event_type": "CLICK_THROUGH",
+        "window_days": 7
+      },
+      {
+        "event_type": "VIEW_THROUGH",
+        "window_days": 1
+      }
+    ],
+    "targeting": {
+      "age_max": 65,
+      "age_min": 18,
+      "age_range": [
+        18,
+        65
+      ],
+      "geo_locations": {
+        "countries": [
+          "ES"
+        ],
+        "location_types": [
+          "home",
+          "recent"
+        ]
+      },
+      "brand_safety_content_filter_levels": [
+        "FACEBOOK_RELAXED",
+        "AN_RELAXED"
+      ],
+      "targeting_automation": {
+        "advantage_audience": 1
+      }
+    },
+    "budget_remaining": "0",
+    "start_time": "2026-06-11T04:01:00+0200",
+    "optimization_sub_event": "NONE",
+    "is_dynamic_creative": false,
+    "use_new_app_click": false,
+    "source_adset_id": "120247501687700604"
+  },
+  "source_campaign": {
+    "id": "120248290297180604",
+    "name": "Patricia Flores - US - ESP - (pg_22069) - 1",
+    "status": "PAUSED",
+    "effective_status": "PAUSED",
+    "objective": "OUTCOME_SALES",
+    "buying_type": "AUCTION",
+    "daily_budget": "10000",
+    "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+    "special_ad_categories": [
+      "FINANCIAL_PRODUCTS_SERVICES"
+    ],
+    "special_ad_category_country": [
+      "ES"
+    ]
+  },
+  "our_failed_payload": {
+    "name": "Conjunto 02 - IMAGENS - RPL 20260620",
+    "campaign_id": "120248947698060604",
+    "status": "PAUSED",
+    "billing_event": "IMPRESSIONS",
+    "optimization_goal": "OFFSITE_CONVERSIONS",
+    "destination_type": "MESSENGER",
+    "targeting": {
+      "age_max": 65,
+      "age_min": 18,
+      "age_range": [
+        18,
+        65
+      ],
+      "geo_locations": {
+        "countries": [
+          "ES"
+        ],
+        "location_types": [
+          "home",
+          "recent"
+        ]
+      },
+      "brand_safety_content_filter_levels": [
+        "FACEBOOK_RELAXED",
+        "AN_RELAXED"
+      ],
+      "targeting_automation": {
+        "advantage_audience": 1
+      }
+    },
+    "promoted_object": {
+      "pixel_id": "629060785934493",
+      "custom_event_type": "COMPLETE_REGISTRATION",
+      "page_id": "1063171606876651",
+      "smart_pse_enabled": false
+    },
+    "attribution_spec": [
+      {
+        "event_type": "CLICK_THROUGH",
+        "window_days": 1
+      }
+    ],
+    "start_time": "2026-06-19T23:00:00Z",
+    "bid_strategy": null,
+    "bid_amount": null
+  },
+  "focus_compare": {
+    "promoted_object": {
+      "source": {
+        "pixel_id": "629060785934493",
+        "custom_event_type": "COMPLETE_REGISTRATION",
+        "page_id": "1063171606876651",
+        "smart_pse_enabled": false
+      },
+      "payload": {
+        "pixel_id": "629060785934493",
+        "custom_event_type": "COMPLETE_REGISTRATION",
+        "page_id": "1063171606876651",
+        "smart_pse_enabled": false
+      }
+    },
+    "optimization_goal": {
+      "source": "OFFSITE_CONVERSIONS",
+      "payload": "OFFSITE_CONVERSIONS"
+    },
+    "destination_type": {
+      "source": "MESSENGER",
+      "payload": "MESSENGER"
+    },
+    "billing_event": {
+      "source": "IMPRESSIONS",
+      "payload": "IMPRESSIONS"
+    },
+    "bid_strategy": {
+      "source": null,
+      "payload": null
+    },
+    "bid_amount": {
+      "source": null,
+      "payload": null
+    },
+    "attribution_spec": {
+      "source": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 7
+        },
+        {
+          "event_type": "VIEW_THROUGH",
+          "window_days": 1
+        }
+      ],
+      "payload": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 1
+        }
+      ]
+    },
+    "targeting": {
+      "source": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "ES"
+          ],
+          "location_types": [
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        }
+      },
+      "payload": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "ES"
+          ],
+          "location_types": [
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        }
+      }
+    },
+    "pacing_type": {
+      "source": null,
+      "payload": null
+    },
+    "optimization_sub_event": {
+      "source": "NONE",
+      "payload": null
+    },
+    "is_dynamic_creative": {
+      "source": false,
+      "payload": null
+    }
+  },
+  "source_has_payload_missing": [
+    {
+      "field": "configured_status",
+      "source": "ACTIVE"
+    },
+    {
+      "field": "effective_status",
+      "source": "CAMPAIGN_PAUSED"
+    },
+    {
+      "field": "is_dynamic_creative",
+      "source": false
+    },
+    {
+      "field": "optimization_sub_event",
+      "source": "NONE"
+    },
+    {
+      "field": "source_adset_id",
+      "source": "120247501687700604"
+    },
+    {
+      "field": "use_new_app_click",
+      "source": false
+    }
+  ],
+  "value_diff": [
+    {
+      "field": "attribution_spec",
+      "source": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 7
+        },
+        {
+          "event_type": "VIEW_THROUGH",
+          "window_days": 1
+        }
+      ],
+      "payload": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 1
+        }
+      ]
+    },
+    {
+      "field": "campaign_id",
+      "source": "120248290297180604",
+      "payload": "120248947698060604"
+    },
+    {
+      "field": "name",
+      "source": "Conjunto 02 - IMAGENS",
+      "payload": "Conjunto 02 - IMAGENS - RPL 20260620"
+    },
+    {
+      "field": "start_time",
+      "source": "2026-06-11T04:01:00+0200",
+      "payload": "2026-06-19T23:00:00Z"
+    },
+    {
+      "field": "status",
+      "source": "ACTIVE",
+      "payload": "PAUSED"
+    }
+  ],
+  "payload_has_source_missing": [
+    {
+      "field": "bid_amount",
+      "payload": null
+    },
+    {
+      "field": "bid_strategy",
+      "payload": null
+    }
+  ]
+}
