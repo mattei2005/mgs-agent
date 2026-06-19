@@ -1,0 +1,123 @@
+{
+  "created_at": "2026-06-19T04:57:25.959664+00:00",
+  "mode": "resolve_create_3_paused_ads_using_existing_elena_creatives",
+  "campaign_id": "120248957582370604",
+  "adset_id": "120248957704340604",
+  "write_scope": "ads only, status PAUSED",
+  "steps": [
+    {
+      "step": "pre_get_adset",
+      "get_status": 200,
+      "get_payload": {
+        "id": "120248957704340604",
+        "name": "Conjunto 02 - VÍDEOS - RPL 20260620 - 1dclick",
+        "campaign_id": "120248957582370604",
+        "status": "PAUSED",
+        "effective_status": "PAUSED",
+        "attribution_spec": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 1
+          }
+        ],
+        "dsa_beneficiary": "Openzed",
+        "dsa_payor": "Openzed",
+        "regional_regulated_categories": [
+          "SPAIN_FINSERV",
+          "VOLUNTARY_VERIFICATION"
+        ]
+      }
+    },
+    {
+      "step": "post_ad",
+      "source_creative_id": "1710921573663723",
+      "request_payload": {
+        "name": "Ad - 1 RPL existing creative",
+        "adset_id": "120248957704340604",
+        "creative": {
+          "creative_id": "1710921573663723"
+        },
+        "status": "PAUSED"
+      },
+      "post_status": 200,
+      "post_payload": {
+        "error": {
+          "message": "This request requires the user to take a pending action",
+          "type": "OAuthException",
+          "code": 31,
+          "error_subcode": 3858385,
+          "is_transient": false,
+          "error_user_title": "Autentica tu cuenta",
+          "error_user_msg": "Creemos que alguien puede haber intentado acceder a tu cuenta sin permiso. Por tu seguridad, no podrás crear ni modificar anuncios hasta que autentiques tu cuenta en el Administrador de anuncios. Tus anuncios actuales seguirán en circulación con normalidad.",
+          "fbtrace_id": "ACuDRfeLkylz5Pp0sEUAwjS"
+        }
+      },
+      "raw_http_response": {
+        "status": 200,
+        "headers": {
+          "debug-link": "https://www.meta.com/debug/?mid=260bac4b607d997670cbd9eea2909baf",
+          "error-mid": "260bac4b607d997670cbd9eea2909baf",
+          "Vary": "Origin",
+          "x-business-use-case-usage": "{\"1356770869843984\":[{\"type\":\"ads_management\",\"call_count\":1,\"total_cputime\":5,\"total_time\":10,\"estimated_time_to_regain_access\":0,\"ads_api_access_tier\":\"development_access\"}]}",
+          "Content-Type": "text/javascript; charset=UTF-8",
+          "WWW-Authenticate": "OAuth \"Facebook Platform\" \"invalid_request\" \"This request requires the user to take a pending action\"",
+          "Access-Control-Allow-Origin": "*",
+          "facebook-api-version": "v25.0",
+          "Strict-Transport-Security": "max-age=15552000; preload",
+          "Pragma": "no-cache",
+          "Cache-Control": "no-store",
+          "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+          "x-fb-request-id": "ACuDRfeLkylz5Pp0sEUAwjS",
+          "x-fb-trace-id": "HprkUV6G0Rm",
+          "x-fb-rev": "1041776027",
+          "X-FB-Debug": "wg9uiKJVSZTJwEXL+pqgjQSbQ6hhrHe+FkxKI2q7lvb2sofucQ0za+a5yGHYQMDt9oHKQ3iZDxayoIup/noeqQ==",
+          "Date": "Fri, 19 Jun 2026 04:57:28 GMT",
+          "X-FB-Connection-Quality": "EXCELLENT; q=0.9, rtt=10, rtx=0, c=10, mss=1380, tbw=3469, tp=-1, tpl=-1, uplat=2062, ullat=0",
+          "Alt-Svc": "h3=\":443\"; ma=86400",
+          "Connection": "close",
+          "Content-Length": "530"
+        },
+        "raw_body": "{\"error\":{\"message\":\"This request requires the user to take a pending action\",\"type\":\"OAuthException\",\"code\":31,\"error_subcode\":3858385,\"is_transient\":false,\"error_user_title\":\"Autentica tu cuenta\",\"error_user_msg\":\"Creemos que alguien puede haber intentado acceder a tu cuenta sin permiso. Por tu seguridad, no podr\\u00e1s crear ni modificar anuncios hasta que autentiques tu cuenta en el Administrador de anuncios. Tus anuncios actuales seguir\\u00e1n en circulaci\\u00f3n con normalidad.\",\"fbtrace_id\":\"ACuDRfeLkylz5Pp0sEUAwjS\"}}"
+      }
+    }
+  ],
+  "created_ads": [],
+  "final_get": {
+    "campaign": {
+      "status": 200,
+      "payload": {
+        "id": "120248957582370604",
+        "name": "Elena Santana - ES - ESP - (pg_22091) - RPL - 20260620 - DIAG01",
+        "status": "PAUSED",
+        "effective_status": "PAUSED",
+        "daily_budget": "2500"
+      }
+    },
+    "adsets": {
+      "status": 200,
+      "payload": {
+        "data": [
+          {
+            "id": "120248957704340604",
+            "name": "Conjunto 02 - VÍDEOS - RPL 20260620 - 1dclick",
+            "status": "PAUSED",
+            "effective_status": "PAUSED"
+          }
+        ],
+        "paging": {
+          "cursors": {
+            "before": "QVFIU25HZA1VSYnNEdWtsSW9PeGxhU0dDSjBSa2poRHFEQk0zakkxaDA4ajJLTGpCREZA4Rm9jdGlnY2tRajEwbmhGMEtSMlgtVzlNR2twLWtEX2FSSUVoRWtn",
+            "after": "QVFIU25HZA1VSYnNEdWtsSW9PeGxhU0dDSjBSa2poRHFEQk0zakkxaDA4ajJLTGpCREZA4Rm9jdGlnY2tRajEwbmhGMEtSMlgtVzlNR2twLWtEX2FSSUVoRWtn"
+          }
+        }
+      }
+    },
+    "ads": {
+      "status": 200,
+      "payload": {
+        "data": []
+      }
+    }
+  },
+  "status": "PARTIAL_OR_FAILED_AD_CREATION"
+}
