@@ -375,6 +375,9 @@ Referências da skill:
 references/drive-ready-destination-correction.md — correção canônica: READY fica em pasta de status; STORY/FEED/REELS ficam no inventário/handoff, não em subpasta final.
 references/human-upload-ready-drive-handoff.md — fluxo validado para upload humano via Discord → import/read attachment quando `.mov` não entra no gateway → detecção de formato/ângulo → limpeza de metadata → upload verificado em READY → inventário/handoff Ares.
 references/video-variation-gpt-grok-workflow.md — workflow para comparar variação de vídeo com GPT/OpenAI e Grok/xAI a partir de anexo Discord, incluindo import read-only, contact sheet, geração e sanitização.
+references/car-video-reference-recreation-lessons.md — aprendizados de correção Rodolfo/Geizian para variação de vídeo CAR: recriar linguagem audiovisual da referência, evitar legenda/zoom/slideshow como final, usar prompt editável e respeitar precedente GPT preview + Grok preview.
+references/car-pt-financing-video-recreation.md — playbook BR/PT para recriar vídeos de financiamento de veículo com vendedor/concessionária, carro branco, cenas/narrativa, voz integrada e QA contra zoom/slideshow/TTS robótico.
+references/video-gpt-grok-precedent.md — precedente operacional: GPT preview + Grok preview; não negar capacidade sem checar histórico/thread citada pelo usuário.
 references/video-provider-default-and-oauth-pitfalls.md — correções de sessão: GPT/OpenAI como provider padrão quando não especificado; variação real de vídeo não é overlay; OAuth Grok/xAI em Discord/headless sem vazamento de Callback URL; wrapper Grok usando venv Hermes.
 references/video-copy-variation-from-existing-asset.md — workflow para criar variação rápida de copy em vídeo existente mantendo o mesmo carro/produto, validando contact sheet, valores/oferta e metadata limpa.
 references/safari-invitation-video-reference-workflow.md — workflow validado para convite animado com referência YouTube/anexo, incluindo regra de não produzir antes de validar a referência, fallback por anexo Discord, YouTube cookies/proxy persistente, Grok real via wrapper e dados fixos legíveis.
@@ -489,16 +492,25 @@ Evite promessas absolutas, claims financeiros sensíveis ou linguagem que pareç
 
 Quando Rodolfo pedir **criativo visual final** ou peça de anúncio pronta, priorize geração/coordenação visual com **GPT-5.5 / OpenAI / ChatGPT** sempre que disponível. Rodolfo corrigiu que criativos feitos diretamente no ChatGPT ficam melhores; portanto, não trate mockups locais por código como substituto de peça final.
 
-Regra explícita de provider padrão: se o pedido **não especificar GPT, Grok ou comparação**, use **GPT/OpenAI/ChatGPT como padrão** para criação visual e roteiro criativo. Só use Grok quando o solicitante pedir Grok explicitamente, pedir comparação GPT+Grok, ou autorizar Grok como fallback.
+Regra explícita de provider por formato, atualizada por Rodolfo:
+
+```text
+Formato pedido        Provider padrão / regra
+────────────────────  ─────────────────────────────────────────────────────────────
+Vídeo                 Grok/xAI como padrão, porque GPT/OpenAI no fluxo atual faz imagem/keyframe e tende a virar slideshow/zoom se forçado como vídeo.
+Imagem estática       GPT/OpenAI/ChatGPT ou Grok/xAI; o gestor pode definir quando pedir, e a Hera pode propor comparação quando fizer sentido.
+GPT + Grok em vídeo   Explicar antes: Grok gera vídeo; GPT pode gerar imagem/keyframe/direção visual/thumbnail, não vídeo narrativo final.
+GPT + Grok em imagem  Gerar as duas versões reais quando solicitado e comparar diferenças visuais.
+```
 
 ```text
 Prioridade  Uso
 ──────────  ─────────────────────────────────────────────────────
-1           GPT-5.5/OpenAI/ChatGPT para peça visual final, quando disponível.
-2           Grok/xAI somente quando solicitado explicitamente ou comparação aprovada.
+1           Para vídeo: Grok/xAI com validação por contact sheet e áudio.
+2           Para imagem: GPT-5.5/OpenAI/ChatGPT ou Grok/xAI conforme pedido.
 3           Provider visual equivalente configurado, se validado como qualidade aceitável.
 4           Canva/designer/Kelly para acabamento quando a imagem final exigir produção humana.
-Evitar      Pillow/Python/mockup local como entrega final de criativo visual.
+Evitar      Pillow/Python/mockup local como entrega final de criativo visual; GPT keyframe com zoom como vídeo.
 ```
 
 Se a geração visual OpenAI/ChatGPT não estiver configurada ou falhar por setup/credencial, reporte o bloqueio claramente e entregue no máximo brief/copy/prompt/direção visual, rotulando como **não-final**. Não improvise uma imagem local inferior como se fosse o criativo final.
