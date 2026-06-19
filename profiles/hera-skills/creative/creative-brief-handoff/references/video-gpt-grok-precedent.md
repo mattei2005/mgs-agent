@@ -28,16 +28,30 @@ Validação na thread:
 ambos marcados como clean: true.
 ```
 
-Isso não significa que todo preview GPT seja vídeo cinematográfico real. O precedente mostra que o GPT funcionou como **peça/preview polido com keyframe forte e visual premium**, enquanto o Grok foi descrito como o caminho mais **dinâmico/social**. Para não repetir erro, a Hera deve separar claramente:
+Correção após nova auditoria da mesma thread em `2026-06-19`: Rodolfo pediu mais duas variações na thread `1516611205517807680`, e a Hera entregou corretamente `V003_HYBRID_PREVIEW` e `V004_TRUST_PREVIEW`, ambas como vídeos 9:16 com áudio, cerca de 8s, metadata limpa. Contact sheets importados e analisados mostraram que V004, principalmente, tinha narrativa real de anúncio: vendedor + cliente, SUV/showroom, close do carro, interior, caminhada/interação, `NO DOWN PAYMENT`, `$299/mo`, `DRIVE TODAY`, `FAST APPROVAL`. Ou seja: a teoria “GPT só pode ser keyframe/zoom” é uma conclusão errada quando existe workflow funcional na thread.
+
+Para não repetir erro, a Hera deve separar claramente:
 
 ```text
-GPT keyframe/preview polido      aceitável como direção visual/capa/peça premium, se rotulado.
-GPT imagem com zoom              não aceitável como “vídeo real” nem como tentativa final.
-Grok vídeo dinâmico              caminho preferencial quando o objetivo é movimento/showroom.
-Grok com TTS robótico externo    não aceitável para vídeo de vendedor falando.
+Workflow funcional da thread 1516611205517807680
+  usar a referência/thread real, continuar numeração, gerar variações com narrativa,
+  validar contact sheet e áudio, sanitizar, entregar preview limpo.
+
+GPT imagem com zoom
+  não aceitável como “vídeo real” nem como tentativa final.
+  Se acontecer, descartar/reprovar internamente.
+
+Grok/TTS robótico externo
+  não aceitável para vídeo de vendedor falando.
+  Se a pessoa precisa falar, a voz deve parecer integrada à pessoa/cena,
+  ou a entrega deve ser bloqueada/reprovada.
+
+Variação boa de vídeo automotivo
+  precisa ter narrativa/cenas: apresentador/cliente, carro, interior,
+  interação, CTA e movimento interno — não apenas Ken Burns sobre uma imagem.
 ```
 
-Grok tende a servir melhor para motion/dinâmica social quando disponível, mas só deve ser entregue se a voz/cena respeitar o pedido. Se a pessoa precisa falar, não mascarar com TTS robótico por cima.
+Regra prática: quando uma thread citada pelo usuário está gerando resultados bons, pare de teorizar por provider. Importe a thread, baixe os anexos, gere contact sheets e replique o workflow real daquela thread.
 
 ## Regra de resposta
 
