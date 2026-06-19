@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T17:58:24.205538-04:00",
+    "updated_at": "2026-06-19T18:03:41-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -97,23 +97,28 @@
         "display": "every 30m"
       },
       "script": "ares-meta-intraday-cron.sh",
-      "next_run_at": "2026-06-19T14:54:17.224559-04:00",
+      "next_run_at": "2026-06-19T18:03:17.643207-04:00",
       "enabled": true,
       "state": "scheduled",
       "no_agent": true,
       "deliver": "discord:1516887105543077949",
       "repeat": {
         "times": null,
-        "completed": 50
+        "completed": 56
       },
       "source": "/root/.hermes/profiles/ares/cron/jobs.json",
-      "last_report": "crons Meta em fase read-only/dry-run com decisões simuladas; jobs enabled=true/state=scheduled",
-      "validated_at": "2026-06-19T14:28:13-04:00",
+      "last_report": "Meta cron wrapper now posts non-empty reports to logs-aquisicao via Discord thread poster; scheduler stdout intentionally empty",
+      "validated_at": "2026-06-19T18:03:41-04:00",
       "validation": {
-        "py_compile": "OK",
-        "json_tool": "OK",
-        "wrappers_local_execution": "OK",
-        "all_writes_disabled_by_policy": true
+        "py_compile_poster": "OK",
+        "bash_n_wrappers": "OK",
+        "poster_dry_run": "OK",
+        "ares_bot_logs_aquisicao_permissions": {
+          "MANAGE_THREADS": true,
+          "MANAGE_ROLES": true,
+          "MANAGE_CHANNELS": true
+        },
+        "enabled_scheduled": true
       }
     },
     {
@@ -136,13 +141,18 @@
         "completed": 1
       },
       "source": "/root/.hermes/profiles/ares/cron/jobs.json",
-      "last_report": "crons Meta em fase read-only/dry-run com decisões simuladas; jobs enabled=true/state=scheduled",
-      "validated_at": "2026-06-19T14:28:13-04:00",
+      "last_report": "Meta cron wrapper now posts non-empty reports to logs-aquisicao via Discord thread poster; scheduler stdout intentionally empty",
+      "validated_at": "2026-06-19T18:03:41-04:00",
       "validation": {
-        "py_compile": "OK",
-        "json_tool": "OK",
-        "wrappers_local_execution": "OK",
-        "all_writes_disabled_by_policy": true
+        "py_compile_poster": "OK",
+        "bash_n_wrappers": "OK",
+        "poster_dry_run": "OK",
+        "ares_bot_logs_aquisicao_permissions": {
+          "MANAGE_THREADS": true,
+          "MANAGE_ROLES": true,
+          "MANAGE_CHANNELS": true
+        },
+        "enabled_scheduled": true
       },
       "intended_local_time": "00:30 Europe/Madrid (stored as 18:30 America/New_York during EDT)"
     },
@@ -156,23 +166,28 @@
         "display": "0 2,6,9,12,16 * * *"
       },
       "script": "ares-meta-hoa-manager.sh",
-      "next_run_at": "2026-06-19T16:00:00-04:00",
+      "next_run_at": "2026-06-20T02:00:00-04:00",
       "enabled": true,
       "state": "scheduled",
       "no_agent": true,
       "deliver": "discord:1516887105543077949",
       "repeat": {
         "times": 20,
-        "completed": 4
+        "completed": 5
       },
       "source": "/root/.hermes/profiles/ares/cron/jobs.json",
-      "last_report": "crons Meta em fase read-only/dry-run com decisões simuladas; jobs enabled=true/state=scheduled",
-      "validated_at": "2026-06-19T14:28:13-04:00",
+      "last_report": "Meta cron wrapper now posts non-empty reports to logs-aquisicao via Discord thread poster; scheduler stdout intentionally empty",
+      "validated_at": "2026-06-19T18:03:41-04:00",
       "validation": {
-        "py_compile": "OK",
-        "json_tool": "OK",
-        "wrappers_local_execution": "OK",
-        "all_writes_disabled_by_policy": true
+        "py_compile_poster": "OK",
+        "bash_n_wrappers": "OK",
+        "poster_dry_run": "OK",
+        "ares_bot_logs_aquisicao_permissions": {
+          "MANAGE_THREADS": true,
+          "MANAGE_ROLES": true,
+          "MANAGE_CHANNELS": true
+        },
+        "enabled_scheduled": true
       }
     },
     {
@@ -769,6 +784,48 @@
       "agent": "ares",
       "purpose": "Ares controlled-write automation to create 15 functional Elena pg_22091 duplicates, targeting 20 scheduled campaigns 00:00-01:00 Europe/Madrid, USD25/day, 1 adset/3 ads, no bid cap",
       "last_report": "Rodolfo aprovou criar 15 duplicações funcionais da Elena pg_22091 para chegar a 20 campanhas programadas entre 00:00 e 01:00 Europe/Madrid"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-discord-post-with-thread.py",
+      "size_bytes": 4460,
+      "modified_at": "2026-06-19T18:01:23.711261-04:00",
+      "sha256": "dd39b9ccc811517173534cd7cedfe4d5e7040e12c0bce15fedec896940d920e2",
+      "agent": "ares",
+      "purpose": "Ares Discord poster for Meta cron reports: posts to logs-aquisicao and creates one thread per checkpoint/recommendation; dry-run extracts title from text block",
+      "last_report": "garantir que relatórios Meta em logs-aquisicao sejam postados no canal e abram thread própria por checkpoint/recomendação, com stdout vazio"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-intraday-cron.sh",
+      "size_bytes": 428,
+      "modified_at": "2026-06-19T18:01:29.852269-04:00",
+      "sha256": "54feb0bcdf302a7aad120bc49c8d173f3fedd8f2411eb34c01d952376d7fc144",
+      "agent": "ares",
+      "purpose": "Ares profile-local Meta cron wrapper updated to pipe non-empty report output into Discord thread poster and keep stdout empty to avoid scheduler duplicate delivery",
+      "last_report": "garantir que relatórios Meta em logs-aquisicao sejam postados no canal e abram thread própria por checkpoint/recomendação, com stdout vazio",
+      "profile": "ares",
+      "git_tracked": false
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-reactivate-all-cron.sh",
+      "size_bytes": 440,
+      "modified_at": "2026-06-19T18:01:35.210276-04:00",
+      "sha256": "6636645cd8032fa46dda70f937a5ffd70602f7c40d4c6fe6bd92a78784044dca",
+      "agent": "ares",
+      "purpose": "Ares profile-local Meta cron wrapper updated to pipe non-empty report output into Discord thread poster and keep stdout empty to avoid scheduler duplicate delivery",
+      "last_report": "garantir que relatórios Meta em logs-aquisicao sejam postados no canal e abram thread própria por checkpoint/recomendação, com stdout vazio",
+      "profile": "ares",
+      "git_tracked": false
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-hoa-manager.sh",
+      "size_bytes": 431,
+      "modified_at": "2026-06-19T18:01:40.877283-04:00",
+      "sha256": "b52bba9daa77abfafc0fb4e544b170e0a18cd4ba1f6309f39294d340b1fef709",
+      "agent": "ares",
+      "purpose": "Ares profile-local Meta cron wrapper updated to pipe non-empty report output into Discord thread poster and keep stdout empty to avoid scheduler duplicate delivery",
+      "last_report": "garantir que relatórios Meta em logs-aquisicao sejam postados no canal e abram thread própria por checkpoint/recomendação, com stdout vazio",
+      "profile": "ares",
+      "git_tracked": false
     }
   ],
   "skills_mgs": [
