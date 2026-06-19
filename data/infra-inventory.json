@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-18T21:46:48-04:00",
+    "updated_at": "2026-06-19T01:10:17.539185-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -2212,6 +2212,26 @@
         "name": "yuanbao",
         "category": "",
         "skill_md": "/root/.hermes/profiles/hera/skills/yuanbao/SKILL.md"
+      },
+      {
+        "name": "meta-library-reference-intake",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md",
+        "versioned_skill_md": "/root/mgs-agent/profiles/hera-skills/creative/meta-library-reference-intake/SKILL.md",
+        "sha256": "d7e60648189846be10fc0638f791ce8cbf8f2b688c1d2846ff71c8fdff582007",
+        "versioned_sha256": "d7e60648189846be10fc0638f791ce8cbf8f2b688c1d2846ff71c8fdff582007",
+        "sha_match": true,
+        "size_bytes": 11797,
+        "versioned_size_bytes": 11797,
+        "modified_at": "2026-06-19T01:08:29.555300-04:00",
+        "versioned_modified_at": "2026-06-19T01:08:29.555300-04:00",
+        "purpose": "Hera workflow for Meta/Facebook Ad Library reference intake: download, sanitize, inventory, name and package references as ZIP/Drive, not final campaign assets.",
+        "validation": {
+          "frontmatter_read": true,
+          "runtime_versioned_sha_match": true,
+          "secret_scan": "clean_except_policy_text_mentions_tokens_cookies_without_values"
+        },
+        "updated_at": "2026-06-19T01:10:17.539185-04:00"
       }
     ],
     "zeus": [
