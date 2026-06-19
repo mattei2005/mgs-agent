@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T11:27:09-04:00",
+    "updated_at": "2026-06-19T11:38:56-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -590,6 +590,15 @@
       "agent": "ares",
       "purpose": "Read-only Meta source mirror diagnostics for clone EU/financial DSA compliance and source-vs-payload diff",
       "last_report": "diagnóstico read-only source mirror para clone Meta EU/financeiro com DSA/compliance e diff source-vs-payload"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-adset-copy-probe.py",
+      "size_bytes": 11717,
+      "modified_at": "2026-06-19T11:19:45.100199-04:00",
+      "sha256": "1d696ff9d7182bcc7b50cf7d31fac9d333f9bf64b1e688ffcf751fc70d992404",
+      "agent": "ares",
+      "purpose": "Controlled Meta API asyncbatch/adset copy probe for Elena campaign clone; creates paused shallow copy and cleans up on failure/incomplete clone",
+      "last_report": "probe controlado de clone Meta API asyncbatch/adset copy para campanha Elena solicitado por Rodolfo"
     }
   ],
   "skills_mgs": [
