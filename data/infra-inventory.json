@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T18:03:41-04:00",
+    "updated_at": "2026-06-19T18:22:10-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -3433,6 +3433,26 @@
       "agent": "ares",
       "type": "meta_ads_controlled_write_audit",
       "purpose": "Cleanup audit for Elena extra duplicate campaigns; deleted 15 surplus DUP campaigns, verified exactly 20 ACTIVE Elena campaigns with USD25/day and removed obsolete midnight cron"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/naming/elena-20260619/",
+      "size_bytes": 1311147,
+      "modified_at": "2026-06-19T18:21:08.012002-04:00",
+      "sha256_manifest": "df4c35bd35c82b6ccf8e273b361d936c85f029e71d38a3312ec6f95a4a38000e",
+      "agent": "ares",
+      "type": "meta_ads_naming_audit_directory",
+      "purpose": "Read-only Elena naming inventory and rename plan before any Meta rename; includes 20 campaigns, 20 adsets, 60 ads, 60 creatives, 60/60 thumbnails and contact sheets",
+      "counts": {
+        "campaigns": 20,
+        "adsets": 20,
+        "ads": 60,
+        "creatives": 60,
+        "thumbnails": 60,
+        "csv_plan_lines": 61,
+        "inventory_lines": 61,
+        "file_count": 70
+      },
+      "last_report": "inventário read-only e plano de nomenclatura para padronizar campanhas/adsets/ads/criativos Elena antes de qualquer rename Meta"
     }
   ],
   "mu_plugin_canonical": {
