@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T14:52:03-04:00",
+    "updated_at": "2026-06-19T15:11:18-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -759,6 +759,15 @@
       "last_report": "Rodolfo aprovou controlled-write na virada da conta Meta para Elena pg_22091",
       "git_tracked": false,
       "profile": "ares"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-elena-bulk-duplicates.py",
+      "size_bytes": 14513,
+      "modified_at": "2026-06-19T14:57:14.545772-04:00",
+      "sha256": "4ca802e260c4e22a804f0cd8055605a08ffe2b8c580e4ede0a1311b1d9e9bb05",
+      "agent": "ares",
+      "purpose": "Ares controlled-write automation to create 15 functional Elena pg_22091 duplicates, targeting 20 scheduled campaigns 00:00-01:00 Europe/Madrid, USD25/day, 1 adset/3 ads, no bid cap",
+      "last_report": "Rodolfo aprovou criar 15 duplicações funcionais da Elena pg_22091 para chegar a 20 campanhas programadas entre 00:00 e 01:00 Europe/Madrid"
     }
   ],
   "skills_mgs": [
@@ -3315,6 +3324,26 @@
       "agent": "ares",
       "type": "meta_ads_controlled_write_audit",
       "purpose": "Dry-run audit for approved Elena midnight controlled-write structure adjustment; validates 5 campaigns, 2 PAUSE rules, no write executed in dry-run"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/elena-bulk-duplicates-20260619T185720Z.json",
+      "size_bytes": 72831,
+      "md5": "128ac69f66987487e1ba349d307f5618",
+      "modified_at": "2026-06-19T14:57:32.330791-04:00",
+      "sha256": "ee73d5398078153663896a664fdb58df29573fb65f2cdc45abcb03452370762c",
+      "agent": "ares",
+      "type": "meta_ads_controlled_write_audit",
+      "purpose": "Dry-run audit for Elena bulk duplicates controlled-write automation; 15 planned creations, no write executed"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/elena-bulk-duplicates-20260619T190820Z.json",
+      "size_bytes": 899,
+      "md5": "7a9f2fe0c9d934a083e636dcf2e3cfaa",
+      "modified_at": "2026-06-19T15:09:23.214528-04:00",
+      "sha256": "1326d72144343c7a861e5494dbb1e1af74af02cad0cbb4fc5cee61f54078b1ce",
+      "agent": "ares",
+      "type": "meta_ads_controlled_write_audit",
+      "purpose": "Execution audit for Elena bulk duplicates controlled-write automation; real execution started in background and recorded Meta/API result"
     }
   ],
   "mu_plugin_canonical": {
@@ -3577,6 +3606,20 @@
       "validation": "unzip -l OK; 10 JPGs verify clean=true and harmful_tags=0",
       "git_tracked": false,
       "updated_at": "2026-06-18T18:32:42.819646-04:00"
+    },
+    {
+      "id": "ares-elena-bulk-duplicates-background-20260619",
+      "agent": "ares",
+      "type": "background_process",
+      "command": "python3 /root/mgs-agent/scripts/ares-meta-elena-bulk-duplicates.py --execute",
+      "source_report": "proc_bc7762a843e7 (Hermes process id not visible in Zeus session); OS process observed by ps during processing",
+      "validation": {
+        "ps_observed": true,
+        "process_tool_poll": "not_found_in_zeus_session",
+        "execution_audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/elena-bulk-duplicates-20260619T190820Z.json",
+        "execution_audit_sha256": "1326d72144343c7a861e5494dbb1e1af74af02cad0cbb4fc5cee61f54078b1ce"
+      },
+      "updated_at": "2026-06-19T15:11:18-04:00"
     }
   ],
   "profile_skill_references": [

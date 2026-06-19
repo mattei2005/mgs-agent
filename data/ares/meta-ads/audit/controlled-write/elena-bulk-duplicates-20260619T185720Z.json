@@ -1,0 +1,2340 @@
+{
+  "created_at": "2026-06-19T18:57:20.855274+00:00",
+  "mode": "dry_run",
+  "account_id": "1356770869843984",
+  "source_campaigns": [
+    "120248940291730604",
+    "120248940367280604",
+    "120248940367270604",
+    "120248940367540604",
+    "120248940367260604"
+  ],
+  "copies_per_source": 3,
+  "target_new_campaigns": 15,
+  "budget_minor_units": "2500",
+  "token_report": {
+    "item": "Token Meta API",
+    "field": "credential",
+    "len": 198
+  },
+  "created": [
+    {
+      "source_campaign_id": "120248940291730604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 1",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 1 - DUP - 20260620-0000 - 01",
+      "start_time_local": "2026-06-20T00:00:00+02:00",
+      "source_adset_id": "120248940291800604",
+      "source_ads": [
+        {
+          "id": "120248940291850604",
+          "creative_id": "949303098149951"
+        },
+        {
+          "id": "120248940291820604",
+          "creative_id": "1516971793271485"
+        },
+        {
+          "id": "120248940291830604",
+          "creative_id": "915285334906758"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 1 - DUP - 20260620-0000 - 01",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:00:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 01",
+              "campaign_id": "dry_run_campaign_1",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:00:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940291850604",
+          "creative_id": "949303098149951",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 01.01",
+              "adset_id": "dry_run_adset_1",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "949303098149951"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940291820604",
+          "creative_id": "1516971793271485",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 01.02",
+              "adset_id": "dry_run_adset_1",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1516971793271485"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940291830604",
+          "creative_id": "915285334906758",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 01.03",
+              "adset_id": "dry_run_adset_1",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "915285334906758"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_1",
+      "new_adset_id": "dry_run_adset_1",
+      "new_ads": [
+        "dry_run_ad_1_1",
+        "dry_run_ad_1_2",
+        "dry_run_ad_1_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940291730604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 1",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 1 - DUP - 20260620-0004 - 02",
+      "start_time_local": "2026-06-20T00:04:00+02:00",
+      "source_adset_id": "120248940291800604",
+      "source_ads": [
+        {
+          "id": "120248940291850604",
+          "creative_id": "949303098149951"
+        },
+        {
+          "id": "120248940291820604",
+          "creative_id": "1516971793271485"
+        },
+        {
+          "id": "120248940291830604",
+          "creative_id": "915285334906758"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 1 - DUP - 20260620-0004 - 02",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:04:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 02",
+              "campaign_id": "dry_run_campaign_2",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:04:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940291850604",
+          "creative_id": "949303098149951",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 02.01",
+              "adset_id": "dry_run_adset_2",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "949303098149951"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940291820604",
+          "creative_id": "1516971793271485",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 02.02",
+              "adset_id": "dry_run_adset_2",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1516971793271485"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940291830604",
+          "creative_id": "915285334906758",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 02.03",
+              "adset_id": "dry_run_adset_2",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "915285334906758"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_2",
+      "new_adset_id": "dry_run_adset_2",
+      "new_ads": [
+        "dry_run_ad_2_1",
+        "dry_run_ad_2_2",
+        "dry_run_ad_2_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940291730604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 1",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 1 - DUP - 20260620-0008 - 03",
+      "start_time_local": "2026-06-20T00:08:00+02:00",
+      "source_adset_id": "120248940291800604",
+      "source_ads": [
+        {
+          "id": "120248940291850604",
+          "creative_id": "949303098149951"
+        },
+        {
+          "id": "120248940291820604",
+          "creative_id": "1516971793271485"
+        },
+        {
+          "id": "120248940291830604",
+          "creative_id": "915285334906758"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 1 - DUP - 20260620-0008 - 03",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:08:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 03",
+              "campaign_id": "dry_run_campaign_3",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:08:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940291850604",
+          "creative_id": "949303098149951",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 03.01",
+              "adset_id": "dry_run_adset_3",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "949303098149951"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940291820604",
+          "creative_id": "1516971793271485",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 03.02",
+              "adset_id": "dry_run_adset_3",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1516971793271485"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940291830604",
+          "creative_id": "915285334906758",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 03.03",
+              "adset_id": "dry_run_adset_3",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "915285334906758"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_3",
+      "new_adset_id": "dry_run_adset_3",
+      "new_ads": [
+        "dry_run_ad_3_1",
+        "dry_run_ad_3_2",
+        "dry_run_ad_3_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940367280604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 2",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 2 - DUP - 20260620-0012 - 01",
+      "start_time_local": "2026-06-20T00:12:00+02:00",
+      "source_adset_id": "120248940367310604",
+      "source_ads": [
+        {
+          "id": "120248940367490604",
+          "creative_id": "1289005926322680"
+        },
+        {
+          "id": "120248940367460604",
+          "creative_id": "773202165818539"
+        },
+        {
+          "id": "120248940367510604",
+          "creative_id": "1536642424795343"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 2 - DUP - 20260620-0012 - 01",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:12:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 04",
+              "campaign_id": "dry_run_campaign_4",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:12:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367490604",
+          "creative_id": "1289005926322680",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 04.01",
+              "adset_id": "dry_run_adset_4",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1289005926322680"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367460604",
+          "creative_id": "773202165818539",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 04.02",
+              "adset_id": "dry_run_adset_4",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "773202165818539"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367510604",
+          "creative_id": "1536642424795343",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 04.03",
+              "adset_id": "dry_run_adset_4",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1536642424795343"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_4",
+      "new_adset_id": "dry_run_adset_4",
+      "new_ads": [
+        "dry_run_ad_4_1",
+        "dry_run_ad_4_2",
+        "dry_run_ad_4_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940367280604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 2",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 2 - DUP - 20260620-0016 - 02",
+      "start_time_local": "2026-06-20T00:16:00+02:00",
+      "source_adset_id": "120248940367310604",
+      "source_ads": [
+        {
+          "id": "120248940367490604",
+          "creative_id": "1289005926322680"
+        },
+        {
+          "id": "120248940367460604",
+          "creative_id": "773202165818539"
+        },
+        {
+          "id": "120248940367510604",
+          "creative_id": "1536642424795343"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 2 - DUP - 20260620-0016 - 02",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:16:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 05",
+              "campaign_id": "dry_run_campaign_5",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:16:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367490604",
+          "creative_id": "1289005926322680",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 05.01",
+              "adset_id": "dry_run_adset_5",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1289005926322680"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367460604",
+          "creative_id": "773202165818539",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 05.02",
+              "adset_id": "dry_run_adset_5",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "773202165818539"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367510604",
+          "creative_id": "1536642424795343",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 05.03",
+              "adset_id": "dry_run_adset_5",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1536642424795343"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_5",
+      "new_adset_id": "dry_run_adset_5",
+      "new_ads": [
+        "dry_run_ad_5_1",
+        "dry_run_ad_5_2",
+        "dry_run_ad_5_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940367280604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 2",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 2 - DUP - 20260620-0020 - 03",
+      "start_time_local": "2026-06-20T00:20:00+02:00",
+      "source_adset_id": "120248940367310604",
+      "source_ads": [
+        {
+          "id": "120248940367490604",
+          "creative_id": "1289005926322680"
+        },
+        {
+          "id": "120248940367460604",
+          "creative_id": "773202165818539"
+        },
+        {
+          "id": "120248940367510604",
+          "creative_id": "1536642424795343"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 2 - DUP - 20260620-0020 - 03",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:20:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 06",
+              "campaign_id": "dry_run_campaign_6",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:20:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367490604",
+          "creative_id": "1289005926322680",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 06.01",
+              "adset_id": "dry_run_adset_6",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1289005926322680"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367460604",
+          "creative_id": "773202165818539",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 06.02",
+              "adset_id": "dry_run_adset_6",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "773202165818539"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367510604",
+          "creative_id": "1536642424795343",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 06.03",
+              "adset_id": "dry_run_adset_6",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1536642424795343"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_6",
+      "new_adset_id": "dry_run_adset_6",
+      "new_ads": [
+        "dry_run_ad_6_1",
+        "dry_run_ad_6_2",
+        "dry_run_ad_6_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940367270604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 3",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 3 - DUP - 20260620-0024 - 01",
+      "start_time_local": "2026-06-20T00:24:00+02:00",
+      "source_adset_id": "120248940367320604",
+      "source_ads": [
+        {
+          "id": "120248940367410604",
+          "creative_id": "2382717552212525"
+        },
+        {
+          "id": "120248940367390604",
+          "creative_id": "1685959972641803"
+        },
+        {
+          "id": "120248940367530604",
+          "creative_id": "1051564254110380"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 3 - DUP - 20260620-0024 - 01",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:24:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 07",
+              "campaign_id": "dry_run_campaign_7",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:24:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367410604",
+          "creative_id": "2382717552212525",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 07.01",
+              "adset_id": "dry_run_adset_7",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "2382717552212525"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367390604",
+          "creative_id": "1685959972641803",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 07.02",
+              "adset_id": "dry_run_adset_7",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1685959972641803"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367530604",
+          "creative_id": "1051564254110380",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 07.03",
+              "adset_id": "dry_run_adset_7",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1051564254110380"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_7",
+      "new_adset_id": "dry_run_adset_7",
+      "new_ads": [
+        "dry_run_ad_7_1",
+        "dry_run_ad_7_2",
+        "dry_run_ad_7_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940367270604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 3",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 3 - DUP - 20260620-0028 - 02",
+      "start_time_local": "2026-06-20T00:28:00+02:00",
+      "source_adset_id": "120248940367320604",
+      "source_ads": [
+        {
+          "id": "120248940367410604",
+          "creative_id": "2382717552212525"
+        },
+        {
+          "id": "120248940367390604",
+          "creative_id": "1685959972641803"
+        },
+        {
+          "id": "120248940367530604",
+          "creative_id": "1051564254110380"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 3 - DUP - 20260620-0028 - 02",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:28:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 08",
+              "campaign_id": "dry_run_campaign_8",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:28:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367410604",
+          "creative_id": "2382717552212525",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 08.01",
+              "adset_id": "dry_run_adset_8",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "2382717552212525"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367390604",
+          "creative_id": "1685959972641803",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 08.02",
+              "adset_id": "dry_run_adset_8",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1685959972641803"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367530604",
+          "creative_id": "1051564254110380",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 08.03",
+              "adset_id": "dry_run_adset_8",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1051564254110380"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_8",
+      "new_adset_id": "dry_run_adset_8",
+      "new_ads": [
+        "dry_run_ad_8_1",
+        "dry_run_ad_8_2",
+        "dry_run_ad_8_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940367270604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 3",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 3 - DUP - 20260620-0032 - 03",
+      "start_time_local": "2026-06-20T00:32:00+02:00",
+      "source_adset_id": "120248940367320604",
+      "source_ads": [
+        {
+          "id": "120248940367410604",
+          "creative_id": "2382717552212525"
+        },
+        {
+          "id": "120248940367390604",
+          "creative_id": "1685959972641803"
+        },
+        {
+          "id": "120248940367530604",
+          "creative_id": "1051564254110380"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 3 - DUP - 20260620-0032 - 03",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:32:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 09",
+              "campaign_id": "dry_run_campaign_9",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:32:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367410604",
+          "creative_id": "2382717552212525",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 09.01",
+              "adset_id": "dry_run_adset_9",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "2382717552212525"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367390604",
+          "creative_id": "1685959972641803",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 09.02",
+              "adset_id": "dry_run_adset_9",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1685959972641803"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367530604",
+          "creative_id": "1051564254110380",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 09.03",
+              "adset_id": "dry_run_adset_9",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1051564254110380"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_9",
+      "new_adset_id": "dry_run_adset_9",
+      "new_ads": [
+        "dry_run_ad_9_1",
+        "dry_run_ad_9_2",
+        "dry_run_ad_9_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940367540604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 4",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 4 - DUP - 20260620-0036 - 01",
+      "start_time_local": "2026-06-20T00:36:00+02:00",
+      "source_adset_id": "120248940367340604",
+      "source_ads": [
+        {
+          "id": "120248940367480604",
+          "creative_id": "1679278363326933"
+        },
+        {
+          "id": "120248940367500604",
+          "creative_id": "1710921573663723"
+        },
+        {
+          "id": "120248940367560604",
+          "creative_id": "27262287090090407"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 4 - DUP - 20260620-0036 - 01",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:36:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 10",
+              "campaign_id": "dry_run_campaign_10",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:36:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367480604",
+          "creative_id": "1679278363326933",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 10.01",
+              "adset_id": "dry_run_adset_10",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1679278363326933"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367500604",
+          "creative_id": "1710921573663723",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 10.02",
+              "adset_id": "dry_run_adset_10",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1710921573663723"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367560604",
+          "creative_id": "27262287090090407",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 10.03",
+              "adset_id": "dry_run_adset_10",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "27262287090090407"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_10",
+      "new_adset_id": "dry_run_adset_10",
+      "new_ads": [
+        "dry_run_ad_10_1",
+        "dry_run_ad_10_2",
+        "dry_run_ad_10_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940367540604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 4",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 4 - DUP - 20260620-0040 - 02",
+      "start_time_local": "2026-06-20T00:40:00+02:00",
+      "source_adset_id": "120248940367340604",
+      "source_ads": [
+        {
+          "id": "120248940367480604",
+          "creative_id": "1679278363326933"
+        },
+        {
+          "id": "120248940367500604",
+          "creative_id": "1710921573663723"
+        },
+        {
+          "id": "120248940367560604",
+          "creative_id": "27262287090090407"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 4 - DUP - 20260620-0040 - 02",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:40:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 11",
+              "campaign_id": "dry_run_campaign_11",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:40:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367480604",
+          "creative_id": "1679278363326933",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 11.01",
+              "adset_id": "dry_run_adset_11",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1679278363326933"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367500604",
+          "creative_id": "1710921573663723",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 11.02",
+              "adset_id": "dry_run_adset_11",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1710921573663723"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367560604",
+          "creative_id": "27262287090090407",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 11.03",
+              "adset_id": "dry_run_adset_11",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "27262287090090407"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_11",
+      "new_adset_id": "dry_run_adset_11",
+      "new_ads": [
+        "dry_run_ad_11_1",
+        "dry_run_ad_11_2",
+        "dry_run_ad_11_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940367540604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 4",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 4 - DUP - 20260620-0044 - 03",
+      "start_time_local": "2026-06-20T00:44:00+02:00",
+      "source_adset_id": "120248940367340604",
+      "source_ads": [
+        {
+          "id": "120248940367480604",
+          "creative_id": "1679278363326933"
+        },
+        {
+          "id": "120248940367500604",
+          "creative_id": "1710921573663723"
+        },
+        {
+          "id": "120248940367560604",
+          "creative_id": "27262287090090407"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 4 - DUP - 20260620-0044 - 03",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:44:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 12",
+              "campaign_id": "dry_run_campaign_12",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:44:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367480604",
+          "creative_id": "1679278363326933",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 12.01",
+              "adset_id": "dry_run_adset_12",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1679278363326933"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367500604",
+          "creative_id": "1710921573663723",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 12.02",
+              "adset_id": "dry_run_adset_12",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1710921573663723"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367560604",
+          "creative_id": "27262287090090407",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 12.03",
+              "adset_id": "dry_run_adset_12",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "27262287090090407"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_12",
+      "new_adset_id": "dry_run_adset_12",
+      "new_ads": [
+        "dry_run_ad_12_1",
+        "dry_run_ad_12_2",
+        "dry_run_ad_12_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940367260604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 5",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 5 - DUP - 20260620-0048 - 01",
+      "start_time_local": "2026-06-20T00:48:00+02:00",
+      "source_adset_id": "120248940367330604",
+      "source_ads": [
+        {
+          "id": "120248940367520604",
+          "creative_id": "1728545404838334"
+        },
+        {
+          "id": "120248940367470604",
+          "creative_id": "797445356786971"
+        },
+        {
+          "id": "120248940367450604",
+          "creative_id": "4456031667987688"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 5 - DUP - 20260620-0048 - 01",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:48:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 13",
+              "campaign_id": "dry_run_campaign_13",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:48:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367520604",
+          "creative_id": "1728545404838334",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 13.01",
+              "adset_id": "dry_run_adset_13",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1728545404838334"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367470604",
+          "creative_id": "797445356786971",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 13.02",
+              "adset_id": "dry_run_adset_13",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "797445356786971"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367450604",
+          "creative_id": "4456031667987688",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 13.03",
+              "adset_id": "dry_run_adset_13",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "4456031667987688"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_13",
+      "new_adset_id": "dry_run_adset_13",
+      "new_ads": [
+        "dry_run_ad_13_1",
+        "dry_run_ad_13_2",
+        "dry_run_ad_13_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940367260604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 5",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 5 - DUP - 20260620-0052 - 02",
+      "start_time_local": "2026-06-20T00:52:00+02:00",
+      "source_adset_id": "120248940367330604",
+      "source_ads": [
+        {
+          "id": "120248940367520604",
+          "creative_id": "1728545404838334"
+        },
+        {
+          "id": "120248940367470604",
+          "creative_id": "797445356786971"
+        },
+        {
+          "id": "120248940367450604",
+          "creative_id": "4456031667987688"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 5 - DUP - 20260620-0052 - 02",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:52:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 14",
+              "campaign_id": "dry_run_campaign_14",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:52:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367520604",
+          "creative_id": "1728545404838334",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 14.01",
+              "adset_id": "dry_run_adset_14",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1728545404838334"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367470604",
+          "creative_id": "797445356786971",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 14.02",
+              "adset_id": "dry_run_adset_14",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "797445356786971"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367450604",
+          "creative_id": "4456031667987688",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 14.03",
+              "adset_id": "dry_run_adset_14",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "4456031667987688"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_14",
+      "new_adset_id": "dry_run_adset_14",
+      "new_ads": [
+        "dry_run_ad_14_1",
+        "dry_run_ad_14_2",
+        "dry_run_ad_14_3"
+      ]
+    },
+    {
+      "source_campaign_id": "120248940367260604",
+      "source_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 5",
+      "new_campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 5 - DUP - 20260620-0056 - 03",
+      "start_time_local": "2026-06-20T00:56:00+02:00",
+      "source_adset_id": "120248940367330604",
+      "source_ads": [
+        {
+          "id": "120248940367520604",
+          "creative_id": "1728545404838334"
+        },
+        {
+          "id": "120248940367470604",
+          "creative_id": "797445356786971"
+        },
+        {
+          "id": "120248940367450604",
+          "creative_id": "4456031667987688"
+        }
+      ],
+      "steps": [
+        {
+          "step": "create_campaign",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/campaigns",
+            "params": {
+              "name": "Elena Santana - ES - ESP - (pg_22091) - 5 - DUP - 20260620-0056 - 03",
+              "objective": "OUTCOME_SALES",
+              "buying_type": "AUCTION",
+              "status": "ACTIVE",
+              "daily_budget": "2500",
+              "special_ad_categories": [
+                "FINANCIAL_PRODUCTS_SERVICES"
+              ],
+              "special_ad_category_country": [
+                "ES"
+              ],
+              "start_time": "2026-06-20T00:56:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/adsets",
+            "params": {
+              "name": "Conjunto 01 - VÍDEOS - DUP 15",
+              "campaign_id": "dry_run_campaign_15",
+              "status": "ACTIVE",
+              "billing_event": "IMPRESSIONS",
+              "optimization_goal": "OFFSITE_CONVERSIONS",
+              "destination_type": "MESSENGER",
+              "targeting": {
+                "age_max": 65,
+                "age_min": 18,
+                "age_range": [
+                  18,
+                  65
+                ],
+                "geo_locations": {
+                  "countries": [
+                    "ES"
+                  ],
+                  "location_types": [
+                    "home",
+                    "recent"
+                  ]
+                },
+                "brand_safety_content_filter_levels": [
+                  "FACEBOOK_RELAXED",
+                  "AN_RELAXED"
+                ],
+                "targeting_automation": {
+                  "advantage_audience": 1
+                }
+              },
+              "promoted_object": {
+                "pixel_id": "629060785934493",
+                "custom_event_type": "COMPLETE_REGISTRATION",
+                "page_id": "990898360783030",
+                "smart_pse_enabled": false
+              },
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+              "start_time": "2026-06-20T00:56:00+0200"
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367520604",
+          "creative_id": "1728545404838334",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 1 - DUP 15.01",
+              "adset_id": "dry_run_adset_15",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "1728545404838334"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367470604",
+          "creative_id": "797445356786971",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 2 - DUP 15.02",
+              "adset_id": "dry_run_adset_15",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "797445356786971"
+              }
+            }
+          }
+        },
+        {
+          "step": "create_ad",
+          "source_ad_id": "120248940367450604",
+          "creative_id": "4456031667987688",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "act_1356770869843984/ads",
+            "params": {
+              "name": "Ad - 3 - DUP 15.03",
+              "adset_id": "dry_run_adset_15",
+              "status": "ACTIVE",
+              "creative": {
+                "creative_id": "4456031667987688"
+              }
+            }
+          }
+        }
+      ],
+      "new_campaign_id": "dry_run_campaign_15",
+      "new_adset_id": "dry_run_adset_15",
+      "new_ads": [
+        "dry_run_ad_15_1",
+        "dry_run_ad_15_2",
+        "dry_run_ad_15_3"
+      ]
+    }
+  ],
+  "errors": [],
+  "existing_campaign_count": 20,
+  "final": {
+    "ok": true,
+    "dry_run": true,
+    "created_count": 15,
+    "error_count": 0
+  }
+}
