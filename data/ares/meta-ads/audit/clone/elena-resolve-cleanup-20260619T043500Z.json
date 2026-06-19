@@ -1,0 +1,31 @@
+{
+  "created_at": "2026-06-19T04:57:47.651322+00:00",
+  "mode": "cleanup_failed_resolve_partials",
+  "campaigns": [
+    {
+      "campaign_id": "120248957582370604",
+      "before": {
+        "status": 200,
+        "payload": {
+          "id": "120248957582370604",
+          "name": "Elena Santana - ES - ESP - (pg_22091) - RPL - 20260620 - DIAG01",
+          "status": "PAUSED",
+          "effective_status": "PAUSED"
+        }
+      },
+      "delete_status": 200,
+      "delete_payload": {
+        "success": true
+      },
+      "after": {
+        "status": 200,
+        "payload": {
+          "id": "120248957582370604",
+          "name": "Elena Santana - ES - ESP - (pg_22091) - RPL - 20260620 - DIAG01",
+          "status": "DELETED",
+          "effective_status": "DELETED"
+        }
+      }
+    }
+  ]
+}
