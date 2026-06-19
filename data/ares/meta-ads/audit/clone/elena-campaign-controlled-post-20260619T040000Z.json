@@ -1,0 +1,76 @@
+{
+  "created_at": "2026-06-19T04:49:59.393221+00:00",
+  "mode": "controlled_post_campaign_only_elena_diag",
+  "graph_version": "v25.0",
+  "token_field": "credential",
+  "token_len": 198,
+  "steps": [
+    {
+      "step": "campaign_post_with_smart_promotion_type",
+      "request_payload": {
+        "name": "Elena Santana - ES - ESP - (pg_22091) - RPL - 20260620 - DIAG01",
+        "objective": "OUTCOME_SALES",
+        "buying_type": "AUCTION",
+        "status": "PAUSED",
+        "daily_budget": "2500",
+        "bid_strategy": "COST_CAP",
+        "special_ad_categories": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ],
+        "special_ad_category_country": [
+          "ES"
+        ],
+        "start_time": "2026-06-19T23:00:00Z",
+        "pacing_type": [
+          "standard"
+        ],
+        "smart_promotion_type": "GUIDED_CREATION"
+      },
+      "request_form_without_token": {
+        "name": "Elena Santana - ES - ESP - (pg_22091) - RPL - 20260620 - DIAG01",
+        "objective": "OUTCOME_SALES",
+        "buying_type": "AUCTION",
+        "status": "PAUSED",
+        "daily_budget": "2500",
+        "bid_strategy": "COST_CAP",
+        "special_ad_categories": "[\"FINANCIAL_PRODUCTS_SERVICES\"]",
+        "special_ad_category_country": "[\"ES\"]",
+        "start_time": "2026-06-19T23:00:00Z",
+        "pacing_type": "[\"standard\"]",
+        "smart_promotion_type": "GUIDED_CREATION"
+      },
+      "post_status": 200,
+      "post_payload": {
+        "id": "120248957582370604"
+      },
+      "campaign_id": "120248957582370604",
+      "get_status": 200,
+      "get_payload": {
+        "id": "120248957582370604",
+        "name": "Elena Santana - ES - ESP - (pg_22091) - RPL - 20260620 - DIAG01",
+        "status": "PAUSED",
+        "effective_status": "PAUSED",
+        "objective": "OUTCOME_SALES",
+        "buying_type": "AUCTION",
+        "created_time": "2026-06-19T06:49:59+0200",
+        "updated_time": "2026-06-19T06:49:59+0200",
+        "start_time": "1970-01-01T00:59:59+0100",
+        "daily_budget": "2500",
+        "bid_strategy": "COST_CAP",
+        "special_ad_categories": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ],
+        "special_ad_category_country": [
+          "ES"
+        ],
+        "smart_promotion_type": "GUIDED_CREATION",
+        "pacing_type": [
+          "standard"
+        ]
+      }
+    }
+  ],
+  "write_scope": "POST campaign only; no adset/creative/ad",
+  "created_campaign_id": "120248957582370604",
+  "status": "campaign_created_validated_stop_before_adset"
+}
