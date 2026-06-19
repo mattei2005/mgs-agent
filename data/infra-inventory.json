@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T19:22:43-04:00",
+    "updated_at": "2026-06-19T19:24:10-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -97,28 +97,28 @@
         "display": "every 30m"
       },
       "script": "ares-meta-intraday-cron.sh",
-      "next_run_at": "2026-06-19T18:03:17.643207-04:00",
+      "next_run_at": "2026-06-19T19:51:18.287498-04:00",
       "enabled": true,
       "state": "scheduled",
       "no_agent": true,
       "deliver": "discord:1516887105543077949",
       "repeat": {
         "times": null,
-        "completed": 56
+        "completed": 60
       },
       "source": "/root/.hermes/profiles/ares/cron/jobs.json",
-      "last_report": "Meta cron wrapper now posts non-empty reports to logs-aquisicao via Discord thread poster; scheduler stdout intentionally empty",
-      "validated_at": "2026-06-19T18:03:41-04:00",
+      "last_report": "Intraday wrapper bounded to avoid raw scheduler timeout; publishes sanitized error/output to logs-aquisicao thread poster",
+      "validated_at": "2026-06-19T19:24:10-04:00",
       "validation": {
-        "py_compile_poster": "OK",
-        "bash_n_wrappers": "OK",
-        "poster_dry_run": "OK",
-        "ares_bot_logs_aquisicao_permissions": {
-          "MANAGE_THREADS": true,
-          "MANAGE_ROLES": true,
-          "MANAGE_CHANNELS": true
+        "bash_n": "OK",
+        "runner_bounded_rc": "0",
+        "audit_json": "OK",
+        "audit_summary": {
+          "campaigns_seen": 35,
+          "insight_rows": 28,
+          "candidate_count": 0
         },
-        "enabled_scheduled": true
+        "wrapper_sha256": "776f8a4392e64951f6197f0e3f5051669cf8338d02a97d636c63ef879297f3bd"
       }
     },
     {
@@ -796,12 +796,12 @@
     },
     {
       "path": "/root/.hermes/profiles/ares/scripts/ares-meta-intraday-cron.sh",
-      "size_bytes": 428,
-      "modified_at": "2026-06-19T18:01:29.852269-04:00",
-      "sha256": "54feb0bcdf302a7aad120bc49c8d173f3fedd8f2411eb34c01d952376d7fc144",
+      "size_bytes": 2179,
+      "modified_at": "2026-06-19T19:20:10.015072-04:00",
+      "sha256": "776f8a4392e64951f6197f0e3f5051669cf8338d02a97d636c63ef879297f3bd",
       "agent": "ares",
-      "purpose": "Ares profile-local Meta cron wrapper updated to pipe non-empty report output into Discord thread poster and keep stdout empty to avoid scheduler duplicate delivery",
-      "last_report": "garantir que relatórios Meta em logs-aquisicao sejam postados no canal e abram thread própria por checkpoint/recomendação, com stdout vazio",
+      "purpose": "Ares Meta intraday cron wrapper with bounded runner/backoff window and sanitized Discord error publication to avoid raw 120s scheduler timeout",
+      "last_report": "corrigir timeout bruto do cron Ares Meta intraday R1-R5 dry-run em logs-aquisicao",
       "profile": "ares",
       "git_tracked": false
     },
@@ -3472,6 +3472,21 @@
         "apply_error_count": 0
       },
       "last_report": "aplicação controlada do plano de nomenclatura Elena aprovado por Rodolfo; GET final 20 campaigns, 20 adsets, 60 ads, 60 unique creative names, issues_count=0"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/intraday/intraday-20260619T232023Z.json",
+      "size_bytes": 457,
+      "md5": "7448f0da318e2a1187c89b44ac82ca64",
+      "modified_at": "2026-06-19T19:20:23.253084-04:00",
+      "sha256": "dd907d5612396eda70526a610c8a92e8714baf4b2f9a34fd5e282adba0180529",
+      "agent": "ares",
+      "type": "meta_ads_intraday_audit",
+      "purpose": "Bounded intraday dry-run audit after wrapper timeout fix; campaigns_seen=35 insight_rows=28 candidate_count=0 no write executed",
+      "summary": {
+        "campaigns_seen": 35,
+        "insight_rows": 28,
+        "candidate_count": 0
+      }
     }
   ],
   "mu_plugin_canonical": {
