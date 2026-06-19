@@ -1,0 +1,110 @@
+{
+  "created_at": "2026-06-19T15:46:04.812895+00:00",
+  "mode": "campaign_deep_copy_inside_asyncbatch",
+  "source_campaign_id": "120248940367540604",
+  "steps": [
+    {
+      "step": "root_asyncbatch_campaign_deep_copy",
+      "status": 200,
+      "payload": {
+        "async_sessions": [
+          {
+            "id": "1319780213050234",
+            "name": "campaign_deep_copy"
+          }
+        ]
+      },
+      "request": [
+        {
+          "method": "POST",
+          "relative_url": "120248940367540604/copies",
+          "name": "campaign_deep_copy",
+          "body": "deep_copy=true&status_option=PAUSED&rename_options=%7B%22rename_strategy%22%3A+%22DEEP_RENAME%22%2C+%22append_text%22%3A+%22+-+ARES+CAMPAIGN+ASYNCDEEP%22%7D"
+        }
+      ]
+    },
+    {
+      "step": "poll",
+      "session_id": "1319780213050234",
+      "polls": [
+        {
+          "i": 0,
+          "status": 200,
+          "payload": {
+            "id": "1319780213050234",
+            "complete_time": 0,
+            "result": "{}",
+            "status": "IN_PROGRESS"
+          }
+        },
+        {
+          "i": 1,
+          "status": 200,
+          "payload": {
+            "id": "1319780213050234",
+            "complete_time": 0,
+            "result": "{}",
+            "status": "IN_PROGRESS"
+          }
+        },
+        {
+          "i": 2,
+          "status": 200,
+          "payload": {
+            "id": "1319780213050234",
+            "complete_time": 0,
+            "result": "{}",
+            "status": "IN_PROGRESS"
+          }
+        },
+        {
+          "i": 3,
+          "status": 200,
+          "payload": {
+            "id": "1319780213050234",
+            "complete_time": 0,
+            "result": "{}",
+            "status": "IN_PROGRESS"
+          }
+        },
+        {
+          "i": 4,
+          "status": 200,
+          "payload": {
+            "id": "1319780213050234",
+            "complete_time": 1781883986,
+            "result": "{\"error\":{\"message\":\"Invalid parameter\",\"type\":\"OAuthException\",\"code\":100,\"error_subcode\":3858504,\"is_transient\":false,\"error_user_title\":\"El contenido no deber\\u00eda incluir mejoras est\\u00e1ndar\",\"error_user_msg\":\"Incluir el campo de mejoras est\\u00e1ndar en el contenido qued\\u00f3 obsoleto. En su lugar, elige configurar funciones individuales. Obt\\u00e9n m\\u00e1s informaci\\u00f3n aqu\\u00ed: https:\\/\\/fburl.com\\/hyth50xo.\",\"fbtrace_id\":\"AHgxdKtzGTXl-JuVupVTt0q\"}}",
+            "status": "FAILED"
+          }
+        }
+      ]
+    }
+  ],
+  "cleanups": [],
+  "parsed_result": {
+    "error": {
+      "message": "Invalid parameter",
+      "type": "OAuthException",
+      "code": 100,
+      "error_subcode": 3858504,
+      "is_transient": false,
+      "error_user_title": "El contenido no debería incluir mejoras estándar",
+      "error_user_msg": "Incluir el campo de mejoras estándar en el contenido quedó obsoleto. En su lugar, elige configurar funciones individuales. Obtén más información aquí: https://fburl.com/hyth50xo.",
+      "fbtrace_id": "AHgxdKtzGTXl-JuVupVTt0q"
+    }
+  },
+  "candidate_campaigns": [
+    {
+      "id": "120249003752960604",
+      "name": "Elena Santana - ES - ESP - (pg_22091) - 4 - Copia",
+      "status": "PAUSED",
+      "effective_status": "PAUSED",
+      "created_time": "2026-06-19T17:30:29+0200"
+    }
+  ],
+  "final": {
+    "success": false,
+    "campaign_id": null,
+    "blocker": "campaign deep_copy inside asyncbatch did not produce verifiable 2x6 7/1 clone"
+  }
+}

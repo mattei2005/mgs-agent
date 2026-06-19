@@ -1,0 +1,75 @@
+{
+  "created_at": "2026-06-19T15:49:04.897577+00:00",
+  "mode": "adcopy_object_story_spec_override_probe",
+  "source_ad": "120248940367500604",
+  "steps": [
+    {
+      "step": "campaign_shell",
+      "status": 200,
+      "payload": {
+        "copied_campaign_id": "120249004511980604",
+        "ad_object_ids": [
+          {
+            "ad_object_type": "campaign",
+            "source_id": "120248940367540604",
+            "copied_id": "120249004511980604"
+          }
+        ]
+      },
+      "campaign_id": "120249004511980604"
+    },
+    {
+      "step": "target_adset",
+      "status": 200,
+      "payload": {
+        "id": "120249004512870604"
+      },
+      "adset_id": "120249004512870604"
+    }
+  ],
+  "cleanups": [
+    {
+      "campaign_id": "120249004511980604",
+      "delete_status": 200,
+      "delete_payload": {
+        "success": true
+      },
+      "verify_status": 200,
+      "verify": {
+        "id": "120249004511980604",
+        "name": "Elena Santana - ES - ESP - (pg_22091) - 4 - Copia",
+        "status": "DELETED",
+        "effective_status": "DELETED"
+      }
+    }
+  ],
+  "variants": [
+    {
+      "variant": "creative_parameters_oss",
+      "status": 500,
+      "payload": {
+        "message": "An unknown error has occurred.",
+        "type": "OAuthException",
+        "code": 1,
+        "fbtrace_id": "AlKqRha5tYlTWnqa3aYq9aM"
+      },
+      "copied_ad_id": null
+    },
+    {
+      "variant": "creative_parameters_oss_dof",
+      "status": 500,
+      "payload": {
+        "message": "An unknown error has occurred.",
+        "type": "OAuthException",
+        "code": 1,
+        "fbtrace_id": "AHqcZb0r2A3_ncqLKy44Ir3"
+      },
+      "copied_ad_id": null
+    }
+  ],
+  "final": {
+    "success": false,
+    "successful_variants": [],
+    "blocker": "ad copy with oss creative_parameters failed"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T11:43:24-04:00",
+    "updated_at": "2026-06-19T11:49:59-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -3084,6 +3084,36 @@
       "agent": "ares",
       "purpose": "Audit artifact for Meta clone source mirror 120248290297180604",
       "last_report": "source mirror 20260619T014543Z for clone diagnostics"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/elena-campaign-asyncbatch-deepcopy-20260619T154631Z.json",
+      "size_bytes": 3515,
+      "md5": "95329d96147c2d050d6eb425a5003caf",
+      "modified_at": "2026-06-19T11:46:31.756731-04:00",
+      "sha256": "0ed659d0d05c89c0c22d40806c93d678ae77b712633904a62f91ee1243080aba",
+      "agent": "ares",
+      "type": "meta_ads_audit",
+      "purpose": "Auditoria de probes Meta API clone Elena solicitados por Rodolfo; campanhas temporárias deletadas/verificadas quando criadas; nenhum token exposto"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/elena-adcopy-creativeparam-probe-20260619T154751Z.json",
+      "size_bytes": 4277,
+      "md5": "719ad71271744242c365018d6775c8e2",
+      "modified_at": "2026-06-19T11:47:51.996812-04:00",
+      "sha256": "46d38ebf2adb5f191e85c2251209ac95a765417d115fed8c40553fd4b8f4104f",
+      "agent": "ares",
+      "type": "meta_ads_audit",
+      "purpose": "Auditoria de probes Meta API clone Elena solicitados por Rodolfo; campanhas temporárias deletadas/verificadas quando criadas; nenhum token exposto"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/elena-adcopy-oss-override-probe-20260619T154912Z.json",
+      "size_bytes": 1831,
+      "md5": "a642a253c156324074c301355996322e",
+      "modified_at": "2026-06-19T11:49:12.152894-04:00",
+      "sha256": "1c058eb958ab29989691e41af96352e5363d2f95c9ddb4d040dcfb237eeea0f0",
+      "agent": "ares",
+      "type": "meta_ads_audit",
+      "purpose": "Auditoria de probes Meta API clone Elena solicitados por Rodolfo; campanhas temporárias deletadas/verificadas quando criadas; nenhum token exposto"
     }
   ],
   "mu_plugin_canonical": {

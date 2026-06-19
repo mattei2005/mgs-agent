@@ -1,0 +1,170 @@
+{
+  "created_at": "2026-06-19T15:47:15.131064+00:00",
+  "mode": "ad_copy_creative_parameters_probe",
+  "source_campaign": "120248940367540604",
+  "source_adset": "120248940367380604",
+  "source_ad": "120248940367500604",
+  "steps": [
+    {
+      "step": "campaign_shell_copy",
+      "status": 200,
+      "payload": {
+        "copied_campaign_id": "120249004390520604",
+        "ad_object_ids": [
+          {
+            "ad_object_type": "campaign",
+            "source_id": "120248940367540604",
+            "copied_id": "120249004390520604"
+          }
+        ]
+      },
+      "campaign_id": "120249004390520604"
+    },
+    {
+      "step": "source_adset_get",
+      "status": 200,
+      "payload": {
+        "name": "Conjunto 02 - VÍDEOS",
+        "billing_event": "IMPRESSIONS",
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "destination_type": "MESSENGER",
+        "targeting": {
+          "age_max": 65,
+          "age_min": 18,
+          "age_range": [
+            18,
+            65
+          ],
+          "geo_locations": {
+            "countries": [
+              "ES"
+            ],
+            "location_types": [
+              "home",
+              "recent"
+            ]
+          },
+          "brand_safety_content_filter_levels": [
+            "FACEBOOK_RELAXED",
+            "AN_RELAXED"
+          ],
+          "targeting_automation": {
+            "advantage_audience": 1
+          }
+        },
+        "promoted_object": {
+          "pixel_id": "629060785934493",
+          "custom_event_type": "COMPLETE_REGISTRATION",
+          "page_id": "990898360783030",
+          "smart_pse_enabled": false
+        },
+        "bid_amount": 200,
+        "dsa_beneficiary": "Openzed",
+        "dsa_payor": "Openzed",
+        "regional_regulated_categories": [
+          "SPAIN_FINSERV",
+          "VOLUNTARY_VERIFICATION"
+        ],
+        "id": "120248940367380604"
+      }
+    },
+    {
+      "step": "target_adset_create_1click_for_adcopy_probe",
+      "status": 200,
+      "payload": {
+        "id": "120249004391620604"
+      },
+      "adset_id": "120249004391620604"
+    }
+  ],
+  "cleanups": [
+    {
+      "campaign_id": "120249004390520604",
+      "delete_status": 200,
+      "delete_payload": {
+        "success": true
+      },
+      "verify_status": 200,
+      "verify": {
+        "id": "120249004390520604",
+        "name": "Elena Santana - ES - ESP - (pg_22091) - 4 - Copia",
+        "status": "DELETED",
+        "effective_status": "DELETED"
+      }
+    }
+  ],
+  "ad_copy_variants": [
+    {
+      "variant": "no_creative_params",
+      "status": 400,
+      "payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 3858504,
+        "fbtrace_id": "AMMbwyH3gOD2P4OaNuN8Nl_"
+      },
+      "copied_ad_id": null
+    },
+    {
+      "variant": "creative_parameters_granular",
+      "status": 400,
+      "payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 1815765,
+        "fbtrace_id": "ALvvtxCM_1JzzCq7IcV0u97"
+      },
+      "copied_ad_id": null
+    },
+    {
+      "variant": "creative_parameter_granular",
+      "status": 400,
+      "payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 3858504,
+        "fbtrace_id": "ADercZYPPlMH_ZTNH0mCPYu"
+      },
+      "copied_ad_id": null
+    },
+    {
+      "variant": "creative_parameters_optout",
+      "status": 400,
+      "payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 3858504,
+        "fbtrace_id": "ANsLgKWv8D6B73plu9Y2c4C"
+      },
+      "copied_ad_id": null
+    }
+  ],
+  "verification": {
+    "adsets_status": 200,
+    "adsets": [
+      {
+        "id": "120249004391620604",
+        "name": "ARES ADCOPY TEMP ADSET",
+        "status": "PAUSED",
+        "attribution_spec": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 1
+          }
+        ]
+      }
+    ],
+    "ads_status": 200,
+    "ads_count": 0,
+    "ads": []
+  },
+  "final": {
+    "success": false,
+    "successful_variants": [],
+    "blocker": "all ad copy variants failed"
+  }
+}
