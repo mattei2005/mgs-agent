@@ -1,0 +1,193 @@
+{
+  "created_at": "2026-06-19T04:56:15.467517+00:00",
+  "mode": "resolve_native_campaign_copy_parent_then_adset",
+  "source_campaign": "120248940367540604",
+  "source_adset": "120248940367380604",
+  "token_len": 198,
+  "steps": [
+    {
+      "step": "campaign_native_shallow_copy",
+      "request_payload": {
+        "deep_copy": false,
+        "status_option": "PAUSED",
+        "rename_options": {
+          "rename_strategy": "DEEP_RENAME",
+          "append_text": " - RPL - 20260620 - NATIVEPARENT"
+        }
+      },
+      "post_status": 200,
+      "post_payload": {
+        "copied_campaign_id": "120248957688050604",
+        "ad_object_ids": [
+          {
+            "ad_object_type": "campaign",
+            "source_id": "120248940367540604",
+            "copied_id": "120248957688050604"
+          }
+        ]
+      },
+      "campaign_id": "120248957688050604"
+    },
+    {
+      "step": "update_copied_campaign_budget_name_paused",
+      "request_payload": {
+        "name": "Elena Santana - ES - ESP - (pg_22091) - RPL - 20260620 - NATIVEPARENT",
+        "daily_budget": "2500",
+        "status": "PAUSED"
+      },
+      "post_status": 200,
+      "post_payload": {
+        "success": true
+      }
+    },
+    {
+      "step": "get_copied_campaign",
+      "get_status": 200,
+      "get_payload": {
+        "id": "120248957688050604",
+        "name": "Elena Santana - ES - ESP - (pg_22091) - RPL - 20260620 - NATIVEPARENT",
+        "status": "PAUSED",
+        "effective_status": "IN_PROCESS",
+        "objective": "OUTCOME_SALES",
+        "buying_type": "AUCTION",
+        "created_time": "2026-06-19T06:56:15+0200",
+        "updated_time": "2026-06-19T06:56:16+0200",
+        "start_time": "1970-01-01T00:59:59+0100",
+        "daily_budget": "2500",
+        "bid_strategy": "COST_CAP",
+        "special_ad_categories": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ],
+        "special_ad_category_country": [
+          "ES"
+        ],
+        "smart_promotion_type": "GUIDED_CREATION",
+        "pacing_type": [
+          "standard"
+        ]
+      }
+    },
+    {
+      "step": "post_first_adset_under_native_parent",
+      "request_payload": {
+        "name": "Conjunto 02 - VÍDEOS - RPL 20260620 - nativeparent",
+        "campaign_id": "120248957688050604",
+        "status": "PAUSED",
+        "billing_event": "IMPRESSIONS",
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "optimization_sub_event": "NONE",
+        "destination_type": "MESSENGER",
+        "targeting": {
+          "age_max": 65,
+          "age_min": 18,
+          "age_range": [
+            18,
+            65
+          ],
+          "geo_locations": {
+            "countries": [
+              "ES"
+            ],
+            "location_types": [
+              "home",
+              "recent"
+            ]
+          },
+          "brand_safety_content_filter_levels": [
+            "FACEBOOK_RELAXED",
+            "AN_RELAXED"
+          ],
+          "targeting_automation": {
+            "advantage_audience": 1
+          }
+        },
+        "promoted_object": {
+          "pixel_id": "629060785934493",
+          "custom_event_type": "COMPLETE_REGISTRATION",
+          "page_id": "990898360783030",
+          "smart_pse_enabled": false
+        },
+        "attribution_spec": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 7
+          },
+          {
+            "event_type": "VIEW_THROUGH",
+            "window_days": 1
+          }
+        ],
+        "start_time": "2026-06-19T23:00:00Z",
+        "bid_amount": 200,
+        "is_dynamic_creative": false,
+        "use_new_app_click": false,
+        "dsa_beneficiary": "Openzed",
+        "dsa_payor": "Openzed",
+        "regional_regulated_categories": [
+          "SPAIN_FINSERV",
+          "VOLUNTARY_VERIFICATION"
+        ]
+      },
+      "post_status": 400,
+      "post_payload": {
+        "error": {
+          "message": "Invalid parameter",
+          "type": "OAuthException",
+          "code": 100,
+          "error_subcode": 1885501,
+          "is_transient": false,
+          "error_user_title": "El intervalo de atribución de visualización no es válido",
+          "error_user_msg": "En función de los objetivos y la optimización que has seleccionado, la combinación admitida para los valores del intervalo de atribución de visualización y de clic es: (1, 0)",
+          "fbtrace_id": "AGa-gI455_AaFxXTeJdYYUo"
+        }
+      },
+      "raw_http_response": {
+        "status": 400,
+        "headers": {
+          "debug-link": "https://www.meta.com/debug/?mid=4e50031433f57b08f882489c5ba41e15",
+          "error-mid": "4e50031433f57b08f882489c5ba41e15",
+          "Vary": "Origin",
+          "x-business-use-case-usage": "{\"1356770869843984\":[{\"type\":\"ads_management\",\"call_count\":1,\"total_cputime\":6,\"total_time\":9,\"estimated_time_to_regain_access\":0,\"ads_api_access_tier\":\"development_access\"}]}",
+          "Content-Type": "text/javascript; charset=UTF-8",
+          "WWW-Authenticate": "OAuth \"Facebook Platform\" \"invalid_request\" \"Invalid parameter\"",
+          "Access-Control-Allow-Origin": "*",
+          "facebook-api-version": "v25.0",
+          "Strict-Transport-Security": "max-age=15552000; preload",
+          "Pragma": "no-cache",
+          "Cache-Control": "no-store",
+          "Expires": "Sat, 01 Jan 2000 00:00:00 GMT",
+          "x-fb-request-id": "AGa-gI455_AaFxXTeJdYYUo",
+          "x-fb-trace-id": "Bl2shLhZSzu",
+          "x-fb-rev": "1041783724",
+          "X-FB-Debug": "kcwNQTkiXUnsVbnxoeHFvPwRQ9I5YJey/TKG79Kp8E8YQL5/g49Z4mHSOOVNjG/7J427MmdSEoyrVG5K++OFog==",
+          "Date": "Fri, 19 Jun 2026 04:56:19 GMT",
+          "Proxy-Status": "http_request_error; e_proxy=\"AcQmqWD8l7TovFQojW1_tyySK0mb7cIUW-jZqSFGUK4LlcIIYto3oSnLlgtRl_4wVtMMFkJkKbynrljbwP9q\"; e_fb_twtaskhandle=\"AcRW5MX6mzxvI77e1SaolmTNuP-VjWSILVS9zEdb4FKpdukbKAyvDI-F-LPCn6fmYd5L8yVOZHHCxQw99iNtwbLw1zhMwKAsdp3-Y44GIo4mTQ\"; e_upip=\"AcS7NHWk7WRSW6LG_cMhbGgFEtJ8TUcKB6RCUg6P0Duskhw3NGoJ-ZIlxU-FKJ19aQP-r23IDXBDAjeFYC1dVUMiUnmtRBgTAl5T5Oad-w\"; e_fb_zone=\"AcRz1gScYWhTVkTaUOOAEfrxjQps04upBzl4lNLtzMkkDtGk0LVM9GNj7QArU3ul\"; e_clientaddr=\"AcQ5f2iRAqYI_KA9pDDDY3ToiKgB5R35C4Rk4VO9BsJGcpRUCYkBmsPTUw5QJwhK_fujkRER77EYx0lQjN-UXPns9IoCQAFQHTrJ7FaHikQNJgHrTocC_A\"; e_fb_vipaddr=\"AcRDfE3K1FEvtPI70KV6JocFbi92rHeWjRU0zXIEaWdjdeO20sGxMKtddmM0ru5CrpEDx1HJuWPCpVwmIjoRs3hHvc7fmWpLnMdH\", http_request_error; e_proxy=\"AcSn3-G2HnsUxWn754Cc2LCIVYHux6GolnH44lAQ93VlTtUWB0nZphwjuPZma3pCb4Na4e3-eClZ4xbiWw2w\"; e_fb_twtaskhandle=\"AcRoF3yYnzYkaXKcP5Ouxy18tidS-XFWRyT02_tQ_u3wHQq-DaR-Jwt_pkkHQuqQbLnVlxOzoqnJg9G6wVZWYWWewCJ7Ur76S06u_xNiOPUrgb8\"; e_upip=\"AcSA9ZS10ZKs9q4Xk2QcmKSXtrafuizSEq7V-eaKjIerytt7eqXvzPo934ypId_DLYGRoWsfJCKPMjWpAkONWU066A5lRLqrE34R\"; e_fb_zone=\"AcTdKeRh6MaukTfism9D3cpS_-FgbhNQExolZirmZXeQFOynlkN2xE0R_0ksRS7e\"; e_clientaddr=\"AcRFXBNAURjw1f1TQ-9WUGX400ncR0agGGK3xp4RQghfDNBLZdofYfCmLkwHFPlSLyH8MAPpeMDOMZzLQb812uDygNF6L2bVgmodQ70ldwZNL6Y8nw\"; e_fb_vipaddr=\"AcRp1xHFFnlu3sqgj7PwW3PbM8aFBjUWoHpCafWoY67LDTQs4Ju12BAP9xKtzp7u9jGW1buFGQcNAY6nafE7cx6NbAbg5s3-h7bW\", http_request_error; e_proxy=\"AcTe2E6hKZLpV9LUEDY7ga6MmdiLAIrrwM6x4SfGEtdzYH8T7vVsR09sVSCH71i2rqa1URInRuujLVs\"; e_fb_twtaskhandle=\"AcQnlNIa7YkxoJXhnwtssIP4E0HPBAMUz7cmeYeAX3W0IEwufzW6d9c5mdvsYUSAOuvt6HfZYiGgz_m9XmKcxXay9VN-KlHnnfvx\"; e_upip=\"AcSi05AiKNGXI_LMkPTutDEYLvNabY6REGtRvmrINej1Nndt3Kp7UFYwWEoiVk4dqIXBAhYoHXPms1ipA5iaoshtCULufCLSxzBW\"; e_fb_zone=\"AcTbY-SApQ7XTxQ4J3t-fVnHPJ3zgOARjrhPHFlv9s_fihWl2R-Tl_PNDw5R6Q\"; e_clientaddr=\"AcSWDM4Dy8N87QBgB_ycBbHseTLeieVdhHs67WPmmp57bzldxyRzidR97Q-y73k_MyjPnBPJAooSlW3nLFKeAPK4y73F4A\"; e_fb_vipaddr=\"AcTETVF1cccglBNOfhUrw23EW2Qhh2780SIpt46-3y1_O_bFZQDNFw9pXxvm9CxC2tsAjlKr0ZRvbwLE4xZqaUbl-_HnQiHNog\"",
+          "X-FB-Connection-Quality": "EXCELLENT; q=0.9, rtt=11, rtx=0, c=10, mss=1380, tbw=3470, tp=-1, tpl=-1, uplat=990, ullat=0",
+          "Alt-Svc": "h3=\":443\"; ma=86400",
+          "Connection": "close",
+          "Content-Length": "472"
+        },
+        "raw_body": "{\"error\":{\"message\":\"Invalid parameter\",\"type\":\"OAuthException\",\"code\":100,\"error_subcode\":1885501,\"is_transient\":false,\"error_user_title\":\"El intervalo de atribuci\\u00f3n de visualizaci\\u00f3n no es v\\u00e1lido\",\"error_user_msg\":\"En funci\\u00f3n de los objetivos y la optimizaci\\u00f3n que has seleccionado, la combinaci\\u00f3n admitida para los valores del intervalo de atribuci\\u00f3n de visualizaci\\u00f3n y de clic es: (1, 0)\",\"fbtrace_id\":\"AGa-gI455_AaFxXTeJdYYUo\"}}"
+      }
+    }
+  ],
+  "created": {
+    "campaign_id": "120248957688050604"
+  },
+  "cleanup": [
+    {
+      "delete_status": 200,
+      "delete_payload": {
+        "success": true
+      },
+      "verify_status": 200,
+      "verify_payload": {
+        "id": "120248957688050604",
+        "name": "Elena Santana - ES - ESP - (pg_22091) - RPL - 20260620 - NATIVEPARENT",
+        "status": "DELETED",
+        "effective_status": "DELETED"
+      }
+    }
+  ],
+  "status": "FAILED_FIRST_ADSET_UNDER_NATIVE_PARENT"
+}
