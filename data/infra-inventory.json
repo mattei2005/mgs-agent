@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T11:38:56-04:00",
+    "updated_at": "2026-06-19T11:42:40-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -3354,11 +3354,12 @@
       "type": "reference",
       "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/video-variation-gpt-grok-workflow.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/video-variation-gpt-grok-workflow.md",
-      "size_bytes": 3393,
-      "sha256": "d79dbe59193fb728acdf82556fcd9671e9a657d69e41620b3365cf99542b66cc",
+      "size_bytes": 3948,
+      "sha256": "3d949905f4783f1c2ff4d2698db5c47923ad91128903631fd9e27c8dc6a9cc97",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:15:38-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; provider policy GPT/OpenAI default, Grok/xAI only explicit/authorized"
+      "source_thread_id": "1516611205517807680",
+      "updated_at": "2026-06-19T11:42:40-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; imported thread 1516611205517807680 exists read-only with 20 messages; documents GPT preview vs Grok preview precedent; reported workflow reference"
     },
     {
       "profile": "hera",
@@ -3431,6 +3432,19 @@
       "runtime_versioned_sha_match": true,
       "updated_at": "2026-06-19T11:27:09-04:00",
       "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/video-gpt-grok-precedent.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/video-gpt-grok-precedent.md",
+      "size_bytes": 2721,
+      "sha256": "94e6840c77fe29345719fa6630e69e8baf9901b5e2d03b5acdf3738145d286ba",
+      "runtime_versioned_sha_match": true,
+      "source_thread_id": "1516611205517807680",
+      "updated_at": "2026-06-19T11:42:40-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; imported thread 1516611205517807680 exists read-only with 20 messages; documents GPT preview vs Grok preview precedent; linked precedent reference for thread 1516611205517807680"
     }
   ]
 }
