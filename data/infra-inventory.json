@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T16:31:11-04:00",
+    "updated_at": "2026-06-19T17:56:09.179461-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -3077,6 +3077,26 @@
       "validated_at": "2026-06-17T17:55:54-04:00",
       "validation": "Hera GET /channels/1498132022634483894 => HTTP 200; Zeus GET overwrite allow=379968 deny=0",
       "reason": "Acesso da Hera ao #alerts-infra para REPORT-INFRA autorizado por Rodolfo"
+    },
+    {
+      "type": "discord_channel_permission",
+      "platform": "discord",
+      "guild_id": "1185714635991679006",
+      "channel_id": "1516887105543077949",
+      "channel_name": "logs-aquisicao",
+      "subject_type": "bot_user",
+      "subject_id": "1508864261504630925",
+      "subject_name": "Ares",
+      "allow": "1040",
+      "deny": "0",
+      "permissions": [
+        "VIEW_CHANNEL",
+        "MANAGE_CHANNELS"
+      ],
+      "scope": "Ares can manage user/channel permission overwrites only on logs-aquisicao when Rodolfo requests acquisition-log access changes.",
+      "authorized_by": "Rodolfo Mattei (344196393512075265)",
+      "validated_at": "2026-06-19T17:56:09.179461-04:00",
+      "validation": "Discord API PUT returned 204; GET /channels/1516887105543077949 shows Ares overwrite allow=1040 deny=0."
     }
   ],
   "oauth_auth_states": [
