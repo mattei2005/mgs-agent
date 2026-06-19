@@ -300,11 +300,82 @@
       "interpretation": "ADSET_FAILED_IN_SOURCE_TOO_problem_not_new_campaign_only",
       "error_code": 100,
       "error_subcode": 1487202
+    },
+    {
+      "step": "2c_DSA",
+      "action": "POST /adsets first only with DSA beneficiary/payor",
+      "created_at": "2026-06-19T01:33:27.886414+00:00",
+      "request_payload": {
+        "name": "Conjunto 02 - IMAGENS - RPL 20260620",
+        "campaign_id": "120248947698060604",
+        "status": "PAUSED",
+        "billing_event": "IMPRESSIONS",
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "destination_type": "MESSENGER",
+        "targeting": {
+          "age_max": 65,
+          "age_min": 18,
+          "age_range": [
+            18,
+            65
+          ],
+          "geo_locations": {
+            "countries": [
+              "ES"
+            ],
+            "location_types": [
+              "home",
+              "recent"
+            ]
+          },
+          "brand_safety_content_filter_levels": [
+            "FACEBOOK_RELAXED",
+            "AN_RELAXED"
+          ],
+          "targeting_automation": {
+            "advantage_audience": 1
+          }
+        },
+        "promoted_object": {
+          "pixel_id": "629060785934493",
+          "custom_event_type": "COMPLETE_REGISTRATION",
+          "page_id": "1063171606876651",
+          "smart_pse_enabled": false
+        },
+        "attribution_spec": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 7
+          },
+          {
+            "event_type": "VIEW_THROUGH",
+            "window_days": 1
+          }
+        ],
+        "start_time": "2026-06-19T23:00:00Z",
+        "bid_strategy": null,
+        "bid_amount": null,
+        "optimization_sub_event": "NONE",
+        "is_dynamic_creative": false,
+        "use_new_app_click": false,
+        "dsa_beneficiary": "Openzed",
+        "dsa_payor": "Openzed"
+      },
+      "post_status": 400,
+      "post_payload": {
+        "message": "Invalid parameter",
+        "type": "OAuthException",
+        "code": 100,
+        "error_subcode": 1487202,
+        "fbtrace_id": "AlhsDtM2AiQRKgA38UPVNQw"
+      },
+      "error_user_msg": null,
+      "error_user_title": null
     }
   ],
   "created": {
     "campaign_id": "120248947698060604"
   },
   "payloads_from_dry_run": "/root/mgs-agent/data/ares/meta-ads/audit/clone/clone-source-dry-run-patricia-1-20260618T224851Z.json",
-  "status": "test_a_completed"
+  "status": "stopped_step_2c_failed"
 }
