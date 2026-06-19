@@ -235,9 +235,22 @@ Campanhas parciais criadas nas alternativas 1 e 3 foram marcadas `DELETED` e ver
 
 Próximo clone real depende de Rodolfo/usuário autenticando a conta no Ads Manager para remover o pending action.
 
-## Prioridade operacional: clonar, não criar do zero
+## Prioridade operacional: separar “replacement Ares” de “clone fiel”
 
-Correção explícita do Rodolfo: para esta operação, replacement deve priorizar **clone nativo** como os buyers fazem, não criação do zero de campaign/adset/ad. Criação from-zero pode falhar para este usuário/token e só ser viável em outro contexto de System User; **não usar criação do zero como prova, teste principal ou resposta operacional quando Rodolfo pedir clone**.
+Correção explícita do Rodolfo em 2026-06-19: não misturar a lógica de gestão/performance com a mecânica de construção da campanha. A palavra “clone” foi usada em dois sentidos e isso causou erro operacional.
+
+```text
+Caminho                         | Significado
+--------------------------------|------------------------------------------------------------
+Replacement Ares 1x3             | campanha nova padronizada: 1 adset, 3 ads, budget USD 25
+Clone fiel / source mirror       | espelhar a estrutura real da campanha source: adsets/ads/campos
+```
+
+Se a conta estiver sob gestão 100% Ares, o padrão oficial deve ser **Replacement Ares 1x3**; campanhas manuais existentes servem como fonte de performance/assets/aprendizado, não como estrutura obrigatória. Se Rodolfo pedir clone fiel de uma campanha manual, então a source decide quantidade de adsets, attribution, DSA, regional compliance, targeting e demais campos graváveis.
+
+Referência detalhada: `references/ares-standard-vs-source-mirror-2026-06-19.md`.
+
+Correção anterior do Rodolfo: quando o pedido for clone fiel, priorizar **clone/source mirror** como os buyers/Ads Manager fazem, não criação from-zero genérica. Criação from-zero pode falhar para este usuário/token e só ser viável em outro contexto de System User; **não usar criação do zero genérica como prova, teste principal ou resposta operacional quando Rodolfo pedir clone fiel**.
 
 Regra de interpretação do escopo:
 - Campanhas `ACTIVE` e `PAUSED/OFF` são fontes válidas de clone. `PAUSED` não é deletada.
@@ -338,6 +351,11 @@ Use códigos (`31/3858385`, `1487202`, `1815199`, `190`) como evidência curta e
 
 ## Pitfalls
 
+- Nunca aplicar “payload padrão Ares” e chamar de clone fiel. Se a source tem 2 adsets/6 ads, criar 1 adset/3 ads é **replacement Ares 1x3**, não clone estrutural. Declare o modo antes de escrever.
+- Não trocar campos da source por sugestão de erro genérico da Meta. Ex.: Elena mostrava `7-day click, 1-day view` na UI/API; a resposta `1885501` sugerindo `(1,0)` indica contexto de criação incompleto, não autorização para alterar a attribution da source.
+- Em conta EU/financeiro, fazer GET explícito de compliance antes de POST: `dsa_beneficiary`, `dsa_payor`, `regional_regulated_categories`, `special_ad_categories`, `special_ad_category_country`. Defaults da API escondem campos.
+- Se a Meta retornar erro de permissão de página (`El permiso de la página es insuficiente para publicar anuncios`), parar. Não resolver mudando payload.
+- Se uma campaign criada voltar `start_time=1970`, tratar como campanha mãe malformada/suspeita antes de debugar adset.
 - `code=31/subcode=3858385` pode aparecer como mensagem genérica de autenticação na API mesmo quando Ads Manager manual não mostra checkpoint; antes de concluir checkpoint humano, testar se o payload está usando a rota correta (`video_id`/`image_hash`) e Graph version compatível.
 - `code=190` com "Application has been deleted" não é problema de payload de clone: é token/app inválido. Não criar campanhas temporárias quando o GET source já falha.
 - A campanha original tem budget USD 100; replacement precisa forçar USD 25, nunca copiar o budget original.
