@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T03:12:26-04:00",
+    "updated_at": "2026-06-19T10:50:18-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -3276,6 +3276,38 @@
       "binary_exists": true,
       "purpose": "Second-pass metadata removal/verification for clean creative asset delivery",
       "updated_at": "2026-06-18T18:32:42.819646-04:00"
+    },
+    {
+      "id": "hera-video-editing-runtime-deps",
+      "agent": "hera",
+      "manager": "apt",
+      "source_report": "REPORT-INFRA Hera local video editing/validation runtime dependencies",
+      "commandline": "apt install ffmpeg python3-pil + apt dependencies",
+      "packages_count": 2,
+      "packages": [
+        {
+          "name": "ffmpeg",
+          "version": "7:6.1.1-3ubuntu5",
+          "status": "installed"
+        },
+        {
+          "name": "python3-pil",
+          "version": "10.2.0-1ubuntu1.2",
+          "status": "installed"
+        }
+      ],
+      "runtime_validation": {
+        "ffmpeg_binary": "/usr/bin/ffmpeg",
+        "ffmpeg_version": "ffmpeg version 6.1.1-3ubuntu5",
+        "ffprobe_binary": "/usr/bin/ffprobe",
+        "ffprobe_version": "ffprobe version 6.1.1-3ubuntu5",
+        "python_pillow_import": "ok",
+        "pillow_version": "10.2.0",
+        "pil_smoke_test": "created 2x2 RGB image"
+      },
+      "purpose": "Local editing, probing and validation of Hera creative/video outputs",
+      "risk": "Low: durable VPS package install; no gateway restart or credential/config change reported.",
+      "updated_at": "2026-06-19T10:50:18-04:00"
     }
   ],
   "runtime_artifacts": [

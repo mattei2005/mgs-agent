@@ -123,10 +123,12 @@ log "Montando JSON final..."
 SYSTEM_PACKAGES_JSON='[]'
 DISCORD_PERMISSIONS_JSON='[]'
 OAUTH_AUTH_STATES_JSON='[]'
+RUNTIME_ARTIFACTS_JSON='[]'
 if [ -f "$OUT" ]; then
     SYSTEM_PACKAGES_JSON=$(jq -c '.system_packages // []' "$OUT")
     DISCORD_PERMISSIONS_JSON=$(jq -c '.discord_permissions // []' "$OUT")
     OAUTH_AUTH_STATES_JSON=$(jq -c '.oauth_auth_states // []' "$OUT")
+    RUNTIME_ARTIFACTS_JSON=$(jq -c '.runtime_artifacts // []' "$OUT")
 fi
 
 jq -n \
@@ -134,6 +136,7 @@ jq -n \
     --arg mu_md5 "$MU_MD5" \
     --argjson mu_lines "$MU_LINES" \
     --argjson system_packages "$SYSTEM_PACKAGES_JSON" \
+    --argjson runtime_artifacts "$RUNTIME_ARTIFACTS_JSON" \
     --argjson services "$SERVICES_JSON" \
     --argjson crons "$CRONS_JSON" \
     --argjson scripts "$SCRIPTS_JSON" \
@@ -149,6 +152,7 @@ jq -n \
             "generated_by": "infra-discovery.sh"
         },
         "system_packages": $system_packages,
+        "runtime_artifacts": $runtime_artifacts,
         "systemd_services": $services,
         "crons": $crons,
         "scripts": $scripts,
