@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T02:27:09-04:00",
+    "updated_at": "2026-06-19T02:47:21-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -989,9 +989,9 @@
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
         "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
-        "sha256": "23a98ebb2a217f61af91e8f1430cf5c80b0ffc4f6d13b6568a09c49962355b90",
-        "versioned_sha256": "23a98ebb2a217f61af91e8f1430cf5c80b0ffc4f6d13b6568a09c49962355b90",
-        "modified_at": "2026-06-19T02:25:50.283066-04:00",
+        "sha256": "371ab531867889131706cb004e065bc722e50164bda3aa2ecc95064796bcd4c2",
+        "versioned_sha256": "371ab531867889131706cb004e065bc722e50164bda3aa2ecc95064796bcd4c2",
+        "modified_at": "2026-06-19T02:46:22.601786-04:00",
         "references": [
           {
             "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/elena-full-clone-token2-success-2026-06-19.md",
@@ -1000,9 +1000,17 @@
             "versioned_sha256": "ce4df5d28624a2c9242a44349ba6e447941e85c4c9d25c014cf116eec803d286",
             "modified_at": "2026-06-19T02:25:34.898063-04:00",
             "purpose": "Operational learning: new token and successful Elena full clone for OpenzedFinanzas"
+          },
+          {
+            "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/attribution-setting-probe-2026-06-19.md",
+            "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/references/attribution-setting-probe-2026-06-19.md",
+            "sha256": "4624ec711fdc163195a0679be021568525e9d3a821bd34e8bd36aa8bb536c3c2",
+            "versioned_sha256": "4624ec711fdc163195a0679be021568525e9d3a821bd34e8bd36aa8bb536c3c2",
+            "modified_at": "2026-06-19T02:46:17.523782-04:00",
+            "purpose": "Operational learning: attribution_setting/use_unified_attribution_setting probe for Elena 7/1 perfect clone hypothesis"
           }
         ],
-        "last_report": "registrar aprendizado operacional do token novo e clone full Elena bem-sucedido para OpenzedFinanzas"
+        "last_report": "registrar teste da hipótese attribution_setting/use_unified_attribution_setting para clone perfeito Elena 7/1"
       },
       {
         "name": "paid-acquisition-operations",

@@ -256,9 +256,13 @@ Referência do probe pragmático que destravou campaign + primeiro adset da Elen
 
 Referência BM/Page vs bloqueio API em `POST /ads` mesmo com Marcos tendo Manage campaigns na ad account e controle absoluto da Página Elena: `references/bm-permissions-vs-api-ad-auth-block-2026-06-19.md`.
 
-Referência final do token novo + clone full Elena bem-sucedido: `references/elena-full-clone-token2-success-2026-06-19.md`.
+Referência final do token novo + clone full Elena funcional: `references/elena-full-clone-token2-success-2026-06-19.md`.
 
-### Status validado em 2026-06-19 — clone e ativação funcionam
+Referência da correção crítica de Rodolfo sobre clone perfeito e attribution 7/1: `references/perfect-clone-attribution-7-1-investigation-2026-06-19.md`.
+
+Referência do teste da hipótese Zeus `attribution_setting=7d_click_1d_view` / `use_unified_attribution_setting`: `references/attribution-setting-probe-2026-06-19.md`.
+
+### Status validado em 2026-06-19 — clone funcional e ativação funcionam
 
 O bloqueio `code=31/subcode=3858385` em `POST /ads` foi resolvido após Rodolfo gerar novo token incluindo escopos de Página/Messenger:
 
@@ -289,7 +293,7 @@ Teste 1x3 TOKEN2 campaign             | 120248959079740604
 Clone full Elena campaign             | 120248959247790604
 ```
 
-O clone full da source `120248940367540604` criou 2 adsets e 6 ads, PAUSED, com budget source USD 100/dia porque o pedido foi “do jeitinho que ela é”. A única divergência operacional validada: source Elena usa `7-day click + 1-day view`, mas criação nova retornou `1885501`; clone aceito com `1-day click`. Regra: tentar primeiro o valor da source em clone fiel; se Meta rejeitar com `1885501`, usar `CLICK_THROUGH 1` e reportar a divergência.
+O clone funcional da source `120248940367540604` criou 2 adsets e 6 ads, PAUSED, com budget source USD 100/dia. Porém Rodolfo corrigiu: isso **não** deve ser chamado de clone perfeito se a attribution divergir. Source Elena usa `7-day click + 1-day view`; rebuild manual retornou `1885501` e só criou com `1-day click`. Regra: para pedido de clone perfeito/“do jeitinho que é”, não aceitar essa divergência; continuar via native/async copy ou Ads Manager UI duplicate até preservar 7/1, ou reportar impossibilidade objetiva. `CLICK_THROUGH 1` é apenas workaround de clone funcional/teste, não clone perfeito.
 
 Correção anterior do Rodolfo: quando o pedido for clone fiel, priorizar **clone/source mirror** como os buyers/Ads Manager fazem, não criação from-zero genérica. Criação from-zero pode falhar para este usuário/token e só ser viável em outro contexto de System User; **não usar criação do zero genérica como prova, teste principal ou resposta operacional quando Rodolfo pedir clone fiel**.
 
@@ -393,7 +397,9 @@ Use códigos (`31/3858385`, `1487202`, `1815199`, `190`) como evidência curta e
 ## Pitfalls
 
 - Nunca aplicar “payload padrão Ares” e chamar de clone fiel. Se a source tem 2 adsets/6 ads, criar 1 adset/3 ads é **replacement Ares 1x3**, não clone estrutural. Declare o modo antes de escrever.
-- Não trocar campos da source por sugestão de erro genérico da Meta quando o objetivo declarado for clone fiel. Ex.: Elena mostrava `7-day click, 1-day view` na UI/API; a resposta `1885501` sugerindo `(1,0)` inicialmente indica contexto de criação incompleto, não autorização automática para alterar a attribution da source.
+- Nunca chamar clone de “perfeito”, “full perfeito” ou “do jeitinho que é” se `attribution_spec` ou outro campo crítico divergir. Clone manual com source 7/1 e clone 1-day click é **clone funcional/teste**, não clone perfeito. Para clone perfeito, insistir em native/async copy ou UI duplicate que preserve lineage/attribution, ou reportar bloqueio objetivo.
+- Se a Meta criar adset com attribution errada, não tentar corrigir depois: update de attribution após criação falha com `code=1/subcode=1504040` (“Ya no se admite la modificación del intervalo de atribución”). Deletar/recriar ou abandonar o clone.
+- Não trocar campos da source por sugestão de erro genérico da Meta quando o objetivo declarado for clone fiel. Ex.: Elena mostrava `7-day click, 1-day view` na UI/API; a resposta `1885501` sugerindo `(1,0)` indica que manual rebuild não preserva o contexto de clone perfeito, não autorização automática para aceitar divergência.
 - Exceção de diagnóstico pragmático: se Rodolfo pedir para “resolver não importa como” ou aceitar um teste não-fiel só para destravar a camada API, `attribution_spec=[CLICK_THROUGH 1]` passou para o primeiro adset Elena com DSA/regional/COST_CAP/bid_amount corretos. Rotular isso como workaround diagnóstico, não clone fiel nem padrão permanente.
 - Em conta EU/financeiro, fazer GET explícito de compliance antes de POST: `dsa_beneficiary`, `dsa_payor`, `regional_regulated_categories`, `special_ad_categories`, `special_ad_category_country`. Defaults da API escondem campos.
 - Se a Meta retornar erro de permissão de página (`El permiso de la página es insuficiente para publicar anuncios`), parar. Não resolver mudando payload.
