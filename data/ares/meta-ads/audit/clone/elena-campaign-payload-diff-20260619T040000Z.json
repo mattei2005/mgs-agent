@@ -1,0 +1,159 @@
+{
+  "created_at": "2026-06-19T04:19:43.248985+00:00",
+  "mode": "DRY_RUN_PAYLOAD_DIFF_NO_META_WRITE",
+  "source_mirror": "/root/mgs-agent/data/ares/meta-ads/audit/clone/source-mirror-120248940367540604-20260619T035846Z.json",
+  "source_campaign_id": "120248940367540604",
+  "candidate_post": "POST /act_1356770869843984/campaigns",
+  "payload_without_token": {
+    "name": "Elena Santana - ES - ESP - (pg_22091) - RPL - 20260620 - DIAG01",
+    "objective": "OUTCOME_SALES",
+    "buying_type": "AUCTION",
+    "status": "PAUSED",
+    "daily_budget": "2500",
+    "bid_strategy": "COST_CAP",
+    "special_ad_categories": [
+      "FINANCIAL_PRODUCTS_SERVICES"
+    ],
+    "special_ad_category_country": [
+      "ES"
+    ],
+    "start_time": "2026-06-19T23:00:00Z",
+    "pacing_type": [
+      "standard"
+    ],
+    "smart_promotion_type": "GUIDED_CREATION"
+  },
+  "diff": [
+    {
+      "field": "bid_strategy",
+      "source": "COST_CAP",
+      "payload": "COST_CAP",
+      "status": "IGUAL",
+      "decision": "ENVIAR"
+    },
+    {
+      "field": "budget_remaining",
+      "source": "9314",
+      "payload": null,
+      "status": "READ-ONLY/derivado",
+      "decision": "NÃO ENVIAR"
+    },
+    {
+      "field": "buying_type",
+      "source": "AUCTION",
+      "payload": "AUCTION",
+      "status": "IGUAL",
+      "decision": "ENVIAR"
+    },
+    {
+      "field": "created_time",
+      "source": "2026-06-18T20:57:04+0200",
+      "payload": null,
+      "status": "READ-ONLY/derivado",
+      "decision": "NÃO ENVIAR"
+    },
+    {
+      "field": "daily_budget",
+      "source": "10000",
+      "payload": "2500",
+      "status": "VALOR DIFERENTE",
+      "decision": "PERMITIDO"
+    },
+    {
+      "field": "effective_status",
+      "source": "ACTIVE",
+      "payload": null,
+      "status": "READ-ONLY/derivado",
+      "decision": "NÃO ENVIAR"
+    },
+    {
+      "field": "id",
+      "source": "120248940367540604",
+      "payload": null,
+      "status": "READ-ONLY/derivado",
+      "decision": "NÃO ENVIAR"
+    },
+    {
+      "field": "name",
+      "source": "Elena Santana - ES - ESP - (pg_22091) - 4",
+      "payload": "Elena Santana - ES - ESP - (pg_22091) - RPL - 20260620 - DIAG01",
+      "status": "VALOR DIFERENTE",
+      "decision": "PERMITIDO"
+    },
+    {
+      "field": "objective",
+      "source": "OUTCOME_SALES",
+      "payload": "OUTCOME_SALES",
+      "status": "IGUAL",
+      "decision": "ENVIAR"
+    },
+    {
+      "field": "pacing_type",
+      "source": [
+        "standard"
+      ],
+      "payload": [
+        "standard"
+      ],
+      "status": "IGUAL",
+      "decision": "ENVIAR"
+    },
+    {
+      "field": "smart_promotion_type",
+      "source": "GUIDED_CREATION",
+      "payload": "GUIDED_CREATION",
+      "status": "IGUAL",
+      "decision": "ENVIAR"
+    },
+    {
+      "field": "special_ad_categories",
+      "source": [
+        "FINANCIAL_PRODUCTS_SERVICES"
+      ],
+      "payload": [
+        "FINANCIAL_PRODUCTS_SERVICES"
+      ],
+      "status": "IGUAL",
+      "decision": "ENVIAR"
+    },
+    {
+      "field": "special_ad_category_country",
+      "source": [
+        "ES"
+      ],
+      "payload": [
+        "ES"
+      ],
+      "status": "IGUAL",
+      "decision": "ENVIAR"
+    },
+    {
+      "field": "start_time",
+      "source": "2026-06-19T00:04:00+0200",
+      "payload": "2026-06-19T23:00:00Z",
+      "status": "VALOR DIFERENTE",
+      "decision": "PERMITIDO"
+    },
+    {
+      "field": "status",
+      "source": "ACTIVE",
+      "payload": "PAUSED",
+      "status": "VALOR DIFERENTE",
+      "decision": "PERMITIDO"
+    },
+    {
+      "field": "updated_time",
+      "source": "2026-06-19T05:09:35+0200",
+      "payload": null,
+      "status": "READ-ONLY/derivado",
+      "decision": "NÃO ENVIAR"
+    }
+  ],
+  "write_performed": false,
+  "next_requires_confirmation": true,
+  "notes": [
+    "Este é o checkpoint antes do POST da campaign.",
+    "smart_promotion_type=GUIDED_CREATION foi incluído como candidato porque a source tem e a tentativa anterior não enviou.",
+    "Se a API rejeitar smart_promotion_type como não gravável, o próximo teste deve remover somente esse campo e manter o resto."
+  ]
+}
