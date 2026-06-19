@@ -1,0 +1,47 @@
+{
+  "created_at": "2026-06-19T20:30:14+00:00",
+  "reason": "Correction to Rodolfo target: keep exactly 20 Elena campaigns. The preceding duplicate run created 15 additional DUP campaigns after the account already had 20 compliant Elena campaigns.",
+  "source_audit": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/elena-bulk-duplicates-20260619T192422Z.json",
+  "deleted_campaign_ids": [
+    "120249013327450604",
+    "120249013340260604",
+    "120249013353140604",
+    "120249015560140604",
+    "120249015592110604",
+    "120249015612230604",
+    "120249016000780604",
+    "120249016025650604",
+    "120249018262150604",
+    "120249018272890604",
+    "120249018596030604",
+    "120249018603490604",
+    "120249018767720604",
+    "120249018774110604",
+    "120249018782980604"
+  ],
+  "delete_verification": {
+    "checked": 15,
+    "deleted": 15,
+    "all_effective_status": "DELETED"
+  },
+  "final_live_validation": {
+    "final_elena_not_deleted": 20,
+    "status_counts": {"ACTIVE": 20},
+    "budget_counts": {"2500": 20},
+    "start_range": ["2026-06-20T00:01:00+0200", "2026-06-20T00:20:00+0200"],
+    "issues_count": 0,
+    "validated_requirements": [
+      "20 Elena campaigns not deleted",
+      "daily_budget=2500 minor units (USD 25) for all 20",
+      "1 adset per campaign",
+      "3 ads per campaign",
+      "no adset bid_amount present",
+      "start_time between 00:01 and 00:20 Europe/Madrid"
+    ]
+  },
+  "removed_cron_job": {
+    "job_id": "25a263999f5c",
+    "name": "Ares Elena midnight structure adjust - approved write",
+    "reason": "Obsolete after final account state already matched the 20-campaign target; removed to avoid reprocessing."
+  }
+}

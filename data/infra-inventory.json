@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T15:11:18-04:00",
+    "updated_at": "2026-06-19T16:31:11-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -186,8 +186,8 @@
       },
       "script": "ares-meta-elena-midnight-structure-adjust.sh",
       "next_run_at": "2026-06-19T18:00:00-04:00",
-      "enabled": true,
-      "state": "scheduled",
+      "enabled": false,
+      "state": "removed",
       "no_agent": true,
       "deliver": "discord:1516887105543077949",
       "repeat": {
@@ -195,16 +195,17 @@
         "completed": 0
       },
       "source": "/root/.hermes/profiles/ares/cron/jobs.json",
-      "last_report": "Approved one-shot controlled-write at Meta account midnight for Elena pg_22091 structure adjustment",
-      "validated_at": "2026-06-19T14:52:03-04:00",
+      "last_report": "Job removido após estado final da conta já estar no alvo de 20 campanhas Elena; evita reprocessamento",
+      "validated_at": "2026-06-19T16:31:11-04:00",
       "validation": {
-        "py_compile": "OK",
-        "bash_n": "OK",
-        "dry_run_audit": "OK",
-        "dry_run_ok": true,
-        "cron_enabled_scheduled": true
+        "cron_absent_from_jobs_json": true,
+        "cleanup_audit_json": "OK",
+        "final_elena_active_campaigns": 20,
+        "daily_budget_2500_count": 20,
+        "issues_count": 0
       },
-      "intended_local_time": "2026-06-20 00:00 Europe/Madrid / 2026-06-19 18:00 America/New_York"
+      "intended_local_time": "2026-06-20 00:00 Europe/Madrid / 2026-06-19 18:00 America/New_York",
+      "removed_at": "2026-06-19T16:31:11-04:00"
     }
   ],
   "scripts": [
@@ -3344,6 +3345,16 @@
       "agent": "ares",
       "type": "meta_ads_controlled_write_audit",
       "purpose": "Execution audit for Elena bulk duplicates controlled-write automation; real execution started in background and recorded Meta/API result"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/elena-extra-dup-cleanup-20260619T203014Z.json",
+      "size_bytes": 1683,
+      "md5": "533816fe02335044300ff16cabd8adad",
+      "modified_at": "2026-06-19T16:30:27.433707-04:00",
+      "sha256": "6eb8dc75e614d12fdd3e5322bc79d625860b1fb35f30b82b453dd96f1f96808b",
+      "agent": "ares",
+      "type": "meta_ads_controlled_write_audit",
+      "purpose": "Cleanup audit for Elena extra duplicate campaigns; deleted 15 surplus DUP campaigns, verified exactly 20 ACTIVE Elena campaigns with USD25/day and removed obsolete midnight cron"
     }
   ],
   "mu_plugin_canonical": {
