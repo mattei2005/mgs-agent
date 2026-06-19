@@ -1,0 +1,159 @@
+{
+  "created_at": "2026-06-19T04:56:50.599496+00:00",
+  "mode": "resolve_create_first_adset_with_meta_required_attribution_1_0",
+  "campaign_id": "120248957582370604",
+  "write_scope": "first adset only; no creatives/ads",
+  "steps": [
+    {
+      "step": "pre_get_campaign",
+      "get_status": 200,
+      "get_payload": {
+        "id": "120248957582370604",
+        "name": "Elena Santana - ES - ESP - (pg_22091) - RPL - 20260620 - DIAG01",
+        "status": "PAUSED",
+        "effective_status": "PAUSED",
+        "objective": "OUTCOME_SALES",
+        "buying_type": "AUCTION",
+        "start_time": "1970-01-01T00:59:59+0100",
+        "daily_budget": "2500",
+        "bid_strategy": "COST_CAP",
+        "special_ad_categories": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ],
+        "special_ad_category_country": [
+          "ES"
+        ],
+        "smart_promotion_type": "GUIDED_CREATION",
+        "pacing_type": [
+          "standard"
+        ]
+      }
+    },
+    {
+      "step": "post_first_adset_1day_click_no_view",
+      "request_payload": {
+        "name": "Conjunto 02 - VÍDEOS - RPL 20260620 - 1dclick",
+        "campaign_id": "120248957582370604",
+        "status": "PAUSED",
+        "billing_event": "IMPRESSIONS",
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "optimization_sub_event": "NONE",
+        "destination_type": "MESSENGER",
+        "targeting": {
+          "age_max": 65,
+          "age_min": 18,
+          "age_range": [
+            18,
+            65
+          ],
+          "geo_locations": {
+            "countries": [
+              "ES"
+            ],
+            "location_types": [
+              "home",
+              "recent"
+            ]
+          },
+          "brand_safety_content_filter_levels": [
+            "FACEBOOK_RELAXED",
+            "AN_RELAXED"
+          ],
+          "targeting_automation": {
+            "advantage_audience": 1
+          }
+        },
+        "promoted_object": {
+          "pixel_id": "629060785934493",
+          "custom_event_type": "COMPLETE_REGISTRATION",
+          "page_id": "990898360783030",
+          "smart_pse_enabled": false
+        },
+        "attribution_spec": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 1
+          }
+        ],
+        "start_time": "2026-06-19T23:00:00Z",
+        "bid_amount": 200,
+        "is_dynamic_creative": false,
+        "use_new_app_click": false,
+        "dsa_beneficiary": "Openzed",
+        "dsa_payor": "Openzed",
+        "regional_regulated_categories": [
+          "SPAIN_FINSERV",
+          "VOLUNTARY_VERIFICATION"
+        ]
+      },
+      "post_status": 200,
+      "post_payload": {
+        "id": "120248957704340604"
+      },
+      "adset_id": "120248957704340604"
+    },
+    {
+      "step": "get_created_adset",
+      "get_status": 200,
+      "get_payload": {
+        "id": "120248957704340604",
+        "name": "Conjunto 02 - VÍDEOS - RPL 20260620 - 1dclick",
+        "campaign_id": "120248957582370604",
+        "status": "PAUSED",
+        "effective_status": "IN_PROCESS",
+        "optimization_goal": "OFFSITE_CONVERSIONS",
+        "billing_event": "IMPRESSIONS",
+        "bid_amount": 200,
+        "destination_type": "MESSENGER",
+        "promoted_object": {
+          "pixel_id": "629060785934493",
+          "custom_event_type": "COMPLETE_REGISTRATION",
+          "page_id": "990898360783030",
+          "smart_pse_enabled": false
+        },
+        "targeting": {
+          "age_max": 65,
+          "age_min": 18,
+          "age_range": [
+            18,
+            65
+          ],
+          "geo_locations": {
+            "countries": [
+              "ES"
+            ],
+            "location_types": [
+              "home",
+              "recent"
+            ]
+          },
+          "brand_safety_content_filter_levels": [
+            "FACEBOOK_RELAXED",
+            "AN_RELAXED"
+          ],
+          "targeting_automation": {
+            "advantage_audience": 1
+          }
+        },
+        "attribution_spec": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 1
+          }
+        ],
+        "optimization_sub_event": "NONE",
+        "is_dynamic_creative": false,
+        "use_new_app_click": false,
+        "start_time": "2026-06-20T01:00:00+0200",
+        "dsa_beneficiary": "Openzed",
+        "dsa_payor": "Openzed",
+        "regional_regulated_categories": [
+          "SPAIN_FINSERV",
+          "VOLUNTARY_VERIFICATION"
+        ]
+      }
+    }
+  ],
+  "created_adset_id": "120248957704340604",
+  "status": "SUCCESS_FIRST_ADSET_CREATED_STOP"
+}
