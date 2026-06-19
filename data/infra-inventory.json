@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T12:11:18-04:00",
+    "updated_at": "2026-06-19T12:22:39-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -1013,9 +1013,9 @@
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
         "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
-        "sha256": "bfc6b850a3b7a7c6abfcb9d754533286f7a76886eba76e562c9397322d65dc8c",
-        "versioned_sha256": "bfc6b850a3b7a7c6abfcb9d754533286f7a76886eba76e562c9397322d65dc8c",
-        "modified_at": "2026-06-19T03:11:26.910579-04:00",
+        "sha256": "757a97887738a52d469744dd9d400eebdbfa167361990ac2cff7311d1bce8d39",
+        "versioned_sha256": "757a97887738a52d469744dd9d400eebdbfa167361990ac2cff7311d1bce8d39",
+        "modified_at": "2026-06-19T12:20:39.974994-04:00",
         "references": [
           {
             "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/elena-full-clone-token2-success-2026-06-19.md",
@@ -1040,6 +1040,30 @@
             "versioned_sha256": "f9c4886b4b5e0862343f06797ddf683a34cb0769aac75084436c24c589add098",
             "modified_at": "2026-06-19T03:11:21.058573-04:00",
             "purpose": "Operational learning: API draft/copy flow for Elena 7/1 perfect clone and app capability block on addrafts"
+          },
+          {
+            "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/elena-native-copy-ctm-standard-enhancements-2026-06-19.md",
+            "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/references/elena-native-copy-ctm-standard-enhancements-2026-06-19.md",
+            "sha256": "c8a06b52354d71da5e43ea50feea9574a6a412e40b5fb3276bcdc1e7a2bc336e",
+            "versioned_sha256": "c8a06b52354d71da5e43ea50feea9574a6a412e40b5fb3276bcdc1e7a2bc336e",
+            "modified_at": "2026-06-19T12:20:34.046988-04:00",
+            "purpose": "Operational learning: Meta Elena native/async copy, standard_enhancements and CTM creative_parameters probe findings"
+          },
+          {
+            "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/asyncbatch-copy-and-ctm-creative-parameters-2026-06-19.md",
+            "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/references/asyncbatch-copy-and-ctm-creative-parameters-2026-06-19.md",
+            "sha256": "9127ddd7b42969782797b0a29b8dc19c0df06de577eacf0f09521d16853ffaf9",
+            "versioned_sha256": "9127ddd7b42969782797b0a29b8dc19c0df06de577eacf0f09521d16853ffaf9",
+            "modified_at": "2026-06-19T12:13:45.274545-04:00",
+            "purpose": "Operational learning: Meta Elena native/async copy, standard_enhancements and CTM creative_parameters probe findings"
+          },
+          {
+            "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/asyncbatch-copy-and-creative-parameters-2026-06-19.md",
+            "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/references/asyncbatch-copy-and-creative-parameters-2026-06-19.md",
+            "sha256": "e44197b5c4e1adeb2da366422e5c7d1d3db35f6bcd7ad799f1fd04fafef9ee6b",
+            "versioned_sha256": "e44197b5c4e1adeb2da366422e5c7d1d3db35f6bcd7ad799f1fd04fafef9ee6b",
+            "modified_at": "2026-06-19T11:50:14.525957-04:00",
+            "purpose": "Operational learning: Meta Elena native/async copy, standard_enhancements and CTM creative_parameters probe findings"
           }
         ],
         "last_report": "registrar descoberta do fluxo API de draft/copy para clone perfeito Elena 7/1 e bloqueio de capability do app em addrafts"

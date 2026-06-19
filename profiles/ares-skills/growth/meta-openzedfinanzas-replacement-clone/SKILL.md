@@ -264,6 +264,12 @@ Referência do teste da hipótese Zeus `attribution_setting=7d_click_1d_view` / 
 
 Referência da descoberta do caminho API de draft/copy (`addraft_id` + `asyncadcopies`) e bloqueio de capability do app: `references/addraft-asyncadcopies-probe-2026-06-19.md`.
 
+Referência dos probes posteriores de native/async copy, `standard_enhancements` obsoleto e formatos CTM/`creative_parameters` que falharam: `references/elena-native-copy-ctm-standard-enhancements-2026-06-19.md`.
+
+Referência da correção posterior: `addrafts` não é o único caminho; `asyncbatch` com `/copies` inicia jobs sem API avançada, mas o clone perfeito Elena segue bloqueado em CTM creative copy (`standard_enhancements`, `messenger_doc`, `destination_spec`/template): `references/asyncbatch-copy-and-ctm-creative-parameters-2026-06-19.md`.
+
+Referência dos probes que corrigiram a leitura sobre API avançada: asyncbatch público inicia sem addrafts, mas o clone Elena bloqueia em creative legado `standard_enhancements`/`messenger_doc`; próximos testes devem focar `/ad_id/copies` com `creative_parameters` plural e formato Click-to-Messenger correto: `references/asyncbatch-copy-and-creative-parameters-2026-06-19.md`.
+
 ### Status validado em 2026-06-19 — clone funcional e ativação funcionam
 
 O bloqueio `code=31/subcode=3858385` em `POST /ads` foi resolvido após Rodolfo gerar novo token incluindo escopos de Página/Messenger:
@@ -312,11 +318,12 @@ Ordem | Caminho
 ------|------------------------------------------------------------
 1     | Validar token e listar campanhas/adsets/ads incluindo OFF/PAUSED
 2     | Tentar Meta native copy endpoints (`/copies`) preservando PAUSED
-3     | Se campaign `deep_copy` falhar em uma source, testar outras campaigns da conta
+3     | Se campaign `deep_copy` regular falhar por limite de objetos, testar o mesmo `/copies` dentro de `asyncbatch` antes de concluir capability/addraft
 4     | Se campaign rasa copiar só shell, não chamar de sucesso; testar adset/ad copy nativo
-5     | Se copy falhar por `standard_enhancements`, suprimir/normalizar creative features
-6     | Só usar rebuild manual de creative/ad como diagnóstico separado, nunca como substituto do clone pedido
-7     | Validar GET e deletar qualquer cópia rasa/parcial sem adsets/ads esperados
+5     | Se copy falhar por `standard_enhancements`, aplicar `creative_parameters` no nível `ad_id/copies`; em adset/campaign deep copy isso não sobrescreveu o blocker
+6     | Para CTM/Messenger, não usar `messenger_doc` como website externo nem `destination_spec.message_destination.page_id`; testar `object_story_spec.link_data.page_welcome_message` ou obter payload/HAR sanitizado do clone que funciona
+7     | Só usar rebuild manual de creative/ad como diagnóstico separado, nunca como substituto do clone pedido
+8     | Validar GET e deletar qualquer cópia rasa/parcial sem adsets/ads esperados
 ```
 
 Pitfalls validados:
@@ -404,6 +411,10 @@ Use códigos (`31/3858385`, `1487202`, `1815199`, `190`) como evidência curta e
 - Não trocar campos da source por sugestão de erro genérico da Meta quando o objetivo declarado for clone fiel. Ex.: Elena mostrava `7-day click, 1-day view` na UI/API; a resposta `1885501` sugerindo `(1,0)` indica que manual rebuild não preserva o contexto de clone perfeito, não autorização automática para aceitar divergência.
 - Exceção de diagnóstico pragmático: se Rodolfo pedir para “resolver não importa como” ou aceitar um teste não-fiel só para destravar a camada API, `attribution_spec=[CLICK_THROUGH 1]` passou para o primeiro adset Elena com DSA/regional/COST_CAP/bid_amount corretos. Rotular isso como workaround diagnóstico, não clone fiel nem padrão permanente.
 - Em conta EU/financeiro, fazer GET explícito de compliance antes de POST: `dsa_beneficiary`, `dsa_payor`, `regional_regulated_categories`, `special_ad_categories`, `special_ad_category_country`. Defaults da API escondem campos.
+- `asyncbatch` público pode executar native copy sem `addrafts`: `POST /vXX.0/` com `asyncbatch=[{"method":"POST","relative_url":"<adset_id>/copies","body":"campaign_id=<target>&deep_copy=true&status_option=PAUSED..."}]` retorna `async_sessions`. Não concluir “precisa API avançada/addrafts” quando essa rota ainda não foi testada.
+- Para Elena/source com creatives antigos, native copy/deep copy pode falhar por `3858504 standard_enhancements` porque a source tem `degrees_of_freedom_spec.creative_features_spec.standard_enhancements=OPT_IN`. Esse é bloqueio de creative legado, não de token/scope.
+- `creative_parameters` plural em `/ad_id/copies` é lido pela Meta; quando aplicado, o erro pode avançar de `3858504` para `1815765 messenger_doc inválido`. Isso indica que o próximo ajuste é o formato correto de Click-to-Messenger sem `asset_feed_spec.link_urls.website_url=https://fb.com/messenger_doc/`, não repetir campaign/adset deep_copy.
+- Probes de copy/async precisam ser bounded: timeout curto, polling limitado, cleanup imediato e, se puder passar de 1 minuto, rodar em background/subagente. Não deixar execução foreground longa parecer travada no Discord.
 - Se a Meta retornar erro de permissão de página (`El permiso de la página es insuficiente para publicar anuncios`), parar. Não resolver mudando payload.
 - Se uma campaign criada voltar `start_time=1970`, tratar como campanha mãe malformada/suspeita antes de debugar adset.
 - `code=31/subcode=3858385` pode aparecer como mensagem genérica de autenticação na API mesmo quando Ads Manager manual não mostra checkpoint; antes de concluir checkpoint humano, testar se o payload está usando a rota correta (`video_id`/`image_hash`) e Graph version compatível.
