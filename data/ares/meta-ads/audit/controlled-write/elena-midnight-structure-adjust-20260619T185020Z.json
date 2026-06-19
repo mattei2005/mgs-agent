@@ -1,0 +1,824 @@
+{
+  "created_at": "2026-06-19T18:50:05.969021+00:00",
+  "mode": "dry_run",
+  "account_id": "1356770869843984",
+  "target_campaign_ids": [
+    "120248940367540604",
+    "120248940367280604",
+    "120248940367270604",
+    "120248940367260604",
+    "120248940291730604"
+  ],
+  "token_report": {
+    "item": "Token Meta API",
+    "field": "credential",
+    "len": 198
+  },
+  "writes": [],
+  "campaigns": [
+    {
+      "campaign_before": {
+        "id": "120248940367540604",
+        "name": "Elena Santana - ES - ESP - (pg_22091) - 4",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "daily_budget": "10000"
+      },
+      "keep_adset_id": "120248940367340604",
+      "keep_adset_name": "Conjunto 01 - VÍDEOS",
+      "adsets_before": [
+        {
+          "id": "120248940367380604",
+          "name": "Conjunto 02 - VÍDEOS",
+          "status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "bid_amount": 200
+        },
+        {
+          "id": "120248940367340604",
+          "name": "Conjunto 01 - VÍDEOS",
+          "status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "bid_amount": 200
+        }
+      ],
+      "adset_metrics_3d": {
+        "120248940367380604": {
+          "spend": 32.01,
+          "MO": 20.0,
+          "CPMO": 1.6004999999999998
+        },
+        "120248940367340604": {
+          "spend": 68.21,
+          "MO": 37.0,
+          "CPMO": 1.8435135135135134
+        }
+      },
+      "actions": [
+        {
+          "target": "120248940367540604",
+          "type": "campaign_budget_2500",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367540604",
+            "params": {
+              "daily_budget": "2500"
+            }
+          }
+        },
+        {
+          "target": "120248940367380604",
+          "type": "pause_removed_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367380604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367300604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367300604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367400604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367400604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367420604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367420604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367340604",
+          "type": "keep_adset_active_lowest_cost_without_cap",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367340604",
+            "params": {
+              "status": "ACTIVE",
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+            }
+          }
+        },
+        {
+          "target": "120248940367560604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367560604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        },
+        {
+          "target": "120248940367500604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367500604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        },
+        {
+          "target": "120248940367480604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367480604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        }
+      ],
+      "verify_after": {
+        "dry_run": true
+      }
+    },
+    {
+      "campaign_before": {
+        "id": "120248940367280604",
+        "name": "Elena Santana - ES - ESP - (pg_22091) - 2",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "daily_budget": "10000"
+      },
+      "keep_adset_id": "120248940367310604",
+      "keep_adset_name": "Conjunto 01 - VÍDEOS",
+      "adsets_before": [
+        {
+          "id": "120248940367360604",
+          "name": "Conjunto 02 - VÍDEOS",
+          "status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "bid_amount": 200
+        },
+        {
+          "id": "120248940367310604",
+          "name": "Conjunto 01 - VÍDEOS",
+          "status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "bid_amount": 200
+        }
+      ],
+      "adset_metrics_3d": {
+        "120248940367360604": {
+          "spend": 13.82,
+          "MO": 6.0,
+          "CPMO": 2.3033333333333332
+        },
+        "120248940367310604": {
+          "spend": 22.61,
+          "MO": 10.0,
+          "CPMO": 2.261
+        }
+      },
+      "actions": [
+        {
+          "target": "120248940367280604",
+          "type": "campaign_budget_2500",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367280604",
+            "params": {
+              "daily_budget": "2500"
+            }
+          }
+        },
+        {
+          "target": "120248940367360604",
+          "type": "pause_removed_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367360604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367600604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367600604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367550604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367550604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367430604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367430604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367310604",
+          "type": "keep_adset_active_lowest_cost_without_cap",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367310604",
+            "params": {
+              "status": "ACTIVE",
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+            }
+          }
+        },
+        {
+          "target": "120248940367510604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367510604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        },
+        {
+          "target": "120248940367490604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367490604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        },
+        {
+          "target": "120248940367460604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367460604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        }
+      ],
+      "verify_after": {
+        "dry_run": true
+      }
+    },
+    {
+      "campaign_before": {
+        "id": "120248940367270604",
+        "name": "Elena Santana - ES - ESP - (pg_22091) - 3",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "daily_budget": "10000"
+      },
+      "keep_adset_id": "120248940367320604",
+      "keep_adset_name": "Conjunto 01 - VÍDEOS",
+      "adsets_before": [
+        {
+          "id": "120248940367350604",
+          "name": "Conjunto 02 - VÍDEOS",
+          "status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "bid_amount": 200
+        },
+        {
+          "id": "120248940367320604",
+          "name": "Conjunto 01 - VÍDEOS",
+          "status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "bid_amount": 200
+        }
+      ],
+      "adset_metrics_3d": {
+        "120248940367350604": {
+          "spend": 6.73,
+          "MO": 0.0,
+          "CPMO": null
+        },
+        "120248940367320604": {
+          "spend": 79.2,
+          "MO": 54.0,
+          "CPMO": 1.4666666666666668
+        }
+      },
+      "actions": [
+        {
+          "target": "120248940367270604",
+          "type": "campaign_budget_2500",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367270604",
+            "params": {
+              "daily_budget": "2500"
+            }
+          }
+        },
+        {
+          "target": "120248940367350604",
+          "type": "pause_removed_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367350604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367580604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367580604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367370604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367370604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367610604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367610604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367320604",
+          "type": "keep_adset_active_lowest_cost_without_cap",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367320604",
+            "params": {
+              "status": "ACTIVE",
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+            }
+          }
+        },
+        {
+          "target": "120248940367390604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367390604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        },
+        {
+          "target": "120248940367410604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367410604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        },
+        {
+          "target": "120248940367530604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367530604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        }
+      ],
+      "verify_after": {
+        "dry_run": true
+      }
+    },
+    {
+      "campaign_before": {
+        "id": "120248940367260604",
+        "name": "Elena Santana - ES - ESP - (pg_22091) - 5",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "daily_budget": "10000"
+      },
+      "keep_adset_id": "120248940367440604",
+      "keep_adset_name": "Conjunto 02 - VÍDEOS",
+      "adsets_before": [
+        {
+          "id": "120248940367440604",
+          "name": "Conjunto 02 - VÍDEOS",
+          "status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "bid_amount": 200
+        },
+        {
+          "id": "120248940367330604",
+          "name": "Conjunto 01 - VÍDEOS",
+          "status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "bid_amount": 200
+        }
+      ],
+      "adset_metrics_3d": {
+        "120248940367440604": {
+          "spend": 22.13,
+          "MO": 10.0,
+          "CPMO": 2.213
+        },
+        "120248940367330604": {
+          "spend": 11.82,
+          "MO": 3.0,
+          "CPMO": 3.94
+        }
+      },
+      "actions": [
+        {
+          "target": "120248940367260604",
+          "type": "campaign_budget_2500",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367260604",
+            "params": {
+              "daily_budget": "2500"
+            }
+          }
+        },
+        {
+          "target": "120248940367440604",
+          "type": "keep_adset_active_lowest_cost_without_cap",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367440604",
+            "params": {
+              "status": "ACTIVE",
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+            }
+          }
+        },
+        {
+          "target": "120248940367590604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367590604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        },
+        {
+          "target": "120248940367570604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367570604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        },
+        {
+          "target": "120248940367290604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367290604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        },
+        {
+          "target": "120248940367330604",
+          "type": "pause_removed_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367330604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367520604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367520604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367470604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367470604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940367450604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940367450604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        }
+      ],
+      "verify_after": {
+        "dry_run": true
+      }
+    },
+    {
+      "campaign_before": {
+        "id": "120248940291730604",
+        "name": "Elena Santana - ES - ESP - (pg_22091) - 1",
+        "status": "ACTIVE",
+        "effective_status": "ACTIVE",
+        "daily_budget": "10000"
+      },
+      "keep_adset_id": "120248940334500604",
+      "keep_adset_name": "Conjunto 02 - VÍDEOS",
+      "adsets_before": [
+        {
+          "id": "120248940334500604",
+          "name": "Conjunto 02 - VÍDEOS",
+          "status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "bid_amount": 200
+        },
+        {
+          "id": "120248940291800604",
+          "name": "Conjunto 01 - VÍDEOS",
+          "status": "ACTIVE",
+          "effective_status": "ACTIVE",
+          "bid_amount": 200
+        }
+      ],
+      "adset_metrics_3d": {
+        "120248940334500604": {
+          "spend": 68.09,
+          "MO": 45.0,
+          "CPMO": 1.5131111111111113
+        },
+        "120248940291800604": {
+          "spend": 9.55,
+          "MO": 2.0,
+          "CPMO": 4.775
+        }
+      },
+      "actions": [
+        {
+          "target": "120248940291730604",
+          "type": "campaign_budget_2500",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940291730604",
+            "params": {
+              "daily_budget": "2500"
+            }
+          }
+        },
+        {
+          "target": "120248940334500604",
+          "type": "keep_adset_active_lowest_cost_without_cap",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940334500604",
+            "params": {
+              "status": "ACTIVE",
+              "bid_strategy": "LOWEST_COST_WITHOUT_CAP"
+            }
+          }
+        },
+        {
+          "target": "120248940334490604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940334490604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        },
+        {
+          "target": "120248940334480604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940334480604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        },
+        {
+          "target": "120248940334470604",
+          "type": "keep_ad_active",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940334470604",
+            "params": {
+              "status": "ACTIVE"
+            }
+          }
+        },
+        {
+          "target": "120248940291800604",
+          "type": "pause_removed_adset",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940291800604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940291820604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940291820604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940291830604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940291830604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        },
+        {
+          "target": "120248940291850604",
+          "type": "pause_removed_ad",
+          "status": 0,
+          "payload": {
+            "dry_run": true,
+            "path": "120248940291850604",
+            "params": {
+              "status": "PAUSED"
+            }
+          }
+        }
+      ],
+      "verify_after": {
+        "dry_run": true
+      }
+    }
+  ],
+  "rule_updates": [
+    {
+      "rule_id": "1706384407070888",
+      "post_status": 0,
+      "post_payload": {
+        "dry_run": true,
+        "path": "1706384407070888",
+        "params": {
+          "status": "DISABLED"
+        }
+      },
+      "verify_status": 0,
+      "verify": {
+        "dry_run": true
+      }
+    },
+    {
+      "rule_id": "1142483632283037",
+      "post_status": 0,
+      "post_payload": {
+        "dry_run": true,
+        "path": "1142483632283037",
+        "params": {
+          "status": "DISABLED"
+        }
+      },
+      "verify_status": 0,
+      "verify": {
+        "dry_run": true
+      }
+    }
+  ],
+  "errors": [],
+  "final": {
+    "ok": true,
+    "dry_run": true,
+    "campaign_count": 5,
+    "error_count": 0
+  }
+}

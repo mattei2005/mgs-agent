@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T14:28:13-04:00",
+    "updated_at": "2026-06-19T14:52:03-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -174,6 +174,37 @@
         "wrappers_local_execution": "OK",
         "all_writes_disabled_by_policy": true
       }
+    },
+    {
+      "profile": "ares",
+      "id": "25a263999f5c",
+      "name": "Ares Elena midnight structure adjust - approved write",
+      "schedule": {
+        "kind": "once",
+        "run_at": "2026-06-19T18:00:00-04:00",
+        "display": "once at 2026-06-19 18:00"
+      },
+      "script": "ares-meta-elena-midnight-structure-adjust.sh",
+      "next_run_at": "2026-06-19T18:00:00-04:00",
+      "enabled": true,
+      "state": "scheduled",
+      "no_agent": true,
+      "deliver": "discord:1516887105543077949",
+      "repeat": {
+        "times": 1,
+        "completed": 0
+      },
+      "source": "/root/.hermes/profiles/ares/cron/jobs.json",
+      "last_report": "Approved one-shot controlled-write at Meta account midnight for Elena pg_22091 structure adjustment",
+      "validated_at": "2026-06-19T14:52:03-04:00",
+      "validation": {
+        "py_compile": "OK",
+        "bash_n": "OK",
+        "dry_run_audit": "OK",
+        "dry_run_ok": true,
+        "cron_enabled_scheduled": true
+      },
+      "intended_local_time": "2026-06-20 00:00 Europe/Madrid / 2026-06-19 18:00 America/New_York"
     }
   ],
   "scripts": [
@@ -708,6 +739,26 @@
         "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/elena-asyncbatch-creativeparam-probe-20260619T154243Z.json",
         "audit_sha256": "05762d5af1469afc987abfb3066b1c308e2c2137285897bc40a9203b40ddee86"
       }
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-elena-midnight-structure-adjust.py",
+      "size_bytes": 12182,
+      "modified_at": "2026-06-19T14:49:58.866287-04:00",
+      "sha256": "49df86e5da21e704fb118a087fedb9e4b20d56ca18d8ab6afc3703770c2e93b2",
+      "agent": "ares",
+      "purpose": "Ares controlled-write script for Elena pg_22091 midnight structure adjustment: USD25/day, 1 adset/3 ads, remove bid cap, disable Meta PAUSE rules",
+      "last_report": "Rodolfo aprovou controlled-write na virada da conta Meta para Elena pg_22091"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-elena-midnight-structure-adjust.sh",
+      "size_bytes": 122,
+      "modified_at": "2026-06-19T14:50:28.649322-04:00",
+      "sha256": "022a39a9320bb586c8b4d64956426b4e27a04962f512a3e53270606ab673d3ab",
+      "agent": "ares",
+      "purpose": "Profile-local Hermes cron wrapper for approved Elena midnight controlled-write structure adjustment",
+      "last_report": "Rodolfo aprovou controlled-write na virada da conta Meta para Elena pg_22091",
+      "git_tracked": false,
+      "profile": "ares"
     }
   ],
   "skills_mgs": [
@@ -3254,6 +3305,16 @@
       "agent": "ares",
       "type": "meta_ads_operation_policy",
       "purpose": "Meta OpenzedFinanzas CC ES read-only/dry-run operation/policy with simulated decisions, REC IDs, Elena pg_22091 active focus and Patricia pg_22069 manual hold"
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/elena-midnight-structure-adjust-20260619T185020Z.json",
+      "size_bytes": 20814,
+      "md5": "4ef48034a30f2c4fde0072328da778d9",
+      "modified_at": "2026-06-19T14:50:20.679313-04:00",
+      "sha256": "bfa0f99d92e243de2600cd5552714da346774b82e25dc6fae69b7a1072193fe4",
+      "agent": "ares",
+      "type": "meta_ads_controlled_write_audit",
+      "purpose": "Dry-run audit for approved Elena midnight controlled-write structure adjustment; validates 5 campaigns, 2 PAUSE rules, no write executed in dry-run"
     }
   ],
   "mu_plugin_canonical": {
