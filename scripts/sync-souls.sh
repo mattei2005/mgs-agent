@@ -68,9 +68,14 @@ if [ -d "$PROFILES_DIR/ares/skills/growth" ]; then
         && echo "$(date -Iseconds) synced ares skills/growth"
 fi
 
-# Hera: skill customizada Creative Brief + Handoff.
+# Hera: skills customizadas Creative Ops MGS.
 # Não sincronizar a categoria creative inteira para evitar vendor/bundled skills enormes.
-if [ -d "$PROFILES_DIR/hera/skills/creative/creative-brief-handoff" ]; then
-    mkdir -p "$TARGET_DIR/hera-skills/creative"
-    rsync -a --delete         "$PROFILES_DIR/hera/skills/creative/creative-brief-handoff/"         "$TARGET_DIR/hera-skills/creative/creative-brief-handoff/"         && echo "$(date -Iseconds) synced hera skills/creative/creative-brief-handoff"
-fi
+mkdir -p "$TARGET_DIR/hera-skills/creative"
+for skill in creative-brief-handoff meta-library-reference-intake; do
+    if [ -d "$PROFILES_DIR/hera/skills/creative/$skill" ]; then
+        rsync -a --delete \
+            "$PROFILES_DIR/hera/skills/creative/$skill/" \
+            "$TARGET_DIR/hera-skills/creative/$skill/" \
+            && echo "$(date -Iseconds) synced hera skills/creative/$skill"
+    fi
+done
