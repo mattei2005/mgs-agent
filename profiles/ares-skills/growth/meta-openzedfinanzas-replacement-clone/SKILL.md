@@ -72,25 +72,81 @@ Page ID promoted      | 1063171606876651
 Attribution           | 7d click + 1d view
 ```
 
-## Nomenclatura de replacement
+## Nomenclatura operacional: scale vs replacement
 
-Padrão criado para identificar trocas:
+Separar escala normal de replacement. Para campanha nova de escala, continuar a sequência simples da página/operação; para substituição de campanha ruim, usar `RPL`.
 
 ```text
-<Nome página> - <País> - <Idioma> - (<pg_id>) - RPL - <YYYYMMDD> - <seq>
+Tipo                  | Padrão
+----------------------|------------------------------------------------------------
+Scale normal           | <Nome página> - <País> - <Idioma> - (<pg_id>) - <seq>
+Replacement            | <Nome página> - <País> - <Idioma> - (<pg_id>) - RPL - <YYYYMMDD> - <seq>
 ```
 
-Exemplo:
+Exemplos:
 
 ```text
+Elena Santana - ES - ESP - (pg_22091) - 21
 Patricia Flores - US - ESP - (pg_22069) - RPL - 20260619 - 01
 ```
 
 Notas:
-- `RPL` identifica replacement.
+- `RPL` identifica replacement, não escala normal.
 - `YYYYMMDD` é a data programada de início no timezone da conta.
 - `seq` começa em `01`.
-- Não reutilizar o sufixo numérico antigo da loser como identidade operacional do clone.
+- Não reutilizar o sufixo numérico antigo da loser como identidade operacional do replacement.
+- Não usar `DUP` em produção; `DUP` é apenas rótulo técnico/teste e deve ser limpo ou evitado em objetos finais.
+
+### Nomenclatura recomendada para adsets, ads e adcreatives
+
+```text
+Object       | Pattern
+-------------|------------------------------------------------------------
+Adset        | CJ01 - <FORMAT> - <ANGLE_GROUP>
+Ad           | AD<NN> - <FORMAT> - <ANGLE> - <P_ORIENT> - <VARIANT>
+AdCreative   | CC_<COUNTRY>_<LANG>_<FORMAT>_<ANGLE>_<P_ORIENT>_<VARIANT>
+```
+
+Exemplo Elena:
+
+```text
+Adset      | CJ01 - VID - MIX
+Ad 1       | AD01 - VID - LIMITE_ALTO - NV - 001
+Ad 2       | AD02 - VID - LIMITE_ALTO - NV - 002
+Ad 3       | AD03 - VID - LIMITE_ALTO - NV - 003
+Creative  | CC_ES_ESP_VID_LIMITE_ALTO_NV_001
+```
+
+Antes de renomear objetos ativos, gerar inventário read-only + contact sheets + plano `old_name -> new_name` e pedir aprovação explícita de Rodolfo. Referência: `references/elena-naming-standard-and-readonly-plan-2026-06-19.md`.
+
+## Padrão de nomenclatura Meta — escala, ads e criativos
+
+Para operação padronizada Ares 1x3 em OpenzedFinanzas/Elena:
+
+```text
+Nível       | Padrão
+------------|------------------------------------------------------------
+Campanha    | <Nome página> - <País> - <Idioma> - (<pg_id>) - <SEQ>
+Conjunto    | CJ01 - <FORMAT> - <ANGLE_GROUP>
+Anúncio     | AD<NN> - <FORMAT> - <ANGLE> - <P_ORIENT> - <VARIANT>
+Adcreative  | CC_<COUNTRY>_<LANG>_<FORMAT>_<ANGLE>_<P_ORIENT>_<VARIANT>_C<SEQ>
+Replacement | <Nome página> - <País> - <Idioma> - (<pg_id>) - RPL - <YYYYMMDD> - <seq>
+```
+
+Exemplo Elena validado:
+
+```text
+Campanha   | Elena Santana - ES - ESP - (pg_22091) - 1
+Conjunto   | CJ01 - VID - MIX
+Anúncio    | AD01 - VID - LIMITE_ALTO - NV - 001
+Adcreative | CC_ES_ESP_VID_LIMITE_ALTO_NV_001_C01
+```
+
+Pitfalls validados em 2026-06-19:
+- Antes de rename em massa, gerar inventário read-only e plano `old_name → new_name`, classificar criativo por thumbnail/frame/texto/video title e salvar audit em `data/ares/meta-ads/audit/naming/`.
+- `adcreative` não aceita GET com `effective_status/status`; validar com fields `id,name`.
+- Nomes de `adcreative` repetidos podem falhar com `Invalid parameter`/`1487229`; adicionar sufixo de instância/campanha (`_C01`, `_C02`...) mantendo o prefixo taxonômico.
+- Para criativos Elena atuais, video titles `NV - Criativo 3 - Openzed - EspanholES - Feed/Storie` + visual de cartão/600/6000/CTA justificaram `CC_ES_ESP_VID_LIMITE_ALTO_NV_00X_CYY`.
 
 ## Regras de clone
 
@@ -402,6 +458,10 @@ O que precisa fazer agora?          | Ação humana específica no Ads Manager o
 ```
 
 Use códigos (`31/3858385`, `1487202`, `1815199`, `190`) como evidência curta em tabela depois da explicação simples. Não liderar com `object_story_spec`, `standard_enhancements`, Graph payloads ou async session salvo se Rodolfo pedir detalhe técnico.
+
+## Preferência operacional do Rodolfo para testes de clone
+
+Quando Rodolfo disser `continue`, `continue os testes` ou equivalente, não responder com plano longo nem narrar cada microteste. Executar a sequência controlada em silêncio, sempre com objetos `PAUSED`, cleanup e audit, e reportar só quando houver resultado útil: rota que passou, bloqueio novo, evidência objetiva ou decisão necessária. Se a pergunta vier junto de uma dúvida operacional, responder a dúvida em ordem e continuar a execução sem transformar isso em loop de confirmação.
 
 ## Pitfalls
 
