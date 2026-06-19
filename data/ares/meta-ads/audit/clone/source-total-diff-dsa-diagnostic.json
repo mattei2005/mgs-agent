@@ -1,0 +1,3034 @@
+{
+  "mode": "GET_ONLY_total_source_dump_and_diff_dsa",
+  "token_field": "credential",
+  "token_len": 198,
+  "source_ids": {
+    "campaign": "120248290297180604",
+    "adset": "120247501687700604",
+    "ads": [
+      "120248290297200604",
+      "120248290297230604",
+      "120248290297210604"
+    ]
+  },
+  "source_dsa_exact": {
+    "dsa_beneficiary": "Openzed",
+    "dsa_payor": "Openzed"
+  },
+  "source_raw": {
+    "campaign": {
+      "name": "Patricia Flores - US - ESP - (pg_22069) - 1",
+      "objective": "OUTCOME_SALES",
+      "buying_type": "AUCTION",
+      "status": "PAUSED",
+      "configured_status": "PAUSED",
+      "effective_status": "PAUSED",
+      "special_ad_categories": [
+        "FINANCIAL_PRODUCTS_SERVICES"
+      ],
+      "special_ad_category_country": [
+        "ES"
+      ],
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "daily_budget": "10000",
+      "budget_remaining": "10000",
+      "start_time": "2026-06-11T04:01:00+0200",
+      "created_time": "2026-06-11T03:31:09+0200",
+      "updated_time": "2026-06-18T20:21:00+0200",
+      "source_campaign_id": "120247501687800604",
+      "smart_promotion_type": "GUIDED_CREATION",
+      "is_skadnetwork_attribution": false,
+      "can_use_spend_cap": true,
+      "budget_rebalance_flag": false,
+      "topline_id": "0",
+      "pacing_type": [
+        "standard"
+      ],
+      "id": "120248290297180604"
+    },
+    "adset": {
+      "name": "Conjunto 02 - IMAGENS",
+      "account_id": "1356770869843984",
+      "campaign_id": "120247501687800604",
+      "campaign": {
+        "id": "120247501687800604"
+      },
+      "configured_status": "ACTIVE",
+      "status": "ACTIVE",
+      "effective_status": "CAMPAIGN_PAUSED",
+      "created_time": "2026-06-01T23:56:46+0200",
+      "updated_time": "2026-06-01T23:57:04+0200",
+      "start_time": "2026-06-02T00:05:00+0200",
+      "billing_event": "IMPRESSIONS",
+      "optimization_goal": "OFFSITE_CONVERSIONS",
+      "optimization_sub_event": "NONE",
+      "destination_type": "MESSENGER",
+      "promoted_object": {
+        "pixel_id": "629060785934493",
+        "custom_event_type": "COMPLETE_REGISTRATION",
+        "page_id": "1037297262803284",
+        "smart_pse_enabled": false
+      },
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "ES"
+          ],
+          "location_types": [
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        }
+      },
+      "attribution_spec": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 7
+        },
+        {
+          "event_type": "VIEW_THROUGH",
+          "window_days": 1
+        }
+      ],
+      "budget_remaining": "0",
+      "is_dynamic_creative": false,
+      "use_new_app_click": false,
+      "source_adset_id": "120247501679840604",
+      "dsa_beneficiary": "Openzed",
+      "dsa_payor": "Openzed",
+      "targeting_optimization_types": [
+        {
+          "key": "detailed_targeting",
+          "value": 1
+        },
+        {
+          "key": "lookalike",
+          "value": 0
+        }
+      ],
+      "id": "120247501687700604"
+    },
+    "ads": {
+      "120248290297200604": {
+        "_error": {
+          "message": "(#100) Tried accessing nonexisting field (dsa_payor)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AVU2klVrQlGH6z6YjDx4OGZ"
+        },
+        "tracking_specs": [
+          {
+            "action.type": [
+              "offsite_conversion"
+            ],
+            "fb_pixel": [
+              "629060785934493"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ],
+            "conversion_id": [
+              "25121374170893585",
+              "26486708381006849",
+              "26619396587739383",
+              "26699871946381481",
+              "26711101385253361",
+              "26923380547330844",
+              "27135953452727679",
+              "27169897759336151",
+              "27205836475694169",
+              "27214792254840766",
+              "27406090242413842",
+              "27428664416797618",
+              "27533094489648922",
+              "27579356088356024",
+              "27639915378995780",
+              "27643002911972231",
+              "27712238498362570",
+              "27762650623318781",
+              "36057640910550733",
+              "36075662475411828",
+              "36427742170203501"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ],
+            "page": [
+              "1063171606876651"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ],
+            "conversion_id": [
+              "28253169440939655"
+            ]
+          },
+          {
+            "action.type": [
+              "whatsapp"
+            ],
+            "page": [
+              "1063171606876651"
+            ]
+          },
+          {
+            "action.type": [
+              "messenger"
+            ],
+            "page": [
+              "1063171606876651"
+            ]
+          },
+          {
+            "action.type": [
+              "post_engagement"
+            ],
+            "page": [
+              "1063171606876651"
+            ],
+            "post": [
+              "122115715520812470"
+            ]
+          },
+          {
+            "action.type": [
+              "post_interaction_gross"
+            ],
+            "page": [
+              "1063171606876651"
+            ],
+            "post": [
+              "122115715520812470"
+            ]
+          },
+          {
+            "action.type": [
+              "link_click"
+            ],
+            "post": [
+              "122115715520812470"
+            ],
+            "post.wall": [
+              "1063171606876651"
+            ]
+          }
+        ],
+        "conversion_specs": [
+          {
+            "action.type": [
+              "offsite_conversion"
+            ],
+            "conversion_id": [
+              "26958060993880517"
+            ]
+          }
+        ],
+        "source_ad_id": "120247501687740604",
+        "id": "120248290297200604"
+      },
+      "120248290297230604": {
+        "_error": {
+          "message": "(#100) Tried accessing nonexisting field (dsa_payor)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AQ5Ztv7l3wfvfe5iydruEaT"
+        },
+        "tracking_specs": [
+          {
+            "action.type": [
+              "offsite_conversion"
+            ],
+            "fb_pixel": [
+              "629060785934493"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ]
+          },
+          {
+            "action.type": [
+              "post_engagement"
+            ],
+            "page": [
+              "1063171606876651"
+            ],
+            "post": [
+              "122115715118812470"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ],
+            "conversion_id": [
+              "25121374170893585",
+              "26486708381006849",
+              "26619396587739383",
+              "26699871946381481",
+              "26711101385253361",
+              "26923380547330844",
+              "27135953452727679",
+              "27169897759336151",
+              "27205836475694169",
+              "27214792254840766",
+              "27406090242413842",
+              "27428664416797618",
+              "27533094489648922",
+              "27579356088356024",
+              "27639915378995780",
+              "27643002911972231",
+              "27712238498362570",
+              "27762650623318781",
+              "36057640910550733",
+              "36075662475411828",
+              "36427742170203501"
+            ]
+          },
+          {
+            "action.type": [
+              "link_click"
+            ],
+            "post": [
+              "122115715118812470"
+            ],
+            "post.wall": [
+              "1063171606876651"
+            ]
+          },
+          {
+            "action.type": [
+              "post_interaction_gross"
+            ],
+            "page": [
+              "1063171606876651"
+            ],
+            "post": [
+              "122115715118812470"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ],
+            "page": [
+              "1063171606876651"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ],
+            "conversion_id": [
+              "28253169440939655"
+            ]
+          },
+          {
+            "action.type": [
+              "whatsapp"
+            ],
+            "page": [
+              "1063171606876651"
+            ]
+          },
+          {
+            "action.type": [
+              "messenger"
+            ],
+            "page": [
+              "1063171606876651"
+            ]
+          }
+        ],
+        "conversion_specs": [
+          {
+            "action.type": [
+              "offsite_conversion"
+            ],
+            "conversion_id": [
+              "26958060993880517"
+            ]
+          }
+        ],
+        "source_ad_id": "120247501687610604",
+        "id": "120248290297230604"
+      },
+      "120248290297210604": {
+        "_error": {
+          "message": "(#100) Tried accessing nonexisting field (dsa_payor)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "ARNbC0lk5ERRUfA71wH1Kn6"
+        },
+        "tracking_specs": [
+          {
+            "action.type": [
+              "offsite_conversion"
+            ],
+            "fb_pixel": [
+              "629060785934493"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ],
+            "conversion_id": [
+              "25121374170893585",
+              "26486708381006849",
+              "26619396587739383",
+              "26699871946381481",
+              "26711101385253361",
+              "26923380547330844",
+              "27135953452727679",
+              "27169897759336151",
+              "27205836475694169",
+              "27214792254840766",
+              "27406090242413842",
+              "27428664416797618",
+              "27533094489648922",
+              "27579356088356024",
+              "27639915378995780",
+              "27643002911972231",
+              "27712238498362570",
+              "27762650623318781",
+              "36057640910550733",
+              "36075662475411828",
+              "36427742170203501"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ],
+            "page": [
+              "1063171606876651"
+            ]
+          },
+          {
+            "action.type": [
+              "onsite_conversion"
+            ],
+            "conversion_id": [
+              "28253169440939655"
+            ]
+          },
+          {
+            "action.type": [
+              "whatsapp"
+            ],
+            "page": [
+              "1063171606876651"
+            ]
+          },
+          {
+            "action.type": [
+              "messenger"
+            ],
+            "page": [
+              "1063171606876651"
+            ]
+          },
+          {
+            "action.type": [
+              "post_interaction_gross"
+            ],
+            "page": [
+              "1063171606876651"
+            ],
+            "post": [
+              "122115715418812470"
+            ]
+          },
+          {
+            "action.type": [
+              "post_engagement"
+            ],
+            "page": [
+              "1063171606876651"
+            ],
+            "post": [
+              "122115715418812470"
+            ]
+          },
+          {
+            "action.type": [
+              "link_click"
+            ],
+            "post": [
+              "122115715418812470"
+            ],
+            "post.wall": [
+              "1063171606876651"
+            ]
+          }
+        ],
+        "conversion_specs": [
+          {
+            "action.type": [
+              "offsite_conversion"
+            ],
+            "conversion_id": [
+              "26958060993880517"
+            ]
+          }
+        ],
+        "source_ad_id": "120247501687560604",
+        "id": "120248290297210604"
+      }
+    }
+  },
+  "unsupported_fields": {
+    "campaign": [
+      "budget_schedule_specs",
+      "dsa_beneficiary",
+      "dsa_payor"
+    ],
+    "adset": [
+      "dsa_beneficiary_id",
+      "dsa_payor_id",
+      "beneficiary",
+      "payor",
+      "regulated_categories",
+      "special_ad_category_country",
+      "page_id"
+    ],
+    "ads": {
+      "120248290297200604": [
+        "dsa_beneficiary",
+        "dsa_payor"
+      ],
+      "120248290297230604": [
+        "dsa_beneficiary",
+        "dsa_payor"
+      ],
+      "120248290297210604": [
+        "dsa_beneficiary",
+        "dsa_payor"
+      ]
+    }
+  },
+  "field_errors": {
+    "campaign": [
+      {
+        "field": "budget_schedule_specs",
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (budget_schedule_specs)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "A_QkjaAVsljuRHCczhgbKEz"
+        }
+      },
+      {
+        "field": "dsa_beneficiary",
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (dsa_beneficiary)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AC2qTFKEwKrGafSzMUGkm9s"
+        }
+      },
+      {
+        "field": "dsa_payor",
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (dsa_payor)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "Aeimez_n3mW1oxSNeo9dSz0"
+        }
+      }
+    ],
+    "adset": [
+      {
+        "field": "dsa_beneficiary_id",
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (dsa_beneficiary_id)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AVT9HMglz3UpNYQwWttYhAb"
+        }
+      },
+      {
+        "field": "dsa_payor_id",
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (dsa_payor_id)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AWQrAtA8xDJ2SpH3I6loDjU"
+        }
+      },
+      {
+        "field": "beneficiary",
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (beneficiary)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AeND5qVKkV6dNfsWucqfHIf"
+        }
+      },
+      {
+        "field": "payor",
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (payor)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AYDddmnzPClrIDYPAGaYsav"
+        }
+      },
+      {
+        "field": "regulated_categories",
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (regulated_categories)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "A4JJehFMnj1EnW_F3RUG1ng"
+        }
+      },
+      {
+        "field": "special_ad_categories",
+        "error": {
+          "message": "(#3) App must be on whitelist",
+          "type": "OAuthException",
+          "code": 3,
+          "fbtrace_id": "AXk_MRudcGGFqkMyCErCs3R"
+        }
+      },
+      {
+        "field": "special_ad_category_country",
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (special_ad_category_country)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "Ao0QsDu-CNFXLBdzL6ZjiMW"
+        }
+      },
+      {
+        "field": "page_id",
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (page_id)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AWK3WonyqkP-H1XH7Lc4Wx3"
+        }
+      }
+    ],
+    "ads": {
+      "120248290297200604": [
+        {
+          "field": "dsa_beneficiary",
+          "error": {
+            "message": "(#100) Tried accessing nonexisting field (dsa_beneficiary)",
+            "type": "OAuthException",
+            "code": 100,
+            "fbtrace_id": "AArBEv0fNx5YJUlocJutmSg"
+          }
+        },
+        {
+          "field": "dsa_payor",
+          "error": {
+            "message": "(#100) Tried accessing nonexisting field (dsa_payor)",
+            "type": "OAuthException",
+            "code": 100,
+            "fbtrace_id": "AnIMZhESX-wL616QJoJsjO1"
+          }
+        }
+      ],
+      "120248290297230604": [
+        {
+          "field": "dsa_beneficiary",
+          "error": {
+            "message": "(#100) Tried accessing nonexisting field (dsa_beneficiary)",
+            "type": "OAuthException",
+            "code": 100,
+            "fbtrace_id": "AuK3SPZG-Q1kWB9BwadBNA8"
+          }
+        },
+        {
+          "field": "dsa_payor",
+          "error": {
+            "message": "(#100) Tried accessing nonexisting field (dsa_payor)",
+            "type": "OAuthException",
+            "code": 100,
+            "fbtrace_id": "AB7gbFgV4qg-a4eW2xjnt6P"
+          }
+        }
+      ],
+      "120248290297210604": [
+        {
+          "field": "dsa_beneficiary",
+          "error": {
+            "message": "(#100) Tried accessing nonexisting field (dsa_beneficiary)",
+            "type": "OAuthException",
+            "code": 100,
+            "fbtrace_id": "AN3uQkEwhTAhu60HTOi2QzQ"
+          }
+        },
+        {
+          "field": "dsa_payor",
+          "error": {
+            "message": "(#100) Tried accessing nonexisting field (dsa_payor)",
+            "type": "OAuthException",
+            "code": 100,
+            "fbtrace_id": "ARBSvZIfHixXtEEu0iB2Jjx"
+          }
+        }
+      ]
+    }
+  },
+  "payloads": {
+    "campaign": {
+      "name": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260620 - DRYRUN",
+      "objective": "OUTCOME_SALES",
+      "buying_type": "AUCTION",
+      "status": "PAUSED",
+      "daily_budget": "2500",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "special_ad_categories": [
+        "FINANCIAL_PRODUCTS_SERVICES"
+      ],
+      "special_ad_category_country": [
+        "ES"
+      ],
+      "start_time": "2026-06-20T01:00:00+0200"
+    },
+    "adset_current": {
+      "name": "Conjunto 02 - IMAGENS - RPL 20260620",
+      "campaign_id": "120248947698060604",
+      "status": "PAUSED",
+      "billing_event": "IMPRESSIONS",
+      "optimization_goal": "OFFSITE_CONVERSIONS",
+      "destination_type": "MESSENGER",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "ES"
+          ],
+          "location_types": [
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        }
+      },
+      "promoted_object": {
+        "pixel_id": "629060785934493",
+        "custom_event_type": "COMPLETE_REGISTRATION",
+        "page_id": "1063171606876651",
+        "smart_pse_enabled": false
+      },
+      "attribution_spec": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 7
+        },
+        {
+          "event_type": "VIEW_THROUGH",
+          "window_days": 1
+        }
+      ],
+      "start_time": "2026-06-19T23:00:00Z",
+      "bid_strategy": null,
+      "bid_amount": null,
+      "optimization_sub_event": "NONE",
+      "is_dynamic_creative": false,
+      "use_new_app_click": false
+    },
+    "adset_with_dsa_candidate": {
+      "name": "Conjunto 02 - IMAGENS - RPL 20260620",
+      "campaign_id": "120248947698060604",
+      "status": "PAUSED",
+      "billing_event": "IMPRESSIONS",
+      "optimization_goal": "OFFSITE_CONVERSIONS",
+      "destination_type": "MESSENGER",
+      "targeting": {
+        "age_max": 65,
+        "age_min": 18,
+        "age_range": [
+          18,
+          65
+        ],
+        "geo_locations": {
+          "countries": [
+            "ES"
+          ],
+          "location_types": [
+            "home",
+            "recent"
+          ]
+        },
+        "brand_safety_content_filter_levels": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "targeting_automation": {
+          "advantage_audience": 1
+        }
+      },
+      "promoted_object": {
+        "pixel_id": "629060785934493",
+        "custom_event_type": "COMPLETE_REGISTRATION",
+        "page_id": "1063171606876651",
+        "smart_pse_enabled": false
+      },
+      "attribution_spec": [
+        {
+          "event_type": "CLICK_THROUGH",
+          "window_days": 7
+        },
+        {
+          "event_type": "VIEW_THROUGH",
+          "window_days": 1
+        }
+      ],
+      "start_time": "2026-06-19T23:00:00Z",
+      "bid_strategy": null,
+      "bid_amount": null,
+      "optimization_sub_event": "NONE",
+      "is_dynamic_creative": false,
+      "use_new_app_click": false,
+      "dsa_beneficiary": "Openzed",
+      "dsa_payor": "Openzed"
+    },
+    "adcreatives": [
+      {
+        "name": "RPL clone-source 20260620 01",
+        "object_story_spec": {
+          "page_id": "1063171606876651",
+          "video_data": {
+            "video_id": "979764601344710",
+            "message": "Hola, toca el botón para continuar.",
+            "title": "TARJETA DE CRÉDITO DISPONIBLE ✅",
+            "image_url": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/715650235_1530166178492243_8675354081048739694_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=100&ccb=1-7&_nc_sid=b696e2&_nc_ohc=tqfx5lzFyyQQ7kNvwF8dz30&_nc_oc=Adq-EJ1IBdJqMW-FTiQGrh0emA1NFC4B8OnPqK1AuwtAK2glSO3Cdj-EGfPXszOiPeqCuHycZrJMEIxUgueRO8cp&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=ANIILHsEAAAA&_nc_gid=iktu2O_FD34zMQTv8DqmfA&_nc_tpa=Q5bMBQGwhvE1bhjYsMU8kZf-SnfADM6_f2ptvRYCvoR953Ldl_hUdQm8AR9T1ufbZZ3504lJwYxdEvao&oh=00_Af9t1AzzDq1EPSIUroeDRK86gOgn4VToO0Okxiy_Xvs6YQ&oe=6A3A4B5F",
+            "call_to_action": {
+              "type": "APPLY_NOW",
+              "value": {
+                "app_destination": "MESSENGER"
+              }
+            }
+          }
+        },
+        "page_welcome_message": {
+          "is_user_editing": true
+        },
+        "degrees_of_freedom_spec": {
+          "creative_features_spec": {}
+        }
+      },
+      {
+        "name": "RPL clone-source 20260620 02",
+        "object_story_spec": {
+          "page_id": "1063171606876651",
+          "link_data": {
+            "image_hash": "09716886bbeeb208ad766b7e9f013b4a",
+            "message": "Hola, toca el botón para continuar.",
+            "name": "TARJETA DE CRÉDITO DISPONIBLE ✅",
+            "call_to_action": {
+              "type": "APPLY_NOW",
+              "value": {
+                "app_destination": "MESSENGER"
+              }
+            }
+          }
+        },
+        "page_welcome_message": {
+          "is_user_editing": true
+        },
+        "degrees_of_freedom_spec": {
+          "creative_features_spec": {}
+        }
+      },
+      {
+        "name": "RPL clone-source 20260620 03",
+        "object_story_spec": {
+          "page_id": "1063171606876651",
+          "video_data": {
+            "video_id": "2018825615667950",
+            "message": "Hola, toca el botón para continuar.",
+            "title": "TARJETA DE CRÉDITO DISPONIBLE ✅",
+            "image_url": "https://scontent-lga3-1.xx.fbcdn.net/v/t15.5256-10/721348360_4542078662704726_3770361300680237516_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=110&ccb=1-7&_nc_sid=b696e2&_nc_ohc=1lzbfq0fPuMQ7kNvwEThVgp&_nc_oc=AdrfM9zUjwLjnHPE3mmw5O5Zka4Lk32ZtR3ZUbyrlbs0RtLCmYBapYfIM2-QqIiTnTbmPkKteThwZPQcodUAeqpd&_nc_zt=23&_nc_ht=scontent-lga3-1.xx&edm=ANIILHsEAAAA&_nc_gid=iktu2O_FD34zMQTv8DqmfA&_nc_tpa=Q5bMBQHnWF5Yv4jL0DoZR8JVPqqRja2UClGAhV-R5aSGm-4neuWxDVl5ZBnevPM2H0zYdKLzjT5obsMm&oh=00_Af-HixUjAhVSXHT4utU2zvRYtLvNWmffos36kV0H4EDlOg&oe=6A3A4C74",
+            "call_to_action": {
+              "type": "APPLY_NOW",
+              "value": {
+                "app_destination": "MESSENGER"
+              }
+            }
+          }
+        },
+        "page_welcome_message": {
+          "is_user_editing": true
+        },
+        "degrees_of_freedom_spec": {
+          "creative_features_spec": {}
+        }
+      }
+    ],
+    "ads": [
+      {
+        "name": "Ad RPL 01 - clone-source video",
+        "adset_id": "<NEW_ADSET_ID_FOR_SOURCE_ADSET_120248290297250604>",
+        "status": "PAUSED",
+        "creative": {
+          "creative_id": "<NEW_CREATIVE_ID_1>"
+        }
+      },
+      {
+        "name": "Ad RPL 02 - clone-source image",
+        "adset_id": "<NEW_ADSET_ID_FOR_SOURCE_ADSET_120248290297260604>",
+        "status": "PAUSED",
+        "creative": {
+          "creative_id": "<NEW_CREATIVE_ID_2>"
+        }
+      },
+      {
+        "name": "Ad RPL 03 - clone-source video",
+        "adset_id": "<NEW_ADSET_ID_FOR_SOURCE_ADSET_120248290297250604>",
+        "status": "PAUSED",
+        "creative": {
+          "creative_id": "<NEW_CREATIVE_ID_3>"
+        }
+      }
+    ]
+  },
+  "diffs": {
+    "campaign": [
+      {
+        "field": "bid_strategy",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "LOWEST_COST_WITHOUT_CAP",
+        "payload": "LOWEST_COST_WITHOUT_CAP"
+      },
+      {
+        "field": "budget_rebalance_flag",
+        "status": "SÓ NA SOURCE",
+        "class": "desconhecido",
+        "source": false,
+        "payload": null
+      },
+      {
+        "field": "budget_remaining",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "10000",
+        "payload": null
+      },
+      {
+        "field": "buying_type",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "AUCTION",
+        "payload": "AUCTION"
+      },
+      {
+        "field": "can_use_spend_cap",
+        "status": "SÓ NA SOURCE",
+        "class": "desconhecido",
+        "source": true,
+        "payload": null
+      },
+      {
+        "field": "configured_status",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "PAUSED",
+        "payload": null
+      },
+      {
+        "field": "created_time",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "2026-06-11T03:31:09+0200",
+        "payload": null
+      },
+      {
+        "field": "daily_budget",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "10000",
+        "payload": "2500"
+      },
+      {
+        "field": "effective_status",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "PAUSED",
+        "payload": null
+      },
+      {
+        "field": "id",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "120248290297180604",
+        "payload": null
+      },
+      {
+        "field": "is_skadnetwork_attribution",
+        "status": "SÓ NA SOURCE",
+        "class": "desconhecido",
+        "source": false,
+        "payload": null
+      },
+      {
+        "field": "name",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "Patricia Flores - US - ESP - (pg_22069) - 1",
+        "payload": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260620 - DRYRUN"
+      },
+      {
+        "field": "objective",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "OUTCOME_SALES",
+        "payload": "OUTCOME_SALES"
+      },
+      {
+        "field": "pacing_type",
+        "status": "SÓ NA SOURCE",
+        "class": "gravável provável",
+        "source": [
+          "standard"
+        ],
+        "payload": null
+      },
+      {
+        "field": "smart_promotion_type",
+        "status": "SÓ NA SOURCE",
+        "class": "desconhecido",
+        "source": "GUIDED_CREATION",
+        "payload": null
+      },
+      {
+        "field": "source_campaign_id",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "120247501687800604",
+        "payload": null
+      },
+      {
+        "field": "special_ad_categories",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ],
+        "payload": [
+          "FINANCIAL_PRODUCTS_SERVICES"
+        ]
+      },
+      {
+        "field": "special_ad_category_country",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": [
+          "ES"
+        ],
+        "payload": [
+          "ES"
+        ]
+      },
+      {
+        "field": "start_time",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "2026-06-11T04:01:00+0200",
+        "payload": "2026-06-20T01:00:00+0200"
+      },
+      {
+        "field": "status",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "PAUSED",
+        "payload": "PAUSED"
+      },
+      {
+        "field": "topline_id",
+        "status": "SÓ NA SOURCE",
+        "class": "desconhecido",
+        "source": "0",
+        "payload": null
+      },
+      {
+        "field": "updated_time",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "2026-06-18T20:21:00+0200",
+        "payload": null
+      }
+    ],
+    "adset_current": [
+      {
+        "field": "account_id",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "1356770869843984",
+        "payload": null
+      },
+      {
+        "field": "attribution_spec",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 7
+          },
+          {
+            "event_type": "VIEW_THROUGH",
+            "window_days": 1
+          }
+        ],
+        "payload": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 7
+          },
+          {
+            "event_type": "VIEW_THROUGH",
+            "window_days": 1
+          }
+        ]
+      },
+      {
+        "field": "bid_amount",
+        "status": "SÓ NO PAYLOAD",
+        "class": "gravável provável",
+        "source": null,
+        "payload": null
+      },
+      {
+        "field": "bid_strategy",
+        "status": "SÓ NO PAYLOAD",
+        "class": "gravável provável",
+        "source": null,
+        "payload": null
+      },
+      {
+        "field": "billing_event",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "IMPRESSIONS",
+        "payload": "IMPRESSIONS"
+      },
+      {
+        "field": "budget_remaining",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "0",
+        "payload": null
+      },
+      {
+        "field": "campaign.id",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "120247501687800604",
+        "payload": null
+      },
+      {
+        "field": "campaign_id",
+        "status": "VALOR DIFERENTE",
+        "class": "desconhecido",
+        "source": "120247501687800604",
+        "payload": "120248947698060604"
+      },
+      {
+        "field": "configured_status",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "ACTIVE",
+        "payload": null
+      },
+      {
+        "field": "created_time",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "2026-06-01T23:56:46+0200",
+        "payload": null
+      },
+      {
+        "field": "destination_type",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "MESSENGER",
+        "payload": "MESSENGER"
+      },
+      {
+        "field": "dsa_beneficiary",
+        "status": "SÓ NA SOURCE",
+        "class": "gravável provável",
+        "source": "Openzed",
+        "payload": null
+      },
+      {
+        "field": "dsa_payor",
+        "status": "SÓ NA SOURCE",
+        "class": "gravável provável",
+        "source": "Openzed",
+        "payload": null
+      },
+      {
+        "field": "effective_status",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "CAMPAIGN_PAUSED",
+        "payload": null
+      },
+      {
+        "field": "id",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "120247501687700604",
+        "payload": null
+      },
+      {
+        "field": "is_dynamic_creative",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": false,
+        "payload": false
+      },
+      {
+        "field": "name",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "Conjunto 02 - IMAGENS",
+        "payload": "Conjunto 02 - IMAGENS - RPL 20260620"
+      },
+      {
+        "field": "optimization_goal",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "OFFSITE_CONVERSIONS",
+        "payload": "OFFSITE_CONVERSIONS"
+      },
+      {
+        "field": "optimization_sub_event",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "NONE",
+        "payload": "NONE"
+      },
+      {
+        "field": "promoted_object.custom_event_type",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "COMPLETE_REGISTRATION",
+        "payload": "COMPLETE_REGISTRATION"
+      },
+      {
+        "field": "promoted_object.page_id",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "1037297262803284",
+        "payload": "1063171606876651"
+      },
+      {
+        "field": "promoted_object.pixel_id",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "629060785934493",
+        "payload": "629060785934493"
+      },
+      {
+        "field": "promoted_object.smart_pse_enabled",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": false,
+        "payload": false
+      },
+      {
+        "field": "source_adset_id",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "120247501679840604",
+        "payload": null
+      },
+      {
+        "field": "start_time",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "2026-06-02T00:05:00+0200",
+        "payload": "2026-06-19T23:00:00Z"
+      },
+      {
+        "field": "status",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "ACTIVE",
+        "payload": "PAUSED"
+      },
+      {
+        "field": "targeting.age_max",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": 65,
+        "payload": 65
+      },
+      {
+        "field": "targeting.age_min",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": 18,
+        "payload": 18
+      },
+      {
+        "field": "targeting.age_range",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": [
+          18,
+          65
+        ],
+        "payload": [
+          18,
+          65
+        ]
+      },
+      {
+        "field": "targeting.brand_safety_content_filter_levels",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "payload": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ]
+      },
+      {
+        "field": "targeting.geo_locations.countries",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": [
+          "ES"
+        ],
+        "payload": [
+          "ES"
+        ]
+      },
+      {
+        "field": "targeting.geo_locations.location_types",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": [
+          "home",
+          "recent"
+        ],
+        "payload": [
+          "home",
+          "recent"
+        ]
+      },
+      {
+        "field": "targeting.targeting_automation.advantage_audience",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": 1,
+        "payload": 1
+      },
+      {
+        "field": "targeting_optimization_types",
+        "status": "SÓ NA SOURCE",
+        "class": "desconhecido",
+        "source": [
+          {
+            "key": "detailed_targeting",
+            "value": 1
+          },
+          {
+            "key": "lookalike",
+            "value": 0
+          }
+        ],
+        "payload": null
+      },
+      {
+        "field": "updated_time",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "2026-06-01T23:57:04+0200",
+        "payload": null
+      },
+      {
+        "field": "use_new_app_click",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": false,
+        "payload": false
+      }
+    ],
+    "adset_with_dsa_candidate": [
+      {
+        "field": "account_id",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "1356770869843984",
+        "payload": null
+      },
+      {
+        "field": "attribution_spec",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 7
+          },
+          {
+            "event_type": "VIEW_THROUGH",
+            "window_days": 1
+          }
+        ],
+        "payload": [
+          {
+            "event_type": "CLICK_THROUGH",
+            "window_days": 7
+          },
+          {
+            "event_type": "VIEW_THROUGH",
+            "window_days": 1
+          }
+        ]
+      },
+      {
+        "field": "bid_amount",
+        "status": "SÓ NO PAYLOAD",
+        "class": "gravável provável",
+        "source": null,
+        "payload": null
+      },
+      {
+        "field": "bid_strategy",
+        "status": "SÓ NO PAYLOAD",
+        "class": "gravável provável",
+        "source": null,
+        "payload": null
+      },
+      {
+        "field": "billing_event",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "IMPRESSIONS",
+        "payload": "IMPRESSIONS"
+      },
+      {
+        "field": "budget_remaining",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "0",
+        "payload": null
+      },
+      {
+        "field": "campaign.id",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "120247501687800604",
+        "payload": null
+      },
+      {
+        "field": "campaign_id",
+        "status": "VALOR DIFERENTE",
+        "class": "desconhecido",
+        "source": "120247501687800604",
+        "payload": "120248947698060604"
+      },
+      {
+        "field": "configured_status",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "ACTIVE",
+        "payload": null
+      },
+      {
+        "field": "created_time",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "2026-06-01T23:56:46+0200",
+        "payload": null
+      },
+      {
+        "field": "destination_type",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "MESSENGER",
+        "payload": "MESSENGER"
+      },
+      {
+        "field": "dsa_beneficiary",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "Openzed",
+        "payload": "Openzed"
+      },
+      {
+        "field": "dsa_payor",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "Openzed",
+        "payload": "Openzed"
+      },
+      {
+        "field": "effective_status",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "CAMPAIGN_PAUSED",
+        "payload": null
+      },
+      {
+        "field": "id",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "120247501687700604",
+        "payload": null
+      },
+      {
+        "field": "is_dynamic_creative",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": false,
+        "payload": false
+      },
+      {
+        "field": "name",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "Conjunto 02 - IMAGENS",
+        "payload": "Conjunto 02 - IMAGENS - RPL 20260620"
+      },
+      {
+        "field": "optimization_goal",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "OFFSITE_CONVERSIONS",
+        "payload": "OFFSITE_CONVERSIONS"
+      },
+      {
+        "field": "optimization_sub_event",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "NONE",
+        "payload": "NONE"
+      },
+      {
+        "field": "promoted_object.custom_event_type",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "COMPLETE_REGISTRATION",
+        "payload": "COMPLETE_REGISTRATION"
+      },
+      {
+        "field": "promoted_object.page_id",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "1037297262803284",
+        "payload": "1063171606876651"
+      },
+      {
+        "field": "promoted_object.pixel_id",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": "629060785934493",
+        "payload": "629060785934493"
+      },
+      {
+        "field": "promoted_object.smart_pse_enabled",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": false,
+        "payload": false
+      },
+      {
+        "field": "source_adset_id",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "120247501679840604",
+        "payload": null
+      },
+      {
+        "field": "start_time",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "2026-06-02T00:05:00+0200",
+        "payload": "2026-06-19T23:00:00Z"
+      },
+      {
+        "field": "status",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "ACTIVE",
+        "payload": "PAUSED"
+      },
+      {
+        "field": "targeting.age_max",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": 65,
+        "payload": 65
+      },
+      {
+        "field": "targeting.age_min",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": 18,
+        "payload": 18
+      },
+      {
+        "field": "targeting.age_range",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": [
+          18,
+          65
+        ],
+        "payload": [
+          18,
+          65
+        ]
+      },
+      {
+        "field": "targeting.brand_safety_content_filter_levels",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ],
+        "payload": [
+          "FACEBOOK_RELAXED",
+          "AN_RELAXED"
+        ]
+      },
+      {
+        "field": "targeting.geo_locations.countries",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": [
+          "ES"
+        ],
+        "payload": [
+          "ES"
+        ]
+      },
+      {
+        "field": "targeting.geo_locations.location_types",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": [
+          "home",
+          "recent"
+        ],
+        "payload": [
+          "home",
+          "recent"
+        ]
+      },
+      {
+        "field": "targeting.targeting_automation.advantage_audience",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": 1,
+        "payload": 1
+      },
+      {
+        "field": "targeting_optimization_types",
+        "status": "SÓ NA SOURCE",
+        "class": "desconhecido",
+        "source": [
+          {
+            "key": "detailed_targeting",
+            "value": 1
+          },
+          {
+            "key": "lookalike",
+            "value": 0
+          }
+        ],
+        "payload": null
+      },
+      {
+        "field": "updated_time",
+        "status": "SÓ NA SOURCE",
+        "class": "READ-ONLY/derivado",
+        "source": "2026-06-01T23:57:04+0200",
+        "payload": null
+      },
+      {
+        "field": "use_new_app_click",
+        "status": "IGUAL",
+        "class": "gravável provável",
+        "source": false,
+        "payload": false
+      }
+    ],
+    "ads": [
+      {
+        "source_ad_id": "120248290297200604",
+        "diff": [
+          {
+            "field": "_error.code",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": 100,
+            "payload": null
+          },
+          {
+            "field": "_error.fbtrace_id",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": "AVU2klVrQlGH6z6YjDx4OGZ",
+            "payload": null
+          },
+          {
+            "field": "_error.message",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": "(#100) Tried accessing nonexisting field (dsa_payor)",
+            "payload": null
+          },
+          {
+            "field": "_error.type",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": "OAuthException",
+            "payload": null
+          },
+          {
+            "field": "ad.adset_id",
+            "status": "SÓ NO PAYLOAD",
+            "class": "desconhecido",
+            "source": null,
+            "payload": "<NEW_ADSET_ID_FOR_SOURCE_ADSET_120248290297250604>"
+          },
+          {
+            "field": "ad.creative.creative_id",
+            "status": "SÓ NO PAYLOAD",
+            "class": "desconhecido",
+            "source": null,
+            "payload": "<NEW_CREATIVE_ID_1>"
+          },
+          {
+            "field": "ad.name",
+            "status": "SÓ NO PAYLOAD",
+            "class": "desconhecido",
+            "source": null,
+            "payload": "Ad RPL 01 - clone-source video"
+          },
+          {
+            "field": "ad.status",
+            "status": "SÓ NO PAYLOAD",
+            "class": "desconhecido",
+            "source": null,
+            "payload": "PAUSED"
+          },
+          {
+            "field": "conversion_specs",
+            "status": "SÓ NA SOURCE",
+            "class": "gravável provável",
+            "source": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "conversion_id": [
+                  "26958060993880517"
+                ]
+              }
+            ],
+            "payload": null
+          },
+          {
+            "field": "creative.name",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "RPL clone-source 20260620 01"
+          },
+          {
+            "field": "creative.object_story_spec.page_id",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "1063171606876651"
+          },
+          {
+            "field": "creative.object_story_spec.video_data.call_to_action.type",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "APPLY_NOW"
+          },
+          {
+            "field": "creative.object_story_spec.video_data.call_to_action.value.app_destination",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "MESSENGER"
+          },
+          {
+            "field": "creative.object_story_spec.video_data.image_url",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "https://scontent-lga3-2.xx.fbcdn.net/v/t15.5256-10/715650235_1530166178492243_8675354081048739694_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=100&ccb=1-7&_nc_sid=b696e2&_nc_ohc=tqfx5lzFyyQQ7kNvwF8dz30&_nc_oc=Adq-EJ1IBdJqMW-FTiQGrh0emA1NFC4B8OnPqK1AuwtAK2glSO3Cdj-EGfPXszOiPeqCuHycZrJMEIxUgueRO8cp&_nc_zt=23&_nc_ht=scontent-lga3-2.xx&edm=ANIILHsEAAAA&_nc_gid=iktu2O_FD34zMQTv8DqmfA&_nc_tpa=Q5bMBQGwhvE1bhjYsMU8kZf-SnfADM6_f2ptvRYCvoR953Ldl_hUdQm8AR9T1ufbZZ3504lJwYxdEvao&oh=00_Af9t1AzzDq1EPSIUroeDRK86gOgn4VToO0Okxiy_Xvs6YQ&oe=6A3A4B5F"
+          },
+          {
+            "field": "creative.object_story_spec.video_data.message",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "Hola, toca el botón para continuar."
+          },
+          {
+            "field": "creative.object_story_spec.video_data.title",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+          },
+          {
+            "field": "creative.object_story_spec.video_data.video_id",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "979764601344710"
+          },
+          {
+            "field": "creative.page_welcome_message.is_user_editing",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": true
+          },
+          {
+            "field": "id",
+            "status": "SÓ NA SOURCE",
+            "class": "READ-ONLY/derivado",
+            "source": "120248290297200604",
+            "payload": null
+          },
+          {
+            "field": "source_ad_id",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": "120247501687740604",
+            "payload": null
+          },
+          {
+            "field": "tracking_specs",
+            "status": "SÓ NA SOURCE",
+            "class": "gravável provável",
+            "source": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "fb_pixel": [
+                  "629060785934493"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "25121374170893585",
+                  "26486708381006849",
+                  "26619396587739383",
+                  "26699871946381481",
+                  "26711101385253361",
+                  "26923380547330844",
+                  "27135953452727679",
+                  "27169897759336151",
+                  "27205836475694169",
+                  "27214792254840766",
+                  "27406090242413842",
+                  "27428664416797618",
+                  "27533094489648922",
+                  "27579356088356024",
+                  "27639915378995780",
+                  "27643002911972231",
+                  "27712238498362570",
+                  "27762650623318781",
+                  "36057640910550733",
+                  "36075662475411828",
+                  "36427742170203501"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "28253169440939655"
+                ]
+              },
+              {
+                "action.type": [
+                  "whatsapp"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "messenger"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_engagement"
+                ],
+                "page": [
+                  "1063171606876651"
+                ],
+                "post": [
+                  "122115715520812470"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_interaction_gross"
+                ],
+                "page": [
+                  "1063171606876651"
+                ],
+                "post": [
+                  "122115715520812470"
+                ]
+              },
+              {
+                "action.type": [
+                  "link_click"
+                ],
+                "post": [
+                  "122115715520812470"
+                ],
+                "post.wall": [
+                  "1063171606876651"
+                ]
+              }
+            ],
+            "payload": null
+          }
+        ]
+      },
+      {
+        "source_ad_id": "120248290297230604",
+        "diff": [
+          {
+            "field": "_error.code",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": 100,
+            "payload": null
+          },
+          {
+            "field": "_error.fbtrace_id",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": "AQ5Ztv7l3wfvfe5iydruEaT",
+            "payload": null
+          },
+          {
+            "field": "_error.message",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": "(#100) Tried accessing nonexisting field (dsa_payor)",
+            "payload": null
+          },
+          {
+            "field": "_error.type",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": "OAuthException",
+            "payload": null
+          },
+          {
+            "field": "ad.adset_id",
+            "status": "SÓ NO PAYLOAD",
+            "class": "desconhecido",
+            "source": null,
+            "payload": "<NEW_ADSET_ID_FOR_SOURCE_ADSET_120248290297260604>"
+          },
+          {
+            "field": "ad.creative.creative_id",
+            "status": "SÓ NO PAYLOAD",
+            "class": "desconhecido",
+            "source": null,
+            "payload": "<NEW_CREATIVE_ID_2>"
+          },
+          {
+            "field": "ad.name",
+            "status": "SÓ NO PAYLOAD",
+            "class": "desconhecido",
+            "source": null,
+            "payload": "Ad RPL 02 - clone-source image"
+          },
+          {
+            "field": "ad.status",
+            "status": "SÓ NO PAYLOAD",
+            "class": "desconhecido",
+            "source": null,
+            "payload": "PAUSED"
+          },
+          {
+            "field": "conversion_specs",
+            "status": "SÓ NA SOURCE",
+            "class": "gravável provável",
+            "source": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "conversion_id": [
+                  "26958060993880517"
+                ]
+              }
+            ],
+            "payload": null
+          },
+          {
+            "field": "creative.name",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "RPL clone-source 20260620 02"
+          },
+          {
+            "field": "creative.object_story_spec.link_data.call_to_action.type",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "APPLY_NOW"
+          },
+          {
+            "field": "creative.object_story_spec.link_data.call_to_action.value.app_destination",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "MESSENGER"
+          },
+          {
+            "field": "creative.object_story_spec.link_data.image_hash",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "09716886bbeeb208ad766b7e9f013b4a"
+          },
+          {
+            "field": "creative.object_story_spec.link_data.message",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "Hola, toca el botón para continuar."
+          },
+          {
+            "field": "creative.object_story_spec.link_data.name",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+          },
+          {
+            "field": "creative.object_story_spec.page_id",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "1063171606876651"
+          },
+          {
+            "field": "creative.page_welcome_message.is_user_editing",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": true
+          },
+          {
+            "field": "id",
+            "status": "SÓ NA SOURCE",
+            "class": "READ-ONLY/derivado",
+            "source": "120248290297230604",
+            "payload": null
+          },
+          {
+            "field": "source_ad_id",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": "120247501687610604",
+            "payload": null
+          },
+          {
+            "field": "tracking_specs",
+            "status": "SÓ NA SOURCE",
+            "class": "gravável provável",
+            "source": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "fb_pixel": [
+                  "629060785934493"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_engagement"
+                ],
+                "page": [
+                  "1063171606876651"
+                ],
+                "post": [
+                  "122115715118812470"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "25121374170893585",
+                  "26486708381006849",
+                  "26619396587739383",
+                  "26699871946381481",
+                  "26711101385253361",
+                  "26923380547330844",
+                  "27135953452727679",
+                  "27169897759336151",
+                  "27205836475694169",
+                  "27214792254840766",
+                  "27406090242413842",
+                  "27428664416797618",
+                  "27533094489648922",
+                  "27579356088356024",
+                  "27639915378995780",
+                  "27643002911972231",
+                  "27712238498362570",
+                  "27762650623318781",
+                  "36057640910550733",
+                  "36075662475411828",
+                  "36427742170203501"
+                ]
+              },
+              {
+                "action.type": [
+                  "link_click"
+                ],
+                "post": [
+                  "122115715118812470"
+                ],
+                "post.wall": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_interaction_gross"
+                ],
+                "page": [
+                  "1063171606876651"
+                ],
+                "post": [
+                  "122115715118812470"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "28253169440939655"
+                ]
+              },
+              {
+                "action.type": [
+                  "whatsapp"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "messenger"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              }
+            ],
+            "payload": null
+          }
+        ]
+      },
+      {
+        "source_ad_id": "120248290297210604",
+        "diff": [
+          {
+            "field": "_error.code",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": 100,
+            "payload": null
+          },
+          {
+            "field": "_error.fbtrace_id",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": "ARNbC0lk5ERRUfA71wH1Kn6",
+            "payload": null
+          },
+          {
+            "field": "_error.message",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": "(#100) Tried accessing nonexisting field (dsa_payor)",
+            "payload": null
+          },
+          {
+            "field": "_error.type",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": "OAuthException",
+            "payload": null
+          },
+          {
+            "field": "ad.adset_id",
+            "status": "SÓ NO PAYLOAD",
+            "class": "desconhecido",
+            "source": null,
+            "payload": "<NEW_ADSET_ID_FOR_SOURCE_ADSET_120248290297250604>"
+          },
+          {
+            "field": "ad.creative.creative_id",
+            "status": "SÓ NO PAYLOAD",
+            "class": "desconhecido",
+            "source": null,
+            "payload": "<NEW_CREATIVE_ID_3>"
+          },
+          {
+            "field": "ad.name",
+            "status": "SÓ NO PAYLOAD",
+            "class": "desconhecido",
+            "source": null,
+            "payload": "Ad RPL 03 - clone-source video"
+          },
+          {
+            "field": "ad.status",
+            "status": "SÓ NO PAYLOAD",
+            "class": "desconhecido",
+            "source": null,
+            "payload": "PAUSED"
+          },
+          {
+            "field": "conversion_specs",
+            "status": "SÓ NA SOURCE",
+            "class": "gravável provável",
+            "source": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "conversion_id": [
+                  "26958060993880517"
+                ]
+              }
+            ],
+            "payload": null
+          },
+          {
+            "field": "creative.name",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "RPL clone-source 20260620 03"
+          },
+          {
+            "field": "creative.object_story_spec.page_id",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "1063171606876651"
+          },
+          {
+            "field": "creative.object_story_spec.video_data.call_to_action.type",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "APPLY_NOW"
+          },
+          {
+            "field": "creative.object_story_spec.video_data.call_to_action.value.app_destination",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "MESSENGER"
+          },
+          {
+            "field": "creative.object_story_spec.video_data.image_url",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "https://scontent-lga3-1.xx.fbcdn.net/v/t15.5256-10/721348360_4542078662704726_3770361300680237516_n.jpg?stp=dst-jpg_s160x160_tt6&_nc_cat=110&ccb=1-7&_nc_sid=b696e2&_nc_ohc=1lzbfq0fPuMQ7kNvwEThVgp&_nc_oc=AdrfM9zUjwLjnHPE3mmw5O5Zka4Lk32ZtR3ZUbyrlbs0RtLCmYBapYfIM2-QqIiTnTbmPkKteThwZPQcodUAeqpd&_nc_zt=23&_nc_ht=scontent-lga3-1.xx&edm=ANIILHsEAAAA&_nc_gid=iktu2O_FD34zMQTv8DqmfA&_nc_tpa=Q5bMBQHnWF5Yv4jL0DoZR8JVPqqRja2UClGAhV-R5aSGm-4neuWxDVl5ZBnevPM2H0zYdKLzjT5obsMm&oh=00_Af-HixUjAhVSXHT4utU2zvRYtLvNWmffos36kV0H4EDlOg&oe=6A3A4C74"
+          },
+          {
+            "field": "creative.object_story_spec.video_data.message",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "Hola, toca el botón para continuar."
+          },
+          {
+            "field": "creative.object_story_spec.video_data.title",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "TARJETA DE CRÉDITO DISPONIBLE ✅"
+          },
+          {
+            "field": "creative.object_story_spec.video_data.video_id",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": "2018825615667950"
+          },
+          {
+            "field": "creative.page_welcome_message.is_user_editing",
+            "status": "SÓ NO PAYLOAD",
+            "class": "gravável provável",
+            "source": null,
+            "payload": true
+          },
+          {
+            "field": "id",
+            "status": "SÓ NA SOURCE",
+            "class": "READ-ONLY/derivado",
+            "source": "120248290297210604",
+            "payload": null
+          },
+          {
+            "field": "source_ad_id",
+            "status": "SÓ NA SOURCE",
+            "class": "desconhecido",
+            "source": "120247501687560604",
+            "payload": null
+          },
+          {
+            "field": "tracking_specs",
+            "status": "SÓ NA SOURCE",
+            "class": "gravável provável",
+            "source": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "fb_pixel": [
+                  "629060785934493"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "25121374170893585",
+                  "26486708381006849",
+                  "26619396587739383",
+                  "26699871946381481",
+                  "26711101385253361",
+                  "26923380547330844",
+                  "27135953452727679",
+                  "27169897759336151",
+                  "27205836475694169",
+                  "27214792254840766",
+                  "27406090242413842",
+                  "27428664416797618",
+                  "27533094489648922",
+                  "27579356088356024",
+                  "27639915378995780",
+                  "27643002911972231",
+                  "27712238498362570",
+                  "27762650623318781",
+                  "36057640910550733",
+                  "36075662475411828",
+                  "36427742170203501"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "28253169440939655"
+                ]
+              },
+              {
+                "action.type": [
+                  "whatsapp"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "messenger"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_interaction_gross"
+                ],
+                "page": [
+                  "1063171606876651"
+                ],
+                "post": [
+                  "122115715418812470"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_engagement"
+                ],
+                "page": [
+                  "1063171606876651"
+                ],
+                "post": [
+                  "122115715418812470"
+                ]
+              },
+              {
+                "action.type": [
+                  "link_click"
+                ],
+                "post": [
+                  "122115715418812470"
+                ],
+                "post.wall": [
+                  "1063171606876651"
+                ]
+              }
+            ],
+            "payload": null
+          }
+        ]
+      }
+    ]
+  },
+  "priority_writable_diffs": {
+    "campaign": [
+      {
+        "field": "daily_budget",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "10000",
+        "payload": "2500"
+      },
+      {
+        "field": "name",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "Patricia Flores - US - ESP - (pg_22069) - 1",
+        "payload": "Patricia Flores - US - ESP - (pg_22069) - RPL - 20260620 - DRYRUN"
+      },
+      {
+        "field": "pacing_type",
+        "status": "SÓ NA SOURCE",
+        "class": "gravável provável",
+        "source": [
+          "standard"
+        ],
+        "payload": null
+      },
+      {
+        "field": "start_time",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "2026-06-11T04:01:00+0200",
+        "payload": "2026-06-20T01:00:00+0200"
+      }
+    ],
+    "adset_current": [
+      {
+        "field": "dsa_beneficiary",
+        "status": "SÓ NA SOURCE",
+        "class": "gravável provável",
+        "source": "Openzed",
+        "payload": null
+      },
+      {
+        "field": "dsa_payor",
+        "status": "SÓ NA SOURCE",
+        "class": "gravável provável",
+        "source": "Openzed",
+        "payload": null
+      },
+      {
+        "field": "name",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "Conjunto 02 - IMAGENS",
+        "payload": "Conjunto 02 - IMAGENS - RPL 20260620"
+      },
+      {
+        "field": "promoted_object.page_id",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "1037297262803284",
+        "payload": "1063171606876651"
+      },
+      {
+        "field": "start_time",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "2026-06-02T00:05:00+0200",
+        "payload": "2026-06-19T23:00:00Z"
+      },
+      {
+        "field": "status",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "ACTIVE",
+        "payload": "PAUSED"
+      }
+    ],
+    "adset_with_dsa_candidate": [
+      {
+        "field": "name",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "Conjunto 02 - IMAGENS",
+        "payload": "Conjunto 02 - IMAGENS - RPL 20260620"
+      },
+      {
+        "field": "promoted_object.page_id",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "1037297262803284",
+        "payload": "1063171606876651"
+      },
+      {
+        "field": "start_time",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "2026-06-02T00:05:00+0200",
+        "payload": "2026-06-19T23:00:00Z"
+      },
+      {
+        "field": "status",
+        "status": "VALOR DIFERENTE",
+        "class": "gravável provável",
+        "source": "ACTIVE",
+        "payload": "PAUSED"
+      }
+    ],
+    "ads": [
+      {
+        "source_ad_id": "120248290297200604",
+        "rows": [
+          {
+            "field": "conversion_specs",
+            "status": "SÓ NA SOURCE",
+            "class": "gravável provável",
+            "source": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "conversion_id": [
+                  "26958060993880517"
+                ]
+              }
+            ],
+            "payload": null
+          },
+          {
+            "field": "tracking_specs",
+            "status": "SÓ NA SOURCE",
+            "class": "gravável provável",
+            "source": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "fb_pixel": [
+                  "629060785934493"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "25121374170893585",
+                  "26486708381006849",
+                  "26619396587739383",
+                  "26699871946381481",
+                  "26711101385253361",
+                  "26923380547330844",
+                  "27135953452727679",
+                  "27169897759336151",
+                  "27205836475694169",
+                  "27214792254840766",
+                  "27406090242413842",
+                  "27428664416797618",
+                  "27533094489648922",
+                  "27579356088356024",
+                  "27639915378995780",
+                  "27643002911972231",
+                  "27712238498362570",
+                  "27762650623318781",
+                  "36057640910550733",
+                  "36075662475411828",
+                  "36427742170203501"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "28253169440939655"
+                ]
+              },
+              {
+                "action.type": [
+                  "whatsapp"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "messenger"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_engagement"
+                ],
+                "page": [
+                  "1063171606876651"
+                ],
+                "post": [
+                  "122115715520812470"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_interaction_gross"
+                ],
+                "page": [
+                  "1063171606876651"
+                ],
+                "post": [
+                  "122115715520812470"
+                ]
+              },
+              {
+                "action.type": [
+                  "link_click"
+                ],
+                "post": [
+                  "122115715520812470"
+                ],
+                "post.wall": [
+                  "1063171606876651"
+                ]
+              }
+            ],
+            "payload": null
+          }
+        ]
+      },
+      {
+        "source_ad_id": "120248290297230604",
+        "rows": [
+          {
+            "field": "conversion_specs",
+            "status": "SÓ NA SOURCE",
+            "class": "gravável provável",
+            "source": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "conversion_id": [
+                  "26958060993880517"
+                ]
+              }
+            ],
+            "payload": null
+          },
+          {
+            "field": "tracking_specs",
+            "status": "SÓ NA SOURCE",
+            "class": "gravável provável",
+            "source": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "fb_pixel": [
+                  "629060785934493"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_engagement"
+                ],
+                "page": [
+                  "1063171606876651"
+                ],
+                "post": [
+                  "122115715118812470"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "25121374170893585",
+                  "26486708381006849",
+                  "26619396587739383",
+                  "26699871946381481",
+                  "26711101385253361",
+                  "26923380547330844",
+                  "27135953452727679",
+                  "27169897759336151",
+                  "27205836475694169",
+                  "27214792254840766",
+                  "27406090242413842",
+                  "27428664416797618",
+                  "27533094489648922",
+                  "27579356088356024",
+                  "27639915378995780",
+                  "27643002911972231",
+                  "27712238498362570",
+                  "27762650623318781",
+                  "36057640910550733",
+                  "36075662475411828",
+                  "36427742170203501"
+                ]
+              },
+              {
+                "action.type": [
+                  "link_click"
+                ],
+                "post": [
+                  "122115715118812470"
+                ],
+                "post.wall": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_interaction_gross"
+                ],
+                "page": [
+                  "1063171606876651"
+                ],
+                "post": [
+                  "122115715118812470"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "28253169440939655"
+                ]
+              },
+              {
+                "action.type": [
+                  "whatsapp"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "messenger"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              }
+            ],
+            "payload": null
+          }
+        ]
+      },
+      {
+        "source_ad_id": "120248290297210604",
+        "rows": [
+          {
+            "field": "conversion_specs",
+            "status": "SÓ NA SOURCE",
+            "class": "gravável provável",
+            "source": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "conversion_id": [
+                  "26958060993880517"
+                ]
+              }
+            ],
+            "payload": null
+          },
+          {
+            "field": "tracking_specs",
+            "status": "SÓ NA SOURCE",
+            "class": "gravável provável",
+            "source": [
+              {
+                "action.type": [
+                  "offsite_conversion"
+                ],
+                "fb_pixel": [
+                  "629060785934493"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "25121374170893585",
+                  "26486708381006849",
+                  "26619396587739383",
+                  "26699871946381481",
+                  "26711101385253361",
+                  "26923380547330844",
+                  "27135953452727679",
+                  "27169897759336151",
+                  "27205836475694169",
+                  "27214792254840766",
+                  "27406090242413842",
+                  "27428664416797618",
+                  "27533094489648922",
+                  "27579356088356024",
+                  "27639915378995780",
+                  "27643002911972231",
+                  "27712238498362570",
+                  "27762650623318781",
+                  "36057640910550733",
+                  "36075662475411828",
+                  "36427742170203501"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "onsite_conversion"
+                ],
+                "conversion_id": [
+                  "28253169440939655"
+                ]
+              },
+              {
+                "action.type": [
+                  "whatsapp"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "messenger"
+                ],
+                "page": [
+                  "1063171606876651"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_interaction_gross"
+                ],
+                "page": [
+                  "1063171606876651"
+                ],
+                "post": [
+                  "122115715418812470"
+                ]
+              },
+              {
+                "action.type": [
+                  "post_engagement"
+                ],
+                "page": [
+                  "1063171606876651"
+                ],
+                "post": [
+                  "122115715418812470"
+                ]
+              },
+              {
+                "action.type": [
+                  "link_click"
+                ],
+                "post": [
+                  "122115715418812470"
+                ],
+                "post.wall": [
+                  "1063171606876651"
+                ]
+              }
+            ],
+            "payload": null
+          }
+        ]
+      }
+    ]
+  },
+  "source_compliance_fields": {
+    "campaign": {},
+    "adset": {
+      "dsa_beneficiary": "Openzed",
+      "dsa_payor": "Openzed"
+    },
+    "ads": {
+      "120248290297200604": {},
+      "120248290297230604": {},
+      "120248290297210604": {}
+    }
+  }
+}
