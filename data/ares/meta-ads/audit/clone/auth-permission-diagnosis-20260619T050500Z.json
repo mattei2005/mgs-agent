@@ -1,0 +1,332 @@
+{
+  "created_at": "2026-06-19T05:35:47.956116+00:00",
+  "mode": "read_only_auth_permission_diagnosis",
+  "token_field": "credential",
+  "token_len": 198,
+  "checks": {
+    "me": {
+      "status": 200,
+      "payload": {
+        "id": "122173487996690654",
+        "name": "Marcos Silva Arruda"
+      },
+      "headers": {
+        "facebook-api-version": "v25.0"
+      }
+    },
+    "me_permissions": {
+      "status": 200,
+      "payload": {
+        "data": [
+          {
+            "permission": "read_insights",
+            "status": "granted"
+          },
+          {
+            "permission": "pages_show_list",
+            "status": "granted"
+          },
+          {
+            "permission": "ads_management",
+            "status": "granted"
+          },
+          {
+            "permission": "ads_read",
+            "status": "granted"
+          },
+          {
+            "permission": "business_management",
+            "status": "granted"
+          },
+          {
+            "permission": "instagram_basic",
+            "status": "granted"
+          },
+          {
+            "permission": "pages_read_engagement",
+            "status": "granted"
+          },
+          {
+            "permission": "pages_read_user_content",
+            "status": "granted"
+          },
+          {
+            "permission": "pages_manage_engagement",
+            "status": "granted"
+          },
+          {
+            "permission": "public_profile",
+            "status": "granted"
+          }
+        ]
+      },
+      "headers": {
+        "facebook-api-version": "v25.0"
+      }
+    },
+    "ad_account": {
+      "status": 200,
+      "payload": {
+        "id": "act_1356770869843984",
+        "name": "OpenzedFinanzas-ES-CC-ES-03",
+        "account_status": 1,
+        "disable_reason": 0,
+        "timezone_name": "Europe/Madrid",
+        "currency": "USD",
+        "business": {
+          "id": "155263197283282",
+          "name": "Digital Trust"
+        },
+        "user_tasks": [
+          "DRAFT",
+          "ANALYZE",
+          "ADVERTISE"
+        ],
+        "capabilities": [
+          "CAN_CREATE_CALL_ADS",
+          "CAN_SEE_GROWTH_OPPORTUNITY_DATA",
+          "ENABLE_IA_RECIRC_AD_DISPLAY_FORMAT",
+          "CAN_USE_MOBILE_EXTERNAL_PAGE_TYPE",
+          "CAN_USE_FB_FEED_POSITION_IN_VIDEO_VIEW_15S",
+          "ENABLE_BIZ_DISCO_ADS",
+          "ENABLE_BRAND_OBJECTIVES_FOR_BIZ_DISCO_ADS",
+          "ENABLE_DIRECT_REACH_FOR_BIZ_DISCO_ADS",
+          "ENABLE_DYNAMIC_ADS_ON_IG_STORIES_ADS",
+          "ENABLE_IG_STORIES_ADS_PPE_OBJECTIVE",
+          "ENABLE_IG_STORIES_ADS_MESSENGER_DESTINATION",
+          "ENABLE_PAC_FOR_BIZ_DISCO_ADS",
+          "CAN_USE_FB_INSTREAM_POSITION_IN_VIDEO_VIEW_15S",
+          "CAN_USE_FB_STORY_POSITION_IN_VIDEO_VIEW_15S",
+          "CAN_USE_AN_INSTREAM_POSITION_IN_VIDEO_VIEW_15S",
+          "CAN_USE_IG_STORY_POSITION_IN_VIDEO_VIEW_15S",
+          "CAN_USE_FB_IA_POSITION_IN_VIDEO_VIEW_15S",
+          "CAN_USE_FB_MKT_PLACE_POSITION_IN_VIDEO_VIEW_15S",
+          "CAN_USE_IG_FEED_POSITION_IN_VIDEO_VIEW_15S",
+          "CAN_USE_IG_EXPLORE_POSITION_IN_VIDEO_VIEW_15S",
+          "CAN_USE_AN_CLASSIC_POSITION_IN_VIDEO_VIEW_15S",
+          "CAN_USE_AN_REWARD_VIDEO_POSITION_IN_VIDEO_VIEW_15S",
+          "CAN_USE_REACH_AND_FREQUENCY",
+          "VIEW_TAGS",
+          "CAN_USE_WCA_V3_UI",
+          "CAN_USE_RECURRING_BUDGET",
+          "HAS_VALID_PAYMENT_METHODS",
+          "CAN_USE_LINK_CLICK_BILLING_EVENT",
+          "CAN_SEE_NEW_CONVERSION_WINDOW_NUX",
+          "ADS_INSTREAM_INTERFACE_INTEGRITY",
+          "ADS_INSTREAM_LINK_CLICK",
+          "ADS_INSTREAM_LINK_CLICK_IMAGE",
+          "ADS_INSTREAM_POST_ENGAGEMENT_IMAGE",
+          "ADS_IN_OBJECTIVES_DEPRECATION",
+          "MESSENGER_INBOX_ADS_PRODUCT_CATALOG_SALES",
+          "CAN_SHOW_MESSENGER_DUPLICSTION_UPSELL",
+          "ALLOW_INSTREAM_ONLY_FOR_REACH",
+          "ADS_INSTREAM_VIDEO_PLACEMENT_CONVERSIONS",
+          "CAN_CREATE_INSTAGRAM_EXPLORE_ADS",
+          "ALLOW_INSTREAM_VIDEOS_PLACEMENT_ONLY",
+          "ALLOW_INSTREAM_NON_INTERRUPTIVE_LEADGEN",
+          "INSTREAM_VIDEO_AD_DESKTOP_CONVERSION_AD_PREVIEW",
+          "ALLOW_INSTREAM_ONLY_FOR_BRAND_AWARENESS_AUCTION",
+          "ALLOW_SUGGESTED_VIDEOS_PLACEMENT_ONLY",
+          "WHATSAPP_DESTINATION_ADS",
+          "CTM_ADS_CREATION_CLICK_TO_DIRECT",
+          "CTW_ADS_ENABLE_IG_FEED_PLACEMENT",
+          "CTW_ADS_FOR_NON_MESSAGES_OBJECTIVE",
+          "CTW_ADS_TRUSTED_TIER_ADVERTISER",
+          "ADS_PLACEMENT_MARKETPLACE",
+          "ADNW_DISABLE_INSTREAM_AND_WEB_PLACEMENT",
+          "CAN_CHANGE_BILLING_THRESHOLD",
+          "CAN_USE_APP_EVENT_AVERAGE_COST_BIDDING",
+          "CAN_USE_LEAD_GEN_AVERAGE_COST_BIDDING",
+          "ADS_DELIVERY_INSIGHTS_IN_BIDDING_PRESET_EXPERIMENT",
+          "ADS_DELIVERY_INSIGHTS_OPTIMIZATION_PRESET",
+          "CAN_SEE_APP_AD_EVENTS",
+          "CAN_SEE_NEW_STANDARD_EVENTS_BETA",
+          "CAN_USE_FREQUENCY_CONTROLS_FOR_AUCTION_GK",
+          "CAN_SEE_VCK_HOLIDAY_TEMPLATES",
+          "ENABLE_DCO_FOR_FB_STORY_ADS",
+          "CAN_USE_IG_EXPLORE_GRID_HOME_PLACEMENT",
+          "CAN_USE_IG_EXPLORE_HOME_IN_REACH_AND_FREQUENCY",
+          "CAN_USE_IG_EXPLORE_HOME_POST_ENGAGEMENT_MESSAGES",
+          "CAN_USE_IG_SEARCH_PLACEMENT",
+          "CAN_USE_IG_REELS_PAC_CAROUSEL",
+          "CAN_USE_IG_REELS_POSITION",
+          "CAN_SEE_CONVERSION_LIFT_SUMMARY",
+          "CAN_USE_IG_PROFILE_FEED_POSITION",
+          "CAN_USE_IG_REELS_REACH_AND_FREQUENCY",
+          "CAN_USE_IG_SHOP_TAB_PAC",
+          "CAN_SEE_LEARNING_STAGE",
+          "ENABLE_WEBSITE_CONVERSIONS_FOR_FB_STORY_ADS",
+          "ENABLE_MESSENGER_INBOX_VIDEO_ADS",
+          "ENABLE_VIDEO_VIEWS_FOR_FB_STORY_ADS",
+          "ENABLE_LINK_CLICKS_FOR_FB_STORY_ADS",
+          "ENABLE_REACH_FOR_FB_STORY_ADS",
+          "CAN_USE_CALL_TO_ACTION_LINK_IMPORT_EXPORT",
+          "ADS_INSTREAM_VIDEO_ENABLE_SLIDE_SHOW",
+          "ALLOW_INSTREAM_VIDEOS_PLACEMENT_ONLY_IN_VV_REACH_AND_FREQUENCY",
+          "ENABLE_MOBILE_APP_INSTALLS_FOR_FB_STORY_ADS",
+          "ENABLE_LEAD_GEN_FOR_FB_STORY_ADS",
+          "CAN_USE_FB_MKT_PLACE_POSITION_IN_REACH",
+          "CAN_USE_FB_MKT_PLACE_POSITION_IN_VIDEO_VIEW",
+          "CAN_USE_FB_MKT_PLACE_POSITION_IN_STORE_VISIT",
+          "ENABLE_MOBILE_APP_ENGAGEMENT_FOR_FB_STORY_ADS",
+          "CAN_USE_FB_MKT_PLACE_POSITION_IN_BRAND_AWARENESS",
+          "CAN_USE_FB_MKT_PLACE_POSITION_IN_APP_INSTALLS",
+          "CAN_USE_FB_MKT_PLACE_POSITION_IN_LEAD_GENERATION",
+          "CAN_USE_FB_MKT_PLACE_POSITION_IN_MESSAGE",
+          "CAN_USE_FB_MKT_PLACE_POSITION_IN_PAGE_LIKE",
+          "CAN_USE_FB_MKT_PLACE_POSITION_IN_POST_ENGAGEMENT",
+          "RF_ALLOW_MARKETPLACE_ACCOUNT",
+          "RF_ALLOW_SEARCH_ACCOUNT",
+          "VERTICAL_VIDEO_PAC_INSTREAM_UPSELL",
+          "IX_COLLECTION_ENABLED_FOR_BAO_AND_REACH",
+          "ADS_BM_REQUIREMENTS_OCT_15_RELEASE",
+          "ENABLE_POST_ENGAGEMENT_FOR_FB_STORY",
+          "ENBABLE_CATALOG_SALES_FOR_FB_STORY",
+          "CAN_USE_WHATSAPP_DESTINATION_ON_LINK_CLICKS_AND_CONVERSIONS",
+          "CAN_USE_WHATSAPP_DESTINATION_ON_CONVERSIONS",
+          "SIEP_GENAI_ADEX_NEW_DISCLOSURE",
+          "IS_IN_IG_EXISTING_POST_CTA_DEFAULTING_EXPERIMENT",
+          "IS_IN_SHORT_WA_LINK_CTWA_UNCONV_TRAFFIC_EXPERIMENT",
+          "IS_IN_ODAX_EXPERIENCE",
+          "IS_IN_REACH_BRAND_AWARENESS_WHATSAPP_L1_DESTINATION_EXPERIMENT",
+          "IS_IN_VIDEO_VIEWS_WHATSAPP_L1_DESTINATION_EXPERIMENT",
+          "IS_IN_WHATSAPP_DESTINATION_DEFAULTING_EXPERIMENT",
+          "CAN_USE_MARKETPLACE_DESKTOP",
+          "ADS_MERCHANT_OVERLAYS_DEPRECATION",
+          "CONNECTIONS_DEPRECATION_V2",
+          "CAN_SEE_HEC_AM_FLOW",
+          "CAN_SEE_POLITICAL_FLOW",
+          "CAN_SEE_CUSTOM_AUDIENCE_REACH_ESTIMATE",
+          "ADS_INSTREAM_PLACEMENT_CATALOG_SALES",
+          "CAN_USE_CONVERSATIONS_OPTIMIZATION",
+          "ENABLE_THRUPLAY_OPTIMIZATION_MESSENGER_STORY_ADS",
+          "CAN_USE_IG_STORY_POLLS_PAC_CREATION",
+          "IOS14_CEO_CAMPAIGN_CREATION",
+          "DIGITAL_CIRCULAR_ADS",
+          "CAN_SEE_SAFR_V3_FLOW",
+          "CAN_USE_FB_REELS_POSITION",
+          "CAN_USE_ADS_ON_FB_REELS_POSITION",
+          "CAN_USE_FB_REELS_AUTO_PLACEMENT",
+          "ENABLE_FB_REELS_CREATION_PAC_ADS",
+          "ENABLE_FB_REELS_CREATION_DCO_ADS",
+          "ENABLE_FB_REELS_POSTLOOP_CREATION_DCO_ADS",
+          "ENABLE_FB_REELS_POSTLOOP_CREATION_PAC_ADS",
+          "RF_CPA_BILLING_DEPRECATION_PHASE_2",
+          "AMA_CAN_SEE_CHARTS_REDESIGN",
+          "ENABLE_APP_INSTALL_CUSTOM_PRODUCT_PAGES",
+          "ADS_RF_FB_REELS_PLACEMENT",
+          "REELS_DM_ADS_ENABLE_REACH_AND_FREQUENCY",
+          "ELIGIBLE_FOR_IMAGE_GEN",
+          "ELIGIBLE_FOR_TEXT_GEN"
+        ],
+        "owner": "155263197283282",
+        "created_time": "2026-05-18T19:26:03+0200"
+      },
+      "headers": {
+        "facebook-api-version": "v25.0",
+        "x-business-use-case-usage": "{\"1356770869843984\":[{\"type\":\"ads_management\",\"call_count\":1,\"total_cputime\":1,\"total_time\":4,\"estimated_time_to_regain_access\":0,\"ads_api_access_tier\":\"development_access\"}]}"
+      }
+    },
+    "ad_account_users": {
+      "status": 400,
+      "payload": {
+        "error": {
+          "message": "(#100) For field 'assigned_users': The parameter business is required",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "A9GyY1p-3K8G7myXdReZA73"
+        }
+      },
+      "headers": {
+        "facebook-api-version": "v25.0",
+        "WWW-Authenticate": "OAuth \"Facebook Platform\" \"invalid_request\" \"(#100) For field 'assigned_users': The parameter business is required\""
+      }
+    },
+    "page_elena": {
+      "status": 400,
+      "payload": {
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (tasks)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AA_si4DlSRVTqjApCi-_yXB"
+        }
+      },
+      "headers": {
+        "facebook-api-version": "v25.0",
+        "WWW-Authenticate": "OAuth \"Facebook Platform\" \"invalid_request\" \"(#100) Tried accessing nonexisting field (tasks)\""
+      }
+    },
+    "page_elena_adaccounts": {
+      "status": 400,
+      "payload": {
+        "error": {
+          "message": "(#100) Tried accessing nonexisting field (adaccounts)",
+          "type": "OAuthException",
+          "code": 100,
+          "fbtrace_id": "AiHQ-OuvxudkOVvTwiH7Ci3"
+        }
+      },
+      "headers": {
+        "facebook-api-version": "v25.0",
+        "WWW-Authenticate": "OAuth \"Facebook Platform\" \"invalid_request\" \"(#100) Tried accessing nonexisting field (adaccounts)\""
+      }
+    },
+    "debug_token_self": {
+      "status": 200,
+      "payload": {
+        "data": {
+          "app_id": "163163106580854",
+          "type": "USER",
+          "application": "mattei-mmv-digital-trust",
+          "data_access_expires_at": 1789591800,
+          "expires_at": 0,
+          "is_valid": true,
+          "issued_at": 1781815814,
+          "scopes": [
+            "read_insights",
+            "pages_show_list",
+            "ads_management",
+            "ads_read",
+            "business_management",
+            "instagram_basic",
+            "pages_read_engagement",
+            "pages_read_user_content",
+            "pages_manage_engagement",
+            "public_profile"
+          ],
+          "granular_scopes": [
+            {
+              "scope": "pages_show_list"
+            },
+            {
+              "scope": "ads_management"
+            },
+            {
+              "scope": "ads_read"
+            },
+            {
+              "scope": "business_management"
+            },
+            {
+              "scope": "instagram_basic"
+            },
+            {
+              "scope": "pages_read_engagement"
+            },
+            {
+              "scope": "pages_read_user_content"
+            },
+            {
+              "scope": "pages_manage_engagement"
+            }
+          ],
+          "user_id": "122173487996690654"
+        }
+      },
+      "headers": {
+        "facebook-api-version": "v25.0"
+      }
+    }
+  }
+}
