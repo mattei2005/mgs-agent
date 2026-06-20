@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T19:24:10-04:00",
+    "updated_at": "2026-06-19T20:15:41-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -3763,6 +3763,25 @@
         "execution_audit_sha256": "1326d72144343c7a861e5494dbb1e1af74af02cad0cbb4fc5cee61f54078b1ce"
       },
       "updated_at": "2026-06-19T15:11:18-04:00"
+    },
+    {
+      "id": "mgs-gateway-restart-20260620T001236Z-437964",
+      "agent": "ares",
+      "type": "gateway_restart_finalizer",
+      "unit": "mgs-gateway-restart-20260620T001236Z-437964",
+      "log_path": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260620T001236Z-437964.log",
+      "log_sha256": "806a1db11fa816d6328fa4645314c0f2179be5cf28e10afe0790d8dcb7a340a5",
+      "log_size_bytes": 1225,
+      "completed_at": "2026-06-19T20:14:29.833033-04:00",
+      "target_service": "ares-gateway.service",
+      "service_state": {
+        "is_active": "active",
+        "ActiveState": "active",
+        "SubState": "running",
+        "ExecMainPID": "438070"
+      },
+      "purpose": "Safe detached restart after Ares Discord thread conversation config update",
+      "last_report": "restart seguro Ares agendado via systemd-run"
     }
   ],
   "profile_skill_references": [
@@ -3875,6 +3894,32 @@
       "updated_at": "2026-06-19T11:56:29-04:00",
       "validation": "runtime/versioned SHA match; secret scan negative; import-discord-thread OK with 20 messages; 4 videos ffprobe 720x1280 ~8.04s audio=true; contact sheets generated/analyzed; reference corrects wrong keyframe/zoom-only conclusion and requires replicating real thread workflow instead of theorizing by provider",
       "known_pending": "No new BR/PT generation performed in this thread; operational rule corrected first."
+    }
+  ],
+  "config_files": [
+    {
+      "path": "/root/.hermes/profiles/ares/.env",
+      "backup_path": "/root/.hermes/profiles/ares/.env.backup-logs-aquisicao-thread-chat-20260620T001228Z",
+      "agent": "ares",
+      "profile": "ares",
+      "type": "discord_gateway_env",
+      "size_bytes": 973,
+      "modified_at": "2026-06-19T20:12:28.192894-04:00",
+      "sha256": "dd9608c5d814e31cd26bb50ac746b00f798fa5e2460be7ec7b5d149fb3f03b23",
+      "backup_sha256": "a0dfb9efe275ddd6e38d51f442b2cef685af1413e74deb4bb72a2979dcb1f984",
+      "secret_values_stored": false,
+      "tracked_keys": {
+        "DISCORD_ALLOWED_CHANNELS": "1508853425952133180,1513005743954198538,1516887105543077949",
+        "DISCORD_FREE_RESPONSE_CHANNELS": "1508853425952133180,1516887105543077949",
+        "DISCORD_THREAD_REQUIRE_MENTION": "false"
+      },
+      "previous_tracked_keys": {
+        "DISCORD_ALLOWED_CHANNELS": "1508853425952133180,1513005743954198538",
+        "DISCORD_FREE_RESPONSE_CHANNELS": "1508853425952133180",
+        "DISCORD_THREAD_REQUIRE_MENTION": "true"
+      },
+      "purpose": "Enable Ares free conversation inside logs-aquisicao threads created by Meta report poster",
+      "last_report": "habilitar conversa do Ares dentro das threads criadas em logs-aquisicao"
     }
   ]
 }
