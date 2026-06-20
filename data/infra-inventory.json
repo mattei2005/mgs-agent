@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T20:27:23-04:00",
+    "updated_at": "2026-06-19T20:40:47-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -787,45 +787,65 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-discord-post-with-thread.py",
-      "size_bytes": 4460,
-      "modified_at": "2026-06-19T18:01:23.711261-04:00",
-      "sha256": "dd39b9ccc811517173534cd7cedfe4d5e7040e12c0bce15fedec896940d920e2",
+      "size_bytes": 5192,
+      "modified_at": "2026-06-19T20:39:03.403480-04:00",
+      "sha256": "fde55c7cd6a30f0d096460cb6b57cb302607c0027532b2723e3556266cd79e9f",
       "agent": "ares",
-      "purpose": "Ares Discord poster for Meta cron reports: posts to logs-aquisicao and creates one thread per checkpoint/recommendation; dry-run extracts title from text block",
-      "last_report": "garantir que relatórios Meta em logs-aquisicao sejam postados no canal e abram thread própria por checkpoint/recomendação, com stdout vazio"
+      "purpose": "Ares Discord poster for Meta cron reports; supports posting normal Openzed/Elena checkpoints into fixed operational thread instead of creating one thread per checkpoint",
+      "last_report": "Rodolfo aprovou consolidar alertas/checkpoints normais da operação Openzed/Elena em uma thread operacional fixa",
+      "validation": {
+        "py_compile": "OK",
+        "dry_run_mode": "post_existing_thread",
+        "thread_id": "1517682975234326729",
+        "parent_id": "1516887105543077949",
+        "thread_archived": false,
+        "thread_locked": false
+      }
     },
     {
       "path": "/root/.hermes/profiles/ares/scripts/ares-meta-intraday-cron.sh",
-      "size_bytes": 2179,
-      "modified_at": "2026-06-19T19:20:10.015072-04:00",
-      "sha256": "776f8a4392e64951f6197f0e3f5051669cf8338d02a97d636c63ef879297f3bd",
+      "size_bytes": 2211,
+      "modified_at": "2026-06-19T20:39:14.064479-04:00",
+      "sha256": "e4f97e0b1ecb07350fcdc9e1af647ffecac206e0ab6c912d9b2adb168600ff17",
       "agent": "ares",
-      "purpose": "Ares Meta intraday cron wrapper with bounded runner/backoff window and sanitized Discord error publication to avoid raw 120s scheduler timeout",
-      "last_report": "corrigir timeout bruto do cron Ares Meta intraday R1-R5 dry-run em logs-aquisicao",
+      "purpose": "Ares profile-local Meta cron wrapper updated to route normal Openzed/Elena checkpoints to fixed logs-aquisicao operational thread and keep scheduler output controlled",
+      "last_report": "consolidar alertas/checkpoints normais da operação Openzed/Elena em uma thread operacional fixa",
       "profile": "ares",
-      "git_tracked": false
+      "git_tracked": false,
+      "validation": {
+        "bash_n": "OK",
+        "fixed_thread_id": "1517682975234326729"
+      }
     },
     {
       "path": "/root/.hermes/profiles/ares/scripts/ares-meta-reactivate-all-cron.sh",
-      "size_bytes": 440,
-      "modified_at": "2026-06-19T18:01:35.210276-04:00",
-      "sha256": "6636645cd8032fa46dda70f937a5ffd70602f7c40d4c6fe6bd92a78784044dca",
+      "size_bytes": 472,
+      "modified_at": "2026-06-19T20:39:14.257479-04:00",
+      "sha256": "3f7a2a9d07de27e0559d878b153bd24a32d9a3bc41f46faa9993fd4319e3bab9",
       "agent": "ares",
-      "purpose": "Ares profile-local Meta cron wrapper updated to pipe non-empty report output into Discord thread poster and keep stdout empty to avoid scheduler duplicate delivery",
-      "last_report": "garantir que relatórios Meta em logs-aquisicao sejam postados no canal e abram thread própria por checkpoint/recomendação, com stdout vazio",
+      "purpose": "Ares profile-local Meta cron wrapper updated to route normal Openzed/Elena checkpoints to fixed logs-aquisicao operational thread and keep scheduler output controlled",
+      "last_report": "consolidar alertas/checkpoints normais da operação Openzed/Elena em uma thread operacional fixa",
       "profile": "ares",
-      "git_tracked": false
+      "git_tracked": false,
+      "validation": {
+        "bash_n": "OK",
+        "fixed_thread_id": "1517682975234326729"
+      }
     },
     {
       "path": "/root/.hermes/profiles/ares/scripts/ares-meta-hoa-manager.sh",
-      "size_bytes": 431,
-      "modified_at": "2026-06-19T18:01:40.877283-04:00",
-      "sha256": "b52bba9daa77abfafc0fb4e544b170e0a18cd4ba1f6309f39294d340b1fef709",
+      "size_bytes": 463,
+      "modified_at": "2026-06-19T20:39:14.442479-04:00",
+      "sha256": "162b21892c2c77ed5111666e91bdca42b82d8b43a7075e97c896ecf59dbb37ec",
       "agent": "ares",
-      "purpose": "Ares profile-local Meta cron wrapper updated to pipe non-empty report output into Discord thread poster and keep stdout empty to avoid scheduler duplicate delivery",
-      "last_report": "garantir que relatórios Meta em logs-aquisicao sejam postados no canal e abram thread própria por checkpoint/recomendação, com stdout vazio",
+      "purpose": "Ares profile-local Meta cron wrapper updated to route normal Openzed/Elena checkpoints to fixed logs-aquisicao operational thread and keep scheduler output controlled",
+      "last_report": "consolidar alertas/checkpoints normais da operação Openzed/Elena em uma thread operacional fixa",
       "profile": "ares",
-      "git_tracked": false
+      "git_tracked": false,
+      "validation": {
+        "bash_n": "OK",
+        "fixed_thread_id": "1517682975234326729"
+      }
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-apply-naming-plan.py",
@@ -1229,7 +1249,13 @@
       {
         "name": "meta-ads-intraday-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "sha256": "87e1f0b79d7b9a8b4d86c2eb95732e35905bce4f8f1c9156bc2e03f872f98718",
+        "versioned_sha256": "87e1f0b79d7b9a8b4d86c2eb95732e35905bce4f8f1c9156bc2e03f872f98718",
+        "modified_at": "2026-06-19T20:39:44.069478-04:00",
+        "purpose": "Ares Meta intraday operations runbook updated for fixed Openzed/Elena operational thread consolidation",
+        "last_report": "documentar consolidação de alertas/checkpoints normais em thread operacional fixa"
       },
       {
         "name": "meta-openzedfinanzas-replacement-clone",
@@ -3801,6 +3827,21 @@
       },
       "purpose": "Safe detached restart after Ares config.yaml/.env Discord thread conversation fix",
       "last_report": "restart seguro Ares agendado após config set"
+    },
+    {
+      "id": "ares-openzed-elena-fixed-operational-thread",
+      "agent": "ares",
+      "type": "discord_thread_route",
+      "channel_id": "1516887105543077949",
+      "thread_id": "1517682975234326729",
+      "status": {
+        "discord_get_status": 200,
+        "parent_id": "1516887105543077949",
+        "archived": false,
+        "locked": false
+      },
+      "purpose": "Fixed logs-aquisicao operational thread for normal Openzed/Elena alerts/checkpoints to avoid giant thread list",
+      "updated_at": "2026-06-19T20:40:47-04:00"
     }
   ],
   "profile_skill_references": [

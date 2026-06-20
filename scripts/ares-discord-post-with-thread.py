@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Post Ares cron output to a Discord channel and create a thread from the message.
+"""Post Ares cron output to Discord.
+
+Default behavior: post to a channel and create a thread from the message.
+When --thread-id is provided: post directly into that existing thread and do
+not create a new thread. This is used for operation-level daily/fixed threads
+where each checkpoint should stay in one conversation instead of creating a
+large thread list.
 
 Reads message body from stdin. If stdin is empty, exits silently.
 Does not print tokens or message content on errors beyond sanitized Discord error payloads.
@@ -77,6 +83,7 @@ def thread_title(message: str, fallback: str) -> str:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--channel-id', default=DEFAULT_CHANNEL_ID)
+    ap.add_argument('--thread-id', help='Existing Discord thread/channel ID to post into; disables thread creation')
     ap.add_argument('--fallback-title', default='Ares Meta Ads')
     ap.add_argument('--archive-minutes', type=int, default=DEFAULT_ARCHIVE_MINUTES)
     ap.add_argument('--dry-run', action='store_true')
@@ -92,13 +99,25 @@ def main() -> int:
         return 2
     title = thread_title(msg, args.fallback_title)
     if args.dry_run:
-        print(json.dumps({'ok': True, 'dry_run': True, 'channel_id': args.channel_id, 'thread_title': title, 'message_len': len(msg)}, ensure_ascii=False))
+        print(json.dumps({
+            'ok': True,
+            'dry_run': True,
+            'channel_id': args.channel_id,
+            'thread_id': args.thread_id,
+            'mode': 'post_existing_thread' if args.thread_id else 'post_channel_create_thread',
+            'thread_title': title,
+            'message_len': len(msg),
+        }, ensure_ascii=False))
         return 0
 
-    st, payload = discord_request('POST', f'/channels/{args.channel_id}/messages', token, {'content': msg})
+    target_channel = args.thread_id or args.channel_id
+    st, payload = discord_request('POST', f'/channels/{target_channel}/messages', token, {'content': msg})
     if st not in (200, 201):
-        print(json.dumps({'ok': False, 'stage': 'post_message', 'status': st, 'error': payload}, ensure_ascii=False), file=sys.stderr)
+        print(json.dumps({'ok': False, 'stage': 'post_message', 'target_channel': target_channel, 'status': st, 'error': payload}, ensure_ascii=False), file=sys.stderr)
         return 3
+    if args.thread_id:
+        return 0
+
     message_id = payload.get('id')
     if not message_id:
         print(json.dumps({'ok': False, 'stage': 'post_message', 'error': 'missing_message_id'}, ensure_ascii=False), file=sys.stderr)
