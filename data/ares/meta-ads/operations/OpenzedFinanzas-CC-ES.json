@@ -22,6 +22,15 @@
       "first_seen_at"
     ]
   },
+  "learning_grace": {
+    "enabled": true,
+    "action_grace_days": 3,
+    "applies_to": [
+      "pause_campaign",
+      "reactivate_campaign"
+    ],
+    "policy": "intraday may report metrics during first 3 days, but must not suggest account actions; show observation/informational only"
+  },
   "daily_spend_reference_cap": {
     "amount_usd": 300.0,
     "account_currency": "USD",

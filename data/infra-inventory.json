@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T20:40:47-04:00",
+    "updated_at": "2026-06-19T21:59:27-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -282,12 +282,16 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
-      "size_bytes": 19910,
-      "modified_at": "2026-06-19T14:25:49.813838-04:00",
-      "sha256": "93c730db348092a29857590bc5de7f4c7c6178202e1ce89a248bc5492bde9412",
+      "size_bytes": 22157,
+      "modified_at": "2026-06-19T21:57:39.029017-04:00",
+      "sha256": "190d0e14f3536bdfc1cee93009a54b957011e5e9198d6a22dd4cea42f95f967f",
       "agent": "ares",
-      "purpose": "Ares Meta cron runner read-only/dry-run simulated decisions for intraday/reactivate-all with REC IDs, scoped focus and manual holds",
-      "last_report": "ajustar crons Meta para fase read-only/dry-run com decisões simuladas, IDs REC, foco Elena pg_22091 e hold Patricia pg_22069"
+      "purpose": "Ares Meta cron runner with learning-grace behavior: campaigns younger than 3 days can be reported as informational metrics but pause/reactivate actions become observe_learning/eu observaria",
+      "last_report": "campanhas em learning/aquecimento nos primeiros 3 dias não devem receber sugestão acionável de pausa/reativação",
+      "validation": {
+        "py_compile": "OK",
+        "read_only_intraday_observe_learning": "OK"
+      }
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-fetch-campaigns.py",
@@ -1251,11 +1255,11 @@
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
         "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "sha256": "87e1f0b79d7b9a8b4d86c2eb95732e35905bce4f8f1c9156bc2e03f872f98718",
-        "versioned_sha256": "87e1f0b79d7b9a8b4d86c2eb95732e35905bce4f8f1c9156bc2e03f872f98718",
-        "modified_at": "2026-06-19T20:39:44.069478-04:00",
-        "purpose": "Ares Meta intraday operations runbook updated for fixed Openzed/Elena operational thread consolidation",
-        "last_report": "documentar consolidação de alertas/checkpoints normais em thread operacional fixa"
+        "sha256": "8ec64090827265e8202ce517a8699c67e3eff5dfb6e2f0fa19be745d4753ba61",
+        "versioned_sha256": "8ec64090827265e8202ce517a8699c67e3eff5dfb6e2f0fa19be745d4753ba61",
+        "modified_at": "2026-06-19T21:58:09.390033-04:00",
+        "purpose": "Ares Meta intraday operations runbook updated with learning/aquecimento <3d observe-only rule",
+        "last_report": "documentar que learning/aquecimento <3d não gera sugestão acionável de pausa/reativação"
       },
       {
         "name": "meta-openzedfinanzas-replacement-clone",
@@ -3419,13 +3423,23 @@
     },
     {
       "path": "/root/mgs-agent/data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json",
-      "size_bytes": 6207,
-      "md5": "fb1c2512438a48fb954d67e170adccb3",
-      "modified_at": "2026-06-19T14:24:56.493783-04:00",
-      "sha256": "c22511ed0c755376c941837b6bb58181a34bf593d7d950006eba7970483d9615",
+      "size_bytes": 6501,
+      "md5": "485858c329ffc1ee966764559799a816",
+      "modified_at": "2026-06-19T21:57:45.831021-04:00",
+      "sha256": "711f71899ea0f52748089ce65bb825f12f404f670796f1d596ef4a417d504a79",
       "agent": "ares",
-      "type": "meta_ads_operation_policy",
-      "purpose": "Meta OpenzedFinanzas CC ES read-only/dry-run operation/policy with simulated decisions, REC IDs, Elena pg_22091 active focus and Patricia pg_22069 manual hold"
+      "type": "meta_ads_operation_config",
+      "purpose": "OpenzedFinanzas-CC-ES operation config updated with learning_grace enabled action_grace_days=3 for pause/reactivate actions",
+      "learning_grace": {
+        "enabled": true,
+        "action_grace_days": 3,
+        "applies_to": [
+          "pause_campaign",
+          "reactivate_campaign"
+        ],
+        "policy": "intraday may report metrics during first 3 days, but must not suggest account actions; show observation/informational only"
+      },
+      "last_report": "correção operacional: learning/aquecimento <3d vira observação informativa, sem ação acionável"
     },
     {
       "path": "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v1.json",
@@ -3513,6 +3527,25 @@
         "insight_rows": 28,
         "candidate_count": 0
       }
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/intraday/intraday-20260620T015757Z.json",
+      "size_bytes": 5225,
+      "md5": "d4ad5ca81dd630991e0630051b103c16",
+      "modified_at": "2026-06-19T21:57:57.883027-04:00",
+      "sha256": "01d170cd72fddd11aa6ac2b370fbb01d8b0a269222950b34adc09601a347e0e0",
+      "agent": "ares",
+      "type": "meta_ads_intraday_audit",
+      "purpose": "Read-only intraday validation after learning-grace fix; returned observe_learning/eu observaria for <3d campaigns instead of actionable pause/reactivate",
+      "summary": {
+        "campaigns_seen": 35,
+        "insight_rows": 30,
+        "candidate_count": 6
+      },
+      "observe_learning_count": 6,
+      "campaign_age_days_seen": [
+        0.28
+      ]
     }
   ],
   "mu_plugin_canonical": {

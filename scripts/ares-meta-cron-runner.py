@@ -131,8 +131,24 @@ def simulated_action_label(action: str | None) -> str:
         'pause_campaign': 'eu pausaria',
         'reactivate_campaign': 'eu reativaria',
         'replace_campaign': 'eu substituiria',
+        'observe_learning': 'eu observaria',
     }
     return mapping.get(str(action or ''), f'eu faria {action}' if action else 'avaliar')
+
+
+def learning_grace_days(op_cfg: dict) -> float:
+    learning = op_cfg.get('learning_grace') or {}
+    if learning.get('enabled') is False:
+        return 0.0
+    return float(learning.get('action_grace_days') or 3)
+
+
+def is_learning_grace(campaign: dict, op_cfg: dict, tz: ZoneInfo) -> tuple[bool, float | None, float]:
+    age = campaign_age_days(campaign, tz)
+    grace_days = learning_grace_days(op_cfg)
+    if grace_days <= 0 or age is None:
+        return False, age, grace_days
+    return age < grace_days, age, grace_days
 
 
 def is_in_management_scope(op_cfg: dict, pg_id: str) -> tuple[bool, str | None]:
@@ -335,6 +351,7 @@ def run_intraday(args) -> int:
             cid = str(row.get('campaign_id') or '')
             campaign = campaigns.get(cid, {'id': cid, 'name': row.get('campaign_name'), 'effective_status': 'UNKNOWN'})
             metrics = derive_metrics(row)
+            in_learning_grace, age_days, grace_days = is_learning_grace(campaign, op_cfg, tz)
             for rule in by_prio:
                 match, excluded = rule_matches(rule, campaign, metrics, op_cfg, tz)
                 if excluded:
@@ -346,6 +363,16 @@ def run_intraday(args) -> int:
                     if not in_scope:
                         event.setdefault('skipped_scope', []).append({'campaign_id': cid, 'campaign_name': campaign_name, 'pg_id': pg_id, 'reason': scope_reason})
                         break
+                    action = rule.get('action')
+                    simulated_action = simulated_action_label(action)
+                    reason = rule_display(rule)
+                    mode = 'dry_run_no_write'
+                    if in_learning_grace and action in {'pause_campaign', 'reactivate_campaign'}:
+                        action = 'observe_learning'
+                        simulated_action = simulated_action_label(action)
+                        age_label = 'desconhecida' if age_days is None else f'{age_days:.2f}d'
+                        reason = f'Learning < {grace_days:g}d; regra acionou ({rule_display(rule)}), mas é só informativo. Idade {age_label}'
+                        mode = 'learning_grace_info_no_action'
                     seq = len(event['candidates']) + 1
                     event['candidates'].append({
                         'rec_id': recommendation_id(tz, seq),
@@ -354,16 +381,18 @@ def run_intraday(args) -> int:
                         'country_vertical': country_vertical_from_name(campaign_name, op_cfg),
                         'rule': rule_display(rule),
                         'status': campaign.get('effective_status'),
-                        'action': rule.get('action'),
-                        'simulated_action': simulated_action_label(rule.get('action')),
-                        'reason': rule_display(rule),
+                        'action': action,
+                        'simulated_action': simulated_action,
+                        'reason': reason,
                         'campaign_id': cid,
                         'campaign_name': campaign_name,
                         'bid_strategy': campaign.get('bid_strategy') or 'UNKNOWN',
                         'spend': round(metrics['spend'], 2),
                         'MO': int(metrics['MO']) if float(metrics['MO']).is_integer() else metrics['MO'],
                         'CPMO': None if metrics['CPMO'] is None else round(metrics['CPMO'], 2),
-                        'mode': 'dry_run_no_write',
+                        'campaign_age_days': None if age_days is None else round(age_days, 2),
+                        'learning_grace_days': grace_days,
+                        'mode': mode,
                     })
                     break
         event['summary'] = {'campaigns_seen': len(campaigns), 'insight_rows': len(insights), 'candidate_count': len(event['candidates'])}
@@ -377,8 +406,8 @@ def run_intraday(args) -> int:
         rows = event['candidates']
         for r in rows:
             r['CPMO'] = '' if r['CPMO'] is None else r['CPMO']
-        prefix = '<@344196393512075265> dry-run intraday: ações simuladas. Responda na thread com `REC... feito`, `ignorar` ou `segurar`. Nenhum write foi executado.'
-        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — decisões simuladas'), rows, [('rec_id','ID'),('pg_id','PG ID'),('page_name','Nome da página'),('simulated_action','Ação sugerida'),('reason','Motivo'),('status','Status')], prefix=prefix))
+        prefix = '<@344196393512075265> dry-run intraday: análise real sem write. Campanhas em learning (<3 dias) são informativas: não pausar/reativar. Responda `REC... feito`, `ignorar` ou `segurar` só quando a ação for aplicável.'
+        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — decisões simuladas'), rows, [('rec_id','ID'),('pg_id','PG ID'),('page_name','Nome da página'),('spend','Spend'),('MO','MO'),('CPMO','CPMO'),('campaign_age_days','Idade d'),('simulated_action','Ação sugerida'),('reason','Motivo'),('status','Status')], prefix=prefix))
     return 0
 
 
@@ -407,6 +436,16 @@ def run_reactivate_all(args) -> int:
             if campaign.get('effective_status') != 'PAUSED':
                 continue
             campaign_name = campaign.get('name')
+            in_learning_grace, age_days, grace_days = is_learning_grace(campaign, op_cfg, ZoneInfo(args.account_tz or 'Europe/Madrid'))
+            if in_learning_grace:
+                event.setdefault('skipped_learning_grace', []).append({
+                    'campaign_id': campaign.get('id'),
+                    'campaign_name': campaign_name,
+                    'age_days': None if age_days is None else round(age_days, 2),
+                    'learning_grace_days': grace_days,
+                    'reason': 'learning_grace_no_reactivate_action',
+                })
+                continue
             pg_id = page_id_from_name(campaign_name)
             in_scope, scope_reason = is_in_management_scope(op_cfg, pg_id)
             if campaign.get('id') in exclusions or campaign.get('name') in exclusions or pg_id in exclusions or not in_scope:
