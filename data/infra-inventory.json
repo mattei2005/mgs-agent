@@ -1,9 +1,458 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T23:10:35-04:00",
+    "updated_at": "2026-06-20T11:50:58-04:00",
     "generated_by": "infra-discovery.sh"
   },
+  "system_packages": [
+    {
+      "id": "hera-meta-library-playwright-runtime-deps",
+      "agent": "hera",
+      "manager": "apt/playwright",
+      "source_report": "REPORT-INFRA Hera Meta/Facebook Ad Library runtime validation",
+      "commandline": "apt-get install --no-install-recommends <playwright chromium deps> via Playwright install-deps",
+      "packages_count": 33,
+      "packages": [
+        {
+          "name": "libasound2t64",
+          "version": "1.2.11-1ubuntu0.2",
+          "status": "installed"
+        },
+        {
+          "name": "libatk-bridge2.0-0t64",
+          "version": "2.52.0-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libatk1.0-0t64",
+          "version": "2.52.0-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libatspi2.0-0t64",
+          "version": "2.52.0-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libcairo2",
+          "version": "1.18.0-3build1",
+          "status": "installed"
+        },
+        {
+          "name": "libcups2t64",
+          "version": "2.4.7-1.2ubuntu7.14",
+          "status": "installed"
+        },
+        {
+          "name": "libdbus-1-3",
+          "version": "1.14.10-4ubuntu4.1",
+          "status": "installed"
+        },
+        {
+          "name": "libdrm2",
+          "version": "2.4.125-1ubuntu0.1~24.04.2",
+          "status": "installed"
+        },
+        {
+          "name": "libgbm1",
+          "version": "25.2.8-0ubuntu0.24.04.2",
+          "status": "installed"
+        },
+        {
+          "name": "libglib2.0-0t64",
+          "version": "2.80.0-6ubuntu3.8",
+          "status": "installed"
+        },
+        {
+          "name": "libnspr4",
+          "version": "2:4.35-1.1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libnss3",
+          "version": "2:3.98-1ubuntu0.1",
+          "status": "installed"
+        },
+        {
+          "name": "libpango-1.0-0",
+          "version": "1.52.1+ds-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libx11-6",
+          "version": "2:1.8.7-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libxcb1",
+          "version": "1.15-1ubuntu2",
+          "status": "installed"
+        },
+        {
+          "name": "libxcomposite1",
+          "version": "1:0.4.5-1build3",
+          "status": "installed"
+        },
+        {
+          "name": "libxdamage1",
+          "version": "1:1.1.6-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libxext6",
+          "version": "2:1.3.4-1build2",
+          "status": "installed"
+        },
+        {
+          "name": "libxfixes3",
+          "version": "1:6.0.0-2build1",
+          "status": "installed"
+        },
+        {
+          "name": "libxkbcommon0",
+          "version": "1.6.0-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libxrandr2",
+          "version": "2:1.5.2-2build1",
+          "status": "installed"
+        },
+        {
+          "name": "xvfb",
+          "version": "2:21.1.12-1ubuntu1.6",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-noto-color-emoji",
+          "version": "2.047-0ubuntu0.24.04.1",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-unifont",
+          "version": "1:15.1.01-1build1",
+          "status": "installed"
+        },
+        {
+          "name": "libfontconfig1",
+          "version": "2.15.0-1.1ubuntu2",
+          "status": "installed"
+        },
+        {
+          "name": "libfreetype6",
+          "version": "2.13.2+dfsg-1ubuntu0.1",
+          "status": "installed"
+        },
+        {
+          "name": "xfonts-cyrillic",
+          "version": "1:1.0.5+nmu1",
+          "status": "installed"
+        },
+        {
+          "name": "xfonts-scalable",
+          "version": "1:1.0.3-1.3",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-liberation",
+          "version": "1:2.1.5-3",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-ipafont-gothic",
+          "version": "00303-21ubuntu1",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-wqy-zenhei",
+          "version": "0.9.45-8",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-tlwg-loma-otf",
+          "version": "1:0.7.3-1",
+          "status": "installed"
+        },
+        {
+          "name": "fonts-freefont-ttf",
+          "version": "20211204+svn4273-2",
+          "status": "installed"
+        }
+      ],
+      "missing_packages": [],
+      "runtime_validation": {
+        "node_playwright_project": "/tmp/hera-meta-library-test",
+        "playwright_version": "1.61.0",
+        "chromium_executable": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+        "chromium_executable_exists": true
+      },
+      "purpose": "Hera validation of Meta/Facebook Ad Library via Playwright/Chromium",
+      "updated_at": "2026-06-18T18:29:15.935418-04:00"
+    },
+    {
+      "id": "hera-creative-sanitizer-exiftool",
+      "agent": "hera",
+      "manager": "apt",
+      "source_report": "REPORT-INFRA Hera creative sanitizer runtime validation",
+      "package": "libimage-exiftool-perl",
+      "version": "12.76+dfsg-1",
+      "binary": "/usr/bin/exiftool",
+      "binary_exists": true,
+      "purpose": "Metadata inspection/sanitization checks for creative assets",
+      "known_pending": "resolved: JFIFVersion treated as structural JPEG/JFIF metadata; 10 Meta Library JPGs verified clean=true/harmful_tags=0 after sanitization.",
+      "updated_at": "2026-06-18T18:32:42.819646-04:00"
+    },
+    {
+      "id": "hera-creative-sanitizer-mat2",
+      "agent": "hera",
+      "manager": "apt",
+      "source_report": "REPORT-INFRA Hera creative sanitizer clean JPG gate",
+      "package": "mat2",
+      "version": "0.13.4-2.1",
+      "binary": "/usr/bin/mat2",
+      "binary_exists": true,
+      "purpose": "Second-pass metadata removal/verification for clean creative asset delivery",
+      "updated_at": "2026-06-18T18:32:42.819646-04:00"
+    },
+    {
+      "id": "hera-video-editing-runtime-deps",
+      "agent": "hera",
+      "manager": "apt",
+      "source_report": "REPORT-INFRA Hera local video editing/validation runtime dependencies",
+      "commandline": "apt install ffmpeg python3-pil + apt dependencies",
+      "packages_count": 2,
+      "packages": [
+        {
+          "name": "ffmpeg",
+          "version": "7:6.1.1-3ubuntu5",
+          "status": "installed"
+        },
+        {
+          "name": "python3-pil",
+          "version": "10.2.0-1ubuntu1.2",
+          "status": "installed"
+        }
+      ],
+      "runtime_validation": {
+        "ffmpeg_binary": "/usr/bin/ffmpeg",
+        "ffmpeg_version": "ffmpeg version 6.1.1-3ubuntu5",
+        "ffprobe_binary": "/usr/bin/ffprobe",
+        "ffprobe_version": "ffprobe version 6.1.1-3ubuntu5",
+        "python_pillow_import": "ok",
+        "pillow_version": "10.2.0",
+        "pil_smoke_test": "created 2x2 RGB image"
+      },
+      "purpose": "Local editing, probing and validation of Hera creative/video outputs",
+      "risk": "Low: durable VPS package install; no gateway restart or credential/config change reported.",
+      "updated_at": "2026-06-19T10:50:18-04:00"
+    }
+  ],
+  "runtime_artifacts": [
+    {
+      "id": "hera-meta-library-first10-clean-zip-2026-06-18",
+      "agent": "hera",
+      "path": "/tmp/hera-meta-library-test/utua_first10_2026-06-18T22-29-47-519Z/utua_meta_library_first10_clean.zip",
+      "type": "temporary_zip",
+      "sha256": "ec3ba172fde784a000ea7e496175bf5ce97101c739d43b02ad3c6c9da997b0c9",
+      "size_bytes": 393048,
+      "source": "/tmp/hera-meta-library-test/",
+      "validation": "unzip -l OK; 10 JPGs verify clean=true and harmful_tags=0",
+      "git_tracked": false,
+      "updated_at": "2026-06-18T18:32:42.819646-04:00"
+    },
+    {
+      "id": "ares-elena-bulk-duplicates-background-20260619",
+      "agent": "ares",
+      "type": "background_process",
+      "command": "python3 /root/mgs-agent/scripts/ares-meta-elena-bulk-duplicates.py --execute",
+      "source_report": "proc_bc7762a843e7 (Hermes process id not visible in Zeus session); OS process observed by ps during processing",
+      "validation": {
+        "ps_observed": true,
+        "process_tool_poll": "not_found_in_zeus_session",
+        "execution_audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/elena-bulk-duplicates-20260619T190820Z.json",
+        "execution_audit_sha256": "1326d72144343c7a861e5494dbb1e1af74af02cad0cbb4fc5cee61f54078b1ce"
+      },
+      "updated_at": "2026-06-19T15:11:18-04:00"
+    },
+    {
+      "id": "mgs-gateway-restart-20260620T001236Z-437964",
+      "agent": "ares",
+      "type": "gateway_restart_finalizer",
+      "unit": "mgs-gateway-restart-20260620T001236Z-437964",
+      "log_path": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260620T001236Z-437964.log",
+      "log_sha256": "806a1db11fa816d6328fa4645314c0f2179be5cf28e10afe0790d8dcb7a340a5",
+      "log_size_bytes": 1225,
+      "completed_at": "2026-06-19T20:14:29.833033-04:00",
+      "target_service": "ares-gateway.service",
+      "service_state": {
+        "is_active": "active",
+        "ActiveState": "active",
+        "SubState": "running",
+        "ExecMainPID": "438070"
+      },
+      "purpose": "Safe detached restart after Ares Discord thread conversation config update",
+      "last_report": "restart seguro Ares agendado via systemd-run"
+    },
+    {
+      "id": "mgs-gateway-restart-20260620T002456Z-439346",
+      "agent": "ares",
+      "type": "gateway_restart_finalizer",
+      "unit": "mgs-gateway-restart-20260620T002456Z-439346",
+      "log_path": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260620T002456Z-439346.log",
+      "log_sha256": "9a1ecaa14894dc151fbc0d4921e6db11fc121aece52aa58d112f89cc37d29955",
+      "log_size_bytes": 1218,
+      "completed_at": "2026-06-19T20:26:29.714783-04:00",
+      "target_service": "ares-gateway.service",
+      "service_state": {
+        "is_active": "active",
+        "ActiveState": "active",
+        "SubState": "running",
+        "ExecMainPID": "442235"
+      },
+      "purpose": "Safe detached restart after Ares config.yaml/.env Discord thread conversation fix",
+      "last_report": "restart seguro Ares agendado após config set"
+    },
+    {
+      "id": "ares-openzed-elena-fixed-operational-thread",
+      "agent": "ares",
+      "type": "discord_thread_route",
+      "channel_id": "1516887105543077949",
+      "thread_id": "1517682975234326729",
+      "status": {
+        "discord_get_status": 200,
+        "parent_id": "1516887105543077949",
+        "archived": false,
+        "locked": false
+      },
+      "purpose": "Fixed logs-aquisicao operational thread for normal Openzed/Elena alerts/checkpoints to avoid giant thread list",
+      "updated_at": "2026-06-19T20:40:47-04:00"
+    },
+    {
+      "id": "hera-drive-auth-watchdog-profile-script",
+      "agent": "hera",
+      "type": "profile_script",
+      "path": "/root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py",
+      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; alerta Zeus/Rodolfo quando OAuth/Service Account cair sem loop operacional.",
+      "validation": "python3 -m py_compile OK; watchdog testado por Hera com primeira execução alertando e segunda silenciosa no mesmo estado.",
+      "git_tracked": false,
+      "updated_at": "2026-06-20T11:50:58-04:00",
+      "size_bytes": 8529,
+      "modified_at": "2026-06-20T11:49:04-04:00",
+      "sha256": "244ea22af03e620f862bcd65069941eb98ef49b0057a7f122c34fd25c0b28688"
+    }
+  ],
+  "profile_skill_references": [
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "skill",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/SKILL.md",
+      "size_bytes": 37421,
+      "sha256": "7d50296ba83430f3977959b382d43ad5d86a2a3c8bd7710a289968ede5e8c3af",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T12:11:18-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; provider rule validated: video defaults to Grok/xAI; image may use GPT/OpenAI or Grok per manager request; GPT for video is limited to image/keyframe/direção visual, not final narrative video"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/video-variation-gpt-grok-workflow.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/video-variation-gpt-grok-workflow.md",
+      "size_bytes": 6480,
+      "sha256": "cfacdd0864f421335e88710e3b8e9cb3ab0a07e57943fff4d0e2d00c5158374d",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T12:11:18-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; provider rule validated: video defaults to Grok/xAI; image may use GPT/OpenAI or Grok per manager request; GPT for video is limited to image/keyframe/direção visual, not final narrative video"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/verticals/CAR.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/verticals/CAR.md",
+      "size_bytes": 5622,
+      "sha256": "cef84eb5de333bf415d5c4049b4548a12d51c8a614511c45496f2ff0b658652b",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:27:09-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/verticals/CC.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/verticals/CC.md",
+      "size_bytes": 3215,
+      "sha256": "9148668a2d1cd37fd72c34ddfbd0dcfa85690183efd53f31d8d927d039e05b95",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:27:09-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/verticals/GAME.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/verticals/GAME.md",
+      "size_bytes": 3105,
+      "sha256": "edeb3a31eaaf56af231b508f4f96d2b4b14d198bdcd1adc798b7ce83032cac10",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:27:09-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/formats/video.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/formats/video.md",
+      "size_bytes": 3523,
+      "sha256": "9f4752c2c1be555d0e4e2a52895dfb9acb55074cb1f0f3ba4f8aecf003d62b5f",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:27:09-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/formats/image.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/formats/image.md",
+      "size_bytes": 2220,
+      "sha256": "7504f1b17cc175b859d6f876cc93dd116c73c9234ea0f190136f8efbb99f5c65",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:27:09-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/continuous-learning.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/continuous-learning.md",
+      "size_bytes": 2999,
+      "sha256": "e3fc7d5214a0be25c11b6a61364b3696f90a2e54a0a0d00a6000bf0162432faa",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-19T11:27:09-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/video-gpt-grok-precedent.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/video-gpt-grok-precedent.md",
+      "size_bytes": 4566,
+      "sha256": "106556156e7bcccf2c2c98cf99a9c7ec8256a65f8a2cf10e24c7755d6a5bf416",
+      "runtime_versioned_sha_match": true,
+      "source_thread_id": "1516611205517807680",
+      "updated_at": "2026-06-19T11:56:29-04:00",
+      "validation": "runtime/versioned SHA match; secret scan negative; import-discord-thread OK with 20 messages; 4 videos ffprobe 720x1280 ~8.04s audio=true; contact sheets generated/analyzed; reference corrects wrong keyframe/zoom-only conclusion and requires replicating real thread workflow instead of theorizing by provider",
+      "known_pending": "No new BR/PT generation performed in this thread; operational rule corrected first."
+    }
+  ],
   "systemd_services": [
     {
       "name": "zeus-gateway.service",
@@ -88,139 +537,25 @@
       "entry": "41 3 * * * flock -n /var/lock/mgs_safety_backup.lock /root/mgs-agent/scripts/mgs-safety-backup.sh >> /root/mgs-agent/logs/mgs-safety-backup-cron.log 2>&1"
     },
     {
-      "profile": "ares",
-      "id": "aa9e01a5ec4a",
-      "name": "Ares Meta intraday R1-R5 dry-run",
+      "id": "d2a7853ae86f",
+      "type": "hermes_cron",
+      "profile": "hera",
+      "agent": "hera",
+      "name": "Hera Drive Auth Watchdog",
       "schedule": {
         "kind": "interval",
         "minutes": 30,
         "display": "every 30m"
       },
-      "script": "ares-meta-intraday-cron.sh",
-      "next_run_at": "2026-06-19T19:51:18.287498-04:00",
+      "script": "drive-auth-watchdog.py",
       "enabled": true,
       "state": "scheduled",
+      "next_run_at": "2026-06-20T12:20:18.665365-04:00",
+      "last_run_at": "2026-06-20T11:50:18.665365-04:00",
       "no_agent": true,
-      "deliver": "discord:1516887105543077949",
-      "repeat": {
-        "times": null,
-        "completed": 60
-      },
-      "source": "/root/.hermes/profiles/ares/cron/jobs.json",
-      "last_report": "Intraday wrapper bounded to avoid raw scheduler timeout; publishes sanitized error/output to logs-aquisicao thread poster",
-      "validated_at": "2026-06-19T19:24:10-04:00",
-      "validation": {
-        "bash_n": "OK",
-        "runner_bounded_rc": "0",
-        "audit_json": "OK",
-        "audit_summary": {
-          "campaigns_seen": 35,
-          "insight_rows": 28,
-          "candidate_count": 0
-        },
-        "wrapper_sha256": "776f8a4392e64951f6197f0e3f5051669cf8338d02a97d636c63ef879297f3bd"
-      }
-    },
-    {
-      "profile": "ares",
-      "id": "c6c737070d3f",
-      "name": "Ares Meta reativar-todas dry-run",
-      "schedule": {
-        "kind": "cron",
-        "expr": "30 18 * * *",
-        "display": "30 18 * * *"
-      },
-      "script": "ares-meta-reactivate-all-cron.sh",
-      "next_run_at": "2026-06-19T18:30:00-04:00",
-      "enabled": true,
-      "state": "scheduled",
-      "no_agent": true,
-      "deliver": "discord:1516887105543077949",
-      "repeat": {
-        "times": null,
-        "completed": 1
-      },
-      "source": "/root/.hermes/profiles/ares/cron/jobs.json",
-      "last_report": "Meta cron wrapper now posts non-empty reports to logs-aquisicao via Discord thread poster; scheduler stdout intentionally empty",
-      "validated_at": "2026-06-19T18:03:41-04:00",
-      "validation": {
-        "py_compile_poster": "OK",
-        "bash_n_wrappers": "OK",
-        "poster_dry_run": "OK",
-        "ares_bot_logs_aquisicao_permissions": {
-          "MANAGE_THREADS": true,
-          "MANAGE_ROLES": true,
-          "MANAGE_CHANNELS": true
-        },
-        "enabled_scheduled": true
-      },
-      "intended_local_time": "00:30 Europe/Madrid (stored as 18:30 America/New_York during EDT)"
-    },
-    {
-      "profile": "ares",
-      "id": "0598c0dc469f",
-      "name": "Ares Meta HOA gestor read-only 4d",
-      "schedule": {
-        "kind": "cron",
-        "expr": "0 2,6,9,12,16 * * *",
-        "display": "0 2,6,9,12,16 * * *"
-      },
-      "script": "ares-meta-hoa-manager.sh",
-      "next_run_at": "2026-06-20T02:00:00-04:00",
-      "enabled": true,
-      "state": "scheduled",
-      "no_agent": true,
-      "deliver": "discord:1516887105543077949",
-      "repeat": {
-        "times": 20,
-        "completed": 5
-      },
-      "source": "/root/.hermes/profiles/ares/cron/jobs.json",
-      "last_report": "Meta cron wrapper now posts non-empty reports to logs-aquisicao via Discord thread poster; scheduler stdout intentionally empty",
-      "validated_at": "2026-06-19T18:03:41-04:00",
-      "validation": {
-        "py_compile_poster": "OK",
-        "bash_n_wrappers": "OK",
-        "poster_dry_run": "OK",
-        "ares_bot_logs_aquisicao_permissions": {
-          "MANAGE_THREADS": true,
-          "MANAGE_ROLES": true,
-          "MANAGE_CHANNELS": true
-        },
-        "enabled_scheduled": true
-      }
-    },
-    {
-      "profile": "ares",
-      "id": "25a263999f5c",
-      "name": "Ares Elena midnight structure adjust - approved write",
-      "schedule": {
-        "kind": "once",
-        "run_at": "2026-06-19T18:00:00-04:00",
-        "display": "once at 2026-06-19 18:00"
-      },
-      "script": "ares-meta-elena-midnight-structure-adjust.sh",
-      "next_run_at": "2026-06-19T18:00:00-04:00",
-      "enabled": false,
-      "state": "removed",
-      "no_agent": true,
-      "deliver": "discord:1516887105543077949",
-      "repeat": {
-        "times": 1,
-        "completed": 0
-      },
-      "source": "/root/.hermes/profiles/ares/cron/jobs.json",
-      "last_report": "Job removido após estado final da conta já estar no alvo de 20 campanhas Elena; evita reprocessamento",
-      "validated_at": "2026-06-19T16:31:11-04:00",
-      "validation": {
-        "cron_absent_from_jobs_json": true,
-        "cleanup_audit_json": "OK",
-        "final_elena_active_campaigns": 20,
-        "daily_budget_2500_count": 20,
-        "issues_count": 0
-      },
-      "intended_local_time": "2026-06-20 00:00 Europe/Madrid / 2026-06-19 18:00 America/New_York",
-      "removed_at": "2026-06-19T16:31:11-04:00"
+      "deliver": "discord:1498132022634483894",
+      "purpose": "Drive auth watchdog da Hera a cada 30m.",
+      "updated_at": "2026-06-20T11:50:58-04:00"
     }
   ],
   "scripts": [
@@ -233,6 +568,11 @@
       "path": "/root/mgs-agent/scripts/ares-classify-video-timelines-ocr.py",
       "size_bytes": 10815,
       "modified_at": "2026-06-13T20:48:34-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-discord-post-with-thread.py",
+      "size_bytes": 5192,
+      "modified_at": "2026-06-19T20:39:03-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-drive-thumbnail-sampler.py",
@@ -265,6 +605,11 @@
       "modified_at": "2026-06-08T14:24:33-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/ares-meta-apply-naming-plan.py",
+      "size_bytes": 6983,
+      "modified_at": "2026-06-19T19:13:17-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/ares-meta-auth-check.py",
       "size_bytes": 1662,
       "modified_at": "2026-06-16T00:20:06-04:00"
@@ -277,21 +622,32 @@
     {
       "path": "/root/mgs-agent/scripts/ares-meta-common.py",
       "size_bytes": 6855,
-      "modified_at": "2026-06-18T15:33:38-04:00",
-      "sha256": "ba8f988e49cfc39ac7ca1d7f2ae95677095194b290f4d8189a9cc1580c8413c5"
+      "modified_at": "2026-06-18T15:33:38-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
       "size_bytes": 22152,
-      "modified_at": "2026-06-19T23:09:37.198417-04:00",
-      "sha256": "c2175ff4d3eb1507b5b429e43b1b89ca9954f636af2d34d5216fc0ee7b98ae5e",
-      "agent": "ares",
-      "purpose": "Ares Meta cron runner learning-grace label update: observe_learning action displays operational label OBSERVAR instead of eu observaria",
-      "last_report": "ajuste de nomenclatura operacional solicitado por Rodolfo: trocar ação de learning de eu observaria para OBSERVAR",
-      "validation": {
-        "py_compile": "OK",
-        "read_only_intraday_label": "OBSERVAR"
-      }
+      "modified_at": "2026-06-19T23:09:37-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-adset-copy-probe.py",
+      "size_bytes": 11717,
+      "modified_at": "2026-06-19T11:19:45-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-creativeparam-probe.py",
+      "size_bytes": 9999,
+      "modified_at": "2026-06-19T11:41:11-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-elena-bulk-duplicates.py",
+      "size_bytes": 15961,
+      "modified_at": "2026-06-19T15:24:10-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-elena-midnight-structure-adjust.py",
+      "size_bytes": 12182,
+      "modified_at": "2026-06-19T14:49:58-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-fetch-campaigns.py",
@@ -301,11 +657,7 @@
     {
       "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
       "size_bytes": 15930,
-      "modified_at": "2026-06-19T14:25:49.813838-04:00",
-      "sha256": "92b296d366786b97d46ff6911f79f7b105f8cfeadddc8e538482c636d5120c37",
-      "agent": "ares",
-      "purpose": "Ares Meta HOA manager read-only/dry-run simulated decisions with REC IDs, Elena pg_22091 focus and Patricia pg_22069 manual hold",
-      "last_report": "ajustar crons Meta para fase read-only/dry-run com decisões simuladas, IDs REC, foco Elena pg_22091 e hold Patricia pg_22069"
+      "modified_at": "2026-06-19T14:25:49-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
@@ -315,13 +667,17 @@
     {
       "path": "/root/mgs-agent/scripts/ares-meta-replacement-clone-videoid.py",
       "size_bytes": 21773,
-      "modified_at": "2026-06-18T16:58:35-04:00",
-      "sha256": "1543aeb8e4c16321184c74640cc9c4bada89f477ab261d14d70a747da0516a0e"
+      "modified_at": "2026-06-18T16:58:35-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-replacement-clone.py",
       "size_bytes": 17797,
       "modified_at": "2026-06-18T00:01:20-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-meta-source-mirror.py",
+      "size_bytes": 21951,
+      "modified_at": "2026-06-18T21:43:35-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-token-expiry-alert.py",
@@ -371,11 +727,7 @@
     {
       "path": "/root/mgs-agent/scripts/clean-creative-metadata.py",
       "size_bytes": 13394,
-      "modified_at": "2026-06-18T18:30:36.980212-04:00",
-      "sha256": "7cf0f13798064269e7c0f82096150d6e940150668b769bae48d07c9a734e27b4",
-      "agent": "hera",
-      "purpose": "Creative metadata sanitizer/gate for Hera/Ares assets",
-      "last_report": "JFIFVersion structural allowlist + mat2 validation for Meta Ad Library JPG delivery"
+      "modified_at": "2026-06-18T18:30:36-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/clean-creative-metadata.sh",
@@ -504,8 +856,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/infra-discovery.sh",
-      "size_bytes": 7479,
-      "modified_at": "2026-06-17T18:00:44-04:00"
+      "size_bytes": 8135,
+      "modified_at": "2026-06-19T11:15:17-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
@@ -515,9 +867,7 @@
     {
       "path": "/root/mgs-agent/scripts/mgs-grok-generate.py",
       "size_bytes": 8607,
-      "modified_at": "2026-06-19T11:05:57-04:00",
-      "sha256": "7bfedee4d7b404168b37668c0fbe7ee78ba22f144a8b69f5f35ce8157f56997b",
-      "validation": "python3 -m py_compile OK; --help OK; xAI credential resolver provider=xai-oauth sanitized"
+      "modified_at": "2026-06-19T11:05:57-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-ops-briefing.py",
@@ -716,8 +1066,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/sync-souls.sh",
-      "size_bytes": 3592,
-      "modified_at": "2026-06-06T23:50:36-04:00"
+      "size_bytes": 3623,
+      "modified_at": "2026-06-19T01:09:14-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/track-article-cost.sh",
@@ -728,137 +1078,6 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-source-mirror.py",
-      "size_bytes": 21951,
-      "modified_at": "2026-06-18T21:43:35.292210-04:00",
-      "sha256": "d64f6b8a867bc03d8f996a768463d75ad7ee90a8f298858f6162362593d1f8bd",
-      "agent": "ares",
-      "purpose": "Read-only Meta source mirror diagnostics for clone EU/financial DSA compliance and source-vs-payload diff",
-      "last_report": "diagnóstico read-only source mirror para clone Meta EU/financeiro com DSA/compliance e diff source-vs-payload"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-adset-copy-probe.py",
-      "size_bytes": 11717,
-      "modified_at": "2026-06-19T11:19:45.100199-04:00",
-      "sha256": "1d696ff9d7182bcc7b50cf7d31fac9d333f9bf64b1e688ffcf751fc70d992404",
-      "agent": "ares",
-      "purpose": "Controlled Meta API asyncbatch/adset copy probe for Elena campaign clone; creates paused shallow copy and cleans up on failure/incomplete clone",
-      "last_report": "probe controlado de clone Meta API asyncbatch/adset copy para campanha Elena solicitado por Rodolfo"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-creativeparam-probe.py",
-      "size_bytes": 9999,
-      "modified_at": "2026-06-19T11:41:11.650408-04:00",
-      "sha256": "e8d0aaa5e8b8644c9d17d47afae5c548ffdd78dcf1c71037caf47e4754a89bfd",
-      "agent": "ares",
-      "purpose": "Controlled Meta asyncbatch adset deep-copy probe with creative_parameters variants excluding deprecated standard_enhancements; paused shells cleaned unless success criteria pass",
-      "last_report": "probe controlado para testar clone Meta asyncbatch com creative_parameters sem standard_enhancements",
-      "evidence": {
-        "audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/elena-asyncbatch-creativeparam-probe-20260619T154243Z.json",
-        "audit_sha256": "05762d5af1469afc987abfb3066b1c308e2c2137285897bc40a9203b40ddee86"
-      }
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-elena-midnight-structure-adjust.py",
-      "size_bytes": 12182,
-      "modified_at": "2026-06-19T14:49:58.866287-04:00",
-      "sha256": "49df86e5da21e704fb118a087fedb9e4b20d56ca18d8ab6afc3703770c2e93b2",
-      "agent": "ares",
-      "purpose": "Ares controlled-write script for Elena pg_22091 midnight structure adjustment: USD25/day, 1 adset/3 ads, remove bid cap, disable Meta PAUSE rules",
-      "last_report": "Rodolfo aprovou controlled-write na virada da conta Meta para Elena pg_22091"
-    },
-    {
-      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-elena-midnight-structure-adjust.sh",
-      "size_bytes": 122,
-      "modified_at": "2026-06-19T14:50:28.649322-04:00",
-      "sha256": "022a39a9320bb586c8b4d64956426b4e27a04962f512a3e53270606ab673d3ab",
-      "agent": "ares",
-      "purpose": "Profile-local Hermes cron wrapper for approved Elena midnight controlled-write structure adjustment",
-      "last_report": "Rodolfo aprovou controlled-write na virada da conta Meta para Elena pg_22091",
-      "git_tracked": false,
-      "profile": "ares"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-elena-bulk-duplicates.py",
-      "size_bytes": 14513,
-      "modified_at": "2026-06-19T14:57:14.545772-04:00",
-      "sha256": "4ca802e260c4e22a804f0cd8055605a08ffe2b8c580e4ede0a1311b1d9e9bb05",
-      "agent": "ares",
-      "purpose": "Ares controlled-write automation to create 15 functional Elena pg_22091 duplicates, targeting 20 scheduled campaigns 00:00-01:00 Europe/Madrid, USD25/day, 1 adset/3 ads, no bid cap",
-      "last_report": "Rodolfo aprovou criar 15 duplicações funcionais da Elena pg_22091 para chegar a 20 campanhas programadas entre 00:00 e 01:00 Europe/Madrid"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-discord-post-with-thread.py",
-      "size_bytes": 5192,
-      "modified_at": "2026-06-19T20:39:03.403480-04:00",
-      "sha256": "fde55c7cd6a30f0d096460cb6b57cb302607c0027532b2723e3556266cd79e9f",
-      "agent": "ares",
-      "purpose": "Ares Discord poster for Meta cron reports; supports posting normal Openzed/Elena checkpoints into fixed operational thread instead of creating one thread per checkpoint",
-      "last_report": "Rodolfo aprovou consolidar alertas/checkpoints normais da operação Openzed/Elena em uma thread operacional fixa",
-      "validation": {
-        "py_compile": "OK",
-        "dry_run_mode": "post_existing_thread",
-        "thread_id": "1517682975234326729",
-        "parent_id": "1516887105543077949",
-        "thread_archived": false,
-        "thread_locked": false
-      }
-    },
-    {
-      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-intraday-cron.sh",
-      "size_bytes": 2211,
-      "modified_at": "2026-06-19T20:39:14.064479-04:00",
-      "sha256": "e4f97e0b1ecb07350fcdc9e1af647ffecac206e0ab6c912d9b2adb168600ff17",
-      "agent": "ares",
-      "purpose": "Ares profile-local Meta cron wrapper updated to route normal Openzed/Elena checkpoints to fixed logs-aquisicao operational thread and keep scheduler output controlled",
-      "last_report": "consolidar alertas/checkpoints normais da operação Openzed/Elena em uma thread operacional fixa",
-      "profile": "ares",
-      "git_tracked": false,
-      "validation": {
-        "bash_n": "OK",
-        "fixed_thread_id": "1517682975234326729"
-      }
-    },
-    {
-      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-reactivate-all-cron.sh",
-      "size_bytes": 472,
-      "modified_at": "2026-06-19T20:39:14.257479-04:00",
-      "sha256": "3f7a2a9d07de27e0559d878b153bd24a32d9a3bc41f46faa9993fd4319e3bab9",
-      "agent": "ares",
-      "purpose": "Ares profile-local Meta cron wrapper updated to route normal Openzed/Elena checkpoints to fixed logs-aquisicao operational thread and keep scheduler output controlled",
-      "last_report": "consolidar alertas/checkpoints normais da operação Openzed/Elena em uma thread operacional fixa",
-      "profile": "ares",
-      "git_tracked": false,
-      "validation": {
-        "bash_n": "OK",
-        "fixed_thread_id": "1517682975234326729"
-      }
-    },
-    {
-      "path": "/root/.hermes/profiles/ares/scripts/ares-meta-hoa-manager.sh",
-      "size_bytes": 463,
-      "modified_at": "2026-06-19T20:39:14.442479-04:00",
-      "sha256": "162b21892c2c77ed5111666e91bdca42b82d8b43a7075e97c896ecf59dbb37ec",
-      "agent": "ares",
-      "purpose": "Ares profile-local Meta cron wrapper updated to route normal Openzed/Elena checkpoints to fixed logs-aquisicao operational thread and keep scheduler output controlled",
-      "last_report": "consolidar alertas/checkpoints normais da operação Openzed/Elena em uma thread operacional fixa",
-      "profile": "ares",
-      "git_tracked": false,
-      "validation": {
-        "bash_n": "OK",
-        "fixed_thread_id": "1517682975234326729"
-      }
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-meta-apply-naming-plan.py",
-      "size_bytes": 6983,
-      "modified_at": "2026-06-19T19:13:17.481683-04:00",
-      "sha256": "4f56ec069d26c80569bacdaab2fc2931d6be5dd27ee1178aac1a33a68d51ddb5",
-      "agent": "ares",
-      "purpose": "Controlled Meta rename applicator for approved Elena naming plan: campaigns/adsets/ads/adcreatives with audit and safe errors",
-      "last_report": "aplicação controlada do plano de nomenclatura Elena aprovado por Rodolfo e documentação do padrão validado"
     }
   ],
   "skills_mgs": [
@@ -1253,81 +1472,12 @@
       {
         "name": "meta-ads-intraday-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "sha256": "8ec64090827265e8202ce517a8699c67e3eff5dfb6e2f0fa19be745d4753ba61",
-        "versioned_sha256": "8ec64090827265e8202ce517a8699c67e3eff5dfb6e2f0fa19be745d4753ba61",
-        "modified_at": "2026-06-19T21:58:09.390033-04:00",
-        "purpose": "Ares Meta intraday operations runbook updated with learning/aquecimento <3d observe-only rule",
-        "last_report": "documentar que learning/aquecimento <3d não gera sugestão acionável de pausa/reativação"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
       },
       {
         "name": "meta-openzedfinanzas-replacement-clone",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
-        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md",
-        "sha256": "bc394a781b2d69ef64ead3bcdb458970a5761747ad2308cb5759e8f24fab40ea",
-        "versioned_sha256": "bc394a781b2d69ef64ead3bcdb458970a5761747ad2308cb5759e8f24fab40ea",
-        "modified_at": "2026-06-19T19:20:01.077064-04:00",
-        "references": [
-          {
-            "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/elena-full-clone-token2-success-2026-06-19.md",
-            "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/references/elena-full-clone-token2-success-2026-06-19.md",
-            "sha256": "ce4df5d28624a2c9242a44349ba6e447941e85c4c9d25c014cf116eec803d286",
-            "versioned_sha256": "ce4df5d28624a2c9242a44349ba6e447941e85c4c9d25c014cf116eec803d286",
-            "modified_at": "2026-06-19T02:25:34.898063-04:00",
-            "purpose": "Operational learning: new token and successful Elena full clone for OpenzedFinanzas"
-          },
-          {
-            "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/attribution-setting-probe-2026-06-19.md",
-            "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/references/attribution-setting-probe-2026-06-19.md",
-            "sha256": "4624ec711fdc163195a0679be021568525e9d3a821bd34e8bd36aa8bb536c3c2",
-            "versioned_sha256": "4624ec711fdc163195a0679be021568525e9d3a821bd34e8bd36aa8bb536c3c2",
-            "modified_at": "2026-06-19T02:46:17.523782-04:00",
-            "purpose": "Operational learning: attribution_setting/use_unified_attribution_setting probe for Elena 7/1 perfect clone hypothesis"
-          },
-          {
-            "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/addraft-asyncadcopies-probe-2026-06-19.md",
-            "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/references/addraft-asyncadcopies-probe-2026-06-19.md",
-            "sha256": "f9c4886b4b5e0862343f06797ddf683a34cb0769aac75084436c24c589add098",
-            "versioned_sha256": "f9c4886b4b5e0862343f06797ddf683a34cb0769aac75084436c24c589add098",
-            "modified_at": "2026-06-19T03:11:21.058573-04:00",
-            "purpose": "Operational learning: API draft/copy flow for Elena 7/1 perfect clone and app capability block on addrafts"
-          },
-          {
-            "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/elena-native-copy-ctm-standard-enhancements-2026-06-19.md",
-            "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/references/elena-native-copy-ctm-standard-enhancements-2026-06-19.md",
-            "sha256": "c8a06b52354d71da5e43ea50feea9574a6a412e40b5fb3276bcdc1e7a2bc336e",
-            "versioned_sha256": "c8a06b52354d71da5e43ea50feea9574a6a412e40b5fb3276bcdc1e7a2bc336e",
-            "modified_at": "2026-06-19T12:20:34.046988-04:00",
-            "purpose": "Operational learning: Meta Elena native/async copy, standard_enhancements and CTM creative_parameters probe findings"
-          },
-          {
-            "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/asyncbatch-copy-and-ctm-creative-parameters-2026-06-19.md",
-            "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/references/asyncbatch-copy-and-ctm-creative-parameters-2026-06-19.md",
-            "sha256": "9127ddd7b42969782797b0a29b8dc19c0df06de577eacf0f09521d16853ffaf9",
-            "versioned_sha256": "9127ddd7b42969782797b0a29b8dc19c0df06de577eacf0f09521d16853ffaf9",
-            "modified_at": "2026-06-19T12:13:45.274545-04:00",
-            "purpose": "Operational learning: Meta Elena native/async copy, standard_enhancements and CTM creative_parameters probe findings"
-          },
-          {
-            "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/asyncbatch-copy-and-creative-parameters-2026-06-19.md",
-            "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/references/asyncbatch-copy-and-creative-parameters-2026-06-19.md",
-            "sha256": "e44197b5c4e1adeb2da366422e5c7d1d3db35f6bcd7ad799f1fd04fafef9ee6b",
-            "versioned_sha256": "e44197b5c4e1adeb2da366422e5c7d1d3db35f6bcd7ad799f1fd04fafef9ee6b",
-            "modified_at": "2026-06-19T11:50:14.525957-04:00",
-            "purpose": "Operational learning: Meta Elena native/async copy, standard_enhancements and CTM creative_parameters probe findings"
-          },
-          {
-            "path": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/references/elena-naming-standard-and-readonly-plan-2026-06-19.md",
-            "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-openzedfinanzas-replacement-clone/references/elena-naming-standard-and-readonly-plan-2026-06-19.md",
-            "sha256": "2d6169734222411346a22d7793cd802a0aa1c0d34031c49e5801377991ee2475",
-            "versioned_sha256": "2d6169734222411346a22d7793cd802a0aa1c0d34031c49e5801377991ee2475",
-            "modified_at": "2026-06-19T18:22:17.324028-04:00",
-            "purpose": "Operational learning: validated Elena naming standard, read-only rename plan, v2 unique creative names, and controlled apply pattern"
-          }
-        ],
-        "last_report": "registrar descoberta do fluxo API de draft/copy para clone perfeito Elena 7/1 e bloqueio de capability do app em addrafts"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-openzedfinanzas-replacement-clone/SKILL.md"
       },
       {
         "name": "paid-acquisition-operations",
@@ -2284,6 +2434,11 @@
         "skill_md": "/root/.hermes/profiles/hera/skills/creative/manim-video/SKILL.md"
       },
       {
+        "name": "meta-library-reference-intake",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md"
+      },
+      {
         "name": "p5js",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/hera/skills/creative/p5js/SKILL.md"
@@ -2552,26 +2707,6 @@
         "name": "yuanbao",
         "category": "",
         "skill_md": "/root/.hermes/profiles/hera/skills/yuanbao/SKILL.md"
-      },
-      {
-        "name": "meta-library-reference-intake",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md",
-        "versioned_skill_md": "/root/mgs-agent/profiles/hera-skills/creative/meta-library-reference-intake/SKILL.md",
-        "sha256": "d7e60648189846be10fc0638f791ce8cbf8f2b688c1d2846ff71c8fdff582007",
-        "versioned_sha256": "d7e60648189846be10fc0638f791ce8cbf8f2b688c1d2846ff71c8fdff582007",
-        "sha_match": true,
-        "size_bytes": 11797,
-        "versioned_size_bytes": 11797,
-        "modified_at": "2026-06-19T01:08:29.555300-04:00",
-        "versioned_modified_at": "2026-06-19T01:08:29.555300-04:00",
-        "purpose": "Hera workflow for Meta/Facebook Ad Library reference intake: download, sanitize, inventory, name and package references as ZIP/Drive, not final campaign assets.",
-        "validation": {
-          "frontmatter_read": true,
-          "runtime_versioned_sha_match": true,
-          "secret_scan": "clean_except_policy_text_mentions_tokens_cookies_without_values"
-        },
-        "updated_at": "2026-06-19T01:10:17.539185-04:00"
       }
     ],
     "zeus": [
@@ -3234,8 +3369,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "bb44f316e6c6d9bed22c605224c761d2",
-      "modified_at": "2026-06-18T14:11:01-04:00"
+      "md5": "3f420393e605772b49faf6529803e878",
+      "modified_at": "2026-06-20T04:56:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -3246,32 +3381,32 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "3d819abb25cd1421df52202991bdcd3f",
-      "modified_at": "2026-06-18T14:00:01-04:00"
+      "md5": "66b4dde6e375d1cb868df6c06af8db93",
+      "modified_at": "2026-06-20T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "ab1c1633f662eda552483831d94df3ae",
-      "modified_at": "2026-06-18T09:02:59-04:00"
+      "md5": "2e2f37d042f020fd2d0ef61c17e28f35",
+      "modified_at": "2026-06-20T03:04:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 14974,
-      "md5": "5e46573fc4f6954656c5044b214838f2",
-      "modified_at": "2026-06-18T14:10:02-04:00"
+      "size_bytes": 15748,
+      "md5": "d482ded9b3504f4e89e0018f1486a0ea",
+      "modified_at": "2026-06-20T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 330,
-      "md5": "f8839dc9aac371c892d1faffe9920fa2",
-      "modified_at": "2026-06-18T08:37:02-04:00"
+      "size_bytes": 333,
+      "md5": "7a1c46a00013e8f2bae90e581dae6c1b",
+      "modified_at": "2026-06-19T20:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 106835,
-      "md5": "699bb6ae75d8840719808576f8564f5a",
-      "modified_at": "2026-06-18T13:33:20-04:00"
+      "size_bytes": 158822,
+      "md5": "50c696501578f76de2e23c79a59f22b0",
+      "modified_at": "2026-06-19T23:10:35-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -3293,9 +3428,9 @@
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
-      "size_bytes": 60351,
-      "md5": "8ec2e6c4835d4174e7119f3f5b001543",
-      "modified_at": "2026-05-26T13:34:13-04:00"
+      "size_bytes": 60588,
+      "md5": "6afbccf5e20b649896da22c66f2709e6",
+      "modified_at": "2026-06-19T19:03:40-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
@@ -3318,8 +3453,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2239,
-      "md5": "11055abe6dfe00f855115e2bd08cc86b",
-      "modified_at": "2026-06-18T14:11:01-04:00"
+      "md5": "3afcabd95ebd4a74df3ff16b6832b358",
+      "modified_at": "2026-06-20T04:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -3336,8 +3471,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "e9ad8293c224e52a9c4c4d8e50eb30b7",
-      "modified_at": "2026-06-18T14:07:02-04:00"
+      "md5": "78f6618a6e20539cf639d14f93b30575",
+      "modified_at": "2026-06-19T20:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -3359,9 +3494,9 @@
     },
     {
       "path": "/root/mgs-agent/profiles/ares-soul.md",
-      "size_bytes": 13958,
-      "md5": "78009a275694f98ff1410def36329caa",
-      "modified_at": "2026-06-16T19:49:20-04:00"
+      "size_bytes": 14966,
+      "md5": "5ff2fe8f70ed9acdbbb5bddc1820118a",
+      "modified_at": "2026-06-19T17:58:32-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
@@ -3382,675 +3517,20 @@
       "modified_at": "2026-06-16T19:23:39-04:00"
     },
     {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/source-mirror-120248290297180604-20260619T014543Z.json",
-      "size_bytes": 214193,
-      "md5": "f6a411696b1e08f5e836e2a313f2b43e",
-      "modified_at": "2026-06-18T21:45:43.309143-04:00",
-      "sha256": "c43c65cb53de3407b0725f529f242763e0c5566ef644ebf16b60e668af6d6061",
-      "agent": "ares",
-      "purpose": "Audit artifact for Meta clone source mirror 120248290297180604",
-      "last_report": "source mirror 20260619T014543Z for clone diagnostics"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/elena-campaign-asyncbatch-deepcopy-20260619T154631Z.json",
-      "size_bytes": 3515,
-      "md5": "95329d96147c2d050d6eb425a5003caf",
-      "modified_at": "2026-06-19T11:46:31.756731-04:00",
-      "sha256": "0ed659d0d05c89c0c22d40806c93d678ae77b712633904a62f91ee1243080aba",
-      "agent": "ares",
-      "type": "meta_ads_audit",
-      "purpose": "Auditoria de probes Meta API clone Elena solicitados por Rodolfo; campanhas temporárias deletadas/verificadas quando criadas; nenhum token exposto"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/elena-adcopy-creativeparam-probe-20260619T154751Z.json",
-      "size_bytes": 4277,
-      "md5": "719ad71271744242c365018d6775c8e2",
-      "modified_at": "2026-06-19T11:47:51.996812-04:00",
-      "sha256": "46d38ebf2adb5f191e85c2251209ac95a765417d115fed8c40553fd4b8f4104f",
-      "agent": "ares",
-      "type": "meta_ads_audit",
-      "purpose": "Auditoria de probes Meta API clone Elena solicitados por Rodolfo; campanhas temporárias deletadas/verificadas quando criadas; nenhum token exposto"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/clone/elena-adcopy-oss-override-probe-20260619T154912Z.json",
-      "size_bytes": 1831,
-      "md5": "a642a253c156324074c301355996322e",
-      "modified_at": "2026-06-19T11:49:12.152894-04:00",
-      "sha256": "1c058eb958ab29989691e41af96352e5363d2f95c9ddb4d040dcfb237eeea0f0",
-      "agent": "ares",
-      "type": "meta_ads_audit",
-      "purpose": "Auditoria de probes Meta API clone Elena solicitados por Rodolfo; campanhas temporárias deletadas/verificadas quando criadas; nenhum token exposto"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json",
-      "size_bytes": 6501,
-      "md5": "485858c329ffc1ee966764559799a816",
-      "modified_at": "2026-06-19T21:57:45.831021-04:00",
-      "sha256": "711f71899ea0f52748089ce65bb825f12f404f670796f1d596ef4a417d504a79",
-      "agent": "ares",
-      "type": "meta_ads_operation_config",
-      "purpose": "OpenzedFinanzas-CC-ES operation config updated with learning_grace enabled action_grace_days=3 for pause/reactivate actions",
-      "learning_grace": {
-        "enabled": true,
-        "action_grace_days": 3,
-        "applies_to": [
-          "pause_campaign",
-          "reactivate_campaign"
-        ],
-        "policy": "intraday may report metrics during first 3 days, but must not suggest account actions; show observation/informational only"
-      },
-      "last_report": "correção operacional: learning/aquecimento <3d vira observação informativa, sem ação acionável"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v1.json",
-      "size_bytes": 4350,
-      "md5": "6e9b9c21b2eca6ee317d61e17c4ee316",
-      "modified_at": "2026-06-19T14:24:56.494783-04:00",
-      "sha256": "94557551cd58b0e4cfe94737d0ac2e13f773720318cdd2b2f0de83eafca815e3",
-      "agent": "ares",
-      "type": "meta_ads_operation_policy",
-      "purpose": "Meta OpenzedFinanzas CC ES read-only/dry-run operation/policy with simulated decisions, REC IDs, Elena pg_22091 active focus and Patricia pg_22069 manual hold"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/elena-midnight-structure-adjust-20260619T185020Z.json",
-      "size_bytes": 20814,
-      "md5": "4ef48034a30f2c4fde0072328da778d9",
-      "modified_at": "2026-06-19T14:50:20.679313-04:00",
-      "sha256": "bfa0f99d92e243de2600cd5552714da346774b82e25dc6fae69b7a1072193fe4",
-      "agent": "ares",
-      "type": "meta_ads_controlled_write_audit",
-      "purpose": "Dry-run audit for approved Elena midnight controlled-write structure adjustment; validates 5 campaigns, 2 PAUSE rules, no write executed in dry-run"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/elena-bulk-duplicates-20260619T185720Z.json",
-      "size_bytes": 72831,
-      "md5": "128ac69f66987487e1ba349d307f5618",
-      "modified_at": "2026-06-19T14:57:32.330791-04:00",
-      "sha256": "ee73d5398078153663896a664fdb58df29573fb65f2cdc45abcb03452370762c",
-      "agent": "ares",
-      "type": "meta_ads_controlled_write_audit",
-      "purpose": "Dry-run audit for Elena bulk duplicates controlled-write automation; 15 planned creations, no write executed"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/elena-bulk-duplicates-20260619T190820Z.json",
-      "size_bytes": 899,
-      "md5": "7a9f2fe0c9d934a083e636dcf2e3cfaa",
-      "modified_at": "2026-06-19T15:09:23.214528-04:00",
-      "sha256": "1326d72144343c7a861e5494dbb1e1af74af02cad0cbb4fc5cee61f54078b1ce",
-      "agent": "ares",
-      "type": "meta_ads_controlled_write_audit",
-      "purpose": "Execution audit for Elena bulk duplicates controlled-write automation; real execution started in background and recorded Meta/API result"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/elena-extra-dup-cleanup-20260619T203014Z.json",
-      "size_bytes": 1683,
-      "md5": "533816fe02335044300ff16cabd8adad",
-      "modified_at": "2026-06-19T16:30:27.433707-04:00",
-      "sha256": "6eb8dc75e614d12fdd3e5322bc79d625860b1fb35f30b82b453dd96f1f96808b",
-      "agent": "ares",
-      "type": "meta_ads_controlled_write_audit",
-      "purpose": "Cleanup audit for Elena extra duplicate campaigns; deleted 15 surplus DUP campaigns, verified exactly 20 ACTIVE Elena campaigns with USD25/day and removed obsolete midnight cron"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/naming/elena-20260619/",
-      "size_bytes": 1689142,
-      "modified_at": "2026-06-19T19:17:51.650941-04:00",
-      "sha256_manifest": "3822b87f11d0c4dcb0825bd12ef9471b8a277512b0b08a9c6070b46ac728f6d6",
-      "agent": "ares",
-      "type": "meta_ads_naming_audit_directory",
-      "purpose": "Elena naming audit/apply directory: read-only inventory, v2 unique creative plan, controlled rename audits, final successful apply with 20 campaigns/20 adsets/60 ads/60 unique creative names and issues_count=0",
-      "counts": {
-        "campaigns": 20,
-        "adsets": 20,
-        "ads": 60,
-        "creatives": 60,
-        "unique_creative_names_final": 60,
-        "thumbnails": 60,
-        "csv_plan_v2_lines": 61,
-        "file_count": 75,
-        "apply_final_ok": true,
-        "apply_error_count": 0
-      },
-      "last_report": "aplicação controlada do plano de nomenclatura Elena aprovado por Rodolfo; GET final 20 campaigns, 20 adsets, 60 ads, 60 unique creative names, issues_count=0"
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/intraday/intraday-20260619T232023Z.json",
-      "size_bytes": 457,
-      "md5": "7448f0da318e2a1187c89b44ac82ca64",
-      "modified_at": "2026-06-19T19:20:23.253084-04:00",
-      "sha256": "dd907d5612396eda70526a610c8a92e8714baf4b2f9a34fd5e282adba0180529",
-      "agent": "ares",
-      "type": "meta_ads_intraday_audit",
-      "purpose": "Bounded intraday dry-run audit after wrapper timeout fix; campaigns_seen=35 insight_rows=28 candidate_count=0 no write executed",
-      "summary": {
-        "campaigns_seen": 35,
-        "insight_rows": 28,
-        "candidate_count": 0
-      }
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/intraday/intraday-20260620T015757Z.json",
-      "size_bytes": 5225,
-      "md5": "d4ad5ca81dd630991e0630051b103c16",
-      "modified_at": "2026-06-19T21:57:57.883027-04:00",
-      "sha256": "01d170cd72fddd11aa6ac2b370fbb01d8b0a269222950b34adc09601a347e0e0",
-      "agent": "ares",
-      "type": "meta_ads_intraday_audit",
-      "purpose": "Read-only intraday validation after learning-grace fix; returned observe_learning/eu observaria for <3d campaigns instead of actionable pause/reactivate",
-      "summary": {
-        "campaigns_seen": 35,
-        "insight_rows": 30,
-        "candidate_count": 6
-      },
-      "observe_learning_count": 6,
-      "campaign_age_days_seen": [
-        0.28
-      ]
-    },
-    {
-      "path": "/root/mgs-agent/data/ares/meta-ads/audit/intraday/intraday-20260620T030946Z.json",
-      "size_bytes": 3686,
-      "md5": "cdf1fb00b655e98f9e5e4387c4ca8291",
-      "modified_at": "2026-06-19T23:09:46.485425-04:00",
-      "sha256": "534cf185cc96acbd757ce25be6f9b0d2d4666d98523edc36935e1559d1b2dca2",
-      "agent": "ares",
-      "type": "meta_ads_intraday_audit",
-      "purpose": "Read-only intraday validation after learning label change; Ação sugerida column uses OBSERVAR for observe_learning candidates",
-      "summary": {
-        "campaigns_seen": 35,
-        "insight_rows": 30,
-        "candidate_count": 4
-      },
-      "actions": [
-        "observe_learning"
-      ],
-      "simulated_action_labels": [
-        "OBSERVAR"
-      ]
+      "path": "/root/mgs-agent/data/hera/drive-auth-watchdog-state.json",
+      "agent": "hera",
+      "type": "runtime_state",
+      "purpose": "State/idempotência do Hera Drive Auth Watchdog.",
+      "git_tracked": false,
+      "updated_at": "2026-06-20T11:50:58-04:00",
+      "size_bytes": 290,
+      "modified_at": "2026-06-20T11:50:18-04:00",
+      "sha256": "dfcac2dc582b7b0660e5d302b57ca288c5f78f0ff214d54958611d17ff83f9e0"
     }
   ],
   "mu_plugin_canonical": {
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  },
-  "system_packages": [
-    {
-      "id": "hera-meta-library-playwright-runtime-deps",
-      "agent": "hera",
-      "manager": "apt/playwright",
-      "source_report": "REPORT-INFRA Hera Meta/Facebook Ad Library runtime validation",
-      "commandline": "apt-get install --no-install-recommends <playwright chromium deps> via Playwright install-deps",
-      "packages_count": 33,
-      "packages": [
-        {
-          "name": "libasound2t64",
-          "version": "1.2.11-1ubuntu0.2",
-          "status": "installed"
-        },
-        {
-          "name": "libatk-bridge2.0-0t64",
-          "version": "2.52.0-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libatk1.0-0t64",
-          "version": "2.52.0-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libatspi2.0-0t64",
-          "version": "2.52.0-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libcairo2",
-          "version": "1.18.0-3build1",
-          "status": "installed"
-        },
-        {
-          "name": "libcups2t64",
-          "version": "2.4.7-1.2ubuntu7.14",
-          "status": "installed"
-        },
-        {
-          "name": "libdbus-1-3",
-          "version": "1.14.10-4ubuntu4.1",
-          "status": "installed"
-        },
-        {
-          "name": "libdrm2",
-          "version": "2.4.125-1ubuntu0.1~24.04.2",
-          "status": "installed"
-        },
-        {
-          "name": "libgbm1",
-          "version": "25.2.8-0ubuntu0.24.04.2",
-          "status": "installed"
-        },
-        {
-          "name": "libglib2.0-0t64",
-          "version": "2.80.0-6ubuntu3.8",
-          "status": "installed"
-        },
-        {
-          "name": "libnspr4",
-          "version": "2:4.35-1.1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libnss3",
-          "version": "2:3.98-1ubuntu0.1",
-          "status": "installed"
-        },
-        {
-          "name": "libpango-1.0-0",
-          "version": "1.52.1+ds-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libx11-6",
-          "version": "2:1.8.7-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libxcb1",
-          "version": "1.15-1ubuntu2",
-          "status": "installed"
-        },
-        {
-          "name": "libxcomposite1",
-          "version": "1:0.4.5-1build3",
-          "status": "installed"
-        },
-        {
-          "name": "libxdamage1",
-          "version": "1:1.1.6-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libxext6",
-          "version": "2:1.3.4-1build2",
-          "status": "installed"
-        },
-        {
-          "name": "libxfixes3",
-          "version": "1:6.0.0-2build1",
-          "status": "installed"
-        },
-        {
-          "name": "libxkbcommon0",
-          "version": "1.6.0-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libxrandr2",
-          "version": "2:1.5.2-2build1",
-          "status": "installed"
-        },
-        {
-          "name": "xvfb",
-          "version": "2:21.1.12-1ubuntu1.6",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-noto-color-emoji",
-          "version": "2.047-0ubuntu0.24.04.1",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-unifont",
-          "version": "1:15.1.01-1build1",
-          "status": "installed"
-        },
-        {
-          "name": "libfontconfig1",
-          "version": "2.15.0-1.1ubuntu2",
-          "status": "installed"
-        },
-        {
-          "name": "libfreetype6",
-          "version": "2.13.2+dfsg-1ubuntu0.1",
-          "status": "installed"
-        },
-        {
-          "name": "xfonts-cyrillic",
-          "version": "1:1.0.5+nmu1",
-          "status": "installed"
-        },
-        {
-          "name": "xfonts-scalable",
-          "version": "1:1.0.3-1.3",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-liberation",
-          "version": "1:2.1.5-3",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-ipafont-gothic",
-          "version": "00303-21ubuntu1",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-wqy-zenhei",
-          "version": "0.9.45-8",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-tlwg-loma-otf",
-          "version": "1:0.7.3-1",
-          "status": "installed"
-        },
-        {
-          "name": "fonts-freefont-ttf",
-          "version": "20211204+svn4273-2",
-          "status": "installed"
-        }
-      ],
-      "missing_packages": [],
-      "runtime_validation": {
-        "node_playwright_project": "/tmp/hera-meta-library-test",
-        "playwright_version": "1.61.0",
-        "chromium_executable": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
-        "chromium_executable_exists": true
-      },
-      "purpose": "Hera validation of Meta/Facebook Ad Library via Playwright/Chromium",
-      "updated_at": "2026-06-18T18:29:15.935418-04:00"
-    },
-    {
-      "id": "hera-creative-sanitizer-exiftool",
-      "agent": "hera",
-      "manager": "apt",
-      "source_report": "REPORT-INFRA Hera creative sanitizer runtime validation",
-      "package": "libimage-exiftool-perl",
-      "version": "12.76+dfsg-1",
-      "binary": "/usr/bin/exiftool",
-      "binary_exists": true,
-      "purpose": "Metadata inspection/sanitization checks for creative assets",
-      "known_pending": "resolved: JFIFVersion treated as structural JPEG/JFIF metadata; 10 Meta Library JPGs verified clean=true/harmful_tags=0 after sanitization.",
-      "updated_at": "2026-06-18T18:32:42.819646-04:00"
-    },
-    {
-      "id": "hera-creative-sanitizer-mat2",
-      "agent": "hera",
-      "manager": "apt",
-      "source_report": "REPORT-INFRA Hera creative sanitizer clean JPG gate",
-      "package": "mat2",
-      "version": "0.13.4-2.1",
-      "binary": "/usr/bin/mat2",
-      "binary_exists": true,
-      "purpose": "Second-pass metadata removal/verification for clean creative asset delivery",
-      "updated_at": "2026-06-18T18:32:42.819646-04:00"
-    },
-    {
-      "id": "hera-video-editing-runtime-deps",
-      "agent": "hera",
-      "manager": "apt",
-      "source_report": "REPORT-INFRA Hera local video editing/validation runtime dependencies",
-      "commandline": "apt install ffmpeg python3-pil + apt dependencies",
-      "packages_count": 2,
-      "packages": [
-        {
-          "name": "ffmpeg",
-          "version": "7:6.1.1-3ubuntu5",
-          "status": "installed"
-        },
-        {
-          "name": "python3-pil",
-          "version": "10.2.0-1ubuntu1.2",
-          "status": "installed"
-        }
-      ],
-      "runtime_validation": {
-        "ffmpeg_binary": "/usr/bin/ffmpeg",
-        "ffmpeg_version": "ffmpeg version 6.1.1-3ubuntu5",
-        "ffprobe_binary": "/usr/bin/ffprobe",
-        "ffprobe_version": "ffprobe version 6.1.1-3ubuntu5",
-        "python_pillow_import": "ok",
-        "pillow_version": "10.2.0",
-        "pil_smoke_test": "created 2x2 RGB image"
-      },
-      "purpose": "Local editing, probing and validation of Hera creative/video outputs",
-      "risk": "Low: durable VPS package install; no gateway restart or credential/config change reported.",
-      "updated_at": "2026-06-19T10:50:18-04:00"
-    }
-  ],
-  "runtime_artifacts": [
-    {
-      "id": "hera-meta-library-first10-clean-zip-2026-06-18",
-      "agent": "hera",
-      "path": "/tmp/hera-meta-library-test/utua_first10_2026-06-18T22-29-47-519Z/utua_meta_library_first10_clean.zip",
-      "type": "temporary_zip",
-      "sha256": "ec3ba172fde784a000ea7e496175bf5ce97101c739d43b02ad3c6c9da997b0c9",
-      "size_bytes": 393048,
-      "source": "/tmp/hera-meta-library-test/",
-      "validation": "unzip -l OK; 10 JPGs verify clean=true and harmful_tags=0",
-      "git_tracked": false,
-      "updated_at": "2026-06-18T18:32:42.819646-04:00"
-    },
-    {
-      "id": "ares-elena-bulk-duplicates-background-20260619",
-      "agent": "ares",
-      "type": "background_process",
-      "command": "python3 /root/mgs-agent/scripts/ares-meta-elena-bulk-duplicates.py --execute",
-      "source_report": "proc_bc7762a843e7 (Hermes process id not visible in Zeus session); OS process observed by ps during processing",
-      "validation": {
-        "ps_observed": true,
-        "process_tool_poll": "not_found_in_zeus_session",
-        "execution_audit_path": "/root/mgs-agent/data/ares/meta-ads/audit/controlled-write/elena-bulk-duplicates-20260619T190820Z.json",
-        "execution_audit_sha256": "1326d72144343c7a861e5494dbb1e1af74af02cad0cbb4fc5cee61f54078b1ce"
-      },
-      "updated_at": "2026-06-19T15:11:18-04:00"
-    },
-    {
-      "id": "mgs-gateway-restart-20260620T001236Z-437964",
-      "agent": "ares",
-      "type": "gateway_restart_finalizer",
-      "unit": "mgs-gateway-restart-20260620T001236Z-437964",
-      "log_path": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260620T001236Z-437964.log",
-      "log_sha256": "806a1db11fa816d6328fa4645314c0f2179be5cf28e10afe0790d8dcb7a340a5",
-      "log_size_bytes": 1225,
-      "completed_at": "2026-06-19T20:14:29.833033-04:00",
-      "target_service": "ares-gateway.service",
-      "service_state": {
-        "is_active": "active",
-        "ActiveState": "active",
-        "SubState": "running",
-        "ExecMainPID": "438070"
-      },
-      "purpose": "Safe detached restart after Ares Discord thread conversation config update",
-      "last_report": "restart seguro Ares agendado via systemd-run"
-    },
-    {
-      "id": "mgs-gateway-restart-20260620T002456Z-439346",
-      "agent": "ares",
-      "type": "gateway_restart_finalizer",
-      "unit": "mgs-gateway-restart-20260620T002456Z-439346",
-      "log_path": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260620T002456Z-439346.log",
-      "log_sha256": "9a1ecaa14894dc151fbc0d4921e6db11fc121aece52aa58d112f89cc37d29955",
-      "log_size_bytes": 1218,
-      "completed_at": "2026-06-19T20:26:29.714783-04:00",
-      "target_service": "ares-gateway.service",
-      "service_state": {
-        "is_active": "active",
-        "ActiveState": "active",
-        "SubState": "running",
-        "ExecMainPID": "442235"
-      },
-      "purpose": "Safe detached restart after Ares config.yaml/.env Discord thread conversation fix",
-      "last_report": "restart seguro Ares agendado após config set"
-    },
-    {
-      "id": "ares-openzed-elena-fixed-operational-thread",
-      "agent": "ares",
-      "type": "discord_thread_route",
-      "channel_id": "1516887105543077949",
-      "thread_id": "1517682975234326729",
-      "status": {
-        "discord_get_status": 200,
-        "parent_id": "1516887105543077949",
-        "archived": false,
-        "locked": false
-      },
-      "purpose": "Fixed logs-aquisicao operational thread for normal Openzed/Elena alerts/checkpoints to avoid giant thread list",
-      "updated_at": "2026-06-19T20:40:47-04:00"
-    }
-  ],
-  "profile_skill_references": [
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "skill",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/SKILL.md",
-      "size_bytes": 37421,
-      "sha256": "7d50296ba83430f3977959b382d43ad5d86a2a3c8bd7710a289968ede5e8c3af",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T12:11:18-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; provider rule validated: video defaults to Grok/xAI; image may use GPT/OpenAI or Grok per manager request; GPT for video is limited to image/keyframe/direção visual, not final narrative video"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/video-variation-gpt-grok-workflow.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/video-variation-gpt-grok-workflow.md",
-      "size_bytes": 6480,
-      "sha256": "cfacdd0864f421335e88710e3b8e9cb3ab0a07e57943fff4d0e2d00c5158374d",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T12:11:18-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; provider rule validated: video defaults to Grok/xAI; image may use GPT/OpenAI or Grok per manager request; GPT for video is limited to image/keyframe/direção visual, not final narrative video"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/verticals/CAR.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/verticals/CAR.md",
-      "size_bytes": 5622,
-      "sha256": "cef84eb5de333bf415d5c4049b4548a12d51c8a614511c45496f2ff0b658652b",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:27:09-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/verticals/CC.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/verticals/CC.md",
-      "size_bytes": 3215,
-      "sha256": "9148668a2d1cd37fd72c34ddfbd0dcfa85690183efd53f31d8d927d039e05b95",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:27:09-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/verticals/GAME.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/verticals/GAME.md",
-      "size_bytes": 3105,
-      "sha256": "edeb3a31eaaf56af231b508f4f96d2b4b14d198bdcd1adc798b7ce83032cac10",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:27:09-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/formats/video.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/formats/video.md",
-      "size_bytes": 3523,
-      "sha256": "9f4752c2c1be555d0e4e2a52895dfb9acb55074cb1f0f3ba4f8aecf003d62b5f",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:27:09-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/formats/image.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/formats/image.md",
-      "size_bytes": 2220,
-      "sha256": "7504f1b17cc175b859d6f876cc93dd116c73c9234ea0f190136f8efbb99f5c65",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:27:09-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/continuous-learning.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/continuous-learning.md",
-      "size_bytes": 2999,
-      "sha256": "e3fc7d5214a0be25c11b6a61364b3696f90a2e54a0a0d00a6000bf0162432faa",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T11:27:09-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; validation=ok for prompt-editable vague requests and continuous-learning rules"
-    },
-    {
-      "profile": "hera",
-      "skill": "creative-brief-handoff",
-      "type": "reference",
-      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/video-gpt-grok-precedent.md",
-      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/video-gpt-grok-precedent.md",
-      "size_bytes": 4566,
-      "sha256": "106556156e7bcccf2c2c98cf99a9c7ec8256a65f8a2cf10e24c7755d6a5bf416",
-      "runtime_versioned_sha_match": true,
-      "source_thread_id": "1516611205517807680",
-      "updated_at": "2026-06-19T11:56:29-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; import-discord-thread OK with 20 messages; 4 videos ffprobe 720x1280 ~8.04s audio=true; contact sheets generated/analyzed; reference corrects wrong keyframe/zoom-only conclusion and requires replicating real thread workflow instead of theorizing by provider",
-      "known_pending": "No new BR/PT generation performed in this thread; operational rule corrected first."
-    }
-  ],
-  "config_files": [
-    {
-      "path": "/root/.hermes/profiles/ares/.env",
-      "backup_path": "/root/.hermes/profiles/ares/.env.backup-logs-aquisicao-thread-chat-20260620T001228Z",
-      "agent": "ares",
-      "profile": "ares",
-      "type": "discord_gateway_env",
-      "size_bytes": 973,
-      "modified_at": "2026-06-19T20:12:28.192894-04:00",
-      "sha256": "dd9608c5d814e31cd26bb50ac746b00f798fa5e2460be7ec7b5d149fb3f03b23",
-      "backup_sha256": "a0dfb9efe275ddd6e38d51f442b2cef685af1413e74deb4bb72a2979dcb1f984",
-      "secret_values_stored": false,
-      "tracked_keys": {
-        "DISCORD_ALLOWED_CHANNELS": "1508853425952133180,1513005743954198538,1516887105543077949",
-        "DISCORD_FREE_RESPONSE_CHANNELS": "1508853425952133180,1516887105543077949",
-        "DISCORD_THREAD_REQUIRE_MENTION": "false"
-      },
-      "previous_tracked_keys": {
-        "DISCORD_ALLOWED_CHANNELS": "1508853425952133180,1513005743954198538",
-        "DISCORD_FREE_RESPONSE_CHANNELS": "1508853425952133180",
-        "DISCORD_THREAD_REQUIRE_MENTION": "true"
-      },
-      "purpose": "Ares Discord env for logs-aquisicao thread chat; kept aligned with config.yaml",
-      "last_report": "corrigir Ares não responder mensagens em threads criadas no logs-aquisicao"
-    },
-    {
-      "path": "/root/.hermes/profiles/ares/config.yaml",
-      "agent": "ares",
-      "profile": "ares",
-      "type": "hermes_profile_config_yaml",
-      "size_bytes": 18957,
-      "modified_at": "2026-06-19T20:24:51.639685-04:00",
-      "sha256": "997ed0bb2f7fbac20110d798308fd633b8b195641c37c040cf4766612c81b748",
-      "secret_values_stored": false,
-      "tracked_keys": {
-        "discord.allowed_channels": "1508853425952133180,1513005743954198538,1516887105543077949",
-        "discord.free_response_channels": "1508853425952133180,1516887105543077949",
-        "discord.thread_require_mention": false
-      },
-      "purpose": "Ares Discord config override for logs-aquisicao thread chat; config.yaml now matches .env allowed/free_response channels and disables thread mention requirement",
-      "last_report": "corrigir Ares não responder mensagens em threads criadas no logs-aquisicao; config.yaml sobrescrevia .env"
-    }
-  ]
+  }
 }
