@@ -3604,5 +3604,47 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "config_files": [
+    {
+      "id": "ares-runtime-config-yaml",
+      "agent": "ares",
+      "type": "profile_config",
+      "path": "/root/.hermes/profiles/ares/config.yaml",
+      "versioned_copy": "/root/mgs-agent/profiles/ares-config.yaml",
+      "size_bytes": 18956,
+      "sha256": "3cbc518f7b7cf2d210f411243247a5ded7c961e063dd4ded5b9951a6b642fba4",
+      "versioned_sha256": "3cbc518f7b7cf2d210f411243247a5ded7c961e063dd4ded5b9951a6b642fba4",
+      "allowlisted_discord_flags": {
+        "allowed_channels": "1508853425952133180,1513005743954198538,1516887105543077949",
+        "free_response_channels": "1508853425952133180,1516887105543077949",
+        "thread_require_mention": true,
+        "require_mention": true
+      },
+      "purpose": "Ares can read Hera channel for explicit handoffs, but must not answer in Hera threads unless directly mentioned.",
+      "source_thread": "1517911362280493089",
+      "updated_at": "2026-06-20T11:57:07-04:00"
+    },
+    {
+      "id": "ares-profile-env-discord-routing",
+      "agent": "ares",
+      "type": "profile_env",
+      "path": "/root/.hermes/profiles/ares/.env",
+      "size_bytes": 972,
+      "sha256": "677a35c7149c50f771a45951687321bc60c6ae7ec2934558d373d280926edbfc",
+      "allowlisted_keys": {
+        "DISCORD_ALLOWED_CHANNELS": "1508853425952133180,1513005743954198538,1516887105543077949",
+        "DISCORD_HOME_CHANNEL": "1508853425952133180",
+        "DISCORD_REQUIRE_MENTION": "true",
+        "DISCORD_AUTO_THREAD": "true",
+        "DISCORD_ALLOW_BOTS": "mentions",
+        "DISCORD_FREE_RESPONSE_CHANNELS": "1508853425952133180,1516887105543077949",
+        "DISCORD_THREAD_REQUIRE_MENTION": "true"
+      },
+      "secret_policy": "hash and allowlisted non-secret Discord routing flags only; tokens/credentials not stored",
+      "purpose": "Runtime env override aligned with config: DISCORD_THREAD_REQUIRE_MENTION=true to prevent Ares free replies in Hera threads.",
+      "source_thread": "1517911362280493089",
+      "updated_at": "2026-06-20T11:57:07-04:00"
+    }
+  ]
 }
