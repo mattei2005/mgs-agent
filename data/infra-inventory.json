@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T20:15:41-04:00",
+    "updated_at": "2026-06-19T20:27:23-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -3782,6 +3782,25 @@
       },
       "purpose": "Safe detached restart after Ares Discord thread conversation config update",
       "last_report": "restart seguro Ares agendado via systemd-run"
+    },
+    {
+      "id": "mgs-gateway-restart-20260620T002456Z-439346",
+      "agent": "ares",
+      "type": "gateway_restart_finalizer",
+      "unit": "mgs-gateway-restart-20260620T002456Z-439346",
+      "log_path": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260620T002456Z-439346.log",
+      "log_sha256": "9a1ecaa14894dc151fbc0d4921e6db11fc121aece52aa58d112f89cc37d29955",
+      "log_size_bytes": 1218,
+      "completed_at": "2026-06-19T20:26:29.714783-04:00",
+      "target_service": "ares-gateway.service",
+      "service_state": {
+        "is_active": "active",
+        "ActiveState": "active",
+        "SubState": "running",
+        "ExecMainPID": "442235"
+      },
+      "purpose": "Safe detached restart after Ares config.yaml/.env Discord thread conversation fix",
+      "last_report": "restart seguro Ares agendado após config set"
     }
   ],
   "profile_skill_references": [
@@ -3918,8 +3937,25 @@
         "DISCORD_FREE_RESPONSE_CHANNELS": "1508853425952133180",
         "DISCORD_THREAD_REQUIRE_MENTION": "true"
       },
-      "purpose": "Enable Ares free conversation inside logs-aquisicao threads created by Meta report poster",
-      "last_report": "habilitar conversa do Ares dentro das threads criadas em logs-aquisicao"
+      "purpose": "Ares Discord env for logs-aquisicao thread chat; kept aligned with config.yaml",
+      "last_report": "corrigir Ares não responder mensagens em threads criadas no logs-aquisicao"
+    },
+    {
+      "path": "/root/.hermes/profiles/ares/config.yaml",
+      "agent": "ares",
+      "profile": "ares",
+      "type": "hermes_profile_config_yaml",
+      "size_bytes": 18957,
+      "modified_at": "2026-06-19T20:24:51.639685-04:00",
+      "sha256": "997ed0bb2f7fbac20110d798308fd633b8b195641c37c040cf4766612c81b748",
+      "secret_values_stored": false,
+      "tracked_keys": {
+        "discord.allowed_channels": "1508853425952133180,1513005743954198538,1516887105543077949",
+        "discord.free_response_channels": "1508853425952133180,1516887105543077949",
+        "discord.thread_require_mention": false
+      },
+      "purpose": "Ares Discord config override for logs-aquisicao thread chat; config.yaml now matches .env allowed/free_response channels and disables thread mention requirement",
+      "last_report": "corrigir Ares não responder mensagens em threads criadas no logs-aquisicao; config.yaml sobrescrevia .env"
     }
   ]
 }
