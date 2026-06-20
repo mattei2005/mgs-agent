@@ -80,6 +80,55 @@ def thread_title(message: str, fallback: str) -> str:
     return title or fallback
 
 
+def split_message(message: str, limit: int = 1900) -> list[str]:
+    """Split Discord content safely below the 2000-char hard limit.
+
+    Uses 1900 chars to leave room for optional part prefixes and small future
+    formatting changes. Splits on line boundaries where possible; falls back to
+    fixed-size chunks for unusually long single lines.
+    """
+    if len(message) <= limit:
+        return [message]
+
+    chunks: list[str] = []
+    current = ''
+    for raw_line in message.splitlines(keepends=True):
+        line = raw_line
+        while len(line) > limit:
+            if current:
+                chunks.append(current.rstrip())
+                current = ''
+            chunks.append(line[:limit].rstrip())
+            line = line[limit:]
+        if len(current) + len(line) > limit:
+            if current:
+                chunks.append(current.rstrip())
+            current = line
+        else:
+            current += line
+    if current:
+        chunks.append(current.rstrip())
+    return chunks
+
+
+def with_part_labels(chunks: list[str], limit: int = 2000) -> list[str]:
+    if len(chunks) == 1:
+        return chunks
+    total = len(chunks)
+    labeled: list[str] = []
+    for i, chunk in enumerate(chunks, 1):
+        prefix = f'[parte {i}/{total}]\n'
+        if len(prefix) + len(chunk) <= limit:
+            labeled.append(prefix + chunk)
+        else:
+            labeled.append(chunk[:limit])
+    return labeled
+
+
+def post_message(target_channel: str, token: str, content: str) -> tuple[int, dict]:
+    return discord_request('POST', f'/channels/{target_channel}/messages', token, {'content': content})
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--channel-id', default=DEFAULT_CHANNEL_ID)
@@ -98,6 +147,7 @@ def main() -> int:
         print(json.dumps({'ok': False, 'error': 'missing_discord_bot_token'}, ensure_ascii=False), file=sys.stderr)
         return 2
     title = thread_title(msg, args.fallback_title)
+    chunks = with_part_labels(split_message(msg))
     if args.dry_run:
         print(json.dumps({
             'ok': True,
@@ -107,15 +157,23 @@ def main() -> int:
             'mode': 'post_existing_thread' if args.thread_id else 'post_channel_create_thread',
             'thread_title': title,
             'message_len': len(msg),
+            'chunks': len(chunks),
+            'chunk_lengths': [len(c) for c in chunks],
+            'max_chunk_len': max(len(c) for c in chunks),
         }, ensure_ascii=False))
         return 0
 
     target_channel = args.thread_id or args.channel_id
-    st, payload = discord_request('POST', f'/channels/{target_channel}/messages', token, {'content': msg})
+    st, payload = post_message(target_channel, token, chunks[0])
     if st not in (200, 201):
-        print(json.dumps({'ok': False, 'stage': 'post_message', 'target_channel': target_channel, 'status': st, 'error': payload}, ensure_ascii=False), file=sys.stderr)
+        print(json.dumps({'ok': False, 'stage': 'post_message', 'target_channel': target_channel, 'status': st, 'chunk': 1, 'chunks': len(chunks), 'error': payload}, ensure_ascii=False), file=sys.stderr)
         return 3
     if args.thread_id:
+        for idx, chunk in enumerate(chunks[1:], 2):
+            st_next, payload_next = post_message(target_channel, token, chunk)
+            if st_next not in (200, 201):
+                print(json.dumps({'ok': False, 'stage': 'post_message_chunk', 'target_channel': target_channel, 'status': st_next, 'chunk': idx, 'chunks': len(chunks), 'error': payload_next}, ensure_ascii=False), file=sys.stderr)
+                return 6
         return 0
 
     message_id = payload.get('id')
@@ -130,6 +188,15 @@ def main() -> int:
     if st2 not in (200, 201):
         print(json.dumps({'ok': False, 'stage': 'create_thread', 'status': st2, 'message_id': message_id, 'error': payload2}, ensure_ascii=False), file=sys.stderr)
         return 5
+    created_thread_id = payload2.get('id')
+    if not created_thread_id:
+        print(json.dumps({'ok': False, 'stage': 'create_thread', 'error': 'missing_thread_id', 'message_id': message_id}, ensure_ascii=False), file=sys.stderr)
+        return 7
+    for idx, chunk in enumerate(chunks[1:], 2):
+        st_next, payload_next = post_message(created_thread_id, token, chunk)
+        if st_next not in (200, 201):
+            print(json.dumps({'ok': False, 'stage': 'post_thread_chunk', 'target_channel': created_thread_id, 'status': st_next, 'chunk': idx, 'chunks': len(chunks), 'error': payload_next}, ensure_ascii=False), file=sys.stderr)
+            return 6
     return 0
 
 

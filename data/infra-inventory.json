@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-20T11:52:28-04:00",
+    "updated_at": "2026-06-20T13:46:00-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_report_infra": "ares-drive-oauth-watchdog-oauth-invalid-grant"
+    "last_report_infra": "ares-discord-post-with-thread-chunked-discord-limit"
   },
   "system_packages": [
     {
@@ -622,8 +622,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-discord-post-with-thread.py",
-      "size_bytes": 5192,
-      "modified_at": "2026-06-19T20:39:03-04:00"
+      "size_bytes": 8098,
+      "modified_at": "2026-06-20T13:44:17-04:00",
+      "sha256": "6e91e956b578f053459eecaef7b616009600b37f90c21ca0e08edf87161fe9f2",
+      "agent": "ares",
+      "purpose": "Ares Discord poster for cron reports; posts to channel/thread and splits long messages under Discord 2000-char limit.",
+      "validation": "python3 -m py_compile OK; sha256 matches report; dry-run long HOA-style message produced chunked output with max_chunk_len <= 2000; secret scan OK",
+      "updated_at": "2026-06-20T13:46:00-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-drive-thumbnail-sampler.py",
