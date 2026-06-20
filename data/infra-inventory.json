@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-19T21:59:27-04:00",
+    "updated_at": "2026-06-19T23:10:35-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "systemd_services": [
@@ -282,15 +282,15 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
-      "size_bytes": 22157,
-      "modified_at": "2026-06-19T21:57:39.029017-04:00",
-      "sha256": "190d0e14f3536bdfc1cee93009a54b957011e5e9198d6a22dd4cea42f95f967f",
+      "size_bytes": 22152,
+      "modified_at": "2026-06-19T23:09:37.198417-04:00",
+      "sha256": "c2175ff4d3eb1507b5b429e43b1b89ca9954f636af2d34d5216fc0ee7b98ae5e",
       "agent": "ares",
-      "purpose": "Ares Meta cron runner with learning-grace behavior: campaigns younger than 3 days can be reported as informational metrics but pause/reactivate actions become observe_learning/eu observaria",
-      "last_report": "campanhas em learning/aquecimento nos primeiros 3 dias não devem receber sugestão acionável de pausa/reativação",
+      "purpose": "Ares Meta cron runner learning-grace label update: observe_learning action displays operational label OBSERVAR instead of eu observaria",
+      "last_report": "ajuste de nomenclatura operacional solicitado por Rodolfo: trocar ação de learning de eu observaria para OBSERVAR",
       "validation": {
         "py_compile": "OK",
-        "read_only_intraday_observe_learning": "OK"
+        "read_only_intraday_label": "OBSERVAR"
       }
     },
     {
@@ -3545,6 +3545,27 @@
       "observe_learning_count": 6,
       "campaign_age_days_seen": [
         0.28
+      ]
+    },
+    {
+      "path": "/root/mgs-agent/data/ares/meta-ads/audit/intraday/intraday-20260620T030946Z.json",
+      "size_bytes": 3686,
+      "md5": "cdf1fb00b655e98f9e5e4387c4ca8291",
+      "modified_at": "2026-06-19T23:09:46.485425-04:00",
+      "sha256": "534cf185cc96acbd757ce25be6f9b0d2d4666d98523edc36935e1559d1b2dca2",
+      "agent": "ares",
+      "type": "meta_ads_intraday_audit",
+      "purpose": "Read-only intraday validation after learning label change; Ação sugerida column uses OBSERVAR for observe_learning candidates",
+      "summary": {
+        "campaigns_seen": 35,
+        "insight_rows": 30,
+        "candidate_count": 4
+      },
+      "actions": [
+        "observe_learning"
+      ],
+      "simulated_action_labels": [
+        "OBSERVAR"
       ]
     }
   ],

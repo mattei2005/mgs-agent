@@ -131,7 +131,7 @@ def simulated_action_label(action: str | None) -> str:
         'pause_campaign': 'eu pausaria',
         'reactivate_campaign': 'eu reativaria',
         'replace_campaign': 'eu substituiria',
-        'observe_learning': 'eu observaria',
+        'observe_learning': 'OBSERVAR',
     }
     return mapping.get(str(action or ''), f'eu faria {action}' if action else 'avaliar')
 

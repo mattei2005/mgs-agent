@@ -1,0 +1,110 @@
+{
+  "ts_utc": "2026-06-20T03:09:43.473614+00:00",
+  "job": "intraday",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "account_id": "1356770869843984",
+  "mode": "dry_run",
+  "write_enabled": false,
+  "token_report": {
+    "item": "Token Meta API",
+    "field": "credential",
+    "len": 198
+  },
+  "timezone": "Europe/Madrid",
+  "candidates": [
+    {
+      "rec_id": "REC-20260620-0509-01",
+      "pg_id": "pg_22091",
+      "page_name": "Elena Santana",
+      "country_vertical": "ES / CC",
+      "rule": "R2 — MO > 0 and CPMO > USD 3.25",
+      "status": "ACTIVE",
+      "action": "observe_learning",
+      "simulated_action": "OBSERVAR",
+      "reason": "Learning < 3d; regra acionou (R2 — MO > 0 and CPMO > USD 3.25), mas é só informativo. Idade 0.33d",
+      "campaign_id": "120249012625470604",
+      "campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 19",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "spend": 3.53,
+      "MO": 1,
+      "CPMO": 3.53,
+      "campaign_age_days": 0.33,
+      "learning_grace_days": 3.0,
+      "mode": "learning_grace_info_no_action"
+    },
+    {
+      "rec_id": "REC-20260620-0509-02",
+      "pg_id": "pg_22091",
+      "page_name": "Elena Santana",
+      "country_vertical": "ES / CC",
+      "rule": "R2 — MO > 0 and CPMO > USD 3.25",
+      "status": "ACTIVE",
+      "action": "observe_learning",
+      "simulated_action": "OBSERVAR",
+      "reason": "Learning < 3d; regra acionou (R2 — MO > 0 and CPMO > USD 3.25), mas é só informativo. Idade 0.33d",
+      "campaign_id": "120249012625490604",
+      "campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 14",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "spend": 3.34,
+      "MO": 1,
+      "CPMO": 3.34,
+      "campaign_age_days": 0.33,
+      "learning_grace_days": 3.0,
+      "mode": "learning_grace_info_no_action"
+    },
+    {
+      "rec_id": "REC-20260620-0509-03",
+      "pg_id": "pg_22091",
+      "page_name": "Elena Santana",
+      "country_vertical": "ES / CC",
+      "rule": "R2 — MO > 0 and CPMO > USD 3.25",
+      "status": "ACTIVE",
+      "action": "observe_learning",
+      "simulated_action": "OBSERVAR",
+      "reason": "Learning < 3d; regra acionou (R2 — MO > 0 and CPMO > USD 3.25), mas é só informativo. Idade 0.33d",
+      "campaign_id": "120249012626140604",
+      "campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 11",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "spend": 3.56,
+      "MO": 1,
+      "CPMO": 3.56,
+      "campaign_age_days": 0.33,
+      "learning_grace_days": 3.0,
+      "mode": "learning_grace_info_no_action"
+    },
+    {
+      "rec_id": "REC-20260620-0509-04",
+      "pg_id": "pg_22091",
+      "page_name": "Elena Santana",
+      "country_vertical": "ES / CC",
+      "rule": "R2 — MO > 0 and CPMO > USD 3.25",
+      "status": "ACTIVE",
+      "action": "observe_learning",
+      "simulated_action": "OBSERVAR",
+      "reason": "Learning < 3d; regra acionou (R2 — MO > 0 and CPMO > USD 3.25), mas é só informativo. Idade 0.33d",
+      "campaign_id": "120249012626290604",
+      "campaign_name": "Elena Santana - ES - ESP - (pg_22091) - 9",
+      "bid_strategy": "LOWEST_COST_WITHOUT_CAP",
+      "spend": 4.26,
+      "MO": 1,
+      "CPMO": 4.26,
+      "campaign_age_days": 0.33,
+      "learning_grace_days": 3.0,
+      "mode": "learning_grace_info_no_action"
+    }
+  ],
+  "errors": [],
+  "skipped_scope": [
+    {
+      "campaign_id": "120248290564430604",
+      "campaign_name": "Patricia Flores - ES - ESP - (pg_22069) - 4",
+      "pg_id": "pg_22069",
+      "reason": "manual_hold"
+    }
+  ],
+  "summary": {
+    "campaigns_seen": 35,
+    "insight_rows": 30,
+    "candidate_count": 4
+  }
+}
