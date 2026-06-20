@@ -1,8 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-20T11:50:58-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-06-20T11:52:28-04:00",
+    "generated_by": "infra-discovery.sh",
+    "last_report_infra": "ares-drive-oauth-watchdog-oauth-invalid-grant"
   },
   "system_packages": [
     {
@@ -339,6 +340,19 @@
       "size_bytes": 8529,
       "modified_at": "2026-06-20T11:49:04-04:00",
       "sha256": "244ea22af03e620f862bcd65069941eb98ef49b0057a7f122c34fd25c0b28688"
+    },
+    {
+      "id": "ares-drive-oauth-watchdog-profile-wrapper",
+      "agent": "ares",
+      "type": "profile_script",
+      "path": "/root/.hermes/profiles/ares/scripts/ares-drive-oauth-watchdog.sh",
+      "size_bytes": 117,
+      "modified_at": "2026-06-20T11:49:37-04:00",
+      "sha256": "acdac8c2fcb018c84d3622e33ff2cf7350699046ffc5b073eab02ee47fce1375",
+      "purpose": "Hermes cron wrapper for Ares Drive OAuth watchdog.",
+      "validation": "bash -n OK; referenced by Hermes cron d1a064017e27",
+      "git_tracked": false,
+      "updated_at": "2026-06-20T11:52:28-04:00"
     }
   ],
   "profile_skill_references": [
@@ -451,6 +465,19 @@
       "updated_at": "2026-06-19T11:56:29-04:00",
       "validation": "runtime/versioned SHA match; secret scan negative; import-discord-thread OK with 20 messages; 4 videos ffprobe 720x1280 ~8.04s audio=true; contact sheets generated/analyzed; reference corrects wrong keyframe/zoom-only conclusion and requires replicating real thread workflow instead of theorizing by provider",
       "known_pending": "No new BR/PT generation performed in this thread; operational rule corrected first."
+    },
+    {
+      "profile": "ares",
+      "skill": "creative-taxonomy-mgs",
+      "type": "skill",
+      "runtime_path": "/root/.hermes/profiles/ares/skills/growth/creative-taxonomy-mgs/SKILL.md",
+      "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/creative-taxonomy-mgs/SKILL.md",
+      "size_bytes": 21272,
+      "modified_at": "2026-06-20T11:50:07-04:00",
+      "sha256": "63381721f9db354ece10fcaa0cb3f8973b8f9afa72b14595b8010cc2b908b250",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-20T11:52:28-04:00",
+      "validation": "runtime/versioned SHA match; synced via sync-souls; secret scan not required for taxonomy text; relevant to Hera/Ares creative taxonomy loop fix"
     }
   ],
   "systemd_services": [
@@ -556,6 +583,30 @@
       "deliver": "discord:1498132022634483894",
       "purpose": "Drive auth watchdog da Hera a cada 30m.",
       "updated_at": "2026-06-20T11:50:58-04:00"
+    },
+    {
+      "type": "hermes_cron",
+      "profile": "ares",
+      "id": "d1a064017e27",
+      "name": "Ares Drive OAuth watchdog",
+      "schedule": {
+        "kind": "interval",
+        "minutes": 30,
+        "display": "every 30m"
+      },
+      "script": "ares-drive-oauth-watchdog.sh",
+      "next_run_at": "2026-06-20T12:19:50.337040-04:00",
+      "enabled": true,
+      "state": "scheduled",
+      "no_agent": true,
+      "deliver": "discord:#zeus",
+      "repeat": {
+        "times": null,
+        "completed": 0
+      },
+      "purpose": "Monitorar OAuth Google Drive do Ares para write/upload expirado e alertar Zeus sem loop operacional.",
+      "validation": "jobs.json validado; no_agent=true; deliver=discord:#zeus; state=scheduled; script wrapper existe e passa bash -n",
+      "updated_at": "2026-06-20T11:52:28-04:00"
     }
   ],
   "scripts": [
@@ -596,8 +647,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-google-drive-oauth-desktop-init.py",
-      "size_bytes": 7042,
-      "modified_at": "2026-06-08T14:40:40-04:00"
+      "size_bytes": 8934,
+      "modified_at": "2026-06-20T11:48:53-04:00",
+      "sha256": "ae34d10e9b978fa455b80109426c8351bff9e199e76d4c6369686b95678e19cf",
+      "agent": "ares",
+      "purpose": "Inicialização OAuth Desktop Google Drive do Ares.",
+      "validation": "python3 -m py_compile OK",
+      "updated_at": "2026-06-20T11:52:28-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-google-drive-oauth-device-init.py",
@@ -1078,6 +1134,16 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-drive-oauth-watchdog.py",
+      "size_bytes": 5728,
+      "modified_at": "2026-06-20T11:49:30-04:00",
+      "sha256": "0c171a2dff6c3e053ad3f1104a108ac4c214be58c55ab656780faa8bc5c79e06",
+      "agent": "ares",
+      "purpose": "Ares Google Drive OAuth watchdog: detecta invalid_grant/write/upload auth expiration sem expor segredo.",
+      "validation": "python3 -m py_compile OK; watchdog detectou invalid_grant em teste reportado",
+      "updated_at": "2026-06-20T11:52:28-04:00"
     }
   ],
   "skills_mgs": [
@@ -3494,9 +3560,15 @@
     },
     {
       "path": "/root/mgs-agent/profiles/ares-soul.md",
-      "size_bytes": 14966,
-      "md5": "5ff2fe8f70ed9acdbbb5bddc1820118a",
-      "modified_at": "2026-06-19T17:58:32-04:00"
+      "size_bytes": 15485,
+      "md5": "da029c450adaa9501be780fe8c3e62ad",
+      "modified_at": "2026-06-20T11:50:01-04:00",
+      "sha256": "e62762fe3fa00fb4aabe652b6830970e4c2d4d4ff94e5445de70931b82b30fcc",
+      "agent": "ares",
+      "type": "profile_soul_copy",
+      "runtime_path": "/root/.hermes/profiles/ares/SOUL.md",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-20T11:52:28-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",

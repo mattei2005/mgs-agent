@@ -23,6 +23,7 @@ from typing import Any
 DEFAULT_VAULT = os.environ.get("OP_DEFAULT_VAULT", "MGS Conteúdo")
 DEFAULT_ITEM = os.environ.get("ARES_DRIVE_OAUTH_OP_ITEM", "Google OAuth - Ares Drive")
 TOKEN_FILE = os.environ.get("ARES_DRIVE_OAUTH_TOKEN_FILE", "/root/mgs-agent/.secrets/ares-google-drive-oauth.json")
+CLIENT_TOKEN_FILE = os.environ.get("ARES_DRIVE_OAUTH_CLIENT_TOKEN_FILE", "/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json")
 SCOPES = "https://www.googleapis.com/auth/drive"
 REDIRECT_URI = "http://localhost:53682/"
 
@@ -104,6 +105,20 @@ def save_refresh_token(item_name: str, vault: str, refresh_token: str) -> str:
         except OSError:
             pass
     if proc.returncode == 0:
+        client_path = Path(CLIENT_TOKEN_FILE)
+        if client_path.exists():
+            try:
+                client_data = json.loads(client_path.read_text(encoding="utf-8"))
+            except Exception:
+                client_data = {}
+            if isinstance(client_data, dict) and client_data.get("client_id") and client_data.get("client_secret"):
+                client_data["refresh_token"] = refresh_token
+                client_tmp = client_path.with_suffix(client_path.suffix + ".tmp")
+                client_tmp.write_text(json.dumps(client_data, ensure_ascii=False), encoding="utf-8")
+                os.chmod(client_tmp, 0o600)
+                os.replace(client_tmp, client_path)
+                os.chmod(client_path, 0o600)
+                return "1password+client_file"
         return "1password"
 
     token_path = Path(TOKEN_FILE)
@@ -113,6 +128,24 @@ def save_refresh_token(item_name: str, vault: str, refresh_token: str) -> str:
     os.chmod(tmp_path, 0o600)
     os.replace(tmp_path, token_path)
     os.chmod(token_path, 0o600)
+
+    # Keep the legacy upload credential file in sync. Existing upload scripts
+    # read client_id/client_secret/refresh_token from this root-only JSON.
+    client_path = Path(CLIENT_TOKEN_FILE)
+    if client_path.exists():
+        try:
+            client_data = json.loads(client_path.read_text(encoding="utf-8"))
+        except Exception:
+            client_data = {}
+        if isinstance(client_data, dict) and client_data.get("client_id") and client_data.get("client_secret"):
+            client_data["refresh_token"] = refresh_token
+            client_path.parent.mkdir(parents=True, mode=0o700, exist_ok=True)
+            client_tmp = client_path.with_suffix(client_path.suffix + ".tmp")
+            client_tmp.write_text(json.dumps(client_data, ensure_ascii=False), encoding="utf-8")
+            os.chmod(client_tmp, 0o600)
+            os.replace(client_tmp, client_path)
+            os.chmod(client_path, 0o600)
+            return "local_file+client_file"
     return "local_file"
 
 

@@ -157,6 +157,7 @@ Exemplos bons:
 - Em threads compartilhadas, não mencione outros bots salvo handoff explícito do Rodolfo.
 - Se precisar falar sobre Zeus/Atena/Hera, cite em texto simples por padrão; user mention só se Rodolfo pedir para acionar o bot.
 - Quando Rodolfo pedir explicitamente para acionar a Hera, use o user mention real do bot Hera: `<@1513006098133680290>`. Escrever `@Hera` em texto simples não acorda o bot nem aparece como mention válida para o gateway.
+- Anti-loop Hera/Ares: responder ao Rodolfo normalmente, mas NÃO responder mensagens de bot/agente que sejam confirmação, “registrado”, “sem nova ação”, “status mantido”, “aguardando handoff”, “silêncio operacional” ou repetição de estado. Depois de um handoff parcial bloqueado, Ares fica em silêncio até haver handoff final com links/metadata ou pedido humano novo. Se Rodolfo reclamar de looping, confirmar correção uma vez e depois silêncio para mensagens de agente naquela thread.
 
 ## Reporting de infraestrutura
 
