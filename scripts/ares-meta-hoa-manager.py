@@ -56,6 +56,39 @@ def page_name_from_campaign(name: str | None) -> str:
     return m.group(1).strip() if m else 'não identificado'
 
 
+def display_campaign_name(name: str | None) -> str:
+    text = str(name or '').strip()
+    # Display-only normalization for Discord tables. It keeps the human
+    # campaign identity visible on mobile: "Elena Santana - ES - ESP - 009".
+    # Does not rename Meta objects; raw campaign_name remains in audit.
+    m = re.match(r'(.+?)\s-\s([A-Z]{2})\s-\s([A-Z]{3})\s-\s\(pg[_-]?\d+\)\s-\s(.+)$', text)
+    if m:
+        suffix = m.group(4).strip()
+        suffix = re.sub(r'^(\d{1,2})$', lambda x: f'{int(x.group(1)):03d}', suffix)
+        suffix = re.sub(r'(\s-\s)(\d{1,2})$', lambda x: f'{x.group(1)}{int(x.group(2)):03d}', suffix)
+        return f'{m.group(1).strip()} - {m.group(2)} - {m.group(3)} - {suffix}'
+    return re.sub(r'(\s-\s)(\d{1,2})$', lambda m: f'{m.group(1)}{int(m.group(2)):03d}', text)
+
+
+def parse_meta_time(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.strptime(value, '%Y-%m-%dT%H:%M:%S%z')
+    except Exception:
+        try:
+            return datetime.fromisoformat(str(value).replace('Z', '+00:00'))
+        except Exception:
+            return None
+
+
+def fmt_start_date(campaign: dict, tz: ZoneInfo) -> str:
+    started = parse_meta_time(campaign.get('start_time') or campaign.get('created_time'))
+    if not started:
+        return 'não informado'
+    return started.astimezone(tz).strftime('%d/%m/%Y')
+
+
 def country_vertical_from_name(name: str | None, op_cfg: dict) -> str:
     text = str(name or '')
     parts = [p.strip() for p in text.split(' - ')]
@@ -65,7 +98,7 @@ def country_vertical_from_name(name: str | None, op_cfg: dict) -> str:
 
 
 def recommendation_id(now_local: datetime, seq: int) -> str:
-    return f'REC-{now_local.strftime("%Y%m%d-%H%M")}-{seq:02d}'
+    return f'REC-{now_local.strftime("%Y%m%d-%H%M")}-{seq:03d}'
 
 
 def simulated_action_for_hoa(replacement: bool, today_bad: bool, pacing: str) -> str:
@@ -131,7 +164,7 @@ def fetch_account_name(common, token: str, account_id: str) -> str:
 
 
 def fetch_campaigns(common, token: str, account_id: str) -> dict[str, dict]:
-    fields = 'id,name,effective_status,status,daily_budget,lifetime_budget,start_time,stop_time'
+    fields = 'id,name,effective_status,status,daily_budget,lifetime_budget,start_time,created_time,stop_time'
     rows = graph_all(common, f'act_{account_id}/campaigns', token, {'fields': fields, 'limit': 500})
     return {str(r.get('id')): r for r in rows if r.get('id')}
 
@@ -329,6 +362,8 @@ def main() -> int:
                 'pg_id': pg_id,
                 'page_name': page_name_from_campaign(cname),
                 'campaign': cname,
+                'campaign_display_name': display_campaign_name(cname),
+                'start_date': fmt_start_date(campaigns.get(cid) or {}, tz),
                 'hoa_cpmo': fmt_money(weighted_cpmo),
                 'target': fmt_money(cpmo_target),
                 'bad_days': f'{bad_complete}/2 completos',
@@ -380,11 +415,11 @@ def main() -> int:
     if not rows and not args.always_output and not is_final:
         return 0
     if not rows and is_final:
-        rows = [{'rec_id':'-', 'pg_id':'-', 'page_name':'-', 'suggested_action':'nenhuma ação', 'reason':'sem watchlist', 'hoa_cpmo':'-', 'target':fmt_money(cpmo_target), 'bad_days':'0/2 completos', 'pacing':'sem watchlist', 'status': budget_status}]
+        rows = [{'rec_id':'-', 'campaign_display_name':'-', 'pg_id':'-', 'start_date':'-', 'suggested_action':'nenhuma ação', 'reason':'sem watchlist', 'hoa_cpmo':'-', 'target':fmt_money(cpmo_target), 'bad_days':'0/2 completos', 'pacing':'sem watchlist', 'status': budget_status}]
     print(output_table(
         title,
         rows,
-        [('rec_id','ID'),('pg_id','PG ID'),('page_name','Nome da página'),('suggested_action','Ação sugerida'),('reason','Motivo'),('hoa_cpmo','HOA CPMO'),('target','Alvo'),('status','Status')],
+        [('rec_id','ID REC'),('campaign_display_name','Nome da campanha'),('pg_id','PG ID'),('start_date','Início'),('suggested_action','Ação sugerida'),('reason','Motivo'),('hoa_cpmo','HOA CPMO'),('target','Alvo'),('status','Status')],
         prefix='<@344196393512075265> HOA checkpoint read-only: decisões simuladas. Responda na thread com `REC... feito`, `ignorar` ou `segurar`. Nenhum write foi executado.'
     ))
     return 0

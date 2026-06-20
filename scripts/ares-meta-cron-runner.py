@@ -93,6 +93,20 @@ def page_name_from_campaign(name: str | None) -> str:
     return m.group(1).strip() if m else 'não identificado'
 
 
+def display_campaign_name(name: str | None) -> str:
+    text = str(name or '').strip()
+    # Display-only normalization for Discord tables. It keeps the human
+    # campaign identity visible on mobile: "Elena Santana - ES - ESP - 009".
+    # Does not rename Meta objects; raw campaign_name remains in audit.
+    m = re.match(r'(.+?)\s-\s([A-Z]{2})\s-\s([A-Z]{3})\s-\s\(pg[_-]?\d+\)\s-\s(.+)$', text)
+    if m:
+        suffix = m.group(4).strip()
+        suffix = re.sub(r'^(\d{1,2})$', lambda x: f'{int(x.group(1)):03d}', suffix)
+        suffix = re.sub(r'(\s-\s)(\d{1,2})$', lambda x: f'{x.group(1)}{int(x.group(2)):03d}', suffix)
+        return f'{m.group(1).strip()} - {m.group(2)} - {m.group(3)} - {suffix}'
+    return re.sub(r'(\s-\s)(\d{1,2})$', lambda m: f'{m.group(1)}{int(m.group(2)):03d}', text)
+
+
 def country_vertical_from_name(name: str | None, op_cfg: dict) -> str:
     text = str(name or '')
     # Ex.: "Carla Rojas - US - ESP - (pg_22068) - 3" => country US; vertical from operation CC.
@@ -109,7 +123,14 @@ def fmt_account_title(account_name: str, tz: ZoneInfo, label: str) -> str:
 
 def recommendation_id(tz: ZoneInfo, seq: int) -> str:
     now = utc_now().astimezone(tz)
-    return f'REC-{now.strftime("%Y%m%d-%H%M")}-{seq:02d}'
+    return f'REC-{now.strftime("%Y%m%d-%H%M")}-{seq:03d}'
+
+
+def fmt_start_date(campaign: dict, tz: ZoneInfo) -> str:
+    started = parse_meta_time(campaign.get('start_time') or campaign.get('created_time'))
+    if not started:
+        return 'não informado'
+    return started.astimezone(tz).strftime('%d/%m/%Y')
 
 
 def management_scope(op_cfg: dict) -> dict:
@@ -243,7 +264,7 @@ def graph_get_all(common, token: str, path: str, params: dict) -> list[dict]:
 
 
 def fetch_campaigns(common, token: str, account_id: str) -> dict[str, dict]:
-    fields = 'id,name,status,effective_status,created_time,updated_time,bid_strategy,daily_budget,lifetime_budget,objective'
+    fields = 'id,name,status,effective_status,created_time,start_time,updated_time,bid_strategy,daily_budget,lifetime_budget,objective'
     rows = graph_get_all(common, token, f'act_{account_id}/campaigns', {'fields': fields, 'limit': 200})
     return {r['id']: r for r in rows if r.get('id')}
 
@@ -386,6 +407,8 @@ def run_intraday(args) -> int:
                         'reason': reason,
                         'campaign_id': cid,
                         'campaign_name': campaign_name,
+                        'campaign_display_name': display_campaign_name(campaign_name),
+                        'start_date': fmt_start_date(campaign, tz),
                         'bid_strategy': campaign.get('bid_strategy') or 'UNKNOWN',
                         'spend': round(metrics['spend'], 2),
                         'MO': int(metrics['MO']) if float(metrics['MO']).is_integer() else metrics['MO'],
@@ -407,7 +430,7 @@ def run_intraday(args) -> int:
         for r in rows:
             r['CPMO'] = '' if r['CPMO'] is None else r['CPMO']
         prefix = '<@344196393512075265> dry-run intraday: análise real sem write. Campanhas em learning (<3 dias) são informativas: não pausar/reativar. Responda `REC... feito`, `ignorar` ou `segurar` só quando a ação for aplicável.'
-        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — decisões simuladas'), rows, [('rec_id','ID'),('pg_id','PG ID'),('page_name','Nome da página'),('spend','Spend'),('MO','MO'),('CPMO','CPMO'),('campaign_age_days','Idade d'),('simulated_action','Ação sugerida'),('reason','Motivo'),('status','Status')], prefix=prefix))
+        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — decisões simuladas'), rows, [('rec_id','ID REC'),('campaign_display_name','Nome da campanha'),('pg_id','PG ID'),('start_date','Início'),('spend','Spend'),('MO','MO'),('CPMO','CPMO'),('simulated_action','Ação sugerida'),('reason','Motivo'),('status','Status')], prefix=prefix))
     return 0
 
 
@@ -464,6 +487,8 @@ def run_reactivate_all(args) -> int:
                 'simulated_action': simulated_action_label('reactivate_campaign'),
                 'campaign_id': campaign.get('id'),
                 'campaign_name': campaign_name,
+                'campaign_display_name': display_campaign_name(campaign_name),
+                'start_date': fmt_start_date(campaign, ZoneInfo(args.account_tz or 'Europe/Madrid')),
                 'mode': 'dry_run_no_write',
             })
         event['summary'] = {'campaigns_seen': len(campaigns), 'candidate_count': len(event['candidates'])}
@@ -475,7 +500,7 @@ def run_reactivate_all(args) -> int:
         return 0
     if event['candidates']:
         prefix = '<@344196393512075265> dry-run reativar-todas: ações simuladas. Responda na thread com `REC... feito`, `ignorar` ou `segurar`. Nenhum write foi executado.'
-        print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — decisões simuladas'), event['candidates'], [('rec_id','ID'),('pg_id','PG ID'),('page_name','Nome da página'),('simulated_action','Ação sugerida'),('reason','Motivo'),('status','Status')], prefix=prefix))
+        print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — decisões simuladas'), event['candidates'], [('rec_id','ID REC'),('campaign_display_name','Nome da campanha'),('pg_id','PG ID'),('start_date','Início'),('simulated_action','Ação sugerida'),('reason','Motivo'),('status','Status')], prefix=prefix))
     return 0
 
 

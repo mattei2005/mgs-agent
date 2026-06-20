@@ -67,7 +67,7 @@ Scripts iniciais / cron:
 7. Reativar-todas pode ter lista de exclusão, mas ela começa vazia e Ares deve perguntar antes de adicionar algo.
 8. Teto diário de USD 300 é referência/log/base para orçamento; 20% (USD 60) fica reservado para testes de criativos novos quando houver espaço de budget.
 9. Log intraday no Discord deve ser resumido e enviado só quando houver ação/erro, salvo Rodolfo mudar a política.
-10. Logs dos crons Meta em `logs-aquisicao` devem usar título com `nome da conta — dia — horário no timezone da conta — tipo do cron` e tabela alinhada com estas colunas base: `PG ID`, `Nome da página`, `País/Vertical`, `Regra usada`, `Status`. Extrair `PG ID` do padrão `(pg_12345)` no nome da campanha e `Nome da página` do trecho inicial antes de ` - <país> - `. Em `Regra usada`, intraday deve mostrar o identificador e a descrição curta (`R1 — ...`, `R2 — ...`, `R3 — ...`, `R4 — ...`, `R5 — ...`). O cron diário separado deve mostrar só `reativar-todas` — não rotular como `fora R1-R5`, porque a distinção já está no tipo do cron/título.
+10. Logs dos crons Meta em `logs-aquisicao` devem usar título com `nome da conta — dia — horário no timezone da conta — tipo do cron` e tabela alinhada com estas colunas base: `ID REC`, `Nome da campanha`, `PG ID`, `Início`, métricas aplicáveis, `Ação`, `Motivo`, `Status`. `ID REC` é identificador da recomendação, não da campanha, e deve usar sequência de 3 dígitos (`REC-YYYYMMDD-HHMM-001`). `Nome da campanha` deve ser legível no mobile e pode normalizar apenas a exibição para 3 dígitos (`... - 009`) sem renomear a campanha na Meta; o nome bruto fica no audit. `Início` deve ser data real em formato `dd/mm/yyyy`, nunca idade decimal tipo `1.17d`. Não incluir colunas redundantes `Nome da página`, `Página`, `Campaign ID` ou `Meta ID` no relatório normal; IDs técnicos ficam no audit/API. Extrair `PG ID` do padrão `(pg_12345)` no nome da campanha. Em `Regra usada`/`Motivo`, intraday deve mostrar o identificador e a descrição curta (`R1 — ...`, `R2 — ...`, `R3 — ...`, `R4 — ...`, `R5 — ...`). O cron diário separado deve mostrar só `reativar-todas` — não rotular como `fora R1-R5`, porque a distinção já está no tipo do cron/título.
 11. Intraday R1-R5 e HOA são camadas separadas e devem coexistir inicialmente. HOA roda como camada de gestor/tráfego nos checkpoints 08:00, 12:00, 15:00, 18:00 e 22:00 no timezone da conta, usando MO/CPMO em operações Europa/GDPR.
 12. Durante a fase de calibração de 4 dias, operar em `read_only/dry_run`: Ares deve reportar a ação que tomaria, regra e motivo; Rodolfo executa/declina manualmente e corrige a lógica. Não recomendar liberar write/autonomia antes dessa calibração. Campanhas com menos de 3 dias de campanha ficam em learning/aquecimento: o intraday pode mostrar métricas e regras que teriam acionado, mas a ação sugerida deve ser informativa (`eu observaria`), sem recomendar pausa/reativação até completar a janela de learning.
 13. O cron lê a conta/operação como fonte de dados, mas a gestão deve respeitar `active_scope` e estado local: campanhas pausadas por humano/saturação entram em hold/exclusão; campanhas pausadas por regra do Ares continuam monitoradas para simular reativação.
@@ -114,9 +114,9 @@ Durante `read_only/dry_run`, relatórios de gestão devem ser tratados como reco
 ```text
 <Nome da conta> — <YYYY-MM-DD> — <HH:MM TZ> — <Tipo do cron>
 
-ID recomendação | PG ID    | País/Vertical | Regra usada    | Status atual | Ação que eu tomaria | Motivo
-----------------|----------|---------------|----------------|--------------|---------------------|-------
-REC-1800-01     | pg_22068 | ES / CC       | R2 — CPMO alto | ACTIVE       | pausaria            | CPMO > alvo
+ID REC                 | Nome da campanha              | PG ID    | Início     | Spend | MO | CPMO | Ação que eu tomaria | Motivo
+-----------------------|-------------------------------|----------|------------|-------|----|------|---------------------|-------
+REC-20260621-0124-001  | Elena Santana - ES - ESP - 009| pg_22091 | 20/06/2026 | 6.21  | 0  |      | OBSERVAR            | Learning < 3d; R1 acionou
 ```
 
 Regras de formatação:

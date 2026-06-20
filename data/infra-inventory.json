@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-20T13:46:00-04:00",
+    "updated_at": "2026-06-20T19:42:47-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_report_infra": "ares-discord-post-with-thread-chunked-discord-limit"
+    "last_report_infra": "ares-meta-log-layout-idrec-campaign-start-date"
   },
   "system_packages": [
     {
@@ -478,6 +478,19 @@
       "runtime_versioned_sha_match": true,
       "updated_at": "2026-06-20T11:52:28-04:00",
       "validation": "runtime/versioned SHA match; synced via sync-souls; secret scan not required for taxonomy text; relevant to Hera/Ares creative taxonomy loop fix"
+    },
+    {
+      "profile": "ares",
+      "skill": "meta-ads-intraday-operations",
+      "type": "skill",
+      "runtime_path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
+      "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
+      "size_bytes": 17620,
+      "modified_at": "2026-06-20T19:40:32-04:00",
+      "sha256": "f7500e1d56ec558bd14ac6da7c0d8f293a5e9c179eb9ef8d84641ced2fe4b21e",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-20T19:42:47-04:00",
+      "validation": "runtime/versioned SHA match; py_compile for linked runners OK; dry-run/read-only output layout validated; secret scan OK"
     }
   ],
   "systemd_services": [
@@ -687,8 +700,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
-      "size_bytes": 22152,
-      "modified_at": "2026-06-19T23:09:37-04:00"
+      "size_bytes": 23615,
+      "modified_at": "2026-06-20T19:40:04-04:00",
+      "sha256": "839d1563f09c51f08c8aa2234442e37c6861ee35b7dcd461a7e24851e446ec4d",
+      "agent": "ares",
+      "purpose": "Ares Meta intraday/reactivate-all dry-run runner; formats logs-aquisicao recommendations with REC IDs and campaign display names.",
+      "validation": "python3 -m py_compile OK; sha256 matches report; dry-run/read-only output validated columns ID REC, Nome da campanha, PG ID, Início and absence of Página/Idade/Campaign ID/Meta ID; secret scan OK",
+      "updated_at": "2026-06-20T19:42:47-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-adset-copy-probe.py",
@@ -717,8 +735,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
-      "size_bytes": 15930,
-      "modified_at": "2026-06-19T14:25:49-04:00"
+      "size_bytes": 17559,
+      "modified_at": "2026-06-20T19:40:11-04:00",
+      "sha256": "d2354cb0d58bd09686430fd022c31b9d423f4119148176e5dc05632f1f1a13ef",
+      "agent": "ares",
+      "purpose": "Ares Meta HOA manager read-only/dry-run; formats checkpoint reports for logs-aquisicao with simplified campaign columns.",
+      "validation": "python3 -m py_compile OK; sha256 matches report; dry-run/read-only output validated columns ID REC, Nome da campanha, PG ID, Início and absence of Página/Idade/Campaign ID/Meta ID; secret scan OK",
+      "updated_at": "2026-06-20T19:42:47-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
@@ -1543,7 +1566,15 @@
       {
         "name": "meta-ads-intraday-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "size_bytes": 17620,
+        "modified_at": "2026-06-20T19:40:32-04:00",
+        "sha256": "f7500e1d56ec558bd14ac6da7c0d8f293a5e9c179eb9ef8d84641ced2fe4b21e",
+        "versioned_sha256": "f7500e1d56ec558bd14ac6da7c0d8f293a5e9c179eb9ef8d84641ced2fe4b21e",
+        "runtime_versioned_sha_match": true,
+        "updated_at": "2026-06-20T19:42:47-04:00",
+        "validation": "runtime/versioned SHA match after sync-souls; log layout rule documents ID REC, Nome da campanha, PG ID, Início and removed technical columns"
       },
       {
         "name": "meta-openzedfinanzas-replacement-clone",
