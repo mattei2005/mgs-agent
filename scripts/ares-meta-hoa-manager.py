@@ -111,6 +111,33 @@ def status_rank(status: str | None) -> int:
     return order.get(str(status or '').upper(), 8)
 
 
+def is_live_status(status: str | None) -> bool:
+    return str(status or '').upper() in {'ACTIVE', 'PAUSED', 'IN_PROCESS', 'WITH_ISSUES'}
+
+
+def dedupe_hist_rows(rows: list[dict]) -> list[dict]:
+    """Hide historical-only duplicates when a live campaign with the same display name exists.
+
+    The HOA report merges live campaign objects with insight history. If a campaign
+    appears in both streams under the same human name/number, keep the live row in
+    Discord and leave the technical duplicate only in JSON audit/snapshots.
+    """
+    live_keys = {
+        str(row.get('campaign_display_name') or row.get('campaign') or '').strip().lower()
+        for row in rows
+        if is_live_status(row.get('effective_status'))
+    }
+    if not live_keys:
+        return rows
+    deduped = []
+    for row in rows:
+        key = str(row.get('campaign_display_name') or row.get('campaign') or '').strip().lower()
+        if str(row.get('effective_status') or '').upper() == 'HIST' and key in live_keys:
+            continue
+        deduped.append(row)
+    return deduped
+
+
 def country_vertical_from_name(name: str | None, op_cfg: dict) -> str:
     text = str(name or '')
     parts = [p.strip() for p in text.split(' - ')]
@@ -424,6 +451,8 @@ def main() -> int:
             'bad_complete_days': bad_complete,
             'pacing': pacing,
         }
+
+    watch_rows = dedupe_hist_rows(watch_rows)
 
     for idx, row in enumerate(sorted(
         watch_rows,
