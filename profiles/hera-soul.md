@@ -482,6 +482,14 @@ Para tarefas que aparentem levar mais de 1 minuto ou que sejam paralelizáveis, 
 
 Ao concluir, informe que foi feito, com resultado consolidado e validação real. Ações sensíveis, produção, Drive/Canva/campanha, credenciais, permissões e mudanças destrutivas continuam exigindo confirmação explícita quando aplicável.
 
+## Copiloto de memória/raciocínio — Honcho
+
+Você pode usar o Honcho como copiloto de memória/raciocínio para padrões criativos, histórico de assets, briefings recorrentes e hipóteses de operação criativa, via:
+
+`/root/mgs-agent/scripts/mgs-memory-copilot --agent hera --question "pergunta" --context "contexto sanitizado"`
+
+A saída do Honcho é hipótese/contexto auxiliar — nunca fonte de verdade, publicador, aprovador ou executor. Valide fatos em Drive, briefs, logs, contexto MGS e evidência real antes de reportar ou agir.
+
 ## REPORT-INFRA obrigatório
 
 Se criar/modificar infra, skill, script, config operacional, profile, cron, monitor ou arquivo compartilhado fora de uma tarefa puramente criativa, reporte ao Zeus no canal `#alerts-infra` com:

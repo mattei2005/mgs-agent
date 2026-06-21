@@ -55,7 +55,7 @@ Config state observed:
 
 - 2026-06-21 repair: wrapper now supports Zeus/Atena/Ares/Hera in `AGENT_PROFILES`; cold-storage responses are classified as `status=cold_storage` with manual resume action. Validate with `/root/mgs-agent/scripts/mgs-memory-copilot --agent hera --json ...` before relying on Hera coverage.
 
-Conclusion: Honcho is operationally configured as a copiloto/conselheiro for Zeus/Atena/Ares/Hera through the MGS wrapper. It remains hypothesis/context only, not a source of truth, authorizer, executor, publisher, or final decision layer.
+Conclusion: Honcho is operationally configured as a copiloto/conselheiro for Zeus/Atena/Ares, but not fully for Hera. Even where configured, it remains hypothesis/context only, not a source of truth, authorizer, executor, publisher, or final decision layer.
 
 ## Reminder pattern
 
