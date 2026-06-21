@@ -156,7 +156,7 @@ def with_part_labels(chunks: list[str], limit: int = 2000) -> list[str]:
     total = len(chunks)
     labeled: list[str] = []
     for i, chunk in enumerate(chunks, 1):
-        prefix = f'[parte {i}/{total}]\n'
+        prefix = f'Parte {i} de {total}\n'
         if len(prefix) + len(chunk) <= limit:
             labeled.append(prefix + chunk)
         else:
