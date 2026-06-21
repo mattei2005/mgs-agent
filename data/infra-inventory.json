@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-20T21:25:47-04:00",
+    "updated_at": "2026-06-20T21:27:22-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_report_infra": "ares-hoa-campaign-number-sort-active-before-history"
+    "last_report_infra": "ares-hoa-human-header-account-timezone"
   },
   "system_packages": [
     {
@@ -485,12 +485,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-      "size_bytes": 18234,
-      "modified_at": "2026-06-20T21:24:23-04:00",
-      "sha256": "39d724c079a40b897729aacab7db7f5a00dd427114651dfb6f26e3ab8ade63cf",
+      "size_bytes": 18415,
+      "modified_at": "2026-06-20T21:26:03-04:00",
+      "sha256": "9e85a0d0789be4293e8127fd318b858c0d406bf233de17260e63150a15f467e2",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-20T21:25:47-04:00",
-      "validation": "runtime/versioned SHA match; HOA manager py_compile/hash/preview order OK; secret scan OK"
+      "updated_at": "2026-06-20T21:27:22-04:00",
+      "validation": "runtime/versioned SHA match; HOA header preview OK; linked runner py_compile/hash OK; secret scan OK"
     }
   ],
   "systemd_services": [
@@ -689,9 +689,9 @@
       "modified_at": "2026-06-20T21:25:20-04:00",
       "sha256": "ed534bca6df458e2f8fbecc68658da3ed721c44511391ec33cf184638bb3001e",
       "agent": "ares",
-      "purpose": "Ares Meta HOA manager read-only/dry-run; orders focus-page campaigns by campaign number and keeps ACTIVE before historical duplicates.",
-      "validation": "python3 -m py_compile OK; sha256 matches report; preview validated order 001,001,002,002,003...020; runtime output balanced fences; secret scan OK",
-      "updated_at": "2026-06-20T21:25:47-04:00"
+      "purpose": "Ares Meta HOA manager read-only/dry-run; reports focus-page campaigns with human header in ad-account timezone.",
+      "validation": "python3 -m py_compile OK; sha256 matches report; preview validates header “HOA — relatório das HH:MM (Europe/Madrid)”; balanced fences; secret scan OK",
+      "updated_at": "2026-06-20T21:27:22-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
@@ -1508,13 +1508,13 @@
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
         "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "size_bytes": 18234,
-        "modified_at": "2026-06-20T21:24:23-04:00",
-        "sha256": "39d724c079a40b897729aacab7db7f5a00dd427114651dfb6f26e3ab8ade63cf",
-        "versioned_sha256": "39d724c079a40b897729aacab7db7f5a00dd427114651dfb6f26e3ab8ade63cf",
+        "size_bytes": 18415,
+        "modified_at": "2026-06-20T21:26:03-04:00",
+        "sha256": "9e85a0d0789be4293e8127fd318b858c0d406bf233de17260e63150a15f467e2",
+        "versioned_sha256": "9e85a0d0789be4293e8127fd318b858c0d406bf233de17260e63150a15f467e2",
         "runtime_versioned_sha_match": true,
-        "updated_at": "2026-06-20T21:25:47-04:00",
-        "validation": "runtime/versioned SHA match after sync-souls; HOA rule documents ordering by campaign numbering and ACTIVE before HIST duplicates"
+        "updated_at": "2026-06-20T21:27:22-04:00",
+        "validation": "runtime/versioned SHA match after sync-souls; HOA rule documents human header with HH:MM in Europe/Madrid account timezone"
       },
       {
         "name": "meta-openzedfinanzas-replacement-clone",
