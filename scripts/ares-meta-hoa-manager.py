@@ -98,6 +98,19 @@ def compact_action(action: str) -> str:
     return mapping.get(action, action)
 
 
+def campaign_sequence(name: str | None) -> int:
+    text = str(name or '').strip()
+    m = re.search(r'(?:^|\s-\s)(\d{1,3})$', text)
+    if m:
+        return int(m.group(1))
+    return 9999
+
+
+def status_rank(status: str | None) -> int:
+    order = {'ACTIVE': 0, 'IN_PROCESS': 1, 'WITH_ISSUES': 2, 'PAUSED': 3, 'HIST': 9, 'UNKNOWN': 10}
+    return order.get(str(status or '').upper(), 8)
+
+
 def country_vertical_from_name(name: str | None, op_cfg: dict) -> str:
     text = str(name or '')
     parts = [p.strip() for p in text.split(' - ')]
@@ -412,6 +425,18 @@ def main() -> int:
             'pacing': pacing,
         }
 
+    for idx, row in enumerate(sorted(
+        watch_rows,
+        key=lambda r: (
+            campaign_sequence(r.get('campaign')),
+            status_rank(r.get('effective_status')),
+            str(r.get('campaign')),
+            str(r.get('rec_id')),
+        ),
+    ), 1):
+        row['rec_id'] = recommendation_id(now_local, idx)
+        watch_rows[idx - 1] = row
+
     budget_left = max(0.0, daily_cap - total_today_spend)
     test_pool = daily_cap * test_share
     test_budget_left = max(0.0, test_pool - min(total_today_spend, test_pool))
@@ -449,11 +474,16 @@ def main() -> int:
         return 0
     if not rows and is_final:
         rows = [{'rec_id':'-', 'campaign_display_name':'-', 'start_date':'-', 'effective_status':'-', 'spend_today':'0.00', 'mo_today':0, 'cpmo_today':'-', 'hoa_cpmo':'-', 'suggested_action':'sem ação', 'reason':'sem campanhas no foco', 'status': budget_status}]
+    header_prefix = (
+        f'<@344196393512075265> HOA — relatório das {now_local.strftime("%H:%M")} ({args.account_tz}) da página em foco.\n'
+        'Estou só analisando as campanhas; não alterei nada na Meta.\n'
+        'Use o ID REC para responder quando quiser registrar uma decisão: `REC... feito`, `ignorar` ou `segurar`.'
+    )
     print(output_table(
         title,
         rows,
         [('rec_id','ID REC'),('campaign_display_name','Nome campanha'),('start_date','Início'),('effective_status','Status'),('spend_today','Spend'),('mo_today','MO'),('cpmo_today','CPMO'),('hoa_cpmo','HOA'),('suggested_action','Ação'),('reason','Motivo')],
-        prefix='<@344196393512075265> Relatório de acompanhamento da página em foco.\nEstou só analisando as campanhas; não alterei nada na Meta.\nUse o ID REC para responder quando quiser registrar uma decisão: `REC... feito`, `ignorar` ou `segurar`.'
+        prefix=header_prefix
     ))
     return 0
 

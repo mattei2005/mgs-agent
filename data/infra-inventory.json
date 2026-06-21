@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-20T21:14:34-04:00",
+    "updated_at": "2026-06-20T21:25:47-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_report_infra": "ares-hoa-humanized-intro-natural-part-labels"
+    "last_report_infra": "ares-hoa-campaign-number-sort-active-before-history"
   },
   "system_packages": [
     {
@@ -485,12 +485,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-      "size_bytes": 17912,
-      "modified_at": "2026-06-20T21:08:33-04:00",
-      "sha256": "7819851c72cd92e4f5f05ffcec5d53a3082dce89348df83d107734b6dc89d360",
+      "size_bytes": 18234,
+      "modified_at": "2026-06-20T21:24:23-04:00",
+      "sha256": "39d724c079a40b897729aacab7db7f5a00dd427114651dfb6f26e3ab8ade63cf",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-20T21:10:01-04:00",
-      "validation": "runtime/versioned SHA match; HOA manager py_compile/hash/preview OK; secret scan OK"
+      "updated_at": "2026-06-20T21:25:47-04:00",
+      "validation": "runtime/versioned SHA match; HOA manager py_compile/hash/preview order OK; secret scan OK"
     }
   ],
   "systemd_services": [
@@ -685,13 +685,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
-      "size_bytes": 19406,
-      "modified_at": "2026-06-20T21:12:56-04:00",
-      "sha256": "a0d68112474869a970c5177c137a26e8c50eedaf3b2b7f5d76558fa854c64bd0",
+      "size_bytes": 20281,
+      "modified_at": "2026-06-20T21:25:20-04:00",
+      "sha256": "ed534bca6df458e2f8fbecc68658da3ed721c44511391ec33cf184638bb3001e",
       "agent": "ares",
-      "purpose": "Ares Meta HOA manager read-only/dry-run; emits humanized intro text and complete fenced blocks for focus-page campaign reports.",
-      "validation": "python3 -m py_compile OK; sha256 matches report; preview generated; intro humanized; chunk dry-run max_chunk_len=1687 all_under_2000=true; balanced fences true; secret scan OK",
-      "updated_at": "2026-06-20T21:14:34-04:00"
+      "purpose": "Ares Meta HOA manager read-only/dry-run; orders focus-page campaigns by campaign number and keeps ACTIVE before historical duplicates.",
+      "validation": "python3 -m py_compile OK; sha256 matches report; preview validated order 001,001,002,002,003...020; runtime output balanced fences; secret scan OK",
+      "updated_at": "2026-06-20T21:25:47-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
@@ -1508,13 +1508,13 @@
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
         "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "size_bytes": 17912,
-        "modified_at": "2026-06-20T21:08:33-04:00",
-        "sha256": "7819851c72cd92e4f5f05ffcec5d53a3082dce89348df83d107734b6dc89d360",
-        "versioned_sha256": "7819851c72cd92e4f5f05ffcec5d53a3082dce89348df83d107734b6dc89d360",
+        "size_bytes": 18234,
+        "modified_at": "2026-06-20T21:24:23-04:00",
+        "sha256": "39d724c079a40b897729aacab7db7f5a00dd427114651dfb6f26e3ab8ade63cf",
+        "versioned_sha256": "39d724c079a40b897729aacab7db7f5a00dd427114651dfb6f26e3ab8ade63cf",
         "runtime_versioned_sha_match": true,
-        "updated_at": "2026-06-20T21:10:01-04:00",
-        "validation": "runtime/versioned SHA match after sync-souls; HOA rule documents focus-page full campaign list and complete Discord table blocks"
+        "updated_at": "2026-06-20T21:25:47-04:00",
+        "validation": "runtime/versioned SHA match after sync-souls; HOA rule documents ordering by campaign numbering and ACTIVE before HIST duplicates"
       },
       {
         "name": "meta-openzedfinanzas-replacement-clone",
