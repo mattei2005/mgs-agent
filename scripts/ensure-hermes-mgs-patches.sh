@@ -98,11 +98,17 @@ apply_patch_if_needed() {
   fail "patch does not apply cleanly and is not already applied: $name"
 }
 
-[[ -d "$REPO/.git" ]] || fail "Hermes repo not found: $REPO"
+git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1 || fail "Hermes repo not found: $REPO"
 [[ -d "$PATCH_DIR" ]] || fail "patch dir not found: $PATCH_DIR"
 
 log "START ensure Hermes MGS patches"
 log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
+
+# Consolidated port for Hermes v0.17.0+ after the 2026-06-20 controlled update.
+# This applies the complete MGS runtime customization surface to a clean
+# upstream checkout first; legacy per-feature patches below then act as
+# invariant checks/backward-compatible fallback.
+apply_patch_if_needed "mgs-runtime-customizations-2026-06-20.patch"
 
 apply_patch_if_needed "discord-deterministic-thread-rename-auto-add-users.patch"
 apply_patch_if_needed "planned-restart-auto-resume-active-sessions.patch"

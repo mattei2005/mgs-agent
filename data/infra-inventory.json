@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-20T19:42:47-04:00",
+    "updated_at": "2026-06-20T19:53:17-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_report_infra": "ares-meta-log-layout-idrec-campaign-start-date"
+    "last_report_infra": "zeus-hermes-v017-mgs-runtime-customizations-2026-06-20"
   },
   "system_packages": [
     {
@@ -512,7 +512,7 @@
     },
     {
       "name": "mgs-autocommit.service",
-      "status": "active"
+      "status": "inactive\nunknown"
     }
   ],
   "crons": [
@@ -575,51 +575,6 @@
     },
     {
       "entry": "41 3 * * * flock -n /var/lock/mgs_safety_backup.lock /root/mgs-agent/scripts/mgs-safety-backup.sh >> /root/mgs-agent/logs/mgs-safety-backup-cron.log 2>&1"
-    },
-    {
-      "id": "d2a7853ae86f",
-      "type": "hermes_cron",
-      "profile": "hera",
-      "agent": "hera",
-      "name": "Hera Drive Auth Watchdog",
-      "schedule": {
-        "kind": "interval",
-        "minutes": 30,
-        "display": "every 30m"
-      },
-      "script": "drive-auth-watchdog.py",
-      "enabled": true,
-      "state": "scheduled",
-      "next_run_at": "2026-06-20T12:20:18.665365-04:00",
-      "last_run_at": "2026-06-20T11:50:18.665365-04:00",
-      "no_agent": true,
-      "deliver": "discord:1498132022634483894",
-      "purpose": "Drive auth watchdog da Hera a cada 30m.",
-      "updated_at": "2026-06-20T11:50:58-04:00"
-    },
-    {
-      "type": "hermes_cron",
-      "profile": "ares",
-      "id": "d1a064017e27",
-      "name": "Ares Drive OAuth watchdog",
-      "schedule": {
-        "kind": "interval",
-        "minutes": 30,
-        "display": "every 30m"
-      },
-      "script": "ares-drive-oauth-watchdog.sh",
-      "next_run_at": "2026-06-20T12:19:50.337040-04:00",
-      "enabled": true,
-      "state": "scheduled",
-      "no_agent": true,
-      "deliver": "discord:#zeus",
-      "repeat": {
-        "times": null,
-        "completed": 0
-      },
-      "purpose": "Monitorar OAuth Google Drive do Ares para write/upload expirado e alertar Zeus sem loop operacional.",
-      "validation": "jobs.json validado; no_agent=true; deliver=discord:#zeus; state=scheduled; script wrapper existe e passa bash -n",
-      "updated_at": "2026-06-20T11:52:28-04:00"
     }
   ],
   "scripts": [
@@ -636,12 +591,12 @@
     {
       "path": "/root/mgs-agent/scripts/ares-discord-post-with-thread.py",
       "size_bytes": 8098,
-      "modified_at": "2026-06-20T13:44:17-04:00",
-      "sha256": "6e91e956b578f053459eecaef7b616009600b37f90c21ca0e08edf87161fe9f2",
-      "agent": "ares",
-      "purpose": "Ares Discord poster for cron reports; posts to channel/thread and splits long messages under Discord 2000-char limit.",
-      "validation": "python3 -m py_compile OK; sha256 matches report; dry-run long HOA-style message produced chunked output with max_chunk_len <= 2000; secret scan OK",
-      "updated_at": "2026-06-20T13:46:00-04:00"
+      "modified_at": "2026-06-20T13:44:17-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/ares-drive-oauth-watchdog.py",
+      "size_bytes": 5728,
+      "modified_at": "2026-06-20T11:49:30-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-drive-thumbnail-sampler.py",
@@ -666,12 +621,7 @@
     {
       "path": "/root/mgs-agent/scripts/ares-google-drive-oauth-desktop-init.py",
       "size_bytes": 8934,
-      "modified_at": "2026-06-20T11:48:53-04:00",
-      "sha256": "ae34d10e9b978fa455b80109426c8351bff9e199e76d4c6369686b95678e19cf",
-      "agent": "ares",
-      "purpose": "Inicialização OAuth Desktop Google Drive do Ares.",
-      "validation": "python3 -m py_compile OK",
-      "updated_at": "2026-06-20T11:52:28-04:00"
+      "modified_at": "2026-06-20T11:48:53-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-google-drive-oauth-device-init.py",
@@ -701,12 +651,7 @@
     {
       "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
       "size_bytes": 23615,
-      "modified_at": "2026-06-20T19:40:04-04:00",
-      "sha256": "839d1563f09c51f08c8aa2234442e37c6861ee35b7dcd461a7e24851e446ec4d",
-      "agent": "ares",
-      "purpose": "Ares Meta intraday/reactivate-all dry-run runner; formats logs-aquisicao recommendations with REC IDs and campaign display names.",
-      "validation": "python3 -m py_compile OK; sha256 matches report; dry-run/read-only output validated columns ID REC, Nome da campanha, PG ID, Início and absence of Página/Idade/Campaign ID/Meta ID; secret scan OK",
-      "updated_at": "2026-06-20T19:42:47-04:00"
+      "modified_at": "2026-06-20T19:40:04-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-adset-copy-probe.py",
@@ -736,12 +681,7 @@
     {
       "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
       "size_bytes": 17559,
-      "modified_at": "2026-06-20T19:40:11-04:00",
-      "sha256": "d2354cb0d58bd09686430fd022c31b9d423f4119148176e5dc05632f1f1a13ef",
-      "agent": "ares",
-      "purpose": "Ares Meta HOA manager read-only/dry-run; formats checkpoint reports for logs-aquisicao with simplified campaign columns.",
-      "validation": "python3 -m py_compile OK; sha256 matches report; dry-run/read-only output validated columns ID REC, Nome da campanha, PG ID, Início and absence of Página/Idade/Campaign ID/Meta ID; secret scan OK",
-      "updated_at": "2026-06-20T19:42:47-04:00"
+      "modified_at": "2026-06-20T19:40:11-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
@@ -865,8 +805,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
-      "size_bytes": 10116,
-      "modified_at": "2026-06-17T12:17:04-04:00"
+      "size_bytes": 10488,
+      "modified_at": "2026-06-20T19:51:12-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
@@ -1162,16 +1102,6 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/ares-drive-oauth-watchdog.py",
-      "size_bytes": 5728,
-      "modified_at": "2026-06-20T11:49:30-04:00",
-      "sha256": "0c171a2dff6c3e053ad3f1104a108ac4c214be58c55ab656780faa8bc5c79e06",
-      "agent": "ares",
-      "purpose": "Ares Google Drive OAuth watchdog: detecta invalid_grant/write/upload auth expiration sem expor segredo.",
-      "validation": "python3 -m py_compile OK; watchdog detectou invalid_grant em teste reportado",
-      "updated_at": "2026-06-20T11:52:28-04:00"
     }
   ],
   "skills_mgs": [
@@ -1566,15 +1496,7 @@
       {
         "name": "meta-ads-intraday-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "size_bytes": 17620,
-        "modified_at": "2026-06-20T19:40:32-04:00",
-        "sha256": "f7500e1d56ec558bd14ac6da7c0d8f293a5e9c179eb9ef8d84641ced2fe4b21e",
-        "versioned_sha256": "f7500e1d56ec558bd14ac6da7c0d8f293a5e9c179eb9ef8d84641ced2fe4b21e",
-        "runtime_versioned_sha_match": true,
-        "updated_at": "2026-06-20T19:42:47-04:00",
-        "validation": "runtime/versioned SHA match after sync-souls; log layout rule documents ID REC, Nome da campanha, PG ID, Início and removed technical columns"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
       },
       {
         "name": "meta-openzedfinanzas-replacement-clone",
@@ -3471,8 +3393,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "3f420393e605772b49faf6529803e878",
-      "modified_at": "2026-06-20T04:56:03-04:00"
+      "md5": "5fe6010062d19d4cd768ded3ab7deab8",
+      "modified_at": "2026-06-20T19:41:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -3483,32 +3405,32 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "66b4dde6e375d1cb868df6c06af8db93",
-      "modified_at": "2026-06-20T05:00:01-04:00"
+      "md5": "f4e6b4a6d825157c601446ca5da45749",
+      "modified_at": "2026-06-20T19:45:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "2e2f37d042f020fd2d0ef61c17e28f35",
-      "modified_at": "2026-06-20T03:04:04-04:00"
+      "md5": "f1ef2a39455c99a83b04f5943a1108c5",
+      "modified_at": "2026-06-20T15:04:10-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 15748,
-      "md5": "d482ded9b3504f4e89e0018f1486a0ea",
-      "modified_at": "2026-06-20T05:00:02-04:00"
+      "size_bytes": 16135,
+      "md5": "feda025a2d55fab256a5ef82a5f9dd5d",
+      "modified_at": "2026-06-20T19:50:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
       "size_bytes": 333,
-      "md5": "7a1c46a00013e8f2bae90e581dae6c1b",
-      "modified_at": "2026-06-19T20:37:02-04:00"
+      "md5": "b7441f5833d04003a3df6a4f1823d58b",
+      "modified_at": "2026-06-20T14:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 158822,
-      "md5": "50c696501578f76de2e23c79a59f22b0",
-      "modified_at": "2026-06-19T23:10:35-04:00"
+      "size_bytes": 137378,
+      "md5": "62316fe81684e5e88c2ad318b9c6d9fb",
+      "modified_at": "2026-06-20T19:42:47-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -3555,8 +3477,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2239,
-      "md5": "3afcabd95ebd4a74df3ff16b6832b358",
-      "modified_at": "2026-06-20T04:56:01-04:00"
+      "md5": "00a24bfa4df7e00055b79551ca9aa3b4",
+      "modified_at": "2026-06-20T19:51:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -3573,8 +3495,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "78f6618a6e20539cf639d14f93b30575",
-      "modified_at": "2026-06-19T20:07:02-04:00"
+      "md5": "192a18ca7021da940bc96ff2efd84bc0",
+      "modified_at": "2026-06-20T14:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -3598,13 +3520,7 @@
       "path": "/root/mgs-agent/profiles/ares-soul.md",
       "size_bytes": 15485,
       "md5": "da029c450adaa9501be780fe8c3e62ad",
-      "modified_at": "2026-06-20T11:50:01-04:00",
-      "sha256": "e62762fe3fa00fb4aabe652b6830970e4c2d4d4ff94e5445de70931b82b30fcc",
-      "agent": "ares",
-      "type": "profile_soul_copy",
-      "runtime_path": "/root/.hermes/profiles/ares/SOUL.md",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-20T11:52:28-04:00"
+      "modified_at": "2026-06-20T11:50:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
@@ -3623,64 +3539,11 @@
       "size_bytes": 43510,
       "md5": "313356aeb86d41db526f68507a56ec4e",
       "modified_at": "2026-06-16T19:23:39-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/data/hera/drive-auth-watchdog-state.json",
-      "agent": "hera",
-      "type": "runtime_state",
-      "purpose": "State/idempotência do Hera Drive Auth Watchdog.",
-      "git_tracked": false,
-      "updated_at": "2026-06-20T11:50:58-04:00",
-      "size_bytes": 290,
-      "modified_at": "2026-06-20T11:50:18-04:00",
-      "sha256": "dfcac2dc582b7b0660e5d302b57ca288c5f78f0ff214d54958611d17ff83f9e0"
     }
   ],
   "mu_plugin_canonical": {
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  },
-  "config_files": [
-    {
-      "id": "ares-runtime-config-yaml",
-      "agent": "ares",
-      "type": "profile_config",
-      "path": "/root/.hermes/profiles/ares/config.yaml",
-      "versioned_copy": "/root/mgs-agent/profiles/ares-config.yaml",
-      "size_bytes": 18956,
-      "sha256": "3cbc518f7b7cf2d210f411243247a5ded7c961e063dd4ded5b9951a6b642fba4",
-      "versioned_sha256": "3cbc518f7b7cf2d210f411243247a5ded7c961e063dd4ded5b9951a6b642fba4",
-      "allowlisted_discord_flags": {
-        "allowed_channels": "1508853425952133180,1513005743954198538,1516887105543077949",
-        "free_response_channels": "1508853425952133180,1516887105543077949",
-        "thread_require_mention": true,
-        "require_mention": true
-      },
-      "purpose": "Ares can read Hera channel for explicit handoffs, but must not answer in Hera threads unless directly mentioned.",
-      "source_thread": "1517911362280493089",
-      "updated_at": "2026-06-20T11:57:07-04:00"
-    },
-    {
-      "id": "ares-profile-env-discord-routing",
-      "agent": "ares",
-      "type": "profile_env",
-      "path": "/root/.hermes/profiles/ares/.env",
-      "size_bytes": 972,
-      "sha256": "677a35c7149c50f771a45951687321bc60c6ae7ec2934558d373d280926edbfc",
-      "allowlisted_keys": {
-        "DISCORD_ALLOWED_CHANNELS": "1508853425952133180,1513005743954198538,1516887105543077949",
-        "DISCORD_HOME_CHANNEL": "1508853425952133180",
-        "DISCORD_REQUIRE_MENTION": "true",
-        "DISCORD_AUTO_THREAD": "true",
-        "DISCORD_ALLOW_BOTS": "mentions",
-        "DISCORD_FREE_RESPONSE_CHANNELS": "1508853425952133180,1516887105543077949",
-        "DISCORD_THREAD_REQUIRE_MENTION": "true"
-      },
-      "secret_policy": "hash and allowlisted non-secret Discord routing flags only; tokens/credentials not stored",
-      "purpose": "Runtime env override aligned with config: DISCORD_THREAD_REQUIRE_MENTION=true to prevent Ares free replies in Hera threads.",
-      "source_thread": "1517911362280493089",
-      "updated_at": "2026-06-20T11:57:07-04:00"
-    }
-  ]
+  }
 }
