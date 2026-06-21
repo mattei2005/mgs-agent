@@ -85,8 +85,17 @@ def parse_meta_time(value: str | None) -> datetime | None:
 def fmt_start_date(campaign: dict, tz: ZoneInfo) -> str:
     started = parse_meta_time(campaign.get('start_time') or campaign.get('created_time'))
     if not started:
-        return 'não informado'
+        return 'n/i'
     return started.astimezone(tz).strftime('%d/%m/%Y')
+
+
+def compact_action(action: str) -> str:
+    mapping = {
+        'eu manteria em observação': 'observar',
+        'eu pausaria/seguraria': 'pausar/seg',
+        'eu substituiria': 'substituir',
+    }
+    return mapping.get(action, action)
 
 
 def country_vertical_from_name(name: str | None, op_cfg: dict) -> str:
@@ -165,7 +174,12 @@ def fetch_account_name(common, token: str, account_id: str) -> str:
 
 def fetch_campaigns(common, token: str, account_id: str) -> dict[str, dict]:
     fields = 'id,name,effective_status,status,daily_budget,lifetime_budget,start_time,created_time,stop_time'
-    rows = graph_all(common, f'act_{account_id}/campaigns', token, {'fields': fields, 'limit': 500})
+    params = {
+        'fields': fields,
+        'limit': 500,
+        'effective_status': json.dumps(['ACTIVE', 'PAUSED', 'IN_PROCESS', 'WITH_ISSUES']),
+    }
+    rows = graph_all(common, f'act_{account_id}/campaigns', token, params)
     return {str(r.get('id')): r for r in rows if r.get('id')}
 
 
@@ -191,27 +205,31 @@ def trunc(s, n=34):
     return s if len(s) <= n else s[: max(0, n-3)] + '...'
 
 
-def output_table(title: str, rows: list[dict], columns: list[tuple[str, str]], prefix: str | None = None) -> str:
+def output_table(title: str, rows: list[dict], columns: list[tuple[str, str]], prefix: str | None = None, rows_per_block: int = 8) -> str:
     lines = []
     if prefix:
         lines += [prefix, '']
-    lines += ['```text', title, '']
     if not rows:
-        lines += ['Sem campanhas em watchlist no checkpoint.', '```']
+        lines += ['```text', title, '', 'Sem campanhas no foco deste checkpoint.', '```']
         return '\n'.join(lines)
-    rendered = []
-    for row in rows:
-        rendered.append({k: trunc(row.get(k, ''), 42) for k, _ in columns})
-    widths = {k: len(label) for k, label in columns}
-    for row in rendered:
-        for k, _ in columns:
-            widths[k] = max(widths[k], len(str(row.get(k, ''))))
-    header = ' | '.join(label.ljust(widths[k]) for k, label in columns)
-    sep = '-|-'.join('-' * widths[k] for k, _ in columns)
-    lines += [header, sep]
-    for row in rendered:
-        lines.append(' | '.join(str(row.get(k, '')).ljust(widths[k]) for k, _ in columns))
-    lines.append('```')
+
+    rendered = [{k: trunc(row.get(k, ''), 34) for k, _ in columns} for row in rows]
+    total_blocks = max(1, math.ceil(len(rendered) / rows_per_block))
+    for block_idx in range(total_blocks):
+        block = rendered[block_idx * rows_per_block:(block_idx + 1) * rows_per_block]
+        widths = {k: len(label) for k, label in columns}
+        for row in block:
+            for k, _ in columns:
+                widths[k] = max(widths[k], len(str(row.get(k, ''))))
+        header = ' | '.join(label.ljust(widths[k]) for k, label in columns)
+        sep = '-|-'.join('-' * widths[k] for k, _ in columns)
+        block_title = title if total_blocks == 1 else f'{title} — bloco {block_idx + 1}/{total_blocks}'
+        lines += ['```text', block_title, '', header, sep]
+        for row in block:
+            lines.append(' | '.join(str(row.get(k, '')).ljust(widths[k]) for k, _ in columns))
+        lines.append('```')
+        if block_idx + 1 < total_blocks:
+            lines.append('')
     return '\n'.join(lines)
 
 
@@ -287,6 +305,14 @@ def main() -> int:
         if day == today.isoformat():
             total_today_spend += spend
 
+    focus_pg_ids = active_focus_pg_ids(op_cfg)
+    for cid, camp in campaigns.items():
+        cname = camp.get('name') or cid
+        pg_id = page_id_from_name(cname)
+        if focus_pg_ids and pg_id not in focus_pg_ids:
+            continue
+        by_campaign.setdefault(cid, {'campaign_id': cid, 'campaign_name': cname, 'days': {}})
+
     prev = latest_snapshot(args.operation_id)
     prev_campaigns = prev.get('campaigns') or {}
     watch_rows = []
@@ -337,9 +363,10 @@ def main() -> int:
         prev_cpmo = (((prev_campaigns.get(cid) or {}).get('today') or {}).get('CPMO'))
         pacing = status_for_today(today_m.get('CPMO'), prev_cpmo, today_m.get('MO') or 0, today_m.get('spend') or 0, min_spend)
         replacement = bad_complete >= 2
+        pg_id = page_id_from_name(cname)
+        is_focus_page = bool(focus_pg_ids and pg_id in focus_pg_ids)
         watch = replacement or today_bad or (weighted_cpmo is not None and weighted_cpmo > cpmo_target)
-        if watch:
-            pg_id = page_id_from_name(cname)
+        if watch or is_focus_page:
             in_scope, scope_reason = is_in_management_scope(op_cfg, pg_id)
             if not in_scope:
                 snapshot_campaigns[cid] = {
@@ -351,11 +378,12 @@ def main() -> int:
                     'scope_skip': scope_reason,
                 }
                 continue
-            status = 'replacement candidate' if replacement and pacing != 'melhorando' else ('hold: pacing melhora' if replacement else 'watchlist')
+            status = 'replacement candidate' if replacement and pacing != 'melhorando' else ('hold: pacing melhora' if replacement else ('watchlist' if watch else 'sem alerta'))
             reasons = []
             if y_bad: reasons.append(f'D-1 {y_reason}')
             if d2_bad: reasons.append(f'D-2 {d2_reason}')
             if today_bad: reasons.append(f'hoje {today_reason}')
+            suggested = simulated_action_for_hoa(replacement, today_bad, pacing) if watch else 'sem ação'
             seq = len(watch_rows) + 1
             watch_rows.append({
                 'rec_id': recommendation_id(now_local, seq),
@@ -364,13 +392,17 @@ def main() -> int:
                 'campaign': cname,
                 'campaign_display_name': display_campaign_name(cname),
                 'start_date': fmt_start_date(campaigns.get(cid) or {}, tz),
+                'effective_status': (campaigns.get(cid) or {}).get('effective_status') or 'HIST',
+                'spend_today': fmt_money(today_m.get('spend') or 0),
+                'mo_today': int(today_m.get('MO') or 0),
+                'cpmo_today': fmt_money(today_m.get('CPMO')) if today_m.get('CPMO') is not None else '-',
                 'hoa_cpmo': fmt_money(weighted_cpmo),
                 'target': fmt_money(cpmo_target),
                 'bad_days': f'{bad_complete}/2 completos',
                 'pacing': pacing,
                 'status': status,
-                'suggested_action': simulated_action_for_hoa(replacement, today_bad, pacing),
-                'reason': '; '.join(reasons) or 'HOA acima alvo',
+                'suggested_action': compact_action(suggested),
+                'reason': '; '.join(reasons) or ('sem alerta' if not watch else 'HOA acima alvo'),
             })
         snapshot_campaigns[cid] = {
             'campaign_name': cname,
@@ -409,18 +441,19 @@ def main() -> int:
     write_json(report_path, event)
     write_json(snapshot_path, event)
 
-    title = f'{account_name} — {now_local.strftime("%Y-%m-%d")} — {now_local.strftime("%H:%M %Z")} — HOA gestor dry-run — {budget_status}'
+    focus_label = ', '.join(sorted(focus_pg_ids)) if focus_pg_ids else 'conta toda'
+    title = f'{account_name} — {now_local.strftime("%Y-%m-%d")} — {now_local.strftime("%H:%M %Z")} — HOA gestor — foco {focus_label} — {budget_status}'
     # Output at every checkpoint so Rodolfo can see the manager pass; still concise.
-    rows = watch_rows[:12]
+    rows = watch_rows
     if not rows and not args.always_output and not is_final:
         return 0
     if not rows and is_final:
-        rows = [{'rec_id':'-', 'campaign_display_name':'-', 'pg_id':'-', 'start_date':'-', 'suggested_action':'nenhuma ação', 'reason':'sem watchlist', 'hoa_cpmo':'-', 'target':fmt_money(cpmo_target), 'bad_days':'0/2 completos', 'pacing':'sem watchlist', 'status': budget_status}]
+        rows = [{'rec_id':'-', 'campaign_display_name':'-', 'start_date':'-', 'effective_status':'-', 'spend_today':'0.00', 'mo_today':0, 'cpmo_today':'-', 'hoa_cpmo':'-', 'suggested_action':'sem ação', 'reason':'sem campanhas no foco', 'status': budget_status}]
     print(output_table(
         title,
         rows,
-        [('rec_id','ID REC'),('campaign_display_name','Nome da campanha'),('pg_id','PG ID'),('start_date','Início'),('suggested_action','Ação sugerida'),('reason','Motivo'),('hoa_cpmo','HOA CPMO'),('target','Alvo'),('status','Status')],
-        prefix='<@344196393512075265> HOA checkpoint read-only: decisões simuladas. Responda na thread com `REC... feito`, `ignorar` ou `segurar`. Nenhum write foi executado.'
+        [('rec_id','ID REC'),('campaign_display_name','Nome campanha'),('start_date','Início'),('effective_status','Status'),('spend_today','Spend'),('mo_today','MO'),('cpmo_today','CPMO'),('hoa_cpmo','HOA'),('suggested_action','Ação'),('reason','Motivo')],
+        prefix='<@344196393512075265> HOA checkpoint read-only: todas as campanhas da página em foco. Responda na thread com `REC... feito`, `ignorar` ou `segurar` quando houver ação aplicável. Nenhum write foi executado.'
     ))
     return 0
 

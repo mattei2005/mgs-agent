@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-20T19:53:17-04:00",
+    "updated_at": "2026-06-20T21:10:01-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_report_infra": "zeus-hermes-v017-mgs-runtime-customizations-2026-06-20"
+    "last_report_infra": "ares-hoa-focus-page-full-campaign-block-layout"
   },
   "system_packages": [
     {
@@ -485,12 +485,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-      "size_bytes": 17620,
-      "modified_at": "2026-06-20T19:40:32-04:00",
-      "sha256": "f7500e1d56ec558bd14ac6da7c0d8f293a5e9c179eb9ef8d84641ced2fe4b21e",
+      "size_bytes": 17912,
+      "modified_at": "2026-06-20T21:08:33-04:00",
+      "sha256": "7819851c72cd92e4f5f05ffcec5d53a3082dce89348df83d107734b6dc89d360",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-20T19:42:47-04:00",
-      "validation": "runtime/versioned SHA match; py_compile for linked runners OK; dry-run/read-only output layout validated; secret scan OK"
+      "updated_at": "2026-06-20T21:10:01-04:00",
+      "validation": "runtime/versioned SHA match; HOA manager py_compile/hash/preview OK; secret scan OK"
     }
   ],
   "systemd_services": [
@@ -680,8 +680,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
-      "size_bytes": 17559,
-      "modified_at": "2026-06-20T19:40:11-04:00"
+      "size_bytes": 19375,
+      "modified_at": "2026-06-20T21:08:11-04:00",
+      "sha256": "51f9787f03c43d8e1cc25baa06045ce3eb75f974fbbae8a6d21b50ce281865a6",
+      "agent": "ares",
+      "purpose": "Ares Meta HOA manager read-only/dry-run; lists all campaigns for the focus page and formats complete Discord-safe table blocks.",
+      "validation": "python3 -m py_compile OK; sha256 matches report; --always-output preview validates all focus-page campaign layout, complete blocks/fences, and no Página/Idade/Campaign ID/Meta ID columns; secret scan OK",
+      "updated_at": "2026-06-20T21:10:01-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
@@ -1496,7 +1501,15 @@
       {
         "name": "meta-ads-intraday-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "size_bytes": 17912,
+        "modified_at": "2026-06-20T21:08:33-04:00",
+        "sha256": "7819851c72cd92e4f5f05ffcec5d53a3082dce89348df83d107734b6dc89d360",
+        "versioned_sha256": "7819851c72cd92e4f5f05ffcec5d53a3082dce89348df83d107734b6dc89d360",
+        "runtime_versioned_sha_match": true,
+        "updated_at": "2026-06-20T21:10:01-04:00",
+        "validation": "runtime/versioned SHA match after sync-souls; HOA rule documents focus-page full campaign list and complete Discord table blocks"
       },
       {
         "name": "meta-openzedfinanzas-replacement-clone",
