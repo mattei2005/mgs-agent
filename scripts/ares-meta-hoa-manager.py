@@ -453,7 +453,7 @@ def main() -> int:
         title,
         rows,
         [('rec_id','ID REC'),('campaign_display_name','Nome campanha'),('start_date','Início'),('effective_status','Status'),('spend_today','Spend'),('mo_today','MO'),('cpmo_today','CPMO'),('hoa_cpmo','HOA'),('suggested_action','Ação'),('reason','Motivo')],
-        prefix='<@344196393512075265> HOA checkpoint read-only: todas as campanhas da página em foco. Responda na thread com `REC... feito`, `ignorar` ou `segurar` quando houver ação aplicável. Nenhum write foi executado.'
+        prefix='<@344196393512075265> Relatório de acompanhamento da página em foco.\nEstou só analisando as campanhas; não alterei nada na Meta.\nUse o ID REC para responder quando quiser registrar uma decisão: `REC... feito`, `ignorar` ou `segurar`.'
     ))
     return 0
 

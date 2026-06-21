@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-20T21:10:01-04:00",
+    "updated_at": "2026-06-20T21:12:52-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_report_infra": "ares-hoa-focus-page-full-campaign-block-layout"
+    "last_report_infra": "ares-discord-poster-balanced-code-fence-chunker"
   },
   "system_packages": [
     {
@@ -590,8 +590,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-discord-post-with-thread.py",
-      "size_bytes": 8098,
-      "modified_at": "2026-06-20T13:44:17-04:00"
+      "size_bytes": 9415,
+      "modified_at": "2026-06-20T21:11:34-04:00",
+      "sha256": "1fd0e33ebca9292e5e1ba869027dafa23af91fd882cbbf31248b580b558dd071",
+      "agent": "ares",
+      "purpose": "Ares Discord poster for cron reports; posts to channel/thread and splits long messages without breaking fenced table blocks.",
+      "validation": "python3 -m py_compile OK; sha256 matches report; dry-run HOA preview message_len=5314 chunks=4 max_chunk_len=1658 all_under_2000=true; balanced code fences validated; secret scan OK",
+      "updated_at": "2026-06-20T21:12:52-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-drive-oauth-watchdog.py",
@@ -684,9 +689,9 @@
       "modified_at": "2026-06-20T21:08:11-04:00",
       "sha256": "51f9787f03c43d8e1cc25baa06045ce3eb75f974fbbae8a6d21b50ce281865a6",
       "agent": "ares",
-      "purpose": "Ares Meta HOA manager read-only/dry-run; lists all campaigns for the focus page and formats complete Discord-safe table blocks.",
-      "validation": "python3 -m py_compile OK; sha256 matches report; --always-output preview validates all focus-page campaign layout, complete blocks/fences, and no Página/Idade/Campaign ID/Meta ID columns; secret scan OK",
-      "updated_at": "2026-06-20T21:10:01-04:00"
+      "purpose": "Ares Meta HOA manager read-only/dry-run; emits complete fenced blocks for focus-page campaign reports.",
+      "validation": "python3 -m py_compile OK; sha256 matches report; preview generated for poster dry-run; balanced fences and expected HOA columns validated; secret scan OK",
+      "updated_at": "2026-06-20T21:12:52-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",

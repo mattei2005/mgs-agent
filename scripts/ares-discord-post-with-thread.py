@@ -83,13 +83,52 @@ def thread_title(message: str, fallback: str) -> str:
 def split_message(message: str, limit: int = 1900) -> list[str]:
     """Split Discord content safely below the 2000-char hard limit.
 
-    Uses 1900 chars to leave room for optional part prefixes and small future
-    formatting changes. Splits on line boundaries where possible; falls back to
-    fixed-size chunks for unusually long single lines.
+    Prefer splitting at complete fenced code blocks so Discord never receives a
+    chunk with an opening ``` but no closing ```. If a single fenced block is
+    larger than the safe limit, fall back to line splitting for that block.
     """
     if len(message) <= limit:
         return [message]
 
+    code_blocks = list(re.finditer(r'```[\s\S]*?```', message))
+    if code_blocks:
+        parts: list[str] = []
+        pos = 0
+        for match in code_blocks:
+            pre = message[pos:match.start()]
+            block = match.group(0)
+            if pre.strip():
+                parts.append(pre.strip())
+            parts.append(block.strip())
+            pos = match.end()
+        tail = message[pos:]
+        if tail.strip():
+            parts.append(tail.strip())
+
+        chunks: list[str] = []
+        current = ''
+        for part in parts:
+            if len(part) > limit:
+                if current:
+                    chunks.append(current.rstrip())
+                    current = ''
+                chunks.extend(split_message_by_lines(part, limit))
+                continue
+            candidate = part if not current else current.rstrip() + '\n\n' + part
+            if len(candidate) <= limit:
+                current = candidate
+            else:
+                if current:
+                    chunks.append(current.rstrip())
+                current = part
+        if current:
+            chunks.append(current.rstrip())
+        return chunks
+
+    return split_message_by_lines(message, limit)
+
+
+def split_message_by_lines(message: str, limit: int = 1900) -> list[str]:
     chunks: list[str] = []
     current = ''
     for raw_line in message.splitlines(keepends=True):
