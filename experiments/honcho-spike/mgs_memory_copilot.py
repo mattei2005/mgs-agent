@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """MGS Honcho memory copilot.
 
-Safe auxiliary layer for Zeus/Atena/Ares. It sends only caller-provided,
+Safe auxiliary layer for Zeus/Atena/Ares/Hera. It sends only caller-provided,
 sanitized context to Honcho and prints hypotheses/context reminders. It is not a
 source of truth and never executes operational actions.
 """
@@ -72,7 +72,34 @@ AGENT_PROFILES = {
         "session": "mgs-memory-copilot-ares",
         "role": "campaign/growth analysis assistant",
     },
+    "hera": {
+        "peer": "hera",
+        "target": "mgs-creative",
+        "session": "mgs-memory-copilot-hera",
+        "role": "creative/asset workflow analysis assistant",
+    },
 }
+
+
+def classify_honcho_exception(exc: Exception) -> tuple[str, str, str]:
+    """Return (status, public_content, action_required) for Honcho failures.
+
+    Keep this deliberately string-based so the wrapper remains resilient across
+    honcho-ai SDK versions without importing provider-specific exception classes.
+    """
+    exc_type = type(exc).__name__
+    msg = str(exc)
+    if "cold storage" in msg.lower():
+        return (
+            "cold_storage",
+            "Honcho tenant is in cold storage due to inactivity. Resume it from https://app.honcho.dev, then rerun the MGS health check.",
+            "manual_resume_app_honcho_dev",
+        )
+    return (
+        "unavailable",
+        f"Honcho copilot unavailable ({exc_type}). Proceed without Honcho and rely on canonical MGS sources.",
+        "none",
+    )
 
 
 def redact(text: str) -> str:
@@ -148,7 +175,19 @@ def main() -> int:
         signal.alarm(COPILOT_TIMEOUT_SECONDS)
         honcho = Honcho(workspace_id=WORKSPACE, api_key=API_KEY, environment="production")
         session = honcho.session(session_id)
-        peers = {name: honcho.peer(name) for name in ["zeus", "atena", "ares", "mgs-system", "mgs-content", "mgs-growth"]}
+        peers = {
+            name: honcho.peer(name)
+            for name in [
+                "zeus",
+                "atena",
+                "ares",
+                "hera",
+                "mgs-system",
+                "mgs-content",
+                "mgs-growth",
+                "mgs-creative",
+            ]
+        }
 
         caller = peers[profile["peer"]]
         system = peers["mgs-system"]
@@ -176,12 +215,9 @@ def main() -> int:
                 response = caller.chat(prompt)
         content = str(getattr(response, "content", response)).strip()
         status = "ok"
+        action_required = "none"
     except Exception as exc:  # Honcho is auxiliary; agents must degrade gracefully.
-        status = "unavailable"
-        content = (
-            f"Honcho copilot unavailable ({type(exc).__name__}). "
-            "Proceed without Honcho and rely on canonical MGS sources."
-        )
+        status, content, action_required = classify_honcho_exception(exc)
     finally:
         try:
             signal.alarm(0)
@@ -197,6 +233,7 @@ def main() -> int:
         "question": question,
         "hypothesis": content,
         "validation_required": True,
+        "action_required": action_required,
     }
 
     if args.json:

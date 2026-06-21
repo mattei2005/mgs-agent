@@ -53,12 +53,9 @@ Future agent work: if the same formatting drift appears in Atena/Ares/Hera outpu
 
 Config state observed:
 
-- Zeus config: `honcho: {}` and SOUL rule present; wrapper supports `--agent zeus`.
-- Atena config: `honcho: {}` and SOUL rule present; wrapper supports `--agent atena`.
-- Ares config: `honcho: {}` and SOUL rule present; wrapper supports `--agent ares`.
-- Hera config: `honcho: {}` exists, but SOUL rule was not found and `/root/mgs-agent/experiments/honcho-spike/mgs_memory_copilot.py` did not include `hera` in `AGENT_PROFILES`.
+- 2026-06-21 repair: wrapper now supports Zeus/Atena/Ares/Hera in `AGENT_PROFILES`; cold-storage responses are classified as `status=cold_storage` with manual resume action. Validate with `/root/mgs-agent/scripts/mgs-memory-copilot --agent hera --json ...` before relying on Hera coverage.
 
-Conclusion: Honcho is operationally configured as a copiloto/conselheiro for Zeus/Atena/Ares, but not fully for Hera. Even where configured, it remains hypothesis/context only, not a source of truth, authorizer, executor, publisher, or final decision layer.
+Conclusion: Honcho is operationally configured as a copiloto/conselheiro for Zeus/Atena/Ares/Hera through the MGS wrapper. It remains hypothesis/context only, not a source of truth, authorizer, executor, publisher, or final decision layer.
 
 ## Reminder pattern
 

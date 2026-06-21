@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-20T21:34:18-04:00",
+    "updated_at": "2026-06-21T00:42:45-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_report_infra": "ares-hoa-dedupe-hist-when-live-row-exists"
+    "last_report_infra": "zeus-honcho-copilot-repair-2026-06-21"
   },
   "system_packages": [
     {
@@ -525,7 +525,7 @@
     },
     {
       "name": "mgs-autocommit.service",
-      "status": "inactive\nunknown"
+      "status": "active"
     }
   ],
   "crons": [
@@ -604,12 +604,7 @@
     {
       "path": "/root/mgs-agent/scripts/ares-discord-post-with-thread.py",
       "size_bytes": 9416,
-      "modified_at": "2026-06-20T21:13:02-04:00",
-      "sha256": "482b8dad07bd97f9f6e34c0e9ee9b37b5ff6fceeac595ebadc0b993e4de55f00",
-      "agent": "ares",
-      "purpose": "Ares Discord poster for cron reports; posts to channel/thread and splits long messages without breaking fenced table blocks, using natural Portuguese part labels.",
-      "validation": "python3 -m py_compile OK; sha256 matches report; dry-run HOA preview chunks=4 max_chunk_len=1687 all_under_2000=true; [parte] label removed; secret scan OK",
-      "updated_at": "2026-06-20T21:14:34-04:00"
+      "modified_at": "2026-06-20T21:13:02-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-drive-oauth-watchdog.py",
@@ -699,12 +694,7 @@
     {
       "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
       "size_bytes": 21400,
-      "modified_at": "2026-06-20T21:32:47-04:00",
-      "sha256": "c8023486b9881bdf52a42d521ab6f192647d54140cd2dd4b458683f081fd4431",
-      "agent": "ares",
-      "purpose": "Ares Meta HOA manager read-only/dry-run; deduplicates HIST rows when a live campaign with same display name/number exists.",
-      "validation": "python3 -m py_compile OK; dry-run HOA chars≈4500 chunks=3 max_chunk=1881; ACTIVE visible=20; HIST visible=0; balanced fences; secret scan OK",
-      "updated_at": "2026-06-20T21:34:18-04:00"
+      "modified_at": "2026-06-20T21:32:47-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
@@ -1519,15 +1509,7 @@
       {
         "name": "meta-ads-intraday-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-        "size_bytes": 18415,
-        "modified_at": "2026-06-20T21:26:03-04:00",
-        "sha256": "9e85a0d0789be4293e8127fd318b858c0d406bf233de17260e63150a15f467e2",
-        "versioned_sha256": "9e85a0d0789be4293e8127fd318b858c0d406bf233de17260e63150a15f467e2",
-        "runtime_versioned_sha_match": true,
-        "updated_at": "2026-06-20T21:27:22-04:00",
-        "validation": "runtime/versioned SHA match after sync-souls; HOA rule documents human header with HH:MM in Europe/Madrid account timezone"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
       },
       {
         "name": "meta-openzedfinanzas-replacement-clone",
@@ -1537,15 +1519,7 @@
       {
         "name": "paid-acquisition-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md",
-        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/paid-acquisition-operations/SKILL.md",
-        "size_bytes": 25137,
-        "modified_at": "2026-06-20T21:33:23-04:00",
-        "sha256": "75d1c230e8c723b4d39a121c4599a605fde113d2a3318be00929f3f5f85a1075",
-        "versioned_sha256": "75d1c230e8c723b4d39a121c4599a605fde113d2a3318be00929f3f5f85a1075",
-        "runtime_versioned_sha_match": true,
-        "updated_at": "2026-06-20T21:34:18-04:00",
-        "validation": "runtime/versioned SHA match after sync-souls; HOA manager rule documents deduplication of HIST duplicate rows when live campaign exists"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md"
       },
       {
         "name": "native-mcp",
@@ -3432,8 +3406,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "5fe6010062d19d4cd768ded3ab7deab8",
-      "modified_at": "2026-06-20T19:41:04-04:00"
+      "md5": "fb10187b44266bf467860fe3e201ce2b",
+      "modified_at": "2026-06-21T00:41:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -3444,32 +3418,32 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "f4e6b4a6d825157c601446ca5da45749",
-      "modified_at": "2026-06-20T19:45:01-04:00"
+      "md5": "ac90ce810a5f69417dadd15423758d07",
+      "modified_at": "2026-06-21T00:30:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "f1ef2a39455c99a83b04f5943a1108c5",
-      "modified_at": "2026-06-20T15:04:10-04:00"
+      "md5": "0a9cebe6be2ac6d7e9584f53e676f55d",
+      "modified_at": "2026-06-20T21:05:09-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 16135,
-      "md5": "feda025a2d55fab256a5ef82a5f9dd5d",
-      "modified_at": "2026-06-20T19:50:02-04:00"
+      "size_bytes": 16264,
+      "md5": "d74f23e612ba2c3813961d34d23298a4",
+      "modified_at": "2026-06-21T00:40:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 333,
-      "md5": "b7441f5833d04003a3df6a4f1823d58b",
-      "modified_at": "2026-06-20T14:37:02-04:00"
+      "size_bytes": 328,
+      "md5": "3cfb5c21f93a6a8fbe7681c6913f20e8",
+      "modified_at": "2026-06-20T20:37:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 137378,
-      "md5": "62316fe81684e5e88c2ad318b9c6d9fb",
-      "modified_at": "2026-06-20T19:42:47-04:00"
+      "size_bytes": 133213,
+      "md5": "6f7dd80cb49667896e91ee2a33f8cbc7",
+      "modified_at": "2026-06-20T21:34:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -3516,8 +3490,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2239,
-      "md5": "00a24bfa4df7e00055b79551ca9aa3b4",
-      "modified_at": "2026-06-20T19:51:01-04:00"
+      "md5": "ade2a15b8b39b3c1e7e3f28bb25a1a18",
+      "modified_at": "2026-06-21T00:41:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -3534,8 +3508,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "192a18ca7021da940bc96ff2efd84bc0",
-      "modified_at": "2026-06-20T14:07:02-04:00"
+      "md5": "1edba3629ff3d39831721b9fa8d63017",
+      "modified_at": "2026-06-20T20:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
