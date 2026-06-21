@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-21T00:46:18-04:00",
+    "updated_at": "2026-06-21T00:52:38-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_report_infra": "zeus-honcho-copilot-soul-coverage-2026-06-21"
+    "last_report_infra": "zeus-honcho-health-monitor-2026-06-21"
   },
   "system_packages": [
     {
@@ -588,6 +588,9 @@
     },
     {
       "entry": "41 3 * * * flock -n /var/lock/mgs_safety_backup.lock /root/mgs-agent/scripts/mgs-safety-backup.sh >> /root/mgs-agent/logs/mgs-safety-backup-cron.log 2>&1"
+    },
+    {
+      "entry": "*/15 * * * * flock -n /var/lock/monitor_honcho_health.lock /root/mgs-agent/scripts/monitor-honcho-health.sh >> /root/mgs-agent/logs/monitor-honcho-health.log 2>&1"
     }
   ],
   "scripts": [
@@ -965,6 +968,11 @@
       "path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
       "size_bytes": 7816,
       "modified_at": "2026-05-27T09:31:26-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/monitor-honcho-health.sh",
+      "size_bytes": 7758,
+      "modified_at": "2026-06-21T00:51:10-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
@@ -3430,8 +3438,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 16264,
-      "md5": "42f3514175cb056153316e8b32340fd3",
-      "modified_at": "2026-06-21T00:45:02-04:00"
+      "md5": "bc2dd1bbb1f03ac5df4aac8b9973d467",
+      "modified_at": "2026-06-21T00:50:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
@@ -3440,10 +3448,16 @@
       "modified_at": "2026-06-20T20:37:01-04:00"
     },
     {
+      "path": "/root/mgs-agent/data/honcho-health-state.json",
+      "size_bytes": 362,
+      "md5": "ea2e7f48267c1eba189833fd925e6fb5",
+      "modified_at": "2026-06-21T00:52:19-04:00"
+    },
+    {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 130959,
-      "md5": "1d9f2f61d8f597828c7b342d6eb6d172",
-      "modified_at": "2026-06-21T00:42:45-04:00"
+      "size_bytes": 130966,
+      "md5": "2093a13241d6774d7c72a58ca9aa2325",
+      "modified_at": "2026-06-21T00:46:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -3490,8 +3504,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2239,
-      "md5": "ceca6896e3e7fb942edc5242ecfc10b9",
-      "modified_at": "2026-06-21T00:46:01-04:00"
+      "md5": "d80a888932165a66e80630b95b9e87ec",
+      "modified_at": "2026-06-21T00:51:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -3537,9 +3551,9 @@
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "size_bytes": 12870,
-      "md5": "fe82c9c0010df0c991b69ec87be03f23",
-      "modified_at": "2026-06-16T19:23:39-04:00"
+      "size_bytes": 13454,
+      "md5": "6c07a6aee561c2fbc26986a1dade9464",
+      "modified_at": "2026-06-21T00:50:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/hera-soul.md",
