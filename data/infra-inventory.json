@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-21T01:06:27-04:00",
+    "updated_at": "2026-06-21T01:07:59-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_report_infra": "zeus-honcho-monitor-cron-path-fix-2026-06-21"
+    "last_report_infra": "zeus-honcho-alert-reset-2026-06-21"
   },
   "system_packages": [
     {
@@ -971,8 +971,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-honcho-health.sh",
-      "size_bytes": 7763,
-      "modified_at": "2026-06-21T01:04:57-04:00"
+      "size_bytes": 7786,
+      "modified_at": "2026-06-21T01:07:01-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
@@ -3449,15 +3449,15 @@
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
-      "size_bytes": 380,
-      "md5": "f35c09c39e4e3341c684eb54641c6fd6",
-      "modified_at": "2026-06-21T01:06:00-04:00"
+      "size_bytes": 362,
+      "md5": "cabfc7fb813c4ac9eee7fe76df6c2d40",
+      "modified_at": "2026-06-21T01:07:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 131505,
-      "md5": "a2915c495575daf6298d789d01d2b701",
-      "modified_at": "2026-06-21T00:52:38-04:00"
+      "size_bytes": 131512,
+      "md5": "9890ce59b2688de1b85ea55054b3e20d",
+      "modified_at": "2026-06-21T01:06:27-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
