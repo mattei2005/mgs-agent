@@ -209,7 +209,7 @@ PY
 import json, sys, pathlib
 p=pathlib.Path(sys.argv[1]); now=sys.argv[2]
 d=json.loads(p.read_text())
-d.update({"last_check":now,"last_status":"ok","last_failure_details":[],"last_ok_at":now})
+d.update({"last_check":now,"last_status":"ok","last_alert_sent":None,"last_failure_details":[],"last_ok_at":now})
 p.write_text(json.dumps(d, indent=2, ensure_ascii=False)+"\n")
 PY
 fi
