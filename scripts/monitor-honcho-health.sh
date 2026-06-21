@@ -199,7 +199,7 @@ else
   log "OK agents=${#AGENTS[@]} prev=${PREV_STATUS}"
   if [[ "$PREV_STATUS" == "fail" ]]; then
     python3 - <<'PY' > "$TMP_RESULTS.payload"
-import json
+import json, sys
 payload={"content":"","embeds":[{"title":"Honcho MGS restabelecido","color":3066993,"fields":[{"name":"Status","value":"Zeus/Atena/Ares/Hera health checks OK","inline":False}]}]}
 json.dump(payload, sys.stdout, ensure_ascii=False)
 PY

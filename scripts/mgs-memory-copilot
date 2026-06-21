@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Cron-safe PATH: root interactive shells see uv in /root/.local/bin, cron does not.
+export PATH="/root/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PATH:-}"
+
 cd /root/mgs-agent
 if [[ -f .env ]]; then
   set -a

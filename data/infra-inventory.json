@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-21T00:52:38-04:00",
+    "updated_at": "2026-06-21T01:06:27-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_report_infra": "zeus-honcho-health-monitor-2026-06-21"
+    "last_report_infra": "zeus-honcho-monitor-cron-path-fix-2026-06-21"
   },
   "system_packages": [
     {
@@ -971,8 +971,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-honcho-health.sh",
-      "size_bytes": 7758,
-      "modified_at": "2026-06-21T00:51:10-04:00"
+      "size_bytes": 7763,
+      "modified_at": "2026-06-21T01:04:57-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
@@ -3414,8 +3414,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "fb10187b44266bf467860fe3e201ce2b",
-      "modified_at": "2026-06-21T00:41:03-04:00"
+      "md5": "ae40fbc223b3837c83f099731f6aa573",
+      "modified_at": "2026-06-21T00:56:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -3426,8 +3426,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "7c588fcd9890725d01258ebbebd6e594",
-      "modified_at": "2026-06-21T00:45:02-04:00"
+      "md5": "7435e5d4711f173c8335a52ee7a9428f",
+      "modified_at": "2026-06-21T01:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
@@ -3438,8 +3438,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 16264,
-      "md5": "bc2dd1bbb1f03ac5df4aac8b9973d467",
-      "modified_at": "2026-06-21T00:50:01-04:00"
+      "md5": "12ddd56b19b945df74bf441422fe6134",
+      "modified_at": "2026-06-21T01:05:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
@@ -3449,15 +3449,15 @@
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
-      "size_bytes": 362,
-      "md5": "ea2e7f48267c1eba189833fd925e6fb5",
-      "modified_at": "2026-06-21T00:52:19-04:00"
+      "size_bytes": 380,
+      "md5": "f35c09c39e4e3341c684eb54641c6fd6",
+      "modified_at": "2026-06-21T01:06:00-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 130966,
-      "md5": "2093a13241d6774d7c72a58ca9aa2325",
-      "modified_at": "2026-06-21T00:46:18-04:00"
+      "size_bytes": 131505,
+      "md5": "a2915c495575daf6298d789d01d2b701",
+      "modified_at": "2026-06-21T00:52:38-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -3504,8 +3504,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2239,
-      "md5": "d80a888932165a66e80630b95b9e87ec",
-      "modified_at": "2026-06-21T00:51:03-04:00"
+      "md5": "1be04fc1ba5e766f3af3f126bf5c1e8c",
+      "modified_at": "2026-06-21T01:06:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
