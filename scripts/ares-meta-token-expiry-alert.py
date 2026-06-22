@@ -16,7 +16,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 COMMON_PATH = "/root/mgs-agent/scripts/ares-meta-common.py"
-TOKEN_ITEM = "Token Meta API"
+TOKEN_ITEM = "Token Meta API - 00 - ANUNCIANTE - Alana Figueiredo - OPENZED SPAIN"
 RODOLFO_MENTION = "<@344196393512075265>"
 DEFAULT_WARN_DAYS = 7.0
 

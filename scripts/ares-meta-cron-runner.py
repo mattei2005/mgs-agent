@@ -22,7 +22,7 @@ BASE = Path('/root/mgs-agent/data/ares/meta-ads')
 COMMON_PATH = '/root/mgs-agent/scripts/ares-meta-common.py'
 ACCOUNT_ID_DEFAULT = '1356770869843984'
 OPERATION_ID_DEFAULT = 'OpenzedFinanzas-CC-ES'
-TOKEN_ITEM = 'Token Meta API'
+TOKEN_ITEM = 'Token Meta API - 00 - ANUNCIANTE - Alana Figueiredo - OPENZED SPAIN'
 MAX_ROWS_OUTPUT = 12
 
 

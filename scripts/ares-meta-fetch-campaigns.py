@@ -10,7 +10,7 @@ BASE=Path('/root/mgs-agent/data/ares/meta-ads')
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument('--account-id', required=True)
-    ap.add_argument('--item', default='Token Meta API')
+    ap.add_argument('--item', default='Token Meta API - 00 - ANUNCIANTE - Alana Figueiredo - OPENZED SPAIN')
     ap.add_argument('--limit', type=int, default=100)
     ap.add_argument('--out')
     args=ap.parse_args()

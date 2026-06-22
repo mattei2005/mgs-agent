@@ -6,7 +6,7 @@ from pathlib import Path
 
 BASE = Path('/root/mgs-agent/data/ares/meta-ads')
 GRAPH_VERSION = os.environ.get('ARES_META_GRAPH_VERSION', 'v20.0')
-TOKEN_ITEM_DEFAULT = 'Token Meta API'
+TOKEN_ITEM_DEFAULT = 'Token Meta API - 00 - ANUNCIANTE - Alana Figueiredo - OPENZED SPAIN'
 RATE_LIMIT_CODES = {4, 17, 32, 613, 80004}
 RATE_LIMIT_MESSAGE_PATTERNS = (
     'rate limit',

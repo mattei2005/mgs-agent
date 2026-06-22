@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-21T01:07:59-04:00",
-    "generated_by": "infra-discovery.sh",
-    "last_report_infra": "zeus-honcho-alert-reset-2026-06-21"
+    "updated_at": "2026-06-22T11:39:12-04:00",
+    "generated_by": "zeus-report-infra-surgical-update",
+    "last_report_infra": "ares-meta-api-alana-token-ref-2026-06-22"
   },
   "system_packages": [
     {
@@ -651,8 +651,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-auth-check.py",
-      "size_bytes": 1662,
-      "modified_at": "2026-06-16T00:20:06-04:00"
+      "size_bytes": 1715,
+      "modified_at": "2026-06-22T11:35:44-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-clone-troubleshoot-3alts.py",
@@ -661,13 +661,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-common.py",
-      "size_bytes": 6855,
-      "modified_at": "2026-06-18T15:33:38-04:00"
+      "size_bytes": 6908,
+      "modified_at": "2026-06-22T11:35:41-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
-      "size_bytes": 23615,
-      "modified_at": "2026-06-20T19:40:04-04:00"
+      "size_bytes": 23668,
+      "modified_at": "2026-06-22T11:35:43-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-adset-copy-probe.py",
@@ -691,8 +691,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-fetch-campaigns.py",
-      "size_bytes": 2045,
-      "modified_at": "2026-06-16T00:22:26-04:00"
+      "size_bytes": 2098,
+      "modified_at": "2026-06-22T11:35:44-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
@@ -721,8 +721,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-token-expiry-alert.py",
-      "size_bytes": 4357,
-      "modified_at": "2026-06-17T12:28:32-04:00"
+      "size_bytes": 4410,
+      "modified_at": "2026-06-22T11:35:42-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-promote-review-ready-retry.sh",
@@ -971,8 +971,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-honcho-health.sh",
-      "size_bytes": 7786,
-      "modified_at": "2026-06-21T01:07:01-04:00"
+      "size_bytes": 9826,
+      "modified_at": "2026-06-22T09:39:09-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
@@ -3406,6 +3406,17 @@
   ],
   "data_files": [
     {
+      "path": "/root/mgs-agent/data/ares/meta-ads/accounts/1356770869843984.json",
+      "size_bytes": 1699,
+      "modified_at": "2026-06-22T11:35:45-04:00",
+      "md5": "ecbdeb9270a85f59dc9303f885933824",
+      "agent": "ares",
+      "type": "meta_ads_account_config",
+      "account_id": "1356770869843984",
+      "purpose": "Referência operacional do token Meta API no 1Password para Alana Figueiredo; sem token em plaintext.",
+      "source_report": "ares-meta-api-alana-token-ref-2026-06-22"
+    },
+    {
       "path": "/root/mgs-agent/data/authorized-users.json",
       "size_bytes": 5086,
       "md5": "fe95cbb18ea3bd40fb665add4f45c128",
@@ -3449,9 +3460,9 @@
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
-      "size_bytes": 362,
-      "md5": "cabfc7fb813c4ac9eee7fe76df6c2d40",
-      "modified_at": "2026-06-21T01:07:32-04:00"
+      "size_bytes": 438,
+      "md5": "84e93776e541f209f3c61cdf44525f20",
+      "modified_at": "2026-06-22T09:47:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
