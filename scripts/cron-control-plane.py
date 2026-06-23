@@ -145,6 +145,30 @@ def tail_summary(path: str, max_lines: int = 8) -> str:
     return (interesting[-1] if interesting else out.splitlines()[-1].strip())[:220]
 
 
+def collect_external_system_crons() -> list[dict[str, Any]]:
+    """Known non-root-crontab system cron jobs relevant to MGS operations."""
+    jobs: list[dict[str, Any]] = []
+    monarx = Path('/etc/cron.d/monarx-update')
+    if monarx.exists():
+        for line in monarx.read_text(errors='replace').splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith('#'):
+                continue
+            parts = stripped.split()
+            if len(parts) >= 7 and 'monarx' in stripped:
+                jobs.append({
+                    'source_file': str(monarx),
+                    'schedule': ' '.join(parts[:5]),
+                    'user': parts[5],
+                    'command': ' '.join(parts[6:]),
+                    'owner': 'Host/security infra',
+                    'risk': 'médio: apt update/install externo pode acionar needrestart/systemd',
+                    'description': 'Atualiza Monarx security scanner/protect; janela conhecida terça 04:20 EDT.',
+                    'guardrail': '/etc/needrestart/conf.d/mgs-hermes-gateways.conf exclui Zeus/Atena/Ares/Hera de auto-restart por needrestart.',
+                })
+    return jobs
+
+
 def collect() -> dict[str, Any]:
     jobs = []
     for line in cron_lines():
@@ -160,6 +184,7 @@ def collect() -> dict[str, Any]:
         'source': 'root crontab + script/log stat, read-only',
         'count': len(jobs),
         'jobs': jobs,
+        'external_system_crons': collect_external_system_crons(),
     }
 
 
@@ -204,6 +229,24 @@ def render_markdown(data: dict[str, Any]) -> str:
     high = [j for j in data['jobs'] if str(j['risk']).startswith('alto')]
     medium = [j for j in data['jobs'] if str(j['risk']).startswith('médio')]
 
+    external_details = []
+    for j in data.get('external_system_crons', []):
+        external_details.append(f"### `{j['source_file']}`")
+        external_details.append(f"- **Frequência:** `{j['schedule']}`")
+        external_details.append(f"- **Usuário:** `{j['user']}`")
+        external_details.append(f"- **Owner:** {j['owner']}")
+        external_details.append(f"- **Risco:** {j['risk']}")
+        external_details.append(f"- **Função:** {j['description']}")
+        external_details.append(f"- **Comando:** `{j['command']}`")
+        external_details.append(f"- **Guardrail:** {j['guardrail']}")
+        external_details.append('')
+    external_section = ''
+    if external_details:
+        external_section = f"""
+## Crons externos / sistema
+
+{chr(10).join(external_details)}"""
+
     return f"""# Crons MGS — Control Plane
 
 Gerado em: `{data['generated_at']}`
@@ -221,7 +264,7 @@ Total MGS ativo no root crontab: **{data['count']}**
 - Alto risco: {', '.join('`'+j['script']+'`' for j in high) if high else 'nenhum'}
 - Médio risco: {', '.join('`'+j['script']+'`' for j in medium) if medium else 'nenhum'}
 - Crons sem `flock`: {', '.join('`'+j['script']+'`' for j in data['jobs'] if not j['uses_flock']) or 'nenhum'}
-
+{external_section}
 ## Detalhes por cron
 
 {chr(10).join(details)}

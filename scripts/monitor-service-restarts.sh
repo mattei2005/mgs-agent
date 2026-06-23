@@ -72,6 +72,27 @@ post_alert_payload() {
   return 2
 }
 
+infer_restart_cause() {
+  local svc="$1" current_start="$2" epoch start end window
+  epoch=$(date -d "$current_start" +%s 2>/dev/null || true)
+  if [[ -z "$epoch" ]]; then
+    printf 'Causa não identificada automaticamente: timestamp do start não parseável.'
+    return 0
+  fi
+  start=$(date -d "@$((epoch - 120))" '+%Y-%m-%d %H:%M:%S')
+  end=$(date -d "@$((epoch + 60))" '+%Y-%m-%d %H:%M:%S')
+  window=$(journalctl --since "$start" --until "$end" --no-pager -o short-iso 2>/dev/null | grep -Ei 'monarx|apt-get install|needrestart|systemctl|Stopping .*gateway|Started .*gateway' | head -80 || true)
+  if grep -Eiq 'monarx-agent|monarx-update|apt-get install.*monarx' <<<"$window"; then
+    printf 'Monarx weekly package update (/etc/cron.d/monarx-update) detectado na janela do restart. Classificar como manutenção conhecida se ocorrer terça 04:20 EDT.'
+    return 0
+  fi
+  if grep -Eiq 'needrestart|apt-get|unattended-upgrade|packagekit' <<<"$window"; then
+    printf 'Atualização de pacote/needrestart detectada na janela; validar se era manutenção planejada.'
+    return 0
+  fi
+  printf 'Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.'
+}
+
 SERVICES=("zeus-gateway" "atena-gateway" "ares-gateway" "hera-gateway" "mgs-autocommit")
 THRESHOLD_INFO=3
 THRESHOLD_WARN=5
@@ -234,13 +255,21 @@ PYEOF
   fi
 
   if [[ "${RESTART_CHANGED}" == "1" ]]; then
+    RESTART_CAUSE=$(infer_restart_cause "${SVC}" "${RESTART_CURRENT}")
+    if [[ "${RESTART_CAUSE}" == Monarx* ]]; then
+      RESTART_ACTION="Manutenção conhecida detectada. Validar se ficou restrita à janela esperada; investigar apenas se repetir fora da terça 04:20 EDT ou gerar loop."
+    else
+      RESTART_ACTION="Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
+    fi
     PAYLOAD=$(jq -n \
       --arg svc "${SVC}" \
       --arg prev "${RESTART_PREVIOUS}" \
       --arg curr "${RESTART_CURRENT}" \
-      '{content:"<@344196393512075265> restart de serviço detectado", embeds:[{title:"Service reiniciado detectado", color:3447003, fields:[{name:"Service", value:("`"+$svc+"`"), inline:true}, {name:"Start anterior", value:("`"+$prev+"`"), inline:false}, {name:"Start atual", value:("`"+$curr+"`"), inline:false}, {name:"Ação", value:"Restart limpo detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço.", inline:false}]}]}')
+      --arg cause "${RESTART_CAUSE}" \
+      --arg action "${RESTART_ACTION}" \
+      '{content:"<@344196393512075265> restart de serviço detectado", embeds:[{title:"Service reiniciado detectado", color:3447003, fields:[{name:"Service", value:("`"+$svc+"`"), inline:true}, {name:"Start anterior", value:("`"+$prev+"`"), inline:false}, {name:"Start atual", value:("`"+$curr+"`"), inline:false}, {name:"Causa provável", value:$cause, inline:false}, {name:"Ação", value:$action, inline:false}]}]}')
     if post_alert_payload "$PAYLOAD" "${SVC}:active_enter_changed"; then
-      echo "$(date -Iseconds) ${LOG_PREFIX} RESTART alert enviado para ${SVC}"
+      echo "$(date -Iseconds) ${LOG_PREFIX} RESTART alert enviado para ${SVC} cause=${RESTART_CAUSE}"
     else
       EXIT_CODE=2
       echo "$(date -Iseconds) ${LOG_PREFIX} FAILED_ALERT RESTART para ${SVC}" >&2
