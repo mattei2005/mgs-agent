@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-24T01:20:00-04:00",
+    "updated_at": "2026-06-24T01:38:00-04:00",
     "generated_by": "zeus-report-infra-surgical-update",
-    "last_report_infra": "ares-meta-intraday-heartbeat-2026-06-24"
+    "last_report_infra": "ares-meta-intraday-heartbeat-skill-2026-06-24"
   },
   "system_packages": [
     {
@@ -594,12 +594,13 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-      "size_bytes": 18415,
-      "modified_at": "2026-06-20T21:26:03-04:00",
-      "sha256": "9e85a0d0789be4293e8127fd318b858c0d406bf233de17260e63150a15f467e2",
+      "size_bytes": 20019,
+      "modified_at": "2026-06-24T01:13:25-04:00",
+      "sha256": "5698dcafeb1b366218300193a437ae5899da6b9fbd66a9f9f666a4c251ed0fd5",
+      "versioned_sha256": "5698dcafeb1b366218300193a437ae5899da6b9fbd66a9f9f666a4c251ed0fd5",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-20T21:27:22-04:00",
-      "validation": "runtime/versioned SHA match; HOA header preview OK; linked runner py_compile/hash OK; secret scan OK"
+      "updated_at": "2026-06-24T01:38:00-04:00",
+      "validation": "runtime/versioned SHA match; heartbeat policy documented; wrapper_rc=0; audit JSON validated; secret scan found only 1Password item references, no literal token."
     },
     {
       "profile": "ares",
@@ -1661,7 +1662,13 @@
       {
         "name": "meta-ads-intraday-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "versioned_skill_md": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
+        "sha256": "5698dcafeb1b366218300193a437ae5899da6b9fbd66a9f9f666a4c251ed0fd5",
+        "versioned_sha256": "5698dcafeb1b366218300193a437ae5899da6b9fbd66a9f9f666a4c251ed0fd5",
+        "modified_at": "2026-06-24T01:13:25-04:00",
+        "updated_at": "2026-06-24T01:38:00-04:00",
+        "validation": "heartbeat policy documented; runtime/versioned SHA match"
       },
       {
         "name": "meta-openzedfinanzas-replacement-clone",
