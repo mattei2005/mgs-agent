@@ -14,6 +14,7 @@ import argparse
 import datetime as dt
 import importlib.util
 import json
+import os
 import re
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -105,6 +106,30 @@ def display_campaign_name(name: str | None) -> str:
         suffix = re.sub(r'(\s-\s)(\d{1,2})$', lambda x: f'{x.group(1)}{int(x.group(2)):03d}', suffix)
         return f'{m.group(1).strip()} - {m.group(2)} - {m.group(3)} - {suffix}'
     return re.sub(r'(\s-\s)(\d{1,2})$', lambda m: f'{m.group(1)}{int(m.group(2)):03d}', text)
+
+
+def compact_campaign_name(name: str | None) -> str:
+    """Mobile-first label for Discord cron tables; raw name stays in audit."""
+    display = display_campaign_name(name)
+    parts = [p.strip() for p in display.split(' - ')]
+    if len(parts) >= 4:
+        first = parts[0].split()[0] if parts[0] else parts[0]
+        return f'{first} {parts[1]} {parts[2]} {parts[-1]}'
+    return display[:22]
+
+
+def compact_rec_id(rec_id: str | None) -> str:
+    m = re.search(r'(\d{3})$', str(rec_id or ''))
+    return f'REC{m.group(1)}' if m else str(rec_id or '')[:6]
+
+
+def compact_reason(reason: str | None) -> str:
+    text = str(reason or '')
+    rule = re.search(r'\b(R\d)\b', text)
+    rule_text = rule.group(1) if rule else ''
+    if text.lower().startswith('learning'):
+        return f'Learning<3d; {rule_text}'.strip('; ')
+    return text[:24]
 
 
 def country_vertical_from_name(name: str | None, op_cfg: dict) -> str:
@@ -332,6 +357,81 @@ def output_table(title: str, rows: list[dict], columns: list[tuple[str, str]], p
     return '\n'.join(lines)
 
 
+def heartbeat_state_path(operation_id: str, account_id: str) -> Path:
+    override = os.environ.get('ARES_META_INTRADAY_HEARTBEAT_STATE')
+    if override:
+        return Path(override)
+    safe_op = re.sub(r'[^A-Za-z0-9_.-]+', '-', operation_id)
+    safe_account = re.sub(r'[^A-Za-z0-9_.-]+', '-', account_id)
+    return BASE / 'state' / f'intraday-heartbeat-{safe_op}-{safe_account}.json'
+
+
+def heartbeat_due(operation_id: str, account_id: str, now: dt.datetime) -> tuple[bool, float]:
+    """Return whether a no-action heartbeat should be emitted.
+
+    Disabled by default. The cron wrapper enables it with
+    ARES_META_INTRADAY_HEARTBEAT_HOURS=3 so ad-hoc/manual runner calls keep the
+    historical silent-on-clean behavior unless explicitly testing heartbeat.
+    """
+    raw = os.environ.get('ARES_META_INTRADAY_HEARTBEAT_HOURS', '').strip()
+    if not raw:
+        return False, 0.0
+    try:
+        hours = float(raw)
+    except ValueError:
+        return False, 0.0
+    if hours <= 0:
+        return False, hours
+    path = heartbeat_state_path(operation_id, account_id)
+    try:
+        state = json.loads(path.read_text()) if path.exists() else {}
+        last_raw = state.get('last_heartbeat_utc')
+        if last_raw:
+            last = dt.datetime.fromisoformat(str(last_raw))
+            if last.tzinfo is None:
+                last = last.replace(tzinfo=dt.UTC)
+            elapsed_hours = (now - last.astimezone(dt.UTC)).total_seconds() / 3600
+            return elapsed_hours >= hours, hours
+    except Exception:
+        # Fail open: if state is corrupt/unreadable, emit a heartbeat and repair
+        # the file instead of silently removing the signal of life.
+        return True, hours
+    return True, hours
+
+
+def record_heartbeat(operation_id: str, account_id: str, now: dt.datetime, audit: Path) -> None:
+    path = heartbeat_state_path(operation_id, account_id)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    state = {
+        'last_heartbeat_utc': now.astimezone(dt.UTC).isoformat(),
+        'operation_id': operation_id,
+        'account_id': account_id,
+        'last_audit': str(audit),
+    }
+    tmp = path.with_suffix(path.suffix + '.tmp')
+    tmp.write_text(json.dumps(state, indent=2, ensure_ascii=False) + '\n')
+    tmp.replace(path)
+
+
+def maybe_output_intraday_heartbeat(event: dict, account_name: str, tz: ZoneInfo, audit: Path) -> None:
+    now = utc_now()
+    due, hours = heartbeat_due(str(event.get('operation_id')), str(event.get('account_id')), now)
+    if not due:
+        return
+    summary = event.get('summary') or {}
+    row = {
+        'status': 'OK',
+        'campaigns': summary.get('campaigns_seen', 0),
+        'insights': summary.get('insight_rows', 0),
+        'candidates': summary.get('candidate_count', 0),
+        'errors': len(event.get('errors') or []),
+        'mode': 'dry-run/read-only',
+    }
+    prefix = f'<@344196393512075265> heartbeat intraday: cron vivo; sem candidato R1-R5 nos últimos {hours:g}h.'
+    print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — heartbeat'), [row], [('status','Status'),('campaigns','Campanhas'),('insights','Insights'),('candidates','Candidatos'),('errors','Erros'),('mode','Modo')], prefix=prefix))
+    record_heartbeat(str(event.get('operation_id')), str(event.get('account_id')), now, audit)
+
+
 def audit_write(kind: str, event: dict) -> Path:
     out_dir = BASE / 'audit' / kind
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -428,9 +528,14 @@ def run_intraday(args) -> int:
     if event['candidates']:
         rows = event['candidates']
         for r in rows:
+            r['rec_short'] = compact_rec_id(r.get('rec_id'))
+            r['campaign_short'] = compact_campaign_name(r.get('campaign_display_name') or r.get('campaign_name'))
+            r['reason_short'] = compact_reason(r.get('reason'))
             r['CPMO'] = '' if r['CPMO'] is None else r['CPMO']
-        prefix = '<@344196393512075265> dry-run intraday: análise real sem write. Campanhas em learning (<3 dias) são informativas: não pausar/reativar. Responda `REC... feito`, `ignorar` ou `segurar` só quando a ação for aplicável.'
-        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — decisões simuladas'), rows, [('rec_id','ID REC'),('campaign_display_name','Nome da campanha'),('pg_id','PG ID'),('start_date','Início'),('spend','Spend'),('MO','MO'),('CPMO','CPMO'),('simulated_action','Ação sugerida'),('reason','Motivo'),('status','Status')], prefix=prefix))
+        prefix = '<@344196393512075265> dry-run intraday: análise real sem write. Learning <3d = informativo; sem pausar/reativar.'
+        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — decisões simuladas'), rows, [('rec_short','REC'),('campaign_short','Campanha'),('pg_id','PG'),('start_date','Início'),('spend','Spend'),('MO','MO'),('CPMO','CPMO'),('simulated_action','Ação'),('reason_short','Motivo'),('status','Status')], prefix=prefix))
+    else:
+        maybe_output_intraday_heartbeat(event, account_name, tz, audit)
     return 0
 
 
@@ -499,8 +604,13 @@ def run_reactivate_all(args) -> int:
         print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — ERRO'), [{'erro': event['errors'][0], 'audit': str(audit)}], [('erro','Erro'),('audit','Audit')], prefix='<@344196393512075265> erro no cron reativar-todas Meta.'))
         return 0
     if event['candidates']:
-        prefix = '<@344196393512075265> dry-run reativar-todas: ações simuladas. Responda na thread com `REC... feito`, `ignorar` ou `segurar`. Nenhum write foi executado.'
-        print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — decisões simuladas'), event['candidates'], [('rec_id','ID REC'),('campaign_display_name','Nome da campanha'),('pg_id','PG ID'),('start_date','Início'),('simulated_action','Ação sugerida'),('reason','Motivo'),('status','Status')], prefix=prefix))
+        rows = event['candidates']
+        for r in rows:
+            r['rec_short'] = compact_rec_id(r.get('rec_id'))
+            r['campaign_short'] = compact_campaign_name(r.get('campaign_display_name') or r.get('campaign_name'))
+            r['reason_short'] = compact_reason(r.get('reason'))
+        prefix = '<@344196393512075265> dry-run reativar-todas: ações simuladas; nenhum write executado.'
+        print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — decisões simuladas'), rows, [('rec_short','REC'),('campaign_short','Campanha'),('pg_id','PG'),('start_date','Início'),('simulated_action','Ação'),('reason_short','Motivo'),('status','Status')], prefix=prefix))
     return 0
 
 
