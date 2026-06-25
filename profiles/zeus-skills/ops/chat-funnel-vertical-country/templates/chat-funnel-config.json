@@ -1,0 +1,53 @@
+{
+  "id": "EMP-BR-01",
+  "vertical": "emp",
+  "country": "br",
+  "language": "pt-BR",
+  "route": "/chat/emp/br1",
+  "title": "Chatbot Empréstimo Pessoal",
+  "brand": "MGS",
+  "theme": "whatsapp",
+  "mode": "cards",
+  "rewarded_enabled": true,
+  "utm_passthrough": true,
+  "tags": ["br", "emp", "rec"],
+  "persona": {
+    "names": ["Maria", "João", "Juliana", "José", "Fernanda", "Carlos", "Olivia", "Lucas", "Camilla", "Pedro"],
+    "female_names": ["Maria", "Juliana", "Fernanda", "Olivia", "Camilla"],
+    "male_names": ["João", "José", "Carlos", "Lucas", "Pedro"],
+    "female_photos": [],
+    "male_photos": [],
+    "role": "Consultor de Empréstimo",
+    "status": "🟢 online agora"
+  },
+  "gate": {
+    "enabled": true,
+    "questions": [
+      {
+        "text": "💰 Qual valor você precisa?",
+        "answers": [
+          {"label": "R$ 500 a R$ 3.000", "value": "500-3000"},
+          {"label": "R$ 3.000 a R$ 10.000", "value": "3000-10000"},
+          {"label": "Acima de R$ 10.000", "value": "10000-plus"}
+        ]
+      }
+    ],
+    "loading_text": "🔍 Buscando a melhor oferta para você...",
+    "final_icon": "💰",
+    "final_title": "Oferta encontrada!",
+    "final_subtitle": "Um consultor foi identificado para te atender agora.",
+    "cta_label": "VER OFERTAS →",
+    "footer_note": "✅ Análise gratuita e sem compromisso"
+  },
+  "chat": {
+    "intro": [
+      "Olá! Eu sou {botName}. 💰",
+      "Sou consultor de empréstimo pessoal e estou aqui para te ajudar a encontrar a melhor opção para o seu perfil.",
+      "Vamos encontrar a oferta ideal para você?"
+    ],
+    "start_answers": ["✅ Vamos lá!", "👀 Quero conhecer as opções"],
+    "questions": [],
+    "pre_offer_messages": []
+  },
+  "offers": []
+}

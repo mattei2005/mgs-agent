@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-25T08:19:54-04:00",
+    "updated_at": "2026-06-25T13:39:19-04:00",
     "generated_by": "zeus-report-infra-surgical-update",
-    "last_report_infra": "ares-hoa-manager-report-cron-2026-06-25"
+    "last_report_infra": "zeus-chat-funnel-vertical-country-skill-2026-06-25"
   },
   "system_packages": [
     {
@@ -3561,6 +3561,58 @@
         "name": "yuanbao",
         "category": "",
         "skill_md": "/root/.hermes/profiles/zeus/skills/yuanbao/SKILL.md"
+      },
+      {
+        "name": "chat-funnel-vertical-country",
+        "category": "ops",
+        "type": "profile_skill",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/chat-funnel-vertical-country/SKILL.md",
+        "versioned_skill_md": "/root/mgs-agent/profiles/zeus-skills/ops/chat-funnel-vertical-country/SKILL.md",
+        "sha256": "3a53723fc37b04e635e0543fb7e99a228b8d9ed5eb2986752bfceaacc97e22c2",
+        "versioned_sha256": "3a53723fc37b04e635e0543fb7e99a228b8d9ed5eb2986752bfceaacc97e22c2",
+        "runtime_versioned_sha_match": true,
+        "files": [
+          {
+            "relative_path": "SKILL.md",
+            "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/chat-funnel-vertical-country/SKILL.md",
+            "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/chat-funnel-vertical-country/SKILL.md",
+            "size_bytes": 10705,
+            "modified_at": "2026-06-25T13:34:40.917642-04:00",
+            "sha256": "3a53723fc37b04e635e0543fb7e99a228b8d9ed5eb2986752bfceaacc97e22c2",
+            "versioned_sha256": "3a53723fc37b04e635e0543fb7e99a228b8d9ed5eb2986752bfceaacc97e22c2"
+          },
+          {
+            "relative_path": "references/config-schema.md",
+            "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/chat-funnel-vertical-country/references/config-schema.md",
+            "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/chat-funnel-vertical-country/references/config-schema.md",
+            "size_bytes": 4682,
+            "modified_at": "2026-06-25T13:35:50.320756-04:00",
+            "sha256": "a44a38fd474054951f7537993f4381c30daca90fb69d9ef0605e1cfca6abcb32",
+            "versioned_sha256": "a44a38fd474054951f7537993f4381c30daca90fb69d9ef0605e1cfca6abcb32"
+          },
+          {
+            "relative_path": "references/examples.md",
+            "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/chat-funnel-vertical-country/references/examples.md",
+            "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/chat-funnel-vertical-country/references/examples.md",
+            "size_bytes": 4414,
+            "modified_at": "2026-06-25T13:35:49.313754-04:00",
+            "sha256": "7796a6b9b6409c29802fade4edffd8b1cc36fd21d9e339ca942853ff2e13fe51",
+            "versioned_sha256": "7796a6b9b6409c29802fade4edffd8b1cc36fd21d9e339ca942853ff2e13fe51"
+          },
+          {
+            "relative_path": "templates/chat-funnel-config.json",
+            "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/chat-funnel-vertical-country/templates/chat-funnel-config.json",
+            "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/chat-funnel-vertical-country/templates/chat-funnel-config.json",
+            "size_bytes": 1759,
+            "modified_at": "2026-06-25T13:35:51.329757-04:00",
+            "sha256": "9356d2f6a045761945add21c770988817b069f13567c7c94c446cf138647c40a",
+            "versioned_sha256": "9356d2f6a045761945add21c770988817b069f13567c7c94c446cf138647c40a"
+          }
+        ],
+        "description": "Padrão operacional para criar/adaptar/auditar chats por vertical + país (EMP-BR, CC-BR, CAR-BR etc.) com rewarded/interstitial, UTMs, ofertas e QA.",
+        "validation": "skill_view OK; frontmatter YAML OK; template JSON valid; linked references non-empty; secret scan returned 0 matches; runtime/versioned SHA match.",
+        "source_report": "REPORT-INFRA Zeus chat-funnel-vertical-country skill 2026-06-25",
+        "updated_at": "2026-06-25T13:39:19-04:00"
       }
     ]
   },
