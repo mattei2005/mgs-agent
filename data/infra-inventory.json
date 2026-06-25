@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-24T01:38:00-04:00",
+    "updated_at": "2026-06-25T08:19:54-04:00",
     "generated_by": "zeus-report-infra-surgical-update",
-    "last_report_infra": "ares-meta-intraday-heartbeat-skill-2026-06-24"
+    "last_report_infra": "ares-hoa-manager-report-cron-2026-06-25"
   },
   "system_packages": [
     {
@@ -735,6 +735,72 @@
       "purpose": "Dry-run/read-only Meta intraday monitor for R1-R5 candidates; now sends a capped 3h heartbeat on clean no-candidate runs.",
       "source_report": "REPORT-INFRA Ares intraday heartbeat 2026-06-24",
       "updated_at": "2026-06-24T01:20:00-04:00"
+    },
+    {
+      "id": "e84a8db81fb3",
+      "profile": "ares",
+      "name": "Ares Meta HOA manager report - Openzed ES",
+      "type": "hermes_cron",
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 2,6,9,12,16 * * *",
+        "display": "0 2,6,9,12,16 * * *"
+      },
+      "schedule_display": "0 2,6,9,12,16 * * *",
+      "script": "ares-meta-hoa-manager.sh",
+      "no_agent": true,
+      "deliver": "local",
+      "enabled": true,
+      "state": "scheduled",
+      "next_run_at": "2026-06-25T09:00:00-04:00",
+      "repeat": {
+        "times": null,
+        "completed": 0
+      },
+      "created_at": "2026-06-25T08:17:45.597897-04:00",
+      "origin": {
+        "platform": "discord",
+        "chat_id": "1516267365934043236",
+        "chat_name": "MGS Digital Corp / #ares / Config automacao agentes ares openzed espanha",
+        "thread_id": "1516267365934043236"
+      },
+      "enabled_toolsets": [
+        "terminal"
+      ],
+      "profile_cron_path": "/root/.hermes/profiles/ares/cron/jobs.json",
+      "profile_cron_sha256": "e2f49e613064461f64ed54107745f80ce97cccbd5a91b518b3b8147e3f4be804",
+      "profile_cron_size_bytes": 7768,
+      "profile_cron_modified_at": "2026-06-25T08:17:45.597558-04:00",
+      "profile_script_path": "/root/.hermes/profiles/ares/scripts/ares-meta-hoa-manager.sh",
+      "profile_script_sha256": "8958b47417e7993f82a3a1bd1329f4d86e28324213a90317865a5bf8cd62612b",
+      "profile_script_size_bytes": 463,
+      "profile_script_modified_at": "2026-06-22T12:09:12.451482-04:00",
+      "repo_scripts": [
+        {
+          "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
+          "sha256": "fc29a2002f1a8c5b8006601706dbc324ea96bdcfa0269fec2d51de14a5db5f88"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/ares-discord-post-with-thread.py",
+          "sha256": "efaa7d15c6cd0f235103032b320e071280db2570d9f90f0aa408b365a2c48714"
+        }
+      ],
+      "fixed_discord_route": {
+        "channel_id": "1516887105543077949",
+        "thread_id": "1518648967360024757",
+        "thread_name": "OpenzedFinanzas ES-CC-ES - 06-20 - HOA",
+        "thread_get_status": 200,
+        "parent_ok": true,
+        "archived": false,
+        "locked": false
+      },
+      "operation_id": "OpenzedFinanzas-CC-ES",
+      "account_id": "1356770869843984",
+      "account_tz": "Europe/Madrid",
+      "purpose": "Recreated Ares HOA manager report cron for OpenzedFinanzas-CC-ES checkpoints, posting to fixed HOA thread 1518648967360024757 with local scheduler delivery only.",
+      "validation": "jobs.json json.tool OK; cron id/e84a8db81fb3 enabled scheduled next_run_at 2026-06-25T09:00:00-04:00; wrapper bash -n OK; repo scripts py_compile OK; Discord GET thread 200 parent_ok archived=false locked=false.",
+      "source_report": "REPORT-INFRA Ares HOA manager report cron 2026-06-25",
+      "updated_at": "2026-06-25T08:19:54-04:00"
     }
   ],
   "scripts": [
