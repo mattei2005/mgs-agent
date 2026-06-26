@@ -18,6 +18,7 @@ PRECHECK_ONLY="${PRECHECK_ONLY:-0}"
 NO_UPDATE="${NO_UPDATE:-0}"
 RESTART_GATEWAYS="${RESTART_GATEWAYS:-0}"
 ALLOW_PATCH_DRIFT="${ALLOW_PATCH_DRIFT:-0}"
+RESTORE_LOCAL_DIFFS="${RESTORE_LOCAL_DIFFS:-1}"
 GATEWAY_SERVICES="${GATEWAY_SERVICES:-zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service}"
 # Discord report delivery is opt-in. Do not hardcode a thread here: updates may be
 # launched from any active Rodolfo/Zeus thread, and accidental delivery to an old
@@ -61,6 +62,7 @@ Report summary:
     Patch guard       $REPORT_DIR/patch-guard.log
     Failure tail      $tail_file
     Restart gateways  $RESTART_GATEWAYS
+    Restore local diff $RESTORE_LOCAL_DIFFS
     Allow patch drift $ALLOW_PATCH_DRIFT
     Precheck only      $PRECHECK_ONLY
 
@@ -283,15 +285,7 @@ check_patches_against_upstream() {
   local rc=0
   {
     local canonical_patches=(
-      "discord-deterministic-thread-rename-auto-add-users.patch"
-      "planned-restart-auto-resume-active-sessions.patch"
-      "restart-recovery-checkpoint-idempotent.patch"
-      "discord-post-response-thread-title-rename.patch"
-      "discord-new-thread-ai-title-once.patch"
-      "discord-thread-title-deduplicate-safe-autorename.patch"
-      "discord-bot-gateway-lifecycle-loop-guard.patch"
-      "discord-report-infra-no-auto-thread.patch"
-      "discord-thread-title-author-suffix.patch"
+      "mgs-runtime-customizations-2026-06-26.patch"
     )
     for name in "${canonical_patches[@]}"; do
       patch="$PATCH_DIR/$name"
@@ -366,7 +360,10 @@ run_update() {
 
 
 restore_saved_local_diffs() {
-  if [[ "$PRECHECK_ONLY" == "1" || "$NO_UPDATE" == "1" ]]; then
+  if [[ "$PRECHECK_ONLY" == "1" || "$NO_UPDATE" == "1" || "$RESTORE_LOCAL_DIFFS" == "0" ]]; then
+    if [[ "$RESTORE_LOCAL_DIFFS" == "0" ]]; then
+      log "Skipping restore of saved local diffs because RESTORE_LOCAL_DIFFS=0; canonical patch guard will apply validated MGS surface"
+    fi
     return 0
   fi
   log "Restoring saved pre-update local patch surface"
@@ -628,6 +625,7 @@ Report summary:
     Backup            ${backup_file:-missing}
     Patch guard       $REPORT_DIR/patch-guard.log
     Restart gateways  $RESTART_GATEWAYS
+    Restore local diff $RESTORE_LOCAL_DIFFS
     Allow patch drift $ALLOW_PATCH_DRIFT
     Precheck only      $PRECHECK_ONLY
 
@@ -663,7 +661,7 @@ main() {
   require_path "$ENSURE_SCRIPT"
   log "START MGS controlled Hermes update"
   log "REPORT_DIR=$REPORT_DIR"
-  log "PRECHECK_ONLY=$PRECHECK_ONLY NO_UPDATE=$NO_UPDATE RESTART_GATEWAYS=$RESTART_GATEWAYS ALLOW_PATCH_DRIFT=$ALLOW_PATCH_DRIFT"
+  log "PRECHECK_ONLY=$PRECHECK_ONLY NO_UPDATE=$NO_UPDATE RESTART_GATEWAYS=$RESTART_GATEWAYS ALLOW_PATCH_DRIFT=$ALLOW_PATCH_DRIFT RESTORE_LOCAL_DIFFS=$RESTORE_LOCAL_DIFFS"
   profile_backup
   snapshot_pre_state
   snapshot_profiles_sanitized pre
@@ -671,9 +669,12 @@ main() {
   check_patches_against_upstream || patch_check_rc=$?
   local_diff_check_rc=0
   check_local_diff_against_upstream || local_diff_check_rc=$?
-  if [[ "$local_diff_check_rc" != 0 && "$PRECHECK_ONLY" != "1" ]]; then
-    log "FAIL-CLOSED: live local diff would not restore cleanly on origin/main. Manual port required before update."
+  if [[ "$local_diff_check_rc" != 0 && "$PRECHECK_ONLY" != "1" && "$RESTORE_LOCAL_DIFFS" != "0" ]]; then
+    log "FAIL-CLOSED: live local diff would not restore cleanly on origin/main. Manual port required before update, or run with RESTORE_LOCAL_DIFFS=0 after validating a canonical port patch."
     false
+  fi
+  if [[ "$local_diff_check_rc" != 0 && "$PRECHECK_ONLY" != "1" && "$RESTORE_LOCAL_DIFFS" == "0" ]]; then
+    log "Local diff drift accepted because RESTORE_LOCAL_DIFFS=0; canonical patch guard must restore validated MGS surface post-update."
   fi
   if [[ "$patch_check_rc" != 0 && "$PRECHECK_ONLY" != "1" && "$ALLOW_PATCH_DRIFT" != "1" ]]; then
     log "FAIL-CLOSED: canonical patch drift detected before update. Set ALLOW_PATCH_DRIFT=1 only after manual port/review."

@@ -36,10 +36,13 @@ apply_patch_if_needed() {
   # known invariant-positive states as applied so the watchdog remains useful
   # instead of false-failing forever.
   case "$name" in
-    discord-deterministic-thread-rename-auto-add-users.patch)
+    mgs-runtime-customizations-*.patch|discord-deterministic-thread-rename-auto-add-users.patch)
       if grep -q "def _auto_thread_name_from_message" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "DISCORD_THREAD_AUTO_ADD_USERS" "$REPO/plugins/platforms/discord/adapter.py" \
-        && grep -q "Auto-thread member sync" "$REPO/plugins/platforms/discord/adapter.py"; then
+        && grep -q "Auto-thread member sync" "$REPO/plugins/platforms/discord/adapter.py" \
+        && grep -q "_append_thread_author_suffix" "$REPO/plugins/platforms/discord/adapter.py" \
+        && grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run.py" \
+        && grep -q "AUTO_ATTACH_LOCAL_FILES_ENV" "$REPO/gateway/platforms/base.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
@@ -108,6 +111,7 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 # This applies the complete MGS runtime customization surface to a clean
 # upstream checkout first; legacy per-feature patches below then act as
 # invariant checks/backward-compatible fallback.
+apply_patch_if_needed "mgs-runtime-customizations-2026-06-26.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-06-20.patch"
 
 apply_patch_if_needed "discord-deterministic-thread-rename-auto-add-users.patch"

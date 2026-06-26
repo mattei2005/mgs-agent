@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-25T13:39:19-04:00",
+    "updated_at": "2026-06-26T02:24:00-04:00",
     "generated_by": "zeus-report-infra-surgical-update",
-    "last_report_infra": "zeus-chat-funnel-vertical-country-skill-2026-06-25"
+    "last_report_infra": "zeus-hermes-safe-update-port-2026-06-26"
   },
   "system_packages": [
     {
@@ -462,6 +462,20 @@
       "validation": "bash -n OK; wrapper_rc=0; stdout_bytes=0; stderr_bytes=0 on clean heartbeat-gated run.",
       "source_report": "REPORT-INFRA Ares intraday heartbeat 2026-06-24",
       "updated_at": "2026-06-24T01:20:00-04:00"
+    },
+    {
+      "id": "hermes-mgs-runtime-customizations-2026-06-26",
+      "agent": "zeus",
+      "type": "hermes_patch",
+      "path": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-06-26.patch",
+      "size_bytes": 71320,
+      "modified_at": "2026-06-26T02:14:30-04:00",
+      "sha256": "2c7ad578f38b3ea312ef63a0805b9bf747ec35823d4675b406063c570f720848",
+      "purpose": "Canonical MGS runtime customization patch ported against Hermes origin/main before controlled update.",
+      "validation": "sha256 verified; git apply --check OK on Hermes origin/main 0f81b0d45; patch apply OK; py_compile OK for gateway/run.py, gateway/platforms/base.py, plugins/platforms/discord/adapter.py, tools/discord_tool.py; post-port precheck report exists.",
+      "source_report": "REPORT-INFRA Zeus Hermes safe update patch port 2026-06-26",
+      "updated_at": "2026-06-26T02:24:00-04:00",
+      "git_tracked": true
     }
   ],
   "profile_skill_references": [
@@ -1032,8 +1046,16 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
-      "size_bytes": 10488,
-      "modified_at": "2026-06-20T19:51:12-04:00"
+      "size_bytes": 10856,
+      "modified_at": "2026-06-26T02:14:46-04:00",
+      "sha256": "04e31fc5a310a8a8ab668a8e90ef35e10d448e99893b31a360fbeb96f1828304",
+      "agent": "zeus",
+      "type": "repo_script",
+      "purpose": "Canonical guard for MGS Hermes runtime patches, now using consolidated 2026-06-26 patch.",
+      "validation": "bash -n OK; consolidated patch applies cleanly to Hermes origin/main; patched runtime py_compile OK in temp worktree.",
+      "source_report": "REPORT-INFRA Zeus Hermes safe update patch port 2026-06-26",
+      "updated_at": "2026-06-26T02:24:00-04:00",
+      "git_tracked": true
     },
     {
       "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
@@ -1302,8 +1324,16 @@
     },
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
-      "size_bytes": 29730,
-      "modified_at": "2026-06-17T13:13:21-04:00"
+      "size_bytes": 30043,
+      "modified_at": "2026-06-26T02:17:12-04:00",
+      "sha256": "b75ee59d5d1080d1d5e3c08e9848234b0b875cc2672247d27e1bce60b5af42db",
+      "agent": "zeus",
+      "type": "repo_script",
+      "purpose": "Controlled Hermes update runner with RESTORE_LOCAL_DIFFS=0 mode for validated canonical port patch.",
+      "validation": "bash -n OK; JSON inventory OK; RESTORE_LOCAL_DIFFS=0 path present; precheck evidence dir post-port-precheck-20260626-021723 present.",
+      "source_report": "REPORT-INFRA Zeus Hermes safe update patch port 2026-06-26",
+      "updated_at": "2026-06-26T02:24:00-04:00",
+      "git_tracked": true
     },
     {
       "path": "/root/mgs-agent/scripts/run-openhands-atena.sh",
