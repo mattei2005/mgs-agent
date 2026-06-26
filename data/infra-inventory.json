@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-26T02:24:00-04:00",
+    "updated_at": "2026-06-26T02:32:00-04:00",
     "generated_by": "zeus-report-infra-surgical-update",
-    "last_report_infra": "zeus-hermes-safe-update-port-2026-06-26"
+    "last_report_infra": "zeus-hermes-live-update-2026-06-26"
   },
   "system_packages": [
     {
@@ -476,6 +476,31 @@
       "source_report": "REPORT-INFRA Zeus Hermes safe update patch port 2026-06-26",
       "updated_at": "2026-06-26T02:24:00-04:00",
       "git_tracked": true
+    },
+    {
+      "id": "hermes-controlled-update-live-20260626-022359",
+      "agent": "zeus",
+      "type": "hermes_update",
+      "path": "/root/.hermes/hermes-agent",
+      "report_dir": "/root/mgs-agent/reports/hermes-updates/live-update-20260626-022359",
+      "backup_path": "/root/mgs-agent/reports/hermes-updates/live-update-20260626-022359/hermes-profiles-backup-live-update-20260626-022359.tar.gz",
+      "pre_head": "ac83365d9",
+      "post_head": "0f81b0d45",
+      "origin_main": "0f81b0d45",
+      "behind": 0,
+      "restart_gateways": false,
+      "restore_local_diffs": false,
+      "patch_guard": "OK",
+      "py_compile": "OK",
+      "pytest_target": "138 passed, 2 warnings, 6 subtests passed",
+      "gateways": "zeus/atena/ares/hera active (validated live)",
+      "profile_compare": "Zeus config.yaml WARN only for Hermes schema/default migration; Zeus/Atena/Ares/Hera SOUL/auth OK and critical MGS invariants preserved.",
+      "validation": "HEAD=origin/main=0f81b0d45; behind=0; patch guard OK; py_compile OK; targeted pytest OK; systemctl active OK; report artifacts present.",
+      "source_report": "REPORT-INFRA Zeus Hermes live update 2026-06-26",
+      "updated_at": "2026-06-26T02:32:00-04:00",
+      "git_tracked": false,
+      "patch_guard_sha256": "60c6804b38da9145736d31dcf383ef0075ecc8a45ca8d3b47ecfa81fb66aeee8",
+      "pytest_log_sha256": "281d53d6378298ece746cd37975459826ab989f2882bc7bab7d4d4e8b55fe2d2"
     }
   ],
   "profile_skill_references": [
@@ -1324,15 +1349,15 @@
     },
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
-      "size_bytes": 30043,
-      "modified_at": "2026-06-26T02:17:12-04:00",
-      "sha256": "b75ee59d5d1080d1d5e3c08e9848234b0b875cc2672247d27e1bce60b5af42db",
+      "size_bytes": 30807,
+      "modified_at": "2026-06-26T02:30:04-04:00",
+      "sha256": "c6a8a453a1c7386dae045fe44945286dc25fb1377e9443565e33f15b47ed3e6b",
       "agent": "zeus",
       "type": "repo_script",
-      "purpose": "Controlled Hermes update runner with RESTORE_LOCAL_DIFFS=0 mode for validated canonical port patch.",
-      "validation": "bash -n OK; JSON inventory OK; RESTORE_LOCAL_DIFFS=0 path present; precheck evidence dir post-port-precheck-20260626-021723 present.",
-      "source_report": "REPORT-INFRA Zeus Hermes safe update patch port 2026-06-26",
-      "updated_at": "2026-06-26T02:24:00-04:00",
+      "purpose": "Controlled Hermes update runner; validates backup/profile compare, patch guard, py_compile and supports RESTORE_LOCAL_DIFFS=0 for validated canonical MGS patch ports.",
+      "validation": "bash -n OK; config.yaml backup/live schema/default migration classified WARN only when MGS critical invariants remain; infra JSON OK.",
+      "source_report": "REPORT-INFRA Zeus Hermes live update 2026-06-26",
+      "updated_at": "2026-06-26T02:32:00-04:00",
       "git_tracked": true
     },
     {

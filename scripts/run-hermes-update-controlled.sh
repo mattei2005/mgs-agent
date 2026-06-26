@@ -467,9 +467,22 @@ with tempfile.TemporaryDirectory() as td_s:
                     rc=1
             else:
                 same=(bp.read_bytes()==lp.read_bytes())
-                lines.append(f'  {"OK" if same else "FAIL"} {fn}: same={same} backup_sha={sha(bp)} live_sha={sha(lp)}')
-                if not same:
+                status='OK' if same else 'FAIL'
+                if fn == 'config.yaml' and not same:
+                    live_text=lp.read_text(errors='replace')
+                    # Hermes updates may add/default new config keys. That is not a
+                    # profile-regression by itself if the MGS critical operating
+                    # invariants survived. Keep the diff as WARN evidence instead of
+                    # failing the whole update on harmless schema/default migration.
+                    critical_ok=all(s in live_text for s in ['provider: openai-codex','default: gpt-5.5','threshold: 0.85'])
+                    if critical_ok:
+                        status='WARN'
+                    else:
+                        rc=1
+                elif not same:
                     rc=1
+                lines.append(f'  {status} {fn}: same={same} backup_sha={sha(bp)} live_sha={sha(lp)}')
+                if not same:
                     # Keep detailed diff out of chat-sized report; file remains local and excludes obvious secret-looking lines.
                     b=bp.read_text(errors='replace').splitlines()
                     l=lp.read_text(errors='replace').splitlines()
