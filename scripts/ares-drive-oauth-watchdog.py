@@ -20,6 +20,8 @@ from typing import Any
 TOKEN_FILE = Path(os.environ.get("ARES_DRIVE_OAUTH_CLIENT_TOKEN_FILE", "/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json"))
 STATE_FILE = Path(os.environ.get("ARES_DRIVE_OAUTH_WATCHDOG_STATE", "/root/mgs-agent/data/ares/drive-oauth-watchdog-state.json"))
 REMIND_AFTER_SECONDS = int(os.environ.get("ARES_DRIVE_OAUTH_WATCHDOG_REMIND_SECONDS", str(6 * 3600)))
+OAUTH_SCOPE = os.environ.get("ARES_DRIVE_OAUTH_SCOPE", "https://www.googleapis.com/auth/drive")
+OAUTH_REDIRECT_URI = os.environ.get("ARES_DRIVE_OAUTH_REDIRECT_URI", "http://localhost:53682/")
 ZEUS_MENTION = "<@1496296175014252634>"
 RODOLFO_MENTION = "<@344196393512075265>"
 
@@ -40,6 +42,18 @@ def save_json(path: Path, data: Any) -> None:
     tmp = path.with_suffix(path.suffix + ".tmp")
     tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     os.replace(tmp, path)
+
+
+def auth_url(client_id: str) -> str:
+    params = {
+        "client_id": client_id,
+        "redirect_uri": OAUTH_REDIRECT_URI,
+        "response_type": "code",
+        "scope": OAUTH_SCOPE,
+        "access_type": "offline",
+        "prompt": "consent",
+    }
+    return "https://accounts.google.com/o/oauth2/v2/auth?" + urllib.parse.urlencode(params)
 
 
 def post_form(url: str, data: dict[str, str]) -> tuple[bool, int | None, dict[str, Any]]:
@@ -80,13 +94,18 @@ def check_oauth() -> dict[str, Any]:
     )
     if ok and obj.get("access_token"):
         return {"ok": True, "stage": "refresh", "http_status": status}
-    return {
+    error = obj.get("error", "unknown")
+    result = {
         "ok": False,
         "stage": "refresh",
         "http_status": status,
-        "error": obj.get("error", "unknown"),
+        "error": error,
         "detail": (obj.get("error_description") or obj.get("error") or "")[:180],
     }
+    if error == "invalid_grant" and creds.get("client_id"):
+        result["reauth_url"] = auth_url(creds["client_id"])
+        result["reauth_instruction"] = "Abra o link, aprove o acesso e cole no Zeus a URL localhost final ou só o code."
+    return result
 
 
 def should_emit_failure(state: dict[str, Any], ts: dt.datetime) -> bool:
@@ -126,6 +145,8 @@ def main() -> int:
         "http_status": result.get("http_status"),
         "error": result.get("error", "unknown"),
         "detail": result.get("detail", ""),
+        "reauth_url": result.get("reauth_url", ""),
+        "reauth_instruction": result.get("reauth_instruction", ""),
     }
     emit = should_emit_failure(state, ts)
     state.update({"last_status": "fail", "last_fail_at": ts_iso, "last_error": state_error})
@@ -143,6 +164,8 @@ def main() -> int:
             f"Detalhe: {state_error.get('detail')}\n"
             f"Impacto: uploads/renomeações Drive via OAuth usuário ficam bloqueados; leitura por service account pode continuar OK.\n"
             f"Ação esperada: revalidar OAuth pelo fluxo desktop do Ares. Segredos não exibidos."
+            + (f"\nLink de reautorização: {state_error.get('reauth_url')}" if state_error.get("reauth_url") else "")
+            + (f"\nInstrução: {state_error.get('reauth_instruction')}" if state_error.get("reauth_instruction") else "")
         )
     return 0
 

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-26T02:32:00-04:00",
+    "updated_at": "2026-06-27T13:02:04.191904-04:00",
     "generated_by": "zeus-report-infra-surgical-update",
     "last_report_infra": "zeus-hermes-live-update-2026-06-26"
   },
@@ -860,8 +860,17 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-drive-oauth-watchdog.py",
-      "size_bytes": 5728,
-      "modified_at": "2026-06-20T11:49:30-04:00"
+      "size_bytes": 6916,
+      "modified_at": "2026-06-27T13:01:21-04:00",
+      "agent": "ares",
+      "purpose": "Watchdog de OAuth Google Drive do Ares; em invalid_grant gera link desktop OAuth para reautorização humana sem expor segredos.",
+      "sha256": "2d39f44c37b01b33240d80b82d15d3a5eac36568b9cf98afc550d0f8c65d2ced",
+      "validation": [
+        "python3 -m py_compile",
+        "invalid_grant smoke test emits reauth link without secret markers",
+        "healthy check silent with valid refresh token"
+      ],
+      "updated_at": "2026-06-27T17:02:04.191883+00:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-drive-thumbnail-sampler.py",
