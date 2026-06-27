@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-27T13:02:04.191904-04:00",
-    "generated_by": "zeus-report-infra-surgical-update",
-    "last_report_infra": "zeus-hermes-live-update-2026-06-26"
+    "updated_at": "2026-06-27T15:39:33-04:00",
+    "generated_by": "zeus manual alert layout humanization for alerts-infra crons",
+    "last_report_infra": "zeus-alerts-infra-human-layout-2026-06-27"
   },
   "system_packages": [
     {
@@ -501,6 +501,34 @@
       "git_tracked": false,
       "patch_guard_sha256": "60c6804b38da9145736d31dcf383ef0075ecc8a45ca8d3b47ecfa81fb66aeee8",
       "pytest_log_sha256": "281d53d6378298ece746cd37975459826ab989f2882bc7bab7d4d4e8b55fe2d2"
+    },
+    {
+      "id": "hera-drive-auth-watchdog-script",
+      "agent": "hera",
+      "type": "profile_script",
+      "path": "/root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py",
+      "sha256": "8503c0f59daf0c8f1d4a377a05d1bc3951ac5aeb847307d2ce4ea427857c9b68",
+      "size_bytes": 11074,
+      "git_tracked": false,
+      "purpose": "Drive auth watchdog posts human-readable Discord embed/table instead of raw script-only stdout.",
+      "validation": "python3 -m py_compile OK; dry-run payload preview OK; no secrets printed",
+      "updated_at": "2026-06-27T15:39:33-04:00"
+    },
+    {
+      "id": "hera-drive-auth-watchdog-cron-route",
+      "agent": "hera",
+      "type": "hermes_cron_route",
+      "profile": "hera",
+      "job_id": "d2a7853ae86f",
+      "name": "Hera Drive Auth Watchdog",
+      "script": "drive-auth-watchdog.py",
+      "no_agent": true,
+      "deliver": "local",
+      "schedule_display": "every 30m",
+      "enabled": true,
+      "purpose": "Deliver set to local so script-only watchdog no longer dumps Cronjob Response/raw REPORT-INFRA into alerts-infra.",
+      "jobs_json_sha256": "c83d6825d75aa147b65dd8ada68bd3ea64a9d7a73412ae3aa473151263eb9828",
+      "updated_at": "2026-06-27T15:39:33-04:00"
     }
   ],
   "profile_skill_references": [
@@ -1243,8 +1271,12 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
-      "size_bytes": 12368,
-      "modified_at": "2026-06-23T10:27:24-04:00"
+      "size_bytes": 13662,
+      "modified_at": "2026-06-23T10:27:24-04:00",
+      "sha256": "7f3ba7f42c9a503ab40ce682cddb147526f06e0414f1746f54274e652313be2d",
+      "source": "alerts-infra human-readable batch layout",
+      "validation": "bash -n OK; dry-run OK; batch simulation dry-run OK",
+      "updated_at": "2026-06-27T15:39:33-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-tool-loops.sh",

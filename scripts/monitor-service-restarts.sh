@@ -131,6 +131,9 @@ print("State file criado.")
 PYEOF
 fi
 
+RESTART_EVENTS_FILE="$(mktemp)"
+trap 'rm -f "$RESTART_EVENTS_FILE"' EXIT
+
 # Processar cada service
 for SVC in "${SERVICES[@]}"; do
   # Obter NRestarts atual e timestamp real do último start ativo
@@ -261,21 +264,57 @@ PYEOF
     else
       RESTART_ACTION="Restart detectado por ActiveEnterTimestamp. Verificar se foi planejado; se não, investigar journal do serviço."
     fi
-    PAYLOAD=$(jq -n \
+    jq -nc \
       --arg svc "${SVC}" \
-      --arg prev "${RESTART_PREVIOUS}" \
       --arg curr "${RESTART_CURRENT}" \
       --arg cause "${RESTART_CAUSE}" \
       --arg action "${RESTART_ACTION}" \
-      '{content:"<@344196393512075265> restart de serviço detectado", embeds:[{title:"Service reiniciado detectado", color:3447003, fields:[{name:"Service", value:("`"+$svc+"`"), inline:true}, {name:"Start anterior", value:("`"+$prev+"`"), inline:false}, {name:"Start atual", value:("`"+$curr+"`"), inline:false}, {name:"Causa provável", value:$cause, inline:false}, {name:"Ação", value:$action, inline:false}]}]}')
-    if post_alert_payload "$PAYLOAD" "${SVC}:active_enter_changed"; then
-      echo "$(date -Iseconds) ${LOG_PREFIX} RESTART alert enviado para ${SVC} cause=${RESTART_CAUSE}"
-    else
-      EXIT_CODE=2
-      echo "$(date -Iseconds) ${LOG_PREFIX} FAILED_ALERT RESTART para ${SVC}" >&2
-    fi
+      '{service:$svc,current:$curr,cause:$cause,action:$action}' >> "$RESTART_EVENTS_FILE"
+    echo "$(date -Iseconds) ${LOG_PREFIX} RESTART queued para ${SVC} cause=${RESTART_CAUSE}"
   fi
 done
+
+if [[ -s "$RESTART_EVENTS_FILE" ]]; then
+  SUMMARY_TABLE=$(python3 - "$RESTART_EVENTS_FILE" <<'PY'
+import json, sys
+rows=[]
+for line in open(sys.argv[1], encoding='utf-8'):
+    line=line.strip()
+    if line:
+        rows.append(json.loads(line))
+headers=("Serviço", "Start atual", "Causa provável", "Ação")
+body=[]
+for r in rows:
+    cause=(r.get('cause') or '').replace('\n',' ')
+    action=(r.get('action') or '').replace('\n',' ')
+    body.append([
+        r.get('service','')[:20],
+        r.get('current','')[:32],
+        (cause[:58] + '...') if len(cause) > 61 else cause,
+        (action[:42] + '...') if len(action) > 45 else action,
+    ])
+widths=[len(h) for h in headers]
+for row in body:
+    widths=[max(w, len(str(v))) for w,v in zip(widths,row)]
+fmt='  '.join('{:<%d}' % w for w in widths)
+print(fmt.format(*headers))
+print(fmt.format(*['-'*w for w in widths]))
+for row in body:
+    print(fmt.format(*row))
+PY
+  )
+  COUNT_RESTARTS=$(wc -l < "$RESTART_EVENTS_FILE" | tr -d ' ')
+  PAYLOAD=$(jq -n \
+    --arg table "$SUMMARY_TABLE" \
+    --arg count "$COUNT_RESTARTS" \
+    '{content:"<@344196393512075265> restarts de serviços detectados", embeds:[{title:"Restarts de serviços detectados", color:3447003, fields:[{name:"Serviços afetados", value:$count, inline:true}, {name:"Resumo", value:("```\n"+$table+"\n```"), inline:false}, {name:"Decisão operacional", value:"Mensagem agrupada para reduzir ruído; investigar apenas se não foi manutenção planejada ou se repetir.", inline:false}]}]}')
+  if post_alert_payload "$PAYLOAD" "service-restarts:active_enter_batch"; then
+    echo "$(date -Iseconds) ${LOG_PREFIX} RESTART batch alert enviado count=${COUNT_RESTARTS}"
+  else
+    EXIT_CODE=2
+    echo "$(date -Iseconds) ${LOG_PREFIX} FAILED_ALERT RESTART batch" >&2
+  fi
+fi
 
 if [[ "${MGS_FORCE_SERVICE_RESTART_ALERT:-0}" == "1" ]]; then
   PAYLOAD=$(jq -n \
