@@ -45,6 +45,7 @@ DESCRIPTIONS = {
     'sync-codex-oauth.sh': 'Sincroniza tokens OAuth Codex do auth global para profiles Hermes com safety check.',
     'hermes-news-explainer.py': 'Lê anúncios no canal Hermes News e posta explicação executiva do Zeus em PT-BR, com estado anti-duplicata.',
     'monitor-webshare-status.sh': 'Monitora status.webshare.io e alerta infra quando detectar manutenção/incidente relevante.',
+    'monitor-discord-thread-archive-warnings.py': 'Monitora threads Discord ativas com auto-archive de 1 semana em Zeus/Atena/Ares/Hera e alerta Rodolfo quando faltam até 24h para ficarem ocultas.',
 }
 
 RISK = {
@@ -70,6 +71,7 @@ RISK = {
     'sync-codex-oauth.sh': 'médio: atualiza auth.json dos profiles',
     'hermes-news-explainer.py': 'baixo/médio: consulta Discord e pode postar explicação automática',
     'monitor-webshare-status.sh': 'baixo: consulta status público + alerta Discord se anomalia',
+    'monitor-discord-thread-archive-warnings.py': 'baixo: consulta Discord + alerta Rodolfo antes de auto-archive',
 }
 
 OWNER = {
