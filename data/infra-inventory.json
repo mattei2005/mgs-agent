@@ -360,13 +360,13 @@
       "agent": "hera",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py",
-      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; alerta Zeus/Rodolfo quando OAuth/Service Account cair sem loop operacional.",
-      "validation": "python3 -m py_compile OK; watchdog testado por Hera com primeira execução alertando e segunda silenciosa no mesmo estado.",
+      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; valida root por ID/capabilities para evitar falso positivo quando o folder é renomeado.",
+      "validation": "python3 -m py_compile OK; live watchdog run exit 0; state healthy=true with OAuth token_ok and Service Account root_access_ok; no Discord alert emitted.",
       "git_tracked": false,
-      "updated_at": "2026-06-20T11:50:58-04:00",
-      "size_bytes": 8529,
-      "modified_at": "2026-06-20T11:49:04-04:00",
-      "sha256": "244ea22af03e620f862bcd65069941eb98ef49b0057a7f122c34fd25c0b28688"
+      "updated_at": "2026-06-29T10:59:52-04:00",
+      "size_bytes": 11778,
+      "modified_at": "2026-06-29T10:59:11-04:00",
+      "sha256": "c7c7c31e1d67073af1762d68ede237cdbb4a84c8e3a4a3994d461830eb325843"
     },
     {
       "id": "ares-drive-oauth-watchdog-profile-wrapper",
@@ -511,12 +511,13 @@
       "agent": "hera",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py",
-      "sha256": "8503c0f59daf0c8f1d4a377a05d1bc3951ac5aeb847307d2ce4ea427857c9b68",
-      "size_bytes": 11074,
+      "sha256": "c7c7c31e1d67073af1762d68ede237cdbb4a84c8e3a4a3994d461830eb325843",
+      "size_bytes": 11778,
       "git_tracked": false,
-      "purpose": "Drive auth watchdog now posts human-readable Discord embed/table instead of raw script-only stdout.",
-      "validation": "python3 -m py_compile OK; dry-run payload preview OK; no secrets printed",
-      "updated_at": "2026-06-27T15:39:33-04:00"
+      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; valida root por ID/capabilities para evitar falso positivo quando o folder é renomeado.",
+      "validation": "python3 -m py_compile OK; live watchdog run exit 0; state healthy=true with OAuth token_ok and Service Account root_access_ok; no Discord alert emitted.",
+      "updated_at": "2026-06-29T10:59:52-04:00",
+      "modified_at": "2026-06-29T10:59:11-04:00"
     },
     {
       "id": "hera-drive-auth-watchdog-cron-route",
