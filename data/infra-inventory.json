@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-30T12:55:12-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-06-30T16:03:19-04:00",
+    "generated_by": "zeus-report-infra-processing"
   },
   "system_packages": [
     {
@@ -543,11 +543,14 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/SKILL.md",
-      "size_bytes": 37421,
-      "sha256": "7d50296ba83430f3977959b382d43ad5d86a2a3c8bd7710a289968ede5e8c3af",
+      "size_bytes": 38926,
+      "sha256": "786af10511034829bdaee2dfe5aadd021227e37609307be3727ae2718733521a",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-19T12:11:18-04:00",
-      "validation": "runtime/versioned SHA match; secret scan negative; provider rule validated: video defaults to Grok/xAI; image may use GPT/OpenAI or Grok per manager request; GPT for video is limited to image/keyframe/direção visual, not final narrative video"
+      "updated_at": "2026-06-30T16:00:40-04:00",
+      "validation": "runtime/versioned SHA match; secret scan found only contextual words token/credenciais, no secrets; patch documents Hera classification/naming/metadata/READY/inventory before Ares campaign rules; no restart executed.",
+      "modified_at": "2026-06-30T15:59:34-04:00",
+      "source_report": "REPORT-INFRA Hera creative-brief-handoff handoff silencioso Hera→Ares 2026-06-30",
+      "known_pending": "If real silent cross-agent notification is required, validate dedicated background mechanism without posting ping-pong in the human thread."
     },
     {
       "profile": "hera",
@@ -759,6 +762,20 @@
       "runtime_versioned_sha_match": null,
       "updated_at": "2026-06-30T02:45:27-04:00",
       "validation": "Added official AdsPower adspower-browser/ads CLI resources and commands for profile automation."
+    },
+    {
+      "profile": "hera",
+      "skill": "creative-brief-handoff",
+      "type": "reference",
+      "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/car-br-pt-multi-image-ready-handoff.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/car-br-pt-multi-image-ready-handoff.md",
+      "size_bytes": 2688,
+      "modified_at": "2026-06-30T16:01:47-04:00",
+      "sha256": "099ce7bdea0690f46829a04ff960586e8631a65b1c79ac7df10346ed4e30c664",
+      "runtime_versioned_sha_match": true,
+      "source_report": "REPORT-INFRA Hera creative handoff silencioso/background para Ares 2026-06-30",
+      "updated_at": "2026-06-30T16:03:19-04:00",
+      "validation": "runtime/versioned SHA match; secret scan OK; reference requires READY upload verified before silent/background Ares notice; no public Hera↔Ares ping-pong in human thread."
     }
   ],
   "systemd_services": [

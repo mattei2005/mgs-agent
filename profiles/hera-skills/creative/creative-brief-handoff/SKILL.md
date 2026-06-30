@@ -374,6 +374,8 @@ Referências da skill:
 ```text
 references/drive-ready-destination-correction.md — correção canônica: READY fica em pasta de status; STORY/FEED/REELS ficam no inventário/handoff, não em subpasta final.
 references/human-upload-ready-drive-handoff.md — fluxo validado para upload humano via Discord → import/read attachment quando `.mov` não entra no gateway → detecção de formato/ângulo → limpeza de metadata → upload verificado em READY → inventário/handoff Ares.
+references/car-br-pt-multi-image-ready-handoff.md — fluxo validado para lote de imagens CAR Brasil/Português: Hera aplica classificação/naming/metadata/READY diretamente; Ares só aplica regras de campanha/teste depois do handoff verificado.
+references/spain-cc-human-upload-handoff.md — fluxo para uploads CC Espanha/ES: Hera aplica classificação/naming/metadata/READY; Ares aplica apenas regras de campanha após handoff verificado; inclui mapping `CC_ES_ES`, naming e blocker de OAuth Drive sem mencionar Ares antes do upload verificado.
 references/video-variation-gpt-grok-workflow.md — workflow para comparar variação de vídeo com GPT/OpenAI e Grok/xAI a partir de anexo Discord, incluindo import read-only, contact sheet, geração e sanitização.
 references/car-video-reference-recreation-lessons.md — aprendizados de correção Rodolfo/Geizian para variação de vídeo CAR: recriar linguagem audiovisual da referência, evitar legenda/zoom/slideshow como final, usar prompt editável e respeitar precedente GPT preview + Grok preview.
 references/car-pt-financing-video-recreation.md — playbook BR/PT para recriar vídeos de financiamento de veículo com vendedor/concessionária, carro branco, cenas/narrativa, voz integrada e QA contra zoom/slideshow/TTS robótico.
@@ -607,11 +609,17 @@ Regra prática: se o pedido é “faça igual/ inspirado neste link” e o link 
 
 ## Handoff para Ares
 
-Só entregue handoff para Ares quando Ares participar e houver material suficiente para campanha ou teste. Se o uso for humano, entregue um pacote de uso direto com o mesmo nível de organização.
+Só prepare handoff para Ares quando Ares participar e houver material suficiente para campanha ou teste; por padrão esse handoff é interno/silencioso, não postagem pública na thread humana. Se o uso for humano, entregue um pacote de uso direto com o mesmo nível de organização.
 
-### Regra de handoff único Hera → Ares
+### Regra de handoff silencioso Hera → Ares
 
-Quando houver upload de criativo novo para tratamento pelo Ares, a Hera deve validar antes de mencionar Ares. A menção ao Ares acontece **uma única vez** por upload válido; depois do handoff, não mencionar Ares para confirmações, status, “ok”, “recebido”, “sem pendência” ou mensagens de acompanhamento. Ares só deve voltar a responder Hera se Rodolfo pedir explicitamente.
+Quando houver upload de criativo novo para tratamento pelo Ares, a Hera deve **aplicar diretamente** tudo que for regra de Operações Criativas antes de qualquer aviso: classificar o asset, detectar formato/ângulo/P_ORIENT, limpar metadata, nomear, colocar na pasta READY correta e registrar inventário/handoff local.
+
+Ares **não é necessário** para aplicar regras de criativo, pasta, naming, metadata ou inventário. O Ares só precisa ser avisado por trás dos panos quando houver pacote válido para campanha/teste.
+
+Regra de Discord/thread: se Kelly, Rodolfo ou outro humano pedir “avisa o Ares”, “manda para o Ares”, “deixa o Ares usar”, ou equivalente, a Hera **não deve postar o handoff para o Ares na thread atual** e não deve pedir confirmação pública. Deve fazer o aviso em modo silencioso/background quando houver mecanismo disponível, ou registrar a pendência local de aviso silencioso se o canal/tool estiver bloqueado. Na thread humana, responder apenas o status operacional do que a Hera fez.
+
+É proibido gerar ping-pong Hera ↔ Ares na thread humana: não responder a confirmações do Ares, mensagens automáticas, erros de continuação, “recebido”, “validado read-only”, “sem ação” ou qualquer ruído de agente. Depois de entregar o status ao humano, silêncio até novo pedido humano.
 
 Campos obrigatórios para upload válido:
 
