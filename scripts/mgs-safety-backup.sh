@@ -156,11 +156,28 @@ fi
 
 # Criar archive sem imprimir lista de arquivos no chat/log.
 # Usar caminhos relativos a / evita warning de tar sobre leading slash no cron.
+# GNU tar pode sair com code 1 quando um arquivo muda durante leitura
+# ("file changed as we read it"). Para snapshot operacional MGS isso é
+# aceitável como WARN se o archive existir e `tar -tzf` validar; caso contrário
+# falha fechado.
 tar_sources=()
 for src in "${existing_sources[@]}"; do
   tar_sources+=("${src#/}")
 done
-tar -C / -czf "$ARCHIVE" "${EXCLUDES[@]}" "${tar_sources[@]}"
+set +e
+tar_output=$(tar -C / -czf "$ARCHIVE" "${EXCLUDES[@]}" "${tar_sources[@]}" 2>&1)
+tar_rc=$?
+set -e
+if [[ "$tar_rc" -ne 0 ]]; then
+  if [[ "$tar_rc" -eq 1 && -s "$ARCHIVE" && "$tar_output" == *"file changed as we read it"* ]]; then
+    log "WARN: tar retornou 1 por arquivo alterado durante leitura; validando archive mesmo assim"
+    printf '%s\n' "$tar_output" >> "$LOG"
+  else
+    printf '%s\n' "$tar_output" >> "$LOG"
+    log "ERROR: tar falhou rc=$tar_rc"
+    exit "$tar_rc"
+  fi
+fi
 
 # Manifest técnico: caminhos no archive + tamanho/hash do pacote. Não contém conteúdo.
 {

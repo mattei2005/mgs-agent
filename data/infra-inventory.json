@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-29T01:35:44-04:00",
+    "updated_at": "2026-06-30T12:55:12-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -703,12 +703,14 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "size_bytes": 14895,
-      "modified_at": "2026-06-27T16:09:52-04:00",
-      "sha256": "f04ff622a26016f408e5744eb10ee7cacdd345f8e1e5fbc226e005ef00b586b0",
-      "purpose": "Durable procedure for MGS Meta/Facebook Developer app B001-B010 rate-limit/token health monitoring, including B007/Openzed and roles/admin drift.",
-      "validation": "Patched with /roles admin/segurador drift detection; secret scan by content review: no token/app_secret values stored.",
-      "updated_at": "2026-06-27T16:10:24-04:00"
+      "size_bytes": 21137,
+      "modified_at": "2026-06-29T17:13:02-04:00",
+      "sha256": "bb2b80e1e1d1afe2c47bd7b3287b7643d57d9b8fee76805773286abeb9be63f4",
+      "purpose": "Procedure for Meta app rate-limit/roles monitoring and #app-rate-limit alert standard.",
+      "validation": "Updated after adding Perfil admin do app to alert semantics.",
+      "updated_at": "2026-06-29T20:39:56-04:00",
+      "skill": "meta-app-rate-limit-monitor",
+      "md5": "1f2a69ce922a1bc66b250f5df18b0dc8"
     },
     {
       "profile": "zeus",
@@ -733,6 +735,30 @@
       "runtime_versioned_sha_match": null,
       "updated_at": "2026-06-29T01:35:20-04:00",
       "validation": "manual Zeus update; secret scan negative"
+    },
+    {
+      "profile": "zeus",
+      "skill": "segurador-page-health-monitor",
+      "type": "profile_skill",
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/segurador-page-health-monitor/SKILL.md",
+      "versioned_path": null,
+      "size_bytes": 15332,
+      "sha256": "ae5a5f41bf78045ff8c95b8a24dd9ca3ab6c6197a86260acaa8741d10823a48c",
+      "runtime_versioned_sha_match": null,
+      "updated_at": "2026-06-30T02:33:52-04:00",
+      "validation": "Added AdsPower + Meta Graph Explorer/Access Token Debugger token-collection workflow and 18-permission set."
+    },
+    {
+      "profile": "zeus",
+      "skill": "adspower-segurador-token-collector",
+      "type": "profile_skill",
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/adspower-segurador-token-collector/SKILL.md",
+      "versioned_path": null,
+      "size_bytes": 9561,
+      "sha256": "7a499d143e5ac080584838e2b173d5baf4d87ca330da75f14be289809c69b10c",
+      "runtime_versioned_sha_match": null,
+      "updated_at": "2026-06-30T02:45:27-04:00",
+      "validation": "Added official AdsPower adspower-browser/ads CLI resources and commands for profile automation."
     }
   ],
   "systemd_services": [
@@ -1053,8 +1079,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
-      "size_bytes": 10856,
-      "modified_at": "2026-06-26T02:14:46-04:00"
+      "size_bytes": 10924,
+      "modified_at": "2026-06-30T12:06:33-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
@@ -1118,8 +1144,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
-      "size_bytes": 9285,
-      "modified_at": "2026-06-07T00:29:26-04:00"
+      "size_bytes": 12386,
+      "modified_at": "2026-06-30T12:54:23-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/import-discord-thread.py",
@@ -1168,8 +1194,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-safety-backup.sh",
-      "size_bytes": 5684,
-      "modified_at": "2026-06-07T00:30:27-04:00"
+      "size_bytes": 6356,
+      "modified_at": "2026-06-30T12:54:35-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-updates.sh",
@@ -1329,7 +1355,7 @@
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
       "size_bytes": 30807,
-      "modified_at": "2026-06-26T02:30:04-04:00"
+      "modified_at": "2026-06-30T12:06:35-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/run-openhands-atena.sh",
@@ -3428,6 +3454,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-operations/SKILL.md"
       },
       {
+        "name": "adspower-segurador-token-collector",
+        "category": "growth",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/growth/adspower-segurador-token-collector/SKILL.md"
+      },
+      {
         "name": "interactive-chat-funnels",
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/zeus/skills/growth/interactive-chat-funnels/SKILL.md"
@@ -3451,6 +3482,11 @@
         "name": "meta-utility-template-approval",
         "category": "growth",
         "skill_md": "/root/.hermes/profiles/zeus/skills/growth/meta-utility-template-approval/SKILL.md"
+      },
+      {
+        "name": "segurador-page-health-monitor",
+        "category": "growth",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/growth/segurador-page-health-monitor/SKILL.md"
       },
       {
         "name": "native-mcp",
@@ -3741,8 +3777,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "7f52bb37857f7d16c665bd5141eadb58",
-      "modified_at": "2026-06-29T01:26:04-04:00"
+      "md5": "32c12aeb317d1c4ccf11e4040ff69eb7",
+      "modified_at": "2026-06-30T12:41:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -3753,44 +3789,44 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "1573d449e2701e58e1dada967b0ccffb",
-      "modified_at": "2026-06-29T01:30:02-04:00"
+      "md5": "7cf50e07ddba92e1899fd0fed103ca71",
+      "modified_at": "2026-06-30T12:45:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
       "size_bytes": 135,
-      "md5": "4af6173ce7454e0a85bcdade1d340f5b",
-      "modified_at": "2026-06-29T01:34:57-04:00"
+      "md5": "0fa59c5d8d458dc529afac8d9fe842ea",
+      "modified_at": "2026-06-30T09:16:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "ff66e9a442075402a5d1dc99c2c0d87e",
-      "modified_at": "2026-06-28T21:06:16-04:00"
+      "md5": "d646c2dba49590f685658546af6d2162",
+      "modified_at": "2026-06-30T09:06:27-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 19876,
-      "md5": "0eff6742ffd039a45addafdc047107b9",
-      "modified_at": "2026-06-29T01:35:01-04:00"
+      "size_bytes": 20650,
+      "md5": "c8a2929e3c106d3e3b0785f66ad1512e",
+      "modified_at": "2026-06-30T12:55:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
       "size_bytes": 333,
-      "md5": "0455755c8c2cded66fb75f8b1b8569a3",
-      "modified_at": "2026-06-28T20:37:03-04:00"
+      "md5": "cb1a4b795c64870b56533e5d1bc4cc0c",
+      "modified_at": "2026-06-30T08:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 438,
-      "md5": "ff3878b70200bd40bd1ed835013a5c09",
-      "modified_at": "2026-06-29T01:30:44-04:00"
+      "md5": "f407002dfbdc9002fe20c22363da5363",
+      "modified_at": "2026-06-30T12:45:47-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 145701,
-      "md5": "a6d27e1d335b4b777108a9b59583b34f",
-      "modified_at": "2026-06-29T01:35:20-04:00"
+      "size_bytes": 147697,
+      "md5": "e9de3a3e93e2da45e7cbc9b58b72502e",
+      "modified_at": "2026-06-30T12:21:53-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -3806,9 +3842,15 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 1206,
-      "md5": "bfbcf1f64a5c04b0f52368788abc6ec2",
-      "modified_at": "2026-06-27T16:13:09-04:00"
+      "size_bytes": 44210,
+      "md5": "a7fb81ef63758084a7693dffe84d978a",
+      "modified_at": "2026-06-30T12:53:36-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
+      "size_bytes": 8526,
+      "md5": "54b0da218f755d0e6635646ef05a3093",
+      "modified_at": "2026-06-29T16:24:48-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -3842,9 +3884,9 @@
     },
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
-      "size_bytes": 2239,
-      "md5": "91377b65c24abfb05df7bed72e590a05",
-      "modified_at": "2026-06-29T01:31:01-04:00"
+      "size_bytes": 2293,
+      "md5": "0175be6b501c7507f025ad16a544de38",
+      "modified_at": "2026-06-30T12:51:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -3861,8 +3903,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "ee1d5ec654888dfb49bd9f6ca3e51343",
-      "modified_at": "2026-06-28T20:07:01-04:00"
+      "md5": "06e5dc2baf6e9048039dafded6f2431a",
+      "modified_at": "2026-06-30T08:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",

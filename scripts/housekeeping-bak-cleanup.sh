@@ -7,11 +7,16 @@
 #   - /root/mgs-agent/       (scripts, skills, data)
 #   - /root/backups/         (snapshots pré-update)
 #   - /tmp                  (temporários antigos)
+#   - /root/mgs-agent/reports/hermes-updates/**/hermes-profiles-backup-*.tar.gz
+#                            (backups grandes de profiles gerados por update Hermes)
 #
 # Proteções:
 #   - NUNCA deleta canônicos (SOUL.md, config.yaml, .env, *.sh sem marcador backup)
-#   - Só pega nomes com marcador explícito de backup: *.bak*, *.backup*, *.old,
-#     *.orig, *~
+#   - Backups pequenos: só pega nomes com marcador explícito de backup: *.bak*,
+#     *.backup*, *.old, *.orig, *~
+#   - Backups grandes Hermes update: aplica retenção dedicada, preservando os N
+#     mais recentes globalmente (default: 2) e deletando o restante acima de
+#     HERMES_UPDATE_BACKUP_RETENTION_DAYS (default: 2 dias).
 #   - Preserva SEMPRE o arquivo mais recente de cada família de backup, mesmo
 #     acima da retenção. Se só existe 1 arquivo na família, não deleta.
 #   - Loga tudo em /root/mgs-agent/logs/housekeeping.log
@@ -34,6 +39,8 @@ elif [[ -n "${1:-}" ]]; then
 fi
 
 RETENTION_DAYS="${RETENTION_DAYS:-15}"
+HERMES_UPDATE_BACKUP_RETENTION_DAYS="${HERMES_UPDATE_BACKUP_RETENTION_DAYS:-2}"
+HERMES_UPDATE_BACKUP_KEEP_LATEST="${HERMES_UPDATE_BACKUP_KEEP_LATEST:-2}"
 LOG=/root/mgs-agent/logs/housekeeping.log
 BASE_DIR=/root/mgs-agent
 CANDIDATES_FILE="$(mktemp)"
@@ -162,32 +169,80 @@ CANDIDATE_COUNT=$(wc -l < "$CANDIDATES_FILE" | tr -d ' ')
 TOTAL_SIZE=$(awk -F '\t' '{sum += $2} END {print sum+0}' "$DELETE_FILE")
 TOTAL_MB=$(awk -v bytes="${TOTAL_SIZE:-0}" 'BEGIN {printf "%.2f", bytes/1024/1024}')
 
-if [[ "$COUNT" -eq 0 ]]; then
-    log "Nada a deletar (${CANDIDATE_COUNT} backup(s) encontrados; ${KEEP_COUNT} preservado(s) por último/retencão)"
+# ─── Retenção dedicada para backups grandes de update Hermes ────────────────
+# O fluxo controlado de update pode gerar vários tarballs de ~1.5GB no mesmo dia.
+# Eles não têm extensão .bak, então a limpeza genérica acima não os alcança.
+HERMES_DELETE_FILE="$(mktemp)"
+trap 'rm -f "$CANDIDATES_FILE" "$KEEP_FILE" "$DELETE_FILE" "$HERMES_DELETE_FILE"' EXIT
+python3 - "$HERMES_UPDATE_BACKUP_RETENTION_DAYS" "$HERMES_UPDATE_BACKUP_KEEP_LATEST" "$HERMES_DELETE_FILE" <<'PY'
+import sys
+import time
+from pathlib import Path
+
+retention_days = int(sys.argv[1])
+keep_latest = int(sys.argv[2])
+out = Path(sys.argv[3])
+root = Path('/root/mgs-agent/reports/hermes-updates')
+cutoff = time.time() - retention_days * 86400
+records = []
+if root.exists():
+    for p in root.glob('**/hermes-profiles-backup*.tar.gz'):
+        try:
+            st = p.stat()
+        except OSError:
+            continue
+        if p.is_file():
+            records.append((st.st_mtime, st.st_size, str(p)))
+records.sort(key=lambda x: (x[0], x[2]), reverse=True)
+keep = {path for _, _, path in records[:keep_latest]}
+with out.open('w') as f:
+    for mtime, size, path in records:
+        if path in keep:
+            continue
+        if mtime < cutoff:
+            f.write(f"{int(mtime)}\t{size}\thermes-update-backup\t{path}\n")
+PY
+
+HERMES_COUNT=$(wc -l < "$HERMES_DELETE_FILE" | tr -d ' ')
+HERMES_TOTAL_SIZE=$(awk -F '\t' '{sum += $2} END {print sum+0}' "$HERMES_DELETE_FILE")
+HERMES_TOTAL_MB=$(awk -v bytes="${HERMES_TOTAL_SIZE:-0}" 'BEGIN {printf "%.2f", bytes/1024/1024}')
+TOTAL_COUNT=$((COUNT + HERMES_COUNT))
+TOTAL_SIZE_ALL=$((TOTAL_SIZE + HERMES_TOTAL_SIZE))
+TOTAL_MB_ALL=$(awk -v bytes="${TOTAL_SIZE_ALL:-0}" 'BEGIN {printf "%.2f", bytes/1024/1024}')
+
+if [[ "$TOTAL_COUNT" -eq 0 ]]; then
+    log "Nada a deletar (${CANDIDATE_COUNT} backup(s) pequenos encontrados; ${KEEP_COUNT} preservado(s); Hermes update tarballs elegíveis=0)"
     log "=== END (no-op) ==="
     exit 0
 fi
 
 if [[ "$DRY_RUN" -eq 1 ]]; then
-    log "DRY-RUN: encontrados ${CANDIDATE_COUNT} backup(s); ${COUNT} seriam deletados (${TOTAL_MB} MB); ${KEEP_COUNT} preservados."
+    log "DRY-RUN: encontrados ${CANDIDATE_COUNT} backup(s) pequenos; ${COUNT} seriam deletados (${TOTAL_MB} MB); ${KEEP_COUNT} preservados."
     awk -F '\t' '{print $4}' "$DELETE_FILE" | while IFS= read -r f; do
         [[ -z "$f" ]] && continue
         log "  would rm $f"
     done
+    if [[ "$HERMES_COUNT" -gt 0 ]]; then
+        log "DRY-RUN: Hermes update tarballs: ${HERMES_COUNT} seriam deletados (${HERMES_TOTAL_MB} MB); keep_latest=${HERMES_UPDATE_BACKUP_KEEP_LATEST}; retention=${HERMES_UPDATE_BACKUP_RETENTION_DAYS}d."
+        awk -F '\t' '{print $4}' "$HERMES_DELETE_FILE" | while IFS= read -r f; do
+            [[ -z "$f" ]] && continue
+            log "  would rm hermes-update $f"
+        done
+    fi
     awk -F '\t' '$1 == "preserve_latest" {print $5}' "$KEEP_FILE" | head -30 | while IFS= read -r f; do
         [[ -z "$f" ]] && continue
         log "  keep latest $f"
     done
     DIRS_CANDIDATE=$(find /root/backups -type d -empty -mtime +"${RETENTION_DAYS}" -print 2>/dev/null | wc -l)
     log "DRY-RUN: ${DIRS_CANDIDATE} diretórios vazios seriam removidos em /root/backups"
-    log "=== END DRY-RUN — candidatos ${COUNT} arquivos / ${TOTAL_MB} MB ==="
+    log "=== END DRY-RUN — candidatos ${TOTAL_COUNT} arquivos / ${TOTAL_MB_ALL} MB ==="
     exit 0
 fi
 
-log "Encontrados ${CANDIDATE_COUNT} backup(s); deletando ${COUNT} antigo(s) (${TOTAL_MB} MB); preservando ${KEEP_COUNT}."
+log "Encontrados ${CANDIDATE_COUNT} backup(s) pequenos + Hermes update tarballs; deletando ${TOTAL_COUNT} antigo(s) (${TOTAL_MB_ALL} MB); preservando ${KEEP_COUNT} pequenos + ${HERMES_UPDATE_BACKUP_KEEP_LATEST} Hermes update recentes."
 
 # ─── Deletar ────────────────────────────────────────────────────────────────
-awk -F '\t' '{print $4}' "$DELETE_FILE" | while IFS= read -r f; do
+awk -F '\t' '{print $4}' "$DELETE_FILE" "$HERMES_DELETE_FILE" | while IFS= read -r f; do
     [[ -z "$f" ]] && continue
     if rm -f -- "$f" 2>>"$LOG"; then
         log "  rm $f"
@@ -197,9 +252,9 @@ awk -F '\t' '{print $4}' "$DELETE_FILE" | while IFS= read -r f; do
 done
 
 # ─── Limpar diretórios vazios deixados pra trás (snapshots antigos) ─────────
-DIRS_REMOVED=$(find /root/backups -type d -empty -mtime +"${RETENTION_DAYS}" -delete -print 2>/dev/null | wc -l)
+DIRS_REMOVED=$({ find /root/backups -type d -empty -mtime +"${RETENTION_DAYS}" -delete -print 2>/dev/null; find /root/mgs-agent/reports/hermes-updates -mindepth 1 -type d -empty -mtime +"${HERMES_UPDATE_BACKUP_RETENTION_DAYS}" -delete -print 2>/dev/null; } | wc -l)
 if [[ "$DIRS_REMOVED" -gt 0 ]]; then
-    log "Removidos ${DIRS_REMOVED} diretórios vazios em /root/backups"
+    log "Removidos ${DIRS_REMOVED} diretórios vazios"
 fi
 
 # ─── Notificar Discord ──────────────────────────────────────────────────────
@@ -213,9 +268,9 @@ if [[ "$WEBHOOK" == https://* ]]; then
     PAYLOAD=$(jq -n \
         --arg host "$HOST" \
         --arg retention "${RETENTION_DAYS} dias" \
-        --arg files "$COUNT" \
+        --arg files "$TOTAL_COUNT" \
         --arg preserved "$KEEP_COUNT" \
-        --arg size "${TOTAL_MB} MB" \
+        --arg size "${TOTAL_MB_ALL} MB" \
         --arg dirs "$DIRS_REMOVED" \
         '{content:"", embeds:[{title:"Housekeeping de backups executado", color:3447003, fields:[{name:"Host", value:$host, inline:true}, {name:"Retenção", value:$retention, inline:true}, {name:"Arquivos deletados", value:$files, inline:true}, {name:"Backups preservados", value:$preserved, inline:true}, {name:"Espaço liberado", value:$size, inline:true}, {name:"Diretórios vazios removidos", value:$dirs, inline:true}]}]}')
     curl -s -X POST "$WEBHOOK" \
@@ -227,4 +282,4 @@ else
     log "WARN: WEBHOOK vazio — sem notificação Discord"
 fi
 
-log "=== END — deletados ${COUNT} arquivos / ${TOTAL_MB} MB ==="
+log "=== END — deletados ${TOTAL_COUNT} arquivos / ${TOTAL_MB_ALL} MB ==="
