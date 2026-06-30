@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-30T16:03:19-04:00",
+    "updated_at": "2026-06-30T16:04:08-04:00",
     "generated_by": "zeus-report-infra-processing"
   },
   "system_packages": [
@@ -534,6 +534,21 @@
       "purpose": "Deliver set to local so script-only watchdog no longer dumps Cronjob Response/raw REPORT-INFRA into alerts-infra.",
       "jobs_json_sha256": "c83d6825d75aa147b65dd8ada68bd3ea64a9d7a73412ae3aa473151263eb9828",
       "updated_at": "2026-06-27T15:39:33-04:00"
+    },
+    {
+      "id": "hera-profile-soul-runtime",
+      "agent": "hera",
+      "type": "profile_soul",
+      "path": "/root/.hermes/profiles/hera/SOUL.md",
+      "size_bytes": 26276,
+      "sha256": "9d4888aaedc2ad98f8b4f7adc7534c190fadecf504107f47bcd4c8eb398b8f6b",
+      "modified_at": "2026-06-30T16:01:48-04:00",
+      "git_tracked": false,
+      "versioned_path": "/root/mgs-agent/profiles/hera-soul.md",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-30T16:04:08-04:00",
+      "source_report": "REPORT-INFRA Hera complete silent/background Ares handoff persistence 2026-06-30",
+      "validation": "runtime/versioned SHA match; secret scan OK; no restart executed."
     }
   ],
   "profile_skill_references": [
@@ -543,14 +558,14 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/SKILL.md",
-      "size_bytes": 38926,
-      "sha256": "786af10511034829bdaee2dfe5aadd021227e37609307be3727ae2718733521a",
+      "size_bytes": 39014,
+      "sha256": "a75453b7b28137a7e006db23e0ed0020ea22d59e4c9b3842ad2c872c8c02e9a7",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-30T16:00:40-04:00",
-      "validation": "runtime/versioned SHA match; secret scan found only contextual words token/credenciais, no secrets; patch documents Hera classification/naming/metadata/READY/inventory before Ares campaign rules; no restart executed.",
-      "modified_at": "2026-06-30T15:59:34-04:00",
-      "source_report": "REPORT-INFRA Hera creative-brief-handoff handoff silencioso Hera→Ares 2026-06-30",
-      "known_pending": "If real silent cross-agent notification is required, validate dedicated background mechanism without posting ping-pong in the human thread."
+      "updated_at": "2026-06-30T16:04:08-04:00",
+      "validation": "runtime/versioned SHA match; git diff --check OK; secret scan OK; rules require Hera to classify/name/clean metadata/place READY/inventory directly and avoid public Hera↔Ares ping-pong.",
+      "modified_at": "2026-06-30T16:02:35-04:00",
+      "source_report": "REPORT-INFRA Hera complete silent/background Ares handoff persistence 2026-06-30",
+      "known_pending": "Define/validate technical silent-background Ares notification mechanism if needed beyond local inventory."
     },
     {
       "profile": "hera",
@@ -3955,15 +3970,33 @@
     },
     {
       "path": "/root/mgs-agent/profiles/hera-soul.md",
-      "size_bytes": 25433,
-      "md5": "3d1ac21a7dee22e108fe924e805d066c",
-      "modified_at": "2026-06-21T00:45:06-04:00"
+      "size_bytes": 26276,
+      "md5": "210d958abb23ab031d75f0df77ad1ef4",
+      "modified_at": "2026-06-30T16:01:54-04:00",
+      "type": "profile_soul",
+      "agent": "hera",
+      "sha256": "9d4888aaedc2ad98f8b4f7adc7534c190fadecf504107f47bcd4c8eb398b8f6b",
+      "updated_at": "2026-06-30T16:04:08-04:00",
+      "source_report": "REPORT-INFRA Hera complete silent/background Ares handoff persistence 2026-06-30",
+      "validation": "runtime/versioned SHA match; git diff --check OK; secret scan OK; Hera SOUL updated for silent/background Ares handoff semantics."
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
       "size_bytes": 43510,
       "md5": "313356aeb86d41db526f68507a56ec4e",
       "modified_at": "2026-06-16T19:23:39-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/context/hera-creative-agent.md",
+      "type": "context_doc",
+      "agent": "hera",
+      "size_bytes": 25562,
+      "md5": "dc82afbd98a70ad23775da2700d22a2c",
+      "sha256": "fa6402f54f50d534a34423b91043e200697e5c5a402bc84941677f076161e068",
+      "modified_at": "2026-06-30T16:01:37-04:00",
+      "updated_at": "2026-06-30T16:04:08-04:00",
+      "source_report": "REPORT-INFRA Hera complete silent/background Ares handoff persistence 2026-06-30",
+      "validation": "git diff --check OK; secret scan OK; Hera Creative OS updated for silent/background Ares handoff semantics."
     }
   ],
   "mu_plugin_canonical": {
