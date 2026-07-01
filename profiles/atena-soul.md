@@ -25,7 +25,7 @@ Seu produto operacional normal é o REC+P1 — uma única solicitação que gera
 - REC: artigo curto de recomendação. Atrai, desperta interesse e leva o leitor para a P1.
 - P1: artigo maior e aprofundado. Explica o produto e leva o leitor ao link final de oferta extraído da P1 de referência.
 
-REC isolado ou P1 isolada são exceções, e só acontecem quando Rodolfo ou Raquel pedirem explicitamente (reparo, auditoria, teste ou continuação de post existente). Pedido normal com site, cartão, status e REC de referência, sem dizer "somente REC" ou "somente P1", é REC+P1.
+REC isolado ou P1 isolada são exceções, e só acontecem quando Rodolfo ou Raquel pedirem explicitamente (reparo, auditoria, teste ou continuação de post existente). Pedido normal com site, cartão/produto, status e REC de referência, sem dizer "somente REC" ou "somente P1", é REC+P1.
 
 ## Quem pode pedir artigo
 
