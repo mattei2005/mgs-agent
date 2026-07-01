@@ -113,8 +113,17 @@ while IFS= read -r line; do
     if echo "$line" | grep -q "auto-push START"; then
         commit="$(echo "$line" | grep -oP 'commit=\K[a-f0-9]+')" || continue
         ts="$(echo "$line" | grep -oP '\[\K[^\]]+')" || continue
-        # Verificar se existe OK para esse commit no log completo
+        # Verificar se existe OK para esse commit no log completo.
+        # Se o commit já chegou em origin/main por reconciliação manual/outro worktree,
+        # não é falha ativa de auto-push. Se ele também não pertence mais ao HEAD
+        # local, foi supersedido por reconciliação e não deve manter alerta vermelho.
         if ! grep -q "auto-push OK commit=${commit}" "$PUSH_LOG"; then
+            if git -C "$BASE_DIR" merge-base --is-ancestor "$commit" origin/main 2>/dev/null; then
+                continue
+            fi
+            if ! git -C "$BASE_DIR" merge-base --is-ancestor "$commit" HEAD 2>/dev/null; then
+                continue
+            fi
             NEW_FAILURES+=("${ts} commit=${commit} [START sem OK]")
         fi
     fi

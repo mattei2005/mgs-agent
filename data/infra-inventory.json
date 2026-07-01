@@ -273,6 +273,19 @@
       "purpose": "Host security scanner/protection; weekly Tuesday 04:20 EDT package update may touch systemd/needrestart context.",
       "known_guardrail": "Hermes gateways excluded from needrestart auto-restart via /etc/needrestart/conf.d/mgs-hermes-gateways.conf; use mgs-gateway-restart-safe.sh for controlled restarts.",
       "updated_at": "2026-06-23T10:28:14-04:00"
+    },
+    {
+      "id": "zeus-sqlite3-article-cost-tracker",
+      "agent": "zeus",
+      "manager": "apt",
+      "source_report": "Rodolfo alert triage 2026-07-01: track-article-cost sqlite3 missing",
+      "package": "sqlite3",
+      "version": "3.45.1-1ubuntu2.6",
+      "binary": "",
+      "binary_exists": true,
+      "purpose": "SQLite CLI runtime dependency for /root/mgs-agent/scripts/track-article-cost.sh writing data/article-tracker.db",
+      "validation": "command -v sqlite3; sqlite3 --version; track-article-cost.sh rerun saved pending posts and next run pending=0",
+      "updated_at": "2026-07-01T18:09:56-04:00"
     }
   ],
   "runtime_artifacts": [
@@ -1241,8 +1254,10 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-auto-push.sh",
-      "size_bytes": 12419,
-      "modified_at": "2026-06-07T00:46:40-04:00"
+      "size_bytes": 12959,
+      "modified_at": "2026-07-01T18:09:56-04:00",
+      "sha256": "3e084b9d893a2ef8b8c8f8d5b01ea8b13e41999a1aa037fb15f870d23186bc03",
+      "description": "Monitor de saúde do auto-push; ignora START sem OK quando commit já foi reconciliado em origin/main ou supersedido fora do HEAD local."
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
