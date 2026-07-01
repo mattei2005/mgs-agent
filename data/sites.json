@@ -23,5 +23,30 @@
     "hide_rec_from_home": true,
     "hide_p1_from_home": false,
     "wp_path": "/home/runcloud/webapps/eggbev"
+  },
+  "eggbev_car_br": {
+    "name": "Eggbev CAR BR",
+    "domain": "eggbev.com",
+    "wp_url": "https://eggbev.com",
+    "country": "br",
+    "language": "pt-BR",
+    "verticals": [
+      "car"
+    ],
+    "publishing_user": {
+      "id": 11,
+      "username": "raqueloliveira",
+      "display_name": "Raquel Oliveira"
+    },
+    "credentials_ref": {
+      "vault": "MGS Conteúdo",
+      "item": "eggbev - WordPress",
+      "field": "wp_app_password"
+    },
+    "default_category": "CAR",
+    "default_button_color": "#0561ea",
+    "hide_rec_from_home": true,
+    "hide_p1_from_home": false,
+    "wp_path": "/home/runcloud/webapps/eggbev"
   }
 }

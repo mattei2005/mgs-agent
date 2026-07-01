@@ -1,6 +1,6 @@
 ---
 name: content-generate-rec-p1
-description: Produção operacional de REC+P1 da Atena como um único produto editorial MGS, usando fonte oficial, contracts ativos, orchestrator aprovado, validações de imagem, anti-repetição e relatório final auditável.
+description: Produção operacional de REC+P1 da Atena como um único produto editorial MGS em modo rewrite_from_reference_pair, usando REC de referência para descobrir a P1 e o CTA final, contracts ativos, orchestrator aprovado, validações de imagem, anti-repetição e relatório final auditável.
 ---
 
 # content-generate-rec-p1
@@ -30,7 +30,7 @@ REC+P1 é **uma única solicitação operacional** que gera dois artigos complem
 
 ```text
 REC -> artigo curto de recomendação, atração e pré-conversão.
-P1  -> artigo maior, detalhado, que leva ao site oficial do banco/cartão.
+P1  -> artigo maior, detalhado, que leva ao link final de oferta extraído da P1 de referência.
 ```
 
 Atena não deve tratar REC e P1 como pedidos separados no fluxo normal.
@@ -45,7 +45,7 @@ REC ou P1 isolado só acontece quando Rodolfo/Raquel pedir explicitamente:
 
 Quando houver dúvida entre interpretar um pedido como `REC` isolado ou `REC+P1`, a regra padrão é: **REC+P1 é o produto completo**, salvo se o usuário pedir claramente apenas REC ou apenas P1.
 
-Um pedido contendo site, cartão/produto, status e URL oficial, sem dizer “somente REC” ou “somente P1”, deve ser interpretado como REC+P1.
+Um pedido normal contendo site, cartão/produto, status e REC de referência, sem dizer “somente REC” ou “somente P1”, deve ser interpretado como REC+P1. Se faltar o REC de referência, bloquear e pedir apenas esse dado, salvo reparo/auditoria/debug explícito.
 
 ---
 
@@ -93,9 +93,29 @@ Site/vertical: <site> / <vertical>
 Tipo: REC+P1
 Produto/cartão: <nome exato>
 Status: rascunho/draft ou publicado/publish
-URL oficial: <URL oficial do banco/cartão>
+REC de referência: <URL do REC usado como entrada>
 Imagem do card: <opcional>
 ```
+
+A URL do REC de referência é obrigatória no fluxo normal. A Atena/orchestrator deve ler esse REC, descobrir a P1 de referência pelo link/botão interno e extrair da P1 o link final de oferta/CTA. Pedido sem REC de referência deve bloquear, salvo reparo/auditoria/debug explícito.
+
+### Resolução inteligente de site_key
+
+Antes de bloquear por configuração, consultar `/root/mgs-agent/data/sites.json` e resolver a chave mais específica compatível com o pedido:
+
+```text
+pedido humano -> filtro em sites.json -> site_key técnico
+site/domínio + vertical + país/idioma -> chave que combine esses campos
+```
+
+Regras:
+
+- não assumir a chave base do domínio quando o humano informou vertical/país/idioma diferente;
+- preferir uma configuração específica que combine `domain`/nome + `verticals[]` + `country` + `language`;
+- normalizar “Brasil”, “BR” e “língua br” como `country=br` e `language=pt-BR` quando o contexto for artigo brasileiro;
+- exemplo ativo: `Eggbev CAR Brasil`, `Eggbev car br`, `país br / língua br / vertical car` -> usar `eggbev_car_br`, não `eggbev`;
+- se houver configuração compatível, executar com esse `site_key` sem perguntar autorização de configuração;
+- se não houver configuração compatível, bloquear e escalar para Zeus com a entrada mínima necessária. Não oferecer opção de publicar em país/idioma/vertical errado.
 
 Mapeamento de status:
 
@@ -129,19 +149,33 @@ Para draft, public HTTP pode não estar disponível como em post publicado. Usar
 
 ---
 
-## Fonte oficial e dados reais
+## Modo principal: reescrever a partir do par REC+P1 de referência
 
-Atena deve usar a URL oficial enviada no pedido como fonte principal.
+Atena não deve mais tratar o fluxo normal REC+P1 como “criar do zero a partir da fonte oficial”.
+
+O modo principal de produção é `rewrite_from_reference_pair`:
+
+```text
+REC de referência -> descobrir P1 de referência -> extrair CTA final/oferta -> reconstrução editorial MGS -> novo REC+P1
+```
 
 Regras:
 
+- o REC de referência é o ponto de entrada normal do fluxo;
+- Atena deve ler o REC de referência, descobrir e ler a P1 de referência e extrair o CTA final/oferta da P1;
+- o par REC+P1 de referência é a fonte editorial principal para entender benefícios, ordem lógica, contexto, argumentos e pontos de conversão;
+- Atena deve reconstruir o conteúdo no modelo MGS, não parafrasear linha a linha;
+- REC continua sendo resumo/chamada para continuar na P1;
+- P1 continua sendo a página aprofundada que pode enviar para a oferta externa;
+- URL oficial/oferta separada não é obrigatória no pedido normal quando o CTA final puder ser extraído da P1 de referência;
 - não inventar benefícios, taxas, APR, bônus, elegibilidade ou condições;
 - não preencher lacunas com suposição;
 - não usar cache editorial como fonte de verdade;
-- se dado essencial não estiver confirmado, bloquear ou pedir dado corrigido;
-- se a URL oficial não corresponder ao cartão/produto pedido, bloquear antes de publicar.
+- se dado essencial não estiver confirmado no REC/P1 de referência, pedido atual ou fonte confiável validada no momento, bloquear ou pedir dado corrigido;
+- se o REC não levar a uma P1 clara, ou a P1 não tiver CTA final/oferta claro, bloquear e pedir a P1 de referência ou URL final de oferta;
+- se o pedido trouxer duas ou mais URLs de referência, tratar a primeira URL compatível como REC de referência e a segunda URL compatível como P1 de referência/override quando o REC não apontar claramente para a P1; não pedir confirmação só por existir mais de uma referência.
 
-Se a extração da página oficial for insuficiente, só usar fatos adicionais quando forem verificados no pedido atual ou em fonte oficial/confiável validada no momento.
+Se a extração do par REC+P1 de referência for insuficiente, só usar fatos adicionais quando forem verificados no pedido atual ou em fonte confiável validada no momento.
 
 ---
 
@@ -211,10 +245,10 @@ Ordem padrão:
 
 ```text
 1. Ler pedido e confirmar que entrada mínima está completa.
-2. Validar site/vertical/status/URL oficial.
+2. Validar site/vertical/status/REC de referência.
 3. Validar ou buscar imagem real do card.
 4. Executar REC+P1 pelo orchestrator aprovado.
-5. Validar links REC -> P1 e P1 -> fonte oficial.
+5. Validar links REC -> P1 e P1 -> oferta final extraída da referência.
 6. Validar imagens, LazyBlocks e featured images.
 7. Validar Yoast/readability/metadados.
 8. Validar anti-repetição e qualidade editorial.
@@ -236,12 +270,16 @@ Para REC+P1, usar o orchestrator aprovado como caminho normal:
 
 ```bash
 python3 /root/mgs-agent/scripts/mgs-rec-p1-orchestrator.py \
-  --site <site_key> \
-  --card "<exact card name>" \
+  --site <site_key_resolvido_em_sites_json> \
+  --card "<exact card/product name>" \
   --status <draft|publish> \
-  --official-url "<official issuer URL>" \
+  --reference-rec-url "<reference REC URL>" \
   [--card-image-url "<direct card image URL when supplied>"]
 ```
+
+`<site_key_resolvido_em_sites_json>` deve ser a configuração específica do pedido, não necessariamente a chave base do domínio. Exemplo: para Eggbev + CAR + Brasil/PT-BR, usar `eggbev_car_br`.
+
+`--reference-rec-url` é obrigatório no modo normal. O orchestrator deve descobrir a P1 de referência e extrair dela o CTA/oferta final. `--offer-url`/`--official-url` só deve ser usado como override quando a extração automática falhar ou for ambígua.
 
 Não executar manualmente scripts de imagem, WordPress, Yoast ou publicação se o orchestrator ainda não falhou.
 
@@ -364,9 +402,19 @@ A composição visual detalhada de featured images deve viver em contract/refere
 
 ---
 
-## Anti-repetição e escala
+## Anti-repetição, anti-plágio e escala
 
-Atena não deve produzir conteúdos que pareçam reaproveitados ou simplesmente reescritos a partir de artigos anteriores.
+Atena deve reescrever a partir do par REC+P1 de referência sem copiar a superfície textual.
+
+Reescrever não significa trocar palavras por sinônimos. O fluxo correto é reconstrução editorial:
+
+- preservar fatos, benefícios e lógica útil do par REC+P1 de referência;
+- mudar abertura, ordem de argumentos quando fizer sentido, exemplos, transições e fraseado;
+- adaptar para os contracts MGS de REC e P1;
+- manter REC como chamada/resumo e P1 como aprofundamento/conversão;
+- evitar mesma sequência de parágrafos;
+- bloquear longos trechos contíguos copiados das referências;
+- validar similaridade antes de publicar/reportar sucesso.
 
 REC e P1 trabalham o mesmo produto e podem compartilhar benefícios, características e informações centrais. A exigência não é eliminar toda repetição de fatos, mas garantir que cada conteúdo cumpra sua função dentro do funil e tenha abordagem editorial própria.
 
@@ -457,7 +505,7 @@ Obrigatórias:
 - atena_agent
 ```
 
-Tags comerciais opcionais só podem entrar quando forem sustentadas por benefícios/fatos confirmados no pedido atual ou na fonte oficial:
+Tags comerciais opcionais só podem entrar quando forem sustentadas por benefícios/fatos confirmados no pedido atual, no REC/P1 de referência ou em fonte confiável validada:
 
 ```text
 - no annual fee
@@ -543,7 +591,7 @@ Formato mínimo obrigatório quando fallback manual for necessário:
 • Tags: `<tags>`
 • Imagem Card: `<link da imagem do card>`
 • Imagem Featured: `<link da featured image>`
-• Fonte oficial: `<link oficial utilizado>`
+• Oferta final: `<link final utilizado>`
 
 📄 P1
 📊 Yoast: SEO `<pontuacao>` / Readability `<pontuacao>`
@@ -554,7 +602,7 @@ Formato mínimo obrigatório quando fallback manual for necessário:
 • Tags: `<tags>`
 • Imagem Card: `<link da imagem do card>`
 • Imagem Featured: `<link da featured image>`
-• Fonte oficial: `<link oficial utilizado>`
+• Oferta final: `<link final utilizado>`
 
 ⏱️ Tempo total dos runners: REC `<tempo>` + P1 `<tempo>`
 💰 Custo estimado: REC `<custo REC>` + P1 `<custo P1>` = `<total>`
@@ -570,7 +618,7 @@ Não reportar apenas duração do runner se retries, reparos, QA ou orquestraç�
 
 Bloquear antes de publicar/reportar sucesso quando:
 
-- URL oficial não corresponde ao cartão;
+- REC/P1 de referência ou oferta final não correspondem ao cartão;
 - dado essencial não está confirmado;
 - runner/orchestrator indica uso de cache editorial indevido;
 - idioma de produção conflita com `data/sites.json`;
