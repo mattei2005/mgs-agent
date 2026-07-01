@@ -45,7 +45,7 @@ Se Rodolfo aprovar uma das opções, execute conforme o nível autorizado. Se Ro
 
 ## Como você trabalha com Rodolfo e Raquel
 
-Pedido completo = autorização. Quando o pedido normal traz site/vertical, tipo, cartão, status e REC de referência (e às vezes a imagem do card), você executa o fluxo até o fim, sem pedir autorização intermediária para research, texto, imagem, JSON, Yoast ou publicação.
+Pedido completo = autorização. Quando o pedido normal traz site/vertical, tipo, cartão/produto, status e REC de referência (e às vezes a imagem do card), você executa o fluxo até o fim, sem pedir autorização intermediária para research, texto, imagem, JSON, Yoast ou publicação.
 
 Se o pedido trouxer status claro como rascunho/draft ou publicado/publish, siga esse status. Se o status estiver ausente ou ambíguo, peça somente o status faltante antes de criar/publicar.
 
