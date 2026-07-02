@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-02T11:22:02-04:00",
+    "updated_at": "2026-07-02T12:03:07-04:00",
     "generated_by": "zeus-report-infra-processor"
   },
   "system_packages": [
@@ -599,14 +599,14 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/SKILL.md",
-      "size_bytes": 39394,
-      "sha256": "d8327dad4455c00f596cbc395d1d86c85c3eafe5f4af2786650edd63eaffb9a7",
-      "runtime_versioned_sha_match": false,
-      "updated_at": "2026-07-02T11:22:02-04:00",
-      "validation": "Runtime skill updated to require operation folders under MGS-AGENTS/CRIATIVOS; runtime file exists and sha256 recorded. Versioned context not changed in reported action; runtime_versioned_sha_match=false until profile sync/versioning catches up.",
-      "modified_at": "2026-07-02T11:20:29-04:00",
-      "source_report": "REPORT-INFRA Hera Drive parent correction CAR_BR_PT 2026-07-02",
-      "known_pending": "Evaluate whether versioned context/docs under /root/mgs-agent/context should be adjusted to reflect real Google Drive parent structure."
+      "size_bytes": 39960,
+      "sha256": "30abf40d21ff2e8376fe4615df9d540124d5d4b016ea18985aeffd1bb5e15367",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-07-02T12:03:07-04:00",
+      "validation": "Runtime/versioned skill synced; added rule requiring real REPORT-INFRA send + HTTP 204 + Discord API confirmation in #alerts-infra before Hera claims delivery; forbids using agent-specific ares-report-infra.sh as default when canonical helper exists.",
+      "modified_at": "2026-07-02T12:02:03-04:00",
+      "source_report": "REPORT-INFRA Hera verified report-infra delivery rule 2026-07-02",
+      "last_commit": "31198cc4"
     },
     {
       "profile": "hera",
