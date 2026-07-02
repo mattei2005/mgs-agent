@@ -209,6 +209,7 @@ HERMES_TOTAL_MB=$(awk -v bytes="${HERMES_TOTAL_SIZE:-0}" 'BEGIN {printf "%.2f", 
 TOTAL_COUNT=$((COUNT + HERMES_COUNT))
 TOTAL_SIZE_ALL=$((TOTAL_SIZE + HERMES_TOTAL_SIZE))
 TOTAL_MB_ALL=$(awk -v bytes="${TOTAL_SIZE_ALL:-0}" 'BEGIN {printf "%.2f", bytes/1024/1024}')
+HERMES_PRESERVED_COUNT=$(find /root/mgs-agent/reports/hermes-updates -type f -name 'hermes-profiles-backup*.tar.gz' 2>/dev/null | wc -l | tr -d ' ')
 
 if [[ "$TOTAL_COUNT" -eq 0 ]]; then
     log "Nada a deletar (${CANDIDATE_COUNT} backup(s) pequenos encontrados; ${KEEP_COUNT} preservado(s); Hermes update tarballs elegíveis=0)"
@@ -239,7 +240,7 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
     exit 0
 fi
 
-log "Encontrados ${CANDIDATE_COUNT} backup(s) pequenos + Hermes update tarballs; deletando ${TOTAL_COUNT} antigo(s) (${TOTAL_MB_ALL} MB); preservando ${KEEP_COUNT} pequenos + ${HERMES_UPDATE_BACKUP_KEEP_LATEST} Hermes update recentes."
+log "Encontrados ${CANDIDATE_COUNT} backup(s) pequenos + Hermes update tarballs; deletando ${TOTAL_COUNT} antigo(s) (${TOTAL_MB_ALL} MB); preservando ${KEEP_COUNT} pequenos + ${HERMES_PRESERVED_COUNT} Hermes update recentes."
 
 # ─── Deletar ────────────────────────────────────────────────────────────────
 awk -F '\t' '{print $4}' "$DELETE_FILE" "$HERMES_DELETE_FILE" | while IFS= read -r f; do
@@ -265,14 +266,40 @@ WEBHOOK=$(op item get "Discord Webhook - Alerts Infra Channel" \
 
 if [[ "$WEBHOOK" == https://* ]]; then
     HOST=$(hostname)
+    PRESERVED_LABEL="${KEEP_COUNT} pequenos + ${HERMES_PRESERVED_COUNT} tarballs Hermes"
+    STATUS_LABEL="OK — baixo risco (somente backups antigos; canônicos preservados)"
+    DELETED_SUMMARY=$(awk -F '\t' '{print $4}' "$DELETE_FILE" "$HERMES_DELETE_FILE" | awk '
+        BEGIN {config=0; auth=0; soul=0; hermes=0; temp=0; other=0}
+        /hermes-profiles-backup.*\.tar\.gz$/ {hermes++; next}
+        /config\.yaml/ {config++; next}
+        /auth\.json/ {auth++; next}
+        /SOUL\.md/ {soul++; next}
+        /~$/ {temp++; next}
+        NF {other++}
+        END {
+            if (config) print "config.yaml.bak: " config;
+            if (auth) print "auth.json.bak: " auth;
+            if (soul) print "SOUL.md.bak: " soul;
+            if (hermes) print "hermes update tarball: " hermes;
+            if (temp) print "temp backup ~: " temp;
+            if (other) print "outros backups: " other;
+            if (!config && !auth && !soul && !hermes && !temp && !other) print "nenhum arquivo";
+        }'
+    )
+    DELETED_SAMPLE=$(awk -F '\t' '{print $4}' "$DELETE_FILE" "$HERMES_DELETE_FILE" | head -5 | sed 's#^/root/#~/#' || true)
+    if [[ -z "$DELETED_SAMPLE" ]]; then
+        DELETED_SAMPLE="nenhum arquivo"
+    fi
     PAYLOAD=$(jq -n \
         --arg host "$HOST" \
         --arg retention "${RETENTION_DAYS} dias" \
-        --arg files "$TOTAL_COUNT" \
-        --arg preserved "$KEEP_COUNT" \
-        --arg size "${TOTAL_MB_ALL} MB" \
+        --arg status "$STATUS_LABEL" \
+        --arg deleted "${TOTAL_COUNT} arquivos / ${TOTAL_MB_ALL} MB" \
+        --arg preserved "$PRESERVED_LABEL" \
         --arg dirs "$DIRS_REMOVED" \
-        '{content:"", embeds:[{title:"Housekeeping de backups executado", color:3447003, fields:[{name:"Host", value:$host, inline:true}, {name:"Retenção", value:$retention, inline:true}, {name:"Arquivos deletados", value:$files, inline:true}, {name:"Backups preservados", value:$preserved, inline:true}, {name:"Espaço liberado", value:$size, inline:true}, {name:"Diretórios vazios removidos", value:$dirs, inline:true}]}]}')
+        --arg summary "$DELETED_SUMMARY" \
+        --arg sample "$DELETED_SAMPLE" \
+        '{content:"", embeds:[{title:"Housekeeping de backups executado", color:3447003, fields:[{name:"Host", value:$host, inline:true}, {name:"Retenção", value:$retention, inline:true}, {name:"Status", value:$status, inline:false}, {name:"Deletados", value:$deleted, inline:true}, {name:"Preservados", value:$preserved, inline:true}, {name:"Diretórios vazios", value:$dirs, inline:true}, {name:"Tipos deletados", value:$summary, inline:false}, {name:"Amostra", value:$sample, inline:false}, {name:"Log completo", value:"`/root/mgs-agent/logs/housekeeping.log`", inline:false}]}]}')
     curl -s -X POST "$WEBHOOK" \
         -H "Content-Type: application/json" \
         -d "$PAYLOAD" \

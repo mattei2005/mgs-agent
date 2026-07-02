@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-06-30T16:04:08-04:00",
-    "generated_by": "zeus-report-infra-processing"
+    "updated_at": "2026-07-02T03:44:55-04:00",
+    "generated_by": "zeus-housekeeping-alert-layout-update"
   },
   "system_packages": [
     {
@@ -1189,8 +1189,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
-      "size_bytes": 12386,
-      "modified_at": "2026-06-30T12:54:23-04:00"
+      "size_bytes": 14030,
+      "modified_at": "2026-07-02T03:44:43-04:00",
+      "description": "Cleanup diário de backups antigos com alerta Discord humanizado; preserva último backup por família e contabiliza tarballs Hermes preservados separadamente."
     },
     {
       "path": "/root/mgs-agent/scripts/import-discord-thread.py",
