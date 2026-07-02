@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-02T03:44:55-04:00",
-    "generated_by": "zeus-housekeeping-alert-layout-update"
+    "updated_at": "2026-07-02T11:22:02-04:00",
+    "generated_by": "zeus-report-infra-processor"
   },
   "system_packages": [
     {
@@ -281,11 +281,11 @@
       "source_report": "Rodolfo alert triage 2026-07-01: track-article-cost sqlite3 missing",
       "package": "sqlite3",
       "version": "3.45.1-1ubuntu2.6",
-      "binary": "",
+      "binary": "/usr/bin/sqlite3",
       "binary_exists": true,
       "purpose": "SQLite CLI runtime dependency for /root/mgs-agent/scripts/track-article-cost.sh writing data/article-tracker.db",
       "validation": "command -v sqlite3; sqlite3 --version; track-article-cost.sh rerun saved pending posts and next run pending=0",
-      "updated_at": "2026-07-01T18:09:56-04:00"
+      "updated_at": "2026-07-01T18:10:19-04:00"
     }
   ],
   "runtime_artifacts": [
@@ -562,6 +562,34 @@
       "updated_at": "2026-06-30T16:04:08-04:00",
       "source_report": "REPORT-INFRA Hera complete silent/background Ares handoff persistence 2026-06-30",
       "validation": "runtime/versioned SHA match; secret scan OK; no restart executed."
+    },
+    {
+      "id": "zeus-meta-app-roles-watch-profile-script",
+      "agent": "zeus",
+      "type": "profile_script",
+      "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
+      "size_bytes": 31258,
+      "modified_at": "2026-07-01T15:42:13-04:00",
+      "sha256": "5295530a223722c5640f63aecfb658d6c26ba7ce7dd58c5c25d0d2d363263904",
+      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; canonical active app set uses B005-2 after original B005 deletion.",
+      "validation": "bash -n OK; dry-run and normal run OK; discovered items include BOT B005-2 Token and exclude BOT B005 Token; state has B005-2 and no B005.",
+      "updated_at": "2026-07-01T15:44:44-04:00",
+      "source_report": "Zeus direct standardization requested by Rodolfo 2026-07-01"
+    },
+    {
+      "id": "hera-fix-car-br-pt-drive-parent-20260702",
+      "agent": "hera",
+      "type": "temporary_execution_script",
+      "path": "/root/mgs-agent/tmp/hera-fix-car-br-pt-drive-parent.py",
+      "size_bytes": 7542,
+      "modified_at": "2026-07-02T11:19:59-04:00",
+      "sha256": "8d2549d09afcc343f6e7af705b076a4725bf89b7c0b4b2467df99488f5231f9e",
+      "git_tracked": false,
+      "purpose": "One-off Google Drive parent correction: moved CAR_BR_PT from MGS-AGENTS root to MGS-AGENTS/CRIATIVOS and verified READY folders/assets.",
+      "validation": "Reported OAuth auth_mode=oauth_user; CAR_BR_PT parent=1NLaOKK6n4fMF5u1Assgq8FKim76NI--i; CAR_BR_PT/IMG/01_READY and VID/01_READY validated; 4 known assets still under IMG/01_READY.",
+      "source_report": "REPORT-INFRA Hera Drive parent correction CAR_BR_PT 2026-07-02",
+      "risk": "Low: one-off Drive folder parent correction; no context versioned files changed; pending context alignment review.",
+      "updated_at": "2026-07-02T11:22:02-04:00"
     }
   ],
   "profile_skill_references": [
@@ -571,14 +599,14 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/SKILL.md",
-      "size_bytes": 39014,
-      "sha256": "a75453b7b28137a7e006db23e0ed0020ea22d59e4c9b3842ad2c872c8c02e9a7",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-30T16:04:08-04:00",
-      "validation": "runtime/versioned SHA match; git diff --check OK; secret scan OK; rules require Hera to classify/name/clean metadata/place READY/inventory directly and avoid public Hera↔Ares ping-pong.",
-      "modified_at": "2026-06-30T16:02:35-04:00",
-      "source_report": "REPORT-INFRA Hera complete silent/background Ares handoff persistence 2026-06-30",
-      "known_pending": "Define/validate technical silent-background Ares notification mechanism if needed beyond local inventory."
+      "size_bytes": 39394,
+      "sha256": "d8327dad4455c00f596cbc395d1d86c85c3eafe5f4af2786650edd63eaffb9a7",
+      "runtime_versioned_sha_match": false,
+      "updated_at": "2026-07-02T11:22:02-04:00",
+      "validation": "Runtime skill updated to require operation folders under MGS-AGENTS/CRIATIVOS; runtime file exists and sha256 recorded. Versioned context not changed in reported action; runtime_versioned_sha_match=false until profile sync/versioning catches up.",
+      "modified_at": "2026-07-02T11:20:29-04:00",
+      "source_report": "REPORT-INFRA Hera Drive parent correction CAR_BR_PT 2026-07-02",
+      "known_pending": "Evaluate whether versioned context/docs under /root/mgs-agent/context should be adjusted to reflect real Google Drive parent structure."
     },
     {
       "profile": "hera",
@@ -734,14 +762,15 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "size_bytes": 21137,
-      "modified_at": "2026-06-29T17:13:02-04:00",
-      "sha256": "bb2b80e1e1d1afe2c47bd7b3287b7643d57d9b8fee76805773286abeb9be63f4",
+      "size_bytes": 25993,
+      "modified_at": "2026-06-30T19:04:37-04:00",
+      "sha256": "5e744811f9ea13b86822ba96a3150b2d4e9ba875875beb5880990afa188f7673",
       "purpose": "Procedure for Meta app rate-limit/roles monitoring and #app-rate-limit alert standard.",
       "validation": "Updated after adding Perfil admin do app to alert semantics.",
-      "updated_at": "2026-06-29T20:39:56-04:00",
+      "updated_at": "2026-06-30T19:04:52-04:00",
       "skill": "meta-app-rate-limit-monitor",
-      "md5": "1f2a69ce922a1bc66b250f5df18b0dc8"
+      "md5": "1f2a69ce922a1bc66b250f5df18b0dc8",
+      "source_report": "REPORT-INFRA Zeus Meta app roles 3-message sorted email format 2026-06-30"
     },
     {
       "profile": "zeus",
@@ -804,6 +833,64 @@
       "source_report": "REPORT-INFRA Hera creative handoff silencioso/background para Ares 2026-06-30",
       "updated_at": "2026-06-30T16:03:19-04:00",
       "validation": "runtime/versioned SHA match; secret scan OK; reference requires READY upload verified before silent/background Ares notice; no public Hera↔Ares ping-pong in human thread."
+    },
+    {
+      "profile": "zeus",
+      "skill": "meta-app-rate-limit-monitor",
+      "type": "skill",
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
+      "versioned_path": null,
+      "size_bytes": 25993,
+      "sha256": "5e744811f9ea13b86822ba96a3150b2d4e9ba875875beb5880990afa188f7673",
+      "runtime_versioned_sha_match": null,
+      "updated_at": "2026-06-30T19:04:52-04:00",
+      "validation": "skill_manage patch succeeded; documents replacement app suffix canonicalization.",
+      "modified_at": "2026-06-30T19:04:37-04:00",
+      "source_report": "REPORT-INFRA Zeus Meta app roles 3-message sorted email format 2026-06-30",
+      "agent": "zeus"
+    },
+    {
+      "profile": "zeus",
+      "skill": "revenue-spend-reporting-pipeline",
+      "type": "profile_skill",
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/revenue-spend-reporting-pipeline/SKILL.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/revenue-spend-reporting-pipeline/SKILL.md",
+      "size_bytes": 10673,
+      "sha256": "466194d0a3863964821e316f69cc9e24d198dce08b8fc4eacded2b1ec82ca709",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-07-01T01:04:27-04:00",
+      "validation": "skill frontmatter parsed; runner smoke-tested; canonical 16-29 Jun rules embedded",
+      "source_report": "REPORT-INFRA Zeus revenue-spend reporting skill"
+    },
+    {
+      "profile": "zeus",
+      "skill": "discord-ops",
+      "type": "profile_skill",
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/SKILL.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/SKILL.md",
+      "size_bytes": 95434,
+      "sha256": "85f17a2f30e5fea5ddc006ee9ffe20b1f92c97b855beaa591babd83a72b22168",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-07-02T03:52:19-04:00",
+      "validation": "REPORT-INFRA embed helper documented with no-mention/no-thread defaults; sync-souls completed.",
+      "source_report": "Zeus REPORT-INFRA embed standardization 2026-07-02",
+      "agent": "zeus",
+      "modified_at": "2026-07-02T03:51:55-04:00"
+    },
+    {
+      "profile": "zeus",
+      "skill": "log-monitor-discord-alert",
+      "type": "profile_skill",
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/SKILL.md",
+      "size_bytes": 44100,
+      "sha256": "4617c00a57b10dac1caba25d77a11b12bcff9efe512bdd6ba428fe1ee1292f6c",
+      "runtime_versioned_sha_match": true,
+      "modified_at": "2026-07-02T04:30:08-04:00",
+      "updated_at": "2026-07-02T04:30:34-04:00",
+      "validation": "Skill atualizada: alertas #alerts-infra sem mention por padrão e restarts sem tabela monoespaçada larga.",
+      "source_report": "Zeus service restart alert layout fix 2026-07-02",
+      "agent": "zeus"
     }
   ],
   "systemd_services": [
@@ -894,6 +981,9 @@
     },
     {
       "entry": "16 9 * * * flock -n /var/lock/monitor_discord_thread_archive_warnings.lock /root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py >> /root/mgs-agent/logs/monitor-discord-thread-archive-warnings.log 2>&1"
+    },
+    {
+      "entry": "*/15 * * * * /root/mgs-agent/scripts/discord-archive-stale-agent-threads.py --apply --grace-minutes 30 --summary-only >> /root/mgs-agent/logs/discord-archive-stale-agent-threads.log 2>&1"
     }
   ],
   "scripts": [
@@ -1118,6 +1208,11 @@
       "modified_at": "2026-06-16T11:54:06-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/discord-archive-stale-agent-threads.py",
+      "size_bytes": 7751,
+      "modified_at": "2026-06-30T22:38:59-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/discord-response-lint.py",
       "size_bytes": 3074,
       "modified_at": "2026-06-15T23:31:30-04:00"
@@ -1190,8 +1285,7 @@
     {
       "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
       "size_bytes": 14030,
-      "modified_at": "2026-07-02T03:44:43-04:00",
-      "description": "Cleanup diário de backups antigos com alerta Discord humanizado; preserva último backup por família e contabiliza tarballs Hermes preservados separadamente."
+      "modified_at": "2026-07-02T03:44:43-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/import-discord-thread.py",
@@ -1199,9 +1293,19 @@
       "modified_at": "2026-06-15T20:26:48-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/include-all-active-sb-templates-in-utility-rollout.py",
+      "size_bytes": 5284,
+      "modified_at": "2026-07-02T01:38:29-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/infra-discovery.sh",
       "size_bytes": 8135,
       "modified_at": "2026-06-19T11:15:17-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/map_content_references.py",
+      "size_bytes": 16989,
+      "modified_at": "2026-07-02T01:03:37-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
@@ -1256,9 +1360,7 @@
     {
       "path": "/root/mgs-agent/scripts/monitor-auto-push.sh",
       "size_bytes": 12959,
-      "modified_at": "2026-07-01T18:09:56-04:00",
-      "sha256": "3e084b9d893a2ef8b8c8f8d5b01ea8b13e41999a1aa037fb15f870d23186bc03",
-      "description": "Monitor de saúde do auto-push; ignora START sem OK quando commit já foi reconciliado em origin/main ou supersedido fora do HEAD local."
+      "modified_at": "2026-07-01T18:09:02-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
@@ -1287,8 +1389,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
-      "size_bytes": 13662,
-      "modified_at": "2026-06-27T15:37:29-04:00"
+      "size_bytes": 13604,
+      "modified_at": "2026-07-02T04:29:25-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-tool-loops.sh",
@@ -1351,9 +1453,19 @@
       "modified_at": "2026-06-09T10:05:35-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/process-revenue-spend-report.py",
+      "size_bytes": 28137,
+      "modified_at": "2026-07-01T01:01:50-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/qa-content-validator.py",
       "size_bytes": 14927,
       "modified_at": "2026-05-28T13:31:49-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/query_content_references.py",
+      "size_bytes": 2062,
+      "modified_at": "2026-07-02T01:08:57-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/rec-fingerprint.py",
@@ -1414,6 +1526,21 @@
       "path": "/root/mgs-agent/scripts/runcloud-inventory.sh",
       "size_bytes": 5772,
       "modified_at": "2026-05-16T17:37:26-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/sb-utility-rollout-cron.sh",
+      "size_bytes": 237,
+      "modified_at": "2026-07-01T16:36:09-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/sb-utility-rollout-manager.py",
+      "size_bytes": 30730,
+      "modified_at": "2026-07-01T16:36:09-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/send-report-infra-embed.sh",
+      "size_bytes": 3314,
+      "modified_at": "2026-07-02T03:49:05-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sync-codex-oauth.sh",
@@ -2493,6 +2620,11 @@
         "skill_md": "/root/.hermes/profiles/atena/skills/software-development/writing-plans/SKILL.md"
       },
       {
+        "name": "content-editorial-image-workflows",
+        "category": "wordpress",
+        "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/content-editorial-image-workflows/SKILL.md"
+      },
+      {
         "name": "content-generate-rec-issuer-quirks",
         "category": "wordpress",
         "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/content-generate-rec-issuer-quirks/SKILL.md"
@@ -2501,6 +2633,11 @@
         "name": "content-reference-map",
         "category": "wordpress",
         "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/content-reference-map/SKILL.md"
+      },
+      {
+        "name": "content-site-vertical-operations",
+        "category": "wordpress",
+        "skill_md": "/root/.hermes/profiles/atena/skills/wordpress/content-site-vertical-operations/SKILL.md"
       },
       {
         "name": "yoast-wordpress",
@@ -3642,6 +3779,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/mgs-company-os-architecture/SKILL.md"
       },
       {
+        "name": "revenue-spend-reporting-pipeline",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/revenue-spend-reporting-pipeline/SKILL.md"
+      },
+      {
         "name": "smartbidding-dashboard-access",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md"
@@ -3825,8 +3967,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "32c12aeb317d1c4ccf11e4040ff69eb7",
-      "modified_at": "2026-06-30T12:41:04-04:00"
+      "md5": "ca110b985d1714ba972e94f1a1688dba",
+      "modified_at": "2026-07-02T10:41:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -3837,44 +3979,44 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "7cf50e07ddba92e1899fd0fed103ca71",
-      "modified_at": "2026-06-30T12:45:01-04:00"
+      "md5": "7514a1d60c99567f0b88f48dcde06f01",
+      "modified_at": "2026-07-02T10:45:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
       "size_bytes": 135,
-      "md5": "0fa59c5d8d458dc529afac8d9fe842ea",
-      "modified_at": "2026-06-30T09:16:02-04:00"
+      "md5": "2a7a4bf78a0522c552922d6dc917bbc5",
+      "modified_at": "2026-07-02T09:16:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "d646c2dba49590f685658546af6d2162",
-      "modified_at": "2026-06-30T09:06:27-04:00"
+      "md5": "3c156dc321bc10ba65b096902562ade4",
+      "modified_at": "2026-07-02T09:07:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 20650,
-      "md5": "c8a2929e3c106d3e3b0785f66ad1512e",
-      "modified_at": "2026-06-30T12:55:02-04:00"
+      "size_bytes": 21811,
+      "md5": "8f5bba380ff687cdf461baf85bcca794",
+      "modified_at": "2026-07-02T10:50:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 333,
-      "md5": "cb1a4b795c64870b56533e5d1bc4cc0c",
-      "modified_at": "2026-06-30T08:37:02-04:00"
+      "size_bytes": 332,
+      "md5": "2761c5ae71958fdf36ee567b9d803195",
+      "modified_at": "2026-07-02T08:37:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 438,
-      "md5": "f407002dfbdc9002fe20c22363da5363",
-      "modified_at": "2026-06-30T12:45:47-04:00"
+      "md5": "238294f797c67739fcbc7bbf39d6b129",
+      "modified_at": "2026-07-02T10:45:54-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 147697,
-      "md5": "e9de3a3e93e2da45e7cbc9b58b72502e",
-      "modified_at": "2026-06-30T12:21:53-04:00"
+      "size_bytes": 157229,
+      "md5": "0b2dcd99b8f5b7ee20ed3078db1c9f50",
+      "modified_at": "2026-07-02T05:00:09-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -3890,9 +4032,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 44210,
-      "md5": "a7fb81ef63758084a7693dffe84d978a",
-      "modified_at": "2026-06-30T12:53:36-04:00"
+      "size_bytes": 45592,
+      "md5": "6d424dbf2bb54dfb390686bd59d9810b",
+      "modified_at": "2026-07-02T10:50:21-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -3931,16 +4073,46 @@
       "modified_at": "2026-04-20T23:12:25-04:00"
     },
     {
+      "path": "/root/mgs-agent/data/sb-utility-rollout-tracker.before-all-active-20260702-013833.json",
+      "size_bytes": 218496,
+      "md5": "77679100ab28d231f990f013bd4ee9cc",
+      "modified_at": "2026-07-02T01:38:33-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/sb-utility-rollout-tracker.before-level-10-20-20260702-024813.json",
+      "size_bytes": 465504,
+      "md5": "c82f05876fab0b7281a0faff520598f4",
+      "modified_at": "2026-07-02T02:52:58-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/sb-utility-rollout-tracker.before-zytiva31-fix-20260702-020853.json",
+      "size_bytes": 442342,
+      "md5": "e50f7ebe548502344e4a8774564cf7cd",
+      "modified_at": "2026-07-02T02:09:32-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/sb-utility-rollout-tracker.before-zytiva31-restore-20260702-021147.json",
+      "size_bytes": 442659,
+      "md5": "5e8cb92791e01d530c621d4f3db888f3",
+      "modified_at": "2026-07-02T02:12:25-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/sb-utility-rollout-tracker.json",
+      "size_bytes": 465504,
+      "md5": "c82f05876fab0b7281a0faff520598f4",
+      "modified_at": "2026-07-02T02:52:58-04:00"
+    },
+    {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
-      "md5": "0175be6b501c7507f025ad16a544de38",
-      "modified_at": "2026-06-30T12:51:01-04:00"
+      "md5": "23ad9dd53818ca58b837dcdea6bfc8f5",
+      "modified_at": "2026-07-02T10:46:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
-      "size_bytes": 634,
-      "md5": "2283ada16a334c6decf5679dee77dda4",
-      "modified_at": "2026-06-14T14:03:54-04:00"
+      "size_bytes": 1275,
+      "md5": "507c582a76ecf0912dfb36507922f000",
+      "modified_at": "2026-07-01T17:25:19-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -3951,8 +4123,8 @@
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "06e5dc2baf6e9048039dafded6f2431a",
-      "modified_at": "2026-06-30T08:07:02-04:00"
+      "md5": "b7cd66e5b0c5261aecbeb1cca47f4120",
+      "modified_at": "2026-07-02T08:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -3980,39 +4152,21 @@
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "size_bytes": 13737,
-      "md5": "fd408c607b7be82ed0b16cde4da9a73a",
-      "modified_at": "2026-06-28T17:55:18-04:00"
+      "size_bytes": 15162,
+      "md5": "686cee64e0ec87590d899b5b6d4ac9fa",
+      "modified_at": "2026-07-01T17:30:33-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/hera-soul.md",
       "size_bytes": 26276,
       "md5": "210d958abb23ab031d75f0df77ad1ef4",
-      "modified_at": "2026-06-30T16:01:54-04:00",
-      "type": "profile_soul",
-      "agent": "hera",
-      "sha256": "9d4888aaedc2ad98f8b4f7adc7534c190fadecf504107f47bcd4c8eb398b8f6b",
-      "updated_at": "2026-06-30T16:04:08-04:00",
-      "source_report": "REPORT-INFRA Hera complete silent/background Ares handoff persistence 2026-06-30",
-      "validation": "runtime/versioned SHA match; git diff --check OK; secret scan OK; Hera SOUL updated for silent/background Ares handoff semantics."
+      "modified_at": "2026-06-30T16:01:54-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
       "size_bytes": 43510,
       "md5": "313356aeb86d41db526f68507a56ec4e",
       "modified_at": "2026-06-16T19:23:39-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/context/hera-creative-agent.md",
-      "type": "context_doc",
-      "agent": "hera",
-      "size_bytes": 25562,
-      "md5": "dc82afbd98a70ad23775da2700d22a2c",
-      "sha256": "fa6402f54f50d534a34423b91043e200697e5c5a402bc84941677f076161e068",
-      "modified_at": "2026-06-30T16:01:37-04:00",
-      "updated_at": "2026-06-30T16:04:08-04:00",
-      "source_report": "REPORT-INFRA Hera complete silent/background Ares handoff persistence 2026-06-30",
-      "validation": "git diff --check OK; secret scan OK; Hera Creative OS updated for silent/background Ares handoff semantics."
     }
   ],
   "mu_plugin_canonical": {
