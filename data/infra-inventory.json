@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-04T06:38:34-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-04T06:56:40-04:00",
+    "generated_by": "Zeus manual update after canonical B011 rename"
   },
   "system_packages": [
     {
@@ -652,6 +652,19 @@
       "description": "B011 DTR/ChatPion link monitor, renamed from temporary B011 label; validates OAuth connection and syncs X in sheet.",
       "updated_at": "2026-07-04T06:27:21-04:00",
       "validation": "Manual live run OK: targets=19 linked=18 not_linked_or_error=1 sheet updated=18 alerts_sent=0."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
+      "size_bytes": 21232,
+      "modified_at": "2026-07-04T06:20:49-04:00",
+      "sha256": "d4b7e8921504c6ce19caa2eb2e5a497b85837135875b51f9bbe5376ae2c97582",
+      "owner": "Zeus/Ops",
+      "type": "hermes_profile_script",
+      "risk": "medium",
+      "description": "B011 DTR/ChatPion link monitor. Reads BOT B011 Token, validates account-level OAuth link via Meta /debug_token, treats page count as separate inventory, and alerts channel 1522830283240505385 on anomalies.",
+      "cron_job_id": "498fb0d95e10",
+      "schedule": "every 2m",
+      "validation": "bash -n OK; dry-run targets=19 linked=18 not_linked_or_error=1 total_connected_pages=196; real run alerts_sent=0"
     }
   ],
   "profile_skill_references": [
@@ -965,6 +978,24 @@
       "source_report": "REPORT-INFRA Zeus Meta app roles stale snapshot docs cleanup 2026-07-04",
       "agent": "zeus",
       "last_commit": "pending"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
+      "size_bytes": 43538,
+      "modified_at": "2026-07-04T06:40:30-04:00",
+      "sha256": "ca88f65c81f6ce65629ec2d22c983aa6bbbddb9104f897bebda26c04d8a4136d",
+      "owner": "Zeus/Ops",
+      "type": "skill",
+      "description": "Updated for canonical B011 naming and monitor configuration."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
+      "size_bytes": 45844,
+      "modified_at": "2026-07-04T06:55:27-04:00",
+      "sha256": "95f63117439134ae6ccb1d32d162444effce4e9720f4d1d2a6a920ce6a53dcc0",
+      "owner": "Zeus/Ops",
+      "type": "skill",
+      "description": "Updated for canonical B011 naming and monitor configuration."
     }
   ],
   "systemd_services": [
@@ -1064,6 +1095,19 @@
     },
     {
       "entry": "0 8,16 * * * flock -n /var/lock/monitor_sb_restricted_pages.lock /root/mgs-agent/scripts/monitor-sb-restricted-pages.sh >> /root/mgs-agent/logs/monitor-sb-restricted-pages.log 2>&1"
+    },
+    {
+      "job_id": "498fb0d95e10",
+      "name": "b011-dtr-link-watch",
+      "type": "hermes_cron",
+      "schedule": "every 2m",
+      "script": "b011-dtr-link-watch.sh",
+      "profile": "zeus",
+      "deliver": "local",
+      "no_agent": true,
+      "owner": "Zeus/Ops",
+      "risk": "medium",
+      "description": "Runs B011 DTR link monitor. Direct Discord alerts on anomalies; empty stdout is silent OK."
     }
   ],
   "scripts": [
@@ -4412,6 +4456,24 @@
       "size_bytes": 43685,
       "md5": "c08529fcd8b0253aae95f1d35c040d4b",
       "modified_at": "2026-07-02T20:20:01-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
+      "size_bytes": 16125,
+      "modified_at": "2026-07-04T06:56:23-04:00",
+      "sha256": "12d7ebbc6f6ce0ae443bf7aed3aa1a68b9b96a289a8b70e515fa4d01738318bf",
+      "owner": "Zeus/Ops",
+      "type": "monitor_state",
+      "description": "Sanitized B011 DTR link monitor state. Contains no access tokens."
+    },
+    {
+      "path": "/root/mgs-agent/docs/CRONS.md",
+      "size_bytes": 21749,
+      "modified_at": "2026-07-04T06:42:28-04:00",
+      "sha256": "1cf510754247f593123662b883fc381f45b2a7dde79153ee706f13f96790b6f6",
+      "owner": "Zeus/Ops",
+      "type": "docs",
+      "description": "Updated for canonical B011 naming and monitor configuration."
     }
   ],
   "mu_plugin_canonical": {
