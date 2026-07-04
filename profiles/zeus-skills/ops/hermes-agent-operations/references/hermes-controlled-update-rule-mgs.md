@@ -38,6 +38,8 @@ Scripts MGS                  ensure-hermes-mgs-patches.sh and update reports
 Telegram                     não crítico na MGS; sem backup/teste dedicado salvo impacto compartilhado
 ```
 
+Detalhe operacional da decisão Telegram + port canônico 2026-07-04: `references/hermes-update-telegram-noncritical-and-20260704-port.md`.
+
 ## Standard command
 
 Precheck/dry-run evidence without mutating live checkout:
