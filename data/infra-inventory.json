@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-04T06:27:21-04:00",
-    "generated_by": "Zeus manual update after Rodolfo renamed B001A to B011"
+    "updated_at": "2026-07-04T06:28:44-04:00",
+    "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
     {
@@ -1064,22 +1064,6 @@
     },
     {
       "entry": "0 8,16 * * * flock -n /var/lock/monitor_sb_restricted_pages.lock /root/mgs-agent/scripts/monitor-sb-restricted-pages.sh >> /root/mgs-agent/logs/monitor-sb-restricted-pages.log 2>&1"
-    },
-    {
-      "job_id": "498fb0d95e10",
-      "name": "b011-dtr-link-watch",
-      "type": "hermes_cron",
-      "schedule": "every 2m",
-      "script": "b011-dtr-link-watch.sh",
-      "profile": "zeus",
-      "deliver": "local",
-      "no_agent": true,
-      "owner": "Zeus/Ops",
-      "risk": "medium",
-      "description": "Runs B011 DTR link monitor. Script posts direct Discord alerts to B011 app-rate-limit channel on anomalies; empty stdout is silent OK.",
-      "updated_at": "2026-07-04T06:27:21-04:00",
-      "validation": "Renamed from b001a-dtr-link-watch; manual script validation OK.",
-      "source_report": "REPORT-INFRA Zeus B001A same-plan cron alignment 2026-07-04"
     }
   ],
   "scripts": [
@@ -3857,13 +3841,7 @@
       {
         "name": "meta-app-rate-limit-monitor",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-        "size_bytes": 41403,
-        "sha256": "0000d7603061a8ffd2370d8886c821fffa46c0b740d6ae56c175f4431cf996cf",
-        "modified_at": "2026-07-04T05:56:59-04:00",
-        "updated_at": "2026-07-04T05:57:33-04:00",
-        "validation": "B001A aligned to B001-B010 plan: cron every 2m; DTR/page-token runtime source writes/clears sheet X; live run OK targets=19 linked=18 marked=1 updated_cells=1 alerts_sent=0; meta roles script preserves B001A X instead of clearing it.",
-        "source_report": "REPORT-INFRA Zeus B001A same-plan cron alignment 2026-07-04"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md"
       },
       {
         "name": "meta-utility-template-approval",
@@ -4174,8 +4152,20 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "736e554e8656652263b9e186f4bd58ee",
-      "modified_at": "2026-07-04T04:56:06-04:00"
+      "md5": "f52daa269715f585ac1306fd9c546b56",
+      "modified_at": "2026-07-04T06:26:08-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/b001a-dtr-link-monitor-state.json",
+      "size_bytes": 16157,
+      "md5": "c75df96164fd0f58902b5c379fcc38a2",
+      "modified_at": "2026-07-04T06:12:15-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
+      "size_bytes": 16199,
+      "md5": "7b57729e0d06ca40f7528389b3c956f3",
+      "modified_at": "2026-07-04T06:28:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -4186,8 +4176,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 59,
-      "md5": "0c902c1fb7d2ec862a117b67652558cc",
-      "modified_at": "2026-07-04T05:00:01-04:00"
+      "md5": "e2bd619eb20852d6e707582143cc421c",
+      "modified_at": "2026-07-04T06:15:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -4216,8 +4206,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 22456,
-      "md5": "83a6cbc352cd465e934bd9e2dcd8695d",
-      "modified_at": "2026-07-04T05:00:02-04:00"
+      "md5": "c031e199dc3aefbf10e876cf96c9cde5",
+      "modified_at": "2026-07-04T06:25:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
@@ -4228,14 +4218,14 @@
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 438,
-      "md5": "619a349ab7239f1ad7f692fa0147ccb1",
-      "modified_at": "2026-07-04T04:45:50-04:00"
+      "md5": "95d309d371e231202c564ad217208aec",
+      "modified_at": "2026-07-04T06:15:45-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 164445,
-      "md5": "75c7dea3b4cb6c09056525c9c016697f",
-      "modified_at": "2026-07-04T04:58:08-04:00"
+      "size_bytes": 171142,
+      "md5": "bad49a20c3e9011dd315749dfb4b5060",
+      "modified_at": "2026-07-04T06:27:21-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -4250,14 +4240,28 @@
       "modified_at": "2026-04-20T23:14:41-04:00"
     },
     {
+      "path": "/root/mgs-agent/data/meta-app-role-monitor-state.before-20260704-0619-b011-clean.json",
+      "size_bytes": 49086,
+      "md5": "db5aea736f1f0bc585c170bbb4ff4c15",
+      "modified_at": "2026-07-04T06:17:40-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-app-role-monitor-state.before-b001a-to-b011-20260704-0623.json",
+      "size_bytes": 49075,
+      "md5": "f1bcd8034d7bc33d65cba7ceb00168ee",
+      "modified_at": "2026-07-04T06:21:40-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/meta-app-role-monitor-state.before-cache-clean-20260704-060944.json",
+      "size_bytes": 47631,
+      "md5": "d99d03a8d85af644f051fd8f4b86d051",
+      "modified_at": "2026-07-04T06:09:39-04:00"
+    },
+    {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 46702,
-      "md5": "190f8d8ed39bacd52ce5eb732e2a6569",
-      "modified_at": "2026-07-04T06:25:42-04:00",
-      "sha256": "f70a095ad4f4e07e2e16eaf5b3577e18b5d6c0e78457df039cf8f78abd480dc6",
-      "updated_at": "2026-07-04T06:27:21-04:00",
-      "validation": "State migrated B001A->B011; B001A key absent; B011 key present; live Meta run errors=0.",
-      "source_report": "REPORT-INFRA Zeus app-role cache cleanup 2026-07-04"
+      "md5": "d47d1ecd742bb8f95a4ebc263a1c2c62",
+      "modified_at": "2026-07-04T06:25:42-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -4341,7 +4345,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "5a066d5cdbdb7955edbea85e9a1b18e1",
-      "modified_at": "2026-07-04T04:56:01-04:00"
+      "modified_at": "2026-07-04T06:26:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -4357,9 +4361,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 1761,
-      "md5": "f42b66053cc321aca623671c1976f4f1",
-      "modified_at": "2026-07-04T05:00:03-04:00"
+      "size_bytes": 1762,
+      "md5": "6570173b35e099acf022918425f8652b",
+      "modified_at": "2026-07-04T06:25:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
@@ -4408,33 +4412,6 @@
       "size_bytes": 43685,
       "md5": "c08529fcd8b0253aae95f1d35c040d4b",
       "modified_at": "2026-07-02T20:20:01-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/data/b001a-dtr-link-monitor-state.json",
-      "size_bytes": 15563,
-      "modified_at": "2026-07-04T05:46:19-04:00",
-      "sha256": "afcb7c49b3871a4bf5d74b54f912bda1bb2cd4175a4518fac9425db87bec1fe3",
-      "owner": "Zeus/Ops",
-      "type": "monitor_state",
-      "description": "Sanitized state for B001A DTR link monitor: account link statuses, page counts, last summary, alert cooldowns. Contains no access tokens."
-    },
-    {
-      "path": "/root/mgs-agent/docs/CRONS.md",
-      "type": "docs",
-      "owner": "Zeus/Ops",
-      "description": "Cron inventory documentation including Hermes B001A DTR link monitor section.",
-      "size_bytes": 21754,
-      "modified_at": "2026-07-04T05:47:23-04:00",
-      "sha256": "86e5e51998e637c1427af489c65b126fe4f255ead1c1529f42dd48624cee5fc2"
-    },
-    {
-      "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
-      "size_bytes": 16199,
-      "modified_at": "2026-07-04T06:26:48-04:00",
-      "sha256": "4ec68b374b63271eaaacb096080507c74a40fcf99e45bbaa0aaeb7ad81ee8c10",
-      "updated_at": "2026-07-04T06:27:21-04:00",
-      "description": "B011 DTR link monitor state, migrated from B001A temporary label; contains account link statuses and sheet sync summary, no tokens.",
-      "validation": "Manual live run OK targets=19 linked=18 marked=1 alerts_sent=0."
     }
   ],
   "mu_plugin_canonical": {
