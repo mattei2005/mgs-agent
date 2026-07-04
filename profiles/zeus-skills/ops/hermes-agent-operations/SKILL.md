@@ -54,7 +54,11 @@ Falha fechada: se backup, patch guard, py_compile, comparação pós-update ou i
 
 **Correção operacional após incidentes 2026-06-15/2026-06-17:** backup sozinho não basta, e comparar só nomes de arquivos também não basta. O update só pode ser chamado de concluído após comparar a superfície crítica viva contra o backup/pre-state e gerar evidência explícita: `post-profiles-sanitized.txt`, `post-backup-live-profile-compare.txt`, `post-readonly-invariants.txt` e comparação de markers/funções/strings introduzidos por `pre-local-diff.patch` / `pre-local-diff-cached.patch`. Escopo mínimo: `config.yaml`, `SOUL.md` e `auth.json` sanitizado para Zeus/Atena/Ares/Hera, além dos invariantes MGS em Hermes. Depois do update, o fluxo deve restaurar os diffs locais pré-update e falhar fechado se qualquer patch local não restaurar limpo ou se algum marker local sumir sem evidência de incorporação upstream equivalente. Se a comparação foi feita retroativamente, dizer que foi retroativa; não apresentar como se tivesse sido feita no fluxo original. Detalhes: `references/hermes-controlled-update-report-and-backup-compare-2026-06-15.md` e `references/hermes-local-patch-surface-guard-2026-06-17.md`.
 
-**Git hygiene obrigatório antes de gerar artifacts:** update reports/backups não são código. Antes de rodar ou validar fluxo que cria `/root/mgs-agent/reports/hermes-updates/` ou `*.tar.gz`, garantir `.gitignore` cobrindo esses paths e pausar `mgs-autocommit.service` se o fluxo ainda está em desenvolvimento/teste. Se artifacts pesados/sensíveis entrarem no Git, tratar como incidente: parar autocommit, resetar para commit limpo, force-push com lease exato só após aprovação explícita de Rodolfo, `git reflog expire` + `git gc --prune=now`, validar disco e reativar autocommit. Detalhe: `references/hermes-controlled-update-git-hygiene-2026-06-15.md`.
+- **Git hygiene obrigatório antes de gerar artifacts:** update reports/backups não são código. Antes de rodar ou validar fluxo que cria `/root/mgs-agent/reports/hermes-updates/` ou `*.tar.gz`, garantir `.gitignore` cobrindo esses paths e pausar `mgs-autocommit.service` se o fluxo ainda está em desenvolvimento/teste. Se artifacts pesados/sensíveis entrarem no Git, tratar como incidente: parar autocommit, resetar para commit limpo, force-push com lease após aprovação explícita de Rodolfo, `git reflog expire` + `git gc --prune=now`, validar disco e reativar autocommit. Detalhe: `references/hermes-controlled-update-git-hygiene-2026-06-15.md`.
+
+- **Discord MGS sem breadcrumbs de tool/code:** em profiles MGS, `display.platforms.discord.tool_progress` tem precedência sobre `display.tool_progress`. Se Discord mostrar terminal/read_file/search_files/código em vez de só o report final, corrigir live profiles e mirrors para `display.tool_progress: off` + `display.platforms.discord.tool_progress: off` + `tool_preview_length: 0` + `cleanup_progress: true`, e validar via `resolve_display_setting(..., 'discord', 'tool_progress') == 'off'`. Mudança de display normalmente vale no próximo turno e não exige restart. Detalhe: `references/mgs-discord-tool-progress-and-backup-retention-2026-06-30.md`.
+
+- **Retenção de backups Hermes update:** o housekeeping genérico de `.bak/.backup/.old/.orig/~` não cobre sozinho os tarballs grandes `reports/hermes-updates/**/hermes-profiles-backup-*.tar.gz`. Manter política explícita: preservar os 2 tarballs Hermes update mais recentes e deletar antigos acima de 2 dias; validar com `housekeeping-bak-cleanup.sh --dry-run`. `mgs-safety-backup.sh` pode tratar `tar rc=1` por `file changed as we read it` como WARN se o archive existe e `tar -tzf` passa. Detalhe: `references/mgs-discord-tool-progress-and-backup-retention-2026-06-30.md`.
 
 ### Pré-check mínimo
 
@@ -126,20 +130,24 @@ Quando Rodolfo pedir uma **revisão geral pós-update** (funcionalidades, crons,
 
 ### Pitfalls de update
 
+- **Discord mostrando tool/code breadcrumbs após update:** antes de concluir que “cleanup_progress” resolveu, verificar precedência de config. `display.platforms.discord.tool_progress` vence `display.tool_progress`; se estiver `all`, Discord vai mostrar `terminal`/`read_file`/`search_files` e previews de comando durante operações longas. Postura MGS para Zeus/Atena/Ares/Hera em Discord: `display.tool_progress: off`, `display.platforms.discord.tool_progress: off`, `tool_preview_length: 0`, `cleanup_progress: true`, `interim_assistant_messages: false`, `busy_ack_detail: false`. Atualizar live profiles e mirrors em `/root/mgs-agent/profiles/`, validar com `gateway.display_config.resolve_display_setting(..., 'discord', 'tool_progress') == 'off'` e rodar `tests/gateway/test_display_config.py` + `tests/gateway/test_run_cleanup_progress.py`. Detalhe: `references/discord-tool-progress-clean-final-report-2026-06-30.md`.
 - Quando Hermes mostrar profiles com `_config_version` antigo após update, usar migração controlada por profile: backup pequeno de `config.yaml`/`SOUL.md`/`auth.json`, `hermes -p <profile> config migrate`, validação provider/model/auth/gateways/patch guard, sync dos mirrors em `/root/mgs-agent/profiles/`, restart gracioso só dos gateways migrados e audit log. Playbook: `references/hermes-profile-config-migration-mgs.md`.
 - Pós-update com restart dos gateways MGS: quando o comando roda dentro do próprio Zeus, `systemctl restart zeus-gateway.service ...` pode timeoutar ou deixar Zeus em `deactivating` porque a conversa/tool atual mantém o processo antigo vivo. Não reportar falha sem checar estado vivo. Validar Atena/Ares, agendar finalização externa via `systemd-run` se necessário, depois diferenciar falhas históricas do restart de erros pós-start. Playbook: `references/post-update-gateway-restart-validation.md`.
 - **Anti-loop de restart multiagente:** não disparar repetidas tentativas de restart Zeus/Atena/Ares/Hera a partir da própria conversa do Zeus em retomada. Use um único finalizer externo, idempotente e com lock; Zeus por último; depois pare e leia o log antes de qualquer nova tentativa. Antes de novo restart após retomada, checar audit/log/HEAD/status para não reprocessar o mesmo `Execute`. Em revisão pós-recovery, comparar root crontab contra `/root/mgs-agent/docs/CRONS.md`, mas tratar cron/monitor comentado como **decisão operacional possível**, não falha automática: reportar drift e pedir confirmação antes de religar/desarmar. Se Rodolfo ou outro operador corrigiu backups/crons fora do Zeus durante o incidente, revalidar o estado vivo antes de repetir números de relatório anterior. Ver `references/hermes-restart-loop-and-cron-drift-2026-06-11.md` e `references/hermes-post-update-full-system-review.md`.
 - **Pós-update com banner/units/alertas ambíguos:** se Git mostra `HEAD == origin/main` e `behind=0`, mas `hermes --version` ainda diz “Update available”, limpar `.update_check` de root/profiles e validar de novo. Se finalizer/transient unit ficou `failed` por reiniciar o próprio conjunto de gateways, não repetir update/restart: inspecionar estado vivo, rodar patch guard, resetar failed unit histórico e reportar. Em scripts futuros, usar `systemctl restart --no-block` para gateways. Se Rodolfo reclamar que não recebeu alertas, validar cron daemon + journal + mtimes/logs de monitores e explicar que silêncio pode ser “nenhuma condição de alerta”, não falha. Detalhe: `references/hermes-update-2026-06-12-stale-cache-cron-alerts.md`.
 - Update parcial com `ENOSPC`: se o disco enche durante `hermes update`, não repetir às cegas. Checar HEAD/upstream/behind, limpar backups redundantes mantendo o backup mais recente, reparar dependências (`uv pip install -e '.[all]'`, `npm install`, `ui-tui npm install`) sem reiniciar serviços, compilar arquivos críticos, e só então dar o comando separado de restart. Playbook: `references/hermes-update-enospc-controlled-recovery.md`.
 - Após `hermes update`, `systemd` pode mostrar falhas `status=1/FAILURE` durante restart controlado. Diferenciar incidente ativo de histórico: confirmar PIDs atuais, uptime do serviço, memória atual/peak, logs posteriores e se há novo traceback/OOM. Só alertar como loop se houver falhas repetidas depois do novo start.
+- Package-manager/security-agent maintenance outside MGS can also move Hermes gateway `ActiveEnterTimestamp`. Before calling it an unexplained crash, inspect apt/dpkg/syslog around the service start. Known case: Hostinger Monarx cron `/etc/cron.d/monarx-update` Tuesday 04:20 EDT upgraded `monarx-agent` and coincided with Ares restart. Guard pattern lives in `log-monitor-discord-alert` → `references/monarx-package-update-gateway-restart-hardening-2026-06-23.md`: classify external cron, add needrestart override for Zeus/Atena/Ares/Hera, enrich service-restart alert with cause inference.
 - Timeout do terminal não prova falha; `hermes update` pode seguir em background. Verificar depois com versão, commits e serviços.
 - Se `hermes update` falhar por `ENOSPC`/disco cheio, **não repetir update às cegas**. Primeiro checar `df -h /`, `df -ih /`, maiores diretórios, logs do update, HEAD/origin/behind, `git status`, stashes e serviços. O repo pode já estar em `behind: 0` com patches locais restaurados, enquanto npm/dependências falharam e os gateways ainda rodam PIDs antigos. Liberar espaço (alvo 8–10G livres; backups redundantes de profiles são candidatos comuns), reparar dependências com `uv pip install --python "$repo/venv/bin/python" -e '.[all]'` + `npm install --no-fund --no-audit` (+ `ui-tui` se existir), compilar arquivos críticos, e só então reiniciar/validar gateways. Playbook: `references/hermes-update-enospc-partial-update-recovery.md`.
 - If `hermes update` official travar/timeoutar sem output, **não repetir em loop**. Rodar verificação de estado; se ainda estiver atrasado, executar atualização manual controlada: backup já feito → `git stash push -u` dos patches locais → `git fetch origin main` → `git pull --ff-only origin main` → restaurar stash/patch local → limpar `__pycache__` → reinstalar dependências (`venv/bin/python -m pip install -e '.[all]'`) → `npm install`/build web quando aplicável → remover `.update_check` dos profiles → validar commit HEAD/origin, `hermes --version`, `py_compile` e serviços.
 - Ao reiniciar Zeus a partir da própria thread com auto-retomada ativa, **não reexecutar a mesma ordem `Execute` sem checar idempotência**. Antes de qualquer novo restart após retomada, consultar `events-audit.jsonl`, `/root/mgs-agent/logs/mgs-direct-hermes-restart-latest.log`, `systemctl show` e o HEAD atual; se já há `hermes_direct_*completed` para o mesmo pedido/HEAD e gateways estão ativos, parar e reportar. Sem esse guard, a retomada da mesma mensagem pode virar loop de restart: Zeus relê `Execute`, agenda novo restart, derruba a si mesmo e repete.
 - Quando a ordem for **atualizar sem restart automático**, não usar o caminho oficial `hermes update` como execução principal porque ele auto-reinicia gateways no final. Usar o playbook `references/hermes-manual-no-restart-update-patch-drift.md`: backup + salvar `git diff`, `git reset --hard`, `git pull --ff-only`, reaplicar/validar patches MGS, reinstalar deps/builds, limpar `.update_check`, validar e só então pedir autorização separada para restart gracioso.
 - Antes de update manual com patch local MGS, salvar `git diff` em backup e testar `git apply --check` contra `origin/main` em worktree temporário. Se aplicar limpo, o risco é controlado; se não aplicar, portar patch antes de atualizar. Se `git apply --reverse --check` false-falhar porque um patch composto já está presente com contexto driftado, validar por invariantes + `py_compile` em vez de tratar como ausência de patch.
+- Para deltas grandes em que o live local diff antigo não aplica mais, preferir criar um novo patch canônico contra `origin/main` em worktree destacada, validar `apply --check`, `py_compile` e pytest alvo, atualizar o guard, e só então rodar o update vivo com `RESTORE_LOCAL_DIFFS=0`. Não tentar restaurar um diff antigo conhecido-driftado quando o patch canônico novo já representa a superfície MGS validada. Detalhe: `references/hermes-controlled-update-canonical-port-2026-06-26.md`.
 - Patches locais críticos MGS devem ser preservados por `/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh`. Esse guard aplica/valida os patches canônicos em `/root/mgs-agent/patches/hermes/`, compila `plugins/platforms/discord/adapter.py` + `gateway/run.py` + `gateway/platforms/base.py`, e falha se invariants como `_auto_thread_name_from_message`, `DISCORD_THREAD_AUTO_ADD_USERS`, `Auto-thread member sync`, planned restart auto-resume, author suffix, anti-loop/Codex noise, local-file auto-attach gate ou Discord `delete_message` sumirem. O script controlado `/root/mgs-agent/scripts/run-hermes-update-controlled.sh` chama esse guard após update e também deve restaurar/validar `pre-local-diff.patch` + `pre-local-diff-cached.patch`; file-level compare não basta. Antes de mutar o checkout em update futuro, validar se o diff local vivo aplicaria em `origin/main` — se não aplicar, falhar fechado e exigir port manual. O repo Hermes também tem hook local `.git/hooks/post-merge` chamando o guard; se update upstream sobrescrever/resetar algo, o merge falha ou reaplica antes de restart. Há também watchdog Hermes cron `44671121f3cc` (`Hermes MGS patch watchdog`) a cada 6h, script-only/silencioso em sucesso, alertando a origem se o guard falhar. Detalhe da correção pós-incidente: `references/hermes-update-local-patch-surface-fail-closed-2026-06-17.md`.
 - Pitfall pós-update validado: patch existir em `/root/mgs-agent/patches/hermes/` **não significa** que está protegido. Todo patch local novo que altera runtime Hermes precisa ser promovido para a lista canônica tanto em `ensure-hermes-mgs-patches.sh` quanto no precheck de `/root/mgs-agent/scripts/run-hermes-update-controlled.sh`, com invariantes específicos. Exemplo: `discord-thread-title-author-suffix.patch` podia aplicar limpo após o update, mas ficou ausente do runtime porque não estava no guard; o update validou patches antigos e deixou passar a regressão. Em auditoria pós-update, além de rodar o guard, comparar todos os `.patch` relevantes: `git apply --reverse --check` = aplicado, `git apply --check` = ausente mas reaplicável, falha = drift/corrompido/upstream absorvido. Reportar qualquer `can_apply` como patch local perdido, não como OK.
+- Quando o diff local vivo do Hermes não aplica mais limpo em `origin/main`, mas um patch consolidado MGS passa com `git apply --3way --check`, seguir o fluxo de **port canônico em worktree** antes de qualquer update real: aplicar em worktree temporário no upstream novo, validar invariantes + `py_compile` + testes alvo, gerar `mgs-runtime-customizations-YYYY-MM-DD.patch`, testar `git apply --check` em worktree limpa e só então atualizar os guards. No update real, se o patch canônico novo foi validado, usar o caminho explícito `RESTORE_LOCAL_DIFFS=0` para não reexecutar diff local antigo/driftado; o guard canônico restaura a superfície MGS. Detalhe: `references/hermes-update-port-canonical-patch-2026-06-26.md`.
 - Em update Hermes MGS, tratar **Zeus + Atena + Ares** como conjunto afetado se os três gateways estiverem ativos. O script controlado pode reiniciar só Zeus/Atena dependendo da versão; validar/reiniciar Ares separadamente ou atualizar o script antes de reportar sucesso. Ver `references/hermes-update-2026-06-04-all-agents-test-env.md`.
 - Ao rodar pytest pós-update, executar a partir de `/root/.hermes/hermes-agent` ou usar `workdir` nesse repo. Testes `tests/gateway/...` falham como “file not found” se lançados de `/root/mgs-agent`. Em shell vivo do gateway, isolar/limpar variáveis `DISCORD_*` de produção quando testes upstream-ish dependem de defaults; preserve/assert apenas invariantes MGS. Se um nodeid antigo não existir mais, rode `pytest --collect-only -q` ou execute o arquivo alvo inteiro antes de concluir falha. Se patches locais MGS mudaram intencionalmente o comportamento, alinhe os testes locais à política MGS e então valide. Exemplo 2026-06-09: `discord.free_response_channels` não força inline; `DISCORD_NO_THREAD_CHANNELS` é o controle inline, e channel backfill deve carregar cabeçalho read-only/non-actionable. Ver `references/hermes-update-2026-06-04-all-agents-test-env.md` e `references/hermes-maintenance-2026-06-09-system-and-test-drift.md`.
 - Em updates de sistema junto com Hermes, tratar reboot como Critical Subset: atualizar pacotes e reiniciar serviços quando necessário, mas pedir confirmação separada para `reboot` do VPS.
@@ -382,7 +390,85 @@ Rollout pattern:
 
 Detailed session/runbook: `references/mgs-grok-imagine-rollout-2026-06-16.md`.
 
-## 5. Context compression / Codex gpt-5.5 notices
+## 5. Gateway approvals / execução sem prompts para agentes confiáveis
+
+Use quando Rodolfo pedir para um agente MGS confiável parar de pedir `Command Approval Required`, `Allow Once`, `Allow Session` ou `Always Allow` para operações técnicas que já fazem parte do escopo do agente — exemplo: Hera rodando `execute_code`/terminal para processar Drive/criativos quando Kelly/Rodolfo já pediu a ação.
+
+Regra operacional MGS: se Rodolfo disser “se pediu é pra fazer”, “não quero esse tipo de notificação”, “dá autorização total” ou equivalente para um agente confiável, a correção é no profile do agente, não em cada thread expirada.
+
+Fluxo seguro:
+
+1. Confirmar que o pedido é sobre o **gate técnico de execução Hermes** (`tools/approval.py`) e não sobre liberar novos usuários externos.
+2. Fazer backup pequeno do config vivo do agente antes da mudança.
+3. Setar no profile afetado:
+
+```bash
+hermes -p <agent> config set approvals.mode off
+```
+
+4. Preferir gravar explicitamente como string YAML para evitar ambiguidade visual:
+
+```yaml
+approvals:
+  mode: 'off'
+```
+
+5. Atualizar também o mirror versionado em `/root/mgs-agent/profiles/<agent>-config.yaml` quando existir, para não haver drift entre runtime e Git.
+6. Validar carregando YAML dos dois arquivos e confirmando `approvals.mode == 'off'`.
+7. Registrar em `/root/mgs-agent/logs/events-audit.jsonl` com requester, agente, paths e razão.
+8. Reportar curto: “sem restart necessário” quando aplicável. `tools/approval.py` lê o config no momento do check; não precisa reiniciar gateway só para essa chave.
+
+Pitfalls:
+
+- O prompt expirado atual não é reaproveitado; o agente precisa tentar de novo. A próxima tentativa deve passar direto.
+- `approvals.mode: off` desliga prompts de comandos/`execute_code` para aquele profile. Isso **não** libera usuários novos, não altera `DISCORD_ALLOWED_USERS` e não bypassa a autorização de canal/whitelist.
+- Não confundir com `approvals.cron_mode`; cron continua separado e deve permanecer `deny` salvo pedido explícito.
+- Não usar `/yolo` como solução permanente para agente MGS; `/yolo` é sessão/processo. Config de profile é a correção durável.
+
+## 6. Session reset / manter contexto em threads
+
+Use quando Rodolfo perguntar sobre mensagens do Hermes como:
+
+```text
+◐ Session automatically reset (daily schedule at 4:00). Conversation history cleared.
+Use /resume to browse and restore a previous session.
+Adjust reset timing in config.yaml under session_reset.
+```
+
+Interpretação correta: isso é política de `session_reset` do gateway, não erro do modelo nem apagamento de mensagens do Discord. O efeito é limpar o contexto interno daquela conversa/thread para o agente; o histórico visual do Discord continua existindo, mas a sessão precisa de `/resume` ou reconstrução via logs/mensagens se o agente responder depois do reset.
+
+Se Rodolfo disser que não quer perder contexto nas threads, o ajuste canônico do profile é:
+
+```yaml
+session_reset:
+  mode: none
+```
+
+`mode: none` é o modo Hermes oficial para desabilitar reset automático: sem reset diário e sem reset por idle. Isso não remove o limite físico de contexto do modelo; conversas muito grandes ainda dependem de compression/summary. Para MGS, preferir `session_reset.mode: none` + compression ativa em vez de reset bruto por agenda.
+
+Workflow seguro:
+
+1. Confirmar qual profile/gateway será afetado, normalmente `/root/.hermes/profiles/zeus/config.yaml` para Zeus.
+2. Verificar o schema no código vivo quando houver dúvida: `gateway/config.py` → `SessionResetPolicy` (`daily`, `idle`, `both`, `none`) e overlay de `config.yaml` via chave top-level `session_reset`.
+3. Aplicar no `config.yaml` do profile:
+
+```bash
+hermes config set session_reset.mode none
+```
+
+ou patch YAML equivalente se o CLI não suportar bem nested keys.
+
+4. Validar que o arquivo contém `session_reset: {mode: none}` ou bloco equivalente.
+5. Reiniciar/recarregar o gateway com o padrão MGS de restart seguro; não reiniciar Zeus no meio de tool calls foreground ou sem finalizer externo.
+6. Explicar o limite operacional: “não haverá reset automático; contexto extremo ainda pode compactar por limite de tokens”.
+
+Pitfalls:
+
+- Não responder “não dá” só porque a mensagem menciona `/resume`; `session_reset.mode: none` existe.
+- Não confundir `compression.threshold` com `session_reset`: compression resume contexto grande; session reset zera por política de tempo/idle.
+- Se a ordem for só explicativa (“tem como?”), responder o caminho e pedir “aplica?” antes de mutar config/restart. Se Rodolfo mandar “aplica”, executar.
+
+## 6. Context compression / Codex gpt-5.5 notices
 
 Use quando Rodolfo perguntar sobre mensagens do Hermes como:
 
@@ -516,9 +602,11 @@ Session-specific Hera bootstrap notes live in `references/mgs-new-agent-bootstra
 
 ## 8. Agent memory / conclusion layers
 
-When Rodolfo asks to evaluate or configure external memory infrastructure such as Honcho for Zeus/Atena/Ares/Hera, use `references/honcho-managed-memory-spike.md`, `references/honcho-manual-briefing-command-2026-06-02.md`, and the session-specific coverage note `references/discord-response-lint-and-honcho-coverage-2026-06-15.md`.
+When Rodolfo asks to evaluate or configure external memory infrastructure such as Honcho for Zeus/Atena/Ares/Hera, use `references/honcho-managed-memory-spike.md`, `references/honcho-manual-briefing-command-2026-06-02.md`, the coverage note `references/discord-response-lint-and-honcho-coverage-2026-06-15.md`, and the repair/reporting note `references/hermes-update-reporting-and-honcho-repair-2026-06-21.md`. For cost/credit/billing questions, use `references/honcho-usage-and-billing-check-2026-07-01.md`.
 
 Operational rule: treat Honcho-like systems as a conclusion/insight layer over sanitized history, not as source of truth. Canonical facts remain in JSON/DB/Git/WordPress/audit logs; procedures remain in Hermes skills; stable preferences remain in Hermes memory. Zeus may use Honcho to generate hypotheses, but must validate them against canonical MGS sources before reporting or acting.
+
+Billing/usage rule: local MGS logs can prove call volume but not exact dollar spend. As of the 2026-07-01 check, Honcho's public OpenAPI exposed workspace/peer/session/conclusion routes but no billing/usage/credits endpoint; obvious `/v3/usage`, `/v3/billing`, `/v3/credits` probes returned 404. For daily spend questions, report confirmed operational volume first (e.g. health monitor runs × agents checked), then label any dollar figure as an estimate based on observed credit balance changes. If Honcho is only “segunda opinião”, avoid aggressive health polling such as 15-min × 4 agents unless Rodolfo explicitly wants it; hourly or 2–4/day preserves credits better during benchmarking.
 
 Coverage audit pitfall: do not equate `honcho: {}` in a profile config with full operational integration. Check all three layers before answering whether an agent is configured: (1) profile config contains Honcho stanza, (2) agent SOUL contains the Honcho role/rules, and (3) `/root/mgs-agent/scripts/mgs-memory-copilot` / `experiments/honcho-spike/mgs_memory_copilot.py` supports that agent in `AGENT_PROFILES`. As of the 2026-06-21 repair, Zeus/Atena/Ares/Hera are supported by the wrapper; if Honcho returns cold storage, the wrapper classifies it as `cold_storage` and requires manual resume at app.honcho.dev before retrying.
 
@@ -552,10 +640,13 @@ Esta umbrella absorveu as antigas skills especializadas abaixo. Conteúdo detalh
 - `references/hermes-update-original-skill.md`
 - `references/hermes-update-post-update-validation.md`
 - `references/hermes-controlled-update-rule-mgs.md` — regra permanente MGS aprovada por Rodolfo: backup + diff/snapshot pré-update + comparação pós-update + guard de patches/invariantes + validação runtime real antes de considerar update concluído.
+- `references/mgs-discord-tool-progress-and-backup-retention-2026-06-30.md` — sessão em que Rodolfo corrigiu a expectativa de Discord sem breadcrumbs de tool/code e pediu reparo da retenção de backups: per-platform `tool_progress` override para Discord, cleanup_progress, política de retenção para `hermes-profiles-backup-*.tar.gz`, e tratamento seguro de `tar: file changed as we read it` no safety backup.
 - `references/hermes-controlled-update-git-hygiene-2026-06-15.md` — incidente/recuperação de Git hygiene quando reports/backups de update entraram no auto-commit: pausar autocommit, ignorar artifacts antes de gerar, force-push com lease após aprovação e `git gc` para recuperar espaço.
 - `references/hermes-update-discord-report-and-followup-2026-06-17.md` — lessons from update where a stale hardcoded Discord thread received a report, detached restart finalizer did not proactively follow up, and Hermes news cron confused update scope; includes opt-in Discord delivery and backup cleanup guidance.
 - `references/hermes-update-local-patch-surface-fail-closed-2026-06-17.md` — post-update local patch loss case: why file-level diff comparison missed missing functions, how to restore `pre-local-diff*`, promote author suffix/anti-loop/auto-attach/delete-message invariants to the guard, clean patch archives, and fail closed before mutation when live local diff does not apply to `origin/main`.
 - `references/hermes-v017-controlled-update-mgs-customizations-2026-06-20.md` — validated v0.16→v0.17 MGS update pattern: precheck-only, port patches in worktree, consolidated runtime customization patch, clean-worktree guard validation, external ordered restart, full report including backups/crons/auth/tests/Git hygiene.
+- `references/hermes-controlled-update-canonical-port-2026-06-26.md` — canonical patch port workflow for large upstream deltas: create a fresh port patch in detached worktree, validate apply/py_compile/targeted pytest before live update, use `RESTORE_LOCAL_DIFFS=0` when the stale live diff is known-drifted, and treat harmless upstream config schema/default additions as WARN when MGS critical invariants survive.
+- `references/hermes-update-port-canonical-patch-2026-06-26.md` — safe workflow for large upstream drift where the old live local diff no longer applies: port consolidated MGS runtime customizations in an `origin/main` worktree, validate invariants/py_compile/target pytest, create a new canonical patch, and use `RESTORE_LOCAL_DIFFS=0` only after validation.
 - `references/hermes-controlled-update-report-and-backup-compare-2026-06-15.md` — incidente/lesson de update Hermes em que backup/snapshot existiam mas a comparação backup↔estado vivo e o relatório pós-restart não foram entregues corretamente; define evidências obrigatórias `post-backup-live-profile-compare.txt`, `post-profiles-sanitized.txt` e `post-readonly-invariants.txt`.
 - `references/hermes-local-patch-surface-guard-2026-06-17.md` — incidente/lesson em que update preservou arquivos modificados mas perdeu funções locais não-canônicas; exige restaurar `pre-local-diff*` pós-update e comparar markers/funções/strings do diff pré-update, não só nomes de arquivos.
 - `references/hermes-manual-no-restart-update-patch-drift.md` — atualização manual sem restart automático: backup/diff, pull ff-only, reaplicar patches MGS, lidar com patch context drift, limpar `.update_check`, validar testes e pedir restart separado.
@@ -587,4 +678,5 @@ Esta umbrella absorveu as antigas skills especializadas abaixo. Conteúdo detalh
 - `references/honcho-managed-memory-spike.md` — avaliação/configuração de Honcho como camada managed de conclusões sobre histórico sanitizado; inclui política de fonte de verdade, 1Password/API key, smoke test sintético e ingestão manual de logs sanitizados.
 - `references/honcho-targeted-rounds-2026-06-02.md` — primeira rodada MGS com datasets por domínio; registra limite de 100 mensagens por batch, vantagem de agregados determinísticos sobre logs brutos, pitfall de secret-scan com placeholders e scoping de `.chat()` por sessão.
 - `references/honcho-manual-briefing-command-2026-06-02.md` — comando manual `/root/mgs-agent/scripts/run-honcho-briefing`, renderer Markdown/Discord, política de on-demand only, e lessons de Zeus deterministic layer sobre Honcho hypotheses.
+- `references/hermes-update-reporting-and-honcho-repair-2026-06-21.md` — checklist de relatório completo para updates/repairs Hermes-MGS, sem “acabou operacionalmente” vago; inclui diagnóstico/correção de Honcho cold storage, cobertura Hera e workaround de REPORT-INFRA via Zeus Bot quando webhook 403.
 - `scripts/honcho_sanitized_secret_scan.py` — scanner local para barrar padrões óbvios de secrets antes de enviar dataset sanitizado ao Honcho

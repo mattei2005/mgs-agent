@@ -1,0 +1,184 @@
+---
+name: monthly-finance-sheet-fill
+description: Use when filling or auditing MGS monthly finance Google Sheets from approved Long revenue/spend data, including site block mapping, GROSS_USD vs GROSS_CAD, USD vs BRL spend, manager mini-tables, backups, and cell-level validation.
+version: 1.0.2
+author: Hermes Agent
+license: MIT
+metadata:
+  hermes:
+    tags: [mgs, finance, google-sheets, revenue, spend, reconciliation, audit]
+    related_skills: [revenue-spend-reporting-pipeline]
+---
+
+# Monthly Finance Sheet Fill
+
+## Purpose
+
+Use this skill when Rodolfo asks to fill an operational monthly finance sheet such as `MGS - Receita dos Sites 2026` / `Junho 2026` from an approved `Long` table or Excel report.
+
+This is not the same as generating the `Long` report. The job here is to write values into the existing operator-facing monthly sheet structure without damaging formulas, dates, currencies, totals, or manual exception blocks.
+
+## Non-negotiable rules
+
+1. **Backup before writing.** Save the touched range or full sheet snapshot with formulas and formatted values before any update.
+2. **Map by real date, not row arithmetic alone.** Verify the month length. For June, never write to a day-31 row. If a template has formulas beyond the month, treat them as out-of-scope unless Rodolfo explicitly asks.
+3. **Preflight all target columns.** Confirm every source site/account maps to a destination cell before writing. If anything is unmapped, stop before partial write.
+4. **Respect revenue currency.** Some sites take raw `GROSS_USD_*`; some take raw `GROSS_CAD_*` and compute USD next to it.
+5. **Respect spend currency.** Meta/Business Manager spend usually goes to `BM - $`; Google Ads BRL goes to `Google Ads - R$`.
+6. **Audit after writing.** Compare expected source values to sheet cells cell-by-cell, not only by totals. Check formula errors and out-of-period rows.
+7. **Do not call success until verified.** Report mismatches honestly and fix if safe.
+
+## Canonical workflow
+
+1. Load/confirm the approved source `Long` data:
+   - Required columns: `Data`, `Site`, `Vertical`, `Gestor`, `Conta_FB`, `Gasto`, `Receita`.
+   - Confirm row count and totals against the approved report.
+
+2. Read the target monthly sheet structure:
+   - Header rows for site blocks.
+   - Revenue headers: `GROSS_USD_*`, `GROSS_CAD_*`.
+   - Spend labels around account rows, usually rows 41–45 in the June template.
+   - Any special lower blocks such as `NF100` / `ICARO - G001-D` or Fincgriffin manager table.
+
+3. Build an explicit mapping table:
+   - `(site, country/vertical, revenue_currency) -> gross revenue cell column`.
+   - `(ad account or aggregate rule) -> spend cell column`.
+   - Special blocks and aggregate rules.
+
+4. Preflight for blockers:
+   - Any source revenue with no revenue target.
+   - Any source spend account with no spend target.
+   - Any target row outside the source date range or outside the month.
+   - Any existing formula errors.
+
+5. Write only the intended cells:
+   - Source period only.
+   - Target monthly tab only, unless Rodolfo asked otherwise.
+   - No broad clears except deliberate cleanup of an out-of-scope contaminated row.
+
+6. Post-write audit:
+   - Expected cell count vs actual updated cell count.
+   - Cell-by-cell mismatch list.
+   - Formula errors count.
+   - Row outside month/date range check.
+   - Special block validation.
+
+## Durable MGS mapping rules learned from June 2026
+
+Revenue `GROSS_CAD_*` sites:
+
+- `financeadx.com`
+- `helixenit.com`
+- `infinitynexx.com`
+- `marevelx.com`
+- `vizioid.com`
+- `xyvlov.com`
+
+Revenue `GROSS_USD_*` sites:
+
+- `cliquet.com`
+- `conectageral.com`
+- `creditoparaveiculo.com`
+- `de.newsoun.com`
+- `ducapes.com`
+- `eggbev.com`
+- `finance.ducapes.com`
+- `finance.topfeed.fun`
+- `finance.wantabrand.com`
+- `finanzas.cliquet.com`
+- `finanzas.eggbev.com`
+- `finanzas.lyzmo.com`
+- `finanzas.newsoun.com`
+- `finanzas.openzed.com`
+- `finanzas.topfeed.fun`
+- `finanzas.zuout.com`
+- `finanzas.zytiva.com`
+- `fincgriffin.com`
+- `gamezonead.com`
+- `gamingadx.com` when revenue exists; in June 16–29 it had no revenue.
+- `lyzmo.com`
+- `newsoun.com`
+- `openzed.com`
+- `portalrelevante.com`
+- `seuprimeiroempregoam.com`
+- `wantabrand.com`
+- `zuout.com`
+- `zytiva.com`
+
+Spend in BRL / Google Ads R$:
+
+- `gamezonead.com` → account `Mattei 1` / source `Mattei 1 (Google Ads - BRL)`.
+- `gamingadx.com` → account `Gamingadx-US-01` / source `Gamingadx-US-01 (Google Ads - BRL)`.
+
+Spend in USD / BM `$`:
+
+- All other confirmed June 2026 spend sites unless Rodolfo updates the mapping.
+
+Special handling:
+
+- `creditoparaveiculo.com`: sum all related FB accounts and write to `Creditoparaveiculo BR-CAR-BR`.
+- `fincgriffin.com`: write aggregated top-row values to `Fincgriffin US-CAR-EN`; also maintain the lower manager mini-table with `Data | Gestor | Gasto | Receita | Lucro | Margem`.
+- `openzed.com`: split principal block from `NF100` / `ICARO - G001-D`; do not collapse Ícaro into the principal block.
+- `finanzas.openzed.com`: keep US and ES blocks separate.
+
+## Monthly tab rollover rules
+
+Use this when Rodolfo asks to duplicate a monthly finance tab such as `Junho 2026` into the next month such as `Julho 2026`.
+
+Non-negotiable rollover checks learned from July 2026 prep:
+
+1. Main sheet monthly tab cell `A3` stores the numeric month used by `Despesas Totais` formulas. When rolling `Junho 2026` to `Julho 2026`, update `A3` from `6` to `7` before validating totals.
+2. Main sheet column `B` stores repeated daily date blocks, not just the first visible month block. Rebuild every repeated date/month block through the active monthly area (observed through row ~180 in July 2026 prep): month labels `Junho` → `Julho`, and each 30-day June run becomes a 31-day July run including the previously blank day-31 row. Preserve the visual number format used by the source tab, e.g. `dddd, d` showing `Monday, 1` — do not leave raw `dd/mm/yyyy` if the source month displays weekday/day text.
+3. Main sheet top exchange/cash cell `E1` must move to the target month column in `CAIXA SINTETICO`: June used `H2`, July uses `I2`. Manager sheet `H1` must be updated the same way.
+4. Preserve the `Despesas da Empresa` block around `L101:N120` from the source month unless Rodolfo explicitly asks to clear it; he manually checks those expenses through the month.
+5. Preserve special lower table structure such as `NF100` / `ICARO - G001-D` / Openzed, but clear the monthly revenue and spend input cells. For July 2026 this meant clearing `NF105:NF135`, `NM105:NM135`, and spend input columns `NF/NH/NJ/NL/NN/NP/NR/NT/NV` rows `146:176`, while keeping formulas/headers intact.
+6. Manager sheets: update the top exchange-rate source formula in `H1` from `CAIXA SINTETICO!H2` (June) to the new month column, e.g. `CAIXA SINTETICO!I2` for July. Do not rely on tab duplication to adjust this.
+6. Audit formulas that reference `$A$3`, `DATE($B$4,$A$3,...)`, `EOMONTH(DATE($B$4,$A$3,1),0)`, or the daily row number. These control per-day expense distribution and can look visually correct while calculating the wrong month if `A3` is stale.
+7. Manager sheets depend heavily on exact tab-name parity via `SHEETNAME()`. The main sheet and all manager sheets must have the exact same target tab name, e.g. `Julho 2026`; validate imported labels such as manager `A21` after fixing the main sheet date/month labels.
+8. Do a formula inventory before mutating: count formulas, classify `IMPORTRANGE`, `CAIXA SINTETICO`, `$A$3`, hardcoded month literals, and formula errors. Save the audit locally before writing.
+
+## Caixa Sintetico monthly column fill
+
+Use this when Rodolfo asks to fill the `CAIXA SINTETICO` column for a new month based on the previous month.
+
+Workflow:
+
+1. Identify the target month column by header row 8 (`Jan`...`Dez`). In June 2026, `Jun` is column `H` and `Mai` is column `G`.
+2. Read the previous month formulas and formatted values for the full sheet before writing.
+3. Backup `CAIXA SINTETICO` formulas and formatted values locally before any update.
+4. For every row where the previous month column has a formula referencing the previous monthly tab and the target month cell is blank, copy the formula and replace the tab name only, e.g. `'Maio 2026'` → `'Junho 2026'`.
+5. Do not overwrite formulas that already exist in the target month unless Rodolfo explicitly asks for repair.
+6. Leave intra-summary formulas (`SUB-TOTAL`, `TOTAL`, rev share, imposto, net, ROI, 50% USD/BRL) in the target month if they already exist; otherwise copy the adjacent month formula by relative month column.
+7. Validate by readback: all intended formulas present, formula error count = 0, and key rows populated (`SUB-TOTAL`, `TOTAL`, `Despesas Empresa`, `Despesas Funcionarios`, `MM Social Media Costs`, `MM Total NET`, `ROI LIQUIDO`, `50% em USD`, `50% em REAIS`).
+
+June 2026 validated pattern:
+
+- Copied/adapted 48 formulas from `Mai` to `Jun`.
+- Replaced only `Maio 2026` with `Junho 2026` in source-tab formulas.
+- Formula errors after write: 0.
+
+## Pitfalls
+
+- **Date serial false positives:** Sheets API returns dates as serial numbers in `UNFORMATTED_VALUE` mode. Convert with epoch `1899-12-30` before declaring a mismatch.
+- **Out-of-month rows:** A template may contain formulas on a row that effectively evaluates as the next month. Do not fill or rely on it for the current month.
+- **One-day reports can contain `Total` rows.** Some daily exports include a final `Total` row in date-based sheets. Remove/ignore those rows before processing, otherwise date parsing fails or totals get double-counted.
+- **MonetizeMore block sheets can be skipped by generic runners.** If the runner output lacks MonetizeMore revenue, parse the block sheet manually (`domain` row followed by `Date | Gross Revenue`) and merge those rows before filling.
+- **Mini tables may exceed the current grid.** Before appending Fincgriffin detail rows, check the tab row count. Use `appendDimension` to add rows if the target range exceeds grid limits.
+- **Header label drift:** Some columns may be unlabeled or updated manually by Rodolfo. Re-read the live sheet immediately before writing.
+- **Formula reference mistakes:** When writing formulas in mini tables, validate formulas by readback. In June 2026, a wrong column reference created `#REF!`; the fix was to compute `Lucro = Receita - Gasto` and `Margem = Lucro / Gasto` with the actual summary columns.
+
+## Verification checklist
+
+- [ ] Backup path recorded.
+- [ ] All source revenue rows mapped or intentionally skipped with reason.
+- [ ] All source spend rows mapped or intentionally skipped with reason.
+- [ ] No writes outside requested date range.
+- [ ] No writes to nonexistent days of month.
+- [ ] Cell-by-cell audit returns zero mismatches.
+- [ ] Formula error count is zero.
+- [ ] Special blocks verified: CAD sites, BRL Google Ads, Fincgriffin, Creditoparaveiculo, Openzed Ícaro.
+
+## Reference files
+
+- `references/june-2026-fill-audit.md` — June 16–29, 2026 live fill lessons, mappings, correction of row 35, and audit results.
+- `references/monthly-rollover-formula-audit.md` — July 2026 rollover prep notes: formula inventory across main + manager sheets, `A3` month-number dependency, column `B` date rebuild, `CAIXA SINTETICO` month-column shift, and Sheets API batching pitfall.

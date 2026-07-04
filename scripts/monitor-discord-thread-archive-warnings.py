@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Warn Rodolfo before Discord threads auto-archive after 1 week.
+"""Keep 1-week Discord threads from auto-archiving.
 
-Scans active Discord threads visible to MGS agent bot tokens and alerts once per
-thread/archive cycle when a 1-week thread has <= 24h before auto-archive.
+Scans active Discord threads visible to MGS agent bot tokens and posts a small
+keepalive message once per thread/archive cycle when a 1-week thread has <= 24h
+before auto-archive.
 """
 from __future__ import annotations
 
@@ -32,6 +33,7 @@ AUTO_ARCHIVE_1_WEEK_MINUTES = 10080
 WARN_WINDOW_SECONDS = 24 * 3600
 USER_AGENT = 'MGS-thread-archive-warning-monitor/1.0'
 DISCORD_EPOCH_MS = 1420070400000
+KEEPALIVE_MESSAGE = 'Mantendo a thread ativa para não arquivar automaticamente.'
 
 
 def now_utc() -> dt.datetime:
@@ -145,7 +147,8 @@ def collect_threads(now: dt.datetime) -> tuple[dict[str, dict[str, Any]], list[s
             meta = thread.get('thread_metadata') or {}
             if meta.get('archived'):
                 continue
-            if int(meta.get('auto_archive_duration') or 0) != AUTO_ARCHIVE_1_WEEK_MINUTES:
+            auto_archive_minutes = int(meta.get('auto_archive_duration') or 0)
+            if auto_archive_minutes != AUTO_ARCHIVE_1_WEEK_MINUTES:
                 continue
             thread_id = str(thread.get('id'))
             archive_ts = parse_discord_ts(meta.get('archive_timestamp'))
@@ -153,7 +156,7 @@ def collect_threads(now: dt.datetime) -> tuple[dict[str, dict[str, Any]], list[s
             activity_ts = max([t for t in (archive_ts, last_message_ts) if t], default=None)
             if not activity_ts:
                 continue
-            archive_at = activity_ts + dt.timedelta(minutes=AUTO_ARCHIVE_1_WEEK_MINUTES)
+            archive_at = activity_ts + dt.timedelta(minutes=auto_archive_minutes)
             remaining = (archive_at - now).total_seconds()
             if remaining <= 0 or remaining > WARN_WINDOW_SECONDS:
                 continue
@@ -164,6 +167,7 @@ def collect_threads(now: dt.datetime) -> tuple[dict[str, dict[str, Any]], list[s
                 'activity_at': activity_ts,
                 'archive_at': archive_at,
                 'remaining_seconds': remaining,
+                'auto_archive_minutes': auto_archive_minutes,
                 'agents': set(),
             })
             item['agents'].add(agent)
@@ -198,11 +202,61 @@ def format_alert(items: list[dict[str, Any]], errors: list[str], now: dt.datetim
     return '\n'.join(lines)
 
 
+def format_failure_alert(failed: list[dict[str, Any]], errors: list[str], now: dt.datetime) -> str:
+    lines = [
+        f'<@{RODOLFO_ID}>',
+        '',
+        'Falhei ao manter vivas algumas threads que vão arquivar em até 24h:',
+        '',
+    ]
+    for item in failed[:10]:
+        name = re.sub(r'\s+', ' ', str(item.get('name') or '(sem título)')).strip()
+        if len(name) > 80:
+            name = name[:77] + '...'
+        detail = str(item.get('post_error') or item.get('post_status') or 'erro desconhecido')[:180]
+        lines.append(f'- {name} — {detail}')
+        lines.append(f'  {thread_link(str(item["id"]))}')
+    if errors:
+        lines.extend(['', 'Erros de leitura adicionais:'])
+        for err in errors[:4]:
+            lines.append(f'- {err[:160]}')
+    lines.append('')
+    lines.append(f'Check: {iso_z(now)}')
+    return '\n'.join(lines)
+
+
 def post_zeus(message: str) -> tuple[int, Any]:
     token = load_env_token('zeus')
     if not token:
         return 0, {'message': 'Zeus token ausente'}
     return api_json(token, 'POST', f'/channels/{ZEUS_CHANNEL_ID}/messages', {'content': message[:1900]})
+
+
+def post_thread_keepalive(item: dict[str, Any]) -> tuple[int, Any, str | None]:
+    """Post a keepalive in the target thread using a bot that can see it."""
+    seen_by = set(item.get('agents') or [])
+    candidates = [agent for agent in AGENTS if agent in seen_by]
+    if 'zeus' not in candidates:
+        candidates.append('zeus')
+
+    last_status = 0
+    last_data: Any = {'message': 'sem token candidato'}
+    for agent in candidates:
+        token = load_env_token(agent)
+        if not token:
+            last_status = 0
+            last_data = {'message': f'{agent}: token ausente'}
+            continue
+        status, data = api_json(
+            token,
+            'POST',
+            f'/channels/{item["id"]}/messages',
+            {'content': KEEPALIVE_MESSAGE},
+        )
+        if status in (200, 201):
+            return status, data, agent
+        last_status, last_data = status, data
+    return last_status, last_data, None
 
 
 def main() -> int:
@@ -227,34 +281,56 @@ def main() -> int:
     posted = False
     post_status: int | None = None
     post_error: Any = None
+    bumped: list[dict[str, Any]] = []
+    failed: list[dict[str, Any]] = []
     if pending:
-        message = format_alert(pending, errors, now)
         if args.dry_run:
-            print(message)
+            print(format_alert(pending, errors, now))
+            print('')
+            print(f'DRY-RUN: postaria em {len(pending)} thread(s): {KEEPALIVE_MESSAGE}')
         else:
-            post_status, data = post_zeus(message)
-            if post_status not in (200, 201):
-                post_error = data
-                print(f'{LOG_PREFIX}: post failed HTTP {post_status}: {data}', file=sys.stderr)
-                return 2
-            posted = True
             for item in pending:
-                alerts[item['state_key']] = {
-                    'thread_id': item['id'],
-                    'name': item['name'],
-                    'archive_at': iso_z(item['archive_at']),
-                    'alerted_at': iso_z(now),
-                    'agents': sorted(item['agents']),
-                }
+                status, data, posted_by = post_thread_keepalive(item)
+                if status in (200, 201):
+                    posted = True
+                    bumped.append(item)
+                    alerts[item['state_key']] = {
+                        'thread_id': item['id'],
+                        'name': item['name'],
+                        'archive_at': iso_z(item['archive_at']),
+                        'bumped_at': iso_z(now),
+                        'posted_by': posted_by,
+                        'message_id': str((data or {}).get('id') or ''),
+                        'agents': sorted(item['agents']),
+                    }
+                else:
+                    item['post_status'] = status
+                    item['post_error'] = data
+                    failed.append(item)
+            if failed:
+                post_status, data = post_zeus(format_failure_alert(failed, errors, now))
+                if post_status not in (200, 201):
+                    post_error = data
+                state['last_run'] = iso_z(now)
+                state['last_seen_candidates'] = len(threads)
+                state['last_pending_alerts'] = len(pending)
+                state['last_bumped'] = len(bumped)
+                state['last_failed_bumps'] = len(failed)
+                state['last_errors'] = errors[-10:]
+                save_state(state)
+                print(f'{LOG_PREFIX}: keepalive failed count={len(failed)} zeus_alert_status={post_status} error={post_error}', file=sys.stderr)
+                return 2
     # prune old alert keys after 30 days
     cutoff = now - dt.timedelta(days=30)
     for key, val in list(alerts.items()):
-        alerted_at = parse_discord_ts(str((val or {}).get('alerted_at')))
+        alerted_at = parse_discord_ts(str((val or {}).get('alerted_at') or (val or {}).get('bumped_at')))
         if alerted_at and alerted_at < cutoff:
             alerts.pop(key, None)
     state['last_run'] = iso_z(now)
     state['last_seen_candidates'] = len(threads)
     state['last_pending_alerts'] = len(pending)
+    state['last_bumped'] = len(bumped)
+    state['last_failed_bumps'] = len(failed)
     state['last_errors'] = errors[-10:]
     if not args.dry_run:
         save_state(state)
@@ -264,6 +340,8 @@ def main() -> int:
         'dry_run': args.dry_run,
         'candidates': len(threads),
         'pending_alerts': len(pending),
+        'bumped': len(bumped),
+        'failed_bumps': len(failed),
         'posted': posted,
         'post_status': post_status,
         'errors': errors,
@@ -271,7 +349,7 @@ def main() -> int:
     if args.json:
         print(json.dumps(summary, ensure_ascii=False, sort_keys=True))
     else:
-        print(f'{LOG_PREFIX}: OK candidates={len(threads)} pending_alerts={len(pending)} posted={posted} errors={len(errors)}')
+        print(f'{LOG_PREFIX}: OK candidates={len(threads)} pending_alerts={len(pending)} bumped={len(bumped)} failed_bumps={len(failed)} errors={len(errors)}')
     return 0
 
 

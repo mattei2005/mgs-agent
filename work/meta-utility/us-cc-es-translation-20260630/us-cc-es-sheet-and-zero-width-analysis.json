@@ -1,0 +1,144 @@
+{
+  "status": "OK",
+  "executed_at_et": "2026-06-30T01:56:20-04:00",
+  "sheet_url": "https://docs.google.com/spreadsheets/d/1ieSjYbhl34T0tWOvvol3F2lhvCoVTWHm9_YnUkoVhtM/edit",
+  "source_tab": "US-CC-EN",
+  "target_tab": "US-CC-ES",
+  "source_rows": 201,
+  "written_rows": 201,
+  "readback_rows": 201,
+  "translated_columns": [
+    "TEXT",
+    "CTA 1"
+  ],
+  "sample_translations": [
+    {
+      "row": 2,
+      "text": "✅ AUTORIZADO: {{first_name}}, estás autorizado a activar tu nueva tarjeta. \n\nNo más esperas. Toque para comenzar.",
+      "cta": "🚀 ACTIVAR AHORA"
+    },
+    {
+      "row": 3,
+      "text": "Tengo 1 actualización importante sobre su perfil crediticio. \n\nEs mejor de lo que esperábamos. Compruébalo aquí:",
+      "cta": "📩 ACTUALIZACIÓN ABIERTA"
+    },
+    {
+      "row": 4,
+      "text": "📦 Estado: RETENIDO\nSu tarjeta preaprobada está esperando. \nSólo necesitamos la confirmación de su dirección de entrega.",
+      "cta": "🚚 CONFIRMAR DIRECCIÓN"
+    },
+    {
+      "row": 5,
+      "text": "✅ ENTREGA CONFIRMADA\nTu tarjeta con límite de $15,000 se está preparando para envío\nVerifique sus datos para realizar el envío.",
+      "cta": "🚚 ENVIAR MI TARJETA"
+    },
+    {
+      "row": 6,
+      "text": "🏆 {{first_name}}, tu Tarjeta Platinum quedó reservada para el grupo de prioridad del 2%.\n\nEl paquete está sellado. Sólo necesitamos la confirmación de su dirección antes de que el mensajero la recoja.",
+      "cta": "🚚 CONFIRMAR Y ENVIAR"
+    }
+  ],
+  "zero_width_analysis": {
+    "available": true,
+    "template": "Openzed - US-CC-ES/ES-ZW - AV - g003-d Isliago",
+    "template_id": "69b037db-b63e-e7b5-a897-337728c375d3",
+    "message_count": 60,
+    "affected_messages": 60,
+    "zero_width_counts": {
+      "U+200B": 13526,
+      "U+200D": 1
+    },
+    "samples": [
+      {
+        "message_id": 1,
+        "zero_width_total": 252,
+        "by_char": {
+          "U+200B": 252
+        },
+        "text_preview": "✅ Entrega confirmada   |  | Hola {{first_name}},   | tu información ya fue verificada y tu tarjeta está siendo preparada para ",
+        "cta_preview": "✅S​O​L​I​C​I​T​A​R  "
+      },
+      {
+        "message_id": 2,
+        "zero_width_total": 355,
+        "by_char": {
+          "U+200B": 355
+        },
+        "text_preview": "{{first_name}}, noté que todavía no has completado tu solicitud de tarjeta 💳   |  | Todavía tienes una oferta disponible con",
+        "cta_preview": "✔️A​P​L​I​C​A​R A​H​O​R​A  "
+      },
+      {
+        "message_id": 3,
+        "zero_width_total": 212,
+        "by_char": {
+          "U+200B": 212
+        },
+        "text_preview": "✅ Aprobación instantánea, {{first_name}}!   |  | Tu oferta de tarjeta ya está lista — con un límite solido de hasta $14,387 ",
+        "cta_preview": "🔵A​P​R​O​B​A​C​I​Ó​N R​Á​P​I​D​A  "
+      },
+      {
+        "message_id": 4,
+        "zero_width_total": 209,
+        "by_char": {
+          "U+200B": 209
+        },
+        "text_preview": "¡Felicitaciones, {{first_name}} {{last_name}}! ✅   |  | Tu perfil acaba de actualizarse y tengo excelentes noticias.   | Ya es",
+        "cta_preview": "💳P​E​D​I​R A​Q​U​Í  "
+      },
+      {
+        "message_id": 5,
+        "zero_width_total": 321,
+        "by_char": {
+          "U+200B": 321
+        },
+        "text_preview": "🎁 Un regalo especial para ti, {{first_name}}!   |  | Has desbloqueado el acceso a una oferta de tarjeta con un límite alto y",
+        "cta_preview": "🟢S​O​L​I​C​I​T​A​R H​O​Y  "
+      },
+      {
+        "message_id": 6,
+        "zero_width_total": 264,
+        "by_char": {
+          "U+200B": 264
+        },
+        "text_preview": "¡Felicitaciones, {{first_name}}! Has sido pre-seleccionado ✔️   |  | Tu perfil muestra una excelente posibilidad de califica",
+        "cta_preview": "✔️O​B​T​E​N​E​R M​I T​A​R​J​E​T​A  "
+      },
+      {
+        "message_id": 7,
+        "zero_width_total": 257,
+        "by_char": {
+          "U+200B": 257
+        },
+        "text_preview": "💥 ¡Tu tarjeta está lista!   |  | Ahora tienes acceso a una tarjeta pre-aprobada con un límite de hasta $8,500 y sin cuota an",
+        "cta_preview": "✅F​I​N​A​L​I​Z​A​R A​H​O​R​A  "
+      },
+      {
+        "message_id": 8,
+        "zero_width_total": 268,
+        "by_char": {
+          "U+200B": 268
+        },
+        "text_preview": "¡Hola, {{first_name}}!   |  | 👋 Hay una excelente oferta de tarjeta disponible hoy.   | 💳 Incluye un límite de hasta $8,000 y ",
+        "cta_preview": "R​E​C​I​B​I​R T​A​R​J​E​T​A✅  "
+      },
+      {
+        "message_id": 9,
+        "zero_width_total": 199,
+        "by_char": {
+          "U+200B": 199
+        },
+        "text_preview": "⚠️ Actualización importante, {{first_name}}   |  | Tengo nueva información sobre tus últimas solicitudes y puede influir dir",
+        "cta_preview": "💳S​O​L​I​C​I​T​A​R T​A​R​J​E​T​A  "
+      },
+      {
+        "message_id": 10,
+        "zero_width_total": 223,
+        "by_char": {
+          "U+200B": 223
+        },
+        "text_preview": "{{first_name}}, estamos emocionados de compartir tu oferta personalizada de tarjeta.   |  | 💳 Límite de hasta $12,500   | ✖️ S",
+        "cta_preview": "🟢A​P​L​I​C​A​R A​H​O​R​A  "
+      }
+    ]
+  }
+}

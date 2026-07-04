@@ -285,7 +285,7 @@ check_patches_against_upstream() {
   local rc=0
   {
     local canonical_patches=(
-      "mgs-runtime-customizations-2026-06-26.patch"
+      "mgs-runtime-customizations-2026-06-30.patch"
     )
     for name in "${canonical_patches[@]}"; do
       patch="$PATCH_DIR/$name"

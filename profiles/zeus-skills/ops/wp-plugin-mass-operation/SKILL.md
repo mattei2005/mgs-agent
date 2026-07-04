@@ -9,16 +9,33 @@ related_skills: [mgs-infra-inventory, log-monitor-discord-alert, shell-cron-env-
 
 ## Quando usar
 - Preciso instalar, ativar, desativar ou deletar um plugin em todos os 31 sites
+- Preciso portar/migrar um fluxo de SaaS/builder/static app para plugin WordPress próprio em um site MGS (ex: quiz/lead capture com REST, rewrite, CSV, SMS Funnel)
 - Preciso rodar um comando WP-CLI de plugin (ex: imagify bulk-optimize, yoast reindex) em massa
 - Preciso verificar se um plugin está instalado/ativo em todos os sites
+- Preciso revisar, preparar ou fazer cutover de plugin WordPress customizado que substitui stack externa (Lovable/Supabase/iframe/static app) em produção — ver `references/wordpress-quiz-plugin-migration.md` para o padrão validado de quiz/funil com SMS Funnel, leads e relatório
 - Rodolfo pergunta se Zeus/Atena instalou um plugin ou se ele já estava presente — fazer auditoria de proveniência, não responder por memória
 - Recebeu REPORT-INFRA de um agente e precisa atualizar o inventário de infra
 - Auditoria da operação MGS (o que existe, onde, quem criou)
 - Onboarding de novo agente — verificar o que já existe
+- Migrar/cortar apps externos ou estáticos para plugin WordPress próprio com rotas públicas, captura de leads, integrações externas e dashboard/reporting — ver `references/custom-wp-plugin-cutover.md`
+
+### Referência rápida — custom plugin cutover
+
+Quando substituir Lovable/Supabase/static folders/iframes por plugin WP first-party, seguir `references/custom-wp-plugin-cutover.md`: validar REST admin, lint remoto, backup, desativar pastas físicas que sombreiam rewrites, salvar lead no WP + encaminhar server-side, importar histórico sem reenviar para vendor, e validar cada rota/lista com status armazenado.
+
+Para UI operacional de quiz e diagnóstico SMS Funnel, ver `references/quiz-redirect-sms-diagnostics.md`: redirect split deve ser editável por linhas com `+ Adicionar URL`, URL + peso + remover; `redirect_variants` não deve ficar como JSON para operador; quando SMS Funnel dashboard mostrar zero mas WP recebeu `success:true` com `list_id` correto, tratar como provável delay/cache/indexação/deduplicação da plataforma SMS Funnel após validar com leads frescas por gestor.
+
+### Referência rápida — revisão de plugin customizado de quiz
+
+Quando revisar plugin customizado de quiz/lead capture gerado por Lovable/dev externo, usar o checklist em `references/wp-quiz-plugin-migration-review.md`: shortcode completo, segredo de SMS Funnel fora do público, sem redirect antes de `ok:true`, Pixel Lead só pós-sucesso, `require_sms_success` para cutover, anti-spam com timestamp obrigatório e canário antes de tráfego cheio.
 
 ### Referência rápida — proveniência WP File Manager
 
 Quando a pergunta for "foi você que instalou o File Manager?", não pivotar para o último REC/P1 nem explicar publicação. Auditar evidências e responder a pergunta de accountability diretamente. Ver `references/wp-file-manager-provenance-audit.md`.
+
+### Referência rápida — auditoria WP File Manager + mu-plugins
+
+Quando Rodolfo trouxer preocupação de segurança sobre `mu-plugins`, WP File Manager, elFinder ou WPCode: não remover primeiro. Rodar auditoria read-only, separar achado acionável de diferença de arquitetura, e só depois pedir confirmação para desativar/deletar resíduos. Ver `references/wp-file-manager-mu-plugin-security-audit.md`.
 
 ---
 
@@ -330,6 +347,22 @@ Para configuração completa da RunCloud API v3 (autenticação, paginação, in
 
 **`references/runcloud-api-ssh-setup.md`** — endpoints API, IDs de servidores, SSH key vault, Fail2Ban, firewall, sshpass, deploy em massa validado.
 
+**`references/custom-wp-plugin-cutover.md`** — padrão MGS para migrar fluxo SaaS/builder/static app para plugin WordPress próprio em um site, com backup, lint remoto, WP-CLI install, import de configs, remoção segura de pastas estáticas que sombreiam rewrites, validação SMS/UTM e rollback.
+
+**`references/openzed-chat-funnels-canary.md`** — deploy canário validado do plugin `MGS Chat Funnels` em OpenZed: upload/replace via WP Admin, ativação via REST plugins endpoint, validação de rotas `/chat/emp/br1` e `/chat/car/br1`, UTM passthrough e pitfall de JSON em `<script type="application/json">` sem `esc_html`.
+
+**`references/chat-funnels-ad-wrapper-contract.md`** — contrato correto para anúncios nos MGS Chat Funnels: preservar `gpt.js`, wrapper JBF, `window.tags`, chamada única de `requestRewardAds()`, `showRewardedAds()` no CTA e `.ad-unit.ad`/`onInfinitePostLoaded`; não criar campos de auctions/timeout nem lógica própria de ads no plugin.
+
+**`references/wp-plugin-json-config-render-validation.md`** — checklist para plugins com rotas públicas + admin UI: validar frontend live com DOM/JSON.parse/gate renderizado e validar admin apenas com sessão autenticada; `curl` deslogado em `/wp-admin` não prova a admin page., chamada única de `requestRewardAds()`, `showRewardedAds()` no CTA e `.ad-unit.ad`/`onInfinitePostLoaded`; não criar campos de auctions/timeout nem lógica própria de ads no plugin.
+
+**`references/wp-plugin-json-config-render-validation.md`** — checklist para plugins com rotas públicas + admin UI: validar frontend live com DOM/JSON.parse/gate renderizado e validar admin apenas com sessão autenticada; `curl` deslogado em `/wp-admin` não prova a admin page.
+
+**`references/wp-frontend-cache-vs-origin-validation.md`** — diagnóstico quando rota WP retorna 200 mas frontend público segue vazio/antigo após fix: comparar bare URL vs cachebuster, headers Cloudflare/APO (`cf-cache-status`, `age`, `cf-apo-via`), asset `ver=`, JSON cru no script e browser render; se cachebuster funciona e bare URL falha, tratar como purge de cache, não regressão do plugin.
+
+**`references/wp-quiz-frontend-sms-diagnostic.md`** — diagnóstico quando leads aceitas pela API do SMS Funnel não aparecem na dashboard: diferenciar teste direto, endpoint WP e preenchimento real no frontend; validar `sms_funnel_status`, `success:true` e `list_id`; e renderizar split redirect com botão `+ Adicionar URL` em vez de JSON para operadores.r; se cachebuster funciona e bare URL falha, tratar como purge de cache, não regressão do plugin.
+
+**`references/wp-quiz-frontend-sms-diagnostic.md`** — diagnóstico quando leads aceitas pela API do SMS Funnel não aparecem na dashboard: diferenciar teste direto, endpoint WP e preenchimento real no frontend; validar `sms_funnel_status`, `success:true` e `list_id`; e renderizar split redirect com botão `+ Adicionar URL` em vez de JSON para operadores.
+
 Para manutenção segura do inventário RunCloud, ver também **`references/runcloud-inventory-hardening.md`**: paginação `meta.pagination.total_pages`, `--dry-run`/`--json`, token via 1Password sem exposição, tempfiles fora do repo, retry/backoff para 403/429/5xx e checklist de validação.
 
 ### Referência rápida
@@ -361,6 +394,16 @@ Para os 4 sites AWS/Bitnami onde SFTP é o canal de acesso (read-only para verif
 
 **CRÍTICO:** `wpfiles` é 100% read-only em todos os diretórios. Para escrita, usar elFinder (ver Seção B) ou SSH bitnami + .pem.
 
+### MGS Chat Funnels — wrapper de anúncios
+
+Para testes/instalações do plugin `MGS Chat Funnels`, ver **`references/mgs-chat-funnels-ad-wrapper-validation.md`**: rota virtual vs pasta física `index.html`, campos `company/domain`, wrapper JBF (`{company}_{domain}.builder.js`), e validação real de anúncios via `gpt.js`, `window.jbftag` e browser canário.
+
+Para instalação em massa do `MGS Chat Funnels` junto com o plugin de quiz `activecampaign-quiz-lazy-blocks`, incluindo extração de pacote existente, RunCloud com `sudo -n`, WP Admin `/rodloguda/`, backups e validação por rota, ver **`references/mgs-chat-and-quiz-bulk-install-2026-07-03.md`**.
+
+**`references/mgs-chat-funnels-ciro-runtime-fixes-2026-07-01.md`**: correções runtime validadas com Ciro para `MGS Chat Funnels`: preload rewarded deve chamar `requestRewardAds()` 1 vez (não loop 5x), top ad precisa manter o chat no fundo via auto-scroll/observers, e deploy OpenZed via WP Admin pode exigir cookie `wordpress_test_cookie` + fluxo upload/replace quando REST plugin retorna `401 rest_cannot_view_plugin`.
+
+Quando Ciro/JBF corrigir a regra de rewarded para “1 só”, não copie loop legado de 5 auctions do `index.html`. O padrão operacional atual é 1 chamada de `requestRewardAds()` no `initQuiz`, sem `for`. Validar em browser com `googletag.pubads().getSlots()` — esperado apenas `..._rewarded/1`, não `/1` a `/5`. Ver `references/mgs-chat-funnels-one-rewarded.md`.
+
 ---
 
 ## Política global — 1Password e Credenciais
@@ -369,3 +412,9 @@ Para os 4 sites AWS/Bitnami onde SFTP é o canal de acesso (read-only para verif
 - NUNCA alterar credenciais de produção sem autorização explícita do Rodolfo
 - Toda ação que modifica estado: validar ANTES de reportar sucesso
 - NUNCA alucinar sucesso após erro — sempre reconhecer e reportar erros literais
+
+---
+
+## Referência — MGS Chat Funnels top ad/rewarded
+
+Para chats standalone baseados no HTML Ciro/JBF, ver `references/mgs-chat-funnels-top-ad-scroll-and-rewarded-count.md`: rewarded preload padrão = 1 chamada; top ad dentro do chat exige auto-scroll/pin-to-bottom para manter os botões visíveis; validar runtime com `nearBottom=0`, `loop5=0` e helper sem recursão.

@@ -18,6 +18,9 @@ GIT_PATHSPECS=(
   ":(exclude)data/ares/creative-inventory/video-frame-samples-full/**"
   ":(exclude)data/browser-profiles/**"
   ":(exclude)data/ares/meta-ads/audit/token-debug-*.json"
+  ":(exclude)data/ares/meta-ads/audit/**/*.json"
+  ":(exclude)data/ares/meta-ads/reports/**/*.json"
+  ":(exclude)data/ares/meta-ads/state/**/*.json"
   ":(exclude)data/mgs-gateway-restart-finalizer-*.sh"
 )
 

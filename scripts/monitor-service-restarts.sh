@@ -248,7 +248,7 @@ PYEOF
       --arg svc "${SVC}" \
       --arg delta "${DELTA}x" \
       --arg window "${WINDOW_HOURS}h" \
-      '{content:"<@344196393512075265> alerta de restart recorrente", embeds:[{title:"Service reiniciando em excesso", color:15158332, fields:[{name:"Service", value:("`"+$svc+"`"), inline:true}, {name:"Reinícios", value:$delta, inline:true}, {name:"Janela", value:$window, inline:true}, {name:"Ação", value:"Investigar logs e causa do restart.", inline:false}]}]}')
+      '{content:"", embeds:[{title:"Service reiniciando em excesso", color:15158332, fields:[{name:"Service", value:("`"+$svc+"`"), inline:true}, {name:"Reinícios", value:$delta, inline:true}, {name:"Janela", value:$window, inline:true}, {name:"Ação", value:"Investigar logs e causa do restart.", inline:false}]}]}')
     if post_alert_payload "$PAYLOAD" "${SVC}:warn"; then
       echo "$(date -Iseconds) ${LOG_PREFIX} WARN alert enviado para ${SVC}"
     else
@@ -275,39 +275,43 @@ PYEOF
 done
 
 if [[ -s "$RESTART_EVENTS_FILE" ]]; then
-  SUMMARY_TABLE=$(python3 - "$RESTART_EVENTS_FILE" <<'PY'
-import json, sys
-rows=[]
-for line in open(sys.argv[1], encoding='utf-8'):
-    line=line.strip()
-    if line:
-        rows.append(json.loads(line))
-headers=("Serviço", "Start atual", "Causa provável", "Ação")
-body=[]
-for r in rows:
-    cause=(r.get('cause') or '').replace('\n',' ')
-    action=(r.get('action') or '').replace('\n',' ')
-    body.append([
-        r.get('service','')[:20],
-        r.get('current','')[:32],
-        (cause[:58] + '...') if len(cause) > 61 else cause,
-        (action[:42] + '...') if len(action) > 45 else action,
-    ])
-widths=[len(h) for h in headers]
-for row in body:
-    widths=[max(w, len(str(v))) for w,v in zip(widths,row)]
-fmt='  '.join('{:<%d}' % w for w in widths)
-print(fmt.format(*headers))
-print(fmt.format(*['-'*w for w in widths]))
-for row in body:
-    print(fmt.format(*row))
+  COUNT_RESTARTS=$(wc -l < "$RESTART_EVENTS_FILE" | tr -d ' ')
+  RESTART_FIELDS=$(python3 - "$RESTART_EVENTS_FILE" "$COUNT_RESTARTS" <<'PY'
+import json
+import sys
+
+path = sys.argv[1]
+count = sys.argv[2]
+fields = [
+    {"name": "Serviços afetados", "value": str(count), "inline": True},
+    {"name": "Formato", "value": "Resumo por serviço; sem tabela quebrada no mobile.", "inline": True},
+]
+for line in open(path, encoding='utf-8'):
+    line = line.strip()
+    if not line:
+        continue
+    r = json.loads(line)
+    svc = (r.get('service') or 'service')[:80]
+    current = (r.get('current') or 'desconhecido').replace(' EDT', ' EDT')
+    cause = ' '.join((r.get('cause') or 'Causa não identificada automaticamente.').split())
+    action = ' '.join((r.get('action') or 'Verificar se foi planejado; se não, investigar journal.').split())
+    if len(cause) > 170:
+        cause = cause[:167] + '...'
+    if len(action) > 150:
+        action = action[:147] + '...'
+    value = f"Start: `{current}`\nCausa: {cause}\nAção: {action}"
+    fields.append({"name": svc, "value": value[:1000], "inline": False})
+fields.append({
+    "name": "Decisão operacional",
+    "value": "Investigar só se não foi manutenção planejada ou se repetir. Mensagem agrupada e silenciosa.",
+    "inline": False,
+})
+print(json.dumps(fields, ensure_ascii=False))
 PY
   )
-  COUNT_RESTARTS=$(wc -l < "$RESTART_EVENTS_FILE" | tr -d ' ')
   PAYLOAD=$(jq -n \
-    --arg table "$SUMMARY_TABLE" \
-    --arg count "$COUNT_RESTARTS" \
-    '{content:"<@344196393512075265> restarts de serviços detectados", embeds:[{title:"Restarts de serviços detectados", color:3447003, fields:[{name:"Serviços afetados", value:$count, inline:true}, {name:"Resumo", value:("```\n"+$table+"\n```"), inline:false}, {name:"Decisão operacional", value:"Mensagem agrupada para reduzir ruído; investigar apenas se não foi manutenção planejada ou se repetir.", inline:false}]}]}')
+    --argjson fields "$RESTART_FIELDS" \
+    '{content:"", embeds:[{title:"Restarts de serviços detectados", color:3447003, fields:$fields}]}')
   if post_alert_payload "$PAYLOAD" "service-restarts:active_enter_batch"; then
     echo "$(date -Iseconds) ${LOG_PREFIX} RESTART batch alert enviado count=${COUNT_RESTARTS}"
   else
@@ -318,7 +322,7 @@ fi
 
 if [[ "${MGS_FORCE_SERVICE_RESTART_ALERT:-0}" == "1" ]]; then
   PAYLOAD=$(jq -n \
-    --arg c "<@344196393512075265> alerta de restart recorrente" \
+    --arg c "" \
     '{content:$c, embeds:[{title:"Service reiniciando em excesso", color:15158332, fields:[{name:"Service", value:"`synthetic-service`", inline:true}, {name:"Reinícios", value:"5x", inline:true}, {name:"Janela", value:"24h", inline:true}, {name:"Ação", value:"Teste local do caminho de alerta.", inline:false}]}]}')
   if post_alert_payload "$PAYLOAD" "synthetic"; then
     echo "$(date -Iseconds) ${LOG_PREFIX} WARN alert enviado para synthetic-service"

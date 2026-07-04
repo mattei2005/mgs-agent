@@ -7,6 +7,21 @@ related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-upd
 
 # Discord Ops — Comunicação Inter-Agente, Roles e Webhooks
 
+## Recent operational references
+
+- `references/discord-normal-response-vs-report-infra-2026-07-03.md` — never append raw `[REPORT-INFRA]` blocks to normal Rodolfo-facing replies; route infra reports through the proper infra flow separately.
+
+## User-facing response hygiene
+
+Do not paste raw `[REPORT-INFRA]` blocks into a normal operational reply to Rodolfo or into a validation thread. If a skill/script/data/config change needs infra reporting, send/process the report through the proper infra flow/channel separately. The user-facing answer should stay focused on the operational result, next action, and blockers.
+
+For short steering messages from Rodolfo such as “ta iai?”, “ok”, “ah?”, or “roda”, answer the immediate operational state/action. Do not treat “ok” as completion if no action was requested; do not add internal audit/report footers.
+
+
+## App-rate-limit channel scope (B001–B010)
+
+The B001–B010 `app-rate-limit` channels are manager-facing, app-specific operational alert channels. Post only app-specific actionable events there: app role add/remove, token/API/rate-limit/app health, or developer/account failures for that specific app. Do **not** post Zeus internal correction/status notices, broad infra explanations, or monitor changelogs there. Keep those in Zeus/#alerts-infra or the Rodolfo thread unless Rodolfo explicitly asks for a manager-facing broadcast. See `references/app-rate-limit-channel-scope-2026-07-02.md`.
+
 ## SEÇÃO A — Comunicação Inter-Agente (Zeus → Atena)
 
 ### Quando usar
@@ -63,6 +78,8 @@ Ao validar `git status` ou arquivos modificados durante revisão de Atena/Zeus/A
 ### Mentions cross-agent em canal de outro agente
 
 Quando Rodolfo disser que marcou um agente dentro da thread/canal de outro agente e esperava resposta (ex.: Ares marcado em thread da Hera), tratar como roteamento de gateway, não como falha do modelo. O agente marcado só receberá o evento se o canal pai/thread estiver em `discord.allowed_channels` efetivo dele; `thread_require_mention=true` sozinho não basta.
+
+Caso inverso validado: se Rodolfo disser que qualquer mensagem sem mention acorda os dois agentes na thread de um deles, auditar o agente visitante. O canal externo pode estar em `allowed_channels` com `thread_require_mention=false` no YAML ou no `.env` efetivo. Corrigir para `thread_require_mention=true` e validar `/proc/<pid>/environ`, não apenas o arquivo. Detalhe: `references/discord-cross-agent-thread-reply-scope-2026-06-20.md`.
 
 ### Challenges por IP de datacenter em fluxos Ares/Hera
 
@@ -207,9 +224,27 @@ for m in s.get('messages', []):
 
 Ao processar `[REPORT-INFRA]`, seguir o playbook operacional em `references/report-infra-processing-playbook.md`: validar artefatos/hashes/crons, atualizar `infra-inventory.json` quando aplicável, registrar audit log, commitar só arquivos relevantes e responder apenas com o ACK canônico curto.
 
-Dois user mentions: bot Zeus (para `DISCORD_ALLOW_BOTS=mentions`) + Rodolfo (push notification):
+**Regra de roteamento para Zeus em tarefa interativa:** não despejar o bloco `[REPORT-INFRA]` na thread onde Rodolfo pediu a execução. Essa thread deve receber só conclusão/detalhes úteis. O report formal deve ser enviado ao canal correto de infra (`#alerts-infra` / webhook correspondente, com mention quando for thread nova). Se o report precisar existir como evidência, poste lá primeiro e depois responda na thread original com resumo limpo. Se a sessão atual não tiver rota/API para postar no canal certo, registre audit/inventário e não simule o report dentro da thread. Referência: `references/report-infra-thread-destination-pitfall-2026-07-01.md`.
 
+**Verificação de entrega obrigatória:** antes de dizer na thread original que um `REPORT-INFRA` foi enviado, validar duas coisas: (1) helper/webhook retornou sucesso real (`HTTP 204` ou equivalente); (2) Discord API mostra a mensagem no destino esperado (`#alerts-infra` / `1498132022634483894`, ou thread específica quando aplicável). Isso evita falso positivo quando o webhook aponta para outro canal, mensagem sai como embed vazio, ou o agente confunde canais de alerta. Detalhe: `references/report-infra-delivery-verification-2026-07-02.md`.
+
+**Layout obrigatório novo:** REPORT-INFRA enviado por Zeus deve usar embed Discord, não bloco de texto cru. Use o helper canônico:
+
+```bash
+/root/mgs-agent/scripts/send-report-infra-embed.sh \
+  --action modificada \
+  --type script/data \
+  --path '/root/mgs-agent/scripts/foo.sh; /root/mgs-agent/data/infra-inventory.json' \
+  --reason 'motivo operacional curto' \
+  --evidence 'bash -n OK; dry-run OK; HTTP 204'
 ```
+
+O helper mantém `content` vazio por padrão: sem mention do Zeus, do Rodolfo ou de qualquer pessoa. Ação/Tipo/Path/Motivo/Evidência ficam em fields de embed. Em `#alerts-infra`, REPORT-INFRA/alerta operacional normal é silencioso e não abre thread. Só usar mention em alerta crítico real com push explicitamente necessário. Não voltar para `[REPORT-INFRA] ...` em texto corrido salvo emergência/manual fallback.
+
+Detalhe/pitfall validado: `references/report-infra-embed-no-mention-no-thread-2026-07-02.md`.
+
+Formato legado ainda aceito para reports vindos de outros agentes, mas deve ser migrado quando tocarmos os scripts/procedimentos deles:
+```text
 [REPORT-INFRA] <@1496296175014252634> <@344196393512075265>
 Ação: criada/modificada/removida
 Tipo: cron / skill / script / config / data
@@ -222,22 +257,38 @@ Evidência: hash de commit ou output de comando
 
 Ao receber `[REPORT-INFRA]`, Zeus deve processar antes de responder:
 1. Validar evidência mínima sem expor segredo: `py_compile`, `bash -n`, `python3 -m json.tool`, `sha256sum`, e leitura sanitizada de `~/.hermes/profiles/<agent>/cron/jobs.json` quando houver Hermes cron job.
+   - Para plugin WordPress com rota pública/frontend, não aceitar só HTTP 200: validar DOM/render real, JSON embutido parseável e comparar bare URL vs cachebuster quando houver Cloudflare/APO. Se cachebuster funciona mas bare URL segue velha (`cf-cache-status: HIT`, `age` alto, asset `ver=` antigo), tratar como purge de cache pendente. Ver `wp-plugin-mass-operation/references/wp-frontend-cache-vs-origin-validation.md`.
 2. Conferir semanticamente a mudança principal quando houver regra/threshold: ex. localizar a regra R4 e confirmar `CPMO gt 2.0 USD`, não apenas comparar hash.
 3. Atualizar `/root/mgs-agent/data/infra-inventory.json` preservando a ordem existente. Evitar reconstruir/sortear listas inteiras porque isso gera diff gigante e ruído; faça merge pontual por `path`/`id`.
-4. Para mudanças runtime sem arquivo versionado direto — permission overwrite Discord, auth store OAuth, acesso de bot a canal — validar via API/status real e registrar em seção manual do inventário (`discord_permissions`, `oauth_auth_states`, etc.). Se criar seção manual nova, patchar `scripts/infra-discovery.sh` para preservar essa seção em futuras regenerações.
-5. Para scripts fora do repo, como `/root/.hermes/profiles/<agent>/scripts/*.sh`, registrar no inventário com `path`, `size_bytes`, `modified_at` e `sha256`, mas não tentar `git add` fora de `/root/mgs-agent`.
+   - Para REPORT-INFRA que aponta para diretório grande de auditoria/evidência, registrar uma entrada única com `path` terminando em `/`, `size_bytes` total, `sha256_manifest` do diretório e `counts` úteis; validar JSON/CSV/imagens sem despejar listagens longas no chat. Se o diff do inventário mostrar reordenação/deleções grandes, restaurar `data/infra-inventory.json` do HEAD e reaplicar merge cirúrgico antes de commit. Detalhe: `references/report-infra-large-data-directories-and-inventory-order-2026-06-19.md`.
+4. Para mudanças runtime sem arquivo versionado direto — permission overwrite Discord, auth store OAuth, acesso de bot a canal, profile `.env`/config, gateway restart finalizer, `system_packages[]`, `runtime_artifacts[]`, `profile_skill_references[]`, `config_files[]` — validar via API/status real e registrar em seção manual do inventário (`discord_permissions`, `oauth_auth_states`, `config_files`, etc.). Em `.env`, armazenar só hashes e chaves não secretas allowlisted (`DISCORD_ALLOWED_CHANNELS`, `DISCORD_FREE_RESPONSE_CHANNELS`, `DISCORD_THREAD_REQUIRE_MENTION`), nunca valores de tokens. Validar o serviço real (`<agent>-gateway.service`) depois do restart, não só o log do finalizer. Se criar ou depender de seção manual nova, patchar `scripts/infra-discovery.sh` **no mesmo processamento** para preservar essa seção em futuras regenerações quando o discovery puder sobrescrevê-la; validar `bash -n`, `json.tool` e checagem compacta de IDs/contagem antes do commit. Detalhes: `references/report-infra-manual-inventory-preservation-2026-06-19.md` e `references/report-infra-profile-env-gateway-restart-2026-06-19.md`.
+4. Para mudanças runtime sem arquivo versionado direto — permission overwrite Discord, auth store OAuth, acesso de bot a canal, profile `.env`/config, gateway restart finalizer, `system_packages[]`, `runtime_artifacts[]`, `profile_skill_references[]`, `config_files[]` — validar via API/status real e registrar em seção manual do inventário (`discord_permissions`, `oauth_auth_states`, `config_files`, etc.). Em `.env`, armazenar só hashes e chaves não secretas allowlisted (`DISCORD_ALLOWED_CHANNELS`, `DISCORD_FREE_RESPONSE_CHANNELS`, `DISCORD_THREAD_REQUIRE_MENTION`), nunca valores de tokens. Validar o serviço real (`<agent>-gateway.service`) depois do restart, não só o log do finalizer. Se criar ou depender de seção manual nova, patchar `scripts/infra-discovery.sh` **no mesmo processamento** para preservar essa seção em futuras regenerações quando o discovery puder sobrescrevê-la; validar `bash -n`, `json.tool` e checagem compacta de IDs/contagem antes do commit. Detalhes: `references/report-infra-manual-inventory-preservation-2026-06-19.md` e `references/report-infra-profile-env-gateway-restart-2026-06-19.md`.
+5. Para scripts fora do repo, como `/root/.hermes/profiles/<agent>/scripts/*.sh`, registrar no inventário com `path`, `size_bytes`, `modified_at` e `sha256`, mas não tentar `git add` fora de `/root/mgs-agent`. Se wrappers de cron passarem a rotear relatórios para uma thread Discord fixa, validar o poster em dry-run (`mode=post_existing_thread`), o thread real com o token do agente que vai postar (`GET /channels/<thread_id>`: parent certo, `archived=false`, `locked=false`), registrar a rota em `runtime_artifacts[]` e commitar só poster/skill/inventário versionados. Detalhe: `references/report-infra-fixed-discord-thread-routing-2026-06-19.md`.
 6. For wrappers secret-backed no repo, validar tanto o caminho positivo quando possível quanto o fail-closed sem segredo: `bash -n`, modo executável, comandos requeridos presentes, e execução sem segredo retornando erro seguro sem vazar credenciais/cookies. Registrar path esperado do segredo, não o conteúdo.
-7. Para REPORT-INFRA de pacotes de sistema/runtime deps sem código compartilhado (ex.: Playwright `install-deps`, `libimage-exiftool-perl`), validar `dpkg-query`/binários/probe runtime compacto, registrar em `infra-inventory.json` como `system_packages[]`, preservar essa seção no `infra-discovery.sh`, e não versionar artefatos `/tmp`. Detalhe: `references/report-infra-system-packages-runtime-deps-2026-06-18.md`.
+7. Para REPORT-INFRA de pacotes de sistema/runtime deps sem código compartilhado (ex.: Playwright `install-deps`, `libimage-exiftool-perl`, `ffmpeg`, `python3-pil`), validar `dpkg-query`/binários/probe runtime compacto, registrar em `infra-inventory.json` como `system_packages[]`, preservar seções manuais no `infra-discovery.sh` (`system_packages`, `runtime_artifacts`, permissões/OAuth etc.), e não versionar artefatos `/tmp`. Se o inventário já tem diff de outro agente/cron, fazer merge cirúrgico ou restaurar só o arquivo alvo do HEAD antes de reaplicar a entrada — nunca apagar seções manuais existentes. Detalhe: `references/report-infra-system-packages-runtime-deps-2026-06-18.md`.
 8. Para REPORT-INFRA de skill/reference/memória de outro profile, validar runtime **e** cópia versionada: rodar `sync-souls.sh` quando aplicável, comparar SHA do arquivo em `/root/.hermes/profiles/<agent>/skills/...` com `/root/mgs-agent/profiles/<agent>-skills/...`, validar scripts citados e registrar memória como runtime-only em audit log — não tentar versionar memory store.
 8. Para Hermes crons, registrar `profile`, `id`, `name`, `schedule`, `script`, `next_run_at`, `enabled`, `state`, `no_agent` e `deliver`. Se o cron usa horário de outra região via conversão (ex. `00:30 Europe/Madrid` como `18:30 America/New_York` durante EDT), anotar `intended_local_time` para não parecer schedule errado.
 9. Acrescentar evento compacto em `/root/mgs-agent/logs/events-audit.jsonl` com paths, validações e `inventory_updated=true`. O log é local-only; não precisa aparecer no commit se estiver ignorado.
 10. Commitar apenas arquivos relevantes dentro do repo (`infra-inventory.json`, scripts/data/skills versionados afetados). Não incluir state files, audit debug, finalizers, auth stores, cookies, generated artifacts, browser profiles, memory files ou mudanças de outro fluxo no mesmo commit. Se `sync-souls.sh` trouxer referências não relacionadas, deixe-as unstaged.
-11. Responder só após commit/validação final, máximo 2 linhas.
+11. Se o auto-commit watcher capturar `infra-inventory.json` antes do commit manual, não tentar forçar commit vazio nem reabrir diff sem necessidade. Verificar `git show --stat --oneline -1` e confirmar que o último commit contém exatamente a mudança de inventário esperada; usar esse SHA no ACK canônico.
+12. Se `infra-inventory.json` já estiver sujo com drift não relacionado, fazer staging cirúrgico a partir de `HEAD:data/infra-inventory.json`: gerar patch só com os hunks do report, `git reset -- data/infra-inventory.json`, `git apply --cached /tmp/<report>-infra-only.patch`, inspecionar `git diff --cached -- data/infra-inventory.json`, e só então commitar. Se um commit amplo já foi criado por engano, usar `git reset --soft HEAD~1`, limpar o index do inventário e recomitar com o patch report-only. Detalhe: `references/report-infra-surgical-inventory-staging-2026-06-22.md`.
+13. Para REPORT-INFRA de profile skill com novas referências em sequência, preservar a lista `references[]` já existente no inventário e apenas anexar/atualizar a referência reportada. Staging deve ser cirúrgico: `infra-inventory.json`, `SKILL.md` versionado e somente o `references/<arquivo>.md` do report atual.
+13. Se o `sync-souls.sh` trouxer outras referências novas que já aparecem no diff do `SKILL.md` versionado, tratar como parte do mesmo report de skill: validar SHA runtime↔versionado, secret-scan e incluir no inventário/commit junto. Não commitar referências órfãs não linkadas, mas também não deixar o SKILL.md apontando para arquivo não versionado.
+14. Responder só após commit/validação final, máximo 2 linhas.
 
 Referências:
 - Runtime permissions/OAuth/wrappers com segredo: `references/report-infra-runtime-permissions-auth-and-secret-wrappers-2026-06-17.md`.
 - System packages/runtime deps: `references/report-infra-system-packages-runtime-deps-2026-06-18.md`.
 - Profile skill/reference/memory updates: `references/report-infra-profile-skill-memory-updates-2026-06-17.md`.
+- Sequential profile-skill reports with auto-commit watcher race and surgical staging: `references/report-infra-sequential-profile-skill-updates-2026-06-19.md`.
+- Meta cron/control-write artifacts, profile-local wrappers, cron removal, large audit directories, and cross-profile Discord token validation: `references/report-infra-meta-cron-controlled-write-artifacts-2026-06-19.md`.
+- Profile `.env` config + gateway-restart reports: `references/report-infra-profile-env-gateway-restart-2026-06-19.md` — validate non-secret Discord routing flags, backup hash, detached finalizer log and actual `<agent>-gateway.service`; register `config_files[]`/`runtime_artifacts[]` metadata only, never commit `.env`/backup/log files.
+- Fixed Discord thread routing for cron/checkpoint reports: `references/report-infra-fixed-discord-thread-routing-2026-06-19.md` — validate poster dry-run `mode=post_existing_thread`, GET the target thread with the posting agent token, register runtime wrappers by hash and fixed route in `runtime_artifacts[]`, and keep high-risk incidents in separate threads.
+- Discord report layout/chunking: `references/report-infra-discord-report-layout-and-chunking-2026-06-20.md` — for poster/report scripts, validate representative preview through the poster dry-run; confirm chunks stay under Discord’s 2000-char limit, code fences are not split mid-table, expected columns are present, removed technical columns are absent, and labels/intro are human-readable.
+- Fixed Discord thread routing for cron/checkpoint reports: `references/report-infra-fixed-discord-thread-routing-2026-06-19.md` — validate poster dry-run `mode=post_existing_thread`, GET the target thread with the posting agent token, register runtime wrappers by hash and fixed route in `runtime_artifacts[]`, and keep high-risk incidents in separate threads.
+- Discord report format/chunking validation: `references/report-infra-discord-report-format-validation-2026-06-20.md` — for scripts that post long reports, validate representative preview output, chunk lengths under 2000, balanced fenced code blocks, natural part labels, requested columns/order, and absence of removed technical columns before ACK/commit.
+- Meta cron / controlled-write reports: `references/report-infra-meta-cron-controlled-write-2026-06-19.md` — validates repo scripts, profile-local wrappers, Hermes cron jobs, dry-run audits, timezone intent, and inventory/commit scope without leaking credentials or dumping raw Discord output.
+- Sequential profile-skill reports with auto-commit watcher race and surgical staging: `references/report-infra-sequential-profile-skill-updates-2026-06-19.md`.
 
 Zeus responde com máximo 2 linhas:
 - `✅ Registrado.`
@@ -277,6 +328,35 @@ Padrão preferido:
 - Resoluções: embed verde simples com título curto (`Cron recuperado`, `Service normalizado`) e descrição de 1 linha.
 - Custo/volume: separar `Custo real`, `Custo hipotético`, `API calls`, `Tokens estimados`, `Referência`, `Nota` em fields; não jogar tudo em uma descrição Markdown única.
 - Emojis: usar só como indicador de severidade no resumo/título; não repetir em toda linha.
+
+#### Listas longas no Discord mobile: agrupar por chave, não forçar tabela
+
+Quando um alerta precisa mostrar lista de pessoas/contas com campos longos — especialmente `email`, `nome`, `perfil ID`, `role` — não insistir em tabela de 4 colunas. Mesmo em bloco monoespaçado, o Discord mobile corta/trunca emails e deixa a leitura ruim.
+
+Padrão validado com Rodolfo para Meta App Roles:
+
+```text
+Usuários do app - B002
+Ordenado por BOT EMAIL
+
+disparosconecta@gmail.com
+• Adalberto Vilela Oliveira — adalbertovilelaoliveira — Admin
+• Afonso Araujo — fernandadossanto678 — Admin
+
+disparosfinanceadx@gmail.com
+• Fernando Narciso Acosta — 100009006839947 — Admin
+```
+
+Regra prática:
+- embed curto para status/resumo;
+- mensagem normal separada para a lista;
+- chave agrupadora longa em linha própria (`BOT EMAIL`, domínio, site, conta);
+- itens em bullets: `Nome — ID — Role/estado`;
+- linha em branco entre grupos;
+- ordenar pela chave agrupadora;
+- validar visualmente em 1 canal canário antes de disparar em massa.
+
+Não usar aliases artificiais (`D1`, `D2`) nem responder que é questão de “modo desktop”: o render depende do client Discord, então o layout deve ser mobile-first. Detalhe: `references/discord-mobile-grouped-list-alert-layout-2026-06-30.md`.
 
 Exemplo jq compacto para webhook:
 
@@ -472,15 +552,59 @@ Referência detalhada: `references/hermes-discord-busy-input-queue.md`.
 | Gateway reiniciou mas parou de receber após reconexão | Sessão zumbi pós-restart |
 | Canal principal responde inline e não cria threads, apesar de `auto_thread: true` | Upstream Hermes pode estar pulando auto-thread em `free_response_channels` |
 
+### Channel permission overwrites and narrow delegation
+
+When Rodolfo asks Zeus to let another agent (Ares/Hera/Atena) manage future user access to a specific Discord channel, treat it as a channel-scoped permission delegation, not a global admin grant. Validate scope first: list/check the category children before applying category-level changes. If the category contains unrelated infra/admin channels, stop and confirm a narrower channel-only scope.
+
+For Discord API `PUT /channels/{channel_id}/permissions/{overwrite_id}`, `MANAGE_CHANNELS` alone is not enough. The delegated bot also needs effective `MANAGE_ROLES` in that channel context to edit permission overwrites; otherwise validation with the delegated bot token can return `403 Forbidden` even if Zeus/admin can set the overwrite. Use the delegated bot token for final validation, not only Zeus/admin.
+
+Validated narrow pattern:
+- Apply bot overwrite on the target channel only: `VIEW_CHANNEL + MANAGE_CHANNELS + MANAGE_ROLES` when the bot must edit channel permission overwrites.
+- Add/read users with overwrite `type: 1`, `allow: VIEW_CHANNEL + READ_MESSAGE_HISTORY` (`66560`), `deny: 0`.
+- Validate idempotently using the delegated bot token: `PUT /channels/{channel_id}/permissions/{known_user_id}` returns HTTP `204`, then `GET /channels/{channel_id}` confirms the overwrite.
+- Register audit log and inventory under `discord_permissions`; explain clearly that `MANAGE_ROLES` is channel-scoped for overwrites, not global role administration.
+
+Reference: `references/discord-channel-permission-overwrites-ares-logs-aquisicao-2026-06-19.md`.
+
 ### Adding a user to a private Discord thread
 
-When Rodolfo asks to add Raquel/Kelly/Geizian/gestor or another approved person to a Zeus/Atena/Ares/Hera thread, use Discord API `PUT /channels/{thread_id}/thread-members/{user_id}`. Do this even when no dedicated `discord_admin` tool is loaded: load the bot token from the active profile `.env` inside a terminal/shell command, call Discord API directly, and never print the token. If it returns `403 Missing Access`, the likely cause is that the bot lacks access to the thread or the user is not in the parent channel yet; report that clearly, then retry the same PUT after Rodolfo grants parent-channel access. Do not claim the thread add succeeded until the API returns `204`; verify with `GET /channels/{thread_id}/thread-members/{user_id}` returning `200` when possible.
+When Rodolfo asks to add Raquel/Kelly/Geizian/Ially/gestor or another approved person to a Zeus/Atena/Ares/Hera thread, **execute it**; do not answer “não consigo” unless API validation proves a real blocker. Use Discord API `PUT /channels/{thread_id}/thread-members/{user_id}`. Do this even when no dedicated `discord_admin` tool is loaded: load the bot token from the active profile `.env` or runtime service environment inside a terminal/shell command, call Discord API directly, and never print the token.
 
-Canonical helper now available for agents/profiles that have shell access:
+Canonical helper for the normal path:
 
 ```bash
 /root/mgs-agent/scripts/discord-add-thread-member.sh --profile <agent> --thread <thread_id> --user <user_id>
 ```
+
+If it returns `403 Missing Access`, diagnose before refusing:
+- `GET /channels/{thread_id}` with the posting bot token to confirm thread access.
+- Search/confirm the user ID in the guild if only a human name was provided.
+- If the user is in the guild but lacks access to the private parent channel, Zeus/admin can set a **minimal parent-channel user overwrite** (`VIEW_CHANNEL + SEND_MESSAGES + READ_MESSAGE_HISTORY + SEND_MESSAGES_IN_THREADS`) and retry the thread-member PUT. Validate `PUT .../thread-members/{user_id}` = `204` and `GET .../thread-members/{user_id}` = `200` before claiming success.
+
+For Zeus, keep this command pattern in `command_allowlist`/Always Allow so routine thread adds do not create approval friction:
+
+```text
+/root/mgs-agent/scripts/discord-add-thread-member.sh --profile zeus --thread * --user *
+```
+
+Do not claim the thread add succeeded until the API returns `204`; verify with `GET /channels/{thread_id}/thread-members/{user_id}` returning `200` when possible.
+
+Zeus-specific correction validated: if the helper returns `403 Missing Access` because the user is not in the parent private channel, apply a narrow parent-channel overwrite for the user first (`VIEW_CHANNEL`, `SEND_MESSAGES`, `READ_MESSAGE_HISTORY`, `SEND_MESSAGES_IN_THREADS`), then retry the helper/API add. Confirm success only after parent overwrite `204` when needed, thread-member PUT `204`, and member GET `200`. Rodolfo expects Zeus to resolve this path, not answer that it cannot add people. For exact reproduction and allowlist details, see `references/discord-thread-member-parent-access-and-allowlist-2026-06-29.md`.
+
+For Zeus, this helper should be in `command_allowlist` as:
+
+```text
+/root/mgs-agent/scripts/discord-add-thread-member.sh --profile zeus --thread * --user *
+```
+
+Operational correction validated on Hera and Ares: if the agent replied “não consigo adicionar pessoas na thread”, fix the profile so future requests are executable, not just manually handled once:
+
+```yaml
+command_allowlist:
+- /root/mgs-agent/scripts/discord-add-thread-member.sh --profile zeus --thread * --user *
+```
+
+Validate via ad-hoc `/tmp/hermes-verify-*` script: YAML parses, entry appears exactly once in active + versioned Zeus config, and a representative command matches the glob. This is not suite green.
 
 Operational correction validated on Hera and Ares: if the agent replied “não consigo adicionar pessoas na thread”, fix the profile so future requests are executable, not just manually handled once:
 - Add the explicit user IDs to `discord.thread_auto_add_users` in `config.yaml` for automatic inclusion in new threads.
@@ -723,12 +847,27 @@ Quando criar ou colocar online um novo agente MGS no Discord (bot/app OAuth, ite
 
 Quando Rodolfo criar um canal que segue anúncios externos (ex: Hermes announcements) e pedir para Zeus explicar automaticamente cada novo post abaixo do anúncio, usar o padrão de poller cron descrito em `references/discord-followed-announcement-explainer.md`.
 
+### Aviso antes de thread ficar oculta por auto-archive
+
+Quando Rodolfo pedir para ser avisado antes de threads Discord configuradas com `Hide After Inactivity = 1 Week` ficarem ocultas, não criar keepalive por padrão. O padrão correto é monitor diário com alerta no sexto dia: consultar `/guilds/{guild_id}/threads/active` pelos bot tokens dos agentes MGS relevantes, filtrar `thread_metadata.auto_archive_duration == 10080`, calcular `archive_at`, deduplicar por `thread_id + archive_at` em state file local e avisar Rodolfo quando faltar até 24h. Ver `references/discord-thread-auto-archive-warning-cron.md` para implementação, validação e pitfall de verificação ad-hoc com `/tmp/hermes-verify-*`.
+
 Resumo operacional:
 - Verificar acesso de Zeus e Atena via Discord API, mas lembrar que acesso ao canal ≠ gateway ouvindo; checar `discord.allowed_channels` separadamente.
 - Preferir poller Zeus com state (`last_seen_id`/`processed`) + reply via `message_reference`, em vez de adicionar o canal ao gateway normal.
 - Manter Atena fora desse fluxo por padrão; é administrativo/Hermes, não editorial.
 - Inicializar state no message atual para não reprocessar histórico/follow setup.
 - Ignorar state runtime no git para evitar auto-commit de churn.
+
+### Threads antigas continuam abertas na sidebar de usuários adicionados
+
+Quando Rodolfo mostrar screenshot ou relatar que Geizian/gestores/Kelly veem muitas threads antigas abertas após serem adicionados por auto-add, trate como problema de **stale active threads**, não apenas de política de membros. Consulte `references/discord-stale-thread-archive-enforcement-2026-06-30.md`.
+
+Checklist curto:
+1. Auditar `/guilds/{guild_id}/threads/active` com os bot tokens dos profiles afetados.
+2. Para cada parent channel de Zeus/Atena/Ares/Hera, comparar `thread_metadata.archived`, `auto_archive_duration` e timestamp do `last_message_id`.
+3. Se `last_message + auto_archive_duration + grace` já passou e `archived=false`, arquivar via `PATCH /channels/{thread_id}` com `{"archived": true}`.
+4. Manter auto-add e archive como assuntos separados: remover usuário reduz escopo de notificação, mas não corrige thread stale.
+5. Se a correção virar script/cron/config/data, atualizar inventário/audit log e seguir o fluxo REPORT-INFRA.
 
 Ver `references/discord-threads-lifecycle.md` para referência completa.
 

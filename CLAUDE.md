@@ -6,7 +6,7 @@ Automated pipeline for generating and publishing credit card recommendation (REC
 
 ## Architecture
 
-- **Host**: VPS `87.99.151.107` (Linux)
+- **Host**: Hostinger VPS `2.25.165.171` / hostname `srv1767265` (Linux). Antiga Hetzner: `87.99.151.107` / `mgs-agent-01`, desativada pós-migração e liberada para exclusão em 2026-06-19.
 - **Working dir**: `/root/mgs-agent/`
 - **Credentials**: 1Password Service Account token in `/root/mgs-agent/.env` (never read or exposed). Default vault `MGS Conteúdo` via `OP_DEFAULT_VAULT`. Both shell scripts source `.env` at startup so they work under `systemd`/`cron` too.
 - **Image generation**: Google Gemini 2.5 Flash Image API, Tier 1 Prepay ($300 credits, valid through Jul 2026).

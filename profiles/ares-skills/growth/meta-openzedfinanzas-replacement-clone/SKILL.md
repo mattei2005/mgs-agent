@@ -147,6 +147,7 @@ Pitfalls validados em 2026-06-19:
 - `adcreative` não aceita GET com `effective_status/status`; validar com fields `id,name`.
 - Nomes de `adcreative` repetidos podem falhar com `Invalid parameter`/`1487229`; adicionar sufixo de instância/campanha (`_C01`, `_C02`...) mantendo o prefixo taxonômico.
 - Para criativos Elena atuais, video titles `NV - Criativo 3 - Openzed - EspanholES - Feed/Storie` + visual de cartão/600/6000/CTA justificaram `CC_ES_ESP_VID_LIMITE_ALTO_NV_00X_CYY`.
+- Detalhes de execução, evidência visual/API e formato de audit: `references/meta-naming-standard-elena-2026-06-19.md`.
 
 ## Regras de clone
 

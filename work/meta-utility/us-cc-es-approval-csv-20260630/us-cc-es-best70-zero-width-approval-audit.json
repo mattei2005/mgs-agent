@@ -1,0 +1,64 @@
+{
+  "status": "OK",
+  "executed_at_et": "2026-06-30T02:05:43-04:00",
+  "source_tab": "US-CC-ES",
+  "source_rows": 201,
+  "unique_rows": 201,
+  "selected_rows": 70,
+  "csv": "/root/mgs-agent/work/meta-utility/us-cc-es-approval-csv-20260630/us-cc-es-best70-zero-width-approval.csv",
+  "zip": "/root/mgs-agent/work/meta-utility/us-cc-es-approval-csv-20260630/us-cc-es-best70-zero-width-approval.zip",
+  "utf8_bom": true,
+  "crlf": true,
+  "text_zero_width_rows": 70,
+  "cta_zero_width_rows": 0,
+  "sample": [
+    {
+      "id": "1",
+      "visible_text": "⚠️ Actualización importante, {{first_name}} |  | Tengo nueva información sobre sus solicitudes recientes y puede afectar directamente la aprobac",
+      "cta": "🔍VER RESPUESTA DE MI TARJETA",
+      "score": 105
+    },
+    {
+      "id": "2",
+      "visible_text": "🔔 (1) ACTUALIZACIÓN DE NUEVA TARJETA |  | El estado de su tarjeta de crédito ha cambiado a: APROBADO.  |  | Toque para ver su límite inicial y la fe",
+      "cta": "📥 LEER ESTADO",
+      "score": 102
+    },
+    {
+      "id": "3",
+      "visible_text": "💳 TARJETA DE CRÉDITO APROBADA |  | ¡Felicitaciones, {{first_name}}! Su nueva Tarjeta de Crédito está lista para ser enviada.  |  | Sólo necesitamos ",
+      "cta": "🚚 CONFIRMAR AHORA",
+      "score": 98
+    },
+    {
+      "id": "4",
+      "visible_text": "✅ SOLICITUD RECIBIDA |  | {{first_name}}, su solicitud de Tarjeta de Crédito fue recibida exitosamente. | Un paso de confirmación está disponible ",
+      "cta": "✅ CONFIRMAR AHORA",
+      "score": 95
+    },
+    {
+      "id": "5",
+      "visible_text": "📍 ESTADO CONFIRMADO |  | Su solicitud de tarjeta de crédito pasó al paso de revisión final. |  | Abra la actualización y finalice el proceso.",
+      "cta": "🟢 FINALIZAR EL PROCESO",
+      "score": 94
+    },
+    {
+      "id": "6",
+      "visible_text": "📦 PAQUETE DE TARJETAS LISTO |  | Tu kit de Tarjeta de Crédito está preparado y esperando confirmación de entrega. |  | Confirma tus datos para conti",
+      "cta": "✅ CONFIRMAR DETALLES",
+      "score": 90
+    },
+    {
+      "id": "7",
+      "visible_text": "🔔 (1) ACTUALIZACIÓN DE TARJETA |  | {{first_name}}, tu solicitud de Tarjeta de Crédito tiene un nuevo estado disponible. |  | Toque a continuación p",
+      "cta": "📥 LEER ACTUALIZACIÓN",
+      "score": 85
+    },
+    {
+      "id": "8",
+      "visible_text": "🚚 PASO DE MENSAJERÍA LISTO |  | El paso de mensajería para su paquete de Tarjeta de Crédito está disponible. |  | Confirma la información de entrega",
+      "cta": "🚚 INICIAR LA ENTREGA",
+      "score": 83
+    }
+  ]
+}

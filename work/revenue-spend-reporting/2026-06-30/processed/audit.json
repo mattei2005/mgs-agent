@@ -1,0 +1,64 @@
+{
+  "input": "/root/mgs-agent/work/revenue-spend-reporting/2026-06-30/30_de_junho-clean.xlsx",
+  "tabs": {
+    "sb": [
+      "report SB-1",
+      "report SB-2"
+    ],
+    "av": [
+      "report AV"
+    ],
+    "monetize": [
+      "MonetizeMore"
+    ],
+    "fb": [
+      "Gastos FB"
+    ],
+    "google": [
+      "Gastos Google"
+    ]
+  },
+  "date_ranges": {
+    "report AV": [
+      "2026-06-30",
+      "2026-06-30",
+      694
+    ],
+    "report SB-1": [
+      "2026-06-30",
+      "2026-06-30",
+      250
+    ],
+    "report SB-2": [
+      "2026-06-30",
+      "2026-06-30",
+      41
+    ],
+    "Gastos FB": [
+      "2026-06-30",
+      "2026-06-30",
+      4
+    ],
+    "Gastos Google": [
+      "2026-06-30",
+      "2026-06-30",
+      2
+    ]
+  },
+  "raw_rev": {
+    "report AV": 2167.9554349999967,
+    "report SB-1": 334.51075536663507,
+    "report SB-2": 2193.343293806508
+  },
+  "raw_spend": {
+    "Gastos FB": 705.5899999999999,
+    "Gastos Google": 4723.46
+  },
+  "total_raw_rev": 4695.80948417314,
+  "total_long_rev": 4695.809484173144,
+  "total_raw_spend": 5429.05,
+  "total_long_spend": 5429.05,
+  "rows_long": 49,
+  "ambiguous": 0,
+  "out_dir": "/root/mgs-agent/work/revenue-spend-reporting/2026-06-30/processed"
+}

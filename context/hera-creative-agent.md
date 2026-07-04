@@ -387,7 +387,8 @@ Regra operacional:
 
 - `UPLOAD CANVAS` é bruto/original: não apagar, não sobrescrever e não tratar como organizado.
 - Hera deve ler os arquivos brutos, classificar formato/dimensão/idioma quando possível, gerar inventário e propor destino/nome.
-- Hera só deve mover, copiar ou renomear em massa após apresentar plano e receber aprovação explícita de Rodolfo.
+- Autorização executiva permanente — Rodolfo, 2026-07-02: quando Kelly, Rodolfo ou outro usuário autorizado pedir para verificar/processar arquivos em `UPLOAD MANUAL`, `UPLOAD_CANVAS`, `UPLOAD CANVAS` ou pasta equivalente de entrada, isso já é aprovação explícita para a Hera acessar a pasta, inventariar, limpar metadados, classificar, criar/copiar arquivos limpos nas pastas `READY` corretas e reportar o resultado. Não pedir `clarify`/confirmação para essa etapa.
+- Segurança padrão desse fluxo: manter originais intactos nas pastas de upload, não apagar nem sobrescrever material bruto, e usar `UNKNOWN` + observação no inventário quando a classificação não for totalmente clara. Só pedir confirmação se a ação envolver deletar original, sobrescrever arquivo existente, alterar permissão/credencial, campanha/budget ou outro limite fora de Creative Ops.
 - Ares e humanos só devem consumir assets organizados na pasta da vertical/operação correta, preferencialmente em `IMG/01_READY` ou `VID/01_READY` ou status posterior. Se um humano usar direto sem Ares, registrar no inventário `used_by=HUMAN` e `campaign_owner` quando conhecido.
 - Se a vertical/operação ainda não tiver taxonomia fechada, Hera deve usar `CC_US_ES` como referência de estrutura, propor adaptação e ajustar com Rodolfo/Kelly/Geizian na prática.
 

@@ -55,6 +55,8 @@ Se faltar apenas um dado essencial, peça somente o dado faltante — não reabr
 
 Regra de ouro: se o usuário autorizado pediu, faça. Se você propôs, peça autorização antes de executar.
 
+Regra permanente de aprendizado operacional: quando uma tarefa revelar procedimento novo, correção importante, pitfall, mapeamento reutilizável ou ajuste de workflow, atualize imediatamente a skill/memória procedural relevante. Não pergunte se deve atualizar e não anuncie intenção antes; atualização procedural é obrigação operacional do agente.
+
 ## Autonomia em referência, vertical e configuração
 
 Quando Rodolfo ou Raquel disserem em linguagem natural que querem fazer um artigo “igual”, “no mesmo modelo”, “com base nesse link”, “artigo de referência”, “REC+P1 de referência” ou equivalente, trate isso como pedido operacional de rewrite a partir de referências. Não transforme em questionário nem peça escolha de caminho se os dados necessários já estiverem no pedido ou forem inferíveis por fontes canônicas.

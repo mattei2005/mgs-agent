@@ -16,6 +16,7 @@ Use this skill when Rodolfo asks Zeus/Ares/Hera/Atena to debug or enable Google 
 - A batch creative/content pipeline needs to copy/upload many files.
 - A script needs to choose between My Drive, Shared Drive, or real-user OAuth.
 - A Google Drive folder ID must be validated before a destructive or large write run.
+- A Google Sheet needs column values distributed/updated/colored via API, especially when preserving row grouping by site/bot/gestor matters.
 
 ## Executive rule
 
@@ -116,6 +117,8 @@ Operational handling:
 5. If Google approval succeeds but 1Password cannot update the item, save `refresh_token` to a root-only gitignored local secret file and teach the runtime loader to combine `client_id`/`client_secret` from 1Password with that local token.
 6. Keep token handling secret: never paste `client_secret`, `refresh_token`, access token, or authorization URLs containing returned codes into Discord unless the code is explicitly safe/short-lived and the user needs to provide it.
 
+When a Google Drive/Sheets-backed cron uses a local OAuth client token file, reauth must validate the exact runtime path, not a nearby service-account path. MGS example: `meta-app-roles-watch` reads `/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json`; after exchanging the Desktop OAuth code, validate refresh-token exchange, run the cron script itself, and inspect its state (`_sheet_removed_sync`) for real sheet read/write success. If sheet sync fails, treat it as alertable infrastructure failure, not a silent state-only warning.
+
 Never print Service Account JSON, OAuth refresh tokens, access tokens, client secrets, or 1Password field values. Report only item names and non-secret metadata such as `len=X`.
 
 ## Validation checklist
@@ -124,10 +127,37 @@ Never print Service Account JSON, OAuth refresh tokens, access tokens, client se
 - Destination preflight shows whether storage is Shared Drive or My Drive.
 - Smoke test with `--limit 1 --max-errors 1` succeeds before full queue.
 - If blocked, no report CSV/file writes are produced for the attempted run.
+- For OAuth watchdog changes: simulate `invalid_grant` with a temp credential file, confirm the alert contains a reauthorization URL/instruction, confirm no `client_secret`/`refresh_token`/`access_token` markers, then run the real healthy watchdog and confirm stdout is empty.
 - Audit log records the decision and evidence.
 - Report to Rodolfo in concise executive format with `Próximo passo pendente:`.
+
+## OAuth watchdog self-service reauthorization
+
+When a Google Drive OAuth watchdog receives `invalid_grant`, do not frame it as fully auto-fixable. Google requires new human consent. The correct durable automation is self-service recovery: generate the Desktop OAuth URL in the alert, ask Rodolfo to approve and paste the final localhost URL/code, exchange it, store the new refresh token in the approved secret location, then validate with the watchdog.
+
+See `references/drive-oauth-invalid-grant-self-service-reauth.md` for the implementation and smoke-test pattern.
+
+## Enabling Google Workspace APIs from an OAuth flow
+
+If a Drive-backed workflow needs a Google API that is disabled in the OAuth project (example: Sheets API disabled while Drive API works), do not assume Drive scope is enough. Enabling project services through Service Usage requires an access token with `https://www.googleapis.com/auth/cloud-platform` and a user/account that has permission on the Google Cloud project.
+
+Operational pattern:
+
+1. Try the target API and capture the exact disabled-service project number from the 403 message.
+2. Attempt `serviceusage.services.enable` only if the token has cloud-platform scope.
+3. If the token only has Drive scope, generate a reauth URL with both existing needed scopes and `cloud-platform`:
+   - `https://www.googleapis.com/auth/drive`
+   - `https://www.googleapis.com/auth/cloud-platform`
+4. Ask Rodolfo to approve and paste the localhost URL/code.
+5. Exchange the code for a new refresh token and store it in the approved secret file without printing token values.
+6. Enable the service, then poll Service Usage until `state=ENABLED`.
+7. Validate the target API with a real write/readback; for Sheets, create/update tabs and confirm row counts.
+
+Pitfall: a 403 `ACCESS_TOKEN_SCOPE_INSUFFICIENT` from Service Usage is a scope issue, not proof that the account cannot enable the API. Reauth with `cloud-platform` before giving up.
 
 ## References
 
 - `references/service-account-my-drive-quota.md` — concrete MGS/Ares incident pattern and reusable Drive API probes.
 - `references/personal-my-drive-oauth-device-flow.md` — personal Google Drive OAuth setup notes, device-flow `invalid_scope` pitfall, `drive.file` limitation, and Desktop app fallback.
+- `references/drive-oauth-invalid-grant-self-service-reauth.md` — watchdog pattern for `invalid_grant`: auto-generate reauth URL, keep healthy checks silent, validate no secret exposure.
+- `references/google-sheets-balanced-column-distribution.md` — Sheets API pattern for filling/formatting a column while preserving group integrity (e.g. one mailbox per bot/site) and balancing group loads.

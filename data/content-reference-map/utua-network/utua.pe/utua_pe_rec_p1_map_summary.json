@@ -1,0 +1,134 @@
+{
+  "domain": "utua.pe",
+  "sitemap_index": "https://utua.pe/sitemap_index.xml",
+  "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+  "post_sitemaps": [
+    "https://utua.pe/post-sitemap.xml"
+  ],
+  "post_url_count": 112,
+  "source_p1_p2_article_count": 112,
+  "source_stage_counts": {
+    "UTUA_P1": 56,
+    "UTUA_P2": 56
+  },
+  "rec_rows": 56,
+  "rec_with_reference_p1": 56,
+  "rec_without_reference_p1": 0,
+  "orphan_source_p2_without_rec": 0,
+  "reference_pair_status_counts": {
+    "REC+P1": 56
+  },
+  "country_counts": {
+    "cc": 30,
+    "emp": 26
+  },
+  "country_vertical_top": [
+    {
+      "country": "emp",
+      "vertical": "prestamo",
+      "count": 7
+    },
+    {
+      "country": "cc",
+      "vertical": "bbva",
+      "count": 6
+    },
+    {
+      "country": "cc",
+      "vertical": "interbank",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "credito",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "bcp",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "bcp",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "cmr",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "prepago",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "scotiabank",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "visa",
+      "count": 2
+    },
+    {
+      "country": "emp",
+      "vertical": "caja",
+      "count": 2
+    },
+    {
+      "country": "emp",
+      "vertical": "cp",
+      "count": 2
+    },
+    {
+      "country": "emp",
+      "vertical": "scotiabank",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "banbif",
+      "count": 1
+    },
+    {
+      "country": "cc",
+      "vertical": "bancom",
+      "count": 1
+    },
+    {
+      "country": "cc",
+      "vertical": "cencosud",
+      "count": 1
+    },
+    {
+      "country": "cc",
+      "vertical": "crediscotia",
+      "count": 1
+    },
+    {
+      "country": "cc",
+      "vertical": "falabella",
+      "count": 1
+    },
+    {
+      "country": "cc",
+      "vertical": "gnb",
+      "count": 1
+    },
+    {
+      "country": "cc",
+      "vertical": "oh",
+      "count": 1
+    }
+  ],
+  "errors": [],
+  "generated_at": "2026-06-29T06:37:52.849891Z",
+  "generated_files": [
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.pe/utua_pe_rec_p1_map.csv",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.pe/utua_pe_rec_p1_map.json",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.pe/utua_pe_rec_p1_map_summary.json"
+  ]
+}

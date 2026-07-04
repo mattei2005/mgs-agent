@@ -1,0 +1,3288 @@
+[
+  {
+    "template": "Cliquet - US-CC-EN/EN - AV - g002-d Gustavo",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Ducapes Finance - US-CC-EN/EN-SR - g001-d Icaro",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://finance.ducapes.com/dp-f-us-cc-en-mct-001/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.ducapes.com/dp-f-us-cc-en-mct-007/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://finance.ducapes.com/dp-f-us-cc-en-mct-001-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.ducapes.com/dp-f-us-cc-en-mct-008/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://finance.ducapes.com/dp-f-us-cc-en-mct-002/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.ducapes.com/dp-f-us-cc-en-mct-009/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://finance.ducapes.com/dp-f-us-cc-en-mct-002-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.ducapes.com/dp-f-us-cc-en-mct-010/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://finance.ducapes.com/dp-f-us-cc-en-mct-003/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.ducapes.com/dp-f-us-cc-en-mct-010-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://finance.ducapes.com/dp-f-us-cc-en-mct-003-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.ducapes.com/dp-f-us-cc-en-mct-011/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://finance.ducapes.com/dp-f-us-cc-en-mct-004/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.ducapes.com/dp-f-us-cc-en-mct-012/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://finance.ducapes.com/dp-f-us-cc-en-mct-005/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.ducapes.com/dp-f-us-cc-en-mct-012-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://finance.ducapes.com/dp-f-us-cc-en-mct-005-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.ducapes.com/dp-f-us-cc-en-mct-013/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://finance.ducapes.com/dp-f-us-cc-en-mct-006/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.ducapes.com/dp-f-us-cc-en-mct-013-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Openzed - US-CC-EN/EN - AV - g001-d Icaro",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Eggbev - US-CC-EN/EN-SR - g006-d Nicolas",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "013",
+        "expected": "https://eggbev.com/eb-us-cc-en-mct-001/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-us-cc-en-mct-013/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "013-2",
+        "expected": "https://eggbev.com/eb-us-cc-en-mct-001-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-us-cc-en-mct-013-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "014",
+        "expected": "https://eggbev.com/eb-us-cc-en-mct-002/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-us-cc-en-mct-014/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "015",
+        "expected": "https://eggbev.com/eb-us-cc-en-mct-002-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-us-cc-en-mct-015/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "015-2",
+        "expected": "https://eggbev.com/eb-us-cc-en-mct-003/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-us-cc-en-mct-015-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "001",
+        "expected": "https://eggbev.com/eb-us-cc-en-mct-003-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-us-cc-en-mct-001/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "001-2",
+        "expected": "https://eggbev.com/eb-us-cc-en-mct-004/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-us-cc-en-mct-001-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "002",
+        "expected": "https://eggbev.com/eb-us-cc-en-mct-005/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-us-cc-en-mct-002/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "002-2",
+        "expected": "https://eggbev.com/eb-us-cc-en-mct-005-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-us-cc-en-mct-002-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "003",
+        "expected": "https://eggbev.com/eb-us-cc-en-mct-006/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-us-cc-en-mct-003/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Infinitynexx - US-CC-EN/EN-SR - g004-d Joe",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Lyzmo - US-CC-EN/EN-SR - g006-d Nicolas",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://lyzmo.com/ly-us-cc-en-mct-001/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-us-cc-en-mct-007/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://lyzmo.com/ly-us-cc-en-mct-001-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-us-cc-en-mct-008/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://lyzmo.com/ly-us-cc-en-mct-002/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-us-cc-en-mct-009/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://lyzmo.com/ly-us-cc-en-mct-002-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-us-cc-en-mct-010/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://lyzmo.com/ly-us-cc-en-mct-003/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-us-cc-en-mct-010-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://lyzmo.com/ly-us-cc-en-mct-003-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-us-cc-en-mct-011/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://lyzmo.com/ly-us-cc-en-mct-004/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-us-cc-en-mct-012/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://lyzmo.com/ly-us-cc-en-mct-005/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-us-cc-en-mct-012-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://lyzmo.com/ly-us-cc-en-mct-005-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-us-cc-en-mct-013/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://lyzmo.com/ly-us-cc-en-mct-006/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-us-cc-en-mct-013-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Marevelx - US-CC-EN/EN-SR - g001-d Icaro",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://marevelx.com/mv-us-cc-en-mct-001/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-en-mct-007/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://marevelx.com/mv-us-cc-en-mct-001-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-en-mct-008/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://marevelx.com/mv-us-cc-en-mct-002/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-en-mct-009/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://marevelx.com/mv-us-cc-en-mct-002-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-en-mct-010/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://marevelx.com/mv-us-cc-en-mct-003/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-en-mct-010-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://marevelx.com/mv-us-cc-en-mct-003-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-en-mct-011/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://marevelx.com/mv-us-cc-en-mct-004/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-en-mct-012/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://marevelx.com/mv-us-cc-en-mct-005/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-en-mct-012-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://marevelx.com/mv-us-cc-en-mct-005-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-en-mct-013/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://marevelx.com/mv-us-cc-en-mct-006/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-en-mct-013-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Newsoun - US-CC-EN/EN-SR - g005-d Kelly",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://newsoun.com/ns-us-cc-en-mct-001/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-us-cc-en-mct-007/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://newsoun.com/ns-us-cc-en-mct-001-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-us-cc-en-mct-008/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://newsoun.com/ns-us-cc-en-mct-002/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-us-cc-en-mct-009/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://newsoun.com/ns-us-cc-en-mct-002-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-us-cc-en-mct-010/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://newsoun.com/ns-us-cc-en-mct-003/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-us-cc-en-mct-010-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://newsoun.com/ns-us-cc-en-mct-003-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-us-cc-en-mct-011/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://newsoun.com/ns-us-cc-en-mct-004/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-us-cc-en-mct-012/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://newsoun.com/ns-us-cc-en-mct-005/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-us-cc-en-mct-012-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://newsoun.com/ns-us-cc-en-mct-005-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-us-cc-en-mct-013/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://newsoun.com/ns-us-cc-en-mct-006/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-us-cc-en-mct-013-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Openzed - US-CC-EN/EN - AV - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Financetopfeed - US-CC-EN/EN-SR - g004-d Joe",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "012",
+        "expected": "https://finance.topfeed.fun/ftf-us-cc-en-mct-001/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-us-cc-en-mct-012/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "012-2",
+        "expected": "https://finance.topfeed.fun/ftf-us-cc-en-mct-001-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-us-cc-en-mct-012-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "013",
+        "expected": "https://finance.topfeed.fun/ftf-us-cc-en-mct-002/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-us-cc-en-mct-013/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "013-2",
+        "expected": "https://finance.topfeed.fun/ftf-us-cc-en-mct-002-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-us-cc-en-mct-013-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "014",
+        "expected": "https://finance.topfeed.fun/ftf-us-cc-en-mct-003/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-us-cc-en-mct-014/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "015",
+        "expected": "https://finance.topfeed.fun/ftf-us-cc-en-mct-003-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-us-cc-en-mct-015/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "015-2",
+        "expected": "https://finance.topfeed.fun/ftf-us-cc-en-mct-004/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-us-cc-en-mct-015-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "001",
+        "expected": "https://finance.topfeed.fun/ftf-us-cc-en-mct-005/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-us-cc-en-mct-001/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "001-2",
+        "expected": "https://finance.topfeed.fun/ftf-us-cc-en-mct-005-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-us-cc-en-mct-001-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "002",
+        "expected": "https://finance.topfeed.fun/ftf-us-cc-en-mct-006/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-us-cc-en-mct-002/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Wavesbee - US-CC-EN/EN - YM - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Zuout - US-CC-EN/EN - AV - g002-d Gustavo",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Zytiva - US-CC-EN/EN-SR - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 25,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "003-2",
+        "expected": "https://zytiva.com/zy-us-cc-en-mct-001/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://zytiva.com/zy-us-cc-en-mct-003-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "004",
+        "expected": "https://zytiva.com/zy-us-cc-en-mct-001-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://zytiva.com/zy-us-cc-en-mct-004/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "005",
+        "expected": "https://zytiva.com/zy-us-cc-en-mct-002/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://zytiva.com/zy-us-cc-en-mct-005/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "005-2",
+        "expected": "https://zytiva.com/zy-us-cc-en-mct-002-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://zytiva.com/zy-us-cc-en-mct-005-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "006",
+        "expected": "https://zytiva.com/zy-us-cc-en-mct-003/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://zytiva.com/zy-us-cc-en-mct-006/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "007",
+        "expected": "https://zytiva.com/zy-us-cc-en-mct-003-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://zytiva.com/zy-us-cc-en-mct-007/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "008",
+        "expected": "https://zytiva.com/zy-us-cc-en-mct-004/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://zytiva.com/zy-us-cc-en-mct-008/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "009",
+        "expected": "https://zytiva.com/zy-us-cc-en-mct-005/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://zytiva.com/zy-us-cc-en-mct-009/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "010",
+        "expected": "https://zytiva.com/zy-us-cc-en-mct-005-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://zytiva.com/zy-us-cc-en-mct-010/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "010-2",
+        "expected": "https://zytiva.com/zy-us-cc-en-mct-006/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://zytiva.com/zy-us-cc-en-mct-010-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Conecta - US-CC-EN/EN-SR - g001-d Icaro",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://conectageral.com/cg-us-cc-en-mct-001",
+        "actual": "https://conectageral.com/cg-us-cc-en-mct-007"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://conectageral.com/cg-us-cc-en-mct-001-2",
+        "actual": "https://conectageral.com/cg-us-cc-en-mct-008"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://conectageral.com/cg-us-cc-en-mct-002",
+        "actual": "https://conectageral.com/cg-us-cc-en-mct-009"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://conectageral.com/cg-us-cc-en-mct-002-2",
+        "actual": "https://conectageral.com/cg-us-cc-en-mct-010"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://conectageral.com/cg-us-cc-en-mct-003",
+        "actual": "https://conectageral.com/cg-us-cc-en-mct-010-2"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://conectageral.com/cg-us-cc-en-mct-003-2",
+        "actual": "https://conectageral.com/cg-us-cc-en-mct-011"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://conectageral.com/cg-us-cc-en-mct-004",
+        "actual": "https://conectageral.com/cg-us-cc-en-mct-012"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://conectageral.com/cg-us-cc-en-mct-005",
+        "actual": "https://conectageral.com/cg-us-cc-en-mct-012-2"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://conectageral.com/cg-us-cc-en-mct-005-2",
+        "actual": "https://conectageral.com/cg-us-cc-en-mct-013"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://conectageral.com/cg-us-cc-en-mct-006",
+        "actual": "https://conectageral.com/cg-us-cc-en-mct-013-2"
+      }
+    ]
+  },
+  {
+    "template": "Vizioid - US-CC-EN/EN-SR - g002-d Gustavo",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://vizioid.com/vz-us-cc-en-mct-001",
+        "actual": "https://vizioid.com/vz-us-cc-en-mct-007"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://vizioid.com/vz-us-cc-en-mct-001-2",
+        "actual": "https://vizioid.com/vz-us-cc-en-mct-008"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://vizioid.com/vz-us-cc-en-mct-002",
+        "actual": "https://vizioid.com/vz-us-cc-en-mct-009"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://vizioid.com/vz-us-cc-en-mct-002-2",
+        "actual": "https://vizioid.com/vz-us-cc-en-mct-010"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://vizioid.com/vz-us-cc-en-mct-003",
+        "actual": "https://vizioid.com/vz-us-cc-en-mct-010-2"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://vizioid.com/vz-us-cc-en-mct-003-2",
+        "actual": "https://vizioid.com/vz-us-cc-en-mct-011"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://vizioid.com/vz-us-cc-en-mct-004",
+        "actual": "https://vizioid.com/vz-us-cc-en-mct-012"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://vizioid.com/vz-us-cc-en-mct-005",
+        "actual": "https://vizioid.com/vz-us-cc-en-mct-012-2"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://vizioid.com/vz-us-cc-en-mct-005-2",
+        "actual": "https://vizioid.com/vz-us-cc-en-mct-013"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://vizioid.com/vz-us-cc-en-mct-006",
+        "actual": "https://vizioid.com/vz-us-cc-en-mct-013-2"
+      }
+    ]
+  },
+  {
+    "template": "Xyvlov - US-CC-EN/EN-SR - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://xyvlov.com/xv-us-cc-en-mct-001/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-en-mct-007/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://xyvlov.com/xv-us-cc-en-mct-001-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-en-mct-008/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://xyvlov.com/xv-us-cc-en-mct-002/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-en-mct-009/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://xyvlov.com/xv-us-cc-en-mct-002-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-en-mct-010/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://xyvlov.com/xv-us-cc-en-mct-003/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-en-mct-010-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://xyvlov.com/xv-us-cc-en-mct-003-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-en-mct-011/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://xyvlov.com/xv-us-cc-en-mct-004/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-en-mct-012/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://xyvlov.com/xv-us-cc-en-mct-005/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-en-mct-012-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://xyvlov.com/xv-us-cc-en-mct-005-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-en-mct-013/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://xyvlov.com/xv-us-cc-en-mct-006/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-en-mct-013-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Helixenit - US-CC-EN/EN-SR - g005-d Kelly",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://helixenit.net/heli-us-cc-en-mct-001/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-en-mct-007/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://helixenit.net/heli-us-cc-en-mct-001-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-en-mct-008/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://helixenit.net/heli-us-cc-en-mct-002/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-en-mct-009/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://helixenit.net/heli-us-cc-en-mct-002-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-en-mct-010/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://helixenit.net/heli-us-cc-en-mct-003/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-en-mct-010-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://helixenit.net/heli-us-cc-en-mct-003-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-en-mct-011/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://helixenit.net/heli-us-cc-en-mct-004/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-en-mct-012/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://helixenit.net/heli-us-cc-en-mct-005/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-en-mct-012-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://helixenit.net/heli-us-cc-en-mct-005-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-en-mct-013/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://helixenit.net/heli-us-cc-en-mct-006/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-en-mct-013-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Financeadx - US-CC-EN/EN-SR - g006-d Nicolas",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://financeadx.com/fax-us-cc-en-mct-001/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-en-mct-007/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://financeadx.com/fax-us-cc-en-mct-001-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-en-mct-008/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://financeadx.com/fax-us-cc-en-mct-002/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-en-mct-009/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://financeadx.com/fax-us-cc-en-mct-002-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-en-mct-010/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://financeadx.com/fax-us-cc-en-mct-003/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-en-mct-010-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://financeadx.com/fax-us-cc-en-mct-003-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-en-mct-011/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://financeadx.com/fax-us-cc-en-mct-004/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-en-mct-012/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://financeadx.com/fax-us-cc-en-mct-005/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-en-mct-012-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://financeadx.com/fax-us-cc-en-mct-005-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-en-mct-013/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://financeadx.com/fax-us-cc-en-mct-006/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-en-mct-013-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Zytiva - GB-CC-EN/EN-SR - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Openzed - GB-CC-EN/EN - AV - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Wantabrand - GB-CC-EN/EN - M2 - g001-d Icaro",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Newsoun - GB-CC-EN/EN-SR - g005-d Kelly",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "003",
+        "expected": "https://newsoun.com/ns-gb-cc-en-mct-001/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-gb-cc-en-mct-003/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "004",
+        "expected": "https://newsoun.com/ns-gb-cc-en-mct-002/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-gb-cc-en-mct-004/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "005",
+        "expected": "https://newsoun.com/ns-gb-cc-en-mct-003/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-gb-cc-en-mct-005/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "006",
+        "expected": "https://newsoun.com/ns-gb-cc-en-mct-004/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-gb-cc-en-mct-006/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "007",
+        "expected": "https://newsoun.com/ns-gb-cc-en-mct-005/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-gb-cc-en-mct-007/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "008",
+        "expected": "https://newsoun.com/ns-gb-cc-en-mct-006/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-gb-cc-en-mct-008/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "009",
+        "expected": "https://newsoun.com/ns-gb-cc-en-mct-007/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-gb-cc-en-mct-009/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "010",
+        "expected": "https://newsoun.com/ns-gb-cc-en-mct-008/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-gb-cc-en-mct-010/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "011",
+        "expected": "https://newsoun.com/ns-gb-cc-en-mct-009/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-gb-cc-en-mct-011/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "012",
+        "expected": "https://newsoun.com/ns-gb-cc-en-mct-010/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://newsoun.com/ns-gb-cc-en-mct-012/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Financetopfeed - GB-CC-EN/EN-SR - g004-d Joe",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 27,
+    "first_mismatches": [
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "015",
+        "expected": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-004/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-015/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "017",
+        "expected": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-005/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-017/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "018",
+        "expected": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-006/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-018/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "019",
+        "expected": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-007/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-019/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "020",
+        "expected": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-008/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-020/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "021",
+        "expected": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-009/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-021/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "022",
+        "expected": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-010/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-022/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 11,
+        "expected_seq": "011",
+        "actual_seq": "023",
+        "expected": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-011/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-023/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 12,
+        "expected_seq": "012",
+        "actual_seq": "001",
+        "expected": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-012/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-001/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 13,
+        "expected_seq": "013",
+        "actual_seq": "002",
+        "expected": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-013/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finance.topfeed.fun/ftf-gb-cc-en-mct-002/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Lyzmo - GB-CC-EN/EN-SR - g006-d Nicolas",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "011",
+        "expected": "https://lyzmo.com/ly-gb-cc-en-mct-001/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-gb-cc-en-mct-011/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "012",
+        "expected": "https://lyzmo.com/ly-gb-cc-en-mct-002/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-gb-cc-en-mct-012/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "021",
+        "expected": "https://lyzmo.com/ly-gb-cc-en-mct-003/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-gb-cc-en-mct-021/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "022",
+        "expected": "https://lyzmo.com/ly-gb-cc-en-mct-004/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-gb-cc-en-mct-022/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "023",
+        "expected": "https://lyzmo.com/ly-gb-cc-en-mct-005/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-gb-cc-en-mct-023/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "001",
+        "expected": "https://lyzmo.com/ly-gb-cc-en-mct-006/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-gb-cc-en-mct-001/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "002",
+        "expected": "https://lyzmo.com/ly-gb-cc-en-mct-007/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-gb-cc-en-mct-002/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "003",
+        "expected": "https://lyzmo.com/ly-gb-cc-en-mct-008/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-gb-cc-en-mct-003/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "004",
+        "expected": "https://lyzmo.com/ly-gb-cc-en-mct-009/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-gb-cc-en-mct-004/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "005",
+        "expected": "https://lyzmo.com/ly-gb-cc-en-mct-010/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://lyzmo.com/ly-gb-cc-en-mct-005/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Fincgriffin - GB-CC-EN/EN-SR - g006-d Nicolas",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "011",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-001/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-011/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "012",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-002/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-012/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "013",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-003/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-013/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "014",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-004/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-014/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "015",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-005/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-015/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "016",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-006/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-016/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "017",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-007/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-017/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "018",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-008/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-018/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "019",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-009/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-019/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "020",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-010/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-020/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Eggbev - GB-CC-EN/EN-SR - g006-d Nicolas",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "011",
+        "expected": "https://eggbev.com/eb-gb-cc-en-mct-001/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-gb-cc-en-mct-011/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "012",
+        "expected": "https://eggbev.com/eb-gb-cc-en-mct-002/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-gb-cc-en-mct-012/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "013",
+        "expected": "https://eggbev.com/eb-gb-cc-en-mct-003/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-gb-cc-en-mct-013/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "014",
+        "expected": "https://eggbev.com/eb-gb-cc-en-mct-004/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-gb-cc-en-mct-014/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "015",
+        "expected": "https://eggbev.com/eb-gb-cc-en-mct-005/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-gb-cc-en-mct-015/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "016",
+        "expected": "https://eggbev.com/eb-gb-cc-en-mct-006/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-gb-cc-en-mct-016/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "017",
+        "expected": "https://eggbev.com/eb-gb-cc-en-mct-007/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-gb-cc-en-mct-017/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "018",
+        "expected": "https://eggbev.com/eb-gb-cc-en-mct-008/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-gb-cc-en-mct-018/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "019",
+        "expected": "https://eggbev.com/eb-gb-cc-en-mct-009/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-gb-cc-en-mct-019/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "020",
+        "expected": "https://eggbev.com/eb-gb-cc-en-mct-010/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://eggbev.com/eb-gb-cc-en-mct-020/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Fincgriffin - GB-CC-EN/EN-SR - g001-d Icaro",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "011",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-001/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-011/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "012",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-002/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-012/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "013",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-003/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-013/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "014",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-004/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-014/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "015",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-005/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-015/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "016",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-006/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-016/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "017",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-007/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-017/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "018",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-008/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-018/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "019",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-009/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-019/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "020",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-010/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-020/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Fincgriffin - GB-CC-EN/EN-SR - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "011",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-001/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-011/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "012",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-002/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-012/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "013",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-003/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-013/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "014",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-004/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-014/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "015",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-005/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-015/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "016",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-006/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-016/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "017",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-007/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-017/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "018",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-008/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-018/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "019",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-009/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-019/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "020",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-010/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-020/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Fincgriffin - GB-CC-EN/EN-SR - g004-d Joe",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "011",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-001/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-011/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "012",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-002/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-012/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "013",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-003/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-013/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "014",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-004/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-014/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "015",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-005/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-015/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "016",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-006/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-016/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "017",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-007/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-017/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "018",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-008/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-018/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "019",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-009/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-019/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "020",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-010/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-020/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Fincgriffin - GB-CC-EN/EN-SR - g005-d Kelly",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "011",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-001/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-011/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "012",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-002/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-012/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "013",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-003/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-013/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "014",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-004/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-014/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "015",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-005/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-015/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "016",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-006/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-016/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "017",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-007/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-017/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "018",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-008/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-018/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "019",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-009/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-019/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "020",
+        "expected": "https://fincgriffin.com/fincg-gb-cc-en-mct-010/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-gb-cc-en-mct-020/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Cliquet - GB-CC-EN/EN - AV - G002-d Gustavo",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Zuout - GB-CC-EN/EN - AV - g002-d Gustavo",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Cliquet Finanzas - US-CC-ES/ES-ZW - AV - g002-d Gustavo",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Zuout - US-CC-ES/ES-ZW - AV - g002-d Gustavo",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Portal - US-CC-ES/ES-ZW - AV - g001-d Icaro",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://portalrelevante.com/pr-us-cc-es-mct-001",
+        "actual": "https://portalrelevante.com/pr-us-cc-es-mct-007"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://portalrelevante.com/pr-us-cc-es-mct-001-2",
+        "actual": "https://portalrelevante.com/pr-us-cc-es-mct-008"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://portalrelevante.com/pr-us-cc-es-mct-002",
+        "actual": "https://portalrelevante.com/pr-us-cc-es-mct-009"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://portalrelevante.com/pr-us-cc-es-mct-002-2",
+        "actual": "https://portalrelevante.com/pr-us-cc-es-mct-010"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://portalrelevante.com/pr-us-cc-es-mct-003",
+        "actual": "https://portalrelevante.com/pr-us-cc-es-mct-010-2"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://portalrelevante.com/pr-us-cc-es-mct-003-2",
+        "actual": "https://portalrelevante.com/pr-us-cc-es-mct-011"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://portalrelevante.com/pr-us-cc-es-mct-004",
+        "actual": "https://portalrelevante.com/pr-us-cc-es-mct-012"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://portalrelevante.com/pr-us-cc-es-mct-005",
+        "actual": "https://portalrelevante.com/pr-us-cc-es-mct-012-2"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://portalrelevante.com/pr-us-cc-es-mct-005-2",
+        "actual": "https://portalrelevante.com/pr-us-cc-es-mct-013"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://portalrelevante.com/pr-us-cc-es-mct-006",
+        "actual": "https://portalrelevante.com/pr-us-cc-es-mct-013-2"
+      }
+    ]
+  },
+  {
+    "template": "Xyvlov - US-CC-ES/ES-ZW-SR - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 22,
+    "first_mismatches": [
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "007",
+        "expected": "https://xyvlov.com/xv-us-cc-es-mct-005-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-es-mct-007/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "008",
+        "expected": "https://xyvlov.com/xv-us-cc-es-mct-006/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-es-mct-008/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 11,
+        "expected_seq": "007",
+        "actual_seq": "009",
+        "expected": "https://xyvlov.com/xv-us-cc-es-mct-007/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-es-mct-009/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 12,
+        "expected_seq": "008",
+        "actual_seq": "010",
+        "expected": "https://xyvlov.com/xv-us-cc-es-mct-008/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-es-mct-010/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 13,
+        "expected_seq": "009",
+        "actual_seq": "010-2",
+        "expected": "https://xyvlov.com/xv-us-cc-es-mct-009/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-es-mct-010-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 14,
+        "expected_seq": "010",
+        "actual_seq": "011",
+        "expected": "https://xyvlov.com/xv-us-cc-es-mct-010/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-es-mct-011/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 15,
+        "expected_seq": "010-2",
+        "actual_seq": "012",
+        "expected": "https://xyvlov.com/xv-us-cc-es-mct-010-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-es-mct-012/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 16,
+        "expected_seq": "011",
+        "actual_seq": "012-2",
+        "expected": "https://xyvlov.com/xv-us-cc-es-mct-011/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-es-mct-012-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 17,
+        "expected_seq": "012",
+        "actual_seq": "013",
+        "expected": "https://xyvlov.com/xv-us-cc-es-mct-012/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-es-mct-013/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 18,
+        "expected_seq": "012-2",
+        "actual_seq": "013-2",
+        "expected": "https://xyvlov.com/xv-us-cc-es-mct-012-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://xyvlov.com/xv-us-cc-es-mct-013-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Infinitynexx - US-CC-ES/ES-ZW-SR - g004-d Joe",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 29,
+    "first_mismatches": [
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "005-2",
+        "expected": "https://infinitynexx.com/in-us-cc-es-mct-001-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://infinitynexx.com/in-us-cc-es-mct-005-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "006",
+        "expected": "https://infinitynexx.com/in-us-cc-es-mct-002/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://infinitynexx.com/in-us-cc-es-mct-006/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "007",
+        "expected": "https://infinitynexx.com/in-us-cc-es-mct-002-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://infinitynexx.com/in-us-cc-es-mct-007/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "008",
+        "expected": "https://infinitynexx.com/in-us-cc-es-mct-003/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://infinitynexx.com/in-us-cc-es-mct-008/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "009",
+        "expected": "https://infinitynexx.com/in-us-cc-es-mct-003-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://infinitynexx.com/in-us-cc-es-mct-009/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "010",
+        "expected": "https://infinitynexx.com/in-us-cc-es-mct-004/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://infinitynexx.com/in-us-cc-es-mct-010/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "010-2",
+        "expected": "https://infinitynexx.com/in-us-cc-es-mct-005/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://infinitynexx.com/in-us-cc-es-mct-010-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "011",
+        "expected": "https://infinitynexx.com/in-us-cc-es-mct-005-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://infinitynexx.com/in-us-cc-es-mct-011/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "012",
+        "expected": "https://infinitynexx.com/in-us-cc-es-mct-006/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://infinitynexx.com/in-us-cc-es-mct-012/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 11,
+        "expected_seq": "007",
+        "actual_seq": "012-2",
+        "expected": "https://infinitynexx.com/in-us-cc-es-mct-007/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://infinitynexx.com/in-us-cc-es-mct-012-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Helixenit - US-CC-ES/ES-ZW-SR - g005-d Kelly",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 23,
+    "first_mismatches": [
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "007",
+        "expected": "https://helixenit.net/heli-us-cc-es-mct-005/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-es-mct-007/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "008",
+        "expected": "https://helixenit.net/heli-us-cc-es-mct-005-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-es-mct-008/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "009",
+        "expected": "https://helixenit.net/heli-us-cc-es-mct-006/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-es-mct-009/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 11,
+        "expected_seq": "007",
+        "actual_seq": "010",
+        "expected": "https://helixenit.net/heli-us-cc-es-mct-007/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-es-mct-010/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 12,
+        "expected_seq": "008",
+        "actual_seq": "010-2",
+        "expected": "https://helixenit.net/heli-us-cc-es-mct-008/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-es-mct-010-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 13,
+        "expected_seq": "009",
+        "actual_seq": "011",
+        "expected": "https://helixenit.net/heli-us-cc-es-mct-009/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-es-mct-011/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 14,
+        "expected_seq": "010",
+        "actual_seq": "012",
+        "expected": "https://helixenit.net/heli-us-cc-es-mct-010/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-es-mct-012/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 15,
+        "expected_seq": "010-2",
+        "actual_seq": "012-2",
+        "expected": "https://helixenit.net/heli-us-cc-es-mct-010-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-es-mct-012-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 16,
+        "expected_seq": "011",
+        "actual_seq": "013",
+        "expected": "https://helixenit.net/heli-us-cc-es-mct-011/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-es-mct-013/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 17,
+        "expected_seq": "012",
+        "actual_seq": "013-2",
+        "expected": "https://helixenit.net/heli-us-cc-es-mct-012/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://helixenit.net/heli-us-cc-es-mct-013-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Vizioid - US-CC-ES/ES-ZW-SR - g002-d Gustavo",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://vizioid.com/vz-us-cc-es-mct-001",
+        "actual": "https://vizioid.com/vz-us-cc-es-mct-007"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://vizioid.com/vz-us-cc-es-mct-001-2",
+        "actual": "https://vizioid.com/vz-us-cc-es-mct-008"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://vizioid.com/vz-us-cc-es-mct-002",
+        "actual": "https://vizioid.com/vz-us-cc-es-mct-009"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://vizioid.com/vz-us-cc-es-mct-002-2",
+        "actual": "https://vizioid.com/vz-us-cc-es-mct-010"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://vizioid.com/vz-us-cc-es-mct-003",
+        "actual": "https://vizioid.com/vz-us-cc-es-mct-010-2"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://vizioid.com/vz-us-cc-es-mct-003-2",
+        "actual": "https://vizioid.com/vz-us-cc-es-mct-011"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://vizioid.com/vz-us-cc-es-mct-004",
+        "actual": "https://vizioid.com/vz-us-cc-es-mct-012"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://vizioid.com/vz-us-cc-es-mct-005",
+        "actual": "https://vizioid.com/vz-us-cc-es-mct-012-2"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://vizioid.com/vz-us-cc-es-mct-005-2",
+        "actual": "https://vizioid.com/vz-us-cc-es-mct-013"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://vizioid.com/vz-us-cc-es-mct-006",
+        "actual": "https://vizioid.com/vz-us-cc-es-mct-013-2"
+      }
+    ]
+  },
+  {
+    "template": "Financetopfeed - US-CC-ES/ES-ZW-SR - g004-d Joe",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "014",
+        "expected": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-001/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-014/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "015",
+        "expected": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-001-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-015/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "015-2",
+        "expected": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-002/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-015-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "001",
+        "expected": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-002-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-001/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "001-2",
+        "expected": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-003/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-001-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "002",
+        "expected": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-003-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-002/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "002-2",
+        "expected": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-004/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-002-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "003",
+        "expected": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-005/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-003/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "003-2",
+        "expected": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-005-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-003-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "004",
+        "expected": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-006/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.topfeed.fun/ftf-f-us-cc-es-mct-004/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Ducapes - US-CC-ES/ES-ZW-SR - g001-d Icaro",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://ducapes.com/dp-us-cc-es-mct-001/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://ducapes.com/dp-us-cc-es-mct-007/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://ducapes.com/dp-us-cc-es-mct-001-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://ducapes.com/dp-us-cc-es-mct-008/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://ducapes.com/dp-us-cc-es-mct-002/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://ducapes.com/dp-us-cc-es-mct-009/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://ducapes.com/dp-us-cc-es-mct-002-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://ducapes.com/dp-us-cc-es-mct-010/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://ducapes.com/dp-us-cc-es-mct-003/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://ducapes.com/dp-us-cc-es-mct-010-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://ducapes.com/dp-us-cc-es-mct-003-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://ducapes.com/dp-us-cc-es-mct-011/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://ducapes.com/dp-us-cc-es-mct-004/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://ducapes.com/dp-us-cc-es-mct-012/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://ducapes.com/dp-us-cc-es-mct-005/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://ducapes.com/dp-us-cc-es-mct-012-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://ducapes.com/dp-us-cc-es-mct-005-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://ducapes.com/dp-us-cc-es-mct-013/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://ducapes.com/dp-us-cc-es-mct-006/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://ducapes.com/dp-us-cc-es-mct-013-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "ZytivaFinanzas - US-CC-ES/ES-ZW-SR - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Lyzmo Finanzas - US-CC-ES/ES-ZW-SR - g006-d Nicolas",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-001/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-007/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-001-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-008/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-002/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-009/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-002-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-010/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-003/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-010-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-003-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-011/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-004/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-012/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-005/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-012-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-005-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-013/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-006/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-013-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Eggbev Finanzas - US-CC-ES/ES-ZW - AV - g006-d Nicolas",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Newsoun - US-CC-ES/ES-ZW-SR - g005-d Kelly",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 28,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "005-2",
+        "expected": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-001/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]",
+        "actual": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-005-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "006",
+        "expected": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-001-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]",
+        "actual": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-006/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "007",
+        "expected": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-002/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]",
+        "actual": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-007/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "008",
+        "expected": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-002-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]",
+        "actual": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-008/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "009",
+        "expected": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-003/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]",
+        "actual": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-009/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "010",
+        "expected": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-003-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]",
+        "actual": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-010/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "010-2",
+        "expected": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-004/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]",
+        "actual": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-010-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "011",
+        "expected": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-005/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]",
+        "actual": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-011/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "012",
+        "expected": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-005-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]",
+        "actual": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-012/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "012-2",
+        "expected": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-006/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]",
+        "actual": "https://finanzas.newsoun.com/ns-f-us-cc-es-mct-012-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_campaign=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Wantabrand - US-CC-ES/ES-ZW - M2 - g001-d Icaro",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Openzed - US-CC-ES/ES-ZW - AV - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Wavesbee - US-CC-ES/ES-ZW - YM - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Marevelx - US-CC-ES/ES-ZW-SR - g001-d Icaro",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://marevelx.com/mv-us-cc-es-mct-001/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-es-mct-007/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://marevelx.com/mv-us-cc-es-mct-001-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-es-mct-008/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://marevelx.com/mv-us-cc-es-mct-002/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-es-mct-009/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://marevelx.com/mv-us-cc-es-mct-002-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-es-mct-010/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://marevelx.com/mv-us-cc-es-mct-003/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-es-mct-010-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://marevelx.com/mv-us-cc-es-mct-003-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-es-mct-011/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://marevelx.com/mv-us-cc-es-mct-004/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-es-mct-012/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://marevelx.com/mv-us-cc-es-mct-005/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-es-mct-012-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://marevelx.com/mv-us-cc-es-mct-005-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-es-mct-013/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://marevelx.com/mv-us-cc-es-mct-006/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://marevelx.com/mv-us-cc-es-mct-013-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Financeadx - US-CC-ES/ES-ZW-SR - g006-d Nicolas",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "007",
+        "expected": "https://financeadx.com/fax-us-cc-es-mct-001/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-es-mct-007/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "001-2",
+        "actual_seq": "008",
+        "expected": "https://financeadx.com/fax-us-cc-es-mct-001-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-es-mct-008/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "002",
+        "actual_seq": "009",
+        "expected": "https://financeadx.com/fax-us-cc-es-mct-002/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-es-mct-009/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "002-2",
+        "actual_seq": "010",
+        "expected": "https://financeadx.com/fax-us-cc-es-mct-002-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-es-mct-010/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "003",
+        "actual_seq": "010-2",
+        "expected": "https://financeadx.com/fax-us-cc-es-mct-003/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-es-mct-010-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "003-2",
+        "actual_seq": "011",
+        "expected": "https://financeadx.com/fax-us-cc-es-mct-003-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-es-mct-011/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "004",
+        "actual_seq": "012",
+        "expected": "https://financeadx.com/fax-us-cc-es-mct-004/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-es-mct-012/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "005",
+        "actual_seq": "012-2",
+        "expected": "https://financeadx.com/fax-us-cc-es-mct-005/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-es-mct-012-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "005-2",
+        "actual_seq": "013",
+        "expected": "https://financeadx.com/fax-us-cc-es-mct-005-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-es-mct-013/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "006",
+        "actual_seq": "013-2",
+        "expected": "https://financeadx.com/fax-us-cc-es-mct-006/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://financeadx.com/fax-us-cc-es-mct-013-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Openzed - US-CC-ES/ES-ZW - AV - g001-d Icaro",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Wantabrand - ES-CC-ES/ES-ZW - M2 - g001-d Icaro",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g006-d Nicolas",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "011",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-001/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-011/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "012",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-002/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-012/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "013",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-003/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-013/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "014",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-004/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-014/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "015",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-005/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-015/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "016",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-006/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-016/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "017",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-007/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-017/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "018",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-008/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-018/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "019",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-009/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-019/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "020",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-010/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-020/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g001-d Icaro",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "011",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-001/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-011/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "012",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-002/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-012/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "013",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-003/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-013/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "014",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-004/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-014/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "015",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-005/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-015/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "016",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-006/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-016/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "017",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-007/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-017/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "018",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-008/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-018/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "019",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-009/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-019/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "020",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-010/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-020/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "011",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-001/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-011/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "012",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-002/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-012/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "013",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-003/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-013/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "014",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-004/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-014/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "015",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-005/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-015/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "016",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-006/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-016/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "017",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-007/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-017/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "018",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-008/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-018/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "019",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-009/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-019/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "020",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-010/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-020/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g004-d Joe",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "011",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-001/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-011/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "012",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-002/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-012/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "013",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-003/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-013/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "014",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-004/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-014/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "015",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-005/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-015/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "016",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-006/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-016/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "017",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-007/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-017/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "018",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-008/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-018/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "019",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-009/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-019/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "020",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-010/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-020/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g005-d Kelly",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "011",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-001/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-011/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "012",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-002/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-012/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "013",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-003/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-013/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "014",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-004/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-014/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "015",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-005/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-015/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "016",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-006/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-016/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "017",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-007/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-017/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "018",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-008/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-018/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "019",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-009/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-019/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "020",
+        "expected": "https://fincgriffin.com/fincg-es-cc-es-mct-010/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://fincgriffin.com/fincg-es-cc-es-mct-020/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "ZytivaFinanzas - ES-CC-ES/ES-ZW-SR - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 30,
+    "first_mismatches": [
+      {
+        "message_id": 1,
+        "expected_seq": "001",
+        "actual_seq": "011",
+        "expected": "https://finanzas.zytiva.com/zy-es-cc-es-mct-001/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.zytiva.com/zy-es-cc-es-mct-011/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 2,
+        "expected_seq": "002",
+        "actual_seq": "012",
+        "expected": "https://finanzas.zytiva.com/zy-es-cc-es-mct-002/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.zytiva.com/zy-es-cc-es-mct-012/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 3,
+        "expected_seq": "003",
+        "actual_seq": "013",
+        "expected": "https://finanzas.zytiva.com/zy-es-cc-es-mct-003/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.zytiva.com/zy-es-cc-es-mct-013/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 4,
+        "expected_seq": "004",
+        "actual_seq": "014",
+        "expected": "https://finanzas.zytiva.com/zy-es-cc-es-mct-004/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.zytiva.com/zy-es-cc-es-mct-014/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 5,
+        "expected_seq": "005",
+        "actual_seq": "015",
+        "expected": "https://finanzas.zytiva.com/zy-es-cc-es-mct-005/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.zytiva.com/zy-es-cc-es-mct-015/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 6,
+        "expected_seq": "006",
+        "actual_seq": "016",
+        "expected": "https://finanzas.zytiva.com/zy-es-cc-es-mct-006/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.zytiva.com/zy-es-cc-es-mct-016/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 7,
+        "expected_seq": "007",
+        "actual_seq": "017",
+        "expected": "https://finanzas.zytiva.com/zy-es-cc-es-mct-007/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.zytiva.com/zy-es-cc-es-mct-017/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 8,
+        "expected_seq": "008",
+        "actual_seq": "018",
+        "expected": "https://finanzas.zytiva.com/zy-es-cc-es-mct-008/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.zytiva.com/zy-es-cc-es-mct-018/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 9,
+        "expected_seq": "009",
+        "actual_seq": "019",
+        "expected": "https://finanzas.zytiva.com/zy-es-cc-es-mct-009/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.zytiva.com/zy-es-cc-es-mct-019/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      },
+      {
+        "message_id": 10,
+        "expected_seq": "010",
+        "actual_seq": "020",
+        "expected": "https://finanzas.zytiva.com/zy-es-cc-es-mct-010/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+        "actual": "https://finanzas.zytiva.com/zy-es-cc-es-mct-020/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+      }
+    ]
+  },
+  {
+    "template": "Openzed - ES-CC-ES/ES-ZW - AV - g003-d Isliago",
+    "messages": 30,
+    "source_bank_count": 70,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Financeadx - AR-CC-ES/ES-ZW-SR - g006-d Nicolas",
+    "messages": 10,
+    "source_bank_count": 60,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Financeadx - CA-CC-EN/EN-SR - g006-d Nicolas",
+    "messages": 10,
+    "source_bank_count": 58,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Financeadx - MX-CC-ES/ES-ZW-SR - g006-d Nicolas",
+    "messages": 10,
+    "source_bank_count": 60,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Financeadx - ZA-CC-EN/EN-SR - g006-d Nicolas",
+    "messages": 10,
+    "source_bank_count": 69,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Fincgriffin - TR-CC-TR/TR-SR -  g006-d Nicolas",
+    "messages": 10,
+    "source_bank_count": 69,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Fincgriffin - TR-CC-TR/TR-SR - g001-d Icaro",
+    "messages": 10,
+    "source_bank_count": 69,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Fincgriffin - TR-CC-TR/TR-SR - g003-d Isliago",
+    "messages": 10,
+    "source_bank_count": 69,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Fincgriffin - TR-CC-TR/TR-SR - g004-d Joe",
+    "messages": 10,
+    "source_bank_count": 69,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Fincgriffin - TR-CC-TR/TR-SR - g005-d Kelly",
+    "messages": 10,
+    "source_bank_count": 69,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Fincgriffin - US-CAR-EN/EN - JBF - g001-d",
+    "messages": 10,
+    "source_bank_count": 30,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Fincgriffin - US-CAR-EN/EN - JBF - g002-d",
+    "messages": 10,
+    "source_bank_count": 30,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Fincgriffin - US-CAR-EN/EN - JBF - g003-d",
+    "messages": 10,
+    "source_bank_count": 30,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Fincgriffin - US-CAR-EN/EN - JBF - g004-d",
+    "messages": 10,
+    "source_bank_count": 30,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Fincgriffin - US-CAR-EN/EN - JBF - g005-d",
+    "messages": 10,
+    "source_bank_count": 30,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Fincgriffin - US-CAR-EN/EN - JBF - g006-d",
+    "messages": 10,
+    "source_bank_count": 30,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Helixenit - DE-CC-DE/DE-SR - g005-d Kelly",
+    "messages": 10,
+    "source_bank_count": 60,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Helixenit - MX-CC-ES/ES-ZW-SR - g005-d Kelly",
+    "messages": 10,
+    "source_bank_count": 60,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Infinitynexx - MX-CC-ES/ES-ZW-SR - g004-d Joe",
+    "messages": 10,
+    "source_bank_count": 60,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Marevelx - DE-CC-DE/DE-SR - g001-d Icaro",
+    "messages": 10,
+    "source_bank_count": 61,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Newsoun - DE-CC-DE/DE-SR - g005-d Kelly",
+    "messages": 10,
+    "source_bank_count": 60,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Portal - US-CC-EN/EN - AV - g001-d Icaro",
+    "messages": 10,
+    "source_bank_count": 69,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Spe - US-JOB-EN/EN - AV - g006-d Nicolas",
+    "messages": 10,
+    "source_bank_count": 60,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Spe - US-JOB-ES/ES-ZW - AV - g006-d Nicolas",
+    "messages": 10,
+    "source_bank_count": 60,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Vizioid - MX-CC-ES/ES-ZW-SR - g002-d Gustavo",
+    "messages": 10,
+    "source_bank_count": 60,
+    "mismatches": 0,
+    "first_mismatches": []
+  },
+  {
+    "template": "Xyvlov - DE-CC-DE/DE-SR - g003-d Isliago",
+    "messages": 10,
+    "source_bank_count": 60,
+    "mismatches": 0,
+    "first_mismatches": []
+  }
+]

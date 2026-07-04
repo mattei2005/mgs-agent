@@ -12,7 +12,7 @@ import json
 import math
 import re
 import urllib.request
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -304,6 +304,8 @@ def main() -> int:
     ap.add_argument('--account-tz', default='Europe/Madrid')
     ap.add_argument('--policy', default=str(POLICY_DEFAULT))
     ap.add_argument('--always-output', action='store_true')
+    ap.add_argument('--report-date', help='YYYY-MM-DD in account timezone; defaults to today')
+    ap.add_argument('--checkpoint-time', default=None, help='HH:MM in account timezone; defaults to now, or 22:00 for historical dates')
     args = ap.parse_args()
 
     common = load_common()
@@ -311,8 +313,15 @@ def main() -> int:
     op_cfg = load_json(BASE / 'operations' / f'{args.operation_id}.json')
     token, _field = common.get_token_from_1password()
     tz = ZoneInfo(args.account_tz)
-    now_local = utc_now().astimezone(tz)
-    today = now_local.date()
+    real_now_local = utc_now().astimezone(tz)
+    if args.report_date:
+        today = date.fromisoformat(args.report_date)
+        checkpoint_time = args.checkpoint_time or ('22:00' if today < real_now_local.date() else real_now_local.strftime('%H:%M'))
+        hour, minute = [int(x) for x in checkpoint_time.split(':', 1)]
+        now_local = datetime.combine(today, time(hour, minute), tzinfo=tz)
+    else:
+        now_local = real_now_local
+        today = now_local.date()
     d1 = today - timedelta(days=1)
     d2 = today - timedelta(days=2)
 

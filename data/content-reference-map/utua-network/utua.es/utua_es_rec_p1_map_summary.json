@@ -1,0 +1,139 @@
+{
+  "domain": "utua.es",
+  "sitemap_index": "https://utua.es/sitemap_index.xml",
+  "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+  "post_sitemaps": [
+    "https://utua.es/post-sitemap1.xml",
+    "https://utua.es/post-sitemap2.xml"
+  ],
+  "post_url_count": 366,
+  "source_p1_p2_article_count": 366,
+  "source_stage_counts": {
+    "UTUA_P2": 181,
+    "UTUA_P1": 185
+  },
+  "rec_rows": 185,
+  "rec_with_reference_p1": 180,
+  "rec_without_reference_p1": 5,
+  "orphan_source_p2_without_rec": 1,
+  "reference_pair_status_counts": {
+    "REC+P1": 180,
+    "REC_only": 5
+  },
+  "country_counts": {
+    "cc": 98,
+    "emp": 82,
+    "es": 2,
+    "finance": 2,
+    "mp": 1
+  },
+  "country_vertical_top": [
+    {
+      "country": "cc",
+      "vertical": "tarjeta",
+      "count": 20
+    },
+    {
+      "country": "emp",
+      "vertical": "prestamo",
+      "count": 18
+    },
+    {
+      "country": "cc",
+      "vertical": "bbva",
+      "count": 9
+    },
+    {
+      "country": "cc",
+      "vertical": "deutsche",
+      "count": 7
+    },
+    {
+      "country": "emp",
+      "vertical": "personal",
+      "count": 7
+    },
+    {
+      "country": "emp",
+      "vertical": "deutsche",
+      "count": 6
+    },
+    {
+      "country": "cc",
+      "vertical": "openbank",
+      "count": 5
+    },
+    {
+      "country": "cc",
+      "vertical": "santander",
+      "count": 5
+    },
+    {
+      "country": "cc",
+      "vertical": "abanca",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "bbva",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "caixa",
+      "count": 4
+    },
+    {
+      "country": "cc",
+      "vertical": "american",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "caixa",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "caixabank",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "march",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "n26",
+      "count": 3
+    },
+    {
+      "country": "emp",
+      "vertical": "bankinter",
+      "count": 3
+    },
+    {
+      "country": "emp",
+      "vertical": "caixabank",
+      "count": 3
+    },
+    {
+      "country": "emp",
+      "vertical": "hipoteca",
+      "count": 3
+    },
+    {
+      "country": "emp",
+      "vertical": "santander",
+      "count": 3
+    }
+  ],
+  "errors": [],
+  "generated_at": "2026-06-29T06:37:23.528886Z",
+  "generated_files": [
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.es/utua_es_rec_p1_map.csv",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.es/utua_es_rec_p1_map.json",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.es/utua_es_rec_p1_map_summary.json"
+  ]
+}

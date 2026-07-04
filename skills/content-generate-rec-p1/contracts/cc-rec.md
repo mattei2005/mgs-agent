@@ -43,14 +43,21 @@ Se houver conflito entre site/vertical e idioma solicitado, bloquear antes de pu
 
 ---
 
-## 3. Fontes Oficiais e Coleta de Dados
+## 3. REC/P1 de Referência e Coleta de Dados
 
-As informações utilizadas devem ser obtidas prioritariamente na URL oficial do cartão informada pelo executor.
+No fluxo normal, o REC deve ser reconstruído a partir do REC de referência enviado/aprovado e da P1 de referência descoberta a partir dele. A URL oficial/oferta separada não é obrigatória quando o CTA final puder ser extraído da P1 de referência.
 
-Utilize apenas informações disponíveis em:
+Regras:
 
-* Página oficial do cartão;
-* Site oficial do emissor;
+* Usar o par REC+P1 de referência para entender estrutura, contexto, benefícios, argumentos e ordem lógica.
+* Reescrever no modelo MGS; nunca copiar ou parafrasear frase por frase.
+* Mudar abertura, transições, exemplos e construção narrativa.
+* Preservar fatos confirmados e bloquear longos trechos similares ao artigo-base.
+* Para claims sensíveis, utilizar apenas informações disponíveis em:
+
+* REC/P1 de referência enviados/aprovados;
+* Página oficial/oferta quando fornecida ou extraída;
+* Site oficial do emissor, quando necessário;
 * Fontes oficiais da bandeira;
 * Fontes oficiais claramente vinculadas ao produto.
 

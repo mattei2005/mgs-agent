@@ -1,0 +1,38 @@
+{
+  "domain": "utua.gr",
+  "sitemap_index": "https://utua.gr/sitemap_index.xml",
+  "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+  "post_sitemaps": [
+    "https://utua.gr/post-sitemap.xml"
+  ],
+  "post_url_count": 14,
+  "source_p1_p2_article_count": 14,
+  "source_stage_counts": {
+    "UTUA_P1": 7,
+    "UTUA_P2": 7
+  },
+  "rec_rows": 7,
+  "rec_with_reference_p1": 7,
+  "rec_without_reference_p1": 0,
+  "orphan_source_p2_without_rec": 0,
+  "reference_pair_status_counts": {
+    "REC+P1": 7
+  },
+  "country_counts": {
+    "gr": 7
+  },
+  "country_vertical_top": [
+    {
+      "country": "gr",
+      "vertical": "cc",
+      "count": 7
+    }
+  ],
+  "errors": [],
+  "generated_at": "2026-06-29T06:37:34.511670Z",
+  "generated_files": [
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.gr/utua_gr_rec_p1_map.csv",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.gr/utua_gr_rec_p1_map.json",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.gr/utua_gr_rec_p1_map_summary.json"
+  ]
+}

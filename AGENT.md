@@ -442,6 +442,8 @@ Ações que **NÃO** geram report:
 
 ### Formato do report
 
+**Regra crítica de destino:** `[REPORT-INFRA]` é mensagem de canal dedicado, não rodapé de resposta operacional. Nunca colar `[REPORT-INFRA]` dentro da thread/tópico onde Rodolfo pediu a tarefa, mesmo que a tarefa tenha modificado infra. O report deve ser publicado apenas no canal `#alerts-infra` (ID: `1498132022634483894`) ou registrado em audit log quando a sessão atual não tiver ferramenta/API para postar naquele canal. Resposta final na thread de origem deve conter só o resumo executivo, sem bloco `[REPORT-INFRA]` inline.
+
 ```
 [REPORT-INFRA] <@1496296175014252634> <@344196393512075265>
 Ação: [criada/modificada/removida]

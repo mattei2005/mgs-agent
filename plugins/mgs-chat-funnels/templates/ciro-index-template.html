@@ -1,0 +1,749 @@
+
+<!doctype html>
+<html lang="{{HTML_LANG}}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{TITLE}}</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+      body {
+        font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #dfe5e7;
+        margin: 0;
+        padding: 0;
+        height: calc(100vh - 10px);
+        color: #333;
+      }
+
+      #chat-container {
+        width: calc(100% - 20px);
+        height: calc(100% - 10px);
+        margin: 5px auto;
+        background-color: #e5ddd5;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c3b9b0' fill-opacity='0.18'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        color: #333;
+        max-width: 780px;
+      }
+
+      /* WhatsApp header */
+      #chat-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background-color: #075e54;
+        color: white;
+        padding: 8px 16px;
+        flex-shrink: 0;
+        min-height: 56px;
+      }
+
+      #chat-header img {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #25d366;
+      }
+
+      #header-info {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.4;
+      }
+
+      #header-name {
+        font-size: 15px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      #header-status {
+        font-size: 12px;
+        color: #d9fdd3;
+        white-space: nowrap;
+      }
+
+      #chat-box {
+        flex-grow: 1;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        scroll-behavior: smooth;
+        padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #chat-box::-webkit-scrollbar {
+        display: none;
+      }
+
+      .chat-message {
+        padding: 7px 12px 8px;
+        border-radius: 7.5px;
+        margin: 4px 0;
+        font-size: 14.5px;
+        max-width: 75%;
+        position: relative;
+        line-height: 1.4;
+        clear: both;
+        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+        word-wrap: break-word;
+      }
+
+      .bot-message {
+        background-color: #ffffff;
+        color: #303030;
+        align-self: flex-start;
+        border-top-left-radius: 0;
+        margin-left: 18px;
+        margin-right: 50px;
+      }
+
+      /* Bot bubble tail */
+      .bot-message::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -8px;
+        width: 0;
+        height: 0;
+        border-top: 8px solid #ffffff;
+        border-left: 8px solid transparent;
+      }
+
+      .user-message {
+        background-color: #dcf8c6;
+        color: #303030;
+        align-self: flex-end;
+        border-top-right-radius: 0;
+        margin-right: 18px;
+        float: right;
+        text-align: left;
+      }
+
+      /* User bubble tail */
+      .user-message::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: -8px;
+        width: 0;
+        height: 0;
+        border-top: 8px solid #dcf8c6;
+        border-right: 8px solid transparent;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 8px;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        margin-right: 18px;
+        max-width: 75%;
+        float: right;
+        align-items: flex-end;
+      }
+
+      button {
+        padding: 9px 16px;
+        background-color: #ffffff;
+        color: #075e54;
+        border: 1.5px solid #25d366;
+        border-radius: 7.5px;
+        cursor: pointer;
+        transition:
+          background-color 0.2s ease,
+          transform 0.1s ease;
+        font-size: 14px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        width: 100%;
+        margin: 3px 0;
+        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+      }
+
+      button:hover {
+        background-color: #f0fdf4;
+        transform: translateY(-1px);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+
+      button:disabled {
+        border-color: #ccc;
+        color: #aaa;
+        cursor: not-allowed;
+        background-color: #f9f9f9;
+      }
+
+      a button {
+        background-color: #25d366;
+        color: white;
+        border-color: #25d366;
+      }
+
+      a button:hover {
+        background-color: #20c05c;
+      }
+
+      /* Typing indicator */
+      .typing-indicator {
+        display: flex;
+        justify-content: flex-start;
+        margin: 6px 0;
+        margin-left: 18px;
+        margin-top: 8px;
+      }
+
+      /* Wrap dots in a bubble */
+      .typing-indicator::before {
+        display: none;
+      }
+
+      .typing-indicator {
+        background-color: #ffffff;
+        border-radius: 7.5px;
+        border-top-left-radius: 0;
+        padding: 10px 14px;
+        width: fit-content;
+        box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+        position: relative;
+      }
+
+      /* Tail for typing bubble */
+      .typing-indicator::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -8px;
+        width: 0;
+        height: 0;
+        border-top: 8px solid #ffffff;
+        border-left: 8px solid transparent;
+      }
+
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        margin: 0 3px;
+        background-color: #90a4ae;
+        animation: typingDot 1.4s infinite ease-in-out;
+      }
+
+      .dot:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes typingDot {
+        0%,
+        60%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        30% {
+          transform: scale(1.3);
+          opacity: 1;
+        }
+      }
+
+      .progress-container {
+        width: 60%;
+        height: 6px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 3px;
+        margin: 12px auto;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0;
+        background-color: #25d366;
+        border-radius: 3px;
+        transition: width 0.8s ease-in-out;
+      }
+
+      .ad {
+        clear: both;
+      }
+
+    </style>
+    {{TAGS_SCRIPT}}
+    <script
+      async=""
+      src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+    ></script>
+    <script
+      defer=""
+      src="{{WRAPPER_URL}}"
+    ></script>
+  </head>
+  <body>
+    <div id="chat-container">
+      <div id="chat-header">
+        <img id="bot-avatar" src="" alt="" />
+        <div id="header-info">
+          <span id="header-name"></span>
+          <span id="header-status">🟢 online agora</span>
+        </div>
+        <a
+          id="call-btn"
+          href="#"
+          target="_self"
+          title="Ligar agora"
+          style="
+            margin-left: auto;
+            flex-shrink: 0;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+          "
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="white"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"
+            />
+          </svg>
+        </a>
+      </div>
+      <div id="chat-box">
+        <!-- Bot's initial message will appear here -->
+      </div>
+    </div>
+
+    <script>
+      function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      function scrollChatToBottom() {
+        const chatBox = document.getElementById("chat-box");
+        if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+      }
+
+      function keepChatPinnedToBottom(durationMs = 3500) {
+        const startedAt = Date.now();
+        scrollChatToBottom();
+        const interval = setInterval(() => {
+          scrollChatToBottom();
+          if (Date.now() - startedAt >= durationMs) {
+            clearInterval(interval);
+          }
+        }, 250);
+      }
+
+      // Copia os parâmetros da URL atual para a URL de destino (sobrescreve existentes)
+      function mergeSourceParams(targetUrl) {
+        try {
+          const url = new URL(targetUrl);
+          const sourceParams = new URLSearchParams(window.location.search);
+          sourceParams.forEach((value, key) => {
+            // Sobrescreve parâmetros para garantir que todos da origem sejam levados
+            url.searchParams.set(key, value);
+          });
+          return url.toString();
+        } catch (e) {
+          return targetUrl;
+        }
+      }
+
+      let questionIndex = -1;
+      const botNames = {{BOT_NAMES_JS}};
+
+      const femaleNames = {{FEMALE_NAMES_JS}};
+      const maleNames = {{MALE_NAMES_JS}};
+
+      const femalePhotos = {{FEMALE_PHOTOS_JS}};
+      const malePhotos = {{MALE_PHOTOS_JS}};
+
+      let botName = botNames[Math.floor(Math.random() * botNames.length)];
+
+      // Match photo to gender of chosen name
+      let botPhoto;
+      if (femaleNames.includes(botName)) {
+        const idx = femaleNames.indexOf(botName);
+        botPhoto = femalePhotos[idx];
+      } else {
+        const idx = maleNames.indexOf(botName);
+        botPhoto = malePhotos[idx];
+      }
+
+      // Header will be set inside window.onload
+
+      const questions = {{QUESTIONS_JS}};
+
+      function askQuestion(userAnswer) {
+        const chatBox = document.getElementById("chat-box");
+
+        function continueChat() {
+          if (userAnswer !== "") {
+            const userMessage = document.createElement("div");
+            userMessage.classList.add("chat-message", "user-message");
+            userMessage.textContent = userAnswer;
+            chatBox.appendChild(userMessage);
+
+            const buttonContainer = document.querySelector(".button-container");
+            if (buttonContainer) {
+              buttonContainer.remove();
+            }
+          }
+
+          setTimeout(() => {
+            const typingIndicator = document.createElement("div");
+            typingIndicator.classList.add("typing-indicator");
+            typingIndicator.innerHTML =
+              '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+            chatBox.appendChild(typingIndicator);
+            scrollChatToBottom();
+
+            setTimeout(() => {
+              typingIndicator.style.display = "none";
+              questionIndex++;
+
+              if (questionIndex === 2) {
+                showAd();
+              }
+
+              if (questionIndex < questions.length - 1) {
+                showNextQuestion();
+              } else {
+                showNextQuestion();
+                showProgressBar();
+              }
+            }, 2000);
+          }, 500);
+        }
+
+        continueChat();
+      }
+
+      async function showNextQuestion() {
+        const chatBox = document.getElementById("chat-box");
+
+        const questionData = questions[questionIndex];
+
+        let messageCounter = 0;
+        const messages = questionData.question.split("|");
+        for (let message of messages) {
+          messageCounter += 1;
+          const botMessage = document.createElement("div");
+          botMessage.classList.add("chat-message", "bot-message");
+          botMessage.textContent = message.replace(/\{botName\}/g, botName);
+          chatBox.appendChild(botMessage);
+          scrollChatToBottom();
+
+          if (messageCounter < messages.length) {
+            await sleep(Math.random() * (2000 - 1000) + 700);
+          }
+        }
+
+        scrollChatToBottom();
+
+        if (questionData.answers) {
+          const buttonContainer = document.createElement("div");
+          buttonContainer.classList.add("button-container");
+
+          questionData.answers.forEach((answer) => {
+            let answerButton;
+
+            if (answer.includes("→")) {
+              const answerLink = document.createElement("a");
+              answerLink.href = mergeSourceParams(questionData.target);
+              answerLink.style.textDecoration = "none";
+              answerButton = document.createElement("button");
+              answerButton.textContent = answer;
+              answerLink.appendChild(answerButton);
+              buttonContainer.appendChild(answerLink);
+            } else {
+              // Create a button otherwise
+              answerButton = document.createElement("button");
+              answerButton.textContent = answer;
+              answerButton.onclick = () => askQuestion(answer);
+              buttonContainer.appendChild(answerButton);
+            }
+          });
+
+          chatBox.appendChild(buttonContainer);
+
+          setTimeout(() => {
+            buttonContainer.style.opacity = 1;
+            scrollChatToBottom();
+            keepChatPinnedToBottom(1500);
+          }, 1000);
+        }
+      }
+
+      function showAd() {
+        const chatBox = document.getElementById("chat-box");
+        const adBanner = document.createElement("div");
+        adBanner.innerHTML = `<div></div>`;
+        adBanner.classList.add("ad-unit");
+        adBanner.classList.add("ad");
+        adBanner.dataset.position = "top";
+        chatBox.appendChild(adBanner);
+        scrollChatToBottom();
+        if (window?.onInfinitePostLoaded) {
+          window.onInfinitePostLoaded();
+        }
+
+        // O wrapper/GAM pode aumentar/alterar o bloco top depois da próxima pergunta.
+        // Mantém o chat no fundo para os botões ficarem visíveis quando o top aparecer.
+        keepChatPinnedToBottom(4500);
+
+        if (window.ResizeObserver) {
+          const resizeObserver = new ResizeObserver(() => keepChatPinnedToBottom(1000));
+          resizeObserver.observe(adBanner);
+          setTimeout(() => resizeObserver.disconnect(), 6000);
+        }
+
+        if (window.MutationObserver) {
+          const mutationObserver = new MutationObserver(() => keepChatPinnedToBottom(1000));
+          mutationObserver.observe(adBanner, { attributes: true, childList: true, subtree: true });
+          setTimeout(() => mutationObserver.disconnect(), 6000);
+        }
+      }
+
+      function showProgressBar() {
+        const chatBox = document.getElementById("chat-box");
+
+        const progressContainer = document.createElement("div");
+        progressContainer.classList.add("progress-container");
+
+        const progressBar = document.createElement("div");
+        progressBar.classList.add("progress-bar");
+        progressContainer.appendChild(progressBar);
+
+        chatBox.appendChild(progressContainer);
+        scrollChatToBottom();
+
+        let width = 0;
+        const interval = setInterval(() => {
+          width += Math.random() * 30;
+          if (width >= 100) {
+            width = 100;
+            clearInterval(interval);
+
+            // Show completion message
+            setTimeout(() => {
+              const finalMessage = document.createElement("div");
+              finalMessage.classList.add("chat-message", "bot-message");
+              finalMessage.textContent =
+                "Busca concluída! Clique nas ofertas acima para continuar. 🎉";
+              chatBox.appendChild(finalMessage);
+              scrollChatToBottom();
+            }, 500);
+          }
+          progressBar.style.width = `${width}%`;
+        }, 1000);
+      }
+
+      window.onload = function () {
+        // Set header
+        document.getElementById("bot-avatar").src = botPhoto;
+        document.getElementById("header-name").textContent =
+          botName + " • " + {{PERSONA_ROLE_JS}};
+
+        // Set random offer on call button
+        const offers = {{OFFER_URLS_JS}};
+        const randomOffer = offers[Math.floor(Math.random() * offers.length)];
+        const callBtn = document.getElementById("call-btn");
+        callBtn.href = mergeSourceParams(randomOffer);
+
+        // Start quiz
+        initQuiz();
+      };
+
+      // ─── QUIZ ────────────────────────────────────────────────────────────
+      let quizStep = 0;
+      let isQuizClosed = false;
+      let quizAlreadyClosed = false;
+
+      function unlockScroll() {
+        document.documentElement.classList.remove("modal-locked");
+        document.body.classList.remove("modal-locked");
+      }
+
+      function lockScroll() {
+        document.documentElement.classList.add("modal-locked");
+        document.body.classList.add("modal-locked");
+      }
+
+      function closeQuiz() {
+        const quizContainer = document.getElementById("quiz-container");
+        if (quizContainer) quizContainer.style.display = "none";
+        isQuizClosed = true;
+        unlockScroll();
+        askQuestion("");
+      }
+
+      function updateQuizProgress() {
+        const fill = document.getElementById("quiz-progress-fill");
+        const progress = quizStep === 0 ? 20 : quizStep === 1 ? 60 : 100;
+        if (fill) fill.style.width = progress + "%";
+      }
+
+      let quizStepLock = false;
+
+      function nextQuizStep() {
+        if (quizStepLock) return;
+        quizStepLock = true;
+        setTimeout(() => { quizStepLock = false; }, 1000);
+
+        const currentSlide = document.querySelector('.aq-slide[data-step="' + quizStep + '"]');
+        if (currentSlide) currentSlide.style.display = "none";
+        quizStep++;
+
+        if (quizStep <= 1) {
+          const nextSlide = document.querySelector('.aq-slide[data-step="' + quizStep + '"]');
+          if (nextSlide) nextSlide.style.display = "flex";
+          updateQuizProgress();
+        } else {
+          const loadingSlide = document.querySelector(".aq-loading");
+          if (loadingSlide) {
+            loadingSlide.style.display = "block";
+            setTimeout(function () {
+              loadingSlide.style.display = "none";
+              const finalSlide = document.querySelector(".aq-final");
+              if (finalSlide) finalSlide.style.display = "block";
+              updateQuizProgress();
+            }, 2000);
+          }
+        }
+      }
+
+      function initQuiz() {
+        const quizContainer = document.getElementById("quiz-container");
+        if (quizContainer) {
+          quizContainer.style.display = "flex";
+          lockScroll();
+          updateQuizProgress();
+        }
+
+        // Inicia 1 leilão de rewarded no background
+        window.jbftag = window.jbftag || { cmd: [] };
+        window.jbftag.cmd.push(() => {
+          if (window.jbftag.requestRewardAds) {
+            window.jbftag.requestRewardAds();
+          }
+        });
+      }
+
+      document.addEventListener("click", function (e) {
+        if (isQuizClosed) return;
+
+        if (e.target.classList.contains("aq-answer")) {
+          e.target.style.background = "#075e54";
+          e.target.style.color = "white";
+          const currentSlide = document.querySelector('.aq-slide[data-step="' + quizStep + '"]');
+          if (currentSlide) {
+            currentSlide.querySelectorAll(".aq-answer").forEach(btn => btn.style.pointerEvents = "none");
+          }
+          setTimeout(nextQuizStep, 500);
+        }
+
+        if (e.target.id === "aq-cta") {
+          window.jbftag = window.jbftag || { cmd: [] };
+          window.jbftag.cmd.push(() => {
+            if (window.jbftag.showRewardedAds) {
+              window.jbftag.showRewardedAds(function () {
+                if (!quizAlreadyClosed) {
+                  quizAlreadyClosed = true;
+                  closeQuiz();
+                }
+              });
+            } else {
+              if (!quizAlreadyClosed) {
+                quizAlreadyClosed = true;
+                closeQuiz();
+              }
+            }
+          });
+        }
+      });
+    </script>
+    <!-- QUIZ MODAL -->
+    <div id="quiz-container" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); z-index:2147483647; justify-content:center; align-items:center; font-family:'Roboto',Arial,sans-serif;">
+      <div style="background:#ffffff; border-radius:20px; padding:0 30px 40px 30px; box-shadow:0 8px 32px rgba(0,0,0,0.2); max-width:500px; width:90%; min-width:300px; position:relative;">
+        <div style="margin-bottom:30px; margin-top:0;">
+          <div style="width:100%; height:5px; background:#e0e0e0; border-radius:2px; overflow:hidden;">
+            <div id="quiz-progress-fill" style="width:20%; height:100%; background:#075e54; border-radius:2px; transition:width 0.5s ease;"></div>
+          </div>
+        </div>
+        <div class="aq-slides">
+          <div class="aq-slide" data-step="0" style="display:flex; flex-direction:column; align-items:center;">
+            <p class="question" style="font-size:22px; margin-bottom:25px; text-align:center; color:#333; font-weight:500;">🚗 Você já tem um carro?</p>
+            <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
+              <button class="aq-answer" data-value="sim" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">Sim</button>
+              <button class="aq-answer" data-value="nao" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">Não</button>
+            </div>
+          </div>
+          <div class="aq-slide" data-step="1" style="display:none; flex-direction:column; align-items:center;">
+            <p class="question" style="font-size:22px; margin-bottom:25px; text-align:center; color:#333; font-weight:500;">🔍 Qual tipo de veículo você quer financiar?</p>
+            <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
+              <button class="aq-answer" data-value="usado" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">Usado</button>
+              <button class="aq-answer" data-value="seminovo" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">Seminovo</button>
+              <button class="aq-answer" data-value="zero" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">Zero KM</button>
+            </div>
+          </div>
+          <div class="aq-loading" style="display:none; text-align:center;">
+            <div style="display:flex; justify-content:center; gap:8px; margin-bottom:20px;">
+              <span class="dot" style="width:12px; height:12px; border-radius:50%; background:#075e54; display:inline-block; animation:bounce 1.4s ease-in-out infinite both;"></span>
+              <span class="dot" style="width:12px; height:12px; border-radius:50%; background:#075e54; display:inline-block; animation:bounce 1.4s ease-in-out infinite both; animation-delay:0.16s;"></span>
+              <span class="dot" style="width:12px; height:12px; border-radius:50%; background:#075e54; display:inline-block; animation:bounce 1.4s ease-in-out infinite both; animation-delay:0.32s;"></span>
+            </div>
+            <h2 style="color:#333; margin:0; font-size:20px;">🔍 Buscando a melhor oferta para você...</h2>
+          </div>
+          <div class="aq-final" style="display:none; text-align:center;">
+            <div style="font-size:52px; margin-bottom:10px;">🚗</div>
+            <p style="font-size:26px; color:#075e54; margin-bottom:8px; font-weight:700; line-height:1.2;">Oferta encontrada!</p>
+            <p style="font-size:16px; color:#333; margin-bottom:25px; font-weight:500;">Um especialista foi identificado para te atender agora.</p>
+            <button id="aq-cta" style="display:block; width:100%; padding:16px 20px; background:#111111; color:white; border:none; border-radius:12px; font-size:15px; font-weight:700; cursor:pointer; font-family:'Roboto',Arial,sans-serif; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition:all 0.3s ease; text-transform:uppercase; letter-spacing:0.5px;">TRANSFERIR PARA ESPECIALISTA →</button>
+            <br/><br/>
+            <small style="color:#444; font-size:13px; font-weight:500;">✅ Análise gratuita e sem compromisso</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>
+      html.modal-locked, body.modal-locked { overflow:hidden !important; touch-action:none; }
+      @keyframes bounce { 0%,80%,100%{transform:scale(0.8);opacity:0.5} 40%{transform:scale(1.2);opacity:1} }
+      #aq-cta:hover { background:#333333 !important; transform:translateY(-2px); }
+      .aq-answer:hover { opacity:0.85; transform:translateY(-1px); }
+      @media(max-width:480px) { #quiz-container > div { padding:20px 15px 30px !important; } .question { font-size:18px !important; } .aq-answer { font-size:14px !important; padding:12px 15px !important; } #aq-cta { font-size:15px !important; padding:10px 25px !important; } }
+    </style>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"be053043c0cd4626ab42b5b242a0e7b7","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

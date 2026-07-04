@@ -1,0 +1,55 @@
+{
+  "source_approved_csv": "/root/mgs-agent/work/meta-utility/us-cc-en-approved-187.csv",
+  "gb_link_source_template": "Newsoun - GB-CC-EN/EN-SR - g005-d Kelly",
+  "gb_links_extracted": 69,
+  "approved_rows_adapted": 187,
+  "rewritten_rejected_rows_added": 14,
+  "full_rows": 201,
+  "dollar_symbols_remaining": 0,
+  "pound_symbol_rows": [
+    "4",
+    "9"
+  ],
+  "rewrite_message_ids": [
+    "188",
+    "189",
+    "190",
+    "191",
+    "192",
+    "193",
+    "194",
+    "195",
+    "196",
+    "197",
+    "198",
+    "199",
+    "200",
+    "201"
+  ],
+  "csv_columns": [
+    "MESSAGE ID",
+    "TEXT",
+    "DESCRIPTION",
+    "IMAGE",
+    "CTA 1",
+    "LINK 1",
+    "CTA 2",
+    "LINK 2",
+    "TEXT 2"
+  ],
+  "encoding": "utf-8-sig / CRLF",
+  "files": {
+    "gb-cc-en-approved-187-pound-newsoun-links.csv": {
+      "path": "/root/mgs-agent/work/meta-utility/gb-cc-en-utility-test-20260630/gb-cc-en-approved-187-pound-newsoun-links.csv",
+      "rows": 187,
+      "sha256": "de3902bc6d37dc5c6424e2499bfad81bc239e08306c24e09977f41bba30b54f2",
+      "size_bytes": 53188
+    },
+    "gb-cc-en-test-201-approved-plus-rewritten-newsoun-links.csv": {
+      "path": "/root/mgs-agent/work/meta-utility/gb-cc-en-utility-test-20260630/gb-cc-en-test-201-approved-plus-rewritten-newsoun-links.csv",
+      "rows": 201,
+      "sha256": "36a8ab2de3a17e22f3807f4a8690b78b561d8113d0481eb8faa365649a3f6305",
+      "size_bytes": 57293
+    }
+  }
+}

@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-05-20T01:42:28-04:00",
+    "ultima_atualizacao": "2026-06-19T19:03:40-04:00",
     "total_abertas": 53,
     "total_resolvidas": 37,
     "proximo_id": 91,
@@ -11,7 +11,7 @@
   "categorias": {
     "app": "MGS Dashboard, USX Track, MGS Tasks (iOS/Android)",
     "seguranca": "Vulnerabilidades, credenciais, acesso",
-    "infra": "Hetzner VPS, scripts, crons, monitores",
+    "infra": "Hostinger VPS, scripts, crons, monitores",
     "conteudo": "REC, P1, SEO, templates, RECs específicos",
     "skills": "Skills Atena/Zeus, refactoring, novas skills",
     "agente": "Atena, Zeus, futuros agentes (Ares)",
@@ -496,7 +496,7 @@
         "monitor",
         "zero-token"
       ],
-      "contexto": "VPS Hetzner. Cron 1×/hora. Alerta se disk usage >80%."
+      "contexto": "VPS Hostinger 2.25.165.171 / srv1767265. Cron 1×/hora. Alerta se disk usage >80%."
     },
     {
       "id": "PEND-040",
@@ -653,7 +653,7 @@
     },
     {
       "id": "PEND-052",
-      "titulo": "Hetzner snapshots cleanup (4 snapshots ativos)",
+      "titulo": "Confirmar exclusão Hetzner antiga pós-migração",
       "categoria": "externo",
       "prioridade": "baixa",
       "status": "aberta",
@@ -663,10 +663,10 @@
       "criada_por": "claude-web",
       "tags": [
         "hetzner",
-        "snapshots",
+        "hostinger-migration",
         "cleanup"
       ],
-      "contexto": "4 snapshots: 381460955 (29/04 pré-Hermes), 382263233, 382319113, 382641638 (sessão 02/05). Considerar manter só os 2 mais recentes."
+      "contexto": "Hetzner antiga 87.99.151.107 / mgs-agent-01 auditada sem crontab, gateways inactive e sem processos hermes/gateway. Rodolfo informou que vai excluir; pendência é apenas confirmar exclusão/cancelamento no painel e remover snapshots se ainda existirem."
     },
     {
       "id": "PEND-053",
@@ -700,7 +700,7 @@
         "mac",
         "pessoal"
       ],
-      "contexto": "Acesso ssh root@87.99.151.107 do Mac. Alternativa pra não depender do Windows PowerShell."
+      "contexto": "Acesso SSH do Mac do Rodolfo deve apontar para a produção atual Hostinger root@2.25.165.171 / srv1767265. Acesso antigo root@87.99.151.107 era Hetzner desativada."
     },
     {
       "id": "PEND-056",

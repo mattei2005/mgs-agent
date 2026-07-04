@@ -1,0 +1,141 @@
+﻿MESSAGE ID,TEXT,CTA 1,STATUS,APPROVED,REJECTED,INVALID_FORMAT,ERROR
+1,"✅ AUTORIZADO: {{first_name}}, estás autorizado a activar tu nueva tarjeta. 
+
+No más esperas. Toque para comenzar.",🚀 ACTIVAR AHORA,REJECTED,0,1,0,0
+2,"Tengo 1 actualización importante sobre su perfil crediticio. 
+
+Es mejor de lo que esperábamos. Compruébalo aquí:",📩 ACTUALIZACIÓN ABIERTA,APPROVED,1,0,0,0
+3,"📦 Estado: RETENIDO
+Su tarjeta preaprobada está esperando. 
+Sólo necesitamos la confirmación de su dirección de entrega.",🚚 CONFIRMAR DIRECCIÓN,APPROVED,1,0,0,0
+4,"✅ ENTREGA CONFIRMADA
+Tu tarjeta con límite de €15,000 se está preparando para envío
+Verifique sus datos para realizar el envío.",🚚 ENVIAR MI TARJETA,APPROVED,1,0,0,0
+5,"🏆 {{first_name}}, tu Tarjeta Platinum quedó reservada para el grupo de prioridad del 2%.
+
+El paquete está sellado. Sólo necesitamos la confirmación de su dirección antes de que el mensajero la recoja.",🚚 CONFIRMAR Y ENVIAR,REJECTED,0,1,0,0
+6,"🚚 ¡EN CAMINO! ¡Felicidades! 
+Su tarjeta de crédito pasa a la siguiente etapa. 
+Siga para finalizar:",🟢 SEGUIMIENTO/FINALIZAR,APPROVED,1,0,0,0
+7,"💳 TARJETA DE CRÉDITO APROBADA
+
+¡Felicitaciones, {{first_name}}! Su nueva Tarjeta de Crédito está lista para ser enviada. 
+
+Sólo necesitamos que confirmes la dirección de entrega.",🚚 CONFIRMAR AHORA,REJECTED,0,1,0,0
+8,"🔓 TARJETA DESBLOQUEADA
+
+Su tarjeta de crédito virtual está lista para usar y la física está esperando su envío. 
+
+Toque para finalizar el proceso.",💳 DESBLOQUEAR TARJETA,APPROVED,1,0,0,0
+9,"📬 PAQUETE NO RECLAMADO: {{first_name}}, un paquete de tarjeta de crédito con un límite de € 14,200 no se ha reclamado a su nombre.
+
+Está en el centro de clasificación. Reclama la entrega antes de que sea devuelta.",🚚 ENTREGA DE RECLAMACIÓN,APPROVED,1,0,0,0
+10,"📍 LISTO PARA ENVÍO
+
+{{first_name}}, su solicitud de una nueva Tarjeta de Crédito fue exitosa. 
+
+Toca a continuación para elegir tu diseño de tarjeta favorito.",✅ ELEGIR TARJETA,APPROVED,1,0,0,0
+11,"⚡ TARJETA ENVIADA: sin esperas. {{first_name}}, tu Tarjeta de Crédito fue aprobada al instante y ya está en el sistema para su entrega.
+
+Toca para asignar el mensajero y recíbelo hoy.",🚚 ASIGNAR MENSAJERO,REJECTED,0,1,0,0
+12,"📦 ENVÍO PRIORITARIO LISTO: {{first_name}}, según su historial, su tarjeta de 5 estrellas se movió al envío prioritario.
+
+Su paquete está en cola: toque para confirmar antes de que se reasigne el espacio.",🚚 ENVÍO DE RECLAMACIÓN,APPROVED,1,0,0,0
+13,"💳 TARJETA VIRTUAL LISTA
+
+¡Tu Tarjeta de Crédito digital está activa! 
+
+Mientras enviamos el físico, puedes verificar tu límite y comenzar a usarlo.",📱 TARJETA ABIERTA,APPROVED,1,0,0,0
+14,"📨 CONFIRMACIÓN DE TARJETA
+
+{{first_name}}, le enviamos una confirmación de su solicitud de Tarjeta de Crédito. 
+
+¿No lo viste? Toque a continuación para finalizarlo ahora.",🟢 TERMINAR AHORA,APPROVED,1,0,0,0
+15,"✈️ TARJETA INTERNACIONAL — LISTA PARA ENVIAR — {{first_name}}, tu Tarjeta de Crédito Internacional pasó el procesamiento aduanero.
+
+Está en el centro logístico. Confirma tu dirección para liberar el envío.",🌍 LIBERACIÓN DE ENVÍO,APPROVED,1,0,0,0
+16,"🚚 MENSAJERO ASIGNADO
+
+Un mensajero está esperando luz verde para entregarle su Tarjeta de Crédito. 
+
+¿Tu dirección sigue siendo la misma? Confirma aquí:",✅ CONFIRMAR,APPROVED,1,0,0,0
+17,"📦 PAQUETE PARA TI: {{first_name}}
+
+El paquete de su tarjeta de crédito ha sido escaneado y está listo para que el cartero lo recoja. 
+
+Toque para liberar el envío.",🚚 LANZAMIENTO,APPROVED,1,0,0,0
+18,"📍 ACTUALIZACIÓN DE ESTADO: Tu tarjeta está en la oficina de correos local.
+
+Ha estado retenido durante 24 horas esperando confirmación de recogida. Toque para liberarlo antes de que se envíe de vuelta.",🟢 TARJETA DE LIBERACIÓN,APPROVED,1,0,0,0
+19,"📦 ACTUALIZACIÓN DEL PAQUETE: {{first_name}}, el paquete de su Tarjeta de Crédito está sellado y etiquetado.
+
+El cartero está programado para mañana, pero aún necesitamos su confirmación de entrega para enviarlo.",🚚 CONFIRMAR ENTREGA,APPROVED,1,0,0,0
+20,"🏠 ENTREGA A DOMICILIO LISTA — {{first_name}}, su Tarjeta de Crédito está empaquetada y lista para entrega a domicilio.
+
+El proceso está finalizado: solo necesitamos su dirección para enviarle el servicio de mensajería.",📦 ENVIAR A MI DOMICILIO,APPROVED,1,0,0,0
+21,"🔔 (1) ACTUALIZACIÓN DE NUEVA TARJETA
+
+El estado de su tarjeta de crédito ha cambiado a: APROBADO. 
+
+Toque para ver su límite inicial y la fecha de envío.",📥 LEER ESTADO,APPROVED,1,0,0,0
+22,"🔔 (1) ESTADO DE LA TARJETA CAMBIADO: {{first_name}}, su cuenta se actualizó y la tarjeta Platinum ya está lista para su envío.
+
+Necesitamos su código postal para liberar al mensajero.",📦 ENVÍA MI TARJETA,APPROVED,1,0,0,0
+23,"📬 TU TARJETA ESTÁ EN TRÁNSITO — {{first_name}}, la tarjeta cashback asignada a tu perfil ya está en movimiento.
+
+Toque para confirmar la dirección de entrega y evitar la devolución al remitente.",✅ CONFIRMAR DIRECCIÓN,APPROVED,1,0,0,0
+24,"🏦 LANZAMIENTO OFICIAL
+
+RE: Tu tarjeta de crédito. El banco ha liberado oficialmente sus fondos. 
+
+Toca para elegir tu tarjeta y comenzar.",✅ FINALIZAR,REJECTED,0,1,0,0
+25,"📦 LISTO PARA ENVÍO
+
+{{first_name}}, su paquete de Tarjeta de Crédito está listo para ser enviado.
+
+Confirma los detalles para que pueda seguir adelante.",🚚 TARJETA DE ENVÍO,,0,0,0,0
+26,"🔔 ESTADO DE LA TARJETA CAMBIADO
+
+Su solicitud de Tarjeta de Crédito tiene un nuevo estado.
+
+Toque para leer la actualización y ver qué hacer a continuación.",📥 LEER ESTADO,,0,0,0,0
+27,"🔔 ACTUALIZACIÓN DEL ESTADO DE LA TARJETA
+
+{{first_name}}, tu solicitud de tarjeta tiene un nuevo estado listo.
+Abra la actualización para revisar el siguiente paso y mantener el proceso activo.",📥 ACTUALIZACIÓN ABIERTA,,0,0,0,0
+28,"💳 REVISIÓN DE TARJETA LISTO
+
+La revisión de su tarjeta de crédito ya está disponible.
+Verifique los detalles preparados para su perfil y continúe desde la página segura.",💳 TARJETA DE REVISIÓN,,0,0,0,0
+29,"✅ SOLICITUD RECIBIDA
+
+{{first_name}}, su solicitud de Tarjeta de Crédito fue recibida exitosamente.
+Un paso de confirmación está disponible antes de la siguiente revisión.",✅ CONFIRMAR AHORA,,0,0,0,0
+30,"📩 ACTUALIZACIÓN DEL PERFIL
+
+Se agregó una nueva actualización relacionada con la tarjeta a su perfil.
+Ábralo para ver la opción disponible y siga las siguientes instrucciones.",📩 LEER ACTUALIZACIÓN,,0,0,0,0
+31,"🔎 CONSULTAR OPCIONES DE TARJETA
+
+{{first_name}}, las opciones de tu tarjeta están listas para comparar.
+Revisa la selección disponible y elige cómo quieres continuar.",🔎 VER OPCIONES,,0,0,0,0
+32,"🟢 PRÓXIMO PASO ABIERTO
+
+El siguiente paso para tu solicitud de Tarjeta de Crédito está abierto.
+Revise sus datos y continúe mientras la página esté disponible.",🟢 CONTINUAR,,0,0,0,0
+33,"📌 CONFIRMAR DETALLES
+
+{{first_name}}, su solicitud de tarjeta necesita una verificación rápida de los detalles.
+Confirme la información para que la revisión pueda avanzar.",📌 CONFIRMAR DETALLES,,0,0,0,0
+34,"💼 AVISO DE PERFIL DE TARJETA
+
+El perfil de tu tarjeta tiene un nuevo aviso esperando.
+Lea el aviso y complete el paso disponible a continuación.",💼 AVISO ABIERTO,,0,0,0,0
+35,"📋 REVISA TU SOLICITUD
+
+{{first_name}}, su solicitud de tarjeta de crédito está lista para su revisión.
+Abra la página para verificar la información guardada para usted.",📋 SOLICITUD DE REVISIÓN,,0,0,0,0
+36,"🔐 ACCESO SEGURO A TARJETA
+
+Su página de acceso seguro a la tarjeta está lista.
+Ábrelo para revisar el siguiente paso relacionado con tu solicitud.",🔐 ACCESO ABIERTO,,0,0,0,0

@@ -1,0 +1,40 @@
+{
+  "status": "OK",
+  "executed_at_et": "2026-06-30T02:16:21-04:00",
+  "source_tab": "US-CC-ES",
+  "rows": 201,
+  "csv": "/root/mgs-agent/work/meta-utility/us-cc-es-approval-csv-20260630/us-cc-es-all-201-zero-width-2chars-approval.csv",
+  "zip": "/root/mgs-agent/work/meta-utility/us-cc-es-approval-csv-20260630/us-cc-es-all-201-zero-width-2chars-approval.zip",
+  "utf8_bom": true,
+  "crlf": true,
+  "text_zero_width_rows": 201,
+  "cta_zero_width_rows": 0,
+  "placeholders_preserved": 98,
+  "sample": [
+    {
+      "id": "1",
+      "visible_text": "✅ AUTORIZADO: {{first_name}}, estás autorizado a activar tu nueva tarjeta.  |  | No más esperas. Toque para comenzar.",
+      "cta": "🚀 ACTIVAR AHORA"
+    },
+    {
+      "id": "2",
+      "visible_text": "Tengo 1 actualización importante sobre su perfil crediticio.  |  | Es mejor de lo que esperábamos. Compruébalo aquí:",
+      "cta": "📩 ACTUALIZACIÓN ABIERTA"
+    },
+    {
+      "id": "3",
+      "visible_text": "📦 Estado: RETENIDO | Su tarjeta preaprobada está esperando.  | Sólo necesitamos la confirmación de su dirección de entrega.",
+      "cta": "🚚 CONFIRMAR DIRECCIÓN"
+    },
+    {
+      "id": "4",
+      "visible_text": "✅ ENTREGA CONFIRMADA | Tu tarjeta con límite de $15,000 se está preparando para envío | Verifique sus datos para realizar el",
+      "cta": "🚚 ENVIAR MI TARJETA"
+    },
+    {
+      "id": "5",
+      "visible_text": "🏆 {{first_name}}, tu Tarjeta Platinum quedó reservada para el grupo de prioridad del 2%. |  | El paquete está sellado. Sólo ",
+      "cta": "🚚 CONFIRMAR Y ENVIAR"
+    }
+  ]
+}

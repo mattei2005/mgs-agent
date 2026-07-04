@@ -1,0 +1,2053 @@
+{
+  "domains": [
+    "utua.fr",
+    "utua.de",
+    "utua.es",
+    "utua.it",
+    "utua.uk",
+    "utua.at",
+    "utua.pl",
+    "utua.gr",
+    "utua.fi",
+    "utua.lv",
+    "utua.us",
+    "utua.ar",
+    "utua.co",
+    "utua.pe",
+    "utua.id",
+    "utua.ph",
+    "utua.in",
+    "utua.pk",
+    "utua.ae"
+  ],
+  "mapping_rule": "For UTUA network domains, source *-p1 articles are REC references and source *-p2 articles are P1 references.",
+  "domain_count": 19,
+  "total_post_urls": 3647,
+  "total_source_p1_p2_articles": 3639,
+  "total_rec_rows": 1871,
+  "total_rec_with_reference_p1": 1763,
+  "total_rec_without_reference_p1": 108,
+  "total_orphan_source_p2_without_rec": 5,
+  "domain_summaries": [
+    {
+      "domain": "utua.fr",
+      "sitemap_index": "https://utua.fr/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.fr/post-sitemap.xml"
+      ],
+      "post_url_count": 178,
+      "source_p1_p2_article_count": 176,
+      "source_stage_counts": {
+        "UTUA_P1": 89,
+        "UTUA_P2": 87
+      },
+      "rec_rows": 89,
+      "rec_with_reference_p1": 87,
+      "rec_without_reference_p1": 2,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {
+        "REC+P1": 87,
+        "REC_only": 2
+      },
+      "country_counts": {
+        "cc": 49,
+        "emp": 38,
+        "finance": 2
+      },
+      "country_vertical_top": [
+        {
+          "country": "cc",
+          "vertical": "carte",
+          "count": 10
+        },
+        {
+          "country": "cc",
+          "vertical": "visa",
+          "count": 7
+        },
+        {
+          "country": "emp",
+          "vertical": "credit",
+          "count": 6
+        },
+        {
+          "country": "emp",
+          "vertical": "pret",
+          "count": 5
+        },
+        {
+          "country": "cc",
+          "vertical": "cb",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "credit",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "n26",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "shine",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "bnp",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "bourso",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "boursobank",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "hello",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "mastercard",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "monabanq",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "nickel",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "revolut",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "revolut",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "younited",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "bforbasic",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "fortuneo",
+          "count": 1
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:17.279219Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.fr/utua_fr_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.fr/utua_fr_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.fr/utua_fr_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.de",
+      "sitemap_index": "https://utua.de/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.de/post-sitemap1.xml",
+        "https://utua.de/post-sitemap2.xml"
+      ],
+      "post_url_count": 321,
+      "source_p1_p2_article_count": 321,
+      "source_stage_counts": {
+        "UTUA_P1": 163,
+        "UTUA_P2": 158
+      },
+      "rec_rows": 163,
+      "rec_with_reference_p1": 158,
+      "rec_without_reference_p1": 5,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {
+        "REC+P1": 158,
+        "REC_only": 5
+      },
+      "country_counts": {
+        "cc": 84,
+        "de": 1,
+        "emp": 76,
+        "finance": 2
+      },
+      "country_vertical_top": [
+        {
+          "country": "cc",
+          "vertical": "commerzbank",
+          "count": 8
+        },
+        {
+          "country": "cc",
+          "vertical": "barclays",
+          "count": 6
+        },
+        {
+          "country": "cc",
+          "vertical": "sparkasse",
+          "count": 6
+        },
+        {
+          "country": "cc",
+          "vertical": "santander",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "deutsche",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "n26",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "awa7",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "hypovereins",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "postbank",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "vr",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "commerzbank",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "ikanobank",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "postbank",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "targobank",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "1822",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "american",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "bunq",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "deutsche",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "extra",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "instabank",
+          "count": 2
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:19.944280Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.de/utua_de_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.de/utua_de_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.de/utua_de_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.es",
+      "sitemap_index": "https://utua.es/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.es/post-sitemap1.xml",
+        "https://utua.es/post-sitemap2.xml"
+      ],
+      "post_url_count": 366,
+      "source_p1_p2_article_count": 366,
+      "source_stage_counts": {
+        "UTUA_P2": 181,
+        "UTUA_P1": 185
+      },
+      "rec_rows": 185,
+      "rec_with_reference_p1": 180,
+      "rec_without_reference_p1": 5,
+      "orphan_source_p2_without_rec": 1,
+      "reference_pair_status_counts": {
+        "REC+P1": 180,
+        "REC_only": 5
+      },
+      "country_counts": {
+        "cc": 98,
+        "emp": 82,
+        "es": 2,
+        "finance": 2,
+        "mp": 1
+      },
+      "country_vertical_top": [
+        {
+          "country": "cc",
+          "vertical": "tarjeta",
+          "count": 20
+        },
+        {
+          "country": "emp",
+          "vertical": "prestamo",
+          "count": 18
+        },
+        {
+          "country": "cc",
+          "vertical": "bbva",
+          "count": 9
+        },
+        {
+          "country": "cc",
+          "vertical": "deutsche",
+          "count": 7
+        },
+        {
+          "country": "emp",
+          "vertical": "personal",
+          "count": 7
+        },
+        {
+          "country": "emp",
+          "vertical": "deutsche",
+          "count": 6
+        },
+        {
+          "country": "cc",
+          "vertical": "openbank",
+          "count": 5
+        },
+        {
+          "country": "cc",
+          "vertical": "santander",
+          "count": 5
+        },
+        {
+          "country": "cc",
+          "vertical": "abanca",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "bbva",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "caixa",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "american",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "caixa",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "caixabank",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "march",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "n26",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "bankinter",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "caixabank",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "hipoteca",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "santander",
+          "count": 3
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:23.528886Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.es/utua_es_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.es/utua_es_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.es/utua_es_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.it",
+      "sitemap_index": "https://utua.it/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.it/post-sitemap1.xml",
+        "https://utua.it/post-sitemap2.xml"
+      ],
+      "post_url_count": 204,
+      "source_p1_p2_article_count": 204,
+      "source_stage_counts": {
+        "UTUA_P2": 97,
+        "UTUA_P1": 107
+      },
+      "rec_rows": 107,
+      "rec_with_reference_p1": 97,
+      "rec_without_reference_p1": 10,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {
+        "REC+P1": 97,
+        "REC_only": 10
+      },
+      "country_counts": {
+        "cc": 59,
+        "emp": 41,
+        "fi": 1,
+        "finance": 2,
+        "hu": 4
+      },
+      "country_vertical_top": [
+        {
+          "country": "cc",
+          "vertical": "carta",
+          "count": 7
+        },
+        {
+          "country": "cc",
+          "vertical": "unicredit",
+          "count": 6
+        },
+        {
+          "country": "cc",
+          "vertical": "bper",
+          "count": 5
+        },
+        {
+          "country": "cc",
+          "vertical": "deutsche",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "mediolanum",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "mps",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "bpm",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "intesa",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "mediolanum",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "prestiti",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "unicredit",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "banco",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "bnl",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "bper",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "isybank",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "mps",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "prestito",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "american",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "bancocard",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "hype",
+          "count": 2
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:25.932399Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.it/utua_it_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.it/utua_it_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.it/utua_it_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.uk",
+      "sitemap_index": "https://utua.uk/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.uk/post-sitemap.xml"
+      ],
+      "post_url_count": 159,
+      "source_p1_p2_article_count": 158,
+      "source_stage_counts": {
+        "UTUA_P1": 80,
+        "UTUA_P2": 78
+      },
+      "rec_rows": 80,
+      "rec_with_reference_p1": 78,
+      "rec_without_reference_p1": 2,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {
+        "REC+P1": 78,
+        "REC_only": 2
+      },
+      "country_counts": {
+        "cc": 44,
+        "emp": 35,
+        "ins": 1
+      },
+      "country_vertical_top": [
+        {
+          "country": "cc",
+          "vertical": "barclaycard",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "hsbc",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "lloyds",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "revolut",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "amex",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "natwest",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "barclays",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "halifax",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "hsbc",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "santander",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "tesco",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "aqua",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "capital",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "halifax",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "nationwide",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "santander",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "monzo",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "asda",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "chase",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "premier",
+          "count": 1
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:28.429167Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.uk/utua_uk_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.uk/utua_uk_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.uk/utua_uk_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.at",
+      "sitemap_index": "https://utua.at/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.at/post-sitemap.xml"
+      ],
+      "post_url_count": 2,
+      "source_p1_p2_article_count": 2,
+      "source_stage_counts": {
+        "UTUA_P1": 2
+      },
+      "rec_rows": 2,
+      "rec_with_reference_p1": 0,
+      "rec_without_reference_p1": 2,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {
+        "REC_only": 2
+      },
+      "country_counts": {
+        "finance": 2
+      },
+      "country_vertical_top": [
+        {
+          "country": "finance",
+          "vertical": "finanzmarkt",
+          "count": 1
+        },
+        {
+          "country": "finance",
+          "vertical": "inflation",
+          "count": 1
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:29.861625Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.at/utua_at_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.at/utua_at_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.at/utua_at_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.pl",
+      "sitemap_index": "https://utua.pl/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.pl/post-sitemap1.xml",
+        "https://utua.pl/post-sitemap2.xml"
+      ],
+      "post_url_count": 243,
+      "source_p1_p2_article_count": 241,
+      "source_stage_counts": {
+        "UTUA_P2": 94,
+        "UTUA_P1": 147
+      },
+      "rec_rows": 147,
+      "rec_with_reference_p1": 94,
+      "rec_without_reference_p1": 53,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {
+        "REC_only": 53,
+        "REC+P1": 94
+      },
+      "country_counts": {
+        "cc": 59,
+        "emp": 45,
+        "finance": 2,
+        "fr": 38,
+        "no": 2,
+        "se": 1
+      },
+      "country_vertical_top": [
+        {
+          "country": "fr",
+          "vertical": "cc",
+          "count": 38
+        },
+        {
+          "country": "cc",
+          "vertical": "karta",
+          "count": 8
+        },
+        {
+          "country": "cc",
+          "vertical": "santander",
+          "count": 7
+        },
+        {
+          "country": "cc",
+          "vertical": "millennium",
+          "count": 6
+        },
+        {
+          "country": "cc",
+          "vertical": "ing",
+          "count": 5
+        },
+        {
+          "country": "cc",
+          "vertical": "mbank",
+          "count": 5
+        },
+        {
+          "country": "cc",
+          "vertical": "bnp",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "ing",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "kredyt",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "citibank",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "pekao",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "alior",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "pko",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "velo",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "alior",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "pkobp",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "santander",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "velobank",
+          "count": 2
+        },
+        {
+          "country": "no",
+          "vertical": "cc",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "citi",
+          "count": 1
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:32.754595Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.pl/utua_pl_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.pl/utua_pl_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.pl/utua_pl_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.gr",
+      "sitemap_index": "https://utua.gr/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.gr/post-sitemap.xml"
+      ],
+      "post_url_count": 14,
+      "source_p1_p2_article_count": 14,
+      "source_stage_counts": {
+        "UTUA_P1": 7,
+        "UTUA_P2": 7
+      },
+      "rec_rows": 7,
+      "rec_with_reference_p1": 7,
+      "rec_without_reference_p1": 0,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {
+        "REC+P1": 7
+      },
+      "country_counts": {
+        "gr": 7
+      },
+      "country_vertical_top": [
+        {
+          "country": "gr",
+          "vertical": "cc",
+          "count": 7
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:34.511670Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.gr/utua_gr_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.gr/utua_gr_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.gr/utua_gr_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.fi",
+      "sitemap_index": "https://utua.fi/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [],
+      "post_url_count": 0,
+      "source_p1_p2_article_count": 0,
+      "source_stage_counts": {},
+      "rec_rows": 0,
+      "rec_with_reference_p1": 0,
+      "rec_without_reference_p1": 0,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {},
+      "country_counts": {},
+      "country_vertical_top": [],
+      "errors": [
+        "index_fetch_error: HTTPError: HTTP Error 404: Not Found"
+      ],
+      "generated_at": "2026-06-29T06:37:34.616088Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.fi/utua_fi_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.fi/utua_fi_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.fi/utua_fi_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.lv",
+      "sitemap_index": "https://utua.lv/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.lv/post-sitemap1.xml",
+        "https://utua.lv/post-sitemap2.xml",
+        "https://utua.lv/post-sitemap3.xml",
+        "https://utua.lv/post-sitemap4.xml",
+        "https://utua.lv/post-sitemap5.xml",
+        "https://utua.lv/post-sitemap6.xml",
+        "https://utua.lv/post-sitemap7.xml"
+      ],
+      "post_url_count": 1347,
+      "source_p1_p2_article_count": 1346,
+      "source_stage_counts": {
+        "UTUA_P1": 675,
+        "UTUA_P2": 671
+      },
+      "rec_rows": 675,
+      "rec_with_reference_p1": 668,
+      "rec_without_reference_p1": 7,
+      "orphan_source_p2_without_rec": 3,
+      "reference_pair_status_counts": {
+        "REC+P1": 668,
+        "REC_only": 7
+      },
+      "country_counts": {
+        "al": 40,
+        "az": 40,
+        "ba": 40,
+        "bg": 41,
+        "ee": 46,
+        "emp": 1,
+        "ge": 85,
+        "gr": 12,
+        "hr": 40,
+        "kz": 40,
+        "lt": 42,
+        "lv": 52,
+        "rs": 45,
+        "si": 40,
+        "ua": 85,
+        "utua": 1,
+        "uz": 25
+      },
+      "country_vertical_top": [
+        {
+          "country": "ge",
+          "vertical": "cc",
+          "count": 45
+        },
+        {
+          "country": "rs",
+          "vertical": "emp",
+          "count": 45
+        },
+        {
+          "country": "ua",
+          "vertical": "emp",
+          "count": 43
+        },
+        {
+          "country": "lt",
+          "vertical": "emp",
+          "count": 42
+        },
+        {
+          "country": "ua",
+          "vertical": "cc",
+          "count": 42
+        },
+        {
+          "country": "bg",
+          "vertical": "emp",
+          "count": 41
+        },
+        {
+          "country": "ee",
+          "vertical": "emp",
+          "count": 41
+        },
+        {
+          "country": "al",
+          "vertical": "emp",
+          "count": 40
+        },
+        {
+          "country": "az",
+          "vertical": "emp",
+          "count": 40
+        },
+        {
+          "country": "ba",
+          "vertical": "emp",
+          "count": 40
+        },
+        {
+          "country": "ge",
+          "vertical": "emp",
+          "count": 40
+        },
+        {
+          "country": "hr",
+          "vertical": "emp",
+          "count": 40
+        },
+        {
+          "country": "kz",
+          "vertical": "emp",
+          "count": 40
+        },
+        {
+          "country": "si",
+          "vertical": "emp",
+          "count": 40
+        },
+        {
+          "country": "lv",
+          "vertical": "emp",
+          "count": 34
+        },
+        {
+          "country": "uz",
+          "vertical": "emp",
+          "count": 24
+        },
+        {
+          "country": "lv",
+          "vertical": "cc",
+          "count": 18
+        },
+        {
+          "country": "gr",
+          "vertical": "cc",
+          "count": 12
+        },
+        {
+          "country": "ee",
+          "vertical": "cc",
+          "count": 4
+        },
+        {
+          "country": "ee",
+          "vertical": "ru",
+          "count": 1
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:45.618776Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.lv/utua_lv_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.lv/utua_lv_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.lv/utua_lv_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.us",
+      "sitemap_index": "https://utua.us/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [],
+      "post_url_count": 0,
+      "source_p1_p2_article_count": 0,
+      "source_stage_counts": {},
+      "rec_rows": 0,
+      "rec_with_reference_p1": 0,
+      "rec_without_reference_p1": 0,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {},
+      "country_counts": {},
+      "country_vertical_top": [],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:45.692685Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.us/utua_us_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.us/utua_us_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.us/utua_us_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.ar",
+      "sitemap_index": "https://utua.ar/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.ar/post-sitemap.xml"
+      ],
+      "post_url_count": 108,
+      "source_p1_p2_article_count": 108,
+      "source_stage_counts": {
+        "UTUA_P2": 54,
+        "UTUA_P1": 54
+      },
+      "rec_rows": 54,
+      "rec_with_reference_p1": 54,
+      "rec_without_reference_p1": 0,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {
+        "REC+P1": 54
+      },
+      "country_counts": {
+        "cc": 30,
+        "emp": 24
+      },
+      "country_vertical_top": [
+        {
+          "country": "cc",
+          "vertical": "icbc",
+          "count": 5
+        },
+        {
+          "country": "emp",
+          "vertical": "bbva",
+          "count": 5
+        },
+        {
+          "country": "cc",
+          "vertical": "american",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "bbva",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "hsbc",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "visa",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "rioja",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "santander",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "santander",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "prendario",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "bna",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "galicia",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "mastercard",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "powercard",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "prexcard",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "supervielle",
+          "count": 1
+        },
+        {
+          "country": "emp",
+          "vertical": "afluenta",
+          "count": 1
+        },
+        {
+          "country": "emp",
+          "vertical": "banco",
+          "count": 1
+        },
+        {
+          "country": "emp",
+          "vertical": "bna",
+          "count": 1
+        },
+        {
+          "country": "emp",
+          "vertical": "cash",
+          "count": 1
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:48.048688Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.ar/utua_ar_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.ar/utua_ar_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.ar/utua_ar_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.co",
+      "sitemap_index": "https://utua.co/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.co/post-sitemap.xml"
+      ],
+      "post_url_count": 60,
+      "source_p1_p2_article_count": 60,
+      "source_stage_counts": {
+        "UTUA_P2": 30,
+        "UTUA_P1": 30
+      },
+      "rec_rows": 30,
+      "rec_with_reference_p1": 30,
+      "rec_without_reference_p1": 0,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {
+        "REC+P1": 30
+      },
+      "country_counts": {
+        "cc": 30
+      },
+      "country_vertical_top": [
+        {
+          "country": "cc",
+          "vertical": "bbva",
+          "count": 8
+        },
+        {
+          "country": "cc",
+          "vertical": "itau",
+          "count": 6
+        },
+        {
+          "country": "cc",
+          "vertical": "banco",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "scotiabank",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "carulla",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "finandina",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "bancolombia",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "bogota",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "davivenda",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "mastercard",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "pichincha",
+          "count": 1
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:49.826204Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.co/utua_co_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.co/utua_co_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.co/utua_co_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.pe",
+      "sitemap_index": "https://utua.pe/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.pe/post-sitemap.xml"
+      ],
+      "post_url_count": 112,
+      "source_p1_p2_article_count": 112,
+      "source_stage_counts": {
+        "UTUA_P1": 56,
+        "UTUA_P2": 56
+      },
+      "rec_rows": 56,
+      "rec_with_reference_p1": 56,
+      "rec_without_reference_p1": 0,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {
+        "REC+P1": 56
+      },
+      "country_counts": {
+        "cc": 30,
+        "emp": 26
+      },
+      "country_vertical_top": [
+        {
+          "country": "emp",
+          "vertical": "prestamo",
+          "count": 7
+        },
+        {
+          "country": "cc",
+          "vertical": "bbva",
+          "count": 6
+        },
+        {
+          "country": "cc",
+          "vertical": "interbank",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "credito",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "bcp",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "bcp",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "cmr",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "prepago",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "scotiabank",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "visa",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "caja",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "cp",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "scotiabank",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "banbif",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "bancom",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "cencosud",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "crediscotia",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "falabella",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "gnb",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "oh",
+          "count": 1
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:52.849891Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.pe/utua_pe_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.pe/utua_pe_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.pe/utua_pe_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.id",
+      "sitemap_index": "https://utua.id/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.id/post-sitemap1.xml",
+        "https://utua.id/post-sitemap2.xml"
+      ],
+      "post_url_count": 214,
+      "source_p1_p2_article_count": 214,
+      "source_stage_counts": {
+        "UTUA_P2": 102,
+        "UTUA_P1": 112
+      },
+      "rec_rows": 112,
+      "rec_with_reference_p1": 102,
+      "rec_without_reference_p1": 10,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {
+        "REC+P1": 102,
+        "REC_only": 10
+      },
+      "country_counts": {
+        "cc": 33,
+        "cd": 8,
+        "emp": 68,
+        "id": 3
+      },
+      "country_vertical_top": [
+        {
+          "country": "emp",
+          "vertical": "pinjaman",
+          "count": 7
+        },
+        {
+          "country": "emp",
+          "vertical": "digibank",
+          "count": 5
+        },
+        {
+          "country": "cc",
+          "vertical": "kartu",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "mandiri",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "bca",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "hsbc",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "bni",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "kredit",
+          "count": 3
+        },
+        {
+          "country": "id",
+          "vertical": "emp",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "bri",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "cimb",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "hsbc",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "jenius",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "permata",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "bni",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "bri",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "dana",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "dbs",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "gopay",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "kredivo",
+          "count": 2
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:55.800735Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.id/utua_id_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.id/utua_id_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.id/utua_id_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.ph",
+      "sitemap_index": "https://utua.ph/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [],
+      "post_url_count": 0,
+      "source_p1_p2_article_count": 0,
+      "source_stage_counts": {},
+      "rec_rows": 0,
+      "rec_with_reference_p1": 0,
+      "rec_without_reference_p1": 0,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {},
+      "country_counts": {},
+      "country_vertical_top": [],
+      "errors": [
+        "index_fetch_error: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)>"
+      ],
+      "generated_at": "2026-06-29T06:37:55.882659Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.ph/utua_ph_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.ph/utua_ph_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.ph/utua_ph_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.in",
+      "sitemap_index": "https://utua.in/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.in/post-sitemap.xml"
+      ],
+      "post_url_count": 16,
+      "source_p1_p2_article_count": 16,
+      "source_stage_counts": {
+        "UTUA_P2": 5,
+        "UTUA_P1": 11
+      },
+      "rec_rows": 11,
+      "rec_with_reference_p1": 5,
+      "rec_without_reference_p1": 6,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {
+        "REC+P1": 5,
+        "REC_only": 6
+      },
+      "country_counts": {
+        "cc": 6,
+        "ft": 5
+      },
+      "country_vertical_top": [
+        {
+          "country": "cc",
+          "vertical": "axis",
+          "count": 2
+        },
+        {
+          "country": "cc",
+          "vertical": "flipkart",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "icici",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "intermiles",
+          "count": 1
+        },
+        {
+          "country": "cc",
+          "vertical": "kotak",
+          "count": 1
+        },
+        {
+          "country": "ft",
+          "vertical": "credit",
+          "count": 1
+        },
+        {
+          "country": "ft",
+          "vertical": "investor",
+          "count": 1
+        },
+        {
+          "country": "ft",
+          "vertical": "learn",
+          "count": 1
+        },
+        {
+          "country": "ft",
+          "vertical": "loan",
+          "count": 1
+        },
+        {
+          "country": "ft",
+          "vertical": "vidya",
+          "count": 1
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:57.334226Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.in/utua_in_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.in/utua_in_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.in/utua_in_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.pk",
+      "sitemap_index": "https://utua.pk/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.pk/post-sitemap.xml"
+      ],
+      "post_url_count": 73,
+      "source_p1_p2_article_count": 73,
+      "source_stage_counts": {
+        "UTUA_P2": 35,
+        "UTUA_P1": 38
+      },
+      "rec_rows": 38,
+      "rec_with_reference_p1": 35,
+      "rec_without_reference_p1": 3,
+      "orphan_source_p2_without_rec": 0,
+      "reference_pair_status_counts": {
+        "REC+P1": 35,
+        "REC_only": 3
+      },
+      "country_counts": {
+        "cc": 7,
+        "emp": 28,
+        "faysal": 1,
+        "pk": 2
+      },
+      "country_vertical_top": [
+        {
+          "country": "emp",
+          "vertical": "mcb",
+          "count": 5
+        },
+        {
+          "country": "emp",
+          "vertical": "mobilink",
+          "count": 5
+        },
+        {
+          "country": "cc",
+          "vertical": "sc",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "alfalah",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "al",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "allied",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "askari",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "hbl",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "meezan",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "silk",
+          "count": 2
+        },
+        {
+          "country": "emp",
+          "vertical": "advans",
+          "count": 1
+        },
+        {
+          "country": "emp",
+          "vertical": "ask",
+          "count": 1
+        },
+        {
+          "country": "emp",
+          "vertical": "bankalfalah",
+          "count": 1
+        },
+        {
+          "country": "emp",
+          "vertical": "finca",
+          "count": 1
+        },
+        {
+          "country": "emp",
+          "vertical": "habib",
+          "count": 1
+        },
+        {
+          "country": "emp",
+          "vertical": "sc",
+          "count": 1
+        },
+        {
+          "country": "faysal",
+          "vertical": "bank",
+          "count": 1
+        },
+        {
+          "country": "pk",
+          "vertical": "cc",
+          "count": 1
+        },
+        {
+          "country": "pk",
+          "vertical": "emp",
+          "count": 1
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:37:58.756791Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.pk/utua_pk_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.pk/utua_pk_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.pk/utua_pk_rec_p1_map_summary.json"
+      ]
+    },
+    {
+      "domain": "utua.ae",
+      "sitemap_index": "https://utua.ae/sitemap_index.xml",
+      "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+      "post_sitemaps": [
+        "https://utua.ae/post-sitemap1.xml",
+        "https://utua.ae/post-sitemap2.xml"
+      ],
+      "post_url_count": 230,
+      "source_p1_p2_article_count": 228,
+      "source_stage_counts": {
+        "UTUA_P2": 113,
+        "UTUA_P1": 115
+      },
+      "rec_rows": 115,
+      "rec_with_reference_p1": 112,
+      "rec_without_reference_p1": 3,
+      "orphan_source_p2_without_rec": 1,
+      "reference_pair_status_counts": {
+        "REC+P1": 112,
+        "REC_only": 3
+      },
+      "country_counts": {
+        "cc": 56,
+        "emp": 57,
+        "fab": 1,
+        "rakbank": 1
+      },
+      "country_vertical_top": [
+        {
+          "country": "emp",
+          "vertical": "dib",
+          "count": 12
+        },
+        {
+          "country": "cc",
+          "vertical": "nbd",
+          "count": 8
+        },
+        {
+          "country": "emp",
+          "vertical": "mashreq",
+          "count": 8
+        },
+        {
+          "country": "cc",
+          "vertical": "fab",
+          "count": 7
+        },
+        {
+          "country": "emp",
+          "vertical": "adcb",
+          "count": 6
+        },
+        {
+          "country": "cc",
+          "vertical": "citi",
+          "count": 5
+        },
+        {
+          "country": "cc",
+          "vertical": "emirates",
+          "count": 5
+        },
+        {
+          "country": "cc",
+          "vertical": "mashreq",
+          "count": 5
+        },
+        {
+          "country": "emp",
+          "vertical": "adib",
+          "count": 5
+        },
+        {
+          "country": "emp",
+          "vertical": "fab",
+          "count": 5
+        },
+        {
+          "country": "emp",
+          "vertical": "rakbank",
+          "count": 5
+        },
+        {
+          "country": "cc",
+          "vertical": "rakbank",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "emirates",
+          "count": 4
+        },
+        {
+          "country": "emp",
+          "vertical": "hsbc",
+          "count": 4
+        },
+        {
+          "country": "cc",
+          "vertical": "adcb",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "amex",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "bank",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "dib",
+          "count": 3
+        },
+        {
+          "country": "emp",
+          "vertical": "personal",
+          "count": 3
+        },
+        {
+          "country": "cc",
+          "vertical": "go4it",
+          "count": 2
+        }
+      ],
+      "errors": [],
+      "generated_at": "2026-06-29T06:38:00.495768Z",
+      "generated_files": [
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.ae/utua_ae_rec_p1_map.csv",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.ae/utua_ae_rec_p1_map.json",
+        "/root/mgs-agent/data/content-reference-map/utua-network/utua.ae/utua_ae_rec_p1_map_summary.json"
+      ]
+    }
+  ],
+  "generated_files": [
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua_network_rec_p1_map.csv",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua_network_rec_p1_map.json",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua_network_rec_p1_map_summary.json",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua_network_rec_p1_map.xlsx"
+  ],
+  "generated_at": "2026-06-29T06:38:00.540735Z",
+  "xlsx_status": "created_minimal_ooxml",
+  "google_sheet_status": "created_and_uploaded",
+  "google_sheet_url": "https://docs.google.com/spreadsheets/d/1gfLVgIgFU4q8y_wkjSZPwJqO6ZG-zlYyWpf1jO9KZ-I/edit",
+  "google_sheet_id": "1gfLVgIgFU4q8y_wkjSZPwJqO6ZG-zlYyWpf1jO9KZ-I",
+  "google_sheet_tabs": [
+    "summary",
+    "all_rec_p1",
+    "fr",
+    "de",
+    "es",
+    "it",
+    "uk",
+    "at",
+    "pl",
+    "gr",
+    "fi",
+    "lv",
+    "us",
+    "ar",
+    "co",
+    "pe",
+    "id",
+    "ph",
+    "in",
+    "pk",
+    "ae"
+  ]
+}

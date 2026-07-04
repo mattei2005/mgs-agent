@@ -180,6 +180,13 @@ def main() -> int:
     msg = sys.stdin.read()
     if not msg.strip():
         return 0
+    if msg.lstrip().startswith('[REPORT-INFRA]') and not args.thread_id:
+        print(json.dumps({
+            'ok': False,
+            'error': 'report_infra_must_not_create_thread',
+            'detail': 'Use /root/mgs-agent/scripts/ares-report-infra.sh for REPORT-INFRA so alerts-infra receives a plain channel message, not a new thread.',
+        }, ensure_ascii=False), file=sys.stderr)
+        return 8
     load_env()
     token = os.environ.get('DISCORD_BOT_TOKEN')
     if not token:

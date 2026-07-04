@@ -63,13 +63,22 @@ Auditoria local        | Salvar decisão, regra, métrica, status antes/depois e
 
 ## Ao usar 1Password
 
-- Buscar item `Token Meta API` apenas internamente.
+- Buscar o token Meta apenas internamente; para OpenzedFinanzas/ES o item operacional atual pode ser nomeado de forma específica por anunciante, ex.: `Token Meta API - 00 - ANUNCIANTE - Alana Figueiredo - OPENZED SPAIN`, e não apenas o alias genérico `Token Meta API`.
+- Preferir que scripts e configs leiam o item via default central/account config (`ares-meta-common.py`, `token_1password_item`) para evitar drift entre auth-check, cron, fetch e watchdog.
+- Se Rodolfo mover o token para outro item 1Password, atualizar todos os defaults operacionais relevantes e validar com Graph GET real antes de reportar sucesso.
+- Se precisar reportar, usar formato seguro:
+  - `scripts/ares-meta-common.py` (`TOKEN_ITEM_DEFAULT`);
+  - scripts com `TOKEN_ITEM` hardcoded, como cron/expiry alert;
+  - scripts CLI com `--item` default, como auth-check/fetch;
+  - config da conta em `data/ares/meta-ads/accounts/*.json` (`token_1password_item`).
+- Validar sem expor segredo: 1Password item/campo/len, `py_compile`, auth-check Graph HTTP 200, fetch pequeno de campanhas e token-debug/expiry quando aplicável.
+- Registrar audit local e emitir `[REPORT-INFRA]` quando a mudança tocar scripts ou dados persistentes em `/root/mgs-agent`.
 - Se precisar reportar, usar formato seguro:
 
 ```text
 Item 1Password | Status | Campo usado | Len
 ---------------|--------|-------------|----
-Token Meta API | OK     | <campo>     | <número>
+<item seguro>  | OK     | <campo>     | <número>
 ```
 
 Nunca colocar o valor do token na resposta, em arquivo de log, em traceback ou em comando impresso.
@@ -107,3 +116,7 @@ Antes de dizer que uma ação real foi executada:
 4. Enviar resumo no canal de log configurado.
 
 Se qualquer etapa falhar, reportar como parcial/falha, não como sucesso.
+
+### Pitfall: background write com exit code 0 não basta
+
+Quando uma execução Meta em background terminar com `exit code 0`, tratar isso apenas como sinal de que o script completou. Antes do status final ao Rodolfo, abrir o audit gerado e fazer GET vivo para validar o alvo operacional completo: contagem de campanhas, budgets, status/effective_status, start_time, quantidade de adsets/ads e campos críticos como ausência de `bid_amount` quando o pedido era remover bid cap. Se a validação mostrar excesso ou drift, corrigir/cleanup imediatamente dentro do escopo aprovado e registrar audit próprio antes de reportar.

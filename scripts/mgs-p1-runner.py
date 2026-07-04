@@ -340,14 +340,20 @@ def preflight_official_source(official_url: str, card_name: str = "") -> None:
         raise RunnerError(f"Official source URL has no usable product content; ask Raquel/Rodolfo for the correct official link before publishing. url={official_url} reason={source_reason}")
 
 
-def extract_official_data(card_name: str, official_url: str, explicit_benefits: List[str], annual_fee: Optional[str], apr: Optional[str]) -> Dict[str, Any]:
-    status, text, source_fetch_url = fetch_official_source_text(official_url, card_name)
-    has_content, source_reason = official_source_has_content(official_url, text, card_name)
-    if not has_content:
-        raise RunnerError(f"Official source URL has no usable product content; ask Raquel/Rodolfo for the correct official link before publishing. url={official_url} reason={source_reason}")
-    rec = load_rec_helpers()
+def extract_official_data(card_name: str, official_url: str, explicit_benefits: List[str], annual_fee: Optional[str], apr: Optional[str], article_url: str = "") -> Dict[str, Any]:
+    source_for_extraction = article_url or official_url
+    if article_url:
+        rec = load_rec_helpers()
+        status, text = rec.fetch_reference_text(article_url)
+        source_fetch_url = article_url
+    else:
+        status, text, source_fetch_url = fetch_official_source_text(official_url, card_name)
+        has_content, source_reason = official_source_has_content(official_url, text, card_name)
+        if not has_content:
+            raise RunnerError(f"Official source URL has no usable product content; ask Raquel/Rodolfo for the correct official link before publishing. url={official_url} reason={source_reason}")
+        rec = load_rec_helpers()
     try:
-        data = rec.extract_card_data_with_llm(card_name, official_url, text)
+        data = rec.extract_card_data_with_llm(card_name, source_for_extraction, text)
     except Exception as e:
         if not (explicit_benefits and annual_fee and apr):
             raise
@@ -362,7 +368,7 @@ def extract_official_data(card_name: str, official_url: str, explicit_benefits: 
             "tag2": tag2,
             "descriptor": descriptor,
             "extraction_mode": f"explicit_facts_after_short_fetch:{type(e).__name__}",
-            "source_url": official_url,
+            "source_url": source_for_extraction,
         }
     if explicit_benefits:
         data["benefits"] = explicit_benefits[:6]
@@ -371,6 +377,10 @@ def extract_official_data(card_name: str, official_url: str, explicit_benefits: 
     if apr:
         data["apr"] = apr
     data["fetch_status"] = status
+    if article_url:
+        data["reference_article_url"] = article_url
+        data["source_mode"] = "rewrite_from_article"
+        data["card_official_url"] = official_url
     # Product-specific deterministic improvements from official text.
     clean = re.sub(r"\s+", " ", text)
     if re.search(r"25,000\s+Avios", clean, re.I):
@@ -1023,6 +1033,7 @@ def main() -> int:
     ap.add_argument("--rec-url", required=True, help="Existing REC URL to use as source context")
     ap.add_argument("--status", choices=["draft", "publish"], default="draft")
     ap.add_argument("--official-url", default="")
+    ap.add_argument("--article-url", default="", help="Article-base URL used as the normal rewrite_from_article source")
     ap.add_argument("--card", default="")
     ap.add_argument("--annual-fee", default="")
     ap.add_argument("--apr", default="")
@@ -1050,7 +1061,7 @@ def main() -> int:
             site["language"] = requested_language
         lang = effective_lang(site)
         t = ts(); p1_contract = load_p1_template_contract(); timings["contract_load"] = ts() - t; steps.append("p1_contract_loaded")
-        result["policy"] = {"contract_p1": p1_contract["path"], "contract_mode": p1_contract["contract_mode"], "effective_language": lang, "article_generation": "deterministic_python", "llm_runtime": "disabled"}
+        result["policy"] = {"contract_p1": p1_contract["path"], "contract_mode": p1_contract["contract_mode"], "effective_language": lang, "source_mode": "rewrite_from_article" if args.article_url else "official_only_debug", "article_generation": "deterministic_python_from_rewrite_facts", "llm_runtime": "disabled"}
 
         t = ts()
         rec_id_match = re.search(r"[?&]p=(\d+)", args.rec_url)
@@ -1071,8 +1082,14 @@ def main() -> int:
         card_slug = infer_card_slug(args.rec_url, card_name)
         official_url = args.official_url or ""
         if not official_url:
-            raise RunnerError("official URL missing; pass --official-url. Editorial card-cache is disabled for production content")
-        t = ts(); preflight_official_source(official_url, card_name); timings["official_source_preflight"] = ts() - t; steps.append("official_source_preflight_passed")
+            raise RunnerError("final offer URL missing; pass --official-url/--offer-url or let REC+P1 orchestrator extract it from the reference P1")
+        if args.article_url:
+            parsed_offer = urllib.parse.urlparse(official_url)
+            if parsed_offer.scheme not in {"http", "https"} or not parsed_offer.netloc:
+                raise RunnerError(f"invalid final offer URL extracted/provided for P1 CTA: {official_url}")
+            steps.append("final_offer_url_present_from_reference_flow")
+        else:
+            t = ts(); preflight_official_source(official_url, card_name); timings["official_source_preflight"] = ts() - t; steps.append("official_source_preflight_passed")
         card_url = parsed.get("card_url")
         card_id = parsed.get("card_id")
         card_image_source = "rec_lazyblock" if card_url and card_id else "missing_from_rec"
@@ -1092,7 +1109,9 @@ def main() -> int:
         if existing_check.status_code < 400 and not args.dry_run and not args.update_post_id:
             raise RunnerError(f"Target P1 already exists at {target_url}; pass --update-post-id to update instead of creating a duplicate")
 
-        t = ts(); official_data = extract_official_data(card_name, official_url, args.benefit, args.annual_fee or None, args.apr or None); timings["official_facts"] = ts() - t; steps.append("official_facts_extracted")
+        if not args.article_url:
+            raise RunnerError("article-base URL missing for P1 rewrite_from_article mode; pass --article-url from the REC+P1 orchestrator")
+        t = ts(); official_data = extract_official_data(card_name, official_url, args.benefit, args.annual_fee or None, args.apr or None, args.article_url); timings["rewrite_article_facts"] = ts() - t; steps.append("article_base_facts_extracted")
         # Do not preserve REC LazyBlock labels by default; P1 derives fresh labels from current official/request facts.
         for key in ("tag10", "tag2", "descriptor"):
             official_data.pop(key, None)

@@ -1,0 +1,176 @@
+{
+  "validated_at": "2026-07-03T23:02:55",
+  "sheets": {
+    "principal_2026": {
+      "title": "MGS - Receita dos Sites 2026",
+      "target_exists": true,
+      "formula_count": 38048,
+      "formula_error_count": 0,
+      "errors": [],
+      "literal_junho_ref_count": 0,
+      "literal_junho_refs": [],
+      "A3": "7.00",
+      "E1_formula": "=SUM('CAIXA SINTETICO'!I2)",
+      "E1_value": "5.118300",
+      "caixa_I2": "5.118300",
+      "B_blocks": {
+        "'Julho 2026'!B5:B35": {
+          "count": 31,
+          "first": "Wednesday, 1",
+          "last": "Friday, 31",
+          "raw_date_format_ok": true
+        },
+        "'Julho 2026'!B46:B76": {
+          "count": 31,
+          "first": "Wednesday, 1",
+          "last": "Friday, 31",
+          "raw_date_format_ok": true
+        },
+        "'Julho 2026'!B105:B135": {
+          "count": 31,
+          "first": "Wednesday, 1",
+          "last": "Friday, 31",
+          "raw_date_format_ok": true
+        }
+      },
+      "openzed_icaro_header": [
+        [
+          "ICARO - G001-D"
+        ],
+        [
+          "PREENCHER ESSA",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "PREENCHER ESSA"
+        ],
+        [
+          "GROSS_USD_US",
+          "NET_USD_US",
+          "IMPOSTO_US",
+          "GASTOS_US",
+          "LUCRO_LIQUIDO_US",
+          "ROI_GROSS_US",
+          "ROI_NET_US",
+          "GROSS_USD_GB",
+          "NET_USD_GB",
+          "IMPOSTO_GB",
+          "GASTOS_GB",
+          "LUCRO_LIQUIDO_GB",
+          "ROI_GROSS_GB",
+          "ROI_NET_GB",
+          "RECEITA_NET_TOTAL",
+          "IMPOSTO_TOTAL"
+        ],
+        [
+          "Openzed US\nGross",
+          "Openzed US \nNET",
+          "Imposto US",
+          "Gastos US",
+          "LUCRO LIQUIDO",
+          "ROI US\nGROSS",
+          "ROI US\nNET",
+          "Openzed GB\nGross",
+          "Openzed GB \nNET",
+          "Imposto GB",
+          "Gastos GB",
+          "LUCRO LIQUIDO",
+          "ROI GB\nGROSS",
+          "ROI GB\nNET",
+          "Receita Total \nNET",
+          "Imposto"
+        ]
+      ],
+      "openzed_icaro_revenue_input_nonblank": 0,
+      "openzed_icaro_spend_input_nonblank": 0
+    },
+    "kelly": {
+      "title": "Kelly - MGS - Receita dos Sites",
+      "target_exists": true,
+      "formula_count": 37,
+      "formula_error_count": 0,
+      "errors": [],
+      "literal_junho_ref_count": 0,
+      "literal_junho_refs": [],
+      "H1_formula": "=IMPORTRANGE(\"https://docs.google.com/spreadsheets/d/16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak/edit\",\"CAIXA SINTETICO!I2\")",
+      "H1_value": "5.118300",
+      "A21_H21": []
+    },
+    "isliago": {
+      "title": "Isliago - MGS - Receita dos Sites",
+      "target_exists": true,
+      "formula_count": 55,
+      "formula_error_count": 0,
+      "errors": [],
+      "literal_junho_ref_count": 0,
+      "literal_junho_refs": [],
+      "H1_formula": "=IMPORTRANGE(\"https://docs.google.com/spreadsheets/d/16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak/edit\";\"CAIXA SINTETICO!I2\")",
+      "H1_value": "5,118300",
+      "A21_H21": [
+        [
+          "Julho",
+          "Openzed\nGROSS\nUS",
+          "Openzed\nNET\nUS",
+          "Imposto\nUS",
+          "Gastos\nUS",
+          "LUCRO LIQUIDO\nUS",
+          "ROI\nGROSS\nUS",
+          "ROI\nNET\nUS"
+        ]
+      ]
+    },
+    "george": {
+      "title": "George - MGS - Receita dos Sites",
+      "target_exists": true,
+      "formula_count": 49,
+      "formula_error_count": 0,
+      "errors": [],
+      "literal_junho_ref_count": 0,
+      "literal_junho_refs": [],
+      "H1_formula": "=IMPORTRANGE(\"https://docs.google.com/spreadsheets/d/16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak/edit\";\"CAIXA SINTETICO!I2\")",
+      "H1_value": "5,118300",
+      "A21_H21": [
+        [
+          "2026"
+        ]
+      ]
+    },
+    "nicolas": {
+      "title": "Nicolas - MGS - Receita dos Sites",
+      "target_exists": true,
+      "formula_count": 49,
+      "formula_error_count": 0,
+      "errors": [],
+      "literal_junho_ref_count": 0,
+      "literal_junho_refs": [],
+      "H1_formula": "=IMPORTRANGE(\"https://docs.google.com/spreadsheets/d/16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak/edit\";\"CAIXA SINTETICO!I2\")",
+      "H1_value": "5,118300",
+      "A21_H21": [
+        [
+          "2026"
+        ]
+      ]
+    },
+    "joe": {
+      "title": "Joe - MGS - Receita dos Sites",
+      "target_exists": true,
+      "formula_count": 34,
+      "formula_error_count": 0,
+      "errors": [],
+      "literal_junho_ref_count": 0,
+      "literal_junho_refs": [],
+      "H1_formula": "=IMPORTRANGE(\"https://docs.google.com/spreadsheets/d/16umGPmLukDGQtCEBh2inYLnE9xcqWbHa3gJCM9HG9ak/edit\";\"CAIXA SINTETICO!I2\")",
+      "H1_value": "5,118300",
+      "A21_H21": [
+        [
+          "2026"
+        ]
+      ]
+    }
+  },
+  "overall_ok": true,
+  "issues": []
+}

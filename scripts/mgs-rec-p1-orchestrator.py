@@ -9,6 +9,7 @@ This orchestrator does not generate article prose and does not consult editorial
 from __future__ import annotations
 
 import argparse
+import html as html_lib
 import json
 import re
 import subprocess
@@ -17,7 +18,7 @@ import time
 import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 ROOT = Path("/root/mgs-agent")
 REC_RUNNER = ROOT / "scripts/mgs-rec-runner.py"
@@ -55,6 +56,85 @@ def okish(data: Dict[str, Any]) -> bool:
 def site_domain_from_url(url: str) -> str:
     parsed = urlparse(url)
     return parsed.netloc
+
+
+def fetch_html(url: str) -> str:
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 MGS-Orchestrator/1.0"})
+    with urllib.request.urlopen(req, timeout=25) as resp:
+        return resp.read(600000).decode(errors="ignore")
+
+
+def extract_links(html: str, base_url: str) -> List[Dict[str, str]]:
+    links: List[Dict[str, str]] = []
+    for m in re.finditer(r"<a\b[^>]*href=[\"']([^\"']+)[\"'][^>]*>(.*?)</a>", html, flags=re.I | re.S):
+        href = html_lib.unescape(m.group(1).strip())
+        if not href or href.startswith(("#", "mailto:", "tel:", "javascript:")):
+            continue
+        text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", m.group(2))).strip()
+        links.append({"url": urljoin(base_url, href), "text": html_lib.unescape(text)})
+    return links
+
+
+def discover_reference_p1_url(reference_rec_url: str, rec_html: str) -> str:
+    base = urlparse(reference_rec_url)
+    base_host = base.netloc.lower()
+    current_path = base.path.rstrip("/")
+    candidates: List[tuple[int, str, str]] = []
+    for link in extract_links(rec_html, reference_rec_url):
+        parsed = urlparse(link["url"])
+        if parsed.scheme not in {"http", "https"} or parsed.netloc.lower() != base_host:
+            continue
+        path = parsed.path.rstrip("/")
+        if not path or path == current_path:
+            continue
+        hay = (path + " " + link.get("text", "")).lower()
+        score = 0
+        for token in ("apply", "how-to-apply", "solicitar", "p1", "continue", "learn-more", "more", "offer"):
+            if token in hay:
+                score += 2
+        if "rec" in hay:
+            score -= 1
+        if score > 0:
+            candidates.append((score, link["url"], link.get("text", "")))
+    if not candidates:
+        raise OrchestratorError("reference_p1_discovery_failed: REC reference has no clear internal P1/apply link; ask for the P1 reference URL or final offer URL")
+    candidates.sort(key=lambda x: x[0], reverse=True)
+    return candidates[0][1]
+
+
+def discover_final_offer_url(reference_p1_url: str, p1_html: str) -> str:
+    p1_host = urlparse(reference_p1_url).netloc.lower()
+    candidates: List[tuple[int, str, str]] = []
+    for link in extract_links(p1_html, reference_p1_url):
+        parsed = urlparse(link["url"])
+        if parsed.scheme not in {"http", "https"}:
+            continue
+        hay = (parsed.netloc + " " + parsed.path + " " + link.get("text", "")).lower()
+        if parsed.netloc.lower() == p1_host:
+            continue
+        if any(bad in hay for bad in ("facebook", "twitter", "instagram", "linkedin", "pinterest", "whatsapp", "mailto", "privacy", "terms")):
+            continue
+        score = 1
+        for token in ("apply", "solicitar", "request", "get", "offer", "card", "credit", "bank", "issuer", "redirect"):
+            if token in hay:
+                score += 2
+        candidates.append((score, link["url"], link.get("text", "")))
+    if not candidates:
+        raise OrchestratorError("final_offer_discovery_failed: reference P1 has no clear external CTA/offer link; ask for the final offer URL")
+    candidates.sort(key=lambda x: x[0], reverse=True)
+    return candidates[0][1]
+
+
+def discover_reference_chain(reference_rec_url: str) -> Dict[str, str]:
+    rec_html = fetch_html(reference_rec_url)
+    reference_p1_url = discover_reference_p1_url(reference_rec_url, rec_html)
+    p1_html = fetch_html(reference_p1_url)
+    final_offer_url = discover_final_offer_url(reference_p1_url, p1_html)
+    return {
+        "reference_rec_url": reference_rec_url,
+        "reference_p1_url": reference_p1_url,
+        "final_offer_url": final_offer_url,
+    }
 
 
 def rec_handoff_url(rec: Dict[str, Any]) -> str:
@@ -121,6 +201,7 @@ def build_rec_cmd(args: argparse.Namespace) -> List[str]:
         "--card", args.card,
         "--status", args.status,
         "--source-url", args.official_url,
+        "--article-url", args.reference_rec_url or args.article_url,
     ]
     if args.lang:
         cmd += ["--lang", args.lang]
@@ -150,6 +231,7 @@ def build_p1_cmd(args: argparse.Namespace, rec_url: str) -> List[str]:
         "--rec-url", rec_url,
         "--status", args.status,
         "--official-url", args.official_url,
+        "--article-url", args.reference_p1_url or args.article_url,
         "--card", args.card,
     ]
     if args.lang:
@@ -226,9 +308,12 @@ def validate_contract_preflight(args: argparse.Namespace) -> List[str]:
         raise OrchestratorError(f"Missing active REC editorial contract: {CONTRACT_REC}")
     if not CONTRACT_P1.exists():
         raise OrchestratorError(f"Missing active P1 editorial contract: {CONTRACT_P1}")
+    if not (args.reference_rec_url or args.article_url):
+        raise OrchestratorError("--reference-rec-url is required for normal REC+P1 production. Atena reads the reference REC, discovers its P1, and extracts the final offer CTA. Legacy --article-url remains only for direct/debug rewrite input.")
     if not args.official_url:
-        raise OrchestratorError("--official-url is required; editorial card-cache is disabled for REC+P1 production")
-    official_product_preflight(args.card, args.official_url)
+        raise OrchestratorError("final offer URL missing: provide --official-url/--offer-url explicitly or pass --reference-rec-url so the orchestrator can extract it from the reference P1")
+    if not args.reference_rec_url:
+        official_product_preflight(args.card, args.official_url)
     if args.status == "publish" and not args.card_image_url:
         raise OrchestratorError(
             "--card-image-url is required for publish. If the image is missing/invalid, stop and ask Raquel/Rodolfo for a correct card image; automatic image fallback is disabled for production."
@@ -242,7 +327,10 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Coordinate REC+P1 as one operation with separate runners")
     ap.add_argument("--site", required=True)
     ap.add_argument("--card", required=True)
-    ap.add_argument("--official-url", required=True, help="Current official issuer/product URL. Required; no editorial cache fallback.")
+    ap.add_argument("--reference-rec-url", default="", help="Normal input: REC reference URL. The orchestrator discovers the linked reference P1 and extracts its final offer CTA.")
+    ap.add_argument("--reference-p1-url", default="", help="Optional override when the reference P1 cannot be discovered from the REC reference.")
+    ap.add_argument("--official-url", "--offer-url", dest="official_url", default="", help="Optional override for the final P1 CTA/offer URL. Normally extracted from the reference P1.")
+    ap.add_argument("--article-url", default="", help="Legacy/debug direct article-base URL. Normal production should use --reference-rec-url.")
     ap.add_argument("--status", choices=["draft", "publish"], default="draft")
     ap.add_argument("--card-image-url", default="")
     ap.add_argument("--annual-fee", default="")
@@ -279,6 +367,27 @@ def main() -> int:
     try:
         if args.lang and not args.allow_language_override:
             raise OrchestratorError("--lang is debug-only. Use site.language for production, or pass --allow-language-override for dry-run/draft debugging.")
+        if args.reference_rec_url:
+            t = time.time()
+            if args.reference_p1_url:
+                p1_html = fetch_html(args.reference_p1_url)
+                if not args.official_url:
+                    args.official_url = discover_final_offer_url(args.reference_p1_url, p1_html)
+                reference_chain = {
+                    "reference_rec_url": args.reference_rec_url,
+                    "reference_p1_url": args.reference_p1_url,
+                    "final_offer_url": args.official_url,
+                    "p1_override": True,
+                }
+            else:
+                reference_chain = discover_reference_chain(args.reference_rec_url)
+                args.reference_p1_url = reference_chain["reference_p1_url"]
+                if not args.official_url:
+                    args.official_url = reference_chain["final_offer_url"]
+            timings["reference_chain_discovery_sec"] = round(time.time() - t, 3)
+            steps.append("reference_chain_discovered")
+            result["reference_chain"] = reference_chain
+            result["official_url"] = args.official_url
         warnings.extend(validate_contract_preflight(args))
         steps.append("contract_preflight_passed")
 

@@ -1,0 +1,57 @@
+{
+  "status": "OK",
+  "executed_at_et": "2026-06-30T03:21:01-04:00",
+  "sheet_url": "https://docs.google.com/spreadsheets/d/1ieSjYbhl34T0tWOvvol3F2lhvCoVTWHm9_YnUkoVhtM/edit",
+  "source_tab": "US-CC-ES",
+  "target_tab": "ES-CC-ES",
+  "rows_written": 201,
+  "readback_rows": 201,
+  "columns": [
+    "MESSAGE ID",
+    "TEXT",
+    "DESCRIPTION",
+    "IMAGE",
+    "CTA 1",
+    "LINK 1",
+    "CTA 2",
+    "LINK 2",
+    "TEXT 2"
+  ],
+  "dollar_symbols_replaced": 2,
+  "euro_symbols_after": 2,
+  "text_zero_width_rows": 201,
+  "links_preserved_from_source": true,
+  "backup_previous_target": "/root/mgs-agent/work/meta-utility/es-cc-es-translation-20260630/es-cc-es-before-write-20260630-032058.json",
+  "sample": [
+    {
+      "id": "1",
+      "visible_text": "✅ AUTORIZADO: {{first_name}}, estás autorizado a activar tu nueva tarjeta.  |  | No más esperas. Toque para comenzar.",
+      "cta": "🚀 ACTIVAR AHORA",
+      "link": "https://newsoun.com/ns-us-cc-en-mct-001/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+    },
+    {
+      "id": "2",
+      "visible_text": "Tengo 1 actualización importante sobre su perfil crediticio.  |  | Es mejor de lo que esperábamos. Compruébalo aquí:",
+      "cta": "📩 ACTUALIZACIÓN ABIERTA",
+      "link": "https://newsoun.com/ns-us-cc-en-mct-001-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+    },
+    {
+      "id": "3",
+      "visible_text": "📦 Estado: RETENIDO | Su tarjeta preaprobada está esperando.  | Sólo necesitamos la confirmación de su dirección de entrega.",
+      "cta": "🚚 CONFIRMAR DIRECCIÓN",
+      "link": "https://newsoun.com/ns-us-cc-en-mct-002/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+    },
+    {
+      "id": "4",
+      "visible_text": "✅ ENTREGA CONFIRMADA | Tu tarjeta con límite de €15,000 se está preparando para envío | Verifique sus datos para realizar el envío.",
+      "cta": "🚚 ENVIAR MI TARJETA",
+      "link": "https://newsoun.com/ns-us-cc-en-mct-002-2/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+    },
+    {
+      "id": "5",
+      "visible_text": "🏆 {{first_name}}, tu Tarjeta Platinum quedó reservada para el grupo de prioridad del 2%. |  | El paquete está sellado. Sólo necesitamos la confi",
+      "cta": "🚚 CONFIRMAR Y ENVIAR",
+      "link": "https://newsoun.com/ns-us-cc-en-mct-003/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+    }
+  ]
+}

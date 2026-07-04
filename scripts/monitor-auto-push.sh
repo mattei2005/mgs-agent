@@ -24,6 +24,7 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_DIR="$(dirname "$SCRIPT_DIR")"
 PUSH_LOG="${BASE_DIR}/logs/auto-push.log"
+AUTO_COMMIT_LOG="${BASE_DIR}/logs/auto-commit-watcher.log"
 STATE_FILE="${BASE_DIR}/data/auto-push-monitor.json"
 WINDOW_MINUTES="${WINDOW_MINUTES:-60}"
 THRESHOLD="${THRESHOLD:-3}"
@@ -175,6 +176,22 @@ fi
 DIRTY_COUNT="$(git -C "$BASE_DIR" status --porcelain=v1 2>/dev/null | wc -l | tr -d ' ')"
 if [[ "${DIRTY_COUNT:-0}" != "0" ]]; then
     log "INFO: working tree tem ${DIRTY_COUNT} mudança(s) local(is); não conta como falha porque auto-commit pode estar em debounce/guardrail"
+fi
+
+# Se o auto-commit watcher estiver abortando por guardrail, o auto-push nunca
+# chega a iniciar. Isso precisa alertar como falha operacional, não ficar só em
+# log local com working tree sujo.
+if [[ -f "$AUTO_COMMIT_LOG" ]]; then
+    while IFS= read -r line; do
+        ts="$(echo "$line" | grep -oP '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}' || true)"
+        [[ -n "$ts" ]] || continue
+        line_epoch="$(date -d "$ts" +%s 2>/dev/null || true)"
+        [[ -n "$line_epoch" ]] || continue
+        if (( line_epoch >= CUTOFF_EPOCH )) && echo "$line" | grep -q "BLOQUEADO: arquivo sensível detectado"; then
+            REPO_FAILURES+=("auto-commit bloqueado por guardrail sensível [commit/push não iniciou]")
+            break
+        fi
+    done < <(tail -300 "$AUTO_COMMIT_LOG" 2>/dev/null || true)
 fi
 
 # ─── Contabilizar falhas ──────────────────────────────────────────────────────

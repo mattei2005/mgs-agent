@@ -1,0 +1,261 @@
+Monitor Meta App Rate Limit — Explicação para replicar
+=======================================================
+
+Montamos um monitor operacional para apps do Meta/Facebook Developers usados em Messenger/ChatPion/DigitalTrChat.
+
+Objetivo
+--------
+- monitorar se o app está acessível
+- detectar rate limit pelo Graph API
+- detectar token expirado/permissões removidas
+- detectar se algum admin/segurador saiu da lista de roles do app
+- alertar no Discord só quando houver problema/mudança
+
+Estrutura
+---------
+- Temos 10 apps: B001 até B010
+- Cada app tem seguradores/perfis adicionados como admins no app
+- O app B007 ficou dedicado ao Openzed
+- O alerta vai para um canal Discord separado: #app-rate-limit
+
+1. Token no Meta Developers
+---------------------------
+Para cada app, gerar token pelo Graph API Explorer:
+
+- Entrar em: https://developers.facebook.com/tools/explorer/
+- Selecionar o app, exemplo B007
+- Selecionar token de usuário/admin
+- Adicionar permissões:
+  - pages_show_list
+  - pages_read_engagement
+  - business_management
+  - public_profile
+- Clicar em Generate Access Token
+
+Depois testar:
+
+- GET /me
+- GET /app
+- GET /{APP_ID}?fields=id,name
+
+2. Salvar no 1Password
+----------------------
+Criamos um item por app.
+
+Padrão do item:
+
+BOT B007 Token
+
+Campos:
+
+app_id
+app_name
+access_token
+expires_at
+app_secret
+notes
+
+Exemplo:
+
+app_name: B007
+notes: openzed e sub dominios
+
+Importante:
+- nunca mandar token no Discord
+- nunca mandar print mostrando token
+- app_secret fica salvo no 1Password também
+- o agente lê internamente pelo 1Password CLI
+
+3. Validar o token
+------------------
+O agente valida:
+
+/me
+/{app_id}?fields=id,name
+/debug_token
+
+E checa:
+
+- token válido
+- scopes/permissões
+- expiração
+- app correto
+- headers X-App-Usage
+
+No nosso teste com B007 retornou:
+
+/me: OK
+/{app_id}: OK — B007
+/debug_token: OK
+X-App-Usage: presente
+
+4. Rate limit do app
+--------------------
+O Graph API retorna headers:
+
+X-App-Usage
+X-Page-Usage
+X-Business-Use-Case-Usage
+
+O principal para o app é:
+
+X-App-Usage
+
+Ele vem com:
+
+call_count
+total_cputime
+total_time
+
+Critérios de alerta:
+
+<70%      OK
+70–84%    atenção
+85–94%    risco
+95%+      crítico
+
+5. Detectar app/token quebrado
+------------------------------
+O monitor também detecta:
+
+- token expirado
+- token inválido
+- app inacessível
+- permissões removidas
+- app removido/desativado
+- Graph API erro
+
+Se isso acontecer, alerta no Discord.
+
+6. Detectar segurador/admin que sumiu do app
+--------------------------------------------
+Esse foi o ponto mais importante.
+
+Com app_id|app_secret, o agente consulta:
+
+GET /{app_id}/roles?limit=100
+
+Esse endpoint retorna os usuários que estão como roles/admins do app.
+
+Depois o agente resolve o nome de cada ID:
+
+GET /{USER_ID}?fields=id,name
+
+Exemplo no B007, baseline atual:
+
+Alex Silva Araujo
+Ameenah Abdullahi
+An Na
+Bẹp Lan
+พรชนิตว์ ฑีฆะวัฒน์
+
+O monitor salva esse snapshot.
+
+A cada execução, compara:
+
+- admins anteriores
+- admins atuais
+- adicionados
+- removidos
+
+Se alguém sair da lista, alerta crítico.
+
+Isso ajuda porque, quando uma conta developer/segurador é bloqueada ou removida, ela pode sumir da lista de admins do app.
+
+7. Cron silencioso
+------------------
+Criamos um cron a cada 5 minutos.
+
+Regra:
+
+se nada mudou: silêncio total
+se alguém saiu: alerta crítico
+se alguém entrou: alerta informativo
+se falhar duas vezes seguidas: alerta
+
+Não usamos entrega normal do cron no Discord porque fica feio, com wrapper tipo:
+
+Cronjob Response
+job_id
+To stop/manage...
+
+Em vez disso, o cron roda local/silencioso e o script posta direto num webhook do Discord.
+
+8. Webhook Discord
+------------------
+Criamos um webhook no canal #app-rate-limit.
+
+Item no 1Password:
+
+Discord Webhook - app-rate-limit
+
+Campo:
+
+webhook_url
+
+O script usa esse webhook para mandar alerta limpo no Discord, sem wrapper do cron.
+
+9. Formato do alerta
+--------------------
+O formato aprovado foi via Discord embed, não tabela de texto crua.
+
+Exemplo de alerta:
+
+Meta App Roles — B007
+
+Estado: CRÍTICO
+Motivo: admin/segurador removido do app
+
+Removidos:
+- Nome X — administrators
+
+Admins atuais:
+- Nome A — administrators
+- Nome B — administrators
+
+Ação sugerida:
+verificar se a conta developer/segurador foi bloqueada ou removida do app
+
+10. Arquivos/scripts criados
+----------------------------
+No nosso caso:
+
+/root/.hermes/scripts/meta-app-roles-watch.sh
+/root/mgs-agent/data/meta-app-role-monitor-state.json
+
+Cron:
+
+meta-app-roles-watch
+every 5m
+silent/local
+
+Skill/procedimento salvo:
+
+meta-app-rate-limit-monitor
+
+11. O que esse monitor não faz
+------------------------------
+Ele não puxa mensagens reais por segurador.
+
+Para envios reais ainda usamos fonte operacional:
+
+SB
+DigitalTrChat
+ChatPion
+
+O monitor de app detecta:
+
+- app saudável
+- rate limit
+- token/permissão
+- roles/admins que sumiram ou entraram
+
+Para envios/leads/delivery, precisa cruzar com dados do sistema de disparo.
+
+Resumo final
+------------
+Token user/admin          -> saúde do app + X-App-Usage
+app_id|app_secret         -> lista de admins/seguradores via /roles
+snapshot salvo            -> detecta quem saiu/entrou
+cron 5 min silencioso     -> só alerta se mudou
+webhook Discord           -> alerta limpo no canal #app-rate-limit

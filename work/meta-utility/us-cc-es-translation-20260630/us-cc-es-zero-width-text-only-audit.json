@@ -1,0 +1,48 @@
+{
+  "status": "OK",
+  "executed_at_et": "2026-06-30T02:01:00-04:00",
+  "sheet_url": "https://docs.google.com/spreadsheets/d/1ieSjYbhl34T0tWOvvol3F2lhvCoVTWHm9_YnUkoVhtM/edit",
+  "tab": "US-CC-ES",
+  "rows": 201,
+  "readback_rows": 201,
+  "changed_text_rows": 201,
+  "cta_changed_rows": 0,
+  "zero_width_char": "U+200B",
+  "zero_width_total_in_text": 18681,
+  "rule": "one U+200B between adjacent alphabetic characters in TEXT only; placeholders preserved; CTA/link untouched",
+  "backup": "/root/mgs-agent/work/meta-utility/us-cc-es-translation-20260630/us-cc-es-before-zero-width-20260630-020059.json",
+  "before_samples": [
+    {
+      "row": 2,
+      "text": "✅ AUTORIZADO: {{first_name}}, estás autorizado a activar tu nueva tarjeta. \n\nNo más esperas. Toque para comenzar.",
+      "cta": "🚀 ACTIVAR AHORA"
+    },
+    {
+      "row": 3,
+      "text": "Tengo 1 actualización importante sobre su perfil crediticio. \n\nEs mejor de lo que esperábamos. Compruébalo aquí:",
+      "cta": "📩 ACTUALIZACIÓN ABIERTA"
+    },
+    {
+      "row": 4,
+      "text": "📦 Estado: RETENIDO\nSu tarjeta preaprobada está esperando. \nSólo necesitamos la confirmación de su dirección de entrega.",
+      "cta": "🚚 CONFIRMAR DIRECCIÓN"
+    }
+  ],
+  "after_samples": [
+    {
+      "row": 2,
+      "text": "✅ A​U​T​O​R​I​Z​A​D​O: {{first_name}}, e​s​t​á​s a​u​t​o​r​i​z​a​d​o a a​c​t​i​v​a​r t​u n​u​e​v​a t​a​r​j​e​t​a. \n\nN​o m​á​s e​s​p​e​r​a​s. T​o​q​u​e p​a​r​a c​o​m​e​n​z​a​r.",
+      "cta": "🚀 ACTIVAR AHORA"
+    },
+    {
+      "row": 3,
+      "text": "T​e​n​g​o 1 a​c​t​u​a​l​i​z​a​c​i​ó​n i​m​p​o​r​t​a​n​t​e s​o​b​r​e s​u p​e​r​f​i​l c​r​e​d​i​t​i​c​i​o. \n\nE​s m​e​j​o​r d​e l​o q​u​e e​s​p​e​r​á​b​a​m​o​s. C​o​m​p​r​u​é​b​a​l​o a​q​u​í:",
+      "cta": "📩 ACTUALIZACIÓN ABIERTA"
+    },
+    {
+      "row": 4,
+      "text": "📦 E​s​t​a​d​o: R​E​T​E​N​I​D​O\nS​u t​a​r​j​e​t​a p​r​e​a​p​r​o​b​a​d​a e​s​t​á e​s​p​e​r​a​n​d​o. \nS​ó​l​o n​e​c​e​s​i​t​a​m​o​s l​a c​o​n​f​i​r​m​a​c​i​ó​n d​e s​u d​i​r​e​c​c​i​ó​n d​e e​n​t​r​e​g​a.",
+      "cta": "🚚 CONFIRMAR DIRECCIÓN"
+    }
+  ]
+}

@@ -9,6 +9,10 @@ STATE_FILE="${BASE_DIR}/data/honcho-health-state.json"
 LOG_PREFIX="monitor-honcho-health"
 CHANNEL_ID="1498132022634483894" # alerts-infra
 WINDOW_ANTI_SPAM_HOURS="${WINDOW_ANTI_SPAM_HOURS:-6}"
+HONCHO_ALERT_THRESHOLD="${HONCHO_ALERT_THRESHOLD:-2}"
+# Debounced Discord alerts: first critical failure only updates state/log;
+# a push is sent only if the next 15-min cron still sees Honcho critically unavailable.
+HONCHO_DISCORD_ALERTS="${HONCHO_DISCORD_ALERTS:-1}"
 DRY_RUN="${DRY_RUN:-0}"
 AGENTS=(zeus atena ares hera)
 
@@ -27,13 +31,15 @@ if [[ ! -f "$STATE_FILE" ]]; then
 {
   "_meta": {
     "description": "Estado do monitor Honcho MGS. Monitora mgs-memory-copilot para Zeus/Atena/Ares/Hera.",
-    "threshold": "alert on first non-ok status",
+    "threshold": "alert after 2 consecutive non-ok checks by default",
     "anti_spam_hours": 6
   },
   "last_check": null,
   "last_status": "unknown",
   "last_alert_sent": null,
   "last_failure_details": [],
+  "consecutive_failures": 0,
+  "alert_active": false,
   "last_ok_at": null
 }
 JSON
@@ -44,12 +50,12 @@ NOW_EPOCH="$(date +%s)"
 TMP_RESULTS="$(mktemp)"
 trap 'rm -f "$TMP_RESULTS" "$TMP_RESULTS.payload" "$TMP_RESULTS.bot"' EXIT
 
-log "START agents=${AGENTS[*]} dry_run=${DRY_RUN}"
+log "START agents=${AGENTS[*]} dry_run=${DRY_RUN} threshold=${HONCHO_ALERT_THRESHOLD}"
 
 # Run health checks. The wrapper itself pulls the Honcho key from 1Password and never prints it.
 for agent in "${AGENTS[@]}"; do
   set +e
-  output="$(MGS_MEMORY_COPILOT_TIMEOUT_SECONDS=45 "${BASE_DIR}/scripts/mgs-memory-copilot" \
+  output="$(MGS_MEMORY_COPILOT_TIMEOUT_SECONDS="${HONCHO_COPILOT_TIMEOUT_SECONDS:-90}" "${BASE_DIR}/scripts/mgs-memory-copilot" \
     --agent "$agent" \
     --json \
     --question "monitor health check: validate Honcho copilot reachability" \
@@ -103,6 +109,21 @@ import json, sys
 print(len(json.loads(sys.argv[1])))
 PY
 )"
+ACTUAL_FAIL_COUNT="$FAIL_COUNT"
+FAIL_COUNT="$(python3 - <<'PY' "$FAILURES_JSON" "${#AGENTS[@]}"
+import json, sys
+fail=json.loads(sys.argv[1]); total=int(sys.argv[2])
+critical = bool(fail) and (
+    len(fail) >= total
+    or any(r.get('status') == 'cold_storage' for r in fail)
+    or any(r.get('action_required') == 'manual_resume_app_honcho_dev' for r in fail)
+)
+print(len(fail) if critical else 0)
+PY
+)"
+if (( ACTUAL_FAIL_COUNT > 0 && FAIL_COUNT == 0 )); then
+  log "PARTIAL_FAIL suppressed actual_failures=${ACTUAL_FAIL_COUNT}/${#AGENTS[@]} reason=not_full_outage_not_cold_storage"
+fi
 PREV_STATUS="$(python3 - <<'PY' "$STATE_FILE"
 import json, sys
 try: print(json.load(open(sys.argv[1])).get('last_status','unknown'))
@@ -113,6 +134,18 @@ LAST_ALERT="$(python3 - <<'PY' "$STATE_FILE"
 import json, sys
 try: print(json.load(open(sys.argv[1])).get('last_alert_sent') or 'null')
 except Exception: print('null')
+PY
+)"
+CONSECUTIVE_FAILURES="$(python3 - <<'PY' "$STATE_FILE"
+import json, sys
+try: print(int(json.load(open(sys.argv[1])).get('consecutive_failures') or 0))
+except Exception: print(0)
+PY
+)"
+ALERT_ACTIVE="$(python3 - <<'PY' "$STATE_FILE"
+import json, sys
+try: print('true' if json.load(open(sys.argv[1])).get('alert_active') else 'false')
+except Exception: print('false')
 PY
 )"
 
@@ -147,15 +180,28 @@ PY
 }
 
 if (( FAIL_COUNT > 0 )); then
-  log "FAIL status_count=${FAIL_COUNT} prev=${PREV_STATUS}"
+  NEW_CONSECUTIVE_FAILURES=$(( CONSECUTIVE_FAILURES + 1 ))
+  log "FAIL status_count=${FAIL_COUNT} prev=${PREV_STATUS} consecutive=${NEW_CONSECUTIVE_FAILURES}/${HONCHO_ALERT_THRESHOLD} alert_active=${ALERT_ACTIVE}"
   SEND_ALERT=0
-  if [[ "$LAST_ALERT" == "null" || -z "$LAST_ALERT" ]]; then
-    SEND_ALERT=1
-  else
-    LAST_ALERT_EPOCH="$(date -d "$LAST_ALERT" +%s 2>/dev/null || echo 0)"
-    if (( NOW_EPOCH - LAST_ALERT_EPOCH > WINDOW_ANTI_SPAM_HOURS * 3600 )); then
-      SEND_ALERT=1
+  NEW_ALERT_ACTIVE="$ALERT_ACTIVE"
+  if (( NEW_CONSECUTIVE_FAILURES >= HONCHO_ALERT_THRESHOLD )); then
+    if [[ "$HONCHO_DISCORD_ALERTS" != "1" ]]; then
+      NEW_ALERT_ACTIVE="false"
+      SEND_ALERT=0
+      log "discord alert disabled for Honcho monitor; keeping log/state only"
+    else
+      NEW_ALERT_ACTIVE="true"
+      if [[ "$ALERT_ACTIVE" != "true" || "$LAST_ALERT" == "null" || -z "$LAST_ALERT" ]]; then
+        SEND_ALERT=1
+      else
+        LAST_ALERT_EPOCH="$(date -d "$LAST_ALERT" +%s 2>/dev/null || echo 0)"
+        if (( NOW_EPOCH - LAST_ALERT_EPOCH > WINDOW_ANTI_SPAM_HOURS * 3600 )); then
+          SEND_ALERT=1
+        fi
+      fi
     fi
+  else
+    log "debounce: suppressing transient Honcho failure until threshold=${HONCHO_ALERT_THRESHOLD} consecutive checks"
   fi
 
   if [[ "$SEND_ALERT" == "1" ]]; then
@@ -184,20 +230,22 @@ PY
     send_discord_payload "$TMP_RESULTS.payload" >/dev/null || log "WARN: Discord alert failed"
     ALERT_TS="$NOW_ISO"
   else
-    log "anti-spam suppress alert last_alert=${LAST_ALERT}"
+    if (( NEW_CONSECUTIVE_FAILURES >= HONCHO_ALERT_THRESHOLD )); then
+      log "anti-spam suppress alert last_alert=${LAST_ALERT}"
+    fi
     ALERT_TS="$LAST_ALERT"
   fi
 
-  python3 - <<'PY' "$STATE_FILE" "$NOW_ISO" "$ALERT_TS" "$FAILURES_JSON"
+  python3 - <<'PY' "$STATE_FILE" "$NOW_ISO" "$ALERT_TS" "$FAILURES_JSON" "$NEW_CONSECUTIVE_FAILURES" "$NEW_ALERT_ACTIVE"
 import json, sys, pathlib
-p=pathlib.Path(sys.argv[1]); now=sys.argv[2]; alert=sys.argv[3]; failures=json.loads(sys.argv[4])
+p=pathlib.Path(sys.argv[1]); now=sys.argv[2]; alert=sys.argv[3]; failures=json.loads(sys.argv[4]); consecutive=int(sys.argv[5]); active=(sys.argv[6]=='true')
 d=json.loads(p.read_text())
-d.update({"last_check":now,"last_status":"fail","last_alert_sent":alert,"last_failure_details":failures})
+d.update({"last_check":now,"last_status":"fail","last_alert_sent":None if alert in ('null','') else alert,"last_failure_details":failures,"consecutive_failures":consecutive,"alert_active":active})
 p.write_text(json.dumps(d, indent=2, ensure_ascii=False)+"\n")
 PY
 else
-  log "OK agents=${#AGENTS[@]} prev=${PREV_STATUS}"
-  if [[ "$PREV_STATUS" == "fail" ]]; then
+  log "OK agents=${#AGENTS[@]} prev=${PREV_STATUS} consecutive=${CONSECUTIVE_FAILURES} alert_active=${ALERT_ACTIVE}"
+  if [[ "$PREV_STATUS" == "fail" && "$ALERT_ACTIVE" == "true" ]]; then
     python3 - <<'PY' > "$TMP_RESULTS.payload"
 import json, sys
 payload={"content":"","embeds":[{"title":"Honcho MGS restabelecido","color":3066993,"fields":[{"name":"Status","value":"Zeus/Atena/Ares/Hera health checks OK","inline":False}]}]}
@@ -209,7 +257,7 @@ PY
 import json, sys, pathlib
 p=pathlib.Path(sys.argv[1]); now=sys.argv[2]
 d=json.loads(p.read_text())
-d.update({"last_check":now,"last_status":"ok","last_alert_sent":None,"last_failure_details":[],"last_ok_at":now})
+d.update({"last_check":now,"last_status":"ok","last_alert_sent":None,"last_failure_details":[],"consecutive_failures":0,"alert_active":False,"last_ok_at":now})
 p.write_text(json.dumps(d, indent=2, ensure_ascii=False)+"\n")
 PY
 fi

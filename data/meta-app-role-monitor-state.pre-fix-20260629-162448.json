@@ -1,0 +1,341 @@
+{
+  "apps": {
+    "B007": {
+      "item": "BOT B010 Token",
+      "app_id": "3404528003062993",
+      "app_name": "B007",
+      "roles": [
+        {
+          "id": "1781039579975307",
+          "name": "Anh Tran",
+          "role": "administrators"
+        },
+        {
+          "id": "122180216222687626",
+          "name": "Eliana Moura Burgos",
+          "role": "administrators"
+        },
+        {
+          "id": "1795093441648411",
+          "name": "Elso Antonio Pelentir",
+          "role": "administrators"
+        },
+        {
+          "id": "2800244180376091",
+          "name": "Erik Sabar",
+          "role": "administrators"
+        },
+        {
+          "id": "2056251015299542",
+          "name": "Ismail Mail",
+          "role": "administrators"
+        },
+        {
+          "id": "1034074469059358",
+          "name": "Janaina Santos",
+          "role": "administrators"
+        },
+        {
+          "id": "4000184976782527",
+          "name": "Lorraynii Criistiinii",
+          "role": "administrators"
+        },
+        {
+          "id": "961382480236338",
+          "name": "Maricel Taruc Ronquillo",
+          "role": "administrators"
+        },
+        {
+          "id": "1371473361561915",
+          "name": "Marsya Aisya",
+          "role": "administrators"
+        },
+        {
+          "id": "1543302660756064",
+          "name": "Ninin Ninin",
+          "role": "administrators"
+        },
+        {
+          "id": "1672464044037200",
+          "name": "Phong Huynh",
+          "role": "administrators"
+        },
+        {
+          "id": "1569429144815215",
+          "name": "Pready AS",
+          "role": "administrators"
+        },
+        {
+          "id": "122164231322714464",
+          "name": "Taina Rocha Silveira",
+          "role": "administrators"
+        },
+        {
+          "id": "2043531786541496",
+          "name": "Thanh Hiep",
+          "role": "administrators"
+        },
+        {
+          "id": "122196109898686552",
+          "name": "William Nogueira",
+          "role": "administrators"
+        }
+      ],
+      "roles_count": 15,
+      "x_app_usage": "{\"call_count\":0,\"total_cputime\":0,\"total_time\":0}",
+      "usage": {
+        "raw": "{\"call_count\":0,\"total_cputime\":0,\"total_time\":0}",
+        "parsed": {
+          "call_count": 0,
+          "total_cputime": 0,
+          "total_time": 0
+        },
+        "max_pct": 0,
+        "max_metric": null,
+        "severity": "ok"
+      },
+      "checks": {
+        "app_metadata": {
+          "status": 200,
+          "ok": true
+        },
+        "roles": {
+          "status": 200,
+          "ok": true,
+          "count": 15
+        },
+        "user_token_me": {
+          "status": 200,
+          "ok": true
+        },
+        "debug_token": {
+          "status": 400,
+          "ok": false,
+          "error": {
+            "code": 100,
+            "type": "OAuthException",
+            "message": "(#100) The App_id in the input_token did not match the Viewing App"
+          }
+        }
+      },
+      "token_info": {
+        "present": true,
+        "valid": false,
+        "scopes": [],
+        "expires_at": null,
+        "app_id": null,
+        "type": null
+      },
+      "checked_at": "2026-06-29T16:21:20-04:00",
+      "initialized": true,
+      "previous_count": 17,
+      "current_count": 15,
+      "last_ok_at": "2026-06-29T16:21:20-04:00",
+      "consecutive_errors": 0,
+      "last_error": null,
+      "alerts": {
+        "script_error": {
+          "critical": "2026-06-29T16:10:32-04:00"
+        },
+        "checks": {
+          "critical": "2026-06-29T16:13:29-04:00"
+        }
+      },
+      "last_removed": [
+        {
+          "id": "1764284714737643",
+          "name": "Agus Husain",
+          "role": "administrators"
+        },
+        {
+          "id": "2464876413991444",
+          "name": "Akew Rider",
+          "role": "administrators"
+        },
+        {
+          "id": "989913400614779",
+          "name": "André De Souza",
+          "role": "administrators"
+        },
+        {
+          "id": "992442853428050",
+          "name": "Beatriz Santos",
+          "role": "administrators"
+        },
+        {
+          "id": "1924631385607958",
+          "name": "Dono Handoko",
+          "role": "administrators"
+        },
+        {
+          "id": "1573637517606579",
+          "name": "Gustavo Padilha",
+          "role": "administrators"
+        },
+        {
+          "id": "27472759079049141",
+          "name": "Hindawan Pratama",
+          "role": "administrators"
+        },
+        {
+          "id": "967157643040921",
+          "name": "Joao Matheus",
+          "role": "administrators"
+        },
+        {
+          "id": "4541214859431629",
+          "name": "Leticia Silva",
+          "role": "administrators"
+        },
+        {
+          "id": "1568655781518366",
+          "name": "Lollo Abu Abu",
+          "role": "administrators"
+        },
+        {
+          "id": "2192431394941931",
+          "name": "Lourival Lemes Silva",
+          "role": "administrators"
+        },
+        {
+          "id": "991496860182599",
+          "name": "Maria Bari",
+          "role": "administrators"
+        },
+        {
+          "id": "122174975750714493",
+          "name": "Rebeca Rocha Ferreira",
+          "role": "administrators"
+        },
+        {
+          "id": "1324083539932944",
+          "name": "Refi Aldiyansyah",
+          "role": "administrators"
+        },
+        {
+          "id": "1025892693284212",
+          "name": "San Dra",
+          "role": "administrators"
+        },
+        {
+          "id": "2207992939998535",
+          "name": "Trương Gia Vinh",
+          "role": "administrators"
+        },
+        {
+          "id": "2524423264699706",
+          "name": "Yani Diana Delima",
+          "role": "administrators"
+        }
+      ],
+      "last_added": [
+        {
+          "id": "1781039579975307",
+          "name": "Anh Tran",
+          "role": "administrators"
+        },
+        {
+          "id": "122180216222687626",
+          "name": "Eliana Moura Burgos",
+          "role": "administrators"
+        },
+        {
+          "id": "1795093441648411",
+          "name": "Elso Antonio Pelentir",
+          "role": "administrators"
+        },
+        {
+          "id": "2800244180376091",
+          "name": "Erik Sabar",
+          "role": "administrators"
+        },
+        {
+          "id": "2056251015299542",
+          "name": "Ismail Mail",
+          "role": "administrators"
+        },
+        {
+          "id": "1034074469059358",
+          "name": "Janaina Santos",
+          "role": "administrators"
+        },
+        {
+          "id": "4000184976782527",
+          "name": "Lorraynii Criistiinii",
+          "role": "administrators"
+        },
+        {
+          "id": "961382480236338",
+          "name": "Maricel Taruc Ronquillo",
+          "role": "administrators"
+        },
+        {
+          "id": "1371473361561915",
+          "name": "Marsya Aisya",
+          "role": "administrators"
+        },
+        {
+          "id": "1543302660756064",
+          "name": "Ninin Ninin",
+          "role": "administrators"
+        },
+        {
+          "id": "1672464044037200",
+          "name": "Phong Huynh",
+          "role": "administrators"
+        },
+        {
+          "id": "1569429144815215",
+          "name": "Pready AS",
+          "role": "administrators"
+        },
+        {
+          "id": "122164231322714464",
+          "name": "Taina Rocha Silveira",
+          "role": "administrators"
+        },
+        {
+          "id": "2043531786541496",
+          "name": "Thanh Hiep",
+          "role": "administrators"
+        },
+        {
+          "id": "122196109898686552",
+          "name": "William Nogueira",
+          "role": "administrators"
+        }
+      ]
+    }
+  },
+  "_created_at": "2026-06-27T16:12:56-04:00",
+  "_updated_at": "2026-06-29T16:21:21-04:00",
+  "_last_discovered_items": [
+    "BOT B001 Token",
+    "BOT B002 Token",
+    "BOT B003 Token",
+    "BOT B004 Token",
+    "BOT B005 Token",
+    "BOT B006 Token",
+    "BOT B007 Token",
+    "BOT B008 Token",
+    "BOT B009 Token",
+    "BOT B010 Token"
+  ],
+  "_last_run_summary": {
+    "items": [
+      "BOT B001 Token",
+      "BOT B002 Token",
+      "BOT B003 Token",
+      "BOT B004 Token",
+      "BOT B005 Token",
+      "BOT B006 Token",
+      "BOT B007 Token",
+      "BOT B008 Token",
+      "BOT B009 Token",
+      "BOT B010 Token"
+    ],
+    "alerts_sent": 10,
+    "errors_count": 0,
+    "dry_run": false
+  }
+}

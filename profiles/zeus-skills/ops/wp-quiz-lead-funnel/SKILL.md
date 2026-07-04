@@ -1,0 +1,201 @@
+---
+name: wp-quiz-lead-funnel
+description: "Use when building, migrating, operating, or diagnosing WordPress-based quiz lead funnels with SMS Funnel routing, UTM-preserving redirects, lead reports, CSV export, and per-site/vertical references."
+version: 1.0.0
+author: MGS Digital Corp / Zeus
+license: Internal MGS
+metadata:
+  hermes:
+    tags: [wordpress, quiz, lead-funnel, sms-funnel, redirect, utm, reports, cutover]
+    related_skills: [wp-plugin-mass-operation]
+---
+
+# WordPress Quiz Lead Funnel
+
+## Overview
+
+Use this skill for MGS quiz funnels that run first-party inside WordPress instead of external builders such as Lovable/Supabase. The canonical pattern is a custom WordPress plugin that owns public quiz routes, lead capture, SMS Funnel delivery, UTM-preserving redirects, admin editing, duplication, reporting, and CSV export.
+
+The first reference implementation is the BR/CAR quiz on `creditoparaveiculo.com`.
+
+## When to Use
+
+Use when Rodolfo asks to:
+
+- migrate a quiz/funnel from Lovable, Supabase, iframe, static folders, or another external app into WordPress;
+- create, duplicate, edit, or cut over a quiz variant;
+- configure SMS Funnel list URLs by gestor/UTM;
+- debug leads not appearing in SMS Funnel;
+- validate frontend form submit versus direct REST/API submit;
+- improve quiz admin/report UI;
+- export or import quiz leads/configs;
+- preserve UTMs, `fbclid`, `gclid`, or campaign params through final redirect.
+
+Do not use this for normal editorial WordPress posting, REC/P1 publication, or generic plugin updates that do not involve quiz lead funnels.
+
+## Architecture Pattern
+
+Preferred architecture:
+
+1. Public quiz URL served by WordPress/plugin rewrite, not a physical static folder.
+2. Frontend quiz submits lead to WordPress REST endpoint.
+3. WordPress saves lead locally first.
+4. WordPress forwards only required payload to SMS Funnel, normally `{ name, phone }`.
+5. WordPress stores SMS Funnel status/response in the lead row.
+6. Frontend redirects only after server returns `ok:true`.
+7. Redirect preserves all query params: `utm_*`, `fbclid`, `gclid`, and custom params.
+8. Admin dashboard provides edit, duplicate, reports, CSV export, filters, and pagination.
+
+## Skill/Reference Organization
+
+Do not create one skill per quiz variant. Variants such as G001/G002/G003 are runtime configuration, not procedural knowledge.
+
+Recommended split:
+
+- Skill: type of system — `wp-quiz-lead-funnel`.
+- Reference: country/vertical/site — e.g. `references/br-car-creditoparaveiculo.md`.
+- Reference: integration — e.g. `references/sms-funnel-routing.md`.
+- Template/checklist: repeatable execution — e.g. `templates/sms-funnel-test-matrix.md`.
+
+## Operational Workflow
+
+### 1. Preflight
+
+- Confirm target domain, vertical, country, and official quiz URLs.
+- Confirm all gestor codes and SMS Funnel list URLs.
+- Confirm final redirect URL(s).
+- Confirm whether historical leads should be imported into WP reporting.
+- Validate admin access and WP-CLI/REST access before mutation.
+- Back up plugin directory and database before deployment/import/UI changes.
+
+### 2. Cutover
+
+Cutover means the production URL stops using the old stack and starts using the WordPress plugin.
+
+For quiz funnels, cutover is not complete until:
+
+- public URLs return the plugin-rendered quiz;
+- no public page HTML references old Lovable/Supabase/static app assets;
+- physical static folders no longer shadow WordPress rewrites;
+- lead submit saves in WP;
+- SMS Funnel response is stored;
+- redirect preserves UTMs;
+- rollback path exists.
+
+### 3. SMS Funnel Routing
+
+- Prefer one explicit SMS Funnel URL per gestor.
+- Use fallback URL only as a safety net when no gestor/UTM-specific URL matches.
+- Keep fallback blank if every gestor has its own URL and blank fallback is intentional.
+- Store status as `ok:G001`, `ok:G002`, `fail:500`, `error`, `skipped`, or `historical_import`.
+- Never resend historical imports to SMS Funnel.
+- Treat SMS Funnel as a downstream destination unless vendor docs prove otherwise. The `add-lead` style integration may create/trigger leads but not provide reliable delete/query/sync semantics.
+- Do not assume SMS Funnel dashboard visibility is real-time. If WP records `ok:G00X` and the vendor response is success, distinguish API delivery success from dashboard indexing/filter/deduplication.
+
+### 4. Tracking Boundaries: Quiz UTMs vs SMS UTMs
+
+Keep the two attribution paths separate:
+
+1. **Facebook → Quiz → REC:** the WordPress quiz must preserve all incoming query params from the quiz URL into the final REC redirect. This includes `utm_*`, `fbclid`, `gclid`, and custom params. This path measures the original paid click.
+2. **SMS Funnel → shortened link → REC:** SMS Funnel automations may define their own fixed `Meu Link` and generate a short URL such as `gosite.cc/...`. Those links should use SMS-specific UTMs such as `utm_source=sms`; they do not need to preserve the original Facebook UTMs.
+
+Operational rule: for normal quiz submit, send SMS Funnel only the fields required by that integration, usually `name` and `phone`. Do not add `customized_url` just to preserve Facebook UTMs when the SMS automation already owns its own link and tracking.
+
+Verification pattern for UTM preservation:
+
+- Fetch the public quiz URL with a synthetic query string such as `?utm_source=facebook&utm_medium=g001-s&utm_campaign=utm_check&fbclid=TEST&custom_x=abc`.
+- Confirm production HTML loads the plugin asset, not Lovable/Supabase.
+- Confirm the production JS reads `location.search`, includes `extra: all`, and redirects with `buildRedirect(base, all)` or equivalent.
+- Simulate the final redirect URL and ensure every input param appears on the REC URL.
+
+See also: `references/sms-funnel-automation-links.md`.
+
+### 4.1 Static Chat Wrapper Contract
+
+When migrating static chat/quiz pages that depend on a third-party ad wrapper, preserve the wrapper contract instead of productizing ad internals. Do not invent plugin fields for auctions, rewarded timeout, interstitial strategy, bids, or fallback behavior unless the wrapper owner explicitly requires them. The plugin/page should load `window.tags`, GPT, and the wrapper in the same effective order as the source HTML, then trigger only the same ad hooks at the same chat steps.
+
+For Ciro/JBF-style chat pages, see `references/static-chat-wrapper-contract.md` before changing ad behavior. Treat wrapper logic as outside the plugin boundary; the plugin may route/render/generate the page, but the wrapper owns monetization behavior.
+
+### 5. Redirect Split
+
+Business-facing UI should avoid raw JSON where possible.
+
+Preferred UI:
+
+- section title: `URLs de redirecionamento (split de tráfego)`;
+- `+ Adicionar URL` button;
+- each row has URL + numeric weight + remove action;
+- one URL at `100` = 100%;
+- two URLs at `50/50` = even split;
+- preserve all incoming params automatically.
+
+### 5. Lead Reports
+
+Reports should be useful to operators, not just technical tables.
+
+Minimum dashboard:
+
+- total leads;
+- unique phones;
+- average/day;
+- date range filters;
+- gestor filter;
+- parcela filter;
+- search by name/phone/campaign;
+- leads by day, default 5 days visible;
+- per-page selector for more days;
+- chart block pagination/filtering independent via AJAX when possible, so clicking chart controls does not reload the entire report page;
+- table default 5 leads visible;
+- table pagination independent via AJAX when possible, so table next/previous controls do not reload the report page;
+- per-page selector for more leads;
+- responsive report layout: cards must align in a coherent grid, use full available width, collapse cleanly below tablet widths, and avoid awkward empty gaps; explicitly override WordPress admin `.card { max-width: 520px; }` when using custom report cards;
+- wide report tables with horizontal overflow when needed, never one-character vertical wrapping;
+- CSV export respecting filters.
+
+## Diagnostic Playbook: SMS Funnel Not Showing Leads
+
+If Rodolfo says a lead is not appearing in SMS Funnel:
+
+1. First distinguish test type:
+   - Direct endpoint test only proves WP backend → SMS Funnel.
+   - Browser/frontend test proves the actual user flow.
+2. Run a real frontend submit through the public quiz page.
+3. Query WP lead table for the exact test campaign/name/phone.
+4. Check `sms_funnel_status` and stored response.
+5. Verify response includes `success:true` and the expected `list_id`.
+6. If WP shows `ok:G00X` and SMS response has correct `list_id`, likely issue is SMS Funnel dashboard delay/cache/indexing/filter/deduplication.
+7. If WP shows `fail:*`, `error`, or no row, debug WordPress/backend/frontend accordingly.
+
+## Validation Checklist
+
+Before reporting success:
+
+- [ ] PHP lint passes on all plugin PHP files.
+- [ ] Plugin active version is correct.
+- [ ] Public routes return 200.
+- [ ] Public HTML has no old external stack references.
+- [ ] Frontend browser submit works for every target quiz variant.
+- [ ] WP lead row created with expected slug/UTM/gestor.
+- [ ] SMS status is stored and interpretable.
+- [ ] Redirect URL preserves query params.
+- [ ] Admin edit screen renders.
+- [ ] Reports render with filters/pagination/export.
+- [ ] Backup path is recorded.
+
+## Common Pitfalls
+
+1. **Only testing the backend endpoint.** This misses frontend JS, button, timestamp, mask, hidden fields, and browser redirect behavior. Always test at least one real browser submit; test all variants when SMS routing is under suspicion.
+
+2. **Physical folders shadowing WordPress rewrites.** Old static folders such as `/quiz-car-parcelas-g003/index.html` can prevent plugin routes from loading. Rename/backup folders instead of deleting.
+
+3. **Dashboard delay mistaken for backend failure.** SMS Funnel API may return `success:true` with the correct `list_id` while the dashboard still shows zero due to delay/cache/indexing/deduplication.
+
+4. **Copying leads during duplication.** Duplicating a quiz must copy configuration only, never leads/history.
+
+5. **Raw JSON as operator UI.** JSON can remain as storage, but normal admin workflows should use rows, buttons, labels, helpers, and per-page controls.
+
+6. **Historical imports sent to SMS Funnel.** Imports are for WP reporting only; mark rows as `historical_import` and do not POST to external vendors.
+
+7. **Overengineering third-party ad wrappers.** If a static chat page loads a wrapper owned by another tech team, do not convert observed wrapper calls into admin settings. A loop in source HTML is not automatically a configurable `auctions` feature. Preserve the source contract and ask/verify before changing monetization semantics.
+
+8. **Declaring ads working from load checks only.** Seeing `gpt.js`, the wrapper script, or `window.jbftag` only proves the stack loaded. Validate the same user path as the original HTML and compare the generated HTML/JS contract: `window.tags`, script order, ad insertion hooks, CTA rewarded call, and absence of unrelated WordPress/theme pollution when static parity is required.

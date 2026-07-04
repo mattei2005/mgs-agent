@@ -1,0 +1,139 @@
+{
+  "domain": "utua.it",
+  "sitemap_index": "https://utua.it/sitemap_index.xml",
+  "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+  "post_sitemaps": [
+    "https://utua.it/post-sitemap1.xml",
+    "https://utua.it/post-sitemap2.xml"
+  ],
+  "post_url_count": 204,
+  "source_p1_p2_article_count": 204,
+  "source_stage_counts": {
+    "UTUA_P2": 97,
+    "UTUA_P1": 107
+  },
+  "rec_rows": 107,
+  "rec_with_reference_p1": 97,
+  "rec_without_reference_p1": 10,
+  "orphan_source_p2_without_rec": 0,
+  "reference_pair_status_counts": {
+    "REC+P1": 97,
+    "REC_only": 10
+  },
+  "country_counts": {
+    "cc": 59,
+    "emp": 41,
+    "fi": 1,
+    "finance": 2,
+    "hu": 4
+  },
+  "country_vertical_top": [
+    {
+      "country": "cc",
+      "vertical": "carta",
+      "count": 7
+    },
+    {
+      "country": "cc",
+      "vertical": "unicredit",
+      "count": 6
+    },
+    {
+      "country": "cc",
+      "vertical": "bper",
+      "count": 5
+    },
+    {
+      "country": "cc",
+      "vertical": "deutsche",
+      "count": 4
+    },
+    {
+      "country": "cc",
+      "vertical": "mediolanum",
+      "count": 4
+    },
+    {
+      "country": "cc",
+      "vertical": "mps",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "bpm",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "intesa",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "mediolanum",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "prestiti",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "unicredit",
+      "count": 4
+    },
+    {
+      "country": "cc",
+      "vertical": "banco",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "bnl",
+      "count": 3
+    },
+    {
+      "country": "emp",
+      "vertical": "bper",
+      "count": 3
+    },
+    {
+      "country": "emp",
+      "vertical": "isybank",
+      "count": 3
+    },
+    {
+      "country": "emp",
+      "vertical": "mps",
+      "count": 3
+    },
+    {
+      "country": "emp",
+      "vertical": "prestito",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "american",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "bancocard",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "hype",
+      "count": 2
+    }
+  ],
+  "errors": [],
+  "generated_at": "2026-06-29T06:37:25.932399Z",
+  "generated_files": [
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.it/utua_it_rec_p1_map.csv",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.it/utua_it_rec_p1_map.json",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.it/utua_it_rec_p1_map_summary.json"
+  ]
+}

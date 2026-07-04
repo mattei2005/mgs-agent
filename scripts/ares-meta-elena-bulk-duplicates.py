@@ -114,17 +114,25 @@ def existing_elena_names(common, token):
     return {r.get('name') for r in rows}, rows
 
 
-def choose_source_adset(common, token, campaign_id):
-    adsets = graph_all(common, token, f'{campaign_id}/adsets', {'fields': 'id,name,status,effective_status,billing_event,optimization_goal,destination_type,targeting,promoted_object,attribution_spec,bid_strategy,bid_amount', 'limit': 20})
+def all_account_adsets(common, token):
+    return graph_all(common, token, f'act_{ACCOUNT_ID}/adsets', {'fields': 'id,name,campaign_id,status,effective_status,billing_event,optimization_goal,destination_type,targeting,promoted_object,attribution_spec,bid_strategy,bid_amount', 'limit': 500})
+
+
+def all_account_ads(common, token):
+    return graph_all(common, token, f'act_{ACCOUNT_ID}/ads', {'fields': 'id,name,campaign_id,adset_id,status,effective_status,creative{id,name}', 'limit': 500})
+
+
+def choose_source_adset(campaign_id, adsets_by_campaign):
+    adsets = adsets_by_campaign.get(campaign_id) or []
     if not adsets:
         raise RuntimeError('no_adsets')
-    # Prefer Conjunto 01 for consistency if available, otherwise first active/effective active, otherwise first.
-    adsets_sorted = sorted(adsets, key=lambda a: (0 if '01' in (a.get('name') or '') else 1, 0 if a.get('effective_status') == 'ACTIVE' else 1))
+    # Prefer Conjunto 01 for consistency if available, then non-deleted stable order.
+    adsets_sorted = sorted(adsets, key=lambda a: (0 if '01' in (a.get('name') or '') else 1, 0 if a.get('effective_status') != 'DELETED' else 1, a.get('id') or ''))
     return adsets_sorted[0], adsets
 
 
-def source_ads(common, token, adset_id):
-    ads = graph_all(common, token, f'{adset_id}/ads', {'fields': 'id,name,status,effective_status,creative{id,name}', 'limit': 20})
+def source_ads(adset_id, ads_by_adset):
+    ads = list(ads_by_adset.get(adset_id) or [])
     # Use exactly 3 ads; prefer active, then stable order by name/id.
     ads.sort(key=lambda a: (0 if a.get('effective_status') == 'ACTIVE' or a.get('status') == 'ACTIVE' else 1, a.get('name') or '', a.get('id') or ''))
     selected = [a for a in ads if ((a.get('creative') or {}).get('id'))][:3]
@@ -153,21 +161,21 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--execute', action='store_true')
     ap.add_argument('--timezone', default='Europe/Madrid')
-    ap.add_argument('--copies-per-source', type=int, default=3)
+    ap.add_argument('--total-new', type=int, default=15)
     args = ap.parse_args()
     dry_run = not args.execute
     common = load_common()
     token, field = common.get_token_from_1password()
     tz = ZoneInfo(args.timezone)
     stamp = utc_now().strftime('%Y%m%dT%H%M%SZ')
-    total_new = len(SOURCE_CAMPAIGNS) * args.copies_per_source
+    total_new = args.total_new
     slots = start_times(tz, total_new)
     audit = {
         'created_at': utc_now().isoformat(),
         'mode': 'execute' if args.execute else 'dry_run',
         'account_id': ACCOUNT_ID,
         'source_campaigns': SOURCE_CAMPAIGNS,
-        'copies_per_source': args.copies_per_source,
+        'total_new': args.total_new,
         'target_new_campaigns': total_new,
         'budget_minor_units': '2500',
         'token_report': {'item': 'Token Meta API', 'field': field, 'len': len(token)},
@@ -176,17 +184,40 @@ def main():
     }
     existing_names, all_campaigns = existing_elena_names(common, token)
     audit['existing_campaign_count'] = len(all_campaigns)
+    account_adsets = all_account_adsets(common, token)
+    account_ads = all_account_ads(common, token)
+    adsets_by_campaign = {}
+    for adset in account_adsets:
+        adsets_by_campaign.setdefault(adset.get('campaign_id'), []).append(adset)
+    ads_by_adset = {}
+    for ad in account_ads:
+        ads_by_adset.setdefault(ad.get('adset_id'), []).append(ad)
     idx = 0
     try:
+        templates = []
         for source_cid in SOURCE_CAMPAIGNS:
             stc, source_campaign = graph_get(common, token, source_cid, {'fields': 'id,name,objective,buying_type,special_ad_categories,status,effective_status'})
             if stc != 200:
-                audit['errors'].append({'source_campaign_id': source_cid, 'stage': 'get_source_campaign', 'error': safe_error(common, source_campaign)})
+                audit.setdefault('skipped_sources', []).append({'source_campaign_id': source_cid, 'stage': 'get_source_campaign', 'error': safe_error(common, source_campaign)})
                 continue
-            source_adset, all_source_adsets = choose_source_adset(common, token, source_cid)
-            ads = source_ads(common, token, source_adset['id'])
-            for n in range(1, args.copies_per_source + 1):
+            try:
+                source_adset, all_source_adsets = choose_source_adset(source_cid, adsets_by_campaign)
+                ads = source_ads(source_adset['id'], ads_by_adset)
+            except Exception as e:
+                audit.setdefault('skipped_sources', []).append({'source_campaign_id': source_cid, 'source_campaign_name': source_campaign.get('name'), 'stage': 'template_build', 'error': str(e)})
+                continue
+            templates.append({'source_cid': source_cid, 'source_campaign': source_campaign, 'source_adset': source_adset, 'ads': ads})
+        if not templates:
+            raise RuntimeError('no_usable_source_templates')
+        audit['usable_template_count'] = len(templates)
+        for i in range(total_new):
+                tpl = templates[i % len(templates)]
+                source_cid = tpl['source_cid']
+                source_campaign = tpl['source_campaign']
+                source_adset = tpl['source_adset']
+                ads = tpl['ads']
                 idx += 1
+                n = idx
                 start_local = slots[idx - 1]
                 base_name = source_campaign.get('name') or f'Elena {source_cid}'
                 new_name = f'{base_name} - DUP - {start_local.strftime("%Y%m%d-%H%M")} - {n:02d}'
@@ -204,6 +235,7 @@ def main():
                         'buying_type': source_campaign.get('buying_type') or 'AUCTION',
                         'status': 'ACTIVE',
                         'daily_budget': '2500',
+                        'bid_strategy': 'LOWEST_COST_WITHOUT_CAP',
                         'special_ad_categories': source_campaign.get('special_ad_categories') or [],
                         'special_ad_category_country': ['ES'],
                         'start_time': start_local.strftime('%Y-%m-%dT%H:%M:%S%z'),

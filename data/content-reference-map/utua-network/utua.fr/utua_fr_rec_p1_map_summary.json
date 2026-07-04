@@ -1,0 +1,136 @@
+{
+  "domain": "utua.fr",
+  "sitemap_index": "https://utua.fr/sitemap_index.xml",
+  "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+  "post_sitemaps": [
+    "https://utua.fr/post-sitemap.xml"
+  ],
+  "post_url_count": 178,
+  "source_p1_p2_article_count": 176,
+  "source_stage_counts": {
+    "UTUA_P1": 89,
+    "UTUA_P2": 87
+  },
+  "rec_rows": 89,
+  "rec_with_reference_p1": 87,
+  "rec_without_reference_p1": 2,
+  "orphan_source_p2_without_rec": 0,
+  "reference_pair_status_counts": {
+    "REC+P1": 87,
+    "REC_only": 2
+  },
+  "country_counts": {
+    "cc": 49,
+    "emp": 38,
+    "finance": 2
+  },
+  "country_vertical_top": [
+    {
+      "country": "cc",
+      "vertical": "carte",
+      "count": 10
+    },
+    {
+      "country": "cc",
+      "vertical": "visa",
+      "count": 7
+    },
+    {
+      "country": "emp",
+      "vertical": "credit",
+      "count": 6
+    },
+    {
+      "country": "emp",
+      "vertical": "pret",
+      "count": 5
+    },
+    {
+      "country": "cc",
+      "vertical": "cb",
+      "count": 4
+    },
+    {
+      "country": "cc",
+      "vertical": "credit",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "n26",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "shine",
+      "count": 3
+    },
+    {
+      "country": "emp",
+      "vertical": "bnp",
+      "count": 3
+    },
+    {
+      "country": "emp",
+      "vertical": "bourso",
+      "count": 3
+    },
+    {
+      "country": "emp",
+      "vertical": "boursobank",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "hello",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "mastercard",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "monabanq",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "nickel",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "revolut",
+      "count": 2
+    },
+    {
+      "country": "emp",
+      "vertical": "revolut",
+      "count": 2
+    },
+    {
+      "country": "emp",
+      "vertical": "younited",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "bforbasic",
+      "count": 1
+    },
+    {
+      "country": "cc",
+      "vertical": "fortuneo",
+      "count": 1
+    }
+  ],
+  "errors": [],
+  "generated_at": "2026-06-29T06:37:17.279219Z",
+  "generated_files": [
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.fr/utua_fr_rec_p1_map.csv",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.fr/utua_fr_rec_p1_map.json",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.fr/utua_fr_rec_p1_map_summary.json"
+  ]
+}

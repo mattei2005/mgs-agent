@@ -1,0 +1,138 @@
+{
+  "domain": "utua.ae",
+  "sitemap_index": "https://utua.ae/sitemap_index.xml",
+  "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+  "post_sitemaps": [
+    "https://utua.ae/post-sitemap1.xml",
+    "https://utua.ae/post-sitemap2.xml"
+  ],
+  "post_url_count": 230,
+  "source_p1_p2_article_count": 228,
+  "source_stage_counts": {
+    "UTUA_P2": 113,
+    "UTUA_P1": 115
+  },
+  "rec_rows": 115,
+  "rec_with_reference_p1": 112,
+  "rec_without_reference_p1": 3,
+  "orphan_source_p2_without_rec": 1,
+  "reference_pair_status_counts": {
+    "REC+P1": 112,
+    "REC_only": 3
+  },
+  "country_counts": {
+    "cc": 56,
+    "emp": 57,
+    "fab": 1,
+    "rakbank": 1
+  },
+  "country_vertical_top": [
+    {
+      "country": "emp",
+      "vertical": "dib",
+      "count": 12
+    },
+    {
+      "country": "cc",
+      "vertical": "nbd",
+      "count": 8
+    },
+    {
+      "country": "emp",
+      "vertical": "mashreq",
+      "count": 8
+    },
+    {
+      "country": "cc",
+      "vertical": "fab",
+      "count": 7
+    },
+    {
+      "country": "emp",
+      "vertical": "adcb",
+      "count": 6
+    },
+    {
+      "country": "cc",
+      "vertical": "citi",
+      "count": 5
+    },
+    {
+      "country": "cc",
+      "vertical": "emirates",
+      "count": 5
+    },
+    {
+      "country": "cc",
+      "vertical": "mashreq",
+      "count": 5
+    },
+    {
+      "country": "emp",
+      "vertical": "adib",
+      "count": 5
+    },
+    {
+      "country": "emp",
+      "vertical": "fab",
+      "count": 5
+    },
+    {
+      "country": "emp",
+      "vertical": "rakbank",
+      "count": 5
+    },
+    {
+      "country": "cc",
+      "vertical": "rakbank",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "emirates",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "hsbc",
+      "count": 4
+    },
+    {
+      "country": "cc",
+      "vertical": "adcb",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "amex",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "bank",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "dib",
+      "count": 3
+    },
+    {
+      "country": "emp",
+      "vertical": "personal",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "go4it",
+      "count": 2
+    }
+  ],
+  "errors": [],
+  "generated_at": "2026-06-29T06:38:00.495768Z",
+  "generated_files": [
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.ae/utua_ae_rec_p1_map.csv",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.ae/utua_ae_rec_p1_map.json",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.ae/utua_ae_rec_p1_map_summary.json"
+  ]
+}

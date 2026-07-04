@@ -1,0 +1,66 @@
+{
+  "status": "OK",
+  "executed_at_et": "2026-06-30T02:51:28-04:00",
+  "sheet_url": "https://docs.google.com/spreadsheets/d/1ieSjYbhl34T0tWOvvol3F2lhvCoVTWHm9_YnUkoVhtM/edit",
+  "tab": "US-CC-ES",
+  "summary_tab": "US-CC-ES Approval Summary",
+  "template": "teste-4-us-cc-es-all-201-zero-width-2chars-approval",
+  "template_id": "6a435f7f-4ee5-df18-c103-2e09f6f96e02",
+  "rows": 201,
+  "readback_rows": 201,
+  "counts": {
+    "REJECTED": 43,
+    "APPROVED": 158
+  },
+  "backup": "/root/mgs-agent/work/meta-utility/us-cc-es-approval-csv-20260630/us-cc-es-before-test4-status-update-20260630-025124.json",
+  "sample": [
+    {
+      "id": 1,
+      "status": "REJECTED",
+      "visible_text": "✅ AUTORIZADO: {{first_name}}, estás autorizado a activar tu nueva tarjeta.  |  | No más esperas. Toque para comenzar.",
+      "cta": "🚀 ACTIVAR AHORA"
+    },
+    {
+      "id": 2,
+      "status": "APPROVED",
+      "visible_text": "Tengo 1 actualización importante sobre su perfil crediticio.  |  | Es mejor de lo que esperábamos. Compruébalo aquí:",
+      "cta": "📩 ACTUALIZACIÓN ABIERTA"
+    },
+    {
+      "id": 3,
+      "status": "APPROVED",
+      "visible_text": "📦 Estado: RETENIDO | Su tarjeta preaprobada está esperando.  | Sólo necesitamos la confirmación de su dirección de entrega.",
+      "cta": "🚚 CONFIRMAR DIRECCIÓN"
+    },
+    {
+      "id": 4,
+      "status": "APPROVED",
+      "visible_text": "✅ ENTREGA CONFIRMADA | Tu tarjeta con límite de $15,000 se está preparando para envío | Verifique sus datos para realizar el envío.",
+      "cta": "🚚 ENVIAR MI TARJETA"
+    },
+    {
+      "id": 5,
+      "status": "REJECTED",
+      "visible_text": "🏆 {{first_name}}, tu Tarjeta Platinum quedó reservada para el grupo de prioridad del 2%. |  | El paquete está sellado. Sólo necesitamo",
+      "cta": "🚚 CONFIRMAR Y ENVIAR"
+    },
+    {
+      "id": 6,
+      "status": "APPROVED",
+      "visible_text": "🚚 ¡EN CAMINO! ¡Felicidades!  | Su tarjeta de crédito pasa a la siguiente etapa.  | Siga para finalizar:",
+      "cta": "🟢 SEGUIMIENTO/FINALIZAR"
+    },
+    {
+      "id": 7,
+      "status": "REJECTED",
+      "visible_text": "💳 TARJETA DE CRÉDITO APROBADA |  | ¡Felicitaciones, {{first_name}}! Su nueva Tarjeta de Crédito está lista para ser enviada.  |  | Sólo ne",
+      "cta": "🚚 CONFIRMAR AHORA"
+    },
+    {
+      "id": 8,
+      "status": "APPROVED",
+      "visible_text": "🔓 TARJETA DESBLOQUEADA |  | Su tarjeta de crédito virtual está lista para usar y la física está esperando su envío.  |  | Toque para final",
+      "cta": "💳 DESBLOQUEAR TARJETA"
+    }
+  ]
+}

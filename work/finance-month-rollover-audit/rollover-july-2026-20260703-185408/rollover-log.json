@@ -1,0 +1,303 @@
+{
+  "run_id": "20260703-185408",
+  "out_dir": "/root/mgs-agent/work/finance-month-rollover-audit/rollover-july-2026-20260703-185408",
+  "started": "2026-07-03T18:54:08",
+  "actions": [
+    {
+      "key": "principal_2026",
+      "action": "duplicate",
+      "from": "Junho 2026",
+      "to": "Julho 2026",
+      "new_sheet_id": 1289891515
+    },
+    {
+      "key": "kelly",
+      "action": "duplicate",
+      "from": "Junho 2026",
+      "to": "Julho 2026",
+      "new_sheet_id": 1849639529
+    },
+    {
+      "key": "isliago",
+      "action": "duplicate",
+      "from": "Junho 2026",
+      "to": "Julho 2026",
+      "new_sheet_id": 34808253
+    },
+    {
+      "key": "george",
+      "action": "duplicate",
+      "from": "Junho 2026",
+      "to": "Julho 2026",
+      "new_sheet_id": 44251704
+    },
+    {
+      "key": "nicolas",
+      "action": "duplicate",
+      "from": "Junho 2026",
+      "to": "Julho 2026",
+      "new_sheet_id": 197199099
+    },
+    {
+      "key": "joe",
+      "action": "duplicate",
+      "from": "Junho 2026",
+      "to": "Julho 2026",
+      "new_sheet_id": 548796791
+    },
+    {
+      "key": "principal_2026",
+      "action": "set",
+      "cells": [
+        "A3=7",
+        "B4=2026",
+        "B5:B35=2026-07-01..31"
+      ]
+    },
+    {
+      "key": "principal_2026",
+      "action": "caixa_sintetico_fill_july_col_I_blank_cells",
+      "updated_cells": 48
+    },
+    {
+      "key": "principal_2026",
+      "action": "clear_constant_input_like_cells",
+      "range_count": 2186,
+      "cell_count": 2230,
+      "sample_ranges": [
+        "'Julho 2026'!AW5:AW5",
+        "'Julho 2026'!BD5:BD5",
+        "'Julho 2026'!BS5:BS5",
+        "'Julho 2026'!CO5:CO5",
+        "'Julho 2026'!DD5:DD5",
+        "'Julho 2026'!DS5:DS5",
+        "'Julho 2026'!FN5:FN5",
+        "'Julho 2026'!GJ5:GJ5",
+        "'Julho 2026'!GY5:GY5",
+        "'Julho 2026'!HF5:HF5",
+        "'Julho 2026'!HU5:HU5",
+        "'Julho 2026'!IJ5:IJ5",
+        "'Julho 2026'!JF5:JF5",
+        "'Julho 2026'!JU5:JU5",
+        "'Julho 2026'!KQ5:KQ5",
+        "'Julho 2026'!LF5:LF5",
+        "'Julho 2026'!LM5:LM5",
+        "'Julho 2026'!MB5:MB5",
+        "'Julho 2026'!MQ5:MQ5",
+        "'Julho 2026'!NF5:NF5"
+      ]
+    },
+    {
+      "key": "kelly",
+      "action": "clear_constant_input_like_cells",
+      "range_count": 278,
+      "cell_count": 963,
+      "sample_ranges": [
+        "'Julho 2026'!C22:V22",
+        "'Julho 2026'!C23:V23",
+        "'Julho 2026'!C24:Q24",
+        "'Julho 2026'!S24:V24",
+        "'Julho 2026'!C25:Q25",
+        "'Julho 2026'!S25:V25",
+        "'Julho 2026'!C26:Q26",
+        "'Julho 2026'!S26:V26",
+        "'Julho 2026'!C27:Q27",
+        "'Julho 2026'!S27:V27",
+        "'Julho 2026'!C28:Q28",
+        "'Julho 2026'!S28:V28",
+        "'Julho 2026'!C29:Q29",
+        "'Julho 2026'!S29:V29",
+        "'Julho 2026'!C30:D30",
+        "'Julho 2026'!F30:F30",
+        "'Julho 2026'!I30:K30",
+        "'Julho 2026'!M30:M30",
+        "'Julho 2026'!P30:Q30",
+        "'Julho 2026'!T30:T30"
+      ]
+    },
+    {
+      "key": "isliago",
+      "action": "clear_constant_input_like_cells",
+      "range_count": 20,
+      "cell_count": 22,
+      "sample_ranges": [
+        "'Julho 2026'!R23:R23",
+        "'Julho 2026'!T23:T23",
+        "'Julho 2026'!R24:R24",
+        "'Julho 2026'!T24:T24",
+        "'Julho 2026'!C54:D54",
+        "'Julho 2026'!I54:I54",
+        "'Julho 2026'!R54:R54",
+        "'Julho 2026'!T54:T54",
+        "'Julho 2026'!R60:R60",
+        "'Julho 2026'!T60:T60",
+        "'Julho 2026'!R61:R61",
+        "'Julho 2026'!T61:T61",
+        "'Julho 2026'!C91:D91",
+        "'Julho 2026'!I91:I91",
+        "'Julho 2026'!R91:R91",
+        "'Julho 2026'!T91:T91",
+        "'Julho 2026'!R97:R97",
+        "'Julho 2026'!T97:T97",
+        "'Julho 2026'!R98:R98",
+        "'Julho 2026'!T98:T98"
+      ]
+    },
+    {
+      "key": "george",
+      "action": "clear_constant_input_like_cells",
+      "range_count": 6,
+      "cell_count": 8,
+      "sample_ranges": [
+        "'Julho 2026'!C53:D53",
+        "'Julho 2026'!C90:D90",
+        "'Julho 2026'!K96:K96",
+        "'Julho 2026'!M96:M96",
+        "'Julho 2026'!K97:K97",
+        "'Julho 2026'!M97:M97"
+      ]
+    },
+    {
+      "key": "nicolas",
+      "action": "clear_constant_input_like_cells",
+      "range_count": 19,
+      "cell_count": 23,
+      "sample_ranges": [
+        "'Julho 2026'!R22:R22",
+        "'Julho 2026'!T22:T22",
+        "'Julho 2026'!R23:R23",
+        "'Julho 2026'!T23:T23",
+        "'Julho 2026'!C53:D53",
+        "'Julho 2026'!I53:K53",
+        "'Julho 2026'!R53:R53",
+        "'Julho 2026'!T53:T53",
+        "'Julho 2026'!K59:K59",
+        "'Julho 2026'!M59:M59",
+        "'Julho 2026'!K60:K60",
+        "'Julho 2026'!M60:M60",
+        "'Julho 2026'!C90:D90",
+        "'Julho 2026'!K90:K90",
+        "'Julho 2026'!M90:M90",
+        "'Julho 2026'!R96:R96",
+        "'Julho 2026'!T96:T96",
+        "'Julho 2026'!R97:R97",
+        "'Julho 2026'!T97:T97"
+      ]
+    },
+    {
+      "key": "joe",
+      "action": "clear_constant_input_like_cells",
+      "range_count": 20,
+      "cell_count": 24,
+      "sample_ranges": [
+        "'Julho 2026'!T22:T22",
+        "'Julho 2026'!V22:V22",
+        "'Julho 2026'!T23:T23",
+        "'Julho 2026'!V23:V23",
+        "'Julho 2026'!C53:D53",
+        "'Julho 2026'!J53:L53",
+        "'Julho 2026'!T53:T53",
+        "'Julho 2026'!V53:V53",
+        "'Julho 2026'!R59:R59",
+        "'Julho 2026'!T59:T59",
+        "'Julho 2026'!R60:R60",
+        "'Julho 2026'!T60:T60",
+        "'Julho 2026'!C90:C90",
+        "'Julho 2026'!I90:J90",
+        "'Julho 2026'!R90:R90",
+        "'Julho 2026'!T90:T90",
+        "'Julho 2026'!K96:K96",
+        "'Julho 2026'!M96:M96",
+        "'Julho 2026'!K97:K97",
+        "'Julho 2026'!M97:M97"
+      ]
+    }
+  ],
+  "backups": [
+    "/root/mgs-agent/work/finance-month-rollover-audit/rollover-july-2026-20260703-185408/backup-principal_2026-Junho_2026.json",
+    "/root/mgs-agent/work/finance-month-rollover-audit/rollover-july-2026-20260703-185408/backup-principal_2026-CAIXA_SINTETICO.json",
+    "/root/mgs-agent/work/finance-month-rollover-audit/rollover-july-2026-20260703-185408/backup-kelly-Junho_2026.json",
+    "/root/mgs-agent/work/finance-month-rollover-audit/rollover-july-2026-20260703-185408/backup-isliago-Junho_2026.json",
+    "/root/mgs-agent/work/finance-month-rollover-audit/rollover-july-2026-20260703-185408/backup-george-Junho_2026.json",
+    "/root/mgs-agent/work/finance-month-rollover-audit/rollover-july-2026-20260703-185408/backup-nicolas-Junho_2026.json",
+    "/root/mgs-agent/work/finance-month-rollover-audit/rollover-july-2026-20260703-185408/backup-joe-Junho_2026.json"
+  ],
+  "validations": {
+    "principal_2026": {
+      "target_exists": true,
+      "formula_errors": [
+        {
+          "cell": "AGT36",
+          "value": "#DIV/0!"
+        },
+        {
+          "cell": "AGU36",
+          "value": "#DIV/0!"
+        }
+      ],
+      "formula_error_count": 2,
+      "literal_junho_refs_count": 5,
+      "literal_junho_refs_sample": [
+        {
+          "cell": "M146",
+          "formula": "=IF(IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ\",\"Junho 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ\",\"Junho 2026!H1\")),IF(IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ\",\"Junho 2026!D16\")<100000,-IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj"
+        },
+        {
+          "cell": "M147",
+          "formula": "=IF(IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Junho 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Junho 2026!H1\")),IF(IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Junho 2026!D16\")<100000,-IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWy"
+        },
+        {
+          "cell": "M149",
+          "formula": "=IF(IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Junho 2026!D13\")<=3000/7%,-(3000/IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Junho 2026!H1\")),IF(IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Junho 2026!D13\")<100000,-IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedW"
+        },
+        {
+          "cell": "M151",
+          "formula": "=IF(IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Junho 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Junho 2026!H1\")),IF(IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Junho 2026!D16\")<100000,-IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2"
+        },
+        {
+          "cell": "M152",
+          "formula": "=IF(IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Junho 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Junho 2026!H1\")),IF(IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Junho 2026!D16\")<100000,-IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz"
+        }
+      ],
+      "A3": "7.00",
+      "date_rows_B5_B35_count": 31
+    },
+    "kelly": {
+      "target_exists": true,
+      "formula_errors": [],
+      "formula_error_count": 0,
+      "literal_junho_refs_count": 0,
+      "literal_junho_refs_sample": []
+    },
+    "isliago": {
+      "target_exists": true,
+      "formula_errors": [],
+      "formula_error_count": 0,
+      "literal_junho_refs_count": 0,
+      "literal_junho_refs_sample": []
+    },
+    "george": {
+      "target_exists": true,
+      "formula_errors": [],
+      "formula_error_count": 0,
+      "literal_junho_refs_count": 0,
+      "literal_junho_refs_sample": []
+    },
+    "nicolas": {
+      "target_exists": true,
+      "formula_errors": [],
+      "formula_error_count": 0,
+      "literal_junho_refs_count": 0,
+      "literal_junho_refs_sample": []
+    },
+    "joe": {
+      "target_exists": true,
+      "formula_errors": [],
+      "formula_error_count": 0,
+      "literal_junho_refs_count": 0,
+      "literal_junho_refs_sample": []
+    }
+  },
+  "warnings": [],
+  "finished": "2026-07-03T18:55:21"
+}

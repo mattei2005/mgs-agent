@@ -25,7 +25,7 @@ O produto é um funil interativo estilo WhatsApp, geralmente composto por:
 5. **Ofertas finais** em modo cards ou sequencial.
 6. **Links P1/oferta** com UTMs preservadas.
 
-Regra executiva: para teste isolado, HTML pode servir. Para produção MGS escalável, preferir **plugin WordPress configurável** em vez de HTML solto.
+Regra executiva: para teste isolado, HTML pode servir. Para produção MGS escalável, preferir **plugin WordPress configurável** em vez de HTML solto — mas, quando o chat depende do wrapper JBF/Ciro, a rota pública deve renderizar um HTML standalone limpo e respeitar o contrato do wrapper.
 
 ## Quando usar
 
@@ -88,6 +88,18 @@ Ou shortcode/plugin:
 
 ### Para produção
 
+Preferir plugin WordPress, por exemplo `MGS Chat Funnels`, onde cada chat é uma configuração editável por interface administrativa. **Não basta o plugin aparecer em Installed Plugins**: Rodolfo precisa ter autonomia para editar textos, perguntas, ofertas, links, rotas e modo do funil no WP Admin, sem depender de ZIP, arquivo JSON manual ou Zeus.
+
+Requisito mínimo de produção:
+
+```text
+- Menu próprio no WP Admin, ex.: MGS Chats
+- Lista de chats/configs existentes
+- Criar novo chat
+- Editar/salvar config com validação
+- Remover chat
+### Para produção
+
 Preferir plugin WordPress, por exemplo `MGS Chat Funnels`, onde cada chat é uma configuração:
 
 ```json
@@ -111,10 +123,14 @@ Preferir plugin WordPress, por exemplo `MGS Chat Funnels`, onde cada chat é uma
 Vantagens do plugin:
 
 - evita drift entre HTMLs soltos;
-- centraliza tracking, rewarded, UTM e fallback;
+- centraliza conteúdo, rotas, persona, ofertas e links finais;
 - permite editar ofertas/textos por config;
 - reduz risco em escala multi-vertical/multi-país;
 - facilita QA e rollback.
+
+Limite importante: se houver wrapper JBF/Ciro, **não centralizar nem inventar configuração de ads no plugin**. Auctions, rewarded, interstitial, bids, timeout/fallback e inventário pertencem ao wrapper/adserver. O plugin só entrega o HTML limpo, `window.tags`, `gpt.js`, wrapper e os pontos de chamada que o HTML de referência já usa.
+
+Requisito de UX do admin: a configuração deve ficar por trás de uma interface humana. A tela principal precisa ter campos e ações de gestor de tráfego — criar novo chat, duplicar escolhendo novo ID e pasta/URL, excluir, abrir URL pública, editar gate/chat/persona/ofertas e ver relatórios. Não usar JSON bruto nem strings com separadores como interface principal; JSON só em seção avançada.
 
 ### Para teste rápido
 
@@ -320,24 +336,85 @@ function mergeSourceParams(targetUrl) {
 
 Não remover nem sobrescrever UTMs sem motivo explícito.
 
-## Rewarded/interstitial
+## Contrato de ads com wrapper JBF/Ciro
 
-Padrão:
+Quando Rodolfo trouxer um `index.html` do Ciro/JBF como referência, trate o wrapper como dono da implementação de anúncios. Não crie camada própria no plugin para ads.
 
-1. Carregar/requestar rewarded no background durante o gate.
-2. No CTA final do gate, tentar `showRewardedAds`.
-3. Se a função não existir ou falhar, liberar o chat como fallback.
-4. Nunca deixar usuário preso sem saída.
+Contrato mínimo do HTML público:
 
-Checklist:
+```html
+<script>window.tags = ["br", "car", "rec"];</script>
+<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<script defer src="https://assets.jbfdigital.com.br/assets/{company}/{domain}/{company}_{domain}.builder.js"></script>
+```
+
+No JS do chat, preserve apenas os pontos de chamada já existentes no HTML de referência:
+
+```js
+window.jbftag = window.jbftag || { cmd: [] };
+window.jbftag.cmd.push(() => {
+  if (window.jbftag.requestRewardAds) window.jbftag.requestRewardAds();
+});
+
+// No CTA final do gate:
+window.jbftag.cmd.push(() => {
+  if (window.jbftag.showRewardedAds) {
+    window.jbftag.showRewardedAds(closeQuiz);
+  } else {
+    closeQuiz();
+  }
+});
+
+// No ponto do banner inline:
+const adBanner = document.createElement("div");
+adBanner.innerHTML = `<div></div>`;
+adBanner.classList.add("ad-unit", "ad");
+adBanner.dataset.position = "top";
+chatBox.appendChild(adBanner);
+if (window.onInfinitePostLoaded) window.onInfinitePostLoaded();
+```
+
+Não adicionar no plugin/painel/config:
 
 ```text
-- requestRewardAds chamado no init do gate
-- showRewardedAds chamado no CTA
-- callback fecha modal e chama o chat
-- fallback fecha modal se rewarded não existir
-- gate não reabre depois de fechado
+- Quantidade de auctions
+- rewarded_auctions
+- rewarded_timeout_ms
+- bids
+- timeout/fallback próprio de ads
+- checkbox “exigir anúncio” controlando lógica do wrapper
 ```
+
+Se Rodolfo perguntar por que o anúncio não aparece, validar em browser/runtime e diferenciar:
+
+```text
+wrapper não carregou          problema de HTML/script/cache
+window.jbftag sem funções     problema de wrapper
+slot não criado               problema de ponto de chamada HTML/JS
+slot criado com .unfilled     problema de fill/adserver/inventário, não de render do plugin
+```
+
+Para diagnóstico, inspecionar `.ad-unit.ad`, `data-requested`, `data-displayed`, classe `unfilled`, iframes e `googletag.pubads().getSlots()`.
+
+## Rota standalone vs página WordPress
+
+Para rotas públicas `/chat/...` que precisam imitar `index.html`, o plugin pode servir a rota, mas a saída deve ser HTML standalone:
+
+```text
+- sem wp_head()
+- sem wp_footer()
+- sem Yoast
+- sem tema
+- sem admin bar
+- sem Contact Form 7/jQuery/WP scripts
+- CSS/JS do chat inline ou controlado pelo próprio renderer
+- gpt.js direto no head
+- wrapper direto no head
+- window.tags antes do wrapper
+```
+
+Se a resposta HTML contém “Page not found”, Yoast, `wp-includes/js`, `admin-bar`, tema ou plugins do WP, ainda não está equivalente ao `index.html` do Ciro.
+
 
 ## Checklist de criação
 
@@ -361,7 +438,7 @@ Durante implementação:
 - [ ] Botões removem opções antigas após clique.
 - [ ] Loading/typing indicator não trava.
 - [ ] CTA externo abre URL certa.
-- [ ] Fallback se anúncio não carregar.
+- [ ] Se usar wrapper JBF/Ciro, não criar configuração própria de ads; copiar o contrato do `index.html` de referência.
 
 Depois de implementar:
 
@@ -371,12 +448,17 @@ Depois de implementar:
 - [ ] Testar mobile viewport.
 - [ ] Verificar console sem erro crítico.
 - [ ] Validar pixel/eventos se aplicável.
-- [ ] Validar rewarded/interstitial ou fallback.
+- [ ] Se usar wrapper JBF/Ciro: confirmar `window.tags`, `gpt.js`, wrapper, `window.jbftag`, slot criado, e distinguir `unfilled` de falha de render.
+- [ ] Se for plugin WordPress de produção, validar menu/admin UI: página admin HTTP 200, configs carregadas, save no-op funcionando, rota pública standalone e shortcode exibidos.
 
 ## Referências canônicas desta skill
 
+- `references/jbf-ciro-wrapper-contract.md` — contrato de integração ads para chats baseados em `index.html` do Ciro/JBF: plugin só controla contexto do chat; wrapper controla auctions/rewarded/interstitial/fill; inclui checklist de paridade literal quando Rodolfo pedir “100% igual”.
 - `references/examples.md` — análise dos exemplos EMP-BR e CAR-BR.
 - `references/config-schema.md` — schema sugerido para plugin/config.
+- `references/wp-plugin-scaffold-mvp.md` — padrão MVP validado para plugin WordPress `MGS Chat Funnels`, incluindo estrutura, validações e pitfalls de rota standalone + contrato do wrapper JBF/Ciro.
+- `references/wp-plugin-human-admin-ui.md` — padrão de admin humano para gestor de tráfego: criar, duplicar, excluir, editar campos e ofertas por blocos/repeaters, sem exigir JSON ou pipes.
+- `templates/chat-funnel-config.json` — template inicial para novo chat.
 - `templates/chat-funnel-config.json` — template inicial para novo chat.
 
 ## Pitfalls
@@ -388,6 +470,7 @@ Depois de implementar:
 5. **Cards vs sequential muda a psicologia.** Cards = escolha rápida; sequential = atendimento humano e prioridade de oferta.
 6. **Não coletar lead sem política clara.** Nome/telefone/CPF/email exigem armazenamento, consentimento e QA de integração.
 7. **Não misturar vertical/país no slug.** `EMP-BR` e `EMP-US` podem ter textos, compliance e ofertas diferentes.
+8. **Admin de WordPress não pode parecer ferramenta de dev.** Rodolfo rejeitou editor principal em JSON e textarea de ofertas com `|`. Para produção, criar interface de gestor de tráfego: campos humanos, botões de criar/duplicar/excluir, URL do chat visível, relatório/inventário, e ofertas como blocos/repeaters com campos separados. JSON bruto só em avançado/debug.
 
 ## Resposta padrão quando Rodolfo pedir um chat novo
 
@@ -409,4 +492,4 @@ Se ele já deu ofertas, agir direto: criar config/HTML/plugin conforme escopo e 
 - [ ] UTMs preservadas.
 - [ ] Rewarded tem fallback.
 - [ ] Links finais testados.
-- [ ] Se criou/modificou plugin/script/config/data, fazer REPORT-INFRA e atualizar inventário.
+- [ ] Se criou/modificou plugin/script/config/data, fazer REPORT-INFRA no canal correto de infra/alerts e manter a thread de trabalho com resumo executivo curto.

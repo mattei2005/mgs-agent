@@ -1,0 +1,189 @@
+{
+  "status": "OK",
+  "executed_at_et": "2026-06-30T04:49:42-04:00",
+  "source_tab": "ES-CC-ES",
+  "test6_template": "teste-6-es-cc-es-test5-sem-status-reapproval",
+  "test6_messages": 36,
+  "test6_counts": {
+    "": 12,
+    "APPROVED": 19,
+    "REJECTED": 5,
+    "INVALID_FORMAT": 0,
+    "ERROR": 0
+  },
+  "sheet_info": {
+    "backup": "/root/mgs-agent/work/meta-utility/es-cc-es-apply-best70-20260630/es-cc-es-before-test6-status-update-20260630-044831.json",
+    "readback_rows": 201,
+    "counts": {
+      "REJECTED": 39,
+      "APPROVED": 150,
+      "": 12
+    },
+    "approved_updates": 19,
+    "all_updates": 36
+  },
+  "approved_available_after_update": 150,
+  "selected_bank_count": 70,
+  "selected_bank_json": "/root/mgs-agent/work/meta-utility/es-cc-es-apply-best70-20260630/es-cc-es-approved-best70-selected-bank.json",
+  "selected_bank_csv": "/root/mgs-agent/work/meta-utility/es-cc-es-apply-best70-20260630/es-cc-es-approved-best70-selected-bank.csv",
+  "targets_requested": [
+    "Wantabrand - ES-CC-ES/ES-ZW - M2 - g001-d Icaro",
+    "Fincgriffin - ES-CC-ES/ES-ZW-SR - g006-d Nicolas",
+    "Fincgriffin - ES-CC-ES/ES-ZW-SR - g001-d Icaro",
+    "Fincgriffin - ES-CC-ES/ES-ZW-SR - g003-d Isliago",
+    "Fincgriffin - ES-CC-ES/ES-ZW-SR - g004-d Joe",
+    "Fincgriffin - ES-CC-ES/ES-ZW-SR - g005-d Kelly",
+    "ZytivaFinanzas - ES-CC-ES/ES-ZW-SR - g003-d Isliago",
+    "Openzed - ES-CC-ES/ES-ZW - AV - g003-d Isliago"
+  ],
+  "update_results": [
+    {
+      "name": "Wantabrand - ES-CC-ES/ES-ZW - M2 - g001-d Icaro",
+      "id": "69aa2921-56da-79a2-d3a9-37abb7a00c59",
+      "before_count": 60,
+      "after_target": 70,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/wantabrand---es-cc-es-es-zw---m2---g001-d-icaro-before-es-cc-es-best70-20260630-044831.json",
+      "backup_csv": "/root/mgs-agent/backups/sb-templates/wantabrand---es-cc-es-es-zw---m2---g001-d-icaro-before-es-cc-es-best70-20260630-044831.csv",
+      "post_status": 201,
+      "first_link": "https://tarjeta.wantabrand.com/2G6KfRgs/?utm_source=facebook&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_term=wantabrand-es-cc-es-bd&utm_content=[utm_content]",
+      "last_link": "https://tarjeta.wantabrand.com/2G6KfRgs/?utm_source=facebook&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_term=wantabrand-es-cc-es-bd&utm_content=[utm_content]"
+    },
+    {
+      "name": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g006-d Nicolas",
+      "id": "69d19412-7229-0e98-46ae-a5f61392f1bc",
+      "before_count": 60,
+      "after_target": 70,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g006-d-nicolas-before-es-cc-es-best70-20260630-044831.json",
+      "backup_csv": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g006-d-nicolas-before-es-cc-es-best70-20260630-044831.csv",
+      "post_status": 201,
+      "first_link": "https://fincgriffin.com/fincg-es-cc-es-mct-001/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+      "last_link": "https://fincgriffin.com/fincg-es-cc-es-mct-010/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+    },
+    {
+      "name": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g001-d Icaro",
+      "id": "69d2a11b-2600-8b7a-1a4f-bddd3bd1bf29",
+      "before_count": 60,
+      "after_target": 70,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g001-d-icaro-before-es-cc-es-best70-20260630-044831.json",
+      "backup_csv": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g001-d-icaro-before-es-cc-es-best70-20260630-044831.csv",
+      "post_status": 201,
+      "first_link": "https://fincgriffin.com/fincg-es-cc-es-mct-001/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+      "last_link": "https://fincgriffin.com/fincg-es-cc-es-mct-010/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+    },
+    {
+      "name": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g003-d Isliago",
+      "id": "69d2a1ec-1f01-75d9-2044-16ab65c356eb",
+      "before_count": 60,
+      "after_target": 70,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g003-d-isliago-before-es-cc-es-best70-20260630-044831.json",
+      "backup_csv": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g003-d-isliago-before-es-cc-es-best70-20260630-044831.csv",
+      "post_status": 201,
+      "first_link": "https://fincgriffin.com/fincg-es-cc-es-mct-001/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+      "last_link": "https://fincgriffin.com/fincg-es-cc-es-mct-010/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+    },
+    {
+      "name": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g004-d Joe",
+      "id": "69d2a3f3-f4fb-fd32-0801-8f9bca760a58",
+      "before_count": 60,
+      "after_target": 70,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g004-d-joe-before-es-cc-es-best70-20260630-044831.json",
+      "backup_csv": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g004-d-joe-before-es-cc-es-best70-20260630-044831.csv",
+      "post_status": 201,
+      "first_link": "https://fincgriffin.com/fincg-es-cc-es-mct-001/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+      "last_link": "https://fincgriffin.com/fincg-es-cc-es-mct-010/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+    },
+    {
+      "name": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g005-d Kelly",
+      "id": "69d2a595-5418-ffd0-3921-74d2b737d9c0",
+      "before_count": 60,
+      "after_target": 70,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g005-d-kelly-before-es-cc-es-best70-20260630-044831.json",
+      "backup_csv": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g005-d-kelly-before-es-cc-es-best70-20260630-044831.csv",
+      "post_status": 201,
+      "first_link": "https://fincgriffin.com/fincg-es-cc-es-mct-001/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+      "last_link": "https://fincgriffin.com/fincg-es-cc-es-mct-010/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+    },
+    {
+      "name": "ZytivaFinanzas - ES-CC-ES/ES-ZW-SR - g003-d Isliago",
+      "id": "69d2cf30-b226-c478-ca72-33a6d099b0de",
+      "before_count": 60,
+      "after_target": 70,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/zytivafinanzas---es-cc-es-es-zw-sr---g003-d-isliago-before-es-cc-es-best70-20260630-044831.json",
+      "backup_csv": "/root/mgs-agent/backups/sb-templates/zytivafinanzas---es-cc-es-es-zw-sr---g003-d-isliago-before-es-cc-es-best70-20260630-044831.csv",
+      "post_status": 201,
+      "first_link": "https://finanzas.zytiva.com/zy-es-cc-es-mct-001/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]",
+      "last_link": "https://finanzas.zytiva.com/zy-es-cc-es-mct-010/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]"
+    },
+    {
+      "name": "Openzed - ES-CC-ES/ES-ZW - AV - g003-d Isliago",
+      "id": "69d3d82b-0d2e-de79-2a0f-51bff1f66c81",
+      "before_count": 60,
+      "after_target": 70,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/openzed---es-cc-es-es-zw---av---g003-d-isliago-before-es-cc-es-best70-20260630-044831.json",
+      "backup_csv": "/root/mgs-agent/backups/sb-templates/openzed---es-cc-es-es-zw---av---g003-d-isliago-before-es-cc-es-best70-20260630-044831.csv",
+      "post_status": 201,
+      "first_link": "https://tarjeta.openzed.com/tP6kwCw3?utm_source=facebook&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_term=openzed-es-cc-es-bd&utm_content=[utm_content]",
+      "last_link": "https://tarjeta.openzed.com/tP6kwCw3?utm_source=facebook&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_term=openzed-es-cc-es-bd&utm_content=[utm_content]"
+    }
+  ],
+  "validation": [
+    {
+      "name": "Wantabrand - ES-CC-ES/ES-ZW - M2 - g001-d Icaro",
+      "validated": true,
+      "count": 70,
+      "first_text_visible": "📍 ESTADO CONFIRMADO\n\nSu solicitud de tarjeta de crédito pasó al paso de revisión",
+      "last_text_visible": "📎 CONFIRMACIÓN DE INFORMACIÓN\n\n{{first_name}}, tu confirmación de información es"
+    },
+    {
+      "name": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g006-d Nicolas",
+      "validated": true,
+      "count": 70,
+      "first_text_visible": "📍 ESTADO CONFIRMADO\n\nSu solicitud de tarjeta de crédito pasó al paso de revisión",
+      "last_text_visible": "📎 CONFIRMACIÓN DE INFORMACIÓN\n\n{{first_name}}, tu confirmación de información es"
+    },
+    {
+      "name": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g001-d Icaro",
+      "validated": true,
+      "count": 70,
+      "first_text_visible": "📍 ESTADO CONFIRMADO\n\nSu solicitud de tarjeta de crédito pasó al paso de revisión",
+      "last_text_visible": "📎 CONFIRMACIÓN DE INFORMACIÓN\n\n{{first_name}}, tu confirmación de información es"
+    },
+    {
+      "name": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g003-d Isliago",
+      "validated": true,
+      "count": 70,
+      "first_text_visible": "📍 ESTADO CONFIRMADO\n\nSu solicitud de tarjeta de crédito pasó al paso de revisión",
+      "last_text_visible": "📎 CONFIRMACIÓN DE INFORMACIÓN\n\n{{first_name}}, tu confirmación de información es"
+    },
+    {
+      "name": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g004-d Joe",
+      "validated": true,
+      "count": 70,
+      "first_text_visible": "📍 ESTADO CONFIRMADO\n\nSu solicitud de tarjeta de crédito pasó al paso de revisión",
+      "last_text_visible": "📎 CONFIRMACIÓN DE INFORMACIÓN\n\n{{first_name}}, tu confirmación de información es"
+    },
+    {
+      "name": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g005-d Kelly",
+      "validated": true,
+      "count": 70,
+      "first_text_visible": "📍 ESTADO CONFIRMADO\n\nSu solicitud de tarjeta de crédito pasó al paso de revisión",
+      "last_text_visible": "📎 CONFIRMACIÓN DE INFORMACIÓN\n\n{{first_name}}, tu confirmación de información es"
+    },
+    {
+      "name": "ZytivaFinanzas - ES-CC-ES/ES-ZW-SR - g003-d Isliago",
+      "validated": true,
+      "count": 70,
+      "first_text_visible": "📍 ESTADO CONFIRMADO\n\nSu solicitud de tarjeta de crédito pasó al paso de revisión",
+      "last_text_visible": "📎 CONFIRMACIÓN DE INFORMACIÓN\n\n{{first_name}}, tu confirmación de información es"
+    },
+    {
+      "name": "Openzed - ES-CC-ES/ES-ZW - AV - g003-d Isliago",
+      "validated": true,
+      "count": 70,
+      "first_text_visible": "📍 ESTADO CONFIRMADO\n\nSu solicitud de tarjeta de crédito pasó al paso de revisión",
+      "last_text_visible": "📎 CONFIRMACIÓN DE INFORMACIÓN\n\n{{first_name}}, tu confirmación de información es"
+    }
+  ],
+  "all_validated": true,
+  "sheet_url": "https://docs.google.com/spreadsheets/d/1ieSjYbhl34T0tWOvvol3F2lhvCoVTWHm9_YnUkoVhtM/edit"
+}

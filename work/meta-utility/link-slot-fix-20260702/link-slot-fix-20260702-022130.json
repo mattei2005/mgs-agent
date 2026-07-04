@@ -1,0 +1,770 @@
+{
+  "executed_at_et": "2026-07-02T02:24:02-04:00",
+  "fixed_count": 38,
+  "failed_count": 0,
+  "fixed_templates": [
+    {
+      "template": "Ducapes Finance - US-CC-EN/EN-SR - g001-d Icaro",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/ducapes-finance---us-cc-en-en-sr---g001-d-icaro-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Eggbev - US-CC-EN/EN-SR - g006-d Nicolas",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/eggbev---us-cc-en-en-sr---g006-d-nicolas-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Lyzmo - US-CC-EN/EN-SR - g006-d Nicolas",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/lyzmo---us-cc-en-en-sr---g006-d-nicolas-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Marevelx - US-CC-EN/EN-SR - g001-d Icaro",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/marevelx---us-cc-en-en-sr---g001-d-icaro-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Newsoun - US-CC-EN/EN-SR - g005-d Kelly",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/newsoun---us-cc-en-en-sr---g005-d-kelly-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Financetopfeed - US-CC-EN/EN-SR - g004-d Joe",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/financetopfeed---us-cc-en-en-sr---g004-d-joe-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Zytiva - US-CC-EN/EN-SR - g003-d Isliago",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 25,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/zytiva---us-cc-en-en-sr---g003-d-isliago-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Conecta - US-CC-EN/EN-SR - g001-d Icaro",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/conecta---us-cc-en-en-sr---g001-d-icaro-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Vizioid - US-CC-EN/EN-SR - g002-d Gustavo",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/vizioid---us-cc-en-en-sr---g002-d-gustavo-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Xyvlov - US-CC-EN/EN-SR - g003-d Isliago",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/xyvlov---us-cc-en-en-sr---g003-d-isliago-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Helixenit - US-CC-EN/EN-SR - g005-d Kelly",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/helixenit---us-cc-en-en-sr---g005-d-kelly-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Financeadx - US-CC-EN/EN-SR - g006-d Nicolas",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/financeadx---us-cc-en-en-sr---g006-d-nicolas-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Newsoun - GB-CC-EN/EN-SR - g005-d Kelly",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/newsoun---gb-cc-en-en-sr---g005-d-kelly-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Financetopfeed - GB-CC-EN/EN-SR - g004-d Joe",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 27,
+      "first_bad_slots": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/financetopfeed---gb-cc-en-en-sr---g004-d-joe-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Lyzmo - GB-CC-EN/EN-SR - g006-d Nicolas",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/lyzmo---gb-cc-en-en-sr---g006-d-nicolas-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Fincgriffin - GB-CC-EN/EN-SR - g006-d Nicolas",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/fincgriffin---gb-cc-en-en-sr---g006-d-nicolas-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Eggbev - GB-CC-EN/EN-SR - g006-d Nicolas",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/eggbev---gb-cc-en-en-sr---g006-d-nicolas-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Fincgriffin - GB-CC-EN/EN-SR - g001-d Icaro",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/fincgriffin---gb-cc-en-en-sr---g001-d-icaro-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Fincgriffin - GB-CC-EN/EN-SR - g003-d Isliago",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/fincgriffin---gb-cc-en-en-sr---g003-d-isliago-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Fincgriffin - GB-CC-EN/EN-SR - g004-d Joe",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/fincgriffin---gb-cc-en-en-sr---g004-d-joe-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Fincgriffin - GB-CC-EN/EN-SR - g005-d Kelly",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/fincgriffin---gb-cc-en-en-sr---g005-d-kelly-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Portal - US-CC-ES/ES-ZW - AV - g001-d Icaro",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/portal---us-cc-es-es-zw---av---g001-d-icaro-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Xyvlov - US-CC-ES/ES-ZW-SR - g003-d Isliago",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 22,
+      "first_bad_slots": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/xyvlov---us-cc-es-es-zw-sr---g003-d-isliago-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Infinitynexx - US-CC-ES/ES-ZW-SR - g004-d Joe",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 29,
+      "first_bad_slots": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/infinitynexx---us-cc-es-es-zw-sr---g004-d-joe-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Helixenit - US-CC-ES/ES-ZW-SR - g005-d Kelly",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 23,
+      "first_bad_slots": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/helixenit---us-cc-es-es-zw-sr---g005-d-kelly-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Vizioid - US-CC-ES/ES-ZW-SR - g002-d Gustavo",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/vizioid---us-cc-es-es-zw-sr---g002-d-gustavo-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Financetopfeed - US-CC-ES/ES-ZW-SR - g004-d Joe",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/financetopfeed---us-cc-es-es-zw-sr---g004-d-joe-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Ducapes - US-CC-ES/ES-ZW-SR - g001-d Icaro",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/ducapes---us-cc-es-es-zw-sr---g001-d-icaro-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Lyzmo Finanzas - US-CC-ES/ES-ZW-SR - g006-d Nicolas",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/lyzmo-finanzas---us-cc-es-es-zw-sr---g006-d-nicolas-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Newsoun - US-CC-ES/ES-ZW-SR - g005-d Kelly",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 28,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/newsoun---us-cc-es-es-zw-sr---g005-d-kelly-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Marevelx - US-CC-ES/ES-ZW-SR - g001-d Icaro",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/marevelx---us-cc-es-es-zw-sr---g001-d-icaro-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Financeadx - US-CC-ES/ES-ZW-SR - g006-d Nicolas",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/financeadx---us-cc-es-es-zw-sr---g006-d-nicolas-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g006-d Nicolas",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g006-d-nicolas-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g001-d Icaro",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g001-d-icaro-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g003-d Isliago",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g003-d-isliago-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g004-d Joe",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g004-d-joe-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "Fincgriffin - ES-CC-ES/ES-ZW-SR - g005-d Kelly",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/fincgriffin---es-cc-es-es-zw-sr---g005-d-kelly-before-link-slot-fix-20260702-022130.json"
+    },
+    {
+      "template": "ZytivaFinanzas - ES-CC-ES/ES-ZW-SR - g003-d Isliago",
+      "ok": true,
+      "post_status": 201,
+      "messages": 30,
+      "mismatches_before": 30,
+      "first_bad_slots": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "backup": "/root/mgs-agent/backups/sb-templates/zytivafinanzas---es-cc-es-es-zw-sr---g003-d-isliago-before-link-slot-fix-20260702-022130.json"
+    }
+  ],
+  "skipped": [],
+  "remaining_bad_count": 0,
+  "remaining_bad": []
+}

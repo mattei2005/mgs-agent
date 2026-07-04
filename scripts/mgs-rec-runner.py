@@ -137,6 +137,48 @@ def strip_html_to_text(raw: str) -> str:
     return raw[:18000]
 
 
+def normalize_plain_text_for_similarity(raw: str) -> str:
+    text = strip_html_to_text(raw)
+    text = re.sub(r"[^a-z0-9£$€%]+", " ", text.lower())
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def longest_common_word_run(a: str, b: str, *, max_words: int = 80) -> int:
+    aw = normalize_plain_text_for_similarity(a).split()[:max_words * 400]
+    bw = normalize_plain_text_for_similarity(b).split()[:max_words * 800]
+    if not aw or not bw:
+        return 0
+    prev = [0] * (len(bw) + 1)
+    best = 0
+    for x in aw:
+        cur = [0]
+        for j, y in enumerate(bw, 1):
+            v = prev[j - 1] + 1 if x == y else 0
+            if v > best:
+                best = v
+                if best >= max_words:
+                    return best
+            cur.append(v)
+        prev = cur
+    return best
+
+
+def validate_rewrite_similarity(output_html: str, reference_text: str, *, label: str = "reference_article") -> Dict[str, Any]:
+    if not reference_text:
+        return {"ok": True, "skipped": True, "reason": "no_reference_text"}
+    run_len = longest_common_word_run(output_html, reference_text)
+    detail = {
+        "ok": run_len < 18,
+        "label": label,
+        "longest_common_word_run": run_len,
+        "threshold": 18,
+        "rule": "rewrite output must not copy long contiguous phrasing from the article-base",
+    }
+    if not detail["ok"]:
+        raise RunnerError(f"rewrite_similarity_gate_failed: {json.dumps(detail, ensure_ascii=False)}")
+    return detail
+
+
 def fetch_reference_text(url: str) -> Tuple[int, str]:
     req = urllib.request.Request(
         url,
@@ -1041,6 +1083,22 @@ def _rec_llm_build_prompt(card_data: Dict[str, Any], lang: str, contract_text: s
     apr = str(card_data.get("apr") or "")
     benefits = [str(b).strip() for b in (card_data.get("benefits") or []) if str(b).strip()]
     benefits_block = "\n".join(f"- {b}" for b in benefits)
+    reference_url = str(card_data.get("reference_article_url") or "").strip()
+    reference_text = str(card_data.get("reference_article_text") or "").strip()
+    reference_block = ""
+    if reference_text:
+        reference_block = f"""
+
+ARTICLE-BASE FOR REWRITE (editorial source; DO NOT COPY):
+- URL: {reference_url}
+- Use this article to understand the product, benefit order, conversion angle and missing context.
+- Reconstruct the REC in the MGS contract; do not paraphrase sentence-by-sentence.
+- Change the opening, paragraph order where useful, examples, transitions and phrasing.
+- Preserve facts and benefits, but write original copy with low textual similarity.
+--- BEGIN ARTICLE-BASE EXTRACT ---
+{reference_text[:22000]}
+--- END ARTICLE-BASE EXTRACT ---
+"""
     return f"""You are writing the BODY of a REC credit-card article for MGS.
 
 Follow this editorial contract exactly:
@@ -1061,7 +1119,7 @@ CONFIRMED FACTS (use ONLY these; never invent numbers, fees, APR, periods or ben
 - Language: write the entire article in {lang}
 - Benefits / facts:
 {benefits_block}
-
+{reference_block}
 WRITING RULES:
 - Use the card name in H2/H3 headings where natural (e.g. "Benefits of {name}"),
   never generic labels like "Benefits of the Card".
@@ -1707,7 +1765,9 @@ def main() -> int:
     ap.add_argument("--site", required=True)
     ap.add_argument("--card", required=True)
     ap.add_argument("--status", choices=["draft", "publish"], default="draft")
-    ap.add_argument("--source-url", default="")
+    ap.add_argument("--source-url", default="", help="Official issuer/product URL used for sensitive-claim validation and P1 CTA")
+    ap.add_argument("--article-url", default="", help="Article-base URL for the normal rewrite_from_article mode")
+    ap.add_argument("--allow-official-only", action="store_true", help="Debug/reversal only: allow old official-source-only generation when no article-base URL is available")
     ap.add_argument("--annual-fee", default="")
     ap.add_argument("--apr", default="")
     ap.add_argument("--benefit", action="append", default=[])
@@ -1786,33 +1846,50 @@ def main() -> int:
             }
             steps.append("request_facts_used")
         else:
-            if not args.source_url:
-                raise RunnerError("official source URL required; editorial card-cache is disabled for production content")
+            if not args.article_url and not args.allow_official_only:
+                raise RunnerError("article-base URL required for normal production; pass --article-url. Old official-source-only generation is disabled except with --allow-official-only for debug/reversal.")
+            source_fetch_url = args.article_url or args.source_url
+            if not source_fetch_url:
+                raise RunnerError("source URL required: pass --article-url for rewrite mode or --source-url with --allow-official-only for debug")
             t0 = time.time()
-            status, text = fetch_reference_text(args.source_url)
-            tick("reference_fetch_sec", t0)
+            status, text = fetch_reference_text(source_fetch_url)
+            tick("article_base_fetch_sec" if args.article_url else "reference_fetch_sec", t0)
             if status >= 400:
                 raise RunnerError(f"reference_url returned HTTP {status}")
             t0 = time.time()
-            card_data = extract_card_data_with_llm(args.card, args.source_url, text)
-            tick("reference_extract_llm_sec", t0)
-            card_data["card_official_url"] = args.source_url
-            steps.append("reference_extracted_deterministic")
+            card_data = extract_card_data_with_llm(args.card, source_fetch_url, text)
+            tick("article_base_extract_sec" if args.article_url else "reference_extract_llm_sec", t0)
+            if args.article_url:
+                card_data["reference_article_url"] = args.article_url
+                card_data["reference_article_text"] = text[:22000]
+                card_data["source_mode"] = "rewrite_from_article"
+                steps.append("article_base_extracted_deterministic")
+            else:
+                card_data["source_mode"] = "official_only_debug"
+                steps.append("reference_extracted_deterministic")
+            card_data["card_official_url"] = args.source_url or source_fetch_url
             costs["extract_llm_est"] = 0.0
 
         card_data["card_name"] = card_data.get("card_name") or args.card
         source_to_check = args.source_url or card_data.get("card_official_url") or ""
         if source_to_check:
-            t0 = time.time()
-            status_check, source_text = fetch_reference_text(source_to_check)
-            tick("official_source_content_gate_sec", t0)
-            if status_check >= 400:
-                raise RunnerError(f"official source returned HTTP {status_check}: {source_to_check}")
-            source_ok, source_reason = official_source_has_content(card_data["card_name"], source_to_check, source_text)
-            if not source_ok:
-                raise RunnerError(f"Official source URL has no usable product content; ask Raquel/Rodolfo for the correct official link. url={source_to_check} reason={source_reason}")
-            card_data["card_official_url"] = source_to_check
-            steps.append("official_source_content_gate_passed")
+            if args.article_url:
+                parsed_offer = urllib.parse.urlparse(source_to_check)
+                if parsed_offer.scheme not in {"http", "https"} or not parsed_offer.netloc:
+                    raise RunnerError(f"invalid final offer URL extracted/provided for CTA: {source_to_check}")
+                card_data["card_official_url"] = source_to_check
+                steps.append("final_offer_url_present_from_reference_flow")
+            else:
+                t0 = time.time()
+                status_check, source_text = fetch_reference_text(source_to_check)
+                tick("official_source_content_gate_sec", t0)
+                if status_check >= 400:
+                    raise RunnerError(f"official source returned HTTP {status_check}: {source_to_check}")
+                source_ok, source_reason = official_source_has_content(card_data["card_name"], source_to_check, source_text)
+                if not source_ok:
+                    raise RunnerError(f"Official source URL has no usable product content; ask Raquel/Rodolfo for the correct official link. url={source_to_check} reason={source_reason}")
+                card_data["card_official_url"] = source_to_check
+                steps.append("official_source_content_gate_passed")
         if args.card_image_url:
             # A user-supplied card image is an explicit override. Do not reuse a
             # cached/uploaded card image for the same card, otherwise manual
@@ -1856,6 +1933,8 @@ def main() -> int:
             tick("article_llm_generate_sec", t0)
             steps.append("article_generated_llm")
             rec_body_telemetry = api.get("body_generation") or rec_body_telemetry
+            rewrite_similarity = validate_rewrite_similarity(api.get("article_html") or "", str(card_data.get("reference_article_text") or ""))
+            api.setdefault("content_validation_extra", {})["rewrite_similarity"] = rewrite_similarity
             if args.dry_run:
                 try:
                     _bp = Path(tempfile.gettempdir()) / f"rec-body-{card_slug}.html"

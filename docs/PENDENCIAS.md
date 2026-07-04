@@ -4,7 +4,7 @@
 > Gerado automaticamente a partir de `data/pendencias.db.json`.  
 > Para adicionar/resolver: use scripts em `scripts/pendencia-*.sh`
 
-**Última atualização:** 2026-05-20T01:42:28-04:00  
+**Última atualização:** 2026-06-19T19:03:40-04:00  
 **Total abertas:** 53  
 **Total resolvidas:** 37
 
@@ -80,7 +80,7 @@
 | `PEND-049` | PITFALLs centralizados (mencionar wp_curl_auth em mais skills) | `skills` | 10min cada | — |
 | `PEND-050` | iOS Apple Unlisted Distribution review | `externo` | aguardar Apple | Apple review |
 | `PEND-051` | openzed.com cleanup completo pós-recovery | `externo` | 30min | Confirmar 100% pós-recovery |
-| `PEND-052` | Hetzner snapshots cleanup (4 snapshots ativos) | `externo` | 5min | — |
+| `PEND-052` | Confirmar exclusão Hetzner antiga pós-migração | `externo` | 5min | — |
 | `PEND-053` | SSH login notification cleanup MatteiInc01 | `pessoal` | 1h | — |
 | `PEND-055` | SSH no Mac do Rodolfo | `pessoal` | 30min | — |
 | `PEND-056` | Backup ZIP automatizado da operação | `infra` | 2h | — |
@@ -118,7 +118,7 @@
 
 - **`app`** — MGS Dashboard, USX Track, MGS Tasks (iOS/Android)
 - **`seguranca`** — Vulnerabilidades, credenciais, acesso
-- **`infra`** — Hetzner VPS, scripts, crons, monitores
+- **`infra`** — Hostinger VPS, scripts, crons, monitores
 - **`conteudo`** — REC, P1, SEO, templates, RECs específicos
 - **`skills`** — Skills Atena/Zeus, refactoring, novas skills
 - **`agente`** — Atena, Zeus, futuros agentes (Ares)

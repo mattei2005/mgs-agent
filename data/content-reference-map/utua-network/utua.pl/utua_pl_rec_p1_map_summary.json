@@ -1,0 +1,140 @@
+{
+  "domain": "utua.pl",
+  "sitemap_index": "https://utua.pl/sitemap_index.xml",
+  "mapping_rule": "UTUA_P1 -> REC; UTUA_P2 -> P1",
+  "post_sitemaps": [
+    "https://utua.pl/post-sitemap1.xml",
+    "https://utua.pl/post-sitemap2.xml"
+  ],
+  "post_url_count": 243,
+  "source_p1_p2_article_count": 241,
+  "source_stage_counts": {
+    "UTUA_P2": 94,
+    "UTUA_P1": 147
+  },
+  "rec_rows": 147,
+  "rec_with_reference_p1": 94,
+  "rec_without_reference_p1": 53,
+  "orphan_source_p2_without_rec": 0,
+  "reference_pair_status_counts": {
+    "REC_only": 53,
+    "REC+P1": 94
+  },
+  "country_counts": {
+    "cc": 59,
+    "emp": 45,
+    "finance": 2,
+    "fr": 38,
+    "no": 2,
+    "se": 1
+  },
+  "country_vertical_top": [
+    {
+      "country": "fr",
+      "vertical": "cc",
+      "count": 38
+    },
+    {
+      "country": "cc",
+      "vertical": "karta",
+      "count": 8
+    },
+    {
+      "country": "cc",
+      "vertical": "santander",
+      "count": 7
+    },
+    {
+      "country": "cc",
+      "vertical": "millennium",
+      "count": 6
+    },
+    {
+      "country": "cc",
+      "vertical": "ing",
+      "count": 5
+    },
+    {
+      "country": "cc",
+      "vertical": "mbank",
+      "count": 5
+    },
+    {
+      "country": "cc",
+      "vertical": "bnp",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "ing",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "kredyt",
+      "count": 4
+    },
+    {
+      "country": "emp",
+      "vertical": "citibank",
+      "count": 3
+    },
+    {
+      "country": "emp",
+      "vertical": "pekao",
+      "count": 3
+    },
+    {
+      "country": "cc",
+      "vertical": "alior",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "pko",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "velo",
+      "count": 2
+    },
+    {
+      "country": "emp",
+      "vertical": "alior",
+      "count": 2
+    },
+    {
+      "country": "emp",
+      "vertical": "pkobp",
+      "count": 2
+    },
+    {
+      "country": "emp",
+      "vertical": "santander",
+      "count": 2
+    },
+    {
+      "country": "emp",
+      "vertical": "velobank",
+      "count": 2
+    },
+    {
+      "country": "no",
+      "vertical": "cc",
+      "count": 2
+    },
+    {
+      "country": "cc",
+      "vertical": "citi",
+      "count": 1
+    }
+  ],
+  "errors": [],
+  "generated_at": "2026-06-29T06:37:32.754595Z",
+  "generated_files": [
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.pl/utua_pl_rec_p1_map.csv",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.pl/utua_pl_rec_p1_map.json",
+    "/root/mgs-agent/data/content-reference-map/utua-network/utua.pl/utua_pl_rec_p1_map_summary.json"
+  ]
+}

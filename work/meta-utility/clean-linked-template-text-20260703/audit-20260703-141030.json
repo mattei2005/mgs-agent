@@ -1,0 +1,650 @@
+{
+  "executed_at_et": "2026-07-03T14:10:48-04:00",
+  "apply": false,
+  "run_approvals": false,
+  "live_templates_total": 101,
+  "linked_templates": 45,
+  "templates_changed": 45,
+  "messages_changed": 474,
+  "live_backup": "/root/mgs-agent/work/meta-utility/clean-linked-template-text-20260703/broadcast-live-before-20260703-141030.json",
+  "change_csv": "/root/mgs-agent/work/meta-utility/clean-linked-template-text-20260703/changed-messages-20260703-141030.csv",
+  "results": [
+    {
+      "template": "Cliquet - US-CC-EN/EN - AV - g002-d Gustavo",
+      "id": "672d84b5-7036-807b-893f-5612ce7bd8fe",
+      "pages": 6,
+      "messages_total": 20,
+      "messages_changed": 8,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/cliquet---us-cc-en-en---av---g002-d-gustavo-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Cliquet Finanzas - US-CC-ES/ES-ZW - AV - g002-d Gustavo",
+      "id": "68884c57-b8c6-79cc-b9cd-351def6786a5",
+      "pages": 51,
+      "messages_total": 20,
+      "messages_changed": 8,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/cliquet-finanzas---us-cc-es-es-zw---av---g002-d-gustavo-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Ducapes Finance - US-CC-EN/EN-SR - g001-d Icaro",
+      "id": "6967bf87-dd2f-fc96-179b-b6ad2393ee9a",
+      "pages": 1,
+      "messages_total": 20,
+      "messages_changed": 9,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/ducapes-finance---us-cc-en-en-sr---g001-d-icaro-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Eggbev - US-CC-EN/EN-SR - g006-d Nicolas",
+      "id": "691bbfd5-e13c-f552-4b39-3dedf76d15bf",
+      "pages": 102,
+      "messages_total": 20,
+      "messages_changed": 13,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/eggbev---us-cc-en-en-sr---g006-d-nicolas-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Eggbev Finanzas - US-CC-ES/ES-ZW - AV - g006-d Nicolas",
+      "id": "696715ce-e3d1-c90b-0e96-76766fd2236c",
+      "pages": 9,
+      "messages_total": 20,
+      "messages_changed": 7,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/eggbev-finanzas---us-cc-es-es-zw---av---g006-d-nicolas-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Financeadx - AR-CC-ES/ES-ZW-SR - g006-d Nicolas",
+      "id": "68adedb1-b763-4c87-728b-5da3eddb9245",
+      "pages": 1,
+      "messages_total": 20,
+      "messages_changed": 16,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/financeadx---ar-cc-es-es-zw-sr---g006-d-nicolas-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Financeadx - CA-CC-EN/EN-SR - g006-d Nicolas",
+      "id": "6839c6dd-fa06-8868-d4c3-7037827bfceb",
+      "pages": 8,
+      "messages_total": 20,
+      "messages_changed": 16,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/financeadx---ca-cc-en-en-sr---g006-d-nicolas-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Financeadx - MX-CC-ES/ES-ZW-SR - g006-d Nicolas",
+      "id": "68adedf1-2145-d762-0dc8-59d74ec489ab",
+      "pages": 9,
+      "messages_total": 20,
+      "messages_changed": 16,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/financeadx---mx-cc-es-es-zw-sr---g006-d-nicolas-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Financeadx - ZA-CC-EN/EN-SR - g006-d Nicolas",
+      "id": "68adecef-7b36-2f0e-a9ab-211e4e5619af",
+      "pages": 4,
+      "messages_total": 20,
+      "messages_changed": 16,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/financeadx---za-cc-en-en-sr---g006-d-nicolas-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Financetopfeed - GB-CC-EN/EN-SR - g004-d Joe",
+      "id": "69d1a422-3f75-1164-8179-56905cb55a0d",
+      "pages": 1,
+      "messages_total": 20,
+      "messages_changed": 10,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/financetopfeed---gb-cc-en-en-sr---g004-d-joe-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Financetopfeed - US-CC-EN/EN-SR - g004-d Joe",
+      "id": "699469dd-20e9-6e5b-4cc4-4e5ecda01295",
+      "pages": 26,
+      "messages_total": 20,
+      "messages_changed": 11,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/financetopfeed---us-cc-en-en-sr---g004-d-joe-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Financetopfeed - US-CC-ES/ES-ZW-SR - g004-d Joe",
+      "id": "68fb92a6-c758-ed62-b962-f721932e1d43",
+      "pages": 19,
+      "messages_total": 20,
+      "messages_changed": 8,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/financetopfeed---us-cc-es-es-zw-sr---g004-d-joe-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Fincgriffin - US-CAR-EN/EN - JBF - g001-d",
+      "id": "6a222a84-22dc-8811-5de6-3745293fe0c1",
+      "pages": 1,
+      "messages_total": 20,
+      "messages_changed": 11,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g001-d-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Fincgriffin - US-CAR-EN/EN - JBF - g002-d",
+      "id": "6a222b45-c609-d8d0-ca13-8bec661ce224",
+      "pages": 1,
+      "messages_total": 20,
+      "messages_changed": 11,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g002-d-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Fincgriffin - US-CAR-EN/EN - JBF - g003-d",
+      "id": "6a222b59-aa4a-f3f1-6a1a-6e66fd285158",
+      "pages": 1,
+      "messages_total": 20,
+      "messages_changed": 11,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g003-d-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Fincgriffin - US-CAR-EN/EN - JBF - g004-d",
+      "id": "6a222b73-1a25-0d2e-4e44-a3e85ae75dd6",
+      "pages": 1,
+      "messages_total": 20,
+      "messages_changed": 11,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g004-d-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Fincgriffin - US-CAR-EN/EN - JBF - g005-d",
+      "id": "6a222b8b-8ce1-94ac-2b2e-1d3ea73fe645",
+      "pages": 1,
+      "messages_total": 20,
+      "messages_changed": 10,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g005-d-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Fincgriffin - US-CAR-EN/EN - JBF - g006-d",
+      "id": "6a222ba1-3b9f-021a-9a9d-90b80204acf7",
+      "pages": 1,
+      "messages_total": 20,
+      "messages_changed": 11,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g006-d-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Helixenit - DE-CC-DE/DE-SR - g005-d Kelly",
+      "id": "01b78b7d-87ad-77f4-f87e-8e4b31cd4227",
+      "pages": 1,
+      "messages_total": 20,
+      "messages_changed": 16,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/helixenit---de-cc-de-de-sr---g005-d-kelly-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Helixenit - MX-CC-ES/ES-ZW-SR - g005-d Kelly",
+      "id": "69c69071-88f9-2c83-f043-d34726ce313f",
+      "pages": 5,
+      "messages_total": 20,
+      "messages_changed": 16,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/helixenit---mx-cc-es-es-zw-sr---g005-d-kelly-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Infinitynexx - MX-CC-ES/ES-ZW-SR - g004-d Joe",
+      "id": "69c6900c-0edc-35dc-0a54-b980b01953db",
+      "pages": 7,
+      "messages_total": 20,
+      "messages_changed": 16,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/infinitynexx---mx-cc-es-es-zw-sr---g004-d-joe-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Infinitynexx - US-CC-ES/ES-ZW-SR - g004-d Joe",
+      "id": "68b8b97c-7875-7d71-e575-41dc76c0dccb",
+      "pages": 1,
+      "messages_total": 20,
+      "messages_changed": 8,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/infinitynexx---us-cc-es-es-zw-sr---g004-d-joe-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Lyzmo - GB-CC-EN/EN-SR - g006-d Nicolas",
+      "id": "69d1a89a-6ecb-dd1f-1b21-0fdff56ab1ca",
+      "pages": 2,
+      "messages_total": 20,
+      "messages_changed": 12,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/lyzmo---gb-cc-en-en-sr---g006-d-nicolas-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Lyzmo - US-CC-EN/EN-SR - g006-d Nicolas",
+      "id": "691bc55e-94de-cc0a-0dc5-65bb883ea300",
+      "pages": 56,
+      "messages_total": 20,
+      "messages_changed": 9,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/lyzmo---us-cc-en-en-sr---g006-d-nicolas-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Lyzmo Finanzas - US-CC-ES/ES-ZW-SR - g006-d Nicolas",
+      "id": "69669fc3-49f4-1db7-b56b-9f9f12e7f4e9",
+      "pages": 9,
+      "messages_total": 20,
+      "messages_changed": 7,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/lyzmo-finanzas---us-cc-es-es-zw-sr---g006-d-nicolas-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Marevelx - DE-CC-DE/DE-SR - g001-d Icaro",
+      "id": "01b78b7d-54bf-7cf9-6aff-4ec45579da17",
+      "pages": 6,
+      "messages_total": 20,
+      "messages_changed": 16,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/marevelx---de-cc-de-de-sr---g001-d-icaro-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Newsoun - DE-CC-DE/DE-SR - g005-d Kelly",
+      "id": "01b78b7d-5768-7e1d-c044-894de86d4240",
+      "pages": 19,
+      "messages_total": 20,
+      "messages_changed": 16,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/newsoun---de-cc-de-de-sr---g005-d-kelly-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Newsoun - GB-CC-EN/EN-SR - g005-d Kelly",
+      "id": "69d1a309-b2f8-455e-cd0b-b4428a82eca3",
+      "pages": 1,
+      "messages_total": 20,
+      "messages_changed": 8,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/newsoun---gb-cc-en-en-sr---g005-d-kelly-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Newsoun - US-CC-EN/EN-SR - g005-d Kelly",
+      "id": "01b78b7d-4417-771e-a07e-a0033785f561",
+      "pages": 55,
+      "messages_total": 20,
+      "messages_changed": 9,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/newsoun---us-cc-en-en-sr---g005-d-kelly-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Newsoun - US-CC-ES/ES-ZW-SR - g005-d Kelly",
+      "id": "69680bfc-98fe-d409-e2f9-66097fb50508",
+      "pages": 6,
+      "messages_total": 20,
+      "messages_changed": 7,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/newsoun---us-cc-es-es-zw-sr---g005-d-kelly-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Openzed - ES-CC-ES/ES-ZW - AV - g003-d Isliago",
+      "id": "69d3d82b-0d2e-de79-2a0f-51bff1f66c81",
+      "pages": 13,
+      "messages_total": 20,
+      "messages_changed": 11,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/openzed---es-cc-es-es-zw---av---g003-d-isliago-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Openzed - GB-CC-EN/EN - AV - g003-d Isliago",
+      "id": "69b17b47-c634-3588-8f9d-367fbad9bfaa",
+      "pages": 6,
+      "messages_total": 20,
+      "messages_changed": 8,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/openzed---gb-cc-en-en---av---g003-d-isliago-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Openzed - US-CC-EN/EN - AV - g001-d Icaro",
+      "id": "69840a80-d633-5a5d-cef7-419472351f6c",
+      "pages": 8,
+      "messages_total": 20,
+      "messages_changed": 12,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/openzed---us-cc-en-en---av---g001-d-icaro-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Openzed - US-CC-EN/EN - AV - g003-d Isliago",
+      "id": "672d8507-18b3-878d-bcad-8b3e8d84f93c",
+      "pages": 203,
+      "messages_total": 20,
+      "messages_changed": 14,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/openzed---us-cc-en-en---av---g003-d-isliago-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Openzed - US-CC-ES/ES-ZW - AV - g003-d Isliago",
+      "id": "69b037db-b63e-e7b5-a897-337728c375d3",
+      "pages": 88,
+      "messages_total": 20,
+      "messages_changed": 8,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/openzed---us-cc-es-es-zw---av---g003-d-isliago-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Spe - US-JOB-ES/ES-ZW - AV - g006-d Nicolas",
+      "id": "6890f567-45f0-a99a-de62-7cd05aa265ea",
+      "pages": 11,
+      "messages_total": 20,
+      "messages_changed": 11,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/spe---us-job-es-es-zw---av---g006-d-nicolas-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Wantabrand - US-CC-ES/ES-ZW - M2 - g001-d Icaro",
+      "id": "69825de4-32a5-de3d-e342-61e445ecc0fe",
+      "pages": 1,
+      "messages_total": 10,
+      "messages_changed": 3,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/wantabrand---us-cc-es-es-zw---m2---g001-d-icaro-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Wavesbee - US-CC-EN/EN - YM - g003-d Isliago",
+      "id": "672e5803-8f22-ce99-8bbc-27ee0a5147e9",
+      "pages": 1,
+      "messages_total": 10,
+      "messages_changed": 2,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/wavesbee---us-cc-en-en---ym---g003-d-isliago-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Xyvlov - DE-CC-DE/DE-SR - g003-d Isliago",
+      "id": "01b78b7d-7552-73cb-490f-ceb7adc6018b",
+      "pages": 42,
+      "messages_total": 20,
+      "messages_changed": 16,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/xyvlov---de-cc-de-de-sr---g003-d-isliago-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Xyvlov - US-CC-ES/ES-ZW-SR - g003-d Isliago",
+      "id": "68b5b7e2-c25f-2f86-90f4-cd7b4fb1bf76",
+      "pages": 2,
+      "messages_total": 20,
+      "messages_changed": 6,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/xyvlov---us-cc-es-es-zw-sr---g003-d-isliago-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Zuout - US-CC-EN/EN - AV - g002-d Gustavo",
+      "id": "672d84db-7fd7-33f4-8a85-606b00b18ab5",
+      "pages": 10,
+      "messages_total": 20,
+      "messages_changed": 9,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/zuout---us-cc-en-en---av---g002-d-gustavo-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Zuout - US-CC-ES/ES-ZW - AV - g002-d Gustavo",
+      "id": "68925ccb-335a-35e8-5471-5a52003c6560",
+      "pages": 37,
+      "messages_total": 20,
+      "messages_changed": 7,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/zuout---us-cc-es-es-zw---av---g002-d-gustavo-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Zytiva - GB-CC-EN/EN-SR - g003-d Isliago",
+      "id": "69a9cd66-360a-6794-7372-594cd229eeb6",
+      "pages": 9,
+      "messages_total": 20,
+      "messages_changed": 9,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/zytiva---gb-cc-en-en-sr---g003-d-isliago-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "Zytiva - US-CC-EN/EN-SR - g003-d Isliago",
+      "id": "691bbba5-527a-2a07-8be0-ec206960cbd0",
+      "pages": 74,
+      "messages_total": 20,
+      "messages_changed": 8,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/zytiva---us-cc-en-en-sr---g003-d-isliago-before-clean-text-20260703-141030.json"
+    },
+    {
+      "template": "ZytivaFinanzas - US-CC-ES/ES-ZW-SR - g003-d Isliago",
+      "id": "691bbc8c-c3bc-7aaf-1ca5-2c27ebc30eff",
+      "pages": 21,
+      "messages_total": 20,
+      "messages_changed": 7,
+      "backup_json": "/root/mgs-agent/backups/sb-templates/zytivafinanzas---us-cc-es-es-zw-sr---g003-d-isliago-before-clean-text-20260703-141030.json"
+    }
+  ],
+  "approvals": [],
+  "local_cache_results": [
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/cliquet---us-cc-en-en---av---g002-d-gustavo-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 36,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/cliquet-finanzas---us-cc-es-es-zw---av---g002-d-gustavo-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 34,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/ducapes-finance---us-cc-en-en-sr---g001-d-icaro-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 36,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/eggbev---us-cc-en-en-sr---g006-d-nicolas-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 36,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/eggbev-finanzas---us-cc-es-es-zw---av---g006-d-nicolas-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 34,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/financeadx---ar-cc-es-es-zw-sr---g006-d-nicolas-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 60,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/financeadx---ca-cc-en-en-sr---g006-d-nicolas-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 55,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/financeadx---mx-cc-es-es-zw-sr---g006-d-nicolas-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 60,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/financeadx---za-cc-en-en-sr---g006-d-nicolas-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 66,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/financetopfeed---gb-cc-en-en-sr---g004-d-joe-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 35,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/financetopfeed---us-cc-en-en-sr---g004-d-joe-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 36,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/financetopfeed---us-cc-es-es-zw-sr---g004-d-joe-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 34,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g001-d-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 30,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g002-d-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 30,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g003-d-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 30,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g004-d-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 30,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g005-d-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 30,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g006-d-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 30,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/helixenit---de-cc-de-de-sr---g005-d-kelly-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 53,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/helixenit---mx-cc-es-es-zw-sr---g005-d-kelly-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 60,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/infinitynexx---mx-cc-es-es-zw-sr---g004-d-joe-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 60,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/infinitynexx---us-cc-es-es-zw-sr---g004-d-joe-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 34,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/lyzmo---gb-cc-en-en-sr---g006-d-nicolas-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 35,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/lyzmo---us-cc-en-en-sr---g006-d-nicolas-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 36,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/lyzmo-finanzas---us-cc-es-es-zw-sr---g006-d-nicolas-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 34,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/marevelx---de-cc-de-de-sr---g001-d-icaro-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 54,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/newsoun---de-cc-de-de-sr---g005-d-kelly-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 53,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/newsoun---gb-cc-en-en-sr---g005-d-kelly-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 35,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/newsoun---us-cc-en-en-sr---g005-d-kelly-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 36,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/newsoun---us-cc-es-es-zw-sr---g005-d-kelly-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 34,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/openzed---es-cc-es-es-zw---av---g003-d-isliago-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 40,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/openzed---gb-cc-en-en---av---g003-d-isliago-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 35,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/openzed---us-cc-en-en---av---g001-d-icaro-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 36,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/openzed---us-cc-en-en---av---g003-d-isliago-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 36,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/openzed---us-cc-es-es-zw---av---g003-d-isliago-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 34,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/spe---us-job-es-es-zw---av---g006-d-nicolas-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 60,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/wantabrand---us-cc-es-es-zw---m2---g001-d-icaro-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 34,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/wavesbee---us-cc-en-en---ym---g003-d-isliago-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 36,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/xyvlov---de-cc-de-de-sr---g003-d-isliago-before-utility10-20260702-010933.json",
+      "changed": true,
+      "messages_changed": 53,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/xyvlov---us-cc-es-es-zw-sr---g003-d-isliago-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 34,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/zuout---us-cc-en-en---av---g002-d-gustavo-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 36,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/zuout---us-cc-es-es-zw---av---g002-d-gustavo-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 34,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/zytiva---gb-cc-en-en-sr---g003-d-isliago-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 35,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/zytiva---us-cc-en-en-sr---g003-d-isliago-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 36,
+      "backup": null
+    },
+    {
+      "path": "/root/mgs-agent/backups/sb-templates/zytivafinanzas---us-cc-es-es-zw-sr---g003-d-isliago-before-reduce10-20260630-210044.json",
+      "changed": true,
+      "messages_changed": 34,
+      "backup": null
+    }
+  ],
+  "tracker_gray_keys_changed": 819,
+  "readback_get_status": null,
+  "readback_bad_count": 0,
+  "readback_bad_sample": []
+}
