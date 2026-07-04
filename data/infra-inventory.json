@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-04T05:47:09-04:00",
+    "updated_at": "2026-07-04T05:47:40-04:00",
     "generated_by": "Zeus manual update after B001A DTR link monitor activation"
   },
   "system_packages": [
@@ -791,7 +791,7 @@
       "sha256": "e783d72056a6dd04c73ce47f92cc7f950f67698b3acee677ee7c5448c462c691",
       "purpose": "Procedure for Meta app rate-limit/roles monitoring; documents live-alert-only resend policy and hard snapshot guard.",
       "validation": "Added/validated FORCE_LIVE_ALERT path: B002 live cron-style alert sent with alerts_sent=1, force_snapshot_effective=false, errors_count=0.",
-      "updated_at": "2026-07-04T05:47:09-04:00",
+      "updated_at": "2026-07-04T05:47:40-04:00",
       "skill": "meta-app-rate-limit-monitor",
       "md5": "3513b9796b5ca58fc197a917c10b7fac",
       "source_report": "REPORT-INFRA Zeus Meta app roles force live alert path 2026-07-04",
@@ -874,7 +874,7 @@
       "size_bytes": 41207,
       "sha256": "e783d72056a6dd04c73ce47f92cc7f950f67698b3acee677ee7c5448c462c691",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-04T05:47:09-04:00",
+      "updated_at": "2026-07-04T05:47:40-04:00",
       "validation": "Added/validated FORCE_LIVE_ALERT path: B002 live cron-style alert sent with alerts_sent=1, force_snapshot_effective=false, errors_count=0.",
       "modified_at": "2026-07-04T05:45:01-04:00",
       "source_report": "REPORT-INFRA Zeus Meta app roles force live alert path 2026-07-04",
@@ -4366,6 +4366,15 @@
       "owner": "Zeus/Ops",
       "type": "monitor_state",
       "description": "Sanitized state for B001A DTR link monitor: account link statuses, page counts, last summary, alert cooldowns. Contains no access tokens."
+    },
+    {
+      "path": "/root/mgs-agent/docs/CRONS.md",
+      "type": "docs",
+      "owner": "Zeus/Ops",
+      "description": "Cron inventory documentation including Hermes B001A DTR link monitor section.",
+      "size_bytes": 21754,
+      "modified_at": "2026-07-04T05:47:23-04:00",
+      "sha256": "86e5e51998e637c1427af489c65b126fe4f255ead1c1529f42dd48624cee5fc2"
     }
   ],
   "mu_plugin_canonical": {
