@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-04T04:25:50-04:00",
-    "generated_by": "Zeus manual update: auto-commit runtime ignore hardening and auto-push monitor guardrail alerting"
+    "updated_at": "2026-07-04T04:27:33-04:00",
+    "generated_by": "Zeus manual update: auto-commit hardening procedure added to log-monitor skill"
   },
   "system_packages": [
     {
@@ -902,14 +902,15 @@
       "type": "profile_skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/SKILL.md",
-      "size_bytes": 44100,
-      "sha256": "4617c00a57b10dac1caba25d77a11b12bcff9efe512bdd6ba428fe1ee1292f6c",
+      "size_bytes": 45728,
+      "sha256": "5454b46d5ee024be9524b347924b6d4a4a7f139e5433f0a21f0899a88875ddba",
       "runtime_versioned_sha_match": true,
-      "modified_at": "2026-07-02T04:30:08-04:00",
-      "updated_at": "2026-07-02T04:30:34-04:00",
-      "validation": "Skill atualizada: alertas #alerts-infra sem mention por padrão e restarts sem tabela monoespaçada larga.",
+      "modified_at": "2026-07-04T04:26:58-04:00",
+      "updated_at": "2026-07-04T04:27:33-04:00",
+      "validation": "Runtime and versioned skill updated with auto-commit guardrail/runtime ignore procedure",
       "source_report": "Zeus service restart alert layout fix 2026-07-02",
-      "agent": "zeus"
+      "agent": "zeus",
+      "last_commit": "pending"
     }
   ],
   "systemd_services": [
