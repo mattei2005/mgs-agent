@@ -35,6 +35,7 @@ Tools                        web tooling, file tools cwd, terminal behavior
 Crons                        root crontab + Hermes cron inventory
 Patches locais               /root/mgs-agent/patches/hermes/
 Scripts MGS                  ensure-hermes-mgs-patches.sh and update reports
+Telegram                     não crítico na MGS; sem backup/teste dedicado salvo impacto compartilhado
 ```
 
 ## Standard command
