@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-04T05:00:01-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-04T05:47:09-04:00",
+    "generated_by": "Zeus manual update after B001A DTR link monitor activation"
   },
   "system_packages": [
     {
@@ -601,6 +601,19 @@
       "validation": "git status clean after commit; monitor-auto-push --dry-run total_failures=0",
       "git_tracked": true,
       "updated_at": "2026-07-04T04:25:50-04:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/scripts/b001a-dtr-link-watch.sh",
+      "size_bytes": 16868,
+      "modified_at": "2026-07-04T05:36:30-04:00",
+      "sha256": "19a51e3e985c685be0c033e48bdedf008f170b1dff0f987c46e72dd423fbcba1",
+      "owner": "Zeus/Ops",
+      "type": "hermes_profile_script",
+      "risk": "medium",
+      "description": "B001A DTR/ChatPion link monitor. Reads B001A config from 1Password, logs into DigitalTRChat bot accounts, switches segurador, validates active OAuth connection with Meta /debug_token against B001A app_id, and stores sanitized state. 0 pages does not mean disconnected.",
+      "cron_job_id": "498fb0d95e10",
+      "schedule": "every 10m",
+      "validation": "bash -n OK; dry-run targets=19 linked=18 not_linked_or_error=1; real baseline targets=19 linked=18 total_connected_pages=196 alerts_sent=0"
     }
   ],
   "profile_skill_references": [
@@ -778,10 +791,11 @@
       "sha256": "e783d72056a6dd04c73ce47f92cc7f950f67698b3acee677ee7c5448c462c691",
       "purpose": "Procedure for Meta app rate-limit/roles monitoring; documents live-alert-only resend policy and hard snapshot guard.",
       "validation": "Added/validated FORCE_LIVE_ALERT path: B002 live cron-style alert sent with alerts_sent=1, force_snapshot_effective=false, errors_count=0.",
-      "updated_at": "2026-07-04T05:45:24-04:00",
+      "updated_at": "2026-07-04T05:47:09-04:00",
       "skill": "meta-app-rate-limit-monitor",
       "md5": "3513b9796b5ca58fc197a917c10b7fac",
-      "source_report": "REPORT-INFRA Zeus Meta app roles force live alert path 2026-07-04"
+      "source_report": "REPORT-INFRA Zeus Meta app roles force live alert path 2026-07-04",
+      "description": "Meta app rate-limit/roles monitor procedure including B001A DTR link validation semantics (debug_token account link, pages separate)."
     },
     {
       "profile": "zeus",
@@ -860,13 +874,15 @@
       "size_bytes": 41207,
       "sha256": "e783d72056a6dd04c73ce47f92cc7f950f67698b3acee677ee7c5448c462c691",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-04T05:45:24-04:00",
+      "updated_at": "2026-07-04T05:47:09-04:00",
       "validation": "Added/validated FORCE_LIVE_ALERT path: B002 live cron-style alert sent with alerts_sent=1, force_snapshot_effective=false, errors_count=0.",
       "modified_at": "2026-07-04T05:45:01-04:00",
       "source_report": "REPORT-INFRA Zeus Meta app roles force live alert path 2026-07-04",
       "agent": "zeus",
       "purpose": "Procedure for Meta app rate-limit/roles monitoring and B001A Advanced Access/DTR verification; documents preserving B001A suffix and clearing role-based X markers.",
-      "md5": "3513b9796b5ca58fc197a917c10b7fac"
+      "md5": "3513b9796b5ca58fc197a917c10b7fac",
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
+      "description": "Meta app rate-limit/roles monitor procedure including B001A DTR link validation semantics (debug_token account link, pages separate)."
     },
     {
       "profile": "zeus",
@@ -1010,6 +1026,19 @@
     },
     {
       "entry": "0 8,16 * * * flock -n /var/lock/monitor_sb_restricted_pages.lock /root/mgs-agent/scripts/monitor-sb-restricted-pages.sh >> /root/mgs-agent/logs/monitor-sb-restricted-pages.log 2>&1"
+    },
+    {
+      "job_id": "498fb0d95e10",
+      "name": "b001a-dtr-link-watch",
+      "type": "hermes_cron",
+      "schedule": "every 10m",
+      "script": "b001a-dtr-link-watch.sh",
+      "profile": "zeus",
+      "deliver": "local",
+      "no_agent": true,
+      "owner": "Zeus/Ops",
+      "risk": "medium",
+      "description": "Runs B001A DTR link monitor. Script posts direct Discord alerts to B001A app-rate-limit channel on anomalies; empty stdout is silent OK."
     }
   ],
   "scripts": [
@@ -4328,6 +4357,15 @@
       "size_bytes": 43685,
       "md5": "c08529fcd8b0253aae95f1d35c040d4b",
       "modified_at": "2026-07-02T20:20:01-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/b001a-dtr-link-monitor-state.json",
+      "size_bytes": 15563,
+      "modified_at": "2026-07-04T05:46:19-04:00",
+      "sha256": "afcb7c49b3871a4bf5d74b54f912bda1bb2cd4175a4518fac9425db87bec1fe3",
+      "owner": "Zeus/Ops",
+      "type": "monitor_state",
+      "description": "Sanitized state for B001A DTR link monitor: account link statuses, page counts, last summary, alert cooldowns. Contains no access tokens."
     }
   ],
   "mu_plugin_canonical": {
