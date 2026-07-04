@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-04T04:30:22-04:00",
-    "generated_by": "Zeus manual update: broaden auto-commit runtime exclusions and immediate guardrail alerting"
+    "updated_at": "2026-07-04T04:30:41-04:00",
+    "generated_by": "Zeus manual update: sync guardrail recovery skill mirror"
   },
   "system_packages": [
     {
@@ -904,10 +904,10 @@
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/SKILL.md",
       "size_bytes": 45767,
       "sha256": "a1ec52a6e9b64b8c7b56b228e46a74128e39fee5b2ff377db5c6da38cd1de3d8",
-      "runtime_versioned_sha_match": false,
+      "runtime_versioned_sha_match": true,
       "modified_at": "2026-07-04T04:30:07-04:00",
-      "updated_at": "2026-07-04T04:30:22-04:00",
-      "validation": "Procedure updated with broad runtime patterns and immediate guardrail alerting",
+      "updated_at": "2026-07-04T04:30:41-04:00",
+      "validation": "Runtime and versioned skill mirror synced after broad auto-commit guardrail hardening",
       "source_report": "Zeus service restart alert layout fix 2026-07-02",
       "agent": "zeus",
       "last_commit": "pending"
