@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-04T06:19:17-04:00",
-    "generated_by": "Zeus manual update after B011->B001A live-alert routing correction"
+    "updated_at": "2026-07-04T06:27:21-04:00",
+    "generated_by": "Zeus manual update after Rodolfo renamed B001A to B011"
   },
   "system_packages": [
     {
@@ -568,12 +568,12 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 51866,
-      "modified_at": "2026-07-04T06:17:56-04:00",
-      "sha256": "d1c598ee07719461f0c46f542540997762672ec7e78a168203aafc7e7eea7c2e",
+      "size_bytes": 51558,
+      "modified_at": "2026-07-04T06:20:12-04:00",
+      "sha256": "66e863c7ae0da294a772e0ba7055eb2ae34ed372fc6b554bd40d19fe45a97b5a",
       "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; manual snapshot forcing is blocked unless explicitly unlocked, so operational resend/cron paths remain live alerts only.",
-      "validation": "Canonicalized legacy 1Password item code B011 to operational app key B001A; forced B001A live alert delivered with snapshot=false, errors=0, cumulative_removed=0.",
-      "updated_at": "2026-07-04T06:19:17-04:00",
+      "validation": "B011 canonical restored; no B001A state; live run OK errors=0 snapshot=false B011_current_count=1 cumulative_removed=0.",
+      "updated_at": "2026-07-04T06:27:21-04:00",
       "source_report": "REPORT-INFRA Zeus B003 cumulative reassignment cleanup 2026-07-04"
     },
     {
@@ -618,26 +618,40 @@
       "source_report": "REPORT-INFRA Zeus B001A same-plan cron alignment 2026-07-04"
     },
     {
-      "id": "zeus-skill-ref-meta-app-roles-b001a-gid",
+      "id": "skill-ref-meta-app-roles-b001a-sheet-gid-2026-07-04.md-be5bc1",
       "agent": "zeus",
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/meta-app-roles-b001a-sheet-gid-2026-07-04.md",
-      "size_bytes": 2876,
-      "modified_at": "2026-07-04T06:18:06-04:00",
-      "sha256": "762db9dbc12205838a670fc88168043f63a2bcb93b78aec2bb381ef5bfb70fd8",
-      "updated_at": "2026-07-04T06:19:17-04:00",
-      "description": "Meta app roles B001A sheet/channel scope reference; includes B011 legacy credential canonicalization to B001A."
+      "size_bytes": 2757,
+      "modified_at": "2026-07-04T06:21:34-04:00",
+      "sha256": "7bc20ef586a79b4dc3f60aa6f9b316664e93872235eb8345c880de9a0fec38bb",
+      "updated_at": "2026-07-04T06:27:21-04:00",
+      "description": "Meta app roles reference updated: B011 is canonical replacement for temporary B001A."
     },
     {
-      "id": "mgs-agent-runtime-skill-ref-meta-app-roles-b001a-gid",
+      "id": "skill-ref-meta-app-roles-b001a-sheet-gid-2026-07-04.md-f9cdfe",
       "agent": "zeus",
       "type": "skill_reference",
       "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/meta-app-roles-b001a-sheet-gid-2026-07-04.md",
-      "size_bytes": 2876,
-      "modified_at": "2026-07-04T06:18:14-04:00",
-      "sha256": "762db9dbc12205838a670fc88168043f63a2bcb93b78aec2bb381ef5bfb70fd8",
-      "updated_at": "2026-07-04T06:19:17-04:00",
-      "description": "Meta app roles B001A sheet/channel scope reference; includes B011 legacy credential canonicalization to B001A."
+      "size_bytes": 2757,
+      "modified_at": "2026-07-04T06:21:34-04:00",
+      "sha256": "7bc20ef586a79b4dc3f60aa6f9b316664e93872235eb8345c880de9a0fec38bb",
+      "updated_at": "2026-07-04T06:27:21-04:00",
+      "description": "Meta app roles reference updated: B011 is canonical replacement for temporary B001A."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
+      "size_bytes": 21232,
+      "modified_at": "2026-07-04T06:20:49-04:00",
+      "sha256": "d4b7e8921504c6ce19caa2eb2e5a497b85837135875b51f9bbe5376ae2c97582",
+      "id": "zeus-b011-dtr-link-watch-script",
+      "agent": "zeus",
+      "type": "profile_script",
+      "owner": "Zeus/Ops",
+      "risk": "medium",
+      "description": "B011 DTR/ChatPion link monitor, renamed from temporary B001A label; validates OAuth connection and syncs X in sheet.",
+      "updated_at": "2026-07-04T06:27:21-04:00",
+      "validation": "Manual live run OK: targets=19 linked=18 not_linked_or_error=1 sheet updated=18 alerts_sent=0."
     }
   ],
   "profile_skill_references": [
@@ -1053,18 +1067,18 @@
     },
     {
       "job_id": "498fb0d95e10",
-      "name": "b001a-dtr-link-watch",
+      "name": "b011-dtr-link-watch",
       "type": "hermes_cron",
-      "schedule": "every 10m",
-      "script": "b001a-dtr-link-watch.sh",
+      "schedule": "every 2m",
+      "script": "b011-dtr-link-watch.sh",
       "profile": "zeus",
       "deliver": "local",
       "no_agent": true,
       "owner": "Zeus/Ops",
       "risk": "medium",
-      "description": "Runs B001A DTR link monitor. Script posts direct Discord alerts to B001A app-rate-limit channel on anomalies; empty stdout is silent OK.",
-      "updated_at": "2026-07-04T05:57:33-04:00",
-      "validation": "B001A aligned to B001-B010 plan: cron every 2m; DTR/page-token runtime source writes/clears sheet X; live run OK targets=19 linked=18 marked=1 updated_cells=1 alerts_sent=0; meta roles script preserves B001A X instead of clearing it.",
+      "description": "Runs B011 DTR link monitor. Script posts direct Discord alerts to B011 app-rate-limit channel on anomalies; empty stdout is silent OK.",
+      "updated_at": "2026-07-04T06:27:21-04:00",
+      "validation": "Renamed from b001a-dtr-link-watch; manual script validation OK.",
       "source_report": "REPORT-INFRA Zeus B001A same-plan cron alignment 2026-07-04"
     }
   ],
@@ -4237,12 +4251,12 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 46249,
+      "size_bytes": 46702,
       "md5": "190f8d8ed39bacd52ce5eb732e2a6569",
-      "modified_at": "2026-07-04T06:18:36-04:00",
-      "sha256": "7a98fa2a40be18a53136d85f4c4b4ca267648ed233e243120d6a0230dedc8fd2",
-      "updated_at": "2026-07-04T06:19:17-04:00",
-      "validation": "Removed stale B011 cache after canonicalizing B011->B001A; preserved B001A operational state; all B001-B010/B005-2/B001A cumulative_removed counts are 0 after live validation.",
+      "modified_at": "2026-07-04T06:25:42-04:00",
+      "sha256": "f70a095ad4f4e07e2e16eaf5b3577e18b5d6c0e78457df039cf8f78abd480dc6",
+      "updated_at": "2026-07-04T06:27:21-04:00",
+      "validation": "State migrated B001A->B011; B001A key absent; B011 key present; live Meta run errors=0.",
       "source_report": "REPORT-INFRA Zeus app-role cache cleanup 2026-07-04"
     },
     {
@@ -4412,6 +4426,15 @@
       "size_bytes": 21754,
       "modified_at": "2026-07-04T05:47:23-04:00",
       "sha256": "86e5e51998e637c1427af489c65b126fe4f255ead1c1529f42dd48624cee5fc2"
+    },
+    {
+      "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
+      "size_bytes": 16199,
+      "modified_at": "2026-07-04T06:26:48-04:00",
+      "sha256": "4ec68b374b63271eaaacb096080507c74a40fcf99e45bbaa0aaeb7ad81ee8c10",
+      "updated_at": "2026-07-04T06:27:21-04:00",
+      "description": "B011 DTR link monitor state, migrated from B001A temporary label; contains account link statuses and sheet sync summary, no tokens.",
+      "validation": "Manual live run OK targets=19 linked=18 marked=1 alerts_sent=0."
     }
   ],
   "mu_plugin_canonical": {
