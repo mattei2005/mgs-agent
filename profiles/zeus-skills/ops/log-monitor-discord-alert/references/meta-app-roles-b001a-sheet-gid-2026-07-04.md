@@ -1,21 +1,20 @@
-# Meta app roles — B001A + sheet GID correction (2026-07-04)
+# Meta app roles — B011 + sheet GID correction (2026-07-04)
 
 ## Trigger
 
-Rodolfo asked for repeated Meta App Roles / removidos acumulados counts and corrected two operational assumptions:
+Rodolfo asked for repeated Meta App Roles / removidos acumulados counts and corrected operational assumptions:
 
 1. The active migration sheet tab changed from `gid=562940072` to `gid=542936436`.
-2. `B001A` is a new app and must be treated as a separate app, not normalized into `B001`.
+2. The temporary app label `B001A` was renamed to canonical app/channel label `B011` in the sheet and 1Password (`BOT B011 Token`).
 
 ## Durable workflow corrections
 
 - For Meta App Roles reconciliation, use the current sheet tab `gid=542936436` unless Rodolfo provides a newer GID.
-- App-key canonicalization must preserve alpha suffixes such as `B001A`.
-- Do **not** parse `B001A` with a numeric-only regex that collapses it to `B001`.
-- Count and report `B001` and `B001A` as distinct channels/apps.
-- Operational scope for “all channels” is 11 channels: `B001`, `B001A`, `B002`, `B003`, `B004`, `B005-2`, `B006`, `B007`, `B008`, `B009`, `B010`.
-- Current 1Password credential naming may expose B001A as legacy item `BOT B011 Token`; canonicalize item code `B011` to operational app key `B001A` before state, channel routing, sheet reconciliation, or alert titles.
-- When user asks for alerts in “all channels” after B001A exists, expected scope is 11 channels: `B001`, `B001A`, `B002`, `B003`, `B004`, `B005-2`, `B006`, `B007`, `B008`, `B009`, `B010`.
+- App-key canonicalization must preserve suffix/replacement labels such as `B005-2`; do not collapse app labels with regex shortcuts.
+- `B011` is canonical. Do **not** route `BOT B011 Token` back to `B001A`.
+- Count and report `B001` and `B011` as distinct channels/apps.
+- Operational scope for “all channels” is 11 channels: `B001`, `B002`, `B003`, `B004`, `B005-2`, `B006`, `B007`, `B008`, `B009`, `B010`, `B011`.
+- When user asks for alerts in “all channels”, expected scope is those 11 canonical channels/apps.
 
 ## Counting pitfall
 
@@ -26,23 +25,22 @@ m = re.search(r'B\s*0*(\d{1,2})(?:\s*-\s*(\d+))?', raw)
 return f'B{int(m.group(1)):03d}'
 ```
 
-This turns `B001A` into `B001` and makes B001 look like it has all B001A removals.
+This pitfall now applies historically to `B001A`; current canonical label is `B011`. Do not collapse `B011` into any other app key.
 
 Safer parser:
 
 ```python
 raw = str(value or '').strip().upper()
-if raw.startswith('B001A'):
-    return 'B001A'
-m = re.search(r'B\s*0*(\d{1,2})(?:\s*-\s*(\d+))?', raw)
+m = re.fullmatch(r'B\s*0*(\d{1,3})(?:\s*-\s*(\d+)|\s*([A-Z]+))?', raw)
+# preserves B011 and B005-2 as distinct labels
 ...
 ```
 
 ## Operational interpretation from the corrected count
 
-After separating `B001` and `B001A`, `B001` can be clean while `B001A` carries the removidos acumulados. Do not describe this as a B001 problem.
+After the rename, `B011` is the only canonical label for the former temporary `B001A` channel/app. Do not describe this as a B001 problem and do not emit `B001A` in user-facing alerts.
 
-If `B001A` shows one API role such as `Thiago Oliveira`, treat it as likely owner/admin until validated against the owner map; owner/admin roles should be ignored like other app owners when reconciling expected seguradores.
+If `B011` shows one API role such as `Thiago Oliveira`, treat it as likely owner/admin until validated against the owner map; owner/admin roles should be ignored like other app owners when reconciling expected seguradores.
 
 ## Validation pattern
 
@@ -50,7 +48,7 @@ For a real alert push, run the official monitor **without** snapshot forcing. Co
 
 Expected live-path validation:
 
-- `items` includes the requested app token items, including `BOT B001A Token` when testing all 11 channels.
+- `items` includes the requested app token items, including `BOT B011 Token` when testing all 11 channels.
 - `errors_count == 0`.
 - `dry_run == false`.
 - `force_snapshot_effective == false`.
