@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-04T06:28:44-04:00",
+    "updated_at": "2026-07-04T06:38:34-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -568,13 +568,13 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 51558,
-      "modified_at": "2026-07-04T06:20:12-04:00",
-      "sha256": "66e863c7ae0da294a772e0ba7055eb2ae34ed372fc6b554bd40d19fe45a97b5a",
-      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; manual snapshot forcing is blocked unless explicitly unlocked, so operational resend/cron paths remain live alerts only.",
-      "validation": "B011 canonical restored; no B001A state; live run OK errors=0 snapshot=false B011_current_count=1 cumulative_removed=0.",
-      "updated_at": "2026-07-04T06:27:21-04:00",
-      "source_report": "REPORT-INFRA Zeus B003 cumulative reassignment cleanup 2026-07-04"
+      "size_bytes": 52440,
+      "modified_at": "2026-07-04T06:37:15-04:00",
+      "sha256": "a74f75e44b7d9b5581f36c8c2faaaa227df91dab51e273fbc4df7a23feb81ea6",
+      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; current-user tables now render every row and split across Discord-safe messages instead of hiding overflow.",
+      "validation": "bash -n OK; embedded Python compile OK; synthetic 60-row table rendered 60 rows, 3 Discord-safe blocks, no hidden/truncated marker.",
+      "updated_at": "2026-07-04T06:38:34-04:00",
+      "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04"
     },
     {
       "id": "hera-fix-car-br-pt-drive-parent-20260702",
@@ -824,16 +824,16 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "size_bytes": 42126,
-      "modified_at": "2026-07-04T06:11:00-04:00",
-      "sha256": "c0cca70099d4eeebc54fbd8e2b43653720d2ab43a0984a6a452215d641431a04",
-      "purpose": "Procedure for Meta app rate-limit/roles monitoring; documents live-alert-only resend policy and hard snapshot guard.",
-      "validation": "Historical app-role cache cleaned with backup; cleared last/cumulative removed/added, preserved role baselines, live run OK alerts_sent=0 errors=0 marked=1 unmatched_removed=0.",
-      "updated_at": "2026-07-04T06:11:25-04:00",
+      "size_bytes": 43875,
+      "modified_at": "2026-07-04T06:37:45-04:00",
+      "sha256": "7a04cccae43fb74f7d7757e2abacd0582778bbedc0363ca3423aa729900c3cf6",
+      "purpose": "Procedure for Meta app rate-limit/roles monitoring; current-user tables must show every row and split into multiple Discord-safe messages when needed.",
+      "validation": "bash -n OK; embedded Python compile OK; synthetic 60-row table rendered 60 rows, 3 Discord-safe blocks, no hidden/truncated marker.",
+      "updated_at": "2026-07-04T06:38:34-04:00",
       "skill": "meta-app-rate-limit-monitor",
-      "md5": "a6f73d878bf90825eb605b37298b11f2",
-      "source_report": "REPORT-INFRA Zeus app-role cache cleanup 2026-07-04",
-      "description": "Meta app rate-limit/roles monitor procedure including B001A DTR link validation semantics (debug_token account link, pages separate)."
+      "md5": "e67190c6524427c58ffabd2f3e652f07",
+      "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
+      "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels."
     },
     {
       "profile": "zeus",
@@ -909,18 +909,18 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 42126,
-      "sha256": "c0cca70099d4eeebc54fbd8e2b43653720d2ab43a0984a6a452215d641431a04",
+      "size_bytes": 43875,
+      "sha256": "7a04cccae43fb74f7d7757e2abacd0582778bbedc0363ca3423aa729900c3cf6",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-04T06:11:25-04:00",
-      "validation": "Historical app-role cache cleaned with backup; cleared last/cumulative removed/added, preserved role baselines, live run OK alerts_sent=0 errors=0 marked=1 unmatched_removed=0.",
-      "modified_at": "2026-07-04T06:11:00-04:00",
-      "source_report": "REPORT-INFRA Zeus app-role cache cleanup 2026-07-04",
+      "updated_at": "2026-07-04T06:38:34-04:00",
+      "validation": "bash -n OK; embedded Python compile OK; synthetic 60-row table rendered 60 rows, 3 Discord-safe blocks, no hidden/truncated marker.",
+      "modified_at": "2026-07-04T06:37:45-04:00",
+      "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
       "agent": "zeus",
-      "purpose": "Procedure for Meta app rate-limit/roles monitoring and B001A Advanced Access/DTR verification; documents preserving B001A suffix and clearing role-based X markers.",
-      "md5": "a6f73d878bf90825eb605b37298b11f2",
+      "purpose": "Procedure for Meta app rate-limit/roles monitoring; current-user tables must show every row and split into multiple Discord-safe messages when needed.",
+      "md5": "e67190c6524427c58ffabd2f3e652f07",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "description": "Meta app rate-limit/roles monitor procedure including B001A DTR link validation semantics (debug_token account link, pages separate)."
+      "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels."
     },
     {
       "profile": "zeus",
