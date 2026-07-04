@@ -777,11 +777,11 @@
       "modified_at": "2026-07-04T05:28:10-04:00",
       "sha256": "7b7481048fee6c5433631eb9cd942ebf084ea62c1e31a64192ae3228ea62723d",
       "purpose": "Procedure for Meta app rate-limit/roles monitoring; documents live-alert-only resend policy and hard snapshot guard.",
-      "validation": "skill patched; documents hard guard against accidental FORCE_SNAPSHOT manual resend; snapshot requires explicit unlock env var.",
-      "updated_at": "2026-07-04T05:29:47-04:00",
+      "validation": "Skill/reference cleaned: live-alert-only resend policy plus hard snapshot guard documented; stale forced-snapshot validation removed.",
+      "updated_at": "2026-07-04T05:34:49-04:00",
       "skill": "meta-app-rate-limit-monitor",
       "md5": "b70f670e4d6bc70ed0ace602a7be3ddc",
-      "source_report": "REPORT-INFRA Zeus Meta app roles snapshot guard 2026-07-04"
+      "source_report": "REPORT-INFRA Zeus Meta app roles stale snapshot docs cleanup 2026-07-04"
     },
     {
       "profile": "zeus",
@@ -857,16 +857,16 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 40006,
-      "sha256": "4ce74d9569c3df59380332c3c42c1b3a624a3222b85ad7e1b2bcb9bbda12c881",
+      "size_bytes": 40585,
+      "sha256": "7b7481048fee6c5433631eb9cd942ebf084ea62c1e31a64192ae3228ea62723d",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-04T04:58:08-04:00",
-      "validation": "skill patched; documents B001A alpha suffix parsing, no role-based X for B001A, and DTR/page-token ownership for connection reconciliation.",
-      "modified_at": "2026-07-04T04:55:33-04:00",
-      "source_report": "REPORT-INFRA Zeus Meta app roles B001A X fix 2026-07-04",
+      "updated_at": "2026-07-04T05:34:49-04:00",
+      "validation": "Skill/reference cleaned: live-alert-only resend policy plus hard snapshot guard documented; stale forced-snapshot validation removed.",
+      "modified_at": "2026-07-04T05:28:10-04:00",
+      "source_report": "REPORT-INFRA Zeus Meta app roles stale snapshot docs cleanup 2026-07-04",
       "agent": "zeus",
       "purpose": "Procedure for Meta app rate-limit/roles monitoring and B001A Advanced Access/DTR verification; documents preserving B001A suffix and clearing role-based X markers.",
-      "md5": "024acd93bef756d875d0867f97aaf0d7"
+      "md5": "b70f670e4d6bc70ed0ace602a7be3ddc"
     },
     {
       "profile": "zeus",
@@ -902,13 +902,13 @@
       "type": "profile_skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/SKILL.md",
-      "size_bytes": 45767,
-      "sha256": "a1ec52a6e9b64b8c7b56b228e46a74128e39fee5b2ff377db5c6da38cd1de3d8",
+      "size_bytes": 45846,
+      "sha256": "4c2e33b2625fbdf3d3fae74421ee067ed9d90f863d573428abcce5cd47f56120",
       "runtime_versioned_sha_match": true,
-      "modified_at": "2026-07-04T04:30:07-04:00",
-      "updated_at": "2026-07-04T04:30:41-04:00",
-      "validation": "Runtime and versioned skill mirror synced after broad auto-commit guardrail hardening",
-      "source_report": "Zeus service restart alert layout fix 2026-07-02",
+      "modified_at": "2026-07-04T04:37:07-04:00",
+      "updated_at": "2026-07-04T05:34:49-04:00",
+      "validation": "Skill references cleaned: removed stale FORCE_SNAPSHOT-as-real-alert instructions; runtime/profile refs verified clear.",
+      "source_report": "REPORT-INFRA Zeus Meta app roles stale snapshot docs cleanup 2026-07-04",
       "agent": "zeus",
       "last_commit": "pending"
     }
