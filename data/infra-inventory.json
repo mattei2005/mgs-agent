@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-04T06:56:40-04:00",
-    "generated_by": "Zeus manual update after canonical B011 rename"
+    "updated_at": "2026-07-04T07:11:52-04:00",
+    "generated_by": "Zeus manual B011 cache cleanup and validation alert"
   },
   "system_packages": [
     {
@@ -4480,5 +4480,18 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "manual_updates": [
+    {
+      "ts": "2026-07-04T07:11:52-04:00",
+      "agent": "zeus",
+      "type": "skill/cron/config cleanup",
+      "summary": "Canonical B011 naming verified; stale legacy label cache scrubbed; B011 validation alert sent.",
+      "paths": [
+        "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
+        "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
+        "/root/mgs-agent/docs/CRONS.md"
+      ]
+    }
+  ]
 }
