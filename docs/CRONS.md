@@ -42,6 +42,19 @@ Frequência          | Script                                     | Owner       
 - Médio risco: `infra-discovery.sh`, `cleanup-zombie-sessions.sh`, `sync-codex-oauth.sh`, `mgs-safety-backup.sh`
 - Crons sem `flock`: `discord-archive-stale-agent-threads.py`
 
+## Crons Hermes ativos (perfil Zeus)
+
+### `b001a-dtr-link-watch`
+- **Job ID:** `498fb0d95e10`
+- **Frequência:** `every 10m`
+- **Owner:** Zeus/Ops
+- **Risco:** médio: login DTR + Meta API read-only; pode alertar canal B001A.
+- **Função:** Valida link OAuth dos seguradores B001A via DigitalTRChat + Meta `/debug_token`. `0` páginas não significa desconectado; páginas são inventário separado.
+- **Script:** `/root/.hermes/profiles/zeus/scripts/b001a-dtr-link-watch.sh`
+- **State:** `/root/mgs-agent/data/b001a-dtr-link-monitor-state.json`
+- **Canal:** `1522830283240505385`
+- **Validação inicial:** 19 targets, 18 linkados, 1 pendente (`Kaio Sousa`), 196 páginas conectadas, `alerts_sent=0`.
+
 ## Crons externos / sistema
 
 ### `/etc/cron.d/monarx-update`
