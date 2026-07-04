@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-04T04:27:33-04:00",
-    "generated_by": "Zeus manual update: auto-commit hardening procedure added to log-monitor skill"
+    "updated_at": "2026-07-04T04:30:22-04:00",
+    "generated_by": "Zeus manual update: broaden auto-commit runtime exclusions and immediate guardrail alerting"
   },
   "system_packages": [
     {
@@ -902,12 +902,12 @@
       "type": "profile_skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/SKILL.md",
-      "size_bytes": 45728,
-      "sha256": "5454b46d5ee024be9524b347924b6d4a4a7f139e5433f0a21f0899a88875ddba",
-      "runtime_versioned_sha_match": true,
-      "modified_at": "2026-07-04T04:26:58-04:00",
-      "updated_at": "2026-07-04T04:27:33-04:00",
-      "validation": "Runtime and versioned skill updated with auto-commit guardrail/runtime ignore procedure",
+      "size_bytes": 45767,
+      "sha256": "a1ec52a6e9b64b8c7b56b228e46a74128e39fee5b2ff377db5c6da38cd1de3d8",
+      "runtime_versioned_sha_match": false,
+      "modified_at": "2026-07-04T04:30:07-04:00",
+      "updated_at": "2026-07-04T04:30:22-04:00",
+      "validation": "Procedure updated with broad runtime patterns and immediate guardrail alerting",
       "source_report": "Zeus service restart alert layout fix 2026-07-02",
       "agent": "zeus",
       "last_commit": "pending"
@@ -1170,8 +1170,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 3634,
-      "modified_at": "2026-07-04T04:24:56-04:00"
+      "size_bytes": 3750,
+      "modified_at": "2026-07-04T04:29:25-04:00",
+      "validation": "Broad runtime audit/reports/state exclusions; guardrail block alerts immediately on monitor"
     },
     {
       "path": "/root/mgs-agent/scripts/chat-log.sh",
@@ -1425,8 +1426,9 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-auto-push.sh",
-      "size_bytes": 14201,
-      "modified_at": "2026-07-04T04:23:50-04:00"
+      "size_bytes": 14495,
+      "modified_at": "2026-07-04T04:29:25-04:00",
+      "validation": "Broad runtime audit/reports/state exclusions; guardrail block alerts immediately on monitor"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
