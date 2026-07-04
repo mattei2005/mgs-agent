@@ -5,7 +5,7 @@
 Use when Zeus/Ares posts to or designs alerts for the 10 app-specific rate-limit channels:
 
 ```text
-#b001-app-rate-limit ... #b010-app-rate-limit
+#b011pp-rate-limit ... #b010-app-rate-limit
 ```
 
 ## User correction
