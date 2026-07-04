@@ -15,6 +15,7 @@ SENSITIVE_ALLOWLIST_REGEX='(^|/)(honcho_sanitized_secret_scan\.py|report-infra-r
 GIT_PATHSPECS=(
   "."
   ":(exclude)data/*-state.json"
+  ":(exclude)data/**/*-state.json"
   ":(exclude)data/ares/creative-inventory/video-frame-samples-full/**"
   ":(exclude)data/browser-profiles/**"
   ":(exclude)data/ares/meta-ads/audit/token-debug-*.json"
