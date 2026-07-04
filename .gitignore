@@ -99,6 +99,9 @@ data/browser-profiles/
 
 # Sensitive/debug runtime artifacts: never version automatically
 data/ares/meta-ads/audit/token-debug-*.json
+data/**/audit/**/*.json
+data/**/reports/**/*.json
+data/**/state/**/*.json
 data/ares/meta-ads/audit/**/*.json
 data/ares/meta-ads/reports/**/*.json
 data/ares/meta-ads/state/**/*.json

@@ -157,6 +157,7 @@ fi
 # O log sozinho não basta: se o watcher estiver em branch lateral, ou travado
 # antes de commitar, o log pode parecer OK enquanto GitHub/main fica velho.
 REPO_FAILURES=()
+AUTO_COMMIT_GUARDRAIL_BLOCKED=0
 CURRENT_BRANCH="$(git -C "$BASE_DIR" rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown)"
 if [[ "$CURRENT_BRANCH" != "main" ]]; then
     REPO_FAILURES+=("repo branch=$CURRENT_BRANCH [esperado main]")
@@ -198,6 +199,7 @@ if [[ -f "$AUTO_COMMIT_LOG" ]]; then
         fi
     done < <(tail -500 "$AUTO_COMMIT_LOG" 2>/dev/null || true)
     if (( LAST_BLOCK_EPOCH > LAST_CLEAR_EPOCH )); then
+        AUTO_COMMIT_GUARDRAIL_BLOCKED=1
         REPO_FAILURES+=("auto-commit bloqueado por guardrail sensível [commit/push não iniciou]")
     fi
 fi
@@ -229,7 +231,11 @@ if (( TOTAL_NEW_FAILURES > 0 )); then
 
     # Verificar anti-spam
     SEND_ALERT=false
-    if (( NEW_CONSECUTIVE >= THRESHOLD )); then
+    if (( AUTO_COMMIT_GUARDRAIL_BLOCKED == 1 )); then
+        # Guardrail bloqueado impede commit/push antes do auto-push começar;
+        # alertar na primeira detecção, sem esperar 3 ciclos.
+        SEND_ALERT=true
+    elif (( NEW_CONSECUTIVE >= THRESHOLD )); then
         if [[ "$LAST_ALERT" == "null" ]]; then
             SEND_ALERT=true
         else
