@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-04T04:30:41-04:00",
-    "generated_by": "Zeus manual update: sync guardrail recovery skill mirror"
+    "updated_at": "2026-07-04T04:58:08-04:00",
+    "generated_by": "Zeus manual inventory update after B001A sheet parser/X-marker fix"
   },
   "system_packages": [
     {
@@ -568,13 +568,13 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 46920,
-      "modified_at": "2026-07-04T04:18:03-04:00",
-      "sha256": "eea361b4a4757404f38f29743b69bbad5e6307b3101b1fb084869c6c63a9babd",
-      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; includes B001A channel routing and excludes B001A from role-based sheet removal reconciliation because it uses Advanced Access + ChatPion connection model.",
-      "validation": "bash -n OK; embedded Python compile OK; real script run OK with 11 items including BOT B001A Token; B001A token valid, X-App-Usage OK, alerts_sent=0, sheet sync gid 542936436 rows=231 updated=False.",
-      "updated_at": "2026-07-04T04:20:14-04:00",
-      "source_report": "REPORT-INFRA Zeus Meta app roles B001A token and sheet gid 2026-07-04"
+      "size_bytes": 47149,
+      "modified_at": "2026-07-04T04:55:25-04:00",
+      "sha256": "afb7a17d55bfd726acb62ef3e456ca5aa0df5ad957b8e6fc1416b42535e9bd6e",
+      "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; preserves B001A alpha suffix in sheet parsing and clears/prevents role-based X markers for B001A because it uses Advanced Access + ChatPion/DTR page-token model.",
+      "validation": "bash -n OK; real script run OK; sheet gid 542936436 updated A2:A232; B001A rows now X=0; alerts_sent=0; errors_count=0; Lorena B001A verified via DTR/Meta API 2/2 pages.",
+      "updated_at": "2026-07-04T04:58:08-04:00",
+      "source_report": "REPORT-INFRA Zeus Meta app roles B001A X fix 2026-07-04"
     },
     {
       "id": "hera-fix-car-br-pt-drive-parent-20260702",
@@ -773,15 +773,15 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "size_bytes": 37227,
-      "modified_at": "2026-07-04T04:18:15-04:00",
-      "sha256": "aef30853fd29c9c4ef4ea2450a52b90911edf5b34b896133c82a44e90e54f5bf",
-      "purpose": "Procedure for Meta app rate-limit/roles monitoring and #app-rate-limit alert standard; documents 11 app channels including B001A and Advanced Access/ChatPion exception.",
-      "validation": "skill patched; documents gid 542936436, 11-channel model, and B001A role-reconciliation exclusion.",
-      "updated_at": "2026-07-04T04:20:14-04:00",
+      "size_bytes": 40006,
+      "modified_at": "2026-07-04T04:55:33-04:00",
+      "sha256": "4ce74d9569c3df59380332c3c42c1b3a624a3222b85ad7e1b2bcb9bbda12c881",
+      "purpose": "Procedure for Meta app rate-limit/roles monitoring and B001A Advanced Access/DTR verification; documents preserving B001A suffix and clearing role-based X markers.",
+      "validation": "skill patched; documents B001A alpha suffix parsing, no role-based X for B001A, and DTR/page-token ownership for connection reconciliation.",
+      "updated_at": "2026-07-04T04:58:08-04:00",
       "skill": "meta-app-rate-limit-monitor",
-      "md5": "279afa13cd2572fb3bb912a1d7f110b2",
-      "source_report": "REPORT-INFRA Zeus Meta app roles B001A token and sheet gid 2026-07-04"
+      "md5": "024acd93bef756d875d0867f97aaf0d7",
+      "source_report": "REPORT-INFRA Zeus Meta app roles B001A X fix 2026-07-04"
     },
     {
       "profile": "zeus",
@@ -857,16 +857,16 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 37227,
-      "sha256": "aef30853fd29c9c4ef4ea2450a52b90911edf5b34b896133c82a44e90e54f5bf",
+      "size_bytes": 40006,
+      "sha256": "4ce74d9569c3df59380332c3c42c1b3a624a3222b85ad7e1b2bcb9bbda12c881",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-04T04:20:14-04:00",
-      "validation": "skill patched; documents gid 542936436, 11-channel model, and B001A role-reconciliation exclusion.",
-      "modified_at": "2026-07-04T04:18:15-04:00",
-      "source_report": "REPORT-INFRA Zeus Meta app roles B001A token and sheet gid 2026-07-04",
+      "updated_at": "2026-07-04T04:58:08-04:00",
+      "validation": "skill patched; documents B001A alpha suffix parsing, no role-based X for B001A, and DTR/page-token ownership for connection reconciliation.",
+      "modified_at": "2026-07-04T04:55:33-04:00",
+      "source_report": "REPORT-INFRA Zeus Meta app roles B001A X fix 2026-07-04",
       "agent": "zeus",
-      "purpose": "Procedure for Meta app rate-limit/roles monitoring and #app-rate-limit alert standard; documents 11 app channels including B001A and Advanced Access/ChatPion exception.",
-      "md5": "279afa13cd2572fb3bb912a1d7f110b2"
+      "purpose": "Procedure for Meta app rate-limit/roles monitoring and B001A Advanced Access/DTR verification; documents preserving B001A suffix and clearing role-based X markers.",
+      "md5": "024acd93bef756d875d0867f97aaf0d7"
     },
     {
       "profile": "zeus",
