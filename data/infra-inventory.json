@@ -568,13 +568,13 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 50062,
-      "modified_at": "2026-07-04T05:44:35-04:00",
-      "sha256": "f31bcd8b57c5ac39acfb6dcb92ce49195f3aef858b6e6617595bc88429569e3a",
+      "size_bytes": 50226,
+      "modified_at": "2026-07-04T05:48:41-04:00",
+      "sha256": "751522242d3841473984df5f89ca3108dcc698e7fa2c0fbfd07a9a5d5939d1b8",
       "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; manual snapshot forcing is blocked unless explicitly unlocked, so operational resend/cron paths remain live alerts only.",
-      "validation": "Added/validated FORCE_LIVE_ALERT path: B002 live cron-style alert sent with alerts_sent=1, force_snapshot_effective=false, errors_count=0.",
-      "updated_at": "2026-07-04T05:45:24-04:00",
-      "source_report": "REPORT-INFRA Zeus Meta app roles force live alert path 2026-07-04"
+      "validation": "B001A aligned to B001-B010 plan: cron every 2m; DTR/page-token runtime source writes/clears sheet X; live run OK targets=19 linked=18 marked=1 updated_cells=1 alerts_sent=0; meta roles script preserves B001A X instead of clearing it.",
+      "updated_at": "2026-07-04T05:57:33-04:00",
+      "source_report": "REPORT-INFRA Zeus B001A same-plan cron alignment 2026-07-04"
     },
     {
       "id": "hera-fix-car-br-pt-drive-parent-20260702",
@@ -604,16 +604,18 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b001a-dtr-link-watch.sh",
-      "size_bytes": 16868,
-      "modified_at": "2026-07-04T05:36:30-04:00",
-      "sha256": "19a51e3e985c685be0c033e48bdedf008f170b1dff0f987c46e72dd423fbcba1",
+      "size_bytes": 21256,
+      "modified_at": "2026-07-04T05:50:40-04:00",
+      "sha256": "97f514a4baa34e657afc32b267c324b43b9dc11508392fd103ce643ddb07fa86",
       "owner": "Zeus/Ops",
       "type": "hermes_profile_script",
       "risk": "medium",
       "description": "B001A DTR/ChatPion link monitor. Reads B001A config from 1Password, logs into DigitalTRChat bot accounts, switches segurador, validates active OAuth connection with Meta /debug_token against B001A app_id, and stores sanitized state. 0 pages does not mean disconnected.",
       "cron_job_id": "498fb0d95e10",
       "schedule": "every 10m",
-      "validation": "bash -n OK; dry-run targets=19 linked=18 not_linked_or_error=1; real baseline targets=19 linked=18 total_connected_pages=196 alerts_sent=0"
+      "validation": "B001A aligned to B001-B010 plan: cron every 2m; DTR/page-token runtime source writes/clears sheet X; live run OK targets=19 linked=18 marked=1 updated_cells=1 alerts_sent=0; meta roles script preserves B001A X instead of clearing it.",
+      "updated_at": "2026-07-04T05:57:33-04:00",
+      "source_report": "REPORT-INFRA Zeus B001A same-plan cron alignment 2026-07-04"
     }
   ],
   "profile_skill_references": [
@@ -786,15 +788,15 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "size_bytes": 41207,
-      "modified_at": "2026-07-04T05:45:01-04:00",
-      "sha256": "e783d72056a6dd04c73ce47f92cc7f950f67698b3acee677ee7c5448c462c691",
+      "size_bytes": 41403,
+      "modified_at": "2026-07-04T05:56:59-04:00",
+      "sha256": "0000d7603061a8ffd2370d8886c821fffa46c0b740d6ae56c175f4431cf996cf",
       "purpose": "Procedure for Meta app rate-limit/roles monitoring; documents live-alert-only resend policy and hard snapshot guard.",
-      "validation": "Added/validated FORCE_LIVE_ALERT path: B002 live cron-style alert sent with alerts_sent=1, force_snapshot_effective=false, errors_count=0.",
-      "updated_at": "2026-07-04T05:47:40-04:00",
+      "validation": "B001A aligned to B001-B010 plan: cron every 2m; DTR/page-token runtime source writes/clears sheet X; live run OK targets=19 linked=18 marked=1 updated_cells=1 alerts_sent=0; meta roles script preserves B001A X instead of clearing it.",
+      "updated_at": "2026-07-04T05:57:33-04:00",
       "skill": "meta-app-rate-limit-monitor",
-      "md5": "3513b9796b5ca58fc197a917c10b7fac",
-      "source_report": "REPORT-INFRA Zeus Meta app roles force live alert path 2026-07-04",
+      "md5": "bbbae9ef76a47bfa56f681450e6ec524",
+      "source_report": "REPORT-INFRA Zeus B001A same-plan cron alignment 2026-07-04",
       "description": "Meta app rate-limit/roles monitor procedure including B001A DTR link validation semantics (debug_token account link, pages separate)."
     },
     {
@@ -871,16 +873,16 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 41207,
-      "sha256": "e783d72056a6dd04c73ce47f92cc7f950f67698b3acee677ee7c5448c462c691",
+      "size_bytes": 41403,
+      "sha256": "0000d7603061a8ffd2370d8886c821fffa46c0b740d6ae56c175f4431cf996cf",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-04T05:47:40-04:00",
-      "validation": "Added/validated FORCE_LIVE_ALERT path: B002 live cron-style alert sent with alerts_sent=1, force_snapshot_effective=false, errors_count=0.",
-      "modified_at": "2026-07-04T05:45:01-04:00",
-      "source_report": "REPORT-INFRA Zeus Meta app roles force live alert path 2026-07-04",
+      "updated_at": "2026-07-04T05:57:33-04:00",
+      "validation": "B001A aligned to B001-B010 plan: cron every 2m; DTR/page-token runtime source writes/clears sheet X; live run OK targets=19 linked=18 marked=1 updated_cells=1 alerts_sent=0; meta roles script preserves B001A X instead of clearing it.",
+      "modified_at": "2026-07-04T05:56:59-04:00",
+      "source_report": "REPORT-INFRA Zeus B001A same-plan cron alignment 2026-07-04",
       "agent": "zeus",
       "purpose": "Procedure for Meta app rate-limit/roles monitoring and B001A Advanced Access/DTR verification; documents preserving B001A suffix and clearing role-based X markers.",
-      "md5": "3513b9796b5ca58fc197a917c10b7fac",
+      "md5": "bbbae9ef76a47bfa56f681450e6ec524",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
       "description": "Meta app rate-limit/roles monitor procedure including B001A DTR link validation semantics (debug_token account link, pages separate)."
     },
@@ -1038,7 +1040,10 @@
       "no_agent": true,
       "owner": "Zeus/Ops",
       "risk": "medium",
-      "description": "Runs B001A DTR link monitor. Script posts direct Discord alerts to B001A app-rate-limit channel on anomalies; empty stdout is silent OK."
+      "description": "Runs B001A DTR link monitor. Script posts direct Discord alerts to B001A app-rate-limit channel on anomalies; empty stdout is silent OK.",
+      "updated_at": "2026-07-04T05:57:33-04:00",
+      "validation": "B001A aligned to B001-B010 plan: cron every 2m; DTR/page-token runtime source writes/clears sheet X; live run OK targets=19 linked=18 marked=1 updated_cells=1 alerts_sent=0; meta roles script preserves B001A X instead of clearing it.",
+      "source_report": "REPORT-INFRA Zeus B001A same-plan cron alignment 2026-07-04"
     }
   ],
   "scripts": [
@@ -3816,7 +3821,13 @@
       {
         "name": "meta-app-rate-limit-monitor",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
+        "size_bytes": 41403,
+        "sha256": "0000d7603061a8ffd2370d8886c821fffa46c0b740d6ae56c175f4431cf996cf",
+        "modified_at": "2026-07-04T05:56:59-04:00",
+        "updated_at": "2026-07-04T05:57:33-04:00",
+        "validation": "B001A aligned to B001-B010 plan: cron every 2m; DTR/page-token runtime source writes/clears sheet X; live run OK targets=19 linked=18 marked=1 updated_cells=1 alerts_sent=0; meta roles script preserves B001A X instead of clearing it.",
+        "source_report": "REPORT-INFRA Zeus B001A same-plan cron alignment 2026-07-04"
       },
       {
         "name": "meta-utility-template-approval",
