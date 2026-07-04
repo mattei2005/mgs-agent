@@ -2,12 +2,9 @@ model:
   default: gpt-5.5
   provider: openai-codex
   base_url: https://chatgpt.com/backend-api/codex
-providers: {}
 fallback_providers: []
-credential_pool_strategies: {}
 toolsets:
-- hermes-cli
-max_concurrent_sessions: null
+  - hermes-cli
 agent:
   max_turns: 200
   gateway_timeout: 1800
@@ -65,19 +62,19 @@ agent:
     hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question
       is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE
       YOU READY?! LET'S DO THIS! 💪😤🚀
+  verify_on_stop: false
 terminal:
   backend: local
   modal_mode: auto
   cwd: .
   timeout: 180
   env_passthrough:
-  - DISCORD_BOT_TOKEN
+    - DISCORD_BOT_TOKEN
   home_mode: auto
   shell_init_files: []
   auto_source_bashrc: true
   docker_image: nikolaik/python-nodejs:python3.11-nodejs20
   docker_forward_env: []
-  docker_env: {}
   singularity_image: docker://nikolaik/python-nodejs:python3.11-nodejs20
   modal_image: nikolaik/python-nodejs:python3.11-nodejs20
   daytona_image: nikolaik/python-nodejs:python3.11-nodejs20
@@ -122,7 +119,6 @@ checkpoints:
   retention_days: 7
   delete_orphans: true
   min_interval_hours: 24
-context_file_max_chars: null
 file_read_max_chars: 100000
 mcp_discovery_timeout: 1.5
 tool_output:
@@ -158,7 +154,6 @@ kanban:
   worker_log_backup_count: 1
   orchestrator_profile: ''
   default_assignee: ''
-  max_in_progress_per_profile: null
   auto_decompose: true
   auto_decompose_per_tick: 3
   dispatch_stale_timeout_seconds: 14400
@@ -186,7 +181,6 @@ auxiliary:
     base_url: ''
     api_key: ''
     timeout: 120
-    extra_body: {}
     download_timeout: 30
   web_extract:
     provider: openai-codex
@@ -194,42 +188,36 @@ auxiliary:
     base_url: ''
     api_key: ''
     timeout: 120
-    extra_body: {}
   compression:
     provider: openai-codex
     model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 300
-    extra_body: {}
   skills_hub:
     provider: openai-codex
     model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 30
-    extra_body: {}
   approval:
     provider: openai-codex
     model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 30
-    extra_body: {}
   mcp:
     provider: openai-codex
     model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 30
-    extra_body: {}
   title_generation:
     provider: openai-codex
     model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 30
-    extra_body: {}
     language: ''
   tts_audio_tags:
     provider: auto
@@ -237,42 +225,36 @@ auxiliary:
     base_url: ''
     api_key: ''
     timeout: 30
-    extra_body: {}
   triage_specifier:
     provider: openai-codex
     model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 120
-    extra_body: {}
   kanban_decomposer:
     provider: openai-codex
     model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 180
-    extra_body: {}
   profile_describer:
     provider: openai-codex
     model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 60
-    extra_body: {}
   curator:
     provider: openai-codex
     model: gpt-5.5
     base_url: ''
     api_key: ''
     timeout: 600
-    extra_body: {}
   monitor:
     provider: auto
     model: ''
     base_url: ''
     api_key: ''
     timeout: 60
-    extra_body: {}
   session_search:
     provider: openai-codex
     model: gpt-5.5
@@ -317,7 +299,6 @@ display:
     last_lines: 2
   interim_assistant_messages: false
   tool_progress_command: false
-  tool_progress_overrides: {}
   tool_preview_length: 0
   tool_progress_grouping: accumulate
   ephemeral_system_ttl: 0
@@ -335,9 +316,9 @@ display:
   runtime_footer:
     enabled: false
     fields:
-    - model
-    - context_pct
-    - cwd
+      - model
+      - context_pct
+      - cwd
   copy_shortcut: auto
   tool_progress: 'off'
   background_process_notifications: error
@@ -443,7 +424,7 @@ goals:
   max_turns: 20
 skills:
   external_dirs:
-  - /root/mgs-agent/skills
+    - /root/mgs-agent/skills
   template_vars: true
   inline_shell: false
   inline_shell_timeout: 10
@@ -451,84 +432,84 @@ skills:
   write_approval: false
   creation_nudge_interval: 15
   disabled:
-  - apple-notes
-  - apple-reminders
-  - architecture-diagram
-  - arxiv
-  - ascii-art
-  - ascii-video
-  - audiocraft
-  - audiocraft-audio-generation
-  - axolotl
-  - baoyu-comic
-  - baoyu-infographic
-  - blogwatcher
-  - claude-code
-  - codebase-inspection
-  - codex
-  - creative-ideation
-  - dogfood
-  - dspy
-  - evaluating-llms-harness
-  - excalidraw
-  - findmy
-  - fine-tuning-with-trl
-  - gif-search
-  - github-auth
-  - github-code-review
-  - github-issues
-  - github-pr-workflow
-  - github-repo-management
-  - godmode
-  - google-workspace
-  - heartmula
-  - hermes-agent
-  - himalaya
-  - huggingface-hub
-  - ideation
-  - imessage
-  - jupyter-live-kernel
-  - linear
-  - llama-cpp
-  - llm-wiki
-  - lm-evaluation-harness
-  - manim-video
-  - maps
-  - minecraft-modpack-server
-  - nano-pdf
-  - native-mcp
-  - notion
-  - obliteratus
-  - obsidian
-  - ocr-and-documents
-  - opencode
-  - openhue
-  - outlines
-  - p5js
-  - pixel-art
-  - plan
-  - pokemon-player
-  - polymarket
-  - popular-web-designs
-  - powerpoint
-  - requesting-code-review
-  - research-paper-writing
-  - segment-anything
-  - segment-anything-model
-  - serving-llms-vllm
-  - songsee
-  - songwriting-and-ai-music
-  - subagent-driven-development
-  - systematic-debugging
-  - test-driven-development
-  - trl-fine-tuning
-  - unsloth
-  - vllm
-  - webhook-subscriptions
-  - weights-and-biases
-  - writing-plans
-  - xurl
-  - youtube-content
+    - apple-notes
+    - apple-reminders
+    - architecture-diagram
+    - arxiv
+    - ascii-art
+    - ascii-video
+    - audiocraft
+    - audiocraft-audio-generation
+    - axolotl
+    - baoyu-comic
+    - baoyu-infographic
+    - blogwatcher
+    - claude-code
+    - codebase-inspection
+    - codex
+    - creative-ideation
+    - dogfood
+    - dspy
+    - evaluating-llms-harness
+    - excalidraw
+    - findmy
+    - fine-tuning-with-trl
+    - gif-search
+    - github-auth
+    - github-code-review
+    - github-issues
+    - github-pr-workflow
+    - github-repo-management
+    - godmode
+    - google-workspace
+    - heartmula
+    - hermes-agent
+    - himalaya
+    - huggingface-hub
+    - ideation
+    - imessage
+    - jupyter-live-kernel
+    - linear
+    - llama-cpp
+    - llm-wiki
+    - lm-evaluation-harness
+    - manim-video
+    - maps
+    - minecraft-modpack-server
+    - nano-pdf
+    - native-mcp
+    - notion
+    - obliteratus
+    - obsidian
+    - ocr-and-documents
+    - opencode
+    - openhue
+    - outlines
+    - p5js
+    - pixel-art
+    - plan
+    - pokemon-player
+    - polymarket
+    - popular-web-designs
+    - powerpoint
+    - requesting-code-review
+    - research-paper-writing
+    - segment-anything
+    - segment-anything-model
+    - serving-llms-vllm
+    - songsee
+    - songwriting-and-ai-music
+    - subagent-driven-development
+    - systematic-debugging
+    - test-driven-development
+    - trl-fine-tuning
+    - unsloth
+    - vllm
+    - webhook-subscriptions
+    - weights-and-biases
+    - writing-plans
+    - xurl
+    - youtube-content
 curator:
   enabled: true
   interval_hours: 168
@@ -540,18 +521,15 @@ curator:
   backup:
     enabled: true
     keep: 5
-honcho: {}
 timezone: America/New_York
 slack:
   require_mention: true
   free_response_channels: ''
   allowed_channels: ''
-  channel_prompts: {}
 discord:
   require_mention: true
   free_response_channels: '1496267442899521627'
   allowed_channels: 1496267442899521627,1496267571543019653,1498132022634483894
-  no_thread_channels: '1498132022634483894'
   auto_thread: true
   thread_require_mention: true
   history_backfill: true
@@ -584,18 +562,17 @@ discord:
     speech_gain: 1.0
     ack_enabled: true
     ack_phrases:
-    - Let me look into that.
-    - One moment.
-    - Checking on that now.
-    - Give me a sec.
-    - On it.
+      - Let me look into that.
+      - One moment.
+      - Checking on that now.
+      - Give me a sec.
+      - On it.
   gateway_restart_notification: false
   thread_auto_add_users:
-  - '344196393512075265'
-whatsapp: {}
+    - '344196393512075265'
+  no_thread_channels: 1498132022634483894
 telegram:
   reactions: false
-  channel_prompts: {}
   allowed_chats: ''
   extra:
     rich_messages: true
@@ -603,7 +580,6 @@ mattermost:
   require_mention: true
   free_response_channels: ''
   allowed_channels: ''
-  channel_prompts: {}
 matrix:
   require_mention: true
   free_response_rooms: ''
@@ -616,23 +592,19 @@ approvals:
   destructive_slash_confirm: false
   gateway_timeout: 900
 command_allowlist:
-- /root/mgs-agent/scripts/discord-add-thread-member.sh --profile zeus --thread * --user
-  *
-- delete in root path
-- stop/restart system service
-- kill hermes/gateway process (self-termination)
-- script execution via -e/-c flag
-- execute_code
-- overwrite system config
-- shell command via -c/-lc flag
-- script execution via heredoc
-- hermes update (restarts gateway, kills running agents)
-- git force push (rewrites remote history)
-quick_commands: {}
-platform_hints: {}
-hooks: {}
+  - /root/mgs-agent/scripts/discord-add-thread-member.sh --profile zeus --thread *
+    --user *
+  - delete in root path
+  - stop/restart system service
+  - kill hermes/gateway process (self-termination)
+  - script execution via -e/-c flag
+  - execute_code
+  - overwrite system config
+  - shell command via -c/-lc flag
+  - script execution via heredoc
+  - hermes update (restarts gateway, kills running agents)
+  - git force push (rewrites remote history)
 hooks_auto_accept: false
-personalities: {}
 security:
   allow_private_urls: false
   redact_secrets: true
@@ -654,7 +626,6 @@ cron:
     expected_audience: ''
     nas_jwks_url: ''
   wrap_response: true
-  max_parallel_jobs: null
 code_execution:
   mode: project
   timeout: 300
@@ -676,7 +647,6 @@ model_catalog:
   enabled: true
   url: https://hermes-agent.nousresearch.com/docs/api/model-catalog.json
   ttl_hours: 1
-  providers: {}
 network:
   force_ipv4: false
 gateway:
@@ -713,7 +683,6 @@ lsp:
   wait_mode: document
   wait_timeout: 5.0
   install_strategy: auto
-  servers: {}
 x_search:
   model: grok-4.20-reasoning
   timeout_seconds: 180
@@ -730,7 +699,7 @@ secrets:
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 5
 paste_collapse_char_threshold: 2000
-_config_version: 30
+_config_version: 32
 session_reset:
   mode: none
   idle_minutes: 1440
@@ -738,43 +707,43 @@ session_reset:
 group_sessions_per_user: true
 platform_toolsets:
   cli:
-  - browser
-  - clarify
-  - code_execution
-  - computer_use
-  - cronjob
-  - delegation
-  - file
-  - image_gen
-  - kanban
-  - memory
-  - messaging
-  - session_search
-  - skills
-  - terminal
-  - todo
-  - tts
-  - video_gen
-  - vision
-  - web
-  - x_search
+    - browser
+    - clarify
+    - code_execution
+    - computer_use
+    - cronjob
+    - delegation
+    - file
+    - image_gen
+    - kanban
+    - memory
+    - messaging
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - tts
+    - video_gen
+    - vision
+    - web
+    - x_search
   telegram:
-  - hermes-telegram
+    - hermes-telegram
   discord:
-  - hermes-discord
+    - hermes-discord
   whatsapp:
-  - hermes-whatsapp
+    - hermes-whatsapp
   slack:
-  - hermes-slack
+    - hermes-slack
   signal:
-  - hermes-signal
+    - hermes-signal
   homeassistant:
-  - hermes-homeassistant
+    - hermes-homeassistant
   qqbot:
-  - hermes-qqbot
+    - hermes-qqbot
 known_plugin_toolsets:
   cli:
-  - spotify
+    - spotify
 video_gen:
   provider: xai
   model: grok-imagine-video
@@ -783,3 +752,25 @@ video_gen:
     image_to_video_model: grok-imagine-video-1.5-preview
     resolution: 720p
     duration: 8
+
+# ── Fallback Model ────────────────────────────────────────────────────
+# Automatic provider failover when primary is unavailable.
+# Uncomment and configure to enable. Triggers on rate limits (429),
+# overload (529), service errors (503), or connection failures.
+#
+# Supported providers:
+#   openrouter   (OPENROUTER_API_KEY)  — routes to any model
+#   openai-codex (OAuth — hermes auth) — OpenAI Codex
+#   nous         (OAuth — hermes auth) — Nous Portal
+#   zai          (ZAI_API_KEY)         — Z.AI / GLM
+#   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
+#   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
+#   minimax      (MINIMAX_API_KEY)     — MiniMax
+#   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
+#   bedrock      (AWS IAM / boto3)     — AWS Bedrock (Converse API)
+#
+# For custom OpenAI-compatible endpoints, add base_url and key_env.
+#
+# fallback_model:
+#   provider: openrouter
+#   model: anthropic/claude-sonnet-4
