@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-04T04:20:14-04:00",
-    "generated_by": "Zeus manual inventory update after B001A token validation, sheet gid update, and role-reconciliation exclusion"
+    "updated_at": "2026-07-04T04:25:50-04:00",
+    "generated_by": "Zeus manual update: auto-commit runtime ignore hardening and auto-push monitor guardrail alerting"
   },
   "system_packages": [
     {
@@ -590,6 +590,17 @@
       "source_report": "REPORT-INFRA Hera Drive parent correction CAR_BR_PT 2026-07-02",
       "risk": "Low: one-off Drive folder parent correction; no context versioned files changed; pending context alignment review.",
       "updated_at": "2026-07-02T11:22:02-04:00"
+    },
+    {
+      "id": "gitignore-runtime-state-and-ares-meta-artifacts",
+      "agent": "zeus",
+      "path": "/root/mgs-agent/.gitignore",
+      "type": "gitignore_policy",
+      "size_bytes": 3269,
+      "source": "Zeus fix 2026-07-04: keep auto-commit operational by ignoring runtime state/audit artifacts",
+      "validation": "git status clean after commit; monitor-auto-push --dry-run total_failures=0",
+      "git_tracked": true,
+      "updated_at": "2026-07-04T04:25:50-04:00"
     }
   ],
   "profile_skill_references": [
@@ -1158,8 +1169,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 3450,
-      "modified_at": "2026-06-18T14:12:11-04:00"
+      "size_bytes": 3634,
+      "modified_at": "2026-07-04T04:24:56-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/chat-log.sh",
@@ -1413,8 +1424,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-auto-push.sh",
-      "size_bytes": 12959,
-      "modified_at": "2026-07-01T18:09:02-04:00"
+      "size_bytes": 14201,
+      "modified_at": "2026-07-04T04:23:50-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
@@ -4257,12 +4268,6 @@
       "size_bytes": 1762,
       "md5": "2929e8054b38ad8649e730dd1be64dc6",
       "modified_at": "2026-07-03T14:20:02-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/data/webshare-status-state.json",
-      "size_bytes": 676,
-      "md5": "ec4fd4830a0816ae2f6381dc9094611e",
-      "modified_at": "2026-07-03T14:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
