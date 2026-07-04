@@ -46,14 +46,14 @@ Frequência          | Script                                     | Owner       
 
 ### `b011-dtr-link-watch`
 - **Job ID:** `498fb0d95e10`
-- **Frequência:** `every 10m`
+- **Frequência:** `every 2m`
 - **Owner:** Zeus/Ops
 - **Risco:** médio: login DTR + Meta API read-only; pode alertar canal B011.
-- **Função:** Valida link OAuth dos seguradores B011 via DigitalTRChat + Meta `/debug_token`. `0` páginas não significa desconectado; páginas são inventário separado.
+- **Função:** Valida link OAuth dos seguradores B011 via DigitalTRChat + Meta `/debug_token`. `0` páginas não significa desconectado; páginas são inventário separado. Usa o mesmo padrão operacional dos B001–B010 (planilha + sync de X + alerta), mas a rota de coleta dos usuários é DTR/ChatPion, não `/app/roles`.
 - **Script:** `/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh`
 - **State:** `/root/mgs-agent/data/b011-dtr-link-monitor-state.json`
 - **Canal:** `1522830283240505385`
-- **Validação inicial:** 19 targets, 18 linkados, 1 pendente (`Kaio Sousa`), 196 páginas conectadas, `alerts_sent=0`.
+- **Validação:** force live disponível via `MGS_B011_DTR_FORCE_LIVE_ALERT=1`; alerta manual deve ir somente para o canal B011.
 
 ## Crons externos / sistema
 
