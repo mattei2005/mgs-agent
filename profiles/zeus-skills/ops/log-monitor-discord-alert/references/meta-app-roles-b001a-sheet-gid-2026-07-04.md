@@ -13,6 +13,8 @@ Rodolfo asked for repeated Meta App Roles / removidos acumulados counts and corr
 - App-key canonicalization must preserve alpha suffixes such as `B001A`.
 - Do **not** parse `B001A` with a numeric-only regex that collapses it to `B001`.
 - Count and report `B001` and `B001A` as distinct channels/apps.
+- Operational scope for “all channels” is 11 channels: `B001`, `B001A`, `B002`, `B003`, `B004`, `B005-2`, `B006`, `B007`, `B008`, `B009`, `B010`.
+- Current 1Password credential naming may expose B001A as legacy item `BOT B011 Token`; canonicalize item code `B011` to operational app key `B001A` before state, channel routing, sheet reconciliation, or alert titles.
 - When user asks for alerts in “all channels” after B001A exists, expected scope is 11 channels: `B001`, `B001A`, `B002`, `B003`, `B004`, `B005-2`, `B006`, `B007`, `B008`, `B009`, `B010`.
 
 ## Counting pitfall
