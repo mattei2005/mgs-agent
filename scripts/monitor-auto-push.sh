@@ -179,19 +179,27 @@ if [[ "${DIRTY_COUNT:-0}" != "0" ]]; then
 fi
 
 # Se o auto-commit watcher estiver abortando por guardrail, o auto-push nunca
-# chega a iniciar. Isso precisa alertar como falha operacional, não ficar só em
-# log local com working tree sujo.
+# chega a iniciar. Alertar apenas se o bloqueio for o estado mais recente do
+# watcher; bloqueios históricos dentro da janela não devem manter falso vermelho
+# depois de um commit/skip limpo posterior.
 if [[ -f "$AUTO_COMMIT_LOG" ]]; then
+    LAST_BLOCK_EPOCH=0
+    LAST_CLEAR_EPOCH=0
     while IFS= read -r line; do
         ts="$(echo "$line" | grep -oP '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}' || true)"
         [[ -n "$ts" ]] || continue
         line_epoch="$(date -d "$ts" +%s 2>/dev/null || true)"
         [[ -n "$line_epoch" ]] || continue
-        if (( line_epoch >= CUTOFF_EPOCH )) && echo "$line" | grep -q "BLOQUEADO: arquivo sensível detectado"; then
-            REPO_FAILURES+=("auto-commit bloqueado por guardrail sensível [commit/push não iniciou]")
-            break
+        (( line_epoch >= CUTOFF_EPOCH )) || continue
+        if echo "$line" | grep -q "BLOQUEADO: arquivo sensível detectado"; then
+            LAST_BLOCK_EPOCH="$line_epoch"
+        elif echo "$line" | grep -qE "Commit OK:|Working tree limpo, skipping|ERRO no commit"; then
+            LAST_CLEAR_EPOCH="$line_epoch"
         fi
-    done < <(tail -300 "$AUTO_COMMIT_LOG" 2>/dev/null || true)
+    done < <(tail -500 "$AUTO_COMMIT_LOG" 2>/dev/null || true)
+    if (( LAST_BLOCK_EPOCH > LAST_CLEAR_EPOCH )); then
+        REPO_FAILURES+=("auto-commit bloqueado por guardrail sensível [commit/push não iniciou]")
+    fi
 fi
 
 # ─── Contabilizar falhas ──────────────────────────────────────────────────────
