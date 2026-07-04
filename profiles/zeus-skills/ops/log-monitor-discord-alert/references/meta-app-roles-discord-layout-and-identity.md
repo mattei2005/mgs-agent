@@ -27,14 +27,16 @@ Rodolfo tested several formats on mobile/Discord and explicitly reverted to the 
 
 Keep sorting by the **full** bot email internally, but display only the local-part before `@` in the `BOT EMAIL` column. Example: `disparosopenzed@gmail.com` displays as `disparosopenzed`. Preserve `sem email` as-is. With `ROLE` removed, give the saved width to `SEGURADOR` and let `PERFIL ID` use the remaining line instead of artificially truncating it when possible.
 
-## Critical consistency rule: snapshot and delta alerts use the same layout
+## Critical consistency rule: live delta alerts use the approved 3-message layout
 
 The monitor has two separate output paths:
 
-- forced/manual snapshot path (`FORCE_SNAPSHOT`, e.g. validation sends to B001)
-- automatic cron delta path when users are added/removed
+- automatic/live cron delta path when users are added/removed;
+- historical/diagnostic snapshot path, now blocked unless explicitly unlocked.
 
-Whenever changing layout, patch and validate **both** paths. A previous bug changed the forced snapshot format while the cron delta still sent the old embed with full tables inside fields. Future changes must run a simulated delta dry-run (temporary state with one role removed/added) and confirm it produces three messages in the same format.
+For Rodolfo requests like “manda alerta”, “manda de novo” or “roda o cron”, use the live cron path only. Do not use the snapshot path as a convenient resend mechanism. Snapshot validation must be dry-run or explicitly requested as “snapshot” with the unlock guard.
+
+Whenever changing layout, patch and validate the automatic cron delta path first. A previous bug changed the forced snapshot format while the cron delta still sent the old embed with full tables inside fields. Future changes should run a simulated delta dry-run (temporary state with one role removed/added) and confirm it produces three messages in the same format.
 
 ## Formatting pitfalls from the session
 
@@ -70,15 +72,15 @@ A high `X-App-Usage` alert can be a true transient spike rather than a script fa
 
 ## Validation checklist
 
-- Run a dry-run for one forced snapshot before real post.
-- Check the generated three messages: embed, `Usuários Atuais` block, movements block without redundant heading.
-- Run a simulated delta dry-run with temporary state so the automatic cron-change path is validated too.
+- Run the live monitor path in dry-run/limited scope without snapshot forcing before any real post.
+- Check generated delta/simulated messages: embed, `Usuários Atuais` block, movements block without redundant heading.
+- Run a simulated delta dry-run with temporary state so the automatic cron-change path is validated.
 - Confirm displayed `BOT EMAIL` values have no `@domain`, but sorting remains based on the full email.
 - Scan state for current-vs-cumulative duplicates across all apps using composite identity.
 - If a script or state file changed, post REPORT-INFRA before declaring done.
 
 Example expected validation result:
 
-- forced B001 snapshot: `alerts_sent=1`, `errors_count=0`.
+- live limited-scope run: `errors_count=0`, `force_snapshot_effective=false`; `alerts_sent=0` is OK when no real event exists.
 - simulated delta: 3 dry-run messages with title `Meta APP - B001` and external code blocks.
 - `duplicates_after_cleanup={}` across B001–B010 after state cleanup.

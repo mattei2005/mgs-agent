@@ -44,11 +44,14 @@ If `B001A` shows one API role such as `Thiago Oliveira`, treat it as likely owne
 
 ## Validation pattern
 
-For a real alert push, run the official monitor with `MGS_META_APP_ROLES_FORCE_SNAPSHOT=1` and validate from state summary:
+For a real alert push, run the official monitor **without** snapshot forcing. Constrain scope with `MGS_META_APP_ROLE_ITEMS` only when needed.
 
-- `items` includes all 11 app token items, including `BOT B001A Token`.
-- `alerts_sent == 11`.
+Expected live-path validation:
+
+- `items` includes the requested app token items, including `BOT B001A Token` when testing all 11 channels.
 - `errors_count == 0`.
 - `dry_run == false`.
+- `force_snapshot_effective == false`.
+- `alerts_sent` may be `0` when there is no real delta/failure/rate-limit event.
 
-Do not rely only on a table printed from ad-hoc code when the user asked to send real alerts.
+Do not use `MGS_META_APP_ROLES_FORCE_SNAPSHOT=1` for Rodolfo requests like “manda alerta”, “manda de novo” or “roda o cron”. Snapshot mode is historical/diagnostic only and now requires the explicit unlock `MGS_META_APP_ROLES_ALLOW_SNAPSHOT=EXPLICIT_RODOLFO_SNAPSHOT`.
