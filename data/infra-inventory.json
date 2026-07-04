@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-04T05:47:40-04:00",
-    "generated_by": "Zeus manual update after B001A DTR link monitor activation"
+    "updated_at": "2026-07-04T06:19:17-04:00",
+    "generated_by": "Zeus manual update after B011->B001A live-alert routing correction"
   },
   "system_packages": [
     {
@@ -568,12 +568,12 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 51562,
-      "modified_at": "2026-07-04T06:05:57-04:00",
-      "sha256": "3d470ec04f52f630c8805cce555723b95ef4c0193c3b4a5117c36d8ce48bff3a",
+      "size_bytes": 51866,
+      "modified_at": "2026-07-04T06:17:56-04:00",
+      "sha256": "d1c598ee07719461f0c46f542540997762672ec7e78a168203aafc7e7eea7c2e",
       "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; manual snapshot forcing is blocked unless explicitly unlocked, so operational resend/cron paths remain live alerts only.",
-      "validation": "Fixed cumulative_removed cleanup: users reassigned in sheet to another NO APP are removed from old app accumulated list. B003/Wah Lan cleanup validated; cumulative_removed=0; live alert sent.",
-      "updated_at": "2026-07-04T06:06:46-04:00",
+      "validation": "Canonicalized legacy 1Password item code B011 to operational app key B001A; forced B001A live alert delivered with snapshot=false, errors=0, cumulative_removed=0.",
+      "updated_at": "2026-07-04T06:19:17-04:00",
       "source_report": "REPORT-INFRA Zeus B003 cumulative reassignment cleanup 2026-07-04"
     },
     {
@@ -616,6 +616,28 @@
       "validation": "B001A aligned to B001-B010 plan: cron every 2m; DTR/page-token runtime source writes/clears sheet X; live run OK targets=19 linked=18 marked=1 updated_cells=1 alerts_sent=0; meta roles script preserves B001A X instead of clearing it.",
       "updated_at": "2026-07-04T05:57:33-04:00",
       "source_report": "REPORT-INFRA Zeus B001A same-plan cron alignment 2026-07-04"
+    },
+    {
+      "id": "zeus-skill-ref-meta-app-roles-b001a-gid",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/meta-app-roles-b001a-sheet-gid-2026-07-04.md",
+      "size_bytes": 2876,
+      "modified_at": "2026-07-04T06:18:06-04:00",
+      "sha256": "762db9dbc12205838a670fc88168043f63a2bcb93b78aec2bb381ef5bfb70fd8",
+      "updated_at": "2026-07-04T06:19:17-04:00",
+      "description": "Meta app roles B001A sheet/channel scope reference; includes B011 legacy credential canonicalization to B001A."
+    },
+    {
+      "id": "mgs-agent-runtime-skill-ref-meta-app-roles-b001a-gid",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/mgs-agent/profiles/zeus-skills/ops/log-monitor-discord-alert/references/meta-app-roles-b001a-sheet-gid-2026-07-04.md",
+      "size_bytes": 2876,
+      "modified_at": "2026-07-04T06:18:14-04:00",
+      "sha256": "762db9dbc12205838a670fc88168043f63a2bcb93b78aec2bb381ef5bfb70fd8",
+      "updated_at": "2026-07-04T06:19:17-04:00",
+      "description": "Meta app roles B001A sheet/channel scope reference; includes B011 legacy credential canonicalization to B001A."
     }
   ],
   "profile_skill_references": [
@@ -4215,12 +4237,12 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 46701,
+      "size_bytes": 46249,
       "md5": "190f8d8ed39bacd52ce5eb732e2a6569",
-      "modified_at": "2026-07-04T06:10:50-04:00",
-      "sha256": "48a9957ff03050268b6193df130a4122291cb80a6ca11f19bba804d775778ee4",
-      "updated_at": "2026-07-04T06:11:25-04:00",
-      "validation": "Historical app-role cache cleaned with backup; cleared last/cumulative removed/added, preserved role baselines, live run OK alerts_sent=0 errors=0 marked=1 unmatched_removed=0.",
+      "modified_at": "2026-07-04T06:18:36-04:00",
+      "sha256": "7a98fa2a40be18a53136d85f4c4b4ca267648ed233e243120d6a0230dedc8fd2",
+      "updated_at": "2026-07-04T06:19:17-04:00",
+      "validation": "Removed stale B011 cache after canonicalizing B011->B001A; preserved B001A operational state; all B001-B010/B005-2/B001A cumulative_removed counts are 0 after live validation.",
       "source_report": "REPORT-INFRA Zeus app-role cache cleanup 2026-07-04"
     },
     {
