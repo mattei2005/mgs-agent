@@ -1,0 +1,119 @@
+{
+  "created_at": "2026-07-05T14:41:32-04:00",
+  "mode": "canary",
+  "results": [
+    {
+      "i": 1,
+      "sb_id": "69293886-754c-9267-dcd8-a396260a6923",
+      "page": "Ophelia Monroe",
+      "payload": {
+        "PAGE_ID": "10906",
+        "UTM_CAMPAIGN": "pg_10906",
+        "ids": [
+          "69293886-754c-9267-dcd8-a396260a6923"
+        ]
+      },
+      "ok": true,
+      "status": 200,
+      "response": ""
+    }
+  ],
+  "validations": [
+    {
+      "target": {
+        "sb_id": "69293886-754c-9267-dcd8-a396260a6923",
+        "bot_user": "disparosfinanceadx@gmail.com",
+        "page_name_dtr": "Ophelia Monroe",
+        "page_name_sb": "Ophelia Monroe",
+        "profile_dtr": "Ari Irham",
+        "profile_sb": "Trương Gia Vinh",
+        "target_PAGE_ID": "10906",
+        "target_FB_PAGE_ID": "860836117101608",
+        "target_UTM_CAMPAIGN": "pg_10906",
+        "diffs": [
+          "PAGE_ID",
+          "SEGURADOR"
+        ],
+        "report_sb": {
+          "sb_id": "69293886-754c-9267-dcd8-a396260a6923",
+          "bot_user": "disparoslyzmo@gmail.com",
+          "profile_name": "Trương Gia Vinh",
+          "page_name": "Ophelia Monroe",
+          "page_id": "13676",
+          "fb_page_id": "860836117101608",
+          "status": "Broadcast",
+          "restricted_until": "2026-07-22",
+          "domain": "",
+          "company": "digital-trust"
+        }
+      },
+      "after": {
+        "ID": "69293886-754c-9267-dcd8-a396260a6923",
+        "USER_LOGIN": "disparoslyzmo@gmail.com",
+        "PROFILE_NAME": "Trương Gia Vinh",
+        "PAGE_NAME": "Ophelia Monroe",
+        "PAGE_ID": "13676",
+        "FB_PAGE_ID": "860836117101608",
+        "UTM_CAMPAIGN": "pg_13676",
+        "STATUS": "Broadcast",
+        "RESTRICTED_UNTIL": "2026-07-22",
+        "COMPANY": "digital-trust",
+        "DOMAIN": ""
+      },
+      "checks": {
+        "PAGE_ID": false,
+        "FB_PAGE_ID": true,
+        "UTM_CAMPAIGN": false
+      }
+    }
+  ],
+  "fail": [
+    {
+      "target": {
+        "sb_id": "69293886-754c-9267-dcd8-a396260a6923",
+        "bot_user": "disparosfinanceadx@gmail.com",
+        "page_name_dtr": "Ophelia Monroe",
+        "page_name_sb": "Ophelia Monroe",
+        "profile_dtr": "Ari Irham",
+        "profile_sb": "Trương Gia Vinh",
+        "target_PAGE_ID": "10906",
+        "target_FB_PAGE_ID": "860836117101608",
+        "target_UTM_CAMPAIGN": "pg_10906",
+        "diffs": [
+          "PAGE_ID",
+          "SEGURADOR"
+        ],
+        "report_sb": {
+          "sb_id": "69293886-754c-9267-dcd8-a396260a6923",
+          "bot_user": "disparoslyzmo@gmail.com",
+          "profile_name": "Trương Gia Vinh",
+          "page_name": "Ophelia Monroe",
+          "page_id": "13676",
+          "fb_page_id": "860836117101608",
+          "status": "Broadcast",
+          "restricted_until": "2026-07-22",
+          "domain": "",
+          "company": "digital-trust"
+        }
+      },
+      "after": {
+        "ID": "69293886-754c-9267-dcd8-a396260a6923",
+        "USER_LOGIN": "disparoslyzmo@gmail.com",
+        "PROFILE_NAME": "Trương Gia Vinh",
+        "PAGE_NAME": "Ophelia Monroe",
+        "PAGE_ID": "13676",
+        "FB_PAGE_ID": "860836117101608",
+        "UTM_CAMPAIGN": "pg_13676",
+        "STATUS": "Broadcast",
+        "RESTRICTED_UNTIL": "2026-07-22",
+        "COMPANY": "digital-trust",
+        "DOMAIN": ""
+      },
+      "checks": {
+        "PAGE_ID": false,
+        "FB_PAGE_ID": true,
+        "UTM_CAMPAIGN": false
+      }
+    }
+  ]
+}
