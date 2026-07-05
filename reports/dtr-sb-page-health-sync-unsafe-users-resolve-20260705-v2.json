@@ -34,8 +34,8 @@
       "reports": 175,
       "errors": [],
       "context_unique": 6,
-      "planned": 4,
-      "ok": 4,
+      "planned": 7,
+      "ok": 7,
       "fail": 0,
       "conflict": 0,
       "no_match": 1,
@@ -239,6 +239,62 @@
         "STATUS": "On-hold",
         "RESTRICTED_UNTIL": null,
         "NOTES": "05 - PERFIL SEGURADOR - Ismail Mail - NEWSOUN\n- INGLES - PERMISSION - SEM_COMPLETED"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "68713e76-ec50-4f1e-c1d9-b7ee4c6aebe7",
+      "page": "Yasmine Marwood",
+      "fb": "656455784222021",
+      "payload": {
+        "NOTES": "05 - PERFIL SEGURADOR - Ismail Mail - NEWSOUN - INGLES - PERMISSION - SEM_COMPLETED"
+      },
+      "http": 201,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"ID\":\"68713e76-ec50-4f1e-c1d9-b7ee4c6aebe7\",\"MESSENGER_USER_ID\":\"01b78b7d-31dc-7a0d-1811-875c60a5ba42\",\"PAGE_ID\":\"5069\",\"FB_PAGE_ID\":\"656455784222021\",\"PAGE_NAME\":\"Yasmine Marwood\",\"UTM_CAMPAIGN\":\"pg",
+      "after": {
+        "STATUS": "On-hold",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "05 - PERFIL SEGURADOR - Ismail Mail - NEWSOUN - INGLES - PERMISSION - SEM_COMPLETED"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "68bf6b66-cb52-40e3-66ae-76d486280813",
+      "page": "Chloe Adams",
+      "fb": "793513017176401",
+      "payload": {
+        "RESTRICTED_UNTIL": "2026-07-22",
+        "STATUS": "Broadcast"
+      },
+      "http": 200,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"STATUS\":\"Broadcast\",\"RESTRICTED_UNTIL\":\"2026-07-22\"}",
+      "after": {
+        "STATUS": "Broadcast",
+        "RESTRICTED_UNTIL": "2026-07-22",
+        "NOTES": "07 - PERFIL SEGURADOR - Thanh Hiep - NEWSOUN - ESPANHOL - #2022"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "68a47cf1-73d3-8963-9a67-7d796c739ded",
+      "page": "Madigan Vaughn",
+      "fb": "642140748975803",
+      "payload": {
+        "RESTRICTED_UNTIL": "2026-07-22",
+        "STATUS": "Broadcast"
+      },
+      "http": 200,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"STATUS\":\"Broadcast\",\"RESTRICTED_UNTIL\":\"2026-07-22\"}",
+      "after": {
+        "STATUS": "Broadcast",
+        "RESTRICTED_UNTIL": "2026-07-22",
+        "NOTES": "07 - PERFIL SEGURADOR - Thanh Hiep - NEWSOUN - INGLES - #2022"
       }
     }
   ],
