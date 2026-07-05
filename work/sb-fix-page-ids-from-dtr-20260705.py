@@ -143,9 +143,9 @@ async def main():
                 already_ok.append({'target':t,'before':pub})
         backup_path=OUTDIR/f'sb-page-id-fix-backup-{stamp}.json'
         plan_path=OUTDIR/f'sb-page-id-fix-plan-{stamp}.json'
-        backup_path.write_text(json.dumps({'created_at':datetime.now(NY).isoformat(timespec='seconds'),'mode':args.mode,'targets_count':len(targets),'publishers':pubs,'backup':backup}, ensure_ascii=False, indent=2), encoding='utf-8')
-        plan_path.write_text(json.dumps({'created_at':datetime.now(NY).isoformat(timespec='seconds'),'mode':args.mode,'planned':planned,'already_ok':already_ok,'missing':missing}, ensure_ascii=False, indent=2), encoding='utf-8')
-        print(json.dumps({'mode':args.mode,'targets':len(targets),'live_rows':len(rows),'backup':str(backup_path),'plan':str(plan_path),'planned_changes':len(planned),'already_ok':len(already_ok),'missing_live':len(missing),'change_fields':dict(Counter(k for p0 in planned for k in p0['changes']))}, ensure_ascii=False, indent=2), flush=True)
+        backup_path.write_text(json.dumps({'created_at':datetime.now(NY).isoformat(timespec='seconds'),'mode':args.mode,'targets_count':len(targets),'skipped_duplicates':skipped_duplicates,'publishers':pubs,'backup':backup}, ensure_ascii=False, indent=2), encoding='utf-8')
+        plan_path.write_text(json.dumps({'created_at':datetime.now(NY).isoformat(timespec='seconds'),'mode':args.mode,'planned':planned,'already_ok':already_ok,'missing':missing,'skipped_duplicates':skipped_duplicates}, ensure_ascii=False, indent=2), encoding='utf-8')
+        print(json.dumps({'mode':args.mode,'targets':len(targets),'skipped_duplicates':len(skipped_duplicates),'live_rows':len(rows),'backup':str(backup_path),'plan':str(plan_path),'planned_changes':len(planned),'already_ok':len(already_ok),'missing_live':len(missing),'change_fields':dict(Counter(k for p0 in planned for k in p0['changes']))}, ensure_ascii=False, indent=2), flush=True)
         if args.mode=='dry-run':
             return
         to_apply=planned
