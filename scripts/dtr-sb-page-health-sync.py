@@ -47,7 +47,10 @@ def op(cmd, timeout=30): return subprocess.check_output(cmd, text=True, env=os.e
 def op_json(cmd): return json.loads(op(cmd, timeout=60))
 
 def sheet_rows():
-    url=f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/export?format=csv&gid={MIGRATION_GID}'
+    # Google's `/export?format=csv&gid=...` route intermittently returns 400
+    # for this sheet. `gviz/tq?tqx=out:csv` is the stable public CSV endpoint
+    # used by the live migration-sheet gate.
+    url=f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&gid={MIGRATION_GID}'
     data=urllib.request.urlopen(url, timeout=60).read().decode('utf-8-sig')
     return list(csv.DictReader(io.StringIO(data)))
 
@@ -64,7 +67,9 @@ def active_users_from_sheet(rows):
 def discover_dtr_items(target_users):
     vault=os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo')
     items=op_json(['op','item','list','--vault',vault,'--format','json'])
-    titles=[i.get('title','') for i in items if norm(i.get('title')).lower().startswith('digitaltrchat - disparos')]
+    # 1Password titles have known spacing/wording variants; match broadly by
+    # title and then verify by the username field from the active Sheet scope.
+    titles=[i.get('title','') for i in items if 'digitaltrchat' in norm(i.get('title')).lower()]
     matched={}; errors=[]
     for t in sorted(set(titles), key=str.lower):
         try: u=op(['op','item','get',t,'--vault',vault,'--fields','username','--reveal']).lower()
