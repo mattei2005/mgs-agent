@@ -20,7 +20,13 @@ def ne(v): return norm(v).lower()
 
 def build_targets():
     raw=json.load(open(REPORT_JSON, encoding='utf-8'))
-    targets=[]
+    duplicate_keys=set()
+    for dup in raw['compare'].get('duplicates') or []:
+        if dup.get('type')=='DTR_user_fb_page_id':
+            k=dup.get('key') or []
+            if len(k)>=2:
+                duplicate_keys.add((ne(k[0]), norm(k[1])))
+    targets=[]; skipped_duplicates=[]
     for issue in raw['compare']['issues']:
         if issue.get('type')!='DIVERGENTE':
             continue
@@ -28,11 +34,12 @@ def build_targets():
         sb_id=norm(s.get('sb_id'))
         page_id=norm(d.get('page_id'))
         fb=norm(d.get('fb_page_id'))
+        user=ne(d.get('bot_user') or s.get('bot_user'))
         if not sb_id or not page_id or not fb:
             continue
-        targets.append({
+        rec={
             'sb_id': sb_id,
-            'bot_user': ne(d.get('bot_user') or s.get('bot_user')),
+            'bot_user': user,
             'page_name_dtr': norm(d.get('page_name')),
             'page_name_sb': norm(s.get('page_name')),
             'profile_dtr': norm(d.get('account_name')),
@@ -42,8 +49,13 @@ def build_targets():
             'target_UTM_CAMPAIGN': f'pg_{page_id}',
             'diffs': issue.get('diffs') or [],
             'report_sb': s,
-        })
-    return targets
+        }
+        if (user, fb) in duplicate_keys:
+            rec['skip_reason']='DTR duplicate user+FB_PAGE_ID; needs manual decision'
+            skipped_duplicates.append(rec)
+            continue
+        targets.append(rec)
+    return targets, skipped_duplicates
 
 async def sb_context():
     from playwright.async_api import async_playwright
