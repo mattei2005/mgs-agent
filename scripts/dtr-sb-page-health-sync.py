@@ -69,13 +69,13 @@ def discover_dtr_items(target_users):
     items=op_json(['op','item','list','--vault',vault,'--format','json'])
     # 1Password titles have known spacing/wording variants; match broadly by
     # title and then verify by the username field from the active Sheet scope.
-    titles=[i.get('title','') for i in items if 'digitaltrchat' in norm(i.get('title')).lower()]
+    candidates=[(i.get('id') or i.get('uuid') or i.get('title',''), i.get('title','')) for i in items if 'digitaltrchat' in norm(i.get('title')).lower()]
     matched={}; errors=[]
-    for t in sorted(set(titles), key=str.lower):
-        try: u=op(['op','item','get',t,'--vault',vault,'--fields','username','--reveal']).lower()
+    for item_id, title in sorted(candidates, key=lambda x: str(x[1]).lower()):
+        try: u=op(['op','item','get',item_id,'--vault',vault,'--fields','username','--reveal']).lower()
         except Exception as exc:
-            errors.append({'item':t,'error':type(exc).__name__}); continue
-        if u in target_users and u not in matched: matched[u]=t
+            errors.append({'item':title or item_id,'error':type(exc).__name__}); continue
+        if u in target_users and u not in matched: matched[u]=item_id
     return matched, sorted(set(target_users)-set(matched)), errors
 
 def op_password(item):
