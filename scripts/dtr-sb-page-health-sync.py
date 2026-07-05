@@ -7,7 +7,9 @@ Validated workflow:
 - latest Completed report only;
 - update SB NOTES for every non-Sent result, all SB statuses;
 - apply/clear RESTRICTED_UNTIL only with validated rules;
-- Blocked -> Broadcast only if Facebook page opens normally.
+- Blocked rows require dual diagnosis before reactivation: the page can be
+  blocked/down, or the segurador/Facebook profile can be down while the page
+  is still public. Never restore Blocked -> Broadcast from public FB URL alone.
 """
 import argparse, asyncio, csv, html, io, json, os, re, subprocess, sys, tempfile, urllib.parse, urllib.request
 from collections import Counter, defaultdict
@@ -455,10 +457,8 @@ async def main():
                         elif sb_status == 'Blocked':
                             fb_status=await fb_page_opens(ctx, norm(sb.get('FB_PAGE_ID')) or norm(rep.get('fb_page_id')))
                             obs.append('fb_'+fb_status); stats[f'blocked_fb_{fb_status}']+=1
-                            if fb_status=='available':
-                                payload['STATUS']='Broadcast'; payload['RESTRICTED_UNTIL']=cls['restricted_until']; action.append('blocked_to_broadcast'); action.append('restricted_until')
-                            else:
-                                stats['blocked_2022_restricted_skipped'] += 1
+                            obs.append('blocked_requires_page_and_segurador_diagnosis')
+                            stats['blocked_2022_restricted_skipped'] += 1
                         else:
                             payload['STATUS']='Broadcast'; payload['RESTRICTED_UNTIL']=cls['restricted_until']; action.append('restricted_until')
                         if len(codes)>1:
@@ -467,12 +467,15 @@ async def main():
                         payload['RESTRICTED_UNTIL']=None; action.append('clear_restricted_sent')
                     elif is_restricted_start and status not in {'SEM_COMPLETED'} and not has_2022:
                         payload['RESTRICTED_UNTIL']=None; action.append('clear_restricted_no2022')
-                    # Blocked rule: only Broadcast if FB page opens. If #2022 already handled the blocked check above, do not test twice.
+                    # Blocked rule: do not restore to Broadcast from public FB URL alone.
+                    # A Blocked row may be a dead page OR a fallen segurador/profile
+                    # with the page still publicly online. Reactivation requires a
+                    # separate dual diagnosis of page availability + operational
+                    # segurador/profile access.
                     if sb_status=='Blocked' and not has_2022:
                         fb_status=await fb_page_opens(ctx, norm(sb.get('FB_PAGE_ID')) or norm(rep.get('fb_page_id')))
                         obs.append('fb_'+fb_status); stats[f'blocked_fb_{fb_status}']+=1
-                        if fb_status=='available':
-                            payload['STATUS']='Broadcast'; action.append('blocked_to_broadcast')
+                        obs.append('blocked_requires_page_and_segurador_diagnosis')
                     if payload:
                         if args.apply:
                             if args.max_writes and writes>=args.max_writes:
