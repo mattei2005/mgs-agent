@@ -120,7 +120,7 @@ async def main():
     ap.add_argument('--limit', type=int, default=0)
     args=ap.parse_args()
     stamp=datetime.now(NY).strftime('%Y%m%d-%H%M%S')
-    targets=build_targets()
+    targets, skipped_duplicates = build_targets()
     if args.limit: targets=targets[:args.limit]
     p,browser,ctx,h=await sb_context()
     try:
