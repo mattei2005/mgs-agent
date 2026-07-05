@@ -159,7 +159,8 @@ Messenger Pages               /reports/messenger                        DATE, CO
 Messenger Daily               /reports/messenger_daily                  SEGURADOR by daily columns + Total; useful for weekly/daily messenger revenue
 Messenger MSGs                /reports/messenger_message                DATE, COMPANY, DOMAIN, COUNTRY, VERTICAL, UTM_CAMPAIGN,
                                                                          UTM_CONTENT, TYPE, SENDS, DELIVEREDS, CTR, SESSIONS, PAGEVIEWS
-CDP                           /reports/cdp                              DATE, AD_REQUESTS, AD_MATCHED, COVERAGE, PRICE, PAGEVIEWS, SESSIONS
+CDP                           /reports/cdp                              DATE, HOUR (when selected), AD_REQUESTS, AD_MATCHED, COVERAGE, PRICE, PAGEVIEWS, SESSIONS;
+                                                                         use /report/queryBuilder with publisher `company_domain` for site-level hourly coverage. See `references/cdp-gamezonead-hourly-query-2026-07-05.md`.
 Facebook Ads                  /reports/facebook_ads                     DATE, COMPANY, DOMAIN, COUNTRY, VERTICAL, ACCOUNT/CAMPAIGN/ADSET/AD,
                                                                          UTM_CAMPAIGN, investment, conversion/subscriber/click/impression,
                                                                          revenue, profit, ROI, cost/rate metrics
@@ -206,7 +207,7 @@ POST /report/facebook_ads
 POST /report/ads_pilot_log
 POST /report/gam_healthy
 POST /report/last_update
-POST /report/queryBuilder
+POST /report/queryBuilder  # generic report builder; validated for CDP DATE+HOUR site coverage
 POST /photo/performance_per_vertical
 POST /photo/performance_per_adgroup
 POST /photo/messenger_insights
