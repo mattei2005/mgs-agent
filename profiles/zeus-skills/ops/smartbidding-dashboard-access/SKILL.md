@@ -8,11 +8,12 @@ metadata:
   hermes:
     tags: [mgs, smartbidding, sb, dashboard, auth0, playwright, xvfb, botguard, messenger, reports]
     related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-update]
-    ---
+---
 
-    ## Recent operational references
+## Recent operational references
 
-    - `references/dtr-step1-step2-segurador-inventory-corrections-2026-07-03.md` — Rodolfo-corrected Step 1/Step 2 rules for DTR/SB audits: sheet-first filtering, `X` precedence, duplicate/no-pages semantics, four active sheet overrides, 1Password username discovery, and context-safety before SB writes.
+- `references/dtr-step1-step2-segurador-inventory-corrections-2026-07-03.md` — Rodolfo-corrected Step 1/Step 2 rules for DTR/SB audits: sheet-first filtering, `X` precedence, duplicate/no-pages semantics, four active sheet overrides, 1Password username discovery, and context-safety before SB writes.
+- `references/sb-restricted-pending-file-bulk-apply-2026-07-04.md` — External restricted-pending text file → live SB bulk update workflow: `pg_` PAGE_ID normalization, full publisher scope, On-hold safety gate, backup, grouped update-many writes, and readback validation.
 
 # Smart Bidding Dashboard Access — MGS
 
@@ -408,6 +409,8 @@ If `ctx.request.get()` returns `401` while the headed UI is logged in and workin
 - For DTR→SB page-health apply jobs, the validated activation gate is strict: canary → batch/apply with readback → consolidate JSON/XLSX → resolve every readback failure and DTR context warning → REPORT-INFRA/inventory → only then enable the recurring cron. If Rodolfo asks whether the plan is “executing correctly,” compare the live script/cron against the validated thread rules before saying yes. If an apply run is active and the audit finds a rule violation, stop it first, patch, dry-run small, and only re-enable after a clean reconciliation.
 
 For DigitalTRChat `#2022 temporarily restricted until DATE` page errors, the agreed SB control is: set Messenger Page `STATUS=Broadcast` and `RESTRICTED_UNTIL=DATE` (same date shown by DigitalTRChat) **only for operational rows where the status gate allows it**. `On-hold` rows must not be reactivated or restricted automatically; record/report instead. `Blocked` rows must not be set to Broadcast unless `https://facebook.com/{FB_PAGE_ID}` opens normally; unavailable/ambiguous Facebook checks keep the row Blocked. Ciro/SB handles expiry automatically; no manual clear workflow is needed by default. Do not auto-block other error classes without Rodolfo’s approval.
+
+When Rodolfo provides an external restricted-pending file/list for SB updates, treat it as an SB bulk-write job with the same safety gate: parse dates to ISO, match file `pg_<id>` against SB numeric `PAGE_ID` plus exact `FB_PAGE_ID`/`UTM_CAMPAIGN`, backup matched rows, update only operational `Broadcast`/`Campaign` rows, skip `On-hold`/`Blocked` unless explicitly authorized, then re-fetch `/campaigns/Messenger` and validate every row by `ID`. For this route, build full scope from **all** `Digital trust` + `Digital trust 2` child publisher IDs returned by `/company`; active-only publishers can miss rows. See `references/sb-restricted-pending-file-bulk-apply-2026-07-04.md`.
 - Utility approval workflow: templates with Broadcast Template `PAGES > 0` can be approved; templates with `PAGES = 0` should stay at 10 messages and must not be Run-Approved because approval has no linked page to execute against. Cron should monitor `PAGES=0` templates and, when one gains pages, start the normal rule.
 - Script-only cron reports can run successfully but fail to appear in Discord/thread. When a scheduled SB review report is missing, inspect Hermes cron output under `~/.hermes/profiles/zeus/cron/output/` and the rollout log under `/root/mgs-agent/logs/` before concluding the cron did not run.
 
