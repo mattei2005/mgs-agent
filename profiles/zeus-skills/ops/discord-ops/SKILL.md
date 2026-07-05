@@ -5,6 +5,10 @@ tags: [discord, inter-agent, messaging, webhook, hook, git, roles, infra, notifi
 related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-update]
 ---
 
+## Referências recentes
+
+- `references/discord-bot-channel-removal-managed-role-2026-07-05.md` — remover bot de canal quando o role gerenciado tem `Administrator`; inclui pitfall de deny que não funciona contra admin, uso de `User-Agent` no REST Discord e validação com o token do bot restringido.
+
 # Discord Ops — Comunicação Inter-Agente, Roles e Webhooks
 
 ## Recent operational references

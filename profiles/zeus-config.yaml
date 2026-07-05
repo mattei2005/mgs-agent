@@ -17,6 +17,7 @@ agent:
   environment_probe: true
   environment_hint: ''
   coding_context: auto
+  verify_on_stop: false
   gateway_timeout_warning: 900
   clarify_timeout: 600
   gateway_notify_interval: 600
@@ -62,7 +63,6 @@ agent:
     hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question
       is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE
       YOU READY?! LET'S DO THIS! 💪😤🚀
-  verify_on_stop: false
 terminal:
   backend: local
   modal_mode: auto
@@ -307,7 +307,7 @@ display:
       streaming: true
     discord:
       streaming: false
-      tool_progress: 'all'
+      tool_progress: all
       tool_preview_length: 40
       cleanup_progress: true
       interim_assistant_messages: false
@@ -320,7 +320,7 @@ display:
       - context_pct
       - cwd
   copy_shortcut: auto
-  tool_progress: 'all'
+  tool_progress: all
   background_process_notifications: error
 dashboard:
   theme: default
@@ -415,7 +415,6 @@ delegation:
   child_timeout_seconds: 600
   reasoning_effort: ''
   max_concurrent_children: 3
-  max_async_children: 3
   max_spawn_depth: 1
   orchestrator_enabled: true
   subagent_auto_approve: false
@@ -592,18 +591,19 @@ approvals:
   destructive_slash_confirm: false
   gateway_timeout: 900
 command_allowlist:
+  - hermes update (restarts gateway, kills running agents)
+  - recursive delete
+  - overwrite system config
+  - delete in root path
+  - script execution via heredoc
   - /root/mgs-agent/scripts/discord-add-thread-member.sh --profile zeus --thread *
     --user *
-  - delete in root path
-  - stop/restart system service
-  - kill hermes/gateway process (self-termination)
   - script execution via -e/-c flag
+  - stop/restart system service
   - execute_code
-  - overwrite system config
-  - shell command via -c/-lc flag
-  - script execution via heredoc
-  - hermes update (restarts gateway, kills running agents)
+  - kill hermes/gateway process (self-termination)
   - git force push (rewrites remote history)
+  - shell command via -c/-lc flag
 hooks_auto_accept: false
 security:
   allow_private_urls: false
@@ -699,7 +699,7 @@ secrets:
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 5
 paste_collapse_char_threshold: 2000
-_config_version: 32
+_config_version: 33
 session_reset:
   mode: none
   idle_minutes: 1440
