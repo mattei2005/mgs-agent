@@ -1,0 +1,114 @@
+{
+  "created_at": "2026-07-05T14:47:51-04:00",
+  "mode": "canary",
+  "results": [
+    {
+      "i": 1,
+      "sb_id": "6778bf80-250a-5ff3-21f2-db8e936e5991",
+      "page": "Harlow Abbott",
+      "changes": {
+        "PAGE_ID": "22158",
+        "UTM_CAMPAIGN": "pg_22158"
+      },
+      "ok": false,
+      "status": 500,
+      "response": "{\"statusCode\":500,\"message\":\"Internal server error\"}"
+    }
+  ],
+  "validations": [
+    {
+      "target": {
+        "sb_id": "6778bf80-250a-5ff3-21f2-db8e936e5991",
+        "bot_user": "disparosfinanceadx@gmail.com",
+        "page_name_dtr": "Harlow Abbott",
+        "page_name_sb": "Harlow Abbott",
+        "profile_dtr": "Yu Hana",
+        "profile_sb": "Yu Hana",
+        "target_PAGE_ID": "22158",
+        "target_FB_PAGE_ID": "560940030428901",
+        "target_UTM_CAMPAIGN": "pg_22158",
+        "diffs": [
+          "PAGE_ID"
+        ],
+        "report_sb": {
+          "sb_id": "6778bf80-250a-5ff3-21f2-db8e936e5991",
+          "bot_user": "disparosfinanceadx@gmail.com",
+          "profile_name": "Yu Hana",
+          "page_name": "Harlow Abbott",
+          "page_id": "3438",
+          "fb_page_id": "560940030428901",
+          "status": "On-hold",
+          "restricted_until": "",
+          "domain": "",
+          "company": "digital-trust"
+        }
+      },
+      "after": {
+        "ID": "6778bf80-250a-5ff3-21f2-db8e936e5991",
+        "USER_LOGIN": "disparosfinanceadx@gmail.com",
+        "PROFILE_NAME": "Yu Hana",
+        "PAGE_NAME": "Harlow Abbott",
+        "PAGE_ID": "3438",
+        "FB_PAGE_ID": "560940030428901",
+        "UTM_CAMPAIGN": "pg_3438",
+        "STATUS": "On-hold",
+        "RESTRICTED_UNTIL": "",
+        "COMPANY": "digital-trust",
+        "DOMAIN": ""
+      },
+      "checks": {
+        "PAGE_ID": false,
+        "FB_PAGE_ID": true,
+        "UTM_CAMPAIGN": false
+      }
+    }
+  ],
+  "fail": [
+    {
+      "target": {
+        "sb_id": "6778bf80-250a-5ff3-21f2-db8e936e5991",
+        "bot_user": "disparosfinanceadx@gmail.com",
+        "page_name_dtr": "Harlow Abbott",
+        "page_name_sb": "Harlow Abbott",
+        "profile_dtr": "Yu Hana",
+        "profile_sb": "Yu Hana",
+        "target_PAGE_ID": "22158",
+        "target_FB_PAGE_ID": "560940030428901",
+        "target_UTM_CAMPAIGN": "pg_22158",
+        "diffs": [
+          "PAGE_ID"
+        ],
+        "report_sb": {
+          "sb_id": "6778bf80-250a-5ff3-21f2-db8e936e5991",
+          "bot_user": "disparosfinanceadx@gmail.com",
+          "profile_name": "Yu Hana",
+          "page_name": "Harlow Abbott",
+          "page_id": "3438",
+          "fb_page_id": "560940030428901",
+          "status": "On-hold",
+          "restricted_until": "",
+          "domain": "",
+          "company": "digital-trust"
+        }
+      },
+      "after": {
+        "ID": "6778bf80-250a-5ff3-21f2-db8e936e5991",
+        "USER_LOGIN": "disparosfinanceadx@gmail.com",
+        "PROFILE_NAME": "Yu Hana",
+        "PAGE_NAME": "Harlow Abbott",
+        "PAGE_ID": "3438",
+        "FB_PAGE_ID": "560940030428901",
+        "UTM_CAMPAIGN": "pg_3438",
+        "STATUS": "On-hold",
+        "RESTRICTED_UNTIL": "",
+        "COMPANY": "digital-trust",
+        "DOMAIN": ""
+      },
+      "checks": {
+        "PAGE_ID": false,
+        "FB_PAGE_ID": true,
+        "UTM_CAMPAIGN": false
+      }
+    }
+  ]
+}
