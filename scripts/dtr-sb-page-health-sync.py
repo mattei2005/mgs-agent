@@ -458,6 +458,9 @@ async def main():
                         if sb_status == 'Blocked':
                             obs.append('blocked_notes_skipped_pending_diagnosis')
                             stats['blocked_notes_skipped'] += 1
+                        elif status == 'SEM_COMPLETED' and active_restricted(sb, tday):
+                            obs.append('sem_completed_notes_skipped_active_restricted')
+                            stats['sem_completed_active_restricted_notes_skipped'] += 1
                         else:
                             new_notes, changed = append_note(sb.get('NOTES'), note)
                             if changed:
