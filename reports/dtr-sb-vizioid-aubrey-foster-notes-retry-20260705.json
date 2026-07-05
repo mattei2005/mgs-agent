@@ -1,0 +1,31 @@
+{
+  "before": {
+    "ID": "67776d3d-d713-fd11-97b6-c272ed97b8d5",
+    "PAGE_NAME": "Aubrey Foster",
+    "FB_PAGE_ID": "553126664540840",
+    "STATUS": "Broadcast",
+    "RESTRICTED_UNTIL": "2026-07-22",
+    "NOTES": "07 - PERFIL SEGURADOR - Yunita Melvianus - ISLIAGO - VIZIOID - EN - #2022 - #10 - #100"
+  },
+  "attempts": [
+    {
+      "endpoint": "https://api.jbfdigital.com.br/accounts/Messenger",
+      "status": 400,
+      "text": "{\"message\":[\"URL should not be empty\",\"ACTIVE should not be empty\",\"COMPANY should not be empty\"],\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "endpoint": "https://api.jbfdigital.com.br/campaigns/Messenger",
+      "status": 500,
+      "text": "{\"statusCode\":500,\"message\":\"Internal server error\"}"
+    }
+  ],
+  "after": {
+    "ID": "67776d3d-d713-fd11-97b6-c272ed97b8d5",
+    "PAGE_NAME": "Aubrey Foster",
+    "FB_PAGE_ID": "553126664540840",
+    "STATUS": "Broadcast",
+    "RESTRICTED_UNTIL": "2026-07-22",
+    "NOTES": "07 - PERFIL SEGURADOR - Yunita Melvianus - ISLIAGO - VIZIOID - EN - #2022 - #10 - #100"
+  },
+  "validated": false
+}
