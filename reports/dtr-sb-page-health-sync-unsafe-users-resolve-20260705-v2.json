@@ -47,8 +47,8 @@
       "reports": 98,
       "errors": [],
       "context_unique": 1,
-      "planned": 29,
-      "ok": 29,
+      "planned": 31,
+      "ok": 31,
       "fail": 0,
       "conflict": 0,
       "no_match": 1,
@@ -1460,6 +1460,42 @@
         "STATUS": "On-hold",
         "RESTRICTED_UNTIL": null,
         "NOTES": "06 - Segurador - SPE - Rian Silva - PERMISSION - SEM_COMPLETED"
+      }
+    },
+    {
+      "user": "disparospeant@gmail.com",
+      "id": "01b78b7d-0ea5-716d-1cfd-c3a6abab0a3e",
+      "page": "Tita Martínez",
+      "fb": "156685917526560",
+      "payload": {
+        "NOTES": "06 - Segurador - SPE - Rian Silva - PERMISSION - SEM_COMPLETED"
+      },
+      "http": 201,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"ID\":\"01b78b7d-0ea5-716d-1cfd-c3a6abab0a3e\",\"MESSENGER_USER_ID\":\"01b78b7d-4a25-7c69-3cb8-14288946b07f\",\"PAGE_ID\":\"582\",\"FB_PAGE_ID\":\"156685917526560\",\"PAGE_NAME\":\"Tita Martínez\",\"UTM_CAMPAIGN\":\"pg_58",
+      "after": {
+        "STATUS": "On-hold",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "06 - Segurador - SPE - Rian Silva - PERMISSION - SEM_COMPLETED"
+      }
+    },
+    {
+      "user": "disparospeant@gmail.com",
+      "id": "01b78b7d-2bd7-76e4-e9e2-717d0723c6c5",
+      "page": "Catarina Souza",
+      "fb": "101588052791259",
+      "payload": {
+        "NOTES": "09 - Segurador - SPE - Marcio Carnelós - #10 - SEM_COMPLETED"
+      },
+      "http": 201,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"ID\":\"01b78b7d-2bd7-76e4-e9e2-717d0723c6c5\",\"MESSENGER_USER_ID\":\"01b78b7d-4a25-7c69-3cb8-14288946b07f\",\"PAGE_ID\":\"624\",\"FB_PAGE_ID\":\"101588052791259\",\"PAGE_NAME\":\"Catarina Souza\",\"UTM_CAMPAIGN\":\"pg_6",
+      "after": {
+        "STATUS": "On-hold",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "09 - Segurador - SPE - Marcio Carnelós - #10 - SEM_COMPLETED"
       }
     }
   ],
