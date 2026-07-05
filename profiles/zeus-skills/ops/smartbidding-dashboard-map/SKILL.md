@@ -289,7 +289,11 @@ When SB changes or Rodolfo asks for a deeper map:
 4. For heavy MGS scopes (`digital-trust` + `digital-trust-2`), use long waits and prefer endpoint-response/table-row detection over fixed sleeps; some tabs legitimately take time because they load large company datasets.
 5. Save raw captures under `/root/mgs-agent/work/sb-dashboard-map/`.
 6. Patch this skill with new routes, columns, endpoints, and pitfalls.
+<<<<<<< HEAD
 7. If the skill changes in `ops/`, follow MGS REPORT-INFRA/inventory rules.
+=======
+6. If the skill changes in `ops/`, follow MGS REPORT-INFRA/inventory rules.
+>>>>>>> origin/main
 
 ## Common Pitfalls
 
