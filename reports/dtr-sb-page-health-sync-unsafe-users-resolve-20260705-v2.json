@@ -29,7 +29,17 @@
       "finished": "2026-07-05T01:24:22-04:00"
     },
     "disparosnewsoun@gmail.com": {
-      "started": "2026-07-05T01:24:22-04:00"
+      "started": "2026-07-05T01:24:22-04:00",
+      "accounts": 8,
+      "reports": 175,
+      "errors": [],
+      "context_unique": 6,
+      "planned": 2,
+      "ok": 2,
+      "fail": 0,
+      "conflict": 0,
+      "no_match": 1,
+      "no_payload": 129
     }
   },
   "details": [
@@ -157,6 +167,42 @@
         "STATUS": "Blocked",
         "RESTRICTED_UNTIL": null,
         "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqeuado"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "687326bd-73bb-e88a-f4ad-a5835ec77e18",
+      "page": "Melissa Tallent",
+      "fb": "669323162930837",
+      "payload": {
+        "NOTES": "05 - PERFIL SEGURADOR - Ismail Mail - NEWSOUN\n - INGLES - PERMISSION - SEM_COMPLETED"
+      },
+      "http": 201,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"ID\":\"687326bd-73bb-e88a-f4ad-a5835ec77e18\",\"MESSENGER_USER_ID\":\"01b78b7d-31dc-7a0d-1811-875c60a5ba42\",\"PAGE_ID\":\"5082\",\"FB_PAGE_ID\":\"669323162930837\",\"PAGE_NAME\":\"Melissa Tallent\",\"UTM_CAMPAIGN\":\"pg",
+      "after": {
+        "STATUS": "On-hold",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "05 - PERFIL SEGURADOR - Ismail Mail - NEWSOUN\n - INGLES - PERMISSION - SEM_COMPLETED"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "68756303-9b1e-37a0-b338-85a9991bab84",
+      "page": "Oakley Langston",
+      "fb": "619406767928047",
+      "payload": {
+        "NOTES": "05 - PERFIL SEGURADOR - Ismail Mail - NEWSOUN\n - INGLES - PERMISSION - SEM_COMPLETED"
+      },
+      "http": 201,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"ID\":\"68756303-9b1e-37a0-b338-85a9991bab84\",\"MESSENGER_USER_ID\":\"01b78b7d-31dc-7a0d-1811-875c60a5ba42\",\"PAGE_ID\":\"5098\",\"FB_PAGE_ID\":\"619406767928047\",\"PAGE_NAME\":\"Oakley Langston\",\"UTM_CAMPAIGN\":\"pg",
+      "after": {
+        "STATUS": "On-hold",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "05 - PERFIL SEGURADOR - Ismail Mail - NEWSOUN\n - INGLES - PERMISSION - SEM_COMPLETED"
       }
     }
   ],
