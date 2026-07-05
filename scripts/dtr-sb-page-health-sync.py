@@ -421,10 +421,11 @@ async def main():
             stats['users_scanned']+=1; stats['dtr_accounts']+=len(scan.get('accounts') or []); stats['dtr_pages']+=sum(a.get('pages',0) for a in scan.get('accounts') or [])
             if scan.get('errors'): summary['errors'].append({'user':user,'errors':scan['errors']})
             unsafe_context = scan.get('context_signatures_unique',0) < max(1, len(scan.get('accounts') or [])) and len(scan.get('accounts') or [])>1
+            seen_sb_ids_for_user=set()
             if unsafe_context:
-                summary['errors'].append({'user':user,'warning':'account_context_signatures_not_unique','unique':scan.get('context_signatures_unique'),'accounts':len(scan.get('accounts') or []),'action':'skipped_automatic_writes'})
+                summary.setdefault('warnings',[]).append({'user':user,'warning':'account_context_signatures_not_unique','unique':scan.get('context_signatures_unique'),'accounts':len(scan.get('accounts') or []),'action':'dedupe_by_unique_sb_row_id'})
                 stats['unsafe_context_users'] += 1
-            reports = [] if unsafe_context else (scan.get('reports') or [])
+            reports = scan.get('reports') or []
             for rep_idx, rep in enumerate(reports, start=1):
                 if rep_idx == 1 or rep_idx % 25 == 0 or rep_idx == len(reports):
                     print(f"PROGRESS user_write {user} {rep_idx}/{len(reports)}", flush=True)
@@ -439,6 +440,13 @@ async def main():
                 if not sb:
                     stats[merr or 'match_error']+=1; obs.append(merr or 'match_error')
                 else:
+                    if unsafe_context and norm(sb.get('ID')) in seen_sb_ids_for_user:
+                        stats['unsafe_context_duplicate_sb_row_skipped'] += 1
+                        obs.append('unsafe_context_duplicate_sb_row_skipped')
+                        report_rows.append({'link da pagina':('https://facebook.com/'+(norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID')))) if (norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID'))) else '', 'nome da pagina':rep.get('page_name'), 'segurador':rep.get('account_name'), 'bot user':rep.get('bot_user'), 'data':rep.get('completed_date'), 'codigo dos erros':note or 'Sent', 'sb status antes':norm(sb.get('STATUS')), 'sb restricted antes':date_only(sb.get('RESTRICTED_UNTIL')), 'acao':'', 'readback ok':'skipped', 'observacao':'; '.join(obs)})
+                        continue
+                    if unsafe_context:
+                        seen_sb_ids_for_user.add(norm(sb.get('ID')))
                     before=public_row(sb); backups.append(before)
                     payload={}
                     sb_status = norm(sb.get('STATUS'))
