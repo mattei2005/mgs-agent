@@ -34,8 +34,8 @@
       "reports": 175,
       "errors": [],
       "context_unique": 6,
-      "planned": 22,
-      "ok": 22,
+      "planned": 25,
+      "ok": 25,
       "fail": 0,
       "conflict": 0,
       "no_match": 1,
@@ -564,6 +564,62 @@
       "id": "692dd17c-e885-49a4-07d8-b3dbf6faadb9",
       "page": "Penelope Green",
       "fb": "844202168775902",
+      "payload": {
+        "RESTRICTED_UNTIL": "2026-07-23",
+        "STATUS": "Broadcast"
+      },
+      "http": 200,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"STATUS\":\"Broadcast\",\"RESTRICTED_UNTIL\":\"2026-07-23\"}",
+      "after": {
+        "STATUS": "Broadcast",
+        "RESTRICTED_UNTIL": "2026-07-23",
+        "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN - #2022"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "68ebb3c9-c79a-881d-bfd6-e3fbd5c032e7",
+      "page": "Penelope Whitaker",
+      "fb": "782934861578495",
+      "payload": {
+        "RESTRICTED_UNTIL": "2026-07-22",
+        "STATUS": "Broadcast"
+      },
+      "http": 200,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"STATUS\":\"Broadcast\",\"RESTRICTED_UNTIL\":\"2026-07-22\"}",
+      "after": {
+        "STATUS": "Broadcast",
+        "RESTRICTED_UNTIL": "2026-07-22",
+        "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN - INGLES - #2022"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "693f7af0-0898-8740-373c-70cabe14da05",
+      "page": "Ruby Collins",
+      "fb": "896118396918482",
+      "payload": {
+        "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN - #2022 - SEM_COMPLETED"
+      },
+      "http": 201,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"ID\":\"693f7af0-0898-8740-373c-70cabe14da05\",\"MESSENGER_USER_ID\":\"01b78b7d-31dc-7a0d-1811-875c60a5ba42\",\"PAGE_ID\":\"13780\",\"FB_PAGE_ID\":\"896118396918482\",\"PAGE_NAME\":\"Ruby Collins\",\"UTM_CAMPAIGN\":\"pg_1",
+      "after": {
+        "STATUS": "Broadcast",
+        "RESTRICTED_UNTIL": "2026-07-20",
+        "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN - #2022 - SEM_COMPLETED"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "6932f109-6f21-9d98-477c-c6c0b6500efd",
+      "page": "Samantha Roberts",
+      "fb": "813649321841379",
       "payload": {
         "RESTRICTED_UNTIL": "2026-07-23",
         "STATUS": "Broadcast"
