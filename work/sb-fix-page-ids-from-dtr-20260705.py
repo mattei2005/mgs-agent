@@ -54,6 +54,10 @@ def build_targets():
             rec['skip_reason']='DTR duplicate user+FB_PAGE_ID; needs manual decision'
             skipped_duplicates.append(rec)
             continue
+        if s.get('bot_user') and ne(s.get('bot_user')) != user:
+            rec['skip_reason']='DTR bot_user differs from SB USER_LOGIN; needs manual decision'
+            skipped_duplicates.append(rec)
+            continue
         targets.append(rec)
     return targets, skipped_duplicates
 
