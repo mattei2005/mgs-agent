@@ -34,8 +34,8 @@
       "reports": 175,
       "errors": [],
       "context_unique": 6,
-      "planned": 14,
-      "ok": 14,
+      "planned": 16,
+      "ok": 16,
       "fail": 0,
       "conflict": 0,
       "no_match": 1,
@@ -427,6 +427,43 @@
         "STATUS": "Broadcast",
         "RESTRICTED_UNTIL": "2026-07-22",
         "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN - INGLES - #2022"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "68f293b8-2e24-acd1-2e70-bd0639c71e67",
+      "page": "Gabriela Pérez",
+      "fb": "776014515588178",
+      "payload": {
+        "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN\n- espanhol - PERMISSION - SEM_COMPLETED"
+      },
+      "http": 201,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"ID\":\"68f293b8-2e24-acd1-2e70-bd0639c71e67\",\"MESSENGER_USER_ID\":\"01b78b7d-31dc-7a0d-1811-875c60a5ba42\",\"PAGE_ID\":\"10891\",\"FB_PAGE_ID\":\"776014515588178\",\"PAGE_NAME\":\"Gabriela Pérez\",\"UTM_CAMPAIGN\":\"pg",
+      "after": {
+        "STATUS": "On-hold",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN\n- espanhol - PERMISSION - SEM_COMPLETED"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "693b4629-81b3-feb1-f618-7dec25d443bb",
+      "page": "Julia Edwards",
+      "fb": "852533771283813",
+      "payload": {
+        "RESTRICTED_UNTIL": "2026-07-26",
+        "STATUS": "Broadcast"
+      },
+      "http": 200,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"STATUS\":\"Broadcast\",\"RESTRICTED_UNTIL\":\"2026-07-26\"}",
+      "after": {
+        "STATUS": "Broadcast",
+        "RESTRICTED_UNTIL": "2026-07-26",
+        "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN - #2022"
       }
     }
   ],
