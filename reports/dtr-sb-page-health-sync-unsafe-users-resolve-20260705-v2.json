@@ -34,8 +34,8 @@
       "reports": 175,
       "errors": [],
       "context_unique": 6,
-      "planned": 25,
-      "ok": 25,
+      "planned": 27,
+      "ok": 27,
       "fail": 0,
       "conflict": 0,
       "no_match": 1,
@@ -632,6 +632,44 @@
         "STATUS": "Broadcast",
         "RESTRICTED_UNTIL": "2026-07-23",
         "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN - #2022"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "6935c7f4-829b-0fe4-2f68-ef0cafaafab3",
+      "page": "Sarah Evans",
+      "fb": "882259248305073",
+      "payload": {
+        "RESTRICTED_UNTIL": "2026-07-23",
+        "STATUS": "Broadcast"
+      },
+      "http": 200,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"STATUS\":\"Broadcast\",\"RESTRICTED_UNTIL\":\"2026-07-23\"}",
+      "after": {
+        "STATUS": "Broadcast",
+        "RESTRICTED_UNTIL": "2026-07-23",
+        "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN - #2022"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "69319c5e-1bb4-838c-742f-53b563989983",
+      "page": "Stella Mitchell",
+      "fb": "936449889543476",
+      "payload": {
+        "RESTRICTED_UNTIL": "2026-07-23",
+        "STATUS": "Broadcast"
+      },
+      "http": 200,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"STATUS\":\"Broadcast\",\"RESTRICTED_UNTIL\":\"2026-07-23\"}",
+      "after": {
+        "STATUS": "Broadcast",
+        "RESTRICTED_UNTIL": "2026-07-23",
+        "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN - #2022 - TOKEN"
       }
     }
   ],
