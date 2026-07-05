@@ -260,6 +260,7 @@ Dashboard changes                               Changelog
 - Treat this skill as a routing/map layer, not a permission to write.
 - Any button labeled `New`, `Save`, `Update`, `Resolve`, `Run queue`, `Edit Token`, `Mark as read`, `Import`, `Erase`, `Run Approval`, or similar may change state. Do not click unless the user requested that exact operation and the relevant write-safety workflow is loaded.
 - Some dashboard filters also use an `Update` button for read-only table refresh. For new screens, assume `Update` may write until verified.
+- For MGS-owned dashboard views, selecting `digital-trust` + `digital-trust-2` can make tabs/reports load slowly because the tables pull a large company dataset. Do not classify a screen as `LOADING`, broken, empty, or unavailable after a short wait. Wait for the real table/API response, pagination, export button, or a clear dashboard error before concluding.
 - For MGS Messenger scope, always select/validate all `digital-trust + digital-trust-2` publishers; stale scope causes wrong counts.
 - Do not use historical captures as current truth. Re-query live before reporting operational status.
 - Never print auth headers, cookies, bearer tokens, passwords, or full profile/session dumps.
@@ -271,9 +272,10 @@ When SB changes or Rodolfo asks for a deeper map:
 1. Use headed Playwright via `smartbidding-dashboard-access`.
 2. Start read-only: direct routes, table headers, visible buttons, API method/URL/status only.
 3. Avoid state-changing buttons.
-4. Save raw captures under `/root/mgs-agent/work/sb-dashboard-map/`.
-5. Patch this skill with new routes, columns, endpoints, and pitfalls.
-6. If the skill changes in `ops/`, follow MGS REPORT-INFRA/inventory rules.
+4. For heavy MGS scopes (`digital-trust` + `digital-trust-2`), use long waits and prefer endpoint-response/table-row detection over fixed sleeps; some tabs legitimately take time because they load large company datasets.
+5. Save raw captures under `/root/mgs-agent/work/sb-dashboard-map/`.
+6. Patch this skill with new routes, columns, endpoints, and pitfalls.
+7. If the skill changes in `ops/`, follow MGS REPORT-INFRA/inventory rules.
 
 ## Common Pitfalls
 
