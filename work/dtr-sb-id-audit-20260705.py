@@ -88,7 +88,7 @@ async def dtr_collect_user(username, item_id, limit_accounts=0):
                         await page.wait_for_timeout(700)
                         try: csrf=await page.locator('#csrf_token').input_value(timeout=5000)
                         except Exception: pass
-                    cards=await page.evaluate("""() => Array.from(document.querySelectorAll('.page_list_ul, .card.author-box')).map(el => (el.innerText||el.textContent||'').replace(/\s+/g,' ').trim()).filter(t => /\b\d{12,}\b\s*\|\s*\d+\b/.test(t))""")
+                    cards=await page.evaluate("""() => Array.from(document.querySelectorAll('.page_list_ul, .card.author-box')).map(el => (el.innerText||el.textContent||'').replace(/\\s+/g,' ').trim())""")
                     parsed=[]
                     for txt in cards:
                         row=parse_page_card_text(txt)
