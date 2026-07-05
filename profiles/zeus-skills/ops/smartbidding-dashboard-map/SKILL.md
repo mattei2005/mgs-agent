@@ -29,6 +29,7 @@ Captured artifacts:
 
 - `/root/mgs-agent/work/sb-dashboard-map/sb-dashboard-crawl-20260705-010029.json`
 - `/root/mgs-agent/work/sb-dashboard-map/sb-dashboard-routes-20260705-010957.json`
+- `/root/mgs-agent/work/sb-dashboard-map/sb-dashboard-routes-deep-20260705-012422.json` — recapture with long waits; resolved every initial `LOADING...` route.
 
 Mode:
 
@@ -156,20 +157,33 @@ Messenger Pages               /reports/messenger                        DATE, CO
                                                                          PAGE_NAME, START DATE, STATUS, UTM_CAMPAIGN, SOURCE, COUNTRY,
                                                                          VERTICAL, LANGUAGE, performance/messenger/drip/broadcast metrics
 Messenger Daily               /reports/messenger_daily                  SEGURADOR by daily columns + Total; useful for weekly/daily messenger revenue
-Messenger MSGs                /reports/messenger_message                Message-level Messenger report; initial capture timed while LOADING
+Messenger MSGs                /reports/messenger_message                DATE, COMPANY, DOMAIN, COUNTRY, VERTICAL, UTM_CAMPAIGN,
+                                                                         UTM_CONTENT, TYPE, SENDS, DELIVEREDS, CTR, SESSIONS, PAGEVIEWS
 CDP                           /reports/cdp                              DATE, AD_REQUESTS, AD_MATCHED, COVERAGE, PRICE, PAGEVIEWS, SESSIONS
-Facebook Ads                  /reports/facebook_ads                     Facebook Ads report; initial capture timed while LOADING
-Ads Pilot                     /reports/ads_pilot                        Ads Pilot report/log; initial capture timed while LOADING
-Url Healthy                   /reports/urlhealthy                       URL health report; initial capture timed while LOADING
+Facebook Ads                  /reports/facebook_ads                     DATE, COMPANY, DOMAIN, COUNTRY, VERTICAL, ACCOUNT/CAMPAIGN/ADSET/AD,
+                                                                         UTM_CAMPAIGN, investment, conversion/subscriber/click/impression,
+                                                                         revenue, profit, ROI, cost/rate metrics
+Ads Pilot                     /reports/ads_pilot                        TIME, INVESTIMENT, INVESTIMENT INCREMENTAL, SUBSCRIBERS,
+                                                                         CONVERSIONS, COST SUBSCRIBER/CONVERSION, BUDGET, CPA TARGET
+Url Healthy                   /reports/urlhealthy                       DATE, COMPANY, DOMAIN, COUNTRY, SOURCE, VERTICAL, URL,
+                                                                         ADS REMOVED, ADS HEALTHY, REVENUE REMOVED, OPERATIONS
 GAM Key Values                /reports/gam-key-values                   DATE, COMPANY, DOMAIN, KEY, VALUE, REVENUE, AD REQUESTS,
                                                                          AD MATCHES, IMPRESSIONS, CPM, COVERAGE, CTR, %VIEWABLE
-Photo by Vertical             /reports/photo-by-vertical                Hourly vertical photo; initial capture timed while LOADING
-Photo by Adgroup              /reports/photo-by-adgroup                 Hourly adgroup photo; initial capture timed while LOADING
-Photo by Messenger            /reports/photo-by-messenger-insights      Hourly Messenger photo; initial capture timed while LOADING
+Photo by Vertical             /reports/photo-by-vertical                Hourly vertical photo: HOUR, DATE, COMPANY, DOMAIN, investment,
+                                                                         revenue/profit/ROI, sessions/pageviews, ad metrics
+Photo by Adgroup              /reports/photo-by-adgroup                 Hourly adgroup photo: HOUR, DATE, COMPANY, DOMAIN, investment,
+                                                                         revenue/profit/ROI, acquisition clicks/conversions and ad metrics
+Photo by Messenger            /reports/photo-by-messenger-insights      Hourly Messenger photo: HOUR, DATE, COMPANY, DOMAIN, Messenger/Drip/
+                                                                         Broadcast, cost subscriber/conversion, revenue/profit/ROI,
+                                                                         leads/conversions/subscribed/delivereds/sessions/CTR/RPS
 Photo by Email                /reports/photo-by-email                   HOUR, DATE, COMPANY, DOMAIN, REVENUE, SENDS, OPENS, CLICKS,
                                                                          sessions/pageviews/ad metrics by hour
-Photo by Url                  /reports/photo-by-url                     Hourly URL photo; initial capture timed while LOADING
-Photo by FacebookAds          /reports/photo-by-facebookads             Hourly FacebookAds photo; initial capture timed while LOADING
+Photo by Url                  /reports/photo-by-url                     Hourly URL photo: HOUR, DATE, COMPANY, DOMAIN, REVENUE,
+                                                                         PAGEVIEWS, RPP, CPM, AVG PRICE, requests/matched/impressions,
+                                                                         coverage, CTR, EPC, viewable
+Photo by FacebookAds          /reports/photo-by-facebookads             Hourly FacebookAds photo: HOUR, DATE, COMPANY, DOMAIN,
+                                                                         investment diff, subscribers/conversions diff, cost subscriber/
+                                                                         conversion diff, clicks/CTR/cost click, impressions/CPM
 ```
 
 Report read/query endpoints observed:
