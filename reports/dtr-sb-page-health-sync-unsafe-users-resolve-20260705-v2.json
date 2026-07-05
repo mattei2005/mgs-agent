@@ -20,12 +20,16 @@
       "reports": 101,
       "errors": [],
       "context_unique": 8,
-      "planned": 5,
+      "planned": 7,
       "ok": 0,
-      "fail": 5,
+      "fail": 7,
       "conflict": 0,
       "no_match": 1,
-      "no_payload": 93
+      "no_payload": 93,
+      "finished": "2026-07-05T01:24:22-04:00"
+    },
+    "disparosnewsoun@gmail.com": {
+      "started": "2026-07-05T01:24:22-04:00"
     }
   },
   "details": [
@@ -117,6 +121,42 @@
         "STATUS": "Blocked",
         "RESTRICTED_UNTIL": null,
         "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado"
+      }
+    },
+    {
+      "user": "disparosfinancetopfeed@gmail.com",
+      "id": "01b78b7d-e471-7b7e-6757-780ca9de66d5",
+      "page": "Martina López",
+      "fb": "421304157723298",
+      "payload": {
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado - SEM_COMPLETED"
+      },
+      "http": 500,
+      "ok": false,
+      "method": "fallback_full",
+      "text": "{\"statusCode\":500,\"message\":\"Internal server error\"}",
+      "after": {
+        "STATUS": "Blocked",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado"
+      }
+    },
+    {
+      "user": "disparosfinancetopfeed@gmail.com",
+      "id": "01b78b7d-4ecc-7b69-1448-e9ab1978c535",
+      "page": "Paulina Suárez",
+      "fb": "378393748698934",
+      "payload": {
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqeuado - SEM_COMPLETED"
+      },
+      "http": 500,
+      "ok": false,
+      "method": "fallback_full",
+      "text": "{\"statusCode\":500,\"message\":\"Internal server error\"}",
+      "after": {
+        "STATUS": "Blocked",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqeuado"
       }
     }
   ],
