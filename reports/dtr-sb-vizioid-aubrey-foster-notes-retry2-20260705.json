@@ -1,0 +1,52 @@
+{
+  "attempts": [
+    {
+      "endpoint": "https://api.jbfdigital.com.br/accounts/Messenger",
+      "status": 409,
+      "text": "\"This URL already exists\""
+    },
+    {
+      "endpoint": "https://api.jbfdigital.com.br/campaigns/Messenger",
+      "status": 500,
+      "text": "{\"statusCode\":500,\"message\":\"Internal server error\"}"
+    }
+  ],
+  "validated": false,
+  "after_notes": "07 - PERFIL SEGURADOR - Yunita Melvianus - ISLIAGO - VIZIOID - EN - #2022 - #10 - #100",
+  "payload_keys": [
+    "ACTIVE",
+    "BROADCAST_CURRENT_MESSAGE_ID",
+    "BROADCAST_LAST_SCHEDULE",
+    "BROADCAST_MESSAGE_ID",
+    "BROADCAST_TEMPLATE_ID",
+    "BROADCAST_TEMPLATE_LANGUAGE",
+    "BROADCAST_TEMPLATE_NAME",
+    "BROADCAST_TIME",
+    "COMPANY",
+    "COUNTRY",
+    "FB_PAGE_ID",
+    "ID",
+    "ID_1",
+    "ID_2",
+    "LANGUAGE",
+    "LEADS",
+    "LOGIN",
+    "MESSENGER_USER_ID",
+    "MESSENGER_USER_NAME",
+    "NAME",
+    "NAME_1",
+    "NOTES",
+    "PAGE_ID",
+    "PAGE_NAME",
+    "PASSWORD",
+    "PROFILE_NAME",
+    "PUBLISHER_ID",
+    "RESTRICTED_UNTIL",
+    "SOURCE",
+    "STATUS",
+    "URL",
+    "USER_LOGIN",
+    "UTM_CAMPAIGN",
+    "VERTICAL"
+  ]
+}
