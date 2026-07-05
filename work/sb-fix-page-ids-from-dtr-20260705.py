@@ -112,10 +112,14 @@ def row_public(r):
     }
 
 async def save_row(ctx,h,row,changes):
-    payload=dict(row)
+    allowed={
+        'ID','PROFILE_NAME','MESSENGER_USER_ID','PAGE_ID','FB_PAGE_ID','PAGE_NAME','UTM_CAMPAIGN',
+        'LEADS_TOTAL','LEADS','STATUS','SOURCE','VERTICAL','COUNTRY','NOTES','HOLDER1','HOLDER2','ADVERTISER',
+        'DATE_START','RESTRICTED_UNTIL','BROADCAST_TEMPLATE_ID','BROADCAST_TIME','BROADCAST_TIME_COUNT',
+        'BROADCAST_CURRENT_MESSAGE_ID','BROADCAST_MESSAGE_ID','BROADCAST_LAST_SCHEDULE'
+    }
+    payload={k:v for k,v in dict(row).items() if k in allowed}
     payload.update(changes)
-    for k in ['DOMAIN','STATUS_BADGE','LEADS_PERC','RESTRICTION_STATUS','dimension','dimensionArr']:
-        payload.pop(k, None)
     if payload.get('DATE_START') in ('null', None, ''):
         payload.pop('DATE_START', None)
     r=await ctx.request.post(API+'/campaigns/Messenger', headers={**h,'content-type':'application/json'}, data=json.dumps(payload, ensure_ascii=False), timeout=120000)
