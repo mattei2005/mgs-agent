@@ -441,11 +441,19 @@ async def main():
                 else:
                     before=public_row(sb); backups.append(before)
                     payload={}
-                    # NOTES: every non-Sent result, all statuses.
+                    sb_status = norm(sb.get('STATUS'))
+                    # NOTES: every non-Sent result on writable rows. Blocked rows
+                    # are diagnosis-only because the cause may be page-level or
+                    # segurador/profile access; automatic writes can mask the real
+                    # operational state and have returned SB 500 on this class.
                     if status!='SENT' and note:
-                        new_notes, changed = append_note(sb.get('NOTES'), note)
-                        if changed:
-                            payload['NOTES']=new_notes; action.append('notes')
+                        if sb_status == 'Blocked':
+                            obs.append('blocked_notes_skipped_pending_diagnosis')
+                            stats['blocked_notes_skipped'] += 1
+                        else:
+                            new_notes, changed = append_note(sb.get('NOTES'), note)
+                            if changed:
+                                payload['NOTES']=new_notes; action.append('notes')
                     # Restricted rules.
                     has_2022 = '#2022' in codes
                     is_restricted_start = str(sb.get('ID')) in sb_restricted_ids
