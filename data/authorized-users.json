@@ -1,6 +1,6 @@
 {
   "_comment": "Authorization registry for MGS Agents (Zeus, Atena, Ares, Hera). Discord-only notifications. Authorization is by Discord ID individual (not by Discord role).",
-  "_updated": "2026-06-06",
+  "_updated": "2026-07-05",
   "discord_server": {
     "name": "MGS Digital Corp",
     "guild_id": "1185714635991679006"
@@ -17,7 +17,8 @@
       "discord_channel_id": "1496267442899521627",
       "discord_channel_name": "zeus-admin-agent",
       "authorized_user_discord_ids": [
-        "344196393512075265"
+        "344196393512075265",
+        "321263240782807040"
       ],
       "_authorized_users_detail": [
         {
@@ -27,6 +28,23 @@
           "discord_role": "Super Admin",
           "added": "2026-04-21",
           "added_by": "system"
+        },
+        {
+          "discord_id": "321263240782807040",
+          "discord_username": null,
+          "name": "Geizian",
+          "discord_role": "External collaborator",
+          "access_level": "thread_full",
+          "scope": {
+            "type": "discord_thread",
+            "thread_id": "1523372308666912788",
+            "description": "Acompanhamento e interação autorizada na análise de placements/rewards Google Ads"
+          },
+          "allowed_context": "Thread de análise de placements/rewards; autorizado 100% se pedir ou escrever algo nessa thread.",
+          "added": "2026-07-05",
+          "added_by": "rodolfo",
+          "authorized_by_discord_id": "344196393512075265",
+          "authorized_at": "2026-07-05T13:15:31-04:00"
         }
       ]
     },
