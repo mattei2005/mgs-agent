@@ -20,9 +20,9 @@
       "reports": 101,
       "errors": [],
       "context_unique": 8,
-      "planned": 3,
+      "planned": 5,
       "ok": 0,
-      "fail": 3,
+      "fail": 5,
       "conflict": 0,
       "no_match": 1,
       "no_payload": 93
@@ -70,6 +70,42 @@
       "id": "01b78b7d-41b0-7251-988e-1a1367f8dbb1",
       "page": "Eliana Rodríguez",
       "fb": "342864618920450",
+      "payload": {
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado - SEM_COMPLETED"
+      },
+      "http": 500,
+      "ok": false,
+      "method": "fallback_full",
+      "text": "{\"statusCode\":500,\"message\":\"Internal server error\"}",
+      "after": {
+        "STATUS": "Blocked",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado"
+      }
+    },
+    {
+      "user": "disparosfinancetopfeed@gmail.com",
+      "id": "01b78b7d-accc-76f0-6342-e3090d6f5583",
+      "page": "Emilia Castillo",
+      "fb": "433134266541612",
+      "payload": {
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado - SEM_COMPLETED"
+      },
+      "http": 500,
+      "ok": false,
+      "method": "fallback_full",
+      "text": "{\"statusCode\":500,\"message\":\"Internal server error\"}",
+      "after": {
+        "STATUS": "Blocked",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado"
+      }
+    },
+    {
+      "user": "disparosfinancetopfeed@gmail.com",
+      "id": "01b78b7d-19f3-715a-a915-5e9713a0ea88",
+      "page": "Graciela Rivera",
+      "fb": "457024370817567",
       "payload": {
         "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado - SEM_COMPLETED"
       },
