@@ -62,6 +62,9 @@ Pitfalls técnicos validados:
 
 - `PUT /campaigns/Messenger/update-many` persiste `STATUS`/`RESTRICTED_UNTIL`, mas pode ignorar `NOTES` silenciosamente. Para `NOTES`, usar a rota de save do modal: `POST /campaigns/Messenger` com os campos editáveis da linha obtida por `GET /campaigns/Messenger/{ID}`, depois validar readback.
 - Ao reproduzir o save do modal via API, omitir campos opcionais `null` do payload (ex.: `PUBLISHER_ID`). Enviar esses campos como JSON `null` pode gerar HTTP 500 em rows onde a Dash/UI salva normalmente; payload full não-nulo + readback foi o fallback validado para as 35 falhas de 2026-07-05.
+- Se Rodolfo salvar a mesma row pela Dash e funcionar, reclassificar imediatamente como falha do caminho de automação/API, não falha da row. Testar rotas alternativas até readback ou até isolar um backend refusal real.
+- Para `account_context_signatures_not_unique`, é permitido resolver por dedupe de SB row ID: agrupar payloads planejados por página/row, aplicar apenas quando o payload for único/idêntico, pular conflitos, e validar readback. Não confiar no rótulo do segurador quando a assinatura de contexto estiver ambígua.
+- Em `Blocked` rows, se Facebook URL abrir normalmente, pode-se aplicar `STATUS=Broadcast` e validar. Se depois a SB continuar recusando apenas append de `NOTES` com HTTP 500, reportar como residual `NOTES append refused by SB`; a correção operacional de status está feita.
 - O save do modal pode retornar `201 Created`; tratar `200` e `201` como sucesso, desde que o readback confirme.
 - Em algumas linhas `Blocked`, salvar `NOTES` e `STATUS=Broadcast` juntos via `POST /campaigns/Messenger` retorna HTTP 500. Fluxo seguro: primeiro salvar `NOTES` mantendo o status atual; depois aplicar `STATUS`/`RESTRICTED_UNTIL` via `update-many`; por fim validar readback.
 - Usuário ativo na planilha com item 1Password sem campo de senha não deve derrubar o lote. Registrar erro de credencial para aquele usuário, pular e continuar.
