@@ -15,10 +15,75 @@
       "finished": "2026-07-05T01:23:14-04:00"
     },
     "disparosfinancetopfeed@gmail.com": {
-      "started": "2026-07-05T01:23:14-04:00"
+      "started": "2026-07-05T01:23:14-04:00",
+      "accounts": 10,
+      "reports": 101,
+      "errors": [],
+      "context_unique": 8,
+      "planned": 3,
+      "ok": 0,
+      "fail": 3,
+      "conflict": 0,
+      "no_match": 1,
+      "no_payload": 93
     }
   },
-  "details": [],
+  "details": [
+    {
+      "user": "disparosfinancetopfeed@gmail.com",
+      "id": "01b78b7d-3a8a-7fb3-330c-ba97b8dcba98",
+      "page": "Belén Rivas",
+      "fb": "397206643472206",
+      "payload": {
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado - SEM_COMPLETED"
+      },
+      "http": 500,
+      "ok": false,
+      "method": "fallback_full",
+      "text": "{\"statusCode\":500,\"message\":\"Internal server error\"}",
+      "after": {
+        "STATUS": "Blocked",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado"
+      }
+    },
+    {
+      "user": "disparosfinancetopfeed@gmail.com",
+      "id": "01b78b7d-aabd-770d-21dd-113aed29b79d",
+      "page": "Coral Herrera",
+      "fb": "382816134918426",
+      "payload": {
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado - SEM_COMPLETED"
+      },
+      "http": 500,
+      "ok": false,
+      "method": "fallback_full",
+      "text": "{\"statusCode\":500,\"message\":\"Internal server error\"}",
+      "after": {
+        "STATUS": "Blocked",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado"
+      }
+    },
+    {
+      "user": "disparosfinancetopfeed@gmail.com",
+      "id": "01b78b7d-41b0-7251-988e-1a1367f8dbb1",
+      "page": "Eliana Rodríguez",
+      "fb": "342864618920450",
+      "payload": {
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado - SEM_COMPLETED"
+      },
+      "http": 500,
+      "ok": false,
+      "method": "fallback_full",
+      "text": "{\"statusCode\":500,\"message\":\"Internal server error\"}",
+      "after": {
+        "STATUS": "Blocked",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "05 - Segurador - Barbara Cristina - FINANCETOPFEED - inglês - segurador e bkp bloqueado"
+      }
+    }
+  ],
   "run_users": [
     "disparosfinanceadx@gmail.com",
     "disparosfinancetopfeed@gmail.com",
