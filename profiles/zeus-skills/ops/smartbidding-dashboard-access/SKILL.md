@@ -18,6 +18,7 @@ metadata:
 - `references/sb-blocked-dual-diagnosis-and-restore-2026-07-05.md` — Rodolfo correction for SB `Blocked` rows: public Facebook URL availability is not enough to reactivate; diagnose both page state and segurador/profile operational access before any `Blocked → Broadcast` change.
 - `references/dtr-sb-blocked-row-dual-diagnosis-and-cron-activation-2026-07-05.md` — DTR→SB cron activation lessons: `Blocked` is a state, not a cause; skip `SEM_COMPLETED` note appends on active restricted rows; process unsafe DTR contexts by deduped unique SB row ID instead of hard-blocking the whole user.
 - `references/dtr-sb-page-id-reconciliation-2026-07-05.md` — Read-only reconciliation workflow for DigitalTRChat/Bot page cards vs SmartBidding `Accounts > Messenger > Page`: active sheet-user scope, all top-bar seguradores, DTR `PG | FB_PAGE_ID` parsing, match order, and issue categories (`DIVERGENTE`, `NO_SB_MATCH`, `NO_DTR_MATCH`, duplicates).
+- `references/bot-sb-page-id-conference-2026-07-05.md` — Rodolfo-corrected scope for the specific Bot/DTR ↔ SmartBidding PAGE ID registration conference: all DigitalTRChat users in 1Password, no migration-sheet/status filters, compare `USER_LOGIN`, segurador/profile, small `PAGE_ID`, `FB_PAGE_ID`, and page name; execute to completion before conversational report.
 
 # Smart Bidding Dashboard Access — MGS
 
