@@ -107,8 +107,14 @@ def row_public(r):
         'DOMAIN': norm(r.get('DOMAIN')),
     }
 
-async def put_update(ctx,h,payload):
-    r=await ctx.request.put(API+'/campaigns/Messenger/update-many', headers={**h,'content-type':'application/json'}, data=json.dumps(payload, ensure_ascii=False), timeout=120000)
+async def save_row(ctx,h,row,changes):
+    payload=dict(row)
+    payload.update(changes)
+    for k in ['DOMAIN','STATUS_BADGE','LEADS_PERC','RESTRICTION_STATUS','dimension','dimensionArr']:
+        payload.pop(k, None)
+    if payload.get('DATE_START') in ('null', None, ''):
+        payload.pop('DATE_START', None)
+    r=await ctx.request.post(API+'/campaigns/Messenger', headers={**h,'content-type':'application/json'}, data=json.dumps(payload, ensure_ascii=False), timeout=120000)
     txt=await r.text()
     ok=200 <= r.status < 300
     return ok, r.status, txt[:1000]
