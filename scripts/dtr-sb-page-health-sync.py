@@ -307,7 +307,10 @@ async def sb_update(ctx,h,row,payload):
         if not current:
             return 404, 'row not found before save'
         allowed=['ID','PUBLISHER_ID','MESSENGER_USER_ID','PAGE_ID','FB_PAGE_ID','PAGE_NAME','UTM_CAMPAIGN','LEADS','STATUS','SOURCE','VERTICAL','COUNTRY','NOTES','HOLDER1','HOLDER2','ADVERTISER','DATE_START','BROADCAST_TEMPLATE_ID','BROADCAST_TIME','BROADCAST_CURRENT_MESSAGE_ID','BROADCAST_MESSAGE_ID','BROADCAST_LAST_SCHEDULE','RESTRICTED_UNTIL']
-        save_payload={k:current.get(k) for k in allowed if k in current}
+        # Match the Dash modal save more closely: omit optional null fields
+        # instead of sending them as JSON null. Some rows return SB HTTP 500
+        # when null fields such as PUBLISHER_ID are included, while UI save works.
+        save_payload={k:current.get(k) for k in allowed if current.get(k) is not None}
         notes_value=payload['NOTES']
         rest_payload={k:v for k,v in payload.items() if k!='NOTES'}
         # Save NOTES with the current row status first. Some Blocked rows 500 if
@@ -335,7 +338,7 @@ async def sb_update(ctx,h,row,payload):
         if not current:
             return 404, 'row not found before clear restriction'
         allowed=['ID','PUBLISHER_ID','MESSENGER_USER_ID','PAGE_ID','FB_PAGE_ID','PAGE_NAME','UTM_CAMPAIGN','LEADS','STATUS','SOURCE','VERTICAL','COUNTRY','NOTES','HOLDER1','HOLDER2','ADVERTISER','DATE_START','BROADCAST_TEMPLATE_ID','BROADCAST_TIME','BROADCAST_CURRENT_MESSAGE_ID','BROADCAST_MESSAGE_ID','BROADCAST_LAST_SCHEDULE','RESTRICTED_UNTIL']
-        save_payload={k:current.get(k) for k in allowed if k in current}
+        save_payload={k:current.get(k) for k in allowed if current.get(k) is not None}
         save_payload['RESTRICTED_UNTIL']=None
         r=await ctx.request.post('https://api.jbfdigital.com.br/campaigns/Messenger', headers=h, data=json.dumps(save_payload), timeout=120000)
         return r.status, (await r.text())[:500]
