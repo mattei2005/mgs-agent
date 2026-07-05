@@ -163,9 +163,12 @@ async def main():
                 to_apply=planned[:1]
         results=[]
         for i,item in enumerate(to_apply,1):
-            payload={**item['changes'], 'ids':[item['target']['sb_id']]}
-            ok,status,txt=await put_update(ctx,h,payload)
-            results.append({'i':i,'sb_id':item['target']['sb_id'],'page':item['target']['page_name_dtr'],'payload':payload,'ok':ok,'status':status,'response':txt})
+            live_row=by_id.get(item['target']['sb_id'])
+            if not live_row:
+                ok,status,txt=False,0,'missing live row before save'
+            else:
+                ok,status,txt=await save_row(ctx,h,live_row,item['changes'])
+            results.append({'i':i,'sb_id':item['target']['sb_id'],'page':item['target']['page_name_dtr'],'changes':item['changes'],'ok':ok,'status':status,'response':txt})
             print(f"APPLY {i}/{len(to_apply)} {item['target']['bot_user']} {item['target']['page_name_dtr']} status={status} ok={ok}", flush=True)
             if not ok:
                 break
