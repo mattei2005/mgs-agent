@@ -34,8 +34,8 @@
       "reports": 175,
       "errors": [],
       "context_unique": 6,
-      "planned": 11,
-      "ok": 11,
+      "planned": 14,
+      "ok": 14,
       "fail": 0,
       "conflict": 0,
       "no_match": 1,
@@ -371,6 +371,62 @@
         "STATUS": "Broadcast",
         "RESTRICTED_UNTIL": "2026-07-22",
         "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN\n- ingles - #2022"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "68e52514-59f0-f486-f363-e0847f415c6b",
+      "page": "Addison Walker",
+      "fb": "758493337355841",
+      "payload": {
+        "RESTRICTED_UNTIL": "2026-07-22",
+        "STATUS": "Broadcast"
+      },
+      "http": 200,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"STATUS\":\"Broadcast\",\"RESTRICTED_UNTIL\":\"2026-07-22\"}",
+      "after": {
+        "STATUS": "Broadcast",
+        "RESTRICTED_UNTIL": "2026-07-22",
+        "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN - ingles - #2022"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "68f29864-b811-6d99-87a4-a4aa975a75a6",
+      "page": "Della Snow",
+      "fb": "594343103769653",
+      "payload": {
+        "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN\n- ingles - SEM_COMPLETED"
+      },
+      "http": 201,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"ID\":\"68f29864-b811-6d99-87a4-a4aa975a75a6\",\"MESSENGER_USER_ID\":\"01b78b7d-31dc-7a0d-1811-875c60a5ba42\",\"PAGE_ID\":\"10894\",\"FB_PAGE_ID\":\"594343103769653\",\"PAGE_NAME\":\"Della Snow\",\"UTM_CAMPAIGN\":\"pg_108",
+      "after": {
+        "STATUS": "On-hold",
+        "RESTRICTED_UNTIL": null,
+        "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN\n- ingles - SEM_COMPLETED"
+      }
+    },
+    {
+      "user": "disparosnewsoun@gmail.com",
+      "id": "68cc0b1f-1ebc-313a-a0ea-2151a518a49e",
+      "page": "Ethan Brown",
+      "fb": "747995018403141",
+      "payload": {
+        "RESTRICTED_UNTIL": "2026-07-22",
+        "STATUS": "Broadcast"
+      },
+      "http": 200,
+      "ok": true,
+      "method": "sb_update",
+      "text": "{\"STATUS\":\"Broadcast\",\"RESTRICTED_UNTIL\":\"2026-07-22\"}",
+      "after": {
+        "STATUS": "Broadcast",
+        "RESTRICTED_UNTIL": "2026-07-22",
+        "NOTES": "09 - PERFIL SEGURADOR - Nguyễn Thuỳ Linh - NEWSOUN - INGLES - #2022"
       }
     }
   ],
