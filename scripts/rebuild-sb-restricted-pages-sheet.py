@@ -73,7 +73,7 @@ def build_rows():
     by=Counter(r.get('restricted_until') or '?' for r in active)
     detected=(st.get('last_check') or datetime.now(NY).isoformat(timespec='seconds')).replace('T',' ')[:16]
     rows=[]
-    rows.append([cell('Páginas Restritas — MGS', bold=True, bg=NAVY, fg=WHITE, size=18, align='CENTER')] + [cell('', bg=NAVY) for _ in range(COLS-1)])
+    rows.append([cell('Registros SB de Restrição — MGS', bold=True, bg=NAVY, fg=WHITE, size=18, align='CENTER')] + [cell('', bg=NAVY) for _ in range(COLS-1)])
     rows.append([cell('Atualizado em ' + datetime.now(NY).strftime('%Y-%m-%d %H:%M %Z') + '  •  Fonte SB-only: DTR/Bot não lido nesta aba', bg=NAVY, fg=rgb('#DDEBFF'), size=10, align='CENTER')] + [cell('', bg=NAVY) for _ in range(COLS-1)])
     rows.append(blank_row())
     rows.append([cell('Resumo Executivo', bold=True, bg=BLUE, fg=WHITE, size=11)] + [cell('', bg=BLUE) for _ in range(COLS-1)])
@@ -88,8 +88,8 @@ def build_rows():
     rows.append(blank_row())
     rows.append([cell('Por Data de Saída', bold=True, bg=BLUE, fg=WHITE, size=11)] + [cell('', bg=BLUE) for _ in range(COLS-1)])
     rows.append([cell('Data saída', bold=True, bg=LIGHT), cell('Páginas', bold=True, bg=LIGHT)] + [cell('', bg=LIGHT) for _ in range(4)])
-    for d,cnt in sorted(by.items(), key=lambda kv:(-kv[1], kv[0]))[:8]:
-        rows.append([cell(d), cell(cnt, align='RIGHT')] + [cell('') for _ in range(4)])
+    for d,cnt in sorted(by.items(), key=lambda kv:kv[0])[:8]:
+        rows.append([cell(d), cell(cnt, align='RIGHT')] + [cell('') for _ in range(COLS-2)])
     rows.append(blank_row())
     rows.append([cell('Registros SB com Restricted Until - Novos:', bold=True, bg=BLUE, fg=WHITE, size=11)] + [cell('', bg=BLUE) for _ in range(COLS-1)])
     rows.append([cell(x, bold=True, bg=LIGHT) for x in ['Entrou registro','Página','FB Page ID','Page ID','Usuário bot','Segurador','Expira SB','Origem']])
