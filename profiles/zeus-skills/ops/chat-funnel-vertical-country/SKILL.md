@@ -448,6 +448,7 @@ Depois de implementar:
 - [ ] Testar mobile viewport.
 - [ ] Verificar console sem erro crítico.
 - [ ] Validar pixel/eventos se aplicável.
+- [ ] Para troca de ofertas/textos em sites já instalados: validar em cada domínio HTTP 200 + rota correta + 3 URLs esperadas + 3 textos novos + ausência dos textos antigos; depois fazer pelo menos um smoke test real no navegador até o CTA e confirmar passthrough de UTM.
 - [ ] Se usar wrapper JBF/Ciro: confirmar `window.tags`, `gpt.js`, wrapper, `window.jbftag`, slot criado, e distinguir `unfilled` de falha de render.
 - [ ] Se for plugin WordPress de produção, validar menu/admin UI: página admin HTTP 200, configs carregadas, save no-op funcionando, rota pública standalone e shortcode exibidos.
 

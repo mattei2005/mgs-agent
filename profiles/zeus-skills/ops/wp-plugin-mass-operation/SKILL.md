@@ -404,6 +404,8 @@ Para instalação em massa do `MGS Chat Funnels` junto com o plugin de quiz `act
 
 Quando Ciro/JBF corrigir a regra de rewarded para “1 só”, não copie loop legado de 5 auctions do `index.html`. O padrão operacional atual é 1 chamada de `requestRewardAds()` no `initQuiz`, sem `for`. Validar em browser com `googletag.pubads().getSlots()` — esperado apenas `..._rewarded/1`, não `/1` a `/5`. Ver `references/mgs-chat-funnels-one-rewarded.md`.
 
+Para troca em massa de textos/URLs das ofertas CAR-BR já instaladas, sem alterar código do plugin, ver `references/mgs-chat-funnels-car-offer-bulk-update.md`: atualizar `configs/car-br-01.json` por site, usar WP-CLI/arquivo em RunCloud e raw JSON no WP Admin para Bitnami, validar HTTP 200 + textos novos + URLs por domínio + textos antigos ausentes + smoke de UTM.
+
 ---
 
 ## Política global — 1Password e Credenciais
