@@ -314,13 +314,17 @@ final class MGS_Chat_Funnels {
         return $value !== '' ? $value : $fallback;
     }
 
+    private function current_site_ad_slug() {
+        $host = parse_url(home_url(), PHP_URL_HOST);
+        $host = preg_replace('/^www\./', '', (string) $host);
+        return $this->clean_ad_slug(strtok($host, '.') ?: '', '');
+    }
+
     private function ad_wrapper_url($config) {
         $company = $this->clean_ad_slug($config['ad_company'] ?? 'digital-trust', 'digital-trust');
         $domain = $this->clean_ad_slug($config['ad_domain'] ?? '', '');
         if ($domain === '') {
-            $host = parse_url(home_url(), PHP_URL_HOST);
-            $host = preg_replace('/^www\./', '', (string) $host);
-            $domain = $this->clean_ad_slug(strtok($host, '.') ?: '', '');
+            $domain = $this->current_site_ad_slug();
         }
         if ($domain === '') {
             return '';
@@ -517,7 +521,8 @@ final class MGS_Chat_Funnels {
         }
         $config['ads_enabled'] = true;
         $config['ad_company'] = $this->clean_ad_slug(wp_unslash($_POST['ad_company'] ?? 'digital-trust'), 'digital-trust');
-        $config['ad_domain'] = $this->clean_ad_slug(wp_unslash($_POST['ad_domain'] ?? ''), '');
+        $posted_ad_domain = $this->clean_ad_slug(wp_unslash($_POST['ad_domain'] ?? ''), '');
+        $config['ad_domain'] = $posted_ad_domain !== '' ? $posted_ad_domain : $this->current_site_ad_slug();
         $config['utm_passthrough'] = !empty($_POST['utm_passthrough']);
         $config['tags'] = $this->parse_csv_text(wp_unslash($_POST['tags'] ?? ''));
 
