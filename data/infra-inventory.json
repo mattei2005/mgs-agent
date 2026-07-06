@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-05T05:00:01-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-05T20:13:33-04:00",
+    "generated_by": "zeus-controlled-hermes-update-20260705"
   },
   "system_packages": [
     {
@@ -691,6 +691,18 @@
       "type": "ops_doc",
       "updated_at": "2026-07-04T07:23:47-04:00",
       "description": "B011 DTR route/canonical alert/cache-clean rules updated."
+    },
+    {
+      "id": "hermes-mgs-runtime-customizations-2026-07-05",
+      "agent": "zeus",
+      "path": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-07-05.patch",
+      "type": "hermes_patch",
+      "sha256": "cff6c813c5a11b67d8733a044eb96fcd279414f702e728ffa0934b73501f41b0",
+      "size_bytes": 71080,
+      "source": "Hermes controlled update 2026-07-05 canonical port",
+      "validation": "git apply --check on origin/main OK; targeted pytest 157 passed; patch guard OK post-update",
+      "git_tracked": true,
+      "updated_at": "2026-07-05T20:13:33-04:00"
     }
   ],
   "profile_skill_references": [
@@ -1809,6 +1821,21 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
+    },
+    {
+      "path": "scripts/ensure-hermes-mgs-patches.sh",
+      "size_bytes": 10992,
+      "modified_at": "2026-07-05T20:03:39-04:00"
+    },
+    {
+      "path": "scripts/run-hermes-update-controlled.sh",
+      "size_bytes": 30807,
+      "modified_at": "2026-07-05T20:03:39-04:00"
+    },
+    {
+      "path": "scripts/mgs-gateway-restart-safe.sh",
+      "size_bytes": 5281,
+      "modified_at": "2026-06-16T19:27:14-04:00"
     }
   ],
   "skills_mgs": [
