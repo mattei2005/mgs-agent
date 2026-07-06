@@ -543,13 +543,18 @@ async def main():
         p,browser,ctx,h=await get_sb_context(); pubs,sb_rows=await fetch_sb_rows(ctx,h); summary['sb_rows']=len(sb_rows); summary['sb_publishers']=len(pubs)
         indexes=build_sb_indexes(sb_rows)
         sb_restricted_ids={str(r.get('ID')) for r in sb_rows if norm(r.get('STATUS'))=='Broadcast' and active_restricted(r,tday)}
+        sb_restricted_pages_by_user=defaultdict(set)
+        for r in sb_rows:
+            if norm(r.get('STATUS'))=='Broadcast' and active_restricted(r,tday) and norm(r.get('USER_LOGIN')) and norm(r.get('PAGE_ID')):
+                sb_restricted_pages_by_user[norm_email(r.get('USER_LOGIN'))].add(norm(r.get('PAGE_ID')))
         summary['sb_active_restricted_start']=len(sb_restricted_ids)
-        state=load_state(); stats=Counter(); report_rows=[]; backups=[]; writes=0
+        state=load_state(); stats=Counter(); report_rows=[]; backups=[]; alert_rows=[]; writes=0
         for user in users:
             print(f"PROGRESS user_start {user}", flush=True)
-            scan=await scan_dtr_user(user, matched[user], step1_scope, args.limit_accounts, args.limit_pages)
+            scan=await scan_dtr_user(user, matched[user], step1_scope, args.limit_accounts, args.limit_pages, sb_restricted_pages_by_user.get(user, set()))
             print(f"PROGRESS user_done {user} accounts={len(scan.get('accounts') or [])} reports={len(scan.get('reports') or [])} errors={len(scan.get('errors') or [])}", flush=True)
             stats['users_scanned']+=1; stats['dtr_accounts']+=len(scan.get('accounts') or []); stats['dtr_pages']+=sum(a.get('pages',0) for a in scan.get('accounts') or [])
+            stats['skipped_already_restricted_sb']+=sum(a.get('skipped_already_restricted',0) for a in scan.get('accounts') or [])
             for a in scan.get('accounts') or []:
                 st=a.get('step1_status') or 'UNKNOWN'
                 stats[f'step1_{st}'] += 1
@@ -651,6 +656,8 @@ async def main():
                                         if 'RESTRICTED_UNTIL' in payload: checks.append(date_only(new_sb.get('RESTRICTED_UNTIL'))==date_only(payload['RESTRICTED_UNTIL']))
                                         readback_ok='yes' if all(checks) else 'no'
                                         if readback_ok=='no': summary['errors'].append({'readback_failed':before,'payload':payload,'after':public_row(new_sb)})
+                                        elif has_2022 and 'RESTRICTED_UNTIL' in payload:
+                                            alert_rows.append({'page_name':rep.get('page_name'),'fb_page_id':norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID')),'page_id':norm(rep.get('dtr_page_id')) or norm(sb.get('PAGE_ID')),'bot_user':rep.get('bot_user'),'segurador':rep.get('account_name'),'restricted_until':cls.get('restricted_until'),'restricted_until_time':cls.get('restricted_until_time'),'codes':codes,'sb_id':norm(sb.get('ID'))})
                                     else:
                                         readback_ok='no'; summary['errors'].append({'readback_get_failed':before,'payload':payload})
                         else:
@@ -660,10 +667,15 @@ async def main():
                 if args.apply and args.max_writes and writes>=args.max_writes:
                     break
             if args.apply and args.max_writes and writes>=args.max_writes: break
-        summary['stats']=dict(stats); summary['writes']=writes; summary['backup_rows']=len(backups); summary['finished_at']=now_iso()
+        summary['stats']=dict(stats); summary['writes']=writes; summary['backup_rows']=len(backups); summary['new_restrictions_alerted']=len(alert_rows); summary['finished_at']=now_iso()
         backup_path=REPORT_DIR/f'dtr-sb-page-health-sync-backup-{stamp}.json'
         backup_path.write_text(json.dumps(backups,ensure_ascii=False,indent=2),encoding='utf-8'); summary['backup']=str(backup_path)
         if report_rows or summary.get('step1_inventory_notes'): write_excel(report_xlsx, report_rows, summary, summary.get('step1_inventory_notes'))
+        if args.apply and alert_rows:
+            try:
+                summary['discord_alert_http']=post_discord(build_new_restrictions_alert(alert_rows, summary))
+            except Exception as exc:
+                summary['errors'].append({'discord_alert_failed':f'{type(exc).__name__}: {exc}'})
         state.setdefault('runs',[]).append({'ts':summary['started_at'],'mode':summary['mode'],'stats':summary['stats'],'writes':writes,'log':str(run_log),'xlsx':str(report_xlsx)})
         save_state(state)
         if summary['errors']: summary['ok']=False
