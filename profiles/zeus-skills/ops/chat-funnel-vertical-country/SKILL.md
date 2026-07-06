@@ -251,7 +251,7 @@ Exemplos validados: `fincfrog.com/chat/emp/br2` e referência CAR-BR tipo `fmybc
 [Card Banco BV]
 ```
 
-Para CAR-BR no padrão de cards de veículo, o card deve ter campos humanos: imagem do carro, nome do carro, texto abaixo do nome, texto verde abaixo e URL final. Não usar “Mensagens da oferta” nem fluxo Oferta 1 → recusa → Oferta 2 quando a referência for convergente. Ver `references/car-br-card-offer-convergent-flow.md`.
+Para CAR-BR no padrão de cards de veículo, o card deve ter campos humanos: imagem do carro, nome do carro, texto abaixo do nome, texto verde abaixo e URL final. O bloco pré-card também deve ser editável por campos humanos separados: mensagem de busca (`🔍 Estou pesquisando...`), mensagem de ofertas encontradas e mensagem de instrução. Não usar “Mensagens da oferta” nem fluxo Oferta 1 → recusa → Oferta 2 quando a referência for convergente. Ver `references/car-br-card-offer-convergent-flow.md`.
 
 ### Modo `sequential`
 
@@ -476,6 +476,7 @@ Depois de implementar:
 6. **Não coletar lead sem política clara.** Nome/telefone/CPF/email exigem armazenamento, consentimento e QA de integração.
 7. **Não misturar vertical/país no slug.** `EMP-BR` e `EMP-US` podem ter textos, compliance e ofertas diferentes.
 8. **Admin de WordPress não pode parecer ferramenta de dev.** Rodolfo rejeitou editor principal em JSON e textarea de ofertas com `|`. Para produção, criar interface de gestor de tráfego: campos humanos, botões de criar/duplicar/excluir, URL do chat visível, relatório/inventário, e ofertas como blocos/repeaters com campos separados. JSON bruto só em avançado/debug.
+9. **Falas pré-card também são produto editável.** Em CAR-BR convergente, Rodolfo espera ver a linha de busca antes das ofertas e poder editar as 3 frases pré-card no admin. Não deixe essas frases hardcoded ou só no JSON bruto; e não crie uma etapa sem botões que impeça o avanço para os cards.
 
 ## Resposta padrão quando Rodolfo pedir um chat novo
 
