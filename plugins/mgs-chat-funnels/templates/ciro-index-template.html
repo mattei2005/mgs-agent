@@ -776,33 +776,46 @@
       document.addEventListener("click", function (e) {
         if (isQuizClosed) return;
 
-        if (e.target.classList.contains("aq-answer")) {
-          e.target.style.background = "#075e54";
-          e.target.style.color = "white";
+        const answerButton = e.target && e.target.closest ? e.target.closest(".aq-answer") : null;
+        if (answerButton) {
+          if (quizStepLock) return;
+          quizStepLock = true;
+          answerButton.style.background = "#075e54";
+          answerButton.style.color = "white";
           const currentSlide = document.querySelector('.aq-slide[data-step="' + quizStep + '"]');
           if (currentSlide) {
             currentSlide.querySelectorAll(".aq-answer").forEach(btn => btn.style.pointerEvents = "none");
           }
-          setTimeout(nextQuizStep, 500);
+          setTimeout(function () {
+            nextQuizStep();
+            quizStepLock = false;
+          }, 500);
         }
 
-        if (e.target.id === "aq-cta") {
-          window.jbftag = window.jbftag || { cmd: [] };
-          window.jbftag.cmd.push(() => {
-            if (window.jbftag.showRewardedAds) {
-              window.jbftag.showRewardedAds(function () {
-                if (!quizAlreadyClosed) {
-                  quizAlreadyClosed = true;
-                  closeQuiz();
-                }
-              });
-            } else {
-              if (!quizAlreadyClosed) {
-                quizAlreadyClosed = true;
-                closeQuiz();
-              }
+        const ctaButton = e.target && e.target.closest ? e.target.closest("#aq-cta") : null;
+        if (ctaButton) {
+          if (quizAlreadyClosed) return;
+          const safeCloseQuiz = function () {
+            if (!quizAlreadyClosed) {
+              quizAlreadyClosed = true;
+              closeQuiz();
             }
-          });
+          };
+
+          setTimeout(safeCloseQuiz, 1200);
+
+          try {
+            window.jbftag = window.jbftag || { cmd: [] };
+            window.jbftag.cmd.push(() => {
+              if (window.jbftag.showRewardedAds) {
+                window.jbftag.showRewardedAds(safeCloseQuiz);
+              } else {
+                safeCloseQuiz();
+              }
+            });
+          } catch (err) {
+            safeCloseQuiz();
+          }
         }
       });
     </script>
