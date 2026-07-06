@@ -1,0 +1,35 @@
+{
+  "updated_at": "2026-07-06T02:18:38-04:00",
+  "scope_publishers": 56,
+  "scope_rows": 3237,
+  "dtr_pages": 2914,
+  "counts": {
+    "OK_IDS_USER_SEG": 2515,
+    "NAO_ENCONTRADO_NA_SB_POR_IDS": 150,
+    "EXISTE_SB_IDS_OK_USER_OU_SEG_DIFERENTE": 178,
+    "EXISTE_SB_FB_OK_PAGE_ID_DIVERGE": 71
+  },
+  "results": {
+    "EXISTE_SB_IDS_OK_USER_OU_SEG_DIFERENTE": {
+      "tab": "Existe na SB, IDs batem, user/seg difere",
+      "gid": 1648951559,
+      "expected": 178,
+      "readback": 178,
+      "url": "https://docs.google.com/spreadsheets/d/1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY/edit?gid=1648951559#gid=1648951559"
+    },
+    "EXISTE_SB_FB_OK_PAGE_ID_DIVERGE": {
+      "tab": "Existe na SB por FB_PAGE_ID, PG difere ",
+      "gid": 1816878903,
+      "expected": 71,
+      "readback": 71,
+      "url": "https://docs.google.com/spreadsheets/d/1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY/edit?gid=1816878903#gid=1816878903"
+    },
+    "NAO_ENCONTRADO_NA_SB_POR_IDS": {
+      "tab": "Não encontrado na SB por FB nem PG",
+      "gid": 1082487111,
+      "expected": 150,
+      "readback": 150,
+      "url": "https://docs.google.com/spreadsheets/d/1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY/edit?gid=1082487111#gid=1082487111"
+    }
+  }
+}
