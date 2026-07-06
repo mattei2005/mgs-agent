@@ -732,6 +732,7 @@
       }
 
       let quizStepLock = false;
+      const gateQuestionCount = {{GATE_QUESTION_COUNT_JS}};
 
       function nextQuizStep() {
         const currentSlide = document.querySelector('.aq-slide[data-step="' + quizStep + '"]');
@@ -828,21 +829,7 @@
           </div>
         </div>
         <div class="aq-slides">
-          <div class="aq-slide" data-step="0" style="display:flex; flex-direction:column; align-items:center;">
-            <p class="question" style="font-size:22px; margin-bottom:25px; text-align:center; color:#333; font-weight:500;">🚗 Você já tem um carro?</p>
-            <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
-              <button class="aq-answer" data-value="sim" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">Sim</button>
-              <button class="aq-answer" data-value="nao" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">Não</button>
-            </div>
-          </div>
-          <div class="aq-slide" data-step="1" style="display:none; flex-direction:column; align-items:center;">
-            <p class="question" style="font-size:22px; margin-bottom:25px; text-align:center; color:#333; font-weight:500;">🔍 Qual tipo de veículo você quer financiar?</p>
-            <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
-              <button class="aq-answer" data-value="usado" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">Usado</button>
-              <button class="aq-answer" data-value="seminovo" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">Seminovo</button>
-              <button class="aq-answer" data-value="zero" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:'Roboto',Arial,sans-serif; transition:all 0.3s ease;">Zero KM</button>
-            </div>
-          </div>
+          {{GATE_SLIDES_HTML}}
           <div class="aq-loading" style="display:none; text-align:center;">
             <div style="display:flex; justify-content:center; gap:8px; margin-bottom:20px;">
               <span class="dot" style="width:12px; height:12px; border-radius:50%; background:#075e54; display:inline-block; animation:bounce 1.4s ease-in-out infinite both;"></span>
