@@ -4,10 +4,10 @@
   "country": "br",
   "language": "pt-BR",
   "route": "/chat/car/br1",
-  "title": "Chatbot Financiamento de Carros - MGS",
-  "brand": "MGS",
+  "title": "chat cards financiamento de carros",
+  "brand": "Eggbev",
   "theme": "whatsapp",
-  "mode": "sequential",
+  "mode": "cards",
   "utm_passthrough": true,
   "tags": [
     "br",
@@ -128,37 +128,33 @@
         ]
       }
     ],
-    "pre_offer_messages": []
+    "pre_offer_messages": [],
+    "offer_headline": "🚗 Encontrei 3 ofertas exclusivas para você! | Toque na que mais te interessa para ver as condições:"
   },
   "offers": [
     {
-      "name": "Banco BV",
-      "messages": [
-        "Aqui está uma ótima opção para você!",
-        "O Banco BV é especialista em financiamento de veículos, com taxas a partir de 1,32% ao mês, prazo de até 60 meses e processo 100% digital. Você pode financiar novos, seminovos e até compras entre particulares!"
-      ],
-      "accept_label": "Sim, quero simular →",
-      "reject_label": "Não, mostre outra opção",
-      "target": "https://fincpro.com/br-chat-car-banco-bv/"
+      "name": "Volkswagen Polo",
+      "subtitle": "Taxa reduzida a partir de 1,29% ao mês",
+      "bank": "Crédito de até R$50.000 em até 60 meses",
+      "image": "https://www.nicepng.com/png/full/90-906789_download-vw-polo-png-and-use-it-wherever.png",
+      "logo": "https://www.nicepng.com/png/full/90-906789_download-vw-polo-png-and-use-it-wherever.png",
+      "target": "https://eggbev.com/financiamento-veiculos-sem-entrada-digital/"
     },
     {
-      "name": "Santander Financiamentos",
-      "messages": [
-        "Encontrei outra opção incrível para você:",
-        "O Santander Financiamentos tem décadas de experiência no mercado, taxas a partir de 1,39% ao mês e aprovação rápida nas concessionárias. Sem necessidade de ser correntista para simular!"
-      ],
-      "accept_label": "Sim, quero ver as condições →",
-      "reject_label": "Não, mostre outra opção",
-      "target": "https://fincpro.com/br-chat-car-santander-financiamento/"
+      "name": "Volkswagen T-Cross",
+      "subtitle": "Taxas a partir de 0,98% ao mês",
+      "bank": "Opção de entrada zero e resposta rápida",
+      "image": "https://d10ax2wcinhk08.cloudfront.net/vehicles-catalog/02657614-3538-48e2-bd3f-2649790e1106_volkswagen-tcross-style.png",
+      "logo": "https://d10ax2wcinhk08.cloudfront.net/vehicles-catalog/02657614-3538-48e2-bd3f-2649790e1106_volkswagen-tcross-style.png",
+      "target": "https://eggbev.com/br-seu-carro-novo-com-um-click/"
     },
     {
-      "name": "Bradesco",
-      "messages": [
-        "Talvez esta seja a opção ideal para você:",
-        "O Bradesco financia carros com até 12 anos de fabricação — um dos limites mais amplos do mercado — e ainda permite financiar até 100% do valor do veículo. Contrate pelo app e economize até 20% na taxa!"
-      ],
-      "accept_label": "Sim, quero conhecer →",
-      "target": "https://fincpro.com/br-chat-car-bradesco-financiamento/"
+      "name": "Hyundai HB20",
+      "subtitle": "Entrada facilitada, sujeita à análise",
+      "bank": "Parcelas calculadas com taxa reduzida",
+      "image": "https://production.autoforce.com/uploads/version/profile_image/12803/comprar-limited_ed61048847.png",
+      "logo": "https://production.autoforce.com/uploads/version/profile_image/12803/comprar-limited_ed61048847.png",
+      "target": "https://eggbev.com/br-financiamento-do-carro-agil/"
     }
   ],
   "ads_enabled": true,
