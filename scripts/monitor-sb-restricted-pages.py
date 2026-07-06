@@ -233,18 +233,19 @@ def publisher_name(item: dict) -> str:
 
 def compact_new_rows(rows: list[dict], limit: int = 5) -> str:
     if not rows:
-        return 'Nenhuma nova restrição desde a última execução.'
-    header = 'Entrou restrição   Página             Page ID   Usuário bot        Segurador            Expira SB     Origem'
+        return 'Nenhum novo registro SB desde a última execução.'
+    header = 'Entrou registro    Página             FB Page ID          Page ID   Usuário bot        Segurador            Expira SB     Origem'
     lines = [header]
     entered = datetime.now(NY).strftime('%Y-%m-%d %H:%M')
     for item in rows[:limit]:
         page = truncate(item.get('page_name') or '?', 17)
+        fb_page_id = truncate(str(item.get('fb_page_id') or '?'), 18)
         page_id = truncate(str(item.get('page_id') or '?'), 8)
         user = truncate((item.get('user_login') or '?').replace('@gmail.com', ''), 17)
         seg = truncate(publisher_name(item), 20)
         exp = item.get('restricted_until') or '?'
         origin = 'SB-only; DTR não lido'
-        lines.append(f'{entered:<18} {page:<17} {page_id:<8} {user:<17} {seg:<20} {exp:<13} {origin}')
+        lines.append(f'{entered:<18} {page:<17} {fb_page_id:<18} {page_id:<8} {user:<17} {seg:<20} {exp:<13} {origin}')
     if len(rows) > limit:
         lines.append(f'... +{len(rows) - limit} novas na Sheet')
     return '\n'.join(lines)
