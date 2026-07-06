@@ -122,6 +122,8 @@ final class MGS_Chat_Funnels {
             '{{PERSONA_ROLE_JS}}' => $this->js_json($persona['role'] ?? 'Consultor'),
             '{{QUESTIONS_JS}}' => $this->js_json($this->ciro_questions_from_config($config)),
             '{{OFFER_URLS_JS}}' => $this->js_json($this->offer_urls_from_config($config)),
+            '{{GATE_SLIDES_HTML}}' => $this->render_gate_slides_html($config),
+            '{{GATE_QUESTION_COUNT_JS}}' => (string) $this->gate_question_count($config),
         );
 
         echo strtr($template, $replacements); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
