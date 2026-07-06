@@ -27,7 +27,8 @@ except Exception:
 
 BASE_DIR=Path('/root/mgs-agent')
 SHEET_ID='1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY'
-MIGRATION_GID='85508562'
+MIGRATION_GID='562940072'
+MIGRATION_GID_FALLBACKS=['562940072','85508562','136896597']
 DTR_BASE='https://digitaltrchat.com'
 SB_STATE='/tmp/smartbidding_state_headed.json'
 NY=ZoneInfo('America/New_York')
@@ -63,18 +64,25 @@ def op_json(cmd): return json.loads(op(cmd, timeout=60))
 
 def sheet_rows():
     # Google's `/export?format=csv&gid=...` route intermittently returns 400
-    # for this sheet. `gviz/tq?tqx=out:csv` is the stable public CSV endpoint
-    # used by the live migration-sheet gate.
-    url=f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&gid={MIGRATION_GID}'
-    data=urllib.request.urlopen(url, timeout=60).read().decode('utf-8-sig')
-    return list(csv.DictReader(io.StringIO(data)))
+    # and the migration workbook has changed tabs over time. Try the known gids
+    # and use the first tab that returns rows with User + Segurador.
+    last=[]
+    for gid in MIGRATION_GID_FALLBACKS:
+        url=f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&gid={gid}'
+        data=urllib.request.urlopen(url, timeout=60).read().decode('utf-8-sig')
+        rows=list(csv.DictReader(io.StringIO(data))) if data.strip() else []
+        last=rows
+        if rows and 'User' in rows[0] and 'Segurador' in rows[0]:
+            return rows
+    return last
 
 def active_users_from_sheet(rows):
     users=[]
     for r in rows:
         u=norm_email(r.get('User'))
         if '@' not in u: continue
-        if not norm(r.get('NO APP')): continue
+        if 'NO APP' in r and not norm(r.get('NO APP')): continue
+        if 'Migrado' in r and norm(r.get('Migrado')).upper() not in {'TRUE','OK','SIM','YES','1'}: continue
         if norm(r.get('Removidos acumulado')).upper()=='X': continue
         users.append(u)
     return sorted(set(users))
@@ -85,9 +93,13 @@ def build_step1_scope(rows):
         u=norm_email(r.get('User'))
         name=clean(r.get('Segurador'))
         key=norm_name(name)
-        if '@' not in u or not key or not norm(r.get('NO APP')):
+        if '@' not in u or not key:
             continue
-        rec={'user':u,'segurador':name,'norm':key,'app':norm(r.get('NO APP')),'pg':norm(r.get('PG')),'removed':norm(r.get('Removidos acumulado')).upper()}
+        if 'NO APP' in r and not norm(r.get('NO APP')):
+            continue
+        if 'Migrado' in r and norm(r.get('Migrado')).upper() not in {'TRUE','OK','SIM','YES','1'}:
+            continue
+        rec={'user':u,'segurador':name,'norm':key,'app':norm(r.get('NO APP') or r.get('Migrado') or 'sheet'),'pg':norm(r.get('PG') or r.get('#paginas')),'removed':norm(r.get('Removidos acumulado')).upper()}
         if rec['removed']=='X':
             scope['x'][u][key]=rec; scope['row_counts']['x_rows']+=1
         else:
