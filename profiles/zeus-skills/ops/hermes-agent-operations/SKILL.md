@@ -37,6 +37,8 @@ Use quando Rodolfo pedir atualização do Hermes ou quando monitor detectar nova
 
 **Regra permanente MGS aprovada por Rodolfo:** nenhum update Hermes é considerado concluído sem backup + diff/snapshot pré-update + comparação pós-update + guard de patches/invariantes MGS + validação runtime real. O playbook canônico é `references/hermes-controlled-update-rule-mgs.md` e o script padrão é `/root/mgs-agent/scripts/run-hermes-update-controlled.sh`.
 
+**Bundled skills após update:** quando `hermes update` reportar `user-modified bundled skill(s)`, não restaurar tudo às cegas. Auditar por profile (`root`, Zeus, Atena, Ares, Hera), gerar diffs, classificar cada skill em restore stock / limpar artifact / manter e rebaseline / merge manual. Para merges, começar do stock atual em `/root/.hermes/hermes-agent/skills/...`, reinserir só o conteúdo local útil, rebaselinear o manifest e validar que `hermes skills list-modified` retorna “No user-modified bundled skills” em todos os profiles. Playbook: `references/hermes-bundled-skill-sync-merge-2026-07-05.md`.
+
 Comandos padrão:
 
 ```bash
@@ -641,6 +643,7 @@ Para manutenção de VPS/update com backup, recuperação manual de npm quando s
 Esta umbrella absorveu as antigas skills especializadas abaixo. Conteúdo detalhado e histórico foi preservado nos arquivos de suporte:
 
 - `references/hermes-update-2026-07-05-autorestart-and-staged-patch-port.md` — sessão de update controlado em que `RESTART_GATEWAYS=0` não impediu o `hermes update` oficial de drenar/reiniciar Ares/Atena/Hera, gerando órfãos `gateway run --replace`; inclui recuperação segura e pitfall de `git apply --3way` deixar mudanças staged, exigindo `git diff --binary HEAD` para gerar patch canônico não-vazio.
+- `references/hermes-bundled-skill-sync-merge-2026-07-05.md` — playbook para resolver `user-modified bundled skills` após update: inventário por profile, diff, backup, classificação restore/rebaseline/merge manual, manifest baseline e validação final.
 - `references/hermes-update-original-skill.md`
 - `references/hermes-update-post-update-validation.md`
 - `references/hermes-controlled-update-rule-mgs.md` — regra permanente MGS aprovada por Rodolfo: backup + diff/snapshot pré-update + comparação pós-update + guard de patches/invariantes + validação runtime real antes de considerar update concluído.
