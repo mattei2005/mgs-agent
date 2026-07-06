@@ -27,7 +27,10 @@ For this class of audit/correction, Rodolfo expects normal tool/progress visibil
 4. Compare by confirmed keys, preferring same-user matches:
    - same `USER_LOGIN` + `PAGE_ID`;
    - same `USER_LOGIN` + `FB_PAGE_ID`;
-   - global `FB_PAGE_ID` is diagnostic only and should not be auto-corrected if the SB `USER_LOGIN` differs.
+   - global `PAGE_ID`, global `FB_PAGE_ID`, and global normalized `PAGE_NAME` must be checked before labeling anything as `NO_SB_MATCH`.
+   - global `PAGE_ID` / `FB_PAGE_ID` are diagnostic only and should not be auto-corrected if the SB `USER_LOGIN` differs.
+   - Normalize page names with Unicode NFC before comparing; decomposed accents can look identical in Sheets but differ byte-for-byte.
+   - Never report “existe no Bot/DTR e não na SB” from same-user matching alone. If a page exists globally in SB under another user/segurador, classify it as `EXISTE_NA_SB_USER_DIFERENTE` or similar, not missing.
 5. For existing SB rows with safe same-user divergence, update only:
    - `PAGE_ID` → DTR PG ID;
    - `FB_PAGE_ID` → DTR FB Page ID if needed;
