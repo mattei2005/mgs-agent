@@ -35,6 +35,7 @@ NY=ZoneInfo('America/New_York')
 LOG_DIR=BASE_DIR/'logs'
 REPORT_DIR=BASE_DIR/'reports'
 STATE_PATH=BASE_DIR/'data/dtr-sb-page-health-sync-state.json'
+TARGET_CHANNEL_ID='1522442220903337984'
 
 MONTHS_EN={'january':1,'february':2,'march':3,'april':4,'may':5,'june':6,'july':7,'august':8,'september':9,'october':10,'november':11,'december':12}
 
@@ -202,7 +203,8 @@ def fb_id_from_row(row):
         if m: return m.group(1)
     return ''
 
-async def scan_dtr_user(username, item, step1_scope, limit_accounts=0, limit_pages=0):
+async def scan_dtr_user(username, item, step1_scope, limit_accounts=0, limit_pages=0, skip_restricted_pages=None):
+    skip_restricted_pages=set(skip_restricted_pages or [])
     out={'username':username,'accounts':[], 'reports':[], 'errors':[], 'login_ok':False}
     try:
         password=op_password(item)
@@ -231,7 +233,7 @@ async def scan_dtr_user(username, item, step1_scope, limit_accounts=0, limit_pag
             for a in uniq:
                 aid=a.get('id') or ''; aname=clean(a.get('name') or 'default') or 'default'
                 step1_status, step1_reason = step1_account_classification(username, aname, name_counts[norm_name(aname)], step1_scope)
-                acc={'id':aid,'name':aname,'pages':0,'latest_completed':0,'no_completed':0,'signature':[],'errors':[],'step1_status':step1_status,'step1_reason':step1_reason}
+                acc={'id':aid,'name':aname,'pages':0,'latest_completed':0,'no_completed':0,'skipped_already_restricted':0,'signature':[],'errors':[],'step1_status':step1_status,'step1_reason':step1_reason}
                 out['accounts'].append(acc)
                 if step1_status != 'PENDING_PAGE_LIST':
                     continue
@@ -252,6 +254,9 @@ async def scan_dtr_user(username, item, step1_scope, limit_accounts=0, limit_pag
                     sig=[]
                     for opt in opts:
                         page_id=str(opt['value']); page_name=clean(opt['text'])
+                        if page_id in skip_restricted_pages:
+                            acc['skipped_already_restricted']+=1
+                            continue
                         camp=await dtr_post_json(ctx, url+'_data', campaign_form(csrf,page_id), url)
                         rows=camp.get('data') or []
                         cid=''; crow=None
