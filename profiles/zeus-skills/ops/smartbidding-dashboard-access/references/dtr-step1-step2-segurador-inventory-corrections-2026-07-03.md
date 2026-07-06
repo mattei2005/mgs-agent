@@ -59,3 +59,4 @@ For Step 2 reports:
 - `Broadcast`/`Campaign` are operational and actionable.
 - `#2022` can suggest `RESTRICTED_UNTIL` action, but only after the Step 1 filters and context-safety checks above.
 - `#10`, `#551`, `#100`, `PERMISSION`, `APP_DELETED`, `TOKEN`, `OTHER` should generally be surfaced as diagnosis/NOTES candidates, not blindly auto-fixed.
+- Page with no campaign/message sent inside the segurador at the time of inspection is **not an error** and must not be treated as unsafe context. It only means that, on that day/moment, no gestor had used that page in a sent campaign yet. If a gestor later creates/runs a campaign for that page, future runs will have data to inspect. Classification should be neutral/report-only (e.g. `NO_CAMPAIGN_DATA_YET` / `SEM_CAMPANHA_ENVIADA`), not a blocker.
