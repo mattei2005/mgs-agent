@@ -487,9 +487,13 @@ def build_new_restrictions_alert(rows, summary):
         lines.append(f'... +{len(rows)-20} no XLSX/log')
     lines += [
         '',
-        'Ação executada: Dash Smart Bidding atualizada automaticamente.',
-        'Campos aplicados: STATUS=Broadcast + RESTRICTED_UNTIL=data da DTR.',
-        'Validação: readback SB OK antes deste alerta.',
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+        'AÇÃO EXECUTADA NA SMART BIDDING',
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+        'Status das páginas: Broadcast',
+        'Restricted Until: data extraída do último Completed da DTR',
+        'Validação: readback SB OK antes do alerta',
+        '',
         f"XLSX: {summary.get('xlsx')}",
         f"Log: {summary.get('log')}",
     ]
