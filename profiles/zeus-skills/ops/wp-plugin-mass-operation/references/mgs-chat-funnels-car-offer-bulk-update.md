@@ -81,6 +81,10 @@ raw_json=<updated config>
 
 5. Validate the save response contains `JSON salvo com sucesso` or equivalent success notice.
 
+## Related mode conversion
+
+If Rodolfo wants the final offers to appear as 3 cards together, or says the reference has no “Mensagens da oferta” block, this is no longer a copy/URL-only update. Use `references/mgs-chat-funnels-car-cards-rollout.md` instead. That path changes plugin renderer/admin behavior and switches `mode` to `cards`.
+
 ## Public validation checklist
 
 For every domain, fetch:
