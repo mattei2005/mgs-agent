@@ -239,9 +239,10 @@ Usar quando:
 
 - a intenção é dar sensação de escolha rápida;
 - as ofertas são equivalentes;
-- o usuário deve comparar opções.
+- o usuário deve comparar opções;
+- Rodolfo apontar uma referência onde as respostas do chat **não ramificam** e todas convergem para o mesmo bloco final.
 
-Exemplo validado: `fincfrog.com/chat/emp/br2`.
+Exemplos validados: `fincfrog.com/chat/emp/br2` e referência CAR-BR tipo `fmybc.com/chat/car/br/`.
 
 ```text
 “Encontrei 3 ofertas exclusivas para você!”
@@ -249,6 +250,8 @@ Exemplo validado: `fincfrog.com/chat/emp/br2`.
 [Card C6 Bank]
 [Card Banco BV]
 ```
+
+Para CAR-BR no padrão de cards de veículo, o card deve ter campos humanos: imagem do carro, nome do carro, texto abaixo do nome, texto verde abaixo e URL final. Não usar “Mensagens da oferta” nem fluxo Oferta 1 → recusa → Oferta 2 quando a referência for convergente. Ver `references/car-br-card-offer-convergent-flow.md`.
 
 ### Modo `sequential`
 
@@ -459,6 +462,7 @@ Depois de implementar:
 - `references/config-schema.md` — schema sugerido para plugin/config.
 - `references/wp-plugin-scaffold-mvp.md` — padrão MVP validado para plugin WordPress `MGS Chat Funnels`, incluindo estrutura, validações e pitfalls de rota standalone + contrato do wrapper JBF/Ciro.
 - `references/wp-plugin-human-admin-ui.md` — padrão de admin humano para gestor de tráfego: criar, duplicar, excluir, editar campos e ofertas por blocos/repeaters, sem exigir JSON ou pipes.
+- `references/car-br-card-offer-convergent-flow.md` — padrão CAR-BR convergente inspirado em `fmybc`: perguntas sem ramificação real, resposta vira balão do usuário, e bloco final mostra 3 cards de veículos com `image/name/subtitle/bank/url`.
 - `templates/chat-funnel-config.json` — template inicial para novo chat.
 - `templates/chat-funnel-config.json` — template inicial para novo chat.
 
