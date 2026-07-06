@@ -228,6 +228,61 @@ final class MGS_Chat_Funnels {
         return $questions;
     }
 
+    private function active_gate_questions($config) {
+        $gate = isset($config['gate']) && is_array($config['gate']) ? $config['gate'] : array();
+        $raw_questions = isset($gate['questions']) && is_array($gate['questions']) ? array_values($gate['questions']) : array();
+        if (empty($raw_questions)) {
+            $raw_questions[] = array(
+                'text' => '🚗 Você já tem um carro?',
+                'answers' => array(array('label' => 'Sim', 'value' => 'sim'), array('label' => 'Não', 'value' => 'nao')),
+            );
+        }
+        $active = array();
+        foreach ($raw_questions as $index => $question) {
+            if (!is_array($question)) {
+                continue;
+            }
+            if ($index > 0 && isset($question['enabled']) && !$question['enabled']) {
+                continue;
+            }
+            $text = (string) ($question['text'] ?? ($question['question'] ?? ''));
+            $answers = isset($question['answers']) && is_array($question['answers']) ? array_values($question['answers']) : array();
+            if ($text === '' || empty($answers)) {
+                continue;
+            }
+            $active[] = array('text' => $text, 'answers' => $answers);
+        }
+        if (empty($active) && !empty($raw_questions[0]) && is_array($raw_questions[0])) {
+            $active[] = $raw_questions[0];
+        }
+        return $active;
+    }
+
+    private function gate_question_count($config) {
+        return max(1, count($this->active_gate_questions($config)));
+    }
+
+    private function render_gate_slides_html($config) {
+        $questions = $this->active_gate_questions($config);
+        $html = '';
+        foreach ($questions as $index => $question) {
+            $display = $index === 0 ? 'flex' : 'none';
+            $html .= '<div class="aq-slide" data-step="' . esc_attr((string) $index) . '" style="display:' . esc_attr($display) . '; flex-direction:column; align-items:center;">';
+            $html .= '<p class="question" style="font-size:22px; margin-bottom:25px; text-align:center; color:#333; font-weight:500;">' . esc_html((string) ($question['text'] ?? '')) . '</p>';
+            $html .= '<div style="display:flex; flex-direction:column; gap:12px; width:100%;">';
+            foreach ((array) ($question['answers'] ?? array()) as $answer) {
+                $label = is_array($answer) ? (string) ($answer['label'] ?? '') : (string) $answer;
+                $value = is_array($answer) ? (string) ($answer['value'] ?? $label) : $label;
+                if ($label === '') {
+                    continue;
+                }
+                $html .= '<button class="aq-answer" data-value="' . esc_attr($value) . '" style="padding:14px 20px; border:none; border-radius:12px; font-size:15px; cursor:pointer; background:#075e54; color:white; font-family:\'Roboto\',Arial,sans-serif; transition:all 0.3s ease;">' . esc_html($label) . '</button>';
+            }
+            $html .= '</div></div>';
+        }
+        return $html;
+    }
+
     private function offer_urls_from_config($config) {
         $offers = isset($config['offers']) && is_array($config['offers']) ? array_values($config['offers']) : array();
         $urls = array();
@@ -534,9 +589,17 @@ final class MGS_Chat_Funnels {
         $config['persona']['role'] = sanitize_text_field(wp_unslash($_POST['persona_role'] ?? 'Consultor'));
         $config['persona']['status'] = sanitize_text_field(wp_unslash($_POST['persona_status'] ?? '🟢 online agora'));
 
+        $gate_questions = $this->parse_questions(wp_unslash($_POST['gate_questions'] ?? ''));
+        if (!empty($gate_questions[0])) {
+            $gate_questions[0]['enabled'] = true;
+        }
+        if (isset($gate_questions[1])) {
+            $gate_questions[1]['enabled'] = !empty($_POST['gate_question_2_enabled']);
+        }
+
         $config['gate'] = array(
             'enabled' => !empty($_POST['gate_enabled']),
-            'questions' => $this->parse_questions(wp_unslash($_POST['gate_questions'] ?? '')),
+            'questions' => $gate_questions,
             'loading_text' => sanitize_text_field(wp_unslash($_POST['gate_loading_text'] ?? '')),
             'loading_ms' => max(200, intval($_POST['gate_loading_ms'] ?? 1800)),
             'final_icon' => sanitize_text_field(wp_unslash($_POST['gate_final_icon'] ?? '💬')),
