@@ -566,6 +566,60 @@
             keepChatPinnedToBottom(1500);
           }, 1000);
         }
+
+        if (questionData.offers) {
+          const offersContainer = document.createElement("div");
+          offersContainer.classList.add("offers-container");
+
+          questionData.offers.forEach((offer) => {
+            const card = document.createElement("a");
+            card.href = mergeSourceParams(offer.url || offer.target || "#");
+            card.classList.add("offer-card");
+
+            if (offer.image) {
+              const img = document.createElement("img");
+              img.src = offer.image;
+              img.alt = offer.name || "";
+              img.classList.add("offer-card-img");
+              card.appendChild(img);
+            }
+
+            const info = document.createElement("div");
+            info.classList.add("offer-card-info");
+
+            const title = document.createElement("p");
+            title.classList.add("offer-card-title");
+            title.textContent = offer.name || "Oferta";
+
+            const subtitle = document.createElement("p");
+            subtitle.classList.add("offer-card-subtitle");
+            subtitle.textContent = offer.subtitle || "Ver oferta";
+
+            const bank = document.createElement("p");
+            bank.classList.add("offer-card-bank");
+            bank.textContent = offer.bank || "";
+
+            info.appendChild(title);
+            info.appendChild(subtitle);
+            if (offer.bank) info.appendChild(bank);
+
+            const arrow = document.createElement("span");
+            arrow.classList.add("offer-card-arrow");
+            arrow.textContent = "→";
+
+            card.appendChild(info);
+            card.appendChild(arrow);
+            offersContainer.appendChild(card);
+          });
+
+          chatBox.appendChild(offersContainer);
+
+          setTimeout(() => {
+            offersContainer.style.opacity = 1;
+            scrollChatToBottom();
+            keepChatPinnedToBottom(1500);
+          }, 1000);
+        }
       }
 
       function showAd() {
