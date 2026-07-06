@@ -81,12 +81,21 @@ async def fetch_rows(ctx,h):
     rc=await ctx.request.get(API+'/company', headers=h, timeout=120000)
     if rc.status!=200:
         raise RuntimeError(f'/company status {rc.status}: {(await rc.text())[:300]}')
-    companies=await rc.json(); pubs=[]
+    companies=await rc.json(); pubs=[]; company_counts=[]
     for c in companies:
+        cname_raw=c.get('name') or c.get('companyId') or c.get('id') or c.get('slug') or ''
+        cname=str(cname_raw).strip().lower().replace(' ', '-')
+        if cname not in ('digital-trust','digital-trust-2'):
+            continue
+        cps=[]; active=0
         for pub in c.get('publishers') or []:
             pid=pub.get('publisherId')
-            if pub.get('active') and pid:
-                pubs.append(pid)
+            if pid:
+                pubs.append(pid); cps.append(pid)
+                if pub.get('active'): active += 1
+        company_counts.append({'company':cname,'publishers_all':len(cps),'publishers_active':active})
+    if len(pubs) < 56:
+        raise RuntimeError(f'incomplete SB PAGE scope: publishers={len(pubs)} company_counts={company_counts}; expected full digital-trust + digital-trust-2 child scope')
     qs='&'.join('companies[]='+urllib.parse.quote(x) for x in pubs)+'&source=Messenger'
     r=await ctx.request.get(API+'/campaigns/Messenger?'+qs, headers=h, timeout=120000)
     if r.status!=200:
@@ -94,6 +103,8 @@ async def fetch_rows(ctx,h):
     rows=await r.json()
     if not isinstance(rows,list):
         raise RuntimeError('campaign rows not list')
+    if len(rows) < 3230:
+        raise RuntimeError(f'incomplete SB PAGE rows: rows={len(rows)} publishers={len(pubs)}; expected full MGS baseline around 3237')
     return pubs, rows
 
 def row_public(r):
