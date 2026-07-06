@@ -634,10 +634,14 @@ final class MGS_Chat_Funnels {
 
         echo '<section class="mgs-cf-section"><h3>2. Monetização e rastreamento</h3><div class="mgs-cf-fields mgs-cf-fields-compact">';
         $this->field_text('Company do wrapper', 'ad_company', $config['ad_company'] ?? 'digital-trust', 'Ex: digital-trust. Usado apenas para montar a URL do wrapper.');
-        $this->field_text('Domain do wrapper', 'ad_domain', $config['ad_domain'] ?? '', 'Ex: openzed. Se ficar vazio, usa o domínio atual do site.');
+        $ad_domain_value = $this->clean_ad_slug($config['ad_domain'] ?? '', '');
+        if ($ad_domain_value === '') {
+            $ad_domain_value = $this->current_site_ad_slug();
+        }
+        $this->field_text('Domain do wrapper', 'ad_domain', $ad_domain_value, 'Ex: openzed. Já vem preenchido com a slug do domínio atual.');
         $wrapper_preview = $this->ad_wrapper_url(array_merge($config, array(
             'ad_company' => $config['ad_company'] ?? 'digital-trust',
-            'ad_domain' => $config['ad_domain'] ?? '',
+            'ad_domain' => $ad_domain_value,
         )));
         echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>Wrapper carregado:</strong><br><code>' . esc_html($wrapper_preview ?: 'Preencha o domain para gerar a URL do wrapper.') . '</code><br><small>O plugin não configura auctions, rewarded ou interstitial. Isso fica 100% com o wrapper.</small></div>';
         $this->field_checkbox('Preservar UTMs nos links finais', 'utm_passthrough', !empty($config['utm_passthrough']), 'Mantém utm_source, utm_campaign, gclid, etc.');
