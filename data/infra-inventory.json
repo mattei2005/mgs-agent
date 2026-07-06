@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-06T05:00:01-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-06T18:07:13.594329+00:00",
+    "generated_by": "zeus manual infra update"
   },
   "system_packages": [
     {
@@ -484,30 +484,38 @@
       "type": "wordpress_plugin",
       "name": "mgs-chat-funnels",
       "path": "/root/mgs-agent/plugins/mgs-chat-funnels/",
-      "version": "0.1.0",
-      "status": "deployed_active_openzed",
-      "files_count": 6,
-      "size_bytes": 37410,
-      "sha256_manifest": "f1d5a9dff527c147d8e99a01a041ec6d61f90e26e3210d26864b8d99f9af0290",
-      "package_path": "/tmp/mgs-chat-funnels.zip",
-      "package_sha256": "b20fdabbceb25152a637dbda61b4e41673ce471315aeb1453b563779c36b842d",
-      "modified_at": "2026-06-25T18:03:02.052109+00:00",
+      "version": "0.3.9",
+      "status": "deployed_active_cards_rollout",
+      "files_count": 7,
+      "size_bytes": 123966,
+      "sha256_manifest": "a498445b0637999e3be34f0da13bdb88ce23de4dca280795b5a34fadc9402de8",
+      "package_path": "/tmp/mgs-chat-funnels-cards.zip",
+      "package_sha256": "97b8c4b06320294b518df517309932273644996c3df043eae6a2cc92b04eb361",
+      "modified_at": "2026-07-06T18:07:13.594329+00:00",
       "validations": [
-        "WP admin upload+replace successful",
-        "REST plugin active 200",
-        "openzed /chat/emp/br1 HTTP 200 + browser gate/chat OK",
-        "openzed /chat/car/br1 HTTP 200 + plugin HTML OK",
-        "UTM passthrough validated in browser",
-        "PHP lint remote OK"
+        "local PHP lint OK",
+        "RunCloud remote PHP lint OK",
+        "RunCloud remote JSON validation OK",
+        "WP Admin upload+replace OK on openzed/cliquet",
+        "public cachebuster validation OK on 8 sites",
+        "browser validation OK on Eggbev canary"
       ],
       "deployed_to": [
-        "https://openzed.com/"
+        "https://zuout.com/",
+        "https://zytiva.com/",
+        "https://openzed.com/",
+        "https://finance.topfeed.fun/",
+        "https://newsoun.com/",
+        "https://wantabrand.com/",
+        "https://cliquet.com/",
+        "https://eggbev.com/"
       ],
       "active_plugin": "mgs-chat-funnels/mgs-chat-funnels",
       "public_routes": [
-        "https://openzed.com/chat/emp/br1",
-        "https://openzed.com/chat/car/br1"
-      ]
+        "/chat/car/br1"
+      ],
+      "source_report": "REPORT-INFRA Zeus CAR-BR card rollout 2026-07-06",
+      "description": "MGS Chat Funnels CAR-BR renderer/config updated from sequential offers to card offers: image, car name, subtitle, green text, final URL."
     },
     {
       "id": "hermes-mgs-runtime-customizations-2026-06-26",
