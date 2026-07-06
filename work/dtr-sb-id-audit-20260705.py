@@ -121,18 +121,30 @@ async def get_sb():
     h={k:v for k,v in headers.items() if k.lower() in {'authorization','accept','content-type'}}
     h.update({'origin':'https://app.smartbiddingdigital.com','referer':'https://app.smartbiddingdigital.com/'})
     rc=await ctx.request.get('https://api.jbfdigital.com.br/company', headers=h, timeout=120000)
-    companies=await rc.json(); pubs=[]
+    if rc.status != 200:
+        raise RuntimeError(f'SB /company bad response {rc.status}: {(await rc.text())[:300]}')
+    companies=await rc.json(); pubs=[]; company_counts=[]
     for c in companies:
-        if c.get('name') not in ('digital-trust','digital-trust-2') and c.get('id') not in ('digital-trust','digital-trust-2'):
-            pass
+        cname_raw=c.get('name') or c.get('companyId') or c.get('id') or c.get('slug') or ''
+        cname=str(cname_raw).strip().lower().replace(' ', '-')
+        if cname not in ('digital-trust','digital-trust-2'):
+            continue
+        cps=[]; active=0
         for pub in c.get('publishers') or []:
-            if pub.get('active') and pub.get('publisherId'):
-                pubs.append(pub['publisherId'])
+            pid=pub.get('publisherId')
+            if pid:
+                pubs.append(pid); cps.append(pid)
+                if pub.get('active'): active += 1
+        company_counts.append({'company':cname,'publishers_all':len(cps),'publishers_active':active})
+    if len(pubs) < 56:
+        raise RuntimeError(f'SB scope incomplete for PAGE ID audit: publishers={len(pubs)} company_counts={company_counts}; expected digital-trust + digital-trust-2 full child scope')
     qs='&'.join('companies[]='+urllib.parse.quote(x) for x in pubs)+'&source=Messenger'
     r=await ctx.request.get('https://api.jbfdigital.com.br/campaigns/Messenger?'+qs, headers=h, timeout=120000)
     rows=await r.json()
     await browser.close(); await p.stop()
     if r.status!=200 or not isinstance(rows,list): raise RuntimeError(f'SB bad response {r.status}')
+    if len(rows) < 3230:
+        raise RuntimeError(f'SB scope incomplete for PAGE ID audit: rows={len(rows)} publishers={len(pubs)}; expected full MGS Messenger Page baseline around 3237')
     return pubs, rows
 
 def sb_public(r):
