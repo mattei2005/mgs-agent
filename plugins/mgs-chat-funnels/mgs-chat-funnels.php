@@ -531,12 +531,22 @@ final class MGS_Chat_Funnels {
             'footer_note' => sanitize_text_field(wp_unslash($_POST['gate_footer_note'] ?? '')),
         );
 
+        $pre_offer_messages = $this->parse_lines(wp_unslash($_POST['chat_pre_offer_messages'] ?? ''));
+        $offer_headline = sanitize_textarea_field(wp_unslash($_POST['chat_offer_headline'] ?? ''));
+        if (isset($_POST['chat_offer_search_message']) || isset($_POST['chat_offer_found_message']) || isset($_POST['chat_offer_instruction_message'])) {
+            $search_message = sanitize_text_field(wp_unslash($_POST['chat_offer_search_message'] ?? ''));
+            $found_message = sanitize_text_field(wp_unslash($_POST['chat_offer_found_message'] ?? ''));
+            $instruction_message = sanitize_text_field(wp_unslash($_POST['chat_offer_instruction_message'] ?? ''));
+            $pre_offer_messages = $search_message !== '' ? array($search_message) : array();
+            $offer_headline = implode(' | ', array_values(array_filter(array($found_message, $instruction_message), function($v) { return $v !== ''; })));
+        }
+
         $config['chat'] = array(
             'intro' => $this->parse_lines(wp_unslash($_POST['chat_intro'] ?? '')),
             'start_answers' => $this->parse_lines(wp_unslash($_POST['chat_start_answers'] ?? '')),
             'questions' => $this->parse_questions(wp_unslash($_POST['chat_questions'] ?? '')),
-            'pre_offer_messages' => $this->parse_lines(wp_unslash($_POST['chat_pre_offer_messages'] ?? '')),
-            'offer_headline' => sanitize_textarea_field(wp_unslash($_POST['chat_offer_headline'] ?? '')),
+            'pre_offer_messages' => $pre_offer_messages,
+            'offer_headline' => $offer_headline,
         );
 
         $config['offers'] = $this->parse_offer_fields($_POST, $config['mode']);
