@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-06T18:27:06.583656+00:00",
+    "updated_at": "2026-07-06T18:35:50.722518+00:00",
     "generated_by": "zeus manual infra update"
   },
   "system_packages": [
@@ -485,20 +485,21 @@
       "name": "mgs-chat-funnels",
       "path": "/root/mgs-agent/plugins/mgs-chat-funnels/",
       "version": "0.3.9",
-      "status": "deployed_active_cards_quiz_click_fix",
+      "status": "deployed_active_cards_ad_domain_prefill",
       "files_count": 7,
-      "size_bytes": 126307,
-      "sha256_manifest": "dabf4648bdf0950770ad609136fdd276c565ae7297a7b281d165111b6f8f45fa",
+      "size_bytes": 126685,
+      "sha256_manifest": "0e98570672fce1c108fefd4537669c5684f4c24d9bf989103c4595005640fa98",
       "package_path": "/tmp/mgs-chat-funnels-cards.zip",
-      "package_sha256": "11382e829647721c629482f8938d728a9fa7b6234d31eb2196b1f6796b877a4f",
-      "modified_at": "2026-07-06T18:27:06.583656+00:00",
+      "package_sha256": "c768b596eedc61117d275aaac7d8095a5f334218eaab6edef243e72911c64537",
+      "modified_at": "2026-07-06T18:35:50.722518+00:00",
       "validations": [
         "local PHP lint OK",
         "RunCloud remote PHP lint OK",
         "RunCloud remote JSON validation OK",
         "WP Admin upload+replace OK on openzed/cliquet",
-        "public fix-marker validation OK on 8 sites",
-        "browser click validation OK on 8 sites: step1 flex, final block, quiz closed none"
+        "public wrapper slug validation OK on 8 sites",
+        "RunCloud config ad_domain validation OK",
+        "WP Admin field value validation OK on openzed/cliquet"
       ],
       "deployed_to": [
         "https://zuout.com/",
@@ -514,8 +515,8 @@
       "public_routes": [
         "/chat/car/br1"
       ],
-      "source_report": "REPORT-INFRA Zeus CAR-BR quiz click fix 2026-07-06",
-      "description": "CAR-BR quiz/gate click handler hardened: rapid second-step clicks no longer get dropped; CTA closes via rewarded callback or deterministic fallback."
+      "source_report": "REPORT-INFRA Zeus MGS Chat Funnels ad_domain prefill 2026-07-06",
+      "description": "Domain do wrapper is prefilled/saved with current site slug; CAR-BR configs deployed with explicit ad_domain per site."
     },
     {
       "id": "hermes-mgs-runtime-customizations-2026-06-26",
