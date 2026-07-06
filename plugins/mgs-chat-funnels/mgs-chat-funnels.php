@@ -806,8 +806,12 @@ final class MGS_Chat_Funnels {
         echo '<div class="' . esc_attr($classes) . '"' . $style . '>';
         echo '<div class="mgs-cf-offer-head"><strong class="mgs-cf-offer-number">Oferta ' . esc_html($number) . '</strong><button type="button" class="button-link-delete mgs-cf-remove-offer">Remover oferta</button></div>';
         echo '<div class="mgs-cf-fields">';
-        echo '<label><span>Nome da oferta</span><input type="text" name="offer_name[]" value="' . esc_attr($offer['name'] ?? '') . '" placeholder="Banco BV, Nubank, Santander..."><small>Nome que aparece no card ou na fala do consultor.</small></label>';
-        echo '<label><span>URL de destino</span><input type="text" name="offer_target[]" value="' . esc_attr($offer['target'] ?? '') . '" placeholder="https://..."><small>Link final. UTMs são adicionadas automaticamente.</small></label>';
+        echo '<label><span>Nome da oferta</span><input type="text" name="offer_name[]" value="' . esc_attr($offer['name'] ?? '') . '" placeholder="Volkswagen Polo, T-Cross, HB20..."><small>Nome que aparece no card ou na fala do consultor.</small></label>';
+        if ($mode !== 'sequential') {
+            echo '<label><span>URL final</span><input type="text" name="offer_target[]" value="' . esc_attr($offer['target'] ?? ($offer['url'] ?? '')) . '" placeholder="https://..."><small>Link final. UTMs são adicionadas automaticamente.</small></label>';
+        } else {
+            echo '<label><span>URL de destino</span><input type="text" name="offer_target[]" value="' . esc_attr($offer['target'] ?? '') . '" placeholder="https://..."><small>Link final. UTMs são adicionadas automaticamente.</small></label>';
+        }
         if ($mode === 'sequential') {
             echo '<label><span>Botão aceitar</span><input type="text" name="offer_accept[]" value="' . esc_attr($offer['accept_label'] ?? 'Sim, quero conhecer →') . '"><small>CTA principal desta oferta.</small></label>';
             echo '<label><span>Botão recusar / próxima oferta</span><input type="text" name="offer_reject[]" value="' . esc_attr($offer['reject_label'] ?? '') . '" placeholder="Não, mostre outra opção"><small>Deixe vazio na última oferta.</small></label>';
