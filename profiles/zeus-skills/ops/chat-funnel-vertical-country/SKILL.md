@@ -167,6 +167,8 @@ P1/oferta com UTMs preservadas
 
 Objetivo: aquecer o usuário e preparar inventário de anúncio antes do chat principal.
 
+Para produção em plugin/admin, o gate precisa ser configurável por campo humano. Padrão validado com Rodolfo: pergunta 1 é obrigatória e não pode ser removida/ocultada; perguntas seguintes podem ter toggle de exibir/ocultar no admin. O template público deve renderizar slides do gate dinamicamente a partir da config ativa e usar contagem dinâmica (`gateQuestionCount`), nunca assumir que sempre existem exatamente 2 perguntas. Ver `references/car-br-gate-admin-and-wrapper-domain.md`.
+
 Boas perguntas por vertical:
 
 ```text
@@ -343,6 +345,8 @@ Não remover nem sobrescrever UTMs sem motivo explícito.
 
 Quando Rodolfo trouxer um `index.html` do Ciro/JBF como referência, trate o wrapper como dono da implementação de anúncios. Não crie camada própria no plugin para ads.
 
+No admin, o campo `Domain do wrapper` deve vir pré-preenchido com a slug do site atual quando estiver vazio (ex.: `zuout.com` → `zuout`) e deve ser persistido no save humano. Em rollout multi-site, grave `ad_domain` explicitamente por domínio para evitar preview/confusão no painel. Ver `references/car-br-gate-admin-and-wrapper-domain.md`.
+
 Contrato mínimo do HTML público:
 
 ```html
@@ -445,7 +449,8 @@ Durante implementação:
 
 Depois de implementar:
 
-- [ ] Testar caminho principal completo com clique real: gate passo 1 → gate passo 2 → CTA final → chat principal → cards/oferta. HTTP 200 e presença de HTML não bastam.
+- [ ] Testar caminho principal completo com clique real: gate passo 1 → gate passo 2 quando habilitado → CTA final → chat principal → cards/oferta. HTTP 200 e presença de HTML não bastam.
+- [ ] Se o gate tiver pergunta opcional, testar também o caminho com ela desabilitada: pergunta 1 → loading/final CTA → chat.
 - [ ] Testar cada CTA final.
 - [ ] Testar com UTMs na URL.
 - [ ] Testar mobile viewport.
@@ -463,7 +468,7 @@ Depois de implementar:
 - `references/wp-plugin-scaffold-mvp.md` — padrão MVP validado para plugin WordPress `MGS Chat Funnels`, incluindo estrutura, validações e pitfalls de rota standalone + contrato do wrapper JBF/Ciro.
 - `references/wp-plugin-human-admin-ui.md` — padrão de admin humano para gestor de tráfego: criar, duplicar, excluir, editar campos e ofertas por blocos/repeaters, sem exigir JSON ou pipes.
 - `references/car-br-card-offer-convergent-flow.md` — padrão CAR-BR convergente inspirado em `fmybc`: perguntas sem ramificação real, resposta vira balão do usuário, e bloco final mostra 3 cards de veículos com `image/name/subtitle/bank/url`.
-- `templates/chat-funnel-config.json` — template inicial para novo chat.
+- `references/car-br-gate-admin-and-wrapper-domain.md` — lições do rollout CAR-BR: pergunta 1 obrigatória + pergunta 2 com toggle, renderização dinâmica do gate, prefill/persistência de `ad_domain` por slug do site e QA de clique real.
 - `templates/chat-funnel-config.json` — template inicial para novo chat.
 
 ## Pitfalls
@@ -478,6 +483,8 @@ Depois de implementar:
 8. **Admin de WordPress não pode parecer ferramenta de dev.** Rodolfo rejeitou editor principal em JSON e textarea de ofertas com `|`. Para produção, criar interface de gestor de tráfego: campos humanos, botões de criar/duplicar/excluir, URL do chat visível, relatório/inventário, e ofertas como blocos/repeaters com campos separados. JSON bruto só em avançado/debug.
 9. **Falas pré-card também são produto editável.** Em CAR-BR convergente, Rodolfo espera ver a linha de busca antes das ofertas e poder editar as 3 frases pré-card no admin. Não deixe essas frases hardcoded ou só no JSON bruto; e não crie uma etapa sem botões que impeça o avanço para os cards.
 10. **Gate/quiz precisa tolerar clique rápido e wrapper silencioso.** No template Ciro/JBF, não deixe `quizStepLock` descartar o clique do segundo passo depois de desabilitar os botões; se usar lock, aplique antes de desabilitar e libere após a transição. O CTA final não pode depender só do callback do rewarded: sempre incluir fallback determinístico para fechar o modal e liberar o chat.
+11. **Gate não deve ficar hardcoded no HTML.** Se Rodolfo quer escolher quais perguntas aparecem, renderize slides do gate a partir da config e use contagem dinâmica. Pergunta 1 é obrigatória; pergunta 2+ pode ser toggled no admin.
+12. **Domain do wrapper vazio confunde operação.** Mesmo que o renderer consiga inferir pelo host, o admin deve mostrar e salvar a slug do site (`zuout`, `openzed`, etc.) para Rodolfo ver o wrapper correto sem editar JSON.
 
 ## Resposta padrão quando Rodolfo pedir um chat novo
 
