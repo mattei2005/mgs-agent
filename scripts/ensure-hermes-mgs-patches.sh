@@ -111,7 +111,7 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 # This applies the complete MGS runtime customization surface to a clean
 # upstream checkout first; legacy per-feature patches below then act as
 # invariant checks/backward-compatible fallback.
-apply_patch_if_needed "mgs-runtime-customizations-2026-07-04.patch"
+apply_patch_if_needed "mgs-runtime-customizations-2026-07-05.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-06-30.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-06-26.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-06-20.patch"
