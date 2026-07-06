@@ -166,15 +166,6 @@ final class MGS_Chat_Funnels {
         }
 
         if ($mode === 'cards') {
-            if (!empty($chat['pre_offer_messages']) && is_array($chat['pre_offer_messages'])) {
-                foreach ($chat['pre_offer_messages'] as $message) {
-                    $message = trim((string) $message);
-                    if ($message !== '') {
-                        $questions[] = array('question' => $message);
-                    }
-                }
-            }
-
             $card_offers = array();
             foreach ($offers as $offer) {
                 if (!is_array($offer)) {
@@ -189,8 +180,25 @@ final class MGS_Chat_Funnels {
                 );
             }
 
+            $offer_messages = array();
+            if (!empty($chat['pre_offer_messages']) && is_array($chat['pre_offer_messages'])) {
+                foreach ($chat['pre_offer_messages'] as $message) {
+                    $message = trim((string) $message);
+                    if ($message !== '') {
+                        $offer_messages[] = $message;
+                    }
+                }
+            }
+            $headline = (string) ($chat['offer_headline'] ?? '🚗 Encontrei 3 ofertas exclusivas para você! | Toque na que mais te interessa para ver as condições:');
+            foreach (explode('|', $headline) as $message) {
+                $message = trim((string) $message);
+                if ($message !== '') {
+                    $offer_messages[] = $message;
+                }
+            }
+
             $questions[] = array(
-                'question' => (string) ($chat['offer_headline'] ?? '🚗 Encontrei 3 ofertas exclusivas para você! | Toque na que mais te interessa para ver as condições:'),
+                'question' => implode(' | ', $offer_messages),
                 'offers' => $card_offers,
             );
             $questions[] = array('question' => '');
