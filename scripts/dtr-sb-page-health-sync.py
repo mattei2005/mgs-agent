@@ -38,6 +38,7 @@ STATE_PATH=BASE_DIR/'data/dtr-sb-page-health-sync-state.json'
 TARGET_CHANNEL_ID='1522442220903337984'
 
 MONTHS_EN={'january':1,'february':2,'march':3,'april':4,'may':5,'june':6,'july':7,'august':8,'september':9,'october':10,'november':11,'december':12}
+MONTHS_PT={'janeiro':1,'fevereiro':2,'março':3,'marco':3,'abril':4,'maio':5,'junho':6,'julho':7,'agosto':8,'setembro':9,'outubro':10,'novembro':11,'dezembro':12}
 
 
 def norm(v): return '' if v is None else str(v).strip()
@@ -152,6 +153,11 @@ def parse_restricted_date(text, year=None):
         if mon:
             if ap=='PM' and hh!=12: hh+=12
             if ap=='AM' and hh==12: hh=0
+            return f'{y:04d}-{mon:02d}-{day:02d}', f'{y:04d}-{mon:02d}-{day:02d} {hh:02d}:{mm:02d}'
+    m=re.search(r'at[eé]\s+(\d{1,2})\s+de\s+([A-Za-záéíóúãõç]+)\s+às\s+(\d{1,2}):(\d{2})', t, re.I)
+    if m:
+        day=int(m.group(1)); mon=MONTHS_PT.get(m.group(2).lower()); hh=int(m.group(3)); mm=int(m.group(4))
+        if mon:
             return f'{y:04d}-{mon:02d}-{day:02d}', f'{y:04d}-{mon:02d}-{day:02d} {hh:02d}:{mm:02d}'
     return None, None
 
