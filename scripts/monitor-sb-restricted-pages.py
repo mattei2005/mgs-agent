@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """Monitor SmartBidding Messenger Page rows with active Restricted Until.
 
-Posts to a dedicated Discord channel only when restricted pages are added/resolved.
+By default this is an SB state monitor only: it must not announce "new restricted
+pages" as confirmed restricted pages because that requires a live DigitalTRChat
+scan of active bot users from the migration sheet. Use --allow-sb-only-alert only
+for an explicitly labelled SB-only diagnostic.
 Uses the validated SB headed/Xvfb route and live /campaigns/Messenger data.
 """
 
