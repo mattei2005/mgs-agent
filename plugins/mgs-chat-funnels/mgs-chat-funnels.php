@@ -657,8 +657,14 @@ final class MGS_Chat_Funnels {
         $this->field_textarea('Mensagens de abertura', 'chat_intro', implode("\n", $chat['intro'] ?? array()), 'Uma mensagem por linha. Use {botName} para o nome do atendente.');
         $this->field_textarea('Botões iniciais', 'chat_start_answers', implode("\n", $chat['start_answers'] ?? array()), 'Um botão por linha.');
         $this->field_textarea('Perguntas do chat', 'chat_questions', $this->questions_to_text($chat['questions'] ?? array()), "Formato: Pergunta | resposta 1; resposta 2; resposta 3");
-        $this->field_textarea('Mensagens antes das ofertas', 'chat_pre_offer_messages', implode("\n", $chat['pre_offer_messages'] ?? array()), 'Opcional. Uma por linha.');
-        $this->field_textarea('Headline das ofertas', 'chat_offer_headline', $chat['offer_headline'] ?? '', 'Para cards, pode usar | para quebrar em duas mensagens.');
+        $offer_headline_parts = array_map('trim', explode('|', (string) ($chat['offer_headline'] ?? '')));
+        $offer_found_message = $offer_headline_parts[0] ?? '🚗 Encontrei 3 ofertas exclusivas para você!';
+        $offer_instruction_message = $offer_headline_parts[1] ?? 'Toque na que mais te interessa para ver as condições:';
+        $this->field_text('Mensagem de busca antes das ofertas', 'chat_offer_search_message', $chat['pre_offer_messages'][0] ?? '🔍 Estou pesquisando as melhores condições para você...', 'Aparece depois da última resposta e antes dos cards.');
+        $this->field_text('Mensagem “ofertas encontradas”', 'chat_offer_found_message', $offer_found_message, 'Primeira fala acima dos cards.');
+        $this->field_text('Mensagem de instrução dos cards', 'chat_offer_instruction_message', $offer_instruction_message, 'Segunda fala acima dos cards.');
+        echo '<input type="hidden" name="chat_pre_offer_messages" value="' . esc_attr(implode("\n", $chat['pre_offer_messages'] ?? array())) . '">';
+        echo '<input type="hidden" name="chat_offer_headline" value="' . esc_attr($chat['offer_headline'] ?? '') . '">';
         echo '</div></section>';
 
         echo '<section class="mgs-cf-section"><h3>6. Ofertas finais</h3>';
