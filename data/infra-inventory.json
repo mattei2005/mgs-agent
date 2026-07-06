@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-06T18:59:28.434266+00:00",
+    "updated_at": "2026-07-06T19:03:00.267307+00:00",
     "generated_by": "zeus manual infra update"
   },
   "system_packages": [
@@ -485,21 +485,21 @@
       "name": "mgs-chat-funnels",
       "path": "/root/mgs-agent/plugins/mgs-chat-funnels/",
       "version": "0.3.9",
-      "status": "deployed_active_gate_question_toggle",
+      "status": "deployed_active_gate_question_2_disabled",
       "files_count": 7,
-      "size_bytes": 128908,
-      "sha256_manifest": "d866ae5949f2ca278a329fe39791ff00b0715dc93169d232eb4c96786dacd396",
+      "size_bytes": 128909,
+      "sha256_manifest": "0282a39f5b8025f40b408a41d6f27ba2576767250dc6b90ae4ee0df16923fd74",
       "package_path": "/tmp/mgs-chat-funnels-cards.zip",
-      "package_sha256": "57030c6d8418af0e95824c731ba78e0784cbbe1a1075d791bdf7c93c4f27c958",
-      "modified_at": "2026-07-06T18:56:18.802937+00:00",
+      "package_sha256": "c8624b0a649018aca82c82aa28ba84294ae463324234e74e5bb53c5c6cb20113",
+      "modified_at": "2026-07-06T19:03:00.267307+00:00",
       "validations": [
         "local PHP lint OK",
         "RunCloud remote PHP lint OK",
         "RunCloud remote JSON validation OK",
         "WP Admin upload+replace OK on openzed/cliquet",
-        "public gateQuestionCount validation OK on 8 sites",
-        "admin toggle validation OK on openzed/cliquet",
-        "browser click validation OK on eggbev"
+        "public gateQuestionCount=1 validation OK on 8 sites",
+        "admin checkbox unchecked validation OK on openzed/cliquet",
+        "browser flow validation OK on eggbev"
       ],
       "deployed_to": [
         "https://zuout.com/",
@@ -515,8 +515,8 @@
       "public_routes": [
         "/chat/car/br1"
       ],
-      "source_report": "REPORT-INFRA Zeus MGS Chat Funnels gate question toggle 2026-07-06",
-      "description": "Gate editor now has mandatory question 1 plus toggle to show/hide question 2; standalone template renders gate slides dynamically from config."
+      "source_report": "REPORT-INFRA Zeus MGS Chat Funnels gate question 2 disabled 2026-07-06",
+      "description": "CAR-BR gate question 2 disabled on all sites; question 1 remains mandatory."
     },
     {
       "id": "hermes-mgs-runtime-customizations-2026-06-26",
