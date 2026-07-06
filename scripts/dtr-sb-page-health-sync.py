@@ -499,10 +499,12 @@ async def main():
                 if st != 'VALID_FOR_STEP2':
                     summary.setdefault('step1_inventory_notes',[]).append({'user':user,'segurador':a.get('name'),'status':st,'reason':a.get('step1_reason'),'pages':a.get('pages',0)})
             if scan.get('errors'): summary['errors'].append({'user':user,'errors':scan['errors']})
-            unsafe_context = scan.get('context_signatures_unique',0) < max(1, len(scan.get('accounts') or [])) and len(scan.get('accounts') or [])>1
+            sig_counts=Counter(tuple(a.get('signature') or []) for a in (scan.get('accounts') or []) if a.get('signature'))
+            repeated_nonempty_signatures=[list(sig) for sig,count in sig_counts.items() if count>1]
+            unsafe_context = bool(repeated_nonempty_signatures)
             seen_sb_ids_for_user=set()
             if unsafe_context:
-                summary.setdefault('warnings',[]).append({'user':user,'warning':'account_context_signatures_not_unique','unique':scan.get('context_signatures_unique'),'accounts':len(scan.get('accounts') or []),'action':'dedupe_by_unique_sb_row_id'})
+                summary.setdefault('warnings',[]).append({'user':user,'warning':'account_context_repeated_nonempty_signature','repeated_signatures':repeated_nonempty_signatures[:5],'accounts':len(scan.get('accounts') or []),'action':'dedupe_by_unique_sb_row_id'})
                 stats['unsafe_context_users'] += 1
             reports = scan.get('reports') or []
             for rep_idx, rep in enumerate(reports, start=1):
