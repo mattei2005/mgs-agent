@@ -406,7 +406,7 @@ Quando Ciro/JBF corrigir a regra de rewarded para “1 só”, não copie loop l
 
 Para troca em massa de textos/URLs das ofertas CAR-BR já instaladas, sem alterar código do plugin, ver `references/mgs-chat-funnels-car-offer-bulk-update.md`: atualizar `configs/car-br-01.json` por site, usar WP-CLI/arquivo em RunCloud e raw JSON no WP Admin para Bitnami, validar HTTP 200 + textos novos + URLs por domínio + textos antigos ausentes + smoke de UTM.
 
-Para converter o CAR-BR do modelo sequencial para cards estilo Ciro/FMYBC, ver `references/mgs-chat-funnels-car-cards-rollout.md`: respostas são engajamento-only e convergem para o mesmo bloco; card mode usa `image`/`name`/`subtitle`/`bank`/`target`; o renderer precisa tratar `questionData.offers`; canário em Eggbev antes de rollout; validar ausência de CTAs sequenciais e UTM nos cards.
+Para converter o CAR-BR do modelo sequencial para cards estilo Ciro/FMYBC, ver `references/mgs-chat-funnels-car-cards-rollout.md`: respostas são engajamento-only e convergem para o mesmo bloco; card mode usa `image`/`name`/`subtitle`/`bank`/`target`; o renderer precisa tratar `questionData.offers`; canário em Eggbev antes de rollout; validar ausência de CTAs sequenciais, UTM nos cards, clique real do quiz/gate até o chat, linha de busca antes dos cards e `ad_domain`/wrapper slug por site.
 
 ---
 

@@ -25,8 +25,9 @@ For card mode, set:
 ```json
 {
   "mode": "cards",
+  "ad_domain": "zuout",
   "chat": {
-    "pre_offer_messages": [],
+    "pre_offer_messages": ["🔍 Estou pesquisando as melhores condições para você..."],
     "offer_headline": "🚗 Encontrei 3 ofertas exclusivas para você! | Toque na que mais te interessa para ver as condições:"
   },
   "offers": [
@@ -44,6 +45,9 @@ For card mode, set:
 
 Field meaning:
 
+- `ad_domain` — wrapper domain slug for the current site, e.g. `zuout` for `https://zuout.com/`. Do not leave this blank in deployed configs; the admin field should prefill/save the current site slug when empty.
+- `chat.pre_offer_messages[0]` — the missing/search line before card offers, e.g. `🔍 Estou pesquisando as melhores condições para você...`.
+- `chat.offer_headline` — pipe-separated final card intro lines, e.g. `🚗 Encontrei... | Toque...`.
 - `image` / `logo` — image shown on card. Keep `logo` as backward-compatible alias for admin/editor code.
 - `name` — car name.
 - `subtitle` — text below the name.
@@ -69,6 +73,19 @@ The standalone Ciro template must handle `questionData.offers` inside `showNextQ
 
 Also update `ciro_questions_from_config()` so `mode === 'cards'` returns a final question object with `offers`, instead of expanding each offer into sequential message questions.
 
+**Do not render `pre_offer_messages` as a separate question without answers.** If a bot-only search line is inserted as its own question object, the standalone template can stop there because no answer exists to advance the flow. Combine `pre_offer_messages` and `offer_headline` into the same final question string (pipe-separated) on the object that also contains `offers`.
+
+## Quiz/gate clickability requirements
+
+The initial quiz/gate must be validated as real clickable UI, not just by checking source markers. A regression observed on CAR-BR was caused by `quizStepLock` dropping a fast second-step click after disabling the answer buttons; users saw buttons that looked clickable but did not advance.
+
+Harden the template:
+
+- Match clicks with `e.target.closest('.aq-answer')` and `e.target.closest('#aq-cta')`, not only direct `e.target.classList`/`id` checks.
+- Gate answer handler should check/set the lock before disabling buttons and release it after the step transition.
+- CTA should close the quiz via rewarded callback **or** deterministic fallback timer (e.g. 1200ms), so a missing/late ad wrapper callback cannot leave the user stuck.
+- Browser validation must click step 1, click step 2, wait for the final screen, click the CTA, and confirm the modal closes and chat buttons appear.
+
 ## Admin UI requirement
 
 For `mode !== sequential`, the offer editor should use operator-facing labels:
@@ -80,6 +97,14 @@ For `mode !== sequential`, the offer editor should use operator-facing labels:
 - Imagem do carro
 
 Do not show “Mensagens da oferta”, “Botão aceitar”, or “Botão recusar” for card mode.
+
+For the conversation section, expose the three pre-card phrases as separate editable fields instead of forcing the operator to understand pipe syntax:
+
+- Mensagem de busca antes das ofertas → maps to `chat.pre_offer_messages[0]`.
+- Mensagem “ofertas encontradas” → first pipe segment of `chat.offer_headline`.
+- Mensagem de instrução dos cards → second pipe segment of `chat.offer_headline`.
+
+For monetization, `Domain do wrapper` should prefill with the current site slug. If the saved value is empty, derive it from `home_url()` and persist that slug on human save. Examples: `zuout.com → zuout`, `finance.topfeed.fun → finance`. Validate the admin field value after deploy on at least one WP Admin site, not only the public wrapper URL.
 
 ## Rollout sequence
 
@@ -103,11 +128,15 @@ Required checks:
 
 - HTTP 200.
 - `offer-card-bank` present in source.
+- Search line present: `🔍 Estou pesquisando as melhores condições para você...`.
 - All 3 car names present.
 - All 3 domain-specific target URLs present.
+- Wrapper URL uses the site slug: `assets/digital-trust/{slug}/digital-trust_{slug}.builder.js`.
 - Old sequential CTAs absent: `Sim, quero simular`, `Não, mostre outra opção`.
-- Browser smoke: after any final answer, the 3 cards appear together.
+- Browser smoke: click quiz step 1 → step 2 appears; click quiz step 2 → final CTA appears; click CTA → modal closes and chat starts; after any final chat answer, the 3 cards appear together.
 - Browser console: card hrefs preserve UTMs.
+
+Do not report success from source/HTTP checks alone. This class of flow can pass all source checks while a click handler race leaves visible buttons non-advancing for users.
 
 ## Cache pitfall
 
