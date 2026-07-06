@@ -818,8 +818,9 @@ final class MGS_Chat_Funnels {
             echo '<label class="mgs-cf-full"><span>Mensagens da oferta</span><textarea name="offer_messages[]" rows="4" placeholder="Uma mensagem por linha">' . esc_textarea(implode("\n", $offer['messages'] ?? array())) . '</textarea><small>Uma fala por linha. O chat mostra em sequência antes dos botões.</small></label>';
             echo '<input type="hidden" name="offer_subtitle[]" value=""><input type="hidden" name="offer_logo[]" value="">';
         } else {
-            echo '<label><span>Subtítulo / benefício</span><input type="text" name="offer_subtitle[]" value="' . esc_attr($offer['subtitle'] ?? 'Ver oferta') . '" placeholder="Ver oferta, Aprovação rápida..."><small>Linha secundária do card.</small></label>';
-            echo '<label><span>Logo da oferta</span><input type="text" name="offer_logo[]" value="' . esc_attr($offer['logo'] ?? '') . '" placeholder="https://.../logo.png"><small>Opcional. URL da imagem/logo.</small></label>';
+            echo '<label><span>Texto abaixo do nome</span><input type="text" name="offer_subtitle[]" value="' . esc_attr($offer['subtitle'] ?? 'Ver oferta') . '" placeholder="Taxas a partir de 1,29% a.m."><small>Linha chamativa abaixo do nome do carro.</small></label>';
+            echo '<label><span>Texto verde</span><input type="text" name="offer_bank[]" value="' . esc_attr($offer['bank'] ?? '') . '" placeholder="Financie pelo Banco BV"><small>Linha verde abaixo do texto chamativo.</small></label>';
+            echo '<label><span>Imagem do carro</span><input type="text" name="offer_logo[]" value="' . esc_attr($offer['image'] ?? ($offer['logo'] ?? '')) . '" placeholder="https://.../carro.png"><small>URL da imagem exibida no card.</small></label>';
             echo '<input type="hidden" name="offer_accept[]" value=""><input type="hidden" name="offer_reject[]" value=""><input type="hidden" name="offer_messages[]" value="">';
         }
         echo '</div></div>';
