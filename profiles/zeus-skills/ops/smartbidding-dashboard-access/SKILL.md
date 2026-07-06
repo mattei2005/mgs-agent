@@ -20,6 +20,7 @@ metadata:
 - `references/dtr-sb-page-id-reconciliation-2026-07-05.md` — Read-only reconciliation workflow for DigitalTRChat/Bot page cards vs SmartBidding `Accounts > Messenger > Page`: active sheet-user scope, all top-bar seguradores, DTR `PG | FB_PAGE_ID` parsing, match order, and issue categories (`DIVERGENTE`, `NO_SB_MATCH`, `NO_DTR_MATCH`, duplicates).
 - `references/bot-sb-page-id-conference-2026-07-05.md` — Rodolfo-corrected scope for the specific Bot/DTR ↔ SmartBidding PAGE ID registration conference: all DigitalTRChat users in 1Password, no migration-sheet/status filters, compare `USER_LOGIN`, segurador/profile, small `PAGE_ID`, `FB_PAGE_ID`, and page name; execute to completion before conversational report.
 - `references/dtr-sb-page-id-registration-conference-2026-07-05.md` — Full registration conference/correction lesson: all 1Password DTR users, equality for `PAGE_ID`, `FB_PAGE_ID`, `UTM_CAMPAIGN=pg_<PAGE_ID>`, safe same-user auto-corrections only, canary/readback, UI-save API route `POST /campaigns/Messenger`, and manual skips for duplicates/cross-user FB matches.
+- `references/dtr-sb-step1-inventory-gate-implementation-2026-07-05.md` — Implementation lesson for the Rodolfo-approved Step 1 inventory gate: enforce sheet-first scope, `X` precedence, active overrides, duplicate-before-pages, `NO_PAGES` as report-ignore, dedicated Step1 inventory output, and dry-run validation before Step 2 diagnostics/writes.
 
 # Smart Bidding Dashboard Access — MGS
 
