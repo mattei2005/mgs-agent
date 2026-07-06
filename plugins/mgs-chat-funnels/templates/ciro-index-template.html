@@ -727,7 +727,7 @@
 
       function updateQuizProgress() {
         const fill = document.getElementById("quiz-progress-fill");
-        const progress = quizStep === 0 ? 20 : quizStep === 1 ? 60 : 100;
+        const progress = Math.min(100, Math.max(20, Math.round(((quizStep + 1) / Math.max(1, gateQuestionCount + 1)) * 100)));
         if (fill) fill.style.width = progress + "%";
       }
 
@@ -739,7 +739,7 @@
         if (currentSlide) currentSlide.style.display = "none";
         quizStep++;
 
-        if (quizStep <= 1) {
+        if (quizStep < gateQuestionCount) {
           const nextSlide = document.querySelector('.aq-slide[data-step="' + quizStep + '"]');
           if (nextSlide) nextSlide.style.display = "flex";
           updateQuizProgress();
