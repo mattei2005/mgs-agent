@@ -269,31 +269,32 @@ def build_alert_payloads(total_rows: int, active_rows: list[dict], new_rows: lis
     block_count = int(state.get('last_block_count', 0) or 0)
 
     msg1 = f"""```
-🚨 PÁGINAS RESTRITAS — MGS
+REGISTROS SB DE RESTRIÇÃO — MGS
 Atualizado em: {datetime.now(NY).strftime('%Y-%m-%d %H:%M %Z')}
+Fonte: SmartBidding only; DTR/Bot não lido nesta execução
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📊 RESUMO DE PAGINAS - STATUS
+RESUMO DE PAGINAS - STATUS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Total Paginas           {fmt_num(total_rows):>5}
 Sem Restricao           {fmt_num(sem_restricao):>5}
 Campaign                {fmt_num(campaign_count):>5}
-Broadcast (Restricted)  {fmt_num(len(active_rows)):>5}
+Broadcast c/ Restricted {fmt_num(len(active_rows)):>5}
 Ready                   {fmt_num(ready_count):>5}
 Review                  {fmt_num(review_count):>5}
 Incomplete              {fmt_num(incomplete_count):>5}
 On-hold                 {fmt_num(on_hold_count):>5}
 Blocked                 {fmt_num(block_count):>5}
 
-Restritas de Hoje       {fmt_num(len(new_rows)):>5}
+Novos registros SB      {fmt_num(len(new_rows)):>5}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📅 POR DATA DE SAÍDA
+POR DATA DE SAÍDA
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 {chr(10).join(by_date_lines)}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🆕 PÁGINAS RESTRITAS - NOVAS
+NOVOS REGISTROS SB — NÃO CONFIRMADOS PELO BOT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 {compact_new_rows(new_rows)}
 ```"""
@@ -391,6 +392,7 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument('--dry-run', action='store_true', help='Do not save state or post Discord; print summary only.')
     ap.add_argument('--send-initial', action='store_true', help='Send baseline alert on first run. Cron does not use this.')
     ap.add_argument('--force-alert', action='store_true', help='Send current live report regardless of state changes.')
+    ap.add_argument('--allow-sb-only-alert', action='store_true', help='Permit Discord posting of explicitly labelled SB-only diagnostic output. Cron must not use this for the restricted-pages channel.')
     return ap.parse_args()
 
 
