@@ -725,6 +725,10 @@ final class MGS_Chat_Funnels {
         echo '<section class="mgs-cf-section"><h3>4. Gate inicial</h3><div class="mgs-cf-fields">';
         $this->field_checkbox('Gate ativo', 'gate_enabled', !isset($gate['enabled']) || !empty($gate['enabled']), 'Mostra perguntas antes do chat.');
         $this->field_textarea('Perguntas do gate', 'gate_questions', $this->questions_to_text($gate['questions'] ?? array()), "Formato: Pergunta | resposta 1; resposta 2; resposta 3");
+        $gate_questions_editor = isset($gate['questions']) && is_array($gate['questions']) ? array_values($gate['questions']) : array();
+        $gate_question_2_enabled = !isset($gate_questions_editor[1]['enabled']) || !empty($gate_questions_editor[1]['enabled']);
+        echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>Pergunta 1 é obrigatória</strong> e sempre aparece para iniciar o gate. A pergunta 2 pode ser ligada/desligada abaixo.</div>';
+        $this->field_checkbox('Mostrar pergunta 2 do gate', 'gate_question_2_enabled', $gate_question_2_enabled, 'Desmarque para pular a segunda pergunta e ir direto para o loading/oferta encontrada.');
         $this->field_text('Texto de loading', 'gate_loading_text', $gate['loading_text'] ?? '', 'Ex: Buscando a melhor oferta...');
         $this->field_number('Tempo de loading (ms)', 'gate_loading_ms', $gate['loading_ms'] ?? 1800, 'Tempo antes do CTA.');
         $this->field_text('Ícone final', 'gate_final_icon', $gate['final_icon'] ?? '💬', 'Emoji ou texto curto.');
