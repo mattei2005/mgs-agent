@@ -49,7 +49,13 @@ Run Step 2 read-only/dry-run first. Do not apply SB writes until:
 - `X` rows, Rodolfo/Geizian noise, and sheet overrides are filtered before write planning;
 - every planned write has SB readback validation logic.
 
-If the script reports `account_context_signatures_not_unique`, skip writes for that user. This means DTR account switching may be returning repeated/ambiguous context and errors could be attributed to the wrong segurador.
+If the script reports `account_context_signatures_not_unique`, do not automatically skip writes for the whole user. First inspect why:
+
+- repeated empty/no-campaign signatures are expected when pages have no sent campaign yet; they are not unsafe context;
+- only repeated **non-empty** campaign/report signatures across different seguradores/accounts confirm context ambiguity;
+- if repeated non-empty signatures exist, skip writes for the affected user/account set and report the repeated signatures.
+
+This means DTR account switching may be returning repeated/ambiguous context and errors could be attributed to the wrong segurador only when real non-empty report signatures collide.
 
 ## Report interpretation
 
