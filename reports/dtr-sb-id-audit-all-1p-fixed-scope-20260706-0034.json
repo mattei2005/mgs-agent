@@ -17,26 +17,26 @@
     "sb_rows_total": 3237,
     "sb_rows_audited_users": 2541,
     "dtr_pages": 2914,
-    "ok_matches": 2489,
+    "ok_matches": 2514,
     "probable_name_matches_used": 0,
-    "issues_count": 451,
+    "issues_count": 426,
     "duplicates_count": 1,
     "issue_types": {
       "NO_SB_MATCH": 397,
-      "DIVERGENTE": 28,
+      "DIVERGENTE": 3,
       "NO_DTR_MATCH": 26
     },
     "field_breakdown": {
       "missing_in_sb": 397,
       "PAGE_ID": 2,
       "SEGURADOR": 2,
-      "PAGE_NAME": 26,
+      "PAGE_NAME": 1,
       "missing_in_dtr": 26
     }
   },
   "compare": {
     "sb_filtered_rows": 2541,
-    "ok_matches": 2489,
+    "ok_matches": 2514,
     "probable_name_matches_used": 0,
     "issues": [
       {
@@ -2174,93 +2174,6 @@
         }
       },
       {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Camila Hernández",
-          "page_email": "camila@gmail.com",
-          "fb_page_id": "860670273793214",
-          "page_id": "13706",
-          "raw": "Analytics Camila Hernández camila@gmail.com 860670273793214 | 13706",
-          "bot_user": "disparosfinancetopfeed@gmail.com",
-          "account_id": "240",
-          "account_name": "Ichfla"
-        },
-        "sb": {
-          "sb_id": "692da6bf-1afb-4c31-1cc2-824c29f0e7ad",
-          "bot_user": "disparosfinancetopfeed@gmail.com",
-          "profile_name": "Ichfla",
-          "page_name": "Camila Hernández",
-          "page_id": "13706",
-          "fb_page_id": "860670273793214",
-          "status": "Broadcast",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "María Calderón",
-          "page_email": "maria@gmail.com",
-          "fb_page_id": "817580264779251",
-          "page_id": "13766",
-          "raw": "Analytics María Calderón maria@gmail.com 817580264779251 | 13766",
-          "bot_user": "disparosfinancetopfeed@gmail.com",
-          "account_id": "918",
-          "account_name": "Beatriz Thomaz"
-        },
-        "sb": {
-          "sb_id": "693b03ff-d19f-9b3a-7b56-99e927a856f3",
-          "bot_user": "disparosfinancetopfeed@gmail.com",
-          "profile_name": "Beatriz Thomaz",
-          "page_name": "María Calderón",
-          "page_id": "13766",
-          "fb_page_id": "817580264779251",
-          "status": "Ready",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Carla Peña",
-          "page_email": "carla@gmail.com",
-          "fb_page_id": "929119680273818",
-          "page_id": "13761",
-          "raw": "Analytics Carla Peña carla@gmail.com 929119680273818 | 13761",
-          "bot_user": "disparosfinancetopfeed@gmail.com",
-          "account_id": "918",
-          "account_name": "Beatriz Thomaz"
-        },
-        "sb": {
-          "sb_id": "69397fec-c8fa-4797-12dd-d6d076c4c1c4",
-          "bot_user": "disparosfinancetopfeed@gmail.com",
-          "profile_name": "Beatriz Thomaz",
-          "page_name": "Carla Peña",
-          "page_id": "13761",
-          "fb_page_id": "929119680273818",
-          "status": "Broadcast",
-          "restricted_until": "2026-07-22",
-          "domain": "",
-          "company": "digital-trust"
-        }
-      },
-      {
         "type": "NO_SB_MATCH",
         "diffs": [
           "missing_in_sb"
@@ -2754,35 +2667,6 @@
         }
       },
       {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Vanessa Calderón",
-          "page_email": "vanessa@gamil.com",
-          "fb_page_id": "755805844293164",
-          "page_id": "11002",
-          "raw": "Analytics Vanessa Calderón vanessa@gamil.com 755805844293164 | 11002",
-          "bot_user": "disparosinfinitynexx@gmail.com",
-          "account_id": "252",
-          "account_name": "Maria Bari"
-        },
-        "sb": {
-          "sb_id": "69e995fe-cfe1-1dcd-43a7-7f6436d416f1",
-          "bot_user": "disparosinfinitynexx@gmail.com",
-          "profile_name": "Maria Bari",
-          "page_name": "Vanessa Calderón",
-          "page_id": "11002",
-          "fb_page_id": "755805844293164",
-          "status": "Broadcast",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust"
-        }
-      },
-      {
         "type": "NO_SB_MATCH",
         "diffs": [
           "missing_in_sb"
@@ -2865,93 +2749,6 @@
           "bot_user": "disparosinfinitynexx@gmail.com",
           "account_id": "1604",
           "account_name": "Eldha Sully"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Rosa González",
-          "page_email": "rosagoz@gmail.com",
-          "fb_page_id": "1013321678538927",
-          "page_id": "19331",
-          "raw": "Analytics Rosa González rosagoz@gmail.com 1013321678538927 | 19331",
-          "bot_user": "disparosinfinitynexxmxcces@gmail.com",
-          "account_id": "1535",
-          "account_name": "Rebeca Rocha Ferreira"
-        },
-        "sb": {
-          "sb_id": "69d72950-40d9-acc1-606e-329c5d95c349",
-          "bot_user": "disparosinfinitynexxmxcces@gmail.com",
-          "profile_name": "Rebeca Rocha Ferreira",
-          "page_name": "Rosa González",
-          "page_id": "19331",
-          "fb_page_id": "1013321678538927",
-          "status": "On-hold",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Laura Ramírez",
-          "page_email": "lauraram@gmail.com",
-          "fb_page_id": "1012508135287092",
-          "page_id": "19328",
-          "raw": "Analytics Laura Ramírez lauraram@gmail.com 1012508135287092 | 19328",
-          "bot_user": "disparosinfinitynexxmxcces@gmail.com",
-          "account_id": "1535",
-          "account_name": "Rebeca Rocha Ferreira"
-        },
-        "sb": {
-          "sb_id": "69d5d58c-0efe-02e2-3dc8-1f431bd71639",
-          "bot_user": "disparosinfinitynexxmxcces@gmail.com",
-          "profile_name": "Rebeca Rocha Ferreira",
-          "page_name": "Laura Ramírez",
-          "page_id": "19328",
-          "fb_page_id": "1012508135287092",
-          "status": "Broadcast",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Rosa Sánchez",
-          "page_email": "",
-          "fb_page_id": "1097043416820003",
-          "page_id": "19253",
-          "raw": "Analytics Rosa Sánchez 1097043416820003 | 19253",
-          "bot_user": "disparosinfinitynexxmxcces@gmail.com",
-          "account_id": "1535",
-          "account_name": "Rebeca Rocha Ferreira"
-        },
-        "sb": {
-          "sb_id": "69ca8cd4-7108-de88-6acb-59ba96209195",
-          "bot_user": "disparosinfinitynexxmxcces@gmail.com",
-          "profile_name": "Rebeca Rocha Ferreira",
-          "page_name": "Rosa Sánchez",
-          "page_id": "19253",
-          "fb_page_id": "1097043416820003",
-          "status": "Broadcast",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust"
         }
       },
       {
@@ -3958,93 +3755,6 @@
         }
       },
       {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Lorena Aragón",
-          "page_email": "lorena@gmail.com",
-          "fb_page_id": "764857390043112",
-          "page_id": "13720",
-          "raw": "Analytics Lorena Aragón lorena@gmail.com 764857390043112 | 13720",
-          "bot_user": "disparosopenzed@gmail.com",
-          "account_id": "712",
-          "account_name": "Lam Sai"
-        },
-        "sb": {
-          "sb_id": "696850bc-171b-51a4-c97c-0eb4c2710525",
-          "bot_user": "disparosopenzed@gmail.com",
-          "profile_name": "Lam Sai",
-          "page_name": "Lorena Aragón",
-          "page_id": "13720",
-          "fb_page_id": "764857390043112",
-          "status": "Broadcast",
-          "restricted_until": "2026-07-29",
-          "domain": "",
-          "company": "digital-trust-2"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Lucía Arizmendi",
-          "page_email": "lucia@gmail.com",
-          "fb_page_id": "797088743480225",
-          "page_id": "13719",
-          "raw": "Analytics Lucía Arizmendi lucia@gmail.com 797088743480225 | 13719",
-          "bot_user": "disparosopenzed@gmail.com",
-          "account_id": "712",
-          "account_name": "Lam Sai"
-        },
-        "sb": {
-          "sb_id": "695dbe93-181c-747f-6d25-c8a6f4ce12fc",
-          "bot_user": "disparosopenzed@gmail.com",
-          "profile_name": "Lam Sai",
-          "page_name": "Lucía Arizmendi",
-          "page_id": "13719",
-          "fb_page_id": "797088743480225",
-          "status": "Broadcast",
-          "restricted_until": "2026-07-22",
-          "domain": "",
-          "company": "digital-trust-2"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Carmen Martínez",
-          "page_email": "carmenmart@gmail.com",
-          "fb_page_id": "750355238160742",
-          "page_id": "13717",
-          "raw": "Analytics Carmen Martínez carmenmart@gmail.com 750355238160742 | 13717",
-          "bot_user": "disparosopenzed@gmail.com",
-          "account_id": "712",
-          "account_name": "Lam Sai"
-        },
-        "sb": {
-          "sb_id": "695f3954-8f0a-54e6-0932-d96a8172e0aa",
-          "bot_user": "disparosopenzed@gmail.com",
-          "profile_name": "Lam Sai",
-          "page_name": "Carmen Martínez",
-          "page_id": "13717",
-          "fb_page_id": "750355238160742",
-          "status": "Broadcast",
-          "restricted_until": "2026-07-22",
-          "domain": "",
-          "company": "digital-trust-2"
-        }
-      },
-      {
         "type": "NO_SB_MATCH",
         "diffs": [
           "missing_in_sb"
@@ -4059,151 +3769,6 @@
           "bot_user": "disparosopenzed@gmail.com",
           "account_id": "712",
           "account_name": "Lam Sai"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Paula Sánchez",
-          "page_email": "paula@gmail.com",
-          "fb_page_id": "847253041806986",
-          "page_id": "13714",
-          "raw": "Analytics Paula Sánchez paula@gmail.com 847253041806986 | 13714",
-          "bot_user": "disparosopenzed@gmail.com",
-          "account_id": "712",
-          "account_name": "Lam Sai"
-        },
-        "sb": {
-          "sb_id": "69742907-dbc7-224c-f85a-2514dcbd8981",
-          "bot_user": "disparosopenzed@gmail.com",
-          "profile_name": "Lam Sai",
-          "page_name": "Paula Sánchez",
-          "page_id": "13714",
-          "fb_page_id": "847253041806986",
-          "status": "Broadcast",
-          "restricted_until": "2026-07-29",
-          "domain": "",
-          "company": "digital-trust-2"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Sofía Pérez",
-          "page_email": "sofia@gmail.com",
-          "fb_page_id": "881650978359540",
-          "page_id": "13713",
-          "raw": "Analytics Sofía Pérez sofia@gmail.com 881650978359540 | 13713",
-          "bot_user": "disparosopenzed@gmail.com",
-          "account_id": "712",
-          "account_name": "Lam Sai"
-        },
-        "sb": {
-          "sb_id": "6957eb3c-f3ca-f6bd-71b9-061c1818f1f0",
-          "bot_user": "disparosopenzed@gmail.com",
-          "profile_name": "Lam Sai",
-          "page_name": "Sofía Pérez",
-          "page_id": "13713",
-          "fb_page_id": "881650978359540",
-          "status": "Broadcast",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust-2"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Mónica Aguilar",
-          "page_email": "monica@gmail.com",
-          "fb_page_id": "912510701936919",
-          "page_id": "13712",
-          "raw": "Analytics Mónica Aguilar monica@gmail.com 912510701936919 | 13712",
-          "bot_user": "disparosopenzed@gmail.com",
-          "account_id": "712",
-          "account_name": "Lam Sai"
-        },
-        "sb": {
-          "sb_id": "6956fec1-7a97-3a92-3ef5-2398f86e09b6",
-          "bot_user": "disparosopenzed@gmail.com",
-          "profile_name": "Lam Sai",
-          "page_name": "Mónica Aguilar",
-          "page_id": "13712",
-          "fb_page_id": "912510701936919",
-          "status": "Broadcast",
-          "restricted_until": "2026-07-22",
-          "domain": "",
-          "company": "digital-trust-2"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Sara López",
-          "page_email": "saralo@gmail.com",
-          "fb_page_id": "923106987544638",
-          "page_id": "10958",
-          "raw": "Analytics Sara López saralo@gmail.com 923106987544638 | 10958",
-          "bot_user": "disparosopenzed@gmail.com",
-          "account_id": "712",
-          "account_name": "Lam Sai"
-        },
-        "sb": {
-          "sb_id": "6940ba46-9cbd-a883-ebdf-d1f8d346afb6",
-          "bot_user": "disparosopenzed@gmail.com",
-          "profile_name": "Lam Sai",
-          "page_name": "Sara López",
-          "page_id": "10958",
-          "fb_page_id": "923106987544638",
-          "status": "Broadcast",
-          "restricted_until": "2026-07-29",
-          "domain": "",
-          "company": "digital-trust-2"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Sara Ramírez",
-          "page_email": "sararami@gmail.com",
-          "fb_page_id": "994439543760379",
-          "page_id": "22267",
-          "raw": "Analytics Sara Ramírez sararami@gmail.com 994439543760379 | 22267",
-          "bot_user": "disparosopenzedes@gmail.com",
-          "account_id": "1611",
-          "account_name": "Fernanda Peixoto"
-        },
-        "sb": {
-          "sb_id": "6a2c6b7d-0bb4-4bbd-6ced-1f15143db723",
-          "bot_user": "disparosopenzedes@gmail.com",
-          "profile_name": "Fernanda Peixoto",
-          "page_name": "Sara Ramírez",
-          "page_id": "22267",
-          "fb_page_id": "994439543760379",
-          "status": "Broadcast",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust-2"
         }
       },
       {
@@ -4309,35 +3874,6 @@
         }
       },
       {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Lucía Maldonado",
-          "page_email": "luciamald@gmail.com",
-          "fb_page_id": "1033667429834170",
-          "page_id": "22093",
-          "raw": "Analytics Lucía Maldonado luciamald@gmail.com 1033667429834170 | 22093",
-          "bot_user": "disparosopenzedspain@gmail.com",
-          "account_id": "1306",
-          "account_name": "Danilo Santos Lima"
-        },
-        "sb": {
-          "sb_id": "6a343502-ad20-ec97-4249-a7c89639e8e3",
-          "bot_user": "disparosopenzedspain@gmail.com",
-          "profile_name": "Danilo Santos Lima",
-          "page_name": "Lucía Maldonado",
-          "page_id": "22093",
-          "fb_page_id": "1033667429834170",
-          "status": "Broadcast",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust-2"
-        }
-      },
-      {
         "type": "NO_SB_MATCH",
         "diffs": [
           "missing_in_sb"
@@ -4352,122 +3888,6 @@
           "bot_user": "disparosopenzedspain@gmail.com",
           "account_id": "1306",
           "account_name": "Danilo Santos Lima"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Inés Ortiz",
-          "page_email": "inesor@gmail.com",
-          "fb_page_id": "1029519480249085",
-          "page_id": "22067",
-          "raw": "Analytics Inés Ortiz inesor@gmail.com 1029519480249085 | 22067",
-          "bot_user": "disparosopenzedspain@gmail.com",
-          "account_id": "1306",
-          "account_name": "Danilo Santos Lima"
-        },
-        "sb": {
-          "sb_id": "6a2e366f-7435-913f-8e9e-d9b14e8d1cb4",
-          "bot_user": "disparosopenzedspain@gmail.com",
-          "profile_name": "Danilo Santos Lima",
-          "page_name": "Inés Ortiz",
-          "page_id": "22067",
-          "fb_page_id": "1029519480249085",
-          "status": "Broadcast",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust-2"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Valeria González",
-          "page_email": "valeriago@gmail.com",
-          "fb_page_id": "1031129550087925",
-          "page_id": "22038",
-          "raw": "Analytics Valeria González valeriago@gmail.com 1031129550087925 | 22038",
-          "bot_user": "disparosopenzedspain@gmail.com",
-          "account_id": "1306",
-          "account_name": "Danilo Santos Lima"
-        },
-        "sb": {
-          "sb_id": "6a1d91b2-e29f-8821-c573-d30b88faf0c4",
-          "bot_user": "disparosopenzedspain@gmail.com",
-          "profile_name": "Danilo Santos Lima",
-          "page_name": "Valeria González",
-          "page_id": "22038",
-          "fb_page_id": "1031129550087925",
-          "status": "Broadcast",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust-2"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Gabriela López",
-          "page_email": "gabrielal@gmail.com",
-          "fb_page_id": "1097045910150412",
-          "page_id": "22037",
-          "raw": "Analytics Gabriela López gabrielal@gmail.com 1097045910150412 | 22037",
-          "bot_user": "disparosopenzedspain@gmail.com",
-          "account_id": "1306",
-          "account_name": "Danilo Santos Lima"
-        },
-        "sb": {
-          "sb_id": "6a0bc58b-1239-70ba-b147-a9eb1b587a07",
-          "bot_user": "disparosopenzedspain@gmail.com",
-          "profile_name": "Danilo Santos Lima",
-          "page_name": "Gabriela López",
-          "page_id": "22037",
-          "fb_page_id": "1097045910150412",
-          "status": "Broadcast",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust-2"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Lourdes Calderón",
-          "page_email": "louders@gmail.com",
-          "fb_page_id": "985935561264247",
-          "page_id": "19245",
-          "raw": "Analytics Lourdes Calderón louders@gmail.com 985935561264247 | 19245",
-          "bot_user": "disparosopenzedspain@gmail.com",
-          "account_id": "1306",
-          "account_name": "Danilo Santos Lima"
-        },
-        "sb": {
-          "sb_id": "699c5cf6-da9d-88b1-db94-2e80222ffaa2",
-          "bot_user": "disparosopenzedspain@gmail.com",
-          "profile_name": "Danilo Santos Lima",
-          "page_name": "Lourdes Calderón",
-          "page_id": "19245",
-          "fb_page_id": "985935561264247",
-          "status": "Broadcast",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust-2"
         }
       },
       {
@@ -5168,35 +4588,6 @@
         }
       },
       {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Gaëlle Gaillard",
-          "page_email": "",
-          "fb_page_id": "548276585033687",
-          "page_id": "3489",
-          "raw": "Analytics Gaëlle Gaillard 548276585033687 | 3489",
-          "bot_user": "disparosspe@gmail.com",
-          "account_id": "72",
-          "account_name": "ISrael Saucedo"
-        },
-        "sb": {
-          "sb_id": "67834a5b-6136-7add-eb73-d0b52584a782",
-          "bot_user": "disparosspe@gmail.com",
-          "profile_name": "ISrael Saucedo",
-          "page_name": "Chloe King",
-          "page_id": "3489",
-          "fb_page_id": "548276585033687",
-          "status": "On-hold",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust"
-        }
-      },
-      {
         "type": "NO_SB_MATCH",
         "diffs": [
           "missing_in_sb"
@@ -5211,35 +4602,6 @@
           "bot_user": "disparosspe@gmail.com",
           "account_id": "72",
           "account_name": "ISrael Saucedo"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Florence Wood",
-          "page_email": "",
-          "fb_page_id": "467227233147066",
-          "page_id": "3251",
-          "raw": "Analytics Florence Wood 467227233147066 | 3251",
-          "bot_user": "disparosspe@gmail.com",
-          "account_id": "72",
-          "account_name": "ISrael Saucedo"
-        },
-        "sb": {
-          "sb_id": "67515c69-3dcc-ab50-6aad-940515dd70b8",
-          "bot_user": "disparosspe@gmail.com",
-          "profile_name": "ISrael Saucedo",
-          "page_name": "Calla Flores",
-          "page_id": "3251",
-          "fb_page_id": "467227233147066",
-          "status": "Broadcast",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust"
         }
       },
       {
@@ -7431,35 +6793,6 @@
         }
       },
       {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Lourdes Guzmán",
-          "page_email": "lourdes@gmail.com",
-          "fb_page_id": "695114080360956",
-          "page_id": "13791",
-          "raw": "Analytics Lourdes Guzmán lourdes@gmail.com 695114080360956 | 13791",
-          "bot_user": "disparoszytiva@gmail.com",
-          "account_id": "715",
-          "account_name": "Gia Huy"
-        },
-        "sb": {
-          "sb_id": "695dd0d5-9da5-92a9-5daa-1dce3cb10177",
-          "bot_user": "disparoszytiva@gmail.com",
-          "profile_name": "Gia Huy",
-          "page_name": "Lourdes Guzmán",
-          "page_id": "13791",
-          "fb_page_id": "695114080360956",
-          "status": "Broadcast",
-          "restricted_until": "2026-07-22",
-          "domain": "",
-          "company": "digital-trust"
-        }
-      },
-      {
         "type": "NO_SB_MATCH",
         "diffs": [
           "missing_in_sb"
@@ -7474,64 +6807,6 @@
           "bot_user": "disparoszytiva@gmail.com",
           "account_id": "715",
           "account_name": "Gia Huy"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Paula Ramírez",
-          "page_email": "paula@gmail.com",
-          "fb_page_id": "845969291933618",
-          "page_id": "13789",
-          "raw": "Analytics Paula Ramírez paula@gmail.com 845969291933618 | 13789",
-          "bot_user": "disparoszytiva@gmail.com",
-          "account_id": "715",
-          "account_name": "Gia Huy"
-        },
-        "sb": {
-          "sb_id": "694049a8-c553-f1d5-31ae-da70a6c73604",
-          "bot_user": "disparoszytiva@gmail.com",
-          "profile_name": "Gia Huy",
-          "page_name": "Paula Ramírez",
-          "page_id": "13789",
-          "fb_page_id": "845969291933618",
-          "status": "Broadcast",
-          "restricted_until": "2026-07-22",
-          "domain": "",
-          "company": "digital-trust"
-        }
-      },
-      {
-        "type": "DIVERGENTE",
-        "diffs": [
-          "PAGE_NAME"
-        ],
-        "match_basis": "user+PAGE_ID",
-        "dtr": {
-          "page_name": "Mónica Maldonado",
-          "page_email": "monica@gmail.com",
-          "fb_page_id": "854110251119876",
-          "page_id": "13971",
-          "raw": "Analytics Mónica Maldonado monica@gmail.com 854110251119876 | 13971",
-          "bot_user": "disparoszytivaes@gmail.com",
-          "account_id": "1551",
-          "account_name": "Isidoro Cristina Barbosa Martins"
-        },
-        "sb": {
-          "sb_id": "69d5dbaa-b2ab-158a-185e-6b093cacfd17",
-          "bot_user": "disparoszytivaes@gmail.com",
-          "profile_name": "Isidoro Cristina Barbosa Martins",
-          "page_name": "Mónica Maldonado",
-          "page_id": "13971",
-          "fb_page_id": "854110251119876",
-          "status": "Campaign",
-          "restricted_until": "",
-          "domain": "",
-          "company": "digital-trust"
         }
       },
       {
