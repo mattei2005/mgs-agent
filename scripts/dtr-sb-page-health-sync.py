@@ -156,7 +156,7 @@ def classify_report(raw):
     if not codes:
         if re.search(r'\bSent\b|Enviado|Delivered|Entregado', t, re.I):
             return {'status':'SENT','codes':[], 'note_code':'', 'restricted_until':None, 'restricted_until_time':None, 'raw':t[:1200]}
-        return {'status':'SEM_COMPLETED' if not t else 'OTHER', 'codes':([] if not t else ['OTHER']), 'note_code':('SEM_COMPLETED' if not t else 'OTHER'), 'restricted_until':None, 'restricted_until_time':None, 'raw':t[:1200]}
+        return {'status':'NO_CAMPAIGN_DATA_YET' if not t else 'OTHER', 'codes':([] if not t else ['OTHER']), 'note_code':('' if not t else 'OTHER'), 'restricted_until':None, 'restricted_until_time':None, 'raw':t[:1200]}
     return {'status':'ERROR','codes':codes,'note_code':' - '.join(codes),'restricted_until':ru,'restricted_until_time':rut,'raw':t[:1200]}
 
 def campaign_form(csrf, page_id, length=10):
@@ -248,7 +248,7 @@ async def scan_dtr_user(username, item, step1_scope, limit_accounts=0, limit_pag
                             if cid: crow=r; break
                         if not cid:
                             acc['no_completed']+=1
-                            cls={'status':'SEM_COMPLETED','codes':[],'note_code':'SEM_COMPLETED','restricted_until':None,'restricted_until_time':None,'raw':''}
+                            cls={'status':'NO_CAMPAIGN_DATA_YET','codes':[],'note_code':'','restricted_until':None,'restricted_until_time':None,'raw':''}
                             out['reports'].append({'bot_user':username,'account_id':aid,'account_name':aname,'dtr_page_id':page_id,'page_name':page_name,'fb_page_id':'','campaign_id':'','completed_date':'','classification':cls})
                             continue
                         acc['latest_completed']+=1; sig.append(cid)
@@ -499,7 +499,7 @@ async def main():
                 cls=rep['classification']; note=cls.get('note_code') or ''
                 status=cls.get('status') or ''; codes=cls.get('codes') or []
                 if status=='SENT': stats['sent']+=1
-                elif status=='SEM_COMPLETED': stats['sem_completed']+=1
+                elif status in {'SEM_COMPLETED','NO_CAMPAIGN_DATA_YET'}: stats['no_campaign_data_yet']+=1
                 else: stats['error_pages']+=1
                 for c in codes or ([note] if note else []): stats[f'code_{c}']+=1
                 sb, merr=match_sb(rep,indexes)
@@ -510,7 +510,7 @@ async def main():
                     if unsafe_context and norm(sb.get('ID')) in seen_sb_ids_for_user:
                         stats['unsafe_context_duplicate_sb_row_skipped'] += 1
                         obs.append('unsafe_context_duplicate_sb_row_skipped')
-                        report_rows.append({'link da pagina':('https://facebook.com/'+(norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID')))) if (norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID'))) else '', 'nome da pagina':rep.get('page_name'), 'segurador':rep.get('account_name'), 'bot user':rep.get('bot_user'), 'data':rep.get('completed_date'), 'codigo dos erros':note or 'Sent', 'sb status antes':norm(sb.get('STATUS')), 'sb restricted antes':date_only(sb.get('RESTRICTED_UNTIL')), 'acao':'', 'readback ok':'skipped', 'observacao':'; '.join(obs)})
+                        report_rows.append({'link da pagina':('https://facebook.com/'+(norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID')))) if (norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID'))) else '', 'nome da pagina':rep.get('page_name'), 'segurador':rep.get('account_name'), 'bot user':rep.get('bot_user'), 'data':rep.get('completed_date'), 'codigo dos erros':note or ('Sem campanha enviada' if status in {'SEM_COMPLETED','NO_CAMPAIGN_DATA_YET'} else 'Sent'), 'sb status antes':norm(sb.get('STATUS')), 'sb restricted antes':date_only(sb.get('RESTRICTED_UNTIL')), 'acao':'', 'readback ok':'skipped', 'observacao':'; '.join(obs)})
                         continue
                     if unsafe_context:
                         seen_sb_ids_for_user.add(norm(sb.get('ID')))
@@ -525,7 +525,7 @@ async def main():
                         if sb_status == 'Blocked':
                             obs.append('blocked_notes_skipped_pending_diagnosis')
                             stats['blocked_notes_skipped'] += 1
-                        elif status == 'SEM_COMPLETED' and active_restricted(sb, tday):
+                        elif status in {'SEM_COMPLETED','NO_CAMPAIGN_DATA_YET'} and active_restricted(sb, tday):
                             obs.append('sem_completed_notes_skipped_active_restricted')
                             stats['sem_completed_active_restricted_notes_skipped'] += 1
                         else:
@@ -551,7 +551,7 @@ async def main():
                             state.setdefault('mixed_2022',{})[str(sb.get('ID'))]={'last_seen':now_iso(),'codes':codes,'restricted_until':cls['restricted_until'],'sb':before,'dtr':rep,'needs_post_expiry_review':True}
                     elif is_restricted_start and status=='SENT':
                         payload['RESTRICTED_UNTIL']=None; action.append('clear_restricted_sent')
-                    elif is_restricted_start and status not in {'SEM_COMPLETED'} and not has_2022:
+                    elif is_restricted_start and status not in {'SEM_COMPLETED','NO_CAMPAIGN_DATA_YET'} and not has_2022:
                         payload['RESTRICTED_UNTIL']=None; action.append('clear_restricted_no2022')
                     # Blocked rule: do not restore to Broadcast from public FB URL alone.
                     # A Blocked row may be a dead page OR a fallen segurador/profile
@@ -585,7 +585,7 @@ async def main():
                         else:
                             readback_ok='dry-run'
                         stats['planned_or_done_writes']+=1
-                report_rows.append({'link da pagina':('https://facebook.com/'+(norm(rep.get('fb_page_id')) or (norm(sb.get('FB_PAGE_ID')) if sb else ''))) if (norm(rep.get('fb_page_id')) or (norm(sb.get('FB_PAGE_ID')) if sb else '')) else '', 'nome da pagina':rep.get('page_name'), 'segurador':rep.get('account_name'), 'bot user':rep.get('bot_user'), 'data':rep.get('completed_date'), 'codigo dos erros':note or 'Sent', 'sb status antes':norm(sb.get('STATUS')) if sb else '', 'sb restricted antes':date_only(sb.get('RESTRICTED_UNTIL')) if sb else '', 'acao':', '.join(action), 'readback ok':readback_ok, 'observacao':'; '.join(obs)})
+                report_rows.append({'link da pagina':('https://facebook.com/'+(norm(rep.get('fb_page_id')) or (norm(sb.get('FB_PAGE_ID')) if sb else ''))) if (norm(rep.get('fb_page_id')) or (norm(sb.get('FB_PAGE_ID')) if sb else '')) else '', 'nome da pagina':rep.get('page_name'), 'segurador':rep.get('account_name'), 'bot user':rep.get('bot_user'), 'data':rep.get('completed_date'), 'codigo dos erros':note or ('Sem campanha enviada' if status in {'SEM_COMPLETED','NO_CAMPAIGN_DATA_YET'} else 'Sent'), 'sb status antes':norm(sb.get('STATUS')) if sb else '', 'sb restricted antes':date_only(sb.get('RESTRICTED_UNTIL')) if sb else '', 'acao':', '.join(action), 'readback ok':readback_ok, 'observacao':'; '.join(obs)})
                 if args.apply and args.max_writes and writes>=args.max_writes:
                     break
             if args.apply and args.max_writes and writes>=args.max_writes: break
