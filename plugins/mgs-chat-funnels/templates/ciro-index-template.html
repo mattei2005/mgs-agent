@@ -734,10 +734,6 @@
       let quizStepLock = false;
 
       function nextQuizStep() {
-        if (quizStepLock) return;
-        quizStepLock = true;
-        setTimeout(() => { quizStepLock = false; }, 1000);
-
         const currentSlide = document.querySelector('.aq-slide[data-step="' + quizStep + '"]');
         if (currentSlide) currentSlide.style.display = "none";
         quizStep++;
