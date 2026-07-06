@@ -485,7 +485,14 @@ def build_new_restrictions_alert(rows, summary):
         )
     if len(rows)>20:
         lines.append(f'... +{len(rows)-20} no XLSX/log')
-    lines += ['', f"XLSX: {summary.get('xlsx')}", f"Log: {summary.get('log')}"]
+    lines += [
+        '',
+        'Ação executada: Dash Smart Bidding atualizada automaticamente.',
+        'Campos aplicados: STATUS=Broadcast + RESTRICTED_UNTIL=data da DTR.',
+        'Validação: readback SB OK antes deste alerta.',
+        f"XLSX: {summary.get('xlsx')}",
+        f"Log: {summary.get('log')}",
+    ]
     return '```\n'+'\n'.join(lines)+'\n```'
 
 def write_excel(path, rows, summary, inventory_notes=None):
