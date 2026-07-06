@@ -20,7 +20,10 @@ For this class of audit/correction, Rodolfo expects normal tool/progress visibil
 
 1. Build live DTR inventory by logging into every DigitalTRChat user discovered from 1Password items.
 2. Enumerate all top-bar seguradores/accounts and page cards in DTR.
-3. Fetch live SB `Accounts > Messenger > Page` rows.
+3. Fetch live SB `Accounts > Messenger > Page` rows using the **full child publisher scope** for both companies:
+   - normalize company names like `Digital trust` → `digital-trust` and `Digital trust 2` → `digital-trust-2`;
+   - include every child `publisherId` under both companies, not only `publisher.active == true`;
+   - hard-stop if scope is below the current full baseline (`56` child publishers / about `3,237` Messenger Page rows as of 2026-07-06). A PAGE ID registration audit with only active publishers (e.g. `46` publishers / `3,218` rows) is invalid and must not be reported.
 4. Compare by confirmed keys, preferring same-user matches:
    - same `USER_LOGIN` + `PAGE_ID`;
    - same `USER_LOGIN` + `FB_PAGE_ID`;
