@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-06T02:15:15-04:00",
+    "updated_at": "2026-07-06T02:26:34-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -575,9 +575,9 @@
       "sha256": "6ee66001355761ff9b1455c2feaf70cee906333850eab4586f1b094b393ab1a6",
       "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; current-user tables now render every row and split across Discord-safe messages instead of hiding overflow.",
       "validation": "B011 excluded from Meta /roles path; live run discovers only B001-B010/B005-2 items; errors=0; no B011/B001A state.",
-      "updated_at": "2026-07-06T02:15:15-04:00",
+      "updated_at": "2026-07-06T02:26:34-04:00",
       "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
-      "last_change": "Padroniza alertas app-rate-limit: adiciona PERFIL ID + PÁGINAS em usuários atuais e remove MOTIVO de removidos acumulados B011."
+      "last_change": "Padroniza alertas app-rate-limit; B011 também remove domínio @gmail.com dos BOT EMAIL."
     },
     {
       "id": "hera-fix-car-br-pt-drive-parent-20260702",
@@ -617,11 +617,11 @@
       "cron_job_id": "498fb0d95e10",
       "schedule": "every 10m",
       "validation": "Cache cleaned and force live alert posted to B011 channel 1522830283240505385; targets=19 linked=18 pending=1 alerts_sent=1.",
-      "updated_at": "2026-07-06T02:15:15-04:00",
+      "updated_at": "2026-07-06T02:26:34-04:00",
       "source_report": "REPORT-INFRA Zeus B011 same-plan cron alignment 2026-07-04",
       "id": "zeus-b011-dtr-link-watch-script",
       "agent": "zeus",
-      "last_change": "Padroniza alertas app-rate-limit: adiciona PERFIL ID + PÁGINAS em usuários atuais e remove MOTIVO de removidos acumulados B011."
+      "last_change": "Padroniza alertas app-rate-limit; B011 também remove domínio @gmail.com dos BOT EMAIL."
     },
     {
       "id": "skill-ref-meta-app-roles-b011-sheet-gid-2026-07-04.md-be5bc1",
@@ -656,9 +656,9 @@
       "owner": "Zeus/Ops",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor, renamed from temporary B011 label; validates OAuth connection and syncs X in sheet.",
-      "updated_at": "2026-07-06T02:15:15-04:00",
+      "updated_at": "2026-07-06T02:26:34-04:00",
       "validation": "Manual live run OK: targets=19 linked=18 not_linked_or_error=1 sheet updated=18 alerts_sent=0.",
-      "last_change": "Padroniza alertas app-rate-limit: adiciona PERFIL ID + PÁGINAS em usuários atuais e remove MOTIVO de removidos acumulados B011."
+      "last_change": "Padroniza alertas app-rate-limit; B011 também remove domínio @gmail.com dos BOT EMAIL."
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
@@ -672,8 +672,8 @@
       "cron_job_id": "498fb0d95e10",
       "schedule": "every 2m",
       "validation": "bash -n OK; dry-run targets=19 linked=18 not_linked_or_error=1 total_connected_pages=196; real run alerts_sent=0",
-      "updated_at": "2026-07-06T02:15:15-04:00",
-      "last_change": "Padroniza alertas app-rate-limit: adiciona PERFIL ID + PÁGINAS em usuários atuais e remove MOTIVO de removidos acumulados B011."
+      "updated_at": "2026-07-06T02:26:34-04:00",
+      "last_change": "Padroniza alertas app-rate-limit; B011 também remove domínio @gmail.com dos BOT EMAIL."
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
