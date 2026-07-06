@@ -24,13 +24,23 @@ For this class of audit/correction, Rodolfo expects normal tool/progress visibil
    - normalize company names like `Digital trust` → `digital-trust` and `Digital trust 2` → `digital-trust-2`;
    - include every child `publisherId` under both companies, not only `publisher.active == true`;
    - hard-stop if scope is below the current full baseline (`56` child publishers / about `3,237` Messenger Page rows as of 2026-07-06). A PAGE ID registration audit with only active publishers (e.g. `46` publishers / `3,218` rows) is invalid and must not be reported.
-4. Compare by confirmed keys, preferring same-user matches:
-   - same `USER_LOGIN` + `PAGE_ID`;
-   - same `USER_LOGIN` + `FB_PAGE_ID`;
-   - global `PAGE_ID`, global `FB_PAGE_ID`, and global normalized `PAGE_NAME` must be checked before labeling anything as `NO_SB_MATCH`.
-   - global `PAGE_ID` / `FB_PAGE_ID` are diagnostic only and should not be auto-corrected if the SB `USER_LOGIN` differs.
-   - Normalize page names with Unicode NFC before comparing; decomposed accents can look identical in Sheets but differ byte-for-byte.
-   - Never report “existe no Bot/DTR e não na SB” from same-user matching alone. If a page exists globally in SB under another user/segurador, classify it as `EXISTE_NA_SB_USER_DIFERENTE` or similar, not missing.
+4. Compare by IDs first — **do not use page name or segurador as match criteria**:
+   - DTR large Facebook Page ID ↔ SB `FB_PAGE_ID` is the primary global key.
+   - DTR small PG/PAGE ID ↔ SB `PAGE_ID` is the secondary global key.
+   - DTR bot user ↔ SB `LOGIN` / API `USER_LOGIN` is validated after ID match.
+   - SB `UTM_CAMPAIGN` must equal `pg_<DTR PAGE_ID>`.
+   - DTR segurador/account is only navigation context inside Bot/DTR; SB Pages does not have a required segurador column for this audit, so segurador must never create divergence.
+   - `PAGE_NAME` is human context only. Names can repeat across seguradores/users and can differ by Unicode/accent composition; never use name to classify existence or correctness.
+   - Only classify “existe no Bot/DTR e não na SB” after neither `FB_PAGE_ID` nor `PAGE_ID` exists globally in SB.
+
+   Recommended categories:
+   - `OK_LOGIN_PAGE_ID_FB_UTM`: `LOGIN + PAGE_ID + FB_PAGE_ID + UTM_CAMPAIGN` all match.
+   - `IDS_UTM_OK_LOGIN_DIVERGE_OU_VAZIO`: IDs and UTM match, but SB `LOGIN` differs or is blank.
+   - `FB_PAGE_ID_OK_PAGE_ID_DIVERGE`: same Facebook page found by large ID, but SB PG/PAGE_ID differs.
+   - `PAGE_ID_OK_FB_PAGE_ID_DIVERGE`: same PG/PAGE_ID found, but SB FB_PAGE_ID differs.
+   - `UTM_DIVERGE`: IDs match, but SB `UTM_CAMPAIGN` is not `pg_<PAGE_ID>`.
+   - `NAO_ENCONTRADO_NA_SB_POR_FB_NEM_PG`: neither ID exists in SB.
+   - `NO_DTR_MATCH`: SB row not found in DTR by either `FB_PAGE_ID` or `PAGE_ID`.
 5. For existing SB rows with safe same-user divergence, update only:
    - `PAGE_ID` → DTR PG ID;
    - `FB_PAGE_ID` → DTR FB Page ID if needed;
