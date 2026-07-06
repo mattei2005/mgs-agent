@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-06T18:35:50.722518+00:00",
+    "updated_at": "2026-07-06T18:56:18.802937+00:00",
     "generated_by": "zeus manual infra update"
   },
   "system_packages": [
@@ -485,21 +485,21 @@
       "name": "mgs-chat-funnels",
       "path": "/root/mgs-agent/plugins/mgs-chat-funnels/",
       "version": "0.3.9",
-      "status": "deployed_active_cards_ad_domain_prefill",
+      "status": "deployed_active_gate_question_toggle",
       "files_count": 7,
-      "size_bytes": 126685,
-      "sha256_manifest": "0e98570672fce1c108fefd4537669c5684f4c24d9bf989103c4595005640fa98",
+      "size_bytes": 128908,
+      "sha256_manifest": "d866ae5949f2ca278a329fe39791ff00b0715dc93169d232eb4c96786dacd396",
       "package_path": "/tmp/mgs-chat-funnels-cards.zip",
-      "package_sha256": "c768b596eedc61117d275aaac7d8095a5f334218eaab6edef243e72911c64537",
-      "modified_at": "2026-07-06T18:35:50.722518+00:00",
+      "package_sha256": "57030c6d8418af0e95824c731ba78e0784cbbe1a1075d791bdf7c93c4f27c958",
+      "modified_at": "2026-07-06T18:56:18.802937+00:00",
       "validations": [
         "local PHP lint OK",
         "RunCloud remote PHP lint OK",
         "RunCloud remote JSON validation OK",
         "WP Admin upload+replace OK on openzed/cliquet",
-        "public wrapper slug validation OK on 8 sites",
-        "RunCloud config ad_domain validation OK",
-        "WP Admin field value validation OK on openzed/cliquet"
+        "public gateQuestionCount validation OK on 8 sites",
+        "admin toggle validation OK on openzed/cliquet",
+        "browser click validation OK on eggbev"
       ],
       "deployed_to": [
         "https://zuout.com/",
@@ -515,8 +515,8 @@
       "public_routes": [
         "/chat/car/br1"
       ],
-      "source_report": "REPORT-INFRA Zeus MGS Chat Funnels ad_domain prefill 2026-07-06",
-      "description": "Domain do wrapper is prefilled/saved with current site slug; CAR-BR configs deployed with explicit ad_domain per site."
+      "source_report": "REPORT-INFRA Zeus MGS Chat Funnels gate question toggle 2026-07-06",
+      "description": "Gate editor now has mandatory question 1 plus toggle to show/hide question 2; standalone template renders gate slides dynamically from config."
     },
     {
       "id": "hermes-mgs-runtime-customizations-2026-06-26",
