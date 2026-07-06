@@ -69,6 +69,51 @@ Exemplo estrutural:
 - Não apresentar oferta 1 → recusa → oferta 2 → recusa → oferta 3.
 - Não criar personalização condicional se Rodolfo apontar que a referência converge para o mesmo lugar.
 
+## Gate/quiz click hardening
+
+Problema observado em CAR-BR: alguns sites ficavam travados no segundo passo do gate (`Qual tipo de veículo você quer financiar?`) ou no CTA `TRANSFERIR PARA ESPECIALISTA`. A causa foi uma combinação de race condition e dependência excessiva do wrapper:
+
+- `quizStepLock` ainda ativo quando o usuário clicava rápido no segundo passo; o clique era descartado e os botões já tinham sido desabilitados visualmente.
+- O CTA final dependia do callback de `window.jbftag.showRewardedAds`; quando o wrapper não chamava o callback, o modal não fechava.
+
+Padrão robusto:
+
+```js
+const answerButton = e.target && e.target.closest ? e.target.closest(".aq-answer") : null;
+if (answerButton) {
+  if (quizStepLock) return;
+  quizStepLock = true;
+  const currentSlide = document.querySelector('.aq-slide[data-step="' + quizStep + '"]');
+  if (currentSlide) currentSlide.querySelectorAll(".aq-answer").forEach(btn => btn.style.pointerEvents = "none");
+  setTimeout(function () {
+    nextQuizStep();
+    quizStepLock = false;
+  }, 500);
+}
+
+const ctaButton = e.target && e.target.closest ? e.target.closest("#aq-cta") : null;
+if (ctaButton) {
+  const safeCloseQuiz = function () {
+    if (!quizAlreadyClosed) {
+      quizAlreadyClosed = true;
+      closeQuiz();
+    }
+  };
+  setTimeout(safeCloseQuiz, 1200);
+  try {
+    window.jbftag = window.jbftag || { cmd: [] };
+    window.jbftag.cmd.push(() => {
+      if (window.jbftag.showRewardedAds) window.jbftag.showRewardedAds(safeCloseQuiz);
+      else safeCloseQuiz();
+    });
+  } catch (err) {
+    safeCloseQuiz();
+  }
+}
+```
+
+Validation for this bug must be real click progression, not just HTTP/HTML markers: step 1 button advances to step 2, step 2 button advances to final slide, CTA closes the modal and starts the chat.
+
 ## Validação obrigatória
 
 1. Abrir a rota com cachebuster quando houver Cloudflare/APO:

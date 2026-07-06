@@ -445,7 +445,7 @@ Durante implementação:
 
 Depois de implementar:
 
-- [ ] Testar caminho principal completo.
+- [ ] Testar caminho principal completo com clique real: gate passo 1 → gate passo 2 → CTA final → chat principal → cards/oferta. HTTP 200 e presença de HTML não bastam.
 - [ ] Testar cada CTA final.
 - [ ] Testar com UTMs na URL.
 - [ ] Testar mobile viewport.
@@ -477,6 +477,7 @@ Depois de implementar:
 7. **Não misturar vertical/país no slug.** `EMP-BR` e `EMP-US` podem ter textos, compliance e ofertas diferentes.
 8. **Admin de WordPress não pode parecer ferramenta de dev.** Rodolfo rejeitou editor principal em JSON e textarea de ofertas com `|`. Para produção, criar interface de gestor de tráfego: campos humanos, botões de criar/duplicar/excluir, URL do chat visível, relatório/inventário, e ofertas como blocos/repeaters com campos separados. JSON bruto só em avançado/debug.
 9. **Falas pré-card também são produto editável.** Em CAR-BR convergente, Rodolfo espera ver a linha de busca antes das ofertas e poder editar as 3 frases pré-card no admin. Não deixe essas frases hardcoded ou só no JSON bruto; e não crie uma etapa sem botões que impeça o avanço para os cards.
+10. **Gate/quiz precisa tolerar clique rápido e wrapper silencioso.** No template Ciro/JBF, não deixe `quizStepLock` descartar o clique do segundo passo depois de desabilitar os botões; se usar lock, aplique antes de desabilitar e libere após a transição. O CTA final não pode depender só do callback do rewarded: sempre incluir fallback determinístico para fechar o modal e liberar o chat.
 
 ## Resposta padrão quando Rodolfo pedir um chat novo
 
