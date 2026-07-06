@@ -428,7 +428,7 @@ def save_state(state):
 def write_excel(path, rows, summary, inventory_notes=None):
     if not Workbook: return None
     wb=Workbook(); ws=wb.active; ws.title='Paginas'
-    headers=['link da pagina','nome da pagina','segurador','bot user','data','codigo dos erros','sb status antes','sb restricted antes','acao','readback ok','observacao']
+    headers=['link da pagina','nome da pagina','fb page id','page id','segurador','bot user','data','codigo dos erros','sb status antes','sb restricted antes','acao','readback ok','observacao']
     ws.append(headers)
     for c in ws[1]: c.font=Font(bold=True,color='FFFFFF'); c.fill=PatternFill('solid',fgColor='1F4E78'); c.alignment=Alignment(horizontal='center')
     for r in rows:
@@ -437,7 +437,7 @@ def write_excel(path, rows, summary, inventory_notes=None):
         cell=ws.cell(row=row,column=1)
         if cell.value and str(cell.value).startswith('http'):
             cell.hyperlink=cell.value; cell.style='Hyperlink'
-    for i,w in enumerate([28,24,22,30,18,24,16,18,30,14,35],1): ws.column_dimensions[get_column_letter(i)].width=w
+    for i,w in enumerate([28,24,18,12,22,30,18,24,16,18,30,14,35],1): ws.column_dimensions[get_column_letter(i)].width=w
     ws.freeze_panes='A2'; ws.auto_filter.ref=ws.dimensions
     sw=wb.create_sheet('Resumo'); sw.append(['Campo','Valor'])
     for k,v in summary.items():
@@ -524,7 +524,7 @@ async def main():
                     if unsafe_context and norm(sb.get('ID')) in seen_sb_ids_for_user:
                         stats['unsafe_context_duplicate_sb_row_skipped'] += 1
                         obs.append('unsafe_context_duplicate_sb_row_skipped')
-                        report_rows.append({'link da pagina':('https://facebook.com/'+(norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID')))) if (norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID'))) else '', 'nome da pagina':rep.get('page_name'), 'segurador':rep.get('account_name'), 'bot user':rep.get('bot_user'), 'data':rep.get('completed_date'), 'codigo dos erros':note or ('Sem campanha enviada' if status in {'SEM_COMPLETED','NO_CAMPAIGN_DATA_YET'} else 'Sent'), 'sb status antes':norm(sb.get('STATUS')), 'sb restricted antes':date_only(sb.get('RESTRICTED_UNTIL')), 'acao':'', 'readback ok':'skipped', 'observacao':'; '.join(obs)})
+                        report_rows.append({'link da pagina':('https://facebook.com/'+(norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID')))) if (norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID'))) else '', 'nome da pagina':rep.get('page_name'), 'fb page id':norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID')), 'page id':norm(rep.get('dtr_page_id')) or norm(sb.get('PAGE_ID')), 'segurador':rep.get('account_name'), 'bot user':rep.get('bot_user'), 'data':rep.get('completed_date'), 'codigo dos erros':note or ('Sem campanha enviada' if status in {'SEM_COMPLETED','NO_CAMPAIGN_DATA_YET'} else 'Sent'), 'sb status antes':norm(sb.get('STATUS')), 'sb restricted antes':date_only(sb.get('RESTRICTED_UNTIL')), 'acao':'', 'readback ok':'skipped', 'observacao':'; '.join(obs)})
                         continue
                     if unsafe_context:
                         seen_sb_ids_for_user.add(norm(sb.get('ID')))
@@ -599,7 +599,7 @@ async def main():
                         else:
                             readback_ok='dry-run'
                         stats['planned_or_done_writes']+=1
-                report_rows.append({'link da pagina':('https://facebook.com/'+(norm(rep.get('fb_page_id')) or (norm(sb.get('FB_PAGE_ID')) if sb else ''))) if (norm(rep.get('fb_page_id')) or (norm(sb.get('FB_PAGE_ID')) if sb else '')) else '', 'nome da pagina':rep.get('page_name'), 'segurador':rep.get('account_name'), 'bot user':rep.get('bot_user'), 'data':rep.get('completed_date'), 'codigo dos erros':note or ('Sem campanha enviada' if status in {'SEM_COMPLETED','NO_CAMPAIGN_DATA_YET'} else 'Sent'), 'sb status antes':norm(sb.get('STATUS')) if sb else '', 'sb restricted antes':date_only(sb.get('RESTRICTED_UNTIL')) if sb else '', 'acao':', '.join(action), 'readback ok':readback_ok, 'observacao':'; '.join(obs)})
+                report_rows.append({'link da pagina':('https://facebook.com/'+(norm(rep.get('fb_page_id')) or (norm(sb.get('FB_PAGE_ID')) if sb else ''))) if (norm(rep.get('fb_page_id')) or (norm(sb.get('FB_PAGE_ID')) if sb else '')) else '', 'nome da pagina':rep.get('page_name'), 'fb page id':norm(rep.get('fb_page_id')) or (norm(sb.get('FB_PAGE_ID')) if sb else ''), 'page id':norm(rep.get('dtr_page_id')) or (norm(sb.get('PAGE_ID')) if sb else ''), 'segurador':rep.get('account_name'), 'bot user':rep.get('bot_user'), 'data':rep.get('completed_date'), 'codigo dos erros':note or ('Sem campanha enviada' if status in {'SEM_COMPLETED','NO_CAMPAIGN_DATA_YET'} else 'Sent'), 'sb status antes':norm(sb.get('STATUS')) if sb else '', 'sb restricted antes':date_only(sb.get('RESTRICTED_UNTIL')) if sb else '', 'acao':', '.join(action), 'readback ok':readback_ok, 'observacao':'; '.join(obs)})
                 if args.apply and args.max_writes and writes>=args.max_writes:
                     break
             if args.apply and args.max_writes and writes>=args.max_writes: break
