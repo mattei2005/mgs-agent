@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-06T18:56:18.802937+00:00",
+    "updated_at": "2026-07-06T18:59:15.238424+00:00",
     "generated_by": "zeus manual infra update"
   },
   "system_packages": [
@@ -721,6 +721,91 @@
   ],
   "profile_skill_references": [
     {
+      "id": "zeus-log-monitor-honcho-flapping-debounce-reference",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/honcho-health-monitor-flapping-debounce-2026-06-22.md",
+      "size_bytes": 3281,
+      "modified_at": "2026-06-22T18:35:32-04:00",
+      "sha256": "28bdf255bc24bcf21d1be3cac500a6188dcf0f9e51238e4e6a711cf8476b8c4b",
+      "purpose": "Durable procedure for Honcho monitor flapping/debounce and optional mute.",
+      "validation": "Patched to prefer debounced Discord alerts: first critical fail silent, second consecutive fail alerts.",
+      "updated_at": "2026-06-22T18:36:24-04:00"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
+      "size_bytes": 43538,
+      "modified_at": "2026-07-04T06:40:30-04:00",
+      "sha256": "ca88f65c81f6ce65629ec2d22c983aa6bbbddb9104f897bebda26c04d8a4136d",
+      "owner": "Zeus/Ops",
+      "type": "skill",
+      "description": "Updated for canonical B011 naming and monitor configuration."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
+      "size_bytes": 45844,
+      "modified_at": "2026-07-04T06:55:27-04:00",
+      "sha256": "95f63117439134ae6ccb1d32d162444effce4e9720f4d1d2a6a920ce6a53dcc0",
+      "owner": "Zeus/Ops",
+      "type": "skill",
+      "description": "Updated for canonical B011 naming and monitor configuration."
+    },
+    {
+      "id": "zeus-meta-app-rate-limit-monitor-skill",
+      "agent": "zeus",
+      "type": "skill",
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
+      "size_bytes": 43875,
+      "modified_at": "2026-07-04T06:37:45-04:00",
+      "sha256": "7a04cccae43fb74f7d7757e2abacd0582778bbedc0363ca3423aa729900c3cf6",
+      "purpose": "Procedure for Meta app rate-limit/roles monitoring; current-user tables must show every row and split into multiple Discord-safe messages when needed.",
+      "validation": "bash -n OK; embedded Python compile OK; synthetic 60-row table rendered 60 rows, 3 Discord-safe blocks, no hidden/truncated marker.",
+      "updated_at": "2026-07-04T06:38:34-04:00",
+      "skill": "meta-app-rate-limit-monitor",
+      "md5": "e67190c6524427c58ffabd2f3e652f07",
+      "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
+      "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels."
+    },
+    {
+      "profile": "ares",
+      "skill": "creative-taxonomy-mgs",
+      "type": "skill",
+      "runtime_path": "/root/.hermes/profiles/ares/skills/growth/creative-taxonomy-mgs/SKILL.md",
+      "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/creative-taxonomy-mgs/SKILL.md",
+      "size_bytes": 21272,
+      "modified_at": "2026-06-20T11:50:07-04:00",
+      "sha256": "63381721f9db354ece10fcaa0cb3f8973b8f9afa72b14595b8010cc2b908b250",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-20T11:52:28-04:00",
+      "validation": "runtime/versioned SHA match; synced via sync-souls; secret scan not required for taxonomy text; relevant to Hera/Ares creative taxonomy loop fix"
+    },
+    {
+      "profile": "ares",
+      "skill": "meta-ads-intraday-operations",
+      "type": "skill",
+      "runtime_path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
+      "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
+      "size_bytes": 18415,
+      "modified_at": "2026-06-20T21:26:03-04:00",
+      "sha256": "9e85a0d0789be4293e8127fd318b858c0d406bf233de17260e63150a15f467e2",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-20T21:27:22-04:00",
+      "validation": "runtime/versioned SHA match; HOA header preview OK; linked runner py_compile/hash OK; secret scan OK"
+    },
+    {
+      "profile": "ares",
+      "skill": "paid-acquisition-operations",
+      "type": "skill",
+      "runtime_path": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md",
+      "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/paid-acquisition-operations/SKILL.md",
+      "size_bytes": 25137,
+      "modified_at": "2026-06-20T21:33:23-04:00",
+      "sha256": "75d1c230e8c723b4d39a121c4599a605fde113d2a3318be00929f3f5f85a1075",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-06-20T21:34:18-04:00",
+      "validation": "runtime/versioned SHA match; HOA dedupe behavior documented; linked runner py_compile/dry-run OK; secret scan OK"
+    },
+    {
       "profile": "hera",
       "skill": "creative-brief-handoff",
       "type": "skill",
@@ -834,127 +919,6 @@
       "known_pending": "No new BR/PT generation performed in this thread; operational rule corrected first."
     },
     {
-      "profile": "ares",
-      "skill": "creative-taxonomy-mgs",
-      "type": "skill",
-      "runtime_path": "/root/.hermes/profiles/ares/skills/growth/creative-taxonomy-mgs/SKILL.md",
-      "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/creative-taxonomy-mgs/SKILL.md",
-      "size_bytes": 21272,
-      "modified_at": "2026-06-20T11:50:07-04:00",
-      "sha256": "63381721f9db354ece10fcaa0cb3f8973b8f9afa72b14595b8010cc2b908b250",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-20T11:52:28-04:00",
-      "validation": "runtime/versioned SHA match; synced via sync-souls; secret scan not required for taxonomy text; relevant to Hera/Ares creative taxonomy loop fix"
-    },
-    {
-      "profile": "ares",
-      "skill": "meta-ads-intraday-operations",
-      "type": "skill",
-      "runtime_path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
-      "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-      "size_bytes": 18415,
-      "modified_at": "2026-06-20T21:26:03-04:00",
-      "sha256": "9e85a0d0789be4293e8127fd318b858c0d406bf233de17260e63150a15f467e2",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-20T21:27:22-04:00",
-      "validation": "runtime/versioned SHA match; HOA header preview OK; linked runner py_compile/hash OK; secret scan OK"
-    },
-    {
-      "profile": "ares",
-      "skill": "paid-acquisition-operations",
-      "type": "skill",
-      "runtime_path": "/root/.hermes/profiles/ares/skills/growth/paid-acquisition-operations/SKILL.md",
-      "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/paid-acquisition-operations/SKILL.md",
-      "size_bytes": 25137,
-      "modified_at": "2026-06-20T21:33:23-04:00",
-      "sha256": "75d1c230e8c723b4d39a121c4599a605fde113d2a3318be00929f3f5f85a1075",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-20T21:34:18-04:00",
-      "validation": "runtime/versioned SHA match; HOA dedupe behavior documented; linked runner py_compile/dry-run OK; secret scan OK"
-    },
-    {
-      "id": "zeus-log-monitor-honcho-flapping-debounce-reference",
-      "agent": "zeus",
-      "type": "skill_reference",
-      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/honcho-health-monitor-flapping-debounce-2026-06-22.md",
-      "size_bytes": 3281,
-      "modified_at": "2026-06-22T18:35:32-04:00",
-      "sha256": "28bdf255bc24bcf21d1be3cac500a6188dcf0f9e51238e4e6a711cf8476b8c4b",
-      "purpose": "Durable procedure for Honcho monitor flapping/debounce and optional mute.",
-      "validation": "Patched to prefer debounced Discord alerts: first critical fail silent, second consecutive fail alerts.",
-      "updated_at": "2026-06-22T18:36:24-04:00"
-    },
-    {
-      "id": "zeus-meta-app-rate-limit-monitor-skill",
-      "agent": "zeus",
-      "type": "skill",
-      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "size_bytes": 43875,
-      "modified_at": "2026-07-04T06:37:45-04:00",
-      "sha256": "7a04cccae43fb74f7d7757e2abacd0582778bbedc0363ca3423aa729900c3cf6",
-      "purpose": "Procedure for Meta app rate-limit/roles monitoring; current-user tables must show every row and split into multiple Discord-safe messages when needed.",
-      "validation": "bash -n OK; embedded Python compile OK; synthetic 60-row table rendered 60 rows, 3 Discord-safe blocks, no hidden/truncated marker.",
-      "updated_at": "2026-07-04T06:38:34-04:00",
-      "skill": "meta-app-rate-limit-monitor",
-      "md5": "e67190c6524427c58ffabd2f3e652f07",
-      "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
-      "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels."
-    },
-    {
-      "profile": "zeus",
-      "skill": "smartbidding-dashboard-access",
-      "type": "skill",
-      "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
-      "versioned_path": null,
-      "size_bytes": 55189,
-      "sha256": "c17daae1f2ba7907dc67f55476f6a836b61dd96d053734db2a4d1347201dcc21",
-      "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-05T01:58:19-04:00",
-      "validation": "Skill patched with Rodolfo correction: Blocked rows require dual diagnosis; page may be blocked or segurador/profile access may be down while page remains public.",
-      "reference_update": {
-        "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/digitaltrchat-full-segurador-audit-methodology-2026-07-02.md",
-        "sha256": "6249254fc654d9d4a16f554d35bed04a1ef69c8be512dff58fce0ebf8033a50e",
-        "size_bytes": 4489,
-        "updated_at": "2026-07-03T21:37:59-04:00"
-      }
-    },
-    {
-      "profile": "zeus",
-      "skill": "meta-utility-template-approval",
-      "type": "skill",
-      "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/meta-utility-template-approval/SKILL.md",
-      "versioned_path": null,
-      "size_bytes": 17824,
-      "sha256": "7767f13e500f53035e10191e76727e215f49abee6fac77e1de40c0af41b24a80",
-      "runtime_versioned_sha_match": null,
-      "updated_at": "2026-06-29T01:35:20-04:00",
-      "validation": "manual Zeus update; secret scan negative"
-    },
-    {
-      "profile": "zeus",
-      "skill": "segurador-page-health-monitor",
-      "type": "profile_skill",
-      "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/segurador-page-health-monitor/SKILL.md",
-      "versioned_path": null,
-      "size_bytes": 15332,
-      "sha256": "ae5a5f41bf78045ff8c95b8a24dd9ca3ab6c6197a86260acaa8741d10823a48c",
-      "runtime_versioned_sha_match": null,
-      "updated_at": "2026-06-30T02:33:52-04:00",
-      "validation": "Added AdsPower + Meta Graph Explorer/Access Token Debugger token-collection workflow and 18-permission set."
-    },
-    {
-      "profile": "zeus",
-      "skill": "adspower-segurador-token-collector",
-      "type": "profile_skill",
-      "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/adspower-segurador-token-collector/SKILL.md",
-      "versioned_path": null,
-      "size_bytes": 9561,
-      "sha256": "7a499d143e5ac080584838e2b173d5baf4d87ca330da75f14be289809c69b10c",
-      "runtime_versioned_sha_match": null,
-      "updated_at": "2026-06-30T02:45:27-04:00",
-      "validation": "Added official AdsPower adspower-browser/ads CLI resources and commands for profile automation."
-    },
-    {
       "profile": "hera",
       "skill": "creative-brief-handoff",
       "type": "reference",
@@ -970,35 +934,28 @@
     },
     {
       "profile": "zeus",
-      "skill": "meta-app-rate-limit-monitor",
-      "type": "skill",
-      "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
+      "skill": "adspower-segurador-token-collector",
+      "type": "profile_skill",
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/adspower-segurador-token-collector/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 43875,
-      "sha256": "7a04cccae43fb74f7d7757e2abacd0582778bbedc0363ca3423aa729900c3cf6",
+      "size_bytes": 9561,
+      "sha256": "7a499d143e5ac080584838e2b173d5baf4d87ca330da75f14be289809c69b10c",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-04T06:38:34-04:00",
-      "validation": "bash -n OK; embedded Python compile OK; synthetic 60-row table rendered 60 rows, 3 Discord-safe blocks, no hidden/truncated marker.",
-      "modified_at": "2026-07-04T06:37:45-04:00",
-      "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
-      "agent": "zeus",
-      "purpose": "Procedure for Meta app rate-limit/roles monitoring; current-user tables must show every row and split into multiple Discord-safe messages when needed.",
-      "md5": "e67190c6524427c58ffabd2f3e652f07",
-      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels."
+      "updated_at": "2026-06-30T02:45:27-04:00",
+      "validation": "Added official AdsPower adspower-browser/ads CLI resources and commands for profile automation."
     },
     {
       "profile": "zeus",
-      "skill": "revenue-spend-reporting-pipeline",
-      "type": "profile_skill",
-      "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/revenue-spend-reporting-pipeline/SKILL.md",
-      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/revenue-spend-reporting-pipeline/SKILL.md",
-      "size_bytes": 10673,
-      "sha256": "466194d0a3863964821e316f69cc9e24d198dce08b8fc4eacded2b1ec82ca709",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-07-01T01:04:27-04:00",
-      "validation": "skill frontmatter parsed; runner smoke-tested; canonical 16-29 Jun rules embedded",
-      "source_report": "REPORT-INFRA Zeus revenue-spend reporting skill"
+      "skill": "cloudflare-operations",
+      "type": "skill",
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/cloudflare-operations/SKILL.md",
+      "versioned_path": null,
+      "size_bytes": 7701,
+      "sha256": "a647bdda976a58de045aa389d8b1341633cfe801291df3cb0d1eea23a96639d5",
+      "runtime_versioned_sha_match": null,
+      "updated_at": "2026-07-06T18:59:15.238424+00:00",
+      "validation": "Skill created after successful Cloudflare cache purge via 1Password token; covers purge, zone resolution, confirmation, and audit logging.",
+      "source_report": "REPORT-INFRA Zeus Cloudflare operations skill"
     },
     {
       "profile": "zeus",
@@ -1032,22 +989,78 @@
       "last_commit": "pending"
     },
     {
-      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "size_bytes": 43538,
-      "modified_at": "2026-07-04T06:40:30-04:00",
-      "sha256": "ca88f65c81f6ce65629ec2d22c983aa6bbbddb9104f897bebda26c04d8a4136d",
-      "owner": "Zeus/Ops",
+      "profile": "zeus",
+      "skill": "meta-app-rate-limit-monitor",
       "type": "skill",
-      "description": "Updated for canonical B011 naming and monitor configuration."
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
+      "versioned_path": null,
+      "size_bytes": 43875,
+      "sha256": "7a04cccae43fb74f7d7757e2abacd0582778bbedc0363ca3423aa729900c3cf6",
+      "runtime_versioned_sha_match": null,
+      "updated_at": "2026-07-04T06:38:34-04:00",
+      "validation": "bash -n OK; embedded Python compile OK; synthetic 60-row table rendered 60 rows, 3 Discord-safe blocks, no hidden/truncated marker.",
+      "modified_at": "2026-07-04T06:37:45-04:00",
+      "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
+      "agent": "zeus",
+      "purpose": "Procedure for Meta app rate-limit/roles monitoring; current-user tables must show every row and split into multiple Discord-safe messages when needed.",
+      "md5": "e67190c6524427c58ffabd2f3e652f07",
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
+      "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels."
     },
     {
-      "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
-      "size_bytes": 45844,
-      "modified_at": "2026-07-04T06:55:27-04:00",
-      "sha256": "95f63117439134ae6ccb1d32d162444effce4e9720f4d1d2a6a920ce6a53dcc0",
-      "owner": "Zeus/Ops",
+      "profile": "zeus",
+      "skill": "meta-utility-template-approval",
       "type": "skill",
-      "description": "Updated for canonical B011 naming and monitor configuration."
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/meta-utility-template-approval/SKILL.md",
+      "versioned_path": null,
+      "size_bytes": 17824,
+      "sha256": "7767f13e500f53035e10191e76727e215f49abee6fac77e1de40c0af41b24a80",
+      "runtime_versioned_sha_match": null,
+      "updated_at": "2026-06-29T01:35:20-04:00",
+      "validation": "manual Zeus update; secret scan negative"
+    },
+    {
+      "profile": "zeus",
+      "skill": "revenue-spend-reporting-pipeline",
+      "type": "profile_skill",
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/revenue-spend-reporting-pipeline/SKILL.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/revenue-spend-reporting-pipeline/SKILL.md",
+      "size_bytes": 10673,
+      "sha256": "466194d0a3863964821e316f69cc9e24d198dce08b8fc4eacded2b1ec82ca709",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-07-01T01:04:27-04:00",
+      "validation": "skill frontmatter parsed; runner smoke-tested; canonical 16-29 Jun rules embedded",
+      "source_report": "REPORT-INFRA Zeus revenue-spend reporting skill"
+    },
+    {
+      "profile": "zeus",
+      "skill": "segurador-page-health-monitor",
+      "type": "profile_skill",
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/segurador-page-health-monitor/SKILL.md",
+      "versioned_path": null,
+      "size_bytes": 15332,
+      "sha256": "ae5a5f41bf78045ff8c95b8a24dd9ca3ab6c6197a86260acaa8741d10823a48c",
+      "runtime_versioned_sha_match": null,
+      "updated_at": "2026-06-30T02:33:52-04:00",
+      "validation": "Added AdsPower + Meta Graph Explorer/Access Token Debugger token-collection workflow and 18-permission set."
+    },
+    {
+      "profile": "zeus",
+      "skill": "smartbidding-dashboard-access",
+      "type": "skill",
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
+      "versioned_path": null,
+      "size_bytes": 55189,
+      "sha256": "c17daae1f2ba7907dc67f55476f6a836b61dd96d053734db2a4d1347201dcc21",
+      "runtime_versioned_sha_match": null,
+      "updated_at": "2026-07-05T01:58:19-04:00",
+      "validation": "Skill patched with Rodolfo correction: Blocked rows require dual diagnosis; page may be blocked or segurador/profile access may be down while page remains public.",
+      "reference_update": {
+        "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/digitaltrchat-full-segurador-audit-methodology-2026-07-02.md",
+        "sha256": "6249254fc654d9d4a16f554d35bed04a1ef69c8be512dff58fce0ebf8033a50e",
+        "size_bytes": 4489,
+        "updated_at": "2026-07-03T21:37:59-04:00"
+      }
     }
   ],
   "systemd_services": [
@@ -3523,6 +3536,21 @@
     ],
     "zeus": [
       {
+        "name": "computer-use",
+        "category": "",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/computer-use/SKILL.md"
+      },
+      {
+        "name": "dogfood",
+        "category": "",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/dogfood/SKILL.md"
+      },
+      {
+        "name": "yuanbao",
+        "category": "",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/yuanbao/SKILL.md"
+      },
+      {
         "name": "apple-notes",
         "category": "apple",
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/apple/apple-notes/SKILL.md"
@@ -3548,6 +3576,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/apple/macos-computer-use/SKILL.md"
       },
       {
+        "name": "ai-coding-agents",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/ai-coding-agents/SKILL.md"
+      },
+      {
         "name": "claude-code",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/autonomous-ai-agents/claude-code/SKILL.md"
@@ -3558,9 +3591,24 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/autonomous-ai-agents/codex/SKILL.md"
       },
       {
+        "name": "hermes-agent",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
+      },
+      {
+        "name": "kanban-codex-lane",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/kanban-codex-lane/SKILL.md"
+      },
+      {
         "name": "opencode",
         "category": "autonomous-ai-agents",
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/autonomous-ai-agents/opencode/SKILL.md"
+      },
+      {
+        "name": "openhands",
+        "category": "autonomous-ai-agents",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/openhands/SKILL.md"
       },
       {
         "name": "architecture-diagram",
@@ -3571,6 +3619,11 @@
         "name": "ascii-art",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/ascii-art/SKILL.md"
+      },
+      {
+        "name": "ascii-video",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/ascii-video/SKILL.md"
       },
       {
         "name": "baoyu-article-illustrator",
@@ -3588,259 +3641,14 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/baoyu-infographic/SKILL.md"
       },
       {
-        "name": "claude-design",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/claude-design/SKILL.md"
-      },
-      {
-        "name": "design-md",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/design-md/SKILL.md"
-      },
-      {
-        "name": "excalidraw",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/excalidraw/SKILL.md"
-      },
-      {
-        "name": "popular-web-designs",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/popular-web-designs/SKILL.md"
-      },
-      {
-        "name": "sketch",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/sketch/SKILL.md"
-      },
-      {
-        "name": "songwriting-and-ai-music",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/songwriting-and-ai-music/SKILL.md"
-      },
-      {
-        "name": "kanban-orchestrator",
-        "category": "devops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/devops/kanban-orchestrator/SKILL.md"
-      },
-      {
-        "name": "kanban-worker",
-        "category": "devops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/devops/kanban-worker/SKILL.md"
-      },
-      {
-        "name": "himalaya",
-        "category": "email",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/email/himalaya/SKILL.md"
-      },
-      {
-        "name": "codebase-inspection",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/codebase-inspection/SKILL.md"
-      },
-      {
-        "name": "github-auth",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-auth/SKILL.md"
-      },
-      {
-        "name": "github-code-review",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-code-review/SKILL.md"
-      },
-      {
-        "name": "github-issues",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-issues/SKILL.md"
-      },
-      {
-        "name": "github-pr-workflow",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-pr-workflow/SKILL.md"
-      },
-      {
-        "name": "github-repo-management",
-        "category": "github",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-repo-management/SKILL.md"
-      },
-      {
-        "name": "gif-search",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/media/gif-search/SKILL.md"
-      },
-      {
-        "name": "heartmula",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/media/heartmula/SKILL.md"
-      },
-      {
-        "name": "songsee",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/media/songsee/SKILL.md"
-      },
-      {
-        "name": "youtube-content",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/media/youtube-content/SKILL.md"
-      },
-      {
-        "name": "lm-evaluation-harness",
-        "category": "evaluation",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/evaluation/lm-evaluation-harness/SKILL.md"
-      },
-      {
-        "name": "weights-and-biases",
-        "category": "evaluation",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/evaluation/weights-and-biases/SKILL.md"
-      },
-      {
-        "name": "huggingface-hub",
-        "category": "mlops",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/huggingface-hub/SKILL.md"
-      },
-      {
-        "name": "llama-cpp",
-        "category": "inference",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/inference/llama-cpp/SKILL.md"
-      },
-      {
-        "name": "vllm",
-        "category": "inference",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/inference/vllm/SKILL.md"
-      },
-      {
-        "name": "audiocraft",
-        "category": "models",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/models/audiocraft/SKILL.md"
-      },
-      {
-        "name": "obsidian",
-        "category": "note-taking",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/note-taking/obsidian/SKILL.md"
-      },
-      {
-        "name": "airtable",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/airtable/SKILL.md"
-      },
-      {
-        "name": "google-workspace",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/google-workspace/SKILL.md"
-      },
-      {
-        "name": "nano-pdf",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/nano-pdf/SKILL.md"
-      },
-      {
-        "name": "notion",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/notion/SKILL.md"
-      },
-      {
-        "name": "ocr-and-documents",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/ocr-and-documents/SKILL.md"
-      },
-      {
-        "name": "powerpoint",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/powerpoint/SKILL.md"
-      },
-      {
-        "name": "teams-meeting-pipeline",
-        "category": "productivity",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/teams-meeting-pipeline/SKILL.md"
-      },
-      {
-        "name": "arxiv",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/research/arxiv/SKILL.md"
-      },
-      {
-        "name": "blogwatcher",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/research/blogwatcher/SKILL.md"
-      },
-      {
-        "name": "llm-wiki",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/research/llm-wiki/SKILL.md"
-      },
-      {
-        "name": "polymarket",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/research/polymarket/SKILL.md"
-      },
-      {
-        "name": "node-inspect-debugger",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/node-inspect-debugger/SKILL.md"
-      },
-      {
-        "name": "python-debugpy",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/python-debugpy/SKILL.md"
-      },
-      {
-        "name": "requesting-code-review",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/requesting-code-review/SKILL.md"
-      },
-      {
-        "name": "simplify-code",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/simplify-code/SKILL.md"
-      },
-      {
-        "name": "spike",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/spike/SKILL.md"
-      },
-      {
-        "name": "systematic-debugging",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/systematic-debugging/SKILL.md"
-      },
-      {
-        "name": "test-driven-development",
-        "category": "software-development",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/test-driven-development/SKILL.md"
-      },
-      {
-        "name": "ai-coding-agents",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/ai-coding-agents/SKILL.md"
-      },
-      {
-        "name": "hermes-agent",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/hermes-agent/SKILL.md"
-      },
-      {
-        "name": "kanban-codex-lane",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/kanban-codex-lane/SKILL.md"
-      },
-      {
-        "name": "openhands",
-        "category": "autonomous-ai-agents",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/autonomous-ai-agents/openhands/SKILL.md"
-      },
-      {
-        "name": "computer-use",
-        "category": "",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/computer-use/SKILL.md"
-      },
-      {
-        "name": "ascii-video",
-        "category": "creative",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/creative/ascii-video/SKILL.md"
-      },
-      {
         "name": "baoyu-visual-content",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/baoyu-visual-content/SKILL.md"
+      },
+      {
+        "name": "claude-design",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/claude-design/SKILL.md"
       },
       {
         "name": "comfyui",
@@ -3856,6 +3664,16 @@
         "name": "creative-output-design",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/creative-output-design/SKILL.md"
+      },
+      {
+        "name": "design-md",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/design-md/SKILL.md"
+      },
+      {
+        "name": "excalidraw",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/excalidraw/SKILL.md"
       },
       {
         "name": "humanizer",
@@ -3878,9 +3696,24 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/pixel-art/SKILL.md"
       },
       {
+        "name": "popular-web-designs",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/popular-web-designs/SKILL.md"
+      },
+      {
         "name": "pretext",
         "category": "creative",
         "skill_md": "/root/.hermes/profiles/zeus/skills/creative/pretext/SKILL.md"
+      },
+      {
+        "name": "sketch",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/sketch/SKILL.md"
+      },
+      {
+        "name": "songwriting-and-ai-music",
+        "category": "creative",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/creative/songwriting-and-ai-music/SKILL.md"
       },
       {
         "name": "touchdesigner-mcp",
@@ -3893,6 +3726,16 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/data-science/jupyter-live-kernel/SKILL.md"
       },
       {
+        "name": "kanban-orchestrator",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/devops/kanban-orchestrator/SKILL.md"
+      },
+      {
+        "name": "kanban-worker",
+        "category": "devops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/devops/kanban-worker/SKILL.md"
+      },
+      {
         "name": "kanban-workflows",
         "category": "devops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/devops/kanban-workflows/SKILL.md"
@@ -3903,9 +3746,19 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/devops/webhook-subscriptions/SKILL.md"
       },
       {
-        "name": "dogfood",
-        "category": "",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/dogfood/SKILL.md"
+        "name": "himalaya",
+        "category": "email",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/email/himalaya/SKILL.md"
+      },
+      {
+        "name": "lm-evaluation-harness",
+        "category": "evaluation",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/evaluation/lm-evaluation-harness/SKILL.md"
+      },
+      {
+        "name": "weights-and-biases",
+        "category": "evaluation",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/evaluation/weights-and-biases/SKILL.md"
       },
       {
         "name": "minecraft-modpack-server",
@@ -3918,9 +3771,39 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/gaming/pokemon-player/SKILL.md"
       },
       {
+        "name": "codebase-inspection",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/codebase-inspection/SKILL.md"
+      },
+      {
+        "name": "github-auth",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-auth/SKILL.md"
+      },
+      {
+        "name": "github-code-review",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-code-review/SKILL.md"
+      },
+      {
+        "name": "github-issues",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-issues/SKILL.md"
+      },
+      {
         "name": "github-operations",
         "category": "github",
         "skill_md": "/root/.hermes/profiles/zeus/skills/github/github-operations/SKILL.md"
+      },
+      {
+        "name": "github-pr-workflow",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-pr-workflow/SKILL.md"
+      },
+      {
+        "name": "github-repo-management",
+        "category": "github",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/github/github-repo-management/SKILL.md"
       },
       {
         "name": "adspower-segurador-token-collector",
@@ -3958,24 +3841,9 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/growth/segurador-page-health-monitor/SKILL.md"
       },
       {
-        "name": "native-mcp",
-        "category": "mcp",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/mcp/native-mcp/SKILL.md"
-      },
-      {
-        "name": "ai-music-audio-generation",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/media/ai-music-audio-generation/SKILL.md"
-      },
-      {
-        "name": "media-content-processing",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/media/media-content-processing/SKILL.md"
-      },
-      {
-        "name": "spotify",
-        "category": "media",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/media/spotify/SKILL.md"
+        "name": "llama-cpp",
+        "category": "inference",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/inference/llama-cpp/SKILL.md"
       },
       {
         "name": "obliteratus",
@@ -3988,6 +3856,56 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/inference/outlines/SKILL.md"
       },
       {
+        "name": "vllm",
+        "category": "inference",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/inference/vllm/SKILL.md"
+      },
+      {
+        "name": "native-mcp",
+        "category": "mcp",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/mcp/native-mcp/SKILL.md"
+      },
+      {
+        "name": "ai-music-audio-generation",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/media/ai-music-audio-generation/SKILL.md"
+      },
+      {
+        "name": "gif-search",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/media/gif-search/SKILL.md"
+      },
+      {
+        "name": "heartmula",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/media/heartmula/SKILL.md"
+      },
+      {
+        "name": "media-content-processing",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/media/media-content-processing/SKILL.md"
+      },
+      {
+        "name": "songsee",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/media/songsee/SKILL.md"
+      },
+      {
+        "name": "spotify",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/media/spotify/SKILL.md"
+      },
+      {
+        "name": "youtube-content",
+        "category": "media",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/media/youtube-content/SKILL.md"
+      },
+      {
+        "name": "huggingface-hub",
+        "category": "mlops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/huggingface-hub/SKILL.md"
+      },
+      {
         "name": "llm-inference-serving",
         "category": "mlops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/llm-inference-serving/SKILL.md"
@@ -3998,34 +3916,29 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/mlops-evaluation-and-tracking/SKILL.md"
       },
       {
+        "name": "audiocraft",
+        "category": "models",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/mlops/models/audiocraft/SKILL.md"
+      },
+      {
         "name": "segment-anything",
         "category": "models",
         "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/models/segment-anything/SKILL.md"
       },
       {
-        "name": "dspy",
-        "category": "research",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/research/dspy/SKILL.md"
-      },
-      {
-        "name": "axolotl",
-        "category": "training",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/training/axolotl/SKILL.md"
-      },
-      {
-        "name": "trl-fine-tuning",
-        "category": "training",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/training/trl-fine-tuning/SKILL.md"
-      },
-      {
-        "name": "unsloth",
-        "category": "training",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/training/unsloth/SKILL.md"
+        "name": "obsidian",
+        "category": "note-taking",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/note-taking/obsidian/SKILL.md"
       },
       {
         "name": "chat-funnel-vertical-country",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/chat-funnel-vertical-country/SKILL.md"
+      },
+      {
+        "name": "cloudflare-operations",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/cloudflare-operations/SKILL.md"
       },
       {
         "name": "discord-ops",
@@ -4093,6 +4006,11 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/wp-quiz-lead-funnel/SKILL.md"
       },
       {
+        "name": "airtable",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/airtable/SKILL.md"
+      },
+      {
         "name": "apple-automation",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/apple-automation/SKILL.md"
@@ -4101,6 +4019,11 @@
         "name": "documents-and-presentations",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/documents-and-presentations/SKILL.md"
+      },
+      {
+        "name": "google-workspace",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/google-workspace/SKILL.md"
       },
       {
         "name": "linear",
@@ -4113,6 +4036,21 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/maps/SKILL.md"
       },
       {
+        "name": "nano-pdf",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/nano-pdf/SKILL.md"
+      },
+      {
+        "name": "notion",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/notion/SKILL.md"
+      },
+      {
+        "name": "ocr-and-documents",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/ocr-and-documents/SKILL.md"
+      },
+      {
         "name": "ocr-and-documents",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/ocr-and-documents/SKILL.md"
@@ -4123,14 +4061,49 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/petdex/SKILL.md"
       },
       {
+        "name": "powerpoint",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/powerpoint/SKILL.md"
+      },
+      {
         "name": "productivity-workspace-apis",
         "category": "productivity",
         "skill_md": "/root/.hermes/profiles/zeus/skills/productivity/productivity-workspace-apis/SKILL.md"
       },
       {
+        "name": "teams-meeting-pipeline",
+        "category": "productivity",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/productivity/teams-meeting-pipeline/SKILL.md"
+      },
+      {
         "name": "godmode",
         "category": "red-teaming",
         "skill_md": "/root/.hermes/profiles/zeus/skills/red-teaming/godmode/SKILL.md"
+      },
+      {
+        "name": "arxiv",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/research/arxiv/SKILL.md"
+      },
+      {
+        "name": "blogwatcher",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/research/blogwatcher/SKILL.md"
+      },
+      {
+        "name": "dspy",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/research/dspy/SKILL.md"
+      },
+      {
+        "name": "llm-wiki",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/research/llm-wiki/SKILL.md"
+      },
+      {
+        "name": "polymarket",
+        "category": "research",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/research/polymarket/SKILL.md"
       },
       {
         "name": "research-intelligence-workflows",
@@ -4173,9 +4146,29 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/local-browser-automation/SKILL.md"
       },
       {
+        "name": "node-inspect-debugger",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/node-inspect-debugger/SKILL.md"
+      },
+      {
         "name": "plan",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/plan/SKILL.md"
+      },
+      {
+        "name": "python-debugpy",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/python-debugpy/SKILL.md"
+      },
+      {
+        "name": "requesting-code-review",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/requesting-code-review/SKILL.md"
+      },
+      {
+        "name": "simplify-code",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/simplify-code/SKILL.md"
       },
       {
         "name": "software-development-methods",
@@ -4183,9 +4176,24 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/software-development-methods/SKILL.md"
       },
       {
+        "name": "spike",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/spike/SKILL.md"
+      },
+      {
         "name": "subagent-driven-development",
         "category": "software-development",
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/subagent-driven-development/SKILL.md"
+      },
+      {
+        "name": "systematic-debugging",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/systematic-debugging/SKILL.md"
+      },
+      {
+        "name": "test-driven-development",
+        "category": "software-development",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/.archive/software-development/test-driven-development/SKILL.md"
       },
       {
         "name": "writing-plans",
@@ -4193,9 +4201,19 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/software-development/writing-plans/SKILL.md"
       },
       {
-        "name": "yuanbao",
-        "category": "",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/yuanbao/SKILL.md"
+        "name": "axolotl",
+        "category": "training",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/training/axolotl/SKILL.md"
+      },
+      {
+        "name": "trl-fine-tuning",
+        "category": "training",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/training/trl-fine-tuning/SKILL.md"
+      },
+      {
+        "name": "unsloth",
+        "category": "training",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/mlops/training/unsloth/SKILL.md"
       }
     ]
   },
