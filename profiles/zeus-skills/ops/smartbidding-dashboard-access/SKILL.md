@@ -278,6 +278,8 @@ Payload: {"RESTRICTED_UNTIL":"YYYY-MM-DD", "ids":["<SB row ID>"]}
 
 Always validate by re-reading `/campaigns/Messenger` and checking the exact page row: `PAGE_NAME`, `PAGE_ID`, `FB_PAGE_ID`, `USER_LOGIN`, `STATUS == Broadcast`, and `RESTRICTED_UNTIL == target date`.
 
+For `PAGE_ID` / `UTM_CAMPAIGN` registration corrections, do **not** rely on `PUT /campaigns/Messenger/update-many`: it can return HTTP 200 while ignoring those fields. Use `GET /campaigns/Messenger/{ID}` to fetch the exact row payload, modify only `PAGE_ID` and `UTM_CAMPAIGN`, then `POST /campaigns/Messenger`; validate against a fresh full-scope `/campaigns/Messenger` readback. Avoid posting the full-table row shape for this correction class — it can return SB HTTP 500 while the exact-row payload succeeds.
+
 See `references/digitaltrchat-page-restriction-workflow-2026-07-02.md` for the DigitalTRChat XHR endpoints and the validated Zytiva test.
 
 Operational use:
