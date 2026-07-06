@@ -883,6 +883,7 @@ final class MGS_Chat_Funnels {
         $targets = isset($post['offer_target']) && is_array($post['offer_target']) ? $post['offer_target'] : array();
         $subtitles = isset($post['offer_subtitle']) && is_array($post['offer_subtitle']) ? $post['offer_subtitle'] : array();
         $logos = isset($post['offer_logo']) && is_array($post['offer_logo']) ? $post['offer_logo'] : array();
+        $banks = isset($post['offer_bank']) && is_array($post['offer_bank']) ? $post['offer_bank'] : array();
         $accepts = isset($post['offer_accept']) && is_array($post['offer_accept']) ? $post['offer_accept'] : array();
         $rejects = isset($post['offer_reject']) && is_array($post['offer_reject']) ? $post['offer_reject'] : array();
         $messages = isset($post['offer_messages']) && is_array($post['offer_messages']) ? $post['offer_messages'] : array();
@@ -909,8 +910,13 @@ final class MGS_Chat_Funnels {
                     'subtitle' => sanitize_text_field(wp_unslash($subtitles[$i] ?? 'Ver oferta')),
                     'target' => $target,
                 );
+                $bank = sanitize_text_field(wp_unslash($banks[$i] ?? ''));
+                if ($bank !== '') {
+                    $offer['bank'] = $bank;
+                }
                 $logo = esc_url_raw(wp_unslash($logos[$i] ?? ''));
                 if ($logo !== '') {
+                    $offer['image'] = $logo;
                     $offer['logo'] = $logo;
                 }
                 $offers[] = $offer;
