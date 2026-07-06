@@ -430,6 +430,58 @@ def save_state(state):
         json.dump(state,f,ensure_ascii=False,indent=2,sort_keys=True); f.write('\n')
     os.replace(tmp, STATE_PATH)
 
+def discord_token():
+    token=os.environ.get('DISCORD_BOT_TOKEN','').strip().strip('"').strip("'")
+    if token: return token
+    env_path=Path('/root/.hermes/profiles/zeus/.env')
+    if env_path.exists():
+        for line in env_path.read_text(encoding='utf-8', errors='ignore').splitlines():
+            if line.startswith('DISCORD_BOT_TOKEN='):
+                return line.split('=',1)[1].strip().strip('"').strip("'")
+    return ''
+
+def truncate_text(value, limit):
+    value=str(value or '')
+    return value if len(value)<=limit else value[:limit-1]+'…'
+
+def post_discord(content):
+    token=discord_token()
+    if not token:
+        raise RuntimeError('DISCORD_BOT_TOKEN unavailable')
+    body=json.dumps({'content':content}, ensure_ascii=False).encode('utf-8')
+    req=urllib.request.Request(
+        f'https://discord.com/api/v10/channels/{TARGET_CHANNEL_ID}/messages',
+        data=body,
+        headers={'Authorization':f'Bot {token}','Content-Type':'application/json','User-Agent':'MGS-Zeus-DTR-Restricted-Sync/1.0'},
+        method='POST',
+    )
+    with urllib.request.urlopen(req, timeout=20) as r:
+        return r.status
+
+def build_new_restrictions_alert(rows, summary):
+    now=datetime.now(NY).strftime('%Y-%m-%d %H:%M %Z')
+    lines=[
+        'PÁGINAS RESTRITAS — NOVAS CONFIRMADAS NA DTR',
+        f'Atualizado em: {now}',
+        f'Fonte: DigitalTRChat último Completed + readback SB validado | Novas: {len(rows)}',
+        '',
+        'Página               FB Page ID          Page ID   Bot user           Segurador            Saída DTR         Códigos',
+    ]
+    for r in rows[:20]:
+        lines.append(
+            f"{truncate_text(r.get('page_name'),20):<20} "
+            f"{truncate_text(r.get('fb_page_id'),18):<18} "
+            f"{truncate_text(r.get('page_id'),8):<8} "
+            f"{truncate_text((r.get('bot_user') or '').replace('@gmail.com',''),18):<18} "
+            f"{truncate_text(r.get('segurador'),20):<20} "
+            f"{truncate_text(r.get('restricted_until_time') or r.get('restricted_until'),16):<16} "
+            f"{','.join(r.get('codes') or [])}"
+        )
+    if len(rows)>20:
+        lines.append(f'... +{len(rows)-20} no XLSX/log')
+    lines += ['', f"XLSX: {summary.get('xlsx')}", f"Log: {summary.get('log')}"]
+    return '```\n'+'\n'.join(lines)+'\n```'
+
 def write_excel(path, rows, summary, inventory_notes=None):
     if not Workbook: return None
     wb=Workbook(); ws=wb.active; ws.title='Paginas'
