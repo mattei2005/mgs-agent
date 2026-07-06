@@ -144,6 +144,7 @@ final class MGS_Chat_Funnels {
     private function ciro_questions_from_config($config) {
         $chat = isset($config['chat']) && is_array($config['chat']) ? $config['chat'] : array();
         $offers = isset($config['offers']) && is_array($config['offers']) ? array_values($config['offers']) : array();
+        $mode = $config['mode'] ?? ($chat['offer_mode'] ?? 'cards');
         $questions = array();
 
         $intro = isset($chat['intro']) && is_array($chat['intro']) ? $chat['intro'] : array('Olá! Eu sou {botName}.');
@@ -162,6 +163,38 @@ final class MGS_Chat_Funnels {
                     'answers' => isset($item['answers']) && is_array($item['answers']) ? array_values($item['answers']) : array(),
                 );
             }
+        }
+
+        if ($mode === 'cards') {
+            if (!empty($chat['pre_offer_messages']) && is_array($chat['pre_offer_messages'])) {
+                foreach ($chat['pre_offer_messages'] as $message) {
+                    $message = trim((string) $message);
+                    if ($message !== '') {
+                        $questions[] = array('question' => $message);
+                    }
+                }
+            }
+
+            $card_offers = array();
+            foreach ($offers as $offer) {
+                if (!is_array($offer)) {
+                    continue;
+                }
+                $card_offers[] = array(
+                    'name' => (string) ($offer['name'] ?? 'Oferta'),
+                    'subtitle' => (string) ($offer['subtitle'] ?? 'Ver oferta'),
+                    'bank' => (string) ($offer['bank'] ?? ''),
+                    'image' => (string) ($offer['image'] ?? ($offer['logo'] ?? '')),
+                    'url' => (string) ($offer['target'] ?? ($offer['url'] ?? '#')),
+                );
+            }
+
+            $questions[] = array(
+                'question' => (string) ($chat['offer_headline'] ?? '🚗 Encontrei 3 ofertas exclusivas para você! | Toque na que mais te interessa para ver as condições:'),
+                'offers' => $card_offers,
+            );
+            $questions[] = array('question' => '');
+            return $questions;
         }
 
         foreach ($offers as $index => $offer) {
