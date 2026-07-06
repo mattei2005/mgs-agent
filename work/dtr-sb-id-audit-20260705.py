@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import asyncio, csv, html, importlib.util, io, json, os, re, subprocess, sys, urllib.parse, urllib.request
+import asyncio, csv, html, importlib.util, io, json, os, re, subprocess, sys, unicodedata, urllib.parse, urllib.request
 from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
@@ -19,7 +19,7 @@ def norm(v): return '' if v is None else str(v).strip()
 def norm_email(v): return norm(v).lower()
 def clean(v): return html.unescape(re.sub(r'<[^>]+>',' ',str(v or ''))).replace('\xa0',' ').strip()
 def name_norm(v):
-    s=clean(v).lower()
+    s=unicodedata.normalize('NFC', clean(v)).lower()
     s=re.sub(r'\s+',' ',s)
     return s
 
