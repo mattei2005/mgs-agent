@@ -1,0 +1,55 @@
+{
+  "created_at": "2026-07-06T15:51:14-04:00",
+  "publishers": 56,
+  "rows": 3237,
+  "before": [
+    {
+      "ID": "685f3a00-c07a-b76d-d8f7-28ff93e0b4ed",
+      "COMPANY": "digital-trust-2",
+      "DOMAIN": null,
+      "LOGIN": "disparoscliquet@gmail.com",
+      "USER_LOGIN": null,
+      "PROFILE_NAME": null,
+      "PAGE_ID": "5210",
+      "FB_PAGE_ID": "696521396874142",
+      "PAGE_NAME": "Eva Ontiveros",
+      "UTM_CAMPAIGN": "pg_5210",
+      "STATUS": "On-hold",
+      "RESTRICTED_UNTIL": null,
+      "BROADCAST_TEMPLATE_NAME": "Cliquet Finanzas - US-CC-ES/ES-ZW - AV - g002-d Gustavo"
+    },
+    {
+      "ID": "69293886-754c-9267-dcd8-a396260a6923",
+      "COMPANY": "digital-trust",
+      "DOMAIN": null,
+      "LOGIN": "disparoslyzmo@gmail.com",
+      "USER_LOGIN": null,
+      "PROFILE_NAME": null,
+      "PAGE_ID": "10906",
+      "FB_PAGE_ID": "860836117101608",
+      "PAGE_NAME": "Ophelia Monroe",
+      "UTM_CAMPAIGN": "pg_10906",
+      "STATUS": "Broadcast",
+      "RESTRICTED_UNTIL": "2026-07-22",
+      "BROADCAST_TEMPLATE_NAME": "Lyzmo - US-CC-EN/EN-SR - g006-d Nicolas"
+    }
+  ],
+  "targets": [
+    {
+      "id": "685f3a00-c07a-b76d-d8f7-28ff93e0b4ed",
+      "name": "Eva Ontiveros",
+      "new_page_id": "4962",
+      "new_utm": "pg_4962",
+      "expected_fb": "696521396874142",
+      "expected_login": "disparoscliquet@gmail.com"
+    },
+    {
+      "id": "69293886-754c-9267-dcd8-a396260a6923",
+      "name": "Ophelia Monroe",
+      "new_page_id": "13676",
+      "new_utm": "pg_13676",
+      "expected_fb": "860836117101608",
+      "expected_login": "disparoslyzmo@gmail.com"
+    }
+  ]
+}
