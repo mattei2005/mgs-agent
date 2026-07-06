@@ -1,0 +1,107 @@
+{
+  "created_at": "2026-07-06T00:33:14-04:00",
+  "mode": "dry-run",
+  "planned": [],
+  "already_ok": [
+    {
+      "target": {
+        "sb_id": "6778bf80-250a-5ff3-21f2-db8e936e5991",
+        "bot_user": "disparosfinanceadx@gmail.com",
+        "page_name_dtr": "Harlow Abbott",
+        "page_name_sb": "Harlow Abbott",
+        "profile_dtr": "Yu Hana",
+        "profile_sb": "Yu Hana",
+        "target_PAGE_ID": "22158",
+        "target_FB_PAGE_ID": "560940030428901",
+        "target_UTM_CAMPAIGN": "pg_22158",
+        "diffs": [
+          "PAGE_ID"
+        ],
+        "report_sb": {
+          "sb_id": "6778bf80-250a-5ff3-21f2-db8e936e5991",
+          "bot_user": "disparosfinanceadx@gmail.com",
+          "profile_name": "Yu Hana",
+          "page_name": "Harlow Abbott",
+          "page_id": "3438",
+          "fb_page_id": "560940030428901",
+          "status": "On-hold",
+          "restricted_until": "",
+          "domain": "",
+          "company": "digital-trust"
+        }
+      },
+      "before": {
+        "ID": "6778bf80-250a-5ff3-21f2-db8e936e5991",
+        "USER_LOGIN": "disparosfinanceadx@gmail.com",
+        "PROFILE_NAME": "Yu Hana",
+        "PAGE_NAME": "Harlow Abbott",
+        "PAGE_ID": "22158",
+        "FB_PAGE_ID": "560940030428901",
+        "UTM_CAMPAIGN": "pg_22158",
+        "STATUS": "On-hold",
+        "RESTRICTED_UNTIL": "",
+        "COMPANY": "digital-trust",
+        "DOMAIN": ""
+      }
+    }
+  ],
+  "missing": [],
+  "skipped_duplicates": [
+    {
+      "sb_id": "685f3a00-c07a-b76d-d8f7-28ff93e0b4ed",
+      "bot_user": "disparoscliquet@gmail.com",
+      "page_name_dtr": "Eva Ontiveros",
+      "page_name_sb": "Eva Ontiveros",
+      "profile_dtr": "Cauã Santos",
+      "profile_sb": "John Cesar",
+      "target_PAGE_ID": "5210",
+      "target_FB_PAGE_ID": "696521396874142",
+      "target_UTM_CAMPAIGN": "pg_5210",
+      "diffs": [
+        "PAGE_ID",
+        "SEGURADOR"
+      ],
+      "report_sb": {
+        "sb_id": "685f3a00-c07a-b76d-d8f7-28ff93e0b4ed",
+        "bot_user": "disparoscliquet@gmail.com",
+        "profile_name": "John Cesar",
+        "page_name": "Eva Ontiveros",
+        "page_id": "4962",
+        "fb_page_id": "696521396874142",
+        "status": "On-hold",
+        "restricted_until": "",
+        "domain": "",
+        "company": "digital-trust-2"
+      },
+      "skip_reason": "DTR duplicate user+FB_PAGE_ID; needs manual decision"
+    },
+    {
+      "sb_id": "69293886-754c-9267-dcd8-a396260a6923",
+      "bot_user": "disparosfinanceadx@gmail.com",
+      "page_name_dtr": "Ophelia Monroe",
+      "page_name_sb": "Ophelia Monroe",
+      "profile_dtr": "Ari Irham",
+      "profile_sb": "Trương Gia Vinh",
+      "target_PAGE_ID": "10906",
+      "target_FB_PAGE_ID": "860836117101608",
+      "target_UTM_CAMPAIGN": "pg_10906",
+      "diffs": [
+        "PAGE_ID",
+        "SEGURADOR"
+      ],
+      "report_sb": {
+        "sb_id": "69293886-754c-9267-dcd8-a396260a6923",
+        "bot_user": "disparoslyzmo@gmail.com",
+        "profile_name": "Trương Gia Vinh",
+        "page_name": "Ophelia Monroe",
+        "page_id": "13676",
+        "fb_page_id": "860836117101608",
+        "status": "Broadcast",
+        "restricted_until": "2026-07-22",
+        "domain": "",
+        "company": "digital-trust"
+      },
+      "skip_reason": "DTR bot_user differs from SB USER_LOGIN; needs manual decision"
+    }
+  ]
+}
