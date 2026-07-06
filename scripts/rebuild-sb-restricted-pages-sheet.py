@@ -9,7 +9,7 @@ SHEET_ID='1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY'; GID=232316676
 STATE_PATH=pathlib.Path('/root/mgs-agent/data/sb-restricted-pages-monitor.json')
 NY=ZoneInfo('America/New_York')
 
-COLS=7
+COLS=8
 ROWS_CLEAR=200
 
 def token():
@@ -74,7 +74,7 @@ def build_rows():
     detected=(st.get('last_check') or datetime.now(NY).isoformat(timespec='seconds')).replace('T',' ')[:16]
     rows=[]
     rows.append([cell('Páginas Restritas — MGS', bold=True, bg=NAVY, fg=WHITE, size=18, align='CENTER')] + [cell('', bg=NAVY) for _ in range(COLS-1)])
-    rows.append([cell('Atualizado em ' + datetime.now(NY).strftime('%Y-%m-%d %H:%M %Z') + '  •  Report live com dados reais', bg=NAVY, fg=rgb('#DDEBFF'), size=10, align='CENTER')] + [cell('', bg=NAVY) for _ in range(COLS-1)])
+    rows.append([cell('Atualizado em ' + datetime.now(NY).strftime('%Y-%m-%d %H:%M %Z') + '  •  Fonte SB-only: DTR/Bot não lido nesta aba', bg=NAVY, fg=rgb('#DDEBFF'), size=10, align='CENTER')] + [cell('', bg=NAVY) for _ in range(COLS-1)])
     rows.append(blank_row())
     rows.append([cell('Resumo Executivo', bold=True, bg=BLUE, fg=WHITE, size=11)] + [cell('', bg=BLUE) for _ in range(COLS-1)])
     total_pages = int(st.get('last_total_rows', 0) or 0)
@@ -91,11 +91,11 @@ def build_rows():
     for d,cnt in sorted(by.items(), key=lambda kv:(-kv[1], kv[0]))[:8]:
         rows.append([cell(d), cell(cnt, align='RIGHT')] + [cell('') for _ in range(4)])
     rows.append(blank_row())
-    rows.append([cell('Páginas Restritas - Novas:', bold=True, bg=BLUE, fg=WHITE, size=11)] + [cell('', bg=BLUE) for _ in range(COLS-1)])
-    rows.append([cell(x, bold=True, bg=LIGHT) for x in ['Entrou restrição','Página','Page ID','Usuário bot','Segurador','Expira restrição','Código erro']])
+    rows.append([cell('Registros SB com Restricted Until - Novos:', bold=True, bg=BLUE, fg=WHITE, size=11)] + [cell('', bg=BLUE) for _ in range(COLS-1)])
+    rows.append([cell(x, bold=True, bg=LIGHT) for x in ['Entrou registro','Página','FB Page ID','Page ID','Usuário bot','Segurador','Expira SB','Origem']])
     for r in sample:
         fb=(r.get('fb_page_id') or '').strip(); uri=f'https://facebook.com/{fb}' if fb else None
-        rows.append([cell(detected), cell(r.get('page_name') or '', link=uri), cell(r.get('page_id') or ''), cell(clean_user(r.get('user_login'))), cell(segurador(r)), cell((r.get('restricted_until') or '') + ' — hora DTR pendente'), cell('DTR pendente', bold=True, fg=rgb('#B45309'), bg=rgb('#FEF3C7'))])
+        rows.append([cell(detected), cell(r.get('page_name') or '', link=uri), cell(fb), cell(r.get('page_id') or ''), cell(clean_user(r.get('user_login'))), cell(segurador(r)), cell(r.get('restricted_until') or ''), cell('SB-only; DTR não lido', bold=True, fg=rgb('#B45309'), bg=rgb('#FEF3C7'))])
     rows.append(blank_row())
     rows.append([cell('Legenda de Erros', bold=True, bg=BLUE, fg=WHITE, size=11)] + [cell('', bg=BLUE) for _ in range(COLS-1)])
     rows.append([cell('Código erro', bold=True, bg=LIGHT), cell('Significado', bold=True, bg=LIGHT), cell('', bg=LIGHT), cell('', bg=LIGHT), cell('Ação', bold=True, bg=LIGHT), cell('', bg=LIGHT), cell('', bg=LIGHT)])
@@ -130,7 +130,7 @@ for r in range(27, 36):
     requests.append({'mergeCells': {'range': {'sheetId':GID,'startRowIndex':r,'endRowIndex':r+1,'startColumnIndex':1,'endColumnIndex':4}, 'mergeType':'MERGE_ALL'}})
     requests.append({'mergeCells': {'range': {'sheetId':GID,'startRowIndex':r,'endRowIndex':r+1,'startColumnIndex':4,'endColumnIndex':COLS}, 'mergeType':'MERGE_ALL'}})
 # widths
-widths=[145,190,90,145,160,160,105]
+widths=[145,190,150,90,145,160,120,160]
 for i,w in enumerate(widths):
     requests.append({'updateDimensionProperties': {'range': {'sheetId':GID,'dimension':'COLUMNS','startIndex':i,'endIndex':i+1}, 'properties': {'pixelSize':w}, 'fields':'pixelSize'}})
 # row heights
@@ -146,5 +146,5 @@ for start,end in [(20,24),(27,31)]:
             requests.append({'repeatCell': {'range': {'sheetId':GID,'startRowIndex':r,'endRowIndex':r+1,'startColumnIndex':0,'endColumnIndex':COLS}, 'cell': {'userEnteredFormat': {'backgroundColor': VERY_LIGHT}}, 'fields':'userEnteredFormat.backgroundColor'}})
 api('POST',f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET_ID}:batchUpdate',{'requests':requests})
 enc=urllib.parse.quote(title)
-rb=api('GET',f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET_ID}/values/{enc}!A1:G45')
+rb=api('GET',f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET_ID}/values/{enc}!A1:H45')
 print(json.dumps({'ok':True,'rows_written':len(rows),'readback_rows':len(rb.get('values',[])),'url':f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/edit?gid={GID}#gid={GID}'},ensure_ascii=False,indent=2))
