@@ -11,7 +11,7 @@ Validated workflow:
   blocked/down, or the segurador/Facebook profile can be down while the page
   is still public. Never restore Blocked -> Broadcast from public FB URL alone.
 """
-import argparse, asyncio, csv, html, io, json, os, re, subprocess, sys, tempfile, urllib.parse, urllib.request
+import argparse, asyncio, csv, html, io, json, os, re, subprocess, sys, tempfile, unicodedata, urllib.parse, urllib.request
 from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
@@ -41,9 +41,22 @@ MONTHS_EN={'january':1,'february':2,'march':3,'april':4,'may':5,'june':6,'july':
 def norm(v): return '' if v is None else str(v).strip()
 def norm_email(v): return norm(v).lower()
 def clean(v): return html.unescape(re.sub(r'<[^>]+>',' ',str(v or ''))).replace('\u202f',' ').replace('\xa0',' ').strip()
+def norm_name(v):
+    t=clean(v).lower()
+    t=''.join(c for c in unicodedata.normalize('NFKD', t) if not unicodedata.combining(c))
+    t=re.sub(r'[^a-z0-9]+',' ',t)
+    return re.sub(r'\s+',' ',t).strip()
 def today(): return datetime.now(NY).date().isoformat()
 def now_iso(): return datetime.now(NY).isoformat(timespec='seconds')
 def date_only(v): return norm(v)[:10]
+
+STEP1_NOISE_NAMES={norm_name(x) for x in ['Rodolfo Mattei','Geizian Pereira']}
+STEP1_ACTIVE_OVERRIDES=[
+    {'user':'disparoseggbev@gmail.com','segurador':'Andi Setiawan','app':'B003'},
+    {'user':'disparosfincgriffinuscaren003@gmail.com','segurador':'Karoline Chaves','app':'B002'},
+    {'user':'disparosinfinitynexx@gmail.com','segurador':'Akew Rider','app':'B009'},
+    {'user':'disparosinfinitynexx@gmail.com','segurador':'Anggiat Hutajulu','app':'B009'},
+]
 
 def op(cmd, timeout=30): return subprocess.check_output(cmd, text=True, env=os.environ.copy(), timeout=timeout).strip()
 def op_json(cmd): return json.loads(op(cmd, timeout=60))
@@ -65,6 +78,37 @@ def active_users_from_sheet(rows):
         if norm(r.get('Removidos acumulado')).upper()=='X': continue
         users.append(u)
     return sorted(set(users))
+
+def build_step1_scope(rows):
+    scope={'active':defaultdict(dict),'x':defaultdict(dict),'overrides':defaultdict(dict),'row_counts':Counter()}
+    for r in rows:
+        u=norm_email(r.get('User'))
+        name=clean(r.get('Segurador'))
+        key=norm_name(name)
+        if '@' not in u or not key or not norm(r.get('NO APP')):
+            continue
+        rec={'user':u,'segurador':name,'norm':key,'app':norm(r.get('NO APP')),'pg':norm(r.get('PG')),'removed':norm(r.get('Removidos acumulado')).upper()}
+        if rec['removed']=='X':
+            scope['x'][u][key]=rec; scope['row_counts']['x_rows']+=1
+        else:
+            scope['active'][u][key]=rec; scope['row_counts']['active_rows']+=1
+    for o in STEP1_ACTIVE_OVERRIDES:
+        u=norm_email(o['user']); key=norm_name(o['segurador'])
+        scope['overrides'][u][key]={**o,'user':u,'norm':key,'override':True}
+        scope['active'][u].setdefault(key,{**o,'user':u,'norm':key,'override':True})
+    return scope
+
+def step1_account_classification(username, account_name, occurrences, scope):
+    u=norm_email(username); key=norm_name(account_name)
+    if key in STEP1_NOISE_NAMES:
+        return 'IGNORED_NOISE_SKIP_PAGES', 'Rodolfo/Geizian noise account'
+    if key in scope['x'].get(u, {}):
+        return 'IGNORED_X_SKIP_PAGES', 'sheet Removidos acumulado=X'
+    if occurrences > 1:
+        return 'REPORT_DUPLICATE_SKIP_PAGES', f'duplicate account occurrences={occurrences}'
+    if key in scope['active'].get(u, {}) or key in scope['overrides'].get(u, {}):
+        return 'PENDING_PAGE_LIST', 'active sheet/override match'
+    return 'OUT_OF_SCOPE_SKIP_PAGES', 'not active in migration sheet for this bot user'
 
 def discover_dtr_items(target_users):
     vault=os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo')
@@ -146,7 +190,7 @@ def fb_id_from_row(row):
         if m: return m.group(1)
     return ''
 
-async def scan_dtr_user(username, item, limit_accounts=0, limit_pages=0):
+async def scan_dtr_user(username, item, step1_scope, limit_accounts=0, limit_pages=0):
     out={'username':username,'accounts':[], 'reports':[], 'errors':[], 'login_ok':False}
     try:
         password=op_password(item)
@@ -170,11 +214,15 @@ async def scan_dtr_user(username, item, limit_accounts=0, limit_pages=0):
                 k=(a.get('id','')+'|'+a.get('name','')).strip()
                 if k not in seen: seen.add(k); uniq.append(a)
             if limit_accounts: uniq=uniq[:limit_accounts]
+            name_counts=Counter(norm_name(a.get('name') or 'default') for a in uniq)
             signatures=[]
             for a in uniq:
                 aid=a.get('id') or ''; aname=clean(a.get('name') or 'default') or 'default'
-                acc={'id':aid,'name':aname,'pages':0,'latest_completed':0,'no_completed':0,'signature':[],'errors':[]}
+                step1_status, step1_reason = step1_account_classification(username, aname, name_counts[norm_name(aname)], step1_scope)
+                acc={'id':aid,'name':aname,'pages':0,'latest_completed':0,'no_completed':0,'signature':[],'errors':[],'step1_status':step1_status,'step1_reason':step1_reason}
                 out['accounts'].append(acc)
+                if step1_status != 'PENDING_PAGE_LIST':
+                    continue
                 try:
                     if aid:
                         await ctx.request.post(f'{DTR_BASE}/social_accounts/fb_rx_account_switch', form={'id':aid,'csrf_token':csrf}, headers={'X-Requested-With':'XMLHttpRequest','Referer':url}, timeout=60000)
@@ -183,6 +231,12 @@ async def scan_dtr_user(username, item, limit_accounts=0, limit_pages=0):
                     opts=await page.evaluate("""() => Array.from(document.querySelectorAll('select#search_page_id option, select[name=search_page_id] option')).map(o=>({value:o.value||'', text:(o.innerText||o.textContent||'').trim()})).filter(x=>x.value && x.value!='0' && !/select|page/i.test(x.text))""")
                     if limit_pages: opts=opts[:limit_pages]
                     acc['pages']=len(opts)
+                    if not opts:
+                        acc['step1_status']='NO_PAGES_REPORT_IGNORE'
+                        acc['step1_reason']='single active account with zero DTR pages'
+                        continue
+                    acc['step1_status']='VALID_FOR_STEP2'
+                    acc['step1_reason']='active account with pages present'
                     sig=[]
                     for opt in opts:
                         page_id=str(opt['value']); page_name=clean(opt['text'])
@@ -399,7 +453,7 @@ async def main():
     summary={'ok':True,'mode':'apply' if args.apply else 'dry-run','started_at':now_iso(),'today':tday,'errors':[],'changes':[],'log':str(run_log),'xlsx':str(report_xlsx)}
     p=browser=ctx=None
     try:
-        srows=sheet_rows(); active=active_users_from_sheet(srows); summary['sheet_active_users']=len(active)
+        srows=sheet_rows(); step1_scope=build_step1_scope(srows); active=active_users_from_sheet(srows); summary['sheet_active_users']=len(active); summary['sheet_step1_rows']=dict(step1_scope['row_counts']); summary['step1_overrides']=STEP1_ACTIVE_OVERRIDES
         matched, missing, op_errors=discover_dtr_items(set(active)); summary['matched_1p_users']=len(matched); summary['missing_1p_users']=missing; summary['op_errors']=op_errors
         users=sorted(matched)
         if args.user:
@@ -416,9 +470,14 @@ async def main():
         state=load_state(); stats=Counter(); report_rows=[]; backups=[]; writes=0
         for user in users:
             print(f"PROGRESS user_start {user}", flush=True)
-            scan=await scan_dtr_user(user, matched[user], args.limit_accounts, args.limit_pages)
+            scan=await scan_dtr_user(user, matched[user], step1_scope, args.limit_accounts, args.limit_pages)
             print(f"PROGRESS user_done {user} accounts={len(scan.get('accounts') or [])} reports={len(scan.get('reports') or [])} errors={len(scan.get('errors') or [])}", flush=True)
             stats['users_scanned']+=1; stats['dtr_accounts']+=len(scan.get('accounts') or []); stats['dtr_pages']+=sum(a.get('pages',0) for a in scan.get('accounts') or [])
+            for a in scan.get('accounts') or []:
+                st=a.get('step1_status') or 'UNKNOWN'
+                stats[f'step1_{st}'] += 1
+                if st != 'VALID_FOR_STEP2':
+                    summary.setdefault('step1_inventory_notes',[]).append({'user':user,'segurador':a.get('name'),'status':st,'reason':a.get('step1_reason'),'pages':a.get('pages',0)})
             if scan.get('errors'): summary['errors'].append({'user':user,'errors':scan['errors']})
             unsafe_context = scan.get('context_signatures_unique',0) < max(1, len(scan.get('accounts') or [])) and len(scan.get('accounts') or [])>1
             seen_sb_ids_for_user=set()
