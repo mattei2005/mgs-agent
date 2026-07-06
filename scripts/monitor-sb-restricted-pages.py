@@ -357,6 +357,10 @@ async def run(args: argparse.Namespace) -> int:
     if initial and not args.send_initial:
         should_send = False
 
+    if should_send and not args.allow_sb_only_alert:
+        log(f'SUPPRESSED_SB_ONLY_ALERT rows={len(rows)} active_restricted={len(active_rows)} new={len(new_rows)} resolved={len(resolved_rows)} reason=dtr_not_read')
+        should_send = False
+
     if args.dry_run:
         print(json.dumps({
             'dry_run': True,
