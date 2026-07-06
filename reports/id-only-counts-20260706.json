@@ -1,0 +1,353 @@
+{
+  "source_dtr_json": "/root/mgs-agent/reports/dtr-sb-id-audit-v2-full-20260706-012017.json",
+  "scope_publishers": 56,
+  "scope_rows": 3237,
+  "dtr_pages": 2914,
+  "buckets": {
+    "OK_IDS_USER_SEG": 2515,
+    "NAO_ENCONTRADO_NA_SB_POR_IDS": 150,
+    "EXISTE_SB_IDS_OK_USER_OU_SEG_DIFERENTE": 178,
+    "EXISTE_SB_FB_OK_PAGE_ID_DIVERGE": 71
+  },
+  "sb_not_in_dtr_by_ids": 475,
+  "samples": {
+    "OK_IDS_USER_SEG": [
+      {
+        "dtr_user": "disparosamazing@gmail.com",
+        "dtr_seg": "Janaina Santos",
+        "dtr_page": "Karina Duarte",
+        "dtr_pg": "743",
+        "dtr_fb": "320023591203685",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "68e28b0f-9155-6424-415e-b86e27fb8b34",
+          "user": "disparosamazing@gmail.com",
+          "seg": "Janaina Santos",
+          "name": "Karina Duarte",
+          "pg": "743",
+          "fb": "320023591203685",
+          "status": "On-hold",
+          "company": "digital-trust-2",
+          "domain": ""
+        }
+      },
+      {
+        "dtr_user": "disparosamazing@gmail.com",
+        "dtr_seg": "Janaina Santos",
+        "dtr_page": "Daniela Lopez",
+        "dtr_pg": "494",
+        "dtr_fb": "110722354534558",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "68e52c1e-e3b2-aa54-7098-fbda1f8a986a",
+          "user": "disparosamazing@gmail.com",
+          "seg": "Janaina Santos",
+          "name": "Daniela Lopez",
+          "pg": "494",
+          "fb": "110722354534558",
+          "status": "On-hold",
+          "company": "digital-trust-2",
+          "domain": ""
+        }
+      },
+      {
+        "dtr_user": "disparosamazing@gmail.com",
+        "dtr_seg": "Janaina Santos",
+        "dtr_page": "Rita Corigliano",
+        "dtr_pg": "493",
+        "dtr_fb": "186377357900051",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "68e52c6f-d2f4-9669-7cc7-1b4a8df6de3d",
+          "user": "disparosamazing@gmail.com",
+          "seg": "Janaina Santos",
+          "name": "Rita Corigliano",
+          "pg": "493",
+          "fb": "186377357900051",
+          "status": "On-hold",
+          "company": "digital-trust-2",
+          "domain": ""
+        }
+      },
+      {
+        "dtr_user": "disparosamazing@gmail.com",
+        "dtr_seg": "Janaina Santos",
+        "dtr_page": "Cintia Curutchet",
+        "dtr_pg": "492",
+        "dtr_fb": "236411646213567",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "68e52cac-a04c-321b-d6d9-496f3dd65039",
+          "user": "disparosamazing@gmail.com",
+          "seg": "Janaina Santos",
+          "name": "Cintia Curutchet",
+          "pg": "492",
+          "fb": "236411646213567",
+          "status": "On-hold",
+          "company": "digital-trust-2",
+          "domain": ""
+        }
+      },
+      {
+        "dtr_user": "disparosamazing@gmail.com",
+        "dtr_seg": "Janaina Santos",
+        "dtr_page": "Julieta Gagliardi",
+        "dtr_pg": "491",
+        "dtr_fb": "220497727811402",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "68e52ce6-17ad-c15d-5461-31c7b5e08622",
+          "user": "disparosamazing@gmail.com",
+          "seg": "Janaina Santos",
+          "name": "Julieta Gagliardi",
+          "pg": "491",
+          "fb": "220497727811402",
+          "status": "On-hold",
+          "company": "digital-trust-2",
+          "domain": ""
+        }
+      }
+    ],
+    "NAO_ENCONTRADO_NA_SB_POR_IDS": [
+      {
+        "dtr_user": "disparosamazing@gmail.com",
+        "dtr_seg": "Janaina Santos",
+        "dtr_page": "Lisa Raper",
+        "dtr_pg": "475",
+        "dtr_fb": "231034176768431",
+        "basis": "",
+        "sb": null
+      },
+      {
+        "dtr_user": "disparosboostingecon@gmail.com",
+        "dtr_seg": "Tiago De Oliveira Vianna",
+        "dtr_page": "Madelyn Riley",
+        "dtr_pg": "2989",
+        "dtr_fb": "507130289143976",
+        "basis": "",
+        "sb": null
+      },
+      {
+        "dtr_user": "disparosboostingecon@gmail.com",
+        "dtr_seg": "Jayadi Thaha Patonangi",
+        "dtr_page": "Ember Reeves",
+        "dtr_pg": "3625",
+        "dtr_fb": "557413660786433",
+        "basis": "",
+        "sb": null
+      },
+      {
+        "dtr_user": "disparosboostingecon@gmail.com",
+        "dtr_seg": "Indah",
+        "dtr_page": "Harriet Collins",
+        "dtr_pg": "3701",
+        "dtr_fb": "592122850650036",
+        "basis": "",
+        "sb": null
+      },
+      {
+        "dtr_user": "disparosboostingecon@gmail.com",
+        "dtr_seg": "Anre Kameza",
+        "dtr_page": "Florence Merrick",
+        "dtr_pg": "4292",
+        "dtr_fb": "578647815332742",
+        "basis": "",
+        "sb": null
+      }
+    ],
+    "EXISTE_SB_IDS_OK_USER_OU_SEG_DIFERENTE": [
+      {
+        "dtr_user": "disparosboostingecon@gmail.com",
+        "dtr_seg": "Jayadi Thaha Patonangi",
+        "dtr_page": "Amber Gilbert",
+        "dtr_pg": "3649",
+        "dtr_fb": "576234412234205",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "67a3787f-064c-6b87-b6d8-4d323996fb1f",
+          "user": "",
+          "seg": "",
+          "name": "Amber Gilbert",
+          "pg": "3649",
+          "fb": "576234412234205",
+          "status": "On-hold",
+          "company": "digital-trust",
+          "domain": ""
+        }
+      },
+      {
+        "dtr_user": "disparosboostingecon@gmail.com",
+        "dtr_seg": "Jayadi Thaha Patonangi",
+        "dtr_page": "Zella Reeves",
+        "dtr_pg": "3647",
+        "dtr_fb": "575381655653198",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "679f9fed-3254-0686-649d-02bf78663a2f",
+          "user": "",
+          "seg": "",
+          "name": "Zella Reeves",
+          "pg": "3647",
+          "fb": "575381655653198",
+          "status": "On-hold",
+          "company": "digital-trust",
+          "domain": ""
+        }
+      },
+      {
+        "dtr_user": "disparosboostingecon@gmail.com",
+        "dtr_seg": "Jayadi Thaha Patonangi",
+        "dtr_page": "Ingrid Hanson",
+        "dtr_pg": "3632",
+        "dtr_fb": "577539958771675",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "679da59c-f6eb-a7ba-18a1-af15a8aa56ab",
+          "user": "",
+          "seg": "",
+          "name": "Ingrid Hanson",
+          "pg": "3632",
+          "fb": "577539958771675",
+          "status": "On-hold",
+          "company": "digital-trust",
+          "domain": ""
+        }
+      },
+      {
+        "dtr_user": "disparosboostingecon@gmail.com",
+        "dtr_seg": "Jayadi Thaha Patonangi",
+        "dtr_page": "Vera Goodwin",
+        "dtr_pg": "3631",
+        "dtr_fb": "534561899743647",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "679c5930-a0e5-4f9c-b3e6-0949d497e760",
+          "user": "",
+          "seg": "",
+          "name": "Vera Goodwin",
+          "pg": "3631",
+          "fb": "534561899743647",
+          "status": "On-hold",
+          "company": "digital-trust",
+          "domain": ""
+        }
+      },
+      {
+        "dtr_user": "disparosboostingecon@gmail.com",
+        "dtr_seg": "Jayadi Thaha Patonangi",
+        "dtr_page": "Joslyn Tanner",
+        "dtr_pg": "3622",
+        "dtr_fb": "581047425086363",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "6799b6d1-0167-3c2a-1b24-cb4856948dd0",
+          "user": "",
+          "seg": "",
+          "name": "Joslyn Tanner",
+          "pg": "3622",
+          "fb": "581047425086363",
+          "status": "Blocked",
+          "company": "digital-trust",
+          "domain": ""
+        }
+      }
+    ],
+    "EXISTE_SB_FB_OK_PAGE_ID_DIVERGE": [
+      {
+        "dtr_user": "disparoscliquet@gmail.com",
+        "dtr_seg": "Cauã Santos",
+        "dtr_page": "Eva Ontiveros",
+        "dtr_pg": "5210",
+        "dtr_fb": "696521396874142",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "685f3a00-c07a-b76d-d8f7-28ff93e0b4ed",
+          "user": "disparoscliquet@gmail.com",
+          "seg": "John Cesar",
+          "name": "Eva Ontiveros",
+          "pg": "4962",
+          "fb": "696521396874142",
+          "status": "On-hold",
+          "company": "digital-trust-2",
+          "domain": ""
+        }
+      },
+      {
+        "dtr_user": "disparoscliquet@gmail.com",
+        "dtr_seg": "Lisna Lumbantobing",
+        "dtr_page": "Carmen López",
+        "dtr_pg": "16690",
+        "dtr_fb": "885233811332698",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "6903d642-b853-3247-1bdd-8f142614e0e5",
+          "user": "",
+          "seg": "",
+          "name": "Carmen López",
+          "pg": "10966",
+          "fb": "885233811332698",
+          "status": "On-hold",
+          "company": "digital-trust-2",
+          "domain": ""
+        }
+      },
+      {
+        "dtr_user": "disparoscliquet@gmail.com",
+        "dtr_seg": "Lisna Lumbantobing",
+        "dtr_page": "Fernanda Ortiz",
+        "dtr_pg": "16689",
+        "dtr_fb": "845597635303372",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "690614ab-a7b8-454f-b0de-6ae9d6221a36",
+          "user": "",
+          "seg": "",
+          "name": "Fernanda Ortiz",
+          "pg": "10970",
+          "fb": "845597635303372",
+          "status": "On-hold",
+          "company": "digital-trust-2",
+          "domain": ""
+        }
+      },
+      {
+        "dtr_user": "disparoscliquet@gmail.com",
+        "dtr_seg": "Lisna Lumbantobing",
+        "dtr_page": "Alejandra Castillo",
+        "dtr_pg": "16688",
+        "dtr_fb": "830570426810339",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "690a8c69-d440-9876-5159-f959bf5dda4a",
+          "user": "",
+          "seg": "",
+          "name": "Alejandra Castillo",
+          "pg": "11026",
+          "fb": "830570426810339",
+          "status": "On-hold",
+          "company": "digital-trust-2",
+          "domain": ""
+        }
+      },
+      {
+        "dtr_user": "disparoscliquet@gmail.com",
+        "dtr_seg": "Lisna Lumbantobing",
+        "dtr_page": "Amelia Adams",
+        "dtr_pg": "16687",
+        "dtr_fb": "859661417230934",
+        "basis": "FB_PAGE_ID",
+        "sb": {
+          "sb_id": "690a8cb6-8200-d5a6-3812-2c9852ef8b46",
+          "user": "",
+          "seg": "",
+          "name": "Amelia Adams",
+          "pg": "11028",
+          "fb": "859661417230934",
+          "status": "On-hold",
+          "company": "digital-trust-2",
+          "domain": ""
+        }
+      }
+    ]
+  }
+}
