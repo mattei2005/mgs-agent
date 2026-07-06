@@ -413,7 +413,7 @@ def save_state(state):
         json.dump(state,f,ensure_ascii=False,indent=2,sort_keys=True); f.write('\n')
     os.replace(tmp, STATE_PATH)
 
-def write_excel(path, rows, summary):
+def write_excel(path, rows, summary, inventory_notes=None):
     if not Workbook: return None
     wb=Workbook(); ws=wb.active; ws.title='Paginas'
     headers=['link da pagina','nome da pagina','segurador','bot user','data','codigo dos erros','sb status antes','sb restricted antes','acao','readback ok','observacao']
@@ -432,6 +432,14 @@ def write_excel(path, rows, summary):
         if isinstance(v,(dict,list)): v=json.dumps(v,ensure_ascii=False)
         sw.append([k,v])
     for c in sw[1]: c.font=Font(bold=True)
+    inv=wb.create_sheet('Inventario Step1')
+    inv_headers=['user','segurador','status','reason','pages']
+    inv.append(inv_headers)
+    for c in inv[1]: c.font=Font(bold=True,color='FFFFFF'); c.fill=PatternFill('solid',fgColor='7030A0'); c.alignment=Alignment(horizontal='center')
+    for item in inventory_notes or []:
+        inv.append([item.get(h,'') for h in inv_headers])
+    for i,w in enumerate([32,28,30,45,10],1): inv.column_dimensions[get_column_letter(i)].width=w
+    inv.freeze_panes='A2'; inv.auto_filter.ref=inv.dimensions
     wb.save(path); return str(path)
 
 async def main():
@@ -584,7 +592,7 @@ async def main():
         summary['stats']=dict(stats); summary['writes']=writes; summary['backup_rows']=len(backups); summary['finished_at']=now_iso()
         backup_path=REPORT_DIR/f'dtr-sb-page-health-sync-backup-{stamp}.json'
         backup_path.write_text(json.dumps(backups,ensure_ascii=False,indent=2),encoding='utf-8'); summary['backup']=str(backup_path)
-        if report_rows: write_excel(report_xlsx, report_rows, summary)
+        if report_rows or summary.get('step1_inventory_notes'): write_excel(report_xlsx, report_rows, summary, summary.get('step1_inventory_notes'))
         state.setdefault('runs',[]).append({'ts':summary['started_at'],'mode':summary['mode'],'stats':summary['stats'],'writes':writes,'log':str(run_log),'xlsx':str(report_xlsx)})
         save_state(state)
         if summary['errors']: summary['ok']=False
