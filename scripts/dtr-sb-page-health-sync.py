@@ -27,7 +27,7 @@ except Exception:
 
 BASE_DIR=Path('/root/mgs-agent')
 SHEET_ID='1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY'
-MIGRATION_GID='562940072'
+MIGRATION_GID='85508562'
 DTR_BASE='https://digitaltrchat.com'
 SB_STATE='/tmp/smartbidding_state_headed.json'
 NY=ZoneInfo('America/New_York')
