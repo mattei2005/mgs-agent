@@ -643,6 +643,7 @@ Para manutenção de VPS/update com backup, recuperação manual de npm quando s
 Esta umbrella absorveu as antigas skills especializadas abaixo. Conteúdo detalhado e histórico foi preservado nos arquivos de suporte:
 
 - `references/hermes-update-2026-07-05-autorestart-and-staged-patch-port.md` — sessão de update controlado em que `RESTART_GATEWAYS=0` não impediu o `hermes update` oficial de drenar/reiniciar Ares/Atena/Hera, gerando órfãos `gateway run --replace`; inclui recuperação segura e pitfall de `git apply --3way` deixar mudanças staged, exigindo `git diff --binary HEAD` para gerar patch canônico não-vazio.
+- `references/hermes-update-2026-07-07-canonical-patch-port.md` — sessão de update com 210 commits novos em que o patch canônico e o live diff driftaram; documenta port em worktree upstream, promoção do novo patch no guard antes da validação, resolução de duplicatas no fluxo Discord thread-title, repetição da colisão `--replace`, e pitfall de `infra-discovery.sh`/auto-commit commitar temp `data/infra-inventory.json.tmp.*`.
 - `references/hermes-bundled-skill-sync-merge-2026-07-05.md` — playbook para resolver `user-modified bundled skills` após update: inventário por profile, diff, backup, classificação restore/rebaseline/merge manual, manifest baseline e validação final.
 - `references/hermes-update-original-skill.md`
 - `references/hermes-update-post-update-validation.md`
