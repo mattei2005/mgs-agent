@@ -159,7 +159,8 @@ June 2026 validated pattern:
 
 ## Pitfalls
 
-- **Date serial false positives:** Sheets API returns dates as serial numbers in `UNFORMATTED_VALUE` mode. Convert with epoch `1899-12-30` before declaring a mismatch.
+- **Date serial false positives:** Sheets API returns dates as serial numbers in `UNFORMATTED_VALUE` mode. Convert with epoch `1899-12-30` before declaring a mismatch. This applies especially to lower detail tables such as Fincgriffin `Data | Gestor | Gasto | Receita | Lucro | Margem`; numeric serials like `46204` may correctly mean `2026-07-01`.
+- **Formula-column contamination during clears:** When clearing/filling monthly input bands, never blindly clear every mapped revenue/spend column across both top rows and spend rows. Some columns are manual input on one band but formula-derived on another band, e.g. `AAH`, `AAW`, `VM`, `NI`, `NP` in July 2026. Build the clear/write set from confirmed manual input cells only. If a batch accidentally touches formula columns, restore those formulas from the pre-write backup and re-validate formula parity before reporting success.
 - **Out-of-month rows:** A template may contain formulas on a row that effectively evaluates as the next month. Do not fill or rely on it for the current month.
 - **One-day reports can contain `Total` rows.** Some daily exports include a final `Total` row in date-based sheets. Remove/ignore those rows before processing, otherwise date parsing fails or totals get double-counted.
 - **MonetizeMore block sheets can be skipped by generic runners.** If the runner output lacks MonetizeMore revenue, parse the block sheet manually (`domain` row followed by `Date | Gross Revenue`) and merge those rows before filling.
@@ -182,3 +183,4 @@ June 2026 validated pattern:
 
 - `references/june-2026-fill-audit.md` — June 16–29, 2026 live fill lessons, mappings, correction of row 35, and audit results.
 - `references/monthly-rollover-formula-audit.md` — July 2026 rollover prep notes: formula inventory across main + manager sheets, `A3` month-number dependency, column `B` date rebuild, `CAIXA SINTETICO` month-column shift, and Sheets API batching pitfall.
+- `references/july-2026-1-6-fill-audit.md` — July 1–6, 2026 live fill lessons: reconciled totals, formula-column restore pitfall, Fincgriffin date-serial validation, and final validation standard.
