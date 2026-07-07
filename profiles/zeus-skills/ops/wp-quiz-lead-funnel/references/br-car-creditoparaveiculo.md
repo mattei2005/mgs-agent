@@ -18,8 +18,9 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 - G004 — `/quiz-car-parcelas-g004/`
 - G005 — `/quiz-car-parcelas-g005/`
 - G006 — `/quiz-car-parcelas-g006/`
+- G007 — `/quiz-car-parcelas-g007/` — modelo visual FMYBC/SMS (`layout_template=fmybc_sms`) com dados primeiro, card central, checklist, etapas e badges.
 
-G002 is the default route without suffix.
+G002 is the default route without suffix. New campaign variants keep the sequential `gNNN` slug pattern unless Rodolfo defines a different campaign family.
 
 ## SMS Funnel Routing
 
@@ -35,6 +36,8 @@ Routing is validated by stored WP lead status:
 - `ok:G004`
 - `ok:G005`
 - `ok:G006`
+
+For multi-gestor quiz configs, routing should resolve gestor code from the first available source in this order: explicit `gestor_code`, `utm_medium`, `utm_campaign`, `utm_adgroup`, `utm_content`, then slug. This supports traffic URLs where the gestor appears in campaign/adgroup, e.g. `b01fb10c12g05`, while preserving the older `utm_medium=g005` pattern.
 
 The SMS response body should include `success:true` and the expected `list_id`.
 
