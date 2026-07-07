@@ -227,6 +227,10 @@ Broadcast Template
 
 Rodolfo correction 2026-07-07: para vincular um Broadcast Template a uma página específica, ir em `Accounts > Messenger > Page`, filtrar pelo **FB_PAGE_ID grande**, validar também o **PAGE_ID pequeno** e o **PAGE_NAME**, selecionar a row, clicar em `Editar` no canto superior direito, abrir a aba `Broadcast`, escolher o template no primeiro campo `Message Template`, e salvar. Via API, a operação equivalente deve alterar somente os campos de template da row alvo (`BROADCAST_TEMPLATE_ID`/`BROADCAST_TEMPLATE_NAME` quando presentes), preservando os demais campos; validar por readback da mesma row (`FB_PAGE_ID`, `PAGE_ID`, `PAGE_NAME`, `BROADCAST_TEMPLATE_NAME`).
 
+#### Corrigir Messenger User da página
+
+Rodolfo correction 2026-07-07: quando uma Sheet de auditoria indicar divergência entre usuário do Bot/DTR e usuário na Dash, e Rodolfo confirmar que a coluna A é o usuário correto do bot e a coluna H é o usuário errado/atual da Dash, corrigir `Messenger User` da página em `Accounts > Messenger > Page`. Validar a row por `FB_PAGE_ID` grande + `PAGE_ID` pequeno + `PAGE_NAME`, editar a página, trocar o campo `Messenger User` para o login correto da coluna A, salvar e fazer readback. Via API, descobrir o `MESSENGER_USER_ID` correspondente ao login correto a partir de outra row/endpoint de users antes de postar; nunca trocar só o texto `USER_LOGIN` sem ID validado.
+
 For temporary Facebook/Messenger send restrictions discovered in DigitalTRChat campaign reports, edit the Page row and use the **Broadcast** tab's `Restricted Until` field. Latest Rodolfo-approved rule after the July 2026 audit: if the latest current DigitalTRChat report shows pure `#2022`, set Page `Status = Broadcast` and `Restricted Until = X + 1 calendar day`; later, when the restriction expires and the page should return to operation, clear `Restricted Until`, save, and restore `Status = Broadcast`. Keeping `Status = Broadcast` with only `Restricted Until` was an earlier approach and should only be used if Rodolfo explicitly asks for that behavior.
 
 ### Page tab
