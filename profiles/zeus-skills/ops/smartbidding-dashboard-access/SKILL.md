@@ -12,6 +12,7 @@ metadata:
 
 ## Recent operational references
 
+- `references/clean-page-selection-by-latest-dtr-sent-2026-07-07.md` — Clean canary page selection for Utility Templates: combine live SB linked-template/page rows with DigitalTRChat latest Completed report; accept only pages whose latest DTR status is `Sent`; prefer requested site such as Newsoun but do not treat `NO_COMPLETED` as clean.
 - `references/sb-messenger-page-delete-cleanup-2026-07-07.md` — Validated cleanup workflow for stale `Accounts > Messenger > Page` rows: backup candidates, validate `LOGIN + PAGE_ID + FB_PAGE_ID + UTM + STATUS=Blocked`, canary, then delete by SB internal `ID` via `DELETE /campaigns/Messenger/{ID}` with live readback. Covers `SB sem Bot/DTR` cleanup, handling transient HTTP 500 retries, and preserving open/pending pages.
 - `references/dtr-sb-phase1-final-and-sb-delete-cleanup-2026-07-07.md` — Final Phase 1 DTR↔SB audit confirmation and cleanup: global `FB_PAGE_ID` → `PAGE_ID` matching, no name/segurador divergence, `SB sem DTR não Blocked` as a separate tab, backup→canary→bulk→sequential retry→readback pattern, and final-live confirmation before declaring Phase 1 stable.
 - `references/sheet-2022-vs-sb-restricted-reconciliation-2026-07-07.md` — Sheet column `#2022` vs live SB reconciliation: match by large `FB_PAGE_ID`, count/list missing `RESTRICTED_UNTIL`, generate Excel when read-only, and only apply SB after DTR expiry date extraction/readback or explicit Rodolfo override.

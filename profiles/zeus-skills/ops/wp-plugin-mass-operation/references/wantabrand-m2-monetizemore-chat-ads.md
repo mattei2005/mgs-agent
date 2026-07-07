@@ -16,17 +16,20 @@ Rodolfo confirmed the target flow:
 2. User answers the first popup/gate questions.
 3. The gate CTA triggers **Rewarded** via `.pg-rewarded`.
 4. The user starts answering the in-chat questions.
-5. When the user reaches the question with the **value/amount answers**, the chat shows the inline display ad known operationally as **Bloco do Topo**.
-6. That Bloco do Topo is the same top ad placement used inside REC articles, but rendered inside the chat at the standard point.
-7. When the user clicks the final offer, the **Interstitial** block fires. That interstitial is installed/configured by M2 side and should not be reimplemented by MGS unless Rodolfo/M2 explicitly asks.
+5. The user reaches the in-chat question with value/amount answers (example: "até 500" plus the other two options).
+6. **After the user answers that value/amount question**, the chat shows the inline ad known operationally as **Bloco do Topo**.
+7. The Bloco do Topo is the same ad block used in REC articles, but the relevant rule here is that its **moment of appearance follows the same timing/pattern as the other chats**.
+8. When the user clicks the final offer, the **Interstitial** block fires. That interstitial is installed/configured by M2 side and should not be reimplemented by MGS unless Rodolfo/M2 explicitly asks.
 
 In short:
 
 ```text
 Popup/gate → Rewarded
-In-chat value question → Bloco do Topo inline ad
+Answer in-chat value/amount question → Bloco do Topo inline ad appears after that answer
 Final offer click → Interstitial
 ```
+
+Important correction: the Bloco do Topo does **not** appear "on the value question". It appears **after the user answers** that question. Do not phrase or implement this as insertion before/inside the value options.
 
 ## Expected M2 config
 
@@ -70,18 +73,20 @@ Main gate CTA:
 
 The inline ad shown between chat messages is **not** the rewarded trigger and **not** the final interstitial. It is the display/top placement called **Bloco do Topo**.
 
-For standard chats, the visual pattern is:
+Clarification from Rodolfo: he did **not** mean the block follows the same pattern as REC articles. He meant this is the same block used in REC articles, while the **appearance timing in the chat** should follow the same pattern as the other chats.
 
-1. The chat inserts an ad placeholder at the configured step.
-2. The code calls `window.onInfinitePostLoaded()`.
-3. The ad provider detects/fills the new block.
+For standard chats, the visual/timing pattern is:
+
+1. The user answers the configured in-chat question.
+2. The chat inserts an ad placeholder at the same point used by the other chats.
+3. The code calls `window.onInfinitePostLoaded()`.
+4. The ad provider detects/fills the new block.
 
 For Wantabrand/M2:
 
 - Do **not** remove `window.onInfinitePostLoaded()` just because the provider is M2.
 - Keep the same timing and visual location as the other chats.
-- When Rodolfo sends the M2-provided tag/div/class for the top block, insert that placeholder at the same chat point where the standard top ad appears.
-- The trigger point is the question with the value/amount answers.
+- When Rodolfo sends the M2-provided tag/div/class for the top block, insert that placeholder **after the value/amount question has been answered**, matching the other chats' timing.
 - After inserting the M2 top-block placeholder, call `window.onInfinitePostLoaded()` so the provider can detect/fill it.
 - Keep JBF/JBFTag-specific wrapper calls out of the public source.
 
@@ -110,7 +115,7 @@ Do **not** require `onInfinitePostLoaded` or inline ad block classes to be absen
 - Gate CTA has `.pg-rewarded`.
 - `window.onInfinitePostLoaded()` remains present for the inline top block.
 - The M2-provided top-block div/class appears only at the intended in-chat insertion point.
-- Browser flow: popup/gate → rewarded trigger → in-chat value question → top block appears → final offer click still redirects/interstitial behavior remains M2-controlled.
+- Browser flow: popup/gate → rewarded trigger → in-chat value/amount question answered → top block appears after that answer → final offer click still redirects/interstitial behavior remains M2-controlled.
 - No JBF/JBFTag wrapper calls are present.
 
 ## Reporting discipline
