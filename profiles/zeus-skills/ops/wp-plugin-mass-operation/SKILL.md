@@ -414,6 +414,16 @@ Para converter o CAR-BR do modelo sequencial para cards estilo Ciro/FMYBC, ver `
 
 Admin UX do `MGS Chat Funnels`: o campo `Modelo de oferta` deve aparecer antes de identidade/URL e antes de configurar gate/chat/ofertas, porque `cards` vs `sequential` define a arquitetura do funil. Ao alterar essa tela, validar ordem no admin autenticado (`1. Modelo de oferta` antes de `2. Identidade e URL`) além de `php -l` e pacote ZIP.
 
+### Exceção Wantabrand — MonetizeMore/M2
+
+`wantabrand.com` usa monetização MonetizeMore/M2, não o wrapper padrão JBF/Ciro. Para pedidos futuros nesse site:
+
+- Escopo deve ser somente `/home/runcloud2/webapps/wantabrand/wp-content/plugins/mgs-chat-funnels/`; não aplicar rollout para outros sites.
+- Configs do chat devem usar `ad_provider: "m2"`, `ad_company: "monetizemore"`, `ad_domain: ""`.
+- Em modo M2, remover/não carregar `https://assets.jbfdigital.com.br/...builder.js` e não carregar `gpt.js` pelo plugin; o script M2/site-level é responsável por detectar o trigger.
+- Botões que devem disparar anúncio recebem classe `pg-rewarded`. No fluxo atual, o principal é o CTA do gate `#aq-cta`; cards/ofertas finais também podem receber a classe quando o pedido for monetizar o clique final.
+- Validar com HTML público: `pg-rewarded > 0`, `assets.jbfdigital.com.br == false`, `gpt.js == false`, sem placeholders `{{...}}`, e browser mostrando o chat avançando após clicar no CTA.
+
 ---
 
 ## Política global — 1Password e Credenciais
