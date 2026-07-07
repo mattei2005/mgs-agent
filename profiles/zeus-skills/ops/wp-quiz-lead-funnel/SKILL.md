@@ -192,7 +192,7 @@ Before reporting success:
 
 4. **Copying leads during duplication.** Duplicating a quiz must copy configuration only, never leads/history.
 
-5. **Raw JSON as operator UI.** JSON can remain as storage, but normal admin workflows must use human rows, buttons, labels, helpers, and per-page controls. SMS Funnel per-gestor URLs must render as editable rows with an explicit `Padrão da quiz` radio, `Usar?` selector, `Gestor`, `Nome/label`, `URL add-lead`, `Remover`, and `+ Adicionar gestor`. Rule: if the visitor returns without UTMs, the lead must go to the quiz’s selected default gestor; if UTMs/campaign/adgroup contain G00X, route to that active gestor; unchecked gestores must not be used. Fallback SMS URL belongs in an advanced/hidden section labeled “Fallback se não detectar gestor nem padrão da quiz”. Raw JSON may exist only behind a hidden/advanced “Ver JSON técnico” view, never as the primary editing surface.
+5. **SMS Funnel config must be single-choice per quiz.** Keep the operator UI simple: when creating/duplicating a quiz, the operator chooses the one SMS Funnel link that this quiz uses. That chosen link wins for every lead from that quiz, regardless of UTMs/campaign/adgroup or whether the visitor returns later with a clean URL. UI may show existing gestor/link rows for convenience, but the primary control must be a single radio/select labeled like `Link SMS desta quiz` / `Usar este link`; avoid routing conditions in the normal UI. Raw JSON may exist only behind a hidden/advanced “Ver JSON técnico” view, never as the primary editing surface.
 
 6. **Historical imports sent to SMS Funnel.** Imports are for WP reporting only; mark rows as `historical_import` and do not POST to external vendors.
 
