@@ -371,6 +371,7 @@ Critical `PAGES` distinction:
 - When Rodolfo asks for the template list with pages/message count from this tab, use **Broadcast Template `PAGES`** from `/broadcast/Messenger[].PAGES` / the visible Broadcast Template column.
 - Do **not** substitute a Page-tab row count grouped by `BROADCAST_TEMPLATE_NAME` unless explicitly labeled as `Page rows live`.
 - Page-tab row counts are for `BROADCAST_TIME`, schedule work, and page-row ETA. Broadcast Template `PAGES` is what Rodolfo expects when pointing at `Accounts → Messenger → Broadcast Template`.
+- When Rodolfo asks for “templates atuais com páginas linkadas” or “verticais que temos nos templates com páginas linkadas”, include only `/broadcast/Messenger` rows where `PAGES > 0`, derive the vertical from the template `NAME` code (`COUNTRY-VERTICAL-LANGUAGE`, e.g. `US-CC-EN`), and summarize by vertical before listing template detail. See `references/template-vertical-inventory-linked-pages-2026-07-07.md`.
 
 Backend caveat: `/broadcast/Messenger` returns `MESSAGES` as a JSON-encoded message array with `APPROVED`, `INVALID_FORMAT`, `REJECTED`, `LINK_1`, etc.; the UI may render it as a count. See `references/messenger-backend-fields-and-company-scope-2026-06-29.md` and `references/sb-utility-rollout-broadcast-pages-correction-2026-07-02.md`.
 
