@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MGS Chat Funnels
  * Description: Config-driven WhatsApp-style chat funnels by vertical and country (EMP-BR, CC-BR, CAR-BR) with rewarded/interstitial gate, UTM passthrough, cards/sequential offers, and shortcode/route rendering.
- * Version: 0.3.9
+ * Version: 0.3.10
  * Author: MGS Digital Corp
  */
 
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 }
 
 final class MGS_Chat_Funnels {
-    const VERSION = '0.3.9';
+    const VERSION = '0.3.10';
     const SHORTCODE = 'mgs_chat_funnel';
     const MENU_SLUG = 'mgs-chat-funnels';
 
