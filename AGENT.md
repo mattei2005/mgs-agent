@@ -153,6 +153,20 @@ Action: show contents of data/authorized-users.json
 
 Triggers: same as Atena's status, but with extended info (logs, recent failures, security events)
 
+## Mandatory procedural learning persistence
+
+When Rodolfo or an authorized MGS operator corrects a workflow, validation rule, parser, cron behavior, report format, operational pitfall, or any reusable procedure, the responsible agent must persist that learning immediately in the correct durable artifact. This is not optional and does not require the user to ask.
+
+Routing:
+
+- Reusable procedure → relevant skill/reference.
+- Agent behavior/persona → that agent's `SOUL.md`.
+- Cross-agent rule → this `AGENT.md` or MGS OS/context.
+- Stable user/manager preference → memory.
+- Any script/cron/config/data/skill/SOUL/AGENT change → infra inventory + `[REPORT-INFRA]` before declaring completion.
+
+If a correction was applied but not persisted, the task is not complete. Ask whether to save only when there is genuine ambiguity about whether a one-off observation should become a durable rule; do not ask by default for every correction.
+
 ## Default behavior
 
 ### Communication style:
