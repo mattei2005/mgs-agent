@@ -434,6 +434,29 @@ If `ctx.request.get()` returns `401` while the headed UI is logged in and workin
 
 ## Runtime Caveats
 
+### DTR page lead scan for Bot pages missing in SB
+
+Rodolfo video correction 2026-07-07: for Sheet tabs where pages exist in Bot/DigitalTRChat but not in Smart Bidding, determine whether the page is worth adding to SB by scanning leads/subscribers inside the Bot user first.
+
+Manual workflow shown:
+
+1. Open the target Bot/DigitalTRChat login from the Sheet user.
+2. Go to `Subscriber Manager` (`/subscriber_manager/bot_subscribers`).
+3. If the bot user has multiple Facebook accounts/seguradores, use the top account switcher and repeat per relevant account.
+4. In the left `Pages` panel, search/select the page by name or PG/page id shown under the page name.
+5. After selecting the page, check the counters in the main panel:
+   - `Bot subscriber` count;
+   - `24h subscriber` count;
+   - subscriber table rows (`Subscriber id`, `First Name`, `Last Name`, quick info).
+6. Use `Scan inbox` / `Scan` when available/enabled to refresh subscribers for that page, then re-read the counters/table. Important Rodolfo correction: after clicking scan, wait for the scan to finish; it can take time. Expected max wait is about **4 minutes**. Sometimes it keeps spinning and never shows the completion/OK notice. If no OK/completion notice appears after ~4 minutes, refresh the same tab/page, check whether leads/subscribers appeared, and if not, click scan again. Repeat refresh → recheck → rescan until an OK/completion message appears or a real blocker is identified.
+7. Classification:
+   - if `Bot subscriber > 0` or subscriber rows appear after scan → page has leads/subscribers and may need to be added/corrected in Smart Bidding;
+   - if `Bot subscriber = 0`, `24h subscriber = 0`, and table remains empty after scan → likely unused/created but not used; report as no-lead/no-subscriber candidate instead of adding blindly.
+
+Automated version should use the same source of truth: per Bot user + account/segurador + page id, read/trigger subscriber scan endpoint where safe, then classify by subscriber count/table rows. Do not infer lead existence from Smart Bidding because the whole point of this tab is pages missing from SB.
+
+## Runtime Caveats
+
 - Site count is runtime/filter dependent. Always verify the current selected-site count and paginator count before reporting. For full MGS Messenger Page schedule inventory, validate `Digital trust` + `Digital trust 2`, selector `56 sites`, and paginator `Showing 1 to 50 of 3237` when that is the expected full scope. A prior 45-site capture returned only 2,443 rows and was incomplete.
 - In the Messenger Page site multiselect, checking a company/group row such as `Digital trust 2` may not select all child publishers. If full scope matters, filter/search the selector and confirm the child publishers are selected, then click the blue square refresh/update button beside the site selector. See `references/sb-messenger-page-site-selection-and-schedule-inventory-2026-06-30.md`.
 - `/reports/...` routes may return SPA shell with HTTP 404 while still rendering correctly in browser. Do not rely on raw HTTP status alone.
