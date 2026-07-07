@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-07T12:45:01-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-07T13:31:36-04:00",
+    "generated_by": "manual Zeus infra inventory update + infra-discovery base"
   },
   "system_packages": [
     {
@@ -1013,11 +1013,14 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/meta-utility-template-approval/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 17824,
-      "sha256": "7767f13e500f53035e10191e76727e215f49abee6fac77e1de40c0af41b24a80",
+      "size_bytes": 43477,
+      "sha256": "d888a343e9e3c99ec013b3c6d319eca66c3207afbb96f84ae303930124f35f5e",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-06-29T01:35:20-04:00",
-      "validation": "manual Zeus update; secret scan negative"
+      "updated_at": "2026-07-07T13:31:36-04:00",
+      "validation": "manual Zeus update; Rodolfo/Felipe template phase plan captured; reference file sha256 25aec6391105131ac19dccecbfa40004fb656e4f2a0c23795bfec0081a705e12; secret scan not applicable",
+      "source_report": "REPORT-INFRA Zeus template canary production diagnosis plan 2026-07-07",
+      "agent": "zeus",
+      "purpose": "Procedure for Utility Template canary per vertical, production replacement at midnight Ciro read, next-day gray/red/purple diagnosis, and page fix/block remediation."
     },
     {
       "profile": "zeus",
