@@ -12,6 +12,7 @@ metadata:
 
 ## Recent operational references
 
+- `references/dtr-sb-phase1-coverage-first-audit-2026-07-06.md` — Rodolfo correction for DTR↔SB audits: Phase 1 is coverage only (`DTR pages → SB match`), reporting pages that exist in DTR but do not exist in SB by global `FB_PAGE_ID` then `PAGE_ID/PG`; do not mix errors, restricted dates, `NOTES`, SB-only rows, or divergence cleanup until later phases.
 - `references/dtr-spanish-2022-date-parsing-2026-07-06.md` — DigitalTRChat Spanish `#2022` expiry parser: handle `hasta el 21 de julio a las 11:10 p. m.` in addition to EN/PT before applying SB `RESTRICTED_UNTIL`.
 - `references/dtr-restriction-expiry-clears-notes-codes-2026-07-06.md` — Rodolfo correction: when DTR proves a page left restriction and SB `RESTRICTED_UNTIL` is cleared, also remove stale restriction/error tokens from `NOTES` (`#2022` always; all delivery error tokens when latest status is `Sent`) with readback validation.
 - `references/dtr-authoritative-restricted-page-alerts-2026-07-06.md` — DTR-authoritative restricted-page alerts: skip SB-already-restricted pages, parse EN/PT/ES `#2022` dates, update SB only after DTR confirmation + readback, and use the approved human-readable alert block.
