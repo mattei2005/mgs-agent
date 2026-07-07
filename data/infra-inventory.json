@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-07T18:45:00-04:00",
+    "updated_at": "2026-07-07T19:10:00-04:00",
     "generated_by": "manual Zeus infra inventory update + infra-discovery base"
   },
   "system_packages": [
@@ -1053,20 +1053,20 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 74434,
-      "sha256": "a4bbc21bacdd4d72436c1924a06ca2509c5c8bb3a88ea7d059124e657aa710c2",
+      "size_bytes": 75155,
+      "sha256": "717b9eaaa4d389415bc8da00f9ebc66aaf9e5965d0df2febbb6bcd51eb62ce0d",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-07T17:06:00-04:00",
-      "validation": "manual Zeus update; Page→Broadcast Message Template linking procedure captured from Rodolfo; live canary linked CA page to test template with readback OK; secret scan not applicable",
+      "updated_at": "2026-07-07T19:10:00-04:00",
+      "validation": "manual Zeus update; Messenger User correction procedure captured from Rodolfo; final readback on login correction sheet: 26/26 identity OK and 26/26 MESSENGER_USER_ID OK",
       "reference_update": {
         "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/digitaltrchat-full-segurador-audit-methodology-2026-07-02.md",
         "sha256": "6249254fc654d9d4a16f554d35bed04a1ef69c8be512dff58fce0ebf8033a50e",
         "size_bytes": 4489,
         "updated_at": "2026-07-03T21:37:59-04:00"
       },
-      "source_report": "REPORT-INFRA Zeus SB page template link procedure 2026-07-07",
+      "source_report": "REPORT-INFRA Zeus SB Messenger User correction procedure 2026-07-07",
       "agent": "zeus",
-      "purpose": "SmartBidding dashboard/API access and safe Messenger Page template linking procedure with FB_PAGE_ID/PAGE_ID/PAGE_NAME validation."
+      "purpose": "SmartBidding access and safe Messenger Page template/user correction procedures."
     }
   ],
   "systemd_services": [
