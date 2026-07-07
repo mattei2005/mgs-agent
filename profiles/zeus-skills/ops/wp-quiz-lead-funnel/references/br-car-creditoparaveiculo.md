@@ -37,9 +37,9 @@ Routing is validated by stored WP lead status:
 - `ok:G005`
 - `ok:G006`
 
-For multi-gestor quiz configs, routing should resolve gestor code from the first available source in this order: explicit `gestor_code`, `utm_medium`, `utm_campaign`, `utm_adgroup`, `utm_content`, then slug. This supports traffic URLs where the gestor appears in campaign/adgroup, e.g. `b01fb10c12g05`, while preserving the older `utm_medium=g005` pattern.
+For normal production quiz configs, the operator chooses **one SMS Funnel link per quiz** in the admin UI. That selected link is the destination for every lead from that quiz, regardless of UTMs/campaign/adgroup or whether the visitor returns later with a clean URL. Do not make UTM-based routing the normal behavior when a quiz-level SMS link is selected.
 
-The SMS response body should include `success:true` and the expected `list_id`.
+The SMS response body should include `success:true` and the expected `list_id` for the selected link.
 
 ## Redirect
 
@@ -59,10 +59,12 @@ Redirect split UI should be business-facing:
 
 ## Admin UX Decisions
 
-- Normal operator path for new variant: Duplicate → name → slug → paste SMS Funnel URL.
+- Normal operator path for new variant: Duplicate → name → slug → choose one SMS Funnel link for the quiz (`Usar este`).
+- The quiz-level selected SMS link wins for all submissions; do not expose normal operators to multi-condition routing by UTM.
 - CSV import is technical/migration-only and should stay hidden behind advanced/details UI.
 - Reports should show 5 days/leads by default, with per-page selectors.
 - Tables should avoid narrow wrapping for gestor, SMS, phone.
+- After saving an edit, redirect back to the same edit screen (`admin.php?page=mgs-quiz-new&id=<id>&saved=1`), not to the quiz list, so the operator keeps context.
 
 ## Known Interpretation
 
