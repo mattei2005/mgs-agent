@@ -1,0 +1,108 @@
+{
+  "started_at": "2026-07-06T21:52:25-04:00",
+  "source": "fresh_live_all_1password_dtr_full_sb_global_fb_first",
+  "matched_1p_users": 88,
+  "op_errors": [
+    {
+      "item": "BOT Digitaltrchat",
+      "error": "username_missing_or_invalid"
+    }
+  ],
+  "users_targeted": 88,
+  "errors": [],
+  "finished_scan_at": "2026-07-06T22:29:42-04:00",
+  "dtr_users_scanned": 88,
+  "dtr_login_ok": 88,
+  "dtr_accounts": 226,
+  "dtr_pages": 2912,
+  "sb_publishers": 56,
+  "sb_rows_total": 3237,
+  "sb_rows_audited_users": 3237,
+  "ok_matches": 2761,
+  "issues_count": 626,
+  "duplicates_count": 0,
+  "issue_types": {
+    "NO_SB_MATCH": 150,
+    "DIVERGENTE": 1,
+    "NO_DTR_MATCH": 475
+  },
+  "field_breakdown": {
+    "missing_in_sb_after_full_global_check": 150,
+    "USER_LOGIN": 1,
+    "missing_in_dtr": 475
+  },
+  "basis_counts": {
+    "global+FB_PAGE_ID": 2762,
+    "none": 150
+  },
+  "company_scope": [
+    {
+      "company": "digital-trust",
+      "publishers_all": 45,
+      "publishers_active": 37
+    },
+    {
+      "company": "digital-trust-2",
+      "publishers_all": 11,
+      "publishers_active": 11
+    }
+  ],
+  "rewritten_at": "2026-07-06T23:00:25-04:00",
+  "sheet_url": "https://docs.google.com/spreadsheets/d/1zKQ9SNPTloBA7MUxfWirQu2XZryTLbUVGYneA3RDk38/edit",
+  "sheet_results": {
+    "summary": {
+      "tab": "00 Resumo",
+      "expected": 24,
+      "readback": 24,
+      "url": "https://docs.google.com/spreadsheets/d/1zKQ9SNPTloBA7MUxfWirQu2XZryTLbUVGYneA3RDk38/edit?gid=633885276#gid=633885276"
+    },
+    "ok": {
+      "tab": "01 OK LOGIN PAGE FB UTM",
+      "expected": 2761,
+      "readback": 2761,
+      "url": "https://docs.google.com/spreadsheets/d/1zKQ9SNPTloBA7MUxfWirQu2XZryTLbUVGYneA3RDk38/edit?gid=2055925771#gid=2055925771"
+    },
+    "login_diverge": {
+      "tab": "02 Login difere",
+      "expected": 1,
+      "readback": 1,
+      "url": "https://docs.google.com/spreadsheets/d/1zKQ9SNPTloBA7MUxfWirQu2XZryTLbUVGYneA3RDk38/edit?gid=922163473#gid=922163473"
+    },
+    "id_diverge": {
+      "tab": "03 PAGE_ID FB difere",
+      "expected": 0,
+      "readback": 0,
+      "url": "https://docs.google.com/spreadsheets/d/1zKQ9SNPTloBA7MUxfWirQu2XZryTLbUVGYneA3RDk38/edit?gid=244821340#gid=244821340"
+    },
+    "utm_diverge": {
+      "tab": "04 UTM difere",
+      "expected": 0,
+      "readback": 0,
+      "url": "https://docs.google.com/spreadsheets/d/1zKQ9SNPTloBA7MUxfWirQu2XZryTLbUVGYneA3RDk38/edit?gid=1902069990#gid=1902069990"
+    },
+    "no_sb_match": {
+      "tab": "05 Nao encontrado SB",
+      "expected": 150,
+      "readback": 150,
+      "url": "https://docs.google.com/spreadsheets/d/1zKQ9SNPTloBA7MUxfWirQu2XZryTLbUVGYneA3RDk38/edit?gid=484463464#gid=484463464"
+    },
+    "ambiguous": {
+      "tab": "06 Ambiguo SB",
+      "expected": 0,
+      "readback": 0,
+      "url": "https://docs.google.com/spreadsheets/d/1zKQ9SNPTloBA7MUxfWirQu2XZryTLbUVGYneA3RDk38/edit?gid=998100268#gid=998100268"
+    },
+    "no_dtr_match": {
+      "tab": "07 SB sem Bot DTR",
+      "expected": 475,
+      "readback": 475,
+      "url": "https://docs.google.com/spreadsheets/d/1zKQ9SNPTloBA7MUxfWirQu2XZryTLbUVGYneA3RDk38/edit?gid=1056885873#gid=1056885873"
+    },
+    "duplicates": {
+      "tab": "08 Duplicidades",
+      "expected": 0,
+      "readback": 0,
+      "url": "https://docs.google.com/spreadsheets/d/1zKQ9SNPTloBA7MUxfWirQu2XZryTLbUVGYneA3RDk38/edit?gid=1280009803#gid=1280009803"
+    }
+  }
+}
