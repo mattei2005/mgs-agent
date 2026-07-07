@@ -696,7 +696,7 @@ final class MGS_Chat_Funnels {
         $this->field_text('URL / pasta do chat', 'route', $route, $is_new ? 'Ex: /chat/emp/br2. Defina isso na criação ou duplicação.' : 'Travado para evitar quebrar campanha/link já em tráfego. Para mudar URL, duplique o chat e escolha nova pasta.', $is_new ? '' : 'readonly');
         $this->field_text('Site', 'brand', $config['brand'] ?? 'MGS', 'Ex: OpenZed, FincFrog, MGS.');
         $this->field_text('Vertical', 'vertical', $config['vertical'] ?? 'emp', 'emp, car, cc, loan...');
-        $this->field_text('País', 'country', $config['country'] ?? 'br, us, mx, es...');
+        $this->field_text('País', 'country', $config['country'] ?? 'br', 'br, us, mx, es...');
         $this->field_text('Idioma', 'language', $config['language'] ?? 'pt-BR', 'pt-BR, en-US, es...');
         echo '</div></section>';
 
@@ -717,7 +717,7 @@ final class MGS_Chat_Funnels {
         echo '</div></section>';
 
         $persona = $config['persona'] ?? array();
-        echo '<section class="mgs-cf-section"><h3>3. Persona do atendente</h3><div class="mgs-cf-fields">';
+        echo '<section class="mgs-cf-section"><h3>4. Persona do atendente</h3><div class="mgs-cf-fields">';
         $this->field_textarea('Nomes possíveis', 'persona_names', implode("\n", $persona['names'] ?? array()), 'Um nome por linha.');
         $this->field_textarea('Nomes femininos', 'persona_female_names', implode("\n", $persona['female_names'] ?? array()), 'Usado para escolher foto feminina quando houver fotos configuradas.');
         $this->field_text('Cargo no header', 'persona_role', $persona['role'] ?? 'Consultor', 'Ex: Consultor de Empréstimo.');
@@ -725,7 +725,7 @@ final class MGS_Chat_Funnels {
         echo '</div></section>';
 
         $gate = $config['gate'] ?? array();
-        echo '<section class="mgs-cf-section"><h3>4. Gate inicial</h3><div class="mgs-cf-fields">';
+        echo '<section class="mgs-cf-section"><h3>5. Gate inicial</h3><div class="mgs-cf-fields">';
         $this->field_checkbox('Gate ativo', 'gate_enabled', !isset($gate['enabled']) || !empty($gate['enabled']), 'Mostra perguntas antes do chat.');
         $this->field_textarea('Perguntas do gate', 'gate_questions', $this->questions_to_text($gate['questions'] ?? array()), "Formato: Pergunta | resposta 1; resposta 2; resposta 3");
         $gate_questions_editor = isset($gate['questions']) && is_array($gate['questions']) ? array_values($gate['questions']) : array();
@@ -742,7 +742,7 @@ final class MGS_Chat_Funnels {
         echo '</div></section>';
 
         $chat = $config['chat'] ?? array();
-        echo '<section class="mgs-cf-section"><h3>5. Conversa do chat</h3><div class="mgs-cf-fields">';
+        echo '<section class="mgs-cf-section"><h3>6. Conversa do chat</h3><div class="mgs-cf-fields">';
         $this->field_textarea('Mensagens de abertura', 'chat_intro', implode("\n", $chat['intro'] ?? array()), 'Uma mensagem por linha. Use {botName} para o nome do atendente.');
         $this->field_textarea('Botões iniciais', 'chat_start_answers', implode("\n", $chat['start_answers'] ?? array()), 'Um botão por linha.');
         $this->field_textarea('Perguntas do chat', 'chat_questions', $this->questions_to_text($chat['questions'] ?? array()), "Formato: Pergunta | resposta 1; resposta 2; resposta 3");
@@ -756,7 +756,7 @@ final class MGS_Chat_Funnels {
         echo '<input type="hidden" name="chat_offer_headline" value="' . esc_attr($chat['offer_headline'] ?? '') . '">';
         echo '</div></section>';
 
-        echo '<section class="mgs-cf-section"><h3>6. Ofertas finais</h3>';
+        echo '<section class="mgs-cf-section"><h3>7. Ofertas finais</h3>';
         echo '<p class="description">Edite como gestor: cada oferta tem nome, URL, CTA e mensagens próprias. Sem pipe, sem formato técnico.</p>';
         $this->render_offer_fields($config['offers'] ?? array(), $mode);
         echo '</section>';
