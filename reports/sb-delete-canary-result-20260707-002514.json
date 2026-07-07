@@ -1,0 +1,29 @@
+{
+  "created_at": "2026-07-07T00:25:33-04:00",
+  "backup_path": "/root/mgs-agent/reports/sb-delete-candidates-465-backup-20260707-002514.json",
+  "canary_id": "684e8cd4-7e02-9a6f-5a50-b5f4bacfcbb1",
+  "canary_before": {
+    "ID": "684e8cd4-7e02-9a6f-5a50-b5f4bacfcbb1",
+    "LOGIN": "disparosspe@gmail.com",
+    "LOGIN_raw": "disparosspe@gmail.com",
+    "USER_LOGIN_raw": "",
+    "PAGE_NAME": "Violet Payne",
+    "PAGE_ID": "4888",
+    "FB_PAGE_ID": "650473824820001",
+    "UTM_CAMPAIGN": "pg_4888",
+    "STATUS": "Blocked",
+    "RESTRICTED_UNTIL": "",
+    "COMPANY": "digital-trust",
+    "DOMAIN": ""
+  },
+  "delete_request": {
+    "method": "DELETE",
+    "url": "https://api.jbfdigital.com.br/campaigns/Messenger/684e8cd4-7e02-9a6f-5a50-b5f4bacfcbb1",
+    "status": 200,
+    "body": "true"
+  },
+  "rows_before": 3237,
+  "rows_after": 3236,
+  "canary_still_present": false,
+  "canary_after": null
+}
