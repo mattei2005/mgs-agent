@@ -1,0 +1,251 @@
+{
+  "created_at": "2026-07-07T12:43:04",
+  "ranges": [
+    "'Julho 2026'!AAG46:AAG51",
+    "'Julho 2026'!AAV46:AAV51",
+    "'Julho 2026'!TV112:TV140",
+    "'Julho 2026'!ABL100:ABQ180",
+    "'Julho 2026'!AAG46:AAL51",
+    "'Julho 2026'!AAV46:ABA51"
+  ],
+  "formula": [
+    {
+      "range": "'Julho 2026'!AAG46:AAG51",
+      "majorDimension": "ROWS"
+    },
+    {
+      "range": "'Julho 2026'!AAV46:AAV51",
+      "majorDimension": "ROWS"
+    },
+    {
+      "range": "'Julho 2026'!TV112:TV140",
+      "majorDimension": "ROWS"
+    },
+    {
+      "range": "'Julho 2026'!ABL100:ABQ180",
+      "majorDimension": "ROWS"
+    },
+    {
+      "range": "'Julho 2026'!AAG46:AAL51",
+      "majorDimension": "ROWS",
+      "values": [
+        [
+          "",
+          208.28,
+          "",
+          "=SUM(AAI46*$E$1)",
+          "",
+          "=SUM(AAK46*$E$1)"
+        ],
+        [
+          "",
+          234.48,
+          "",
+          "=SUM(AAI47*$E$1)",
+          "",
+          "=SUM(AAK47*$E$1)"
+        ],
+        [
+          "",
+          258.67,
+          "",
+          "=SUM(AAI48*$E$1)",
+          "",
+          "=SUM(AAK48*$E$1)"
+        ],
+        [
+          "",
+          237.26,
+          "",
+          "=SUM(AAI49*$E$1)",
+          "",
+          "=SUM(AAK49*$E$1)"
+        ],
+        [
+          "",
+          261.79,
+          "",
+          "=SUM(AAI50*$E$1)",
+          "",
+          "=SUM(AAK50*$E$1)"
+        ],
+        [
+          "",
+          308.21,
+          "",
+          "=SUM(AAI51*$E$1)",
+          "",
+          "=SUM(AAK51*$E$1)"
+        ]
+      ]
+    },
+    {
+      "range": "'Julho 2026'!AAV46:ABA51",
+      "majorDimension": "ROWS",
+      "values": [
+        [
+          "",
+          7053.1,
+          "=SUM(AAY46/$E$1)",
+          "",
+          "=SUM(ABA46/$E$1)"
+        ],
+        [
+          "",
+          11950.98,
+          "=SUM(AAY47/$E$1)",
+          "",
+          "=SUM(ABA47/$E$1)"
+        ],
+        [
+          "",
+          10120.18,
+          "=SUM(AAY48/$E$1)",
+          "",
+          "=SUM(ABA48/$E$1)"
+        ],
+        [
+          "",
+          6058.22,
+          "=SUM(AAY49/$E$1)",
+          "",
+          "=SUM(ABA49/$E$1)"
+        ],
+        [
+          "",
+          4882.69,
+          "=SUM(AAY50/$E$1)",
+          "",
+          "=SUM(ABA50/$E$1)"
+        ],
+        [
+          "",
+          1253.38,
+          "=SUM(AAY51/$E$1)",
+          "",
+          "=SUM(ABA51/$E$1)"
+        ]
+      ]
+    }
+  ],
+  "formatted": [
+    {
+      "range": "'Julho 2026'!AAG46:AAG51",
+      "majorDimension": "ROWS"
+    },
+    {
+      "range": "'Julho 2026'!AAV46:AAV51",
+      "majorDimension": "ROWS"
+    },
+    {
+      "range": "'Julho 2026'!TV112:TV140",
+      "majorDimension": "ROWS"
+    },
+    {
+      "range": "'Julho 2026'!ABL100:ABQ180",
+      "majorDimension": "ROWS"
+    },
+    {
+      "range": "'Julho 2026'!AAG46:AAL51",
+      "majorDimension": "ROWS",
+      "values": [
+        [
+          "",
+          " R$  208.28 ",
+          "",
+          " R$  -   ",
+          "",
+          " R$  -   "
+        ],
+        [
+          "",
+          " R$  234.48 ",
+          "",
+          " R$  -   ",
+          "",
+          " R$  -   "
+        ],
+        [
+          "",
+          " R$  258.67 ",
+          "",
+          " R$  -   ",
+          "",
+          " R$  -   "
+        ],
+        [
+          "",
+          " R$  237.26 ",
+          "",
+          " R$  -   ",
+          "",
+          " R$  -   "
+        ],
+        [
+          "",
+          " R$  261.79 ",
+          "",
+          " R$  -   ",
+          "",
+          " R$  -   "
+        ],
+        [
+          "",
+          " R$  308.21 ",
+          "",
+          " R$  -   ",
+          "",
+          " R$  -   "
+        ]
+      ]
+    },
+    {
+      "range": "'Julho 2026'!AAV46:ABA51",
+      "majorDimension": "ROWS",
+      "values": [
+        [
+          "",
+          " R$  7,053.10 ",
+          "$0.00",
+          "",
+          "$0.00"
+        ],
+        [
+          "",
+          " R$  11,950.98 ",
+          "$0.00",
+          "",
+          "$0.00"
+        ],
+        [
+          "",
+          " R$  10,120.18 ",
+          "$0.00",
+          "",
+          "$0.00"
+        ],
+        [
+          "",
+          " R$  6,058.22 ",
+          "$0.00",
+          "",
+          "$0.00"
+        ],
+        [
+          "",
+          " R$  4,882.69 ",
+          "$0.00",
+          "",
+          "$0.00"
+        ],
+        [
+          "",
+          " R$  1,253.38 ",
+          "$0.00",
+          "",
+          "$0.00"
+        ]
+      ]
+    }
+  ]
+}
