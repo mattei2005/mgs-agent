@@ -65,6 +65,15 @@
     });
   }
 
+  function adProvider(config) {
+    var provider = String(config.ad_provider || 'jbf').toLowerCase();
+    return provider === 'm2' || provider === 'monetizemore' || provider === 'monetize-more' ? 'm2' : 'jbf';
+  }
+
+  function applyRewardedClass(config, node) {
+    if (node && adProvider(config) === 'm2') node.classList.add('pg-rewarded');
+  }
+
   function ChatFunnel(container, config) {
     this.container = container;
     this.config = config;
@@ -82,7 +91,9 @@
     this.renderShell();
     if (this.config.gate && this.config.gate.enabled !== false) {
       this.renderGate();
-      requestRewardAds(this.config);
+      if (adProvider(this.config) !== 'm2') {
+        requestRewardAds(this.config);
+      }
     } else {
       this.startChat();
     }
@@ -202,6 +213,7 @@
       final.appendChild(el('p', 'mgs-cf-gate-title', gate.final_title || 'Oferta encontrada!'));
       final.appendChild(el('p', 'mgs-cf-gate-subtitle', gate.final_subtitle || 'Um especialista foi identificado para te atender agora.'));
       var cta = el('button', 'mgs-cf-gate-cta', gate.cta_label || 'VER OFERTAS →');
+      applyRewardedClass(self.config, cta);
       cta.type = 'button';
       cta.addEventListener('click', function () {
         cta.disabled = true;
