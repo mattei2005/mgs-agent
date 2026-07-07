@@ -400,6 +400,8 @@ Para testes/instalações do plugin `MGS Chat Funnels`, ver **`references/mgs-ch
 
 Para instalação em massa do `MGS Chat Funnels` junto com o plugin de quiz `activecampaign-quiz-lazy-blocks`, incluindo extração de pacote existente, RunCloud com `sudo -n`, WP Admin `/rodloguda/`, backups e validação por rota, ver **`references/mgs-chat-and-quiz-bulk-install-2026-07-03.md`**.
 
+**Regra crítica de rollout MGS Chat Funnels:** código/plugin pode ser empacotado em comum, mas `configs/*.json` nunca são neutros. Em rollout “todos os sites”, validar e/ou ajustar individualmente por domínio antes de concluir: `ad_domain`, `brand`, `route`, wrapper gerado (`{company}_{ad_domain}.builder.js`) e rota pública. Nunca propagar config de canário como Eggbev/OpenZed para outros sites sem troca explícita do domínio.
+
 **`references/mgs-chat-funnels-ciro-runtime-fixes-2026-07-01.md`**: correções runtime validadas com Ciro para `MGS Chat Funnels`: preload rewarded deve chamar `requestRewardAds()` 1 vez (não loop 5x), top ad precisa manter o chat no fundo via auto-scroll/observers, e deploy OpenZed via WP Admin pode exigir cookie `wordpress_test_cookie` + fluxo upload/replace quando REST plugin retorna `401 rest_cannot_view_plugin`.
 
 Quando Ciro/JBF corrigir a regra de rewarded para “1 só”, não copie loop legado de 5 auctions do `index.html`. O padrão operacional atual é 1 chamada de `requestRewardAds()` no `initQuiz`, sem `for`. Validar em browser com `googletag.pubads().getSlots()` — esperado apenas `..._rewarded/1`, não `/1` a `/5`. Ver `references/mgs-chat-funnels-one-rewarded.md`.
