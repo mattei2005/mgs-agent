@@ -393,6 +393,7 @@
   };
 
   ChatFunnel.prototype.showCardsOffers = function () {
+    var self = this;
     var chat = this.config.chat || {};
     var headline = chat.offer_headline || '🎉 Encontrei as melhores ofertas para você!';
     splitMessages(headline).forEach(this.addMessage.bind(this));
@@ -400,7 +401,7 @@
     var offers = el('div', 'mgs-cf-offers');
     (this.config.offers || []).forEach(function (offer) {
       var a = el('a', 'mgs-cf-offer-card');
-      applyRewardedClass(this.config, a);
+      applyRewardedClass(self.config, a);
       a.href = mergeSourceParams(offer.target || '#');
       if (offer.logo) {
         var img = el('img');
@@ -454,6 +455,8 @@
         } else {
           var a = el('a');
           a.href = mergeSourceParams(answer.target || '#');
+          applyRewardedClass(self.config, a);
+          applyRewardedClass(self.config, btn);
           a.appendChild(btn);
           wrap.appendChild(a);
         }
