@@ -396,6 +396,33 @@ final class MGS_Chat_Funnels {
         return 'https://assets.jbfdigital.com.br/assets/' . rawurlencode($company) . '/' . rawurlencode($domain) . '/' . rawurlencode($company . '_' . $domain) . '.builder.js';
     }
 
+    private function ad_provider($config) {
+        $provider = strtolower(trim((string) ($config['ad_provider'] ?? 'jbf')));
+        if (in_array($provider, array('m2', 'monetizemore', 'monetize-more'), true)) {
+            return 'm2';
+        }
+        return 'jbf';
+    }
+
+    private function render_ads_head_html($config) {
+        if (($config['ads_enabled'] ?? true) === false) {
+            return '';
+        }
+        if ($this->ad_provider($config) === 'm2') {
+            return '<!-- MGS Chat Funnels: MonetizeMore/M2 mode. JBF wrapper disabled; M2 triggers rewarded ads from .pg-rewarded buttons. -->';
+        }
+
+        $tags = isset($config['tags']) && is_array($config['tags']) ? array_values($config['tags']) : array();
+        $tags_json = $this->js_json($tags);
+        $wrapper_url = $this->ad_wrapper_url($config);
+        $html = '<script>window.tags = JSON.parse(' . $this->js_json($tags_json) . ');</script>' . "\n";
+        $html .= '<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>' . "\n";
+        if ($wrapper_url !== '') {
+            $html .= '<script defer src="' . esc_url($wrapper_url) . '"></script>';
+        }
+        return $html;
+    }
+
     private function render_ads_head_config($config) {
         $tags = isset($config['tags']) && is_array($config['tags']) ? array_values($config['tags']) : array();
         $json = wp_json_encode($tags, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP);

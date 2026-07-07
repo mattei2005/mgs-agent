@@ -350,15 +350,7 @@
       }
 
     </style>
-    {{TAGS_SCRIPT}}
-    <script
-      async=""
-      src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
-    ></script>
-    <script
-      defer=""
-      src="{{WRAPPER_URL}}"
-    ></script>
+    {{ADS_HEAD}}
   </head>
   <body>
     <div id="chat-container">
@@ -466,6 +458,12 @@
       // Header will be set inside window.onload
 
       const questions = {{QUESTIONS_JS}};
+      const rewardedButtonClass = {{REWARDED_BUTTON_CLASS_JS}};
+
+      function applyRewardedButtonClass(node) {
+        if (!node || !rewardedButtonClass) return;
+        rewardedButtonClass.split(/\s+/).filter(Boolean).forEach((className) => node.classList.add(className));
+      }
 
       function askQuestion(userAnswer) {
         const chatBox = document.getElementById("chat-box");
