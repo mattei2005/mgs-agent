@@ -685,19 +685,22 @@ final class MGS_Chat_Funnels {
         wp_nonce_field('mgs_cf_save', 'mgs_cf_nonce');
         echo '<input type="hidden" name="mgs_cf_action" value="save_human">';
 
-        echo '<section class="mgs-cf-section"><h3>1. Identidade e URL</h3><div class="mgs-cf-fields">';
+        echo '<section class="mgs-cf-section"><h3>1. Modelo de oferta</h3><div class="mgs-cf-fields">';
+        echo '<label><span>Modelo de oferta</span><select name="mode"><option value="cards"' . selected($mode, 'cards', false) . '>Cards: mostra todas as ofertas</option><option value="sequential"' . selected($mode, 'sequential', false) . '>Sequencial: uma oferta por vez</option></select><small>Cards: mostra todas as opções juntas, bom para comparação/vitrine. Sequencial: mostra uma oferta por vez, bom para simular atendimento humano e priorizar a oferta com maior EPC/ROI; se o usuário recusar, aparece a próxima.</small></label>';
+        echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>Diferença prática:</strong><br><b>Cards</b> = o usuário vê Nubank/C6/BV ao mesmo tempo e escolhe. <br><b>Sequencial</b> = o consultor apresenta Oferta 1; se o usuário clicar “não, mostre outra”, aparece Oferta 2, depois Oferta 3. Use sequencial quando existir prioridade comercial.</div>';
+        echo '</div></section>';
+
+        echo '<section class="mgs-cf-section"><h3>2. Identidade e URL</h3><div class="mgs-cf-fields">';
         $this->field_text('ID do chat', 'id', $id, 'Ex: EMP-BR-02. Esse nome vira o arquivo de configuração.', $is_new ? '' : 'readonly');
         $this->field_text('Nome interno', 'title', $config['title'] ?? '', 'Aparece no painel e no título da rota.');
         $this->field_text('URL / pasta do chat', 'route', $route, $is_new ? 'Ex: /chat/emp/br2. Defina isso na criação ou duplicação.' : 'Travado para evitar quebrar campanha/link já em tráfego. Para mudar URL, duplique o chat e escolha nova pasta.', $is_new ? '' : 'readonly');
         $this->field_text('Site', 'brand', $config['brand'] ?? 'MGS', 'Ex: OpenZed, FincFrog, MGS.');
         $this->field_text('Vertical', 'vertical', $config['vertical'] ?? 'emp', 'emp, car, cc, loan...');
-        $this->field_text('País', 'country', $config['country'] ?? 'br', 'br, us, mx, es...');
+        $this->field_text('País', 'country', $config['country'] ?? 'br, us, mx, es...');
         $this->field_text('Idioma', 'language', $config['language'] ?? 'pt-BR', 'pt-BR, en-US, es...');
-        echo '<label><span>Modelo de oferta</span><select name="mode"><option value="cards"' . selected($mode, 'cards', false) . '>Cards: mostra todas as ofertas</option><option value="sequential"' . selected($mode, 'sequential', false) . '>Sequencial: uma oferta por vez</option></select><small>Cards: mostra todas as opções juntas, bom para comparação/vitrine. Sequencial: mostra uma oferta por vez, bom para simular atendimento humano e priorizar a oferta com maior EPC/ROI; se o usuário recusar, aparece a próxima.</small></label>';
-        echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>Diferença prática:</strong><br><b>Cards</b> = o usuário vê Nubank/C6/BV ao mesmo tempo e escolhe. <br><b>Sequencial</b> = o consultor apresenta Oferta 1; se o usuário clicar “não, mostre outra”, aparece Oferta 2, depois Oferta 3. Use sequencial quando existir prioridade comercial.</div>';
         echo '</div></section>';
 
-        echo '<section class="mgs-cf-section"><h3>2. Monetização e rastreamento</h3><div class="mgs-cf-fields mgs-cf-fields-compact">';
+        echo '<section class="mgs-cf-section"><h3>3. Monetização e rastreamento</h3><div class="mgs-cf-fields mgs-cf-fields-compact">';
         $this->field_text('Company do wrapper', 'ad_company', $config['ad_company'] ?? 'digital-trust', 'Ex: digital-trust. Usado apenas para montar a URL do wrapper.');
         $ad_domain_value = $this->clean_ad_slug($config['ad_domain'] ?? '', '');
         if ($ad_domain_value === '') {
