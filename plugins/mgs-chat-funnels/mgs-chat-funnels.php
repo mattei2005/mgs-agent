@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MGS Chat Funnels
  * Description: Config-driven WhatsApp-style chat funnels by vertical and country (EMP-BR, CC-BR, CAR-BR) with rewarded/interstitial gate, UTM passthrough, cards/sequential offers, and shortcode/route rendering.
- * Version: 0.3.10
+ * Version: 0.3.11
  * Author: MGS Digital Corp
  */
 
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 }
 
 final class MGS_Chat_Funnels {
-    const VERSION = '0.3.10';
+    const VERSION = '0.3.11';
     const SHORTCODE = 'mgs_chat_funnel';
     const MENU_SLUG = 'mgs-chat-funnels';
 
@@ -765,11 +765,20 @@ final class MGS_Chat_Funnels {
             $ad_domain_value = $this->current_site_ad_slug();
         }
         $this->field_text('Domain do wrapper', 'ad_domain', $ad_domain_value, 'Ex: openzed. Já vem preenchido com a slug do domínio atual.');
-        $wrapper_preview = $this->ad_wrapper_url(array_merge($config, array(
+        $preview_config = array_merge($config, array(
             'ad_company' => $config['ad_company'] ?? 'digital-trust',
             'ad_domain' => $ad_domain_value,
-        )));
-        echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>Wrapper carregado:</strong><br><code>' . esc_html($wrapper_preview ?: 'Preencha o domain para gerar a URL do wrapper.') . '</code><br><small>O plugin não configura auctions, rewarded ou interstitial. Isso fica 100% com o wrapper.</small></div>';
+        ));
+        if ($this->ad_provider($preview_config) === 'm2') {
+            $wrapper_preview = 'https://c.pubguru.net/pg.wantabrand.js';
+            $wrapper_label = 'Script M2/PubGuru carregado:';
+            $wrapper_help = 'No Wantabrand/M2, o trigger é a classe pg-rewarded e o script PubGuru escuta essa classe.';
+        } else {
+            $wrapper_preview = $this->ad_wrapper_url($preview_config);
+            $wrapper_label = 'Wrapper carregado:';
+            $wrapper_help = 'O plugin não configura auctions, rewarded ou interstitial. Isso fica 100% com o wrapper.';
+        }
+        echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>' . esc_html($wrapper_label) . '</strong><br><code>' . esc_html($wrapper_preview ?: 'Preencha o domain para gerar a URL do wrapper.') . '</code><br><small>' . esc_html($wrapper_help) . '</small></div>';
         $this->field_checkbox('Preservar UTMs nos links finais', 'utm_passthrough', !empty($config['utm_passthrough']), 'Mantém utm_source, utm_campaign, gclid, etc.');
         $this->field_text('Tags', 'tags', implode(', ', $config['tags'] ?? array()), 'Separadas por vírgula.');
         echo '</div></section>';
