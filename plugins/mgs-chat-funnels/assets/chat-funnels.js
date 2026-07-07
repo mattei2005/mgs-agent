@@ -370,6 +370,8 @@
       if (target) {
         var a = el('a');
         a.href = mergeSourceParams(target);
+        applyRewardedClass(self.config, a);
+        applyRewardedClass(self.config, btn);
         a.appendChild(btn);
         wrap.appendChild(a);
       } else {
@@ -398,6 +400,7 @@
     var offers = el('div', 'mgs-cf-offers');
     (this.config.offers || []).forEach(function (offer) {
       var a = el('a', 'mgs-cf-offer-card');
+      applyRewardedClass(this.config, a);
       a.href = mergeSourceParams(offer.target || '#');
       if (offer.logo) {
         var img = el('img');
