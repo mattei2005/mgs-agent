@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-07T17:06:00-04:00",
+    "updated_at": "2026-07-07T18:45:00-04:00",
     "generated_by": "manual Zeus infra inventory update + infra-discovery base"
   },
   "system_packages": [
@@ -1851,6 +1851,33 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/utility-canary-approval-loop.py",
+      "size_bytes": 18327,
+      "sha256": "9d6ea7219446d2b5f5f9126ba82dd295c9aa1e959ba8717b902bbe01ecda2c6f",
+      "updated_at": "2026-07-07T18:45:00-04:00",
+      "source_report": "REPORT-INFRA Zeus Utility canary approval loop 2026-07-07",
+      "agent": "zeus",
+      "purpose": "Temporary 3h Utility canary approval loop and durable message bank/state."
+    },
+    {
+      "path": "/root/mgs-agent/scripts/utility-canary-approval-loop.sh",
+      "size_bytes": 228,
+      "sha256": "6eab8f37845123b24cbfa46c41f7a71f28695c1940e415b55bea6b2049251d98",
+      "updated_at": "2026-07-07T18:45:00-04:00",
+      "source_report": "REPORT-INFRA Zeus Utility canary approval loop 2026-07-07",
+      "agent": "zeus",
+      "purpose": "Temporary 3h Utility canary approval loop and durable message bank/state."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/scripts/utility-canary-approval-loop.sh",
+      "size_bytes": 94,
+      "sha256": "4804821b9dc6cbcd489a0b62a5dcf5538ddde46ec8a069a525d8fae00635b7c5",
+      "updated_at": "2026-07-07T18:45:00-04:00",
+      "source_report": "REPORT-INFRA Zeus Utility canary approval loop 2026-07-07",
+      "agent": "zeus",
+      "purpose": "Temporary 3h Utility canary approval loop and durable message bank/state."
     }
   ],
   "skills_mgs": [
@@ -4541,6 +4568,24 @@
       "size_bytes": 45590,
       "md5": "a5340a91cb211e86ffdd67b91f310c7c",
       "modified_at": "2026-07-07T10:20:02-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/utility-message-bank.json",
+      "size_bytes": 160368,
+      "sha256": "4d0a65b31296183041633a251cd0a8c301ad96b0c1e46592230c7cf094bf5f61",
+      "updated_at": "2026-07-07T18:45:00-04:00",
+      "source_report": "REPORT-INFRA Zeus Utility canary approval loop 2026-07-07",
+      "agent": "zeus",
+      "purpose": "Temporary 3h Utility canary approval loop and durable message bank/state."
+    },
+    {
+      "path": "/root/mgs-agent/data/utility-canary-approval-state.json",
+      "size_bytes": 105380,
+      "sha256": "3e052c8d3587cfbbaa9317d0be1aac47fce459c78782b7c48899025ef078c17b",
+      "updated_at": "2026-07-07T18:45:00-04:00",
+      "source_report": "REPORT-INFRA Zeus Utility canary approval loop 2026-07-07",
+      "agent": "zeus",
+      "purpose": "Temporary 3h Utility canary approval loop and durable message bank/state."
     }
   ],
   "mu_plugin_canonical": {
