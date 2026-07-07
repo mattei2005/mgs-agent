@@ -695,9 +695,34 @@ final class MGS_Chat_Funnels {
         $this->field_text('Nome interno', 'title', $config['title'] ?? '', 'Aparece no painel e no título da rota.');
         $this->field_text('URL / pasta do chat', 'route', $route, $is_new ? 'Ex: /chat/emp/br2. Defina isso na criação ou duplicação.' : 'Travado para evitar quebrar campanha/link já em tráfego. Para mudar URL, duplique o chat e escolha nova pasta.', $is_new ? '' : 'readonly');
         $this->field_text('Site', 'brand', $config['brand'] ?? 'MGS', 'Ex: OpenZed, FincFrog, MGS.');
-        $this->field_text('Vertical', 'vertical', $config['vertical'] ?? 'emp', 'emp, car, cc, loan...');
-        $this->field_text('País', 'country', $config['country'] ?? 'br', 'br, us, mx, es...');
-        $this->field_text('Idioma', 'language', $config['language'] ?? 'pt-BR', 'pt-BR, en-US, es...');
+        $this->field_select('Vertical', 'vertical', strtolower($config['vertical'] ?? 'emp'), array(
+            'app' => 'APP',
+            'car' => 'CAR',
+            'cc' => 'CC',
+            'emp' => 'EMP',
+            'job' => 'JOB',
+            'loan' => 'LOAN',
+        ), 'Selecione a vertical do chat.');
+        $this->field_select('País', 'country', strtolower($config['country'] ?? 'br'), array(
+            'ar' => 'AR',
+            'br' => 'BR',
+            'ca' => 'CA',
+            'es' => 'ES',
+            'mx' => 'MX',
+            'tr' => 'TR',
+            'us' => 'US',
+            'za' => 'ZA',
+        ), 'Selecione o país/mercado do chat.');
+        $this->field_select('Idioma', 'language', $config['language'] ?? 'pt-BR', array(
+            'de' => 'Alemão',
+            'es' => 'Espanhol',
+            'fr' => 'Francês',
+            'en-US' => 'Inglês',
+            'ja' => 'Japonês',
+            'pt-BR' => 'Português-BR',
+            'pt-PT' => 'Português-PT',
+            'tr' => 'Turco',
+        ), 'Selecione o idioma do chat.');
         echo '</div></section>';
 
         echo '<section class="mgs-cf-section"><h3>3. Monetização e rastreamento</h3><div class="mgs-cf-fields mgs-cf-fields-compact">';
@@ -836,6 +861,18 @@ final class MGS_Chat_Funnels {
 
     private function field_number($label, $name, $value, $help = '') {
         echo '<label><span>' . esc_html($label) . '</span><input type="number" name="' . esc_attr($name) . '" value="' . esc_attr($value) . '">';
+        if ($help) {
+            echo '<small>' . esc_html($help) . '</small>';
+        }
+        echo '</label>';
+    }
+
+    private function field_select($label, $name, $value, $options, $help = '') {
+        echo '<label><span>' . esc_html($label) . '</span><select name="' . esc_attr($name) . '">';
+        foreach ($options as $option_value => $option_label) {
+            echo '<option value="' . esc_attr($option_value) . '" ' . selected((string) $value, (string) $option_value, false) . '>' . esc_html($option_label) . '</option>';
+        }
+        echo '</select>';
         if ($help) {
             echo '<small>' . esc_html($help) . '</small>';
         }
