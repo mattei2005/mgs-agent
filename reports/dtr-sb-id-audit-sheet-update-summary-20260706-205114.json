@@ -1,0 +1,86 @@
+{
+  "started_at": "2026-07-06T20:52:01-04:00",
+  "source": "all_1password_digitaltrchat_items_full_live_global_id_first_sheet_write",
+  "matched_1p_users": 88,
+  "op_errors": [
+    {
+      "item": "BOT Digitaltrchat",
+      "error": "username_missing_or_invalid"
+    }
+  ],
+  "users_targeted": 88,
+  "errors": [],
+  "finished_scan_at": "2026-07-06T21:29:31-04:00",
+  "dtr_users_scanned": 88,
+  "dtr_login_ok": 88,
+  "dtr_accounts": 226,
+  "dtr_pages": 2912,
+  "sb_publishers": 56,
+  "sb_rows_total": 3237,
+  "sb_rows_audited_users": 2605,
+  "ok_matches": 2579,
+  "issues_count": 333,
+  "issue_types": {
+    "NO_SB_MATCH": 150,
+    "DIVERGENTE": 183
+  },
+  "field_breakdown": {
+    "missing_in_sb_after_full_global_check": 150,
+    "USER_LOGIN": 183
+  },
+  "basis_counts": {
+    "global+FB_PAGE_ID": 2762,
+    "none": 150
+  },
+  "company_scope": [
+    {
+      "company": "digital-trust",
+      "publishers_all": 45,
+      "publishers_active": 37
+    },
+    {
+      "company": "digital-trust-2",
+      "publishers_all": 11,
+      "publishers_active": 11
+    }
+  ],
+  "sheet_updated_at": "2026-07-06T21:29:45-04:00",
+  "json": "/root/mgs-agent/reports/dtr-sb-id-audit-sheet-update-20260706-205114.json",
+  "sheet_results": {
+    "LOGIN_DIVERGE": {
+      "tab": "Login difere ou vazio",
+      "gid": 285680288,
+      "expected": 183,
+      "readback": 183,
+      "url": "https://docs.google.com/spreadsheets/d/1VNz7l1soafiju0v89H0IfaKJHcgioVjUw6nXyORl9oI/edit?gid=285680288#gid=285680288"
+    },
+    "PAGE_ID_DIVERGE": {
+      "tab": "FB ok PG difere",
+      "gid": 559166535,
+      "expected": 0,
+      "readback": 0,
+      "url": "https://docs.google.com/spreadsheets/d/1VNz7l1soafiju0v89H0IfaKJHcgioVjUw6nXyORl9oI/edit?gid=559166535#gid=559166535"
+    },
+    "UTM_DIVERGE": {
+      "tab": "UTM difere",
+      "gid": 1628001832,
+      "expected": 0,
+      "readback": 0,
+      "url": "https://docs.google.com/spreadsheets/d/1VNz7l1soafiju0v89H0IfaKJHcgioVjUw6nXyORl9oI/edit?gid=1628001832#gid=1628001832"
+    },
+    "NO_SB_MATCH": {
+      "tab": "Não encontrado por IDs",
+      "gid": 1540560615,
+      "expected": 150,
+      "readback": 150,
+      "url": "https://docs.google.com/spreadsheets/d/1VNz7l1soafiju0v89H0IfaKJHcgioVjUw6nXyORl9oI/edit?gid=1540560615#gid=1540560615"
+    },
+    "OK": {
+      "tab": "OK LOGIN PAGE FB UTM",
+      "gid": 1917823513,
+      "expected": 2579,
+      "readback": 2579,
+      "url": "https://docs.google.com/spreadsheets/d/1VNz7l1soafiju0v89H0IfaKJHcgioVjUw6nXyORl9oI/edit?gid=1917823513#gid=1917823513"
+    }
+  }
+}
