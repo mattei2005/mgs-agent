@@ -39,14 +39,16 @@ Public route:
 ## RunCloud write method
 
 - Use the owning webapp user: `runcloud` vs `runcloud2`.
-- Use `sudo -n` for file operations under `/home/runcloud*`.
+- Use `sudo -n` for file operations under `/home/runcloud*`. If direct SSH as `zeus` can read but cannot write the plugin config (`Permission denied`), run the remote updater itself with `sudo -n python3 -` rather than trying to write as the webapp user from an unprivileged shell.
+- Source `/root/mgs-agent/.env` with `set -a` / `set +a` before calling `op` from a local helper script, so the 1Password service-account token is exported for subprocesses.
 - Before overwrite, copy backup:
 
 ```text
 car-br-01.json.zeus-bak-YYYYMMDD-HHMMSS
 ```
 
-- Validate plugin active before writing:
+- For simple target URL swaps, a safe batch updater can load each JSON, update only `offers[0..2].target`, write a temp JSON, re-parse it, atomically replace the config, then `chown {user}:{user}` the config and backup.
+- Validate plugin active before writing when using WP-CLI:
 
 ```bash
 sudo -u {user} wp --path={path} plugin is-active mgs-chat-funnels --allow-root
@@ -71,7 +73,7 @@ For `openzed.com` / `cliquet.com`, if direct filesystem write is unavailable:
 /wp-admin/admin.php?page=mgs-chat-funnels&funnel=CAR-BR-01
 ```
 
-3. Extract `mgs_cf_nonce`.
+3. Extract `mgs_cf_nonce` and the current `<textarea name="raw_json">` content from the authenticated admin page.
 4. POST raw JSON with:
 
 ```text
@@ -80,6 +82,9 @@ raw_json=<updated config>
 ```
 
 5. Validate the save response contains `JSON salvo com sucesso` or equivalent success notice.
+6. Re-fetch the admin page and parse `raw_json` again; verify the 3 saved `offers[N].target` values exactly match the requested URLs. A success notice alone is not sufficient.
+
+A lightweight Python `requests.Session()` flow is enough for this; avoid adding dependencies just to parse the form. Regex extraction of `mgs_cf_nonce` and `raw_json` is acceptable when immediately followed by JSON parse + public-route validation.
 
 ## Related mode conversion
 
@@ -96,11 +101,11 @@ https://DOMAIN/chat/car/br1/?zeus_cache=TIMESTAMP&utm_source=zeusqa&utm_campaign
 Confirm all of these before reporting success:
 
 - HTTP 200.
-- Route marker exists: standalone Ciro template has `const questions =`; shortcode renderer has `mgs-chat-funnel-config`.
+- Route marker exists: standalone Ciro template has `const questions =`; shortcode renderer has `mgs-chat-funnel-config`; card-mode standalone routes may also expose `offer-card` links directly.
 - All 3 expected per-domain target URLs appear in the HTML/source.
-- All 3 new offer text snippets appear.
-- Old offer copy snippets are absent.
-- At least one browser smoke test reaches an offer CTA and confirms UTM passthrough in the rendered link.
+- All 3 new offer text snippets appear when copy was changed; for URL-only swaps, confirm the 3 expected car/card names or other stable card identifiers instead.
+- Old offer copy snippets are absent when copy was changed.
+- At least one browser smoke test reaches the final cards/offer CTA and confirms UTM passthrough in the rendered link (`utm_*`, `fbclid`, etc. carried from the chat URL to each target URL).
 
 ## Pitfalls
 
