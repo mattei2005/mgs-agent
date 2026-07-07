@@ -1,7 +1,7 @@
 {
   "version": 1,
   "created_at_et": "2026-07-07T18:40:00-04:00",
-  "updated_at_et": "2026-07-07T19:20:37-04:00",
+  "updated_at_et": "2026-07-07T19:26:24-04:00",
   "description": "Durable registry of MGS Utility Template messages observed in SB approvals. Keyed by normalized TEXT+CTA hash; LINK_1 is excluded because links are template/page-specific slots.",
   "records": {
     "97de046b0c219b195fef5785253a7b0ccf2ba6fb97c2e6bcef583e40837a21ab": {
@@ -12,10 +12,10 @@
       "text": "💳 CARD REVIEW UPDATE\n\nYour card request has a new review step available. Open the update to continue with the available options.",
       "cta_1": "🔍 REVIEW CARD",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 12,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 16,
       "rejected_count": 0,
       "gray_count": 8,
       "purple_count": 0,
@@ -160,6 +160,34 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 1,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 1,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 1,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 1,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -172,12 +200,12 @@
       "text": "📋 CARD REQUEST STATUS\n\nA card status check is ready for review. Use the next screen to confirm the details and continue.",
       "cta_1": "✅ CHECK STATUS",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 13,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 18,
       "rejected_count": 0,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -334,6 +362,48 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 2,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 2,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 12,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 2,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 2,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": [
@@ -524,10 +594,10 @@
       "text": "✅ CARD REVIEW AVAILABLE\n\nThe card recommendation flow has a new result ready. Review the details before continuing.",
       "cta_1": "➡️ CONTINUE",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 9,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 12,
       "rejected_count": 1,
       "gray_count": 8,
       "purple_count": 0,
@@ -658,6 +728,27 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 4,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 4,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 4,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -670,10 +761,10 @@
       "text": "📌 APPLICATION STEP READY\n\nA pending card review needs confirmation. Open the page to see the available card options.",
       "cta_1": "💳 REVIEW UPDATE",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 12,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 16,
       "rejected_count": 0,
       "gray_count": 8,
       "purple_count": 0,
@@ -818,6 +909,34 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 5,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 5,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 6,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 5,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -830,10 +949,10 @@
       "text": "💬 CARD MATCH UPDATE\n\nYour application review is ready for the next step. Check the status and continue from the secure page.",
       "cta_1": "🔎 OPEN REVIEW",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 12,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 16,
       "rejected_count": 0,
       "gray_count": 8,
       "purple_count": 0,
@@ -978,6 +1097,34 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 6,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 7,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 7,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 6,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -990,10 +1137,10 @@
       "text": "📄 REVIEW STEP OPEN\n\nThere is an update on your card request. Review the current option and confirm the next detail.",
       "cta_1": "✅ CONFIRM DETAILS",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 12,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 16,
       "rejected_count": 0,
       "gray_count": 8,
       "purple_count": 0,
@@ -1138,6 +1285,34 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 7,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 8,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 8,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 7,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -1150,10 +1325,10 @@
       "text": "🔔 (1) NEW CARD UPDATE\n\nYour Credit Card status has changed to: APPROVED.\n\nTap to see your starting limit and shipping date.",
       "cta_1": "📥 READ STATUS",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:19-04:00",
+      "last_seen_at": "2026-07-07T19:26:20-04:00",
       "first_approved_at": "2026-07-07T19:00:06-04:00",
-      "last_approved_at": "2026-07-07T19:20:19-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:20-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -1193,6 +1368,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:19-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 8,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
         }
       ],
       "usage": []
@@ -1205,12 +1387,12 @@
       "text": "🔔 CARD PROFILE UPDATE\n\nYour card selection step is available now. Open the update to review the current recommendation.",
       "cta_1": "📌 VIEW RESULT",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:25-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 3,
-      "gray_count": 8,
+      "gray_count": 9,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -1311,6 +1493,20 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 9,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": [
@@ -1330,10 +1526,10 @@
       "text": "💳 CARD REVIEW UPDATE\n\nA card status check is ready for review. Use the next screen to confirm the details and continue.",
       "cta_1": "🔍 REVIEW CARD",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 14,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 20,
       "rejected_count": 1,
       "gray_count": 10,
       "purple_count": 0,
@@ -1513,6 +1709,48 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 10,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 18,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 10,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 10,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 9,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 17,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": [
@@ -1544,10 +1782,10 @@
       "text": "📋 CARD REQUEST STATUS\n\nYour credit profile has card options available to review. Open the update and check the next step.",
       "cta_1": "✅ CHECK STATUS",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 12,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 16,
       "rejected_count": 0,
       "gray_count": 8,
       "purple_count": 0,
@@ -1692,6 +1930,34 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 11,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 11,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 11,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 10,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -1808,10 +2074,10 @@
       "text": "✅ CARD REVIEW AVAILABLE\n\nA pending card review needs confirmation. Open the page to see the available card options.",
       "cta_1": "➡️ CONTINUE",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 12,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 16,
       "rejected_count": 0,
       "gray_count": 8,
       "purple_count": 0,
@@ -1956,6 +2222,34 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 13,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 13,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 13,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 12,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -1968,10 +2262,10 @@
       "text": "📌 APPLICATION STEP READY\n\nYour application review is ready for the next step. Check the status and continue from the secure page.",
       "cta_1": "💳 REVIEW UPDATE",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 12,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 16,
       "rejected_count": 0,
       "gray_count": 8,
       "purple_count": 0,
@@ -2116,6 +2410,34 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 14,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 14,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 14,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 13,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -2128,10 +2450,10 @@
       "text": "💬 CARD MATCH UPDATE\n\nThere is an update on your card request. Review the current option and confirm the next detail.",
       "cta_1": "🔎 OPEN REVIEW",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 12,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 16,
       "rejected_count": 0,
       "gray_count": 8,
       "purple_count": 0,
@@ -2276,6 +2598,34 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 15,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 15,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 15,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 14,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -2288,10 +2638,10 @@
       "text": "📄 REVIEW STEP OPEN\n\nYour card selection step is available now. Open the update to review the current recommendation.",
       "cta_1": "✅ CONFIRM DETAILS",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 12,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 16,
       "rejected_count": 0,
       "gray_count": 8,
       "purple_count": 0,
@@ -2436,6 +2786,34 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 16,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 16,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 16,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 15,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -2448,10 +2826,10 @@
       "text": "🔔 CARD PROFILE UPDATE\n\nYour card request has a new review step available. Open the update to continue with the available options.",
       "cta_1": "📌 VIEW RESULT",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 12,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 16,
       "rejected_count": 0,
       "gray_count": 8,
       "purple_count": 0,
@@ -2596,6 +2974,34 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 17,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 17,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 17,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 16,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -2712,10 +3118,10 @@
       "text": "📋 CARD REQUEST STATUS\n\nThe card recommendation flow has a new result ready. Review the details before continuing.",
       "cta_1": "✅ CHECK STATUS",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 12,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 16,
       "rejected_count": 0,
       "gray_count": 8,
       "purple_count": 0,
@@ -2860,6 +3266,34 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 19,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 19,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 19,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 19,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -2872,10 +3306,10 @@
       "text": "🔎 CARD OPTIONS READY\n\nA pending card review needs confirmation. Open the page to see the available card options.",
       "cta_1": "📋 SEE OPTIONS",
       "first_seen_at": "2026-07-07T19:00:06-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:18-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 12,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 16,
       "rejected_count": 0,
       "gray_count": 8,
       "purple_count": 0,
@@ -3020,6 +3454,34 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 20,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 20,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 20,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 20,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -3032,10 +3494,10 @@
       "text": "💳 KARTEN UPDATE\n\nFür deine Kartenanfrage ist ein neuer Prüfschritt verfügbar. Öffne das Update und sieh dir die Optionen an.",
       "cta_1": "🔍 KARTE PRÜFEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 4,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 3,
       "purple_count": 0,
@@ -3089,6 +3551,20 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 1,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 11,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": [
@@ -3108,10 +3584,10 @@
       "text": "📋 ANFRAGE STATUS\n\nDer Status deiner Karte ist zur Prüfung bereit. Bestätige die Angaben auf der nächsten Seite.",
       "cta_1": "✅ STATUS ANSEHEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3151,6 +3627,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 2,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3204,10 +3687,10 @@
       "text": "✅ PRÜFUNG VERFÜGBAR\n\nDer Kartenempfehlungsprozess hat ein Ergebnis bereit. Prüfe die Details bevor du fortfährst.",
       "cta_1": "➡️ WEITER",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3247,6 +3730,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 4,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3259,10 +3749,10 @@
       "text": "📌 BESTÄTIGUNG BEREIT\n\nEine Kartenprüfung wartet auf Bestätigung. Öffne die Seite und bestätige die aktuellen Angaben.",
       "cta_1": "💳 UPDATE ANSEHEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3302,6 +3792,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 5,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3314,10 +3811,10 @@
       "text": "💬 KARTEN ERGEBNIS\n\nDein Kartenprozess ist für den nächsten Schritt bereit. Sieh dir den Status an und fahre fort.",
       "cta_1": "🔎 PRÜFUNG ÖFFNEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3357,6 +3854,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 6,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3369,10 +3873,10 @@
       "text": "📄 PRÜFUNG OFFEN\n\nEs gibt ein Update zu deiner Kartenanfrage. Prüfe die aktuelle Option und bestätige die Angaben.",
       "cta_1": "✅ DATEN BESTÄTIGEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3412,6 +3916,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 7,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3424,10 +3935,10 @@
       "text": "🔔 PROFIL UPDATE\n\nDer Auswahlschritt für deine Karte ist verfügbar. Öffne das Update und prüfe die Empfehlung.",
       "cta_1": "📌 ERGEBNIS SEHEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3467,6 +3978,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 8,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3479,10 +3997,10 @@
       "text": "💳 KARTEN UPDATE\n\nDer Status deiner Karte ist zur Prüfung bereit. Bestätige die Angaben auf der nächsten Seite.",
       "cta_1": "🔍 KARTE PRÜFEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3522,6 +4040,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 9,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3534,10 +4059,10 @@
       "text": "📋 ANFRAGE STATUS\n\nFür dein Profil stehen Kartenoptionen zur Prüfung bereit. Öffne die Übersicht für den nächsten Schritt.",
       "cta_1": "✅ STATUS ANSEHEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3577,6 +4102,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 10,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3630,10 +4162,10 @@
       "text": "✅ PRÜFUNG VERFÜGBAR\n\nEine Kartenprüfung wartet auf Bestätigung. Öffne die Seite und bestätige die aktuellen Angaben.",
       "cta_1": "➡️ WEITER",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3673,6 +4205,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 12,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3685,10 +4224,10 @@
       "text": "📌 BESTÄTIGUNG BEREIT\n\nDein Kartenprozess ist für den nächsten Schritt bereit. Sieh dir den Status an und fahre fort.",
       "cta_1": "💳 UPDATE ANSEHEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3728,6 +4267,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 13,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3740,10 +4286,10 @@
       "text": "💬 KARTEN ERGEBNIS\n\nEs gibt ein Update zu deiner Kartenanfrage. Prüfe die aktuelle Option und bestätige die Angaben.",
       "cta_1": "🔎 PRÜFUNG ÖFFNEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3783,6 +4329,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 14,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3795,10 +4348,10 @@
       "text": "📄 PRÜFUNG OFFEN\n\nDer Auswahlschritt für deine Karte ist verfügbar. Öffne das Update und prüfe die Empfehlung.",
       "cta_1": "✅ DATEN BESTÄTIGEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3838,6 +4391,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 15,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3850,10 +4410,10 @@
       "text": "🔔 PROFIL UPDATE\n\nFür deine Kartenanfrage ist ein neuer Prüfschritt verfügbar. Öffne das Update und sieh dir die Optionen an.",
       "cta_1": "📌 ERGEBNIS SEHEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3893,6 +4453,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 16,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3905,10 +4472,10 @@
       "text": "💳 KARTEN UPDATE\n\nFür dein Profil stehen Kartenoptionen zur Prüfung bereit. Öffne die Übersicht für den nächsten Schritt.",
       "cta_1": "🔍 KARTE PRÜFEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -3948,6 +4515,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 17,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -3960,10 +4534,10 @@
       "text": "📋 ANFRAGE STATUS\n\nDer Kartenempfehlungsprozess hat ein Ergebnis bereit. Prüfe die Details bevor du fortfährst.",
       "cta_1": "✅ STATUS ANSEHEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -4003,6 +4577,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 18,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4015,10 +4596,10 @@
       "text": "🔎 KARTEN OPTIONEN\n\nEine Kartenprüfung wartet auf Bestätigung. Öffne die Seite und bestätige die aktuellen Angaben.",
       "cta_1": "📋 OPTIONEN SEHEN",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -4058,6 +4639,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 19,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4070,10 +4658,10 @@
       "text": "✅ PRÜFUNG VERFÜGBAR\n\nDein Kartenprozess ist für den nächsten Schritt bereit. Sieh dir den Status an und fahre fort.",
       "cta_1": "➡️ WEITER",
       "first_seen_at": "2026-07-07T19:00:07-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:21-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -4113,6 +4701,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 20,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4125,10 +4720,10 @@
       "text": "📦 SHIPMENT UPDATE\n\nYour Credit Card package is waiting for one final confirmation before dispatch.\n\nReview your information here.",
       "cta_1": "📦 REVIEW INFO",
       "first_seen_at": "2026-07-07T19:00:08-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:08-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -4168,6 +4763,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 6,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4180,10 +4782,10 @@
       "text": "📍 VE​RI​FI​CA​CI​ÓN DE DI​RE​CC​IÓ​N\n\nNe​ce​si​ta​mo​s co​nf​ir​ma​r la di​re​cc​ió​n de en​tr​eg​a vi​nc​ul​ad​a a su so​li​ci​tu​d de ta​rj​et​a de cr​éd​it​o.\n\nTo​qu​e a co​nt​in​ua​ci​ón pa​ra ve​ri​fi​ca​rl​o.",
       "cta_1": "📍 VERIFICAR DIRECCIÓN",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -4223,6 +4825,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 1,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4235,10 +4844,10 @@
       "text": "📦 PA​QU​ET​E DE TA​RJ​ET​AS LI​ST​O\n\nTu ki​t de Ta​rj​et​a de Cr​éd​it​o es​tá pr​ep​ar​ad​o y es​pe​ra​nd​o co​nf​ir​ma​ci​ón de en​tr​eg​a.\n\nCo​nf​ir​ma tu​s da​to​s pa​ra co​nt​in​ua​r.",
       "cta_1": "✅ CONFIRMAR DETALLES",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -4278,6 +4887,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 2,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4290,10 +4906,10 @@
       "text": "🏠 OP​CI​ÓN DE EN​TR​EG​A A DO​MI​CI​LI​O\n\nLa en​tr​eg​a a do​mi​ci​li​o es​tá di​sp​on​ib​le pa​ra su pa​qu​et​e de Ta​rj​et​a de Cr​éd​it​o.\n\nCo​nf​ir​ma tu di​re​cc​ió​n pa​ra se​gu​ir ad​el​an​te.",
       "cta_1": "🏠 CONFIRMAR DOMICILIO",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -4333,6 +4949,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 3,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4345,10 +4968,10 @@
       "text": "🚚 PA​SO DE ME​NS​AJ​ER​ÍA LI​ST​O\n\nEl pa​so de me​ns​aj​er​ía pa​ra su pa​qu​et​e de Ta​rj​et​a de Cr​éd​it​o es​tá di​sp​on​ib​le.\n\nCo​nf​ir​ma la in​fo​rm​ac​ió​n de en​tr​eg​a pa​ra co​nt​in​ua​r.",
       "cta_1": "🚚 INICIAR LA ENTREGA",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -4388,6 +5011,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 4,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4400,12 +5030,12 @@
       "text": "💳 ACTUALIZACIÓN​ DE TARJETA​\n\nTu solicitud​ de tarjeta​ tiene una​ nueva revisión​ disponible. Abre​ la actualización​ para continuar​ con las​ opciones.",
       "cta_1": "🔍 REVISAR TARJETA",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 11,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 16,
       "rejected_count": 0,
-      "gray_count": 15,
+      "gray_count": 17,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -4590,6 +5220,55 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 5,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 1,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 11,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 1,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 11,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 1,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": [
@@ -4621,10 +5300,10 @@
       "text": "📬 PA​QU​ET​E NO RE​CL​AM​AD​O: un pa​qu​et​e de ta​rj​et​a de cr​éd​it​o co​n un lí​mi​te de € 14,200 no se ha re​cl​am​ad​o a su no​mb​re.\n\nEs​tá en el ce​nt​ro de cl​as​if​ic​ac​ió​n. Re​cl​am​a la en​tr​eg​a an​te​s de qu​e se​a de​vu​el​ta.",
       "cta_1": "🚚 ENTREGA DE RECLAMACIÓN",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -4664,6 +5343,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 6,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4676,10 +5362,10 @@
       "text": "🚚 PA​SO DE EN​TR​EG​A AB​IE​RT​O\n\nYa es​tá di​sp​on​ib​le el pa​so de en​tr​eg​a de tu Ta​rj​et​a de Cr​éd​it​o.\n\nTo​qu​e pa​ra co​nf​ir​ma​r dó​nd​e de​be en​vi​ar​se.",
       "cta_1": "🚚 CONFIRMAR ENTREGA",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -4719,6 +5405,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 7,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4731,10 +5424,10 @@
       "text": "🔓 TA​RJ​ET​A DE​SB​LO​QU​EA​DA\n\nSu ta​rj​et​a de cr​éd​it​o vi​rt​ua​l es​tá li​st​a pa​ra us​ar y la fí​si​ca es​tá es​pe​ra​nd​o su en​ví​o.\n\nTo​qu​e pa​ra fi​na​li​za​r el pr​oc​es​o.",
       "cta_1": "💳 DESBLOQUEAR TARJETA",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -4774,6 +5467,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 8,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4786,10 +5486,10 @@
       "text": "📦 el pa​qu​et​e de tu ta​rj​et​a fu​e ma​rc​ad​o co​mo no en​tr​eg​ad​o.\n\nNe​ce​si​ta​mo​s qu​e vu​el​va a co​nf​ir​ma​r su di​re​cc​ió​n an​te​s de re​as​ig​na​r su es​pa​ci​o a la si​gu​ie​nt​e pe​rs​on​a de la li​st​a.",
       "cta_1": "✅ CONFIRMAR DIRECCIÓN",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -4829,6 +5529,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 9,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4841,10 +5548,10 @@
       "text": "🔔 (1) AC​TU​AL​IZ​AC​IÓ​N DE NU​EV​A TA​RJ​ET​A\n\nEl es​ta​do de su ta​rj​et​a de cr​éd​it​o ha ca​mb​ia​do a: AP​RO​BA​DO.\n\nTo​qu​e pa​ra ve​r su lí​mi​te in​ic​ia​l y la fe​ch​a de en​ví​o.",
       "cta_1": "📥 LEER ESTADO",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -4884,6 +5591,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 10,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4896,10 +5610,10 @@
       "text": "🔔 (1) AC​TU​AL​IZ​AC​IÓ​N DE TA​RJ​ET​A\n\nTu so​li​ci​tu​d de Ta​rj​et​a de Cr​éd​it​o ti​en​e un nu​ev​o es​ta​do di​sp​on​ib​le.\n\nTo​qu​e a co​nt​in​ua​ci​ón pa​ra re​vi​sa​r el si​gu​ie​nt​e pa​so.",
       "cta_1": "📥 LEER ACTUALIZACIÓN",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -4939,6 +5653,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 11,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -4951,10 +5672,10 @@
       "text": "📬 AV​IS​O DE EN​TR​EG​A\n\nSu pa​qu​et​e de ta​rj​et​a de cr​éd​it​o ne​ce​si​ta un​a co​nf​ir​ma​ci​ón de en​tr​eg​a an​te​s de po​de​r tr​as​la​da​rs​e.\n\nCo​nf​ir​ma tu​s da​to​s aq​uí.",
       "cta_1": "📬 CONFIRMAR AHORA",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -4994,6 +5715,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 12,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -5006,10 +5734,10 @@
       "text": "💳 TA​RJ​ET​A VI​RT​UA​L LI​ST​A\n\n¡Tu Ta​rj​et​a de Cr​éd​it​o di​gi​ta​l es​tá ac​ti​va!\n\nMi​en​tr​as en​vi​am​os el fí​si​co, pu​ed​es ve​ri​fi​ca​r tu lí​mi​te y co​me​nz​ar a us​ar​lo.",
       "cta_1": "📱 TARJETA ABIERTA",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -5049,6 +5777,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 13,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -5061,10 +5796,10 @@
       "text": "📍 PU​NT​O DE VE​RI​FI​CA​CI​ÓN DE ES​TA​DO\n\nSu so​li​ci​tu​d de Ta​rj​et​a de Cr​éd​it​o ll​eg​ó a un nu​ev​o pu​nt​o de co​nt​ro​l.\nRe​vi​se el es​ta​do y co​nf​ir​me el si​gu​ie​nt​e pa​so a co​nt​in​ua​ci​ón.",
       "cta_1": "📍 VERIFICAR ESTADO",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -5104,6 +5839,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 14,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -5116,10 +5858,10 @@
       "text": "📝 RE​VI​SI​ÓN DE SO​LI​CI​TU​D DE TA​RJ​ET​A\n\nLa re​vi​si​ón de su so​li​ci​tu​d de ta​rj​et​a de cr​éd​it​o es​tá li​st​a.\nVe​ri​fi​ca lo​s de​ta​ll​es y co​nf​ir​ma el si​gu​ie​nt​e pa​so.",
       "cta_1": "📝 REVISAR AHORA",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -5159,6 +5901,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 15,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -5171,10 +5920,10 @@
       "text": "📦 Es​ta​do: RE​TE​NI​DO\nSu ta​rj​et​a pr​ea​pr​ob​ad​a es​tá es​pe​ra​nd​o.\nSó​lo ne​ce​si​ta​mo​s la co​nf​ir​ma​ci​ón de su di​re​cc​ió​n de en​tr​eg​a.",
       "cta_1": "🚚 CONFIRMAR DIRECCIÓN",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -5214,6 +5963,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 16,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -5226,10 +5982,10 @@
       "text": "📦 AC​TU​AL​IZ​AC​IÓ​N DE EN​VÍ​O\n\nSu pa​qu​et​e de ta​rj​et​a de cr​éd​it​o es​tá es​pe​ra​nd​o un​a co​nf​ir​ma​ci​ón fi​na​l an​te​s de​l en​ví​o.\n\nRe​vi​sa tu in​fo​rm​ac​ió​n aq​uí.",
       "cta_1": "📦 REVISAR INFORMACIÓN",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -5269,6 +6025,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 17,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -5281,10 +6044,10 @@
       "text": "✅ CO​NF​IR​MA​CI​ÓN DE​L PA​SO DE LA TA​RJ​ET​A\n\nEl pa​so de su ta​rj​et​a es​tá li​st​o pa​ra su co​nf​ir​ma​ci​ón.\nCo​mp​lé​te​lo ah​or​a pa​ra co​nt​in​ua​r co​n la so​li​ci​tu​d.",
       "cta_1": "✅ CONFIRMAR PASO",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -5324,6 +6087,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 18,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -5336,10 +6106,10 @@
       "text": "📌 RE​VI​SI​ÓN DE IN​FO​RM​AC​IÓ​N\n\nLa in​fo​rm​ac​ió​n de su so​li​ci​tu​d es​tá li​st​a pa​ra su re​vi​si​ón.\nCo​nf​ir​me lo​s de​ta​ll​es de la ta​rj​et​a an​te​s de co​nt​in​ua​r.",
       "cta_1": "📌 REVISAR INFORMACIÓN",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -5379,6 +6149,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 19,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -5391,10 +6168,10 @@
       "text": "✅ CO​NF​IR​MA​R SO​LI​CI​TU​D DE TA​RJ​ET​A\n\nSu so​li​ci​tu​d de Ta​rj​et​a de Cr​éd​it​o ne​ce​si​ta co​nf​ir​ma​ci​ón.\nRe​vi​se la in​fo​rm​ac​ió​n y co​mp​le​te el pa​so ah​or​a.",
       "cta_1": "✅ CONFIRMAR SOLICITUD",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -5434,6 +6211,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 20,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -5446,12 +6230,12 @@
       "text": "📋 ESTADO​ DE SOLICITUD​\n\nEl estado​ de tu​ tarjeta está​ listo para​ revisar. Confirma​ los datos​ en la​ siguiente pantalla​ y continúa.​",
       "cta_1": "✅ VER ESTADO",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 6,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 8,
       "rejected_count": 0,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -5559,6 +6343,27 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 2,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 2,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 2,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -5571,10 +6376,10 @@
       "text": "💳 TARJETA DE CRÉDITO APROBADA\n\n¡Felicidades! Tu nueva Tarjeta de Crédito está lista para envío.\n\nSolo necesitamos confirmar la dirección de entrega.",
       "cta_1": "🚚 CONFIRMAR AHORA",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -5614,6 +6419,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 3,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -5626,10 +6438,10 @@
       "text": "✅ ENTREGA CONFIRMADA\nTu tarjeta con límite de $15,000 se está preparando para envío.\nVerifica tus datos para enviarla.",
       "cta_1": "🚚 ENVIAR MI TARJETA",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -5669,6 +6481,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 4,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -5681,10 +6500,10 @@
       "text": "⚡ TARJETA ENVIADA. Sin espera. Tu Tarjeta de Crédito fue aprobada al instante y ya está en el sistema de entrega.\n\nToca para asignar el mensajero y recibirla hoy.",
       "cta_1": "🚚 ASIGNAR MENSAJERO",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:09-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -5724,6 +6543,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 5,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -5819,12 +6645,12 @@
       "text": "✅ REVISIÓN​ DISPONIBLE\n\nEl​ flujo de​ recomendación de​ tarjeta tiene​ un resultado​ listo. Revisa​ los detalles​ antes de​ continuar.",
       "cta_1": "➡️ CONTINUAR",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 7,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 10,
       "rejected_count": 0,
-      "gray_count": 10,
+      "gray_count": 11,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -5946,6 +6772,34 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 7,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 14,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 4,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 4,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": [
@@ -5965,12 +6819,12 @@
       "text": "📌 PASO​ DE CONFIRMACIÓN​\n\nHay una​ revisión pendiente​ de tu​ tarjeta. Abre​ la página​ para confirmar​ la información​ actual.",
       "cta_1": "💳 VER ACTUALIZACIÓN",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 6,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 8,
       "rejected_count": 0,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -6078,6 +6932,27 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 8,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 5,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 5,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -6090,12 +6965,12 @@
       "text": "💬 RESULTADO​ DE TARJETA​\n\nTu proceso​ de tarjeta​ está listo​ para el​ próximo paso.​ Revisa el​ estado y​ continúa desde​ la página​ segura.",
       "cta_1": "🔎 ABRIR REVISIÓN",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 6,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 8,
       "rejected_count": 0,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -6203,6 +7078,27 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 9,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 6,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 6,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -6215,12 +7111,12 @@
       "text": "📄 REVISIÓN​ ABIERTA\n\nHay​ una actualización​ sobre tu​ solicitud de​ tarjeta. Revisa​ la opción​ actual y​ confirma los​ datos.",
       "cta_1": "✅ CONFIRMAR DATOS",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 6,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 8,
       "rejected_count": 0,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -6328,6 +7224,27 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 10,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 7,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 7,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -6340,12 +7257,12 @@
       "text": "🔔 PERFIL​ ACTUALIZADO\n\nTu​ paso de​ selección de​ tarjeta está​ disponible. Abre​ la actualización​ para ver​ la recomendación​ actual.",
       "cta_1": "📌 VER RESULTADO",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:42-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 4,
       "rejected_count": 1,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -6439,6 +7356,20 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 8,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 8,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -6451,12 +7382,12 @@
       "text": "💳 ACTUALIZACIÓN​ DE TARJETA​\n\nEl estado​ de tu​ tarjeta está​ listo para​ revisar. Confirma​ los datos​ en la​ siguiente pantalla​ y continúa.​",
       "cta_1": "🔍 REVISAR TARJETA",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 6,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 8,
       "rejected_count": 0,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -6564,6 +7495,27 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 12,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 9,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 9,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -6576,12 +7528,12 @@
       "text": "📋 ESTADO​ DE SOLICITUD​\n\nTu perfil​ tiene opciones​ de tarjeta​ disponibles. Abre​ la revisión​ para ver​ el próximo​ paso.",
       "cta_1": "✅ VER ESTADO",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 6,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 8,
       "rejected_count": 0,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -6689,6 +7641,27 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 13,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 10,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 10,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -6784,12 +7757,12 @@
       "text": "✅ REVISIÓN​ DISPONIBLE\n\nHay​ una revisión​ pendiente de​ tu tarjeta.​ Abre la​ página para​ confirmar la​ información actual.​",
       "cta_1": "➡️ CONTINUAR",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 6,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 8,
       "rejected_count": 0,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -6897,6 +7870,27 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 15,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 12,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -6909,12 +7903,12 @@
       "text": "📌 PASO​ DE CONFIRMACIÓN​\n\nTu proceso​ de tarjeta​ está listo​ para el​ próximo paso.​ Revisa el​ estado y​ continúa desde​ la página​ segura.",
       "cta_1": "💳 VER ACTUALIZACIÓN",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 6,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 8,
       "rejected_count": 0,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -7022,6 +8016,27 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 16,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 13,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 13,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -7034,12 +8049,12 @@
       "text": "💬 RESULTADO​ DE TARJETA​\n\nHay una​ actualización sobre​ tu solicitud​ de tarjeta.​ Revisa la​ opción actual​ y confirma​ los datos.​",
       "cta_1": "🔎 ABRIR REVISIÓN",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 6,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 8,
       "rejected_count": 0,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -7147,6 +8162,27 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 17,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 14,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 14,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -7159,12 +8195,12 @@
       "text": "📄 REVISIÓN​ ABIERTA\n\nTu​ paso de​ selección de​ tarjeta está​ disponible. Abre​ la actualización​ para ver​ la recomendación​ actual.",
       "cta_1": "✅ CONFIRMAR DATOS",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 6,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 8,
       "rejected_count": 0,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -7272,6 +8308,27 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 18,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 15,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 15,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -7284,12 +8341,12 @@
       "text": "🔔 PERFIL​ ACTUALIZADO\n\nTu​ solicitud de​ tarjeta tiene​ una nueva​ revisión disponible.​ Abre la​ actualización para​ continuar con​ las opciones.​",
       "cta_1": "📌 VER RESULTADO",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 6,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 8,
       "rejected_count": 0,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -7397,6 +8454,27 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 19,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 16,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 16,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -7409,12 +8487,12 @@
       "text": "💳 ACTUALIZACIÓN​ DE TARJETA​\n\nTu perfil​ tiene opciones​ de tarjeta​ disponibles. Abre​ la revisión​ para ver​ el próximo​ paso.",
       "cta_1": "🔍 REVISAR TARJETA",
       "first_seen_at": "2026-07-07T19:00:09-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:29-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 6,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 8,
       "rejected_count": 0,
-      "gray_count": 9,
+      "gray_count": 10,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -7522,6 +8600,27 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 20,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 17,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 17,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -7534,10 +8633,10 @@
       "text": "🚗 VEHICLE OFFER UPDATE\n\nYour vehicle request has a new review step available. Open the update to continue with the options.",
       "cta_1": "🚗 REVIEW OFFER",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -7577,6 +8676,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 1,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -7589,10 +8695,10 @@
       "text": "📋 AUTO REQUEST STATUS\n\nAn auto offer status check is ready for review. Confirm the details on the next page.",
       "cta_1": "✅ CHECK STATUS",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -7632,6 +8738,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 2,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -7644,10 +8757,10 @@
       "text": "🔎 CAR OPTIONS READY\n\nYour profile has vehicle options available to review. Open the update and check the next step.",
       "cta_1": "📋 SEE OPTIONS",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -7687,6 +8800,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 3,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -7699,10 +8819,10 @@
       "text": "✅ REVIEW AVAILABLE\n\nThe car offer flow has a result ready. Review the details before continuing.",
       "cta_1": "➡️ CONTINUE",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -7742,6 +8862,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 4,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -7754,10 +8881,10 @@
       "text": "📌 CONFIRMATION STEP\n\nA pending vehicle review needs confirmation. Open the page to see the available options.",
       "cta_1": "🔎 OPEN REVIEW",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -7797,6 +8924,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 5,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -7809,10 +8943,10 @@
       "text": "🚘 VEHICLE MATCH UPDATE\n\nYour auto request is ready for the next step. Check the status and continue from the secure page.",
       "cta_1": "📌 VIEW DETAILS",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -7852,6 +8986,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 6,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -7864,10 +9005,10 @@
       "text": "📄 DETAILS READY\n\nThere is an update on your vehicle request. Review the current option and confirm the next detail.",
       "cta_1": "✅ CONFIRM DETAILS",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -7907,6 +9048,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 7,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -7919,10 +9067,10 @@
       "text": "🔔 AUTO PROFILE UPDATE\n\nYour vehicle selection step is available now. Open the update to review the current match.",
       "cta_1": "🚘 SEE RESULT",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -7962,6 +9110,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 8,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -7974,10 +9129,10 @@
       "text": "🚗 VEHICLE OFFER UPDATE\n\nAn auto offer status check is ready for review. Confirm the details on the next page.",
       "cta_1": "🚗 REVIEW OFFER",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -8017,6 +9172,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 9,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -8029,10 +9191,10 @@
       "text": "📋 AUTO REQUEST STATUS\n\nYour profile has vehicle options available to review. Open the update and check the next step.",
       "cta_1": "✅ CHECK STATUS",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -8072,6 +9234,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 10,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -8084,10 +9253,10 @@
       "text": "🔎 CAR OPTIONS READY\n\nThe car offer flow has a result ready. Review the details before continuing.",
       "cta_1": "📋 SEE OPTIONS",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -8127,6 +9296,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 11,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -8139,10 +9315,10 @@
       "text": "✅ REVIEW AVAILABLE\n\nA pending vehicle review needs confirmation. Open the page to see the available options.",
       "cta_1": "➡️ CONTINUE",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -8182,6 +9358,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 12,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -8194,10 +9377,10 @@
       "text": "📌 CONFIRMATION STEP\n\nYour auto request is ready for the next step. Check the status and continue from the secure page.",
       "cta_1": "🔎 OPEN REVIEW",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -8237,6 +9420,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 13,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -8249,10 +9439,10 @@
       "text": "🚘 VEHICLE MATCH UPDATE\n\nThere is an update on your vehicle request. Review the current option and confirm the next detail.",
       "cta_1": "📌 VIEW DETAILS",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -8292,6 +9482,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 14,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -8304,10 +9501,10 @@
       "text": "📄 DETAILS READY\n\nYour vehicle selection step is available now. Open the update to review the current match.",
       "cta_1": "✅ CONFIRM DETAILS",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -8347,6 +9544,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 15,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -8359,10 +9563,10 @@
       "text": "🔔 AUTO PROFILE UPDATE\n\nYour vehicle request has a new review step available. Open the update to continue with the options.",
       "cta_1": "🚘 SEE RESULT",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -8402,6 +9606,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 16,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -8455,10 +9666,10 @@
       "text": "📋 AUTO REQUEST STATUS\n\nThe car offer flow has a result ready. Review the details before continuing.",
       "cta_1": "✅ CHECK STATUS",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -8498,6 +9709,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 18,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -8510,10 +9728,10 @@
       "text": "🔎 CAR OPTIONS READY\n\nA pending vehicle review needs confirmation. Open the page to see the available options.",
       "cta_1": "📋 SEE OPTIONS",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -8553,6 +9771,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 19,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -8565,10 +9790,10 @@
       "text": "✅ REVIEW AVAILABLE\n\nYour auto request is ready for the next step. Check the status and continue from the secure page.",
       "cta_1": "➡️ CONTINUE",
       "first_seen_at": "2026-07-07T19:00:10-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:07:35-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -8608,6 +9833,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 20,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -8620,10 +9852,10 @@
       "text": "📦 CARD PACKAGE READY\n\nYour Credit Card kit is prepared and waiting for delivery confirmation.\n\nConfirm your details to continue.",
       "cta_1": "✅ CONFIRM DETAILS",
       "first_seen_at": "2026-07-07T19:00:11-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:00:11-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -8663,6 +9895,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 5,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": []
@@ -8675,12 +9914,12 @@
       "text": "📋 ESTADO​ DE SOLICITUD​\n\nEl flujo​ de recomendación​ de tarjeta​ tiene un​ resultado listo.​ Revisa los​ detalles antes​ de continuar.​",
       "cta_1": "✅ VER ESTADO",
       "first_seen_at": "2026-07-07T19:00:12-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:42-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
-      "gray_count": 7,
+      "gray_count": 8,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -8753,6 +9992,20 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 18,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 18,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -8765,12 +10018,12 @@
       "text": "🔎 OPCIONES​ DE TARJETA​\n\nHay una​ revisión pendiente​ de tu​ tarjeta. Abre​ la página​ para confirmar​ la información​ actual.",
       "cta_1": "📋 VER OPCIONES",
       "first_seen_at": "2026-07-07T19:00:12-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:42-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
-      "gray_count": 7,
+      "gray_count": 8,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -8843,6 +10096,20 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 19,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 19,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -8855,12 +10122,12 @@
       "text": "✅ REVISIÓN​ DISPONIBLE\n\nTu​ proceso de​ tarjeta está​ listo para​ el próximo​ paso. Revisa​ el estado​ y continúa​ desde la​ página segura.​",
       "cta_1": "➡️ CONTINUAR",
       "first_seen_at": "2026-07-07T19:00:12-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:07:42-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
-      "gray_count": 7,
+      "gray_count": 8,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -8933,6 +10200,20 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 20,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 20,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": []
@@ -9027,12 +10308,12 @@
       "text": "🔎 OPCIONES​ DE TRABAJO​\n\nUna vacante​ relacionada con​ tu perfil​ está lista​ para revisión.​ Abre los​ detalles para​ continuar.",
       "cta_1": "📋 VER OPCIONES",
       "first_seen_at": "2026-07-07T19:00:13-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": null,
       "last_approved_at": null,
       "approved_count": 0,
       "rejected_count": 2,
-      "gray_count": 3,
+      "gray_count": 4,
       "purple_count": 0,
       "status": "rejected",
       "seen_in": [
@@ -9070,6 +10351,13 @@
           "observed_color": "vermelho",
           "observed_status": "REJECTED",
           "observed_at": "2026-07-07T19:20:27-04:00"
+        },
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": [
@@ -9095,12 +10383,12 @@
       "text": "📌 PASO​ DE SOLICITUD​\n\nEl estado​ de tu​ postulación necesita​ una revisión​ rápida. Consulta​ la información​ actualizada.",
       "cta_1": "➡️ CONTINUAR",
       "first_seen_at": "2026-07-07T19:00:13-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:47-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 4,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
-      "gray_count": 3,
+      "gray_count": 4,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -9152,6 +10440,27 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:27-04:00"
+        },
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 4,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 10,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": [
@@ -9259,10 +10568,10 @@
       "text": "🔔 PERFIL​ LABORAL\n\nSe​ actualizó el​ estado de​ tu perfil.​ Abre la​ página para​ revisar las​ opciones disponibles.​",
       "cta_1": "✅ CONFIRMAR DATOS",
       "first_seen_at": "2026-07-07T19:00:13-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:47-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -9302,6 +10611,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:27-04:00"
+        },
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 7,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -9314,10 +10630,10 @@
       "text": "➡️ CONTINUAR​ REVISIÓN\n\nTu​ solicitud tiene​ detalles listos​ para confirmar.​ Continúa para​ ver la​ información actual.​",
       "cta_1": "📄 VER DETALLES",
       "first_seen_at": "2026-07-07T19:00:13-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:47-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 4,
       "rejected_count": 0,
       "gray_count": 2,
       "purple_count": 0,
@@ -9357,6 +10673,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:27-04:00"
+        },
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 8,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -9431,12 +10754,12 @@
       "text": "✅ REVISIÓN​ DISPONIBLE\n\nUna​ vacante relacionada​ con tu​ perfil está​ lista para​ revisión. Abre​ los detalles​ para continuar.​",
       "cta_1": "✅ VER ESTADO",
       "first_seen_at": "2026-07-07T19:00:13-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": null,
       "last_approved_at": null,
       "approved_count": 0,
       "rejected_count": 2,
-      "gray_count": 3,
+      "gray_count": 4,
       "purple_count": 0,
       "status": "rejected",
       "seen_in": [
@@ -9474,6 +10797,13 @@
           "observed_color": "vermelho",
           "observed_status": "REJECTED",
           "observed_at": "2026-07-07T19:20:27-04:00"
+        },
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 16,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": [
@@ -9499,12 +10829,12 @@
       "text": "🔎 OPCIONES​ DE TRABAJO​\n\nEl estado​ de tu​ postulación necesita​ una revisión​ rápida. Consulta​ la información​ actualizada.",
       "cta_1": "📋 VER OPCIONES",
       "first_seen_at": "2026-07-07T19:00:13-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": null,
       "last_approved_at": null,
       "approved_count": 0,
       "rejected_count": 2,
-      "gray_count": 3,
+      "gray_count": 4,
       "purple_count": 0,
       "status": "rejected",
       "seen_in": [
@@ -9542,6 +10872,13 @@
           "observed_color": "vermelho",
           "observed_status": "REJECTED",
           "observed_at": "2026-07-07T19:20:27-04:00"
+        },
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 17,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": [
@@ -9834,10 +11171,10 @@
       "text": "✅ REVISIÓN​ DISPONIBLE\n\nEl​ estado de​ tu postulación​ necesita una​ revisión rápida.​ Consulta la​ información actualizada.​",
       "cta_1": "✅ VER ESTADO",
       "first_seen_at": "2026-07-07T19:00:13-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:07:47-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 4,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 3,
       "purple_count": 0,
@@ -9891,6 +11228,20 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:27-04:00"
+        },
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 18,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 20,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": [
@@ -9992,10 +11343,10 @@
       "text": "Hello!\n\n👋 A great credit card offer is available for you today.\n💳 It includes a limit of up to $8,000, and your first payment won’t be due for 2 months, giving you extra time to organize your budget.\n\nIf you’d like to move forward, tap below to review the details and submit your application:\n⬇️.",
       "cta_1": "✅ CHECK CARD",
       "first_seen_at": "2026-07-07T19:00:14-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:00:14-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 5,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 0,
       "purple_count": 0,
@@ -10035,6 +11386,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 18,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": []
@@ -10047,10 +11405,10 @@
       "text": "🔔 CARD PROFILE UPDATE\n\nA card status check is ready for review. Use the next screen to confirm the details and continue.",
       "cta_1": "📌 VIEW RESULT",
       "first_seen_at": "2026-07-07T19:07:18-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:20:19-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 4,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 8,
       "rejected_count": 0,
       "gray_count": 4,
       "purple_count": 0,
@@ -10111,6 +11469,34 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 3,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 3,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 3,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 3,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": [
@@ -10148,10 +11534,10 @@
       "text": "📄 REVIEW STEP OPEN\n\nA card status check is ready for review. Use the next screen to confirm the details and continue.",
       "cta_1": "✅ CONFIRM DETAILS",
       "first_seen_at": "2026-07-07T19:07:18-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:20:19-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 3,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 6,
       "rejected_count": 0,
       "gray_count": 3,
       "purple_count": 0,
@@ -10198,6 +11584,27 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 9,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:20-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 9,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 8,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": [
@@ -10229,10 +11636,10 @@
       "text": "🔔 PROFIL UPDATE\n\nDer Status deiner Karte ist zur Prüfung bereit. Bestätige die Angaben auf der nächsten Seite.",
       "cta_1": "📌 ERGEBNIS SEHEN",
       "first_seen_at": "2026-07-07T19:07:21-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:20:23-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 1,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 2,
       "rejected_count": 0,
       "gray_count": 1,
       "purple_count": 0,
@@ -10251,6 +11658,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 3,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": [
@@ -10270,10 +11684,10 @@
       "text": "🔔 CARD PROFILE UPDATE\n\nThe card recommendation flow has a new result ready. Review the details before continuing.",
       "cta_1": "📌 VIEW RESULT",
       "first_seen_at": "2026-07-07T19:07:25-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:20:23-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 1,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 2,
       "rejected_count": 0,
       "gray_count": 1,
       "purple_count": 0,
@@ -10292,6 +11706,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 18,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": [
@@ -10311,10 +11732,10 @@
       "text": "🔎 OPCIONES​ DE TARJETA​\n\nEl estado​ de tu​ tarjeta está​ listo para​ revisar. Confirma​ los datos​ en la​ siguiente pantalla​ y continúa.​",
       "cta_1": "📋 VER OPCIONES",
       "first_seen_at": "2026-07-07T19:07:29-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:20:23-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 1,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 2,
       "rejected_count": 0,
       "gray_count": 1,
       "purple_count": 0,
@@ -10333,6 +11754,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 6,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": [
@@ -10352,10 +11780,10 @@
       "text": "🚘 VEHICLE MATCH UPDATE\n\nAn auto offer status check is ready for review. Confirm the details on the next page.",
       "cta_1": "📌 VIEW DETAILS",
       "first_seen_at": "2026-07-07T19:07:35-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
       "first_approved_at": "2026-07-07T19:20:23-04:00",
-      "last_approved_at": "2026-07-07T19:20:23-04:00",
-      "approved_count": 1,
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 2,
       "rejected_count": 0,
       "gray_count": 1,
       "purple_count": 0,
@@ -10374,6 +11802,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 17,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": [
@@ -10393,12 +11828,12 @@
       "text": "🔔 PERFIL​ ACTUALIZADO\n\nEl​ estado de​ tu tarjeta​ está listo​ para revisar.​ Confirma los​ datos en​ la siguiente​ pantalla y​ continúa.",
       "cta_1": "📌 VER RESULTADO",
       "first_seen_at": "2026-07-07T19:07:42-04:00",
-      "last_seen_at": "2026-07-07T19:20:34-04:00",
+      "last_seen_at": "2026-07-07T19:26:23-04:00",
       "first_approved_at": "2026-07-07T19:20:27-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 1,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 2,
       "rejected_count": 0,
-      "gray_count": 3,
+      "gray_count": 4,
       "purple_count": 0,
       "status": "approved",
       "seen_in": [
@@ -10429,6 +11864,20 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:34-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 3,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 3,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:23-04:00"
         }
       ],
       "usage": [
@@ -10536,10 +11985,10 @@
       "text": "✅ REVISIÓN​ DISPONIBLE\n\nHay​ una actualización​ disponible para​ tu solicitud​ de empleo.​ Abre la​ revisión para​ ver el​ próximo paso.​",
       "cta_1": "✅ VER ESTADO",
       "first_seen_at": "2026-07-07T19:07:47-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:20:27-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 1,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 2,
       "rejected_count": 0,
       "gray_count": 1,
       "purple_count": 0,
@@ -10558,6 +12007,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:27-04:00"
+        },
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 3,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": [
@@ -10577,10 +12033,10 @@
       "text": "💬 ESTADO​ DE POSTULACIÓN​\n\nEl estado​ de tu​ postulación necesita​ una revisión​ rápida. Consulta​ la información​ actualizada.",
       "cta_1": "📌 ABRIR ACTUALIZACIÓN",
       "first_seen_at": "2026-07-07T19:07:47-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:20:27-04:00",
-      "last_approved_at": "2026-07-07T19:20:27-04:00",
-      "approved_count": 1,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 2,
       "rejected_count": 0,
       "gray_count": 1,
       "purple_count": 0,
@@ -10599,6 +12055,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:27-04:00"
+        },
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 5,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": [
@@ -10659,12 +12122,12 @@
       "text": "💬 ESTADO​ DE POSTULACIÓN​\n\nHay una​ actualización disponible​ para tu​ solicitud de​ empleo. Abre​ la revisión​ para ver​ el próximo​ paso.",
       "cta_1": "📌 ABRIR ACTUALIZACIÓN",
       "first_seen_at": "2026-07-07T19:07:47-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": null,
       "last_approved_at": null,
       "approved_count": 0,
       "rejected_count": 1,
-      "gray_count": 1,
+      "gray_count": 2,
       "purple_count": 0,
       "status": "rejected",
       "seen_in": [
@@ -10681,6 +12144,13 @@
           "observed_color": "vermelho",
           "observed_status": "REJECTED",
           "observed_at": "2026-07-07T19:20:27-04:00"
+        },
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 13,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": [
@@ -10829,10 +12299,10 @@
       "text": "📋 CARD REQUEST STATUS\n\nYour card request has a new review step available. Open the update to continue with the available options.",
       "cta_1": "✅ CHECK STATUS",
       "first_seen_at": "2026-07-07T19:07:50-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": "2026-07-07T19:20:31-04:00",
-      "last_approved_at": "2026-07-07T19:20:31-04:00",
-      "approved_count": 1,
+      "last_approved_at": "2026-07-07T19:26:22-04:00",
+      "approved_count": 2,
       "rejected_count": 0,
       "gray_count": 1,
       "purple_count": 0,
@@ -10851,6 +12321,13 @@
           "observed_color": "verde",
           "observed_status": "APPROVED",
           "observed_at": "2026-07-07T19:20:31-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 4,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:22-04:00"
         }
       ],
       "usage": [
@@ -10870,14 +12347,14 @@
       "text": "📄 REVIEW STEP OPEN\n\nYour credit profile has card options available to review. Open the update and check the next step.",
       "cta_1": "✅ CONFIRM DETAILS",
       "first_seen_at": "2026-07-07T19:14:21-04:00",
-      "last_seen_at": "2026-07-07T19:20:23-04:00",
-      "first_approved_at": null,
-      "last_approved_at": null,
-      "approved_count": 0,
+      "last_seen_at": "2026-07-07T19:26:21-04:00",
+      "first_approved_at": "2026-07-07T19:26:21-04:00",
+      "last_approved_at": "2026-07-07T19:26:21-04:00",
+      "approved_count": 1,
       "rejected_count": 0,
       "gray_count": 1,
       "purple_count": 0,
-      "status": "testing",
+      "status": "approved",
       "seen_in": [
         {
           "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
@@ -10885,6 +12362,13 @@
           "observed_color": "cinza",
           "observed_status": "GRAY",
           "observed_at": "2026-07-07T19:20:23-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 18,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-07T19:26:21-04:00"
         }
       ],
       "usage": [
@@ -10904,15 +12388,23 @@
       "text": "💬 ESTADO​ DE POSTULACIÓN​\n\nUna vacante​ relacionada con​ tu perfil​ está lista​ para revisión.​ Abre los​ detalles para​ continuar.",
       "cta_1": "📌 ABRIR ACTUALIZACIÓN",
       "first_seen_at": "2026-07-07T19:20:27-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": null,
       "last_approved_at": null,
       "approved_count": 0,
       "rejected_count": 0,
-      "gray_count": 0,
+      "gray_count": 1,
       "purple_count": 0,
       "status": "testing",
-      "seen_in": [],
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 1,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        }
+      ],
       "usage": [
         {
           "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
@@ -10930,15 +12422,23 @@
       "text": "🔔 PERFIL​ LABORAL\n\nHay​ una actualización​ disponible para​ tu solicitud​ de empleo.​ Abre la​ revisión para​ ver el​ próximo paso.​",
       "cta_1": "✅ CONFIRMAR DATOS",
       "first_seen_at": "2026-07-07T19:20:27-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": null,
       "last_approved_at": null,
       "approved_count": 0,
       "rejected_count": 0,
-      "gray_count": 0,
+      "gray_count": 1,
       "purple_count": 0,
       "status": "testing",
-      "seen_in": [],
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 2,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        }
+      ],
       "usage": [
         {
           "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
@@ -10956,15 +12456,23 @@
       "text": "📌 PASO​ DE SOLICITUD​\n\nUna vacante​ relacionada con​ tu perfil​ está lista​ para revisión.​ Abre los​ detalles para​ continuar.",
       "cta_1": "➡️ CONTINUAR",
       "first_seen_at": "2026-07-07T19:20:27-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": null,
       "last_approved_at": null,
       "approved_count": 0,
       "rejected_count": 0,
-      "gray_count": 0,
+      "gray_count": 1,
       "purple_count": 0,
       "status": "testing",
-      "seen_in": [],
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 6,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        }
+      ],
       "usage": [
         {
           "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
@@ -10982,15 +12490,23 @@
       "text": "➡️ CONTINUAR​ REVISIÓN\n\nUna​ vacante relacionada​ con tu​ perfil está​ lista para​ revisión. Abre​ los detalles​ para continuar.​",
       "cta_1": "📄 VER DETALLES",
       "first_seen_at": "2026-07-07T19:20:27-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": null,
       "last_approved_at": null,
       "approved_count": 0,
       "rejected_count": 0,
-      "gray_count": 0,
+      "gray_count": 1,
       "purple_count": 0,
       "status": "testing",
-      "seen_in": [],
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 9,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        }
+      ],
       "usage": [
         {
           "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
@@ -11008,15 +12524,23 @@
       "text": "📄 DETALLES​ ABIERTOS\n\nTu​ perfil laboral​ tiene una​ opción lista​ para revisar.​ Confirma los​ datos y​ continúa desde​ la página.​",
       "cta_1": "🔎 REVISAR VACANTE",
       "first_seen_at": "2026-07-07T19:20:27-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": null,
       "last_approved_at": null,
       "approved_count": 0,
       "rejected_count": 0,
-      "gray_count": 0,
+      "gray_count": 1,
       "purple_count": 0,
       "status": "testing",
-      "seen_in": [],
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 14,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        }
+      ],
       "usage": [
         {
           "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
@@ -11034,15 +12558,23 @@
       "text": "➡️ CONTINUAR​ REVISIÓN\n\nEl​ estado de​ tu postulación​ necesita una​ revisión rápida.​ Consulta la​ información actualizada.​",
       "cta_1": "📄 VER DETALLES",
       "first_seen_at": "2026-07-07T19:20:27-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": null,
       "last_approved_at": null,
       "approved_count": 0,
       "rejected_count": 0,
-      "gray_count": 0,
+      "gray_count": 1,
       "purple_count": 0,
       "status": "testing",
-      "seen_in": [],
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 15,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        }
+      ],
       "usage": [
         {
           "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
@@ -11060,15 +12592,23 @@
       "text": "💬 ESTADO​ DE POSTULACIÓN​\n\nTu perfil​ laboral tiene​ una opción​ lista para​ revisar. Confirma​ los datos​ y continúa​ desde la​ página.",
       "cta_1": "📌 ABRIR ACTUALIZACIÓN",
       "first_seen_at": "2026-07-07T19:20:27-04:00",
-      "last_seen_at": "2026-07-07T19:20:27-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": null,
       "last_approved_at": null,
       "approved_count": 0,
       "rejected_count": 0,
-      "gray_count": 0,
+      "gray_count": 1,
       "purple_count": 0,
       "status": "testing",
-      "seen_in": [],
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 19,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        }
+      ],
       "usage": [
         {
           "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
@@ -11086,15 +12626,23 @@
       "text": "🔔 CARD PROFILE UPDATE\n\nYour credit profile has card options available to review. Open the update and check the next step.",
       "cta_1": "📌 VIEW RESULT",
       "first_seen_at": "2026-07-07T19:20:31-04:00",
-      "last_seen_at": "2026-07-07T19:20:31-04:00",
+      "last_seen_at": "2026-07-07T19:26:22-04:00",
       "first_approved_at": null,
       "last_approved_at": null,
       "approved_count": 0,
       "rejected_count": 0,
-      "gray_count": 0,
+      "gray_count": 1,
       "purple_count": 0,
       "status": "testing",
-      "seen_in": [],
+      "seen_in": [
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-07T19:26:22-04:00"
+        }
+      ],
       "usage": [
         {
           "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
