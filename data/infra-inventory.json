@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-07T19:10:00-04:00",
+    "updated_at": "2026-07-07T19:30:00-04:00",
     "generated_by": "manual Zeus infra inventory update + infra-discovery base"
   },
   "system_packages": [
@@ -1053,18 +1053,18 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 75155,
-      "sha256": "717b9eaaa4d389415bc8da00f9ebc66aaf9e5965d0df2febbb6bcd51eb62ce0d",
+      "size_bytes": 77313,
+      "sha256": "6d9628cfd5861d8b73a571f7c95c841ad95b6c7008afa41a32b7fc759361754f",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-07T19:10:00-04:00",
-      "validation": "manual Zeus update; Messenger User correction procedure captured from Rodolfo; final readback on login correction sheet: 26/26 identity OK and 26/26 MESSENGER_USER_ID OK",
+      "updated_at": "2026-07-07T19:30:00-04:00",
+      "validation": "manual Zeus update; DTR Subscriber Manager scan workflow/4-minute timeout documented from Rodolfo video/instruction",
       "reference_update": {
         "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/digitaltrchat-full-segurador-audit-methodology-2026-07-02.md",
         "sha256": "6249254fc654d9d4a16f554d35bed04a1ef69c8be512dff58fce0ebf8033a50e",
         "size_bytes": 4489,
         "updated_at": "2026-07-03T21:37:59-04:00"
       },
-      "source_report": "REPORT-INFRA Zeus SB Messenger User correction procedure 2026-07-07",
+      "source_report": "REPORT-INFRA Zeus DTR missing-SB page lead scan 2026-07-07",
       "agent": "zeus",
       "purpose": "SmartBidding access and safe Messenger Page template/user correction procedures."
     }
@@ -1878,6 +1878,24 @@
       "source_report": "REPORT-INFRA Zeus Utility canary approval loop 2026-07-07",
       "agent": "zeus",
       "purpose": "Temporary 3h Utility canary approval loop and durable message bank/state."
+    },
+    {
+      "path": "/root/mgs-agent/scripts/dtr-missing-sb-page-lead-scan.py",
+      "size_bytes": 14546,
+      "sha256": "d16751c91a01c96a8565c66a39c7cc7c96cda84493a5b5393a63ac22cc185ad3",
+      "updated_at": "2026-07-07T19:30:00-04:00",
+      "source_report": "REPORT-INFRA Zeus DTR missing-SB page lead scan 2026-07-07",
+      "agent": "zeus",
+      "purpose": "Scan Bot/DTR pages missing in SmartBidding for leads/subscribers using Subscriber Manager scan workflow."
+    },
+    {
+      "path": "/root/mgs-agent/scripts/dtr-missing-sb-page-lead-scan.sh",
+      "size_bytes": 234,
+      "sha256": "120f7f179fb9fe5ed27c772d45fd1b34ffb60a0a7e992a146517c5dc1dd02fd3",
+      "updated_at": "2026-07-07T19:30:00-04:00",
+      "source_report": "REPORT-INFRA Zeus DTR missing-SB page lead scan 2026-07-07",
+      "agent": "zeus",
+      "purpose": "Scan Bot/DTR pages missing in SmartBidding for leads/subscribers using Subscriber Manager scan workflow."
     }
   ],
   "skills_mgs": [
@@ -4586,6 +4604,15 @@
       "source_report": "REPORT-INFRA Zeus Utility canary approval loop 2026-07-07",
       "agent": "zeus",
       "purpose": "Temporary 3h Utility canary approval loop and durable message bank/state."
+    },
+    {
+      "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
+      "size_bytes": 4171,
+      "sha256": "1aac5d81d9cb0e3b287474a9681d0dbb3a172ce015891f2238c75404b81cfe4f",
+      "updated_at": "2026-07-07T19:30:00-04:00",
+      "source_report": "REPORT-INFRA Zeus DTR missing-SB page lead scan 2026-07-07",
+      "agent": "zeus",
+      "purpose": "Scan Bot/DTR pages missing in SmartBidding for leads/subscribers using Subscriber Manager scan workflow."
     }
   ],
   "mu_plugin_canonical": {
