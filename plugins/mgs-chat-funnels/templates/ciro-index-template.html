@@ -545,6 +545,8 @@
               answerLink.style.textDecoration = "none";
               answerButton = document.createElement("button");
               answerButton.textContent = answer;
+              applyRewardedButtonClass(answerButton);
+              applyRewardedButtonClass(answerLink);
               answerLink.appendChild(answerButton);
               buttonContainer.appendChild(answerLink);
             } else {
@@ -573,6 +575,7 @@
             const card = document.createElement("a");
             card.href = mergeSourceParams(offer.url || offer.target || "#");
             card.classList.add("offer-card");
+            applyRewardedButtonClass(card);
 
             if (offer.image) {
               const img = document.createElement("img");
