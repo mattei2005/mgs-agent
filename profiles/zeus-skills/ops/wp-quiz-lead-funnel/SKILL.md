@@ -192,7 +192,7 @@ Before reporting success:
 
 4. **Copying leads during duplication.** Duplicating a quiz must copy configuration only, never leads/history.
 
-5. **Raw JSON as operator UI.** JSON can remain as storage, but normal admin workflows must use human rows, buttons, labels, helpers, and per-page controls. SMS Funnel per-gestor URLs must render as editable rows (`Gestor`, `Nome/label`, `URL add-lead`, `Remover`, `+ Adicionar gestor`); raw JSON may exist only behind a hidden/advanced “Ver JSON técnico” view, never as the primary editing surface.
+5. **Raw JSON as operator UI.** JSON can remain as storage, but normal admin workflows must use human rows, buttons, labels, helpers, and per-page controls. SMS Funnel per-gestor URLs must render as editable rows with an explicit `Usar?` selector plus `Gestor`, `Nome/label`, `URL add-lead`, `Remover`, and `+ Adicionar gestor`; unchecked gestores must not be used in routing. Fallback SMS URL belongs in an advanced/hidden section labeled “Fallback se não detectar gestor”. Raw JSON may exist only behind a hidden/advanced “Ver JSON técnico” view, never as the primary editing surface.
 
 6. **Historical imports sent to SMS Funnel.** Imports are for WP reporting only; mark rows as `historical_import` and do not POST to external vendors.
 
