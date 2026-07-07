@@ -223,6 +223,10 @@ Broadcast Template
 
 `Messenger > Page` shows pages and installed template fields. This is also where page-level broadcast schedules live: the schedule is the row's `BROADCAST_TIME`/Broadcast tab data tied to a selected `BROADCAST_TEMPLATE_NAME`, not necessarily a property of the Broadcast Template message body itself.
 
+#### Linkar template em uma página
+
+Rodolfo correction 2026-07-07: para vincular um Broadcast Template a uma página específica, ir em `Accounts > Messenger > Page`, filtrar pelo **FB_PAGE_ID grande**, validar também o **PAGE_ID pequeno** e o **PAGE_NAME**, selecionar a row, clicar em `Editar` no canto superior direito, abrir a aba `Broadcast`, escolher o template no primeiro campo `Message Template`, e salvar. Via API, a operação equivalente deve alterar somente os campos de template da row alvo (`BROADCAST_TEMPLATE_ID`/`BROADCAST_TEMPLATE_NAME` quando presentes), preservando os demais campos; validar por readback da mesma row (`FB_PAGE_ID`, `PAGE_ID`, `PAGE_NAME`, `BROADCAST_TEMPLATE_NAME`).
+
 For temporary Facebook/Messenger send restrictions discovered in DigitalTRChat campaign reports, edit the Page row and use the **Broadcast** tab's `Restricted Until` field. Latest Rodolfo-approved rule after the July 2026 audit: if the latest current DigitalTRChat report shows pure `#2022`, set Page `Status = Broadcast` and `Restricted Until = X + 1 calendar day`; later, when the restriction expires and the page should return to operation, clear `Restricted Until`, save, and restore `Status = Broadcast`. Keeping `Status = Broadcast` with only `Restricted Until` was an earlier approach and should only be used if Rodolfo explicitly asks for that behavior.
 
 ### Page tab
