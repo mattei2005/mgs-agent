@@ -32,6 +32,23 @@ Real-user OAuth in My Drive   valid if the user account has quota/permission
 
 ## Standard diagnostic sequence
 
+For Hera/MGS quick checks, run the profile watchdog before deeper Drive debugging:
+
+```bash
+python3 /root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py
+python3 - <<'PY'
+import json, datetime
+p='/root/mgs-agent/data/hera/drive-auth-watchdog-state.json'
+d=json.load(open(p)); s=d.get('signature',{})
+print('healthy:', d.get('healthy'))
+print('user:', s.get('user_ok'), s.get('user_state'), s.get('user_http'), s.get('user_error'))
+print('service_account:', s.get('sa_ok'), s.get('sa_state'), s.get('sa_http'))
+print('last_check:', datetime.datetime.fromtimestamp(d.get('last_check_ts')).isoformat() if d.get('last_check_ts') else None)
+PY
+```
+
+Interpretation: empty stdout from `drive-auth-watchdog.py` is the healthy/silent path. A healthy Hera Drive state should show OAuth user `token_ok` plus Service Account `root_access_ok`/HTTP 200. If the user asks “Drive auth is OK, right?”, answer from this watchdog/state rather than inferring from absence of logs.
+
 1. Identify the auth mode used by the script:
    - Service Account JSON/JWT.
    - OAuth refresh token for a real user.
