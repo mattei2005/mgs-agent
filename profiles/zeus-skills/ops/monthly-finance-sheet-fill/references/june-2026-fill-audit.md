@@ -79,6 +79,25 @@ Sum all related FB accounts and write to `Creditoparaveiculo BR-CAR-BR`:
 - `Creditoparaveiculo-BR-CAR-BR-01-G005`
 - `Creditoparaveiculo-BR-CAR-BR-02-G002`
 
+July 2026 correction: also maintain a lower gestor mini-table for Creditoparaveiculo starting at `ABL100`, mirroring the Fincgriffin pattern:
+
+- Summary rows: `ABL102:ABP108` with `Gestor | Gasto | Receita | Lucro | Margem`.
+- Detail rows: `ABL111:ABQ180` with `Data | Gestor | Gasto | Receita | Lucro | Margem`.
+- Summary formulas: `Gasto` and `Receita` via `SUMIF` over detail `Gestor`; `Lucro = Receita - Gasto`; `Margem = IFERROR(Lucro/Gasto, "")`.
+- Top `Creditoparaveiculo BR-CAR-BR` daily block remains aggregated; lower table exposes gestor split.
+
+### Google Ads BRL spend formula preservation
+
+For `gamezonead.com` and `gamingadx.com`, the `Google Ads -R$` input column has a neighboring USD formula column that converts BRL using `$E$1` (examples: `AAG46 = SUM(AAH46/$E$1)`, `AAV46 = SUM(AAW46/$E$1)`). Never clear or overwrite the USD formula column when filling BRL spend; only write into the BRL input column. If a broad clear touches the formula column, restore formulas from the pre-write backup before validation.
+
+### Zero-looking cells in future dates
+
+Some duplicated month tabs already contain literal `0` values in future-date revenue input cells (observed July 2026: Lyzmo `HF11`, FinanceAdx AR `RN29:RN32`, Ducapes `SL32`, Ducapes Finance `TA30`). Before attributing a `$ -`/`0.00` display to the current fill, compare against the pre-write backup/formula render. Report whether the value was pre-existing versus created by the fill.
+
+### Mini-table ROI/margin formulas
+
+When writing lower detail tables such as Fincgriffin `TQ111:TV...` or Creditoparaveiculo `ABL111:ABQ...`, the margin/ROI detail column should be a formula, not a static blank/value: `=IFERROR(Lucro/Gasto, "")` using that row's detail columns. Validate the formula exists after writing, especially when `Gasto = 0` causes the displayed margin to be blank.
+
 ## Error encountered and permanent lesson
 
 A row-35 issue occurred. June has only 30 days, so row 35 must not be written or treated as part of June’s daily data. The agent initially framed it as a “day 31 phantom formula” issue, but Rodolfo corrected the reasoning: the operational error was the agent allowing out-of-period contamination. Future fills must explicitly validate:

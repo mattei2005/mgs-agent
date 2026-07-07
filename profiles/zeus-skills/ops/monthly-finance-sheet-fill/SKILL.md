@@ -116,10 +116,11 @@ Spend in USD / BM `$`:
 
 Special handling:
 
-- `creditoparaveiculo.com`: sum all related FB accounts and write to `Creditoparaveiculo BR-CAR-BR`.
-- `fincgriffin.com`: write aggregated top-row values to `Fincgriffin US-CAR-EN`; also maintain the lower manager mini-table with `Data | Gestor | Gasto | Receita | Lucro | Margem`.
+- `creditoparaveiculo.com`: sum all related FB accounts and write to `Creditoparaveiculo BR-CAR-BR`; also maintain the lower gestor mini-table starting at `ABL100` when filling July 2026+ style tabs (`ABL102:ABP108` summary, `ABL111:ABQ...` detail, with margin/ROI formulas in the detail margin column).
+- `fincgriffin.com`: write aggregated top-row values to `Fincgriffin US-CAR-EN`; also maintain the lower manager mini-table with `Data | Gestor | Gasto | Receita | Lucro | Margem`. Detail margin must be formula-driven (`=IFERROR(Lucro/Gasto, "")`), not a static blank/value.
 - `openzed.com`: split principal block from `NF100` / `ICARO - G001-D`; do not collapse Ícaro into the principal block.
 - `finanzas.openzed.com`: keep US and ES blocks separate.
+- `gamezonead.com` / `gamingadx.com`: fill only the `Google Ads -R$` input column for BRL spend and preserve the neighboring USD conversion formula column (for example `AAG46 = SUM(AAH46/$E$1)`, `AAV46 = SUM(AAW46/$E$1)`). Broad clears must not blank those formulas.
 
 ## Monthly tab rollover rules
 
