@@ -766,13 +766,16 @@
           updateQuizProgress();
         }
 
-        // Inicia 1 leilão de rewarded no background
-        window.jbftag = window.jbftag || { cmd: [] };
-        window.jbftag.cmd.push(() => {
-          if (window.jbftag.requestRewardAds) {
-            window.jbftag.requestRewardAds();
-          }
-        });
+        // Inicia 1 leilão de rewarded no background quando o wrapper JBF está ativo.
+        // Em MonetizeMore/M2, o gatilho é a classe .pg-rewarded no botão; não carregar jbftag.
+        if (!rewardedButtonClass) {
+          window.jbftag = window.jbftag || { cmd: [] };
+          window.jbftag.cmd.push(() => {
+            if (window.jbftag.requestRewardAds) {
+              window.jbftag.requestRewardAds();
+            }
+          });
+        }
       }
 
       document.addEventListener("click", function (e) {
@@ -796,6 +799,7 @@
 
         const ctaButton = e.target && e.target.closest ? e.target.closest("#aq-cta") : null;
         if (ctaButton) {
+          applyRewardedButtonClass(ctaButton);
           if (quizAlreadyClosed) return;
           const safeCloseQuiz = function () {
             if (!quizAlreadyClosed) {
