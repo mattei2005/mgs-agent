@@ -408,6 +408,8 @@ Para troca em massa de textos/URLs das ofertas CAR-BR já instaladas, sem altera
 
 Para converter o CAR-BR do modelo sequencial para cards estilo Ciro/FMYBC, ver `references/mgs-chat-funnels-car-cards-rollout.md`: respostas são engajamento-only e convergem para o mesmo bloco; card mode usa `image`/`name`/`subtitle`/`bank`/`target`; o renderer precisa tratar `questionData.offers`; canário em Eggbev antes de rollout; validar ausência de CTAs sequenciais, UTM nos cards, clique real do quiz/gate até o chat, linha de busca antes dos cards e `ad_domain`/wrapper slug por site.
 
+Admin UX do `MGS Chat Funnels`: o campo `Modelo de oferta` deve aparecer antes de identidade/URL e antes de configurar gate/chat/ofertas, porque `cards` vs `sequential` define a arquitetura do funil. Ao alterar essa tela, validar ordem no admin autenticado (`1. Modelo de oferta` antes de `2. Identidade e URL`) além de `php -l` e pacote ZIP.
+
 ---
 
 ## Política global — 1Password e Credenciais
