@@ -1,0 +1,68 @@
+{
+  "started_at": "2026-07-07T01:27:39-04:00",
+  "source": "phase1_final_confirmation_live",
+  "matched_1p_users": 88,
+  "op_errors": [
+    {
+      "item": "BOT Digitaltrchat",
+      "error": "username_missing_or_invalid"
+    }
+  ],
+  "users_targeted": 88,
+  "errors": [],
+  "finished_at": "2026-07-07T01:36:06-04:00",
+  "dtr_users_scanned": 88,
+  "dtr_login_ok": 88,
+  "dtr_accounts": 226,
+  "dtr_pages": 2912,
+  "sb_publishers": 56,
+  "sb_rows_total": 2771,
+  "ok": 2736,
+  "login_diverge": 26,
+  "id_diverge": 0,
+  "utm_diverge": 0,
+  "no_sb_match": 150,
+  "ambiguous": 0,
+  "sb_no_dtr_total": 9,
+  "sb_no_dtr_not_blocked": 9,
+  "basis_counts": {
+    "global+FB_PAGE_ID": 2762,
+    "none": 150
+  },
+  "company_scope": [
+    {
+      "company": "digital-trust",
+      "publishers_all": 45,
+      "publishers_active": 37
+    },
+    {
+      "company": "digital-trust-2",
+      "publishers_all": 11,
+      "publishers_active": 11
+    }
+  ],
+  "json": "/root/mgs-agent/reports/dtr-sb-phase1-final-confirmation-20260707-012651.json",
+  "sheet_results": {
+    "summary": {
+      "tab": "00 Resumo Fase 1",
+      "gid": 315043175,
+      "expected": 14,
+      "readback": 14,
+      "url": "https://docs.google.com/spreadsheets/d/1VNz7l1soafiju0v89H0IfaKJHcgioVjUw6nXyORl9oI/edit?gid=315043175#gid=315043175"
+    },
+    "dtr_no_sb": {
+      "tab": "Fase 1 - DTR sem SB",
+      "gid": 130786795,
+      "expected": 150,
+      "readback": 150,
+      "url": "https://docs.google.com/spreadsheets/d/1VNz7l1soafiju0v89H0IfaKJHcgioVjUw6nXyORl9oI/edit?gid=130786795#gid=130786795"
+    },
+    "sb_no_dtr_not_blocked": {
+      "tab": "Fase 1 - SB sem DTR nao Blocked",
+      "gid": 860481715,
+      "expected": 9,
+      "readback": 9,
+      "url": "https://docs.google.com/spreadsheets/d/1VNz7l1soafiju0v89H0IfaKJHcgioVjUw6nXyORl9oI/edit?gid=860481715#gid=860481715"
+    }
+  }
+}
