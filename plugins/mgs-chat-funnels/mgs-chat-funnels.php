@@ -45,7 +45,7 @@ final class MGS_Chat_Funnels {
 
     private function enqueue_assets($config = null) {
         if (!$this->rendered_assets) {
-            if (is_array($config) && (($config['ads_enabled'] ?? true) !== false)) {
+            if (is_array($config) && (($config['ads_enabled'] ?? true) !== false) && $this->ad_provider($config) !== 'm2') {
                 wp_enqueue_script('mgs-chat-funnels-gpt', 'https://securepubads.g.doubleclick.net/tag/js/gpt.js', array(), null, false);
                 $wrapper_url = $this->ad_wrapper_url($config);
                 if ($wrapper_url !== '') {
