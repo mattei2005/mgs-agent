@@ -12,8 +12,9 @@ metadata:
 
 ## Recent operational references
 
+- `references/dtr-spanish-2022-date-parsing-2026-07-06.md` — DigitalTRChat Spanish `#2022` expiry parser: handle `hasta el 21 de julio a las 11:10 p. m.` in addition to EN/PT before applying SB `RESTRICTED_UNTIL`.
 - `references/dtr-restriction-expiry-clears-notes-codes-2026-07-06.md` — Rodolfo correction: when DTR proves a page left restriction and SB `RESTRICTED_UNTIL` is cleared, also remove stale restriction/error tokens from `NOTES` (`#2022` always; all delivery error tokens when latest status is `Sent`) with readback validation.
-- `references/dtr-authoritative-restricted-page-alerts-2026-07-06.md` — DTR-authoritative restricted-page alerts: skip SB-already-restricted pages, parse EN/PT `#2022` dates, update SB only after DTR confirmation + readback, and use the approved human-readable alert block.
+- `references/dtr-authoritative-restricted-page-alerts-2026-07-06.md` — DTR-authoritative restricted-page alerts: skip SB-already-restricted pages, parse EN/PT/ES `#2022` dates, update SB only after DTR confirmation + readback, and use the approved human-readable alert block.
 - `references/dtr-step1-step2-segurador-inventory-corrections-2026-07-03.md` — Rodolfo-corrected Step 1/Step 2 rules for DTR/SB audits: sheet-first filtering, `X` precedence, duplicate/no-pages semantics, four active sheet overrides, 1Password username discovery, and context-safety before SB writes.
 - `references/sb-restricted-pending-file-bulk-apply-2026-07-04.md` — External restricted-pending text file → live SB bulk update workflow: `pg_` PAGE_ID normalization, full publisher scope, On-hold safety gate, backup, grouped update-many writes, and readback validation.
 - `references/dtr-sb-page-health-sync-save-fallbacks-2026-07-05.md` — Save fallback lessons for DTR→SB page-health sync: distinguish DTR login vs SB save failures, omit null fields in modal-style payloads, dedupe unsafe context by SB row ID, and handle Blocked rows where status can be fixed but NOTES append is refused.
