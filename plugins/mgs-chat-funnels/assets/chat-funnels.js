@@ -51,6 +51,10 @@
       callback();
       return;
     }
+    if (adProvider(config) === 'm2') {
+      setTimeout(callback, 1200);
+      return;
+    }
     window.jbftag = window.jbftag || { cmd: [] };
     window.jbftag.cmd.push(function () {
       if (window.jbftag && typeof window.jbftag.showRewardedAds === 'function') {
