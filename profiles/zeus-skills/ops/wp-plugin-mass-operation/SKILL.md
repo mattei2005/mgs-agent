@@ -400,7 +400,7 @@ Para testes/instalações do plugin `MGS Chat Funnels`, ver **`references/mgs-ch
 
 Para instalação em massa do `MGS Chat Funnels` junto com o plugin de quiz `activecampaign-quiz-lazy-blocks`, incluindo extração de pacote existente, RunCloud com `sudo -n`, WP Admin `/rodloguda/`, backups e validação por rota, ver **`references/mgs-chat-and-quiz-bulk-install-2026-07-03.md`**.
 
-**Regra crítica de rollout MGS Chat Funnels:** código/plugin pode ser empacotado em comum, mas `configs/*.json` nunca são neutros. Em rollout “todos os sites”, validar e/ou ajustar individualmente por domínio antes de concluir: `ad_domain`, `brand`, `route`, wrapper gerado (`{company}_{ad_domain}.builder.js`) e rota pública. Nunca propagar config de canário como Eggbev/OpenZed para outros sites sem troca explícita do domínio.
+**Regra crítica de rollout MGS Chat Funnels:** código/plugin pode ser empacotado em comum, mas `configs/*.json` nunca são neutros. Em rollout “todos os sites”, validar e/ou ajustar individualmente por domínio antes de concluir: `ad_domain`, `route`, wrapper gerado (`{company}_{ad_domain}.builder.js`) e rota pública. Não propagar config de canário como Eggbev/OpenZed para outros sites. Se um campo admin não tiver efeito operacional real (caso confirmado: `brand`/`Site`), remover o campo e só limpar essa chave dos JSONs, sem reescrever configs inteiros.
 
 Para mudanças na UI humana do admin do `MGS Chat Funnels`, ver `references/mgs-chat-funnels-admin-ui-taxonomy-and-rollout.md`: `Modelo de oferta` deve vir antes da identidade do chat; campos com taxonomia conhecida devem ser selects em ordem alfabética (Idioma, Vertical, País); e canário pedido pelo Rodolfo deve parar no site solicitado antes de rollout amplo.
 
