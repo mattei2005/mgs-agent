@@ -422,8 +422,10 @@ Admin UX do `MGS Chat Funnels`: o campo `Modelo de oferta` deve aparecer antes d
 - Configs do chat devem usar `ad_provider: "m2"`, `ad_company: "monetizemore"`, `ad_domain: ""`.
 - Em modo M2, remover/não carregar `https://assets.jbfdigital.com.br/...builder.js` e não carregar `gpt.js` pelo plugin; o script M2/site-level é responsável por detectar o trigger.
 - Não deixar fallback JBF/JBFTag visível no código-fonte público do wantabrand: remover referências a `jbf`, `jbftag`, `showRewardedAds`, `requestRewardAds`, `securepubads`, `assets.jbfdigital`, `ad-unit` e `onInfinitePostLoaded` das rotas públicas M2.
-- Botões que devem disparar anúncio recebem classe `pg-rewarded`. No fluxo atual, o principal é o CTA do gate `#aq-cta`; cards/ofertas finais também podem receber a classe quando o pedido for monetizar o clique final.
+- Botões que devem disparar anúncio recebem classe `pg-rewarded`. No fluxo atual, o principal é o CTA do gate `#aq-cta`.
+- Não assumir que clique em oferta final é rewarded. No padrão JBF/Ciro, o rewarded confirmado por código é o CTA do gate (`showRewardedAds`); oferta/card final é link normal salvo interceptação externa do wrapper. Para Wantabrand/M2, só colocar `pg-rewarded` em cards/ofertas finais se Rodolfo/M2 pedir explicitamente esse comportamento.
 - Validar com HTML público: `pg-rewarded > 0`, `jbf == 0`, `jbftag == 0`, `assets.jbfdigital.com.br == false`, `gpt.js == false`, sem placeholders `{{...}}`, e browser mostrando o chat avançando após clicar no CTA.
+- Detalhe completo: ver `references/wantabrand-m2-monetizemore-chat-ads.md`.
 
 ---
 
