@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-07T16:57:45-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-07T17:06:00-04:00",
+    "generated_by": "manual Zeus infra inventory update + infra-discovery base"
   },
   "system_packages": [
     {
@@ -1053,17 +1053,20 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 55189,
-      "sha256": "c17daae1f2ba7907dc67f55476f6a836b61dd96d053734db2a4d1347201dcc21",
+      "size_bytes": 74434,
+      "sha256": "a4bbc21bacdd4d72436c1924a06ca2509c5c8bb3a88ea7d059124e657aa710c2",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-05T01:58:19-04:00",
-      "validation": "Skill patched with Rodolfo correction: Blocked rows require dual diagnosis; page may be blocked or segurador/profile access may be down while page remains public.",
+      "updated_at": "2026-07-07T17:06:00-04:00",
+      "validation": "manual Zeus update; Page→Broadcast Message Template linking procedure captured from Rodolfo; live canary linked CA page to test template with readback OK; secret scan not applicable",
       "reference_update": {
         "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/digitaltrchat-full-segurador-audit-methodology-2026-07-02.md",
         "sha256": "6249254fc654d9d4a16f554d35bed04a1ef69c8be512dff58fce0ebf8033a50e",
         "size_bytes": 4489,
         "updated_at": "2026-07-03T21:37:59-04:00"
-      }
+      },
+      "source_report": "REPORT-INFRA Zeus SB page template link procedure 2026-07-07",
+      "agent": "zeus",
+      "purpose": "SmartBidding dashboard/API access and safe Messenger Page template linking procedure with FB_PAGE_ID/PAGE_ID/PAGE_NAME validation."
     }
   ],
   "systemd_services": [
