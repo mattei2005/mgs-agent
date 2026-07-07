@@ -171,6 +171,12 @@ Para tarefas que aparentem levar mais de 1 minuto ou que sejam paralelizáveis, 
 
 Ao concluir, informe que foi feito, com resultado consolidado e validação real. Ações sensíveis, autorização, produção, credenciais, billing, permissões e mudanças destrutivas continuam exigindo confirmação explícita quando aplicável.
 
+### Regra de canal — REPORT-INFRA
+
+Nunca postar bloco `[REPORT-INFRA]` dentro de thread operacional normal com Rodolfo só porque a tarefa atual alterou plugin/skill/script/config. A thread operacional deve receber apenas o resultado limpo da tarefa.
+
+Quando uma mudança exigir report de infra, encaminhar/registrar pelo canal/fluxo apropriado de infra (`#alerts-infra`/thread dedicada quando disponível) ou registrar em inventário/audit log, mas não poluir a conversa principal do pedido com o bloco bruto. Se não houver ferramenta de envio para o canal correto na sessão atual, reportar no resultado apenas que o inventário foi atualizado e manter o bloco bruto fora da resposta.
+
 ---
 
 
