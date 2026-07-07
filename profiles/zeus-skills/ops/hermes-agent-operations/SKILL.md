@@ -327,6 +327,7 @@ Quando Rodolfo disser “GPT-5.5 pra tudo”, “zero Anthropic”, “deleta de
 - Endpoint Codex não lista modelos via API (`/codex/models` pode retornar 400; `/backend-api/models` 403).
 - Token expira; refresh deve ser automático, mas falhas exigem novo `hermes model` e recópia para profiles.
 - Não manter Claude/Haiku como fallback silencioso após decisão de custo.
+- Backups de `auth.json`/tokens/OAuth NUNCA devem ser criados dentro de `/root/mgs-agent` ou qualquer path versionado/auto-commitado. Se precisar de rollback, usar diretório fora do Git com permissão `700` (ex.: `/root/.hermes/secure-backups/<agent>/`) e validar `git -C /root/mgs-agent status` imediatamente; remover/shredar qualquer cópia sensível criada por engano antes de continuar.
 - Quando limpar Anthropic/Claude, remover também `credential_pool.anthropic`, root `~/.hermes/auth.json`, root `~/.hermes/.env`, snapshots/backups com credenciais e espelhos versionados em `/root/mgs-agent/profiles/`; só limpar `providers.anthropic` nos profiles é insuficiente.
 - Alguns serviços fora do gateway podem continuar chamando Anthropic mesmo depois de migrar Zeus/Atena/Ares.
 - OpenHands “funcionando” não basta: se wrapper/trajectory usa `anthropic/claude-*` + API key 1Password, isso é uma falha de custo/governança salvo autorização explícita de Rodolfo. Diagnóstico canônico: `references/atena-openhands-provider-diagnostic.md`.
