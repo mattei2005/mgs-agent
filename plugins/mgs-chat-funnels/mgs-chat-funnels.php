@@ -108,12 +108,16 @@ final class MGS_Chat_Funnels {
         $tags_json = $this->js_json($tags);
         $persona = isset($config['persona']) && is_array($config['persona']) ? $config['persona'] : array();
         $wrapper_url = (($config['ads_enabled'] ?? true) !== false) ? $this->ad_wrapper_url($config) : '';
+        $ad_provider = $this->ad_provider($config);
 
         $replacements = array(
             '{{HTML_LANG}}' => esc_attr($language),
             '{{TITLE}}' => esc_html($title),
             '{{TAGS_SCRIPT}}' => '<script>window.tags = JSON.parse(' . $this->js_json($tags_json) . ');</script>',
+            '{{ADS_HEAD}}' => $this->render_ads_head_html($config),
             '{{WRAPPER_URL}}' => esc_url($wrapper_url),
+            '{{REWARDED_BUTTON_CLASS}}' => esc_attr($ad_provider === 'm2' ? 'pg-rewarded' : ''),
+            '{{REWARDED_BUTTON_CLASS_JS}}' => $this->js_json($ad_provider === 'm2' ? 'pg-rewarded' : ''),
             '{{BOT_NAMES_JS}}' => $this->js_json($persona['names'] ?? array('Maria')),
             '{{FEMALE_NAMES_JS}}' => $this->js_json($persona['female_names'] ?? array()),
             '{{MALE_NAMES_JS}}' => $this->js_json($persona['male_names'] ?? array()),
