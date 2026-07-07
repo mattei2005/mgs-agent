@@ -534,6 +534,8 @@ Use **blocos simples sem language tag** ou bullets curtos para qualquer matriz d
 
 Regra de anexos para Rodolfo: **nunca enviar arquivo/anexo por iniciativa própria**. Se ele pedir “mostra por aqui”, “no chat” ou apenas pedir explicação/review, responder inline. Só enviar `MEDIA:/...`/anexo quando ele pedir explicitamente arquivo/anexo. Para documentos longos, oferecer resumo inline e perguntar se quer anexo. O guard local `/root/mgs-agent/scripts/discord-response-lint.py --check` deve acusar language-tagged fences, linha solta `text`, tabela Markdown crua e diretivas `MEDIA:/...` em drafts.
 
+Correção operacional 2026-07-07: em respostas normais de update para Rodolfo, **não colar blocos `[REPORT-INFRA]` inline na própria thread de update**. REPORT-INFRA é feed/canal operacional separado; se Zeus não tiver entrega explícita para esse destino no momento, registrar a mudança em Git/audit/inventário e resumir no report final como “infra alterada: paths + commits”, sem transformar a resposta executiva em alerta de infra.
+
 Quando a resposta longa foi redigida em arquivo/stdin antes de enviar, validar quando prático com:
 
 ```bash
