@@ -1,0 +1,3003 @@
+<!DOCTYPE html><html lang="en"><head><style type="text/css">.swal-icon--error{border-color:#f27474;-webkit-animation:animateErrorIcon .5s;animation:animateErrorIcon .5s}.swal-icon--error__x-mark{position:relative;display:block;-webkit-animation:animateXMark .5s;animation:animateXMark .5s}.swal-icon--error__line{position:absolute;height:5px;width:47px;background-color:#f27474;display:block;top:37px;border-radius:2px}.swal-icon--error__line--left{-webkit-transform:rotate(45deg);transform:rotate(45deg);left:17px}.swal-icon--error__line--right{-webkit-transform:rotate(-45deg);transform:rotate(-45deg);right:16px}@-webkit-keyframes animateErrorIcon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}to{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);opacity:1}}@keyframes animateErrorIcon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}to{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);opacity:1}}@-webkit-keyframes animateXMark{0%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}50%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}80%{-webkit-transform:scale(1.15);transform:scale(1.15);margin-top:-6px}to{-webkit-transform:scale(1);transform:scale(1);margin-top:0;opacity:1}}@keyframes animateXMark{0%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}50%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}80%{-webkit-transform:scale(1.15);transform:scale(1.15);margin-top:-6px}to{-webkit-transform:scale(1);transform:scale(1);margin-top:0;opacity:1}}.swal-icon--warning{border-color:#f8bb86;-webkit-animation:pulseWarning .75s infinite alternate;animation:pulseWarning .75s infinite alternate}.swal-icon--warning__body{width:5px;height:47px;top:10px;border-radius:2px;margin-left:-2px}.swal-icon--warning__body,.swal-icon--warning__dot{position:absolute;left:50%;background-color:#f8bb86}.swal-icon--warning__dot{width:7px;height:7px;border-radius:50%;margin-left:-4px;bottom:-11px}@-webkit-keyframes pulseWarning{0%{border-color:#f8d486}to{border-color:#f8bb86}}@keyframes pulseWarning{0%{border-color:#f8d486}to{border-color:#f8bb86}}.swal-icon--success{border-color:#a5dc86}.swal-icon--success:after,.swal-icon--success:before{content:"";border-radius:50%;position:absolute;width:60px;height:120px;background:#fff;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.swal-icon--success:before{border-radius:120px 0 0 120px;top:-7px;left:-33px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:60px 60px;transform-origin:60px 60px}.swal-icon--success:after{border-radius:0 120px 120px 0;top:-11px;left:30px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:0 60px;transform-origin:0 60px;-webkit-animation:rotatePlaceholder 4.25s ease-in;animation:rotatePlaceholder 4.25s ease-in}.swal-icon--success__ring{width:80px;height:80px;border:4px solid hsla(98,55%,69%,.2);border-radius:50%;box-sizing:content-box;position:absolute;left:-4px;top:-4px;z-index:2}.swal-icon--success__hide-corners{width:5px;height:90px;background-color:#fff;padding:1px;position:absolute;left:28px;top:8px;z-index:1;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.swal-icon--success__line{height:5px;background-color:#a5dc86;display:block;border-radius:2px;position:absolute;z-index:2}.swal-icon--success__line--tip{width:25px;left:14px;top:46px;-webkit-transform:rotate(45deg);transform:rotate(45deg);-webkit-animation:animateSuccessTip .75s;animation:animateSuccessTip .75s}.swal-icon--success__line--long{width:47px;right:8px;top:38px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-animation:animateSuccessLong .75s;animation:animateSuccessLong .75s}@-webkit-keyframes rotatePlaceholder{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}to{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@keyframes rotatePlaceholder{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}to{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@-webkit-keyframes animateSuccessTip{0%{width:0;left:1px;top:19px}54%{width:0;left:1px;top:19px}70%{width:50px;left:-8px;top:37px}84%{width:17px;left:21px;top:48px}to{width:25px;left:14px;top:45px}}@keyframes animateSuccessTip{0%{width:0;left:1px;top:19px}54%{width:0;left:1px;top:19px}70%{width:50px;left:-8px;top:37px}84%{width:17px;left:21px;top:48px}to{width:25px;left:14px;top:45px}}@-webkit-keyframes animateSuccessLong{0%{width:0;right:46px;top:54px}65%{width:0;right:46px;top:54px}84%{width:55px;right:0;top:35px}to{width:47px;right:8px;top:38px}}@keyframes animateSuccessLong{0%{width:0;right:46px;top:54px}65%{width:0;right:46px;top:54px}84%{width:55px;right:0;top:35px}to{width:47px;right:8px;top:38px}}.swal-icon--info{border-color:#c9dae1}.swal-icon--info:before{width:5px;height:29px;bottom:17px;border-radius:2px;margin-left:-2px}.swal-icon--info:after,.swal-icon--info:before{content:"";position:absolute;left:50%;background-color:#c9dae1}.swal-icon--info:after{width:7px;height:7px;border-radius:50%;margin-left:-3px;top:19px}.swal-icon{width:80px;height:80px;border-width:4px;border-style:solid;border-radius:50%;padding:0;position:relative;box-sizing:content-box;margin:20px auto}.swal-icon:first-child{margin-top:32px}.swal-icon--custom{width:auto;height:auto;max-width:100%;border:none;border-radius:0}.swal-icon img{max-width:100%;max-height:100%}.swal-title{color:rgba(0,0,0,.65);font-weight:600;text-transform:none;position:relative;display:block;padding:13px 16px;font-size:27px;line-height:normal;text-align:center;margin-bottom:0}.swal-title:first-child{margin-top:26px}.swal-title:not(:first-child){padding-bottom:0}.swal-title:not(:last-child){margin-bottom:13px}.swal-text{font-size:16px;position:relative;float:none;line-height:normal;vertical-align:top;text-align:left;display:inline-block;margin:0;padding:0 10px;font-weight:400;color:rgba(0,0,0,.64);max-width:calc(100% - 20px);overflow-wrap:break-word;box-sizing:border-box}.swal-text:first-child{margin-top:45px}.swal-text:last-child{margin-bottom:45px}.swal-footer{text-align:right;padding-top:13px;margin-top:13px;padding:13px 16px;border-radius:inherit;border-top-left-radius:0;border-top-right-radius:0}.swal-button-container{margin:5px;display:inline-block;position:relative}.swal-button{background-color:#7cd1f9;color:#fff;border:none;box-shadow:none;border-radius:5px;font-weight:600;font-size:14px;padding:10px 24px;margin:0;cursor:pointer}.swal-button[not:disabled]:hover{background-color:#78cbf2}.swal-button:active{background-color:#70bce0}.swal-button:focus{outline:none;box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(43,114,165,.29)}.swal-button[disabled]{opacity:.5;cursor:default}.swal-button::-moz-focus-inner{border:0}.swal-button--cancel{color:#555;background-color:#efefef}.swal-button--cancel[not:disabled]:hover{background-color:#e8e8e8}.swal-button--cancel:active{background-color:#d7d7d7}.swal-button--cancel:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)}.swal-button--danger{background-color:#e64942}.swal-button--danger[not:disabled]:hover{background-color:#df4740}.swal-button--danger:active{background-color:#cf423b}.swal-button--danger:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(165,43,43,.29)}.swal-content{padding:0 20px;margin-top:20px;font-size:medium}.swal-content:last-child{margin-bottom:20px}.swal-content__input,.swal-content__textarea{-webkit-appearance:none;background-color:#fff;border:none;font-size:14px;display:block;box-sizing:border-box;width:100%;border:1px solid rgba(0,0,0,.14);padding:10px 13px;border-radius:2px;transition:border-color .2s}.swal-content__input:focus,.swal-content__textarea:focus{outline:none;border-color:#6db8ff}.swal-content__textarea{resize:vertical}.swal-button--loading{color:transparent}.swal-button--loading~.swal-button__loader{opacity:1}.swal-button__loader{position:absolute;height:auto;width:43px;z-index:2;left:50%;top:50%;-webkit-transform:translateX(-50%) translateY(-50%);transform:translateX(-50%) translateY(-50%);text-align:center;pointer-events:none;opacity:0}.swal-button__loader div{display:inline-block;float:none;vertical-align:baseline;width:9px;height:9px;padding:0;border:none;margin:2px;opacity:.4;border-radius:7px;background-color:hsla(0,0%,100%,.9);transition:background .2s;-webkit-animation:swal-loading-anim 1s infinite;animation:swal-loading-anim 1s infinite}.swal-button__loader div:nth-child(3n+2){-webkit-animation-delay:.15s;animation-delay:.15s}.swal-button__loader div:nth-child(3n+3){-webkit-animation-delay:.3s;animation-delay:.3s}@-webkit-keyframes swal-loading-anim{0%{opacity:.4}20%{opacity:.4}50%{opacity:1}to{opacity:.4}}@keyframes swal-loading-anim{0%{opacity:.4}20%{opacity:.4}50%{opacity:1}to{opacity:.4}}.swal-overlay{position:fixed;top:0;bottom:0;left:0;right:0;text-align:center;font-size:0;overflow-y:auto;background-color:rgba(0,0,0,.4);z-index:10000;pointer-events:none;opacity:0;transition:opacity .3s}.swal-overlay:before{content:" ";display:inline-block;vertical-align:middle;height:100%}.swal-overlay--show-modal{opacity:1;pointer-events:auto}.swal-overlay--show-modal .swal-modal{opacity:1;pointer-events:auto;box-sizing:border-box;-webkit-animation:showSweetAlert .3s;animation:showSweetAlert .3s;will-change:transform}.swal-modal{width:478px;opacity:0;pointer-events:none;background-color:#fff;text-align:center;border-radius:5px;position:static;margin:20px auto;display:inline-block;vertical-align:middle;-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:50% 50%;transform-origin:50% 50%;z-index:10001;transition:opacity .2s,-webkit-transform .3s;transition:transform .3s,opacity .2s;transition:transform .3s,opacity .2s,-webkit-transform .3s}@media (max-width:500px){.swal-modal{width:calc(100% - 20px)}}@-webkit-keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}@keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}</style>
+	  <meta charset="UTF-8">
+	  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+	  <title>Digital TR Chat | Subscriber Manager</title>
+	  <link rel="shortcut icon" href="https://digitaltrchat.com/assets/img/favicon.png"> 
+	  <!-- General CSS Files -->
+	<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/fontawesome/css/v4-shims.min.css">
+
+<!-- CSS Libraries -->
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/jqvmap/dist/jqvmap.min.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/summernote/summernote-bs4.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css">
+
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/weather-icon/css/weather-icons.min.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/weather-icon/css/weather-icons-wind.min.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/chocolat/dist/css/chocolat.css">
+
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/prism/prism.css">
+
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/dropzonejs/dropzone.css">
+
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/flag-icon-css/css/flag-icon.min.css">
+
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/bootstrap-social/bootstrap-social.css">
+
+
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/bootstrap-daterangepicker/daterangepicker.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/select2/dist/css/select2.min.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/jquery-selectric/selectric.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+
+
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/codemirror/theme/duotone-dark.css">
+
+
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/fullcalendar/main.min.css">
+
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/datatables/datatables.min.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
+
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/ionicons/css/ionicons.min.css">
+
+
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/izitoast/css/iziToast.min.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/izitoast/css/iziToast.min.css">
+
+<!-- <link rel="stylesheet" type="text/css" href="https://digitaltrchat.com/plugins/grid/grid_themes/default/easyui.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://digitaltrchat.com/plugins/grid/grid_themes/icon.css"> -->
+
+<!-- Template CSS -->
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/css/style.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/css/components.css">
+
+<!-- Scrollbar -->
+<link rel="stylesheet" type="text/css" href="https://digitaltrchat.com/plugins/scrollbar/jquery.mCustomScrollbar.css">
+
+<!-- SlimScroll -->
+<link href="https://digitaltrchat.com/plugins/perfect-scrollbar-1.4.0/css/perfect-scrollbar.css" rel="stylesheet">
+
+<!-- Alerfify https://alertifyjs.com/guide.html -->
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/alertifyjs/css/alertify.min.css">
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/modules/alertifyjs/css/themes/default.min.css">
+
+<!--Jquey Date Time Picker -->
+<link href="https://digitaltrchat.com/plugins/datetimepickerjquery/jquery.datetimepicker.css" rel="stylesheet" type="text/css">
+
+<!--Emoji CSS-->
+<link rel="stylesheet" type="text/css" href="https://digitaltrchat.com/plugins/emoji/dist/emojionearea.min.css" media="screen">
+
+
+<!-- Custom -->
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/css/custom.css">
+
+<script type="text/javascript">
+  var areWeUsingScroll = true;var is_rtl = false;</script>
+
+<script type="text/javascript">
+	"use strict";
+	var base_url="https://digitaltrchat.com/";
+	var user_id = "30";
+	var selected_language="english";
+	var is_demo = "0";
+	var is_admin = "1";
+	var controller_name = 'subscriber_manager';
+    var function_name = 'bot_subscribers';    
+    var is_mobile =  '0';
+	var global_lang_video_upload_limit = '';
+	global_lang_video_upload_limit = parseInt(global_lang_video_upload_limit);
+
+	var global_lang_image = 'Image';
+	var global_lang_video = 'Video';
+	var global_lang_report = 'Report';
+	var global_lang_view = 'View';
+	var global_lang_edit = 'Edit';
+	var global_lang_update = 'Update';
+	var global_lang_delete = 'Delete';
+	var global_lang_remove = 'Remove';
+	var global_lang_close = 'Close';
+	var global_lang_copy = 'Copy';
+	var global_lang_submit = 'Submit';
+	var global_lang_add_more = 'Add more';
+	var global_lang_play = 'Play';
+	var global_lang_visit_channel = 'Visit channel';
+	var global_lang_watch_video = 'Watch video';
+	var global_lang_not_applicable = 'N/a';
+	var global_lang_url_copied_clipbloard = 'Url copied to clipboard';
+	var global_lang_pause_campaign ='Pause campaign';
+	var global_lang_start_campaign = 'Start campaign';
+
+	var global_lang_active = 'Active';
+	var global_lang_inactive = 'Inactive';
+	var global_lang_processing = 'Processing';
+	var global_lang_completed = 'Completed';
+	var global_lang_pending = 'Pending';
+
+	var global_lang_success = 'Success';
+	var global_lang_error = 'Error';
+	var global_lang_warning = 'Warning';
+
+	var global_lang_last_30_days = 'Last 30 days';
+	var global_lang_this_month = 'This month';
+	var global_lang_last_month = 'Last month';
+	var global_lang_select_from_date = 'Please select from date';
+	var global_lang_select_to_date = 'Please select to date';
+
+	var global_lang_try_once_again = 'Try once again';
+	var global_lang_something_went_wrong = 'Something went wrong, please try again.';
+	var global_lang_no_data_found = 'No data found';
+	var global_lang_are_you_sure = 'Are you sure?';
+	var global_lang_saved_successfully = 'Your data has been successfully saved.';
+	var global_lang_delete_confirmation = 'Do you really want to delete it?';
+
+	var global_lang_campaign_create = 'Create Campaign';
+	var global_lang_campaign_edit = 'Edit campaign';
+	var global_lang_campaign_delete = 'Delete campaign';
+	var global_lang_campaign_delete_confirmation = 'Do you really want to delete this campaign?';
+	var global_lang_campaign_campaign_state_confirmation = 'Do you really want to change this campaign state?';
+	var global_lang_campaign_name = 'Campaign name';
+	var global_lang_campaign_created_successfully = 'Campaign has been created successfully.';
+	var global_lang_campaign_updated_successfully = 'Campaign has been updated successfully.';
+	var global_lang_campaign_deleted_successfully = 'Campaign has been deleted successfully.';
+	var global_lang_campaign_paused_successfully = 'Campaign has been paused successfully.';
+	var global_lang_campaign_started_successfully = 'Campaign has been stared successfully.';
+	var global_lang_campaign_force_started_successfully = 'Force processing has been enabled successfully.';
+	var global_lang_no_video_found = 'We cound not find any video';
+
+	var global_lang_previous = 'Previous'
+	var global_lang_next = 'Next'
+	var global_lang_this = 'This'
+	var global_lang_today = 'Today'
+	var global_lang_month = 'Month'
+	var global_lang_week = 'Week'
+	var global_lang_day = 'Day'
+	var global_lang_all_day = 'All day'
+	var global_lang_more = 'More'
+	var global_lang_no_event_found = 'No event found'
+
+	var upload_lang_drag_drop_files = "Drag & drop files";
+	var upload_lang_upload = "Upload";
+	var upload_lang_abort = "Abort";
+	var upload_lang_cancel = "Cancel";
+	var upload_lang_delete = "Delete";
+	var upload_lang_done = "Done";
+	var upload_lang_multiple_file_drag_drop_is_not_allowed = "Multiple file drag & drop is not allowed.";
+	var upload_lang_is_not_allowed_allowed_extensions  = "Is not allowed. Allowed extensions:";
+	var upload_lang_is_not_allowed_file_already_exists = "Is not allowed. File already exists.";
+	var upload_lang_is_not_allowed_allowed_max_size  = "Is not allowed. Allowed max size:";
+	var upload_lang_upload_is_not_allowed = "Upload is not allowed";
+	var upload_lang_is_not_allowed_maximum_allowed_files_are = "Is not allowed. Maximum allowed files are:";
+	var upload_lang_download = "Download";
+
+	var support_lang_success = 'Success';
+	var support_lang_error = 'Error';
+	var support_lang_no_data_found = 'No data found';
+	var support_lang_ticket_delete_confirm = 'Do you really want to delete it?';
+	var support_lang_are_you_sure = 'Are you sure?';
+
+
+	var addon_manager_lang_alert = 'Alert';
+	var addon_manager_lang_deactive_addon = 'Deactive add-on?';
+	var addon_manager_lang_deactive_addon_confirmation = 'Do you really want to deactive this add-on? your add-on data will still remain.';
+	var addon_manager_lang_delete_addon = 'Delete add-on?';
+	var addon_manager_lang_delete_addon_confirmation = 'Do you really want to delete this add-on? this process can not be undone.';
+	var addon_manager_lang_delete_url = 'https://digitaltrchat.com/addons/delete_uploaded_zip';
+
+	var announcement_lang_mark_seen_confirmation = 'Do you really want to mark all unseen notifications as seen?';
+
+	var user_manager_lang_not_selected = 'You have to select users to send email.';
+	var package_manager_lang_cannot_deleted = 'Default package can not be deleted.';
+
+	var language_manager_lang_alert1 = 'Please put a language name & then save.';
+	var language_manager_lang_alert2 = 'Please put a language name & save it first.';
+	var language_manager_lang_download = 'Download language';
+	var language_manager_lang_delete = 'Delete language';
+	var language_manager_lang_cannot_delete = 'Sorry, english language can not be deleted.';
+	var language_manager_lang_cannot_delete_default = 'This is your default language, it can not be deleted.';
+	var language_manager_lang_cannot_delete_confirmation = 'Delete language?';
+	var language_manager_lang_cannot_delete_confirmation_msg = 'Do you really want to delete this language? it will delete all files of this language.';
+	var language_manager_lang_cannot_delete_success_msg = 'Your language file has been successfully deleted.';
+	var language_manager_lang_only_char_allowed = 'Only characters and underscores are allowed.';
+	var language_manager_lang_language_exist = 'Sorry, this language already exists, you can not add this again.';
+	var language_manager_lang_language_exist_try = 'This language is already exist, please try with different one.';
+	var language_manager_lang_language_exist_update = 'This language already exist, no need to update.';
+	var language_manager_lang_update_name_first = 'Your given name has not updated, please update the name first.';
+	var language_manager_lang_selected_lang = '';
+	var language_manager_lang_editable_language = '';
+
+	var smtp_settings_lang_test_mail_sent = 'Test email has been sent successfully.';
+
+	var import_account_bot_restart = 'Re-start bot connection';
+	var import_account_bot_restart_confirm = 'Do you really want to re-start bot connection for this page?';
+	var import_account_bot_enable = 'Enable bot connection';
+	var import_account_bot_enable_confirm = 'Do you really want to enable bot connection for this page?';
+	var import_account_bot_disable = 'Disable bot connection';
+	var import_account_bot_disable_confirm = 'Do you really want to disable bot connection for this page?';
+	var import_account_bot_delete = 'Delete bot connection & all settings';
+	var import_account_bot_delete_confirm = 'By proceeding, it will delete all settings of messenger bot, auto reply campaign, posting campaign, subscribers and all campaign reports of this page. this data can not be retrived. It will not delete the page itself from the system.';
+	var import_account_group_delete_confirm = 'If you delete this group, all the campaigns corresponding to this group will also be deleted. Do you want to delete this group from database?';
+	var import_account_page_delete_confirm = 'If you delete this page, all the campaigns corresponding to this page will also be deleted. Do you want to delete this page from database?';
+	var import_account_delete_confirm = 'If you delete this account, all the pages, groups and all the campaigns corresponding to this account will also be deleted form database. Do you want to delete this account from database?';
+	var import_account_gb_numberic_id = 'Please enter your Facebook numeric ID first';
+
+	var fb_settings_lang_make_active = 'Make this app active';
+	var fb_settings_lang_make_inactive = 'Make this app inactive';
+	var fb_settings_lang_add_app = 'Add app';
+	var fb_settings_lang_edit_app = 'Edit app';
+	var fb_settings_lang_change_app_state_confirmation = 'Do you really want to change this apps state?';
+	var fb_settings_lang_delete_app_confirmation = 'Do you really want to delete this app?';
+	var google_settings_lang_delete_app_confirmation = 'Do you really want to delete this app? deleting app will delete all related channels and campaigns.';
+
+	var theme_manager_lang_activation = 'Theme activation';
+	var theme_manager_lang_activation_confirmation = 'Do you really want to activate this theme?';
+	var theme_manager_lang_deactivation = 'Theme deactivation';
+	var theme_manager_lang_deactivation_confirmation = 'Do you really want to deactivate this theme? your theme data will still remain';
+	var theme_manager_lang_delete_confirmation = 'Do you really want to delete this theme? this process can not be undone.';
+
+	var account_list_delete_confirmation = 'Do you really want to delete this account?';
+
+	var upload_lang_error_msg1 = 'Please provide video title';
+	var upload_lang_error_msg2 = 'Please select a youtube channel';
+	var upload_lang_error_msg3 = 'Please select video category';
+	var upload_lang_error_msg4 = 'Please select video privacy type';
+	var upload_lang_error_msg5 = 'Please select time zone';
+	var upload_lang_error_msg6 = 'Please select schedule date time';
+	var upload_lang_error_msg7 = 'Please upload video';
+	var upload_lang_error_msg8 = 'This video has no title';
+	var upload_lang_error_msg9 = 'No title';
+	var upload_lang_success_msg = 'Video data has been stored successfully and will be processed at scheduled time.';
+	var upload_lang_update_video = 'Update schedule video';
+
+
+	var menu_manager_all_menu = '';
+	var menu_manager_restore_confirm = 'Are you sure about reseting your menus to default state?';
+	var menu_manager_name_required = 'Menu name is required';
+	var menu_manager_icon_required = 'Menu icon must not be empty icon';
+	var menu_manager_page_created = 'Page has been created successfully.';
+	var menu_manager_page_updated = 'Page has been updated successfully.';
+	var menu_manager_page_deleted = 'Page has been deleted successfully.';
+	var menu_manager_pages_deleted = 'Selected pages has been deleted successfully';
+	var menu_manager_page_not_selected = 'You did not select any page to delete.';
+	var notAllowed = 'Menu having link cannot be used as parent.';
+    var three_level_allowed = 'Third level menu is not allowed.';
+    var drag_drop_not_allowed = 'System default menu cannot be re-ordered.';
+
+    var payment_is_manaual_payment =  '';
+    var payment_sslcommers_mode =  '';
+    var payment_ssl_post_data = '';
+    var payment_has_reccuring = '';
+    var payment_lang_subscription_message = 'Subscription message';
+    var payment_lang_subscription_message_deatils = 'You have already a subscription enabled in paypal. If you want to use different paypal or different package, make sure to cancel your previous subscription from your paypal.';
+
+
+    var facebook_app_delete_confirm = 'If you delete this app then, all the imported Facebook accounts and their pages and campaigns will be deleted too corresponding to this app.';
+    var google_app_delete_confirm = 'If you delete this app then, all the imported google accounts and their pages and campaigns will be deleted too corresponding to this app.';
+    var google_app_status_change_confirm = 'If you change this app status to inactive then, all the imported google accounts and campaigns will not work corresponding to this app.';
+
+	var dashboard_step_size = '1';
+	var dashboard_image_video_compare_list = [];
+	var dashboard_image_post_list = [];
+	var dashboard_video_post_list = [];
+
+	var calendar_events = [];
+
+	var instragram_post_post_type ="";
+	var instragram_post_warning_upload_message = "Please type a message to post.";
+	var instragram_post_warning_upload_link = "Please paste a link to post.";
+	var instragram_post_warning_upload_image = "Please paste an image URL or upload an image to post.";
+	var instragram_post_warning_upload_video = "Please paste an video URL or upload an video to post.";
+	var instragram_post_warning_select_account = "Please select any page/group/account to publish this post.";
+	var instragram_post_warning_schedule_timezone = "Please select schedule time/time zone.";
+	var instragram_post_message_see_report = "Click here to see report";
+	var instragram_post_delete_main_confirm = "This is main campaign, if you want to delete it, rest of the sub campaign will be deleted. Do you really want to delete this post from the database?";
+	var instragram_post_message_sorry1 = "Sorry, only parent campaign has shown report.";
+	var instragram_post_message_sorry2 = "Sorry, this post is not published yet.";
+	var instragram_post_message_sorry3 = "Sorry, only pending campaigns are editable.";
+	var instragram_post_message_sorry4 = "Sorry, processing campaign can not be deleted.";
+	var instragram_post_message_sorry5 = "Sorry, embed code is only available for published video posts.";
+
+    var instagram_all_auto_comment_report_doyouwanttopausethiscampaign = 'Do you want to pause this campaign?';
+	var instagram_all_auto_comment_report_doyouwanttostartthiscampaign = 'Do you want to start this campaign?';
+	var instagram_all_auto_comment_report_doyouwanttodeletethisrecordfromdatabase = 'Do you want to delete this record from database?';
+	var instagram_all_auto_comment_report_youdidntselectanyoption = 'You did not select any option.';
+	var instagram_all_auto_comment_report_youdidntprovideallinformation = 'You did not provide all information.';
+	var instagram_all_auto_comment_report_doyouwanttostarthiscampaign = 'Do you want to start this campaign?';
+	var instagram_all_auto_comment_report_doyoureallywanttoreprocessthiscampaign = 'Force reprocessing means you are going to process this campaign again from where it ended. you should do only if you think the campaign is hung for long time and did not send message for long time. it may happen for any server timeout issue or server going down during last attempt or any other server issue. so only click ok if you think message is not sending. are you sure to reprocessing ?';
+	var instagram_all_auto_comment_report_alreadyenabled = 'This campaign is already enable for processing.';
+	var instagram_all_auto_comment_report_typeautocampaignname = 'You did not type auto campaign name';
+	var instagram_all_auto_comment_report_youdidnotchosescheduletype = 'You did not choose any schedule type';
+	var instagram_all_auto_comment_report_youdidnotchosescheduletime = 'You did not select any schedule time';
+	var instagram_all_auto_comment_report_youdidnotchosescheduletimezone = 'You did not select any time zone';
+	var instagram_all_auto_comment_report_youdidnotselectperodictime = 'You did not select any periodic time';
+	var instagram_all_auto_comment_report_youdidnotselectcampaignstarttime = 'You did not choose campaign start time';
+	var instagram_all_auto_comment_report_youdidnotselectcampaignendtime = 'You did not choose campaign end time';
+	var instagram_all_auto_comment_report_youdidntselectanytemplate = 'You did not select any template.';
+	var instagram_all_auto_comment_report_youdidntselectanyoptionyet = 'You did not select any option yet.';
+	var instagram_all_auto_comment_report_please_select_comment_between_times = 'Please select comment between times.';
+	var instagram_all_auto_comment_report_comment_between_start_time_must_be_less_than_end_time = 'Comment between start time must be less than end time.';
+	var instagram_all_auto_comment_report_post_id = "0";
+	var instagram_all_auto_comment_report_page_id = "0";
+
+	var instagram_auto_comment_template_youdidntselectanyoption = 'You did not select any option.';
+	var instagram_auto_comment_template_youdidntprovideallcomment = 'You did not provide comment information';
+	var instagram_auto_comment_template_autocomment = 'Auto comment';
+	var instagram_auto_comment_template_addcomments = 'Add comments';
+	var instagram_auto_comment_template_please_give_the_following_information_for_post_auto_comment = 'Please give the following information for post auto comment';
+	var instagram_auto_comment_template_can_not_delete_from_admin = 'You can not delete templates from admin account';
+	var instagram_auto_comment_template_deleted_successfully = 'Template has been deleted successfully.';
+
+
+	var instagram_template_manager_youdidntprovideallinformation = 'You didn`t provide all information.';
+	var instagram_template_manager_pleaseprovidepostid = 'Please provide post ID.';
+	var instagram_template_manager_alreadyenabled = 'Already enabled';
+	var instagram_template_manager_thispostidisnotfoundindatabaseorthispostidisnotassociatedwiththepageyouareworking = 'This post ID is not found in database or this post ID is not associated with the page you are working.';
+	var instagram_template_manager_enableautoreply = 'Enable auto reply';
+
+
+	var instagram_hash_tag_select_account = 'Please select an Instagram account';
+	var instagram_hash_tag_provide_hash_tag = 'Please provide hash tag';
+
+	var instagram_selectanaccount = 'Please select an account';
+	var instagram_selectanaccountfirst = 'Please select an account first';
+	var instagram_meta_info_grabber_url = 'https://digitaltrchat.com/ultrapost/text_image_link_video_meta_info_grabber';
+
+	var selected_global_page_table_id = '';
+	var selected_global_media_type = 'fb';
+</script>
+<script src="https://digitaltrchat.com/assets/modules/jquery.min.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/moment.min.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/chart.min.js"></script><style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style>
+<script src="https://digitaltrchat.com/assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
+
+<!-- General JS Scripts -->
+<!-- <script src="https://digitaltrchat.com/assets/modules/jquery.min.js"></script> -->
+<script src="https://digitaltrchat.com/assets/modules/popper.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/tooltip.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+
+<script src="https://digitaltrchat.com/assets/js/stisla.js"></script>
+
+
+<!-- JS Libraies -->
+
+<script src="https://digitaltrchat.com/assets/modules/jquery.sparkline.min.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/summernote/summernote-bs4.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+
+<script src="https://digitaltrchat.com/assets/modules/simple-weather/jquery.simpleWeather.min.js"></script>
+
+<script src="https://digitaltrchat.com/assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+
+
+<script src="https://digitaltrchat.com/assets/modules/jquery-ui/jquery-ui.min.js"></script>
+
+<script src="https://digitaltrchat.com/assets/js/page/clipboard.min.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/prism/prism.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+
+<script src="https://digitaltrchat.com/assets/modules/sticky-kit.js"></script>
+
+
+
+<script src="https://digitaltrchat.com/assets/modules/dropzonejs/min/dropzone.min.js"></script>
+
+
+<script src="https://digitaltrchat.com/assets/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js"></script>
+
+
+
+<script src="https://digitaltrchat.com/assets/modules/cleave-js/dist/cleave.min.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/cleave-js/dist/addons/cleave-phone.us.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/select2/dist/js/select2.full.min.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+
+
+<script src="https://digitaltrchat.com/assets/modules/codemirror/lib/codemirror.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/codemirror/mode/javascript/javascript.js"></script>
+
+
+<script src="https://digitaltrchat.com/assets/modules/gmaps.js"></script>
+
+<script src="https://digitaltrchat.com/assets/modules/fullcalendar/main.min.js"></script>
+
+
+
+<script src="https://digitaltrchat.com/assets/modules/datatables/datatables.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://digitaltrchat.com/assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
+
+
+
+<script src="https://digitaltrchat.com/assets/modules/sweetalert/sweetalert.min.js"></script>
+
+
+
+<script src="https://digitaltrchat.com/assets/modules/izitoast/js/iziToast.min.js"></script>
+
+
+
+<script src="https://digitaltrchat.com/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
+
+
+
+<!-- <script src="http://maps.google.com/maps/api/js?key=AIzaSyB55Np3_WsZwUQ9NS7DP-HnneleZLYZDNw&amp;sensor=true"></script> -->
+
+<!-- js for ajax multiselect [zilani 02-07-2019] -->
+<link rel="stylesheet" href="https://digitaltrchat.com/plugins/multiselect_tokenize/jquery.tokenize.css" type="text/css">
+<script src="https://digitaltrchat.com/plugins/multiselect_tokenize/jquery.tokenize.js" type="text/javascript"></script>
+
+<!-- Scrollbar -->
+<script src="https://digitaltrchat.com/plugins/scrollbar/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+
+<!-- Slimscroll -->
+<script src="https://digitaltrchat.com/plugins/perfect-scrollbar-1.4.0/dist/perfect-scrollbar.js"></script>
+
+<!-- Alerfify https://alertifyjs.com/guide.html -->
+<script src="https://digitaltrchat.com/assets/modules/alertifyjs/alertify.min.js"></script>
+
+<!--Jquery Date Time Picker  https://github.com/xdan/datetimepicker-->
+<script type="text/javascript" src="https://digitaltrchat.com/plugins/datetimepickerjquery/jquery.datetimepicker.js"></script>
+
+<!-- Emoji Library-->
+<script src="https://digitaltrchat.com/plugins/emoji/dist/emojionearea.js" type="text/javascript"></script>
+
+
+<!-- Custom Universal JS -->
+<script>
+
+  // $("document").ready(function(){
+  //   $('.modal').on('shown.bs.modal', function () { 
+  //     $(this).find('.table-responsive').attr('style','overflow','scroll !important;');
+  //   });
+  // });
+
+  function goBack(link,insert_or_update,add_base_url) //used to go back to list as crud
+  {
+    
+    // insert_or_update does not have any effect from v6.0
+    if (typeof(insert_or_update)==='undefined') insert_or_update = 0;
+    if (typeof(add_base_url)==='undefined') add_base_url = 1;
+
+    var mes='';
+    mes="Your data may not be saved.";
+    swal({
+      title: "Do you want to go back?",
+      text: mes,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => 
+    {
+      if (willDelete) 
+      {
+        if(add_base_url==1)
+        link="https://digitaltrchat.com/"+link;
+        window.location.assign(link);
+      } 
+    });
+  }
+
+  $(document).ready(function() {
+    
+    $('[data-toggle="popover"]').popover(); 
+    $('[data-toggle="popover"]').on('click', function(e) {e.preventDefault(); return true;});
+
+    $(document).on('change','#selected_global_media_type',function(e){
+
+        // var media_type = 'fb';
+        // if($(this).val()=='1') media_type = 'ig';
+        
+        $.ajax({
+          type:'POST' ,
+          url: "https://digitaltrchat.com/home/switch_to_media",
+          data:{},
+          success:function(response)
+          {
+            location.reload();
+          }
+        }); 
+    });
+
+    $(document).on('click','.are_you_sure',function(e){
+      e.preventDefault();
+      var link = $(this).attr("href");
+      var mes='Do you really want to delete it?';  
+      swal({
+        title: "Are you sure?",
+        text: mes,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => 
+      {
+        if (willDelete) 
+        {
+          window.location.href = link;
+        } 
+      });
+    });
+
+    $(document).on('click','.are_you_sure_datatable',function(e){
+      e.preventDefault();
+      var link = $(this).attr("href");
+      var refresh = $(this).attr("data-refresh");
+      var csrf_token = $(this).attr('csrf_token');
+      if (typeof(csrf_token)==='undefined') csrf_token = '';
+      var mes='Do you really want to delete it?';  
+      swal({
+        title: "Are you sure?",
+        text: mes,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => 
+      {
+        if (willDelete) 
+        {
+            $(this).addClass('btn-progress btn-danger').removeClass('btn-outline-danger');
+            $.ajax({
+              context: this,
+              url: link,
+              type: 'POST',
+              dataType: 'JSON',
+              data: {csrf_token:csrf_token},
+                success:function(response)
+                {
+                  $(this).removeClass('btn-progress btn-danger').addClass('btn-outline-danger');
+                  if(response.status == 1)  
+                  {
+                    iziToast.success({title: '',message: response.message,position: 'bottomRight'});
+                    if(refresh!='0')
+                    {
+                      if($(this).hasClass('non_ajax')) $(this).parent().parent().hide();
+                      else $('#mytable').DataTable().ajax.reload();
+                    }
+                  }
+                  else iziToast.error({title: '',message: response.message,position: 'bottomRight'});
+                }
+            });
+        } 
+      });
+    });
+
+    $(".account_switch").click(function(e){
+      e.preventDefault();
+      var id=$(this).attr('data-id');
+      $.ajax({
+        url: 'https://digitaltrchat.com/social_accounts/fb_rx_account_switch',
+        type: 'POST',
+        data: {id:id},
+        success:function(response){
+            location.reload(); 
+        }
+      })
+      
+    });
+
+    // $("#account_switch_select").change(function(e){
+    //   e.preventDefault();
+    //   var id=$(this).val();
+    //   $.ajax({
+    //     url: 'https://digitaltrchat.com/social_accounts/fb_rx_account_switch',
+    //     type: 'POST',
+    //     data: {id:id},
+    //     success:function(response){
+    //         location.reload(); 
+    //     }
+    //   })
+      
+    // });
+
+    $(".gmb_account_switch").click(function(e){
+      e.preventDefault();
+      var id=$(this).attr('data-id');
+      $.ajax({
+        url: 'https://digitaltrchat.com/social_accounts/gmb_account_switch',
+        type: 'POST',
+        data: {id:id},
+        success:function(response){
+            location.reload(); 
+        }
+      })
+      
+    });
+
+    $(".language_switch").click(function(e){
+      e.preventDefault();
+      var language=$(this).attr('data-id');
+      $.ajax({
+        url: 'https://digitaltrchat.com/home/language_changer',
+        type: 'POST',
+        data: {language:language},
+        success:function(response){
+            location.reload(); 
+        }
+      });      
+    });
+
+    $("#datatableSelectAllRows").change(function(){
+      if ($(this).is(':checked')) 
+      $(".datatableCheckboxRow").prop("checked",true);
+      else
+      $(".datatableCheckboxRow").prop("checked",false);
+    });
+  });
+</script>
+
+
+<!-- scrollbar -->
+<!-- theme:"rounded-dark",
+theme: "dark", "light",
+theme: "light-2", "dark-2",
+theme: "light-thick", "dark-thick",
+theme: "light-thin", "dark-thin",
+theme "rounded", "rounded-dark", "rounded-dots", "rounded-dots-dark",
+theme "3d", "3d-dark", "3d-thick", "3d-thick-dark",
+theme: "minimal", "minimal-dark",
+theme "light-3", "dark-3",
+theme "inset", "inset-dark", "inset-2", "inset-2-dark", "inset-3", "inset-3-dark", -->
+<script>
+  //iframe auto higth
+  function resizeIframe(obj) {
+
+    setTimeout(function(){
+      var cacl_height = obj.contentWindow.document.body.scrollHeight;
+      if(parseFloat(cacl_height)<800) cacl_height = '800';
+      obj.style.height =  cacl_height + 'px';
+    }, 3000);
+
+
+    $(obj).contents().on("mousedown, mouseup, click", function(){
+        setTimeout(function(){
+          var cacl_height2 = obj.contentWindow.document.body.scrollHeight;
+          if(parseFloat(cacl_height2)<800) cacl_height2 = '800';
+          obj.style.height = cacl_height2 + 'px';
+        }, 500);
+    });
+  }
+
+    $(document).ready(function() { 
+     
+      $(".xscroll").mCustomScrollbar({
+        autoHideScrollbar:true,
+        theme:"rounded-dark",
+        axis: "x"
+      });
+      $(".yscroll").mCustomScrollbar({
+        autoHideScrollbar:true,
+        theme:"rounded-dark"
+      });
+      $(".xyscroll").mCustomScrollbar({
+        autoHideScrollbar:true,
+        theme:"rounded-dark",
+        axis:"yx"
+      });
+
+      $("div:not(.data-card) > .table-responsive").niceScroll();      
+
+      $(".nicescroll,.makeNiceScroll").niceScroll();
+      $(".makeNiceScroll").niceScroll();
+      $(".makeScroll,.video-widget-info,.account_list").mCustomScrollbar({
+        autoHideScrollbar:true,
+        theme:"rounded-dark"
+      });
+
+      $('#xxx').on('hide.bs.dropdown', function (e) {
+          if (e.clickEvent) {
+            e.preventDefault();
+          }
+      })
+  });
+
+</script>
+
+
+
+
+<!-- Template JS File -->
+<script src="https://digitaltrchat.com/assets/js/scripts.js"></script>
+<script src="https://digitaltrchat.com/assets/js/custom.js"></script>
+
+<!-- HTML search -->
+<script type="text/javascript">
+  function search_in_class(obj,class_name){
+      var filter=$(obj).val().toUpperCase();
+      $('.'+class_name).each(function(){
+        var content=$(this).text().trim();
+
+        if (content.toUpperCase().indexOf(filter) > -1) {
+          $(this).css('display','');
+        }
+        else $(this).css('display','none');
+      });
+  }
+  
+  function search_in_ul(obj,ul_id){  // obj = 'this' of jquery, ul_id = id of the ul 
+    var filter=$(obj).val().toUpperCase();
+    $('#'+ul_id+' li').each(function(){
+      var content=$(this).text().trim();
+
+      if (content.toUpperCase().indexOf(filter) > -1) {
+        $(this).css('display','');
+      }
+      else $(this).css('display','none');
+    });
+
+  }
+
+   function search_in_div(obj,ul_id){  // obj = 'this' of jquery, ul_id = id of the ul 
+    var filter=$(obj).val().toUpperCase();
+    $('#'+ul_id+' div').each(function(){
+      var content=$(this).text().trim();
+
+      if (content.toUpperCase().indexOf(filter) > -1) {
+        $(this).css('display','');
+      }
+      else $(this).css('display','none');
+    });
+  }
+</script>	<style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
+
+	
+	<body class="sidebar-mini">
+	  <div id="app">
+	    <div class="main-wrapper">
+			
+<div class="navbar-bg"></div>
+<nav class="navbar navbar-expand-lg main-navbar">
+  <form class="form-inline mr-auto">
+     <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg mr-0" id="collapse_me_plz"><i class="fas fa-bars"></i></a>      
+
+     
+      <ul class="navbar-nav navbar-right d-none d-md-block ml-2 mr-1 facebook">
+        <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user d-none d-lg-block ml-2">
+          <img src="https://graph.facebook.com/me/picture?access_token=EAAdSwJPab6oBR5r3LKnxZB3A0qagXmyLVTh5uy4y6ENYVJk5A6txPv8pLKLuU5G9b0weGe7fVrGpXoIZC836d8ome5T6ZAnUkZCugqPaJj0P7qRsK5jS1dLesLlvZCRrljfZCGsZBHOYZBGBQ53CZAsRPjirtQzk4eKof2bWL6i0w9jY7ZAQipuZBr41LV1jFjp7nbOoZBSqtlgeJZAct&amp;width=150&amp;height=150" class="rounded-circle mr-1">
+          <div class="d-inline">Tiago De Oliveira Vianna</div></a>
+          <div class="dropdown-menu dropdown-menu-right acount-switch-lists">
+            <div class="dropdown-title">Interact as</div>               
+            <a href="" data-id="64" class="dropdown-item account_switch"><i class="fas fa-check-circle text-primary"></i> Tiago De Oliveira Vianna</a><a href="" data-id="173" class="dropdown-item account_switch"><i class="fas fa-check-circle text-primary"></i> Jayadi Thaha Patonangi</a><a href="" data-id="207" class="dropdown-item account_switch"><i class="fas fa-check-circle text-primary"></i> Indah</a><a href="" data-id="222" class="dropdown-item account_switch"><i class="fas fa-check-circle text-primary"></i> Anre Kameza</a><a href="" data-id="257" class="dropdown-item account_switch"><i class="fas fa-check-circle text-primary"></i> Abah Ngatimin</a>
+          </div>
+        </li>
+      </ul>  
+
+      <div class="ltr custom-switches-stacked mt-2 social-media-switch ">
+          <label class="custom-switch">
+            <input type="checkbox" name="selected_global_media_type" id="selected_global_media_type" value="" class="custom-switch-input" checked="">
+            <span class="custom-switch-description mx-1"><i class="fab fa-instagram text-secondary "></i></span>
+            <span class="custom-switch-indicator"></span>
+            <span class="custom-switch-description mx-1"><i class="fab fa-facebook text-primary"></i></span>
+          </label>
+      </div>
+
+  </form>
+
+  <ul class="navbar-nav navbar-right">    
+      <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" style="margin-top: 5px" class="nav-link notification-toggle nav-link-lg mr-2 "><i class="far fa-bell"></i></a>
+  <div class="dropdown-menu dropdown-list dropdown-menu-right">
+    <div class="dropdown-header">Notifications      
+      <div class="float-right">Nothing new</div>     
+    
+    </div>
+    <div class="dropdown-list-content dropdown-list-icons">
+
+       
+    </div>
+    <div class="dropdown-footer text-center">
+      <a href="https://digitaltrchat.com/announcement/full_list">View all <i class="fas fa-chevron-right"></i></a>
+    </div>
+  </div>
+</li>    <li class="dropdown" id="xxx"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+  <img src="https://digitaltrchat.com/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+  <div class="d-none d-md-inline-block">Disparos Boostingecon US-CC-EN</div></a>
+  <div class="dropdown-menu dropdown-menu-right">
+
+    <div class="dropdown-title">DigitalTrChat - Admin</div>
+    <a href="https://digitaltrchat.com/myprofile/edit_profile" class="dropdown-item has-icon">
+      <i class="far fa-user"></i> Profile    </a>
+    <a href="https://digitaltrchat.com/calendar/index" class="dropdown-item has-icon">
+      <i class="fas fa-bolt"></i> Activities    </a>
+
+                    <a href="https://digitaltrchat.com/native_api/get_api_key" class="dropdown-item has-icon">
+          <i class="fas fa-plug"></i> Api key        </a>
+            
+  
+    <div class="dropdown-divider"></div>  
+    <div class="dropdown-title"><i class="fab fa-facebook"></i> Facebook account</div>
+        <a class="dropdown-item has-icon active" data-toggle="collapse" href="#collapseExampleFBA" role="button" aria-expanded="false" aria-controls="collapseExampleFBA">
+     Tiago De Oliveira Vianna (Change)
+    </a>
+    <div class="collapse" id="collapseExampleFBA">
+      <a href="" data-id="64" class="dropdown-item account_switch d-none"><i class="fas fa-check-circle"></i> Tiago De Oliveira Vianna</a><a href="" data-id="173" class="dropdown-item account_switch "><i class="fas fa-check-circle"></i> Jayadi Thaha Patonangi</a><a href="" data-id="207" class="dropdown-item account_switch "><i class="fas fa-check-circle"></i> Indah</a><a href="" data-id="222" class="dropdown-item account_switch "><i class="fas fa-check-circle"></i> Anre Kameza</a><a href="" data-id="257" class="dropdown-item account_switch "><i class="fas fa-check-circle"></i> Abah Ngatimin</a>    </div>
+
+    <!-- for gmb add-on -->
+        <div class="dropdown-divider"></div>    
+    <div class="dropdown-title"><i class="fab fa-google"></i> GMB Account</div>
+    
+    <a class="dropdown-item has-icon active" data-toggle="collapse" href="#collapseExampleGMB" role="button" aria-expanded="false" aria-controls="collapseExampleGMB">
+     No account (Change)
+    </a>
+    <div class="collapse" id="collapseExampleGMB">
+          </div>
+        <!-- end of gmb add-on -->
+
+    <div class="dropdown-divider"></div>
+    <a href="https://digitaltrchat.com/change_password/reset_password_form" class="dropdown-item has-icon">
+      <i class="fas fa-key"></i> Change Password    </a>  
+
+    <a href="https://digitaltrchat.com/home/logout" class="dropdown-item has-icon text-danger">
+      <i class="fas fa-sign-out-alt"></i> Logout    </a>
+
+
+  </div>
+</li>      
+  </ul>
+
+</nav>
+<style>
+  .acount-switch-lists { max-height: 400px;overflow-y: auto; }
+  .acount-switch-lists::-webkit-scrollbar { width: 0 !important; }
+</style><div class="main-sidebar" tabindex="1" style="overflow: hidden; outline: none;">
+  <aside id="sidebar-wrapper">
+    <div class="sidebar-brand">
+      <a href="https://digitaltrchat.com/"><img src="https://digitaltrchat.com/assets/img/logo.png" alt="DigitalTrChat"></a>
+    </div>
+    <div class="sidebar-brand sidebar-brand-sm">
+      <!-- <a href="https://digitaltrchat.com/dist/index"><i class="fa fa-prescription"></i></a> -->
+      <a href="https://digitaltrchat.com/"><img src="https://digitaltrchat.com/assets/img/favicon.png" alt="DigitalTrChat"></a>
+    </div>
+    <ul class="sidebar-menu">
+      <li class=""><a href="https://digitaltrchat.com/dashboard" class="nav-link "><i class="fa fa-fire" style="background: -webkit-linear-gradient(270deg,#ff7979,#5a2b2b);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>Dashboard</span></a></li><li class="menu-header">Integrations</li><li class=""><a href="https://digitaltrchat.com/social_accounts/index" class="nav-link "><i class="fab fa-facebook" style="color:#0D8BF1"></i> <span>Facebook &amp; Instagram</span></a></li><li class=""><a href="https://digitaltrchat.com/integration" class="nav-link "><i class="fas fa-wifi" style="background: -webkit-linear-gradient(270deg,#0D8BF1,#053155);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>API channels</span></a></li><li class="menu-header">Comment feature</li><li class=""><a href="https://digitaltrchat.com/comment_automation/comment_growth_tools" class="nav-link "><i class="fas fa-comments" style="background: -webkit-linear-gradient(270deg,#575fcf,#1f2249);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>Comment growth tools</span></a></li><li class="menu-header">Messenger tools</li><li class="active"><a href="https://digitaltrchat.com/subscriber_manager/bot_subscribers" class="nav-link "><i class="fas fa-user-circle" style="background: -webkit-linear-gradient(270deg,#D980FA,#4c2d58);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>Subscriber Manager</span></a></li><li class=""><a href="https://digitaltrchat.com/subscriber_manager/livechat" class="nav-link "><i class="fas fa-comment-alt" style="background: -webkit-linear-gradient(270deg,#32ff7e,#125a2d);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>Live chat</span></a></li><li class=""><a href="https://digitaltrchat.com/messenger_bot/bot_list" class="nav-link "><i class="fas fa-project-diagram" style="background: -webkit-linear-gradient(270deg,#B33771,#3f1428);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>Bot manager</span></a></li><li class=""><a href="https://digitaltrchat.com/messenger_bot_broadcast" class="nav-link "><i class="fas fa-paper-plane" style="background: -webkit-linear-gradient(270deg,#0D8BF1,#053155);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>Broadcasting</span></a></li><li class="menu-header">Ecommerce</li><li class=""><a href="https://digitaltrchat.com/ecommerce" class="nav-link "><i class="fas fa-shopping-cart" style="background: -webkit-linear-gradient(270deg,#FC427B,#59182c);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>Ecommerce store</span></a></li><li class=""><a href="https://digitaltrchat.com/woocommerce_integration" class="nav-link "><i class="fab fa-wordpress" style="background: -webkit-linear-gradient(270deg,#0D8BF1,#053155);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>WC Integration</span></a></li><li class="menu-header">Posting Feature</li><li class=""><a href="https://digitaltrchat.com/ultrapost" class="nav-link "><i class="fa fa-share-square" style="background: -webkit-linear-gradient(270deg,#a55eea,#3a2152);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>Social Posting</span></a></li><li class="nav-item dropdown"><a href="https://digitaltrchat.com/" class="nav-link has-dropdown"><i class="fas fa-store-alt" style="background: -webkit-linear-gradient(270deg,#B33771,#3f1428);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>GMB Manager</span></a><ul class="dropdown-menu"><li class=""><a href="https://digitaltrchat.com/gmb/business_accounts" class="nav-link"><i style="color:#B33771" class="fa fa-cloud-download-alt"></i>Account Import</a></li><li class=""><a href="https://digitaltrchat.com/gmb/location_list" class="nav-link"><i style="color:#B33771" class="fas fa-map-marked-alt"></i>Location manager</a></li><li class=""><a href="https://digitaltrchat.com/gmb/campaigns" class="nav-link"><i style="color:#B33771" class="fas fa-arrows-alt"></i>Campaigns</a></li><li class=""><a href="https://digitaltrchat.com/gmb/review_report" class="nav-link"><i style="color:#B33771" class="fas fa-reply-all"></i>Review Replies</a></li></ul></li><li class="menu-header">Utility Tools</li><li class=""><a href="https://digitaltrchat.com/search_tools" class="nav-link "><i class="fas fa-search" style="background: -webkit-linear-gradient(270deg,#218c74,#0c3129);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>Search Tools</span></a></li><li class="menu-header">Administration</li><li class="nav-item dropdown"><a href="https://digitaltrchat.com/" class="nav-link has-dropdown"><i class="fas fa-cog" style="background: -webkit-linear-gradient(270deg,#d35400,#4a1e00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>System</span></a><ul class="dropdown-menu"><li class=""><a href="https://digitaltrchat.com/admin/settings" class="nav-link"><i style="color:#d35400" class="fas fa-sliders-h"></i>Settings</a></li><li class=""><a href="https://digitaltrchat.com/cron_job/index" class="nav-link"><i style="color:#d35400" class="fas fa-clipboard-list"></i>Cron Job</a></li><li class=""><a href="https://digitaltrchat.com/multi_language/index" class="nav-link"><i style="color:#d35400" class="fas fa-language"></i>Language Editor</a></li><li class=""><a href="https://digitaltrchat.com/addons/lists" class="nav-link"><i style="color:#d35400" class="fas fa-plug"></i>Add-on Manager</a></li><li class=""><a href="https://digitaltrchat.com/themes/lists" class="nav-link"><i style="color:#d35400" class="fas fa-palette"></i>Theme manager</a></li><li class=""><a href="https://digitaltrchat.com/menu_manager/index" class="nav-link"><i style="color:#d35400" class="fas fa-bars"></i>Menu manager</a></li><li class=""><a href="https://digitaltrchat.com/update_system/update_list_v2" class="nav-link"><i style="color:#d35400" class="fas fa-leaf"></i>Check Update</a></li></ul></li><li class="nav-item dropdown"><a href="https://digitaltrchat.com/" class="nav-link has-dropdown"><i class="fas fa-coins" style="background: -webkit-linear-gradient(270deg,#ffa801,#5a3b01);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>Subscription</span></a><ul class="dropdown-menu"><li class=""><a href="https://digitaltrchat.com/payment/package_manager" class="nav-link"><i style="color:#ffa801" class="fas fa-shopping-bag"></i>Package Manager</a></li><li class=""><a href="https://digitaltrchat.com/admin/user_manager" class="nav-link"><i style="color:#ffa801" class="fas fa-users"></i>User Manager</a></li><li class=""><a href="https://digitaltrchat.com/announcement/full_list" class="nav-link"><i style="color:#ffa801" class="far fa-bell"></i>Announcement</a></li></ul></li><li class="nav-item dropdown"><a href="https://digitaltrchat.com/" class="nav-link has-dropdown"><i class="fas fa-people-carry" style="background: -webkit-linear-gradient(270deg,#0D8BF1,#053155);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> <span>Affiliate System</span></a><ul class="dropdown-menu"><li class=""><a href="https://digitaltrchat.com/affiliate_system/affiliate_users" class="nav-link"><i style="color:#0D8BF1" class="fas fa-users"></i>Affiliate Users</a></li><li class=""><a href="https://digitaltrchat.com/affiliate_system/affiliate_payment_settings" class="nav-link"><i style="color:#0D8BF1" class="fas fa-money-check-alt"></i>Commission Settings</a></li><li class=""><a href="https://digitaltrchat.com/affiliate_system/all_withdrawal_requests" class="nav-link"><i style="color:#0D8BF1" class="fas fa-hands-helping"></i>Withdrawal Requests</a></li></ul></li>    </ul>
+
+    
+    
+  </aside>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+  var all_links_JS = ["https://digitaltrchat.com/dashboard","https://digitaltrchat.com/social_accounts/index","https://digitaltrchat.com/integration","https://digitaltrchat.com/comment_automation/comment_growth_tools","https://digitaltrchat.com/subscriber_manager/bot_subscribers","https://digitaltrchat.com/subscriber_manager/livechat","https://digitaltrchat.com/messenger_bot/bot_list","https://digitaltrchat.com/messenger_bot_broadcast","https://digitaltrchat.com/ecommerce","https://digitaltrchat.com/woocommerce_integration","https://digitaltrchat.com/ultrapost","https://digitaltrchat.com/","https://digitaltrchat.com/gmb/business_accounts","https://digitaltrchat.com/gmb/location_list","https://digitaltrchat.com/gmb/campaigns","https://digitaltrchat.com/gmb/review_report","https://digitaltrchat.com/search_tools","https://digitaltrchat.com/admin/settings","https://digitaltrchat.com/cron_job/index","https://digitaltrchat.com/multi_language/index","https://digitaltrchat.com/addons/lists","https://digitaltrchat.com/themes/lists","https://digitaltrchat.com/menu_manager/index","https://digitaltrchat.com/update_system/update_list_v2","https://digitaltrchat.com/payment/package_manager","https://digitaltrchat.com/admin/user_manager","https://digitaltrchat.com/announcement/full_list","https://digitaltrchat.com/affiliate_system/affiliate_users","https://digitaltrchat.com/affiliate_system/affiliate_payment_settings","https://digitaltrchat.com/affiliate_system/all_withdrawal_requests","https://digitaltrchat.com/admin/general_settings","https://digitaltrchat.com/admin/frontend_settings","https://digitaltrchat.com/admin/smtp_settings","https://digitaltrchat.com/admin/email_template_settings","https://digitaltrchat.com/admin/analytics_settings","https://digitaltrchat.com/admin/advertisement_settings","https://digitaltrchat.com/admin/add_user","https://digitaltrchat.com/admin/edit_user","https://digitaltrchat.com/admin/login_log","https://digitaltrchat.com/payment/add_package","https://digitaltrchat.com/payment/update_package","https://digitaltrchat.com/payment/details_package","https://digitaltrchat.com/announcement/add","https://digitaltrchat.com/announcement/edit","https://digitaltrchat.com/announcement/details","https://digitaltrchat.com/addons/upload","https://digitaltrchat.com/comment_automation/all_auto_comment_report","https://digitaltrchat.com/comment_automation/all_auto_comment_report/0/0","https://digitaltrchat.com/comment_automation/all_auto_reply_report","https://digitaltrchat.com/comment_reply_enhancers/bulk_tag_campaign_list","https://digitaltrchat.com/comment_reply_enhancers/bulk_comment_reply_campaign_list","https://digitaltrchat.com/comment_reply_enhancers/all_response_report","https://digitaltrchat.com/comment_reply_enhancers/all_like_share_report","https://digitaltrchat.com/messenger_bot_enhancers/checkbox_plugin_list","https://digitaltrchat.com/messenger_bot_enhancers/checkbox_plugin_add","https://digitaltrchat.com/messenger_bot_enhancers/checkbox_plugin_edit","https://digitaltrchat.com/messenger_bot_enhancers/send_to_messenger_list","https://digitaltrchat.com/messenger_bot_enhancers/send_to_messenger_add","https://digitaltrchat.com/messenger_bot_enhancers/send_to_messenger_edit","https://digitaltrchat.com/messenger_bot_enhancers/mme_link_list","https://digitaltrchat.com/messenger_bot_enhancers/mme_link_add","https://digitaltrchat.com/messenger_bot_enhancers/mme_link_edit","https://digitaltrchat.com/messenger_bot_enhancers/customer_chat_plugin_list","https://digitaltrchat.com/messenger_bot_enhancers/customer_chat_add","https://digitaltrchat.com/messenger_bot_enhancers/customer_chat_edit","https://digitaltrchat.com/messenger_bot_enhancers/subscriber_broadcast_campaign","https://digitaltrchat.com/messenger_bot_enhancers/create_subscriber_broadcast_campaign","https://digitaltrchat.com/messenger_bot_enhancers/edit_subscriber_broadcast_campaign","https://digitaltrchat.com/message_manager/message_dashboard","https://digitaltrchat.com/messenger_bot/tree_view","https://digitaltrchat.com/messenger_bot_connectivity/analytics","https://digitaltrchat.com/messenger_bot_connectivity/saved_template_view","https://digitaltrchat.com/webview_builder","https://digitaltrchat.com/webview_builder/manager","https://digitaltrchat.com/autoposting/settings","https://digitaltrchat.com/instagram_poster","https://digitaltrchat.com/themes/upload","https://digitaltrchat.com/messenger_bot_connectivity/webview_builder_manager","https://digitaltrchat.com/messenger_bot_connectivity","https://digitaltrchat.com/messenger_bot_connectivity/edit_webview","https://digitaltrchat.com/sms_email_manager/contact_group_list","https://digitaltrchat.com/sms_email_manager/contact_list","https://digitaltrchat.com/sms_email_manager/sms_campaign_lists","https://digitaltrchat.com/sms_email_manager/create_sms_campaign","https://digitaltrchat.com/sms_email_manager/edit_sms_campaign","https://digitaltrchat.com/sms_email_manager/email_campaign_lists","https://digitaltrchat.com/sms_email_manager/create_email_campaign","https://digitaltrchat.com/sms_email_manager/edit_email_campaign","https://digitaltrchat.com/comment_automation/comment_template_manager","https://digitaltrchat.com/comment_automation/template_manager","https://digitaltrchat.com/comment_automation/index","https://digitaltrchat.com/comment_automation/comment_section_report","https://digitaltrchat.com/comment_reply_enhancers/post_list","https://digitaltrchat.com/instagram_reply/template_manager","https://digitaltrchat.com/instagram_reply/get_account_lists","https://digitaltrchat.com/instagram_reply/instagram_autoreply_report/post","https://digitaltrchat.com/instagram_reply/instagram_autoreply_report/full","https://digitaltrchat.com/instagram_reply/instagram_autoreply_report/mention","https://digitaltrchat.com/affiliate_system/request_info","https://digitaltrchat.com/affiliate_system/add_affiliate","https://digitaltrchat.com/affiliate_system/edit_affiliate","https://digitaltrchat.com/comboposter/text_post/campaigns","https://digitaltrchat.com/comboposter/image_post/campaigns","https://digitaltrchat.com/comboposter/video_post/campaigns","https://digitaltrchat.com/comboposter/link_post/campaigns","https://digitaltrchat.com/comboposter/html_post/campaigns","https://digitaltrchat.com/comboposter/text_post/create","https://digitaltrchat.com/comboposter/image_post/create","https://digitaltrchat.com/comboposter/video_post/create","https://digitaltrchat.com/comboposter/link_post/create","https://digitaltrchat.com/comboposter/html_post/create","https://digitaltrchat.com/comboposter/text_post/edit","https://digitaltrchat.com/comboposter/image_post/edit","https://digitaltrchat.com/comboposter/video_post/edit","https://digitaltrchat.com/comboposter/link_post/edit","https://digitaltrchat.com/comboposter/html_post/edit","https://digitaltrchat.com/comboposter/text_post/clone","https://digitaltrchat.com/comboposter/image_post/clone","https://digitaltrchat.com/comboposter/video_post/clone","https://digitaltrchat.com/comboposter/link_post/clone","https://digitaltrchat.com/comboposter/html_post/clone","https://digitaltrchat.com/blog/add_post","https://digitaltrchat.com/blog/edit_post","https://digitaltrchat.com/blog/tag","https://digitaltrchat.com/blog/category","https://digitaltrchat.com/menu_manager/custom_page","https://digitaltrchat.com/gmb/posts","https://digitaltrchat.com/gmb/create_post","https://digitaltrchat.com/gmb/media_campaigns","https://digitaltrchat.com/gmb/create_media_campaign","https://digitaltrchat.com/gmb/rss","https://digitaltrchat.com/gmb/edit_post","https://digitaltrchat.com/gmb/edit_media_campaign","https://digitaltrchat.com/payment/accounts","https://digitaltrchat.com/social_apps","https://digitaltrchat.com/comboposter/social_accounts","https://digitaltrchat.com/email_auto_responder_integration","https://digitaltrchat.com/messenger_bot_connectivity/json_api_connector","https://digitaltrchat.com/sms_email_manager/sms_api_lists","https://digitaltrchat.com/sms_email_manager/smtp_config","https://digitaltrchat.com/sms_email_manager/mandrill_api_config","https://digitaltrchat.com/sms_email_manager/sendgrid_api_config","https://digitaltrchat.com/sms_email_manager/mailgun_api_config","https://digitaltrchat.com/woocommerce_abandoned_cart","https://digitaltrchat.com/woocommerce_integration","https://digitaltrchat.com/payment/transaction_log_manual"]; // all urls includes database & custom urls
+  var custom_links_JS= ["https://digitaltrchat.com/admin/general_settings","https://digitaltrchat.com/admin/frontend_settings","https://digitaltrchat.com/admin/smtp_settings","https://digitaltrchat.com/admin/email_template_settings","https://digitaltrchat.com/admin/analytics_settings","https://digitaltrchat.com/admin/advertisement_settings","https://digitaltrchat.com/admin/add_user","https://digitaltrchat.com/admin/edit_user","https://digitaltrchat.com/admin/login_log","https://digitaltrchat.com/payment/add_package","https://digitaltrchat.com/payment/update_package","https://digitaltrchat.com/payment/details_package","https://digitaltrchat.com/announcement/add","https://digitaltrchat.com/announcement/edit","https://digitaltrchat.com/announcement/details","https://digitaltrchat.com/addons/upload","https://digitaltrchat.com/comment_automation/all_auto_comment_report","https://digitaltrchat.com/comment_automation/all_auto_comment_report/0/0","https://digitaltrchat.com/comment_automation/all_auto_reply_report","https://digitaltrchat.com/comment_reply_enhancers/bulk_tag_campaign_list","https://digitaltrchat.com/comment_reply_enhancers/bulk_comment_reply_campaign_list","https://digitaltrchat.com/comment_reply_enhancers/all_response_report","https://digitaltrchat.com/comment_reply_enhancers/all_like_share_report","https://digitaltrchat.com/messenger_bot_enhancers/checkbox_plugin_list","https://digitaltrchat.com/messenger_bot_enhancers/checkbox_plugin_add","https://digitaltrchat.com/messenger_bot_enhancers/checkbox_plugin_edit","https://digitaltrchat.com/messenger_bot_enhancers/send_to_messenger_list","https://digitaltrchat.com/messenger_bot_enhancers/send_to_messenger_add","https://digitaltrchat.com/messenger_bot_enhancers/send_to_messenger_edit","https://digitaltrchat.com/messenger_bot_enhancers/mme_link_list","https://digitaltrchat.com/messenger_bot_enhancers/mme_link_add","https://digitaltrchat.com/messenger_bot_enhancers/mme_link_edit","https://digitaltrchat.com/messenger_bot_enhancers/customer_chat_plugin_list","https://digitaltrchat.com/messenger_bot_enhancers/customer_chat_add","https://digitaltrchat.com/messenger_bot_enhancers/customer_chat_edit","https://digitaltrchat.com/messenger_bot_enhancers/subscriber_broadcast_campaign","https://digitaltrchat.com/messenger_bot_enhancers/create_subscriber_broadcast_campaign","https://digitaltrchat.com/messenger_bot_enhancers/edit_subscriber_broadcast_campaign","https://digitaltrchat.com/message_manager/message_dashboard","https://digitaltrchat.com/messenger_bot/tree_view","https://digitaltrchat.com/messenger_bot_connectivity/analytics","https://digitaltrchat.com/messenger_bot_connectivity/saved_template_view","https://digitaltrchat.com/webview_builder","https://digitaltrchat.com/webview_builder/manager","https://digitaltrchat.com/autoposting/settings","https://digitaltrchat.com/instagram_poster","https://digitaltrchat.com/themes/upload","https://digitaltrchat.com/messenger_bot_connectivity/webview_builder_manager","https://digitaltrchat.com/messenger_bot_connectivity","https://digitaltrchat.com/messenger_bot_connectivity/edit_webview","https://digitaltrchat.com/sms_email_manager/contact_group_list","https://digitaltrchat.com/sms_email_manager/contact_list","https://digitaltrchat.com/sms_email_manager/sms_campaign_lists","https://digitaltrchat.com/sms_email_manager/create_sms_campaign","https://digitaltrchat.com/sms_email_manager/edit_sms_campaign","https://digitaltrchat.com/sms_email_manager/email_campaign_lists","https://digitaltrchat.com/sms_email_manager/create_email_campaign","https://digitaltrchat.com/sms_email_manager/edit_email_campaign","https://digitaltrchat.com/comment_automation/comment_template_manager","https://digitaltrchat.com/comment_automation/template_manager","https://digitaltrchat.com/comment_automation/index","https://digitaltrchat.com/comment_automation/comment_section_report","https://digitaltrchat.com/comment_reply_enhancers/post_list","https://digitaltrchat.com/instagram_reply/template_manager","https://digitaltrchat.com/instagram_reply/get_account_lists","https://digitaltrchat.com/instagram_reply/instagram_autoreply_report/post","https://digitaltrchat.com/instagram_reply/instagram_autoreply_report/full","https://digitaltrchat.com/instagram_reply/instagram_autoreply_report/mention","https://digitaltrchat.com/affiliate_system/request_info","https://digitaltrchat.com/affiliate_system/add_affiliate","https://digitaltrchat.com/affiliate_system/edit_affiliate","https://digitaltrchat.com/comboposter/text_post/campaigns","https://digitaltrchat.com/comboposter/image_post/campaigns","https://digitaltrchat.com/comboposter/video_post/campaigns","https://digitaltrchat.com/comboposter/link_post/campaigns","https://digitaltrchat.com/comboposter/html_post/campaigns","https://digitaltrchat.com/comboposter/text_post/create","https://digitaltrchat.com/comboposter/image_post/create","https://digitaltrchat.com/comboposter/video_post/create","https://digitaltrchat.com/comboposter/link_post/create","https://digitaltrchat.com/comboposter/html_post/create","https://digitaltrchat.com/comboposter/text_post/edit","https://digitaltrchat.com/comboposter/image_post/edit","https://digitaltrchat.com/comboposter/video_post/edit","https://digitaltrchat.com/comboposter/link_post/edit","https://digitaltrchat.com/comboposter/html_post/edit","https://digitaltrchat.com/comboposter/text_post/clone","https://digitaltrchat.com/comboposter/image_post/clone","https://digitaltrchat.com/comboposter/video_post/clone","https://digitaltrchat.com/comboposter/link_post/clone","https://digitaltrchat.com/comboposter/html_post/clone","https://digitaltrchat.com/blog/add_post","https://digitaltrchat.com/blog/edit_post","https://digitaltrchat.com/blog/tag","https://digitaltrchat.com/blog/category","https://digitaltrchat.com/menu_manager/custom_page","https://digitaltrchat.com/gmb/posts","https://digitaltrchat.com/gmb/create_post","https://digitaltrchat.com/gmb/media_campaigns","https://digitaltrchat.com/gmb/create_media_campaign","https://digitaltrchat.com/gmb/rss","https://digitaltrchat.com/gmb/edit_post","https://digitaltrchat.com/gmb/edit_media_campaign","https://digitaltrchat.com/payment/accounts","https://digitaltrchat.com/social_apps","https://digitaltrchat.com/comboposter/social_accounts","https://digitaltrchat.com/email_auto_responder_integration","https://digitaltrchat.com/messenger_bot_connectivity/json_api_connector","https://digitaltrchat.com/sms_email_manager/sms_api_lists","https://digitaltrchat.com/sms_email_manager/smtp_config","https://digitaltrchat.com/sms_email_manager/mandrill_api_config","https://digitaltrchat.com/sms_email_manager/sendgrid_api_config","https://digitaltrchat.com/sms_email_manager/mailgun_api_config","https://digitaltrchat.com/woocommerce_abandoned_cart","https://digitaltrchat.com/woocommerce_integration","https://digitaltrchat.com/payment/transaction_log_manual"]; // only custom urls
+  var custom_links_assoc_JS = {httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESadminFORWARDSLASHESgeneral_settings:'https://digitaltrchat.com/admin/settings',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESadminFORWARDSLASHESfrontend_settings:'https://digitaltrchat.com/admin/settings',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESadminFORWARDSLASHESsmtp_settings:'https://digitaltrchat.com/admin/settings',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESadminFORWARDSLASHESemail_template_settings:'https://digitaltrchat.com/admin/settings',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESadminFORWARDSLASHESanalytics_settings:'https://digitaltrchat.com/admin/settings',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESadminFORWARDSLASHESadvertisement_settings:'https://digitaltrchat.com/admin/settings',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESadminFORWARDSLASHESadd_user:'https://digitaltrchat.com/admin/user_manager',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESadminFORWARDSLASHESedit_user:'https://digitaltrchat.com/admin/user_manager',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESadminFORWARDSLASHESlogin_log:'https://digitaltrchat.com/admin/user_manager',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESpaymentFORWARDSLASHESadd_package:'https://digitaltrchat.com/payment/package_manager',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESpaymentFORWARDSLASHESupdate_package:'https://digitaltrchat.com/payment/package_manager',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESpaymentFORWARDSLASHESdetails_package:'https://digitaltrchat.com/payment/package_manager',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESannouncementFORWARDSLASHESadd:'https://digitaltrchat.com/announcement/full_list',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESannouncementFORWARDSLASHESedit:'https://digitaltrchat.com/announcement/full_list',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESannouncementFORWARDSLASHESdetails:'https://digitaltrchat.com/announcement/full_list',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESaddonsFORWARDSLASHESupload:'https://digitaltrchat.com/addons/lists',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomment_automationFORWARDSLASHESall_auto_comment_report:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomment_automationFORWARDSLASHESall_auto_comment_reportFORWARDSLASHES0FORWARDSLASHES0:'https://digitaltrchat.com/instagram_reply/reports',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomment_automationFORWARDSLASHESall_auto_reply_report:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomment_reply_enhancersFORWARDSLASHESbulk_tag_campaign_list:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomment_reply_enhancersFORWARDSLASHESbulk_comment_reply_campaign_list:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomment_reply_enhancersFORWARDSLASHESall_response_report:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomment_reply_enhancersFORWARDSLASHESall_like_share_report:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHEScheckbox_plugin_list:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHEScheckbox_plugin_add:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHEScheckbox_plugin_edit:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHESsend_to_messenger_list:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHESsend_to_messenger_add:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHESsend_to_messenger_edit:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHESmme_link_list:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHESmme_link_add:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHESmme_link_edit:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHEScustomer_chat_plugin_list:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHEScustomer_chat_add:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHEScustomer_chat_edit:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHESsubscriber_broadcast_campaign:'https://digitaltrchat.com/messenger_bot_broadcast',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHEScreate_subscriber_broadcast_campaign:'https://digitaltrchat.com/messenger_bot_broadcast',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_enhancersFORWARDSLASHESedit_subscriber_broadcast_campaign:'https://digitaltrchat.com/messenger_bot_broadcast',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessage_managerFORWARDSLASHESmessage_dashboard:'https://digitaltrchat.com/subscriber_manager',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_botFORWARDSLASHEStree_view:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_connectivityFORWARDSLASHESanalytics:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_connectivityFORWARDSLASHESsaved_template_view:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESwebview_builder:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESwebview_builderFORWARDSLASHESmanager:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESautopostingFORWARDSLASHESsettings:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESinstagram_poster:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESthemesFORWARDSLASHESupload:'https://digitaltrchat.com/themes/lists',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_connectivityFORWARDSLASHESwebview_builder_manager:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_connectivity:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_connectivityFORWARDSLASHESedit_webview:'https://digitaltrchat.com/messenger_bot',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsms_email_managerFORWARDSLASHEScontact_group_list:'https://digitaltrchat.com/subscriber_manager',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsms_email_managerFORWARDSLASHEScontact_list:'https://digitaltrchat.com/subscriber_manager',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsms_email_managerFORWARDSLASHESsms_campaign_lists:'https://digitaltrchat.com/messenger_bot_broadcast',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsms_email_managerFORWARDSLASHEScreate_sms_campaign:'https://digitaltrchat.com/messenger_bot_broadcast',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsms_email_managerFORWARDSLASHESedit_sms_campaign:'https://digitaltrchat.com/messenger_bot_broadcast',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsms_email_managerFORWARDSLASHESemail_campaign_lists:'https://digitaltrchat.com/messenger_bot_broadcast',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsms_email_managerFORWARDSLASHEScreate_email_campaign:'https://digitaltrchat.com/messenger_bot_broadcast',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsms_email_managerFORWARDSLASHESedit_email_campaign:'https://digitaltrchat.com/messenger_bot_broadcast',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomment_automationFORWARDSLASHEScomment_template_manager:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomment_automationFORWARDSLASHEStemplate_manager:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomment_automationFORWARDSLASHESindex:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomment_automationFORWARDSLASHEScomment_section_report:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomment_reply_enhancersFORWARDSLASHESpost_list:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESinstagram_replyFORWARDSLASHEStemplate_manager:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESinstagram_replyFORWARDSLASHESget_account_lists:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESinstagram_replyFORWARDSLASHESinstagram_autoreply_reportFORWARDSLASHESpost:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESinstagram_replyFORWARDSLASHESinstagram_autoreply_reportFORWARDSLASHESfull:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESinstagram_replyFORWARDSLASHESinstagram_autoreply_reportFORWARDSLASHESmention:'https://digitaltrchat.com/comment_automation/comment_growth_tools',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESaffiliate_systemFORWARDSLASHESrequest_info:'https://digitaltrchat.com/affiliate_system/affiliate_users',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESaffiliate_systemFORWARDSLASHESadd_affiliate:'https://digitaltrchat.com/affiliate_system/affiliate_users',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESaffiliate_systemFORWARDSLASHESedit_affiliate:'https://digitaltrchat.com/affiliate_system/affiliate_users',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHEStext_postFORWARDSLASHEScampaigns:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHESimage_postFORWARDSLASHEScampaigns:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHESvideo_postFORWARDSLASHEScampaigns:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHESlink_postFORWARDSLASHEScampaigns:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHEShtml_postFORWARDSLASHEScampaigns:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHEStext_postFORWARDSLASHEScreate:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHESimage_postFORWARDSLASHEScreate:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHESvideo_postFORWARDSLASHEScreate:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHESlink_postFORWARDSLASHEScreate:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHEShtml_postFORWARDSLASHEScreate:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHEStext_postFORWARDSLASHESedit:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHESimage_postFORWARDSLASHESedit:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHESvideo_postFORWARDSLASHESedit:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHESlink_postFORWARDSLASHESedit:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHEShtml_postFORWARDSLASHESedit:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHEStext_postFORWARDSLASHESclone:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHESimage_postFORWARDSLASHESclone:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHESvideo_postFORWARDSLASHESclone:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHESlink_postFORWARDSLASHESclone:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHEShtml_postFORWARDSLASHESclone:'https://digitaltrchat.com/ultrapost',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESblogFORWARDSLASHESadd_post:'https://digitaltrchat.com/blog/posts',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESblogFORWARDSLASHESedit_post:'https://digitaltrchat.com/blog/posts',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESblogFORWARDSLASHEStag:'https://digitaltrchat.com/blog/posts',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESblogFORWARDSLASHEScategory:'https://digitaltrchat.com/blog/posts',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmenu_managerFORWARDSLASHEScustom_page:'',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESgmbFORWARDSLASHESposts:'https://digitaltrchat.com/gmb/campaigns',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESgmbFORWARDSLASHEScreate_post:'https://digitaltrchat.com/gmb/campaigns',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESgmbFORWARDSLASHESmedia_campaigns:'https://digitaltrchat.com/gmb/campaigns',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESgmbFORWARDSLASHEScreate_media_campaign:'https://digitaltrchat.com/gmb/campaigns',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESgmbFORWARDSLASHESrss:'https://digitaltrchat.com/gmb/campaigns',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESgmbFORWARDSLASHESedit_post:'https://digitaltrchat.com/gmb/campaigns',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESgmbFORWARDSLASHESedit_media_campaign:'https://digitaltrchat.com/gmb/campaigns',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESpaymentFORWARDSLASHESaccounts:'https://digitaltrchat.com/integration',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsocial_apps:'https://digitaltrchat.com/integration',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHEScomboposterFORWARDSLASHESsocial_accounts:'https://digitaltrchat.com/integration',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESemail_auto_responder_integration:'https://digitaltrchat.com/integration',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESmessenger_bot_connectivityFORWARDSLASHESjson_api_connector:'https://digitaltrchat.com/integration',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsms_email_managerFORWARDSLASHESsms_api_lists:'https://digitaltrchat.com/integration',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsms_email_managerFORWARDSLASHESsmtp_config:'https://digitaltrchat.com/integration',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsms_email_managerFORWARDSLASHESmandrill_api_config:'https://digitaltrchat.com/integration',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsms_email_managerFORWARDSLASHESsendgrid_api_config:'https://digitaltrchat.com/integration',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESsms_email_managerFORWARDSLASHESmailgun_api_config:'https://digitaltrchat.com/integration',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESwoocommerce_abandoned_cart:'https://digitaltrchat.com/integration',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESwoocommerce_integration:'https://digitaltrchat.com/integration',httpsCOLONSFORWARDSLASHESFORWARDSLASHESdigitaltrchatDOTScomFORWARDSLASHESpaymentFORWARDSLASHEStransaction_log_manual:'https://digitaltrchat.com/payment/transaction_log'}; // custom urls associative array link -> parent
+
+  var sideBarURL = window.location;
+  sideBarURL=String(sideBarURL).trim();
+  sideBarURL=sideBarURL.replace('#_=_',''); // redirct from facebook login return extra chars with url
+
+  function removeUrlLastPart(the_url)   // function that remove last segment of a url
+  {
+      var theurl = String(the_url).split('/');
+      theurl.pop();      
+      var answer=theurl.join('/');
+      return answer;
+  }
+
+  // get parent url of a custom url
+  function matchCustomUrl(find)
+  {
+    var parentUrl='';
+    var tempu1=find.replace(/\//g, 'FORWARDSLASHES'); // decoding special chars that was encoded to make js array
+    tempu1=tempu1.replace(/:/g, 'COLONS');
+    tempu1=tempu1.replace(/-/g, 'DASHES');
+    tempu1=tempu1.replace(/\./g, 'DOTS');
+
+    if(typeof(custom_links_assoc_JS[tempu1])!=='undefined')
+    parentUrl=custom_links_assoc_JS[tempu1]; // getting parent value of custom link
+
+    return parentUrl;
+  }
+
+  if(jQuery.inArray(sideBarURL, custom_links_JS) !== -1) // if the current link match custom urls
+  {    
+    sideBarURL=matchCustomUrl(sideBarURL);
+  } 
+  else if(jQuery.inArray(sideBarURL, all_links_JS) !== -1) // if the current link match known urls, this check is done later becuase all_links_JS also contains custom urls
+  {
+     sideBarURL=sideBarURL;
+  }
+  else // url does not match any of known urls
+  {  
+    var remove_times=1;
+    var temp_URL=sideBarURL;
+    var temp_URL2="";
+    var tempu2="";
+    while(true) // trying to match known urls by remove last part of url or adding /index at the last
+    {
+      temp_URL=removeUrlLastPart(temp_URL); // url may match after removing last
+      temp_URL2=temp_URL+'/index'; // url may match after removing last part and adding /index
+
+      if(jQuery.inArray(temp_URL, custom_links_JS) !== -1) // trimmed url match custom urls
+      {
+        sideBarURL=matchCustomUrl(temp_URL);
+        break;
+      }
+      else if(jQuery.inArray(temp_URL, all_links_JS) !== -1) //trimmed url match known links
+      {
+        sideBarURL=temp_URL;
+        break;
+      }
+      else // trimmed url does not match known urls, lets try extending url by adding /index
+      {
+        if(jQuery.inArray(temp_URL2, custom_links_JS) !== -1) // extended url match custom urls
+        {
+          sideBarURL=matchCustomUrl(temp_URL2);
+          break;
+        }
+        else if(jQuery.inArray(temp_URL2, all_links_JS) !== -1)  // extended url match known urls
+        {
+          sideBarURL=temp_URL2;
+          break;
+        }
+      }
+      remove_times++;
+      if(temp_URL.trim()=="") break;
+    }    
+  }
+
+  $('ul.sidebar-menu a').filter(function() {
+     return this.href == sideBarURL;
+  }).parent().addClass('active');
+  $('ul.dropdown-menu a').filter(function() {
+     return this.href == sideBarURL;
+  }).parentsUntil(".sidebar-menu > .dropdown-menu").addClass('active');
+</script><div class="main-content " style="min-height: 892px;"><section class="section section_custom">
+  <div class="section-header">
+    <h1><i class="fas fa-user-circle"></i> Subscriber Manager</h1>
+    <!-- <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item"><a href="https://digitaltrchat.com/subscriber_manager">Subscriber Manager</a></div>
+      <div class="breadcrumb-item">Subscriber Manager</div>
+    </div> -->
+  </div>
+
+  
+</section>
+
+  <div class="row multi_layout2">
+
+    <div class="col-12 col-md-4 col-lg-3 collef">
+      <div class="card main_card">
+        <div class="card-header">
+          <div class="col-6 padding-0">
+            <h4>
+              Pages</h4>
+          </div>
+          <div class="col-6 padding-0">
+            <input type="text" class="form-control float-right" id="search_page_list" onkeyup="search_in_ul(this,'page_list_ul')" autofocus="" placeholder="Search...">
+          </div>
+        </div>
+        <div class="card-body padding-0">
+          <div class="makeScroll mCustomScrollbar _mCS_1 mCS-autoHide"><div id="mCSB_1" class="mCustomScrollBox mCS-rounded-dark mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0"><div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+            <ul class="list-group" id="page_list_ul">
+                              <li class="list-group-item page_list_item" page_table_id="2989">
+                  <div class="row">
+                    <div class="col-3 col-md-2"><img width="45px" class="rounded-circle mCS_img_loaded" src="https://scontent.xx.fbcdn.net/v/t39.30808-1/465854802_1326000872106819_1434172108347520799_n.jpg?stp=c247.0.986.986a_cp0_dst-jpg_s50x50_tt6&amp;_nc_cat=109&amp;ccb=1-7&amp;_nc_sid=f907e8&amp;_nc_ohc=6HreFjife0MQ7kNvwHxnlJs&amp;_nc_oc=AdrM1JOu9U-_k5BUpqipxi9QA5pslgFtF5qsriTspxw8iTJo3L5JsHMrng1w62CYJqI&amp;_nc_zt=24&amp;_nc_ht=scontent.xx&amp;edm=AGaHXAAEAAAA&amp;_nc_gid=czFN_4gkpYpfB287RcP_RA&amp;_nc_tpa=Q5bMBQGvjm4WsDG1T5cea4AzIi6oUAZyZVfYAf7mcjXmwURoE7Msu4LyOKyA5jvHDtvJP-ky4WwzJFWSJQ&amp;oh=00_Af_aBuhhv-TU7TxmO3kpEan-s7qkUqc2fwUnJh5oZEeLfw&amp;oe=6A4746AD"></div>
+                    <div class="col-9 col-md-10">
+                      <h6 class="page_name">Madelyn Riley</h6>
+                      <small class="gray">#2989 - 507130289143976</small>
+                      <!-- <code class="pl-2 text-dark text-small" data-toggle="tooltip" title="Last scanned"><i class="far fa-clock"> 11 Minutes Ago</i></code> -->
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item page_list_item" page_table_id="1507">
+                  <div class="row">
+                    <div class="col-3 col-md-2"><img width="45px" class="rounded-circle mCS_img_loaded" src="https://scontent.xx.fbcdn.net/v/t39.30808-1/464423020_588890136900414_8186691095007050749_n.jpg?stp=c247.0.986.986a_cp0_dst-jpg_s50x50_tt6&amp;_nc_cat=109&amp;ccb=1-7&amp;_nc_sid=f907e8&amp;_nc_ohc=53HG5xPnhesQ7kNvwHjk_VS&amp;_nc_oc=AdqdF7Ry-ySE0FAMxQLAPoZF-g-qVNBB5SJ5xpuG5376_uqMU2XamM8wF6FYP-aRUwk&amp;_nc_zt=24&amp;_nc_ht=scontent.xx&amp;edm=AGaHXAAEAAAA&amp;_nc_gid=czFN_4gkpYpfB287RcP_RA&amp;_nc_tpa=Q5bMBQFs26qIj0gGGRkN0mqkYuoikykZRXfI5kj2JYcFWOs4RHgfY9uaSJTI4uUqZivUa6zSbbRQOrn9mA&amp;oh=00_Af8SZ2Nj8yxDLsyp415Q6oD3ISu77qnKcaoQu9BI14xYRQ&amp;oe=6A4767E7"></div>
+                    <div class="col-9 col-md-10">
+                      <h6 class="page_name">Aline Bravo</h6>
+                      <small class="gray">#1507 - 464455643420338</small>
+                      <!-- <code class="pl-2 text-dark text-small" data-toggle="tooltip" title="Last scanned"><i class="far fa-clock"> 1 Year Ago</i></code> -->
+                    </div>
+                  </div>
+                </li>
+                              <li class="list-group-item page_list_item" page_table_id="1205">
+                  <div class="row">
+                    <div class="col-3 col-md-2"><img width="45px" class="rounded-circle mCS_img_loaded" src="https://scontent.xx.fbcdn.net/v/t39.30808-1/460645515_122116638872441627_2805975625671850893_n.jpg?stp=cp0_dst-jpg_p50x50_tt6&amp;_nc_cat=111&amp;ccb=1-7&amp;_nc_sid=f907e8&amp;_nc_ohc=fdMrOiVjQe8Q7kNvwGbePn4&amp;_nc_oc=AdrbwcGMpUDMdmy8M6-vGhwKCbBJPaIQJ0UCIFitRzdUJ0cCS1vA_OHbagrArhRuJ_o&amp;_nc_zt=24&amp;_nc_ht=scontent.xx&amp;edm=AGaHXAAEAAAA&amp;_nc_gid=czFN_4gkpYpfB287RcP_RA&amp;_nc_tpa=Q5bMBQHVGHkuV8bgP-jeF7ZJAoAd2pj5gDAHPpZoDw6I_IgSOB3EqC0nQqz-cQBsE3zqDxmVxsSUyVh0QA&amp;oh=00_Af-_6-XuVwbHcuTdGmLy4Hz0GWiDpRmXwwHXX_How6xk2w&amp;oe=6A47495A"></div>
+                    <div class="col-9 col-md-10">
+                      <h6 class="page_name">Daniela Delgado</h6>
+                      <small class="gray">#1205 - 418367214685491</small>
+                      <!-- <code class="pl-2 text-dark text-small" data-toggle="tooltip" title="Last scanned"><i class="far fa-clock"> 1 Year Ago</i></code> -->
+                    </div>
+                  </div>
+                </li>
+                          </ul>
+          </div><div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-rounded-dark mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 14px; top: 0px;"><div class="mCSB_dragger_bar"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-8 col-lg-9 colmid" id="middle_column">
+
+      <div id="middle_column_content">
+
+        <div class="card main_card">
+          <div class="card-header p-2">
+            <h4 class="full_width" id="middle_column_content_title">
+            </h4>
+          </div>
+          <div class="card-body p-2" id="middle_column_content_body">
+          </div>
+          <div class="text-center waiting">
+            <i class="fas fa-spinner fa-spin blue text-center"></i>
+          </div>
+
+          <div class="row mt-0">
+            <div class="col-12 col-sm-12 col-md-9 py-0 pl-lg-3 pr-lg-0 p-sm-2">
+              <div class="card no_shadow">
+                <div class="card-body data-card py-0 px-2">
+                  <div class="row">
+                    <div class="col-12 col-md-10">
+                      <div class="input-group" id="searchbox">
+                          <div class="input-group-prepend d-none">
+                          <input id="page_id">
+                          </div>
+                          <div class="input-group-prepend" id="label_dropdown">
+                         </div>
+
+                          <div class="input-group-prepend d-none d-md-block">
+                            <select class="form-control select2 select2-hidden-accessible" id="gender" name="gender" tabindex="-1" aria-hidden="true">
+                              <option value="">Gender</option>
+                              <option value="male">Male</option>
+                              <option value="female">Female</option>
+                            </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 104px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-gender-container"><span class="select2-selection__rendered" id="select2-gender-container" title="Gender">Gender</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                          </div>
+
+                          <select class="form-control select2 select2-hidden-accessible" id="email_phone_birth" name="email_phone_birth[]" multiple="" style="max-width:30%;" tabindex="-1" aria-hidden="true">
+                            <option value="has_phone">Has phone</option>
+                            <option value="has_email">Has email</option>
+                            <option value="has_birthdate">Has birth date</option>
+                          </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 210.125px;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="" style="width: 0.75em;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+
+                          <input type="text" class="form-control" autofocus="" id="search_value" name="search_value" placeholder="Search..." style="max-width:30%;">
+                          <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="search_subscriber"><i class="fas fa-search"></i> <span class="d-none d-sm-inline">Search</span></button>
+                          </div>
+                        </div>                    </div>
+
+                    <div class="col-12 col-md-2">
+
+                      <div class="btn-group dropleft float-right">
+                        <button type="button" class="btn btn-outline-primary btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Options                        </button>
+                        <div class="dropdown-menu dropleft" style="width:auto !important">
+                          <a class="dropdown-item" href="#" button_id="" id="migrate_list"><i class="fas fa-file-export"></i> Migrate page conversations as subscribers</a>
+                          <a class="dropdown-item" href="https://digitaltrchat.com/subscriber_manager/download_result"><i class="fas fa-cloud-download-alt"></i> Download search result</a>
+
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" id="assign_group" href=""><i class="fas fa-user-tag"></i> Assign labels to selected subscribers</a>
+
+                                                                                    <a class="dropdown-item" id="assign_sms_email_sequence" href=""><i class="fas fa-plug"></i> Assign sequence to selected subscribers</a>
+                                                      
+                          <div class="dropdown-divider"></div>
+
+                          <a class="dropdown-item" id="enable_subscribers" href=""><i class="fas fa-recycle"></i> Re-enable all subscribers</a>
+
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item red" id="bulk_delete_contact" href=""><i class="fas fa-trash"></i> Delete subscriber</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="table-responsive2">
+                    <input type="hidden" id="put_page_id">
+                    <table class="table table-bordered" id="mytable">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th style="vertical-align:middle;width:20px">
+                            <input class="regular-checkbox" id="datatableSelectAllRows" type="checkbox"><label for="datatableSelectAllRows"></label>
+                          </th>
+                          <th>Avatar</th>
+                          <th>Page/account</th>
+                          <th>Subscriber id</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Full name</th>
+                          <th>Actions</th>
+                          <th>Quick info</th>
+                          <th>Label/tag</th>
+                          <th>Thread ID</th>
+                          <th>Synced at</th>
+                          <th>Social media</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-3 py-0 pl-lg-0 pr-lg-3 p-sm-2">
+              <div class="card no_shadow">
+                <div class="card-body data-card py-0 px-2">
+                  <div class="row">
+                    <div class="col-12">
+                      <a class="btn btn-outline-primary add_label btn-block btn-lg mb-1" href="#">
+                        <i class="fas fa-plus-circle"></i> New label                      </a>
+                    </div>
+                    <div class="col-12">
+                      <div class="input-group float-left" id="searchbox">
+                        <input type="text" class="form-control" id="searching" name="searching" autofocus="" placeholder="Search labels..." aria-label="" aria-describedby="basic-addon2">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table-responsive2">
+                    <table class="table table-bordered bg-white" id="mytablelabel">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Id</th>
+                          <th>Label</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+
+
+
+<script type="text/javascript">
+  var is_webview_exist = "1"
+  var base_url = "https://digitaltrchat.com/";
+  var youhavenotselected = "You have not selected any subscriber to assign label. You can choose upto";
+  var youhavenotselectanysubscribertoassignsequence = "You have not selected any subscriber to assign sms/email sequence campaign. You can choose upto";
+  var youhavenotselected2 = "You have not selected any subscriber to delete.";
+  var leadsatatime = "Subscribers at a time.";
+  var youcanselectupto = "You can select upto";
+  var leadsyouhaveselected = ",you have selected";
+  var leads = "Subscribers.";
+  var youhavenotselectedanyleadtoassigngroup = "You have not selected any subscriber to assign label.";
+  var youhavenotselectedanyleadtoassigndripcampaign = "You have not selected any subscriber to assign sequence campaign.";
+  var youhavenotselectedanyleadgroup = "You have not selected any label.";
+  var pleasewait = "Please wait...";
+  var groupshavebeenassignedsuccessfully = "Labels have been assigned successfully";
+  var sequencehavebeenassignedsuccessfully = "Sequence campaign have been assigned successfully";
+  var contactshavebeendeletedsuccessfully = "Subscribers have been deleted successfully";
+  var auto_selected_page = "0";
+  var auto_selected_subscriber = "0";
+  var youhavenotselectedanysequence = "You have not selected any sequence campaign.";
+  var ig_bot_exists = "1";
+
+  setTimeout(function() {
+    $('#search_date_range').daterangepicker({
+      ranges: {
+        'Last 30 days': [moment().subtract(29, 'days'), moment()],
+        'This month': [moment().startOf('month'), moment().endOf('month')],
+        'Last month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      },
+      startDate: moment().subtract(29, 'days'),
+      endDate: moment()
+    }, function(start, end) {
+      $('#search_date_range_val').val(start.format('YYYY-M-D') + '|' + end.format('YYYY-M-D')).change();
+    });
+  }, 3000);
+
+  function get_page_details(elem) {
+    $('.multi_layout2 #middle_column .waiting').show();
+    $('.multi_layout2 #middle_column_content_body').hide();
+
+    var page_table_id = $(elem).attr('page_table_id');
+    if (typeof(page_table_id) === 'undefined') {
+      elem = $(".list-group li:first");
+      page_table_id = $(elem).attr('page_table_id');
+    }
+
+    $('.page_list_item').removeClass('active');
+    $(elem).addClass('active');
+
+
+    $("#page_id").val(page_table_id).blur();
+
+    $.ajax({
+      type: 'POST',
+      url: "https://digitaltrchat.com/subscriber_manager/get_page_details",
+      data: {
+        page_table_id: page_table_id
+      },
+      dataType: 'JSON',
+      success: function(response) {
+        $(".multi_layout2 #middle_column_content_title").html(response.title);
+        $(".multi_layout2 #middle_column_content_body").html(response.middle_column_content).show();
+        $("#put_page_label_list").html(response.dropdown);
+        $('.multi_layout2 #middle_column .waiting').hide();
+      }
+    });
+  }
+
+
+  $("document").ready(function() {
+
+    var perscroll_label;
+    var table_label = '';
+    var perscroll;
+    var table1 = '';
+    //if(auto_selected_page!='' && auto_selected_page!='0' ) $('#page_id').val(auto_selected_page).trigger('change');
+
+    setTimeout(function() {
+      table_label = $("#mytablelabel").DataTable({
+        serverSide: true,
+        processing: true,
+        bFilter: false,
+        order: [
+          [2, "asc"]
+        ],
+        pageLength: 10,
+        ajax: {
+          "url": base_url + 'subscriber_manager/contact_group_data',
+          "type": 'POST',
+          data: function(d) {
+            d.page_id = $('#page_id').val();
+            d.searching = $('#searching').val();
+          }
+        },
+        responsive: true,
+        language: {
+          url: "https://digitaltrchat.com/assets/modules/datatables/language/english.json"
+        },
+        dom: '<"top"f>rt<"bottom"lip><"clear">',
+        columnDefs: [{
+            targets: [0, 1],
+            visible: false
+          },
+          {
+            targets: [0, 1],
+            sortable: false
+          }
+        ],
+        fnInitComplete: function() { // when initialization is completed then apply scroll plugin
+          if (areWeUsingScroll) {
+            if (perscroll_label) perscroll_label.destroy();
+            perscroll_label = new PerfectScrollbar('#mytablelabel_wrapper .dataTables_scrollBody');
+          }
+        },
+        scrollX: 'auto',
+        fnDrawCallback: function(oSettings) { //on paginition page 2,3.. often scroll shown, so reset it and assign it again 
+          if (areWeUsingScroll) {
+            if (perscroll_label) perscroll_label.destroy();
+            perscroll_label = new PerfectScrollbar('#mytablelabel_wrapper .dataTables_scrollBody');
+          }
+        }
+      });
+    }, 1000);
+
+
+
+    var hideCol = [3, 10, 11, 12, 13];
+    if (selected_global_media_type == 'ig') {
+      hideCol.push(5);
+      hideCol.push(6);
+    } else hideCol.push(7);
+
+    setTimeout(function() {
+      table1 = $("#mytable").DataTable({
+        serverSide: true,
+        processing: true,
+        bFilter: false,
+        order: [
+          [12, "desc"]
+        ],
+        pageLength: 10,
+        ajax: {
+          url: base_url + 'subscriber_manager/bot_subscribers_data',
+          type: 'POST',
+          data: function(d) {
+            d.page_id = $('#page_id').val();
+            d.search_value = $('#search_value').val();
+            d.label_id = $('#label_id').val();
+            d.email_phone_birth = $('#email_phone_birth').val();
+            d.gender = $('#gender').val();
+          }
+        },
+        language: {
+          url: "https://digitaltrchat.com/assets/modules/datatables/language/english.json"
+        },
+        dom: '<"top"f>rt<"bottom"lip><"clear">',
+        columnDefs: [{
+            targets: hideCol,
+            visible: false
+          },
+          {
+            targets: [0, 2, 4, 8, 9, 10, 11, 12],
+            className: 'text-center'
+          },
+          {
+            targets: [0, 1, 2, 8, 10],
+            sortable: false
+          }
+        ],
+        fnInitComplete: function() { // when initialization is completed then apply scroll plugin
+          if (areWeUsingScroll) {
+            if (perscroll) perscroll.destroy();
+            perscroll = new PerfectScrollbar('#mytable_wrapper .dataTables_scrollBody');
+          }
+        },
+        scrollX: 'auto',
+        fnDrawCallback: function(oSettings) { //on paginition page 2,3.. often scroll shown, so reset it and assign it again 
+          if (areWeUsingScroll) {
+            if (perscroll) perscroll.destroy();
+            perscroll = new PerfectScrollbar('#mytable_wrapper .dataTables_scrollBody');
+          }
+        }
+      });
+    }, 1000);
+
+
+    $(document).on('blur', '#page_id', function(e) {
+      var page_id = $(this).val();
+      var return_social_media_by_force = '0';
+
+      $.ajax({
+        context: this,
+        type: 'POST',
+        dataType: 'JSON',
+        url: "https://digitaltrchat.com/home/switch_to_page",
+        data: {
+          page_id,
+          return_social_media_by_force
+        },
+        success: function(response) {
+          $.ajax({
+            context: this,
+            type: 'POST',
+            url: "https://digitaltrchat.com/subscriber_manager/get_label_dropdown",
+            data: {
+              page_id: page_id
+            },
+            success: function(response) {
+              $("#label_dropdown").html(response);
+              if (table1 != '') table1.draw(false);
+              if (table_label != '') table_label.draw(false);
+              // $("#page_err").text("");
+            }
+          });
+        }
+      });
+
+
+    });
+
+    if (auto_selected_subscriber != '' && auto_selected_subscriber != '0') {
+      $("#search_value").val(auto_selected_subscriber);
+      $("#search_subscriber").click();
+    }
+
+    $(document).on('click', '#search_subscriber', function(e) {
+      e.preventDefault();
+      table1.draw(false);
+    });
+
+    $(document).on('change', '#label_id', function(e) {
+      table1.draw(false);
+    });
+
+    $(document).on('change', '#gender', function(e) {
+      table1.draw(false);
+    });
+
+    $(document).on('change', '#email_phone_birth', function(e) {
+      table1.draw(false);
+    });
+
+
+    $(document).on('click', '#assign_group', function(e) {
+      e.preventDefault();
+      var upto = 500;
+      var selected_page = $("#page_id").val(); // database id
+      var ids = [];
+      $(".datatableCheckboxRow:checked").each(function() {
+        ids.push(parseInt($(this).val()));
+      });
+      var selected = ids.length;
+
+      if (selected_page == "") {
+        swal('Warning', "To assign labels in bulk you have to search by any page first.", 'warning');
+        return;
+      }
+
+      if (ids == "") {
+        swal('Warning', youhavenotselected + " " + upto + " " + leadsatatime, 'warning');
+        return;
+      }
+      if (selected > upto) {
+        swal('Warning', youcanselectupto + " " + upto + " " + leadsyouhaveselected + " " + selected + " " + leads, 'warning');
+        return;
+      }
+
+      $.ajax({
+        type: 'POST',
+        url: "https://digitaltrchat.com/subscriber_manager/get_label_dropdown_multiple",
+        data: {
+          selected_page: selected_page
+        },
+        success: function(response) {
+          $("#get_labels").html(response);
+        }
+      });
+
+      $("#assign_group_modal").modal();
+    });
+
+    $(document).on('click', '#assign_sms_email_sequence', function(event) {
+      event.preventDefault();
+      var upto = 500;
+      var selected_page = $("#page_id").val();
+      var ids = [];
+
+      $(".datatableCheckboxRow:checked").each(function() {
+        ids.push(parseInt($(this).val()));
+      });
+      var selected = ids.length;
+
+      if (selected_page == "") {
+        swal('Warning', "To assign sequence in bulk you have to search by any page first.", 'warning');
+        return;
+      }
+
+      if (ids == "") {
+        swal('Warning', youhavenotselectanysubscribertoassignsequence + " " + upto + " " + leadsatatime, 'warning');
+        return;
+      }
+      if (selected > upto) {
+        swal('Warning', youcanselectupto + " " + upto + " " + leadsyouhaveselected + " " + selected + " " + leads, 'warning');
+        return;
+      }
+
+      $.ajax({
+        type: 'POST',
+        url: "https://digitaltrchat.com/subscriber_manager/get_sequence_campaigns",
+        data: {
+          selected_page: selected_page
+        },
+        success: function(response) {
+          $("#sequence_campaigns").html(response);
+        }
+      });
+
+      $("#assign_sqeuence_campaign_modal").modal();
+
+    });
+
+    $(document).on('click', '#assign_group_submit', function(e) {
+      e.preventDefault();
+      swal({
+          title: 'Assign label',
+          text: 'Do you really want to assign selected labels to your selected subscribers? please be noted that bulk assigning labels will replace subscribers previous labels if any.',
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            var ids = [];
+            $(".datatableCheckboxRow:checked").each(function() {
+              ids.push(parseInt($(this).val()));
+            });
+            var selected = ids.length;
+
+
+            if (ids == "") {
+              swal('Warning', youhavenotselected + " " + upto + " " + leadsatatime, 'warning');
+              return;
+            }
+
+            var group_id = $("#label_ids").val();
+            var page_id = $("#page_id").val();
+            var count = group_id.length;
+
+            if (count == 0) {
+              swal('Error', youhavenotselectedanyleadgroup, 'error');
+              return;
+            }
+
+            $("#assign_group_submit").addClass("btn-progress");
+
+            $.ajax({
+              type: 'POST',
+              url: "https://digitaltrchat.com/subscriber_manager/bulk_group_assign",
+              data: {
+                ids: ids,
+                group_id: group_id,
+                page_id: page_id
+              },
+              success: function(response) {
+                $("#assign_group_submit").removeClass("btn-progress");
+                swal('Label assign', groupshavebeenassignedsuccessfully + " (" + selected + ")", 'success')
+                  .then((value) => {
+                    $("#assign_group_modal").modal('hide');
+                    table1.draw(false);
+                    table_label.draw(false);
+                  });
+
+              }
+            });
+          }
+        });
+    });
+
+    $(document).on('click', '#assign_sequence_submit', function(e) {
+      e.preventDefault();
+
+      var ids = [];
+      $(".datatableCheckboxRow:checked").each(function() {
+        ids.push(parseInt($(this).val()));
+      });
+      var selected = ids.length;
+
+      if (ids == "") {
+        swal('Warning', youhavenotselectanysubscribertoassignsequence + " " + upto + " " + leadsatatime, 'warning');
+        return;
+      }
+
+      var sequence_id = $("#sequence_ids").val();
+      var page_id = $("#page_id").val();
+      var count = sequence_id.length;
+
+      if (count == 0) {
+        swal('Error', youhavenotselectedanysequence, 'error');
+        return;
+      }
+
+      $("#assign_sequence_submit").addClass("btn-progress");
+
+      $.ajax({
+        type: 'POST',
+        url: "https://digitaltrchat.com/subscriber_manager/bulk_sequence_campaign_assign",
+        data: {
+          ids: ids,
+          sequence_id: sequence_id,
+          page_id: page_id
+        },
+        success: function(response) {
+          $("#assign_sequence_submit").removeClass("btn-progress");
+          swal('Sequence campaign assign', sequencehavebeenassignedsuccessfully + " (" + selected + ")", 'success')
+            .then((value) => {
+              $("#assign_sqeuence_campaign_modal").modal('hide');
+              table1.draw(false);
+            });
+
+        }
+      });
+
+    });
+
+    $(document).on('click', '#bulk_delete_contact', function(e) {
+      e.preventDefault();
+      var ids = [];
+      var page_id = $("#page_id").val();
+
+      $(".datatableCheckboxRow:checked").each(function() {
+        ids.push(parseInt($(this).val()));
+      });
+      var selected = ids.length;
+
+      if (page_id == "") {
+        swal('Warning', "To delete subscribers in bulk you have to search by any page first.", 'warning');
+        return;
+      }
+      if (ids == "") {
+        swal('Warning', youhavenotselected2, 'warning');
+        return;
+      }
+
+      swal({
+          title: 'Delete subscribers',
+          text: 'Do you really want to delete selected subscribers?',
+          icon: 'error',
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            $.ajax({
+              type: 'POST',
+              url: "https://digitaltrchat.com/subscriber_manager/delete_bulk_subscriber",
+              data: {
+                ids: ids,
+                page_id: page_id
+              },
+              success: function(response) {
+                swal('Delete subscribers', contactshavebeendeletedsuccessfully + " (" + selected + ")", 'success')
+                  .then((value) => {
+                    table1.draw(false);
+                  });
+
+              }
+            });
+          }
+        });
+    });
+
+    $(document).on('click', '#enable_subscribers', function(e) {
+      e.preventDefault();
+      var ids = [];
+      var page_id = $("#page_id").val();
+
+      var ans = confirm("Do you really want to re-enable all subscribers of this page?");
+      if (!ans) return false;
+      $.ajax({
+        url: "https://digitaltrchat.com/subscriber_manager/enable_all_subscribers",
+        method: "POST",
+        data: {
+          page_id: page_id
+        },
+        dataType: 'JSON',
+        success: function(response) {
+          console.log('response', response)
+          if (response.status == '1') {
+            swal('Success', response.message, 'success');
+          } else {
+            swal('Error', response.message, 'error');
+          }
+          location.reload();
+        }
+      });
+
+
+    });
+
+    $(document).on('click', '.subscriber_actions_modal', function(e) {
+      e.preventDefault();
+
+      var id = $(this).attr('data-id');
+      var subscribe_id = $(this).attr('data-subscribe-id');
+      var page_id = $(this).attr('data-page-id'); // auto id
+      $("#search_subscriber_id").val(subscribe_id);
+
+      var social_media = 'ig';
+      if (page_id.indexOf('fb') > -1) social_media = 'fb';
+
+      $("#subscriber_actions_modal").modal();
+      get_subscriber_action_content(id, subscribe_id, page_id);
+      var user_input_flow_exist = "yes";
+      if (user_input_flow_exist == 'yes') {
+        get_subscriber_flowdata(id, subscribe_id, page_id);
+        get_subscriber_customfields(id, subscribe_id, page_id);
+      } else {
+        $("#flowanswers-tab,#customfields-tab").hide();
+      }
+
+      if (is_webview_exist) {
+        get_subscriber_formdata(id, subscribe_id, page_id);
+      } else $("#formdata-tab").hide();
+
+      $("#default-tab").click();
+    });
+
+
+    function get_subscriber_flowdata(id, subscribe_id, page_id) {
+      $(".flowanswers_div").html('<div class="text-center waiting"><i class="fas fa-spinner fa-spin blue text-center"></i></div>');
+
+      $.ajax({
+        type: 'POST',
+        url: "https://digitaltrchat.com/subscriber_manager/get_subscriber_inputflow_data",
+        data: {
+          id: id,
+          page_id: page_id,
+          subscribe_id: subscribe_id
+        },
+        success: function(response) {
+          $(".flowanswers_div").html(response);
+        }
+      });
+    }
+
+    function get_subscriber_customfields(id, subscribe_id, page_id) {
+      $(".customfields_div").html('<div class="text-center waiting"><i class="fas fa-spinner fa-spin blue text-center"></i></div>');
+
+      $.ajax({
+        type: 'POST',
+        url: "https://digitaltrchat.com/subscriber_manager/get_subscriber_customfields_data",
+        data: {
+          id: id,
+          page_id: page_id,
+          subscribe_id: subscribe_id
+        },
+        success: function(response) {
+          $(".customfields_div").html(response);
+        }
+      });
+    }
+
+    function get_subscriber_formdata(id, subscribe_id, page_id) {
+      $(".formdata_div").html('<div class="text-center waiting"><i class="fas fa-spinner fa-spin blue text-center"></i></div>');
+
+      $.ajax({
+        type: 'POST',
+        url: "https://digitaltrchat.com/subscriber_manager/get_subscriber_formdata",
+        data: {
+          id: id,
+          page_id: page_id,
+          subscribe_id: subscribe_id
+        },
+        success: function(response) {
+          $(".formdata_div").html(response);
+        }
+      });
+    }
+
+    var table2 = '';
+
+    $(document).on('change', '#search_status', function(e) {
+      table2.draw();
+    });
+
+    $(document).on('change', '#search_date_range_val', function(e) {
+      e.preventDefault();
+      table2.draw();
+    });
+
+    $(document).on('keypress', '#search_value2', function(e) {
+      if (e.which == 13) $("#search_action").click();
+    });
+
+    $(document).on('click', '#search_action', function(event) {
+      event.preventDefault();
+      table2.draw();
+    });
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+      var id = $(this).attr('id');
+      if (id == 'purchase-tab') setTimeout(function() {
+        get_purchase_data();
+      }, 1000);
+    });
+
+
+    function get_purchase_data() {
+      var perscroll2;
+      if (table2 == '') {
+        table2 = $("#mytable2").DataTable({
+          serverSide: true,
+          processing: true,
+          bFilter: false,
+          order: [
+            [10, "desc"]
+          ],
+          pageLength: 10,
+          ajax: {
+            url: base_url + 'subscriber_manager/my_orders_data',
+            type: 'POST',
+            data: function(d) {
+              d.search_subscriber_id = $('#search_subscriber_id').val();
+              d.search_status = $('#search_status').val();
+              d.search_value = $('#search_value2').val();
+              d.search_date_range = $('#search_date_range_val').val();
+            }
+          },
+          language: {
+            url: "https://digitaltrchat.com/assets/modules/datatables/language/english.json"
+          },
+          dom: '<"top"f>rt<"bottom"lip><"clear">',
+          columnDefs: [{
+              targets: [1, 3, 6, 7, 11],
+              visible: false
+            },
+            {
+              targets: [5, 7, 8, 9, 10, 11],
+              className: 'text-center'
+            },
+            {
+              targets: [3, 4],
+              className: 'text-right'
+            },
+            {
+              targets: [2, 8, 9],
+              sortable: false
+            }
+          ],
+          fnInitComplete: function() { // when initialization is completed then apply scroll plugin
+            if (areWeUsingScroll) {
+              if (perscroll2) perscroll2.destroy();
+              perscroll2 = new PerfectScrollbar('#mytable2_wrapper .dataTables_scrollBody');
+            }
+          },
+          scrollX: 'auto',
+          fnDrawCallback: function(oSettings) { //on paginition page 2,3.. often scroll shown, so reset it and assign it again 
+            if (areWeUsingScroll) {
+              if (perscroll2) perscroll2.destroy();
+              perscroll2 = new PerfectScrollbar('#mytable2_wrapper .dataTables_scrollBody');
+            }
+          }
+        });
+      } else table2.draw();
+    }
+
+    $(document).on('click', '#migrate_list', function(e) {
+
+      e.preventDefault();
+
+      swal({
+          title: 'Migrate conversations as bot subscriber',
+          text: 'Do you really want to migrate all of your page converasations as bot subscribers?',
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            var base_url = 'https://digitaltrchat.com/';
+            $(this).parent().prev().addClass('btn-progress');
+
+            var user_page_id = $("#migrate_list").attr('button_id');
+
+            $.ajax({
+              context: this,
+              type: 'POST',
+              url: "https://digitaltrchat.com/subscriber_manager/migrate_lead_to_bot",
+              dataType: 'json',
+              data: {},
+              success: function(response) {
+                $(this).parent().prev().removeClass('btn-progress');
+                if (response.status == '1') {
+                  swal('Migration successful', response.message, 'success');
+                } else {
+                  swal('Error', response.message, 'error');
+                }
+              }
+            });
+          }
+        });
+    });
+
+    $('#subscriber_actions_modal').on('hidden.bs.modal', function() {
+      table1.draw(false);
+    });
+    $('#subscriber_actions_modal').on('shown.bs.modal', function() {
+      $(document).off('focusin.modal');
+    });
+
+
+
+    $(document).on('click', '.add_label', function(event) {
+      event.preventDefault();
+      $("#name_err").text("");
+      // $("#page_err").text("");
+      $("#group_name").val("");
+      // $("#page_id").val("").change();
+      $("#add_label").modal();
+    });
+
+    // create new label
+    $(document).on('click', '#create_label_main', function(event) {
+      event.preventDefault();
+
+      $("#name_err").text("");
+      // $("#page_err").text("");
+
+      group_name = $("#group_name").val();
+      selected_page_id = $("#page_id").val();
+
+      if (group_name == '') {
+        $("#name_err").text("Name is required")
+        return false;
+      }
+      // if(selected_page_id == '') {
+      //     $("#page_err").text("Page is required")
+      //     return false;
+      // }
+
+      $(this).addClass('btn-progress');
+      var that = $(this);
+
+      $.ajax({
+        url: 'https://digitaltrchat.com/subscriber_manager/ajax_label_insert',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+          group_name: group_name,
+          selected_page_id: selected_page_id
+        },
+        success: function(response) {
+          $("#result_status").html('');
+          $("#result_status").css({
+            "background": "",
+            "padding": "",
+            "margin": ""
+          });
+
+          if (response.status == "0") {
+            var errorMessage = JSON.stringify(response, null, 10);
+            swal('Error', errorMessage, "error");
+            // iziToast.error({title: '',message: response.message,position: 'bottomRight'});
+            $("#result_status").css({
+              "background": "#EEE",
+              "margin": "10px"
+            });
+
+          } else if (response.status == '1') {
+            iziToast.success({
+              title: '',
+              message: response.message,
+              position: 'bottomRight'
+            });
+          }
+
+          table_label.draw();
+          $(that).removeClass('btn-progress');
+        }
+      });
+
+    });
+
+    $(document).on('keyup', '#group_name', function(event) {
+      event.preventDefault();
+      $("#name_err").text("");
+    });
+
+    $(document).on('keyup', '#searching', function(event) {
+      table_label.draw();
+    });
+
+
+    // delete label
+    $(document).on('click', '.delete_label', function(event) {
+      event.preventDefault();
+
+      swal({
+          title: 'Delete label',
+          text: 'Do you want to delete this label?',
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            var table_id = $(this).attr("table_id");
+            var social_media = $(this).attr("social_media");
+
+            $(this).addClass('btn-danger btn-progress').removeClass('btn-outline-danger');
+            var that = $(this);
+
+            $.ajax({
+              url: 'https://digitaltrchat.com/subscriber_manager/ajax_delete_label',
+              type: 'POST',
+              dataType: 'json',
+              data: {
+                table_id: table_id,
+                social_media: social_media
+              },
+              success: function(response) {
+                if (response.status == 'successfull') {
+                  iziToast.success({
+                    title: '',
+                    message: response.message,
+                    position: 'bottomRight'
+                  });
+
+                } else if (response.status == 'failed') {
+                  swal("Error", response.message, "error")
+
+                } else if (response.status == 'error') {
+                  var errorMessage = JSON.stringify(response, null, 10);
+                  swal('Error', errorMessage, "error");
+                } else if (response.status == 'wrong') {
+                  swal('Error', response.message, "error");
+                }
+
+                table_label.draw();
+                $(that).removeClass('btn-danger btn-progress').addClass('btn-outline-danger');
+              }
+            });
+          }
+        });
+
+    });
+
+    $('#add_label').on('hidden.bs.modal', function() {
+      $("#name_err").text("");
+      // $("#page_err").text("");
+      $("#group_name").val("");
+      // $("#page_id").val("").change();
+      table_label.draw();
+    });
+
+    $("document").ready(function() {
+
+      $(".page_list_item").click(function(e) {
+        e.preventDefault();
+        get_page_details(this);
+      });
+
+      $(document).on('click', '.import_data', function(e) {
+        e.preventDefault();
+        var id = $(this).attr('id');
+        $("#start_scanning").attr("data-id", id);
+        $("#import_lead_modal").modal();
+      });
+
+      $(document).on('click', '.subscriber_info_modal', function(e) {
+        e.preventDefault();
+        $("#subscriber_info_modal").modal();
+      });
+
+      $(document).on('click', '#start_scanning', function(e) {
+        e.preventDefault();
+        var id = $(this).attr('data-id');
+        var scan_limit = $("#scan_limit").val();
+        var folder = $("#folder").val();
+        $("#start_scanning").addClass('btn-progress');
+        $(".auto_sync_lead_page").addClass('disabled');
+        $(".user_details_modal").addClass('disabled');
+        $("#scan_load").attr('class', '');
+        $.ajax({
+          context: this,
+          type: 'POST',
+          url: "https://digitaltrchat.com/subscriber_manager/import_lead_action",
+          data: {
+            id: id,
+            scan_limit: scan_limit,
+            folder: folder
+          },
+          dataType: 'JSON',
+          success: function(response) {
+            $("#start_scanning").removeClass('btn-progress');
+
+            if (response.status == '1') {
+              swal('Success', response.message, 'success');
+            } else {
+              swal('Error', response.message, 'error');
+            }
+          }
+        });
+
+      });
+
+      $(document).on('click', '.auto_sync_lead_page', function(e) {
+        e.preventDefault();
+        var page_id = $(this).attr('auto_sync_lead_page_id');
+        var operation = $(this).attr('enable_disable');
+        var base_url = 'https://digitaltrchat.com/';
+
+        var disabledsuccessfully = 'Backgound scanning has been disabled successfully.';
+        var enabledsuccessfully = 'Backgound scanning has been enabled successfully.';
+
+        $(".import_data").addClass('disabled');
+        $(".auto_sync_lead_page").addClass('disabled');
+        $(".user_details_modal").addClass('disabled');
+        $.ajax({
+          type: 'POST',
+          url: "https://digitaltrchat.com/subscriber_manager/enable_disable_auto_sync",
+          data: {
+            page_id: page_id,
+            operation: operation
+          },
+          success: function(response) {
+            if (operation == "0") iziToast.success({
+              title: '',
+              message: disabledsuccessfully,
+              position: 'bottomRight'
+            });
+            else iziToast.success({
+              title: '',
+              message: enabledsuccessfully,
+              position: 'bottomRight'
+            });
+
+            $(".page_list_item.active").click();
+          }
+        });
+
+      });
+
+      $('.modal').on("hidden.bs.modal", function(e) {
+        if ($('.modal:visible').length) {
+          $('body').addClass('modal-open');
+        }
+
+      });
+
+    });
+
+    $("document").ready(function() {
+      $('#import_lead_modal').on('hidden.bs.modal', function() {
+        $(".page_list_item.active").click();
+      });
+    });
+
+    $("document").ready(function() {
+      setTimeout(function() {
+        var session_value = "";
+        var elem;
+        if (session_value == '') elem = $(".list-group li:first");
+        else elem = $("li[page_table_id='" + session_value + "']");
+        get_page_details(elem);
+      }, 500);
+
+    });
+
+
+  });
+</script>
+
+<script type="text/javascript">
+	//  loads subscriber action modal content
+	function get_subscriber_action_content(id,subscribe_id,page_id)
+	{
+		$(".multi_layout").html(' <div class="text-center waiting"><i class="fas fa-spinner fa-spin blue text-center"></i></div>');
+
+		$.ajax({
+		  type:'POST' ,
+		  url: "https://digitaltrchat.com/subscriber_manager/subscriber_actions_modal",
+		  data:{id:id,page_id:page_id,subscribe_id:subscribe_id},
+		  success:function(response)
+		  {
+		    $(".multi_layout").html(response);
+		  }
+		}); 
+	}
+	//  refresh label and broadcast block 
+	function subscriber_actions_refresh(id)
+	{
+	  $("#save_changes").addClass("btn-progress");
+	  $.ajax({
+	    context: this,
+	    type:'POST',
+	    dataType:'JSON',
+	    url:"https://digitaltrchat.com/subscriber_manager/subscriber_actions_refresh",
+	    data:{id:id},
+	    success:function(response){
+	       $("#save_changes").removeClass("btn-progress");
+	       $("#subscriber_labels_container").html(response.label_dropdown);
+	       $("#broadcast_block").html(response.broadcast_block);
+	    }
+	  });
+	}
+
+
+	$("document").ready(function(){
+		$(document).on('click','.client_thread_subscribe_unsubscribe',function(e){
+        e.preventDefault();
+        $(this).addClass('btn-progress');
+        $("#save_changes").addClass("btn-progress");
+        var client_subscribe_unsubscribe_status = $(this).attr('id');
+        var social_media = $(this).attr('social_media');
+
+        var exp = [];
+        var exp = client_subscribe_unsubscribe_status.split("-");
+        var id = exp[0];
+
+        $.ajax({
+          context: this,
+          type:'POST',
+          dataType:'JSON',
+          url:"https://digitaltrchat.com/subscriber_manager/client_subscribe_unsubscribe_status_change",
+          data:{client_subscribe_unsubscribe_status:client_subscribe_unsubscribe_status,subscriber_details_page:'1',social_media:social_media},
+          success:function(response){
+             $(this).removeClass('btn-progress');
+             $("#save_changes").removeClass('btn-progress');
+             $(this).parent().html(response.button2);
+             subscriber_actions_refresh(id);
+             if(response.status=='1') iziToast.success({title: '',message: response.message,position: 'bottomRight'});
+             else iziToast.error({title: '',message: response.message,position: 'bottomRight'});
+          }
+        });
+
+      });
+
+
+      $(document).on('click','.client_thread_start_stop',function(e){
+        e.preventDefault();
+        $(this).addClass('btn-progress');
+        $("#save_changes").addClass("btn-progress");
+        var call_from_conversation = $(this).attr('call-from-conversation');
+        if(call_from_conversation!='1')  call_from_conversation = '0';
+        var client_thread_start_stop = $(this).attr('button_id');
+        $.ajax({
+          context: this,
+          type:'POST',
+          dataType:'JSON',
+          url:"https://digitaltrchat.com/subscriber_manager/start_stop_bot_reply",
+          data:{client_thread_start_stop:client_thread_start_stop,call_from_conversation:call_from_conversation},
+          success:function(response){
+             $(this).removeClass('btn-progress');
+             $("#save_changes").removeClass('btn-progress');
+             $(this).parent().html(response.button);
+             iziToast.success({title: '',message: response.message,position: 'bottomRight'});       
+          }
+        });
+
+      });
+
+
+      // create an new label and put inside label list
+      $(document).on('click','#create_label',function(e){
+        e.preventDefault();
+        var id=$(this).attr('data-id');
+        var page_id=$(this).attr('data-page-id');
+        var social_media=$(this).attr('data-social-media');
+
+        swal("Label name", {
+          content: "input",
+          button: {text: "New label"},
+        })
+        .then((value) => {
+          var label_name = `${value}`;
+          if(label_name!="" && label_name!='null')
+          {
+            $("#save_changes").addClass("btn-progress");
+            $.ajax({
+              context: this,
+              type:'POST',
+              dataType:'JSON',
+              url:"https://digitaltrchat.com/subscriber_manager/create_label_and_assign",
+              data:{id:id,page_id:page_id,label_name:label_name,social_media:social_media},
+              success:function(response){
+                 $("#save_changes").removeClass("btn-progress");
+                 var newOption = new Option(response.text, response.id, true, true);
+                 $('#subscriber_labels').append(newOption).trigger('change');
+              }
+            });
+          }
+        });
+
+      });
+
+
+      // saves label list and sequence campaign
+      $(document).on('click','#save_changes',function(e){
+        e.preventDefault();
+        var id=$(this).attr('data-id');
+        var page_id=$(this).attr('data-page-id');
+        var subscribe_id=$(this).attr('data-subscribe-id');
+        var group_id=$("#subscriber_labels").val();
+        var campaign_id=$("#assign_campaign_id").val();
+
+        var social_media = $(this).attr('data-social-media');
+        var page_id_media = page_id+"-"+social_media;
+
+        $("#save_changes").addClass("btn-progress");
+        $.ajax({
+          context: this,
+          type:'POST',
+          dataType:'JSON',
+          url:"https://digitaltrchat.com//subscriber_manager/save_subscriber_changes",
+          data:{id:id,page_id:page_id,group_id:group_id,campaign_id:campaign_id,social_media:social_media},
+          success:function(response){
+             $("#save_changes").removeClass("btn-progress");
+             get_subscriber_action_content(id,subscribe_id,page_id_media);
+             iziToast.success({title: '',message: 'Subscriber information has been saved successfully.',position: 'bottomRight'});
+          }
+        });
+
+      });      
+
+    $(document).on('click','.update_user_details',function(e){
+      e.preventDefault();
+      $(this).addClass('btn-progress');
+      $("#save_changes").addClass("btn-progress");
+      var post_value = $(this).attr('button_id');
+      var social_media = $(this).attr('social_media');
+
+      var exp=[];
+      exp=post_value.split("-");
+      var id=exp[0];
+      var subscribe_id=exp[1];
+      var page_id=exp[2];
+
+      var page_id_media = page_id+"-"+social_media;
+
+      $.ajax({
+        context: this,
+        type:'POST',
+        dataType:'JSON',
+        url:"https://digitaltrchat.com/subscriber_manager/sync_subscriber_data",
+        data:{post_value:post_value,social_media:social_media},
+        success:function(response){
+           $(this).removeClass('btn-progress');
+           $("#save_changes").removeClass('btn-progress');
+           if(response.status=='1')   iziToast.success({title: '',message: response.message,position: 'bottomRight'});       
+           else  iziToast.error({title: '',message: response.message,position: 'bottomRight'});
+           get_subscriber_action_content(id,subscribe_id,page_id_media);    
+        }
+      });
+
+    });
+
+    $(document).on('click','.reset_user_input_flow',function(e){
+      e.preventDefault();
+      $(this).addClass('btn-progress');
+      $("#save_changes").addClass("btn-progress");
+      var post_value = $(this).attr('button_id');
+      var social_media = $(this).attr('social_media');
+
+      var exp=[];
+      exp=post_value.split("-");
+      var id=exp[0];
+      var subscribe_id=exp[1];
+      var page_id=exp[2];
+
+      var page_id_media = page_id+"-"+social_media;
+
+      $.ajax({
+        context: this,
+        type:'POST',
+        dataType:'JSON',
+        url:"https://digitaltrchat.com/subscriber_manager/reset_user_input_flow",
+        data:{post_value:post_value,social_media:social_media},
+        success:function(response){
+           $(this).removeClass('btn-progress');
+           $("#save_changes").removeClass('btn-progress');
+           if(response.status=='1')   iziToast.success({title: '',message: response.message,position: 'bottomRight'});       
+           else  iziToast.error({title: '',message: response.message,position: 'bottomRight'});
+           get_subscriber_action_content(id,subscribe_id,page_id_media);    
+        }
+      });
+
+    });
+
+    $(document).on('click','.delete_user_details',function(e){
+      e.preventDefault();
+
+      swal({
+         title: 'Delete subscriber',
+         text: 'Do you really want to delete this subscriber?',
+         icon: 'warning',
+         buttons: true,
+         dangerMode: true,
+       })
+       .then((willDelete) => {
+         if (willDelete) 
+         {
+             $(this).addClass('btn-progress');
+             $("#save_changes").addClass("btn-progress");
+             var post_value = $(this).attr('button_id');
+             var social_media = $(this).attr('social_media');
+             $.ajax({
+               context: this,
+               type:'POST',
+               dataType:'JSON',
+               url:"https://digitaltrchat.com/subscriber_manager/delete_subsriber",
+               data:{post_value:post_value,social_media:social_media},
+               success:function(response){
+                  $(this).removeClass('btn-progress');
+                  $("#save_changes").removeClass('btn-progress');
+                  $("#subscriber_actions_modal").modal('hide');
+                  iziToast.success({title: '',message: 'Subscriber has been deleted successfully.',position: 'bottomRight'});    
+               }
+             });
+         } 
+       });       
+
+    });
+	});
+</script>
+
+
+<style type="text/css">
+  .multi_layout {
+    margin: 0;
+    background: #fff
+  }
+
+  .multi_layout .card {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+
+  .multi_layout {
+    border: 1px solid #dee2e6;
+    border-top-width: 0;
+  }
+
+  .multi_layout .collef {
+    padding-left: 0px;
+    padding-right: 0px;
+    border-right: 1px solid #dee2e6;
+  }
+
+  .multi_layout .colmid {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .multi_layout .card-statistic-1 {
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+  }
+
+  .multi_layout .main_card {
+    min-height: 100%;
+  }
+
+  .multi_layout h6.page_name {
+    font-size: 14px;
+  }
+
+  .multi_layout .card .card-header input {
+    max-width: 100% !important;
+  }
+
+  .multi_layout .card .card-header h4 a {
+    font-weight: 700 !important;
+  }
+
+  .multi_layout .card-primary {
+    margin-top: 35px;
+    margin-bottom: 15px;
+  }
+
+  .multi_layout .product-details .product-name {
+    font-size: 12px;
+  }
+
+  .multi_layout .margin-top-50 {
+    margin-top: 70px;
+  }
+
+  .multi_layout .waiting {
+    height: 100%;
+    width: 100%;
+    display: table;
+  }
+
+  .multi_layout .waiting i {
+    font-size: 60px;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 30px 0;
+  }
+
+  .multi_layout .collef .bgimage {
+    border-radius: 5px;
+    height: 250px;
+    background-position: 50% 50%;
+    background-size: cover;
+    min-width: 140px;
+    background-repeat: no-repeat;
+    display: block;
+  }
+
+  .multi_layout .collef .subscriber_details {
+    padding-right: 20px;
+  }
+
+  /*.multi_layout .colmid .section-title{padding-bottom: 10px;}*/
+  .tab-content>.tab-pane {
+    padding: 0;
+  }
+
+  @media (max-width: 575.98px) {
+    .multi_layout .collef {
+      border-right: none !important;
+    }
+  }
+
+  .multi_layout2 {
+    margin: 0;
+    background: #fff
+  }
+
+  .multi_layout2 .card {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+
+  .multi_layout2 p,
+  .multi_layout2 ul:not(.list-unstyled),
+  .multi_layout2 ol {
+    line-height: 15px;
+  }
+
+  .multi_layout2 .list-group li {
+    padding: 15px 10px 12px 25px;
+  }
+
+  .multi_layout2 {
+    border: .5px solid #dee2e6;
+  }
+
+  .multi_layout2 .collef,
+  .multi_layout2 .colmid {
+    padding-left: 0px;
+    padding-right: 0px;
+    border-right: .5px solid #dee2e6;
+  }
+
+  .multi_layout2 .colmid .card-icon {
+    border: .5px solid #dee2e6;
+  }
+
+  .multi_layout2 .colmid .card-icon i {
+    font-size: 30px !important;
+  }
+
+  .multi_layout2 .main_card {
+    box-shadow: none;
+  }
+
+  .multi_layout2 .collef .makeScroll {
+    max-height: 550px;
+    overflow: auto;
+  }
+
+  .multi_layout2 .list-group .list-group-item {
+    border-radius: 0;
+    border: .5px solid #dee2e6;
+    border-left: none;
+    border-right: none;
+    cursor: pointer;
+    z-index: 0;
+  }
+
+  .multi_layout2 .list-group .list-group-item:first-child {
+    border-top: none;
+  }
+
+  .multi_layout2 .list-group .list-group-item:last-child {
+    border-bottom: none;
+  }
+
+  .multi_layout2 .list-group .list-group-item.active {
+    border: .5px solid #6777EF;
+  }
+
+  .multi_layout2 .mCSB_inside>.mCSB_container {
+    margin-right: 0;
+  }
+
+  .multi_layout2 .card-statistic-1 {
+    border: .5px solid #dee2e6;
+    border-radius: 4px;
+  }
+
+  .multi_layout2 h6.page_name {
+    font-size: 14px;
+  }
+
+  .multi_layout2 .card .card-header input {
+    max-width: 100% !important;
+  }
+
+  .multi_layout2 .card .card-header h4 a {
+    font-weight: 700 !important;
+  }
+
+  .multi_layout2 .card-primary {
+    margin-top: 35px;
+    margin-bottom: 15px;
+  }
+
+  .multi_layout2 .product-details .product-name {
+    font-size: 12px;
+  }
+
+  .multi_layout2 .margin-top-50 {
+    margin-top: 70px;
+  }
+
+  .multi_layout2 .waiting {
+    height: 100%;
+    width: 100%;
+    display: table;
+  }
+
+  .multi_layout2 .waiting i {
+    font-size: 60px;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 30px 0;
+  }
+
+  .subscriber_info_modal {
+    cursor: pointer;
+  }
+</style>
+
+<div class="modal fade" id="assign_group_modal" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-user-tag"></i> Assign label</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div id="get_labels">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary float-left" href="" id="assign_group_submit"><i class="fas fa-user-tag"></i> Assign label</a>
+        <a class="btn btn-outline-secondary float-right" data-dismiss="modal"><i class="fas fa-times"></i> Close</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="assign_sqeuence_campaign_modal" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" style="min-width:40%;">
+    <div class="modal-content">
+      <div class="modal-header bbw">
+        <h5 class="modal-title"><i class="fas fa-sort-numeric-up"></i> Assign sms/email sequence</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="text-center" style="padding:20px;margin-bottom:20px;border:.5px solid #dee2e6; color:var(--blue);background: #fff;">Bulk sequence assign is available for email &amp; sms cmapaign. for messenger, bulk campaign isn`t available due to safety &amp; avoiding breaking 24 hours policy.</div>
+        <div id="sequence_campaigns"></div>
+      </div>
+      <div class="modal-footer bg-whitesmoke">
+        <a class="btn btn-lg btn-primary float-left" href="" id="assign_sequence_submit"><i class="fas fa-save"></i> Assign sequence</a>
+        <a class="btn btn-lg btn-light float-right" data-dismiss="modal"><i class="fas fa-times"></i> Close</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="subscriber_actions_modal" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header" style="padding:15px;">
+        <h5 class="modal-title"><i class="fas fa-user-circle"></i> Subscriber actions</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body" id="subscriber_actions_modal_body" style="padding:0 15px 15px 15px;" data-backdrop="static" data-keyboard="false">
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="default-tab" data-toggle="tab" href="#default" role="tab" aria-controls="default" aria-selected="true">Subscriber data</a>
+          </li>
+
+                      <li class="nav-item">
+              <a class="nav-link" id="flowanswers-tab" data-toggle="tab" href="#flowanswers" role="tab" aria-controls="flowanswers" aria-selected="false">User input flow answer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="customfields-tab" data-toggle="tab" href="#customfields" role="tab" aria-controls="customfields" aria-selected="false">Custom fields</a>
+            </li>
+          
+                      <li class="nav-item">
+              <a class="nav-link" id="formdata-tab" data-toggle="tab" href="#formdata" role="tab" aria-controls="formdata" aria-selected="false">Custom form data</a>
+            </li>
+                                <li class="nav-item">
+              <a class="nav-link" id="purchase-tab" data-toggle="tab" href="#purchase" role="tab" aria-controls="purchase" aria-selected="false">Purchase history</a>
+            </li>
+          
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+
+          <div class="tab-pane fade active show" id="default" role="tabpanel" aria-labelledby="default-tab">
+            <div class="row multi_layout">
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="formdata" role="tabpanel" aria-labelledby="formdata-tab">
+            <div class="card no_shadow" style="border:1px solid #dee2e6;border-top:none;border-radius:0">
+              <div class="card-body">
+                <div class="row formdata_div" style="padding-top:20px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="flowanswers" role="tabpanel" aria-labelledby="flowanswers-tab">
+            <div class="card no_shadow" style="border:1px solid #dee2e6;border-top:none;border-radius:0">
+              <div class="card-body">
+                <div class="row flowanswers_div" style="padding-top:20px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="customfields" role="tabpanel" aria-labelledby="customfields-tab">
+            <div class="card no_shadow" style="border:1px solid #dee2e6;border-top:none;border-radius:0">
+              <div class="card-body">
+                <div class="row customfields_div" style="padding-top:20px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade" id="purchase" role="tabpanel" aria-labelledby="purchase-tab">
+            <div class="card no_shadow data-card" style="border:1px solid #dee2e6;border-top:none;border-radius:0">
+              <div class="card-body">
+                <div class="row purchase_div" style="padding-top:20px;"></div>
+                <div class="row">
+                  <div class="col-12 col-md-9">
+                    <div class="input-group mb-3" id="searchbox">
+                            <div class="input-group-prepend d-none">
+                              <input type="text" value="" name="search_subscriber_id" id="search_subscriber_id">
+                            </div>
+                            <div class="input-group-prepend d-none">
+                              <select name="search_status" class="form-control select2 select2-hidden-accessible" id="search_status" tabindex="-1" aria-hidden="true">
+<option value="pending">Pending</option>
+<option value="approved">Approved</option>
+<option value="rejected">Rejected</option>
+<option value="shipped">Shipped</option>
+<option value="delivered">Delivered</option>
+<option value="completed">Completed</option>
+<option value="" selected="selected">Status</option>
+</select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-search_status-container"><span class="select2-selection__rendered" id="select2-search_status-container" title="Status">Status</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+
+                            </div>
+                            <input type="text" class="form-control" id="search_value2" autofocus="" name="search_value2" placeholder="Search..." style="max-width:25%;">
+                            <div class="input-group-append">
+                              <button class="btn btn-primary" type="button" id="search_action"><i class="fas fa-search"></i> <span class="d-none d-sm-inline">Search</span></button>
+                            </div>
+                          </div>                  </div>
+
+                  <div class="col-12 col-md-3">
+
+                    <a href="javascript:;" id="search_date_range" class="btn btn-primary btn-lg float-right icon-left btn-icon"><i class="fas fa-calendar"></i> Choose date</a><input type="hidden" id="search_date_range_val">
+
+                  </div>
+                </div>
+
+                <div class="table-responsive2">
+                  <table class="table table-bordered" id="mytable2">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th style="vertical-align:middle;width:20px">
+                          <input class="regular-checkbox" id="datatableSelectAllRows" type="checkbox"><label for="datatableSelectAllRows"></label>
+                        </th>
+                        <th style="max-width: 130px">Status</th>
+                        <th>Coupon</th>
+                        <th>Amount</th>
+                        <th>Currency</th>
+                        <th>Method</th>
+                        <th>Transaction ID</th>
+                        <th>Invoice</th>
+                        <th>Docs</th>
+                        <th>Ordered at</th>
+                        <th>Paid at</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="add_label" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" style="min-width: 30%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fa fa-plus-circle"></i> Add label</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+      <div class="modal-body" id="add_label_modal_body">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label><i class="fas fa-tags"></i> Label name</label>
+              <input type="text" name="group_name" id="group_name" class="form-control">
+              <span id="name_err" class="red"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="result_status"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+        <button id="create_label_main" type="button" class="btn btn-lg btn-primary"><i class="fas fa-save"></i> Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="import_lead_modal" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-qrcode"></i> Scan page inbox</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body ">
+        <div class="row">
+          <div class="col-12">
+            <div id="import_lead_body">
+              <div id="scan_load"></div><br>
+              <div class="row">
+                <div class="form-group col-12 col-lg-6">
+                  <label>
+                    Scan latest leads                    <a href="#" data-placement="right" data-toggle="popover" data-trigger="focus" title="" data-content="Scanning process scans your page conversation and import them as subscriber. we strongly recommend to use cron based scanning feature for first time, if your page conversation is huge. After importing all subscribers, the cron feature will not import any future new subscribers, you have to scan for latest subscribers manually occasionally using the scan limit feature. Although you can enable the cron based scanning again manually but be informed that it will rescan the full page conversation. If you are scanning for first time and your inbox conversation is moderate, then you can scan all of them at once. To get future new subscribers scan occasionally same as stated earlier." data-original-title="Scan latest leads"><i class="fa fa-info-circle"></i> </a>
+                  </label>
+                  <select name="lead_limit" class="form-control select2 select2-hidden-accessible" id="scan_limit" style="width:100%;" tabindex="-1" aria-hidden="true">
+<option value="" selected="selected">Scan all subscribers</option>
+<option value="500">500 Subscribers</option>
+<option value="1000">1000 Subscribers</option>
+<option value="2000">2000 Subscribers</option>
+<option value="3000">3000 Subscribers</option>
+<option value="5000">5000 Subscribers</option>
+<option value="10000">10000 Subscribers</option>
+<option value="20000">20000 Subscribers</option>
+<option value="30000">30000 Subscribers</option>
+<option value="50000">50000 Subscribers</option>
+<option value="100000">100000 Subscribers</option>
+</select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-scan_limit-container"><span class="select2-selection__rendered" id="select2-scan_limit-container" title="Scan all subscribers">Scan all subscribers</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                </div>
+
+                <div class="form-group col-12 col-lg-6" id="folder_con">
+                  <label>
+                    Folder                    <a href="#" data-placement="right" data-toggle="popover" data-trigger="focus" title="" data-content="The target folder from which to retrieve conversations." data-original-title="Folder"><i class="fa fa-info-circle"></i> </a>
+                  </label>
+                  <select name="folder" class="form-control select2 select2-hidden-accessible" id="folder" style="width:100%;" tabindex="-1" aria-hidden="true">
+<option value="inbox">Inbox</option>
+<option value="page_done">Done</option>
+<option value="spam">Spam</option>
+<option value="other">Other</option>
+</select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-folder-container"><span class="select2-selection__rendered" id="select2-folder-container" title="Inbox">Inbox</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default  btn-lg" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+        <button type="button" class="btn btn-primary btn-lg" id="start_scanning"><i class="fas fa-check-circle"></i> Start scanning</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="subscriber_info_modal" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fas fa-users"></i> Subscribers</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="section">
+          <h2 class="section-title">Conversation subscribers</h2>
+          <p>Conversation Subscribers are, who have conversation in your page inbox. These users may come from Messenger Bot, Comment Private Reply, Click to Messenger Ads or Send Message CTA Post.  These users are eligible to get Conversation Broadcast message. Even if after getting private reply, users doesn`t reply back will be counted for Conversation Broadcast.</p>
+        </div>
+        <div class="section">
+          <h2 class="section-title">Bot subscribers</h2>
+          <p>Bot subscribers are those users who have given message &amp; get reply from messenger bot after enabling in our system. However you can also migrate conversation subscribers (existing subscribers) to bot subscribers. In this case, bot subscribers are those who have given message to your page. Bot subscribers may less than conversation subscribers for different reason like</p>
+          <ol>
+            <li>The user deactivated their account.</li>
+            <li>The user blocked your page.</li>
+            <li>The user don`t have activity for long days with your page.</li>
+            <li>The user may in conversation subscriber list as got private reply of comment but never reply may not eligible for bot subscriber.</li>
+          </ol>
+        </div>
+        <div class="section">
+          <h2 class="section-title">24h subscribers</h2>
+          <p>Those users who interacted with your messenger bot within 24 hours. This subscribers are eligible to get promotional message through subscriber broadcast.</p>
+        </div>
+        <div class="section">
+          <h2 class="section-title">Unavailable</h2>
+          <p>You may find red color number as unavailable beside both conversation subscribers &amp; bot subscribers means the number of users are unavailable for broadcast, because in last broadcasting campaign, Facebook responded with error during sending message to them. They will not be eligible for future broadcast campaign. However once that user send message to your page again, then user become available again.</p>
+        </div>
+        <div class="section">
+          <h2 class="section-title">Migrated subscribers</h2>
+          <p>Those subscribers are migrated as bot subscribers from conversation subscribers. These are basically all old subscribers achieved before using our system for messenger bot.</p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a class="btn btn-outline-secondary float-right" data-dismiss="modal"><i class="fas fa-times"></i> Close</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+  #page_id {
+    width: 120px;
+  }
+
+  #label_id {
+    width: 100px;
+  }
+
+  .bbw {
+    border-bottom-width: thin !important;
+    border-bottom: solid .5px #f9f9f9 !important;
+    padding-bottom: 20px;
+  }
+
+  @media (max-width: 575.98px) {
+    #page_id {
+      width: 80px;
+    }
+
+    #label_id {
+      width: 80px;
+    }
+  }
+
+  .flex-column .nav-item .nav-link.active {
+    background: #fff !important;
+    color: #3516df !important;
+    border: 1px solid #988be1 !important;
+  }
+
+  .flex-column .nav-item .nav-link .form_id,
+  .flex-column .nav-item .nav-link .insert_date {
+    color: #608683 !important;
+    font-size: 12px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .swal-text {
+    text-align: left !important;
+  }
+
+  @media (max-width: 575.98px) {
+    #add_label {
+      max-width: 100% !important;
+    }
+  }
+</style></div><footer class="main-footer">
+  <div class="footer-left">
+    © DigitalTrChat  <div class="bullet"></div>  <a href="https://digitaltrchat.com/"></a>  </div>
+  <div class="footer-right">
+
+  	    <a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-item has-icon d-inline">  English</a>
+    <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+      <li class="dropdown-title">Switch language</li>
+      <li><a href="" data-id="bengali" class="dropdown-item language_switch ">Bengali</a></li><li><a href="" data-id="german" class="dropdown-item language_switch ">German</a></li><li><a href="" data-id="french" class="dropdown-item language_switch ">French</a></li><li><a href="" data-id="spanish" class="dropdown-item language_switch ">Spanish</a></li><li><a href="" data-id="italian" class="dropdown-item language_switch ">Italian</a></li><li><a href="" data-id="arabic" class="dropdown-item language_switch ">Arabic</a></li><li><a href="" data-id="russian" class="dropdown-item language_switch ">Russian</a></li><li><a href="" data-id="greek" class="dropdown-item language_switch ">Greek</a></li><li><a href="" data-id="turkish" class="dropdown-item language_switch ">Turkish</a></li><li><a href="" data-id="vietnamese" class="dropdown-item language_switch ">Vietnamese</a></li><li><a href="" data-id="portuguese" class="dropdown-item language_switch ">Portuguese</a></li><li><a href="" data-id="dutch" class="dropdown-item language_switch ">Dutch</a></li><li><a href="" data-id="english" class="dropdown-item language_switch ">English</a></li>    </ul>
+
+    <!-- v -->
+  </div>
+
+  
+</footer>
+		</div>
+	  </div>
+	
+
+<link rel="stylesheet" href="https://digitaltrchat.com/assets/css/system/inline.css"><div id="ascrail2000" class="nicescroll-rails nicescroll-rails-vr" style="width: 8px; z-index: 892; cursor: default; position: absolute; top: 0px; left: 57px; height: 1000px; display: block; opacity: 0.714127;"><div class="nicescroll-cursors" style="position: relative; top: 0px; float: right; width: 6px; height: 820px; background-color: rgb(66, 66, 66); border: 1px solid rgb(255, 255, 255); background-clip: padding-box; border-radius: 5px;"></div></div><div id="ascrail2000-hr" class="nicescroll-rails nicescroll-rails-hr" style="height: 8px; z-index: 892; top: 992px; left: 0px; position: absolute; cursor: default; display: none; width: 57px; opacity: 0.716062;"><div class="nicescroll-cursors" style="position: absolute; top: 0px; height: 6px; width: 65px; background-color: rgb(66, 66, 66); border: 1px solid rgb(255, 255, 255); background-clip: padding-box; border-radius: 5px; left: 0px;"></div></div></body></html>
