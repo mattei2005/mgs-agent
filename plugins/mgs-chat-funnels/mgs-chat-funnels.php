@@ -409,7 +409,7 @@ final class MGS_Chat_Funnels {
             return '';
         }
         if ($this->ad_provider($config) === 'm2') {
-            return '<!-- MGS Chat Funnels: MonetizeMore/M2 mode. JBF wrapper disabled; M2 triggers rewarded ads from .pg-rewarded buttons. -->';
+            return '<!-- MGS Chat Funnels: MonetizeMore/M2 mode. Rewarded ads trigger from .pg-rewarded buttons. -->' . "\n" . '<script type="text/javascript" async src="https://c.pubguru.net/pg.wantabrand.js"></script>';
         }
 
         $tags = isset($config['tags']) && is_array($config['tags']) ? array_values($config['tags']) : array();
