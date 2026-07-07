@@ -453,7 +453,9 @@ Manual workflow shown:
    - if `Bot subscriber > 0` or subscriber rows appear after scan → page has leads/subscribers and may need to be added/corrected in Smart Bidding;
    - if `Bot subscriber = 0`, `24h subscriber = 0`, and table remains empty after scan → likely unused/created but not used; report as no-lead/no-subscriber candidate instead of adding blindly.
 
-Automated version should use the same source of truth: per Bot user + account/segurador + page id, read/trigger subscriber scan endpoint where safe, then classify by subscriber count/table rows. Do not infer lead existence from Smart Bidding because the whole point of this tab is pages missing from SB. Detailed reference: `references/dtr-missing-sb-page-lead-scan.md`.
+Automated version should use the same source of truth: per Bot user + account/segurador + page id, read/trigger subscriber scan endpoint where safe, then classify by subscriber count/table rows. Do not infer lead existence from Smart Bidding because the whole point of this tab is pages missing from SB.
+
+Rodolfo correction 2026-07-07 for missing-in-SB audit Sheets: after scanning, update the Sheet result column immediately. In the `Fase 1 - DTR sem SB` tab, **column D** is the scan result/lead count column: write the numeric subscriber/lead count when found, `0` when scan completes OK with no leads, and `PAGE_NOT_FOUND` when the page is not found under the expected DTR account. Do not finish the audit with only local JSON/CSV reports if the Sheet has a result column to be filled. Detailed reference: `references/dtr-missing-sb-page-lead-scan.md`.
 
 ## Runtime Caveats
 
