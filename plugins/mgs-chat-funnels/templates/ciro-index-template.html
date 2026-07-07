@@ -810,17 +810,19 @@
 
           setTimeout(safeCloseQuiz, 1200);
 
-          try {
-            window.jbftag = window.jbftag || { cmd: [] };
-            window.jbftag.cmd.push(() => {
-              if (window.jbftag.showRewardedAds) {
-                window.jbftag.showRewardedAds(safeCloseQuiz);
-              } else {
-                safeCloseQuiz();
-              }
-            });
-          } catch (err) {
-            safeCloseQuiz();
+          if (!rewardedButtonClass) {
+            try {
+              window.jbftag = window.jbftag || { cmd: [] };
+              window.jbftag.cmd.push(() => {
+                if (window.jbftag.showRewardedAds) {
+                  window.jbftag.showRewardedAds(safeCloseQuiz);
+                } else {
+                  safeCloseQuiz();
+                }
+              });
+            } catch (err) {
+              safeCloseQuiz();
+            }
           }
         }
       });
@@ -847,7 +849,7 @@
             <div style="font-size:52px; margin-bottom:10px;">🚗</div>
             <p style="font-size:26px; color:#075e54; margin-bottom:8px; font-weight:700; line-height:1.2;">Oferta encontrada!</p>
             <p style="font-size:16px; color:#333; margin-bottom:25px; font-weight:500;">Um especialista foi identificado para te atender agora.</p>
-            <button id="aq-cta" style="display:block; width:100%; padding:16px 20px; background:#111111; color:white; border:none; border-radius:12px; font-size:15px; font-weight:700; cursor:pointer; font-family:'Roboto',Arial,sans-serif; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition:all 0.3s ease; text-transform:uppercase; letter-spacing:0.5px;">TRANSFERIR PARA ESPECIALISTA →</button>
+            <button id="aq-cta" class="{{REWARDED_BUTTON_CLASS}}" style="display:block; width:100%; padding:16px 20px; background:#111111; color:white; border:none; border-radius:12px; font-size:15px; font-weight:700; cursor:pointer; font-family:'Roboto',Arial,sans-serif; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition:all 0.3s ease; text-transform:uppercase; letter-spacing:0.5px;">TRANSFERIR PARA ESPECIALISTA →</button>
             <br/><br/>
             <small style="color:#444; font-size:13px; font-weight:500;">✅ Análise gratuita e sem compromisso</small>
           </div>
