@@ -12,6 +12,7 @@ metadata:
 
 ## Recent operational references
 
+- `references/sb-messenger-page-delete-cleanup-2026-07-07.md` — Validated cleanup workflow for stale `Accounts > Messenger > Page` rows: backup candidates, validate `LOGIN + PAGE_ID + FB_PAGE_ID + UTM + STATUS=Blocked`, canary, then delete by SB internal `ID` via `DELETE /campaigns/Messenger/{ID}` with live readback. Covers `SB sem Bot/DTR` cleanup, handling transient HTTP 500 retries, and preserving open/pending pages.
 - `references/sheet-2022-vs-sb-restricted-reconciliation-2026-07-07.md` — Sheet column `#2022` vs live SB reconciliation: match by large `FB_PAGE_ID`, count/list missing `RESTRICTED_UNTIL`, generate Excel when read-only, and only apply SB after DTR expiry date extraction/readback or explicit Rodolfo override.
 
 - `references/dtr-sb-phase1-coverage-first-audit-2026-07-06.md` — Rodolfo correction for DTR↔SB audits: Phase 1 is coverage only (`DTR pages → SB match`), reporting pages that exist in DTR but do not exist in SB by global `FB_PAGE_ID` then `PAGE_ID/PG`; do not mix errors, restricted dates, `NOTES`, SB-only rows, or divergence cleanup until later phases.
