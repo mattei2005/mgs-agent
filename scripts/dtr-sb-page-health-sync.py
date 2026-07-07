@@ -344,6 +344,22 @@ def append_note(existing, note_code):
     suffix=' - '.join(missing)
     return (existing + ' - ' + suffix) if existing else suffix, True
 
+DELIVERY_ERROR_NOTE_CODES=['#2022','#10','#100','#551','TOKEN','APP_DELETED','PERMISSION','SEM_COMPLETED']
+
+def strip_note_codes(existing, codes):
+    """Remove transient delivery/restriction codes from SB NOTES.
+
+    Used when DTR proves a page left restriction. Preserve the human prefix
+    (segurador/site/language) and only remove exact code tokens joined by " - ".
+    """
+    text=norm(existing)
+    if not text: return text, False
+    parts=[p.strip() for p in re.split(r'\s+-\s+', text) if p.strip()]
+    remove={c.upper() for c in codes}
+    kept=[p for p in parts if p.upper() not in remove]
+    cleaned=' - '.join(kept)
+    return cleaned, cleaned != text
+
 def active_restricted(row, tday):
     ru=date_only(row.get('RESTRICTED_UNTIL'))
     return bool(ru and ru>=tday)
@@ -644,8 +660,14 @@ async def main():
                             state.setdefault('mixed_2022',{})[str(sb.get('ID'))]={'last_seen':now_iso(),'codes':codes,'restricted_until':cls['restricted_until'],'sb':before,'dtr':rep,'needs_post_expiry_review':True}
                     elif is_restricted_start and status=='SENT':
                         payload['RESTRICTED_UNTIL']=None; action.append('clear_restricted_sent')
+                        cleaned_notes, notes_changed = strip_note_codes(payload.get('NOTES', sb.get('NOTES')), DELIVERY_ERROR_NOTE_CODES)
+                        if notes_changed:
+                            payload['NOTES']=cleaned_notes; action.append('clear_notes_codes')
                     elif is_restricted_start and status not in {'SEM_COMPLETED','NO_CAMPAIGN_DATA_YET'} and not has_2022:
                         payload['RESTRICTED_UNTIL']=None; action.append('clear_restricted_no2022')
+                        cleaned_notes, notes_changed = strip_note_codes(payload.get('NOTES', sb.get('NOTES')), ['#2022'])
+                        if notes_changed:
+                            payload['NOTES']=cleaned_notes; action.append('clear_notes_2022')
                     # Blocked rule: do not restore to Broadcast from public FB URL alone.
                     # A Blocked row may be a dead page OR a fallen segurador/profile
                     # with the page still publicly online. Reactivation requires a

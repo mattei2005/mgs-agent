@@ -565,7 +565,7 @@ final class MGS_Chat_Funnels {
 
         $config['id'] = $id;
         $config['title'] = sanitize_text_field(wp_unslash($_POST['title'] ?? ''));
-        $config['brand'] = sanitize_text_field(wp_unslash($_POST['brand'] ?? 'MGS'));
+        unset($config['brand']);
         $config['vertical'] = sanitize_key(wp_unslash($_POST['vertical'] ?? 'emp'));
         $config['country'] = sanitize_key(wp_unslash($_POST['country'] ?? 'br'));
         $config['language'] = sanitize_text_field(wp_unslash($_POST['language'] ?? 'pt-BR'));
@@ -694,7 +694,6 @@ final class MGS_Chat_Funnels {
         $this->field_text('ID do chat', 'id', $id, 'Ex: EMP-BR-02. Esse nome vira o arquivo de configuração.', $is_new ? '' : 'readonly');
         $this->field_text('Nome interno', 'title', $config['title'] ?? '', 'Aparece no painel e no título da rota.');
         $this->field_text('URL / pasta do chat', 'route', $route, $is_new ? 'Ex: /chat/emp/br2. Defina isso na criação ou duplicação.' : 'Travado para evitar quebrar campanha/link já em tráfego. Para mudar URL, duplique o chat e escolha nova pasta.', $is_new ? '' : 'readonly');
-        $this->field_text('Site', 'brand', $config['brand'] ?? 'MGS', 'Ex: OpenZed, FincFrog, MGS.');
         $this->field_select('Vertical', 'vertical', strtolower($config['vertical'] ?? 'emp'), array(
             'app' => 'APP',
             'car' => 'CAR',
