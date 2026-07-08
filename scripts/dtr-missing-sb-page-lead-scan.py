@@ -73,23 +73,33 @@ def parse_sheet():
     data=urllib.request.urlopen(url,timeout=60).read().decode('utf-8-sig')
     raw=list(csv.reader(io.StringIO(data)))
     rows=[]
-    # First row is a title/header row that also contains the first data row in text.
-    if raw:
-        r=raw[0]
-        try:
-            u=re.search(r'DTR Bot user\s+(\S+@\S+)', r[0]).group(1)
-            segurador=re.search(r'DTR Segurador\s+(.+)$', r[1]).group(1).strip()
-            page=re.search(r'DTR Página\s+(.+)$', r[2]).group(1).strip()
-            pg=re.search(r'DTR PAGE_ID/PG\s+(\d+)', r[4]).group(1)
-            fb=re.search(r'DTR FB_PAGE_ID\s+(\d+)', r[5]).group(1)
-            rows.append({'rownum':1,'bot_user':norm_email(u),'account_name':segurador,'page_name':page,'pg':pg,'fb_page_id':fb,'facebook_url':r[6].replace('Facebook URL ','').strip(),'raw':r})
-        except Exception:
-            pass
-    for idx,r in enumerate(raw[1:], start=2):
-        if len(r)<6: continue
+    # Current tab layout has metadata rows, then header row:
+    # A DTR Bot user, B DTR Segurador, C DTR Página, E STATUS, G DTR PAGE_ID/PG, H DTR FB_PAGE_ID.
+    header_idx=None
+    for idx,r in enumerate(raw):
+        if r and clean(r[0]).lower() == 'dtr bot user':
+            header_idx=idx
+            break
+    data_rows=raw[header_idx+1:] if header_idx is not None else raw
+    base_rownum=(header_idx+2) if header_idx is not None else 1
+    for off,r in enumerate(data_rows):
+        idx=base_rownum+off
+        if len(r)<8: continue
         u=norm_email(r[0])
         if '@' not in u: continue
-        rows.append({'rownum':idx,'bot_user':u,'account_name':clean(r[1]),'page_name':clean(r[2]),'pg':clean(r[4]),'fb_page_id':clean(r[5]),'facebook_url':clean(r[6]) if len(r)>6 else '', 'raw':r})
+        rows.append({
+            'rownum':idx,
+            'bot_user':u,
+            'account_name':clean(r[1]),
+            'page_name':clean(r[2]),
+            'lead_scan_result':clean(r[3]) if len(r)>3 else '',
+            'sheet_status':clean(r[4]) if len(r)>4 else '',
+            'sheet_action':clean(r[5]) if len(r)>5 else '',
+            'pg':clean(r[6]) if len(r)>6 else '',
+            'fb_page_id':clean(r[7]) if len(r)>7 else '',
+            'facebook_url':clean(r[8]) if len(r)>8 else '',
+            'raw':r,
+        })
     # de-dupe by user/account/pg/fb
     out=[]; seen=set()
     for r in rows:
