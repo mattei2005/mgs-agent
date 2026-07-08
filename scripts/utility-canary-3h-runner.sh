@@ -6,7 +6,7 @@ PAUSE_FLAG="${BASE_DIR}/data/utility-canary-loop.paused"
 LOCK_FILE=/tmp/utility-canary-3h-runner.lock
 LOG_FILE="${LOG_DIR}/utility-canary-3h-runner-$(date +%Y%m%d-%H%M%S).log"
 INTERVAL_SECONDS=${INTERVAL_SECONDS:-600}
-MAX_SECONDS=${MAX_SECONDS:-10800}
+MAX_SECONDS=${MAX_SECONDS:-21600}
 
 mkdir -p "$LOG_DIR" "${BASE_DIR}/data"
 exec 9>"$LOCK_FILE"
