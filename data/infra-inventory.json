@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-07T21:29:01-04:00",
+    "updated_at": "2026-07-07T21:36:20-04:00",
     "generated_by": "manual Zeus infra inventory update + infra-discovery base"
   },
   "system_packages": [
@@ -1048,28 +1048,6 @@
       "validation": "Added AdsPower + Meta Graph Explorer/Access Token Debugger token-collection workflow and 18-permission set."
     },
     {
-      "profile": "zeus",
-      "skill": "smartbidding-dashboard-access",
-      "type": "skill",
-      "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
-      "versioned_path": null,
-      "size_bytes": 79964,
-      "sha256": "b5f579bc134e7c8c862f4c1a0fd2eee81bfc9a66c0e65e50efa02a99c4915ff0",
-      "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-07T21:14:09-04:00",
-      "validation": "manual Zeus update; corrected SB status enum: Sheet READY must be posted as API/UI Ready, not uppercase READY",
-      "reference_update": {
-        "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/digitaltrchat-full-segurador-audit-methodology-2026-07-02.md",
-        "sha256": "6249254fc654d9d4a16f554d35bed04a1ef69c8be512dff58fce0ebf8033a50e",
-        "size_bytes": 4489,
-        "updated_at": "2026-07-03T21:37:59-04:00"
-      },
-      "source_report": "REPORT-INFRA Zeus SB page registration status enum correction 2026-07-07",
-      "agent": "zeus",
-      "purpose": "SmartBidding/DTR operational skill updated with Column E global ignore and gid 907 registration payload rule.",
-      "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md"
-    },
-    {
       "id": "zeus-soul-sb-cadastro-intent-routing-20260707",
       "agent": "zeus",
       "type": "profile_soul",
@@ -1081,6 +1059,17 @@
       "validation": "Rule inserted in SOUL.md under Gestão de autorizações; SB registration for Bruna Babdinto validated by live /campaigns/Messenger readback.",
       "updated_at": "2026-07-07T21:29:01-04:00",
       "source_report": "REPORT-INFRA Zeus SB cadastro intent correction 2026-07-07"
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
+      "size_bytes": 82129,
+      "modified_at": "2026-07-07T21:36:05-04:00",
+      "sha256": "11bf618994e4aee6ff17135978cad1d13902206be43c45c46613dd417ebaa99d",
+      "owner": "Zeus/Ops",
+      "type": "skill",
+      "description": "Updated SB Messenger Page create workflow: map Sheet labels to SB enum codes (US/CC/FACEBOOK/Ready) and copy BROADCAST_TIME; validate dropdown-readable readback.",
+      "updated_at": "2026-07-07T21:36:20-04:00",
+      "source_report": "REPORT-INFRA Zeus SB page create enum/dropdown correction 2026-07-07"
     }
   ],
   "systemd_services": [
