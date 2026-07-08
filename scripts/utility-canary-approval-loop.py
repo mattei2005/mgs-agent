@@ -144,9 +144,13 @@ def upsert_bank(bank, template, msg, color, status, vertical):
     if len(rec['seen_in']) > 50: rec['seen_in'] = rec['seen_in'][-50:]
     return h, rec
 
-def approved_candidate(bank, vertical, used_hashes):
+def approved_candidate(bank, vertical, used_hashes, used_visible_texts=None):
+    used_visible_texts = used_visible_texts or set()
     for h, rec in bank.get('records', {}).items():
-        if h in used_hashes: continue
+        if h in used_hashes:
+            continue
+        if norm_text(rec.get('text') or '') in used_visible_texts:
+            continue
         if rec.get('vertical') == vertical and rec.get('status') == 'approved' and rec.get('text') and rec.get('cta_1'):
             return rec
     return None
