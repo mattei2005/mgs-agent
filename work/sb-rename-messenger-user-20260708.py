@@ -51,7 +51,7 @@ async def main():
    print(json.dumps({'status':'already_ok','backup':str(bp),'before':pub_user(before)},ensure_ascii=False,indent=2)); return
   payload=dict(before); payload['LOGIN']=CORRECT
   # keep only observed user columns; POST is the dashboard's upsert route for account subresources.
-  allowed=['ID','ACCOUNT_ID','LOGIN','NAME','PUBLISHER_ID','COMPANY','URL','ID_1','ACTIVE']
+  allowed=['ID','ACCOUNT_ID','PUBLISHER_ID','NAME','LOGIN']
   payload={k:payload.get(k) for k in allowed if k in payload}
   attempts=[]
   for method,url in [('POST',API+'/users/Messenger'),('PUT',API+'/users/Messenger')]:
