@@ -728,8 +728,10 @@
       "sha256": "d45f4d7ab0be8a870356ea3e5a14960ee617c50b11140f48518703268c66243a",
       "purpose": "Bulk register/audit Smart Bidding Messenger Page rows from Google Sheet gid=907050576 with enums and 08:00 schedule.",
       "validation": "Applied/audited sheet: 112/114 rows present and valid; 2 rows blocked/missing for explicit report.",
-      "updated_at": "2026-07-07T22:10:43-04:00",
-      "source_report": "REPORT-INFRA Zeus SB bulk page registration 2026-07-07"
+      "updated_at": "2026-07-08T00:03:27-04:00",
+      "source_report": "REPORT-INFRA Zeus SB bulk page registration 2026-07-07",
+      "owner": "zeus",
+      "notes": "SB/DTR page-registration audit tooling; threshold adjusted for post-cleanup SB row baseline and Sheet 907050576 validation."
     },
     {
       "id": "sb-audit-sheet-907050576-20260707",
@@ -741,8 +743,19 @@
       "sha256": "1410c9fa0490f84a9d47a15238a344faa3afd3db6475b6a5b3198af7282bcf49",
       "purpose": "Bulk register/audit Smart Bidding Messenger Page rows from Google Sheet gid=907050576 with enums and 08:00 schedule.",
       "validation": "Applied/audited sheet: 112/114 rows present and valid; 2 rows blocked/missing for explicit report.",
-      "updated_at": "2026-07-07T22:10:43-04:00",
-      "source_report": "REPORT-INFRA Zeus SB bulk page registration 2026-07-07"
+      "updated_at": "2026-07-08T00:03:27-04:00",
+      "source_report": "REPORT-INFRA Zeus SB bulk page registration 2026-07-07",
+      "owner": "zeus",
+      "notes": "SB/DTR page-registration audit tooling; threshold adjusted for post-cleanup SB row baseline and Sheet 907050576 validation."
+    },
+    {
+      "path": "/root/mgs-agent/work/dtr-sb-id-audit-20260705.py",
+      "type": "work-script",
+      "owner": "zeus",
+      "sha256": "f1d24b567e1ad573140d1ae66d10b0a845aef1ee2545b8801d444bc924074184",
+      "size_bytes": 15212,
+      "updated_at": "2026-07-08T00:03:27-04:00",
+      "notes": "SB/DTR page-registration audit tooling; threshold adjusted for post-cleanup SB row baseline and Sheet 907050576 validation."
     }
   ],
   "profile_skill_references": [
