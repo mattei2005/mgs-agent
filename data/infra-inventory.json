@@ -756,6 +756,42 @@
       "size_bytes": 15212,
       "updated_at": "2026-07-08T00:03:27-04:00",
       "notes": "SB/DTR page-registration audit tooling; threshold adjusted for post-cleanup SB row baseline and Sheet 907050576 validation."
+    },
+    {
+      "path": "/root/mgs-agent/scripts/utility-canary-approval-loop.sh",
+      "owner": "zeus",
+      "type": "script",
+      "sha256": "a847ecd35ae6d4ab6ef4936deda04bc6d6853188357400ac7e6b75396f3850ff",
+      "size_bytes": 400,
+      "updated_at": "2026-07-08T00:11:35-04:00",
+      "notes": "Emergency Utility canary duplicate-message fix/pause after Rodolfo correction 2026-07-08."
+    },
+    {
+      "path": "/root/mgs-agent/scripts/utility-canary-approval-loop.py",
+      "owner": "zeus",
+      "type": "script",
+      "sha256": "f2bc49d9f897d0cdefdf81084ebf8d4a09e1ab683fa854d6693259be6ef05a9e",
+      "size_bytes": 18785,
+      "updated_at": "2026-07-08T00:11:35-04:00",
+      "notes": "Emergency Utility canary duplicate-message fix/pause after Rodolfo correction 2026-07-08."
+    },
+    {
+      "path": "/root/mgs-agent/work/fix-utility-canary-duplicates-20260708.py",
+      "owner": "zeus",
+      "type": "script",
+      "sha256": "92b1ac95250ec9c7f02ad39291f2c8f81e7e801463690cdeb43a3c2ca93e9163",
+      "size_bytes": 20092,
+      "updated_at": "2026-07-08T00:11:35-04:00",
+      "notes": "Emergency Utility canary duplicate-message fix/pause after Rodolfo correction 2026-07-08."
+    },
+    {
+      "path": "/root/mgs-agent/data/utility-canary-loop.paused",
+      "owner": "zeus",
+      "type": "data",
+      "sha256": "a4068e3817bd242a8acb7ec66bcda0b7689c79014697d93a7b2a3faf16f44821",
+      "size_bytes": 156,
+      "updated_at": "2026-07-08T00:11:35-04:00",
+      "notes": "Emergency Utility canary duplicate-message fix/pause after Rodolfo correction 2026-07-08."
     }
   ],
   "profile_skill_references": [
@@ -1111,6 +1147,16 @@
       "source_report": "REPORT-INFRA Zeus SB bulk page registration 2026-07-07",
       "skill": "smartbidding-dashboard-access",
       "notes": "Added LOGIN fallback requirement for final DTR↔SB audits after freshly-created SB rows exposed USER_LOGIN null."
+    },
+    {
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-utility-template-approval/SKILL.md",
+      "skill": "meta-utility-template-approval",
+      "owner": "zeus",
+      "type": "skill",
+      "sha256": "0ed7ec10912ad774555678a633c1180e1682b61ee32a3bde701a4516756d464c",
+      "size_bytes": 50942,
+      "updated_at": "2026-07-08T00:11:35-04:00",
+      "notes": "Added visible-TEXT duplicate guard for Utility canary/replacement loops."
     }
   ],
   "systemd_services": [
