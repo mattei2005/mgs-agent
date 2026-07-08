@@ -238,6 +238,9 @@
       pgBanner.appendChild(pgSlot);
       this.chatBox.appendChild(pgBanner);
       this.scrollBottom();
+      if (window.onInfinitePostLoaded) {
+        window.onInfinitePostLoaded();
+      }
       this.keepPinnedToBottom(4500);
       if (window.ResizeObserver) {
         var pgResizeObserver = new ResizeObserver(this.keepPinnedToBottom.bind(this, 1000));
