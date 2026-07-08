@@ -333,12 +333,17 @@ def build_report(input_path: Path, out_dir: Path, fincgriffin_gb_to_us_g006: boo
         if rows:
             date_ranges[sheet] = [min(r['Data'] for r in rows), max(r['Data'] for r in rows), len(rows)]
 
+    inferred_single_date = None
+    known_dates = sorted({d for rng in date_ranges.values() for d in rng[:2] if isinstance(d, str) and d})
+    if len(known_dates) == 1:
+        inferred_single_date = known_dates[0]
+
     for sheet in tabs.get('fb', []):
         df = pd.read_excel(input_path, sheet_name=sheet)
         c_acc, c_day, c_spend = find_col(df, ['Account name']), find_col(df, ['Day']), find_col(df, ['Amount spent'])
         dates = []
         for _, r in df.iterrows():
-            d = norm_date(r.get(c_day))
+            d = norm_date(r.get(c_day)) if c_day else (inferred_single_date or '')
             if not d:
                 continue
             dates.append(d)
