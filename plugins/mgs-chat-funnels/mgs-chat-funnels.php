@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MGS Chat Funnels
  * Description: Config-driven WhatsApp-style chat funnels by vertical and country (EMP-BR, CC-BR, CAR-BR) with rewarded/interstitial gate, UTM passthrough, cards/sequential offers, and shortcode/route rendering.
- * Version: 0.3.11
+ * Version: 0.3.12
  * Author: MGS Digital Corp
  */
 
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 }
 
 final class MGS_Chat_Funnels {
-    const VERSION = '0.3.11';
+    const VERSION = '0.3.12';
     const SHORTCODE = 'mgs_chat_funnel';
     const MENU_SLUG = 'mgs-chat-funnels';
 
@@ -772,7 +772,7 @@ final class MGS_Chat_Funnels {
         if ($this->ad_provider($preview_config) === 'm2') {
             $wrapper_preview = 'https://c.pubguru.net/pg.wantabrand.js';
             $wrapper_label = 'Script M2/PubGuru carregado:';
-            $wrapper_help = 'No Wantabrand/M2, o trigger é a classe pg-rewarded e o script PubGuru escuta essa classe.';
+            $wrapper_help = 'No Wantabrand/M2, o trigger é a classe pg-rewarded e o bloco inline usa <pubguru data-pg-ad="wantabrand_mob_top">.';
         } else {
             $wrapper_preview = $this->ad_wrapper_url($preview_config);
             $wrapper_label = 'Wrapper carregado:';

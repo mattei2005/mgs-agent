@@ -625,6 +625,30 @@
 
       function showAd() {
         const chatBox = document.getElementById("chat-box");
+        if (rewardedButtonClass) {
+          const adBanner = document.createElement("div");
+          adBanner.classList.add("pubguru-chat-ad", "pubguru-chat-ad-top");
+          const adSlot = document.createElement("pubguru");
+          adSlot.setAttribute("data-pg-ad", "wantabrand_mob_top");
+          adBanner.appendChild(adSlot);
+          chatBox.appendChild(adBanner);
+          scrollChatToBottom();
+          keepChatPinnedToBottom(4500);
+
+          if (window.ResizeObserver) {
+            const resizeObserver = new ResizeObserver(() => keepChatPinnedToBottom(1000));
+            resizeObserver.observe(adBanner);
+            setTimeout(() => resizeObserver.disconnect(), 6000);
+          }
+
+          if (window.MutationObserver) {
+            const mutationObserver = new MutationObserver(() => keepChatPinnedToBottom(1000));
+            mutationObserver.observe(adBanner, { attributes: true, childList: true, subtree: true });
+            setTimeout(() => mutationObserver.disconnect(), 6000);
+          }
+          return;
+        }
+
         const adBanner = document.createElement("div");
         adBanner.innerHTML = `<div></div>`;
         adBanner.classList.add("ad-unit");

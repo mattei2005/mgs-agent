@@ -231,6 +231,27 @@
   };
 
   ChatFunnel.prototype.showInlineAd = function () {
+    if (adProvider(this.config) === 'm2') {
+      var pgBanner = el('div', 'pubguru-chat-ad pubguru-chat-ad-top');
+      var pgSlot = document.createElement('pubguru');
+      pgSlot.setAttribute('data-pg-ad', 'wantabrand_mob_top');
+      pgBanner.appendChild(pgSlot);
+      this.chatBox.appendChild(pgBanner);
+      this.scrollBottom();
+      this.keepPinnedToBottom(4500);
+      if (window.ResizeObserver) {
+        var pgResizeObserver = new ResizeObserver(this.keepPinnedToBottom.bind(this, 1000));
+        pgResizeObserver.observe(pgBanner);
+        setTimeout(function () { pgResizeObserver.disconnect(); }, 6000);
+      }
+      if (window.MutationObserver) {
+        var pgMutationObserver = new MutationObserver(this.keepPinnedToBottom.bind(this, 1000));
+        pgMutationObserver.observe(pgBanner, { attributes: true, childList: true, subtree: true });
+        setTimeout(function () { pgMutationObserver.disconnect(); }, 6000);
+      }
+      return;
+    }
+
     var adBanner = el('div', 'ad-unit ad');
     adBanner.dataset.position = 'top';
     adBanner.appendChild(el('div'));
