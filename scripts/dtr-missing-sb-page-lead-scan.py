@@ -20,6 +20,7 @@ DTR_BASE='https://digitaltrchat.com'
 NY=ZoneInfo('America/New_York')
 STATE=BASE/'data/dtr-missing-sb-page-lead-scan-state.json'
 OUTDIR=BASE/'reports/dtr-missing-sb-page-lead-scan'
+IGNORE_LIST=BASE/'data/mgs-global-page-ignore-list.json'
 
 spec=importlib.util.spec_from_file_location('health', BASE/'scripts/dtr-sb-page-health-sync.py')
 health=importlib.util.module_from_spec(spec); spec.loader.exec_module(health)
