@@ -226,6 +226,12 @@ async def main():
                         rec2.setdefault('usage', []).append({'template':name,'message_id':mid,'installed_at':now(),'mode':'canary_loop_replacement'})
                         replaced.append(mid); approval_needed = True
                     new_msgs.append(m2)
+                visible_text_keys = [norm_text(m.get('TEXT') or '') for m in new_msgs]
+                if len(visible_text_keys) != len(set(visible_text_keys)):
+                    errors.append(f'{name}: duplicate_text_guard_blocked_post')
+                    summary.append({'template':name,'before':dict(counts_before),'replaced':0,'approval_run':False,'blocked':'duplicate_text_guard'})
+                    all_green = False
+                    continue
                 if replaced:
                     rollout.save_json(backup_dir/(rollout.safe_name(name)+'-before.json'), row)
                     payload=dict(row); payload['MESSAGES']=json.dumps(new_msgs,ensure_ascii=False,separators=(',',':'))
