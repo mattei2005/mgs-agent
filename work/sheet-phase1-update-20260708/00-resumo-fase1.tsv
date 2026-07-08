@@ -1,0 +1,22 @@
+Fase 1 final — conferência DTR x SmartBidding
+Atualizado em	2026-07-08T00:02:35-04:00
+Fonte	/root/mgs-agent/reports/dtr-sb-id-audit-all-1p-fixed-login-20260708-000235.json
+
+Código técnico	Legenda humana	Valor
+dtr_users	Usuários DTR lidos	88/88
+dtr_accounts	Seguradores DTR lidos	226
+dtr_pages	Páginas DTR lidas	2911
+sb_publishers	Publishers SB	56
+sb_rows_live	Rows SB live	2885
+ok_matches	Matches OK	2874
+id_utm_divergente	PAGE_ID / FB_PAGE_ID / UTM divergente	0
+dtr_sem_sb	DTR sem SB ainda	36
+login_divergente	Login divergente	1
+sb_sem_dtr	SB sem DTR	10
+
+Leitura executiva
+Bloco da aba de cadastro que você mandou	Resolvido
+Sistema global	Ainda não 100% zerado
+Pendência 1	36 páginas existem no DTR e ainda não têm cadastro correspondente na SB
+Pendência 2	10 rows existem na SB, não aparecem no DTR e continuam para revisão
+Pendência 3	1 caso de login divergente
