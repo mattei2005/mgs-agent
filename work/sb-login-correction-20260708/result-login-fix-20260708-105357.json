@@ -1,0 +1,99 @@
+{
+  "status": "updated",
+  "http_status": 201,
+  "backup": "/root/mgs-agent/work/sb-login-correction-20260708/backup-before-login-fix-20260708-105357.json",
+  "target": {
+    "sb_id": "01b78b7d-ad85-73a8-9ca5-a91b8799d2da",
+    "correct_login": "disparosconectaportal@gmail.com",
+    "wrong_login": "disparosconecta@gmail.com",
+    "page_name": "Graciela Scarlatto",
+    "page_id": "22228",
+    "fb_page_id": "202364442950515",
+    "utm": "pg_22228"
+  },
+  "correct_messenger_user_id": "01b78b7d-ec6e-7198-1ce1-8d50704d4973",
+  "before": {
+    "ID": "01b78b7d-ad85-73a8-9ca5-a91b8799d2da",
+    "LOGIN": "disparosconecta@gmail.com",
+    "USER_LOGIN": null,
+    "MESSENGER_USER_ID": "01b78b7d-ec6e-7198-1ce1-8d50704d4973",
+    "PROFILE_NAME": null,
+    "PAGE_NAME": "Graciela Scarlatto",
+    "PAGE_ID": "22228",
+    "FB_PAGE_ID": "202364442950515",
+    "UTM_CAMPAIGN": "pg_22228",
+    "STATUS": "On-hold",
+    "RESTRICTED_UNTIL": null,
+    "COMPANY": "digital-trust",
+    "BROADCAST_TEMPLATE_NAME": "Financetopfeed - US-CC-ES/ES-ZW-SR - g004-d Joe",
+    "BROADCAST_TIME": [
+      "08:00",
+      "09:00",
+      "11:00",
+      "12:00",
+      "14:00",
+      "16:00",
+      "19:00",
+      "21:00"
+    ],
+    "BROADCAST_CURRENT_MESSAGE_ID": "1921",
+    "BROADCAST_MESSAGE_ID": "-1"
+  },
+  "after_full": {
+    "ID": "01b78b7d-ad85-73a8-9ca5-a91b8799d2da",
+    "LOGIN": "disparosconecta@gmail.com",
+    "USER_LOGIN": null,
+    "MESSENGER_USER_ID": "01b78b7d-ec6e-7198-1ce1-8d50704d4973",
+    "PROFILE_NAME": null,
+    "PAGE_NAME": "Graciela Scarlatto",
+    "PAGE_ID": "22228",
+    "FB_PAGE_ID": "202364442950515",
+    "UTM_CAMPAIGN": "pg_22228",
+    "STATUS": "On-hold",
+    "RESTRICTED_UNTIL": null,
+    "COMPANY": "digital-trust",
+    "BROADCAST_TEMPLATE_NAME": "Financetopfeed - US-CC-ES/ES-ZW-SR - g004-d Joe",
+    "BROADCAST_TIME": [
+      "08:00",
+      "09:00",
+      "11:00",
+      "12:00",
+      "14:00",
+      "16:00",
+      "19:00",
+      "21:00"
+    ],
+    "BROADCAST_CURRENT_MESSAGE_ID": "1921",
+    "BROADCAST_MESSAGE_ID": "-1"
+  },
+  "after_exact": {
+    "ID": "01b78b7d-ad85-73a8-9ca5-a91b8799d2da",
+    "MESSENGER_USER_ID": "01b78b7d-ec6e-7198-1ce1-8d50704d4973",
+    "PAGE_NAME": "Graciela Scarlatto",
+    "PAGE_ID": "22228",
+    "FB_PAGE_ID": "202364442950515",
+    "UTM_CAMPAIGN": "pg_22228",
+    "STATUS": "On-hold",
+    "RESTRICTED_UNTIL": null,
+    "BROADCAST_TIME": [
+      "08:00",
+      "09:00",
+      "11:00",
+      "12:00",
+      "14:00",
+      "16:00",
+      "19:00",
+      "21:00"
+    ],
+    "BROADCAST_CURRENT_MESSAGE_ID": "1921",
+    "BROADCAST_MESSAGE_ID": "-1"
+  },
+  "validation": {
+    "MESSENGER_USER_ID": true,
+    "PAGE_ID": true,
+    "FB_PAGE_ID": true,
+    "PAGE_NAME": true,
+    "UTM": true,
+    "STATUS_preserved": true
+  }
+}
