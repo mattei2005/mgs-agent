@@ -252,10 +252,11 @@ def parse_monetize(input_path: Path, sheet: str) -> list[dict[str, Any]]:
         if a.endswith('.com'):
             current = a.lower()
             continue
-        if current and re.match(r'^\d{4}-\d{2}-\d{2}$', a):
+        d = norm_date(r.iloc[0] if len(r) > 0 else None)
+        if current and d:
             site = normalize_site(current)
             vertical = 'gb-cc-en' if site == 'finance.wantabrand.com' else 'us-cc-es'
-            rows.append({'Data': a, 'Site': site, 'Vertical': vertical, 'Gestor': 'g001-d', 'Receita': parse_money(b), 'Origem': sheet, 'Classificacao': 'monetizemore'})
+            rows.append({'Data': d, 'Site': site, 'Vertical': vertical, 'Gestor': 'g001-d', 'Receita': parse_money(b), 'Origem': sheet, 'Classificacao': 'monetizemore'})
     return rows
 
 

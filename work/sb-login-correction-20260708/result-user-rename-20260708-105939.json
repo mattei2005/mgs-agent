@@ -1,0 +1,38 @@
+{
+  "status": "updated",
+  "backup": "/root/mgs-agent/work/sb-login-correction-20260708/backup-before-user-rename-20260708-105939.json",
+  "attempts": [
+    {
+      "method": "POST",
+      "status": 201,
+      "response": "{\"ID\":\"01b78b7d-ec6e-7198-1ce1-8d50704d4973\",\"ACCOUNT_ID\":\"01924a72-08eb-7bb2-abe3-78e2bf37491f\",\"PUBLISHER_ID\":\"digital-trust_conectageral\",\"NAME\":\"Disparos Conecta US-CC-EN\",\"LOGIN\":\"disparosconectaportal@gmail.com\",\"PASSWORD\":\"disparosconecta100\"}"
+    }
+  ],
+  "before": {
+    "ID": "01b78b7d-ec6e-7198-1ce1-8d50704d4973",
+    "ACCOUNT_ID": "01924a72-08eb-7bb2-abe3-78e2bf37491f",
+    "LOGIN": "disparosconecta@gmail.com",
+    "NAME": "Disparos Conecta US-CC-EN",
+    "PUBLISHER_ID": "digital-trust_conectageral",
+    "COMPANY": "digital-trust",
+    "URL": "https://digitaltrchat.com",
+    "ID_1": "01924a72-08eb-7bb2-abe3-78e2bf37491f",
+    "ACTIVE": true
+  },
+  "after": {
+    "ID": "01b78b7d-ec6e-7198-1ce1-8d50704d4973",
+    "ACCOUNT_ID": "01924a72-08eb-7bb2-abe3-78e2bf37491f",
+    "LOGIN": "disparosconectaportal@gmail.com",
+    "NAME": "Disparos Conecta US-CC-EN",
+    "PUBLISHER_ID": "digital-trust_conectageral",
+    "COMPANY": "digital-trust",
+    "URL": "https://digitaltrchat.com",
+    "ID_1": "01924a72-08eb-7bb2-abe3-78e2bf37491f",
+    "ACTIVE": true
+  },
+  "validation": {
+    "user_id": true,
+    "login": true,
+    "name_preserved": true
+  }
+}
