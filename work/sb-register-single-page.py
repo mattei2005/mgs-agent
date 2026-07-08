@@ -15,9 +15,9 @@ NY=ZoneInfo('America/New_York')
 SHEET_ID='1VNz7l1soafiju0v89H0IfaKJHcgioVjUw6nXyORl9oI'
 GID='907050576'
 TARGET_LOGIN='disparoseggbev@gmail.com'
-TARGET_FB='785366574671025'
-TARGET_PAGE_ID='11877'
-TARGET_PAGE_NAME='Bruna Babdinto'
+TARGET_FB='595435846996573'
+TARGET_PAGE_ID='4932'
+TARGET_PAGE_NAME='Greta Baumann'
 
 def norm(v): return '' if v is None else str(v).strip()
 def low(v): return norm(v).lower()
