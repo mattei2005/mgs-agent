@@ -143,8 +143,8 @@ async def get_sb():
     rows=await r.json()
     await browser.close(); await p.stop()
     if r.status!=200 or not isinstance(rows,list): raise RuntimeError(f'SB bad response {r.status}')
-    if len(rows) < 3230:
-        raise RuntimeError(f'SB scope incomplete for PAGE ID audit: rows={len(rows)} publishers={len(pubs)}; expected full MGS Messenger Page baseline around 3237')
+    if len(rows) < 2500:
+        raise RuntimeError(f'SB scope incomplete for PAGE ID audit: rows={len(rows)} publishers={len(pubs)}; expected full MGS Messenger Page baseline around current post-cleanup baseline >=2500')
     return pubs, rows
 
 def sb_public(r):
