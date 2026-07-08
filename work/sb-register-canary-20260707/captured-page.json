@@ -1,0 +1,156 @@
+[
+  {
+    "url": "https://jbfdigital.us.auth0.com/authorize?client_id=ATDoMPuhKZUDX9UvbJ80OvcIcsbzAbPN&audience=https%3A%2F%2Fapi.jbfdigital.com.br&redirect_uri=https%3A%2F%2Fapp.smartbiddingdigital.com&scope=openid%20profile%20email%20offline_access&response_type=code&response_mode=web_message&state=MlpsY2ZsQVc3YlozNWVCaC5XVkM3dERtR0dYSmZIb015cWp6VXQ5NC1kQg%3D%3D&nonce=cFN1flhrdmV1X0MuZWxYeGdzRTRHTm9pQn5rQkNOLlJ1MkloejNIQWlXUA%3D%3D&code_challenge=ePlSow_c7-5stuIHI6tNU2gHtwyZJ4VL4GPrlREW9Ig&code_challenge_method=S256&prompt=none&auth0Client=eyJuYW1lIjoiYXV0aDAtc3BhLWpzIiwidmVyc2lvbiI6IjEuMjIuNiJ9",
+    "method": "GET",
+    "headers": {
+      "referer": "https://app.smartbiddingdigital.com/",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Linux\""
+    },
+    "post": null
+  },
+  {
+    "url": "https://api.jbfdigital.com.br/user/validate",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Linux\"",
+      "authorization": "[REDACTED]",
+      "referer": "https://app.smartbiddingdigital.com/",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "post": null
+  },
+  {
+    "url": "https://api.jbfdigital.com.br/company",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Linux\"",
+      "authorization": "[REDACTED]",
+      "referer": "https://app.smartbiddingdigital.com/",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "post": null
+  },
+  {
+    "url": "https://api.jbfdigital.com.br/helpdesk/list",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"Linux\"",
+      "authorization": "[REDACTED]",
+      "referer": "https://app.smartbiddingdigital.com/",
+      "sec-ch-ua": "\"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+      "sec-ch-ua-mobile": "?0",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "content-type": "application/json"
+    },
+    "post": "{\"publishers\":[\"digital-trust\",\"digital-trust-2\"],\"status\":[\"Open\"]}"
+  },
+  {
+    "url": "https://api.jbfdigital.com.br/notification",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Linux\"",
+      "authorization": "[REDACTED]",
+      "referer": "https://app.smartbiddingdigital.com/",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "post": null
+  },
+  {
+    "url": "https://api.jbfdigital.com.br/countries/enabled",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Linux\"",
+      "authorization": "[REDACTED]",
+      "referer": "https://app.smartbiddingdigital.com/",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "post": null
+  },
+  {
+    "url": "https://api.jbfdigital.com.br/accounts/Google?companies[]=digital-trust&companies[]=digital-trust-2&source=Google",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Linux\"",
+      "authorization": "[REDACTED]",
+      "referer": "https://app.smartbiddingdigital.com/",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "post": null
+  },
+  {
+    "url": "https://api.jbfdigital.com.br/accounts/Google?companies[]=digital-trust&companies[]=digital-trust-2&source=Google",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Linux\"",
+      "authorization": "[REDACTED]",
+      "referer": "https://app.smartbiddingdigital.com/",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "post": null
+  },
+  {
+    "url": "https://api.jbfdigital.com.br/accounts/Messenger?companies[]=digital-trust&companies[]=digital-trust-2&source=Messenger",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Linux\"",
+      "authorization": "[REDACTED]",
+      "referer": "https://app.smartbiddingdigital.com/",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "post": null
+  },
+  {
+    "url": "https://api.jbfdigital.com.br/campaigns/Messenger?companies[]=digital-trust_autocreditadx&companies[]=digital-trust_boostingecon&companies[]=digital-trust_carcreditad&companies[]=digital-trust_cephyric&companies[]=digital-trust_cliquetfinanzas&companies[]=digital-trust_conectageral&companies[]=digital-trust_conectageralfinanzas&companies[]=digital-trust_creditoparaveiculo&companies[]=digital-trust_ducapes&companies[]=digital-trust_ducapesfinance&companies[]=digital-trust_eggbev&companies[]=digital-trust_eggbevfinanzas&companies[]=digital-trust_escalatepower&companies[]=digital-trust_financeadx&companies[]=digital-trust_financiamentoautoadx&companies[]=digital-trust_fincgriffin&companies[]=digital-trust_gamezonead&companies[]=digital-trust_gamingadx&companies[]=digital-trust_growpowerhub&companies[]=digital-trust_helixenit&companies[]=digital-trust_infinitynexx&companies[]=digital-trust_jobscana&companies[]=digital-trust_lyzmo&companies[]=digital-trust_lyzmofinanzas&companies[]=digital-trust_marevelx&companies[]=digital-trust_mavroa&companies[]=digital-trust_newsoun&companies[]=digital-trust_newsounde&companies[]=digital-trust_newsounfinanzas&companies[]=digital-trust_openzed&companies[]=digital-trust_openzedfinanzas&companies[]=digital-trust_portalrelevante&companies[]=digital-trust_portalrelevantefinanzas&companies[]=digital-trust_spe&companies[]=digital-trust_speempleo&companies[]=digital-trust_topfeed&companies[]=digital-trust_topfeedfinanzas&companies[]=digital-trust_vizioid&companies[]=digital-trust_wavesbeefinanzas&companies[]=digital-trust_xyvlov&companies[]=digital-trust_yolokfx&companies[]=digital-trust_zuoutfinanzas&companies[]=digital-trust_zyclor&companies[]=digital-trust_zytiva&companies[]=digital-trust_zytivafinanzas&source=Messenger",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Linux\"",
+      "authorization": "[REDACTED]",
+      "referer": "https://app.smartbiddingdigital.com/",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "post": null
+  },
+  {
+    "url": "https://api.jbfdigital.com.br/favorites?page=campaign-messenger-list",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Linux\"",
+      "authorization": "[REDACTED]",
+      "referer": "https://app.smartbiddingdigital.com/",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\"",
+      "sec-ch-ua-mobile": "?0"
+    },
+    "post": null
+  }
+]
