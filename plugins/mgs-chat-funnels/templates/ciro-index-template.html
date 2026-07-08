@@ -793,15 +793,8 @@
           updateQuizProgress();
         }
 
-        // Inicia 1 leilão de rewarded no background quando o wrapper JBF está ativo.
-        // Em MonetizeMore/M2, o gatilho é a classe .pg-rewarded no botão; não carregar jbftag.
         if (!rewardedButtonClass) {
-          window.jbftag = window.jbftag || { cmd: [] };
-          window.jbftag.cmd.push(() => {
-            if (window.jbftag.requestRewardAds) {
-              window.jbftag.requestRewardAds();
-            }
-          });
+          {{JBF_REWARDED_PRELOAD_JS}}
         }
       }
 
@@ -838,18 +831,7 @@
           setTimeout(safeCloseQuiz, 1200);
 
           if (!rewardedButtonClass) {
-            try {
-              window.jbftag = window.jbftag || { cmd: [] };
-              window.jbftag.cmd.push(() => {
-                if (window.jbftag.showRewardedAds) {
-                  window.jbftag.showRewardedAds(safeCloseQuiz);
-                } else {
-                  safeCloseQuiz();
-                }
-              });
-            } catch (err) {
-              safeCloseQuiz();
-            }
+            {{JBF_REWARDED_SHOW_JS}}
           }
         }
       });

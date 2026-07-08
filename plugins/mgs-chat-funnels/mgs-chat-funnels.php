@@ -128,6 +128,8 @@ final class MGS_Chat_Funnels {
             '{{OFFER_URLS_JS}}' => $this->js_json($this->offer_urls_from_config($config)),
             '{{GATE_SLIDES_HTML}}' => $this->render_gate_slides_html($config),
             '{{GATE_QUESTION_COUNT_JS}}' => (string) $this->gate_question_count($config),
+            '{{JBF_REWARDED_PRELOAD_JS}}' => $ad_provider === 'm2' ? '' : "window.jbftag = window.jbftag || { cmd: [] };\n          window.jbftag.cmd.push(() => {\n            if (window.jbftag.requestRewardAds) {\n              window.jbftag.requestRewardAds();\n            }\n          });",
+            '{{JBF_REWARDED_SHOW_JS}}' => $ad_provider === 'm2' ? '' : "try {\n              window.jbftag = window.jbftag || { cmd: [] };\n              window.jbftag.cmd.push(() => {\n                if (window.jbftag.showRewardedAds) {\n                  window.jbftag.showRewardedAds(safeCloseQuiz);\n                } else {\n                  safeCloseQuiz();\n                }\n              });\n            } catch (err) {\n              safeCloseQuiz();\n            }",
         );
 
         echo strtr($template, $replacements); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
