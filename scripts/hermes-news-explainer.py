@@ -161,6 +161,7 @@ def main() -> int:
     ap.add_argument('--dry-run', action='store_true', help='Fetch and report candidates without posting')
     args = ap.parse_args()
 
+    print(f'{now_iso()} START hermes-news-explainer dry_run={int(args.dry_run)} init={int(args.init)}')
     token = load_token()
     state = load_state()
     messages = api(token, 'GET', f'/channels/{CHANNEL_ID}/messages?limit=25')
