@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-07T21:14:09-04:00",
+    "updated_at": "2026-07-07T21:29:01-04:00",
     "generated_by": "manual Zeus infra inventory update + infra-discovery base"
   },
   "system_packages": [
@@ -1068,6 +1068,19 @@
       "agent": "zeus",
       "purpose": "SmartBidding/DTR operational skill updated with Column E global ignore and gid 907 registration payload rule.",
       "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md"
+    },
+    {
+      "id": "zeus-soul-sb-cadastro-intent-routing-20260707",
+      "agent": "zeus",
+      "type": "profile_soul",
+      "path": "/root/.hermes/profiles/zeus/SOUL.md",
+      "size_bytes": 46067,
+      "modified_at": "2026-07-07T21:24:01-04:00",
+      "sha256": "c2200c802e973238fc5fea06f798cccd8205b17b51b1ec9eea0f08910520a3ff",
+      "purpose": "Persist Rodolfo correction: \"cadastra essa\" with SB Sheet/page fields means Smart Bidding Messenger Page registration, not user authorization.",
+      "validation": "Rule inserted in SOUL.md under Gestão de autorizações; SB registration for Bruna Babdinto validated by live /campaigns/Messenger readback.",
+      "updated_at": "2026-07-07T21:29:01-04:00",
+      "source_report": "REPORT-INFRA Zeus SB cadastro intent correction 2026-07-07"
     }
   ],
   "systemd_services": [
