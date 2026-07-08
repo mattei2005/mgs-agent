@@ -243,15 +243,25 @@ async def main():
                     if color == 'cinza' and not slot.get('ever_green') and not rec.get('approved_count') and int(slot.get('gray_attempt_count') or 0) >= MAX_GRAY_ATTEMPTS:
                         should_replace = True
                     if should_replace:
-                        cand = approved_candidate(bank, vertical, used)
+                        cand = approved_candidate(bank, vertical, used, used_visible_texts)
                         if cand:
                             text, cta = cand['text'], cand['cta_1']
                         else:
-                            text, cta = generated_copy(vertical, int(slot.get('replacements_done') or 0) + mid + len(used))
+                            text = cta = None
+                            base_idx = int(slot.get('replacements_done') or 0) + mid + len(used)
+                            for attempt_i in range(120):
+                                t, c = generated_copy(vertical, base_idx + attempt_i)
+                                if norm_text(t) not in used_visible_texts:
+                                    text, cta = t, c
+                                    break
+                            if text is None:
+                                errors.append(f'{name}: no_unique_emoji_replacement_available_mid_{mid}')
+                                new_msgs.append(m2)
+                                continue
                         m2['TEXT'] = text; m2['CTA_1'] = cta; m2.pop('CTA 1', None)
                         for k in ['APPROVED','INVALID_FORMAT','REJECTED','ERROR','REJECTED_REASON']:
                             m2.pop(k, None)
-                        new_hash = msg_hash(m2); used.add(new_hash)
+                        new_hash = msg_hash(m2); used.add(new_hash); used_visible_texts.add(norm_text(text))
                         slot.update({'text_cta_hash': new_hash, 'ever_green': False, 'gray_attempt_count': 0, 'replacements_done': int(slot.get('replacements_done') or 0) + 1, 'last_color': 'replaced'})
                         # Record installation usage immediately.
                         rec2 = bank.setdefault('records', {}).setdefault(new_hash, {'text_cta_hash':new_hash,'vertical':vertical,'country':country_lang(vertical)[0],'language':country_lang(vertical)[1],'text':text,'cta_1':cta,'first_seen_at':now(),'last_seen_at':now(),'first_approved_at':None,'last_approved_at':None,'approved_count':0,'rejected_count':0,'gray_count':0,'purple_count':0,'status':'testing','seen_in':[],'usage':[]})
