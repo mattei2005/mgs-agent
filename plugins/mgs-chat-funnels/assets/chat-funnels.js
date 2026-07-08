@@ -238,8 +238,8 @@
       pgBanner.appendChild(pgSlot);
       this.chatBox.appendChild(pgBanner);
       this.scrollBottom();
-      // M2/PubGuru: do not call onInfinitePostLoaded here; it can trigger the
-      // interstitial early. The top block is detected by the PubGuru tag itself.
+      // M2/PubGuru: do not fire the legacy infinite-post hook here; it can
+      // trigger the interstitial early. The top block is detected by the tag.
       this.keepPinnedToBottom(4500);
       if (window.ResizeObserver) {
         var pgResizeObserver = new ResizeObserver(this.keepPinnedToBottom.bind(this, 1000));

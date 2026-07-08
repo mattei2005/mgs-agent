@@ -633,8 +633,8 @@
           adBanner.appendChild(adSlot);
           chatBox.appendChild(adBanner);
           scrollChatToBottom();
-          // M2/PubGuru: do not call onInfinitePostLoaded here; it can trigger the
-          // interstitial early. The top block is detected by the PubGuru tag itself.
+          // M2/PubGuru: do not fire the legacy infinite-post hook here; it can
+          // trigger the interstitial early. The top block is detected by the tag.
           keepChatPinnedToBottom(4500);
 
           if (window.ResizeObserver) {
