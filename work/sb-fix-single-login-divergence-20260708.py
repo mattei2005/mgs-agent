@@ -78,7 +78,7 @@ async def get_exact(ctx,h,sb_id):
 
 async def save_row(ctx,h,row,changes):
     allowed={
-        'ID','MESSENGER_USER_ID','PAGE_ID','FB_PAGE_ID','PAGE_NAME','UTM_CAMPAIGN',
+        'ID','MESSENGER_USER_ID','USER_LOGIN','PAGE_ID','FB_PAGE_ID','PAGE_NAME','UTM_CAMPAIGN',
         'STATUS','SOURCE','VERTICAL','COUNTRY','NOTES','HOLDER1','HOLDER2','ADVERTISER',
         'DATE_START','RESTRICTED_UNTIL','BROADCAST_TEMPLATE_ID','BROADCAST_TIME',
         'BROADCAST_CURRENT_MESSAGE_ID','BROADCAST_MESSAGE_ID'
@@ -123,7 +123,7 @@ async def main():
         if norm(live.get('MESSENGER_USER_ID'))==target_muid and ne(live.get('USER_LOGIN') or live.get('LOGIN'))==TARGET['correct_login']:
             result={'status':'already_ok','backup':str(backup_path),'before':public(live)}
             print(json.dumps(result,ensure_ascii=False,indent=2)); return
-        ok,status,resp,payload=await save_row(ctx,h,exact_before,{'MESSENGER_USER_ID':target_muid})
+        ok,status,resp,payload=await save_row(ctx,h,exact_before,{'MESSENGER_USER_ID':target_muid,'USER_LOGIN':TARGET['correct_login']})
         if not ok: raise RuntimeError(f'POST failed {status}: {resp}')
         await asyncio.sleep(1)
         _,rows2=await fetch_rows(ctx,h)
@@ -133,6 +133,7 @@ async def main():
         # Accept LOGIN as display fallback when USER_LOGIN is null, but require MESSENGER_USER_ID + IDs preserved.
         validation={
           'MESSENGER_USER_ID': norm(after.get('MESSENGER_USER_ID'))==target_muid,
+          'USER_LOGIN': ne(after.get('USER_LOGIN'))==TARGET['correct_login'],
           'PAGE_ID': norm(after.get('PAGE_ID'))==TARGET['page_id'],
           'FB_PAGE_ID': norm(after.get('FB_PAGE_ID'))==TARGET['fb_page_id'],
           'PAGE_NAME': norm(after.get('PAGE_NAME'))==TARGET['page_name'],
