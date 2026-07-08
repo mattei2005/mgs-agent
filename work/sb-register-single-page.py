@@ -161,7 +161,16 @@ def pick_template(pages, templates):
 def status_map(v):
     return 'Ready' if low(v)=='ready' else norm(v)
 
-def build_payload(sheet, messenger_user_id, template_id, template_name):
+def country_map(v):
+    return {'united states':'US','us':'US','usa':'US'}.get(low(v), norm(v))
+
+def vertical_map(v):
+    return {'credit card':'CC','cc':'CC'}.get(low(v), norm(v))
+
+def source_map(v):
+    return {'facebook':'FACEBOOK','fb':'FACEBOOK'}.get(low(v), norm(v))
+
+def build_payload(sheet, messenger_user_id, template_id, template_name, broadcast_time=None):
     login_header='Vou colocar os campos que voce tem que saber para fazer o cadastro na dash da SB PAGE Messenger User'
     return {
         'MESSENGER_USER_ID': messenger_user_id,
@@ -170,13 +179,14 @@ def build_payload(sheet, messenger_user_id, template_id, template_name):
         'PAGE_NAME': norm(sheet.get('Page Name')),
         'UTM_CAMPAIGN': norm(sheet.get('UTM Campaign')),
         'STATUS': status_map(sheet.get('Status')),
-        'SOURCE': norm(sheet.get('Source')),
-        'VERTICAL': norm(sheet.get('Vertical')),
-        'COUNTRY': norm(sheet.get('Country')),
+        'SOURCE': source_map(sheet.get('Source')),
+        'VERTICAL': vertical_map(sheet.get('Vertical')),
+        'COUNTRY': country_map(sheet.get('Country')),
         'NOTES': norm(sheet.get('NOTES')),
         'BROADCAST_TEMPLATE_ID': template_id,
         'BROADCAST_CURRENT_MESSAGE_ID': norm(sheet.get('Current Message ID')),
         'BROADCAST_MESSAGE_ID': norm(sheet.get('Message ID')),
+        'BROADCAST_TIME': broadcast_time or [],
     }
 
 async def post_page(ctx,h,payload):
@@ -202,7 +212,12 @@ async def main():
         templates=await fetch_templates(ctx,h)
         messenger_user_id,user_source,user_source_kind=pick_user(users,pages)
         template_id,template_name,template_source=pick_template(pages,templates)
-        payload=build_payload(sheet,messenger_user_id,template_id,template_name)
+        # Use schedule from existing same-login/template row so Broadcast tab is complete.
+        bt=[]
+        for r in pages:
+            if str(r.get('BROADCAST_TEMPLATE_ID'))==str(template_id) and low(r.get('USER_LOGIN') or r.get('LOGIN'))==TARGET_LOGIN and isinstance(r.get('BROADCAST_TIME'), list) and r.get('BROADCAST_TIME'):
+                bt=r.get('BROADCAST_TIME'); break
+        payload=build_payload(sheet,messenger_user_id,template_id,template_name,bt)
         backup_path=OUTDIR/f'sb-register-page-backup-{TARGET_PAGE_ID}-{stamp}.json'
         backup_path.write_text(json.dumps({'created_at':datetime.now(NY).isoformat(timespec='seconds'),'target':{'login':TARGET_LOGIN,'fb_page_id':TARGET_FB,'page_id':TARGET_PAGE_ID,'page_name':TARGET_PAGE_NAME},'publisher_scope':counts,'existing_same_login_rows':[ {k:r.get(k) for k in ['ID','USER_LOGIN','PAGE_ID','FB_PAGE_ID','PAGE_NAME','STATUS','DOMAIN','BROADCAST_TEMPLATE_ID','BROADCAST_TEMPLATE_NAME','BROADCAST_TIME','BROADCAST_CURRENT_MESSAGE_ID','BROADCAST_MESSAGE_ID']} for r in pages if low(r.get('USER_LOGIN'))==TARGET_LOGIN ],'payload':payload,'user_source':user_source,'user_source_kind':user_source_kind,'template_source':template_source},ensure_ascii=False,indent=2),encoding='utf-8')
         result={'mode':mode,'sheet_row_number':sheet['_sheet_row'],'sheet_row':sheet,'live_rows':len(pages),'publishers':len(pubs),'messenger_user_id':messenger_user_id,'user_source_kind':user_source_kind,'template_id':template_id,'template_name':template_name,'template_source':template_source,'payload':payload,'backup':str(backup_path)}
