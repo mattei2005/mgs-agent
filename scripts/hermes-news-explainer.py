@@ -22,6 +22,8 @@ PROFILE_ENV = pathlib.Path('/root/.hermes/profiles/zeus/.env')
 HERMES_BIN = '/root/.local/bin/hermes'
 USER_AGENT = 'Hermes-Agent (https://github.com/NousResearch/hermes-agent)'
 MAX_MESSAGES_PER_RUN = 5
+API_TIMEOUT_SECONDS = 20
+API_MAX_ATTEMPTS = 3
 
 
 def now_iso() -> str:
@@ -51,9 +53,24 @@ def api(token: str, method: str, path: str, body: dict | None = None):
         },
         data=data,
     )
-    with urllib.request.urlopen(req, timeout=20) as resp:
-        raw = resp.read()
-        return json.loads(raw) if raw else {}
+    last_error: Exception | None = None
+    for attempt in range(1, API_MAX_ATTEMPTS + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=API_TIMEOUT_SECONDS) as resp:
+                raw = resp.read()
+                return json.loads(raw) if raw else {}
+        except urllib.error.HTTPError as e:
+            last_error = e
+            if e.code not in {429, 500, 502, 503, 504} or attempt >= API_MAX_ATTEMPTS:
+                raise
+        except (TimeoutError, urllib.error.URLError, OSError) as e:
+            last_error = e
+            if attempt >= API_MAX_ATTEMPTS:
+                break
+        time.sleep(min(2 * attempt, 6))
+    raise RuntimeError(
+        f'Discord API {method} {path} failed after {API_MAX_ATTEMPTS} attempts: {last_error}'
+    ) from last_error
 
 
 def load_state() -> dict:
@@ -205,4 +222,8 @@ def main() -> int:
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except Exception as e:
+        print(f'{now_iso()} ERROR fatal: {e}', file=sys.stderr)
+        raise SystemExit(1)
