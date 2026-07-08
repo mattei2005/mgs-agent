@@ -96,26 +96,56 @@ def zw_text(s):
 
 def no_dash(s): return s.replace('-', ' ').replace('–',' ').replace('—',' ')
 
-def generated_copy(vertical, idx):
+def copy_family(vertical):
     if 'JOB' in vertical:
-        heads=['📋 ACTUALIZACIÓN DE VACANTE','✅ REVISIÓN DISPONIBLE','🔎 OPCIONES DE TRABAJO','📌 PASO DE SOLICITUD','💬 ESTADO DE POSTULACIÓN','📄 DETALLES ABIERTOS','🔔 PERFIL LABORAL','➡️ CONTINUAR REVISIÓN']
-        bodies=['Hay una actualización disponible para tu solicitud de empleo. Abre la revisión para ver el próximo paso.','Tu perfil laboral tiene una opción lista para revisar. Confirma los datos y continúa desde la página.','Una vacante relacionada con tu perfil está lista para revisión. Abre los detalles para continuar.','El estado de tu postulación necesita una revisión rápida. Consulta la información actualizada.']
-        return zw_text(no_dash(f"{heads[idx%len(heads)]}\n\n{bodies[(idx//len(heads)+idx)%len(bodies)]}")), CTA['JOB_ES'][idx%len(CTA['JOB_ES'])]
+        return 'JOB_ES'
     if 'CAR' in vertical:
-        heads=['🚗 VEHICLE OFFER UPDATE','📋 AUTO REQUEST STATUS','🔎 CAR OPTIONS READY','✅ REVIEW AVAILABLE','📌 CONFIRMATION STEP','🚘 VEHICLE MATCH UPDATE','📄 DETAILS READY','🔔 AUTO PROFILE UPDATE']
-        bodies=['Your vehicle request has a new review step available. Open the update to continue with the options.','An auto offer status check is ready for review. Confirm the details on the next page.','Your profile has vehicle options available to review. Open the update and check the next step.','The car offer flow has a result ready. Review the details before continuing.']
-        return no_dash(f"{heads[idx%len(heads)]}\n\n{bodies[(idx//len(heads)+idx)%len(bodies)]}"), CTA['CAR_EN'][idx%len(CTA['CAR_EN'])]
+        return 'CAR_EN'
     if vertical.endswith('-DE'):
-        heads=['💳 KARTEN UPDATE','📋 ANFRAGE STATUS','🔎 KARTEN OPTIONEN','✅ PRÜFUNG VERFÜGBAR','📌 BESTÄTIGUNG BEREIT','💬 KARTEN ERGEBNIS','📄 PRÜFUNG OFFEN','🔔 PROFIL UPDATE']
-        bodies=['Für deine Kartenanfrage ist ein neuer Prüfschritt verfügbar. Öffne das Update und sieh dir die Optionen an.','Der Status deiner Karte ist zur Prüfung bereit. Bestätige die Angaben auf der nächsten Seite.','Für dein Profil stehen Kartenoptionen zur Prüfung bereit. Öffne die Übersicht für den nächsten Schritt.','Der Kartenempfehlungsprozess hat ein Ergebnis bereit. Prüfe die Details bevor du fortfährst.']
-        return no_dash(f"{heads[idx%len(heads)]}\n\n{bodies[(idx//len(heads)+idx)%len(bodies)]}"), CTA['DE_CC'][idx%len(CTA['DE_CC'])]
+        return 'DE_CC'
     if vertical.endswith('-ES'):
-        heads=['💳 ACTUALIZACIÓN DE TARJETA','📋 ESTADO DE SOLICITUD','🔎 OPCIONES DE TARJETA','✅ REVISIÓN DISPONIBLE','📌 PASO DE CONFIRMACIÓN','💬 RESULTADO DE TARJETA','📄 REVISIÓN ABIERTA','🔔 PERFIL ACTUALIZADO']
-        bodies=['Tu solicitud de tarjeta tiene una nueva revisión disponible. Abre la actualización para continuar con las opciones.','El estado de tu tarjeta está listo para revisar. Confirma los datos en la siguiente pantalla y continúa.','Tu perfil tiene opciones de tarjeta disponibles. Abre la revisión para ver el próximo paso.','El flujo de recomendación de tarjeta tiene un resultado listo. Revisa los detalles antes de continuar.']
-        return zw_text(no_dash(f"{heads[idx%len(heads)]}\n\n{bodies[(idx//len(heads)+idx)%len(bodies)]}")), CTA['ES_CC'][idx%len(CTA['ES_CC'])]
-    heads=['💳 CARD REVIEW UPDATE','📋 CARD REQUEST STATUS','🔎 CARD OPTIONS READY','✅ CARD REVIEW AVAILABLE','📌 APPLICATION STEP READY','💬 CARD MATCH UPDATE','📄 REVIEW STEP OPEN','🔔 CARD PROFILE UPDATE']
-    bodies=['Your card request has a new review step available. Open the update to continue with the available options.','A card status check is ready for review. Use the next screen to confirm the details and continue.','Your credit profile has card options available to review. Open the update and check the next step.','The card recommendation flow has a new result ready. Review the details before continuing.']
-    return no_dash(f"{heads[idx%len(heads)]}\n\n{bodies[(idx//len(heads)+idx)%len(bodies)]}"), CTA['EN_CC'][idx%len(CTA['EN_CC'])]
+        return 'ES_CC'
+    return 'EN_CC'
+
+COPY_VARIATIONS = {
+ 'EN_CC': {
+  'cta': ['🔍 REVIEW CARD','✅ CHECK STATUS','📋 SEE OPTIONS','➡️ CONTINUE','💳 REVIEW UPDATE','🔎 OPEN REVIEW','✅ CONFIRM DETAILS','📌 VIEW RESULT','💳 SEE CARD OPTIONS','🔔 OPEN STATUS','📄 REVIEW PROFILE','🔍 CHECK MATCH'],
+  'heads': ['💳 CARD REVIEW UPDATE','📋 CARD REQUEST STATUS','🔎 CARD OPTIONS READY','✅ CARD REVIEW AVAILABLE','📌 APPLICATION STEP READY','💬 CARD MATCH UPDATE','📄 REVIEW STEP OPEN','🔔 CARD PROFILE UPDATE','💳 CARD OPTION NOTICE','📋 CARD STATUS READY','🔎 PROFILE MATCH READY','✅ CARD CHECK OPEN','📌 REQUEST REVIEW READY','💬 CARD DETAILS AVAILABLE','📄 OPTION CHECK READY','🔔 PROFILE REVIEW UPDATE','💳 CARD SELECTION STEP','📋 STATUS CONFIRMATION','🔎 CARD RESULT NOTICE','✅ REVIEW CONTINUATION'],
+  'bodies': ['Your card request has a review step ready. Open the page to continue with the available options.','A status check is available for your card profile. Review the details before moving forward.','Your card options are ready to compare. Open the update and confirm the next step.','The card recommendation flow has new details available. Check the page to continue.','Your profile review is ready for confirmation. Open the card update to see the result.','A card selection step is available now. Review the page and continue from there.','Your card request moved to the next review point. Open the status page for details.','The card option summary is ready. Confirm the information on the review page.','A new card profile update is available. Check the options and continue safely.','Your card match has an available result. Open the update to review the details.','The request review page is ready. Continue there to confirm your card information.','A card status update is waiting. Open the page and check the available path.']
+ },
+ 'ES_CC': {
+  'cta': ['🔍 REVISAR TARJETA','✅ VER ESTADO','📋 VER OPCIONES','➡️ CONTINUAR','💳 VER ACTUALIZACIÓN','🔎 ABRIR REVISIÓN','✅ CONFIRMAR DATOS','📌 VER RESULTADO','💳 VER OPCIONES','🔔 ABRIR ESTADO','📄 REVISAR PERFIL','🔍 VER COMPATIBILIDAD'],
+  'heads': ['💳 ACTUALIZACIÓN DE TARJETA','📋 ESTADO DE SOLICITUD','🔎 OPCIONES DE TARJETA','✅ REVISIÓN DISPONIBLE','📌 PASO DE CONFIRMACIÓN','💬 RESULTADO DE TARJETA','📄 REVISIÓN ABIERTA','🔔 PERFIL ACTUALIZADO','💳 AVISO DE TARJETA','📋 ESTADO LISTO','🔎 PERFIL COMPATIBLE','✅ CONSULTA ABIERTA','📌 SOLICITUD EN REVISIÓN','💬 DETALLES DISPONIBLES','📄 OPCIONES ABIERTAS','🔔 REVISIÓN DE PERFIL','💳 SELECCIÓN DE TARJETA','📋 CONFIRMACIÓN DE ESTADO','🔎 RESULTADO DISPONIBLE','✅ CONTINUACIÓN DE REVISIÓN'],
+  'bodies': ['Tu solicitud de tarjeta tiene una revisión lista. Abre la página para continuar con las opciones disponibles.','Hay una verificación disponible para tu perfil de tarjeta. Revisa los detalles antes de avanzar.','Tus opciones de tarjeta están listas para comparar. Abre la actualización y confirma el siguiente paso.','El flujo de recomendación de tarjeta tiene nuevos detalles disponibles. Consulta la página para continuar.','La revisión de tu perfil está lista para confirmación. Abre la actualización de tarjeta para ver el resultado.','Hay un paso de selección de tarjeta disponible ahora. Revisa la página y continúa desde ahí.','Tu solicitud de tarjeta pasó al siguiente punto de revisión. Abre la página de estado para ver detalles.','El resumen de opciones de tarjeta está listo. Confirma la información en la página de revisión.','Hay una nueva actualización de perfil de tarjeta disponible. Revisa las opciones y continúa.','Tu compatibilidad de tarjeta tiene un resultado disponible. Abre la actualización para revisar los detalles.','La página de revisión de solicitud está lista. Continúa allí para confirmar la información de tarjeta.','Hay una actualización de estado de tarjeta esperando. Abre la página y revisa el camino disponible.']
+ },
+ 'DE_CC': {
+  'cta': ['🔍 KARTE PRÜFEN','✅ STATUS ANSEHEN','📋 OPTIONEN SEHEN','➡️ WEITER','💳 UPDATE ANSEHEN','🔎 PRÜFUNG ÖFFNEN','✅ DATEN BESTÄTIGEN','📌 ERGEBNIS SEHEN','💳 OPTIONEN ÖFFNEN','🔔 STATUS ÖFFNEN','📄 PROFIL PRÜFEN','🔍 TREFFER ANSEHEN'],
+  'heads': ['💳 KARTEN UPDATE','📋 ANFRAGE STATUS','🔎 KARTEN OPTIONEN','✅ PRÜFUNG VERFÜGBAR','📌 BESTÄTIGUNG BEREIT','💬 KARTEN ERGEBNIS','📄 PRÜFUNG OFFEN','🔔 PROFIL UPDATE','💳 KARTEN HINWEIS','📋 STATUS BEREIT','🔎 PROFIL TREFFER','✅ PRÜFUNG STARTEN','📌 ANFRAGE PRÜFUNG','💬 DETAILS VERFÜGBAR','📄 OPTIONEN OFFEN','🔔 PROFIL PRÜFUNG','💳 KARTENAUSWAHL','📋 STATUS BESTÄTIGUNG','🔎 ERGEBNIS BEREIT','✅ PRÜFUNG FORTSETZEN'],
+  'bodies': ['Deine Kartenanfrage hat einen Prüfschritt bereit. Öffne die Seite und sieh dir die verfügbaren Optionen an.','Für dein Kartenprofil ist eine Statusprüfung verfügbar. Prüfe die Details bevor du fortfährst.','Deine Kartenoptionen sind zum Vergleich bereit. Öffne das Update und bestätige den nächsten Schritt.','Der Kartenempfehlungsprozess hat neue Details verfügbar. Öffne die Seite um weiterzumachen.','Deine Profilprüfung ist zur Bestätigung bereit. Öffne das Karten Update und sieh dir das Ergebnis an.','Ein Schritt zur Kartenauswahl ist jetzt verfügbar. Prüfe die Seite und fahre dort fort.','Deine Kartenanfrage ist beim nächsten Prüfpunkt angekommen. Öffne die Statusseite für Details.','Die Zusammenfassung der Kartenoptionen ist bereit. Bestätige die Angaben auf der Prüfseite.','Ein neues Update für dein Kartenprofil ist verfügbar. Prüfe die Optionen und fahre fort.','Dein Karten Treffer hat ein verfügbares Ergebnis. Öffne das Update und prüfe die Details.','Die Seite zur Anfrageprüfung ist bereit. Fahre dort fort und bestätige deine Kartendaten.','Ein Kartenstatus Update wartet. Öffne die Seite und prüfe den verfügbaren Weg.']
+ },
+ 'JOB_ES': {
+  'cta': ['🔍 VER OFERTA','✅ VER ESTADO','📋 VER OPCIONES','➡️ CONTINUAR','📌 ABRIR ACTUALIZACIÓN','🔎 REVISAR VACANTE','✅ CONFIRMAR DATOS','📄 VER DETALLES','💼 VER PERFIL','🔔 ABRIR ESTADO','📋 REVISAR RESULTADO','➡️ SEGUIR REVISIÓN'],
+  'heads': ['💼 ACTUALIZACIÓN DE VACANTE','📋 REVISIÓN DISPONIBLE','🔎 OPCIONES DE TRABAJO','✅ PASO DE SOLICITUD','📌 ESTADO DE POSTULACIÓN','💬 DETALLES ABIERTOS','📄 PERFIL LABORAL','🔔 CONTINUAR REVISIÓN','💼 AVISO DE EMPLEO','📋 ESTADO LISTO','🔎 PERFIL COMPATIBLE','✅ VACANTE ABIERTA','📌 SOLICITUD EN REVISIÓN','💬 DETALLES DISPONIBLES','📄 OPCIONES ABIERTAS','🔔 REVISIÓN DE PERFIL','💼 PUESTO DISPONIBLE','📋 CONFIRMACIÓN DE DATOS','🔎 RESULTADO LABORAL','✅ SIGUIENTE PASO'],
+  'bodies': ['Tu solicitud de empleo tiene una revisión lista. Abre la página para continuar con las opciones disponibles.','Hay una verificación disponible para tu perfil laboral. Revisa los detalles antes de avanzar.','Tus opciones de trabajo están listas para comparar. Abre la actualización y confirma el siguiente paso.','El flujo de recomendación laboral tiene nuevos detalles disponibles. Consulta la página para continuar.','La revisión de tu perfil está lista para confirmación. Abre la actualización laboral para ver el resultado.','Hay un paso de selección de vacante disponible ahora. Revisa la página y continúa desde ahí.','Tu solicitud pasó al siguiente punto de revisión. Abre la página de estado para ver detalles.','El resumen de opciones laborales está listo. Confirma la información en la página de revisión.','Hay una nueva actualización de perfil laboral disponible. Revisa las opciones y continúa.','Tu compatibilidad con la vacante tiene un resultado disponible. Abre la actualización para revisar los detalles.','La página de revisión de solicitud está lista. Continúa allí para confirmar la información de perfil.','Hay una actualización de estado laboral esperando. Abre la página y revisa el camino disponible.']
+ },
+ 'CAR_EN': {
+  'cta': ['🚗 REVIEW OFFER','✅ CHECK STATUS','📋 SEE OPTIONS','➡️ CONTINUE','🔎 OPEN REVIEW','📌 VIEW DETAILS','✅ CONFIRM DETAILS','🚘 SEE RESULT','🚗 REVIEW VEHICLE','🔔 OPEN STATUS','📄 SEE AUTO OPTIONS','🔍 CHECK MATCH'],
+  'heads': ['🚗 VEHICLE OFFER UPDATE','📋 AUTO REQUEST STATUS','🔎 CAR OPTIONS READY','✅ REVIEW AVAILABLE','📌 CONFIRMATION STEP','🚘 VEHICLE MATCH UPDATE','📄 DETAILS READY','🔔 AUTO PROFILE UPDATE','🚗 OFFER NOTICE','📋 STATUS READY','🔎 PROFILE MATCH READY','✅ VEHICLE CHECK OPEN','📌 AUTO REVIEW READY','🚘 DETAILS AVAILABLE','📄 OPTION CHECK READY','🔔 PROFILE REVIEW UPDATE','🚗 VEHICLE SELECTION STEP','📋 STATUS CONFIRMATION','🔎 AUTO RESULT NOTICE','✅ REVIEW CONTINUATION'],
+  'bodies': ['Your vehicle request has a review step ready. Open the page to continue with the available options.','A status check is available for your auto profile. Review the details before moving forward.','Your vehicle options are ready to compare. Open the update and confirm the next step.','The auto recommendation flow has new details available. Check the page to continue.','Your profile review is ready for confirmation. Open the vehicle update to see the result.','A vehicle selection step is available now. Review the page and continue from there.','Your auto request moved to the next review point. Open the status page for details.','The vehicle option summary is ready. Confirm the information on the review page.','A new auto profile update is available. Check the options and continue safely.','Your vehicle match has an available result. Open the update to review the details.','The request review page is ready. Continue there to confirm your auto information.','An auto status update is waiting. Open the page and check the available path.']
+ }
+}
+
+def generated_copy(vertical, idx):
+    fam = copy_family(vertical)
+    cfg = COPY_VARIATIONS[fam]
+    head = cfg['heads'][idx % len(cfg['heads'])]
+    body = cfg['bodies'][(idx // len(cfg['heads']) + idx) % len(cfg['bodies'])]
+    text = no_dash(f"{head}
+
+{body}")
+    if fam in ('ES_CC', 'JOB_ES'):
+        text = zw_text(text)
+    return text, cfg['cta'][idx % len(cfg['cta'])]
 
 def upsert_bank(bank, template, msg, color, status, vertical):
     country, lang = country_lang(vertical)
