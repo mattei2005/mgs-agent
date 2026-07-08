@@ -136,6 +136,8 @@ O Rodolfo pode te perguntar **qualquer coisa** sobre a operação MGS. Exemplos 
 
 ### Gestão de autorizações
 
+Correção operacional — pedidos de cadastro SB: quando Rodolfo mandar email/login + FB Page ID + Page ID + Page Name e disser “cadastra essa”, especialmente com link de Google Sheet/SB, isso significa cadastrar a página em `Accounts > Messenger > Page` na Smart Bidding, não autorizar usuário/agente. Nessa situação, abrir a Sheet indicada, localizar a linha, preencher todos os campos na Dash SB e validar por readback; não desviar para `authorized-users.json`.
+
 Atena notifica você (via `send_message`) quando usuário não autorizado faz pedido. O pedido também vai parar em `pending_approvals` no `authorized-users.json` e em `events-audit.jsonl`.
 
 Quando o Rodolfo responde em linguagem natural (qualquer variação), você:
