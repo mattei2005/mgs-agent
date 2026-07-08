@@ -43,6 +43,31 @@ def load_state():
     if STATE.exists(): return json.loads(STATE.read_text(encoding='utf-8'))
     return {'version':1,'created_at_et':now(),'updated_at_et':now(),'rows':{},'runs':[]}
 
+def load_ignore_keys():
+    """Return canonical page keys that must never be scanned/added to SB."""
+    if not IGNORE_LIST.exists():
+        return set()
+    try:
+        data=json.loads(IGNORE_LIST.read_text(encoding='utf-8'))
+    except Exception:
+        return set()
+    keys=set()
+    for e in data.get('entries',[]):
+        bot=norm_email(e.get('bot_user'))
+        pg=clean(e.get('page_id_pg'))
+        fb=clean(e.get('fb_page_id'))
+        if bot and pg:
+            keys.add(('bot_pg', bot, pg))
+        if fb:
+            keys.add(('fb', fb))
+    return keys
+
+def is_ignored_row(row, ignore_keys):
+    bot=norm_email(row.get('bot_user'))
+    pg=clean(row.get('pg'))
+    fb=clean(row.get('fb_page_id'))
+    return (bot and pg and ('bot_pg',bot,pg) in ignore_keys) or (fb and ('fb',fb) in ignore_keys)
+
 def parse_sheet():
     url=f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&gid={GID}'
     data=urllib.request.urlopen(url,timeout=60).read().decode('utf-8-sig')
