@@ -1101,14 +1101,16 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
-      "size_bytes": 82192,
+      "size_bytes": 83189,
       "modified_at": "2026-07-07T21:55:15-04:00",
-      "sha256": "1938631ce7316f5e9be0fb9418e2dd1a5b1c88e26f46e3e66fbb834e0f2b1dc2",
+      "sha256": "683d3e90798bcc5d39d7aac8d50cd5679c1f0ec6c7171619b2997a4688802226",
       "owner": "Zeus/Ops",
       "type": "skill",
       "description": "SB Messenger Page creation workflow updated: gid=907050576 uses Scheduled Times 08:00 only; validate enums and readback.",
-      "updated_at": "2026-07-07T22:10:43-04:00",
-      "source_report": "REPORT-INFRA Zeus SB bulk page registration 2026-07-07"
+      "updated_at": "2026-07-08T00:03:49-04:00",
+      "source_report": "REPORT-INFRA Zeus SB bulk page registration 2026-07-07",
+      "skill": "smartbidding-dashboard-access",
+      "notes": "Added LOGIN fallback requirement for final DTR↔SB audits after freshly-created SB rows exposed USER_LOGIN null."
     }
   ],
   "systemd_services": [
