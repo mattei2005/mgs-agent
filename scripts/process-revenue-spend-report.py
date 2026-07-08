@@ -313,7 +313,10 @@ def build_report(input_path: Path, out_dir: Path, fincgriffin_gb_to_us_g006: boo
         c_date, c_place, c_rev, c_med = find_col(df, ['Date']), find_col(df, ['Placement']), find_col(df, ['Ad Exchange revenue']), find_col(df, ['utm_medium'])
         dates = []
         for _, r in df.iterrows():
-            d = norm_date(r.get(c_date)); dates.append(d)
+            d = norm_date(r.get(c_date))
+            if not d:
+                continue
+            dates.append(d)
             site, vertical, forced_gestor, flag = placement_to_site_vertical(r.get(c_place), fincgriffin_gb_to_us_g006=fincgriffin_gb_to_us_g006)
             rev = parse_money(r.get(c_rev)); raw_rev[sheet] += rev
             if flag:
@@ -334,7 +337,10 @@ def build_report(input_path: Path, out_dir: Path, fincgriffin_gb_to_us_g006: boo
         c_acc, c_day, c_spend = find_col(df, ['Account name']), find_col(df, ['Day']), find_col(df, ['Amount spent'])
         dates = []
         for _, r in df.iterrows():
-            d = norm_date(r.get(c_day)); dates.append(d)
+            d = norm_date(r.get(c_day))
+            if not d:
+                continue
+            dates.append(d)
             site, vertical, gestor = parse_fb_account(r.get(c_acc))
             val = parse_money(r.get(c_spend)); raw_spend[sheet] += val
             spend.append({'Data': d, 'Site': site, 'Vertical': vertical, 'Gestor': gestor, 'Conta_FB': clean_str(r.get(c_acc)), 'Gasto': val})
