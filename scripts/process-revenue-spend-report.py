@@ -88,7 +88,10 @@ def clean_str(v: Any) -> str:
 def norm_date(v: Any) -> str:
     if pd.isna(v):
         return ''
-    return pd.to_datetime(v).date().isoformat()
+    try:
+        return pd.to_datetime(v).date().isoformat()
+    except Exception:
+        return ''
 
 
 def find_col(df: pd.DataFrame, candidates: list[str]) -> str | None:
@@ -289,7 +292,10 @@ def build_report(input_path: Path, out_dir: Path, fincgriffin_gb_to_us_g006: boo
         c_pg, c_term, c_cont, c_med = find_col(df, ['utm_campaign']), find_col(df, ['utm_term']), find_col(df, ['utm_content']), find_col(df, ['utm_medium'])
         dates = []
         for _, r in df.iterrows():
-            d = norm_date(r.get(c_date)); dates.append(d)
+            d = norm_date(r.get(c_date))
+            if not d:
+                continue
+            dates.append(d)
             site = normalize_site(r.get(c_site)); pg = clean_str(r.get(c_pg)); rev = parse_money(r.get(c_rev)); raw_rev[sheet] += rev
             term_c = country_from_term(r.get(c_term)); cont_c = country_from_content(r.get(c_cont)); page_c = pgmap.get((site, pg)) if pg and pg != '-' else None
             country = pick(term_c, cont_c, page_c)
