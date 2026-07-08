@@ -140,9 +140,7 @@ def generated_copy(vertical, idx):
     cfg = COPY_VARIATIONS[fam]
     head = cfg['heads'][idx % len(cfg['heads'])]
     body = cfg['bodies'][(idx // len(cfg['heads']) + idx) % len(cfg['bodies'])]
-    text = no_dash(f"{head}
-
-{body}")
+    text = no_dash(f"{head}\n\n{body}")
     if fam in ('ES_CC', 'JOB_ES'):
         text = zw_text(text)
     return text, cfg['cta'][idx % len(cfg['cta'])]
@@ -216,7 +214,7 @@ async def main():
                 vertical = parse_vertical(name)
                 msgs = sorted(rollout.parse_messages(row), key=lambda m:int(m.get('MESSAGE_ID') or 0))
                 counts_before = Counter(rollout.status_color(rollout.status_of(m)) for m in msgs)
-                new_msgs=[]; replaced=[]; used={msg_hash(m) for m in msgs}; approval_needed=False
+                new_msgs=[]; replaced=[]; used={msg_hash(m) for m in msgs}; used_visible_texts={norm_text(m.get('TEXT') or '') for m in msgs}; approval_needed=False
                 for m in msgs:
                     mid = int(m.get('MESSAGE_ID') or 0)
                     status = rollout.status_of(m)
