@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-07T20:50:04-04:00",
+    "updated_at": "2026-07-07T21:01:29-04:00",
     "generated_by": "manual Zeus infra inventory update + infra-discovery base"
   },
   "system_packages": [
@@ -1053,18 +1053,18 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 78543,
-      "sha256": "5e0e05fe2312e291820c08b8c8272031b87b6903b71ed2338ea98ae9b17f6ecb",
+      "size_bytes": 79650,
+      "sha256": "75d96c702c68e106b35ddf656fd6dd646069b2066ba66f2499dee919a8e9be81",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-07T20:50:04-04:00",
-      "validation": "manual Zeus update; DTR Subscriber Manager scan workflow/4-minute timeout documented from Rodolfo video/instruction",
+      "updated_at": "2026-07-07T21:01:29-04:00",
+      "validation": "manual Zeus update; SB Messenger Page create workflow documented from Rodolfo video + canary readback",
       "reference_update": {
         "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/digitaltrchat-full-segurador-audit-methodology-2026-07-02.md",
         "sha256": "6249254fc654d9d4a16f554d35bed04a1ef69c8be512dff58fce0ebf8033a50e",
         "size_bytes": 4489,
         "updated_at": "2026-07-03T21:37:59-04:00"
       },
-      "source_report": "REPORT-INFRA Zeus global page ignore list 2026-07-07",
+      "source_report": "REPORT-INFRA Zeus SB page registration canary 2026-07-07",
       "agent": "zeus",
       "purpose": "SmartBidding/DTR operational skill updated with Column E global ignore and gid 907 registration payload rule.",
       "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md"
