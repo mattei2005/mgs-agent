@@ -770,10 +770,10 @@
       "path": "/root/mgs-agent/scripts/utility-canary-approval-loop.py",
       "owner": "zeus",
       "type": "script",
-      "sha256": "596157e8952219ff72e873c4e211d0631c1b096fce967a7666c359296044e131",
-      "size_bytes": 18963,
-      "updated_at": "2026-07-08T00:16:33-04:00",
-      "notes": "Utility canary safe 3h runner with visible-TEXT duplicate guard and early-stop on all green."
+      "sha256": "d90073edf4b687c4e6864dda94d1162c2e7baea0816bc977b49b6ab3fe91747b",
+      "size_bytes": 26155,
+      "updated_at": "2026-07-08T00:42:08-04:00",
+      "notes": "Utility canary loop now generates contextual emoji copy variations and avoids visible-TEXT duplicates when replacing messages."
     },
     {
       "path": "/root/mgs-agent/work/fix-utility-canary-duplicates-20260708.py",
@@ -1162,10 +1162,10 @@
       "skill": "meta-utility-template-approval",
       "owner": "zeus",
       "type": "skill",
-      "sha256": "0ed7ec10912ad774555678a633c1180e1682b61ee32a3bde701a4516756d464c",
-      "size_bytes": 50942,
-      "updated_at": "2026-07-08T00:11:35-04:00",
-      "notes": "Added visible-TEXT duplicate guard for Utility canary/replacement loops."
+      "sha256": "07f10d9df227a77bf8c0c84398202098ccc6afd79fe10363622c4358a3e40ab5",
+      "size_bytes": 51201,
+      "updated_at": "2026-07-08T00:42:08-04:00",
+      "notes": "Documented Utility replacement requirement: contextual emojis + varied copy + no repeated visible TEXT."
     }
   ],
   "systemd_services": [
