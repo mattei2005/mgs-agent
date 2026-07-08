@@ -1,7 +1,7 @@
 {
   "version": 1,
   "created_at_et": "2026-07-07T18:40:00-04:00",
-  "updated_at_et": "2026-07-07T22:32:24-04:00",
+  "updated_at_et": "2026-07-08T00:16:36-04:00",
   "description": "Durable registry of MGS Utility Template messages observed in SB approvals. Keyed by normalized TEXT+CTA hash; LINK_1 is excluded because links are template/page-specific slots.",
   "records": {
     "97de046b0c219b195fef5785253a7b0ccf2ba6fb97c2e6bcef583e40837a21ab": {
@@ -39505,6 +39505,3546 @@
           "mode": "canary_loop_replacement"
         }
       ]
+    },
+    "15df81d207f2555f1029b48a0f2d10e88b559ba96bdb507ddb9c20b3ffb8b998": {
+      "text_cta_hash": "15df81d207f2555f1029b48a0f2d10e88b559ba96bdb507ddb9c20b3ffb8b998",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "CARD REVIEW UPDATE\n\nYour card request has a review step ready. Open the page to continue with the available options.",
+      "cta_1": "REVIEW CARD",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:32-04:00",
+      "last_approved_at": "2026-07-08T00:16:32-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 1,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 1,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 1,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 1,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "14c2a5336df3498718c2fbbb2a573b8b77674b70664092698d5e1f961e61b637": {
+      "text_cta_hash": "14c2a5336df3498718c2fbbb2a573b8b77674b70664092698d5e1f961e61b637",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "CARD REQUEST STATUS\n\nA status check is available for your card profile. Review the details before moving forward.",
+      "cta_1": "CHECK STATUS",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 2,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 2,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 2,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 2,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "47c1fbbf914516bd84cb283e0e44bdf5c7ae9333e36e65d1ff4fe5eb3f939be3": {
+      "text_cta_hash": "47c1fbbf914516bd84cb283e0e44bdf5c7ae9333e36e65d1ff4fe5eb3f939be3",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "CARD OPTIONS READY\n\nYour card options are ready to compare. Open the update and confirm the next step.",
+      "cta_1": "SEE OPTIONS",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 3,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 3,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 3,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 3,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "04979f751bb1bb3bb1f7697dac2b6c1da02dc58f66b4552c5859bec875af8778": {
+      "text_cta_hash": "04979f751bb1bb3bb1f7697dac2b6c1da02dc58f66b4552c5859bec875af8778",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "CARD REVIEW AVAILABLE\n\nThe card recommendation flow has new details available. Check the page to continue.",
+      "cta_1": "CONTINUE",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 4,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 4,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 4,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 4,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "c692de7577097a8e7a58db31fd16d1e5ad53aa532eb583a499d6e309935c4d29": {
+      "text_cta_hash": "c692de7577097a8e7a58db31fd16d1e5ad53aa532eb583a499d6e309935c4d29",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "APPLICATION STEP READY\n\nYour profile review is ready for confirmation. Open the card update to see the result.",
+      "cta_1": "REVIEW UPDATE",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:32-04:00",
+      "last_approved_at": "2026-07-08T00:16:32-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 5,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 5,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 5,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 5,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "affbd8f7b11cee21b30beef29a47ce65c1520bb156c1d3922f20898103689047": {
+      "text_cta_hash": "affbd8f7b11cee21b30beef29a47ce65c1520bb156c1d3922f20898103689047",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "CARD MATCH UPDATE\n\nA card selection step is available now. Review the page and continue from there.",
+      "cta_1": "OPEN REVIEW",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 6,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 6,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 6,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 6,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "379ba94d38012b441e43f9d207ffb5e98e76369129d5cda031224c8ffa47eac6": {
+      "text_cta_hash": "379ba94d38012b441e43f9d207ffb5e98e76369129d5cda031224c8ffa47eac6",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "REVIEW STEP OPEN\n\nYour card request moved to the next review point. Open the status page for details.",
+      "cta_1": "CONFIRM DETAILS",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:28-04:00",
+      "last_approved_at": "2026-07-08T00:16:32-04:00",
+      "approved_count": 2,
+      "rejected_count": 0,
+      "gray_count": 2,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 7,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 7,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 7,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 7,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "24a3ae2739ad1c9bef5d45c1d6e27dbfc2945f0870b3e3617f0de2e004c30088": {
+      "text_cta_hash": "24a3ae2739ad1c9bef5d45c1d6e27dbfc2945f0870b3e3617f0de2e004c30088",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "CARD PROFILE UPDATE\n\nThe card option summary is ready. Confirm the information on the review page.",
+      "cta_1": "VIEW RESULT",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 8,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 8,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 8,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 8,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "3c9a9319ac41ce7cfabbbb6c59e31a66054e4b469ed528eb3f34bdda616d02e6": {
+      "text_cta_hash": "3c9a9319ac41ce7cfabbbb6c59e31a66054e4b469ed528eb3f34bdda616d02e6",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "CARD OPTION NOTICE\n\nA new card profile update is available. Check the options and continue safely.",
+      "cta_1": "SEE CARD OPTIONS",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:32-04:00",
+      "last_approved_at": "2026-07-08T00:16:32-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 9,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 9,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 9,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 9,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "3caadf6ea1ddd4fd061707052ab24cac7b88df859e9f6a755d46fd177bb5323d": {
+      "text_cta_hash": "3caadf6ea1ddd4fd061707052ab24cac7b88df859e9f6a755d46fd177bb5323d",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "CARD STATUS READY\n\nYour card match has an available result. Open the update to review the details.",
+      "cta_1": "OPEN STATUS",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:29-04:00",
+      "last_approved_at": "2026-07-08T00:16:32-04:00",
+      "approved_count": 2,
+      "rejected_count": 0,
+      "gray_count": 2,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 10,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 10,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 10,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 10,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "e5a0b3f185862de0737578cc497aaf8569f89399bdcd2c602bc2e434252d82f3": {
+      "text_cta_hash": "e5a0b3f185862de0737578cc497aaf8569f89399bdcd2c602bc2e434252d82f3",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "PROFILE MATCH READY\n\nThe request review page is ready. Continue there to confirm your card information.",
+      "cta_1": "REVIEW PROFILE",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "d113b82da30881aae717c7fbcd9dc5a47427d74a10aadef1d46c8ef90d448e11": {
+      "text_cta_hash": "d113b82da30881aae717c7fbcd9dc5a47427d74a10aadef1d46c8ef90d448e11",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "CARD CHECK OPEN\n\nA card status update is waiting. Open the page and check the available path.",
+      "cta_1": "CHECK MATCH",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "19505d77eb9be802cf6a37b8221021b0b3f9e4bc8658397eeebae64f36cc327b": {
+      "text_cta_hash": "19505d77eb9be802cf6a37b8221021b0b3f9e4bc8658397eeebae64f36cc327b",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "REQUEST REVIEW READY\n\nYour card profile has a fresh option review. See the details before continuing.",
+      "cta_1": "VIEW OPTIONS",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:32-04:00",
+      "last_approved_at": "2026-07-08T00:16:32-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 13,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 13,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 13,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 13,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "ad5443bca685eb01ad4697f02856e2a43945afb2c96828e774c9aea25b4c64ed": {
+      "text_cta_hash": "ad5443bca685eb01ad4697f02856e2a43945afb2c96828e774c9aea25b4c64ed",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "CARD DETAILS AVAILABLE\n\nThe card recommendation page has a confirmation step. Review it to proceed.",
+      "cta_1": "CONFIRM REVIEW",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:32-04:00",
+      "last_approved_at": "2026-07-08T00:16:32-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 14,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 14,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 14,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 14,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "e962f230f74edd5247f493ef4d43973a0ae1313b039537e0272b84387a7b14c3": {
+      "text_cta_hash": "e962f230f74edd5247f493ef4d43973a0ae1313b039537e0272b84387a7b14c3",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "OPTION CHECK READY\n\nA card review result is available. Open the update and see the next instruction.",
+      "cta_1": "OPEN DETAILS",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:32-04:00",
+      "last_approved_at": "2026-07-08T00:16:32-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 15,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 15,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 15,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 15,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "06fc4cdbc3e95aa2e353ffaff1010811b28ebdacccec1fa2173a7cc3bdd7d626": {
+      "text_cta_hash": "06fc4cdbc3e95aa2e353ffaff1010811b28ebdacccec1fa2173a7cc3bdd7d626",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "PROFILE REVIEW UPDATE\n\nYour card options page is ready for a quick check. Continue from the review screen.",
+      "cta_1": "SEE RESULT",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 16,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 16,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 16,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 16,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "a1c2265ac58ea746b6d0981d6a68ff99b247ddb48d0890ea9a3f18d4bcc8cf3e": {
+      "text_cta_hash": "a1c2265ac58ea746b6d0981d6a68ff99b247ddb48d0890ea9a3f18d4bcc8cf3e",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "CARD SELECTION STEP\n\nThe card request status changed to a review step. Open the page to verify it.",
+      "cta_1": "CONTINUE REVIEW",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 17,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 17,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 17,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 17,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "aada5c618d2fcc4b372ad677f65143a956612b29ca6807f7e44274f9c3ffdef7": {
+      "text_cta_hash": "aada5c618d2fcc4b372ad677f65143a956612b29ca6807f7e44274f9c3ffdef7",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "STATUS CONFIRMATION\n\nA new card detail screen is available. Review the information and keep going.",
+      "cta_1": "VIEW UPDATE",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 18,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 18,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 18,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 18,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "cb740c7bda17741a01f1298818b04d72e5337d9bcbc6c423cb24b60302b0b81b": {
+      "text_cta_hash": "cb740c7bda17741a01f1298818b04d72e5337d9bcbc6c423cb24b60302b0b81b",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "CARD RESULT NOTICE\n\nYour card profile review has another step open. Check the update to continue.",
+      "cta_1": "CHECK OPTIONS",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 19,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 19,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 19,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 19,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "9e90b23956d27ca272dc35a675701fa69ca4c7160c3bca42f419d18a5fc4a230": {
+      "text_cta_hash": "9e90b23956d27ca272dc35a675701fa69ca4c7160c3bca42f419d18a5fc4a230",
+      "vertical": "CA-CC-EN",
+      "country": "CA",
+      "language": "EN",
+      "text": "REVIEW CONTINUATION\n\nThe card selection review is ready. Open the page and confirm the next action.",
+      "cta_1": "OPEN CARD REVIEW",
+      "first_seen_at": "2026-07-08T00:16:28-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "message_id": 20,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:28-04:00"
+        },
+        {
+          "template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "message_id": 20,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        },
+        {
+          "template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "message_id": 20,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        },
+        {
+          "template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "message_id": 20,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "2b00328b59c91064bfe8f2c61bccd5bf59cf2bd87fb8125ee0bdf5391bb63bb6": {
+      "text_cta_hash": "2b00328b59c91064bfe8f2c61bccd5bf59cf2bd87fb8125ee0bdf5391bb63bb6",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "KARTEN UPDATE\n\nDeine Kartenanfrage hat einen Prüfschritt bereit. Öffne die Seite und sieh dir die verfügbaren Optionen an.",
+      "cta_1": "KARTE PRÜFEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": "2026-07-08T00:16:29-04:00",
+      "last_approved_at": "2026-07-08T00:16:29-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 0,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 1,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "71e561dfc497b82376060aceeb71efd4091fea350f66dde1a55c335d804c4cb3": {
+      "text_cta_hash": "71e561dfc497b82376060aceeb71efd4091fea350f66dde1a55c335d804c4cb3",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "ANFRAGE STATUS\n\nFür dein Kartenprofil ist eine Statusprüfung verfügbar. Prüfe die Details bevor du fortfährst.",
+      "cta_1": "STATUS ANSEHEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 2,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "73ee93edfe10290385f469154778a6989b85d2d65cf381e4581bfae36e3a9248": {
+      "text_cta_hash": "73ee93edfe10290385f469154778a6989b85d2d65cf381e4581bfae36e3a9248",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "KARTEN OPTIONEN\n\nDeine Kartenoptionen sind zum Vergleich bereit. Öffne das Update und bestätige den nächsten Schritt.",
+      "cta_1": "OPTIONEN SEHEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 3,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "266695b71ff097c554acd0afccd927c7ed21d7d0f2d43314b8b74267fc0a417f": {
+      "text_cta_hash": "266695b71ff097c554acd0afccd927c7ed21d7d0f2d43314b8b74267fc0a417f",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "PRÜFUNG VERFÜGBAR\n\nDer Kartenempfehlungsprozess hat neue Details verfügbar. Öffne die Seite um weiterzumachen.",
+      "cta_1": "WEITER",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 4,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "da848c6c4412623ab72d45124179b7c9f1c88916035ef76fe1600250a38703ff": {
+      "text_cta_hash": "da848c6c4412623ab72d45124179b7c9f1c88916035ef76fe1600250a38703ff",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "BESTÄTIGUNG BEREIT\n\nDeine Profilprüfung ist zur Bestätigung bereit. Öffne das Karten Update und sieh dir das Ergebnis an.",
+      "cta_1": "UPDATE ANSEHEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 5,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "f2dfbb82ff6b9cb9177167f8bb5ea3d899356af0077b5103a2cf258123f6abdf": {
+      "text_cta_hash": "f2dfbb82ff6b9cb9177167f8bb5ea3d899356af0077b5103a2cf258123f6abdf",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "KARTEN ERGEBNIS\n\nEin Schritt zur Kartenauswahl ist jetzt verfügbar. Prüfe die Seite und fahre dort fort.",
+      "cta_1": "PRÜFUNG ÖFFNEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 6,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "f504324e24e4bc909af345502a7361183b849ae5a7125517ef2402dd62c8de24": {
+      "text_cta_hash": "f504324e24e4bc909af345502a7361183b849ae5a7125517ef2402dd62c8de24",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "PRÜFUNG OFFEN\n\nDeine Kartenanfrage ist beim nächsten Prüfpunkt angekommen. Öffne die Statusseite für Details.",
+      "cta_1": "DATEN BESTÄTIGEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 7,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "9ccad87f001e54d107ee79c3e30221c7f5f9c692aa112dac3247b9eb2b7cdaf7": {
+      "text_cta_hash": "9ccad87f001e54d107ee79c3e30221c7f5f9c692aa112dac3247b9eb2b7cdaf7",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "PROFIL UPDATE\n\nDie Zusammenfassung der Kartenoptionen ist bereit. Bestätige die Angaben auf der Prüfseite.",
+      "cta_1": "ERGEBNIS SEHEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 8,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "c31973b53b9690bbeca42d23e7f498df911e3738e49a81be37f399c3c5695222": {
+      "text_cta_hash": "c31973b53b9690bbeca42d23e7f498df911e3738e49a81be37f399c3c5695222",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "KARTEN HINWEIS\n\nEin neues Update für dein Kartenprofil ist verfügbar. Prüfe die Optionen und fahre fort.",
+      "cta_1": "KARTENOPTIONEN SEHEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 9,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "d5de1873a489a0a5d142f782eda4e4431852e2775953509e693a68876170fb73": {
+      "text_cta_hash": "d5de1873a489a0a5d142f782eda4e4431852e2775953509e693a68876170fb73",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "STATUS BEREIT\n\nDein Karten Treffer hat ein verfügbares Ergebnis. Öffne das Update und prüfe die Details.",
+      "cta_1": "STATUS ÖFFNEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 10,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "d3597ab027e3aea2358713d94530bc409c1a02a90e64ce113dc7046713676e99": {
+      "text_cta_hash": "d3597ab027e3aea2358713d94530bc409c1a02a90e64ce113dc7046713676e99",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "PROFIL TREFFER\n\nDie Seite zur Anfrageprüfung ist bereit. Fahre dort fort und bestätige deine Kartendaten.",
+      "cta_1": "PROFIL PRÜFEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "8f33dc0ef4f899d7c547c3828c7f994157fe08c0739a1132732e78a6dcc0eabd": {
+      "text_cta_hash": "8f33dc0ef4f899d7c547c3828c7f994157fe08c0739a1132732e78a6dcc0eabd",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "PRÜFUNG STARTEN\n\nEin Kartenstatus Update wartet. Öffne die Seite und prüfe den verfügbaren Weg.",
+      "cta_1": "TREFFER ANSEHEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "d8278c8bf00f069516858251701ec58697e03bc3e6d56382f3a147d5a30a0661": {
+      "text_cta_hash": "d8278c8bf00f069516858251701ec58697e03bc3e6d56382f3a147d5a30a0661",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "ANFRAGE PRÜFUNG\n\nDein Kartenprofil hat eine neue Optionsprüfung. Sieh dir die Details an bevor du fortfährst.",
+      "cta_1": "OPTIONEN PRÜFEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 13,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "52fc69666d8ae8f0c507c6f7263684ff0201ee96113d084b0bea5e10f04c3311": {
+      "text_cta_hash": "52fc69666d8ae8f0c507c6f7263684ff0201ee96113d084b0bea5e10f04c3311",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "DETAILS VERFÜGBAR\n\nDie Kartenempfehlungsseite hat einen Bestätigungsschritt. Prüfe ihn um weiterzumachen.",
+      "cta_1": "PRÜFUNG BESTÄTIGEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 14,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "23a294055a815c2ea448dee4c0ef37ba25ceb38aef5346b1b6f5e65aaf8f288f": {
+      "text_cta_hash": "23a294055a815c2ea448dee4c0ef37ba25ceb38aef5346b1b6f5e65aaf8f288f",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "OPTIONEN OFFEN\n\nEin Ergebnis der Kartenprüfung ist verfügbar. Öffne das Update und sieh den nächsten Hinweis.",
+      "cta_1": "DETAILS ÖFFNEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 15,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "51e729e6be81b64fcd144c09bc79b8054a7673e58e58a72d509aa0a596669f94": {
+      "text_cta_hash": "51e729e6be81b64fcd144c09bc79b8054a7673e58e58a72d509aa0a596669f94",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "PROFIL PRÜFUNG\n\nDie Seite mit Kartenoptionen ist für eine schnelle Prüfung bereit. Fahre über die Prüfseite fort.",
+      "cta_1": "ANTWORT SEHEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 16,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "70fd6ca931bee7ed2574efe09431841f6e9ef1e7c1aed2aeb555a0c85cef4839": {
+      "text_cta_hash": "70fd6ca931bee7ed2574efe09431841f6e9ef1e7c1aed2aeb555a0c85cef4839",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "KARTENAUSWAHL\n\nDer Status deiner Kartenanfrage wechselte zu einem Prüfschritt. Öffne die Seite zur Kontrolle.",
+      "cta_1": "PRÜFUNG FORTSETZEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 17,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "b4686300017881fa0708959386afe3301251a9debed4a5f167eac3f2096f2891": {
+      "text_cta_hash": "b4686300017881fa0708959386afe3301251a9debed4a5f167eac3f2096f2891",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "STATUS BESTÄTIGUNG\n\nEine neue Detailseite zur Karte ist verfügbar. Prüfe die Informationen und fahre fort.",
+      "cta_1": "UPDATE ÖFFNEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 18,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "07d801655d6f21d34d8883d2d0ff2e5abc796bb1ebfe8135c44a8f74f23b0053": {
+      "text_cta_hash": "07d801655d6f21d34d8883d2d0ff2e5abc796bb1ebfe8135c44a8f74f23b0053",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "ERGEBNIS BEREIT\n\nDeine Kartenprofilprüfung hat einen weiteren Schritt offen. Öffne das Update zum Fortfahren.",
+      "cta_1": "OPTIONEN ÖFFNEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 19,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "914894030f31ccf3d89ec50c2a1e9be850316a4bbe52933c6da972da92474d6c": {
+      "text_cta_hash": "914894030f31ccf3d89ec50c2a1e9be850316a4bbe52933c6da972da92474d6c",
+      "vertical": "DE-CC-DE",
+      "country": "DE",
+      "language": "DE",
+      "text": "PRÜFUNG FORTSETZEN\n\nDie Prüfung der Kartenauswahl ist bereit. Öffne die Seite und bestätige die nächste Aktion.",
+      "cta_1": "KARTENSTATUS SEHEN",
+      "first_seen_at": "2026-07-08T00:16:29-04:00",
+      "last_seen_at": "2026-07-08T00:16:29-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "message_id": 20,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:29-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "3cca60b00d6f08915740f58215bfc5b4ab0ea563abacb594a4c841759622c536": {
+      "text_cta_hash": "3cca60b00d6f08915740f58215bfc5b4ab0ea563abacb594a4c841759622c536",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "ACTUALIZACIÓN DE​ TARJETA\n\nTu​ solicitud de​ tarjeta tiene​ una revisión​ lista. Abre​ la página​ para continuar​ con las​ opciones disponibles.​",
+      "cta_1": "REVISAR TARJETA",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 1,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 1,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 1,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 1,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "2a882ce5d5af5096791c5c32c5aa8767e3c849e83c00b6e0dfcd0e085a4eec95": {
+      "text_cta_hash": "2a882ce5d5af5096791c5c32c5aa8767e3c849e83c00b6e0dfcd0e085a4eec95",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "ESTADO DE​ SOLICITUD\n\nHay​ una verificación​ disponible para​ tu perfil​ de tarjeta.​ Revisa los​ detalles antes​ de avanzar.​",
+      "cta_1": "VER ESTADO",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 2,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 2,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 2,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 2,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "a15b9dc66fb52c6492d0ce4ef7259c72f3fc759f646aa982d6f16330f031f828": {
+      "text_cta_hash": "a15b9dc66fb52c6492d0ce4ef7259c72f3fc759f646aa982d6f16330f031f828",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "OPCIONES DE​ TARJETA\n\nTus​ opciones de​ tarjeta están​ listas para​ comparar. Abre​ la actualización​ y confirma​ el siguiente​ paso.",
+      "cta_1": "VER OPCIONES",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 3,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 3,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 3,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 3,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "89bcf85490586ff0c65ac243286cb0a4af3884e332ffed94d2675a0ba90aebda": {
+      "text_cta_hash": "89bcf85490586ff0c65ac243286cb0a4af3884e332ffed94d2675a0ba90aebda",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "REVISIÓN DISPONIBLE​\n\nEl flujo​ de recomendación​ de tarjeta​ tiene nuevos​ detalles disponibles.​ Consulta la​ página para​ continuar.",
+      "cta_1": "CONTINUAR",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 4,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 4,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 4,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 4,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "47d170808e9dd08da0a29a6690d983ca6cb9a5071c31e4c067ca392c94b77482": {
+      "text_cta_hash": "47d170808e9dd08da0a29a6690d983ca6cb9a5071c31e4c067ca392c94b77482",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "PASO DE​ CONFIRMACIÓN\n\nLa​ revisión de​ tu perfil​ está lista​ para confirmación.​ Abre la​ actualización de​ tarjeta para​ ver el​ resultado.",
+      "cta_1": "VER ACTUALIZACIÓN",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 5,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 5,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 5,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 5,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "5aeaa7952544720421de54d03f188c29a56a0c0fe268410efa9229e346ba3328": {
+      "text_cta_hash": "5aeaa7952544720421de54d03f188c29a56a0c0fe268410efa9229e346ba3328",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "RESULTADO DE​ TARJETA\n\nHay​ un paso​ de selección​ de tarjeta​ disponible ahora.​ Revisa la​ página y​ continúa desde​ ahí.",
+      "cta_1": "ABRIR REVISIÓN",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 6,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 6,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 6,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 6,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "6055677f699efe93d5a5e04abb3242e8f4fb428d9262e287ea1eec71622aa972": {
+      "text_cta_hash": "6055677f699efe93d5a5e04abb3242e8f4fb428d9262e287ea1eec71622aa972",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "REVISIÓN ABIERTA​\n\nTu solicitud​ de tarjeta​ pasó al​ siguiente punto​ de revisión.​ Abre la​ página de​ estado para​ ver detalles.​",
+      "cta_1": "CONFIRMAR DATOS",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 7,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 7,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 7,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 7,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "e33b73360226656173a63b6aa50500802378755b48fb39a43b53168fdfff49b1": {
+      "text_cta_hash": "e33b73360226656173a63b6aa50500802378755b48fb39a43b53168fdfff49b1",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "PERFIL ACTUALIZADO​\n\nEl resumen​ de opciones​ de tarjeta​ está listo.​ Confirma la​ información en​ la página​ de revisión.​",
+      "cta_1": "VER RESULTADO",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 8,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 8,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 8,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 8,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "780956d05123b45804461e12dea195926bc280bb7049dab0b3b680989be13a8f": {
+      "text_cta_hash": "780956d05123b45804461e12dea195926bc280bb7049dab0b3b680989be13a8f",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "AVISO DE​ TARJETA\n\nHay​ una nueva​ actualización de​ perfil de​ tarjeta disponible.​ Revisa las​ opciones y​ continúa.",
+      "cta_1": "VER OPCIONES DE TARJETA",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:33-04:00",
+      "last_approved_at": "2026-07-08T00:16:33-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 9,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 9,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 9,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 9,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "7f4ae7b00f3d37486dfff1964b0bea1fa8b295a41ee944a4557c9e6a64ff5134": {
+      "text_cta_hash": "7f4ae7b00f3d37486dfff1964b0bea1fa8b295a41ee944a4557c9e6a64ff5134",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "ESTADO LISTO​\n\nTu compatibilidad​ de tarjeta​ tiene un​ resultado disponible.​ Abre la​ actualización para​ revisar los​ detalles.",
+      "cta_1": "ABRIR ESTADO",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:33-04:00",
+      "last_approved_at": "2026-07-08T00:16:33-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 10,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 10,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 10,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 10,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "64bf08fb4df9d31f7c3251dfb0bda98042c9b986f8a906306d4b8d7440ee7346": {
+      "text_cta_hash": "64bf08fb4df9d31f7c3251dfb0bda98042c9b986f8a906306d4b8d7440ee7346",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "PERFIL COMPATIBLE​\n\nLa página​ de revisión​ de solicitud​ está lista.​ Continúa allí​ para confirmar​ la información​ de tarjeta.​",
+      "cta_1": "REVISAR PERFIL",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "6cdc72681710f2b126a534020de1d6225779b57cd9c55ba56b97d949c4340f8b": {
+      "text_cta_hash": "6cdc72681710f2b126a534020de1d6225779b57cd9c55ba56b97d949c4340f8b",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "CONSULTA ABIERTA​\n\nHay una​ actualización de​ estado de​ tarjeta esperando.​ Abre la​ página y​ revisa el​ camino disponible.​",
+      "cta_1": "VER COMPATIBILIDAD",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:33-04:00",
+      "last_approved_at": "2026-07-08T00:16:33-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 12,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "2ba90bc8c87f70732ced66fdf22554dc856ef743fc87e1ae1ac72d3ba1c4515d": {
+      "text_cta_hash": "2ba90bc8c87f70732ced66fdf22554dc856ef743fc87e1ae1ac72d3ba1c4515d",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "SOLICITUD EN​ REVISIÓN\n\nTu​ perfil de​ tarjeta tiene​ una nueva​ revisión de​ opciones. Mira​ los detalles​ antes de​ continuar.",
+      "cta_1": "CONSULTAR OPCIONES",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:33-04:00",
+      "last_approved_at": "2026-07-08T00:16:33-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 13,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 13,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 13,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 13,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "a05a346742340bbdcc42c6691d381b134d24ba117b2ec7ad38a1a33e0f24894b": {
+      "text_cta_hash": "a05a346742340bbdcc42c6691d381b134d24ba117b2ec7ad38a1a33e0f24894b",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "DETALLES DISPONIBLES​\n\nLa página​ de recomendación​ de tarjeta​ tiene un​ paso de​ confirmación. Revísalo​ para proceder.​",
+      "cta_1": "CONFIRMAR REVISIÓN",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 14,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 14,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 14,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 14,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "539b7f83566947b8fc96c6dcd8418ff48301d505bda753d1c99742890fee6390": {
+      "text_cta_hash": "539b7f83566947b8fc96c6dcd8418ff48301d505bda753d1c99742890fee6390",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "OPCIONES ABIERTAS​\n\nHay un​ resultado de​ revisión de​ tarjeta disponible.​ Abre la​ actualización y​ mira la​ siguiente indicación.​",
+      "cta_1": "ABRIR DETALLES",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 15,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 15,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 15,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 15,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "989c35c0f9158bcb1fa059bf68145218d726e0b7d71b563ea32eb4e8e91fa33b": {
+      "text_cta_hash": "989c35c0f9158bcb1fa059bf68145218d726e0b7d71b563ea32eb4e8e91fa33b",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "REVISIÓN DE​ PERFIL\n\nLa​ página de​ opciones de​ tarjeta está​ lista para​ una revisión​ rápida. Continúa​ desde la​ pantalla de​ revisión.",
+      "cta_1": "VER RESPUESTA",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:33-04:00",
+      "last_approved_at": "2026-07-08T00:16:33-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 16,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 16,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 16,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 16,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "d6b30cd8c42a5cf1c787fd10015a397ba29fe808c503984245f4190aef47de21": {
+      "text_cta_hash": "d6b30cd8c42a5cf1c787fd10015a397ba29fe808c503984245f4190aef47de21",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "SELECCIÓN DE​ TARJETA\n\nEl​ estado de​ la solicitud​ de tarjeta​ cambió a​ un paso​ de revisión.​ Abre la​ página para​ verificarlo.",
+      "cta_1": "CONTINUAR REVISIÓN",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 4,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 17,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 17,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 17,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 17,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "8673955dadf0ba7f332d771df3eafcd23eb0bc364a406c75a866919ee4cf8308": {
+      "text_cta_hash": "8673955dadf0ba7f332d771df3eafcd23eb0bc364a406c75a866919ee4cf8308",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "CONFIRMACIÓN DE​ ESTADO\n\nHay​ una nueva​ pantalla de​ detalles de​ tarjeta disponible.​ Revisa la​ información y​ sigue.",
+      "cta_1": "VER UPDATE",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:33-04:00",
+      "last_approved_at": "2026-07-08T00:16:33-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 18,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 18,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 18,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 18,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "448e04e332f3e3d77a9c2188e84540b5c2706a346fb4944093f6d09d1dc3bd52": {
+      "text_cta_hash": "448e04e332f3e3d77a9c2188e84540b5c2706a346fb4944093f6d09d1dc3bd52",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "RESULTADO DISPONIBLE​\n\nLa revisión​ de tu​ perfil de​ tarjeta tiene​ otro paso​ abierto. Consulta​ la actualización​ para continuar.​",
+      "cta_1": "REVISAR OPCIONES",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:33-04:00",
+      "last_approved_at": "2026-07-08T00:16:33-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 19,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 19,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 19,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 19,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "adb741ce9b79b8b3ec37f3702dfec10258c86501025f53b1a72bf302f61cc8d1": {
+      "text_cta_hash": "adb741ce9b79b8b3ec37f3702dfec10258c86501025f53b1a72bf302f61cc8d1",
+      "vertical": "ES-CC-ES",
+      "country": "ES",
+      "language": "ES",
+      "text": "CONTINUACIÓN DE​ REVISIÓN\n\nLa​ revisión de​ selección de​ tarjeta está​ lista. Abre​ la página​ y confirma​ la siguiente​ acción.",
+      "cta_1": "ABRIR TARJETA",
+      "first_seen_at": "2026-07-08T00:16:30-04:00",
+      "last_seen_at": "2026-07-08T00:16:35-04:00",
+      "first_approved_at": "2026-07-08T00:16:33-04:00",
+      "last_approved_at": "2026-07-08T00:16:33-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 3,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "message_id": 20,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:30-04:00"
+        },
+        {
+          "template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "message_id": 20,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:31-04:00"
+        },
+        {
+          "template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "message_id": 20,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        },
+        {
+          "template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "message_id": 20,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:35-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "9c7f664be17d99eaf0033fb51d5db7222341b96ebd2c97b9f5a9ee9e41f74453": {
+      "text_cta_hash": "9c7f664be17d99eaf0033fb51d5db7222341b96ebd2c97b9f5a9ee9e41f74453",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "VEHICLE OFFER UPDATE\n\nYour vehicle request has a review step ready. Open the page to continue with the available options.",
+      "cta_1": "REVIEW OFFER",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 1,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "b3297b2a7a6ddd130d7ca12d69057ee0f0331aac17a42d663f096cc4ae2f928c": {
+      "text_cta_hash": "b3297b2a7a6ddd130d7ca12d69057ee0f0331aac17a42d663f096cc4ae2f928c",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "AUTO REQUEST STATUS\n\nA status check is available for your auto profile. Review the details before moving forward.",
+      "cta_1": "CHECK STATUS",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": "2026-07-08T00:16:32-04:00",
+      "last_approved_at": "2026-07-08T00:16:32-04:00",
+      "approved_count": 1,
+      "rejected_count": 0,
+      "gray_count": 0,
+      "purple_count": 0,
+      "status": "approved",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 2,
+          "observed_color": "verde",
+          "observed_status": "APPROVED",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "ba344c7c44faf0f815ff8608631f19a702826b1d728393b44d687cfe381a39ef": {
+      "text_cta_hash": "ba344c7c44faf0f815ff8608631f19a702826b1d728393b44d687cfe381a39ef",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "CAR OPTIONS READY\n\nYour vehicle options are ready to compare. Open the update and confirm the next step.",
+      "cta_1": "SEE OPTIONS",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 3,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "db159e1d497822bd91981292ce01144e065349ad75dbf83993225735453067b7": {
+      "text_cta_hash": "db159e1d497822bd91981292ce01144e065349ad75dbf83993225735453067b7",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "REVIEW AVAILABLE\n\nThe auto recommendation flow has new details available. Check the page to continue.",
+      "cta_1": "CONTINUE",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 4,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "291239816dc03f4053701b8b5ad2a517274aeac787b8f63e006bdb08f1e8546e": {
+      "text_cta_hash": "291239816dc03f4053701b8b5ad2a517274aeac787b8f63e006bdb08f1e8546e",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "CONFIRMATION STEP\n\nYour profile review is ready for confirmation. Open the vehicle update to see the result.",
+      "cta_1": "OPEN REVIEW",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 5,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "ab17af25b260ccaa62656a8ee5d37f0d3e34343fa33d9ba1161f91521e0d1726": {
+      "text_cta_hash": "ab17af25b260ccaa62656a8ee5d37f0d3e34343fa33d9ba1161f91521e0d1726",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "VEHICLE MATCH UPDATE\n\nA vehicle selection step is available now. Review the page and continue from there.",
+      "cta_1": "VIEW DETAILS",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 6,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "dc63715f0565840cc2bbd802b0db573be97a3d2409f30c4b8ef25e53f51d3dcc": {
+      "text_cta_hash": "dc63715f0565840cc2bbd802b0db573be97a3d2409f30c4b8ef25e53f51d3dcc",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "DETAILS READY\n\nYour auto request moved to the next review point. Open the status page for details.",
+      "cta_1": "CONFIRM DETAILS",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 7,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "17e1163e370580b23b00aa32e94f9a9ecc5885ebf09e6d69b6b6d3c4449707f2": {
+      "text_cta_hash": "17e1163e370580b23b00aa32e94f9a9ecc5885ebf09e6d69b6b6d3c4449707f2",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "AUTO PROFILE UPDATE\n\nThe vehicle option summary is ready. Confirm the information on the review page.",
+      "cta_1": "SEE RESULT",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 8,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "f80228b6fbe7f03eb7ebd0ebc1edc6985001a2ebeb6daf8ff89d9b1190a91873": {
+      "text_cta_hash": "f80228b6fbe7f03eb7ebd0ebc1edc6985001a2ebeb6daf8ff89d9b1190a91873",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "OFFER NOTICE\n\nA new auto profile update is available. Check the options and continue safely.",
+      "cta_1": "REVIEW VEHICLE",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 9,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "29cada3adeefa17fa37b6deb6d1c71cc066a2edec06af6720ef88ddcdc13657f": {
+      "text_cta_hash": "29cada3adeefa17fa37b6deb6d1c71cc066a2edec06af6720ef88ddcdc13657f",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "STATUS READY\n\nYour vehicle match has an available result. Open the update to review the details.",
+      "cta_1": "OPEN STATUS",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 10,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "ba4b032001d38c39b95fe9656331bf0ac5a7b9d40cdcd15410596f1af36f6d02": {
+      "text_cta_hash": "ba4b032001d38c39b95fe9656331bf0ac5a7b9d40cdcd15410596f1af36f6d02",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "PROFILE MATCH READY\n\nThe request review page is ready. Continue there to confirm your auto information.",
+      "cta_1": "SEE AUTO OPTIONS",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "fdc68cc2c698c58c8d46ca7d07c31e087978d12a85142414dd420ba9bff12505": {
+      "text_cta_hash": "fdc68cc2c698c58c8d46ca7d07c31e087978d12a85142414dd420ba9bff12505",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "VEHICLE CHECK OPEN\n\nAn auto status update is waiting. Open the page and check the available path.",
+      "cta_1": "CHECK MATCH",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "65f0aea2b3928450385494729f9a788d8eb5b1e5c898a1640d897cf4d7ec633f": {
+      "text_cta_hash": "65f0aea2b3928450385494729f9a788d8eb5b1e5c898a1640d897cf4d7ec633f",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "AUTO REVIEW READY\n\nYour vehicle profile has a fresh option review. See the details before continuing.",
+      "cta_1": "VIEW OFFER",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 13,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "db8c50b24aec573fd3c748eb3dcb15e507bd236cd46b6c4b2e200e877ac89771": {
+      "text_cta_hash": "db8c50b24aec573fd3c748eb3dcb15e507bd236cd46b6c4b2e200e877ac89771",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "DETAILS AVAILABLE\n\nThe auto recommendation page has a confirmation step. Review it to proceed.",
+      "cta_1": "CONFIRM REVIEW",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 14,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "2da15b9e78eb1a81f13f8e694c8f0395a167b8a80bc9d0aef6c1cf304a46301c": {
+      "text_cta_hash": "2da15b9e78eb1a81f13f8e694c8f0395a167b8a80bc9d0aef6c1cf304a46301c",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "OPTION CHECK READY\n\nA vehicle review result is available. Open the update and see the next instruction.",
+      "cta_1": "OPEN DETAILS",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 15,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "0913c45208c3acb4daba1c45ff57dc1ea93b67e73424a7bba991dadddcfd9e6c": {
+      "text_cta_hash": "0913c45208c3acb4daba1c45ff57dc1ea93b67e73424a7bba991dadddcfd9e6c",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "PROFILE REVIEW UPDATE\n\nYour auto options page is ready for a quick check. Continue from the review screen.",
+      "cta_1": "SEE UPDATE",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 16,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "2cd693eb20cc54005a98f007966874b7a7fafa31189230b45baab1e7f49ef6b5": {
+      "text_cta_hash": "2cd693eb20cc54005a98f007966874b7a7fafa31189230b45baab1e7f49ef6b5",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "VEHICLE SELECTION STEP\n\nThe vehicle request status changed to a review step. Open the page to verify it.",
+      "cta_1": "CONTINUE REVIEW",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 17,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "31dfe8aeed4c98422c50fd593501f1f1a99c98c21317e5e21c2a4ae390433218": {
+      "text_cta_hash": "31dfe8aeed4c98422c50fd593501f1f1a99c98c21317e5e21c2a4ae390433218",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "STATUS CONFIRMATION\n\nA new auto detail screen is available. Review the information and keep going.",
+      "cta_1": "VIEW RESULT",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 18,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "b3636ba9821a047913c49df793e8ded549a45a5642599c1c05ae6d35a4f10439": {
+      "text_cta_hash": "b3636ba9821a047913c49df793e8ded549a45a5642599c1c05ae6d35a4f10439",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "AUTO RESULT NOTICE\n\nYour auto profile review has another step open. Check the update to continue.",
+      "cta_1": "CHECK OPTIONS",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 19,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "a353f8b89dc37499e56924c3f2de0efa1cd5209bd17999f607048970c0ede2a7": {
+      "text_cta_hash": "a353f8b89dc37499e56924c3f2de0efa1cd5209bd17999f607048970c0ede2a7",
+      "vertical": "US-CAR-EN",
+      "country": "US",
+      "language": "EN",
+      "text": "REVIEW CONTINUATION\n\nThe vehicle selection review is ready. Open the page and confirm the next action.",
+      "cta_1": "OPEN OFFER",
+      "first_seen_at": "2026-07-08T00:16:32-04:00",
+      "last_seen_at": "2026-07-08T00:16:32-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "message_id": 20,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:32-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "0e5692872462106234b2d5988308cbb036c0466f947a5adfdc6a91f361819454": {
+      "text_cta_hash": "0e5692872462106234b2d5988308cbb036c0466f947a5adfdc6a91f361819454",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "ACTUALIZACIÓN DE​ VACANTE\n\nTu​ solicitud de​ empleo tiene​ una revisión​ lista. Abre​ la página​ para continuar​ con las​ opciones disponibles.​",
+      "cta_1": "VER OFERTA",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 1,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "316caa9e89f5b77be815f9cebbeddeec4543769399ac7dce0c9d1ffb51d4f1e9": {
+      "text_cta_hash": "316caa9e89f5b77be815f9cebbeddeec4543769399ac7dce0c9d1ffb51d4f1e9",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "REVISIÓN DISPONIBLE​\n\nHay una​ verificación disponible​ para tu​ perfil laboral.​ Revisa los​ detalles antes​ de avanzar.​",
+      "cta_1": "VER ESTADO",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 2,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "a2fe4bb06a1f09be5ab40d28b61ea1d2a96637b2be98665a9e7aa479b78ba964": {
+      "text_cta_hash": "a2fe4bb06a1f09be5ab40d28b61ea1d2a96637b2be98665a9e7aa479b78ba964",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "OPCIONES DE​ TRABAJO\n\nTus​ opciones de​ trabajo están​ listas para​ comparar. Abre​ la actualización​ y confirma​ el siguiente​ paso.",
+      "cta_1": "VER OPCIONES",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 3,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "03e62eab9887d55349ac9e9ee624473dabfb9faf18bd01843b98eec3ebb2caff": {
+      "text_cta_hash": "03e62eab9887d55349ac9e9ee624473dabfb9faf18bd01843b98eec3ebb2caff",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "PASO DE​ SOLICITUD\n\nEl​ flujo de​ recomendación laboral​ tiene nuevos​ detalles disponibles.​ Consulta la​ página para​ continuar.",
+      "cta_1": "CONTINUAR",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 4,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "f24a1e604276f5fc524efc448209658be5c302dca050e3915c1e2a3026df0d72": {
+      "text_cta_hash": "f24a1e604276f5fc524efc448209658be5c302dca050e3915c1e2a3026df0d72",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "ESTADO DE​ POSTULACIÓN\n\nLa​ revisión de​ tu perfil​ está lista​ para confirmación.​ Abre la​ actualización laboral​ para ver​ el resultado.​",
+      "cta_1": "ABRIR ACTUALIZACIÓN",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 5,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "c6ac0711d84cd73cc4d6d71c2820a91189064a2c8f9307b4edbfda424c0c9e2c": {
+      "text_cta_hash": "c6ac0711d84cd73cc4d6d71c2820a91189064a2c8f9307b4edbfda424c0c9e2c",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "DETALLES ABIERTOS​\n\nHay un​ paso de​ selección de​ vacante disponible​ ahora. Revisa​ la página​ y continúa​ desde ahí.​",
+      "cta_1": "REVISAR VACANTE",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 6,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "d0303501616b893be313b18489a1b017a74ba47f835c2c0b74b29a9cceab3508": {
+      "text_cta_hash": "d0303501616b893be313b18489a1b017a74ba47f835c2c0b74b29a9cceab3508",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "PERFIL LABORAL​\n\nTu solicitud​ pasó al​ siguiente punto​ de revisión.​ Abre la​ página de​ estado para​ ver detalles.​",
+      "cta_1": "CONFIRMAR DATOS",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 7,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "6a95b61467b6e463f94733a9ec164f26ce4cfae2e05646100269a20ca4691118": {
+      "text_cta_hash": "6a95b61467b6e463f94733a9ec164f26ce4cfae2e05646100269a20ca4691118",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "CONTINUAR REVISIÓN​\n\nEl resumen​ de opciones​ laborales está​ listo. Confirma​ la información​ en la​ página de​ revisión.",
+      "cta_1": "VER DETALLES",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 8,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "b9da1c69c59d91abf7ec5dad744b84f77e764ead69aedc9567373d39b0cd9dcd": {
+      "text_cta_hash": "b9da1c69c59d91abf7ec5dad744b84f77e764ead69aedc9567373d39b0cd9dcd",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "AVISO DE​ EMPLEO\n\nHay​ una nueva​ actualización de​ perfil laboral​ disponible. Revisa​ las opciones​ y continúa.​",
+      "cta_1": "VER PERFIL",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 9,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "8abfc95f29b1f3a62db389834e275a3d95efc05ecd9c9ea41dcc9d941c5987ff": {
+      "text_cta_hash": "8abfc95f29b1f3a62db389834e275a3d95efc05ecd9c9ea41dcc9d941c5987ff",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "ESTADO LISTO​\n\nTu compatibilidad​ con la​ vacante tiene​ un resultado​ disponible. Abre​ la actualización​ para revisar​ los detalles.​",
+      "cta_1": "ABRIR ESTADO",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 10,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "22419172e55a57b87d342c1ca89b6be1d139859044b0c503e3b7ecbdd74b17ea": {
+      "text_cta_hash": "22419172e55a57b87d342c1ca89b6be1d139859044b0c503e3b7ecbdd74b17ea",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "PERFIL COMPATIBLE​\n\nLa página​ de revisión​ de solicitud​ está lista.​ Continúa allí​ para confirmar​ la información​ de perfil.​",
+      "cta_1": "REVISAR RESULTADO",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 11,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "a790b248163e2755cadb93b58eee4f3f7380326dde9001bc20f831deff63a6fa": {
+      "text_cta_hash": "a790b248163e2755cadb93b58eee4f3f7380326dde9001bc20f831deff63a6fa",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "VACANTE ABIERTA​\n\nHay una​ actualización de​ estado laboral​ esperando. Abre​ la página​ y revisa​ el camino​ disponible.",
+      "cta_1": "CONTINUAR REVISIÓN",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 12,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "f198659f1452c8ac7df4de56cdcb0bc8893da59a8fbf9008562c5d5ff2409b06": {
+      "text_cta_hash": "f198659f1452c8ac7df4de56cdcb0bc8893da59a8fbf9008562c5d5ff2409b06",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "SOLICITUD EN​ REVISIÓN\n\nTu​ perfil laboral​ tiene una​ nueva revisión​ de opciones.​ Mira los​ detalles antes​ de continuar.​",
+      "cta_1": "VER PUESTO",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 13,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "d52becf9767c740b35f9ea3e8a41abff93ce2ecb96ca19f95ec8049b4909deae": {
+      "text_cta_hash": "d52becf9767c740b35f9ea3e8a41abff93ce2ecb96ca19f95ec8049b4909deae",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "DETALLES DISPONIBLES​\n\nLa página​ de recomendación​ laboral tiene​ un paso​ de confirmación.​ Revísalo para​ proceder.",
+      "cta_1": "ABRIR DETALLES",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 14,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "c8027916f64226304fb9c714d0868f3a7313dc8a209678f765d19c6d33a69b6f": {
+      "text_cta_hash": "c8027916f64226304fb9c714d0868f3a7313dc8a209678f765d19c6d33a69b6f",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "OPCIONES ABIERTAS​\n\nHay un​ resultado de​ revisión de​ vacante disponible.​ Abre la​ actualización y​ mira la​ siguiente indicación.​",
+      "cta_1": "CONFIRMAR PERFIL",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 15,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "b377858b1aef6da7c1e3ef7dd7bbdfaf1795e079489c386534e7f8d8b1d57389": {
+      "text_cta_hash": "b377858b1aef6da7c1e3ef7dd7bbdfaf1795e079489c386534e7f8d8b1d57389",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "REVISIÓN DE​ PERFIL\n\nLa​ página de​ opciones de​ trabajo está​ lista para​ una revisión​ rápida. Continúa​ desde la​ pantalla de​ revisión.",
+      "cta_1": "VER RESPUESTA",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 16,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "ba0935d44f94f0cf349c122269ab2f564dcdc8bdd6a75222865f6173d066eaf7": {
+      "text_cta_hash": "ba0935d44f94f0cf349c122269ab2f564dcdc8bdd6a75222865f6173d066eaf7",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "PUESTO DISPONIBLE​\n\nEl estado​ de la​ postulación cambió​ a un​ paso de​ revisión. Abre​ la página​ para verificarlo.​",
+      "cta_1": "REVISAR OPCIONES",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 17,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "00152281fe1d64f4ab8e0db15243415549f49d84dd1960c459b036bf1985bff4": {
+      "text_cta_hash": "00152281fe1d64f4ab8e0db15243415549f49d84dd1960c459b036bf1985bff4",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "CONFIRMACIÓN DE​ DATOS\n\nHay​ una nueva​ pantalla de​ detalles laborales​ disponible. Revisa​ la información​ y sigue.​",
+      "cta_1": "ABRIR SOLICITUD",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 18,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "10c3f1e3ef5483677b31563430f874015e49b6ab530dacd4769df7f183fd7b27": {
+      "text_cta_hash": "10c3f1e3ef5483677b31563430f874015e49b6ab530dacd4769df7f183fd7b27",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "RESULTADO LABORAL​\n\nLa revisión​ de tu​ perfil laboral​ tiene otro​ paso abierto.​ Consulta la​ actualización para​ continuar.",
+      "cta_1": "SEGUIR REVISIÓN",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 19,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
+    },
+    "d7a084f2a7105fd2d915e09face3a86a7fe78561b8823d51d39b704a296493b6": {
+      "text_cta_hash": "d7a084f2a7105fd2d915e09face3a86a7fe78561b8823d51d39b704a296493b6",
+      "vertical": "US-JOB-ES",
+      "country": "US",
+      "language": "ES",
+      "text": "SIGUIENTE PASO​\n\nLa revisión​ de selección​ de empleo​ está lista.​ Abre la​ página y​ confirma la​ siguiente acción.​",
+      "cta_1": "VER ACTUALIZACIÓN",
+      "first_seen_at": "2026-07-08T00:16:33-04:00",
+      "last_seen_at": "2026-07-08T00:16:33-04:00",
+      "first_approved_at": null,
+      "last_approved_at": null,
+      "approved_count": 0,
+      "rejected_count": 0,
+      "gray_count": 1,
+      "purple_count": 0,
+      "status": "testing",
+      "seen_in": [
+        {
+          "template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "message_id": 20,
+          "observed_color": "cinza",
+          "observed_status": "GRAY",
+          "observed_at": "2026-07-08T00:16:33-04:00"
+        }
+      ],
+      "usage": []
     }
   }
 }

@@ -763,17 +763,17 @@
       "type": "script",
       "sha256": "a847ecd35ae6d4ab6ef4936deda04bc6d6853188357400ac7e6b75396f3850ff",
       "size_bytes": 400,
-      "updated_at": "2026-07-08T00:11:35-04:00",
-      "notes": "Emergency Utility canary duplicate-message fix/pause after Rodolfo correction 2026-07-08."
+      "updated_at": "2026-07-08T00:16:33-04:00",
+      "notes": "Utility canary safe 3h runner with visible-TEXT duplicate guard and early-stop on all green."
     },
     {
       "path": "/root/mgs-agent/scripts/utility-canary-approval-loop.py",
       "owner": "zeus",
       "type": "script",
-      "sha256": "f2bc49d9f897d0cdefdf81084ebf8d4a09e1ab683fa854d6693259be6ef05a9e",
-      "size_bytes": 18785,
-      "updated_at": "2026-07-08T00:11:35-04:00",
-      "notes": "Emergency Utility canary duplicate-message fix/pause after Rodolfo correction 2026-07-08."
+      "sha256": "596157e8952219ff72e873c4e211d0631c1b096fce967a7666c359296044e131",
+      "size_bytes": 18963,
+      "updated_at": "2026-07-08T00:16:33-04:00",
+      "notes": "Utility canary safe 3h runner with visible-TEXT duplicate guard and early-stop on all green."
     },
     {
       "path": "/root/mgs-agent/work/fix-utility-canary-duplicates-20260708.py",
@@ -792,6 +792,15 @@
       "size_bytes": 156,
       "updated_at": "2026-07-08T00:11:35-04:00",
       "notes": "Emergency Utility canary duplicate-message fix/pause after Rodolfo correction 2026-07-08."
+    },
+    {
+      "path": "/root/mgs-agent/scripts/utility-canary-3h-runner.sh",
+      "owner": "zeus",
+      "type": "script",
+      "sha256": "8b8f3a60f0773b584f8cb957d7a3b9faeb9a25ec4c6c8ec25ade76b96b1f9708",
+      "size_bytes": 1926,
+      "updated_at": "2026-07-08T00:16:33-04:00",
+      "notes": "Utility canary safe 3h runner with visible-TEXT duplicate guard and early-stop on all green."
     }
   ],
   "profile_skill_references": [
