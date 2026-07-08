@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-07T19:30:00-04:00",
+    "updated_at": "2026-07-07T20:50:04-04:00",
     "generated_by": "manual Zeus infra inventory update + infra-discovery base"
   },
   "system_packages": [
@@ -1053,10 +1053,10 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 77313,
-      "sha256": "6d9628cfd5861d8b73a571f7c95c841ad95b6c7008afa41a32b7fc759361754f",
+      "size_bytes": 78543,
+      "sha256": "5e0e05fe2312e291820c08b8c8272031b87b6903b71ed2338ea98ae9b17f6ecb",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-07T19:30:00-04:00",
+      "updated_at": "2026-07-07T20:50:04-04:00",
       "validation": "manual Zeus update; DTR Subscriber Manager scan workflow/4-minute timeout documented from Rodolfo video/instruction",
       "reference_update": {
         "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/digitaltrchat-full-segurador-audit-methodology-2026-07-02.md",
@@ -1064,9 +1064,10 @@
         "size_bytes": 4489,
         "updated_at": "2026-07-03T21:37:59-04:00"
       },
-      "source_report": "REPORT-INFRA Zeus DTR missing-SB page lead scan 2026-07-07",
+      "source_report": "REPORT-INFRA Zeus global page ignore list 2026-07-07",
       "agent": "zeus",
-      "purpose": "SmartBidding access and safe Messenger Page template/user correction procedures."
+      "purpose": "SmartBidding/DTR operational skill updated with Column E global ignore and gid 907 registration payload rule.",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md"
     }
   ],
   "systemd_services": [
@@ -1881,12 +1882,12 @@
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-missing-sb-page-lead-scan.py",
-      "size_bytes": 14546,
-      "sha256": "d16751c91a01c96a8565c66a39c7cc7c96cda84493a5b5393a63ac22cc185ad3",
-      "updated_at": "2026-07-07T19:30:00-04:00",
-      "source_report": "REPORT-INFRA Zeus DTR missing-SB page lead scan 2026-07-07",
+      "size_bytes": 15955,
+      "sha256": "7dbc940385b3ce0fbd1f730fc91b5753f0a6f1aceb6d435afc3386c0d47490e4",
+      "updated_at": "2026-07-07T20:50:04-04:00",
+      "source_report": "REPORT-INFRA Zeus global page ignore list 2026-07-07",
       "agent": "zeus",
-      "purpose": "Scan Bot/DTR pages missing in SmartBidding for leads/subscribers using Subscriber Manager scan workflow."
+      "purpose": "DTR missing-in-SB lead scan now respects mgs-global-page-ignore-list.json and current Sheet columns."
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-missing-sb-page-lead-scan.sh",
@@ -4613,11 +4614,31 @@
       "source_report": "REPORT-INFRA Zeus DTR missing-SB page lead scan 2026-07-07",
       "agent": "zeus",
       "purpose": "Scan Bot/DTR pages missing in SmartBidding for leads/subscribers using Subscriber Manager scan workflow."
+    },
+    {
+      "path": "/root/mgs-agent/data/mgs-global-page-ignore-list.json",
+      "size_bytes": 27366,
+      "sha256": "1c479011ba7d57d38304c740da5e83c61a54d63fd9b92f00332da485f5b5e1f6",
+      "updated_at": "2026-07-07T20:50:04-04:00",
+      "agent": "zeus",
+      "source_report": "REPORT-INFRA Zeus global page ignore list 2026-07-07",
+      "purpose": "Canonical global ignore list for MGS pages marked BLOCKED/IGNORAR; whole-system skip source."
     }
   ],
   "mu_plugin_canonical": {
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "docs": [
+    {
+      "path": "/root/mgs-agent/AGENT.md",
+      "size_bytes": 23572,
+      "sha256": "c84d2d67e5bd1aafeb38937e928a2343e6badf05064c9f0c230844e9763238ba",
+      "updated_at": "2026-07-07T20:50:04-04:00",
+      "agent": "zeus",
+      "source_report": "REPORT-INFRA Zeus global page ignore list 2026-07-07",
+      "purpose": "MGS-wide rule: global page ignore list must be honored across agents/automations."
+    }
+  ]
 }

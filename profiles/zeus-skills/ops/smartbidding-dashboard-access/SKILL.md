@@ -457,6 +457,8 @@ Automated version should use the same source of truth: per Bot user + account/se
 
 Rodolfo correction 2026-07-07 for missing-in-SB audit Sheets: after scanning, update the Sheet result column immediately. In the `Fase 1 - DTR sem SB` tab, **column D** is the scan result/lead count column: write the numeric subscriber/lead count when found, `0` when scan completes OK with no leads, and `PAGE_NOT_FOUND` when the page is not found under the expected DTR account. Do not finish the audit with only local JSON/CSV reports if the Sheet has a result column to be filled. Detailed reference: `references/dtr-missing-sb-page-lead-scan.md`.
 
+Rodolfo correction 2026-07-07: in the same tab, **column E** is authoritative for global exclusion. Rows with `STATUS=BLOCKED` or `STATUS=IGNORAR` must be written to `/root/mgs-agent/data/mgs-global-page-ignore-list.json` and ignored by the entire MGS system: no future Bot/DTR scans, no Smart Bidding registration, no scheduling, no operational backfill. Match first by large `FB_PAGE_ID`, then by `bot_user + PAGE_ID/PG`. Column F then describes the action for non-ignored rows; if it says `cadastrar na dash e colocar o status broadcast e escolher o template`, the matching registration sheet (`gid=907050576`) is the execution payload for creating SB Messenger Page rows.
+
 ## Runtime Caveats
 
 - Site count is runtime/filter dependent. Always verify the current selected-site count and paginator count before reporting. For full MGS Messenger Page schedule inventory, validate `Digital trust` + `Digital trust 2`, selector `56 sites`, and paginator `Showing 1 to 50 of 3237` when that is the expected full scope. A prior 45-site capture returned only 2,443 rows and was incomplete.
