@@ -84,7 +84,6 @@ For standard chats, the visual/timing pattern is:
 
 For Wantabrand/M2:
 
-- Do **not** remove `window.onInfinitePostLoaded()` just because the provider is M2.
 - Keep the same timing and visual location as the other chats.
 - Current M2 top-block placeholder confirmed by Rodolfo:
 
@@ -93,7 +92,7 @@ For Wantabrand/M2:
 ```
 
 - Insert that placeholder wrapped in a neutral chat container, e.g. `.pubguru-chat-ad.pubguru-chat-ad-top`, **after the value/amount question has been answered**, matching the other chats' timing.
-- After inserting the M2 top-block placeholder, call `window.onInfinitePostLoaded()` so the provider can detect/fill it.
+- **Do not call `window.onInfinitePostLoaded()` for the M2/PubGuru top block.** Rodolfo confirmed this caused the interstitial to appear early before final offer click. For M2, the `<pubguru data-pg-ad="wantabrand_mob_top">` tag itself is the provider signal for the top block.
 - Keep JBF/JBFTag-specific wrapper calls out of the public source. If shared templates contain JBF logic for non-M2 sites, inject that logic conditionally server-side so rendered M2 public source has no `jbf`, `jbftag`, `showRewardedAds`, or `requestRewardAds` literals.
 - Validation should include both source checks and a real browser flow: popup/gate → CTA → answer first in-chat question → answer value/amount question → assert `document.querySelectorAll('pubguru[data-pg-ad="wantabrand_mob_top"]').length === 1`.
 
@@ -120,9 +119,9 @@ Do **not** require `onInfinitePostLoaded` or inline ad block classes to be absen
 
 - Public source has PubGuru loader.
 - Gate CTA has `.pg-rewarded`.
-- `window.onInfinitePostLoaded()` remains present for the inline top block.
 - The M2-provided top-block div/class appears only at the intended in-chat insertion point.
-- Browser flow: popup/gate → rewarded trigger → in-chat value/amount question answered → top block appears after that answer → final offer click still redirects/interstitial behavior remains M2-controlled.
+- For M2/PubGuru, `window.onInfinitePostLoaded()` must not be called by the top-block branch; if it remains in shared JBF code, verify it is gated away from M2.
+- Browser flow: popup/gate → rewarded trigger → in-chat value/amount question answered → top block appears after that answer → no interstitial before offer click → final offer click remains M2-controlled.
 - No JBF/JBFTag wrapper calls are present.
 
 ## Reporting discipline
