@@ -86,9 +86,16 @@ For Wantabrand/M2:
 
 - Do **not** remove `window.onInfinitePostLoaded()` just because the provider is M2.
 - Keep the same timing and visual location as the other chats.
-- When Rodolfo sends the M2-provided tag/div/class for the top block, insert that placeholder **after the value/amount question has been answered**, matching the other chats' timing.
+- Current M2 top-block placeholder confirmed by Rodolfo:
+
+```html
+<pubguru data-pg-ad="wantabrand_mob_top"></pubguru>
+```
+
+- Insert that placeholder wrapped in a neutral chat container, e.g. `.pubguru-chat-ad.pubguru-chat-ad-top`, **after the value/amount question has been answered**, matching the other chats' timing.
 - After inserting the M2 top-block placeholder, call `window.onInfinitePostLoaded()` so the provider can detect/fill it.
-- Keep JBF/JBFTag-specific wrapper calls out of the public source.
+- Keep JBF/JBFTag-specific wrapper calls out of the public source. If shared templates contain JBF logic for non-M2 sites, inject that logic conditionally server-side so rendered M2 public source has no `jbf`, `jbftag`, `showRewardedAds`, or `requestRewardAds` literals.
+- Validation should include both source checks and a real browser flow: popup/gate → CTA → answer first in-chat question → answer value/amount question → assert `document.querySelectorAll('pubguru[data-pg-ad="wantabrand_mob_top"]').length === 1`.
 
 ## Final offer click / Interstitial
 
