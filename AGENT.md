@@ -167,6 +167,10 @@ Routing:
 
 If a correction was applied but not persisted, the task is not complete. Ask whether to save only when there is genuine ambiguity about whether a one-off observation should become a durable rule; do not ask by default for every correction.
 
+## Global page ignore list (MGS-wide)
+
+`/root/mgs-agent/data/mgs-global-page-ignore-list.json` is the canonical deny/ignore list for Messenger/Facebook pages that Rodolfo marked as `BLOCKED` or `IGNORAR` in operational Sheets. Entries in this file must be ignored by the whole MGS system: do not scan them in DigitalTRChat/Bot, do not add them to Smart Bidding, do not schedule broadcasts, do not include them in registration/backfill jobs, and do not surface them as actionable unless Rodolfo explicitly removes or overrides the ignore. Match primarily by large `FB_PAGE_ID`, then by `bot_user + PAGE_ID/PG`.
+
 ## Default behavior
 
 ### Communication style:

@@ -233,6 +233,16 @@ async def main():
     OUTDIR.mkdir(parents=True, exist_ok=True)
     rows=parse_sheet()
     state=load_state(); state['updated_at_et']=now(); state.setdefault('sheet_rows',len(rows))
+    ignore_keys=load_ignore_keys()
+    active_rows=[]
+    for r in rows:
+        if is_ignored_row(r, ignore_keys):
+            key=f"{r['bot_user']}::{norm_name(r['account_name'])}::{r['pg']}::{r['fb_page_id']}"
+            rec={**r,'status':'IGNORED_GLOBAL_PAGE_IGNORE_LIST','lead_count':'','scan_ok_seen':False,'final':True,'checked_at_et':now()}
+            state['rows'][key]=rec
+        else:
+            active_rows.append(r)
+    rows=active_rows
     users=sorted({r['bot_user'] for r in rows})
     if args.limit_users: users=users[:args.limit_users]
     items, missing, item_errors = health.discover_dtr_items(users)
