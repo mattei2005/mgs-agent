@@ -165,6 +165,17 @@ async def fetch_pages(ctx, h, pubs):
     return rows
 
 
+async def fetch_templates(ctx, h):
+    r = await ctx.request.get(API + '/broadcast/Messenger?companies[]=digital-trust&companies[]=digital-trust-2&source=Messenger', headers=h, timeout=120000)
+    txt = await r.text()
+    if r.status != 200:
+        raise RuntimeError(f'/broadcast/Messenger {r.status}: {txt[:300]}')
+    data = json.loads(txt)
+    if not isinstance(data, list):
+        raise RuntimeError('templates response not list')
+    return data
+
+
 async def fetch_users(ctx, h, pubs):
     qs = '&'.join('companies[]=' + urllib.parse.quote(x) for x in pubs) + '&source=Messenger'
     for url in [API + '/users/Messenger?' + qs, API + '/users/Messenger']:
@@ -193,6 +204,28 @@ def user_index(users, pages):
         if login and mid:
             idx.setdefault(login, str(mid))
     return idx
+
+
+def template_fallback_for_login(login, templates):
+    # Fallback for new Messenger users with no existing Page rows. Prefer the site/country/language template visible in Broadcast Template.
+    rules = [
+        ('disparosducapesuscces@gmail.com', ['Ducapes - US-CC-ES']),
+        ('disparosopenzedloancarusen@gmail.com', ['Openzed - US-CC-EN', 'Openzed - US']),
+        ('disparosportalusaen@gmail.com', ['Portal - US-CC-EN']),
+        ('disparoszytivaspain@gmail.com', ['ZytivaFinanzas - ES-CC-ES']),
+    ]
+    for exact, needles in rules:
+        if login == exact:
+            matches=[]
+            for t in templates:
+                name = norm(t.get('NAME'))
+                if any(n in name for n in needles) and 'NAO USAR' not in name.upper() and not name.lower().startswith('teste'):
+                    matches.append(t)
+            if matches:
+                matches.sort(key=lambda t: int(t.get('PAGES') or 0), reverse=True)
+                t=matches[0]
+                return {'BROADCAST_TEMPLATE_ID': norm(t.get('ID')), 'BROADCAST_TEMPLATE_NAME': norm(t.get('NAME')), 'source_row_id': None, 'source_page': None, 'source_status': 'template_fallback'}
+    return None
 
 
 def template_index(pages):
@@ -270,6 +303,7 @@ async def main():
         pubs, pub_counts = full_publishers(companies)
         pages = await fetch_pages(ctx, h, pubs)
         users = await fetch_users(ctx, h, pubs)
+        templates = await fetch_templates(ctx, h)
         uidx = user_index(users, pages)
         tidx = template_index(pages)
 
@@ -297,7 +331,7 @@ async def main():
                 existing.append({'sheet_row': row['_sheet_row'], 'reason': 'PAGE_ID already in SB for same login', 'sheet': row, 'sb': public_row(same_page_hits[0])})
                 continue
             mid = uidx.get(login)
-            tinfo = tidx.get(login)
+            tinfo = tidx.get(login) or template_fallback_for_login(login, templates)
             if not mid:
                 skipped.append({'sheet_row': row['_sheet_row'], 'reason': 'MESSENGER_USER_ID not found for login', 'login': login, 'sheet': row})
                 continue
