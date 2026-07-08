@@ -352,7 +352,10 @@ def build_report(input_path: Path, out_dir: Path, fincgriffin_gb_to_us_g006: boo
         c_day, c_acc, c_spend = find_col(df, ['Dia']), find_col(df, ['Nome da conta']), find_col(df, ['Valor gasto'])
         dates = []
         for _, r in df.iterrows():
-            d = norm_date(r.get(c_day)); dates.append(d)
+            d = norm_date(r.get(c_day))
+            if not d:
+                continue
+            dates.append(d)
             acct = clean_str(r.get(c_acc)); key = acct.lower().replace(' ', '')
             if key not in GOOGLE_ACCOUNT_MAP:
                 raise ValueError(f'Conta Google sem mapa: {acct}')
@@ -503,7 +506,7 @@ def preflight(input_path: Path) -> dict[str, Any]:
         info = {'sheet': sheet, 'rows': len(df), 'cols': len(df.columns), 'columns': [str(c) for c in df.columns]}
         date_col = find_col(df, ['Date', 'Day', 'Dia'])
         if date_col and len(df):
-            dates = [norm_date(v) for v in df[date_col].dropna()]
+            dates = [d for d in (norm_date(v) for v in df[date_col].dropna()) if d]
             if dates:
                 info['date_min'] = min(dates); info['date_max'] = max(dates)
         summary['sheets'].append(info)
