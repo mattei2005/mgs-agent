@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-07T22:10:43-04:00",
-    "generated_by": "manual Zeus infra inventory update + infra-discovery base"
+    "updated_at": "2026-07-08T00:50:35-04:00",
+    "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
     {
@@ -1522,6 +1522,16 @@
       "modified_at": "2026-07-03T01:03:13-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/dtr-missing-sb-page-lead-scan.py",
+      "size_bytes": 15955,
+      "modified_at": "2026-07-07T20:49:06-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/dtr-missing-sb-page-lead-scan.sh",
+      "size_bytes": 234,
+      "modified_at": "2026-07-07T19:28:30-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/dtr-sb-full-restricted-sync.py",
       "size_bytes": 25183,
       "modified_at": "2026-07-03T03:05:31-04:00"
@@ -1593,8 +1603,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
-      "size_bytes": 7290,
-      "modified_at": "2026-05-27T09:31:34-04:00"
+      "size_bytes": 8134,
+      "modified_at": "2026-07-08T00:48:34-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hermes-post-update-restart-finalize.sh",
@@ -1947,54 +1957,24 @@
       "modified_at": "2026-06-07T22:52:10-04:00"
     },
     {
-      "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
-      "size_bytes": 4466,
-      "modified_at": "2026-04-24T18:05:16-04:00"
+      "path": "/root/mgs-agent/scripts/utility-canary-3h-runner.sh",
+      "size_bytes": 1926,
+      "modified_at": "2026-07-08T00:42:26-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/utility-canary-approval-loop.py",
-      "size_bytes": 18327,
-      "sha256": "9d6ea7219446d2b5f5f9126ba82dd295c9aa1e959ba8717b902bbe01ecda2c6f",
-      "updated_at": "2026-07-07T18:45:00-04:00",
-      "source_report": "REPORT-INFRA Zeus Utility canary approval loop 2026-07-07",
-      "agent": "zeus",
-      "purpose": "Temporary 3h Utility canary approval loop and durable message bank/state."
+      "size_bytes": 26155,
+      "modified_at": "2026-07-08T00:39:53-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/utility-canary-approval-loop.sh",
-      "size_bytes": 228,
-      "sha256": "6eab8f37845123b24cbfa46c41f7a71f28695c1940e415b55bea6b2049251d98",
-      "updated_at": "2026-07-07T18:45:00-04:00",
-      "source_report": "REPORT-INFRA Zeus Utility canary approval loop 2026-07-07",
-      "agent": "zeus",
-      "purpose": "Temporary 3h Utility canary approval loop and durable message bank/state."
+      "size_bytes": 400,
+      "modified_at": "2026-07-08T00:06:52-04:00"
     },
     {
-      "path": "/root/.hermes/profiles/zeus/scripts/utility-canary-approval-loop.sh",
-      "size_bytes": 94,
-      "sha256": "4804821b9dc6cbcd489a0b62a5dcf5538ddde46ec8a069a525d8fae00635b7c5",
-      "updated_at": "2026-07-07T18:45:00-04:00",
-      "source_report": "REPORT-INFRA Zeus Utility canary approval loop 2026-07-07",
-      "agent": "zeus",
-      "purpose": "Temporary 3h Utility canary approval loop and durable message bank/state."
-    },
-    {
-      "path": "/root/mgs-agent/scripts/dtr-missing-sb-page-lead-scan.py",
-      "size_bytes": 15955,
-      "sha256": "7dbc940385b3ce0fbd1f730fc91b5753f0a6f1aceb6d435afc3386c0d47490e4",
-      "updated_at": "2026-07-07T20:50:04-04:00",
-      "source_report": "REPORT-INFRA Zeus global page ignore list 2026-07-07",
-      "agent": "zeus",
-      "purpose": "DTR missing-in-SB lead scan now respects mgs-global-page-ignore-list.json and current Sheet columns."
-    },
-    {
-      "path": "/root/mgs-agent/scripts/dtr-missing-sb-page-lead-scan.sh",
-      "size_bytes": 234,
-      "sha256": "120f7f179fb9fe5ed27c772d45fd1b34ffb60a0a7e992a146517c5dc1dd02fd3",
-      "updated_at": "2026-07-07T19:30:00-04:00",
-      "source_report": "REPORT-INFRA Zeus DTR missing-SB page lead scan 2026-07-07",
-      "agent": "zeus",
-      "purpose": "Scan Bot/DTR pages missing in SmartBidding for leads/subscribers using Subscriber Manager scan workflow."
+      "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
+      "size_bytes": 4466,
+      "modified_at": "2026-04-24T18:05:16-04:00"
     }
   ],
   "skills_mgs": [
@@ -4424,9 +4404,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
-      "size_bytes": 143,
-      "md5": "184db47a3601ee5f037068e4910120f7",
-      "modified_at": "2026-07-07T16:57:01-04:00"
+      "size_bytes": 359,
+      "md5": "b5be30fb43f8873d9a343f58dafae4da",
+      "modified_at": "2026-07-08T00:47:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -4437,8 +4417,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "271287bcbea7102ea3532d5612052e0f",
-      "modified_at": "2026-07-07T16:56:19-04:00"
+      "md5": "55aa3f05c45cd90629fd9ac690626cd1",
+      "modified_at": "2026-07-08T00:41:22-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -4449,8 +4429,8 @@
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
       "size_bytes": 25012,
-      "md5": "2047e8f0e5dbd01b632eab796b7b6130",
-      "modified_at": "2026-07-07T16:56:32-04:00"
+      "md5": "eabe45909c20faf0e493511c74280860",
+      "modified_at": "2026-07-08T00:42:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -4460,15 +4440,21 @@
     },
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
-      "size_bytes": 59,
-      "md5": "510388b3109a9a4fb3b705f16ec84c75",
-      "modified_at": "2026-07-07T16:45:02-04:00"
+      "size_bytes": 331,
+      "md5": "b491c103fff55eac3bd6dc3734aa18e7",
+      "modified_at": "2026-07-08T00:45:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
       "size_bytes": 3782,
       "md5": "f1a19e1115d5f457cfe61b841aaefff1",
       "modified_at": "2026-07-07T09:16:02-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
+      "size_bytes": 1015394,
+      "md5": "d514d2fe44076ef7a958ec2f5b8801b4",
+      "modified_at": "2026-07-07T19:40:28-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
@@ -4485,32 +4471,32 @@
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "2dc620d44427ef9e032588c97085133b",
-      "modified_at": "2026-07-07T13:49:59-04:00"
+      "md5": "14b19e8ff7d475a1381e985427ac6a60",
+      "modified_at": "2026-07-07T19:50:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 24004,
-      "md5": "26da2b0a2b63b56d5b1767c31fe0dd61",
-      "modified_at": "2026-07-07T16:55:02-04:00"
+      "size_bytes": 24262,
+      "md5": "64e6c0236b1856b4eef4b859b9088521",
+      "modified_at": "2026-07-08T00:50:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 327,
-      "md5": "2caf72a2dccbb1595890907f3318929a",
-      "modified_at": "2026-07-07T14:37:02-04:00"
+      "size_bytes": 330,
+      "md5": "4b5885851c1f0551fba77f1499e99650",
+      "modified_at": "2026-07-07T20:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 438,
-      "md5": "38b0739f58811f0acd1ea5c034e3948a",
-      "modified_at": "2026-07-07T16:45:49-04:00"
+      "md5": "2e90aa1cdb40d5739b869d57c6fd38f6",
+      "modified_at": "2026-07-08T00:45:46-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 175766,
-      "md5": "dc31d4cfb73a7b7951ce2d049d231676",
-      "modified_at": "2026-07-07T16:53:54-04:00"
+      "size_bytes": 185695,
+      "md5": "d1fc986f1d167e7e3ef569f80adf04b6",
+      "modified_at": "2026-07-08T00:42:49-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -4533,14 +4519,20 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 44050,
-      "md5": "b1b8d832ac19a2cd9664d286470b3a83",
-      "modified_at": "2026-07-07T16:54:51-04:00"
+      "md5": "66bd5fa3b146beea6c67fad411319c21",
+      "modified_at": "2026-07-08T00:49:50-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
       "size_bytes": 8526,
       "md5": "54b0da218f755d0e6635646ef05a3093",
       "modified_at": "2026-06-29T16:24:48-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/mgs-global-page-ignore-list.json",
+      "size_bytes": 27366,
+      "md5": "089db15b6cb378eaec7fd14a6bae7528",
+      "modified_at": "2026-07-07T20:47:57-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -4618,7 +4610,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2294,
       "md5": "f5fedba43c8a29377d6966150321988c",
-      "modified_at": "2026-07-07T16:56:02-04:00"
+      "modified_at": "2026-07-08T00:46:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -4633,16 +4625,28 @@
       "modified_at": "2026-04-27T12:02:17-04:00"
     },
     {
+      "path": "/root/mgs-agent/data/utility-canary-approval-state.json",
+      "size_bytes": 324438,
+      "md5": "b51e47d64fb7e828cc08508fcbe6160d",
+      "modified_at": "2026-07-08T00:43:00-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/utility-message-bank.json",
+      "size_bytes": 1914010,
+      "md5": "9017b5e8d65149200fc888fcc09710cd",
+      "modified_at": "2026-07-08T00:43:00-04:00"
+    },
+    {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 1759,
-      "md5": "e67c5d06e1dcc2b702b9d318dfbbc7e6",
-      "modified_at": "2026-07-07T16:55:02-04:00"
+      "md5": "4b0b8e53f221d54a878b49a422f08867",
+      "modified_at": "2026-07-08T00:50:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "c75381713319e6f1ac8ff4e101156eab",
-      "modified_at": "2026-07-07T14:07:02-04:00"
+      "md5": "a75592a6d1354a30d2be70b6a1bad7a6",
+      "modified_at": "2026-07-07T20:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",
@@ -4682,61 +4686,14 @@
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
-      "size_bytes": 45590,
-      "md5": "a5340a91cb211e86ffdd67b91f310c7c",
-      "modified_at": "2026-07-07T10:20:02-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/data/utility-message-bank.json",
-      "size_bytes": 160368,
-      "sha256": "4d0a65b31296183041633a251cd0a8c301ad96b0c1e46592230c7cf094bf5f61",
-      "updated_at": "2026-07-07T18:45:00-04:00",
-      "source_report": "REPORT-INFRA Zeus Utility canary approval loop 2026-07-07",
-      "agent": "zeus",
-      "purpose": "Temporary 3h Utility canary approval loop and durable message bank/state."
-    },
-    {
-      "path": "/root/mgs-agent/data/utility-canary-approval-state.json",
-      "size_bytes": 105380,
-      "sha256": "3e052c8d3587cfbbaa9317d0be1aac47fce459c78782b7c48899025ef078c17b",
-      "updated_at": "2026-07-07T18:45:00-04:00",
-      "source_report": "REPORT-INFRA Zeus Utility canary approval loop 2026-07-07",
-      "agent": "zeus",
-      "purpose": "Temporary 3h Utility canary approval loop and durable message bank/state."
-    },
-    {
-      "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
-      "size_bytes": 4171,
-      "sha256": "1aac5d81d9cb0e3b287474a9681d0dbb3a172ce015891f2238c75404b81cfe4f",
-      "updated_at": "2026-07-07T19:30:00-04:00",
-      "source_report": "REPORT-INFRA Zeus DTR missing-SB page lead scan 2026-07-07",
-      "agent": "zeus",
-      "purpose": "Scan Bot/DTR pages missing in SmartBidding for leads/subscribers using Subscriber Manager scan workflow."
-    },
-    {
-      "path": "/root/mgs-agent/data/mgs-global-page-ignore-list.json",
-      "size_bytes": 27366,
-      "sha256": "1c479011ba7d57d38304c740da5e83c61a54d63fd9b92f00332da485f5b5e1f6",
-      "updated_at": "2026-07-07T20:50:04-04:00",
-      "agent": "zeus",
-      "source_report": "REPORT-INFRA Zeus global page ignore list 2026-07-07",
-      "purpose": "Canonical global ignore list for MGS pages marked BLOCKED/IGNORAR; whole-system skip source."
+      "size_bytes": 46067,
+      "md5": "80b595b0b9b77d64eb3d42b4ca07c0a2",
+      "modified_at": "2026-07-07T21:25:01-04:00"
     }
   ],
   "mu_plugin_canonical": {
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  },
-  "docs": [
-    {
-      "path": "/root/mgs-agent/AGENT.md",
-      "size_bytes": 23572,
-      "sha256": "c84d2d67e5bd1aafeb38937e928a2343e6badf05064c9f0c230844e9763238ba",
-      "updated_at": "2026-07-07T20:50:04-04:00",
-      "agent": "zeus",
-      "source_report": "REPORT-INFRA Zeus global page ignore list 2026-07-07",
-      "purpose": "MGS-wide rule: global page ignore list must be honored across agents/automations."
-    }
-  ]
+  }
 }
