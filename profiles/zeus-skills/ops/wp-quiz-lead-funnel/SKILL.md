@@ -116,6 +116,8 @@ When migrating static chat/quiz pages that depend on a third-party ad wrapper, p
 
 For Ciro/JBF-style chat pages, see `references/static-chat-wrapper-contract.md` before changing ad behavior. Treat wrapper logic as outside the plugin boundary; the plugin may route/render/generate the page, but the wrapper owns monetization behavior.
 
+When investigating a suspicious wrapper suffix or source/country variant such as `_facebook_br.builder.js`, use the read-only diagnostic sequence in `references/static-chat-wrapper-diagnostics.md`: compare live HTML, request-context variations, CDN variant existence, and accessible plugin/theme/snippet code before concluding whether the variant is actively served.
+
 ### 5. Redirect Split
 
 Business-facing UI should avoid raw JSON where possible.
