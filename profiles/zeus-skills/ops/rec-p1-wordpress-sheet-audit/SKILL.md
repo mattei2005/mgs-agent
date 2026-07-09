@@ -1,0 +1,55 @@
+---
+name: rec-p1-wordpress-sheet-audit
+description: Use when Rodolfo asks to audit WordPress REC/P1 article pairs into a Google Sheet, including dates, links, and WordPress tags for both REC and linked P1 posts.
+version: 1.0.0
+author: Hermes Agent
+license: MIT
+metadata:
+  hermes:
+    tags: [mgs, wordpress, rec, p1, google-sheets, audit]
+    related_skills: [content-publish-wordpress, productivity-workspace-apis]
+---
+
+# REC/P1 WordPress Sheet Audit
+
+## Overview
+
+Use this workflow to build a spreadsheet mapping REC articles to their linked P1 articles across MGS WordPress sites. The key relationship is not inferred from title alone: open the REC content and identify the card/button/final CTA link that points to the P1.
+
+## Required Columns
+
+Always use exactly these columns unless Rodolfo changes the format:
+
+1. `Data REC`
+2. `Artigo REC`
+3. `Tags REC`
+4. `Data P1`
+5. `Artigo P1`
+6. `Tags P1`
+
+Do not collapse the P1 into the REC date. REC and P1 each need their own date, link, and WordPress tag list.
+
+## Workflow
+
+1. Identify the target sheet tabs/sites from the Sheet itself or the screenshot.
+2. For each site, discover REC candidates via WordPress REST. Use `/wp-json/wp/v2/search` as a fallback because some older REC posts may be reachable by direct ID/search but absent from ordinary `/posts` listing.
+3. Fetch the REC post body and extract same-site links from `content.rendered`.
+4. Pick the P1 link from REC CTA/card/button patterns: slugs starting with `apply`, `aplicar`, `p1-`, or equivalent apply/solicitar links.
+5. Fetch both posts through WordPress REST and resolve tag IDs through `/wp-json/wp/v2/tags?include=...`.
+6. Fill the Google Sheet tab with one row per REC→P1 pair using the required column order.
+7. Verify by CSV export/readback for every edited tab: header equals the required columns, row count matches expected sample size, and the last row has the expected REC link.
+
+## Pitfalls
+
+- Some sites use `apply-now-*`, others use `aplicar-ahora-*`, others use `p1-*`; do not assume a single P1 slug pattern.
+- Public `/posts` listings can miss older/hidden REC posts. Cross-check with `/wp/v2/search` and direct `/posts/<id>`.
+- A P1 may have no WordPress tags. Record that explicitly as blank or `SEM TAGS NO WP`, not as a failed lookup.
+- For Google Sheets browser fallback, an array literal formula in `A1` can populate a small test table quickly, but always validate via CSV export/readback.
+
+## Verification Checklist
+
+- [ ] Each tab has the six required columns in order.
+- [ ] Each target site has the requested number of REC rows.
+- [ ] Each P1 URL was found inside the REC content, not guessed from slug similarity alone.
+- [ ] WordPress tags for REC and P1 were resolved from tag IDs.
+- [ ] Google Sheet readback confirms the data is present remotely.
