@@ -332,6 +332,7 @@ Quando Rodolfo disser “GPT-5.5 pra tudo”, “zero Anthropic”, “deleta de
 - Alguns serviços fora do gateway podem continuar chamando Anthropic mesmo depois de migrar Zeus/Atena/Ares.
 - OpenHands “funcionando” não basta: se wrapper/trajectory usa `anthropic/claude-*` + API key 1Password, isso é uma falha de custo/governança salvo autorização explícita de Rodolfo. Diagnóstico canônico: `references/atena-openhands-provider-diagnostic.md`.
 - Para OpenHands na Atena/Zeus, a política correta é **GPT-5.5/OpenAI-Codex OAuth para tudo por padrão**. Não sugerir “backend não-Anthropic aprovado” genérico, OpenRouter, Haiku ou Claude como workaround. Se OpenHands precisar de compatibilidade com Codex, forçar `openai/gpt-5.5`, usar OAuth do profile sem imprimir token e validar o modelo real no output. Playbook: `references/openhands-gpt55-codex-wrapper.md`.
+- Quando um agente MGS falhar em thread Discord com `Provider authentication failed` e logs de OpenAI-Codex/Codex mostrarem refresh token inválido, reparar o profile afetado antes de responder: backup fora do Git, copiar um provider `openai-codex` válido de outro profile MGS validado, smoke `hermes -p <agent> -z ...`, gerar/postar a resposta como o agente na thread original, fazer readback Discord e só então reportar. Playbook: `references/mgs-agent-codex-auth-repair-and-thread-reply.md`.
 
 ## 4. Image generation / OpenAI-Codex OAuth
 
