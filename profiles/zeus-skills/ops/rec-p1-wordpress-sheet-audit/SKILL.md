@@ -55,7 +55,7 @@ Do not collapse the P1 into the REC date. REC and P1 each need their own date, l
 - Extract CTA/card/LazyBlock links only from the real post body, never from related-post widgets, sidebar, footer, menu, category lists or homepage/blog listing blocks. On Cliquet theme use `jd-post-content`; on OpenZed theme use `article.main-content` and cut before `related-posts`/navigation/comments. LazyBlock markup may be inside HTML comments; unwrap comments inside the post body before extracting `<a href>`.
 - If many unrelated REC rows all point to the same P1, stop immediately: that almost always means the scraper captured `related posts`, not the actual CTA card/button.
 - Canonicalize legacy/internal IP URLs found in buttons (e.g. `http://18.x.x.x/slug/` or `http://3.x.x.x/slug/`) to the current domain when the same slug exists on that site, and keep the original IP only in the button-links/audit column if needed.
-- A P1 may have no WordPress tags. Record that explicitly as blank or `SEM TAGS NO WP`, not as a failed lookup.
+- If a REC or P1 has no WordPress tags after the correct post-ID lookup returns `tags: []`, leave the tag cell blank. Do not write `SEM TAGS NO WP` in columns C/F; it looks like stale/bad data in the final sheet.
 - For Google Sheets browser fallback, an array literal formula in `A1` can populate a small test table quickly, but always validate via CSV export/readback.
 
 ## References
