@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T15:31:49-04:00",
+    "updated_at": "2026-07-09T15:51:19-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -818,6 +818,32 @@
       "updated_at": "2026-07-09T10:11:23-04:00",
       "source_report": "REPORT-INFRA Zeus meta app roles sheet sync timeout correction 2026-07-09",
       "validation": "Reference patched via skill_manage; production monitor validation OK at 10:10 EDT."
+    },
+    {
+      "id": "zuout-mgs-chat-funnels-plugin",
+      "agent": "zeus",
+      "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/mgs-chat-funnels.php",
+      "type": "wordpress_plugin",
+      "sha256": "22d4f3df72bd72801ae1323fda248b79fcefef278fcbd4c517701cd861ef848d",
+      "size_bytes": 73717,
+      "source": "RunCloud Inc01 zuout.com",
+      "purpose": "WordPress plugin code for Zuout chat funnel; ActView provider added for zuout only.",
+      "validation": "PHP lint OK; public and origin HTML contain scr.actview.net/zuout.js + zuout_top_wrapper/zuout_top and contain no assets.jbfdigital/window.wrapper_url on /chat/car/br1/. Browser click path created #zuout_top_wrapper with no console JS errors.",
+      "backup_path": "/home/runcloud/webapps/zuout/wp-content/mgs-chat-funnels-actview-backup-20260709-194554",
+      "updated_at": "2026-07-09T15:51:19-04:00"
+    },
+    {
+      "id": "zuout-mgs-chat-funnels-car-br-config",
+      "agent": "zeus",
+      "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/configs/car-br-01.json",
+      "type": "wordpress_plugin_config",
+      "sha256": "d387a4dbb9ccf0bb0601f45e28c1868113757f095a804e4a61734eaf0c156452",
+      "size_bytes": 5268,
+      "source": "RunCloud Inc01 zuout.com",
+      "purpose": "Zuout CAR-BR-01 chat config set to ad_provider=actview and ActView script.",
+      "validation": "PHP lint OK; public and origin HTML contain scr.actview.net/zuout.js + zuout_top_wrapper/zuout_top and contain no assets.jbfdigital/window.wrapper_url on /chat/car/br1/. Browser click path created #zuout_top_wrapper with no console JS errors.",
+      "backup_path": "/home/runcloud/webapps/zuout/wp-content/mgs-chat-funnels-actview-backup-20260709-194554",
+      "updated_at": "2026-07-09T15:51:19-04:00"
     }
   ],
   "profile_skill_references": [
@@ -1197,9 +1223,9 @@
       "size_bytes": 4468,
       "modified_at": "2026-07-09T15:27:52-04:00",
       "sha256": "77edae6b5d9ade9cf798cd3fbe53a709435a7ccfae1950969c3c2d9fdb31ae40",
-      "purpose": "Static chat ad-wrapper contracts for MGS quiz/chat funnels, including JBF/SB and Zuout ActView exception.",
+      "purpose": "Static chat ad-wrapper contracts for MGS quiz/chat funnels, including JBF/SB, Wantabrand M2, and Zuout ActView exception.",
       "validation": "Updated from Rodolfo correction: zuout.com/chat/car/br1/ uses ActView scr.actview.net/zuout.js + zuout_top_wrapper/zuout_top, not SB/JBF wrapper.",
-      "updated_at": "2026-07-09T15:28:31-04:00",
+      "updated_at": "2026-07-09T15:51:19-04:00",
       "skill": "wp-quiz-lead-funnel",
       "source_report": "REPORT-INFRA Zeus Zuout ActView wrapper contract 2026-07-09"
     },
