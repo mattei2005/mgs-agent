@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T14:45:19-04:00",
+    "updated_at": "2026-07-09T15:27:27-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1194,12 +1194,12 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/ops/rec-p1-wordpress-sheet-audit/SKILL.md",
-      "size_bytes": 5560,
-      "modified_at": "2026-07-09T18:45:07.533699+00:00",
-      "sha256": "edb3e2cce583d51fd4eb0b3db6b6acaa67b5de337f84b693319935d213a185d5",
-      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with post-body-only CTA extraction, full URL inventory reconciliation, no duplicate P1 destination rows, canonical IP replacement, and divergent CTA/button-link reporting.",
-      "validation": "Patched after Rodolfo caught repeated wrong P1 links caused by scraping related-post widgets instead of the actual CTA/LazyBlock card; rebuilt sheet v3 and validated by CSV plus spot-checks.",
-      "updated_at": "2026-07-09T14:45:19-04:00"
+      "size_bytes": 5966,
+      "modified_at": "2026-07-09T19:27:15.783914+00:00",
+      "sha256": "9e26d96fb882da11004e735ad8e000c1119bd007cdf0cf7eefbf72fe089c62de",
+      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with post-body-only CTA extraction, post-ID REST tag lookup, full URL inventory reconciliation, no duplicate P1 destination rows, canonical IP replacement, and divergent CTA/button-link reporting.",
+      "validation": "Patched after Rodolfo caught false SEM TAGS NO WP; /posts?slug returned [] while /posts/{id} returned tag IDs. Rebuilt sheet and validated Forever 21 row by CSV readback.",
+      "updated_at": "2026-07-09T15:27:27-04:00"
     }
   ],
   "systemd_services": [
