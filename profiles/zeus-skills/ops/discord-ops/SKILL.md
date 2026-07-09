@@ -25,6 +25,10 @@ Do not paste raw `[REPORT-INFRA]` blocks into a normal operational reply to Rodo
 
 For short steering messages from Rodolfo such as “ta iai?”, “ok”, “ah?”, or “roda”, answer the immediate operational state/action. Do not treat “ok” as completion if no action was requested; do not add internal audit/report footers.
 
+## Message deletion / repost by channel ID
+
+When Rodolfo asks Zeus to delete a recent Discord report/message and gives a channel/thread ID, do not answer “I cannot delete” from platform-session limitations. Use the available MGS Discord bot token via REST API when accessible: fetch recent messages from `GET /channels/{channel_id}/messages?limit=N`, identify the target bot/report messages by author/time/content, delete the exact message IDs with `DELETE /channels/{channel_id}/messages/{message_id}`, then repost the corrected content if requested. For split reports, delete all parts of the same report batch (`Parte 1 de N`, `Parte 2 de N`, etc.), not only the last chunk. Never print tokens; show only sanitized IDs/status.
+
 
 ## App-rate-limit channel scope (B001–B010)
 
