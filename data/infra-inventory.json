@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T16:41:21-04:00",
+    "updated_at": "2026-07-09T17:56:45-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -824,13 +824,13 @@
       "agent": "zeus",
       "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/mgs-chat-funnels.php",
       "type": "wordpress_plugin",
-      "sha256": "d1aa27ee38a391f5b7bf2ba70244715246e3fe678d0636f266e0e63f8659228e",
-      "size_bytes": 74722,
+      "sha256": "01829bb009df55342fc71faea3515efa4f95fc9edfaa66e274b73b58e7f3759c",
+      "size_bytes": 74698,
       "source": "RunCloud Inc01 zuout.com",
-      "purpose": "WordPress plugin code for Zuout chat funnel; separates ActView final CTA class from PubGuru/M2 rewardedButtonClass JS branch.",
-      "validation": "PHP lint OK; public HTML now has const rewardedButtonClass=\"\" for ActView while final CTA remains <a class=av-rewarded data-av-rewarded=true>. Browser chat path confirms top ad container/ad slot: #zout_top_wrapper, #zout_top, GPT slot /22048006626/zout_mobile_top. Console errors: 0.",
-      "backup_path": "/home/runcloud/webapps/zuout/wp-content/mgs-chat-funnels-actview-branch-fix-backup-20260709-163838",
-      "updated_at": "2026-07-09T16:41:21-04:00"
+      "purpose": "WordPress plugin code for Zuout chat funnel; final ActView rewarded CTA contract is class-only <a class=av-rewarded>, while rewardedButtonClass JS remains empty so top ActView path stays active.",
+      "validation": "PHP lint OK; public HTML final has <a id=aq-cta class=av-rewarded> with no data-av-rewarded; browser final gate confirmed tag=A, class=av-rewarded, dataAttr=null, GPT slot/request /22048006626/zout_rewarded present.",
+      "backup_path": "/home/runcloud/webapps/zuout/wp-content/mgs-chat-funnels-rewarded-ab-backup-20260709-175256",
+      "updated_at": "2026-07-09T17:56:45-04:00"
     },
     {
       "id": "zuout-mgs-chat-funnels-car-br-config",
@@ -1250,14 +1250,14 @@
       "agent": "zeus",
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/ops/wp-quiz-lead-funnel/references/static-chat-wrapper-contract.md",
-      "size_bytes": 7538,
-      "modified_at": "2026-07-09T16:40:55-04:00",
-      "sha256": "a10daa6e8fadc13c75877fd9119d7c73425622256b5c4a916de57971e77cebdb",
+      "size_bytes": 7711,
+      "modified_at": "2026-07-09T17:56:13-04:00",
+      "sha256": "dab97cd9f8011b9754024e56f155ffb660f464a006a1e75453babaec0709a1c6",
       "purpose": "Static chat ad-wrapper contracts for MGS quiz/chat funnels, including JBF/SB, Wantabrand M2, and Zuout ActView exception/admin UI/rewarded CTA handling.",
-      "validation": "Added pitfall: ActView CTA class must not drive global PubGuru top-ad branch; keep rewardedButtonClass JS empty for ActView and apply av-rewarded only to final CTA.",
-      "updated_at": "2026-07-09T16:41:21-04:00",
+      "validation": "A/B tested Zuout ActView rewarded trigger: class-only and data-only both requested zout_rewarded; final contract set to class-only <a class=av-rewarded> per AV guidance to avoid duplicate trigger risk.",
+      "updated_at": "2026-07-09T17:56:45-04:00",
       "skill": "wp-quiz-lead-funnel",
-      "source_report": "REPORT-INFRA Zeus Zuout ActView branch separation 2026-07-09"
+      "source_report": "REPORT-INFRA Zeus Zuout rewarded A/B test 2026-07-09"
     },
     {
       "id": "zeus:rec-p1-wordpress-sheet-audit",
