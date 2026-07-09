@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T19:51:14-04:00",
-    "generated_by": "zeus-drive-reauth-proactivity-rule"
+    "updated_at": "2026-07-09T19:52:09-04:00",
+    "generated_by": "zeus-drive-auth-watchdog-fix"
   },
   "system_packages": [
     {
@@ -373,13 +373,13 @@
       "agent": "hera",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py",
-      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; saúde operacional baseada no Service Account primário, com OAuth de usuário tratado como fallback degradado para evitar alertas repetidos quando uploads estão OK.",
-      "validation": "python3 -m py_compile OK; live watchdog run exit 0; state healthy=true with primary_credential=service_account, fallback_degraded=true; no Discord alert emitted while SA root_access_ok.",
+      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; valida OAuth usuário e Service Account, mas trata Service Account em My Drive como bloqueado para upload por risco real storageQuotaExceeded. Operação precisa de Shared Drive ou reauth OAuth usuário.",
+      "validation": "python3 -m py_compile OK; watchdog dry-run/local exit 0; Drive root GET HTTP 200 name=MGS-AGENTS destination=my_drive caps canAddChildren/canEdit/canModifyContent=true; upload smoke via Service Account failed HTTP 403 reason=storageQuotaExceeded; state healthy=false primary_credential=service_account fallback_degraded=true.",
       "git_tracked": false,
-      "updated_at": "2026-07-09T19:47:03-04:00",
-      "size_bytes": 12366,
-      "modified_at": "2026-07-09T19:46:00-04:00",
-      "sha256": "cbda7a215efd9924d6a20f3cd83af87d1d73be2ded6cbf7291ab790f2fcd2520"
+      "updated_at": "2026-07-09T19:52:09-04:00",
+      "size_bytes": 13128,
+      "modified_at": "2026-07-09T19:52:19-04:00",
+      "sha256": "64bb36090b8a93919236c354e82bf83f0abc8c12e367b9054a0671caf93489a3"
     },
     {
       "id": "ares-drive-oauth-watchdog-profile-wrapper",
@@ -535,13 +535,13 @@
       "agent": "hera",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py",
-      "sha256": "cbda7a215efd9924d6a20f3cd83af87d1d73be2ded6cbf7291ab790f2fcd2520",
-      "size_bytes": 12366,
+      "sha256": "64bb36090b8a93919236c354e82bf83f0abc8c12e367b9054a0671caf93489a3",
+      "size_bytes": 13128,
       "git_tracked": false,
-      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; saúde operacional baseada no Service Account primário, com OAuth de usuário tratado como fallback degradado para evitar alertas repetidos quando uploads estão OK.",
-      "validation": "python3 -m py_compile OK; live watchdog run exit 0; state healthy=true with primary_credential=service_account, fallback_degraded=true; no Discord alert emitted while SA root_access_ok.",
-      "updated_at": "2026-07-09T19:47:03-04:00",
-      "modified_at": "2026-07-09T19:46:00-04:00"
+      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; valida OAuth usuário e Service Account, mas trata Service Account em My Drive como bloqueado para upload por risco real storageQuotaExceeded. Operação precisa de Shared Drive ou reauth OAuth usuário.",
+      "validation": "python3 -m py_compile OK; watchdog dry-run/local exit 0; Drive root GET HTTP 200 name=MGS-AGENTS destination=my_drive caps canAddChildren/canEdit/canModifyContent=true; upload smoke via Service Account failed HTTP 403 reason=storageQuotaExceeded; state healthy=false primary_credential=service_account fallback_degraded=true.",
+      "updated_at": "2026-07-09T19:52:09-04:00",
+      "modified_at": "2026-07-09T19:52:19-04:00"
     },
     {
       "id": "hera-drive-auth-watchdog-cron-route",
