@@ -37,11 +37,11 @@ Do not collapse the P1 into the REC date. REC and P1 each need their own date, l
 4. For every article, check whether all CTA/button/card/lazyblock links resolve to the same destination. If not, report the different links in the sheet; this catches redator/gestor mistakes where one button points to the wrong URL.
 5. Classify flow:
    - REC→P1: article links to another same-site article and that destination is the P1/apply article.
-   - P1: article is the destination of a REC/P1 flow.
+   - P1 destination: if a URL is already the P1 destination of a REC row, **do not create a separate row with that same P1 in `Artigo REC` / column B**. It belongs only in `Artigo P1 / Link Final` / column E of the REC row. This prevents duplicate P1 rows.
    - SEO: article does not participate in REC→P1 flow; keep the article URL and record its final CTA/button link.
 6. Fetch REC/P1 posts through WordPress REST and resolve tag IDs through `/wp-json/wp/v2/tags?include=...`.
-7. Fill the Google Sheet tab using the required REC/P1 columns plus operational audit columns when needed (`Tipo`, `Links de botão`, `Alerta links`) so every URL/article is represented and link divergence is visible.
-8. Verify by CSV export/readback for every edited tab: header contains the required REC/P1 columns, row count matches the complete published-post coverage, and divergent links are present in the alert column.
+7. Fill the Google Sheet tab using the required REC/P1 columns plus operational audit columns when needed (`Tipo`, `Links de botão`, `Alerta links`). Coverage means all source URLs except P1 destination duplicates that are already represented in column E.
+8. Verify by CSV export/readback for every edited tab: header contains the required REC/P1 columns, no duplicate P1 destination appears in column B, no blank spacer rows exist, and divergent links are present in the alert column.
 
 ## Pitfalls
 
