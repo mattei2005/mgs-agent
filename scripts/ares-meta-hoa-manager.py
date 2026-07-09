@@ -515,12 +515,12 @@ def main() -> int:
     header_prefix = (
         f'<@344196393512075265> HOA — relatório das {now_local.strftime("%H:%M")} ({args.account_tz}) da página em foco.\n'
         'Estou só analisando as campanhas; não alterei nada na Meta.\n'
-        'Use o ID REC para responder quando quiser registrar uma decisão: `REC... feito`, `ignorar` ou `segurar`.'
+        'Para registrar uma decisão, responda usando o nome completo da campanha.'
     )
     print(output_table(
         title,
         rows,
-        [('rec_id','ID REC'),('campaign_display_name','Nome campanha'),('start_date','Início'),('effective_status','Status'),('spend_today','Spend'),('mo_today','MO'),('cpmo_today','CPMO'),('hoa_cpmo','HOA'),('suggested_action','Ação'),('reason','Motivo')],
+        [('campaign_display_name','Nome campanha'),('start_date','Início'),('effective_status','Status'),('spend_today','Spend'),('mo_today','MO'),('cpmo_today','CPMO'),('hoa_cpmo','HOA'),('suggested_action','Ação'),('reason','Motivo')],
         prefix=header_prefix
     ))
     return 0
