@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T19:47:19-04:00",
-    "generated_by": "zeus-manual-inventory-update"
+    "updated_at": "2026-07-09T19:51:14-04:00",
+    "generated_by": "zeus-drive-reauth-proactivity-rule"
   },
   "system_packages": [
     {
@@ -880,13 +880,13 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/SKILL.md",
-      "sha256": "f12694108dd874c14cb0f2d35e620338273b3e1d9ca898770ab407fe9c27dd78",
-      "size_bytes": 12225,
+      "sha256": "f76b151fdb5bd76b3fe9b49a8a6d733298dd954106e51987269355bba64b66fc",
+      "size_bytes": 12403,
       "git_tracked": false,
-      "purpose": "Procedimento Drive MGS atualizado: Hera é operacionalmente saudável com Service Account primário OK; OAuth invalid_grant é fallback degradado sem paging repetitivo.",
-      "validation": "skill_manage patch OK; aligned with live drive-auth-watchdog state semantics.",
-      "updated_at": "2026-07-09T19:47:03-04:00",
-      "modified_at": "2026-07-09T19:46:33-04:00"
+      "purpose": "Procedimento Drive MGS atualizado: Hera é operacionalmente saudável com Service Account primário OK; OAuth invalid_grant é fallback degradado sem paging repetitivo; quando reauth humana for necessária/opcional, Zeus deve mandar o link/instrução no mesmo aviso.",
+      "validation": "skill_manage patch OK; SHA readback OK; procedural correction persisted after Rodolfo requested proactivity.",
+      "updated_at": "2026-07-09T19:51:14-04:00",
+      "modified_at": "2026-07-09T19:50:57-04:00"
     }
   ],
   "profile_skill_references": [
