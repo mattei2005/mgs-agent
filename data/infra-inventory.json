@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T16:00:02-04:00",
+    "updated_at": "2026-07-09T16:06:39-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1220,14 +1220,16 @@
       "agent": "zeus",
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/ops/wp-quiz-lead-funnel/references/static-chat-wrapper-contract.md",
-      "size_bytes": 6279,
-      "modified_at": "2026-07-09T15:59:26-04:00",
-      "sha256": "1e2d5ecfbf489995671cad4febb0a539cbfc145fb9549eebd9908426b27ae788",
-      "purpose": "Static chat ad-wrapper contracts for MGS quiz/chat funnels, including JBF/SB, Wantabrand M2, and Zuout ActView exception/admin UI handling.",
-      "validation": "Updated from Rodolfo correction: Zuout admin/editor layout must show ActView/Zuout provider summary, not SB/JBF wrapper company/domain controls.",
-      "updated_at": "2026-07-09T16:00:02-04:00",
+      "size_bytes": 6626,
+      "modified_at": "2026-07-09T16:06:09.595953-04:00",
+      "sha256": "a402eb3e13122975b4b8acb3db9c5a8c1fb7dd7bedc22fce301def25bfe7c196",
+      "purpose": "Static chat ad-wrapper contracts for MGS quiz/chat funnels, including JBF/SB wrapper contract and no duplicate GPT/wrapper imports.",
+      "validation": "Updated from Rodolfo/Ciro correction: GPT must import with wrapper but exactly once; duplicate GPT/JBF wrapper on Cliquet chat is not valid implementation.",
+      "updated_at": "2026-07-09T16:06:39-04:00",
       "skill": "wp-quiz-lead-funnel",
-      "source_report": "REPORT-INFRA Zeus Zuout ActView admin layout 2026-07-09"
+      "source_report": "REPORT-INFRA Zeus Cliquet static chat duplicate GPT/wrapper contract 2026-07-09",
+      "profile": "zeus",
+      "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/wp-quiz-lead-funnel/references/static-chat-wrapper-contract.md"
     },
     {
       "id": "zeus:rec-p1-wordpress-sheet-audit",
