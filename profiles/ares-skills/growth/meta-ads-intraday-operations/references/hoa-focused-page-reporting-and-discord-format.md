@@ -21,11 +21,12 @@ When the page stops being run, update `management_scope.active_focus`; the HOA r
 Keep the normal Discord report human-readable. Do not include technical IDs unless explicitly requested.
 
 ```text
-Nome campanha | Início | Status | Spend | MO | CPMO | HOA | Ação | Motivo
+ID REC | Nome campanha | Início | Status | Spend | MO | CPMO | HOA | Ação | Motivo
 ```
 
 Column rules:
 
+- `ID REC`: recommendation ID only; not campaign ID. Use 3-digit sequence: `REC-YYYYMMDD-HHMM-001`.
 - `Nome campanha`: enough campaign identity for humans. Display-normalize final numeric suffix to 3 digits (`009`, `016`) without renaming Meta objects.
 - `Início`: date in `dd/mm/yyyy`; avoid decimal age values like `1.17d`.
 - `Status`: campaign effective status when available; use `HIST` for insight-only historical rows.
@@ -36,7 +37,6 @@ Column rules:
 
 Avoid these columns in the normal Discord report:
 
-- `ID REC` — redundant/polluting for gestores; the complete campaign name with numeric suffix is unique enough for human operation. Keep recommendation IDs only in audit JSON if needed;
 - `Página` / `Nome da página` — redundant when the campaign name starts with the page name;
 - `Campaign ID`, `Meta ID` — keep in audit/API, not the human report;
 - `Idade d` — poor readability for Rodolfo.
