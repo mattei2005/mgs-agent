@@ -49,7 +49,7 @@ print('last_check:', datetime.datetime.fromtimestamp(d.get('last_check_ts')).iso
 PY
 ```
 
-Interpretation: empty stdout from `drive-auth-watchdog.py` is the healthy/silent path. Hera operational health is based on the primary Service Account path (`primary_credential=service_account`, `sa_ok=true`, `root_access_ok`/HTTP 200). User OAuth can be `invalid_grant` and recorded as `fallback_degraded=true` without paging Rodolfo repeatedly while Service Account is healthy; reauth is a self-service fallback task, not a critical upload blocker. If the user asks “Drive auth is OK, right?”, answer from this watchdog/state rather than inferring from absence of logs.
+Interpretation: empty stdout from `drive-auth-watchdog.py` is the healthy/silent path. Hera operational health means at least one real upload credential works. For personal My Drive destinations, Service Account may show folder capabilities but still be blocked for upload (`my_drive_sa_upload_blocked` / `storageQuotaExceeded_risk`); in that case `user_ok=true`, `token_ok`, and `primary_credential=user_oauth` is healthy. If OAuth is `invalid_grant`, generate/send the reauthorization link immediately instead of making Rodolfo ask. If the user asks “Drive auth is OK, right?”, answer from this watchdog/state rather than inferring from absence of logs.
 
 1. Identify the auth mode used by the script:
    - Service Account JSON/JWT.
