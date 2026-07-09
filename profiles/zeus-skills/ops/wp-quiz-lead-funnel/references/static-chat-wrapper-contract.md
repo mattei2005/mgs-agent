@@ -55,7 +55,11 @@ If a WordPress plugin serves `/chat/...`, rendering with normal `wp_head()`/`wp_
    - `<link rel='preload' as='script' href='https://securepubads.g.doubleclick.net/tag/js/gpt.js' />`
 2. Load Zuout ActView script:
    - `<script async src="https://scr.actview.net/zuout.js"></script>`
-3. Preserve the top ad container with the IDs expected by the ActView script:
+3. Rewarded trigger CTA must follow ActView's DOM contract:
+   - It must be an `<a>` tag, not `<button>`.
+   - Add class `av-rewarded` and/or attribute `data-av-rewarded="true"`.
+   - Current safe form: `<a id="aq-cta" class="av-rewarded" href="#" role="button" data-av-rewarded="true">...</a>`.
+4. Preserve the top ad container with the IDs expected by the ActView script:
 
 ```html
 <div id="zout_top_wrapper" align="center" style="width: 100%; margin-top: 2rem; margin-bottom: 2rem; min-height: 400px;">
