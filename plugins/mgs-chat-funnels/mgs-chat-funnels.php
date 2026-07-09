@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MGS Chat Funnels
  * Description: Config-driven WhatsApp-style chat funnels by vertical and country (EMP-BR, CC-BR, CAR-BR) with rewarded/interstitial gate, UTM passthrough, cards/sequential offers, and shortcode/route rendering.
- * Version: 0.3.12
+ * Version: 0.3.20
  * Author: MGS Digital Corp
  */
 
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 }
 
 final class MGS_Chat_Funnels {
-    const VERSION = '0.3.12';
+    const VERSION = '0.3.17';
     const SHORTCODE = 'mgs_chat_funnel';
     const MENU_SLUG = 'mgs-chat-funnels';
 
@@ -113,6 +113,9 @@ final class MGS_Chat_Funnels {
         $replacements = array(
             '{{HTML_LANG}}' => esc_attr($language),
             '{{TITLE}}' => esc_html($title),
+            '{{WP_HEAD}}' => $this->capture_wp_head(),
+            '{{WP_BODY_OPEN}}' => $this->capture_wp_body_open(),
+            '{{WP_FOOTER}}' => $this->capture_wp_footer(),
             '{{TAGS_SCRIPT}}' => '<script>window.tags = JSON.parse(' . $this->js_json($tags_json) . ');</script>',
             '{{ADS_HEAD}}' => $this->render_ads_head_html($config),
             '{{WRAPPER_URL}}' => esc_url($wrapper_url),
@@ -130,9 +133,35 @@ final class MGS_Chat_Funnels {
             '{{GATE_QUESTION_COUNT_JS}}' => (string) $this->gate_question_count($config),
             '{{JBF_REWARDED_PRELOAD_JS}}' => $ad_provider === 'm2' ? '' : "window.jbftag = window.jbftag || { cmd: [] };\n          window.jbftag.cmd.push(() => {\n            if (window.jbftag.requestRewardAds) {\n              window.jbftag.requestRewardAds();\n            }\n          });",
             '{{JBF_REWARDED_SHOW_JS}}' => $ad_provider === 'm2' ? '' : "try {\n              window.jbftag = window.jbftag || { cmd: [] };\n              window.jbftag.cmd.push(() => {\n                if (window.jbftag.showRewardedAds) {\n                  window.jbftag.showRewardedAds(safeCloseQuiz);\n                } else {\n                  safeCloseQuiz();\n                }\n              });\n            } catch (err) {\n              safeCloseQuiz();\n            }",
+
         );
 
         echo strtr($template, $replacements); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+
+    private function capture_wp_head() {
+        ob_start();
+        wp_head();
+        $output = ob_get_clean();
+        return is_string($output) ? $output : '';
+    }
+
+    private function capture_wp_body_open() {
+        ob_start();
+        if (function_exists('wp_body_open')) {
+            wp_body_open();
+        } else {
+            do_action('wp_body_open');
+        }
+        $output = ob_get_clean();
+        return is_string($output) ? $output : '';
+    }
+
+    private function capture_wp_footer() {
+        ob_start();
+        wp_footer();
+        $output = ob_get_clean();
+        return is_string($output) ? $output : '';
     }
 
     private function asset_contents($relative_path) {

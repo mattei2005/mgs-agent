@@ -23,6 +23,7 @@ Prefer one canonical log path per cron:
 2. Change the script's internal `LOG=...` to the same path.
 3. Remove any now-unnecessary `CUSTOM_LOG` override.
 4. Keep/ensure a heartbeat line on healthy no-op runs, otherwise healthy zero-work runs look stale.
+5. For a newly-created low-frequency cron that has not reached its first scheduled slot yet, seed the canonical redirected log with a safe manual validation run (`--dry-run --no-post` when supported, redirected to the exact cron log) before letting `monitor-cron-stale-logs.sh` evaluate it; otherwise the monitor will treat the absent redirect log as STALE even if an internal/manual validation log exists elsewhere.
 
 ## Validation sequence
 

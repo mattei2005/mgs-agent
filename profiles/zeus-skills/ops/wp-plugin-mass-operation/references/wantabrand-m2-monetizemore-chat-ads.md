@@ -6,7 +6,9 @@ Use this when operating or explaining ad triggers for `wantabrand.com` chat funn
 
 - `wantabrand.com` is a MonetizeMore/M2 implementation, not the standard JBF/Ciro wrapper flow.
 - Scope changes must stay limited to `/home/runcloud2/webapps/wantabrand/wp-content/plugins/mgs-chat-funnels/` unless Rodolfo explicitly asks for a rollout.
-- The visual chat ad pattern must remain the same as the other MGS chats. The only difference is the integration/provider: standard chats use JBF/Ciro; Wantabrand uses M2/PubGuru.
+- **Never replicate Wantabrand ad implementation to any other site by default.** Rodolfo confirmed Wantabrand is the only MGS site in the M2/MonetizeMore network with this plugin ad configuration. Any request to edit another site's chat/plugin must start from that site's own provider/config, not from Wantabrand's M2/PubGuru branch.
+- If Rodolfo asks for a change to **all sites**, **all chat plugins**, **all funnels**, **mass rollout**, or any broad/multi-site plugin operation that could touch chat/ad behavior, pause and explicitly ask whether Wantabrand should be included or excluded. Do not assume broad wording includes Wantabrand, because he may ask "all" by mistake.
+- The visual chat ad pattern must remain the same as the other MGS chats, but the implementation/provider is exclusive: standard chats use JBF/Ciro; Wantabrand uses M2/PubGuru.
 
 ## Correct Wantabrand/M2 user flow
 
@@ -85,16 +87,22 @@ For standard chats, the visual/timing pattern is:
 For Wantabrand/M2:
 
 - Keep the same timing and visual location as the other chats.
-- Current M2 top-block placeholder confirmed by Rodolfo:
+- Current M2 top-block placeholders confirmed by Rodolfo:
 
 ```html
 <pubguru data-pg-ad="wantabrand_mob_top"></pubguru>
+<pubguru data-pg-ad="wantabrand_desk_top"></pubguru>
 ```
 
-- Insert that placeholder wrapped in a neutral chat container, e.g. `.pubguru-chat-ad.pubguru-chat-ad-top`, **after the value/amount question has been answered**, matching the other chats' timing.
-- **Do not call `window.onInfinitePostLoaded()` for the M2/PubGuru top block.** Rodolfo confirmed this caused the interstitial to appear early before final offer click. For M2, the `<pubguru data-pg-ad="wantabrand_mob_top">` tag itself is the provider signal for the top block.
+- Insert one placeholder wrapped in a neutral chat container, e.g. `.pubguru-chat-ad.pubguru-chat-ad-top`, **after the value/amount question has been answered**, matching the other chats' timing. Choose `wantabrand_desk_top` for desktop viewport (`min-width: 768px`) and `wantabrand_mob_top` for mobile/tablet viewport.
+- **Do not call `window.onInfinitePostLoaded()` for the M2/PubGuru top block.** Rodolfo confirmed this caused the interstitial to appear early before final offer click.
+- After injecting the chosen `<pubguru data-pg-ad="...">`, register only that tag with PubGuru via `window.pga.adunitManager.defineObserveredNode(adSlot)` when available, with short retry if PubGuru is still loading. This is the safe dynamic-render path for the top block without firing the global infinite-post/interstitial hook. Register asynchronously (`setTimeout(..., 0)`) and wrap in `try/catch`; a PubGuru registration/render issue must never block the next chat question/buttons.
+- Reserve vertical space for the top block before PubGuru fills it (`min-height: 420px` for `wantabrand_mob_top`, `300px` for `wantabrand_desk_top`, centered wrapper, `margin: 28px 0 28px`). PubGuru mobile native/display creatives can be taller than the initial placeholder; if the wrapper only reserves ~280px, the native ad title/CTA can paint over the next chat question/buttons. If PubGuru marks the slot `pg-disabled`, collapse the wrapper back to height/margin 0.
+- Contain the top-block wrapper so PubGuru creative DOM cannot visually escape into chat bubbles/questions: `position: relative`, `overflow: hidden`, `isolation: isolate`, `width: 100%`, `flex-shrink: 0`; set the `<pubguru>` tag itself to `display:block; max-width:100%`. This is required on Chrome Android where PubGuru may inject positioned/full-width creative nodes after the chat continues.
+- Mobile scroll fix: `#chat-box` must have `min-height: 0` inside the flex column, and bottom pinning must use both `chatBox.scrollTop = chatBox.scrollHeight` and `lastElementChild.scrollIntoView({block:'end'})` inside `requestAnimationFrame`. This prevents Chrome Android from visually jumping back above the newly rendered question/buttons when PubGuru expands the inline iframe.
 - Keep JBF/JBFTag-specific wrapper calls out of the public source. If shared templates contain JBF logic for non-M2 sites, inject that logic conditionally server-side so rendered M2 public source has no `jbf`, `jbftag`, `showRewardedAds`, or `requestRewardAds` literals.
-- Validation should include both source checks and a real browser flow: popup/gate → CTA → answer first in-chat question → answer value/amount question → assert `document.querySelectorAll('pubguru[data-pg-ad="wantabrand_mob_top"]').length === 1`.
+- Validation should include both source checks and a real browser flow: popup/gate → CTA → answer first in-chat question → answer value/amount question → assert exactly one top-block tag appears, using the expected viewport slot (`wantabrand_desk_top` on desktop, `wantabrand_mob_top` on mobile/tablet). Also assert the next chat question/buttons continue after the ad; a loaded ad that stalls the flow is a failure.
+- Important desktop/mobile caveat: PubGuru config may mark a slot `pg-disabled` if that slot is not enabled for the current device/viewport. If a slot is present in DOM but height 0/`pg-disabled`, inspect `window.adUnits` and coordinate with M2 to publish/enable the matching slot. Do not try to force a mobile-only slot to render on desktop from MGS code.
 
 ## Final offer click / Interstitial
 
@@ -113,10 +121,12 @@ Validate these are zero/absent on `view-source:https://wantabrand.com/chat/car/b
 - `assets.jbfdigital.com.br`
 - raw placeholders like `{{...}}`
 
-Do **not** require `onInfinitePostLoaded` or inline ad block classes to be absent. They are allowed/expected when implementing the M2 Bloco do Topo pattern.
+For the M2 top-block branch, `window.onInfinitePostLoaded()` must not be called. It caused the interstitial to fire before final offer click. It may remain only in the non-M2/JBF branch, gated away from Wantabrand/M2.
 
 ## Validation checklist after M2 top block tag is added
 
+- Compare the chat bubble/button aesthetics against a known-good legacy chat such as `eggbev.com/chat/car/br1` before reporting done. M2/PubGuru fixes must not change answer button layout: legacy `.button-container` has `margin-right:18px`, `max-width:75%`, `float:right`, `align-items:flex-end`; buttons use `width:100%` and do **not** use `width:fit-content`, `margin-left:auto`, `align-self:flex-end`, or `min-width:220px`.
+- If Wantabrand/PubGuru global CSS changes the popup/gate width or capitalizes `Sim/Não`, fix only the gate scope (`#quiz-container > div { box-sizing: content-box !important; }` and `#quiz-container .aq-answer { text-transform: none !important; }`). Do not touch `.pubguru-chat-ad-top`, `showAd()`, `registerPubGuruTopBlock()`, scroll pinning, or top-block height/containment when doing this aesthetic gate fix.
 - Public source has PubGuru loader.
 - Gate CTA has `.pg-rewarded`.
 - The M2-provided top-block div/class appears only at the intended in-chat insertion point.

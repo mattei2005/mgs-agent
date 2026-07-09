@@ -357,6 +357,8 @@ Para configuração completa da RunCloud API v3 (autenticação, paginação, in
 
 **`references/wp-plugin-json-config-render-validation.md`** — checklist para plugins com rotas públicas + admin UI: validar frontend live com DOM/JSON.parse/gate renderizado e validar admin apenas com sessão autenticada; `curl` deslogado em `/wp-admin` não prova a admin page.
 
+**`references/wp-custom-plugin-public-routes-global-hooks.md`** — regra operacional para plugins MGS com rotas públicas (`/chat/...`, quiz etc.): URLs devem se comportar como páginas/posts normais do WordPress, herdando `wp_head()`, `wp_body_open()` e `wp_footer()` para WPCode/GTM/Yoast/pixels/scripts globais; canário OpenZed validado antes de rollout amplo.
+
 **`references/wp-frontend-cache-vs-origin-validation.md`** — diagnóstico quando rota WP retorna 200 mas frontend público segue vazio/antigo após fix: comparar bare URL vs cachebuster, headers Cloudflare/APO (`cf-cache-status`, `age`, `cf-apo-via`), asset `ver=`, JSON cru no script e browser render; se cachebuster funciona e bare URL falha, tratar como purge de cache, não regressão do plugin.
 
 **`references/wp-quiz-frontend-sms-diagnostic.md`** — diagnóstico quando leads aceitas pela API do SMS Funnel não aparecem na dashboard: diferenciar teste direto, endpoint WP e preenchimento real no frontend; validar `sms_funnel_status`, `success:true` e `list_id`; e renderizar split redirect com botão `+ Adicionar URL` em vez de JSON para operadores.r; se cachebuster funciona e bare URL falha, tratar como purge de cache, não regressão do plugin.
@@ -416,18 +418,21 @@ Admin UX do `MGS Chat Funnels`: o campo `Modelo de oferta` deve aparecer antes d
 
 ### Exceção Wantabrand — MonetizeMore/M2
 
-`wantabrand.com` usa monetização MonetizeMore/M2, não o wrapper padrão JBF/Ciro. Para pedidos futuros nesse site:
+`wantabrand.com` usa monetização MonetizeMore/M2/PubGuru, não o wrapper padrão JBF/Ciro. Para pedidos futuros nesse site:
 
 - Escopo deve ser somente `/home/runcloud2/webapps/wantabrand/wp-content/plugins/mgs-chat-funnels/`; não aplicar rollout para outros sites.
+- Se Rodolfo pedir algo para “todos os sites”, “todos os plugins”, “todos os chats”, “todos os funis”, “rollout geral” ou equivalente que possa mexer em chat/anúncio/plugin, parar e perguntar explicitamente se Wantabrand deve ser incluído ou excluído. Não assumir que “todos” inclui Wantabrand.
 - Configs do chat devem usar `ad_provider: "m2"`, `ad_company: "monetizemore"`, `ad_domain: ""`.
 - Em modo M2, remover/não carregar `https://assets.jbfdigital.com.br/...builder.js` pelo plugin.
 - Wantabrand/M2 deve carregar explicitamente o loader PubGuru no `<head>` das rotas do chat: `<script type="text/javascript" async src="https://c.pubguru.net/pg.wantabrand.js"></script>`.
 - Não deixar fallback JBF/JBFTag visível no código-fonte público do wantabrand: remover referências a `jbf`, `jbftag`, `showRewardedAds`, `requestRewardAds` e `assets.jbfdigital` das rotas públicas M2. `gpt.js`/`securepubads` podem aparecer em runtime como dependência carregada pelo próprio PubGuru, não pelo plugin MGS.
-- Não remover `window.onInfinitePostLoaded()` nem o padrão de placeholder de anúncio inline quando Rodolfo/M2 pedir o bloco do meio do chat. O fluxo visual deve seguir o padrão dos outros sites: inserir um bloco no chat e chamar `onInfinitePostLoaded()` para o provider preencher. A diferença do Wantabrand é o modo de integração/provider (M2/PubGuru), não o fluxo visual do chat.
-- Quando Rodolfo enviar a classe/tag do bloco M2, aplicar essa classe/tag no placeholder inline do chat do Wantabrand e manter `onInfinitePostLoaded()`.
-- Botões que devem disparar anúncio recebem classe `pg-rewarded`. No fluxo atual, o principal é o CTA do gate `#aq-cta`; cards/ofertas finais também podem receber a classe quando o pedido for monetizar o clique final.
-- Não assumir que clique em oferta final é rewarded. No padrão JBF/Ciro, o rewarded confirmado por código é o CTA do gate (`showRewardedAds`); oferta/card final é link normal salvo interceptação externa do wrapper. Para Wantabrand/M2, só colocar `pg-rewarded` em cards/ofertas finais se Rodolfo/M2 pedir explicitamente esse comportamento.
-- Validar com HTML público: `pg-rewarded > 0`, `jbf == 0`, `jbftag == 0`, `assets.jbfdigital.com.br == false`, `gpt.js == false`, sem placeholders `{{...}}`, e browser mostrando o chat avançando após clicar no CTA.
+- Para o bloco inline “topo” no meio do chat, usar `<pubguru data-pg-ad="wantabrand_mob_top"></pubguru>` em mobile e `<pubguru data-pg-ad="wantabrand_desk_top"></pubguru>` em desktop. Inserir após a resposta da pergunta de valor/amount.
+- **Não chamar `window.onInfinitePostLoaded()` no branch M2/PubGuru do bloco topo.** Essa chamada disparou interstitial cedo. Registrar o tag escolhido via `window.pga.adunitManager.defineObserveredNode(adSlot)` quando disponível, de forma assíncrona e protegida por `try/catch`.
+- O wrapper do bloco topo precisa reservar/contener layout mobile: `min-height:420px` para `wantabrand_mob_top`, `300px` para desktop, `overflow:hidden`, `isolation:isolate`, `flex-shrink:0`; se PubGuru marcar `pg-disabled`, colapsar altura/margem.
+- Preservar estética dos chats legados como Eggbev. Fixes M2/PubGuru não podem alterar layout dos botões/perguntas: comparar cores, tamanhos, posição, `button width:100%`, e evitar `width:fit-content`, `margin-left:auto`, `align-self:flex-end` ou `min-width:220px` no layout de respostas.
+- Botões que devem disparar rewarded recebem classe `pg-rewarded`. No fluxo atual, o principal é o CTA do gate `#aq-cta`.
+- Não assumir que clique em oferta final é rewarded. Para Wantabrand/M2, só colocar `pg-rewarded` em cards/ofertas finais se Rodolfo/M2 pedir explicitamente esse comportamento.
+- Validar com HTML público: PubGuru loader presente, `pg-rewarded > 0`, `jbf == 0`, `jbftag == 0`, `assets.jbfdigital.com.br == false`, sem placeholders `{{...}}`, branch M2 sem `onInfinitePostLoaded`, e browser mostrando o chat avançando após o bloco.
 - Detalhe completo: ver `references/wantabrand-m2-monetizemore-chat-ads.md`.
 
 ---

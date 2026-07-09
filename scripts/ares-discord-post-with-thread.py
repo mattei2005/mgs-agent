@@ -129,6 +129,14 @@ def split_message(message: str, limit: int = 1900) -> list[str]:
 
 
 def split_message_by_lines(message: str, limit: int = 1900) -> list[str]:
+    fence_match = re.match(r'^(?P<fence>```[^\n]*\n)(?P<body>[\s\S]*?)(?P<close>```\s*)$', message)
+    if fence_match and len(message) > limit:
+        return split_fenced_block(
+            fence_match.group('fence'),
+            fence_match.group('body').splitlines(),
+            fence_match.group('close').strip(),
+            limit,
+        )
     chunks: list[str] = []
     current = ''
     for raw_line in message.splitlines(keepends=True):
@@ -148,6 +156,32 @@ def split_message_by_lines(message: str, limit: int = 1900) -> list[str]:
     if current:
         chunks.append(current.rstrip())
     return chunks
+
+
+def split_fenced_block(opening: str, body_lines: list[str], closing: str = '```', limit: int = 1900) -> list[str]:
+    """Split one oversized fenced block into valid fenced chunks.
+
+    Discord rejects >2000 chars and renders badly when a chunk has an opening
+    fence without a closing fence. Keep every part independently renderable.
+    """
+    chunks: list[str] = []
+    current = opening
+    close = closing or '```'
+    overhead = len(opening) + len(close) + 2
+    hard_line_limit = max(20, limit - overhead)
+    for raw_line in body_lines:
+        pieces = [raw_line]
+        if len(raw_line) > hard_line_limit:
+            pieces = [raw_line[i:i + hard_line_limit] for i in range(0, len(raw_line), hard_line_limit)]
+        for line in pieces:
+            candidate = current + line + '\n' + close
+            if len(candidate) > limit and current != opening:
+                chunks.append((current + close).rstrip())
+                current = opening
+            current += line + '\n'
+    if current != opening:
+        chunks.append((current + close).rstrip())
+    return chunks or [(opening + close).rstrip()]
 
 
 def with_part_labels(chunks: list[str], limit: int = 2000) -> list[str]:

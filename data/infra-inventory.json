@@ -1,8 +1,10 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-08T11:04:14-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-09T11:59:40-04:00",
+    "generated_by": "infra-discovery.sh",
+    "updated_by": "zeus",
+    "last_manual_update": "Restricted pages correction: removed old-page baseline list, posted aggregate summary by date with Sites; delta report remains for new pages only."
   },
   "system_packages": [
     {
@@ -579,14 +581,14 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 52803,
-      "modified_at": "2026-07-04T07:14:38-04:00",
-      "sha256": "6ee66001355761ff9b1455c2feaf70cee906333850eab4586f1b094b393ab1a6",
+      "size_bytes": 62487,
+      "modified_at": "2026-07-09T10:09:13-04:00",
+      "sha256": "76006b579c69006aedbb97aa8ed35081d5f26c2d30cc0f2e81ff5347396b4312",
       "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; current-user tables now render every row and split across Discord-safe messages instead of hiding overflow.",
-      "validation": "B011 excluded from Meta /roles path; live run discovers only B001-B010/B005-2 items; errors=0; no B011/B001A state.",
-      "updated_at": "2026-07-06T03:04:10-04:00",
+      "validation": "bash -n OK; B007 dry-run exit 0 no output; production cron cycle at 10:10 EDT exit 0, _sheet_removed_sync rows=231 marked=6 updated=false, consecutive_errors=0.",
+      "updated_at": "2026-07-09T10:11:23-04:00",
       "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
-      "last_change": "Forced live alerts no longer display cached state deltas; current users from live API and accumulated removals from live sheet/reconciliation only."
+      "last_change": "2026-07-09: Google/Sheets calls retry transient timeouts; sheet-sync alerts require 2 consecutive failures and route to infra channel, not app-rate-limit fallback."
     },
     {
       "id": "hera-fix-car-br-pt-drive-parent-20260702",
@@ -686,14 +688,16 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "size_bytes": 43525,
-      "modified_at": "2026-07-04T07:17:30-04:00",
-      "sha256": "b7d57b78f07483b41e67c7afb868452aed620d912a3cedc9097f4301c2ffe8b2",
+      "size_bytes": 47646,
+      "modified_at": "2026-07-08T16:20:53-04:00",
+      "sha256": "69e120bb8431cfad0fb7c12c838665a2882499c0b0a2e635af6ef758dc08095a",
       "id": "doc-8887da278c",
       "agent": "zeus",
       "type": "ops_doc",
-      "updated_at": "2026-07-04T07:23:47-04:00",
-      "description": "B011 DTR route/canonical alert/cache-clean rules updated."
+      "updated_at": "2026-07-09T10:11:23-04:00",
+      "description": "B011 DTR route/canonical alert/cache-clean rules updated.",
+      "last_change": "2026-07-09: documented sheet sync timeout/backoff and infra-channel alert routing.",
+      "validation": "Skill reference patched via skill_manage; production monitor validation OK at 10:10 EDT."
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/b011-dtr-link-monitor-2026-07-04.md",
@@ -801,6 +805,21 @@
       "size_bytes": 1926,
       "updated_at": "2026-07-08T00:42:49-04:00",
       "notes": "Utility canary safe runner default extended to 6h with early-stop on all green."
+    },
+    {
+      "id": "zeus-meta-app-roles-sheet-sync-oauth-alerting-reference",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/references/meta-app-roles-sheet-sync-oauth-alerting-2026-07-02.md",
+      "size_bytes": 3259,
+      "modified_at": "2026-07-09T10:10:52-04:00",
+      "sha256": "c0fdfcd99141c7be6225120c866eaa68f81ac898160ea21c0d48edd670034ed0",
+      "owner": "Zeus/Ops",
+      "risk": "low",
+      "description": "Reference for meta-app-roles-watch Google Sheet sync auth, timeout handling, and infra alerting.",
+      "updated_at": "2026-07-09T10:11:23-04:00",
+      "source_report": "REPORT-INFRA Zeus meta app roles sheet sync timeout correction 2026-07-09",
+      "validation": "Reference patched via skill_manage; production monitor validation OK at 10:10 EDT."
     }
   ],
   "profile_skill_references": [
@@ -818,12 +837,15 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "size_bytes": 43538,
-      "modified_at": "2026-07-04T06:40:30-04:00",
-      "sha256": "ca88f65c81f6ce65629ec2d22c983aa6bbbddb9104f897bebda26c04d8a4136d",
+      "size_bytes": 47646,
+      "modified_at": "2026-07-08T16:20:53-04:00",
+      "sha256": "69e120bb8431cfad0fb7c12c838665a2882499c0b0a2e635af6ef758dc08095a",
       "owner": "Zeus/Ops",
       "type": "skill",
-      "description": "Updated for canonical B011 naming and monitor configuration."
+      "description": "Updated for canonical B011 naming and monitor configuration.",
+      "updated_at": "2026-07-09T10:11:23-04:00",
+      "last_change": "2026-07-09: documented sheet sync timeout/backoff and infra-channel alert routing.",
+      "validation": "Skill reference patched via skill_manage; production monitor validation OK at 10:10 EDT."
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/SKILL.md",
@@ -839,16 +861,17 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "size_bytes": 43875,
-      "modified_at": "2026-07-04T06:37:45-04:00",
-      "sha256": "7a04cccae43fb74f7d7757e2abacd0582778bbedc0363ca3423aa729900c3cf6",
+      "size_bytes": 47646,
+      "modified_at": "2026-07-08T16:20:53-04:00",
+      "sha256": "69e120bb8431cfad0fb7c12c838665a2882499c0b0a2e635af6ef758dc08095a",
       "purpose": "Procedure for Meta app rate-limit/roles monitoring; current-user tables must show every row and split into multiple Discord-safe messages when needed.",
-      "validation": "bash -n OK; embedded Python compile OK; synthetic 60-row table rendered 60 rows, 3 Discord-safe blocks, no hidden/truncated marker.",
-      "updated_at": "2026-07-04T06:38:34-04:00",
+      "validation": "Skill reference patched via skill_manage; production monitor validation OK at 10:10 EDT.",
+      "updated_at": "2026-07-09T10:11:23-04:00",
       "skill": "meta-app-rate-limit-monitor",
       "md5": "e67190c6524427c58ffabd2f3e652f07",
       "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
-      "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels."
+      "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels.",
+      "last_change": "2026-07-09: documented sheet sync timeout/backoff and infra-channel alert routing."
     },
     {
       "profile": "ares",
@@ -1078,18 +1101,19 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 43875,
-      "sha256": "7a04cccae43fb74f7d7757e2abacd0582778bbedc0363ca3423aa729900c3cf6",
+      "size_bytes": 47646,
+      "sha256": "69e120bb8431cfad0fb7c12c838665a2882499c0b0a2e635af6ef758dc08095a",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-04T06:38:34-04:00",
-      "validation": "bash -n OK; embedded Python compile OK; synthetic 60-row table rendered 60 rows, 3 Discord-safe blocks, no hidden/truncated marker.",
-      "modified_at": "2026-07-04T06:37:45-04:00",
+      "updated_at": "2026-07-09T10:11:23-04:00",
+      "validation": "Skill reference patched via skill_manage; production monitor validation OK at 10:10 EDT.",
+      "modified_at": "2026-07-08T16:20:53-04:00",
       "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
       "agent": "zeus",
       "purpose": "Procedure for Meta app rate-limit/roles monitoring; current-user tables must show every row and split into multiple Discord-safe messages when needed.",
       "md5": "e67190c6524427c58ffabd2f3e652f07",
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
-      "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels."
+      "description": "Meta app rate-limit/roles monitor procedure; documents full current-user rendering across all 11 app channels.",
+      "last_change": "2026-07-09: documented sheet sync timeout/backoff and infra-channel alert routing."
     },
     {
       "profile": "zeus",
@@ -1268,6 +1292,9 @@
     },
     {
       "entry": "2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1"
+    },
+    {
+      "entry": "20 6 * * * flock -n /var/lock/dtr_sb_daily_match_audit.lock /root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh >> /root/mgs-agent/logs/dtr-sb-daily-match-audit-cron.log 2>&1"
     }
   ],
   "scripts": [
@@ -1288,8 +1315,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-discord-post-with-thread.py",
-      "size_bytes": 9826,
-      "modified_at": "2026-06-22T11:38:58-04:00"
+      "size_bytes": 11300,
+      "modified_at": "2026-07-08T18:49:28-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-drive-oauth-watchdog.py",
@@ -1348,8 +1375,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
-      "size_bytes": 28237,
-      "modified_at": "2026-06-24T01:12:02-04:00"
+      "size_bytes": 28361,
+      "modified_at": "2026-07-08T18:49:07-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-adset-copy-probe.py",
@@ -1532,6 +1559,16 @@
       "modified_at": "2026-07-07T19:28:30-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.py",
+      "size_bytes": 14250,
+      "modified_at": "2026-07-09T00:25:13-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh",
+      "size_bytes": 656,
+      "modified_at": "2026-07-09T00:34:09-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/dtr-sb-full-restricted-sync.py",
       "size_bytes": 25183,
       "modified_at": "2026-07-03T03:05:31-04:00"
@@ -1543,8 +1580,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.py",
-      "size_bytes": 48418,
-      "modified_at": "2026-07-06T22:33:27-04:00"
+      "size_bytes": 52144,
+      "modified_at": "2026-07-09T11:58:43"
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
@@ -1733,8 +1770,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-sb-restricted-pages.py",
-      "size_bytes": 17583,
-      "modified_at": "2026-07-06T16:36:12-04:00"
+      "size_bytes": 17663,
+      "modified_at": "2026-07-09T10:10:00-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-sb-restricted-pages.sh",
@@ -1828,8 +1865,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/rebuild-sb-restricted-pages-sheet.py",
-      "size_bytes": 12218,
-      "modified_at": "2026-07-06T16:37:13-04:00"
+      "size_bytes": 12297,
+      "modified_at": "2026-07-09T10:10:11-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/rec-fingerprint.py",
@@ -1963,8 +2000,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/utility-canary-approval-loop.py",
-      "size_bytes": 26155,
-      "modified_at": "2026-07-08T00:39:53-04:00"
+      "size_bytes": 29305,
+      "modified_at": "2026-07-09T11:45:28-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/utility-canary-approval-loop.sh",
@@ -4404,9 +4441,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
-      "size_bytes": 396,
-      "md5": "2362e44a6b6503d8772be7b29561d5c0",
-      "modified_at": "2026-07-08T11:02:01-04:00"
+      "size_bytes": 647,
+      "md5": "3e982cf9447fa050f904d1359234df11",
+      "modified_at": "2026-07-09T11:47:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -4417,8 +4454,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "8474f4a64aed7b414c43c3e625d4ab97",
-      "modified_at": "2026-07-08T10:56:25-04:00"
+      "md5": "b1b46ddfd1f902643922c22b68369c2c",
+      "modified_at": "2026-07-09T11:41:22-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -4428,9 +4465,9 @@
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
-      "size_bytes": 25012,
-      "md5": "3a7a9f1fe2b91b71f84ed170a33528bb",
-      "modified_at": "2026-07-08T10:56:52-04:00"
+      "size_bytes": 25839,
+      "md5": "98cb88f81352d827ae49ccc3fbb50086",
+      "modified_at": "2026-07-09T11:42:20-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -4440,15 +4477,15 @@
     },
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
-      "size_bytes": 317,
-      "md5": "948ff1f4b8491a0d01ec31caa3e621ed",
-      "modified_at": "2026-07-08T11:00:01-04:00"
+      "size_bytes": 316,
+      "md5": "ffb6074d46fb7a168a2ba1bbc42d4fbb",
+      "modified_at": "2026-07-09T11:45:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
       "size_bytes": 4592,
-      "md5": "75975a4fa16b5c4362a0fa580d51c687",
-      "modified_at": "2026-07-08T09:16:02-04:00"
+      "md5": "9ae2809e18d4ecd42672c4ecb9c54d12",
+      "modified_at": "2026-07-09T09:16:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -4457,10 +4494,16 @@
       "modified_at": "2026-07-07T19:40:28-04:00"
     },
     {
+      "path": "/root/mgs-agent/data/dtr-sb-daily-match-audit-state.json",
+      "size_bytes": 1019,
+      "md5": "33341758a3759ec0d14a69179f8515d8",
+      "modified_at": "2026-07-09T06:55:48-04:00"
+    },
+    {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
-      "size_bytes": 87475,
-      "md5": "2ce51ea47c1b2fa184c3230bc48aa0cb",
-      "modified_at": "2026-07-08T07:48:26-04:00"
+      "size_bytes": 290320,
+      "md5": "fe0035e9eadd59aaf990900df38fbeb3",
+      "modified_at": "2026-07-09T11:54:45"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-restricted-sync-state.json",
@@ -4471,32 +4514,32 @@
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "6b9fb00734fbe1f218aab01ee5f239f4",
-      "modified_at": "2026-07-08T07:50:06-04:00"
+      "md5": "29c4d5551eae1b4aba75a1b8843a1945",
+      "modified_at": "2026-07-09T07:50:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 24391,
-      "md5": "ea8c4f7774b53c0ab400e3d00428b599",
-      "modified_at": "2026-07-08T11:00:01-04:00"
+      "size_bytes": 24907,
+      "md5": "ed8790b4f67d39c3fe361b131208a42d",
+      "modified_at": "2026-07-09T11:50:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
-      "size_bytes": 333,
-      "md5": "3ec89be80cfed5607840d28ada239b0a",
-      "modified_at": "2026-07-08T08:37:03-04:00"
+      "size_bytes": 334,
+      "md5": "a151411ec2475f75f2971c251669ea02",
+      "modified_at": "2026-07-09T08:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 438,
-      "md5": "9757b91cba53ab98733d01c41c0d7406",
-      "modified_at": "2026-07-08T11:00:54-04:00"
+      "md5": "adbac88ec6b64c3827c46f6580b3e70a",
+      "modified_at": "2026-07-09T11:45:39-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 182779,
-      "md5": "fba3704f0b2ef6d6d7821cc985b38659",
-      "modified_at": "2026-07-08T11:00:52-04:00"
+      "size_bytes": 185211,
+      "md5": "58c8a65a029bcb9ddb5c8314d0b897a6",
+      "modified_at": "2026-07-09T11:55:47"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -4518,9 +4561,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 45039,
-      "md5": "c67d40d9dc74b5b41b7bef0c0ed54b98",
-      "modified_at": "2026-07-08T11:00:03-04:00"
+      "size_bytes": 48991,
+      "md5": "4c170d83e99311b7a9ba6b7afb655b35",
+      "modified_at": "2026-07-09T11:50:14-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -4530,9 +4573,9 @@
     },
     {
       "path": "/root/mgs-agent/data/mgs-global-page-ignore-list.json",
-      "size_bytes": 27366,
-      "md5": "089db15b6cb378eaec7fd14a6bae7528",
-      "modified_at": "2026-07-07T20:47:57-04:00"
+      "size_bytes": 36823,
+      "md5": "ec6f98873cff2f13d862c8d116e5318d",
+      "modified_at": "2026-07-09T00:10:36-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -4572,9 +4615,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
-      "size_bytes": 559310,
-      "md5": "617cdc0e5b20fa05dcef7a65eaf7f343",
-      "modified_at": "2026-07-08T09:00:24-04:00"
+      "size_bytes": 556457,
+      "md5": "bcbb06812f61905930536772d6d435d8",
+      "modified_at": "2026-07-09T09:00:34-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-rollout-tracker.before-all-active-20260702-013833.json",
@@ -4609,8 +4652,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2294,
-      "md5": "927471f1bd130176c921959b4f8e3ed6",
-      "modified_at": "2026-07-08T11:01:02-04:00"
+      "md5": "b20cb95ee10ff9b289b5e1ab87602c70",
+      "modified_at": "2026-07-09T11:51:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -4626,27 +4669,27 @@
     },
     {
       "path": "/root/mgs-agent/data/utility-canary-approval-state.json",
-      "size_bytes": 440235,
-      "md5": "57cdb146ca8a3d8e61620cbdc834baeb",
-      "modified_at": "2026-07-08T06:35:33-04:00"
+      "size_bytes": 521562,
+      "md5": "f8984479e2b26d67da5a514794ba67ae",
+      "modified_at": "2026-07-09T11:45:57-04:00"
     },
     {
       "path": "/root/mgs-agent/data/utility-message-bank.json",
-      "size_bytes": 2803079,
-      "md5": "462696985f35bed46b678b853e705312",
-      "modified_at": "2026-07-08T06:35:33-04:00"
+      "size_bytes": 3618694,
+      "md5": "b4b4635ea3c26159bbf4fac8a3a4ad17",
+      "modified_at": "2026-07-09T11:45:57-04:00"
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 1759,
-      "md5": "b7a213ee89f53db719437ec5c9d9ecb9",
-      "modified_at": "2026-07-08T11:00:02-04:00"
+      "size_bytes": 1760,
+      "md5": "7e81e80c9e4b70898adc923957045b2b",
+      "modified_at": "2026-07-09T11:50:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "d54780829eff824f78be9ed497adcbd0",
-      "modified_at": "2026-07-08T08:07:02-04:00"
+      "md5": "238691adc2deec1777ed76704a1269b6",
+      "modified_at": "2026-07-09T08:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",

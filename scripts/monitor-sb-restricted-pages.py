@@ -349,6 +349,8 @@ async def run(args: argparse.Namespace) -> int:
             'new': len(new_rows),
             'resolved': len(resolved_rows),
         },
+        'last_new_rows': new_rows,
+        'last_resolved_rows': resolved_rows,
     })
 
     should_send = bool(new_rows or resolved_rows) or bool(getattr(args, 'force_alert', False))

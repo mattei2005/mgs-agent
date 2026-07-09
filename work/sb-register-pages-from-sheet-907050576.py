@@ -21,6 +21,7 @@ SHEET_ID = '1VNz7l1soafiju0v89H0IfaKJHcgioVjUw6nXyORl9oI'
 GID = '907050576'
 NY = ZoneInfo('America/New_York')
 SCHEDULE = ['08:00']
+IGNORE_LIST = BASE / 'data/mgs-global-page-ignore-list.json'
 
 LOGIN_HEADER = 'Vou colocar os campos que voce tem que saber para fazer o cadastro na dash da SB PAGE Messenger User'
 ALLOWED_SAVE = [
@@ -73,6 +74,29 @@ def source_map(v):
     return {'facebook': 'FACEBOOK', 'fb': 'FACEBOOK'}.get(low(v), norm(v))
 
 
+def load_ignore_keys():
+    if not IGNORE_LIST.exists():
+        return set()
+    try:
+        data = json.loads(IGNORE_LIST.read_text(encoding='utf-8'))
+    except Exception:
+        return set()
+    keys = set()
+    for e in data.get('entries', []):
+        bot = low(e.get('bot_user'))
+        pg = norm(e.get('page_id_pg'))
+        fb = norm(e.get('fb_page_id'))
+        if fb:
+            keys.add(('fb', fb))
+        if bot and pg:
+            keys.add(('bot_pg', bot, pg))
+    return keys
+
+
+def is_ignored(login, page_id, fb_page_id, ignore_keys):
+    return (fb_page_id and ('fb', fb_page_id) in ignore_keys) or (login and page_id and ('bot_pg', login, page_id) in ignore_keys)
+
+
 def sheet_rows():
     url = f'https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&gid={GID}'
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -81,6 +105,7 @@ def sheet_rows():
     if not raw:
         raise RuntimeError('empty sheet')
     header = raw[0]
+    ignore_keys = load_ignore_keys()
     out = []
     for idx, row in enumerate(raw[1:], start=2):
         vals = dict(zip(header, row))
@@ -89,6 +114,8 @@ def sheet_rows():
         page_id = norm(vals.get('Page ID'))
         page_name = norm(vals.get('Page Name'))
         if not (login and fb and page_id and page_name):
+            continue
+        if is_ignored(login, page_id, fb, ignore_keys):
             continue
         vals['_sheet_row'] = idx
         out.append(vals)

@@ -172,9 +172,10 @@ Before reporting success:
 
 - [ ] PHP lint passes on all plugin PHP files.
 - [ ] Plugin active version is correct.
-- [ ] Public routes return 200.
-- [ ] Public HTML has no old external stack references.
-- [ ] Frontend browser submit works for every target quiz variant.
+- Public routes return 200.
+- Public routes inherit normal WordPress global hooks unless Rodolfo explicitly requested an isolated/static page: WPCode/GTM/Yoast/pixels/head/footer changes should appear on quiz URLs like they do on posts/pages. See `wp-plugin-mass-operation/references/wp-custom-plugin-public-routes-global-hooks.md`.
+- Public HTML has no old external stack references.
+
 - [ ] WP lead row created with expected slug/UTM/gestor.
 - [ ] SMS status is stored and interpretable.
 - [ ] Redirect URL preserves query params.
@@ -199,3 +200,5 @@ Before reporting success:
 7. **Overengineering third-party ad wrappers.** If a static chat page loads a wrapper owned by another tech team, do not convert observed wrapper calls into admin settings. A loop in source HTML is not automatically a configurable `auctions` feature. Preserve the source contract and ask/verify before changing monetization semantics.
 
 8. **Declaring ads working from load checks only.** Seeing `gpt.js`, the wrapper script, or `window.jbftag` only proves the stack loaded. Validate the same user path as the original HTML and compare the generated HTML/JS contract: `window.tags`, script order, ad insertion hooks, CTA rewarded call, and absence of unrelated WordPress/theme pollution when static parity is required.
+
+9. **Quiz routes should not be isolated from the WordPress site by default.** MGS quiz URLs are part of the site. If Rodolfo adds or changes global head/footer/tracking/SEO behavior in WordPress, quiz public routes should inherit it like posts/pages. Audit for `wp_head()`, `wp_body_open()`, and `wp_footer()` when validating plugin renderers; only keep a fully isolated standalone output when explicitly requested or technically required.

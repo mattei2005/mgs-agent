@@ -375,6 +375,25 @@ def active_restricted(row, tday):
 def public_row(r):
     return {k:r.get(k) for k in ['ID','PAGE_ID','FB_PAGE_ID','PAGE_NAME','USER_LOGIN','PROFILE_NAME','STATUS','RESTRICTED_UNTIL','NOTES','BROADCAST_TEMPLATE_NAME']}
 
+def restriction_identity(sb=None, rep=None):
+    """Stable page identity for alert de-duplication.
+
+    Do not include RESTRICTED_UNTIL/campaign/date here. Rodolfo's channel
+    semantics are: a page already mentioned as restricted should not be mentioned
+    again while it remains in the same unresolved restricted-page lifecycle.
+    """
+    sb=sb or {}; rep=rep or {}
+    user=norm_email(rep.get('bot_user') or sb.get('USER_LOGIN'))
+    page_id=norm(rep.get('dtr_page_id') or sb.get('PAGE_ID'))
+    fb_id=norm(rep.get('fb_page_id') or sb.get('FB_PAGE_ID'))
+    if user and page_id:
+        return f'user_page|{user}|{page_id}'
+    if fb_id:
+        return f'fb|{fb_id}'
+    if sb.get('ID'):
+        return f"sb|{norm(sb.get('ID'))}"
+    return ''
+
 async def fb_page_opens(ctx, fb_page_id):
     if not fb_page_id: return 'ambiguous'
     url=f'https://www.facebook.com/{fb_page_id}'
@@ -474,6 +493,25 @@ def truncate_text(value, limit):
     value=str(value or '')
     return value if len(value)<=limit else value[:limit-1]+'…'
 
+def derive_sites(row):
+    row=row or {}
+    sites=[]
+    for key in ('DOMAIN','domain','SITE','site'):
+        value=norm(row.get(key))
+        if value: sites.append(value)
+    pub=norm(row.get('PUBLISHER_ID') or row.get('publisher_id'))
+    if '_' in pub:
+        sites.append(pub.split('_',1)[1])
+    tmpl=norm(row.get('BROADCAST_TEMPLATE_NAME') or row.get('TEMPLATE_NAME') or row.get('template_name'))
+    if tmpl and not sites:
+        sites.append(tmpl.split(' - ',1)[0].strip().lower())
+    clean=[]
+    for s in sites:
+        s=re.sub(r'[^A-Za-z0-9._-]+','',s).strip().lower()
+        if s and s not in clean:
+            clean.append(s)
+    return ','.join(clean) if clean else '?'
+
 def post_discord(content):
     token=discord_token()
     if not token:
@@ -490,12 +528,16 @@ def post_discord(content):
 
 def build_new_restrictions_alert(rows, summary):
     now=datetime.now(NY).strftime('%Y-%m-%d %H:%M %Z')
+    rows=sorted(rows, key=lambda r: (r.get('restricted_until') or '9999-99-99', r.get('page_name') or '', r.get('bot_user') or ''))
     lines=[
-        'PÁGINAS RESTRITAS — NOVAS CONFIRMADAS NA DTR',
+        'PÁGINAS RESTRITAS — NOVAS APLICADAS NA SMART BIDDING',
         f'Atualizado em: {now}',
-        f'Fonte: DigitalTRChat último Completed + readback SB validado | Novas: {len(rows)}',
+        f'Fonte: DigitalTRChat último Completed → Smart Bidding readback OK | Novas nesta execução: {len(rows)}',
         '',
-        'Página               FB Page ID          Page ID   Bot user           Segurador            Saída DTR         Códigos',
+        'Ação: Restricted Until já aplicado automaticamente na Dash SB.',
+        '',
+        'Página               FB Page ID          Page ID   Bot user           Segurador            Status SB   Códigos       Data saída',
+        '-------------------- ------------------ -------- ------------------ -------------------- ----------- ------------- ----------------',
     ]
     for r in rows[:20]:
         lines.append(
@@ -504,8 +546,9 @@ def build_new_restrictions_alert(rows, summary):
             f"{truncate_text(r.get('page_id'),8):<8} "
             f"{truncate_text((r.get('bot_user') or '').replace('@gmail.com',''),18):<18} "
             f"{truncate_text(r.get('segurador'),20):<20} "
-            f"{truncate_text(r.get('restricted_until_time') or r.get('restricted_until'),16):<16} "
-            f"{','.join(r.get('codes') or [])}"
+            f"{truncate_text(r.get('status_sb') or '?',11):<11} "
+            f"{truncate_text(','.join(r.get('codes') or []),13):<13} "
+            f"{truncate_text(r.get('restricted_until_time') or r.get('restricted_until'),16)}"
         )
     if len(rows)>20:
         lines.append(f'... +{len(rows)-20} no XLSX/log')
@@ -514,7 +557,7 @@ def build_new_restrictions_alert(rows, summary):
         '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
         'AÇÃO EXECUTADA NA SMART BIDDING',
         '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        'Status das páginas: Broadcast',
+        'Status SB: conforme readback após aplicação',
         'Restricted Until: data extraída do último Completed da DTR',
         'Validação: readback SB OK antes do alerta',
         '',
@@ -589,7 +632,8 @@ async def main():
             if norm(r.get('STATUS'))=='Broadcast' and active_restricted(r,tday) and norm(r.get('USER_LOGIN')) and norm(r.get('PAGE_ID')):
                 sb_restricted_pages_by_user[norm_email(r.get('USER_LOGIN'))].add(norm(r.get('PAGE_ID')))
         summary['sb_active_restricted_start']=len(sb_restricted_ids)
-        state=load_state(); stats=Counter(); report_rows=[]; backups=[]; alert_rows=[]; writes=0
+        state=load_state(); state.setdefault('alerted_restricted_pages', {})
+        stats=Counter(); report_rows=[]; backups=[]; alert_rows=[]; writes=0
         for user in users:
             print(f"PROGRESS user_start {user}", flush=True)
             scan=await scan_dtr_user(user, matched[user], step1_scope, args.limit_accounts, args.limit_pages, sb_restricted_pages_by_user.get(user, set()))
@@ -703,8 +747,23 @@ async def main():
                                         if 'RESTRICTED_UNTIL' in payload: checks.append(date_only(new_sb.get('RESTRICTED_UNTIL'))==date_only(payload['RESTRICTED_UNTIL']))
                                         readback_ok='yes' if all(checks) else 'no'
                                         if readback_ok=='no': summary['errors'].append({'readback_failed':before,'payload':payload,'after':public_row(new_sb)})
+                                        elif 'RESTRICTED_UNTIL' in payload and payload.get('RESTRICTED_UNTIL') is None:
+                                            ident=restriction_identity(sb, rep)
+                                            if ident:
+                                                state.setdefault('alerted_restricted_pages', {}).pop(ident, None)
                                         elif has_2022 and 'RESTRICTED_UNTIL' in payload:
-                                            alert_rows.append({'page_name':rep.get('page_name'),'fb_page_id':norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID')),'page_id':norm(rep.get('dtr_page_id')) or norm(sb.get('PAGE_ID')),'bot_user':rep.get('bot_user'),'segurador':rep.get('account_name'),'restricted_until':cls.get('restricted_until'),'restricted_until_time':cls.get('restricted_until_time'),'codes':codes,'sb_id':norm(sb.get('ID'))})
+                                            ident=restriction_identity(sb, rep)
+                                            status_after=norm(new_sb.get('STATUS'))
+                                            if status_after != 'Broadcast':
+                                                obs.append('restricted_alert_suppressed_non_broadcast')
+                                                stats['restricted_alert_suppressed_non_broadcast'] += 1
+                                            elif ident and ident in state.get('alerted_restricted_pages', {}):
+                                                obs.append('restricted_alert_suppressed_already_mentioned')
+                                                stats['restricted_alert_suppressed_already_mentioned'] += 1
+                                            else:
+                                                alert_rows.append({'page_name':rep.get('page_name'),'fb_page_id':norm(rep.get('fb_page_id')) or norm(sb.get('FB_PAGE_ID')),'page_id':norm(rep.get('dtr_page_id')) or norm(sb.get('PAGE_ID')),'bot_user':rep.get('bot_user'),'segurador':rep.get('account_name'),'sites':derive_sites(new_sb),'status_sb':status_after,'restricted_until':cls.get('restricted_until'),'restricted_until_time':cls.get('restricted_until_time'),'codes':codes,'sb_id':norm(sb.get('ID')),'alert_identity':ident})
+                                            if ident and status_after == 'Broadcast':
+                                                state.setdefault('alerted_restricted_pages', {})[ident]={'last_seen':now_iso(),'restricted_until':cls.get('restricted_until'),'sb_id':norm(sb.get('ID')),'page_name':rep.get('page_name'),'bot_user':rep.get('bot_user'),'segurador':rep.get('account_name'),'sites':derive_sites(new_sb),'status_sb':status_after}
                                     else:
                                         readback_ok='no'; summary['errors'].append({'readback_get_failed':before,'payload':payload})
                         else:

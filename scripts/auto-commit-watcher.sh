@@ -50,24 +50,50 @@ while inotifywait -r -e modify,create,delete,move \
     continue
   fi
 
-  # Captura o status uma única vez. Evita pipelines com `head` sob
-  # `set -o pipefail`: quando há muitas mudanças, o produtor do pipe pode
-  # receber SIGPIPE e derrubar o watcher com exit 141, gerando restart loop.
-  STATUS_OUTPUT=$(git status --porcelain -- "${GIT_PATHSPECS[@]}")
+  # Captura o status uma única vez em formato NUL-safe.
+  # Motivo: `git status --porcelain` cita paths com espaço; parsear com awk `{print $2}`
+  # transforma `"work/Fase 1.tsv"` em `"work/Fase`, gerando `fatal: pathspec ... did not match`
+  # e restart loop no systemd.
+  STATUS_FILE=$(mktemp)
+  git status --porcelain=v1 -z -- "${GIT_PATHSPECS[@]}" > "$STATUS_FILE"
 
   # Verifica se há algo pra commitar
-  if [ -z "$STATUS_OUTPUT" ]; then
+  if [ ! -s "$STATUS_FILE" ]; then
+    rm -f "$STATUS_FILE"
     log "Working tree limpo, skipping"
     continue
   fi
 
+  STATUS_PATHS=$(python3 - "$STATUS_FILE" <<'PY'
+import sys
+from pathlib import Path
+raw = Path(sys.argv[1]).read_bytes().split(b"\0")
+rows = []
+i = 0
+while i < len(raw):
+    rec = raw[i]
+    if not rec:
+        i += 1
+        continue
+    status = rec[:2].decode("utf-8", "replace")
+    path = rec[3:].decode("utf-8", "surrogateescape")
+    if status[0] in "RC" or status[1] in "RC":
+        # Porcelain -z em rename/copy traz path antigo no próximo registro.
+        i += 1
+    rows.append(status + "\t" + path)
+    i += 1
+sys.stdout.write("\n".join(rows))
+PY
+)
+  rm -f "$STATUS_FILE"
+
   # Lista arquivos modificados pra mensagem sem fechar pipe prematuramente.
-  CHANGES=$(printf '%s\n' "$STATUS_OUTPUT" | awk 'NR<=3 {print $2}' | tr '\n' ' ')
+  CHANGES=$(printf '%s\n' "$STATUS_PATHS" | cut -f2- | awk 'NR<=3 {print}' | tr '\n' ' ')
   CHANGES_TRIM=$(printf '%s' "$CHANGES" | cut -c1-100)
 
   # Guardrail: nunca auto-commitar arquivo com nome sensível.
   # Se aparecer algo suspeito, aborta esta rodada e exige revisão humana.
-  SENSITIVE_CHANGES=$(printf '%s\n' "$STATUS_OUTPUT" | awk '{print $2}' | grep -Ei "$SENSITIVE_PATH_REGEX" | grep -Eiv "$SENSITIVE_ALLOWLIST_REGEX" || true)
+  SENSITIVE_CHANGES=$(printf '%s\n' "$STATUS_PATHS" | cut -f2- | grep -Ei "$SENSITIVE_PATH_REGEX" | grep -Eiv "$SENSITIVE_ALLOWLIST_REGEX" || true)
   if [ -n "$SENSITIVE_CHANGES" ]; then
     log "BLOQUEADO: arquivo sensível detectado; commit automático abortado"
     printf '%s\n' "$SENSITIVE_CHANGES" | while IFS= read -r f; do log "  sensitive: $f"; done
@@ -75,14 +101,20 @@ while inotifywait -r -e modify,create,delete,move \
   fi
 
   # Add + commit (push acontece via hook 1P existente)
-  # Stage somente os paths retornados pelo status filtrado. Evita `git add .`
-  # tocar diretórios ignorados que ainda têm histórico versionado.
-  while IFS= read -r status_line; do
-    [ -n "$status_line" ] || continue
-    path=$(printf '%s\n' "$status_line" | awk '{print $2}')
+  # Stage somente os paths retornados pelo status filtrado. O parse é NUL-safe
+  # para nomes com espaço; cada `git add` é tolerante a corrida de arquivo
+  # removido/movido entre status e staging.
+  while IFS=$'\t' read -r status path; do
     [ -n "$path" ] || continue
-    git add -A -- "$path"
-  done <<< "$STATUS_OUTPUT"
+    if [[ "${status:0:1}" == "D" && "${status:1:1}" == " " ]]; then
+      # Deleção já staged: não há path no working tree nem no index para stagear.
+      continue
+    elif [[ "${status:1:1}" == "D" ]]; then
+      git add -u -- "$path" >> "$LOG_FILE" 2>&1 || log "WARN: não consegui stagear deleção volátil: $path"
+    elif ! git add -A -- "$path" >> "$LOG_FILE" 2>&1; then
+      log "WARN: não consegui stagear path volátil, seguindo: $path"
+    fi
+  done <<< "$STATUS_PATHS"
 
   COMMIT_MSG="auto: $CHANGES_TRIM"
 

@@ -232,15 +232,30 @@
 
   ChatFunnel.prototype.showInlineAd = function () {
     if (adProvider(this.config) === 'm2') {
+      var pgTopSlot = this.pubGuruTopSlot();
       var pgBanner = el('div', 'pubguru-chat-ad pubguru-chat-ad-top');
+      pgBanner.style.minHeight = pgTopSlot === 'wantabrand_mob_top' ? '420px' : '300px';
+      pgBanner.style.display = 'flex';
+      pgBanner.style.alignItems = 'center';
+      pgBanner.style.justifyContent = 'center';
+      pgBanner.style.margin = '28px 0 28px';
+      pgBanner.style.position = 'relative';
+      pgBanner.style.overflow = 'hidden';
+      pgBanner.style.isolation = 'isolate';
+      pgBanner.style.width = '100%';
+      pgBanner.style.flexShrink = '0';
       var pgSlot = document.createElement('pubguru');
-      pgSlot.setAttribute('data-pg-ad', 'wantabrand_mob_top');
+      pgSlot.setAttribute('data-pg-ad', pgTopSlot);
+      pgSlot.style.display = 'block';
+      pgSlot.style.maxWidth = '100%';
       pgBanner.appendChild(pgSlot);
       this.chatBox.appendChild(pgBanner);
       this.scrollBottom();
       // M2/PubGuru: do not fire the legacy infinite-post hook here; it can
-      // trigger the interstitial early. The top block is detected by the tag.
-      this.keepPinnedToBottom(4500);
+      // trigger the interstitial early. Register this top-block tag async so
+      // ad rendering cannot block the next chat question.
+      setTimeout(this.registerPubGuruTopBlock.bind(this, pgSlot, 0), 0);
+      this.keepPinnedToBottom(7000);
       if (window.ResizeObserver) {
         var pgResizeObserver = new ResizeObserver(this.keepPinnedToBottom.bind(this, 1000));
         pgResizeObserver.observe(pgBanner);
@@ -275,6 +290,33 @@
     }
   };
 
+  ChatFunnel.prototype.pubGuruTopSlot = function () {
+    if (window.matchMedia && window.matchMedia('(min-width: 768px)').matches) {
+      return 'wantabrand_desk_top';
+    }
+    return 'wantabrand_mob_top';
+  };
+
+  ChatFunnel.prototype.registerPubGuruTopBlock = function (slot, attempt) {
+    attempt = Number(attempt || 0);
+    if (window.pga && window.pga.adunitManager && typeof window.pga.adunitManager.defineObserveredNode === 'function') {
+      try {
+        window.pga.adunitManager.defineObserveredNode(slot);
+        if (slot.classList && slot.classList.contains('pg-disabled') && slot.parentElement) {
+          slot.parentElement.style.minHeight = '0';
+          slot.parentElement.style.margin = '0';
+        }
+        this.keepPinnedToBottom(2500);
+      } catch (err) {
+        console.warn('PubGuru top block registration failed', err);
+      }
+      return;
+    }
+    if (attempt < 20) {
+      setTimeout(this.registerPubGuruTopBlock.bind(this, slot, attempt + 1), 250);
+    }
+  };
+
   ChatFunnel.prototype.startChat = function () {
     if (this.started) return;
     this.started = true;
@@ -299,6 +341,14 @@
 
   ChatFunnel.prototype.scrollBottom = function () {
     this.chatBox.scrollTop = this.chatBox.scrollHeight;
+    var lastChild = this.chatBox.lastElementChild;
+    if (lastChild && lastChild.scrollIntoView) {
+      var self = this;
+      requestAnimationFrame(function () {
+        self.chatBox.scrollTop = self.chatBox.scrollHeight;
+        lastChild.scrollIntoView({ block: 'end', inline: 'nearest' });
+      });
+    }
   };
 
 

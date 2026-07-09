@@ -1,0 +1,350 @@
+{
+  "started_at": "2026-07-08T23:35:57-04:00",
+  "delete_targets": [
+    [
+      "1063903433472026",
+      "19337"
+    ],
+    [
+      "823864334141386",
+      "8341"
+    ],
+    [
+      "380536875150328",
+      "1122"
+    ],
+    [
+      "346856805184271",
+      "702"
+    ],
+    [
+      "352775804588457",
+      "499"
+    ],
+    [
+      "323736617490470",
+      "109"
+    ],
+    [
+      "330353400164437",
+      "107"
+    ],
+    [
+      "334015689799757",
+      "106"
+    ],
+    [
+      "392418553945157",
+      "101"
+    ]
+  ],
+  "dtr_verify": {
+    "fb_page_id": "802843239573486",
+    "page_id": "5461",
+    "login": "disparoszuout@gmail.com"
+  },
+  "sb_delete": {
+    "scope_before": {
+      "publishers": 56,
+      "company_counts": [
+        {
+          "company": "digital-trust",
+          "publishers_all": 45
+        },
+        {
+          "company": "digital-trust-2",
+          "publishers_all": 11
+        }
+      ],
+      "rows": 2884
+    },
+    "scope_after": {
+      "publishers": 56,
+      "company_counts": [
+        {
+          "company": "digital-trust",
+          "publishers_all": 45
+        },
+        {
+          "company": "digital-trust-2",
+          "publishers_all": 11
+        }
+      ],
+      "rows": 2876
+    },
+    "rows_before": 2884,
+    "rows_after": 2876,
+    "backup_path": "/root/mgs-agent/reports/sb-delete-requested-9-backup-20260708-233650.json",
+    "results": [
+      {
+        "fb_page_id": "1063903433472026",
+        "page_id": "19337",
+        "matches": 0,
+        "status": "SKIPPED_MATCH_COUNT",
+        "rows": [],
+        "present_after_by_pair": 0,
+        "present_after_by_id": false
+      },
+      {
+        "fb_page_id": "823864334141386",
+        "page_id": "8341",
+        "matches": 1,
+        "row_before": {
+          "ID": "68ead2f3-ac28-a655-5920-eeaacf2a0d24",
+          "USER_LOGIN": "",
+          "LOGIN": "disparoscliquet@gmail.com",
+          "PROFILE_NAME": "",
+          "PAGE_NAME": "Daniella Rosário",
+          "PAGE_ID": "8341",
+          "FB_PAGE_ID": "823864334141386",
+          "UTM_CAMPAIGN": "pg_8341",
+          "STATUS": "On-hold",
+          "RESTRICTED_UNTIL": "",
+          "COMPANY": "digital-trust-2",
+          "DOMAIN": "",
+          "PUBLISHER_ID": "digital-trust_cliquetfinanzas"
+        },
+        "delete_http": 200,
+        "delete_body": "true",
+        "status": "DELETED",
+        "present_after_by_pair": 0,
+        "present_after_by_id": false
+      },
+      {
+        "fb_page_id": "380536875150328",
+        "page_id": "1122",
+        "matches": 1,
+        "row_before": {
+          "ID": "01b78b7d-4f15-7fa9-5732-4b795699da3e",
+          "USER_LOGIN": "disparoseggbev@gmail.com",
+          "LOGIN": "disparoseggbev@gmail.com",
+          "PROFILE_NAME": "Reginaldo Novaes Santiago",
+          "PAGE_NAME": "Maria José",
+          "PAGE_ID": "1122",
+          "FB_PAGE_ID": "380536875150328",
+          "UTM_CAMPAIGN": "pg_1122",
+          "STATUS": "On-hold",
+          "RESTRICTED_UNTIL": "",
+          "COMPANY": "digital-trust",
+          "DOMAIN": "",
+          "PUBLISHER_ID": "digital-trust_eggbev"
+        },
+        "delete_http": 200,
+        "delete_body": "true",
+        "status": "DELETED",
+        "present_after_by_pair": 0,
+        "present_after_by_id": false
+      },
+      {
+        "fb_page_id": "346856805184271",
+        "page_id": "702",
+        "matches": 1,
+        "row_before": {
+          "ID": "01b78b7d-1631-7b1f-874e-58b8b210e621",
+          "USER_LOGIN": "disparoseggbev@gmail.com",
+          "LOGIN": "disparoseggbev@gmail.com",
+          "PROFILE_NAME": "Reginaldo Novaes Santiago",
+          "PAGE_NAME": "Aurora Jiménez",
+          "PAGE_ID": "702",
+          "FB_PAGE_ID": "346856805184271",
+          "UTM_CAMPAIGN": "pg_702",
+          "STATUS": "On-hold",
+          "RESTRICTED_UNTIL": "",
+          "COMPANY": "digital-trust",
+          "DOMAIN": "",
+          "PUBLISHER_ID": "digital-trust_eggbev"
+        },
+        "delete_http": 200,
+        "delete_body": "true",
+        "status": "DELETED",
+        "present_after_by_pair": 0,
+        "present_after_by_id": false
+      },
+      {
+        "fb_page_id": "352775804588457",
+        "page_id": "499",
+        "matches": 1,
+        "row_before": {
+          "ID": "01b78b7d-b050-7ca9-5192-136e338229a3",
+          "USER_LOGIN": "disparoseggbev@gmail.com",
+          "LOGIN": "disparoseggbev@gmail.com",
+          "PROFILE_NAME": "Reginaldo Novaes Santiago",
+          "PAGE_NAME": "Bruna Herrera",
+          "PAGE_ID": "499",
+          "FB_PAGE_ID": "352775804588457",
+          "UTM_CAMPAIGN": "pg_499",
+          "STATUS": "On-hold",
+          "RESTRICTED_UNTIL": "",
+          "COMPANY": "digital-trust",
+          "DOMAIN": "",
+          "PUBLISHER_ID": "digital-trust_eggbev"
+        },
+        "delete_http": 200,
+        "delete_body": "true",
+        "status": "DELETED",
+        "present_after_by_pair": 0,
+        "present_after_by_id": false
+      },
+      {
+        "fb_page_id": "323736617490470",
+        "page_id": "109",
+        "matches": 1,
+        "row_before": {
+          "ID": "01b78b7d-b628-7efa-523b-325161997ae9",
+          "USER_LOGIN": "disparoseggbev@gmail.com",
+          "LOGIN": "disparoseggbev@gmail.com",
+          "PROFILE_NAME": "Reginaldo Novaes Santiago",
+          "PAGE_NAME": "Isadora Torres",
+          "PAGE_ID": "109",
+          "FB_PAGE_ID": "323736617490470",
+          "UTM_CAMPAIGN": "pg_109",
+          "STATUS": "On-hold",
+          "RESTRICTED_UNTIL": "",
+          "COMPANY": "digital-trust",
+          "DOMAIN": "",
+          "PUBLISHER_ID": "digital-trust_eggbev"
+        },
+        "delete_http": 200,
+        "delete_body": "true",
+        "status": "DELETED",
+        "present_after_by_pair": 0,
+        "present_after_by_id": false
+      },
+      {
+        "fb_page_id": "330353400164437",
+        "page_id": "107",
+        "matches": 1,
+        "row_before": {
+          "ID": "01b78b7d-d5c7-77fd-f8cc-04e793a01cba",
+          "USER_LOGIN": "disparoseggbev@gmail.com",
+          "LOGIN": "disparoseggbev@gmail.com",
+          "PROFILE_NAME": "Reginaldo Novaes Santiago",
+          "PAGE_NAME": "Marta Sanchez",
+          "PAGE_ID": "107",
+          "FB_PAGE_ID": "330353400164437",
+          "UTM_CAMPAIGN": "pg_107",
+          "STATUS": "On-hold",
+          "RESTRICTED_UNTIL": "",
+          "COMPANY": "digital-trust",
+          "DOMAIN": "",
+          "PUBLISHER_ID": "digital-trust_eggbev"
+        },
+        "delete_http": 200,
+        "delete_body": "true",
+        "status": "DELETED",
+        "present_after_by_pair": 0,
+        "present_after_by_id": false
+      },
+      {
+        "fb_page_id": "334015689799757",
+        "page_id": "106",
+        "matches": 1,
+        "row_before": {
+          "ID": "01b78b7d-46d0-7a47-fdf2-8849c170b42f",
+          "USER_LOGIN": "disparoseggbev@gmail.com",
+          "LOGIN": "disparoseggbev@gmail.com",
+          "PROFILE_NAME": "Reginaldo Novaes Santiago",
+          "PAGE_NAME": "Emilia Montoya",
+          "PAGE_ID": "106",
+          "FB_PAGE_ID": "334015689799757",
+          "UTM_CAMPAIGN": "pg_106",
+          "STATUS": "On-hold",
+          "RESTRICTED_UNTIL": "",
+          "COMPANY": "digital-trust",
+          "DOMAIN": "",
+          "PUBLISHER_ID": "digital-trust_eggbev"
+        },
+        "delete_http": 200,
+        "delete_body": "true",
+        "status": "DELETED",
+        "present_after_by_pair": 0,
+        "present_after_by_id": false
+      },
+      {
+        "fb_page_id": "392418553945157",
+        "page_id": "101",
+        "matches": 1,
+        "row_before": {
+          "ID": "01b78b7d-11d7-7ec0-1aa8-934fcd0ab186",
+          "USER_LOGIN": "disparoseggbev@gmail.com",
+          "LOGIN": "disparoseggbev@gmail.com",
+          "PROFILE_NAME": "Reginaldo Novaes Santiago",
+          "PAGE_NAME": "Isabel Núñez",
+          "PAGE_ID": "101",
+          "FB_PAGE_ID": "392418553945157",
+          "UTM_CAMPAIGN": "pg_101",
+          "STATUS": "On-hold",
+          "RESTRICTED_UNTIL": "",
+          "COMPANY": "digital-trust",
+          "DOMAIN": "",
+          "PUBLISHER_ID": "digital-trust_eggbev"
+        },
+        "delete_http": 200,
+        "delete_body": "true",
+        "status": "DELETED",
+        "present_after_by_pair": 0,
+        "present_after_by_id": false
+      }
+    ],
+    "deleted_count": 8
+  },
+  "dtr_result": {
+    "username": "disparoszuout@gmail.com",
+    "login_ok": true,
+    "accounts": [
+      {
+        "id": "7",
+        "name": "Marcio De Oliveira Pires",
+        "pages": 18,
+        "matches": [],
+        "errors": []
+      },
+      {
+        "id": "218",
+        "name": "Posisi Nek Endi Iki",
+        "pages": 18,
+        "matches": [],
+        "errors": []
+      },
+      {
+        "id": "260",
+        "name": "Ninda Nak Mapa",
+        "pages": 11,
+        "matches": [],
+        "errors": []
+      },
+      {
+        "id": "262",
+        "name": "Riski Miftahul Hid",
+        "pages": 38,
+        "matches": [],
+        "errors": []
+      },
+      {
+        "id": "326",
+        "name": "Đoàn Diệu Hồng",
+        "pages": 32,
+        "matches": [],
+        "errors": []
+      },
+      {
+        "id": "915",
+        "name": "Maribel Tamboon",
+        "pages": 9,
+        "matches": [],
+        "errors": []
+      },
+      {
+        "id": "1609",
+        "name": "Ione Silva",
+        "pages": 24,
+        "matches": [],
+        "errors": []
+      }
+    ],
+    "matches": [],
+    "pages_total": 150,
+    "errors": []
+  },
+  "finished_at": "2026-07-08T23:38:37-04:00"
+}

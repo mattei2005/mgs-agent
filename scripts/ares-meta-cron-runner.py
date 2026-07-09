@@ -24,7 +24,7 @@ COMMON_PATH = '/root/mgs-agent/scripts/ares-meta-common.py'
 ACCOUNT_ID_DEFAULT = '1356770869843984'
 OPERATION_ID_DEFAULT = 'OpenzedFinanzas-CC-ES'
 TOKEN_ITEM = 'Token Meta API - 00 - ANUNCIANTE - Alana Figueiredo - OPENZED SPAIN'
-MAX_ROWS_OUTPUT = 12
+MAX_ROWS_OUTPUT = 0  # 0 = show every row; Discord poster splits long messages safely.
 
 
 def load_common():
@@ -333,7 +333,7 @@ def fetch_today_insights(common, token: str, account_id: str) -> list[dict]:
 def output_table(title: str, rows: list[dict], columns: list[tuple[str, str]], prefix: str = '') -> str:
     if not rows:
         return ''
-    limited = rows[:MAX_ROWS_OUTPUT]
+    limited = rows if MAX_ROWS_OUTPUT <= 0 else rows[:MAX_ROWS_OUTPUT]
     prepared = []
     for row in limited:
         prepared.append([str(row.get(key, ''))[:44] for key, _label in columns])
@@ -351,7 +351,7 @@ def output_table(title: str, rows: list[dict], columns: list[tuple[str, str]], p
     lines.append('-|-'.join('-' * w for w in widths))
     for vals in prepared:
         lines.append(' | '.join(vals[idx].ljust(widths[idx]) for idx in range(len(widths))))
-    if len(rows) > len(limited):
+    if MAX_ROWS_OUTPUT > 0 and len(rows) > len(limited):
         lines.append(f'... +{len(rows)-len(limited)} linhas no audit local')
     lines.append('```')
     return '\n'.join(lines)

@@ -5,8 +5,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{TITLE}}</title>
+    {{WP_HEAD}}
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+      #chat-container,
+      #chat-container *,
+      #chat-container *::before,
+      #chat-container *::after {
+        box-sizing: content-box !important;
+        font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+        text-transform: none !important;
+        letter-spacing: normal !important;
+      }
+
+      #chat-container button,
+      #chat-container a,
+      #chat-container span,
+      #chat-container div,
+      #chat-container p {
+        font-size-adjust: none !important;
+      }
 
       body {
         font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -30,6 +49,7 @@
         flex-direction: column;
         color: #333;
         max-width: 780px;
+        font-size: 14.5px !important;
       }
 
       /* WhatsApp header */
@@ -60,19 +80,38 @@
       }
 
       #header-name {
-        font-size: 15px;
-        font-weight: 500;
+        font-size: 15px !important;
+        font-weight: 500 !important;
         white-space: nowrap;
       }
 
       #header-status {
-        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px !important;
         color: #d9fdd3;
         white-space: nowrap;
       }
 
+      #header-status::before {
+        content: "";
+        width: 8px !important;
+        height: 8px !important;
+        min-width: 8px !important;
+        max-width: 8px !important;
+        min-height: 8px !important;
+        max-height: 8px !important;
+        display: inline-block !important;
+        border-radius: 50% !important;
+        background: #25d366 !important;
+        flex: 0 0 8px !important;
+        aspect-ratio: 1 / 1 !important;
+      }
+
       #chat-box {
         flex-grow: 1;
+        min-height: 0;
         overflow-y: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
@@ -90,7 +129,7 @@
         padding: 7px 12px 8px;
         border-radius: 7.5px;
         margin: 4px 0;
-        font-size: 14.5px;
+        font-size: 14.5px !important;
         max-width: 75%;
         position: relative;
         line-height: 1.4;
@@ -148,13 +187,13 @@
         margin-top: 8px;
         opacity: 0;
         transition: opacity 0.5s ease;
-        margin-right: 18px;
-        max-width: 75%;
-        float: right;
-        align-items: flex-end;
+        margin-right: 18px !important;
+        max-width: 75% !important;
+        float: right !important;
+        align-items: flex-end !important;
       }
 
-      button {
+      #chat-container button {
         padding: 9px 16px;
         background-color: #ffffff;
         color: #075e54;
@@ -164,37 +203,49 @@
         transition:
           background-color 0.2s ease,
           transform 0.1s ease;
-        font-size: 14px;
-        font-family: "Roboto", sans-serif;
-        font-weight: 500;
-        width: 100%;
+        font-size: 14px !important;
+        line-height: normal !important;
+        font-family: "Roboto", sans-serif !important;
+        font-weight: 500 !important;
+        width: 100% !important;
         margin: 3px 0;
         box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
       }
 
-      button:hover {
+      #chat-container button:hover {
         background-color: #f0fdf4;
         transform: translateY(-1px);
       }
 
-      button:active {
+      #chat-container button:active {
         transform: translateY(0);
       }
 
-      button:disabled {
+      #chat-container button:disabled {
         border-color: #ccc;
         color: #aaa;
         cursor: not-allowed;
         background-color: #f9f9f9;
       }
 
-      a button {
+      /* Wantabrand/M2 can load global ad CSS that changes the quiz gate box
+         model/text casing. Keep this scoped to the popup gate so the PubGuru
+         in-chat top block, scroll pinning, and answer flow are not touched. */
+      #quiz-container > div {
+        box-sizing: content-box !important;
+      }
+
+      #quiz-container .aq-answer {
+        text-transform: none !important;
+      }
+
+      #chat-container a button {
         background-color: #25d366;
         color: white;
         border-color: #25d366;
       }
 
-      a button:hover {
+      #chat-container a button:hover {
         background-color: #20c05c;
       }
 
@@ -320,20 +371,20 @@
       .offer-card-title {
         margin: 0 0 3px;
         font-weight: 700;
-        font-size: 14px;
+        font-size: 14px !important;
         color: #1f2937;
       }
 
       .offer-card-subtitle {
         margin: 0 0 4px;
-        font-size: 12.5px;
+        font-size: 12.5px !important;
         color: #475467;
         line-height: 1.25;
       }
 
       .offer-card-bank {
         margin: 0;
-        font-size: 12.5px;
+        font-size: 12.5px !important;
         font-weight: 700;
         color: #128c4a;
       }
@@ -353,12 +404,13 @@
     {{ADS_HEAD}}
   </head>
   <body>
+    {{WP_BODY_OPEN}}
     <div id="chat-container">
       <div id="chat-header">
         <img id="bot-avatar" src="" alt="" />
         <div id="header-info">
           <span id="header-name"></span>
-          <span id="header-status">🟢 online agora</span>
+          <span id="header-status">online agora</span>
         </div>
         <a
           id="call-btn"
@@ -405,7 +457,15 @@
 
       function scrollChatToBottom() {
         const chatBox = document.getElementById("chat-box");
-        if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+        if (!chatBox) return;
+        chatBox.scrollTop = chatBox.scrollHeight;
+        const lastChild = chatBox.lastElementChild;
+        if (lastChild && lastChild.scrollIntoView) {
+          requestAnimationFrame(() => {
+            chatBox.scrollTop = chatBox.scrollHeight;
+            lastChild.scrollIntoView({ block: "end", inline: "nearest" });
+          });
+        }
       }
 
       function keepChatPinnedToBottom(durationMs = 3500) {
@@ -422,7 +482,7 @@
       // Copia os parâmetros da URL atual para a URL de destino (sobrescreve existentes)
       function mergeSourceParams(targetUrl) {
         try {
-          const url = new URL(targetUrl);
+          const url = new URL(targetUrl, window.location.href);
           const sourceParams = new URLSearchParams(window.location.search);
           sourceParams.forEach((value, key) => {
             // Sobrescreve parâmetros para garantir que todos da origem sejam levados
@@ -541,6 +601,7 @@
 
             if (answer.includes("→")) {
               const answerLink = document.createElement("a");
+              answerLink.dataset.mgsTargetUrl = questionData.target;
               answerLink.href = mergeSourceParams(questionData.target);
               answerLink.style.textDecoration = "none";
               answerButton = document.createElement("button");
@@ -573,7 +634,8 @@
 
           questionData.offers.forEach((offer) => {
             const card = document.createElement("a");
-            card.href = mergeSourceParams(offer.url || offer.target || "#");
+            card.dataset.mgsTargetUrl = offer.url || offer.target || "#";
+            card.href = mergeSourceParams(card.dataset.mgsTargetUrl);
             card.classList.add("offer-card");
             applyRewardedButtonClass(card);
 
@@ -626,16 +688,57 @@
       function showAd() {
         const chatBox = document.getElementById("chat-box");
         if (rewardedButtonClass) {
+          const pubGuruTopSlot = window.matchMedia && window.matchMedia("(min-width: 768px)").matches
+            ? "wantabrand_desk_top"
+            : "wantabrand_mob_top";
           const adBanner = document.createElement("div");
           adBanner.classList.add("pubguru-chat-ad", "pubguru-chat-ad-top");
+          // Reserve the slot height before PubGuru fills it. On mobile the ad
+          // iframe can arrive after the next question and otherwise pushes the
+          // question/buttons out of view, making them look like they disappeared.
+          // Mobile native/display creatives can be taller than the initial
+          // placeholder. Reserve the full creative height so the next question
+          // starts below the ad instead of being painted under it.
+          adBanner.style.minHeight = pubGuruTopSlot === "wantabrand_mob_top" ? "420px" : "300px";
+          adBanner.style.display = "flex";
+          adBanner.style.alignItems = "center";
+          adBanner.style.justifyContent = "center";
+          adBanner.style.margin = "28px 0 28px";
+          adBanner.style.position = "relative";
+          adBanner.style.overflow = "hidden";
+          adBanner.style.isolation = "isolate";
+          adBanner.style.width = "100%";
+          adBanner.style.flexShrink = "0";
           const adSlot = document.createElement("pubguru");
-          adSlot.setAttribute("data-pg-ad", "wantabrand_mob_top");
+          adSlot.setAttribute("data-pg-ad", pubGuruTopSlot);
+          adSlot.style.display = "block";
+          adSlot.style.maxWidth = "100%";
           adBanner.appendChild(adSlot);
           chatBox.appendChild(adBanner);
           scrollChatToBottom();
           // M2/PubGuru: do not fire the legacy infinite-post hook here; it can
-          // trigger the interstitial early. The top block is detected by the tag.
-          keepChatPinnedToBottom(4500);
+          // trigger the interstitial early. Register only this top-block tag.
+          function registerPubGuruTopBlock(attempt = 0) {
+            try {
+              if (window.pga?.adunitManager?.defineObserveredNode) {
+                window.pga.adunitManager.defineObserveredNode(adSlot);
+                if (adSlot.classList.contains("pg-disabled")) {
+                  adBanner.style.minHeight = "0";
+                  adBanner.style.margin = "0";
+                }
+                keepChatPinnedToBottom(2500);
+                return;
+              }
+            } catch (err) {
+              console.warn('PubGuru top block registration failed', err);
+              return;
+            }
+            if (attempt < 20) {
+              setTimeout(() => registerPubGuruTopBlock(attempt + 1), 250);
+            }
+          }
+          setTimeout(() => registerPubGuruTopBlock(), 0);
+          keepChatPinnedToBottom(7000);
 
           if (window.ResizeObserver) {
             const resizeObserver = new ResizeObserver(() => keepChatPinnedToBottom(1000));
@@ -723,11 +826,24 @@
         const offers = {{OFFER_URLS_JS}};
         const randomOffer = offers[Math.floor(Math.random() * offers.length)];
         const callBtn = document.getElementById("call-btn");
+        callBtn.dataset.mgsTargetUrl = randomOffer;
         callBtn.href = mergeSourceParams(randomOffer);
 
         // Start quiz
         initQuiz();
       };
+
+      function refreshTrackedLinkHref(e) {
+        const link = e.target && e.target.closest ? e.target.closest("a[data-mgs-target-url], a.offer-card, #call-btn") : null;
+        if (!link) return;
+        const targetUrl = link.dataset.mgsTargetUrl || link.getAttribute("href") || "";
+        if (!targetUrl || targetUrl === "#") return;
+        link.href = mergeSourceParams(targetUrl);
+      }
+
+      ["pointerdown", "touchstart", "mousedown", "focus", "click"].forEach((eventName) => {
+        document.addEventListener(eventName, refreshTrackedLinkHref, true);
+      });
 
       // ─── QUIZ ────────────────────────────────────────────────────────────
       let quizStep = 0;
@@ -871,6 +987,7 @@
       .aq-answer:hover { opacity:0.85; transform:translateY(-1px); }
       @media(max-width:480px) { #quiz-container > div { padding:20px 15px 30px !important; } .question { font-size:18px !important; } .aq-answer { font-size:14px !important; padding:12px 15px !important; } #aq-cta { font-size:15px !important; padding:10px 25px !important; } }
     </style>
+{{WP_FOOTER}}
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"be053043c0cd4626ab42b5b242a0e7b7","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>

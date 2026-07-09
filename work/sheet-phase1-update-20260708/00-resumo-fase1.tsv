@@ -1,18 +1,16 @@
-Item	Leitura humana	Valor
-Atualizado em	Horário do relatório usado	2026-07-08T00:02:35-04:00
-Fonte	Relatório local	/root/mgs-agent/reports/dtr-sb-id-audit-all-1p-fixed-login-20260708-000235.json
+Código técnico	Legenda humana	Valor
+Atualizado em	Horário do relatório/correção aplicado	2026-07-08T12:23:43-04:00
+Fonte	Fonte canônica da exclusão global	/root/mgs-agent/data/mgs-global-page-ignore-list.json
 Usuários DTR lidos	Logins do DigitalTRChat auditados	88/88
 Seguradores DTR lidos	Seguradores/accounts varridos no DTR	226
 Páginas DTR lidas	Páginas encontradas no DTR	2911
 Publishers SB	Publishers SmartBidding no escopo completo	56
 Rows SB live	Linhas lidas em Accounts > Messenger > Page	2885
-Matches OK	Páginas batendo entre DTR e SB	2874
-PAGE_ID / FB_PAGE_ID / UTM divergente	Divergência de IDs/UTM	0
-DTR sem SB ainda	Páginas no DTR sem cadastro correspondente na SB	36
+Matches OK	Páginas batendo entre DTR e SB antes do filtro de ignore	2874
+DTR sem SB acionável	Páginas no DTR sem cadastro na SB após aplicar ignore-list global	0
+DTR sem SB ignorado global	Páginas antigas/fora de nicho, não entram em varredura nem comparação	36
+BLOCKED ignorado	Entradas BLOCKED na ignore-list global	13
+IGNORAR ignorado	Entradas IGNORAR na ignore-list global	23
 Login divergente	Mesmo FB_PAGE_ID/PAGE_ID, mas login diferente	1
 SB sem DTR	Rows na SB sem match no DTR	10
-Leitura final	Bloco da aba enviada pelo Rodolfo	Resolvido
-Leitura final	Sistema global	Ainda não 100% zerado
-Pendente	DTR sem SB fora da aba resolvida	36
-Pendente	SB sem DTR	10
-Pendente	Login divergente	1
+Regra final	Global ignore vence match: não consultar DTR/Bot, não comparar com SB, não cadastrar, não agendar, não fazer backfill	ATIVA

@@ -47,6 +47,15 @@ CTA = {
  'CAR_EN': ['🚗 REVIEW OFFER','✅ CHECK STATUS','📋 SEE OPTIONS','➡️ CONTINUE','🔎 OPEN REVIEW','📌 VIEW DETAILS','✅ CONFIRM DETAILS','🚘 SEE RESULT'],
 }
 
+EMOJI_RE = re.compile('[\U0001F300-\U0001FAFF\u2600-\u27BF]')
+EMOJI_POOLS = {
+ 'EN_CC': ['💳','📋','✅','🔎','📌','🔔','📄','💬'],
+ 'ES_CC': ['💳','📋','✅','🔎','📌','🔔','📄','💬'],
+ 'DE_CC': ['💳','📋','✅','🔎','📌','🔔','📄','💬'],
+ 'JOB_ES': ['💼','📄','📋','✅','🔎','📌','🔔','➡️'],
+ 'CAR_EN': ['🚗','🚘','📋','✅','🔎','📌','🔔','📄'],
+}
+
 def now(): return dt.datetime.now(TZ).isoformat(timespec='seconds')
 def today_stamp(): return dt.datetime.now(TZ).strftime('%Y%m%d-%H%M%S')
 
@@ -95,6 +104,54 @@ def zw_text(s):
     return ''.join(out)
 
 def no_dash(s): return s.replace('-', ' ').replace('–',' ').replace('—',' ')
+
+def strip_leading_emoji(s):
+    return re.sub(r'^(?:[\s\u200b\u200c\u200d\ufeff\u2060]*(?:[\U0001F300-\U0001FAFF\u2600-\u27BF]\ufe0f?))+\s*', '', s or '')
+
+def split_head_body(text):
+    text = text or ''
+    if '\n\n' in text:
+        h, b = text.split('\n\n', 1)
+        return h, b, '\n\n'
+    if '\n' in text:
+        h, b = text.split('\n', 1)
+        return h, b, '\n'
+    return text, '', ''
+
+def emoji_for_slot(vertical, mid):
+    fam = copy_family(vertical)
+    return EMOJI_POOLS[fam][(int(mid) - 1) % 8]
+
+def ensure_slot_emoji(text, cta, vertical, mid):
+    emoji = emoji_for_slot(vertical, mid)
+    h, b, sep = split_head_body(text)
+    h = strip_leading_emoji(h).strip()
+    new_text = (emoji + ' ' + h) if h else emoji
+    if b:
+        new_text += sep + b
+    cta = strip_leading_emoji(cta).strip()
+    new_cta = (emoji + ' ' + cta) if cta else emoji
+    return new_text, new_cta
+
+def leading_emoji(text):
+    m = EMOJI_RE.search(visible(text or '').lstrip())
+    return m.group(0) if m else ''
+
+def validate_emoji_blocks(msgs):
+    problems = []
+    for start, end in [(1, 8), (9, 16), (17, 20)]:
+        emojis = []
+        for m in msgs:
+            mid = int(m.get('MESSAGE_ID') or 0)
+            if start <= mid <= end:
+                e = leading_emoji(m.get('TEXT') or '')
+                if not e:
+                    problems.append(f'missing_emoji_mid_{mid}')
+                emojis.append(e)
+        non_empty = [e for e in emojis if e]
+        if len(non_empty) != len(set(non_empty)):
+            problems.append(f'repeated_emoji_block_{start}_{end}')
+    return problems
 
 def copy_family(vertical):
     if 'JOB' in vertical:
@@ -194,8 +251,24 @@ async def approve(ctx, headers, template_id):
 
 async def main():
     if LOCK_PATH.exists():
-        print('Utility canary loop: execução anterior ainda em andamento; skip seguro.')
-        return
+        stale = True
+        try:
+            old_pid = int(LOCK_PATH.read_text().strip())
+            # PID still alive means another approval loop is actually running.
+            os.kill(old_pid, 0)
+            stale = False
+        except (ValueError, ProcessLookupError, FileNotFoundError):
+            stale = True
+        except PermissionError:
+            stale = False
+        if not stale:
+            print('Utility canary loop: execução anterior ainda em andamento; skip seguro.')
+            return
+        try:
+            LOCK_PATH.unlink()
+            print(f'Utility canary loop: lock stale removido ({LOCK_PATH}).')
+        except FileNotFoundError:
+            pass
     LOCK_PATH.write_text(str(os.getpid()))
     bank = load_json(BANK_PATH, {'version':1,'created_at_et':now(),'updated_at_et':now(),'records':{}})
     state = load_json(STATE_PATH, {'version':1,'created_at_et':now(),'updated_at_et':now(),'runs':[],'slots':{}})
@@ -245,12 +318,13 @@ async def main():
                     if should_replace:
                         cand = approved_candidate(bank, vertical, used, used_visible_texts)
                         if cand:
-                            text, cta = cand['text'], cand['cta_1']
+                            text, cta = ensure_slot_emoji(cand['text'], cand['cta_1'], vertical, mid)
                         else:
                             text = cta = None
                             base_idx = int(slot.get('replacements_done') or 0) + mid + len(used)
                             for attempt_i in range(120):
                                 t, c = generated_copy(vertical, base_idx + attempt_i)
+                                t, c = ensure_slot_emoji(t, c, vertical, mid)
                                 if norm_text(t) not in used_visible_texts:
                                     text, cta = t, c
                                     break
@@ -269,9 +343,15 @@ async def main():
                         replaced.append(mid); approval_needed = True
                     new_msgs.append(m2)
                 visible_text_keys = [norm_text(m.get('TEXT') or '') for m in new_msgs]
+                emoji_block_errors = validate_emoji_blocks(new_msgs)
                 if len(visible_text_keys) != len(set(visible_text_keys)):
                     errors.append(f'{name}: duplicate_text_guard_blocked_post')
                     summary.append({'template':name,'before':dict(counts_before),'replaced':0,'approval_run':False,'blocked':'duplicate_text_guard'})
+                    all_green = False
+                    continue
+                if emoji_block_errors:
+                    errors.append(f'{name}: emoji_block_guard_blocked_post:{",".join(emoji_block_errors)}')
+                    summary.append({'template':name,'before':dict(counts_before),'replaced':0,'approval_run':False,'blocked':'emoji_block_guard'})
                     all_green = False
                     continue
                 if replaced:

@@ -69,7 +69,9 @@ def row(vals, **style):
 def build_rows():
     st=json.loads(STATE_PATH.read_text())
     active=list(st['active'].values())
-    sample=sorted(active, key=lambda r:(r.get('restricted_until') or '', segurador(r), r.get('page_name') or ''))[:5]
+    # The Sheet section is named "Novos". It must show only the delta from the
+    # last monitor execution, never a sample of all active restricted pages.
+    sample=st.get('last_new_rows') or []
     by=Counter(r.get('restricted_until') or '?' for r in active)
     detected=(st.get('last_check') or datetime.now(NY).isoformat(timespec='seconds')).replace('T',' ')[:16]
     rows=[]

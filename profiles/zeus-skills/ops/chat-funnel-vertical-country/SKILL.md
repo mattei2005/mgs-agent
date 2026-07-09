@@ -403,25 +403,15 @@ slot criado com .unfilled     problema de fill/adserver/inventário, não de ren
 
 Para diagnóstico, inspecionar `.ad-unit.ad`, `data-requested`, `data-displayed`, classe `unfilled`, iframes e `googletag.pubads().getSlots()`.
 
-## Rota standalone vs página WordPress
+## Rota WordPress aberta vs HTML isolado
 
-Para rotas públicas `/chat/...` que precisam imitar `index.html`, o plugin pode servir a rota, mas a saída deve ser HTML standalone:
+Padrão MGS atual para `/chat/...`: a rota pública deve se comportar como URL normal do WordPress, herdando integrações globais do site. Mesmo quando o visual precisa parecer um HTML limpo de chat, o renderer deve permitir hooks globais como `wp_head()`, `wp_body_open()` e `wp_footer()` para WPCode/GTM/Yoast/pixels/scripts/plugins do site.
 
-```text
-- sem wp_head()
-- sem wp_footer()
-- sem Yoast
-- sem tema
-- sem admin bar
-- sem Contact Form 7/jQuery/WP scripts
-- CSS/JS do chat inline ou controlado pelo próprio renderer
-- gpt.js direto no head
-- wrapper direto no head
-- window.tags antes do wrapper
-```
+Use HTML totalmente isolado apenas quando Rodolfo pedir explicitamente paridade com arquivo estático isolado ou quando a integração de ads exigir isolamento técnico documentado. Nesse caso, declarar a troca: isolamento preserva paridade com `index.html`, mas não herda alterações globais do WordPress.
 
-Se a resposta HTML contém “Page not found”, Yoast, `wp-includes/js`, `admin-bar`, tema ou plugins do WP, ainda não está equivalente ao `index.html` do Ciro.
+Para implementação e validação do padrão aberto, ver também `wp-plugin-mass-operation/references/wp-custom-plugin-public-routes-global-hooks.md`.
 
+Se a resposta HTML contém “Page not found”, rota de tema/404 ou placeholders `{{...}}`, ainda não está correta.
 
 ## Checklist de criação
 
@@ -452,7 +442,7 @@ Depois de implementar:
 - [ ] Testar caminho principal completo com clique real: gate passo 1 → gate passo 2 quando habilitado → CTA final → chat principal → cards/oferta. HTTP 200 e presença de HTML não bastam.
 - [ ] Se o gate tiver pergunta opcional, testar também o caminho com ela desabilitada: pergunta 1 → loading/final CTA → chat.
 - [ ] Testar cada CTA final.
-- [ ] Testar com UTMs na URL.
+- [ ] Testar com UTMs na URL e validar o `href` final real de cada card/oferta no DOM e a URL após clique/navegação, não apenas a função de merge. Em rotas que herdam WordPress global, scripts externos podem alterar ou ler anchors antes do click; o renderer deve guardar `data-mgs-target-url` com URL base e reaplicar `mergeSourceParams` em eventos de preflight (`pointerdown`, `touchstart`, `mousedown`, `focus`) e `click` antes da navegação.
 - [ ] Testar mobile viewport.
 - [ ] Verificar console sem erro crítico.
 - [ ] Validar pixel/eventos se aplicável.
@@ -469,7 +459,12 @@ Depois de implementar:
 - `references/wp-plugin-human-admin-ui.md` — padrão de admin humano para gestor de tráfego: criar, duplicar, excluir, editar campos e ofertas por blocos/repeaters, sem exigir JSON ou pipes.
 - `references/car-br-card-offer-convergent-flow.md` — padrão CAR-BR convergente inspirado em `fmybc`: perguntas sem ramificação real, resposta vira balão do usuário, e bloco final mostra 3 cards de veículos com `image/name/subtitle/bank/url`.
 - `references/car-br-gate-admin-and-wrapper-domain.md` — lições do rollout CAR-BR: pergunta 1 obrigatória + pergunta 2 com toggle, renderização dinâmica do gate, prefill/persistência de `ad_domain` por slug do site e QA de clique real.
+- `references/wp-global-rollout-config-preservation.md` — sequência segura para abrir `/chat/...` ao WordPress global em rollout multi-site sem quebrar UTM nem sobrescrever `configs/*.json` ambientais; aponta para `templates/mgs-chat-code-updater.php` quando o caminho seguro for WP Admin code-only.
+- `references/wp-global-preserve-standalone-visual.md` — regra operacional pós-correção do Rodolfo: abrir para WordPress global não pode redesenhar layout/fonte do chat; CSS defensivo deve preservar os valores visuais standalone originais.
+- `references/wp-global-layout-preservation.md` — detalhes práticos do rollout OpenZed/Topfeed/Wantabrand: checklist de validação visual multi-site, métricas DOM esperadas, e correção do indicador online via bolinha CSS para evitar emoji esticado.
+- `references/chat-ad-monetization-audit-2026-07.md` — checklist de auditoria de monetização em chats: separar prova estática de prova runtime, distinguir Standard/JBF de M2/PubGuru, validar rewarded/top/interstitial, e não marcar oferta/interstitial como OK sem hook/SDK/request confirmado.
 - `templates/chat-funnel-config.json` — template inicial para novo chat.
+- `templates/mgs-chat-code-updater.php` — plugin temporário one-shot para copiar somente código/template do `MGS Chat Funnels`, preservando `configs/*.json`; usar como base quando deploy via WP Admin for mais seguro que ZIP completo.
 
 ## Pitfalls
 
@@ -485,6 +480,12 @@ Depois de implementar:
 10. **Gate/quiz precisa tolerar clique rápido e wrapper silencioso.** No template Ciro/JBF, não deixe `quizStepLock` descartar o clique do segundo passo depois de desabilitar os botões; se usar lock, aplique antes de desabilitar e libere após a transição. O CTA final não pode depender só do callback do rewarded: sempre incluir fallback determinístico para fechar o modal e liberar o chat.
 11. **Gate não deve ficar hardcoded no HTML.** Se Rodolfo quer escolher quais perguntas aparecem, renderize slides do gate a partir da config e use contagem dinâmica. Pergunta 1 é obrigatória; pergunta 2+ pode ser toggled no admin.
 12. **Domain do wrapper vazio confunde operação.** Mesmo que o renderer consiga inferir pelo host, o admin deve mostrar e salvar a slug do site (`zuout`, `openzed`, etc.) para Rodolfo ver o wrapper correto sem editar JSON.
+13. **Não confundir MGS Chats com redirects externos.** Quando Rodolfo mostrar ou citar o menu WP Admin `MGS Chats` / `MGS Chat Funnels` e rotas como `/chat/car/br1`, diagnosticar o plugin WordPress `MGS Chat Funnels`, não Smart Bidding/ActView/`tarjeta.*` redirects. Para GTM, diferenciar: rota standalone do plugin pode não herdar `wp_head()`/tema/site-wide tags; se o renderer é standalone, a tag precisa estar no campo/config/header do próprio chat/plugin ou no contrato HTML renderizado, não apenas no header global do tema.
+14. **Operação canário single-site: mexer só no site alvo até Rodolfo validar rollout.** Se a validação é no OpenZed, não consultar snapshot/config de Eggbev como base operacional, não misturar configs entre domínios e não alterar/deployar plugins de outros sites. Nunca sobrescrever configs ambientais (`configs/*.json`) ao corrigir só código/template do MGS Chat Funnels. Os arquivos `configs/car-br-01.json`, `configs/emp-br-01.json` etc. carregam URLs de oferta específicas do site instalado. Upload de zip completo do plugin pode trocar URLs de OpenZed por URLs de outro domínio se o repositório local estiver com configs de canário/dev. Antes de qualquer deploy, comparar targets do site vivo e preservar configs; se a mudança é só PHP/template/CSS/JS, aplicar code-only ou restaurar os targets corretos no pacote antes do upload. Validação obrigatória pós-deploy: HTML público da rota não pode conter domínio errado (ex.: `eggbev.com` em `openzed.com`) e cada card deve apontar para o domínio esperado com UTMs.
+
+15. **Rotas do MGS Chat Funnels devem se comportar como URLs normais do WordPress, não como HTML isolado travado.** Regra do Rodolfo: se ele altera algo global no site — head, footer, WPCode, Yoast, scripts, pixels, plugins de tracking ou outras integrações WordPress — a URL `/chat/...` deve herdar/funcionar como post/página normal. Não tratar isso como caso específico de WPCode/GTM. A solução preferida é transformar o renderer público do chat em template/rota WordPress aberta que execute os hooks globais (`wp_head`, `wp_body_open`, `wp_footer` e integrações relevantes), mantendo o layout limpo do chat por CSS/template, não bloqueando o ecossistema WP. Ao inserir `wp_head`, colocar o hook antes do CSS próprio do chat ou aplicar overrides escopados depois dele; se `wp_head` vier depois do CSS do chat, CSS global do tema/plugins pode quebrar botões/perguntas. Só usar HTML standalone totalmente isolado quando Rodolfo pedir explicitamente paridade com arquivo estático isolado ou quando a integração de ads exigir isolamento técnico documentado.
+
+16. **Ao abrir para WordPress global, preservar o layout/fonte original do chat — não redesenhar.** Correção do Rodolfo: abrir `/chat/...` para herdar WordPress global significa liberar `wp_head/wp_body_open/wp_footer`, não alterar a aparência do chat. O CSS defensivo deve neutralizar interferência de tema/plugins mantendo os mesmos valores visuais do standalone anterior: mesma fonte, tamanhos, pesos, larguras, margens, max-width, float/alinhamento e botões. Nunca “normalizar” mudando UX (ex.: transformar botões de 75%/alinhados à direita em full-width) salvo pedido explícito. Ao aplicar hardening, use seletores escopados (`#chat-container ...`) e `!important` apenas para proteger os valores originais. Indicadores visuais como “online” não devem depender de emoji quando o site herda WP global: alguns temas/plugins/font stacks renderizam `🟢` como oval esticado. Usar ponto CSS escopado (`#header-status::before`) com `width/height/border-radius:50%` preserva a bolinha sem drift. Fonte para subir chat em site novo: **não clonar HTML de site vivo**. Usar o plugin canônico local `/root/mgs-agent/plugins/mgs-chat-funnels` como base code/template, escolhendo variante padrão vs variante M2/wrapper quando aplicável, e criar/preservar `configs/*.json` específico do site/funil. Sites vivos servem só como validação comparativa, nunca como source of truth. Validação obrigatória: comparar screenshot/DOM com o modelo pré-WP-global e confirmar WP global + UTM hardening sem drift visual. Para auditoria de anúncios/monetização em chats, consultar também `references/chat-ad-monetization-audit-2026-07.md`: separar prova estática de prova runtime, distinguir Standard/JBF de M2/PubGuru, e não marcar oferta/interstitial como OK sem hook/SDK/request confirmado.
 
 ## Resposta padrão quando Rodolfo pedir um chat novo
 
