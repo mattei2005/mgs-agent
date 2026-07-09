@@ -1,15 +1,16 @@
-# CAR BR/PT multi-image upload → READY + Ares handoff
+# CAR BR/BR multi-image upload → READY + Ares handoff
 
 Use this reference when Kelly/Geizian/gestor sends multiple Portuguese Brazil car-financing static creatives in Discord and asks Hera to put them in Drive for Ares.
 
 ## Durable pattern
 
 1. Treat the batch as valid when the message includes `País: BRASIL`, `Vertical: CAR`, `Língua: PORTUGUES` and image attachments.
-2. Detect all images before naming. For typical CAR BR/PT batches in this flow:
+2. Language-code rule for this flow: when the user says only `PORTUGUES` for `País: BRASIL`, use Brazilian Portuguese code `BR`, so the operation is `CAR_BR_BR`. Use `PT` only when Portugal/Portuguese-Portugal is explicitly stated.
+3. Detect all images before naming. For typical CAR BR/BR batches in this flow:
    - `1080x1920` → `IMG`, vertical/story placement.
    - no visible human/person → `NV`.
-   - operation code → `CAR_BR_PT`.
-3. Hera applies the Creative Ops rules directly, without asking for extra authorization for routine Creative Ops tasks:
+   - operation code → `CAR_BR_BR`.
+4. Hera applies the Creative Ops rules directly, without asking for extra authorization for routine Creative Ops tasks:
    - classify angle from visible promise/copy;
    - rename;
    - clean metadata;
@@ -20,10 +21,10 @@ Use this reference when Kelly/Geizian/gestor sends multiple Portuguese Brazil ca
 5. If Ares needs to be notified, do it silently/background; do not ping Ares in the human thread and do not reply to Ares bot validation/continuation messages there.
 6. Keep original Discord/Canva source untouched. Final Drive asset is the cleaned renamed copy.
 
-## CAR_BR_PT naming used in this flow
+## CAR_BR_BR naming used in this flow
 
 ```text
-CAR_BR_PT_IMG_{ANGLE}_NV_{VARIANT}.jpg
+CAR_BR_BR_IMG_{ANGLE}_{P_ORIENT}_{VARIANT}.jpg
 ```
 
 Example angle labels that worked for BR car-financing creatives:
