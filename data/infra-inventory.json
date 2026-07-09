@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T15:27:27-04:00",
+    "updated_at": "2026-07-09T15:28:31-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1200,6 +1200,20 @@
       "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with post-body-only CTA extraction, post-ID REST tag lookup, full URL inventory reconciliation, no duplicate P1 destination rows, canonical IP replacement, and divergent CTA/button-link reporting.",
       "validation": "Patched after Rodolfo caught false SEM TAGS NO WP; /posts?slug returned [] while /posts/{id} returned tag IDs. Rebuilt sheet and validated Forever 21 row by CSV readback.",
       "updated_at": "2026-07-09T15:27:27-04:00"
+    },
+    {
+      "id": "zeus-wp-quiz-lead-funnel-static-chat-wrapper-contract-reference",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/wp-quiz-lead-funnel/references/static-chat-wrapper-contract.md",
+      "size_bytes": 4468,
+      "modified_at": "2026-07-09T15:27:52-04:00",
+      "sha256": "77edae6b5d9ade9cf798cd3fbe53a709435a7ccfae1950969c3c2d9fdb31ae40",
+      "purpose": "Static chat ad-wrapper contracts for MGS quiz/chat funnels, including JBF/SB and Zuout ActView exception.",
+      "validation": "Updated from Rodolfo correction: zuout.com/chat/car/br1/ uses ActView scr.actview.net/zuout.js + zuout_top_wrapper/zuout_top, not SB/JBF wrapper.",
+      "updated_at": "2026-07-09T15:28:31-04:00",
+      "skill": "wp-quiz-lead-funnel",
+      "source_report": "REPORT-INFRA Zeus Zuout ActView wrapper contract 2026-07-09"
     }
   ],
   "systemd_services": [
