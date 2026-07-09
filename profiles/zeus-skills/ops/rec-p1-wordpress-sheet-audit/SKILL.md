@@ -32,12 +32,16 @@ Do not collapse the P1 into the REC date. REC and P1 each need their own date, l
 ## Workflow
 
 1. Identify the target sheet tabs/sites from the Sheet itself or the screenshot.
-2. For each site, discover REC candidates via WordPress REST. Use `/wp-json/wp/v2/search` as a fallback because some older REC posts may be reachable by direct ID/search but absent from ordinary `/posts` listing.
-3. Fetch the REC post body and extract same-site links from `content.rendered`.
-4. Pick the P1 link from REC CTA/card/button patterns: slugs starting with `apply`, `aplicar`, `p1-`, or equivalent apply/solicitar links.
-5. Fetch both posts through WordPress REST and resolve tag IDs through `/wp-json/wp/v2/tags?include=...`.
-6. Fill the Google Sheet tab with one row per REC→P1 pair using the required column order.
-7. Verify by CSV export/readback for every edited tab: header equals the required columns, row count matches expected sample size, and the last row has the expected REC link.
+2. For each site, discover **all published posts** via WordPress REST. Use `/wp-json/wp/v2/search` as a fallback because some older REC/P1 posts may be reachable by direct ID/search but absent from ordinary `/posts` listing.
+3. Fetch each post body and extract CTA/button/card/lazyblock links from `content.rendered`; prefer links inside `<a>` elements whose class/text/ancestor indicates button, card, LazyBlock, apply, solicitar, veja, continue, etc.
+4. For every article, check whether all CTA/button/card/lazyblock links resolve to the same destination. If not, report the different links in the sheet; this catches redator/gestor mistakes where one button points to the wrong URL.
+5. Classify flow:
+   - REC→P1: article links to another same-site article and that destination is the P1/apply article.
+   - P1: article is the destination of a REC/P1 flow.
+   - SEO: article does not participate in REC→P1 flow; keep the article URL and record its final CTA/button link.
+6. Fetch REC/P1 posts through WordPress REST and resolve tag IDs through `/wp-json/wp/v2/tags?include=...`.
+7. Fill the Google Sheet tab using the required REC/P1 columns plus operational audit columns when needed (`Tipo`, `Links de botão`, `Alerta links`) so every URL/article is represented and link divergence is visible.
+8. Verify by CSV export/readback for every edited tab: header contains the required REC/P1 columns, row count matches the complete published-post coverage, and divergent links are present in the alert column.
 
 ## Pitfalls
 
