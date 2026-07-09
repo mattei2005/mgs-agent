@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T13:02:40-04:00",
+    "updated_at": "2026-07-09T13:19:17-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1068,14 +1068,14 @@
       "type": "profile_skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/SKILL.md",
-      "size_bytes": 95434,
-      "sha256": "85f17a2f30e5fea5ddc006ee9ffe20b1f92c97b855beaa591babd83a72b22168",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-07-02T03:52:19-04:00",
-      "validation": "REPORT-INFRA embed helper documented with no-mention/no-thread defaults; sync-souls completed.",
+      "size_bytes": 99113,
+      "sha256": "77aa4fa32d5c58b6529026997d06851c602115068e952f1a338441380fdad53e",
+      "runtime_versioned_sha_match": false,
+      "updated_at": "2026-07-09T13:19:17-04:00",
+      "validation": "Patched Discord delete/repost by channel ID rule after Rodolfo correction; runtime skill updated; used REST API to delete/repost HOA report parts without ID REC.",
       "source_report": "Zeus REPORT-INFRA embed standardization 2026-07-02",
       "agent": "zeus",
-      "modified_at": "2026-07-02T03:51:55-04:00"
+      "modified_at": "2026-07-09T13:18:21-04:00"
     },
     {
       "profile": "zeus",
