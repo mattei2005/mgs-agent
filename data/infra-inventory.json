@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T16:08:46-04:00",
+    "updated_at": "2026-07-09T16:21:19-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1234,12 +1234,12 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/ops/rec-p1-wordpress-sheet-audit/SKILL.md",
-      "size_bytes": 6067,
-      "modified_at": "2026-07-09T19:31:37.089148+00:00",
-      "sha256": "102ab50fad6184f77d4b225d9b8c1e06d4a3597faba1ca890d9a1a2956e083ea",
-      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with post-body-only CTA extraction, post-ID REST tag lookup, blank cells for no-tag posts, full URL inventory reconciliation, no duplicate P1 destination rows, canonical IP replacement, and divergent CTA/button-link reporting.",
-      "validation": "Patched after Rodolfo flagged SEM TAGS NO WP in columns C/F; final sheet should leave no-tag cells blank after verified post-ID lookup.",
-      "updated_at": "2026-07-09T15:31:49-04:00"
+      "size_bytes": 6383,
+      "modified_at": "2026-07-09T20:21:07.195961+00:00",
+      "sha256": "862571b59756ecb0322f4ee9b26ef92bbe399df2781fde12d2d74155bee87703",
+      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with post-body-only CTA extraction, live post-ID REST tag verification across all sites, no blank internal tag cells, no duplicate P1 destination rows, canonical IP replacement, and divergent CTA/button-link reporting.",
+      "validation": "Patched after Rodolfo clarified all columns/tags across four sites must be verified; performed v7 live tag refresh and sheet readback: all 4 tabs match source, no blank internal C/F, no P1 duplicate in B, H/I populated.",
+      "updated_at": "2026-07-09T16:21:19-04:00"
     }
   ],
   "systemd_services": [
