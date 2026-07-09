@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T15:28:31-04:00",
+    "updated_at": "2026-07-09T15:31:49-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1190,18 +1190,6 @@
       "notes": "Documented Utility replacement requirement: contextual emojis + varied copy + no repeated visible TEXT."
     },
     {
-      "id": "zeus:rec-p1-wordpress-sheet-audit",
-      "agent": "zeus",
-      "type": "skill",
-      "path": "/root/.hermes/profiles/zeus/skills/ops/rec-p1-wordpress-sheet-audit/SKILL.md",
-      "size_bytes": 5966,
-      "modified_at": "2026-07-09T19:27:15.783914+00:00",
-      "sha256": "9e26d96fb882da11004e735ad8e000c1119bd007cdf0cf7eefbf72fe089c62de",
-      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with post-body-only CTA extraction, post-ID REST tag lookup, full URL inventory reconciliation, no duplicate P1 destination rows, canonical IP replacement, and divergent CTA/button-link reporting.",
-      "validation": "Patched after Rodolfo caught false SEM TAGS NO WP; /posts?slug returned [] while /posts/{id} returned tag IDs. Rebuilt sheet and validated Forever 21 row by CSV readback.",
-      "updated_at": "2026-07-09T15:27:27-04:00"
-    },
-    {
       "id": "zeus-wp-quiz-lead-funnel-static-chat-wrapper-contract-reference",
       "agent": "zeus",
       "type": "skill_reference",
@@ -1214,6 +1202,18 @@
       "updated_at": "2026-07-09T15:28:31-04:00",
       "skill": "wp-quiz-lead-funnel",
       "source_report": "REPORT-INFRA Zeus Zuout ActView wrapper contract 2026-07-09"
+    },
+    {
+      "id": "zeus:rec-p1-wordpress-sheet-audit",
+      "agent": "zeus",
+      "type": "skill",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/rec-p1-wordpress-sheet-audit/SKILL.md",
+      "size_bytes": 6067,
+      "modified_at": "2026-07-09T19:31:37.089148+00:00",
+      "sha256": "102ab50fad6184f77d4b225d9b8c1e06d4a3597faba1ca890d9a1a2956e083ea",
+      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with post-body-only CTA extraction, post-ID REST tag lookup, blank cells for no-tag posts, full URL inventory reconciliation, no duplicate P1 destination rows, canonical IP replacement, and divergent CTA/button-link reporting.",
+      "validation": "Patched after Rodolfo flagged SEM TAGS NO WP in columns C/F; final sheet should leave no-tag cells blank after verified post-ID lookup.",
+      "updated_at": "2026-07-09T15:31:49-04:00"
     }
   ],
   "systemd_services": [
