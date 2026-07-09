@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T16:25:25-04:00",
+    "updated_at": "2026-07-09T16:37:58-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1264,12 +1264,12 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/ops/rec-p1-wordpress-sheet-audit/SKILL.md",
-      "size_bytes": 6383,
-      "modified_at": "2026-07-09T20:21:07.195961+00:00",
-      "sha256": "862571b59756ecb0322f4ee9b26ef92bbe399df2781fde12d2d74155bee87703",
-      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with post-body-only CTA extraction, live post-ID REST tag verification across all sites, no blank internal tag cells, no duplicate P1 destination rows, canonical IP replacement, and divergent CTA/button-link reporting.",
-      "validation": "Patched after Rodolfo clarified all columns/tags across four sites must be verified; performed v7 live tag refresh and sheet readback: all 4 tabs match source, no blank internal C/F, no P1 duplicate in B, H/I populated.",
-      "updated_at": "2026-07-09T16:21:19-04:00"
+      "size_bytes": 6731,
+      "modified_at": "2026-07-09T20:37:35.120169+00:00",
+      "sha256": "eb7af83c2a7fb92c60fefce451247deac9acf894433f6ecdeab14faa0e370d46",
+      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with full tab clear, post-body-only CTA extraction, redirect/canonical P1 URL resolution, live post-ID REST tag verification, no blank internal tag cells, no duplicate P1 destination rows, and divergent CTA/button-link reporting.",
+      "validation": "Patched after full rebuild request: cleaned 4 tabs via A1:I1000 delete, rebuilt v9 fresh, canonicalized same-site redirects, validated exact CSV readback on all tabs with no blank B/C/F/H/I and no duplicate P1 rows.",
+      "updated_at": "2026-07-09T16:37:58-04:00"
     }
   ],
   "systemd_services": [
