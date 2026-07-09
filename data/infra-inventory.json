@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T19:45:53-04:00",
-    "generated_by": "zeus-manual-inventory-update"
+    "updated_at": "2026-07-09T19:47:03-04:00",
+    "generated_by": "zeus-drive-watchdog-alert-fix"
   },
   "system_packages": [
     {
@@ -373,13 +373,13 @@
       "agent": "hera",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py",
-      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; valida root por ID/capabilities para evitar falso positivo quando o folder é renomeado.",
-      "validation": "python3 -m py_compile OK; live watchdog run exit 0; state healthy=true with OAuth token_ok and Service Account root_access_ok; no Discord alert emitted.",
+      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; saúde operacional baseada no Service Account primário, com OAuth de usuário tratado como fallback degradado para evitar alertas repetidos quando uploads estão OK.",
+      "validation": "python3 -m py_compile OK; live watchdog run exit 0; state healthy=true with primary_credential=service_account, fallback_degraded=true; no Discord alert emitted while SA root_access_ok.",
       "git_tracked": false,
-      "updated_at": "2026-06-29T10:59:52-04:00",
-      "size_bytes": 11778,
-      "modified_at": "2026-06-29T10:59:11-04:00",
-      "sha256": "c7c7c31e1d67073af1762d68ede237cdbb4a84c8e3a4a3994d461830eb325843"
+      "updated_at": "2026-07-09T19:47:03-04:00",
+      "size_bytes": 12366,
+      "modified_at": "2026-07-09T19:46:00-04:00",
+      "sha256": "cbda7a215efd9924d6a20f3cd83af87d1d73be2ded6cbf7291ab790f2fcd2520"
     },
     {
       "id": "ares-drive-oauth-watchdog-profile-wrapper",
@@ -535,13 +535,13 @@
       "agent": "hera",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py",
-      "sha256": "c7c7c31e1d67073af1762d68ede237cdbb4a84c8e3a4a3994d461830eb325843",
-      "size_bytes": 11778,
+      "sha256": "cbda7a215efd9924d6a20f3cd83af87d1d73be2ded6cbf7291ab790f2fcd2520",
+      "size_bytes": 12366,
       "git_tracked": false,
-      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; valida root por ID/capabilities para evitar falso positivo quando o folder é renomeado.",
-      "validation": "python3 -m py_compile OK; live watchdog run exit 0; state healthy=true with OAuth token_ok and Service Account root_access_ok; no Discord alert emitted.",
-      "updated_at": "2026-06-29T10:59:52-04:00",
-      "modified_at": "2026-06-29T10:59:11-04:00"
+      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; saúde operacional baseada no Service Account primário, com OAuth de usuário tratado como fallback degradado para evitar alertas repetidos quando uploads estão OK.",
+      "validation": "python3 -m py_compile OK; live watchdog run exit 0; state healthy=true with primary_credential=service_account, fallback_degraded=true; no Discord alert emitted while SA root_access_ok.",
+      "updated_at": "2026-07-09T19:47:03-04:00",
+      "modified_at": "2026-07-09T19:46:00-04:00"
     },
     {
       "id": "hera-drive-auth-watchdog-cron-route",
@@ -874,6 +874,19 @@
       "updated_at": "2026-07-09T16:25:25-04:00",
       "source_report": "REPORT-INFRA Zeus Cliquet MGS Chat Funnels duplicate GPT/JBF wrapper hotfix 2026-07-09",
       "validation": "PHP lint pass; WP plugin-editor readback SHA matched; live /chat/car/br1 with UTM has exactly one gpt.js and one assets.jbfdigital wrapper, no facebook_br variant, browser exposes jbftag and one rewarded slot."
+    },
+    {
+      "id": "zeus-google-drive-agent-automation-skill-20260709",
+      "agent": "zeus",
+      "type": "skill",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/SKILL.md",
+      "sha256": "f12694108dd874c14cb0f2d35e620338273b3e1d9ca898770ab407fe9c27dd78",
+      "size_bytes": 12225,
+      "git_tracked": false,
+      "purpose": "Procedimento Drive MGS atualizado: Hera é operacionalmente saudável com Service Account primário OK; OAuth invalid_grant é fallback degradado sem paging repetitivo.",
+      "validation": "skill_manage patch OK; aligned with live drive-auth-watchdog state semantics.",
+      "updated_at": "2026-07-09T19:47:03-04:00",
+      "modified_at": "2026-07-09T19:46:33-04:00"
     }
   ],
   "profile_skill_references": [
