@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T12:56:26-04:00",
+    "updated_at": "2026-07-09T13:02:40-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -890,12 +890,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-      "size_bytes": 18415,
-      "modified_at": "2026-06-20T21:26:03-04:00",
-      "sha256": "9e85a0d0789be4293e8127fd318b858c0d406bf233de17260e63150a15f467e2",
-      "runtime_versioned_sha_match": true,
-      "updated_at": "2026-06-20T21:27:22-04:00",
-      "validation": "runtime/versioned SHA match; HOA header preview OK; linked runner py_compile/hash OK; secret scan OK"
+      "size_bytes": 20143,
+      "modified_at": "2026-07-09T13:01:48-04:00",
+      "sha256": "f15286e414498940aa379bd683fe55a874b6aa99ee38fb9c307f82b7731709a7",
+      "runtime_versioned_sha_match": false,
+      "updated_at": "2026-07-09T13:02:40-04:00",
+      "validation": "versioned skill updated for HOA gestor report format; ID REC hidden from HOA Discord tables; script py_compile/sample output OK; linked reference sha256=7be214ed5bce"
     },
     {
       "profile": "ares",
@@ -1415,8 +1415,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
-      "size_bytes": 22053,
-      "modified_at": "2026-06-22T12:11:49-04:00"
+      "size_bytes": 22001,
+      "modified_at": "2026-07-09T13:01:47-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
