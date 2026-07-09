@@ -59,7 +59,9 @@ If a WordPress plugin serves `/chat/...`, rendering with normal `wp_head()`/`wp_
    - It must be an `<a>` tag, not `<button>`.
    - Use **class-only** for Zuout: `class="av-rewarded"`.
    - Do **not** also add `data-av-rewarded="true"`; AV guidance indicated duplicate trigger risk, and A/B testing confirmed both class-only and data-only request `zout_rewarded`, so the final safer contract is class-only.
-   - Current safe form: `<a id="aq-cta" class="av-rewarded" href="#" role="button">...</a>`.
+   - Do **not** set `href="#"` or `href=""`. `href="#"` only shows the current URL/hash on hover and the ActView rewarded handler does not treat it as a valid rewarded callback. Omit `href` entirely.
+   - Current safe form: `<a id="aq-cta" class="av-rewarded" role="button" tabindex="0" onclick="window.mgsCloseQuizAfterReward && window.mgsCloseQuizAfterReward(); return false;">...</a>`.
+   - Expose `window.mgsCloseQuizAfterReward` before click time. For ActView, do not use the generic 1200ms auto-close timeout; let ActView clear/eval the inline callback when ready, or let the inline callback close immediately when no rewarded is ready/no-fill.
    - Do **not** reuse a global `rewardedButtonClass` variable for ActView if that variable also controls PubGuru/M2 top-ad branching. In the MGS Chat Funnels template, `rewardedButtonClass` must stay empty for ActView so `showAd()` takes the normal ActView/JBF top-ad path and injects `zout_top`; only the final CTA receives the static `av-rewarded` class.
 4. Preserve the top ad container with the IDs expected by the ActView script:
 

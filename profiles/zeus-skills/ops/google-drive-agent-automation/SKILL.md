@@ -41,13 +41,15 @@ import json, datetime
 p='/root/mgs-agent/data/hera/drive-auth-watchdog-state.json'
 d=json.load(open(p)); s=d.get('signature',{})
 print('healthy:', d.get('healthy'))
+print('primary_credential:', d.get('primary_credential'))
+print('fallback_degraded:', d.get('fallback_degraded'))
 print('user:', s.get('user_ok'), s.get('user_state'), s.get('user_http'), s.get('user_error'))
 print('service_account:', s.get('sa_ok'), s.get('sa_state'), s.get('sa_http'))
 print('last_check:', datetime.datetime.fromtimestamp(d.get('last_check_ts')).isoformat() if d.get('last_check_ts') else None)
 PY
 ```
 
-Interpretation: empty stdout from `drive-auth-watchdog.py` is the healthy/silent path. A healthy Hera Drive state should show OAuth user `token_ok` plus Service Account `root_access_ok`/HTTP 200. If the user asks “Drive auth is OK, right?”, answer from this watchdog/state rather than inferring from absence of logs.
+Interpretation: empty stdout from `drive-auth-watchdog.py` is the healthy/silent path. Hera operational health is based on the primary Service Account path (`primary_credential=service_account`, `sa_ok=true`, `root_access_ok`/HTTP 200). User OAuth can be `invalid_grant` and recorded as `fallback_degraded=true` without paging Rodolfo repeatedly while Service Account is healthy; reauth is a self-service fallback task, not a critical upload blocker. If the user asks “Drive auth is OK, right?”, answer from this watchdog/state rather than inferring from absence of logs.
 
 1. Identify the auth mode used by the script:
    - Service Account JSON/JWT.
