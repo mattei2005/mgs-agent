@@ -59,6 +59,7 @@ If a WordPress plugin serves `/chat/...`, rendering with normal `wp_head()`/`wp_
    - It must be an `<a>` tag, not `<button>`.
    - Add class `av-rewarded` and/or attribute `data-av-rewarded="true"`.
    - Current safe form: `<a id="aq-cta" class="av-rewarded" href="#" role="button" data-av-rewarded="true">...</a>`.
+   - Do **not** reuse a global `rewardedButtonClass` variable for ActView if that variable also controls PubGuru/M2 top-ad branching. In the MGS Chat Funnels template, `rewardedButtonClass` must stay empty for ActView so `showAd()` takes the normal ActView/JBF top-ad path and injects `zout_top`; only the final CTA receives the static `av-rewarded` class/attribute.
 4. Preserve the top ad container with the IDs expected by the ActView script:
 
 ```html
