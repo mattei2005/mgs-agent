@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T19:52:09-04:00",
-    "generated_by": "zeus-drive-auth-watchdog-fix"
+    "updated_at": "2026-07-09T19:53:05-04:00",
+    "generated_by": "zeus-hera-drive-oauth-reauth"
   },
   "system_packages": [
     {
@@ -373,10 +373,10 @@
       "agent": "hera",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py",
-      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; valida OAuth usuário e Service Account, mas trata Service Account em My Drive como bloqueado para upload por risco real storageQuotaExceeded. Operação precisa de Shared Drive ou reauth OAuth usuário.",
-      "validation": "python3 -m py_compile OK; watchdog dry-run/local exit 0; Drive root GET HTTP 200 name=MGS-AGENTS destination=my_drive caps canAddChildren/canEdit/canModifyContent=true; upload smoke via Service Account failed HTTP 403 reason=storageQuotaExceeded; state healthy=false primary_credential=service_account fallback_degraded=true.",
+      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; saúde operacional baseada em pelo menos um caminho real de upload, usando OAuth usuário como primário quando destino é My Drive pessoal e Service Account é bloqueada por quota.",
+      "validation": "OAuth code exchange OK; refresh-token validation HTTP 200; Hera watchdog exit 0; state healthy=true, primary_credential=user_oauth, user token_ok; Service Account noted blocked for personal My Drive upload.",
       "git_tracked": false,
-      "updated_at": "2026-07-09T19:52:09-04:00",
+      "updated_at": "2026-07-09T19:53:05-04:00",
       "size_bytes": 13128,
       "modified_at": "2026-07-09T19:52:19-04:00",
       "sha256": "64bb36090b8a93919236c354e82bf83f0abc8c12e367b9054a0671caf93489a3"
@@ -538,9 +538,9 @@
       "sha256": "64bb36090b8a93919236c354e82bf83f0abc8c12e367b9054a0671caf93489a3",
       "size_bytes": 13128,
       "git_tracked": false,
-      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; valida OAuth usuário e Service Account, mas trata Service Account em My Drive como bloqueado para upload por risco real storageQuotaExceeded. Operação precisa de Shared Drive ou reauth OAuth usuário.",
-      "validation": "python3 -m py_compile OK; watchdog dry-run/local exit 0; Drive root GET HTTP 200 name=MGS-AGENTS destination=my_drive caps canAddChildren/canEdit/canModifyContent=true; upload smoke via Service Account failed HTTP 403 reason=storageQuotaExceeded; state healthy=false primary_credential=service_account fallback_degraded=true.",
-      "updated_at": "2026-07-09T19:52:09-04:00",
+      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; saúde operacional baseada em pelo menos um caminho real de upload, usando OAuth usuário como primário quando destino é My Drive pessoal e Service Account é bloqueada por quota.",
+      "validation": "OAuth code exchange OK; refresh-token validation HTTP 200; Hera watchdog exit 0; state healthy=true, primary_credential=user_oauth, user token_ok; Service Account noted blocked for personal My Drive upload.",
+      "updated_at": "2026-07-09T19:53:05-04:00",
       "modified_at": "2026-07-09T19:52:19-04:00"
     },
     {
@@ -880,13 +880,28 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/ops/google-drive-agent-automation/SKILL.md",
-      "sha256": "f76b151fdb5bd76b3fe9b49a8a6d733298dd954106e51987269355bba64b66fc",
-      "size_bytes": 12403,
+      "sha256": "cf775896afc760a3418763f306472713a290a2f5ae860040347f4a853ea3d228",
+      "size_bytes": 12309,
       "git_tracked": false,
-      "purpose": "Procedimento Drive MGS atualizado: Hera é operacionalmente saudável com Service Account primário OK; OAuth invalid_grant é fallback degradado sem paging repetitivo; quando reauth humana for necessária/opcional, Zeus deve mandar o link/instrução no mesmo aviso.",
-      "validation": "skill_manage patch OK; SHA readback OK; procedural correction persisted after Rodolfo requested proactivity.",
-      "updated_at": "2026-07-09T19:51:14-04:00",
-      "modified_at": "2026-07-09T19:50:57-04:00"
+      "purpose": "Procedimento Drive MGS atualizado: watchdog saudável se ao menos um upload credential funciona; em My Drive pessoal, OAuth usuário token_ok é primário e Service Account pode ficar bloqueada por quota.",
+      "validation": "skill_manage patch OK; SHA readback OK; aligned with validated watchdog state.",
+      "updated_at": "2026-07-09T19:53:05-04:00",
+      "modified_at": "2026-07-09T19:52:38-04:00"
+    },
+    {
+      "id": "mgs-ares-google-drive-oauth-client-secret-20260709",
+      "agent": "hera",
+      "type": "secret_config",
+      "path": "/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json",
+      "sha256": "85894b0721c6d6e4738525cd281355acee243545da548a551f7d4e7f8c52b3b2",
+      "size_bytes": 371,
+      "mode": "600",
+      "git_tracked": false,
+      "purpose": "Credencial OAuth Google Drive reautorizada por consentimento humano de Rodolfo; usada como caminho válido de upload em My Drive pessoal.",
+      "validation": "Authorization code exchanged; refresh token validated via oauth2 token endpoint HTTP 200; no token values logged in report.",
+      "updated_at": "2026-07-09T19:53:05-04:00",
+      "modified_at": "2026-07-09T19:51:39-04:00",
+      "backup_path": "/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json.bak-20260709-reauth"
     }
   ],
   "profile_skill_references": [
