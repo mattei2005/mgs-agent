@@ -29,6 +29,7 @@ A Ciro/JBF static chat page includes, in this order:
 
 ## What not to do
 
+- Do not import GPT (`securepubads.g.doubleclick.net/tag/js/gpt.js`) or the JBF wrapper twice on the same chat route. GPT must be imported together with the wrapper contract, but exactly once per generated page. If WordPress head/theme/snippet already injects GPT/wrapper, remove or suppress one layer before declaring the implementation correct.
 - Do not expose `Quantidade de auctions` / `rewarded_auctions` just because the original HTML has a loop or repeated call.
 - Do not add a custom timeout/fallback layer unless the original HTML or wrapper owner requires it.
 - Do not call `requestRewardAds()` multiple times unless that is explicitly the owner-approved contract. A loop can call the tag 5x and break/overload monetization.
@@ -54,21 +55,23 @@ If a WordPress plugin serves `/chat/...`, rendering with normal `wp_head()`/`wp_
    - `<link rel='preload' as='script' href='https://securepubads.g.doubleclick.net/tag/js/gpt.js' />`
 2. Load Zuout ActView script:
    - `<script async src="https://scr.actview.net/zuout.js"></script>`
-3. Preserve the top ad container exactly:
+3. Preserve the top ad container with the IDs expected by the ActView script:
 
 ```html
-<div id="zuout_top_wrapper" align="center" style="width: 100%; margin-top: 2rem; margin-bottom: 2rem; min-height: 400px;">
+<div id="zout_top_wrapper" align="center" style="width: 100%; margin-top: 2rem; margin-bottom: 2rem; min-height: 400px;">
     <div>
         <p style="font-size: 10px; text-transform: uppercase; text-align: center;">
             Anúncios
         </p>
-        <div id="zuout_top">
+        <div id="zout_top">
         </div>
     </div>
 </div>
 ```
 
-If ads are missing on Zuout chat, do not debug it as an SB wrapper problem. Validate the ActView script + `zuout_top_wrapper` / `zuout_top` contract first.
+Important: the ActView JavaScript uses placement `zout_top` (without the extra `u` after `z`). Do not implement `zuout_top`; it leaves only the label/blank reserved space because the script never finds the placement div.
+
+If ads are missing on Zuout chat, do not debug it as an SB wrapper problem. Validate the ActView script + `zout_top_wrapper` / `zout_top` contract first.
 
 Implementation notes for the MGS Chat Funnels plugin:
 
@@ -77,15 +80,15 @@ Implementation notes for the MGS Chat Funnels plugin:
 - In ActView mode, `ad_wrapper_url()` must return empty; do not emit `assets.jbfdigital`, `window.wrapper_url`, or JBF rewarded preload/show calls for Zuout.
 - `render_ads_head_html()` for ActView should emit only the GPT preload + `https://scr.actview.net/zuout.js` script.
 - If the route captures normal `wp_head()`, strip legacy JBF wrapper snippets from captured head for ActView pages; otherwise old theme/header injection can leave both ActView and JBF on the same page.
-- Replace the generated in-chat top ad placeholder with the exact `zuout_top_wrapper` / `zuout_top` HTML. In the current chat template this is the `adBanner.innerHTML = \`<div></div>\`; insertion point.
-- Validate through the real browser click path, not just initial HTML. On Zuout, `#zuout_top_wrapper` appears only after advancing the chat to the in-chat ad insertion step.
+- Replace the generated in-chat top ad placeholder with the exact `zout_top_wrapper` / `zout_top` HTML. In the current chat template this is the `adBanner.innerHTML = \`<div></div>\`; insertion point.
+- Validate through the real browser click path, not just initial HTML. On Zuout, `#zout_top_wrapper` appears only after advancing the chat to the in-chat ad insertion step.
 - Admin/editor UI must reflect the exception too: when `ad_provider=actview`, hide or replace generic `Company do wrapper` / `Domain do wrapper` controls with an ActView/Zuout provider summary. Hidden `ad_company` / `ad_domain` fields may remain only to preserve legacy config on save; do not show SB/JBF wrapper wording for Zuout.
 
 Validation expectations after deploy:
 
 - Public + origin HTML contain `scr.actview.net/zuout.js` once.
 - Public + origin HTML contain no `assets.jbfdigital`, no `window.wrapper_url`, and no `digital-trust_zuout` on `/chat/car/br1/`.
-- Browser click path reaches the ad step and creates `.ad-unit.ad` containing `#zuout_top_wrapper` and `#zuout_top`.
+- Browser click path reaches the ad step and creates `.ad-unit.ad` containing `#zout_top_wrapper` and `#zout_top`.
 - Browser console has no JavaScript errors.
 
 ## Verification checklist
