@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T13:20:39-04:00",
+    "updated_at": "2026-07-09T13:29:57-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1194,12 +1194,12 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/ops/rec-p1-wordpress-sheet-audit/SKILL.md",
-      "size_bytes": 4711,
-      "modified_at": "2026-07-09T17:11:40.459692+00:00",
-      "sha256": "14a4062701c873245478cd731fd1274d7cb67f1440705edb650d07d1d6479d9d",
-      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with full URL inventory reconciliation, separate REC/P1 columns, canonical IP replacement, and divergent CTA/button-link reporting.",
-      "validation": "Patched after Rodolfo identified REST undercount vs yydev-show-pages, blank P1 rows, and legacy IP links; validated by sitemap-based full rewrite and CSV readback.",
-      "updated_at": "2026-07-09T13:20:39-04:00"
+      "size_bytes": 4974,
+      "modified_at": "2026-07-09T17:24:46.377528+00:00",
+      "sha256": "fdbc36d75620073e0386ac2414d56021aef81868855e3c73149c66fb6118666e",
+      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with full URL inventory reconciliation, no duplicate P1 destination rows in REC column, canonical IP replacement, and divergent CTA/button-link reporting.",
+      "validation": "Patched after Rodolfo clarified P1 destination must only appear in column E when paired from REC, not again in column B; validated by CSV readback and spot-check on openzed Virgin Money example.",
+      "updated_at": "2026-07-09T13:29:57-04:00"
     }
   ],
   "systemd_services": [
