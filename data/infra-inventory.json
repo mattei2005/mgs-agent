@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T19:53:05-04:00",
-    "generated_by": "zeus-hera-drive-oauth-reauth"
+    "updated_at": "2026-07-09T19:53:44-04:00",
+    "generated_by": "zeus-drive-auth-watchdog-fix"
   },
   "system_packages": [
     {
@@ -373,13 +373,13 @@
       "agent": "hera",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py",
-      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; saúde operacional baseada em pelo menos um caminho real de upload, usando OAuth usuário como primário quando destino é My Drive pessoal e Service Account é bloqueada por quota.",
-      "validation": "OAuth code exchange OK; refresh-token validation HTTP 200; Hera watchdog exit 0; state healthy=true, primary_credential=user_oauth, user token_ok; Service Account noted blocked for personal My Drive upload.",
+      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; considera saudável quando existe ao menos uma credencial real de upload compatível com o destino. Para MGS-AGENTS em My Drive, OAuth usuário é o primário; Service Account fica bloqueado para upload até mover para Shared Drive.",
+      "validation": "python3 -m py_compile OK; MGS_DRY_RUN=1 watchdog exit 0/stdout vazio; OAuth refresh HTTP 200 e upload smoke criou arquivo 27B com HTTP 200 e cleanup trash HTTP 200; Drive root GET HTTP 200 name=MGS-AGENTS destination=my_drive caps true; Service Account upload smoke falhou HTTP 403 reason=storageQuotaExceeded; state healthy=true primary_credential=user_oauth fallback_degraded=true.",
       "git_tracked": false,
-      "updated_at": "2026-07-09T19:53:05-04:00",
-      "size_bytes": 13128,
-      "modified_at": "2026-07-09T19:52:19-04:00",
-      "sha256": "64bb36090b8a93919236c354e82bf83f0abc8c12e367b9054a0671caf93489a3"
+      "updated_at": "2026-07-09T19:53:44-04:00",
+      "size_bytes": 13215,
+      "modified_at": "2026-07-09T19:53:34-04:00",
+      "sha256": "3c14c7a70a08785d306533582b2d43d6330b45fb60aa74a99289a67c2651d7e9"
     },
     {
       "id": "ares-drive-oauth-watchdog-profile-wrapper",
@@ -535,13 +535,13 @@
       "agent": "hera",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py",
-      "sha256": "64bb36090b8a93919236c354e82bf83f0abc8c12e367b9054a0671caf93489a3",
-      "size_bytes": 13128,
+      "sha256": "3c14c7a70a08785d306533582b2d43d6330b45fb60aa74a99289a67c2651d7e9",
+      "size_bytes": 13215,
       "git_tracked": false,
-      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; saúde operacional baseada em pelo menos um caminho real de upload, usando OAuth usuário como primário quando destino é My Drive pessoal e Service Account é bloqueada por quota.",
-      "validation": "OAuth code exchange OK; refresh-token validation HTTP 200; Hera watchdog exit 0; state healthy=true, primary_credential=user_oauth, user token_ok; Service Account noted blocked for personal My Drive upload.",
-      "updated_at": "2026-07-09T19:53:05-04:00",
-      "modified_at": "2026-07-09T19:52:19-04:00"
+      "purpose": "Monitor silencioso de autenticação Google Drive da Hera; considera saudável quando existe ao menos uma credencial real de upload compatível com o destino. Para MGS-AGENTS em My Drive, OAuth usuário é o primário; Service Account fica bloqueado para upload até mover para Shared Drive.",
+      "validation": "python3 -m py_compile OK; MGS_DRY_RUN=1 watchdog exit 0/stdout vazio; OAuth refresh HTTP 200 e upload smoke criou arquivo 27B com HTTP 200 e cleanup trash HTTP 200; Drive root GET HTTP 200 name=MGS-AGENTS destination=my_drive caps true; Service Account upload smoke falhou HTTP 403 reason=storageQuotaExceeded; state healthy=true primary_credential=user_oauth fallback_degraded=true.",
+      "updated_at": "2026-07-09T19:53:44-04:00",
+      "modified_at": "2026-07-09T19:53:34-04:00"
     },
     {
       "id": "hera-drive-auth-watchdog-cron-route",
