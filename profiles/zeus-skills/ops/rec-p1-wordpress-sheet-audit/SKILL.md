@@ -39,7 +39,11 @@ Do not collapse the P1 into the REC date. REC and P1 each need their own date, l
    - REC→P1: article links to another same-site article and that destination is the P1/apply article.
    - P1 destination: if a URL is already the P1 destination of a REC row, **do not create a separate row with that same P1 in `Artigo REC` / column B**. It belongs only in `Artigo P1 / Link Final` / column E of the REC row. This prevents duplicate P1 rows.
    - SEO: article does not participate in REC→P1 flow; keep the article URL and record its final CTA/button link.
-6. Fetch REC/P1 posts through WordPress REST and resolve tag IDs through `/wp-json/wp/v2/tags?include=...`.
+6. Fetch REC/P1 dates/tags through the correct WordPress REST route:
+   - First extract the post ID from the public HTML (`postid-123`, `/wp-json/wp/v2/posts/123`, or `?p=123`).
+   - Then call `/wp-json/wp/v2/posts/{id}?_fields=id,date,link,slug,tags,title,status`.
+   - Do **not** rely only on `/wp-json/wp/v2/posts?slug=...`; on these sites it can return `[]` for published posts that still resolve correctly by ID, causing false `SEM TAGS NO WP`.
+   - Resolve tag IDs through `/wp-json/wp/v2/tags?include=...`.
 7. Fill the Google Sheet tab using the required REC/P1 columns plus operational audit columns when needed (`Tipo`, `Links de botão`, `Alerta links`). Coverage means all source URLs except P1 destination duplicates that are already represented in column E.
 8. Verify by CSV export/readback for every edited tab: header contains the required REC/P1 columns, no duplicate P1 destination appears in column B, no blank spacer rows exist, and divergent links are present in the alert column.
 

@@ -1,6 +1,6 @@
 # Static Chat Wrapper Contract (Ciro/JBF pattern)
 
-Use this reference when migrating or generating WhatsApp-style chat/quiz pages that depend on a third-party ad wrapper such as `assets.jbfdigital.com.br`.
+Use this reference when migrating or generating WhatsApp-style chat/quiz pages that depend on a third-party ad wrapper such as `assets.jbfdigital.com.br` or a non-SB site-specific wrapper such as ActView (`https://scr.actview.net/{domain}.js`).
 
 ## Core lesson
 
@@ -45,6 +45,30 @@ If a WordPress plugin serves `/chat/...`, rendering with normal `wp_head()`/`wp_
 - direct GPT + wrapper tags
 - `window.tags` before wrapper
 - same chat/ad trigger points as source HTML
+
+## Zuout / ActView exception
+
+`zuout.com/chat/car/br1/` does **not** use the Smart Bidding/JBF `assets.jbfdigital.com.br` wrapper. Its ad stack contract is ActView:
+
+1. Preload GPT:
+   - `<link rel='preload' as='script' href='https://securepubads.g.doubleclick.net/tag/js/gpt.js' />`
+2. Load Zuout ActView script:
+   - `<script async src="https://scr.actview.net/zuout.js"></script>`
+3. Preserve the top ad container exactly:
+
+```html
+<div id="zuout_top_wrapper" align="center" style="width: 100%; margin-top: 2rem; margin-bottom: 2rem; min-height: 400px;">
+    <div>
+        <p style="font-size: 10px; text-transform: uppercase; text-align: center;">
+            Anúncios
+        </p>
+        <div id="zuout_top">
+        </div>
+    </div>
+</div>
+```
+
+If ads are missing on Zuout chat, do not debug it as an SB wrapper problem. Validate the ActView script + `zuout_top_wrapper` / `zuout_top` contract first.
 
 ## Verification checklist
 
