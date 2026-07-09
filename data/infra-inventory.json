@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T16:25:11-04:00",
+    "updated_at": "2026-07-09T16:25:25-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -857,6 +857,23 @@
       "validation": "PHP lint OK; public HTML has <a id=\"aq-cta\" class=\"av-rewarded\" href=\"#\" role=\"button\" data-av-rewarded=\"true\"> and no <button id=\"aq-cta\">. Browser final gate confirms tag=A, class=av-rewarded, data-av-rewarded=true; click closes quiz with no console JS errors.",
       "backup_path": "/home/runcloud/webapps/zuout/wp-content/mgs-chat-funnels-actview-rewarded-backup-20260709-162254",
       "updated_at": "2026-07-09T16:25:11-04:00"
+    },
+    {
+      "id": "cliquet-mgs-chat-funnels-no-duplicate-wrapper-20260709",
+      "agent": "zeus",
+      "type": "wordpress_plugin_hotfix",
+      "site": "cliquet.com",
+      "runtime_path": "cliquet.com:/opt/bitnami/wordpress/wp-content/plugins/mgs-chat-funnels/mgs-chat-funnels.php",
+      "plugin": "mgs-chat-funnels",
+      "file": "mgs-chat-funnels.php",
+      "backup_original_path": "/root/mgs-agent/backups/cliquet-chat-funnels/mgs-chat-funnels-original-20260709.php",
+      "backup_original_sha256": "0d009eba6a1ae1bf6d4c7bf9e7f1b2e7221cd7cc327527e7c2679167bd6b1cbf",
+      "backup_fixed_path": "/root/mgs-agent/backups/cliquet-chat-funnels/mgs-chat-funnels-fixed-no-duplicate-wrapper-20260709.php",
+      "sha256": "20bd6ad620c5ea52fb465a7c53188dfabaf31fbcb0e1bde121073e282841f0e8",
+      "size_bytes": 73443,
+      "updated_at": "2026-07-09T16:25:25-04:00",
+      "source_report": "REPORT-INFRA Zeus Cliquet MGS Chat Funnels duplicate GPT/JBF wrapper hotfix 2026-07-09",
+      "validation": "PHP lint pass; WP plugin-editor readback SHA matched; live /chat/car/br1 with UTM has exactly one gpt.js and one assets.jbfdigital wrapper, no facebook_br variant, browser exposes jbftag and one rewarded slot."
     }
   ],
   "profile_skill_references": [
@@ -1234,11 +1251,11 @@
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/ops/wp-quiz-lead-funnel/references/static-chat-wrapper-contract.md",
       "size_bytes": 7171,
-      "modified_at": "2026-07-09T16:24:32-04:00",
+      "modified_at": "2026-07-09T16:24:32.208248-04:00",
       "sha256": "46dc4af4f052315f04666b544c5a3c317857476d4293b0680c29f2c71bb57740",
       "purpose": "Static chat ad-wrapper contracts for MGS quiz/chat funnels, including JBF/SB, Wantabrand M2, and Zuout ActView exception/admin UI/rewarded CTA handling.",
-      "validation": "Updated from ActView guidance: Zuout rewarded trigger must be <a>, not <button>, with av-rewarded class or data-av-rewarded=true.",
-      "updated_at": "2026-07-09T16:25:11-04:00",
+      "validation": "Updated from Rodolfo/Ciro correction: GPT/JBF wrapper must appear exactly once on chat route; duplicate Cliquet implementation fixed in production.",
+      "updated_at": "2026-07-09T16:25:25-04:00",
       "skill": "wp-quiz-lead-funnel",
       "source_report": "REPORT-INFRA Zeus Zuout ActView rewarded CTA fix 2026-07-09"
     },
