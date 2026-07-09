@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T13:29:57-04:00",
+    "updated_at": "2026-07-09T14:45:19-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1194,12 +1194,12 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/ops/rec-p1-wordpress-sheet-audit/SKILL.md",
-      "size_bytes": 4974,
-      "modified_at": "2026-07-09T17:24:46.377528+00:00",
-      "sha256": "fdbc36d75620073e0386ac2414d56021aef81868855e3c73149c66fb6118666e",
-      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with full URL inventory reconciliation, no duplicate P1 destination rows in REC column, canonical IP replacement, and divergent CTA/button-link reporting.",
-      "validation": "Patched after Rodolfo clarified P1 destination must only appear in column E when paired from REC, not again in column B; validated by CSV readback and spot-check on openzed Virgin Money example.",
-      "updated_at": "2026-07-09T13:29:57-04:00"
+      "size_bytes": 5560,
+      "modified_at": "2026-07-09T18:45:07.533699+00:00",
+      "sha256": "edb3e2cce583d51fd4eb0b3db6b6acaa67b5de337f84b693319935d213a185d5",
+      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with post-body-only CTA extraction, full URL inventory reconciliation, no duplicate P1 destination rows, canonical IP replacement, and divergent CTA/button-link reporting.",
+      "validation": "Patched after Rodolfo caught repeated wrong P1 links caused by scraping related-post widgets instead of the actual CTA/LazyBlock card; rebuilt sheet v3 and validated by CSV plus spot-checks.",
+      "updated_at": "2026-07-09T14:45:19-04:00"
     }
   ],
   "systemd_services": [
