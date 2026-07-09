@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T13:19:17-04:00",
+    "updated_at": "2026-07-09T13:20:39-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1194,12 +1194,12 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/ops/rec-p1-wordpress-sheet-audit/SKILL.md",
-      "size_bytes": 3510,
-      "modified_at": "2026-07-09T16:47:14.602067+00:00",
-      "sha256": "2e79d36e77124b0bc1b237e77909b73409e74daa4a86533cd9067eff74ab7ae6",
-      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with separate REC/P1 columns and divergent button-link reporting.",
-      "validation": "Patched after Rodolfo expanded scope to all articles and all CTA/card/lazyblock button-link consistency checks; validated on full 4-site Sheet run by CSV readback.",
-      "updated_at": "2026-07-09T12:56:26-04:00"
+      "size_bytes": 4711,
+      "modified_at": "2026-07-09T17:11:40.459692+00:00",
+      "sha256": "14a4062701c873245478cd731fd1274d7cb67f1440705edb650d07d1d6479d9d",
+      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with full URL inventory reconciliation, separate REC/P1 columns, canonical IP replacement, and divergent CTA/button-link reporting.",
+      "validation": "Patched after Rodolfo identified REST undercount vs yydev-show-pages, blank P1 rows, and legacy IP links; validated by sitemap-based full rewrite and CSV readback.",
+      "updated_at": "2026-07-09T13:20:39-04:00"
     }
   ],
   "systemd_services": [
