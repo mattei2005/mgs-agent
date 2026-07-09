@@ -50,10 +50,15 @@ Do not collapse the P1 into the REC date. REC and P1 each need their own date, l
 - A P1 may have no WordPress tags. Record that explicitly as blank or `SEM TAGS NO WP`, not as a failed lookup.
 - For Google Sheets browser fallback, an array literal formula in `A1` can populate a small test table quickly, but always validate via CSV export/readback.
 
+## References
+
+- `references/full-site-rec-p1-seo-audit-2026-07-09.md` — complete-site audit pattern for REC→P1 plus SEO/single articles, CTA/button link divergence reporting, and Google Sheets paste/readback details.
+
 ## Verification Checklist
 
-- [ ] Each tab has the six required columns in order.
-- [ ] Each target site has the requested number of REC rows.
+- [ ] Each tab has the required REC/P1 columns in order; when doing complete-site audits, include `Tipo`, `Links nos botões`, and `Alerta links`.
+- [ ] Each target site has the requested coverage: sample size or all published posts, depending on Rodolfo's scope.
 - [ ] Each P1 URL was found inside the REC content, not guessed from slug similarity alone.
+- [ ] Every CTA/button/card/lazyblock link in the article was checked for consistency; divergent links are reported in the sheet.
 - [ ] WordPress tags for REC and P1 were resolved from tag IDs.
-- [ ] Google Sheet readback confirms the data is present remotely.
+- [ ] Google Sheet readback confirms the data is present remotely and alert counts match local extraction.
