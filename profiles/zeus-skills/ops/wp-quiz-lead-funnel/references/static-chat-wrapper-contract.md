@@ -79,6 +79,7 @@ Implementation notes for the MGS Chat Funnels plugin:
 - If the route captures normal `wp_head()`, strip legacy JBF wrapper snippets from captured head for ActView pages; otherwise old theme/header injection can leave both ActView and JBF on the same page.
 - Replace the generated in-chat top ad placeholder with the exact `zuout_top_wrapper` / `zuout_top` HTML. In the current chat template this is the `adBanner.innerHTML = \`<div></div>\`; insertion point.
 - Validate through the real browser click path, not just initial HTML. On Zuout, `#zuout_top_wrapper` appears only after advancing the chat to the in-chat ad insertion step.
+- Admin/editor UI must reflect the exception too: when `ad_provider=actview`, hide or replace generic `Company do wrapper` / `Domain do wrapper` controls with an ActView/Zuout provider summary. Hidden `ad_company` / `ad_domain` fields may remain only to preserve legacy config on save; do not show SB/JBF wrapper wording for Zuout.
 
 Validation expectations after deploy:
 
