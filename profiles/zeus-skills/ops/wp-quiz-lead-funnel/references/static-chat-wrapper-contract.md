@@ -70,6 +70,23 @@ If a WordPress plugin serves `/chat/...`, rendering with normal `wp_head()`/`wp_
 
 If ads are missing on Zuout chat, do not debug it as an SB wrapper problem. Validate the ActView script + `zuout_top_wrapper` / `zuout_top` contract first.
 
+Implementation notes for the MGS Chat Funnels plugin:
+
+- Add/keep `ad_provider: "actview"` in the Zuout chat config only.
+- `ad_provider()` should map `actview` / `zuout-actview` to an ActView mode, distinct from `jbf` and `m2`.
+- In ActView mode, `ad_wrapper_url()` must return empty; do not emit `assets.jbfdigital`, `window.wrapper_url`, or JBF rewarded preload/show calls for Zuout.
+- `render_ads_head_html()` for ActView should emit only the GPT preload + `https://scr.actview.net/zuout.js` script.
+- If the route captures normal `wp_head()`, strip legacy JBF wrapper snippets from captured head for ActView pages; otherwise old theme/header injection can leave both ActView and JBF on the same page.
+- Replace the generated in-chat top ad placeholder with the exact `zuout_top_wrapper` / `zuout_top` HTML. In the current chat template this is the `adBanner.innerHTML = \`<div></div>\`; insertion point.
+- Validate through the real browser click path, not just initial HTML. On Zuout, `#zuout_top_wrapper` appears only after advancing the chat to the in-chat ad insertion step.
+
+Validation expectations after deploy:
+
+- Public + origin HTML contain `scr.actview.net/zuout.js` once.
+- Public + origin HTML contain no `assets.jbfdigital`, no `window.wrapper_url`, and no `digital-trust_zuout` on `/chat/car/br1/`.
+- Browser click path reaches the ad step and creates `.ad-unit.ad` containing `#zuout_top_wrapper` and `#zuout_top`.
+- Browser console has no JavaScript errors.
+
 ## Verification checklist
 
 Compare source static HTML vs generated page with counts and order, not just visual behavior:
