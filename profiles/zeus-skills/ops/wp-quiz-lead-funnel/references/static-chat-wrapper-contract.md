@@ -57,9 +57,10 @@ If a WordPress plugin serves `/chat/...`, rendering with normal `wp_head()`/`wp_
    - `<script async src="https://scr.actview.net/zuout.js"></script>`
 3. Rewarded trigger CTA must follow ActView's DOM contract:
    - It must be an `<a>` tag, not `<button>`.
-   - Add class `av-rewarded` and/or attribute `data-av-rewarded="true"`.
-   - Current safe form: `<a id="aq-cta" class="av-rewarded" href="#" role="button" data-av-rewarded="true">...</a>`.
-   - Do **not** reuse a global `rewardedButtonClass` variable for ActView if that variable also controls PubGuru/M2 top-ad branching. In the MGS Chat Funnels template, `rewardedButtonClass` must stay empty for ActView so `showAd()` takes the normal ActView/JBF top-ad path and injects `zout_top`; only the final CTA receives the static `av-rewarded` class/attribute.
+   - Use **class-only** for Zuout: `class="av-rewarded"`.
+   - Do **not** also add `data-av-rewarded="true"`; AV guidance indicated duplicate trigger risk, and A/B testing confirmed both class-only and data-only request `zout_rewarded`, so the final safer contract is class-only.
+   - Current safe form: `<a id="aq-cta" class="av-rewarded" href="#" role="button">...</a>`.
+   - Do **not** reuse a global `rewardedButtonClass` variable for ActView if that variable also controls PubGuru/M2 top-ad branching. In the MGS Chat Funnels template, `rewardedButtonClass` must stay empty for ActView so `showAd()` takes the normal ActView/JBF top-ad path and injects `zout_top`; only the final CTA receives the static `av-rewarded` class.
 4. Preserve the top ad container with the IDs expected by the ActView script:
 
 ```html
