@@ -45,8 +45,10 @@ Do not collapse the P1 into the REC date. REC and P1 each need their own date, l
 
 ## Pitfalls
 
-- Some sites use `apply-now-*`, others use `aplicar-ahora-*`, others use `p1-*`; do not assume a single P1 slug pattern.
-- Public `/posts` listings can miss older/hidden REC posts. Cross-check with `/wp/v2/search` and direct `/posts/<id>`.
+- Some sites use `apply-now-*`, others use `aplicar-ahora-*`, others use `p1-*`; do not assume a single P1 slug pattern. The source of truth is the links in buttons/cards/LazyBlocks inside the article.
+- Public `/wp/v2/posts` listings can undercount vs the YYDevelopment Show Pages plugin. When available, use `/wp-admin/admin.php?page=yydev-show-pages` / `yydev-show-pages` as the URL inventory source and reconcile counts before writing the sheet.
+- Never leave blank spacer rows for P1-only detections. If a URL must be represented, keep a row with the URL in the article/link column and a clear `Tipo`; blank REC rows look like sheet corruption.
+- Canonicalize legacy/internal IP URLs found in buttons (e.g. `http://18.x.x.x/slug/` or `http://3.x.x.x/slug/`) to the current domain when the same slug exists on that site, and keep the original IP only in the button-links/audit column if needed.
 - A P1 may have no WordPress tags. Record that explicitly as blank or `SEM TAGS NO WP`, not as a failed lookup.
 - For Google Sheets browser fallback, an array literal formula in `A1` can populate a small test table quickly, but always validate via CSV export/readback.
 
