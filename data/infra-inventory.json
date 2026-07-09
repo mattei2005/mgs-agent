@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T12:22:34-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-09T12:38:44-04:00",
+    "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
     {
@@ -1188,6 +1188,18 @@
       "size_bytes": 51201,
       "updated_at": "2026-07-08T00:42:08-04:00",
       "notes": "Documented Utility replacement requirement: contextual emojis + varied copy + no repeated visible TEXT."
+    },
+    {
+      "id": "zeus:rec-p1-wordpress-sheet-audit",
+      "agent": "zeus",
+      "type": "skill",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/rec-p1-wordpress-sheet-audit/SKILL.md",
+      "size_bytes": 2803,
+      "modified_at": "2026-07-09T16:38:09.713500+00:00",
+      "sha256": "28044a7ab23b967f33e74de9ae60c1e2528d44049dd20b85063a5d1c0982f050",
+      "purpose": "Procedure for auditing WordPress REC→P1 article pairs into Google Sheets with separate REC/P1 date/link/tag columns.",
+      "validation": "Created after Rodolfo corrected required REC/P1 column format; skill frontmatter valid and workflow used in live sheet test.",
+      "updated_at": "2026-07-09T12:38:44-04:00"
     }
   ],
   "systemd_services": [
