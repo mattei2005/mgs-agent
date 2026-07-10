@@ -62,7 +62,10 @@ If a WordPress plugin serves `/chat/...`, rendering with normal `wp_head()`/`wp_
    - Do **not** set `href="#"` or `href=""`. `href="#"` only shows the current URL/hash on hover and the ActView rewarded handler does not treat it as a valid rewarded callback. Omit `href` entirely.
    - Current safe form: `<a id="aq-cta" class="av-rewarded" role="button" tabindex="0" onclick="window.mgsCloseQuizAfterReward && window.mgsCloseQuizAfterReward(); return false;">...</a>`.
    - Expose `window.mgsCloseQuizAfterReward` before click time. For ActView, do not use the generic 1200ms auto-close timeout; let ActView clear/eval the inline callback when ready, or let the inline callback close immediately when no rewarded is ready/no-fill.
+   - Also register a GPT `rewardedSlotClosed` listener for `zout_rewarded`: after the user closes the Google rewarded overlay with X, close the underlying quiz modal and continue the chat. Without this, the Google ad disappears but the MGS quiz overlay can remain behind it.
+   - Maintain `window.mgsRewardedClickInProgress` so the close listener only fires after the rewarded CTA click, not on unrelated rewarded lifecycle events.
    - Do **not** reuse a global `rewardedButtonClass` variable for ActView if that variable also controls PubGuru/M2 top-ad branching. In the MGS Chat Funnels template, `rewardedButtonClass` must stay empty for ActView so `showAd()` takes the normal ActView/JBF top-ad path and injects `zout_top`; only the final CTA receives the static `av-rewarded` class.
+   - Validation must be click-path validation, not initial HTML/request only: click the actual CTA and confirm the Google rewarded state appears (`#goog_rewarded` in URL and/or Google Rewarded modal overlay with creative). A request to `/zout_rewarded` proves registration; visible `#goog_rewarded`/modal proves the reward printed.
 4. Preserve the top ad container with the IDs expected by the ActView script:
 
 ```html
