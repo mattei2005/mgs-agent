@@ -423,6 +423,17 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "mgs-busy-steer-rollout-validation-3cc76e563764",
+      "agent": "zeus",
+      "type": "cron_one_shot",
+      "job_id": "3cc76e563764",
+      "name": "Validar rollout steer multimodal MGS",
+      "schedule": "once at 2026-07-10T13:58:36-04:00",
+      "purpose": "Validate 4/4 gateway restart, universal media steer runtime, guard tests, inventory, audit and REPORT-INFRA outside the active Discord restart thread.",
+      "status": "scheduled",
+      "updated_at": "2026-07-10T13:54:36-04:00"
+    },
+    {
       "id": "mgs-busy-steer-universal-media-20260710",
       "agent": "zeus",
       "type": "hermes_runtime_patch",
