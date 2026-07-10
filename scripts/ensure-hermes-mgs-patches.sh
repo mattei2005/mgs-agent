@@ -91,7 +91,8 @@ apply_patch_if_needed() {
       ;;
     mgs-auto-reasoning-routing.patch)
       if grep -q "def _resolve_turn_reasoning_config" "$REPO/gateway/run.py" \
-        && grep -q "def route_reasoning_config" "$REPO/gateway/reasoning_router.py"; then
+        && grep -q "def route_reasoning_config" "$REPO/gateway/reasoning_router.py" \
+        && grep -q "Auto: ON (medium/high/xhigh; global = fallback)" "$REPO/gateway/slash_commands.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
@@ -211,9 +212,10 @@ grep -q "def route_reasoning_config" "$REPO/gateway/reasoning_router.py" \
 PYBIN="$REPO/venv/bin/python"
 [[ -x "$PYBIN" ]] || PYBIN="python3"
 "$PYBIN" -m py_compile \
-  "$REPO/plugins/platforms/discord/adapter.py" \
-  "$REPO/gateway/run.py" \
-  "$REPO/gateway/reasoning_router.py" \
+  "$PYTHON_BIN" -m py_compile \
+    "$REPO/gateway/run.py" \
+    "$REPO/gateway/slash_commands.py" \
+    "$REPO/gateway/reasoning_router.py" \
   "$REPO/gateway/platforms/base.py"
 
 log "OK Hermes MGS patches present and py_compile passed"
