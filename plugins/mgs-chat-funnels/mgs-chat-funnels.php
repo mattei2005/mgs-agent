@@ -45,13 +45,16 @@ final class MGS_Chat_Funnels {
 
     private function enqueue_assets($config = null) {
         if (!$this->rendered_assets) {
-            if (is_array($config) && (($config['ads_enabled'] ?? true) !== false) && $this->ad_provider($config) !== 'm2') {
+            $ad_provider = is_array($config) ? $this->ad_provider($config) : 'jbf';
+            if (is_array($config) && (($config['ads_enabled'] ?? true) !== false) && $ad_provider === 'jbf') {
                 wp_enqueue_script('mgs-chat-funnels-gpt', 'https://securepubads.g.doubleclick.net/tag/js/gpt.js', array(), null, false);
                 $wrapper_url = $this->ad_wrapper_url($config);
                 if ($wrapper_url !== '') {
                     wp_enqueue_script('mgs-chat-funnels-wrapper', $wrapper_url, array('mgs-chat-funnels-gpt'), self::VERSION, false);
                     wp_script_add_data('mgs-chat-funnels-wrapper', 'strategy', 'defer');
                 }
+            } elseif (is_array($config) && (($config['ads_enabled'] ?? true) !== false) && $ad_provider === 'actview') {
+                wp_enqueue_script('mgs-chat-funnels-actview', 'https://scr.actview.net/zuout.js', array(), null, false);
             }
             wp_enqueue_style('mgs-chat-funnels');
             wp_enqueue_script('mgs-chat-funnels');
