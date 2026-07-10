@@ -80,6 +80,7 @@ Validation performed:
 
 ## Pitfalls
 
+- Never gate full SB child scope on a fixed publisher count (for example, `publishers >= 56`). Publishers can be legitimately added/removed. Validate the live `/company` response structurally: both `digital-trust` and `digital-trust-2` must be present with non-empty publisher lists, consume every returned child publisher, and retain the Messenger-row floor as the volume sanity check. Ensure Playwright/browser cleanup runs in `finally` so a scope exception does not emit a secondary `Event loop is closed` traceback.
 - Do not put this report in `#alerts-infra`. It is operational DTR/SB state, not infrastructure failure.
 - Do not compare Sheet row counts as if they were live pending work; live SB/DTR + global ignore gate wins.
 - Do not treat `SB sem DTR` as automatically deletable/blockable. This cron reports divergences; cleanup still requires the relevant validated workflow and Rodolfo's decision unless an explicit safe autocorrect rule is approved later.
