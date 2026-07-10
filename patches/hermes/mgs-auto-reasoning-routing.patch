@@ -1,0 +1,351 @@
+diff --git a/gateway/run.py b/gateway/run.py
+index 573d5c5..7bf0a10 100644
+--- a/gateway/run.py
++++ b/gateway/run.py
+@@ -4862,6 +4862,45 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+             return overrides[resolved_session_key]
+         return self._load_reasoning_config()
+ 
++    def _resolve_turn_reasoning_config(
++        self,
++        user_message: str,
++        *,
++        source: Optional[SessionSource] = None,
++        session_key: Optional[str] = None,
++    ) -> dict | None:
++        """Resolve per-turn reasoning while preserving explicit session overrides."""
++        resolved_session_key = session_key
++        if not resolved_session_key and source is not None:
++            try:
++                resolved_session_key = self._session_key_for_source(source)
++            except Exception:
++                resolved_session_key = None
++
++        base_config = self._resolve_session_reasoning_config(
++            source=source,
++            session_key=resolved_session_key,
++        )
++        overrides = getattr(self, "_session_reasoning_overrides", {}) or {}
++        if resolved_session_key and resolved_session_key in overrides:
++            return base_config
++
++        cfg = _load_gateway_runtime_config()
++        settings = cfg_get(cfg, "agent", "reasoning_auto_routing", default={})
++        if not isinstance(settings, dict):
++            return base_config
++
++        from gateway.reasoning_router import route_reasoning_config
++
++        routed = route_reasoning_config(user_message, base_config, settings)
++        logger.debug(
++            "Per-turn reasoning route: session=%s effort=%s auto=%s",
++            resolved_session_key or "",
++            (routed or {}).get("effort", "disabled/default"),
++            settings.get("enabled") is True,
++        )
++        return routed
++
+     def _set_session_reasoning_override(
+         self,
+         session_key: str,
+@@ -13139,7 +13178,10 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+ 
+             pr = self._provider_routing
+             max_iterations = _current_max_iterations()
+-            reasoning_config = self._resolve_session_reasoning_config(source=source)
++            reasoning_config = self._resolve_turn_reasoning_config(
++                prompt,
++                source=source,
++            )
+             self._reasoning_config = reasoning_config
+             self._service_tier = self._load_service_tier()
+             turn_route = self._resolve_turn_agent_config(prompt, model, runtime_kwargs)
+@@ -17907,7 +17949,8 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+                 }
+ 
+             pr = self._provider_routing
+-            reasoning_config = self._resolve_session_reasoning_config(
++            reasoning_config = self._resolve_turn_reasoning_config(
++                message,
+                 source=source,
+                 session_key=session_key,
+             )
+diff --git a/gateway/reasoning_router.py b/gateway/reasoning_router.py
+new file mode 100644
+index 0000000..ff2e0e5
+--- /dev/null
++++ b/gateway/reasoning_router.py
+@@ -0,0 +1,152 @@
++"""Deterministic per-turn reasoning-effort routing for Hermes gateways.
++
++The router is intentionally local and side-effect free: it does not make an
++extra LLM call, mutate the session, or alter the prompt. Explicit /reasoning
++session overrides are handled by GatewayRunner before this function is used.
++"""
++
++from __future__ import annotations
++
++import re
++import unicodedata
++from typing import Any, Mapping
++
++from hermes_constants import parse_reasoning_effort
++
++_ALLOWED_EFFORTS = {"minimal", "low", "medium", "high", "xhigh"}
++
++_CRITICAL_MARKERS = (
++    # Incidents / availability
++    "fora do ar",
++    "site down",
++    "system down",
++    "outage",
++    "incidente",
++    "incident",
++    "indisponivel",
++    "unavailable",
++    "erro recorrente",
++    "recurrent error",
++    "root cause",
++    "causa raiz",
++    # Production-changing / security-sensitive work
++    "producao",
++    "production",
++    "deploy",
++    "rollback",
++    "reverter",
++    "migracao",
++    "migration",
++    "em massa",
++    "mass operation",
++    "todos os sites",
++    "all sites",
++    "deleta",
++    "delete",
++    "remover token",
++    "remove token",
++    "credencial",
++    "credential",
++    "senha",
++    "password",
++    "permissao",
++    "permission",
++    "billing",
++    "cobranca",
++    "pagamento",
++    # Deep investigation / exhaustive review
++    "investiga",
++    "investigate",
++    "auditoria",
++    "audit",
++    "revisa tudo",
++    "review everything",
++    "compara tudo",
++    "compare everything",
++    "debug",
++)
++
++_SIMPLE_EXACT = {
++    "oi",
++    "ola",
++    "hello",
++    "hi",
++    "bom dia",
++    "boa tarde",
++    "boa noite",
++    "obrigado",
++    "obrigada",
++    "thanks",
++    "thank you",
++    "ok",
++    "entendi",
++    "perfeito",
++}
++
++_SIMPLE_PREFIXES = (
++    "o que e ",
++    "quem e ",
++    "what is ",
++    "who is ",
++    "defina ",
++    "define ",
++    "traduza ",
++    "translate ",
++    "resuma esta frase",
++    "summarize this sentence",
++)
++
++
++def _normalize(text: str) -> str:
++    normalized = unicodedata.normalize("NFKD", text or "")
++    without_marks = "".join(ch for ch in normalized if not unicodedata.combining(ch))
++    return re.sub(r"\s+", " ", without_marks).strip().lower()
++
++
++def _effort_config(effort: Any, fallback: dict | None) -> dict | None:
++    value = str(effort or "").strip().lower()
++    if value not in _ALLOWED_EFFORTS:
++        return fallback
++    parsed = parse_reasoning_effort(value)
++    return parsed if parsed is not None else fallback
++
++
++def route_reasoning_config(
++    message: str,
++    profile_default: dict | None,
++    settings: Mapping[str, Any] | None,
++) -> dict | None:
++    """Return Medium, High, or Extra High (``xhigh``) for one user turn.
++
++    Safety ordering matters: critical markers and large/code-heavy payloads are
++    evaluated before the short-message fast path, so a terse production command
++    is never downgraded merely because it is short.
++    """
++    settings = settings or {}
++    if settings.get("enabled") is not True:
++        return profile_default
++
++    raw = str(message or "").strip()
++    if not raw:
++        return profile_default
++
++    normalized = _normalize(raw)
++    simple_effort = settings.get("simple_effort", "medium")
++    default_effort = settings.get("default_effort", "high")
++    critical_effort = settings.get("critical_effort", "xhigh")
++
++    code_heavy = raw.count("\n") >= 20 or raw.count("```") >= 2
++    long_payload = len(raw) >= int(settings.get("critical_char_threshold", 1200))
++    critical_marker = any(marker in normalized for marker in _CRITICAL_MARKERS)
++
++    if critical_marker or code_heavy or long_payload:
++        return _effort_config(critical_effort, profile_default)
++
++    simple_char_threshold = int(settings.get("simple_char_threshold", 180))
++    if len(raw) <= simple_char_threshold and (
++        normalized in _SIMPLE_EXACT
++        or any(normalized.startswith(prefix) for prefix in _SIMPLE_PREFIXES)
++    ):
++        return _effort_config(simple_effort, profile_default)
++
++    return _effort_config(default_effort, profile_default)
+diff --git a/tests/gateway/test_auto_reasoning_routing.py b/tests/gateway/test_auto_reasoning_routing.py
+new file mode 100644
+index 0000000..ef9111a
+--- /dev/null
++++ b/tests/gateway/test_auto_reasoning_routing.py
+@@ -0,0 +1,115 @@
++from gateway.reasoning_router import route_reasoning_config
++
++
++SETTINGS = {
++    "enabled": True,
++    "simple_effort": "medium",
++    "default_effort": "high",
++    "critical_effort": "xhigh",
++}
++
++
++def test_disabled_router_preserves_profile_default():
++    assert route_reasoning_config(
++        "oi",
++        {"enabled": True, "effort": "high"},
++        {"enabled": False},
++    ) == {"enabled": True, "effort": "high"}
++
++
++def test_short_social_or_simple_question_uses_medium():
++    for message in ("oi", "obrigado", "o que é cache?", "traduza isso para inglês"):
++        assert route_reasoning_config(
++            message,
++            {"enabled": True, "effort": "high"},
++            SETTINGS,
++        ) == {"enabled": True, "effort": "medium"}
++
++
++def test_normal_operational_request_uses_high():
++    assert route_reasoning_config(
++        "confere o status da campanha e me passa um resumo",
++        {"enabled": True, "effort": "high"},
++        SETTINGS,
++    ) == {"enabled": True, "effort": "high"}
++
++
++def test_short_critical_request_is_never_downgraded():
++    for message in (
++        "o site está fora do ar",
++        "deleta esse token de produção",
++        "faz deploy em todos os sites",
++        "investiga esse erro recorrente",
++    ):
++        assert route_reasoning_config(
++            message,
++            {"enabled": True, "effort": "high"},
++            SETTINGS,
++        ) == {"enabled": True, "effort": "xhigh"}
++
++
++def test_long_or_code_heavy_request_uses_xhigh():
++    long_message = "analise estes logs:\n" + ("erro de timeout no worker\n" * 90)
++    code_message = "debug este código:\n```python\n" + ("print('x')\n" * 30) + "```"
++    for message in (long_message, code_message):
++        assert route_reasoning_config(
++            message,
++            {"enabled": True, "effort": "high"},
++            SETTINGS,
++        ) == {"enabled": True, "effort": "xhigh"}
++
++
++def test_empty_message_preserves_profile_default():
++    assert route_reasoning_config(
++        "",
++        {"enabled": True, "effort": "high"},
++        SETTINGS,
++    ) == {"enabled": True, "effort": "high"}
++
++
++def test_gateway_turn_router_honors_explicit_session_override(monkeypatch):
++    from gateway.run import GatewayRunner
++
++    runner = object.__new__(GatewayRunner)
++    runner._session_reasoning_overrides = {
++        "session-1": {"enabled": True, "effort": "medium"}
++    }
++    monkeypatch.setattr(
++        runner,
++        "_load_reasoning_config",
++        lambda: {"enabled": True, "effort": "high"},
++    )
++    monkeypatch.setattr(
++        "gateway.run._load_gateway_runtime_config",
++        lambda: {"agent": {"reasoning_auto_routing": SETTINGS}},
++    )
++
++    result = runner._resolve_turn_reasoning_config(
++        "o site está fora do ar",
++        session_key="session-1",
++    )
++
++    assert result == {"enabled": True, "effort": "medium"}
++
++
++def test_gateway_turn_router_applies_auto_routing_without_override(monkeypatch):
++    from gateway.run import GatewayRunner
++
++    runner = object.__new__(GatewayRunner)
++    runner._session_reasoning_overrides = {}
++    monkeypatch.setattr(
++        runner,
++        "_load_reasoning_config",
++        lambda: {"enabled": True, "effort": "high"},
++    )
++    monkeypatch.setattr(
++        "gateway.run._load_gateway_runtime_config",
++        lambda: {"agent": {"reasoning_auto_routing": SETTINGS}},
++    )
++
++    result = runner._resolve_turn_reasoning_config(
++        "o site está fora do ar",
++        session_key="session-2",
++    )
++
++    assert result == {"enabled": True, "effort": "xhigh"}
