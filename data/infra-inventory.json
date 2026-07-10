@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T23:22:16-04:00",
+    "updated_at": "2026-07-09T23:24:16-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1252,14 +1252,14 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
-      "size_bytes": 90509,
-      "modified_at": "2026-07-09T23:21:29-04:00",
-      "sha256": "d773a53ace7bb3161e364db04117f58357227d1b142967dd27e257ff3e6b6f9b",
+      "size_bytes": 91289,
+      "modified_at": "2026-07-09T23:23:56-04:00",
+      "sha256": "0fafe9fc7136d884df0749dfa7a0fc2961094d16f09e18a6c2a5cd46ba0f6c8c",
       "owner": "Zeus/Ops",
       "type": "skill",
-      "description": "Added completion safeguard: verify/remove the actual active Utility canary cron ID after TODOS VERDES; never trust legacy hardcoded ID in output.",
-      "updated_at": "2026-07-09T23:21:57-04:00",
-      "source_report": "REPORT-INFRA Zeus Utility canary cron completion safeguard 2026-07-09",
+      "description": "Utility canary cron lifecycle corrected: reuse one canonical job via pause/resume/update; never create a new ID per extension.",
+      "updated_at": "2026-07-09T23:24:16-04:00",
+      "source_report": "REPORT-INFRA Zeus Utility canary canonical cron lifecycle correction 2026-07-09",
       "skill": "smartbidding-dashboard-access",
       "notes": "Added LOGIN fallback requirement for final DTR↔SB audits after freshly-created SB rows exposed USER_LOGIN null."
     },
@@ -1438,9 +1438,11 @@
       "deliver": "discord:1522487422510694450",
       "script": "utility-canary-approval-loop.sh",
       "workdir": "/root/mgs-agent",
-      "status": "removed",
+      "status": "removed-duplicate-lifecycle-error",
       "removed_at": "2026-07-09T23:22:16-04:00",
-      "reason": "11/11 templates confirmados 20/20 verdes; cron ativo removido após detectar que o aviso citava ID legado."
+      "reason": "11/11 templates confirmados 20/20 verdes; cron ativo removido após detectar que o aviso citava ID legado.",
+      "lifecycle_correction_at": "2026-07-09T23:24:16-04:00",
+      "lifecycle_note": "Should have reused one canonical Utility canary cron via pause/resume/update instead of creating a new job ID."
     }
   ],
   "scripts": [
