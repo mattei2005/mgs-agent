@@ -451,16 +451,18 @@ Semântica:
 
 - `queue`: preserva a execução atual e processa a nova mensagem no turno seguinte; corresponde ao sintoma “espera terminar e depois responde”.
 - `interrupt`: interrompe/redireciona a execução atual; não garante uma resposta consolidada.
-- `steer`: injeta texto na execução em andamento após a próxima tool call, permitindo ajustar o trabalho e consolidar a resposta final. Se o agente ainda não iniciou, não houver nova tool call ou houver mídia, pode cair para fila/próximo turno.
+- `steer`: injeta o payload do usuário na execução em andamento no próximo ponto seguro, permitindo ajustar o trabalho e consolidar a resposta final.
 
-Para o comportamento “mandei um complemento enquanto estava digitando; incorpore e responda uma vez”, o modo correto é:
+**Regra MGS obrigatória definida por Rodolfo:** o comportamento mid-turn deve funcionar para qualquer mensagem enviada enquanto o agente está ocupado: texto, imagem, imagem com texto, áudio, áudio com texto e demais anexos. Mídia não pode cair silenciosamente para `queue` só porque o `AIAgent.steer()` aceita texto; o gateway deve converter o evento já normalizado (caption/transcrição + marcadores e caminhos locais dos anexos) em um payload de steer confiável, sem duplicar a mensagem no próximo turno. Se o Hermes stock não suporta uma modalidade, tratar como gap de runtime a corrigir e testar, não como limitação aceitável do produto MGS.
+
+Para o comportamento “mandei um complemento enquanto estava digitando; incorpore e responda uma vez”, o modo correto continua sendo:
 
 ```yaml
 display:
   busy_input_mode: steer
 ```
 
-Mudança de `config.yaml` é infra/config: só aplicar quando solicitada, validar o valor resolvido e seguir restart seguro se o gateway não recarregar a configuração automaticamente. Não prometer consolidação absoluta: uma mensagem que chega depois do final, ou tarde demais para outro tool boundary, vira próximo turno.
+Mudança de `config.yaml` é infra/config: só aplicar quando solicitada, validar o valor resolvido e seguir restart seguro se o gateway não recarregar a configuração automaticamente. Não prometer consolidação quando a mensagem chega depois do final; enquanto o turno ainda estiver ativo, todas as modalidades devem entrar no mesmo turno.
 
 ## 6. Session reset / manter contexto em threads
 

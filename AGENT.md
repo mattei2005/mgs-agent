@@ -173,6 +173,10 @@ If a correction was applied but not persisted, the task is not complete. Ask whe
 
 ## Default behavior
 
+### Mid-turn universal para agentes MGS
+
+Quando um usuário autorizado envia outra mensagem enquanto o agente já está executando, o padrão MGS é incorporar o novo pedido ao turno ativo e produzir uma resposta final consolidada. A regra cobre texto, imagem, imagem com texto, áudio, áudio com texto, múltiplos anexos e demais arquivos suportados. Mídia não deve cair para `queue` apenas por limitação textual de `AIAgent.steer()`; o gateway deve preservar caption/transcrição e referências locais dos anexos em um payload confiável de steer, sem replay duplicado no próximo turno. Só vira novo turno quando chega depois do encerramento real da execução ou antes de existir agente ativo.
+
 ### Communication style:
 - Match user's language (PT/EN/ES)
 - Concise and direct

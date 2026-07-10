@@ -24,6 +24,25 @@ O recurso existir no código não significa estar ativo no profile. Nunca respon
 
 Nota: com `busy_input_mode=steer`, `_load_busy_text_mode()` pode resolver `interrupt` por desenho interno; o gate principal de steer é `_load_busy_input_mode()`. Não tratar isso isoladamente como falha.
 
+## Cobertura MGS obrigatória de payload
+
+Rodolfo definiu que o padrão mid-turn vale para **qualquer tipo de mensagem** enquanto o agente está ocupado:
+
+- texto;
+- imagem sem caption;
+- imagem com texto;
+- áudio/voice sem texto adicional;
+- áudio com texto;
+- múltiplos anexos e demais arquivos suportados pelo Discord/Hermes.
+
+O Hermes stock pode limitar `AIAgent.steer()` a uma string, mas isso não autoriza o gateway MGS a mandar mídia para o próximo turno. O adapter já normaliza/cacha a mídia antes do busy handler; o runtime deve construir uma string de steer que preserve caption/transcrição e os marcadores/caminhos locais dos anexos, permitindo ao agente chamar `vision_analyze`, processamento de áudio ou a ferramenta adequada dentro do mesmo turno. Invariantes:
+
+1. Payload multimodal chega uma vez ao turno ativo.
+2. Não é replayado novamente como próximo turno após steer bem-sucedido.
+3. Caption/transcrição e todos os anexos permanecem associados ao evento original.
+4. Falha real de normalização/steer é explícita; não chamar `queue` de sucesso.
+5. O smoke final cobre texto, imagem, imagem+texto, áudio e áudio+texto.
+
 ## Aplicação multiagente MGS
 
 Para Zeus, Atena, Ares e Hera:
@@ -46,7 +65,7 @@ hermes -p <agent> config set display.busy_input_mode steer
 
 - Steer depende de haver um turno ativo e um próximo ponto seguro, normalmente após tool call.
 - Se o complemento chegar depois da resposta final, ele vira novo turno.
-- Se o agente ainda estiver iniciando, rejeitar o steer, ou a mensagem incluir mídia, o Hermes pode cair para fila.
+- Se o agente ainda estiver iniciando ou a mensagem chegar depois do encerramento do turno, ela pode virar próximo turno; isso não se aplica a mídia recebida enquanto o turno já está ativo.
 - Steer melhora consolidação, mas não justifica prometer fusão absoluta em qualquer timing.
 
 ## Pitfalls
