@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MGS Chat Funnels
  * Description: Config-driven WhatsApp-style chat funnels by vertical and country (EMP-BR, CC-BR, CAR-BR) with rewarded/interstitial gate, UTM passthrough, cards/sequential offers, and shortcode/route rendering.
- * Version: 0.3.20
+ * Version: 0.3.21
  * Author: MGS Digital Corp
  */
 
@@ -109,13 +109,14 @@ final class MGS_Chat_Funnels {
         $persona = isset($config['persona']) && is_array($config['persona']) ? $config['persona'] : array();
         $wrapper_url = (($config['ads_enabled'] ?? true) !== false) ? $this->ad_wrapper_url($config) : '';
         $ad_provider = $this->ad_provider($config);
+        $standalone = !empty($config['standalone']);
 
         $replacements = array(
             '{{HTML_LANG}}' => esc_attr($language),
             '{{TITLE}}' => esc_html($title),
-            '{{WP_HEAD}}' => $this->capture_wp_head(),
-            '{{WP_BODY_OPEN}}' => $this->capture_wp_body_open(),
-            '{{WP_FOOTER}}' => $this->capture_wp_footer(),
+            '{{WP_HEAD}}' => $standalone ? $this->render_tracking_head_html($config) : $this->capture_wp_head($config),
+            '{{WP_BODY_OPEN}}' => $standalone ? $this->render_tracking_body_html($config) : $this->capture_wp_body_open(),
+            '{{WP_FOOTER}}' => $standalone ? '' : $this->capture_wp_footer(),
             '{{TAGS_SCRIPT}}' => '<script>window.tags = JSON.parse(' . $this->js_json($tags_json) . ');</script>',
             '{{ADS_HEAD}}' => $this->render_ads_head_html($config),
             '{{WRAPPER_URL}}' => esc_url($wrapper_url),
@@ -139,11 +140,57 @@ final class MGS_Chat_Funnels {
         echo strtr($template, $replacements); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
 
-    private function capture_wp_head() {
+    private function gtm_container_id($config) {
+        $container_id = strtoupper(trim((string) ($config['gtm_container_id'] ?? '')));
+        return preg_match('/^GTM-[A-Z0-9]+$/', $container_id) ? $container_id : '';
+    }
+
+    private function render_tracking_head_html($config) {
+        $container_id = $this->gtm_container_id($config);
+        if ($container_id === '') {
+            return '';
+        }
+        $id_json = $this->js_json($container_id);
+        return '<!-- Google Tag Manager + Analytics -->' . "\n"
+            . '<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({\'gtm.start\':new Date().getTime(),event:\'gtm.js\'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!==\'dataLayer\'?\'&l=\'+l:\'\';j.async=true;j.src=\'https://www.googletagmanager.com/gtm.js?id=\'+i+dl;f.parentNode.insertBefore(j,f);})(window,document,\'script\',\'dataLayer\',' . $id_json . ');</script>' . "\n"
+            . '<!-- End Google Tag Manager + Analytics -->';
+    }
+
+    private function render_tracking_body_html($config) {
+        $container_id = $this->gtm_container_id($config);
+        if ($container_id === '') {
+            return '';
+        }
+        return '<!-- Google Tag Manager (noscript) -->' . "\n"
+            . '<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=' . esc_attr($container_id) . '" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>' . "\n"
+            . '<!-- End Google Tag Manager (noscript) -->';
+    }
+
+    private function capture_wp_head($config = null) {
         ob_start();
         wp_head();
         $output = ob_get_clean();
-        return is_string($output) ? $output : '';
+        if (!is_string($output)) {
+            return '';
+        }
+        return $this->sanitize_captured_wp_head($output, $config);
+    }
+
+    private function sanitize_captured_wp_head($output, $config = null) {
+        if (!is_array($config) || (($config['ads_enabled'] ?? true) === false) || $this->ad_provider($config) === 'm2') {
+            return $output;
+        }
+
+        // Chat routes own the ad stack through {{ADS_HEAD}}. WordPress head/theme/WPCode
+        // may also inject the same JBF/GPT wrapper; strip that layer to avoid duplicate
+        // GPT imports, duplicate wrapper scripts, and duplicate window.wrapper_url setup.
+        $patterns = array(
+            '#<script\b[^>]*src=["\'][^"\']*securepubads\.g\.doubleclick\.net/tag/js/gpt\.js[^"\']*["\'][^>]*>\s*</script>#i',
+            '#<script\b[^>]*src=["\'][^"\']*assets\.jbfdigital\.com\.br/[^"\']*\.builder\.js[^"\']*["\'][^>]*>\s*</script>#i',
+            '#<script\b[^>]*>[\s\S]*?window\.wrapper_url\s*=\s*["\'][^"\']*assets\.jbfdigital\.com\.br/[^"\']*\.builder\.js[^"\']*["\'][\s\S]*?</script>#i',
+        );
+
+        return preg_replace($patterns, '', $output);
     }
 
     private function capture_wp_body_open() {
