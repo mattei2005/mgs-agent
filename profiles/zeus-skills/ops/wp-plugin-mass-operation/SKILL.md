@@ -408,6 +408,8 @@ Se uma rota carregar `gpt.js` ou wrapper JBF duas vezes, tratar como bug de impl
 
 Para mudanças na UI humana do admin do `MGS Chat Funnels`, ver `references/mgs-chat-funnels-admin-ui-taxonomy-and-rollout.md`: `Modelo de oferta` deve vir antes da identidade do chat; campos com taxonomia conhecida devem ser selects em ordem alfabética (Idioma, Vertical, País); e canário pedido pelo Rodolfo deve parar no site solicitado antes de rollout amplo.
 
+Para rollout standalone de tracking nos chats já instalados, com campos GTM/GA4 no passo 3 e preservação dos provedores JBF, Zuout/ActView e Wantabrand/M2, ver `references/mgs-chat-funnels-standalone-tracking-rollout-2026-07-10.md`. O fluxo exige um canário por provedor, JSON por chat e validação de `page_view` real.
+
 **`references/mgs-chat-funnels-ciro-runtime-fixes-2026-07-01.md`**: correções runtime validadas com Ciro para `MGS Chat Funnels`: preload rewarded deve chamar `requestRewardAds()` 1 vez (não loop 5x), top ad precisa manter o chat no fundo via auto-scroll/observers, e deploy OpenZed via WP Admin pode exigir cookie `wordpress_test_cookie` + fluxo upload/replace quando REST plugin retorna `401 rest_cannot_view_plugin`.
 
 Quando Ciro/JBF corrigir a regra de rewarded para “1 só”, não copie loop legado de 5 auctions do `index.html`. O padrão operacional atual é 1 chamada de `requestRewardAds()` no `initQuiz`, sem `for`. Validar em browser com `googletag.pubads().getSlots()` — esperado apenas `..._rewarded/1`, não `/1` a `/5`. Ver `references/mgs-chat-funnels-one-rewarded.md`.
