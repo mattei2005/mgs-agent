@@ -230,7 +230,7 @@ diff --git a/tests/gateway/test_busy_session_ack.py b/tests/gateway/test_busy_se
      )
      return evt
  
-@@ -302,6 +311,144 @@
+@@ -302,6 +311,226 @@
          assert "Interrupting" not in content
  
      @pytest.mark.asyncio
@@ -369,6 +369,88 @@ diff --git a/tests/gateway/test_busy_session_ack.py b/tests/gateway/test_busy_se
 +        assert "usa esse arquivo na análise" in payload
 +        assert "audio file attachment" in payload
 +        assert "/tmp/song.m4a" in payload
++        assert sk not in adapter._pending_messages
++
++    @pytest.mark.asyncio
++    @pytest.mark.parametrize(
++        ("message_type", "media_type", "path", "marker"),
++        [
++            (MessageType.VIDEO, "video/mp4", "/tmp/clip.mp4", "video attachment"),
++            (MessageType.DOCUMENT, "application/pdf", "/tmp/brief.pdf", "document"),
++        ],
++    )
++    async def test_steer_mode_includes_video_and_document_paths(
++        self,
++        monkeypatch,
++        message_type,
++        media_type,
++        path,
++        marker,
++    ):
++        """Other supported attachments keep their paths in the active run."""
++        import gateway.run as _gr
++
++        monkeypatch.delenv("HERMES_GATEWAY_BUSY_STEER_ACK_ENABLED", raising=False)
++        monkeypatch.setattr(_gr, "_load_gateway_config", lambda: {})
++        runner, _sentinel = _make_runner()
++        runner._busy_input_mode = "steer"
++        adapter = _make_adapter(platform_val="discord")
++
++        event = _make_event(
++            text="considera este anexo",
++            platform_val="discord",
++            message_type=message_type,
++            media_urls=[path],
++            media_types=[media_type],
++        )
++        sk = build_session_key(event.source)
++        runner.adapters[event.source.platform] = adapter
++
++        agent = MagicMock()
++        agent.steer = MagicMock(return_value=True)
++        runner._running_agents[sk] = agent
++
++        await runner._handle_active_session_busy_message(event, sk)
++
++        payload = agent.steer.call_args.args[0]
++        assert "considera este anexo" in payload
++        assert marker in payload
++        assert path in payload
++        assert sk not in adapter._pending_messages
++
++    @pytest.mark.asyncio
++    async def test_steer_media_enrichment_failure_uses_paths_without_queue(self, monkeypatch):
++        """A media normalisation error still steers a concrete path fallback."""
++        import gateway.run as _gr
++
++        monkeypatch.delenv("HERMES_GATEWAY_BUSY_STEER_ACK_ENABLED", raising=False)
++        monkeypatch.setattr(_gr, "_load_gateway_config", lambda: {})
++        runner, _sentinel = _make_runner()
++        runner._busy_input_mode = "steer"
++        runner._prepare_inbound_message_text = AsyncMock(
++            side_effect=RuntimeError("synthetic enrichment failure")
++        )
++        adapter = _make_adapter(platform_val="discord")
++
++        event = _make_event(
++            text="usa este print",
++            platform_val="discord",
++            message_type=MessageType.PHOTO,
++            media_urls=["/tmp/fallback.png"],
++            media_types=["image/png"],
++        )
++        sk = build_session_key(event.source)
++        runner.adapters[event.source.platform] = adapter
++
++        agent = MagicMock()
++        agent.steer = MagicMock(return_value=True)
++        runner._running_agents[sk] = agent
++
++        await runner._handle_active_session_busy_message(event, sk)
++
++        payload = agent.steer.call_args.args[0]
++        assert "usa este print" in payload
++        assert "[User sent an image: /tmp/fallback.png]" in payload
 +        assert sk not in adapter._pending_messages
 +
 +    @pytest.mark.asyncio
