@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T17:21:23-04:00",
+    "updated_at": "2026-07-10T17:30:05-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_manual_update": "hera-meta-library-persistent-runtime"
+    "last_manual_update": "hera-meta-library-runtime-hardening"
   },
   "system_packages": [
     {
@@ -1184,9 +1184,9 @@
       "files": [
         {
           "path": "/root/mgs-agent/tools/meta-library-collector/collector.js",
-          "size_bytes": 10331,
-          "modified_at": "2026-07-10T17:18:02.912879-04:00",
-          "sha256": "df08f7c4c812da1d1f7aa0375064324c32243b83e0c3e2d2a0f21e1438670812"
+          "size_bytes": 14612,
+          "modified_at": "2026-07-10T17:27:02.646993-04:00",
+          "sha256": "15462fc0d7e44e143074870ba6898b4aa86a48cb9be64d516228d4036fa0ca91"
         },
         {
           "path": "/root/mgs-agent/tools/meta-library-collector/package.json",
@@ -1201,26 +1201,45 @@
           "sha256": "61ca9ee2f7b9fdfbc54eb6a98bad602c20b17b5955419ae2ff2b64e700286085"
         },
         {
+          "path": "/root/mgs-agent/tools/meta-library-collector/README.md",
+          "size_bytes": 1309,
+          "modified_at": "2026-07-10T17:29:55.314286-04:00",
+          "sha256": "30bda5a9b7b5a9f5eadfd53a0d8c8f8d0a81661cd90dc0f2574b37b83e27ea78"
+        },
+        {
           "path": "/root/mgs-agent/scripts/hera-meta-library-collector.sh",
-          "size_bytes": 955,
-          "modified_at": "2026-07-10T17:11:55.115498-04:00",
-          "sha256": "c3a11bdd7d553299777855322cd3b9a17f65b607f622647afca84a9fafc586d3"
+          "size_bytes": 1200,
+          "modified_at": "2026-07-10T17:27:19.353022-04:00",
+          "sha256": "e6bb5f9111c923c31bf963cae3b8ca6c4d6c1eff40a0408b094ac7d03f3ca201"
         }
       ],
       "validation": {
-        "public_smoke": "PASS",
+        "public_smoke": "PASS x3",
         "query": "utua",
-        "result_text": "~4,600 results",
-        "library_ids": 30,
-        "images": 98,
-        "videos": 19,
+        "latest_result_text": "~4,600 results",
+        "latest_library_ids": 30,
+        "latest_images": 98,
+        "latest_videos": 19,
+        "media_linked_to_card": 4,
         "download_http": 200,
-        "download_bytes": 47548,
+        "download_magic_bytes": true,
+        "download_library_id": "1972296293422363",
+        "profile_reused": true,
+        "concurrent_run": "refused cleanly with exit 75",
+        "secret_scan_hits": 0,
         "authenticated_session": "absent",
         "fmybc_exact": "page shell loads but no cards; reauthentication required before claiming collection success"
       },
       "purpose": "Durable Meta/Facebook Ads Library intake with persistent browser profile; runtime/profile must never use /tmp.",
-      "updated_at": "2026-07-10T17:21:23-04:00"
+      "updated_at": "2026-07-10T17:30:05-04:00",
+      "security": {
+        "exclusive_profile_lock": "flock, concurrent exit 75",
+        "site_isolation": "enabled",
+        "sandbox": "disabled because Chromium runs as root; scope restricted to facebook.com/ads/library",
+        "env_secrets_loaded": false,
+        "sensitive_query_params": "rejected",
+        "download_validation": "HTTP 2xx + MIME allowlist + magic bytes + size limits + atomic rename + SHA256"
+      }
     }
   ],
   "profile_skill_references": [
@@ -1648,13 +1667,13 @@
       "type": "profile_skill",
       "path": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/meta-library-reference-intake/SKILL.md",
-      "size_bytes": 2908,
-      "modified_at": "2026-07-10T17:13:35.893601-04:00",
-      "sha256": "af5791000c67adb60eaadd2542bfc23a3f1d318925dd577f55e91f3001c4067a",
-      "versioned_sha256": "af5791000c67adb60eaadd2542bfc23a3f1d318925dd577f55e91f3001c4067a",
+      "size_bytes": 3350,
+      "modified_at": "2026-07-10T17:28:04.574101-04:00",
+      "sha256": "6602198880e92af7aeb4b6b38475fe9216c2283976c523e0646c49acc9b81e46",
+      "versioned_sha256": "6602198880e92af7aeb4b6b38475fe9216c2283976c523e0646c49acc9b81e46",
       "purpose": "Canonical Meta Ads Library collection flow with persistent runtime/profile and explicit no-/tmp rule.",
-      "validation": "live/versioned SHA256 match; runtime public smoke PASS",
-      "updated_at": "2026-07-10T17:21:23-04:00"
+      "validation": "live/versioned SHA256 match; hardened runtime PASS x3; exclusive lock exit 75",
+      "updated_at": "2026-07-10T17:30:05-04:00"
     },
     {
       "id": "zeus-local-browser-automation-persistent-runtime-rule",
