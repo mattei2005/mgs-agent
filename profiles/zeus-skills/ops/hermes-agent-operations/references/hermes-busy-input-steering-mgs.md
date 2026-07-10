@@ -1,78 +1,211 @@
-# Hermes busy input steering — diagnóstico e rollout MGS
+# Hermes busy input steering — diagnóstico, mídia e rollout MGS
 
 ## Quando usar
 
-Quando o usuário envia uma segunda mensagem enquanto o agente aparece como ocupado/“digitando” e ela só é respondida depois da primeira resposta, ou quando quer que complementos sejam incorporados à resposta em andamento.
+Quando uma mensagem enviada durante um turno ativo só chega depois da primeira resposta, quando o usuário quer consolidar complementos no trabalho em andamento, ou quando imagem/áudio/caption somem em `busy_input_mode=steer`.
 
 ## Modelo mental
 
-`display.busy_input_mode` controla o que uma nova mensagem de texto faz enquanto a sessão já está executando:
+`display.busy_input_mode` controla novas mensagens enquanto a sessão executa:
 
-- `queue` — preserva o turno atual e agenda a mensagem como próximo turno. Sintoma: primeira resposta termina; depois o agente responde à segunda mensagem separadamente.
-- `interrupt` — interrompe/redireciona a execução atual. Não é o modo correto quando o objetivo é preservar o trabalho e consolidar a resposta.
-- `steer` — chama o mecanismo `/steer`, que injeta o texto no turno ativo no próximo ponto seguro de ferramenta, usando o marcador out-of-band confiável. É o modo correto para complementos durante diagnóstico/execução.
+- `queue` — preserva o turno atual e agenda outro turno.
+- `interrupt` — aborta/redireciona o turno e pode cancelar tools/subagentes.
+- `steer` — injeta texto no próximo ponto seguro do turno ativo, anexando-o ao último resultado `role=tool` com o marcador out-of-band confiável.
 
 O recurso existir no código não significa estar ativo no profile. Nunca responder “já está ativo” sem ler o valor vivo.
 
-## Diagnóstico mínimo
+## Arquitetura end-to-end do Discord
 
-1. Ler `display.busy_input_mode` no `config.yaml` vivo do profile.
-2. Verificar overrides legados/ambiente: `busy_text_mode` e `HERMES_GATEWAY_BUSY_INPUT_MODE` quando presentes.
-3. Validar o mirror versionado correspondente em `/root/mgs-agent/profiles/<agent>-config.yaml` para detectar drift.
-4. Se necessário, confirmar o valor resolvido com o Python do venv Hermes e o contexto do profile.
-5. Diferenciar configuração em disco de runtime já carregado: o gateway mantém `_busy_input_mode` em memória; uma alteração de arquivo pode exigir restart seguro.
+Fluxo relevante:
 
-Nota: com `busy_input_mode=steer`, `_load_busy_text_mode()` pode resolver `interrupt` por desenho interno; o gate principal de steer é `_load_busy_input_mode()`. Não tratar isso isoladamente como falha.
+```text
+Discord on_message
+  -> dedup/autorização/filtros
+  -> DiscordAdapter._handle_message
+       -> normaliza caption/menção
+       -> classifica anexos
+       -> baixa para cache
+       -> MessageEvent(text, message_type, media_urls, media_types)
+  -> BasePlatformAdapter.handle_message
+       -> se sessão ativa: busy_session_handler ANTES do preprocessamento normal
+  -> GatewayRunner._handle_active_session_busy_message
+       -> running_agent.steer(payload)
+```
 
-## Cobertura MGS obrigatória de payload
+`MessageEvent` não tem `image_path`/`audio_path`. Mídia fica em listas paralelas:
 
-Rodolfo definiu que o padrão mid-turn vale para **qualquer tipo de mensagem** enquanto o agente está ocupado:
+```python
+media_urls = ["<local path ou URL fallback>", ...]
+media_types = ["image/png", "audio/ogg", ...]
+```
 
-- texto;
-- imagem sem caption;
-- imagem com texto;
-- áudio/voice sem texto adicional;
-- áudio com texto;
-- múltiplos anexos e demais arquivos suportados pelo Discord/Hermes.
+Tipos Discord/Hermes:
 
-O Hermes stock pode limitar `AIAgent.steer()` a uma string, mas isso não autoriza o gateway MGS a mandar mídia para o próximo turno. O adapter já normaliza/cacha a mídia antes do busy handler; o runtime deve construir uma string de steer que preserve caption/transcrição e os marcadores/caminhos locais dos anexos, permitindo ao agente chamar `vision_analyze`, processamento de áudio ou a ferramenta adequada dentro do mesmo turno. Invariantes:
+- imagem: `MessageType.PHOTO`;
+- voice note nativo Discord: `MessageType.VOICE` (`Attachment.is_voice_message()` ou duration+waveform);
+- arquivo de áudio comum: `MessageType.AUDIO`.
 
-1. Payload multimodal chega uma vez ao turno ativo.
-2. Não é replayado novamente como próximo turno após steer bem-sucedido.
-3. Caption/transcrição e todos os anexos permanecem associados ao evento original.
-4. Falha real de normalização/steer é explícita; não chamar `queue` de sucesso.
-5. O smoke final cobre texto, imagem, imagem+texto, áudio e áudio+texto.
+O `message_type` global é escolhido pelo primeiro attachment reconhecido. Para mensagens mistas, classificar cada item pelo seu próprio `media_types[i]`; nunca promover todos os arquivos com base apenas no tipo global.
 
-## Aplicação multiagente MGS
+Caches canônicos:
 
-Para Zeus, Atena, Ares e Hera:
+```text
+<HERMES_HOME>/cache/images/img_<12hex>.<ext>
+<HERMES_HOME>/cache/audio/audio_<12hex>.<ext>
+```
 
-1. Inventariar live + mirror antes da alteração.
-2. Aplicar no live pelo CLI oficial, evitando edição direta bloqueada de config sensível:
+O caminho primário usa `Attachment.read()` autenticado. Em falha, imagem/áudio podem cair para URL CDN, então `media_urls` não é garantia absoluta de path local.
+
+## Estado do evento antes do busy handler
+
+Antes de `_prepare_inbound_message_text`, a matriz é:
+
+```text
+Entrada                    event.text                                      message_type  media_urls
+Imagem sem caption         (The user sent a message with no text content)  PHOTO         cached path/URL
+Imagem + caption            caption normalizada                            PHOTO         cached path/URL
+Voice sem caption          placeholder                                     VOICE         cached path/URL
+Voice + caption             caption                                         VOICE         cached path/URL
+Áudio comum sem caption     placeholder                                     AUDIO         cached path/URL
+Áudio comum + caption       caption                                         AUDIO         cached path/URL
+```
+
+Transcrição, vision enrichment, native image content parts, document/audio context notes e tradução de paths ainda não aconteceram.
+
+## Gap crítico do steer baseado só em `event.text`
+
+Se o busy handler fizer:
+
+```python
+steer_text = (event.text or "").strip()
+running_agent.steer(steer_text)
+```
+
+então:
+
+- mídia com caption envia só a caption;
+- mídia sem caption envia só o placeholder;
+- o placeholder é não-vazio, portanto `steer()` aceita;
+- steer bem-sucedido não entra na fila, logo o asset some do turno corrente e não é replayado depois.
+
+Há dois gates busy no runner/base; ambos devem chamar o mesmo serializador para não haver comportamento diferente por timing/race.
+
+## Preprocessamento normal quando idle/queued
+
+`GatewayRunner._prepare_inbound_message_text()` faz o enriquecimento completo:
+
+- imagem: visão nativa ou `vision_analyze` textual com descrição e path;
+- `VOICE`: STT e transcript antes da caption;
+- `AUDIO`: não faz STT no caminho fresco; injeta nota com path para processamento explícito;
+- documentos: injeta conteúdo ou nota de path conforme MIME.
+
+Queued/drain tem caminhos adicionais que podem tratar `AUDIO` junto com `VOICE` e transcrever áudio comum. Exigir consistência entre fresh, queue e steer; áudio comum não deve mudar de semântica só porque chegou enquanto busy.
+
+## Contrato recomendado: `MessageEvent -> steer payload`
+
+Criar/reusar um helper central, puro ou com efeitos explícitos, que retorna texto sem mutar/consumir o evento. Formato recomendado:
+
+```text
+[Discord inbound message id=123456789]
+Attachments:
+- image 1; MIME=image/png; path=<agent-visible-path>
+  Inspect with vision_analyze if relevant.
+- audio 1; kind=voice|audio; MIME=audio/ogg; path=<usable-path>
+  Transcribe or process this file directly if its contents matter.
+
+User caption:
+<caption exatamente uma vez>
+```
+
+Invariantes:
+
+1. Todos os anexos aparecem uma vez e na ordem original.
+2. Cada mensagem inclui `message_id`/framing próprio; múltiplos steers podem ser concatenados sem destruir fronteiras.
+3. Caption aparece uma vez.
+4. Imagem inclui path que `vision_analyze` consegue resolver.
+5. Voice pode incluir transcript já obtido, mas sempre mantém o path; falha de STT nunca apaga o asset.
+6. Steer aceito não é também enfileirado.
+7. Steer rejeitado mantém o `MessageEvent` original completo para queue/fallback.
+8. Não usar `MEDIA:<path>`: é diretiva outbound, não referência inbound.
+9. Passar texto puro a `AIAgent.steer()`; não pré-aplicar `format_steer_marker()`, evitando wrapper duplicado.
+10. Notas geradas dos anexos devem preceder a caption, ou delimitadores do marker dentro da caption devem ser neutralizados para não quebrar o framing.
+
+## Paths e sandbox
+
+Use `to_agent_visible_cache_path()` para o caminho que o agente/terminal deve enxergar. Nuances:
+
+- atualmente a tradução cobre Docker; outros backends remotos exigem validação própria;
+- `vision_analyze` aceita paths visíveis do container e faz tradução inversa;
+- `transcribe_audio()` historicamente valida `Path(file_path)` diretamente. Se receber path Docker traduzido sem `from_agent_visible_cache_path()`, pode falhar no host.
+
+Contrato ideal: ferramentas que consomem cache inbound aceitam o mesmo path visível ao agente e traduzem internamente. Até isso ser garantido, diferenciar `agent_path` e `host/tool_path` no payload/adapter sem perder nenhum deles.
+
+## Álbuns e múltiplas mensagens
+
+- Vários attachments no mesmo post Discord já formam um único `MessageEvent`.
+- Posts separados não têm media-group ID Discord dedicado.
+- `merge_pending_message_event` concatena paths/MIME e mescla captions, promovendo para `PHOTO` se houver foto.
+- O FIFO busy pode agregar qualquer evento com mídia ao head slot, não apenas álbuns; preservar boundaries e definir explicitamente se reply anchor/message ID final é o primeiro ou o último.
+- `AIAgent.steer()` concatena chamadas com newline e injeta um único bloco out-of-band. Cada payload precisa de framing próprio.
+
+## Role alternation
+
+`AIAgent.steer()` deve continuar:
+
+- sem criar nova mensagem `role=user` mid-loop;
+- anexando ao último `role=tool`;
+- preservando tool results multimodais;
+- re-stash quando ainda não há tool result;
+- entregando `pending_steer` como um próximo turno exatamente uma vez se o run terminar antes da injeção.
+
+Nunca resolver mídia steer criando um user message sintético no meio do loop; isso quebra alternância e prompt caching.
+
+## Deduplicação/replay
+
+Discord usa dedup em memória por `message.id`, default TTL 300s e máximo 2000 IDs. A checagem ocorre antes do download, e thread starters são pré-semeados. Porém restart do processo ou replay após TTL pode executar novamente. Para side effects fortes, testar/considerar barreira durável `(platform, message_id)` antes de cache/steer.
+
+## Diagnóstico e rollout MGS
+
+1. Ler `display.busy_input_mode` no config vivo.
+2. Checar `busy_text_mode` e `HERMES_GATEWAY_BUSY_INPUT_MODE` quando presentes.
+3. Comparar live com `/root/mgs-agent/profiles/<agent>-config.yaml`.
+4. Confirmar valor resolvido com o Python do venv.
+5. Aplicar, quando solicitado:
 
 ```bash
 hermes -p <agent> config set display.busy_input_mode steer
 ```
 
-3. Atualizar o mirror versionado do mesmo agente para `steer`.
-4. Carregar YAML de todos os pares e exigir `4/4 live=steer` e `4/4 mirror=steer` antes do restart.
-5. Registrar audit log, atualizar `infra-inventory.json` e enviar REPORT-INFRA no canal dedicado; não colar o bloco na thread operacional.
-6. Reiniciar gateways com finalizer detached; agentes executores primeiro e Zeus por último. Nunca reiniciar Zeus em foreground durante tool calls.
-7. Fazer validação pós-restart: serviços `active/running`, novos timestamps/PIDs, config resolvida `steer`, ausência de traceback/OOM/auth failure recente.
-8. Fazer smoke funcional real: iniciar uma tarefa com ferramenta, enviar complemento durante a execução e confirmar uma única resposta final incorporando as duas mensagens.
+6. Atualizar mirror, registrar audit/infra e reiniciar de forma detached se o gateway não recarregar.
+7. Validar serviços e fazer smoke funcional real durante tool call ativa.
+
+## Testes obrigatórios
+
+1. Matriz adapter: imagem/voice/audio, com e sem caption.
+2. Busy steer: payload contém caption + todos os paths; nunca placeholder-only.
+3. Steer rejeitado: evento completo preservado na fila.
+4. Múltiplos/mistos: classificação por MIME individual.
+5. Consolidação: vários IDs preservados em ordem, uma resposta final, sem replay.
+6. Álbum: todos os paths/MIME/captions preservados.
+7. STT: `VOICE` transcrito, `AUDIO` comum não, igual em fresh/queue/steer; falha mantém path.
+8. Docker/remote: path abre no terminal, vision e transcription.
+9. Role alternation: só último tool result muda; multimodal preservado.
+10. Replay: mesmo ID não baixa/steera duas vezes; cobrir restart/TTL conforme política durável.
 
 ## Limites que devem ser explicados
 
-- Steer depende de haver um turno ativo e um próximo ponto seguro, normalmente após tool call.
-- Se o complemento chegar depois da resposta final, ele vira novo turno.
-- Se o agente ainda estiver iniciando ou a mensagem chegar depois do encerramento do turno, ela pode virar próximo turno; isso não se aplica a mídia recebida enquanto o turno já está ativo.
-- Steer melhora consolidação, mas não justifica prometer fusão absoluta em qualquer timing.
+- Steer depende de turno ativo e de próximo ponto seguro.
+- Se o complemento chegar depois da resposta final, vira novo turno.
+- Agente ainda iniciando pode exigir queue fallback.
+- Esses limites de timing não justificam perder mídia recebida enquanto o turno já está ativo.
 
 ## Pitfalls
 
-- Confundir “mid-turn steering é nativo” com “o profile está configurado em steer”.
-- Usar `queue` esperando consolidação; queue foi feito para separar turnos.
-- Usar `interrupt` para complementos e perder trabalho/tool calls em andamento.
-- Alterar só o live ou só o mirror, criando drift que reaparece em sync/update.
-- Declarar concluído após validar YAML, sem restart/runtime e sem smoke funcional.
-- Reiniciar todos os gateways em foreground a partir da conversa do Zeus.
+- Validar apenas texto e declarar multimedia steer pronto.
+- Chamar `queue` de consolidação.
+- Usar `interrupt` para complementos e destruir tool/subagent work.
+- Rodar o preprocessador completo com efeitos colaterais nos dois gates busy sem idempotência.
+- Consumir native-image buffers ou ecoar STT antes de saber se steer foi aceito.
+- Transcrever áudio comum apenas no caminho queued, mudando semântica por timing.
+- Atualizar só live ou só mirror.
+- Declarar concluído por YAML/test unitário sem smoke mid-turn real.

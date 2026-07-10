@@ -439,7 +439,7 @@ Pitfalls:
 
 Use quando o usuário disser que uma segunda mensagem enviada durante “digitando” só é processada depois da primeira resposta, ou quando quiser consolidar complementos no turno em andamento.
 
-Playbook detalhado de diagnóstico, rollout multiagente, restart e smoke funcional: `references/hermes-busy-input-steering-mgs.md`.
+Playbook detalhado de diagnóstico, rollout multiagente, restart e smoke funcional: `references/hermes-busy-input-steering-mgs.md`. A referência também mapeia o fluxo Discord end-to-end (`Attachment` → cache → `MessageEvent` → busy handler → `AIAgent.steer`), o gap de mídia quando só `event.text` é steered, o contrato de payload com paths agent-visible, nuances VOICE vs AUDIO/STT, role alternation, dedup/replay e a matriz de testes multimodais.
 
 Diagnóstico obrigatório no estado vivo:
 
