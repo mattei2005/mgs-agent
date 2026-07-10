@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T20:32:44-04:00",
+    "updated_at": "2026-07-09T21:10:53-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1427,6 +1427,20 @@
     },
     {
       "entry": "20 6 * * * flock -n /var/lock/dtr_sb_daily_match_audit.lock /root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh >> /root/mgs-agent/logs/dtr-sb-daily-match-audit-cron.log 2>&1"
+    },
+    {
+      "entry": "Hermes cron a91e39d6d353: every 5m, repeat 12, deliver discord:1522487422510694450, script utility-canary-approval-loop.sh, workdir /root/mgs-agent",
+      "id": "a91e39d6d353",
+      "name": "SB Utility canary approval loop — 1h extension",
+      "manager": "hermes-cron",
+      "schedule": "every 5m",
+      "repeat": "12 times",
+      "deliver": "discord:1522487422510694450",
+      "script": "utility-canary-approval-loop.sh",
+      "workdir": "/root/mgs-agent",
+      "created_at": "2026-07-09T21:10:53-04:00",
+      "status": "temporary-active",
+      "reason": "Rodolfo pediu rodar o loop Utility canary por mais 1 hora para tentar resolver os 2 templates restantes."
     }
   ],
   "scripts": [
