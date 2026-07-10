@@ -50,7 +50,9 @@ After installing/updating plugin on a site:
    - `!!window.jbftag === true`
    - keys include `requestRewardAds`, `showRewardedAds`, `displayManualInterstitial`
    - `googletag.pubads().getSlots()` shows only one rewarded preload slot (`..._rewarded/1`) unless Rodolfo/Ciro explicitly changes the contract.
+   - Multiple `/gampad/ads` requests can still appear with a single rewarded slot because the JBF wrapper/GAM auction may request several price rules/rebids. Do not call this duplicate plugin loading when raw HTML has one `gpt.js`, one wrapper script, and browser slots show only one rewarded slot.
    - clicking through the gate should not trap user; ad fallback may release chat.
+   - for card-mode CAR-BR flows, continue the real click path until the offer block renders; validate the expected offer cards/texts appear, not only the initial gate.
    - after top ad insertion/resizing, `chatBox.scrollHeight - chatBox.clientHeight - chatBox.scrollTop` should be near 0 so buttons remain visible.
    - Google ad iframes/safeframes indicate the stack executed, but no-fill/adblock may still prevent a visible ad.
 

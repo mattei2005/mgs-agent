@@ -113,4 +113,6 @@ Compare source static HTML vs generated page with counts and order, not just vis
 - expected ad hooks appear in either inline HTML or loaded frontend JS: `requestRewardAds`, `showRewardedAds`, `onInfinitePostLoaded`, `.ad-unit.ad`
 - browser runtime confirms `window.jbftag` methods exist
 - browser interaction reaches CTA and verifies ad/iframe behavior after the same click path
+- for cards-style chat funnels, advance through the actual question path until the card/offer block appears; the block rendering is part of validation, not just initial wrapper load
+- do not confuse JBF/GAM auction requests with duplicate stack loading: several `/gampad/ads` requests can be normal if HTML/runtime still show one `gpt.js`, one wrapper script, and one rewarded slot
 - check Cloudflare/APO cache separately; use cachebuster and bare URL to distinguish origin correctness from stale cached HTML
