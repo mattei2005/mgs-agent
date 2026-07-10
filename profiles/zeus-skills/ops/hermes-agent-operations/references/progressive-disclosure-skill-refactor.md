@@ -37,9 +37,31 @@ Auto-commit secret guards may classify filenames containing words such as `token
 - If an agent's modified custom category is not versioned, add a selective skill allowlist to `sync-souls.sh`, then validate live/mirror byte equality.
 - Run infrastructure discovery, append audit evidence, allow the normal auto-commit/push chain to finalize, and issue REPORT-INFRA according to MGS policy.
 
+## Linked-file index overhead
+
+`skill_view` does not return only `SKILL.md`: it recursively enumerates files under `references/`, `templates/`, `assets/`, and `scripts/` and includes the full `linked_files` index in the tool result. Reference explosion therefore has a context cost even when the main file is short.
+
+- Measure `main_chars + serialized linked_files chars`, not only `SKILL.md` size.
+- Prefer a small number of branch references in the 3–8K range over hundreds of tiny files.
+- Use second-level routers only for genuinely independent sub-branches.
+- When a skill already has a large historical library, keep the main routing links explicit and consider a runtime change that returns only explicitly linked files plus counts instead of the complete inventory.
+- Do not call a 3K router “lean” if its automatic linked-file index adds another 10K+ characters.
+
+## Full context audit beyond skills
+
+A complete context-efficiency audit must also measure, per profile:
+
+1. `SOUL.md` and stored `system_prompt` character sizes.
+2. Current/recent `last_prompt_tokens`, message counts, and tool-call counts.
+3. Tool-result characters by tool name, especially `skill_view`, `read_file`, `terminal`, and `session_search`.
+4. `tool_output.max_bytes`, `file_read_max_chars`, `agent.max_turns`, compression policy, and tool-loop hard-stop settings.
+5. Enabled/disabled toolsets, because every enabled model tool schema rides on every API call.
+6. Runtime evidence of which large skills are actually loaded; do not prioritize unused bundled skills over frequently loaded MGS skills.
+
 ## Completion criteria
 
 - Original content reconstructs exactly from references.
 - Main files are lean routers and all links resolve.
+- Reference-index overhead is measured and not excessive.
 - Every changed live skill has a byte-identical versioned mirror where required.
 - Backup, audit, inventory, Git state, and infrastructure report are accounted for.
