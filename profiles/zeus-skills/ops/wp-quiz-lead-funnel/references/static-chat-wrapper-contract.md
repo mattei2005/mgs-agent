@@ -47,6 +47,18 @@ If a WordPress plugin serves `/chat/...`, rendering with normal `wp_head()`/`wp_
 - `window.tags` before wrapper
 - same chat/ad trigger points as source HTML
 
+### Standalone tracking allowlist
+
+When Rodolfo explicitly asks to close/isolate a chat route again, do not capture `wp_head()`, `wp_body_open()`, or `wp_footer()` and then try to strip contaminants one by one. Use an explicit per-chat allowlist owned by the plugin/config:
+
+- `standalone: true` disables all three global WordPress hook captures for that route;
+- `gtm_container_id` loads the canonical GTM `<script>` in `<head>` and the matching `<noscript>` iframe immediately after `<body>`;
+- Google Analytics/GA4 should load through that GTM container, not through a second hardcoded `gtag.js` integration;
+- GPT and the site wrapper remain plugin-owned and each load exactly once;
+- do not hardcode a site container globally in shared plugin code—keep the container ID in the site/chat config.
+
+Validation for an isolated route must prove all of the following on live HTML/browser: one GTM container, Analytics `page_view` sent by the expected GA4 measurement ID, one GPT, one wrapper, zero `wp-includes`, zero theme assets, zero Yoast/CF7/WPCode pollution, chat gate works, rewarded slot count is correct, and offer cards render. A successful Cliquet canary used `GTM-K3V9CL5B`, whose published container loaded GA4 `G-499W6E48Z8`; treat these IDs as Cliquet-specific data, not shared defaults.
+
 ## Zuout / ActView exception
 
 `zuout.com/chat/car/br1/` does **not** use the Smart Bidding/JBF `assets.jbfdigital.com.br` wrapper. Its ad stack contract is ActView:
