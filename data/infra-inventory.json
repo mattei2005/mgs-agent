@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T23:26:58-04:00",
+    "updated_at": "2026-07-09T23:41:17-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1252,14 +1252,14 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
-      "size_bytes": 91536,
-      "modified_at": "2026-07-09T23:26:34-04:00",
-      "sha256": "27933477bfa776187dafe413f676809099c1d03a92c8d9623a09b2e2016d289b",
+      "size_bytes": 92699,
+      "modified_at": "2026-07-09T23:41:02-04:00",
+      "sha256": "47c9ce1532233884dc69babc0169df6ad6f49d6aaf2cd942957f10d1e0a95db6",
       "owner": "Zeus/Ops",
       "type": "skill",
-      "description": "Recorded single canonical paused Utility canary cron 5f4c56c2fc1f; reuse via pause/resume/update.",
-      "updated_at": "2026-07-09T23:26:58-04:00",
-      "source_report": "REPORT-INFRA Zeus canonical Utility canary cron creation 2026-07-09",
+      "description": "Scoped Utility production rollout rule: replace red/purple/gray slots only from same-vertical 20/20 canary bank; preserve green slots and destination links.",
+      "updated_at": "2026-07-09T23:41:17-04:00",
+      "source_report": "REPORT-INFRA Zeus Utility approved-bank linked-template rollout rule 2026-07-09",
       "skill": "smartbidding-dashboard-access",
       "notes": "Added LOGIN fallback requirement for final DTR↔SB audits after freshly-created SB rows exposed USER_LOGIN null."
     },
