@@ -1,8 +1,8 @@
 diff --git a/gateway/run.py b/gateway/run.py
-index 573d5c5..7bf0a10 100644
+index 497ea21..8470bd0 100644
 --- a/gateway/run.py
 +++ b/gateway/run.py
-@@ -4862,6 +4862,45 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+@@ -4882,6 +4882,52 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
              return overrides[resolved_session_key]
          return self._load_reasoning_config()
  
@@ -12,6 +12,8 @@ index 573d5c5..7bf0a10 100644
 +        *,
 +        source: Optional[SessionSource] = None,
 +        session_key: Optional[str] = None,
++        model: Optional[str] = None,
++        provider: Optional[str] = None,
 +    ) -> dict | None:
 +        """Resolve per-turn reasoning while preserving explicit session overrides."""
 +        resolved_session_key = session_key
@@ -33,6 +35,11 @@ index 573d5c5..7bf0a10 100644
 +        settings = cfg_get(cfg, "agent", "reasoning_auto_routing", default={})
 +        if not isinstance(settings, dict):
 +            return base_config
++        if settings.get("enabled") is True and (
++            str(provider or "").strip().lower() != "openai-codex"
++            or not str(model or "").strip().lower().startswith("gpt-5.6-")
++        ):
++            return base_config
 +
 +        from gateway.reasoning_router import route_reasoning_config
 +
@@ -48,7 +55,7 @@ index 573d5c5..7bf0a10 100644
      def _set_session_reasoning_override(
          self,
          session_key: str,
-@@ -13139,7 +13178,10 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+@@ -13363,7 +13409,12 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
  
              pr = self._provider_routing
              max_iterations = _current_max_iterations()
@@ -56,11 +63,13 @@ index 573d5c5..7bf0a10 100644
 +            reasoning_config = self._resolve_turn_reasoning_config(
 +                prompt,
 +                source=source,
++                model=model,
++                provider=runtime_kwargs.get("provider"),
 +            )
              self._reasoning_config = reasoning_config
              self._service_tier = self._load_service_tier()
              turn_route = self._resolve_turn_agent_config(prompt, model, runtime_kwargs)
-@@ -17907,7 +17949,8 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+@@ -18145,9 +18196,12 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
                  }
  
              pr = self._provider_routing
@@ -69,13 +78,17 @@ index 573d5c5..7bf0a10 100644
 +                message,
                  source=source,
                  session_key=session_key,
++                model=model,
++                provider=runtime_kwargs.get("provider"),
              )
+             self._reasoning_config = reasoning_config
+             self._service_tier = self._load_service_tier()
 diff --git a/gateway/reasoning_router.py b/gateway/reasoning_router.py
 new file mode 100644
-index 0000000..ff2e0e5
+index 0000000..e47c223
 --- /dev/null
 +++ b/gateway/reasoning_router.py
-@@ -0,0 +1,152 @@
+@@ -0,0 +1,171 @@
 +"""Deterministic per-turn reasoning-effort routing for Hermes gateways.
 +
 +The router is intentionally local and side-effect free: it does not make an
@@ -189,6 +202,22 @@ index 0000000..ff2e0e5
 +    return parsed if parsed is not None else fallback
 +
 +
++def _safe_threshold(
++    settings: Mapping[str, Any],
++    key: str,
++    default: int,
++) -> int:
++    """Parse a positive threshold and fail closed to the safe default."""
++    value = settings.get(key, default)
++    if isinstance(value, bool):
++        return default
++    try:
++        parsed = int(value)
++    except (TypeError, ValueError, OverflowError):
++        return default
++    return parsed if parsed > 0 else default
++
++
 +def route_reasoning_config(
 +    message: str,
 +    profile_default: dict | None,
@@ -214,13 +243,16 @@ index 0000000..ff2e0e5
 +    critical_effort = settings.get("critical_effort", "xhigh")
 +
 +    code_heavy = raw.count("\n") >= 20 or raw.count("```") >= 2
-+    long_payload = len(raw) >= int(settings.get("critical_char_threshold", 1200))
++    critical_char_threshold = _safe_threshold(
++        settings, "critical_char_threshold", 1200
++    )
++    long_payload = len(raw) >= critical_char_threshold
 +    critical_marker = any(marker in normalized for marker in _CRITICAL_MARKERS)
 +
 +    if critical_marker or code_heavy or long_payload:
 +        return _effort_config(critical_effort, profile_default)
 +
-+    simple_char_threshold = int(settings.get("simple_char_threshold", 180))
++    simple_char_threshold = _safe_threshold(settings, "simple_char_threshold", 180)
 +    if len(raw) <= simple_char_threshold and (
 +        normalized in _SIMPLE_EXACT
 +        or any(normalized.startswith(prefix) for prefix in _SIMPLE_PREFIXES)
@@ -230,10 +262,10 @@ index 0000000..ff2e0e5
 +    return _effort_config(default_effort, profile_default)
 diff --git a/tests/gateway/test_auto_reasoning_routing.py b/tests/gateway/test_auto_reasoning_routing.py
 new file mode 100644
-index 0000000..ef9111a
+index 0000000..1c383da
 --- /dev/null
 +++ b/tests/gateway/test_auto_reasoning_routing.py
-@@ -0,0 +1,115 @@
+@@ -0,0 +1,199 @@
 +from gateway.reasoning_router import route_reasoning_config
 +
 +
@@ -303,6 +335,25 @@ index 0000000..ef9111a
 +    ) == {"enabled": True, "effort": "high"}
 +
 +
++def test_invalid_thresholds_fall_back_without_raising():
++    invalid = {
++        **SETTINGS,
++        "simple_char_threshold": "oops",
++        "critical_char_threshold": None,
++    }
++
++    assert route_reasoning_config(
++        "oi",
++        {"enabled": True, "effort": "high"},
++        invalid,
++    ) == {"enabled": True, "effort": "medium"}
++    assert route_reasoning_config(
++        "x" * 1300,
++        {"enabled": True, "effort": "high"},
++        invalid,
++    ) == {"enabled": True, "effort": "xhigh"}
++
++
 +def test_gateway_turn_router_honors_explicit_session_override(monkeypatch):
 +    from gateway.run import GatewayRunner
 +
@@ -323,6 +374,8 @@ index 0000000..ef9111a
 +    result = runner._resolve_turn_reasoning_config(
 +        "o site está fora do ar",
 +        session_key="session-1",
++        model="gpt-5.6-sol",
++        provider="openai-codex",
 +    )
 +
 +    assert result == {"enabled": True, "effort": "medium"}
@@ -346,6 +399,69 @@ index 0000000..ef9111a
 +    result = runner._resolve_turn_reasoning_config(
 +        "o site está fora do ar",
 +        session_key="session-2",
++        model="gpt-5.6-sol",
++        provider="openai-codex",
 +    )
 +
 +    assert result == {"enabled": True, "effort": "xhigh"}
++
++
++def test_gateway_router_is_clamped_to_gpt56_codex(monkeypatch):
++    from gateway.run import GatewayRunner
++
++    runner = object.__new__(GatewayRunner)
++    runner._session_reasoning_overrides = {}
++    monkeypatch.setattr(
++        runner,
++        "_load_reasoning_config",
++        lambda: {"enabled": True, "effort": "high"},
++    )
++    monkeypatch.setattr(
++        "gateway.run._load_gateway_runtime_config",
++        lambda: {"agent": {"reasoning_auto_routing": SETTINGS}},
++    )
++
++    for model, provider in (
++        ("gpt-5.5", "openai-codex"),
++        ("gpt-5.6-sol", "openrouter"),
++    ):
++        assert runner._resolve_turn_reasoning_config(
++            "o site está fora do ar",
++            session_key="session-3",
++            model=model,
++            provider=provider,
++        ) == {"enabled": True, "effort": "high"}
++
++
++def test_reasoning_effort_does_not_change_prompt_cache_key():
++    from agent.transports.codex import ResponsesApiTransport
++
++    transport = ResponsesApiTransport()
++    common = {
++        "model": "gpt-5.6-sol",
++        "messages": [{"role": "user", "content": "confere o status"}],
++        "tools": [
++            {
++                "type": "function",
++                "function": {
++                    "name": "status",
++                    "parameters": {"type": "object"},
++                },
++            }
++        ],
++        "instructions": "system prompt estável",
++        "session_id": "session-cache-test",
++        "is_codex_backend": True,
++    }
++    medium = transport.build_kwargs(
++        **common,
++        reasoning_config={"enabled": True, "effort": "medium"},
++    )
++    xhigh = transport.build_kwargs(
++        **common,
++        reasoning_config={"enabled": True, "effort": "xhigh"},
++    )
++
++    assert medium["prompt_cache_key"] == xhigh["prompt_cache_key"]
++    assert medium["reasoning"]["effort"] == "medium"
++    assert xhigh["reasoning"]["effort"] == "xhigh"
