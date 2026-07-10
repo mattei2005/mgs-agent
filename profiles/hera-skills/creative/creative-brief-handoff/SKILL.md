@@ -281,7 +281,7 @@ MGS-CRIATIVOS/CAR_US_EN/VID/STORY/EN/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_0
 
 Não inserir `READY`, `TESTING`, `TESTED`, `WINNER` ou `REJECTED` no nome do arquivo. O status fica na pasta/inventário para evitar renomear o mesmo asset a cada mudança de status.
 
-`UPLOAD CANVAS` é bruto/original. Não apagar, não sobrescrever e não mover em massa sem plano aprovado.
+`UPLOAD CANVAS` / `UPLOAD MANUAL` é uma área de entrada, não arquivo permanente. Correção executiva de Rodolfo (2026-07-10): quando a ação operacional for **tratar/mover**, o arquivo-fonte deve sair da pasta de upload somente depois de a versão limpa estar verificada e presente no `01_READY` correto. Para preservar o bruto sem deixar falso backlog, mover o original para `{OPERAÇÃO}/{IMG|VID}/99_LEGACY`, mantendo ID/nome original e sem deletar. A pasta de upload deve conter apenas itens ainda pendentes. Exceção: manter na entrada somente quando Rodolfo/Kelly pedir explicitamente **copiar** ou **manter o original no upload**.
 
 Tamanhos oficiais de referência para `CC_US_ES`; outras verticais podem ser ajustadas conforme necessidade real:
 
