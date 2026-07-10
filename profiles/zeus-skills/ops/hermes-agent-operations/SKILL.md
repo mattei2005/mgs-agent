@@ -435,6 +435,31 @@ Pitfalls:
 - Não confundir com `approvals.cron_mode`; cron continua separado e deve permanecer `deny` salvo pedido explícito.
 - Não usar `/yolo` como solução permanente para agente MGS; `/yolo` é sessão/processo. Config de profile é a correção durável.
 
+## 5.1 Mensagens enviadas enquanto o agente está ocupado
+
+Use quando o usuário disser que uma segunda mensagem enviada durante “digitando” só é processada depois da primeira resposta, ou quando quiser consolidar complementos no turno em andamento.
+
+Diagnóstico obrigatório no estado vivo:
+
+1. Ler `display.busy_input_mode` no `config.yaml` do profile.
+2. Confirmar o valor resolvido com o Python do venv Hermes chamando `GatewayRunner._load_busy_input_mode()` e `_load_busy_text_mode()`.
+3. Não chamar mid-turn steering de “ativo” apenas porque o código `/steer` existe.
+
+Semântica:
+
+- `queue`: preserva a execução atual e processa a nova mensagem no turno seguinte; corresponde ao sintoma “espera terminar e depois responde”.
+- `interrupt`: interrompe/redireciona a execução atual; não garante uma resposta consolidada.
+- `steer`: injeta texto na execução em andamento após a próxima tool call, permitindo ajustar o trabalho e consolidar a resposta final. Se o agente ainda não iniciou, não houver nova tool call ou houver mídia, pode cair para fila/próximo turno.
+
+Para o comportamento “mandei um complemento enquanto estava digitando; incorpore e responda uma vez”, o modo correto é:
+
+```yaml
+display:
+  busy_input_mode: steer
+```
+
+Mudança de `config.yaml` é infra/config: só aplicar quando solicitada, validar o valor resolvido e seguir restart seguro se o gateway não recarregar a configuração automaticamente. Não prometer consolidação absoluta: uma mensagem que chega depois do final, ou tarde demais para outro tool boundary, vira próximo turno.
+
 ## 6. Session reset / manter contexto em threads
 
 Use quando Rodolfo perguntar sobre mensagens do Hermes como:
