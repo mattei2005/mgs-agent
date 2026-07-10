@@ -105,6 +105,14 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    skill-view-compact-linked-files.patch)
+      if grep -q "def _linked_files_for_view" "$REPO/tools/skills_tool.py" \
+        && grep -q '"linked_files_summary"' "$REPO/tools/skills_tool.py" \
+        && grep -q "test_view_compacts_large_linked_file_inventory" "$REPO/tests/tools/test_skills_tool.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     discord-thread-title-author-suffix.patch)
       if grep -q "_append_thread_author_suffix" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run.py"; then
@@ -144,6 +152,7 @@ apply_patch_if_needed "discord-report-infra-no-auto-thread.patch"
 apply_patch_if_needed "discord-thread-title-author-suffix.patch"
 apply_patch_if_needed "mgs-auto-reasoning-routing.patch"
 apply_patch_if_needed "mgs-busy-steer-universal-media-2026-07-10.patch"
+apply_patch_if_needed "skill-view-compact-linked-files.patch"
 
 # Invariants that must survive every Hermes update. If any grep fails, the
 # update is not production-safe for MGS gateways.
@@ -223,6 +232,12 @@ grep -q "for_mid_turn_steer" "$REPO/gateway/run.py" \
   || fail "missing MGS mid-turn media enrichment mode"
 grep -q "Image attached at:" "$REPO/gateway/run.py" \
   || fail "missing MGS mid-turn image path marker"
+grep -q "def _linked_files_for_view" "$REPO/tools/skills_tool.py" \
+  || fail "missing compact linked-files skill_view helper"
+grep -q '"linked_files_summary"' "$REPO/tools/skills_tool.py" \
+  || fail "missing compact linked-files summary result"
+grep -q "test_view_compacts_large_linked_file_inventory" "$REPO/tests/tools/test_skills_tool.py" \
+  || fail "missing compact linked-files regression tests"
 
 PYBIN="$REPO/venv/bin/python"
 [[ -x "$PYBIN" ]] || PYBIN="python3"
@@ -231,10 +246,12 @@ PYBIN="$REPO/venv/bin/python"
   "$REPO/gateway/run.py" \
   "$REPO/gateway/slash_commands.py" \
   "$REPO/gateway/reasoning_router.py" \
-  "$REPO/gateway/platforms/base.py"
+  "$REPO/gateway/platforms/base.py" \
+  "$REPO/tools/skills_tool.py"
 
 "$PYBIN" -m pytest -q \
   "$REPO/tests/gateway/test_busy_session_ack.py" \
-  "$REPO/tests/gateway/test_telegram_photo_interrupts.py"
+  "$REPO/tests/gateway/test_telegram_photo_interrupts.py" \
+  "$REPO/tests/tools/test_skills_tool.py"
 
 log "OK Hermes MGS patches present, py_compile and busy-steer tests passed"
