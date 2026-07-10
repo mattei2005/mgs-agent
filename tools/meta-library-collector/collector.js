@@ -163,7 +163,7 @@ async function main() {
       markers: {
         adLibrary: /Ad Library/i.test(text) || /ads\/library/i.test(html),
         libraryId: libraryIds.length > 0,
-        noResults: /No ads match|No results found|0\s+results?/i.test(text),
+        noResults: /No ads match|No results found/i.test(text),
         activeAds: /Active ads/i.test(text),
         loginPrompt: /Log in|Create new account/i.test(text),
         challenge: /__rd_verify|executeChallenge/i.test(html),
