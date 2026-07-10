@@ -518,6 +518,9 @@ final class MGS_Chat_Funnels {
         if (in_array($provider, array('m2', 'monetizemore', 'monetize-more'), true)) {
             return 'm2';
         }
+        if (in_array($provider, array('actview', 'zuout-actview'), true)) {
+            return 'actview';
+        }
         return 'jbf';
     }
 
@@ -527,6 +530,9 @@ final class MGS_Chat_Funnels {
         }
         if ($this->ad_provider($config) === 'm2') {
             return '<!-- MGS Chat Funnels: MonetizeMore/M2 mode. Rewarded ads trigger from .pg-rewarded buttons. -->' . "\n" . '<script type="text/javascript" async src="https://c.pubguru.net/pg.wantabrand.js"></script>';
+        }
+        if ($this->ad_provider($config) === 'actview') {
+            return "<link rel='preload' as='script' href='https://securepubads.g.doubleclick.net/tag/js/gpt.js' />" . "\n" . '<script async src="https://scr.actview.net/zuout.js"></script>';
         }
 
         $tags = isset($config['tags']) && is_array($config['tags']) ? array_values($config['tags']) : array();
