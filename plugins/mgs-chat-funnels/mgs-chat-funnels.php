@@ -889,26 +889,33 @@ final class MGS_Chat_Funnels {
         echo '</div></section>';
 
         echo '<section class="mgs-cf-section"><h3>3. Monetização e rastreamento</h3><div class="mgs-cf-fields mgs-cf-fields-compact">';
-        $this->field_text('Company do wrapper', 'ad_company', $config['ad_company'] ?? 'digital-trust', 'Ex: digital-trust. Usado apenas para montar a URL do wrapper.');
         $ad_domain_value = $this->clean_ad_slug($config['ad_domain'] ?? '', '');
         if ($ad_domain_value === '') {
             $ad_domain_value = $this->current_site_ad_slug();
         }
-        $this->field_text('Domain do wrapper', 'ad_domain', $ad_domain_value, 'Ex: openzed. Já vem preenchido com a slug do domínio atual.');
         $preview_config = array_merge($config, array(
             'ad_company' => $config['ad_company'] ?? 'digital-trust',
             'ad_domain' => $ad_domain_value,
         ));
-        if ($this->ad_provider($preview_config) === 'm2') {
-            $wrapper_preview = 'https://c.pubguru.net/pg.wantabrand.js';
-            $wrapper_label = 'Script M2/PubGuru carregado:';
-            $wrapper_help = 'No Wantabrand/M2, o trigger é a classe pg-rewarded e o bloco inline usa <pubguru data-pg-ad="wantabrand_mob_top">.';
+        $ad_provider_preview = $this->ad_provider($preview_config);
+        if ($ad_provider_preview === 'actview') {
+            echo '<input type="hidden" name="ad_company" value="' . esc_attr($config['ad_company'] ?? 'digital-trust') . '">';
+            echo '<input type="hidden" name="ad_domain" value="' . esc_attr($ad_domain_value) . '">';
+            echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>Provider de anúncios: ActView / Zuout</strong><br><code>https://scr.actview.net/zuout.js</code><br><small>Zuout é exceção operacional: não usa wrapper JBF no chat ActView. O bloco de topo é <code>#zout_top_wrapper</code> contendo <code>#zout_top</code>.</small></div>';
         } else {
-            $wrapper_preview = $this->ad_wrapper_url($preview_config);
-            $wrapper_label = 'Wrapper carregado:';
-            $wrapper_help = 'O plugin não configura auctions, rewarded ou interstitial. Isso fica 100% com o wrapper.';
+            $this->field_text('Company do wrapper', 'ad_company', $config['ad_company'] ?? 'digital-trust', 'Ex: digital-trust. Usado apenas para montar a URL do wrapper.');
+            $this->field_text('Domain do wrapper', 'ad_domain', $ad_domain_value, 'Ex: openzed. Já vem preenchido com a slug do domínio atual.');
+            if ($ad_provider_preview === 'm2') {
+                $wrapper_preview = 'https://c.pubguru.net/pg.wantabrand.js';
+                $wrapper_label = 'Script M2/PubGuru carregado:';
+                $wrapper_help = 'No Wantabrand/M2, o trigger é a classe pg-rewarded e o bloco inline usa <pubguru data-pg-ad="wantabrand_mob_top">.';
+            } else {
+                $wrapper_preview = $this->ad_wrapper_url($preview_config);
+                $wrapper_label = 'Wrapper carregado:';
+                $wrapper_help = 'O plugin não configura auctions, rewarded ou interstitial. Isso fica 100% com o wrapper.';
+            }
+            echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>' . esc_html($wrapper_label) . '</strong><br><code>' . esc_html($wrapper_preview ?: 'Preencha o domain para gerar a URL do wrapper.') . '</code><br><small>' . esc_html($wrapper_help) . '</small></div>';
         }
-        echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>' . esc_html($wrapper_label) . '</strong><br><code>' . esc_html($wrapper_preview ?: 'Preencha o domain para gerar a URL do wrapper.') . '</code><br><small>' . esc_html($wrapper_help) . '</small></div>';
         $this->field_checkbox('Página standalone (sem scripts globais do WordPress)', 'standalone', !empty($config['standalone']), 'Mantém somente o chat, GTM/Analytics e monetização configurados aqui.');
         $tracking_mode = $this->tracking_mode($config);
         $this->field_select('Modo de rastreamento', 'tracking_mode', $tracking_mode, array(
