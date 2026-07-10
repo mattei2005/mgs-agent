@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T20:04:48-04:00",
+    "updated_at": "2026-07-09T20:25:40-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1292,12 +1292,12 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/ops/rec-p1-wordpress-sheet-audit/SKILL.md",
-      "size_bytes": 7381,
-      "modified_at": "2026-07-09T20:53:09.432033+00:00",
-      "sha256": "b0cb2ba7437a47afc469620da3e7d740ef2da16b3263f85c25e544fa0afc10fb",
-      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with tag-class missing audit column, full tab clear, post-body-only CTA extraction, redirect/canonical P1 URL resolution, live post-ID REST tag verification, no blank internal tag cells, no duplicate P1 destination rows, and divergent CTA/button-link reporting.",
-      "validation": "Patched after Rodolfo clarified missing-tag audit should report generic classes (vertical/país/língua/rec-or-p1) without guessing exact expected values; applied column J across 4 tabs and validated exact readback/no blank J/A-Z preserved.",
-      "updated_at": "2026-07-09T19:47:19-04:00"
+      "size_bytes": 7624,
+      "modified_at": "2026-07-10T00:25:28.627747+00:00",
+      "sha256": "61bc376744aee9420e9a7d0d7a74232c54607d2f44f632a487a5818c182b89a9",
+      "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with authenticated yydev-show-pages inventory validation, tag-class missing audit column, full tab clear, post-body-only CTA extraction, canonical P1 URL resolution, live post-ID REST tag verification, no blank internal tag cells, no duplicate P1 destination rows, and divergent CTA/button-link reporting.",
+      "validation": "Patched after Rodolfo clarified yydev-show-pages requires logged-in WP Admin and is the 100% URL source; sitemap only fallback/proxy.",
+      "updated_at": "2026-07-09T20:25:40-04:00"
     }
   ],
   "systemd_services": [
