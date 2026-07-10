@@ -27,6 +27,7 @@ Mapa de agentes                         /root/mgs-agent/context/agent-map.md
 SOUL vivo do Ares                       /root/.hermes/profiles/ares/SOUL.md
 SOUL versionado do Ares                 /root/mgs-agent/profiles/ares-soul.md
 Skill umbrella aquisição                /root/mgs-agent/profiles/ares-skills/growth/paid-acquisition-operations/SKILL.md
+Tráfego direto CBO/UTM/SB/SMS          /root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md
 Taxonomia criativos                     /root/mgs-agent/profiles/ares-skills/growth/creative-taxonomy-mgs/SKILL.md
 Meta intraday                           /root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md
 Meta guardrails                         /root/mgs-agent/profiles/ares-skills/growth/meta-ads-governance-guardrails/SKILL.md
