@@ -430,8 +430,9 @@
       "name": "Validar rollout steer multimodal MGS",
       "schedule": "once at 2026-07-10T13:58:36-04:00",
       "purpose": "Validate 4/4 gateway restart, universal media steer runtime, guard tests, inventory, audit and REPORT-INFRA outside the active Discord restart thread.",
-      "status": "scheduled",
-      "updated_at": "2026-07-10T13:54:36-04:00"
+      "status": "completed_manual_recovery",
+      "validation": "The one-shot delivery was missed while Zeus was deactivating for 5 minutes; manual post-restart validation confirmed 4/4 active/running, 4/4 steer, runtime markers present, and patch guard 37 passed.",
+      "updated_at": "2026-07-10T14:14:15-04:00"
     },
     {
       "id": "mgs-busy-steer-universal-media-20260710",
@@ -451,9 +452,9 @@
         "hera"
       ],
       "purpose": "Make busy_input_mode=steer incorporate text, image, image+text, voice/audio, audio+text, video, documents and mixed attachments into the active run without next-turn replay.",
-      "validation": "current reverse apply OK; origin/main apply OK; origin/main 35 tests passed; live checkout 128 related tests passed; ruff and py_compile passed; patch guard passed",
-      "status": "pre_restart_validated",
-      "updated_at": "2026-07-10T13:47:40-04:00"
+      "validation": "current reverse apply OK; origin/main apply OK with 35 tests; live checkout 128 related tests; post-restart 4/4 active/running and 4/4 busy_input_mode=steer; runtime markers present; final patch guard 37 passed; ruff and py_compile passed",
+      "status": "deployed_validated",
+      "updated_at": "2026-07-10T14:14:15-04:00"
     },
     {
       "id": "mgs-busy-input-steer-validation-6a16e41afa9a",
