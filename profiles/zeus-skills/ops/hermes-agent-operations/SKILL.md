@@ -439,6 +439,8 @@ Pitfalls:
 
 Use quando o usuário disser que uma segunda mensagem enviada durante “digitando” só é processada depois da primeira resposta, ou quando quiser consolidar complementos no turno em andamento.
 
+Playbook detalhado de diagnóstico, rollout multiagente, restart e smoke funcional: `references/hermes-busy-input-steering-mgs.md`.
+
 Diagnóstico obrigatório no estado vivo:
 
 1. Ler `display.busy_input_mode` no `config.yaml` do profile.
