@@ -14,7 +14,14 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 
 `creditoparaveiculo.com` usa o plugin de quiz `mgs-quiz-carro`; não há plugin de chat nesse site. Quando Rodolfo disser “chat” informalmente sobre essas URLs, confirmar o produto real no runtime e tratar o pedido como quiz, sem envolver `mgs-chat-funnels`.
 
-Versão validada em produção em 2026-07-10: `mgs-quiz-carro` v1.6.1.
+Versão validada em produção em 2026-07-10: `mgs-quiz-carro` v1.6.2.
+
+Relatório de custo SMS v1.6.2:
+
+- A página `MGS Quiz > Relatório` calcula o custo estimado a partir de todas as linhas absorvidas pelo relatório/banco, respeitando os filtros ativos; não consulta nem reconcilia com o dashboard do SMS Funnel.
+- O custo é `8 centavos × total de registros filtrados`, com cálculo em centavos inteiros e exibição BRL fixa (`R$ 1.234,56`), independentemente do locale do WordPress.
+- O dashboard mostra cards de custo unitário e custo estimado total, além de uma tabela por quiz com nome, slug, registros absorvidos, custo unitário e custo estimado.
+- Status SMS, validade do telefone, duplicidade ou visibilidade no fornecedor não excluem linhas do cálculo. A métrica representa o que foi absorvido no relatório WordPress.
 
 Hardening operacional v1.6.1:
 

@@ -53,7 +53,8 @@ For MGS Hermes runtime, large support-file inventories use a compact `skill_view
 
 - Default mode is `auto`; inventories with more than 40 total linked files are compacted.
 - The main response keeps only file paths explicitly named in rendered `SKILL.md` content.
-- `linked_files_summary` reports deterministic totals, shown, and omitted counts by category.
+- `linked_files_summary` is emitted only when at least one file is actually omitted; small inventories and large fully referenced inventories preserve their previous response shape and ordering.
+- Normalize `\\` to `/` only for path matching so rendered Windows `${HERMES_SKILL_DIR}` references remain discoverable without rewriting returned paths.
 - Direct `skill_view(name, file_path=...)` reads are unchanged, including omitted files.
 - Omitted names remain discoverable on demand through `search_files(target='files', pattern='*.md', path=skill_dir)`.
 - Small inventories preserve the historical full-list response.
@@ -61,6 +62,15 @@ For MGS Hermes runtime, large support-file inventories use a compact `skill_view
 - Persist the runtime change as a selective Hermes patch and protect it with helper/result/test invariants in `ensure-hermes-mgs-patches.sh`.
 
 Required validation: unit tests for auto threshold, small-list compatibility, per-skill override, config rollback, and direct omitted-file access; then E2E profile loads for Zeus, Atena, Ares, and Hera.
+
+### Runtime rollout and persistence
+
+1. Back up only the runtime and test files in scope before editing.
+2. If the Hermes checkout already has unrelated local changes, generate the durable patch with a path-scoped diff for only the files changed by this feature; never capture the whole dirty worktree.
+3. Register the selective patch and its behavioral markers in `ensure-hermes-mgs-patches.sh`, including `py_compile` and the targeted regression suite.
+4. A live gateway must restart to import the changed Python module. Follow the safe-restart contract: send the clean user-facing status first, then schedule an external finalizer; restart Zeus last.
+5. REPORT-INFRA is fail-closed before activation. If 1Password/webhook resolution is temporarily rate-limited, an external finalizer may wait and retry, but it must not restart gateways until the report succeeds. Exhausted retries leave the code installed but inactive and record the failure in audit logs.
+6. Validate all gateway services from the external job; never foreground-poll the active Discord conversation through its own restart.
 
 ## Full context audit beyond skills
 
