@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T23:17:43-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-09T23:21:57-04:00",
+    "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
     {
@@ -1252,14 +1252,14 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
-      "size_bytes": 83189,
-      "modified_at": "2026-07-07T21:55:15-04:00",
-      "sha256": "683d3e90798bcc5d39d7aac8d50cd5679c1f0ec6c7171619b2997a4688802226",
+      "size_bytes": 90509,
+      "modified_at": "2026-07-09T23:21:29-04:00",
+      "sha256": "d773a53ace7bb3161e364db04117f58357227d1b142967dd27e257ff3e6b6f9b",
       "owner": "Zeus/Ops",
       "type": "skill",
-      "description": "SB Messenger Page creation workflow updated: gid=907050576 uses Scheduled Times 08:00 only; validate enums and readback.",
-      "updated_at": "2026-07-08T00:03:49-04:00",
-      "source_report": "REPORT-INFRA Zeus SB bulk page registration 2026-07-07",
+      "description": "Added completion safeguard: verify/remove the actual active Utility canary cron ID after TODOS VERDES; never trust legacy hardcoded ID in output.",
+      "updated_at": "2026-07-09T23:21:57-04:00",
+      "source_report": "REPORT-INFRA Zeus Utility canary cron completion safeguard 2026-07-09",
       "skill": "smartbidding-dashboard-access",
       "notes": "Added LOGIN fallback requirement for final DTR↔SB audits after freshly-created SB rows exposed USER_LOGIN null."
     },
