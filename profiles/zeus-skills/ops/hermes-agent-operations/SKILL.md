@@ -23,6 +23,8 @@ This skill is the entry point for Hermes operations on the MGS VPS. It intention
 
 Completion criterion: the model context contains only the rules and evidence needed for the current action; unrelated Hermes domains remain unloaded.
 
+For auditing and safely splitting monolithic agent skills while preserving content exactly, use `references/progressive-disclosure-skill-refactor.md`.
+
 ## Always-on operational rules
 
 - Inspect live state before answering or changing Hermes; do not rely on memory.
