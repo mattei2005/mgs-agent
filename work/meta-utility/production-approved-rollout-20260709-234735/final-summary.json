@@ -1,0 +1,26 @@
+{
+  "completed_at_et": "2026-07-10T00:03:03-04:00",
+  "status": "DEPLOYED_APPROVALS_TRIGGERED",
+  "targets": 42,
+  "linked_pages": 920,
+  "verticals": 11,
+  "problem_slots_replaced": 615,
+  "slots_added": 20,
+  "green_slots_preserved": 205,
+  "backups": 42,
+  "live_content_link_good": 42,
+  "live_content_link_bad": 0,
+  "approvals_ok": 42,
+  "approvals_total": 42,
+  "approval_http_statuses": {
+    "[202]": 42
+  },
+  "canary_sources_final": "11/11 templates 20/20 green",
+  "current_changed_templates_colors": {
+    "roxo": 59,
+    "verde": 249,
+    "cinza": 489,
+    "vermelho": 43
+  },
+  "note": "Approval counters are asynchronous and continue changing after HTTP 202."
+}
