@@ -83,8 +83,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/ducapes-finance---us-cc-en-en-sr---g001-d-icaro-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:00-04:00",
       "history": [
         {
@@ -126,6 +126,20 @@
           "after": 20,
           "pages": 1,
           "backup_json": "/root/mgs-agent/backups/sb-templates/ducapes-finance---us-cc-en-en-sr---g001-d-icaro-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 1,
+          "green_preserved": 9,
+          "non_green_replaced": 11,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/ducapes-finance---us-cc-en-en-sr---g001-d-icaro-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -156,7 +170,9 @@
         "[\"📍 address check\\n\\nWe need to confirm the delivery address linked to your credit card request.\\n\\nTap below to verify it.\",\"📍 verify address\",\"https://finance.ducapes.com/dp-f-us-cc-en-mct-015/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02",
         "[\"📦 package confirmation\\n\\nYour credit card package is marked ready for the next step.\\n\\nConfirm your delivery details below.\",\"✅ confirm package\",\"https://finance.ducapes.com/dp-f-us-cc-en-mct-015-2/?utm_source=mct&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Openzed - US-CC-EN/EN - AV - g001-d Icaro",
@@ -166,8 +182,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/openzed---us-cc-en-en---av---g001-d-icaro-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:02-04:00",
       "history": [
         {
@@ -209,6 +225,20 @@
           "after": 20,
           "pages": 8,
           "backup_json": "/root/mgs-agent/backups/sb-templates/openzed---us-cc-en-en---av---g001-d-icaro-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 8,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/openzed---us-cc-en-en---av---g001-d-icaro-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -224,18 +254,20 @@
         "[\"📦 status: held\\nYour pre approved card is waiting.\\nWe just need your delivery address confirmation.\",\"🚚 confirm address\",\"https://card.openzed.com/Bgp9Xtjq/?utm_source=facebook&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_term=openzed-us-cc-en-bd&utm_content=[utm_content]\"]": "2026-07-02",
         "[\"🔔 card status update\\n\\nYour card request has a new status ready.\\nOpen the update to review the next step and keep the process active.\",\"📥 open update\",\"https://card.openzed.com/Bgp9Xtjq/?utm_source=facebook&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_term=openzed-us-cc-en-bd&utm_content=[utm_content]\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Eggbev - US-CC-EN/EN-SR - g006-d Nicolas",
       "id": "691bbfd5-e13c-f552-4b39-3dedf76d15bf",
-      "pages": 100,
+      "pages": 102,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/eggbev---us-cc-en-en-sr---g006-d-nicolas-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T15:42-04:00",
       "history": [
         {
@@ -277,6 +309,20 @@
           "after": 20,
           "pages": 100,
           "backup_json": "/root/mgs-agent/backups/sb-templates/eggbev---us-cc-en-en-sr---g006-d-nicolas-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 102,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/eggbev---us-cc-en-en-sr---g006-d-nicolas-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -289,7 +335,9 @@
         "[\"✅ request confirmation\\n\\nYour request confirmation is ready.\\nReview the credit card details and complete it now.\",\"✅ complete now\",\"https://eggbev.com/eb-us-cc-en-mct-013/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-01",
         "[\"📋 request ready to review\\n\\nYour credit card request is ready to review.\\nCheck the information and complete the available step.\",\"📋 review now\",\"https://eggbev.com/eb-us-cc-en-mct-013-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-01"
       },
-      "last_analysis_date": "2026-07-01"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Infinitynexx - US-CC-EN/EN-SR - g004-d Joe",
@@ -382,8 +430,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/lyzmo---us-cc-en-en-sr---g006-d-nicolas-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T05:02-04:00",
       "history": [
         {
@@ -425,6 +473,20 @@
           "after": 20,
           "pages": 56,
           "backup_json": "/root/mgs-agent/backups/sb-templates/lyzmo---us-cc-en-en-sr---g006-d-nicolas-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 56,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/lyzmo---us-cc-en-en-sr---g006-d-nicolas-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -434,7 +496,9 @@
       ],
       "next_analysis_due_et": "2026-07-03T06:12-04:00",
       "gray_first_seen": {},
-      "last_analysis_date": "2026-07-01"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Marevelx - US-CC-EN/EN-SR - g001-d Icaro",
@@ -522,13 +586,13 @@
     {
       "name": "Newsoun - US-CC-EN/EN-SR - g005-d Kelly",
       "id": "01b78b7d-4417-771e-a07e-a0033785f561",
-      "pages": 41,
+      "pages": 54,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/newsoun---us-cc-en-en-sr---g005-d-kelly-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T07:26-04:00",
       "history": [
         {
@@ -570,6 +634,20 @@
           "after": 20,
           "pages": 41,
           "backup_json": "/root/mgs-agent/backups/sb-templates/newsoun---us-cc-en-en-sr---g005-d-kelly-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 54,
+          "green_preserved": 8,
+          "non_green_replaced": 12,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/newsoun---us-cc-en-en-sr---g005-d-kelly-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -579,18 +657,20 @@
       ],
       "next_analysis_due_et": "2026-07-03T08:09-04:00",
       "gray_first_seen": {},
-      "last_analysis_date": "2026-07-01"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Openzed - US-CC-EN/EN - AV - g003-d Isliago",
       "id": "672d8507-18b3-878d-bcad-8b3e8d84f93c",
-      "pages": 179,
+      "pages": 203,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/openzed---us-cc-en-en---av---g003-d-isliago-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T17:36-04:00",
       "history": [
         {
@@ -632,6 +712,20 @@
           "after": 20,
           "pages": 179,
           "backup_json": "/root/mgs-agent/backups/sb-templates/openzed---us-cc-en-en---av---g003-d-isliago-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 203,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/openzed---us-cc-en-en---av---g003-d-isliago-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -641,7 +735,9 @@
       ],
       "next_analysis_due_et": "2026-07-03T18:22-04:00",
       "gray_first_seen": {},
-      "last_analysis_date": "2026-07-01"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Financetopfeed - US-CC-EN/EN-SR - g004-d Joe",
@@ -651,8 +747,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/financetopfeed---us-cc-en-en-sr---g004-d-joe-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T10:11-04:00",
       "history": [
         {
@@ -694,6 +790,20 @@
           "after": 20,
           "pages": 26,
           "backup_json": "/root/mgs-agent/backups/sb-templates/financetopfeed---us-cc-en-en-sr---g004-d-joe-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 26,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/financetopfeed---us-cc-en-en-sr---g004-d-joe-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -703,18 +813,20 @@
       ],
       "next_analysis_due_et": "2026-07-03T13:48-04:00",
       "gray_first_seen": {},
-      "last_analysis_date": "2026-07-01"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Wavesbee - US-CC-EN/EN - YM - g003-d Isliago",
       "id": "672e5803-8f22-ce99-8bbc-27ee0a5147e9",
-      "pages": 0,
-      "active_target": 10,
+      "pages": 1,
+      "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/wavesbee---us-cc-en-en---ym---g003-d-isliago-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_10_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:00-04:00",
       "history": [
         {
@@ -756,6 +868,20 @@
           "after": 10,
           "pages": 0,
           "backup_json": "/root/mgs-agent/backups/sb-templates/wavesbee---us-cc-en-en---ym---g003-d-isliago-before-level-10-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 10,
+          "after": 20,
+          "pages": 1,
+          "green_preserved": 0,
+          "non_green_replaced": 10,
+          "messages_added": 10,
+          "source_canary": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/canary/wavesbee---us-cc-en-en---ym---g003-d-isliago-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -786,18 +912,20 @@
         "[\"✅ request confirmation\\n\\nYour request confirmation is ready.\\nReview the credit card details and complete it now.\",\"✅ complete now\",\"https://card.wavesbee.com/KhGcfxkD\"]": "2026-07-02",
         "[\"📋 request ready to review\\n\\nYour credit card request is ready to review.\\nCheck the information and complete the available step.\",\"📋 review now\",\"https://card.wavesbee.com/KhGcfxkD\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Zuout - US-CC-EN/EN - AV - g002-d Gustavo",
       "id": "672d84db-7fd7-33f4-8a85-606b00b18ab5",
-      "pages": 8,
+      "pages": 11,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/zuout---us-cc-en-en---av---g002-d-gustavo-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:36-04:00",
       "history": [
         {
@@ -839,6 +967,20 @@
           "after": 20,
           "pages": 8,
           "backup_json": "/root/mgs-agent/backups/sb-templates/zuout---us-cc-en-en---av---g002-d-gustavo-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 11,
+          "green_preserved": 9,
+          "non_green_replaced": 11,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/zuout---us-cc-en-en---av---g002-d-gustavo-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -869,18 +1011,20 @@
         "[\"📦 status: held\\nYour pre approved card is waiting.\\nWe just need your delivery address confirmation.\",\"🚚 confirm address\",\"https://card.zuout.com/KNKcHGXh?utm_source=facebook&utm_medium=g002-d&utm_campaign=[utm_campaign]&utm_term=zuout-us-cc-en-bd&utm_content=[utm_content]\"]": "2026-07-02",
         "[\"🔔 card status update\\n\\nYour card request has a new status ready.\\nOpen the update to review the next step and keep the process active.\",\"📥 open update\",\"https://card.zuout.com/KNKcHGXh?utm_source=facebook&utm_medium=g002-d&utm_campaign=[utm_campaign]&utm_term=zuout-us-cc-en-bd&utm_content=[utm_content]\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Zytiva - US-CC-EN/EN-SR - g003-d Isliago",
       "id": "691bbba5-527a-2a07-8be0-ec206960cbd0",
-      "pages": 65,
+      "pages": 74,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/zytiva---us-cc-en-en-sr---g003-d-isliago-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T05:28-04:00",
       "history": [
         {
@@ -937,6 +1081,20 @@
           "after": 20,
           "pages": 65,
           "backup_json": "/root/mgs-agent/backups/sb-templates/zytiva---us-cc-en-en-sr---g003-d-isliago-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 74,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/zytiva---us-cc-en-en-sr---g003-d-isliago-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -948,7 +1106,9 @@
       "gray_first_seen": {
         "[\"✅ request received\\n\\nYour credit card request was received successfully.\\nOne confirmation step is available before the next review.\",\"✅ confirm now\",\"https://zytiva.com/zy-us-cc-en-mct-005-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-01"
       },
-      "last_analysis_date": "2026-07-01"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-EN-Newsoun-Iona Brookfield-952051961334613-19225",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Conecta - US-CC-EN/EN-SR - g001-d Icaro",
@@ -1368,13 +1528,13 @@
     {
       "name": "Zytiva - GB-CC-EN/EN-SR - g003-d Isliago",
       "id": "69a9cd66-360a-6794-7372-594cd229eeb6",
-      "pages": 9,
+      "pages": 8,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/zytiva---gb-cc-en-en-sr---g003-d-isliago-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:00-04:00",
       "history": [
         {
@@ -1416,6 +1576,20 @@
           "after": 20,
           "pages": 9,
           "backup_json": "/root/mgs-agent/backups/sb-templates/zytiva---gb-cc-en-en-sr---g003-d-isliago-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 8,
+          "green_preserved": 12,
+          "non_green_replaced": 8,
+          "messages_added": 0,
+          "source_canary": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/zytiva---gb-cc-en-en-sr---g003-d-isliago-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -1438,7 +1612,9 @@
         "[\"✅ request confirmation\\n\\nYour request confirmation is ready.\\nReview the credit card details and complete it now.\",\"✅ complete now\",\"https://zytiva.com/zy-gb-cc-en-mct-019/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02",
         "[\"📋 request ready to review\\n\\nYour credit card request is ready to review.\\nCheck the information and complete the available step.\",\"📋 review now\",\"https://zytiva.com/zy-gb-cc-en-mct-020/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Openzed - GB-CC-EN/EN - AV - g003-d Isliago",
@@ -1448,8 +1624,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/openzed---gb-cc-en-en---av---g003-d-isliago-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:00-04:00",
       "history": [
         {
@@ -1491,6 +1667,20 @@
           "after": 20,
           "pages": 6,
           "backup_json": "/root/mgs-agent/backups/sb-templates/openzed---gb-cc-en-en---av---g003-d-isliago-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 6,
+          "green_preserved": 13,
+          "non_green_replaced": 7,
+          "messages_added": 0,
+          "source_canary": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/openzed---gb-cc-en-en---av---g003-d-isliago-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -1507,7 +1697,9 @@
         "[\"✅ request confirmation\\n\\nYour request confirmation is ready.\\nReview the credit card details and complete it now.\",\"✅ complete now\",\"https://card.openzed.com/vwNqDRdm/?utm_source=facebook&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_term=openzed-gb-cc-en-bd&utm_content=[utm_content]\"]": "2026-07-02",
         "[\"📋 request ready to review\\n\\nYour credit card request is ready to review.\\nCheck the information and complete the available step.\",\"📋 review now\",\"https://card.openzed.com/vwNqDRdm/?utm_source=facebook&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_term=openzed-gb-cc-en-bd&utm_content=[utm_content]\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Wantabrand - GB-CC-EN/EN - M2 - g001-d Icaro",
@@ -1600,8 +1792,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/newsoun---gb-cc-en-en-sr---g005-d-kelly-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:00-04:00",
       "history": [
         {
@@ -1643,6 +1835,20 @@
           "after": 20,
           "pages": 1,
           "backup_json": "/root/mgs-agent/backups/sb-templates/newsoun---gb-cc-en-en-sr---g005-d-kelly-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 1,
+          "green_preserved": 19,
+          "non_green_replaced": 1,
+          "messages_added": 0,
+          "source_canary": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/canary/newsoun---gb-cc-en-en-sr---g005-d-kelly-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -1665,7 +1871,9 @@
         "[\"✅ request confirmation\\n\\nYour request confirmation is ready.\\nReview the credit card details and complete it now.\",\"✅ complete now\",\"https://newsoun.com/ns-gb-cc-en-mct-019/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02",
         "[\"📋 request ready to review\\n\\nYour credit card request is ready to review.\\nCheck the information and complete the available step.\",\"📋 review now\",\"https://newsoun.com/ns-gb-cc-en-mct-020/?utm_source=mct&utm_medium=g005-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Financetopfeed - GB-CC-EN/EN-SR - g004-d Joe",
@@ -1675,8 +1883,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/financetopfeed---gb-cc-en-en-sr---g004-d-joe-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:00-04:00",
       "history": [
         {
@@ -1718,6 +1926,20 @@
           "after": 20,
           "pages": 1,
           "backup_json": "/root/mgs-agent/backups/sb-templates/financetopfeed---gb-cc-en-en-sr---g004-d-joe-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 1,
+          "green_preserved": 10,
+          "non_green_replaced": 10,
+          "messages_added": 0,
+          "source_canary": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/financetopfeed---gb-cc-en-en-sr---g004-d-joe-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -1740,7 +1962,9 @@
         "[\"🏠 home delivery option\\n\\nHome delivery is available for your credit card package.\\n\\nConfirm your address to move forward.\",\"🏠 confirm home\",\"https://finance.topfeed.fun/ftf-gb-cc-en-mct-002/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02",
         "[\"📦 ready for dispatch\\n\\nYour credit card package is ready for dispatch.\\n\\nConfirm the details so it can move forward.\",\"🚚 dispatch card\",\"https://finance.topfeed.fun/ftf-gb-cc-en-mct-003/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Lyzmo - GB-CC-EN/EN-SR - g006-d Nicolas",
@@ -1750,8 +1974,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/lyzmo---gb-cc-en-en-sr---g006-d-nicolas-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:00-04:00",
       "history": [
         {
@@ -1793,6 +2017,20 @@
           "after": 20,
           "pages": 2,
           "backup_json": "/root/mgs-agent/backups/sb-templates/lyzmo---gb-cc-en-en-sr---g006-d-nicolas-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 2,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/lyzmo---gb-cc-en-en-sr---g006-d-nicolas-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -1815,7 +2053,9 @@
         "[\"🟢 card request page\\n\\nYour credit card request page is available now.\\nReview the current information and follow the next step below.\",\"🟢 open request\",\"https://lyzmo.com/ly-gb-cc-en-mct-006/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02",
         "[\"📦 status: held\\nYour pre approved card is waiting.\\nWe just need your delivery address confirmation.\",\"🚚 confirm address\",\"https://lyzmo.com/ly-gb-cc-en-mct-007/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-GB-CC-EN-Zytiva-Sabrina Ellsworth-1179604071896296-22064",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Fincgriffin - GB-CC-EN/EN-SR - g006-d Nicolas",
@@ -2484,13 +2724,13 @@
     {
       "name": "Cliquet Finanzas - US-CC-ES/ES-ZW - AV - g002-d Gustavo",
       "id": "68884c57-b8c6-79cc-b9cd-351def6786a5",
-      "pages": 45,
+      "pages": 51,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/cliquet-finanzas---us-cc-es-es-zw---av---g002-d-gustavo-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T12:00-04:00",
       "history": [
         {
@@ -2532,6 +2772,20 @@
           "after": 20,
           "pages": 45,
           "backup_json": "/root/mgs-agent/backups/sb-templates/cliquet-finanzas---us-cc-es-es-zw---av---g002-d-gustavo-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 51,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/cliquet-finanzas---us-cc-es-es-zw---av---g002-d-gustavo-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -2541,18 +2795,20 @@
       ],
       "next_analysis_due_et": "2026-07-03T15:00-04:00",
       "gray_first_seen": {},
-      "last_analysis_date": "2026-07-01"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Zuout - US-CC-ES/ES-ZW - AV - g002-d Gustavo",
       "id": "68925ccb-335a-35e8-5471-5a52003c6560",
-      "pages": 32,
+      "pages": 37,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/zuout---us-cc-es-es-zw---av---g002-d-gustavo-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T06:32-04:00",
       "history": [
         {
@@ -2594,6 +2850,20 @@
           "after": 20,
           "pages": 32,
           "backup_json": "/root/mgs-agent/backups/sb-templates/zuout---us-cc-es-es-zw---av---g002-d-gustavo-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 37,
+          "green_preserved": 2,
+          "non_green_replaced": 18,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/zuout---us-cc-es-es-zw---av---g002-d-gustavo-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -2605,7 +2875,9 @@
       "gray_first_seen": {
         "[\"🟢 solicitud aún activa\\n\\nSu solicitud de tarjeta de crédito aún está activa.\\nComplete el siguiente paso disponible para mantener la revisión en movimiento.\",\"🟢 continuar\",\"https://tarjeta.zuout.com/lpszuout?utm_source=facebook&utm_medium=g002-d&utm_campaign=[utm_campaign]&utm_term=zuout-us-cc-es-bd&utm_content=[utm_content]\"]": "2026-07-01"
       },
-      "last_analysis_date": "2026-07-01"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Portal - US-CC-ES/ES-ZW - AV - g001-d Icaro",
@@ -2773,8 +3045,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/infinitynexx---us-cc-es-es-zw-sr---g004-d-joe-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:00-04:00",
       "history": [
         {
@@ -2816,6 +3088,20 @@
           "after": 20,
           "pages": 1,
           "backup_json": "/root/mgs-agent/backups/sb-templates/infinitynexx---us-cc-es-es-zw-sr---g004-d-joe-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 1,
+          "green_preserved": 18,
+          "non_green_replaced": 2,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/infinitynexx---us-cc-es-es-zw-sr---g004-d-joe-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -2846,7 +3132,9 @@
         "[\"🏠 opción de entrega a domicilio\\n\\nLa entrega a domicilio está disponible para su paquete de tarjeta de crédito.\\n\\nConfirma tu dirección para seguir adelante.\",\"🏠 confirmar domicilio\",\"https://infinitynexx.com/in-us-cc-es-mct-013/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02",
         "[\"📦 confirmación del paquete\\n\\nSu paquete de tarjeta de crédito está marcado como listo para el siguiente paso.\\n\\nConfirme los detalles de su entrega a continuación.\",\"✅ confirmar paquete\",\"https://infinitynexx.com/in-us-cc-es-mct-013-2/?utm_source=mct&utm_medium=g004-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Helixenit - US-CC-ES/ES-ZW-SR - g005-d Kelly",
@@ -3022,8 +3310,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/financetopfeed---us-cc-es-es-zw-sr---g004-d-joe-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T09:12-04:00",
       "history": [
         {
@@ -3065,6 +3353,20 @@
           "after": 20,
           "pages": 19,
           "backup_json": "/root/mgs-agent/backups/sb-templates/financetopfeed---us-cc-es-es-zw-sr---g004-d-joe-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 19,
+          "green_preserved": 1,
+          "non_green_replaced": 19,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/financetopfeed---us-cc-es-es-zw-sr---g004-d-joe-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -3074,7 +3376,9 @@
       ],
       "next_analysis_due_et": "2026-07-03T12:09-04:00",
       "gray_first_seen": {},
-      "last_analysis_date": "2026-07-01"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Ducapes - US-CC-ES/ES-ZW-SR - g001-d Icaro",
@@ -3167,8 +3471,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/zytivafinanzas---us-cc-es-es-zw-sr---g003-d-isliago-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T02:59-04:00",
       "history": [
         {
@@ -3210,6 +3514,20 @@
           "after": 20,
           "pages": 21,
           "backup_json": "/root/mgs-agent/backups/sb-templates/zytivafinanzas---us-cc-es-es-zw-sr---g003-d-isliago-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 21,
+          "green_preserved": 11,
+          "non_green_replaced": 9,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/zytivafinanzas---us-cc-es-es-zw-sr---g003-d-isliago-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -3222,7 +3540,9 @@
         "[\"📋 revisa tu solicitud\\n\\nSu solicitud de tarjeta de crédito está lista para su revisión.\\nAbra la página para verificar la información guardada para usted.\",\"📋 solicitud de revisión\",\"https://finanzas.zytiva.com/zy-us-cc-es-f-mct-005-2/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-01",
         "[\"🟢 solicitud aún activa\\n\\nSu solicitud de tarjeta de crédito aún está activa.\\nComplete el siguiente paso disponible para mantener la revisión en movimiento.\",\"🟢 continuar\",\"https://finanzas.zytiva.com/zy-us-cc-es-f-mct-006/?utm_source=mct&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-01"
       },
-      "last_analysis_date": "2026-07-01"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Lyzmo Finanzas - US-CC-ES/ES-ZW-SR - g006-d Nicolas",
@@ -3232,8 +3552,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/lyzmo-finanzas---us-cc-es-es-zw-sr---g006-d-nicolas-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:02-04:00",
       "history": [
         {
@@ -3275,6 +3595,20 @@
           "after": 20,
           "pages": 9,
           "backup_json": "/root/mgs-agent/backups/sb-templates/lyzmo-finanzas---us-cc-es-es-zw-sr---g006-d-nicolas-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 9,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/lyzmo-finanzas---us-cc-es-es-zw-sr---g006-d-nicolas-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -3305,7 +3639,9 @@
         "[\"📝 revisión de la solicitud\\n\\nLa revisión de su solicitud de tarjeta está disponible.\\nAbra la actualización para ver qué está listo y continúe.\",\"📝 iniciar revisión\",\"https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-003-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02",
         "[\"💼 acción del perfil listo\\n\\nTu perfil tiene una acción de tarjeta de crédito lista.\\nÁbrelo y completa el paso disponible para continuar.\",\"💼 acción completa\",\"https://finanzas.lyzmo.com/ly-f-us-cc-es-mct-004/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Eggbev Finanzas - US-CC-ES/ES-ZW - AV - g006-d Nicolas",
@@ -3315,8 +3651,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/eggbev-finanzas---us-cc-es-es-zw---av---g006-d-nicolas-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:00-04:00",
       "history": [
         {
@@ -3358,6 +3694,20 @@
           "after": 20,
           "pages": 9,
           "backup_json": "/root/mgs-agent/backups/sb-templates/eggbev-finanzas---us-cc-es-es-zw---av---g006-d-nicolas-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 9,
+          "green_preserved": 11,
+          "non_green_replaced": 9,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/eggbev-finanzas---us-cc-es-es-zw---av---g006-d-nicolas-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -3380,18 +3730,20 @@
         "[\"🏠 opción de entrega a domicilio\\n\\nLa entrega a domicilio está disponible para su paquete de tarjeta de crédito.\\n\\nConfirma tu dirección para seguir adelante.\",\"🏠 confirmar domicilio\",\"https://finanzas.eggbev.com/eb-f-us-cc-es-mct-013/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02",
         "[\"📦 confirmación del paquete\\n\\nSu paquete de tarjeta de crédito está marcado como listo para el siguiente paso.\\n\\nConfirme los detalles de su entrega a continuación.\",\"✅ confirmar paquete\",\"https://finanzas.eggbev.com/eb-f-us-cc-es-mct-013-2/?utm_source=mct&utm_medium=g006-d&utm_campaign=[utm_campaign]&utm_content=[utm_content]\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Newsoun - US-CC-ES/ES-ZW-SR - g005-d Kelly",
       "id": "69680bfc-98fe-d409-e2f9-66097fb50508",
-      "pages": 3,
+      "pages": 5,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/newsoun---us-cc-es-es-zw-sr---g005-d-kelly-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T02:11-04:00",
       "history": [
         {
@@ -3433,6 +3785,20 @@
           "after": 20,
           "pages": 3,
           "backup_json": "/root/mgs-agent/backups/sb-templates/newsoun---us-cc-es-es-zw-sr---g005-d-kelly-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 5,
+          "green_preserved": 16,
+          "non_green_replaced": 4,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/newsoun---us-cc-es-es-zw-sr---g005-d-kelly-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -3442,18 +3808,20 @@
       ],
       "next_analysis_due_et": "2026-07-03T02:52-04:00",
       "gray_first_seen": {},
-      "last_analysis_date": "2026-07-01"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Wantabrand - US-CC-ES/ES-ZW - M2 - g001-d Icaro",
       "id": "69825de4-32a5-de3d-e342-61e445ecc0fe",
-      "pages": 0,
-      "active_target": 10,
+      "pages": 1,
+      "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/wantabrand---us-cc-es-es-zw---m2---g001-d-icaro-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_10_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:00-04:00",
       "history": [
         {
@@ -3495,6 +3863,20 @@
           "after": 10,
           "pages": 0,
           "backup_json": "/root/mgs-agent/backups/sb-templates/wantabrand---us-cc-es-es-zw---m2---g001-d-icaro-before-level-10-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 10,
+          "after": 20,
+          "pages": 1,
+          "green_preserved": 0,
+          "non_green_replaced": 10,
+          "messages_added": 10,
+          "source_canary": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/canary/wantabrand---us-cc-es-es-zw---m2---g001-d-icaro-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -3525,7 +3907,9 @@
         "[\"🏠 opción de entrega a domicilio\\n\\nLa entrega a domicilio está disponible para su paquete de tarjeta de crédito.\\n\\nConfirma tu dirección para seguir adelante.\",\"🏠 confirmar domicilio\",\"https://tarjeta.wantabrand.com/y8p2xGQM/?utm_source=facebook&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_term=wantabrand-us-cc-es-bd&utm_content=[utm_content]\"]": "2026-07-02",
         "[\"📦 confirmación del paquete\\n\\nSu paquete de tarjeta de crédito está marcado como listo para el siguiente paso.\\n\\nConfirme los detalles de su entrega a continuación.\",\"✅ confirmar paquete\",\"https://tarjeta.wantabrand.com/y8p2xGQM/?utm_source=facebook&utm_medium=g001-d&utm_campaign=[utm_campaign]&utm_term=wantabrand-us-cc-es-bd&utm_content=[utm_content]\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Openzed - US-CC-ES/ES-ZW - AV - g003-d Isliago",
@@ -3535,8 +3919,8 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/openzed---us-cc-es-es-zw---av---g003-d-isliago-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T09:20-04:00",
       "history": [
         {
@@ -3578,6 +3962,20 @@
           "after": 20,
           "pages": 88,
           "backup_json": "/root/mgs-agent/backups/sb-templates/openzed---us-cc-es-es-zw---av---g003-d-isliago-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 88,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/openzed---us-cc-es-es-zw---av---g003-d-isliago-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -3587,7 +3985,9 @@
       ],
       "next_analysis_due_et": "2026-07-03T15:34-04:00",
       "gray_first_seen": {},
-      "last_analysis_date": "2026-07-01"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-US-CC-ES-Newsoun-Carla Ramírez-873273395865880-13992",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Wavesbee - US-CC-ES/ES-ZW - YM - g003-d Isliago",
@@ -4505,13 +4905,13 @@
     {
       "name": "Openzed - ES-CC-ES/ES-ZW - AV - g003-d Isliago",
       "id": "69d3d82b-0d2e-de79-2a0f-51bff1f66c81",
-      "pages": 13,
+      "pages": 12,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/openzed---es-cc-es-es-zw---av---g003-d-isliago-before-reduce10-20260630-210044.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "next_due_et": "2026-07-02T01:04-04:00",
       "history": [
         {
@@ -4553,6 +4953,20 @@
           "after": 20,
           "pages": 13,
           "backup_json": "/root/mgs-agent/backups/sb-templates/openzed---es-cc-es-es-zw---av---g003-d-isliago-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 12,
+          "green_preserved": 10,
+          "non_green_replaced": 10,
+          "messages_added": 0,
+          "source_canary": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/canary/openzed---es-cc-es-es-zw---av---g003-d-isliago-before.json"
         }
       ],
       "last_added_date": "2026-07-02",
@@ -4569,7 +4983,9 @@
         "[\"📦 actualización de envío\\n\\nSu paquete de tarjeta de crédito está esperando una confirmación final antes del envío.\\n\\nRevisa tu información aquí.\",\"📦 revisar información\",\"https://tarjeta.openzed.com/tP6kwCw3?utm_source=facebook&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_term=openzed-es-cc-es-bd&utm_content=[utm_content]\"]": "2026-07-02",
         "[\"✅ confirmación del paso de la tarjeta\\n\\nEl paso de su tarjeta está listo para su confirmación.\\nComplételo ahora para continuar con la solicitud.\",\"✅ confirmar paso\",\"https://tarjeta.openzed.com/tP6kwCw3?utm_source=facebook&utm_medium=g003-d&utm_campaign=[utm_campaign]&utm_term=openzed-es-cc-es-bd&utm_content=[utm_content]\"]": "2026-07-02"
       },
-      "last_analysis_date": "2026-07-02"
+      "last_analysis_date": "2026-07-10",
+      "approved_source_template": "Teste-ES-CC-ES-Openzed-Elena Santana-990898360783030-22091",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Financeadx - AR-CC-ES/ES-ZW-SR - g006-d Nicolas",
@@ -4579,9 +4995,9 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/financeadx---ar-cc-es-es-zw-sr---g006-d-nicolas-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -4604,20 +5020,36 @@
           "after": 20,
           "pages": 1,
           "backup_json": "/root/mgs-agent/backups/sb-templates/financeadx---ar-cc-es-es-zw-sr---g006-d-nicolas-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 1,
+          "green_preserved": 1,
+          "non_green_replaced": 19,
+          "messages_added": 0,
+          "source_canary": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/canary/financeadx---ar-cc-es-es-zw-sr---g006-d-nicolas-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-AR-CC-ES-Financeadx-Teresa Camacho-1063903433472026-19337",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Financeadx - CA-CC-EN/EN-SR - g006-d Nicolas",
       "id": null,
-      "pages": 8,
+      "pages": 7,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/financeadx---ca-cc-en-en-sr---g006-d-nicolas-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -4640,20 +5072,36 @@
           "after": 20,
           "pages": 8,
           "backup_json": "/root/mgs-agent/backups/sb-templates/financeadx---ca-cc-en-en-sr---g006-d-nicolas-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 7,
+          "green_preserved": 6,
+          "non_green_replaced": 14,
+          "messages_added": 0,
+          "source_canary": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/canary/financeadx---ca-cc-en-en-sr---g006-d-nicolas-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-CA-CC-EN-Financeadx-Varya Stonebridge-1102378912948290-22028",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Financeadx - MX-CC-ES/ES-ZW-SR - g006-d Nicolas",
       "id": null,
-      "pages": 9,
+      "pages": 8,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/financeadx---mx-cc-es-es-zw-sr---g006-d-nicolas-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -4676,20 +5124,36 @@
           "after": 20,
           "pages": 9,
           "backup_json": "/root/mgs-agent/backups/sb-templates/financeadx---mx-cc-es-es-zw-sr---g006-d-nicolas-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 8,
+          "green_preserved": 4,
+          "non_green_replaced": 16,
+          "messages_added": 0,
+          "source_canary": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/financeadx---mx-cc-es-es-zw-sr---g006-d-nicolas-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Financeadx - ZA-CC-EN/EN-SR - g006-d Nicolas",
       "id": null,
-      "pages": 4,
+      "pages": 3,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/financeadx---za-cc-en-en-sr---g006-d-nicolas-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -4712,8 +5176,24 @@
           "after": 20,
           "pages": 4,
           "backup_json": "/root/mgs-agent/backups/sb-templates/financeadx---za-cc-en-en-sr---g006-d-nicolas-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 3,
+          "green_preserved": 8,
+          "non_green_replaced": 12,
+          "messages_added": 0,
+          "source_canary": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/canary/financeadx---za-cc-en-en-sr---g006-d-nicolas-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-ZA-CC-EN-Financeadx-Margaret Smith-699254556615476-5459",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Fincgriffin - TR-CC-TR/TR-SR -  g006-d Nicolas",
@@ -4863,9 +5343,9 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g001-d-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -4888,8 +5368,24 @@
           "after": 20,
           "pages": 1,
           "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g001-d-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 1,
+          "green_preserved": 9,
+          "non_green_replaced": 11,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/canary/fincgriffin---us-car-en-en---jbf---g001-d-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Fincgriffin - US-CAR-EN/EN - JBF - g002-d",
@@ -4899,9 +5395,9 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g002-d-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -4924,8 +5420,24 @@
           "after": 20,
           "pages": 1,
           "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g002-d-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 1,
+          "green_preserved": 9,
+          "non_green_replaced": 11,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/fincgriffin---us-car-en-en---jbf---g002-d-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Fincgriffin - US-CAR-EN/EN - JBF - g003-d",
@@ -4971,9 +5483,9 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g004-d-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -4996,8 +5508,24 @@
           "after": 20,
           "pages": 1,
           "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g004-d-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 1,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/fincgriffin---us-car-en-en---jbf---g004-d-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Fincgriffin - US-CAR-EN/EN - JBF - g005-d",
@@ -5007,9 +5535,9 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g005-d-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -5032,8 +5560,24 @@
           "after": 20,
           "pages": 1,
           "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g005-d-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 1,
+          "green_preserved": 9,
+          "non_green_replaced": 11,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/fincgriffin---us-car-en-en---jbf---g005-d-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Fincgriffin - US-CAR-EN/EN - JBF - g006-d",
@@ -5043,9 +5587,9 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g006-d-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -5068,8 +5612,24 @@
           "after": 20,
           "pages": 1,
           "backup_json": "/root/mgs-agent/backups/sb-templates/fincgriffin---us-car-en-en---jbf---g006-d-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 1,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/fincgriffin---us-car-en-en---jbf---g006-d-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-US-CAR-EN-Fincgriffin-Trust Car Offers-1033507496517692-22079",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Helixenit - DE-CC-DE/DE-SR - g005-d Kelly",
@@ -5079,9 +5639,9 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/helixenit---de-cc-de-de-sr---g005-d-kelly-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -5104,8 +5664,24 @@
           "after": 20,
           "pages": 1,
           "backup_json": "/root/mgs-agent/backups/sb-templates/helixenit---de-cc-de-de-sr---g005-d-kelly-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 1,
+          "green_preserved": 7,
+          "non_green_replaced": 13,
+          "messages_added": 0,
+          "source_canary": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/canary/helixenit---de-cc-de-de-sr---g005-d-kelly-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Helixenit - MX-CC-ES/ES-ZW-SR - g005-d Kelly",
@@ -5115,9 +5691,9 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/helixenit---mx-cc-es-es-zw-sr---g005-d-kelly-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -5140,8 +5716,24 @@
           "after": 20,
           "pages": 5,
           "backup_json": "/root/mgs-agent/backups/sb-templates/helixenit---mx-cc-es-es-zw-sr---g005-d-kelly-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 5,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/canary/helixenit---mx-cc-es-es-zw-sr---g005-d-kelly-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Infinitynexx - MX-CC-ES/ES-ZW-SR - g004-d Joe",
@@ -5151,9 +5743,9 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/infinitynexx---mx-cc-es-es-zw-sr---g004-d-joe-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -5176,8 +5768,24 @@
           "after": 20,
           "pages": 7,
           "backup_json": "/root/mgs-agent/backups/sb-templates/infinitynexx---mx-cc-es-es-zw-sr---g004-d-joe-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 7,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/infinitynexx---mx-cc-es-es-zw-sr---g004-d-joe-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-MX-CC-ES-Financeadx-Carolina Cruz-1025593570646416-19333",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Marevelx - DE-CC-DE/DE-SR - g001-d Icaro",
@@ -5187,9 +5795,9 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/marevelx---de-cc-de-de-sr---g001-d-icaro-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -5212,20 +5820,36 @@
           "after": 20,
           "pages": 6,
           "backup_json": "/root/mgs-agent/backups/sb-templates/marevelx---de-cc-de-de-sr---g001-d-icaro-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 6,
+          "green_preserved": 3,
+          "non_green_replaced": 17,
+          "messages_added": 0,
+          "source_canary": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/marevelx---de-cc-de-de-sr---g001-d-icaro-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Newsoun - DE-CC-DE/DE-SR - g005-d Kelly",
       "id": null,
-      "pages": 19,
+      "pages": 18,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/newsoun---de-cc-de-de-sr---g005-d-kelly-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -5248,8 +5872,24 @@
           "after": 20,
           "pages": 19,
           "backup_json": "/root/mgs-agent/backups/sb-templates/newsoun---de-cc-de-de-sr---g005-d-kelly-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 18,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/newsoun---de-cc-de-de-sr---g005-d-kelly-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Portal - US-CC-EN/EN - AV - g001-d Icaro",
@@ -5310,14 +5950,14 @@
     {
       "name": "Spe - US-JOB-ES/ES-ZW - AV - g006-d Nicolas",
       "id": null,
-      "pages": 4,
+      "pages": 10,
       "active_target": 20,
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/spe---us-job-es-es-zw---av---g006-d-nicolas-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -5340,8 +5980,24 @@
           "after": 20,
           "pages": 4,
           "backup_json": "/root/mgs-agent/backups/sb-templates/spe---us-job-es-es-zw---av---g006-d-nicolas-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 10,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/canary/spe---us-job-es-es-zw---av---g006-d-nicolas-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-US-JOB-ES-Spe-Maria Tisocco-177067078834007-8283",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     },
     {
       "name": "Vizioid - MX-CC-ES/ES-ZW-SR - g002-d Gustavo",
@@ -5379,9 +6035,9 @@
       "max_target": 20,
       "source_bank_json": "/root/mgs-agent/backups/sb-templates/xyvlov---de-cc-de-de-sr---g003-d-isliago-before-utility10-20260702-010933.json",
       "last_increment_date": "2026-07-02",
-      "last_action_date": "2026-07-02",
-      "last_analysis_date": "2026-07-02",
-      "last_action": "manual_level_to_20_by_pages",
+      "last_action_date": "2026-07-10",
+      "last_analysis_date": "2026-07-10",
+      "last_action": "approved_bank_non_green_rollout",
       "last_added_date": "2026-07-02",
       "last_added_range": [
         1,
@@ -5404,8 +6060,24 @@
           "after": 20,
           "pages": 42,
           "backup_json": "/root/mgs-agent/backups/sb-templates/xyvlov---de-cc-de-de-sr---g003-d-isliago-before-level-20-20260702-024813.json"
+        },
+        {
+          "date": "2026-07-10",
+          "at": "2026-07-10T00:00:26-04:00",
+          "action": "approved_bank_non_green_rollout",
+          "run_id": "production-approved-rollout-20260709-234735",
+          "before": 20,
+          "after": 20,
+          "pages": 42,
+          "green_preserved": 0,
+          "non_green_replaced": 20,
+          "messages_added": 0,
+          "source_canary": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+          "backup_json": "/root/mgs-agent/work/meta-utility/production-approved-rollout-20260709-234735/backups/rest/xyvlov---de-cc-de-de-sr---g003-d-isliago-before.json"
         }
-      ]
+      ],
+      "approved_source_template": "Teste-DE-CC-DE-Newsoun-Ramona Dreher-1029582290242361-19329",
+      "last_rollout_run_id": "production-approved-rollout-20260709-234735"
     }
   ],
   "hold_active_target": 20,
@@ -5416,5 +6088,6 @@
   "purple_policy": "do_not_touch_globally; investigate page/segurador/app/block cause; controlled single-template test only",
   "alert_channel_templates_broadcast": "1522487422510694450",
   "last_text_sanitization_et": "2026-07-03T14:16:40-04:00",
-  "last_text_sanitization_rule": "Removed {{first_name}} and hyphen/dash chars from TEXT only for linked-template workflow; CTAs/links untouched."
+  "last_text_sanitization_rule": "Removed {{first_name}} and hyphen/dash chars from TEXT only for linked-template workflow; CTAs/links untouched.",
+  "updated_at_et": "2026-07-10T00:00:26-04:00"
 }
