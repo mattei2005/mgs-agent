@@ -1,0 +1,432 @@
+diff --git a/gateway/run.py b/gateway/run.py
+--- a/gateway/run.py
++++ b/gateway/run.py
+@@ -5333,6 +5333,49 @@
+ 
+         self._enqueue_fifo(session_key, event, adapter)
+ 
++    async def _prepare_busy_steer_payload(
++        self,
++        event: MessageEvent,
++        session_key: str,
++    ) -> str:
++        """Normalize any busy follow-up into the text-only steer channel.
++
++        Text-only events remain byte-for-byte compatible with stock steer.
++        Events carrying images, voice/audio, video, documents, or mixed
++        attachments run through the normal inbound enrichment pipeline in its
++        mid-turn mode, so captions/transcripts and cached paths reach the
++        active run exactly once instead of replaying as a later turn.
++        """
++        raw_text = (event.text or "").strip()
++        if not (getattr(event, "media_urls", None) or []):
++            return raw_text
++
++        try:
++            prepared = await self._prepare_inbound_message_text(
++                event=event,
++                source=event.source,
++                history=[],
++                session_key=session_key,
++                for_mid_turn_steer=True,
++            )
++            payload = (prepared or "").strip()
++            if payload:
++                return payload
++        except Exception as exc:
++            logger.warning(
++                "Busy steer media enrichment failed for session %s; using path placeholders: %s",
++                session_key,
++                exc,
++            )
++
++        # Do not demote an authorized MGS media follow-up to queue solely
++        # because enrichment failed. Preserve its caption and every cached path
++        # so the active agent can still inspect the files with tools.
++        media_placeholder = _build_media_placeholder(event).strip()
++        return "\n\n".join(
++            part for part in (raw_text, media_placeholder) if part
++        ).strip()
++
+     async def _handle_active_session_busy_message(self, event: MessageEvent, session_key: str) -> bool:
+         # --- Authorization gate (#17775) ---
+         # The cold path (_handle_message) checks _is_user_authorized before
+@@ -5519,7 +5562,7 @@
+             effective_mode = "queue"
+         steered = False
+         if effective_mode == "steer":
+-            steer_text = (event.text or "").strip()
++            steer_text = await self._prepare_busy_steer_payload(event, session_key)
+             can_steer = (
+                 steer_text
+                 and running_agent is not None
+@@ -9586,7 +9629,10 @@
+                     f"mid-turn. Wait for the current response or `/stop` first."
+                 )
+ 
+-            if event.message_type == MessageType.PHOTO:
++            if (
++                event.message_type == MessageType.PHOTO
++                and self._busy_input_mode != "steer"
++            ):
+                 logger.debug("PRIORITY photo follow-up for session %s — queueing without interrupt", _quick_key)
+                 adapter = self._adapter_for_source(source)
+                 if adapter:
+@@ -9654,10 +9700,10 @@
+                 self._queue_or_replace_pending_event(_quick_key, event)
+                 return None
+             if self._busy_input_mode == "steer":
+-                # Steer mode: inject text into the running agent mid-run via
+-                # agent.steer().  Falls back to queue semantics if the payload
+-                # is empty, the agent lacks steer(), or steer() rejects.
+-                steer_text = (event.text or "").strip()
++                # Normalize text + media into the running agent's text-only
++                # OOB channel. Fall back to queue only if the agent is
++                # unavailable or rejects the normalized payload.
++                steer_text = await self._prepare_busy_steer_payload(event, _quick_key)
+                 steered = False
+                 if steer_text and hasattr(running_agent, "steer"):
+                     try:
+@@ -10461,6 +10507,7 @@
+         source: SessionSource,
+         history: List[Dict[str, Any]],
+         session_key: Optional[str] = None,
++        for_mid_turn_steer: bool = False,
+     ) -> Optional[str]:
+         """Prepare inbound event text for the agent.
+ 
+@@ -10474,6 +10521,13 @@
+         ``run_conversation`` site to build a multimodal user turn. When the
+         list is empty, the ``_enrich_message_with_vision`` text path has
+         already run and images are represented in-text.
++
++        ``for_mid_turn_steer`` keeps every attachment representable inside an
++        already-running text-only steer channel. Images become trusted local
++        path markers (so the agent can call ``vision_analyze`` on the next
++        iteration) instead of being buffered as native image parts for a new
++        user turn. Voice audio still follows the normal STT path; other media
++        keeps the same path-pointing context notes as a normal inbound turn.
+         """
+         history = history or []
+         message_text = event.text or ""
+@@ -10484,8 +10538,11 @@
+         # to deriving it here for tests and legacy standalone callers.
+         session_key = session_key or self._session_key_for_source(source)
+         # Reset only this session's per-call buffer; other sessions may be
+-        # concurrently preparing multimodal turns on the same runner.
+-        self._consume_pending_native_image_paths(session_key)
++        # concurrently preparing multimodal turns on the same runner. A
++        # mid-turn steer cannot attach a new native image part, so it must not
++        # disturb the active turn's native-image buffer.
++        if not for_mid_turn_steer:
++            self._consume_pending_native_image_paths(session_key)
+ 
+         _is_shared_multi_user = is_shared_multi_user_session(
+             source,
+@@ -10531,32 +10588,49 @@
+                     video_paths.append(path)
+ 
+             if image_paths:
+-                # Decide routing: native (attach pixels) vs text (vision_analyze
+-                # pre-run + prepend description).  See agent/image_routing.py.
+-                _img_mode = self._decide_image_input_mode(
+-                    source=source,
+-                    session_key=session_key,
+-                )
+-                if _img_mode == "native":
+-                    # Defer attachment to the run_conversation call site.
+-                    pending_native = getattr(self, "_pending_native_image_paths_by_session", None)
+-                    if pending_native is None:
+-                        pending_native = {}
+-                        self._pending_native_image_paths_by_session = pending_native
+-                    pending_native[session_key] = list(image_paths)
+-                    logger.info(
+-                        "Image routing: native (model supports vision). %d image(s) will be attached inline.",
+-                        len(image_paths),
++                if for_mid_turn_steer:
++                    # AIAgent.steer() is text-only to preserve role
++                    # alternation. Keep every cached image as an explicit path
++                    # marker so the active agent can call vision_analyze after
++                    # the steer lands in the next tool result.
++                    from tools.credential_files import to_agent_visible_cache_path as _to_agent_path
++                    for _ipath in image_paths:
++                        _agent_path = (
++                            _ipath
++                            if str(_ipath).startswith(("http://", "https://"))
++                            else _to_agent_path(_ipath)
++                        )
++                        message_text = (
++                            f"{message_text}\n\n[Image attached at: {_agent_path}]"
++                        ).strip()
++                else:
++                    # Decide routing: native (attach pixels) vs text
++                    # (vision_analyze pre-run + prepend description). See
++                    # agent/image_routing.py.
++                    _img_mode = self._decide_image_input_mode(
++                        source=source,
++                        session_key=session_key,
+                     )
+-                else:
+-                    logger.info(
+-                        "Image routing: text (mode=%s). Pre-analyzing %d image(s) via vision_analyze.",
+-                        _img_mode, len(image_paths),
+-                    )
+-                    message_text = await self._enrich_message_with_vision(
+-                        message_text,
+-                        image_paths,
+-                    )
++                    if _img_mode == "native":
++                        # Defer attachment to the run_conversation call site.
++                        pending_native = getattr(self, "_pending_native_image_paths_by_session", None)
++                        if pending_native is None:
++                            pending_native = {}
++                            self._pending_native_image_paths_by_session = pending_native
++                        pending_native[session_key] = list(image_paths)
++                        logger.info(
++                            "Image routing: native (model supports vision). %d image(s) will be attached inline.",
++                            len(image_paths),
++                        )
++                    else:
++                        logger.info(
++                            "Image routing: text (mode=%s). Pre-analyzing %d image(s) via vision_analyze.",
++                            _img_mode, len(image_paths),
++                        )
++                        message_text = await self._enrich_message_with_vision(
++                            message_text,
++                            image_paths,
++                        )
+ 
+             if audio_paths:
+                 message_text, _successful_transcripts = await self._enrich_message_with_transcription(
+diff --git a/tests/gateway/test_busy_session_ack.py b/tests/gateway/test_busy_session_ack.py
+--- a/tests/gateway/test_busy_session_ack.py
++++ b/tests/gateway/test_busy_session_ack.py
+@@ -37,7 +37,14 @@
+ # Helpers
+ # ---------------------------------------------------------------------------
+ 
+-def _make_event(text="hello", chat_id="123", platform_val="telegram"):
++def _make_event(
++    text="hello",
++    chat_id="123",
++    platform_val="telegram",
++    message_type=MessageType.TEXT,
++    media_urls=None,
++    media_types=None,
++):
+     """Build a minimal MessageEvent."""
+     source = SessionSource(
+         platform=MagicMock(value=platform_val),
+@@ -47,9 +54,11 @@
+     )
+     evt = MessageEvent(
+         text=text,
+-        message_type=MessageType.TEXT,
++        message_type=message_type,
+         source=source,
+         message_id="msg1",
++        media_urls=list(media_urls or []),
++        media_types=list(media_types or []),
+     )
+     return evt
+ 
+@@ -302,6 +311,144 @@
+         assert "Interrupting" not in content
+ 
+     @pytest.mark.asyncio
++    async def test_steer_mode_includes_image_caption_and_cached_path_without_replay(self, monkeypatch):
++        """Image + text must enter the active run, not fall back to queue."""
++        import gateway.run as _gr
++
++        monkeypatch.delenv("HERMES_GATEWAY_BUSY_STEER_ACK_ENABLED", raising=False)
++        monkeypatch.setattr(_gr, "_load_gateway_config", lambda: {})
++        runner, _sentinel = _make_runner()
++        runner._busy_input_mode = "steer"
++        runner._pending_native_image_paths_by_session = {"keep": ["/tmp/original.png"]}
++        adapter = _make_adapter(platform_val="discord")
++
++        event = _make_event(
++            text="confere isso junto com o pedido",
++            platform_val="discord",
++            message_type=MessageType.PHOTO,
++            media_urls=["/tmp/followup.webp"],
++            media_types=["image/webp"],
++        )
++        sk = build_session_key(event.source)
++        runner.adapters[event.source.platform] = adapter
++
++        agent = MagicMock()
++        agent.steer = MagicMock(return_value=True)
++        runner._running_agents[sk] = agent
++
++        await runner._handle_active_session_busy_message(event, sk)
++
++        payload = agent.steer.call_args.args[0]
++        assert "confere isso junto com o pedido" in payload
++        assert "[Image attached at: /tmp/followup.webp]" in payload
++        assert sk not in adapter._pending_messages
++        assert runner._pending_native_image_paths_by_session == {
++            "keep": ["/tmp/original.png"]
++        }
++        agent.interrupt.assert_not_called()
++
++    @pytest.mark.asyncio
++    async def test_steer_mode_includes_image_without_caption(self, monkeypatch):
++        """Image-only follow-ups retain a usable cached path in the active run."""
++        import gateway.run as _gr
++
++        monkeypatch.delenv("HERMES_GATEWAY_BUSY_STEER_ACK_ENABLED", raising=False)
++        monkeypatch.setattr(_gr, "_load_gateway_config", lambda: {})
++        runner, _sentinel = _make_runner()
++        runner._busy_input_mode = "steer"
++        adapter = _make_adapter(platform_val="discord")
++
++        event = _make_event(
++            text="(The user sent a message with no text content)",
++            platform_val="discord",
++            message_type=MessageType.PHOTO,
++            media_urls=["/tmp/image-only.png"],
++            media_types=["image/png"],
++        )
++        sk = build_session_key(event.source)
++        runner.adapters[event.source.platform] = adapter
++
++        agent = MagicMock()
++        agent.steer = MagicMock(return_value=True)
++        runner._running_agents[sk] = agent
++
++        await runner._handle_active_session_busy_message(event, sk)
++
++        payload = agent.steer.call_args.args[0]
++        assert "[Image attached at: /tmp/image-only.png]" in payload
++        assert sk not in adapter._pending_messages
++
++    @pytest.mark.asyncio
++    async def test_steer_mode_transcribes_voice_with_caption_in_active_run(self, monkeypatch):
++        """Voice + text uses STT before steering and is never replayed."""
++        import gateway.run as _gr
++
++        monkeypatch.delenv("HERMES_GATEWAY_BUSY_STEER_ACK_ENABLED", raising=False)
++        monkeypatch.setattr(_gr, "_load_gateway_config", lambda: {})
++        runner, _sentinel = _make_runner()
++        runner._busy_input_mode = "steer"
++        runner._should_echo_stt_transcripts = lambda: False
++        runner._enrich_message_with_transcription = AsyncMock(
++            return_value=("considera este áudio também\n\n[Voice transcript: ajuste o prazo]", ["ajuste o prazo"])
++        )
++        adapter = _make_adapter(platform_val="discord")
++
++        event = _make_event(
++            text="considera este áudio também",
++            platform_val="discord",
++            message_type=MessageType.VOICE,
++            media_urls=["/tmp/voice.ogg"],
++            media_types=["audio/ogg"],
++        )
++        sk = build_session_key(event.source)
++        runner.adapters[event.source.platform] = adapter
++
++        agent = MagicMock()
++        agent.steer = MagicMock(return_value=True)
++        runner._running_agents[sk] = agent
++
++        await runner._handle_active_session_busy_message(event, sk)
++
++        payload = agent.steer.call_args.args[0]
++        assert "considera este áudio também" in payload
++        assert "Voice transcript: ajuste o prazo" in payload
++        runner._enrich_message_with_transcription.assert_awaited_once()
++        assert sk not in adapter._pending_messages
++
++    @pytest.mark.asyncio
++    async def test_steer_mode_includes_audio_file_path_with_text(self, monkeypatch):
++        """Uploaded audio + text keeps the file path inside the active run."""
++        import gateway.run as _gr
++
++        monkeypatch.delenv("HERMES_GATEWAY_BUSY_STEER_ACK_ENABLED", raising=False)
++        monkeypatch.setattr(_gr, "_load_gateway_config", lambda: {})
++        runner, _sentinel = _make_runner()
++        runner._busy_input_mode = "steer"
++        adapter = _make_adapter(platform_val="discord")
++
++        event = _make_event(
++            text="usa esse arquivo na análise",
++            platform_val="discord",
++            message_type=MessageType.AUDIO,
++            media_urls=["/tmp/song.m4a"],
++            media_types=["audio/mp4"],
++        )
++        sk = build_session_key(event.source)
++        runner.adapters[event.source.platform] = adapter
++
++        agent = MagicMock()
++        agent.steer = MagicMock(return_value=True)
++        runner._running_agents[sk] = agent
++
++        await runner._handle_active_session_busy_message(event, sk)
++
++        payload = agent.steer.call_args.args[0]
++        assert "usa esse arquivo na análise" in payload
++        assert "audio file attachment" in payload
++        assert "/tmp/song.m4a" in payload
++        assert sk not in adapter._pending_messages
++
++    @pytest.mark.asyncio
+     async def test_steer_mode_can_suppress_visible_ack_without_disabling_steer(self, monkeypatch):
+         """busy_steer_ack_enabled=false keeps steering but drops the echo bubble."""
+         import gateway.run as _gr
+diff --git a/tests/gateway/test_telegram_photo_interrupts.py b/tests/gateway/test_telegram_photo_interrupts.py
+--- a/tests/gateway/test_telegram_photo_interrupts.py
++++ b/tests/gateway/test_telegram_photo_interrupts.py
+@@ -1,4 +1,4 @@
+-from unittest.mock import MagicMock
++from unittest.mock import AsyncMock, MagicMock
+ 
+ import pytest
+ 
+@@ -46,3 +46,45 @@
+     assert result is None
+     running_agent.interrupt.assert_not_called()
+     assert runner.adapters[Platform.TELEGRAM]._pending_messages[session_key] is event
++
++
++@pytest.mark.asyncio
++async def test_handle_message_priority_photo_steers_when_configured(monkeypatch):
++    """PHOTO follow-ups must not bypass steer and fall into the media queue."""
++    runner = _make_runner()
++    runner._busy_input_mode = "steer"
++    runner._busy_text_mode = "interrupt"
++    runner._draining = False
++    runner._running_agents_ts = {}
++    runner._prepare_busy_steer_payload = AsyncMock(
++        return_value="caption\n\n[Image attached at: /tmp/photo-a.jpg]"
++    )
++
++    source = SessionSource(
++        platform=Platform.TELEGRAM,
++        chat_id="12345",
++        chat_type="dm",
++        user_id="u1",
++    )
++    session_key = build_session_key(source)
++    running_agent = MagicMock()
++    running_agent.steer = MagicMock(return_value=True)
++    runner._running_agents[session_key] = running_agent
++
++    event = MessageEvent(
++        text="caption",
++        message_type=MessageType.PHOTO,
++        source=source,
++        media_urls=["/tmp/photo-a.jpg"],
++        media_types=["image/jpeg"],
++    )
++
++    result = await runner._handle_message(event)
++
++    assert result is None
++    runner._prepare_busy_steer_payload.assert_awaited_once_with(event, session_key)
++    running_agent.steer.assert_called_once_with(
++        "caption\n\n[Image attached at: /tmp/photo-a.jpg]"
++    )
++    running_agent.interrupt.assert_not_called()
++    assert session_key not in runner.adapters[Platform.TELEGRAM]._pending_messages
