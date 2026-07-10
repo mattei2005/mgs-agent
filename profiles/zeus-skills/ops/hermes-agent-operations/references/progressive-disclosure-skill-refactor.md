@@ -47,6 +47,21 @@ Auto-commit secret guards may classify filenames containing words such as `token
 - When a skill already has a large historical library, keep the main routing links explicit and consider a runtime change that returns only explicitly linked files plus counts instead of the complete inventory.
 - Do not call a 3K router “lean” if its automatic linked-file index adds another 10K+ characters.
 
+## Compact linked-files runtime contract
+
+For MGS Hermes runtime, large support-file inventories use a compact `skill_view` response:
+
+- Default mode is `auto`; inventories with more than 40 total linked files are compacted.
+- The main response keeps only file paths explicitly named in rendered `SKILL.md` content.
+- `linked_files_summary` reports deterministic totals, shown, and omitted counts by category.
+- Direct `skill_view(name, file_path=...)` reads are unchanged, including omitted files.
+- Omitted names remain discoverable on demand through `search_files(target='files', pattern='*.md', path=skill_dir)`.
+- Small inventories preserve the historical full-list response.
+- Instant rollback: set `skills.linked_files_mode: full` in profile config, or `metadata.hermes.linked_files_mode: full` for one skill. `compact` can force the behavior on a small skill.
+- Persist the runtime change as a selective Hermes patch and protect it with helper/result/test invariants in `ensure-hermes-mgs-patches.sh`.
+
+Required validation: unit tests for auto threshold, small-list compatibility, per-skill override, config rollback, and direct omitted-file access; then E2E profile loads for Zeus, Atena, Ares, and Hera.
+
 ## Full context audit beyond skills
 
 A complete context-efficiency audit must also measure, per profile:
