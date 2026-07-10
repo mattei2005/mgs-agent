@@ -45,6 +45,18 @@ A code/UI change can be common, but site configs are never neutral. In any rollo
    - public routes (`/chat/car/br1`, `/chat/emp/br1` when expected)
 5. If Rodolfo asks to validate first, deploy canary to the named site only, commonly `eggbev.com`, and stop for validation before broad rollout.
 
+### Provider-specific rollout preflight
+
+A common `MGS Chat Funnels` package must preserve every active monetization branch before broad rollout. Audit the plugin source and every `configs/*.json` per target; provider can differ between chats on the same site.
+
+- **JBF / digital-trust:** preserve `gpt.js`, `window.tags` and exactly one `{company}_{ad_domain}.builder.js`.
+- **Zuout / ActView:** preserve `ad_provider: actview`, `https://scr.actview.net/zuout.js`, the `av-rewarded` CTA contract and the `#zout_top_wrapper > #zout_top` top slot. A canonical package that only recognizes `jbf` and `m2` will silently convert Zuout to JBF and is not safe to deploy.
+- **Wantabrand / M2-PubGuru:** preserve `ad_provider: m2`, `https://c.pubguru.net/pg.wantabrand.js`, `pg-rewarded` and the M2 top-slot contract. Any request for “todos os sites” requires explicit confirmation to include or exclude Wantabrand.
+
+For standalone/tracking rollout, add only the operational keys needed by each chat (`standalone`, `tracking_mode`, `gtm_container_id`, `ga4_measurement_id`). Never copy a canary JSON over another site. Validate both CAR and EMP independently because wrapper/provider/domain can differ inside one WordPress installation.
+
+Before production deployment, merge all required provider branches into one canonical version and run focused renderer tests for JBF, ActView and M2. Then use one canary per provider, followed by the remaining sites only after runtime validation confirms: HTTP 200, one GTM source, one GA4 `page_view`, one provider loader/wrapper, no unrelated WordPress assets and a working rewarded/chat flow.
+
 ## Validation checklist
 
 - PHP lint passes: `php -l mgs-chat-funnels.php`.
