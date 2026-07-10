@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T22:21:39-04:00",
+    "updated_at": "2026-07-09T22:53:20-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1442,6 +1442,20 @@
       "status": "removed",
       "reason": "Rodolfo mandou parar o cron temporário Utility canary.",
       "removed_at": "2026-07-09T22:21:39-04:00"
+    },
+    {
+      "entry": "Hermes cron ce865343afbe: every 5m, repeat 96, deliver discord:1522487422510694450, script utility-canary-approval-loop.sh, workdir /root/mgs-agent",
+      "id": "ce865343afbe",
+      "name": "SB Utility canary approval loop — 8h extension",
+      "manager": "hermes-cron",
+      "schedule": "every 5m",
+      "repeat": "96 times",
+      "deliver": "discord:1522487422510694450",
+      "script": "utility-canary-approval-loop.sh",
+      "workdir": "/root/mgs-agent",
+      "created_at": "2026-07-09T22:53:20-04:00",
+      "status": "temporary-active",
+      "reason": "Rodolfo pediu ligar o loop Utility canary por mais 8 horas para tentar fechar os templates restantes antes do rollout."
     }
   ],
   "scripts": [
