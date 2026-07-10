@@ -21,6 +21,26 @@ if ! flock -n 9; then
   exit 75
 fi
 
+cleanup_stale_listener() {
+  local port="$1" expected="$2" pids pid comm
+  pids="$(fuser "${port}/tcp" 2>/dev/null || true)"
+  for pid in $pids; do
+    comm="$(ps -p "$pid" -o comm= 2>/dev/null | xargs || true)"
+    if [[ "$comm" == "$expected" ]]; then
+      kill "$pid" 2>/dev/null || true
+    else
+      echo "Porta ${port} ocupada por processo inesperado (${comm:-desconhecido}, PID ${pid}); sessão visual não iniciada." >&2
+      exit 76
+    fi
+  done
+}
+
+# Se uma sessão anterior morreu sem executar o trap, limpe apenas listeners
+# conhecidos. O lock já foi adquirido, então não há sessão canônica ativa.
+cleanup_stale_listener "$VNC_PORT" x11vnc
+cleanup_stale_listener "$NOVNC_PORT" websockify
+sleep 1
+
 cleanup() {
   set +e
   [[ -n "${X11VNC_PID:-}" ]] && kill "$X11VNC_PID" 2>/dev/null
