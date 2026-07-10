@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T19:53:44-04:00",
-    "generated_by": "zeus-drive-auth-watchdog-fix"
+    "updated_at": "2026-07-09T20:04:48-04:00",
+    "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
     {
@@ -850,13 +850,13 @@
       "agent": "zeus",
       "path": "/home/runcloud/webapps/zuout/wp-content/plugins/mgs-chat-funnels/templates/ciro-index-template.html",
       "type": "wordpress_plugin_template",
-      "sha256": "5ece07fd40ce40ad9b3aa50ea6f7141d9968f459edcac31497309dca3b3600ff",
-      "size_bytes": 34183,
+      "sha256": "2adbfc95241cce4ad03623b7e67f411bf955f1adca49bb9371697569dbc0915d",
+      "size_bytes": 35297,
       "source": "RunCloud Inc01 zuout.com",
-      "purpose": "Template exposes window.mgsCloseQuizAfterReward before click and disables generic 1200ms timeout for av-rewarded CTA.",
-      "validation": "PHP lint OK; public HTML has <a id=aq-cta class=av-rewarded role=button tabindex=0 onclick=window.mgsCloseQuizAfterReward...> with no href and no data-av-rewarded. Browser: CTA has no href/prophref, rewarded GAM request present, click keeps URL unchanged and closes quiz via callback when no rewarded fill is ready.",
-      "backup_path": "/home/runcloud/webapps/zuout/wp-content/mgs-chat-funnels-actview-rewarded-click-backup-20260709-194004",
-      "updated_at": "2026-07-09T19:45:53-04:00"
+      "purpose": "Zuout chat funnel template. ActView rewarded CTA registers rewardedSlotClosed for zout_rewarded and closes underlying quiz after user closes Google rewarded overlay.",
+      "validation": "Public HTML contains rewardedSlotClosed listener, click-in-progress flag, class-only av-rewarded CTA without href/data-av. Browser: rewarded request present, callback function exists, no-fill click closes quiz and URL stays unchanged.",
+      "backup_path": "/home/runcloud/webapps/zuout/wp-content/mgs-chat-funnels-rewarded-close-backup-20260709-200245",
+      "updated_at": "2026-07-09T20:04:48-04:00"
     },
     {
       "id": "cliquet-mgs-chat-funnels-no-duplicate-wrapper-20260709",
@@ -1278,14 +1278,14 @@
       "agent": "zeus",
       "type": "skill_reference",
       "path": "/root/.hermes/profiles/zeus/skills/ops/wp-quiz-lead-funnel/references/static-chat-wrapper-contract.md",
-      "size_bytes": 8269,
-      "modified_at": "2026-07-09T19:45:13-04:00",
-      "sha256": "fe64dc6ba71e3c98d326ffd4a44422c1bc8e451a91adb23d6259c88cd52b6ea4",
+      "size_bytes": 9033,
+      "modified_at": "2026-07-09T20:04:14-04:00",
+      "sha256": "772645459bba06e21e2d4db8a0d5d8188327cc1d4e49eb156fd651f306e1c253",
       "purpose": "Static chat ad-wrapper contracts for MGS quiz/chat funnels, including JBF/SB, Wantabrand M2, and Zuout ActView exception/admin UI/rewarded CTA handling.",
-      "validation": "Updated ActView rewarded contract: class-only CTA omits href/data-av; exposes window.mgsCloseQuizAfterReward callback before click; no generic timeout for av-rewarded.",
-      "updated_at": "2026-07-09T19:45:53-04:00",
+      "validation": "Updated ActView rewarded contract: register rewardedSlotClosed listener for zout_rewarded; close underlying quiz when Google rewarded overlay is closed with X; keep click-in-progress guard.",
+      "updated_at": "2026-07-09T20:04:48-04:00",
       "skill": "wp-quiz-lead-funnel",
-      "source_report": "REPORT-INFRA Zeus Zuout ActView rewarded click fix 2026-07-09"
+      "source_report": "REPORT-INFRA Zeus Zuout rewarded X-close fix 2026-07-09"
     },
     {
       "id": "zeus:rec-p1-wordpress-sheet-audit",
