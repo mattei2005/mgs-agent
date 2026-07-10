@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MGS Chat Funnels
  * Description: Config-driven WhatsApp-style chat funnels by vertical and country (EMP-BR, CC-BR, CAR-BR) with rewarded/interstitial gate, UTM passthrough, cards/sequential offers, and shortcode/route rendering.
- * Version: 0.3.21
+ * Version: 0.3.22
  * Author: MGS Digital Corp
  */
 
@@ -145,7 +145,29 @@ final class MGS_Chat_Funnels {
         return preg_match('/^GTM-[A-Z0-9]+$/', $container_id) ? $container_id : '';
     }
 
+    private function ga4_measurement_id($config) {
+        $measurement_id = strtoupper(trim((string) ($config['ga4_measurement_id'] ?? '')));
+        return preg_match('/^G-[A-Z0-9]+$/', $measurement_id) ? $measurement_id : '';
+    }
+
+    private function tracking_mode($config) {
+        $mode = strtolower(trim((string) ($config['tracking_mode'] ?? 'gtm')));
+        return $mode === 'direct_ga4' ? 'direct_ga4' : 'gtm';
+    }
+
     private function render_tracking_head_html($config) {
+        if ($this->tracking_mode($config) === 'direct_ga4') {
+            $measurement_id = $this->ga4_measurement_id($config);
+            if ($measurement_id === '') {
+                return '';
+            }
+            $id_json = $this->js_json($measurement_id);
+            return '<!-- Google Analytics 4 (direct) -->' . "\n"
+                . '<script async src="https://www.googletagmanager.com/gtag/js?id=' . esc_attr($measurement_id) . '"></script>' . "\n"
+                . '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag(\'js\',new Date());gtag(\'config\',' . $id_json . ');</script>' . "\n"
+                . '<!-- End Google Analytics 4 (direct) -->';
+        }
+
         $container_id = $this->gtm_container_id($config);
         if ($container_id === '') {
             return '';
@@ -157,6 +179,9 @@ final class MGS_Chat_Funnels {
     }
 
     private function render_tracking_body_html($config) {
+        if ($this->tracking_mode($config) !== 'gtm') {
+            return '';
+        }
         $container_id = $this->gtm_container_id($config);
         if ($container_id === '') {
             return '';
@@ -685,6 +710,13 @@ final class MGS_Chat_Funnels {
         $config['route'] = is_array($existing) && !empty($existing['route']) ? $existing['route'] : $posted_route;
         $config['theme'] = 'whatsapp';
         $config['mode'] = sanitize_key(wp_unslash($_POST['mode'] ?? 'cards'));
+        $config['standalone'] = !empty($_POST['standalone']);
+        $config['tracking_mode'] = sanitize_key(wp_unslash($_POST['tracking_mode'] ?? 'gtm'));
+        if (!in_array($config['tracking_mode'], array('gtm', 'direct_ga4'), true)) {
+            $config['tracking_mode'] = 'gtm';
+        }
+        $config['gtm_container_id'] = $this->gtm_container_id(array('gtm_container_id' => wp_unslash($_POST['gtm_container_id'] ?? '')));
+        $config['ga4_measurement_id'] = $this->ga4_measurement_id(array('ga4_measurement_id' => wp_unslash($_POST['ga4_measurement_id'] ?? '')));
         foreach (array('rewarded' . '_enabled', 'rewarded' . '_auctions', 'rewarded' . '_timeout_ms') as $legacy_ads_key) {
             unset($config[$legacy_ads_key]);
         }
@@ -857,6 +889,20 @@ final class MGS_Chat_Funnels {
             $wrapper_help = 'O plugin não configura auctions, rewarded ou interstitial. Isso fica 100% com o wrapper.';
         }
         echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>' . esc_html($wrapper_label) . '</strong><br><code>' . esc_html($wrapper_preview ?: 'Preencha o domain para gerar a URL do wrapper.') . '</code><br><small>' . esc_html($wrapper_help) . '</small></div>';
+        $this->field_checkbox('Página standalone (sem scripts globais do WordPress)', 'standalone', !empty($config['standalone']), 'Mantém somente o chat, GTM/Analytics e monetização configurados aqui.');
+        $tracking_mode = $this->tracking_mode($config);
+        $this->field_select('Modo de rastreamento', 'tracking_mode', $tracking_mode, array(
+            'gtm' => 'Google Tag Manager (Analytics dentro do GTM)',
+            'direct_ga4' => 'Google Analytics 4 direto (sem GTM)',
+        ), 'Escolha uma fonte para evitar pageview duplicado.');
+        $this->field_text('ID do Google Tag Manager', 'gtm_container_id', $this->gtm_container_id($config), 'Ex: GTM-K3V9CL5B. Usado quando o modo selecionado é Google Tag Manager.');
+        $this->field_text('ID do Google Analytics 4', 'ga4_measurement_id', $this->ga4_measurement_id($config), 'Ex: G-499W6E48Z8. No modo GTM é referência do Analytics dentro do container; no modo GA4 direto é carregado pelo plugin.');
+        if ($tracking_mode === 'direct_ga4') {
+            $tracking_summary = 'Ativo: Google Analytics 4 direto ' . ($this->ga4_measurement_id($config) ?: '—') . '. O GTM não é carregado neste modo.';
+        } else {
+            $tracking_summary = 'Ativo: ' . ($this->gtm_container_id($config) ?: 'GTM não configurado') . ' → Analytics ' . ($this->ga4_measurement_id($config) ?: 'não informado') . ' dentro do container. O GA4 direto não é carregado.';
+        }
+        echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>Rastreamento carregado:</strong><br><code>' . esc_html($tracking_summary) . '</code></div>';
         $this->field_checkbox('Preservar UTMs nos links finais', 'utm_passthrough', !empty($config['utm_passthrough']), 'Mantém utm_source, utm_campaign, gclid, etc.');
         $this->field_text('Tags', 'tags', implode(', ', $config['tags'] ?? array()), 'Separadas por vírgula.');
         echo '</div></section>';
@@ -1252,6 +1298,10 @@ final class MGS_Chat_Funnels {
             'brand' => 'MGS',
             'theme' => 'whatsapp',
             'mode' => 'cards',
+            'standalone' => false,
+            'tracking_mode' => 'gtm',
+            'gtm_container_id' => '',
+            'ga4_measurement_id' => '',
             'ads_enabled' => true,
             'ad_company' => 'digital-trust',
             'ad_domain' => '',
