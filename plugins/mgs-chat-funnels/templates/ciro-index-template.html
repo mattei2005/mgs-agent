@@ -868,6 +868,37 @@
         askQuestion("");
       }
 
+      window.mgsRewardedClickInProgress = false;
+      window.mgsCloseQuizAfterReward = function () {
+        window.mgsRewardedClickInProgress = false;
+        if (!quizAlreadyClosed) {
+          quizAlreadyClosed = true;
+          closeQuiz();
+        }
+      };
+
+      function registerRewardedCloseCallback(attempt = 0) {
+        if (!window.googletag || !window.googletag.cmd) {
+          if (attempt < 40) setTimeout(() => registerRewardedCloseCallback(attempt + 1), 250);
+          return;
+        }
+
+        window.googletag.cmd.push(function () {
+          try {
+            if (!window.googletag.pubads) return;
+            window.googletag.pubads().addEventListener("rewardedSlotClosed", function (event) {
+              const slotPath = event && event.slot && event.slot.getAdUnitPath ? event.slot.getAdUnitPath() : "";
+              if (window.mgsRewardedClickInProgress && slotPath.indexOf("zout_rewarded") !== -1) {
+                window.mgsCloseQuizAfterReward();
+              }
+            });
+          } catch (err) {
+            console.warn("Rewarded close callback registration failed", err);
+          }
+        });
+      }
+      registerRewardedCloseCallback();
+
       function updateQuizProgress() {
         const fill = document.getElementById("quiz-progress-fill");
         const progress = Math.min(100, Math.max(20, Math.round(((quizStep + 1) / Math.max(1, gateQuestionCount + 1)) * 100)));
