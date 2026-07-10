@@ -115,13 +115,13 @@ Redirect split UI should be business-facing:
 
 ## SMS Cost Reporting
 
-- Canonical unit cost informed by Rodolfo: **R$ 0,08 per SMS sent**.
-- The report page `admin.php?page=mgs-quiz-report` should show spend by quiz for the active date/filter range: quiz, successful SMS count, unit cost, and total estimated spend.
-- Formula: `successful_sms_count × 0.08`, calculated in integer centavos to avoid floating-point drift.
-- Also show consolidated cards for total successful SMS and total estimated spend across the filtered result set.
-- If WordPress only records successful lead delivery to SMS Funnel (`ok:G00X`) and cannot observe the vendor's actual outbound message event, label the metric **Custo estimado**, not actual spend.
-- Do not count `fail:*`, `error`, `skipped`, or `historical_import` rows.
-- If an automation can send multiple SMS per lead, accurate actual spend requires a vendor event/webhook or imported send-count report; never silently equate one accepted lead with multiple outbound messages.
+- Canonical unit cost informed by Rodolfo: **R$ 0,08 per record absorbed into the WordPress quiz-leads report**.
+- The report page `admin.php?page=mgs-quiz-report` should show spend by quiz for the active date/filter range: quiz, records absorbed, unit cost, and total estimated spend.
+- Formula: `filtered_report_row_count × 8 centavos`, calculated as an integer to avoid floating-point drift.
+- Also show consolidated cards for total records and total estimated spend across the filtered result set.
+- The WordPress report/database is the canonical counting source for this cost estimate. Do not reconcile against the SMS Funnel dashboard: invalid or nonexistent phone numbers can appear in both systems, and that external comparison does not improve this metric.
+- Count every row included by the report's current filters regardless of `sms_funnel_status`, phone validity, duplication, or downstream dashboard visibility. The metric measures absorbed/reportable records, not vendor-confirmed delivery.
+- Label the monetary metric **Custo estimado de SMS**, because the calculation is operationally based on report rows at R$ 0,08 each.
 
 ## Known Interpretation
 
