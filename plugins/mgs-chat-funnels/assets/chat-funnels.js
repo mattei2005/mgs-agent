@@ -37,7 +37,7 @@
   }
 
   function requestRewardAds(config) {
-    if (config.ads_enabled === false) return;
+    if (config.ads_enabled === false || adProvider(config) !== 'jbf') return;
     window.jbftag = window.jbftag || { cmd: [] };
     window.jbftag.cmd.push(function () {
       if (window.jbftag && typeof window.jbftag.requestRewardAds === 'function') {
@@ -51,7 +51,8 @@
       callback();
       return;
     }
-    if (adProvider(config) === 'm2') {
+    var provider = adProvider(config);
+    if (provider === 'm2' || provider === 'actview') {
       setTimeout(callback, 1200);
       return;
     }
