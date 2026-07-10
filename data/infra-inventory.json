@@ -1,8 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T17:22:16-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-10T17:21:23-04:00",
+    "generated_by": "infra-discovery.sh",
+    "last_manual_update": "hera-meta-library-persistent-runtime"
   },
   "system_packages": [
     {
@@ -483,18 +484,6 @@
       "purpose": "Apply busy_input_mode=steer after validated live and mirror config changes; Zeus restarts last.",
       "status": "scheduled",
       "updated_at": "2026-07-10T13:18:28-04:00"
-    },
-    {
-      "id": "hera-meta-library-first10-clean-zip-2026-06-18",
-      "agent": "hera",
-      "path": "/tmp/hera-meta-library-test/utua_first10_2026-06-18T22-29-47-519Z/utua_meta_library_first10_clean.zip",
-      "type": "temporary_zip",
-      "sha256": "ec3ba172fde784a000ea7e496175bf5ce97101c739d43b02ad3c6c9da997b0c9",
-      "size_bytes": 393048,
-      "source": "/tmp/hera-meta-library-test/",
-      "validation": "unzip -l OK; 10 JPGs verify clean=true and harmful_tags=0",
-      "git_tracked": false,
-      "updated_at": "2026-06-18T18:32:42.819646-04:00"
     },
     {
       "id": "ares-elena-bulk-duplicates-background-20260619",
@@ -1176,6 +1165,62 @@
           "updated_at": "2026-07-10T17:16:23-04:00"
         }
       ]
+    },
+    {
+      "id": "hera-meta-library-persistent-runtime",
+      "agent": "hera",
+      "type": "persistent_browser_automation",
+      "status": "active",
+      "runtime_path": "/root/mgs-agent/tools/meta-library-collector",
+      "wrapper": "/root/mgs-agent/scripts/hera-meta-library-collector.sh",
+      "profile_path": "/root/.hermes/profiles/hera/browser-profiles/meta-library-chromium",
+      "output_path": "/root/.hermes/profiles/hera/artifacts/meta-library",
+      "profile_permissions": "0700; marker 0600",
+      "dependencies": {
+        "node": "22.23.1",
+        "playwright": "1.61.0",
+        "chromium": "149.0.7827.55"
+      },
+      "files": [
+        {
+          "path": "/root/mgs-agent/tools/meta-library-collector/collector.js",
+          "size_bytes": 10331,
+          "modified_at": "2026-07-10T17:18:02.912879-04:00",
+          "sha256": "df08f7c4c812da1d1f7aa0375064324c32243b83e0c3e2d2a0f21e1438670812"
+        },
+        {
+          "path": "/root/mgs-agent/tools/meta-library-collector/package.json",
+          "size_bytes": 310,
+          "modified_at": "2026-07-10T17:11:55.118498-04:00",
+          "sha256": "8ac8e3e084b7e4f264e504711d35e0912482f3676e148f5806104c816703bf7f"
+        },
+        {
+          "path": "/root/mgs-agent/tools/meta-library-collector/package-lock.json",
+          "size_bytes": 1732,
+          "modified_at": "2026-07-10T17:12:08.386511-04:00",
+          "sha256": "61ca9ee2f7b9fdfbc54eb6a98bad602c20b17b5955419ae2ff2b64e700286085"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/hera-meta-library-collector.sh",
+          "size_bytes": 955,
+          "modified_at": "2026-07-10T17:11:55.115498-04:00",
+          "sha256": "c3a11bdd7d553299777855322cd3b9a17f65b607f622647afca84a9fafc586d3"
+        }
+      ],
+      "validation": {
+        "public_smoke": "PASS",
+        "query": "utua",
+        "result_text": "~4,600 results",
+        "library_ids": 30,
+        "images": 98,
+        "videos": 19,
+        "download_http": 200,
+        "download_bytes": 47548,
+        "authenticated_session": "absent",
+        "fmybc_exact": "page shell loads but no cards; reauthentication required before claiming collection success"
+      },
+      "purpose": "Durable Meta/Facebook Ads Library intake with persistent browser profile; runtime/profile must never use /tmp.",
+      "updated_at": "2026-07-10T17:21:23-04:00"
     }
   ],
   "profile_skill_references": [
@@ -1596,6 +1641,20 @@
       "purpose": "Zeus handoff note explaining Rodolfo corrections and operational context for Atena.",
       "validation": "Created by Zeus at Rodolfo request; file written and readback validated by inventory hash.",
       "updated_at": "2026-07-09T20:32:44-04:00"
+    },
+    {
+      "id": "hera-meta-library-reference-intake-v2",
+      "agent": "hera",
+      "type": "profile_skill",
+      "path": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/meta-library-reference-intake/SKILL.md",
+      "size_bytes": 2908,
+      "modified_at": "2026-07-10T17:13:35.893601-04:00",
+      "sha256": "af5791000c67adb60eaadd2542bfc23a3f1d318925dd577f55e91f3001c4067a",
+      "versioned_sha256": "af5791000c67adb60eaadd2542bfc23a3f1d318925dd577f55e91f3001c4067a",
+      "purpose": "Canonical Meta Ads Library collection flow with persistent runtime/profile and explicit no-/tmp rule.",
+      "validation": "live/versioned SHA256 match; runtime public smoke PASS",
+      "updated_at": "2026-07-10T17:21:23-04:00"
     }
   ],
   "systemd_services": [
