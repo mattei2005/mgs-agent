@@ -965,16 +965,15 @@
 
         const ctaButton = e.target && e.target.closest ? e.target.closest("#aq-cta") : null;
         if (ctaButton) {
+          e.preventDefault();
           applyRewardedButtonClass(ctaButton);
+          window.mgsRewardedClickInProgress = ctaButton.classList.contains("av-rewarded");
           if (quizAlreadyClosed) return;
-          const safeCloseQuiz = function () {
-            if (!quizAlreadyClosed) {
-              quizAlreadyClosed = true;
-              closeQuiz();
-            }
-          };
+          const safeCloseQuiz = window.mgsCloseQuizAfterReward;
 
-          setTimeout(safeCloseQuiz, 1200);
+          if (!ctaButton.classList.contains("av-rewarded")) {
+            setTimeout(safeCloseQuiz, 1200);
+          }
 
           if (!rewardedButtonClass) {
             {{JBF_REWARDED_SHOW_JS}}
