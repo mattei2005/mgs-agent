@@ -7,6 +7,8 @@ related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-upd
 
 ## Referências recentes
 
+- `references/discord-sequential-message-continuity.md` — responder perguntas sequenciais não resolvidas quando o usuário envia `?`, `Oi`, novo ping ou screenshots do contexto perdido, sem transformar contexto read-only em autorização de side effect.
+
 - `references/report-infra-channel-discipline.md` — disciplina de canal para REPORT-INFRA: não postar bloco bruto na thread operacional do Rodolfo; enviar para #alerts-infra via webhook/helper e responder só status limpo.
 
 - `references/discord-alert-continuation-layout-2026-07-07.md` — Rodolfo correction: operational alert complements must match the original report style, use a clean block/section, explicitly state the action/validation, and delete/repost ugly addenda instead of leaving them in channel.

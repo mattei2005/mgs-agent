@@ -255,8 +255,8 @@ Para rollout de modelo/reasoning em múltiplos profiles, incluindo distinção p
 - Billing Hermes: `openai-codex` deve aparecer como `subscription_included`/included, sem pay-per-token.
 - Modelo principal MGS atual: `gpt-5.6-sol` via plano ChatGPT; `gpt-5.5` é legado/fallback apenas quando explicitamente mantido.
 - Roteamento MGS por dificuldade: Medium para simples, High para operação normal e `xhigh`/Extra High para crítico/long/code-heavy. Override explícito `/reasoning` sempre vence. Implementação e validação: `references/gpt56-sol-auto-reasoning-routing-mgs.md`.
-- Migração de modelo/config só termina após restart seguro + smoke real de cada profile. Quando Zeus precisar reiniciar, não depender de auto-resume: preparar finalizer externo com callback verificável para a thread de origem, porque o gateway pode voltar `active` sem retomar a conversa automaticamente. Nunca declarar “tudo pronto” antes desse callback pós-restart.
-- `gpt-5.6-sol-pro` só pode ser oferecido após aparecer na lista viva do Codex; não inventar slug nem assumir entitlement.
+- Migração de modelo/config só termina após restart seguro + smoke real de cada profile. Quando Zeus precisar reiniciar, não depender de auto-resume: preparar finalizer externo com callback verificável para a thread de origem. Em `systemd-run`, usar executável absoluto (`/root/.local/bin/hermes`), porque unidades detached não herdam o PATH interativo. Agendar só depois da resposta pré-restart e deixar o turno ativo terminar; caso contrário Zeus pode permanecer `deactivating` e gerar falso `not ready`.
+- `gpt-5.6-sol-pro` só pode ser oferecido depois de smoke real. Não confiar apenas no picker/lista sintetizada: no OAuth ChatGPT MGS, uma chamada real ao slug retornou HTTP 400 “model is not supported when using Codex with a ChatGPT account”. Para trabalho crítico, usar `gpt-5.6-sol` com `xhigh` até um smoke Pro passar.
 - Política operacional MGS: zero Anthropic/Claude API pay-per-token por padrão, salvo autorização explícita do Rodolfo.
 
 ### Login inicial
@@ -266,27 +266,21 @@ hermes model
 # selecionar openai-codex, abrir URL, inserir device code e autorizar
 ```
 
-O login no perfil raiz atualiza `~/.hermes/auth.json`; profiles Zeus/Atena usam seus próprios `auth.json` e precisam receber as credenciais.
+O login no perfil raiz atualiza `~/.hermes/auth.json`; profiles Zeus/Atena/Ares/Hera mantêm stores próprios.
 
-### Copiar credenciais para Zeus/Atena
+### OAuth por profile — regra durável
 
-```bash
-python3 - <<'EOF'
-import json
-with open('/root/.hermes/auth.json') as f:
-    root = json.load(f)
-codex_creds = root['providers']['openai-codex']
-for profile in ['zeus', 'atena']:
-    path = f'/root/.hermes/profiles/{profile}/auth.json'
-    with open(path) as f:
-        d = json.load(f)
-    d['providers']['openai-codex'] = codex_creds
-    d['active_provider'] = 'openai-codex'
-    with open(path, 'w') as f:
-        json.dump(d, f, indent=2)
-    print(f'{profile}: OK')
-EOF
-```
+Para produção multi-profile, autenticar cada profile por device-code e validar com inferência real. Não copiar permanentemente o mesmo bloco `openai-codex` entre profiles: refresh tokens Codex são rotativos/single-use; clones podem funcionar no smoke inicial e falhar depois com `refresh_token_reused` quando dois gateways renovarem a mesma cadeia.
+
+Fluxo:
+
+1. Backup de cada `auth.json` fora do Git, com diretório `700`.
+2. Executar o login OAuth no contexto de cada profile (`hermes -p <profile> model`) e concluir o device-code.
+3. Validar presença de access/refresh sem imprimir valores.
+4. Rodar `hermes -p <profile> -z ...` em cada profile.
+5. Confirmar que os refresh tokens não são clones por comparação booleana/hash interna, sem exibir hashes ou tokens.
+
+Copiar apenas o provider block de um profile saudável é permitido somente como recuperação emergencial e temporária após confirmação crítica. Registrar prazo de correção e substituir por sessões OAuth independentes ou por store compartilhado que tenha lock cross-process e write-through comprovados.
 
 Formato esperado em cada `config.yaml`:
 
@@ -341,7 +335,7 @@ Quando Rodolfo disser “GPT-5.5 pra tudo”, “zero Anthropic”, “deleta de
 - Alguns serviços fora do gateway podem continuar chamando Anthropic mesmo depois de migrar Zeus/Atena/Ares.
 - OpenHands “funcionando” não basta: se wrapper/trajectory usa `anthropic/claude-*` + API key 1Password, isso é uma falha de custo/governança salvo autorização explícita de Rodolfo. Diagnóstico canônico: `references/atena-openhands-provider-diagnostic.md`.
 - Para OpenHands na Atena/Zeus, a política correta é **GPT-5.5/OpenAI-Codex OAuth para tudo por padrão**. Não sugerir “backend não-Anthropic aprovado” genérico, OpenRouter, Haiku ou Claude como workaround. Se OpenHands precisar de compatibilidade com Codex, forçar `openai/gpt-5.5`, usar OAuth do profile sem imprimir token e validar o modelo real no output. Playbook: `references/openhands-gpt55-codex-wrapper.md`.
-- Quando um agente MGS falhar em thread Discord com `Provider authentication failed` e logs de OpenAI-Codex/Codex mostrarem refresh token inválido, reparar o profile afetado antes de responder: backup fora do Git, copiar um provider `openai-codex` válido de outro profile MGS validado, smoke `hermes -p <agent> -z ...`, gerar/postar a resposta como o agente na thread original, fazer readback Discord e só então reportar. Playbook: `references/mgs-agent-codex-auth-repair-and-thread-reply.md`.
+- Quando um agente MGS falhar em thread Discord com `Provider authentication failed` e logs OpenAI-Codex mostrarem refresh inválido, reparar o profile antes de responder: backup fora do Git, reautenticação OAuth independente preferida, smoke `hermes -p <agent> -z ...`, resposta na thread original e readback Discord. Copiar um bloco válido de outro profile só como recuperação emergencial temporária após confirmação crítica; nunca chamar isso de correção durável por causa de `refresh_token_reused`. Playbook: `references/mgs-agent-codex-auth-repair-and-thread-reply.md` e `references/gpt56-sol-auto-reasoning-routing-mgs.md`.
 
 ## 4. Image generation / OpenAI-Codex OAuth
 

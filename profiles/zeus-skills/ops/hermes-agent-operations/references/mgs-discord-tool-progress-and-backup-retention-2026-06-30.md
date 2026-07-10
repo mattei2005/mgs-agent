@@ -118,7 +118,22 @@ bash -n /root/mgs-agent/scripts/mgs-safety-backup.sh
 /root/mgs-agent/scripts/mgs-safety-backup.sh --dry-run
 ```
 
-### 5. Infra reporting checklist after changing backup automation
+### 5. Conservative cleanup of Hermes archives and Git worktrees
+
+Before deleting a redundant `hermes-profiles-backup*.tar.gz`, validate both the current canonical archive and the one prior archive that will remain with `tar -tzf`. Preserve the surrounding report/evidence directory and remove only the redundant large archive unless the user explicitly authorizes deleting the whole report.
+
+Inventory worktrees separately with `git worktree list --porcelain`. Registered temporary worktrees must be removed through:
+
+```bash
+git -C /root/.hermes/hermes-agent worktree remove --force /exact/worktree/path
+git -C /root/.hermes/hermes-agent worktree prune
+```
+
+Do not `rm -rf` a registered worktree first; that leaves stale Git metadata. Unregistered temporary directories may be removed only when they were included explicitly in the confirmed deletion scope.
+
+An explicit backup policy wins over generic count-based advice. For example, safety snapshots governed by `RETENTION_DAYS=30` remain protected during a conservative Hermes cleanup even if several copies exist; changing that policy is a separate script/config decision and confirmation. Recalculate actual bytes immediately before deletion and report actual reclaimed space afterward, because temporary directories may disappear between inventory and execution.
+
+### 6. Infra reporting checklist after changing backup automation
 
 Because these are scripts/config/data, the task is not complete until:
 
