@@ -1,0 +1,235 @@
+diff --git a/tests/tools/test_skills_tool.py b/tests/tools/test_skills_tool.py
+index a7445207c..feec41229 100644
+--- a/tests/tools/test_skills_tool.py
++++ b/tests/tools/test_skills_tool.py
+@@ -494,6 +494,101 @@ class TestSkillView:
+         result = json.loads(raw)
+         assert result["linked_files"] is not None
+         assert "references" in result["linked_files"]
++        assert result["linked_files_summary"] is None
++
++    def test_view_compacts_large_linked_file_inventory(self, tmp_path):
++        with patch("tools.skills_tool.SKILLS_DIR", tmp_path):
++            skill_dir = _make_skill(
++                tmp_path,
++                "large-skill",
++                body="Load `references/keep.md` first.",
++            )
++            refs_dir = skill_dir / "references"
++            refs_dir.mkdir()
++            (refs_dir / "keep.md").write_text("keep content")
++            for index in range(40):
++                (refs_dir / f"extra-{index:02d}.md").write_text(f"extra {index}")
++
++            main_result = json.loads(skill_view("large-skill"))
++            direct_result = json.loads(
++                skill_view("large-skill", file_path="references/extra-39.md")
++            )
++
++        assert main_result["linked_files"] == {
++            "references": ["references/keep.md"]
++        }
++        summary = main_result["linked_files_summary"]
++        assert summary["compacted"] is True
++        assert summary["mode"] == "auto"
++        assert summary["total_files"] == 41
++        assert summary["totals"] == {"references": 41}
++        assert summary["shown"] == {"references": 1}
++        assert summary["omitted"] == {"references": 40}
++        assert "search_files" in main_result["usage_hint"]
++        assert direct_result["success"] is True
++        assert direct_result["content"] == "extra 39"
++
++    def test_view_full_override_preserves_large_inventory(self, tmp_path):
++        with patch("tools.skills_tool.SKILLS_DIR", tmp_path):
++            skill_dir = _make_skill(
++                tmp_path,
++                "full-skill",
++                frontmatter_extra=(
++                    "metadata:\n"
++                    "  hermes:\n"
++                    "    linked_files_mode: full\n"
++                ),
++            )
++            refs_dir = skill_dir / "references"
++            refs_dir.mkdir()
++            for index in range(41):
++                (refs_dir / f"ref-{index:02d}.md").write_text(str(index))
++            result = json.loads(skill_view("full-skill"))
++
++        assert len(result["linked_files"]["references"]) == 41
++        assert result["linked_files_summary"] is None
++
++    def test_view_config_full_override_is_instant_rollback(self, tmp_path):
++        with (
++            patch("tools.skills_tool.SKILLS_DIR", tmp_path),
++            patch(
++                "hermes_cli.config.load_config",
++                return_value={"skills": {"linked_files_mode": "full"}},
++            ),
++        ):
++            skill_dir = _make_skill(tmp_path, "config-full-skill")
++            refs_dir = skill_dir / "references"
++            refs_dir.mkdir()
++            for index in range(41):
++                (refs_dir / f"ref-{index:02d}.md").write_text(str(index))
++            result = json.loads(skill_view("config-full-skill"))
++
++        assert len(result["linked_files"]["references"]) == 41
++        assert result["linked_files_summary"] is None
++
++    def test_view_compact_override_applies_to_small_inventory(self, tmp_path):
++        with patch("tools.skills_tool.SKILLS_DIR", tmp_path):
++            skill_dir = _make_skill(
++                tmp_path,
++                "compact-skill",
++                frontmatter_extra=(
++                    "metadata:\n"
++                    "  hermes:\n"
++                    "    linked_files_mode: compact\n"
++                ),
++                body="Load `references/used.md`.",
++            )
++            refs_dir = skill_dir / "references"
++            refs_dir.mkdir()
++            (refs_dir / "used.md").write_text("used")
++            (refs_dir / "unused.md").write_text("unused")
++            result = json.loads(skill_view("compact-skill"))
++
++        assert result["linked_files"] == {
++            "references": ["references/used.md"]
++        }
++        assert result["linked_files_summary"]["mode"] == "compact"
++        assert result["linked_files_summary"]["omitted"] == {"references": 1}
+ 
+     def test_view_tags_from_metadata(self, tmp_path):
+         with patch("tools.skills_tool.SKILLS_DIR", tmp_path):
+diff --git a/tools/skills_tool.py b/tools/skills_tool.py
+index a5613f62c..a5e714c0c 100644
+--- a/tools/skills_tool.py
++++ b/tools/skills_tool.py
+@@ -615,6 +615,86 @@ def _parse_tags(tags_value) -> List[str]:
+     return [t.strip().strip("\"'") for t in tags_value.split(",") if t.strip()]
+ 
+ 
++_LINKED_FILES_COMPACT_THRESHOLD = 40
++_LINKED_FILES_MODES = {"auto", "compact", "full"}
++
++
++def _linked_files_for_view(
++    linked_files: Dict[str, List[str]],
++    rendered_content: str,
++    hermes_meta: Dict[str, Any],
++) -> Tuple[Dict[str, List[str]], Optional[Dict[str, Any]]]:
++    """Return a context-efficient linked-file index for a main skill view.
++
++    Small inventories preserve the historical full-list response. Large
++    inventories default to ``auto`` mode: only files explicitly named in the
++    rendered SKILL.md are returned, while deterministic per-category counts
++    preserve visibility into omitted support files. Direct ``file_path`` reads
++    return earlier in :func:`skill_view` and are therefore unchanged.
++
++    Rollback/override controls, read on every call:
++
++    - ``skills.linked_files_mode`` in config: ``auto`` (default), ``compact``,
++      or ``full``.
++    - ``metadata.hermes.linked_files_mode`` in SKILL.md overrides config for
++      one skill.
++    - ``skills.linked_files_compact_threshold`` changes the auto threshold
++      (default 40 total files).
++    """
++    normalized = {category: sorted(files) for category, files in linked_files.items() if files}
++    total = sum(len(files) for files in normalized.values())
++    if not total:
++        return normalized, None
++
++    mode = "auto"
++    threshold = _LINKED_FILES_COMPACT_THRESHOLD
++    try:
++        from hermes_cli.config import load_config
++
++        skills_cfg = (load_config() or {}).get("skills", {})
++        mode = str(skills_cfg.get("linked_files_mode", mode)).strip().lower()
++        threshold = int(
++            skills_cfg.get("linked_files_compact_threshold", threshold)
++        )
++    except (TypeError, ValueError):
++        threshold = _LINKED_FILES_COMPACT_THRESHOLD
++    except Exception:
++        logger.debug("Could not load linked-files view policy", exc_info=True)
++
++    mode = str(hermes_meta.get("linked_files_mode", mode)).strip().lower()
++    if mode not in _LINKED_FILES_MODES:
++        mode = "auto"
++    threshold = max(1, min(threshold, 1000))
++
++    should_compact = mode == "compact" or (mode == "auto" and total > threshold)
++    if not should_compact:
++        return normalized, None
++
++    content = rendered_content or ""
++    visible: Dict[str, List[str]] = {}
++    totals: Dict[str, int] = {}
++    shown: Dict[str, int] = {}
++    omitted: Dict[str, int] = {}
++    for category, files in normalized.items():
++        selected = [path for path in files if path in content]
++        if selected:
++            visible[category] = selected
++        totals[category] = len(files)
++        shown[category] = len(selected)
++        omitted[category] = len(files) - len(selected)
++
++    summary = {
++        "compacted": True,
++        "mode": mode,
++        "threshold": threshold,
++        "total_files": total,
++        "totals": totals,
++        "shown": shown,
++        "omitted": omitted,
++    }
++    return visible, summary
++
++
+ 
+ def _get_disabled_skill_names() -> Set[str]:
+     """Load disabled skill names from config.
+@@ -1561,6 +1641,25 @@ def skill_view(
+                     "Could not preprocess skill content for %s", skill_name, exc_info=True
+                 )
+ 
++        linked_files, linked_files_summary = _linked_files_for_view(
++            linked_files,
++            rendered_content,
++            hermes_meta,
++        )
++        if linked_files_summary:
++            usage_hint = (
++                "linked_files is compacted to paths explicitly referenced by this skill. "
++                "Direct skill_view(name, file_path) access is unchanged. To discover omitted "
++                "names on demand, use search_files(target='files', pattern='*.md', path=skill_dir)."
++            )
++        elif linked_files:
++            usage_hint = (
++                "To view linked files, call skill_view(name, file_path) where file_path is "
++                "e.g. 'references/api.md' or 'assets/config.yaml'"
++            )
++        else:
++            usage_hint = None
++
+         result = {
+             "success": True,
+             "name": skill_name,
+@@ -1571,9 +1670,8 @@ def skill_view(
+             "path": rel_path,
+             "skill_dir": str(skill_dir) if skill_dir else None,
+             "linked_files": linked_files if linked_files else None,
+-            "usage_hint": "To view linked files, call skill_view(name, file_path) where file_path is e.g. 'references/api.md' or 'assets/config.yaml'"
+-            if linked_files
+-            else None,
++            "linked_files_summary": linked_files_summary,
++            "usage_hint": usage_hint,
+             "required_environment_variables": required_env_vars,
+             "required_commands": [],
+             "missing_required_environment_variables": remaining_missing_required_envs,
