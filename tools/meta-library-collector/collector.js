@@ -131,6 +131,13 @@ async function main() {
     if (!html.includes('/__rd_verify') && !html.toLowerCase().includes('executechallenge')) break;
   }
 
+  try {
+    await page.waitForFunction(() => {
+      const text = document.body ? document.body.innerText : '';
+      return /Library ID:\s*\d+/i.test(text) || /No ads match|No results found|0\s+results?/i.test(text);
+    }, { timeout: 45000 });
+  } catch (_) {}
+
   for (let i = 0; i < scrolls; i++) {
     await page.mouse.wheel(0, 900);
     await page.waitForTimeout(waitMs);
