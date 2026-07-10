@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T18:37:51-04:00",
+    "updated_at": "2026-07-10T22:43:49.210352+00:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1134,65 +1134,30 @@
       "updated_at": "2026-07-10T05:32:59.005815+00:00"
     },
     {
-      "id": "creditoparaveiculo-mgs-quiz-carro-1.5.0-20260710",
+      "id": "creditoparaveiculo-mgs-quiz-carro-1.6.2-20260710",
       "agent": "zeus",
       "type": "wordpress_plugin",
       "site": "creditoparaveiculo.com",
       "host": "RunCloud Inc02",
       "path": "/home/runcloud2/webapps/creditoparaveiculo/wp-content/plugins/mgs-quiz-carro/",
       "plugin": "mgs-quiz-carro",
-      "version": "1.5.0",
+      "version": "1.6.2",
       "status": "active",
-      "feature": "layout_template=quiz_maker_sb (Quiz Maker SB two-step layout)",
-      "package_sha256": "7a5ad4e8f021b90b224834c3574a2b5bf0544cde9e13cd5a2fd890f93af343e7",
-      "backup_path": "/home/runcloud2/backups/creditoparaveiculo/mgs-quiz-carro-1.4.4-20260710T182004Z",
+      "feature": "SMS cost reporting by quiz from filtered WordPress report rows at R$ 0.08 per absorbed record; no SMS Funnel dashboard reconciliation",
+      "package_sha256": "270e621333f0b3bc7c7d45e02be4072d5aedb8ef9e6ac912bfe1df359e83237d",
+      "backup_path": "/home/runcloud2/backups/creditoparaveiculo/mgs-quiz-carro-1.6.1-20260710T224213Z",
       "files": {
         "mgs-quiz-carro.php": {
-          "sha256": "0bba02300f835507545b022cfa5e9e9622ea0ff7251f3ea33036c612f0af35d8",
+          "sha256": "4af8fd8c4b842bc681ba06dbed65679cdc24f0b426a149880fe80a4f89ba3466",
           "bytes": 2410
         },
-        "templates/quiz-embed-sb.php": {
-          "sha256": "c6f997cdccbf36c1cf46709430c911ca84abee6b759313f7ad47f8eef60da9df",
-          "bytes": 4242
-        },
-        "public/css/quiz.css": {
-          "sha256": "40d5fa61d382961570e9e8927c8c0af659d183ccd0d2b72eb2cfdacc3394d4f9",
-          "bytes": 10263
-        },
-        "public/js/quiz.js": {
-          "sha256": "d0783d440c6b5ff3f1990e1361c4af221bd7970a1782d11b083184133a55a641",
-          "bytes": 7605
+        "includes/class-mgs-quiz-admin.php": {
+          "sha256": "601310680721d1b903350a121618aee4801802503e477edd1c47e0a38d14d441",
+          "bytes": 81677
         }
       },
-      "validation": "PHP lint 11/11; plugin active v1.5.0; default and fmybc layouts regression-smoked; Quiz Maker SB canary rendered 4 options, advanced to form, stored one test lead, no JS errors; canary config and test lead removed; remaining=0.",
-      "updated_at": "2026-07-10T17:16:23-04:00",
-      "active_quizzes": [
-        {
-          "slug": "quiz-car-parcelas-g002-qm001",
-          "url": "https://creditoparaveiculo.com/quiz-car-parcelas-g002-qm001/",
-          "name": "Creditoparaveiculo-quiz-br-car-br-g002-qm001",
-          "layout_template": "quiz_maker_sb",
-          "origin": "G007 created from G002/default, renamed by Rodolfo",
-          "sms_state": "configured",
-          "require_sms_success": 1,
-          "leads": 0,
-          "status": "active_validated",
-          "updated_at": "2026-07-10T17:16:23-04:00"
-        },
-        {
-          "slug": "quiz-car-parcelas-g002-qm002",
-          "url": "https://creditoparaveiculo.com/quiz-car-parcelas-g002-qm002/",
-          "name": "Creditoparaveiculo-quiz-br-car-br-g002-qm002",
-          "layout_template": "quiz_maker_sb",
-          "origin": "duplicated by Rodolfo from QM001",
-          "sms_state": "configured",
-          "require_sms_success": 0,
-          "leads": 1,
-          "latest_sms_status": "ok:G002",
-          "status": "active_validated",
-          "updated_at": "2026-07-10T17:16:23-04:00"
-        }
-      ]
+      "validation": "PHP lint 11/11; plugin active v1.6.2; full-history report smoke 72,159 records / 8 quiz rows / R$ 5.772,72; filtered quiz smoke 62,981 records / R$ 5.038,48; 4 public quiz routes HTTP 200; live admin SHA-256 matched package.",
+      "updated_at": "2026-07-10T22:43:49.210330+00:00"
     },
     {
       "id": "hera-meta-library-persistent-runtime",
