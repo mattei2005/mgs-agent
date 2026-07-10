@@ -1655,6 +1655,18 @@
       "purpose": "Canonical Meta Ads Library collection flow with persistent runtime/profile and explicit no-/tmp rule.",
       "validation": "live/versioned SHA256 match; runtime public smoke PASS",
       "updated_at": "2026-07-10T17:21:23-04:00"
+    },
+    {
+      "id": "zeus-local-browser-automation-persistent-runtime-rule",
+      "agent": "zeus",
+      "type": "profile_skill",
+      "path": "/root/.hermes/profiles/zeus/skills/software-development/local-browser-automation/SKILL.md",
+      "size_bytes": 9072,
+      "modified_at": "2026-07-10T17:13:57.574624-04:00",
+      "sha256": "b2aed734c53ce6362f0d442f49b79e032be8c96500f8a2b535af912ae86bde73",
+      "purpose": "Reusable rule: recurring browser automation must use versioned runtime and durable profile-local browser/session paths, never /tmp.",
+      "validation": "skill_manage patch succeeded; skill file readback",
+      "updated_at": "2026-07-10T17:21:23-04:00"
     }
   ],
   "systemd_services": [
