@@ -52,10 +52,25 @@ If a WordPress plugin serves `/chat/...`, rendering with normal `wp_head()`/`wp_
 When Rodolfo explicitly asks to close/isolate a chat route again, do not capture `wp_head()`, `wp_body_open()`, or `wp_footer()` and then try to strip contaminants one by one. Use an explicit per-chat allowlist owned by the plugin/config:
 
 - `standalone: true` disables all three global WordPress hook captures for that route;
-- `gtm_container_id` loads the canonical GTM `<script>` in `<head>` and the matching `<noscript>` iframe immediately after `<body>`;
-- Google Analytics/GA4 should load through that GTM container, not through a second hardcoded `gtag.js` integration;
+- `tracking_mode` must explicitly choose `gtm` or `direct_ga4` so the plugin never loads both tracking sources and duplicates pageviews;
+- `gtm_container_id` loads the canonical GTM `<script>` in `<head>` and the matching `<noscript>` iframe immediately after `<body>` when `tracking_mode=gtm`;
+- `ga4_measurement_id` is displayed as the Analytics ID inside the selected GTM container and is loaded directly only when `tracking_mode=direct_ga4`;
+- Google Analytics/GA4 should normally load through the GTM container, not through a second hardcoded `gtag.js` integration;
 - GPT and the site wrapper remain plugin-owned and each load exactly once;
 - do not hardcode a site container globally in shared plugin code—keep the container ID in the site/chat config.
+
+### Admin UI placement
+
+All operator-editable monetization/tracking fields must live visibly inside step `3. Monetização e rastreamento`, not only in raw JSON. At minimum show and persist:
+
+- standalone on/off;
+- tracking mode (`Google Tag Manager` or `Google Analytics 4 direto`);
+- GTM container ID;
+- GA4 measurement ID;
+- wrapper company/domain and effective wrapper URL;
+- UTM preservation and tags.
+
+The UI must state which source is currently active. Editing through the human form must persist the same config keys used by the frontend renderer. Never add a field that only displays/stores a value without changing runtime behavior. In GTM mode, the GA4 field is the visible reference for the Analytics ID expected inside that container; changing the active Analytics independently requires selecting direct GA4 mode or updating the GTM container itself.
 
 Validation for an isolated route must prove all of the following on live HTML/browser: one GTM container, Analytics `page_view` sent by the expected GA4 measurement ID, one GPT, one wrapper, zero `wp-includes`, zero theme assets, zero Yoast/CF7/WPCode pollution, chat gate works, rewarded slot count is correct, and offer cards render. A successful Cliquet canary used `GTM-K3V9CL5B`, whose published container loaded GA4 `G-499W6E48Z8`; treat these IDs as Cliquet-specific data, not shared defaults.
 
