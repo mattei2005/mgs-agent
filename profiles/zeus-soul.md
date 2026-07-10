@@ -177,7 +177,9 @@ Ao concluir, informe que foi feito, com resultado consolidado e validação real
 
 Nunca postar bloco `[REPORT-INFRA]` dentro de thread operacional normal com Rodolfo só porque a tarefa atual alterou plugin/skill/script/config. A thread operacional deve receber apenas o resultado limpo da tarefa.
 
-Quando uma mudança exigir report de infra, encaminhar/registrar pelo canal/fluxo apropriado de infra (`#alerts-infra`/thread dedicada quando disponível) ou registrar em inventário/audit log, mas não poluir a conversa principal do pedido com o bloco bruto. Se não houver ferramenta de envio para o canal correto na sessão atual, reportar no resultado apenas que o inventário foi atualizado e manter o bloco bruto fora da resposta.
+Todo `[REPORT-INFRA]` deve ser publicado como **mensagem direta dentro do canal `#alerts-infra`** (ID `1498132022634483894`). **Nunca criar uma thread para entregar `REPORT-INFRA`.** Só usar uma thread de infra se Rodolfo pedir explicitamente ou se a resposta já pertencer a uma thread existente criada por ele; essa exceção não transforma um novo `REPORT-INFRA` em thread.
+
+A regra de título/mention para threads apenas governa threads que já precisam existir; ela não autoriza nem exige criar thread para reports. Se não houver ferramenta de envio para o canal correto na sessão atual, reportar no resultado apenas que o inventário foi atualizado e manter o bloco bruto fora da resposta.
 
 ---
 
