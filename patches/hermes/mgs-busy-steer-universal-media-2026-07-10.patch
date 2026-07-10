@@ -1,7 +1,7 @@
 diff --git a/gateway/run.py b/gateway/run.py
 --- a/gateway/run.py
 +++ b/gateway/run.py
-@@ -5333,6 +5333,49 @@
+@@ -5333,6 +5333,86 @@
  
          self._enqueue_fifo(session_key, event, adapter)
  
@@ -30,9 +30,46 @@ diff --git a/gateway/run.py b/gateway/run.py
 +                session_key=session_key,
 +                for_mid_turn_steer=True,
 +            )
-+            payload = (prepared or "").strip()
-+            if payload:
-+                return payload
++            # None is a deliberate preprocessing refusal (for example a
++            # security-sensitive context-reference rejection). Do not bypass
++            # it by serializing the raw attachment paths.
++            if prepared is None:
++                return ""
++
++            payload = prepared.strip()
++            from tools.credential_files import to_agent_visible_cache_path as _to_agent_path
++
++            # The canonical inbound pipeline may represent voice as a
++            # transcript and mixed attachments according to the event's
++            # primary MessageType. Preserve every attachment path exactly once
++            # so no secondary image/audio/video/document disappears from a
++            # successful steer.
++            missing_media_context: list[str] = []
++            media_urls = list(getattr(event, "media_urls", None) or [])
++            media_types = list(getattr(event, "media_types", None) or [])
++            for index, media_path in enumerate(media_urls):
++                raw_path = str(media_path)
++                agent_path = (
++                    raw_path
++                    if raw_path.startswith(("http://", "https://"))
++                    else str(_to_agent_path(raw_path))
++                )
++                if raw_path in payload or agent_path in payload:
++                    continue
++                mime = str(media_types[index] if index < len(media_types) else "").lower()
++                if mime.startswith("image/"):
++                    note = f"[Image attached at: {agent_path}]"
++                elif mime.startswith("audio/"):
++                    note = f"[Audio attached at: {agent_path}; MIME: {mime or 'unknown'}]"
++                elif mime.startswith("video/"):
++                    note = f"[Video attached at: {agent_path}; MIME: {mime or 'unknown'}]"
++                else:
++                    note = f"[Document attached at: {agent_path}; MIME: {mime or 'unknown'}]"
++                missing_media_context.append(note)
++
++            return "\n\n".join(
++                part for part in (payload, *missing_media_context) if part
++            ).strip()
 +        except Exception as exc:
 +            logger.warning(
 +                "Busy steer media enrichment failed for session %s; using path placeholders: %s",
@@ -51,7 +88,7 @@ diff --git a/gateway/run.py b/gateway/run.py
      async def _handle_active_session_busy_message(self, event: MessageEvent, session_key: str) -> bool:
          # --- Authorization gate (#17775) ---
          # The cold path (_handle_message) checks _is_user_authorized before
-@@ -5519,7 +5562,7 @@
+@@ -5519,7 +5599,7 @@
              effective_mode = "queue"
          steered = False
          if effective_mode == "steer":
@@ -60,7 +97,7 @@ diff --git a/gateway/run.py b/gateway/run.py
              can_steer = (
                  steer_text
                  and running_agent is not None
-@@ -9586,7 +9629,10 @@
+@@ -9586,7 +9666,10 @@
                      f"mid-turn. Wait for the current response or `/stop` first."
                  )
  
@@ -72,7 +109,7 @@ diff --git a/gateway/run.py b/gateway/run.py
                  logger.debug("PRIORITY photo follow-up for session %s — queueing without interrupt", _quick_key)
                  adapter = self._adapter_for_source(source)
                  if adapter:
-@@ -9654,10 +9700,10 @@
+@@ -9654,10 +9737,10 @@
                  self._queue_or_replace_pending_event(_quick_key, event)
                  return None
              if self._busy_input_mode == "steer":
@@ -87,7 +124,7 @@ diff --git a/gateway/run.py b/gateway/run.py
                  steered = False
                  if steer_text and hasattr(running_agent, "steer"):
                      try:
-@@ -10461,6 +10507,7 @@
+@@ -10461,6 +10544,7 @@
          source: SessionSource,
          history: List[Dict[str, Any]],
          session_key: Optional[str] = None,
@@ -95,7 +132,7 @@ diff --git a/gateway/run.py b/gateway/run.py
      ) -> Optional[str]:
          """Prepare inbound event text for the agent.
  
-@@ -10474,6 +10521,13 @@
+@@ -10474,6 +10558,13 @@
          ``run_conversation`` site to build a multimodal user turn. When the
          list is empty, the ``_enrich_message_with_vision`` text path has
          already run and images are represented in-text.
@@ -109,7 +146,7 @@ diff --git a/gateway/run.py b/gateway/run.py
          """
          history = history or []
          message_text = event.text or ""
-@@ -10484,8 +10538,11 @@
+@@ -10484,8 +10575,11 @@
          # to deriving it here for tests and legacy standalone callers.
          session_key = session_key or self._session_key_for_source(source)
          # Reset only this session's per-call buffer; other sessions may be
@@ -123,7 +160,7 @@ diff --git a/gateway/run.py b/gateway/run.py
  
          _is_shared_multi_user = is_shared_multi_user_session(
              source,
-@@ -10531,32 +10588,49 @@
+@@ -10531,32 +10625,49 @@
                      video_paths.append(path)
  
              if image_paths:
@@ -230,7 +267,7 @@ diff --git a/tests/gateway/test_busy_session_ack.py b/tests/gateway/test_busy_se
      )
      return evt
  
-@@ -302,6 +311,226 @@
+@@ -302,6 +311,304 @@
          assert "Interrupting" not in content
  
      @pytest.mark.asyncio
@@ -335,6 +372,7 @@ diff --git a/tests/gateway/test_busy_session_ack.py b/tests/gateway/test_busy_se
 +        payload = agent.steer.call_args.args[0]
 +        assert "considera este áudio também" in payload
 +        assert "Voice transcript: ajuste o prazo" in payload
++        assert "/tmp/voice.ogg" in payload
 +        runner._enrich_message_with_transcription.assert_awaited_once()
 +        assert sk not in adapter._pending_messages
 +
@@ -417,6 +455,83 @@ diff --git a/tests/gateway/test_busy_session_ack.py b/tests/gateway/test_busy_se
 +        assert marker in payload
 +        assert path in payload
 +        assert sk not in adapter._pending_messages
++
++    @pytest.mark.asyncio
++    async def test_steer_mode_preserves_every_path_in_mixed_attachment_event(self, monkeypatch):
++        """Mixed Discord attachments are serialized individually by MIME/path."""
++        import gateway.run as _gr
++
++        monkeypatch.delenv("HERMES_GATEWAY_BUSY_STEER_ACK_ENABLED", raising=False)
++        monkeypatch.setattr(_gr, "_load_gateway_config", lambda: {})
++        runner, _sentinel = _make_runner()
++        runner._busy_input_mode = "steer"
++        runner._should_echo_stt_transcripts = lambda: False
++        runner._enrich_message_with_transcription = AsyncMock(
++            return_value=("usa tudo\n\n[Voice transcript: áudio misto]", ["áudio misto"])
++        )
++        adapter = _make_adapter(platform_val="discord")
++        paths = [
++            "/tmp/mixed.png",
++            "/tmp/mixed.ogg",
++            "/tmp/mixed.mp4",
++            "/tmp/mixed.pdf",
++        ]
++        event = _make_event(
++            text="usa tudo",
++            platform_val="discord",
++            message_type=MessageType.PHOTO,
++            media_urls=paths,
++            media_types=[
++                "image/png",
++                "audio/ogg",
++                "video/mp4",
++                "application/pdf",
++            ],
++        )
++        sk = build_session_key(event.source)
++        runner.adapters[event.source.platform] = adapter
++
++        agent = MagicMock()
++        agent.steer = MagicMock(return_value=True)
++        runner._running_agents[sk] = agent
++
++        await runner._handle_active_session_busy_message(event, sk)
++
++        payload = agent.steer.call_args.args[0]
++        for path in paths:
++            assert path in payload
++        assert "Voice transcript: áudio misto" in payload
++        assert sk not in adapter._pending_messages
++
++    @pytest.mark.asyncio
++    async def test_steer_preprocessing_refusal_queues_original_media_event(self, monkeypatch):
++        """A deliberate preprocessing refusal must not be bypassed by paths."""
++        import gateway.run as _gr
++
++        monkeypatch.delenv("HERMES_GATEWAY_BUSY_STEER_ACK_ENABLED", raising=False)
++        monkeypatch.setattr(_gr, "_load_gateway_config", lambda: {})
++        runner, _sentinel = _make_runner()
++        runner._busy_input_mode = "steer"
++        runner._prepare_inbound_message_text = AsyncMock(return_value=None)
++        adapter = _make_adapter(platform_val="discord")
++        event = _make_event(
++            text="@session:forbidden/context",
++            platform_val="discord",
++            message_type=MessageType.PHOTO,
++            media_urls=["/tmp/refused.png"],
++            media_types=["image/png"],
++        )
++        sk = build_session_key(event.source)
++        runner.adapters[event.source.platform] = adapter
++
++        agent = MagicMock()
++        agent.steer = MagicMock(return_value=True)
++        runner._running_agents[sk] = agent
++
++        await runner._handle_active_session_busy_message(event, sk)
++
++        agent.steer.assert_not_called()
++        assert adapter._pending_messages[sk] is event
 +
 +    @pytest.mark.asyncio
 +    async def test_steer_media_enrichment_failure_uses_paths_without_queue(self, monkeypatch):
