@@ -385,10 +385,11 @@ MGS-CRIATIVOS/UPLOAD CANVAS
 
 Regra operacional:
 
-- `UPLOAD CANVAS` é bruto/original: não apagar, não sobrescrever e não tratar como organizado.
-- Hera deve ler os arquivos brutos, classificar formato/dimensão/idioma quando possível, gerar inventário e propor destino/nome.
-- Autorização executiva permanente — Rodolfo, 2026-07-02: quando Kelly, Rodolfo ou outro usuário autorizado pedir para verificar/processar arquivos em `UPLOAD MANUAL`, `UPLOAD_CANVAS`, `UPLOAD CANVAS` ou pasta equivalente de entrada, isso já é aprovação explícita para a Hera acessar a pasta, inventariar, limpar metadados, classificar, criar/copiar arquivos limpos nas pastas `READY` corretas e reportar o resultado. Não pedir `clarify`/confirmação para essa etapa.
-- Segurança padrão desse fluxo: manter originais intactos nas pastas de upload, não apagar nem sobrescrever material bruto, e usar `UNKNOWN` + observação no inventário quando a classificação não for totalmente clara. Só pedir confirmação se a ação envolver deletar original, sobrescrever arquivo existente, alterar permissão/credencial, campanha/budget ou outro limite fora de Creative Ops.
+- `UPLOAD CANVAS` / `UPLOAD MANUAL` é área de entrada; deve conter somente material ainda pendente, não funcionar como arquivo permanente.
+- Hera deve ler os arquivos brutos, classificar formato/dimensão/idioma quando possível, gerar inventário e decidir destino/nome.
+- Autorização executiva permanente — Rodolfo, 2026-07-02: quando Kelly, Rodolfo ou outro usuário autorizado pedir para verificar/processar arquivos em `UPLOAD MANUAL`, `UPLOAD_CANVAS`, `UPLOAD CANVAS` ou pasta equivalente de entrada, isso já é aprovação explícita para a Hera acessar a pasta, inventariar, limpar metadados, classificar e colocar arquivos limpos nas pastas `READY` corretas. Não pedir `clarify`/confirmação para essa etapa.
+- Correção executiva — Rodolfo, 2026-07-10: quando a ação for **tratar/mover**, após validar a versão limpa no `01_READY`, o arquivo-fonte deve sair da pasta de upload. Para preservar o bruto sem deixar falso backlog, mover o original para `{OPERAÇÃO}/{IMG|VID}/99_LEGACY`, mantendo ID/nome original e sem deletar. Só manter o original na entrada quando o pedido disser explicitamente **copiar** ou **manter no upload**.
+- Segurança padrão: não apagar nem sobrescrever material bruto; usar `UNKNOWN` + observação quando a classificação não for clara. Só pedir confirmação se a ação envolver deletar original, sobrescrever arquivo existente, alterar permissão/credencial, campanha/budget ou outro limite fora de Creative Ops.
 - Ares e humanos só devem consumir assets organizados na pasta da vertical/operação correta, preferencialmente em `IMG/01_READY` ou `VID/01_READY` ou status posterior. Se um humano usar direto sem Ares, registrar no inventário `used_by=HUMAN` e `campaign_owner` quando conhecido.
 - Se a vertical/operação ainda não tiver taxonomia fechada, Hera deve usar `CC_US_ES` como referência de estrutura, propor adaptação e ajustar com Rodolfo/Kelly/Geizian na prática.
 

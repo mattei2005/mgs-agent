@@ -68,7 +68,7 @@ Item                                Regra
 ----------------------------------- ------------------------------------------------------------
 Pasta raiz                          MGS-CRIATIVOS
 Folder ID raiz                      14ica5TVauTrzAxcl4T-ViJorF89vRKIl
-UPLOAD CANVAS                       RAW/original; não apagar, sobrescrever ou mover em massa sem plano aprovado
+UPLOAD CANVAS / UPLOAD MANUAL       Entrada pendente; após tratar/mover e validar READY, arquivar bruto em {OP}/{IMG|VID}/99_LEGACY; não apagar
 CC_US_ES                            exemplo/piloto; não tratar como única vertical
 Novos uploads via Hera              exigir País + Vertical + Língua + anexo antes de handoff técnico
 Nome geral                          {VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
