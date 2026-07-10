@@ -62,6 +62,8 @@ Quando a Library pública abrir, mas uma busca específica não carregar cards e
 
 O helper usa o mesmo perfil persistente, Xvfb + x11vnc + noVNC, com VNC/noVNC vinculados somente a `127.0.0.1`. Rodolfo acessa por túnel SSH; nunca publicar a porta nem pedir senha/cookies no Discord. Após ele confirmar o login, encerrar a sessão visual de forma limpa para o Chromium salvar o perfil e só então rodar novamente o coletor headless.
 
+Se uma sessão anterior morrer e deixar `x11vnc`/`websockify` órfãos, o helper só pode limpar listeners conhecidos após adquirir o lock do perfil. Nunca usar `pkill` amplo; processo inesperado nas portas deve falhar com exit `76`.
+
 ## Verificação de encerramento
 
 Uma coleta só está concluída quando houver readback real de:
