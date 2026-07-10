@@ -73,4 +73,20 @@ Required validation:
 
 ## OAuth prerequisite
 
-A profile pointing to `openai-codex` is not operational merely because systemd is active. Validate each profile with a real `hermes -p <agent> -z ...` call. If OAuth is missing/invalid, back up `auth.json` outside Git, copy only a known-working `openai-codex` provider block after critical confirmation, preserve the intended `active_provider`, and repeat the smoke test.
+A profile pointing to `openai-codex` is not operational merely because systemd is active. Validate each profile with a real `hermes -p <agent> -z ...` call.
+
+Do not treat copying an `openai-codex` provider block between profiles as a durable fix. Codex refresh tokens rotate and are single-use; cloned profiles can later race and produce `refresh_token_reused`. Copying may be used only as a time-boxed emergency recovery after Rodolfo's critical confirmation, followed by independent OAuth sessions per profile or a genuinely shared auth store with cross-process locking and refresh write-through. Never print token values or commit `auth.json`.
+
+## Finalizer and restart pitfalls
+
+- Detached `systemd-run` units do not inherit the interactive PATH. Use `/root/.local/bin/hermes` for smoke tests.
+- A Zeus self-restart remains `deactivating` until the active Discord turn exits. A finalizer polling during that turn can falsely report `service zeus not ready`; respond before scheduling and let the active turn finish.
+- Validate all four services and all four real inference smokes. Service state alone is insufficient.
+
+## Explicit override semantics
+
+`/reasoning <effort>` is a session override and wins over automatic routing. `/reasoning <effort> --global` changes the profile fallback/default; while `reasoning_auto_routing.enabled: true`, automatic per-turn selection still applies to sessions without an explicit override.
+
+## Sol Pro limitation
+
+Do not infer availability from a synthesized model-picker entry. On the current ChatGPT OAuth account, a real `gpt-5.6-sol-pro` call returned HTTP 400: the model is not supported for Codex with a ChatGPT account. Use `gpt-5.6-sol` with `xhigh` for critical work until a real Pro smoke succeeds.
