@@ -89,12 +89,13 @@ Erro `file changed as we read it` durante tar pode ocorrer por escrita de agente
 
 ### Review antes de pedir aprovação
 
-Quando a pergunta for “vale atualizar?”, fazer análise read-only antes de recomendar. Ver `references/hermes-update-pre-update-review.md`. Reportar:
+Quando a pergunta for “vale atualizar?”, fazer análise read-only antes de recomendar. Ver `references/hermes-update-pre-update-review.md`. Se outro operador já estiver executando o precheck, ou se o escopo proibir fetch, artifacts, testes e worktrees, usar `references/hermes-readonly-delta-review-no-worktree.md`: revisar apenas refs já presentes, separar release commit de commits pós-release sob a mesma versão, fazer scan exato dos hunks em memória e distinguir risco textual, semântico e operacional. Reportar:
 
 - commits atrás e delta de arquivos/linhas;
 - features/fixes/docs/manutenção por contagem aproximada;
 - melhorias relevantes para MGS;
-- risco de conflito com patches locais;
+- SHA exato revisado e, quando aplicável, release boundary vs. `origin/main` móvel;
+- risco textual de patches separado do risco semântico em lifecycle/Discord e do risco operacional do updater;
 - recomendação: atualizar agora, deferir ou atualizar em janela controlada.
 
 ### Execução
