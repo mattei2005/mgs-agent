@@ -1,8 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T18:45:40-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-10T19:54:20-04:00",
+    "generated_by": "infra-discovery.sh",
+    "last_manual_update": "hera-meta-library-stale-novnc-recovery"
   },
   "system_packages": [
     {
@@ -1246,14 +1247,14 @@
         "127.0.0.1:5903",
         "127.0.0.1:6083"
       ],
-      "background_session": "proc_83b5d68a46eb",
-      "validation": "process running; ports localhost-only; noVNC HTTP 200; status ready; authenticatedLikely=false",
+      "background_session": "proc_a6dc10481529",
+      "validation": "process running; stale listeners cleaned safely after profile lock; ports localhost-only; noVNC HTTP 200",
       "files": [
         {
           "path": "/root/mgs-agent/scripts/hera-meta-library-login-browser.sh",
-          "size_bytes": 1696,
-          "modified_at": "2026-07-10T17:40:41.763231-04:00",
-          "sha256": "0576f5ec580eca8a4ce1606b3337331eafbf6a3d50a068a6620189270205556f"
+          "size_bytes": 2415,
+          "modified_at": "2026-07-10T19:53:55.298132-04:00",
+          "sha256": "1f84f18f2ba96219498f7be831dbae22d9a8963b4bb860d8e56f697fcba78e56"
         },
         {
           "path": "/root/mgs-agent/tools/meta-library-collector/login-browser.js",
@@ -1263,7 +1264,8 @@
         }
       ],
       "purpose": "One-time/manual Facebook authentication while preserving cookies in the canonical Hera browser profile.",
-      "updated_at": "2026-07-10T17:42:04-04:00"
+      "updated_at": "2026-07-10T19:54:20-04:00",
+      "recovery": "Known stale x11vnc/websockify listeners auto-cleaned only after profile lock; unexpected port owner fails exit 76."
     }
   ],
   "profile_skill_references": [
@@ -1691,13 +1693,13 @@
       "type": "profile_skill",
       "path": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/meta-library-reference-intake/SKILL.md",
-      "size_bytes": 3981,
+      "size_bytes": 4217,
       "modified_at": "2026-07-10T17:41:59.982336-04:00",
-      "sha256": "9ae1c2481250cdffca29c8cb6cb8ae0aadc4e5f7578c25bc7141d28e3fcbcc90",
-      "versioned_sha256": "9ae1c2481250cdffca29c8cb6cb8ae0aadc4e5f7578c25bc7141d28e3fcbcc90",
+      "sha256": "39b91899d406e767ca5f2a0846b82c95c608d3951cda15809ec5a8b60b32caf0",
+      "versioned_sha256": "39b91899d406e767ca5f2a0846b82c95c608d3951cda15809ec5a8b60b32caf0",
       "purpose": "Canonical Meta Ads Library collection flow with persistent runtime/profile and explicit no-/tmp rule.",
-      "validation": "live/versioned SHA256 match; manual login helper documented; noVNC localhost-only ready",
-      "updated_at": "2026-07-10T17:42:04-04:00"
+      "validation": "live/versioned SHA256 match; stale-listener recovery rule documented",
+      "updated_at": "2026-07-10T19:54:20-04:00"
     },
     {
       "id": "zeus-local-browser-automation-persistent-runtime-rule",
