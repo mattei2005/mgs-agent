@@ -45,6 +45,8 @@ Audit MGS                               /root/mgs-agent/logs/events-audit.jsonl
 Pedido do usuário                                   Primeira fonte
 -------------------------------------------------- ------------------------------------------------------------
 "campanha" / "ads" / "growth"                    paid-acquisition-operations/SKILL.md
+"tráfego direto" / "CBO" / "b01fb01c01"           direct-traffic-cbo-operations/SKILL.md
+"Smart Bidding" / "Adgroup" / "receita SMS"       direct-traffic-cbo-operations + dados/dashboards reais
 "Meta Ads" / "Facebook Ads"                       meta-ads-intraday-operations + guardrails
 "corte intraday" / "reativar todas"               meta-ads-intraday-operations/SKILL.md
 "budget" / "billing"                              SOUL + guardrails; exige confirmação/double-confirm quando crítico
