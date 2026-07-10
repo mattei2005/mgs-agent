@@ -14,7 +14,14 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 
 `creditoparaveiculo.com` usa o plugin de quiz `mgs-quiz-carro`; não há plugin de chat nesse site. Quando Rodolfo disser “chat” informalmente sobre essas URLs, confirmar o produto real no runtime e tratar o pedido como quiz, sem envolver `mgs-chat-funnels`.
 
-Versão validada em produção em 2026-07-10: `mgs-quiz-carro` v1.5.3.
+Versão validada em produção em 2026-07-10: `mgs-quiz-carro` v1.6.0.
+
+Correções operacionais v1.6.0:
+
+- `Nome/label` e `URL add-lead` no editor da quiz são somente leitura. O operador escolhe apenas o gestor no seletor; o backend resolve os dados server-side para evitar erro humano ou adulteração de POST.
+- O menu MGS Quiz possui submenu `SMS`, página central para gerenciar os presets G001–G006. A fonte central é a option `mgs_quiz_sms_presets`, com os valores canônicos do plugin apenas como fallback inicial.
+- Salvar a página SMS exige label não vazio e URL HTTPS para todos os gestores. A alteração deve ser propagada para todas as linhas `sms_funnel_urls` das quizzes com o mesmo `gestor_code`, mantendo o runtime REST em paridade com a fonte central.
+- O editor da quiz não oferece modo manual e exige uma seleção válida de gestor antes de salvar.
 
 Correção operacional v1.5.3:
 
