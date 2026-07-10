@@ -52,6 +52,19 @@ Não     | Sim                          | Investigar tracking antes de somar
 
 Objetivo read-only: localizar uma tela/exportação que mostre volume enviado e custo por dia/lista/gestor, e identificar se existe endpoint/API de leitura estável.
 
+Mapeamento read-only do bundle público da dashboard em 2026-07-10 confirmou:
+
+```text
+Item                         | Rota/endpoint autenticado
+-----------------------------|---------------------------------------------------------------
+Tela Performance por Funil   | `/#/analytics/funnel-performance`
+Consolidado por período      | `GET /api/analytics/funnel-performance?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD`
+Detalhe por campanha         | `GET /api/analytics/funnel-performance/{campaignId}/sequences?start_date=...&end_date=...`
+API base                     | `https://web2.smsfunnel.com.br/api`
+```
+
+A tela declara `Receita Total`, `Receita Total SMS`, `Custo Total`, `Total de Conversões SMS`, `Total SMS Enviados` e tabela por funil com `SMS Enviados`, `Custo`, `Conversões`, `Receita` e `ROI`. O tooltip de custo define `quantidade enviada × custo unitário por SMS`. Esses endpoints exigem sessão; nunca colocar token/cookie em log ou chat.
+
 Checklist de exploração:
 
 - filtros por período;
