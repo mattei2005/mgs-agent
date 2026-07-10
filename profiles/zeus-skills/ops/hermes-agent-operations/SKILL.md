@@ -242,6 +242,8 @@ Ver detalhes: `references/hermes-web-brave-search-mgs-2026-05-17.md` e `referenc
 
 Use quando Rodolfo quiser trocar provider de Zeus/Atena/Ares, usar GPT via assinatura ChatGPT, reduzir custo Anthropic/Claude, autenticar `openai-codex`, validar cron jobs após migração, ou auditar chamadas LLM pagas.
 
+Para rollout de modelo/reasoning em múltiplos profiles, incluindo distinção principal vs. auxiliares, verificação auth por agente, smoke real 4/4, limites de `xhigh` vs. Sol Pro e proibição de chamar default fixo de “roteamento automático”, use `references/openai-codex-multi-profile-model-rollout.md`.
+
 ### Fatos essenciais
 
 - Endpoint Codex: `https://chatgpt.com/backend-api/codex` (não `api.openai.com`).
