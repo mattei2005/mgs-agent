@@ -423,6 +423,23 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "mgs-busy-steer-universal-media-20260710",
+      "agent": "zeus",
+      "type": "hermes_runtime_patch",
+      "path": "/root/mgs-agent/patches/hermes/mgs-busy-steer-universal-media-2026-07-10.patch",
+      "sha256": "9f12f1e83635f2eb8ce27ed46582a266b5919fee7f62c9ef00b4ccc9c084f0ae",
+      "runtime_file": "/root/.hermes/hermes-agent/gateway/run.py",
+      "guard_scripts": [
+        "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
+        "/root/mgs-agent/scripts/run-hermes-update-controlled.sh"
+      ],
+      "agents": ["zeus", "atena", "ares", "hera"],
+      "purpose": "Make busy_input_mode=steer incorporate text, image, image+text, voice/audio, audio+text, video, documents and mixed attachments into the active run without next-turn replay.",
+      "validation": "current reverse apply OK; origin/main apply OK; origin/main 35 tests passed; live checkout 128 related tests passed; ruff and py_compile passed; patch guard passed",
+      "status": "pre_restart_validated",
+      "updated_at": "2026-07-10T13:47:40-04:00"
+    },
+    {
       "id": "mgs-busy-input-steer-validation-6a16e41afa9a",
       "agent": "zeus",
       "type": "hermes_cron_one_shot_validation",
