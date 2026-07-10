@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T23:56:54-04:00",
-    "generated_by": "zeus-operational-learning"
+    "updated_at": "2026-07-09T23:59:29-04:00",
+    "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
     {
@@ -1427,38 +1427,6 @@
     },
     {
       "entry": "20 6 * * * flock -n /var/lock/dtr_sb_daily_match_audit.lock /root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh >> /root/mgs-agent/logs/dtr-sb-daily-match-audit-cron.log 2>&1"
-    },
-    {
-      "entry": "Hermes cron ce865343afbe: every 5m, repeat 96, deliver discord:1522487422510694450, script utility-canary-approval-loop.sh, workdir /root/mgs-agent",
-      "id": "ce865343afbe",
-      "name": "SB Utility canary approval loop — 8h extension",
-      "manager": "hermes-cron",
-      "schedule": "every 5m",
-      "repeat": "96 times",
-      "deliver": "discord:1522487422510694450",
-      "script": "utility-canary-approval-loop.sh",
-      "workdir": "/root/mgs-agent",
-      "status": "removed-duplicate-lifecycle-error",
-      "removed_at": "2026-07-09T23:22:16-04:00",
-      "reason": "11/11 templates confirmados 20/20 verdes; cron ativo removido após detectar que o aviso citava ID legado.",
-      "lifecycle_correction_at": "2026-07-09T23:24:16-04:00",
-      "lifecycle_note": "Should have reused one canonical Utility canary cron via pause/resume/update instead of creating a new job ID.",
-      "replaced_by_canonical": "5f4c56c2fc1f"
-    },
-    {
-      "entry": "Hermes cron 5f4c56c2fc1f: every 5m, repeat forever, deliver discord:1522487422510694450, script utility-canary-approval-loop.sh, workdir /root/mgs-agent",
-      "id": "5f4c56c2fc1f",
-      "name": "SB Utility canary approval loop — canonical",
-      "manager": "hermes-cron",
-      "schedule": "every 5m",
-      "repeat": "forever",
-      "deliver": "discord:1522487422510694450",
-      "script": "utility-canary-approval-loop.sh",
-      "workdir": "/root/mgs-agent",
-      "status": "paused",
-      "created_at": "2026-07-09T23:26:58-04:00",
-      "paused_at": "2026-07-09T23:26:21-04:00",
-      "reason": "Single canonical Utility canary job; reuse only with pause/resume/update."
     }
   ],
   "scripts": [
@@ -1764,8 +1732,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
-      "size_bytes": 11060,
-      "modified_at": "2026-07-07T09:42:00-04:00"
+      "size_bytes": 11737,
+      "modified_at": "2026-07-09T23:57:28-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
@@ -2079,8 +2047,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
-      "size_bytes": 30807,
-      "modified_at": "2026-07-05T20:03:39-04:00"
+      "size_bytes": 31038,
+      "modified_at": "2026-07-09T23:57:20-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/run-openhands-atena.sh",
@@ -4301,9 +4269,7 @@
       {
         "name": "segurador-page-health-monitor",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/zeus/skills/growth/segurador-page-health-monitor/SKILL.md",
-        "last_updated_at": "2026-07-09T23:56:54-04:00",
-        "purpose": "Monitorar saúde de seguradores/páginas B001-B011 e quarentena reversível em Smart Bidding"
+        "skill_md": "/root/.hermes/profiles/zeus/skills/growth/segurador-page-health-monitor/SKILL.md"
       },
       {
         "name": "native-mcp",
@@ -4618,8 +4584,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 1149,
-      "md5": "c2a2d13b5f875d254296f257a6844a0c",
-      "modified_at": "2026-07-09T23:17:01-04:00"
+      "md5": "bb8f1f5d7250700c2ebfc7eb6470bcd8",
+      "modified_at": "2026-07-09T23:57:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -4630,8 +4596,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "fbdf5bc8f7998de4e028a2e87f38b31c",
-      "modified_at": "2026-07-09T23:11:24-04:00"
+      "md5": "67a0f7d3c63fa0fbd75ddbd142877921",
+      "modified_at": "2026-07-09T23:56:29-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -4642,8 +4608,8 @@
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
       "size_bytes": 25839,
-      "md5": "af77d6d001d69f32564c92212fb965da",
-      "modified_at": "2026-07-09T23:08:02-04:00"
+      "md5": "05ea5d03972005ae7b69f838e8419e97",
+      "modified_at": "2026-07-09T23:57:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -4654,8 +4620,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 316,
-      "md5": "6649a365569daf898c060b0d4b19e212",
-      "modified_at": "2026-07-09T23:15:02-04:00"
+      "md5": "14f93ae0793e5afc242c85feed65b018",
+      "modified_at": "2026-07-09T23:45:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -4696,8 +4662,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 25165,
-      "md5": "c122957468fd036d1a6389667c86d2e6",
-      "modified_at": "2026-07-09T23:15:02-04:00"
+      "md5": "b84b082915dbd284d866bd02898ab769",
+      "modified_at": "2026-07-09T23:55:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
@@ -4708,14 +4674,14 @@
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 438,
-      "md5": "546a2df4492329b8b90aca0dc2aa1c18",
-      "modified_at": "2026-07-09T23:15:52-04:00"
+      "md5": "d1622cbf63a6715d638e654c8f5d58d5",
+      "modified_at": "2026-07-09T23:45:33-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 195502,
-      "md5": "f4bffd373e56c5973c6e7be8d18acd68",
-      "modified_at": "2026-07-09T23:16:19-04:00"
+      "size_bytes": 197427,
+      "md5": "7f955a8695ab8e38c74f4ee338af4fc1",
+      "modified_at": "2026-07-09T23:56:54-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -4738,8 +4704,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 48991,
-      "md5": "6265425f0aa6897e4216db01f72836f8",
-      "modified_at": "2026-07-09T23:15:13-04:00"
+      "md5": "839c36066fe77a1661aace34f9b17500",
+      "modified_at": "2026-07-09T23:54:55-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -4828,8 +4794,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
-      "md5": "c28749d461a12905f7e9f97e6e4e4f3a",
-      "modified_at": "2026-07-09T23:16:02-04:00"
+      "md5": "9a9f3c04fa3c493a86cec88ee25aa649",
+      "modified_at": "2026-07-09T23:56:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -4857,9 +4823,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 1759,
-      "md5": "db35ac8694e37c64ee1a469ed0d7cd16",
-      "modified_at": "2026-07-09T23:15:03-04:00"
+      "size_bytes": 1760,
+      "md5": "ae897bf1dbf910a0ffc8baab32869865",
+      "modified_at": "2026-07-09T23:55:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
