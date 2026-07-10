@@ -137,10 +137,15 @@ final class MGS_Chat_Funnels {
             '{{OFFER_URLS_JS}}' => $this->js_json($this->offer_urls_from_config($config)),
             '{{GATE_SLIDES_HTML}}' => $this->render_gate_slides_html($config),
             '{{GATE_QUESTION_COUNT_JS}}' => (string) $this->gate_question_count($config),
-            '{{JBF_REWARDED_PRELOAD_JS}}' => $ad_provider === 'm2' ? '' : "window.jbftag = window.jbftag || { cmd: [] };\n          window.jbftag.cmd.push(() => {\n            if (window.jbftag.requestRewardAds) {\n              window.jbftag.requestRewardAds();\n            }\n          });",
-            '{{JBF_REWARDED_SHOW_JS}}' => $ad_provider === 'm2' ? '' : "try {\n              window.jbftag = window.jbftag || { cmd: [] };\n              window.jbftag.cmd.push(() => {\n                if (window.jbftag.showRewardedAds) {\n                  window.jbftag.showRewardedAds(safeCloseQuiz);\n                } else {\n                  safeCloseQuiz();\n                }\n              });\n            } catch (err) {\n              safeCloseQuiz();\n            }",
+            '{{JBF_REWARDED_PRELOAD_JS}}' => $ad_provider === 'jbf' ? "window.jbftag = window.jbftag || { cmd: [] };\n          window.jbftag.cmd.push(() => {\n            if (window.jbftag.requestRewardAds) {\n              window.jbftag.requestRewardAds();\n            }\n          });" : '',
+            '{{JBF_REWARDED_SHOW_JS}}' => $ad_provider === 'jbf' ? "try {\n              window.jbftag = window.jbftag || { cmd: [] };\n              window.jbftag.cmd.push(() => {\n                if (window.jbftag.showRewardedAds) {\n                  window.jbftag.showRewardedAds(safeCloseQuiz);\n                } else {\n                  safeCloseQuiz();\n                }\n              });\n            } catch (err) {\n              safeCloseQuiz();\n            }" : '',
 
         );
+
+        if ($ad_provider === 'actview') {
+            $actview_top = '<div id="zout_top_wrapper" align="center" style="width: 100%; margin-top: 2rem; margin-bottom: 2rem; min-height: 400px;"><div><p style="font-size: 10px; text-transform: uppercase; text-align: center;">Anúncios</p><div id="zout_top"></div></div></div>';
+            $template = str_replace('adBanner.innerHTML = `<div></div>`;', 'adBanner.innerHTML = `' . $actview_top . '`;', $template);
+        }
 
         echo strtr($template, $replacements); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
