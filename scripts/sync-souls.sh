@@ -38,6 +38,19 @@ rsync -a --delete \
     "$TARGET_DIR/zeus-skills/ops/" \
     && echo "$(date -Iseconds) synced zeus skills/ops"
 
+# Zeus: growth/ MGS específicas usadas por governança/monitoramento.
+# Não sincronizar a categoria growth inteira; preservar apenas as skills customizadas
+# refatoradas e validadas nesta operação.
+mkdir -p "$TARGET_DIR/zeus-skills/growth"
+for skill in meta-utility-template-approval meta-app-rate-limit-monitor segurador-page-health-monitor; do
+    if [ -d "$PROFILES_DIR/zeus/skills/growth/$skill" ]; then
+        rsync -a --delete \
+            "$PROFILES_DIR/zeus/skills/growth/$skill/" \
+            "$TARGET_DIR/zeus-skills/growth/$skill/" \
+            && echo "$(date -Iseconds) synced zeus skills/growth/$skill"
+    fi
+done
+
 # Atena: wordpress/ + devops/ (skills WP e deploy MGS-específicas)
 mkdir -p "$TARGET_DIR/atena-skills"
 for category in wordpress devops; do
