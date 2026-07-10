@@ -32,9 +32,8 @@ Rotas confirmadas no banco em 2026-07-10:
 - G004 — `/quiz-car-parcelas-g004/`
 - G005 — `/quiz-car-parcelas-g005/`
 - G006 — `/quiz-car-parcelas-g006/`
+- G007 — `/quiz-car-parcelas-g007/` (`layout_template=quiz_maker_sb`) — criada em 2026-07-10 com todos os dados internos clonados da G002/default, incluindo SMS Funnel, redirect, tracking, textos, opções e imagens; somente ID, nome, slug, modelo visual e `updated_at` diferem.
 - Modelo FMYBC/SMS — `/quiz-car-002-g002/` (`layout_template=fmybc_sms`).
-
-Não assumir que `/quiz-car-parcelas-g007/` existe: essa rota estava documentada, mas não constava no banco/runtime em 2026-07-10 e caiu na homepage.
 
 G002 is the default route without suffix. New campaign variants keep the sequential `gNNN` slug pattern unless Rodolfo defines a different campaign family.
 

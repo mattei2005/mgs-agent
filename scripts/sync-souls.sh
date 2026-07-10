@@ -68,6 +68,25 @@ if [ -d "$PROFILES_DIR/ares/skills/growth" ]; then
         && echo "$(date -Iseconds) synced ares skills/growth"
 fi
 
+# Ares/Hera: skills ops MGS compartilhadas, sincronizadas seletivamente.
+# Não sincronizar a categoria ops inteira: preservar apenas as skills operacionais
+# que foram auditadas/refatoradas e precisam de mirror versionado.
+for agent in ares hera; do
+    mkdir -p "$TARGET_DIR/$agent-skills/ops"
+    skills=(discord-ops log-monitor-discord-alert)
+    if [ "$agent" = "hera" ]; then
+        skills+=(hermes-agent-operations)
+    fi
+    for skill in "${skills[@]}"; do
+        if [ -d "$PROFILES_DIR/$agent/skills/ops/$skill" ]; then
+            rsync -a --delete \
+                "$PROFILES_DIR/$agent/skills/ops/$skill/" \
+                "$TARGET_DIR/$agent-skills/ops/$skill/" \
+                && echo "$(date -Iseconds) synced $agent skills/ops/$skill"
+        fi
+    done
+done
+
 # Hera: skills customizadas Creative Ops MGS.
 # Não sincronizar a categoria creative inteira para evitar vendor/bundled skills enormes.
 mkdir -p "$TARGET_DIR/hera-skills/creative"
