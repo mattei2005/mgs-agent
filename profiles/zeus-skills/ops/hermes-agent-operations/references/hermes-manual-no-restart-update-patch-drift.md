@@ -25,6 +25,7 @@ Context: MGS sometimes needs to update `/root/.hermes/hermes-agent` while keepin
    - reinstall Python deps with `uv pip install --python "$repo/venv/bin/python" -e "$repo[all]"`;
    - run npm install/build for `web` and `ui-tui` if package.json exists;
    - clear stale `.update_check` files.
+   - for any detached finalizer launched with `systemd-run`, export `HOME=/root` and `PATH=/root/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin` before calling `hermes`; transient units do not inherit `/root/.local/bin` and otherwise fail with exit 127 before the restart starts.
 5. Validate before reporting success:
    - HEAD equals origin/main and behind=0;
    - patch guard OK;

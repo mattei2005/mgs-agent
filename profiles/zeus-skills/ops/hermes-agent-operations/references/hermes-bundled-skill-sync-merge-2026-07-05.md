@@ -7,7 +7,7 @@ Use when `hermes update` reports `user-modified bundled skill(s) (kept as-is)` a
 Do **not** blindly run `hermes skills reset <skill> --restore` on every modified bundled skill. Classify each diff first:
 
 - **Empty/stale local copy** → restore stock (`--restore --yes`).
-- **Local artifact only** (`__pycache__`, temporary files) → delete artifact and rebaseline.
+- **Local artifact only** (`__pycache__`, temporary files) → move artifact to a secure rollback directory (or delete only after any required critical confirmation), then rebaseline.
 - **Useful local addition only** → keep local copy and rebaseline.
 - **Both sides useful** → merge manually, then rebaseline the manifest to the merged copy.
 
@@ -34,7 +34,7 @@ Back up `/root/.hermes/skills` and `/root/.hermes/profiles/{zeus,atena,ares,hera
 4. **Apply by classification**
 
 - Restore stock for stale/empty local copies.
-- Remove local junk files before rebaseline.
+- For artifact-only drift, preserve rollback by moving junk outside the skill tree before rebaseline; avoid irreversible deletion when the operation requires separate confirmation.
 - For merges, start from the current bundled stock in `/root/.hermes/hermes-agent/skills/...`, then add back only useful local operational content.
 
 5. **Rebaseline intentionally**
