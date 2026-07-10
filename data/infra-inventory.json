@@ -423,6 +423,29 @@
   ],
   "runtime_artifacts": [
     {
+      "id": "mgs-busy-input-steer-validation-6a16e41afa9a",
+      "agent": "zeus",
+      "type": "hermes_cron_one_shot_validation",
+      "job_id": "6a16e41afa9a",
+      "schedule": "2026-07-10T17:21:34Z",
+      "deliver": "origin",
+      "purpose": "Validate post-restart busy_input_mode=steer for Zeus, Atena, Ares and Hera and deliver a clean callback to the originating Discord thread.",
+      "status": "scheduled",
+      "updated_at": "2026-07-10T13:18:34-04:00"
+    },
+    {
+      "id": "mgs-gateway-restart-20260710T171828Z-1228554",
+      "agent": "zeus",
+      "type": "gateway_restart_finalizer",
+      "unit": "mgs-gateway-restart-20260710T171828Z-1228554",
+      "finalizer_path": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20260710T171828Z-1228554.sh",
+      "log_path": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260710T171828Z-1228554.log",
+      "agents": ["atena", "ares", "hera", "zeus"],
+      "purpose": "Apply busy_input_mode=steer after validated live and mirror config changes; Zeus restarts last.",
+      "status": "scheduled",
+      "updated_at": "2026-07-10T13:18:28-04:00"
+    },
+    {
       "id": "hera-meta-library-first10-clean-zip-2026-06-18",
       "agent": "hera",
       "path": "/tmp/hera-meta-library-test/utua_first10_2026-06-18T22-29-47-519Z/utua_meta_library_first10_clean.zip",
