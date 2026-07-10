@@ -52,6 +52,16 @@ Nunca recriar esse fluxo em `/tmp`. Nunca apagar, substituir, anexar ou versiona
 - O wrapper usa lock exclusivo; nunca abrir dois Chromium simultaneamente no mesmo perfil nem remover `SingletonLock` manualmente.
 - O browser roda como root apenas por limitação atual do host e mantém `--no-sandbox`; não desativar site isolation e não usar esse runtime para navegação fora de `facebook.com/ads/library/`.
 
+## Reautenticação manual persistente
+
+Quando a Library pública abrir, mas uma busca específica não carregar cards e `authenticatedLikely=false`, abrir a sessão visual local-only:
+
+```bash
+/root/mgs-agent/scripts/hera-meta-library-login-browser.sh '<URL DA LIBRARY>'
+```
+
+O helper usa o mesmo perfil persistente, Xvfb + x11vnc + noVNC, com VNC/noVNC vinculados somente a `127.0.0.1`. Rodolfo acessa por túnel SSH; nunca publicar a porta nem pedir senha/cookies no Discord. Após ele confirmar o login, encerrar a sessão visual de forma limpa para o Chromium salvar o perfil e só então rodar novamente o coletor headless.
+
 ## Verificação de encerramento
 
 Uma coleta só está concluída quando houver readback real de:
