@@ -32,6 +32,26 @@ Implementation:
 - The router runs after session override resolution and before `agent.reasoning_config` is assigned.
 - It does not make an extra LLM call or alter the prompt, preserving latency and prompt-cache stability.
 - Safety order: critical markers / long payload / code-heavy payload are evaluated before the short-message fast path, so terse production commands are never downgraded.
+- Apply the decision in both the principal gateway turn and background-task path. On cached-agent reuse, assign the routed value to `agent.reasoning_config` again for that turn.
+- Keep `reasoning_config` out of `_agent_config_signature`: it does not change the system prompt or tool schemas. For Codex Responses, `medium`/`high`/`xhigh` must keep the same content-addressed `prompt_cache_key`; only `reasoning.effort` changes.
+- This is a conservative current-message heuristic, not full semantic classification: it does not inspect conversation history or re-evaluate after tools. Subagents inherit the parent turn effort unless `delegation.reasoning_effort` overrides it.
+- `codex_app_server` currently does not forward effort in `turn/start`; scope initial MGS validation to `codex_responses`.
+
+## Guardrails and UX semantics
+
+- Parse numeric thresholds with safe defaults and clamps. Invalid strings or YAML `null` must never raise `ValueError`/`TypeError` in the message path.
+- Disabled or malformed auto-routing must fail closed to the profile default.
+- Explicit session `/reasoning <level>` wins; `/reasoning reset` resumes automatic routing.
+- Define `/reasoning <level> --global` honestly: with auto-routing enabled, either disable auto-routing or state that the global value changed only the fallback. Do not claim all turns are pinned.
+- `/reasoning` status must expose that Auto is active; reporting only `high/global` is misleading when the next turn may route to `medium` or `xhigh`.
+- A session `/model` override can select a backend that rejects `xhigh`. Clamp by the active model/provider capability or fall back to its configured effort.
+- The base `gpt-5.6-sol` may itself advertise `low`, `medium`, `high`, `xhigh`, `max`, and `ultra`; in that case Extra High is `xhigh` and does not require a `*-pro` slug. Treat missing Pro variants as a separate Codex catalog/picker issue.
+
+## Read-only audit with concurrent working-tree changes
+
+- Record `git status` at the beginning and end.
+- If new files/diffs appear during the audit, treat them as concurrent work: inspect and test read-only, but do not overwrite or claim authorship.
+- Report which files pre-existed, which appeared during the audit, and whether the auditor changed any source/config.
 
 Canonical patch and guard:
 
@@ -45,8 +65,11 @@ Required validation:
 2. `git apply --check` against an `origin/main` worktree before Hermes updates.
 3. `py_compile gateway/run.py gateway/reasoning_router.py`.
 4. `pytest tests/gateway/test_auto_reasoning_routing.py tests/gateway/test_reasoning_command.py`.
-5. Read back live + mirror configs for all four profiles.
-6. Restart gateways safely with Zeus last, then run real smoke calls.
+5. Add behavior tests for malformed/`null` thresholds, session-override precedence, reset-to-auto, provider/model capability clamp, and both principal/background integration paths.
+6. Assert cache invariants explicitly: same cached `AIAgent`, frozen system prompt, and same `prompt_cache_key` across `medium`, `high`, and `xhigh`.
+7. Read back live + mirror configs for all four profiles.
+8. Restart gateways safely with Zeus last, then run real smoke calls. Separate unrelated pre-existing suite failures from routing regressions.
+9. If Zeus restarts, use an external finalizer that validates new PIDs/services and posts a clean callback to the originating thread. A file-only log or `systemctl active` without delivery is not completion; auto-resume may fail even when restart succeeds.
 
 ## OAuth prerequisite
 

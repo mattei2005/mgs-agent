@@ -251,6 +251,7 @@ Para rollout de modelo/reasoning em múltiplos profiles, incluindo distinção p
 - Billing Hermes: `openai-codex` deve aparecer como `subscription_included`/included, sem pay-per-token.
 - Modelo principal MGS atual: `gpt-5.6-sol` via plano ChatGPT; `gpt-5.5` é legado/fallback apenas quando explicitamente mantido.
 - Roteamento MGS por dificuldade: Medium para simples, High para operação normal e `xhigh`/Extra High para crítico/long/code-heavy. Override explícito `/reasoning` sempre vence. Implementação e validação: `references/gpt56-sol-auto-reasoning-routing-mgs.md`.
+- Migração de modelo/config só termina após restart seguro + smoke real de cada profile. Quando Zeus precisar reiniciar, não depender de auto-resume: preparar finalizer externo com callback verificável para a thread de origem, porque o gateway pode voltar `active` sem retomar a conversa automaticamente. Nunca declarar “tudo pronto” antes desse callback pós-restart.
 - `gpt-5.6-sol-pro` só pode ser oferecido após aparecer na lista viva do Codex; não inventar slug nem assumir entitlement.
 - Política operacional MGS: zero Anthropic/Claude API pay-per-token por padrão, salvo autorização explícita do Rodolfo.
 
