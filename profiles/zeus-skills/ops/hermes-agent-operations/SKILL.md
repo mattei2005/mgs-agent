@@ -249,8 +249,10 @@ Para rollout de modelo/reasoning em múltiplos profiles, incluindo distinção p
 - Endpoint Codex: `https://chatgpt.com/backend-api/codex` (não `api.openai.com`).
 - Auth: OAuth device-code via assinatura ChatGPT; tokens em `auth.json`.
 - Billing Hermes: `openai-codex` deve aparecer como `subscription_included`/included, sem pay-per-token.
-- Modelo MGS atual conhecido: `gpt-5.5` via plano ChatGPT.
-- Política operacional MGS: zero Anthropic/Claude API pay-per-token por padrão, salvo autorização explícita de Rodolfo.
+- Modelo principal MGS atual: `gpt-5.6-sol` via plano ChatGPT; `gpt-5.5` é legado/fallback apenas quando explicitamente mantido.
+- Roteamento MGS por dificuldade: Medium para simples, High para operação normal e `xhigh`/Extra High para crítico/long/code-heavy. Override explícito `/reasoning` sempre vence. Implementação e validação: `references/gpt56-sol-auto-reasoning-routing-mgs.md`.
+- `gpt-5.6-sol-pro` só pode ser oferecido após aparecer na lista viva do Codex; não inventar slug nem assumir entitlement.
+- Política operacional MGS: zero Anthropic/Claude API pay-per-token por padrão, salvo autorização explícita do Rodolfo.
 
 ### Login inicial
 
