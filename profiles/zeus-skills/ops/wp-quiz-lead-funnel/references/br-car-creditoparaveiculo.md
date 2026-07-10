@@ -113,6 +113,16 @@ Redirect split UI should be business-facing:
 - Tables should avoid narrow wrapping for gestor, SMS, phone.
 - After saving an edit, redirect back to the same edit screen (`admin.php?page=mgs-quiz-new&id=<id>&saved=1`), not to the quiz list, so the operator keeps context.
 
+## SMS Cost Reporting
+
+- Canonical unit cost informed by Rodolfo: **R$ 0,08 per SMS sent**.
+- The report page `admin.php?page=mgs-quiz-report` should show spend by quiz for the active date/filter range: quiz, successful SMS count, unit cost, and total estimated spend.
+- Formula: `successful_sms_count × 0.08`, calculated in integer centavos to avoid floating-point drift.
+- Also show consolidated cards for total successful SMS and total estimated spend across the filtered result set.
+- If WordPress only records successful lead delivery to SMS Funnel (`ok:G00X`) and cannot observe the vendor's actual outbound message event, label the metric **Custo estimado**, not actual spend.
+- Do not count `fail:*`, `error`, `skipped`, or `historical_import` rows.
+- If an automation can send multiple SMS per lead, accurate actual spend requires a vendor event/webhook or imported send-count report; never silently equate one accepted lead with multiple outbound messages.
+
 ## Known Interpretation
 
 If WordPress records `ok:G00X` and SMS Funnel returns `success:true` with the correct `list_id`, but SMS Funnel dashboard still shows zero, treat it as likely SMS Funnel dashboard delay/cache/indexing/filter/deduplication unless contrary evidence appears.
