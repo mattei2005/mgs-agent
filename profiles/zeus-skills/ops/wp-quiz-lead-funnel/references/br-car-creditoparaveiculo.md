@@ -14,7 +14,14 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 
 `creditoparaveiculo.com` usa o plugin de quiz `mgs-quiz-carro`; não há plugin de chat nesse site. Quando Rodolfo disser “chat” informalmente sobre essas URLs, confirmar o produto real no runtime e tratar o pedido como quiz, sem envolver `mgs-chat-funnels`.
 
-Versão validada em produção em 2026-07-10: `mgs-quiz-carro` v1.6.0.
+Versão validada em produção em 2026-07-10: `mgs-quiz-carro` v1.6.1.
+
+Hardening operacional v1.6.1:
+
+- A atualização central de SMS deve rodar somente com `wp_options` e `wp_mgs_quiz_config` em InnoDB, iniciar transação antes da leitura, carregar as quizzes com `SELECT ... FOR UPDATE`, verificar falhas de start/select/update/commit e invalidar o cache da option em rollback.
+- Elementos inválidos dentro de `sms_funnel_urls` devem abortar com rollback, nunca causar propagação parcial ou TypeError.
+- URLs centrais são válidas apenas com HTTPS, host `v2.smsfunnel.com.br` e path `/integrations/lists/<id>/add-lead`; option inválida cai nos defaults canônicos e POST inválido é bloqueado sem alterar option/configs.
+- O escopo atual é deliberadamente G001–G006. Antes de introduzir código legado/customizado, migrar explicitamente e ampliar a fonte central; não permitir fallback manual silencioso no editor.
 
 Correções operacionais v1.6.0:
 
@@ -56,10 +63,11 @@ Rotas confirmadas no banco em 2026-07-10:
 - G004 — `/quiz-car-parcelas-g004/`
 - G005 — `/quiz-car-parcelas-g005/`
 - G006 — `/quiz-car-parcelas-g006/`
-- G007 — `/quiz-car-parcelas-g007/` (`layout_template=quiz_maker_sb`) — criada em 2026-07-10 com todos os dados internos clonados da G002/default, incluindo SMS Funnel, redirect, tracking, textos, opções e imagens; somente ID, nome, slug, modelo visual e `updated_at` diferem.
+- QM001 — `/quiz-car-parcelas-g002-qm001/` (`layout_template=quiz_maker_sb`) — renomeada por Rodolfo a partir da G007 criada por Zeus; mantém dados internos da G002/default.
+- QM002 — `/quiz-car-parcelas-g002-qm002/` (`layout_template=quiz_maker_sb`) — duplicada por Rodolfo a partir da QM001; validada com lead `ok:G002`.
 - Modelo FMYBC/SMS — `/quiz-car-002-g002/` (`layout_template=fmybc_sms`).
 
-G002 is the default route without suffix. New campaign variants keep the sequential `gNNN` slug pattern unless Rodolfo defines a different campaign family.
+A slug temporária `/quiz-car-parcelas-g007/` não é mais uma quiz ativa após a renomeação para QM001. G002 is the default route without suffix. New campaign variants use the naming defined by Rodolfo.
 
 ## SMS Funnel Routing
 
