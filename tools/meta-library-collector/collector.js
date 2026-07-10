@@ -249,7 +249,7 @@ async function main() {
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2), { mode: 0o600 });
   await context.close();
 
-  const success = data.markers.adLibrary && (data.libraryIds.length > 0 || data.markers.noResults);
+  const success = data.markers.adLibrary && data.libraryIds.length > 0;
   process.stdout.write(JSON.stringify({
     success,
     reportPath,
