@@ -68,11 +68,16 @@
 
   function adProvider(config) {
     var provider = String(config.ad_provider || 'jbf').toLowerCase();
-    return provider === 'm2' || provider === 'monetizemore' || provider === 'monetize-more' ? 'm2' : 'jbf';
+    if (provider === 'm2' || provider === 'monetizemore' || provider === 'monetize-more') return 'm2';
+    if (provider === 'actview' || provider === 'zuout-actview') return 'actview';
+    return 'jbf';
   }
 
   function applyRewardedClass(config, node) {
-    if (node && adProvider(config) === 'm2') node.classList.add('pg-rewarded');
+    if (!node) return;
+    var provider = adProvider(config);
+    if (provider === 'm2') node.classList.add('pg-rewarded');
+    if (provider === 'actview') node.classList.add('av-rewarded');
   }
 
   function ChatFunnel(container, config) {
