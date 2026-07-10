@@ -46,6 +46,34 @@ sudo reboot
 
 Then validate after the VPS returns: current kernel matches expected, `apt list --upgradable` empty, `dpkg --audit` clean, Zeus/Atena/Ares/Hera active, Hermes up to date, and recent gateway logs clean.
 
+## Forced phased updates in controlled batches
+
+When Rodolfo explicitly wants the VPS fully current instead of waiting for Ubuntu phased rollout:
+
+1. Simulate each package group with explicit names and `apt-get -s install --only-upgrade ...`.
+2. Require zero removals and zero unexpected new dependencies before mutation.
+3. Snapshot exact package versions, gateway states, `dpkg --audit`, reboot flag, Node/npm/Corepack, and create rollback backup before the first batch.
+4. Apply explicit batches instead of one broad command. Recommended risk isolation:
+   - `apport` + Python helpers;
+   - `libheif` + plugins;
+   - `fwupd` + library;
+   - `plymouth` + library/theme last.
+5. After every batch, require empty `dpkg --audit` and Zeus/Atena/Ares/Hera + cron/autocommit active. Stop on the first failed batch.
+6. A phased package is not necessarily broken or held; explicit `--only-upgrade` opts into the candidate early. Keep this distinction in the report.
+
+## Corepack/npm major update isolation
+
+Treat global Node package-manager updates separately from APT even when the user says “update everything”:
+
+1. Check target `engines.node` and registry shasum metadata before mutation.
+2. Back up `/usr/lib/node_modules/npm` and `/usr/lib/node_modules/corepack` outside Git; verify archive and checksum; record current versions.
+3. Upgrade Corepack first. Validate its exact version, Node/npm unchanged, and gateways active.
+4. Upgrade npm major second. Validate exact version, `npm ping`, one real `npm exec` smoke, global prefix, `npm outdated -g`, and gateways.
+5. Final acceptance requires APT pending `0`, npm global pending `{}`, no held packages, clean `dpkg`, zero failed units, and no reboot requirement unless documented.
+6. Retain the rollback archive until post-maintenance validation is complete; never mix npm rollback troubleshooting with APT rollback.
+
+Validated 2026-07-10: 12 phased Ubuntu packages were applied in four explicit batches after simulation; Corepack `0.34.6 → 0.35.0` and npm `10.9.8 → 12.0.0` were then updated independently with rollback backup and real smokes. Final state: APT `0`, npm outdated `{}`, gateways `4/4`, clean `dpkg`, no reboot.
+
 ## Reporting shape
 
 Keep the final report executive:
