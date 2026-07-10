@@ -1,12 +1,12 @@
 diff --git a/tests/tools/test_skills_tool.py b/tests/tools/test_skills_tool.py
-index a7445207c..feec41229 100644
+index a7445207c..7d001e397 100644
 --- a/tests/tools/test_skills_tool.py
 +++ b/tests/tools/test_skills_tool.py
-@@ -494,6 +494,101 @@ class TestSkillView:
+@@ -494,6 +494,145 @@ class TestSkillView:
          result = json.loads(raw)
          assert result["linked_files"] is not None
          assert "references" in result["linked_files"]
-+        assert result["linked_files_summary"] is None
++        assert "linked_files_summary" not in result
 +
 +    def test_view_compacts_large_linked_file_inventory(self, tmp_path):
 +        with patch("tools.skills_tool.SKILLS_DIR", tmp_path):
@@ -58,7 +58,7 @@ index a7445207c..feec41229 100644
 +            result = json.loads(skill_view("full-skill"))
 +
 +        assert len(result["linked_files"]["references"]) == 41
-+        assert result["linked_files_summary"] is None
++        assert "linked_files_summary" not in result
 +
 +    def test_view_config_full_override_is_instant_rollback(self, tmp_path):
 +        with (
@@ -76,7 +76,7 @@ index a7445207c..feec41229 100644
 +            result = json.loads(skill_view("config-full-skill"))
 +
 +        assert len(result["linked_files"]["references"]) == 41
-+        assert result["linked_files_summary"] is None
++        assert "linked_files_summary" not in result
 +
 +    def test_view_compact_override_applies_to_small_inventory(self, tmp_path):
 +        with patch("tools.skills_tool.SKILLS_DIR", tmp_path):
@@ -101,14 +101,58 @@ index a7445207c..feec41229 100644
 +        }
 +        assert result["linked_files_summary"]["mode"] == "compact"
 +        assert result["linked_files_summary"]["omitted"] == {"references": 1}
++
++    def test_linked_files_helper_preserves_small_inventory_order(self):
++        linked = {"references": ["references/z.md", "references/a.md"]}
++        visible, summary = skills_tool_module._linked_files_for_view(
++            linked,
++            "",
++            {},
++        )
++        assert visible == linked
++        assert summary is None
++
++    def test_view_large_all_referenced_inventory_remains_unchanged(self, tmp_path):
++        paths = [f"references/ref-{index:02d}.md" for index in range(41)]
++        with patch("tools.skills_tool.SKILLS_DIR", tmp_path):
++            skill_dir = _make_skill(
++                tmp_path,
++                "all-referenced-skill",
++                body="\n".join(f"Load `{path}`." for path in paths),
++            )
++            refs_dir = skill_dir / "references"
++            refs_dir.mkdir()
++            for index, path in enumerate(paths):
++                (skill_dir / path).write_text(str(index))
++            expected = [
++                str(path.relative_to(skill_dir)) for path in refs_dir.glob("*.md")
++            ]
++            result = json.loads(skill_view("all-referenced-skill"))
++
++        assert result["linked_files"] == {"references": expected}
++        assert "linked_files_summary" not in result
++
++    def test_linked_files_helper_normalizes_windows_separators(self):
++        linked = {
++            "references": ["references\\used.md"],
++            "assets": [f"assets\\unused-{index:02d}.png" for index in range(40)],
++        }
++        visible, summary = skills_tool_module._linked_files_for_view(
++            linked,
++            "Load `references/used.md`.",
++            {},
++        )
++        assert visible == {"references": ["references\\used.md"]}
++        assert summary is not None
++        assert summary["omitted_files"] == 40
  
      def test_view_tags_from_metadata(self, tmp_path):
          with patch("tools.skills_tool.SKILLS_DIR", tmp_path):
 diff --git a/tools/skills_tool.py b/tools/skills_tool.py
-index a5613f62c..a5e714c0c 100644
+index a5613f62c..0a66a0b79 100644
 --- a/tools/skills_tool.py
 +++ b/tools/skills_tool.py
-@@ -615,6 +615,86 @@ def _parse_tags(tags_value) -> List[str]:
+@@ -615,6 +615,94 @@ def _parse_tags(tags_value) -> List[str]:
      return [t.strip().strip("\"'") for t in tags_value.split(",") if t.strip()]
  
  
@@ -138,7 +182,9 @@ index a5613f62c..a5e714c0c 100644
 +    - ``skills.linked_files_compact_threshold`` changes the auto threshold
 +      (default 40 total files).
 +    """
-+    normalized = {category: sorted(files) for category, files in linked_files.items() if files}
++    normalized = {
++        category: list(files) for category, files in linked_files.items() if files
++    }
 +    total = sum(len(files) for files in normalized.values())
 +    if not total:
 +        return normalized, None
@@ -167,24 +213,30 @@ index a5613f62c..a5e714c0c 100644
 +    if not should_compact:
 +        return normalized, None
 +
-+    content = rendered_content or ""
++    content = (rendered_content or "").replace("\\", "/")
 +    visible: Dict[str, List[str]] = {}
 +    totals: Dict[str, int] = {}
 +    shown: Dict[str, int] = {}
 +    omitted: Dict[str, int] = {}
 +    for category, files in normalized.items():
-+        selected = [path for path in files if path in content]
++        selected = [path for path in files if path.replace("\\", "/") in content]
 +        if selected:
 +            visible[category] = selected
 +        totals[category] = len(files)
 +        shown[category] = len(selected)
 +        omitted[category] = len(files) - len(selected)
 +
++    omitted_total = sum(omitted.values())
++    if omitted_total == 0:
++        return normalized, None
++
 +    summary = {
 +        "compacted": True,
 +        "mode": mode,
 +        "threshold": threshold,
 +        "total_files": total,
++        "shown_files": total - omitted_total,
++        "omitted_files": omitted_total,
 +        "totals": totals,
 +        "shown": shown,
 +        "omitted": omitted,
@@ -195,7 +247,7 @@ index a5613f62c..a5e714c0c 100644
  
  def _get_disabled_skill_names() -> Set[str]:
      """Load disabled skill names from config.
-@@ -1561,6 +1641,25 @@ def skill_view(
+@@ -1561,6 +1649,25 @@ def skill_view(
                      "Could not preprocess skill content for %s", skill_name, exc_info=True
                  )
  
@@ -221,15 +273,24 @@ index a5613f62c..a5e714c0c 100644
          result = {
              "success": True,
              "name": skill_name,
-@@ -1571,9 +1670,8 @@ def skill_view(
+@@ -1571,9 +1678,7 @@ def skill_view(
              "path": rel_path,
              "skill_dir": str(skill_dir) if skill_dir else None,
              "linked_files": linked_files if linked_files else None,
 -            "usage_hint": "To view linked files, call skill_view(name, file_path) where file_path is e.g. 'references/api.md' or 'assets/config.yaml'"
 -            if linked_files
 -            else None,
-+            "linked_files_summary": linked_files_summary,
 +            "usage_hint": usage_hint,
              "required_environment_variables": required_env_vars,
              "required_commands": [],
              "missing_required_environment_variables": remaining_missing_required_envs,
+@@ -1586,6 +1691,9 @@ def skill_view(
+             else SkillReadinessStatus.AVAILABLE.value,
+         }
+ 
++        if linked_files_summary:
++            result["linked_files_summary"] = linked_files_summary
++
+         setup_help = next((e["help"] for e in required_env_vars if e.get("help")), None)
+         if setup_help:
+             result["setup_help"] = setup_help
