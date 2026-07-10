@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T17:13:05-04:00",
+    "updated_at": "2026-07-10T17:16:23-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1148,19 +1148,32 @@
         }
       },
       "validation": "PHP lint 11/11; plugin active v1.5.0; default and fmybc layouts regression-smoked; Quiz Maker SB canary rendered 4 options, advanced to form, stored one test lead, no JS errors; canary config and test lead removed; remaining=0.",
-      "updated_at": "2026-07-10T16:00:07-04:00",
+      "updated_at": "2026-07-10T17:16:23-04:00",
       "active_quizzes": [
         {
-          "slug": "quiz-car-parcelas-g007",
-          "url": "https://creditoparaveiculo.com/quiz-car-parcelas-g007/",
-          "name": "Creditoparaveiculo-quiz-br-car-br-g007-modelo-quiz-maker-sb",
+          "slug": "quiz-car-parcelas-g002-qm001",
+          "url": "https://creditoparaveiculo.com/quiz-car-parcelas-g002-qm001/",
+          "name": "Creditoparaveiculo-quiz-br-car-br-g002-qm001",
           "layout_template": "quiz_maker_sb",
-          "source_config": "quiz-car-parcelas (G002/default)",
-          "internal_data_parity_sha256": "1ef12a09c42f9d4e0746af3c06833c89e3133098f47a869abe06ebc67c76670a",
-          "config_backup_path": "/home/runcloud2/backups/creditoparaveiculo/quiz-config-g007-20260710/source-g002-config.json",
-          "config_backup_sha256": "d01be71dbf3760331e99bb7d5be95f7ae0b155935492310857265fe4a9d34b9b",
+          "origin": "G007 created from G002/default, renamed by Rodolfo",
+          "sms_state": "configured",
+          "require_sms_success": 1,
+          "leads": 0,
           "status": "active_validated",
-          "updated_at": "2026-07-10T16:00:07-04:00"
+          "updated_at": "2026-07-10T17:16:23-04:00"
+        },
+        {
+          "slug": "quiz-car-parcelas-g002-qm002",
+          "url": "https://creditoparaveiculo.com/quiz-car-parcelas-g002-qm002/",
+          "name": "Creditoparaveiculo-quiz-br-car-br-g002-qm002",
+          "layout_template": "quiz_maker_sb",
+          "origin": "duplicated by Rodolfo from QM001",
+          "sms_state": "configured",
+          "require_sms_success": 0,
+          "leads": 1,
+          "latest_sms_status": "ok:G002",
+          "status": "active_validated",
+          "updated_at": "2026-07-10T17:16:23-04:00"
         }
       ]
     }

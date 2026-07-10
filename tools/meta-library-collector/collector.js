@@ -134,7 +134,7 @@ async function main() {
   try {
     await page.waitForFunction(() => {
       const text = document.body ? document.body.innerText : '';
-      return /Library ID:\s*\d+/i.test(text) || /No ads match|No results found|0\s+results?/i.test(text);
+      return /Library ID:\s*\d+/i.test(text) || /No ads match|No results found/i.test(text);
     }, { timeout: 45000 });
   } catch (_) {}
 
