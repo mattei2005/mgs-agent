@@ -217,6 +217,12 @@ grep -q "def _resolve_turn_reasoning_config" "$REPO/gateway/run.py" \
   || fail "missing MGS per-turn reasoning router integration"
 grep -q "def route_reasoning_config" "$REPO/gateway/reasoning_router.py" \
   || fail "missing MGS deterministic reasoning router"
+grep -q "async def _prepare_busy_steer_payload" "$REPO/gateway/run.py" \
+  || fail "missing MGS universal busy-steer media normalizer"
+grep -q "for_mid_turn_steer" "$REPO/gateway/run.py" \
+  || fail "missing MGS mid-turn media enrichment mode"
+grep -q "Image attached at:" "$REPO/gateway/run.py" \
+  || fail "missing MGS mid-turn image path marker"
 
 PYBIN="$REPO/venv/bin/python"
 [[ -x "$PYBIN" ]] || PYBIN="python3"
@@ -227,4 +233,8 @@ PYBIN="$REPO/venv/bin/python"
   "$REPO/gateway/reasoning_router.py" \
   "$REPO/gateway/platforms/base.py"
 
-log "OK Hermes MGS patches present and py_compile passed"
+"$PYBIN" -m pytest -q \
+  "$REPO/tests/gateway/test_busy_session_ack.py" \
+  "$REPO/tests/gateway/test_telegram_photo_interrupts.py"
+
+log "OK Hermes MGS patches present, py_compile and busy-steer tests passed"
