@@ -115,13 +115,26 @@ Redirect split UI should be business-facing:
 
 ## SMS Cost Reporting
 
-- Canonical unit cost informed by Rodolfo: **R$ 0,08 per record absorbed into the WordPress quiz-leads report**.
-- The report page `admin.php?page=mgs-quiz-report` should show spend by quiz for the active date/filter range: quiz, records absorbed, unit cost, and total estimated spend.
-- Formula: `filtered_report_row_count × 8 centavos`, calculated as an integer to avoid floating-point drift.
-- Also show consolidated cards for total records and total estimated spend across the filtered result set.
-- The WordPress report/database is the canonical counting source for this cost estimate. Do not reconcile against the SMS Funnel dashboard: invalid or nonexistent phone numbers can appear in both systems, and that external comparison does not improve this metric.
-- Count every row included by the report's current filters regardless of `sms_funnel_status`, phone validity, duplication, or downstream dashboard visibility. The metric measures absorbed/reportable records, not vendor-confirmed delivery.
-- Label the monetary metric **Custo estimado de SMS**, because the calculation is operationally based on report rows at R$ 0,08 each.
+Decision confirmed by Rodolfo for this site/report:
+
+- Canonical unit cost: **R$ 0,08 per row counted by the WordPress quiz-leads report**.
+- The source of truth is exclusively the rows in `{$wpdb->prefix}mgs_quiz_leads` satisfying the same `report_where()` filters used by `admin.php?page=mgs-quiz-report`.
+- Count the entire filtered result set, not only the current paginated table page. Group by `quiz_slug` and show quiz, counted WP rows, unit cost, and estimated cost.
+- Formula: `filtered_report_row_count × 8 centavos`; perform arithmetic in integer centavos and convert only for presentation.
+- Do **not** filter by `sms_funnel_status`, phone uniqueness, phone validity, duplication, or downstream dashboard visibility. Rows with `ok:*`, `fail:*`, `error`, `historical_import`, `skipped`/NULL, duplicate phones, or semantically invalid phones are counted when they belong to the filtered WP result.
+- Do not query or reconcile against the SMS Funnel dashboard for this metric. Label it **Custo estimado de SMS — base WP** (or equivalent), because WordPress does not observe the vendor's actual outbound-message event.
+- Reuse `report_where()` and its parameter list for both consolidated cost and per-quiz aggregation, keeping `slug`, date range, gestor, parcela, and search filters identical to the existing report.
+- The CSV exporter currently has a narrower filter contract than the report (`slug/from/to` only); do not use CSV equality as validation when `gestor`, `parcela`, or `q` is active unless export filtering is updated too.
+- Validate with one read-only SQL snapshot that the filtered total equals the sum of grouped quiz rows and that `total_rows × 8` equals the sum of grouped centavos.
+- If the business later changes from “one charged SMS per WP report row” to actual outbound-message billing or multiple sends per lead, treat that as a different metric requiring a vendor event/webhook or imported send-count report.
+
+### Read-only source/provenance check before proposing a patch
+
+- Confirm the active plugin version and live plugin directory via WP-CLI.
+- Compare SHA-256 of the live files with the candidate baseline package; do not assume an ephemeral `/tmp` worktree is canonical, especially when it is not a Git repository.
+- Inspect the live table prefix/schema/status distribution without selecting PII or response bodies.
+- Distinguish three states explicitly: production runtime, immutable baseline package, and un-deployed working candidate.
+- A report-only change needs no schema/DB-version bump. Stage and lint the whole plugin, back up the live plugin directory, replace the admin implementation first and the version/bootstrap file last, then validate filtered totals and the authenticated report. Never deploy during a read-only audit request.
 
 ## Known Interpretation
 
