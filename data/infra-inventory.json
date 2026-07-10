@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T23:24:16-04:00",
+    "updated_at": "2026-07-09T23:26:58-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1252,14 +1252,14 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/SKILL.md",
-      "size_bytes": 91289,
-      "modified_at": "2026-07-09T23:23:56-04:00",
-      "sha256": "0fafe9fc7136d884df0749dfa7a0fc2961094d16f09e18a6c2a5cd46ba0f6c8c",
+      "size_bytes": 91536,
+      "modified_at": "2026-07-09T23:26:34-04:00",
+      "sha256": "27933477bfa776187dafe413f676809099c1d03a92c8d9623a09b2e2016d289b",
       "owner": "Zeus/Ops",
       "type": "skill",
-      "description": "Utility canary cron lifecycle corrected: reuse one canonical job via pause/resume/update; never create a new ID per extension.",
-      "updated_at": "2026-07-09T23:24:16-04:00",
-      "source_report": "REPORT-INFRA Zeus Utility canary canonical cron lifecycle correction 2026-07-09",
+      "description": "Recorded single canonical paused Utility canary cron 5f4c56c2fc1f; reuse via pause/resume/update.",
+      "updated_at": "2026-07-09T23:26:58-04:00",
+      "source_report": "REPORT-INFRA Zeus canonical Utility canary cron creation 2026-07-09",
       "skill": "smartbidding-dashboard-access",
       "notes": "Added LOGIN fallback requirement for final DTR↔SB audits after freshly-created SB rows exposed USER_LOGIN null."
     },
@@ -1442,7 +1442,23 @@
       "removed_at": "2026-07-09T23:22:16-04:00",
       "reason": "11/11 templates confirmados 20/20 verdes; cron ativo removido após detectar que o aviso citava ID legado.",
       "lifecycle_correction_at": "2026-07-09T23:24:16-04:00",
-      "lifecycle_note": "Should have reused one canonical Utility canary cron via pause/resume/update instead of creating a new job ID."
+      "lifecycle_note": "Should have reused one canonical Utility canary cron via pause/resume/update instead of creating a new job ID.",
+      "replaced_by_canonical": "5f4c56c2fc1f"
+    },
+    {
+      "entry": "Hermes cron 5f4c56c2fc1f: every 5m, repeat forever, deliver discord:1522487422510694450, script utility-canary-approval-loop.sh, workdir /root/mgs-agent",
+      "id": "5f4c56c2fc1f",
+      "name": "SB Utility canary approval loop — canonical",
+      "manager": "hermes-cron",
+      "schedule": "every 5m",
+      "repeat": "forever",
+      "deliver": "discord:1522487422510694450",
+      "script": "utility-canary-approval-loop.sh",
+      "workdir": "/root/mgs-agent",
+      "status": "paused",
+      "created_at": "2026-07-09T23:26:58-04:00",
+      "paused_at": "2026-07-09T23:26:21-04:00",
+      "reason": "Single canonical Utility canary job; reuse only with pause/resume/update."
     }
   ],
   "scripts": [
