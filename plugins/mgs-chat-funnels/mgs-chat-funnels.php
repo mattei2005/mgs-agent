@@ -225,6 +225,10 @@ final class MGS_Chat_Funnels {
             '#<script\b[^>]*>[\s\S]*?window\.wrapper_url\s*=\s*["\'][^"\']*assets\.jbfdigital\.com\.br/[^"\']*\.builder\.js[^"\']*["\'][\s\S]*?</script>#i',
         );
 
+        if ($this->ad_provider($config) === 'actview') {
+            $patterns[] = '#<script\b[^>]*src=["\'][^"\']*scr\.actview\.net/zuout\.js[^"\']*["\'][^>]*>\s*</script>#i';
+        }
+
         return preg_replace($patterns, '', $output);
     }
 
