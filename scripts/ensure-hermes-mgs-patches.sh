@@ -97,6 +97,14 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    mgs-busy-steer-universal-media-*.patch)
+      if grep -q "async def _prepare_busy_steer_payload" "$REPO/gateway/run.py" \
+        && grep -q "for_mid_turn_steer" "$REPO/gateway/run.py" \
+        && grep -q "Image attached at:" "$REPO/gateway/run.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     discord-thread-title-author-suffix.patch)
       if grep -q "_append_thread_author_suffix" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run.py"; then
@@ -135,6 +143,7 @@ apply_patch_if_needed "discord-bot-gateway-lifecycle-loop-guard.patch"
 apply_patch_if_needed "discord-report-infra-no-auto-thread.patch"
 apply_patch_if_needed "discord-thread-title-author-suffix.patch"
 apply_patch_if_needed "mgs-auto-reasoning-routing.patch"
+apply_patch_if_needed "mgs-busy-steer-universal-media-2026-07-10.patch"
 
 # Invariants that must survive every Hermes update. If any grep fails, the
 # update is not production-safe for MGS gateways.
