@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import asyncio, json
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from pathlib import Path
 from playwright.async_api import async_playwright
@@ -24,9 +24,10 @@ async def main():
         req=await asyncio.wait_for(req_future,timeout=120)
         headers=await req.all_headers()
         safe_headers={k:v for k,v in headers.items() if k.lower() in ('authorization','content-type','origin','referer','user-agent')}
+        closed_date=(datetime.now(timezone.utc)-timedelta(days=1)).date().isoformat()
         payload={
             'initialDate':'2020-01-01T00:00:00.000Z',
-            'finalDate':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),
+            'finalDate':closed_date+'T23:59:59.999Z',
             'publishers':[TARGET],
             'currency':None,
         }
@@ -38,12 +39,13 @@ async def main():
         wrong=[r for r in rows if r.get('PUBLISHER')!=TARGET or r.get('DOMAIN') not in ('creditoparaveiculo','creditoparaveiculo.com')]
         if wrong: raise RuntimeError(f'Historical response leaked {len(wrong)} non-target rows')
         rows.sort(key=lambda r:(r.get('DATE',''),str(r.get('PK_JBF_PERFORMANCE_PER_SMS',''))))
-        (OUT/'historical-creditoparaveiculo-raw.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2))
+        (OUT/'historical-creditoparaveiculo-closed-raw.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2))
         dates=sorted({r.get('DATE') for r in rows if r.get('DATE')})
         revenue=sum((Decimal(str(r.get('REVENUE') or 0)) for r in rows),Decimal('0'))
         net=sum((Decimal(str(r.get('NET_REVENUE') or 0)) for r in rows),Decimal('0'))
         summary={'status':'OK','rows':len(rows),'dates':len(dates),'first_date':dates[0] if dates else None,'last_date':dates[-1] if dates else None,'revenue':str(revenue),'net_revenue':str(net),'publisher':TARGET}
-        (OUT/'historical-creditoparaveiculo-summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2))
+        summary['closed_through']=closed_date
+        (OUT/'historical-creditoparaveiculo-closed-summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2))
         print(json.dumps(summary,ensure_ascii=False))
         await browser.close()
 
