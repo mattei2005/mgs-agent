@@ -1,5 +1,5 @@
 model:
-  default: gpt-5.5
+  default: gpt-5.6-sol
   provider: openai-codex
   base_url: https://chatgpt.com/backend-api/codex
 providers: {}
@@ -26,7 +26,7 @@ agent:
   image_input_mode: auto
   disabled_toolsets: []
   verbose: false
-  reasoning_effort: medium
+  reasoning_effort: high
   personalities:
     helpful: You are a helpful, friendly AI assistant.
     concise: You are a concise assistant. Keep responses brief and to the point.
@@ -306,7 +306,7 @@ display:
       streaming: true
     discord:
       streaming: false
-      tool_progress: 'all'
+      tool_progress: all
       tool_preview_length: 40
       cleanup_progress: true
       interim_assistant_messages: false
@@ -319,7 +319,7 @@ display:
     - context_pct
     - cwd
   copy_shortcut: auto
-  tool_progress: 'all'
+  tool_progress: all
   background_process_notifications: error
 dashboard:
   theme: default
