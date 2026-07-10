@@ -302,6 +302,7 @@ check_patches_against_upstream() {
     local canonical_patches=(
       "$latest_runtime_patch"
       "mgs-auto-reasoning-routing.patch"
+      "mgs-busy-steer-universal-media-2026-07-10.patch"
     )
     for name in "${canonical_patches[@]}"; do
       [[ -n "$name" ]] || continue
