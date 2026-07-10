@@ -176,6 +176,7 @@ Before reporting success:
 - [ ] Plugin active version is correct.
 - Public routes return 200.
 - Public routes inherit normal WordPress global hooks unless Rodolfo explicitly requested an isolated/static page: WPCode/GTM/Yoast/pixels/head/footer changes should appear on quiz URLs like they do on posts/pages. See `wp-plugin-mass-operation/references/wp-custom-plugin-public-routes-global-hooks.md`.
+- If the route is explicitly isolated/standalone, replace global hook capture with a strict plugin-owned allowlist: site-specific GTM container (head + noscript), Analytics through that container, GPT once, and the correct wrapper once. Validate an actual GA4 `page_view` request—not merely the presence of GTM markup—and confirm zero unrelated WordPress/theme assets. See `references/static-chat-wrapper-contract.md`.
 - Public HTML has no old external stack references.
 
 - [ ] WP lead row created with expected slug/UTM/gestor.

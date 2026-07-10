@@ -1,7 +1,7 @@
 ---
 name: creative-brief-handoff
 description: Use quando a Hera receber um pedido criativo e precisar transformar em brief operacional, variações criativas, naming de assets, status de revisão e pacote limpo de handoff para o Ares sem executar campanhas.
-version: 1.4.0
+version: 1.4.1
 author: MGS Digital Corp
 license: Proprietary
 metadata:
@@ -380,6 +380,7 @@ Referências da skill:
 ```text
 references/drive-ready-destination-correction.md — correção canônica: READY fica em pasta de status; STORY/FEED/REELS ficam no inventário/handoff, não em subpasta final.
 references/human-upload-ready-drive-handoff.md — fluxo validado para upload humano via Discord → import/read attachment quando `.mov` não entra no gateway → detecção de formato/ângulo → limpeza de metadata → upload verificado em READY → inventário/handoff Ares.
+references/upload-folder-live-verification.md — verificação forte quando originais continuam em UPLOAD MANUAL: cruzar `source_drive_id` com relatório, validar `dest_drive_id`/ancestralidade live, tamanho, SHA-256 limpo e sanitizer em todos os destinos; não confundir preservação do bruto com pendência.
 references/car-br-pt-multi-image-ready-handoff.md — fluxo validado para lote de imagens CAR Brasil/Português: Hera aplica classificação/naming/metadata/READY diretamente; Ares só aplica regras de campanha/teste depois do handoff verificado.
 references/spain-cc-human-upload-handoff.md — fluxo para uploads CC Espanha/ES: Hera aplica classificação/naming/metadata/READY; Ares aplica apenas regras de campanha após handoff verificado; inclui mapping `CC_ES_ES`, naming e blocker de OAuth Drive sem mencionar Ares antes do upload verificado.
 references/video-variation-gpt-grok-workflow.md — workflow para comparar variação de vídeo com GPT/OpenAI e Grok/xAI a partir de anexo Discord, incluindo import read-only, contact sheet, geração e sanitização.
