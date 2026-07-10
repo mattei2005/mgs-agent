@@ -34,8 +34,9 @@ Nunca recriar esse fluxo em `/tmp`. Nunca apagar, substituir, anexar ou versiona
 2. Ler o resumo JSON do stdout e depois o `report.json` indicado.
 3. Validar o caminho real do browser, não apenas o status inicial:
    - `page.markers.adLibrary=true`;
-   - pelo menos um `Library ID` ou mídia útil;
+   - pelo menos 3 `Library ID` distintos e mídia útil associada aos cards;
    - download HTTP 200 quando o pedido envolver baixar mídia;
+   - MIME permitido, magic-byte válido, tamanho dentro dos limites e hash SHA-256;
    - screenshot real no diretório da execução.
 4. O `gotoStatus` pode ser 403 e ainda assim a Meta concluir o challenge no Chromium. Não declarar bloqueio se o DOM/cards/mídia carregaram.
 5. Se `session.authenticatedLikely=false`, isso não é erro quando a Library pública abre. Se a Meta exigir login ou esconder mídia, parar e pedir reautenticação manual; não pedir senha/cookie no Discord.
@@ -48,6 +49,8 @@ Nunca recriar esse fluxo em `/tmp`. Nunca apagar, substituir, anexar ou versiona
 - Nunca commitar o perfil persistente.
 - O coletor só reporta contagem de cookies e presença dos nomes `c_user`/`xs`, sem valores.
 - Não usar `/tmp` para runtime, perfil, sessão ou artefato que precise sobreviver.
+- O wrapper usa lock exclusivo; nunca abrir dois Chromium simultaneamente no mesmo perfil nem remover `SingletonLock` manualmente.
+- O browser roda como root apenas por limitação atual do host e mantém `--no-sandbox`; não desativar site isolation e não usar esse runtime para navegação fora de `facebook.com/ads/library/`.
 
 ## Verificação de encerramento
 
