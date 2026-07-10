@@ -237,6 +237,17 @@
   };
 
   ChatFunnel.prototype.showInlineAd = function () {
+    if (adProvider(this.config) === 'actview') {
+      var actViewBanner = el('div', 'ad-unit ad');
+      actViewBanner.dataset.position = 'top';
+      actViewBanner.innerHTML = '<div id="zout_top_wrapper" align="center" style="width:100%;margin-top:2rem;margin-bottom:2rem;min-height:400px"><div><p style="font-size:10px;text-transform:uppercase;text-align:center">Anúncios</p><div id="zout_top"></div></div></div>';
+      this.chatBox.appendChild(actViewBanner);
+      this.scrollBottom();
+      if (window.onInfinitePostLoaded) window.onInfinitePostLoaded();
+      this.keepPinnedToBottom(4500);
+      return;
+    }
+
     if (adProvider(this.config) === 'm2') {
       var pgTopSlot = this.pubGuruTopSlot();
       var pgBanner = el('div', 'pubguru-chat-ad pubguru-chat-ad-top');

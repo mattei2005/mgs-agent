@@ -10,7 +10,21 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 - Plugin: `mgs-quiz-carro`
 - Purpose: capture financing leads, route to SMS Funnel by gestor, then redirect to REC page preserving UTMs.
 
+## Runtime e modelos visuais
+
+`creditoparaveiculo.com` usa o plugin de quiz `mgs-quiz-carro`; não há plugin de chat nesse site. Quando Rodolfo disser “chat” informalmente sobre essas URLs, confirmar o produto real no runtime e tratar o pedido como quiz, sem envolver `mgs-chat-funnels`.
+
+Versão validada em produção em 2026-07-10: `mgs-quiz-carro` v1.5.0.
+
+Modelos disponíveis no campo admin `Modelo visual`:
+
+- `layout_template` vazio — Quiz padrão, pergunta primeiro e formulário depois.
+- `fmybc_sms` — landing FMYBC/SMS com dados primeiro, checklist e badges.
+- `quiz_maker_sb` — Quiz Maker SB, réplica first-party do layout de duas etapas da Smart Bidding: pergunta com opções verdes, depois nome/telefone, mantendo backend, SMS Funnel e redirect da MGS.
+
 ## Public Quiz Routes
+
+Rotas confirmadas no banco em 2026-07-10:
 
 - G001 — `/quiz-car-parcelas-g001/`
 - G002/default — `/quiz-car-parcelas/`
@@ -18,7 +32,9 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 - G004 — `/quiz-car-parcelas-g004/`
 - G005 — `/quiz-car-parcelas-g005/`
 - G006 — `/quiz-car-parcelas-g006/`
-- G007 — `/quiz-car-parcelas-g007/` — modelo visual FMYBC/SMS (`layout_template=fmybc_sms`) com dados primeiro, card central, checklist, etapas e badges.
+- Modelo FMYBC/SMS — `/quiz-car-002-g002/` (`layout_template=fmybc_sms`).
+
+Não assumir que `/quiz-car-parcelas-g007/` existe: essa rota estava documentada, mas não constava no banco/runtime em 2026-07-10 e caiu na homepage.
 
 G002 is the default route without suffix. New campaign variants keep the sequential `gNNN` slug pattern unless Rodolfo defines a different campaign family.
 
