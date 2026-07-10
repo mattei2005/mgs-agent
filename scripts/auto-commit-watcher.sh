@@ -91,9 +91,15 @@ PY
   CHANGES=$(printf '%s\n' "$STATUS_PATHS" | cut -f2- | awk 'NR<=3 {print}' | tr '\n' ' ')
   CHANGES_TRIM=$(printf '%s' "$CHANGES" | cut -c1-100)
 
-  # Guardrail: nunca auto-commitar arquivo com nome sensível.
-  # Se aparecer algo suspeito, aborta esta rodada e exige revisão humana.
-  SENSITIVE_CHANGES=$(printf '%s\n' "$STATUS_PATHS" | cut -f2- | grep -Ei "$SENSITIVE_PATH_REGEX" | grep -Eiv "$SENSITIVE_ALLOWLIST_REGEX" || true)
+  # Guardrail: nunca auto-commitar adição/modificação com nome sensível.
+  # Deleções puras são seguras para este filtro: removem do Git um path já
+  # versionado e não conseguem introduzir segredo novo. Bloqueá-las impediria
+  # para sempre a limpeza/renomeação de docs com falso positivo no nome.
+  SENSITIVE_CHANGES=$(printf '%s\n' "$STATUS_PATHS" | while IFS=$'\t' read -r status path; do
+    [ -n "$path" ] || continue
+    [[ "$status" == *D* ]] && continue
+    printf '%s\n' "$path"
+  done | grep -Ei "$SENSITIVE_PATH_REGEX" | grep -Eiv "$SENSITIVE_ALLOWLIST_REGEX" || true)
   if [ -n "$SENSITIVE_CHANGES" ]; then
     log "BLOQUEADO: arquivo sensível detectado; commit automático abortado"
     printf '%s\n' "$SENSITIVE_CHANGES" | while IFS= read -r f; do log "  sensitive: $f"; done

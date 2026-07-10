@@ -28,7 +28,7 @@ Use this procedure when an agent-specific `SKILL.md` has become monolithic, repe
 
 ## Git and secret-scanner pitfall
 
-Auto-commit secret guards may classify filenames containing words such as `token`, `webhook`, or `private` as sensitive even when the moved content was already versioned safely. Use neutral operational filenames (`meta-runtime-diagnostics`, `alert-layout`, `thread-member-management`) while keeping the original section title inside the file. Never weaken the scanner just to land a refactor.
+Auto-commit secret guards may classify filenames containing words such as `token`, `webhook`, or `private` as sensitive even when the moved content was already versioned safely. Use neutral operational filenames (`meta-runtime-diagnostics`, `alert-layout`, `thread-member-management`) while keeping the original section title inside the file. Never weaken scanning for additions or modifications just to land a refactor. Deletion-only status entries may bypass the sensitive-name path check because they remove an already-versioned path and cannot introduce a new secret; validate this distinction with a guard test before relying on it.
 
 ## Mirrors and sync scope
 

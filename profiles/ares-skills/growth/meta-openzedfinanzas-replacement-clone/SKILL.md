@@ -15,36 +15,25 @@ Use esta skill quando Rodolfo pedir para clonar/replacement de campanhas da cont
 
 ## Progressive disclosure — mandatory
 
-1. Identify the exact branch below before loading details.
-2. Load one primary reference first.
-3. Load another reference only when the first requires it or live evidence changes the branch.
-4. Never load every reference, the full catalog, or broad source ranges “for context.”
-5. For repeated lookups, search the exact symbol/path and aggregate results before returning them to model context.
+1. Identify the exact operational branch below.
+2. Load one route pack first; load another only when the first requires it or live evidence changes the branch.
+3. Search the selected reference or exact source symbol before opening broader ranges.
+4. Never load every reference or historical case study “for context.”
+5. Reduce tool output above roughly 5 KB before another broad lookup.
 
 Completion criterion: only the procedure and evidence required for the current action are loaded.
 
-## Routing index
+## Operational route packs
 
-- **Conta/operação** → `references/router-01-conta-opera-o.md`
-- **Campanha loser mapeada** → `references/router-02-campanha-loser-mapeada.md`
-- **Estrutura real da campanha** → `references/router-03-estrutura-real-da-campanha.md`
-- **Nomenclatura operacional: scale vs replacement** → `references/router-04-nomenclatura-operacional-scale-vs-replacement.md`
-- **Padrão de nomenclatura Meta — escala, ads e criativos** → `references/router-05-padr-o-de-nomenclatura-meta-escala-ads-e-criativos.md`
-- **Regras de clone** → `references/router-06-regras-de-clone.md`
-- **Source mirror obrigatório antes de writes EU/financeiro** → `references/router-07-source-mirror-obrigat-rio-antes-de-writes-eu-financeiro.md`
-- **Script canônico** → `references/router-08-script-can-nico.md`
-- **Criativos vencedores do dry-run inicial** → `references/router-09-criativos-vencedores-do-dry-run-inicial.md`
-- **Tentativa real 2026-06-18** → `references/router-10-tentativa-real-2026-06-18.md`
-- **Prioridade operacional: separar “replacement Ares” de “clone fiel”** → `references/router-11-prioridade-operacional-separar-replacement-ares-de-clone-fiel.md`
-- **Correção aprendida com playbook externo de clone** → `references/router-12-corre-o-aprendida-com-playbook-externo-de-clone.md`
-- **Diagnóstico token/app, página alternativa e camada `POST /ads`** → `references/router-13-meta-runtime-diagnostics.md`
-- **Comunicação com Rodolfo em troubleshooting Meta** → `references/router-14-comunica-o-com-rodolfo-em-troubleshooting-meta.md`
-- **Preferência operacional do Rodolfo para testes de clone** → `references/router-15-prefer-ncia-operacional-do-rodolfo-para-testes-de-clone.md`
-- **Pitfalls** → `references/router-16-pitfalls.md`
+- **Conta/operação → Padrão de nomenclatura Meta — escala, ads e criativos** → `references/route-pack-01.md`
+- **Regras de clone → Criativos vencedores do dry-run inicial** → `references/route-pack-02.md`
+- **Tentativa real 2026-06-18** → `references/route-pack-03.md`
+- **Prioridade operacional: separar “replacement Ares” de “clone fiel” → Status validado em 2026-06-19 — clone funcional e ativação funcionam** → `references/route-pack-04.md`
+- **Correção aprendida com playbook externo de clone → Preferência operacional do Rodolfo para testes de clone** → `references/route-pack-05.md`
+- **Pitfalls** → `references/route-pack-06.md`
 
 ## Context-efficiency guardrails
 
 - Stop and re-plan after more than three overlapping reads of the same file.
-- Reduce tool output above roughly 5 KB before any additional broad lookup.
-- Preserve exact procedures in topical references; keep this `SKILL.md` as the routing layer.
-- Validate the real result before reporting success.
+- Keep this main file as a routing layer; preserve detailed procedures in route packs.
+- Validate the real runtime result before reporting success.

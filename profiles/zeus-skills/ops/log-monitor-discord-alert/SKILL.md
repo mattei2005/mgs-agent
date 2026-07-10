@@ -9,36 +9,25 @@ related_skills: [wp-plugin-mass-operation, discord-ops]
 
 ## Progressive disclosure — mandatory
 
-1. Identify the exact branch below before loading details.
-2. Load one primary reference first.
-3. Load another reference only when the first requires it or live evidence changes the branch.
-4. Never load every reference, the full catalog, or broad source ranges “for context.”
-5. For repeated lookups, search the exact symbol/path and aggregate results before returning them to model context.
+1. Identify the exact operational branch below.
+2. Load one route pack first; load another only when the first requires it or live evidence changes the branch.
+3. Search the selected reference or exact source symbol before opening broader ranges.
+4. Never load every reference or historical case study “for context.”
+5. Reduce tool output above roughly 5 KB before another broad lookup.
 
 Completion criterion: only the procedure and evidence required for the current action are loaded.
 
-## Routing index
+## Operational route packs
 
-- **Quando usar** → `references/router-01-quando-usar.md`
-- **Convenção de canal Discord por tipo de alerta** → `references/router-02-conven-o-de-canal-discord-por-tipo-de-alerta.md`
-- **Estrutura do sistema** → `references/router-03-estrutura-do-sistema.md`
-- **State file inicial** → `references/router-04-state-file-inicial.md`
-- **Template do script monitor** → `references/router-05-template-do-script-monitor.md`
-- **Cron entry** → `references/router-06-cron-entry.md`
-- **Validação pós-criação** → `references/router-07-valida-o-p-s-cria-o.md`
-- **Triage operacional de alertas já disparados** → `references/router-08-triage-operacional-de-alertas-j-disparados.md`
-- **Atualizar infra-inventory.json** → `references/router-09-atualizar-infra-inventory-json.md`
-- **Pitfalls** → `references/router-10-pitfalls.md`
-- **SEÇÃO B — Monitor de Restarts de Services Systemd** → `references/router-11-se-o-b-monitor-de-restarts-de-services-systemd.md`
-- **SEÇÃO C — Monitor de Skills MGS sem REPORT-INFRA** → `references/router-12-se-o-c-monitor-de-skills-mgs-sem-report-infra.md`
-- **SEÇÃO D — Hardening de Monitors em Produção (checklist obrigatório)** → `references/router-13-se-o-d-hardening-de-monitors-em-produ-o-checklist-obrigat-rio.md`
-- **SEÇÃO E — Bug History: Regras Universais para Monitors com State File** → `references/router-14-se-o-e-bug-history-regras-universais-para-monitors-com-state-fil.md`
-- **SEÇÃO F — Cron Control Plane e Smoke Tests** → `references/router-15-se-o-f-cron-control-plane-e-smoke-tests.md`
-- **Exemplo real — monitor-auto-push.sh** → `references/router-16-exemplo-real-monitor-auto-push-sh.md`
+- **Quando usar** → `references/route-pack-01.md`
+- **Convenção de canal Discord por tipo de alerta → Template do script monitor** → `references/route-pack-02.md`
+- **Cron entry → Atualizar infra-inventory.json** → `references/route-pack-03.md`
+- **Pitfalls** → `references/route-pack-04.md`
+- **SEÇÃO B — Monitor de Restarts de Services Systemd → Fluxo completo esperado** → `references/route-pack-05.md`
+- **SEÇÃO D — Hardening de Monitors em Produção (checklist obrigatório) → Exemplo real — monitor-auto-push.sh** → `references/route-pack-06.md`
 
 ## Context-efficiency guardrails
 
 - Stop and re-plan after more than three overlapping reads of the same file.
-- Reduce tool output above roughly 5 KB before any additional broad lookup.
-- Preserve exact procedures in topical references; keep this `SKILL.md` as the routing layer.
-- Validate the real result before reporting success.
+- Keep this main file as a routing layer; preserve detailed procedures in route packs.
+- Validate the real runtime result before reporting success.

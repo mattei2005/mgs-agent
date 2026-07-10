@@ -1,9 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T17:30:05-04:00",
-    "generated_by": "infra-discovery.sh",
-    "last_manual_update": "hera-meta-library-runtime-hardening"
+    "updated_at": "2026-07-10T17:45:56-04:00",
+    "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
     {
@@ -420,6 +419,35 @@
         "journal_errors_since_maintenance": 0
       },
       "updated_at": "2026-07-10T00:44:17-04:00"
+    },
+    {
+      "id": "hera-meta-library-manual-login-runtime",
+      "agent": "hera",
+      "manager": "apt",
+      "source_report": "Zeus Meta Library persistent manual-login setup",
+      "commandline": "apt-get install --no-install-recommends x11vnc novnc websockify",
+      "packages_count": 3,
+      "packages": [
+        {
+          "name": "x11vnc",
+          "version": "0.9.16-10",
+          "status": "installed"
+        },
+        {
+          "name": "novnc",
+          "version": "1:1.3.0-2",
+          "status": "installed"
+        },
+        {
+          "name": "websockify",
+          "version": "0.10.0+dfsg1-5build2",
+          "status": "installed"
+        }
+      ],
+      "missing_packages": [],
+      "runtime_validation": "x11vnc 127.0.0.1:5903; websockify/noVNC 127.0.0.1:6083; vnc.html HTTP 200",
+      "purpose": "Local-only visual session for Rodolfo to authenticate the persistent Hera Meta Library Chromium profile.",
+      "updated_at": "2026-07-10T17:42:04-04:00"
     }
   ],
   "runtime_artifacts": [
@@ -1240,6 +1268,37 @@
         "sensitive_query_params": "rejected",
         "download_validation": "HTTP 2xx + MIME allowlist + magic bytes + size limits + atomic rename + SHA256"
       }
+    },
+    {
+      "id": "hera-meta-library-manual-login-helper",
+      "agent": "hera",
+      "type": "local_only_login_helper",
+      "status": "active_session",
+      "script": "/root/mgs-agent/scripts/hera-meta-library-login-browser.sh",
+      "browser_helper": "/root/mgs-agent/tools/meta-library-collector/login-browser.js",
+      "profile_path": "/root/.hermes/profiles/hera/browser-profiles/meta-library-chromium",
+      "bindings": [
+        "127.0.0.1:5903",
+        "127.0.0.1:6083"
+      ],
+      "background_session": "proc_83b5d68a46eb",
+      "validation": "process running; ports localhost-only; noVNC HTTP 200; status ready; authenticatedLikely=false",
+      "files": [
+        {
+          "path": "/root/mgs-agent/scripts/hera-meta-library-login-browser.sh",
+          "size_bytes": 1696,
+          "modified_at": "2026-07-10T17:40:41.763231-04:00",
+          "sha256": "0576f5ec580eca8a4ce1606b3337331eafbf6a3d50a068a6620189270205556f"
+        },
+        {
+          "path": "/root/mgs-agent/tools/meta-library-collector/login-browser.js",
+          "size_bytes": 3420,
+          "modified_at": "2026-07-10T17:40:41.773231-04:00",
+          "sha256": "a9c7ad1d5bd137dc84f7634b527cd242f2f2000d7127b2ad77e76e1cfe5dc129"
+        }
+      ],
+      "purpose": "One-time/manual Facebook authentication while preserving cookies in the canonical Hera browser profile.",
+      "updated_at": "2026-07-10T17:42:04-04:00"
     }
   ],
   "profile_skill_references": [
@@ -1667,13 +1726,13 @@
       "type": "profile_skill",
       "path": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/meta-library-reference-intake/SKILL.md",
-      "size_bytes": 3350,
-      "modified_at": "2026-07-10T17:28:04.574101-04:00",
-      "sha256": "6602198880e92af7aeb4b6b38475fe9216c2283976c523e0646c49acc9b81e46",
-      "versioned_sha256": "6602198880e92af7aeb4b6b38475fe9216c2283976c523e0646c49acc9b81e46",
+      "size_bytes": 3981,
+      "modified_at": "2026-07-10T17:41:59.982336-04:00",
+      "sha256": "9ae1c2481250cdffca29c8cb6cb8ae0aadc4e5f7578c25bc7141d28e3fcbcc90",
+      "versioned_sha256": "9ae1c2481250cdffca29c8cb6cb8ae0aadc4e5f7578c25bc7141d28e3fcbcc90",
       "purpose": "Canonical Meta Ads Library collection flow with persistent runtime/profile and explicit no-/tmp rule.",
-      "validation": "live/versioned SHA256 match; hardened runtime PASS x3; exclusive lock exit 75",
-      "updated_at": "2026-07-10T17:30:05-04:00"
+      "validation": "live/versioned SHA256 match; manual login helper documented; noVNC localhost-only ready",
+      "updated_at": "2026-07-10T17:42:04-04:00"
     },
     {
       "id": "zeus-local-browser-automation-persistent-runtime-rule",
@@ -1956,8 +2015,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 4840,
-      "modified_at": "2026-07-09T12:05:10-04:00"
+      "size_bytes": 5148,
+      "modified_at": "2026-07-10T17:45:27-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/chat-log.sh",
@@ -2111,8 +2170,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/hera-meta-library-collector.sh",
-      "size_bytes": 955,
-      "modified_at": "2026-07-10T17:11:55-04:00"
+      "size_bytes": 1200,
+      "modified_at": "2026-07-10T17:27:19-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/hera-meta-library-login-browser.sh",
+      "size_bytes": 1696,
+      "modified_at": "2026-07-10T17:40:41-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hera-youtube-capture-frames.py",
@@ -2486,8 +2550,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/sync-souls.sh",
-      "size_bytes": 4407,
-      "modified_at": "2026-07-10T15:58:51-04:00"
+      "size_bytes": 5045,
+      "modified_at": "2026-07-10T17:41:47-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/track-article-cost.sh",
@@ -4953,8 +5017,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 1651,
-      "md5": "18aef4ba0b552cd71c0be0b7797409b8",
-      "modified_at": "2026-07-10T17:22:01-04:00"
+      "md5": "110a2684bbf45e30810e810b9a150c8f",
+      "modified_at": "2026-07-10T17:42:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -4965,8 +5029,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "5a50a8bc0cd358fb78b2d2a24ed2e74b",
-      "modified_at": "2026-07-10T17:11:25-04:00"
+      "md5": "dadb84c27196f99ebc50e159c538717e",
+      "modified_at": "2026-07-10T17:41:29-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -4977,8 +5041,8 @@
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
       "size_bytes": 25839,
-      "md5": "b0646e3e68987c2f5ab5470b00f08b69",
-      "modified_at": "2026-07-10T17:18:14-04:00"
+      "md5": "58d8d696e4ade2bb37a3fa96d41f2eaf",
+      "modified_at": "2026-07-10T17:42:26-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -4989,8 +5053,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 316,
-      "md5": "89b1365e27a5f47e8f845e419eb4d681",
-      "modified_at": "2026-07-10T17:15:01-04:00"
+      "md5": "93be2d75e84a53a4199967ad2b0c7e66",
+      "modified_at": "2026-07-10T17:45:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -5031,8 +5095,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 25552,
-      "md5": "3377c4f98fdf9dce8b47e776d590c5a4",
-      "modified_at": "2026-07-10T17:20:02-04:00"
+      "md5": "f307f546c4c452417001f498b565a148",
+      "modified_at": "2026-07-10T17:45:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -5049,14 +5113,14 @@
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 438,
-      "md5": "9385ae2705e91e32890af09a14c27e47",
-      "modified_at": "2026-07-10T17:15:47-04:00"
+      "md5": "6d76882fe53b76f11f24e3c39d923720",
+      "modified_at": "2026-07-10T17:45:47-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 206382,
-      "md5": "2d91bbdedde65e1582740aecf857fc08",
-      "modified_at": "2026-07-10T17:17:47-04:00"
+      "size_bytes": 213367,
+      "md5": "879d15ea6d058042cf4fe82dc65132b1",
+      "modified_at": "2026-07-10T17:42:47-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -5079,8 +5143,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 48991,
-      "md5": "17b1f21dbeeae235c99013c1346c0e4b",
-      "modified_at": "2026-07-10T17:20:19-04:00"
+      "md5": "b50699d5669405141a6a3b913e7ac990",
+      "modified_at": "2026-07-10T17:45:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -5170,7 +5234,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "027535e9da7defec1c09a0e0796d4675",
-      "modified_at": "2026-07-10T17:21:02-04:00"
+      "modified_at": "2026-07-10T17:46:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -5198,9 +5262,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 1757,
-      "md5": "d410afa94dfc6d60077a448d2697bae8",
-      "modified_at": "2026-07-10T17:20:02-04:00"
+      "size_bytes": 1759,
+      "md5": "a96551f2a130f9e1f9db15fb9c65078d",
+      "modified_at": "2026-07-10T17:45:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",

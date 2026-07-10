@@ -8,33 +8,34 @@ related_skills: [log-monitor-discord-alert, wp-plugin-mass-operation, hermes-upd
 
 ## Progressive disclosure — mandatory
 
-1. Identify the exact branch below before loading details.
-2. Load one primary reference first.
-3. Load another reference only when the first requires it or live evidence changes the branch.
-4. Never load every reference, the full catalog, or broad source ranges “for context.”
-5. For repeated lookups, search the exact symbol/path and aggregate results before returning them to model context.
+1. Identify the exact operational branch below.
+2. Load one route pack first; load another only when the first requires it or live evidence changes the branch.
+3. Search the selected reference or exact source symbol before opening broader ranges.
+4. Never load every reference or historical case study “for context.”
+5. Reduce tool output above roughly 5 KB before another broad lookup.
 
 Completion criterion: only the procedure and evidence required for the current action are loaded.
 
-## Routing index
+## Operational route packs
 
-- **Referências recentes** → `references/router-01-refer-ncias-recentes.md`
-- **Recent operational references** → `references/router-02-recent-operational-references.md`
-- **User-facing response hygiene** → `references/router-03-user-facing-response-hygiene.md`
-- **Message deletion / repost by channel ID** → `references/router-04-message-deletion-repost-by-channel-id.md`
-- **App-rate-limit channel scope (B001–B010)** → `references/router-05-app-rate-limit-channel-scope-b001-b010.md`
-- **SEÇÃO A — Comunicação Inter-Agente (Zeus → Atena)** → `references/router-06-se-o-a-comunica-o-inter-agente-zeus-atena.md`
-- **SEÇÃO B — Roles Managed (não deletáveis via API)** → `references/router-07-se-o-b-roles-managed-n-o-delet-veis-via-api.md`
-- **SEÇÃO C — Hook git post-commit com notificação Discord** → `references/router-08-se-o-c-hook-git-post-commit-com-notifica-o-discord.md`
-- **SEÇÃO D — Diagnóstico, Cron Scheduler e Reinicialização de Agente (Gateway Hermes)** → `references/router-09-se-o-d-diagn-stico-cron-scheduler-e-reinicializa-o-de-agente-gat.md`
-- **SEÇÃO F — Threads: Ciclo de Vida, Tokens e Leitura de Histórico** → `references/router-10-thread-lifecycle-history.md`
-- **SEÇÃO G — Importar histórico de thread antiga por link/ID** → `references/router-11-se-o-g-importar-hist-rico-de-thread-antiga-por-link-id.md`
-- **SEÇÃO E — Versionamento e Edição de Profiles (SOUL.md, config.yaml, skills)** → `references/router-12-se-o-e-versionamento-e-edi-o-de-profiles-soul-md-config-yaml-ski.md`
-- **SEÇÃO E — Versionamento e Edição de Profiles (SOUL.md, config.yaml, skills)** → `references/router-13-se-o-e-versionamento-e-edi-o-de-profiles-soul-md-config-yaml-ski.md`
+- **Referências recentes → Escopo por agente/thread antes de reportar pendências** → `references/route-pack-01.md`
+- **Mentions cross-agent em canal de outro agente → Challenges por IP de datacenter em fluxos Ares/Hera** → `references/route-pack-02.md`
+- **Recuperar e consolidar continuidade de thread grande → Novo agente Discord/Hermes — bootstrap de bot, token e service** → `references/route-pack-03.md`
+- **Enviar arquivos grandes/anexos no Discord → Formato REPORT-INFRA (Atena/Ares/Hera → Zeus)** → `references/route-pack-04.md`
+- **Processamento Zeus de REPORT-INFRA** → `references/route-pack-05.md`
+- **Processamento Zeus de REPORT-INFRA com cron Hermes de outro profile → Alternativa Operacional** → `references/route-pack-06.md`
+- **SEÇÃO C — Hook git post-commit com notificação Discord → Live tool-call trace no Discord com cleanup automático** → `references/route-pack-07.md`
+- **Gateway routing/restart incident reference → Channel permission overwrites and narrow delegation** → `references/route-pack-08.md`
+- **Adding a user to a private Discord thread → Diagnóstico de título ruim em auto-thread** → `references/route-pack-09.md`
+- **Regra MGS: renomear thread nova uma vez; nunca renomear thread já aberta → Pitfall crítico: função segura pode estar sobrescrita por duplicata posterior** → `references/route-pack-10.md`
+- **Correção preferida: título IA uma vez após a primeira resposta → Patch local `busy_input_mode` em gateway** → `references/route-pack-11.md`
+- **Pitfalls (restart) → Aviso antes de thread ficar oculta por auto-archive** → `references/route-pack-12.md`
+- **Threads antigas continuam abertas na sidebar de usuários adicionados → SEÇÃO E — Versionamento e Edição de Profiles (SOUL.md, config.yaml, skills)** → `references/route-pack-13.md`
+- **Quando usar → Solução implantada em produção — cópia periódica via cron** → `references/route-pack-14.md`
+- **Diagnóstico rápido: symlink vs arquivo real no git → Política de extensão de skills** → `references/route-pack-15.md`
 
 ## Context-efficiency guardrails
 
 - Stop and re-plan after more than three overlapping reads of the same file.
-- Reduce tool output above roughly 5 KB before any additional broad lookup.
-- Preserve exact procedures in topical references; keep this `SKILL.md` as the routing layer.
-- Validate the real result before reporting success.
+- Keep this main file as a routing layer; preserve detailed procedures in route packs.
+- Validate the real runtime result before reporting success.

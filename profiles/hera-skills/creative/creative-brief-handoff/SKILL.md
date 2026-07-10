@@ -14,38 +14,25 @@ metadata:
 
 ## Progressive disclosure — mandatory
 
-1. Identify the exact branch below before loading details.
-2. Load one primary reference first.
-3. Load another reference only when the first requires it or live evidence changes the branch.
-4. Never load every reference, the full catalog, or broad source ranges “for context.”
-5. For repeated lookups, search the exact symbol/path and aggregate results before returning them to model context.
+1. Identify the exact operational branch below.
+2. Load one route pack first; load another only when the first requires it or live evidence changes the branch.
+3. Search the selected reference or exact source symbol before opening broader ranges.
+4. Never load every reference or historical case study “for context.”
+5. Reduce tool output above roughly 5 KB before another broad lookup.
 
 Completion criterion: only the procedure and evidence required for the current action are loaded.
 
-## Routing index
+## Operational route packs
 
-- **Visão geral** → `references/router-01-vis-o-geral.md`
-- **Quando usar** → `references/router-02-quando-usar.md`
-- **Pedidos naturais — sem formulário obrigatório** → `references/router-03-pedidos-naturais-sem-formul-rio-obrigat-rio.md`
-- **Triagem do pedido** → `references/router-04-triagem-do-pedido.md`
-- **Formato de resposta flexível** → `references/router-05-formato-de-resposta-flex-vel.md`
-- **Fluxo de status** → `references/router-06-fluxo-de-status.md`
-- **Drive/Canva — reestruturação multivertical** → `references/router-07-drive-canva-reestrutura-o-multivertical.md`
-- **Sanitização obrigatória de metadados** → `references/router-08-sanitiza-o-obrigat-ria-de-metadados.md`
-- **Origem e uso dos assets** → `references/router-09-origem-e-uso-dos-assets.md`
-- **Naming de arquivos e assets** → `references/router-10-naming-de-arquivos-e-assets.md`
-- **Padrão para criativo estático** → `references/router-11-padr-o-para-criativo-est-tico.md`
-- **Padrão para vídeo curto** → `references/router-12-padr-o-para-v-deo-curto.md`
-- **Handoff para Ares** → `references/router-13-handoff-para-ares.md`
-- **Limites e escalonamento** → `references/router-14-limites-e-escalonamento.md`
-- **Hard gate — referência, backend e pré-requisitos antes de produzir** → `references/router-15-hard-gate-refer-ncia-backend-e-pr-requisitos-antes-de-produzir.md`
-- **Checklist de qualidade** → `references/router-16-checklist-de-qualidade.md`
-- **Armadilhas comuns** → `references/router-17-armadilhas-comuns.md`
-- **Checklist de verificação** → `references/router-18-checklist-de-verifica-o.md`
+- **Visão geral → Formato de resposta flexível** → `references/route-pack-01.md`
+- **Fluxo de status → Regra canônica de destino final READY** → `references/route-pack-02.md`
+- **Sanitização obrigatória de metadados → Origem e uso dos assets** → `references/route-pack-03.md`
+- **Naming de arquivos e assets → Geração visual — preferência Rodolfo/MGS** → `references/route-pack-04.md`
+- **Padrão para vídeo curto → Gate obrigatório para vídeo com referência externa ou backend específico** → `references/route-pack-05.md`
+- **Handoff para Ares → Checklist de verificação** → `references/route-pack-06.md`
 
 ## Context-efficiency guardrails
 
 - Stop and re-plan after more than three overlapping reads of the same file.
-- Reduce tool output above roughly 5 KB before any additional broad lookup.
-- Preserve exact procedures in topical references; keep this `SKILL.md` as the routing layer.
-- Validate the real result before reporting success.
+- Keep this main file as a routing layer; preserve detailed procedures in route packs.
+- Validate the real runtime result before reporting success.
