@@ -263,6 +263,8 @@ readonly_invariant_check() {
       "$adapter::_append_thread_author_suffix" \
       "$runpy::_append_discord_thread_author_suffix" \
       "$runpy::def _resolve_turn_reasoning_config" \
+      "$runpy::async def _prepare_busy_steer_payload" \
+      "$runpy::for_mid_turn_steer" \
       "$reasoning_router::def route_reasoning_config" \
       "$adapter::async def delete_message"; do
       file="${spec%%::*}"
