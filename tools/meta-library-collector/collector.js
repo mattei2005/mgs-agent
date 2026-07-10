@@ -163,6 +163,7 @@ async function main() {
       markers: {
         adLibrary: /Ad Library/i.test(text) || /ads\/library/i.test(html),
         libraryId: libraryIds.length > 0,
+        noResults: /No ads match|No results found|0\s+results?/i.test(text),
         activeAds: /Active ads/i.test(text),
         loginPrompt: /Log in|Create new account/i.test(text),
         challenge: /__rd_verify|executeChallenge/i.test(html),
@@ -187,7 +188,8 @@ async function main() {
   }
 
   const downloads = [];
-  for (const item of uniqueMedia.slice(0, downloadLimit)) {
+  const downloadCandidates = data.libraryIds.length > 0 ? uniqueMedia : [];
+  for (const item of downloadCandidates.slice(0, downloadLimit)) {
     try {
       const response = await context.request.get(item.src, { timeout: 60000, headers: { Referer: 'https://www.facebook.com/ads/library/' } });
       const body = await response.body();
