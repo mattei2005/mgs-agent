@@ -97,7 +97,7 @@
     this.renderShell();
     if (this.config.gate && this.config.gate.enabled !== false) {
       this.renderGate();
-      if (adProvider(this.config) !== 'm2') {
+      if (adProvider(this.config) === 'jbf') {
         requestRewardAds(this.config);
       }
     } else {
