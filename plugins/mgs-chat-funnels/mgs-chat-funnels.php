@@ -499,7 +499,7 @@ final class MGS_Chat_Funnels {
     }
 
     private function ad_wrapper_url($config) {
-        if ($this->ad_provider($config) === 'm2') {
+        if (in_array($this->ad_provider($config), array('m2', 'actview'), true)) {
             return '';
         }
         $company = $this->clean_ad_slug($config['ad_company'] ?? 'digital-trust', 'digital-trust');
