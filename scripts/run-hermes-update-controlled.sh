@@ -286,12 +286,25 @@ check_patches_against_upstream() {
   local wt="$REPORT_DIR/upstream-worktree"
   git -C "$REPO" worktree add --detach "$wt" origin/main > "$REPORT_DIR/worktree-add.txt" 2>&1
   local rc=0
+  local runtime_patches=("$PATCH_DIR"/mgs-runtime-customizations-*.patch)
+  local latest_runtime_patch=""
+  if [[ -e "${runtime_patches[0]:-}" ]]; then
+    latest_runtime_patch="${runtime_patches[${#runtime_patches[@]}-1]##*/}"
+  fi
   {
+    if [[ -z "$latest_runtime_patch" ]]; then
+      echo "MISSING latest mgs-runtime-customizations patch"
+      rc=1
+    elif ! grep -Fq "apply_patch_if_needed \"$latest_runtime_patch\"" "$ENSURE_SCRIPT"; then
+      echo "DRIFT patch guard does not reference latest runtime patch: $latest_runtime_patch"
+      rc=1
+    fi
     local canonical_patches=(
-      "mgs-runtime-customizations-2026-07-05.patch"
+      "$latest_runtime_patch"
       "mgs-auto-reasoning-routing.patch"
     )
     for name in "${canonical_patches[@]}"; do
+      [[ -n "$name" ]] || continue
       patch="$PATCH_DIR/$name"
       if [[ ! -s "$patch" ]]; then
         echo "MISSING $name"
