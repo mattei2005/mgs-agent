@@ -455,6 +455,8 @@ Semântica:
 
 **Regra MGS obrigatória definida por Rodolfo:** o comportamento mid-turn deve funcionar para qualquer mensagem enviada enquanto o agente está ocupado: texto, imagem, imagem com texto, áudio, áudio com texto e demais anexos. Mídia não pode cair silenciosamente para `queue` só porque o `AIAgent.steer()` aceita texto; o gateway deve converter o evento já normalizado (caption/transcrição + marcadores e caminhos locais dos anexos) em um payload de steer confiável, sem duplicar a mensagem no próximo turno. Se o Hermes stock não suporta uma modalidade, tratar como gap de runtime a corrigir e testar, não como limitação aceitável do produto MGS.
 
+**Correção de comunicação/diagnóstico:** se o usuário mostrar `Queued for the next turn` em uma mensagem com imagem/áudio, não defender a configuração dizendo apenas “o `steer` funciona para texto” ou “não foi falha da configuração”. Isso pode explicar a causa técnica, mas continua sendo falha do requisito MGS universal. Separar sempre três camadas: (1) config resolvida em `steer`; (2) runtime capaz de serializar aquela modalidade; (3) smoke funcional comprovando incorporação sem replay. Só a terceira permite dizer que o comportamento pedido funciona.
+
 Para o comportamento “mandei um complemento enquanto estava digitando; incorpore e responda uma vez”, o modo correto continua sendo:
 
 ```yaml

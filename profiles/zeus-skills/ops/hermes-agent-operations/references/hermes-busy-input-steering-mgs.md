@@ -179,6 +179,34 @@ hermes -p <agent> config set display.busy_input_mode steer
 6. Atualizar mirror, registrar audit/infra e reiniciar de forma detached se o gateway não recarregar.
 7. Validar serviços e fazer smoke funcional real durante tool call ativa.
 
+## Proteção canônica MGS do runtime
+
+A correção não termina no checkout vivo. O artefato canônico é:
+
+```text
+/root/mgs-agent/patches/hermes/mgs-busy-steer-universal-media-2026-07-10.patch
+```
+
+O patch deve permanecer listado em ambos:
+
+```text
+/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh
+/root/mgs-agent/scripts/run-hermes-update-controlled.sh
+```
+
+Invariantes mínimos do guard:
+
+- `async def _prepare_busy_steer_payload` existe;
+- `_prepare_inbound_message_text(..., for_mid_turn_steer=True)` existe;
+- imagens viram markers com path agent-visible sem consumir o native-image buffer do turno ativo;
+- VOICE segue STT e AUDIO/document/video preservam path;
+- os dois gates busy usam o mesmo helper;
+- PHOTO só força queue quando o modo efetivo não é `steer`;
+- falha de enrichment mantém caption + paths e tenta steer antes de queue;
+- testes busy/media rodam dentro do guard.
+
+Para cada mudança futura, validar `git apply --reverse --check` no checkout vivo, `git apply --check` em worktree limpa de `origin/main`, `ruff`, `py_compile`, pytest alvo e depois smoke Discord real. Um patch presente em disco, mas ausente do guard/precheck, é regressão futura esperando o próximo update.
+
 ## Testes obrigatórios
 
 1. Matriz adapter: imagem/voice/audio, com e sem caption.
