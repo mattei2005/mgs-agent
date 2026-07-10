@@ -63,6 +63,13 @@ agent:
     hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question
       is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE
       YOU READY?! LET'S DO THIS! 💪😤🚀
+  reasoning_auto_routing:
+    enabled: true
+    simple_effort: medium
+    default_effort: high
+    critical_effort: xhigh
+    simple_char_threshold: 180
+    critical_char_threshold: 1200
 terminal:
   backend: local
   modal_mode: auto
@@ -177,44 +184,44 @@ bedrock:
 auxiliary:
   vision:
     provider: openai-codex
-    model: gpt-5.5
+    model: gpt-5.6-sol
     base_url: ''
     api_key: ''
     timeout: 120
     download_timeout: 30
   web_extract:
     provider: openai-codex
-    model: gpt-5.5
+    model: gpt-5.6-sol
     base_url: ''
     api_key: ''
     timeout: 120
   compression:
     provider: openai-codex
-    model: gpt-5.5
+    model: gpt-5.6-sol
     base_url: ''
     api_key: ''
     timeout: 300
   skills_hub:
     provider: openai-codex
-    model: gpt-5.5
+    model: gpt-5.6-sol
     base_url: ''
     api_key: ''
     timeout: 30
   approval:
     provider: openai-codex
-    model: gpt-5.5
+    model: gpt-5.6-sol
     base_url: ''
     api_key: ''
     timeout: 30
   mcp:
     provider: openai-codex
-    model: gpt-5.5
+    model: gpt-5.6-sol
     base_url: ''
     api_key: ''
     timeout: 30
   title_generation:
     provider: openai-codex
-    model: gpt-5.5
+    model: gpt-5.6-sol
     base_url: ''
     api_key: ''
     timeout: 30
@@ -227,25 +234,25 @@ auxiliary:
     timeout: 30
   triage_specifier:
     provider: openai-codex
-    model: gpt-5.5
+    model: gpt-5.6-sol
     base_url: ''
     api_key: ''
     timeout: 120
   kanban_decomposer:
     provider: openai-codex
-    model: gpt-5.5
+    model: gpt-5.6-sol
     base_url: ''
     api_key: ''
     timeout: 180
   profile_describer:
     provider: openai-codex
-    model: gpt-5.5
+    model: gpt-5.6-sol
     base_url: ''
     api_key: ''
     timeout: 60
   curator:
     provider: openai-codex
-    model: gpt-5.5
+    model: gpt-5.6-sol
     base_url: ''
     api_key: ''
     timeout: 600
@@ -257,7 +264,7 @@ auxiliary:
     timeout: 60
   session_search:
     provider: openai-codex
-    model: gpt-5.5
+    model: gpt-5.6-sol
     base_url: ''
     api_key: ''
     timeout: 30
