@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-09T20:25:40-04:00",
+    "updated_at": "2026-07-09T20:32:44-04:00",
     "generated_by": "zeus-manual-inventory-update"
   },
   "system_packages": [
@@ -1298,6 +1298,30 @@
       "purpose": "Procedure for auditing WordPress REC→P1/SEO articles into Google Sheets with authenticated yydev-show-pages inventory validation, tag-class missing audit column, full tab clear, post-body-only CTA extraction, canonical P1 URL resolution, live post-ID REST tag verification, no blank internal tag cells, no duplicate P1 destination rows, and divergent CTA/button-link reporting.",
       "validation": "Patched after Rodolfo clarified yydev-show-pages requires logged-in WP Admin and is the 100% URL source; sitemap only fallback/proxy.",
       "updated_at": "2026-07-09T20:25:40-04:00"
+    },
+    {
+      "id": "atena:content-article-quality-audit",
+      "agent": "atena",
+      "type": "skill",
+      "path": "/root/.hermes/profiles/atena/skills/wordpress/content-article-quality-audit/SKILL.md",
+      "size_bytes": 6645,
+      "modified_at": "2026-07-10T00:32:10.049245+00:00",
+      "sha256": "b135fb27bf94b4249d089c88ae301534419c5b726a04fdc31a443f1ea6b992d4",
+      "purpose": "Atena playbook/handoff for recurring WordPress article QA: yydev-show-pages inventory, REC/P1 links, tags, missing tag classes, Google Sheets readback.",
+      "validation": "Created by Zeus at Rodolfo request; file written and readback validated by inventory hash.",
+      "updated_at": "2026-07-09T20:32:44-04:00"
+    },
+    {
+      "id": "atena:content-article-quality-audit:zeus-handoff-2026-07-10",
+      "agent": "atena",
+      "type": "skill-reference",
+      "path": "/root/.hermes/profiles/atena/skills/wordpress/content-article-quality-audit/references/zeus-handoff-2026-07-10.md",
+      "size_bytes": 1876,
+      "modified_at": "2026-07-10T00:32:24.830263+00:00",
+      "sha256": "34efa96d8e3e1fa7364c9b34bfb53545f625fbd3ff3dc7bb1a614df7cdb723e0",
+      "purpose": "Zeus handoff note explaining Rodolfo corrections and operational context for Atena.",
+      "validation": "Created by Zeus at Rodolfo request; file written and readback validated by inventory hash.",
+      "updated_at": "2026-07-09T20:32:44-04:00"
     }
   ],
   "systemd_services": [
