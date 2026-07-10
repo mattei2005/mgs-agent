@@ -238,6 +238,7 @@ readonly_invariant_check() {
   log "Running read-only MGS invariant check ($prefix)"
   local adapter="$REPO/plugins/platforms/discord/adapter.py"
   local runpy="$REPO/gateway/run.py"
+  local reasoning_router="$REPO/gateway/reasoning_router.py"
   local basepy="$REPO/gateway/platforms/base.py"
   local rc=0
   {
@@ -261,6 +262,8 @@ readonly_invariant_check() {
       "$adapter::_is_discord_bot_loop_noise" \
       "$adapter::_append_thread_author_suffix" \
       "$runpy::_append_discord_thread_author_suffix" \
+      "$runpy::def _resolve_turn_reasoning_config" \
+      "$reasoning_router::def route_reasoning_config" \
       "$adapter::async def delete_message"; do
       file="${spec%%::*}"
       needle="${spec#*::}"
@@ -274,7 +277,7 @@ readonly_invariant_check() {
   } | tee "$REPORT_DIR/${prefix}-readonly-invariants.txt"
   local pybin="$REPO/venv/bin/python"
   [[ -x "$pybin" ]] || pybin="python3"
-  "$pybin" -m py_compile "$adapter" "$runpy" "$basepy" > "$REPORT_DIR/${prefix}-readonly-py-compile.log" 2>&1 || rc=1
+  "$pybin" -m py_compile "$adapter" "$runpy" "$reasoning_router" "$basepy" > "$REPORT_DIR/${prefix}-readonly-py-compile.log" 2>&1 || rc=1
   return "$rc"
 }
 
@@ -286,6 +289,7 @@ check_patches_against_upstream() {
   {
     local canonical_patches=(
       "mgs-runtime-customizations-2026-07-05.patch"
+      "mgs-auto-reasoning-routing.patch"
     )
     for name in "${canonical_patches[@]}"; do
       patch="$PATCH_DIR/$name"

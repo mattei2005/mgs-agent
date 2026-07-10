@@ -89,6 +89,13 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    mgs-auto-reasoning-routing.patch)
+      if grep -q "def _resolve_turn_reasoning_config" "$REPO/gateway/run.py" \
+        && grep -q "def route_reasoning_config" "$REPO/gateway/reasoning_router.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     discord-thread-title-author-suffix.patch)
       if grep -q "_append_thread_author_suffix" "$REPO/plugins/platforms/discord/adapter.py" \
         && grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run.py"; then
@@ -126,6 +133,7 @@ apply_patch_if_needed "discord-thread-title-deduplicate-safe-autorename.patch"
 apply_patch_if_needed "discord-bot-gateway-lifecycle-loop-guard.patch"
 apply_patch_if_needed "discord-report-infra-no-auto-thread.patch"
 apply_patch_if_needed "discord-thread-title-author-suffix.patch"
+apply_patch_if_needed "mgs-auto-reasoning-routing.patch"
 
 # Invariants that must survive every Hermes update. If any grep fails, the
 # update is not production-safe for MGS gateways.
@@ -195,12 +203,17 @@ grep -q "_append_discord_thread_author_suffix" "$REPO/gateway/run.py" \
   || fail "missing Discord AI title author suffix"
 grep -q "async def delete_message" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord delete_message cleanup_progress support"
+grep -q "def _resolve_turn_reasoning_config" "$REPO/gateway/run.py" \
+  || fail "missing MGS per-turn reasoning router integration"
+grep -q "def route_reasoning_config" "$REPO/gateway/reasoning_router.py" \
+  || fail "missing MGS deterministic reasoning router"
 
 PYBIN="$REPO/venv/bin/python"
 [[ -x "$PYBIN" ]] || PYBIN="python3"
 "$PYBIN" -m py_compile \
   "$REPO/plugins/platforms/discord/adapter.py" \
   "$REPO/gateway/run.py" \
+  "$REPO/gateway/reasoning_router.py" \
   "$REPO/gateway/platforms/base.py"
 
 log "OK Hermes MGS patches present and py_compile passed"
