@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-11T12:18:07-04:00",
+    "updated_at": "2026-07-11T17:04:53-04:00",
     "generated_by": "infra-discovery.sh + Zeus runtime reconciliation"
   },
   "system_packages": [
@@ -472,6 +472,20 @@
     }
   ],
   "runtime_artifacts": [
+    {
+      "id": "finanzas-topfeed-preloader-css-failsafe-20260711",
+      "agent": "zeus",
+      "type": "wordpress_production_config",
+      "site": "https://finanzas.topfeed.fun",
+      "component": "Ad Inserter header code (code_block_h)",
+      "backup_path": "/root/mgs-agent/backups/finanzas-topfeed-ad-inserter-header-preloader-20260711-165826.json",
+      "backup_sha256": "a1ba4e87bfb2f1cefbc563804ad011aaa09490a667ae1dba6ad23f2a67e2eda8",
+      "purpose": "Remove the preloader dependency on LiteSpeed-delayed DOMContentLoaded execution while preserving the 2-second visual preloader.",
+      "change": "Replaced the JavaScript dismissal/body scroll lock with a CSS animation failsafe that hides the overlay after 2 seconds and disables pointer events.",
+      "validation": "Authenticated Ad Inserter readback exact; canonical article HTTP 200 contains mgs-preloader-dismiss; real browser readyState complete with visibility=hidden, opacity=0, pointer-events=none, body overflow visible, article visible; zero console errors.",
+      "status": "deployed_validated",
+      "updated_at": "2026-07-11T17:04:53-04:00"
+    },
     {
       "id": "discord-suppress-link-previews-20260710",
       "agent": "zeus",
