@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T21:25:01-04:00",
+    "updated_at": "2026-07-10T21:28:10-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1873,6 +1873,9 @@
     },
     {
       "entry": "20 6 * * * flock -n /var/lock/dtr_sb_daily_match_audit.lock /root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh >> /root/mgs-agent/logs/dtr-sb-daily-match-audit-cron.log 2>&1"
+    },
+    {
+      "entry": "9,24,39,54 * * * * flock -n /var/lock/monitor_op_rate_limit.lock /root/mgs-agent/scripts/monitor-op-rate-limit.py >> /root/mgs-agent/logs/monitor-op-rate-limit.log 2>&1"
     }
   ],
   "scripts": [
@@ -2355,6 +2358,11 @@
       "path": "/root/mgs-agent/scripts/monitor-honcho-health.sh",
       "size_bytes": 10254,
       "modified_at": "2026-06-22T18:35:26-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/monitor-op-rate-limit.py",
+      "size_bytes": 12324,
+      "modified_at": "2026-07-10T21:26:47-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-sb-restricted-pages.py",
@@ -5045,8 +5053,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 1902,
-      "md5": "d86c25236e2c3d2931bd9551cf79b607",
-      "modified_at": "2026-07-10T21:22:02-04:00"
+      "md5": "750ad849434bd7ca916f1b907dd027ad",
+      "modified_at": "2026-07-10T21:27:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -5056,9 +5064,9 @@
     },
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
-      "size_bytes": 1321,
-      "md5": "c223a7ab225462e0e75f36845d132923",
-      "modified_at": "2026-07-10T21:11:29-04:00"
+      "size_bytes": 358,
+      "md5": "10ef612b97fec604ecfc6fd2fce906a4",
+      "modified_at": "2026-07-10T21:26:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -5068,9 +5076,9 @@
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
-      "size_bytes": 25914,
-      "md5": "3c54522cdc23fec76a7dce1461ab3ac4",
-      "modified_at": "2026-07-10T21:19:19-04:00"
+      "size_bytes": 25839,
+      "md5": "f6254a13ae12f4eda17ac95082f20b57",
+      "modified_at": "2026-07-10T21:28:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -5146,9 +5154,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 215345,
-      "md5": "30194cd0b6430f3f62314d2d29e0ede5",
-      "modified_at": "2026-07-10T21:25:01-04:00"
+      "size_bytes": 215019,
+      "md5": "aea48b1913972b6c353c9c319f9cc85f",
+      "modified_at": "2026-07-10T21:25:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -5171,8 +5179,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 48987,
-      "md5": "e8ece363ff2029d48931dd55b92c2d14",
-      "modified_at": "2026-07-10T21:20:12-04:00"
+      "md5": "0a9ba4f2f038506cddd8945090d3f824",
+      "modified_at": "2026-07-10T21:25:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -5191,6 +5199,12 @@
       "size_bytes": 7588,
       "md5": "d03557249f7bf95c88031f031576f268",
       "modified_at": "2026-06-04T12:24:33-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
+      "size_bytes": 1117,
+      "md5": "5592ae380c07de8a194bc921eb50045e",
+      "modified_at": "2026-07-10T21:27:33-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -5262,7 +5276,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "0697c0326c77d82982ec0de851584cdf",
-      "modified_at": "2026-07-10T21:21:01-04:00"
+      "modified_at": "2026-07-10T21:26:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
