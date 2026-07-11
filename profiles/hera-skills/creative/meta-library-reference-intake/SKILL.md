@@ -25,10 +25,10 @@ Nunca recriar esse fluxo em `/tmp`. Nunca apagar, substituir, anexar ou versiona
 
 ## Fluxo obrigatório
 
-1. Rodar o wrapper com a URL recebida:
+1. Rodar o wrapper com a URL recebida, preservando a rota de rede do último sucesso autenticado. Se o último `proxyMode` for `windows-home-socks`, verificar primeiro `127.0.0.1:1080` e usar `HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080`; nunca testar `direct-vps` antes:
 
 ```bash
-/root/mgs-agent/scripts/hera-meta-library-collector.sh --url '<URL>' --download 1
+HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080 /root/mgs-agent/scripts/hera-meta-library-collector.sh --url '<URL>' --download 1
 ```
 
 2. Ler o resumo JSON do stdout e depois o `report.json` indicado.
@@ -66,6 +66,10 @@ O helper usa o mesmo perfil persistente, Xvfb + x11vnc + noVNC, com VNC/noVNC vi
 Se uma sessão anterior morrer e deixar `x11vnc`/`websockify` órfãos, o helper só pode limpar listeners conhecidos após adquirir o lock do perfil. Nunca usar `pkill` amplo; processo inesperado nas portas deve falhar com exit `76`.
 
 Se o Facebook entrar em CAPTCHA repetitivo pelo IP do VPS, parar a tentativa para não aumentar o risco da conta. Não trocar apenas de navegador nem usar proxy público/terceiro. A rota preferida é um SOCKS temporário pelo próprio Windows do Rodolfo: o SSH abre `-R 127.0.0.1:1080`, e o helper é iniciado com `HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080`. O proxy deve ficar local-only, existir somente enquanto o túnel SSH estiver aberto e nunca aceitar outro endereço no helper.
+
+### Continuidade obrigatória da rota residencial
+
+Antes de reutilizar uma sessão autenticada, leia o `proxyMode` do último `report.json` bem-sucedido. Se ele for `windows-home-socks`, confirme que `127.0.0.1:1080` continua aberto e execute o coletor com `HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080`. **Não rode primeiro em `direct-vps`**: a troca de IP/rota pode fazer a Meta remover `c_user`/`xs` do perfil persistente e invalidar a sessão recém-salva. Se o SOCKS estiver fechado, pare antes de abrir o Chromium e peça somente a reabertura do túnel residencial; depois valide os nomes `c_user`/`xs` sem expor valores e retome a coleta pela mesma rota.
 
 ## Verificação de encerramento
 
