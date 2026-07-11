@@ -58,5 +58,6 @@ echo wp_json_encode( array(
     'revenue' => $expected,
     'single_day_2026_07_08' => $day_expected,
     'roi_2026_07_09' => '65,73%',
+    'default_from_to' => $yesterday,
     'html_bytes' => strlen( $html ),
 ) ) . PHP_EOL;
