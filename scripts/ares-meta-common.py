@@ -38,14 +38,16 @@ def _identify_token_field(data):
 
 def _write_token_cache(item_name, token, field):
     TOKEN_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    os.chmod(TOKEN_CACHE_PATH.parent, 0o700)
     payload = json.dumps({
         'item': item_name,
         'field': field,
         'token': token,
         'cached_at': int(time.time()),
     }, ensure_ascii=False)
-    tmp = TOKEN_CACHE_PATH.with_suffix('.tmp')
-    fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    fd, tmp_name = tempfile.mkstemp(prefix='.ares-meta-token-', dir=TOKEN_CACHE_PATH.parent)
+    tmp = Path(tmp_name)
+    os.fchmod(fd, 0o600)
     try:
         with os.fdopen(fd, 'w') as fh:
             fh.write(payload + '\n')
