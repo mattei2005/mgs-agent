@@ -7,19 +7,21 @@
 set -euo pipefail
 
 BASE_DIR="/root/mgs-agent"
-STATE_FILE="${BASE_DIR}/data/service-restart-state.json"
+STATE_FILE="${MGS_SERVICE_RESTART_STATE_FILE:-${BASE_DIR}/data/service-restart-state.json}"
 LOG_PREFIX="[monitor-service-restarts]"
 
 set -a
+# Token do bot Zeus local; o monitor não depende mais do 1Password/webhook.
 # shellcheck source=/dev/null
-source "${BASE_DIR}/.env" 2>/dev/null || true
+source "/root/.hermes/profiles/zeus/.env" 2>/dev/null || true
 set +a
 
-LOG_DIR="/var/log/mgs-agent"
+LOG_DIR="${MGS_SERVICE_RESTART_LOG_DIR:-/var/log/mgs-agent}"
 FAILED_ALERTS_LOG="${LOG_DIR}/monitor-service-restarts-failed-alerts.log"
 PENDING_ALERTS_DIR="${LOG_DIR}/pending-alerts"
-WEBHOOK_URL=""
-WEBHOOK_FETCHED=0
+DISCORD_CHANNEL_ID="${MGS_DISCORD_CHANNEL_ID_OVERRIDE:-1498132022634483894}"
+DISCORD_API_URL="${MGS_DISCORD_API_URL_OVERRIDE:-https://discord.com/api/v10/channels/${DISCORD_CHANNEL_ID}/messages}"
+BOT_TOKEN="${MGS_DISCORD_BOT_TOKEN_OVERRIDE:-${DISCORD_BOT_TOKEN:-}}"
 EXIT_CODE=0
 
 record_failed_alert() {
@@ -33,42 +35,34 @@ record_failed_alert() {
   return 0
 }
 
-fetch_webhook_once() {
-  if [[ "$WEBHOOK_FETCHED" == "1" ]]; then
-    [[ "$WEBHOOK_URL" == https://* ]]
-    return $?
-  fi
-  WEBHOOK_FETCHED=1
-  if [[ "${MGS_FORCE_OP_FAIL:-0}" == "1" ]]; then
-    WEBHOOK_URL=""
-    return 1
-  fi
-  if [[ -n "${MGS_WEBHOOK_URL_OVERRIDE:-}" ]]; then
-    WEBHOOK_URL="$MGS_WEBHOOK_URL_OVERRIDE"
-  else
-    WEBHOOK_URL=$(op item get 'Discord Webhook - Alerts Infra Channel' --vault 'MGS Conteúdo' --fields label=webhook_url --reveal 2>/dev/null || true)
-  fi
-  [[ "$WEBHOOK_URL" == https://* ]]
-}
-
 post_alert_payload() {
   local payload="$1" reason="${2:-alert}" http_status attempt
-  if ! fetch_webhook_once; then
-    record_failed_alert "$payload" "op_unavailable:${reason}" || return 2
+  if [[ "${MGS_FORCE_DISCORD_AUTH_FAIL:-0}" == "1" ]]; then
+    record_failed_alert "$payload" "discord_auth_forced:${reason}" || return 2
+    return 2
+  fi
+  if [[ -z "$BOT_TOKEN" ]]; then
+    record_failed_alert "$payload" "discord_bot_token_missing:${reason}" || return 2
     return 2
   fi
   if [[ "${MGS_DRY_RUN:-0}" == "1" ]]; then
-    echo "$(date -Iseconds) ${LOG_PREFIX} DRY_RUN: would post alert (${reason})"
+    echo "$(date -Iseconds) ${LOG_PREFIX} DRY_RUN: would post bot alert channel=${DISCORD_CHANNEL_ID} (${reason})"
     return 0
   fi
   for attempt in 1 2; do
-    http_status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 -X POST -H "Content-Type: application/json" -d "$payload" "$WEBHOOK_URL" 2>/dev/null || echo "000")
+    http_status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 \
+      -X POST \
+      -H "Authorization: Bot ${BOT_TOKEN}" \
+      -H "Content-Type: application/json" \
+      -H "User-Agent: MGS-Zeus/1.0" \
+      -d "$payload" \
+      "$DISCORD_API_URL" 2>/dev/null || echo "000")
     if [[ "$http_status" =~ ^2 ]]; then
       return 0
     fi
     sleep 2
   done
-  record_failed_alert "$payload" "curl_failed:${reason}:http=${http_status}" || return 2
+  record_failed_alert "$payload" "discord_api_failed:${reason}:http=${http_status}" || return 2
   return 2
 }
 

@@ -71,7 +71,8 @@ Fallbacks:
 - `python3 -m py_compile /root/mgs-agent/scripts/cron-control-plane.py` if edited
 - `perl -c /etc/needrestart/conf.d/mgs-hermes-gateways.conf`
 - `python3 -m json.tool /root/mgs-agent/data/infra-inventory.json`
-- `MGS_DRY_RUN=1 MGS_WEBHOOK_URL_OVERRIDE=https://example.com/webhook /root/mgs-agent/scripts/monitor-service-restarts.sh`
+- `MGS_DRY_RUN=1 MGS_SERVICE_RESTART_STATE_FILE=/tmp/service-restart-test-state.json MGS_SERVICE_RESTART_LOG_DIR=/tmp/service-restart-test-logs /root/mgs-agent/scripts/monitor-service-restarts.sh`
+- confirmar estaticamente que `monitor-service-restarts.sh` não contém `op item get`; o envio real usa o bot Zeus via API Discord
 - `systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service mgs-autocommit.service`
 - `needrestart -r l -b` does not list Hermes gateways
 

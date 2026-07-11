@@ -9,7 +9,7 @@
 Cron `*/5 * * * *` → `/root/mgs-agent/scripts/monitor-service-restarts.sh`:
 1. Lê `NRestarts` de cada service via `systemctl show`
 2. Calcula delta desde baseline da janela de 24h
-3. Compara com thresholds e envia alerta via webhook Discord
+3. Compara com thresholds e envia alerta pela API do Discord usando o bot Zeus, diretamente no canal `#alerts-infra` (`1498132022634483894`)
 4. Persiste estado em `/root/mgs-agent/data/service-restart-state.json`
 
 ### Services monitorados
@@ -18,6 +18,8 @@ Cron `*/5 * * * *` → `/root/mgs-agent/scripts/monitor-service-restarts.sh`:
 |---|---|
 | `zeus-gateway` | Gateway do agente Zeus (Discord) |
 | `atena-gateway` | Gateway do agente Atena (Discord) |
+| `ares-gateway` | Gateway do agente Ares (Discord) |
+| `hera-gateway` | Gateway do agente Hera (Discord) |
 | `mgs-autocommit` | Watcher de auto-commit git |
 
 ### Thresholds
@@ -80,9 +82,11 @@ Para batch de restarts, não usar tabela monoespaçada larga: no Discord mobile 
 }
 ```
 
-### Credencial
+### Autenticação Discord
 
-Webhook: 1Password vault `MGS Conteúdo`, item `Discord Webhook - Alerts Infra Channel`, field `webhook_url`.
+O monitor **não consulta o 1Password**. Ele carrega `DISCORD_BOT_TOKEN` do arquivo local `/root/.hermes/profiles/zeus/.env` e publica pela API `POST /api/v10/channels/1498132022634483894/messages` como bot Zeus.
+
+Para testes isolados, usar `MGS_DISCORD_API_URL_OVERRIDE`, `MGS_DISCORD_BOT_TOKEN_OVERRIDE`, `MGS_SERVICE_RESTART_STATE_FILE` e `MGS_SERVICE_RESTART_LOG_DIR`; nunca enviar smoke test ao canal real.
 
 ---
 ## SEÇÃO C — Monitor de Skills MGS sem REPORT-INFRA
