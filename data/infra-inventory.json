@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T22:31:15-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-10T22:35:47.635311-04:00",
+    "generated_by": "infra-discovery.sh + scoped Hera Library Meta hierarchy correction"
   },
   "system_packages": [
     {
@@ -1874,16 +1874,16 @@
       "modified_at": "2026-07-10T22:06:02.416779-04:00",
       "sha256": "39ba62c679b4115379628f6e6c5d4c40de05df6623d79b98b7e84ac6bc8573a1",
       "versioned_sha256": "39ba62c679b4115379628f6e6c5d4c40de05df6623d79b98b7e84ac6bc8573a1",
-      "purpose": "Canonical Meta Library flow with dedicated residential routing and standard Drive destination MGS-AGENTS/CRIATIVOS/<library>.",
-      "validation": "skill/reference live-versioned hashes match; FMYBC folder moved under CRIATIVOS; 25 children retained; remote inventory MD5 readback PASS; trashed=0.",
-      "updated_at": "2026-07-10T22:26:26.784481-04:00",
+      "purpose": "Canonical Meta Library flow with standard Drive destination MGS-AGENTS/CRIATIVOS/LIBRARY META/<library>.",
+      "validation": "skill/reference live-versioned hashes match; FMYBC folder moved under LIBRARY META; 25 children retained; remote inventory MD5 readback PASS; trashed=0.",
+      "updated_at": "2026-07-10T22:35:47.635311-04:00",
       "reference_sha256": "5c9a57d8e0f6b37391fc399e7729a1105220d468081ef736026b76cbc96eb450",
       "known_pending": "Never expose cookie values/hashes; do not touch profile again in the completed collection task.",
-      "full_collection_reference_sha256": "ed570c1074e4f0d487e3e84d6fc080d82a45bdc96fbe28c7096a42da17833da9",
-      "full_collection_versioned_sha256": "ed570c1074e4f0d487e3e84d6fc080d82a45bdc96fbe28c7096a42da17833da9",
+      "full_collection_reference_sha256": "66a3d713fb2b6c32754bb3a266d5e30c096d83a3f9ad9c0930feba18de9771b4",
+      "full_collection_versioned_sha256": "66a3d713fb2b6c32754bb3a266d5e30c096d83a3f9ad9c0930feba18de9771b4",
       "standard_drive_parent": {
-        "path": "MGS-AGENTS/CRIATIVOS",
-        "folder_id": "1NLaOKK6n4fMF5u1Assgq8FKim76NI--i"
+        "path": "MGS-AGENTS/CRIATIVOS/LIBRARY META",
+        "folder_id": "1vXTzNsXYvdJlGkwiy62_LFrMuGvQfsk0"
       }
     },
     {
