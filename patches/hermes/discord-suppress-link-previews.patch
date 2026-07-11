@@ -1,0 +1,297 @@
+diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/adapter.py
+--- a/plugins/platforms/discord/adapter.py
++++ b/plugins/platforms/discord/adapter.py
+@@ -956,8 +956,15 @@
+         self._dedup = MessageDeduplicator()
+         # Reply threading mode: "off" (no replies), "first" (reply on first
+         # chunk only, default), "all" (reply-reference on every chunk).
+         self._reply_to_mode: str = getattr(config, 'reply_to_mode', 'first') or 'first'
++        # Optional Discord message flag for plain-text/file messages. This
++        # suppresses automatic URL previews without disabling the explicit
++        # embeds used by approvals, clarify prompts, and model selection.
++        self._suppress_link_previews: bool = _env_bool(
++            "DISCORD_SUPPRESS_LINK_PREVIEWS",
++            bool(self.config.extra.get("suppress_link_previews", False)),
++        )
+         self._slash_commands: bool = self.config.extra.get("slash_commands", True)
+         # In-memory cache of the bot's last message ID per channel, used by
+         # history backfill to skip the full scan on hot paths.  Falls back to
+         # scanning channel.history() on cache miss (cold start / restart).
+@@ -2077,8 +2084,18 @@
+                 await self._add_reaction(message, "✅")
+             elif outcome == ProcessingOutcome.FAILURE:
+                 await self._add_reaction(message, "❌")
+ 
++    def _plain_message_send_kwargs(self) -> Dict[str, Any]:
++        """Return flags for sends that must not create automatic URL previews.
++
++        Explicit Hermes embeds intentionally do not use this helper, so rich
++        approval, clarify, and model-picker UI remains visible.
++        """
++        if not self._suppress_link_previews:
++            return {}
++        return {"suppress_embeds": True}
++
+     async def send(
+         self,
+         chat_id: str,
+         content: str,
+@@ -2147,8 +2164,9 @@
+                 try:
+                     msg = await channel.send(
+                         content=chunk,
+                         reference=chunk_reference,
++                        **self._plain_message_send_kwargs(),
+                     )
+                 except Exception as e:
+                     err_text = str(e)
+                     if (
+@@ -2169,8 +2187,9 @@
+                         reference = None
+                         msg = await channel.send(
+                             content=chunk,
+                             reference=None,
++                            **self._plain_message_send_kwargs(),
+                         )
+                     else:
+                         raise
+                 message_ids.append(str(msg.id))
+@@ -2242,8 +2261,9 @@
+         try:
+             thread = await forum_channel.create_thread(
+                 name=thread_name,
+                 content=starter_content,
++                **self._plain_message_send_kwargs(),
+             )
+         except Exception as e:
+             logger.error("[%s] Failed to create forum thread in %s: %s", self.name, forum_channel.id, e)
+             return SendResult(success=False, error=f"Forum thread creation failed: {e}")
+@@ -2260,8 +2280,9 @@
+         for chunk in chunks[1:]:
+             try:
+                 msg = await thread_channel.send(
+                     content=chunk,
++                    **self._plain_message_send_kwargs(),
+                 )
+                 message_ids.append(str(msg.id))
+             except Exception as e:
+                 warning = f"Failed to send follow-up chunk to forum thread {thread_id}: {e}"
+@@ -2308,8 +2329,9 @@
+                     hint = getattr(files[0], "filename", "") or ""
+             thread_name = _derive_forum_thread_name(hint) if hint.strip() else "New Post"
+ 
+         kwargs: Dict[str, Any] = {"name": thread_name}
++        kwargs.update(self._plain_message_send_kwargs())
+         if content:
+             kwargs["content"] = content
+         if file is not None:
+             kwargs["file"] = file
+@@ -2399,9 +2421,12 @@
+                 # mask a real edit later.
+                 self._last_overflow_preview.pop(_preview_key, None)
+ 
+             try:
+-                await msg.edit(content=formatted)
++                await msg.edit(
++                    content=formatted,
++                    suppress=self._suppress_link_previews,
++                )
+                 if _saturated_preview:
+                     self._last_overflow_preview[_preview_key] = formatted
+             except Exception as edit_err:
+                 # Reactive split-and-deliver: format_message inflation (or a
+@@ -2419,9 +2444,12 @@
+                     )[0]
+                     if self._last_overflow_preview.get(_preview_key) == truncated:
+                         # Saturated-preview dedup (see pre-flight path above).
+                         return SendResult(success=True, message_id=message_id)
+-                    await msg.edit(content=truncated)
++                    await msg.edit(
++                        content=truncated,
++                        suppress=self._suppress_link_previews,
++                    )
+                     self._last_overflow_preview[_preview_key] = truncated
+                 else:
+                     raise
+             return SendResult(success=True, message_id=message_id)
+@@ -2471,14 +2499,20 @@
+         chunks = self.truncate_message(formatted, self.MAX_MESSAGE_LENGTH)
+         if len(chunks) <= 1:
+             # Defensive: caller's pre-flight should guarantee >1 chunk, but if
+             # not, just edit normally.
+-            await msg.edit(content=chunks[0] if chunks else formatted)
++            await msg.edit(
++                content=chunks[0] if chunks else formatted,
++                suppress=self._suppress_link_previews,
++            )
+             return SendResult(success=True, message_id=message_id)
+ 
+         # Step 1 — edit the existing message with the first chunk.
+         try:
+-            await msg.edit(content=chunks[0])
++            await msg.edit(
++                content=chunks[0],
++                suppress=self._suppress_link_previews,
++            )
+         except Exception as e:
+             logger.error(
+                 "[%s] Overflow split: first-chunk edit failed: %s",
+                 self.name, e, exc_info=True,
+@@ -2499,8 +2533,9 @@
+             try:
+                 sent = await channel.send(
+                     content=chunk,
+                     reference=reference,
++                    **self._plain_message_send_kwargs(),
+                 )
+             except Exception as send_err:
+                 # Drop the reply anchor and retry once — a deleted/expired
+                 # anchor (10008) or system-message reply (50035) shouldn't lose
+@@ -2512,8 +2547,9 @@
+                 try:
+                     sent = await channel.send(
+                         content=chunk,
+                         reference=None,
++                        **self._plain_message_send_kwargs(),
+                     )
+                 except Exception as retry_err:
+                     logger.warning(
+                         "[%s] Overflow split: stopped at %d/%d chunks delivered: %s",
+@@ -2584,8 +2620,9 @@
+                 )
+             msg = await channel.send(
+                 content=caption if caption else None,
+                 file=file,
++                **self._plain_message_send_kwargs(),
+             )
+         return SendResult(success=True, message_id=str(msg.id))
+ 
+     async def send_multiple_images(
+@@ -2703,8 +2740,9 @@
+                 else:
+                     await channel.send(
+                         content=content,
+                         files=files,
++                        **self._plain_message_send_kwargs(),
+                     )
+             except Exception as e:
+                 logger.warning(
+                     "[%s] Multi-image Discord send failed (chunk %d/%d), falling back to per-image: %s",
+@@ -3827,8 +3865,9 @@
+ 
+                     msg = await channel.send(
+                         content=caption if caption else None,
+                         file=file,
++                        **self._plain_message_send_kwargs(),
+                     )
+                     return SendResult(success=True, message_id=str(msg.id))
+ 
+         except ImportError:
+@@ -3896,8 +3935,9 @@
+ 
+                     msg = await channel.send(
+                         content=caption if caption else None,
+                         file=file,
++                        **self._plain_message_send_kwargs(),
+                     )
+                     return SendResult(success=True, message_id=str(msg.id))
+ 
+         except ImportError:
+@@ -5425,8 +5465,9 @@
+             )
+             if starter_message:
+                 await thread.send(
+                     starter_message,
++                    **self._plain_message_send_kwargs(),
+                 )
+             return {
+                 "success": True,
+                 "thread_id": str(thread.id),
+@@ -5436,8 +5477,9 @@
+             try:
+                 seed_content = starter_message or f"\U0001f9f5 Thread created by Hermes: **{name}**"
+                 seed_msg = await parent_channel.send(
+                     seed_content,
++                    **self._plain_message_send_kwargs(),
+                 )
+                 thread = await seed_msg.create_thread(
+                     name=name,
+                     auto_archive_duration=auto_archive_duration,
+@@ -5775,8 +5817,9 @@
+                 last_direct_error = direct_error
+                 try:
+                     seed_msg = await message.channel.send(
+                         f"\U0001f9f5 Thread created by Hermes: **{thread_name}**",
++                        **self._plain_message_send_kwargs(),
+                     )
+                     thread = await seed_msg.create_thread(
+                         name=thread_name,
+                         auto_archive_duration=1440,
+@@ -8723,8 +8766,12 @@
+             tau = ",".join(str(v) for v in tau)
+         os.environ["DISCORD_THREAD_AUTO_ADD_USERS"] = str(tau)
+     if "reactions" in discord_cfg and not os.getenv("DISCORD_REACTIONS"):
+         os.environ["DISCORD_REACTIONS"] = str(discord_cfg["reactions"]).lower()
++    if "suppress_link_previews" in discord_cfg and not os.getenv("DISCORD_SUPPRESS_LINK_PREVIEWS"):
++        os.environ["DISCORD_SUPPRESS_LINK_PREVIEWS"] = str(
++            discord_cfg["suppress_link_previews"]
++        ).lower()
+     # ignored_channels: channels where bot never responds (even when mentioned)
+     ic = discord_cfg.get("ignored_channels")
+     if ic is not None and not os.getenv("DISCORD_IGNORED_CHANNELS"):
+         if isinstance(ic, list):
+diff --git a/tests/gateway/test_discord_send.py b/tests/gateway/test_discord_send.py
+--- a/tests/gateway/test_discord_send.py
++++ b/tests/gateway/test_discord_send.py
+@@ -159,8 +159,51 @@
+     assert channel.send.await_count == 1
+     assert send_calls[0]["reference"] is reference_obj
+ 
+ 
++@pytest.mark.asyncio
++async def test_send_suppresses_link_previews_when_enabled(monkeypatch):
++    monkeypatch.setenv("DISCORD_SUPPRESS_LINK_PREVIEWS", "true")
++    adapter = DiscordAdapter(PlatformConfig(enabled=True, token="***"))
++
++    sent_msg = SimpleNamespace(id=4321)
++    channel = SimpleNamespace(send=AsyncMock(return_value=sent_msg))
++    adapter._client = SimpleNamespace(
++        get_channel=lambda _chat_id: channel,
++        fetch_channel=AsyncMock(),
++    )
++
++    result = await adapter.send("555", "https://example.com")
++
++    assert result.success is True
++    channel.send.assert_awaited_once_with(
++        content="https://example.com",
++        reference=None,
++        suppress_embeds=True,
++    )
++
++
++@pytest.mark.asyncio
++async def test_edit_preserves_suppressed_link_preview_flag(monkeypatch):
++    monkeypatch.setenv("DISCORD_SUPPRESS_LINK_PREVIEWS", "true")
++    adapter = DiscordAdapter(PlatformConfig(enabled=True, token="***"))
++
++    msg = SimpleNamespace(edit=AsyncMock())
++    channel = SimpleNamespace(fetch_message=AsyncMock(return_value=msg))
++    adapter._client = SimpleNamespace(
++        get_channel=lambda _chat_id: channel,
++        fetch_channel=AsyncMock(),
++    )
++
++    result = await adapter.edit_message("555", "4321", "https://example.com")
++
++    assert result.success is True
++    msg.edit.assert_awaited_once_with(
++        content="https://example.com",
++        suppress=True,
++    )
++
++
+ # ---------------------------------------------------------------------------
+ # Forum channel tests
+ # ---------------------------------------------------------------------------
+ 

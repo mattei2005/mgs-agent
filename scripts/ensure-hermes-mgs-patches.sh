@@ -89,6 +89,14 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    discord-suppress-link-previews.patch)
+      if grep -q "DISCORD_SUPPRESS_LINK_PREVIEWS" "$REPO/plugins/platforms/discord/adapter.py" \
+        && grep -q "def _plain_message_send_kwargs" "$REPO/plugins/platforms/discord/adapter.py" \
+        && grep -q "test_edit_preserves_suppressed_link_preview_flag" "$REPO/tests/gateway/test_discord_send.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     mgs-auto-reasoning-routing.patch)
       if grep -q "def _resolve_turn_reasoning_config" "$REPO/gateway/run.py" \
         && grep -q "def route_reasoning_config" "$REPO/gateway/reasoning_router.py" \
@@ -150,6 +158,7 @@ apply_patch_if_needed "discord-thread-title-deduplicate-safe-autorename.patch"
 apply_patch_if_needed "discord-bot-gateway-lifecycle-loop-guard.patch"
 apply_patch_if_needed "discord-report-infra-no-auto-thread.patch"
 apply_patch_if_needed "discord-thread-title-author-suffix.patch"
+apply_patch_if_needed "discord-suppress-link-previews.patch"
 apply_patch_if_needed "mgs-auto-reasoning-routing.patch"
 apply_patch_if_needed "mgs-busy-steer-universal-media-2026-07-10.patch"
 apply_patch_if_needed "skill-view-compact-linked-files.patch"
@@ -205,6 +214,12 @@ grep -q "Ignoring gateway lifecycle notice from bot" "$REPO/plugins/platforms/di
   || fail "missing Discord bot lifecycle notice ignore guard"
 grep -q "Shutdown notification suppressed for bot-originated Discord session" "$REPO/gateway/run.py" \
   || fail "missing Discord bot-originated shutdown notification suppressor"
+grep -q "DISCORD_SUPPRESS_LINK_PREVIEWS" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord suppress-link-previews config bridge"
+grep -q "def _plain_message_send_kwargs" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord plain-message link-preview suppression helper"
+grep -q "test_edit_preserves_suppressed_link_preview_flag" "$REPO/tests/gateway/test_discord_send.py" \
+  || fail "missing Discord link-preview suppression regression tests"
 
 grep -q "AUTO_ATTACH_LOCAL_FILES_ENV" "$REPO/gateway/platforms/base.py" \
   || fail "missing Discord/local file auto-attach safety gate"
@@ -251,6 +266,7 @@ PYBIN="$REPO/venv/bin/python"
 
 "$PYBIN" -m pytest -q \
   "$REPO/tests/gateway/test_busy_session_ack.py" \
+  "$REPO/tests/gateway/test_discord_send.py" \
   "$REPO/tests/gateway/test_telegram_photo_interrupts.py" \
   "$REPO/tests/tools/test_skills_tool.py"
 

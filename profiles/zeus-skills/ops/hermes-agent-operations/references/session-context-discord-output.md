@@ -2,6 +2,28 @@
 
 > Extracted from the former monolithic `SKILL.md` on 2026-07-10. Load this file only when its branch is relevant.
 
+## Discord — suprimir previews automáticos de links
+
+Use quando Rodolfo pedir que mensagens dos agentes não gerem cards/previews automáticos para URLs no Discord.
+
+Estado MGS canônico:
+
+- Chave por profile: `discord.suppress_link_previews: true`.
+- Bridge interno: `DISCORD_SUPPRESS_LINK_PREVIEWS` em `plugins/platforms/discord/adapter.py`.
+- Mensagens simples e captions usam `suppress_embeds=True`; edições de streaming preservam a flag com `suppress=True`.
+- Embeds explícitos do Hermes (aprovação, clarify, model picker) não usam o helper de mensagens simples e devem continuar visíveis.
+- Patch persistente: `/root/mgs-agent/patches/hermes/discord-suppress-link-previews.patch`.
+- Patch guard: `/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh`.
+
+Validação mínima após alteração/update:
+
+1. `hermes -p <profile> config check` e readback de `discord.suppress_link_previews`.
+2. `git apply --reverse --check` no patch contra o checkout vivo.
+3. `pytest -q tests/gateway/test_discord_send.py`.
+4. Restart seguro dos gateways afetados; Zeus por último.
+
+Não remover a permissão Discord `Embed Links`: isso pode quebrar UI interativa. Não envolver URLs em `<...>` como workaround, porque altera o texto visível.
+
 ## 6. Session reset / manter contexto em threads
 
 Use quando Rodolfo perguntar sobre mensagens do Hermes como:

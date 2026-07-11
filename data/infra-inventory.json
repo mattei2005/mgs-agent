@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T22:57:05-04:00",
+    "updated_at": "2026-07-10T23:00:08-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -451,6 +451,32 @@
     }
   ],
   "runtime_artifacts": [
+    {
+      "id": "discord-suppress-link-previews-20260710",
+      "agent": "zeus",
+      "type": "hermes_runtime_patch",
+      "path": "/root/mgs-agent/patches/hermes/discord-suppress-link-previews.patch",
+      "sha256": "4471ac10669a78ccd1763b1e76eb250f9211c2830b93e5b9e0f87533252a6edc",
+      "runtime_file": "/root/.hermes/hermes-agent/plugins/platforms/discord/adapter.py",
+      "guard_script": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
+      "guard_sha256": "279303ea94c0ae736b74d4c9a0fe4c4d7087fc40432d2db6deac473da3bf3836",
+      "profile_configs": [
+        "/root/.hermes/profiles/zeus/config.yaml",
+        "/root/.hermes/profiles/atena/config.yaml",
+        "/root/.hermes/profiles/ares/config.yaml",
+        "/root/.hermes/profiles/hera/config.yaml"
+      ],
+      "agents": [
+        "zeus",
+        "atena",
+        "ares",
+        "hera"
+      ],
+      "purpose": "Suppress Discord automatic URL previews on plain agent messages while preserving explicit Hermes UI embeds.",
+      "validation": "patch reverse apply PASS; py_compile PASS; 20 targeted tests PASS; full MGS patch guard 153 tests PASS; 4/4 profile config checks PASS",
+      "status": "validated_pending_restart",
+      "updated_at": "2026-07-10T22:58:31-04:00"
+    },
     {
       "id": "mgs-busy-steer-rollout-validation-3cc76e563764",
       "agent": "zeus",
@@ -2198,8 +2224,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 6646,
-      "modified_at": "2026-07-10T22:53:43-04:00"
+      "size_bytes": 7556,
+      "modified_at": "2026-07-10T22:59:58-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/chat-log.sh",
@@ -2338,8 +2364,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
-      "size_bytes": 13787,
-      "modified_at": "2026-07-10T18:37:02-04:00"
+      "size_bytes": 14852,
+      "modified_at": "2026-07-10T22:57:15-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
@@ -5251,8 +5277,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 316,
-      "md5": "cffb68a98e3f433e8b43621af99b8aa2",
-      "modified_at": "2026-07-10T22:45:01-04:00"
+      "md5": "d36bb467ec842ed7820f7b6811595122",
+      "modified_at": "2026-07-10T23:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -5299,8 +5325,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 25681,
-      "md5": "ebcc2d7350503944bd923600dc784c93",
-      "modified_at": "2026-07-10T22:55:01-04:00"
+      "md5": "dbd72381799940e5a05d39c017503c53",
+      "modified_at": "2026-07-10T23:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -5322,9 +5348,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 224384,
-      "md5": "354652fd45a5da04d0a8282befc1375f",
-      "modified_at": "2026-07-10T22:35:47-04:00"
+      "size_bytes": 225602,
+      "md5": "057030c56d1acffdb2ddc16051f9c256",
+      "modified_at": "2026-07-10T22:58:42-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -5472,9 +5498,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2172,
-      "md5": "569a2a60535819b2ae4a711dfb4afab8",
-      "modified_at": "2026-07-10T22:55:02-04:00"
+      "size_bytes": 2173,
+      "md5": "b8543d23c7e4d58e1648626b2f24342f",
+      "modified_at": "2026-07-10T23:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",

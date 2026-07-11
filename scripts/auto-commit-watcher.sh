@@ -37,54 +37,87 @@ log() {
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "$LOG_FILE"
 }
 
-log "=== Watcher started — batch_target=${BATCH_TARGET} max_wait=${BATCH_MAX_WAIT_SECONDS}s quiet=${BATCH_QUIET_SECONDS}s ==="
+# Evita duas instâncias stageando/commitando o mesmo índice Git.
+exec 9>"$REPO_DIR/.git/auto-commit-watcher.lock"
+if ! flock -n 9; then
+  log "BLOQUEADO: outra instância do auto-commit-watcher já está ativa"
+  exit 0
+fi
 
-wait_for_change() {
-  local timeout_seconds="${1:-0}"
-  local args=(-q -r -e modify,create,delete,move --exclude '\.git/|\.bak|\.swp|\.tmp|sessions/|/logs/|node_modules')
-  if (( timeout_seconds > 0 )); then
-    inotifywait "${args[@]}" -t "$timeout_seconds" "$REPO_DIR" >/dev/null 2>&1
-  else
-    inotifywait "${args[@]}" "$REPO_DIR" >/dev/null 2>&1
-  fi
+# Monitor persistente: não existe janela cega durante quiet period, status,
+# staging ou commit. O snapshot Git no flush continua sendo autoritativo.
+coproc INOTIFY_MONITOR {
+  exec inotifywait -m -q -r -e modify,create,delete,move \
+    --format '%e' \
+    --exclude '\.git/|\.bak|\.swp|\.tmp|sessions/|/logs/|node_modules' \
+    "$REPO_DIR" 2>>"$LOG_FILE"
 }
+INOTIFY_FD=${INOTIFY_MONITOR[0]}
+INOTIFY_PID=$INOTIFY_MONITOR_PID
+
+cleanup_monitor() {
+  kill "$INOTIFY_PID" 2>/dev/null || true
+  wait "$INOTIFY_PID" 2>/dev/null || true
+}
+trap cleanup_monitor EXIT
+trap 'exit 0' INT TERM
+
+BATCH_ACTIVE=0
+BATCH_COUNT=0
+BATCH_STARTED_AT=0
+LAST_EVENT_AT=0
+
+log "=== Watcher started — batch_target=${BATCH_TARGET} max_wait=${BATCH_MAX_WAIT_SECONDS}s quiet=${BATCH_QUIET_SECONDS}s persistent_inotify=1 ==="
 
 while true; do
-  # Primeiro lote: aguarda indefinidamente por uma mudança real.
-  if ! wait_for_change 0; then
-    log "WARN: inotifywait inicial falhou; tentando novamente em 5s"
-    sleep 5
+  EVENT=""
+  if IFS= read -r -t 1 EVENT <&"$INOTIFY_FD"; then
+    NOW_TS=$SECONDS
+
+    if (( BATCH_ACTIVE == 0 )); then
+      BATCH_ACTIVE=1
+      BATCH_STARTED_AT=$NOW_TS
+      BATCH_COUNT=1
+      log "Lote 1/${BATCH_TARGET} detectado; janela máxima ${BATCH_MAX_WAIT_SECONDS}s iniciada"
+    elif (( NOW_TS - LAST_EVENT_AT >= BATCH_QUIET_SECONDS )); then
+      BATCH_COUNT=$((BATCH_COUNT + 1))
+      log "Lote ${BATCH_COUNT}/${BATCH_TARGET} detectado"
+    fi
+
+    LAST_EVENT_AT=$NOW_TS
+    if [[ "$EVENT" == *Q_OVERFLOW* ]]; then
+      log "WARN: overflow da fila inotify; o próximo snapshot Git será autoritativo"
+    fi
+  else
+    READ_RC=$?
+    if (( READ_RC == 1 )); then
+      wait "$INOTIFY_PID" 2>/dev/null || true
+      log "FATAL: monitor inotify encerrou inesperadamente"
+      exit 1
+    fi
+  fi
+
+  (( BATCH_ACTIVE == 1 )) || continue
+
+  NOW_TS=$SECONDS
+  ELAPSED=$((NOW_TS - BATCH_STARTED_AT))
+  if (( BATCH_COUNT < BATCH_TARGET && ELAPSED < BATCH_MAX_WAIT_SECONDS )); then
     continue
   fi
 
-  BATCH_COUNT=1
-  BATCH_STARTED_AT=$(date +%s)
-  FLUSH_REASON="max_wait"
-  log "Lote 1/${BATCH_TARGET} detectado; janela máxima ${BATCH_MAX_WAIT_SECONDS}s iniciada"
-  sleep "$BATCH_QUIET_SECONDS"
-
-  # Agrupa novos lotes até atingir o alvo ou expirar a janela máxima.
-  while (( BATCH_COUNT < BATCH_TARGET )); do
-    NOW_TS=$(date +%s)
-    ELAPSED=$((NOW_TS - BATCH_STARTED_AT))
-    REMAINING=$((BATCH_MAX_WAIT_SECONDS - ELAPSED))
-    if (( REMAINING <= 0 )); then
-      break
-    fi
-
-    if wait_for_change "$REMAINING"; then
-      BATCH_COUNT=$((BATCH_COUNT + 1))
-      log "Lote ${BATCH_COUNT}/${BATCH_TARGET} detectado"
-      sleep "$BATCH_QUIET_SECONDS"
-    else
-      break
-    fi
-  done
-
   if (( BATCH_COUNT >= BATCH_TARGET )); then
     FLUSH_REASON="batch_target"
+  else
+    FLUSH_REASON="max_wait"
   fi
-  log "Flush do auto-commit: reason=${FLUSH_REASON} batches=${BATCH_COUNT}"
+  log "Flush do auto-commit: reason=${FLUSH_REASON} batches=${BATCH_COUNT} elapsed=${ELAPSED}s"
+
+  # Resetar antes do snapshot garante que eventos ocorridos durante
+  # status/add/commit sejam lidos como o próximo agrupamento.
+  BATCH_ACTIVE=0
+  BATCH_COUNT=0
+  BATCH_STARTED_AT=0
+  LAST_EVENT_AT=0
 
   CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
   if [ "$CURRENT_BRANCH" != "main" ]; then
