@@ -83,9 +83,9 @@ rsync -a \
   --exclude='*/DawnCache/' \
   "$PROFILE_DIR/" "$tmp/profile/"
 
-python3 - "$tmp" "$STATUS_FILE" <<'PY'
+python3 - "$tmp" "$AUTH_EVIDENCE" <<'PY'
 import datetime, hashlib, json, os, sys
-root,status_path=sys.argv[1:]
+root,evidence_path=sys.argv[1:]
 profile=os.path.join(root,'profile')
 def digest(rel):
     p=os.path.join(profile,rel)
@@ -94,12 +94,21 @@ def digest(rel):
     with open(p,'rb') as f:
         for chunk in iter(lambda:f.read(1024*1024),b''): h.update(chunk)
     return h.hexdigest()
-status=json.load(open(status_path))
+evidence=json.load(open(evidence_path))
+if 'session' in evidence:
+    authenticated=evidence.get('session',{}).get('authenticatedLikely') is True
+    proxy_mode=evidence.get('proxyMode')
+    page_title=evidence.get('page',{}).get('title')
+else:
+    authenticated=evidence.get('authenticatedLikely') is True
+    proxy_mode=evidence.get('proxyMode')
+    page_title=evidence.get('pageTitle')
 meta={
   'createdAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),
-  'authenticatedLikely':status.get('authenticatedLikely') is True,
-  'proxyMode':status.get('proxyMode'),
-  'pageTitle':status.get('pageTitle'),
+  'authenticatedLikely':authenticated,
+  'proxyMode':proxy_mode,
+  'pageTitle':page_title,
+  'authEvidence':evidence_path,
   'criticalHashes':{
     'Default/Cookies':digest('Default/Cookies'),
     'Local State':digest('Local State'),
