@@ -38,7 +38,9 @@ DOMAIN    = creditoparaveiculo
 
 `DOMAIN` omits `.com`, and `domain` is not an observed request field. A shortened publisher value such as `creditoparaveiculo` is not equivalent and may return HTTP 403.
 
-For domain-total SMS revenue, sum `REVENUE` across every returned `UTM_CAMPAIGN` per day. Do not restrict to G001–G006: historical generic campaigns such as `s01c01` and `captura-sms-quiz` carry valid revenue.
+For domain-total SMS revenue, include every returned `UTM_CAMPAIGN` per day. Do not restrict to G001–G006: historical generic campaigns such as `s01c01` and `captura-sms-quiz` carry valid revenue.
+
+When the dashboard's **Discount revenue share** switch is enabled, the primary BRL value rendered in the `REVENUE` column is `NET_REVENUE`; the secondary/info value is gross `REVENUE`. To mirror the visible dashboard metric in WordPress, sum `NET_REVENUE`, while retaining both gross and net cents for auditability.
 
 ## Response contract
 
@@ -65,10 +67,12 @@ Validated historical floor for this publisher on 2026-07-10:
 
 - earliest `DATE`: `2026-05-22`
 - no rows before `2026-05-22`
-- 50 distinct contiguous dates through `2026-07-10`
-- 68 unique source rows in that snapshot
+- full mutable snapshot through `2026-07-10`: 50 dates / 68 source rows
+- closed-day backfill through `2026-07-09`: 49 dates / 61 source rows, gross `R$ 13.923,73`, net `R$ 12.531,37`
 
-Treat these quantities as a dated reconciliation fixture, not an immutable business total; recent days can be revised by the source.
+When splitting a broad range into adjacent chunks at `00:00:00Z`, the API can repeat the prior local day's rows at the next chunk boundary. Reconciliation on 2026-07-10 found two duplicated PKs at month boundaries. Always deduplicate by `PK_JBF_PERFORMANCE_PER_SMS` before aggregating chunked responses; never sum raw chunk arrays directly.
+
+Treat these quantities as dated reconciliation fixtures, not immutable business totals; recent days can be revised by the source.
 
 ## Pagination
 
@@ -84,23 +88,28 @@ No server-side pagination fields were observed in request or response: no page, 
 6. Probe the day before the minimum and the minimum day at a timezone-safe instant.
 7. Do not write dashboard state, WordPress, database, or local artifacts during a read-only request.
 
-## Idempotent daily aggregate
+## Idempotent WordPress storage
 
-For WordPress reporting, prefer one row per `(publisher, domain, revenue_date)` in a dedicated revenue table, not the lead table. Recommended fields:
+The deployed `mgs-quiz-carro` v1.7.0 schema stores one aggregate per `(revenue_date, publisher, utm_campaign)` in `wp_mgs_quiz_sms_revenue`. This preserves campaign-level provenance while the report still presents the total domain revenue for the selected dates. Fields include:
 
 ```text
 revenue_date DATE
 publisher VARCHAR(190)
 domain VARCHAR(190)
-revenue_cents BIGINT UNSIGNED
-net_revenue_cents BIGINT UNSIGNED
-source_row_count INT UNSIGNED
+utm_campaign VARCHAR(190)
+currency CHAR(3) = BRL
+discount_revenue_share TINYINT = 1
+revenue_cents BIGINT
+net_revenue_cents BIGINT
+investment_cents BIGINT
+source_rows INT UNSIGNED
 source_hash CHAR(64)
-created_at DATETIME
 synced_at DATETIME
-UNIQUE (publisher, domain, revenue_date)
+UNIQUE (revenue_date, publisher, utm_campaign)
 ```
 
-Canonicalize source rows sorted by source PK and hash the fields that determine the aggregate. Use `INSERT ... ON DUPLICATE KEY UPDATE` to replace that day's aggregate, never increment it. The same snapshot must be a semantic no-op; a revised source day may update only its deterministic daily row.
+Canonicalize and deduplicate source rows by source PK before grouping. Use `INSERT ... ON DUPLICATE KEY UPDATE` to replace each deterministic aggregate, never increment it. The same source snapshot must be a semantic no-op; revised source rows may update only their date/campaign aggregates.
 
-Reconcile source vs database by date count, min/max date, sum of source-row counts, gross/net cent sums, uniqueness, and per-day source hash. Do not automatically delete a database day merely because a partial API request omitted it. Treat the current day as provisional.
+The WordPress card sums `net_revenue_cents` for `digital-trust_creditoparaveiculo` / `creditoparaveiculo` over the report's selected dates. It intentionally does not claim parity with quiz, gestor, parcela, or lead-search filters because the source has no trustworthy historical per-quiz mapping.
+
+Reconcile source vs database by aggregate count, source-row count, date count/min/max, gross/net cent sums, uniqueness, and source hashes. Do not automatically delete a database day merely because a partial API request omitted it. Treat the current day as provisional.

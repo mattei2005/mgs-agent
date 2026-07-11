@@ -137,26 +137,28 @@ Decision confirmed by Rodolfo for this site/report:
 
 ## Smart Bidding SMS Revenue Backfill
 
-Keep Smart Bidding revenue distinct from the estimated SMS cost and from lead rows:
+Production state validated on 2026-07-10: `mgs-quiz-carro` v1.7.0, schema version `1.3.0`, with `wp_mgs_quiz_sms_revenue` populated for closed dates from 2026-05-22 through 2026-07-09.
 
-- Source endpoint and publisher/date contract live in `smartbidding-dashboard-map/references/sms-report-api-contract-and-backfill.md`.
-- Revenue is domain/date-level. It may respect the report's date range, but it must not pretend to respect quiz, gestor, parcela, or lead-search filters unless a trustworthy attribution mapping is introduced.
-- Sum `REVENUE` over all Smart Bidding campaigns for `digital-trust_creditoparaveiculo`; filtering only G001–G006 loses historical generic campaigns.
-- Persist daily aggregates in a dedicated table with a unique key on `(publisher, domain, revenue_date)`, integer gross/net cents, source-row count, source hash, and sync timestamps.
-- Upsert by unique day key and replace the aggregate; never increment existing revenue. Same source snapshot must be a no-op, while source revisions may update that day.
-- Reconcile API and database by count/min/max dates, sum of source-row counts, gross/net cent sums, uniqueness, and per-day hashes. Treat the current day as provisional and do not delete omitted days after a partial fetch.
-- Historical source PKs are signed-looking strings and can be negative; use a character field if raw rows are ever stored.
+Keep Smart Bidding revenue distinct from estimated SMS cost and lead rows:
+
+- Source contract and API/date pitfalls live in `smartbidding-dashboard-map/references/sms-report-api-contract-and-backfill.md`.
+- When **Discount revenue share** is enabled in Smart Bidding, the primary BRL value displayed in the `REVENUE` column is `NET_REVENUE`; WordPress must sum `net_revenue_cents`. Gross `REVENUE` remains stored for audit.
+- Revenue is domain/date-level. It respects the report's date range, but it must not pretend to respect quiz, gestor, parcela, or lead-search filters without trustworthy attribution.
+- Include every campaign for `digital-trust_creditoparaveiculo`; filtering only G001–G006 loses historical generic campaigns.
+- The deployed table uses unique `(revenue_date, publisher, utm_campaign)` aggregates with BRL currency, gross/net cents, source-row count/hash, and sync timestamp.
+- Upsert replaces each deterministic aggregate; never increment. Deduplicate API rows by signed-looking source PK before grouping, especially across UTC−3 chunk boundaries.
+- Reconcile aggregate count, source-row count, date count/min/max, gross/net cent sums, uniqueness, and source hashes. Treat the current day as provisional and do not delete omitted days after a partial fetch.
 
 ### Schema lifecycle guard
 
 A report query referencing a new table is not sufficient implementation. Before deployment:
 
-1. Verify the activator/upgrader actually creates the revenue table with `dbDelta()` or an equivalent migration.
-2. Bump the plugin DB schema version and provide an upgrade path for already-active installations; activation hooks do not run merely because plugin files were replaced.
-3. Validate the table and indexes live before rendering the authenticated report or running a backfill.
-4. Smoke-test both the no-data state and populated aggregate state.
+1. Ensure the activator/upgrader creates the revenue table with `dbDelta()` or equivalent.
+2. Bump the plugin DB schema version and add an upgrade path for active installations; activation hooks do not run merely because files are replaced.
+3. Validate the live table and indexes before rendering the report or importing revenue.
+4. Smoke-test no-data, populated history, an exact single-day filter, and idempotent re-import.
 
-The inspected v1.6.2 package had report code referencing `{$wpdb->prefix}mgs_quiz_sms_revenue`, while its activator did not create that table and its DB version remained `1.2.0`. Treat this as a packaging/schema gap to resolve before any write-enabled backfill; confirm live state rather than assuming the package reflects the database.
+For v1.7.0, the active-install upgrade hook created schema `1.3.0`; the closed-day backfill reconciled 61 source rows across 49 dates, gross `R$ 13.923,73`, net `R$ 12.531,37`. No daily cron was created in this phase.
 
 ### Read-only source/provenance check before proposing a patch
 
