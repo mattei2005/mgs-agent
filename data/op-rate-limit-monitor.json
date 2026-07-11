@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "description": "Estado do monitor de rate limit do 1Password Service Account.",
+    "channel_id": "1525311777208926398",
+    "warning_percent": 50.0,
+    "critical_percent": 90.0
+  },
+  "last_check": "2026-07-10T21:26:59.520698-04:00",
+  "overall_level": "normal",
+  "last_metrics": [
+    {
+      "type": "token",
+      "action": "write",
+      "used": 0,
+      "remaining": 1000,
+      "limit": 1000,
+      "percent": 0.0,
+      "level": "normal",
+      "reset_at": null
+    },
+    {
+      "type": "token",
+      "action": "read",
+      "used": 1024,
+      "remaining": 8976,
+      "limit": 10000,
+      "percent": 10.24,
+      "level": "normal",
+      "reset_at": "2026-07-10T22:07:02.835788-04:00"
+    },
+    {
+      "type": "account",
+      "action": "read_write",
+      "used": 1024,
+      "remaining": 48976,
+      "limit": 50000,
+      "percent": 2.05,
+      "level": "normal",
+      "reset_at": "2026-07-11T21:07:02.835788-04:00"
+    }
+  ],
+  "consecutive_probe_failures": 0,
+  "probe_failure_alerted": false,
+  "last_error": null,
+  "last_alert_sent": "2026-07-10T21:26:59.520698-04:00"
+}
