@@ -48,6 +48,8 @@
 
 15. **Novo cron pode gerar falso STALE antes da primeira execução agendada** — ao cadastrar um cron cujo log ainda não existe, o stale watchdog pode rodar entre o deploy e o primeiro minuto válido do cron e alertar `log ausente`. Antes de declarar falha, compare: horário de criação do script/entrada, agenda do cron, horário do alerta e primeiro slot de execução. Se o alerta antecede o primeiro slot, aguarde esse slot, valide que o log foi criado com heartbeat/status saudável e confirme que o state foi limpo no ciclo seguinte. Para evitar o falso positivo no deploy, prefira uma destas estratégias: executar um smoke real controlado que crie o log canônico; criar o log com marcador explícito de `PENDING_FIRST_RUN` que o watchdog reconheça; ou adicionar grace period baseada no cadastro/mtime da entrada. Nunca maquiar uma falha posterior como startup: após o primeiro slot, ausência de log continua sendo erro real.
 
+16. **Cron de produção não deve depender de runtime ou estado autenticado em diretório temporário** — quando um alerta mostra exit `127`, `not found` ou storage state ausente, não corrija apenas o wrapper que alertou. Primeiro inventarie todos os consumidores do mesmo interpretador, browser profile ou auth state; depois migre runtime e estado para caminho persistente, fixe dependências reproduzíveis e preserve permissões restritas do material autenticado. Validação mínima: sintaxe/imports de todos os consumidores, smoke local do browser/runtime, execução real read-only do fluxo afetado e `cronjob run` com readback de `last_status=ok`. Atualize inventário/audit e o runbook dono do sistema para evitar regressão.
+
 ---
 
 ---
