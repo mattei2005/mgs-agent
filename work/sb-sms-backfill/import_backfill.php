@@ -10,6 +10,9 @@ if ( ! is_array( $payload ) || empty( $payload['records'] ) || empty( $payload['
 if ( 'digital-trust_creditoparaveiculo' !== $payload['publisher'] || 'creditoparaveiculo' !== $payload['domain'] ) {
     throw new RuntimeException( 'Unexpected publisher/domain scope' );
 }
+if ( false === strpos( $payload['metric'] ?? '', 'NET_REVENUE' ) ) {
+    throw new RuntimeException( 'Unexpected revenue metric' );
+}
 
 global $wpdb;
 $table = $wpdb->prefix . 'mgs_quiz_sms_revenue';
@@ -36,9 +39,9 @@ try {
             }
         }
         $sql = $wpdb->prepare(
-            "INSERT INTO {$table} (revenue_date,publisher,domain,utm_campaign,revenue_cents,net_revenue_cents,investment_cents,source_rows,source_hash,synced_at)
-             VALUES (%s,%s,%s,%s,%d,%d,%d,%d,%s,UTC_TIMESTAMP())
-             ON DUPLICATE KEY UPDATE domain=VALUES(domain),revenue_cents=VALUES(revenue_cents),net_revenue_cents=VALUES(net_revenue_cents),investment_cents=VALUES(investment_cents),source_rows=VALUES(source_rows),source_hash=VALUES(source_hash),synced_at=UTC_TIMESTAMP()",
+            "INSERT INTO {$table} (revenue_date,publisher,domain,utm_campaign,currency,discount_revenue_share,revenue_cents,net_revenue_cents,investment_cents,source_rows,source_hash,synced_at)
+             VALUES (%s,%s,%s,%s,'BRL',1,%d,%d,%d,%d,%s,UTC_TIMESTAMP())
+             ON DUPLICATE KEY UPDATE domain=VALUES(domain),currency='BRL',discount_revenue_share=1,revenue_cents=VALUES(revenue_cents),net_revenue_cents=VALUES(net_revenue_cents),investment_cents=VALUES(investment_cents),source_rows=VALUES(source_rows),source_hash=VALUES(source_hash),synced_at=UTC_TIMESTAMP()",
             $row['revenue_date'], $row['publisher'], $row['domain'], $row['utm_campaign'],
             $row['revenue_cents'], $row['net_revenue_cents'], $row['investment_cents'],
             $row['source_rows'], $row['source_hash']
