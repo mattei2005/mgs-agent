@@ -26,6 +26,7 @@ Completion criterion: only the procedure and evidence required for the current a
 
 - **Overview → Accounts Area** → `references/route-pack-01.md`
 - **Reports Menu Map** → `references/route-pack-02.md`
+- **SMS report API contract, publisher scope, timezone, pagination, and backfill reconciliation** → `references/sms-report-api-contract-and-backfill.md`
 - **Other Operational Areas → Verification Checklist** → `references/route-pack-03.md`
 
 ## Context-efficiency guardrails

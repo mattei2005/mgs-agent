@@ -135,6 +135,29 @@ Decision confirmed by Rodolfo for this site/report:
 - Validate with one read-only SQL snapshot that the filtered total equals the sum of grouped quiz rows and that `total_rows × 8` equals the sum of grouped centavos.
 - If the business later changes from “one charged SMS per WP report row” to actual outbound-message billing or multiple sends per lead, treat that as a different metric requiring a vendor event/webhook or imported send-count report.
 
+## Smart Bidding SMS Revenue Backfill
+
+Keep Smart Bidding revenue distinct from the estimated SMS cost and from lead rows:
+
+- Source endpoint and publisher/date contract live in `smartbidding-dashboard-map/references/sms-report-api-contract-and-backfill.md`.
+- Revenue is domain/date-level. It may respect the report's date range, but it must not pretend to respect quiz, gestor, parcela, or lead-search filters unless a trustworthy attribution mapping is introduced.
+- Sum `REVENUE` over all Smart Bidding campaigns for `digital-trust_creditoparaveiculo`; filtering only G001–G006 loses historical generic campaigns.
+- Persist daily aggregates in a dedicated table with a unique key on `(publisher, domain, revenue_date)`, integer gross/net cents, source-row count, source hash, and sync timestamps.
+- Upsert by unique day key and replace the aggregate; never increment existing revenue. Same source snapshot must be a no-op, while source revisions may update that day.
+- Reconcile API and database by count/min/max dates, sum of source-row counts, gross/net cent sums, uniqueness, and per-day hashes. Treat the current day as provisional and do not delete omitted days after a partial fetch.
+- Historical source PKs are signed-looking strings and can be negative; use a character field if raw rows are ever stored.
+
+### Schema lifecycle guard
+
+A report query referencing a new table is not sufficient implementation. Before deployment:
+
+1. Verify the activator/upgrader actually creates the revenue table with `dbDelta()` or an equivalent migration.
+2. Bump the plugin DB schema version and provide an upgrade path for already-active installations; activation hooks do not run merely because plugin files were replaced.
+3. Validate the table and indexes live before rendering the authenticated report or running a backfill.
+4. Smoke-test both the no-data state and populated aggregate state.
+
+The inspected v1.6.2 package had report code referencing `{$wpdb->prefix}mgs_quiz_sms_revenue`, while its activator did not create that table and its DB version remained `1.2.0`. Treat this as a packaging/schema gap to resolve before any write-enabled backfill; confirm live state rather than assuming the package reflects the database.
+
 ### Read-only source/provenance check before proposing a patch
 
 - Confirm the active plugin version and live plugin directory via WP-CLI.
