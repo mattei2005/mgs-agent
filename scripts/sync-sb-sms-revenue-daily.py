@@ -172,8 +172,10 @@ def import_remote(payload):
         remote = (
             'set -e; '
             'mv /tmp/import-sb-sms-revenue-day.php /tmp/mgs-import-sb-sms-revenue-day.php; '
+            'sudo chown runcloud2:runcloud2 /tmp/mgs-sb-sms-revenue-day.json /tmp/mgs-import-sb-sms-revenue-day.php; '
             'chmod 600 /tmp/mgs-sb-sms-revenue-day.json /tmp/mgs-import-sb-sms-revenue-day.php; '
-            f"sudo -u runcloud2 wp --path={REMOTE_WP} eval-file /tmp/mgs-import-sb-sms-revenue-day.php --skip-themes; "
+            f"result=$(sudo -u runcloud2 wp --path={REMOTE_WP} eval-file /tmp/mgs-import-sb-sms-revenue-day.php --skip-themes); "
+            'printf "%s\\n" "$result"; '
             'rm -f /tmp/mgs-sb-sms-revenue-day.json /tmp/mgs-import-sb-sms-revenue-day.php'
         )
         run = subprocess.run(
@@ -181,7 +183,9 @@ def import_remote(payload):
             text=True, capture_output=True, env=env, timeout=180,
         )
         if run.returncode != 0 or 'DAILY_REVENUE_IMPORT_OK' not in run.stdout:
-            raise RuntimeError('WordPress daily revenue import/readback failed')
+            raw_diagnostic = (run.stderr or run.stdout or 'no remote diagnostic').strip().replace('\n', ' ')
+            diagnostic = raw_diagnostic[-800:]
+            raise RuntimeError(f'WordPress daily revenue import/readback failed: {diagnostic}')
         return json.loads(run.stdout.strip().splitlines()[-1])
 
 
@@ -224,7 +228,8 @@ def main():
         print(json.dumps({'status': 'SYNC_OK', 'target_date': args.date, **payload['expected'], 'readback': imported}, ensure_ascii=False))
         return 0
     except Exception as exc:
-        safe = f'{type(exc).__name__}: {str(exc)[:240]}'
+        error_text = str(exc).replace('\n', ' ')
+        safe = f'{type(exc).__name__}: {error_text[-1000:]}'
         print(json.dumps({'status': 'SYNC_FAILED', 'target_date': args.date, 'error': safe}, ensure_ascii=False))
         try:
             discord_alert(safe)
