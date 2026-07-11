@@ -24,6 +24,12 @@ $checks = array(
 foreach ( $checks as $name => $ok ) {
     if ( ! $ok ) { throw new RuntimeException( 'Revenue report smoke failed: ' . $name ); }
 }
+$day_html = render_sms_revenue_report( '2026-07-08', '2026-07-08', 'quiz-car-parcelas-g002-qm002' );
+$day_cents = (int) $wpdb->get_var( "SELECT COALESCE(SUM(net_revenue_cents),0) FROM {$table} WHERE revenue_date='2026-07-08'" );
+$day_expected = 'R$ ' . number_format( $day_cents / 100, 2, ',', '.' );
+if ( false === strpos( $day_html, esc_html( $day_expected ) ) || 27457 !== $day_cents ) {
+    throw new RuntimeException( 'Single-day revenue filter mismatch' );
+}
 $empty = render_sms_revenue_report( '2020-01-01', '2020-01-02' );
 if ( false === strpos( $empty, 'Não disponível' ) || false === strpos( $empty, 'Sem dados' ) ) {
     throw new RuntimeException( 'Empty revenue period state failed' );
@@ -35,5 +41,6 @@ echo wp_json_encode( array(
     'first_date' => $all['first_date'],
     'last_date' => $all['last_date'],
     'revenue' => $expected,
+    'single_day_2026_07_08' => $day_expected,
     'html_bytes' => strlen( $html ),
 ) ) . PHP_EOL;

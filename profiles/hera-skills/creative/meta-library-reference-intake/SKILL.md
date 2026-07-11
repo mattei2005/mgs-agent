@@ -64,6 +64,8 @@ O helper usa o mesmo perfil persistente, Xvfb + x11vnc + noVNC, com VNC/noVNC vi
 
 Se uma sessão anterior morrer e deixar `x11vnc`/`websockify` órfãos, o helper só pode limpar listeners conhecidos após adquirir o lock do perfil. Nunca usar `pkill` amplo; processo inesperado nas portas deve falhar com exit `76`.
 
+Se o Facebook entrar em CAPTCHA repetitivo pelo IP do VPS, parar a tentativa para não aumentar o risco da conta. Não trocar apenas de navegador nem usar proxy público/terceiro. A rota preferida é um SOCKS temporário pelo próprio Windows do Rodolfo: o SSH abre `-R 127.0.0.1:1080`, e o helper é iniciado com `HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080`. O proxy deve ficar local-only, existir somente enquanto o túnel SSH estiver aberto e nunca aceitar outro endereço no helper.
+
 ## Verificação de encerramento
 
 Uma coleta só está concluída quando houver readback real de:
