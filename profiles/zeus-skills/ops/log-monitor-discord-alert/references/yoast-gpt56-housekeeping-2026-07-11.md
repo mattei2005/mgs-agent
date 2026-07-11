@@ -26,7 +26,7 @@ Runtime: `/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh` (nome legado pres
 Cron: `44 22 * * *` ET
 Canal: `1498132022634483894`
 
-Não usar estimativa fixa de tokens por chamada nem preço hipotético sem telemetria. Os logs dos gateways expõem `response ready ... api_calls=N`, mas não input/output tokens. O relatório canônico soma chamadas LLM e respostas concluídas na janela móvel de 24h, calcula média por resposta e valida `gpt-5.6-sol` / `openai-codex` nos quatro profiles. Custo incremental real: US$ 0 via OAuth.
+O relatório canônico soma chamadas LLM e respostas concluídas na janela móvel de 24h, calcula média por resposta e valida `gpt-5.6-sol` / `openai-codex` nos quatro profiles. Deve exibir separadamente: custo incremental real de US$ 0 via OAuth e custo hipotético pay-per-token. Como os gateways não expõem input/output tokens, a simulação precisa ser explicitamente rotulada e usar as premissas internas preservadas do monitor anterior: 2.000 tokens de entrada + 500 de saída por `api_call`, a US$ 7/US$ 21 por 1M, respectivamente. Chamadas são telemetria real; tokens e custo são estimativas, nunca valores observados.
 
 Validação: py_compile, dry-run com parse_errors=0 e API Discord mock com autenticação/payload sanitizados.
 
