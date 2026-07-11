@@ -44,6 +44,11 @@ $empty = render_sms_revenue_report( '2020-01-01', '2020-01-02' );
 if ( false === strpos( $empty, 'Não disponível' ) || false === strpos( $empty, 'Sem base' ) ) {
     throw new RuntimeException( 'Empty revenue period state failed' );
 }
+$yesterday = ( new DateTimeImmutable( 'now', wp_timezone() ) )->modify( '-1 day' )->format( 'Y-m-d' );
+$default_html = render_default_sms_report();
+if ( false === strpos( $default_html, 'name="from" value="' . esc_attr( $yesterday ) . '"' ) || false === strpos( $default_html, 'name="to" value="' . esc_attr( $yesterday ) . '"' ) ) {
+    throw new RuntimeException( 'Default report dates are not yesterday' );
+}
 echo wp_json_encode( array(
     'status' => 'REVENUE_REPORT_SMOKE_OK',
     'groups' => (int) $all['groups_count'],
