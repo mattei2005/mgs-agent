@@ -1,0 +1,12 @@
+#!/usr/bin/env python3
+import json,os,hashlib
+from datetime import datetime,timezone
+inv_path='/root/mgs-agent/data/infra-inventory.json';log_path='/root/mgs-agent/logs/events-audit.jsonl';root='/tmp/mgs-quiz-carro-audit/mgs-quiz-carro'
+def meta(rel):
+ b=open(os.path.join(root,rel),'rb').read();return {'path':rel,'sha256':hashlib.sha256(b).hexdigest(),'bytes':len(b)}
+data=json.load(open(inv_path));matches=[x for x in data.get('runtime_artifacts',[]) if x.get('plugin')=='mgs-quiz-carro' and x.get('site')=='creditoparaveiculo.com']
+if len(matches)!=1:raise SystemExit(f'expected one artifact, got {len(matches)}')
+a=matches[0];a.update({'id':'creditoparaveiculo-mgs-quiz-carro-1.7.1-20260710','version':'1.7.1','feature':'Quiz car BR + custo, receita líquida e ROI estimado SMS por período','package_sha256':'e2e08dc5c1108f8aaa1d51f518bd8d7e2e60bef3463d448f3111268ec1eb5b51','backup_path':'/home/runcloud2/backups/creditoparaveiculo/mgs-quiz-carro-1.7.0-20260711T012406Z','files':[meta('mgs-quiz-carro.php'),meta('includes/class-mgs-quiz-admin.php'),meta('includes/class-mgs-quiz-activator.php')],'roi_reporting':{'formula':'(net_revenue_cents - estimated_cost_cents) / estimated_cost_cents * 100','scope':'date-only; non-date filters show Não comparável','zero_base':'Sem base','validated_date':'2026-07-09','validated_revenue_cents':28850,'validated_cost_cents':17408,'validated_profit_cents':11442,'validated_roi_percent':'65.73'},'validation':'PHP lint 11/11; ROI 2026-07-09 = 65,73%; profit R$ 114,42; filtered scope = Não comparável; empty state = Sem base; revenue regression smoke; four quiz routes HTTP 200','updated_at':datetime.now(timezone.utc).isoformat()});data['updated_at']=datetime.now(timezone.utc).isoformat();tmp=inv_path+'.tmp';json.dump(data,open(tmp,'w'),ensure_ascii=False,indent=2);open(tmp,'a').write('\n');json.load(open(tmp));os.replace(tmp,inv_path)
+event={'timestamp':datetime.now(timezone.utc).isoformat(),'event':'mgs_quiz_sms_roi_deployed','actor':'zeus','site':'creditoparaveiculo.com','plugin':'mgs-quiz-carro','version':'1.7.1','db_version':'1.3.0','formula':a['roi_reporting']['formula'],'scope_guard':a['roi_reporting']['scope'],'validation':'2026-07-09 ROI 65.73%, profit BRL 114.42; filtered scope and empty state validated','package_sha256':a['package_sha256'],'backup_path':a['backup_path']}
+with open(log_path,'a') as f:f.write(json.dumps(event,ensure_ascii=False)+'\n')
+print('ROI_INVENTORY_AUDIT_OK',a['version'],a['files'][1]['sha256'][:12])
