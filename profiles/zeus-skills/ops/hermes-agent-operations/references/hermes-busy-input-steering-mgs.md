@@ -224,8 +224,11 @@ Para cada mudança futura, validar `git apply --reverse --check` no checkout viv
 
 - Steer depende de turno ativo e de próximo ponto seguro.
 - Se o complemento chegar depois da resposta final, vira novo turno.
-- Agente ainda iniciando pode exigir queue fallback.
-- Esses limites de timing não justificam perder mídia recebida enquanto o turno já está ativo.
+- Uma sessão pode já aparecer como ocupada/“digitando” enquanto `_running_agents[session_key]` ainda é `_AGENT_PENDING_SENTINEL`. Nesse intervalo, o busy handler não tem uma instância de `AIAgent` para chamar `steer()` e atualmente faz fallback para `queue`.
+- Ver `Queued for the next turn` **não prova que o profile voltou para `queue`**. Antes de afirmar regressão de configuração, separar: (1) config vivo; (2) valor resolvido; (3) agente disponível versus sentinel; (4) retorno real de `running_agent.steer()`.
+- Para investigar um caso real, buscar a mensagem original diretamente no Discord, comparar timestamps do pedido principal e do complemento e correlacionar com a sessão/runtime. A sessão Hermes é contexto secundário; o Discord é a fonte direta para conteúdo e horário atuais.
+- Se config e resolver estiverem em `steer`, mas o ack foi de queue poucos segundos após o primeiro pedido e antes da primeira ação do agente, reportar como **fallback/race de inicialização**, não como configuração revertida ou update que removeu o patch.
+- Esses limites de timing não justificam perder mídia recebida enquanto o turno já estiver ativo; para o padrão MGS universal, o fallback de inicialização continua sendo gap de runtime a corrigir e testar.
 
 ## Pitfalls
 

@@ -18,7 +18,7 @@
 #       * OU ≥5 novos amarelos (absoluto)
 #   - Estável ou melhorou em AMBAS                → silencioso (sem post)
 #
-# Canal destino: Alerts Yoast Channel (via webhook 1Password)
+# Canal destino: 1498193722871910550 (API Discord via bot Zeus; sem webhook 1Password)
 # Estado:   /root/mgs-agent/data/yoast-health-eggbev-snapshots.json
 # Log:      /root/mgs-agent/logs/monitor-yoast-health-eggbev.log
 #
@@ -29,6 +29,7 @@
 set -euo pipefail
 
 DRY_RUN=0
+FORCE_POST="${MGS_YOAST_FORCE_POST:-0}"
 if [[ "${1:-}" == "--dry-run" ]]; then
     DRY_RUN=1
 elif [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
@@ -42,22 +43,44 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BASE_DIR="$(dirname "$SCRIPT_DIR")"
-SNAPSHOT_FILE="${BASE_DIR}/data/yoast-health-eggbev-snapshots.json"
-OLD_SNAPSHOT_FILE="${BASE_DIR}/data/yoast-readability-eggbev-snapshots.json"
+SNAPSHOT_FILE="${MGS_YOAST_SNAPSHOT_FILE:-${BASE_DIR}/data/yoast-health-eggbev-snapshots.json}"
+OLD_SNAPSHOT_FILE="${MGS_YOAST_OLD_SNAPSHOT_FILE:-${BASE_DIR}/data/yoast-readability-eggbev-snapshots.json}"
 LOG_PREFIX="monitor-yoast-health-eggbev"
 
-# Carregar env (OP_SERVICE_ACCOUNT_TOKEN etc)
-# shellcheck source=/dev/null
+# Carregar OP_SERVICE_ACCOUNT_TOKEN para as duas credenciais SSH e token local do bot Zeus.
 set -a
 # shellcheck source=/dev/null
 source "${BASE_DIR}/.env" 2>/dev/null || true
+# shellcheck source=/dev/null
+source "/root/.hermes/profiles/zeus/.env" 2>/dev/null || true
 set +a
+
+DISCORD_CHANNEL_ID="${MGS_DISCORD_CHANNEL_ID_OVERRIDE:-1498193722871910550}"
+DISCORD_API_URL="${MGS_DISCORD_API_URL_OVERRIDE:-https://discord.com/api/v10/channels/${DISCORD_CHANNEL_ID}/messages}"
+BOT_TOKEN="${MGS_DISCORD_BOT_TOKEN_OVERRIDE:-${DISCORD_BOT_TOKEN:-}}"
 
 NOW_ISO="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 NOW_DATE="$(date +%Y-%m-%d)"
 DAY_OF_WEEK="$(date +%u)"  # 1=Mon ... 7=Sun
 
 log() { echo "[$(date -Iseconds)] ${LOG_PREFIX}: $*"; }
+
+post_discord_payload() {
+    local payload="$1" http_code
+    if [[ -z "$BOT_TOKEN" ]]; then
+        log "ERRO: DISCORD_BOT_TOKEN do Zeus ausente"
+        return 2
+    fi
+    http_code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 \
+        -X POST \
+        -H "Authorization: Bot ${BOT_TOKEN}" \
+        -H "Content-Type: application/json" \
+        -H "User-Agent: MGS-Zeus-Yoast/1.0" \
+        -d "$payload" \
+        "$DISCORD_API_URL" 2>/dev/null || printf '000')
+    printf '%s' "$http_code"
+    [[ "$http_code" =~ ^20[01]$ ]]
+}
 
 TMP_DIR="$(mktemp -d /tmp/yoast-health-eggbev.XXXXXX)"
 REMOTE_SCRIPT="/tmp/yoast_health_query_eggbev_$$.sh"
@@ -90,17 +113,9 @@ op_get_retry() {
     return 1
 }
 
-WEBHOOK_URL=""
-if [[ "$DRY_RUN" -eq 0 ]]; then
-    WEBHOOK_URL="$(op_get_retry 'Discord Webhook - Alerts Yoast Channel' 'MGS Conteúdo' 'label=webhook_url')" || true
-fi
 S03_PASS="$(op_get_retry 'Runcloud Server 03 - 46.4.95.117- zeus Acesso' 'MGS Conteúdo' 'password')" || true
 S01_PASS="$(op_get_retry 'Runcloud Server 01 - 162.55.28.178- zeus Acesso' 'MGS Conteúdo' 'password')" || true
 
-if [[ "$DRY_RUN" -eq 0 && -z "$WEBHOOK_URL" ]]; then
-    log "ERRO CRÍTICO: Webhook URL vazio após 3 tentativas — abortando"
-    exit 1
-fi
 if [[ -z "$S03_PASS" || -z "$S01_PASS" ]]; then
     log "ERRO CRÍTICO: Credenciais SSH vazias após 3 tentativas — abortando"
     exit 1
@@ -452,6 +467,14 @@ print('true' if d.get('seo') is not None else 'false')
     fi
 fi
 
+if [[ "$FORCE_POST" == "1" ]]; then
+    SHOULD_POST="true"
+    if [[ "$POST_TYPE" != "alert" ]]; then
+        POST_TYPE="weekly"
+    fi
+    log "MGS_YOAST_FORCE_POST=1 — relatório real será enviado"
+fi
+
 if [[ "$DRY_RUN" -eq 1 ]]; then
     log "DRY-RUN: não salva snapshot e não posta Discord. post_type=${POST_TYPE} should_post=${SHOULD_POST} total=${TOTAL} SEO=G${SEO_GREEN}/A${SEO_AMBER}/R${SEO_RED} READ=G${READ_GREEN}/A${READ_AMBER}/R${READ_RED}"
     exit 0
@@ -561,16 +584,13 @@ PYEOF
 
 log "Postando no Discord (tipo=${POST_TYPE})..."
 
-HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
-    -X POST "$WEBHOOK_URL" \
-    -H "Content-Type: application/json" \
-    -d "$DISCORD_MSG" \
-    --max-time 15)
+HTTP_CODE=$(post_discord_payload "$DISCORD_MSG" || true)
 
-if [[ "$HTTP_CODE" == "204" ]]; then
-    log "Discord: OK (HTTP 204)"
+if [[ "$HTTP_CODE" =~ ^20[01]$ ]]; then
+    log "Discord bot: OK (HTTP ${HTTP_CODE}, channel=${DISCORD_CHANNEL_ID})"
 else
-    log "AVISO: Discord retornou HTTP ${HTTP_CODE} — verificar webhook"
+    log "ERRO: Discord bot retornou HTTP ${HTTP_CODE:-none} — channel=${DISCORD_CHANNEL_ID}"
+    exit 1
 fi
 
 # ── Cleanup ───────────────────────────────────────────────────────────────────

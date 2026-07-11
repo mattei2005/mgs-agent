@@ -1,146 +1,218 @@
-#!/bin/bash
-# monitor-gpt55-oauth-cost.sh — Monitor de volume/uso hipotético GPT-5.5 via OAuth
-#
-# Com OAuth (openai-codex), custo real é ZERO (incluso na assinatura).
-# Este script calcula USO HIPOTÉTICO se fosse pay-per-token, apenas para
-# visibilidade operacional de volume. Não representa cobrança real.
-#
-# Modos:
-#   --dry-run   calcula e imprime payload resumido, sem webhook
-#   normal      posta embed no #alerts-infra conforme thresholds
+#!/usr/bin/env python3
+"""Nightly real-volume report for GPT-5.6 OAuth usage across MGS agents.
 
-set -euo pipefail
+Counts gateway-reported LLM API calls and completed responses in the trailing
+24 hours. Hermes agent logs do not expose token counts, so this monitor never
+invents token volume or hypothetical token cost. Actual incremental API cost is
+reported as USD 0 because all monitored profiles use openai-codex OAuth.
+"""
+from __future__ import annotations
 
-DRY_RUN=0
-if [[ "${1:-}" == "--dry-run" ]]; then
-  DRY_RUN=1
-elif [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
-  echo "Usage: $0 [--dry-run]"
-  exit 0
-elif [[ -n "${1:-}" ]]; then
-  echo "ERROR: argumento desconhecido: $1" >&2
-  echo "Usage: $0 [--dry-run]" >&2
-  exit 2
-fi
+import argparse
+import json
+import os
+import re
+import urllib.error
+import urllib.request
+from datetime import datetime, timedelta
+from pathlib import Path
+from typing import Any
 
-set -a
-# shellcheck source=/dev/null
-source /root/mgs-agent/.env 2>/dev/null || true
-set +a
+PROFILES = ("zeus", "atena", "ares", "hera")
+PROFILES_ROOT = Path("/root/.hermes/profiles")
+CHANNEL_ID_DEFAULT = "1498132022634483894"
+RESPONSE_RE = re.compile(r"response ready:.*\bapi_calls=(\d+)")
+TIMESTAMP_FORMAT = "%Y-%m-%d %H:%M:%S,%f"
+EXPECTED_MODEL = "gpt-5.6-sol"
+EXPECTED_PROVIDER = "openai-codex"
 
-LOG_DIR="/root/.hermes/profiles"
-PROFILES=(zeus atena ares hera)
 
-THRESHOLD_INFO=5
-THRESHOLD_WARN=15
-THRESHOLD_ALERT=30
+def load_env_file(path: Path, env: dict[str, str]) -> None:
+    if not path.exists():
+        return
+    for raw in path.read_text(encoding="utf-8", errors="ignore").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key, value = key.strip(), value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+            value = value[1:-1]
+        if key and key not in env:
+            env[key] = value
 
-# Pricing hipotético GPT-5.5 (USD / 1M tokens) — somente referência interna.
-PRICE_INPUT=7.00
-PRICE_OUTPUT=21.00
 
-YESTERDAY=$(date -u -d '1 day ago' '+%Y-%m-%d %H:%M:%S')
+def profile_model(profile: str) -> tuple[str, str]:
+    path = PROFILES_ROOT / profile / "config.yaml"
+    if not path.exists():
+        return "missing", "missing"
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    try:
+        import yaml  # type: ignore
 
-count_api_calls_since() {
-  local logfile="$1"
-  local since="$2"
-  if [[ ! -f "$logfile" ]]; then echo 0; return; fi
-  awk -v since="$since" '
-    /response ready/ {
-      ts = substr($0, 1, 19)
-      if (ts >= since) {
-        match($0, /api_calls=[0-9]+/)
-        if (RSTART) {
-          calls = substr($0, RSTART+10, RLENGTH-10)
-          total += calls + 0
-        }
-      }
+        data = yaml.safe_load(text) or {}
+        model = data.get("model", {}) if isinstance(data, dict) else {}
+        if isinstance(model, dict):
+            return str(model.get("default") or "unknown"), str(model.get("provider") or "unknown")
+    except Exception:
+        pass
+    model_match = re.search(r"^\s*default:\s*['\"]?([^'\"\s#]+)", text, re.MULTILINE)
+    provider_match = re.search(r"^\s*provider:\s*['\"]?([^'\"\s#]+)", text, re.MULTILINE)
+    return (
+        model_match.group(1) if model_match else "unknown",
+        provider_match.group(1) if provider_match else "unknown",
+    )
+
+
+def profile_usage(profile: str, cutoff: datetime, local_tz: Any) -> dict[str, Any]:
+    path = PROFILES_ROOT / profile / "logs" / "agent.log"
+    responses = 0
+    api_calls = 0
+    parse_errors = 0
+    if path.exists():
+        for line in path.read_text(encoding="utf-8", errors="ignore").splitlines():
+            match = RESPONSE_RE.search(line)
+            if not match:
+                continue
+            try:
+                stamp = datetime.strptime(line[:23], TIMESTAMP_FORMAT).replace(tzinfo=local_tz)
+            except ValueError:
+                parse_errors += 1
+                continue
+            if stamp < cutoff:
+                continue
+            responses += 1
+            api_calls += int(match.group(1))
+    model, provider = profile_model(profile)
+    return {
+        "profile": profile,
+        "responses": responses,
+        "api_calls": api_calls,
+        "average": round(api_calls / responses, 2) if responses else 0.0,
+        "model": model,
+        "provider": provider,
+        "parse_errors": parse_errors,
     }
-    END { print (total ? total : 0) }
-  ' "$logfile"
-}
 
-TOTAL_CALLS=0
-CALLS_DETAIL=()
-for profile in "${PROFILES[@]}"; do
-  calls=$(count_api_calls_since "${LOG_DIR}/${profile}/logs/agent.log" "$YESTERDAY")
-  TOTAL_CALLS=$((TOTAL_CALLS + calls))
-  CALLS_DETAIL+=("${profile^} ${calls}")
-done
 
-AVG_INPUT_PER_CALL=2000
-AVG_OUTPUT_PER_CALL=500
-TOTAL_INPUT=$((TOTAL_CALLS * AVG_INPUT_PER_CALL))
-TOTAL_OUTPUT=$((TOTAL_CALLS * AVG_OUTPUT_PER_CALL))
-HYPOTHETICAL_USD=$(awk -v inp="$TOTAL_INPUT" -v out="$TOTAL_OUTPUT" \
-  -v pi="$PRICE_INPUT" -v po="$PRICE_OUTPUT" \
-  'BEGIN { printf "%.2f", (inp * pi + out * po) / 1000000 }')
-TOTAL_INPUT_K=$((TOTAL_INPUT / 1000))
-TOTAL_OUTPUT_K=$((TOTAL_OUTPUT / 1000))
-USAGE_INT=$(echo "$HYPOTHETICAL_USD" | cut -d. -f1)
-CALLS_JOINED=$(IFS=' | '; echo "${CALLS_DETAIL[*]}")
+def build_report() -> tuple[dict[str, Any], dict[str, Any]]:
+    now = datetime.now().astimezone()
+    cutoff = now - timedelta(hours=24)
+    rows = [profile_usage(profile, cutoff, now.tzinfo) for profile in PROFILES]
+    total_responses = sum(row["responses"] for row in rows)
+    total_calls = sum(row["api_calls"] for row in rows)
+    total_parse_errors = sum(row["parse_errors"] for row in rows)
+    average = round(total_calls / total_responses, 2) if total_responses else 0.0
+    config_ok = all(
+        row["model"] == EXPECTED_MODEL and row["provider"] == EXPECTED_PROVIDER
+        for row in rows
+    )
+    content = "" if config_ok else "<@344196393512075265> divergência no modelo/provedor dos agentes"
+    color = 3066993 if config_ok else 15844367
+    status = "OK — todos em GPT-5.6 Sol via OAuth" if config_ok else "ATENÇÃO — configuração divergente"
+    detail = "\n".join(
+        f"**{row['profile'].title()}** — {row['api_calls']} chamadas | "
+        f"{row['responses']} respostas | média {row['average']:.2f}"
+        for row in rows
+    )
+    models = "\n".join(
+        f"{row['profile'].title()}: `{row['model']}` / `{row['provider']}`"
+        for row in rows
+    )
+    payload = {
+        "content": content,
+        "embeds": [{
+            "title": "GPT-5.6 OAuth — volume real em 24h",
+            "color": color,
+            "fields": [
+                {"name": "Status", "value": status, "inline": False},
+                {"name": "Custo incremental real", "value": "US$ 0,00 — openai-codex OAuth", "inline": True},
+                {"name": "Chamadas LLM", "value": str(total_calls), "inline": True},
+                {"name": "Respostas concluídas", "value": str(total_responses), "inline": True},
+                {"name": "Média por resposta", "value": f"{average:.2f} chamadas", "inline": True},
+                {"name": "Por agente", "value": detail or "Sem atividade", "inline": False},
+                {"name": "Modelo/provedor configurado", "value": models, "inline": False},
+                {
+                    "name": "Metodologia",
+                    "value": (
+                        "Soma `api_calls` das linhas `response ready` dos gateways nas últimas 24h. "
+                        "Os logs não expõem tokens de entrada/saída; por isso o monitor não inventa "
+                        "estimativa de tokens nem preço pay-per-token."
+                    ),
+                    "inline": False,
+                },
+            ],
+            "footer": {"text": f"Janela: {cutoff.strftime('%d/%m %H:%M %Z')} → {now.strftime('%d/%m %H:%M %Z')}"},
+        }],
+    }
+    summary = {
+        "total_calls": total_calls,
+        "total_responses": total_responses,
+        "average": average,
+        "config_ok": config_ok,
+        "parse_errors": total_parse_errors,
+        "rows": rows,
+    }
+    return payload, summary
 
-if [ "$USAGE_INT" -ge "$THRESHOLD_ALERT" ]; then
-  COLOR=15158332
-  STATUS="ALERTA — volume muito alto"
-  MENTION="<@344196393512075265>"
-elif [ "$USAGE_INT" -ge "$THRESHOLD_WARN" ]; then
-  COLOR=15844367
-  STATUS="WARN — volume acima do normal"
-  MENTION=""
-else
-  COLOR=3066993
-  STATUS="OK — volume normal"
-  MENTION=""
-fi
 
-TITLE="GPT-5.5 OAuth — uso hipotético 24h"
-SUMMARY="Uso hipotético: \$${HYPOTHETICAL_USD} se fosse pay-per-token; custo real: \$0.00"
-CONTENT=""
-if [ -n "$MENTION" ]; then
-  CONTENT="${MENTION} alerta de volume GPT-5.5 OAuth"
-fi
+def post_discord(payload: dict[str, Any], env: dict[str, str]) -> dict[str, Any]:
+    channel_id = env.get("MGS_DISCORD_CHANNEL_ID_OVERRIDE", CHANNEL_ID_DEFAULT)
+    token = env.get("MGS_DISCORD_BOT_TOKEN_OVERRIDE") or env.get("DISCORD_BOT_TOKEN", "")
+    if not token:
+        raise RuntimeError("DISCORD_BOT_TOKEN do Zeus ausente")
+    url = env.get("MGS_DISCORD_API_URL_OVERRIDE") or f"https://discord.com/api/v10/channels/{channel_id}/messages"
+    request = urllib.request.Request(
+        url,
+        data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+        headers={
+            "Authorization": f"Bot {token}",
+            "Content-Type": "application/json",
+            "User-Agent": "MGS-GPT56-OAuth-Monitor/1.0",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=15) as response:
+            body = response.read().decode("utf-8", errors="replace")
+            result = json.loads(body or "{}")
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")[:300]
+        raise RuntimeError(f"Discord HTTP {exc.code}: {detail}") from exc
+    if not env.get("MGS_DISCORD_API_URL_OVERRIDE"):
+        if str(result.get("channel_id")) != channel_id or not result.get("id"):
+            raise RuntimeError("Discord respondeu sem message_id/channel_id esperado")
+    return result
 
-PAYLOAD=$(jq -n \
-  --arg c "$CONTENT" \
-  --arg t "$TITLE" \
-  --arg s "$SUMMARY" \
-  --arg status "$STATUS" \
-  --arg real "\$0.00 — OAuth incluso na assinatura" \
-  --arg hypothetical "\$${HYPOTHETICAL_USD} — simulação se fosse pay-per-token" \
-  --arg calls "${TOTAL_CALLS} total | ${CALLS_JOINED}" \
-  --arg tokens "~${TOTAL_INPUT_K}K input | ~${TOTAL_OUTPUT_K}K output" \
-  --arg pricing "GPT-5.5 \$${PRICE_INPUT}/\$${PRICE_OUTPUT} por 1M — estimativa" \
-  --arg note "Valores hipotéticos; não representam cobrança real." \
-  --argjson col "$COLOR" \
-  '{content:$c, embeds:[{title:$t, description:$s, color:$col, fields:[{name:"Status", value:$status, inline:false}, {name:"Custo real", value:$real, inline:true}, {name:"Uso hipotético", value:$hypothetical, inline:true}, {name:"API calls", value:$calls, inline:false}, {name:"Tokens estimados", value:$tokens, inline:false}, {name:"Referência", value:$pricing, inline:false}, {name:"Nota", value:$note, inline:false}]}]}')
 
-if [[ "$DRY_RUN" -eq 1 ]]; then
-  echo "DRY-RUN: ${TITLE} | ${SUMMARY} | calls=${TOTAL_CALLS} (${CALLS_JOINED})"
-  exit 0
-fi
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dry-run", action="store_true")
+    args = parser.parse_args()
+    env = dict(os.environ)
+    load_env_file(Path("/root/.hermes/profiles/zeus/.env"), env)
+    payload, summary = build_report()
+    if args.dry_run:
+        print(
+            "DRY-RUN: GPT-5.6 OAuth 24h | "
+            f"calls={summary['total_calls']} responses={summary['total_responses']} "
+            f"avg={summary['average']:.2f} config_ok={summary['config_ok']} "
+            f"parse_errors={summary['parse_errors']}"
+        )
+        for row in summary["rows"]:
+            print(
+                f"{row['profile']}: calls={row['api_calls']} responses={row['responses']} "
+                f"avg={row['average']:.2f} model={row['model']} provider={row['provider']}"
+            )
+        return 0
+    result = post_discord(payload, env)
+    print(
+        "Monitor GPT-5.6 OAuth enviado: "
+        f"calls={summary['total_calls']} responses={summary['total_responses']} "
+        f"config_ok={summary['config_ok']} message_id={result.get('id', 'mock')}"
+    )
+    return 0
 
-WEBHOOK=""
-for _attempt in 1 2 3; do
-  WEBHOOK=$(op item get "Discord Webhook - Alerts Infra Channel" --vault "MGS Conteúdo" --fields label=webhook_url --reveal 2>/dev/null || true)
-  [[ "$WEBHOOK" == https://* ]] && break
-  sleep 3
-done
 
-if [[ "$WEBHOOK" != https://* ]]; then
-  echo "ERROR: Webhook not available" >&2
-  exit 1
-fi
-
-HTTP_CODE=$(curl -s --max-time 15 -X POST -H "Content-Type: application/json" \
-  -d "$PAYLOAD" \
-  "$WEBHOOK" \
-  -o /tmp/discord-response.txt -w "%{http_code}")
-
-echo "Monitor: uso hipotético \$${HYPOTHETICAL_USD} | API calls: ${TOTAL_CALLS} | HTTP: ${HTTP_CODE}"
-echo "${CALLS_JOINED}"
-
-if [ "$HTTP_CODE" != "204" ] && [ "$HTTP_CODE" != "200" ]; then
-  echo "Discord error response:"
-  sed -n '1,20p' /tmp/discord-response.txt
-fi
+if __name__ == "__main__":
+    raise SystemExit(main())
