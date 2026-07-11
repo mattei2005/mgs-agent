@@ -17,15 +17,23 @@ async def main():
   for start,end in RANGES:
    resp=await c.request.post(API,headers=h,data={'initialDate':start+'T00:00:00.000Z','finalDate':end+'T23:59:59.999Z','publishers':[TARGET],'currency':None},timeout=180000)
    if resp.status not in (200,201):raise RuntimeError(f'HTTP {resp.status} for {start}')
-   rows=await resp.json();all_rows.extend(rows);parts.append({'range':start+'..'+end,'rows':len(rows),'net':str(sum((Decimal(str(r.get('NET_REVENUE') or 0)) for r in rows),Decimal('0')))})
+   rows=await resp.json()
+   for row in rows:
+    tagged=dict(row);tagged['_query_range']=start+'..'+end;all_rows.append(tagged)
+   parts.append({'range':start+'..'+end,'rows':len(rows),'net':str(sum((Decimal(str(r.get('NET_REVENUE') or 0)) for r in rows),Decimal('0')))})
  closed=json.load(open('/root/mgs-agent/work/sb-sms-backfill/historical-creditoparaveiculo-closed-raw.json'))
  ids=lambda xs:sorted(str(x.get('PK_JBF_PERFORMANCE_PER_SMS')) for x in xs)
- left=ids(all_rows);right=ids(closed)
+ dedup={str(r.get('PK_JBF_PERFORMANCE_PER_SMS')):{k:v for k,v in r.items() if k!='_query_range'} for r in all_rows}
+ left=sorted(dedup);right=ids(closed)
  if left!=right:
   only_chunk=sorted(set(left)-set(right));only_full=sorted(set(right)-set(left))
   print(json.dumps({'status':'MISMATCH','parts':parts,'chunk_rows':len(all_rows),'full_rows':len(closed),'only_chunk_count':len(only_chunk),'only_full_count':len(only_full),'only_chunk_ids':only_chunk[:10],'only_full_ids':only_full[:10]},ensure_ascii=False))
   raise RuntimeError('Chunked IDs differ from full-range IDs')
- net=sum((Decimal(str(r.get('NET_REVENUE') or 0)) for r in all_rows),Decimal('0'))
- print(json.dumps({'status':'CHUNK_RECONCILIATION_OK','parts':parts,'rows':len(all_rows),'net_revenue':str(net)},ensure_ascii=False))
+ from collections import Counter
+ repeated=[{'id':pk,'occurrences':count,'date':dedup[pk].get('DATE'),'ranges':[r['_query_range'] for r in all_rows if str(r.get('PK_JBF_PERFORMANCE_PER_SMS'))==pk]} for pk,count in Counter(str(r.get('PK_JBF_PERFORMANCE_PER_SMS')) for r in all_rows).items() if count>1]
+ net=sum((Decimal(str(r.get('NET_REVENUE') or 0)) for r in dedup.values()),Decimal('0'))
+ full_net=sum((Decimal(str(r.get('NET_REVENUE') or 0)) for r in closed),Decimal('0'))
+ if net!=full_net: raise RuntimeError(f'Chunked net {net} differs from full net {full_net}')
+ print(json.dumps({'status':'CHUNK_RECONCILIATION_OK','parts':parts,'raw_rows':len(all_rows),'dedup_rows':len(dedup),'boundary_duplicates':repeated,'net_revenue':str(net)},ensure_ascii=False))
  await b.close()
 asyncio.run(main())
