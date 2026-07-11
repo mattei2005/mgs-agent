@@ -25,7 +25,7 @@ PROJECT_ENV = BASE_DIR / ".env"
 ZEUS_ENV = Path("/root/.hermes/profiles/zeus/.env")
 STATE_FILE = BASE_DIR / "data/op-rate-limit-monitor.json"
 CHANNEL_ID = "1525311777208926398"
-WARN_PERCENT = 70.0
+WARN_PERCENT = 50.0
 CRITICAL_PERCENT = 90.0
 MENTION = "<@344196393512075265>"
 
@@ -209,12 +209,12 @@ def rate_payload(metrics: list[dict[str, Any]], level: str, resolved: bool = Fal
         title = "Monitor 1Password ativado"
         color = LEVEL_COLOR["info"]
         content = ""
-        action = "Monitoramento ativo: aviso em 70% e alerta crítico em 90%."
+        action = "Monitoramento ativo: primeiro aviso em 50% e alerta crítico em 90%."
     elif resolved:
         title = "Rate limit do 1Password normalizado"
         color = LEVEL_COLOR["normal"]
         content = ""
-        action = "Uso voltou abaixo de 70%."
+        action = "Uso voltou abaixo de 50%."
     elif level == "critical":
         title = "Rate limit do 1Password crítico"
         color = LEVEL_COLOR["critical"]
@@ -224,7 +224,7 @@ def rate_payload(metrics: list[dict[str, Any]], level: str, resolved: bool = Fal
         title = "Rate limit do 1Password em atenção"
         color = LEVEL_COLOR["warning"]
         content = ""
-        action = "Uso acima de 70%. Acompanhar antes do próximo ciclo."
+        action = "Uso acima de 50%. Acompanhar antes do próximo ciclo."
 
     fields = [
         {"name": metric_label(metric), "value": metric_value(metric), "inline": False}
