@@ -154,7 +154,7 @@ async function main() {
   const profileDir = path.resolve(args.profile || process.env.HERA_META_LIBRARY_PROFILE || '/root/.hermes/profiles/hera/browser-profiles/meta-library-chromium');
   const outputRoot = path.resolve(args['output-root'] || process.env.HERA_META_LIBRARY_OUTPUT || '/root/.hermes/profiles/hera/artifacts/meta-library');
   const runDir = path.join(outputRoot, safeTimestamp());
-  const scrolls = intArg(args.scrolls, 8, 0, 50);
+  const scrolls = intArg(args.scrolls, 20, 0, 100);
   const waitMs = intArg(args['wait-ms'], 1500, 250, 10000);
   const downloadLimit = intArg(args.download, 1, 0, 100);
   const headless = boolArg(args.headless, true);
@@ -176,7 +176,11 @@ async function main() {
   ].join('\n'), { mode: 0o600 });
 
   const runtime = chromiumVersionAndUa();
-  const context = await chromium.launchPersistentContext(profileDir, {
+  const proxyServer = process.env.HERA_META_LIBRARY_PROXY || '';
+  if (proxyServer && proxyServer !== 'socks5://127.0.0.1:1080') {
+    throw new Error('Proxy recusado: somente o SOCKS local temporário 127.0.0.1:1080 é permitido.');
+  }
+  const launchOptions = {
     headless,
     viewport: { width: 1365, height: 900 },
     locale: 'en-US',
@@ -184,7 +188,9 @@ async function main() {
     userAgent: runtime.userAgent,
     extraHTTPHeaders: { 'Accept-Language': 'en-US,en;q=0.9' },
     args: ['--disable-blink-features=AutomationControlled', '--no-sandbox', '--disable-dev-shm-usage', '--lang=en-US,en']
-  });
+  };
+  if (proxyServer) launchOptions.proxy = { server: proxyServer };
+  const context = await chromium.launchPersistentContext(profileDir, launchOptions);
   activeContext = context;
 
   await context.addInitScript(() => {
@@ -231,10 +237,17 @@ async function main() {
   }
   initialIdCount = allIds.size;
 
+  let scrollsPerformed = 0;
+  let stableRounds = 0;
   for (let i = 0; i < scrolls; i++) {
+    const before = `${allIds.size}:${allMedia.size}`;
     await page.mouse.wheel(0, 900);
     await page.waitForTimeout(waitMs);
     mergeSnapshot(await extractSnapshot(page));
+    scrollsPerformed += 1;
+    const after = `${allIds.size}:${allMedia.size}`;
+    stableRounds = after === before ? stableRounds + 1 : 0;
+    if (stableRounds >= 4) break;
   }
 
   const cookies = await context.cookies(['https://www.facebook.com']);
@@ -292,6 +305,7 @@ async function main() {
     runDir,
     runtime: { node: process.version, playwright: require('playwright/package.json').version, chromium: runtime.version },
     headless,
+    proxyMode: proxyServer ? 'windows-home-socks' : 'direct-vps',
     gotoStatus,
     gotoError,
     profile: { reused: profileReused, permissions: '0700' },
@@ -302,6 +316,9 @@ async function main() {
       resultText: latest ? latest.resultText : null,
       markers: latest ? latest.markers : {},
       persistentChallenge,
+      scrollsRequested: scrolls,
+      scrollsPerformed,
+      stoppedAfterStableRounds: stableRounds >= 4,
       initialLibraryIdCount: initialIdCount,
       libraryIdCount: allIds.size,
       libraryIds: [...allIds],
