@@ -48,7 +48,7 @@ fi
 NOW_ISO="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 NOW_EPOCH="$(date +%s)"
 TMP_RESULTS="$(mktemp)"
-trap 'rm -f "$TMP_RESULTS" "$TMP_RESULTS.payload" "$TMP_RESULTS.bot"' EXIT
+trap 'rm -f "$TMP_RESULTS" "$TMP_RESULTS.payload"' EXIT
 
 log "START agents=${AGENTS[*]} dry_run=${DRY_RUN} threshold=${HONCHO_ALERT_THRESHOLD}"
 
@@ -161,34 +161,13 @@ except Exception: print('false')
 PY
 )"
 
-get_bot_token() {
-  op item get 'Discord Bot - Zeus' \
-    --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" \
-    --fields label=discord_bot_token \
-    --reveal 2>/dev/null
-}
-
 send_discord_payload() {
   local payload_file="$1"
   if [[ "$DRY_RUN" == "1" ]]; then
-    log "DRY_RUN discord payload=$(python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); print(d.get("embeds", [{}])[0].get("title", "payload"))' "$payload_file")"
-    return 0
+    "${BASE_DIR}/scripts/discord-bot-post.py" --channel-id "$CHANNEL_ID" --dry-run < "$payload_file"
+    return $?
   fi
-  local token
-  token="$(get_bot_token)"
-  if [[ -z "$token" ]]; then
-    log "ERROR: Zeus bot token unavailable; cannot send Discord alert"
-    return 1
-  fi
-  printf '%s' "$token" > "$TMP_RESULTS.bot"
-  python3 - <<'PY' "$TMP_RESULTS.bot" "$CHANNEL_ID" "$payload_file"
-import sys, json, urllib.request
-bot=open(sys.argv[1]).read().strip(); channel=sys.argv[2]; payload=json.load(open(sys.argv[3]))
-url=f"https://discord.com/api/v10/channels/{channel}/messages"
-req=urllib.request.Request(url, data=json.dumps(payload).encode(), headers={"Content-Type":"application/json","Authorization":f"Bot {bot}","User-Agent":"MGS-Zeus/1.0"}, method="POST")
-with urllib.request.urlopen(req, timeout=15) as r:
-    print(r.status)
-PY
+  "${BASE_DIR}/scripts/discord-bot-post.py" --channel-id "$CHANNEL_ID" < "$payload_file"
 }
 
 if (( FAIL_COUNT > 0 )); then

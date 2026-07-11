@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ares-report-infra.sh — envia REPORT-INFRA do Ares para #alerts-infra via webhook 1Password.
+# ares-report-infra.sh — envia REPORT-INFRA do Ares via bot Zeus direto.
 # Uso:
 #   /root/mgs-agent/scripts/ares-report-infra.sh --file /path/report.md
 #   printf 'mensagem' | /root/mgs-agent/scripts/ares-report-infra.sh
@@ -8,9 +8,8 @@
 set -euo pipefail
 
 BASE_DIR="/root/mgs-agent"
-WEBHOOK_ITEM="Discord Webhook - Alerts Infra Channel"
-VAULT="${OP_DEFAULT_VAULT:-MGS Conteúdo}"
-USER_AGENT="MGS-Ares-InfraReporter/1.0"
+DISCORD_CHANNEL_ID="1498132022634483894"
+DISCORD_POSTER="${BASE_DIR}/scripts/discord-bot-post.py"
 DRY_RUN=0
 INPUT_FILE=""
 
@@ -31,11 +30,6 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-set -a
-# shellcheck source=/dev/null
-source "${BASE_DIR}/.env" 2>/dev/null || true
-set +a
-
 if [[ -n "$INPUT_FILE" ]]; then
   [[ -f "$INPUT_FILE" ]] || { echo "arquivo não encontrado: $INPUT_FILE" >&2; exit 2; }
   CONTENT=$(cat "$INPUT_FILE")
@@ -46,12 +40,6 @@ fi
 if [[ -z "${CONTENT//[[:space:]]/}" ]]; then
   echo "conteúdo vazio" >&2
   exit 2
-fi
-
-WEBHOOK_URL=$(op item get "$WEBHOOK_ITEM" --vault "$VAULT" --fields label=webhook_url --reveal 2>/dev/null || true)
-if [[ "$WEBHOOK_URL" != https://* ]]; then
-  echo "webhook ausente/inválido no 1Password: item='${WEBHOOK_ITEM}' field='webhook_url'" >&2
-  exit 1
 fi
 
 PAYLOAD=$(python3 - "$CONTENT" <<'PY'
@@ -70,23 +58,11 @@ PY
   exit 0
 fi
 
-TMP_BODY=$(mktemp)
-HTTP_CODE=$(curl -sS \
-  -A "$USER_AGENT" \
-  -o "$TMP_BODY" \
-  -w '%{http_code}' \
-  --max-time 15 \
-  -H 'Content-Type: application/json' \
-  -d "$PAYLOAD" \
-  "$WEBHOOK_URL" || true)
-
-if [[ "$HTTP_CODE" == "204" || "$HTTP_CODE" == "200" ]]; then
-  echo "sent=ok http_status=${HTTP_CODE}"
-  rm -f "$TMP_BODY"
+if POST_RESULT=$(printf '%s' "$PAYLOAD" | "$DISCORD_POSTER" --channel-id "$DISCORD_CHANNEL_ID" 2>&1); then
+  echo "sent=ok transport=zeus_bot ${POST_RESULT}"
   exit 0
 fi
 
-echo "sent=failed http_status=${HTTP_CODE}" >&2
-sed -E 's/[A-Za-z0-9_\-]{24,}/[REDACTED]/g' "$TMP_BODY" >&2 || true
-rm -f "$TMP_BODY"
+echo "sent=failed transport=zeus_bot" >&2
+printf '%s\n' "$POST_RESULT" >&2
 exit 1

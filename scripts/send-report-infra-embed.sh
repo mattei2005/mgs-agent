@@ -46,20 +46,8 @@ if (( ${#missing[@]} > 0 )); then
   exit 2
 fi
 
-set -a
-# shellcheck source=/dev/null
-source "${BASE_DIR}/.env" 2>/dev/null || true
-set +a
-
-WEBHOOK=$(op item get "Discord Webhook - Alerts Infra Channel" \
-  --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" \
-  --fields label=webhook_url \
-  --reveal 2>/dev/null || true)
-
-if [[ "$WEBHOOK" != https://* ]]; then
-  echo "ERROR: webhook vazio ou inválido" >&2
-  exit 1
-fi
+DISCORD_CHANNEL_ID="1498132022634483894"
+DISCORD_POSTER="${BASE_DIR}/scripts/discord-bot-post.py"
 
 HOST=$(hostname)
 NOW=$(TZ=America/New_York date '+%Y-%m-%d %H:%M:%S %Z')
@@ -90,16 +78,10 @@ PAYLOAD=$(jq -n \
     {name:"Horário", value:$now, inline:true}
   ]}]}')
 
-http_code=$(curl -sS -o /tmp/send-report-infra-embed.response -w '%{http_code}' \
-  -X POST "$WEBHOOK" \
-  -H 'Content-Type: application/json' \
-  -d "$PAYLOAD" \
-  --max-time 10)
-
-if [[ "$http_code" != "204" ]]; then
-  echo "ERROR: Discord webhook retornou HTTP $http_code" >&2
-  cat /tmp/send-report-infra-embed.response >&2 || true
+if ! POST_RESULT=$(printf '%s' "$PAYLOAD" | "$DISCORD_POSTER" --channel-id "$DISCORD_CHANNEL_ID" 2>&1); then
+  echo "ERROR: Discord bot Zeus falhou ao enviar REPORT-INFRA" >&2
+  printf '%s\n' "$POST_RESULT" >&2
   exit 1
 fi
 
-echo "OK: REPORT-INFRA embed enviado (HTTP 204)"
+echo "OK: REPORT-INFRA embed enviado pelo bot Zeus (${POST_RESULT})"

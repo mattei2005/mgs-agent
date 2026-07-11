@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-11T00:30:52-04:00",
+    "updated_at": "2026-07-11T00:34:07-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -570,7 +570,7 @@
       "agent": "zeus",
       "type": "hermes_runtime_patch",
       "path": "/root/mgs-agent/patches/hermes/mgs-busy-steer-startup-merge-2026-07-11.patch",
-      "sha256": "77bcafc0811ca8c61a063c2066882328677e04eb594ddac194c405b6571379c8",
+      "sha256": "197747f4b6e24c9e541290bae77a7850c56ace36840e1c81d3a02cf5696bab50",
       "runtime_file": "/root/.hermes/hermes-agent/gateway/run.py",
       "guard_scripts": [
         "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
@@ -583,9 +583,37 @@
         "hera"
       ],
       "purpose": "Keep authorized follow-ups received during _AGENT_PENDING_SENTINEL startup inside the active steer turn and merge them before the first model call instead of replaying them through queue.",
-      "validation": "patch reverse/apply/roundtrip OK; ruff and py_compile passed; 60 focused busy-steer tests passed including sentinel-stage media; patch guard recognizes the artifact and startup invariants; full guard suite remains blocked by 3 pre-existing Discord suppress_embeds mock-signature failures unrelated to startup steer",
+      "validation": "patch reverse/apply/roundtrip OK; ruff and py_compile passed; 160 related busy-steer/restart/subagent tests passed including sentinel-stage media; patch guard recognizes the artifact and startup invariants; full guard suite remains blocked by 3 pre-existing Discord suppress_embeds mock-signature failures unrelated to startup steer",
       "status": "staged_validated_restart_pending",
       "updated_at": "2026-07-11T00:30:52-04:00"
+    },
+    {
+      "id": "mgs-gateway-restart-busy-steer-startup-20260711T043316Z-3105180",
+      "agent": "zeus",
+      "type": "gateway_restart_finalizer",
+      "finalizer_path": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20260711T043316Z-3105180.sh",
+      "finalizer_sha256": "94944d78e969be5236278895fe07f16a8ef25d19880e9321dbd0e8d7a9632743",
+      "log_path": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260711T043316Z-3105180.log",
+      "agents": [
+        "atena",
+        "ares",
+        "hera",
+        "zeus"
+      ],
+      "purpose": "Activate the startup steer same-turn merge on all MGS gateways with Zeus restarted last.",
+      "status": "prepared_detached_execution_pending",
+      "updated_at": "2026-07-11T00:34:07-04:00"
+    },
+    {
+      "id": "mgs-busy-steer-startup-postrestart-validation-47f269e09c7e",
+      "agent": "zeus",
+      "type": "hermes_cron_one_shot_validation",
+      "job_id": "47f269e09c7e",
+      "schedule": "2026-07-11T00:37:44-04:00",
+      "deliver": "origin",
+      "purpose": "Validate 4/4 gateway rollout, resolved steer config, runtime invariants, patch reversibility, finalizer completion, inventory/audit readback and direct REPORT-INFRA after the safe restart.",
+      "status": "scheduled",
+      "updated_at": "2026-07-11T00:34:07-04:00"
     },
     {
       "id": "mgs-busy-input-steer-validation-6a16e41afa9a",

@@ -10,13 +10,8 @@ STATE_FILE="${BASE_DIR}/data/webshare-status-state.json"
 STATUS_URL="https://status.webshare.io/"
 FAILED_ALERTS_LOG="/var/log/mgs-agent/monitor-webshare-status-failed-alerts.log"
 PENDING_ALERTS_DIR="/var/log/mgs-agent/pending-alerts"
-WEBHOOK_URL=""
-WEBHOOK_FETCHED=0
-
-set -a
-# shellcheck source=/dev/null
-source "${BASE_DIR}/.env" 2>/dev/null || true
-set +a
+DISCORD_CHANNEL_ID="1498132022634483894"
+DISCORD_POSTER="${BASE_DIR}/scripts/discord-bot-post.py"
 
 log() {
   echo "[$(date -Iseconds)] monitor-webshare-status: $*"
@@ -32,38 +27,17 @@ record_failed_alert() {
   return 0
 }
 
-fetch_webhook_once() {
-  if [[ "$WEBHOOK_FETCHED" == "1" ]]; then
-    [[ "$WEBHOOK_URL" == https://* ]]
-    return $?
-  fi
-  WEBHOOK_FETCHED=1
-  if [[ -n "${MGS_WEBHOOK_URL_OVERRIDE:-}" ]]; then
-    WEBHOOK_URL="$MGS_WEBHOOK_URL_OVERRIDE"
-  else
-    WEBHOOK_URL=$(op item get 'Discord Webhook - Alerts Infra Channel' --vault 'MGS Conteúdo' --fields label=webhook_url --reveal 2>/dev/null || true)
-  fi
-  [[ "$WEBHOOK_URL" == https://* ]]
-}
-
 post_alert_payload() {
-  local payload="$1" reason="${2:-alert}" http_status attempt
-  if ! fetch_webhook_once; then
-    record_failed_alert "$payload" "op_unavailable:${reason}" || return 2
-    return 2
-  fi
+  local payload="$1" reason="${2:-alert}"
   if [[ "${MGS_DRY_RUN:-0}" == "1" ]]; then
-    log "DRY_RUN: would post Discord alert (${reason})"
+    printf '%s' "$payload" | "$DISCORD_POSTER" --channel-id "$DISCORD_CHANNEL_ID" --dry-run >/dev/null
+    log "DRY_RUN: would post Discord alert via Zeus bot (${reason})"
     return 0
   fi
-  for attempt in 1 2; do
-    http_status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 -X POST -H "Content-Type: application/json" -d "$payload" "$WEBHOOK_URL" 2>/dev/null || echo "000")
-    if [[ "$http_status" =~ ^2 ]]; then
-      return 0
-    fi
-    sleep 2
-  done
-  record_failed_alert "$payload" "curl_failed:${reason}:http=${http_status}" || return 2
+  if printf '%s' "$payload" | "$DISCORD_POSTER" --channel-id "$DISCORD_CHANNEL_ID" >/dev/null; then
+    return 0
+  fi
+  record_failed_alert "$payload" "zeus_bot_failed:${reason}" || return 2
   return 2
 }
 

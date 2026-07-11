@@ -6,8 +6,8 @@ set -euo pipefail
 BASE=/root/mgs-agent
 LOG="$BASE/logs/hermes-mgs-patch-watchdog.log"
 STATE_FILE="$BASE/data/hermes-mgs-patch-watchdog-state.json"
-WEBHOOK_ITEM="Discord Webhook - Alerts Infra Channel"
-VAULT="${OP_DEFAULT_VAULT:-MGS Conteúdo}"
+DISCORD_CHANNEL_ID="1498132022634483894"
+DISCORD_POSTER="$BASE/scripts/discord-bot-post.py"
 MENTION="<@344196393512075265>"
 mkdir -p "$(dirname "$LOG")" "$(dirname "$STATE_FILE")"
 
@@ -36,31 +36,17 @@ state_write() {
     > "${STATE_FILE}.tmp" && mv "${STATE_FILE}.tmp" "$STATE_FILE"
 }
 
-get_webhook_url() {
-  set -a
-  # shellcheck disable=SC1091
-  source "$BASE/.env" 2>/dev/null || true
-  set +a
-  op item get "$WEBHOOK_ITEM" --vault "$VAULT" --fields label=webhook_url --reveal 2>/dev/null || true
-}
-
 send_discord_payload() {
   local payload="$1"
   if [[ "${DRY_RUN:-0}" == "1" ]]; then
-    log_local "DRY_RUN: would send alerts-infra payload"
-    printf '%s\n' "$payload"
+    printf '%s\n' "$payload" | "$DISCORD_POSTER" --channel-id "$DISCORD_CHANNEL_ID" --dry-run >/dev/null
+    log_local "DRY_RUN: would send alerts-infra payload via Zeus bot"
     return 0
   fi
-  local webhook_url
-  webhook_url="$(get_webhook_url)"
-  if [[ -z "$webhook_url" ]]; then
-    log_local "WARN: webhook URL unavailable; alert not sent"
-    return 0
+  if ! printf '%s\n' "$payload" | "$DISCORD_POSTER" --channel-id "$DISCORD_CHANNEL_ID" >/dev/null; then
+    log_local "WARN: Discord bot post failed"
+    return 1
   fi
-  curl -sS -X POST "$webhook_url" \
-    -H 'Content-Type: application/json' \
-    -d "$payload" \
-    --max-time 10 >/dev/null || log_local "WARN: Discord webhook post failed"
 }
 
 send_failure_alert() {
