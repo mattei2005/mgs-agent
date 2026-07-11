@@ -41,5 +41,6 @@ Use this reference when Kelly/Geizian/gestor uploads a creative directly in Disc
 ## Notes
 
 - For Drive writes to Rodolfo's personal `MGS-CRIATIVOS`, use the configured real-user OAuth path when service account quota/My Drive constraints apply. Validate root metadata and upload with the established Drive client/module rather than inventing a new credential flow.
+- If Rodolfo updates the Drive OAuth refresh token in 1Password but refresh still returns HTTP 400, check whether the established client is reading a complete stale local credential cache before consulting 1Password. Do not delete or overwrite the canonical cache during a live task. Force one fresh 1Password read through isolated root-only temporary token/credential paths, remove the temporary credential file immediately after minting the access token, then validate Drive root metadata. Remediate canonical cache precedence separately with REPORT-INFRA.
 - Keep raw/original upload untouched. The cleaned renamed copy is the organized asset.
 - If the sanitizer reports `clean: true` and `harmful_tags: 0`, report only the summary; never dump raw metadata in Discord.

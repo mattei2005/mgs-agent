@@ -153,8 +153,8 @@ Use `op service-account ratelimit --format=json` como probe oficial. Ele retorna
 
 Padrão recomendado:
 
-- Executar a cada 15 minutos, com minuto escalonado e `flock -n`.
-- Alertar amarelo em 70% e crítico em 90%, separando budget horário e diário.
+- Executar uma vez por hora, com minuto escalonado e `flock -n`; Rodolfo definiu que 15 minutos é frequência desnecessária para este budget.
+- Emitir primeiro alerta em 50% e crítico em 90%, separando budget horário e diário.
 - Persistir state e cooldown; só reenviar ao cruzar faixa, após cooldown ou na resolução.
 - Enviar pelo bot Zeus/Discord REST usando a credencial já local do profile, não buscar o webhook no próprio 1Password. Um monitor dependente do `op` para obter o canal falha justamente quando o limite esgota.
 - Nunca imprimir token ou valores de itens; reportar apenas `used`, `limit`, `remaining`, percentual e horário de reset.
@@ -202,3 +202,62 @@ Política confirmada por Rodolfo em 2026-07-10:
 - A consulta `op service-account ratelimit` consome uma requisição simples. Uma vez por hora, o monitor adiciona no máximo 24 requisições/dia, ou 0,048% do limite Business de 50.000.
 - Enviar pelo token local do bot Zeus, não por webhook buscado no próprio 1Password; o alerta precisa continuar funcionando mesmo quando o 1Password estiver bloqueado.
 - O smoke test real deve validar `message_id` e `channel_id` retornados pela API Discord sem imprimir tokens.
+
+## Auditoria de consumo do 1Password no sistema inteiro
+
+Use quando Rodolfo pedir consumo por hora/dia/mês ou quando o limite subir sem causa óbvia. Uma busca apenas no root crontab é incompleta: os maiores consumidores podem estar nos crons Hermes de outros profiles ou em hooks acionados por eventos.
+
+### Escopo obrigatório
+
+1. Root crontab e `/etc/cron.d/`.
+2. Jobs Hermes ativos de **todos** os profiles em `/root/.hermes/profiles/{zeus,atena,ares,hera}/cron/jobs.json`.
+3. Scripts resolvidos por esses jobs em cada `profiles/<agent>/scripts/` e em `/root/mgs-agent/scripts/`.
+4. Timers/systemd e processos `op` vivos.
+5. Git hooks, especialmente `.git/hooks/post-commit` — consumo é proporcional ao número de commits, não a um cron fixo.
+6. Chamadas sob demanda de agentes, REPORT-INFRA, WordPress, Meta, Drive, SmartBidding e DTR; separar do baseline automático.
+
+### Como contar corretamente
+
+- Contar comandos `op` por execução e multiplicar pela frequência real.
+- Usar a documentação oficial como teto por comando: `op item get` pode fazer múltiplas leituras quando item/vault são passados por nome; IDs reduzem o custo. `op item list` também pode fazer múltiplas requests.
+- Em loops, derivar cardinalidades ao vivo: número de itens no vault, apps monitorados, logins DTR, usuários-alvo e campos buscados por item. Nunca assumir contagem antiga.
+- Distinguir chamadas **fixas** de chamadas **lazy/condicionais**. Webhook/token buscado apenas no ramo de alerta vale zero no estado saudável; webhook carregado antes da checagem entra no baseline.
+- Retries entram como teto de falha, não como consumo saudável, salvo se os logs mostrarem retry recorrente.
+- Para Git, contar commits em 1h/24h/7d/30d e multiplicar pelo custo do askpass; não projetar um pico de uma hora como média histórica sem rotular.
+
+### Validação por consumo real
+
+Consultar `op service-account ratelimit --format=json` e calcular:
+
+```text
+elapsed_seconds = 3600 - token_read.reset
+observed_requests_per_hour = token_read.used / elapsed_seconds * 3600
+observed_requests_per_day = observed_requests_per_hour * 24
+observed_requests_per_30d = observed_requests_per_day * 30
+```
+
+Comparar dois números:
+
+- **Teto nominal:** soma por código/frequência usando multiplicadores oficiais.
+- **Ritmo observado:** extrapolação da janela viva, que incorpora locks, jobs atrasados, cache do CLI e tarefas sob demanda.
+
+Se ambos ultrapassarem o limite diário, o diagnóstico é confirmado. Se só o teto ultrapassar, observar mais de uma janela antes de concluir.
+
+### Padrão de relatório executivo
+
+Mostrar:
+
+1. Estado atual (`used/limit`, percentual e reset).
+2. Ritmo observado por hora/dia/mês.
+3. Tabela por consumidor com frequência, requests/hora, dia e 30 dias.
+4. Separação entre automático fixo, condicional e sob demanda.
+5. Concentração dos maiores consumidores e horário estimado de esgotamento versus reset.
+6. Recomendações quantificadas, sem aplicar mudança de agenda apenas porque foi proposta.
+
+### Otimizações preferidas
+
+- Frequência primeiro: reduzir monitores pesados de vários ciclos por hora para horário quando a urgência operacional permitir.
+- Buscar o item completo uma vez (`--format json --reveal`) e reutilizar campos, em vez de um `op item get` por campo.
+- Preferir IDs de vault/item em rotas repetitivas.
+- Cachear apenas metadados não secretos (IDs, título→username) quando aprovado pelo fluxo; não criar cache local de senhas/tokens sem autorização explícita.
+- O alerta de rate limit deve usar token local do bot, não um webhook recuperado do próprio 1Password.
