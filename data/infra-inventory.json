@@ -1,9 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T22:06:04-04:00",
-    "generated_by": "infra-discovery.sh + scoped Hera dedicated-route update",
-    "last_manual_update": "hera-meta-library-dedicated-us-residential-proxy"
+    "updated_at": "2026-07-10T22:13:40-04:00",
+    "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
     {
@@ -2349,23 +2348,17 @@
     {
       "path": "/root/mgs-agent/scripts/hera-meta-library-collector.sh",
       "size_bytes": 1260,
-      "modified_at": "2026-07-10T17:27:19-04:00",
-      "sha256": "3a22fbe461eb8021dc4dc2ab7f2511d98cb2234570fa29314a080b55eb15ee51",
-      "updated_at": "2026-07-10T22:06:04-04:00"
+      "modified_at": "2026-07-10T22:02:21-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hera-meta-library-login-browser.sh",
       "size_bytes": 2499,
-      "modified_at": "2026-07-10T19:53:55-04:00",
-      "sha256": "4473ff6ea5704776d202ba23ac823ffacb43d2e9be576f573c1b396f92f5c55c",
-      "updated_at": "2026-07-10T22:06:04-04:00"
+      "modified_at": "2026-07-10T22:02:24-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hera-meta-library-profile-snapshot.sh",
       "size_bytes": 4494,
-      "modified_at": "2026-07-10T21:43:55-04:00",
-      "sha256": "f0bd5dae5563abceda4e1f9c46c4cc9ad205b0847a9e705a266e125ae22f4998",
-      "updated_at": "2026-07-10T22:06:04-04:00"
+      "modified_at": "2026-07-10T22:03:38-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hera-youtube-capture-frames.py",
@@ -5215,9 +5208,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
-      "size_bytes": 1902,
-      "md5": "e173d4ab181cb27b9bc9229dbb81aa1f",
-      "modified_at": "2026-07-10T21:57:02-04:00"
+      "size_bytes": 2116,
+      "md5": "d674522bfc3c755dda9494e32af00779",
+      "modified_at": "2026-07-10T22:12:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -5227,9 +5220,9 @@
     },
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
-      "size_bytes": 358,
-      "md5": "b054cee3c7a3b773e35a020e6a0f1247",
-      "modified_at": "2026-07-10T21:56:33-04:00"
+      "size_bytes": 440,
+      "md5": "d535da4064b1f308cbe5501d36139ccd",
+      "modified_at": "2026-07-10T22:11:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -5240,8 +5233,8 @@
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
       "size_bytes": 25839,
-      "md5": "049f07be33d066c345ec509b4ec34229",
-      "modified_at": "2026-07-10T21:43:02-04:00"
+      "md5": "81c00e61c46cc6c0e98fd08790ba667a",
+      "modified_at": "2026-07-10T21:58:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -5252,8 +5245,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 316,
-      "md5": "9d2b81f4e5f8de578e2aba10c7d09541",
-      "modified_at": "2026-07-10T21:45:02-04:00"
+      "md5": "4895be7131fe7d7299de416d2e759ef9",
+      "modified_at": "2026-07-10T22:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -5286,6 +5279,12 @@
       "modified_at": "2026-07-03T03:12:58-04:00"
     },
     {
+      "path": "/root/mgs-agent/data/hera-meta-library-proxy.json",
+      "size_bytes": 394,
+      "md5": "71e6e5a1e3262bb5ab4fb705e1edef89",
+      "modified_at": "2026-07-10T22:01:01-04:00"
+    },
+    {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
       "md5": "2ad01ce068d31bc9641d52dc65b038ec",
@@ -5294,8 +5293,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 25681,
-      "md5": "889eeadef902b265c17afe1ce67299f0",
-      "modified_at": "2026-07-10T21:55:01-04:00"
+      "md5": "c94be9946147d27cc3629d51c9d708da",
+      "modified_at": "2026-07-10T22:10:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -5312,14 +5311,14 @@
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 438,
-      "md5": "0a9be8c1f70e24d04a56495d3c6651f9",
-      "modified_at": "2026-07-10T21:45:50-04:00"
+      "md5": "f4869e14cf6d8e7f04c700e953754b1f",
+      "modified_at": "2026-07-10T22:00:52-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 220644,
-      "md5": "04666d37d330632ff06ad7b8230772c3",
-      "modified_at": "2026-07-10T21:57:54-04:00"
+      "size_bytes": 224343,
+      "md5": "aa075f24e798308ce2d3ee6c927246d6",
+      "modified_at": "2026-07-10T22:09:45-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -5342,8 +5341,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 48991,
-      "md5": "dc65a213703353c3067f443b4c62d7d3",
-      "modified_at": "2026-07-10T21:55:21-04:00"
+      "md5": "8f5fa921e3e184846d284da0c3c20ac9",
+      "modified_at": "2026-07-10T22:01:17-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -5439,7 +5438,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "0697c0326c77d82982ec0de851584cdf",
-      "modified_at": "2026-07-10T21:56:01-04:00"
+      "modified_at": "2026-07-10T22:11:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -5468,8 +5467,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2173,
-      "md5": "a691be5154b9c562d6d9d15ba2d54fdb",
-      "modified_at": "2026-07-10T21:55:02-04:00"
+      "md5": "339a888c1dafcfe9d256fc656ea0265d",
+      "modified_at": "2026-07-10T22:10:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
