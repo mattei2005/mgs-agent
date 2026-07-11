@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Common helpers for Ares Meta Ads operations. Never print tokens."""
 from __future__ import annotations
-import fcntl, json, os, subprocess, sys, time, urllib.error, urllib.parse, urllib.request
+import fcntl, json, os, subprocess, sys, tempfile, time, urllib.error, urllib.parse, urllib.request
 from pathlib import Path
 
 BASE = Path('/root/mgs-agent/data/ares/meta-ads')
@@ -27,27 +27,74 @@ def load_json(path):
 def account_config(account_id):
     return load_json(BASE / 'accounts' / f'{account_id}.json')['accounts'][0]
 
-def get_token_from_1password(item_name=TOKEN_ITEM_DEFAULT):
-    # Source /root/mgs-agent/.env for OP_SERVICE_ACCOUNT_TOKEN without exposing it.
-    field_candidates = ['credential', 'password', 'token', 'api key', 'access token']
-    for field in field_candidates:
-        cmd = f"set -a; [ -f /root/mgs-agent/.env ] && . /root/mgs-agent/.env; set +a; op item get {shell_quote(item_name)} --vault {shell_quote(os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo'))} --fields {shell_quote(field)} --reveal 2>/dev/null"
-        res = subprocess.run(['bash','-lc',cmd], text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30)
-        token = res.stdout.strip()
-        if res.returncode == 0 and token:
-            return token, field
-    # fallback: JSON and common field labels
-    cmd = f"set -a; [ -f /root/mgs-agent/.env ] && . /root/mgs-agent/.env; set +a; op item get {shell_quote(item_name)} --vault {shell_quote(os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo'))} --format json --reveal"
-    res = subprocess.run(['bash','-lc',cmd], text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30)
-    if res.returncode != 0:
-        raise RuntimeError('1Password item not readable or not found')
-    data=json.loads(res.stdout)
-    for field in data.get('fields',[]):
-        label=(field.get('label') or field.get('id') or '').lower()
-        val=field.get('value')
-        if val and any(k in label for k in ['token','password','credential','api key','access']):
+def _identify_token_field(data):
+    for field in data.get('fields', []):
+        label = (field.get('label') or field.get('id') or '').lower()
+        val = field.get('value')
+        if val and any(k in label for k in ['token', 'password', 'credential', 'api key', 'access']):
             return val, field.get('label') or field.get('id')
     raise RuntimeError('1Password item found but token field was not identified')
+
+
+def _write_token_cache(item_name, token, field):
+    TOKEN_CACHE_PATH.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    payload = json.dumps({
+        'item': item_name,
+        'field': field,
+        'token': token,
+        'cached_at': int(time.time()),
+    }, ensure_ascii=False)
+    tmp = TOKEN_CACHE_PATH.with_suffix('.tmp')
+    fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    try:
+        with os.fdopen(fd, 'w') as fh:
+            fh.write(payload + '\n')
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(tmp, TOKEN_CACHE_PATH)
+        os.chmod(TOKEN_CACHE_PATH, 0o600)
+    finally:
+        try:
+            tmp.unlink()
+        except FileNotFoundError:
+            pass
+
+
+def _read_token_cache(item_name):
+    try:
+        st = TOKEN_CACHE_PATH.stat()
+        if st.st_mode & 0o077:
+            return None
+        data = json.loads(TOKEN_CACHE_PATH.read_text())
+        age = time.time() - float(data.get('cached_at') or 0)
+        token = str(data.get('token') or '').strip()
+        if data.get('item') != item_name or not token or age < 0 or age > TOKEN_CACHE_MAX_AGE_SECONDS:
+            return None
+        return token, str(data.get('field') or 'cached'), age
+    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+        return None
+
+
+def get_token_from_1password(item_name=TOKEN_ITEM_DEFAULT):
+    # One 1Password request per run. The old field-by-field loop made up to six
+    # requests and amplified service-account throttling across recurring crons.
+    cmd = f"set -a; [ -f /root/mgs-agent/.env ] && . /root/mgs-agent/.env; set +a; op item get {shell_quote(item_name)} --vault {shell_quote(os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo'))} --format json --reveal"
+    res = subprocess.run(['bash', '-lc', cmd], text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30)
+    if res.returncode == 0:
+        data = json.loads(res.stdout)
+        token, field = _identify_token_field(data)
+        _write_token_cache(item_name, token, field)
+        return token, field
+
+    cached = _read_token_cache(item_name)
+    if cached:
+        token, field, age = cached
+        return token, f'{field} (cache {int(age)}s)'
+
+    error = (res.stderr or '').lower()
+    if 'rate-limit' in error or 'rate limit' in error or 'too many requests' in error:
+        raise RuntimeError('1Password rate-limited and no valid local token cache is available')
+    raise RuntimeError('1Password item not readable and no valid local token cache is available')
 
 def shell_quote(s):
     import shlex
