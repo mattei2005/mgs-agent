@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T21:35:00-04:00",
+    "updated_at": "2026-07-10T21:45:47-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_manual_update": "hera-discord-tool-progress-off"
+    "last_manual_update": "hera-meta-library-trusted-device-snapshot"
   },
   "system_packages": [
     {
@@ -1331,6 +1331,27 @@
       "sha256": "8a6e68f712629fc7e34a82a46f2c723efb35a211a69237ed824235dbca76fc29",
       "validation": "YAML parse passed; tool_progress=off; gateway_restart_notification=false. Applied without restarting Hera during active Meta Library operation.",
       "updated_at": "2026-07-10T21:35:00-04:00"
+    },
+    {
+      "id": "hera-meta-library-profile-snapshot",
+      "type": "script",
+      "path": "/root/mgs-agent/scripts/hera-meta-library-profile-snapshot.sh",
+      "status": "active",
+      "owner": "hera",
+      "purpose": "Create secure, lock-protected snapshots of the trusted Meta Library Chromium profile after clean authenticated shutdown, preserving cookies/2FA trust without exposing values.",
+      "size_bytes": 4463,
+      "sha256": "7f1b1aaa81e2b37bcac6c1723cb5954ef62fce6eda08496155b1e668829f291a",
+      "security": {
+        "backup_root": "/root/.hermes/profiles/hera/browser-profile-backups/meta-library-chromium",
+        "directory_mode": "700",
+        "cookie_db_mode": "600",
+        "retention": 5,
+        "singleton_policy": "never remove; exclude stale links only after zero live profile processes",
+        "auth_gate": "authenticated residential status or successful report within 1 hour"
+      },
+      "validation": "bash -n PASS; real snapshot PASS; authenticatedLikely=true; windows-home-socks; critical files hashed internally; snapshot 12M; no live Chromium.",
+      "latest_snapshot": "/root/.hermes/profiles/hera/browser-profile-backups/meta-library-chromium/20260711T014404Z",
+      "updated_at": "2026-07-10T21:45:47-04:00"
     }
   ],
   "profile_skill_references": [
@@ -1758,13 +1779,13 @@
       "type": "profile_skill",
       "path": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/meta-library-reference-intake/SKILL.md",
-      "size_bytes": 6676,
+      "size_bytes": 7992,
       "modified_at": "2026-07-10T17:41:59.982336-04:00",
-      "sha256": "761c8a8f39fc7d99fac6e70ce4bad90161ffcaa0d04c078386dca48b25db9c23",
-      "versioned_sha256": "761c8a8f39fc7d99fac6e70ce4bad90161ffcaa0d04c078386dca48b25db9c23",
+      "sha256": "0b4a8bdb2612220312df71cf2d1d50184c318c3e2575c2579b20ec2cff7c1e65",
+      "versioned_sha256": "0b4a8bdb2612220312df71cf2d1d50184c318c3e2575c2579b20ec2cff7c1e65",
       "purpose": "Canonical Meta Ads Library collection flow with persistent runtime/profile and explicit no-/tmp rule.",
-      "validation": "live/versioned SKILL and continuity reference hashes match; direct-vps incident guidance corrected; Zeus guidance delivered to Hera thread message 1525309622993289226",
-      "updated_at": "2026-07-10T21:17:22-04:00",
+      "validation": "live/versioned hash match; no redundant human confirmation when authenticated readback passes; trusted-device snapshot gate documented and exercised",
+      "updated_at": "2026-07-10T21:45:47-04:00",
       "reference_sha256": "5c9a57d8e0f6b37391fc399e7729a1105220d468081ef736026b76cbc96eb450"
     },
     {
