@@ -4,9 +4,11 @@
 
 set -euo pipefail
 
-REPO_DIR="/root/mgs-agent"
-LOG_FILE="/root/mgs-agent/logs/auto-commit-watcher.log"
-DEBOUNCE_SECONDS=10  # espera 10s antes de commitar (evita spam)
+REPO_DIR="${MGS_AUTOCOMMIT_REPO_DIR:-/root/mgs-agent}"
+LOG_FILE="${MGS_AUTOCOMMIT_LOG_FILE:-/root/mgs-agent/logs/auto-commit-watcher.log}"
+BATCH_TARGET="${MGS_AUTOCOMMIT_BATCH_TARGET:-10}"
+BATCH_QUIET_SECONDS="${MGS_AUTOCOMMIT_BATCH_QUIET_SECONDS:-10}"
+BATCH_MAX_WAIT_SECONDS="${MGS_AUTOCOMMIT_BATCH_MAX_WAIT_SECONDS:-600}"
 SENSITIVE_PATH_REGEX='(^|/)(\.env($|\.)|.*\.pem|.*\.key|id_rsa|id_ed25519|.*credential.*|.*secret.*|.*token.*|.*password.*|.*webhook.*|.*private.*|hosts\.yml|\.npmrc|\.pypirc)$'
 SENSITIVE_ALLOWLIST_REGEX='(^|/)(honcho_sanitized_secret_scan\.py|report-infra-runtime-permissions-auth-and-secret-wrappers-2026-06-17\.md)$'
 
