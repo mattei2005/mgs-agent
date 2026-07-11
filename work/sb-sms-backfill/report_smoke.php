@@ -8,6 +8,12 @@ function render_sms_revenue_report( $from, $to, $slug = '' ) {
     MGS_Quiz_Admin::render_report();
     return ob_get_clean();
 }
+function render_default_sms_report() {
+    $_GET = array( 'page' => 'mgs-quiz-report', 'leads_per_page' => '5', 'days_per_page' => '5' );
+    ob_start();
+    MGS_Quiz_Admin::render_report();
+    return ob_get_clean();
+}
 
 global $wpdb;
 $table = $wpdb->prefix . 'mgs_quiz_sms_revenue';
