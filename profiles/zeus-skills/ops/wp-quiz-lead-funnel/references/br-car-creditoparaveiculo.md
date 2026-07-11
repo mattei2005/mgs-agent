@@ -161,7 +161,20 @@ A report query referencing a new table is not sufficient implementation. Before 
 3. Validate the live table and indexes before rendering the report or importing revenue.
 4. Smoke-test no-data, populated history, an exact single-day filter, and idempotent re-import.
 
-For v1.7.0, the active-install upgrade hook created schema `1.3.0`; the closed-day backfill reconciled 61 source rows across 49 dates, gross `R$ 13.923,73`, net `R$ 12.531,37`. No daily cron was created in this phase.
+For v1.7.0, the active-install upgrade hook created schema `1.3.0`; the closed-day backfill reconciled 61 source rows across 49 dates, gross `R$ 13.923,73`, net `R$ 12.531,37`.
+
+Daily sync deployed on 2026-07-11 after recovering Rodolfo's original instruction:
+
+- root cron: `0 8 * * *` in VPS timezone `America/New_York`;
+- wrapper: `/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.sh`;
+- collector/import coordinator: `/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.py`;
+- transactional importer: `/root/mgs-agent/scripts/import-sb-sms-revenue-day.php`;
+- behavior: fetch yesterday in `America/Sao_Paulo`, require at least one correctly scoped row, deduplicate by source PK, aggregate by UTM campaign, upsert the exact closed date, and validate WordPress readback;
+- credentials remain outside WordPress; the importer payload/runtime is staged under `/var/tmp/mgs-sb-sms-revenue` on RunCloud Inc02;
+- failures alert `#alerts-infra` and mention Rodolfo; success remains log-only;
+- log: `/root/mgs-agent/logs/sync-sb-sms-revenue-daily.log`.
+
+The first corrective execution imported 2026-07-10 with 7 source rows / 7 campaign aggregates: gross `R$ 385,16`, net `R$ 346,64`; the WordPress report validated cost `R$ 175,92`, profit `R$ 170,72`, and ROI `97,04%`.
 
 ### Schema/backfill deployment recovery
 

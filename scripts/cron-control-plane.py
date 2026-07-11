@@ -48,6 +48,7 @@ DESCRIPTIONS = {
     'monitor-discord-thread-archive-warnings.py': 'Monitora threads Discord ativas com auto-archive de 1 semana em Zeus/Atena/Ares/Hera e posta keepalive quando faltam até 24h para ficarem ocultas.',
     'monitor-vps-health.py': 'Monitora saúde bruta da VPS: disco, inodes, memória disponível, load, reboot recente, tamanho de backups e services MGS ativos.',
     'monitor-op-rate-limit.py': 'Monitora limites horário e diário do 1Password Business e alerta o canal dedicado em 50%/90%.',
+    'sync-sb-sms-revenue-daily.sh': 'Às 08:00 ET, importa no WordPress a receita líquida SMS do dia anterior fechado na Smart Bidding, com upsert e readback.',
 }
 
 RISK = {
@@ -76,6 +77,7 @@ RISK = {
     'monitor-discord-thread-archive-warnings.py': 'baixo: consulta Discord + keepalive automático antes de auto-archive',
     'monitor-vps-health.py': 'baixo: read-only + alerta Discord em anomalia da VPS',
     'monitor-op-rate-limit.py': 'baixo: consulta read-only + alerta Discord por transição',
+    'sync-sb-sms-revenue-daily.sh': 'médio/alto: lê SB autenticada e escreve receita diária no WordPress com transação/readback',
 }
 
 OWNER = {
@@ -87,6 +89,7 @@ OWNER = {
     'pendencia-render-md.sh': 'Zeus/Ops',
     'chat-log.sh': 'Zeus/Ops',
     'monitor-op-rate-limit.py': 'Zeus/Infra',
+    'sync-sb-sms-revenue-daily.sh': 'Zeus/Revenue Tech',
 }
 
 

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-11T19:23:26-04:00",
+    "updated_at": "2026-07-11T19:37:25-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -2366,6 +2366,9 @@
     },
     {
       "entry": "19,49 * * * * flock -n /var/lock/monitor_drive_auth_unified.lock /root/mgs-agent/scripts/monitor-drive-auth-unified.py >> /root/mgs-agent/logs/monitor-drive-auth-unified.log 2>&1"
+    },
+    {
+      "entry": "0 8 * * * flock -n /var/lock/sync_sb_sms_revenue_daily.lock /root/mgs-agent/scripts/sync-sb-sms-revenue-daily.sh >> /root/mgs-agent/logs/sync-sb-sms-revenue-daily.log 2>&1"
     }
   ],
   "scripts": [
@@ -2566,8 +2569,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/cron-control-plane.py",
-      "size_bytes": 13998,
-      "modified_at": "2026-07-10T21:28:53-04:00"
+      "size_bytes": 14352,
+      "modified_at": "2026-07-11T19:35:29-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/cron-smoke-test.sh",
@@ -2763,6 +2766,11 @@
       "path": "/root/mgs-agent/scripts/import-discord-thread.py",
       "size_bytes": 8088,
       "modified_at": "2026-06-15T20:26:48-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/import-sb-sms-revenue-day.php",
+      "size_bytes": 4600,
+      "modified_at": "2026-07-11T19:31:59-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/include-all-active-sb-templates-in-utility-rollout.py",
@@ -3083,6 +3091,16 @@
       "path": "/root/mgs-agent/scripts/sync-codex-oauth.sh",
       "size_bytes": 11488,
       "modified_at": "2026-06-07T00:38:52-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.py",
+      "size_bytes": 10804,
+      "modified_at": "2026-07-11T19:32:55-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.sh",
+      "size_bytes": 820,
+      "modified_at": "2026-07-11T19:27:27-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sync-souls.sh",
@@ -5558,8 +5576,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 2906,
-      "md5": "4c13ae054d4045c5a180d5d709cf100f",
-      "modified_at": "2026-07-11T19:22:01-04:00"
+      "md5": "529013a7589efe0116ac3ac56a54cecc",
+      "modified_at": "2026-07-11T19:37:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -5570,8 +5588,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "a007634ad9bf825dc383bdd80d35467a",
-      "modified_at": "2026-07-11T19:11:31-04:00"
+      "md5": "7a0addfae6bc10a870102aad2fa9b260",
+      "modified_at": "2026-07-11T19:26:29-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -5594,8 +5612,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 316,
-      "md5": "7b049478d606c143ba834f7123b72617",
-      "modified_at": "2026-07-11T19:15:02-04:00"
+      "md5": "8dbf8cf9b5514191cd1f4f99661e7d85",
+      "modified_at": "2026-07-11T19:30:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -5648,8 +5666,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 25939,
-      "md5": "c9152ee47495436e70d2fada6f6fb4ba",
-      "modified_at": "2026-07-11T19:20:02-04:00"
+      "md5": "ed2815d6bc78d274444a4cc6314e9515",
+      "modified_at": "2026-07-11T19:35:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -5671,9 +5689,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 243086,
-      "md5": "a19fc45fbb3bbb0b5bcfb6c9d3efca06",
-      "modified_at": "2026-07-11T19:05:38-04:00"
+      "size_bytes": 243705,
+      "md5": "4a47213b358efeb160986d87f11ab48a",
+      "modified_at": "2026-07-11T19:36:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -5793,7 +5811,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "59dee493330135b7c91cf93a2323d6fa",
-      "modified_at": "2026-07-11T19:21:02-04:00"
+      "modified_at": "2026-07-11T19:36:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -5821,9 +5839,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2173,
-      "md5": "037d1eb55985459ffe3d296356e6aec7",
-      "modified_at": "2026-07-11T19:20:02-04:00"
+      "size_bytes": 2171,
+      "md5": "76a17dea0d6567d00970c6315fb0553f",
+      "modified_at": "2026-07-11T19:35:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",

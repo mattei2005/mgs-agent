@@ -63,4 +63,15 @@ Display the block as total SMS revenue for the domain and state that it respects
 - Keep the import idempotent with a unique key and upsert.
 - Validate the full historical total, one known single-day filter, an empty period, plugin version/status, table engine/schema, report rendering, and public quiz routes.
 - A credentials provider rate limit is a blocker, not authorization to improvise or expose secrets. Use bounded retries; after the retry budget, stop without touching production and wait for access to be restored.
-- Historical backfill and the recurring 08:00 cron are separate phases. Do not create the cron when only the backfill phase was authorized.
+- Historical backfill and the recurring 08:00 cron are separate implementation phases, but a request to execute phase 1 first does not cancel a previously requested phase 2. Keep the daily sync explicitly pending unless Rodolfo cancels or defers it.
+
+## Daily closed-day sync pattern
+
+- Schedule at `08:00` in the operator/VPS timezone and fetch yesterday as a closed calendar date in `America/Sao_Paulo`.
+- Query one timezone-safe instant (for example `12:00:00Z` at both boundaries), reject rows outside the target date/scope, require at least one source row, and never write a synthetic zero.
+- Deduplicate by source PK, aggregate by UTM campaign, use centavo integers and deterministic source hashes, then upsert transactionally.
+- Validate the exact date in WordPress by aggregate count, source-row count, gross/net/investment cents; rerun once to prove idempotency.
+- Keep Smart Bidding authorization and RunCloud credentials outside WordPress. Use a persistent runtime outside `/tmp` when the importer must be readable by a different OS user; verify directory traversal and file ownership before the first production run.
+- A WP-CLI importer executed as the site owner must be able to read both the importer and payload. Prefer a shared runtime such as `/var/tmp/<job>` with controlled permissions over a home directory that the site user cannot traverse.
+- Log success locally; alert `#alerts-infra` on failure with no credential material. Add `flock`, cron inventory, stale-log monitoring, audit entry, and REPORT-INFRA.
+- End-to-end validation must render the actual report for the imported date and verify revenue, cost, profit, ROI, and date fields—not only the database row.

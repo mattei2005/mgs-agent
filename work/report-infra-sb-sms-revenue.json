@@ -1,0 +1,6 @@
+{
+  "content": "[REPORT-INFRA] <@1496296175014252634> <@344196393512075265>\nAção: criado e validado\nTipo: cron + scripts + sincronização WordPress\nPaths: /root/mgs-agent/scripts/sync-sb-sms-revenue-daily.sh; sync-sb-sms-revenue-daily.py; import-sb-sms-revenue-day.php; root crontab\nMotivo: corrigir a omissão da rotina diária de receita SMS solicitada por Rodolfo\nAgenda: 0 8 * * * — dia anterior fechado\nEvidência: 10/07 importado; 7 linhas/7 grupos; líquido R$ 346,64; relatório R$ 175,92 custo, R$ 170,72 lucro, ROI 97,04%; rerun idempotente SYNC_OK; DAILY_REPORT_VERIFY_OK\nInventário/CRONS: regenerados e validados",
+  "allowed_mentions": {
+    "users": ["1496296175014252634", "344196393512075265"]
+  }
+}
