@@ -214,7 +214,7 @@ async def ensure_sb_logged_in(page, ctx):
     await page.get_by_role('button', name=re.compile('Continue|Log in|Login', re.I)).first.click(timeout=10000)
     await page.wait_for_load_state('networkidle', timeout=90000)
     await page.wait_for_timeout(3000)
-    await ctx.storage_state(path='/tmp/smartbidding_state_headed.json')
+    await ctx.storage_state(path='/root/.local/share/mgs/smartbidding_state_headed.json')
     return True
 
 
@@ -289,7 +289,7 @@ async def capture_rows_headers():
     post_url = 'https://api.jbfdigital.com.br/broadcast/Messenger'
     p = await async_playwright().start()
     browser = await p.chromium.launch(headless=False, args=['--disable-blink-features=AutomationControlled'])
-    ctx = await browser.new_context(storage_state='/tmp/smartbidding_state_headed.json', viewport={'width':1600,'height':1000}, user_agent=UA)
+    ctx = await browser.new_context(storage_state='/root/.local/share/mgs/smartbidding_state_headed.json', viewport={'width':1600,'height':1000}, user_agent=UA)
     page = await ctx.new_page()
 
     async def on_request(req):

@@ -5,4 +5,4 @@ set -a
 source "${BASE_DIR}/.env" 2>/dev/null || true
 set +a
 cd "$BASE_DIR"
-xvfb-run -a /tmp/sb-venv/bin/python "${BASE_DIR}/scripts/sb-utility-rollout-manager.py" review-due
+xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python "${BASE_DIR}/scripts/sb-utility-rollout-manager.py" review-due

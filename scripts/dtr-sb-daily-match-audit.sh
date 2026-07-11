@@ -16,7 +16,7 @@ set +a
 log "START args=$*"
 cd "$BASE_DIR"
 set +e
-xvfb-run -a /tmp/sb-venv/bin/python "${BASE_DIR}/scripts/dtr-sb-daily-match-audit.py" "$@"
+xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python "${BASE_DIR}/scripts/dtr-sb-daily-match-audit.py" "$@"
 rc=$?
 set -e
 log "END rc=${rc}"

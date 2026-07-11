@@ -20,12 +20,12 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PATH
 
 echo "[$(date -Iseconds)] dtr-sb-restricted-sync.sh START args=$*" >> "$LOG"
 
-if [[ ! -x /tmp/sb-venv/bin/python ]]; then
-  echo "[$(date -Iseconds)] ERROR /tmp/sb-venv/bin/python não encontrado" >> "$LOG"
+if [[ ! -x /root/.local/share/mgs/sb-venv/bin/python ]]; then
+  echo "[$(date -Iseconds)] ERROR /root/.local/share/mgs/sb-venv/bin/python não encontrado" >> "$LOG"
   exit 1
 fi
 
-xvfb-run -a /tmp/sb-venv/bin/python "$PY" "$@" 2>&1 | tee -a "$LOG"
+xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python "$PY" "$@" 2>&1 | tee -a "$LOG"
 rc=${PIPESTATUS[0]}
 
 echo "[$(date -Iseconds)] dtr-sb-restricted-sync.sh END rc=$rc" >> "$LOG"

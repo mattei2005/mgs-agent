@@ -21,12 +21,12 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PATH
 
 echo "[$(date -Iseconds)] monitor-sb-restricted-pages.sh START args=$*"
 
-if [[ ! -x /tmp/sb-venv/bin/python ]]; then
-  echo "[$(date -Iseconds)] ERROR /tmp/sb-venv/bin/python não encontrado" >&2
+if [[ ! -x /root/.local/share/mgs/sb-venv/bin/python ]]; then
+  echo "[$(date -Iseconds)] ERROR /root/.local/share/mgs/sb-venv/bin/python não encontrado" >&2
   exit 1
 fi
 
-xvfb-run -a /tmp/sb-venv/bin/python "$PY" "$@"
+xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python "$PY" "$@"
 rc=$?
 
 echo "[$(date -Iseconds)] monitor-sb-restricted-pages.sh END rc=$rc"
