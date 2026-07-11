@@ -2,6 +2,8 @@
 
 Quando Rodolfo disser que marcou um agente dentro da thread/canal de outro agente e esperava resposta (ex.: Ares marcado em thread da Hera), tratar como roteamento de gateway, não como falha do modelo. O agente marcado só receberá o evento se o canal pai/thread estiver em `discord.allowed_channels` efetivo dele; `thread_require_mention=true` sozinho não basta.
 
+**Mensagens enviadas por outro bot/agente:** quando `DISCORD_ALLOW_BOTS=mentions`, uma mensagem de Zeus/Hera/Ares/Atena sem mention direta do agente destinatário pode aparecer normalmente no Discord, mas será ignorada pelo gateway desse agente. Toda instrução cross-agent enviada por bot deve começar com `<@BOT_ID_DESTINATÁRIO>`, inclusive em thread já aberta. Depois do envio, validar em duas etapas: (1) readback confirma a mensagem e a mention no thread ID correto; (2) uma nova mensagem/atividade do agente destinatário confirma que ele acordou. Não interpretar apenas “mensagem enviada com sucesso” como handoff concluído. Se a primeira orientação saiu sem mention, reenviar de forma consolidada com mention — não depender de o agente reler histórico silenciosamente.
+
 Caso inverso validado: se Rodolfo disser que qualquer mensagem sem mention acorda os dois agentes na thread de um deles, auditar o agente visitante. O canal externo pode estar em `allowed_channels` com `thread_require_mention=false` no YAML ou no `.env` efetivo. Corrigir para `thread_require_mention=true` e validar `/proc/<pid>/environ`, não apenas o arquivo. Detalhe: `references/discord-cross-agent-thread-reply-scope-2026-06-20.md`.
 
 ### Challenges por IP de datacenter em fluxos Ares/Hera

@@ -24,7 +24,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Enviar arquivos grandes/anexos no Discord → Formato REPORT-INFRA (Atena/Ares/Hera → Zeus)** → `references/route-pack-04.md`
 - **Processamento Zeus de REPORT-INFRA** → `references/route-pack-05.md`
 - **Processamento Zeus de REPORT-INFRA com cron Hermes de outro profile → Alternativa Operacional** → `references/route-pack-06.md`
-- **SEÇÃO C — Hook git post-commit com notificação Discord → Live tool-call trace no Discord com cleanup automático** → `references/route-pack-07.md`
+- **SEÇÃO C — Hook git post-commit com notificação Discord → Política MGS de tool progress no Discord** → `references/route-pack-07.md`
 - **Gateway routing/restart incident reference → Channel permission overwrites and narrow delegation** → `references/route-pack-08.md`
 - **Adding a user to a private Discord thread → Diagnóstico de título ruim em auto-thread** → `references/route-pack-09.md`
 - **Regra MGS: renomear thread nova uma vez; nunca renomear thread já aberta → Pitfall crítico: função segura pode estar sobrescrita por duplicata posterior** → `references/route-pack-10.md`
