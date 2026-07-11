@@ -39,9 +39,10 @@ Nunca recriar esse fluxo em `/tmp`. Nunca apagar, substituir, anexar ou versiona
    - MIME permitido, magic-byte válido, tamanho dentro dos limites e hash SHA-256;
    - screenshot real no diretório da execução.
 4. O `gotoStatus` pode ser 403 e ainda assim a Meta concluir o challenge no Chromium. Não declarar bloqueio se o DOM/cards/mídia carregaram.
-5. Se `session.authenticatedLikely=false`, isso não é erro quando a Library pública abre. Se a Meta exigir login ou esconder mídia, parar e pedir reautenticação manual; não pedir senha/cookie no Discord.
-6. Para entrega, sanitizar os downloads com `/root/mgs-agent/scripts/clean-creative-metadata.sh`, validar `clean=true`, deduplicar e criar `README.txt` + `inventory.json`.
-7. Material de Library é referência/inspiração. Não tratar como asset MGS final nem copiar diretamente para campanha.
+5. Coletar incrementalmente durante o scroll; a Meta virtualiza cards antigos. Em libraries maiores, continuar até quatro ciclos sem novos IDs/mídias ou até o limite de segurança, registrando `scrollsPerformed` e `stoppedAfterStableRounds`.
+6. Se `session.authenticatedLikely=false`, isso não é erro quando a Library pública abre. Se a Meta exigir login ou esconder mídia, parar e pedir reautenticação manual; não pedir senha/cookie no Discord.
+7. Para entrega, sanitizar os downloads com `/root/mgs-agent/scripts/clean-creative-metadata.sh`, validar `clean=true`, deduplicar e criar `README.txt` + `inventory.json`.
+8. Material de Library é referência/inspiração. Não tratar como asset MGS final nem copiar diretamente para campanha.
 
 ## Segurança
 
