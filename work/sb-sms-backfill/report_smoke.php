@@ -27,11 +27,15 @@ foreach ( $checks as $name => $ok ) {
 $day_html = render_sms_revenue_report( '2026-07-08', '2026-07-08', 'quiz-car-parcelas-g002-qm002' );
 $day_cents = (int) $wpdb->get_var( "SELECT COALESCE(SUM(net_revenue_cents),0) FROM {$table} WHERE revenue_date='2026-07-08'" );
 $day_expected = 'R$ ' . number_format( $day_cents / 100, 2, ',', '.' );
-if ( false === strpos( $day_html, esc_html( $day_expected ) ) || 27457 !== $day_cents ) {
+if ( false === strpos( $day_html, esc_html( $day_expected ) ) || 27457 !== $day_cents || false === strpos( $day_html, 'Não comparável' ) ) {
     throw new RuntimeException( 'Single-day revenue filter mismatch' );
 }
+$roi_html = render_sms_revenue_report( '2026-07-09', '2026-07-09' );
+if ( false === strpos( $roi_html, '65,73%' ) || false === strpos( $roi_html, 'Lucro estimado: R$ 114,42' ) ) {
+    throw new RuntimeException( 'ROI calculation mismatch for 2026-07-09' );
+}
 $empty = render_sms_revenue_report( '2020-01-01', '2020-01-02' );
-if ( false === strpos( $empty, 'Não disponível' ) || false === strpos( $empty, 'Sem dados' ) ) {
+if ( false === strpos( $empty, 'Não disponível' ) || false === strpos( $empty, 'Sem base' ) ) {
     throw new RuntimeException( 'Empty revenue period state failed' );
 }
 echo wp_json_encode( array(
@@ -42,5 +46,6 @@ echo wp_json_encode( array(
     'last_date' => $all['last_date'],
     'revenue' => $expected,
     'single_day_2026_07_08' => $day_expected,
+    'roi_2026_07_09' => '65,73%',
     'html_bytes' => strlen( $html ),
 ) ) . PHP_EOL;
