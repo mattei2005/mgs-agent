@@ -154,6 +154,8 @@ Minimum dashboard:
 - wide report tables with horizontal overflow when needed, never one-character vertical wrapping;
 - CSV export respecting filters.
 
+For Smart Bidding SMS revenue backfill/sync, dashboard metric semantics, BRL centavo storage, API boundary deduplication, and report-scope limits, load `references/smartbidding-sms-revenue-backfill.md`.
+
 ## Diagnostic Playbook: SMS Funnel Not Showing Leads
 
 If Rodolfo says a lead is not appearing in SMS Funnel:

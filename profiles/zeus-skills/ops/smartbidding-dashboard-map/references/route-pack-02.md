@@ -102,3 +102,16 @@ POST /photo/facebookads
 GET  /report/dollar
 ```
 
+### SMS report revenue semantics and historical extraction
+
+For `POST /report/performance_per_sms`:
+
+- request scope uses `initialDate`, `finalDate`, `publishers`, and `currency`;
+- response includes both `REVENUE` (gross) and `NET_REVENUE`;
+- with the dashboard switch `Discount revenue share` enabled, the primary BRL value shown in the `REVENUE` cell is `NET_REVENUE`, while gross `REVENUE` appears as the secondary/info value;
+- mirror the dashboard primary value with `NET_REVENUE`, but retain both fields for auditability;
+- closed-day backfills should end on yesterday, not the incomplete current day;
+- chunked date queries can duplicate boundary rows (for example month-end rows) across adjacent chunks. Deduplicate by `PK_JBF_PERFORMANCE_PER_SMS` before aggregation and reconcile deduplicated chunks against a full-range query;
+- publisher/domain scope must be validated row by row before import.
+
+When feeding a WordPress quiz report, do not imply per-quiz attribution from domain SMS revenue unless the SB dimensions prove a deterministic mapping. Generic campaigns, shared G00X routes, and blank `LABEL`/`MSG_ID` make domain/date revenue the safe default scope.
