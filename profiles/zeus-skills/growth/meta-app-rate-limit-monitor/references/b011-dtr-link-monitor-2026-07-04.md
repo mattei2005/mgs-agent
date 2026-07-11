@@ -76,7 +76,7 @@ For each B011 row:
 ```text
 Script: /root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh
 State:  /root/mgs-agent/data/b011-dtr-link-monitor-state.json
-Cron:   Hermes job 498fb0d95e10, schedule `2,12,21,27,36,42,51 * * * *` (~every 8m, staggered to avoid same-minute collision with meta-app-roles-watch; root service-restarts still shares :21/:36/:51 until wider root cron rebalancing), deliver=local, no_agent=true
+Cron:   Hermes job 498fb0d95e10, schedule `15 8,13,18,22 * * *` (4 vezes por dia, horário ET; 15 minutos após o monitor Meta para evitar rajada simultânea), deliver=local, no_agent=true
 Lock:   /var/lock/b011-dtr-link-watch.lock (skip overlapping run)
 Config: 1Password item `BOT B011 Token`
 Alert:  B011 channel 1522830283240505385, direct Discord bot post on anomaly/change or explicit live validation
@@ -138,5 +138,5 @@ William Nogueira was initially misclassified by an older validation route; after
 - Do not treat `0 pages` as unlinked.
 - Do not use stale sheet rows with `Migrado=FALSE` as active alert targets unless Rodolfo explicitly asks for all rows.
 - Do not expose OAuth tokens, page tokens, app secrets, or authorization codes in Discord/logs.
-- Do not schedule B011 below 8 minutes while the route still takes ~5m20s for 25 targets. Keep a non-blocking flock lock so a slow run never overlaps the next run.
+- O runtime histórico de ~5m20s continua exigindo `flock` não bloqueante, mas a cadência canônica foi reduzida por Rodolfo em 2026-07-10 para quatro vezes por dia (`08:15`, `13:15`, `18:15`, `22:15` ET) após auditoria mostrar consumo excessivo do 1Password. Não restaurar a cadência de ~8 minutos sem autorização explícita e novo orçamento de requests.
 - A Facebook OAuth URL like `/dialog/oauth/business/cancel/?app_id=...` can confirm app_id, scopes, and redirect_uri, but it does not contain a usable token/code for monitoring.

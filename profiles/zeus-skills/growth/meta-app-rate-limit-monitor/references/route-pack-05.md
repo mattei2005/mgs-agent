@@ -5,7 +5,7 @@ Active Hermes cron job:
 ```text
 Job name       meta-app-roles-watch
 Job ID         0cc7ed1e587e
-Schedule       4-59/5 * * * *  (B001-B010/B005-2 every 5 minutes, offset minute 4; no same-minute collision with current root cron starts at time of audit)
+Schedule       0 8,13,18,22 * * *  (4 vezes por dia, horário ET)
 Mode           no_agent script, deliver=local (silent on OK)
 Script         /root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh
 Lock           /var/lock/meta-app-roles-watch.lock (skip if previous run still active)
@@ -22,11 +22,11 @@ Active B011 Hermes cron job:
 ```text
 Job name       b011-dtr-link-watch
 Job ID         498fb0d95e10
-Schedule       2,12,21,27,36,42,51 * * * *  (~every 8 minutes; explicit stagger chosen to avoid same-minute collision with meta-app-roles-watch; current root cron audit still has lightweight service-restarts collisions at :21/:36/:51 unless the wider root crontab is reorganized)
+Schedule       15 8,13,18,22 * * *  (4 vezes por dia, horário ET; 15 minutos após meta-app-roles-watch para evitar rajada simultânea)
 Mode           no_agent script, deliver=local (silent on OK)
 Script         /root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh
 Lock           /var/lock/b011-dtr-link-watch.lock (skip if previous run still active)
-Runtime        Last measured ~5m20s for 25 targets; do not schedule under 8 minutes unless the route is optimized.
+Runtime        Last measured ~5m20s for 25 targets; a defasagem de 15 minutos mantém os dois monitores pesados separados.
 ```
 
 Important UX correction: if Rodolfo explicitly says **"manda um alerta no canal Bxxx"** or **"ativa o cron e faz ele mandar um alerta"** for B001–B010/B005-2, use `MGS_META_APP_ROLES_FORCE_LIVE_ALERT=1` with `MGS_META_APP_ROLE_ITEMS='BOT Bxxx Token'`. This forces the same polished 3-message app-roles layout with the current users list: (1) native embed `Meta APP - Bxxx`, (2) `👥 USUÁRIOS ATUAIS` code block, (3) removidos/adicionados/acumulados code block. It uses live Meta Graph + live sheet reconciliation and must not display cached state deltas: forced live alerts show `REMOVIDOS AGORA`/`ADICIONADOS AGORA` as empty unless the same fresh run proves otherwise, and `REMOVIDOS ACUMULADOS` must come from the live sheet X/reconciliation layer, not `state.cumulative_removed`. It does not enable snapshot mode, does not forge a delta, and does not corrupt state. Do **not** hand-build a generic embed.
@@ -43,12 +43,14 @@ Hard guard implemented in `meta-app-roles-watch.sh`: `MGS_META_APP_ROLES_FORCE_S
 
 The production monitor cadence is:
 
+> Correção canônica de Rodolfo em 2026-07-10: os monitores completos deixaram de rodar a cada 5/~8 minutos porque essa frequência consumia o limite diário compartilhado do 1Password. A agenda oficial é quatro vezes por dia, com Meta às 08:00/13:00/18:00/22:00 ET e B011 15 minutos depois. Não restaurar a cadência antiga sem autorização explícita e orçamento de requests validado.
+
 ```text
 Failure mode                         Alert SLA
 -----------------------------------  -----------------------------------------
-Segurador/admin removed from roles   B001-B010/B005-2: next run, up to 5 minutes; CRITICAL alert
-Segurador/admin added to roles       B001-B010/B005-2: next run, up to 5 minutes; ATTENTION one-cycle delta
-B011 DTR/ChatPion link removed       next B011 run, ~8 minutes cadence; alert when disconnected/connected state changes
+Segurador/admin removed from roles   B001-B010/B005-2: próximo ciclo em 08:00, 13:00, 18:00 ou 22:00 ET
+Segurador/admin added to roles       B001-B010/B005-2: próximo ciclo em 08:00, 13:00, 18:00 ou 22:00 ET
+B011 DTR/ChatPion link removed       próximo ciclo em 08:15, 13:15, 18:15 ou 22:15 ET
 X-App-Usage >=70%                    alert on severity increase
 X-App-Usage >=85%                    risk alert; for B007/Openzed act fast
 X-App-Usage >=95%                    critical alert; repeat after cooldown

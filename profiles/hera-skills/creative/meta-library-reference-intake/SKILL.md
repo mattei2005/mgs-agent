@@ -81,6 +81,8 @@ Antes de reutilizar uma sessão autenticada, leia o `proxyMode` do último `repo
 
 Para evidência, comando de retomada e distinção entre perfil reutilizado e sessão autenticada, consulte `references/residential-route-session-continuity.md`.
 
+Para coleta integral, deduplicação SHA-256, sanitização, pacote de referências, upload e readback no Drive, consulte `references/full-collection-drive-packaging.md`.
+
 ## Verificação de encerramento
 
 Uma coleta só está concluída quando houver readback real de:
