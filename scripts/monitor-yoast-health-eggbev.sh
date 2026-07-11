@@ -105,31 +105,8 @@ trap cleanup EXIT
 log "=== Iniciando monitor-yoast-health-eggbev ==="
 log "Data: ${NOW_DATE} | Dia semana: ${DAY_OF_WEEK}"
 
-# ── Credenciais ───────────────────────────────────────────────────────────────
-log "Buscando credenciais via 1Password..."
-
-# Retry helper: 3 tentativas com 2s de espera entre elas
-# Necessário porque runs consecutivos rápidos podem causar rate-limit transitório do op CLI
-op_get_retry() {
-    local item="$1" vault="$2" field="$3"
-    local val="" attempt=0
-    while [[ $attempt -lt 3 ]]; do
-        val="$(op item get "$item" --vault "$vault" --fields "$field" --reveal 2>/dev/null)" || true
-        [[ -n "$val" ]] && echo "$val" && return 0
-        attempt=$(( attempt + 1 ))
-        [[ $attempt -lt 3 ]] && sleep 2
-    done
-    return 1
-}
-
-S03_PASS="$(op_get_retry 'Runcloud Server 03 - 46.4.95.117- zeus Acesso' 'MGS Conteúdo' 'password')" || true
-S01_PASS="$(op_get_retry 'Runcloud Server 01 - 162.55.28.178- zeus Acesso' 'MGS Conteúdo' 'password')" || true
-
-if [[ -z "$S03_PASS" || -z "$S01_PASS" ]]; then
-    log "ERRO CRÍTICO: Credenciais SSH vazias após 3 tentativas — abortando"
-    exit 1
-fi
-log "Credenciais OK."
+# ── Autenticação SSH dedicada ─────────────────────────────────────────────────
+log "Usando chave SSH dedicada para S03/S01; nenhuma consulta ao 1Password."
 
 # ── Script remoto ─────────────────────────────────────────────────────────────
 # Roda no S01 (eggbev). Busca SEO + Readability em duas queries separadas.
@@ -210,55 +187,14 @@ EOFREMOTE
 chmod +x "${TMP_DIR}/yoast_health_query_eggbev.sh"
 
 # ── SCP do script remoto ──────────────────────────────────────────────────────
-log "Enviando script remoto via SCP (S03→S01)..."
-
-cat > "${TMP_DIR}/yoast_scp.exp" << 'EOFEXP'
-#!/usr/bin/expect -f
-set s03 [lindex $argv 0]
-set s01 [lindex $argv 1]
-set local_script [lindex $argv 2]
-set remote_script [lindex $argv 3]
-set ssh_opts [lindex $argv 4]
-set timeout 30
-spawn sh -c "scp $ssh_opts -J zeus@46.4.95.117 \"$local_script\" zeus@162.55.28.178:\"$remote_script\""
-expect "46.4.95.117's password:"
-send "$s03\r"
-expect "162.55.28.178's password:"
-send "$s01\r"
-expect {
-    "100%" { exp_continue }
-    eof    {}
-}
-EOFEXP
-chmod +x "${TMP_DIR}/yoast_scp.exp"
-"${TMP_DIR}/yoast_scp.exp" "$S03_PASS" "$S01_PASS" "${TMP_DIR}/yoast_health_query_eggbev.sh" "$REMOTE_SCRIPT" "$SSH_OPTS" > /dev/null 2>&1
+log "Enviando script remoto via SCP com chave dedicada (S03→S01)..."
+scp "${SSH_TARGET_OPTS[@]}" "${TMP_DIR}/yoast_health_query_eggbev.sh" "zeus@162.55.28.178:${REMOTE_SCRIPT}" >/dev/null
 log "SCP OK."
 
 # ── SSH execute + captura output ──────────────────────────────────────────────
-log "Executando queries no eggbev via SSH (S03→S01)..."
-
-cat > "${TMP_DIR}/yoast_ssh.exp" << 'EOFEXP'
-#!/usr/bin/expect -f
-set s03 [lindex $argv 0]
-set s01 [lindex $argv 1]
-set remote_script [lindex $argv 2]
-set ssh_opts [lindex $argv 3]
-set timeout 120
-spawn sh -c "ssh $ssh_opts -J zeus@46.4.95.117 zeus@162.55.28.178"
-expect "46.4.95.117's password:"
-send "$s03\r"
-expect "162.55.28.178's password:"
-send "$s01\r"
-expect "Made with"
-sleep 3
-send "bash $remote_script; rm -f $remote_script\r"
-sleep 55
-send "exit\r"
-expect eof
-EOFEXP
-chmod +x "${TMP_DIR}/yoast_ssh.exp"
-
-SSH_OUT=$("${TMP_DIR}/yoast_ssh.exp" "$S03_PASS" "$S01_PASS" "$REMOTE_SCRIPT" "$SSH_OPTS" 2>/dev/null)
+log "Executando queries no eggbev via SSH com chave dedicada (S03→S01)..."
+SSH_OUT=$(ssh "${SSH_TARGET_OPTS[@]}" zeus@162.55.28.178 \
+    "bash '$REMOTE_SCRIPT'; rc=\$?; rm -f '$REMOTE_SCRIPT'; exit \$rc" 2>/dev/null)
 
 # ── Parse resultado ───────────────────────────────────────────────────────────
 YOAST_LINE=$(echo "$SSH_OUT" | grep "^YOAST_DATA:" | head -1 || true)
