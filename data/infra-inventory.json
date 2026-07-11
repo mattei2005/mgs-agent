@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-11T17:04:53-04:00",
+    "updated_at": "2026-07-11T17:07:57-04:00",
     "generated_by": "infra-discovery.sh + Zeus runtime reconciliation"
   },
   "system_packages": [
@@ -1752,6 +1752,19 @@
     }
   ],
   "profile_skill_references": [
+    {
+      "id": "zeus-wp-plugin-ad-inserter-native-code-save-reference",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "skill": "wp-plugin-mass-operation",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/wp-plugin-mass-operation/references/wp-plugin-admin-and-rendered-frontend-validation.md",
+      "size_bytes": 4232,
+      "modified_at": "2026-07-11T17:07:16-04:00",
+      "sha256": "e6443f970f9a2ef32542f7d396344820ff5dd1cf7c1641195757d4c46186ffa2",
+      "purpose": "Durable procedure for safe Ad Inserter header/footer code changes behind Wordfence, including plugin-native :AI: base64 form encoding and canonical browser validation.",
+      "validation": "Procedure derived from a real production repair: raw POST 403/no change; plugin-native encoded POST 200; exact admin readback and canonical browser smoke passed.",
+      "updated_at": "2026-07-11T17:07:57-04:00"
+    },
     {
       "id": "zeus-log-monitor-honcho-flapping-debounce-reference",
       "agent": "zeus",

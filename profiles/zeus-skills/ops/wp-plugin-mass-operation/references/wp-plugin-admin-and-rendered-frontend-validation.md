@@ -43,3 +43,19 @@ For plugin/config reports, ACK only when both are true:
 - the deployed runtime proof passes on the live site.
 
 If source shows the intended fix but live deployed HTML still fails, respond with a canonical error and do not update inventory as successful deployment.
+
+## Ad Inserter header/footer code saves behind Wordfence
+
+Ad Inserter 2.x does not submit changed code textareas as raw HTML. Its admin JavaScript `encode_code()` converts the changed field to `:AI:` plus standard base64 before the regular form POST. Sending raw `<script>`/HTML in `code_block_h` can be blocked by Wordfence with HTTP 403 even when authentication and the WordPress nonce are valid.
+
+Safe procedure for a narrow header-code correction:
+
+1. Authenticate through the real hidden WordPress login and fetch `options-general.php?page=ad-inserter.php`.
+2. Back up the exact current `code_block_h` value with timestamp and SHA-256 before changing it.
+3. Serialize successful controls from `#ai-form`, preserving duplicate hidden+checked checkbox values and selected options.
+4. Omit unchanged `code_block_*` fields from the POST. Add only the changed field as `code_block_h=:AI:<base64(UTF-8 new code)>` plus one `ai_save` submit value. Send browser-like `Origin` and `Referer` headers.
+5. If an initial raw-code POST returns 403, verify by authenticated readback that no change occurred before retrying with the plugin-native encoding.
+6. Require an exact authenticated readback of `code_block_h` after HTTP 200.
+7. Validate the canonical public URL without a cache-busting query. Check rendered HTML plus a real browser after the intended timeout.
+
+For preloaders affected by LiteSpeed delayed JavaScript, prefer a CSS animation failsafe that reaches `visibility:hidden`, `opacity:0`, and `pointer-events:none` after a short fixed timeout. Remove body scroll locking unless it is strictly necessary. Validate `document.body` remains scrollable and that the fix does not depend on `DOMContentLoaded`, `DOMContentLiteSpeedLoaded`, click, touch, or scroll.
