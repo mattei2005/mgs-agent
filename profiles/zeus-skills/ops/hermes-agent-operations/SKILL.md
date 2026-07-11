@@ -129,7 +129,9 @@ Stop/re-plan signal: more than three overlapping reads of the same file, more th
 4. **Threshold as root-cause fix** — raising compression/context thresholds when the session is inflated by unnecessary tool output. Fix: reduce reads and improve trigger evidence first.
 5. **Config-only success** — reporting a YAML value without confirming resolved runtime behavior. Fix: run the resolver or real smoke test.
 6. **Restart in foreground** — restarting gateways from the active Discord execution. Fix: detached safe finalizer, Zeus last.
-7. **Reference sediment** — duplicating a new lesson in the router and several references. Fix: keep the durable procedure in one topical reference and only route to it here.
+7. **Post-validation drift** — editing runtime/config after validation or while a restart is already scheduled, allowing the finalizer to load an untested transitional state. Fix: wait for reviews, freeze target hashes, abort on drift, and regenerate the finalizer after any change.
+8. **`py_compile` as completeness proof** — syntax succeeds while a runtime path calls an undefined instance method. Fix: pair compilation with targeted behavior tests and a call-vs-definition preflight for critical helper families.
+9. **Reference sediment** — duplicating a new lesson in the router and several references. Fix: keep the durable procedure in one topical reference and only route to it here.
 
 ## Verification checklist
 

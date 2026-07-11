@@ -47,10 +47,8 @@ SNAPSHOT_FILE="${MGS_YOAST_SNAPSHOT_FILE:-${BASE_DIR}/data/yoast-health-eggbev-s
 OLD_SNAPSHOT_FILE="${MGS_YOAST_OLD_SNAPSHOT_FILE:-${BASE_DIR}/data/yoast-readability-eggbev-snapshots.json}"
 LOG_PREFIX="monitor-yoast-health-eggbev"
 
-# Carregar OP_SERVICE_ACCOUNT_TOKEN para as duas credenciais SSH e token local do bot Zeus.
+# Carregar somente o token local do bot Zeus. SSH usa chave dedicada em /root/.ssh.
 set -a
-# shellcheck source=/dev/null
-source "${BASE_DIR}/.env" 2>/dev/null || true
 # shellcheck source=/dev/null
 source "/root/.hermes/profiles/zeus/.env" 2>/dev/null || true
 set +a
@@ -85,7 +83,18 @@ post_discord_payload() {
 TMP_DIR="$(mktemp -d /tmp/yoast-health-eggbev.XXXXXX)"
 REMOTE_SCRIPT="/tmp/yoast_health_query_eggbev_$$.sh"
 KNOWN_HOSTS_FILE="/root/.ssh/known_hosts_mgs"
-SSH_OPTS="-o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=${KNOWN_HOSTS_FILE}"
+SSH_KEY="${MGS_YOAST_SSH_KEY:-/root/.ssh/mgs_yoast_monitor_ed25519}"
+[[ -f "$SSH_KEY" ]] || { log "ERRO CRÍTICO: chave SSH dedicada ausente: $SSH_KEY"; exit 1; }
+[[ "$(stat -c '%a' "$SSH_KEY")" == "600" ]] || { log "ERRO CRÍTICO: permissão da chave SSH deve ser 600"; exit 1; }
+SSH_TARGET_OPTS=(
+    -i "$SSH_KEY"
+    -o IdentitiesOnly=yes
+    -o BatchMode=yes
+    -o ConnectTimeout=20
+    -o StrictHostKeyChecking=yes
+    -o UserKnownHostsFile="$KNOWN_HOSTS_FILE"
+    -o "ProxyCommand=ssh -i $SSH_KEY -o IdentitiesOnly=yes -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$KNOWN_HOSTS_FILE -W %h:%p zeus@46.4.95.117"
+)
 mkdir -p /root/.ssh
 touch "$KNOWN_HOSTS_FILE"
 chmod 600 "$KNOWN_HOSTS_FILE"
