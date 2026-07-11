@@ -1,8 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T21:32:47-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-10T21:35:00-04:00",
+    "generated_by": "infra-discovery.sh",
+    "last_manual_update": "hera-discord-tool-progress-off"
   },
   "system_packages": [
     {
@@ -1314,6 +1315,22 @@
         "binding": "server localhost only",
         "third_party_proxy": false
       }
+    },
+    {
+      "id": "hera-discord-output-config",
+      "type": "profile_config",
+      "path": "/root/.hermes/profiles/hera/config.yaml",
+      "status": "active",
+      "owner": "hera",
+      "purpose": "Discord output discipline; suppress raw tool progress and gateway restart notifications.",
+      "settings": {
+        "display.platforms.discord.tool_progress": "off",
+        "discord.gateway_restart_notification": false
+      },
+      "size_bytes": 21182,
+      "sha256": "8a6e68f712629fc7e34a82a46f2c723efb35a211a69237ed824235dbca76fc29",
+      "validation": "YAML parse passed; tool_progress=off; gateway_restart_notification=false. Applied without restarting Hera during active Meta Library operation.",
+      "updated_at": "2026-07-10T21:35:00-04:00"
     }
   ],
   "profile_skill_references": [
