@@ -23,6 +23,8 @@ O runtime canônico é versionado e o perfil do navegador é persistente:
 
 Nunca recriar esse fluxo em `/tmp`. Nunca apagar, substituir, anexar ou versionar o diretório do perfil. Ele pode conter uma sessão autenticada do Rodolfo. Cookies podem expirar por decisão da Meta, mas não devem ser removidos pela operação MGS.
 
+Se Rodolfo marcar “confiar neste dispositivo” ou a sessão depender de 2FA, após encerrar o helper visual de forma limpa e liberar o lock, exigir snapshot seguro do perfil canônico **antes** de iniciar o coletor. Não abrir duas instâncias, não remover `SingletonLock` manualmente e não prosseguir até haver confirmação do snapshot. O coletor deve continuar pela mesma rota SOCKS residencial; nunca usar `direct-vps` nessa sessão.
+
 ## Fluxo obrigatório
 
 1. Rodar o wrapper com a URL recebida, preservando a rota de rede do último sucesso autenticado. Se o último `proxyMode` for `windows-home-socks`, verificar primeiro `127.0.0.1:1080` e usar `HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080`; nunca testar `direct-vps` antes:
