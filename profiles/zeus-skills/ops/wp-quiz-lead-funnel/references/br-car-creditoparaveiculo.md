@@ -119,6 +119,7 @@ Redirect split UI should be business-facing:
 - Reports should show 5 days/leads by default, with per-page selectors.
 - Tables should avoid narrow wrapping for gestor, SMS, phone.
 - After saving an edit, redirect back to the same edit screen (`admin.php?page=mgs-quiz-new&id=<id>&saved=1`), not to the quiz list, so the operator keeps context.
+- When the operator opens `admin.php?page=mgs-quiz-report` without explicit `from`/`to` query parameters, default both **Data inicial** and **Data final** to the previous calendar day in the WordPress site timezone. Explicitly submitted dates must remain unchanged.
 
 ## SMS Cost Reporting
 
@@ -137,7 +138,7 @@ Decision confirmed by Rodolfo for this site/report:
 
 ## Smart Bidding SMS Revenue Backfill
 
-Production state validated on 2026-07-10: `mgs-quiz-carro` v1.7.1, schema version `1.3.0`, with `wp_mgs_quiz_sms_revenue` populated for closed dates from 2026-05-22 through 2026-07-09.
+Production state validated on 2026-07-10: `mgs-quiz-carro` v1.7.2, schema version `1.3.0`, with `wp_mgs_quiz_sms_revenue` populated for closed dates from 2026-05-22 through 2026-07-09.
 
 Keep Smart Bidding revenue distinct from estimated SMS cost and lead rows:
 

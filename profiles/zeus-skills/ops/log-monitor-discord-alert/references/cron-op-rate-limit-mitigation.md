@@ -191,13 +191,14 @@ Artefatos canônicos:
 - State: `/root/mgs-agent/data/op-rate-limit-monitor.json`
 - Log: `/root/mgs-agent/logs/monitor-op-rate-limit.log`
 - Canal Discord: `1passw-rate-limit` (`1525311777208926398`)
-- Cron: `9,24,39,54 * * * *` com `flock -n`
+- Cron: `39 * * * *` com `flock -n`
 
 Política confirmada por Rodolfo em 2026-07-10:
 
+- Consultar **uma vez por hora**; 15 minutos foi considerado frequência desnecessária.
 - Primeiro alerta somente quando qualquer janela atingir **50%**.
 - Alerta crítico com mention em **90%**.
 - Alertar apenas em transição de estado; emitir resolução quando voltar abaixo de 50%.
-- A consulta `op service-account ratelimit` consome uma requisição simples. A cada 15 minutos, o monitor adiciona no máximo 96 requisições/dia, ou 0,192% do limite Business de 50.000.
+- A consulta `op service-account ratelimit` consome uma requisição simples. Uma vez por hora, o monitor adiciona no máximo 24 requisições/dia, ou 0,048% do limite Business de 50.000.
 - Enviar pelo token local do bot Zeus, não por webhook buscado no próprio 1Password; o alerta precisa continuar funcionando mesmo quando o 1Password estiver bloqueado.
 - O smoke test real deve validar `message_id` e `channel_id` retornados pela API Discord sem imprimir tokens.

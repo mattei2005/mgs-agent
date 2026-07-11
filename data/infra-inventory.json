@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T21:29:06-04:00",
+    "updated_at": "2026-07-10T21:32:38-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1134,28 +1134,28 @@
       "updated_at": "2026-07-10T05:32:59.005815+00:00"
     },
     {
-      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.1-20260710",
+      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.2-20260710",
       "agent": "zeus",
       "type": "wordpress_plugin",
       "site": "creditoparaveiculo.com",
       "host": "RunCloud Inc02",
       "path": "/home/runcloud2/webapps/creditoparaveiculo/wp-content/plugins/mgs-quiz-carro/",
       "plugin": "mgs-quiz-carro",
-      "version": "1.7.1",
+      "version": "1.7.2",
       "status": "active",
       "feature": "Quiz car BR + custo, receita líquida e ROI estimado SMS por período",
-      "package_sha256": "e2e08dc5c1108f8aaa1d51f518bd8d7e2e60bef3463d448f3111268ec1eb5b51",
-      "backup_path": "/home/runcloud2/backups/creditoparaveiculo/mgs-quiz-carro-1.7.0-20260711T012406Z",
+      "package_sha256": "d8eb20f40931a6d82a3ac98f73d0b90d9c7d51cb045c9f524ebb210413543ba8",
+      "backup_path": "/home/runcloud2/backups/creditoparaveiculo/mgs-quiz-carro-1.7.1-20260711T013155Z",
       "files": [
         {
           "path": "mgs-quiz-carro.php",
-          "sha256": "f5248be2b3229fd7066f5cb6e363db45b4d40754bcb625552db53bfd44e502ed",
+          "sha256": "1b1d58bd9abe125698ec2332f1f70660ac884b805bb73b6e891a9efa5fc1b422",
           "bytes": 2579
         },
         {
           "path": "includes/class-mgs-quiz-admin.php",
-          "sha256": "e4d20094020724758b0822ff7491402e5acb82b3669ca5711fa53aa6fabb536d",
-          "bytes": 84635
+          "sha256": "e5e35596577cf1361f95200d2c9bf54d266f1450256c27ecd61b998aa3764119",
+          "bytes": 84707
         },
         {
           "path": "includes/class-mgs-quiz-activator.php",
@@ -1163,8 +1163,8 @@
           "bytes": 5549
         }
       ],
-      "validation": "PHP lint 11/11; ROI 2026-07-09 = 65,73%; profit R$ 114,42; filtered scope = Não comparável; empty state = Sem base; revenue regression smoke; four quiz routes HTTP 200",
-      "updated_at": "2026-07-11T01:25:01.858329+00:00",
+      "validation": "PHP lint 11/11; default from/to both 2026-07-09 in WP timezone at validation time; explicit date/ROI/revenue regressions pass; four quiz routes HTTP 200",
+      "updated_at": "2026-07-11T01:32:47.392845+00:00",
       "db_version": "1.3.0",
       "sms_revenue_backfill": {
         "table": "wp_mgs_quiz_sms_revenue",
@@ -1189,6 +1189,12 @@
         "validated_cost_cents": 17408,
         "validated_profit_cents": 11442,
         "validated_roi_percent": "65.73"
+      },
+      "report_default_dates": {
+        "from": "previous day",
+        "to": "previous day",
+        "timezone": "WordPress site timezone",
+        "explicit_query_dates_preserved": true
       }
     },
     {
@@ -1875,7 +1881,7 @@
       "entry": "20 6 * * * flock -n /var/lock/dtr_sb_daily_match_audit.lock /root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh >> /root/mgs-agent/logs/dtr-sb-daily-match-audit-cron.log 2>&1"
     },
     {
-      "entry": "9,24,39,54 * * * * flock -n /var/lock/monitor_op_rate_limit.lock /root/mgs-agent/scripts/monitor-op-rate-limit.py >> /root/mgs-agent/logs/monitor-op-rate-limit.log 2>&1"
+      "entry": "39 * * * * flock -n /var/lock/monitor_op_rate_limit.lock /root/mgs-agent/scripts/monitor-op-rate-limit.py >> /root/mgs-agent/logs/monitor-op-rate-limit.log 2>&1"
     }
   ],
   "scripts": [
@@ -5053,8 +5059,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 1902,
-      "md5": "750ad849434bd7ca916f1b907dd027ad",
-      "modified_at": "2026-07-10T21:27:02-04:00"
+      "md5": "a6f2c52012f1ee0035a7064be8746cc8",
+      "modified_at": "2026-07-10T21:32:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -5089,8 +5095,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 316,
-      "md5": "b3af9f285b8c33472d2ed4b7371b5ca5",
-      "modified_at": "2026-07-10T21:15:01-04:00"
+      "md5": "f5daac8367f4a18e536613dbed78c182",
+      "modified_at": "2026-07-10T21:30:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -5131,8 +5137,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 25681,
-      "md5": "bcfcb3b2db1c04f745171889f58aee80",
-      "modified_at": "2026-07-10T21:25:01-04:00"
+      "md5": "179584df11d572289567be16fce6b5c9",
+      "modified_at": "2026-07-10T21:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -5149,14 +5155,14 @@
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 438,
-      "md5": "ebf16f85b7660cc2ca9114fed4079980",
-      "modified_at": "2026-07-10T21:15:54-04:00"
+      "md5": "663440c20c1f074304e1a8ec2f156566",
+      "modified_at": "2026-07-10T21:30:52-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 215574,
-      "md5": "67c4326a4fa2a8eef48b030def2f032a",
-      "modified_at": "2026-07-10T21:28:19-04:00"
+      "md5": "768cb738b008ecb239f5f2569dcb59eb",
+      "modified_at": "2026-07-10T21:29:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -5179,8 +5185,8 @@
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
       "size_bytes": 48987,
-      "md5": "0a9ba4f2f038506cddd8945090d3f824",
-      "modified_at": "2026-07-10T21:25:16-04:00"
+      "md5": "1053ee26a09a8c2b240a42bf134acb67",
+      "modified_at": "2026-07-10T21:30:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -5276,7 +5282,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "0697c0326c77d82982ec0de851584cdf",
-      "modified_at": "2026-07-10T21:26:02-04:00"
+      "modified_at": "2026-07-10T21:31:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -5305,8 +5311,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2173,
-      "md5": "4577791fd74d33783345bcefde5931a9",
-      "modified_at": "2026-07-10T21:25:02-04:00"
+      "md5": "0e3ac739e09740ac3666a0e43d6958d7",
+      "modified_at": "2026-07-10T21:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
@@ -5361,5 +5367,6 @@
     "path": "scripts/mu-plugins/yoast-rest-meta.php",
     "md5": "069270de4c07a9d15838ff45df65f539",
     "lines": 90
-  }
+  },
+  "updated_at": "2026-07-11T01:32:47.392863+00:00"
 }
