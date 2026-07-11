@@ -84,6 +84,47 @@ Pitfalls:
 - Para MGS, 85% é a recomendação segura: em 272K, compacta em ~231K e deixa ~40.8K de folga. 90% deixa ~27.2K; 95% só ~13.6K e é arriscado com tool outputs/system prompt.
 - Se uma sessão já aberta ainda mostrar o aviso, validar em nova sessão/novo init antes de concluir que a configuração falhou.
 
+## 6. Discord link previews / suppressão de embeds automáticos
+
+Use quando Rodolfo pedir que links enviados por Zeus, Atena, Ares, Hera ou futuros agentes não gerem cards/previews automáticos no Discord.
+
+### Diagnóstico canônico
+
+1. Consulte a documentação Hermes e o código vivo do adapter Discord; não presuma que exista uma chave de config.
+2. Diferencie:
+   - **preview automático de URL**: card gerado pelo Discord para um link comum;
+   - **embed explícito do bot**: UI usada por aprovações, clarify, model picker e outros fluxos interativos.
+3. No Hermes v0.18.2, o envio textual normal passa por `plugins/platforms/discord/adapter.py::DiscordAdapter.send()` e chama `channel.send(content=..., reference=...)`; não há configuração pública documentada para suprimir previews globalmente.
+
+### Solução recomendada
+
+Implementar uma opção comportamental em `config.yaml` e propagá-la pelo adapter para aplicar `suppress_embeds=True` nos envios de texto normal. Cobrir todos os caminhos equivalentes, não apenas `DiscordAdapter.send()`:
+
+- mensagens normais e retries sem `reference`;
+- continuações após overflow;
+- posts/follow-ups de fórum quando aplicável;
+- mensagem inicial e edições do streaming, preservando a flag;
+- mensagens de ferramentas/cross-platform delivery que reutilizem o adapter.
+
+Não aplicar a supressão indiscriminadamente aos fluxos que constroem `discord.Embed` explicitamente. Aprovações, clarify, prompts e model picker devem continuar renderizando suas interfaces.
+
+### Alternativa não recomendada
+
+Remover a permissão Discord **Embed Links** do role do bot também impede previews automáticos, mas pode quebrar embeds explícitos e fluxos interativos. Use apenas se Rodolfo aceitar essa perda funcional.
+
+### Contrato de implementação
+
+- Preferir uma chave pública como `discord.suppress_link_previews: true`, traduzida pelo hook YAML do plugin; não criar variável `.env` como superfície de configuração.
+- O default upstream deve preservar compatibilidade; o default MGS pode ser habilitado em Zeus/Atena/Ares/Hera.
+- Adicionar testes para URL comum sem preview e para embed explícito ainda presente.
+- Validar no Discord real com mensagem contendo URL e readback da flag/ausência do card.
+- Proteger o patch MGS contra updates e seguir restart seguro dos gateways, com Zeus por último.
+- Se a pergunta for apenas “tem como?”, explicar a estratégia e pedir autorização antes de mutar config/código/reiniciar.
+
+### Pitfall
+
+Não confundir “suprimir preview de link” com “proibir qualquer embed”. A primeira é uma preferência visual de mensagens textuais; a segunda pode remover controles operacionais importantes.
+
 ## 6. Reporting templates
 
 ### Resposta executiva para tooling web
