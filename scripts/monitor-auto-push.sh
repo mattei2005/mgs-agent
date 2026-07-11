@@ -30,27 +30,13 @@ WINDOW_MINUTES="${WINDOW_MINUTES:-60}"
 THRESHOLD="${THRESHOLD:-3}"
 ANTI_SPAM_HOURS="${ANTI_SPAM_HOURS:-2}"
 
-# ─── Credenciais via 1Password ────────────────────────────────────────────────
-# shellcheck source=/dev/null
-set -a
-# shellcheck source=/dev/null
-source "${BASE_DIR}/.env" 2>/dev/null || true
-set +a
+# ─── Transporte Discord direto pelo bot Zeus ────────────────────────────────
+DISCORD_CHANNEL_ID="1498132022634483894"
+DISCORD_POSTER="${BASE_DIR}/scripts/discord-bot-post.py"
 
-WEBHOOK_URL=""
-get_webhook() {
-    if [[ -n "$WEBHOOK_URL" ]]; then
-        return 0
-    fi
-    WEBHOOK_URL="$(op item get "Discord Webhook - Alerts Infra Channel" \
-        --vault 'MGS Conteúdo' \
-        --fields label=webhook_url \
-        --reveal 2>/dev/null || true)"
-    if [[ "$WEBHOOK_URL" != https://* ]]; then
-        echo "[$(date -Iseconds)] monitor-auto-push: FATAL — WEBHOOK_URL vazio/inválido (1Password lookup falhou?)" >&2
-        logger -t monitor-auto-push "FATAL: WEBHOOK_URL empty — check 1Password item name"
-        return 2
-    fi
+post_discord_payload() {
+    local payload="$1"
+    printf '%s' "$payload" | "$DISCORD_POSTER" --channel-id "$DISCORD_CHANNEL_ID"
 }
 
 
@@ -254,16 +240,12 @@ if (( TOTAL_NEW_FAILURES > 0 )); then
     if [[ "$SEND_ALERT" == "true" ]]; then
         ALERT_TS="$NOW_ISO"
         log "Enviando alerta Discord — ${NEW_CONSECUTIVE} falhas consecutivas"
-        get_webhook || exit 2
         PAYLOAD=$(jq -n \
             --arg n "$NEW_CONSECUTIVE" \
             --arg detail "$LAST_DETAIL" \
             --arg ok_ts "${LAST_OK_TS:-nunca}" \
             '{content:"<@344196393512075265> alerta de auto-push", embeds:[{title:"Auto-push falhando", color:15158332, fields:[{name:"Falhas consecutivas", value:$n, inline:true}, {name:"Último push OK", value:$ok_ts, inline:true}, {name:"Último erro", value:("```text\n"+$detail+"\n```"), inline:false}, {name:"Ação", value:"Investigar `/root/mgs-agent/logs/auto-push.log`.", inline:false}]}]}')
-        curl -s -X POST "$WEBHOOK_URL" \
-            -H "Content-Type: application/json" \
-            -d "$PAYLOAD" \
-            --max-time 10 >/dev/null
+        post_discord_payload "$PAYLOAD" >/dev/null || exit 2
     else
         ALERT_TS="$LAST_ALERT"
     fi
@@ -283,16 +265,12 @@ else
         # Enviar "RESOLVIDO" se havia alerta ativo
         if [[ "$ALERT_WAS_ACTIVE" == "true" ]]; then
             log "Enviando alerta RESOLVIDO para Discord"
-            get_webhook || exit 2
             PAYLOAD=$(jq -n \
                 --arg n "$CONSECUTIVE" \
                 --arg commit "${LAST_OK_COMMIT:-desconhecido}" \
                 --arg ts "${LAST_OK_TS:-desconhecido}" \
                 '{content:"", embeds:[{title:"Auto-push restabelecido", color:3066993, fields:[{name:"Falhas anteriores", value:$n, inline:true}, {name:"Último commit OK", value:("`"+$commit+"`"), inline:true}, {name:"Horário", value:$ts, inline:false}]}]}')
-            curl -s -X POST "$WEBHOOK_URL" \
-                -H "Content-Type: application/json" \
-                -d "$PAYLOAD" \
-                --max-time 10 >/dev/null
+            post_discord_payload "$PAYLOAD" >/dev/null || exit 2
         fi
     else
         log "OK: zero falhas detectadas na janela de ${WINDOW_MINUTES}min"

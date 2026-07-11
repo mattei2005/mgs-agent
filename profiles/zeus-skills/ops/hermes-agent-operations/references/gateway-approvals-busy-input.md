@@ -66,4 +66,18 @@ display:
   busy_input_mode: steer
 ```
 
-Mudança de `config.yaml` é infra/config: só aplicar quando solicitada, validar o valor resolvido e seguir restart seguro se o gateway não recarregar a configuração automaticamente. Não prometer consolidação quando a mensagem chega depois do final; enquanto o turno ainda estiver ativo, todas as modalidades devem entrar no mesmo turno.
+### Pitfall: sessão ocupada antes do `AIAgent` existir
+
+Ver `Queued for the next turn` não prova que o profile voltou para `queue`. Compare sempre config vivo, valor resolvido e estado de `_running_agents[session_key]`. O gateway pode já mostrar “digitando” enquanto a sessão ainda contém `_AGENT_PENDING_SENTINEL`.
+
+No runtime MGS corrigido, follow-up recebido nessa janela deve:
+
+1. ser normalizado por `_prepare_busy_steer_payload`;
+2. entrar em `_pending_startup_steers`, sem FIFO de próximo turno;
+3. ser incorporado por `_merge_startup_steer_into_message` antes da primeira chamada ao modelo;
+4. preservar o `MessageEvent` para fallback somente se o agente rejeitar o resíduo da corrida de promoção;
+5. produzir ack de `Steered`, nunca `Queued`, quando o buffer foi aceito.
+
+Guard obrigatório após updates: confirmar `_stash_startup_steer`, `_merge_startup_steer_into_message` e `test_steer_mode_buffers_current_turn_when_agent_pending`. Para reproduções reais, usar o Discord como fonte direta e comparar os timestamps do pedido inicial e do complemento; sessão Hermes é contexto secundário.
+
+Mudança de `config.yaml` ou runtime é infra: só aplicar quando solicitada, validar valor resolvido, patch canônico, testes e restart seguro. Não prometer consolidação quando a mensagem chega depois do final; enquanto o turno ainda estiver ativo, todas as modalidades devem entrar no mesmo turno.
