@@ -56,6 +56,15 @@ def run(cmd):
 
 def threshold_seconds(schedule: str) -> int:
     minute, hour, dom, mon, dow = schedule.split()
+    # Jobs restritos por dia da semana podem ficar vários dias sem executar.
+    # O fallback diário de 30h gerava falso STALE (ex.: terça/sexta). Uma
+    # janela semanal completa também cobre a primeira execução após mudança
+    # de agenda feita depois do horário daquele dia.
+    if dow != '*':
+        return 8 * 24 * 3600
+    # Mesma proteção para jobs mensais/restritos por dia do mês.
+    if dom != '*':
+        return 32 * 24 * 3600
     if minute.startswith('*/5'):
         return 20 * 60
     if minute.startswith('*/15'):
