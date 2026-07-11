@@ -37,14 +37,54 @@ log() {
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "$LOG_FILE"
 }
 
-log "=== Watcher started ==="
+log "=== Watcher started — batch_target=${BATCH_TARGET} max_wait=${BATCH_MAX_WAIT_SECONDS}s quiet=${BATCH_QUIET_SECONDS}s ==="
 
-while inotifywait -r -e modify,create,delete,move \
-  --exclude '\.git/|\.bak|\.swp|\.tmp|sessions/|/logs/|node_modules' \
-  "$REPO_DIR" 2>/dev/null; do
+wait_for_change() {
+  local timeout_seconds="${1:-0}"
+  local args=(-q -r -e modify,create,delete,move --exclude '\.git/|\.bak|\.swp|\.tmp|sessions/|/logs/|node_modules')
+  if (( timeout_seconds > 0 )); then
+    inotifywait "${args[@]}" -t "$timeout_seconds" "$REPO_DIR" >/dev/null 2>&1
+  else
+    inotifywait "${args[@]}" "$REPO_DIR" >/dev/null 2>&1
+  fi
+}
 
-  log "Mudança detectada"
-  sleep "$DEBOUNCE_SECONDS"
+while true; do
+  # Primeiro lote: aguarda indefinidamente por uma mudança real.
+  if ! wait_for_change 0; then
+    log "WARN: inotifywait inicial falhou; tentando novamente em 5s"
+    sleep 5
+    continue
+  fi
+
+  BATCH_COUNT=1
+  BATCH_STARTED_AT=$(date +%s)
+  FLUSH_REASON="max_wait"
+  log "Lote 1/${BATCH_TARGET} detectado; janela máxima ${BATCH_MAX_WAIT_SECONDS}s iniciada"
+  sleep "$BATCH_QUIET_SECONDS"
+
+  # Agrupa novos lotes até atingir o alvo ou expirar a janela máxima.
+  while (( BATCH_COUNT < BATCH_TARGET )); do
+    NOW_TS=$(date +%s)
+    ELAPSED=$((NOW_TS - BATCH_STARTED_AT))
+    REMAINING=$((BATCH_MAX_WAIT_SECONDS - ELAPSED))
+    if (( REMAINING <= 0 )); then
+      break
+    fi
+
+    if wait_for_change "$REMAINING"; then
+      BATCH_COUNT=$((BATCH_COUNT + 1))
+      log "Lote ${BATCH_COUNT}/${BATCH_TARGET} detectado"
+      sleep "$BATCH_QUIET_SECONDS"
+    else
+      break
+    fi
+  done
+
+  if (( BATCH_COUNT >= BATCH_TARGET )); then
+    FLUSH_REASON="batch_target"
+  fi
+  log "Flush do auto-commit: reason=${FLUSH_REASON} batches=${BATCH_COUNT}"
 
   CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
   if [ "$CURRENT_BRANCH" != "main" ]; then
