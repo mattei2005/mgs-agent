@@ -41,14 +41,20 @@ chmod 644 "$SMOKE"
 mv "$LIVE" "$BACKUP/mgs-quiz-carro"
 mv "$STAGE" "$LIVE"
 SWAPPED=1
+echo 'STEP_SWAP_OK'
 sudo -u runcloud2 wp --path="$WP" plugin is-active mgs-quiz-carro --skip-plugins --skip-themes >/dev/null
+echo 'STEP_ACTIVE_OK'
 NEW_VERSION="$(sudo -u runcloud2 wp --path="$WP" plugin get mgs-quiz-carro --field=version --skip-plugins --skip-themes 2>/dev/null)"
 [ "$NEW_VERSION" = "1.7.1" ]
+echo 'STEP_VERSION_OK'
 DB_VERSION="$(sudo -u runcloud2 wp --path="$WP" option get mgs_quiz_db_version --skip-plugins --skip-themes 2>/dev/null)"
 [ "$DB_VERSION" = "1.3.0" ]
+echo 'STEP_DB_OK'
 SMOKE_RESULT="$(sudo -u runcloud2 wp --path="$WP" eval-file "$SMOKE" --skip-themes 2>/dev/null)"
+printf 'SMOKE_RAW=%s\n' "$SMOKE_RESULT"
 printf '%s' "$SMOKE_RESULT" | grep -q 'REVENUE_REPORT_SMOKE_OK'
 printf '%s' "$SMOKE_RESULT" | grep -q '"roi_2026_07_09":"65,73%"'
+echo 'STEP_SMOKE_OK'
 for path in quiz-car-parcelas/ quiz-car-valor/ quiz-car-gestor/ quiz-car-quiz/; do
   code="$(curl -sS -o /dev/null -w '%{http_code}' "https://creditoparaveiculo.com/$path")"
   [ "$code" = "200" ]
