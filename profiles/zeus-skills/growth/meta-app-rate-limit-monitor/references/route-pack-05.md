@@ -5,7 +5,7 @@ Active Hermes cron job:
 ```text
 Job name       meta-app-roles-watch
 Job ID         0cc7ed1e587e
-Schedule       0 8,13,18,22 * * *  (4 vezes por dia, horário ET)
+Schedule       4 8-23 * * *  (uma vez por hora, das 08:04 às 23:04 ET; minuto isolado após auditoria de colisões)
 Mode           no_agent script, deliver=local (silent on OK)
 Script         /root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh
 Lock           /var/lock/meta-app-roles-watch.lock (skip if previous run still active)
@@ -22,11 +22,11 @@ Active B011 Hermes cron job:
 ```text
 Job name       b011-dtr-link-watch
 Job ID         498fb0d95e10
-Schedule       15 8,13,18,22 * * *  (4 vezes por dia, horário ET; 15 minutos após meta-app-roles-watch para evitar rajada simultânea)
+Schedule       24 8-23 * * *  (uma vez por hora, das 08:24 às 23:24 ET; 20 minutos após meta-app-roles-watch e sem colisão de início no inventário atual)
 Mode           no_agent script, deliver=local (silent on OK)
 Script         /root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh
 Lock           /var/lock/b011-dtr-link-watch.lock (skip if previous run still active)
-Runtime        Last measured ~5m20s for 25 targets; a defasagem de 15 minutos mantém os dois monitores pesados separados.
+Runtime        Last measured ~5m20s for 25 targets; manter o stagger de 20 minutos e o `flock` não bloqueante.
 ```
 
 Important UX correction: if Rodolfo explicitly says **"manda um alerta no canal Bxxx"** or **"ativa o cron e faz ele mandar um alerta"** for B001–B010/B005-2, use `MGS_META_APP_ROLES_FORCE_LIVE_ALERT=1` with `MGS_META_APP_ROLE_ITEMS='BOT Bxxx Token'`. This forces the same polished 3-message app-roles layout with the current users list: (1) native embed `Meta APP - Bxxx`, (2) `👥 USUÁRIOS ATUAIS` code block, (3) removidos/adicionados/acumulados code block. It uses live Meta Graph + live sheet reconciliation and must not display cached state deltas: forced live alerts show `REMOVIDOS AGORA`/`ADICIONADOS AGORA` as empty unless the same fresh run proves otherwise, and `REMOVIDOS ACUMULADOS` must come from the live sheet X/reconciliation layer, not `state.cumulative_removed`. It does not enable snapshot mode, does not forge a delta, and does not corrupt state. Do **not** hand-build a generic embed.
