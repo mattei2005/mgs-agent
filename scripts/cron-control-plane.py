@@ -47,6 +47,7 @@ DESCRIPTIONS = {
     'monitor-webshare-status.sh': 'Monitora status.webshare.io e alerta infra quando detectar manutenção/incidente relevante.',
     'monitor-discord-thread-archive-warnings.py': 'Monitora threads Discord ativas com auto-archive de 1 semana em Zeus/Atena/Ares/Hera e posta keepalive quando faltam até 24h para ficarem ocultas.',
     'monitor-vps-health.py': 'Monitora saúde bruta da VPS: disco, inodes, memória disponível, load, reboot recente, tamanho de backups e services MGS ativos.',
+    'monitor-op-rate-limit.py': 'Monitora limites horário e diário do 1Password Business e alerta o canal dedicado em 50%/90%.',
 }
 
 RISK = {
@@ -74,6 +75,7 @@ RISK = {
     'monitor-webshare-status.sh': 'baixo: consulta status público + alerta Discord se anomalia',
     'monitor-discord-thread-archive-warnings.py': 'baixo: consulta Discord + keepalive automático antes de auto-archive',
     'monitor-vps-health.py': 'baixo: read-only + alerta Discord em anomalia da VPS',
+    'monitor-op-rate-limit.py': 'baixo: consulta read-only + alerta Discord por transição',
 }
 
 OWNER = {
@@ -84,6 +86,7 @@ OWNER = {
     'track-article-cost.sh': 'Atena/Conteúdo',
     'pendencia-render-md.sh': 'Zeus/Ops',
     'chat-log.sh': 'Zeus/Ops',
+    'monitor-op-rate-limit.py': 'Zeus/Infra',
 }
 
 
