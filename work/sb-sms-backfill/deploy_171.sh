@@ -50,7 +50,7 @@ echo 'STEP_VERSION_OK'
 DB_VERSION="$(sudo -u runcloud2 wp --path="$WP" option get mgs_quiz_db_version --skip-plugins --skip-themes 2>/dev/null)"
 [ "$DB_VERSION" = "1.3.0" ]
 echo 'STEP_DB_OK'
-SMOKE_RESULT="$(sudo -u runcloud2 wp --path="$WP" eval-file "$SMOKE" --skip-themes 2>/dev/null)"
+SMOKE_RESULT="$(sudo -u runcloud2 wp --path="$WP" eval-file "$SMOKE" --skip-themes)"
 printf 'SMOKE_RAW=%s\n' "$SMOKE_RESULT"
 printf '%s' "$SMOKE_RESULT" | grep -q 'REVENUE_REPORT_SMOKE_OK'
 printf '%s' "$SMOKE_RESULT" | grep -q '"roi_2026_07_09":"65,73%"'
