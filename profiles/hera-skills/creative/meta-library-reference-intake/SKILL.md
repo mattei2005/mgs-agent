@@ -71,7 +71,7 @@ Depois de autenticar pela rota residencial, não testar a rota `direct-vps` com 
 
 ### Continuidade obrigatória da rota residencial
 
-Antes de reutilizar uma sessão autenticada, leia o `proxyMode` do último `report.json` bem-sucedido. Se ele for `windows-home-socks`, confirme que `127.0.0.1:1080` continua aberto e execute o coletor com `HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080`. **Não rode primeiro em `direct-vps`**: a troca de IP/rota pode fazer a Meta remover `c_user`/`xs` do perfil persistente e invalidar a sessão recém-salva. Se o SOCKS estiver fechado, pare antes de abrir o Chromium e peça somente a reabertura do túnel residencial; depois valide os nomes `c_user`/`xs` sem expor valores e retome a coleta pela mesma rota.
+Antes de reutilizar uma sessão autenticada, leia o `proxyMode` do último `report.json` bem-sucedido. Se ele for `windows-home-socks`, confirme que `127.0.0.1:1080` continua aberto e execute o coletor com `HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080`. **Não rode primeiro em `direct-vps`**: a troca de IP/rota reativa o challenge e, no incidente observado, foi seguida pela ausência de `c_user`/`xs`; não atribuir causalidade sem evidência adicional. Se o SOCKS estiver fechado, pare antes de abrir o Chromium e peça somente a reabertura do túnel residencial; depois valide os nomes `c_user`/`xs` sem expor valores e retome a coleta pela mesma rota.
 
 Para evidência, comando de retomada e distinção entre perfil reutilizado e sessão autenticada, consulte `references/residential-route-session-continuity.md`.
 
