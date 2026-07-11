@@ -88,7 +88,9 @@ skip_parts = {'.git', 'node_modules'}
 now = time.time()
 cutoff = now - retention_days * 86400
 
-backup_name_re = re.compile(r'(\.bak|\.backup|\.old|\.orig|~)', re.IGNORECASE)
+backup_name_re = re.compile(
+    r'(?i)(?:\.bak(?:[-_.].*)?|\.backup(?:[-_.].*)?|\.old(?:[-_.].*)?|\.orig(?:[-_.].*)?|~)$'
+)
 
 # Normaliza nomes comuns de backup para família estável:
 #   SOUL.md.bak-20260602-195530                 -> SOUL.md
@@ -241,7 +243,7 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
         [[ -z "$f" ]] && continue
         log "  keep latest $f"
     done
-    DIRS_CANDIDATE=$(find "$BACKUPS_ROOT" -type d -empty -mtime +"${RETENTION_DAYS}" -print 2>/dev/null | wc -l)
+    DIRS_CANDIDATE=$(find "$BACKUPS_ROOT" -mindepth 1 -type d -empty -mtime +"${RETENTION_DAYS}" -print 2>/dev/null | wc -l)
     log "DRY-RUN: ${DIRS_CANDIDATE} diretórios vazios seriam removidos em /root/backups"
     log "=== END DRY-RUN — candidatos ${TOTAL_COUNT} arquivos / ${TOTAL_MB_ALL} MB ==="
     exit 0
@@ -249,18 +251,25 @@ fi
 
 log "Encontrados ${CANDIDATE_COUNT} backup(s) pequenos + Hermes update tarballs; deletando ${TOTAL_COUNT} antigo(s) (${TOTAL_MB_ALL} MB); preservando ${KEEP_COUNT} pequenos + ${HERMES_PRESERVED_COUNT} Hermes update recentes."
 
-# ─── Deletar ────────────────────────────────────────────────────────────────
-awk -F '\t' '{print $4}' "$DELETE_FILE" "$HERMES_DELETE_FILE" | while IFS= read -r f; do
+# ─── Deletar e verificar cada remoção ────────────────────────────────────────
+DELETE_FAILURES=0
+while IFS=$'\t' read -r _mtime _size _family f; do
     [[ -z "$f" ]] && continue
-    if rm -f -- "$f" 2>>"$LOG"; then
+    if rm -f -- "$f" 2>>"$LOG" && [[ ! -e "$f" ]]; then
         log "  rm $f"
     else
         log "  FAIL $f"
+        DELETE_FAILURES=$((DELETE_FAILURES + 1))
     fi
-done
+done < <(awk -F '\t' 'NF >= 4 {print}' "$DELETE_FILE" "$HERMES_DELETE_FILE")
+
+if (( DELETE_FAILURES > 0 )); then
+    log "ERRO: ${DELETE_FAILURES} arquivo(s) permaneceram após tentativa de remoção"
+    exit 1
+fi
 
 # ─── Limpar diretórios vazios deixados pra trás (snapshots antigos) ─────────
-DIRS_REMOVED=$({ find "$BACKUPS_ROOT" -type d -empty -mtime +"${RETENTION_DAYS}" -delete -print 2>/dev/null; find "$HERMES_UPDATE_ROOT" -mindepth 1 -type d -empty -mtime +"${HERMES_UPDATE_BACKUP_RETENTION_DAYS}" -delete -print 2>/dev/null; } | wc -l)
+DIRS_REMOVED=$({ find "$BACKUPS_ROOT" -mindepth 1 -type d -empty -mtime +"${RETENTION_DAYS}" -delete -print 2>/dev/null; find "$HERMES_UPDATE_ROOT" -mindepth 1 -type d -empty -mtime +"${HERMES_UPDATE_BACKUP_RETENTION_DAYS}" -delete -print 2>/dev/null; } | wc -l)
 if [[ "$DIRS_REMOVED" -gt 0 ]]; then
     log "Removidos ${DIRS_REMOVED} diretórios vazios"
 fi

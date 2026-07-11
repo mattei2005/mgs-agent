@@ -38,11 +38,13 @@ Canal: `1498132022634483894`, bot Zeus direto, sem 1Password.
 
 Proteções:
 
-- somente nomes com marcadores explícitos `.bak`, `.backup`, `.old`, `.orig` ou `~`;
+- somente nomes terminados por marcadores explícitos `.bak*`, `.backup*`, `.old*`, `.orig*` ou `~`; a regex é ancorada no fim para não tratar nomes como `bakery.txt` como backup;
 - canônicos sem marcador nunca entram na lista;
 - por diretório + família normalizada, preserva sempre o arquivo mais recente, mesmo acima da retenção;
 - família com um único backup nunca é deletada;
 - tarballs Hermes preservam os dois mais recentes globalmente;
+- diretórios raiz de backup usam `-mindepth 1` e nunca podem ser removidos pelo cleanup de diretórios vazios;
+- cada `rm` é validado por existência; qualquer arquivo remanescente gera falha explícita;
 - `--dry-run` nunca remove nem notifica.
 
 Teste destrutivo deve usar apenas fixture temporária via `MGS_HOUSEKEEPING_SCAN_ROOTS`, `MGS_HOUSEKEEPING_BACKUPS_ROOT`, `MGS_HOUSEKEEPING_HERMES_UPDATE_ROOT` e `MGS_HOUSEKEEPING_LOG`. Validar canônico preservado, último backup pequeno preservado, antigos removidos, dois tarballs mais recentes preservados e mais antigo removido.
