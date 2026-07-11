@@ -32,6 +32,16 @@ Cron `*/5 * * * *` → `/root/mgs-agent/scripts/monitor-service-restarts.sh`:
 
 Anti-spam: não reenviar mesmo nível por 12h por service.
 
+### Pitfall — reboot completo não é restart espontâneo nem Monarx
+
+Quando todos os gateways e serviços auxiliares aparecem com o mesmo `ExecMainStartTimestamp`, validar primeiro `uptime -s`, boot ID e journal do boot anterior. Isso normalmente indica reboot completo da VPS, não cinco falhas independentes.
+
+Nunca atribuir a causa ao Monarx apenas porque `monarx-agent.service` também parou/subiu na mesma janela. Confirmar o horário real de `/etc/cron.d/monarx-update`; fora da terça-feira 04:20 EDT, a classificação “Monarx weekly package update” é incorreta. Diferenciar:
+
+- reboot limpo da VPS: sequência ordenada de `reboot.target`/shutdown + novo boot;
+- restart autorizado MGS: evidência em `events-audit.jsonl` e finalizer;
+- crash real: `NRestarts` crescente, exit inesperado e ausência de shutdown global.
+
 ### Schema do state file
 
 ```json
