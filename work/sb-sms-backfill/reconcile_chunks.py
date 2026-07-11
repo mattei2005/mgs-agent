@@ -20,7 +20,11 @@ async def main():
    rows=await resp.json();all_rows.extend(rows);parts.append({'range':start+'..'+end,'rows':len(rows),'net':str(sum((Decimal(str(r.get('NET_REVENUE') or 0)) for r in rows),Decimal('0')))})
  closed=json.load(open('/root/mgs-agent/work/sb-sms-backfill/historical-creditoparaveiculo-closed-raw.json'))
  ids=lambda xs:sorted(str(x.get('PK_JBF_PERFORMANCE_PER_SMS')) for x in xs)
- if ids(all_rows)!=ids(closed):raise RuntimeError('Chunked IDs differ from full-range IDs')
+ left=ids(all_rows);right=ids(closed)
+ if left!=right:
+  only_chunk=sorted(set(left)-set(right));only_full=sorted(set(right)-set(left))
+  print(json.dumps({'status':'MISMATCH','parts':parts,'chunk_rows':len(all_rows),'full_rows':len(closed),'only_chunk_count':len(only_chunk),'only_full_count':len(only_full),'only_chunk_ids':only_chunk[:10],'only_full_ids':only_full[:10]},ensure_ascii=False))
+  raise RuntimeError('Chunked IDs differ from full-range IDs')
  net=sum((Decimal(str(r.get('NET_REVENUE') or 0)) for r in all_rows),Decimal('0'))
  print(json.dumps({'status':'CHUNK_RECONCILIATION_OK','parts':parts,'rows':len(all_rows),'net_revenue':str(net)},ensure_ascii=False))
  await b.close()
