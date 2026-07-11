@@ -33,6 +33,8 @@ For auditing and safely splitting monolithic agent skills while preserving conte
 - Separate capability, configuration, credential presence, and real smoke-test success.
 - User-requested state changes follow `AGENT.md`; Critical Subset still requires double-confirmation.
 - Never restart Zeus or another MGS gateway from an active foreground tool chain. Use the safe detached finalizer and Zeus last.
+- A detached restart freezes its validated runtime/config targets at preparation time. Do not schedule while independent review is pending; do not edit targets after scheduling. Late findings require cancelling/pausing the pending finalizer, revalidating, snapshotting again, and creating a new finalizer.
+- The restart finalizer must abort before touching any gateway when target hashes drift, runtime compilation fails, or a called critical startup helper has no class definition.
 - Never claim success without a real validation check.
 - Profile changes must account for live config plus the versioned MGS mirror when one exists.
 - Any script/config/data/skill/SOUL/AGENT infrastructure change requires inventory/audit handling and REPORT-INFRA according to MGS policy before completion.

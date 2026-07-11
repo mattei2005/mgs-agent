@@ -249,3 +249,6 @@ Para cada mudança futura, validar `git apply --reverse --check` no checkout viv
 - Transcrever áudio comum apenas no caminho queued, mudando semântica por timing.
 - Atualizar só live ou só mirror.
 - Declarar concluído por YAML/test unitário sem smoke mid-turn real.
+- Agendar restart enquanto revisão independente ainda está pendente.
+- Editar runtime/config depois de preparar ou agendar o finalizer. Se surgir achado tardio, cancelar/pausar a execução destacada, corrigir, revalidar e gerar novo snapshot/finalizer.
+- Confiar apenas em `py_compile`: ele não detecta chamada a método de instância inexistente. O preflight deve comparar calls/defs dos helpers críticos e o finalizer deve abortar se o hash validado mudar antes do restart.

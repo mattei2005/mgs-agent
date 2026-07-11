@@ -72,12 +72,21 @@ Ver `Queued for the next turn` não prova que o profile voltou para `queue`. Com
 
 No runtime MGS corrigido, follow-up recebido nessa janela deve:
 
-1. ser normalizado por `_prepare_busy_steer_payload`;
-2. entrar em `_pending_startup_steers`, sem FIFO de próximo turno;
-3. ser incorporado por `_merge_startup_steer_into_message` antes da primeira chamada ao modelo;
-4. preservar o `MessageEvent` para fallback somente se o agente rejeitar o resíduo da corrida de promoção;
-5. produzir ack de `Steered`, nunca `Queued`, quando o buffer foi aceito.
+1. reservar uma sequência FIFO **antes** de STT/enrichment assíncrono;
+2. incrementar uma contagem de preprocessamentos em voo e preservar o `MessageEvent` completo;
+3. bloquear a promoção do sentinel apenas na worker thread — nunca no event loop — até todas as reservas terminarem;
+4. drenar o buffer em ordem de chegada e promover o agente de forma atômica sob a mesma `Condition`/lock;
+5. aplicar `_merge_startup_steer_into_message` antes da primeira chamada ao modelo e alinhar qualquer `persist_user_message` override com a mensagem realmente mesclada;
+6. reler geração e identidade do agente depois de qualquer `await`; payload atrasado nunca pode ser enviado a agente encerrado ou substituído;
+7. limpar buffer, sequence, inflight e janela aberta em stop, erro e finalização, acordando waiters;
+8. produzir ack de `Steered`, nunca `Queued`, quando a reserva foi aceita.
 
-Guard obrigatório após updates: confirmar `_stash_startup_steer`, `_merge_startup_steer_into_message` e `test_steer_mode_buffers_current_turn_when_agent_pending`. Para reproduções reais, usar o Discord como fonte direta e comparar os timestamps do pedido inicial e do complemento; sessão Hermes é contexto secundário.
+Guard obrigatório após updates: confirmar `_reserve_startup_steer`, `_complete_startup_steer`, `_promote_agent_and_consume_startup_steers`, `_try_busy_steer_event`, `_merge_startup_steer_into_message`, `test_startup_barrier_waits_and_preserves_arrival_order` e `test_async_prepare_does_not_steer_into_replaced_agent`. Para reproduções reais, usar o Discord como fonte direta e comparar os timestamps do pedido inicial e do complemento; sessão Hermes é contexto secundário.
+
+### Pitfall: editar depois de validar/agendar restart
+
+Nunca agendar restart enquanto revisão independente ainda estiver pendente. Depois de preparar ou agendar o finalizer, runtime e configs-alvo ficam congelados. Se surgir achado tardio: cancelar/pausar a execução destacada, corrigir, rodar novamente lint/compilação/testes/guard, gerar novo snapshot e só então agendar outro finalizer.
+
+`py_compile` não detecta chamada a método de instância inexistente. O preflight de restart precisa comparar helpers críticos chamados versus definidos. O finalizer seguro também deve registrar SHA-256 dos targets validados e abortar antes de reiniciar qualquer gateway se houver drift, falha de compilação ou helper startup sem definição.
 
 Mudança de `config.yaml` ou runtime é infra: só aplicar quando solicitada, validar valor resolvido, patch canônico, testes e restart seguro. Não prometer consolidação quando a mensagem chega depois do final; enquanto o turno ainda estiver ativo, todas as modalidades devem entrar no mesmo turno.

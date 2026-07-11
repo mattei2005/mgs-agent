@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-11T01:28:48-04:00",
+    "updated_at": "2026-07-11T01:34:32-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -644,8 +644,8 @@
       "schedule": "2026-07-11T00:37:44-04:00",
       "deliver": "origin",
       "purpose": "Validate 4/4 gateway rollout, resolved steer config, runtime invariants, patch reversibility, finalizer completion, inventory/audit readback and direct REPORT-INFRA after the safe restart.",
-      "status": "scheduled",
-      "updated_at": "2026-07-11T00:34:07-04:00"
+      "status": "paused_obsolete_after_incident",
+      "updated_at": "2026-07-11T01:34:32-04:00"
     },
     {
       "id": "mgs-busy-input-steer-validation-6a16e41afa9a",
