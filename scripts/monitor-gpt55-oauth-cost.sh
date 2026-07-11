@@ -25,6 +25,12 @@ RESPONSE_RE = re.compile(r"response ready:.*\bapi_calls=(\d+)")
 TIMESTAMP_FORMAT = "%Y-%m-%d %H:%M:%S,%f"
 EXPECTED_MODEL = "gpt-5.6-sol"
 EXPECTED_PROVIDER = "openai-codex"
+# Simulação interna preservada do monitor anterior. Os logs não expõem tokens,
+# então estes valores são premissas explícitas, não telemetria real.
+ESTIMATED_INPUT_TOKENS_PER_CALL = 2_000
+ESTIMATED_OUTPUT_TOKENS_PER_CALL = 500
+HYPOTHETICAL_INPUT_USD_PER_MILLION = 7.00
+HYPOTHETICAL_OUTPUT_USD_PER_MILLION = 21.00
 
 
 def load_env_file(path: Path, env: dict[str, str]) -> None:
@@ -103,6 +109,13 @@ def build_report() -> tuple[dict[str, Any], dict[str, Any]]:
     total_calls = sum(row["api_calls"] for row in rows)
     total_parse_errors = sum(row["parse_errors"] for row in rows)
     average = round(total_calls / total_responses, 2) if total_responses else 0.0
+    estimated_input_tokens = total_calls * ESTIMATED_INPUT_TOKENS_PER_CALL
+    estimated_output_tokens = total_calls * ESTIMATED_OUTPUT_TOKENS_PER_CALL
+    hypothetical_usd = round(
+        estimated_input_tokens / 1_000_000 * HYPOTHETICAL_INPUT_USD_PER_MILLION
+        + estimated_output_tokens / 1_000_000 * HYPOTHETICAL_OUTPUT_USD_PER_MILLION,
+        2,
+    )
     config_ok = all(
         row["model"] == EXPECTED_MODEL and row["provider"] == EXPECTED_PROVIDER
         for row in rows
@@ -127,17 +140,31 @@ def build_report() -> tuple[dict[str, Any], dict[str, Any]]:
             "fields": [
                 {"name": "Status", "value": status, "inline": False},
                 {"name": "Custo incremental real", "value": "US$ 0,00 — openai-codex OAuth", "inline": True},
+                {
+                    "name": "Custo hipotético por tokens",
+                    "value": f"US$ {hypothetical_usd:,.2f} — se fosse pay-per-token".replace(",", "X").replace(".", ",").replace("X", "."),
+                    "inline": True,
+                },
                 {"name": "Chamadas LLM", "value": str(total_calls), "inline": True},
                 {"name": "Respostas concluídas", "value": str(total_responses), "inline": True},
                 {"name": "Média por resposta", "value": f"{average:.2f} chamadas", "inline": True},
+                {
+                    "name": "Premissas da simulação",
+                    "value": (
+                        f"~{estimated_input_tokens:,} tokens de entrada + ~{estimated_output_tokens:,} de saída; "
+                        f"2.000/500 tokens por chamada; US$ {HYPOTHETICAL_INPUT_USD_PER_MILLION:.2f}/"
+                        f"US$ {HYPOTHETICAL_OUTPUT_USD_PER_MILLION:.2f} por 1M."
+                    ).replace(",", "."),
+                    "inline": False,
+                },
                 {"name": "Por agente", "value": detail or "Sem atividade", "inline": False},
                 {"name": "Modelo/provedor configurado", "value": models, "inline": False},
                 {
                     "name": "Metodologia",
                     "value": (
                         "Soma `api_calls` das linhas `response ready` dos gateways nas últimas 24h. "
-                        "Os logs não expõem tokens de entrada/saída; por isso o monitor não inventa "
-                        "estimativa de tokens nem preço pay-per-token."
+                        "Chamadas são reais; tokens e custo pay-per-token são uma simulação identificada, "
+                        "pois os logs não expõem tokens de entrada/saída."
                     ),
                     "inline": False,
                 },
@@ -151,6 +178,9 @@ def build_report() -> tuple[dict[str, Any], dict[str, Any]]:
         "average": average,
         "config_ok": config_ok,
         "parse_errors": total_parse_errors,
+        "estimated_input_tokens": estimated_input_tokens,
+        "estimated_output_tokens": estimated_output_tokens,
+        "hypothetical_usd": hypothetical_usd,
         "rows": rows,
     }
     return payload, summary
@@ -197,7 +227,7 @@ def main() -> int:
             "DRY-RUN: GPT-5.6 OAuth 24h | "
             f"calls={summary['total_calls']} responses={summary['total_responses']} "
             f"avg={summary['average']:.2f} config_ok={summary['config_ok']} "
-            f"parse_errors={summary['parse_errors']}"
+            f"parse_errors={summary['parse_errors']} hypothetical_usd={summary['hypothetical_usd']:.2f}"
         )
         for row in summary["rows"]:
             print(
@@ -209,6 +239,7 @@ def main() -> int:
     print(
         "Monitor GPT-5.6 OAuth enviado: "
         f"calls={summary['total_calls']} responses={summary['total_responses']} "
+        f"hypothetical_usd={summary['hypothetical_usd']:.2f} "
         f"config_ok={summary['config_ok']} message_id={result.get('id', 'mock')}"
     )
     return 0

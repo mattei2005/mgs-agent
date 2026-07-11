@@ -12,6 +12,7 @@ Use when the request is to download **all available creatives** from one Ads Lib
    --scrolls 100 --download 100 --wait-ms 1800
    ```
 4. Validate the report and every download: result count, distinct Library IDs, screenshot, HTTP 200, allowed MIME, matching magic bytes, byte count, and recomputed SHA-256.
+   - Known collector pitfall: when `mediaLinkedToCardCount > 0` but is much smaller than `imageCount + videoCount`, the current candidate-selection branch may download only the linked subset and silently omit virtualized videos. Do not package that partial run. Use a task-local copy of `collector.js` under the Hera artifact directory, preserve the canonical profile/lock/proxy rules, change only `fallbackCandidates` to all observed accepted media, rerun, and deduplicate by SHA-256. Do not patch the canonical production collector during a creative task; report the runtime defect through REPORT-INFRA for a separately authorized fix.
 5. Deduplicate by downloaded-file SHA-256, not filename or CDN URL. Preserve a duplicate map in the inventory. Report both raw download count and unique creative count.
 6. Treat the material as reference-only. Sanitize each unique file and require `clean=true` plus `harmful_tags_after=0` before Drive upload.
 7. Package only sanitized unique creatives with:
