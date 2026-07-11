@@ -5,26 +5,45 @@
 set -euo pipefail
 
 BASE_DIR="/root/mgs-agent"
-STATE_FILE="${BASE_DIR}/data/pending-reports-state.json"
-INVENTORY_FILE="${BASE_DIR}/data/infra-inventory.json"
+STATE_FILE="${MGS_PENDING_REPORT_STATE_FILE:-${BASE_DIR}/data/pending-reports-state.json}"
+INVENTORY_FILE="${MGS_PENDING_REPORT_INVENTORY_FILE:-${BASE_DIR}/data/infra-inventory.json}"
 LOG_PREFIX="[$(date '+%Y-%m-%d %H:%M:%S')]"
 
-# Carregar variáveis de ambiente (incluindo OP_SERVICE_ACCOUNT_TOKEN)
+# Autenticação local do bot Zeus; este monitor não consulta o 1Password.
 set -a
 # shellcheck source=/dev/null
-source "/root/mgs-agent/.env" 2>/dev/null || true
+source "/root/.hermes/profiles/zeus/.env" 2>/dev/null || true
 set +a
 
-# Buscar webhook via 1Password (#alerts-infra — alerts/REPORT-INFRA operacionais)
-WEBHOOK_URL=$(op item get "Discord Webhook - Alerts Infra Channel" --vault "MGS Conteúdo" --fields label=webhook_url 2>/dev/null || true)
+DISCORD_CHANNEL_ID="${MGS_DISCORD_CHANNEL_ID_OVERRIDE:-1498132022634483894}"
+DISCORD_API_URL="${MGS_DISCORD_API_URL_OVERRIDE:-https://discord.com/api/v10/channels/${DISCORD_CHANNEL_ID}/messages}"
+BOT_TOKEN="${MGS_DISCORD_BOT_TOKEN_OVERRIDE:-${DISCORD_BOT_TOKEN:-}}"
+DRY_RUN="${MGS_DRY_RUN:-0}"
 
-if [[ -z "$WEBHOOK_URL" ]]; then
-    echo "${LOG_PREFIX} ERRO: Não foi possível obter WEBHOOK_URL do 1Password. Abortando."
-    exit 1
-fi
+post_discord_payload() {
+    local payload="$1" reason="${2:-pending_report}" http_code
+    if [[ -z "$BOT_TOKEN" ]]; then
+        echo "${LOG_PREFIX} ERRO: DISCORD_BOT_TOKEN do Zeus ausente (${reason})." >&2
+        return 2
+    fi
+    if [[ "$DRY_RUN" == "1" ]]; then
+        echo "${LOG_PREFIX} DRY_RUN: enviaria payload via bot Zeus para channel=${DISCORD_CHANNEL_ID} (${reason})" >&2
+        printf '200'
+        return 0
+    fi
+    http_code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 \
+        -X POST \
+        -H "Authorization: Bot ${BOT_TOKEN}" \
+        -H "Content-Type: application/json" \
+        -H "User-Agent: MGS-Zeus/1.0" \
+        -d "$payload" \
+        "$DISCORD_API_URL" 2>/dev/null || printf '000')
+    printf '%s' "$http_code"
+    [[ "$http_code" =~ ^20[01]$ ]]
+}
 
-# Mentions: Zeus para roteamento do bot + Rodolfo para push notification
-ZEUS_MENTION="<@1496296175014252634> <@344196393512075265>"
+# Rodolfo recebe push quando há pendência real; Zeus é o próprio emissor.
+ZEUS_MENTION="<@344196393512075265>"
 
 # Inicializar state file se não existir
 if [[ ! -f "$STATE_FILE" ]]; then
@@ -36,9 +55,9 @@ fi
 # Zeus: ops/
 # Atena: wordpress/, devops/
 declare -A SKILL_DIRS
-SKILL_DIRS["zeus"]="/root/.hermes/profiles/zeus/skills/ops"
-SKILL_DIRS["atena_wp"]="/root/.hermes/profiles/atena/skills/wordpress"
-SKILL_DIRS["atena_devops"]="/root/.hermes/profiles/atena/skills/devops"
+SKILL_DIRS["zeus"]="${MGS_PENDING_REPORT_ZEUS_SKILL_DIR:-/root/.hermes/profiles/zeus/skills/ops}"
+SKILL_DIRS["atena_wp"]="${MGS_PENDING_REPORT_ATENA_WP_SKILL_DIR:-/root/.hermes/profiles/atena/skills/wordpress}"
+SKILL_DIRS["atena_devops"]="${MGS_PENDING_REPORT_ATENA_DEVOPS_SKILL_DIR:-/root/.hermes/profiles/atena/skills/devops}"
 
 # Mapear agent real para cada dir key
 declare -A DIR_AGENT
@@ -157,12 +176,9 @@ print(json.dumps({
 PY
 )
 
-    HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
-        -H "Content-Type: application/json" \
-        -d "$payload" \
-        "$WEBHOOK_URL")
+    HTTP_CODE=$(post_discord_payload "$payload" "pending_detected" || true)
 
-    if [[ "$HTTP_CODE" == "204" ]]; then
+    if [[ "$HTTP_CODE" =~ ^20[01]$ ]]; then
         echo "${LOG_PREFIX} Alerta enviado ao Discord (${#PENDING_SKILLS[@]} skills pendentes)"
         # Atualizar state — marcar como alerted
         for entry in "${PENDING_SKILLS[@]}"; do
@@ -241,12 +257,9 @@ PY
 )
         echo "$STATE" > "$STATE_FILE"
 
-        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
-            -H "Content-Type: application/json" \
-            -d "$payload" \
-            "$WEBHOOK_URL")
+        HTTP_CODE=$(post_discord_payload "$payload" "pending_resolved" || true)
 
-        if [[ "$HTTP_CODE" == "204" ]]; then
+        if [[ "$HTTP_CODE" =~ ^20[01]$ ]]; then
             echo "${LOG_PREFIX} Resolução enviada para ${skill_key}"
         else
             echo "${LOG_PREFIX} ERRO ao enviar resolução Discord: HTTP ${HTTP_CODE}"
