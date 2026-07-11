@@ -18,7 +18,7 @@ Use when the request is to download **all available creatives** from one Ads Lib
    - `README.txt` — source, counts, sanitization status, reference-only notice;
    - `inventory.json` — source report, raw/unique counts, duplicate map, dimensions, MIME, hashes, cleaning status, Drive IDs/links;
    - a clean reference folder using human-readable sequential names such as `FMYBC_LIBRARY_REF_IMG_01.jpg` and `FMYBC_LIBRARY_REF_VID_01.mp4`.
-8. Upload into `MGS-AGENTS/CRIATIVOS/<PASTA DA LIBRARY>` as the standard hierarchy for Meta Library reference packages. The Library folder must be a child of `CRIATIVOS`, never a sibling at the Drive root. Do not place third-party Library material in campaign `READY` folders.
+8. Upload into `MGS-AGENTS/CRIATIVOS/LIBRARY META/<PASTA DA LIBRARY>` as the standard hierarchy for Meta Library reference packages. The Library package must be a child of `LIBRARY META`, never directly under `CRIATIVOS` and never a sibling of `CRIATIVOS` at the Drive root. Do not place third-party Library material in campaign `READY` folders.
 9. Upload the finalized inventory after creative Drive IDs/links are populated.
 10. Perform independent readback: expected child count, exact parent, `trashed=false`, non-zero size, and Drive MD5 matching every local sanitized file. Verify README and inventory separately.
 
