@@ -24,7 +24,7 @@ import os, sys
 profile=sys.argv[1].encode()
 live=[]
 for name in os.listdir('/proc'):
-    if not name.isdigit():
+    if not name.isdigit() or int(name) in {os.getpid(), os.getppid()}:
         continue
     try:
         cmd=open(f'/proc/{name}/cmdline','rb').read()
