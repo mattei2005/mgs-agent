@@ -67,6 +67,8 @@ Se uma sessão anterior morrer e deixar `x11vnc`/`websockify` órfãos, o helper
 
 Se o Facebook entrar em CAPTCHA repetitivo pelo IP do VPS, parar a tentativa para não aumentar o risco da conta. Não trocar apenas de navegador nem usar proxy público/terceiro. A rota preferida é um SOCKS temporário pelo próprio Windows do Rodolfo: o SSH abre `-R 127.0.0.1:1080`, e o helper é iniciado com `HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080`. O proxy deve ficar local-only, existir somente enquanto o túnel SSH estiver aberto e nunca aceitar outro endereço no helper.
 
+Depois de autenticar pela rota residencial, não testar a rota `direct-vps` com o mesmo perfil persistente: isso pode reativar o challenge e alterar o estado da sessão. Se uma tentativa direta ocorrer e `c_user`/`xs` ficarem ausentes, não atribuir causalidade sem evidência; reabrir o helper visual pela rota residencial, autenticar se necessário, encerrar de forma limpa e só então coletar pela mesma rota SOCKS. Processos de coleta em background nunca devem despejar JSON bruto no Discord; aguardar/poll manualmente e publicar apenas resumo validado.
+
 ### Continuidade obrigatória da rota residencial
 
 Antes de reutilizar uma sessão autenticada, leia o `proxyMode` do último `report.json` bem-sucedido. Se ele for `windows-home-socks`, confirme que `127.0.0.1:1080` continua aberto e execute o coletor com `HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080`. **Não rode primeiro em `direct-vps`**: a troca de IP/rota pode fazer a Meta remover `c_user`/`xs` do perfil persistente e invalidar a sessão recém-salva. Se o SOCKS estiver fechado, pare antes de abrir o Chromium e peça somente a reabertura do túnel residencial; depois valide os nomes `c_user`/`xs` sem expor valores e retome a coleta pela mesma rota.
