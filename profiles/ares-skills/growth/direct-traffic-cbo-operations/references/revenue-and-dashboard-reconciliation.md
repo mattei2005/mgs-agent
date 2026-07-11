@@ -12,8 +12,8 @@ Sistema / tela                     | Dado esperado                              
 Meta Ads                           | spend, delivery, clicks, events            | custo de mídia/entrega
 Smart Bidding > Reports > Adgroup  | performance e receita de aquisição         | monetização por adgroup
 Smart Bidding > Reports > SMS      | ganho/receita de SMS                       | receita SMS
-SMS Funnel dashboard               | envios/custo exibido pelo fornecedor        | custo vendor, se disponível
-WP > MGS Quiz > Relatório          | leads absorvidos e custo estimado base WP   | estimativa interna de SMS
+SMS Funnel dashboard               | envios/custo real exibido pelo fornecedor   | custo vendor por período
+WP > MGS Quiz > Relatório          | leads, custo estimado e receita SMS SB       | estimativa WP + backfill SB separado
 ```
 
 O acesso às telas é read-only. Não alterar filtros salvos, integrações, usuários, listas, custo, tracking ou configuração.
@@ -76,7 +76,7 @@ Detalhe por campanha         | `GET /api/analytics/funnel-performance/{campaignI
 API base                     | `https://web2.smsfunnel.com.br/api`
 ```
 
-A tela declara `Receita Total`, `Receita Total SMS`, `Custo Total`, `Total de Conversões SMS`, `Total SMS Enviados` e tabela por funil com `SMS Enviados`, `Custo`, `Conversões`, `Receita` e `ROI`. O tooltip de custo define `quantidade enviada × custo unitário por SMS`. Esses endpoints exigem sessão; nunca colocar token/cookie em log ou chat.
+A tela declara `Receita Total`, `Receita Total SMS`, `Custo Total`, `Total de Conversões SMS`, `Total SMS Enviados` e tabela por funil com `SMS Enviados`, `Custo`, `Conversões`, `Receita` e `ROI`. O tooltip de custo define `quantidade enviada × custo unitário por SMS`. A resposta autenticada usa `data.totals.total_sms_sent`, `data.totals.sms_unit_cost` e `data.totals.total_cost`; validar sempre `total_sms_sent × sms_unit_cost = total_cost`. Esses endpoints exigem sessão; nunca colocar token/cookie em log ou chat.
 
 Checklist de exploração:
 
@@ -104,6 +104,17 @@ Para `creditoparaveiculo.com`, o mapeamento técnico versionado do Zeus registra
 - não reconcilia automaticamente com SMS Funnel.
 
 Portanto, esse card é uma estimativa de custo por linha absorvida, não uma prova de faturamento do fornecedor.
+
+O relatório WordPress em produção também exibe **`Receita SMS — Smart Bidding`** a partir do backfill próprio, mas essa receita permanece separada do custo estimado:
+
+- fonte: Smart Bidding `Reports > SMS` / `performance_per_sms`;
+- com `Discount revenue share`, usar `NET_REVENUE`/`net_revenue_cents` como receita primária e preservar gross para auditoria;
+- atribuição atual: domínio + data + `utm_campaign` do namespace SMS;
+- respeita data inicial/final, mas não deve fingir granularidade por quiz, gestor, parcela ou busca sem mapping confiável;
+- data atual é provisória; fechamento e backfill devem usar dias fechados e upsert idempotente;
+- nunca somar o card de receita SB ao próprio total SB novamente.
+
+No `creditoparaveiculo.com`, a validação autenticada de 2026-07-10 confirmou `mgs-quiz-report` acessível, cards de custo por registro/custo estimado, tabela por quiz e o card `Receita SMS — Smart Bidding`.
 
 ## Join keys
 

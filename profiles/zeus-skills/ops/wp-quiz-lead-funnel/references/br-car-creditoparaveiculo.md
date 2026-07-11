@@ -160,6 +160,16 @@ A report query referencing a new table is not sufficient implementation. Before 
 
 For v1.7.0, the active-install upgrade hook created schema `1.3.0`; the closed-day backfill reconciled 61 source rows across 49 dates, gross `R$ 13.923,73`, net `R$ 12.531,37`. No daily cron was created in this phase.
 
+### Schema/backfill deployment recovery
+
+For releases that combine a schema migration, data backfill, and report UI:
+
+- Emit named checkpoints for `schema`, `table readback`, `import`, `report smoke`, and `public routes`; do not suppress the failing stage's diagnostic output.
+- Make the backfill transactional and independently rerunnable. Validate it directly before retrying the full plugin swap.
+- A plugin rollback does not necessarily roll back `dbDelta()`, the DB-version option, or a new table. After any failed rollout, inspect the live plugin version/hash, schema version, table existence, and row count before deciding the retry path.
+- If schema creation succeeded but import did not, keep the empty additive table, run the idempotent importer with readback, then retry the UI deployment. Do not drop the table automatically.
+- Re-run the same snapshot once to prove semantic idempotency, then smoke-test one exact historical date and a no-data date range.
+
 ### Read-only source/provenance check before proposing a patch
 
 - Confirm the active plugin version and live plugin directory via WP-CLI.
