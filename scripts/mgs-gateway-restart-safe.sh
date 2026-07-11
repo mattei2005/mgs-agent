@@ -73,7 +73,23 @@ fi
 
 FINALIZER="$ROOT/data/mgs-gateway-restart-finalizer-$(date -u +%Y%m%dT%H%M%SZ)-$$.sh"
 FINAL_LOG="$LOG_DIR/mgs-gateway-restart-finalizer-$(date -u +%Y%m%dT%H%M%SZ)-$$.log"
+SNAPSHOT="$ROOT/data/mgs-gateway-restart-snapshot-$(date -u +%Y%m%dT%H%M%SZ)-$$.sha256"
 AGENT_LIST="${ORDERED_AGENTS[*]}"
+
+SNAPSHOT_FILES=(
+  "/root/.hermes/hermes-agent/gateway/run.py"
+  "/root/.hermes/hermes-agent/gateway/platforms/base.py"
+  "/root/.hermes/hermes-agent/plugins/platforms/discord/adapter.py"
+  "/root/.hermes/hermes-agent/gateway/slash_commands.py"
+  "/root/.hermes/hermes-agent/run_agent.py"
+)
+for agent in "${ORDERED_AGENTS[@]}"; do
+  SNAPSHOT_FILES+=("/root/.hermes/profiles/$agent/config.yaml")
+done
+: > "$SNAPSHOT"
+for file in "${SNAPSHOT_FILES[@]}"; do
+  [[ -f "$file" ]] && sha256sum "$file" >> "$SNAPSHOT"
+done
 
 cat > "$FINALIZER" <<EOF
 #!/usr/bin/env bash
@@ -81,11 +97,28 @@ set -euo pipefail
 LOG="$FINAL_LOG"
 AUDIT="$AUDIT"
 REASON="$(printf '%s' "$REASON" | sed "s/'/'\\''/g")"
+SNAPSHOT="$SNAPSHOT"
+RUNTIME="/root/.hermes/hermes-agent/gateway/run.py"
 exec >>"\$LOG" 2>&1
 log(){ printf '[%s] %s\n' "\$(date -u +%Y-%m-%dT%H:%M:%SZ)" "\$*"; }
 audit(){ printf '{"ts":"%s","event":"%s","actor":"mgs-gateway-restart-finalizer","reason":"%s","detail":"%s"}\n' "\$(date -u +%Y-%m-%dT%H:%M:%SZ)" "\$1" "\$REASON" "\$2" >> "\$AUDIT"; }
 log "START detached gateway restart finalizer agents=$AGENT_LIST reason=\$REASON"
-audit "gateway_restart_finalizer_started" "agents=$AGENT_LIST log=\$LOG"
+audit "gateway_restart_finalizer_started" "agents=$AGENT_LIST log=\$LOG snapshot=\$SNAPSHOT"
+if ! sha256sum -c "\$SNAPSHOT"; then
+  log "ABORT target files changed after restart preparation"
+  audit "gateway_restart_finalizer_aborted" "reason=target_drift snapshot=\$SNAPSHOT log=\$LOG"
+  exit 75
+fi
+if ! /root/.hermes/hermes-agent/venv/bin/python -m py_compile "\$RUNTIME"; then
+  log "ABORT runtime py_compile failed"
+  audit "gateway_restart_finalizer_aborted" "reason=runtime_pycompile_failed log=\$LOG"
+  exit 76
+fi
+if ! python3 -c 'import re,sys; s=open(sys.argv[1],encoding="utf-8").read(); defs=set(re.findall(r"^[ \\t]+def (_[A-Za-z0-9_]*startup_steer[A-Za-z0-9_]*)\\(",s,re.M))|set(re.findall(r"^[ \\t]+async def (_[A-Za-z0-9_]*startup_steer[A-Za-z0-9_]*)\\(",s,re.M)); calls=set(re.findall(r"self\\.(_[A-Za-z0-9_]*startup_steer[A-Za-z0-9_]*)\\(",s)); missing=sorted(calls-defs); print("startup_steer_missing="+",".join(missing)) if missing else None; raise SystemExit(bool(missing))' "\$RUNTIME"; then
+  log "ABORT startup-steer method call has no class definition"
+  audit "gateway_restart_finalizer_aborted" "reason=startup_steer_method_missing log=\$LOG"
+  exit 77
+fi
 for agent in $AGENT_LIST; do
   [[ "\$agent" == "zeus" ]] && continue
   svc="\${agent}-gateway.service"
@@ -106,7 +139,7 @@ audit "gateway_restart_finalizer_finished" "agents=$AGENT_LIST log=\$LOG"
 log "DONE detached gateway restart finalizer"
 EOF
 chmod 0750 "$FINALIZER"
-audit "gateway_restart_finalizer_prepared" "agents=$AGENT_LIST finalizer=$FINALIZER log=$FINAL_LOG mode=$MODE"
+audit "gateway_restart_finalizer_prepared" "agents=$AGENT_LIST finalizer=$FINALIZER log=$FINAL_LOG snapshot=$SNAPSHOT mode=$MODE"
 
 if [[ "$MODE" != "execute" ]]; then
   echo "Prepared detached finalizer only (no restart executed): $FINALIZER"

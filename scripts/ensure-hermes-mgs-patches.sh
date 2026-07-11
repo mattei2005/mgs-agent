@@ -113,6 +113,23 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    mgs-busy-steer-startup-merge-*.patch)
+      if grep -q "def _merge_startup_steer_into_message" "$REPO/gateway/run.py" \
+        && grep -Eq "def _stash_startup_steer|def _reserve_startup_steer" "$REPO/gateway/run.py" \
+        && grep -q "test_steer_mode_buffers_current_turn_when_agent_pending" "$REPO/tests/gateway/test_busy_session_ack.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
+    mgs-busy-steer-startup-race-hardening-*.patch)
+      if grep -q "def _promote_agent_and_consume_startup_steers" "$REPO/gateway/run.py" \
+        && grep -q "async def _try_busy_steer_event" "$REPO/gateway/run.py" \
+        && grep -q "test_startup_barrier_waits_and_preserves_arrival_order" "$REPO/tests/gateway/test_busy_session_ack.py" \
+        && grep -q "test_async_prepare_does_not_steer_into_replaced_agent" "$REPO/tests/gateway/test_busy_session_ack.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     skill-view-compact-linked-files.patch)
       if grep -q "def _linked_files_for_view" "$REPO/tools/skills_tool.py" \
         && grep -q '"linked_files_summary"' "$REPO/tools/skills_tool.py" \
@@ -162,6 +179,7 @@ apply_patch_if_needed "discord-suppress-link-previews.patch"
 apply_patch_if_needed "mgs-auto-reasoning-routing.patch"
 apply_patch_if_needed "mgs-busy-steer-universal-media-2026-07-10.patch"
 apply_patch_if_needed "mgs-busy-steer-startup-merge-2026-07-11.patch"
+apply_patch_if_needed "mgs-busy-steer-startup-race-hardening-2026-07-11.patch"
 apply_patch_if_needed "skill-view-compact-linked-files.patch"
 
 # Invariants that must survive every Hermes update. If any grep fails, the
@@ -246,12 +264,20 @@ grep -q "async def _prepare_busy_steer_payload" "$REPO/gateway/run.py" \
   || fail "missing MGS universal busy-steer media normalizer"
 grep -q "for_mid_turn_steer" "$REPO/gateway/run.py" \
   || fail "missing MGS mid-turn media enrichment mode"
-grep -q "def _stash_startup_steer" "$REPO/gateway/run.py" \
-  || fail "missing MGS startup steer buffer"
+grep -q "def _reserve_startup_steer" "$REPO/gateway/run.py" \
+  || fail "missing MGS ordered startup steer reservation"
+grep -q "def _promote_agent_and_consume_startup_steers" "$REPO/gateway/run.py" \
+  || fail "missing MGS atomic startup steer barrier/promotion"
+grep -q "async def _try_busy_steer_event" "$REPO/gateway/run.py" \
+  || fail "missing MGS stale-agent revalidation for busy steer"
 grep -q "def _merge_startup_steer_into_message" "$REPO/gateway/run.py" \
   || fail "missing MGS startup steer same-turn merge"
 grep -q "test_steer_mode_buffers_current_turn_when_agent_pending" "$REPO/tests/gateway/test_busy_session_ack.py" \
   || fail "missing MGS startup steer regression test"
+grep -q "test_startup_barrier_waits_and_preserves_arrival_order" "$REPO/tests/gateway/test_busy_session_ack.py" \
+  || fail "missing MGS startup steer async FIFO/barrier test"
+grep -q "test_async_prepare_does_not_steer_into_replaced_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
+  || fail "missing MGS stale-agent busy steer regression test"
 grep -q "Image attached at:" "$REPO/gateway/run.py" \
   || fail "missing MGS mid-turn image path marker"
 grep -q "def _linked_files_for_view" "$REPO/tools/skills_tool.py" \

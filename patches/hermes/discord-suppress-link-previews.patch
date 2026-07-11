@@ -243,6 +243,33 @@ diff --git a/plugins/platforms/discord/adapter.py b/plugins/platforms/discord/ad
 diff --git a/tests/gateway/test_discord_send.py b/tests/gateway/test_discord_send.py
 --- a/tests/gateway/test_discord_send.py
 +++ b/tests/gateway/test_discord_send.py
+@@ -54,7 +54,7 @@
+     sent_msg = SimpleNamespace(id=1234)
+     send_calls = []
+ 
+-    async def fake_send(*, content, reference=None):
++    async def fake_send(*, content, reference=None, suppress_embeds=None):
+         send_calls.append({"content": content, "reference": reference})
+         if len(send_calls) == 1:
+             raise RuntimeError(
+@@ -92,7 +92,7 @@
+     sent_msgs = [SimpleNamespace(id=1001), SimpleNamespace(id=1002)]
+     send_calls = []
+ 
+-    async def fake_send(*, content, reference=None):
++    async def fake_send(*, content, reference=None, suppress_embeds=None):
+         send_calls.append({"content": content, "reference": reference})
+         if len(send_calls) == 1:
+             raise RuntimeError(
+@@ -135,7 +135,7 @@
+     ref_msg = SimpleNamespace(id=99, to_reference=MagicMock(return_value=reference_obj))
+     send_calls = []
+ 
+-    async def fake_send(*, content, reference=None):
++    async def fake_send(*, content, reference=None, suppress_embeds=None):
+         send_calls.append({"content": content, "reference": reference})
+         raise RuntimeError(
+             "403 Forbidden (error code: 50013): Missing Permissions"
 @@ -159,8 +159,51 @@
      assert channel.send.await_count == 1
      assert send_calls[0]["reference"] is reference_obj

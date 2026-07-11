@@ -186,6 +186,7 @@ A correção não termina no checkout vivo. Os artefatos canônicos são:
 ```text
 /root/mgs-agent/patches/hermes/mgs-busy-steer-universal-media-2026-07-10.patch
 /root/mgs-agent/patches/hermes/mgs-busy-steer-startup-merge-2026-07-11.patch
+/root/mgs-agent/patches/hermes/mgs-busy-steer-startup-race-hardening-2026-07-11.patch
 ```
 
 Os patches devem permanecer listados, na mesma ordem, em ambos:
@@ -204,11 +205,14 @@ Invariantes mínimos do guard:
 - os dois gates busy usam o mesmo helper;
 - PHOTO só força queue quando o modo efetivo não é `steer`;
 - falha de enrichment mantém caption + paths e tenta steer antes de queue;
-- follow-up recebido enquanto `_running_agents[session_key]` ainda é `_AGENT_PENDING_SENTINEL` entra em `_pending_startup_steers`, não no FIFO de próximo turno;
-- o worker consome o buffer de startup e aplica `_merge_startup_steer_into_message()` antes da primeira chamada ao modelo, inclusive quando o primeiro resultado não usa tools;
-- o sentinel só é promovido após o merge; o resíduo da pequena corrida pós-merge é enviado ao `AIAgent.steer()` e só cai em queue se o agente rejeitar;
-- cleanup de turno/stop remove qualquer buffer de startup residual;
-- testes busy/media/startup rodam dentro do guard.
+- follow-up recebido enquanto `_running_agents[session_key]` ainda é `_AGENT_PENDING_SENTINEL` reserva ordem de chegada antes de qualquer preprocessamento assíncrono;
+- o worker aguarda todas as reservas em voo, drena em FIFO e promove o sentinel para o agente real de forma atômica sob a mesma barreira;
+- `_try_busy_steer_event()` relê geração e identidade do agente depois de STT/enrichment; resultado atrasado nunca é aplicado a agente encerrado/substituído;
+- `_merge_startup_steer_into_message()` acontece antes da primeira chamada ao modelo, inclusive quando o primeiro resultado não usa tools;
+- `_persist_user_message_override` acompanha a mensagem efetivamente mesclada nos caminhos de resume/tool-tail;
+- cleanup de turno/stop fecha a janela, remove buffer/reservas/sequence e acorda qualquer waiter;
+- fallback de mídia usa path agent-visible tanto em sucesso quanto em erro de enrichment;
+- testes busy/media/startup, concorrência FIFO e stale-agent rodam dentro do guard.
 
 Para cada mudança futura, validar `git apply --reverse --check` no checkout vivo, `git apply --check` em worktree limpa de `origin/main`, `ruff`, `py_compile`, pytest alvo e depois smoke Discord real. Um patch presente em disco, mas ausente do guard/precheck, é regressão futura esperando o próximo update.
 
@@ -229,8 +233,8 @@ Para cada mudança futura, validar `git apply --reverse --check` no checkout viv
 
 - Steer depende de turno ativo e de próximo ponto seguro.
 - Se o complemento chegar depois da resposta final, vira novo turno.
-- Uma sessão pode já aparecer como ocupada/“digitando” enquanto `_running_agents[session_key]` ainda é `_AGENT_PENDING_SENTINEL`. No runtime MGS corrigido, esse intervalo não usa mais `queue`: o evento normalizado fica em um buffer por sessão e é anexado ao primeiro user turn imediatamente antes da primeira chamada ao modelo.
-- Se config e resolver estiverem em `steer`, mas aparecer `Queued for the next turn` durante essa janela, tratar como regressão do patch/guard e verificar `_stash_startup_steer`, `_merge_startup_steer_into_message` e o teste `test_steer_mode_buffers_current_turn_when_agent_pending`.
+- Uma sessão pode já aparecer como ocupada/“digitando” enquanto `_running_agents[session_key]` ainda é `_AGENT_PENDING_SENTINEL`. No runtime MGS corrigido, esse intervalo não usa mais `queue`: a chegada reserva uma sequência antes de STT/enrichment; a promoção aguarda reservas em voo, drena FIFO e anexa tudo ao primeiro user turn antes da chamada ao modelo.
+- Se config e resolver estiverem em `steer`, mas aparecer `Queued for the next turn` durante essa janela, tratar como regressão do patch/guard e verificar `_reserve_startup_steer`, `_promote_agent_and_consume_startup_steers`, `_merge_startup_steer_into_message` e os testes de barrier/stale-agent.
 - Ver `Queued for the next turn` não prova que o profile voltou para `queue`. Antes de afirmar regressão de configuração, separar: (1) config vivo; (2) valor resolvido; (3) agente disponível versus sentinel; (4) retorno real de `running_agent.steer()`; (5) presença dos invariantes do startup merge.
 - Para investigar um caso real, buscar a mensagem original diretamente no Discord, comparar timestamps do pedido principal e do complemento e correlacionar com a sessão/runtime. A sessão Hermes é contexto secundário; o Discord é a fonte direta para conteúdo e horário atuais.
 - Esses limites de timing não justificam perder mídia recebida enquanto o turno já estiver ativo.

@@ -306,6 +306,7 @@ check_patches_against_upstream() {
       "mgs-auto-reasoning-routing.patch"
       "mgs-busy-steer-universal-media-2026-07-10.patch"
       "mgs-busy-steer-startup-merge-2026-07-11.patch"
+      "mgs-busy-steer-startup-race-hardening-2026-07-11.patch"
     )
     for name in "${canonical_patches[@]}"; do
       [[ -n "$name" ]] || continue

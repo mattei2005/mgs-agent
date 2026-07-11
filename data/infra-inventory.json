@@ -583,11 +583,40 @@
         "hera"
       ],
       "purpose": "Keep authorized follow-ups received during _AGENT_PENDING_SENTINEL startup inside the active steer turn and merge them before the first model call instead of replaying them through queue.",
-      "validation": "py_compile PASS; ruff PASS; git diff --check PASS; startup regression tests 3 PASS; full busy-session test file 37 PASS; broader Discord batch 35 PASS / 3 pre-existing suppress_embeds mock-signature failures unrelated to this repair; Zeus detached restart unit mgs-gateway-restart-20260711T045457Z-3143967 scheduled; post-restart validation job 1e31485dfda7 scheduled.",
-      "status": "repair_applied_restart_scheduled",
-      "updated_at": "2026-07-11T00:55:41-04:00",
-      "runtime_sha256": "fe8c893efcc7605255e930b67ac7b1bbf16518126e6ecfaba9b7910f255d618a",
-      "repair": "Restored missing _stash_startup_steer and _consume_startup_steers definitions after an interrupted/incomplete patch port loaded by Zeus."
+      "validation": "Atena restored the two missing methods and restarted Zeus; Zeus then replaced that compatibility repair with the race-safe barrier implementation. Current validation: 162 related busy-steer/restart/subagent tests PASS; full MGS patch guard 157 PASS; ruff, py_compile and git diff --check PASS; live runtime loaded after 2026-07-11 01:12:40 EDT restart.",
+      "status": "superseded_by_race_hardening_deployed_validated",
+      "updated_at": "2026-07-11T01:34:32-04:00",
+      "runtime_sha256": "30b6a4f05558a3e00f08f0d8ab1a7ef2f9eb8bd982fe1f1f326494b73a9e7e26",
+      "repair": "Original failure was caused by Zeus editing gateway/run.py after validation and while a detached restart was already scheduled, leaving calls to _stash_startup_steer/_consume_startup_steers without definitions. Atena restored compatibility; final hardening removes those obsolete calls and uses ordered reservation plus atomic promotion."
+    },
+    {
+      "id": "mgs-busy-steer-startup-race-hardening-20260711",
+      "agent": "zeus",
+      "type": "hermes_runtime_patch",
+      "path": "/root/mgs-agent/patches/hermes/mgs-busy-steer-startup-race-hardening-2026-07-11.patch",
+      "sha256": "d2485e832a8f252479a2e75485e310c76e902047ad08cbdee3807a20be3c9c2a",
+      "runtime_file": "/root/.hermes/hermes-agent/gateway/run.py",
+      "runtime_sha256": "30b6a4f05558a3e00f08f0d8ab1a7ef2f9eb8bd982fe1f1f326494b73a9e7e26",
+      "guard_scripts": [
+        "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
+        "/root/mgs-agent/scripts/run-hermes-update-controlled.sh"
+      ],
+      "agents": ["zeus", "atena", "ares", "hera"],
+      "purpose": "Eliminate stale-agent/media races and async completion reordering during _AGENT_PENDING_SENTINEL startup by reserving FIFO order before preprocessing and atomically promoting only after all in-flight reservations complete.",
+      "validation": "live reverse apply PASS; canonical baseline apply PASS; canonical baseline 162 related tests PASS; live 162 related tests PASS; full MGS patch guard 157 PASS; ruff, py_compile and git diff --check PASS",
+      "status": "deployed_validated",
+      "updated_at": "2026-07-11T01:34:32-04:00"
+    },
+    {
+      "id": "mgs-gateway-restart-target-freeze-20260711",
+      "agent": "zeus",
+      "type": "gateway_restart_guardrail",
+      "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
+      "sha256": "40de2b501a67042fb029ad90d3270e6974b6ad750b1ae2ce14817cbe6d257a90",
+      "purpose": "Prevent a detached restart from loading code/config changed after finalizer preparation; snapshot target hashes, abort on drift, py_compile runtime, and reject startup-steer calls without class method definitions before restarting any gateway.",
+      "validation": "bash -n PASS; startup-steer definition/call preflight PASS with no missing methods",
+      "status": "deployed_validated",
+      "updated_at": "2026-07-11T01:34:32-04:00"
     },
     {
       "id": "mgs-gateway-restart-busy-steer-startup-20260711T043316Z-3105180",
@@ -603,8 +632,9 @@
         "zeus"
       ],
       "purpose": "Activate the startup steer same-turn merge on all MGS gateways with Zeus restarted last.",
-      "status": "prepared_detached_execution_pending",
-      "updated_at": "2026-07-11T00:34:07-04:00"
+      "status": "completed_but_loaded_post_validation_drift",
+      "validation": "Finalizer completed at 2026-07-11 00:37:29 EDT, but gateway/run.py had been edited after validation and before restart; Zeus loaded missing-method calls and failed until Atena repair.",
+      "updated_at": "2026-07-11T01:34:32-04:00"
     },
     {
       "id": "mgs-busy-steer-startup-postrestart-validation-47f269e09c7e",
