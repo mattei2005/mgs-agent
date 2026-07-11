@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T22:13:40-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-10T22:26:26.784481-04:00",
+    "generated_by": "infra-discovery.sh + scoped Hera Drive hierarchy update"
   },
   "system_packages": [
     {
@@ -1874,11 +1874,17 @@
       "modified_at": "2026-07-10T22:06:02.416779-04:00",
       "sha256": "39ba62c679b4115379628f6e6c5d4c40de05df6623d79b98b7e84ac6bc8573a1",
       "versioned_sha256": "39ba62c679b4115379628f6e6c5d4c40de05df6623d79b98b7e84ac6bc8573a1",
-      "purpose": "Canonical Meta Ads Library flow with dedicated US residential route as default, fail-closed direct-vps prohibition, trusted-device snapshot and Windows SOCKS fallback only after dedicated-route failure report.",
-      "validation": "live/versioned hash match; dedicated residential primary; home SOCKS fallback; direct-vps prohibited; canary-before-promotion documented",
-      "updated_at": "2026-07-10T22:06:04-04:00",
+      "purpose": "Canonical Meta Library flow with dedicated residential routing and standard Drive destination MGS-AGENTS/CRIATIVOS/<library>.",
+      "validation": "skill/reference live-versioned hashes match; FMYBC folder moved under CRIATIVOS; 25 children retained; remote inventory MD5 readback PASS; trashed=0.",
+      "updated_at": "2026-07-10T22:26:26.784481-04:00",
       "reference_sha256": "5c9a57d8e0f6b37391fc399e7729a1105220d468081ef736026b76cbc96eb450",
-      "known_pending": "Never expose cookie values/hashes; do not touch profile again in the completed collection task."
+      "known_pending": "Never expose cookie values/hashes; do not touch profile again in the completed collection task.",
+      "full_collection_reference_sha256": "ed570c1074e4f0d487e3e84d6fc080d82a45bdc96fbe28c7096a42da17833da9",
+      "full_collection_versioned_sha256": "ed570c1074e4f0d487e3e84d6fc080d82a45bdc96fbe28c7096a42da17833da9",
+      "standard_drive_parent": {
+        "path": "MGS-AGENTS/CRIATIVOS",
+        "folder_id": "1NLaOKK6n4fMF5u1Assgq8FKim76NI--i"
+      }
     },
     {
       "id": "zeus-local-browser-automation-persistent-runtime-rule",
