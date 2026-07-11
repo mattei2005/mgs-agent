@@ -78,9 +78,25 @@ Validação obrigatória:
 
 Validação de 2026-07-11: 280 posts, SEO G206/A39/R0/N35 e readability G205/A36/R39/N0. Projeção: aproximadamente 6 para 0 requests/dia.
 
-## GitHub SSH ainda pendente
+## GitHub com deploy key SSH dedicada
 
-Uma chave local dedicada foi gerada em `/root/.ssh/mgs_github_deploy_ed25519`, mas não está ativa. O GitHub recusou o cadastro da deploy key com HTTP 403 `Resource not accessible by personal access token`; o PAT atual não possui `Administration: Read and write`. Até essa permissão ser concedida ou a deploy key ser adicionada manualmente, o remote continua HTTPS e o hook continua buscando `GitHub PAT - mgs-agent` no 1Password. Não mudar o remote antes de validar a key pelo GitHub.
+Estado aplicado em 2026-07-11:
+- repositório: `mattei2005/mgs-agent`;
+- chave dedicada: `/root/.ssh/mgs_github_deploy_ed25519`, modo `600`;
+- deploy key GitHub com escrita, ID `156991446`, `read_only=false` e `verified=true`;
+- remote: `git@github.com:mattei2005/mgs-agent.git`;
+- `core.sshCommand` e o hook `.git/hooks/post-commit` fixam a chave, `IdentitiesOnly=yes`, `BatchMode=yes`, `StrictHostKeyChecking=yes` e `/root/.ssh/known_hosts_github_mgs`;
+- host keys vêm do endpoint oficial `https://api.github.com/meta` e ficam no arquivo dedicado;
+- o hook não carrega `/root/mgs-agent/.env`, não chama `op` e não lê mais `GitHub PAT - mgs-agent`.
+
+Validação obrigatória:
+1. `git ls-remote` via SSH com a chave dedicada;
+2. `git fetch --prune origin`;
+3. `git push origin HEAD:main`;
+4. busca estática com zero `op item get`/`GitHub PAT - mgs-agent` no hook;
+5. commit real e readback de igualdade entre `HEAD` e `origin/main`.
+
+Rollback: restaurar o hook e a URL HTTPS do backup mais recente em `/root/mgs-agent/backups/github-ssh-cutover-*`; somente depois de confirmar o PAT funcional, remover a deploy key pelo ID registrado.
 
 ## Limites
 
