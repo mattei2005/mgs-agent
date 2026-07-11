@@ -1,6 +1,6 @@
 # Crons MGS — Control Plane
 
-Gerado em: `2026-07-10T21:28:10-04:00`
+Gerado em: `2026-07-10T21:29:06-04:00`
 Fonte: `root crontab + script/log stat, read-only`
 Total MGS ativo no root crontab: **28**
 
@@ -36,7 +36,7 @@ Frequência          | Script                                     | Owner       
 30 7,15 * * *       | dtr-sb-page-health-sync.sh                 | Zeus/Infra     | não classificado                                                     | sim   | (sem log útil ainda)
 2-57/5 * * * *      | alerts-infra-failed-alert-resolver.py      | Zeus/Infra     | não classificado                                                     | sim   | [2026-07-11T01:27:02Z] alerts-infra-failed-alert-resolver: DONE candidates=2 handled=0 skipped=2 last_seen_id=1525312305871454249
 20 6 * * *          | dtr-sb-daily-match-audit.sh                | Zeus/Infra     | não classificado                                                     | sim   | "op_errors": [],
-9,24,39,54 * * * *  | monitor-op-rate-limit.py                   | Zeus/Infra     | não classificado                                                     | sim   | OK level=normal transition_sent=false token:write=0.00% token:read=10.37% account:read_write=2.07%
+9,24,39,54 * * * *  | monitor-op-rate-limit.py                   | Zeus/Infra     | baixo: consulta read-only + alerta Discord por transição             | sim   | OK level=normal transition_sent=false token:write=0.00% token:read=10.37% account:read_write=2.07%
 ```
 
 ## Pontos de atenção
@@ -304,8 +304,8 @@ Frequência          | Script                                     | Owner       
 ### `monitor-op-rate-limit.py`
 - **Frequência:** `9,24,39,54 * * * *`
 - **Owner:** Zeus/Infra
-- **Risco:** não classificado
-- **Função:** Sem descrição cadastrada.
+- **Risco:** baixo: consulta read-only + alerta Discord por transição
+- **Função:** Monitora limites horário e diário do 1Password Business e alerta o canal dedicado em 50%/90%.
 - **Comando:** `flock -n /var/lock/monitor_op_rate_limit.lock /root/mgs-agent/scripts/monitor-op-rate-limit.py >> /root/mgs-agent/logs/monitor-op-rate-limit.log 2>&1`
 - **Log:** `/root/mgs-agent/logs/monitor-op-rate-limit.log`
 - **Último log:** 2026-07-10T21:27:33-04:00 (99 bytes)
