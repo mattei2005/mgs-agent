@@ -11,14 +11,14 @@ function render_sms_revenue_report( $from, $to, $slug = '' ) {
 
 global $wpdb;
 $table = $wpdb->prefix . 'mgs_quiz_sms_revenue';
-$all = $wpdb->get_row( "SELECT COUNT(*) groups_count, COUNT(DISTINCT revenue_date) dates_count, SUM(revenue_cents) revenue_cents, MIN(revenue_date) first_date, MAX(revenue_date) last_date FROM {$table}", ARRAY_A );
-$html = render_sms_revenue_report( '2026-05-22', '2026-07-10' );
-$expected = 'R$ ' . number_format( (int) $all['revenue_cents'] / 100, 2, ',', '.' );
+$all = $wpdb->get_row( "SELECT COUNT(*) groups_count, COUNT(DISTINCT revenue_date) dates_count, SUM(net_revenue_cents) display_revenue_cents, MIN(revenue_date) first_date, MAX(revenue_date) last_date FROM {$table}", ARRAY_A );
+$html = render_sms_revenue_report( '2026-05-22', '2026-07-09' );
+$expected = 'R$ ' . number_format( (int) $all['display_revenue_cents'] / 100, 2, ',', '.' );
 $checks = array(
     'label' => false !== strpos( $html, 'Receita SMS — Smart Bidding' ),
     'amount' => false !== strpos( $html, esc_html( $expected ) ),
     'coverage' => false !== strpos( $html, esc_html( number_format_i18n( (int) $all['dates_count'] ) . ' dia(s)' ) ),
-    'scope_note' => false !== strpos( $html, 'respeita somente o período selecionado' ),
+    'scope_note' => false !== strpos( $html, 'Valor líquido exibido na SB com Discount revenue share' ),
     'cost_regression' => false !== strpos( $html, 'Custo estimado de SMS' ),
 );
 foreach ( $checks as $name => $ok ) {
