@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T20:07:05-04:00",
+    "updated_at": "2026-07-10T20:19:38-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_manual_update": "hera-meta-library-windows-home-socks"
+    "last_manual_update": "hera-fmybc-authenticated-smoke"
   },
   "system_packages": [
     {
@@ -1178,9 +1178,9 @@
       "files": [
         {
           "path": "/root/mgs-agent/tools/meta-library-collector/collector.js",
-          "size_bytes": 14612,
-          "modified_at": "2026-07-10T17:27:02.646993-04:00",
-          "sha256": "15462fc0d7e44e143074870ba6898b4aa86a48cb9be64d516228d4036fa0ca91"
+          "size_bytes": 15411,
+          "modified_at": "2026-07-10T20:17:28.159650-04:00",
+          "sha256": "e117106a32f3cfcc07bafe33072ed29963b3c8bcdb043e7fc20814ab913ce3f3"
         },
         {
           "path": "/root/mgs-agent/tools/meta-library-collector/package.json",
@@ -1208,24 +1208,23 @@
         }
       ],
       "validation": {
-        "public_smoke": "PASS x3",
-        "query": "utua",
-        "latest_result_text": "~4,600 results",
-        "latest_library_ids": 30,
-        "latest_images": 98,
-        "latest_videos": 19,
-        "media_linked_to_card": 4,
-        "download_http": 200,
+        "fmybc_exact": "PASS authenticated through Windows home SOCKS",
+        "goto_http": 200,
+        "result_text": "~63 results",
+        "library_ids": 42,
+        "images": 3,
+        "videos": 30,
+        "scrolls_requested": 100,
+        "scrolls_performed": 6,
+        "stopped_after_stable_rounds": true,
+        "downloads": 3,
         "download_magic_bytes": true,
-        "download_library_id": "1972296293422363",
+        "authenticated_session": true,
         "profile_reused": true,
-        "concurrent_run": "refused cleanly with exit 75",
-        "secret_scan_hits": 0,
-        "authenticated_session": "absent",
-        "fmybc_exact": "page shell loads but no cards; reauthentication required before claiming collection success"
+        "screenshot_visual": "real fmybc.com ad cards confirmed"
       },
       "purpose": "Durable Meta/Facebook Ads Library intake with persistent browser profile; runtime/profile must never use /tmp.",
-      "updated_at": "2026-07-10T17:30:05-04:00",
+      "updated_at": "2026-07-10T20:19:38-04:00",
       "security": {
         "exclusive_profile_lock": "flock, concurrent exit 75",
         "site_isolation": "enabled",
@@ -1239,7 +1238,7 @@
       "id": "hera-meta-library-manual-login-helper",
       "agent": "hera",
       "type": "local_only_login_helper",
-      "status": "active_waiting_for_windows_socks",
+      "status": "session_saved_and_closed",
       "script": "/root/mgs-agent/scripts/hera-meta-library-login-browser.sh",
       "browser_helper": "/root/mgs-agent/tools/meta-library-collector/login-browser.js",
       "profile_path": "/root/.hermes/profiles/hera/browser-profiles/meta-library-chromium",
@@ -1247,8 +1246,8 @@
         "127.0.0.1:5903",
         "127.0.0.1:6083"
       ],
-      "background_session": "proc_74f5004c0b80",
-      "validation": "noVNC HTTP 200; browser configured for allowlisted socks5://127.0.0.1:1080; awaiting SSH remote dynamic forward from Rodolfo Windows",
+      "background_session": null,
+      "validation": "authenticatedLikely=true through Windows home SOCKS; Chromium closed gracefully exit 0; canonical profile lock released",
       "files": [
         {
           "path": "/root/mgs-agent/scripts/hera-meta-library-login-browser.sh",
@@ -1264,7 +1263,7 @@
         }
       ],
       "purpose": "One-time/manual Facebook authentication while preserving cookies in the canonical Hera browser profile.",
-      "updated_at": "2026-07-10T20:07:05-04:00",
+      "updated_at": "2026-07-10T20:19:38-04:00",
       "recovery": "Known stale x11vnc/websockify listeners auto-cleaned only after profile lock; unexpected port owner fails exit 76.",
       "network_route": {
         "mode": "temporary_windows_home_socks",
@@ -1699,13 +1698,13 @@
       "type": "profile_skill",
       "path": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/meta-library-reference-intake/SKILL.md",
-      "size_bytes": 4710,
+      "size_bytes": 4955,
       "modified_at": "2026-07-10T17:41:59.982336-04:00",
-      "sha256": "7b08773219e3ff072a8d2686207ef28be10a92a5575b4c4b8e115e9c40b8317b",
-      "versioned_sha256": "7b08773219e3ff072a8d2686207ef28be10a92a5575b4c4b8e115e9c40b8317b",
+      "sha256": "f312ab015794f05da09633873fa09e64882277ed2053ad7520091d244d9b7e3a",
+      "versioned_sha256": "f312ab015794f05da09633873fa09e64882277ed2053ad7520091d244d9b7e3a",
       "purpose": "Canonical Meta Ads Library collection flow with persistent runtime/profile and explicit no-/tmp rule.",
-      "validation": "live/versioned hash match; captcha-loop fallback uses temporary Windows home SOCKS only",
-      "updated_at": "2026-07-10T20:07:05-04:00"
+      "validation": "live/versioned hash match; adaptive scroll rule documented; fmybc authenticated smoke PASS",
+      "updated_at": "2026-07-10T20:19:38-04:00"
     },
     {
       "id": "zeus-local-browser-automation-persistent-runtime-rule",
