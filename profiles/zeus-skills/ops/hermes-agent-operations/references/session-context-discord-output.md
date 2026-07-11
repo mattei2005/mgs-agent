@@ -27,6 +27,28 @@ Resposta executiva recomendada: informar o valor anterior e atual, o horário/co
 
 Para restaurar, tratar como mudança de configuração + restart: obter autorização conforme MGS, alterar tanto o profile vivo quanto o mirror canônico, validar com `hermes -p <profile> config check`, usar restart seguro (Zeus por último) e fazer smoke real no Discord confirmando que o progresso reapareceu. A configuração exata deve ser validada contra o schema/runtime da versão instalada; não assumir que strings antigas (`all`, `off`) e booleanos atuais são intercambiáveis.
 
+### Estado canônico MGS autorizado
+
+Rodolfo prefere o acompanhamento ao vivo ligado em todos os agentes. O estado canônico de Zeus, Atena, Ares e Hera é:
+
+```yaml
+display:
+  tool_progress: all
+  platforms:
+    discord:
+      tool_progress: all
+      cleanup_progress: true
+```
+
+Regras operacionais:
+
+- Aplicar nos quatro profiles vivos e nos quatro mirrors versionados; não corrigir apenas Zeus.
+- Em refactors/sincronizações YAML, preservar semanticamente `all`; não normalizar para `false` como efeito colateral de formatação.
+- Validar `config check` 4/4 e readback live+mirror 8/8 antes do restart.
+- Ativar via restart seguro, com Zeus por último, e confirmar no Discord real que uma nova execução mostra progresso enquanto o agente trabalha.
+- `cleanup_progress: true` pode remover as mensagens transitórias no fim; isso é compatível com a preferência, desde que o progresso apareça durante a execução.
+- Não confundir progresso resumido das ferramentas com despejo de logs brutos; outputs extensos continuam reduzidos na origem.
+
 ## Discord — suprimir previews automáticos de links
 
 Use quando Rodolfo pedir que mensagens dos agentes não gerem cards/previews automáticos para URLs no Discord.

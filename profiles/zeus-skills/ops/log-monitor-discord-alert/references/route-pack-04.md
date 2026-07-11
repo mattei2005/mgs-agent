@@ -46,6 +46,8 @@
 
 14. **Hardening SSH incremental para monitors via jump host** — quando um monitor usa `expect` + senha + `ssh/scp -J`, não trocar direto para chave permanente sem autorização explícita do Rodolfo. Primeiro remover `StrictHostKeyChecking` desativado e usar `StrictHostKeyChecking=accept-new` com `UserKnownHostsFile=/root/.ssh/known_hosts_mgs`, `mktemp -d` local com `chmod 700`, `trap cleanup EXIT`, script remoto único (`/tmp/name_$$.sh`) e remoção remota após execução. Validar com execução real controlada e confirmar que não houve post Discord indevido. Ver `references/cron-ssh-hardening-2026-05-16.md`.
 
+15. **Novo cron pode gerar falso STALE antes da primeira execução agendada** — ao cadastrar um cron cujo log ainda não existe, o stale watchdog pode rodar entre o deploy e o primeiro minuto válido do cron e alertar `log ausente`. Antes de declarar falha, compare: horário de criação do script/entrada, agenda do cron, horário do alerta e primeiro slot de execução. Se o alerta antecede o primeiro slot, aguarde esse slot, valide que o log foi criado com heartbeat/status saudável e confirme que o state foi limpo no ciclo seguinte. Para evitar o falso positivo no deploy, prefira uma destas estratégias: executar um smoke real controlado que crie o log canônico; criar o log com marcador explícito de `PENDING_FIRST_RUN` que o watchdog reconheça; ou adicionar grace period baseada no cadastro/mtime da entrada. Nunca maquiar uma falha posterior como startup: após o primeiro slot, ausência de log continua sendo erro real.
+
 ---
 
 ---
