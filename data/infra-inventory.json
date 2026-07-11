@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T21:12:48-04:00",
+    "updated_at": "2026-07-10T21:13:24-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1772,7 +1772,7 @@
     },
     {
       "name": "mgs-autocommit.service",
-      "status": "active"
+      "status": "inactive\nunknown"
     }
   ],
   "crons": [
@@ -2021,8 +2021,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 5148,
-      "modified_at": "2026-07-10T17:45:27-04:00"
+      "size_bytes": 5154,
+      "modified_at": "2026-07-10T21:13:10-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/chat-log.sh",
@@ -5129,9 +5129,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 213864,
-      "md5": "bffa9c317591d8615e875864244bcfe9",
-      "modified_at": "2026-07-10T21:12:48-04:00"
+      "size_bytes": 213813,
+      "md5": "f4761d046ea784782ebfbeda04c90e0b",
+      "modified_at": "2026-07-10T21:13:10-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
