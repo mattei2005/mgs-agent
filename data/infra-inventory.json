@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-11T01:22:15-04:00",
+    "updated_at": "2026-07-11T01:28:48-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1575,6 +1575,62 @@
       "resolver_path": "/root/mgs-agent/tools/meta-library-collector/proxy-config.js",
       "resolver_sha256": "684ec9e780c9fdd5aad91bc1e40641644606faa8e52021e747159fe1ad961042",
       "config_sha256": "7dc78212cd32f2c7c19917676adae440906d7af8819a75b09966e916d6d21542"
+    },
+    {
+      "id": "discord-bot-post-helper-20260711",
+      "agent": "zeus",
+      "type": "discord_bot_transport",
+      "path": "/root/mgs-agent/scripts/discord-bot-post.py",
+      "sha256": "abe8f261ca402c39b312efe085589ec6e0fb17a62a62ca33979887a550856503",
+      "channel_default": "1498132022634483894",
+      "purpose": "Post monitor/report JSON payloads through the local Zeus bot without a 1Password webhook lookup.",
+      "consumers": [
+        "monitor-honcho-health.sh",
+        "monitor-auto-push.sh",
+        "monitor-tool-loops.sh",
+        "monitor-webshare-status.sh",
+        "hermes-mgs-patch-watchdog.sh",
+        "ares-report-infra.sh",
+        "send-report-infra-embed.sh",
+        ".git/hooks/post-commit"
+      ],
+      "validation": "py_compile PASS; isolated HTTP mock confirmed Bot auth, payload, channel readback, HTTP 201 and zero secret output",
+      "status": "deployed_validated",
+      "updated_at": "2026-07-11T01:29:52-04:00"
+    },
+    {
+      "id": "drive-auth-unified-zeus-20260711",
+      "agent": "zeus",
+      "type": "cron_monitor",
+      "path": "/root/mgs-agent/scripts/monitor-drive-auth-unified.py",
+      "sha256": "625dbefb2c9dc567d360f2d325bd6019f7c5a30bc3930872cba6881d29a0ba5f",
+      "schedule": "19,49 * * * *",
+      "state_path": "/root/mgs-agent/data/drive-auth-unified-state.json",
+      "replaces_jobs": [
+        "ares:d1a064017e27",
+        "hera:d2a7853ae86f"
+      ],
+      "purpose": "Check local Google OAuth every cycle and the 1Password Service Account at most once per day while OAuth remains healthy.",
+      "validation": "Production cron completed twice healthy; cached run with op absent from PATH returned token_ok and sa_checked=0; Ares/Hera jobs read back enabled=false; no root minute collision",
+      "status": "deployed_validated",
+      "updated_at": "2026-07-11T01:29:52-04:00"
+    },
+    {
+      "id": "honcho-key-single-fetch-20260711",
+      "agent": "zeus",
+      "type": "monitor_optimization",
+      "paths": [
+        "/root/mgs-agent/scripts/monitor-honcho-health.sh",
+        "/root/mgs-agent/scripts/mgs-memory-copilot"
+      ],
+      "sha256": {
+        "monitor": "6b8716cfe08eccbb3fef4878abad9b708dc9b176ff468526233d6ded8fc4990f",
+        "copilot": "79608ba780b1e911d5845ae7b7cd569d8ad906a4c31e855581d54b2f48e363eb"
+      },
+      "purpose": "Fetch the shared Honcho key once per cycle and reuse it for Zeus, Atena, Ares and Hera.",
+      "validation": "DRY_RUN real health check completed 4 agents OK; monitor contains one op item get callsite; wrapper skips op when HONCHO_API_KEY is preloaded",
+      "status": "deployed_validated",
+      "updated_at": "2026-07-11T01:29:52-04:00"
     }
   ],
   "profile_skill_references": [
@@ -2478,8 +2534,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
-      "size_bytes": 15323,
-      "modified_at": "2026-07-11T00:25:35-04:00"
+      "size_bytes": 17091,
+      "modified_at": "2026-07-11T01:28:10-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/estimate-atena-session-cost.py",
@@ -2818,8 +2874,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/run-hermes-update-controlled.sh",
-      "size_bytes": 31810,
-      "modified_at": "2026-07-11T00:25:41-04:00"
+      "size_bytes": 31873,
+      "modified_at": "2026-07-11T01:28:22-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/run-openhands-atena.sh",
@@ -5360,8 +5416,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 2404,
-      "md5": "366d5371b95c5a28ef4e59b9b8bb5e60",
-      "modified_at": "2026-07-11T01:22:01-04:00"
+      "md5": "06bfcbb0767e968a665e9be3a350196e",
+      "modified_at": "2026-07-11T01:27:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -5372,8 +5428,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "21781b3befb658f53e3972f1fe21e9ad",
-      "modified_at": "2026-07-11T01:11:30-04:00"
+      "md5": "711c0c8ed79b18a8242821bd256855af",
+      "modified_at": "2026-07-11T01:27:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -5408,8 +5464,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 368,
-      "md5": "1b0d840f9c3c692ead844ef3d89df29f",
-      "modified_at": "2026-07-11T01:19:02-04:00"
+      "md5": "39c57e5cf238cd6064c4f4efb311b223",
+      "modified_at": "2026-07-11T01:25:27-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -5443,15 +5499,15 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
-      "size_bytes": 117,
-      "md5": "2ad01ce068d31bc9641d52dc65b038ec",
-      "modified_at": "2026-07-10T19:52:06-04:00"
+      "size_bytes": 144,
+      "md5": "56571423cdedd8cab1957d3ba2ce23d0",
+      "modified_at": "2026-07-11T01:27:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 25681,
-      "md5": "dcd620a69e9e6235053534337f7cf2c2",
-      "modified_at": "2026-07-11T01:20:01-04:00"
+      "md5": "789deab4fe6bf9218092d8517bab3e47",
+      "modified_at": "2026-07-11T01:25:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -5474,8 +5530,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 231380,
-      "md5": "d7d8480c5455d2714130a019f98dae0e",
-      "modified_at": "2026-07-11T01:07:50-04:00"
+      "md5": "f7d92aa8fce7a3ea7a46a507f0bf7265",
+      "modified_at": "2026-07-11T01:22:23-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -5595,7 +5651,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "8595031c45e44549c7bd183638f6fc33",
-      "modified_at": "2026-07-11T01:21:01-04:00"
+      "modified_at": "2026-07-11T01:26:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -5623,15 +5679,15 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2170,
-      "md5": "5b33faa88f211bbea633618317d5ed6a",
-      "modified_at": "2026-07-11T01:20:02-04:00"
+      "size_bytes": 2171,
+      "md5": "f888af1697889c6e41e261c4410559ae",
+      "modified_at": "2026-07-11T01:25:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "a7a642678202cad86049f4d8ca9c2fd9",
-      "modified_at": "2026-07-10T20:07:01-04:00"
+      "md5": "6ef97d9c91459f17c21141ce05792390",
+      "modified_at": "2026-07-11T01:27:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",

@@ -28,6 +28,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Service Account `op`: rate-limit, migração Business, diagnóstico de consumo e monitor independente do 1Password** → `references/cron-op-rate-limit-mitigation.md`
 - **Auditoria completa de consumo 1Password: crons Linux + Hermes de todos os perfis, projeção nominal versus observada e otimização** → `references/1p-full-consumption-audit.md`
 - **Yoast eggbev, relatório GPT-5.6 OAuth e housekeeping de backups** → `references/yoast-gpt56-housekeeping-2026-07-11.md`
+- **Centralização Zeus para Honcho, Google Drive e transporte Discord sem webhook do 1Password** → `references/onepassword-zeus-centralization-2026-07-11.md`
 
 ## MGS transport and telemetry invariants
 
