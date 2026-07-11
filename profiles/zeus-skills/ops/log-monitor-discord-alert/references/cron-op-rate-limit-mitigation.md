@@ -182,3 +182,22 @@ O auto-commit pode ficar ativo mas bloqueado se um arquivo de documentação tiv
 1. Escanear o arquivo por padrões reais de segredo sem imprimir valores.
 2. Se não houver segredo e for documentação, renomear para termo menos sensível (ex.: `cron-op-rate-limit-mitigation.md` em vez de `cron-1password-rate-limit-mitigation.md`).
 3. Confirmar `git status`, auto-commit e auto-push.
+
+## Monitor dedicado MGS — conta Business
+
+Artefatos canônicos:
+
+- Script: `/root/mgs-agent/scripts/monitor-op-rate-limit.py`
+- State: `/root/mgs-agent/data/op-rate-limit-monitor.json`
+- Log: `/root/mgs-agent/logs/monitor-op-rate-limit.log`
+- Canal Discord: `1passw-rate-limit` (`1525311777208926398`)
+- Cron: `9,24,39,54 * * * *` com `flock -n`
+
+Política confirmada por Rodolfo em 2026-07-10:
+
+- Primeiro alerta somente quando qualquer janela atingir **50%**.
+- Alerta crítico com mention em **90%**.
+- Alertar apenas em transição de estado; emitir resolução quando voltar abaixo de 50%.
+- A consulta `op service-account ratelimit` consome uma requisição simples. A cada 15 minutos, o monitor adiciona no máximo 96 requisições/dia, ou 0,192% do limite Business de 50.000.
+- Enviar pelo token local do bot Zeus, não por webhook buscado no próprio 1Password; o alerta precisa continuar funcionando mesmo quando o 1Password estiver bloqueado.
+- O smoke test real deve validar `message_id` e `channel_id` retornados pela API Discord sem imprimir tokens.
