@@ -32,7 +32,7 @@ from playwright.async_api import async_playwright
 BASE_DIR = Path('/root/mgs-agent')
 SHEET_ID = '1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY'
 MIGRATION_GID = '562940072'
-SB_STATE = '/tmp/smartbidding_state_headed.json'
+SB_STATE = '/root/.local/share/mgs/smartbidding_state_headed.json'
 DTR_BASE = 'https://digitaltrchat.com'
 NY = ZoneInfo('America/New_York')
 STATE_PATH = BASE_DIR / 'data/dtr-sb-restricted-sync-state.json'

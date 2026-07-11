@@ -26,7 +26,7 @@ from playwright.async_api import async_playwright
 BASE = Path('/root/mgs-agent')
 STATE_PATH = BASE / 'data/sb-restricted-pages-monitor.json'
 LOG_PREFIX = 'monitor-sb-restricted-pages'
-SB_STATE = '/tmp/smartbidding_state_headed.json'
+SB_STATE = '/root/.local/share/mgs/smartbidding_state_headed.json'
 TARGET_CHANNEL_ID = '1522442220903337984'
 NY = ZoneInfo('America/New_York')
 

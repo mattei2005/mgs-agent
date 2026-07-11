@@ -23,7 +23,7 @@ from playwright.async_api import async_playwright
 
 BASE = Path('/root/mgs-agent')
 DTR_DETECT = BASE / 'scripts/dtr-detect-restricted-pages.py'
-SB_STATE = '/tmp/smartbidding_state_headed.json'
+SB_STATE = '/root/.local/share/mgs/smartbidding_state_headed.json'
 NY = ZoneInfo('America/New_York')
 LOG_DIR = BASE / 'logs'
 

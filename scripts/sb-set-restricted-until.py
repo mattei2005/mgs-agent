@@ -11,7 +11,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 from playwright.async_api import async_playwright
 
-SB_STATE='/tmp/smartbidding_state_headed.json'
+SB_STATE='/root/.local/share/mgs/smartbidding_state_headed.json'
 NY=ZoneInfo('America/New_York')
 
 def norm(v): return '' if v is None else str(v).strip()
