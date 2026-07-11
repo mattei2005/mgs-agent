@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T21:45:47-04:00",
-    "generated_by": "infra-discovery.sh",
+    "updated_at": "2026-07-10T21:53:12.843607-04:00",
+    "generated_by": "infra-discovery.sh + scoped Hera operational update",
     "last_manual_update": "hera-meta-library-trusted-device-snapshot"
   },
   "system_packages": [
@@ -1780,13 +1780,14 @@
       "path": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/meta-library-reference-intake/SKILL.md",
       "size_bytes": 7992,
-      "modified_at": "2026-07-10T17:41:59.982336-04:00",
+      "modified_at": "2026-07-10T21:45:39.193353-04:00",
       "sha256": "0b4a8bdb2612220312df71cf2d1d50184c318c3e2575c2579b20ec2cff7c1e65",
       "versioned_sha256": "0b4a8bdb2612220312df71cf2d1d50184c318c3e2575c2579b20ec2cff7c1e65",
-      "purpose": "Canonical Meta Ads Library collection flow with persistent runtime/profile and explicit no-/tmp rule.",
-      "validation": "live/versioned hash match; no redundant human confirmation when authenticated readback passes; trusted-device snapshot gate documented and exercised",
-      "updated_at": "2026-07-10T21:45:47-04:00",
-      "reference_sha256": "5c9a57d8e0f6b37391fc399e7729a1105220d468081ef736026b76cbc96eb450"
+      "purpose": "Canonical Meta Ads Library collection flow with persistent profile, residential-route continuity and trusted-device snapshot gate.",
+      "validation": "live/versioned hash match; direct-vps causality wording corrected; 2FA/trusted-device snapshot required before collector; full residential collection PASS with 42 IDs and 33 HTTP 200 downloads.",
+      "updated_at": "2026-07-10T21:53:12.843607-04:00",
+      "reference_sha256": "5c9a57d8e0f6b37391fc399e7729a1105220d468081ef736026b76cbc96eb450",
+      "known_pending": "Never expose cookie values/hashes; do not touch profile again in the completed collection task."
     },
     {
       "id": "zeus-local-browser-automation-persistent-runtime-rule",
@@ -1812,6 +1813,21 @@
       "runtime_versioned_sha_match": true,
       "updated_at": "2026-07-10T21:23:43-04:00",
       "validation": "Live Graph evidence: quiz adset custom_event_type=SUBSCRIBE with OFFSITE_CONVERSIONS/pixel. Corrected prior naming assumption: chat=ADD_TO_WISHLIST, quiz=SUBSCRIBE at adset; positive cases PASS; cross-event rejected; py_compile OK."
+    },
+    {
+      "id": "hera-drive-ready-oauth-precedence-reference",
+      "agent": "hera",
+      "type": "profile_skill_reference",
+      "path": "/root/.hermes/profiles/hera/skills/creative/creative-brief-handoff/references/human-upload-ready-drive-handoff.md",
+      "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/creative-brief-handoff/references/human-upload-ready-drive-handoff.md",
+      "size_bytes": 3425,
+      "modified_at": "2026-07-10T21:50:05.588704-04:00",
+      "sha256": "0c84f0169428d8d57e4398bf30b893e25ac66cd1ed066446fe1f9bd2c8a6173e",
+      "versioned_sha256": "0c84f0169428d8d57e4398bf30b893e25ac66cd1ed066446fe1f9bd2c8a6173e",
+      "purpose": "Drive READY/reference upload procedure with OAuth credential-precedence recovery and readback gate.",
+      "validation": "live/versioned hash match; watchdog client cache token_ok; stale token-only override bypassed without deleting canonical credentials; 23 creatives + README + inventory uploaded and read back.",
+      "known_pending": "Canonical Drive OAuth client precedence should be remediated separately; task used isolated nonexistent token override path.",
+      "updated_at": "2026-07-10T21:53:12.843607-04:00"
     }
   ],
   "systemd_services": [
