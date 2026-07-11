@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T20:24:40-04:00",
+    "updated_at": "2026-07-10T20:43:19-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1723,12 +1723,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
-      "size_bytes": 7873,
-      "modified_at": "2026-07-10T19:46:39-04:00",
-      "sha256": "5414aa34b76a040354a8c509f5659dc179b922ef5c7222c4678080cf16071045",
+      "size_bytes": 8710,
+      "modified_at": "2026-07-10T20:41:44-04:00",
+      "sha256": "6b5b496f363ee532171c52540fbc115bba446f54ec57526881b54bffcb45ee4e",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-07-10T19:59:04-04:00",
-      "validation": "Frontmatter OK; positive chat/quiz URL cases valid; whitespace/prefix mismatch case rejected; SB Adgroup/SMS routes and APIs live-readonly validated."
+      "updated_at": "2026-07-10T20:43:19-04:00",
+      "validation": "Frontmatter OK; chat requires event_add_to_wishlist; quiz requires event_Subscribe; both valid cases PASS; cross-event case rejected; py_compile OK."
     }
   ],
   "systemd_services": [
@@ -2950,7 +2950,8 @@
       {
         "name": "direct-traffic-cbo-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
+        "purpose": "Campanhas Meta de tráfego direto CBO: estrutura 1x1x3, eventos obrigatórios por estratégia, UTMs MGS e reconciliação Smart Bidding/SMS."
       },
       {
         "name": "meta-ads-account-visualization",
