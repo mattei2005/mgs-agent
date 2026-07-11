@@ -43,14 +43,14 @@ Hard guard implemented in `meta-app-roles-watch.sh`: `MGS_META_APP_ROLES_FORCE_S
 
 The production monitor cadence is:
 
-> Correção canônica de Rodolfo em 2026-07-10: os monitores completos deixaram de rodar a cada 5/~8 minutos porque essa frequência consumia o limite diário compartilhado do 1Password. A agenda oficial é quatro vezes por dia, com Meta às 08:00/13:00/18:00/22:00 ET e B011 15 minutos depois. Não restaurar a cadência antiga sem autorização explícita e orçamento de requests validado.
+> Correção canônica de Rodolfo em 2026-07-10: após a auditoria do limite compartilhado do 1Password, os monitores completos passaram a rodar uma vez por hora apenas entre 08h e 23h ET. O stagger oficial é Meta em `:04` e B011 em `:24`; Honcho fica em `:54` nas quatro janelas diárias. Esses minutos foram escolhidos após auditoria de colisões de início nos crons root e Hermes. Não restaurar a cadência antiga de 5/~8 minutos nem remover o stagger sem autorização explícita e novo orçamento de requests validado.
 
 ```text
 Failure mode                         Alert SLA
 -----------------------------------  -----------------------------------------
-Segurador/admin removed from roles   B001-B010/B005-2: próximo ciclo em 08:00, 13:00, 18:00 ou 22:00 ET
-Segurador/admin added to roles       B001-B010/B005-2: próximo ciclo em 08:00, 13:00, 18:00 ou 22:00 ET
-B011 DTR/ChatPion link removed       próximo ciclo em 08:15, 13:15, 18:15 ou 22:15 ET
+Segurador/admin removed from roles   B001-B010/B005-2: próximo ciclo horário entre 08:04 e 23:04 ET
+Segurador/admin added to roles       B001-B010/B005-2: próximo ciclo horário entre 08:04 e 23:04 ET
+B011 DTR/ChatPion link removed       próximo ciclo horário entre 08:24 e 23:24 ET
 X-App-Usage >=70%                    alert on severity increase
 X-App-Usage >=85%                    risk alert; for B007/Openzed act fast
 X-App-Usage >=95%                    critical alert; repeat after cooldown

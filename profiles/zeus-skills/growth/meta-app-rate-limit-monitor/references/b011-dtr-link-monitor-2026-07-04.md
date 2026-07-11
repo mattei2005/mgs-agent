@@ -76,7 +76,7 @@ For each B011 row:
 ```text
 Script: /root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh
 State:  /root/mgs-agent/data/b011-dtr-link-monitor-state.json
-Cron:   Hermes job 498fb0d95e10, schedule `15 8,13,18,22 * * *` (4 vezes por dia, horário ET; 15 minutos após o monitor Meta para evitar rajada simultânea), deliver=local, no_agent=true
+Cron:   Hermes job 498fb0d95e10, schedule `24 8-23 * * *` (uma vez por hora, 08:24–23:24 ET; 20 minutos após Meta e sem colisão de início no inventário atual), deliver=local, no_agent=true
 Lock:   /var/lock/b011-dtr-link-watch.lock (skip overlapping run)
 Config: 1Password item `BOT B011 Token`
 Alert:  B011 channel 1522830283240505385, direct Discord bot post on anomaly/change or explicit live validation
@@ -138,5 +138,5 @@ William Nogueira was initially misclassified by an older validation route; after
 - Do not treat `0 pages` as unlinked.
 - Do not use stale sheet rows with `Migrado=FALSE` as active alert targets unless Rodolfo explicitly asks for all rows.
 - Do not expose OAuth tokens, page tokens, app secrets, or authorization codes in Discord/logs.
-- O runtime histórico de ~5m20s continua exigindo `flock` não bloqueante, mas a cadência canônica foi reduzida por Rodolfo em 2026-07-10 para quatro vezes por dia (`08:15`, `13:15`, `18:15`, `22:15` ET) após auditoria mostrar consumo excessivo do 1Password. Não restaurar a cadência de ~8 minutos sem autorização explícita e novo orçamento de requests.
+- O runtime histórico de ~5m20s continua exigindo `flock` não bloqueante. A cadência canônica foi definida por Rodolfo em 2026-07-10 como uma vez por hora entre 08:24 e 23:24 ET, com Meta em `:04` e B011 em `:24`, após auditoria do consumo do 1Password e das colisões de cron. Não restaurar a cadência de ~8 minutos nem remover o stagger sem autorização explícita e novo orçamento de requests.
 - A Facebook OAuth URL like `/dialog/oauth/business/cancel/?app_id=...` can confirm app_id, scopes, and redirect_uri, but it does not contain a usable token/code for monitoring.
