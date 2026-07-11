@@ -32,6 +32,8 @@ chmod 644 "$IMPORT_JSON" "$IMPORT_PHP" "$SMOKE_PHP"
 [ -d "$LIVE" ]
 CURRENT_VERSION="$(sudo -u runcloud2 wp --path="$WP" plugin get mgs-quiz-carro --field=version --skip-plugins --skip-themes 2>/dev/null)"
 [ "$CURRENT_VERSION" = "1.6.2" ]
+[ "$(sudo -u runcloud2 sha256sum "$LIVE/mgs-quiz-carro.php" | cut -d' ' -f1)" = "4af8fd8c4b842bc681ba06dbed65679cdc24f0b426a149880fe80a4f89ba3466" ]
+[ "$(sudo -u runcloud2 sha256sum "$LIVE/includes/class-mgs-quiz-admin.php" | cut -d' ' -f1)" = "601310680721d1b903350a121618aee4801802503e477edd1c47e0a38d14d441" ]
 [ ! -e "$BACKUP" ]
 [ ! -e "$STAGE_PARENT" ]
 
