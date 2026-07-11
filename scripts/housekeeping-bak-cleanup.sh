@@ -2,7 +2,7 @@
 # =============================================================================
 # housekeeping-bak-cleanup.sh — Remove backups antigos preservando o último
 #
-# Roda diariamente via cron. Cobre locais conhecidos onde patches deixam backups:
+# Roda duas vezes por semana via cron. Cobre locais conhecidos onde patches deixam backups:
 #   - /root/.hermes/         (configs Hermes, profiles, .env)
 #   - /root/mgs-agent/       (scripts, skills, data)
 #   - /root/backups/         (snapshots pré-update)
@@ -41,18 +41,25 @@ fi
 RETENTION_DAYS="${RETENTION_DAYS:-15}"
 HERMES_UPDATE_BACKUP_RETENTION_DAYS="${HERMES_UPDATE_BACKUP_RETENTION_DAYS:-2}"
 HERMES_UPDATE_BACKUP_KEEP_LATEST="${HERMES_UPDATE_BACKUP_KEEP_LATEST:-2}"
-LOG=/root/mgs-agent/logs/housekeeping.log
 BASE_DIR=/root/mgs-agent
+LOG="${MGS_HOUSEKEEPING_LOG:-${BASE_DIR}/logs/housekeeping.log}"
+SCAN_ROOTS="${MGS_HOUSEKEEPING_SCAN_ROOTS:-/root/.hermes:/root/mgs-agent:/root/backups:/tmp}"
+BACKUPS_ROOT="${MGS_HOUSEKEEPING_BACKUPS_ROOT:-/root/backups}"
+HERMES_UPDATE_ROOT="${MGS_HOUSEKEEPING_HERMES_UPDATE_ROOT:-${BASE_DIR}/reports/hermes-updates}"
+DISCORD_CHANNEL_ID="${MGS_DISCORD_CHANNEL_ID_OVERRIDE:-1498132022634483894}"
+DISCORD_API_URL="${MGS_DISCORD_API_URL_OVERRIDE:-https://discord.com/api/v10/channels/${DISCORD_CHANNEL_ID}/messages}"
 CANDIDATES_FILE="$(mktemp)"
 KEEP_FILE="$(mktemp)"
 DELETE_FILE="$(mktemp)"
 trap 'rm -f "$CANDIDATES_FILE" "$KEEP_FILE" "$DELETE_FILE"' EXIT
 
-# Carregar credenciais 1Password apenas para notificação em execução real.
+# Token local do bot Zeus; housekeeping não consulta o 1Password.
 set -a
 # shellcheck source=/dev/null
-source "${BASE_DIR}/.env" 2>/dev/null || true
+source "/root/.hermes/profiles/zeus/.env" 2>/dev/null || true
 set +a
+BOT_TOKEN="${MGS_DISCORD_BOT_TOKEN_OVERRIDE:-${DISCORD_BOT_TOKEN:-}}"
+mkdir -p "$(dirname "$LOG")"
 
 log() { echo "[$(date -Iseconds)] housekeeping: $*" | tee -a "$LOG"; }
 
@@ -64,7 +71,7 @@ fi
 
 # ─── Coletar candidatos e decidir o que pode ser deletado ────────────────────
 # A regra é calculada em Python para evitar bugs de parsing em nomes com espaço.
-python3 - "$RETENTION_DAYS" "$CANDIDATES_FILE" "$KEEP_FILE" "$DELETE_FILE" <<'PY'
+python3 - "$RETENTION_DAYS" "$CANDIDATES_FILE" "$KEEP_FILE" "$DELETE_FILE" "$SCAN_ROOTS" <<'PY'
 import os
 import re
 import sys
@@ -76,7 +83,7 @@ candidates_path = Path(sys.argv[2])
 keep_path = Path(sys.argv[3])
 delete_path = Path(sys.argv[4])
 
-roots = [Path('/root/.hermes'), Path('/root/mgs-agent'), Path('/root/backups'), Path('/tmp')]
+roots = [Path(value) for value in sys.argv[5].split(os.pathsep) if value]
 skip_parts = {'.git', 'node_modules'}
 now = time.time()
 cutoff = now - retention_days * 86400
@@ -174,7 +181,7 @@ TOTAL_MB=$(awk -v bytes="${TOTAL_SIZE:-0}" 'BEGIN {printf "%.2f", bytes/1024/102
 # Eles não têm extensão .bak, então a limpeza genérica acima não os alcança.
 HERMES_DELETE_FILE="$(mktemp)"
 trap 'rm -f "$CANDIDATES_FILE" "$KEEP_FILE" "$DELETE_FILE" "$HERMES_DELETE_FILE"' EXIT
-python3 - "$HERMES_UPDATE_BACKUP_RETENTION_DAYS" "$HERMES_UPDATE_BACKUP_KEEP_LATEST" "$HERMES_DELETE_FILE" <<'PY'
+python3 - "$HERMES_UPDATE_BACKUP_RETENTION_DAYS" "$HERMES_UPDATE_BACKUP_KEEP_LATEST" "$HERMES_DELETE_FILE" "$HERMES_UPDATE_ROOT" <<'PY'
 import sys
 import time
 from pathlib import Path
@@ -182,7 +189,7 @@ from pathlib import Path
 retention_days = int(sys.argv[1])
 keep_latest = int(sys.argv[2])
 out = Path(sys.argv[3])
-root = Path('/root/mgs-agent/reports/hermes-updates')
+root = Path(sys.argv[4])
 cutoff = time.time() - retention_days * 86400
 records = []
 if root.exists():
@@ -209,7 +216,7 @@ HERMES_TOTAL_MB=$(awk -v bytes="${HERMES_TOTAL_SIZE:-0}" 'BEGIN {printf "%.2f", 
 TOTAL_COUNT=$((COUNT + HERMES_COUNT))
 TOTAL_SIZE_ALL=$((TOTAL_SIZE + HERMES_TOTAL_SIZE))
 TOTAL_MB_ALL=$(awk -v bytes="${TOTAL_SIZE_ALL:-0}" 'BEGIN {printf "%.2f", bytes/1024/1024}')
-HERMES_PRESERVED_COUNT=$(find /root/mgs-agent/reports/hermes-updates -type f -name 'hermes-profiles-backup*.tar.gz' 2>/dev/null | wc -l | tr -d ' ')
+HERMES_PRESERVED_COUNT=$(find "$HERMES_UPDATE_ROOT" -type f -name 'hermes-profiles-backup*.tar.gz' 2>/dev/null | wc -l | tr -d ' ')
 
 if [[ "$TOTAL_COUNT" -eq 0 ]]; then
     log "Nada a deletar (${CANDIDATE_COUNT} backup(s) pequenos encontrados; ${KEEP_COUNT} preservado(s); Hermes update tarballs elegíveis=0)"
@@ -234,7 +241,7 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
         [[ -z "$f" ]] && continue
         log "  keep latest $f"
     done
-    DIRS_CANDIDATE=$(find /root/backups -type d -empty -mtime +"${RETENTION_DAYS}" -print 2>/dev/null | wc -l)
+    DIRS_CANDIDATE=$(find "$BACKUPS_ROOT" -type d -empty -mtime +"${RETENTION_DAYS}" -print 2>/dev/null | wc -l)
     log "DRY-RUN: ${DIRS_CANDIDATE} diretórios vazios seriam removidos em /root/backups"
     log "=== END DRY-RUN — candidatos ${TOTAL_COUNT} arquivos / ${TOTAL_MB_ALL} MB ==="
     exit 0
@@ -253,18 +260,13 @@ awk -F '\t' '{print $4}' "$DELETE_FILE" "$HERMES_DELETE_FILE" | while IFS= read 
 done
 
 # ─── Limpar diretórios vazios deixados pra trás (snapshots antigos) ─────────
-DIRS_REMOVED=$({ find /root/backups -type d -empty -mtime +"${RETENTION_DAYS}" -delete -print 2>/dev/null; find /root/mgs-agent/reports/hermes-updates -mindepth 1 -type d -empty -mtime +"${HERMES_UPDATE_BACKUP_RETENTION_DAYS}" -delete -print 2>/dev/null; } | wc -l)
+DIRS_REMOVED=$({ find "$BACKUPS_ROOT" -type d -empty -mtime +"${RETENTION_DAYS}" -delete -print 2>/dev/null; find "$HERMES_UPDATE_ROOT" -mindepth 1 -type d -empty -mtime +"${HERMES_UPDATE_BACKUP_RETENTION_DAYS}" -delete -print 2>/dev/null; } | wc -l)
 if [[ "$DIRS_REMOVED" -gt 0 ]]; then
     log "Removidos ${DIRS_REMOVED} diretórios vazios"
 fi
 
-# ─── Notificar Discord ──────────────────────────────────────────────────────
-WEBHOOK=$(op item get "Discord Webhook - Alerts Infra Channel" \
-    --vault "MGS Conteúdo" \
-    --fields label=webhook_url \
-    --reveal 2>/dev/null || echo "")
-
-if [[ "$WEBHOOK" == https://* ]]; then
+# ─── Notificar Discord diretamente pelo bot Zeus ─────────────────────────────
+if [[ -n "$BOT_TOKEN" ]]; then
     HOST=$(hostname)
     PRESERVED_LABEL="${KEEP_COUNT} pequenos + ${HERMES_PRESERVED_COUNT} tarballs Hermes"
     STATUS_LABEL="OK — baixo risco (somente backups antigos; canônicos preservados)"
@@ -300,13 +302,20 @@ if [[ "$WEBHOOK" == https://* ]]; then
         --arg summary "$DELETED_SUMMARY" \
         --arg sample "$DELETED_SAMPLE" \
         '{content:"", embeds:[{title:"Housekeeping de backups executado", color:3447003, fields:[{name:"Host", value:$host, inline:true}, {name:"Retenção", value:$retention, inline:true}, {name:"Status", value:$status, inline:false}, {name:"Deletados", value:$deleted, inline:true}, {name:"Preservados", value:$preserved, inline:true}, {name:"Diretórios vazios", value:$dirs, inline:true}, {name:"Tipos deletados", value:$summary, inline:false}, {name:"Amostra", value:$sample, inline:false}, {name:"Log completo", value:"`/root/mgs-agent/logs/housekeeping.log`", inline:false}]}]}')
-    curl -s -X POST "$WEBHOOK" \
+    HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 \
+        -X POST \
+        -H "Authorization: Bot ${BOT_TOKEN}" \
         -H "Content-Type: application/json" \
+        -H "User-Agent: MGS-Zeus-Housekeeping/1.0" \
         -d "$PAYLOAD" \
-        --max-time 10 > /dev/null 2>&1 || log "WARN: Discord notify falhou"
-    log "Discord notificado"
+        "$DISCORD_API_URL" 2>/dev/null || printf '000')
+    if [[ "$HTTP_CODE" =~ ^20[01]$ ]]; then
+        log "Discord bot notificado (HTTP ${HTTP_CODE}, channel=${DISCORD_CHANNEL_ID})"
+    else
+        log "WARN: Discord bot falhou (HTTP ${HTTP_CODE:-none})"
+    fi
 else
-    log "WARN: WEBHOOK vazio — sem notificação Discord"
+    log "WARN: DISCORD_BOT_TOKEN do Zeus ausente — sem notificação Discord"
 fi
 
 log "=== END — deletados ${TOTAL_COUNT} arquivos / ${TOTAL_MB_ALL} MB ==="

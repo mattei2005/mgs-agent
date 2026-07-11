@@ -1,10 +1,64 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T23:27:43-04:00",
+    "updated_at": "2026-07-11T00:19:14-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
+    {
+      "id": "hera-creative-sanitizer-exiftool",
+      "agent": "hera",
+      "manager": "apt",
+      "source_report": "REPORT-INFRA Hera creative sanitizer runtime validation",
+      "package": "libimage-exiftool-perl",
+      "version": "12.76+dfsg-1",
+      "binary": "/usr/bin/exiftool",
+      "binary_exists": true,
+      "purpose": "Metadata inspection/sanitization checks for creative assets",
+      "known_pending": "resolved: JFIFVersion treated as structural JPEG/JFIF metadata; 10 Meta Library JPGs verified clean=true/harmful_tags=0 after sanitization.",
+      "updated_at": "2026-06-18T18:32:42.819646-04:00"
+    },
+    {
+      "id": "hera-creative-sanitizer-mat2",
+      "agent": "hera",
+      "manager": "apt",
+      "source_report": "REPORT-INFRA Hera creative sanitizer clean JPG gate",
+      "package": "mat2",
+      "version": "0.13.4-2.1",
+      "binary": "/usr/bin/mat2",
+      "binary_exists": true,
+      "purpose": "Second-pass metadata removal/verification for clean creative asset delivery",
+      "updated_at": "2026-06-18T18:32:42.819646-04:00"
+    },
+    {
+      "id": "hera-meta-library-manual-login-runtime",
+      "agent": "hera",
+      "manager": "apt",
+      "source_report": "Zeus Meta Library persistent manual-login setup",
+      "commandline": "apt-get install --no-install-recommends x11vnc novnc websockify",
+      "packages_count": 3,
+      "packages": [
+        {
+          "name": "x11vnc",
+          "version": "0.9.16-10",
+          "status": "installed"
+        },
+        {
+          "name": "novnc",
+          "version": "1:1.3.0-2",
+          "status": "installed"
+        },
+        {
+          "name": "websockify",
+          "version": "0.10.0+dfsg1-5build2",
+          "status": "installed"
+        }
+      ],
+      "missing_packages": [],
+      "runtime_validation": "x11vnc 127.0.0.1:5903; websockify/noVNC 127.0.0.1:6083; vnc.html HTTP 200",
+      "purpose": "Local-only visual session for Rodolfo to authenticate the persistent Hera Meta Library Chromium profile.",
+      "updated_at": "2026-07-10T17:42:04-04:00"
+    },
     {
       "id": "hera-meta-library-playwright-runtime-deps",
       "agent": "hera",
@@ -190,31 +244,6 @@
       "updated_at": "2026-06-18T18:29:15.935418-04:00"
     },
     {
-      "id": "hera-creative-sanitizer-exiftool",
-      "agent": "hera",
-      "manager": "apt",
-      "source_report": "REPORT-INFRA Hera creative sanitizer runtime validation",
-      "package": "libimage-exiftool-perl",
-      "version": "12.76+dfsg-1",
-      "binary": "/usr/bin/exiftool",
-      "binary_exists": true,
-      "purpose": "Metadata inspection/sanitization checks for creative assets",
-      "known_pending": "resolved: JFIFVersion treated as structural JPEG/JFIF metadata; 10 Meta Library JPGs verified clean=true/harmful_tags=0 after sanitization.",
-      "updated_at": "2026-06-18T18:32:42.819646-04:00"
-    },
-    {
-      "id": "hera-creative-sanitizer-mat2",
-      "agent": "hera",
-      "manager": "apt",
-      "source_report": "REPORT-INFRA Hera creative sanitizer clean JPG gate",
-      "package": "mat2",
-      "version": "0.13.4-2.1",
-      "binary": "/usr/bin/mat2",
-      "binary_exists": true,
-      "purpose": "Second-pass metadata removal/verification for clean creative asset delivery",
-      "updated_at": "2026-06-18T18:32:42.819646-04:00"
-    },
-    {
       "id": "hera-video-editing-runtime-deps",
       "agent": "hera",
       "manager": "apt",
@@ -279,19 +308,6 @@
         "result": "upgraded and service active",
         "log": "/root/mgs-agent/logs/vps-update-20260710-001713.log"
       }
-    },
-    {
-      "id": "zeus-sqlite3-article-cost-tracker",
-      "agent": "zeus",
-      "manager": "apt",
-      "source_report": "Rodolfo alert triage 2026-07-01: track-article-cost sqlite3 missing",
-      "package": "sqlite3",
-      "version": "3.45.1-1ubuntu2.6",
-      "binary": "/usr/bin/sqlite3",
-      "binary_exists": true,
-      "purpose": "SQLite CLI runtime dependency for /root/mgs-agent/scripts/track-article-cost.sh writing data/article-tracker.db",
-      "validation": "command -v sqlite3; sqlite3 --version; track-article-cost.sh rerun saved pending posts and next run pending=0",
-      "updated_at": "2026-07-01T18:10:19-04:00"
     },
     {
       "id": "vps-runtime-package-baseline",
@@ -421,33 +437,38 @@
       "updated_at": "2026-07-10T00:44:17-04:00"
     },
     {
-      "id": "hera-meta-library-manual-login-runtime",
-      "agent": "hera",
+      "id": "zeus-sqlite3-article-cost-tracker",
+      "agent": "zeus",
       "manager": "apt",
-      "source_report": "Zeus Meta Library persistent manual-login setup",
-      "commandline": "apt-get install --no-install-recommends x11vnc novnc websockify",
-      "packages_count": 3,
+      "source_report": "Rodolfo alert triage 2026-07-01: track-article-cost sqlite3 missing",
+      "package": "sqlite3",
+      "version": "3.45.1-1ubuntu2.6",
+      "binary": "/usr/bin/sqlite3",
+      "binary_exists": true,
+      "purpose": "SQLite CLI runtime dependency for /root/mgs-agent/scripts/track-article-cost.sh writing data/article-tracker.db",
+      "validation": "command -v sqlite3; sqlite3 --version; track-article-cost.sh rerun saved pending posts and next run pending=0",
+      "updated_at": "2026-07-01T18:10:19-04:00"
+    },
+    {
+      "id": "zeus-yoast-expect-runtime",
+      "agent": "zeus",
+      "manager": "apt",
+      "source_report": "REPORT-INFRA Yoast monitor recovery 2026-07-11",
+      "commandline": "apt-get install -y expect",
+      "packages_count": 2,
       "packages": [
         {
-          "name": "x11vnc",
-          "version": "0.9.16-10",
+          "name": "expect",
+          "version": "5.45.4-3",
           "status": "installed"
         },
         {
-          "name": "novnc",
-          "version": "1:1.3.0-2",
-          "status": "installed"
-        },
-        {
-          "name": "websockify",
-          "version": "0.10.0+dfsg1-5build2",
+          "name": "tcl-expect",
+          "version": "5.45.4-3",
           "status": "installed"
         }
       ],
-      "missing_packages": [],
-      "runtime_validation": "x11vnc 127.0.0.1:5903; websockify/noVNC 127.0.0.1:6083; vnc.html HTTP 200",
-      "purpose": "Local-only visual session for Rodolfo to authenticate the persistent Hera Meta Library Chromium profile.",
-      "updated_at": "2026-07-10T17:42:04-04:00"
+      "purpose": "Non-interactive two-hop SSH/SCP automation for monitor-yoast-health-eggbev.sh."
     }
   ],
   "runtime_artifacts": [
@@ -2025,7 +2046,7 @@
       "entry": "1-56/5 * * * * flock -n /var/lock/monitor_service_restarts.lock /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1"
     },
     {
-      "entry": "47 12 * * * flock -n /var/lock/monitor_gpt55_oauth_cost.lock /root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh >> /root/mgs-agent/logs/monitor-gpt55-oauth-cost.log 2>&1"
+      "entry": "44 22 * * * flock -n /var/lock/monitor_gpt55_oauth_cost.lock /root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh >> /root/mgs-agent/logs/monitor-gpt55-oauth-cost.log 2>&1"
     },
     {
       "entry": "3-58/5 * * * * flock -n /var/lock/monitor_tool_loops.lock /root/mgs-agent/scripts/monitor-tool-loops.sh >> /root/mgs-agent/logs/monitor-tool-loops.log 2>&1"
@@ -2043,7 +2064,7 @@
       "entry": "0 * * * * flock -n /var/lock/cleanup_zombie_sessions.lock /root/mgs-agent/scripts/cleanup-zombie-sessions.sh >> /root/mgs-agent/logs/cleanup-zombie-sessions.log 2>&1"
     },
     {
-      "entry": "17 3 * * * flock -n /var/lock/housekeeping_bak_cleanup.lock /root/mgs-agent/scripts/housekeeping-bak-cleanup.sh >> /root/mgs-agent/logs/housekeeping-cron.log 2>&1"
+      "entry": "44 20 * * 2,5 flock -n /var/lock/housekeeping_bak_cleanup.lock /root/mgs-agent/scripts/housekeeping-bak-cleanup.sh >> /root/mgs-agent/logs/housekeeping-cron.log 2>&1"
     },
     {
       "entry": "0 8 * * * flock -n /var/lock/pendencia_render_md.lock /root/mgs-agent/scripts/pendencia-render-md.sh >> /root/mgs-agent/logs/pendencia-render.log 2>&1"
@@ -2267,8 +2288,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/check-pending-reports.sh",
-      "size_bytes": 8828,
-      "modified_at": "2026-06-07T21:39:19-04:00"
+      "size_bytes": 9602,
+      "modified_at": "2026-07-11T00:03:44-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/clean-creative-metadata.py",
@@ -2477,8 +2498,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
-      "size_bytes": 14030,
-      "modified_at": "2026-07-02T03:44:43-04:00"
+      "size_bytes": 14689,
+      "modified_at": "2026-07-11T00:15:28-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/import-discord-thread.py",
@@ -2567,8 +2588,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh",
-      "size_bytes": 4798,
-      "modified_at": "2026-06-07T00:45:43-04:00"
+      "size_bytes": 8907,
+      "modified_at": "2026-07-11T00:12:56-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
@@ -2617,8 +2638,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh",
-      "size_bytes": 23332,
-      "modified_at": "2026-06-07T00:47:16-04:00"
+      "size_bytes": 24242,
+      "modified_at": "2026-07-11T00:07:53-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mu-plugins/yoast-rest-meta.php",
@@ -5274,8 +5295,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 2153,
-      "md5": "c8c3036b8f3dd98eb5b189b586269a2e",
-      "modified_at": "2026-07-10T23:27:01-04:00"
+      "md5": "151d76427777c3aea59b43c401bee2e9",
+      "modified_at": "2026-07-11T00:17:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -5286,8 +5307,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "94dd3fead89bc523707248b4cd4c0516",
-      "modified_at": "2026-07-10T23:26:32-04:00"
+      "md5": "d5b2d28076ea6c88b64680a2f2d743aa",
+      "modified_at": "2026-07-11T00:11:29-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -5298,8 +5319,8 @@
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
       "size_bytes": 25839,
-      "md5": "8ca26e3574e0fa73bb332934a4143a6b",
-      "modified_at": "2026-07-10T22:21:56-04:00"
+      "md5": "dd1d9a240ef6d6495dc0a5d4ca0e6935",
+      "modified_at": "2026-07-10T23:31:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -5310,8 +5331,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 316,
-      "md5": "46a17a98c69efd936a8c4970294127ac",
-      "modified_at": "2026-07-10T23:15:01-04:00"
+      "md5": "2e6d5771eaae5b781d3ad1adf7b299f2",
+      "modified_at": "2026-07-11T00:15:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -5358,8 +5379,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 25681,
-      "md5": "8b5236f18e61ebed7d7f4649d573084d",
-      "modified_at": "2026-07-10T23:25:02-04:00"
+      "md5": "342dc628f23664c2725149f8f8e27fce",
+      "modified_at": "2026-07-11T00:15:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -5381,9 +5402,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 227027,
-      "md5": "6219859dfb0f66f12c7b3cbf8c048a4c",
-      "modified_at": "2026-07-10T23:12:59-04:00"
+      "size_bytes": 227160,
+      "md5": "875dac6389ed10ece62ebcacaf5b2440",
+      "modified_at": "2026-07-10T23:53:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -5430,8 +5451,8 @@
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
       "size_bytes": 1115,
-      "md5": "19fb6622947d8923397a44026c291270",
-      "modified_at": "2026-07-10T22:39:02-04:00"
+      "md5": "8557a952fab381154646df370348a2b2",
+      "modified_at": "2026-07-10T23:39:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -5502,8 +5523,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
-      "md5": "c25a5805763f4de3095e3c1b69f385c6",
-      "modified_at": "2026-07-10T23:26:02-04:00"
+      "md5": "d7114548d8ff16a37a08680119b97180",
+      "modified_at": "2026-07-11T00:16:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -5532,8 +5553,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2173,
-      "md5": "b4bfd9bbce732697af2804e9c67eaf64",
-      "modified_at": "2026-07-10T23:25:02-04:00"
+      "md5": "be3260f22ea10045dc24ea0e18318c3b",
+      "modified_at": "2026-07-11T00:15:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
@@ -5549,9 +5570,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 21704,
-      "md5": "530224f8f02257ad922c1c766e28c26b",
-      "modified_at": "2026-06-18T10:24:08-04:00"
+      "size_bytes": 22068,
+      "md5": "f9d549c865fa89196b7a1c053eb4320d",
+      "modified_at": "2026-07-11T00:10:33-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",

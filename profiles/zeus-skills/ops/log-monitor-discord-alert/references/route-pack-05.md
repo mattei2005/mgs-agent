@@ -101,7 +101,7 @@ Para testes isolados, usar `MGS_DISCORD_API_URL_OVERRIDE`, `MGS_DISCORD_BOT_TOKE
 /root/mgs-agent/scripts/check-pending-reports.sh   — script principal
 /root/mgs-agent/data/pending-reports-state.json    — state anti-spam
 /root/mgs-agent/logs/check-pending-reports.log     — output do cron
-crontab: */15 * * * *
+crontab: `7,22,37,52 * * * *` (quatro vezes por hora, ET)
 ```
 
 ### Diretórios monitorados
@@ -145,17 +145,18 @@ DIR_AGENT["novo_agente"]="novo_agente"
 ### Formato das mensagens Discord
 
 **Alerta:** embed vermelho com fields `Pendências`, `Ação` e `Itens`.
-`content` deve conter a mention necessária para o Zeus receber o evento: `<@1496296175014252634> pending report detectado`.
+`content` deve mencionar Rodolfo quando houver pendência real: `<@344196393512075265> pending report detectado`. Não mencionar o próprio Zeus; ele é o emissor.
 
 **Resolução:** embed verde com fields `Skill`, `Agent` e `Inventário`; `content` vazio.
 
 ### Pitfalls específicos do pending-report monitor
 
-1. **Source correto:** `source "/root/mgs-agent/.env"` (tem `OP_SERVICE_ACCOUNT_TOKEN`), não `/root/.hermes/profiles/zeus/.env`
+1. **Transporte canônico:** carregar `DISCORD_BOT_TOKEN` de `/root/.hermes/profiles/zeus/.env` e publicar como bot Zeus pela API no canal `1498132022634483894`; este monitor não consulta o 1Password.
 2. **Separador `|` não `:`:** `agent:skill_name` usa `:` — usar `|` como separador em arrays shell; `:` causa colisão e bugs silenciosos
-3. **Persistir state ANTES de `curl`:** se curl falha, state deve já ter sido salvo (idempotência evita loop infinito)
-4. **Bug histórico 2026-04-27:** combinação dos bugs acima causou ~120 mensagens duplicadas em 8h. Sempre validar com dry-run após modificar lógica de state transitions
-5. **Resetar state:** `echo '{"alerted": {}, "resolved": {}}' > /root/mgs-agent/data/pending-reports-state.json`
+3. **Persistir state somente após POST 200/201 confirmado:** a pendência deve permanecer elegível se a API falhar; a resolução remove do state antes de enviar para evitar loop de resolução.
+4. **Bug histórico 2026-04-27:** parsing/estado inadequados causaram mensagens duplicadas. Sempre validar com fixture temporária e API mock após modificar transições de state.
+5. **Overrides de teste:** `MGS_PENDING_REPORT_STATE_FILE`, `MGS_PENDING_REPORT_INVENTORY_FILE`, `MGS_PENDING_REPORT_*_SKILL_DIR`, `MGS_DISCORD_API_URL_OVERRIDE` e `MGS_DISCORD_BOT_TOKEN_OVERRIDE`.
+6. **Resetar state:** `echo '{"alerted": {}, "resolved": {}}' > /root/mgs-agent/data/pending-reports-state.json`
 
 ### Fluxo completo esperado
 

@@ -73,16 +73,22 @@ The rate-limit query itself is a request. Keep production monitoring low-frequen
 5. Stagger heavy jobs to avoid simultaneous bursts.
 6. Keep manual on-demand validation available when scheduled cadence is reduced.
 
-## Canonical MGS correction — 2026-07-10
+## Canonical MGS corrections — 2026-07-10/11
 
-After full-system audit, Rodolfo changed the two heavy Zeus monitors from 5/~8-minute cadence to four runs per day in ET:
+After full-system audit, Rodolfo set the two heavy Zeus monitors to hourly business-window cadence in ET with isolated start minutes:
 
 ```text
-meta-app-roles-watch  08:00  13:00  18:00  22:00
-b011-dtr-link-watch   08:15  13:15  18:15  22:15
+meta-app-roles-watch  08:04–23:04, uma vez por hora
+b011-dtr-link-watch   08:24–23:24, uma vez por hora
 ```
 
-The 15-minute stagger avoids simultaneous heavy sweeps. Do not restore the old cadence without explicit authorization and a fresh request-budget calculation.
+The 20-minute stagger avoids simultaneous heavy sweeps; Honcho uses `:54` in its four operational windows. Do not restore the old 5/~8-minute cadence without explicit authorization and a fresh request-budget calculation.
+
+Direct Discord transport corrections on 2026-07-11:
+
+- `monitor-service-restarts.sh`, `check-pending-reports.sh`, `monitor-gpt55-oauth-cost.sh`, and `housekeeping-bak-cleanup.sh` use the local Zeus bot and consume zero 1Password requests for alert delivery;
+- `monitor-yoast-health-eggbev.sh` uses the bot for Discord and retains only two SSH credential reads per run;
+- `monitor-op-rate-limit.py` necessarily performs one hourly 1Password rate-limit probe and alerts with the bot.
 
 ## Verification checklist
 
