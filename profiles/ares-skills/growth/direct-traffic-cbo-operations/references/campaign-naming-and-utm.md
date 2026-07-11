@@ -72,6 +72,22 @@ Criativos  | 3      | todos imagem, todos vídeo ou mix
 Destino    | direto | URL final com UTMs canônicas
 ```
 
+## Evento obrigatório no nome da campanha
+
+```text
+Experiência | Captura                  | Texto literal obrigatório
+------------|--------------------------|-----------------------------
+Chat        | com ou sem captura       | `event_add_to_wishlist`
+Quiz        | com ou sem captura       | `event_Subscribe`
+```
+
+Regras:
+
+1. O evento pertence ao **nome da campanha Meta**; não é parâmetro UTM.
+2. Captura não altera o evento obrigatório.
+3. Preservar exatamente capitalização e underscores: `event_add_to_wishlist` e `event_Subscribe`.
+4. Antes de criar/clonar, validar o nome final juntamente com BM, conta e sequência da campanha.
+
 ## Exemplos
 
 ### Chat, gestor G002

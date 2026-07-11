@@ -81,6 +81,17 @@ Adset      | 1          | código `gNN` dentro da campanha
 Anúncios   | 3          | imagem, vídeo ou mix permitido
 ```
 
+Evento obrigatório no **nome da campanha**, independentemente de haver captura:
+
+```text
+Estratégia | Sem captura           | Com captura           | Sufixo/evento obrigatório
+-----------|-----------------------|-----------------------|---------------------------
+Chat       | obrigatório           | obrigatório           | `event_add_to_wishlist`
+Quiz       | obrigatório           | obrigatório           | `event_Subscribe`
+```
+
+O evento é definido pela experiência, não pela captura. Campanha de chat nunca usa `event_Subscribe`; campanha de quiz nunca usa `event_add_to_wishlist`.
+
 Qualquer desvio do 1×1×3 deve estar explícito no pedido/spec. Antes de campanha, cada criativo precisa passar pelo metadata sanitizer canônico do Ares.
 
 ### 3. Construir e validar UTMs
@@ -153,17 +164,20 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 ## Common pitfalls
 
 1. **Confundir `-f` e `-s`.** Nesta taxonomia, `-f` identifica chat e `-s` identifica quiz.
-2. **Confundir gestor e adset.** `gXXX` em `utm_medium` é gestor; `gNN` no final de `utm_adgroup` é o número do conjunto.
-3. **Duplicar sequência.** `utm_adgroup` deve copiar `utm_campaign` integralmente antes de acrescentar o adset.
-4. **Misturar DTR/ChatPion.** A campanha desta skill é link direto por CBO, não a estratégia de bot.
-5. **Somar receita sem captura.** Receita SMS só entra quando houver captura/envio atribuível no mesmo recorte.
-6. **Usar R$ 0,08 como fatura real.** O relatório WordPress atual estima 8 centavos por linha filtrada; isso não prova evento cobrado no vendor.
-7. **Cruzar datas diferentes.** Meta, SB, SMS Funnel e WP precisam do mesmo período/timezone ou da divergência declarada.
-8. **Concluir por login.** Acesso é validado só depois de abrir as páginas/relatórios e observar dados/filtros esperados.
+2. **Usar evento errado no nome.** Chat exige `event_add_to_wishlist`; quiz exige `event_Subscribe`, com ou sem captura.
+3. **Confundir gestor e adset.** `gXXX` em `utm_medium` é gestor; `gNN` no final de `utm_adgroup` é o número do conjunto.
+4. **Duplicar sequência.** `utm_adgroup` deve copiar `utm_campaign` integralmente antes de acrescentar o adset.
+5. **Misturar DTR/ChatPion.** A campanha desta skill é link direto por CBO, não a estratégia de bot.
+6. **Somar receita sem captura.** Receita SMS só entra quando houver captura/envio atribuível no mesmo recorte.
+7. **Usar R$ 0,08 como fatura real.** O relatório WordPress atual estima 8 centavos por linha filtrada; isso não prova evento cobrado no vendor.
+8. **Cruzar datas diferentes.** Meta, SB, SMS Funnel e WP precisam do mesmo período/timezone ou da divergência declarada.
+9. **Concluir por login.** Acesso é validado só depois de abrir as páginas/relatórios e observar dados/filtros esperados.
 
 ## Verification checklist
 
 - [ ] Estratégia classificada como quiz/chat e com/sem captura
+- [ ] Nome de chat contém exatamente `event_add_to_wishlist`
+- [ ] Nome de quiz contém exatamente `event_Subscribe`
 - [ ] Campanha CBO e estrutura esperada 1×1×3 documentadas
 - [ ] BM, conta, campanha, adset e gestor confirmados
 - [ ] `utm_source=facebook`
