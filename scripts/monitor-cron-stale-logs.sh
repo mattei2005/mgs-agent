@@ -71,7 +71,11 @@ def threshold_seconds(schedule: str) -> int:
         return 60 * 60
     if minute == '0' and hour == '*':
         return 150 * 60
-    return 30 * 3600
+    # Jobs diários podem ter a agenda movida para mais tarde no mesmo dia.
+    # 30h gerava falso STALE antes da primeira execução na nova agenda
+    # (ex.: 12:47 -> 22:44). 36h mantém uma margem de 12h após o horário
+    # diário esperado sem mascarar uma execução perdida por mais de um ciclo.
+    return 36 * 3600
 
 
 def parse_crons():
