@@ -160,23 +160,31 @@ def import_remote(payload):
         '-o', 'UserKnownHostsFile=/root/.ssh/known_hosts_mgs',
         '-o', 'ConnectTimeout=20',
     ]
+    remote_dir = '/var/tmp/mgs-sb-sms-revenue'
+    remote_payload = remote_dir + '/mgs-sb-sms-revenue-day.json'
+    remote_importer = remote_dir + '/import-sb-sms-revenue-day.php'
+    prepare = subprocess.run(
+        ['sshpass', '-e', 'ssh', *ssh_opts, f'{REMOTE_USER}@{REMOTE_HOST}', f'mkdir -p {remote_dir} && chmod 755 {remote_dir}'],
+        text=True, capture_output=True, env=env, timeout=60,
+    )
+    if prepare.returncode != 0:
+        raise RuntimeError('Failed to prepare persistent RunCloud import runtime')
     with tempfile.TemporaryDirectory(prefix='mgs-sb-daily-', dir='/root/mgs-agent/work') as tmp:
         local_payload = Path(tmp) / 'mgs-sb-sms-revenue-day.json'
+        local_importer = Path(tmp) / 'import-sb-sms-revenue-day.php'
         local_payload.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        local_importer.write_text(IMPORTER.read_text(encoding='utf-8'), encoding='utf-8')
         scp = subprocess.run(
-            ['sshpass', '-e', 'scp', *ssh_opts, str(local_payload), str(IMPORTER), f'{REMOTE_USER}@{REMOTE_HOST}:/tmp/'],
+            ['sshpass', '-e', 'scp', *ssh_opts, str(local_payload), str(local_importer), f'{REMOTE_USER}@{REMOTE_HOST}:{remote_dir}/'],
             text=True, capture_output=True, env=env, timeout=120,
         )
         if scp.returncode != 0:
             raise RuntimeError('Failed to transfer daily revenue payload/importer to RunCloud')
         remote = (
             'set -e; '
-            'mv /tmp/import-sb-sms-revenue-day.php /tmp/mgs-import-sb-sms-revenue-day.php; '
-            'sudo chown runcloud2:runcloud2 /tmp/mgs-sb-sms-revenue-day.json /tmp/mgs-import-sb-sms-revenue-day.php; '
-            'chmod 600 /tmp/mgs-sb-sms-revenue-day.json /tmp/mgs-import-sb-sms-revenue-day.php; '
-            f"result=$(sudo -u runcloud2 wp --path={REMOTE_WP} eval-file /tmp/mgs-import-sb-sms-revenue-day.php --skip-themes); "
-            'printf "%s\\n" "$result"; '
-            'rm -f /tmp/mgs-sb-sms-revenue-day.json /tmp/mgs-import-sb-sms-revenue-day.php'
+            f'chmod 644 {remote_payload} {remote_importer}; '
+            f"result=$(sudo -u runcloud2 MGS_SB_PAYLOAD_PATH={remote_payload} wp --path={REMOTE_WP} eval-file {remote_importer} --skip-themes); "
+            'printf "%s\\n" "$result"'
         )
         run = subprocess.run(
             ['sshpass', '-e', 'ssh', *ssh_opts, f'{REMOTE_USER}@{REMOTE_HOST}', remote],

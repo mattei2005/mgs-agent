@@ -3,7 +3,7 @@
  * Transactional one-day Smart Bidding SMS revenue importer.
  * Run with: wp eval-file /tmp/import-sb-sms-revenue-day.php --skip-themes
  */
-$input_path = '/tmp/mgs-sb-sms-revenue-day.json';
+$input_path = getenv( 'MGS_SB_PAYLOAD_PATH' ) ?: '/tmp/mgs-sb-sms-revenue-day.json';
 if ( ! file_exists( $input_path ) ) {
     throw new RuntimeException( 'Daily revenue payload not found' );
 }
