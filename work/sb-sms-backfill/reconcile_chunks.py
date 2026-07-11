@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+import asyncio,json
+from decimal import Decimal
+from playwright.async_api import async_playwright
+API='https://api.jbfdigital.com.br/report/performance_per_sms'; TARGET='digital-trust_creditoparaveiculo'
+RANGES=[('2026-05-01','2026-05-31'),('2026-06-01','2026-06-30'),('2026-07-01','2026-07-09')]
+async def main():
+ async with async_playwright() as p:
+  b=await p.chromium.launch(headless=False,args=['--disable-blink-features=AutomationControlled'])
+  c=await b.new_context(storage_state='/tmp/smartbidding_state_headed.json',viewport={'width':1600,'height':1000},user_agent='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36')
+  page=await c.new_page(); fut=asyncio.get_running_loop().create_future()
+  async def cap(req):
+   if '/report/performance_per_sms' in req.url and not fut.done():fut.set_result(req)
+  page.on('request',cap);await page.goto('https://app.smartbiddingdigital.com/reports/sms',wait_until='domcontentloaded',timeout=120000);req=await asyncio.wait_for(fut,120)
+  h=await req.all_headers();h={k:v for k,v in h.items() if k.lower() in ('authorization','content-type','origin','referer','user-agent')}
+  all_rows=[];parts=[]
+  for start,end in RANGES:
+   resp=await c.request.post(API,headers=h,data={'initialDate':start+'T00:00:00.000Z','finalDate':end+'T23:59:59.999Z','publishers':[TARGET],'currency':None},timeout=180000)
+   if resp.status not in (200,201):raise RuntimeError(f'HTTP {resp.status} for {start}')
+   rows=await resp.json();all_rows.extend(rows);parts.append({'range':start+'..'+end,'rows':len(rows),'net':str(sum((Decimal(str(r.get('NET_REVENUE') or 0)) for r in rows),Decimal('0')))})
+ closed=json.load(open('/root/mgs-agent/work/sb-sms-backfill/historical-creditoparaveiculo-closed-raw.json'))
+ ids=lambda xs:sorted(str(x.get('PK_JBF_PERFORMANCE_PER_SMS')) for x in xs)
+ if ids(all_rows)!=ids(closed):raise RuntimeError('Chunked IDs differ from full-range IDs')
+ net=sum((Decimal(str(r.get('NET_REVENUE') or 0)) for r in all_rows),Decimal('0'))
+ print(json.dumps({'status':'CHUNK_RECONCILIATION_OK','parts':parts,'rows':len(all_rows),'net_revenue':str(net)},ensure_ascii=False))
+ await b.close()
+asyncio.run(main())
