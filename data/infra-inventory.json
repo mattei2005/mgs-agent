@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-11T00:24:45-04:00",
+    "updated_at": "2026-07-11T00:30:52-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -564,6 +564,28 @@
       "validation": "current reverse apply OK; origin/main apply OK with 35 tests; live checkout 128 related tests; post-restart 4/4 active/running and 4/4 busy_input_mode=steer; runtime markers present; final patch guard 37 passed; ruff and py_compile passed",
       "status": "deployed_validated",
       "updated_at": "2026-07-10T14:14:15-04:00"
+    },
+    {
+      "id": "mgs-busy-steer-startup-merge-20260711",
+      "agent": "zeus",
+      "type": "hermes_runtime_patch",
+      "path": "/root/mgs-agent/patches/hermes/mgs-busy-steer-startup-merge-2026-07-11.patch",
+      "sha256": "77bcafc0811ca8c61a063c2066882328677e04eb594ddac194c405b6571379c8",
+      "runtime_file": "/root/.hermes/hermes-agent/gateway/run.py",
+      "guard_scripts": [
+        "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
+        "/root/mgs-agent/scripts/run-hermes-update-controlled.sh"
+      ],
+      "agents": [
+        "zeus",
+        "atena",
+        "ares",
+        "hera"
+      ],
+      "purpose": "Keep authorized follow-ups received during _AGENT_PENDING_SENTINEL startup inside the active steer turn and merge them before the first model call instead of replaying them through queue.",
+      "validation": "patch reverse/apply/roundtrip OK; ruff and py_compile passed; 60 focused busy-steer tests passed including sentinel-stage media; patch guard recognizes the artifact and startup invariants; full guard suite remains blocked by 3 pre-existing Discord suppress_embeds mock-signature failures unrelated to startup steer",
+      "status": "staged_validated_restart_pending",
+      "updated_at": "2026-07-11T00:30:52-04:00"
     },
     {
       "id": "mgs-busy-input-steer-validation-6a16e41afa9a",

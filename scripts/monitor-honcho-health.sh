@@ -52,7 +52,19 @@ trap 'rm -f "$TMP_RESULTS" "$TMP_RESULTS.payload" "$TMP_RESULTS.bot"' EXIT
 
 log "START agents=${AGENTS[*]} dry_run=${DRY_RUN} threshold=${HONCHO_ALERT_THRESHOLD}"
 
-# Run health checks. The wrapper itself pulls the Honcho key from 1Password and never prints it.
+# Uma única leitura da chave compartilhada por ciclo; os quatro copilots reutilizam
+# HONCHO_API_KEY e não voltam ao 1Password.
+HONCHO_API_KEY="$(op item get 'Honcho API - MGS' \
+  --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" \
+  --fields 'api key' \
+  --reveal 2>/dev/null || true)"
+if [[ -z "$HONCHO_API_KEY" ]]; then
+  log "ERROR: Honcho API key unavailable; aborting cycle without multiplicative retries"
+  exit 1
+fi
+export HONCHO_API_KEY
+
+# Run health checks with the single shared key loaded above.
 for agent in "${AGENTS[@]}"; do
   set +e
   output="$(MGS_MEMORY_COPILOT_TIMEOUT_SECONDS="${HONCHO_COPILOT_TIMEOUT_SECONDS:-90}" "${BASE_DIR}/scripts/mgs-memory-copilot" \

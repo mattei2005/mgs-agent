@@ -181,13 +181,14 @@ hermes -p <agent> config set display.busy_input_mode steer
 
 ## Proteção canônica MGS do runtime
 
-A correção não termina no checkout vivo. O artefato canônico é:
+A correção não termina no checkout vivo. Os artefatos canônicos são:
 
 ```text
 /root/mgs-agent/patches/hermes/mgs-busy-steer-universal-media-2026-07-10.patch
+/root/mgs-agent/patches/hermes/mgs-busy-steer-startup-merge-2026-07-11.patch
 ```
 
-O patch deve permanecer listado em ambos:
+Os patches devem permanecer listados, na mesma ordem, em ambos:
 
 ```text
 /root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh
@@ -203,7 +204,11 @@ Invariantes mínimos do guard:
 - os dois gates busy usam o mesmo helper;
 - PHOTO só força queue quando o modo efetivo não é `steer`;
 - falha de enrichment mantém caption + paths e tenta steer antes de queue;
-- testes busy/media rodam dentro do guard.
+- follow-up recebido enquanto `_running_agents[session_key]` ainda é `_AGENT_PENDING_SENTINEL` entra em `_pending_startup_steers`, não no FIFO de próximo turno;
+- o worker consome o buffer de startup e aplica `_merge_startup_steer_into_message()` antes da primeira chamada ao modelo, inclusive quando o primeiro resultado não usa tools;
+- o sentinel só é promovido após o merge; o resíduo da pequena corrida pós-merge é enviado ao `AIAgent.steer()` e só cai em queue se o agente rejeitar;
+- cleanup de turno/stop remove qualquer buffer de startup residual;
+- testes busy/media/startup rodam dentro do guard.
 
 Para cada mudança futura, validar `git apply --reverse --check` no checkout vivo, `git apply --check` em worktree limpa de `origin/main`, `ruff`, `py_compile`, pytest alvo e depois smoke Discord real. Um patch presente em disco, mas ausente do guard/precheck, é regressão futura esperando o próximo update.
 
@@ -224,11 +229,11 @@ Para cada mudança futura, validar `git apply --reverse --check` no checkout viv
 
 - Steer depende de turno ativo e de próximo ponto seguro.
 - Se o complemento chegar depois da resposta final, vira novo turno.
-- Uma sessão pode já aparecer como ocupada/“digitando” enquanto `_running_agents[session_key]` ainda é `_AGENT_PENDING_SENTINEL`. Nesse intervalo, o busy handler não tem uma instância de `AIAgent` para chamar `steer()` e atualmente faz fallback para `queue`.
-- Ver `Queued for the next turn` **não prova que o profile voltou para `queue`**. Antes de afirmar regressão de configuração, separar: (1) config vivo; (2) valor resolvido; (3) agente disponível versus sentinel; (4) retorno real de `running_agent.steer()`.
+- Uma sessão pode já aparecer como ocupada/“digitando” enquanto `_running_agents[session_key]` ainda é `_AGENT_PENDING_SENTINEL`. No runtime MGS corrigido, esse intervalo não usa mais `queue`: o evento normalizado fica em um buffer por sessão e é anexado ao primeiro user turn imediatamente antes da primeira chamada ao modelo.
+- Se config e resolver estiverem em `steer`, mas aparecer `Queued for the next turn` durante essa janela, tratar como regressão do patch/guard e verificar `_stash_startup_steer`, `_merge_startup_steer_into_message` e o teste `test_steer_mode_buffers_current_turn_when_agent_pending`.
+- Ver `Queued for the next turn` não prova que o profile voltou para `queue`. Antes de afirmar regressão de configuração, separar: (1) config vivo; (2) valor resolvido; (3) agente disponível versus sentinel; (4) retorno real de `running_agent.steer()`; (5) presença dos invariantes do startup merge.
 - Para investigar um caso real, buscar a mensagem original diretamente no Discord, comparar timestamps do pedido principal e do complemento e correlacionar com a sessão/runtime. A sessão Hermes é contexto secundário; o Discord é a fonte direta para conteúdo e horário atuais.
-- Se config e resolver estiverem em `steer`, mas o ack foi de queue poucos segundos após o primeiro pedido e antes da primeira ação do agente, reportar como **fallback/race de inicialização**, não como configuração revertida ou update que removeu o patch.
-- Esses limites de timing não justificam perder mídia recebida enquanto o turno já estiver ativo; para o padrão MGS universal, o fallback de inicialização continua sendo gap de runtime a corrigir e testar.
+- Esses limites de timing não justificam perder mídia recebida enquanto o turno já estiver ativo.
 
 ## Pitfalls
 

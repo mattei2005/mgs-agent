@@ -72,6 +72,19 @@ diff --git a/gateway/run.py b/gateway/run.py
  
      async def _prepare_busy_steer_payload(
          self,
+@@ -5564,9 +5621,9 @@
+             return False
+ 
+         # Steer mode: inject mid-run via running_agent.steer() instead of
+-        # queueing + interrupting.  If the agent isn't running yet
+-        # (sentinel) or lacks steer(), or the payload is empty, fall back
+-        # to queue semantics so nothing is lost.
++        # queueing + interrupting. If the real agent is not ready yet
++        # (sentinel), buffer the normalized event for same-turn startup merge;
++        # only an empty/rejected payload falls back to queue semantics.
+         # #30170 — Subagent protection. ``AIAgent.interrupt()`` cascades
+         # to every entry in the parent's ``_active_children`` list and
+         # aborts in-flight ``delegate_task`` work. Demote ``interrupt``
 @@ -5600,13 +5657,16 @@
          steered = False
          if effective_mode == "steer":
@@ -232,7 +245,7 @@ diff --git a/tests/gateway/test_busy_session_ack.py b/tests/gateway/test_busy_se
          runner, sentinel = _make_runner()
          runner._busy_input_mode = "steer"
          adapter = _make_adapter()
-@@ -745,12 +748,30 @@
+@@ -745,12 +748,59 @@
  
          await runner._handle_active_session_busy_message(event, sk)
  
@@ -263,6 +276,35 @@ diff --git a/tests/gateway/test_busy_session_ack.py b/tests/gateway/test_busy_se
 +        assert "[OUT-OF-BAND USER MESSAGE" in merged
 +        assert "first follow-up" in merged
 +        assert "second follow-up" in merged
++
++    @pytest.mark.asyncio
++    async def test_startup_steer_preserves_media_path_without_queue(self, monkeypatch):
++        """A media follow-up during sentinel startup stays in the first turn."""
++        import gateway.run as _gr
++
++        monkeypatch.delenv("HERMES_GATEWAY_BUSY_STEER_ACK_ENABLED", raising=False)
++        monkeypatch.setattr(_gr, "_load_gateway_config", lambda: {})
++        runner, sentinel = _make_runner()
++        runner._busy_input_mode = "steer"
++        adapter = _make_adapter(platform_val="discord")
++        event = _make_event(
++            text="considera esta imagem também",
++            platform_val="discord",
++            message_type=MessageType.PHOTO,
++            media_urls=["/tmp/startup-followup.png"],
++            media_types=["image/png"],
++        )
++        sk = build_session_key(event.source)
++        runner.adapters[event.source.platform] = adapter
++        runner._running_agents[sk] = sentinel
++
++        await runner._handle_active_session_busy_message(event, sk)
++
++        payload, events = runner._consume_startup_steers(sk)
++        assert "considera esta imagem também" in payload
++        assert "[Image attached at: /tmp/startup-followup.png]" in payload
++        assert events == [event]
++        assert sk not in adapter._pending_messages
  
      @pytest.mark.asyncio
      async def test_interrupt_mode_text_followups_fifo_not_merged(self):

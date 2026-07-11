@@ -12,9 +12,11 @@ if [[ -f .env ]]; then
   set +a
 fi
 
-HONCHO_API_KEY_VALUE=$(op item get 'Honcho API - MGS' --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" --fields 'api key' --reveal)
-export HONCHO_API_KEY="$HONCHO_API_KEY_VALUE"
-unset HONCHO_API_KEY_VALUE
+if [[ -z "${HONCHO_API_KEY:-}" ]]; then
+  HONCHO_API_KEY_VALUE=$(op item get 'Honcho API - MGS' --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" --fields 'api key' --reveal)
+  export HONCHO_API_KEY="$HONCHO_API_KEY_VALUE"
+  unset HONCHO_API_KEY_VALUE
+fi
 export HONCHO_WORKSPACE="${HONCHO_WORKSPACE:-mgs-agents}"
 COPILOT_TIMEOUT="${MGS_MEMORY_COPILOT_TIMEOUT_SECONDS:-90}"
 
