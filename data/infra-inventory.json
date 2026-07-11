@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T19:59:04-04:00",
+    "updated_at": "2026-07-10T20:07:05-04:00",
     "generated_by": "infra-discovery.sh",
-    "last_manual_update": "hera-meta-library-stale-novnc-recovery"
+    "last_manual_update": "hera-meta-library-windows-home-socks"
   },
   "system_packages": [
     {
@@ -1239,7 +1239,7 @@
       "id": "hera-meta-library-manual-login-helper",
       "agent": "hera",
       "type": "local_only_login_helper",
-      "status": "active_session",
+      "status": "active_waiting_for_windows_socks",
       "script": "/root/mgs-agent/scripts/hera-meta-library-login-browser.sh",
       "browser_helper": "/root/mgs-agent/tools/meta-library-collector/login-browser.js",
       "profile_path": "/root/.hermes/profiles/hera/browser-profiles/meta-library-chromium",
@@ -1247,8 +1247,8 @@
         "127.0.0.1:5903",
         "127.0.0.1:6083"
       ],
-      "background_session": "proc_a6dc10481529",
-      "validation": "process running; stale listeners cleaned safely after profile lock; ports localhost-only; noVNC HTTP 200",
+      "background_session": "proc_74f5004c0b80",
+      "validation": "noVNC HTTP 200; browser configured for allowlisted socks5://127.0.0.1:1080; awaiting SSH remote dynamic forward from Rodolfo Windows",
       "files": [
         {
           "path": "/root/mgs-agent/scripts/hera-meta-library-login-browser.sh",
@@ -1258,14 +1258,20 @@
         },
         {
           "path": "/root/mgs-agent/tools/meta-library-collector/login-browser.js",
-          "size_bytes": 3420,
-          "modified_at": "2026-07-10T17:40:41.773231-04:00",
-          "sha256": "a9c7ad1d5bd137dc84f7634b527cd242f2f2000d7127b2ad77e76e1cfe5dc129"
+          "size_bytes": 3831,
+          "modified_at": "2026-07-10T20:06:05.746120-04:00",
+          "sha256": "dc0e1cd024dc152b2d967b3077f04c5deebdeb1a9321a3bdc998e1cfc147d7cb"
         }
       ],
       "purpose": "One-time/manual Facebook authentication while preserving cookies in the canonical Hera browser profile.",
-      "updated_at": "2026-07-10T19:54:20-04:00",
-      "recovery": "Known stale x11vnc/websockify listeners auto-cleaned only after profile lock; unexpected port owner fails exit 76."
+      "updated_at": "2026-07-10T20:07:05-04:00",
+      "recovery": "Known stale x11vnc/websockify listeners auto-cleaned only after profile lock; unexpected port owner fails exit 76.",
+      "network_route": {
+        "mode": "temporary_windows_home_socks",
+        "proxy": "socks5://127.0.0.1:1080",
+        "binding": "server localhost only",
+        "third_party_proxy": false
+      }
     }
   ],
   "profile_skill_references": [
@@ -1693,13 +1699,13 @@
       "type": "profile_skill",
       "path": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/meta-library-reference-intake/SKILL.md",
-      "size_bytes": 4217,
+      "size_bytes": 4710,
       "modified_at": "2026-07-10T17:41:59.982336-04:00",
-      "sha256": "39b91899d406e767ca5f2a0846b82c95c608d3951cda15809ec5a8b60b32caf0",
-      "versioned_sha256": "39b91899d406e767ca5f2a0846b82c95c608d3951cda15809ec5a8b60b32caf0",
+      "sha256": "7b08773219e3ff072a8d2686207ef28be10a92a5575b4c4b8e115e9c40b8317b",
+      "versioned_sha256": "7b08773219e3ff072a8d2686207ef28be10a92a5575b4c4b8e115e9c40b8317b",
       "purpose": "Canonical Meta Ads Library collection flow with persistent runtime/profile and explicit no-/tmp rule.",
-      "validation": "live/versioned SHA256 match; stale-listener recovery rule documented",
-      "updated_at": "2026-07-10T19:54:20-04:00"
+      "validation": "live/versioned hash match; captcha-loop fallback uses temporary Windows home SOCKS only",
+      "updated_at": "2026-07-10T20:07:05-04:00"
     },
     {
       "id": "zeus-local-browser-automation-persistent-runtime-rule",
