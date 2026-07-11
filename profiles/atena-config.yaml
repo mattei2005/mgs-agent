@@ -509,6 +509,7 @@ slack:
   channel_prompts: {}
 discord:
   gateway_restart_notification: false
+  suppress_link_previews: true
   require_mention: false
   free_response_channels: ''
   allowed_channels: '1496267571543019653'
