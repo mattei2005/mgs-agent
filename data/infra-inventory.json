@@ -473,9 +473,9 @@
         "hera"
       ],
       "purpose": "Suppress Discord automatic URL previews on plain agent messages while preserving explicit Hermes UI embeds.",
-      "validation": "patch reverse apply PASS; py_compile PASS; 20 targeted tests PASS; full MGS patch guard 153 tests PASS; 4/4 profile config checks PASS",
-      "status": "rollout_3_scheduled_zeus_deferred",
-      "updated_at": "2026-07-10T23:02:45-04:00"
+      "validation": "patch reverse apply PASS; py_compile PASS; 20 targeted tests PASS; full MGS patch guard 153 tests PASS; 4/4 profile config checks PASS; Zeus restarted 2026-07-10 23:31:04 EDT and is active/running; live Hermes send smoke message 1525349092908208251 returned with no embed payload",
+      "status": "deployed_validated_4_of_4",
+      "updated_at": "2026-07-10T23:52:55-04:00"
     },
     {
       "id": "mgs-gateway-restart-20260711T030245Z-2857319",
