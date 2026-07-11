@@ -72,6 +72,21 @@ Required validation: unit tests for auto threshold, small-list compatibility, pe
 5. REPORT-INFRA is fail-closed before activation. If 1Password/webhook resolution is temporarily rate-limited, an external finalizer may wait and retry, but it must not restart gateways until the report succeeds. Exhausted retries leave the code installed but inactive and record the failure in audit logs.
 6. Validate all gateway services from the external job; never foreground-poll the active Discord conversation through its own restart.
 
+## SOUL refactor safety contract
+
+Treat SOUL reduction as a safety-critical prompt migration, not a text-shortening exercise.
+
+1. Inventory each H2/H3 by characters and classify it as `MUST`, `MUST/split`, `MOVE`, or `DUP/STALE`.
+2. Before moving anything, compare the SOUL against MGS OS/context, runtime config, active skills, and permission data. Resolve contradictions first; never replace a permanent guardrail with a pointer to a stale or conflicting reference.
+3. Keep permanently loaded: identity, authority, scope boundaries, authorization, credential safety, anti-invention/validation, Critical Subset, source precedence, historical-context non-actionability, anti-loop, and a short fail-closed restart invariant.
+4. For `MUST/split`, retain the decision rule and exact trigger in SOUL; move only mechanics, examples, IDs, commands, histories, and mutable inventories.
+5. Extract procedures literally first. Do not combine migration and semantic rewriting in one diff. Resolve stale/conflicting wording in a separate reviewed change.
+6. Preserve explicit routing: every removed operational branch must name the exact skill/reference loaded on that trigger.
+7. Validate with negative scenarios before rollout: unauthorized user, out-of-scope request, credential/budget change, cross-agent ownership, restart during an active turn, unsupported provider, and success without evidence.
+8. Roll out one profile at a time with backup, size/hash manifest, prompt/runtime smoke test, rollback artifact, inventory update, audit log, and REPORT-INFRA.
+
+Common blockers found in real MGS audits include hardcoded model/provider names, stale permission IDs, conflicting budget limits, contradictory upload semantics, obsolete runtime-tool guidance, and duplicate REPORT-INFRA/thread rules. These must be reconciled before extraction.
+
 ## Full context audit beyond skills
 
 A complete context-efficiency audit must also measure, per profile:

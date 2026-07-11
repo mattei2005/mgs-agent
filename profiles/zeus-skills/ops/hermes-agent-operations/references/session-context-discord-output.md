@@ -20,7 +20,7 @@ Validação mínima após alteração/update:
 1. `hermes -p <profile> config check` e readback de `discord.suppress_link_previews`.
 2. `git apply --reverse --check` no patch contra o checkout vivo.
 3. `pytest -q tests/gateway/test_discord_send.py`.
-4. Restart seguro dos gateways afetados; Zeus por último.
+4. Para gateways não-Zeus, fazer restart seguro quando a implantação exigir. Para Zeus, pedir autorização explícita de timing antes de incluir no finalizer; `aplica para os 4` autoriza a configuração, não um restart imediato do Zeus.
 
 Não remover a permissão Discord `Embed Links`: isso pode quebrar UI interativa. Não envolver URLs em `<...>` como workaround, porque altera o texto visível.
 
@@ -140,8 +140,11 @@ Remover a permissão Discord **Embed Links** do role do bot também impede previ
 - O default upstream deve preservar compatibilidade; o default MGS pode ser habilitado em Zeus/Atena/Ares/Hera.
 - Adicionar testes para URL comum sem preview e para embed explícito ainda presente.
 - Validar no Discord real com mensagem contendo URL e readback da flag/ausência do card.
-- Proteger o patch MGS contra updates e seguir restart seguro dos gateways, com Zeus por último.
-- Se a pergunta for apenas “tem como?”, explicar a estratégia e pedir autorização antes de mutar config/código/reiniciar.
+- Proteger o patch MGS contra updates.
+- Separar **configuração aplicada** de **ativação por restart**. Aprovar a mudança para quatro profiles não implica reiniciar Zeus imediatamente.
+- Antes de agendar restart multiagente, declarar o escopo exato. Para Zeus, exigir autorização explícita de timing (`reinicia Zeus agora` ou janela equivalente); sem isso, reiniciar apenas os demais agentes e deixar Zeus como pendência.
+- Se Rodolfo interromper um restart agendado, cancelar primeiro o timer/unit antigo, validar que Zeus manteve o mesmo PID/start timestamp e só então reagendar o subconjunto autorizado. Nunca editar apenas o finalizer enquanto o timer continua armado.
+- Se a pergunta for apenas “tem como?”, explicar a estratégia e pedir autorização antes de mutar config/código. Autorização de implementação e autorização de restart são decisões separadas.
 
 ### Pitfall
 

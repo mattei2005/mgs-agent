@@ -474,8 +474,24 @@
       ],
       "purpose": "Suppress Discord automatic URL previews on plain agent messages while preserving explicit Hermes UI embeds.",
       "validation": "patch reverse apply PASS; py_compile PASS; 20 targeted tests PASS; full MGS patch guard 153 tests PASS; 4/4 profile config checks PASS",
-      "status": "rollout_scheduled",
-      "updated_at": "2026-07-10T23:01:21-04:00"
+      "status": "rollout_3_scheduled_zeus_deferred",
+      "updated_at": "2026-07-10T23:02:45-04:00"
+    },
+    {
+      "id": "mgs-gateway-restart-20260711T030245Z-2857319",
+      "agent": "zeus",
+      "type": "gateway_restart_finalizer",
+      "unit": "mgs-gateway-restart-20260711T030245Z-2857319",
+      "finalizer_path": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20260711T030245Z-2857319.sh",
+      "log_path": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260711T030245Z-2857319.log",
+      "agents": [
+        "atena",
+        "ares",
+        "hera"
+      ],
+      "purpose": "Activate Discord link-preview suppression on Atena, Ares and Hera while Zeus restart remains explicitly deferred by Rodolfo.",
+      "status": "scheduled",
+      "updated_at": "2026-07-10T23:02:45-04:00"
     },
     {
       "id": "mgs-gateway-restart-20260711T030121Z-2851091",
@@ -491,8 +507,8 @@
         "zeus"
       ],
       "purpose": "Activate Discord link-preview suppression on all four MGS gateways; Zeus restarts last.",
-      "status": "scheduled",
-      "updated_at": "2026-07-10T23:01:21-04:00"
+      "status": "cancelled_before_execution_by_rodolfo",
+      "updated_at": "2026-07-10T23:02:30-04:00"
     },
     {
       "id": "mgs-busy-steer-rollout-validation-3cc76e563764",
