@@ -45,15 +45,29 @@ PY
   # o rsync os exclui e o snapshot segue apenas após confirmar zero processo vivo.
 fi
 
-if [[ ! -f "$STATUS_FILE" ]] || ! python3 - "$STATUS_FILE" <<'PY'
-import json,sys
-s=json.load(open(sys.argv[1]))
-raise SystemExit(0 if s.get('authenticatedLikely') is True else 1)
+REPORT_ROOT="/root/.hermes/profiles/hera/artifacts/meta-library"
+AUTH_EVIDENCE="$(python3 - "$STATUS_FILE" "$REPORT_ROOT" <<'PY'
+import glob, json, os, sys, time
+status_path, report_root=sys.argv[1:]
+try:
+    s=json.load(open(status_path))
+    if s.get('authenticatedLikely') is True:
+        print(status_path); raise SystemExit(0)
+except (OSError, ValueError):
+    pass
+for p in sorted(glob.glob(os.path.join(report_root,'*','report.json')), key=os.path.getmtime, reverse=True):
+    if time.time()-os.path.getmtime(p) > 3600:
+        break
+    try: r=json.load(open(p))
+    except (OSError, ValueError): continue
+    if r.get('success') is True and r.get('proxyMode')=='windows-home-socks' and r.get('session',{}).get('authenticatedLikely') is True:
+        print(p); raise SystemExit(0)
+raise SystemExit(1)
 PY
-then
-  echo "Sessão autenticada não confirmada; snapshot recusado." >&2
+)" || {
+  echo "Sessão autenticada não confirmada por status nem report recente; snapshot recusado." >&2
   exit 77
-fi
+}
 
 ts="$(date -u +%Y%m%dT%H%M%SZ)"
 tmp="$BACKUP_ROOT/.${ts}.tmp"
