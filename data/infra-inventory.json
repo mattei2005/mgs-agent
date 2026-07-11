@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-11T01:34:32-04:00",
+    "updated_at": "2026-07-11T02:06:02-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -601,7 +601,12 @@
         "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
         "/root/mgs-agent/scripts/run-hermes-update-controlled.sh"
       ],
-      "agents": ["zeus", "atena", "ares", "hera"],
+      "agents": [
+        "zeus",
+        "atena",
+        "ares",
+        "hera"
+      ],
       "purpose": "Eliminate stale-agent/media races and async completion reordering during _AGENT_PENDING_SENTINEL startup by reserving FIFO order before preprocessing and atomically promoting only after all in-flight reservations complete.",
       "validation": "live reverse apply PASS; canonical baseline apply PASS; canonical baseline 162 related tests PASS; live 162 related tests PASS; full MGS patch guard 157 PASS; ruff, py_compile and git diff --check PASS",
       "status": "deployed_validated",
@@ -1661,6 +1666,39 @@
       "validation": "DRY_RUN real health check completed 4 agents OK; monitor contains one op item get callsite; wrapper skips op when HONCHO_API_KEY is preloaded",
       "status": "deployed_validated",
       "updated_at": "2026-07-11T01:29:52-04:00"
+    },
+    {
+      "id": "yoast-dedicated-ssh-key-20260711",
+      "agent": "zeus",
+      "type": "production_ssh_auth_migration",
+      "script": "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh",
+      "script_sha256": "59db458daef9ad3cfb3c571394579bad0a8cc607a9db825dfc03613d4342cff4",
+      "private_key_path": "/root/.ssh/mgs_yoast_monitor_ed25519",
+      "public_key_fingerprint": "SHA256:waTLCN8zcf6KM1Z/vK//7WQ4b4kXp96UmlqhVw1dQ5E",
+      "targets": [
+        "zeus@46.4.95.117",
+        "zeus@162.55.28.178 via 46.4.95.117"
+      ],
+      "purpose": "Remove recurring 1Password password reads from the Yoast monitor using a dedicated least-scope SSH key.",
+      "validation": "S03 and S01 BatchMode key auth PASS; monitor bash -n PASS; zero op/expect callsites; production dry-run with op absent from PATH returned 280 posts and parsed SEO/readability",
+      "rollback": "Restore previous script revision and remove only the public key line tagged mgs-yoast-monitor-2026-07-11 from each authorized_keys.",
+      "status": "deployed_validated",
+      "updated_at": "2026-07-11T02:06:10-04:00"
+    },
+    {
+      "id": "github-deploy-key-migration-20260711",
+      "agent": "zeus",
+      "type": "production_git_auth_migration",
+      "private_key_path": "/root/.ssh/mgs_github_deploy_ed25519",
+      "public_key_fingerprint": "SHA256:fsM/nhS8wPCrJuRMHlenw3JN+IVtzQd7yLMhRKnz/60",
+      "target": "github.com/mattei2005/mgs-agent",
+      "current_remote": "https://github.com/mattei2005/mgs-agent.git",
+      "purpose": "Replace per-push 1Password PAT lookup with a repository-specific writable deploy key.",
+      "attempt": "POST /repos/mattei2005/mgs-agent/keys",
+      "failure": "HTTP 403 Resource not accessible by personal access token; PAT lacks repository Administration write permission.",
+      "safety_state": "Deploy key not registered; remote and post-commit PAT path intentionally unchanged.",
+      "status": "blocked_external_permission",
+      "updated_at": "2026-07-11T02:06:10-04:00"
     }
   ],
   "profile_skill_references": [
@@ -2669,8 +2707,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
-      "size_bytes": 5281,
-      "modified_at": "2026-06-16T19:27:14-04:00"
+      "size_bytes": 7086,
+      "modified_at": "2026-07-11T01:31:11-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-grok-generate.py",
@@ -2789,8 +2827,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh",
-      "size_bytes": 24242,
-      "modified_at": "2026-07-11T00:07:53-04:00"
+      "size_bytes": 22839,
+      "modified_at": "2026-07-11T01:53:48-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mu-plugins/yoast-rest-meta.php",
@@ -5446,8 +5484,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 2404,
-      "md5": "06bfcbb0767e968a665e9be3a350196e",
-      "modified_at": "2026-07-11T01:27:01-04:00"
+      "md5": "e563d873a00518996f492b71ce74eb24",
+      "modified_at": "2026-07-11T02:02:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -5458,8 +5496,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "711c0c8ed79b18a8242821bd256855af",
-      "modified_at": "2026-07-11T01:27:02-04:00"
+      "md5": "0f675f74078c92e9ac994b6b5a8292ca",
+      "modified_at": "2026-07-11T01:56:30-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -5482,8 +5520,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 316,
-      "md5": "39fdbae41d227491e3cd858301be7104",
-      "modified_at": "2026-07-11T01:15:01-04:00"
+      "md5": "8e057eefb8190b4f7e20f2e2d831547b",
+      "modified_at": "2026-07-11T02:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -5494,8 +5532,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 368,
-      "md5": "39c57e5cf238cd6064c4f4efb311b223",
-      "modified_at": "2026-07-11T01:25:27-04:00"
+      "md5": "9d1e9ee708019d789ee21311e59657ed",
+      "modified_at": "2026-07-11T01:49:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -5529,15 +5567,15 @@
     },
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
-      "size_bytes": 144,
-      "md5": "56571423cdedd8cab1957d3ba2ce23d0",
-      "modified_at": "2026-07-11T01:27:03-04:00"
+      "size_bytes": 117,
+      "md5": "27cc5560faddbaa1825866112490137f",
+      "modified_at": "2026-07-11T01:52:54-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 25681,
-      "md5": "789deab4fe6bf9218092d8517bab3e47",
-      "modified_at": "2026-07-11T01:25:01-04:00"
+      "md5": "bfc3b80660f73a63c2a254767da397ae",
+      "modified_at": "2026-07-11T02:05:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -5559,9 +5597,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 231380,
-      "md5": "f7d92aa8fce7a3ea7a46a507f0bf7265",
-      "modified_at": "2026-07-11T01:22:23-04:00"
+      "size_bytes": 236498,
+      "md5": "17f24966de489f64ee7f1897b22a5885",
+      "modified_at": "2026-07-11T01:36:10-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -5607,9 +5645,9 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1113,
-      "md5": "5e60c8501ab717166b7ad583a213fe9a",
-      "modified_at": "2026-07-11T00:39:01-04:00"
+      "size_bytes": 1082,
+      "md5": "6b6da0f4ac5f4cd4ca936fa24fde1477",
+      "modified_at": "2026-07-11T01:39:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -5681,7 +5719,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "8595031c45e44549c7bd183638f6fc33",
-      "modified_at": "2026-07-11T01:26:01-04:00"
+      "modified_at": "2026-07-11T02:06:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -5710,8 +5748,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2171,
-      "md5": "f888af1697889c6e41e261c4410559ae",
-      "modified_at": "2026-07-11T01:25:02-04:00"
+      "md5": "9139fefc5e3bb768b8d2ed503795abfd",
+      "modified_at": "2026-07-11T02:05:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
