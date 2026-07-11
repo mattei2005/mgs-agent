@@ -583,9 +583,11 @@
         "hera"
       ],
       "purpose": "Keep authorized follow-ups received during _AGENT_PENDING_SENTINEL startup inside the active steer turn and merge them before the first model call instead of replaying them through queue.",
-      "validation": "patch reverse/apply/roundtrip OK; ruff and py_compile passed; 160 related busy-steer/restart/subagent tests passed including sentinel-stage media; patch guard recognizes the artifact and startup invariants; full guard suite remains blocked by 3 pre-existing Discord suppress_embeds mock-signature failures unrelated to startup steer",
-      "status": "staged_validated_restart_pending",
-      "updated_at": "2026-07-11T00:30:52-04:00"
+      "validation": "py_compile PASS; ruff PASS; git diff --check PASS; startup regression tests 3 PASS; full busy-session test file 37 PASS; broader Discord batch 35 PASS / 3 pre-existing suppress_embeds mock-signature failures unrelated to this repair; Zeus detached restart unit mgs-gateway-restart-20260711T045457Z-3143967 scheduled; post-restart validation job 1e31485dfda7 scheduled.",
+      "status": "repair_applied_restart_scheduled",
+      "updated_at": "2026-07-11T00:55:41-04:00",
+      "runtime_sha256": "fe8c893efcc7605255e930b67ac7b1bbf16518126e6ecfaba9b7910f255d618a",
+      "repair": "Restored missing _stash_startup_steer and _consume_startup_steers definitions after an interrupted/incomplete patch port loaded by Zeus."
     },
     {
       "id": "mgs-gateway-restart-busy-steer-startup-20260711T043316Z-3105180",
