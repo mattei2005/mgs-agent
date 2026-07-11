@@ -137,13 +137,15 @@ Decision confirmed by Rodolfo for this site/report:
 
 ## Smart Bidding SMS Revenue Backfill
 
-Production state validated on 2026-07-10: `mgs-quiz-carro` v1.7.0, schema version `1.3.0`, with `wp_mgs_quiz_sms_revenue` populated for closed dates from 2026-05-22 through 2026-07-09.
+Production state validated on 2026-07-10: `mgs-quiz-carro` v1.7.1, schema version `1.3.0`, with `wp_mgs_quiz_sms_revenue` populated for closed dates from 2026-05-22 through 2026-07-09.
 
 Keep Smart Bidding revenue distinct from estimated SMS cost and lead rows:
 
 - Source contract and API/date pitfalls live in `smartbidding-dashboard-map/references/sms-report-api-contract-and-backfill.md`.
 - When **Discount revenue share** is enabled in Smart Bidding, the primary BRL value displayed in the `REVENUE` column is `NET_REVENUE`; WordPress must sum `net_revenue_cents`. Gross `REVENUE` remains stored for audit.
 - Revenue is domain/date-level. It respects the report's date range, but it must not pretend to respect quiz, gestor, parcela, or lead-search filters without trustworthy attribution.
+- ROI formula: `(receita líquida SB − custo estimado SMS) ÷ custo estimado SMS × 100`. Compute from integer centavos and format to two decimals. Show the estimated profit alongside it.
+- ROI is comparable only when no quiz, gestor, parcela, or search filter is active, because revenue is domain/date-level while those filters narrow only the WordPress cost. With any such filter, display `Não comparável` instead of a misleading percentage. With no revenue or zero cost, display `Sem base`.
 - Include every campaign for `digital-trust_creditoparaveiculo`; filtering only G001–G006 loses historical generic campaigns.
 - The deployed table uses unique `(revenue_date, publisher, utm_campaign)` aggregates with BRL currency, gross/net cents, source-row count/hash, and sync timestamp.
 - Upsert replaces each deterministic aggregate; never increment. Deduplicate API rows by signed-looking source PK before grouping, especially across UTC−3 chunk boundaries.
