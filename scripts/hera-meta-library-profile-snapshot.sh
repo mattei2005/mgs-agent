@@ -19,8 +19,30 @@ fi
 shopt -s nullglob
 singleton_files=("$PROFILE_DIR"/Singleton*)
 if ((${#singleton_files[@]})); then
-  echo "Chromium ainda mantém SingletonLock; snapshot recusado." >&2
-  exit 76
+  if ! python3 - "$PROFILE_DIR" <<'PY'
+import os, sys
+profile=sys.argv[1].encode()
+live=[]
+for name in os.listdir('/proc'):
+    if not name.isdigit():
+        continue
+    try:
+        cmd=open(f'/proc/{name}/cmdline','rb').read()
+    except (FileNotFoundError, PermissionError, ProcessLookupError):
+        continue
+    if profile in cmd:
+        live.append((name, cmd.replace(b'\0',b' ')[:240].decode(errors='replace')))
+if live:
+    for pid,cmd in live:
+        print(f'Chromium ativo no perfil: pid={pid} cmd={cmd}', file=sys.stderr)
+    raise SystemExit(1)
+PY
+  then
+    echo "Singleton ativo confirmado; snapshot recusado." >&2
+    exit 76
+  fi
+  # Symlinks Singleton órfãos podem permanecer após shutdown. Não removê-los;
+  # o rsync os exclui e o snapshot segue apenas após confirmar zero processo vivo.
 fi
 
 if [[ ! -f "$STATUS_FILE" ]] || ! python3 - "$STATUS_FILE" <<'PY'
