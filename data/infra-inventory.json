@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T23:00:08-04:00",
+    "updated_at": "2026-07-10T23:01:32-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -474,8 +474,25 @@
       ],
       "purpose": "Suppress Discord automatic URL previews on plain agent messages while preserving explicit Hermes UI embeds.",
       "validation": "patch reverse apply PASS; py_compile PASS; 20 targeted tests PASS; full MGS patch guard 153 tests PASS; 4/4 profile config checks PASS",
-      "status": "validated_pending_restart",
-      "updated_at": "2026-07-10T22:58:31-04:00"
+      "status": "rollout_scheduled",
+      "updated_at": "2026-07-10T23:01:21-04:00"
+    },
+    {
+      "id": "mgs-gateway-restart-20260711T030121Z-2851091",
+      "agent": "zeus",
+      "type": "gateway_restart_finalizer",
+      "unit": "mgs-gateway-restart-20260711T030121Z-2851091",
+      "finalizer_path": "/root/mgs-agent/data/mgs-gateway-restart-finalizer-20260711T030121Z-2851091.sh",
+      "log_path": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260711T030121Z-2851091.log",
+      "agents": [
+        "atena",
+        "ares",
+        "hera",
+        "zeus"
+      ],
+      "purpose": "Activate Discord link-preview suppression on all four MGS gateways; Zeus restarts last.",
+      "status": "scheduled",
+      "updated_at": "2026-07-10T23:01:21-04:00"
     },
     {
       "id": "mgs-busy-steer-rollout-validation-3cc76e563764",
@@ -5349,8 +5366,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 225602,
-      "md5": "057030c56d1acffdb2ddc16051f9c256",
-      "modified_at": "2026-07-10T22:58:42-04:00"
+      "md5": "b09a7172b3d7c3399907ed60bc662554",
+      "modified_at": "2026-07-10T23:01:16-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -5469,8 +5486,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
-      "md5": "0697c0326c77d82982ec0de851584cdf",
-      "modified_at": "2026-07-10T22:56:01-04:00"
+      "md5": "28c455672b53d850b5de960d859785bb",
+      "modified_at": "2026-07-10T23:01:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
