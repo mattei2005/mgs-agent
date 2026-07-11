@@ -20,6 +20,7 @@ Regras operacionais:
 - Remover linhas comentadas `DEPRECATED` quando já houver substituto e arquivo em `scripts/deprecated/`.
 - Todo cron MGS deve usar `flock -n` para evitar execução paralela.
 - Frequência nunca pode ser menor que o runtime p95 do job; se runtime > 60% do intervalo, aumentar intervalo ou otimizar rota antes de reduzir cadência.
+- O watchdog de logs deve calcular tolerância pela agenda real, não por um limite diário genérico: jobs diários usam 36h, semanais 8 dias e mensais 32 dias. A janela diária de 36h cobre mudança de horário no mesmo dia sem mascarar a perda de mais de um ciclo.
 - Crons recorrentes devem ser escalonados por minuto de início para evitar colisões óbvias: não usar `*/N` por padrão em jobs novos; preferir offsets/listas explícitas (`3-58/5`, `6,14,22...`) e checar o calendário contra root crontab + Hermes cron antes de aplicar.
 - Para jobs lentos de fontes externas (DTR/ChatPion/browser/API pesada), usar lock próprio e schedule com folga mínima de 2 minutos acima do runtime medido.
 - Após mudar crontab/scripts de cron, rodar `infra-discovery.sh` e registrar em `events-audit.jsonl`.
