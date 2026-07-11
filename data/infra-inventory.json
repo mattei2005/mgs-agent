@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T21:17:22-04:00",
+    "updated_at": "2026-07-10T21:23:43-04:00",
     "generated_by": "infra-discovery.sh",
     "last_manual_update": "hera-meta-library-direct-route-incident-guidance"
   },
@@ -1753,12 +1753,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md",
-      "size_bytes": 8710,
-      "modified_at": "2026-07-10T20:41:44-04:00",
-      "sha256": "6b5b496f363ee532171c52540fbc115bba446f54ec57526881b54bffcb45ee4e",
+      "size_bytes": 8993,
+      "modified_at": "2026-07-10T21:22:32-04:00",
+      "sha256": "a7e6abf425bfb6de1e0a7cf13a1b342a5e6e11aa4f9d128a974d2e24817d7690",
       "runtime_versioned_sha_match": true,
-      "updated_at": "2026-07-10T21:17:40-04:00",
-      "validation": "Live 1Password/Meta/SB/SMS Funnel/WP checks OK; SMS Funnel total_sent×unit_cost=total_cost; WP Smart Bidding revenue provenance/filter caveats documented; reference SHA c381871ad2875b3d5c795d9e2a470e53748ca5e7587a73fa61ece77af4ff957d"
+      "updated_at": "2026-07-10T21:23:43-04:00",
+      "validation": "Live Graph evidence: quiz adset custom_event_type=SUBSCRIBE with OFFSITE_CONVERSIONS/pixel. Corrected prior naming assumption: chat=ADD_TO_WISHLIST, quiz=SUBSCRIBE at adset; positive cases PASS; cross-event rejected; py_compile OK."
     }
   ],
   "systemd_services": [
@@ -2980,7 +2980,8 @@
       {
         "name": "direct-traffic-cbo-operations",
         "category": "growth",
-        "skill_md": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md"
+        "skill_md": "/root/.hermes/profiles/ares/skills/growth/direct-traffic-cbo-operations/SKILL.md",
+        "purpose": "Campanhas Meta de tráfego direto CBO: estrutura 1x1x3, evento de conversão obrigatório no adset por estratégia, UTMs MGS e reconciliação Smart Bidding/SMS."
       },
       {
         "name": "meta-ads-account-visualization",

@@ -18,7 +18,7 @@ $checks = array(
     'label' => false !== strpos( $html, 'Receita SMS — Smart Bidding' ),
     'amount' => false !== strpos( $html, esc_html( $expected ) ),
     'coverage' => false !== strpos( $html, esc_html( number_format_i18n( (int) $all['dates_count'] ) . ' dia(s)' ) ),
-    'scope_note' => false !== strpos( $html, 'Valor líquido exibido na SB com Discount revenue share' ),
+    'scope_note' => false !== strpos( $html, 'Valor líquido exibido na SB. Cobertura:' ),
     'cost_regression' => false !== strpos( $html, 'Custo estimado de SMS' ),
 );
 foreach ( $checks as $name => $ok ) {
