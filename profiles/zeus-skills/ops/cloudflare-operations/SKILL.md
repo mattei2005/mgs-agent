@@ -66,11 +66,14 @@ Cloudflare zones are usually apex domains. For a requested hostname:
 3. Report the mapping before purge when confirmation is requested.
 4. If a subdomain maps to parent zone, state that purge applies to the whole parent zone when using `purge_everything`.
 
-Known observed mapping from the first validated purge:
+Known observed mappings from validated purges:
 
 ```text
-finance.topfeed.fun -> topfeed.fun
+finance.topfeed.fun  -> topfeed.fun
+finanzas.topfeed.fun -> topfeed.fun
 ```
+
+For either subdomain, `purge_everything` clears the complete `topfeed.fun` zone, including cache for sibling hostnames. State that actual scope explicitly in the final report even when the user asked only for one subdomain.
 
 ## Cache Purge Procedure
 
