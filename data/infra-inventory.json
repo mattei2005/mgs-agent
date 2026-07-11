@@ -1,8 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T21:57:54-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-10T22:06:04-04:00",
+    "generated_by": "infra-discovery.sh + scoped Hera dedicated-route update",
+    "last_manual_update": "hera-meta-library-dedicated-us-residential-proxy"
   },
   "system_packages": [
     {
@@ -1244,24 +1245,9 @@
           "sha256": "e6bb5f9111c923c31bf963cae3b8ca6c4d6c1eff40a0408b094ac7d03f3ca201"
         }
       ],
-      "validation": {
-        "fmybc_exact": "PASS authenticated through Windows home SOCKS",
-        "goto_http": 200,
-        "result_text": "~63 results",
-        "library_ids": 42,
-        "images": 3,
-        "videos": 30,
-        "scrolls_requested": 100,
-        "scrolls_performed": 6,
-        "stopped_after_stable_rounds": true,
-        "downloads": 3,
-        "download_magic_bytes": true,
-        "authenticated_session": true,
-        "profile_reused": true,
-        "screenshot_visual": "real fmybc.com ad cards confirmed"
-      },
+      "validation": "Dedicated US residential canary PASS on snapshot copy; canonical profile untouched; authenticated session retained; 42 IDs; one valid download; fail-closed direct-vps.",
       "purpose": "Durable Meta/Facebook Ads Library intake with persistent browser profile; runtime/profile must never use /tmp.",
-      "updated_at": "2026-07-10T21:17:22-04:00",
+      "updated_at": "2026-07-10T22:06:04-04:00",
       "security": {
         "exclusive_profile_lock": "flock, concurrent exit 75",
         "site_isolation": "enabled",
@@ -1275,7 +1261,13 @@
         "not_confirmed": "Exact cause of c_user/xs absence; do not claim Meta removed them without further evidence.",
         "correction": "Do not probe direct-vps after residential success; if auth names absent, reauthenticate visually over Windows SOCKS then collect through same route.",
         "hera_guidance_message_id": "1525309622993289226"
-      }
+      },
+      "default_proxy_mode": "dedicated-us-residential",
+      "direct_vps_allowed": false,
+      "proxy_config_path": "/root/mgs-agent/data/hera-meta-library-proxy.json",
+      "proxy_resolver_path": "/root/mgs-agent/tools/meta-library-collector/proxy-config.js",
+      "collector_sha256": "bee77c497d7d062d6d278f143bb933c95fd4afc38305b82722d5b1397b963ed7",
+      "login_browser_sha256": "48bbe3431ae1400bef881581891175888a7b2b529df9b1fc38430e99e58fd92b"
     },
     {
       "id": "hera-meta-library-manual-login-helper",
@@ -1338,8 +1330,8 @@
       "status": "active",
       "owner": "hera",
       "purpose": "Create secure, lock-protected snapshots of the trusted Meta Library Chromium profile after clean authenticated shutdown, preserving cookies/2FA trust without exposing values.",
-      "size_bytes": 4463,
-      "sha256": "7f1b1aaa81e2b37bcac6c1723cb5954ef62fce6eda08496155b1e668829f291a",
+      "size_bytes": 4494,
+      "sha256": "f0bd5dae5563abceda4e1f9c46c4cc9ad205b0847a9e705a266e125ae22f4998",
       "security": {
         "backup_root": "/root/.hermes/profiles/hera/browser-profile-backups/meta-library-chromium",
         "directory_mode": "700",
@@ -1350,7 +1342,8 @@
       },
       "validation": "bash -n PASS; real snapshot PASS; authenticatedLikely=true; windows-home-socks; critical files hashed internally; snapshot 12M; no live Chromium.",
       "latest_snapshot": "/root/.hermes/profiles/hera/browser-profile-backups/meta-library-chromium/20260711T014404Z",
-      "updated_at": "2026-07-10T21:45:47-04:00"
+      "updated_at": "2026-07-10T22:06:04-04:00",
+      "auth_gate": "authenticated windows-home-socks or dedicated-us-residential report within 1 hour"
     },
     {
       "id": "zeus-hermes-cron-meta-app-roles-watch",
@@ -1381,6 +1374,76 @@
       "purpose": "B011 DTR/ChatPion OAuth link and page connection reconciliation.",
       "validation": "cronjob readback enabled/scheduled; next run 2026-07-10 22:15 ET",
       "updated_at": "2026-07-10T21:57:54-04:00"
+    },
+    {
+      "id": "hera-meta-library-dedicated-us-residential",
+      "agent": "hera",
+      "type": "dedicated_residential_proxy_route",
+      "status": "active_24x7_default",
+      "mode": "dedicated-us-residential",
+      "expected_country": "US",
+      "credential_provider": "1Password",
+      "config_path": "/root/mgs-agent/data/hera-meta-library-proxy.json",
+      "fallback_mode": "windows-home-socks",
+      "direct_vps_allowed": false,
+      "files": [
+        {
+          "path": "/root/mgs-agent/data/hera-meta-library-proxy.json",
+          "size_bytes": 394,
+          "modified_at": "2026-07-10T22:01:01.088426-04:00",
+          "sha256": "7dc78212cd32f2c7c19917676adae440906d7af8819a75b09966e916d6d21542"
+        },
+        {
+          "path": "/root/mgs-agent/tools/meta-library-collector/proxy-config.js",
+          "size_bytes": 3216,
+          "modified_at": "2026-07-10T22:01:26.458455-04:00",
+          "sha256": "684ec9e780c9fdd5aad91bc1e40641644606faa8e52021e747159fe1ad961042"
+        },
+        {
+          "path": "/root/mgs-agent/tools/meta-library-collector/collector.js",
+          "size_bytes": 15225,
+          "modified_at": "2026-07-10T22:02:12.357508-04:00",
+          "sha256": "bee77c497d7d062d6d278f143bb933c95fd4afc38305b82722d5b1397b963ed7"
+        },
+        {
+          "path": "/root/mgs-agent/scripts/hera-meta-library-collector.sh",
+          "size_bytes": 1260,
+          "modified_at": "2026-07-10T22:02:21.807519-04:00",
+          "sha256": "3a22fbe461eb8021dc4dc2ab7f2511d98cb2234570fa29314a080b55eb15ee51"
+        }
+      ],
+      "security": {
+        "credentials_in_files": false,
+        "credentials_in_logs": false,
+        "credentials_in_process_args": false,
+        "browser_environment_secret_filter": true,
+        "failure_mode": "fail_closed"
+      },
+      "validation": {
+        "canary_country": "US",
+        "stable_ip_short_test": true,
+        "proxy_mode": "dedicated-us-residential",
+        "authenticated_likely": true,
+        "authenticated_cookie_names_present": [
+          "c_user",
+          "xs"
+        ],
+        "result_text": "~63 results",
+        "library_ids": 42,
+        "images": 3,
+        "videos": 30,
+        "persistent_challenge": false,
+        "pilot_download_http": 200,
+        "pilot_magic_bytes_valid": true,
+        "profile_used_for_canary": false,
+        "config_resolution_readback": "PASS; credentials present without values; browser env secret filter PASS"
+      },
+      "human_action_policy": "No PowerShell/tunnel in normal operation. Human action only for expired-session login, MFA or visible CAPTCHA.",
+      "updated_at": "2026-07-10T22:07:10.074657-04:00",
+      "onepassword_item_id": "x3hzhoyxthjnz4n2irx237tjla",
+      "resolver_path": "/root/mgs-agent/tools/meta-library-collector/proxy-config.js",
+      "resolver_sha256": "684ec9e780c9fdd5aad91bc1e40641644606faa8e52021e747159fe1ad961042",
+      "config_sha256": "7dc78212cd32f2c7c19917676adae440906d7af8819a75b09966e916d6d21542"
     }
   ],
   "profile_skill_references": [
@@ -1808,13 +1871,13 @@
       "type": "profile_skill",
       "path": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/meta-library-reference-intake/SKILL.md",
-      "size_bytes": 7992,
-      "modified_at": "2026-07-10T21:45:39.193353-04:00",
-      "sha256": "0b4a8bdb2612220312df71cf2d1d50184c318c3e2575c2579b20ec2cff7c1e65",
-      "versioned_sha256": "0b4a8bdb2612220312df71cf2d1d50184c318c3e2575c2579b20ec2cff7c1e65",
-      "purpose": "Canonical Meta Ads Library collection flow with persistent profile, residential-route continuity and trusted-device snapshot gate.",
-      "validation": "live/versioned hash match; direct-vps causality wording corrected; 2FA/trusted-device snapshot required before collector; full residential collection PASS with 42 IDs and 33 HTTP 200 downloads.",
-      "updated_at": "2026-07-10T21:53:12.843607-04:00",
+      "size_bytes": 8898,
+      "modified_at": "2026-07-10T22:06:02.416779-04:00",
+      "sha256": "39ba62c679b4115379628f6e6c5d4c40de05df6623d79b98b7e84ac6bc8573a1",
+      "versioned_sha256": "39ba62c679b4115379628f6e6c5d4c40de05df6623d79b98b7e84ac6bc8573a1",
+      "purpose": "Canonical Meta Ads Library flow with dedicated US residential route as default, fail-closed direct-vps prohibition, trusted-device snapshot and Windows SOCKS fallback only after dedicated-route failure report.",
+      "validation": "live/versioned hash match; dedicated residential primary; home SOCKS fallback; direct-vps prohibited; canary-before-promotion documented",
+      "updated_at": "2026-07-10T22:06:04-04:00",
       "reference_sha256": "5c9a57d8e0f6b37391fc399e7729a1105220d468081ef736026b76cbc96eb450",
       "known_pending": "Never expose cookie values/hashes; do not touch profile again in the completed collection task."
     },
@@ -2285,18 +2348,24 @@
     },
     {
       "path": "/root/mgs-agent/scripts/hera-meta-library-collector.sh",
-      "size_bytes": 1200,
-      "modified_at": "2026-07-10T17:27:19-04:00"
+      "size_bytes": 1260,
+      "modified_at": "2026-07-10T17:27:19-04:00",
+      "sha256": "3a22fbe461eb8021dc4dc2ab7f2511d98cb2234570fa29314a080b55eb15ee51",
+      "updated_at": "2026-07-10T22:06:04-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hera-meta-library-login-browser.sh",
-      "size_bytes": 2415,
-      "modified_at": "2026-07-10T19:53:55-04:00"
+      "size_bytes": 2499,
+      "modified_at": "2026-07-10T19:53:55-04:00",
+      "sha256": "4473ff6ea5704776d202ba23ac823ffacb43d2e9be576f573c1b396f92f5c55c",
+      "updated_at": "2026-07-10T22:06:04-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hera-meta-library-profile-snapshot.sh",
-      "size_bytes": 4463,
-      "modified_at": "2026-07-10T21:43:55-04:00"
+      "size_bytes": 4494,
+      "modified_at": "2026-07-10T21:43:55-04:00",
+      "sha256": "f0bd5dae5563abceda4e1f9c46c4cc9ad205b0847a9e705a266e125ae22f4998",
+      "updated_at": "2026-07-10T22:06:04-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/hera-youtube-capture-frames.py",
