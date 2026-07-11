@@ -81,16 +81,16 @@ Adset      | 1          | código `gNN` dentro da campanha
 Anúncios   | 3          | imagem, vídeo ou mix permitido
 ```
 
-Evento obrigatório no **nome da campanha**, independentemente de haver captura:
+Evento de conversão obrigatório no **adset/conjunto**, independentemente de haver captura:
 
 ```text
-Estratégia | Sem captura           | Com captura           | Sufixo/evento obrigatório
------------|-----------------------|-----------------------|---------------------------
-Chat       | obrigatório           | obrigatório           | `event_add_to_wishlist`
-Quiz       | obrigatório           | obrigatório           | `event_Subscribe`
+Estratégia | Com/sem captura | Evento operacional informado | Meta Graph `promoted_object.custom_event_type`
+-----------|-----------------|-------------------------------|-----------------------------------------------
+Chat       | obrigatório     | `event_add_to_wishlist`       | `ADD_TO_WISHLIST`
+Quiz       | obrigatório     | `event_Subscribe`             | `SUBSCRIBE`
 ```
 
-O evento é definido pela experiência, não pela captura. Campanha de chat nunca usa `event_Subscribe`; campanha de quiz nunca usa `event_add_to_wishlist`.
+O evento é definido pela experiência, não pela captura. Validar no adset `optimization_goal=OFFSITE_CONVERSIONS`, pixel presente e `promoted_object.custom_event_type` correto. Esses literais não precisam integrar o nome da campanha, salvo regra de naming separada e explícita.
 
 Qualquer desvio do 1×1×3 deve estar explícito no pedido/spec. Antes de campanha, cada criativo precisa passar pelo metadata sanitizer canônico do Ares.
 
@@ -164,7 +164,7 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 ## Common pitfalls
 
 1. **Confundir `-f` e `-s`.** Nesta taxonomia, `-f` identifica chat e `-s` identifica quiz.
-2. **Usar evento errado no nome.** Chat exige `event_add_to_wishlist`; quiz exige `event_Subscribe`, com ou sem captura.
+2. **Configurar evento errado no adset.** Chat exige `ADD_TO_WISHLIST`; quiz exige `SUBSCRIBE`, com ou sem captura. Não confundir evento de conversão com texto de naming.
 3. **Confundir gestor e adset.** `gXXX` em `utm_medium` é gestor; `gNN` no final de `utm_adgroup` é o número do conjunto.
 4. **Duplicar sequência.** `utm_adgroup` deve copiar `utm_campaign` integralmente antes de acrescentar o adset.
 5. **Misturar DTR/ChatPion.** A campanha desta skill é link direto por CBO, não a estratégia de bot.
@@ -176,8 +176,9 @@ Conclusão: totais por fonte fecham com o consolidado, e divergências ficam vis
 ## Verification checklist
 
 - [ ] Estratégia classificada como quiz/chat e com/sem captura
-- [ ] Nome de chat contém exatamente `event_add_to_wishlist`
-- [ ] Nome de quiz contém exatamente `event_Subscribe`
+- [ ] Adset de chat usa `ADD_TO_WISHLIST` (`event_add_to_wishlist`)
+- [ ] Adset de quiz usa `SUBSCRIBE` (`event_Subscribe`)
+- [ ] Adset usa `OFFSITE_CONVERSIONS` e pixel presente
 - [ ] Campanha CBO e estrutura esperada 1×1×3 documentadas
 - [ ] BM, conta, campanha, adset e gestor confirmados
 - [ ] `utm_source=facebook`

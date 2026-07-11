@@ -72,21 +72,22 @@ Criativos  | 3      | todos imagem, todos vídeo ou mix
 Destino    | direto | URL final com UTMs canônicas
 ```
 
-## Evento obrigatório no nome da campanha
+## Evento de conversão obrigatório no adset
 
 ```text
-Experiência | Captura                  | Texto literal obrigatório
-------------|--------------------------|-----------------------------
-Chat        | com ou sem captura       | `event_add_to_wishlist`
-Quiz        | com ou sem captura       | `event_Subscribe`
+Experiência | Captura            | Evento informado             | Valor Meta Graph
+------------|--------------------|------------------------------|-------------------
+Chat        | com ou sem captura | `event_add_to_wishlist`      | `ADD_TO_WISHLIST`
+Quiz        | com ou sem captura | `event_Subscribe`            | `SUBSCRIBE`
 ```
 
 Regras:
 
-1. O evento pertence ao **nome da campanha Meta**; não é parâmetro UTM.
+1. O evento pertence à configuração de conversão do **adset/conjunto**, não ao nome da campanha nem às UTMs.
 2. Captura não altera o evento obrigatório.
-3. Preservar exatamente capitalização e underscores: `event_add_to_wishlist` e `event_Subscribe`.
-4. Antes de criar/clonar, validar o nome final juntamente com BM, conta e sequência da campanha.
+3. Validar por GET real: `optimization_goal=OFFSITE_CONVERSIONS`, `promoted_object.pixel_id` presente e `promoted_object.custom_event_type` conforme a tabela.
+4. O Ads Manager pode exibir `event_add_to_wishlist`/`event_Subscribe`; a Graph API normaliza para `ADD_TO_WISHLIST`/`SUBSCRIBE`.
+5. Não exigir o literal do evento no nome da campanha sem uma regra de naming separada e explícita.
 
 ## Exemplos
 
@@ -101,10 +102,12 @@ Regras:
 ## Validação automática
 
 ```bash
-python3 scripts/validate_direct_traffic_utm.py 'https://example.com/quiz/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c02&utm_adgroup=b01fb01c02g01'
+python3 scripts/validate_direct_traffic_utm.py \
+  'https://example.com/quiz/?utm_source=facebook&utm_medium=g002-s&utm_campaign=b01fb01c02&utm_adgroup=b01fb01c02g01' \
+  --conversion-event SUBSCRIBE
 ```
 
-Saída esperada: JSON com `valid: true`, estratégia, gestor, BM, conta, campanha e adset.
+Saída esperada: JSON com `valid: true`, estratégia, gestor, BM, conta, campanha, adset e `conversion_event_verified: true`.
 
 Para gerar:
 

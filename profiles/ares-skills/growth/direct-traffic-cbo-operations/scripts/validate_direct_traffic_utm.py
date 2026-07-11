@@ -13,7 +13,7 @@ ADGROUP_RE = re.compile(r"^(?P<prefix>b\d{2}fb\d{2}c\d{2})g(?P<adset>\d{2})$")
 REQUIRED = ("utm_source", "utm_medium", "utm_campaign", "utm_adgroup")
 
 
-def validate(url: str, campaign_name: str | None = None) -> dict:
+def validate(url: str, conversion_event: str | None = None) -> dict:
     errors = []
     parts = urlsplit(url)
     pairs = parse_qsl(parts.query, keep_blank_values=True)
@@ -52,18 +52,16 @@ def validate(url: str, campaign_name: str | None = None) -> dict:
     result = {"valid": not errors, "url": url, "errors": errors}
     if medium:
         strategy = "chat" if medium.group("suffix") == "f" else "quiz"
-        required_event = "event_add_to_wishlist" if strategy == "chat" else "event_Subscribe"
-        forbidden_event = "event_Subscribe" if strategy == "chat" else "event_add_to_wishlist"
+        required_event = "ADD_TO_WISHLIST" if strategy == "chat" else "SUBSCRIBE"
         result["manager"] = f"g{medium.group('manager')}"
         result["strategy"] = strategy
-        result["required_campaign_event"] = required_event
-        if campaign_name is not None:
-            result["campaign_name"] = campaign_name
-            result["campaign_event_verified"] = required_event in campaign_name and forbidden_event not in campaign_name
-            if required_event not in campaign_name:
-                errors.append(f"campaign name for {strategy} must contain exactly-cased '{required_event}'")
-            if forbidden_event in campaign_name:
-                errors.append(f"campaign name for {strategy} must not contain '{forbidden_event}'")
+        result["required_conversion_event"] = required_event
+        if conversion_event is not None:
+            normalized_event = conversion_event.strip()
+            result["conversion_event"] = normalized_event
+            result["conversion_event_verified"] = normalized_event == required_event
+            if normalized_event != required_event:
+                errors.append(f"adset conversion event for {strategy} must be '{required_event}'")
     if campaign:
         result.update({k: int(campaign.group(k)) for k in ("bm", "account", "campaign")})
     if adgroup:
@@ -112,7 +110,7 @@ def main() -> int:
     parser.add_argument("--adset", type=int)
     parser.add_argument("--manager", type=int)
     parser.add_argument("--strategy", choices=("quiz", "chat"))
-    parser.add_argument("--campaign-name", help="Meta campaign name; validates the mandatory event for the URL strategy")
+    parser.add_argument("--conversion-event", choices=("ADD_TO_WISHLIST", "SUBSCRIBE"), help="Meta adset promoted_object.custom_event_type")
     args = parser.parse_args()
 
     try:
@@ -125,7 +123,7 @@ def main() -> int:
             url = args.url
         else:
             parser.error("provide a URL or use --build")
-        result = validate(url, args.campaign_name)
+        result = validate(url, args.conversion_event)
     except ValueError as exc:
         result = {"valid": False, "errors": [str(exc)]}
 

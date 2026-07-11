@@ -147,6 +147,35 @@ done
 
 Se um erro antigo era o último bloco do log (ex.: Yoast falhou às 10:00 mas depois não rodou), executar o cron manualmente quando for seguro/idempotente, depois rodar o stale watchdog real para emitir resolução.
 
+## Monitor canônico de rate limit do Service Account
+
+Use `op service-account ratelimit --format=json` como probe oficial. Ele retorna budgets independentes de leitura horária por token, escrita horária por token e leitura/escrita diária por conta. No plano Business, os limites são 10.000 leituras/hora, 1.000 escritas/hora e 50.000 requisições/dia por conta.
+
+Padrão recomendado:
+
+- Executar a cada 15 minutos, com minuto escalonado e `flock -n`.
+- Alertar amarelo em 70% e crítico em 90%, separando budget horário e diário.
+- Persistir state e cooldown; só reenviar ao cruzar faixa, após cooldown ou na resolução.
+- Enviar pelo bot Zeus/Discord REST usando a credencial já local do profile, não buscar o webhook no próprio 1Password. Um monitor dependente do `op` para obter o canal falha justamente quando o limite esgota.
+- Nunca imprimir token ou valores de itens; reportar apenas `used`, `limit`, `remaining`, percentual e horário de reset.
+- Antes de instalar: backup do crontab, arquivo intermediário validado, smoke test real, atualização de `docs/CRONS.md`, inventário, audit log e REPORT-INFRA.
+
+### Diagnóstico de consumo acelerado
+
+A documentação oficial do CLI informa:
+
+- `op item get` por nome: 3 leituras; com IDs do item e vault: 1.
+- `op read` por nome: 3 leituras; com IDs: 1.
+- `op item list --vault <nome>`: até 3 leituras; com vault ID: 2.
+
+Se o contador subir rapidamente, não atribuir automaticamente ao monitor. Inspecionar processos `op` ativos e sua árvore de pais para localizar uma operação concorrente. Em loops/batches, resolver vault/item IDs uma vez e reutilizá-los; não fazer probes de vários campos com chamadas separadas.
+
+### Migração para conta Business
+
+Um token criado na conta pessoal não acessa vaults da Business. Criar um novo Service Account dentro da Business, conceder somente os vaults necessários e permissões mínimas de leitura, desabilitar criação de vaults e atualizar `OP_SERVICE_ACCOUNT_TOKEN` no env central. Acesso e permissões são imutáveis; se faltar vault ou permissão, é necessário criar outro Service Account.
+
+Validar sem expor segredos: identidade, vault visível, contagem de itens, uma leitura real reportada apenas por status/comprimento e o budget de 50.000/dia. Criar outro token só contorna limite horário por token; não contorna limite diário por conta.
+
 ## Pitfall: auto-commit guardrail por nome de arquivo
 
 O auto-commit pode ficar ativo mas bloqueado se um arquivo de documentação tiver nome com `token|password|secret|webhook|credential|1password`. Antes de relaxar guardrail:

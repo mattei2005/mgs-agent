@@ -25,6 +25,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Pitfalls** → `references/route-pack-04.md`
 - **SEÇÃO B — Monitor de Restarts de Services Systemd → Fluxo completo esperado** → `references/route-pack-05.md`
 - **SEÇÃO D — Hardening de Monitors em Produção (checklist obrigatório) → Exemplo real — monitor-auto-push.sh** → `references/route-pack-06.md`
+- **Service Account `op`: rate-limit, migração Business, diagnóstico de consumo e monitor independente do 1Password** → `references/cron-op-rate-limit-mitigation.md`
 
 ## Context-efficiency guardrails
 
