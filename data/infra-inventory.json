@@ -1,8 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T21:17:40-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-10T21:17:22-04:00",
+    "generated_by": "infra-discovery.sh",
+    "last_manual_update": "hera-meta-library-direct-route-incident-guidance"
   },
   "system_packages": [
     {
@@ -1245,7 +1246,7 @@
         "screenshot_visual": "real fmybc.com ad cards confirmed"
       },
       "purpose": "Durable Meta/Facebook Ads Library intake with persistent browser profile; runtime/profile must never use /tmp.",
-      "updated_at": "2026-07-10T20:19:38-04:00",
+      "updated_at": "2026-07-10T21:17:22-04:00",
       "security": {
         "exclusive_profile_lock": "flock, concurrent exit 75",
         "site_isolation": "enabled",
@@ -1253,6 +1254,12 @@
         "env_secrets_loaded": false,
         "sensitive_query_params": "rejected",
         "download_validation": "HTTP 2xx + MIME allowlist + magic bytes + size limits + atomic rename + SHA256"
+      },
+      "incident_2026_07_10": {
+        "confirmed": "Two post-success attempts ran proxyMode=direct-vps at 00:25 and 00:26 UTC, returned 0 IDs/media; auth cookie names absent.",
+        "not_confirmed": "Exact cause of c_user/xs absence; do not claim Meta removed them without further evidence.",
+        "correction": "Do not probe direct-vps after residential success; if auth names absent, reauthenticate visually over Windows SOCKS then collect through same route.",
+        "hera_guidance_message_id": "1525309622993289226"
       }
     },
     {
@@ -1719,13 +1726,14 @@
       "type": "profile_skill",
       "path": "/root/.hermes/profiles/hera/skills/creative/meta-library-reference-intake/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/hera-skills/creative/meta-library-reference-intake/SKILL.md",
-      "size_bytes": 4955,
+      "size_bytes": 6676,
       "modified_at": "2026-07-10T17:41:59.982336-04:00",
-      "sha256": "f312ab015794f05da09633873fa09e64882277ed2053ad7520091d244d9b7e3a",
-      "versioned_sha256": "f312ab015794f05da09633873fa09e64882277ed2053ad7520091d244d9b7e3a",
+      "sha256": "761c8a8f39fc7d99fac6e70ce4bad90161ffcaa0d04c078386dca48b25db9c23",
+      "versioned_sha256": "761c8a8f39fc7d99fac6e70ce4bad90161ffcaa0d04c078386dca48b25db9c23",
       "purpose": "Canonical Meta Ads Library collection flow with persistent runtime/profile and explicit no-/tmp rule.",
-      "validation": "live/versioned hash match; adaptive scroll rule documented; fmybc authenticated smoke PASS",
-      "updated_at": "2026-07-10T20:19:38-04:00"
+      "validation": "live/versioned SKILL and continuity reference hashes match; direct-vps incident guidance corrected; Zeus guidance delivered to Hera thread message 1525309622993289226",
+      "updated_at": "2026-07-10T21:17:22-04:00",
+      "reference_sha256": "5c9a57d8e0f6b37391fc399e7729a1105220d468081ef736026b76cbc96eb450"
     },
     {
       "id": "zeus-local-browser-automation-persistent-runtime-rule",
