@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-10T21:56:26-04:00",
+    "updated_at": "2026-07-10T21:57:54-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1351,6 +1351,36 @@
       "validation": "bash -n PASS; real snapshot PASS; authenticatedLikely=true; windows-home-socks; critical files hashed internally; snapshot 12M; no live Chromium.",
       "latest_snapshot": "/root/.hermes/profiles/hera/browser-profile-backups/meta-library-chromium/20260711T014404Z",
       "updated_at": "2026-07-10T21:45:47-04:00"
+    },
+    {
+      "id": "zeus-hermes-cron-meta-app-roles-watch",
+      "agent": "zeus",
+      "type": "hermes_cron",
+      "job_id": "0cc7ed1e587e",
+      "name": "meta-app-roles-watch",
+      "source_path": "/root/.hermes/profiles/zeus/cron/jobs.json",
+      "script": "meta-app-roles-watch.sh",
+      "schedule": "0 8,13,18,22 * * *",
+      "timezone": "America/New_York",
+      "enabled": true,
+      "purpose": "Full Meta app roles/admin and sheet reconciliation for B001-B010/B005-2.",
+      "validation": "cronjob readback enabled/scheduled; next run 2026-07-10 22:00 ET",
+      "updated_at": "2026-07-10T21:57:54-04:00"
+    },
+    {
+      "id": "zeus-hermes-cron-b011-dtr-link-watch",
+      "agent": "zeus",
+      "type": "hermes_cron",
+      "job_id": "498fb0d95e10",
+      "name": "b011-dtr-link-watch",
+      "source_path": "/root/.hermes/profiles/zeus/cron/jobs.json",
+      "script": "b011-dtr-link-watch.sh",
+      "schedule": "15 8,13,18,22 * * *",
+      "timezone": "America/New_York",
+      "enabled": true,
+      "purpose": "B011 DTR/ChatPion OAuth link and page connection reconciliation.",
+      "validation": "cronjob readback enabled/scheduled; next run 2026-07-10 22:15 ET",
+      "updated_at": "2026-07-10T21:57:54-04:00"
     }
   ],
   "profile_skill_references": [
@@ -5117,8 +5147,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 1902,
-      "md5": "ffb6b2ff725ea1d513b8240432907ff0",
-      "modified_at": "2026-07-10T21:52:01-04:00"
+      "md5": "e173d4ab181cb27b9bc9229dbb81aa1f",
+      "modified_at": "2026-07-10T21:57:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -5218,9 +5248,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 219293,
-      "md5": "b01141f5f8863010124337e1ae7195df",
-      "modified_at": "2026-07-10T21:53:12-04:00"
+      "size_bytes": 220644,
+      "md5": "04666d37d330632ff06ad7b8230772c3",
+      "modified_at": "2026-07-10T21:57:54-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
