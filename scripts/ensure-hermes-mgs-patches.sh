@@ -161,6 +161,7 @@ apply_patch_if_needed "discord-thread-title-author-suffix.patch"
 apply_patch_if_needed "discord-suppress-link-previews.patch"
 apply_patch_if_needed "mgs-auto-reasoning-routing.patch"
 apply_patch_if_needed "mgs-busy-steer-universal-media-2026-07-10.patch"
+apply_patch_if_needed "mgs-busy-steer-startup-merge-2026-07-11.patch"
 apply_patch_if_needed "skill-view-compact-linked-files.patch"
 
 # Invariants that must survive every Hermes update. If any grep fails, the
@@ -245,6 +246,12 @@ grep -q "async def _prepare_busy_steer_payload" "$REPO/gateway/run.py" \
   || fail "missing MGS universal busy-steer media normalizer"
 grep -q "for_mid_turn_steer" "$REPO/gateway/run.py" \
   || fail "missing MGS mid-turn media enrichment mode"
+grep -q "def _stash_startup_steer" "$REPO/gateway/run.py" \
+  || fail "missing MGS startup steer buffer"
+grep -q "def _merge_startup_steer_into_message" "$REPO/gateway/run.py" \
+  || fail "missing MGS startup steer same-turn merge"
+grep -q "test_steer_mode_buffers_current_turn_when_agent_pending" "$REPO/tests/gateway/test_busy_session_ack.py" \
+  || fail "missing MGS startup steer regression test"
 grep -q "Image attached at:" "$REPO/gateway/run.py" \
   || fail "missing MGS mid-turn image path marker"
 grep -q "def _linked_files_for_view" "$REPO/tools/skills_tool.py" \

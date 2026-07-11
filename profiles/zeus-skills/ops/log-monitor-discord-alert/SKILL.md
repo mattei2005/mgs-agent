@@ -1,6 +1,6 @@
 ---
 name: log-monitor-discord-alert
-description: "Monitoramento MGS com alertas Discord: template genérico de monitor de log (START/OK padrão), monitor de restarts de services systemd (zeus-gateway, atena-gateway, mgs-autocommit), e monitor de skills MGS sem REPORT-INFRA no inventário. Inclui state file JSON, anti-spam, resolução automática, padrão cron, set-a env export para cron, e padrão seguro para crontab. Referências: meta-app-roles-b011-sheet-gid-2026-07-04.md (B011 separado + gid 542936436), shell-env-crontab-patterns.md (set-a, crontab safety), mgs-audit-2026-05-02.md (auditoria 130 arquivos)."
+description: "Monitoramento operacional MGS com crons, state files e alertas Discord: transporte direto por bot, anti-spam, resolução, monitores de services/REPORT-INFRA/rate limit/Yoast/uso OAuth, housekeeping seguro, consumo 1Password e validação por fixture/mock antes de produção."
 tags: [monitoring, discord, cron, logs, alerting, bash, systemd, restart, infra, inventory, skills, report-infra, env-export, shell]
 related_skills: [wp-plugin-mass-operation, discord-ops]
 ---
@@ -28,6 +28,16 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Service Account `op`: rate-limit, migração Business, diagnóstico de consumo e monitor independente do 1Password** → `references/cron-op-rate-limit-mitigation.md`
 - **Auditoria completa de consumo 1Password: crons Linux + Hermes de todos os perfis, projeção nominal versus observada e otimização** → `references/1p-full-consumption-audit.md`
 - **Yoast eggbev, relatório GPT-5.6 OAuth e housekeeping de backups** → `references/yoast-gpt56-housekeeping-2026-07-11.md`
+
+## MGS transport and telemetry invariants
+
+- For monitors posting to a Discord channel already reachable by an authenticated MGS bot, prefer direct Discord API delivery with that bot. Do not add a recurring 1Password lookup merely to retrieve a webhook.
+- Keep 1Password only for secrets genuinely required by the monitored operation, not for alert transport when local bot authentication already exists.
+- Alert delivery should remain independent of the dependency being monitored when practical; for example, a 1Password rate-limit monitor must alert through Discord bot auth rather than a 1Password-resolved webhook.
+- Test direct delivery with an isolated mock HTTP endpoint and token override before sending a real smoke message. Verify authorization, destination, payload schema, state transition, and absence of secrets in stdout/stderr.
+- Separate fixed, conditional, event-driven, and on-demand credential consumption. Do not present a conditional lookup as a fixed daily cost.
+- Report only telemetry emitted by the runtime. If logs expose API-call counts but not token counts, report calls/responses and explicitly omit token or pay-per-token estimates instead of inventing averages.
+- For destructive housekeeping, verify behavior in a temporary fixture first: canonical file preserved, latest backup per family preserved, singleton family preserved, and only eligible older backups removed.
 
 ## Context-efficiency guardrails
 

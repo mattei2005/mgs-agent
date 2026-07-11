@@ -1,0 +1,268 @@
+diff --git a/gateway/run.py b/gateway/run.py
+--- a/gateway/run.py
++++ b/gateway/run.py
+@@ -2966,6 +2966,12 @@
+         # preserve the queue.
+         self._queued_events: Dict[str, List[MessageEvent]] = {}
+         self._pending_native_image_paths_by_session: Dict[str, List[str]] = {}
++        # Follow-ups that arrive after the session slot is claimed but before
++        # the real AIAgent is ready. In steer mode these belong to the active
++        # turn, not the adapter's next-turn queue. The gateway loop stores them
++        # while the agent worker thread consumes them before its first API call.
++        self._pending_startup_steers: Dict[str, List[tuple[str, MessageEvent]]] = {}
++        self._pending_startup_steers_lock = threading.Lock()
+         self._busy_ack_ts: Dict[str, float] = {}  # last busy-ack timestamp per session (debounce)
+         self._session_run_generation: Dict[str, int] = {}
+         # Startup restore gate: while restart-interrupted sessions are being
+@@ -5332,6 +5338,57 @@
+             return
+ 
+         self._enqueue_fifo(session_key, event, adapter)
++
++    def _stash_startup_steer(
++        self,
++        session_key: str,
++        payload: str,
++        event: MessageEvent,
++    ) -> bool:
++        """Hold an early follow-up for the active turn until AIAgent exists."""
++        if not session_key or not payload or not payload.strip():
++            return False
++        lock = getattr(self, "_pending_startup_steers_lock", None)
++        if lock is None:
++            lock = threading.Lock()
++            self._pending_startup_steers_lock = lock
++        with lock:
++            pending = getattr(self, "_pending_startup_steers", None)
++            if pending is None:
++                pending = {}
++                self._pending_startup_steers = pending
++            pending.setdefault(session_key, []).append((payload.strip(), event))
++        return True
++
++    def _consume_startup_steers(
++        self,
++        session_key: str,
++    ) -> tuple[str, List[MessageEvent]]:
++        """Atomically drain early follow-ups while preserving arrival order."""
++        lock = getattr(self, "_pending_startup_steers_lock", None)
++        pending = getattr(self, "_pending_startup_steers", None)
++        if lock is None or pending is None:
++            return "", []
++        with lock:
++            entries = pending.pop(session_key, [])
++        payload = "\n\n".join(text for text, _event in entries if text)
++        return payload, [event for _text, event in entries]
++
++    @staticmethod
++    def _merge_startup_steer_into_message(message: Any, payload: str) -> Any:
++        """Merge a pre-agent follow-up into the first user turn cache-safely."""
++        if not payload or not payload.strip():
++            return message
++        from agent.prompt_builder import format_steer_marker
++
++        marker = format_steer_marker(payload.strip())
++        if isinstance(message, str):
++            return message + marker
++        if isinstance(message, list):
++            merged = list(message)
++            merged.append({"type": "text", "text": marker})
++            return merged
++        return f"{message}{marker}"
+ 
+     async def _prepare_busy_steer_payload(
+         self,
+@@ -5600,13 +5657,16 @@
+         steered = False
+         if effective_mode == "steer":
+             steer_text = await self._prepare_busy_steer_payload(event, session_key)
+-            can_steer = (
++            if running_agent is _AGENT_PENDING_SENTINEL:
++                # The session is active but AIAgent construction/prompt setup is
++                # still running. Keep the follow-up inside this turn; run_sync
++                # merges it into the initial user message before the first API call.
++                steered = self._stash_startup_steer(session_key, steer_text, event)
++            elif (
+                 steer_text
+                 and running_agent is not None
+-                and running_agent is not _AGENT_PENDING_SENTINEL
+                 and hasattr(running_agent, "steer")
+-            )
+-            if can_steer:
++            ):
+                 try:
+                     steered = bool(running_agent.steer(steer_text))
+                 except Exception as exc:
+@@ -9713,8 +9773,13 @@
+                     self._release_running_agent_state(_quick_key)
+                     logger.info("HARD STOP (pending) for session %s — sentinel cleared", _quick_key)
+                     return EphemeralReply("⚡ Force-stopped. The agent was still starting — session unlocked.")
+-                # Queue the message so it will be picked up after the
+-                # agent starts.
++                if self._busy_input_mode == "steer":
++                    steer_text = await self._prepare_busy_steer_payload(event, _quick_key)
++                    if self._stash_startup_steer(_quick_key, steer_text, event):
++                        logger.debug("PRIORITY startup steer buffered for session %s", _quick_key)
++                        return None
++                # Non-steer mode, or an unusable payload: preserve the established
++                # next-turn fallback so the message cannot be lost.
+                 adapter = self._adapter_for_source(source)
+                 if adapter:
+                     merge_pending_message_event(
+@@ -16315,6 +16380,11 @@
+                 logger.debug("Failed to release active session slot", exc_info=True)
+         self._running_agents.pop(session_key, None)
+         self._running_agents_ts.pop(session_key, None)
++        startup_lock = getattr(self, "_pending_startup_steers_lock", None)
++        startup_pending = getattr(self, "_pending_startup_steers", None)
++        if startup_lock is not None and startup_pending is not None:
++            with startup_lock:
++                startup_pending.pop(session_key, None)
+         if hasattr(self, "_busy_ack_ts"):
+             self._busy_ack_ts.pop(session_key, None)
+         # Turn boundary: a running-agent slot was just released.  Persist the
+@@ -18150,6 +18220,8 @@
+         result_holder = [None]  # Mutable container for the result
+         tools_holder = [None]   # Mutable container for the tool definitions
+         stream_consumer_holder = [None]  # Mutable container for stream consumer
++        startup_steer_merge_ready = threading.Event()
++        startup_agent_promoted = threading.Event()
+         
+         # Bridge sync step_callback → async hooks.emit for agent:step events
+         _loop_for_step = asyncio.get_running_loop()
+@@ -19140,6 +19212,29 @@
+             _approval_session_token = set_current_session_key(_approval_session_key)
+             register_gateway_notify(_approval_session_key, _approval_notify_sync)
+             try:
++                # Authorized follow-ups received while AIAgent was still the
++                # pending sentinel belong to this same response. Merge them into
++                # the first user message before native-media wrapping and before
++                # the first model request, including the no-tool response case.
++                _startup_payload, _startup_events = self._consume_startup_steers(
++                    session_key or ""
++                )
++                if _startup_payload:
++                    message = self._merge_startup_steer_into_message(
++                        message,
++                        _startup_payload,
++                    )
++                    logger.info(
++                        "Merged %d startup steer follow-up(s) into active turn for session %s",
++                        len(_startup_events),
++                        session_key or "",
++                    )
++                startup_steer_merge_ready.set()
++                if session_key and not startup_agent_promoted.wait(timeout=2.0):
++                    logger.warning(
++                        "Timed out waiting for startup agent promotion for session %s",
++                        session_key,
++                    )
+                 # If _prepare_inbound_message_text buffered image paths for native
+                 # attachment, wrap the user turn as an OpenAI-style multimodal
+                 # content list. Consume-and-clear so subsequent turns on the same
+@@ -19512,7 +19607,12 @@
+             while agent_holder[0] is None:
+                 await asyncio.sleep(0.05)
+             if not session_key:
++                startup_agent_promoted.set()
+                 return
++            # Keep the sentinel in place until run_sync has atomically drained
++            # all follow-ups received during setup into the initial prompt.
++            while not startup_steer_merge_ready.is_set():
++                await asyncio.sleep(0.01)
+             # Only promote the sentinel to the real agent if this run is still
+             # current.  If /stop or /new bumped the generation while we were
+             # spinning up, leave the newer run's slot alone — we'll be
+@@ -19525,8 +19625,27 @@
+                     session_key or "",
+                     run_generation,
+                 )
++                startup_agent_promoted.set()
+                 return
+             self._running_agents[session_key] = agent_holder[0]
++            # Close the tiny cross-thread race between startup drain and
++            # sentinel promotion. Anything that landed there still belongs to
++            # this run; steer it now instead of replaying it as another turn.
++            _late_payload, _late_events = self._consume_startup_steers(session_key)
++            if _late_payload:
++                try:
++                    _late_accepted = bool(agent_holder[0].steer(_late_payload))
++                except Exception as exc:
++                    logger.warning(
++                        "Late startup steer failed for session %s: %s",
++                        session_key,
++                        exc,
++                    )
++                    _late_accepted = False
++                if not _late_accepted:
++                    for _late_event in _late_events:
++                        self._queue_or_replace_pending_event(session_key, _late_event)
++            startup_agent_promoted.set()
+             if self._draining:
+                 self._update_runtime_status("draining")
+         
+diff --git a/tests/gateway/test_busy_session_ack.py b/tests/gateway/test_busy_session_ack.py
+--- a/tests/gateway/test_busy_session_ack.py
++++ b/tests/gateway/test_busy_session_ack.py
+@@ -3,6 +3,7 @@
+ Verifies that users get an immediate status response instead of total silence
+ when the agent is working on a task. See PR fix for the @Lonely__MH report.
+ """
++import threading
+ import time
+ from unittest.mock import AsyncMock, MagicMock, patch
+ 
+@@ -71,6 +72,8 @@
+     runner._running_agents = {}
+     runner._running_agents_ts = {}
+     runner._pending_messages = {}
++    runner._pending_startup_steers = {}
++    runner._pending_startup_steers_lock = threading.Lock()
+     runner._busy_ack_ts = {}
+     runner._draining = False
+     runner._busy_text_mode = "interrupt"
+@@ -730,8 +733,8 @@
+         assert "Steered" not in content
+ 
+     @pytest.mark.asyncio
+-    async def test_steer_mode_falls_back_to_queue_when_agent_pending(self):
+-        """If agent is still starting (sentinel), steer mode falls back to queue."""
++    async def test_steer_mode_buffers_current_turn_when_agent_pending(self):
++        """Sentinel-stage follow-ups remain in the active turn, never queue."""
+         runner, sentinel = _make_runner()
+         runner._busy_input_mode = "steer"
+         adapter = _make_adapter()
+@@ -745,12 +748,30 @@
+ 
+         await runner._handle_active_session_busy_message(event, sk)
+ 
+-        # Event was queued instead of steered (FIFO path, #43066)
+-        assert adapter._pending_messages.get(sk) is event
++        # Held for run_sync to merge before the first API call; never replayed.
++        assert sk not in adapter._pending_messages
++        payload, events = runner._consume_startup_steers(sk)
++        assert payload == "arrived too early"
++        assert events == [event]
+ 
+         call_kwargs = adapter._send_with_retry.call_args
+         content = call_kwargs.kwargs.get("content") or call_kwargs[1].get("content", "")
+-        assert "Queued for the next turn" in content
++        assert "Steered" in content
++        assert "Queued for the next turn" not in content
++
++    def test_startup_steer_merge_preserves_first_turn_and_boundaries(self):
++        """Early follow-ups are visible in the initial user message itself."""
++        from gateway.run import GatewayRunner
++
++        merged = GatewayRunner._merge_startup_steer_into_message(
++            "initial request",
++            "first follow-up\n\nsecond follow-up",
++        )
++
++        assert merged.startswith("initial request")
++        assert "[OUT-OF-BAND USER MESSAGE" in merged
++        assert "first follow-up" in merged
++        assert "second follow-up" in merged
+ 
+     @pytest.mark.asyncio
+     async def test_interrupt_mode_text_followups_fifo_not_merged(self):
