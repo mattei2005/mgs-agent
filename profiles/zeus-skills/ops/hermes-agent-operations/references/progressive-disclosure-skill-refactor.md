@@ -81,9 +81,11 @@ Treat SOUL reduction as a safety-critical prompt migration, not a text-shortenin
 3. Keep permanently loaded: identity, authority, scope boundaries, authorization, credential safety, anti-invention/validation, Critical Subset, source precedence, historical-context non-actionability, anti-loop, and a short fail-closed restart invariant.
 4. For `MUST/split`, retain the decision rule and exact trigger in SOUL; move only mechanics, examples, IDs, commands, histories, and mutable inventories.
 5. Extract procedures literally first. Do not combine migration and semantic rewriting in one diff. Resolve stale/conflicting wording in a separate reviewed change.
-6. Preserve explicit routing: every removed operational branch must name the exact skill/reference loaded on that trigger.
-7. Validate with negative scenarios before rollout: unauthorized user, out-of-scope request, credential/budget change, cross-agent ownership, restart during an active turn, unsupported provider, and success without evidence.
-8. Roll out one profile at a time with backup, size/hash manifest, prompt/runtime smoke test, rollback artifact, inventory update, audit log, and REPORT-INFRA.
+6. Preserve the complete original source, not only H2 bodies: include the preface/title and every section in route packs or an immutable backup. Build a per-pack hash manifest, then prove that concatenating the preserved raw payloads reproduces the original file byte-for-byte. A backup is rollback evidence; it is not proof that knowledge remains discoverable through references.
+7. Preserve explicit routing: every removed operational branch must name the exact skill/reference loaded on that trigger. Mark migrated packs as historical detail and state that the compact SOUL plus current canonical sources win on conflict.
+8. Validate with negative scenarios before rollout: unauthorized user, out-of-scope request, credential/budget change, cross-agent ownership, restart during an active turn, unsupported provider, and success without evidence.
+9. Keep adjacent remediations separate in scope and evidence. A Discord/config regression discovered during a SOUL audit is not proof that the SOUL migration failed; diagnose and validate each surface independently before applying authorization.
+10. Roll out one profile at a time with backup, size/hash manifest, prompt/runtime smoke test, rollback artifact, inventory update, audit log, and REPORT-INFRA.
 
 Common blockers found in real MGS audits include hardcoded model/provider names, stale permission IDs, conflicting budget limits, contradictory upload semantics, obsolete runtime-tool guidance, and duplicate REPORT-INFRA/thread rules. These must be reconciled before extraction.
 
