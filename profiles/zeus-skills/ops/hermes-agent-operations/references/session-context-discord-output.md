@@ -2,6 +2,31 @@
 
 > Extracted from the former monolithic `SKILL.md` on 2026-07-10. Load this file only when its branch is relevant.
 
+## Discord — “só aparece digitando”, sem histórico ao vivo
+
+Quando Rodolfo perguntar por que não vê mais o “histórico” enquanto o agente está digitando, primeiro diferencie três coisas:
+
+- **histórico do Discord**: mensagens já enviadas, que não foram apagadas;
+- **indicador “digitando…”**: presença temporária do bot;
+- **tool progress**: mensagens/edições transitórias que mostram consultas e ferramentas durante a execução.
+
+Diagnóstico mínimo, antes de afirmar a causa:
+
+1. Ler a configuração viva do profile em `display.tool_progress` e `display.platforms.discord.tool_progress`.
+2. Conferir `display.platforms.discord.streaming`, `cleanup_progress` e `interim_assistant_messages`; não confundir streaming da resposta com progresso de ferramentas.
+3. Comparar com o mirror versionado e, quando houver regressão recente, usar o histórico Git do arquivo para identificar exatamente quando `all/on` virou `false/off`.
+4. Conferir o horário do último restart do gateway: uma alteração de config pode existir há horas e só se tornar visível após o restart.
+
+Interpretação:
+
+- `tool_progress: false/off` + gateway reiniciado explica o cenário “só fica digitando e não mostra o que está fazendo”.
+- Isso **não significa perda do histórico do Discord** nem perda do contexto interno; apenas oculta o acompanhamento operacional ao vivo.
+- `cleanup_progress: true` pode remover o progresso transitório após a resposta final, mas não é a causa primária quando o progresso nunca aparece.
+
+Resposta executiva recomendada: informar o valor anterior e atual, o horário/commit da mudança quando confirmados e o restart que a ativou. Se a mudança entrou junto de refactor/sync sem pedido explícito, classificá-la honestamente como possível regressão de visibilidade, não como comportamento intencional presumido.
+
+Para restaurar, tratar como mudança de configuração + restart: obter autorização conforme MGS, alterar tanto o profile vivo quanto o mirror canônico, validar com `hermes -p <profile> config check`, usar restart seguro (Zeus por último) e fazer smoke real no Discord confirmando que o progresso reapareceu. A configuração exata deve ser validada contra o schema/runtime da versão instalada; não assumir que strings antigas (`all`, `off`) e booleanos atuais são intercambiáveis.
+
 ## Discord — suprimir previews automáticos de links
 
 Use quando Rodolfo pedir que mensagens dos agentes não gerem cards/previews automáticos para URLs no Discord.

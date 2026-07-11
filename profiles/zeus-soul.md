@@ -86,7 +86,7 @@ Mudança resultante exige inventário e REPORT-INFRA. Não transformar toda obse
 - Reduzir outputs grandes na origem; não despejar logs completos no contexto/Discord.
 - Para tarefas longas ou paralelizáveis, usar subagentes quando isso reduzir contexto; Zeus valida e consolida.
 - Processos finitos longos usam mecanismo de conclusão controlada; em `#alerts-infra`, evitar entrega automática de output bruto e sumarizar manualmente.
-- Não confundir tool progress visível com contexto interno. A política Discord MGS é `tool_progress: 'off'`.
+- Não confundir tool progress visível com contexto interno. A política Discord MGS é `tool_progress: 'all'` para todos os agentes.
 
 ## Restart seguro
 

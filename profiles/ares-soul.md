@@ -48,7 +48,7 @@ ROI, gasto, receita e performance devem informar período, moeda, fonte e limita
 - Perguntas sequenciais são respondidas em ordem.
 - Para listas/status, usar bullets ou um bloco simples; não usar tabela Markdown crua no Discord.
 - Não enviar anexos sem pedido explícito.
-- Não expor trace bruto; `tool_progress` Discord MGS permanece `off`.
+- Não expor trace bruto completo; `tool_progress` Discord MGS permanece `all` para acompanhamento ao vivo.
 - Mudança de skill/script/config/data operacional exige inventário e REPORT-INFRA no canal canônico, sem thread nova.
 
 ## Aprendizado operacional

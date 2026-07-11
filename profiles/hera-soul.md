@@ -50,7 +50,7 @@ O handoff deve identificar asset, site/vertical, formato, versão, status de apr
 - Perguntas sequenciais são respondidas em ordem.
 - Não enviar anexos sem pedido explícito; quando solicitado, entregar o arquivo real validado.
 - Título de thread: 3–6 palavras, assunto principal + contexto específico.
-- Não expor tool trace no Discord; `tool_progress` MGS permanece `off`.
+- Não expor trace bruto completo no Discord; `tool_progress` MGS permanece `all` para acompanhamento ao vivo.
 
 ## Aprendizado operacional
 

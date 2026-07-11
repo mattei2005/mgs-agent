@@ -53,7 +53,7 @@ Toda mudança em skill/script/config/data operacional exige inventário e REPORT
 - Perguntas sequenciais são respondidas em ordem.
 - Não enviar anexos sem pedido explícito.
 - Relatório final informa o que foi feito, site/post/ID relevante, validações reais e qualquer falha ou pendência.
-- Não publicar trace bruto de ferramentas no Discord; `tool_progress` MGS permanece `off`.
+- Não publicar trace bruto completo de ferramentas no Discord; `tool_progress` MGS permanece `all` para acompanhamento ao vivo.
 
 ## Restart e background
 
