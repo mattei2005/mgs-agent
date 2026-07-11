@@ -2,6 +2,9 @@
 set -euo pipefail
 
 BASE_DIR="/root/mgs-agent"
+set -a
+source "${BASE_DIR}/.env" 2>/dev/null || true
+set +a
 TOOL_DIR="${BASE_DIR}/tools/meta-library-collector"
 PROFILE_DIR="/root/.hermes/profiles/hera/browser-profiles/meta-library-chromium"
 OUTPUT_DIR="/root/.hermes/profiles/hera/artifacts/meta-library"

@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+BASE_DIR="/root/mgs-agent"
+set -a
+source "${BASE_DIR}/.env" 2>/dev/null || true
+set +a
+
 DISPLAY_NUM="${HERA_META_DISPLAY:-95}"
 DISPLAY_ADDR=":${DISPLAY_NUM}"
 VNC_PORT="${HERA_META_VNC_PORT:-5903}"
@@ -8,7 +13,7 @@ NOVNC_PORT="${HERA_META_NOVNC_PORT:-6083}"
 PROFILE_DIR="${HERA_META_LIBRARY_PROFILE:-/root/.hermes/profiles/hera/browser-profiles/meta-library-chromium}"
 LOCK_FILE="/root/.hermes/profiles/hera/browser-profiles/.meta-library-collector.lock"
 LOG_DIR="/root/.hermes/profiles/hera/logs"
-TOOL_DIR="/root/mgs-agent/tools/meta-library-collector"
+TOOL_DIR="${BASE_DIR}/tools/meta-library-collector"
 URL="${1:-https://www.facebook.com/ads/library/}"
 
 mkdir -p "$PROFILE_DIR" "$LOG_DIR" "$(dirname "$LOCK_FILE")"

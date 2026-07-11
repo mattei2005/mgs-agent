@@ -23,14 +23,14 @@ O runtime canônico é versionado e o perfil do navegador é persistente:
 
 Nunca recriar esse fluxo em `/tmp`. Nunca apagar, substituir, anexar ou versionar o diretório do perfil. Ele pode conter uma sessão autenticada do Rodolfo. Cookies podem expirar por decisão da Meta, mas não devem ser removidos pela operação MGS.
 
-Se Rodolfo marcar “confiar neste dispositivo” ou a sessão depender de 2FA, após encerrar o helper visual de forma limpa e liberar o lock, exigir snapshot seguro do perfil canônico **antes** de iniciar o coletor. Não abrir duas instâncias, não remover `SingletonLock` manualmente e não prosseguir até haver confirmação do snapshot. O coletor deve continuar pela mesma rota SOCKS residencial; nunca usar `direct-vps` nessa sessão.
+Se Rodolfo marcar “confiar neste dispositivo” ou a sessão depender de 2FA, após encerrar o helper visual de forma limpa e liberar o lock, exigir snapshot seguro do perfil canônico **antes** de iniciar o coletor. Não abrir duas instâncias, não remover `SingletonLock` manualmente e não prosseguir até haver confirmação do snapshot. O coletor deve continuar pela rota residencial dedicada resolvida pelo wrapper; `direct-vps` é proibido.
 
 ## Fluxo obrigatório
 
-1. Rodar o wrapper com a URL recebida, preservando a rota de rede do último sucesso autenticado. Se o último `proxyMode` for `windows-home-socks`, verificar primeiro `127.0.0.1:1080` e usar `HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080`; nunca testar `direct-vps` antes:
+1. Rodar o wrapper normalmente, **sem** definir `HERA_META_LIBRARY_PROXY`. O runtime resolve a rota `dedicated-us-residential` e suas credenciais diretamente no 1Password e falha fechado se a configuração estiver ausente/inválida. `windows-home-socks` é apenas fallback após reportar falha do dedicado; nunca usar `direct-vps`:
 
 ```bash
-HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080 /root/mgs-agent/scripts/hera-meta-library-collector.sh --url '<URL>' --download 1
+/root/mgs-agent/scripts/hera-meta-library-collector.sh --url '<URL>' --download 1
 ```
 
 2. Ler o resumo JSON do stdout e depois o `report.json` indicado.
@@ -71,13 +71,17 @@ Se o status do helper já mostrar `state=ready`, `pageTitle=Ad Library`, `authen
 
 Quando Rodolfo marcar “confiar neste dispositivo” ou concluir 2FA, preservar os cookies vira gate crítico. Após shutdown limpo e antes de qualquer nova operação no perfil, executar `/root/mgs-agent/scripts/hera-meta-library-profile-snapshot.sh`. O script exige lock exclusivo, recusa processo Chromium vivo, não remove `Singleton*`, aceita apenas evidência autenticada recente pela rota residencial, mantém permissões 700/600 e retenção dos cinco snapshots mais recentes. Nunca imprimir valores ou hashes de cookies no Discord.
 
-Se o Facebook entrar em CAPTCHA repetitivo pelo IP do VPS, parar a tentativa para não aumentar o risco da conta. Não trocar apenas de navegador nem usar proxy público/terceiro. A rota preferida é um SOCKS temporário pelo próprio Windows do Rodolfo: o SSH abre `-R 127.0.0.1:1080`, e o helper é iniciado com `HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080`. O proxy deve ficar local-only, existir somente enquanto o túnel SSH estiver aberto e nunca aceitar outro endereço no helper.
+Se o Facebook entrar em CAPTCHA repetitivo mesmo pela rota dedicada, parar a tentativa para não aumentar o risco da conta e reportar a falha do dedicado. Não trocar apenas de navegador nem usar proxy público/terceiro. O fallback aprovado é o SOCKS temporário pelo próprio Windows do Rodolfo: o SSH abre `-R 127.0.0.1:1080`, e o helper/coletor são iniciados com `HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080`. Esse fallback deve ficar local-only, existir somente enquanto o túnel SSH estiver aberto e nunca ser solicitado em operação normal com o dedicado saudável.
 
 Depois de autenticar pela rota residencial, não testar a rota `direct-vps` com o mesmo perfil persistente: isso pode reativar o challenge e alterar o estado da sessão. Se uma tentativa direta ocorrer e `c_user`/`xs` ficarem ausentes, não atribuir causalidade sem evidência; reabrir o helper visual pela rota residencial, autenticar se necessário, encerrar de forma limpa e só então coletar pela mesma rota SOCKS. Processos de coleta em background nunca devem despejar JSON bruto no Discord; aguardar/poll manualmente e publicar apenas resumo validado.
 
 ### Continuidade obrigatória da rota residencial
 
-Antes de reutilizar uma sessão autenticada, leia o `proxyMode` do último `report.json` bem-sucedido. Se ele for `windows-home-socks`, confirme que `127.0.0.1:1080` continua aberto e execute o coletor com `HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080`. **Não rode primeiro em `direct-vps`**: a troca de IP/rota reativa o challenge e, no incidente observado, foi seguida pela ausência de `c_user`/`xs`; não atribuir causalidade sem evidência adicional. Se o SOCKS estiver fechado, pare antes de abrir o Chromium e peça somente a reabertura do túnel residencial; depois valide os nomes `c_user`/`xs` sem expor valores e retome a coleta pela mesma rota.
+A rota padrão agora é `dedicated-us-residential`, resolvida em runtime pelo item 1Password definido em `/root/mgs-agent/data/hera-meta-library-proxy.json`. Credenciais nunca entram em arquivo, log, argumento de processo ou Discord. Os wrappers carregam `.env` com `set -a/set +a`; `proxy-config.js` busca host/porta/usuário/senha diretamente no 1Password, remove segredos do ambiente herdado pelo Chromium e proíbe `direct-vps` fail-closed.
+
+Antes de tocar no perfil canônico, validar mudança de proxy em cópia canário do último snapshot. Só promover quando o report confirmar país esperado, `proxyMode=dedicated-us-residential`, `authenticatedLikely=true`, ausência de challenge persistente, IDs reais e download HTTP 200 com magic-bytes. O `gotoStatus` pode ser 403 quando o Chromium conclui o challenge e o DOM real carrega; avaliar o report completo, não o status isolado.
+
+A rota `windows-home-socks` fica apenas como fallback temporário. Se o proxy dedicado falhar, não testar `direct-vps`; usar o túnel residencial do Rodolfo somente após reportar a falha. Com o dedicado saudável, Rodolfo pode fechar o PowerShell e a Hera consulta libraries 24/7 sem ação humana. Login/MFA/CAPTCHA continuam sendo as únicas exceções humanas quando a sessão realmente expirar.
 
 Para evidência, comando de retomada e distinção entre perfil reutilizado e sessão autenticada, consulte `references/residential-route-session-continuity.md`.
 

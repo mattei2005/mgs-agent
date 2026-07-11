@@ -60,7 +60,7 @@ for p in sorted(glob.glob(os.path.join(report_root,'*','report.json')), key=os.p
         break
     try: r=json.load(open(p))
     except (OSError, ValueError): continue
-    if r.get('success') is True and r.get('proxyMode')=='windows-home-socks' and r.get('session',{}).get('authenticatedLikely') is True:
+    if r.get('success') is True and r.get('proxyMode') in {'windows-home-socks','dedicated-us-residential'} and r.get('session',{}).get('authenticatedLikely') is True:
         print(p); raise SystemExit(0)
 raise SystemExit(1)
 PY

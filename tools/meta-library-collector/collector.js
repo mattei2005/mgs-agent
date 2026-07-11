@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const childProcess = require('child_process');
+const { resolveProxyConfig } = require('./proxy-config');
 
 let activeContext = null;
 
@@ -176,10 +177,7 @@ async function main() {
   ].join('\n'), { mode: 0o600 });
 
   const runtime = chromiumVersionAndUa();
-  const proxyServer = process.env.HERA_META_LIBRARY_PROXY || '';
-  if (proxyServer && proxyServer !== 'socks5://127.0.0.1:1080') {
-    throw new Error('Proxy recusado: somente o SOCKS local temporário 127.0.0.1:1080 é permitido.');
-  }
+  const proxy = resolveProxyConfig();
   const launchOptions = {
     headless,
     viewport: { width: 1365, height: 900 },
@@ -187,9 +185,10 @@ async function main() {
     timezoneId: 'America/New_York',
     userAgent: runtime.userAgent,
     extraHTTPHeaders: { 'Accept-Language': 'en-US,en;q=0.9' },
-    args: ['--disable-blink-features=AutomationControlled', '--no-sandbox', '--disable-dev-shm-usage', '--lang=en-US,en']
+    args: ['--disable-blink-features=AutomationControlled', '--no-sandbox', '--disable-dev-shm-usage', '--lang=en-US,en'],
+    proxy: proxy.playwrightProxy,
+    env: proxy.browserEnv
   };
-  if (proxyServer) launchOptions.proxy = { server: proxyServer };
   const context = await chromium.launchPersistentContext(profileDir, launchOptions);
   activeContext = context;
 
@@ -305,7 +304,7 @@ async function main() {
     runDir,
     runtime: { node: process.version, playwright: require('playwright/package.json').version, chromium: runtime.version },
     headless,
-    proxyMode: proxyServer ? 'windows-home-socks' : 'direct-vps',
+    proxyMode: proxy.mode,
     gotoStatus,
     gotoError,
     profile: { reused: profileReused, permissions: '0700' },

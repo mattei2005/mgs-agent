@@ -1,43 +1,62 @@
-# Meta Ads Library — continuidade da sessão pela rota residencial
+# Meta Ads Library — continuidade por rota residencial
 
 ## Quando usar
 
-Use quando uma coleta anterior da Meta Ads Library funcionou por `windows-home-socks` e uma execução posterior precisa reutilizar o mesmo perfil autenticado.
+Use em toda coleta da Meta Ads Library que reutilize o perfil autenticado da Hera.
+
+## Rotas autorizadas
+
+1. `dedicated-us-residential` — padrão 24/7. Credenciais são resolvidas em runtime no 1Password pelo item referenciado em `/root/mgs-agent/data/hera-meta-library-proxy.json`.
+2. `windows-home-socks` — fallback temporário pelo Windows do Rodolfo em `socks5://127.0.0.1:1080`.
+3. `direct-vps` — proibida para esse perfil.
+
+Nunca gravar host, porta, usuário ou senha do proxy em logs, relatórios, argumentos ou Discord.
 
 ## Evidência operacional observada
 
-Uma coleta autenticada pela rota residencial retornou:
+O canário do proxy dedicado, criado a partir do snapshot autenticado e sem tocar no perfil canônico, confirmou:
 
-```text
-proxyMode                 windows-home-socks
-resultText                ~63 results
-Library IDs               42
-Mídias detectadas         3 IMG + 30 VID
-Cookies autenticados      c_user + xs presentes
-Downloads piloto          3, HTTP 200
+- país US e IP estável no teste curto;
+- `proxyMode=dedicated-us-residential`;
+- `authenticatedLikely=true`, com `c_user` e `xs` presentes;
+- `~63 results` e 42 Library IDs;
+- 3 imagens e 30 vídeos detectados;
+- challenge persistente ausente;
+- download piloto HTTP 200 com MIME e magic-bytes válidos.
+
+O `gotoStatus=403` isolado não significa falha quando o Chromium conclui o challenge e o report confirma DOM real, IDs, mídia e ausência de challenge persistente.
+
+## Procedimento padrão
+
+1. Confirmar que `/root/mgs-agent/data/hera-meta-library-proxy.json` está válido e `direct_vps_allowed=false`.
+2. Os wrappers carregam `/root/mgs-agent/.env` com `set -a/set +a`; `proxy-config.js` busca o item 1Password e injeta a configuração diretamente no Playwright.
+3. Executar normalmente, sem variável de proxy explícita:
+
+```
+/root/mgs-agent/scripts/hera-meta-library-collector.sh \
+  --url '<META_LIBRARY_URL>' --download 100 --scrolls 100
 ```
 
-Após o túnel residencial ser encerrado, uma tentativa com o mesmo perfil por `direct-vps` mostrou zero resultados e o readback posterior já não continha `c_user`/`xs`. A conclusão durável não é que a sessão persistente falhou: a rota de rede mudou antes da reutilização.
+4. Validar `proxyMode=dedicated-us-residential`, `authenticatedLikely=true`, IDs/mídia reais, downloads HTTP 200 e `persistentChallenge=false`.
+5. Após login/2FA ou mudança de rota, testar primeiro em cópia canário do snapshot; nunca usar o perfil canônico como experimento.
+6. Após shutdown autenticado e antes de nova operação crítica no perfil, executar `/root/mgs-agent/scripts/hera-meta-library-profile-snapshot.sh`.
 
-## Procedimento seguro
+## Fallback
 
-1. Leia o `report.json` do último sucesso antes de abrir Chromium.
-2. Se `proxyMode=windows-home-socks`, teste somente se `127.0.0.1:1080` está aceitando conexão.
-3. Se a porta estiver fechada, não inicie o coletor nem o navegador de login pela VPS direta. Peça para reabrir o mesmo túnel residencial e mantê-lo aberto.
-4. Execute com:
+Se o dedicado falhar, parar e reportar. Não testar pela VPS direta. Só então usar:
 
-```bash
-HERA_META_LIBRARY_PROXY=socks5://127.0.0.1:1080 \
+```
+HERA_META_LIBRARY_PROXY_MODE=windows-home-socks \
   /root/mgs-agent/scripts/hera-meta-library-collector.sh \
   --url '<META_LIBRARY_URL>' --download 100 --scrolls 100
 ```
 
-5. Faça readback apenas dos nomes/contagens de cookies; nunca exponha valores. Confirme `c_user` e `xs` antes de declarar sessão autenticada.
-6. Só considere a coleta completa após quatro ciclos estáveis sem novos IDs/mídias, downloads HTTP 200 válidos e relatório/screenshot reais.
+O túnel do Rodolfo precisa estar ativo apenas nesse fallback.
 
 ## Pitfalls
 
-- Não interpretar `profileReused=true` como autenticação; valide `authenticatedLikely` e os nomes `c_user`/`xs`.
-- Não usar uma execução direta como “teste rápido” quando o último sucesso dependia do SOCKS residencial.
-- Não confundir `~63 results` com 63 assets únicos: deduplicar por URL/hash e registrar Library IDs separadamente.
-- `captcha=true` pode ser falso positivo por texto escondido no HTML; dê prioridade ao DOM visível, IDs, mídia e screenshot.
+- `profileReused=true` não prova autenticação; valide `authenticatedLikely` e apenas os nomes `c_user`/`xs`.
+- Não pedir ação humana quando o readback autenticado já passou.
+- Não confundir contagem de resultados com assets únicos; deduplicar por URL/hash e registrar Library IDs separadamente.
+- `captcha=true` pode ser falso positivo por texto escondido; priorizar DOM visível, IDs, mídia, screenshot e `persistentChallenge`.
+- Nunca expor credenciais, cookies ou hashes do banco de cookies.
