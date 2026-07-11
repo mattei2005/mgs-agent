@@ -1,5 +1,6 @@
 {
   "source": "smartbidding:/report/performance_per_sms",
+  "metric": "NET_REVENUE (primary BRL value with Discount revenue share enabled)",
   "publisher": "digital-trust_creditoparaveiculo",
   "domain": "creditoparaveiculo",
   "records": [
@@ -673,93 +674,16 @@
       "investment_cents": 0,
       "source_rows": 1,
       "source_hash": "8847ae2c53364da96382990e3a87e16cb83e50d741cd541280a2b98c14478d87"
-    },
-    {
-      "revenue_date": "2026-07-10",
-      "publisher": "digital-trust_creditoparaveiculo",
-      "domain": "creditoparaveiculo",
-      "utm_campaign": "s01c01",
-      "revenue_cents": 2403,
-      "net_revenue_cents": 2163,
-      "investment_cents": 0,
-      "source_rows": 1,
-      "source_hash": "b4e4636377dd216ec1a0b110dbc11178884ef8b3a5313ee763898e289b319851"
-    },
-    {
-      "revenue_date": "2026-07-10",
-      "publisher": "digital-trust_creditoparaveiculo",
-      "domain": "creditoparaveiculo",
-      "utm_campaign": "s01c01g001",
-      "revenue_cents": 5853,
-      "net_revenue_cents": 5268,
-      "investment_cents": 0,
-      "source_rows": 1,
-      "source_hash": "e5faee194d9fd733b669514da8ba5e91e468a61146c54f96b54dedc9bb9f9a4c"
-    },
-    {
-      "revenue_date": "2026-07-10",
-      "publisher": "digital-trust_creditoparaveiculo",
-      "domain": "creditoparaveiculo",
-      "utm_campaign": "s01c01g002",
-      "revenue_cents": 9688,
-      "net_revenue_cents": 8719,
-      "investment_cents": 0,
-      "source_rows": 1,
-      "source_hash": "5a51fcb4202203d6b21181bbb2ea78e6481a64ac8126354b73eb241736e010df"
-    },
-    {
-      "revenue_date": "2026-07-10",
-      "publisher": "digital-trust_creditoparaveiculo",
-      "domain": "creditoparaveiculo",
-      "utm_campaign": "s01c01g003",
-      "revenue_cents": 981,
-      "net_revenue_cents": 883,
-      "investment_cents": 0,
-      "source_rows": 1,
-      "source_hash": "e685121075a6fe43cc273c988f2fbf5340c434efa49ec50b21291b4b899d6478"
-    },
-    {
-      "revenue_date": "2026-07-10",
-      "publisher": "digital-trust_creditoparaveiculo",
-      "domain": "creditoparaveiculo",
-      "utm_campaign": "s01c01g004",
-      "revenue_cents": 7395,
-      "net_revenue_cents": 6656,
-      "investment_cents": 0,
-      "source_rows": 1,
-      "source_hash": "4c3044dc57ff66bbb5e5b4838b78b6cc7962fb56f6c8e48ac89fe29547d75fdd"
-    },
-    {
-      "revenue_date": "2026-07-10",
-      "publisher": "digital-trust_creditoparaveiculo",
-      "domain": "creditoparaveiculo",
-      "utm_campaign": "s01c01g005",
-      "revenue_cents": 1909,
-      "net_revenue_cents": 1718,
-      "investment_cents": 0,
-      "source_rows": 1,
-      "source_hash": "981dde72040d6fa1e3c056be1cded0968e5ad8177e3d305d2392a6fe0b8f1c8d"
-    },
-    {
-      "revenue_date": "2026-07-10",
-      "publisher": "digital-trust_creditoparaveiculo",
-      "domain": "creditoparaveiculo",
-      "utm_campaign": "s01c01g006",
-      "revenue_cents": 786,
-      "net_revenue_cents": 707,
-      "investment_cents": 0,
-      "source_rows": 1,
-      "source_hash": "f6aea38638c7aaa7b23e5ba84119b53ad6b594cc5f5621a658ff0053a861c6dd"
     }
   ],
   "expected": {
-    "groups": 68,
-    "source_rows": 68,
-    "dates": 50,
+    "groups": 61,
+    "source_rows": 61,
+    "dates": 49,
     "first_date": "2026-05-22",
-    "last_date": "2026-07-10",
-    "revenue_cents": 1421388,
-    "net_revenue_cents": 1279251,
+    "last_date": "2026-07-09",
+    "revenue_cents": 1392373,
+    "net_revenue_cents": 1253137,
     "investment_cents": 0
   }
 }

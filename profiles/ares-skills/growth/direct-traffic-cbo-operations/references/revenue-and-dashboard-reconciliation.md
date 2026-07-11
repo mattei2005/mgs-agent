@@ -2,7 +2,7 @@
 
 ## Objective
 
-Unificar leitura de mídia, monetização e SMS sem esconder a origem de cada valor. A unidade mínima de análise é o adgroup canônico (`bNNfbNNcNNgNN`) no mesmo período, timezone e moeda.
+Unificar leitura de mídia, monetização e SMS sem esconder a origem de cada valor. Para aquisição, a unidade mínima é o `UTM_ADGROUP` canônico (`bNNfbNNcNNgNN`). Para SMS, a chave precisa ser traduzida pela configuração de site/campanha/gestor; não assumir igualdade textual com o adgroup.
 
 ## Source map
 
@@ -31,7 +31,20 @@ Operação esperada:
 5. Registrar campos e moeda exatamente como exibidos.
 6. Somar apenas linhas pertencentes à mesma campanha/estratégia.
 
-A captura fornecida confirma tela AdGroup com seletor de data, seletor de sites e cards como `Investment`, `Conversions` e `Revenue Acquisition`; valores estavam cortados e não devem ser inferidos.
+A captura fornecida e a validação autenticada read-only em 2026-07-10 confirmaram:
+
+```text
+Tela / dado                  | Rota/endpoint
+-----------------------------|------------------------------------------------------
+AdGroup                      | `https://app.smartbiddingdigital.com/reports/adgroup`
+Dados AdGroup                | `POST https://api.jbfdigital.com.br/report/performance_per_campaigns`
+Domínios                     | `GET https://api.jbfdigital.com.br/report/performance_per_domain`
+SMS                          | `https://app.smartbiddingdigital.com/reports/sms`
+Dados SMS                    | `POST https://api.jbfdigital.com.br/report/performance_per_sms`
+Última atualização           | `POST https://api.jbfdigital.com.br/report/last_update`
+```
+
+A tela AdGroup possui seletor de data, seletor de sites, `Filter` e rótulos/cards como `Investment`, `Conversions`, `Revenue Acquisition` e `Revenue Total`. A tela SMS expõe `Investment`, `Revenue Acquisition`, filtro, data e receita. Não inferir valores cortados em captura. Prefira a API autenticada capturada da própria SPA para extração repetível, preservando sessão/tokens fora de logs e chat.
 
 ## Smart Bidding — SMS
 
@@ -94,17 +107,28 @@ Portanto, esse card é uma estimativa de custo por linha absorvida, não uma pro
 
 ## Join keys
 
+A validação live do SB mostrou dois namespaces diferentes:
+
+```text
+Relatório SB | Campo de atribuição | Exemplo de formato observado
+-------------|---------------------|----------------------------
+Adgroup      | `UTM_ADGROUP`       | `b01fb03c01g01`
+SMS          | `UTM_CAMPAIGN`      | `s01c01g002`
+```
+
+Logo, **não** juntar SMS e Adgroup por igualdade direta das strings. O relatório SMS atual usa namespace de site/campanha/gestor; a aquisição usa BM/conta/campanha/adset. A ponte deve vir do cadastro operacional da quiz/lista/gestor para a campanha Meta e precisa ser demonstrada para o recorte.
+
 Prioridade para reconciliação:
 
 ```text
-Prioridade | Chave
------------|---------------------------------------------
-1          | utm_adgroup completo (`bNNfbNNcNNgNN`)
-2          | utm_campaign + adset confirmados
-3          | domínio + gestor + janela, apenas diagnóstico
+Prioridade | Chave / evidência
+-----------|-------------------------------------------------------------
+1          | `UTM_ADGROUP` para Meta + receita de aquisição
+2          | mapping explícito `SMS sNNcNNgXXX → quiz/lista/gestor → adgroup`
+3          | domínio + gestor + janela somente para diagnóstico, nunca fechamento
 ```
 
-Nunca juntar somente por domínio quando duas campanhas/adsets coexistirem.
+Nunca juntar somente por domínio quando duas campanhas/adsets coexistirem. Se o mapping SMS→adgroup não existir, manter a receita SMS em bucket separado por gestor/site/campanha e marcar a margem por adgroup como não reconciliada.
 
 ## Metric model
 
