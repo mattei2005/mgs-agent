@@ -1,98 +1,53 @@
-# Discord live tool-call trace com cleanup automático
+# Discord tool progress — política MGS atual
 
-## Quando usar
+## Estado canônico
 
-Rodolfo quer a UX de “atividade ao vivo” no Discord: o agente mostra chamadas de ferramenta (`search_files`, `read_file`, `execute_code`, `terminal`, etc.) enquanto trabalha, mas remove esses breadcrumbs quando a resposta final chega com sucesso.
+A experiência de live tool-call trace foi testada no passado, mas está desativada na MGS. O padrão obrigatório atual é não publicar breadcrumbs de ferramentas no Discord:
 
-## Diagnóstico prévio
+- `display.tool_progress: 'off'`
+- `display.platforms.discord.tool_progress: 'off'`
+- preferir a string YAML entre aspas para clareza; o runtime atual também normaliza o booleano `false` produzido por `off` sem aspas para o modo `off`;
+- só reativar `all` após autorização explícita do Rodolfo.
 
-1. Confirmar que o runtime Hermes já tem suporte genérico a `display.cleanup_progress` em `gateway/run.py` e resolução em `gateway/display_config.py`.
-2. Confirmar se o adapter Discord implementa `delete_message`. Sem isso, o runner desativa cleanup silenciosamente porque compara `type(adapter).delete_message` com `BasePlatformAdapter.delete_message`.
-3. Verificar configs atuais dos profiles:
+A mensagem `Queued for the next turn...` é separada: vem de `busy_input_mode: steer` quando uma mensagem chega durante um turno ativo. Ela não é controlada por `tool_progress`.
 
-```bash
-python3 - <<'PY'
-import yaml
-from pathlib import Path
-for profile in ['zeus','atena','ares']:
-    p=Path(f'/root/.hermes/profiles/{profile}/config.yaml')
-    c=yaml.safe_load(p.read_text()) or {}
-    print(profile, ((c.get('display') or {}).get('platforms') or {}).get('discord'))
-PY
-```
+## Diagnóstico
 
-## Patch runtime necessário
-
-Adicionar `DiscordAdapter.delete_message(...)` ao plugin Discord (`/root/.hermes/hermes-agent/plugins/platforms/discord/adapter.py`) usando `channel.fetch_message(message_id)` + `msg.delete()` e retornando `SendResult`.
-
-Patch durável MGS:
-
-```text
-/root/mgs-agent/patches/hermes/discord-live-tool-trace-cleanup.patch
-```
+1. Ler os valores efetivos nos quatro profiles e nos mirrors versionados.
+2. Conferir tanto o valor global quanto o override `display.platforms.discord`; o override por plataforma vence.
+3. Verificar o valor efetivo com `resolve_display_setting(...)`; o parser pode devolver a string `off` ou o booleano `false`, que o runtime atual normaliza para `off`.
+4. Após qualquer mudança, reiniciar gateways pelo finalizador seguro e validar o canal real sem expor trace bruto.
 
 ## Config por profile
 
-Ativar em `display.platforms.discord`:
+Padrão MGS obrigatório:
 
 ```yaml
 display:
+  tool_progress: 'off'
   platforms:
     discord:
-      tool_progress: all
-      tool_preview_length: 80
+      tool_progress: 'off'
       cleanup_progress: true
       interim_assistant_messages: false
       long_running_notifications: true
       busy_ack_detail: false
 ```
 
-Aplicar tanto nos profiles ativos:
+Aplicar nos profiles ativos e mirrors versionados de Zeus, Atena, Ares e Hera. Não reutilizar a configuração histórica `tool_progress: all` como padrão.
 
-```text
-/root/.hermes/profiles/{zeus,atena,ares}/config.yaml
-```
+## Validação
 
-quanto nas cópias versionadas:
-
-```text
-/root/mgs-agent/profiles/{zeus,atena,ares}-config.yaml
-```
-
-## Validação sem restart
-
-```bash
-cd /root/.hermes/hermes-agent
-python3 -m py_compile plugins/platforms/discord/adapter.py gateway/run.py gateway/display_config.py
-python3 - <<'PY'
-import ast, yaml
-from pathlib import Path
-p='/root/.hermes/hermes-agent/plugins/platforms/discord/adapter.py'
-tree=ast.parse(open(p).read())
-for cls in [n for n in tree.body if isinstance(n, ast.ClassDef) and n.name=='DiscordAdapter']:
-    methods={n.name for n in cls.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
-    assert 'delete_message' in methods
-for profile in ['zeus','atena','ares']:
-    p=Path(f'/root/.hermes/profiles/{profile}/config.yaml')
-    c=yaml.safe_load(p.read_text()) or {}
-    d=((c.get('display') or {}).get('platforms') or {}).get('discord') or {}
-    assert d.get('tool_progress') == 'all'
-    assert d.get('cleanup_progress') is True
-    assert d.get('tool_preview_length') == 80
-print('live tool trace config ok')
-PY
-```
-
-Também registrar PIDs antes/depois para provar que não houve restart quando Rodolfo pediu apenas aplicação/preparação.
-
-## Ativação
-
-Config/patch só entram em produção após restart dos gateways afetados. Para MGS, tratar como mudança de serviço ativo: reportar validação e pedir autorização separada para restart controlado de `zeus-gateway`, `atena-gateway` e `ares-gateway`.
+- resolução efetiva retorna `off` nos dois níveis;
+- live e mirror são idênticos;
+- gateways ativos após restart seguro, Zeus por último;
+- smoke real no Discord não cria mensagem acumulada de `Reading`, `terminal`, `Updating skill` ou comandos;
+- mensagens enviadas durante turno ativo ainda podem receber o ACK de fila por causa de `busy_input_mode: steer`; avaliar essa UX separadamente.
 
 ## Pitfalls
 
-- `display.tool_progress: off` global não impede override específico em `display.platforms.discord`; o override por plataforma vence.
-- `cleanup_progress` só remove breadcrumbs em execuções bem-sucedidas. Runs com falha mantêm os breadcrumbs como trilha de debug.
-- Se `delete_message` não existir no adapter Discord, a config `cleanup_progress: true` não terá efeito prático.
-- Não confundir com `ephemeral_system_ttl`; esse TTL apaga mensagens de sistema após tempo fixo, não o lifecycle “some quando termina”.
-- Não reiniciar no mesmo turno se o pedido foi apenas preparar/aplicar sem autorização explícita para restart.
+- Alterar somente o global não funciona quando o override Discord continua em `all`.
+- `off` sem aspas vira `False` em YAML 1.1, mas o resolver atual normaliza esse booleano para `off`; ainda assim, prefira aspas para evitar ambiguidade em tooling externo.
+- `cleanup_progress: true` não substitui `tool_progress: 'off'`; cleanup atua depois que breadcrumbs já foram publicados.
+- Desabilitar tool progress reduz ruído visível, mas não remove do contexto interno as tool calls necessárias ao raciocínio.
+- Não reiniciar gateways na cadeia ativa; usar finalizador externo e reiniciar Zeus por último.

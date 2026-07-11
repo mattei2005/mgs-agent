@@ -4,7 +4,7 @@ model:
   base_url: https://chatgpt.com/backend-api/codex
 fallback_providers: []
 toolsets:
-- hermes-cli
+  - hermes-cli
 agent:
   max_turns: 200
   gateway_timeout: 1800
@@ -76,7 +76,7 @@ terminal:
   cwd: .
   timeout: 180
   env_passthrough:
-  - DISCORD_BOT_TOKEN
+    - DISCORD_BOT_TOKEN
   home_mode: auto
   shell_init_files: []
   auto_source_bashrc: true
@@ -314,7 +314,7 @@ display:
       streaming: true
     discord:
       streaming: false
-      tool_progress: all
+      tool_progress: false
       tool_preview_length: 40
       cleanup_progress: true
       interim_assistant_messages: false
@@ -323,11 +323,11 @@ display:
   runtime_footer:
     enabled: false
     fields:
-    - model
-    - context_pct
-    - cwd
+      - model
+      - context_pct
+      - cwd
   copy_shortcut: auto
-  tool_progress: all
+  tool_progress: false
   background_process_notifications: error
 dashboard:
   theme: default
@@ -430,7 +430,7 @@ goals:
   max_turns: 20
 skills:
   external_dirs:
-  - /root/mgs-agent/skills
+    - /root/mgs-agent/skills
   template_vars: true
   inline_shell: false
   inline_shell_timeout: 10
@@ -438,84 +438,84 @@ skills:
   write_approval: false
   creation_nudge_interval: 15
   disabled:
-  - apple-notes
-  - apple-reminders
-  - architecture-diagram
-  - arxiv
-  - ascii-art
-  - ascii-video
-  - audiocraft
-  - audiocraft-audio-generation
-  - axolotl
-  - baoyu-comic
-  - baoyu-infographic
-  - blogwatcher
-  - claude-code
-  - codebase-inspection
-  - codex
-  - creative-ideation
-  - dogfood
-  - dspy
-  - evaluating-llms-harness
-  - excalidraw
-  - findmy
-  - fine-tuning-with-trl
-  - gif-search
-  - github-auth
-  - github-code-review
-  - github-issues
-  - github-pr-workflow
-  - github-repo-management
-  - godmode
-  - google-workspace
-  - heartmula
-  - hermes-agent
-  - himalaya
-  - huggingface-hub
-  - ideation
-  - imessage
-  - jupyter-live-kernel
-  - linear
-  - llama-cpp
-  - llm-wiki
-  - lm-evaluation-harness
-  - manim-video
-  - maps
-  - minecraft-modpack-server
-  - nano-pdf
-  - native-mcp
-  - notion
-  - obliteratus
-  - obsidian
-  - ocr-and-documents
-  - opencode
-  - openhue
-  - outlines
-  - p5js
-  - pixel-art
-  - plan
-  - pokemon-player
-  - polymarket
-  - popular-web-designs
-  - powerpoint
-  - requesting-code-review
-  - research-paper-writing
-  - segment-anything
-  - segment-anything-model
-  - serving-llms-vllm
-  - songsee
-  - songwriting-and-ai-music
-  - subagent-driven-development
-  - systematic-debugging
-  - test-driven-development
-  - trl-fine-tuning
-  - unsloth
-  - vllm
-  - webhook-subscriptions
-  - weights-and-biases
-  - writing-plans
-  - xurl
-  - youtube-content
+    - apple-notes
+    - apple-reminders
+    - architecture-diagram
+    - arxiv
+    - ascii-art
+    - ascii-video
+    - audiocraft
+    - audiocraft-audio-generation
+    - axolotl
+    - baoyu-comic
+    - baoyu-infographic
+    - blogwatcher
+    - claude-code
+    - codebase-inspection
+    - codex
+    - creative-ideation
+    - dogfood
+    - dspy
+    - evaluating-llms-harness
+    - excalidraw
+    - findmy
+    - fine-tuning-with-trl
+    - gif-search
+    - github-auth
+    - github-code-review
+    - github-issues
+    - github-pr-workflow
+    - github-repo-management
+    - godmode
+    - google-workspace
+    - heartmula
+    - hermes-agent
+    - himalaya
+    - huggingface-hub
+    - ideation
+    - imessage
+    - jupyter-live-kernel
+    - linear
+    - llama-cpp
+    - llm-wiki
+    - lm-evaluation-harness
+    - manim-video
+    - maps
+    - minecraft-modpack-server
+    - nano-pdf
+    - native-mcp
+    - notion
+    - obliteratus
+    - obsidian
+    - ocr-and-documents
+    - opencode
+    - openhue
+    - outlines
+    - p5js
+    - pixel-art
+    - plan
+    - pokemon-player
+    - polymarket
+    - popular-web-designs
+    - powerpoint
+    - requesting-code-review
+    - research-paper-writing
+    - segment-anything
+    - segment-anything-model
+    - serving-llms-vllm
+    - songsee
+    - songwriting-and-ai-music
+    - subagent-driven-development
+    - systematic-debugging
+    - test-driven-development
+    - trl-fine-tuning
+    - unsloth
+    - vllm
+    - webhook-subscriptions
+    - weights-and-biases
+    - writing-plans
+    - xurl
+    - youtube-content
 curator:
   enabled: true
   interval_hours: 168
@@ -533,7 +533,6 @@ slack:
   free_response_channels: ''
   allowed_channels: ''
 discord:
-  suppress_link_previews: true
   require_mention: true
   free_response_channels: '1496267442899521627'
   allowed_channels: 1496267442899521627,1496267571543019653,1498132022634483894
@@ -569,15 +568,16 @@ discord:
     speech_gain: 1.0
     ack_enabled: true
     ack_phrases:
-    - Let me look into that.
-    - One moment.
-    - Checking on that now.
-    - Give me a sec.
-    - On it.
+      - Let me look into that.
+      - One moment.
+      - Checking on that now.
+      - Give me a sec.
+      - On it.
   gateway_restart_notification: false
   thread_auto_add_users:
-  - '344196393512075265'
+    - '344196393512075265'
   no_thread_channels: 1498132022634483894
+  suppress_link_previews: true
 telegram:
   reactions: false
   allowed_chats: ''
@@ -599,19 +599,19 @@ approvals:
   destructive_slash_confirm: false
   gateway_timeout: 900
 command_allowlist:
-- hermes update (restarts gateway, kills running agents)
-- recursive delete
-- overwrite system config
-- delete in root path
-- script execution via heredoc
-- /root/mgs-agent/scripts/discord-add-thread-member.sh --profile zeus --thread * --user
-  *
-- script execution via -e/-c flag
-- stop/restart system service
-- execute_code
-- kill hermes/gateway process (self-termination)
-- git force push (rewrites remote history)
-- shell command via -c/-lc flag
+  - hermes update (restarts gateway, kills running agents)
+  - recursive delete
+  - overwrite system config
+  - delete in root path
+  - script execution via heredoc
+  - /root/mgs-agent/scripts/discord-add-thread-member.sh --profile zeus --thread *
+    --user *
+  - script execution via -e/-c flag
+  - stop/restart system service
+  - execute_code
+  - kill hermes/gateway process (self-termination)
+  - git force push (rewrites remote history)
+  - shell command via -c/-lc flag
 hooks_auto_accept: false
 security:
   allow_private_urls: false
@@ -715,43 +715,43 @@ session_reset:
 group_sessions_per_user: true
 platform_toolsets:
   cli:
-  - browser
-  - clarify
-  - code_execution
-  - computer_use
-  - cronjob
-  - delegation
-  - file
-  - image_gen
-  - kanban
-  - memory
-  - messaging
-  - session_search
-  - skills
-  - terminal
-  - todo
-  - tts
-  - video_gen
-  - vision
-  - web
-  - x_search
+    - browser
+    - clarify
+    - code_execution
+    - computer_use
+    - cronjob
+    - delegation
+    - file
+    - image_gen
+    - kanban
+    - memory
+    - messaging
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - tts
+    - video_gen
+    - vision
+    - web
+    - x_search
   telegram:
-  - hermes-telegram
+    - hermes-telegram
   discord:
-  - hermes-discord
+    - hermes-discord
   whatsapp:
-  - hermes-whatsapp
+    - hermes-whatsapp
   slack:
-  - hermes-slack
+    - hermes-slack
   signal:
-  - hermes-signal
+    - hermes-signal
   homeassistant:
-  - hermes-homeassistant
+    - hermes-homeassistant
   qqbot:
-  - hermes-qqbot
+    - hermes-qqbot
 known_plugin_toolsets:
   cli:
-  - spotify
+    - spotify
 video_gen:
   provider: xai
   model: grok-imagine-video

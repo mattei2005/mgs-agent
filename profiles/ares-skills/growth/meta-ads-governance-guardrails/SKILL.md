@@ -53,7 +53,7 @@ autonomous_guarded | Futuro; só com regras e limites formalmente aprovados
 ----------------------|------------------------------------------------------------
 Token Meta             | 1Password; nunca imprimir; reportar só item/campo/len/status
 API Meta               | Cache, batch quando possível, backoff e log de erros
-Budget referência      | R$1.500/dia piloto; não pausar automaticamente por teto
+Budget referência      | Não é global: ler config/autorização da operação; histórico piloto R$1.500/dia e OpenzedFinanzas USD 300/dia não se substituem nem autorizam write
 Campanha TEST          | Carência 3 dias contra pausa/exclusão automática
 Reativar-todas         | Lista de exclusão manual permitida; perguntar antes de adicionar
 Write campanha         | Só nível campaign no piloto; validar before/after

@@ -313,7 +313,7 @@ display:
       streaming: true
     discord:
       streaming: false
-      tool_progress: off
+      tool_progress: false
       tool_preview_length: 40
       cleanup_progress: true
       interim_assistant_messages: false
@@ -326,7 +326,7 @@ display:
       - context_pct
       - cwd
   copy_shortcut: auto
-  tool_progress: all
+  tool_progress: false
   background_process_notifications: error
 dashboard:
   theme: default
@@ -534,7 +534,6 @@ slack:
   allowed_channels: ''
   channel_prompts: {}
 discord:
-  suppress_link_previews: true
   require_mention: true
   free_response_channels: '1513005743954198538'
   allowed_channels: '1513005743954198538'
@@ -627,6 +626,7 @@ discord:
     - '432898782188011543'
     - '1214246869484576890'
     - '1055570806945620030'
+  suppress_link_previews: true
 whatsapp: {}
 telegram:
   reactions: false

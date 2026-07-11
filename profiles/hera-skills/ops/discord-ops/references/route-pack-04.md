@@ -1,13 +1,13 @@
-### Live tool-call trace no Discord com cleanup automático
+### Tool progress no Discord — política atual
 
-Quando Rodolfo quiser a UX de “atividade ao vivo” no Discord — tool calls visíveis enquanto o agente trabalha e removidos quando a resposta final chega — usar `references/discord-live-tool-trace-cleanup.md`.
+A política MGS atual é não publicar tool calls no Discord. Usar `references/discord-live-tool-trace-cleanup.md` para diagnóstico e validação.
 
 Resumo operacional:
-- Ativar `display.platforms.discord.tool_progress: all` e `tool_preview_length` adequado por profile.
-- Ativar `display.platforms.discord.cleanup_progress: true` para apagar breadcrumbs após sucesso.
-- Garantir que o adapter Discord implemente `delete_message`; sem isso o runner desativa cleanup silenciosamente.
-- Aplicar config nos profiles ativos e nas cópias versionadas em `/root/mgs-agent/profiles/*-config.yaml`.
-- Validar com `py_compile` + parse YAML/AST sem restart; pedir autorização separada para reiniciar gateways.
+- Manter `display.tool_progress: off` e `display.platforms.discord.tool_progress: off` em todos os profiles.
+- `cleanup_progress: true` não substitui o modo `off`; ele só tenta remover breadcrumbs depois de publicados.
+- Validar a resolução efetiva com `gateway.display_config.resolve_display_setting(...)`.
+- Aplicar config nos profiles ativos e mirrors versionados.
+- Restart apenas pelo fluxo seguro autorizado, Zeus por último.
 
 Padrão correto:
 - Confirmar o sintoma no print/logs (`agent.log`/`errors.log`) e distinguir: retry interno pode continuar, mas não deve poluir Discord.

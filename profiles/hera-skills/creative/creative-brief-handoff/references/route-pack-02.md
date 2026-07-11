@@ -102,8 +102,9 @@ Etapa  Ação
 2      Detectar IMG/VID, dimensão, aspect ratio e placement.
 3      Sugerir ANGLE/P_ORIENT sem inventar.
 4      Gerar inventário e plano de renomeação/destino.
-5      Mostrar o plano para Rodolfo.
-6      Só copiar/mover/renomear após aprovação explícita.
+5      Se o pedido já autorizou `tratar/mover` dentro da estrutura canônica, esse pedido é a aprovação; não pedir confirmação redundante.
+6      Mostrar plano e pedir decisão apenas quando houver ambiguidade, nova estrutura, destino não canônico ou mudança de escopo.
+7      Após copiar/mover/renomear, validar `01_READY`, mover o bruto para `99_LEGACY` e confirmar que a entrada contém só pendências.
 ```
 
 Inventário mínimo para plano de reestruturação:
