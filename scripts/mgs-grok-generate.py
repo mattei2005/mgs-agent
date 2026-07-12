@@ -196,7 +196,7 @@ def main() -> None:
     p = argparse.ArgumentParser(description="Generate image/video with Grok Imagine via xAI OAuth/API key")
     sub = p.add_subparsers(dest="cmd", required=True)
     common = argparse.ArgumentParser(add_help=False)
-    common.add_argument("--profile", default="hera", help="Hermes profile holding xAI OAuth tokens")
+    common.add_argument("--profile", default="ares", help="Hermes profile holding xAI OAuth tokens")
     common.add_argument("--prompt", required=True)
     common.add_argument("--output-dir", default="/root/mgs-agent/data/generated/grok")
     common.add_argument("--timeout", type=int, default=300)

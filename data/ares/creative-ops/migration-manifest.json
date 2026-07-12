@@ -1,0 +1,47 @@
+{
+  "source_agent": "hera",
+  "target_agent": "ares",
+  "mode": "copy_preserve_source",
+  "checks": [
+    {
+      "source": "/root/mgs-agent/data/hera",
+      "target": "/root/mgs-agent/data/ares/creative-ops",
+      "source_files": 292,
+      "target_files": 293,
+      "source_bytes": 256935069,
+      "missing_source_files": [],
+      "mismatched_sizes": [],
+      "source_subset_identical": true
+    },
+    {
+      "source": "/root/.hermes/profiles/hera/browser-profiles/meta-library-chromium",
+      "target": "/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium",
+      "source_files": 12146,
+      "target_files": 12146,
+      "source_bytes": 495653437,
+      "missing_source_files": [],
+      "mismatched_sizes": [],
+      "source_subset_identical": true
+    },
+    {
+      "source": "/root/.hermes/profiles/hera/browser-profile-backups/meta-library-chromium",
+      "target": "/root/.hermes/profiles/ares/browser-profile-backups/meta-library-chromium",
+      "source_files": 239,
+      "target_files": 239,
+      "source_bytes": 11114781,
+      "missing_source_files": [],
+      "mismatched_sizes": [],
+      "source_subset_identical": true
+    },
+    {
+      "source": "/root/.hermes/profiles/hera/artifacts/meta-library",
+      "target": "/root/.hermes/profiles/ares/artifacts/meta-library",
+      "source_files": 196,
+      "target_files": 196,
+      "source_bytes": 50054405,
+      "missing_source_files": [],
+      "mismatched_sizes": [],
+      "source_subset_identical": true
+    }
+  ]
+}

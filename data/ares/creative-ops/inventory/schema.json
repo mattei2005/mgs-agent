@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "source_of_truth": "assets.jsonl",
+  "required_fields": [
+    "asset_id",
+    "original_filename",
+    "canonical_filename",
+    "reservation_status",
+    "ares_eligible",
+    "status"
+  ],
+  "default_human_upload": {
+    "reservation_status": "RESERVADO_PELO_GESTOR",
+    "ares_eligible": false
+  },
+  "migration": {
+    "source": "/root/mgs-agent/data/ares/creative-ops/inventory/hera-ready-assets.jsonl",
+    "asset_records": 33,
+    "legacy_events": 35,
+    "policy": "fail-closed until Meta × Drive reconciliation"
+  }
+}

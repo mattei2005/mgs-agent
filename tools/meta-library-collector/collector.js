@@ -152,8 +152,8 @@ async function extractSnapshot(page) {
 async function main() {
   const args = parseArgs(process.argv);
   const url = validateSourceUrl(args.url || '');
-  const profileDir = path.resolve(args.profile || process.env.HERA_META_LIBRARY_PROFILE || '/root/.hermes/profiles/hera/browser-profiles/meta-library-chromium');
-  const outputRoot = path.resolve(args['output-root'] || process.env.HERA_META_LIBRARY_OUTPUT || '/root/.hermes/profiles/hera/artifacts/meta-library');
+  const profileDir = path.resolve(args.profile || process.env.ARES_META_LIBRARY_PROFILE || process.env.HERA_META_LIBRARY_PROFILE || '/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium');
+  const outputRoot = path.resolve(args['output-root'] || process.env.ARES_META_LIBRARY_OUTPUT || process.env.HERA_META_LIBRARY_OUTPUT || '/root/.hermes/profiles/ares/artifacts/meta-library');
   const runDir = path.join(outputRoot, safeTimestamp());
   const scrolls = intArg(args.scrolls, 20, 0, 100);
   const waitMs = intArg(args['wait-ms'], 1500, 250, 10000);
