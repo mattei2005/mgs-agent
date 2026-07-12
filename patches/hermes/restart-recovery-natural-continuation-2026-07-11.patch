@@ -31,7 +31,7 @@ index 84c43de..1c0a55d 100644
                  ),
                  message_type=MessageType.TEXT,
                  source=source,
-@@ -19329,37 +19329,45 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+@@ -19329,37 +19329,50 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
                      if _reason == "shutdown_timeout"
                      else "a gateway interruption"
                  )
@@ -99,7 +99,7 @@ index 84c43de..1c0a55d 100644
                      + message
                  )
  
-@@ -19401,13 +19409,10 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+@@ -19401,13 +19414,10 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
                  )
                  message = (
                      f"[System note: The previous turn was interrupted by "
@@ -117,14 +117,14 @@ index 84c43de..1c0a55d 100644
                  )
  
              _approval_session_key = session_key or ""
-@@ -19437,7 +19442,11 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+@@ -19437,7 +19447,11 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
                      # override. Keep it aligned with what the model actually
                      # receives so future turns retain startup follow-ups.
                      if _persist_user_message_override is not None:
 -                        _persist_user_message_override = message
 +                        _persist_user_message_override = (
 +                            _startup_payload
-+                            if _is_resume_pending and getattr(event, "internal", False)
++                            if _is_resume_pending and _internal_auto_resume
 +                            else message
 +                        )
                      logger.info(
@@ -134,7 +134,52 @@ diff --git a/tests/gateway/test_restart_resume_pending.py b/tests/gateway/test_r
 index e8e18b7..1547660 100644
 --- a/tests/gateway/test_restart_resume_pending.py
 +++ b/tests/gateway/test_restart_resume_pending.py
-@@ -151,6 +151,7 @@ def _simulate_note_injection(
+@@ -25,7 +25,10 @@ PRs #9850, #9934, #7536):
+    counter is added on ``SessionEntry``.
+ """
+ 
++import ast
+ import asyncio
++import inspect
++import textwrap
+ import time
+ from datetime import datetime, timedelta
+ from unittest.mock import AsyncMock, MagicMock, patch
+@@ -37,6 +40,7 @@ from gateway.config import GatewayConfig, HomeChannel, Platform
+ from gateway.platforms.base import MessageEvent, MessageType, SendResult
+ from gateway.run import (
+     _AGENT_PENDING_SENTINEL,
++    GatewayRunner,
+     _auto_continue_freshness_window,
+     _coerce_gateway_timestamp,
+     _is_fresh_gateway_interruption,
+@@ -69,6 +73,25 @@ def test_resume_pending_is_cleared_only_after_successful_turn():
+     assert _should_clear_resume_pending_after_turn({"failed": True}) is False
+     assert _should_clear_resume_pending_after_turn({"partial": True}) is False
+     assert _should_clear_resume_pending_after_turn({"error": "boom"}) is False
++
++
++def test_nested_run_sync_does_not_reference_outer_message_event():
++    """The executor worker receives ``message`` but no outer ``event`` object."""
++    tree = ast.parse(textwrap.dedent(inspect.getsource(GatewayRunner._run_agent_inner)))
++    run_sync = next(
++        node
++        for node in ast.walk(tree)
++        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
++        and node.name == "run_sync"
++    )
++    event_loads = [
++        node
++        for node in ast.walk(run_sync)
++        if isinstance(node, ast.Name)
++        and node.id == "event"
++        and isinstance(node.ctx, ast.Load)
++    ]
++    assert event_loads == []
+ 
+ 
+ def _make_source(platform=Platform.TELEGRAM, chat_id="123", user_id="u1"):
+@@ -151,6 +174,7 @@ def _simulate_note_injection(
      )
  
      if is_resume_pending:
@@ -348,7 +393,7 @@ index e8e18b7..1547660 100644
 -    # MGS checkpoint text makes auto-resume idempotent: recover/status only, do not re-run side effects.
 -    assert event.text == '[Internal restart recovery checkpoint: the gateway just came back online after interrupting a previous turn. Do not re-run the prior user request or repeat side-effecting commands such as restart/update/deploy. First inspect current state if needed, then send one concise recovery/status message and stop.]' 
 +    # MGS continuation resumes pending work in order without recovery chatter.
-+    assert event.text == '[Internal continuation event: silently resume the interrupted work from the existing conversation state. Reconcile completed steps before acting so side effects are not duplicated. Finish all outstanding user requests in chronological order and deliver the normal final answer. Do not mention this event, the restart, recovery, or checkpoint unless the user explicitly asks.]' 
++    assert event.text == '[Internal continuation event: silently resume the interrupted work from the existing conversation state. Reconcile completed steps before acting so side effects are not duplicated. Finish all outstanding user requests in chronological order and deliver the normal final answer. Do not mention this event, the restart, recovery, or checkpoint unless the user explicitly asks.]'
  
  
  @pytest.mark.asyncio

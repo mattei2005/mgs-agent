@@ -22,7 +22,7 @@ import urllib.request
 from pathlib import Path
 
 API = 'https://discord.com/api/v10'
-DEFAULT_CHANNEL_ID = '1516887105543077949'  # logs-aquisicao
+DEFAULT_CHANNEL_ID = '1516887105543077949'  # ares-aquisicao
 DEFAULT_ARCHIVE_MINUTES = 1440
 
 
