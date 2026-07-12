@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-11T20:52:51-04:00",
+    "updated_at": "2026-07-11T21:05:39-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1009,21 +1009,21 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
-      "size_bytes": 24494,
-      "modified_at": "2026-07-04T07:15:30-04:00",
-      "sha256": "065fb275988418869d8acc050469784a6576a574fe43228b0f60e6b4cdc64b61",
+      "size_bytes": 26628,
+      "modified_at": "2026-07-11T20:51:04-04:00",
+      "sha256": "16bc54aa45adfdc8450dee000b471fdd11c312985a2a33cf3e044690f9f9c022",
       "owner": "Zeus/Ops",
       "type": "profile_script",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor. Reads B011 config from 1Password, logs into DigitalTRChat bot accounts, switches segurador, validates active OAuth connection with Meta /debug_token against B011 app_id, and stores sanitized state. 0 pages does not mean disconnected.",
       "cron_job_id": "498fb0d95e10",
-      "schedule": "every 10m",
-      "validation": "Cache cleaned and force live alert posted to B011 channel 1522830283240505385; targets=19 linked=18 pending=1 alerts_sent=1.",
-      "updated_at": "2026-07-06T03:04:10-04:00",
+      "schedule": "24 8-23 * * *",
+      "validation": "2026-07-11: bash -n PASS; persistent venv import PASS; dry-run MAX_TARGETS=1 rc=0, linked=1/1, failures=0; cron path no longer uses /tmp.",
+      "updated_at": "2026-07-11T20:57:13-04:00",
       "source_report": "REPORT-INFRA Zeus B011 same-plan cron alignment 2026-07-04",
       "id": "zeus-b011-dtr-link-watch-script",
       "agent": "zeus",
-      "last_change": "Forced live alerts no longer display cached state deltas; current users from live API and accumulated removals from live sheet/reconciliation only."
+      "last_change": "Replaced volatile /tmp/sb-venv default with /root/.local/share/mgs/sb-venv after reboot cleanup failure."
     },
     {
       "id": "skill-ref-meta-app-roles-b011-sheet-gid-2026-07-04.md-be5bc1",
@@ -1049,33 +1049,34 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
-      "size_bytes": 21232,
-      "modified_at": "2026-07-04T06:20:49-04:00",
-      "sha256": "d4b7e8921504c6ce19caa2eb2e5a497b85837135875b51f9bbe5376ae2c97582",
+      "size_bytes": 26628,
+      "modified_at": "2026-07-11T20:51:04-04:00",
+      "sha256": "16bc54aa45adfdc8450dee000b471fdd11c312985a2a33cf3e044690f9f9c022",
       "id": "zeus-b011-dtr-link-watch-script",
       "agent": "zeus",
       "type": "profile_script",
       "owner": "Zeus/Ops",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor, renamed from temporary B011 label; validates OAuth connection and syncs X in sheet.",
-      "updated_at": "2026-07-06T03:04:10-04:00",
-      "validation": "Manual live run OK: targets=19 linked=18 not_linked_or_error=1 sheet updated=18 alerts_sent=0.",
-      "last_change": "Forced live alerts no longer display cached state deltas; current users from live API and accumulated removals from live sheet/reconciliation only."
+      "updated_at": "2026-07-11T20:57:13-04:00",
+      "validation": "2026-07-11: bash -n PASS; persistent venv import PASS; dry-run MAX_TARGETS=1 rc=0, linked=1/1, failures=0; cron path no longer uses /tmp.",
+      "last_change": "Replaced volatile /tmp/sb-venv default with /root/.local/share/mgs/sb-venv after reboot cleanup failure.",
+      "schedule": "24 8-23 * * *"
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
-      "size_bytes": 21232,
-      "modified_at": "2026-07-04T06:20:49-04:00",
-      "sha256": "d4b7e8921504c6ce19caa2eb2e5a497b85837135875b51f9bbe5376ae2c97582",
+      "size_bytes": 26628,
+      "modified_at": "2026-07-11T20:51:04-04:00",
+      "sha256": "16bc54aa45adfdc8450dee000b471fdd11c312985a2a33cf3e044690f9f9c022",
       "owner": "Zeus/Ops",
       "type": "hermes_profile_script",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor. Reads BOT B011 Token, validates account-level OAuth link via Meta /debug_token, treats page count as separate inventory, and alerts channel 1522830283240505385 on anomalies.",
       "cron_job_id": "498fb0d95e10",
-      "schedule": "every 2m",
-      "validation": "bash -n OK; dry-run targets=19 linked=18 not_linked_or_error=1 total_connected_pages=196; real run alerts_sent=0",
-      "updated_at": "2026-07-06T03:04:10-04:00",
-      "last_change": "Forced live alerts no longer display cached state deltas; current users from live API and accumulated removals from live sheet/reconciliation only."
+      "schedule": "24 8-23 * * *",
+      "validation": "2026-07-11: bash -n PASS; persistent venv import PASS; dry-run MAX_TARGETS=1 rc=0, linked=1/1, failures=0; cron path no longer uses /tmp.",
+      "updated_at": "2026-07-11T20:57:13-04:00",
+      "last_change": "Replaced volatile /tmp/sb-venv default with /root/.local/share/mgs/sb-venv after reboot cleanup failure."
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
@@ -1552,8 +1553,8 @@
       "timezone": "America/New_York",
       "enabled": true,
       "purpose": "B011 DTR/ChatPion OAuth link and page connection reconciliation.",
-      "validation": "cronjob readback enabled; next run 23:24 ET; collision audit start_count=1",
-      "updated_at": "2026-07-10T22:57:13-04:00"
+      "validation": "Enabled schedule readback; runtime dry-run rc=0 linked=1/1 after persistent-vault migration.",
+      "updated_at": "2026-07-11T20:57:13-04:00"
     },
     {
       "id": "hera-meta-library-dedicated-us-residential",
@@ -1749,6 +1750,19 @@
       "purpose": "Keep Smart Bidding/DigitalTRChat Playwright automation and authenticated storage outside ephemeral /tmp across VPS restarts.",
       "validation": "pip check PASS; Playwright Chromium local smoke PASS; bash -n 10 wrappers PASS; py_compile affected Python PASS; live SB gray-alert script rc=0; Hermes cron 500f8f1cff5e manual run last_status=ok.",
       "updated_at": "2026-07-11T12:18:07-04:00"
+    },
+    {
+      "id": "dtr-sb-daily-match-audit-transitive-helper",
+      "path": "/root/mgs-agent/work/dtr-sb-id-audit-20260705.py",
+      "type": "runtime_helper",
+      "owner": "Zeus/Infra",
+      "risk": "medium",
+      "size_bytes": 15667,
+      "sha256": "8637bf6d43898bbf58f138a212d44aab644eef89913e5a4ca534642d397c1f31",
+      "modified_at": "2026-07-11T20:54:29-04:00",
+      "description": "Transitive live DTR/SB collector imported by the daily match-audit cron. Uses persistent Smart Bidding storage state.",
+      "validation": "2026-07-11 wrapper smoke --dry-run --no-post --limit-users 1 --limit-accounts 1 rc=0; durable storage state read successfully.",
+      "updated_at": "2026-07-11T20:57:13-04:00"
     }
   ],
   "profile_skill_references": [
@@ -5576,8 +5590,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 2906,
-      "md5": "9bde67847d2ab1f8fef5a7899df8e0a3",
-      "modified_at": "2026-07-11T20:52:01-04:00"
+      "md5": "5704f57013c9f072d8596e656ee8a53b",
+      "modified_at": "2026-07-11T21:02:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -5588,8 +5602,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "64e5136541f37c28438a5d8f483cec30",
-      "modified_at": "2026-07-11T20:41:30-04:00"
+      "md5": "7169f2fa7cce2c46eb6cf94d6bb8e96e",
+      "modified_at": "2026-07-11T20:56:30-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -5612,8 +5626,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 316,
-      "md5": "0f94cecae2d1e07615a112b369ae7270",
-      "modified_at": "2026-07-11T20:45:02-04:00"
+      "md5": "fe132ea120883d61476714c5b8dbdea8",
+      "modified_at": "2026-07-11T21:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -5666,8 +5680,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 25939,
-      "md5": "03ce190ccfe34e8885180c3b37cf1c19",
-      "modified_at": "2026-07-11T20:50:02-04:00"
+      "md5": "b470c761b197af66564f7772c6fda55f",
+      "modified_at": "2026-07-11T21:05:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -5689,9 +5703,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 243764,
-      "md5": "f053699753a70372b549041d2e9042fa",
-      "modified_at": "2026-07-11T20:11:22-04:00"
+      "size_bytes": 244638,
+      "md5": "d4b6af6cc3716003be50c00f97ac7297",
+      "modified_at": "2026-07-11T20:57:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -5810,8 +5824,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
-      "md5": "59dee493330135b7c91cf93a2323d6fa",
-      "modified_at": "2026-07-11T20:51:01-04:00"
+      "md5": "11115b72b5ce3f63e8968c0354624b0e",
+      "modified_at": "2026-07-11T21:01:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -5840,8 +5854,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2173,
-      "md5": "5f63338cbc32628d0f032e3a31f3b998",
-      "modified_at": "2026-07-11T20:50:03-04:00"
+      "md5": "d4770c94b1ec498094105a77d329e694",
+      "modified_at": "2026-07-11T21:05:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
