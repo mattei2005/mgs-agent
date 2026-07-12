@@ -1,6 +1,6 @@
 # Plano de Unificação Hera → Ares
 
-> Status: inventário e blueprint read-only em andamento
+> Status: migração aplicada; finalizer detached preparado para desativação, restart e readback
 > Dono executivo: Rodolfo Mattei
 > Executor/orquestrador: Zeus
 > Data: 2026-07-12

@@ -23,7 +23,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **3. Recommended initial MGS areas → 5. Sources-of-truth distinction** → `references/route-pack-02.md`
 - **6. Safe migration stages** → `references/route-pack-03.md`
 - **7. Inventory deliverable format → Pitfalls** → `references/route-pack-04.md`
-- **Auditoria read-only de dependências de agente fora dos profiles, consolidação ou desativação** → `references/hera-ares-transversal-dependency-audit.md`
+- **Auditoria transversal, credenciais/profile, cutover detached e desativação reversível de agentes** → `references/hera-ares-transversal-dependency-audit.md`
 - **Referências operacionais → Verification Checklist** → `references/route-pack-05.md`
 - **References** → `references/route-pack-06.md`
 

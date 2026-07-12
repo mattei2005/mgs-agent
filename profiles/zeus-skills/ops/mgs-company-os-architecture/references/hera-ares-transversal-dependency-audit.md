@@ -62,15 +62,35 @@ Capture Git status no início e no fim. Se um arquivo ficar dirty durante a audi
 
 ## Validações antes de desativar o agente origem
 
-1. Congelar hashes/snapshots de arquivos canônicos, dados, DBs e browser profiles.
+1. Congelar hashes/snapshots de arquivos canônicos, dados, DBs, auth stores e browser profiles; manter material sensível fora do Git e registrar apenas presença/hash estrutural.
 2. Migrar skills class-level e adaptar paths hardcoded sem desligar a origem.
 3. Validar imagem, vídeo, sanitização de metadata e entrega de artefato real quando aplicável.
 4. Validar readback externo de Drive/library/providers sem expor credenciais.
-5. Validar o agente destino no canal Discord da origem, incluindo threads, free-response, prompts e permissões.
-6. Buscar referências restantes ao profile/service/path de origem.
-7. Confirmar que monitores unificados realmente substituem jobs pausados/duplicados.
-8. Preservar DB/sessões históricas read-only em vez de mesclá-las.
-9. Só então stop/disable, janela de observação e eventual arquivamento.
+5. Rodar um one-shot no profile destino e exigir resposta estruturada sobre identidade, módulos, estado do agente antigo e contagem de autorizados; isso detecta SOUL/config não carregados antes do restart.
+6. Validar o agente destino no Discord, incluindo canal, threads, free-response, prompts e permissões.
+7. Buscar referências restantes ao profile/service/path de origem em SOUL, mapas, skills ativas, scripts de monitor/update/restart e docs gerados.
+8. Confirmar que monitores unificados realmente substituem jobs pausados/duplicados.
+9. Preservar DB/sessões históricas read-only em vez de mesclá-las.
+10. Só então stop/disable, janela de observação e eventual arquivamento.
+
+## Credenciais e seleção explícita de profile
+
+- Compare somente a **forma** do auth store (`provider`, presença de access/refresh, pool e modo), nunca valores.
+- Se uma capacidade depende de credencial exclusiva da origem, faça backup seguro do auth destino antes da migração e copie apenas o provider necessário; preserve o provider ativo do destino.
+- Readback estrutural após a cópia deve confirmar presença, pool e provider ativo sem imprimir token.
+- Em wrappers que aceitam `--profile`, não assuma que alterar apenas `HERMES_HOME` vence. Hermes pode ter um override context-local já instalado; use a API canônica de override do runtime além da variável de ambiente e valide com o mesmo interpretador/venv indicado no shebang.
+- Execute wrappers diretamente pelo shebang ou pelo venv canônico. Um `python3 script.py` genérico pode selecionar outro ambiente e produzir um falso diagnóstico de credencial ausente.
+- Faça smoke read-only quando possível; para geração, use um artefato mínimo e registre somente provider/model/path/tamanho.
+
+## Cutover detached e confirmação externa
+
+- Nunca restart/stop gateways relacionados dentro da cadeia ativa. Prepare um finalizer idempotente, com lock, audit pre/post, state JSON atômico e checks de preflight.
+- Agende o finalizer com atraso suficiente para a resposta ao usuário ser entregue antes do restart real.
+- Ordem do finalizer: validar artefatos → disable/stop origem → readback inactive+disabled → restart destino → readiness Discord → regenerar inventário → notificar destino → REPORT-INFRA.
+- `inactive` não prova `disabled`; valide ambos.
+- A notificação de handoff deve listar módulos, ciclo de vida, fontes atuais, usuários autorizados e gates que continuam valendo.
+- Use um verificador one-shot separado para ler state/log/service após o cutover, sem polling foreground na thread operacional.
+- Imports históricos devem começar conservadores (`eligible=false`/reconciliação pendente) para impedir uso duplicado enquanto a plataforma real não foi conciliada.
 
 ## Redução de ruído
 
