@@ -39,6 +39,8 @@ MGS_B011_DTR_FORCE_LIVE_ALERT=1 /root/.hermes/profiles/zeus/scripts/b011-dtr-lin
 
 For “todos os 11 canais”, validate the operational set as: B001, B002, B003, B004, B005-2, B006, B007, B008, B009, B010, B011. B011 routes to `#b011-app-rate-limit` / `1522830283240505385`; there must be no stale alternate runtime state, script, sheet label, or alert title.
 
+B012 is an intentional reserve app, not a twelfth operational segurador channel. Its validated baseline is one app administrator (`Om Gendut`) and zero assigned seguradores; Rodolfo keeps it ready for emergency migration if another app falls. It may remain visible in credential auto-discovery/health state, but exclude it from “todos os 11 canais”, role-to-segurador reconciliation, and routine manager alert fan-out unless Rodolfo explicitly activates it.
+
 Hard guard implemented in `meta-app-roles-watch.sh`: `MGS_META_APP_ROLES_FORCE_SNAPSHOT=1` alone is ignored/blocked. Snapshot only becomes effective if `MGS_META_APP_ROLES_ALLOW_SNAPSHOT=EXPLICIT_RODOLFO_SNAPSHOT` is also set. This prevents accidental manual resend with snapshot after Rodolfo asks for a real alert.
 
 The production monitor cadence is:

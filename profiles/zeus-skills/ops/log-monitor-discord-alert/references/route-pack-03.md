@@ -51,6 +51,8 @@ Padrão de resposta para o CEO: tabela curta com `Item | Status agora | Decisão
 
 Para alertas Discord com muitos itens comparáveis, o próprio script deve renderizar blocos monoespaçados alinhados, com uma linha por registro e colunas compactas escolhidas pelo contexto (ex.: `Template | Configuração | Gestor | ID | Dias | CTA`). Organização visual não autoriza remover informação acionável: preservar integralmente todos os registros, IDs, tempo/idade, CTA/status e valores-fonte; não truncar células nem substituir registros por `+N`. Dividir em blocos independentes abaixo do limite do Discord, repetindo cabeçalho e delimitadores. Validar o renderer com fixture incluindo contagem total, presença do primeiro e último registro, conteúdo integral dos campos acionáveis, tamanho dos blocos e fechamento dos delimitadores antes do próximo ciclo real.
 
+No alerta diário SB Utility, reportar imediatamente **roxo** (`INVALID_FORMAT`/`ERROR`) e **vermelho** (`REJECTED`), além do **cinza** persistente por pelo menos 2 dias. Roxo é diagnóstico e nunca troca global automática. Vermelho só pode ser descrito como troca automática ativa após confirmar scheduler `enabled/scheduled` e execução real recente; existência de código red-only ou job pausado não equivale a automação ativa. Enquanto o executor estiver pausado, manter vermelho no relatório como pendência acionável.
+
 ---
 ## Atualizar infra-inventory.json
 

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Alert templates/broadcast channel when SB Utility messages stay gray for >=2 days.
+"""Alert actionable SB Utility message states in the templates/broadcast channel.
 
-Live SB is the source of truth. Local state only remembers first_seen/alerted markers.
+Live SB is the source of truth. Red and purple are reported immediately; gray is
+reported after >=2 days. Local state preserves first_seen markers between runs.
 Cron delivery target is Discord channel 1522487422510694450; stdout is the alert.
 """
 import asyncio, datetime as dt, importlib.util, json, pathlib, re
@@ -41,28 +42,60 @@ def template_columns(template):
     return tuple(part.strip() for part in match.groups())
 
 
+def is_active_production_row(row):
+    name = str(row.get('NAME') or '').strip()
+    lowered = name.lower()
+    if not name or lowered.startswith('teste-') or 'nao usar' in lowered or 'não usar' in lowered:
+        return False
+    try:
+        pages = int(float(row.get('PAGES') or 0))
+    except (TypeError, ValueError):
+        pages = 0
+    return pages > 0
+
+
+def should_report(color, age):
+    return color in {'roxo', 'vermelho'} or (color == 'cinza' and age >= ALERT_AFTER_DAYS)
+
+
 def render_alert(alerts):
+    priority = {'vermelho': 0, 'roxo': 1, 'cinza': 2}
+    alerts = sorted(
+        alerts,
+        key=lambda item: (
+            priority.get(item[1].get('color'), 9),
+            item[1].get('template') or '',
+            int(item[1].get('message_id') or 0),
+        ),
+    )
     rows = []
+    counts = {'cinza': 0, 'roxo': 0, 'vermelho': 0}
     for age, rec in alerts:
         site, config, manager = template_columns(rec['template'])
         message_id = str(rec.get('message_id') or '-')
+        color = str(rec.get('color') or '-').upper()
+        status = str(rec.get('status') or 'GRAY')
         cta = str(rec.get('cta') or '-').strip()
+        counts[rec.get('color')] = counts.get(rec.get('color'), 0) + 1
         rows.append(
             f'{site:<18} | {config:<24} | {manager:<10} | '
-            f'{message_id:>4} | {age:>4} | {cta}'
+            f'{message_id:>4} | {color:<8} | {age:>4} | {status:<14} | {cta}'
         )
 
-    header = 'Template           | Configuração             | Gestor     | ID   | Dias | CTA'
-    divider = '-------------------|--------------------------|------------|------|------|-------------------------'
+    header = 'Template           | Configuração             | Gestor     | ID   | Cor      | Dias | Status         | CTA'
+    divider = '-------------------|--------------------------|------------|------|----------|------|----------------|-------------------------'
     lines = [
-        'Template/Broadcast — cinza persistente',
-        f'Mensagens cinza há >= {ALERT_AFTER_DAYS} dias: {len(alerts)}',
+        'Template/Broadcast — estados acionáveis',
+        (
+            f'Cinza >= {ALERT_AFTER_DAYS} dias: {counts["cinza"]} | '
+            f'Roxo: {counts["roxo"]} | Vermelho: {counts["vermelho"]}'
+        ),
         '',
     ]
     # Independent blocks keep Discord's automatic message splitting readable.
-    for start in range(0, len(rows), 11):
-        lines.extend(['```', header, divider, *rows[start:start + 11], '```', ''])
-    lines.append('Ação: sem troca automática; validar com Ciro ou em teste controlado.')
+    for start in range(0, len(rows), 9):
+        lines.extend(['```', header, divider, *rows[start:start + 9], '```', ''])
+    lines.append('Política: roxo = diagnóstico; vermelho = elegível à troca red-only; cinza = sem troca automática.')
     return '\n'.join(lines)
 
 
@@ -75,11 +108,13 @@ async def main():
         current_keys = set()
         alerts = []
         for row in rows:
-            name = row.get('NAME') or ''
-            if not name:
+            if not is_active_production_row(row):
                 continue
+            name = row.get('NAME') or ''
             for msg in rollout.parse_messages(row):
-                if rollout.status_of(msg) != '':
+                status = rollout.status_of(msg)
+                color = rollout.status_color(status)
+                if color not in {'cinza', 'roxo', 'vermelho'}:
                     continue
                 k = key_for(name, msg)
                 current_keys.add(k)
@@ -89,17 +124,31 @@ async def main():
                     'first_seen': today.isoformat(),
                     'text': (msg.get('TEXT') or '')[:160],
                     'cta': msg.get('CTA_1') or msg.get('CTA 1') or '',
+                    'status': status,
+                    'color': color,
                     'alerted': False,
+                })
+                previous_status = rec.get('status', status)
+                if previous_status != status:
+                    rec['first_seen'] = today.isoformat()
+                    rec['alerted'] = False
+                rec.update({
+                    'template': name,
+                    'message_id': int(msg.get('MESSAGE_ID') or 0),
+                    'text': (msg.get('TEXT') or '')[:160],
+                    'cta': msg.get('CTA_1') or msg.get('CTA 1') or '',
+                    'status': status,
+                    'color': color,
                 })
                 try:
                     age = (today - dt.date.fromisoformat(rec.get('first_seen', today.isoformat()))).days
                 except Exception:
                     rec['first_seen'] = today.isoformat(); age = 0
-                if age >= ALERT_AFTER_DAYS and not rec.get('alerted'):
+                if should_report(color, age):
                     alerts.append((age, rec))
                     rec['alerted'] = True
                     rec['last_alerted'] = today.isoformat()
-        # purge resolved/non-gray keys
+        # purge resolved/green keys
         for k in list(items):
             if k not in current_keys:
                 items.pop(k, None)

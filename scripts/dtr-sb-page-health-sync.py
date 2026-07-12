@@ -566,6 +566,21 @@ def build_new_restrictions_alert(rows, summary):
     ]
     return '```\n'+'\n'.join(lines)+'\n```'
 
+def build_no_new_restrictions_alert(summary):
+    now=datetime.now(NY).strftime('%Y-%m-%d %H:%M %Z')
+    stats=summary.get('stats') or {}
+    lines=[
+        'PÁGINAS RESTRITAS — VARREDURA CONCLUÍDA',
+        f'Atualizado em: {now}',
+        '',
+        'Nenhuma página restrita nova até o momento, comparado com a última varredura concluída.',
+        '',
+        f"Já restritas na SB no início: {summary.get('sb_active_restricted_start', 0)}",
+        f"Páginas DTR no escopo: {stats.get('dtr_pages', 0)}",
+        'Novas aplicadas na SB: 0',
+    ]
+    return '```\n'+'\n'.join(lines)+'\n```'
+
 def write_excel(path, rows, summary, inventory_notes=None):
     if not Workbook: return None
     wb=Workbook(); ws=wb.active; ws.title='Paginas'
@@ -777,9 +792,15 @@ async def main():
         backup_path=REPORT_DIR/f'dtr-sb-page-health-sync-backup-{stamp}.json'
         backup_path.write_text(json.dumps(backups,ensure_ascii=False,indent=2),encoding='utf-8'); summary['backup']=str(backup_path)
         if report_rows or summary.get('step1_inventory_notes'): write_excel(report_xlsx, report_rows, summary, summary.get('step1_inventory_notes'))
-        if args.apply and alert_rows:
+        if args.apply and (alert_rows or not summary['errors']):
             try:
-                summary['discord_alert_http']=post_discord(build_new_restrictions_alert(alert_rows, summary))
+                if alert_rows:
+                    alert_content=build_new_restrictions_alert(alert_rows, summary)
+                    summary['discord_alert_kind']='new_restrictions'
+                else:
+                    alert_content=build_no_new_restrictions_alert(summary)
+                    summary['discord_alert_kind']='no_new_restrictions'
+                summary['discord_alert_http']=post_discord(alert_content)
             except Exception as exc:
                 summary['errors'].append({'discord_alert_failed':f'{type(exc).__name__}: {exc}'})
         state.setdefault('runs',[]).append({'ts':summary['started_at'],'mode':summary['mode'],'stats':summary['stats'],'writes':writes,'log':str(run_log),'xlsx':str(report_xlsx)})

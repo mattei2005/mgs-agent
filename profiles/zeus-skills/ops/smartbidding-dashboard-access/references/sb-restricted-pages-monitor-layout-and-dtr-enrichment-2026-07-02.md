@@ -94,7 +94,8 @@ Rodolfo prefers a complete Excel report in addition to a short Discord summary.
 
 Recommended behavior:
 - If there are new restrictions, resolutions, or operational errors: send Discord summary + Excel attachment.
-- If nothing changed: short Discord/no alert depending on monitor mode; do not attach unnecessary Excel unless explicitly requested.
+- After every successful full `apply` scan with no new restricted page, send a short Discord completion message: `Nenhuma página restrita nova até o momento, comparado com a última varredura concluída.` Do not attach an unnecessary Excel.
+- Never send the zero-new completion message when the scan has operational errors or is incomplete; that would be a false all-clear.
 
 Suggested Excel tabs:
 - `Resumo`
