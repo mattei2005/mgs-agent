@@ -10,7 +10,7 @@
 Quando Rodolfo perguntar a quais WordPress o agente tem ou não tem acesso:
 
 1. Não responder somente pelo inventário documentado, por `data/sites.json` ou por memória.
-2. Consultar ao vivo os itens `LOGIN` do vault `MGS Conteúdo`, incluindo itens cujo título não contém `WordPress` mas cuja URL aponta para `wp-login.php`, `wp-admin`, `/rodloguda` ou outro slug de login.
+2. Consultar ao vivo os itens `LOGIN` do vault `MGS Conteúdo` e considerar como credenciais canônicas de WordPress somente os títulos que começam com `Wordpress - `, com comparação sem diferenciar maiúsculas/minúsculas. Não inferir credencial canônica por URL, slug de login ou nomes legados fora desse prefixo.
 3. Separar claramente:
    - credencial direta de WP-Admin/API no 1Password;
    - acesso técnico por SSH/WP-CLI;
