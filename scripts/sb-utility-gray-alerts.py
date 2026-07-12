@@ -4,7 +4,7 @@
 Live SB is the source of truth. Local state only remembers first_seen/alerted markers.
 Cron delivery target is Discord channel 1522487422510694450; stdout is the alert.
 """
-import asyncio, datetime as dt, importlib.util, json, pathlib
+import asyncio, datetime as dt, importlib.util, json, pathlib, re
 from zoneinfo import ZoneInfo
 
 BASE = pathlib.Path('/root/mgs-agent')
@@ -31,6 +31,51 @@ def save_state(state):
 
 def key_for(template, msg):
     return json.dumps({'template': template, 'key': rollout.msg_key(msg)}, ensure_ascii=False, separators=(',', ':'))
+
+
+def clip(value, width):
+    value = str(value or '').strip()
+    return value if len(value) <= width else value[:width - 1] + '…'
+
+
+def template_columns(template):
+    """Split '<site> - <config> - gNNN-d <manager>' for a compact Discord row."""
+    match = re.match(r'^(.*?)\s+-\s+(.*?)\s+-\s+g\d+-d\s+(.+)$', template or '')
+    if not match:
+        return clip(template, 18), '-', '-'
+    site, config, manager = match.groups()
+    return clip(site, 18), clip(config, 24), clip(manager, 10)
+
+
+def render_alert(alerts):
+    by_template = {}
+    for age, rec in alerts:
+        by_template.setdefault(rec['template'], []).append((age, rec))
+
+    lines = [
+        'Template/Broadcast — cinza persistente',
+        f'Mensagens cinza há >= {ALERT_AFTER_DAYS} dias: {len(alerts)}',
+        '',
+        '```',
+        'Template           | Configuração             | Gestor     | Qtd | IDs',
+        '-------------------|--------------------------|------------|-----|----------------',
+    ]
+    for template, vals in list(by_template.items())[:12]:
+        site, config, manager = template_columns(template)
+        shown_ids = [str(rec.get('message_id') or '-') for _, rec in vals[:6]]
+        ids = ','.join(shown_ids)
+        if len(vals) > 6:
+            ids += f' +{len(vals) - 6}'
+        lines.append(f'{site:<18} | {config:<24} | {manager:<10} | {len(vals):>3} | {ids}')
+    if len(by_template) > 12:
+        lines.append(f'+{len(by_template) - 12} templates não exibidos')
+    lines.extend([
+        '```',
+        '',
+        'Ação: sem troca automática; validar com Ciro ou em teste controlado.',
+    ])
+    return '\n'.join(lines)
+
 
 async def main():
     state = load_state()
@@ -73,21 +118,7 @@ async def main():
         save_state(state)
         if not alerts:
             return
-        lines = ['Template/Broadcast — cinza persistente', '', f'Mensagens cinza há >= {ALERT_AFTER_DAYS} dias: {len(alerts)}']
-        by_template = {}
-        for age, rec in alerts:
-            by_template.setdefault(rec['template'], []).append((age, rec))
-        for template, vals in list(by_template.items())[:12]:
-            lines.append(f'- {template}: {len(vals)} mensagem(ns) cinza')
-            for age, rec in vals[:3]:
-                lines.append(f'  · #{rec.get("message_id")} há {age} dias — {rec.get("cta","")}')
-            if len(vals) > 3:
-                lines.append(f'  · +{len(vals)-3} no estado local')
-        if len(by_template) > 12:
-            lines.append(f'- +{len(by_template)-12} templates no estado local')
-        lines.append('')
-        lines.append('Ação: não troquei automaticamente. Estado cinza precisa validação/Ciro ou teste controlado.')
-        print('\n'.join(lines))
+        print(render_alert(alerts))
     finally:
         try: await browser.close()
         except Exception: pass
