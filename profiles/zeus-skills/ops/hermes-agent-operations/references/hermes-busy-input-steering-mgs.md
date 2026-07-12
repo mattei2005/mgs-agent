@@ -187,6 +187,7 @@ A correção não termina no checkout vivo. Os artefatos canônicos são:
 /root/mgs-agent/patches/hermes/mgs-busy-steer-universal-media-2026-07-10.patch
 /root/mgs-agent/patches/hermes/mgs-busy-steer-startup-merge-2026-07-11.patch
 /root/mgs-agent/patches/hermes/mgs-busy-steer-startup-race-hardening-2026-07-11.patch
+/root/mgs-agent/patches/hermes/mgs-busy-steer-reentrant-followup-2026-07-12.patch
 ```
 
 Os patches devem permanecer listados, na mesma ordem, em ambos:
@@ -207,6 +208,8 @@ Invariantes mínimos do guard:
 - falha de enrichment mantém caption + paths e tenta steer antes de queue;
 - follow-up recebido enquanto `_running_agents[session_key]` ainda é `_AGENT_PENDING_SENTINEL` reserva ordem de chegada antes de qualquer preprocessamento assíncrono;
 - o worker aguarda todas as reservas em voo, drena em FIFO e promove o sentinel para o agente real de forma atômica sob a mesma barreira;
+- follow-up recursivo no mesmo `AIAgent` + mesma geração reconhece promoção já concluída e não gera falso `lost ownership`; agente diferente ou geração substituída continua fail-closed;
+- chamadas diretas legadas de `_run_agent()` com `run_generation=None` e slot vazio continuam válidas sem enfraquecer o ownership de runs gerenciados;
 - `_try_busy_steer_event()` relê geração e identidade do agente depois de STT/enrichment; resultado atrasado nunca é aplicado a agente encerrado/substituído;
 - `_merge_startup_steer_into_message()` acontece antes da primeira chamada ao modelo, inclusive quando o primeiro resultado não usa tools;
 - `_persist_user_message_override` acompanha a mensagem efetivamente mesclada nos caminhos de resume/tool-tail;
