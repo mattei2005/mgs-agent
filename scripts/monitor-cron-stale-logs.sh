@@ -133,6 +133,8 @@ def post_discord(webhook, payload):
 
 
 def cron_problem_payload(script, status, detail):
+    # Idade do log, thresholds e erro bruto permanecem no state/log local.
+    # O alerta público informa somente a falha operacional acionável.
     title = 'Cron com erro no log' if status == 'ERROR' else 'Cron sem log recente'
     return {
         'content': f'{MENTION} alerta de cron {status.lower()}',
@@ -143,7 +145,6 @@ def cron_problem_payload(script, status, detail):
                 {'name': 'Script', 'value': f'`{script}`', 'inline': True},
                 {'name': 'Estado', 'value': status, 'inline': True},
                 {'name': 'Ação', 'value': 'Verificar cron, script e log.', 'inline': False},
-                {'name': 'Detalhe técnico', 'value': f'```text\n{detail[:900]}\n```', 'inline': False},
             ],
         }],
     }

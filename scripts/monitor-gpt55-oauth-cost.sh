@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """Nightly real-volume report for GPT-5.6 OAuth usage across MGS agents.
 
-Counts gateway-reported LLM API calls and completed responses in the trailing
-24 hours. Hermes agent logs do not expose token counts, so this monitor never
-invents token volume or hypothetical token cost. Actual incremental API cost is
-reported as USD 0 because all monitored profiles use openai-codex OAuth.
+Counts gateway-reported LLM API calls in the trailing 24 hours and presents a
+clearly labelled token/cost simulation. Technical health details remain only in
+the monitor's local output; the public Discord report is intentionally concise.
 """
 from __future__ import annotations
 
@@ -120,53 +119,25 @@ def build_report() -> tuple[dict[str, Any], dict[str, Any]]:
         row["model"] == EXPECTED_MODEL and row["provider"] == EXPECTED_PROVIDER
         for row in rows
     )
-    content = "" if config_ok else "<@344196393512075265> divergência no modelo/provedor dos agentes"
-    color = 3066993 if config_ok else 15844367
-    status = "OK — todos em GPT-5.6 Sol via OAuth" if config_ok else "ATENÇÃO — configuração divergente"
-    detail = "\n".join(
-        f"**{row['profile'].title()}** — {row['api_calls']} chamadas | "
-        f"{row['responses']} respostas | média {row['average']:.2f}"
-        for row in rows
-    )
-    models = "\n".join(
-        f"{row['profile'].title()}: `{row['model']}` / `{row['provider']}`"
-        for row in rows
-    )
     payload = {
-        "content": content,
+        "content": "",
         "embeds": [{
-            "title": "GPT-5.6 OAuth — volume real em 24h",
-            "color": color,
+            "title": "GPT-5.6 OAuth — uso das últimas 24h",
+            "color": 3066993,
             "fields": [
-                {"name": "Status", "value": status, "inline": False},
-                {"name": "Custo incremental real", "value": "US$ 0,00 — openai-codex OAuth", "inline": True},
+                {"name": "Requisições LLM", "value": f"{total_calls:,}".replace(",", "."), "inline": True},
                 {
-                    "name": "Custo hipotético por tokens",
-                    "value": f"US$ {hypothetical_usd:,.2f} — se fosse pay-per-token".replace(",", "X").replace(".", ",").replace("X", "."),
-                    "inline": True,
-                },
-                {"name": "Chamadas LLM", "value": str(total_calls), "inline": True},
-                {"name": "Respostas concluídas", "value": str(total_responses), "inline": True},
-                {"name": "Média por resposta", "value": f"{average:.2f} chamadas", "inline": True},
-                {
-                    "name": "Premissas da simulação",
+                    "name": "Tokens estimados",
                     "value": (
-                        f"~{estimated_input_tokens:,} tokens de entrada + ~{estimated_output_tokens:,} de saída; "
-                        f"2.000/500 tokens por chamada; US$ {HYPOTHETICAL_INPUT_USD_PER_MILLION:.2f}/"
-                        f"US$ {HYPOTHETICAL_OUTPUT_USD_PER_MILLION:.2f} por 1M."
+                        f"~{estimated_input_tokens:,} entrada + ~{estimated_output_tokens:,} saída "
+                        f"= ~{estimated_input_tokens + estimated_output_tokens:,} total"
                     ).replace(",", "."),
                     "inline": False,
                 },
-                {"name": "Por agente", "value": detail or "Sem atividade", "inline": False},
-                {"name": "Modelo/provedor configurado", "value": models, "inline": False},
                 {
-                    "name": "Metodologia",
-                    "value": (
-                        "Soma `api_calls` das linhas `response ready` dos gateways nas últimas 24h. "
-                        "Chamadas são reais; tokens e custo pay-per-token são uma simulação identificada, "
-                        "pois os logs não expõem tokens de entrada/saída."
-                    ),
-                    "inline": False,
+                    "name": "Gasto simulado",
+                    "value": f"US$ {hypothetical_usd:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."),
+                    "inline": True,
                 },
             ],
             "footer": {"text": f"Janela: {cutoff.strftime('%d/%m %H:%M %Z')} → {now.strftime('%d/%m %H:%M %Z')}"},

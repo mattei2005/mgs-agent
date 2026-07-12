@@ -33,18 +33,12 @@ def key_for(template, msg):
     return json.dumps({'template': template, 'key': rollout.msg_key(msg)}, ensure_ascii=False, separators=(',', ':'))
 
 
-def clip(value, width):
-    value = str(value or '').strip()
-    return value if len(value) <= width else value[:width - 1] + '…'
-
-
 def template_columns(template):
-    """Split '<site> - <config> - gNNN-d <manager>' for a compact Discord row."""
+    """Split '<site> - <config> - gNNN-d <manager>' without dropping source data."""
     match = re.match(r'^(.*?)\s+-\s+(.*?)\s+-\s+g\d+-d\s+(.+)$', template or '')
     if not match:
-        return clip(template, 18), '-', '-'
-    site, config, manager = match.groups()
-    return clip(site, 18), clip(config, 24), clip(manager, 10)
+        return str(template or '').strip(), '-', '-'
+    return tuple(part.strip() for part in match.groups())
 
 
 def render_alert(alerts):
@@ -52,7 +46,7 @@ def render_alert(alerts):
     for age, rec in alerts:
         site, config, manager = template_columns(rec['template'])
         message_id = str(rec.get('message_id') or '-')
-        cta = clip(rec.get('cta') or '-', 25)
+        cta = str(rec.get('cta') or '-').strip()
         rows.append(
             f'{site:<18} | {config:<24} | {manager:<10} | '
             f'{message_id:>4} | {age:>4} | {cta}'

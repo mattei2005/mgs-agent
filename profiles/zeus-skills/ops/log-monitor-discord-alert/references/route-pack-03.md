@@ -49,7 +49,7 @@ tail -20 /root/mgs-agent/logs/monitor-NOME.log
 
 Padrão de resposta para o CEO: tabela curta com `Item | Status agora | Decisão`. Separar claramente pendências deliberadas (ex: update Hermes em outro tópico) de problemas resolvidos. Se um erro apareceu em log mas `bash -n` e execução real passam depois, reportar como "não reproduzido no estado atual" e citar a validação feita, sem inventar causa.
 
-Para alertas Discord com muitos itens comparáveis, o próprio script deve renderizar um bloco monoespaçado alinhado, com uma linha por entidade e colunas compactas escolhidas pelo contexto (ex.: `Template | Configuração | Gestor | Qtd | IDs`). Não emitir listas longas com CTAs repetidos por mensagem. Limitar linhas/IDs exibidos, indicar o restante com `+N` e validar o renderer com fixture incluindo truncamento, limite de largura e fechamento dos delimitadores antes do próximo ciclo real.
+Para alertas Discord com muitos itens comparáveis, o próprio script deve renderizar blocos monoespaçados alinhados, com uma linha por registro e colunas compactas escolhidas pelo contexto (ex.: `Template | Configuração | Gestor | ID | Dias | CTA`). Organização visual não autoriza remover informação acionável: preservar integralmente todos os registros, IDs, tempo/idade, CTA/status e valores-fonte; não truncar células nem substituir registros por `+N`. Dividir em blocos independentes abaixo do limite do Discord, repetindo cabeçalho e delimitadores. Validar o renderer com fixture incluindo contagem total, presença do primeiro e último registro, conteúdo integral dos campos acionáveis, tamanho dos blocos e fechamento dos delimitadores antes do próximo ciclo real.
 
 ---
 ## Atualizar infra-inventory.json
