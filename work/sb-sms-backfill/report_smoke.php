@@ -46,8 +46,25 @@ if ( false === strpos( $empty, 'Não disponível' ) || false === strpos( $empty,
 }
 $yesterday = ( new DateTimeImmutable( 'now', wp_timezone() ) )->modify( '-1 day' )->format( 'Y-m-d' );
 $default_html = render_default_sms_report();
-if ( false === strpos( $default_html, 'name="from" value="' . esc_attr( $yesterday ) . '"' ) || false === strpos( $default_html, 'name="to" value="' . esc_attr( $yesterday ) . '"' ) ) {
+if ( false === strpos( $default_html, 'name="from" id="mgsqDateFrom" value="' . esc_attr( $yesterday ) . '"' ) || false === strpos( $default_html, 'name="to" id="mgsqDateTo" value="' . esc_attr( $yesterday ) . '"' ) ) {
     throw new RuntimeException( 'Default report dates are not yesterday' );
+}
+$calendar_checks = array(
+    'trigger' => 'id="mgsqDateRangeTrigger"',
+    'popover' => 'id="mgsqDatePopover"',
+    'two_months' => 'data-calendar-index="1"',
+    'preset_yesterday' => 'data-preset="yesterday"',
+    'preset_last_7' => 'data-preset="last7"',
+    'preset_last_30' => 'data-preset="last30"',
+    'preset_this_month' => 'data-preset="thisMonth"',
+    'preset_last_month' => 'data-preset="lastMonth"',
+    'cancel' => 'id="mgsqDateCancel"',
+    'apply' => 'id="mgsqDateApply"',
+);
+foreach ( $calendar_checks as $name => $marker ) {
+    if ( false === strpos( $default_html, $marker ) ) {
+        throw new RuntimeException( 'Calendar UI smoke failed: ' . $name );
+    }
 }
 echo wp_json_encode( array(
     'status' => 'REVENUE_REPORT_SMOKE_OK',

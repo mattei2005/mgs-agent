@@ -277,6 +277,7 @@ Artefato canônico atual:
 
 ## Pitfalls
 
+- **Reentrant queued follow-up após promoção:** `_run_agent_inner()` drena uma mensagem pendente chamando `_run_agent()` recursivamente enquanto o turno externo ainda possui o mesmo `AIAgent` e a mesma geração. `_promote_agent_and_consume_startup_steers()` deve tratar a identidade exata `current_agent is agent` + geração atual como promoção já concluída e retornar payload vazio; não pode exigir novamente `_AGENT_PENDING_SENTINEL`, senão aborta com `startup agent promotion lost ownership` e o Discord mostra `Sorry, I encountered an unexpected error`. Preserve o fail-closed para agente diferente/geração substituída. Cubra também chamadas diretas legadas com `run_generation=None` e slot ainda vazio. Testes canônicos: `test_reentrant_followup_promotion_reuses_current_agent` e `test_reentrant_followup_does_not_mask_replaced_agent`.
 - Validar apenas texto e declarar multimedia steer pronto.
 - Chamar `queue` de consolidação.
 - Usar `interrupt` para complementos e destruir tool/subagent work.

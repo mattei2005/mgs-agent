@@ -624,14 +624,78 @@ class MGS_Quiz_Admin {
         echo '<a href="'.esc_url( admin_url( 'admin.php?page=mgs-quiz' ) ).'">← Voltar</a>';
         echo '<div class="hero"><div class="icon">📊</div><div><h1>Relatório · '.esc_html( $cfg['name'] ?? ( $filters['slug'] ?: 'Todos os quizzes' ) ).'</h1><p>'.esc_html( $filters['slug'] ? '/' . $filters['slug'] . '/' : 'Todos' ).' · análise das leads capturadas</p></div></div>';
         echo '<p><a class="button button-primary" href="'.esc_url( $export_url ).'">Exportar CSV</a></p>';
-        echo '<form class="filters" method="get"><input type="hidden" name="page" value="mgs-quiz-report"><input type="hidden" name="slug" value="'.esc_attr( $filters['slug'] ).'">';
-        echo '<div><label>Data inicial</label><input type="date" name="from" value="'.esc_attr( $filters['from'] ).'"></div>';
-        echo '<div><label>Data final</label><input type="date" name="to" value="'.esc_attr( $filters['to'] ).'"></div>';
+        echo '<style>
+        .mgsq-report .filters{position:relative;grid-template-columns:repeat(7,minmax(120px,1fr))}
+        .mgsq-range-field{grid-column:span 2;position:relative}.mgsq-range-trigger{width:100%;min-height:38px;display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #8c8f94;border-radius:4px;background:#fff;padding:7px 10px;cursor:pointer;text-align:left}.mgsq-range-trigger:hover,.mgsq-range-trigger:focus{border-color:#2271b1;box-shadow:0 0 0 1px #2271b1;outline:0}.mgsq-range-trigger .dashicons{color:#646970}
+        .mgsq-date-popover{position:absolute;z-index:1001;top:calc(100% + 8px);left:0;width:min(820px,calc(100vw - 64px));display:none;background:#fff;border:1px solid #d0d5dd;border-radius:14px;box-shadow:0 18px 48px rgba(16,24,40,.18);overflow:hidden}.mgsq-date-popover.is-open{display:grid;grid-template-columns:180px 1fr}.mgsq-date-shortcuts{padding:14px;border-right:1px solid #e4e7ec;background:#f8fafc;display:flex;flex-direction:column;gap:4px}.mgsq-date-shortcut{border:0;background:transparent;border-radius:8px;padding:9px 10px;text-align:left;cursor:pointer;color:#344054}.mgsq-date-shortcut:hover,.mgsq-date-shortcut.is-active{background:#e7f7ed;color:#16723a;font-weight:700}.mgsq-date-main{min-width:0}.mgsq-calendars{display:grid;grid-template-columns:1fr 1fr}.mgsq-calendar-panel{padding:14px 16px}.mgsq-calendar-panel+ .mgsq-calendar-panel{border-left:1px solid #e4e7ec}.mgsq-calendar-head{height:36px;display:grid;grid-template-columns:36px 1fr 36px;align-items:center;text-align:center;font-weight:700}.mgsq-calendar-head button{width:32px;height:32px;border:0;border-radius:8px;background:transparent;cursor:pointer;font-size:20px;line-height:1}.mgsq-calendar-head button:hover{background:#f0f0f1}.mgsq-mobile-next{display:none}.mgsq-weekdays,.mgsq-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}.mgsq-weekdays span{padding:7px 0;text-align:center;color:#667085;font-size:11px;font-weight:700;text-transform:uppercase}.mgsq-day,.mgsq-day-empty{aspect-ratio:1;min-height:32px}.mgsq-day{border:0;background:transparent;border-radius:8px;cursor:pointer;color:#1d2939}.mgsq-day:hover{background:#edf2f7}.mgsq-day.is-range{background:#e7f7ed;border-radius:0}.mgsq-day.is-start,.mgsq-day.is-end{background:#16723a;color:#fff;border-radius:8px}.mgsq-day.is-today{box-shadow:inset 0 0 0 1px #16723a}.mgsq-date-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid #e4e7ec;padding:12px 16px}.mgsq-date-summary{font-weight:600;color:#344054}.mgsq-date-actions{display:flex;gap:8px}.mgsq-date-actions .button{min-width:82px}.mgsq-date-error{display:none;color:#b42318;font-size:12px;padding:0 16px 10px}.mgsq-date-error.is-visible{display:block}
+        @media(max-width:1180px){.mgsq-report .filters{grid-template-columns:repeat(4,minmax(150px,1fr))}}
+        @media(max-width:782px){.mgsq-report .filters{grid-template-columns:1fr}.mgsq-range-field{grid-column:span 1}.mgsq-date-popover{position:fixed;left:12px;right:12px;top:56px;width:auto;max-height:calc(100vh - 72px);overflow:auto}.mgsq-date-popover.is-open{display:block}.mgsq-date-shortcuts{border-right:0;border-bottom:1px solid #e4e7ec;display:grid;grid-template-columns:1fr 1fr}.mgsq-calendars{grid-template-columns:1fr}.mgsq-calendar-panel:nth-child(2){display:none}.mgsq-calendar-panel+ .mgsq-calendar-panel{border-left:0}.mgsq-mobile-next{display:inline-block}.mgsq-date-footer{align-items:flex-start;flex-direction:column}.mgsq-date-actions{width:100%}.mgsq-date-actions .button{flex:1}}
+        </style>';
+        echo '<form class="filters" method="get" id="mgsqReportFilters"><input type="hidden" name="page" value="mgs-quiz-report"><input type="hidden" name="slug" value="'.esc_attr( $filters['slug'] ).'">';
+        echo '<div class="mgsq-range-field"><label>Período</label><button type="button" class="mgsq-range-trigger" id="mgsqDateRangeTrigger" aria-haspopup="dialog" aria-expanded="false"><span id="mgsqDateRangeLabel"></span><span class="dashicons dashicons-calendar-alt" aria-hidden="true"></span></button><input type="hidden" name="from" id="mgsqDateFrom" value="'.esc_attr( $filters['from'] ).'"><input type="hidden" name="to" id="mgsqDateTo" value="'.esc_attr( $filters['to'] ).'">';
+        echo '<div class="mgsq-date-popover" id="mgsqDatePopover" role="dialog" aria-label="Selecionar período"><div class="mgsq-date-shortcuts"><button type="button" class="mgsq-date-shortcut" data-preset="today">Hoje</button><button type="button" class="mgsq-date-shortcut" data-preset="yesterday">Ontem</button><button type="button" class="mgsq-date-shortcut" data-preset="last7">Últimos 7 dias</button><button type="button" class="mgsq-date-shortcut" data-preset="last30">Últimos 30 dias</button><button type="button" class="mgsq-date-shortcut" data-preset="thisMonth">Este mês</button><button type="button" class="mgsq-date-shortcut" data-preset="lastMonth">Mês anterior</button><button type="button" class="mgsq-date-shortcut" data-preset="custom">Personalizado</button></div>';
+        echo '<div class="mgsq-date-main"><div class="mgsq-calendars"><div class="mgsq-calendar-panel" data-calendar-index="0"><div class="mgsq-calendar-head"><button type="button" data-shift="-1" aria-label="Mês anterior">‹</button><span class="mgsq-month-title"></span><button type="button" class="mgsq-mobile-next" data-shift="1" aria-label="Próximo mês">›</button></div><div class="mgsq-weekdays"><span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span></div><div class="mgsq-days"></div></div><div class="mgsq-calendar-panel" data-calendar-index="1"><div class="mgsq-calendar-head"><span></span><span class="mgsq-month-title"></span><button type="button" data-shift="1" aria-label="Próximo mês">›</button></div><div class="mgsq-weekdays"><span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span></div><div class="mgsq-days"></div></div></div><div class="mgsq-date-error" id="mgsqDateError">Selecione a data inicial e a data final.</div><div class="mgsq-date-footer"><span class="mgsq-date-summary" id="mgsqDateSummary"></span><div class="mgsq-date-actions"><button type="button" class="button" id="mgsqDateCancel">Cancelar</button><button type="button" class="button button-primary" id="mgsqDateApply">Aplicar</button></div></div></div></div></div>';
         echo '<div><label>Gestor</label><select name="gestor"><option value="">Todos</option>'; foreach ( $gestores as $g ) echo '<option '.selected( $filters['gestor'], $g, false ).' value="'.esc_attr($g).'">'.esc_html($g).'</option>'; echo '</select></div>';
         echo '<div><label>Parcela</label><select name="parcela"><option value="">Todas</option>'; foreach ( $parcelas as $p ) echo '<option '.selected( $filters['parcela'], $p, false ).' value="'.esc_attr($p).'">'.esc_html($p).'</option>'; echo '</select></div>';
         echo '<div><label>Buscar</label><input name="q" value="'.esc_attr( $filters['q'] ).'" placeholder="Nome, telefone, campanha"></div>';
         echo '<div><label>Leads por página</label><select name="leads_per_page">'; foreach ( array(5,10,25,50,100,250,500) as $n ) echo '<option '.selected( (int)$filters['leads_per_page'], $n, false ).' value="'.$n.'">'.$n.'</option>'; echo '</select></div>';
         echo '<div><button class="button">Filtrar relatório</button></div></form>';
+        ?>
+        <script>
+        (function(){
+          var trigger=document.getElementById('mgsqDateRangeTrigger'),popover=document.getElementById('mgsqDatePopover'),fromInput=document.getElementById('mgsqDateFrom'),toInput=document.getElementById('mgsqDateTo'),label=document.getElementById('mgsqDateRangeLabel'),summary=document.getElementById('mgsqDateSummary'),error=document.getElementById('mgsqDateError');
+          if(!trigger||!popover||!fromInput||!toInput)return;
+          var months=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+          var appliedStart=fromInput.value,appliedEnd=toInput.value,draftStart=appliedStart,draftEnd=appliedEnd,activePreset='custom';
+          function parseIso(value){var p=(value||'').split('-').map(Number);return p.length===3&&p[0]&&p[1]&&p[2]?new Date(p[0],p[1]-1,p[2],12,0,0,0):null;}
+          function iso(date){return date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0');}
+          function br(value){var d=parseIso(value);return d?String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear():'';}
+          function addDays(date,n){var d=new Date(date.getTime());d.setDate(d.getDate()+n);return d;}
+          function firstOfMonth(date){return new Date(date.getFullYear(),date.getMonth(),1,12,0,0,0);}
+          var base=parseIso(draftStart)||new Date(),viewMonth=firstOfMonth(base);
+          function setActivePreset(name){activePreset=name;popover.querySelectorAll('[data-preset]').forEach(function(btn){btn.classList.toggle('is-active',btn.dataset.preset===name);});}
+          function updateText(){label.textContent=br(appliedStart)+' — '+br(appliedEnd);summary.textContent=draftStart?(br(draftStart)+(draftEnd?' — '+br(draftEnd):' — selecione a data final')):'Selecione o período';}
+          function monthFor(index){return new Date(viewMonth.getFullYear(),viewMonth.getMonth()+index,1,12,0,0,0);}
+          function render(){
+            popover.querySelectorAll('.mgsq-calendar-panel').forEach(function(panel){
+              var index=Number(panel.dataset.calendarIndex||0),month=monthFor(index),year=month.getFullYear(),monthIndex=month.getMonth(),days=new Date(year,monthIndex+1,0).getDate(),offset=month.getDay(),grid=panel.querySelector('.mgsq-days');
+              panel.querySelector('.mgsq-month-title').textContent=months[monthIndex]+' '+year;grid.innerHTML='';
+              for(var blank=0;blank<offset;blank++){var empty=document.createElement('span');empty.className='mgsq-day-empty';grid.appendChild(empty);}
+              for(var day=1;day<=days;day++){var date=new Date(year,monthIndex,day,12,0,0,0),value=iso(date),button=document.createElement('button');button.type='button';button.className='mgsq-day';button.dataset.date=value;button.textContent=day;button.setAttribute('aria-label',br(value));if(value===draftStart)button.classList.add('is-start');if(value===draftEnd)button.classList.add('is-end');if(draftStart&&draftEnd&&value>draftStart&&value<draftEnd)button.classList.add('is-range');if(value===iso(new Date()))button.classList.add('is-today');grid.appendChild(button);}
+            });
+            updateText();
+          }
+          function selectDate(value){
+            if(!draftStart||(draftStart&&draftEnd)){draftStart=value;draftEnd='';setActivePreset('custom');}
+            else if(value<draftStart){draftStart=value;draftEnd='';setActivePreset('custom');}
+            else{draftEnd=value;setActivePreset('custom');}
+            error.classList.remove('is-visible');render();
+          }
+          function preset(name){
+            var today=new Date(),start,end;
+            today=new Date(today.getFullYear(),today.getMonth(),today.getDate(),12,0,0,0);
+            if(name==='today'){start=end=today;}
+            else if(name==='yesterday'){start=end=addDays(today,-1);}
+            else if(name==='last7'){end=today;start=addDays(today,-6);}
+            else if(name==='last30'){end=today;start=addDays(today,-29);}
+            else if(name==='thisMonth'){start=new Date(today.getFullYear(),today.getMonth(),1,12);end=today;}
+            else if(name==='lastMonth'){start=new Date(today.getFullYear(),today.getMonth()-1,1,12);end=new Date(today.getFullYear(),today.getMonth(),0,12);}
+            else{setActivePreset('custom');return;}
+            draftStart=iso(start);draftEnd=iso(end);viewMonth=firstOfMonth(start);setActivePreset(name);render();
+          }
+          function applyDraft(){if(!draftStart||!draftEnd){error.classList.add('is-visible');return;}appliedStart=draftStart;appliedEnd=draftEnd;fromInput.value=appliedStart;toInput.value=appliedEnd;close();updateText();}
+          function open(){draftStart=appliedStart;draftEnd=appliedEnd;viewMonth=firstOfMonth(parseIso(draftStart)||new Date());error.classList.remove('is-visible');popover.classList.add('is-open');trigger.setAttribute('aria-expanded','true');render();}
+          function close(){popover.classList.remove('is-open');trigger.setAttribute('aria-expanded','false');}
+          trigger.addEventListener('click',function(){popover.classList.contains('is-open')?close():open();});
+          popover.addEventListener('click',function(e){var day=e.target.closest('.mgsq-day'),shortcut=e.target.closest('[data-preset]'),shift=e.target.closest('[data-shift]');if(day)selectDate(day.dataset.date);if(shortcut)preset(shortcut.dataset.preset);if(shift){viewMonth=new Date(viewMonth.getFullYear(),viewMonth.getMonth()+Number(shift.dataset.shift),1,12);render();}});
+          document.getElementById('mgsqDateCancel').addEventListener('click',function(){draftStart=appliedStart;draftEnd=appliedEnd;close();});
+          document.getElementById('mgsqDateApply').addEventListener('click',applyDraft);
+          document.addEventListener('click',function(e){if(popover.classList.contains('is-open')&&!popover.contains(e.target)&&!trigger.contains(e.target))close();});
+          document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+          updateText();
+        })();
+        </script>
+        <?php
         echo '<div class="mgsq-stats"><div class="mgsq-stat">Total de leads<b>'.esc_html( number_format_i18n( $total ) ).'</b></div><div class="mgsq-stat">Telefones únicos<b>'.esc_html( number_format_i18n( $unique ) ).'</b></div><div class="mgsq-stat">Média por dia<b>'.esc_html( $avg ).'</b></div><div class="mgsq-stat">Período<b>'.esc_html( $period_days ).' dia(s)</b></div><div class="mgsq-stat">Custo por registro<b>R$ 0,08</b></div><div class="mgsq-stat">Custo estimado de SMS<b>'.esc_html( 'R$ ' . number_format( $sms_total_cost_centavos / 100, 2, ',', '.' ) ).'</b></div><div class="mgsq-stat">Receita SMS — Smart Bidding<b>'.( $sms_revenue_has_data ? esc_html( 'R$ ' . number_format( (int) $sms_revenue['display_revenue_cents'] / 100, 2, ',', '.' ) ) : 'Não disponível' ).'</b><small>'.esc_html( 'Valor líquido exibido na SB. Cobertura: ' . $sms_revenue_coverage ).'</small></div><div class="mgsq-stat">ROI estimado de SMS<b>'.esc_html( $sms_roi_value ).'</b><small>'.esc_html( $sms_roi_note ).'</small></div></div>';
         echo '<div class="card"><h2>Por parcela escolhida</h2><div class="mgsq-pills">'; foreach ( $by_parcela as $r ) echo '<span>'.esc_html($r['k']).' <b>'.(int)$r['c'].'</b></span>'; echo '</div></div>';
 

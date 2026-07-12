@@ -139,6 +139,14 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    mgs-busy-steer-reentrant-followup-*.patch)
+      if grep -q "direct_unclaimed_run = run_generation is None and current_agent is None" "$REPO/gateway/run.py" \
+        && grep -q "test_reentrant_followup_promotion_reuses_current_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
+        && grep -q "test_reentrant_followup_does_not_mask_replaced_agent" "$REPO/tests/gateway/test_busy_session_ack.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     mgs-busy-steer-ack-ptbr-*.patch)
       if grep -q "Mensagem adicionada à execução atual" "$REPO/gateway/run.py" \
         && grep -q "Vou considerá-la no próximo passo" "$REPO/tests/gateway/test_busy_session_ack.py"; then
@@ -197,6 +205,7 @@ apply_patch_if_needed "mgs-auto-reasoning-routing.patch"
 apply_patch_if_needed "mgs-busy-steer-universal-media-2026-07-10.patch"
 apply_patch_if_needed "mgs-busy-steer-startup-merge-2026-07-11.patch"
 apply_patch_if_needed "mgs-busy-steer-startup-race-hardening-2026-07-11.patch"
+apply_patch_if_needed "mgs-busy-steer-reentrant-followup-2026-07-12.patch"
 apply_patch_if_needed "mgs-busy-steer-ack-ptbr-2026-07-11.patch"
 apply_patch_if_needed "skill-view-compact-linked-files.patch"
 

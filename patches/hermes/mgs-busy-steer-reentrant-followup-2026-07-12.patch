@@ -1,0 +1,86 @@
+diff --git a/gateway/run.py b/gateway/run.py
+--- a/gateway/run.py
++++ b/gateway/run.py
+@@ -5466,18 +5466,23 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+                         f"startup steer preprocessing timed out for {session_key}"
+                     )
+                 condition.wait(timeout=remaining)
+-            if (
+-                self._running_agents.get(session_key)
+-                is not _AGENT_PENDING_SENTINEL
+-                or (
+-                    run_generation is not None
+-                    and not self._is_session_run_current(
+-                        session_key,
+-                        run_generation,
+-                    )
+-                )
+-            ):
++            current_agent = self._running_agents.get(session_key)
++            generation_current = (
++                run_generation is None
++                or self._is_session_run_current(session_key, run_generation)
++            )
++            # In-band queued follow-ups recurse through _run_agent while the
++            # outer turn still owns the same live agent/generation. Startup
++            # promotion already happened for that chain; treating this as an
++            # ownership loss aborts the valid follow-up with a generic error.
++            if current_agent is agent and generation_current:
++                return "", []
++            direct_unclaimed_run = run_generation is None and current_agent is None
++            if (
++                current_agent is not _AGENT_PENDING_SENTINEL
++                and not direct_unclaimed_run
++            ) or not generation_current:
+                 raise RuntimeError(
+                     f"startup agent promotion lost ownership for {session_key}"
+                 )
+             entries = sorted(
+diff --git a/tests/gateway/test_busy_session_ack.py b/tests/gateway/test_busy_session_ack.py
+--- a/tests/gateway/test_busy_session_ack.py
++++ b/tests/gateway/test_busy_session_ack.py
+@@ -883,6 +883,44 @@ class TestBusySessionAck:
+         assert runner._running_agents[sk] is agent
+         assert sk not in adapter._pending_messages
+ 
++    def test_reentrant_followup_promotion_reuses_current_agent(self):
++        """An in-band queued follow-up must not re-promote an already-owned agent."""
++        runner, _sentinel = _make_runner()
++        event = _make_event(text="follow-up")
++        sk = build_session_key(event.source)
++        agent = MagicMock()
++        runner._running_agents[sk] = agent
++        runner._session_run_generation[sk] = 1
++
++        payload, events = runner._promote_agent_and_consume_startup_steers(
++            sk,
++            agent,
++            1,
++        )
++
++        assert payload == ""
++        assert events == []
++        assert runner._running_agents[sk] is agent
++
++    def test_reentrant_followup_does_not_mask_replaced_agent(self):
++        """Only the exact current agent may bypass startup promotion."""
++        runner, _sentinel = _make_runner()
++        event = _make_event(text="follow-up")
++        sk = build_session_key(event.source)
++        current_agent = MagicMock()
++        replacement_agent = MagicMock()
++        runner._running_agents[sk] = current_agent
++        runner._session_run_generation[sk] = 1
++
++        with pytest.raises(RuntimeError, match="lost ownership"):
++            runner._promote_agent_and_consume_startup_steers(
++                sk,
++                replacement_agent,
++                1,
++            )
++
++        assert runner._running_agents[sk] is current_agent
++
+     @pytest.mark.asyncio
+     async def test_async_prepare_does_not_steer_into_replaced_agent(self):
+         """A completed preprocessor must revalidate agent identity/generation."""
