@@ -55,6 +55,8 @@ Services to check by default:
 
 ## Pitfalls
 
+- **Nunca conte pacotes a partir de linhas genéricas de `apt list --upgradable` com stderr mesclado.** O `apt` emite o warning de CLI instável e `Listing...`; um parser que só ignora a primeira linha pode reportar 2 pacotes quando existem 0. Para contagem estável, usar `apt-get -s upgrade` e contar somente linhas iniciadas por `Inst `.
+- **Todo alerta/relatório VPS que exibe atualizações deve renovar o índice APT imediatamente antes do POST.** Rodar `apt-get -o Acquire::Retries=1 update -qq` com timeout e então simular o upgrade. Não fazer isso em cada ciclo silencioso de 5 minutos. Se o refresh falhar, publicar estado `indisponível` em vez de reutilizar contagem em cache como atual.
 - Existing cron monitors do not necessarily cover raw VPS resource health. `monitor-service-restarts.sh` catches restart patterns but not “service inactive right now”, disk pressure, memory pressure, inode pressure, or recent reboot.
 - Do not send a fake/smoke Discord alert if current health is OK unless Rodolfo explicitly asks for a test notification. Validate with dry-run + real silent state creation.
 - Updating crontab/script/data/docs is infra: update `docs/CRONS.md`, `infra-inventory.json`, and REPORT-INFRA/audit before declaring completion.

@@ -107,6 +107,16 @@ Etapa  Ação
 7      Após copiar/mover/renomear, validar `01_READY`, mover o bruto para `99_LEGACY` e confirmar que a entrada contém só pendências.
 ```
 
+### Rastreabilidade obrigatória de renomeação
+
+Em **todo upload organizado pela Hera**, independentemente da origem (`UPLOAD MANUAL`, Discord, Canva ou outro intake autorizado):
+
+1. Registrar no inventário o par exato `source_filename → destination_filename`, junto com IDs de origem/destino quando existirem.
+2. Na resposta de conclusão ao solicitante, listar **cada arquivo** como `nome original → nome final em READY`.
+3. Em lotes grandes, separar por `IMG` e `VID`, mas nunca substituir a lista individual por apenas uma faixa de nomes.
+4. Quando a origem for um anexo Discord sem filename humano preservado, usar e identificar explicitamente o filename técnico/cache disponível; não inventar o nome original.
+5. Esse mapa é a chave humana para localizar o bruto preservado em `99_LEGACY` e deve acompanhar todas as entregas futuras.
+
 Inventário mínimo para plano de reestruturação:
 
 ```text
