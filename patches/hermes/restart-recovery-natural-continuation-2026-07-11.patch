@@ -1,0 +1,358 @@
+diff --git a/gateway/run.py b/gateway/run.py
+index 84c43de..1c0a55d 100644
+--- a/gateway/run.py
++++ b/gateway/run.py
+@@ -7060,18 +7060,18 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+             self._running_agents_ts[entry.session_key] = time.time()
+             self._persist_active_agents()
+ 
+-            # Internal recovery checkpoint — the _is_resume_pending branch in
+-            # _handle_message_with_agent prepends the proper reason-aware
+-            # system note before the turn runs.  The checkpoint text makes the
+-            # resumed turn idempotent: inspect/summarize; do NOT repeat the
+-            # side-effecting user request that may have caused the restart.
++            # Internal continuation event — the resume_pending branch turns
++            # this into a silent continuation directive.  The model must
++            # reconcile completed steps, finish outstanding requests in order,
++            # and answer normally as if the gateway had not interrupted it.
+             event = MessageEvent(
+                 text=(
+-                    "[Internal restart recovery checkpoint: the gateway just came "
+-                    "back online after interrupting a previous turn. Do not re-run "
+-                    "the prior user request or repeat side-effecting commands such "
+-                    "as restart/update/deploy. First inspect current state if needed, "
+-                    "then send one concise recovery/status message and stop.]"
++                    "[Internal continuation event: silently resume the interrupted "
++                    "work from the existing conversation state. Reconcile completed "
++                    "steps before acting so side effects are not duplicated. Finish "
++                    "all outstanding user requests in chronological order and deliver "
++                    "the normal final answer. Do not mention this event, the restart, "
++                    "recovery, or checkpoint unless the user explicitly asks.]"
+                 ),
+                 message_type=MessageType.TEXT,
+                 source=source,
+@@ -19329,37 +19329,45 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+                     if _reason == "shutdown_timeout"
+                     else "a gateway interruption"
+                 )
+-                _persist_user_message_override = message
+-                # The empty-message case is the auto-resume startup turn
+-                # synthesized by _schedule_resume_pending_sessions — there is
+-                # no NEW user message to address, so tell the model to report
+-                # recovery instead of the (nonexistent) "new message".
+-                if message:
++                _internal_auto_resume = bool(getattr(event, "internal", False))
++                # Internal startup continuation is transport machinery, not a
++                # user-authored message. Persist an empty override so the
++                # synthetic directive never reappears as Rodolfo's text.
++                _persist_user_message_override = "" if _internal_auto_resume else message
++                if _internal_auto_resume:
++                    _resume_guidance = (
++                        "Silently continue the interrupted work from the existing "
++                        "conversation state. Reconcile which steps and side effects "
++                        "already completed before acting, then finish every outstanding "
++                        "user request in chronological order and deliver the normal final "
++                        "answer as if uninterrupted. Do not mention the restart, recovery, "
++                        "checkpoint, or this system note unless the user explicitly asks."
++                    )
++                elif message:
+                     _resume_guidance = (
+-                        "Address the user's NEW message below FIRST and focus "
+-                        "on what the user is asking now."
++                        "First finish the interrupted work, reconciling completed steps "
++                        "so side effects are not duplicated. Then address the user's new "
++                        "message below in chronological order and produce one normal answer."
+                     )
+                 else:
+                     _resume_guidance = (
+-                        "Report to the user that the session was restored "
+-                        "successfully and ask what they would like to do next."
++                        "Silently continue and finish the interrupted work, then deliver "
++                        "the normal pending answer without announcing recovery."
+                     )
+                 message = (
+                     f"[System note: The previous turn was interrupted by "
+                     f"{_reason_phrase}; the gateway is now back online. "
+-                    f"Any restart/shutdown command in the history has already "
+-                    f"run — do NOT re-execute or verify it. {_resume_guidance} "
+-                    f"Do NOT re-execute old tool calls — skip any unfinished "
+-                    f"work from the conversation history.]"
+-                    + (f"\n\n{message}" if message else "")
++                    f"{_resume_guidance}]"
++                    + (f"\n\n{message}" if message and not _internal_auto_resume else "")
+                 )
+             elif _has_fresh_tool_tail:
+                 _persist_user_message_override = message
+                 message = (
+                     "[System note: A new message has arrived. The conversation "
+                     "history contains pending tool outputs from an interrupted turn. "
+-                    "IGNORE those pending results. Address the user's NEW message "
+-                    "below FIRST. Do NOT re-execute old tool calls from the history.]\n\n"
++                    "Continue the unfinished work from those outputs first, reconciling "
++                    "completed side effects before acting. Then address the user's new "
++                    "message below in chronological order. Do not announce the interruption.]\n\n"
+                     + message
+                 )
+ 
+@@ -19401,13 +19409,10 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+                 )
+                 message = (
+                     f"[System note: The previous turn was interrupted by "
+-                    f"{_sn_reason_phrase}; the gateway is now back online. "
+-                    f"Any restart/shutdown command in the history has already "
+-                    f"run — do NOT re-execute or verify it. Report to the user "
+-                    f"that the session was restored successfully and ask what "
+-                    f"they would like to do next. Do NOT re-execute old tool "
+-                    f"calls — skip any unfinished work from the conversation "
+-                    f"history.]"
++                    f"{_sn_reason_phrase}; the gateway is now back online. Silently "
++                    f"reconcile completed steps, continue all unfinished work in "
++                    f"chronological order, and deliver the normal pending answer. "
++                    f"Do not mention restart, recovery, or this note unless asked.]"
+                 )
+ 
+             _approval_session_key = session_key or ""
+@@ -19437,7 +19442,11 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+                     # override. Keep it aligned with what the model actually
+                     # receives so future turns retain startup follow-ups.
+                     if _persist_user_message_override is not None:
+-                        _persist_user_message_override = message
++                        _persist_user_message_override = (
++                            _startup_payload
++                            if _is_resume_pending and getattr(event, "internal", False)
++                            else message
++                        )
+                     logger.info(
+                         "Merged %d startup steer follow-up(s) into active turn for session %s",
+                         len(_startup_events),
+diff --git a/tests/gateway/test_restart_resume_pending.py b/tests/gateway/test_restart_resume_pending.py
+index e8e18b7..1547660 100644
+--- a/tests/gateway/test_restart_resume_pending.py
++++ b/tests/gateway/test_restart_resume_pending.py
+@@ -151,6 +151,7 @@ def _simulate_note_injection(
+     )
+ 
+     if is_resume_pending:
++        internal_auto_resume = user_message.startswith("[Internal continuation event:")
+         reason = getattr(resume_entry, "resume_reason", None) or "restart_timeout"
+         reason_phrase = (
+             "a gateway restart"
+@@ -159,31 +160,33 @@ def _simulate_note_injection(
+             if reason == "shutdown_timeout"
+             else "a gateway interruption"
+         )
+-        if message:
++        if internal_auto_resume:
+             resume_guidance = (
+-                "Address the user's NEW message below FIRST and focus "
+-                "on what the user is asking now."
++                "Silently continue the interrupted work from the existing conversation state. "
++                "Reconcile completed steps before acting, finish all outstanding user requests "
++                "in chronological order, and deliver the normal final answer without announcing recovery."
++            )
++        elif message:
++            resume_guidance = (
++                "First finish the interrupted work without duplicating completed side effects, "
++                "then address the user's new message in chronological order."
+             )
+         else:
+             resume_guidance = (
+-                "Report to the user that the session was restored "
+-                "successfully and ask what they would like to do next."
++                "Silently continue and finish the interrupted work, then deliver the normal pending answer."
+             )
+         message = (
+             f"[System note: The previous turn was interrupted by "
+             f"{reason_phrase}; the gateway is now back online. "
+-            f"Any restart/shutdown command in the history has already "
+-            f"run — do NOT re-execute or verify it. {resume_guidance} "
+-            f"Do NOT re-execute old tool calls — skip any unfinished "
+-            f"work from the conversation history.]"
+-            + (f"\n\n{message}" if message else "")
++            f"{resume_guidance}]"
++            + (f"\n\n{message}" if message and not internal_auto_resume else "")
+         )
+     elif has_fresh_tool_tail:
+         message = (
+             "[System note: A new message has arrived. The conversation "
+             "history contains pending tool outputs from an interrupted turn. "
+-            "IGNORE those pending results. Address the user's NEW message "
+-            "below FIRST. Do NOT re-execute old tool calls from the history.]\n\n"
++            "Continue unfinished work first without duplicating completed side effects, "
++            "then address the user's new message in chronological order.]\n\n"
+             + message
+         )
+ 
+@@ -206,12 +209,9 @@ def _simulate_note_injection(
+         message = (
+             f"[System note: The previous turn was interrupted by "
+             f"{sn_reason_phrase}; the gateway is now back online. "
+-            f"Any restart/shutdown command in the history has already "
+-            f"run — do NOT re-execute or verify it. Report to the user "
+-            f"that the session was restored successfully and ask what "
+-            f"they would like to do next. Do NOT re-execute old tool "
+-            f"calls — skip any unfinished work from the conversation "
+-            f"history.]"
++            f"Silently reconcile completed steps, continue all unfinished work in "
++            f"chronological order, and deliver the normal pending answer without "
++            f"announcing recovery.]"
+         )
+     return message
+ 
+@@ -506,8 +506,8 @@ class TestResumePendingSystemNote:
+         )
+         assert "[System note:" in result
+         assert "gateway restart" in result
+-        assert "NEW message" in result
+-        assert "Do NOT re-execute" in result
++        assert "finish the interrupted work" in result
++        assert "chronological order" in result
+         assert "what happened?" in result
+ 
+     def test_resume_pending_shutdown_note_mentions_shutdown(self):
+@@ -532,7 +532,8 @@ class TestResumePendingSystemNote:
+         result = _simulate_note_injection(history, "ping", resume_entry=entry)
+         assert "[System note:" in result
+         assert "gateway restart" in result
+-        assert "NEW message" in result
++        assert "finish the interrupted work" in result
++        assert "chronological order" in result
+ 
+     def test_resume_pending_subsumes_tool_tail_note(self):
+         """When BOTH conditions are true, the restart-resume note wins —
+@@ -552,7 +553,7 @@ class TestResumePendingSystemNote:
+         assert "haven't responded to yet" not in result
+ 
+     def test_no_resume_pending_preserves_tool_tail_note(self):
+-        """Regression: the old PR #9934 tool-tail behaviour is unchanged."""
++        """Fresh tool tails continue before the newly arrived message."""
+         history = [
+             {"role": "assistant", "content": None, "tool_calls": [
+                 {"id": "c1", "function": {"name": "x", "arguments": "{}"}},
+@@ -563,7 +564,8 @@ class TestResumePendingSystemNote:
+         result = _simulate_note_injection(history, "ping", resume_entry=None)
+         assert "[System note:" in result
+         assert "pending tool outputs" in result
+-        assert "Do NOT re-execute" in result
++        assert "Continue unfinished work first" in result
++        assert "chronological order" in result
+ 
+     def test_stale_resume_pending_does_not_inject_restart_note(self):
+         """Old restart markers must not revive an unrelated stale task.
+@@ -667,7 +669,8 @@ class TestResumePendingSystemNote:
+         result = _simulate_note_injection(history, "ping", resume_entry=None)
+         assert "[System note:" in result
+         assert "pending tool outputs" in result
+-        assert "Do NOT re-execute" in result
++        assert "Continue unfinished work first" in result
++        assert "chronological order" in result
+ 
+     def test_stale_tool_tail_does_not_inject_auto_continue_note(self):
+         """The core bug fix: stale tool-tail must not revive a dead task.
+@@ -759,7 +762,7 @@ class TestResumePendingSystemNote:
+         )
+         assert "[System note:" in result
+         assert "pending tool outputs" in result
+-        assert "Do NOT re-execute" in result
++        assert "Continue unfinished work first" in result
+ 
+     def test_legacy_history_without_timestamps_still_injects(self):
+         """Transcripts predating timestamp persistence must keep the old
+@@ -773,7 +776,7 @@ class TestResumePendingSystemNote:
+         result = _simulate_note_injection(history, "ping", resume_entry=None)
+         assert "[System note:" in result
+         assert "pending tool outputs" in result
+-        assert "Do NOT re-execute" in result
++        assert "Continue unfinished work first" in result
+ 
+     def test_no_note_when_nothing_to_resume(self):
+         history = [
+@@ -783,11 +786,8 @@ class TestResumePendingSystemNote:
+         result = _simulate_note_injection(history, "ping", resume_entry=None)
+         assert result == "ping"
+ 
+-    def test_resume_pending_note_warns_against_reexecuting_restart(self):
+-        """The resume-pending note tells the model any restart/shutdown
+-        command in the history already ran and must not be re-executed or
+-        verified — the cognitive backstop to the source-level tail strip.
+-        """
++    def test_resume_pending_note_reconciles_before_continuing(self):
++        """The resume note preserves order without duplicating side effects."""
+         entry = self._pending_entry(reason="restart_timeout")
+         result = _simulate_note_injection(
+             history=[
+@@ -798,14 +798,12 @@ class TestResumePendingSystemNote:
+         )
+         assert "[System note:" in result
+         assert "back online" in result
+-        assert "already" in result and "do NOT re-execute or verify" in result
++        assert "without duplicating completed side effects" in result
++        assert "chronological order" in result
+         assert "restarted!" in result
+ 
+-    def test_resume_pending_empty_message_reports_recovery(self):
+-        """On the empty-message auto-resume startup turn there is no NEW user
+-        message, so the note instructs the model to report recovery and ask
+-        for instructions rather than 'address the user's NEW message'.
+-        """
++    def test_resume_pending_empty_message_continues_silently(self):
++        """Empty startup continuation finishes pending work without chatter."""
+         entry = self._pending_entry(reason="restart_timeout")
+         result = _simulate_note_injection(
+             history=[
+@@ -816,14 +814,31 @@ class TestResumePendingSystemNote:
+         )
+         assert "[System note:" in result
+         assert "gateway restart" in result
+-        assert "restored successfully" in result
+-        assert "ask what they would like to do next" in result
+-        assert "do NOT re-execute or verify" in result
+-        # No phantom "NEW message" instruction when there is no new message.
++        assert "Silently continue and finish the interrupted work" in result
++        assert "normal pending answer" in result
++        assert "ask what" not in result
+         assert "NEW message" not in result
+         # Nothing appended after the closing bracket (no empty user text).
+         assert result.rstrip().endswith("]")
+ 
++    def test_internal_continuation_event_is_not_exposed_as_user_text(self):
++        """Startup transport text is consumed internally, never echoed as a request."""
++        entry = self._pending_entry(reason="restart_timeout")
++        transport_event = (
++            "[Internal continuation event: silently resume the interrupted work "
++            "from the existing conversation state.]"
++        )
++        result = _simulate_note_injection(
++            history=[
++                {"role": "assistant", "content": "in progress", "timestamp": time.time()},
++            ],
++            user_message=transport_event,
++            resume_entry=entry,
++        )
++        assert transport_event not in result
++        assert "Silently continue the interrupted work" in result
++        assert "chronological order" in result
++        assert "normal final answer" in result
+ 
+ 
+ # ---------------------------------------------------------------------------
+@@ -1072,8 +1087,8 @@ async def test_startup_auto_resume_schedules_fresh_pending_sessions():
+     assert event.internal is True
+     assert event.message_type == MessageType.TEXT
+     assert event.source == source
+-    # MGS checkpoint text makes auto-resume idempotent: recover/status only, do not re-run side effects.
+-    assert event.text == '[Internal restart recovery checkpoint: the gateway just came back online after interrupting a previous turn. Do not re-run the prior user request or repeat side-effecting commands such as restart/update/deploy. First inspect current state if needed, then send one concise recovery/status message and stop.]' 
++    # MGS continuation resumes pending work in order without recovery chatter.
++    assert event.text == '[Internal continuation event: silently resume the interrupted work from the existing conversation state. Reconcile completed steps before acting so side effects are not duplicated. Finish all outstanding user requests in chronological order and deliver the normal final answer. Do not mention this event, the restart, recovery, or checkpoint unless the user explicitly asks.]' 
+ 
+ 
+ @pytest.mark.asyncio
+@@ -1359,7 +1374,7 @@ async def test_reconnect_reschedules_pending_after_late_platform_connect():
+     assert isinstance(event, MessageEvent)
+     assert event.internal is True
+     assert event.message_type == MessageType.TEXT
+-    assert event.text == '[Internal restart recovery checkpoint: the gateway just came back online after interrupting a previous turn. Do not re-run the prior user request or repeat side-effecting commands such as restart/update/deploy. First inspect current state if needed, then send one concise recovery/status message and stop.]'
++    assert event.text == '[Internal continuation event: silently resume the interrupted work from the existing conversation state. Reconcile completed steps before acting so side effects are not duplicated. Finish all outstanding user requests in chronological order and deliver the normal final answer. Do not mention this event, the restart, recovery, or checkpoint unless the user explicitly asks.]'
+     assert event.source == source
+ 
+ 
