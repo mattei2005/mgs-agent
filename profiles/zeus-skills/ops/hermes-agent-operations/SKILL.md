@@ -72,11 +72,13 @@ Primary reference: `references/image-video-generation.md`.
 
 Hera owns routine creative production. Zeus audits/configures but does not become the default creative executor unless Rodolfo asks.
 
-### Command approvals or messages received while an agent is busy
+### Command approvals, busy messages, or continuation after gateway restart
 
 Primary reference: `references/gateway-approvals-busy-input.md`.
 
-This branch covers `approvals.mode`, `busy_input_mode`, steering, text/image/audio/file payloads, and gateway runtime behavior.
+For implementation-level steering, startup races, multimedia preservation, and silent chronological continuation after a gateway restart, also load `references/hermes-busy-input-steering-mgs.md`.
+
+This branch covers `approvals.mode`, `busy_input_mode`, steering, text/image/audio/file payloads, restart auto-resume, and gateway runtime behavior. After a restart interrupts an active turn, reconcile completed side effects, finish pending requests in chronological order, and deliver the normal answer without exposing or attributing synthetic checkpoint text to the user.
 
 ### Session reset, context compression, Discord progress, or response formatting
 
