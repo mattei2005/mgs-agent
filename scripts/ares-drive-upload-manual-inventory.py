@@ -342,7 +342,7 @@ def build_summary(rows: list[dict[str, Any]], folder_count: int) -> dict[str, An
     duplicate_files = sum(count for count in by_md5.values() if count > 1)
     return {
         "generated_at_utc": dt.datetime.now(dt.UTC).isoformat(),
-        "source": "MGS-CRIATIVOS/UPLOAD_CANVAS",
+        "source": "MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL",
         "root_folder_id_sha256_12": hashlib.sha256(ROOT_FOLDER_ID.encode()).hexdigest()[:12],
         "files": len(rows),
         "folders": folder_count,
@@ -362,9 +362,9 @@ def build_summary(rows: list[dict[str, Any]], folder_count: int) -> dict[str, An
 def write_outputs(rows: list[dict[str, Any]], summary: dict[str, Any], out_dir: Path) -> dict[str, str]:
     out_dir.mkdir(parents=True, exist_ok=True)
     stamp = dt.datetime.now(dt.UTC).strftime("%Y%m%dT%H%M%SZ")
-    csv_path = out_dir / f"upload-canvas-inventory-{stamp}.csv"
-    json_path = out_dir / f"upload-canvas-summary-{stamp}.json"
-    md_path = out_dir / f"upload-canvas-summary-{stamp}.md"
+    csv_path = out_dir / f"upload-manual-inventory-{stamp}.csv"
+    json_path = out_dir / f"upload-manual-summary-{stamp}.json"
+    md_path = out_dir / f"upload-manual-summary-{stamp}.md"
     fields = list(rows[0].keys()) if rows else []
     with csv_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fields)
@@ -376,7 +376,7 @@ def write_outputs(rows: list[dict[str, Any]], summary: dict[str, Any], out_dir: 
 
 
 def render_markdown(summary: dict[str, Any]) -> str:
-    lines = ["# UPLOAD_CANVAS inventory summary", "", f"Generated UTC: {summary['generated_at_utc']}", "", "## Totals", ""]
+    lines = ["# UPLOAD MANUAL inventory summary", "", f"Generated UTC: {summary['generated_at_utc']}", "", "## Totals", ""]
     lines += [f"- Files: {summary['files']}", f"- Folders: {summary['folders']}", f"- Bytes: {summary['bytes']}", f"- Duplicate MD5 groups: {summary['duplicate_md5_groups']}", f"- Duplicate MD5 files: {summary['duplicate_md5_files']}", ""]
     for key in ["by_format", "by_extension", "by_vertical_guess", "by_language_guess", "by_placement_fit", "by_dimension_top20"]:
         lines += [f"## {key}", "", "```text"]
@@ -393,7 +393,7 @@ def render_markdown(summary: dict[str, Any]) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--out-dir", default="/root/mgs-agent/data/ares/creative-inventory")
+    parser.add_argument("--out-dir", default="/root/mgs-agent/data/ares/creative-ops/intake")
     args = parser.parse_args()
     load_env()
     item = get_op_item_json()

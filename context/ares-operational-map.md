@@ -31,6 +31,7 @@ Tráfego direto CBO/UTM                  direct-traffic-cbo-operations/SKILL.md
 Sanitizador metadata                    /root/mgs-agent/docs/CREATIVE_METADATA_SANITIZER.md
 Dados criativos                         /root/mgs-agent/data/ares/creative-ops/
 Inventário unificado                    /root/mgs-agent/data/ares/creative-ops/inventory/assets.jsonl
+Intake Drive read-only                  /root/mgs-agent/scripts/ares-drive-upload-manual-inventory.py
 Dados Meta Ads                          /root/mgs-agent/data/ares/meta-ads/
 Scripts Ares                            /root/mgs-agent/scripts/ares-*
 Logs Ares                               /root/.hermes/profiles/ares/logs/
