@@ -130,6 +130,13 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    mgs-busy-steer-ack-ptbr-*.patch)
+      if grep -q "Mensagem adicionada à execução atual" "$REPO/gateway/run.py" \
+        && grep -q "Vou considerá-la no próximo passo" "$REPO/tests/gateway/test_busy_session_ack.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     skill-view-compact-linked-files.patch)
       if grep -q "def _linked_files_for_view" "$REPO/tools/skills_tool.py" \
         && grep -q '"linked_files_summary"' "$REPO/tools/skills_tool.py" \
@@ -180,6 +187,7 @@ apply_patch_if_needed "mgs-auto-reasoning-routing.patch"
 apply_patch_if_needed "mgs-busy-steer-universal-media-2026-07-10.patch"
 apply_patch_if_needed "mgs-busy-steer-startup-merge-2026-07-11.patch"
 apply_patch_if_needed "mgs-busy-steer-startup-race-hardening-2026-07-11.patch"
+apply_patch_if_needed "mgs-busy-steer-ack-ptbr-2026-07-11.patch"
 apply_patch_if_needed "skill-view-compact-linked-files.patch"
 
 # Invariants that must survive every Hermes update. If any grep fails, the
@@ -278,6 +286,10 @@ grep -q "test_startup_barrier_waits_and_preserves_arrival_order" "$REPO/tests/ga
   || fail "missing MGS startup steer async FIFO/barrier test"
 grep -q "test_async_prepare_does_not_steer_into_replaced_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
   || fail "missing MGS stale-agent busy steer regression test"
+grep -q "Mensagem adicionada à execução atual" "$REPO/gateway/run.py" \
+  || fail "missing MGS PT-BR busy-steer acknowledgment"
+grep -q "Vou considerá-la no próximo passo" "$REPO/tests/gateway/test_busy_session_ack.py" \
+  || fail "missing MGS PT-BR busy-steer acknowledgment regression test"
 grep -q "Image attached at:" "$REPO/gateway/run.py" \
   || fail "missing MGS mid-turn image path marker"
 grep -q "def _linked_files_for_view" "$REPO/tools/skills_tool.py" \

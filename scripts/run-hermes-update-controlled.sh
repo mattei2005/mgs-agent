@@ -265,6 +265,7 @@ readonly_invariant_check() {
       "$runpy::def _resolve_turn_reasoning_config" \
       "$runpy::async def _prepare_busy_steer_payload" \
       "$runpy::for_mid_turn_steer" \
+      "$runpy::Mensagem adicionada à execução atual" \
       "$reasoning_router::def route_reasoning_config" \
       "$adapter::async def delete_message"; do
       file="${spec%%::*}"
@@ -307,6 +308,7 @@ check_patches_against_upstream() {
       "mgs-busy-steer-universal-media-2026-07-10.patch"
       "mgs-busy-steer-startup-merge-2026-07-11.patch"
       "mgs-busy-steer-startup-race-hardening-2026-07-11.patch"
+      "mgs-busy-steer-ack-ptbr-2026-07-11.patch"
     )
     for name in "${canonical_patches[@]}"; do
       [[ -n "$name" ]] || continue

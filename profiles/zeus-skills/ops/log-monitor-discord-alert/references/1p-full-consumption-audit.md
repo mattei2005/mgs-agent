@@ -55,14 +55,35 @@ observed_per_30d = observed_per_day × 30
 
 Compare both hourly and account-daily limits. The daily limit can fail even when the hourly window looks safe. Project exhaustion time and compare it with the account reset time.
 
+If the token-hour row has `used=0` and `reset=0` because the hourly window just rolled over, do not report an observed rate of zero. Use the account-daily row instead:
+
+```text
+elapsed_daily_seconds = 86400 - account_reset
+observed_per_hour = account_used / elapsed_daily_seconds × 3600
+```
+
+Label this as a daily-window average, not an instantaneous hourly rate. Near the daily reset, it is usually the best live reconciliation source.
+
+Shell pitfall: never pipe JSON into `python3 - <<'PY' ...`; the heredoc owns stdin and the piped JSON is lost. Use `python3 -c`, a temporary file, or pass the JSON path as an argument.
+
 The rate-limit query itself is a request. Keep production monitoring low-frequency; MGS canonical rate-limit monitor cadence is once per hour, with transition-only anti-spam alerts at 50% and critical at 90%.
 
 ## Consumer classification
 
-- **Fixed:** credential lookup occurs on every run.
+- **Fixed:** credential lookup occurs on every successful run.
 - **Conditional/lazy:** credential is fetched only when an alert/recovery or other branch executes. Verify call sites, not just literal `op` strings.
 - **Event-driven:** e.g. Git post-commit hook; estimate from actual event counts over 24h and 7d.
 - **On-demand:** manual agent tasks, diagnostics and DTR sweeps; exclude from fixed baseline but report potential burst cost.
+- **Enabled but ineffective:** scheduler entry is enabled, but the current execution fails before reaching `op`. Count its current effective consumption as zero, report the failure separately, and show the additional projection if restored. Never silently include a broken job in the “as running today” baseline.
+- **Autonomous zero-1Password:** scheduled jobs that operate from local OAuth, dedicated SSH/deploy keys, bot credentials already local to the profile, cached browser state, or purely local checks. List these explicitly in a system-wide audit; Rodolfo wants visibility into what Zeus runs autonomously even when it costs zero 1Password requests.
+
+For recurring jobs, distinguish three totals:
+
+1. **Configured nominal:** what all enabled schedules would consume if their intended code paths completed.
+2. **Effective current:** only jobs that actually reached the credential path in the inspected period.
+3. **Observed account:** live account counter normalized by elapsed time.
+
+A strong reconciliation is when effective current approximately matches the account counter. Explain the residual as conditional alerts, manual/on-demand work, telemetry timing, or the audit probes themselves; do not force exact equality.
 
 ## Optimization priorities
 
