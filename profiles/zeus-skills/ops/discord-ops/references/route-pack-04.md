@@ -73,3 +73,18 @@ Detalhe/pitfall validado: `references/report-infra-embed-no-mention-no-thread-20
 
 Formato legado em texto não deve mais ser publicado. Adaptadores antigos precisam converter seus campos para o helper canônico. Depois de sucesso do helper, nunca enviar o mesmo report novamente por `send_message` ou resposta comum.
 
+### Diagnóstico e padronização de layout misto
+
+Quando Rodolfo perguntar por que alguns reports estão “bonitos” e outros aparecem como texto cru:
+
+1. Buscar as mensagens recentes no canal e comparar os caminhos de entrega.
+2. Mensagem com `content` vazio pode ser um embed válido; confirmar por readback da API (`embeds`, título e fields), não classificar como vazia só pela listagem resumida da ferramenta.
+3. Mensagem com `[REPORT-INFRA]` no `content` veio de fluxo legado ou de uma segunda resposta direta do agente.
+4. Se embed e texto aparecem com poucos segundos de diferença para a mesma ação, tratar como duplicidade: helper canônico + publicação manual posterior.
+5. Para corrigir toda a classe, atualizar a regra global MGS, SOUL/instruções dos agentes e adaptadores legados; não basta mudar apenas a aparência de um script.
+6. Preservar compatibilidade convertendo inputs legados (`Ação`, `Tipo`, `Path`, `Motivo`, `Evidência`) para o helper canônico, em vez de manter um segundo transporte em texto.
+7. Validar com `bash -n`, dry-run do helper, dry-run do adaptador legado e um único envio real com readback: `content == ""`, exatamente um embed e fields esperados.
+8. Nunca reiniciar agentes durante outras threads ativas quando Rodolfo pedir para aguardar; a mudança de scripts vale imediatamente, enquanto instruções já carregadas em sessões antigas só ficam integralmente vigentes em sessões novas ou após restart autorizado.
+
+Regra de comunicação: explicar que a mudança é interna da MGS, não uma alteração estrutural do Hermes. Se a implementação exigir editar `AGENT.md` ou skills de outros agentes, aplicar o Critical Subset e obter a confirmação adicional antes da escrita.
+

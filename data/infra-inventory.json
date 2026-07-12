@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-12T12:39:52-04:00",
+    "updated_at": "2026-07-12T12:43:05-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1316,28 +1316,28 @@
       "updated_at": "2026-07-10T05:32:59.005815+00:00"
     },
     {
-      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.2-20260710",
+      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.3-20260712",
       "agent": "zeus",
       "type": "wordpress_plugin",
       "site": "creditoparaveiculo.com",
       "host": "RunCloud Inc02",
       "path": "/home/runcloud2/webapps/creditoparaveiculo/wp-content/plugins/mgs-quiz-carro/",
       "plugin": "mgs-quiz-carro",
-      "version": "1.7.2",
+      "version": "1.7.3",
       "status": "active",
-      "feature": "Quiz car BR + custo, receita líquida e ROI estimado SMS por período",
-      "package_sha256": "d8eb20f40931a6d82a3ac98f73d0b90d9c7d51cb045c9f524ebb210413543ba8",
-      "backup_path": "/home/runcloud2/backups/creditoparaveiculo/mgs-quiz-carro-1.7.1-20260711T013155Z",
+      "feature": "Quiz car BR + custo, receita líquida e ROI estimado SMS por período + seletor visual de intervalo",
+      "package_sha256": "072ff6e31b742fc7c6279bbaf437d9b25279361dc21d24d009d360c339457a1c",
+      "backup_path": "/home/runcloud2/backups/creditoparaveiculo/mgs-quiz-carro-1.7.2-20260712T163948Z",
       "files": [
         {
           "path": "mgs-quiz-carro.php",
-          "sha256": "1b1d58bd9abe125698ec2332f1f70660ac884b805bb73b6e891a9efa5fc1b422",
+          "sha256": "2377bbbd34e840b67ce65294310aae334342da0234e7808d9b61cdbd77111a7a",
           "bytes": 2579
         },
         {
           "path": "includes/class-mgs-quiz-admin.php",
-          "sha256": "e5e35596577cf1361f95200d2c9bf54d266f1450256c27ecd61b998aa3764119",
-          "bytes": 84707
+          "sha256": "a8ed43209594fdb525b4e56cbef1ace1f6abaa018f4fda9d49355a3fff3d85d9",
+          "bytes": 96926
         },
         {
           "path": "includes/class-mgs-quiz-activator.php",
@@ -1345,8 +1345,8 @@
           "bytes": 5549
         }
       ],
-      "validation": "PHP lint 11/11; default from/to both 2026-07-09 in WP timezone at validation time; explicit date/ROI/revenue regressions pass; four quiz routes HTTP 200",
-      "updated_at": "2026-07-11T01:32:47.392845+00:00",
+      "validation": "PHP lint 7/7; calendar source test 18/18; local browser presets/custom range and zero JS errors; production revenue/ROI/default-date/calendar-marker smoke passed; four quiz routes HTTP 200; remote temp cleanup passed",
+      "updated_at": "2026-07-12T16:41:22Z",
       "db_version": "1.3.0",
       "sms_revenue_backfill": {
         "table": "wp_mgs_quiz_sms_revenue",
@@ -1377,6 +1377,24 @@
         "to": "previous day",
         "timezone": "WordPress site timezone",
         "explicit_query_dates_preserved": true
+      },
+      "date_range_picker": {
+        "desktop_months": 2,
+        "mobile_months": 1,
+        "presets": [
+          "today",
+          "yesterday",
+          "last7",
+          "last30",
+          "thisMonth",
+          "lastMonth",
+          "custom"
+        ],
+        "ignored_reference_features": [
+          "compare_to",
+          "730_day_limit_message"
+        ],
+        "query_contract": "existing from/to GET parameters preserved"
       }
     },
     {
@@ -5590,8 +5608,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 3157,
-      "md5": "676ce5ac9748b4dc7d20fc55ebe28f70",
-      "modified_at": "2026-07-12T12:37:02-04:00"
+      "md5": "c2e90b2ded2bed2bd4c20ef70fc283e6",
+      "modified_at": "2026-07-12T12:42:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -5602,8 +5620,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "dd70d5da9c7ba1664beb83ff469d0c0e",
-      "modified_at": "2026-07-12T12:26:32-04:00"
+      "md5": "d1ee410dcb949a1d2e545364e1772928",
+      "modified_at": "2026-07-12T12:41:31-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -5680,8 +5698,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 26068,
-      "md5": "d259da491889a331468520542562be7a",
-      "modified_at": "2026-07-12T12:35:01-04:00"
+      "md5": "3def4e9c8573f0a6f57fa62e102226b9",
+      "modified_at": "2026-07-12T12:40:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -5703,9 +5721,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 244500,
-      "md5": "0d998ef5822532978d8a49e8cc976795",
-      "modified_at": "2026-07-12T11:54:40-04:00"
+      "size_bytes": 245034,
+      "md5": "883ef2f8fb151573dd9d18c186c2e4b9",
+      "modified_at": "2026-07-12T12:41:56-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -5825,7 +5843,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "e1519f4c8839ee7fc15b7ba86f910e42",
-      "modified_at": "2026-07-12T12:36:01-04:00"
+      "modified_at": "2026-07-12T12:41:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -5853,9 +5871,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2250,
-      "md5": "29253f5225e29082f6ae00f9e59e03f8",
-      "modified_at": "2026-07-12T12:35:02-04:00"
+      "size_bytes": 2249,
+      "md5": "dd032ee6d80392ca1dfbaf251653936b",
+      "modified_at": "2026-07-12T12:40:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
@@ -5885,25 +5903,25 @@
       "path": "/root/mgs-agent/profiles/ares-soul.md",
       "size_bytes": 5603,
       "md5": "c7970c8d1ad6ff040e3955638872d302",
-      "modified_at": "2026-07-12T12:38:38-04:00"
+      "modified_at": "2026-07-12T12:40:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
       "size_bytes": 5210,
       "md5": "442e7697a8319f8aad24fda7f05bae67",
-      "modified_at": "2026-07-12T12:38:38-04:00"
+      "modified_at": "2026-07-12T12:40:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/hera-soul.md",
       "size_bytes": 5698,
       "md5": "fe18b4b617dd493c53489e9469b5150d",
-      "modified_at": "2026-07-12T12:38:39-04:00"
+      "modified_at": "2026-07-12T12:40:01-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
       "size_bytes": 7393,
       "md5": "ed8a55865215e860cb1799410dbdae74",
-      "modified_at": "2026-07-12T12:38:38-04:00"
+      "modified_at": "2026-07-12T12:40:01-04:00"
     }
   ],
   "mu_plugin_canonical": {

@@ -14,7 +14,7 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 
 `creditoparaveiculo.com` usa o plugin de quiz `mgs-quiz-carro`; não há plugin de chat nesse site. Quando Rodolfo disser “chat” informalmente sobre essas URLs, confirmar o produto real no runtime e tratar o pedido como quiz, sem envolver `mgs-chat-funnels`.
 
-Versão validada em produção em 2026-07-10: `mgs-quiz-carro` v1.6.2.
+Versão validada em produção em 2026-07-12: `mgs-quiz-carro` v1.7.3.
 
 Relatório de custo SMS v1.6.2:
 
@@ -120,6 +120,8 @@ Redirect split UI should be business-facing:
 - Tables should avoid narrow wrapping for gestor, SMS, phone.
 - After saving an edit, redirect back to the same edit screen (`admin.php?page=mgs-quiz-new&id=<id>&saved=1`), not to the quiz list, so the operator keeps context.
 - When the operator opens `admin.php?page=mgs-quiz-report` without explicit `from`/`to` query parameters, default both **Data inicial** and **Data final** to the previous calendar day in the WordPress site timezone. Explicitly submitted dates must remain unchanged.
+- The report date UI uses one business-facing `Período` control: two months side by side on desktop, one month on mobile, manual start/end selection, month navigation, Cancelar/Aplicar, and shortcuts for Hoje, Ontem, Últimos 7 dias, Últimos 30 dias, Este mês, Mês anterior, and Personalizado. It continues submitting the canonical `from`/`to` GET fields. Do not add the reference UI's `Compare to` section or 730-day-limit notice.
+- For `wp eval-file` report smoke tests, do not pass `--skip-plugins`: that prevents `MGS_Quiz_Admin` from loading. Historical smoke SQL must use the exact same date/publisher/domain scope rendered by the report; querying the entire revenue table becomes stale as the daily sync adds newer dates.
 
 ## SMS Cost Reporting
 
@@ -138,7 +140,7 @@ Decision confirmed by Rodolfo for this site/report:
 
 ## Smart Bidding SMS Revenue Backfill
 
-Production state validated on 2026-07-10: `mgs-quiz-carro` v1.7.2, schema version `1.3.0`, with `wp_mgs_quiz_sms_revenue` populated for closed dates from 2026-05-22 through 2026-07-09.
+Production state validated on 2026-07-12: `mgs-quiz-carro` v1.7.3, schema version `1.3.0`, with `wp_mgs_quiz_sms_revenue` populated for closed dates from 2026-05-22 onward by the daily sync.
 
 Keep Smart Bidding revenue distinct from estimated SMS cost and lead rows:
 
