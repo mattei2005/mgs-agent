@@ -42,6 +42,29 @@ Pitfalls:
 - Não confundir com `approvals.cron_mode`; cron continua separado e deve permanecer `deny` salvo pedido explícito.
 - Não usar `/yolo` como solução permanente para agente MGS; `/yolo` é sessão/processo. Config de profile é a correção durável.
 
+## 5.0.1 Caixas interativas `Hermes needs your input` / ferramenta `clarify`
+
+Essas caixas não são o gate técnico de `approvals.mode`. Elas aparecem quando o modelo chama a ferramenta `clarify`. Portanto, mudar somente `approvals.mode` ou escrever “não use caixas” no SOUL não garante a remoção: a ferramenta ainda pode estar exposta por `hermes-discord` ou por uma lista explícita em `platform_toolsets.discord`, e instruções de sistema da ferramenta podem vencer a preferência comportamental do SOUL.
+
+Quando Rodolfo pedir diálogo natural sem caixas de escolha em todos os agentes MGS:
+
+1. Manter a regra de comunicação natural no SOUL do agente.
+2. Desabilitar a capacidade no profile:
+
+```yaml
+agent:
+  disabled_toolsets:
+    - clarify
+```
+
+3. Atualizar o mirror versionado do config.
+4. Validar com o runtime Hermes que `_get_platform_tools(config, "discord")` não contém `clarify` e que `get_tool_definitions(..., disabled_toolsets=["clarify"])` não expõe a ferramenta.
+5. Não confundir prompt expirado de `clarify` com `Command Approval Required`.
+6. Um agente já em execução pode conservar o schema antigo até terminar o turno. A lista resolvida de toolsets participa da assinatura do cache; quando `clarify` deixa a lista resolvida, a próxima mensagem após o turno ativo reconstrói o agente sem a ferramenta. Não reiniciar gateway no meio de uma thread ativa apenas para isso.
+7. Registrar audit, inventário e REPORT-INFRA por ser mudança de config/comportamento transversal.
+
+Pitfall validado no Ares em 2026-07-12: `approvals.mode: off` e uma regra no SOUL estavam corretos, mas o Ares continuou exibindo `Hermes needs your input` porque `clarify` permanecia disponível no schema do agente já ativo. A correção efetiva foi desabilitar o toolset `clarify` em todos os profiles ativos e validar a resolução real, não apenas o YAML.
+
 ## 5.1 Mensagens enviadas enquanto o agente está ocupado
 
 Use quando o usuário disser que uma segunda mensagem enviada durante “digitando” só é processada depois da primeira resposta, ou quando quiser consolidar complementos no turno em andamento.

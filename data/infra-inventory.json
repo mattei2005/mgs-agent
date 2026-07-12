@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-12T14:57:45-04:00",
+    "updated_at": "2026-07-12T17:35:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1781,6 +1781,21 @@
       "description": "Transitive live DTR/SB collector imported by the daily match-audit cron. Uses persistent Smart Bidding storage state.",
       "validation": "2026-07-11 wrapper smoke --dry-run --no-post --limit-users 1 --limit-accounts 1 rc=0; durable storage state read successfully.",
       "updated_at": "2026-07-11T20:57:13-04:00"
+    },
+    {
+      "id": "mgs-disable-clarify-choice-boxes-20260712",
+      "agent": "zeus",
+      "type": "multi_profile_config_policy",
+      "profile_configs": [
+        "/root/.hermes/profiles/zeus/config.yaml",
+        "/root/.hermes/profiles/atena/config.yaml",
+        "/root/.hermes/profiles/ares/config.yaml"
+      ],
+      "setting": "agent.disabled_toolsets=[clarify]",
+      "purpose": "Preserve natural text dialogue by removing Hermes interactive choice boxes from all active MGS agents while keeping normal chat questions available.",
+      "validation": "Direct Discord readback confirmed Ares clarify boxes at messages 1525971625526693938 and 1525975978631987332; runtime resolver after correction returned CLARIFY_PRESENT=False for Zeus/Atena/Ares; live and versioned configs matched.",
+      "status": "deployed_no_restart_required_after_active_turn",
+      "updated_at": "2026-07-12T17:35:01-04:00"
     }
   ],
   "profile_skill_references": [

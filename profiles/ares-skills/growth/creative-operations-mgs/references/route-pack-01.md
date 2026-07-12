@@ -27,7 +27,7 @@ Use esta skill quando o usuário pedir para o Ares:
 - escrever roteiros de vídeo ou quebra de cenas;
 - adaptar uma ideia para feed, stories, reels, shorts ou banners;
 - organizar ou nomear assets de Canva/Drive;
-- reestruturar criativos baixados do Canva em `MGS-CRIATIVOS/UPLOAD CANVAS`;
+- processar criativos colocados em `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`;
 - validar taxonomia por vertical/operação; `CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}` é exemplo/piloto;
 - preparar criativos aprovados para o Ares;
 - preparar criativos organizados para uso direto por Kelly, Geizian ou gestores;

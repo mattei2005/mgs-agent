@@ -85,7 +85,9 @@ Raiz operacional atual validada:
 
 ```text
 MGS-AGENTS/CRIATIVOS/
-├── UPLOAD MANUAL
+├── UPLOAD MANUAL      # fila temporária, inclusive arquivos >10 MB
+├── GEIZIAN            # cópias para upload do gestor; ignorar no pool canônico
+├── LIBRARY META       # referências; nunca asset final automático
 └── <OPERAÇÃO>/
     ├── IMG/{01_READY,02_TESTING,03_TESTED,04_WINNERS,05_REJECTED,99_LEGACY}
     └── VID/{01_READY,02_TESTING,03_TESTED,04_WINNERS,05_REJECTED,99_LEGACY}
@@ -109,10 +111,11 @@ Modelo:
 ```
 
 - `VARIANT`: sempre `001–999`.
-- `P_ORIENT`: `PV/NV` vertical, `PS/NS` square, `PH/NH` horizontal.
+- `P_ORIENT`: somente `PV/NV` vertical e `PH/NH` square/feed 1:1 ou horizontal; `PS/NS` não entram em nomes finais.
 - `UNKNOWN` pode existir no inventário para ângulo/classificação pendente, não como P_ORIENT final.
 - status, site, gestor e IDs não entram no nome.
 - dimensão, placement e origem ficam no inventário.
+- idioma `BR` significa português do Brasil e é o padrão quando país=BR e o pedido diz apenas “Português”; `PT` significa português de Portugal explícito.
 
 ## 7. Metadata
 

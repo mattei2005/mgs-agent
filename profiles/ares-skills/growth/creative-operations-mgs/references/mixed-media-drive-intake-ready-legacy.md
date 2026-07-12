@@ -9,7 +9,7 @@ Use when an authorized request identifies country, vertical and language and ask
 3. Download the batch and build compact visual evidence:
    - one labeled image contact sheet;
    - for each video, a labeled strip with frames near 20%, 50% and 80%; inspect a final frame separately if the dominant claim remains unclear.
-4. Classify each asset from visible evidence: `IMG|VID`, dominant `ANGLE`, `PV|NV|PS|NS`, placement and exact operation code. For Brasil + CAR + Português without Portugal context, use `CAR_BR_BR`.
+4. Classify each asset from visible evidence: `IMG|VID`, dominant `ANGLE`, `PV|NV|PH|NH`, placement and exact operation code. Square/feed 1:1 uses `PH|NH` for final naming. For Brasil + CAR + Português without Portugal context, use `CAR_BR_BR`; use `PT` only when Portuguese-Portugal is explicit.
 5. Before assigning variants, list live READY filenames and calculate the next numeric variant per exact `(FORMAT, ANGLE, P_ORIENT)` group. Use three digits and preserve the real extension.
 6. For each item, in this order:
    - clean with the canonical sanitizer using `--agent ares`;

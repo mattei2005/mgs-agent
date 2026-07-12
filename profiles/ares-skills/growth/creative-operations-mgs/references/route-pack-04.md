@@ -19,10 +19,10 @@ CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
 Exemplos:
 
 ```text
-CC_US_ES_IMG_APROBACION_PS_01.jpg
-CC_US_ES_IMG_APROBACION_NS_02.jpg
-CC_US_ES_IMG_SIN_VERIFICACION_PV_01.jpg
-CC_US_ES_VID_CASHBACK_NV_01.mp4
+CC_US_ES_IMG_APROBACION_PH_001.jpg
+CC_US_ES_IMG_APROBACION_NH_002.jpg
+CC_US_ES_IMG_SIN_VERIFICACION_PV_001.jpg
+CC_US_ES_VID_CASHBACK_NV_001.mp4
 ```
 
 Campos:
@@ -32,8 +32,8 @@ Campo       Regra
 ──────────  ─────────────────────────────────────────────────────────────
 FORMAT      IMG ou VID.
 ANGLE       Dicionário controlado por operação; usar UNKNOWN se incerto.
-P_ORIENT    Para CC_US_ES, apenas PV, NV, PS ou NS.
-VARIANT     Sequencial 01, 02, 03...
+P_ORIENT    Somente PV, NV, PH ou NH; square/feed 1:1 usa PH/NH.
+VARIANT     Sequencial de 3 dígitos: 001, 002, 003...
 ext         Extensão real do arquivo.
 ```
 

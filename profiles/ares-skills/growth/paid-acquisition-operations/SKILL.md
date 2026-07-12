@@ -26,8 +26,8 @@ Completion criterion: only the procedure and evidence required for the current a
 ## Operational route packs
 
 - **Princípios → Caminho oficial: Canva Connect API** → `references/route-pack-01.md`
-- **Fallback: automação local no Windows → UPLOAD_CANVAS → Drive organizado com limpeza de metadata** → `references/route-pack-02.md`
-- **Continuação de classificação após limpeza de duplicatas → Meta Ads intraday / chatbot operations** → `references/route-pack-03.md`
+- **Fallback Canva local + intake atual `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`** → `references/route-pack-02.md`
+- **Precedentes históricos de `UPLOAD_CANVAS` + Meta Ads intraday** → `references/route-pack-03.md`
 - **Regras de decisão de campanha → Referências** → `references/route-pack-04.md`
 
 ## Context-efficiency guardrails

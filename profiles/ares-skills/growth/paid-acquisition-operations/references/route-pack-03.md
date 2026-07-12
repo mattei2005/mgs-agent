@@ -1,4 +1,6 @@
-### Continuação de classificação após limpeza de duplicatas
+> **Histórico:** as seções sobre `UPLOAD_CANVAS`, `videos2`, `imagens2` e backlog antigo documentam operações encerradas. A entrada ativa é `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`; não procurar nem recriar `UPLOAD_CANVAS`. Para intake atual, usar `creative-operations-mgs` route-pack-02.
+
+### Continuação de classificação após limpeza de duplicatas — precedente histórico
 
 Quando a pasta RAW tiver sido parcialmente ajustada a pedido explícito de Rodolfo — por exemplo, vídeos duplicados movidos de `cartao de credito/videos` para `videos2` — sempre recomeçar a classificação com inventário Drive read-only fresco. Não reutilizar CSV anterior para proposta final.
 

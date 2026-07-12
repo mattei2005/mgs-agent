@@ -33,52 +33,34 @@ Atenção: quando Canva baixa designs misturados com um único formato, static/v
 Detalhes técnicos, endpoints, scopes e estrutura piloto: `references/canva-connect-drive-creative-sync.md`.
 Detalhes técnicos, endpoints, scopes e estrutura piloto: `references/canva-connect-drive-creative-sync.md`.
 
-### Inventário read-only de UPLOAD_CANVAS e sanitizer
+### Intake Drive atual — `UPLOAD MANUAL`
 
-Quando Rodolfo já tiver subido criativos brutos para `MGS-CRIATIVOS/UPLOAD_CANVAS`, Ares deve começar por inventário read-only recursivo via Drive, não por mover/limpar/renomear arquivos. `UPLOAD_CANVAS` é RAW/original; preservar origem e classificar só com evidência. Se a vertical ficar majoritariamente `UNKNOWN`, não inventar por nome de gestor — fazer amostragem visual/read-only antes do plano final.
-
-Antes de usar criativo em campanha/teste, aplicar o gate de metadata: verificar com `/root/mgs-agent/scripts/clean-creative-metadata.sh verify`; se `clean=false`, limpar uma cópia/staging com `clean --agent ares`; se falhar, escalar antes de usar arquivo bruto. Não sanitizar Drive originals in-place.
-
-Detalhes do padrão, campos de inventário, duplicatas por MD5 e relatório infra: `references/upload-canvas-drive-inventory-and-sanitizer.md`.
-
-### Fallback sem Canva Enterprise/API privada
-
-Quando a API privada não for viável e o Canva bloquear automação no VPS, usar **automação local assistida** no computador do Rodolfo:
-
-1. Rodolfo roda um pacote local Node/Playwright.
-2. Login, senha e código de e-mail/MFA são digitados apenas por ele no navegador local — nunca no Discord.
-3. A primeira etapa é somente auditoria da pasta: screenshot, texto visível, HTML e inventário de elementos clicáveis.
-4. Só depois de revisar a auditoria adaptar o script para baixar estáticos como PNG/JPG e vídeos/animações como MP4.
-5. Se anexos `MEDIA:/...` não aparecerem no Discord, entregar o pacote como arquivos texto com caminho + conteúdo completo.
-
-Referência operacional: `references/canva-local-automation.md`.
-
-### UPLOAD_CANVAS → Drive organizado com limpeza de metadata
-
-Quando Rodolfo subir criativos brutos para `MGS-CRIATIVOS/UPLOAD_CANVAS`, a ordem correta é **organizar logicamente antes de limpar/copiar**:
-
-1. Manter `UPLOAD_CANVAS` como RAW/original intacto.
-2. Gerar inventário read-only recursivo.
-3. Classificar por vertical/operação → `IMG/VID` → placement/tamanho → idioma → status; gestor/origem fica em metadado, não como estrutura final.
-4. Deduplicar por checksum antes de limpar/copiar.
-5. Montar fila de cópia com destino proposto.
-6. Após aprovação explícita de Rodolfo para Drive write, baixar cada canônico, limpar metadata localmente, verificar `clean=true`, criar pastas destino e subir a versão limpa.
-7. Registrar relatório com source/destination IDs, hashes e status; parar em erro recorrente/quota/auth.
-
-Destino recomendado:
+A pasta operacional vigente é:
 
 ```text
-MGS-CRIATIVOS/<OPERATION>/<IMG|VID>/<FEED|STORY|LANDSCAPE|UNKNOWN>/<LANG>/<STATUS>/
+MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL
 ```
 
-Detalhes, pitfall de OAuth/Service Account, sanitizer MP4, comparação pós-reorganização manual e limpeza de pastas `01_READY_CANDIDATE`: `references/upload-canvas-drive-clean-copy.md`.
+`UPLOAD_CANVAS` foi removida após auditoria e aparece somente em referências históricas. Para qualquer pedido novo de tratar/classificar arquivos do Drive:
 
-Quando Rodolfo der autonomia explícita para resolver a fila inteira, reduza narração técnica intermediária: corrija/reinicie/retome com segurança, evite reportar cada alerta de processo em background, e volte ao usuário principalmente com bloqueio real ou relatório final consolidado. Se ele reorganizar manualmente o Drive, trate a nova estrutura dele como fonte de verdade antes de comparar/deletar.
-Long-runs com centenas de uploads exigem controle de processo único, refresh OAuth em `401`, reconciliação por `queue_id` e limpeza auditada de duplicados: `references/drive-clean-copy-long-run-recovery.md`.
-Para filas longas já aprovadas, usar o padrão de controlador/resume sem upload paralelo: `references/drive-bulk-upload-controller.md`.
-Para etapa final de organização, backlog `00_REVIEW`, promoção posterior para `01_READY_CANDIDATE`, validação de report e retry bounded quando 1Password/OAuth rate-limit bloquear, usar `references/drive-final-organization-review-and-promotion.md`. Nunca tratar `00_REVIEW` como pronto para campanha.
+1. Resolver a raiz `MGS-AGENTS` por API e depois localizar `CRIATIVOS/UPLOAD MANUAL`.
+2. Inventariar em modo read-only por Drive ID, nome, MIME, tamanho/checksum e dimensões.
+3. Usar a operação/vertical/idioma informados na thread; não inferir o destino apenas pelo nome.
+4. Para Brasil + “Português” sem qualificador, usar `LANG=BR`; `PT` é português de Portugal explícito.
+5. Classificar `P_ORIENT` somente como `PV`, `NV`, `PH` ou `NH`; square/feed 1:1 usa `PH/NH`.
+6. Sanitizar uma cópia com o gate canônico e exigir `clean=true`.
+7. Subir a cópia limpa diretamente em `{OPERAÇÃO}/{IMG|VID}/01_READY`, sem subpastas de placement/idioma.
+8. Validar o destino por readback; só então mover o original para `{OPERAÇÃO}/{IMG|VID}/99_LEGACY`, preservando ID/nome e sem deletar.
+9. Registrar `original_filename → canonical_filename`, IDs, checksums, reserva e elegibilidade.
 
-Para o fechamento final da organização Drive — promover `01_READY_CANDIDATE` para `01_READY`, zerar `REVIEW`, preservar `UPLOAD_CANVAS` como RAW e explicar a diferença entre RAW e cópias limpas — seguir `references/drive-final-ready-promotion-and-raw-preservation.md`. Pitfall crítico: em reports de clean-copy, `source_drive_id` é normalmente o RAW em `UPLOAD_CANVAS`; ações de promoção/rejeição devem recair sobre o `dest_drive_id` da cópia limpa, salvo pedido explícito de mexer no RAW.
+Pasta de apoio:
 
-Quando a nomenclatura já foi normalizada e Rodolfo disser para executar a organização final, seguir `references/upload-canvas-final-organization-after-naming.md`: inventário fresco, classificação visual dos pendentes, validação de variante 3 dígitos, fila final executor-compatible (`original_filename` obrigatório), dedup MD5, clean-copy com report e validação por status.
+```text
+GEIZIAN       cópias para upload do gestor; ignorar no pool/inventário canônico
+LIBRARY META  referências da Meta Library; nunca asset final automático
+```
+
+Procedimento detalhado: `creative-operations-mgs/references/route-pack-02.md` e `creative-operations-mgs/references/mixed-media-drive-intake-ready-legacy.md`.
+
+Os documentos com `upload-canvas-*` permanecem como precedentes históricos do backlog antigo. Não são rota ativa e não autorizam procurar/recriar `UPLOAD_CANVAS`.
 

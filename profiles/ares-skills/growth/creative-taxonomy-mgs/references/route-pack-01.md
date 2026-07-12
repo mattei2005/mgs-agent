@@ -28,7 +28,7 @@ Modelo base:
 Exemplos:
 
 ```text
-CC_CA_FR_IMG_APPROBATION_NS_001.jpg
+CC_CA_FR_IMG_APPROBATION_NH_001.jpg
 CC_CA_FR_IMG_WALLET_NH_001.png
 CC_CA_FR_VID_SANS_VERIFICATION_PV_001.mp4
 CC_US_ES_IMG_APROBACION_NV_001.jpg
@@ -41,7 +41,7 @@ Campo      | Regra
 -----------|----------------------------------------------------------
 VERTICAL   | Código da vertical: CC, CAR, EMP, JOB, APP, GAME etc.
 COUNTRY    | País alvo: US, CA, MX, BR etc.
-LANG       | Idioma do criativo: EN, ES, FR, DE, PT etc.
+LANG       | Idioma do criativo: EN, ES, FR, DE, BR, PT etc.
 FORMAT     | IMG ou VID
 ANGLE      | Ângulo controlado por operação/idioma
 P_ORIENT   | Código compacto de pessoa + orientação
@@ -64,6 +64,17 @@ Regras importantes:
 - Não colocar gestor/origem no nome.
 - Não colocar IDs longos no nome.
 - `drive_id`, `page_id`, `meta_creative_id`, `origin_campaign_id` e origem ficam no inventário/metadados.
+
+Regra MGS para português confirmada por Rodolfo em 2026-07-12:
+
+```text
+Código | Uso
+-------|------------------------------------------------------------
+BR     | Português do Brasil; padrão quando país=BR e o pedido diz apenas “Português”.
+PT     | Português de Portugal; usar quando PORTUGUÊS-PT/PT-PT for explícito.
+```
+
+Exemplos: `CAR_BR_BR` e `GAME_BR_BR` são operações válidas. `CAR_BR_PT`/`GAME_BR_PT` representam conteúdo em português de Portugal direcionado ao país BR quando isso for explicitamente solicitado.
 ## Verticais
 
 Códigos iniciais aceitos:
@@ -132,36 +143,32 @@ UNKNOWN               | Ângulo incerto; exige note
 ```
 ## P_ORIENT
 
-`P_ORIENT` combina presença de pessoa + formato/orientação visual. O inventário e os assets reais atuais usam códigos distintos para vertical, square e horizontal; não colapsar square em horizontal.
+`P_ORIENT` combina presença de pessoa + orientação visual. Regra executiva confirmada por Rodolfo em 2026-07-12: nomes finais usam somente quatro códigos; criativos square/feed 1:1 entram como horizontal/não vertical para fins de nomenclatura.
 
 ```text
 Código | Pessoa     | Orientação
 -------|------------|------------
 PV     | PERSON     | VERTICAL/STORY
 NV     | NO_PERSON  | VERTICAL/STORY
-PS     | PERSON     | SQUARE/FEED
-NS     | NO_PERSON  | SQUARE/FEED
-PH     | PERSON     | HORIZONTAL/LANDSCAPE
-NH     | NO_PERSON  | HORIZONTAL/LANDSCAPE
+PH     | PERSON     | HORIZONTAL/NÃO VERTICAL
+NH     | NO_PERSON  | HORIZONTAL/NÃO VERTICAL
 ```
 
 Códigos não permitidos no nome final:
 
 ```text
-PU, NU, UU, UNKNOWN
+PS, NS, PU, NU, UU, UNKNOWN
 ```
 
 Mapeamento operacional:
 
 ```text
-Código | Pessoa     | Orientação | Uso típico
--------|------------|------------|-------------------------
-PV     | PERSON     | VERTICAL   | Story/Reels 9:16
-NV     | NO_PERSON  | VERTICAL   | Story/Reels 9:16
-PS     | PERSON     | SQUARE     | Feed 1:1
-NS     | NO_PERSON  | SQUARE     | Feed 1:1
-PH     | PERSON     | HORIZONTAL | Landscape
-NH     | NO_PERSON  | HORIZONTAL | Landscape
+Código | Pessoa     | Formato visual      | Uso típico
+-------|------------|---------------------|-------------------------
+PV     | PERSON     | VERTICAL            | Story/Reels 9:16
+NV     | NO_PERSON  | VERTICAL            | Story/Reels 9:16
+PH     | PERSON     | SQUARE/HORIZONTAL   | Feed 1:1 ou landscape
+NH     | NO_PERSON  | SQUARE/HORIZONTAL   | Feed 1:1 ou landscape
 ```
 
 Se pessoa ou orientação não puderem ser determinados com segurança, marcar revisão no inventário em vez de criar nome final incorreto. Não usar código `UNKNOWN` no nome final.
@@ -198,4 +205,4 @@ Status / Pasta       | Uso
 01_READY_CANDIDATE   | Candidato pronto após organização automática
 ```
 
-Para organização bruta de backlog, pode existir `UPLOAD_CANVAS` como RAW. Essa pasta deve ser preservada intacta salvo pedido explícito do Rodolfo para mover/deletar duplicatas.
+A entrada operacional atual é `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`. Ela é uma fila temporária para arquivos enviados fora do Discord, especialmente IMG/VID acima de 10 MB. Depois que a versão limpa for validada no `01_READY` correto, mover o original para `99_LEGACY` sem deletar. `UPLOAD_CANVAS` não existe mais e aparece somente em referências históricas.

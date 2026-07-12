@@ -35,7 +35,9 @@ Estrutura de referência por vertical/operação. `CC_US_ES` é exemplo/piloto; 
 
 ```text
 MGS-AGENTS/CRIATIVOS/
-├── UPLOAD MANUAL
+├── UPLOAD MANUAL     # fila temporária para arquivos, inclusive >10 MB
+├── GEIZIAN           # cópias de conveniência para upload; ignorar no pool/inventário canônico
+├── LIBRARY META      # referências; nunca asset final automático
 └── CC_US_ES/
     ├── IMG/
     │   ├── 01_READY
@@ -71,18 +73,20 @@ Pessoa/orientação         Nome do arquivo.
 Exemplo correto:
 
 ```text
-MGS-CRIATIVOS/CAR_US_EN/VID/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
+MGS-AGENTS/CRIATIVOS/CAR_US_EN/VID/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
 ```
 
 Exemplo incorreto que deve ser corrigido/não repetido:
 
 ```text
-MGS-CRIATIVOS/CAR_US_EN/VID/STORY/EN/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
+MGS-AGENTS/CRIATIVOS/CAR_US_EN/VID/STORY/EN/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
 ```
 
 Não inserir `READY`, `TESTING`, `TESTED`, `WINNER` ou `REJECTED` no nome do arquivo. O status fica na pasta/inventário para evitar renomear o mesmo asset a cada mudança de status.
 
-`UPLOAD CANVAS` / `UPLOAD MANUAL` é uma área de entrada, não arquivo permanente. Correção executiva de Rodolfo (2026-07-10): quando a ação operacional for **tratar/mover**, o arquivo-fonte deve sair da pasta de upload somente depois de a versão limpa estar verificada e presente no `01_READY` correto. Para preservar o bruto sem deixar falso backlog, mover o original para `{OPERAÇÃO}/{IMG|VID}/99_LEGACY`, mantendo ID/nome original e sem deletar. A pasta de upload deve conter apenas itens ainda pendentes. Exceção: manter na entrada somente quando Rodolfo/Kelly pedir explicitamente **copiar** ou **manter o original no upload**.
+Regra de idioma para operações brasileiras: se o país for `BR` e o pedido disser apenas “Português”, usar `LANG=BR` (`CAR_BR_BR`, `GAME_BR_BR`). Usar `LANG=PT` somente quando português de Portugal (`PORTUGUÊS-PT`/`PT-PT`) for explícito.
+
+`UPLOAD MANUAL` é a única fila de entrada operacional atual. Ela recebe IMG/VID enviados fora do Discord, especialmente arquivos acima de 10 MB. Quando a ação for **tratar/mover**, o arquivo-fonte deve sair da fila somente depois de a versão limpa estar verificada e presente no `01_READY` correto. Para preservar o bruto sem deixar falso backlog, mover o original para `{OPERAÇÃO}/{IMG|VID}/99_LEGACY`, mantendo ID/nome original e sem deletar. Manter na entrada somente quando Rodolfo/Kelly pedir explicitamente **copiar** ou **manter o original no upload**. `UPLOAD_CANVAS` não existe mais e é somente referência histórica.
 
 Tamanhos oficiais de referência para `CC_US_ES`; outras verticais podem ser ajustadas conforme necessidade real:
 
@@ -90,7 +94,7 @@ Tamanhos oficiais de referência para `CC_US_ES`; outras verticais podem ser aju
 Placement  Dimensão   Aspect ratio  Com pessoa  Sem pessoa
 ─────────  ─────────  ────────────  ──────────  ──────────
 STORY      1080x1920  9:16          PV          NV
-FEED       1080x1080  1:1           PS          NS
+FEED       1080x1080  1:1           PH          NH
 ```
 
 Fluxo seguro:
@@ -98,7 +102,7 @@ Fluxo seguro:
 ```text
 Etapa  Ação
 ─────  ─────────────────────────────────────────────────────────────
-1      Ler os arquivos brutos em `UPLOAD CANVAS`.
+1      Ler os arquivos brutos em `UPLOAD MANUAL`.
 2      Detectar IMG/VID, dimensão, aspect ratio e placement.
 3      Sugerir ANGLE/P_ORIENT sem inventar.
 4      Gerar inventário e plano de renomeação/destino.
