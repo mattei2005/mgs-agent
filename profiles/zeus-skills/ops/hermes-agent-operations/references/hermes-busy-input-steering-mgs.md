@@ -239,6 +239,25 @@ Para cada mudança futura, validar `git apply --reverse --check` no checkout viv
 - Para investigar um caso real, buscar a mensagem original diretamente no Discord, comparar timestamps do pedido principal e do complemento e correlacionar com a sessão/runtime. A sessão Hermes é contexto secundário; o Discord é a fonte direta para conteúdo e horário atuais.
 - Esses limites de timing não justificam perder mídia recebida enquanto o turno já estiver ativo.
 
+## Personalização da confirmação visual de steer
+
+A confirmação de steer tem duas camadas distintas:
+
+- `display.busy_steer_ack_enabled` controla apenas mostrar/ocultar o aviso;
+- o texto do aviso pode continuar fixo em `gateway/run.py` quando a versão instalada não expõe uma chave de mensagem customizável.
+
+Para localizar/personalizar o texto compartilhado pelos gateways MGS:
+
+1. Confirmar no runtime vivo onde `is_steer_mode` monta a mensagem e verificar se existe configuração textual upstream antes de criar patch local.
+2. Alterar somente a confirmação visível; não mexer no payload entregue a `AIAgent.steer()` nem no framing out-of-band.
+3. Adicionar teste de regressão no teste stock já existente para o ack. A orientação de primeiro uso do Hermes pode ser anexada ao aviso em sessões novas; por isso, validar `content.startswith(texto_exato)` e também ausência do texto legado, em vez de exigir igualdade total nesse caminho.
+4. Manter testes de startup/race focados em comportamento (`content` não vazio e ausência de `Queued for the next turn`), sem acoplá-los à redação. Isso evita que um patch de localização dependa de testes introduzidos por outro patch MGS e ausentes no upstream limpo.
+5. Criar patch canônico independente em `patches/hermes/`, registrá-lo no guard e no updater controlado, e adicionar invariantes da nova frase.
+6. Validar: `bash -n`, `py_compile`, pytest direcionado, `git apply --reverse --check` no checkout vivo e `git apply --check` contra `origin/main` em worktree temporária.
+7. Se o runtime for compartilhado, um único patch atende Zeus/Atena/Ares/Hera, mas todos os gateways precisam de restart seguro; Zeus sempre por último. Não editar targets depois de gerar o snapshot do finalizer.
+
+Pitfall de patches dependentes: se um teste foi criado por um patch MGS anterior e não existe em `origin/main`, não o inclua no patch independente de localização que precisa passar `apply --check` no upstream limpo. Torne o teste anterior neutro em relação à redação e concentre a asserção textual no teste stock que já existe upstream.
+
 ## Pitfalls
 
 - Validar apenas texto e declarar multimedia steer pronto.

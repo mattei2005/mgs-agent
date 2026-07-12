@@ -10,7 +10,7 @@ OUTDIR=BASE/'reports'
 WORK=BASE/'work'
 NY=ZoneInfo('America/New_York')
 DTR_BASE='https://digitaltrchat.com'
-SB_STATE='/tmp/smartbidding_state_headed.json'
+SB_STATE='/root/.local/share/mgs/smartbidding_state_headed.json'
 
 spec=importlib.util.spec_from_file_location('sync', str(BASE/'scripts/dtr-sb-page-health-sync.py'))
 sync=importlib.util.module_from_spec(spec); spec.loader.exec_module(sync)
