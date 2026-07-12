@@ -63,6 +63,9 @@ $calendar_checks = array(
     'preset_last_month' => 'data-preset="lastMonth"',
     'cancel' => 'id="mgsqDateCancel"',
     'apply' => 'id="mgsqDateApply"',
+    'direct_day_click' => "button.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();selectDate(e.currentTarget.dataset.date);});",
+    'direct_preset_click' => "shortcut.addEventListener('click'",
+    'direct_navigation_click' => "nav.addEventListener('click'",
 );
 foreach ( $calendar_checks as $name => $marker ) {
     if ( false === strpos( $default_html, $marker ) ) {

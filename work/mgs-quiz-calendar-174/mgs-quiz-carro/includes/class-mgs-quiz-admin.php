@@ -661,7 +661,7 @@ class MGS_Quiz_Admin {
               var index=Number(panel.dataset.calendarIndex||0),month=monthFor(index),year=month.getFullYear(),monthIndex=month.getMonth(),days=new Date(year,monthIndex+1,0).getDate(),offset=month.getDay(),grid=panel.querySelector('.mgsq-days');
               panel.querySelector('.mgsq-month-title').textContent=months[monthIndex]+' '+year;grid.innerHTML='';
               for(var blank=0;blank<offset;blank++){var empty=document.createElement('span');empty.className='mgsq-day-empty';grid.appendChild(empty);}
-              for(var day=1;day<=days;day++){var date=new Date(year,monthIndex,day,12,0,0,0),value=iso(date),button=document.createElement('button');button.type='button';button.className='mgsq-day';button.dataset.date=value;button.textContent=day;button.setAttribute('aria-label',br(value));if(value===draftStart)button.classList.add('is-start');if(value===draftEnd)button.classList.add('is-end');if(draftStart&&draftEnd&&value>draftStart&&value<draftEnd)button.classList.add('is-range');if(value===iso(new Date()))button.classList.add('is-today');grid.appendChild(button);}
+              for(var day=1;day<=days;day++){var date=new Date(year,monthIndex,day,12,0,0,0),value=iso(date),button=document.createElement('button');button.type='button';button.className='mgsq-day';button.dataset.date=value;button.textContent=day;button.setAttribute('aria-label',br(value));if(value===draftStart)button.classList.add('is-start');if(value===draftEnd)button.classList.add('is-end');if(draftStart&&draftEnd&&value>draftStart&&value<draftEnd)button.classList.add('is-range');if(value===iso(new Date()))button.classList.add('is-today');button.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();selectDate(e.currentTarget.dataset.date);});grid.appendChild(button);}
             });
             updateText();
           }
@@ -687,7 +687,8 @@ class MGS_Quiz_Admin {
           function open(){draftStart=appliedStart;draftEnd=appliedEnd;viewMonth=firstOfMonth(parseIso(draftStart)||new Date());error.classList.remove('is-visible');popover.classList.add('is-open');trigger.setAttribute('aria-expanded','true');render();}
           function close(){popover.classList.remove('is-open');trigger.setAttribute('aria-expanded','false');}
           trigger.addEventListener('click',function(){popover.classList.contains('is-open')?close():open();});
-          popover.addEventListener('click',function(e){var day=e.target.closest('.mgsq-day'),shortcut=e.target.closest('[data-preset]'),shift=e.target.closest('[data-shift]');if(day)selectDate(day.dataset.date);if(shortcut)preset(shortcut.dataset.preset);if(shift){viewMonth=new Date(viewMonth.getFullYear(),viewMonth.getMonth()+Number(shift.dataset.shift),1,12);render();}});
+          popover.querySelectorAll('[data-preset]').forEach(function(shortcut){shortcut.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();preset(e.currentTarget.dataset.preset);});});
+          popover.querySelectorAll('[data-shift]').forEach(function(nav){nav.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();viewMonth=new Date(viewMonth.getFullYear(),viewMonth.getMonth()+Number(e.currentTarget.dataset.shift),1,12);render();});});
           document.getElementById('mgsqDateCancel').addEventListener('click',function(){draftStart=appliedStart;draftEnd=appliedEnd;close();});
           document.getElementById('mgsqDateApply').addEventListener('click',applyDraft);
           document.addEventListener('click',function(e){if(popover.classList.contains('is-open')&&!popover.contains(e.target)&&!trigger.contains(e.target))close();});

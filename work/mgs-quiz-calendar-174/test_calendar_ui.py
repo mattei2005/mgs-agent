@@ -6,8 +6,8 @@ admin = (root / 'includes/class-mgs-quiz-admin.php').read_text(encoding='utf-8')
 bootstrap = (root / 'mgs-quiz-carro.php').read_text(encoding='utf-8')
 
 checks = {
-    'version_173_header': 'Version:     1.7.3' in bootstrap,
-    'version_173_constant': "MGS_QUIZ_VERSION', '1.7.3'" in bootstrap,
+    'version_174_header': 'Version:     1.7.4' in bootstrap,
+    'version_174_constant': "MGS_QUIZ_VERSION', '1.7.4'" in bootstrap,
     'range_trigger': 'id="mgsqDateRangeTrigger"' in admin,
     'hidden_from': 'type="hidden" name="from" id="mgsqDateFrom"' in admin,
     'hidden_to': 'type="hidden" name="to" id="mgsqDateTo"' in admin,
@@ -20,6 +20,10 @@ checks = {
     'custom_preset': 'data-preset="custom"' in admin,
     'cancel_apply': 'id="mgsqDateCancel"' in admin and 'id="mgsqDateApply"' in admin,
     'date_range_logic': 'function selectDate(' in admin and 'function applyDraft(' in admin,
+    'direct_day_listener': "button.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();selectDate(e.currentTarget.dataset.date);});" in admin,
+    'direct_preset_listener': "shortcut.addEventListener('click'" in admin,
+    'direct_navigation_listener': "nav.addEventListener('click'" in admin,
+    'no_delegated_popover_click': "popover.addEventListener('click'" not in admin,
     'mobile_one_month': '@media(max-width:782px)' in admin and '.mgsq-calendar-panel:nth-child(2){display:none}' in admin,
     'default_yesterday_preserved': "modify( '-1 day' )->format( 'Y-m-d' )" in admin,
     'no_compare_to': 'Compare to:' not in admin and 'Compare To:' not in admin,
