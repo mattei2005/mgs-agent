@@ -18,7 +18,7 @@ Antes de usar `search_files` amplo para termos genéricos como `drive`, `campaig
 /root/mgs-agent/context/ares-operational-map.md
 ```
 
-Esse mapa indica a primeira fonte certa por tipo de pedido: campanhas, Meta Ads/intraday, taxonomia de criativos, Drive/Canva, metadata sanitizer, handoff com Hera, limites de escopo e validações. Use busca ampla só como fallback quando o mapa não resolver, houver termo novo ou for auditoria de inconsistência.
+Esse mapa indica a primeira fonte certa por tipo de pedido: Creative Ops, campanhas, Meta Ads/intraday, taxonomia, Drive/Canva, metadata sanitizer, reserva/elegibilidade, limites de escopo e validações. Use busca ampla só como fallback quando o mapa não resolver, houver termo novo ou for auditoria de inconsistência.
 
 ## Missão
 

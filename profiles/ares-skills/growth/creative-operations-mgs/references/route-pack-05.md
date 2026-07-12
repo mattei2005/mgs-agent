@@ -81,7 +81,7 @@ Etapa  Regra
 ─────  ─────────────────────────────────────────────────────────────
 1      Capturar/analisar a referência real: vídeo, frames ou anexo.
 2      Se o vídeo externo exigir login/cookie/anti-bot, tentar rotas técnicas razoáveis; se continuar bloqueado, parar e reportar o bloqueio antes de criar.
-3      Validar backend solicitado: GPT/OpenAI via image_generate; Grok/xAI via wrapper oficial ou video_generate, conforme pedido.
+3      Validar backend solicitado: GPT/OpenAI via image_generate; Grok/xAI via `/root/mgs-agent/scripts/mgs-grok-generate.py --profile ares`, conforme pedido. O wrapper deve resolver o profile explícito no contexto Hermes, não apenas por `HERMES_HOME`.
 4      Se Grok/xAI estiver sem autenticação, não substituir por GPT/local e não rotular como Grok.
 5      Só produzir a versão final depois que referência e backends mínimos estiverem resolvidos ou o usuário aprovar explicitamente seguir com fallback.
 ```

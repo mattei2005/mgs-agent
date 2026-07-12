@@ -1,9 +1,9 @@
 #!/root/.hermes/hermes-agent/venv/bin/python3
 """MGS Grok/xAI media generator.
 
-Operational wrapper for Hera/Zeus to call Grok Imagine via Hermes-managed
+Operational wrapper for Ares/Zeus to call Grok Imagine via Hermes-managed
 xAI OAuth (preferred) or XAI_API_KEY fallback without changing the active
-Hermes image provider. This lets Hera use GPT/OpenAI-Codex through
+Hermes image provider. This lets Ares use GPT/OpenAI-Codex through
 `image_generate` and Grok through this explicit wrapper in the same workflow.
 
 No secrets are printed. Outputs are downloaded to a local file and a JSON
@@ -32,7 +32,15 @@ DEFAULT_BASE_URL = "https://api.x.ai/v1"
 
 
 def _set_profile(profile: str) -> None:
-    os.environ["HERMES_HOME"] = f"/root/.hermes/profiles/{profile}"
+    home = f"/root/.hermes/profiles/{profile}"
+    os.environ["HERMES_HOME"] = home
+    # Hermes 0.3.x may install a context-local profile override before this
+    # wrapper reaches main(). The context override wins over HERMES_HOME, so
+    # set both or an explicit --profile can silently resolve another agent's
+    # auth store.
+    import importlib
+
+    importlib.import_module("hermes_constants").set_hermes_home_override(home)
 
 
 def _creds() -> tuple[str, str, str]:
