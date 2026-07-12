@@ -94,7 +94,30 @@
       "name": "Ares",
       "type": "Creative Operations + Acquisition / Paid Media Agent",
       "discord_channel_id": "1508853425952133180",
-      "discord_channel_name": "ares-campaign-ads-agent",
+      "discord_channel_name": "ares-diretoria",
+      "discord_channels": {
+        "diretoria": {
+          "id": "1508853425952133180",
+          "name": "ares-diretoria",
+          "audience": [
+            "Rodolfo",
+            "Zeus",
+            "Ares"
+          ],
+          "purpose": "Diretoria privada e histórico completo do Ares"
+        },
+        "aquisicao": {
+          "id": "1516887105543077949",
+          "name": "ares-aquisicao",
+          "audience": [
+            "Rodolfo",
+            "Zeus",
+            "Ares",
+            "gestores autorizados"
+          ],
+          "purpose": "Campanhas, HOA, Intraday, regras, monitoramento e relatórios"
+        }
+      },
       "authorized_user_discord_ids": [
         "344196393512075265",
         "321263240782807040",

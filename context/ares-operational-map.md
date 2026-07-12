@@ -38,6 +38,17 @@ Logs Ares                               /root/.hermes/profiles/ares/logs/
 Audit MGS                               /root/mgs-agent/logs/events-audit.jsonl
 ```
 
+### Canais Discord canônicos
+
+```text
+Canal            ID                    Participantes                         Finalidade
+---------------  --------------------  ------------------------------------  ----------------------------------------------
+ares-diretoria   1508853425952133180   Rodolfo, Zeus e Ares                  Diretoria privada e histórico completo do Ares
+ares-aquisicao   1516887105543077949   Rodolfo, Zeus, Ares e gestores        Campanhas, HOA, Intraday, regras e relatórios
+```
+
+`ares-diretoria` é o canal principal/home do profile. `ares-aquisicao` é o canal operacional compartilhado; assuntos ficam separados por threads. Nenhum outro canal Discord é rota ativa do Ares.
+
 ## 3. Pedido → primeira rota
 
 ```text
