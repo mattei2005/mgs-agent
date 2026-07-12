@@ -8,6 +8,8 @@ BASE = Path('/root/mgs-agent/data/ares/meta-ads')
 GRAPH_VERSION = os.environ.get('ARES_META_GRAPH_VERSION', 'v20.0')
 TOKEN_ITEM_DEFAULT = 'Token Meta API - 00 - ANUNCIANTE - Alana Figueiredo - OPENZED SPAIN'
 TOKEN_CACHE_PATH = Path(os.environ.get('ARES_META_TOKEN_CACHE_PATH', '/root/.cache/mgs/ares-meta-token.json'))
+TOKEN_CACHE_LOCK_PATH = Path(os.environ.get('ARES_META_TOKEN_CACHE_LOCK_PATH', f'{TOKEN_CACHE_PATH}.lock'))
+TOKEN_CACHE_REFRESH_SECONDS = int(os.environ.get('ARES_META_TOKEN_CACHE_REFRESH_SECONDS', '86400'))
 TOKEN_CACHE_MAX_AGE_SECONDS = int(os.environ.get('ARES_META_TOKEN_CACHE_MAX_AGE_SECONDS', '604800'))
 RATE_LIMIT_CODES = {4, 17, 32, 613, 80004}
 RATE_LIMIT_MESSAGE_PATTERNS = (
@@ -62,7 +64,7 @@ def _write_token_cache(item_name, token, field):
             pass
 
 
-def _read_token_cache(item_name):
+def _read_token_cache(item_name, max_age_seconds=TOKEN_CACHE_MAX_AGE_SECONDS):
     try:
         st = TOKEN_CACHE_PATH.stat()
         if st.st_mode & 0o077:
@@ -70,16 +72,24 @@ def _read_token_cache(item_name):
         data = json.loads(TOKEN_CACHE_PATH.read_text())
         age = time.time() - float(data.get('cached_at') or 0)
         token = str(data.get('token') or '').strip()
-        if data.get('item') != item_name or not token or age < 0 or age > TOKEN_CACHE_MAX_AGE_SECONDS:
+        if data.get('item') != item_name or not token or age < 0 or age > max_age_seconds:
             return None
         return token, str(data.get('field') or 'cached'), age
     except (OSError, ValueError, TypeError, json.JSONDecodeError):
         return None
 
 
-def get_token_from_1password(item_name=TOKEN_ITEM_DEFAULT):
-    # One 1Password request per run. The old field-by-field loop made up to six
-    # requests and amplified service-account throttling across recurring crons.
+def _open_token_cache_lock():
+    TOKEN_CACHE_LOCK_PATH.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    os.chmod(TOKEN_CACHE_LOCK_PATH.parent, 0o700)
+    fd = os.open(TOKEN_CACHE_LOCK_PATH, os.O_CREAT | os.O_RDWR, 0o600)
+    os.fchmod(fd, 0o600)
+    return os.fdopen(fd, 'r+')
+
+
+def _fetch_token_from_1password(item_name):
+    # Exactly one 1Password request per refresh. The old field-by-field loop made
+    # up to six requests and amplified service-account throttling across crons.
     cmd = f"set -a; [ -f /root/mgs-agent/.env ] && . /root/mgs-agent/.env; set +a; op item get {shell_quote(item_name)} --vault {shell_quote(os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo'))} --format json --reveal"
     res = subprocess.run(['bash', '-lc', cmd], text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=30)
     if res.returncode == 0:
@@ -87,16 +97,63 @@ def get_token_from_1password(item_name=TOKEN_ITEM_DEFAULT):
         token, field = _identify_token_field(data)
         _write_token_cache(item_name, token, field)
         return token, field
+    return None, res.stderr or ''
 
-    cached = _read_token_cache(item_name)
-    if cached:
-        token, field, age = cached
-        return token, f'{field} (cache {int(age)}s)'
 
-    error = (res.stderr or '').lower()
-    if 'rate-limit' in error or 'rate limit' in error or 'too many requests' in error:
-        raise RuntimeError('1Password rate-limited and no valid local token cache is available')
-    raise RuntimeError('1Password item not readable and no valid local token cache is available')
+def get_token_from_1password(item_name=TOKEN_ITEM_DEFAULT, force_refresh=False):
+    """Return a Meta token without calling 1Password on every process run.
+
+    A fresh protected cache is the normal path. Refreshes are serialized across
+    cron processes and double-checked after locking to avoid a request stampede.
+    If refresh fails, a bounded older cache may be used until its maximum age.
+    """
+    if not force_refresh:
+        cached = _read_token_cache(item_name, TOKEN_CACHE_REFRESH_SECONDS)
+        if cached:
+            token, field, age = cached
+            return token, f'{field} (cache {int(age)}s)'
+
+    with _open_token_cache_lock() as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        if not force_refresh:
+            cached = _read_token_cache(item_name, TOKEN_CACHE_REFRESH_SECONDS)
+            if cached:
+                token, field, age = cached
+                return token, f'{field} (cache {int(age)}s)'
+
+        token, field_or_error = _fetch_token_from_1password(item_name)
+        if token:
+            return token, field_or_error
+
+        if not force_refresh:
+            cached = _read_token_cache(item_name, TOKEN_CACHE_MAX_AGE_SECONDS)
+            if cached:
+                token, field, age = cached
+                return token, f'{field} (stale-cache {int(age)}s)'
+
+        error = field_or_error.lower()
+        if 'rate-limit' in error or 'rate limit' in error or 'too many requests' in error:
+            raise RuntimeError('1Password rate-limited and no valid local token cache is available')
+        raise RuntimeError('1Password item not readable and no valid local token cache is available')
+
+
+def invalidate_token_cache(item_name=TOKEN_ITEM_DEFAULT, rejected_token=None):
+    """Invalidate only the matching cached credential; never print its value."""
+    with _open_token_cache_lock() as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        try:
+            data = json.loads(TOKEN_CACHE_PATH.read_text())
+        except (OSError, ValueError, TypeError, json.JSONDecodeError):
+            return False
+        if data.get('item') != item_name:
+            return False
+        if rejected_token is not None and data.get('token') != rejected_token:
+            return False
+        try:
+            TOKEN_CACHE_PATH.unlink()
+            return True
+        except FileNotFoundError:
+            return False
 
 def shell_quote(s):
     import shlex
