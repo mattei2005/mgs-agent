@@ -25,7 +25,7 @@ Completion criterion: only the procedure and evidence required for the current a
 ## Operational route packs
 
 - **Objetivo → Status e ciclo de vida** → `references/route-pack-01.md`
-- **Entrada operacional via Hera → Inventário mínimo** → `references/route-pack-02.md`
+- **Entrada operacional unificada → Inventário mínimo** → `references/route-pack-02.md`
 - **Procedimento seguro de classificação → Pitfalls comuns** → `references/route-pack-03.md`
 - **Referências internas** → `references/route-pack-04.md`
 

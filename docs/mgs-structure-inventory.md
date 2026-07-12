@@ -1,13 +1,29 @@
 # Inventário Classificado — MGS OS
 
-> Status: inventário read-only v0.2  
-> Data: 2026-06-07 01:28 EDT  
+> Status: inventário v0.3 — unificação Hera → Ares  
+> Data original: 2026-06-07 01:28 EDT; atualização: 2026-07-12  
 > Escopo: `/root/mgs-agent`  
-> Regra: este documento **não move, remove nem altera runtime**. Ele apenas classifica a estrutura atual e recomenda próximos passos.
+> Regra: este documento classifica a estrutura e registra a migração autorizada; runtime real e manifests vencem para estado técnico.
 
 ---
 
 ## Resumo executivo
+
+Atualização estrutural de 2026-07-12:
+
+```text
+Componente                              Estado atual
+--------------------------------------  ---------------------------------------------------------
+Ares                                    agente ativo unificado Creative Ops + Growth/Media Buying
+Hera                                    inativa; profile/dados/canal/unit preservados para rollback
+data/ares/creative-ops/                  cópia validada dos dados Hera + inventário unificado
+profiles/ares-skills/growth/             Creative Ops, taxonomia, Meta Library e Campaign Ops
+scripts/ares-meta-library-*              runtime criativo migrado para Ares
+browser-profiles Ares                    Meta Library/YouTube copiados com origem preservada
+authorized-users.json                    7 usuários permanentes no Ares; Hera sem usuários ativos
+```
+
+O snapshot de contagens abaixo é histórico de 2026-06-07 e não deve ser usado como contagem atual.
 
 ```text
 Bloco                         Classe principal        Veredito
@@ -63,7 +79,8 @@ context/agent-map.md                      canônico      Executive / MGS OS     
 context/routes.md                         canônico      Executive / MGS OS          auditado      manter
 context/sources-of-truth.md               canônico      Executive / MGS OS          auditado      manter
 context/permissions-matrix.md             canônico      Security / Access           auditado      manter
-context/hera-creative-agent.md            canônico      Creative / Hera             novo/ativo    manter; revisar após testes Hera
+context/ares-operational-map.md           canônico      Creative + Growth / Ares     ativo         fonte operacional HOT
+context/hera-creative-agent.md            histórico     Creative / Hera              arquivado     rollback/auditoria; não rotear
 context/company.md                        canônico      Empresa                    legado ativo   revisar em bloco conceitual
 context/sites.md                          canônico      Sites / Verticais           legado ativo   revisar em bloco conceitual
 context/team.md                           canônico      Equipe / Access             legado ativo   revisar em bloco conceitual

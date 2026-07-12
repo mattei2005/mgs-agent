@@ -109,7 +109,7 @@ Fluxo seguro para reestruturar criativos baixados do Canva:
 Inventário deve registrar origem e uso:
 
 ```text
-created_by       HERA / KELLY / GEIZIAN / GESTOR / UNKNOWN
+created_by       ARES / KELLY / GEIZIAN / GESTOR / UNKNOWN
 requested_by     solicitante, quando houver
 used_by          ARES / HUMAN / UNKNOWN
 campaign_owner   Ares, Kelly, Geizian, gestor específico ou UNKNOWN

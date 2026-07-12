@@ -1,0 +1,677 @@
+{
+  "generated_at": "2026-07-12T13:48:09-04:00",
+  "source": "root crontab + script/log stat, read-only",
+  "count": 30,
+  "jobs": [
+    {
+      "schedule": "*/5 * * * *",
+      "command": "flock -n /var/lock/sync_souls.lock /root/mgs-agent/scripts/sync-souls.sh >> /root/mgs-agent/logs/sync-souls.log 2>&1",
+      "script": "sync-souls.sh",
+      "script_path": "/root/mgs-agent/scripts/sync-souls.sh",
+      "log_path": "/root/mgs-agent/logs/sync-souls.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "baixo",
+      "description": "Sincroniza SOUL.md, config.yaml e skills MGS dos profiles Hermes para versionamento no repo.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 4408,
+        "mtime": "2026-07-12T13:44:51-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 2921229,
+        "mtime": "2026-07-12T13:45:01-04:00"
+      },
+      "last_log_signal": "2026-07-12T13:45:01-04:00 synced ares skills/ops/log-monitor-discord-alert"
+    },
+    {
+      "schedule": "11,26,41,56 * * * *",
+      "command": "flock -n /var/lock/monitor_auto_push.lock /root/mgs-agent/scripts/monitor-auto-push.sh >> /root/mgs-agent/logs/monitor-auto-push.log 2>&1",
+      "script": "monitor-auto-push.sh",
+      "script_path": "/root/mgs-agent/scripts/monitor-auto-push.sh",
+      "log_path": "/root/mgs-agent/logs/monitor-auto-push.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "baixo",
+      "description": "Monitora falhas no auto-push Git do /root/mgs-agent e alerta em #mgs-alerts.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 13740,
+        "mtime": "2026-07-11T00:38:59-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 750328,
+        "mtime": "2026-07-12T13:41:31-04:00"
+      },
+      "last_log_signal": "[2026-07-12T13:41:31-04:00] monitor-auto-push: Concluído. consecutive_failures=0 last_ok=62fc2cb7"
+    },
+    {
+      "schedule": "23 10 * * *",
+      "command": "flock -n /var/lock/monitor_yoast_health_eggbev.lock /root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh >> /root/mgs-agent/logs/monitor-yoast-health-eggbev.log 2>&1",
+      "script": "monitor-yoast-health-eggbev.sh",
+      "script_path": "/root/mgs-agent/scripts/monitor-yoast-health-eggbev.sh",
+      "log_path": "/root/mgs-agent/logs/monitor-yoast-health-eggbev.log",
+      "uses_flock": true,
+      "owner": "Atena/Conteúdo",
+      "risk": "baixo",
+      "description": "Monitora saúde Yoast do eggbev: SEO + Readability com baseline, semanal e alerta por degradação.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 22839,
+        "mtime": "2026-07-11T01:53:48-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 14509,
+        "mtime": "2026-07-12T10:23:08-04:00"
+      },
+      "last_log_signal": "[2026-07-12T10:23:08-04:00] monitor-yoast-health-eggbev: === Concluído (silencioso). SEO: 🟢206/🟡39/🔴0 | Read: 🟢205/🟡36/🔴39 ==="
+    },
+    {
+      "schedule": "7,22,37,52 * * * *",
+      "command": "flock -n /var/lock/check_pending_reports.lock /root/mgs-agent/scripts/check-pending-reports.sh >> /root/mgs-agent/logs/check-pending-reports.log 2>&1",
+      "script": "check-pending-reports.sh",
+      "script_path": "/root/mgs-agent/scripts/check-pending-reports.sh",
+      "log_path": "/root/mgs-agent/logs/check-pending-reports.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "baixo",
+      "description": "Detecta skills MGS sem REPORT-INFRA/inventário e cobra correção no #alerts-infra.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 9602,
+        "mtime": "2026-07-11T00:03:44-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 296843,
+        "mtime": "2026-07-12T13:37:01-04:00"
+      },
+      "last_log_signal": "[2026-07-12 13:37:01] check-pending-reports.sh concluído"
+    },
+    {
+      "schedule": "1-56/5 * * * *",
+      "command": "flock -n /var/lock/monitor_service_restarts.lock /root/mgs-agent/scripts/monitor-service-restarts.sh >> /root/mgs-agent/logs/monitor-service-restarts.log 2>&1",
+      "script": "monitor-service-restarts.sh",
+      "script_path": "/root/mgs-agent/scripts/monitor-service-restarts.sh",
+      "log_path": "/root/mgs-agent/logs/monitor-service-restarts.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "baixo",
+      "description": "Detecta restarts inesperados dos services zeus-gateway, atena-gateway, ares-gateway e mgs-autocommit.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 13782,
+        "mtime": "2026-07-12T13:45:21-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 4743735,
+        "mtime": "2026-07-12T13:46:01-04:00"
+      },
+      "last_log_signal": "2026-07-12T13:46:01-04:00 [monitor-service-restarts] OK"
+    },
+    {
+      "schedule": "54 11 * * *",
+      "command": "flock -n /var/lock/monitor_gpt55_oauth_cost.lock /root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh >> /root/mgs-agent/logs/monitor-gpt55-oauth-cost.log 2>&1",
+      "script": "monitor-gpt55-oauth-cost.sh",
+      "script_path": "/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh",
+      "log_path": "/root/mgs-agent/logs/monitor-gpt55-oauth-cost.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "baixo",
+      "description": "Calcula uso hipotético GPT-5.5/OAuth dos agentes; OAuth não gera custo real por token.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 8824,
+        "mtime": "2026-07-12T13:45:21-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 2244,
+        "mtime": "2026-07-12T11:54:01-04:00"
+      },
+      "last_log_signal": "Monitor GPT-5.6 OAuth enviado: calls=782 responses=61 hypothetical_usd=19.16 config_ok=True message_id=1525893003309220004"
+    },
+    {
+      "schedule": "3-58/5 * * * *",
+      "command": "flock -n /var/lock/monitor_tool_loops.lock /root/mgs-agent/scripts/monitor-tool-loops.sh >> /root/mgs-agent/logs/monitor-tool-loops.log 2>&1",
+      "script": "monitor-tool-loops.sh",
+      "script_path": "/root/mgs-agent/scripts/monitor-tool-loops.sh",
+      "log_path": "/root/mgs-agent/logs/monitor-tool-loops.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "baixo",
+      "description": "Detecta loops de tool_calls nas sessões Hermes e alerta infra.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 9696,
+        "mtime": "2026-07-11T00:38:18-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 240618,
+        "mtime": "2026-07-12T13:48:01-04:00"
+      },
+      "last_log_signal": "Loop detector: 0 alertas enviados"
+    },
+    {
+      "schedule": "0 5 * * *",
+      "command": "flock -n /var/lock/infra_discovery.lock /root/mgs-agent/scripts/infra-discovery.sh >> /root/mgs-agent/logs/infra-discovery.log 2>&1",
+      "script": "infra-discovery.sh",
+      "script_path": "/root/mgs-agent/scripts/infra-discovery.sh",
+      "log_path": "/root/mgs-agent/logs/infra-discovery.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "médio: sobrescreve infra-inventory.json",
+      "description": "Regenera data/infra-inventory.json a partir do estado real do sistema.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 8122,
+        "mtime": "2026-07-12T13:45:38-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 2360,
+        "mtime": "2026-07-12T05:00:10-04:00"
+      },
+      "last_log_signal": "[05:00:10] === infra-discovery.sh DONE ==="
+    },
+    {
+      "schedule": "37 8,14,20 * * *",
+      "command": "flock -n /var/lock/monitor_hermes_updates.lock /root/mgs-agent/scripts/monitor-hermes-updates.sh >> /root/mgs-agent/logs/monitor-hermes-updates.log 2>&1",
+      "script": "monitor-hermes-updates.sh",
+      "script_path": "/root/mgs-agent/scripts/monitor-hermes-updates.sh",
+      "log_path": "/root/mgs-agent/logs/monitor-hermes-updates.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "baixo",
+      "description": "Verifica updates upstream do Hermes Agent e alerta quando há nova versão.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 7816,
+        "mtime": "2026-05-27T09:31:26-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 12763,
+        "mtime": "2026-07-12T08:37:03-04:00"
+      },
+      "last_log_signal": "[2026-07-12T08:37:03-04:00] OK notified upstream=7b5ba2054 local=f8361d29c behind=210 days=2 feat=23 fix=140 breaking=0"
+    },
+    {
+      "schedule": "*/15 * * * *",
+      "command": "flock -n /var/lock/track_article_cost.lock /root/mgs-agent/scripts/track-article-cost.sh >> /root/mgs-agent/logs/track-article-cost-cron.log 2>&1",
+      "script": "track-article-cost.sh",
+      "script_path": "/root/mgs-agent/scripts/track-article-cost.sh",
+      "log_path": "/root/mgs-agent/logs/track-article-cost-cron.log",
+      "uses_flock": true,
+      "owner": "Atena/Conteúdo",
+      "risk": "baixo/médio: escreve SQLite local",
+      "description": "Calcula custo hipotético por artigo publicado e grava data/article-tracker.db.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 8242,
+        "mtime": "2026-06-07T22:52:10-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 582306,
+        "mtime": "2026-07-12T13:45:01-04:00"
+      },
+      "last_log_signal": "[2026-07-12T13:45:01-0400] Nothing to process. Exit."
+    },
+    {
+      "schedule": "0 * * * *",
+      "command": "flock -n /var/lock/cleanup_zombie_sessions.lock /root/mgs-agent/scripts/cleanup-zombie-sessions.sh >> /root/mgs-agent/logs/cleanup-zombie-sessions.log 2>&1",
+      "script": "cleanup-zombie-sessions.sh",
+      "script_path": "/root/mgs-agent/scripts/cleanup-zombie-sessions.sh",
+      "log_path": "/root/mgs-agent/logs/cleanup-zombie-sessions.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "médio: fecha sessões Hermes inativas",
+      "description": "Fecha sessões Hermes zumbis/inativas usando última atividade real, com grace padrão de 180 minutos.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 4271,
+        "mtime": "2026-06-07T00:38:25-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 45692,
+        "mtime": "2026-07-12T13:00:01-04:00"
+      },
+      "last_log_signal": "[2026-07-12T13:00:01-0400] OK total closed zombie sessions: 0 (grace=180min)"
+    },
+    {
+      "schedule": "44 20 * * 2,5",
+      "command": "flock -n /var/lock/housekeeping_bak_cleanup.lock /root/mgs-agent/scripts/housekeeping-bak-cleanup.sh >> /root/mgs-agent/logs/housekeeping-cron.log 2>&1",
+      "script": "housekeeping-bak-cleanup.sh",
+      "script_path": "/root/mgs-agent/scripts/housekeeping-bak-cleanup.sh",
+      "log_path": "/root/mgs-agent/logs/housekeeping-cron.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "alto: deleta backups antigos, preservando último por família",
+      "description": "Remove backups antigos (.bak/.backup/.old/.orig/~) com retenção padrão de 15 dias, preservando sempre o último por família.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 14972,
+        "mtime": "2026-07-11T00:24:01-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 15946,
+        "mtime": "2026-07-10T03:17:03-04:00"
+      },
+      "last_log_signal": "[2026-07-10T03:17:03-04:00] housekeeping: === END (no-op) ==="
+    },
+    {
+      "schedule": "0 8 * * *",
+      "command": "flock -n /var/lock/pendencia_render_md.lock /root/mgs-agent/scripts/pendencia-render-md.sh >> /root/mgs-agent/logs/pendencia-render.log 2>&1",
+      "script": "pendencia-render-md.sh",
+      "script_path": "/root/mgs-agent/scripts/pendencia-render-md.sh",
+      "log_path": "/root/mgs-agent/logs/pendencia-render.log",
+      "uses_flock": true,
+      "owner": "Zeus/Ops",
+      "risk": "baixo: re-renderiza docs/PENDENCIAS.md",
+      "description": "Renderiza docs/PENDENCIAS.md a partir de data/pendencias.db.json.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 4697,
+        "mtime": "2026-05-16T17:31:14-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 3775,
+        "mtime": "2026-07-12T08:00:02-04:00"
+      },
+      "last_log_signal": "Tamanho: 16671 bytes"
+    },
+    {
+      "schedule": "0 * * * *",
+      "command": "flock -n /var/lock/chat_log_rebuild.lock /root/mgs-agent/scripts/chat-log.sh --rebuild-index >> /root/mgs-agent/logs/chat-log-rebuild.log 2>&1",
+      "script": "chat-log.sh",
+      "script_path": "/root/mgs-agent/scripts/chat-log.sh",
+      "log_path": "/root/mgs-agent/logs/chat-log-rebuild.log",
+      "uses_flock": true,
+      "owner": "Zeus/Ops",
+      "risk": "baixo: re-renderiza índice",
+      "description": "Mantém índice Markdown de data/chat-logs/INDEX.md.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 5786,
+        "mtime": "2026-05-16T17:37:36-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 50740,
+        "mtime": "2026-07-12T13:00:01-04:00"
+      },
+      "last_log_signal": "2 sessões indexadas"
+    },
+    {
+      "schedule": "*/15 * * * *",
+      "command": "flock -n /var/lock/sync_codex_oauth.lock /root/mgs-agent/scripts/sync-codex-oauth.sh >> /root/mgs-agent/logs/sync-codex-oauth.log 2>&1",
+      "script": "sync-codex-oauth.sh",
+      "script_path": "/root/mgs-agent/scripts/sync-codex-oauth.sh",
+      "log_path": "/root/mgs-agent/logs/sync-codex-oauth.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "médio: atualiza auth.json dos profiles",
+      "description": "Sincroniza tokens OAuth Codex do auth global para profiles Hermes com safety check.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 11488,
+        "mtime": "2026-06-07T00:38:52-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 1450040,
+        "mtime": "2026-07-12T13:45:01-04:00"
+      },
+      "last_log_signal": "[2026-07-12T17:45:01Z] done: all profiles in sync, nothing to do"
+    },
+    {
+      "schedule": "10 8 * * *",
+      "command": "flock -n /var/lock/cron_control_plane.lock /root/mgs-agent/scripts/cron-control-plane.py --write-doc >> /root/mgs-agent/logs/cron-control-plane.log 2>&1",
+      "script": "cron-control-plane.py",
+      "script_path": "/root/mgs-agent/scripts/cron-control-plane.py",
+      "log_path": "/root/mgs-agent/logs/cron-control-plane.log",
+      "uses_flock": true,
+      "owner": "Zeus/Ops",
+      "risk": "baixo: re-renderiza docs/CRONS.md",
+      "description": "Regenera docs/CRONS.md com inventário/status dos crons MGS.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 14328,
+        "mtime": "2026-07-12T13:45:38-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 2666,
+        "mtime": "2026-07-12T08:10:01-04:00"
+      },
+      "last_log_signal": "OK wrote /root/mgs-agent/docs/CRONS.md jobs=30 generated_at=2026-07-12T08:10:01-04:00"
+    },
+    {
+      "schedule": "*/15 * * * *",
+      "command": "flock -n /var/lock/monitor_cron_stale_logs.lock /root/mgs-agent/scripts/monitor-cron-stale-logs.sh >> /root/mgs-agent/logs/monitor-cron-stale-logs.log 2>&1",
+      "script": "monitor-cron-stale-logs.sh",
+      "script_path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
+      "log_path": "/root/mgs-agent/logs/monitor-cron-stale-logs.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "baixo: read-only + alerta Discord",
+      "description": "Watchdog que alerta quando logs de crons MGS deixam de atualizar dentro da tolerância esperada.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 9525,
+        "mtime": "2026-07-12T11:33:49-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 200600,
+        "mtime": "2026-07-12T13:45:01-04:00"
+      },
+      "last_log_signal": "[2026-07-12T17:45:01Z] cron-stale check: jobs=30 problems=0 resolved=0 alerts_sent=0"
+    },
+    {
+      "schedule": "*/5 * * * *",
+      "command": "flock -n /var/lock/hermes_news_explainer.lock /root/mgs-agent/scripts/hermes-news-explainer.py >> /root/mgs-agent/logs/hermes-news-explainer.log 2>&1",
+      "script": "hermes-news-explainer.py",
+      "script_path": "/root/mgs-agent/scripts/hermes-news-explainer.py",
+      "log_path": "/root/mgs-agent/logs/hermes-news-explainer.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "baixo/médio: consulta Discord e pode postar explicação automática",
+      "description": "Lê anúncios no canal Hermes News e posta explicação executiva do Zeus em PT-BR, com estado anti-duplicata.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 8238,
+        "mtime": "2026-07-08T00:50:57-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 791628,
+        "mtime": "2026-07-12T13:45:02-04:00"
+      },
+      "last_log_signal": "2026-07-12T17:45:02.000885Z done posted=0 skipped=0 candidates=0 last_seen_id=1525844234224275557"
+    },
+    {
+      "schedule": "7 8,14,20 * * *",
+      "command": "flock -n /var/lock/monitor_webshare_status.lock /root/mgs-agent/scripts/monitor-webshare-status.sh >> /root/mgs-agent/logs/monitor-webshare-status.log 2>&1",
+      "script": "monitor-webshare-status.sh",
+      "script_path": "/root/mgs-agent/scripts/monitor-webshare-status.sh",
+      "log_path": "/root/mgs-agent/logs/monitor-webshare-status.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "baixo: consulta status público + alerta Discord se anomalia",
+      "description": "Monitora status.webshare.io e alerta infra quando detectar manutenção/incidente relevante.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 7715,
+        "mtime": "2026-07-11T00:37:53-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 21316,
+        "mtime": "2026-07-12T08:07:02-04:00"
+      },
+      "last_log_signal": "[2026-07-12T08:07:02-04:00] monitor-webshare-status: OK completed mode=normal"
+    },
+    {
+      "schedule": "41 3 * * *",
+      "command": "flock -n /var/lock/mgs_safety_backup.lock /root/mgs-agent/scripts/mgs-safety-backup.sh >> /root/mgs-agent/logs/mgs-safety-backup-cron.log 2>&1",
+      "script": "mgs-safety-backup.sh",
+      "script_path": "/root/mgs-agent/scripts/mgs-safety-backup.sh",
+      "log_path": "/root/mgs-agent/logs/mgs-safety-backup-cron.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "médio: cria tar.gz local, exclui segredos por padrão",
+      "description": "Cria snapshot operacional seguro no máximo a cada 3 dias, excluindo segredos conhecidos e preservando o último backup.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 6356,
+        "mtime": "2026-06-30T12:54:35-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 5653,
+        "mtime": "2026-07-12T03:41:01-04:00"
+      },
+      "last_log_signal": "[2026-07-10T03:43:28-04:00] mgs-safety-backup: END OK archive=/root/mgs-agent/backups/safety/mgs-safety-20260710-034101.tar.gz size=3416.70MB manifest=/root/mgs-agent/backups/safety/mgs-safety-20260710-034101.manifest.tx"
+    },
+    {
+      "schedule": "54 8,13,18,22 * * *",
+      "command": "flock -n /var/lock/monitor_honcho_health.lock /root/mgs-agent/scripts/monitor-honcho-health.sh >> /root/mgs-agent/logs/monitor-honcho-health.log 2>&1",
+      "script": "monitor-honcho-health.sh",
+      "script_path": "/root/mgs-agent/scripts/monitor-honcho-health.sh",
+      "log_path": "/root/mgs-agent/logs/monitor-honcho-health.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "não classificado",
+      "description": "Sem descrição cadastrada.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 9756,
+        "mtime": "2026-07-12T13:45:38-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 579665,
+        "mtime": "2026-07-12T08:54:42-04:00"
+      },
+      "last_log_signal": "[2026-07-12T08:54:42-04:00] monitor-honcho-health: DONE status=ok failures=0"
+    },
+    {
+      "schedule": "16 9 * * *",
+      "command": "flock -n /var/lock/monitor_discord_thread_archive_warnings.lock /root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py >> /root/mgs-agent/logs/monitor-discord-thread-archive-warnings.log 2>&1",
+      "script": "monitor-discord-thread-archive-warnings.py",
+      "script_path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
+      "log_path": "/root/mgs-agent/logs/monitor-discord-thread-archive-warnings.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "baixo: consulta Discord + keepalive automático antes de auto-archive",
+      "description": "Monitora threads Discord ativas com auto-archive de 1 semana em Zeus/Atena/Ares e posta keepalive quando faltam até 24h para ficarem ocultas.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 13676,
+        "mtime": "2026-07-12T13:45:21-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 1671,
+        "mtime": "2026-07-12T09:16:02-04:00"
+      },
+      "last_log_signal": "monitor-discord-thread-archive-warnings: OK candidates=1 pending_alerts=1 bumped=1 failed_bumps=0 errors=0"
+    },
+    {
+      "schedule": "*/15 * * * *",
+      "command": "/root/mgs-agent/scripts/discord-archive-stale-agent-threads.py --apply --grace-minutes 30 --summary-only >> /root/mgs-agent/logs/discord-archive-stale-agent-threads.log 2>&1",
+      "script": "discord-archive-stale-agent-threads.py",
+      "script_path": "/root/mgs-agent/scripts/discord-archive-stale-agent-threads.py",
+      "log_path": "/root/mgs-agent/logs/discord-archive-stale-agent-threads.log",
+      "uses_flock": false,
+      "owner": "Zeus/Infra",
+      "risk": "não classificado",
+      "description": "Sem descrição cadastrada.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 7743,
+        "mtime": "2026-07-12T13:45:21-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 173133,
+        "mtime": "2026-07-12T13:45:03-04:00"
+      },
+      "last_log_signal": "{\"summary\": {\"mode\": \"apply\", \"profiles\": [\"zeus\", \"atena\", \"ares\", \"hera\"], \"checked\": 23, \"stale\": 0, \"archived\": 0, \"skipped_recent\": 23, \"errors\": 0}}"
+    },
+    {
+      "schedule": "*/5 * * * *",
+      "command": "flock -n /var/lock/monitor_vps_health.lock /root/mgs-agent/scripts/monitor-vps-health.py --channel-id 1522444367292268565 >> /root/mgs-agent/logs/monitor-vps-health.log 2>&1",
+      "script": "monitor-vps-health.py",
+      "script_path": "/root/mgs-agent/scripts/monitor-vps-health.py",
+      "log_path": "/root/mgs-agent/logs/monitor-vps-health.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "baixo: read-only + alerta Discord em anomalia da VPS",
+      "description": "Monitora saúde bruta da VPS: disco, inodes, memória disponível, load, reboot recente, tamanho de backups e services MGS ativos.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 20587,
+        "mtime": "2026-07-12T13:45:38-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 230860,
+        "mtime": "2026-07-12T13:45:02-04:00"
+      },
+      "last_log_signal": "[2026-07-12T13:45:02-0400] monitor-vps-health: DONE status=ok issues=0 resolved=0"
+    },
+    {
+      "schedule": "30 7,15 * * *",
+      "command": "flock -n /var/lock/dtr_sb_page_health_sync.lock /root/mgs-agent/scripts/dtr-sb-page-health-sync.sh --apply --quiet-noop >/dev/null 2>&1",
+      "script": "dtr-sb-page-health-sync.sh",
+      "script_path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
+      "log_path": "",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "não classificado",
+      "description": "Sem descrição cadastrada.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 1047,
+        "mtime": "2026-07-11T12:12:41-04:00"
+      },
+      "log_stat": {
+        "exists": false
+      },
+      "last_log_signal": ""
+    },
+    {
+      "schedule": "2-57/5 * * * *",
+      "command": "flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1",
+      "script": "alerts-infra-failed-alert-resolver.py",
+      "script_path": "/root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py",
+      "log_path": "/root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "não classificado",
+      "description": "Sem descrição cadastrada.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 11956,
+        "mtime": "2026-07-05T01:41:07-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 280670,
+        "mtime": "2026-07-12T13:47:01-04:00"
+      },
+      "last_log_signal": "[2026-07-12T17:47:01Z] alerts-infra-failed-alert-resolver: DONE candidates=0 handled=0 skipped=0 last_seen_id=1525909865417937008"
+    },
+    {
+      "schedule": "20 6 * * *",
+      "command": "flock -n /var/lock/dtr_sb_daily_match_audit.lock /root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh >> /root/mgs-agent/logs/dtr-sb-daily-match-audit-cron.log 2>&1",
+      "script": "dtr-sb-daily-match-audit.sh",
+      "script_path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh",
+      "log_path": "/root/mgs-agent/logs/dtr-sb-daily-match-audit-cron.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "não classificado",
+      "description": "Sem descrição cadastrada.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 674,
+        "mtime": "2026-07-11T12:12:40-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 32215,
+        "mtime": "2026-07-12T06:56:25-04:00"
+      },
+      "last_log_signal": "\"op_errors\": [],"
+    },
+    {
+      "schedule": "39 * * * *",
+      "command": "flock -n /var/lock/monitor_op_rate_limit.lock /root/mgs-agent/scripts/monitor-op-rate-limit.py >> /root/mgs-agent/logs/monitor-op-rate-limit.log 2>&1",
+      "script": "monitor-op-rate-limit.py",
+      "script_path": "/root/mgs-agent/scripts/monitor-op-rate-limit.py",
+      "log_path": "/root/mgs-agent/logs/monitor-op-rate-limit.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "baixo: consulta read-only + alerta Discord por transição",
+      "description": "Monitora limites horário e diário do 1Password Business e alerta o canal dedicado em 50%/90%.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 12324,
+        "mtime": "2026-07-10T21:26:47-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 4118,
+        "mtime": "2026-07-12T13:39:02-04:00"
+      },
+      "last_log_signal": "OK level=normal transition_sent=false token:write=0.00% token:read=0.00% account:read_write=0.05%"
+    },
+    {
+      "schedule": "19,49 * * * *",
+      "command": "flock -n /var/lock/monitor_drive_auth_unified.lock /root/mgs-agent/scripts/monitor-drive-auth-unified.py >> /root/mgs-agent/logs/monitor-drive-auth-unified.log 2>&1",
+      "script": "monitor-drive-auth-unified.py",
+      "script_path": "/root/mgs-agent/scripts/monitor-drive-auth-unified.py",
+      "log_path": "/root/mgs-agent/logs/monitor-drive-auth-unified.log",
+      "uses_flock": true,
+      "owner": "Zeus/Infra",
+      "risk": "não classificado",
+      "description": "Sem descrição cadastrada.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 11695,
+        "mtime": "2026-07-11T00:34:22-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 6512,
+        "mtime": "2026-07-12T13:19:01-04:00"
+      },
+      "last_log_signal": "drive_auth status=ok user=token_ok sa=my_drive_sa_upload_blocked sa_checked=0 dry_run=0"
+    },
+    {
+      "schedule": "0 8 * * *",
+      "command": "flock -n /var/lock/sync_sb_sms_revenue_daily.lock /root/mgs-agent/scripts/sync-sb-sms-revenue-daily.sh >> /root/mgs-agent/logs/sync-sb-sms-revenue-daily.log 2>&1",
+      "script": "sync-sb-sms-revenue-daily.sh",
+      "script_path": "/root/mgs-agent/scripts/sync-sb-sms-revenue-daily.sh",
+      "log_path": "/root/mgs-agent/logs/sync-sb-sms-revenue-daily.log",
+      "uses_flock": true,
+      "owner": "Zeus/Revenue Tech",
+      "risk": "médio/alto: lê SB autenticada e escreve receita diária no WordPress com transação/readback",
+      "description": "Às 08:00 ET, importa no WordPress a receita líquida SMS do dia anterior fechado na Smart Bidding, com upsert e readback.",
+      "script_stat": {
+        "exists": true,
+        "size_bytes": 820,
+        "mtime": "2026-07-11T19:27:27-04:00"
+      },
+      "log_stat": {
+        "exists": true,
+        "size_bytes": 2011,
+        "mtime": "2026-07-12T08:00:15-04:00"
+      },
+      "last_log_signal": "{\"status\": \"SYNC_OK\", \"target_date\": \"2026-07-11\", \"groups\": 7, \"source_rows\": 7, \"revenue_cents\": 50482, \"net_revenue_cents\": 45435, \"investment_cents\": 0, \"readback\": {\"status\": \"DAILY_REVENUE_IMPORT_OK\", \"target_date\""
+    }
+  ],
+  "external_system_crons": [
+    {
+      "source_file": "/etc/cron.d/monarx-update",
+      "schedule": "20 4 * * 2",
+      "user": "root",
+      "command": "apt-get update -qq && apt-get install -y -qq monarx-agent monarx-protect monarx-protect-autodetect > /dev/null 2>&1",
+      "owner": "Host/security infra",
+      "risk": "médio: apt update/install externo pode acionar needrestart/systemd",
+      "description": "Atualiza Monarx security scanner/protect; janela conhecida terça 04:20 EDT.",
+      "guardrail": "/etc/needrestart/conf.d/mgs-hermes-gateways.conf exclui Zeus/Atena/Ares de auto-restart por needrestart."
+    }
+  ]
+}
