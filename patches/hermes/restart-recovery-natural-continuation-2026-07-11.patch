@@ -41,9 +41,14 @@ index 84c43de..1c0a55d 100644
 -                # no NEW user message to address, so tell the model to report
 -                # recovery instead of the (nonexistent) "new message".
 -                if message:
-+                _internal_auto_resume = bool(getattr(event, "internal", False))
++                _internal_auto_resume = bool(
++                    isinstance(message, str)
++                    and message.startswith("[Internal continuation event:")
++                )
 +                # Internal startup continuation is transport machinery, not a
-+                # user-authored message. Persist an empty override so the
++                # user-authored message. Detect it from the explicit internal
++                # marker because the nested run_sync worker does not receive the
++                # outer MessageEvent object. Persist an empty override so the
 +                # synthetic directive never reappears as Rodolfo's text.
 +                _persist_user_message_override = "" if _internal_auto_resume else message
 +                if _internal_auto_resume:

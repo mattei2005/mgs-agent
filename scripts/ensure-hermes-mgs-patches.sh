@@ -62,9 +62,28 @@ apply_patch_if_needed() {
       fi
       ;;
     restart-recovery-natural-continuation-*.patch)
+      if grep -q 'getattr(event, "internal", False)' "$REPO/gateway/run.py"; then
+        /usr/bin/python3 - "$REPO/gateway/run.py" <<'PY'
+from pathlib import Path
+import sys
+path = Path(sys.argv[1])
+text = path.read_text()
+broken = '_internal_auto_resume = bool(getattr(event, "internal", False))'
+fixed = '''_internal_auto_resume = bool(
+                    isinstance(message, str)
+                    and message.startswith("[Internal continuation event:")
+                )'''
+if text.count(broken) != 1:
+    raise SystemExit(f"unexpected broken auto-resume marker count: {text.count(broken)}")
+path.write_text(text.replace(broken, fixed, 1))
+PY
+        log "repaired undefined event reference in nested restart-resume worker: $name"
+      fi
       if grep -q "Internal continuation event" "$REPO/gateway/run.py" \
+        && grep -q 'message.startswith("\[Internal continuation event:")' "$REPO/gateway/run.py" \
         && grep -q "finish every outstanding" "$REPO/gateway/run.py" \
-        && grep -q "chronological order" "$REPO/gateway/run.py"; then
+        && grep -q "chronological order" "$REPO/gateway/run.py" \
+        && ! grep -q 'getattr(event, "internal", False)' "$REPO/gateway/run.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
