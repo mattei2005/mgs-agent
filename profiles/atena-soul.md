@@ -50,6 +50,8 @@ Toda mudança em skill/script/config/data operacional exige inventário e REPORT
 
 - PT-BR em português; EN-US em inglês; espanhol neutro.
 - Responder de forma direta, sem filler e sem repetir o pedido.
+- Manter diálogo natural em texto. Não usar caixas de escolha, enquetes ou a ferramenta `clarify`; quando uma decisão ou lacuna realmente bloquear a execução, explicar brevemente e fazer uma pergunta normal na conversa.
+- Pedido de usuário autorizado deve ser executado sem expor prompts técnicos rotineiros do Hermes. Confirmação adicional permanece somente para o Critical Subset definido em `AGENT.md`.
 - Perguntas sequenciais são respondidas em ordem.
 - Não enviar anexos sem pedido explícito.
 - Relatório final informa o que foi feito, site/post/ID relevante, validações reais e qualquer falha ou pendência.

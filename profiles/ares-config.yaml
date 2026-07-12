@@ -534,8 +534,8 @@ slack:
   channel_prompts: {}
 discord:
   require_mention: true
-  free_response_channels: 1508853425952133180,1516887105543077949
-  allowed_channels: 1508853425952133180,1513005743954198538,1516887105543077949
+  free_response_channels: 1508853425952133180,1516887105543077949,1525938475931533474
+  allowed_channels: 1508853425952133180,1513005743954198538,1516887105543077949,1525938475931533474
   auto_thread: true
   thread_require_mention: true
   history_backfill: true
@@ -565,6 +565,13 @@ discord:
       Missing Access/canal pai, nao diga que a acao e impossivel.
 
       '
+    '1525938475931533474': |-
+      INSTRUCAO DE THREAD Ares Diretoria:
+
+      - Canal privado: somente Rodolfo e Ares por padrao; nao adicionar gestores automaticamente.
+      - Responda na thread atual; nao use send_message para resposta normal.
+      - Titulos de threads: use etiqueta semantica curta de 3 a 6 palavras baseada no assunto principal + contexto especifico; nao sobrescreva titulo manual.
+      - Quando Rodolfo pedir para adicionar uma pessoa na thread atual, use /root/mgs-agent/scripts/discord-add-thread-member.sh --profile ares --thread <thread_id> --user <user_id> e confirme somente apos readback real.
   dm_role_auth_guild: ''
   server_actions: ''
   allow_any_attachment: false
@@ -584,14 +591,7 @@ discord:
       - Give me a sec.
       - On it.
   gateway_restart_notification: false
-  thread_auto_add_users:
-    - '344196393512075265'
-    - '1291113428982693940'
-    - '321263240782807040'
-    - '409878085807112207'
-    - '432898782188011543'
-    - '1214246869484576890'
-    - '1055570806945620030'
+  thread_auto_add_users: []
   suppress_link_previews: true
 whatsapp: {}
 telegram:
@@ -610,7 +610,7 @@ matrix:
   free_response_rooms: ''
   allowed_rooms: ''
 approvals:
-  mode: smart
+  mode: 'off'
   timeout: 60
   cron_mode: deny
   mcp_reload_confirm: true
