@@ -1,6 +1,6 @@
 {
   "_comment": "Authorization registry for MGS Agents (Zeus, Atena, Ares, Hera). Discord-only notifications. Authorization is by Discord ID individual (not by Discord role).",
-  "_updated": "2026-07-05",
+  "_updated": "2026-07-12",
   "discord_server": {
     "name": "MGS Digital Corp",
     "guild_id": "1185714635991679006"
@@ -96,11 +96,19 @@
       "discord_channel_id": "1508853425952133180",
       "discord_channel_name": "ares-campaign-ads-agent",
       "authorized_user_discord_ids": [
-        "344196393512075265"
+        "344196393512075265",
+        "321263240782807040",
+        "409878085807112207",
+        "432898782188011543",
+        "1214246869484576890",
+        "1291113428982693940",
+        "1055570806945620030"
       ],
       "allowed_intents": [
         "ads_status",
+        "campaign_management",
         "campaign_report",
+        "creative_operations",
         "creative_analysis",
         "budget_analysis",
         "tracking_diagnostics",
@@ -116,7 +124,136 @@
           "discord_role": "Super Admin",
           "access_level": "full",
           "added": "2026-05-26",
-          "added_by": "zeus"
+          "added_by": "zeus",
+          "scope": {
+            "agent": "ares",
+            "operations": [
+              "campaign_management",
+              "campaign_reports",
+              "creative_operations"
+            ],
+            "budget_rule": "Budget write continues subject to Ares SOUL and permissions-matrix approval gates."
+          }
+        },
+        {
+          "discord_id": "321263240782807040",
+          "discord_username": "geizianpereira",
+          "name": "Geizian",
+          "discord_role": "Admin / Sócio",
+          "added": "2026-07-12",
+          "added_by": "zeus",
+          "authorized_by_discord_id": "344196393512075265",
+          "authorized_at": "2026-07-12T13:26:45-04:00",
+          "access_level": "full",
+          "scope": {
+            "agent": "ares",
+            "operations": [
+              "campaign_management",
+              "campaign_reports",
+              "creative_operations"
+            ],
+            "budget_rule": "Budget write continues subject to Ares SOUL and permissions-matrix approval gates."
+          }
+        },
+        {
+          "discord_id": "409878085807112207",
+          "discord_username": "georgeicaro",
+          "name": "Icaro",
+          "discord_role": "Gestor",
+          "added": "2026-07-12",
+          "added_by": "zeus",
+          "authorized_by_discord_id": "344196393512075265",
+          "authorized_at": "2026-07-12T13:26:45-04:00",
+          "access_level": "full",
+          "scope": {
+            "agent": "ares",
+            "operations": [
+              "campaign_management",
+              "campaign_reports",
+              "creative_operations"
+            ],
+            "budget_rule": "Budget write continues subject to Ares SOUL and permissions-matrix approval gates."
+          }
+        },
+        {
+          "discord_id": "432898782188011543",
+          "discord_username": "isliagopereira",
+          "name": "Isliago",
+          "discord_role": "Gestor",
+          "added": "2026-07-12",
+          "added_by": "zeus",
+          "authorized_by_discord_id": "344196393512075265",
+          "authorized_at": "2026-07-12T13:26:45-04:00",
+          "access_level": "full",
+          "scope": {
+            "agent": "ares",
+            "operations": [
+              "campaign_management",
+              "campaign_reports",
+              "creative_operations"
+            ],
+            "budget_rule": "Budget write continues subject to Ares SOUL and permissions-matrix approval gates."
+          }
+        },
+        {
+          "discord_id": "1214246869484576890",
+          "discord_username": "joewillams",
+          "name": "Joe",
+          "discord_role": "Gestor",
+          "added": "2026-07-12",
+          "added_by": "zeus",
+          "authorized_by_discord_id": "344196393512075265",
+          "authorized_at": "2026-07-12T13:26:45-04:00",
+          "access_level": "full",
+          "scope": {
+            "agent": "ares",
+            "operations": [
+              "campaign_management",
+              "campaign_reports",
+              "creative_operations"
+            ],
+            "budget_rule": "Budget write continues subject to Ares SOUL and permissions-matrix approval gates."
+          }
+        },
+        {
+          "discord_id": "1291113428982693940",
+          "discord_username": "kellynscaraujo_",
+          "name": "Kelly",
+          "discord_role": "Gestora / Creative Ops",
+          "added": "2026-07-12",
+          "added_by": "zeus",
+          "authorized_by_discord_id": "344196393512075265",
+          "authorized_at": "2026-07-12T13:26:45-04:00",
+          "access_level": "full",
+          "scope": {
+            "agent": "ares",
+            "operations": [
+              "campaign_management",
+              "campaign_reports",
+              "creative_operations"
+            ],
+            "budget_rule": "Budget write continues subject to Ares SOUL and permissions-matrix approval gates."
+          }
+        },
+        {
+          "discord_id": "1055570806945620030",
+          "discord_username": "nh0471",
+          "name": "Nicolas",
+          "discord_role": "Gestor",
+          "added": "2026-07-12",
+          "added_by": "zeus",
+          "authorized_by_discord_id": "344196393512075265",
+          "authorized_at": "2026-07-12T13:26:45-04:00",
+          "access_level": "full",
+          "scope": {
+            "agent": "ares",
+            "operations": [
+              "campaign_management",
+              "campaign_reports",
+              "creative_operations"
+            ],
+            "budget_rule": "Budget write continues subject to Ares SOUL and permissions-matrix approval gates."
+          }
         }
       ]
     },
