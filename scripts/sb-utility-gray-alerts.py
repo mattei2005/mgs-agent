@@ -59,43 +59,57 @@ def should_report(color, age):
 
 
 def render_alert(alerts):
-    priority = {'vermelho': 0, 'roxo': 1, 'cinza': 2}
-    alerts = sorted(
-        alerts,
+    grouped = {}
+    totals = {'cinza': 0, 'roxo': 0, 'vermelho': 0}
+    for age, rec in alerts:
+        group = grouped.setdefault(rec['template'], {'items': [], 'counts': {'cinza': 0, 'roxo': 0, 'vermelho': 0}})
+        color = rec.get('color') or ''
+        group['items'].append((age, rec))
+        group['counts'][color] = group['counts'].get(color, 0) + 1
+        totals[color] = totals.get(color, 0) + 1
+
+    ordered = sorted(
+        grouped.items(),
         key=lambda item: (
-            priority.get(item[1].get('color'), 9),
-            item[1].get('template') or '',
-            int(item[1].get('message_id') or 0),
+            0 if item[1]['counts'].get('vermelho') else 1,
+            0 if item[1]['counts'].get('roxo') else 1,
+            item[0],
         ),
     )
     rows = []
-    counts = {'cinza': 0, 'roxo': 0, 'vermelho': 0}
-    for age, rec in alerts:
-        site, config, manager = template_columns(rec['template'])
-        message_id = str(rec.get('message_id') or '-')
-        color = str(rec.get('color') or '-').upper()
-        status = str(rec.get('status') or 'GRAY')
-        cta = str(rec.get('cta') or '-').strip()
-        counts[rec.get('color')] = counts.get(rec.get('color'), 0) + 1
+    labels = {'cinza': 'C', 'roxo': 'RX', 'vermelho': 'VM'}
+    for template, group in ordered:
+        site, config, manager = template_columns(template)
+        details = []
+        for color in ('cinza', 'roxo', 'vermelho'):
+            colored = sorted(
+                ((age, rec) for age, rec in group['items'] if rec.get('color') == color),
+                key=lambda item: int(item[1].get('message_id') or 0),
+            )
+            if colored:
+                ids = ','.join(f"{int(rec.get('message_id') or 0)}({age}d)" for age, rec in colored)
+                details.append(f'{labels[color]}:{ids}')
+        counts = group['counts']
         rows.append(
             f'{site:<18} | {config:<24} | {manager:<10} | '
-            f'{message_id:>4} | {color:<8} | {age:>4} | {status:<14} | {cta}'
+            f'{counts.get("cinza", 0):>3} | {counts.get("roxo", 0):>4} | '
+            f'{counts.get("vermelho", 0):>4} | {"; ".join(details)}'
         )
 
-    header = 'Template           | Configuração             | Gestor     | ID   | Cor      | Dias | Status         | CTA'
-    divider = '-------------------|--------------------------|------------|------|----------|------|----------------|-------------------------'
+    header = 'Template           | Configuração             | Gestor     | C≥2 | Roxo | Verm | IDs por cor (dias)'
+    divider = '-------------------|--------------------------|------------|-----|------|------|-------------------------'
     lines = [
         'Template/Broadcast — estados acionáveis',
         (
-            f'Cinza >= {ALERT_AFTER_DAYS} dias: {counts["cinza"]} | '
-            f'Roxo: {counts["roxo"]} | Vermelho: {counts["vermelho"]}'
+            f'Cinza >= {ALERT_AFTER_DAYS} dias: {totals["cinza"]} | '
+            f'Roxo: {totals["roxo"]} | Vermelho: {totals["vermelho"]}'
         ),
         '',
     ]
     # Independent blocks keep Discord's automatic message splitting readable.
-    for start in range(0, len(rows), 9):
-        lines.extend(['```', header, divider, *rows[start:start + 9], '```', ''])
-    lines.append('Política: roxo = diagnóstico; vermelho = elegível à troca red-only; cinza = sem troca automática.')
+    for start in range(0, len(rows), 6):
+        lines.extend(['```', header, divider, *rows[start:start + 6], '```', ''])
+    lines.append('Legenda: C=cinza, RX=roxo, VM=vermelho. Roxo é diagnóstico; vermelho está sem executor ativo.')
     return '\n'.join(lines)
 
 
