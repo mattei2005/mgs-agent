@@ -188,6 +188,7 @@ A correção não termina no checkout vivo. Os artefatos canônicos são:
 /root/mgs-agent/patches/hermes/mgs-busy-steer-startup-merge-2026-07-11.patch
 /root/mgs-agent/patches/hermes/mgs-busy-steer-startup-race-hardening-2026-07-11.patch
 /root/mgs-agent/patches/hermes/mgs-busy-steer-reentrant-followup-2026-07-12.patch
+/root/mgs-agent/patches/hermes/mgs-busy-steer-reentrant-rebuild-2026-07-12.patch
 ```
 
 Os patches devem permanecer listados, na mesma ordem, em ambos:
@@ -208,7 +209,7 @@ Invariantes mínimos do guard:
 - falha de enrichment mantém caption + paths e tenta steer antes de queue;
 - follow-up recebido enquanto `_running_agents[session_key]` ainda é `_AGENT_PENDING_SENTINEL` reserva ordem de chegada antes de qualquer preprocessamento assíncrono;
 - o worker aguarda todas as reservas em voo, drena em FIFO e promove o sentinel para o agente real de forma atômica sob a mesma barreira;
-- follow-up recursivo no mesmo `AIAgent` + mesma geração reconhece promoção já concluída e não gera falso `lost ownership`; agente diferente ou geração substituída continua fail-closed;
+- follow-up recursivo na mesma geração reconhece a promoção já concluída: reutiliza o mesmo `AIAgent` quando a assinatura continua igual e transfere ownership atomicamente para um `AIAgent` reconstruído quando skill/config/session cache mudou entre os dois turnos; essa transferência só é permitida em `_interrupt_depth > 0`, enquanto geração substituída e troca de agente em turno inicial continuam fail-closed;
 - chamadas diretas legadas de `_run_agent()` com `run_generation=None` e slot vazio continuam válidas sem enfraquecer o ownership de runs gerenciados;
 - `_try_busy_steer_event()` relê geração e identidade do agente depois de STT/enrichment; resultado atrasado nunca é aplicado a agente encerrado/substituído;
 - `_merge_startup_steer_into_message()` acontece antes da primeira chamada ao modelo, inclusive quando o primeiro resultado não usa tools;
@@ -280,7 +281,7 @@ Artefato canônico atual:
 
 ## Pitfalls
 
-- **Reentrant queued follow-up após promoção:** `_run_agent_inner()` drena uma mensagem pendente chamando `_run_agent()` recursivamente enquanto o turno externo ainda possui o mesmo `AIAgent` e a mesma geração. `_promote_agent_and_consume_startup_steers()` deve tratar a identidade exata `current_agent is agent` + geração atual como promoção já concluída e retornar payload vazio; não pode exigir novamente `_AGENT_PENDING_SENTINEL`, senão aborta com `startup agent promotion lost ownership` e o Discord mostra `Sorry, I encountered an unexpected error`. Preserve o fail-closed para agente diferente/geração substituída. Cubra também chamadas diretas legadas com `run_generation=None` e slot ainda vazio. Testes canônicos: `test_reentrant_followup_promotion_reuses_current_agent` e `test_reentrant_followup_does_not_mask_replaced_agent`.
+- **Reentrant queued follow-up após promoção:** `_run_agent_inner()` drena uma mensagem pendente chamando `_run_agent()` recursivamente com a mesma geração. Se a assinatura do cache não mudou, `current_agent is agent` significa promoção já concluída. Se skill/config/session cache mudou entre as duas etapas, o follow-up pode reconstruir legitimamente o `AIAgent`; nesse caso, e somente quando `_interrupt_depth > 0` + geração ainda atual, transfira ownership atomicamente para o agente reconstruído. Exigir identidade exata em ambos os casos aborta com `startup agent promotion lost ownership` e o Discord mostra `Sorry, I encountered an unexpected error`. Turno inicial com agente diferente ou qualquer geração substituída permanece fail-closed. Testes canônicos: `test_reentrant_followup_promotion_reuses_current_agent`, `test_reentrant_followup_does_not_mask_replaced_agent`, `test_reentrant_followup_transfers_same_generation_rebuilt_agent` e `test_recursive_run_enables_same_generation_replacement`.
 - Validar apenas texto e declarar multimedia steer pronto.
 - Chamar `queue` de consolidação.
 - Usar `interrupt` para complementos e destruir tool/subagent work.

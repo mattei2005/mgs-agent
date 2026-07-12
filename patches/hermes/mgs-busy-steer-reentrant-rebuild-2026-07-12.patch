@@ -1,0 +1,82 @@
+diff --git a/gateway/run.py b/gateway/run.py
+--- a/gateway/run.py
++++ b/gateway/run.py
+@@ -5452,6 +5452,7 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+         run_generation: Optional[int],
+         *,
+         timeout: float = 60.0,
++        allow_same_generation_replacement: bool = False,
+     ) -> tuple[str, List[MessageEvent]]:
+         """Wait for reserved preprocessors, then atomically close and promote."""
+         if not session_key:
+@@ -5476,6 +5477,23 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+             # promotion already happened for that chain; treating this as an
+             # ownership loss aborts the valid follow-up with a generic error.
+             if current_agent is agent and generation_current:
++                return "", []
++            # A recursive in-band follow-up can legitimately rebuild the
++            # cached AIAgent between turns in the same run generation (for
++            # example after a skill/config signature change or a concurrent
++            # SessionDB write). The outer turn has already completed before
++            # recursion, so transfer ownership to the replacement atomically.
++            # Initial turns keep the strict identity check below.
++            if (
++                allow_same_generation_replacement
++                and generation_current
++                and current_agent is not None
++                and current_agent is not _AGENT_PENDING_SENTINEL
++            ):
++                self._pending_startup_steers.pop(session_key, None)
++                self._startup_steer_open.discard(session_key)
++                self._pending_startup_steer_sequence.pop(session_key, None)
++                self._running_agents[session_key] = agent
+                 return "", []
+             direct_unclaimed_run = run_generation is None and current_agent is None
+             if (
+@@ -19433,6 +19451,7 @@ class GatewayRunner(GatewayAuthorizationMixin, GatewayKanbanWatchersMixin, Gatew
+                         session_key,
+                         agent,
+                         run_generation,
++                        allow_same_generation_replacement=_interrupt_depth > 0,
+                     )
+                     if session_key
+                     else ("", [])
+diff --git a/tests/gateway/test_busy_session_ack.py b/tests/gateway/test_busy_session_ack.py
+--- a/tests/gateway/test_busy_session_ack.py
++++ b/tests/gateway/test_busy_session_ack.py
+@@ -921,6 +921,35 @@ class TestBusySessionAck:
+ 
+         assert runner._running_agents[sk] is current_agent
+ 
++    def test_reentrant_followup_transfers_same_generation_rebuilt_agent(self):
++        """A recursive follow-up may own a rebuilt cache agent in the same generation."""
++        runner, _sentinel = _make_runner()
++        event = _make_event(text="follow-up after skill reload")
++        sk = build_session_key(event.source)
++        current_agent = MagicMock()
++        rebuilt_agent = MagicMock()
++        runner._running_agents[sk] = current_agent
++        runner._session_run_generation[sk] = 1
++
++        payload, events = runner._promote_agent_and_consume_startup_steers(
++            sk,
++            rebuilt_agent,
++            1,
++            allow_same_generation_replacement=True,
++        )
++
++        assert payload == ""
++        assert events == []
++        assert runner._running_agents[sk] is rebuilt_agent
++
++    def test_recursive_run_enables_same_generation_replacement(self):
++        """The production recursive path must opt into the guarded transfer."""
++        import inspect
++        from gateway.run import GatewayRunner
++
++        src = inspect.getsource(GatewayRunner._run_agent_inner)
++        assert "allow_same_generation_replacement=_interrupt_depth > 0" in src
++
+     @pytest.mark.asyncio
+     async def test_async_prepare_does_not_steer_into_replaced_agent(self):
+         """A completed preprocessor must revalidate agent identity/generation."""

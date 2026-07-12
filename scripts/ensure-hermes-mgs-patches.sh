@@ -147,6 +147,14 @@ apply_patch_if_needed() {
         return 0
       fi
       ;;
+    mgs-busy-steer-reentrant-rebuild-*.patch)
+      if grep -q "allow_same_generation_replacement=_interrupt_depth > 0" "$REPO/gateway/run.py" \
+        && grep -q "test_reentrant_followup_transfers_same_generation_rebuilt_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
+        && grep -q "test_recursive_run_enables_same_generation_replacement" "$REPO/tests/gateway/test_busy_session_ack.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     mgs-busy-steer-ack-ptbr-*.patch)
       if grep -q "Mensagem adicionada à execução atual" "$REPO/gateway/run.py" \
         && grep -q "Vou considerá-la no próximo passo" "$REPO/tests/gateway/test_busy_session_ack.py"; then
@@ -206,6 +214,7 @@ apply_patch_if_needed "mgs-busy-steer-universal-media-2026-07-10.patch"
 apply_patch_if_needed "mgs-busy-steer-startup-merge-2026-07-11.patch"
 apply_patch_if_needed "mgs-busy-steer-startup-race-hardening-2026-07-11.patch"
 apply_patch_if_needed "mgs-busy-steer-reentrant-followup-2026-07-12.patch"
+apply_patch_if_needed "mgs-busy-steer-reentrant-rebuild-2026-07-12.patch"
 apply_patch_if_needed "mgs-busy-steer-ack-ptbr-2026-07-11.patch"
 apply_patch_if_needed "skill-view-compact-linked-files.patch"
 
@@ -307,6 +316,10 @@ grep -q "test_startup_barrier_waits_and_preserves_arrival_order" "$REPO/tests/ga
   || fail "missing MGS startup steer async FIFO/barrier test"
 grep -q "test_async_prepare_does_not_steer_into_replaced_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
   || fail "missing MGS stale-agent busy steer regression test"
+grep -q "allow_same_generation_replacement=_interrupt_depth > 0" "$REPO/gateway/run.py" \
+  || fail "missing MGS recursive rebuilt-agent ownership transfer"
+grep -q "test_reentrant_followup_transfers_same_generation_rebuilt_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
+  || fail "missing MGS rebuilt-agent follow-up regression test"
 grep -q "Mensagem adicionada à execução atual" "$REPO/gateway/run.py" \
   || fail "missing MGS PT-BR busy-steer acknowledgment"
 grep -q "Vou considerá-la no próximo passo" "$REPO/tests/gateway/test_busy_session_ack.py" \

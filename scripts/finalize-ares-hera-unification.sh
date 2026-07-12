@@ -59,6 +59,7 @@ HERA_ACTIVE="$(systemctl is-active hera-gateway.service 2>/dev/null || true)"
 HERA_ENABLED="$(systemctl is-enabled hera-gateway.service 2>/dev/null || true)"
 [[ "$HERA_ACTIVE" != "active" ]] || { write_state "failed" "Hera continuou ativa"; audit "ares_hera_finalizer_failed" "Hera continuou ativa"; exit 77; }
 [[ "$HERA_ENABLED" != "enabled" ]] || { write_state "failed" "Hera continuou enabled"; audit "ares_hera_finalizer_failed" "Hera continuou enabled"; exit 78; }
+systemctl reset-failed hera-gateway.service 2>/dev/null || true
 audit "hera_gateway_deactivated" "service=hera-gateway.service active=$HERA_ACTIVE enabled=$HERA_ENABLED profile/data preservados"
 
 # External detached job: safe place to restart Ares and wait for readiness.
@@ -71,7 +72,7 @@ done
 
 READY=0
 for _ in $(seq 1 45); do
-  if journalctl -u ares-gateway.service --since '-2 minutes' --no-pager 2>/dev/null | grep -Eqi 'Connected as|gateway running|logged in as|discord.*ready|ready'; then READY=1; break; fi
+  if { journalctl -u ares-gateway.service --since '-2 minutes' --no-pager 2>/dev/null; tail -n 400 /root/.hermes/profiles/ares/logs/agent.log 2>/dev/null; } | grep -Eqi 'Connected as|gateway running|logged in as|discord.*ready|ready'; then READY=1; break; fi
   sleep 1
 done
 [[ "$READY" -eq 1 ]] || { write_state "failed" "Ares active sem marker Discord de readiness"; audit "ares_hera_finalizer_failed" "Ares active sem marker Discord de readiness"; exit 80; }
@@ -81,7 +82,7 @@ audit "ares_gateway_restarted" "service=ares-gateway.service active e Discord re
 /root/mgs-agent/scripts/infra-discovery.sh
 python3 -m json.tool /root/mgs-agent/data/infra-inventory.json >/dev/null
 
-ARES_MESSAGE='<@1496296175014252634> A Hera foi desativada e consolidada em você. A partir de agora, você é o único agente responsável pelo fluxo completo de Creative Operations + Campaign Operations: pedido/upload → criação ou tratamento → sanitização → naming e Drive → inventário/linhagem → reserva e elegibilidade → conciliação Meta × Drive → campanhas/testes → performance e ROI. Fontes atuais: seu SOUL, context/ares-operational-map.md e skills growth. Referências da Hera são somente histórico/rollback. Usuários permanentes autorizados: Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas; gates específicos de budget, billing, credencial e produção crítica continuam valendo.'
+ARES_MESSAGE='<@1508864261504630925> A Hera foi desativada e consolidada em você. A partir de agora, você é o único agente responsável pelo fluxo completo de Creative Operations + Campaign Operations: pedido/upload → criação ou tratamento → sanitização → naming e Drive → inventário/linhagem → reserva e elegibilidade → conciliação Meta × Drive → campanhas/testes → performance e ROI. Fontes atuais: seu SOUL, context/ares-operational-map.md e skills growth. Referências da Hera são somente histórico/rollback. Usuários permanentes autorizados: Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas; gates específicos de budget, billing, credencial e produção crítica continuam valendo.'
 if hermes -p zeus send --to discord:1508853425952133180 --quiet "$ARES_MESSAGE"; then
   audit "ares_handoff_notified" "channel=1508853425952133180 message entregue"
   HANDOFF="sent"
