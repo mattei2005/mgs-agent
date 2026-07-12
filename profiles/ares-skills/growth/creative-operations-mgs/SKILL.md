@@ -43,6 +43,15 @@ Ares é dono das duas etapas. A transição entre Creative Ops e Campaign Ops oc
 - Antes de seleção/write, conciliar Drive × Meta.
 - Nunca tratar material de Ad Library como asset final sem transformação/aprovação.
 
+## Invariantes atuais de intake e naming
+
+- Entrada canônica: `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`; `UPLOAD_CANVAS` é apenas histórico e não deve ser recriada.
+- `GEIZIAN` contém cópias de conveniência para upload do gestor e fica fora do pool/inventário canônico.
+- `LIBRARY META` contém referências; nunca é fonte automática de asset final.
+- `P_ORIENT` final aceita somente `PV`, `NV`, `PH`, `NH`; square/feed 1:1 usa `PH/NH`.
+- Para país BR, “Português” sem qualificador usa `LANG=BR`; `LANG=PT` exige português de Portugal explícito.
+- Antes de mudar regras, scripts ou estrutura do Drive, apresentar o plano exato e obter aprovação. Se Rodolfo declarar sua auditoria manual do Drive como final, não aplicar limpeza automática sobre ela.
+
 ## Guardrails
 
 - Skills criativas não autorizam sozinhas campaign write, budget, billing ou credencial; carregar a skill Campaign Ops e validar autoridade.
