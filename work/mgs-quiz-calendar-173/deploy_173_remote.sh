@@ -36,7 +36,7 @@ install -o runcloud2 -g runcloud2 -m 0644 "$CAND/mgs-quiz-carro.php" "$LIVE/mgs-
 [[ "$(sha256sum "$LIVE/mgs-quiz-carro.php" | cut -d' ' -f1)" == "$EXPECTED_BOOT" ]]
 [[ "$(sha256sum "$LIVE/includes/class-mgs-quiz-admin.php" | cut -d' ' -f1)" == "$EXPECTED_ADMIN" ]]
 wp --allow-root --path="$SITE_ROOT" plugin status mgs-quiz-carro --skip-plugins --skip-themes | grep -q 'Version: 1.7.3'
-wp --allow-root --path="$SITE_ROOT" eval-file "$SMOKE" --skip-plugins --skip-themes
+wp --allow-root --path="$SITE_ROOT" eval-file "$SMOKE" --skip-themes
 for route in quiz-car-parcelas quiz-car-parcelas-g001 quiz-car-parcelas-g003 quiz-car-parcelas-g002-qm002; do
   code="$(curl -sS -o /dev/null -w '%{http_code}' "https://creditoparaveiculo.com/${route}/")"
   [[ "$code" == 200 ]]

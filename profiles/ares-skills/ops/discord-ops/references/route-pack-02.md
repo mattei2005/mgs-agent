@@ -60,18 +60,7 @@ for m in s.get('messages', []):
 
 ### Formato REPORT-INFRA (Atena/Ares → Zeus)
 
-Dois user mentions: bot Zeus (para `DISCORD_ALLOW_BOTS=mentions`) + Rodolfo (push notification):
-
-```
-[REPORT-INFRA] <@1496296175014252634> <@344196393512075265>
-Ação: criada/modificada/removida
-Tipo: cron / skill / script / config / data
-Path: caminho exato
-Motivo: contexto
-Evidência: hash de commit ou output de comando
-```
-
-Ares-specific pitfall: REPORT-INFRA **não deve abrir thread** no canal de infra/alertas. Para Ares, preferir sempre `/root/mgs-agent/scripts/ares-report-infra.sh` via webhook. Não usar `/root/mgs-agent/scripts/ares-discord-post-with-thread.py` para `[REPORT-INFRA]` sem `--thread-id`, porque isso posta no canal e cria thread automática. Se precisar validar sem sujar o Discord: `printf '[REPORT-INFRA] test\n' | /root/mgs-agent/scripts/ares-report-infra.sh --dry-run`.
+REPORT-INFRA usa somente Discord Embed pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh`: `content` vazio, sem mentions, sem thread e sem segunda cópia em texto. O adaptador `/root/mgs-agent/scripts/ares-report-infra.sh` permanece compatível com payloads legados, mas os converte para o mesmo embed. Não usar `send_message` nem `ares-discord-post-with-thread.py` para REPORT-INFRA. Validar sem sujar o canal com `ares-report-infra.sh --dry-run`.
 
 Zeus responde com máximo 2 linhas:
 - `✅ Registrado.`

@@ -12,12 +12,13 @@ REASON=""
 EVIDENCE=""
 COLOR="3447003"
 TITLE="REPORT-INFRA"
+DRY_RUN=0
 # REPORT-INFRA embeds no #alerts-infra devem ser silenciosos por padrão.
 # Rodolfo pediu explicitamente para não mencionar Zeus, ele, nem ninguém nesses alertas.
 
 usage() {
   cat <<'EOF'
-Usage: send-report-infra-embed.sh --action <criada|modificada|removida> --type <tipo> --path <path(s)> --reason <motivo> --evidence <evidência> [--color <decimal>]
+Usage: send-report-infra-embed.sh --action <criada|modificada|removida> --type <tipo> --path <path(s)> --reason <motivo> --evidence <evidência> [--color <decimal>] [--dry-run]
 EOF
 }
 
@@ -29,6 +30,7 @@ while [[ $# -gt 0 ]]; do
     --reason) REASON="${2:-}"; shift 2 ;;
     --evidence) EVIDENCE="${2:-}"; shift 2 ;;
     --color) COLOR="${2:-}"; shift 2 ;;
+    --dry-run) DRY_RUN=1; shift ;;
     -h|--help) usage; exit 0 ;;
     *) echo "ERROR: argumento desconhecido: $1" >&2; usage >&2; exit 2 ;;
   esac
@@ -78,10 +80,16 @@ PAYLOAD=$(jq -n \
     {name:"Horário", value:$now, inline:true}
   ]}]}')
 
-if ! POST_RESULT=$(printf '%s' "$PAYLOAD" | "$DISCORD_POSTER" --channel-id "$DISCORD_CHANNEL_ID" 2>&1); then
+POSTER_ARGS=(--channel-id "$DISCORD_CHANNEL_ID")
+[[ "$DRY_RUN" == "1" ]] && POSTER_ARGS+=(--dry-run)
+if ! POST_RESULT=$(printf '%s' "$PAYLOAD" | "$DISCORD_POSTER" "${POSTER_ARGS[@]}" 2>&1); then
   echo "ERROR: Discord bot Zeus falhou ao enviar REPORT-INFRA" >&2
   printf '%s\n' "$POST_RESULT" >&2
   exit 1
 fi
 
-echo "OK: REPORT-INFRA embed enviado pelo bot Zeus (${POST_RESULT})"
+if [[ "$DRY_RUN" == "1" ]]; then
+  echo "OK: REPORT-INFRA embed dry-run (${POST_RESULT})"
+else
+  echo "OK: REPORT-INFRA embed enviado pelo bot Zeus (${POST_RESULT})"
+fi

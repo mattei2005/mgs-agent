@@ -54,7 +54,7 @@ Pedido de cadastro de página Smart Bidding com email/login + FB Page ID + Page 
 
 Mudanças em skill, script, cron, config, data operacional, `AGENT.md` ou SOUL estrutural exigem inventário e REPORT-INFRA antes do encerramento.
 
-O REPORT-INFRA deve ser mensagem direta no canal `#alerts-infra` (`1498132022634483894`), sem criar thread. Se a ferramenta de envio estiver indisponível, não publicar o bloco bruto na thread operacional; registrar a pendência honestamente.
+O REPORT-INFRA deve ser mensagem direta no canal `#alerts-infra` (`1498132022634483894`), em Discord Embed pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh`, com `content` vazio, sem mentions e sem criar thread. Após sucesso do helper, nunca publicar uma segunda cópia em texto. Se a ferramenta estiver indisponível, não publicar o bloco bruto na thread operacional; registrar a pendência honestamente.
 
 Reports críticos e proativos mencionam `<@344196393512075265>` quando push for necessário. Respostas normais não mencionam.
 

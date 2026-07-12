@@ -468,15 +468,16 @@ Ações que **NÃO** geram report:
 
 ### Formato do report
 
-**Regra crítica de destino:** `[REPORT-INFRA]` é mensagem de canal dedicado, não rodapé de resposta operacional. Nunca colar `[REPORT-INFRA]` dentro da thread/tópico onde Rodolfo pediu a tarefa, mesmo que a tarefa tenha modificado infra. O report deve ser publicado apenas no canal `#alerts-infra` (ID: `1498132022634483894`) ou registrado em audit log quando a sessão atual não tiver ferramenta/API para postar naquele canal. Resposta final na thread de origem deve conter só o resumo executivo, sem bloco `[REPORT-INFRA]` inline.
+**Regra crítica de destino e layout:** REPORT-INFRA é mensagem de canal dedicado, não rodapé de resposta operacional. Nunca colar o report dentro da thread/tópico onde Rodolfo pediu a tarefa. O report deve ser publicado apenas no canal `#alerts-infra` (ID: `1498132022634483894`) ou registrado em audit log quando a sessão atual não tiver ferramenta/API para postar naquele canal.
+
+Todo REPORT-INFRA deve usar Discord Embed pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh`, com `content` vazio, sem mentions e sem criar thread. Os campos obrigatórios são `Ação`, `Tipo`, `Path`, `Motivo` e `Evidência`. É proibido publicar uma segunda cópia em texto depois que o helper retornar sucesso. Texto bruto é permitido somente como fallback de emergência quando o helper estiver realmente indisponível; nesse caso, registrar a falha e não simular entrega.
+
+Exemplo:
 
 ```
-[REPORT-INFRA] <@1496296175014252634> <@344196393512075265>
-Ação: [criada/modificada/removida]
-Tipo: [cron/skill/script/config/data]
-Path: [caminho exato]
-Motivo: [contexto]
-Evidência: [hash commit / output]
+/root/mgs-agent/scripts/send-report-infra-embed.sh \
+  --action modificada --type script --path /caminho/exato \
+  --reason "contexto" --evidence "validação real"
 ```
 
 ### Skills MGS-específicas (em sync para Git)
@@ -500,15 +501,7 @@ Categorias MGS-específicas que disparam REPORT-INFRA:
 - **Atena:** `skills/wordpress/`, `skills/devops/`
 - **Ares:** `skills/growth/`
 
-Formato obrigatório:
-```
-[REPORT-INFRA] <@1496296175014252634> <@344196393512075265>
-Ação: criada
-Tipo: skill
-Path: <path completo da skill>
-Motivo: <descrição clara do propósito da skill>
-Evidência: <commit hash do sync seletivo OU criação manual>
-```
+Formato obrigatório: Discord Embed pelo helper canônico definido acima, com `--action criada`, `--type skill`, path completo, motivo claro e evidência real do sync/criação.
 
 Após postar REPORT-INFRA, atualizar `/root/mgs-agent/data/infra-inventory.json` — adicionar entrada em `skills_hermes.{agent}`:
 ```json

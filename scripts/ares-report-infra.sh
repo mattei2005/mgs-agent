@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ares-report-infra.sh — envia REPORT-INFRA do Ares via bot Zeus direto.
+# ares-report-infra.sh — adaptador legado do Ares para o embed canônico.
 # Uso:
 #   /root/mgs-agent/scripts/ares-report-infra.sh --file /path/report.md
 #   printf 'mensagem' | /root/mgs-agent/scripts/ares-report-infra.sh
@@ -8,8 +8,7 @@
 set -euo pipefail
 
 BASE_DIR="/root/mgs-agent"
-DISCORD_CHANNEL_ID="1498132022634483894"
-DISCORD_POSTER="${BASE_DIR}/scripts/discord-bot-post.py"
+CANONICAL_HELPER="${BASE_DIR}/scripts/send-report-infra-embed.sh"
 DRY_RUN=0
 INPUT_FILE=""
 
@@ -42,27 +41,37 @@ if [[ -z "${CONTENT//[[:space:]]/}" ]]; then
   exit 2
 fi
 
-PAYLOAD=$(python3 - "$CONTENT" <<'PY'
-import json, sys
+FIELDS=$(python3 - "$CONTENT" <<'PY'
+import json, re, sys
 content = sys.argv[1]
-print(json.dumps({"content": content[:1900]}))
+values = {}
+for raw in content.splitlines():
+    line = raw.strip()
+    match = re.match(r"^(Ação|Acao|Tipo|Path|Paths|Motivo|Evidência|Evidencia):\s*(.*)$", line, re.I)
+    if match:
+        key = match.group(1).lower()
+        values[key] = match.group(2).strip()
+def first(*keys, default=""):
+    for key in keys:
+        if values.get(key):
+            return values[key]
+    return default
+print(json.dumps({
+    "action": first("ação", "acao", default="modificada"),
+    "type": first("tipo", default="infra"),
+    "path": first("path", "paths", default="não informado"),
+    "reason": first("motivo", default="REPORT-INFRA emitido pelo Ares"),
+    "evidence": first("evidência", "evidencia", default="payload legado convertido para embed"),
+}, ensure_ascii=False))
 PY
 )
 
-if [[ "$DRY_RUN" == "1" ]]; then
-  python3 - <<'PY' "$PAYLOAD"
-import json, sys
-p=json.loads(sys.argv[1])
-print(f"dry_run=ok content_len={len(p.get('content',''))}")
-PY
-  exit 0
-fi
+ACTION=$(jq -r '.action' <<<"$FIELDS")
+TYPE=$(jq -r '.type' <<<"$FIELDS")
+PATHS=$(jq -r '.path' <<<"$FIELDS")
+REASON=$(jq -r '.reason' <<<"$FIELDS")
+EVIDENCE=$(jq -r '.evidence' <<<"$FIELDS")
 
-if POST_RESULT=$(printf '%s' "$PAYLOAD" | "$DISCORD_POSTER" --channel-id "$DISCORD_CHANNEL_ID" 2>&1); then
-  echo "sent=ok transport=zeus_bot ${POST_RESULT}"
-  exit 0
-fi
-
-echo "sent=failed transport=zeus_bot" >&2
-printf '%s\n' "$POST_RESULT" >&2
-exit 1
+ARGS=(--action "$ACTION" --type "$TYPE" --path "$PATHS" --reason "$REASON" --evidence "$EVIDENCE")
+[[ "$DRY_RUN" == "1" ]] && ARGS+=(--dry-run)
+exec "$CANONICAL_HELPER" "${ARGS[@]}"

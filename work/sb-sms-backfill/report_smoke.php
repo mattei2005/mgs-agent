@@ -17,7 +17,10 @@ function render_default_sms_report() {
 
 global $wpdb;
 $table = $wpdb->prefix . 'mgs_quiz_sms_revenue';
-$all = $wpdb->get_row( "SELECT COUNT(*) groups_count, COUNT(DISTINCT revenue_date) dates_count, SUM(net_revenue_cents) display_revenue_cents, MIN(revenue_date) first_date, MAX(revenue_date) last_date FROM {$table}", ARRAY_A );
+$all = $wpdb->get_row( $wpdb->prepare(
+    "SELECT COUNT(*) groups_count, COUNT(DISTINCT revenue_date) dates_count, SUM(net_revenue_cents) display_revenue_cents, MIN(revenue_date) first_date, MAX(revenue_date) last_date FROM {$table} WHERE revenue_date BETWEEN %s AND %s AND publisher = %s AND domain = %s",
+    '2026-05-22', '2026-07-09', 'digital-trust_creditoparaveiculo', 'creditoparaveiculo'
+), ARRAY_A );
 $html = render_sms_revenue_report( '2026-05-22', '2026-07-09' );
 $expected = 'R$ ' . number_format( (int) $all['display_revenue_cents'] / 100, 2, ',', '.' );
 $checks = array(

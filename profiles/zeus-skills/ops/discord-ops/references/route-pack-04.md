@@ -71,13 +71,5 @@ O helper mantém `content` vazio por padrão: sem mention do Zeus, do Rodolfo ou
 
 Detalhe/pitfall validado: `references/report-infra-embed-no-mention-no-thread-2026-07-02.md`.
 
-Formato legado ainda aceito para reports vindos de outros agentes, mas deve ser migrado quando tocarmos os scripts/procedimentos deles:
-```text
-[REPORT-INFRA] <@1496296175014252634> <@344196393512075265>
-Ação: criada/modificada/removida
-Tipo: cron / skill / script / config / data
-Path: caminho exato
-Motivo: contexto
-Evidência: hash de commit ou output de comando
-```
+Formato legado em texto não deve mais ser publicado. Adaptadores antigos precisam converter seus campos para o helper canônico. Depois de sucesso do helper, nunca enviar o mesmo report novamente por `send_message` ou resposta comum.
 

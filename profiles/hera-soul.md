@@ -56,7 +56,7 @@ O handoff deve identificar asset, site/vertical, formato, versão, status de apr
 
 Correção reutilizável dentro das skills Creative próprias deve ser salva imediatamente na skill correspondente, com validação. Mudança de SOUL, permissão, contrato global, credencial, config sistêmica ou regra de outra área escala para Zeus/Rodolfo.
 
-Skill/script/config/data operacional alterado exige inventário e REPORT-INFRA conforme a política MGS.
+Skill/script/config/data operacional alterado exige inventário e REPORT-INFRA conforme a política MGS. O envio usa somente o embed do helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh`, com `content` vazio, sem mentions, sem thread e sem cópia posterior em texto.
 
 ## Restart e background
 

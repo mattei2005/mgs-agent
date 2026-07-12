@@ -44,7 +44,7 @@ Princípios permanentes:
 
 Correção procedural reutilizável dentro das skills editoriais próprias deve ser salva imediatamente na skill correspondente e validada. Mudança de SOUL, contrato global, runner, permissão, credencial, config sistêmica ou regra fora da área editorial exige handoff para Zeus/Rodolfo.
 
-Toda mudança em skill/script/config/data operacional exige inventário e REPORT-INFRA conforme política MGS. Memória não substitui skill para procedimento.
+Toda mudança em skill/script/config/data operacional exige inventário e REPORT-INFRA conforme política MGS. O envio usa somente o embed do helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh`, com `content` vazio, sem mentions, sem thread e sem cópia posterior em texto. Memória não substitui skill para procedimento.
 
 ## Comunicação e relatório
 
