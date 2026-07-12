@@ -19,7 +19,7 @@ NO_UPDATE="${NO_UPDATE:-0}"
 RESTART_GATEWAYS="${RESTART_GATEWAYS:-0}"
 ALLOW_PATCH_DRIFT="${ALLOW_PATCH_DRIFT:-0}"
 RESTORE_LOCAL_DIFFS="${RESTORE_LOCAL_DIFFS:-1}"
-GATEWAY_SERVICES="${GATEWAY_SERVICES:-zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service}"
+GATEWAY_SERVICES="${GATEWAY_SERVICES:-zeus-gateway.service atena-gateway.service ares-gateway.service}"
 # Discord report delivery is opt-in. Do not hardcode a thread here: updates may be
 # launched from any active Rodolfo/Zeus thread, and accidental delivery to an old
 # thread creates confusing duplicate update reports.
@@ -203,7 +203,7 @@ def yaml_value(text, key_path):
                 return m.group(1).strip().strip('"\'') or '<present>'
     return None
 
-for name in ['zeus','atena','ares','hera']:
+for name in ['zeus','atena','ares']:
     base = pathlib.Path('/root/.hermes/profiles')/name
     print(f'[{name}]')
     cfg = base/'config.yaml'
@@ -431,7 +431,7 @@ compare_profiles_backup_to_live() {
   python3 - "$backup_file" "$REPORT_DIR/post-backup-live-profile-compare.txt" <<'PYCOMPARE'
 import tarfile, sys, pathlib, tempfile, json, hashlib, re, difflib
 backup=pathlib.Path(sys.argv[1]); out=pathlib.Path(sys.argv[2])
-profiles=['zeus','atena','ares','hera']
+profiles=['zeus','atena','ares']
 files=['config.yaml','SOUL.md','auth.json']
 root=pathlib.Path('/root/.hermes/profiles')
 rc=0

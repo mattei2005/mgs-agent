@@ -8,7 +8,7 @@ TARGET_DIR="/root/mgs-agent/profiles"
 mkdir -p "$TARGET_DIR"
 
 # ── SOUL.md sync ───────────────────────────────────────────────────────────
-for agent in zeus atena ares hera; do
+for agent in zeus atena ares; do
     SOURCE="$PROFILES_DIR/$agent/SOUL.md"
     TARGET="$TARGET_DIR/$agent-soul.md"
     if [ -f "$SOURCE" ] && [ "$SOURCE" -nt "$TARGET" ]; then
@@ -17,10 +17,10 @@ for agent in zeus atena ares hera; do
     fi
 done
 
-# ── Config.yaml sync (Zeus + Atena + Ares + Hera) ──────────────────────────
+# ── Config.yaml sync (Zeus + Atena + Ares) ─────────────────────────────────
 # Adicionado 2026-04-27 (Item 23) — sincroniza configs do Hermes
 # Mantem permissao 600 no destino
-for agent in zeus atena ares hera; do
+for agent in zeus atena ares; do
     SOURCE="$PROFILES_DIR/$agent/config.yaml"
     TARGET="$TARGET_DIR/$agent-config.yaml"
     if [ -f "$SOURCE" ] && { [ ! -f "$TARGET" ] || [ "$SOURCE" -nt "$TARGET" ]; }; then
@@ -81,15 +81,12 @@ if [ -d "$PROFILES_DIR/ares/skills/growth" ]; then
         && echo "$(date -Iseconds) synced ares skills/growth"
 fi
 
-# Ares/Hera: skills ops MGS compartilhadas, sincronizadas seletivamente.
+# Ares: skills ops MGS compartilhadas, sincronizadas seletivamente.
 # Não sincronizar a categoria ops inteira: preservar apenas as skills operacionais
 # que foram auditadas/refatoradas e precisam de mirror versionado.
-for agent in ares hera; do
+for agent in ares; do
     mkdir -p "$TARGET_DIR/$agent-skills/ops"
     skills=(discord-ops log-monitor-discord-alert)
-    if [ "$agent" = "hera" ]; then
-        skills+=(hermes-agent-operations)
-    fi
     for skill in "${skills[@]}"; do
         if [ -d "$PROFILES_DIR/$agent/skills/ops/$skill" ]; then
             rsync -a --delete \
@@ -98,16 +95,4 @@ for agent in ares hera; do
                 && echo "$(date -Iseconds) synced $agent skills/ops/$skill"
         fi
     done
-done
-
-# Hera: skills customizadas Creative Ops MGS.
-# Não sincronizar a categoria creative inteira para evitar vendor/bundled skills enormes.
-mkdir -p "$TARGET_DIR/hera-skills/creative"
-for skill in creative-brief-handoff meta-library-reference-intake; do
-    if [ -d "$PROFILES_DIR/hera/skills/creative/$skill" ]; then
-        rsync -a --delete \
-            "$PROFILES_DIR/hera/skills/creative/$skill/" \
-            "$TARGET_DIR/hera-skills/creative/$skill/" \
-            && echo "$(date -Iseconds) synced hera skills/creative/$skill"
-    fi
 done

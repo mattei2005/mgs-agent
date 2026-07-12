@@ -36,7 +36,7 @@ except Exception as exc:  # pragma: no cover
 
 BASE = "https://discord.com/api/v10"
 DISCORD_EPOCH_MS = 1420070400000
-DEFAULT_PROFILES = ("zeus", "atena", "ares", "hera")
+DEFAULT_PROFILES = ("zeus", "atena", "ares")
 PROFILE_ROOT = pathlib.Path("/root/.hermes/profiles")
 
 

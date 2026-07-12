@@ -92,7 +92,7 @@
     },
     "ares": {
       "name": "Ares",
-      "type": "Acquisition / Paid Media Agent",
+      "type": "Creative Operations + Acquisition / Paid Media Agent",
       "discord_channel_id": "1508853425952133180",
       "discord_channel_name": "ares-campaign-ads-agent",
       "authorized_user_discord_ids": [
@@ -255,30 +255,24 @@
             "budget_rule": "Budget write continues subject to Ares SOUL and permissions-matrix approval gates."
           }
         }
-      ]
+      ],
+      "status": "active_unified"
     },
     "hera": {
       "name": "Hera",
       "type": "Creative Operations Agent",
       "discord_channel_id": "1513005743954198538",
       "discord_channel_name": "hera-creative-agent",
-      "authorized_user_discord_ids": [
-        "344196393512075265",
-        "1496296175014252634",
-        "1496306920494202950",
-        "1508864261504630925"
-      ],
-      "allowed_intents": [
-        "creative_brief",
-        "static_creative",
-        "video_script",
-        "asset_variations",
-        "canva_drive_organization",
-        "creative_analysis",
-        "ares_handoff",
-        "read_only_audit"
-      ],
-      "_authorized_users_detail": [
+      "authorized_user_discord_ids": [],
+      "allowed_intents": [],
+      "discord_application_id": "1513006098133680290",
+      "discord_bot_id": "1513006098133680290",
+      "discord_permissions_integer": "328565115968",
+      "status": "inactive_archived",
+      "deactivated_at": "2026-07-12T13:29:00-04:00",
+      "deactivated_by": "zeus",
+      "deactivation_reason": "Capabilities consolidated into Ares by Rodolfo authorization.",
+      "_authorized_users_detail_historical": [
         {
           "discord_id": "344196393512075265",
           "discord_username": "rodolfomattei",
@@ -315,10 +309,7 @@
           "added": "2026-06-06",
           "added_by": "rodolfo"
         }
-      ],
-      "discord_application_id": "1513006098133680290",
-      "discord_bot_id": "1513006098133680290",
-      "discord_permissions_integer": "328565115968"
+      ]
     }
   },
   "blocklist": [],

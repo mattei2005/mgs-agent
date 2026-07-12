@@ -30,7 +30,7 @@ DESCRIPTIONS = {
     'monitor-auto-push.sh': 'Monitora falhas no auto-push Git do /root/mgs-agent e alerta em #mgs-alerts.',
     'monitor-yoast-health-eggbev.sh': 'Monitora saúde Yoast do eggbev: SEO + Readability com baseline, semanal e alerta por degradação.',
     'check-pending-reports.sh': 'Detecta skills MGS sem REPORT-INFRA/inventário e cobra correção no #alerts-infra.',
-    'monitor-service-restarts.sh': 'Detecta restarts inesperados dos services zeus-gateway, atena-gateway, ares-gateway, hera-gateway e mgs-autocommit.',
+    'monitor-service-restarts.sh': 'Detecta restarts inesperados dos services zeus-gateway, atena-gateway, ares-gateway e mgs-autocommit.',
     'monitor-gpt55-oauth-cost.sh': 'Calcula uso hipotético GPT-5.5/OAuth dos agentes; OAuth não gera custo real por token.',
     'monitor-tool-loops.sh': 'Detecta loops de tool_calls nas sessões Hermes e alerta infra.',
     'infra-discovery.sh': 'Regenera data/infra-inventory.json a partir do estado real do sistema.',
@@ -45,7 +45,7 @@ DESCRIPTIONS = {
     'sync-codex-oauth.sh': 'Sincroniza tokens OAuth Codex do auth global para profiles Hermes com safety check.',
     'hermes-news-explainer.py': 'Lê anúncios no canal Hermes News e posta explicação executiva do Zeus em PT-BR, com estado anti-duplicata.',
     'monitor-webshare-status.sh': 'Monitora status.webshare.io e alerta infra quando detectar manutenção/incidente relevante.',
-    'monitor-discord-thread-archive-warnings.py': 'Monitora threads Discord ativas com auto-archive de 1 semana em Zeus/Atena/Ares/Hera e posta keepalive quando faltam até 24h para ficarem ocultas.',
+    'monitor-discord-thread-archive-warnings.py': 'Monitora threads Discord ativas com auto-archive de 1 semana em Zeus/Atena/Ares e posta keepalive quando faltam até 24h para ficarem ocultas.',
     'monitor-vps-health.py': 'Monitora saúde bruta da VPS: disco, inodes, memória disponível, load, reboot recente, tamanho de backups e services MGS ativos.',
     'monitor-op-rate-limit.py': 'Monitora limites horário e diário do 1Password Business e alerta o canal dedicado em 50%/90%.',
     'sync-sb-sms-revenue-daily.sh': 'Às 08:00 ET, importa no WordPress a receita líquida SMS do dia anterior fechado na Smart Bidding, com upsert e readback.',
@@ -174,7 +174,7 @@ def collect_external_system_crons() -> list[dict[str, Any]]:
                     'owner': 'Host/security infra',
                     'risk': 'médio: apt update/install externo pode acionar needrestart/systemd',
                     'description': 'Atualiza Monarx security scanner/protect; janela conhecida terça 04:20 EDT.',
-                    'guardrail': '/etc/needrestart/conf.d/mgs-hermes-gateways.conf exclui Zeus/Atena/Ares/Hera de auto-restart por needrestart.',
+                    'guardrail': '/etc/needrestart/conf.d/mgs-hermes-gateways.conf exclui Zeus/Atena/Ares de auto-restart por needrestart.',
                 })
     return jobs
 

@@ -6,7 +6,7 @@ set -euo pipefail
 # wait for restarts. Default mode only schedules a detached finalizer via
 # systemd-run --no-block (or cron fallback) and exits with a clean summary.
 
-AGENTS_DEFAULT="atena ares hera zeus"
+AGENTS_DEFAULT="atena ares zeus"
 ROOT="/root/mgs-agent"
 LOG_DIR="$ROOT/logs"
 AUDIT="$LOG_DIR/events-audit.jsonl"
@@ -17,7 +17,7 @@ DELAY_SECONDS=5
 
 usage() {
   cat <<'USAGE'
-Usage: mgs-gateway-restart-safe.sh [--agents "atena ares hera zeus"] [--reason TEXT] [--delay SECONDS] [--execute]
+Usage: mgs-gateway-restart-safe.sh [--agents "atena ares zeus"] [--reason TEXT] [--delay SECONDS] [--execute]
 
 Default schedules a detached restart finalizer and exits. It does not poll,
 sleep for validation, stream systemctl output, or restart the caller in the
@@ -57,7 +57,7 @@ audit() {
 normalize_agents() {
   local requested=( $AGENTS )
   local out=() a
-  for wanted in atena ares hera zeus; do
+  for wanted in atena ares zeus; do
     for a in "${requested[@]}"; do
       [[ "$a" == "$wanted" ]] && out+=("$wanted")
     done
@@ -67,7 +67,7 @@ normalize_agents() {
 
 mapfile -t ORDERED_AGENTS < <(normalize_agents)
 if [[ ${#ORDERED_AGENTS[@]} -eq 0 ]]; then
-  echo "No valid agents selected. Valid: atena ares hera zeus" >&2
+  echo "No valid agents selected. Valid: atena ares zeus" >&2
   exit 2
 fi
 

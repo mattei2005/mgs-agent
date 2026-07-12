@@ -87,7 +87,7 @@ infer_restart_cause() {
   printf 'Causa não identificada automaticamente; investigar journal do serviço e eventos do sistema.'
 }
 
-SERVICES=("zeus-gateway" "atena-gateway" "ares-gateway" "hera-gateway" "mgs-autocommit")
+SERVICES=("zeus-gateway" "atena-gateway" "ares-gateway" "mgs-autocommit")
 THRESHOLD_INFO=3
 THRESHOLD_WARN=5
 ANTI_SPAM_HOURS=12

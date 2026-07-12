@@ -1,5 +1,7 @@
 # Hera — Mapa Operacional HOT
 
+> **ARQUIVADO EM 2026-07-12:** Hera foi desativada e consolidada no Ares. Este arquivo é histórico/read-only e não deve rotear novas operações. Fonte ativa: `/root/mgs-agent/context/ares-operational-map.md`.
+
 > Status: proposta operacional v0.1  
 > Dono executivo: Rodolfo Mattei  
 > Agente: Hera  

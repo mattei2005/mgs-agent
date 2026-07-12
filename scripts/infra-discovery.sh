@@ -19,7 +19,7 @@ log "=== infra-discovery.sh START ==="
 # ── 1. Systemd services ──────────────────────────────────────────────────────
 log "Coletando systemd services..."
 SERVICES_JSON="[]"
-for svc in zeus-gateway atena-gateway ares-gateway hera-gateway mgs-autocommit; do
+for svc in zeus-gateway atena-gateway ares-gateway mgs-autocommit; do
     STATUS=$(systemctl is-active "${svc}.service" 2>/dev/null || echo "unknown")
     SERVICES_JSON=$(echo "$SERVICES_JSON" | jq \
         --arg name "${svc}.service" \

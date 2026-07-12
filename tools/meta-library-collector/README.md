@@ -5,9 +5,9 @@ Runtime permanente para abrir URLs públicas da Meta/Facebook Ads Library com Ch
 ## Caminhos canônicos
 
 - Runtime: `/root/mgs-agent/tools/meta-library-collector/`
-- Wrapper: `/root/mgs-agent/scripts/hera-meta-library-collector.sh`
-- Perfil persistente: `/root/.hermes/profiles/hera/browser-profiles/meta-library-chromium/`
-- Saídas: `/root/.hermes/profiles/hera/artifacts/meta-library/<timestamp>/`
+- Wrapper: `/root/mgs-agent/scripts/ares-meta-library-collector.sh`
+- Perfil persistente: `/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium/`
+- Saídas: `/root/.hermes/profiles/ares/artifacts/meta-library/<timestamp>/`
 
 O perfil pode conter cookies/sessão. Nunca versione, anexe ou imprima valores de cookies. O coletor reporta somente contagem e presença dos nomes `c_user`/`xs`.
 
@@ -16,7 +16,7 @@ O wrapper aplica lock exclusivo ao perfil; uma segunda execução simultânea te
 ## Uso
 
 ```bash
-/root/mgs-agent/scripts/hera-meta-library-collector.sh \
+/root/mgs-agent/scripts/ares-meta-library-collector.sh \
   --url 'https://www.facebook.com/ads/library/?...' \
   --download 1
 ```

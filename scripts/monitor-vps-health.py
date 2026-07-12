@@ -24,7 +24,7 @@ STATE_PATH = BASE / 'data' / 'vps-health-state.json'
 LOG_PREFIX = 'monitor-vps-health'
 DEFAULT_TARGET_CHANNEL_ID = os.environ.get('MGS_VPS_HEALTH_CHANNEL_ID', '1522444367292268565')
 MENTION_USER_ID = '344196393512075265'
-SERVICES = ['zeus-gateway', 'atena-gateway', 'ares-gateway', 'hera-gateway', 'mgs-autocommit']
+SERVICES = ['zeus-gateway', 'atena-gateway', 'ares-gateway', 'mgs-autocommit']
 ANTI_SPAM_SECONDS = int(os.environ.get('MGS_VPS_HEALTH_ANTI_SPAM_SECONDS', str(6 * 3600)))
 
 THRESHOLDS = {

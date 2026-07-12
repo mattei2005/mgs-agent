@@ -17,7 +17,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-PROFILES = ("zeus", "atena", "ares", "hera")
+PROFILES = ("zeus", "atena", "ares")
 PROFILES_ROOT = Path("/root/.hermes/profiles")
 CHANNEL_ID_DEFAULT = "1498132022634483894"
 RESPONSE_RE = re.compile(r"response ready:.*\bapi_calls=(\d+)")

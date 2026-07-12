@@ -1,5 +1,7 @@
 # Hera — Agente de Operações Criativas
 
+> **ARQUIVADO EM 2026-07-12:** Hera foi desativada e suas capacidades foram consolidadas no Ares. Este documento preserva o modelo anterior para auditoria/rollback; não é procedimento ativo. Fonte atual: `/root/mgs-agent/context/ares-operational-map.md` e skills Growth do Ares.
+
 > Status: **proposta operacional v0.5 — Creative Ops multivertical + pedidos naturais**  
 > Dono executivo: Rodolfo Mattei  
 > Área: Operações Criativas  
