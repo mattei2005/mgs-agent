@@ -12,6 +12,10 @@ NameError: name 'event' is not defined
 
 `py_compile` does not catch this class because undefined names are runtime errors.
 
+The user-facing Discord text (`Sorry, I encountered an unexpected error`) is not a root-cause signature. Different incidents can render the same generic message—for example, an ownership race and later an undefined worker-scope name. Re-open the journal traceback for every recurrence instead of assuming the previous cause returned.
+
+A failed resume turn may intentionally leave `resume_pending` set because the interrupted work is still incomplete. If the resume branch itself is broken, every follow-up can re-enter the same bad line and emit the same error repeatedly. Diagnose both the first exception and the state-retention mechanism that explains repetition.
+
 ## Correct invariant
 
 Detect an internal startup continuation from the explicit transport marker already carried in `message`, for example:
