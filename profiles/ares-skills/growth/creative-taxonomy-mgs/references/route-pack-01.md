@@ -28,7 +28,7 @@ Modelo base:
 Exemplos:
 
 ```text
-CC_CA_FR_IMG_APPROBATION_NV_001.jpg
+CC_CA_FR_IMG_APPROBATION_NS_001.jpg
 CC_CA_FR_IMG_WALLET_NH_001.png
 CC_CA_FR_VID_SANS_VERIFICATION_PV_001.mp4
 CC_US_ES_IMG_APROBACION_NV_001.jpg
@@ -132,34 +132,36 @@ UNKNOWN               | Ângulo incerto; exige note
 ```
 ## P_ORIENT
 
-`P_ORIENT` combina presença de pessoa + orientação visual.
-
-Regra oficial MGS definida por Rodolfo: usar **somente** `PV`, `PH`, `NV`, `NH`. Códigos de square ou orientação desconhecida ficam desconsiderados e não devem entrar em nome final.
+`P_ORIENT` combina presença de pessoa + formato/orientação visual. O inventário e os assets reais atuais usam códigos distintos para vertical, square e horizontal; não colapsar square em horizontal.
 
 ```text
 Código | Pessoa     | Orientação
 -------|------------|------------
-PV     | PERSON     | VERTICAL
-PH     | PERSON     | HORIZONTAL
-NV     | NO_PERSON  | VERTICAL
-NH     | NO_PERSON  | HORIZONTAL
+PV     | PERSON     | VERTICAL/STORY
+NV     | NO_PERSON  | VERTICAL/STORY
+PS     | PERSON     | SQUARE/FEED
+NS     | NO_PERSON  | SQUARE/FEED
+PH     | PERSON     | HORIZONTAL/LANDSCAPE
+NH     | NO_PERSON  | HORIZONTAL/LANDSCAPE
 ```
 
-Códigos removidos/desconsiderados:
+Códigos não permitidos no nome final:
 
 ```text
-PS, NS, PU, NU, UU
+PU, NU, UU, UNKNOWN
 ```
 
-Para operações Meta comuns, tratar o placement como vertical ou horizontal para fins de nome:
+Mapeamento operacional:
 
 ```text
 Código | Pessoa     | Orientação | Uso típico
 -------|------------|------------|-------------------------
-PV     | PERSON     | VERTICAL   | Story/Reels vertical
-NV     | NO_PERSON  | VERTICAL   | Story/Reels vertical
-PH     | PERSON     | HORIZONTAL | Feed/landscape/não vertical
-NH     | NO_PERSON  | HORIZONTAL | Feed/landscape/não vertical
+PV     | PERSON     | VERTICAL   | Story/Reels 9:16
+NV     | NO_PERSON  | VERTICAL   | Story/Reels 9:16
+PS     | PERSON     | SQUARE     | Feed 1:1
+NS     | NO_PERSON  | SQUARE     | Feed 1:1
+PH     | PERSON     | HORIZONTAL | Landscape
+NH     | NO_PERSON  | HORIZONTAL | Landscape
 ```
 
 Se pessoa ou orientação não puderem ser determinados com segurança, marcar revisão no inventário em vez de criar nome final incorreto. Não usar código `UNKNOWN` no nome final.

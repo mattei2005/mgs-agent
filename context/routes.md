@@ -26,10 +26,10 @@ Editar/publicar conteúdo WordPress      Raquel / Rodolfo / Content     Atena   
 Criar artigo SEO                        Raquel / Rodolfo / Content     Atena        Zeus se prioridade conflita.
 Montar/configurar site WordPress        Rodolfo / Tech                 Zeus apoio   Rodolfo aprova.
 Configurar pixel Facebook/Google Ads    Rodolfo / Tech/Growth          Zeus apoio   Rodolfo aprova.
-Criar criativo estático                 Kelly + Geizian / Creative     Hera         Rodolfo se padrão/ferramenta.
-Criar/editar vídeo                      Kelly + Geizian / Creative     Hera         Rodolfo se padrão/ferramenta.
-Organizar criativos Canva/Drive         Kelly + Geizian / Creative     Hera         Rodolfo se estrutura mudar.
-Disponibilizar criativo aprovado ao Ares Kelly + Geizian / Creative     Hera         Ares usa em testes.
+Criar criativo estático                 Kelly + Geizian / Creative     Ares         Rodolfo se padrão/ferramenta.
+Criar/editar vídeo                      Kelly + Geizian / Creative     Ares         Rodolfo se padrão/ferramenta.
+Organizar criativos Canva/Drive         Kelly + Geizian / Creative     Ares         Rodolfo se estrutura mudar.
+Reservar/conciliar criativo para teste   Growth + Creative               Ares         Meta × Drive antes do write.
 Criar/subir campanha Facebook Ads       Rodolfo + Geizian + gestores   Ares         Budget/risco escala Rodolfo.
 Criar/subir campanha Google Ads         Rodolfo + Geizian + gestores   Ares         Budget/risco escala Rodolfo.
 Criar/subir campanha TikTok Ads         Rodolfo + Geizian + gestores   Ares         Futuro; Rodolfo aprova.
@@ -57,31 +57,30 @@ Zeus só entra quando houver exceção, erro recorrente, risco técnico, usuári
 
 Montar/configurar site WordPress e configurar pixel de Facebook Ads/Google Ads continuam sob responsabilidade do Rodolfo. Zeus pode ajudar como apoio técnico/orquestrador quando Rodolfo solicitar ou quando houver problema operacional.
 
-## Creative Operations — Hera
+## Creative Operations — Ares
 
-Tudo relacionado a criativos — criação, edição, vídeo, estático, organização e padrões — pertence à Hera.
+Tudo relacionado a criativos — criação, edição, vídeo, estático, referências, organização, naming, metadata, Drive e inventário — pertence ao módulo Creative Ops do Ares.
 
 ```text
 Comando humano principal       Kelly
-Também podem pedir             Rodolfo, Geizian e gestores
-Agente                         Hera
-Área                           Creative Operations
+Também podem pedir             Rodolfo, Geizian e gestores autorizados
+Agente                         Ares
+Área                           Creative Operations + Growth
 ```
 
-Kelly é a responsável humana por criar criativos para os gestores. Geizian orienta e apoia. Rodolfo mantém decisão final sobre ferramentas, estrutura e padrões.
-
-Fluxo Hera → Drive → Ares:
+Fluxo unificado:
 
 ```text
-1. Kelly, Rodolfo, Geizian ou gestor pede criativos.
-2. Hera cria variações nos formatos necessários, ex.: feed e stories para Facebook/Instagram.
-3. Hera limpa metadados do criativo no VPS antes de handoff/upload.
-4. Kelly avalia/aprova o criativo.
-5. Hera salva o criativo aprovado na pasta correta do Google Drive.
-6. Ares verifica/limpa metadados antes de usar o asset em testes de campanhas novas.
+1. Usuário autorizado pede ou envia criativo ao Ares.
+2. Ares cria/trata/classifica e sanitiza.
+3. Kelly ou responsável aprova quando o fluxo exigir.
+4. Ares salva no Drive, valida e registra original → tratado.
+5. Upload de gestor permanece reservado e ares_eligible=false.
+6. Antes de campanha, Ares concilia Drive × Meta e reserva o selecionado.
+7. Campaign Ops executa somente com autoridade vigente e valida por readback.
 ```
 
-Regra: Ares e Hera podem ler e escrever nas pastas de criativos aprovados no Drive para conseguir gerenciar os criativos. Hera organiza/escreve os assets aprovados; Ares consome, organiza quando necessário e usa em campanhas/testes. O gate canônico de limpeza de metadados é `/root/mgs-agent/scripts/clean-creative-metadata.sh`; detalhes em `/root/mgs-agent/docs/CREATIVE_METADATA_SANITIZER.md`.
+O gate canônico de metadata é `/root/mgs-agent/scripts/clean-creative-metadata.sh`. Original e tratado são uma única linhagem; `01_READY` não prova ineditismo.
 
 ## Growth / Campaigns — Ares
 
@@ -95,7 +94,7 @@ Agente                          Ares
 Área                            Growth / Media Buying
 ```
 
-Ares gerencia, cria, analisa e opera campanhas conforme permissão aprovada. Gestores entram depois de Ares estar testado, aprovado e depois de treinamento.
+Ares gerencia criativos, contas, campanhas, análises e relatórios conforme permissão aprovada. Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas estão autorizados conforme o registry real.
 
 Limite: Ares não configura ChatPion/DigitalTrChat, SMS Funnel ou estrutura de quiz. Ares pode usar campanhas/estratégias resultantes desses fluxos, mas a configuração dessas estruturas fica com Rodolfo, Geizian e gestores conforme o caso.
 
@@ -224,8 +223,7 @@ Escalar para Rodolfo quando houver:
 ---------------------------- -------------------------------------- -----------------------------
 Executive / Management        prioridade, decisão, conflito          decisão, direção, governança
 Content Operations            pedido editorial/WordPress             conteúdo publicado/ajustado
-Growth / Media Buying         campanha, tráfego, custo, ROI          campanha/análise/alerta
-Creative Operations           pedido de asset                        criativo entregue
+Creative Ops + Growth        criativo, campanha, custo, ROI         asset/campanha/análise/alerta
 Revenue / AdOps               bloco, aprovação, regra, monetização   ajuste/alerta/relatório
 Finance / BI                  fechamento, receita, custo             relatório/decisão financeira
 Tech / WordPress / Infra      site, plugin, pixel, Hermes, VPS       ajuste técnico validado

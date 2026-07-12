@@ -126,10 +126,10 @@ O Google Drive de criativos aprovados é a fonte operacional para assets usados 
 Fluxo:
 
 ```text
-1. Kelly/Rodolfo/Geizian/gestor pede criativo.
-2. Hera cria ou organiza o asset.
+1. Kelly/Rodolfo/Geizian/gestor pede ou envia criativo ao Ares.
+2. Ares cria/trata, sanitiza, nomeia e inventaria.
 3. Kelly/responsável aprova conforme o caso.
-4. Hera salva o criativo aprovado na pasta correta do Google Drive.
+4. Ares salva no Drive, registra reserva/elegibilidade e concilia com a Meta antes do uso.
 5. Ares acessa o Drive para usar/gerenciar assets em testes e campanhas.
 6. Gestores também usam os assets aprovados nas campanhas.
 ```

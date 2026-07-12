@@ -1,178 +1,235 @@
 # Ares — Mapa Operacional HOT
 
-> Status: proposta operacional v0.1  
-> Dono executivo: Rodolfo Mattei  
-> Agente: Ares  
-> Função: reduzir `search_files` amplo e orientar a primeira fonte certa para Growth / Media Buying.
+> Status: proposta operacional v0.2
+> Dono executivo: Rodolfo Mattei
+> Agente: Ares
+> Área: Creative Operations + Growth / Media Buying
+> Atualização: capacidades da Hera consolidadas em 2026-07-12.
 
 ## 1. Regra de uso
 
-Antes de buscar termos genéricos como `drive`, `campaign`, `meta`, `creative`, `CC_US_ES`, `UPLOAD`, `pixel`, `budget`, `roi`, `intraday`, `canva` ou nomes soltos de arquivos, Ares deve abrir este mapa e escolher a fonte específica.
+Antes de busca ampla por `drive`, `creative`, `reference`, `video`, `meta`, `campaign`, `UPLOAD`, `budget`, `roi`, `canva` ou nomes soltos, abrir este mapa e escolher a fonte específica.
 
-Use `search_files` amplo apenas quando:
+Busca ampla só quando a fonte indicada não existir, o termo for novo, houver auditoria de drift ou Rodolfo pedir para procurar em tudo.
 
-- o pedido trouxer termo novo que não esteja neste mapa;
-- a fonte indicada não existir ou estiver incompleta;
-- for auditoria de drift/inconsistência;
-- Rodolfo pedir explicitamente para procurar em tudo.
-
-## 2. Fontes principais do Ares
+## 2. Fontes principais
 
 ```text
 Assunto                                Abrir primeiro
 -------------------------------------- ------------------------------------------------------------
-Arquitetura Growth/MGS OS              /root/mgs-agent/context/acquisition.md
+Identidade, autoridade e invariantes    /root/.hermes/profiles/ares/SOUL.md
 Rotas e limites                         /root/mgs-agent/context/routes.md
-Mapa de agentes                         /root/mgs-agent/context/agent-map.md
-SOUL vivo do Ares                       /root/.hermes/profiles/ares/SOUL.md
-SOUL versionado do Ares                 /root/mgs-agent/profiles/ares-soul.md
-Skill umbrella aquisição                /root/mgs-agent/profiles/ares-skills/growth/paid-acquisition-operations/SKILL.md
-Tráfego direto CBO/UTM/SB/SMS          /root/mgs-agent/profiles/ares-skills/growth/direct-traffic-cbo-operations/SKILL.md
-Taxonomia criativos                     /root/mgs-agent/profiles/ares-skills/growth/creative-taxonomy-mgs/SKILL.md
-Meta intraday                           /root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md
-Meta guardrails                         /root/mgs-agent/profiles/ares-skills/growth/meta-ads-governance-guardrails/SKILL.md
+Permissões reais                        /root/mgs-agent/data/authorized-users.json
+Matriz conceitual                       /root/mgs-agent/context/permissions-matrix.md
+Creative Ops                            creative-operations-mgs/SKILL.md
+Taxonomia/linhagem/reserva              creative-taxonomy-mgs/SKILL.md
+Meta/Facebook Ad Library                meta-library-reference-intake/SKILL.md
+Aquisição geral                         paid-acquisition-operations/SKILL.md
+Meta intraday                           meta-ads-intraday-operations/SKILL.md
+Meta guardrails                         meta-ads-governance-guardrails/SKILL.md
+Tráfego direto CBO/UTM                  direct-traffic-cbo-operations/SKILL.md
 Sanitizador metadata                    /root/mgs-agent/docs/CREATIVE_METADATA_SANITIZER.md
-Wrapper sanitizador                     /root/mgs-agent/scripts/clean-creative-metadata.sh
-Scripts Ares                            /root/mgs-agent/scripts/ares-*.py
-Dados Ares                              /root/mgs-agent/data/ares/
+Dados criativos                         /root/mgs-agent/data/ares/creative-ops/
+Inventário unificado                    /root/mgs-agent/data/ares/creative-ops/inventory/assets.jsonl
+Dados Meta Ads                          /root/mgs-agent/data/ares/meta-ads/
+Scripts Ares                            /root/mgs-agent/scripts/ares-*
 Logs Ares                               /root/.hermes/profiles/ares/logs/
 Audit MGS                               /root/mgs-agent/logs/events-audit.jsonl
 ```
 
-## 3. Pergunta/pedido → fonte certa
+## 3. Pedido → primeira rota
 
 ```text
-Pedido do usuário                                   Primeira fonte
--------------------------------------------------- ------------------------------------------------------------
-"campanha" / "ads" / "growth"                    paid-acquisition-operations/SKILL.md
-"tráfego direto" / "CBO" / "b01fb01c01"           direct-traffic-cbo-operations/SKILL.md
-"Smart Bidding" / "Adgroup" / "receita SMS"       direct-traffic-cbo-operations + dados/dashboards reais
-"Meta Ads" / "Facebook Ads"                       meta-ads-intraday-operations + guardrails
-"corte intraday" / "reativar todas"               meta-ads-intraday-operations/SKILL.md
-"budget" / "billing"                              SOUL + guardrails; exige confirmação/double-confirm quando crítico
-"ROI" / "performance" / "CPS"                    dados/API real; não inventar sem fonte
-"criativo para campanha"                           creative-taxonomy-mgs/SKILL.md + metadata sanitizer
-"naming" / "taxonomia" / "P_ORIENT"               creative-taxonomy-mgs/SKILL.md
-"Drive" / "UPLOAD_CANVAS"                         paid-acquisition-operations/SKILL.md seção Canva/Drive
-"Canva"                                            paid-acquisition-operations/SKILL.md seção Canva
-"limpar metadata"                                  docs/CREATIVE_METADATA_SANITIZER.md + clean-creative-metadata.sh
-"handoff para Hera"                                routes.md + hera-operational-map.md
-"Hera mandou criativo"                             creative-taxonomy-mgs/SKILL.md seção Entrada operacional via Hera
-"ChatPion/quiz/SMS"                                routes.md; Ares não configura
-"WordPress/site setup/pixel crítico"               routes.md; escalar Zeus/Rodolfo
-"erro do Ares"                                     /root/.hermes/profiles/ares/logs/ + logs/ares-*.log
+Pedido                                           Primeira fonte
+------------------------------------------------ ------------------------------------------------------------
+"faz um criativo/brief/copy"                    creative-operations-mgs route-pack-01
+"trata/move UPLOAD MANUAL"                      creative-operations-mgs route-pack-02
+"imagem estática/naming/provider"               creative-operations-mgs route-pack-04
+"vídeo/variação/referência/GPT/Grok"            creative-operations-mgs route-pack-05
+"Meta Ad Library"                               meta-library-reference-intake
+"inventário/reserva/ares_eligible"              creative-taxonomy-mgs route-pack-02
+"esse criativo já foi usado?"                   creative-operations-mgs route-pack-06 + Meta real
+"campanha/ads/growth"                           paid-acquisition-operations
+"Meta/Facebook Ads"                             meta-ads-intraday-operations + guardrails
+"tráfego direto/CBO"                            direct-traffic-cbo-operations
+"budget/billing"                                SOUL + guardrails + autoridade vigente
+"ROI/performance"                               API/dados reais; período/moeda/fonte
+"ChatPion/quiz/SMS"                             routes.md; Ares não configura
+"WordPress/pixel crítico"                       routes.md; escalar Zeus/Rodolfo
+"erro do Ares"                                  logs Ares + journal filtrado se infra
 ```
 
-## 4. Meta Ads / intraday
-
-Primeira fonte: `profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md`.
+## 4. Ciclo único do criativo
 
 ```text
-Estrutura local                         Pasta
---------------------------------------- ------------------------------------------------------------
-Accounts/config por conta                /root/mgs-agent/data/ares/meta-ads/accounts/
-Operações país+vertical                  /root/mgs-agent/data/ares/meta-ads/operations/
-Rulesets R1-R5                           /root/mgs-agent/data/ares/meta-ads/rules/
-Estado local/carência/exclusões           /root/mgs-agent/data/ares/meta-ads/state/
-Cache                                    /root/mgs-agent/data/ares/meta-ads/cache/
-Auditoria                                /root/mgs-agent/data/ares/meta-ads/audit/
-Relatórios                               /root/mgs-agent/data/ares/meta-ads/reports/
-Permissões/guardrails                    /root/mgs-agent/data/ares/meta-ads/permissions/
+pedido/upload
+→ criação/importação
+→ referência/provider gate
+→ classificação técnica/visual
+→ sanitização
+→ naming
+→ Drive + readback
+→ inventário e linhagem
+→ reserva/elegibilidade
+→ conciliação Meta × Drive
+→ seleção/campanha
+→ performance/ROI
+→ novas variações
 ```
 
-Scripts iniciais:
+Não existe handoff Hera → Ares. Creative Ops e Campaign Ops compartilham o mesmo estado.
+
+## 5. Intake e Drive
+
+Raiz operacional atual validada:
 
 ```text
-/root/mgs-agent/scripts/ares-meta-common.py
-/root/mgs-agent/scripts/ares-meta-auth-check.py
-/root/mgs-agent/scripts/ares-meta-intraday-runner.py
+MGS-AGENTS/CRIATIVOS/
+├── UPLOAD MANUAL
+└── <OPERAÇÃO>/
+    ├── IMG/{01_READY,02_TESTING,03_TESTED,04_WINNERS,05_REJECTED,99_LEGACY}
+    └── VID/{01_READY,02_TESTING,03_TESTED,04_WINNERS,05_REJECTED,99_LEGACY}
 ```
 
-Regras rápidas:
+Regras:
 
-- leitura/dry-run antes de write;
-- alteração de campanha precisa aprovação explícita;
-- budget/billing é crítico e exige confirmação forte;
-- não reportar sucesso sem GET/API real;
-- não expor token Meta.
+- validar a raiz por API antes de write;
+- placement/idioma não viram subpasta intermediária sem aprovação;
+- pedido autorizado de tratar/mover: clean validado em READY, original movido para LEGACY, sem delete;
+- pedido de copiar/manter: preservar na entrada;
+- listar `original_filename → canonical_filename`;
+- Drive write exige readback por ID/nome/tamanho.
 
-## 5. Criativos / Drive / Canva
+## 6. Naming
 
-Primeira fonte: `profiles/ares-skills/growth/creative-taxonomy-mgs/SKILL.md`.
+Modelo:
 
 ```text
-Item                                Regra
------------------------------------ ------------------------------------------------------------
-Nome oficial                         {VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
-VARIANT                              3 dígitos: 001-999
-P_ORIENT                             somente PV, PH, NV, NH
-Status                               não entra no nome; fica em pasta/inventário
-Drive raiz                           MGS-CRIATIVOS
-UPLOAD_CANVAS                        RAW/original; preservar salvo ordem explícita
-Novos uploads via Hera               País + Vertical + Língua + anexo
-Antes de campanha                    verificar/limpar metadata
+{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
 ```
 
-Pipeline seguro para backlog/Drive:
+- `VARIANT`: sempre `001–999`.
+- `P_ORIENT`: `PV/NV` vertical, `PS/NS` square, `PH/NH` horizontal.
+- `UNKNOWN` pode existir no inventário para ângulo/classificação pendente, não como P_ORIENT final.
+- status, site, gestor e IDs não entram no nome.
+- dimensão, placement e origem ficam no inventário.
 
-```text
-1. Inventário read-only fresco.
-2. Validar IMG/VID pelo arquivo real.
-3. Extrair dimensões/frame/timeline quando vídeo.
-4. Classificar país/idioma/vertical/ângulo com evidência.
-5. Gerar plano CSV/JSON com confidence/notes.
-6. Mostrar plano para Rodolfo.
-7. Só executar Drive write após aprovação explícita.
-8. Preservar RAW e agir na cópia limpa quando aplicável.
-```
-
-## 6. Sanitização de metadata
-
-Primeira fonte: `docs/CREATIVE_METADATA_SANITIZER.md`.
-
-Comandos canônicos:
+## 7. Metadata
 
 ```text
 /root/mgs-agent/scripts/clean-creative-metadata.sh verify /path/to/asset
 /root/mgs-agent/scripts/clean-creative-metadata.sh clean /path/to/asset --agent ares
 ```
 
-Ares não deve subir criativo bruto em campanha se o gate de metadata falhar ou estiver pendente.
+Asset final/campanha exige `clean=true`. Nunca sanitizar o único RAW in-place.
 
-## 7. Handoff Ares ↔ Hera
+## 8. Identidade, reserva e conciliação
 
-- Se Ares precisar resumir thread/config para Hera, enviar ao canal da Hera mencionando o bot Hera `1513006098133680290`.
-- Se Hera enviar criativo novo válido, tratar como entrada operacional e seguir `creative-taxonomy-mgs`.
-- Não mencionar Hera para status sem ação, agradecimento ou loop entre bots.
+Original e tratado são a mesma linhagem.
 
-Formato mínimo para handoff Ares → Hera:
+Upload de gestor começa:
 
 ```text
-[HANDOFF ARES → HERA]
-Contexto da thread
-Decisões feitas
-Configurações/arquivos alterados
-O que Hera precisa fazer
-Bloqueios/riscos
+reservation_status = RESERVADO_PELO_GESTOR
+ares_eligible = false
 ```
 
-## 8. Limites rápidos
+`01_READY` significa pronto tecnicamente, não inédito. Silêncio não libera.
+
+Antes de seleção/write, cruzar quando disponível:
+
+```text
+original → tratado
+source_drive_id / asset_drive_id
+checksums + fingerprint visual
+ad_id / creative_id
+image_hash / video_id
+effective_object_story_id
+conta / campanha / gestor / estratégia
+status / histórico / performance
+```
+
+Repetir a conferência imediatamente antes do write.
+
+## 9. Meta Ads
+
+Dados:
+
+```text
+/root/mgs-agent/data/ares/meta-ads/accounts/
+/root/mgs-agent/data/ares/meta-ads/operations/
+/root/mgs-agent/data/ares/meta-ads/rules/
+/root/mgs-agent/data/ares/meta-ads/state/
+/root/mgs-agent/data/ares/meta-ads/cache/
+/root/mgs-agent/data/ares/meta-ads/audit/
+/root/mgs-agent/data/ares/meta-ads/reports/
+/root/mgs-agent/data/ares/meta-ads/permissions/
+```
+
+Regras:
+
+- API/readback real vence snapshot;
+- dry-run quando houver runner;
+- campaign write exige usuário e escopo autorizados;
+- budget write segue aprovação vigente de Rodolfo/Geizian;
+- billing/credencial continuam críticos;
+- nunca expor token;
+- nunca inventar métrica/status.
+
+## 10. Meta Library e referências
+
+Runtime:
+
+```text
+/root/mgs-agent/tools/meta-library-collector/
+/root/mgs-agent/scripts/ares-meta-library-collector.sh
+/root/mgs-agent/scripts/ares-meta-library-login-browser.sh
+/root/mgs-agent/scripts/ares-meta-library-profile-snapshot.sh
+/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium/
+/root/.hermes/profiles/ares/artifacts/meta-library/
+```
+
+A sessão persistente é sensível: não apagar, versionar, imprimir cookies ou abrir instâncias concorrentes. Rota dedicada residencial é padrão; `direct-vps` é proibido. Material coletado é referência, não asset final automático.
+
+## 11. Usuários autorizados
+
+Fonte real: `data/authorized-users.json`.
+
+```text
+Rodolfo
+Geizian
+Icaro
+Isliago
+Joe
+Kelly
+Nicolas
+```
+
+Escopo: Creative Ops, gestão de campanhas e relatórios. Acesso não elimina gates específicos de budget, billing, credencial, pixel crítico ou mudança de política.
+
+## 12. Limites
 
 ```text
 Ares pode                               Ares não pode por padrão
 --------------------------------------  ---------------------------------------------------------
-Analisar campanhas/performance           Configurar ChatPion/DigitalTrChat
-Operar Meta/Google conforme aprovação     Configurar quiz/SMS/SMS Funnel
-Preparar criativos para campanha          Ser dono de AdOps/Smart Bidding/ActiveView
-Organizar taxonomia/Drive de campanha     Fazer setup WordPress/site/pixel crítico sem Rodolfo
-Criar scripts/relatórios de growth        Expor credenciais/tokens
+Criar/tratar/organizar criativos         Configurar ChatPion/DigitalTrChat
+Operar Drive/inventário/referências      Configurar quiz/SMS/SMS Funnel
+Gerenciar campanhas autorizadas          Ser dono de AdOps/precificação
+Analisar custo/ROI/performance            Fazer setup WordPress/pixel crítico sem Rodolfo
+Produzir relatórios                       Expor credenciais/tokens
 ```
 
-## 9. Validação antes de responder
+## 13. Validação antes de responder
 
-- Métrica de campanha: citar fonte real/API/log/dado usado.
-- Mudança Meta/Google: validar estado pós-ação com GET/API real.
-- Drive write: validar item por ID/nome pós-ação, sem expor IDs sensíveis sem necessidade.
-- Metadata: validar `verify clean=true`.
-- Git/infra/script: reportar diff/status/log e `REPORT-INFRA` quando aplicável.
-- Sem fonte real: declarar lacuna, não inventar performance.
+- Arquivo criado/alterado: path + inspeção real.
+- Criativo final: formato/dimensão/QA visual + metadata.
+- Drive: readback por ID/nome/tamanho.
+- Reserva: estado persistido no inventário.
+- Campanha: GET/API real pós-write.
+- Métrica: fonte/período/moeda.
+- Git/infra: diff, lint, audit e REPORT-INFRA.
+- Sem evidência: declarar lacuna.
+
+## 14. Hera histórica
+
+Hera está desativada. Profile, dados e logs antigos servem apenas para rollback/auditoria. Não encaminhar pedidos, não mencionar o bot e não usar mapas/skills Hera como procedimento ativo quando houver fonte Ares atual.

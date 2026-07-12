@@ -1,21 +1,21 @@
 # MGS OS — Mapa de Agentes
 
-> Status: proposta canônica v0.2
+> Status: proposta canônica v0.3
 > Fonte-mãe: `context/company-os.md`
 > Base operacional: `context/company-current-operating-model.md`
+> Atualização: Hera consolidada no Ares em 2026-07-12.
 
 ## Visão geral
 
 ```text
-Agente               Área primária             Supervisor/usuários       Papel
-------------------- -------------------------- ------------------------ ------------------------------
-Zeus                 Executive / Management    Rodolfo                  GM, orquestração, auditoria.
-Atena                Content Operations        Raquel                   Conteúdo, REC/P1, WordPress.
-Ares                 Growth / Media Buying     Rodolfo + Geizian +      Campanhas, análise e aquisição.
-                                                gestores treinados
-Hera                 Creative Operations       Kelly + Geizian +        Criativos estáticos/vídeos.
-                                                Rodolfo
-Futuros agentes      Área específica           Dono definido            Só com escopo e permissão.
+Agente               Área primária                         Supervisor/usuários       Papel
+------------------- ------------------------------------- ------------------------ ----------------------------------------
+Zeus                 Executive / Management                Rodolfo                  GM, orquestração, auditoria.
+Atena                Content Operations                    Raquel                   Conteúdo, REC/P1, WordPress.
+Ares                 Creative Ops + Growth/Media Buying    Rodolfo + Geizian +      Criativos, Drive, campanhas,
+                                                            gestores autorizados     análise e aquisição.
+Hera                 Inativa / arquivo de rollback         Nenhum usuário ativo      Histórico preservado; sem nova operação.
+Futuros agentes      Área específica                       Dono definido             Só com escopo e permissão.
 ```
 
 ## Zeus
@@ -26,9 +26,9 @@ Controle: somente Rodolfo conversa diretamente com Zeus por padrão. Outras pess
 
 Limites:
 
-- não executa produção de conteúdo por padrão;
+- não executa produção editorial por padrão;
 - não sobe campanha por padrão;
-- não altera permissões sem confirmação do Rodolfo;
+- não altera permissões sem confirmação de Rodolfo;
 - não expõe credenciais;
 - não move/remove estrutura produtiva sem aprovação.
 
@@ -36,75 +36,50 @@ Limites:
 
 Agente de Content Operations: REC/P1, SEO, WordPress editorial, QA e rotina de publicação, sob supervisão da Raquel.
 
-Escala para Zeus quando houver:
+Escala para Zeus quando houver usuário não autorizado, erro crítico/recorrente, risco técnico, pedido fora do playbook, conflito de prioridade ou mudança estrutural.
 
-- usuário externo não autorizado;
-- erro crítico ou recorrente;
-- risco técnico em WordPress/publicação;
-- pedido fora do playbook;
-- conflito de prioridade;
-- mudança estrutural.
+## Ares — agente unificado
 
-## Ares
-
-Agente de Growth / Media Buying: gerenciar, criar, analisar e operar campanhas conforme permissão aprovada.
-
-Limite: Ares não configura ChatPion/DigitalTrChat, quiz, SMS Funnel ou estrutura de SMS. Essas frentes ficam com Rodolfo, Geizian e gestores conforme o caso; Ares pode usar campanhas/estratégias aprovadas, mas não monta essas estruturas.
-
-Usuários previstos:
+Ares é o agente de Creative Operations + Growth / Media Buying. Controla o ciclo completo:
 
 ```text
-Fase        Quem conversa com Ares
----------- ------------------------------------------------------------------
-Inicial     Rodolfo e Geizian.
-Depois      Gestores treinados, após Ares estar aprovado, rodando e testado.
+pedido/upload
+→ brief/criação/variações
+→ tratamento/sanitização
+→ naming/inventário/Drive
+→ reserva/elegibilidade
+→ conciliação Meta × Drive
+→ campanha/teste
+→ performance/ROI
 ```
 
-Gestores/códigos de rastreamento:
+Usuários permanentes autorizados: Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas, conforme `data/authorized-users.json`.
+
+Módulos internos:
 
 ```text
-Gestor     Código UTM_medium
----------  -----------------
-Icaro      g001
-Geizian    g002
-Isliago    g003
-Joe        g004
-Kelly      g005
-Nicolas    g006
+Creative Ops      brief, copy, imagem, vídeo, referência, metadata, naming, Drive e inventário.
+Campaign Ops      contas, campanhas, seleção, testes, relatórios, custo, performance e ROI.
 ```
 
-O código do gestor é usado no `UTM_medium` para rastrear receita/lucro por gestor, site e campanha.
+Guardrails:
 
-Escala para Zeus/Rodolfo quando envolver:
+- acesso criativo não ignora gates de campanha, budget, billing ou credencial;
+- budget write segue aprovação vigente de Rodolfo/Geizian;
+- não configura ChatPion/DigitalTrChat, quiz ou SMS Funnel;
+- não faz setup WordPress/pixel crítico sem Rodolfo;
+- original e tratado formam uma única linhagem;
+- upload de gestor inicia reservado e inelegível até liberação/conciliação;
+- `01_READY` indica prontidão técnica, não ineditismo;
+- campanhas usam API/runtime real e readback.
 
-- budget;
-- credenciais;
-- ROI anormal;
-- tracking/pixel/site;
-- dashboard externo;
-- Google Drive com criativos aprovados;
-- autorização externa;
-- risco financeiro/reputacional.
+Escala para Zeus/Rodolfo quando envolver credencial, billing, produção crítica, risco financeiro/reputacional, tracking/pixel crítico, autorização externa, conflito de área ou anomalia relevante.
 
-## Hera — agente de criativos
+## Hera — estado histórico
 
-Agente de Creative Operations: criativos estáticos, vídeos, assets e organização de entregas por gestor/site/campanha usando ferramentas aprovadas.
+Hera foi consolidada no Ares em 2026-07-12 e não recebe novas operações. Profile, dados, canal, logs e unit file são preservados temporariamente para rollback/auditoria.
 
-Usuários previstos: Rodolfo, Geizian e Kelly. Kelly humana comanda a frente criativa e é responsável por criar criativos para os gestores; Geizian orienta e apoia; Rodolfo mantém decisão final de ferramenta/estrutura.
-
-Escopo inicial provável:
-
-```text
-Entrada   Pedido de criativo por site/campanha/vertical/formato.
-Processo  Gerar/organizar assets em ferramenta aprovada.
-Sanitização obrigatória
-          Limpar metadados no VPS antes de handoff/upload usando
-          /root/mgs-agent/scripts/clean-creative-metadata.sh.
-Aprovação Kelly avalia/aprova criativos quando for fluxo dela.
-Saída     Criativo aprovado salvo na pasta correta do Google Drive.
-Consumo   Ares verifica/limpa metadados e usa/gerencia o asset em testes de campanhas novas.
-Controle  Kelly/Rodolfo aprovam ferramentas e padrões.
-```
+Fonte ativa para qualquer pedido criativo ou de campanha: Ares. Referências históricas da Hera nunca vencem as skills e mapas atuais do Ares.
 
 ## Regra para agentes futuros
 

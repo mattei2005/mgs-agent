@@ -1,6 +1,6 @@
 # MGS OS — Matriz de Permissões e Autoridade
 
-> Status: proposta canônica v0.2
+> Status: proposta canônica v0.3
 > Fonte-mãe: `context/company-os.md`
 > Base operacional: `context/company-current-operating-model.md`
 > Regra: permissões reais continuam em `data/authorized-users.json`.
@@ -25,10 +25,10 @@ Criar REC/P1                          Atena / Raquel           Playbook/Raquel.
 Editar REC/P1                          Atena / Raquel           Playbook/Raquel.
 Publicar WordPress editorial           Atena                    Regra editorial.
 Criar artigo SEO                       Atena / Raquel           Playbook/Raquel.
-Criar criativo                         Hera / Kelly humana      Kelly/gestor/Rodolfo.
-Gerenciar criativo aprovado no Drive     Hera / Ares              Kelly/Rodolfo/Geizian.
-Ler criativo aprovado no Drive          Hera / Ares              Escopo aprovado.
-Subir campanha                         Ares / gestores          Geizian/Rodolfo.
+Criar/tratar criativo                 Ares / Kelly humana      Kelly/gestor/Rodolfo.
+Gerenciar criativo no Drive            Ares                     Escopo aprovado.
+Reservar/conciliar Meta × Drive        Ares                     Antes de seleção/write.
+Subir/gerenciar campanha               Ares / gestores          Autorização Ares vigente.
 Alterar budget                         Ares / gestores          Rodolfo/Geizian.
 Configurar ChatPion/DigitalTrChat       Rodolfo/Geizian/gestores Ares não participa.
 Configurar quiz/SMS Funnel              Rodolfo                  Ares não participa.

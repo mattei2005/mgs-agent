@@ -21,7 +21,6 @@ Regra prática:
 - Áreas oficiais: `context/areas.md`
 - Agentes: `context/agent-map.md`
 - Mapa operacional Ares: `context/ares-operational-map.md`
-- Mapa operacional Hera: `context/hera-operational-map.md`
 - Rotas/handoffs: `context/routes.md`
 - Fontes de verdade: `context/sources-of-truth.md`
 - Permissões conceituais: `context/permissions-matrix.md`
@@ -87,58 +86,35 @@ Regra prática:
   - Yoast
   - QA editorial
 
-### Growth / Media Buying
+### Creative Operations + Growth / Media Buying
 
-- Donos: Rodolfo + Geizian + gestores
+- Donos: Rodolfo + Geizian + Kelly + gestores autorizados
 - Agente: Ares
 - Abrir primeiro:
+  - `context/ares-operational-map.md`
   - `context/acquisition.md`
   - `context/routes.md`
   - `context/agent-map.md`
   - `profiles/ares-soul.md`
 - Runtime/dados:
   - `/root/.hermes/profiles/ares/logs/`
-  - `data/ares/`
+  - `data/ares/meta-ads/`
+  - `data/ares/creative-ops/`
   - `scripts/ares-*.py`
   - `logs/ares-*.log`
 - Usar para:
-  - campanhas
-  - Facebook Ads
-  - Google Ads
-  - ROI
-  - tracking por gestor
-  - criativos usados em campanhas
+  - brief, copy, imagem e vídeo
+  - referências Meta Library/YouTube
+  - sanitização, naming, Drive e inventário
+  - reserva/elegibilidade e conciliação Meta × Drive
+  - campanhas Facebook/Google e futuros canais aprovados
+  - custo, ROI, tracking por gestor e relatórios
 - Limites:
   - Ares não configura ChatPion/DigitalTrChat.
   - Ares não configura quiz/SMS Funnel.
-  - Ares não é dono de AdOps.
+  - Ares não é dono de AdOps/precificação.
   - Ares não faz setup WordPress/pixel crítico sem Rodolfo.
-
-### Creative Operations
-
-- Donos: Kelly + Geizian + Rodolfo
-- Agente: Hera
-- Abrir primeiro:
-  - `context/hera-creative-agent.md`
-  - `context/routes.md`
-  - `profiles/hera-soul.md`
-  - `docs/CREATIVE_METADATA_SANITIZER.md`
-- Runtime/ferramentas:
-  - `/root/.hermes/profiles/hera/logs/`
-  - `scripts/clean-creative-metadata.sh`
-  - `tools/canva-local-automation/`
-- Usar para:
-  - criativos estáticos
-  - vídeos
-  - Canva
-  - Drive de criativos
-  - assets
-  - handoff para Ares/humanos
-  - limpeza de metadados
-- Limites:
-  - Hera não executa campanha.
-  - Hera não altera budget.
-  - Hera não decide ROI.
+  - Budget write segue gates de Rodolfo/Geizian.
 
 ### Revenue / AdOps
 
@@ -268,45 +244,32 @@ Regra prática:
 
 ### Ares
 
-- Área: Growth / Media Buying
+- Área: Creative Operations + Growth / Media Buying
 - Vivo:
   - `/root/.hermes/profiles/ares/SOUL.md`
   - `/root/.hermes/profiles/ares/config.yaml`
   - `/root/.hermes/profiles/ares/logs/`
+  - `/root/.hermes/profiles/ares/skills/growth/`
 - Versionado:
   - `profiles/ares-soul.md`
   - `profiles/ares-config.yaml`
-  - `profiles/ares-skills/`
+  - `profiles/ares-skills/growth/`
 - Usa principalmente:
   - `context/ares-operational-map.md`
   - `context/acquisition.md`
   - `context/routes.md`
+  - `data/ares/meta-ads/`
+  - `data/ares/creative-ops/`
   - `scripts/ares-*.py`
-  - `data/ares/`
-
 - Regra HOT:
-  - Antes de usar `search_files` amplo para `drive`, `campaign`, `meta`, `creative`, `CC_*`, `UPLOAD`, `pixel`, `budget` ou `roi`, abrir `context/ares-operational-map.md` e escolher a fonte específica.
+  - Antes de busca ampla para `drive`, `campaign`, `meta`, `creative`, `UPLOAD`, `reference`, `video`, `budget` ou `roi`, abrir `context/ares-operational-map.md`.
 
-### Hera
+### Hera — histórico/rollback
 
-- Área: Creative Operations
-- Vivo:
-  - `/root/.hermes/profiles/hera/SOUL.md`
-  - `/root/.hermes/profiles/hera/config.yaml`
-  - `/root/.hermes/profiles/hera/logs/`
-- Versionado:
-  - `profiles/hera-soul.md`
-  - `profiles/hera-config.yaml`
-  - `profiles/hera-skills/`
-- Usa principalmente:
-  - `context/hera-operational-map.md`
-  - `context/hera-creative-agent.md`
-  - `docs/CREATIVE_METADATA_SANITIZER.md`
-  - `scripts/clean-creative-metadata.sh`
-  - `tools/canva-local-automation/`
-
-- Regra HOT:
-  - Antes de usar `search_files` amplo para `drive`, `creative`, `canva`, `UPLOAD`, `metadata`, `CC_*` ou `ares`, abrir `context/hera-operational-map.md` e escolher a fonte específica.
+- Estado: agente desativada em 2026-07-12; sem novas operações.
+- Profile, dados, logs, canal e unit file preservados temporariamente para rollback/auditoria.
+- Fonte ativa para qualquer pedido criativo/campanha: Ares.
+- Consultar Hera somente para evidência histórica; referências atuais do Ares vencem.
 
 ## 5. Mapa por pasta
 
@@ -386,7 +349,7 @@ Regra prática:
 - “Qual site/pixel/config WordPress?” → `data/sites.json`
 - “Atena fez X?” → `/root/.hermes/profiles/atena/logs/`, `data/article-tracker.db`, WordPress/API se necessário
 - “Ares fez X?” → `/root/.hermes/profiles/ares/logs/`, `scripts/ares-*.py`, `data/ares/`, `logs/ares-*.log`
-- “Hera fez X?” → `/root/.hermes/profiles/hera/logs/`, `context/hera-creative-agent.md`, `docs/CREATIVE_METADATA_SANITIZER.md`
+- “Hera fez X antes da desativação?” → histórico em `/root/.hermes/profiles/hera/logs/` e dados preservados; operação atual → Ares
 - “Tem erro no Hermes/VPS?” → `/root/.hermes/profiles/*/logs/errors.log`, systemd, journalctl filtrado, `docs/CRONS.md`, `data/*-state.json`
 - “Cron está ativo?” → `docs/CRONS.md`, crontab real, logs do script, estado do monitor
 - “Isso está no Git?” → `git status`, `git log`, `git diff`, `logs/auto-push.log`

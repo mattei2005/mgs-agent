@@ -41,8 +41,7 @@ Audit trail                       logs/events-audit.jsonl
 Executive / Management        company-os, areas, routes, audit log, pendências
 Office / Follow-up             pendências, tarefas operacionais, cobranças e follow-up com gestores
 Content Operations            content skills, WordPress, sites.json, processes
-Growth / Media Buying         dashboards de ads, Smart Bidding, UTM_medium, planilhas, Ares
-Creative Operations           Canva, Google Drive de criativos aprovados, ChatGPT, TopView.ai, Grok se aprovado, pastas dos gestores
+Creative Ops + Growth        Ares, APIs/dashboards de ads, Drive/inventário criativo, Canva, providers aprovados, UTM e performance
 Revenue / AdOps               Smart Bidding, ActiveView, Discord AdOps, reports
 Finance / BI                  planilha financeira, comissões, Smart Bidding, FB BM, reports
 Tech / WordPress / Infra      scripts, crons, patches, Hermes, WordPress, logs
@@ -61,7 +60,7 @@ Google Ads                      Campanhas/aquisição quando usado.
 TikTok Ads                      Canal potencial/futuro para Ares.
 Google / AdX                    Camada de pagamento/monetização via parceiros.
 Canva                           Organização e criação inicial de criativos.
-Google Drive                     Pasta oficial de criativos aprovados; Hera e Ares podem ler/escrever para gerenciar assets de campanha.
+Google Drive                     Pasta oficial de criativos; Ares lê/escreve, preserva linhagem e concilia com plataformas de campanha.
 DigitalTrChat / ChatPion         Dashboard Messenger/Facebook; usuários por vertical, seguradores, páginas e bot flows.
 SMS Funnel                       Envio de SMS da estratégia quiz/SMS configurada por Rodolfo.
 UTM_medium                       Código de atribuição por gestor em campanhas/sites.

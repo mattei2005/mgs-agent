@@ -127,29 +127,29 @@ Acesso ao Ares começa com Rodolfo + Geizian. Gestores entram depois de teste, a
 
 ---
 
-## Fluxo de criativos — Kelly / Hera / Drive / Ares
+## Fluxo unificado de criativos e campanhas — Ares
 
-Google Drive é a fonte operacional dos criativos aprovados.
+Google Drive + inventário Ares são as fontes operacionais de assets; Meta/Google APIs vencem para estado real de campanha.
 
 ```text
 Etapa   Ação
 ------- -----------------------------------------------------------------------
-1       Kelly/Rodolfo/Geizian/gestor pede criativo.
-2       Hera cria ou organiza variações conforme escopo aprovado.
-3       Kelly ou responsável avalia/aprova.
-4       Hera salva o criativo aprovado na pasta correta do Google Drive.
-5       Gestores usam o criativo aprovado nas campanhas.
-6       Ares usa/organiza assets aprovados em testes e campanhas.
+1       Usuário autorizado pede ou envia criativo ao Ares.
+2       Creative Ops cria/trata/sanitiza/nomeia e registra original → tratado.
+3       Kelly ou responsável aprova quando aplicável.
+4       Ares salva no Drive e valida por readback.
+5       Upload de gestor fica reservado e ares_eligible=false.
+6       Campaign Ops concilia Drive × Meta antes de selecionar.
+7       Ares reserva, executa dentro da autoridade e valida a plataforma.
+8       Performance/ROI retornam ao inventário para orientar novas variações.
 ```
 
 Regras:
 
 - Kelly é pessoa humana/gestora `g005`, não agente.
-- Hera é o agente de Creative Operations.
-- Hera não substitui aprovação humana quando ela for necessária.
-- Ares e Hera podem ler/escrever no Drive de criativos aprovados conforme escopo.
-
----
+- Hera está inativa; não existe handoff entre bots.
+- `01_READY` significa pronto tecnicamente, não inédito.
+- Original e tratado nunca competem como assets independentes sem decisão expressa.
 
 ## Fluxo ChatPion / DigitalTrChat — Messenger
 
@@ -281,8 +281,8 @@ Canal / sistema                 Uso
 Discord                         Operação dos agentes e threads de trabalho.
 #zeus-admin-agent                Zeus; controle padrão somente Rodolfo.
 #atena-content-agent             Atena / Content Operations.
-Ares                             Canal/thread de campanhas quando implantado.
-Hera                             Canal/thread de criativos quando implantado.
+Ares                             Canal/thread unificado de criativos, campanhas e relatórios.
+Hera                             Canal histórico; agente desativada.
 Google Drive                     Criativos aprovados.
 Dashboards externos              Ads, monetização, ChatPion, SMS Funnel, reports.
 ```
@@ -315,7 +315,7 @@ Conflito                                      Vence
 Fala recente do Rodolfo vs processo antigo     Fala recente do Rodolfo.
 Fonte operacional validada vs documento antigo Fonte operacional validada.
 Ares vs ChatPion/quiz/SMS                       Ares não configura esses fluxos.
-Kelly vs Hera                                   Kelly é pessoa; Hera é agente.
+Kelly vs Ares                                   Kelly é dona humana criativa; Ares é agente unificado.
 SB vs AV                                        SB é dashboard principal; AV só exceções.
 Permissão real vs documentação                  data/authorized-users.json.
 Credencial em qualquer lugar                    1Password.

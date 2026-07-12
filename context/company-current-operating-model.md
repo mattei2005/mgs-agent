@@ -263,13 +263,12 @@ Zeus                 Manager geral de tudo; olha todos os agentes, faz updates,
                      governa, audita, roteia e reporta.
 Atena                Gestora/agente de conteúdo; produz conteúdos. Raquel deve
                      cuidar/supervisionar.
-Ares                 Agente de campanhas para mídia paga/aquisição:
-                     Facebook Ads, Google Ads, TikTok e demais canais aprovados.
-                     Não configura ChatPion/DigitalTrChat, quiz ou SMS Funnel.
-Hera                 Agente planejado/em implantação de criativos; criação de criativos usando
-                     ChatGPT, TopView.ai, Canva, Grok se testado/aprovado ou
-                     outras AIs com API/acesso permitido. Kelly permanece como
-                     pessoa/gestora humana da frente de criativos.
+Ares                 Agente unificado de Creative Operations + mídia paga/aquisição:
+                     criação/tratamento/inventário de criativos, Drive, Facebook Ads,
+                     Google Ads e demais canais aprovados. Não configura ChatPion,
+                     DigitalTrChat, quiz ou SMS Funnel.
+Hera                 Desativada em 2026-07-12 após consolidação no Ares; profile,
+                     dados e histórico preservados para rollback/auditoria.
 ```
 
 ---
@@ -285,8 +284,8 @@ A arquitetura da MGS deve ser desenhada por áreas reais da empresa, não apenas
 ----------------------------- ------------------------------------------------
 Executive / Management        Rodolfo, Geizian, reuniões, decisões, estratégia
 Content Operations            Raquel, gestores, REC/P1, SEO, WordPress conteúdo
-Growth / Media Buying         Gestores, Facebook Ads, Google Ads, SMS
-Creative Operations           Kelly, Canva, ChatGPT, TopView.ai, Hera
+Creative Ops + Growth        Kelly, gestores, Ares, Drive, providers criativos, Facebook/Google Ads
+Acquisition systems           ChatPion, quiz e SMS sob Rodolfo/Geizian/gestores
 Revenue / AdOps               Smart Bidding, ActiveView, AdManager, AdX, blocos
 Finance / BI                  Rodolfo recebe relatórios, alimenta planilhas,
                               acompanha ROI, gastos, receitas, custos

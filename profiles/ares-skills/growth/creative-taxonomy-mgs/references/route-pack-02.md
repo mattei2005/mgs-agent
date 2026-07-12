@@ -1,47 +1,45 @@
-## Entrada operacional via Hera
+## Entrada operacional unificada no Ares
 
-Fluxo aprovado por Rodolfo para entrada de criativos novos:
+Rodolfo, Geizian, Kelly e gestores autorizados enviam criativos diretamente ao Ares. Não existe handoff Hera → Ares.
 
-- Gestores/Kelly enviam o criativo como anexo no Discord da Hera.
-- A mensagem deve informar obrigatoriamente `PAIS`, `VERTICAL` e `LINGUA`.
-- Hera não deve inventar esses campos; eles são fonte oficial vinda do gestor/Kelly.
-- Se faltar qualquer campo obrigatório, Hera deve pedir correção antes de enviar para processamento.
-- O nome original do arquivo pode ser livre/Canva; a nomenclatura oficial é gerada depois pelo Ares.
-- Hera atua como porta de entrada e organização inicial; Ares atua no tratamento técnico, sanitização, classificação e nomenclatura de aquisição.
-- Quando Hera receber um upload válido com `PAIS`, `VERTICAL`, `LINGUA` e anexo, ela deve fazer um único handoff mencionando o Ares (`<@1508864261504630925>`) com os campos estruturados e link/contexto do anexo/processamento.
-- Quando Rodolfo pedir explicitamente para Ares acionar/pedir algo à Hera, Ares deve usar o **user mention real da Hera** (`<@1513006098133680290>`). Escrever `@Hera` em texto simples não acorda o bot nem garante leitura pelo gateway.
-- Para evitar loop entre agentes, Hera não deve mencionar Ares para confirmações, agradecimentos, status sem ação ou mensagens sem anexo/campos obrigatórios; Ares não deve responder a confirmações da Hera. Depois que uma correção Drive/naming estiver validada e encerrada, thumbs-up, “confirmado”, “registrado”, “sem nova ação”, “status mantido”, “aguardando handoff”, “sem ação pendente”, “silêncio operacional” ou mensagens equivalentes da Hera exigem silêncio total, não uma nova resposta curta. Handoff parcial bloqueado não deve virar ping-pong: Ares só volta a responder se houver handoff final com links/metadata ou pedido humano novo.
+Ares trabalha com pedido natural. País, vertical e idioma devem ser inferidos quando houver evidência segura; se faltarem e alterarem destino/naming, perguntar somente o bloqueio mínimo. Nunca inventar esses campos.
 
-Formato recomendado para envio no Discord da Hera:
+Entrada recomendada:
 
 ```text
 País: US
 Vertical: CC
 Língua: ES
+Estratégia: bot | tráfego direto | desconhecida
+Conta: quando conhecida
 [anexo]
 ```
 
 Formato curto aceito:
 
 ```text
-US | CC | ES
+US | CC | ES | bot
 [anexo]
 ```
 
-Pasta de entrada recomendada no Drive:
+## Reserva padrão de upload humano
+
+Todo upload de gestor começa fail-closed:
 
 ```text
-MGS-CRIATIVOS/
-└── CRIATIVOS_ENVIADOS/
-    └── <VERTICAL>_<COUNTRY>_<LANG>/
-        ├── KELLY/
-        └── GESTORES/
+reservation_status = RESERVADO_PELO_GESTOR
+ares_eligible = false
 ```
 
-Destino final canônico no Drive, no fluxo atual aprovado:
+O original e a cópia tratada compartilham a mesma linhagem. Se o gestor usar o original, a tratada também fica inelegível. Silêncio nunca libera o asset.
+
+## Estrutura Drive canônica
+
+A raiz real deve ser validada por API antes do write. Estrutura atual:
 
 ```text
-MGS-CRIATIVOS/
+MGS-AGENTS/CRIATIVOS/
+├── UPLOAD MANUAL
 └── <VERTICAL>_<COUNTRY>_<LANG>/
     ├── IMG/
     │   ├── 01_READY
@@ -59,47 +57,39 @@ MGS-CRIATIVOS/
         └── 99_LEGACY
 ```
 
-Regra importante: como `<VERTICAL>_<COUNTRY>_<LANG>` já contém idioma e a nomenclatura já contém `IMG|VID`, `ANGLE` e `P_ORIENT`, Hera/Ares **não devem criar subpastas intermediárias** como `STORY/EN/01_READY` no fluxo atual, salvo aprovação explícita. Placement/formato (`STORY`, `FEED`, `REELS`) deve ficar no inventário/handoff e ser inferido por dimensão, mas o arquivo final vai direto em `<OPERATION>/<IMG|VID>/01_READY` quando estiver pronto.
+Não criar subpastas intermediárias de placement/idioma no destino final sem aprovação. Placement fica no inventário; status fica na pasta.
 
-Depois da entrada, Ares deve preservar o original/inbox, criar cópia limpa, classificar por OCR/visão, aplicar o nome final e enviar a cópia tratada para as pastas operacionais já existentes. Criativos vindos de `UPLOAD_CANVAS` já tratados continuam como backlog/artefato existente e não devem ser confundidos com novos uploads via Hera.
-## Estrutura Drive recomendada
+Quando o pedido autorizado for tratar/mover:
 
-Estrutura por operação, não por site:
+1. inventariar e classificar;
+2. criar cópia limpa;
+3. validar `clean=true`;
+4. colocar a cópia em `01_READY` correto;
+5. validar Drive readback;
+6. mover o original para `99_LEGACY`, sem deletar;
+7. confirmar que a entrada contém apenas pendências.
 
-```text
-MGS-CRIATIVOS/
-└── <OPERATION>/
-    ├── IMG/
-    │   ├── 01_READY
-    │   ├── 02_TESTING
-    │   ├── 03_TESTED
-    │   ├── 04_WINNERS
-    │   ├── 05_REJECTED
-    │   └── 99_LEGACY
-    └── VID/
-        ├── 01_READY
-        ├── 02_TESTING
-        ├── 03_TESTED
-        ├── 04_WINNERS
-        ├── 05_REJECTED
-        └── 99_LEGACY
-```
+Se o pedido disser copiar/manter original na entrada, preservar conforme solicitado.
 
-Para pipeline de backlog com placement/idioma como pastas intermediárias, usar quando aprovado:
+## Inventário mínimo unificado
 
 ```text
-MGS-CRIATIVOS/<OPERATION>/<IMG|VID>/<FEED|STORY|LANDSCAPE|UNKNOWN>/<LANG>/<STATUS>/
-```
-## Inventário mínimo
-
-Todo pipeline de classificação/renomeação deve manter inventário com pelo menos:
-
-```text
-filename
-proposed_filename
+asset_id
+original_filename
+canonical_filename
+source_manager
+requested_by
+created_by
 vertical
 country
 language
+strategy
+ad_account_id
+source_drive_id
+asset_drive_id
+original_checksum
+clean_checksum
+perceptual_fingerprint
 format
 angle
 person
@@ -107,28 +97,32 @@ orientation
 p_orient
 variant
 status
-performance_label
-source
-source_manager
-page_id
-asset_drive_id
+reservation_status
+ares_eligible
+used_by
+campaign_owner
+meta_ad_id
 meta_creative_id
-origin_campaign_id
+meta_image_hash
+meta_video_id
+effective_object_story_id
 width
 height
 aspect_ratio
 placement_fit
-checksum_md5
-clean_metadata_status
-created_at
+metadata_clean
+first_seen_at
+last_reconciled_at
+performance_label
 notes
 ```
 
-Valores usuais:
+Fonte local canônica:
 
 ```text
-person: PERSON, NO_PERSON, UNKNOWN
-orientation: VERTICAL, HORIZONTAL, REVIEW
-status: READY, TESTING, TESTED, WINNER, REJECTED, LEGACY, REVIEW
-performance_label: GOOD, BAD, INCONCLUSIVE, UNKNOWN
+/root/mgs-agent/data/ares/creative-ops/inventory/assets.jsonl
 ```
+
+## Antes de campanha
+
+`01_READY` significa pronto tecnicamente. Campaign Ops deve conciliar Meta × Drive antes da seleção, atualizar reserva/elegibilidade e repetir a conferência imediatamente antes do write.

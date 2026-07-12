@@ -12,9 +12,8 @@
 Executive / Management        Rodolfo + Geizian         Direção, prioridades, reuniões e governança.
 Office / Follow-up             Ially                     Cobrança e acompanhamento de tarefas dos gestores.
 Content Operations            Raquel                    Conteúdo, REC/P1, SEO e WordPress editorial.
-Growth / Media Buying         Rodolfo + Geizian +       Campanhas, arbitragem, custos, aquisição e ROI.
-                              gestores
-Creative Operations           Kelly + Geizian           Criativos, Canva, ChatGPT, TopView.ai e AIs.
+Creative Ops + Growth /      Rodolfo + Geizian +       Criativos, Drive, campanhas, arbitragem,
+Media Buying                   Kelly + gestores          custos, aquisição e ROI.
 Revenue / AdOps               Rodolfo + Geizian +       Smart Bidding, ActiveView, AdX, blocos e regras.
                               gestores
 Finance / BI                  Rodolfo                   Fechamento, custos, receita, ROI e pagamentos.
@@ -42,15 +41,15 @@ Escala para Zeus quando houver erro crítico, risco técnico, conflito de priori
 
 ## Growth / Media Buying
 
-Facebook Ads, Google Ads, TikTok, SMS, ChatPion, quiz, tráfego direto, análise de campanhas, custos, ROI, gestores e operação do Ares dentro do escopo aprovado de campanhas.
+Facebook Ads, Google Ads, criativos, Canva/Drive, referências, campanhas, tráfego direto, análise, custos e ROI pertencem ao Ares dentro do escopo aprovado. ChatPion, quiz e SMS Funnel continuam fora da configuração do Ares.
 
 Rodolfo também atua diretamente na configuração e direção estratégica da área, incluindo a preparação do Ares. Geizian acompanha gestores no dia a dia. Rodolfo acompanha visão geral, budget, ROI e impacto financeiro.
 
 ## Creative Operations
 
-Criativos estáticos, vídeos, assets para campanhas, Canva, Google Drive de criativos aprovados, ChatGPT, TopView.ai, Grok se testado/aprovado e Hera.
+Criativos estáticos, vídeos, referências, assets, Canva, Google Drive, providers aprovados e inventário são o módulo Creative Ops do Ares.
 
-Kelly é a dona humana atual da produção criativa. Geizian também atua orientando e apoiando Kelly nessa frente. O fluxo aprovado termina com os assets salvos no Google Drive de criativos aprovados, onde Hera e Ares podem ler/escrever para gerenciar criativos de campanha.
+Kelly é a dona humana da frente criativa. Geizian orienta e apoia. Ares cria/organiza/trata os assets, controla reserva/elegibilidade e conecta o resultado às campanhas sem handoff entre agentes.
 
 ## Revenue / AdOps
 

@@ -67,10 +67,9 @@ Office / Follow-up             Cobrança, acompanhamento de tarefas pendentes
                               dos gestores e disciplina operacional.
 Content Operations            Produção de conteúdo, REC/P1, SEO, categorias,
                               WordPress editorial e rotina de publicação.
-Growth / Media Buying         Campanhas, Facebook Ads, Google Ads, TikTok, SMS, ChatPion, quiz e tráfego direto,
-                              gestores, custos, ROI e aquisição.
-Creative Operations           Criativos estáticos, vídeos, Canva, ChatGPT,
-                              TopView.ai, Hera e Google Drive de criativos.
+Creative Ops + Growth        Criativos, Drive, Facebook/Google Ads, tráfego direto,
+                              gestores, custos, ROI e aquisição via Ares.
+Acquisition systems           ChatPion, quiz e SMS continuam com Rodolfo/Geizian/gestores, fora do setup do Ares.
 Revenue / AdOps               Smart Bidding, ActiveView, AdManager, AdX,
                               blocos de anúncio, precificação e monetização.
 Finance / BI                  Relatórios recebidos, planilhas alimentadas por Rodolfo,
@@ -171,19 +170,19 @@ Camada                 Ferramentas / canais
 Media buying           Facebook Ads, Google Ads, TikTok e tráfego direto
 ChatPion/Messenger     DigitalTrChat/ChatPion; cadastro por Rodolfo/Geizian e configuração operacional por gestores
 Quiz/SMS               Estrutura montada/configurada por Rodolfo usando SMS Funnel quando aplicável
-Criativos estáticos    Hera, Kelly humana, ChatGPT, Canva
-Vídeos                 Hera, TopView.ai
-Criativos futuros      Grok ou outras AIs com API/acesso permitido
+Criativos estáticos    Ares, Kelly humana e providers aprovados
+Vídeos                 Ares e providers aprovados
+Criativos futuros      Ferramentas/APIs testadas e aprovadas
 Gestão                 Rodolfo + Geizian + gestores; Ares em implantação progressiva para campanhas
 ```
 
 Fluxo de criativos:
 
 ```text
-1. Kelly humana pede/cria/avalia criativos para gestores.
-2. Hera cria/organiza assets usando ferramentas aprovadas.
-3. Kelly/Rodolfo/gestor aprovam conforme o fluxo.
-4. Hera salva o criativo aprovado na pasta correta do Google Drive.
+1. Kelly/Rodolfo/Geizian/gestor pede ou envia criativo ao Ares.
+2. Ares cria/trata/sanitiza/nomeia e registra a linhagem.
+3. Kelly/Rodolfo/gestor aprovam quando o fluxo exigir.
+4. Ares salva no Drive, controla reserva/elegibilidade e conecta o asset às campanhas.
 5. Ares lê/escreve no Drive de criativos aprovados e usa/gerencia assets em testes/campanhas.
 6. Geizian acompanha execução/performance.
 7. Rodolfo acompanha visão geral, ROI e financeiro.
@@ -192,8 +191,8 @@ Fluxo de criativos:
 Fluxo alvo com agentes:
 
 ```text
-Hera           -> cria/organiza criativos aprovados no Drive
-Ares           -> analisa/sobe/acompanha campanhas conforme permissão; não configura ChatPion, quiz ou SMS Funnel
+Ares           -> cria/organiza criativos e analisa/sobe/acompanha campanhas conforme permissão; não configura ChatPion, quiz ou SMS Funnel
+Hera           -> inativa; histórico preservado para rollback
 Zeus           -> monitora, audita, escala exceções e reporta para Rodolfo
 ```
 
@@ -239,11 +238,9 @@ Zeus                 Executive / Management    General Manager, orquestrador,
 Atena                Content Operations        Gestora/agente de conteúdo;
                                               REC/P1, SEO, WordPress editorial,
                                               sob supervisão da Raquel.
-Ares                 Growth / Media Buying     Campanhas, análise, criação e
+Ares                 Creative Ops + Growth    Criativos, Drive, campanhas, análise e
                                               operação de aquisição.
-Hera                 Creative Operations       Criativos estáticos/vídeos via
-                                              ChatGPT, TopView.ai, Canva, Grok se testado/aprovado
-                                              ou outras APIs aprovadas.
+Hera                 Inativa / rollback        Sem operação nova; histórico preservado.
 Futuros agentes      Área específica           Só devem nascer com área, dono,
                                               fontes, permissões e rotas claras.
 ```
@@ -306,7 +303,7 @@ Criar/editar REC/P1                    Atena / Content        Se prioridade,
                                                               erro ou exceção.
 Publicar/ajustar WordPress editorial   Atena / Content        Se risco técnico.
 Montar site/plugin/pixel               Tech / Rodolfo         Sim se produção.
-Criar criativo                         Hera / Kelly humana    Escala se risco ou
+Criar/tratar criativo                 Ares / Kelly humana    Escala se risco ou
                                                               ferramenta nova.
 Subir/analisar campanha                Gestor / Ares          Se budget, risco
                                                               ou decisão.
@@ -331,7 +328,7 @@ Artigo SEO                            Atena/Raquel             Playbook/Raquel
 Publicação WordPress editorial        Atena                    Regra editorial
 Setup técnico WordPress/site          Rodolfo/Tech             Rodolfo
 Campanhas Facebook/Google/TikTok      Gestores/Ares            Geizian/Rodolfo
-Criativos                             Hera/Kelly humana        Gestor/Rodolfo
+Criativos                             Ares/Kelly humana        Gestor/Rodolfo
 Budget de mídia                       Gestores/Ares            Rodolfo/Geizian
 Blocos e regras AdOps                 Smart Bidding/Revenue    Rodolfo/gestor
 Fechamento financeiro                 Rodolfo                  Rodolfo

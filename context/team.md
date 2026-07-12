@@ -92,16 +92,18 @@ Regra de atribuição: o `UTM_medium` carrega o código do gestor. Esse código 
 - Responsável humana pela criação de criativos para gestores.
 - Também atua como gestora.
 - Trabalha com Geizian/Rodolfo na frente criativa.
-- No fluxo com Hera: pede/cria/avalia/aprova criativos, e Hera pode organizar/salvar assets aprovados no Google Drive.
+- No fluxo com Ares: pede/cria/avalia/aprova criativos; Ares pode criar, tratar, organizar, inventariar e conectar os assets às campanhas.
+
+### Ares — Creative Operations
+
+- Ares assumiu Creative Operations após consolidação da Hera em 2026-07-12.
+- Cria/organiza criativos, vídeos e assets conforme escopo aprovado.
+- Lê/escreve no Drive, preserva linhagem original → tratado e controla reserva/elegibilidade.
+- A mesma identidade conecta o asset a testes/campanhas, respeitando gates de write e budget.
 
 ### Hera
 
-- Agente de Creative Operations.
-- Não substitui Kelly como responsável humana.
-- Cria/organiza criativos, vídeos e assets conforme escopo aprovado.
-- Pode ler/escrever no Google Drive de criativos aprovados.
-- Disponibiliza assets aprovados para Ares usar em testes/campanhas.
-- Não sobe campanhas, não altera budget, não configura pixel e não mexe em Business Manager.
+- Agente desativada; profile/dados/canal preservados apenas para rollback e auditoria.
 
 ---
 
@@ -113,9 +115,9 @@ Agente   Área                     Acesso humano / supervisão
 Zeus     Executive / Management   Rodolfo somente por padrão. Outras pessoas só
                                   entram em thread do Zeus se Rodolfo pedir.
 Atena    Content Operations       Raquel supervisiona e tem acesso operacional.
-Ares     Growth / Media Buying    Rodolfo + Geizian inicialmente; gestores entram
-                                  depois de teste, aprovação e treinamento.
-Hera     Creative Operations      Rodolfo, Geizian e Kelly conforme escopo criativo.
+Ares     Creative Ops + Growth    Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e
+                                  Nicolas, conforme registry e escopo.
+Hera     Inativa / rollback        Sem operação nova; histórico preservado.
 ```
 
 Acesso humano esperado não substitui o registry operacional. Para acesso real, consultar `data/authorized-users.json`.
@@ -134,20 +136,15 @@ Acesso humano esperado não substitui o registry operacional. Para acesso real, 
 
 ### Ares
 
-- Agente de campanhas / Growth / Media Buying.
-- Status: em configuração / implantação progressiva.
-- Acesso inicial: Rodolfo e Geizian.
-- Gestores terão acesso depois que Ares estiver aprovado, testado e após treinamento de uso.
-- Pode gerenciar/analisar/criar/operar campanhas conforme escopo aprovado.
-- Pode ler/escrever no Google Drive de criativos aprovados para usar assets em campanhas.
+- Agente unificado de Creative Operations + Growth / Media Buying.
+- Acesso permanente: Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas.
+- Pode criar/tratar/inventariar criativos, gerenciar/analisar/criar/operar campanhas e produzir relatórios conforme escopo.
+- Budget write continua subordinado à aprovação vigente de Rodolfo/Geizian.
 - Não configura ChatPion/DigitalTrChat, quiz, SMS Funnel ou estrutura de SMS.
 
 ### Hera
 
-- Agente de criativos.
-- Atua em criativos estáticos, vídeos, organização de assets e Google Drive.
-- Trabalha junto ao fluxo humano de Kelly, Geizian e Rodolfo.
-- Pode disponibilizar criativos aprovados para Ares.
+- Inativa desde 2026-07-12; sem novas solicitações.
 
 ---
 

@@ -11,7 +11,7 @@
 9. Detectar idioma/país por texto visível, nome, pasta e/ou OCR quando disponível; evidência visual pode corrigir o guess automático. Para vídeos, o classificador OCR-assisted canônico é `/root/mgs-agent/scripts/ares-classify-video-timelines-ocr.py`.
 10. Para escala completa de vídeos, seguir `references/upload-canvas-video-classification-scale.md`.
 11. Classificar vertical por evidência visual/textual; se incerto, `UNKNOWN`.
-12. Classificar pessoa/orientação usando apenas `PV`, `PH`, `NV`, `NH`; FEED 1:1 entra como `HORIZONTAL` para fins de nome.
+12. Classificar pessoa/formato usando `PV/NV` para vertical, `PS/NS` para square e `PH/NH` para horizontal; não colapsar FEED 1:1 em horizontal.
 13. Sugerir `ANGLE` somente com evidência suficiente; se incerto, `UNKNOWN` + baixa confiança.
 14. Gerar plano de renomeação/cópia em CSV/JSON com `confidence` e `notes`.
 14. Gerar plano de renomeação/cópia em CSV/JSON com `confidence` e `notes`.
@@ -40,7 +40,7 @@ Se `clean: false`, limpar uma cópia:
 Usar o arquivo `.metadata-clean` como asset final. Não sanitizar RAW original in-place.
 ## Regras de segurança
 
-- Não apagar, mover ou renomear RAW sem confirmação explícita.
+- Em pedido autorizado de tratar/mover uma pasta de entrada, validar o clean em `01_READY` e mover o RAW para `99_LEGACY`, sem deletar; fora desse fluxo, não mover/renomear RAW sem confirmação explícita.
 - Não subir criativo em campanha sem metadata gate aprovado.
 - Não inventar performance ou histórico de teste.
 - Não expor tokens, cookies, IDs sensíveis sem necessidade, client secrets ou credenciais.
