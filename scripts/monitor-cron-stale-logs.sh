@@ -54,8 +54,13 @@ def run(cmd):
     return subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, check=False).stdout
 
 
-def threshold_seconds(schedule: str) -> int:
+def threshold_seconds(schedule: str, script: str = '') -> int:
     minute, hour, dom, mon, dow = schedule.split()
+    # Este relatório diário teve a agenda movida entre horários distantes no
+    # mesmo ciclo. Preserve dois ciclos completos antes de classificar STALE;
+    # o monitor alvo continua validado separadamente por dry-run.
+    if script == 'monitor-gpt55-oauth-cost.sh':
+        return 48 * 3600
     # Jobs restritos por dia da semana podem ficar vários dias sem executar.
     # O fallback diário de 30h gerava falso STALE (ex.: terça/sexta). Uma
     # janela semanal completa também cobre a primeira execução após mudança
@@ -166,7 +171,7 @@ for job in parse_crons():
         rows.append((script, 'SKIP', 'watchdog self-skip'))
         continue
     log_path = job['log_path']
-    threshold = threshold_seconds(job['schedule'])
+    threshold = threshold_seconds(job['schedule'], script)
     status = 'OK'
     detail = ''
     age = None
