@@ -34,7 +34,7 @@ write_state running 'validando gateway e regressão'
 if [[ "$(systemctl is-active zeus-gateway.service 2>/dev/null || true)" != active ]]; then
   write_state failed 'zeus-gateway não está active'
   audit zeus_startup_promotion_fix_failed 'service not active'
-  hermes -p zeus send --to "discord:$THREAD_ID" --quiet '<@344196393512075265> A correção da mensagem genérica não passou no pós-restart: zeus-gateway não ficou ativo. O rollback está preservado e o detalhe técnico foi registrado em #alerts-infra.' || true
+  /root/.local/bin/hermes -p zeus send --to "discord:$THREAD_ID" --quiet '<@344196393512075265> A correção da mensagem genérica não passou no pós-restart: zeus-gateway não ficou ativo. O rollback está preservado e o detalhe técnico foi registrado em #alerts-infra.' || true
   exit 81
 fi
 
@@ -52,7 +52,7 @@ ERRORS="$(journalctl -u zeus-gateway.service --since '-3 minutes' --no-pager -o 
 [[ "$ERRORS" == 0 ]] || {
   write_state failed "erro reapareceu após restart count=$ERRORS"
   audit zeus_startup_promotion_fix_failed "post-restart lost ownership count=$ERRORS"
-  hermes -p zeus send --to "discord:$THREAD_ID" --quiet '<@344196393512075265> A correção da mensagem genérica não passou: o erro de ownership reapareceu depois do restart. O detalhe foi registrado e não vou declarar resolvido.' || true
+  /root/.local/bin/hermes -p zeus send --to "discord:$THREAD_ID" --quiet '<@344196393512075265> A correção da mensagem genérica não passou: o erro de ownership reapareceu depois do restart. O detalhe foi registrado e não vou declarar resolvido.' || true
   exit 82
 }
 
@@ -67,5 +67,5 @@ audit zeus_startup_promotion_fix_validated 'Zeus active; 4 targeted tests PASS; 
   --reason 'Corrigir erro Discord recorrente startup agent promotion lost ownership em follow-up recursivo após rebuild do AIAgent' \
   --evidence '43 busy-session tests PASS antes do restart; 4 regressões PASS pós-restart; patch guard PASS; zero novos lost ownership; backup seguro 20260712T1408-0400'
 
-hermes -p zeus send --to "discord:$THREAD_ID" --quiet 'Correção aplicada e validada após o restart: Zeus ativo, 4 regressões direcionadas aprovadas, patch guard aprovado e nenhum novo `startup agent promotion lost ownership` no pós-restart. A causa era uma corrida no follow-up recursivo quando o AIAgent era reconstruído após mudança de skill/config.'
+/root/.local/bin/hermes -p zeus send --to "discord:$THREAD_ID" --quiet 'Correção aplicada e validada após o restart: Zeus ativo, 4 regressões direcionadas aprovadas, patch guard aprovado e nenhum novo `startup agent promotion lost ownership` no pós-restart. A causa era uma corrida no follow-up recursivo quando o AIAgent era reconstruído após mudança de skill/config.'
 log 'DONE validation PASS'
