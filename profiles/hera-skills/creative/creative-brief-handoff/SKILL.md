@@ -1,7 +1,7 @@
 ---
 name: creative-brief-handoff
 description: Use quando a Hera receber um pedido criativo e precisar transformar em brief operacional, variações criativas, naming de assets, status de revisão e pacote limpo de handoff para o Ares sem executar campanhas.
-version: 1.4.1
+version: 1.4.3
 author: MGS Digital Corp
 license: Proprietary
 metadata:
@@ -30,6 +30,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Naming de arquivos e assets → Geração visual — preferência Rodolfo/MGS** → `references/route-pack-04.md`
 - **Padrão para vídeo curto → Gate obrigatório para vídeo com referência externa ou backend específico** → `references/route-pack-05.md`
 - **Handoff para Ares → Checklist de verificação** → `references/route-pack-06.md`
+- **Lote misto IMG/VID em UPLOAD MANUAL → READY + LEGACY com verificação forte** → `references/mixed-media-drive-intake-ready-legacy.md`
 
 ## Context-efficiency guardrails
 

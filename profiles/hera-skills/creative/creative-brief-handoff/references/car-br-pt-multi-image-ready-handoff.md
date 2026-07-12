@@ -14,12 +14,14 @@ Use this reference when Kelly/Geizian/gestor sends multiple Portuguese Brazil ca
    - classify angle from visible promise/copy;
    - rename;
    - clean metadata;
-   - upload clean copy to `MGS-CRIATIVOS/CAR_BR_PT/IMG/01_READY/`;
+   - upload clean copy to `MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY/`;
    - verify Drive metadata after upload;
    - register inventory.
-4. Ares should not be asked to do Hera's file hygiene. Ares consumes the verified `READY` assets and applies campaign/test rules only.
-5. If Ares needs to be notified, do it silently/background; do not ping Ares in the human thread and do not reply to Ares bot validation/continuation messages there.
-6. Keep original Discord/Canva source untouched. Final Drive asset is the cleaned renamed copy.
+5. Ares should not be asked to do Hera's file hygiene. Ares consumes the verified `READY` assets and applies campaign/test rules only.
+6. If Ares needs to be notified, do it silently/background; do not ping Ares in the human thread and do not reply to Ares bot validation/continuation messages there.
+7. Source preservation depends on intake:
+   - Discord attachment: keep the external source untouched; upload only the cleaned renamed copy.
+   - Drive `UPLOAD MANUAL` with explicit **tratar/mover**: after READY verification, move the original to `MGS-AGENTS/CRIATIVOS/CAR_BR_BR/{IMG|VID}/99_LEGACY`, preserving Drive ID/name. Keep it in upload only when explicitly asked to copy/keep.
 
 ## CAR_BR_BR naming used in this flow
 

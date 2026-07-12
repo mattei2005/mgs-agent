@@ -4,7 +4,7 @@ Use quando Rodolfo/Kelly perguntar se arquivos que ainda aparecem em uma pasta d
 
 ## Princípio
 
-A presença do original em `UPLOAD MANUAL` não indica pendência. O fluxo preserva o bruto e cria uma versão sanitizada no `READY`. A confirmação deve cruzar a fonte live, o relatório operacional e o destino live — não se apoiar apenas em histórico local.
+`UPLOAD MANUAL` é fila de entrada e deve conter somente itens ainda pendentes. No fluxo canônico **tratar/mover**, Hera cria e valida a versão sanitizada no `01_READY` e só então move o original, preservando ID e nome, para `{OPERAÇÃO}/{IMG|VID}/99_LEGACY`; não apaga o bruto. A confirmação deve cruzar fonte live, relatório, `01_READY` e `99_LEGACY`, sem se apoiar apenas em histórico local. Somente mantenha o original na entrada quando o pedido disser explicitamente **copiar** ou **manter no upload**.
 
 ## Procedimento
 
@@ -21,9 +21,11 @@ A presença do original em `UPLOAD MANUAL` não indica pendência. O fluxo prese
 ## Critério de sucesso
 
 ```text
-origens atuais == source_drive_id registrados
+origens processadas == source_drive_id registrados
 destinos live == total processado
-ancestralidade live == MGS-AGENTS/CRIATIVOS/{OP}/{IMG|VID}/01_READY
+ancestralidade dos destinos == MGS-AGENTS/CRIATIVOS/{OP}/{IMG|VID}/01_READY
+ancestralidade dos originais == MGS-AGENTS/CRIATIVOS/{OP}/{IMG|VID}/99_LEGACY
+itens pendentes no upload == 0
 size_ok == total
 sha256_ok == total
 clean_true == total
@@ -32,12 +34,13 @@ falhas == 0
 
 ## Pitfalls
 
-- Não dizer que a pasta de entrada deveria estar vazia; originais devem permanecer intactos.
-- Não confirmar apenas porque existe um relatório antigo; validar `dest_drive_id` e caminho atuais no Drive.
+- Não deixar original processado na entrada no fluxo **tratar/mover**; isso cria falso backlog. Preserve-o em `99_LEGACY`.
+- Não mover o original antes de a cópia limpa passar pelos gates de READY, readback, hash e `clean: true`.
+- Não confirmar apenas porque existe um relatório antigo; validar `source_drive_id`, `dest_drive_id` e os dois caminhos atuais no Drive.
 - Sanitização muda o checksum em relação ao bruto. Compare o destino com `clean_sha256`, não com o hash da origem.
-- Um asset pode ter sido renomeado/movido depois do relatório. O ID do Drive continua sendo a chave confiável; use a ancestralidade e o nome live.
+- Um asset pode ter sido renomeado/movido depois do relatório. O ID do Drive continua sendo a chave confiável; use ancestralidade e nome live.
 - Não reprocessar nem duplicar arquivos se todos os `source_drive_id` já tiverem destinos válidos.
 
 ## Formato de resposta
 
-Responder de forma curta e operacional, explicando explicitamente que os arquivos ainda visíveis são os originais preservados e não pendências. Incluir link da pasta READY e as contagens de validação; não despejar lista completa quando uma faixa de nomes resolve.
+Responder de forma curta e operacional. Incluir contagens de processados, destinos READY, originais em LEGACY, `clean: true`, hashes/readback, pendências restantes no upload e links das pastas READY; não despejar a lista completa quando contagens resolvem.

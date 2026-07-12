@@ -46,8 +46,21 @@ def log(msg: str) -> None:
     print(f'[{time.strftime("%Y-%m-%dT%H:%M:%S%z")}] {LOG_PREFIX}: {msg}', flush=True)
 
 
-def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, check=False)
+def run(cmd: list[str], *, timeout: int | None = None) -> subprocess.CompletedProcess[str]:
+    try:
+        return subprocess.run(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            check=False,
+            timeout=timeout,
+        )
+    except subprocess.TimeoutExpired as exc:
+        output = exc.stdout or ''
+        if isinstance(output, bytes):
+            output = output.decode(errors='replace')
+        return subprocess.CompletedProcess(cmd, 124, stdout=f'{output}\ncommand timed out after {timeout}s'.strip())
 
 
 def load_env_file(path: Path) -> None:
@@ -86,10 +99,40 @@ def cpu_usage_percent(interval: float = 0.5) -> float:
 
 
 def apt_upgradable_count() -> int:
-    proc = run(['apt', 'list', '--upgradable'])
-    if proc.returncode not in (0,):
+    # Do not count lines from `apt list --upgradable`: apt emits its unstable-CLI
+    # warning to stderr and run() intentionally merges stderr/stdout, which made
+    # the warning + `Listing...` look like two packages. apt-get simulation has
+    # a stable machine-detectable `Inst ` line for every pending upgrade.
+    proc = run(['apt-get', '-s', 'upgrade'], timeout=60)
+    if proc.returncode != 0:
         return -1
-    return max(0, len([line for line in proc.stdout.splitlines()[1:] if line.strip()]))
+    return sum(1 for line in proc.stdout.splitlines() if line.startswith('Inst '))
+
+
+def apt_updates_metrics(*, refresh: bool = False) -> dict[str, Any]:
+    checked_at = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+    if refresh:
+        refresh_proc = run(
+            ['apt-get', '-o', 'Acquire::Retries=1', 'update', '-qq'],
+            timeout=120,
+        )
+        if refresh_proc.returncode != 0:
+            return {
+                'apt_upgradable_count': -1,
+                'available': None,
+                'index_refreshed': False,
+                'checked_at': checked_at,
+                'error': f'apt-get update exit={refresh_proc.returncode}',
+            }
+
+    count = apt_upgradable_count()
+    return {
+        'apt_upgradable_count': count,
+        'available': count > 0 if count >= 0 else None,
+        'index_refreshed': refresh,
+        'checked_at': checked_at,
+        **({'error': 'apt-get upgrade simulation failed'} if count < 0 else {}),
+    }
 
 
 def cron_summary_chunks(max_chars: int = 950) -> list[str]:
@@ -173,8 +216,9 @@ def collect() -> tuple[list[dict[str, Any]], dict[str, Any]]:
     cpu_pct = cpu_usage_percent()
     metrics['cpu'] = {'used_pct': round(cpu_pct, 1)}
 
-    updates = apt_upgradable_count()
-    metrics['updates'] = {'apt_upgradable_count': updates, 'available': updates > 0 if updates >= 0 else None}
+    # Routine 5-minute checks use the local APT cache. Before any full Discord
+    # alert/report, main() refreshes the index and replaces this metric.
+    metrics['updates'] = apt_updates_metrics(refresh=False)
 
     disk = shutil.disk_usage('/')
     disk_pct = pct(disk.used, disk.total)
@@ -283,6 +327,10 @@ def build_status_embeds(title: str, color: int, metrics: dict[str, Any], issues:
         updates_value = f"sim — {updates.get('apt_upgradable_count')} pacotes"
     elif updates.get('available') is False:
         updates_value = 'não'
+    if updates.get('index_refreshed'):
+        updates_value += ' — índice atualizado agora'
+    elif updates.get('error'):
+        updates_value = 'indisponível — falha ao atualizar índice APT'
 
     fields: list[dict[str, Any]] = [
         {'name': 'CPU', 'value': f"{metrics['cpu']['used_pct']}% usado", 'inline': True},
@@ -377,6 +425,15 @@ def main() -> int:
             state['alerts'][key] = {'first_seen': prev.get('first_seen', now), 'last_alert': now, 'severity': issue['severity'], 'detail': issue['detail']}
         else:
             state['alerts'][key] = {**prev, 'severity': issue['severity'], 'detail': issue['detail']}
+
+    # The local APT package index can be stale even when `apt list` succeeds.
+    # Refresh only when a full alert/report will actually be sent, avoiding a
+    # repository request every five minutes. If refresh fails, publish an
+    # explicit unknown status instead of presenting a cached count as current.
+    if args.force_report or alerts_to_send:
+        metrics['updates'] = apt_updates_metrics(refresh=True)
+        if metrics['updates'].get('error'):
+            log(f"WARN apt_refresh_failed: {metrics['updates']['error']}")
 
     for key in resolved:
         state['alerts'].pop(key, None)
