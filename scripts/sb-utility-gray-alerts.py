@@ -48,32 +48,27 @@ def template_columns(template):
 
 
 def render_alert(alerts):
-    by_template = {}
+    rows = []
     for age, rec in alerts:
-        by_template.setdefault(rec['template'], []).append((age, rec))
+        site, config, manager = template_columns(rec['template'])
+        message_id = str(rec.get('message_id') or '-')
+        cta = clip(rec.get('cta') or '-', 25)
+        rows.append(
+            f'{site:<18} | {config:<24} | {manager:<10} | '
+            f'{message_id:>4} | {age:>4} | {cta}'
+        )
 
+    header = 'Template           | Configuração             | Gestor     | ID   | Dias | CTA'
+    divider = '-------------------|--------------------------|------------|------|------|-------------------------'
     lines = [
         'Template/Broadcast — cinza persistente',
         f'Mensagens cinza há >= {ALERT_AFTER_DAYS} dias: {len(alerts)}',
         '',
-        '```',
-        'Template           | Configuração             | Gestor     | Qtd | IDs',
-        '-------------------|--------------------------|------------|-----|----------------',
     ]
-    for template, vals in list(by_template.items())[:12]:
-        site, config, manager = template_columns(template)
-        shown_ids = [str(rec.get('message_id') or '-') for _, rec in vals[:6]]
-        ids = ','.join(shown_ids)
-        if len(vals) > 6:
-            ids += f' +{len(vals) - 6}'
-        lines.append(f'{site:<18} | {config:<24} | {manager:<10} | {len(vals):>3} | {ids}')
-    if len(by_template) > 12:
-        lines.append(f'+{len(by_template) - 12} templates não exibidos')
-    lines.extend([
-        '```',
-        '',
-        'Ação: sem troca automática; validar com Ciro ou em teste controlado.',
-    ])
+    # Independent blocks keep Discord's automatic message splitting readable.
+    for start in range(0, len(rows), 11):
+        lines.extend(['```', header, divider, *rows[start:start + 11], '```', ''])
+    lines.append('Ação: sem troca automática; validar com Ciro ou em teste controlado.')
     return '\n'.join(lines)
 
 

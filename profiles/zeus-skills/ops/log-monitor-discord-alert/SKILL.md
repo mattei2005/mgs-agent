@@ -38,6 +38,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - Test direct delivery with an isolated mock HTTP endpoint and token override before sending a real smoke message. Verify authorization, destination, payload schema, state transition, and absence of secrets in stdout/stderr.
 - Separate fixed, conditional, event-driven, and on-demand credential consumption. Do not present a conditional lookup as a fixed daily cost.
 - Report only telemetry emitted by the runtime. If logs expose API-call counts but not token counts, report calls/responses and explicitly omit token or pay-per-token estimates instead of inventing averages.
+- High-cardinality Discord alerts must be organized at the renderer/source as a compact aligned monospace table: one row per comparable entity, contextual columns, bounded width, and `+N` summaries for omitted rows or IDs. Do not emit long nested bullet lists with repeated CTA/message prose. Validate the renderer with a realistic fixture before the next production cycle; the detailed pattern is in `references/route-pack-03.md`.
 - For destructive housekeeping, verify behavior in a temporary fixture first: canonical file preserved, latest backup per family preserved, singleton family preserved, and only eligible older backups removed.
 
 ## Context-efficiency guardrails
