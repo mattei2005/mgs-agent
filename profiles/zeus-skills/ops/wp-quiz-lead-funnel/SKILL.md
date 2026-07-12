@@ -141,6 +141,8 @@ Minimum dashboard:
 - unique phones;
 - average/day;
 - date range filters;
+- when improving date-range UX, prefer one business-facing **Período** control backed by hidden canonical `from`/`to` inputs rather than two exposed native date inputs. Preserve the existing query contract and default dates. The picker should show two adjacent months on desktop and one month on mobile, support start/end range highlighting, month navigation, `Cancelar`/`Aplicar`, and shortcuts such as Hoje, Ontem, Últimos 7 dias, Últimos 30 dias, Este mês, Mês anterior, and Personalizado. Do not add unrelated comparison or maximum-range features merely because the visual reference contains them;
+- validate a custom date picker at three levels before production: source markers/PHP lint, a locally rendered browser fixture with real click/readback checks for presets and custom ranges, and the authenticated WordPress report smoke after deployment. If the report smoke matches rendered input markup, update it when visible date fields become hidden canonical fields; otherwise a correct UI can be rejected by a stale assertion;
 - gestor filter;
 - parcela filter;
 - search by name/phone/campaign;
