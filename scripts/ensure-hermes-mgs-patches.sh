@@ -54,8 +54,17 @@ apply_patch_if_needed() {
       fi
       ;;
     restart-recovery-checkpoint-idempotent.patch)
-      if grep -q "Internal restart recovery checkpoint" "$REPO/gateway/run.py" \
-        && grep -q "Do not re-run" "$REPO/gateway/run.py"; then
+      if { grep -q "Internal restart recovery checkpoint" "$REPO/gateway/run.py" \
+          && grep -q "Do not re-run" "$REPO/gateway/run.py"; } \
+        || grep -q "Internal continuation event" "$REPO/gateway/run.py"; then
+        log "patch invariants already present or superseded: $name"
+        return 0
+      fi
+      ;;
+    restart-recovery-natural-continuation-*.patch)
+      if grep -q "Internal continuation event" "$REPO/gateway/run.py" \
+        && grep -q "finish every outstanding" "$REPO/gateway/run.py" \
+        && grep -q "chronological order" "$REPO/gateway/run.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
@@ -176,6 +185,7 @@ apply_patch_if_needed "mgs-runtime-customizations-2026-06-20.patch"
 apply_patch_if_needed "discord-deterministic-thread-rename-auto-add-users.patch"
 apply_patch_if_needed "planned-restart-auto-resume-active-sessions.patch"
 apply_patch_if_needed "restart-recovery-checkpoint-idempotent.patch"
+apply_patch_if_needed "restart-recovery-natural-continuation-2026-07-11.patch"
 apply_patch_if_needed "discord-post-response-thread-title-rename.patch"
 apply_patch_if_needed "discord-new-thread-ai-title-once.patch"
 apply_patch_if_needed "discord-thread-title-deduplicate-safe-autorename.patch"
@@ -206,10 +216,12 @@ grep -q "Erro Sistema Operacional" "$REPO/plugins/platforms/discord/adapter.py" 
   || fail "missing Discord OS-error title classifier"
 grep -q "service-manager restarts while a chat task is active" "$REPO/gateway/run.py" \
   || fail "missing restart/service-manager auto-resume marker"
-grep -q "Internal restart recovery checkpoint" "$REPO/gateway/run.py" \
-  || fail "missing idempotent restart recovery checkpoint"
-grep -q "Do not re-run" "$REPO/gateway/run.py" \
-  || fail "missing restart recovery anti-reexecution instruction"
+grep -q "Internal continuation event" "$REPO/gateway/run.py" \
+  || fail "missing silent restart continuation event"
+grep -q "finish every outstanding" "$REPO/gateway/run.py" \
+  || fail "missing chronological restart continuation instruction"
+! grep -q "Internal restart recovery checkpoint" "$REPO/gateway/run.py" \
+  || fail "legacy recovery checkpoint still active"
 grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
   || fail "missing Discord post-response thread rename callback"
 grep -Eq "Discord thread renamed from auto-generated title|Discord GPT-style thread title applied" "$REPO/gateway/run.py" \

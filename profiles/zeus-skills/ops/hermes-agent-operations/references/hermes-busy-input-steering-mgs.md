@@ -258,6 +258,23 @@ Para localizar/personalizar o texto compartilhado pelos gateways MGS:
 
 Pitfall de patches dependentes: se um teste foi criado por um patch MGS anterior e não existe em `origin/main`, não o inclua no patch independente de localização que precisa passar `apply --check` no upstream limpo. Torne o teste anterior neutro em relação à redação e concentre a asserção textual no teste stock que já existe upstream.
 
+## Continuação após restart do gateway
+
+O auto-resume de sessão interrompida não deve gerar uma resposta de “gateway recuperado”, pedir que o usuário repita o pedido nem abandonar tool outputs pendentes. O contrato MGS é:
+
+1. O evento sintético de startup é transporte interno e nunca deve ser persistido como texto atribuído ao usuário.
+2. Antes de agir, reconciliar o que já concluiu para não duplicar side effects.
+3. Continuar todo trabalho pendente e responder pedidos em ordem cronológica, como se o chat não tivesse sido interrompido.
+4. Não mencionar restart, recovery, checkpoint ou diretiva interna, salvo pergunta explícita do usuário.
+5. Follow-up que chegar durante o auto-resume entra depois do trabalho anterior, preservando FIFO.
+6. Proteger o comportamento em patch canônico, guard/updater e teste que garanta que o texto de transporte não aparece no turno do usuário.
+
+Artefato canônico atual:
+
+```text
+/root/mgs-agent/patches/hermes/restart-recovery-natural-continuation-2026-07-11.patch
+```
+
 ## Pitfalls
 
 - Validar apenas texto e declarar multimedia steer pronto.

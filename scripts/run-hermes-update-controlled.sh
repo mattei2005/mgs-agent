@@ -249,8 +249,8 @@ readonly_invariant_check() {
       "$adapter::Auto-thread skipped for REPORT-INFRA control-plane message" \
       "$adapter::Ignoring gateway lifecycle notice from bot" \
       "$runpy::service-manager restarts while a chat task is active" \
-      "$runpy::Internal restart recovery checkpoint" \
-      "$runpy::Do not re-run" \
+      "$runpy::Internal continuation event" \
+      "$runpy::finish every outstanding" \
       "$runpy::_schedule_discord_thread_title_rename" \
       "$runpy::_discord_thread_safe_to_autorename" \
       "$runpy::_discord_title_message_from_gateway_text" \
@@ -304,6 +304,7 @@ check_patches_against_upstream() {
     fi
     local canonical_patches=(
       "$latest_runtime_patch"
+      "restart-recovery-natural-continuation-2026-07-11.patch"
       "mgs-auto-reasoning-routing.patch"
       "mgs-busy-steer-universal-media-2026-07-10.patch"
       "mgs-busy-steer-startup-merge-2026-07-11.patch"
@@ -569,7 +570,7 @@ for patch in [pre_patch, pre_cached]:
             m=re.search(pat, s)
             if m:
                 markers.append(m.group(1))
-        for q in ['AUTO_ATTACH_LOCAL_FILES_ENV','DISCORD_THREAD_AUTO_ADD_USERS','Auto-thread member sync','semantic_fallback_title','Formatação de Tabelas','Erro Sistema Operacional','service-manager restarts while a chat task is active','Internal restart recovery checkpoint','Do not re-run','_remember_auto_thread_initial_title','_discord_title_message_from_gateway_text','Shutdown notification suppressed for bot-originated Discord session','Ignoring gateway lifecycle notice from bot','Auto-thread skipped for REPORT-INFRA control-plane message','_DISCORD_BOT_LOOP_NOISE_MARKERS','_DISCORD_BOT_LOOP_NOISE_EXACT','codex response remained incomplete','_append_thread_author_suffix','_append_discord_thread_author_suffix','async def delete_message']:
+        for q in ['AUTO_ATTACH_LOCAL_FILES_ENV','DISCORD_THREAD_AUTO_ADD_USERS','Auto-thread member sync','semantic_fallback_title','Formatação de Tabelas','Erro Sistema Operacional','service-manager restarts while a chat task is active','Internal continuation event','finish every outstanding','_remember_auto_thread_initial_title','_discord_title_message_from_gateway_text','Shutdown notification suppressed for bot-originated Discord session','Ignoring gateway lifecycle notice from bot','Auto-thread skipped for REPORT-INFRA control-plane message','_DISCORD_BOT_LOOP_NOISE_MARKERS','_DISCORD_BOT_LOOP_NOISE_EXACT','codex response remained incomplete','_append_thread_author_suffix','_append_discord_thread_author_suffix','async def delete_message']:
             if q in s:
                 markers.append(q)
 seen=[]
