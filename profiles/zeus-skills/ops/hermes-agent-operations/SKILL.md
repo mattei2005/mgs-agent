@@ -79,6 +79,8 @@ Primary reference: `references/gateway-approvals-busy-input.md`.
 
 For implementation-level steering, startup races, multimedia preservation, and silent chronological continuation after a gateway restart, also load `references/hermes-busy-input-steering-mgs.md`.
 
+If restart auto-resume fails inside the nested executor worker, especially with an undefined outer `event`, load `references/hermes-restart-auto-resume-worker-scope.md` for the worker-scope invariant, regression test, patch-artifact repair, and post-restart validation.
+
 This branch covers `approvals.mode`, `busy_input_mode`, steering, text/image/audio/file payloads, restart auto-resume, and gateway runtime behavior. After a restart interrupts an active turn, reconcile completed side effects, finish pending requests in chronological order, and deliver the normal answer without exposing or attributing synthetic checkpoint text to the user.
 
 ### Session reset, context compression, Discord progress, or response formatting

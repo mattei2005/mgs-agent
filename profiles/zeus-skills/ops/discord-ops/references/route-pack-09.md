@@ -67,13 +67,26 @@ Padrão recomendado, com privacidade por default:
 7. Reiniciar o gateway pelo finalizer seguro porque mudanças de `.env`/roteamento são carregadas no startup. No processo novo, validar `/proc/<pid>/environ` sem imprimir tokens: novo channel ID presente e auto-add vazio.
 8. Readback Discord obrigatório: canal novo `GET=200`, nome/categoria corretos e IDs dos overwrites exatamente no escopo planejado. Registrar audit, inventário e REPORT-INFRA.
 
+Quando a reorganização também excluir um canal redundante, aplicar este fechamento antes do delete:
+
+1. Tratar a exclusão do canal como operação crítica e obter a confirmação adicional mesmo quando o pedido inicial já disser “pode deletar”.
+2. Inventariar mensagens, pins e threads ativas do canal. Deletar o canal pai também elimina as threads filhas e seus históricos.
+3. Exportar via API o objeto do canal, permission overwrites, mensagens do pai e mensagens de cada thread; salvar em backup seguro e validar hashes antes do delete.
+4. Atualizar primeiro config vivo, mirror versionado e overrides de `.env` (`DISCORD_ALLOWED_CHANNELS`, `DISCORD_FREE_RESPONSE_CHANNELS`, `DISCORD_HOME_CHANNEL`). Não imprimir nem diffar o `.env` inteiro: editar somente as linhas não secretas por mecanismo que não exponha linhas vizinhas.
+5. Recriar a audiência exata dos canais preservados: negar `VIEW_CHANNEL` ao `@everyone`, adicionar usuários/bots aprovados e remover explicitamente bots/roles antigos. Validar o conjunto completo de overwrite IDs, não apenas a contagem.
+6. Excluir o canal somente depois do backup e da configuração; validar `GET /channels/{parent}=404` e também `GET /channels/{thread}=404`.
+7. Remover a entrada do inventário customizado: discovery genérico pode não podar artefatos Discord registrados manualmente. Confirmar por readback que o ID excluído desapareceu do inventário e que os canais preservados estão presentes com nomes e audiências atuais.
+8. Reiniciar o gateway afetado pelo fluxo seguro, confirmar env efetivo do processo sem segredos, conexão Discord e rotas carregadas; então registrar audit e REPORT-INFRA.
+
 Criar subagente separado somente quando também houver separação real de área, dados, ferramentas, autoridade ou fonte de verdade. Para mera privacidade de conversa, dois canais do mesmo agente reduzem drift e manutenção.
 
 Pitfalls:
 
 - Não usar `thread_auto_add_users` para “facilitar” o canal de equipe quando o mesmo profile também atende um canal privado; a configuração não é por canal.
 - Não confundir usuário autorizado a operar o agente com participante automático de toda thread. Autorização, visibilidade do canal e membership da thread são camadas diferentes.
-- Ao criar o canal por API, nunca imprimir o bot token; retornar apenas status, channel ID, nome, parent e IDs/contagem dos overwrites.
+- Não assumir que renomear um canal atualiza nomes descritivos em dados/scripts: procurar o ID canônico e corrigir labels ativos, preservando referências históricas como histórico.
+- Não confiar em uma chamada de escrita que depois falhou no parser de resposta: fazer GET independente e comparar o estado inteiro antes de repetir writes idempotentes.
+- Ao criar ou reorganizar canal por API, nunca imprimir o bot token; retornar apenas status, channel ID, nome, parent e IDs/contagem dos overwrites.
 
 
 #### Conferência pós-update/restart não é só “online”

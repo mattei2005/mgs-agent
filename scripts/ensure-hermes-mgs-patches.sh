@@ -257,6 +257,8 @@ grep -q "Internal continuation event" "$REPO/gateway/run.py" \
   || fail "missing silent restart continuation event"
 grep -q "finish every outstanding" "$REPO/gateway/run.py" \
   || fail "missing chronological restart continuation instruction"
+! grep -q '_internal_auto_resume = bool(getattr(event, "internal", False))' "$REPO/gateway/run.py" \
+  || fail "undefined outer event reference remains in restart-resume worker"
 ! grep -q "Internal restart recovery checkpoint" "$REPO/gateway/run.py" \
   || fail "legacy recovery checkpoint still active"
 grep -q "_schedule_discord_thread_title_rename" "$REPO/gateway/run.py" \
@@ -363,6 +365,7 @@ PYBIN="$REPO/venv/bin/python"
   "$REPO/tools/skills_tool.py"
 
 "$PYBIN" -m pytest -q \
+  "$REPO/tests/gateway/test_restart_resume_pending.py" \
   "$REPO/tests/gateway/test_busy_session_ack.py" \
   "$REPO/tests/gateway/test_discord_send.py" \
   "$REPO/tests/gateway/test_telegram_photo_interrupts.py" \

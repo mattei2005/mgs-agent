@@ -278,6 +278,14 @@ readonly_invariant_check() {
       fi
     done
   } | tee "$REPORT_DIR/${prefix}-readonly-invariants.txt"
+  if grep -q '_internal_auto_resume = bool(getattr(event, "internal", False))' "$runpy"; then
+    echo "FORBIDDEN undefined outer event reference in restart-resume worker" \
+      | tee -a "$REPORT_DIR/${prefix}-readonly-invariants.txt"
+    rc=1
+  else
+    echo "OK restart-resume worker does not reference outer event" \
+      | tee -a "$REPORT_DIR/${prefix}-readonly-invariants.txt"
+  fi
   local pybin="$REPO/venv/bin/python"
   [[ -x "$pybin" ]] || pybin="python3"
   "$pybin" -m py_compile "$adapter" "$runpy" "$reasoning_router" "$basepy" > "$REPORT_DIR/${prefix}-readonly-py-compile.log" 2>&1 || rc=1
