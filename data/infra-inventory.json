@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-12T14:24:56-04:00",
+    "updated_at": "2026-07-12T14:57:45-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -5678,6 +5678,26 @@
       "authorized_by": "Rodolfo Mattei (344196393512075265)",
       "validated_at": "2026-06-19T17:58:24.205538-04:00",
       "validation": "Discord API with Zeus token set Ares overwrite allow=268436496; idempotent PUT with Ares token on existing user overwrite returned 204; GET /channels/1516887105543077949 with Ares token confirmed user overwrite allow=66560 deny=0."
+    },
+    {
+      "type": "discord_channel_privacy",
+      "platform": "discord",
+      "guild_id": "1185714635991679006",
+      "category_id": "1513368461307547760",
+      "channel_id": "1525938475931533474",
+      "channel_name": "ares-diretoria",
+      "agent": "ares",
+      "intended_participants": [
+        "344196393512075265",
+        "1508864261504630925"
+      ],
+      "everyone_view_deny": "1024",
+      "rodolfo_view_allow": "1024",
+      "ares_allow": "380104723520",
+      "auto_add_users": [],
+      "authorized_by": "Rodolfo Mattei (344196393512075265)",
+      "validation": "POST channel=201; GET new channel=200; overwrite IDs exactly guild, Rodolfo, Ares; prior channel renamed ares-gestores with PATCH=200/GET=200.",
+      "validated_at": "2026-07-12T14:57:45-04:00"
     }
   ],
   "oauth_auth_states": [

@@ -49,6 +49,32 @@ Pitfall: avoid rewriting full `config.yaml` with PyYAML for small profile edits 
 
 Session reference: `references/discord-thread-member-autonomy-ares-hera-2026-06-16.md`.
 
+### Separar canal privado/diretoria e canal de equipe
+
+Use quando um agente atende liderança e gestores, mas Rodolfo precisa abrir conversas que não incluam automaticamente toda a equipe. Não criar outro agente apenas para resolver membership/visibilidade: um único profile pode atender vários canais com sessões separadas e o mesmo estado operacional.
+
+Padrão recomendado, com privacidade por default:
+
+1. Manter ou renomear o canal existente como `<agente>-gestores`/equipe, preservando os overwrites humanos já autorizados.
+2. Criar `<agente>-diretoria` na mesma categoria com overwrite explícito:
+   - `@everyone`: negar `VIEW_CHANNEL`;
+   - Rodolfo: permitir `VIEW_CHANNEL`;
+   - bot do agente: permitir o conjunto operacional necessário para responder/criar threads.
+3. Remover o auto-add global (`discord.thread_auto_add_users: []` e `DISCORD_THREAD_AUTO_ADD_USERS=`). Essa lista é global por profile; mantê-la faria gestores entrarem também nas threads da Diretoria. Participantes extras entram apenas por pedido natural via helper/API.
+4. Adicionar o novo channel ID em `discord.allowed_channels` e `discord.free_response_channels`, além de um `channel_prompts.<id>` curto declarando a privacidade por padrão.
+5. Verificar `.env` antes de confiar em `config.yaml`: `DISCORD_ALLOWED_CHANNELS`, `DISCORD_FREE_RESPONSE_CHANNELS` e `DISCORD_THREAD_AUTO_ADD_USERS` prevalecem no processo quando definidos.
+6. Atualizar config vivo + mirror versionado com edição textual mínima; validar YAML e igualdade dos artefatos relevantes.
+7. Reiniciar o gateway pelo finalizer seguro porque mudanças de `.env`/roteamento são carregadas no startup. No processo novo, validar `/proc/<pid>/environ` sem imprimir tokens: novo channel ID presente e auto-add vazio.
+8. Readback Discord obrigatório: canal novo `GET=200`, nome/categoria corretos e IDs dos overwrites exatamente no escopo planejado. Registrar audit, inventário e REPORT-INFRA.
+
+Criar subagente separado somente quando também houver separação real de área, dados, ferramentas, autoridade ou fonte de verdade. Para mera privacidade de conversa, dois canais do mesmo agente reduzem drift e manutenção.
+
+Pitfalls:
+
+- Não usar `thread_auto_add_users` para “facilitar” o canal de equipe quando o mesmo profile também atende um canal privado; a configuração não é por canal.
+- Não confundir usuário autorizado a operar o agente com participante automático de toda thread. Autorização, visibilidade do canal e membership da thread são camadas diferentes.
+- Ao criar o canal por API, nunca imprimir o bot token; retornar apenas status, channel ID, nome, parent e IDs/contagem dos overwrites.
+
 
 #### Conferência pós-update/restart não é só “online”
 

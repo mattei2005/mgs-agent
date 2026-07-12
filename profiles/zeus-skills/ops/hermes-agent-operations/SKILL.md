@@ -28,6 +28,7 @@ For auditing and safely splitting monolithic agent skills while preserving conte
 ## Always-on operational rules
 
 - Inspect live state before answering or changing Hermes; do not rely on memory.
+- For MGS operators, preserve a natural question-and-answer flow: explain the operational judgment in prose and ask a normal chat question only when a real blocker remains. Do not use `clarify` choice boxes/polls merely to present recommendations or low-stakes options. When Rodolfo explicitly asks for an authorized non-critical action, execute it rather than inserting a second technical approval layer; the MGS Critical Subset in `AGENT.md` remains unchanged.
 - Hermes documentation is authoritative for current product behavior. Local runtime/code is authoritative for MGS patches and the deployed version.
 - Never expose tokens, OAuth material, API keys, or credential values.
 - Separate capability, configuration, credential presence, and real smoke-test success.

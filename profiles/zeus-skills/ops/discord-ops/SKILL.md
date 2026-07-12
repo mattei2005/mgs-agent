@@ -26,7 +26,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Processamento Zeus de REPORT-INFRA com cron Hermes de outro profile → Alternativa Operacional** → `references/route-pack-06.md`
 - **SEÇÃO C — Hook git post-commit com notificação Discord → Política MGS de tool progress no Discord** → `references/route-pack-07.md`
 - **Gateway routing/restart incident reference → Channel permission overwrites and narrow delegation** → `references/route-pack-08.md`
-- **Adding a user to a private Discord thread → Diagnóstico de título ruim em auto-thread** → `references/route-pack-09.md`
+- **Adding a user to a private Discord thread → Separar canais privados/diretoria e canais de equipe → Diagnóstico de título ruim em auto-thread** → `references/route-pack-09.md`
 - **Regra MGS: renomear thread nova uma vez; nunca renomear thread já aberta → Pitfall crítico: função segura pode estar sobrescrita por duplicata posterior** → `references/route-pack-10.md`
 - **Correção preferida: título IA uma vez após a primeira resposta → Patch local `busy_input_mode` em gateway** → `references/route-pack-11.md`
 - **Pitfalls (restart) → Aviso antes de thread ficar oculta por auto-archive** → `references/route-pack-12.md`

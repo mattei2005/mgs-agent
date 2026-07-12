@@ -10,25 +10,30 @@ Regra operacional MGS: se Rodolfo disser “se pediu é pra fazer”, “não qu
 
 Fluxo seguro:
 
-1. Confirmar que o pedido é sobre o **gate técnico de execução Hermes** (`tools/approval.py`) e não sobre liberar novos usuários externos.
-2. Fazer backup pequeno do config vivo do agente antes da mudança.
-3. Setar no profile afetado:
+1. Separar três fenômenos antes de mudar configuração:
+   - `approvals.mode` controla o gate técnico de comandos/`execute_code`;
+   - `tool_progress` apenas torna a execução visível no Discord e não deve ser culpado por um approval real;
+   - caixas de opções vêm do uso da ferramenta `clarify` pelo agente e são uma decisão de condução da conversa, não um requisito do gate de segurança.
+2. Confirmar que o pedido é sobre o **gate técnico de execução Hermes** (`tools/approval.py`) e não sobre liberar novos usuários externos. Se o incômodo for a dinâmica da conversa, corrigir também a regra de comunicação do agente: análise em prosa + pergunta normal somente quando houver bloqueio; sem caixas de escolha para recomendações ou opções de baixo risco.
+3. Fazer backup pequeno do config vivo do agente antes da mudança.
+4. Aplicar `approvals.mode = 'off'` no profile afetado. O comando abaixo pode ser usado como primeiro passo, mas não é prova suficiente:
 
 ```bash
 hermes -p <agent> config set approvals.mode off
 ```
 
-4. Preferir gravar explicitamente como string YAML para evitar ambiguidade visual:
+5. **Validar o tipo YAML**, não apenas o texto exibido pelo CLI. Em algumas versões, `off` é interpretado como booleano `False`; envolver o valor em aspas no argumento também pode gravar literalmente `"off"`. O estado correto é uma string YAML:
 
 ```yaml
 approvals:
   mode: 'off'
 ```
 
-5. Atualizar também o mirror versionado em `/root/mgs-agent/profiles/<agent>-config.yaml` quando existir, para não haver drift entre runtime e Git.
-6. Validar carregando YAML dos dois arquivos e confirmando `approvals.mode == 'off'`.
-7. Registrar em `/root/mgs-agent/logs/events-audit.jsonl` com requester, agente, paths e razão.
-8. Reportar curto: “sem restart necessário” quando aplicável. `tools/approval.py` lê o config no momento do check; não precisa reiniciar gateway só para essa chave.
+Se o CLI gravar booleano ou aspas literais, fazer uma substituição textual mínima e guardada somente nessa linha; não reserializar o arquivo inteiro com PyYAML. Depois carregar o YAML e confirmar simultaneamente `value == 'off'` e `type(value) is str`.
+6. Atualizar também o mirror versionado em `/root/mgs-agent/profiles/<agent>-config.yaml` quando existir, para não haver drift entre runtime e Git.
+7. Validar todos os profiles ativos quando Rodolfo pedir que a dinâmica seja uniforme. Não assumir que eles já compartilham o mesmo modo: comparar vivo + mirror por agente.
+8. Registrar em `/root/mgs-agent/logs/events-audit.jsonl` com requester, agente, paths e razão.
+9. Reportar curto: “sem restart necessário” quando somente `approvals.mode` mudou. `tools/approval.py` lê o config no momento do check; mudanças de `.env` ou roteamento Discord continuam exigindo restart seguro.
 
 Pitfalls:
 
