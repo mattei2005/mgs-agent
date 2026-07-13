@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-12T21:20:26-04:00",
+    "updated_at": "2026-07-12T21:24:40-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -555,6 +555,26 @@
       "validation": "swapfile.swap loaded/active from /etc/fstab; swapon capacity 4 GiB; free reports 4.0 GiB swap; vm.swappiness=10; metadata root:root 0600; findmnt 0 parse errors/0 errors; systemd running; no service restarted.",
       "status": "active_persistent_validated",
       "updated_at": "2026-07-12T21:20:26-04:00"
+    },
+    {
+      "id": "mgs-discord-token-passthrough-cleanup-20260712",
+      "agent": "zeus",
+      "type": "multi_profile_security_config",
+      "profile_configs": [
+        "/root/.hermes/profiles/zeus/config.yaml",
+        "/root/.hermes/profiles/atena/config.yaml",
+        "/root/.hermes/profiles/ares/config.yaml"
+      ],
+      "setting": "terminal.env_passthrough=[]",
+      "sha256": {
+        "zeus_config": "1f60400996655727766e93aaadd74622c9299aeaa827840e7d7e5f9a5775e737",
+        "atena_config": "217fa9105ae6dd6525fd9e6df2a3dae1d802fa8bbfd1ad69e3e68de20f9916f5",
+        "ares_config": "33b052f1816e72d14a60b274c41877611802f8d3e84e85233d4629e144befd5c"
+      },
+      "scope": "Removed the ineffective DISCORD_BOT_TOKEN terminal passthrough request from all active MGS profiles without changing .env credentials or weakening Hermes credential scrubbing.",
+      "validation": "Live and versioned configs byte-identical; env_passthrough empty; token key remains present in each profile .env; runtime provider blocklist still contains DISCORD_BOT_TOKEN; terminal process has no token; Zeus/Atena/Ares gateways active at their original start times; Discord readback OK; no restart.",
+      "status": "deployed_no_restart_required",
+      "updated_at": "2026-07-12T21:24:40-04:00"
     },
     {
       "id": "finanzas-topfeed-preloader-css-failsafe-20260711",

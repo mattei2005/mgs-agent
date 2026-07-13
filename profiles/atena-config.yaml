@@ -76,8 +76,7 @@ terminal:
   modal_mode: auto
   cwd: .
   timeout: 180
-  env_passthrough:
-    - DISCORD_BOT_TOKEN
+  env_passthrough: []
   shell_init_files: []
   auto_source_bashrc: true
   docker_image: nikolaik/python-nodejs:python3.11-nodejs20
