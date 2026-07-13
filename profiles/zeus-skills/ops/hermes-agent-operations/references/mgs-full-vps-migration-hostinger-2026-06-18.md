@@ -72,5 +72,5 @@ Final report should clearly separate:
 Example concise status line:
 
 ```text
-Hostinger 2.25.165.171 = produção ativa; Hetzner 87.99.151.107 = standby seguro sem crons/gateways/processos.
+Hostinger 2.25.165.171 = produção ativa; Hetzner mgs-agent-01 = desativada, endereço anterior reatribuído a terceiros, nunca conectar.
 ```

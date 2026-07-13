@@ -666,7 +666,7 @@
         "hostinger-migration",
         "cleanup"
       ],
-      "contexto": "Hetzner antiga 87.99.151.107 / mgs-agent-01 auditada sem crontab, gateways inactive e sem processos hermes/gateway. Rodolfo informou que vai excluir; pendência é apenas confirmar exclusão/cancelamento no painel e remover snapshots se ainda existirem."
+      "contexto": "Hetzner antiga mgs-agent-01 auditada sem crontab, gateways inactive e sem processos hermes/gateway. VPS desativada e endereço anterior reatribuído a terceiros; não conectar. Pendência é apenas confirmar cancelamento no painel e remover snapshots se ainda existirem."
     },
     {
       "id": "PEND-053",
@@ -700,7 +700,7 @@
         "mac",
         "pessoal"
       ],
-      "contexto": "Acesso SSH do Mac do Rodolfo deve apontar para a produção atual Hostinger root@2.25.165.171 / srv1767265. Acesso antigo root@87.99.151.107 era Hetzner desativada."
+      "contexto": "Acesso SSH do Mac do Rodolfo deve apontar para a produção atual Hostinger root@2.25.165.171 / srv1767265. O acesso da Hetzner desativada foi aposentado e não deve ser reutilizado."
     },
     {
       "id": "PEND-056",
