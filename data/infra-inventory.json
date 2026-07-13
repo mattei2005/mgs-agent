@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-12T22:13:12-04:00",
+    "updated_at": "2026-07-12T23:24:29-04:00",
     "generated_by": "zeus"
   },
   "system_packages": [
@@ -2038,6 +2038,31 @@
       "validation": "All 10 approved writes applied; 4 rejected records removed; live/versioned mirrors byte-identical; retained IDs preserved; memory exact apply failed closed and record preserved; current pending=9 total across Zeus/Atena/Ares, 0 aged.",
       "status": "skills_applied_memory_blocked",
       "updated_at": "2026-07-12T22:13:12-04:00"
+    },
+    {
+      "id": "hermes-write-approval-redesign-20260712",
+      "agent": "zeus",
+      "type": "approval_decision_and_staged_redesign",
+      "authorized_by": "344196393512075265",
+      "rejected_skills": [
+        "5f3bef2b",
+        "0a6f7faf"
+      ],
+      "memory": {
+        "original_pending_id": "a691d018",
+        "applied_text": "Sessões Zeus são isoladas; reconciliar audit/REPORT/Git antes de declarar anomalia.",
+        "readback": "PASS",
+        "usage": "2170/2200"
+      },
+      "staged_redesign": {
+        "ares_reference": "8abee15b",
+        "ares_router": "ff22019a",
+        "zeus_boundary": "716d91a7"
+      },
+      "backup": "/root/.mgs-backups/hermes-write-approvals/20260712-232046",
+      "validation": "Rejected pair absent; short memory applied and original pending removed; 3 redesigned proposals staged only; new reference and boundary absent from live skills; queue total=11 across profiles, aged=0.",
+      "status": "validated",
+      "updated_at": "2026-07-12T23:24:29-04:00"
     }
   ],
   "profile_skill_references": [
