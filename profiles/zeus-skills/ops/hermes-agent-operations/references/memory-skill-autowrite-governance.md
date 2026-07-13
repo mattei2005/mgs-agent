@@ -115,6 +115,17 @@ For every profile and subsystem:
    - **discard** — obsolete, stale, or superseded; remove only through the audited/canonical queue path available in the deployment.
 6. Present one line per item plus a batch recommendation. Wait for the human decision; do not mutate the queue during inventory.
 
+### Reconcile evidence before rejecting a proposal
+
+Do not reject a staged proposal merely because its evidence is absent from the current session. Reconcile the exact claim in this order: `logs/events-audit.jsonl` → `data/infra-inventory.json` → REPORT-INFRA → Git → `session_search`. Then:
+
+- distinguish live observed usage from measured per-run call counts, projections, and conservative upper bounds;
+- preserve the staged wording only when it matches the evidence class exactly;
+- correct a stale predecessor when later authorized validation superseded it;
+- reject only after the source chain is exhausted or reveals a real contradiction.
+
+For credential-related memory cleanup, separate **bad residency** from **secret exposure**. A credential variable name, provider reference, or `.env` path is unnecessary in MEMORY/USER and can be removed for hygiene, but it is not proof that a credential value leaked. Verify literal exposure without printing the value: compare the active secret internally against MEMORY/USER, logs, reports, the tracked tree, and reachable Git blobs; report only match counts and paths. Generic token/JWT pattern matches are triage evidence, not proof that the active secret leaked. Likewise, the presence of a protected, ignored local credential backup prevents a broad “no sensitive material exists in reports” claim even when the active token has zero matches.
+
 A newly generated class-level reference can legitimately supersede several narrow staged proposals. Prefer the current umbrella and discard duplicate one-session variants rather than applying all of them.
 
 ## Capacity failure without silent loss
