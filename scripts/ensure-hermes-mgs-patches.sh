@@ -193,7 +193,10 @@ PY
     memory-dead-letter-state-fingerprint-*.patch)
       if grep -q "def _state_fingerprint" "$REPO/tools/memory_tool.py" \
         && grep -q '"state_fingerprint": context.get("state_fingerprint")' "$REPO/tools/write_approval.py" \
-        && grep -q "test_same_payload_against_different_state_gets_new_pending_id" "$REPO/tests/tools/test_memory_capacity_dead_letter.py"; then
+        && grep -q "def _valid_pending_id" "$REPO/tools/write_approval.py" \
+        && grep -q "capacity overflow preserved" "$REPO/agent/background_review.py" \
+        && grep -q "test_same_payload_against_different_state_gets_new_pending_id" "$REPO/tests/tools/test_memory_capacity_dead_letter.py" \
+        && grep -q "test_surfaces_capacity_dead_letter_without_rejected_content_even_when_off" "$REPO/tests/run_agent/test_background_review_summary.py"; then
         log "patch invariants already present despite context drift: $name"
         return 0
       fi
@@ -388,6 +391,12 @@ grep -q '"state_fingerprint": context.get("state_fingerprint")' "$REPO/tools/wri
   || fail "missing state-scoped dead-letter idempotency key"
 grep -q "test_same_payload_against_different_state_gets_new_pending_id" "$REPO/tests/tools/test_memory_capacity_dead_letter.py" \
   || fail "missing cross-state dead-letter idempotency regression test"
+grep -q "def _valid_pending_id" "$REPO/tools/write_approval.py" \
+  || fail "missing pending-ID path traversal guard"
+grep -q "capacity overflow preserved" "$REPO/agent/background_review.py" \
+  || fail "missing mandatory background capacity-loss disclosure"
+grep -q "test_surfaces_capacity_dead_letter_without_rejected_content_even_when_off" "$REPO/tests/run_agent/test_background_review_summary.py" \
+  || fail "missing background capacity disclosure regression test"
 
 "$BASE/scripts/check-retired-host-references.py" \
   || fail "retired host reference reappeared on an operational surface"
@@ -400,6 +409,7 @@ PYBIN="$REPO/venv/bin/python"
   "$REPO/gateway/slash_commands.py" \
   "$REPO/gateway/reasoning_router.py" \
   "$REPO/gateway/platforms/base.py" \
+  "$REPO/agent/background_review.py" \
   "$REPO/tools/skills_tool.py" \
   "$REPO/tools/memory_tool.py" \
   "$REPO/tools/write_approval.py" \

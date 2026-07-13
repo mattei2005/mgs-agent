@@ -1,5 +1,148 @@
+diff --git a/agent/background_review.py b/agent/background_review.py
+index 3f4e5efcd..69bde6e4e 100644
+--- a/agent/background_review.py
++++ b/agent/background_review.py
+@@ -373,13 +373,12 @@ def summarize_background_review_actions(
+     not re-surfaced as fresh background work (issue #14944).
+ 
+     ``notification_mode`` controls display detail:
+-    - ``off``: return no actions.
++    - ``off``: suppress successful actions, but never suppress a capacity-loss alert.
+     - ``on``: generic "Memory updated"/tool messages.
+     - ``verbose``: include compact content previews from tool-call arguments.
+     """
+     mode = str(notification_mode or "on").lower()
+-    if mode == "off":
+-        return []
++    notify_success = mode != "off"
+     verbose = mode == "verbose"
+ 
+     existing_tool_call_ids = set()
+@@ -458,8 +457,31 @@ def summarize_background_review_actions(
+         # Defensively normalize everything through a dict-typed alias so
+         # the rest of the function can stay terse without per-call
+         # ``isinstance`` guards (#59437).
++        # Capacity loss is a safety exception, not a normal successful-write
++        # notification. Surface it even when notifications are off, and never
++        # echo tool-call content or current_entries into the user-facing line.
++        if isinstance(data, dict) and data.get("error_code") == "capacity_overflow":
++            detail = call_details.get(tcid) or {}
++            if not isinstance(detail, dict):
++                detail = {}
++            target = data.get("target", "") or detail.get("target", "memory")
++            label = "Memory" if target == "memory" else "User profile" if target == "user" else "Memory"
++            usage = str(data.get("usage") or "usage unavailable")[:80]
++            if data.get("staged") and data.get("pending_id"):
++                pending_id = str(data.get("pending_id"))[:128]
++                actions.append(
++                    f"{label} capacity overflow preserved — {usage} — pending {pending_id}"
++                )
++            else:
++                actions.append(
++                    f"{label} capacity overflow could not be preserved — {usage} — report immediately"
++                )
++            continue
++
+         if not isinstance(data, dict) or not data.get("success"):
+             continue
++        if not notify_success:
++            continue
+         message = data.get("message", "")
+         detail = call_details.get(tcid) or {}
+         if not isinstance(detail, dict):
+diff --git a/tests/run_agent/test_background_review_summary.py b/tests/run_agent/test_background_review_summary.py
+index 7401b1eb1..d2068c7b6 100644
+--- a/tests/run_agent/test_background_review_summary.py
++++ b/tests/run_agent/test_background_review_summary.py
+@@ -83,6 +83,86 @@ def test_ignores_failed_tool_results():
+     assert actions == []
+ 
+ 
++def test_surfaces_capacity_dead_letter_without_rejected_content_even_when_off():
++    secret_payload = "SECRET REJECTED MEMORY CONTENT"
++    review_messages = [
++        {
++            "role": "assistant",
++            "tool_calls": [
++                {
++                    "id": "call_overflow",
++                    "function": {
++                        "name": "memory",
++                        "arguments": json.dumps(
++                            {
++                                "action": "add",
++                                "target": "memory",
++                                "content": secret_payload,
++                            }
++                        ),
++                    },
++                }
++            ],
++        },
++        _tool_msg(
++            "call_overflow",
++            {
++                "success": False,
++                "error_code": "capacity_overflow",
++                "failure_type": "capacity_overflow",
++                "target": "memory",
++                "usage": "3,180/3,200",
++                "staged": True,
++                "pending_id": "deadbeef1234",
++                "current_entries": [secret_payload],
++            },
++        ),
++    ]
++
++    for mode in ("on", "verbose", "off"):
++        actions = _summarize(review_messages, [], notification_mode=mode)
++        rendered = "\n".join(actions)
++        assert len(actions) == 1
++        assert "Memory capacity overflow preserved" in rendered
++        assert "3,180/3,200" in rendered
++        assert "deadbeef1234" in rendered
++        assert secret_payload not in rendered
++
++
++def test_surfaces_unpersisted_capacity_failure_without_payload():
++    secret_payload = "UNSAVED SECRET CONTENT"
++    review_messages = [
++        {
++            "role": "assistant",
++            "tool_calls": [
++                {
++                    "id": "call_failed_stage",
++                    "function": {
++                        "name": "memory",
++                        "arguments": json.dumps(
++                            {"action": "add", "target": "user", "content": secret_payload}
++                        ),
++                    },
++                }
++            ],
++        },
++        _tool_msg(
++            "call_failed_stage",
++            {
++                "success": False,
++                "error_code": "capacity_overflow",
++                "target": "user",
++                "usage": "1,800/1,800",
++                "staged": False,
++            },
++        ),
++    ]
++
++    rendered = "\n".join(_summarize(review_messages, []))
++    assert "User profile capacity overflow could not be preserved" in rendered
++    assert secret_payload not in rendered
++
++
+ def test_handles_non_json_tool_content_gracefully():
+     review_messages = [
+         {"role": "tool", "tool_call_id": "x", "content": "not-json"},
 diff --git a/tests/tools/test_memory_capacity_dead_letter.py b/tests/tools/test_memory_capacity_dead_letter.py
-index 3e42e38d2..d0d38336c 100644
+index 3e42e38d2..799108516 100644
 --- a/tests/tools/test_memory_capacity_dead_letter.py
 +++ b/tests/tools/test_memory_capacity_dead_letter.py
 @@ -98,15 +98,48 @@ def test_duplicate_retry_coalesces_to_same_pending_id(hermes_home):
@@ -56,6 +199,82 @@ index 3e42e38d2..d0d38336c 100644
  def test_non_capacity_failure_does_not_create_dead_letter(hermes_home):
      from tools import write_approval as wa
  
+@@ -201,5 +234,43 @@ def test_failure_record_permissions_and_readback(hermes_home):
+     assert second["deduplicated"] is True
+     assert first["id"] == second["id"]
+     assert json.loads(record_path.read_text())["payload"] == payload
++    assert os.stat(hermes_home / "pending").st_mode & 0o777 == 0o700
+     assert os.stat(pending_dir).st_mode & 0o777 == 0o700
+     assert os.stat(record_path).st_mode & 0o777 == 0o600
++
++
++def test_failure_pending_id_traversal_is_rejected(hermes_home):
++    from tools import write_approval as wa
++
++    outside = hermes_home / "escape.json"
++    outside.write_text(json.dumps({"id": "escape", "payload": "must stay"}))
++    (hermes_home / "pending" / "memory").mkdir(parents=True)
++
++    assert wa.get_pending(wa.MEMORY, "../../escape") is None
++    assert wa.discard_pending(wa.MEMORY, "../../escape") is False
++    assert outside.exists()
++
++
++def test_failure_record_readback_mismatch_is_truthful(hermes_home, monkeypatch):
++    from pathlib import Path
++    from tools import write_approval as wa
++
++    original_read_text = Path.read_text
++
++    def corrupt_pending_readback(path, *args, **kwargs):
++        if path.parent.name == "memory" and path.suffix == ".json":
++            return "{}"
++        return original_read_text(path, *args, **kwargs)
++
++    monkeypatch.setattr(Path, "read_text", corrupt_pending_readback)
++    record = wa.stage_failure_write(
++        wa.MEMORY,
++        {"action": "add", "target": "memory", "content": "x"},
++        failure_type="capacity_overflow",
++        summary="capacity overflow",
++        origin="background_review",
++        context={"state_fingerprint": "f" * 64},
++    )
++
++    assert record["persisted"] is False
++    assert "readback mismatch" in record["persistence_error"].lower()
+diff --git a/tests/tools/test_write_approval.py b/tests/tools/test_write_approval.py
+index f2b8bab40..8d0b88899 100644
+--- a/tests/tools/test_write_approval.py
++++ b/tests/tools/test_write_approval.py
+@@ -107,6 +107,27 @@ def test_memory_gate_on_then_apply(hermes_home):
+     assert "approved entry" in store.user_entries[0]
+ 
+ 
++def test_approved_pending_overflow_keeps_original_without_second_dead_letter(hermes_home):
++    from tools.memory_tool import memory_tool, MemoryStore, apply_memory_pending
++    from tools import write_approval as wa
++
++    _set_approval("memory", True)
++    store = MemoryStore(memory_char_limit=40, user_char_limit=40)
++    store.load_from_disk()
++    staged = json.loads(memory_tool("add", "memory", "x" * 60, store=store))
++    original_id = staged["pending_id"]
++    original = wa.get_pending("memory", original_id)
++    assert original is not None
++
++    result = apply_memory_pending(original["payload"], store)
++
++    assert result["success"] is False
++    assert result["error_code"] == "capacity_overflow"
++    assert "staged" not in result
++    assert wa.pending_count("memory") == 1
++    assert wa.get_pending("memory", original_id) == original
++
++
+ def test_cli_memory_approve_without_live_agent_uses_fresh_store(hermes_home, capsys):
+     """#46783: ``/memory approve`` from a context with no live agent (e.g. the
+     Desktop GUI) passed ``memory_store=None`` into the shared handler, which
 diff --git a/tools/memory_tool.py b/tools/memory_tool.py
 index bf8ce3eac..6d24c78e4 100644
 --- a/tools/memory_tool.py
@@ -156,10 +375,33 @@ index bf8ce3eac..6d24c78e4 100644
          "profile": get_hermes_home().name,
      }
 diff --git a/tools/write_approval.py b/tools/write_approval.py
-index 14a2f1b9d..b845d960c 100644
+index 14a2f1b9d..66742dde3 100644
 --- a/tools/write_approval.py
 +++ b/tools/write_approval.py
-@@ -175,6 +175,7 @@ def stage_failure_write(
+@@ -46,6 +46,7 @@ import hashlib
+ import json
+ import logging
+ import os
++import re
+ import tempfile
+ import time
+ import uuid
+@@ -113,6 +114,14 @@ def _pending_dir(subsystem: str) -> Path:
+     return get_hermes_home() / "pending" / subsystem
+ 
+ 
++_SAFE_PENDING_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$")
++
++
++def _valid_pending_id(pending_id: str) -> bool:
++    """Accept one bounded filename component; reject traversal and separators."""
++    return bool(isinstance(pending_id, str) and _SAFE_PENDING_ID.fullmatch(pending_id))
++
++
+ def stage_write(subsystem: str, payload: Dict[str, Any],
+                 *, summary: str, origin: str) -> Dict[str, Any]:
+     """Persist a pending write and return a short record describing it.
+@@ -175,6 +184,7 @@ def stage_failure_write(
          "subsystem": subsystem,
          "failure_type": failure_type,
          "payload": payload,
@@ -167,3 +409,43 @@ index 14a2f1b9d..b845d960c 100644
      }
      canonical = json.dumps(
          identity,
+@@ -199,6 +209,9 @@ def stage_failure_write(
+     }
+     tmp_path: Optional[str] = None
+     try:
++        pending_root = get_hermes_home() / "pending"
++        pending_root.mkdir(parents=True, exist_ok=True, mode=0o700)
++        os.chmod(pending_root, 0o700)
+         d = _pending_dir(subsystem)
+         d.mkdir(parents=True, exist_ok=True, mode=0o700)
+         os.chmod(d, 0o700)
+@@ -229,6 +242,11 @@ def stage_failure_write(
+         os.replace(tmp_path, path)
+         tmp_path = None
+         os.chmod(path, 0o600)
++        dir_fd = os.open(str(d), os.O_RDONLY)
++        try:
++            os.fsync(dir_fd)
++        finally:
++            os.close(dir_fd)
+ 
+         readback = json.loads(path.read_text(encoding="utf-8"))
+         if readback != record:
+@@ -276,6 +294,8 @@ def list_pending(subsystem: str) -> List[Dict[str, Any]]:
+ 
+ def get_pending(subsystem: str, pending_id: str) -> Optional[Dict[str, Any]]:
+     """Return a single pending record by id, or None."""
++    if not _valid_pending_id(pending_id):
++        return None
+     path = _pending_dir(subsystem) / f"{pending_id}.json"
+     if not path.exists():
+         return None
+@@ -287,6 +307,8 @@ def get_pending(subsystem: str, pending_id: str) -> Optional[Dict[str, Any]]:
+ 
+ def discard_pending(subsystem: str, pending_id: str) -> bool:
+     """Delete a pending record. Returns True if it existed."""
++    if not _valid_pending_id(pending_id):
++        return False
+     path = _pending_dir(subsystem) / f"{pending_id}.json"
+     try:
+         if path.exists():
