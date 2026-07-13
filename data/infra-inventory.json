@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-13T16:59:12-04:00",
+    "updated_at": "2026-07-13T17:00:13-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -2241,7 +2241,7 @@
         "1508853425952133180": "auto-add explicitamente vazio"
       },
       "backup": "/root/mgs-agent/backups/ares-thread-auto-add-20260713-165039",
-      "validation": "py_compile PASS; 5/5 targeted tests PASS; ensure-hermes-mgs-patches 388/388 PASS; patch reverse-check PASS; live/versioned Ares configs byte-identical; acquisition count=7; diretoria count=0.",
+      "validation": "py_compile PASS; 5/5 targeted tests PASS; ensure-hermes-mgs-patches 388/388 PASS; patch reverse-check PASS; live/versioned Ares configs byte-identical; safe restart READY with Discord connected; real auto-thread smoke in ares-aquisicao added all 7 expected humans (9 members including Ares/Zeus), Ares replied, test thread archived.",
       "hashes": {
         "patch": "2e775ff5c5ba19be30da4747ac385c3fc13c99cd4aa21ff20fa13cd0f69aeac9",
         "guard": "a9b0183a09856bae7ea17c36b4a9cb6466b002f6e4edd2a29575f3305517b497",
@@ -2249,8 +2249,27 @@
         "adapter": "e5f19ebb9be56438cc65e25f5a8b50f60dffe1a890b01288dcf2c3428e7509f1",
         "test": "fddbac6daa549d1d6d7ae49c6a27b299f8f1fa0e7e48e219ce2f64a3456a4bf6"
       },
-      "status": "staged_validated_pending_safe_restart",
-      "updated_at": "2026-07-13T16:56:19-04:00"
+      "status": "deployed_validated_live_smoke",
+      "updated_at": "2026-07-13T17:01:13-04:00",
+      "restart": {
+        "service": "ares-gateway.service",
+        "pid": 3571801,
+        "active_state": "active",
+        "sub_state": "running",
+        "discord_connected": true,
+        "nrestarts": 0,
+        "finalizer_log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260713T205808Z-3570272.log"
+      },
+      "live_smoke": {
+        "thread_id": "1526332627416780803",
+        "parent_id": "1516887105543077949",
+        "thread_type": 11,
+        "member_count": 9,
+        "expected_humans_present": 7,
+        "missing": [],
+        "ares_reply_seen": true,
+        "archived_after_test": true
+      }
     }
   ],
   "profile_skill_references": [
@@ -6312,8 +6331,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 359,
-      "md5": "769ad7188bead9e855c8242caaec35a3",
-      "modified_at": "2026-07-13T16:45:01-04:00"
+      "md5": "3687a5a3137d9b40fcafc3c70bdfa93b",
+      "modified_at": "2026-07-13T17:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -6366,14 +6385,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 26326,
-      "md5": "99e264a079b2ff1ff1a86d9dc828540a",
-      "modified_at": "2026-07-13T16:55:01-04:00"
+      "md5": "1f5a54707487aa1c4928bb332e84a1d7",
+      "modified_at": "2026-07-13T17:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 358,
-      "md5": "947e5b1193fdf71aba773b04857bdf53",
-      "modified_at": "2026-07-13T16:59:01-04:00"
+      "md5": "13ffa80a1ab7a6d2b5a83a2779297e97",
+      "modified_at": "2026-07-13T17:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -6395,9 +6414,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 278964,
-      "md5": "248ea1710e033086026b6278ec0f89a9",
-      "modified_at": "2026-07-13T16:59:11-04:00"
+      "size_bytes": 278949,
+      "md5": "bee4945f02abc967724add5a7e95bb34",
+      "modified_at": "2026-07-13T17:00:11-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -6545,9 +6564,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2111,
-      "md5": "27113f29a07aec993e0e05ab3e0f262b",
-      "modified_at": "2026-07-13T16:55:02-04:00"
+      "size_bytes": 2112,
+      "md5": "937348c9eac30b483a0cb131382460c6",
+      "modified_at": "2026-07-13T17:00:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
