@@ -42,7 +42,7 @@ rsync -a --delete \
 # Não sincronizar a categoria growth inteira; preservar apenas as skills customizadas
 # refatoradas e validadas nesta operação.
 mkdir -p "$TARGET_DIR/zeus-skills/growth"
-for skill in meta-utility-template-approval meta-app-rate-limit-monitor segurador-page-health-monitor; do
+for skill in meta-utility-template-approval meta-app-rate-limit-monitor segurador-page-health-monitor meta-ads-api-operations; do
     if [ -d "$PROFILES_DIR/zeus/skills/growth/$skill" ]; then
         rsync -a --delete \
             "$PROFILES_DIR/zeus/skills/growth/$skill/" \

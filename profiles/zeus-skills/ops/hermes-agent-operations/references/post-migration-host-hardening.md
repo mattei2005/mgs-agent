@@ -55,6 +55,22 @@ For every mutable infra operation, prefer a shared correlation tuple in audit/re
 
 `hermes config set` converts booleans and numbers, but a value such as `'[]'` can be stored as the string `"[]"` rather than an empty list. After any structured config write, validate the parsed YAML type and live-versus-versioned equality. If the CLI cannot express the required list/dict type, use Hermes' atomic YAML writer with an actual Python list/dict, then read back the parsed value; never accept a visually plausible scalar as equivalent.
 
+## 6. Harden SSH only after reconciling the firewall control plane
+
+A local `firewall-cmd --permanent` readback is not enough when RunCloud or another control plane owns the zone. Before changing global `22/tcp`, inspect the control-plane firewall model and prove that a future deploy/reconcile will not recreate retired rules or overwrite the intended whitelist. Treat unresolved control-plane ownership as a blocker, not a caveat.
+
+For a lockout-safe SSH whitelist rollout:
+
+1. inventory every legitimate source and confirm which egress addresses are actually stable;
+2. never allow a broad residential ISP range for a dynamic admin IP—establish access through a stable bastion/management host or WireGuard/Tailscale first;
+3. change one server at a time, keep two SSH sessions open and verify provider/emergency-console access;
+4. arm a time-bounded automatic rollback that restores global SSH before restricting anything;
+5. add approved `/32` rules in runtime and permanent state, then prove fresh authorized connections;
+6. remove global `22/tcp` in runtime only, run positive and negative connection tests, and remove it permanently only after every check passes;
+7. cancel the rollback only after runtime, permanent config, nftables, Fail2Ban, control-plane state and fresh SSH readbacks agree.
+
+Do not start discovery or implementation merely because the design was approved. A suspended rollout remains suspended until the owner explicitly authorizes the read-only discovery phase, and firewall mutations retain their separate Critical Subset confirmation.
+
 ## Reporting
 
 For each finding, report: confirmed source, operational vs historical classification, proposed action, validation, rollback and exact approval gate. Do not bundle swap, profile config cleanup, repository cleanup and firewall modification into one approval.

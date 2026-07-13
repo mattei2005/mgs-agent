@@ -150,7 +150,7 @@ Validated MGS example from 2026-07-12:
 Configured nominal ceiling     10,032 requests/day (20.06%)
 Observed daily projection         ~124 requests/day (0.25%)
 Largest nominal consumers      B011 DTR + Meta App Roles (89.47%)
-Post-refactor target ceiling      ~676 requests/day (1.35%)
+Post-refactor conservative ceiling   ~751 requests/day (1.50%)
 ```
 
 The reduction path is structural—full-item reads, IDs, and non-secret mapping reuse—not persistence of all DTR passwords/tokens. Secret caching remains an explicit security decision; the narrow Ares Meta token cache is governed separately by `meta-ads-api-operations`.
