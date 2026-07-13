@@ -181,6 +181,15 @@ PY
         return 0
       fi
       ;;
+    memory-dead-letter-structural-trace-*.patch)
+      if grep -q '"error_code": "capacity_overflow"' "$REPO/tools/memory_tool.py" \
+        && grep -q "def stage_failure_write" "$REPO/tools/write_approval.py" \
+        && grep -q "def emit_structural_write_receipt" "$REPO/tools/write_trace.py" \
+        && grep -q 'result\["trace_receipt"\]' "$REPO/tools/skill_manager_tool.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     skill-view-compact-linked-files.patch)
       if grep -q "def _linked_files_for_view" "$REPO/tools/skills_tool.py" \
         && grep -q '"linked_files_summary"' "$REPO/tools/skills_tool.py" \
@@ -212,6 +221,7 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 # upstream checkout first; legacy per-feature patches below then act as
 # invariant checks/backward-compatible fallback.
 apply_patch_if_needed "mgs-runtime-customizations-2026-07-07.patch"
+apply_patch_if_needed "memory-dead-letter-structural-trace-2026-07-13.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-07-05.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-06-30.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-06-26.patch"
@@ -353,6 +363,16 @@ grep -q '"linked_files_summary"' "$REPO/tools/skills_tool.py" \
   || fail "missing compact linked-files summary result"
 grep -q "test_view_compacts_large_linked_file_inventory" "$REPO/tests/tools/test_skills_tool.py" \
   || fail "missing compact linked-files regression tests"
+grep -q '"error_code": "capacity_overflow"' "$REPO/tools/memory_tool.py" \
+  || fail "missing machine-readable memory capacity_overflow result"
+grep -q "def _stage_capacity_overflow" "$REPO/tools/memory_tool.py" \
+  || fail "missing failure-only memory dead-letter dispatcher"
+grep -q "def stage_failure_write" "$REPO/tools/write_approval.py" \
+  || fail "missing atomic capacity-overflow staging helper"
+grep -q "def emit_structural_write_receipt" "$REPO/tools/write_trace.py" \
+  || fail "missing structural autowrite receipt emitter"
+grep -q 'result\["trace_receipt"\]' "$REPO/tools/skill_manager_tool.py" \
+  || fail "missing background skill structural receipt integration"
 
 "$BASE/scripts/check-retired-host-references.py" \
   || fail "retired host reference reappeared on an operational surface"
@@ -365,13 +385,20 @@ PYBIN="$REPO/venv/bin/python"
   "$REPO/gateway/slash_commands.py" \
   "$REPO/gateway/reasoning_router.py" \
   "$REPO/gateway/platforms/base.py" \
-  "$REPO/tools/skills_tool.py"
+  "$REPO/tools/skills_tool.py" \
+  "$REPO/tools/memory_tool.py" \
+  "$REPO/tools/write_approval.py" \
+  "$REPO/tools/skill_manager_tool.py" \
+  "$REPO/tools/write_trace.py"
 
 "$PYBIN" -m pytest -q \
   "$REPO/tests/gateway/test_restart_resume_pending.py" \
   "$REPO/tests/gateway/test_busy_session_ack.py" \
   "$REPO/tests/gateway/test_discord_send.py" \
   "$REPO/tests/gateway/test_telegram_photo_interrupts.py" \
-  "$REPO/tests/tools/test_skills_tool.py"
+  "$REPO/tests/tools/test_skills_tool.py" \
+  "$REPO/tests/tools/test_memory_tool.py" \
+  "$REPO/tests/tools/test_memory_capacity_dead_letter.py" \
+  "$REPO/tests/tools/test_write_trace.py"
 
-log "OK Hermes MGS patches present, py_compile and busy-steer tests passed"
+log "OK Hermes MGS patches present, py_compile, dead-letter/trace and busy-steer tests passed"
