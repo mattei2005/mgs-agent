@@ -132,7 +132,17 @@ A newly generated class-level reference can legitimately supersede several narro
 
 The built-in memory store rejects an add/replace that would exceed its character limit and returns the current entries. That protects existing memory but does not preserve the unsaved proposal if a background reviewer fails to surface the tool error.
 
-Preferred design:
+### Deployment gate: approved design is not protection
+
+Never say a dead-letter mechanism protects writes merely because its design was approved or documented. Before relying on it, verify all three layers:
+
+1. an executable overflow branch exists outside documentation and emits a failure-only record such as `capacity_overflow`;
+2. a behavior test proves the rejected payload survives with a pending/recovery handle while the memory file remains unchanged;
+3. the originating-conversation report and pending/capacity monitor both surface the same exception.
+
+If `capacity_overflow` exists only in a skill/reference, the runtime is still unprotected. Treat the current behavior as fail-closed rejection with possible loss of the unsaved proposal.
+
+Preferred deployed design:
 
 1. Keep normal memory/skill writes direct when the gate is off.
 2. On a capacity rejection only, preserve the rejected payload in a failure-only staged/dead-letter record such as `capacity_overflow`.
@@ -140,7 +150,15 @@ Preferred design:
 4. Let the existing pending/capacity monitor alert on the exception.
 5. Never compact, delete, or replace durable facts automatically to make room.
 
-A temporary limit increase is a bridge, not the durable fix. Raising the cap alone adds no prompt tokens until content actually grows; document the possible maximum growth, compact with a reviewed full diff, then reduce or reassess the cap. The durable safety property is that a failed learning write remains recoverable and visible.
+### Buffer ordering and activation semantics
+
+A temporary limit increase is a bridge, not the durable fix. Raising the cap alone adds no prompt tokens until content actually grows; document the possible maximum growth, compact with a reviewed full diff, then reduce or reassess the cap.
+
+When headroom is critically low and no deployed dead-letter exists, do not delay an explicitly approved temporary buffer behind dead-letter implementation. The design review may come first, but the unimplemented mechanism provides no interim safety. Apply the buffer through the native scalar config writer with backup, config check, live/mirror readback, and the required MGS infrastructure reporting.
+
+Memory limits are captured when `MemoryStore` is instantiated from config; changing YAML does not mutate an already-active store instance. Do not call the change effective for an in-flight agent merely from file readback. Exercise a freshly initialized agent/turn and verify that the live store reports the new limits. A gateway restart is not inherently required, but a new agent initialization is.
+
+The durable safety property is that a failed learning write remains recoverable and visible.
 
 ## Mandatory transparency for automatic writes
 
