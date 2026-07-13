@@ -63,6 +63,19 @@ This is not the same as generating the `Long` report. The job here is to write v
    - Row outside month/date range check.
    - Special block validation.
 
+## Incremental multi-day updates
+
+When earlier days of the month are already filled and Rodolfo supplies a later period:
+
+1. Reconcile the new workbook independently and write top daily cells only for its date range.
+2. Load the previously approved `Long.csv` outputs for earlier days of the same month.
+3. Combine prior + new Long sources only for cumulative lower tables such as Fincgriffin and Creditoparaveiculo; never reconstruct gestor detail from displayed Sheet totals.
+4. Route spend by normalized `Conta_FB`, not only by site, whenever a site block has multiple manual `BM - $` slots.
+5. Preserve the slot already used by that account earlier in the same month. If the account is genuinely new, preflight a free manual slot and record the mapping in the audit; do not silently collapse it into another account.
+6. After normal readback, run an independent scope-diff: compare broad pre-write and post-write `FORMULA` snapshots and fail if any changed cell is outside the approved daily bands or explicitly rebuilt lower tables.
+
+See `references/july-2026-8-12-incremental-fill-audit.md` for the validated incremental pattern, account-routing lesson, and independent scope-diff audit.
+
 ## Durable MGS mapping rules learned from June 2026
 
 Revenue `GROSS_CAD_*` sites:

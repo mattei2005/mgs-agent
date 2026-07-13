@@ -114,6 +114,33 @@ Pitfalls:
 - Não confundir `compression.threshold` com `session_reset`: compression resume contexto grande; session reset zera por política de tempo/idle.
 - Se a ordem for só explicativa (“tem como?”), responder o caminho e pedir “aplica?” antes de mutar config/restart. Se Rodolfo mandar “aplica”, executar.
 
+## Diagnóstico de compactação frequente em thread visualmente curta
+
+Não concluir pelo número de mensagens do Discord. Antes de alterar `compression.threshold`, medir o transcript interno da sessão em `state.db` e separar três gatilhos:
+
+1. **limite real/estimado de tokens** — logs `Pre-API compression` e `context compression started`;
+2. **válvula por contagem de mensagens** — `compression.hygiene_hard_message_limit` no gateway;
+3. **inflação do turno** — quantidade de API calls, tool calls, reloads de skill e volume de tool results/replay.
+
+Readback mínimo da sessão:
+
+- `sessions.api_call_count`, `message_count`, `tool_call_count`;
+- `messages` agrupadas por `role`, `active`, `compacted`;
+- ferramentas mais chamadas e soma de `length(content)`;
+- tamanho de `tool_calls` e dos campos de replay/reasoning;
+- logs de compressão antes/depois, incluindo tokens aproximados e chamada real seguinte.
+
+Interpretação:
+
+- Uma thread com poucos posts pode legitimamente compactar se um único turno tiver dezenas ou centenas de chamadas de modelo/ferramentas.
+- Recarregar a mesma skill grande, fazer muitos patches pequenos e repetir `skill_manage`/readbacks infla o contexto evitavelmente; a correção primária é reduzir o tool loop, agregar lookups e manter skills como routers enxutos.
+- `hygiene_hard_message_limit` não é o threshold normal de contexto. A documentação Hermes atual define **5000** como default/safety valve para sessões que não conseguem obter usage real. Um valor MGS legado baixo, como **250**, pode forçar compactação apenas por contagem mesmo com tokens bem abaixo do limite; corrigir para o default oficial quando confirmado nos quatro profiles/mirrors.
+- O número do aviso pré-API é estimativa conservadora; compare com `in=` da última chamada real e com o primeiro `in=` pós-compactação antes de chamar o gatilho de falso.
+- Antes de propor mudança de threshold, consultar o histórico: se `0.90` foi uma decisão explícita de Rodolfo para preservar mais contexto, não desfazer nem elevar além disso como tentativa de mascarar tool-loop excessivo.
+- Verificar a versão instalada contra o upstream: fixes de compaction por usage real, anti-thrashing e runtime context budget podem tornar um update controlado mais importante que tuning local.
+
+A correção recomendada deve ser em camadas: eliminar o gatilho legado por contagem, conter o crescimento evitável do agente/skill e só depois avaliar update/threshold. Não desligar compression.
+
 ## 6. Context compression / Codex gpt-5.5 notices
 
 Use quando Rodolfo perguntar sobre mensagens do Hermes como:

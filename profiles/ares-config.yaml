@@ -149,7 +149,7 @@ compression:
   threshold: 0.9
   target_ratio: 0.22
   protect_last_n: 24
-  hygiene_hard_message_limit: 250
+  hygiene_hard_message_limit: 5000
   protect_first_n: 3
   abort_on_summary_failure: false
   codex_gpt55_autoraise: true
