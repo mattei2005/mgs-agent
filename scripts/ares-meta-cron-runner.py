@@ -595,7 +595,7 @@ def run_intraday(args) -> int:
         insights = fetch_today_insights(common, token, args.account_id)
         insights_by_campaign = {str(row.get('campaign_id') or ''): row for row in insights if row.get('campaign_id')}
         for cid, bid in adset_bids.items():
-            if cid in campaigns and not campaigns[cid].get('bid_strategy'):
+            if cid in campaigns and (bid == 'COST_CAP' or not campaigns[cid].get('bid_strategy')):
                 campaigns[cid]['bid_strategy'] = bid
         by_prio = sorted([r for r in (ruleset.get('rules') or []) if r.get('enabled')], key=lambda r: int(r.get('priority') or 99))
         rule_ids = [str(r.get('id')) for r in by_prio]

@@ -180,6 +180,44 @@ def active_focus_pg_ids(op_cfg: dict) -> set[str]:
     return {str(x.get('pg_id')) for x in (management_scope(op_cfg).get('active_focus') or []) if x.get('pg_id')}
 
 
+def normalize_bid_strategy(value: str | None) -> str:
+    strategy = str(value or 'UNKNOWN').strip().upper()
+    aliases = {
+        'LOWEST_COST_NO_CAP': 'LOWEST_COST_WITHOUT_CAP',
+        'LOWEST_COST_WITHOUT_BID_CAP': 'LOWEST_COST_WITHOUT_CAP',
+    }
+    return aliases.get(strategy, strategy)
+
+
+def campaign_age_days(campaign: dict, now_local: datetime) -> float | None:
+    created = parse_meta_time(campaign.get('created_time') or campaign.get('start_time'))
+    if not created:
+        return None
+    return (now_local - created.astimezone(now_local.tzinfo)).total_seconds() / 86400
+
+
+def grace_block_reason(campaign: dict, op_cfg: dict, now_local: datetime) -> str | None:
+    age = campaign_age_days(campaign, now_local)
+    grace_days = float((op_cfg.get('learning_grace') or {}).get('action_grace_days') or 3)
+    test_name = str((op_cfg.get('test_grace') or {}).get('name_contains') or 'TEST').upper()
+    if age is None or age >= grace_days:
+        return None
+    if test_name in str(campaign.get('name') or '').upper():
+        return 'TEST < 3d'
+    return 'learning < 3d'
+
+
+def classify_bad_day(metrics: dict, min_spend: float, min_mo: float, cpmo_target: float) -> tuple[bool, str]:
+    spend = float(metrics.get('spend') or 0)
+    mo = float(metrics.get('MO') or 0)
+    cpmo = metrics.get('CPMO')
+    if spend < min_spend or mo < min_mo:
+        return False, 'volume insuficiente'
+    if cpmo is not None and float(cpmo) > cpmo_target:
+        return True, 'CPMO alto'
+    return False, 'ok'
+
+
 def is_in_management_scope(op_cfg: dict, pg_id: str) -> tuple[bool, str | None]:
     if pg_id in manual_hold_pg_ids(op_cfg):
         return False, 'manual_hold'
@@ -223,7 +261,7 @@ def fetch_account_name(common, token: str, account_id: str) -> str:
 
 
 def fetch_campaigns(common, token: str, account_id: str) -> dict[str, dict]:
-    fields = 'id,name,effective_status,status,daily_budget,lifetime_budget,start_time,created_time,stop_time'
+    fields = 'id,name,effective_status,status,daily_budget,lifetime_budget,start_time,created_time,stop_time,bid_strategy'
     params = {
         'fields': fields,
         'limit': 500,
@@ -231,6 +269,26 @@ def fetch_campaigns(common, token: str, account_id: str) -> dict[str, dict]:
     }
     rows = graph_all(common, f'act_{account_id}/campaigns', token, params)
     return {str(r.get('id')): r for r in rows if r.get('id')}
+
+
+def fetch_adset_bid_strategies(common, token: str, account_id: str) -> dict[str, str]:
+    rows = graph_all(common, f'act_{account_id}/adsets', token, {'fields': 'id,campaign_id,bid_strategy', 'limit': 500})
+    by_campaign: dict[str, set[str]] = {}
+    for row in rows:
+        cid = str(row.get('campaign_id') or '')
+        if cid:
+            by_campaign.setdefault(cid, set()).add(normalize_bid_strategy(row.get('bid_strategy')))
+    result = {}
+    for cid, values in by_campaign.items():
+        if 'COST_CAP' in values:
+            result[cid] = 'COST_CAP'
+        elif 'LOWEST_COST_WITHOUT_CAP' in values:
+            result[cid] = 'LOWEST_COST_WITHOUT_CAP'
+        elif 'LOWEST_COST' in values:
+            result[cid] = 'LOWEST_COST'
+        else:
+            result[cid] = sorted(values)[0] if values else 'UNKNOWN'
+    return result
 
 
 def fetch_insights(common, token: str, account_id: str, since: str, until: str) -> list[dict]:
@@ -411,19 +469,27 @@ def main() -> int:
         today = now_local.date()
     d1 = today - timedelta(days=1)
     d2 = today - timedelta(days=2)
+    d3 = today - timedelta(days=3)
 
     checkpoint = now_local.strftime('%H:%M')
     is_final = checkpoint.startswith('22:')
     weights = policy.get('hoa_weights') or {'today': 0.5, 'yesterday': 0.3, 'day_before_yesterday': 0.2}
     cpmo_target = float((policy.get('hoa') or {}).get('target_cpmo_usd') or (policy.get('initial_cpmo_baseline') or {}).get('suggested_initial_CPMO_target_usd') or 2.0)
-    min_spend = float((policy.get('bad_day_gates') or {}).get('minimum_spend_usd') or 5.0)
-    min_mo = float((policy.get('bad_day_gates') or {}).get('minimum_MO') or 2.0)
+    bad_day_gates = policy.get('bad_day_gates') or {}
+    min_spend = float(bad_day_gates.get('minimum_spend_usd') or 10.0)
+    min_mo = float(bad_day_gates.get('minimum_MO') or 5.0)
+    replacement_required = int(bad_day_gates.get('bad_days_required_for_replacement') or 2)
+    complete_days_window = int(bad_day_gates.get('complete_days_window') or 3)
     daily_cap = float((policy.get('budget') or {}).get('daily_account_cap_usd') or 300.0)
     test_share = float((policy.get('budget') or {}).get('creative_test_share') or 0.2)
 
     account_name = fetch_account_name(common, token, args.account_id)
     campaigns = fetch_campaigns(common, token, args.account_id)
-    insights = fetch_insights(common, token, args.account_id, d2.isoformat(), today.isoformat())
+    adset_bids = fetch_adset_bid_strategies(common, token, args.account_id)
+    for cid, bid in adset_bids.items():
+        if cid in campaigns and (bid == 'COST_CAP' or not campaigns[cid].get('bid_strategy')):
+            campaigns[cid]['bid_strategy'] = bid
+    insights = fetch_insights(common, token, args.account_id, d3.isoformat(), today.isoformat())
 
     by_campaign: dict[str, dict] = {}
     total_today_spend = 0.0
@@ -469,23 +535,13 @@ def main() -> int:
         today_m = days.get(today.isoformat(), {'spend': 0, 'MO': 0, 'CPMO': None})
         y_m = days.get(d1.isoformat(), {'spend': 0, 'MO': 0, 'CPMO': None})
         d2_m = days.get(d2.isoformat(), {'spend': 0, 'MO': 0, 'CPMO': None})
+        d3_m = days.get(d3.isoformat(), {'spend': 0, 'MO': 0, 'CPMO': None})
 
-        def day_bad(m):
-            spend = float(m.get('spend') or 0)
-            mo = float(m.get('MO') or 0)
-            cpmo = m.get('CPMO')
-            if spend < min_spend:
-                return False, 'sem volume'
-            if mo < min_mo:
-                return True, 'MO baixo'
-            if cpmo is not None and float(cpmo) > cpmo_target:
-                return True, 'CPMO alto'
-            return False, 'ok'
-
-        y_bad, y_reason = day_bad(y_m)
-        d2_bad, d2_reason = day_bad(d2_m)
-        today_bad, today_reason = day_bad(today_m)
-        bad_complete = int(y_bad) + int(d2_bad)
+        y_bad, y_reason = classify_bad_day(y_m, min_spend, min_mo, cpmo_target)
+        d2_bad, d2_reason = classify_bad_day(d2_m, min_spend, min_mo, cpmo_target)
+        d3_bad, d3_reason = classify_bad_day(d3_m, min_spend, min_mo, cpmo_target)
+        today_bad, today_reason = classify_bad_day(today_m, min_spend, min_mo, cpmo_target)
+        bad_complete = int(y_bad) + int(d2_bad) + int(d3_bad)
 
         components = []
         for key, day, w in [('today', today.isoformat(), weights.get('today', .5)), ('yesterday', d1.isoformat(), weights.get('yesterday', .3)), ('day_before_yesterday', d2.isoformat(), weights.get('day_before_yesterday', .2))]:
@@ -507,10 +563,15 @@ def main() -> int:
 
         prev_cpmo = (((prev_campaigns.get(cid) or {}).get('today') or {}).get('CPMO'))
         pacing = status_for_today(today_m.get('CPMO'), prev_cpmo, today_m.get('MO') or 0, today_m.get('spend') or 0, min_spend)
-        replacement = bad_complete >= 2
+        campaign_obj = campaigns.get(cid) or {}
+        bid_strategy = normalize_bid_strategy(campaign_obj.get('bid_strategy'))
+        grace_reason = grace_block_reason(campaign_obj, op_cfg, now_local)
+        cost_cap_excluded = bid_strategy == 'COST_CAP'
+        action_eligible = not cost_cap_excluded and grace_reason is None
+        replacement = bad_complete >= replacement_required and action_eligible
         pg_id = page_id_from_name(cname)
         is_focus_page = bool(focus_pg_ids and pg_id in focus_pg_ids)
-        watch = replacement or today_bad or (weighted_cpmo is not None and weighted_cpmo > cpmo_target)
+        watch = replacement or (today_bad and action_eligible) or (weighted_cpmo is not None and weighted_cpmo > cpmo_target)
         if watch or is_focus_page:
             in_scope, scope_reason = is_in_management_scope(op_cfg, pg_id)
             if not in_scope:
@@ -519,16 +580,25 @@ def main() -> int:
                     'today': today_m,
                     'weighted_CPMO': weighted_cpmo,
                     'bad_complete_days': bad_complete,
+                    'bad_complete_days_window': complete_days_window,
                     'pacing': pacing,
                     'scope_skip': scope_reason,
                 }
                 continue
-            status = 'replacement candidate' if replacement and pacing != 'melhorando' else ('hold: pacing melhora' if replacement else ('watchlist' if watch else 'sem alerta'))
+            if cost_cap_excluded:
+                status = 'COST_CAP sem ação'
+            elif grace_reason:
+                status = f'{grace_reason} informativo'
+            else:
+                status = 'replacement candidate' if replacement and pacing != 'melhorando' else ('hold: pacing melhora' if replacement else ('watchlist' if watch else 'sem alerta'))
             reasons = []
             if y_bad: reasons.append(f'D-1 {y_reason}')
             if d2_bad: reasons.append(f'D-2 {d2_reason}')
+            if d3_bad: reasons.append(f'D-3 {d3_reason}')
             if today_bad: reasons.append(f'hoje {today_reason}')
-            suggested = simulated_action_for_hoa(replacement, today_bad, pacing) if watch else 'sem ação'
+            if cost_cap_excluded: reasons.append('COST_CAP fora de pausa por custo')
+            if grace_reason: reasons.append(f'{grace_reason}; sem ação')
+            suggested = simulated_action_for_hoa(replacement, today_bad, pacing) if watch and action_eligible else 'sem ação'
             seq = len(watch_rows) + 1
             watch_rows.append({
                 'rec_id': recommendation_id(now_local, seq),
@@ -536,14 +606,15 @@ def main() -> int:
                 'page_name': page_name_from_campaign(cname),
                 'campaign': cname,
                 'campaign_display_name': display_campaign_name(cname),
-                'start_date': fmt_start_date(campaigns.get(cid) or {}, tz),
-                'effective_status': (campaigns.get(cid) or {}).get('effective_status') or 'HIST',
+                'start_date': fmt_start_date(campaign_obj, tz),
+                'effective_status': campaign_obj.get('effective_status') or 'HIST',
+                'bid_strategy': bid_strategy,
                 'spend_today': fmt_money(today_m.get('spend') or 0),
                 'mo_today': int(today_m.get('MO') or 0),
                 'cpmo_today': fmt_money(today_m.get('CPMO')) if today_m.get('CPMO') is not None else '-',
                 'hoa_cpmo': fmt_money(weighted_cpmo),
                 'target': fmt_money(cpmo_target),
-                'bad_days': f'{bad_complete}/2 completos',
+                'bad_days': f'{bad_complete}/{complete_days_window} completos',
                 'pacing': pacing,
                 'status': status,
                 'suggested_action': compact_action(suggested),
@@ -554,6 +625,9 @@ def main() -> int:
             'today': today_m,
             'weighted_CPMO': weighted_cpmo,
             'bad_complete_days': bad_complete,
+            'bad_complete_days_window': complete_days_window,
+            'bid_strategy': bid_strategy,
+            'grace_block': grace_reason,
             'pacing': pacing,
         }
 
@@ -585,7 +659,14 @@ def main() -> int:
         'local_time': now_local.isoformat(),
         'checkpoint': checkpoint,
         'mode': 'read_only_dry_run_no_meta_write',
+        'policy_schema_version': policy.get('schema_version'),
         'target_cpmo_usd': cpmo_target,
+        'bad_day_gate': {
+            'minimum_spend_usd': min_spend,
+            'minimum_MO': min_mo,
+            'bad_days_required': replacement_required,
+            'complete_days_window': complete_days_window,
+        },
         'daily_cap_usd': daily_cap,
         'creative_test_pool_usd': test_pool,
         'today_spend_usd': round(total_today_spend, 2),

@@ -46,15 +46,19 @@ class SmartBiddingRoiTests(unittest.TestCase):
         self.assertEqual(text.count('```'), 2)
         self.assertLess(len(text), 2000)
 
-    def test_scope_does_not_change_rules_or_hoa_target(self):
+    def test_scope_uses_approved_v2_but_keeps_write_disabled(self):
         operation = json.loads(Path('/root/mgs-agent/data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json').read_text())
-        policy = json.loads(Path('/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v1.json').read_text())
-        rules = json.loads(Path('/root/mgs-agent/data/ares/meta-ads/rules/openzedfinanzas_cc_es_intraday_v1.json').read_text())
+        policy = json.loads(Path(operation['hoa_policy']['policy_path']).read_text())
+        rules = json.loads(Path('/root/mgs-agent/data/ares/meta-ads/rules') .joinpath(f"{operation['ruleset']}.json").read_text())
         self.assertTrue(operation['smart_bidding_roi']['enabled'])
-        self.assertEqual(policy['hoa']['target_cpmo_usd'], 2.0)
+        self.assertEqual(operation['ruleset'], 'openzedfinanzas_cc_es_intraday_v2')
+        self.assertEqual(policy['hoa']['target_cpmo_usd'], 1.3)
         self.assertEqual([r['id'] for r in rules['rules']], ['R1', 'R2', 'R3', 'R4', 'R5'])
-        self.assertEqual(rules['rules'][0]['condition']['all'][1]['value'], 5.0)
-        self.assertEqual(rules['rules'][3]['condition']['all'][2]['value'], 2.0)
+        self.assertEqual(rules['rules'][0]['condition']['all'][2]['value'], 4.0)
+        self.assertEqual(rules['rules'][3]['condition']['all'][4]['value'], 1.75)
+        self.assertFalse(rules['rules'][4]['enabled'])
+        self.assertFalse(rules['write_enabled'])
+        self.assertFalse(operation['management_scope']['write_enabled'])
 
 
 if __name__ == '__main__':
