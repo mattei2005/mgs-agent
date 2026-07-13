@@ -106,7 +106,10 @@ def get_vault_index(vault: str | None = None, force_refresh: bool = False) -> di
         for row in rows:
             title = str(row.get("title") or "").strip()
             item_id = str(row.get("id") or row.get("uuid") or "").strip()
-            if title and item_id:
+            if title and item_id and (
+                "digitaltrchat" in title.casefold()
+                or (title.startswith("BOT B") and title.endswith(" Token"))
+            ):
                 items[title] = {"id": item_id, "title": title}
         payload = {
             "schema": 1,
@@ -156,8 +159,7 @@ def resolve_dtr_items(target_users: Iterable[str], vault: str | None = None, for
         cached = _read_fresh(DTR_MAP_PATH, DTR_MAP_MAX_AGE, vault)
         if cached:
             users = cached.get("users") or {}
-            if targets.issubset(users):
-                return {u: users[u] for u in targets}, sorted(targets - set(users)), [], cached
+            return {u: users[u] for u in targets if u in users}, sorted(targets - set(users)), [], cached
 
     index = get_vault_index(vault)
     with _lock_file() as lock:
@@ -166,8 +168,7 @@ def resolve_dtr_items(target_users: Iterable[str], vault: str | None = None, for
             cached = _read_fresh(DTR_MAP_PATH, DTR_MAP_MAX_AGE, vault)
             if cached:
                 users = cached.get("users") or {}
-                if targets.issubset(users):
-                    return {u: users[u] for u in targets}, sorted(targets - set(users)), [], cached
+                return {u: users[u] for u in targets if u in users}, sorted(targets - set(users)), [], cached
 
         candidates = [
             entry for title, entry in (index.get("items") or {}).items()
