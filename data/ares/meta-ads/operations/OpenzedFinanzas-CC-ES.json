@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "operation_id": "OpenzedFinanzas-CC-ES",
   "country": "ES",
   "country_name": "Spain",
@@ -9,7 +9,8 @@
   "intraday_interval_minutes": 30,
   "intraday_log_policy": "only_when_action_or_error",
   "reactivate_all_time": "00:30",
-  "reactivate_all_scope": "all_paused_campaigns_in_account",
+  "reactivate_all_scope": "paused_by_ares_rule_only",
+  "reactivate_provenance_state_required": true,
   "reactivate_exclusion_list": [
     "pg_22069"
   ],
@@ -93,7 +94,7 @@
     ],
     "use_subs_for_intraday_rules": false
   },
-  "ruleset": "openzedfinanzas_cc_es_intraday_v1",
+  "ruleset": "openzedfinanzas_cc_es_intraday_v2",
   "scheduler_policy": {
     "intraday": "vps_cron_deterministic_no_skill_runtime",
     "reactivate_all": "vps_cron_deterministic_no_skill_runtime",
@@ -130,10 +131,10 @@
       "reports": "always_output_each_checkpoint"
     }
   },
-  "updated_at": "2026-06-19T17:30:00-04:00",
+  "updated_at": "2026-07-13T17:50:52-04:00",
   "hoa_policy": {
-    "status": "read_only_dry_run_implemented",
-    "policy_path": "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v1.json",
+    "status": "approved_config_read_only_no_meta_write",
+    "policy_path": "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v2.json",
     "checkpoints": [
       "08:00",
       "12:00",
@@ -143,10 +144,10 @@
     ],
     "timezone": "Europe/Madrid",
     "coexists_with_intraday": true,
-    "initial_suggested_cpmo_target_usd": 2.27,
+    "provisional_cpmo_baseline_usd": 1.15,
     "new_campaign_budget_max_usd": 25.0,
     "replacement_start_time": "next_day_01:00_account_timezone",
-    "target_cpmo_usd": 2.0,
+    "target_cpmo_usd": 1.3,
     "daily_account_cap_usd": 300.0,
     "creative_test_pool_usd": 60.0,
     "loser_final_action": "delete_if_possible_else_archive",

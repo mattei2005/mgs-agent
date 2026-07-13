@@ -17,7 +17,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 BASE = Path('/root/mgs-agent/data/ares/meta-ads')
-POLICY_DEFAULT = BASE / 'policies' / 'openzedfinanzas_cc_es_hoa_v1.json'
+POLICY_DEFAULT = BASE / 'policies' / 'openzedfinanzas_cc_es_hoa_v2.json'
 STATE_DIR = BASE / 'state' / 'hoa'
 REPORT_DIR = BASE / 'reports' / 'hoa'
 COMMON_PATH = Path('/root/mgs-agent/scripts/ares-meta-common.py')

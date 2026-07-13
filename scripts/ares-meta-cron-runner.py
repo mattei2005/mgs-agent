@@ -172,6 +172,15 @@ def active_focus_pg_ids(op_cfg: dict) -> set[str]:
     return {str(x.get('pg_id')) for x in (scope.get('active_focus') or []) if x.get('pg_id')}
 
 
+def normalize_bid_strategy(value: str | None) -> str:
+    strategy = str(value or 'UNKNOWN').strip().upper()
+    aliases = {
+        'LOWEST_COST_NO_CAP': 'LOWEST_COST_WITHOUT_CAP',
+        'LOWEST_COST_WITHOUT_BID_CAP': 'LOWEST_COST_WITHOUT_CAP',
+    }
+    return aliases.get(strategy, strategy)
+
+
 def simulated_action_label(action: str | None) -> str:
     mapping = {
         'pause_campaign': 'eu pausaria',
@@ -229,6 +238,10 @@ def cmp_value(actual, op: str, expected) -> bool:
         return actual < expected
     if op == 'lte':
         return actual <= expected
+    if op == 'in':
+        return actual in expected
+    if op == 'not_in':
+        return actual not in expected
     raise ValueError(f'unsupported op: {op}')
 
 
@@ -254,15 +267,23 @@ def rule_matches(rule: dict, campaign: dict, metrics: dict, op_cfg: dict, tz: Zo
         return False, 'disabled'
     if 'TEST_grace_3_days' in (rule.get('exclusions') or []) and is_test_grace(campaign, op_cfg, tz):
         return False, 'TEST_grace_3_days'
-    bid_strategy = str(campaign.get('bid_strategy') or 'UNKNOWN')
+    bid_strategy = normalize_bid_strategy(campaign.get('bid_strategy'))
     if 'COST_CAP_no_cost_pause' in (rule.get('exclusions') or []) and bid_strategy == 'COST_CAP':
         return False, 'COST_CAP_no_cost_pause'
     for cond in (rule.get('condition') or {}).get('all') or []:
+        expected = cond.get('value')
         if 'metric' in cond:
             actual = metrics.get(cond['metric'])
         else:
-            actual = campaign.get(cond.get('field'))
-        if not cmp_value(actual, cond.get('op'), cond.get('value')):
+            field = cond.get('field')
+            actual = campaign.get(field)
+            if field == 'bid_strategy':
+                actual = normalize_bid_strategy(actual)
+                if isinstance(expected, list):
+                    expected = [normalize_bid_strategy(x) for x in expected]
+                else:
+                    expected = normalize_bid_strategy(expected)
+        if not cmp_value(actual, cond.get('op'), expected):
             return False, None
     return True, None
 
@@ -308,11 +329,13 @@ def fetch_adset_bid_strategies(common, token: str, account_id: str) -> dict[str,
         cid = row.get('campaign_id')
         if not cid:
             continue
-        by_campaign.setdefault(cid, set()).add(row.get('bid_strategy') or 'UNKNOWN')
+        by_campaign.setdefault(cid, set()).add(normalize_bid_strategy(row.get('bid_strategy')))
     out = {}
     for cid, vals in by_campaign.items():
         if 'COST_CAP' in vals:
             out[cid] = 'COST_CAP'
+        elif 'LOWEST_COST_WITHOUT_CAP' in vals:
+            out[cid] = 'LOWEST_COST_WITHOUT_CAP'
         elif 'LOWEST_COST' in vals:
             out[cid] = 'LOWEST_COST'
         else:
@@ -440,22 +463,128 @@ def audit_write(kind: str, event: dict) -> Path:
     return path
 
 
+def atomic_json_write(path: Path, payload: dict, mode: int = 0o600) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(path.suffix + '.tmp')
+    tmp.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + '\n')
+    os.chmod(tmp, mode)
+    tmp.replace(path)
+
+
+def persistence_state_path(operation_id: str, account_id: str) -> Path:
+    override = os.environ.get('ARES_META_INTRADAY_PERSISTENCE_STATE')
+    if override:
+        return Path(override)
+    safe_op = re.sub(r'[^A-Za-z0-9_.-]+', '-', operation_id)
+    safe_account = re.sub(r'[^A-Za-z0-9_.-]+', '-', account_id)
+    return BASE / 'state' / f'intraday-rule-persistence-{safe_op}-{safe_account}.json'
+
+
+def provenance_state_path(operation_id: str, account_id: str) -> Path:
+    override = os.environ.get('ARES_META_CAMPAIGN_PROVENANCE_STATE')
+    if override:
+        return Path(override)
+    safe_op = re.sub(r'[^A-Za-z0-9_.-]+', '-', operation_id)
+    safe_account = re.sub(r'[^A-Za-z0-9_.-]+', '-', account_id)
+    return BASE / 'state' / f'campaign-action-provenance-{safe_op}-{safe_account}.json'
+
+
+def load_json_state(path: Path, default: dict) -> dict:
+    try:
+        value = json.loads(path.read_text()) if path.exists() else default
+        return value if isinstance(value, dict) else default
+    except Exception:
+        return default
+
+
+def checkpoint_bucket(now_local: dt.datetime, interval_minutes: int) -> dt.datetime:
+    minute = (now_local.minute // interval_minutes) * interval_minutes
+    return now_local.replace(minute=minute, second=0, microsecond=0)
+
+
+def apply_persistence(
+    state: dict,
+    campaign_id: str,
+    selected_rule_id: str | None,
+    rule_ids: list[str],
+    checkpoint: dt.datetime,
+    interval_minutes: int,
+) -> int:
+    day = checkpoint.date().isoformat()
+    if state.get('date_local') != day:
+        state.clear()
+        state.update({'schema_version': '1.0', 'date_local': day, 'campaigns': {}})
+    state.setdefault('campaigns', {})
+    campaign_state = state['campaigns'].setdefault(campaign_id, {'rules': {}})
+    rules_state = campaign_state.setdefault('rules', {})
+    selected_count = 0
+    for rule_id in rule_ids:
+        entry = rules_state.setdefault(rule_id, {'count': 0, 'last_matched': False})
+        checkpoint_iso = checkpoint.isoformat(timespec='minutes')
+        if entry.get('last_checkpoint') == checkpoint_iso:
+            if rule_id == selected_rule_id:
+                selected_count = int(entry.get('count') or 0)
+            continue
+        if rule_id == selected_rule_id:
+            previous = None
+            try:
+                previous = dt.datetime.fromisoformat(str(entry.get('last_checkpoint'))) if entry.get('last_checkpoint') else None
+            except Exception:
+                previous = None
+            gap_minutes = None if previous is None else (checkpoint - previous).total_seconds() / 60
+            consecutive = bool(entry.get('last_matched')) and gap_minutes is not None and 0 < gap_minutes <= interval_minutes * 1.5
+            entry['count'] = int(entry.get('count') or 0) + 1 if consecutive else 1
+            entry['last_matched'] = True
+            selected_count = int(entry['count'])
+        else:
+            entry['count'] = 0
+            entry['last_matched'] = False
+        entry['last_checkpoint'] = checkpoint_iso
+    state['updated_at'] = utc_now().isoformat()
+    return selected_count
+
+
+def campaign_budget_usd(campaign: dict, fallback: float = 25.0) -> float:
+    raw = campaign.get('daily_budget')
+    if raw not in (None, ''):
+        try:
+            return float(raw) / 100.0
+        except Exception:
+            pass
+    return float(fallback)
+
+
+def spend_projection_usd(spend_so_far: float, now_local: dt.datetime) -> float:
+    seconds = now_local.hour * 3600 + now_local.minute * 60 + now_local.second
+    elapsed_fraction = max(seconds / 86400.0, 1 / 48)
+    return float(spend_so_far) / elapsed_fraction
+
+
 def run_intraday(args) -> int:
     common = load_common()
     op_cfg = load_operation(args.operation_id)
     ruleset = load_rules(op_cfg)
     token, token_field = common.get_token_from_1password(TOKEN_ITEM)
     tz = ZoneInfo(args.account_tz or 'Europe/Madrid')
+    now_local = utc_now().astimezone(tz)
+    interval_minutes = int((ruleset.get('persistence_policy') or {}).get('checkpoint_interval_minutes') or op_cfg.get('intraday_interval_minutes') or 30)
+    checkpoint = checkpoint_bucket(now_local, interval_minutes)
+    state_path = persistence_state_path(args.operation_id, args.account_id)
+    persistence_state = load_json_state(state_path, {'schema_version': '1.0', 'date_local': checkpoint.date().isoformat(), 'campaigns': {}})
     event = {
         'ts_utc': utc_now().isoformat(),
         'job': 'intraday',
         'operation_id': args.operation_id,
         'account_id': args.account_id,
+        'ruleset': ruleset.get('ruleset'),
         'mode': 'dry_run',
         'write_enabled': False,
         'token_report': {'item': TOKEN_ITEM, 'field': token_field, 'len': len(token)},
         'timezone': str(tz),
+        'checkpoint_local': checkpoint.isoformat(timespec='minutes'),
+        'persistence_state': str(state_path),
         'candidates': [],
+        'pending_persistence': [],
         'errors': [],
     }
     account_name = f'act_{args.account_id}'
@@ -464,61 +593,89 @@ def run_intraday(args) -> int:
         campaigns = fetch_campaigns(common, token, args.account_id)
         adset_bids = fetch_adset_bid_strategies(common, token, args.account_id)
         insights = fetch_today_insights(common, token, args.account_id)
+        insights_by_campaign = {str(row.get('campaign_id') or ''): row for row in insights if row.get('campaign_id')}
         for cid, bid in adset_bids.items():
             if cid in campaigns and not campaigns[cid].get('bid_strategy'):
                 campaigns[cid]['bid_strategy'] = bid
-        by_prio = sorted(ruleset.get('rules') or [], key=lambda r: int(r.get('priority') or 99))
-        for row in insights:
-            cid = str(row.get('campaign_id') or '')
-            campaign = campaigns.get(cid, {'id': cid, 'name': row.get('campaign_name'), 'effective_status': 'UNKNOWN'})
+        by_prio = sorted([r for r in (ruleset.get('rules') or []) if r.get('enabled')], key=lambda r: int(r.get('priority') or 99))
+        rule_ids = [str(r.get('id')) for r in by_prio]
+        for cid, campaign in campaigns.items():
+            row = insights_by_campaign.get(cid) or {'campaign_id': cid, 'campaign_name': campaign.get('name'), 'spend': 0, 'actions': []}
             metrics = derive_metrics(row)
+            campaign_name = campaign.get('name') or row.get('campaign_name') or cid
+            pg_id = page_id_from_name(campaign_name)
+            in_scope, scope_reason = is_in_management_scope(op_cfg, pg_id)
             in_learning_grace, age_days, grace_days = is_learning_grace(campaign, op_cfg, tz)
-            for rule in by_prio:
-                match, excluded = rule_matches(rule, campaign, metrics, op_cfg, tz)
-                if excluded:
-                    continue
-                if match:
-                    campaign_name = campaign.get('name') or row.get('campaign_name')
-                    pg_id = page_id_from_name(campaign_name)
-                    in_scope, scope_reason = is_in_management_scope(op_cfg, pg_id)
-                    if not in_scope:
-                        event.setdefault('skipped_scope', []).append({'campaign_id': cid, 'campaign_name': campaign_name, 'pg_id': pg_id, 'reason': scope_reason})
+            in_test_grace = is_test_grace(campaign, op_cfg, tz)
+            selected_rule = None
+            if in_scope and not in_learning_grace and not in_test_grace:
+                for rule in by_prio:
+                    match, excluded = rule_matches(rule, campaign, metrics, op_cfg, tz)
+                    if excluded:
+                        continue
+                    if match:
+                        selected_rule = rule
                         break
-                    action = rule.get('action')
-                    simulated_action = simulated_action_label(action)
-                    reason = rule_display(rule)
-                    mode = 'dry_run_no_write'
-                    if in_learning_grace and action in {'pause_campaign', 'reactivate_campaign'}:
-                        action = 'observe_learning'
-                        simulated_action = simulated_action_label(action)
-                        age_label = 'desconhecida' if age_days is None else f'{age_days:.2f}d'
-                        reason = f'Learning < {grace_days:g}d; regra acionou ({rule_display(rule)}), mas é só informativo. Idade {age_label}'
-                        mode = 'learning_grace_info_no_action'
-                    seq = len(event['candidates']) + 1
-                    event['candidates'].append({
-                        'rec_id': recommendation_id(tz, seq),
-                        'pg_id': pg_id,
-                        'page_name': page_name_from_campaign(campaign_name),
-                        'country_vertical': country_vertical_from_name(campaign_name, op_cfg),
-                        'rule': rule_display(rule),
-                        'status': campaign.get('effective_status'),
-                        'action': action,
-                        'simulated_action': simulated_action,
-                        'reason': reason,
-                        'campaign_id': cid,
-                        'campaign_name': campaign_name,
-                        'campaign_display_name': display_campaign_name(campaign_name),
-                        'start_date': fmt_start_date(campaign, tz),
-                        'bid_strategy': campaign.get('bid_strategy') or 'UNKNOWN',
-                        'spend': round(metrics['spend'], 2),
-                        'MO': int(metrics['MO']) if float(metrics['MO']).is_integer() else metrics['MO'],
-                        'CPMO': None if metrics['CPMO'] is None else round(metrics['CPMO'], 2),
-                        'campaign_age_days': None if age_days is None else round(age_days, 2),
-                        'learning_grace_days': grace_days,
-                        'mode': mode,
-                    })
-                    break
-        event['summary'] = {'campaigns_seen': len(campaigns), 'insight_rows': len(insights), 'candidate_count': len(event['candidates'])}
+            elif not in_scope:
+                event.setdefault('skipped_scope', []).append({'campaign_id': cid, 'campaign_name': campaign_name, 'pg_id': pg_id, 'reason': scope_reason})
+            elif in_learning_grace or in_test_grace:
+                event.setdefault('skipped_grace', []).append({
+                    'campaign_id': cid,
+                    'campaign_name': campaign_name,
+                    'reason': 'TEST_grace_3_days' if in_test_grace else 'learning_grace_3_days',
+                    'campaign_age_days': None if age_days is None else round(age_days, 2),
+                })
+            selected_rule_id = str(selected_rule.get('id')) if selected_rule else None
+            consecutive = apply_persistence(persistence_state, cid, selected_rule_id, rule_ids, checkpoint, interval_minutes)
+            if not selected_rule:
+                continue
+            required = int((selected_rule.get('persistence') or {}).get('consecutive_checkpoints') or (ruleset.get('persistence_policy') or {}).get('required') or 1)
+            persistence_label = f'{consecutive}/{required} checkpoints'
+            if consecutive < required:
+                event['pending_persistence'].append({
+                    'campaign_id': cid,
+                    'campaign_name': campaign_name,
+                    'pg_id': pg_id,
+                    'rule': selected_rule_id,
+                    'persistence': persistence_label,
+                    'spend': round(metrics['spend'], 2),
+                    'MO': int(metrics['MO']) if float(metrics['MO']).is_integer() else metrics['MO'],
+                    'CPMO': None if metrics['CPMO'] is None else round(metrics['CPMO'], 2),
+                })
+                continue
+            seq = len(event['candidates']) + 1
+            reason = f'{rule_display(selected_rule)}; persistência {persistence_label}'
+            event['candidates'].append({
+                'rec_id': recommendation_id(tz, seq),
+                'pg_id': pg_id,
+                'page_name': page_name_from_campaign(campaign_name),
+                'country_vertical': country_vertical_from_name(campaign_name, op_cfg),
+                'rule': rule_display(selected_rule),
+                'status': campaign.get('effective_status'),
+                'action': selected_rule.get('action'),
+                'simulated_action': simulated_action_label(selected_rule.get('action')),
+                'reason': reason,
+                'campaign_id': cid,
+                'campaign_name': campaign_name,
+                'campaign_display_name': display_campaign_name(campaign_name),
+                'start_date': fmt_start_date(campaign, tz),
+                'bid_strategy': normalize_bid_strategy(campaign.get('bid_strategy')),
+                'spend': round(metrics['spend'], 2),
+                'MO': int(metrics['MO']) if float(metrics['MO']).is_integer() else metrics['MO'],
+                'CPMO': None if metrics['CPMO'] is None else round(metrics['CPMO'], 2),
+                'campaign_age_days': None if age_days is None else round(age_days, 2),
+                'learning_grace_days': grace_days,
+                'persistence_count': consecutive,
+                'persistence_required': required,
+                'mode': 'dry_run_no_write',
+            })
+        atomic_json_write(state_path, persistence_state)
+        event['summary'] = {
+            'campaigns_seen': len(campaigns),
+            'insight_rows': len(insights),
+            'pending_persistence_count': len(event['pending_persistence']),
+            'candidate_count': len(event['candidates']),
+        }
     except Exception as e:
         event['errors'].append(str(e)[:1000])
     audit = audit_write('intraday', event)
@@ -532,8 +689,8 @@ def run_intraday(args) -> int:
             r['campaign_short'] = compact_campaign_name(r.get('campaign_display_name') or r.get('campaign_name'))
             r['reason_short'] = compact_reason(r.get('reason'))
             r['CPMO'] = '' if r['CPMO'] is None else r['CPMO']
-        prefix = '<@344196393512075265> dry-run intraday: análise real sem write. Learning <3d = informativo; sem pausar/reativar.'
-        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta — decisões simuladas'), rows, [('rec_short','REC'),('campaign_short','Campanha'),('pg_id','PG'),('start_date','Início'),('spend','Spend'),('MO','MO'),('CPMO','CPMO'),('simulated_action','Ação'),('reason_short','Motivo'),('status','Status')], prefix=prefix))
+        prefix = '<@344196393512075265> dry-run intraday v2: 2 checkpoints confirmados; análise real sem write.'
+        print(output_table(fmt_account_title(account_name, tz, 'Intraday Meta v2 — decisões simuladas'), rows, [('rec_short','REC'),('campaign_short','Campanha'),('pg_id','PG'),('start_date','Início'),('spend','Spend'),('MO','MO'),('CPMO','CPMO'),('simulated_action','Ação'),('reason_short','Motivo'),('status','Status')], prefix=prefix))
     else:
         maybe_output_intraday_heartbeat(event, account_name, tz, audit)
     return 0
@@ -542,15 +699,27 @@ def run_intraday(args) -> int:
 def run_reactivate_all(args) -> int:
     common = load_common()
     op_cfg = load_operation(args.operation_id)
+    ruleset = load_rules(op_cfg)
     token, token_field = common.get_token_from_1password(TOKEN_ITEM)
+    tz = ZoneInfo(args.account_tz or 'Europe/Madrid')
+    now_local = utc_now().astimezone(tz)
+    reactivate_cfg = ruleset.get('reactivate_all') or {}
+    gates = reactivate_cfg.get('gates') or {}
+    provenance_path = provenance_state_path(args.operation_id, args.account_id)
+    provenance = load_json_state(provenance_path, {'schema_version': '1.0', 'campaigns': {}})
+    allowed_origin = str(reactivate_cfg.get('allowed_pause_origin') or 'paused_by_ares_rule')
     event = {
         'ts_utc': utc_now().isoformat(),
-        'job': 'reactivate_all',
+        'job': 'reactivate_safe_00_30',
+        'legacy_cli_job': 'reactivate-all',
         'operation_id': args.operation_id,
         'account_id': args.account_id,
+        'ruleset': ruleset.get('ruleset'),
         'mode': 'dry_run',
         'write_enabled': False,
         'token_report': {'item': TOKEN_ITEM, 'field': token_field, 'len': len(token)},
+        'provenance_state': str(provenance_path),
+        'allowed_pause_origin': allowed_origin,
         'candidates': [],
         'errors': [],
         'exclusion_list': op_cfg.get('reactivate_exclusion_list') or [],
@@ -559,49 +728,104 @@ def run_reactivate_all(args) -> int:
     try:
         account_name = fetch_account_name(common, token, args.account_id)
         campaigns = fetch_campaigns(common, token, args.account_id)
+        insights = fetch_today_insights(common, token, args.account_id)
+        spend_so_far = sum(float(row.get('spend') or 0) for row in insights)
+        active_campaigns = [c for c in campaigns.values() if c.get('effective_status') == 'ACTIVE']
+        max_active = int(gates.get('max_active_campaigns') or 12)
+        cap = float(gates.get('daily_account_cap_usd') or 300.0)
+        budget_max = float(gates.get('candidate_daily_budget_max_usd') or 25.0)
+        configured_active_budget = sum(campaign_budget_usd(c, budget_max) for c in active_campaigns)
+        run_rate_projection = spend_projection_usd(spend_so_far, now_local)
+        projected_spend = max(configured_active_budget, run_rate_projection)
+        projected_active_count = len(active_campaigns)
+        event['gates'] = {
+            'daily_account_cap_usd': cap,
+            'max_active_campaigns': max_active,
+            'candidate_daily_budget_max_usd': budget_max,
+            'active_campaigns_before': projected_active_count,
+            'configured_active_budget_usd': round(configured_active_budget, 2),
+            'spend_so_far_usd': round(spend_so_far, 2),
+            'run_rate_projection_usd': round(run_rate_projection, 2),
+            'base_projected_spend_usd': round(projected_spend, 2),
+        }
         exclusions = set(op_cfg.get('reactivate_exclusion_list') or []) | manual_hold_pg_ids(op_cfg)
-        for campaign in campaigns.values():
+        provenance_campaigns = provenance.get('campaigns') or {}
+        for campaign in sorted(campaigns.values(), key=lambda c: str(c.get('id'))):
             if campaign.get('effective_status') != 'PAUSED':
                 continue
+            campaign_id = str(campaign.get('id') or '')
             campaign_name = campaign.get('name')
-            in_learning_grace, age_days, grace_days = is_learning_grace(campaign, op_cfg, ZoneInfo(args.account_tz or 'Europe/Madrid'))
+            pg_id = page_id_from_name(campaign_name)
+            record = provenance_campaigns.get(campaign_id) or {}
+            pause_origin = str(record.get('pause_origin') or 'unknown')
+            if pause_origin != allowed_origin:
+                event.setdefault('skipped_provenance', []).append({
+                    'campaign_id': campaign_id,
+                    'campaign_name': campaign_name,
+                    'pg_id': pg_id,
+                    'pause_origin': pause_origin,
+                    'reason': 'pause_origin_not_allowed',
+                })
+                continue
+            in_learning_grace, age_days, grace_days = is_learning_grace(campaign, op_cfg, tz)
             if in_learning_grace:
                 event.setdefault('skipped_learning_grace', []).append({
-                    'campaign_id': campaign.get('id'),
+                    'campaign_id': campaign_id,
                     'campaign_name': campaign_name,
                     'age_days': None if age_days is None else round(age_days, 2),
                     'learning_grace_days': grace_days,
                     'reason': 'learning_grace_no_reactivate_action',
                 })
                 continue
-            pg_id = page_id_from_name(campaign_name)
             in_scope, scope_reason = is_in_management_scope(op_cfg, pg_id)
-            if campaign.get('id') in exclusions or campaign.get('name') in exclusions or pg_id in exclusions or not in_scope:
-                event.setdefault('skipped_scope', []).append({'campaign_id': campaign.get('id'), 'campaign_name': campaign_name, 'pg_id': pg_id, 'reason': 'manual_hold_or_exclusion' if pg_id in exclusions else scope_reason})
+            if campaign_id in exclusions or campaign_name in exclusions or pg_id in exclusions or not in_scope:
+                event.setdefault('skipped_scope', []).append({'campaign_id': campaign_id, 'campaign_name': campaign_name, 'pg_id': pg_id, 'reason': 'manual_hold_or_exclusion' if pg_id in exclusions else scope_reason})
                 continue
+            candidate_budget = campaign_budget_usd(campaign, budget_max)
+            if candidate_budget > budget_max:
+                event.setdefault('skipped_budget', []).append({'campaign_id': campaign_id, 'reason': 'candidate_budget_above_max', 'candidate_budget_usd': round(candidate_budget, 2)})
+                continue
+            if projected_active_count + 1 > max_active:
+                event.setdefault('skipped_cap', []).append({'campaign_id': campaign_id, 'reason': 'active_campaign_count_cap', 'projected_active_count': projected_active_count + 1, 'max_active_campaigns': max_active})
+                continue
+            if projected_spend + candidate_budget > cap:
+                event.setdefault('skipped_cap', []).append({'campaign_id': campaign_id, 'reason': 'projected_spend_cap', 'projected_spend_usd': round(projected_spend + candidate_budget, 2), 'cap_usd': cap})
+                continue
+            projected_active_count += 1
+            projected_spend += candidate_budget
             seq = len(event['candidates']) + 1
             event['candidates'].append({
-                'rec_id': recommendation_id(ZoneInfo(args.account_tz or 'Europe/Madrid'), seq),
+                'rec_id': recommendation_id(tz, seq),
                 'pg_id': pg_id,
                 'page_name': page_name_from_campaign(campaign_name),
                 'country_vertical': country_vertical_from_name(campaign_name, op_cfg),
-                'rule': 'reativar-todas',
-                'reason': 'campanha pausada dentro do escopo; simularia reativação',
+                'rule': 'reativar-00:30-paused_by_ares_rule',
+                'reason': 'proveniência paused_by_ares_rule confirmada; gates de quantidade e cap aprovados',
                 'status': campaign.get('effective_status'),
                 'action': 'reactivate_campaign',
                 'simulated_action': simulated_action_label('reactivate_campaign'),
-                'campaign_id': campaign.get('id'),
+                'campaign_id': campaign_id,
                 'campaign_name': campaign_name,
                 'campaign_display_name': display_campaign_name(campaign_name),
-                'start_date': fmt_start_date(campaign, ZoneInfo(args.account_tz or 'Europe/Madrid')),
+                'start_date': fmt_start_date(campaign, tz),
+                'candidate_budget_usd': round(candidate_budget, 2),
+                'projected_active_count': projected_active_count,
+                'projected_spend_usd': round(projected_spend, 2),
                 'mode': 'dry_run_no_write',
             })
-        event['summary'] = {'campaigns_seen': len(campaigns), 'candidate_count': len(event['candidates'])}
+        event['summary'] = {
+            'campaigns_seen': len(campaigns),
+            'paused_seen': sum(1 for c in campaigns.values() if c.get('effective_status') == 'PAUSED'),
+            'skipped_unknown_or_forbidden_provenance': len(event.get('skipped_provenance') or []),
+            'candidate_count': len(event['candidates']),
+            'projected_active_count_after': projected_active_count,
+            'projected_spend_usd_after': round(projected_spend, 2),
+        }
     except Exception as e:
         event['errors'].append(str(e)[:1000])
     audit = audit_write('reactivate-all', event)
     if event['errors']:
-        print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — ERRO'), [{'erro': event['errors'][0], 'audit': str(audit)}], [('erro','Erro'),('audit','Audit')], prefix='<@344196393512075265> erro no cron reativar-todas Meta.'))
+        print(output_table(fmt_account_title(account_name, tz, 'Reativação segura 00:30 — ERRO'), [{'erro': event['errors'][0], 'audit': str(audit)}], [('erro','Erro'),('audit','Audit')], prefix='<@344196393512075265> erro no cron de reativação segura 00:30.'))
         return 0
     if event['candidates']:
         rows = event['candidates']
@@ -609,8 +833,8 @@ def run_reactivate_all(args) -> int:
             r['rec_short'] = compact_rec_id(r.get('rec_id'))
             r['campaign_short'] = compact_campaign_name(r.get('campaign_display_name') or r.get('campaign_name'))
             r['reason_short'] = compact_reason(r.get('reason'))
-        prefix = '<@344196393512075265> dry-run reativar-todas: ações simuladas; nenhum write executado.'
-        print(output_table(fmt_account_title(account_name, ZoneInfo(args.account_tz or 'Europe/Madrid'), 'Reativar-todas Meta — decisões simuladas'), rows, [('rec_short','REC'),('campaign_short','Campanha'),('pg_id','PG'),('start_date','Início'),('simulated_action','Ação'),('reason_short','Motivo'),('status','Status')], prefix=prefix))
+        prefix = '<@344196393512075265> dry-run reativação 00:30: somente paused_by_ares_rule; nenhum write executado.'
+        print(output_table(fmt_account_title(account_name, tz, 'Reativação segura 00:30 — decisões simuladas'), rows, [('rec_short','REC'),('campaign_short','Campanha'),('pg_id','PG'),('start_date','Início'),('simulated_action','Ação'),('reason_short','Motivo'),('status','Status')], prefix=prefix))
     return 0
 
 
