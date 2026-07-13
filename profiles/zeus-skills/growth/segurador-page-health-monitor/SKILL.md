@@ -1,7 +1,7 @@
 ---
 name: segurador-page-health-monitor
 description: "Use when monitoring or designing alerts for MGS segurador/profile tokens and the Facebook Pages inside them, especially page access, publication status, bot subscription, Messenger conversations, and SB/ChatPion lead drops. This is separate from Meta app/rate-limit monitoring."
-version: 1.0.0
+version: 1.1.0
 author: Hermes Agent
 license: MIT
 metadata:
@@ -28,6 +28,22 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Critical: segurador/profile fell → Risk/Critical: page stopped receiving leads** → `references/route-pack-02.md`
 - **Purple template / approval errors → DigitalTRChat Bot Error Audit** → `references/route-pack-03.md`
 - **Alert Format → Common Pitfalls** → `references/route-pack-04.md`
+- **Restricted-page delta alerts, Smart Bidding lifecycle, and gestores-facing Google Sheet** → `references/restricted-pages-discord-domino-flow-2026-07-09.md`
+
+## Restricted-page shared-sheet invariants
+
+When the task touches the gestores-facing restricted-pages Sheet, apply these rules before writing:
+
+- Do not generate per-run XLSX files. Maintain the single shared Google Sheet and use its link in Discord alerts.
+- `Paginas` is the consolidated view and contains only current active restricted pages with `Status SB = Broadcast`, after active-user scope and the global ignore list. Never include On-hold, Ready, Campaign, blank-status, expired, unrestricted, or diagnostic rows.
+- Maintain one dynamic tab per concrete site. A multi-site page belongs in each matching site tab; blank/`?` does not create a tab.
+- Reconcile incrementally: update `Paginas` plus only site tabs whose desired rows changed because of additions, removals, field changes, or duplicate repair. Leave unrelated site tabs untouched.
+- Use idempotent upsert, never blind append. Stable key: primary `bot user + Page ID`; fallback `FB Page ID`. Validate zero duplicate keys after every write.
+- `Data saída`/`Restricted Until` is inclusive. Keep the page through that date, remove it on the next calendar day, and upsert it back once if a later active restriction occurs.
+- Keep all managed tabs wide and no-wrap/clip for legibility; validate exact rows and headers by API readback.
+- Never recreate `Resumo` or `Inventario Step1`. Deleting any existing tab remains a Critical Subset action requiring backup and confirmation.
+
+Detailed lifecycle, Discord dedupe, baseline, and Sheet rules live in `references/restricted-pages-discord-domino-flow-2026-07-09.md`.
 
 ## Context-efficiency guardrails
 
