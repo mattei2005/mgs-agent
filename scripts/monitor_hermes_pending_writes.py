@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Monitor staged Hermes memory/skill writes without reading their content.
 
-Default mode updates a small anti-spam state and sends Discord embeds only for
-items aged >= threshold, daily reminders, scanner errors, and recovery. The
-``--summary-json`` mode is strictly read-only and is used by REPORT-INFRA.
+Default mode updates a small anti-spam state and sends Discord embeds for
+items aged >= threshold, memory/user stores at or above the capacity threshold,
+daily reminders, scanner errors, and recovery. The ``--summary-json`` mode is
+strictly read-only and is used by REPORT-INFRA.
 """
 from __future__ import annotations
 

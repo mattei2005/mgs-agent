@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-12T23:52:15-04:00",
+    "updated_at": "2026-07-13T00:01:14-04:00",
     "generated_by": "zeus"
   },
   "system_packages": [
@@ -1960,7 +1960,21 @@
       },
       "validation": "8/8 monitor unit tests PASS; aged fixture emitted one alert then anti-spam; scanner error preserves last confirmed aged set; staged content absent from payload; production scan total=18 aged=0 errors=0; report helper normal and scanner-failure fallback PASS; cron readback PASS.",
       "status": "active",
-      "updated_at": "2026-07-12T22:00:20-04:00"
+      "updated_at": "2026-07-12T23:59:41-04:00",
+      "capacity_threshold_percent": 80,
+      "capacity_scope": [
+        "zeus.memory",
+        "zeus.user",
+        "atena.memory",
+        "atena.user",
+        "ares.memory",
+        "ares.user"
+      ],
+      "capacity_behavior": "metadata-only chars/limit/percent; first crossing, new store, daily reminder, recovery; scanner errors preserve last confirmed state",
+      "script_sha256": "bb957d0e214acc89a6189f2750e0e7d459a14fbef0037dc7b75d2e43bc71c59e",
+      "tests_sha256": "92a44b0f9d0b0748483dd170ed7b8f686ca57210f4666bc9afffd67ed1b6c6eb",
+      "last_validation": "23/23 combined store+monitor tests PASS; py_compile PASS; production alert sent and read back; no memory content exposed",
+      "last_alert_message_id": "1526075417860112424"
     },
     {
       "id": "mgs-pendencia-transactional-store-20260712",
@@ -2094,16 +2108,33 @@
         "message_id": "1526069487374307469"
       },
       "memory_compaction": {
-        "status": "proposal_only_no_write",
+        "status": "full_diff_presented_not_applied",
         "current_memory_chars": 2170,
         "proposed_memory_chars": 260,
         "current_user_chars": 1375,
         "proposed_user_chars": 782
       },
       "backup": "/root/.mgs-backups/hermes-write-approvals/20260712-233415",
-      "validation": "Approved pending IDs removed; live/versioned mirrors byte-identical; current router staged only and absent live; dbefcf9d/12261f26 retained; Ares evidence request posted and read back; memory/user files unchanged.",
+      "validation": "Approved pending IDs removed; mirrors byte-identical; router 62c11426 staged only; dbefcf9d/12261f26 retained; Ares evidence request read back; memory/user unchanged; canonical-source matrix and full compaction diff prepared.",
       "status": "validated",
-      "updated_at": "2026-07-12T23:52:15-04:00"
+      "updated_at": "2026-07-13T00:01:14-04:00",
+      "dbefcf9d_evidence": {
+        "status": "reproduced_and_independently_verified_pending_human_decision",
+        "thread_id": "1526069487374307469",
+        "evidence_report_sha256": "f6093220a7bbc3f99af927f96a0b593abbdcb35a46e5bd0d979e0f2c6c31548e",
+        "depth10": {
+          "mediaLinkedToCardCount": 0,
+          "selectedLibraryId": null
+        },
+        "depth40": {
+          "mediaLinkedToCardCount": 53,
+          "selectedLibraryId": "911928715213204"
+        },
+        "same_selected_media_sha256": "d08467483e0e6e4f9f8c9647b37a8173d71622afba4864e79c15f5192d6a4b3f",
+        "canonical_collector_sha256": "de918767ef6827c7607d7c10d4c0393235d71080fb4cd32e5b56d7dadca877e4",
+        "canonical_git_diff_exit_code": 0,
+        "pending_sha256": "39661f566024a70607492700ce5c1819db3f9911d4a35a6a1bdfdf3c7cb4d26e"
+      }
     }
   ],
   "profile_skill_references": [
