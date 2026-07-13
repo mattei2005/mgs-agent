@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-12T21:14:45-04:00",
+    "updated_at": "2026-07-12T21:20:26-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -534,6 +534,29 @@
       "updated_at": "2026-07-12T20:49:52-04:00"
     },
     {
+      "id": "hostinger-swapfile-hardening-20260712",
+      "agent": "zeus",
+      "type": "host_os_memory_hardening",
+      "path": "/swapfile",
+      "size_bytes": 4294967296,
+      "swap_capacity_bytes": 4294963200,
+      "mode": "0600",
+      "owner": "root:root",
+      "fstab_entry": "/swapfile none swap sw 0 0",
+      "sysctl_path": "/etc/sysctl.d/99-mgs-swap.conf",
+      "swappiness": 10,
+      "backup_path": "/root/mgs-agent/backups/fstab-pre-swap-20260712T2059-0400",
+      "sha256": {
+        "swapfile": "1e9d4a78c74d6344a691821c9db391d5ef81fe29d7af96391eb47998021a74d2",
+        "fstab": "b3733cf544b304cc0391bff423c212584b57057663cb67d465351ac404932225",
+        "sysctl": "81e77b3ef550c013ce34e8aa64066deec7434967eaf25f228daed639ba41213a",
+        "fstab_backup": "839b7820c3e3159b787c94cee40028ad7005f3eaec7f76e133a7053a57117a5f"
+      },
+      "validation": "swapfile.swap loaded/active from /etc/fstab; swapon capacity 4 GiB; free reports 4.0 GiB swap; vm.swappiness=10; metadata root:root 0600; findmnt 0 parse errors/0 errors; systemd running; no service restarted.",
+      "status": "active_persistent_validated",
+      "updated_at": "2026-07-12T21:20:26-04:00"
+    },
+    {
       "id": "finanzas-topfeed-preloader-css-failsafe-20260711",
       "agent": "zeus",
       "type": "wordpress_production_config",
@@ -1033,14 +1056,14 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 64603,
-      "modified_at": "2026-07-12T20:27:40-04:00",
-      "sha256": "107871f1adccad027d46dcade8705210995ce33da68be1d3ce5b9279731966b0",
+      "size_bytes": 65108,
+      "modified_at": "2026-07-12T21:01:39-04:00",
+      "sha256": "569c2ded99eb1d3cfdf18164d1ab9df89c2723719907c80bd45a50bdd263139c",
       "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; current-user tables now render every row and split across Discord-safe messages instead of hiding overflow.",
-      "validation": "2026-07-12: bash -n and embedded Python compile PASS; full dry-run exit 0 with 11 item-get calls by item/vault ID, zero errors and no credential output.",
-      "updated_at": "2026-07-12T20:44:00-04:00",
+      "validation": "2026-07-12: dry-run full rc=0 with 11 item-get calls and unchanged state hash; synthetic sheet update planned without token/write; stale failed-app snapshot preserved; production 21:04 cycle errors=0, apps=11, sheet updated=false.",
+      "updated_at": "2026-07-12T21:20:00-04:00",
       "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
-      "last_change": "2026-07-12: item discovery moved to protected non-secret metadata index; each Meta app now uses one full-item read; Discord transport uses local Zeus bot token."
+      "last_change": "2026-07-12: dry-run blocks Sheets/state writes; reconciliation accepts only apps checked successfully in the current cycle."
     },
     {
       "id": "hera-fix-car-br-pt-drive-parent-20260702",
@@ -1070,21 +1093,21 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
-      "size_bytes": 26204,
-      "modified_at": "2026-07-12T20:26:31-04:00",
-      "sha256": "9dc6810a33becc963f22cd0f501d77100839965d51764125cefca16bcf64a12d",
+      "size_bytes": 28944,
+      "modified_at": "2026-07-12T21:13:45-04:00",
+      "sha256": "edc8fa4966f39dc7246edbbb38d4e41e6eae49a26b7a78d3ba6d953077af53af",
       "owner": "Zeus/Ops",
       "type": "profile_script",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor. Reads B011 config from 1Password, logs into DigitalTRChat bot accounts, switches segurador, validates active OAuth connection with Meta /debug_token against B011 app_id, and stores sanitized state. 0 pages does not mean disconnected.",
       "cron_job_id": "498fb0d95e10",
       "schedule": "24 8-23 * * *",
-      "validation": "2026-07-12: bash -n and embedded Python compile PASS; one-target dry-run rc=0 linked=1/1 with 2 item-get calls; full dry-run rc=0, targets=28, linked=23 and 23 item-get calls by item/vault ID.",
-      "updated_at": "2026-07-12T20:44:00-04:00",
+      "validation": "2026-07-12: tri-state fail-closed validated; unknown rows preserve Sheets and use stable item ID; full dry-run rc=0 targets=28 linked=23 unlinked_confirmed=5 unknown=0 with 23 item-get calls; latest one-target rc=0 linked=1 unknown=0.",
+      "updated_at": "2026-07-12T21:20:00-04:00",
       "source_report": "REPORT-INFRA Zeus B011 same-plan cron alignment 2026-07-04",
       "id": "zeus-b011-dtr-link-watch-script",
       "agent": "zeus",
-      "last_change": "2026-07-12: shared protected DTR metadata map; one full-item read per login; local Zeus Discord token; no credential values persisted."
+      "last_change": "2026-07-12: stable item IDs and tri-state verdicts; only confirmed unlinked writes X; unknown preserves Sheets and alerts infra after two consecutive inconclusive runs."
     },
     {
       "id": "skill-ref-meta-app-roles-b011-sheet-gid-2026-07-04.md-be5bc1",
@@ -1110,34 +1133,34 @@
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
-      "size_bytes": 26204,
-      "modified_at": "2026-07-12T20:26:31-04:00",
-      "sha256": "9dc6810a33becc963f22cd0f501d77100839965d51764125cefca16bcf64a12d",
+      "size_bytes": 28944,
+      "modified_at": "2026-07-12T21:13:45-04:00",
+      "sha256": "edc8fa4966f39dc7246edbbb38d4e41e6eae49a26b7a78d3ba6d953077af53af",
       "id": "zeus-b011-dtr-link-watch-script",
       "agent": "zeus",
       "type": "profile_script",
       "owner": "Zeus/Ops",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor, renamed from temporary B011 label; validates OAuth connection and syncs X in sheet.",
-      "updated_at": "2026-07-12T20:44:00-04:00",
-      "validation": "2026-07-12: bash -n and embedded Python compile PASS; one-target dry-run rc=0 linked=1/1 with 2 item-get calls; full dry-run rc=0, targets=28, linked=23 and 23 item-get calls by item/vault ID.",
-      "last_change": "2026-07-12: shared protected DTR metadata map; one full-item read per login; local Zeus Discord token; no credential values persisted.",
+      "updated_at": "2026-07-12T21:20:00-04:00",
+      "validation": "2026-07-12: tri-state fail-closed validated; unknown rows preserve Sheets and use stable item ID; full dry-run rc=0 targets=28 linked=23 unlinked_confirmed=5 unknown=0 with 23 item-get calls; latest one-target rc=0 linked=1 unknown=0.",
+      "last_change": "2026-07-12: stable item IDs and tri-state verdicts; only confirmed unlinked writes X; unknown preserves Sheets and alerts infra after two consecutive inconclusive runs.",
       "schedule": "24 8-23 * * *"
     },
     {
       "path": "/root/.hermes/profiles/zeus/scripts/b011-dtr-link-watch.sh",
-      "size_bytes": 26204,
-      "modified_at": "2026-07-12T20:26:31-04:00",
-      "sha256": "9dc6810a33becc963f22cd0f501d77100839965d51764125cefca16bcf64a12d",
+      "size_bytes": 28944,
+      "modified_at": "2026-07-12T21:13:45-04:00",
+      "sha256": "edc8fa4966f39dc7246edbbb38d4e41e6eae49a26b7a78d3ba6d953077af53af",
       "owner": "Zeus/Ops",
       "type": "hermes_profile_script",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor. Reads BOT B011 Token, validates account-level OAuth link via Meta /debug_token, treats page count as separate inventory, and alerts channel 1522830283240505385 on anomalies.",
       "cron_job_id": "498fb0d95e10",
       "schedule": "24 8-23 * * *",
-      "validation": "2026-07-12: bash -n and embedded Python compile PASS; one-target dry-run rc=0 linked=1/1 with 2 item-get calls; full dry-run rc=0, targets=28, linked=23 and 23 item-get calls by item/vault ID.",
-      "updated_at": "2026-07-12T20:44:00-04:00",
-      "last_change": "2026-07-12: shared protected DTR metadata map; one full-item read per login; local Zeus Discord token; no credential values persisted."
+      "validation": "2026-07-12: tri-state fail-closed validated; unknown rows preserve Sheets and use stable item ID; full dry-run rc=0 targets=28 linked=23 unlinked_confirmed=5 unknown=0 with 23 item-get calls; latest one-target rc=0 linked=1 unknown=0.",
+      "updated_at": "2026-07-12T21:20:00-04:00",
+      "last_change": "2026-07-12: stable item IDs and tri-state verdicts; only confirmed unlinked writes X; unknown preserves Sheets and alerts infra after two consecutive inconclusive runs."
     },
     {
       "id": "mgs-1password-metadata-cache-20260712",
@@ -1156,8 +1179,8 @@
         "DigitalTRChat usernames"
       ],
       "purpose": "Share non-secret 1Password discovery metadata across recurring MGS jobs and prevent repeated field-by-field lookups.",
-      "validation": "2026-07-12: cache scoped to 90 DigitalTRChat and 12 BOT items; no private-key/access-token markers; 8 concurrent synthetic processes produced one vault get, one item list and one item get; secret_persisted=false.",
-      "updated_at": "2026-07-12T20:44:00-04:00"
+      "validation": "2026-07-12: schema=2 on index/map; 8 concurrent processes collapsed to one vault/list/item read; separate index/DTR locks bounded at 120s with zero-call stale metadata fallback; force_refresh propagates; deleted/renamed title gets one index refresh/retry; cache contains no private-key/access-token markers.",
+      "updated_at": "2026-07-12T21:20:00-04:00"
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
@@ -1637,8 +1660,8 @@
       "timezone": "America/New_York",
       "enabled": true,
       "purpose": "Full Meta app roles/admin and sheet reconciliation for B001-B010/B005-2.",
-      "validation": "Cron readback enabled; phase-2 full dry-run exit 0 with 11 item-get calls by item/vault ID and no output/errors.",
-      "updated_at": "2026-07-12T20:44:00-04:00"
+      "validation": "Cron readback enabled; production 21:04 ET cycle errors=0, apps=11, sheet updated=false; subsequent full dry-run rc=0, 11 item-get calls and state hash unchanged.",
+      "updated_at": "2026-07-12T21:20:00-04:00"
     },
     {
       "id": "zeus-hermes-cron-b011-dtr-link-watch",
@@ -1652,8 +1675,8 @@
       "timezone": "America/New_York",
       "enabled": true,
       "purpose": "B011 DTR/ChatPion OAuth link and page connection reconciliation.",
-      "validation": "Enabled schedule readback; phase-2 full dry-run rc=0, targets=28, linked=23, 23 item-get calls by item/vault ID.",
-      "updated_at": "2026-07-12T20:44:00-04:00"
+      "validation": "Enabled schedule readback; tri-state full dry-run rc=0, targets=28, linked=23, unlinked_confirmed=5, unknown=0, 23 item-get calls by item/vault ID.",
+      "updated_at": "2026-07-12T21:20:00-04:00"
     },
     {
       "id": "hera-meta-library-dedicated-us-residential",
@@ -2808,8 +2831,10 @@
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.py",
-      "size_bytes": 15540,
-      "modified_at": "2026-07-12T21:04:32-04:00"
+      "size_bytes": 15649,
+      "modified_at": "2026-07-12T21:18:03-04:00",
+      "description": "Daily read-only DTR/SB registry audit with fail-closed incomplete-collection gate.",
+      "validation": "2026-07-12: synthetic incomplete collector exits 2 before SB/state/post; complete one-user dry-run rc=0 with DTR login 1/1, 52 publishers, 2854 SB rows, one item-get call, zero errors and zero report-artifact delta."
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh",
@@ -2974,7 +2999,9 @@
     {
       "path": "/root/mgs-agent/scripts/mgs-op-item-resolver.py",
       "size_bytes": 10071,
-      "modified_at": "2026-07-12T21:06:03-04:00"
+      "modified_at": "2026-07-12T21:06:03-04:00",
+      "description": "Shared protected 1Password metadata resolver with schema-versioned cache, bounded separate locks and single stale-index retry.",
+      "validation": "2026-07-12: py_compile PASS; 8-process concurrency collapse PASS; force-refresh propagation PASS; 1-second lock-timeout stale fallback produced zero op calls; stale title refreshed/retried exactly once."
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-ops-briefing.py",

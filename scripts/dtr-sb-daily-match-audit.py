@@ -361,11 +361,14 @@ def main():
 
     raw_path = REPORT_DIR / f'dtr-sb-daily-match-audit-{stamp}.json'
     csv_path = REPORT_DIR / f'dtr-sb-daily-match-audit-issues-{stamp}.csv'
-    raw_path.write_text(json.dumps({'summary':summary,'status_counts':dict(status_counts),'issues':issue_rows,'dtr_scans':dtr_scans}, ensure_ascii=False, indent=2), encoding='utf-8')
-    with csv_path.open('w', newline='', encoding='utf-8-sig') as f:
-        w = csv.DictWriter(f, fieldnames=['type','fb','pg_dtr','pg_sb','status','login_dtr','login_sb','problem'])
-        w.writeheader(); w.writerows(issue_rows)
-    summary['json'] = str(raw_path); summary['csv'] = str(csv_path)
+    if not args.dry_run:
+        raw_path.write_text(json.dumps({'summary':summary,'status_counts':dict(status_counts),'issues':issue_rows,'dtr_scans':dtr_scans}, ensure_ascii=False, indent=2), encoding='utf-8')
+        with csv_path.open('w', newline='', encoding='utf-8-sig') as f:
+            w = csv.DictWriter(f, fieldnames=['type','fb','pg_dtr','pg_sb','status','login_dtr','login_sb','problem'])
+            w.writeheader(); w.writerows(issue_rows)
+        summary['json'] = str(raw_path); summary['csv'] = str(csv_path)
+    else:
+        summary['json'] = None; summary['csv'] = None
 
     report = build_report(summary, status_counts, issue_rows, new_keys, resolved_count)
     if args.dry_run or args.no_post:
