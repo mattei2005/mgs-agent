@@ -1,0 +1,150 @@
+{
+  "schema_version": "2.0",
+  "ruleset": "openzedfinanzas_cc_es_intraday_v2",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "mode": "approved_config_read_only_until_separate_write_release",
+  "baseline": {
+    "metric": "CPMO",
+    "provisional_usd": 1.15,
+    "source": "Meta performance after campaign reactivation on 2026-07-08",
+    "status": "provisional"
+  },
+  "persistence_policy": {
+    "type": "consecutive_checkpoints",
+    "required": 2,
+    "checkpoint_interval_minutes": 30,
+    "same_checkpoint_does_not_increment": true,
+    "reset_on_non_match": true,
+    "learning_grace_does_not_accumulate": true
+  },
+  "rules": [
+    {
+      "id": "R1",
+      "enabled": true,
+      "status": "approved_by_Rodolfo_2026-07-13_configured_read_only",
+      "description": "MO = 0 and spend >= USD 4.00 for 2 consecutive checkpoints => pause campaign",
+      "window": "intraday_current_day",
+      "condition": {
+        "all": [
+          {"field": "status", "op": "eq", "value": "ACTIVE"},
+          {"metric": "MO", "op": "eq", "value": 0},
+          {"metric": "spend", "op": "gte", "value": 4.0, "currency": "USD"}
+        ]
+      },
+      "persistence": {"consecutive_checkpoints": 2},
+      "action": "pause_campaign",
+      "priority": 1,
+      "exclusions": ["TEST_grace_3_days", "learning_grace_3_days", "reactivate_exclusion_list"]
+    },
+    {
+      "id": "R2",
+      "enabled": true,
+      "status": "approved_by_Rodolfo_2026-07-13_configured_read_only",
+      "description": "MO = 1 and spend >= USD 4.50 for 2 consecutive checkpoints => pause campaign",
+      "window": "intraday_current_day",
+      "condition": {
+        "all": [
+          {"field": "status", "op": "eq", "value": "ACTIVE"},
+          {"metric": "MO", "op": "eq", "value": 1},
+          {"metric": "spend", "op": "gte", "value": 4.5, "currency": "USD"}
+        ]
+      },
+      "persistence": {"consecutive_checkpoints": 2},
+      "action": "pause_campaign",
+      "priority": 2,
+      "exclusions": ["TEST_grace_3_days", "learning_grace_3_days", "reactivate_exclusion_list"]
+    },
+    {
+      "id": "R3",
+      "enabled": true,
+      "status": "approved_by_Rodolfo_2026-07-13_configured_read_only",
+      "description": "MO >= 2, spend >= USD 6.00 and CPMO > USD 2.00 for 2 consecutive checkpoints => pause campaign",
+      "window": "intraday_current_day",
+      "condition": {
+        "all": [
+          {"field": "status", "op": "eq", "value": "ACTIVE"},
+          {"metric": "MO", "op": "gte", "value": 2},
+          {"metric": "spend", "op": "gte", "value": 6.0, "currency": "USD"},
+          {"metric": "CPMO", "op": "gt", "value": 2.0, "currency": "USD"}
+        ]
+      },
+      "persistence": {"consecutive_checkpoints": 2},
+      "action": "pause_campaign",
+      "priority": 3,
+      "exclusions": ["TEST_grace_3_days", "learning_grace_3_days", "reactivate_exclusion_list", "COST_CAP_no_cost_pause"]
+    },
+    {
+      "id": "R4",
+      "enabled": true,
+      "status": "approved_by_Rodolfo_2026-07-13_configured_read_only",
+      "description": "LOWEST_COST or LOWEST_COST_WITHOUT_CAP with MO >= 5, spend >= USD 10.00 and CPMO > USD 1.75 for 2 consecutive checkpoints => pause campaign",
+      "window": "intraday_current_day",
+      "condition": {
+        "all": [
+          {"field": "status", "op": "eq", "value": "ACTIVE"},
+          {"field": "bid_strategy", "op": "in", "value": ["LOWEST_COST", "LOWEST_COST_WITHOUT_CAP"]},
+          {"metric": "MO", "op": "gte", "value": 5},
+          {"metric": "spend", "op": "gte", "value": 10.0, "currency": "USD"},
+          {"metric": "CPMO", "op": "gt", "value": 1.75, "currency": "USD"}
+        ]
+      },
+      "persistence": {"consecutive_checkpoints": 2},
+      "action": "pause_campaign",
+      "priority": 4,
+      "exclusions": ["TEST_grace_3_days", "learning_grace_3_days", "reactivate_exclusion_list", "COST_CAP_no_cost_pause"]
+    },
+    {
+      "id": "R5",
+      "enabled": false,
+      "status": "removed_in_v2",
+      "description": "Intraday reactivation by frozen metric removed",
+      "action": "none",
+      "priority": 5,
+      "replacement": "safe_reactivation_at_00_30_only_for_paused_by_ares_rule"
+    }
+  ],
+  "reactivate_all": {
+    "enabled": true,
+    "time": "00:30",
+    "timezone": "meta_ad_account_timezone",
+    "scope": "paused_by_ares_rule_only",
+    "provenance_state_required": true,
+    "allowed_pause_origin": "paused_by_ares_rule",
+    "forbidden_pause_origins": ["paused_by_human", "paused_historical", "paused_saturated", "manual_hold", "unknown"],
+    "exclusion_list": [],
+    "gates": {
+      "daily_account_cap_usd": 300.0,
+      "max_active_campaigns": 12,
+      "candidate_daily_budget_max_usd": 25.0,
+      "require_projected_spend_lte_cap": true,
+      "require_active_count_lte_max": true
+    }
+  },
+  "global_exceptions": [
+    {
+      "id": "TEST_grace_3_days",
+      "condition": {"campaign_name_contains": "TEST", "active_age_days_lt": 3},
+      "effect": "immune_to_all_intraday_actions"
+    },
+    {
+      "id": "learning_grace_3_days",
+      "condition": {"campaign_age_days_lt": 3},
+      "effect": "metrics_only_no_pause_or_reactivate_and_no_persistence_accumulation"
+    },
+    {
+      "id": "COST_CAP_no_cost_pause",
+      "condition": {"bid_strategy": "COST_CAP", "rule_metric": ["CPMO"]},
+      "effect": "do_not_pause_by_cost_rules"
+    }
+  ],
+  "metric_mapping": {
+    "mapping_id": "openzedfinanzas_cc_es_metrics_v1",
+    "mapping_path": "/root/mgs-agent/data/ares/meta-ads/metrics/openzedfinanzas_cc_es_metrics_v1.json",
+    "MO_action_type": "complete_registration",
+    "CPMO_formula": "spend / MO"
+  },
+  "write_enabled": false,
+  "write_release_required": "separate_explicit_Rodolfo_authorization_after_dry_run_validation",
+  "approved_at": "2026-07-13T21:50:52Z",
+  "approved_by": "Rodolfo Mattei"
+}

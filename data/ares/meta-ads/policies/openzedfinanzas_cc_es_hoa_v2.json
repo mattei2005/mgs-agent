@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0",
+  "operation_id": "OpenzedFinanzas-CC-ES",
+  "account_id": "1356770869843984",
+  "timezone": "Europe/Madrid",
+  "status": "approved_config_read_only_no_meta_write",
+  "baseline": {
+    "metric": "CPMO",
+    "provisional_usd": 1.15,
+    "status": "provisional",
+    "source_period": "post_reactivation_from_2026-07-08"
+  },
+  "coexistence": {
+    "intraday_R1_R4": "separate_deterministic_cron_every_30m",
+    "HOA": "separate_manager_layer_checkpoints",
+    "policy": "intraday_and_HOA_coexist; ROI is an extra informational block"
+  },
+  "checkpoints": ["08:00", "12:00", "15:00", "18:00", "22:00"],
+  "metrics": {
+    "europe_primary_count": "MO",
+    "MO_action_type": "complete_registration",
+    "primary_cost": "CPMO",
+    "CPMO_formula": "spend_usd / MO"
+  },
+  "hoa_weights": {"today": 0.5, "yesterday": 0.3, "day_before_yesterday": 0.2},
+  "bad_day_gates": {
+    "minimum_spend_usd": 10.0,
+    "minimum_MO": 5,
+    "CPMO_operator": "gt",
+    "CPMO_threshold_source": "hoa.target_cpmo_usd",
+    "all_conditions_required": true,
+    "bad_days_required_for_replacement": 2,
+    "complete_days_window": 3,
+    "bad_days_definition": "CPMO > USD 1.30 with spend >= USD 10 and MO >= 5; replacement requires 2 bad days out of the last 3 complete days"
+  },
+  "budget": {
+    "creative_test_share": 0.2,
+    "creative_test_policy": "only launch tests when there is available test budget; otherwise only mention in 22:00 report",
+    "new_campaign_daily_budget_max_usd": 25.0,
+    "never_create_campaign_above_usd": 25.0,
+    "daily_account_cap_usd": 300.0,
+    "creative_test_pool_usd": 60.0
+  },
+  "exceptions": {
+    "COST_CAP": "excluded_from_cost_pause_and_replacement",
+    "TEST": "3_day_grace",
+    "learning": "3_day_grace"
+  },
+  "replacement": {
+    "bad_days_required": 2,
+    "complete_days_window": 3,
+    "same_page_required": true,
+    "creative_source_scope": "entire_account_not_only_campaign_or_page",
+    "creative_ranking_metric": "lowest_CPMO",
+    "creative_window_days": 3,
+    "creatives_per_new_campaign": 3,
+    "start_time_policy": "schedule replacement campaign for next day around 01:00 in account timezone",
+    "controlled_write": "requires_separate_explicit_Rodolfo_approval_before_Meta_write",
+    "loser_final_action": "delete_if_Meta_supports_else_archive",
+    "archive_fallback": true
+  },
+  "reactivation_guard": {
+    "time": "00:30",
+    "pause_origin_required": "paused_by_ares_rule",
+    "never_reactivate": ["paused_by_human", "paused_historical", "paused_saturated", "manual_hold", "unknown"],
+    "daily_account_cap_usd": 300.0,
+    "block_when_active_count_or_projected_spend_exceeds_cap": true
+  },
+  "hoa": {
+    "target_cpmo_usd": 1.30,
+    "instruction": "Target approved by Rodolfo from the provisional post-reactivation baseline; remains read-only until separate write release"
+  },
+  "roi": {
+    "display": "extra_block_preserving_full_campaign_report",
+    "columns": ["ROI Drip", "ROI Total"],
+    "broadcast": "audit_only_not_displayed",
+    "action_policy": "informational_only_no_rule_or_write_trigger"
+  },
+  "management_scope": {
+    "read_scope": "entire_account",
+    "reporting_mode": "simulated_decisions_read_only",
+    "write_enabled": false,
+    "active_focus": [{"pg_id": "pg_22091", "page_name": "Elena Santana"}],
+    "manual_holds": [{"pg_id": "pg_22069", "page_name": "Patricia Flores", "reason": "page saturation/manual manager hold"}]
+  },
+  "approved_at": "2026-07-13T21:00:00Z",
+  "approved_by": "Rodolfo Mattei"
+}
