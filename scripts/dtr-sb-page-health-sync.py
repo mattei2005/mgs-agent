@@ -11,19 +11,12 @@ Validated workflow:
   blocked/down, or the segurador/Facebook profile can be down while the page
   is still public. Never restore Blocked -> Broadcast from public FB URL alone.
 """
-import argparse, asyncio, csv, html, importlib.util, io, json, os, re, subprocess, sys, tempfile, unicodedata, urllib.parse, urllib.request
+import argparse, asyncio, csv, html, importlib.util, io, json, os, re, subprocess, sys, tempfile, unicodedata, urllib.error, urllib.parse, urllib.request
 from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from playwright.async_api import async_playwright
-
-try:
-    from openpyxl import Workbook
-    from openpyxl.styles import Font, PatternFill, Alignment
-    from openpyxl.utils import get_column_letter
-except Exception:
-    Workbook = None
 
 BASE_DIR=Path('/root/mgs-agent')
 SHEET_ID='1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY'
@@ -37,6 +30,9 @@ REPORT_DIR=BASE_DIR/'reports'
 STATE_PATH=BASE_DIR/'data/dtr-sb-page-health-sync-state.json'
 TARGET_CHANNEL_ID='1522442220903337984'
 OP_RESOLVER_PATH=BASE_DIR/'scripts/mgs-op-item-resolver.py'
+REPORT_SHEET_ID='1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI'
+REPORT_SHEET_URL=f'https://docs.google.com/spreadsheets/d/{REPORT_SHEET_ID}/edit?gid=0#gid=0'
+GOOGLE_TOKEN_FILE=BASE_DIR/'.secrets/ares-google-drive-oauth-client.json'
 
 _op_spec=importlib.util.spec_from_file_location('mgs_op_item_resolver', OP_RESOLVER_PATH)
 if not _op_spec or not _op_spec.loader:
@@ -550,7 +546,7 @@ def build_new_restrictions_alert(rows, summary):
             f"{truncate_text(r.get('restricted_until_time') or r.get('restricted_until'),16)}"
         )
     if len(rows)>20:
-        lines.append(f'... +{len(rows)-20} no XLSX/log')
+        lines.append(f'... +{len(rows)-20} na planilha/log')
     lines += [
         '',
         '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
@@ -560,7 +556,7 @@ def build_new_restrictions_alert(rows, summary):
         'Restricted Until: data extraída do último Completed da DTR',
         'Validação: readback SB OK antes do alerta',
         '',
-        f"XLSX: {summary.get('xlsx')}",
+        f"Planilha: {summary.get('sheet')}",
         f"Log: {summary.get('log')}",
     ]
     return '```\n'+'\n'.join(lines)+'\n```'
@@ -577,37 +573,116 @@ def build_no_new_restrictions_alert(summary):
         f"Já restritas na SB no início: {summary.get('sb_active_restricted_start', 0)}",
         f"Páginas DTR no escopo: {stats.get('dtr_pages', 0)}",
         'Novas aplicadas na SB: 0',
+        '',
+        f"Planilha: {summary.get('sheet')}",
     ]
     return '```\n'+'\n'.join(lines)+'\n```'
 
-def write_excel(path, rows, summary, inventory_notes=None):
-    if not Workbook: return None
-    wb=Workbook(); ws=wb.active; ws.title='Paginas'
-    headers=['link da pagina','nome da pagina','fb page id','page id','segurador','bot user','data','codigo dos erros','sb status antes','sb restricted antes','acao','readback ok','observacao']
-    ws.append(headers)
-    for c in ws[1]: c.font=Font(bold=True,color='FFFFFF'); c.fill=PatternFill('solid',fgColor='1F4E78'); c.alignment=Alignment(horizontal='center')
-    for r in rows:
-        ws.append([r.get(h,'') for h in headers])
-    for row in range(2,ws.max_row+1):
-        cell=ws.cell(row=row,column=1)
-        if cell.value and str(cell.value).startswith('http'):
-            cell.hyperlink=cell.value; cell.style='Hyperlink'
-    for i,w in enumerate([28,24,18,12,22,30,18,24,16,18,30,14,35],1): ws.column_dimensions[get_column_letter(i)].width=w
-    ws.freeze_panes='A2'; ws.auto_filter.ref=ws.dimensions
-    sw=wb.create_sheet('Resumo'); sw.append(['Campo','Valor'])
-    for k,v in summary.items():
-        if isinstance(v,(dict,list)): v=json.dumps(v,ensure_ascii=False)
-        sw.append([k,v])
-    for c in sw[1]: c.font=Font(bold=True)
-    inv=wb.create_sheet('Inventario Step1')
+def google_access_token():
+    creds=json.loads(GOOGLE_TOKEN_FILE.read_text(encoding='utf-8'))
+    body=urllib.parse.urlencode({
+        'client_id':creds['client_id'],
+        'client_secret':creds['client_secret'],
+        'refresh_token':creds['refresh_token'],
+        'grant_type':'refresh_token',
+    }).encode()
+    req=urllib.request.Request(creds.get('token_uri') or 'https://oauth2.googleapis.com/token',data=body,headers={'Content-Type':'application/x-www-form-urlencoded'})
+    with urllib.request.urlopen(req,timeout=30) as response:
+        return json.load(response)['access_token']
+
+def sheets_api(access_token, method, url, data=None):
+    body=None
+    headers={'Authorization':f'Bearer {access_token}'}
+    if data is not None:
+        body=json.dumps(data,ensure_ascii=False).encode('utf-8')
+        headers['Content-Type']='application/json; charset=UTF-8'
+    req=urllib.request.Request(url,method=method,headers=headers,data=body)
+    try:
+        with urllib.request.urlopen(req,timeout=60) as response:
+            raw=response.read()
+            return json.loads(raw) if raw else {}
+    except urllib.error.HTTPError as exc:
+        detail=exc.read().decode('utf-8','replace')[:1200]
+        raise RuntimeError(f'Google Sheets HTTP {exc.code}: {detail}') from exc
+
+def ensure_report_tabs(access_token):
+    base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
+    meta=sheets_api(access_token,'GET',base+'?fields=sheets.properties')
+    props=[item['properties'] for item in meta.get('sheets',[])]
+    by_title={item['title']:item for item in props}
+    requests=[]
+    if 'Paginas' not in by_title:
+        default=by_title.get('Sheet1')
+        if default:
+            requests.append({'updateSheetProperties':{'properties':{'sheetId':default['sheetId'],'title':'Paginas'},'fields':'title'}})
+        else:
+            requests.append({'addSheet':{'properties':{'title':'Paginas'}}})
+    for title in ('Resumo','Inventario Step1'):
+        if title not in by_title:
+            requests.append({'addSheet':{'properties':{'title':title}}})
+    if requests:
+        sheets_api(access_token,'POST',base+':batchUpdate',{'requests':requests})
+        meta=sheets_api(access_token,'GET',base+'?fields=sheets.properties')
+    return {item['properties']['title']:item['properties'] for item in meta.get('sheets',[])}
+
+def write_google_sheet(rows, summary, inventory_notes=None):
+    access_token=google_access_token()
+    tabs=ensure_report_tabs(access_token)
+    page_headers=['link da pagina','nome da pagina','fb page id','page id','segurador','bot user','data','codigo dos erros','sb status antes','sb restricted antes','acao','readback ok','observacao']
     inv_headers=['user','segurador','status','reason','pages']
-    inv.append(inv_headers)
-    for c in inv[1]: c.font=Font(bold=True,color='FFFFFF'); c.fill=PatternFill('solid',fgColor='7030A0'); c.alignment=Alignment(horizontal='center')
-    for item in inventory_notes or []:
-        inv.append([item.get(h,'') for h in inv_headers])
-    for i,w in enumerate([32,28,30,45,10],1): inv.column_dimensions[get_column_letter(i)].width=w
-    inv.freeze_panes='A2'; inv.auto_filter.ref=inv.dimensions
-    wb.save(path); return str(path)
+    page_values=[page_headers]+[[r.get(h,'') for h in page_headers] for r in rows]
+    summary_values=[['Campo','Valor']]
+    for key,value in summary.items():
+        if isinstance(value,(dict,list)): value=json.dumps(value,ensure_ascii=False)
+        summary_values.append([key,'' if value is None else value])
+    inv_values=[inv_headers]+[[item.get(h,'') for h in inv_headers] for item in (inventory_notes or [])]
+    datasets={'Paginas':page_values,'Resumo':summary_values,'Inventario Step1':inv_values}
+    base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
+    sheets_api(access_token,'POST',base+'/values:batchClear',{'ranges':["'Paginas'!A:Z","'Resumo'!A:Z","'Inventario Step1'!A:Z"]})
+    resize=[]
+    for title,values in datasets.items():
+        props=tabs[title]
+        needed_rows=max(100,len(values)+10)
+        needed_cols=max(5,len(values[0]) if values else 1)
+        current=props.get('gridProperties') or {}
+        if current.get('rowCount',0)<needed_rows or current.get('columnCount',0)<needed_cols:
+            resize.append({'updateSheetProperties':{'properties':{'sheetId':props['sheetId'],'gridProperties':{'rowCount':max(current.get('rowCount',0),needed_rows),'columnCount':max(current.get('columnCount',0),needed_cols)}},'fields':'gridProperties.rowCount,gridProperties.columnCount'}})
+    if resize:
+        sheets_api(access_token,'POST',base+':batchUpdate',{'requests':resize})
+    sheets_api(access_token,'POST',base+'/values:batchUpdate',{
+        'valueInputOption':'RAW',
+        'data':[{'range':f"'{title}'!A1",'majorDimension':'ROWS','values':values} for title,values in datasets.items()],
+    })
+    navy={'red':31/255,'green':78/255,'blue':121/255}
+    purple={'red':112/255,'green':48/255,'blue':160/255}
+    white={'red':1,'green':1,'blue':1}
+    format_requests=[]
+    for title,values in datasets.items():
+        sid=tabs[title]['sheetId']; cols=len(values[0])
+        color=purple if title=='Inventario Step1' else navy
+        format_requests += [
+            {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':1,'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'backgroundColor':color,'textFormat':{'bold':True,'foregroundColor':white},'horizontalAlignment':'CENTER','wrapStrategy':'WRAP'}},'fields':'userEnteredFormat'}},
+            {'updateSheetProperties':{'properties':{'sheetId':sid,'gridProperties':{'frozenRowCount':1}},'fields':'gridProperties.frozenRowCount'}},
+            {'autoResizeDimensions':{'dimensions':{'sheetId':sid,'dimension':'COLUMNS','startIndex':0,'endIndex':cols}}},
+        ]
+        if len(values)>1:
+            format_requests.append({'setBasicFilter':{'filter':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols}}}})
+    sheets_api(access_token,'POST',base+':batchUpdate',{'requests':format_requests})
+    params=urllib.parse.urlencode([
+        ('ranges',"'Paginas'!A1:M3"),
+        ('ranges',"'Resumo'!A1:B3"),
+        ('ranges',"'Inventario Step1'!A1:E3"),
+        ('majorDimension','ROWS'),
+    ])
+    readback=sheets_api(access_token,'GET',base+'/values:batchGet?'+params)
+    value_ranges=readback.get('valueRanges') or []
+    if len(value_ranges)!=3:
+        raise RuntimeError(f'Google Sheets readback incompleto: {len(value_ranges)}/3 abas')
+    headers_read=[(item.get('values') or [[]])[0] for item in value_ranges]
+    expected=[page_headers,['Campo','Valor'],inv_headers]
+    if headers_read!=expected:
+        raise RuntimeError(f'Google Sheets readback de cabeçalhos divergente: {headers_read!r}')
+    return {'url':REPORT_SHEET_URL,'rows_paginas':len(page_values),'rows_resumo':len(summary_values),'rows_inventario':len(inv_values),'readback_ok':True}
 
 async def main():
     ap=argparse.ArgumentParser()
@@ -624,8 +699,7 @@ async def main():
     LOG_DIR.mkdir(parents=True, exist_ok=True); REPORT_DIR.mkdir(parents=True, exist_ok=True)
     stamp=datetime.now(NY).strftime('%Y%m%d-%H%M%S'); tday=today()
     run_log=LOG_DIR/f'dtr-sb-page-health-sync-{stamp}.json'
-    report_xlsx=REPORT_DIR/f'dtr-sb-page-health-sync-{stamp}.xlsx'
-    summary={'ok':True,'mode':'apply' if args.apply else 'dry-run','started_at':now_iso(),'today':tday,'errors':[],'changes':[],'log':str(run_log),'xlsx':str(report_xlsx)}
+    summary={'ok':True,'mode':'apply' if args.apply else 'dry-run','started_at':now_iso(),'today':tday,'errors':[],'changes':[],'log':str(run_log),'sheet':REPORT_SHEET_URL}
     p=browser=ctx=None
     try:
         srows=sheet_rows(); step1_scope=build_step1_scope(srows); active=active_users_from_sheet(srows); summary['sheet_active_users']=len(active); summary['sheet_step1_rows']=dict(step1_scope['row_counts']); summary['step1_overrides']=STEP1_ACTIVE_OVERRIDES
@@ -790,7 +864,13 @@ async def main():
         summary['stats']=dict(stats); summary['writes']=writes; summary['backup_rows']=len(backups); summary['new_restrictions_alerted']=len(alert_rows); summary['finished_at']=now_iso()
         backup_path=REPORT_DIR/f'dtr-sb-page-health-sync-backup-{stamp}.json'
         backup_path.write_text(json.dumps(backups,ensure_ascii=False,indent=2),encoding='utf-8'); summary['backup']=str(backup_path)
-        if report_rows or summary.get('step1_inventory_notes'): write_excel(report_xlsx, report_rows, summary, summary.get('step1_inventory_notes'))
+        if args.apply:
+            try:
+                summary['sheet_update']=write_google_sheet(report_rows,summary,summary.get('step1_inventory_notes'))
+            except Exception as exc:
+                summary['errors'].append({'sheet_update_failed':f'{type(exc).__name__}: {exc}'})
+        else:
+            summary['sheet_update_skipped']='dry-run'
         if args.apply and (alert_rows or not summary['errors']):
             try:
                 if alert_rows:
@@ -802,7 +882,7 @@ async def main():
                 summary['discord_alert_http']=post_discord(alert_content)
             except Exception as exc:
                 summary['errors'].append({'discord_alert_failed':f'{type(exc).__name__}: {exc}'})
-        state.setdefault('runs',[]).append({'ts':summary['started_at'],'mode':summary['mode'],'stats':summary['stats'],'writes':writes,'log':str(run_log),'xlsx':str(report_xlsx)})
+        state.setdefault('runs',[]).append({'ts':summary['started_at'],'mode':summary['mode'],'stats':summary['stats'],'writes':writes,'log':str(run_log),'sheet':REPORT_SHEET_URL,'sheet_update_ok':bool((summary.get('sheet_update') or {}).get('readback_ok'))})
         save_state(state)
         if summary['errors']: summary['ok']=False
     except Exception as exc:
@@ -815,7 +895,7 @@ async def main():
     run_log.write_text(json.dumps(summary,ensure_ascii=False,indent=2,sort_keys=True),encoding='utf-8')
     if args.quiet_noop and not summary.get('writes') and summary.get('ok'):
         return
-    print(json.dumps({k:summary.get(k) for k in ['ok','mode','sheet_active_users','matched_1p_users','sb_rows','sb_active_restricted_start','stats','writes','log','xlsx','backup','errors']},ensure_ascii=False,indent=2))
+    print(json.dumps({k:summary.get(k) for k in ['ok','mode','sheet_active_users','matched_1p_users','sb_rows','sb_active_restricted_start','stats','writes','log','sheet','sheet_update','backup','errors']},ensure_ascii=False,indent=2))
     sys.exit(0 if summary.get('ok') else 2)
 
 if __name__=='__main__': asyncio.run(main())
