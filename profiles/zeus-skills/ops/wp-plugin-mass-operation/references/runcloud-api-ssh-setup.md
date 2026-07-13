@@ -40,7 +40,8 @@ JSON: `/root/mgs-agent/inventario-webapps.json` (no .gitignore)
 
 Pré-requisitos (configurados uma vez pelo Rodolfo):
 - Usuário `zeus` com sudo criado nos 3 servidores
-- IP do VPS (87.99.151.107) whitelisted em Security → Firewall e Security → Fail2Ban
+- Egress público da VPS de produção atual validado no momento da operação e whitelisted em Security → Firewall e Security → Fail2Ban; nunca reutilizar IP estático de VPS desativada ou reassigned
+- Antes de alterar whitelist, auditar por readback todos os três servidores. Remover IP aposentado e adicionar o egress atual são mudanças de firewall separadas, sujeitas à confirmação crítica e a novo readback após `Deploy Firewall`
 - `sshpass` instalado: `apt install sshpass -y`
 
 Credenciais: `op item get "Runcloud Server 0X - IP- zeus Acesso" --vault "MGS Conteúdo" --fields label=password --reveal`

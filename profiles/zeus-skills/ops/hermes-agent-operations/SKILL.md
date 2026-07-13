@@ -94,7 +94,9 @@ Important distinction: visible Discord message count is not context size. Intern
 
 Primary reference: `references/migration-agent-bootstrap.md`.
 
-Choose only one branch: migration/restore, deep comparison/decommission, or new-agent bootstrap.
+For post-cutover OOM/swap, sandboxed credential diagnostics, retired IP/domain sweeps, hashed known-host entries, and downstream firewall allowlists, also load `references/post-migration-host-hardening.md`.
+
+Choose only one branch: migration/restore, deep comparison/decommission, post-migration hardening, or new-agent bootstrap.
 
 ### Honcho memory/copilot or `/root/mgs-agent` Git auto-push
 

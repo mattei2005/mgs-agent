@@ -94,6 +94,39 @@ A strong reconciliation is when effective current approximately matches the acco
 5. Stagger heavy jobs to avoid simultaneous bursts.
 6. Keep manual on-demand validation available when scheduled cadence is reduced.
 
+### Cardinality trap: full-vault discovery inside every run
+
+Do not count only literal `op` call sites. Derive loop cardinality from live state or a single bounded inventory query:
+
+- number of candidate items scanned;
+- number of active/matched items actually needed;
+- fields fetched per item;
+- fallback fields that add another lookup;
+- alert-only credential reads versus healthy-path reads.
+
+A recurring monitor that lists the vault, reads `username` from every candidate item, then reads login fields again for matched items can dominate the account budget even with only a few call sites in source. Prefer:
+
+1. a non-secret `user → item ID` mapping refreshed daily or only when an unknown user appears;
+2. one full-item JSON read per active credential per run;
+3. vault ID + item ID so a read costs one request instead of up to three;
+4. shared non-secret discovery between jobs that scan the same credential family;
+5. local bot transport for Discord rather than another 1Password lookup.
+
+### Cold-cache risk versus observed usage
+
+A low live account counter does not clear a high configured nominal budget. The persistent `op daemon` can satisfy repeated name/field reads from local cache, making observed usage far lower than the documented cold-cache ceiling. Report both and treat the configured ceiling as restart/cache-eviction burst risk.
+
+Validated MGS example from 2026-07-12:
+
+```text
+Configured nominal ceiling     10,032 requests/day (20.06%)
+Observed daily projection         ~124 requests/day (0.25%)
+Largest nominal consumers      B011 DTR + Meta App Roles (89.47%)
+Post-refactor target ceiling      ~676 requests/day (1.35%)
+```
+
+The reduction path is structural—full-item reads, IDs, and non-secret mapping reuse—not persistence of all DTR passwords/tokens. Secret caching remains an explicit security decision; the narrow Ares Meta token cache is governed separately by `meta-ads-api-operations`.
+
 ## Canonical MGS corrections — 2026-07-10/11
 
 After full-system audit, Rodolfo set the two heavy Zeus monitors to hourly business-window cadence in ET with isolated start minutes:

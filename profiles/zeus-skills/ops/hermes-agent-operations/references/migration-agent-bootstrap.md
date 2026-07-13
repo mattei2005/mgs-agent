@@ -22,6 +22,8 @@ When Rodolfo asks for a persistent “compare TUDO” verification after migrati
 
 Post-migration finalization must also close the Git/runtime loop: install `inotify-tools` if needed, recreate/enable `/etc/systemd/system/mgs-autocommit.service`, secret-scan dirty files before staging, commit/push controlled migration state, clean or ignore runtime artifacts, and prove end-to-end with a create/delete auto-commit + auto-push smoke test. Detailed playbook: `references/mgs-hostinger-post-migration-autocommit-finalization-2026-06-18.md`.
 
+After cutover, use `references/post-migration-host-hardening.md` to independently audit OOM versus shutdown cleanup, swap posture, protected credential scrubbing versus genuinely missing service credentials, retired IP/domain references, hashed SSH known-host entries, and downstream firewall/Fail2Ban allowlists. Keep each state-changing remediation behind its own approval gate.
+
 When Rodolfo asks whether the old VPS can be deleted, validate old-host inactivity with `hostname`, root `crontab -l`, gateway service states, `pgrep -af 'hermes|gateway'`, and current-production health. If docs need cleanup, update only current-state operational docs/backlog/inventory; preserve audit logs, changelogs, Discord imports and migration logs as historical evidence. Detailed playbook: `references/mgs-vps-decommission-documentation-cleanup-2026-06-19.md`.
 
 ## 8. New MGS agent bootstrap
