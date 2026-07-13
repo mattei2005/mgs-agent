@@ -17,6 +17,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
+import yaml
+
 DEFAULT_PROFILES_ROOT = Path("/root/.hermes/profiles")
 DEFAULT_STATE = Path("/root/mgs-agent/data/hermes-pending-write-monitor-state.json")
 DEFAULT_POSTER = Path("/root/mgs-agent/scripts/discord-bot-post.py")
@@ -24,6 +26,9 @@ DEFAULT_CHANNEL = "1498132022634483894"
 PROFILES = ("zeus", "atena", "ares")
 SUBSYSTEMS = ("memory", "skills")
 RODOLFO = "344196393512075265"
+DEFAULT_MEMORY_LIMIT = 2200
+DEFAULT_USER_LIMIT = 1375
+DEFAULT_CAPACITY_THRESHOLD_PERCENT = 80.0
 
 
 def _created_epoch(value: Any, fallback: float) -> float:
