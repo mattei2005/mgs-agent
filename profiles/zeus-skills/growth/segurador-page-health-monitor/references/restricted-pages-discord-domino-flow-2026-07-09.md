@@ -65,6 +65,26 @@ Rules:
 - Suppress pages already mentioned in the same unresolved restricted lifecycle.
 ```
 
+## Gestores-facing report artifact
+
+The DTR → Smart Bidding page-health sync must maintain one shared Google Sheet instead of creating a new XLSX on every run:
+
+```text
+Sheet ID: 1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI
+URL: https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0
+Tabs: Paginas | Resumo | Inventario Step1
+```
+
+Operational rules:
+
+```text
+- Refresh the three tabs from the latest completed run and validate headers/row readback before claiming success.
+- Do not generate a new `dtr-sb-page-health-sync-*.xlsx` artifact.
+- In the Discord alert footer, show `Planilha: <URL>` instead of a local `XLSX:` path.
+- Keep local JSON logs/backups for audit and rollback; the shared Sheet is the gestores-facing artifact.
+- A dry-run must not overwrite the shared production Sheet.
+```
+
 ## Dedupe key
 
 Use stable page identity, not campaign/date/restricted-until:

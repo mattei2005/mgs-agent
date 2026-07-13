@@ -69,6 +69,18 @@ Quando a pergunta for “vale atualizar?”, fazer análise read-only antes de r
 - risco textual de patches separado do risco semântico em lifecycle/Discord e do risco operacional do updater;
 - recomendação: atualizar agora, deferir ou atualizar em janela controlada.
 
+#### Contagem sem ambiguidade em upstream móvel
+
+Nunca apresentar uma contagem isolada de commits como “as atualizações” sem nomear a base. Em toda revisão, separar explicitamente:
+
+1. **Novos desde a revisão/plano anterior:** `<sha-anterior>..origin/main`.
+2. **Pendentes no runtime instalado:** `HEAD..origin/main` — esta é a dimensão do update operacional.
+3. **Desde a última tag pública:** `<tag>..origin/main` — mostra quanto do `main` ainda não virou release.
+
+Sequenciar a medição: primeiro `git fetch origin main --tags`; depois capturar uma única vez `HEAD`, `origin/main`, tag e timestamp; só então calcular ancestry, contagens e shortstats. Não rodar o fetch em paralelo com `hermes version` ou contagens, pois commits entrando durante a coleta produzem números internamente inconsistentes. Antes da resposta final, fazer uma atualização curta da ref; se o SHA mudou, recalcular e dizer quantos commits chegaram durante a análise.
+
+Validar `merge-base --is-ancestor` antes de usar intervalos de um plano anterior. Cruzar a contagem com a comparação Git/GitHub quando disponível. O grafo Git bruto é a evidência primária; `hermes version` é um indicador conveniente e pode refletir cache, filtro ou snapshot diferente. Se divergir, reportar ambos e a lacuna em vez de escolher silenciosamente um número. Exemplo de linguagem correta: “55 novos desde o plano anterior; 269 pendentes no checkout instalado; 455 desde a última tag pública”.
+
 ### Execução
 
 ```bash

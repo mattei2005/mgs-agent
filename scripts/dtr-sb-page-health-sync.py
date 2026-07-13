@@ -669,20 +669,23 @@ def write_google_sheet(rows, summary, inventory_notes=None):
             format_requests.append({'setBasicFilter':{'filter':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols}}}})
     sheets_api(access_token,'POST',base+':batchUpdate',{'requests':format_requests})
     params=urllib.parse.urlencode([
-        ('ranges',"'Paginas'!A1:M3"),
-        ('ranges',"'Resumo'!A1:B3"),
-        ('ranges',"'Inventario Step1'!A1:E3"),
+        ('ranges',"'Paginas'!A:M"),
+        ('ranges',"'Resumo'!A:B"),
+        ('ranges',"'Inventario Step1'!A:E"),
         ('majorDimension','ROWS'),
     ])
     readback=sheets_api(access_token,'GET',base+'/values:batchGet?'+params)
     value_ranges=readback.get('valueRanges') or []
     if len(value_ranges)!=3:
         raise RuntimeError(f'Google Sheets readback incompleto: {len(value_ranges)}/3 abas')
-    headers_read=[(item.get('values') or [[]])[0] for item in value_ranges]
-    expected=[page_headers,['Campo','Valor'],inv_headers]
-    if headers_read!=expected:
-        raise RuntimeError(f'Google Sheets readback de cabeçalhos divergente: {headers_read!r}')
-    return {'url':REPORT_SHEET_URL,'rows_paginas':len(page_values),'rows_resumo':len(summary_values),'rows_inventario':len(inv_values),'readback_ok':True}
+    values_read=[item.get('values') or [] for item in value_ranges]
+    headers_read=[values[0] if values else [] for values in values_read]
+    expected_headers=[page_headers,['Campo','Valor'],inv_headers]
+    expected_counts=[len(page_values),len(summary_values),len(inv_values)]
+    counts_read=[len(values) for values in values_read]
+    if headers_read!=expected_headers or counts_read!=expected_counts:
+        raise RuntimeError(f'Google Sheets readback divergente: headers={headers_read!r} rows={counts_read!r} expected_rows={expected_counts!r}')
+    return {'url':REPORT_SHEET_URL,'rows_paginas':counts_read[0],'rows_resumo':counts_read[1],'rows_inventario':counts_read[2],'readback_ok':True}
 
 async def main():
     ap=argparse.ArgumentParser()
