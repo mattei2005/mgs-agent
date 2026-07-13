@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-13T17:00:13-04:00",
+    "updated_at": "2026-07-13T17:38:11-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -943,18 +943,18 @@
         "/root/mgs-agent/tests/test_ares_meta_hoa_roi.py"
       ],
       "sha256": {
-        "ares-meta-hoa-manager.py": "9cab73f86b80d50ea1bce5723f6a0f65caf34905c9616f4c3570115d282e2da1",
+        "ares-meta-hoa-manager.py": "c69a2573e098b2bbd386e3cb86d088354304ab57ec99a66cd588b0c2d5321c2f",
         "ares-smartbidding-common.py": "2cb736c2c6bf09d63a499b1656ee4b83c905f2d1661e32464afa9e7e9d70b8a3",
         "OpenzedFinanzas-CC-ES.json": "e678dff5c4715a36911a9da3be59ea71918a29aac84e94dc6f9161356cd15c28",
-        "test_ares_meta_hoa_roi.py": "e4c5fdf1552ca48f2f842043a060d33f891fc900145427a5cbc8e4c08ac70517"
+        "test_ares_meta_hoa_roi.py": "f8ef764ae8a9d337eec90983d6e69d650dd4f3cebde46b53cdee6c2a0cea01ef"
       },
-      "purpose": "Adicionar ao HOA da página em foco ROI Drip, ROI Broadcast e ROI Total em cashflow diário, reconciliando receita Smart Bidding com spend Meta.",
+      "purpose": "Exibir no HOA da página em foco somente ROI Drip e ROI Total em cashflow diário; manter receita/ROI Broadcast apenas no audit para investigação, sem coluna no Discord.",
       "auth": "Auth0 Authorization Code + PKCE; credenciais resolvidas do item Ares - Smartbidding Dashboard no 1Password; token cache local 0600 sem exposição.",
       "scope": "read_only_dry_run_no_meta_write; ROI informativo sem gatilho de regra; thresholds R1-R5 e target CPMO preservados.",
-      "validation": "4 unit tests OK; py_compile e JSON OK; integração live 2026-07-13 pg_22091 status OK/matched_rows=1; fórmulas Drip/Broadcast/Total conferidas; credenciais ausentes do output; token cache 0600.",
-      "evidence": "/root/mgs-agent/data/ares/meta-ads/reports/hoa/OpenzedFinanzas-CC-ES/hoa-20260713T205535Z.json",
+      "validation": "4 unit tests OK; py_compile/diff-check OK; integração live 2026-07-13 pg_22091 status OK; display contém ROI Drip/Total e não contém ROI Broad; Broadcast preservado no JSON; target CPMO 2.0 e no Meta write.",
+      "evidence": "/root/mgs-agent/data/ares/meta-ads/reports/hoa/OpenzedFinanzas-CC-ES/hoa-20260713T213449Z.json",
       "source_report": "REPORT-INFRA Ares HOA Smart Bidding ROI 2026-07-13",
-      "updated_at": "2026-07-13T16:57:02-04:00"
+      "updated_at": "2026-07-13T17:35:10-04:00"
     },
     {
       "id": "ares-meta-hoa-fixed-discord-thread-20260622",
@@ -3030,8 +3030,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
-      "size_bytes": 27248,
-      "modified_at": "2026-07-13T16:52:42-04:00"
+      "size_bytes": 27132,
+      "modified_at": "2026-07-13T17:34:33-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
@@ -6311,8 +6311,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 3792,
-      "md5": "88d5311db9769ff730a10bd31220a3b4",
-      "modified_at": "2026-07-13T16:57:01-04:00"
+      "md5": "2898d9168c1be644ab2fc2590c40048d",
+      "modified_at": "2026-07-13T17:37:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6323,8 +6323,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "a8362355d4b8a1c85f2d04ba46a69796",
-      "modified_at": "2026-07-13T16:56:33-04:00"
+      "md5": "9e71eaf85e61b553fd25b524aba1fdc1",
+      "modified_at": "2026-07-13T17:26:34-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -6335,8 +6335,8 @@
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
       "size_bytes": 27156,
-      "md5": "d5da54c5af57906fa7e65dd54cecf50f",
-      "modified_at": "2026-07-13T16:29:22-04:00"
+      "md5": "39976eeadba26be01b6b3203a5506fc2",
+      "modified_at": "2026-07-13T17:29:14-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -6347,8 +6347,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 359,
-      "md5": "3687a5a3137d9b40fcafc3c70bdfa93b",
-      "modified_at": "2026-07-13T17:00:02-04:00"
+      "md5": "3eecb5833b5578764dfd14d678e0eabd",
+      "modified_at": "2026-07-13T17:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -6359,8 +6359,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 368,
-      "md5": "51050d768186c33743c291eb70708be9",
-      "modified_at": "2026-07-13T16:49:02-04:00"
+      "md5": "ce0527a5d0e88d49619ca027a4586450",
+      "modified_at": "2026-07-13T17:19:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -6401,14 +6401,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 26326,
-      "md5": "1f5a54707487aa1c4928bb332e84a1d7",
-      "modified_at": "2026-07-13T17:00:02-04:00"
+      "md5": "8514bfa90dde7104edccedf560c316c1",
+      "modified_at": "2026-07-13T17:35:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 358,
-      "md5": "13ffa80a1ab7a6d2b5a83a2779297e97",
-      "modified_at": "2026-07-13T17:00:02-04:00"
+      "size_bytes": 394,
+      "md5": "3442ed23ad05938120a6ffc2793e3479",
+      "modified_at": "2026-07-13T17:38:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -6430,9 +6430,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 278949,
-      "md5": "bee4945f02abc967724add5a7e95bb34",
-      "modified_at": "2026-07-13T17:00:11-04:00"
+      "size_bytes": 280695,
+      "md5": "1c61295af93be122dcd7854b8038cd96",
+      "modified_at": "2026-07-13T17:38:10-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -6454,9 +6454,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 48913,
-      "md5": "6dcd67995af17878b7e1cc538caec2f8",
-      "modified_at": "2026-07-13T16:04:59-04:00"
+      "size_bytes": 48905,
+      "md5": "1de630476a9cecea4edd85e8d839f186",
+      "modified_at": "2026-07-13T17:05:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -6551,8 +6551,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
-      "md5": "d2a4ece7584f468ebabd35dc2f12e939",
-      "modified_at": "2026-07-13T16:56:01-04:00"
+      "md5": "955223bfe2e8365bc32bed7dfb9abf46",
+      "modified_at": "2026-07-13T17:36:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -6581,8 +6581,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2112,
-      "md5": "937348c9eac30b483a0cb131382460c6",
-      "modified_at": "2026-07-13T17:00:03-04:00"
+      "md5": "ac676799de3163b94bee853bf3e4c26d",
+      "modified_at": "2026-07-13T17:35:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",

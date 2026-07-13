@@ -667,7 +667,31 @@ def sheets_api(access_token, method, url, data=None):
         detail=exc.read().decode('utf-8','replace')[:1200]
         raise RuntimeError(f'Google Sheets HTTP {exc.code}: {detail}') from exc
 
-def ensure_report_tabs(access_token):
+def sheet_a1_title(title):
+    return "'"+str(title).replace("'","''")+"'"
+
+def site_tab_title(site):
+    title=re.sub(r'[\\/\?\*\[\]:]+','-',norm(site)).strip().strip("'")
+    if not title:
+        raise RuntimeError(f'nome de site inválido para aba: {site!r}')
+    return title[:100]
+
+def build_report_datasets(rows, page_headers):
+    datasets={'Paginas':[page_headers]+[[row.get(header,'') for header in page_headers] for row in rows]}
+    title_to_site={}
+    grouped=defaultdict(list)
+    for row in rows:
+        for site in [item.strip() for item in norm(row.get('sites')).split(',') if item.strip() and item.strip()!='?']:
+            title=site_tab_title(site)
+            previous=title_to_site.setdefault(title,site)
+            if previous!=site:
+                raise RuntimeError(f'colisão de nomes de abas de site: {previous!r} e {site!r} -> {title!r}')
+            grouped[title].append(row)
+    for title in sorted(grouped,key=str.lower):
+        datasets[title]=[page_headers]+[[row.get(header,'') for header in page_headers] for row in grouped[title]]
+    return datasets
+
+def ensure_report_tabs(access_token, required_titles):
     base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
     meta=sheets_api(access_token,'GET',base+'?fields=sheets.properties')
     props=[item['properties'] for item in meta.get('sheets',[])]

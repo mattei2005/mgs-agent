@@ -614,7 +614,7 @@ def main() -> int:
     header_prefix = (
         f'<@344196393512075265> HOA — relatório das {now_local.strftime("%H:%M")} ({args.account_tz}) da página em foco.\n'
         'Estou só analisando as campanhas; não alterei nada na Meta.\n'
-        'ROI = cashflow diário da página (receita SB × spend Meta); Broadcast pode maturar em D+1 e não aciona regra.\n'
+        'ROI = cashflow diário da página (receita SB × spend Meta); informativo e sem ação automática.\n'
         'Para registrar uma decisão, responda usando o nome completo da campanha.'
     )
     campaign_block = output_table(
@@ -628,7 +628,6 @@ def main() -> int:
             'pg_id': item.get('pg_id'),
             'meta_spend': fmt_money(item.get('meta_spend')),
             'roi_drip': fmt_percent(item.get('roi_drip_pct')),
-            'roi_broadcast': fmt_percent(item.get('roi_broadcast_pct')),
             'roi_total': fmt_percent(item.get('roi_total_pct')),
             'status': item.get('status'),
         })
@@ -637,7 +636,7 @@ def main() -> int:
         blocks.append(output_table(
             f'ROI da página — {today.isoformat()} — USD — informativo',
             roi_rows,
-            [('pg_id','PG'),('meta_spend','Spend'),('roi_drip','ROI Drip'),('roi_broadcast','ROI Broad'),('roi_total','ROI Total'),('status','Status')],
+            [('pg_id','PG'),('meta_spend','Spend'),('roi_drip','ROI Drip'),('roi_total','ROI Total'),('status','Status')],
         ))
     blocks.append(campaign_block)
     print('\n\n'.join(blocks))

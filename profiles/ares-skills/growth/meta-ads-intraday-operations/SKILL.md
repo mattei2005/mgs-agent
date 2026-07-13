@@ -197,6 +197,7 @@ Fase | Critério
 - `references/logs-aquisicao-threaded-cron-and-permissions.md` — padrão para postar relatórios Meta no `logs-aquisicao` abrindo thread própria via wrapper/script-only cron, evitar duplicidade de scheduler e aplicar/validar permission overwrites quando Ares tiver permissão.
 - `references/hermes-script-only-timeout-and-sanitized-errors-2026-06-19.md` — padrão para impedir que crons script-only Hermes estourem o timeout de 120s do scheduler durante backoff/rate-limit Meta; wrapper deve limitar tempo total e converter falha em alerta sanitizado + audit local.
 - `references/hoa-focused-page-reporting-and-discord-format.md` — regra atual do HOA por página em foco: listar todas as campanhas da página ativa, colunas preferidas por Rodolfo, e pitfall de chunking Discord sem quebrar blocos ```text.
+- `references/smart-bidding-hoa-roi-reconciliation.md` — reconciliação ROI Smart Bidding × spend Meta, Auth0 PKCE, consulta histórica por intervalo/DATE, semântica cashflow e layout Openzed com ROI Drip + Total visíveis e Broadcast somente no audit.
 - `references/hoa-thread-routing-historical-reports-and-mobile-layout-2026-06-22.md` — separação Intraday vs HOA em threads fixas, adição/validação de gestores+Geizian na thread, geração de HOA histórico por data/checkpoint, e layout mobile-first para evitar tabelas feias/quebradas.
 - `references/discord-mobile-table-and-report-infra-pitfalls-2026-06-22.md` — lições de layout mobile-first para tabelas intraday e pitfall de REPORT-INFRA do Ares: usar `ares-report-infra.sh`, não helper que cria thread.
 

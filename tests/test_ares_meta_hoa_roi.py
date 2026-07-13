@@ -37,11 +37,11 @@ class SmartBiddingRoiTests(unittest.TestCase):
     def test_hoa_roi_block_is_compact_and_balanced(self):
         text = HOA.output_table(
             'ROI da página',
-            [{'pg_id': 'pg_22091', 'meta_spend': '122.76', 'roi_drip': '+19.9%', 'roi_broadcast': '-100.0%', 'roi_total': '+21.1%', 'status': 'OK'}],
-            [('pg_id','PG'),('meta_spend','Spend'),('roi_drip','ROI Drip'),('roi_broadcast','ROI Broad'),('roi_total','ROI Total'),('status','Status')],
+            [{'pg_id': 'pg_22091', 'meta_spend': '122.76', 'roi_drip': '+19.9%', 'roi_total': '+21.1%', 'status': 'OK'}],
+            [('pg_id','PG'),('meta_spend','Spend'),('roi_drip','ROI Drip'),('roi_total','ROI Total'),('status','Status')],
         )
         self.assertIn('ROI Drip', text)
-        self.assertIn('ROI Broad', text)
+        self.assertNotIn('ROI Broad', text)
         self.assertIn('ROI Total', text)
         self.assertEqual(text.count('```'), 2)
         self.assertLess(len(text), 2000)
