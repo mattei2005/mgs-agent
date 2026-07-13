@@ -247,17 +247,22 @@ Report the evidence class precisely: **no existing-data deletion**, **rejected p
 
 ### Prevent structural receipts from becoming permanent drift loops
 
-A receipt for one automatic patch must snapshot only the files actually created, modified, or removed by that write. Hashing the entire skill directory makes an unrelated later write change one sibling path, after which the old receipt remains `live_hash_drift` forever even though its own patch was valid.
+The preferred writer records only files actually created, modified, or removed by one automatic write. The finalizer must also be defensive with legacy/full-directory receipts: derive the receipt delta as every path where `before[path] != after[path]`, and validate/synchronize only that set. A later authorized write to an unchanged sibling path must not turn the older receipt into `live_hash_drift`.
+
+Keep fail-closed behavior for the receipt's own delta: if a path that the receipt actually created, modified, or removed no longer matches its expected post-write state, block and reconcile rather than rewriting expected hashes.
 
 When an existing receipt is blocked by drift:
 
-1. identify exactly which post-write paths drifted and how many still match;
-2. reconcile attribution through audit → inventory → REPORT-INFRA → Git → session history;
-3. prove live and mirror equality for the current files;
-4. classify the receipt as a real conflict, unattributed drift, or **superseded by a later authorized write**;
-5. never rewrite expected hashes to make it pass;
-6. close a superseded receipt only through an explicit canonical closure state that preserves original hashes, later correlation/commit, reason, and readback;
-7. stop minute-by-minute retry noise after a bounded attempt threshold and raise one metadata-only alert rather than silently looping forever.
+1. derive and display the actual changed-path set from `before` versus `after`;
+2. identify whether the drift is on the receipt's own delta or only on an unchanged sibling captured by an older broad snapshot;
+3. reconcile attribution through audit → inventory → REPORT-INFRA → Git → session history;
+4. prove live and mirror equality for the current changed files;
+5. classify a delta conflict as real conflict or unattributed drift; treat sibling-only drift as a later authorized supersession when the source chain proves it;
+6. never rewrite expected hashes merely to make a receipt pass;
+7. make closure idempotent and preserve original hashes, correlation/commit, reason, REPORT readback, and audit readback;
+8. stop minute-by-minute retry noise after a bounded attempt threshold and raise one metadata-only alert rather than silently looping forever.
+
+Regression coverage must include both directions: drift in the receipt's own changed path stays blocked before side effects, while drift in a sibling whose before/after hashes were identical does not block closure.
 
 ## Compaction workflow
 
