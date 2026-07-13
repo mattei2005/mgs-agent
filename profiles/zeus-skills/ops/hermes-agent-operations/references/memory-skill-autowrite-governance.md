@@ -228,6 +228,37 @@ Never identify a Discord embed from timestamp proximity, author, or blank `conte
 
 A durable finalizer should be idempotent on profile + paths + post-write hashes. It marks the receipt closed only after mirror, inventory, audit, REPORT-INFRA, and Discord readback all succeed; a conversation report alone must not masquerade as that structural completion.
 
+### Audit historical capacity rejections before claiming “no loss”
+
+Separate two questions:
+
+1. **Was existing MEMORY/USER content deleted or changed?** Compare live files with backups, mtimes, approved write events, and semantic diffs.
+2. **Was a new proposed learning rejected before persistence?** Query `state.db` read-only for `messages.tool_name='memory'` capacity failures, pair each result with its originating assistant `tool_call_id`, and inspect subsequent memory calls before the next user message.
+
+For each rejection:
+
+- a later successful add/replace/batch in the same turn is a recovered write, not loss;
+- no immediate success is only an unresolved candidate—search current MEMORY, USER, SOUL, routed skills/references, audit, Git, and the originating session for a semantically equivalent recovery;
+- count duplicate retries as one proposed learning;
+- if the durable fact exists only in session history, restore it to the correct class-level skill or always-active memory and report the readback;
+- never say “nothing was lost” merely because the durable memory file stayed byte-identical: fail-closed rejection protects old content while the new proposal can still be absent.
+
+Report the evidence class precisely: **no existing-data deletion**, **rejected proposal recovered**, **rejected proposal restored during audit**, or **unresolved historical proposal**. The durable dead-letter prevents future silent rejection; it does not retroactively prove old failures were recovered.
+
+### Prevent structural receipts from becoming permanent drift loops
+
+A receipt for one automatic patch must snapshot only the files actually created, modified, or removed by that write. Hashing the entire skill directory makes an unrelated later write change one sibling path, after which the old receipt remains `live_hash_drift` forever even though its own patch was valid.
+
+When an existing receipt is blocked by drift:
+
+1. identify exactly which post-write paths drifted and how many still match;
+2. reconcile attribution through audit → inventory → REPORT-INFRA → Git → session history;
+3. prove live and mirror equality for the current files;
+4. classify the receipt as a real conflict, unattributed drift, or **superseded by a later authorized write**;
+5. never rewrite expected hashes to make it pass;
+6. close a superseded receipt only through an explicit canonical closure state that preserves original hashes, later correlation/commit, reason, and readback;
+7. stop minute-by-minute retry noise after a bounded attempt threshold and raise one metadata-only alert rather than silently looping forever.
+
 ## Compaction workflow
 
 1. Read the live MEMORY, USER, SOUL, AGENT, routed skills, and canonical data sources.

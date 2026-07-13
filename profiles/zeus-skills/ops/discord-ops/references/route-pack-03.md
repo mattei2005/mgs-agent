@@ -2,21 +2,33 @@
 
 Quando Rodolfo disser que quer “continuar de onde paramos” em uma thread longa:
 1. Importar a thread inteira/maior limite via `import-discord-thread.py --profile zeus --limit 1000 '<id-ou-link>'`.
-2. Resumir o histórico em fases, não mensagem por mensagem.
-3. Identificar a última decisão útil, a última execução registrada e o próximo passo operacional.
-4. Verificar documentos de resumo já existentes e corrigir contradições/supersedências. Exemplo: um resumo inicial dizia que P1 usaria `wp:details`, mas a decisão final Tesco/Raquel removeu `details/accordion` e fixou `credit-card_ANTIGO` + `botao normal`.
-5. Registrar audit log quando atualizar docs/resumos derivados.
+2. Confirmar completude antes de dizer “li tudo”: comparar a contagem importada com o início real da thread. Se usar `discord.fetch_messages`, paginar com `before=<oldest_message_id>` até alcançar a mensagem de criação; um lote com exatamente o limite solicitado é sinal de paginação pendente, não de thread completa.
+3. Inventariar anexos separadamente das mensagens. “Li N/N mensagens” não significa “reanálise N/N screenshots”. Reabrir os anexos relevantes; se o CDN expirou, procurar a cópia local no `image_cache` por tamanho/timestamp e declarar qualquer anexo que continue inacessível.
+4. Resumir o histórico em fases, não mensagem por mensagem.
+5. Identificar a última decisão útil, a última execução registrada e o próximo passo operacional.
+6. Verificar documentos de resumo já existentes e corrigir contradições/supersedências. Exemplo: um resumo inicial dizia que P1 usaria `wp:details`, mas a decisão final Tesco/Raquel removeu `details/accordion` e fixou `credit-card_ANTIGO` + `botao normal`.
+7. Registrar audit log quando atualizar docs/resumos derivados.
+
+Pitfall de confiança: não use a conclusão das últimas mensagens como substituto da leitura integral quando Rodolfo perguntou explicitamente se tudo foi lido. Informe a cobertura exata (`mensagens lidas/total`, `anexos reabertos/total`) e corrija imediatamente uma afirmação anterior ampla demais.
 
 Formato preferido de report para Rodolfo:
 
 ```text
 Thread importada     <id>
-Mensagens lidas      <n>
+Mensagens lidas      <n>/<total>
+Anexos reabertos     <n>/<total>
 Tema                 <tema>
 Ponto atual          <última decisão útil>
 Arquivos afetados    <lista curta>
 Próximo passo        <ação concreta>
 ```
+
+Quando a pergunta for “isso foi bom ou ruim para a MGS?” ou pedir resposta humana/não técnica:
+
+- abrir com o veredito líquido e delimitar o escopo real (ex.: infraestrutura dos agentes, não campanhas/conteúdo/negócio inteiro);
+- explicar em linguagem de impacto: o que melhorou, o que deu errado no caminho, se houve dano, estado vivo e pendências;
+- não usar hashes, commits, contagens de testes ou nomes de funções como corpo da explicação; deixar a evidência técnica em uma nota curta de validação;
+- distinguir “nenhum dado existente foi apagado” de “uma nova proposta falhou ao persistir”; não transformar ausência de dano em certeza mais ampla do que a auditoria provou.
 - Se houver divergência, declarar a decisão recomendada sem iniciar conversa agente→agente.
 - Terminar com `Próximo passo pendente:` quando a conversa envolver execução/patch/infra ou quando o veredito concluir que a ideia faz sentido mas ainda falta implementação/teste.
 

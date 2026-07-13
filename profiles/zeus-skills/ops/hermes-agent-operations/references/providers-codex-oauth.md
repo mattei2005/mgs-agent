@@ -71,6 +71,23 @@ EOF
 grep "provider:\|default:" /root/.hermes/profiles/zeus/config.yaml /root/.hermes/profiles/atena/config.yaml | grep -v "auto\|haiku\|edge\|local"
 ```
 
+### Auditoria read-only de backups OAuth/JWT
+
+Quando uma cópia histórica de `auth.json` aparecer em reports, snapshots ou backups, não classifique como “stale” apenas pela data, pelo nome da pasta ou porque alguns JWTs expiraram.
+
+Auditoria sem expor valores:
+
+1. Validar arquivo regular, symlink, owner, modo do arquivo e permissões de todos os diretórios pais (`stat` + `namei`).
+2. Confirmar JSON válido e reportar somente nomes de providers/campos sensíveis; nunca valores, hashes ou trechos de token.
+3. Extrair internamente apenas `access_token`, `refresh_token` e `id_token`. Decodificar `exp` de JWT somente para contagem expirado/futuro; um refresh token pode continuar sensível mesmo quando access/id JWTs expiraram.
+4. Comparar por igualdade interna com os auth stores atuais. Qualquer refresh/token coincidente torna o backup **cópia sensível ativa**, não material morto.
+5. Diferenciar localização física de estado Git: um arquivo pode estar dentro da árvore do repositório, porém ignorado e não rastreado. Verificar `git ls-files`, `git check-ignore`, árvore rastreada atual e histórico.
+6. Para o histórico, procurar os valores sem colocá-los em argv/output. Se a varredura por cada árvore/blob for lenta, usar um único fluxo `git log --all --full-history --no-ext-diff --text -p` e comparar chunks em memória, preservando overlap de `max_token_length-1`; reportar somente bytes examinados e contagem de matches.
+7. Procurar cópias exatas em diretórios seguros e validar `0700/0600`; listar apenas paths e metadados.
+8. Encerrar a auditoria com quatro estados separados: exposição pública/Git, cópia local protegida, coincidência com credencial atual e lacuna de cobertura.
+
+Auditoria read-only não autoriza apagar, mover ou rotacionar. Exclusão de backup sensível e reautenticação/rotação são operações separadas: apresentar escopo exato, autenticação que permanece, backups preservados e risco de lockout antes da confirmação crítica.
+
 ### Cron jobs e custo após migração
 
 - Cron agent-based sem override herda provider/model do perfil. Após migração para Codex, jobs com `model/provider: null` passam a herdar `openai-codex` + `gpt-5.5`.
