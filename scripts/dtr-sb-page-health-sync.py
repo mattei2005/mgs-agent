@@ -679,9 +679,6 @@ def ensure_report_tabs(access_token):
             requests.append({'updateSheetProperties':{'properties':{'sheetId':default['sheetId'],'title':'Paginas'},'fields':'title'}})
         else:
             requests.append({'addSheet':{'properties':{'title':'Paginas'}}})
-    for title in ('Resumo','Inventario Step1'):
-        if title not in by_title:
-            requests.append({'addSheet':{'properties':{'title':title}}})
     if requests:
         sheets_api(access_token,'POST',base+':batchUpdate',{'requests':requests})
         meta=sheets_api(access_token,'GET',base+'?fields=sheets.properties')
