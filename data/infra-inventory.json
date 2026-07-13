@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-13T01:09:13-04:00",
-    "generated_by": "zeus"
+    "updated_at": "2026-07-13T05:00:01-04:00",
+    "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
     {
@@ -2814,8 +2814,7 @@
       "entry": "0 8 * * * flock -n /var/lock/sync_sb_sms_revenue_daily.lock /root/mgs-agent/scripts/sync-sb-sms-revenue-daily.sh >> /root/mgs-agent/logs/sync-sb-sms-revenue-daily.log 2>&1"
     },
     {
-      "entry": "34 * * * * flock -n /var/lock/monitor_hermes_pending_writes.lock /root/mgs-agent/scripts/monitor_hermes_pending_writes.py >> /root/mgs-agent/logs/monitor-hermes-pending-writes.log 2>&1",
-      "description": "Hourly read-only scan of staged Hermes memory/skill writes; alert after 24h and daily until reviewed."
+      "entry": "34 * * * * flock -n /var/lock/monitor_hermes_pending_writes.lock /root/mgs-agent/scripts/monitor_hermes_pending_writes.py >> /root/mgs-agent/logs/monitor-hermes-pending-writes.log 2>&1"
     }
   ],
   "scripts": [
@@ -3132,9 +3131,7 @@
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.py",
       "size_bytes": 15649,
-      "modified_at": "2026-07-12T21:18:03-04:00",
-      "description": "Daily read-only DTR/SB registry audit with fail-closed incomplete-collection gate.",
-      "validation": "2026-07-12: synthetic incomplete collector exits 2 before SB/state/post; complete one-user dry-run rc=0 with DTR login 1/1, 52 publishers, 2854 SB rows, one item-get call, zero errors and zero report-artifact delta."
+      "modified_at": "2026-07-12T21:18:03-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-daily-match-audit.sh",
@@ -3299,9 +3296,7 @@
     {
       "path": "/root/mgs-agent/scripts/mgs-op-item-resolver.py",
       "size_bytes": 10071,
-      "modified_at": "2026-07-12T21:06:03-04:00",
-      "description": "Shared protected 1Password metadata resolver with schema-versioned cache, bounded separate locks and single stale-index retry.",
-      "validation": "2026-07-12: py_compile PASS; 8-process concurrency collapse PASS; force-refresh propagation PASS; 1-second lock-timeout stale fallback produced zero op calls; stale title refreshed/retried exactly once."
+      "modified_at": "2026-07-12T21:06:03-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-ops-briefing.py",
@@ -3419,6 +3414,11 @@
       "modified_at": "2026-07-11T01:53:48-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/monitor_hermes_pending_writes.py",
+      "size_bytes": 17150,
+      "modified_at": "2026-07-12T23:59:11-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/mu-plugins/yoast-rest-meta.php",
       "size_bytes": 2905,
       "modified_at": "2026-04-24T16:20:23-04:00"
@@ -3436,23 +3436,17 @@
     {
       "path": "/root/mgs-agent/scripts/pendencia-add.sh",
       "size_bytes": 185,
-      "modified_at": "2026-07-12T21:46:04-04:00",
-      "sha256": "7f48da20f23b455b59b8b6524e3b71c502fbbbae8b809afb265d1bdacaaac653",
-      "description": "Thin wrapper for transactional pendencia add."
+      "modified_at": "2026-07-12T21:46:04-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/pendencia-done.sh",
       "size_bytes": 181,
-      "modified_at": "2026-07-12T21:46:04-04:00",
-      "sha256": "d9a4968c70c79268cb691d0bc1671ae26533d41720c867cf166b87058a42484b",
-      "description": "Thin wrapper for transactional pendencia resolution under the shared lock."
+      "modified_at": "2026-07-12T21:46:04-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/pendencia-historico-add.sh",
       "size_bytes": 200,
-      "modified_at": "2026-07-12T21:46:04-04:00",
-      "sha256": "ec5af4cfcb1756ad9b330b2da2730e62683a3c6442211b475df637d3638af580",
-      "description": "Thin wrapper for transactional historical pendencia registration."
+      "modified_at": "2026-07-12T21:46:04-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/pendencia-list.sh",
@@ -3463,6 +3457,11 @@
       "path": "/root/mgs-agent/scripts/pendencia-render-md.sh",
       "size_bytes": 4697,
       "modified_at": "2026-05-16T17:31:14-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/pendencia_store.py",
+      "size_bytes": 12452,
+      "modified_at": "2026-07-12T21:55:58-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/post-reboot-health-20260609.sh",
@@ -3597,9 +3596,7 @@
     {
       "path": "/root/mgs-agent/scripts/send-report-infra-embed.sh",
       "size_bytes": 3903,
-      "modified_at": "2026-07-12T21:50:34-04:00",
-      "sha256": "0d2b71da27af586d522cfd7b577c992f2f687eb2ff4b6f39422e8f1c316a6a92",
-      "description": "Canonical REPORT-INFRA embed sender with non-blocking Hermes pending count field."
+      "modified_at": "2026-07-12T21:50:34-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/sync-codex-oauth.sh",
@@ -3650,20 +3647,6 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/scripts/monitor_hermes_pending_writes.py",
-      "size_bytes": 12152,
-      "modified_at": "2026-07-12T21:58:36-04:00",
-      "sha256": "2f9c8460e74d34fe5825b9013a6ae6b571a8c2d6c1e124c985d1763882f5bdc7",
-      "description": "Read-only Hermes pending memory/skill aging monitor with stateful anti-spam and direct Discord embeds."
-    },
-    {
-      "path": "/root/mgs-agent/scripts/pendencia_store.py",
-      "size_bytes": 12452,
-      "modified_at": "2026-07-12T21:55:58-04:00",
-      "sha256": "c11ec4f6657a4964d5251022a5491a6e59d67d6a879b973448e4d3deb24d6b63",
-      "description": "Transactional pendencias store: flock, max+1 ID allocation, derived counters, atomic write and readback."
     }
   ],
   "skills_mgs": [
@@ -6207,9 +6190,9 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
-      "size_bytes": 3541,
-      "md5": "260f5423f10bce3bcd2128ee4a7f2790",
-      "modified_at": "2026-07-12T21:14:14-04:00"
+      "size_bytes": 3792,
+      "md5": "d52979545d96c1d5ee7b60ce3d41db4d",
+      "modified_at": "2026-07-13T04:57:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6220,8 +6203,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "b9e7bdf19698a2c44b0f9fd75cb5b272",
-      "modified_at": "2026-07-12T21:11:33-04:00"
+      "md5": "973261ba615cbd3a08921b42a659202c",
+      "modified_at": "2026-07-13T04:56:31-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -6231,9 +6214,9 @@
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
-      "size_bytes": 25839,
-      "md5": "9d411a8a8d268a395791396f79e85548",
-      "modified_at": "2026-07-12T20:31:02-04:00"
+      "size_bytes": 27156,
+      "md5": "cefe2ce6332b897bf4ba5e5ffc47b08c",
+      "modified_at": "2026-07-12T23:29:22-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -6244,8 +6227,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 359,
-      "md5": "8a34da84d6aa58c4533a865dfd474859",
-      "modified_at": "2026-07-12T21:00:03-04:00"
+      "md5": "da0390424cef05149c813e0fc34bc5f9",
+      "modified_at": "2026-07-13T05:00:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -6256,8 +6239,8 @@
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 368,
-      "md5": "b1f2996dfe8568de3f6645587a6d4ba9",
-      "modified_at": "2026-07-12T20:49:01-04:00"
+      "md5": "c033c3ce3f54a7bc40a4fb4dcd2c570c",
+      "modified_at": "2026-07-13T04:49:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -6292,14 +6275,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "6d6bd226b16d3d9a8482522d94971af8",
-      "modified_at": "2026-07-12T19:59:38-04:00"
+      "md5": "933e967b7ec0a4182bf6182eb1a404e9",
+      "modified_at": "2026-07-13T02:00:56-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 26068,
-      "md5": "fb55373ab36f9ff1fb93358096eb92f8",
-      "modified_at": "2026-07-12T21:10:01-04:00"
+      "md5": "1a919c2a2bea1e9f26a48663ecd25cef",
+      "modified_at": "2026-07-13T05:00:02-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
+      "size_bytes": 401,
+      "md5": "42f3a3320e4ad5459dc87bff8a4ed879",
+      "modified_at": "2026-07-13T04:34:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -6316,14 +6305,14 @@
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 438,
-      "md5": "146a70b005153ec35fbe9b45ce78dcea",
-      "modified_at": "2026-07-12T18:54:37-04:00"
+      "md5": "d1f1a9095b08b22a2aab219e22aeebf7",
+      "modified_at": "2026-07-12T22:54:34-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 256505,
-      "md5": "11ce69cd572f82c60031e3966a7c84cb",
-      "modified_at": "2026-07-12T20:50:33-04:00"
+      "size_bytes": 276086,
+      "md5": "dc1e55b79041f6af913c905e43d0cd01",
+      "modified_at": "2026-07-13T01:09:13-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -6345,9 +6334,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 48979,
-      "md5": "a3f552e9323013815e574fbd8608a8d6",
-      "modified_at": "2026-07-12T21:04:55-04:00"
+      "size_bytes": 48907,
+      "md5": "fc500c0471cb4df6f877392ea4e93bb0",
+      "modified_at": "2026-07-12T23:04:57-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -6369,17 +6358,15 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1112,
-      "md5": "cbafbb990ec5b23f167214849005f83b",
-      "modified_at": "2026-07-12T20:39:02-04:00"
+      "size_bytes": 1080,
+      "md5": "b0c32e34f0c0180bc3c40dbe06e1c4f5",
+      "modified_at": "2026-07-13T04:39:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
       "size_bytes": 61500,
       "md5": "da510954b391cb900393f9f16f12db56",
-      "modified_at": "2026-07-12T21:53:22-04:00",
-      "sha256": "b0dd4a16e77296ea470835e5d69c211082c45887c4105190996500ea491ced14",
-      "description": "Canonical MGS pendencias database; numeric IDs allocated from live max under exclusive lock."
+      "modified_at": "2026-07-12T21:53:22-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
@@ -6444,8 +6431,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
-      "md5": "06e494fffe892604706647fffa3ff511",
-      "modified_at": "2026-07-12T21:11:01-04:00"
+      "md5": "288653ac7d3b81cbcedf22e2c08abaf2",
+      "modified_at": "2026-07-13T04:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -6474,8 +6461,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2111,
-      "md5": "24d1bf12b8da9b20eba57ccaa0346107",
-      "modified_at": "2026-07-12T21:10:02-04:00"
+      "md5": "e7f11476dc168a7a7b277623855d5964",
+      "modified_at": "2026-07-13T05:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
@@ -6509,15 +6496,15 @@
     },
     {
       "path": "/root/mgs-agent/profiles/ares-soul.md",
-      "size_bytes": 8160,
-      "md5": "b3fc52dc3f83e15b7cfd1f4296764c4d",
-      "modified_at": "2026-07-12T20:30:01-04:00"
+      "size_bytes": 8565,
+      "md5": "f6a65f6ddbc546b6d27babff9d039ba6",
+      "modified_at": "2026-07-13T01:07:05-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/atena-soul.md",
-      "size_bytes": 5625,
-      "md5": "aaeb4dbd7973d3009878cb09ab4c1e97",
-      "modified_at": "2026-07-12T14:53:40-04:00"
+      "size_bytes": 6037,
+      "md5": "df4063b0bcc7050887a7935529279206",
+      "modified_at": "2026-07-13T01:07:05-04:00"
     },
     {
       "path": "/root/mgs-agent/profiles/hera-soul.md",
@@ -6527,16 +6514,9 @@
     },
     {
       "path": "/root/mgs-agent/profiles/zeus-soul.md",
-      "size_bytes": 8187,
-      "md5": "992d40e83e63c7cd3a51e8642ca60cab",
-      "modified_at": "2026-07-12T20:24:36-04:00"
-    },
-    {
-      "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 208,
-      "modified_at": "2026-07-12T21:49:03-04:00",
-      "sha256": "517888121782d9b0811faeb1986b10346af6bd5466fcdf0edf0aab1948ee0e26",
-      "description": "Anti-spam/readback state for Hermes pending write monitor."
+      "size_bytes": 8922,
+      "md5": "37713c3398c8210cc75786328356a033",
+      "modified_at": "2026-07-13T01:07:05-04:00"
     }
   ],
   "mu_plugin_canonical": {
