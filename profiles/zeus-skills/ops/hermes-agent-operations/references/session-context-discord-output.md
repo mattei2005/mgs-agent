@@ -141,6 +141,25 @@ Interpretação:
 
 A correção recomendada deve ser em camadas: eliminar o gatilho legado por contagem, conter o crescimento evitável do agente/skill e só depois avaliar update/threshold. Não desligar compression.
 
+### Aplicação segura do limite de higiene nos profiles MGS
+
+Quando o diagnóstico confirmar o legado `hygiene_hard_message_limit: 250`, aplicar o default oficial `5000` assim:
+
+1. Verificar se há update/restart Hermes concorrente e ler os valores atuais em todos os profiles e mirrors.
+2. Criar backup dos oito arquivos: quatro `~/.hermes/profiles/<profile>/config.yaml` e quatro mirrors `/root/mgs-agent/profiles/<profile>-config.yaml`, com hashes.
+3. Para os profiles vivos, usar o writer nativo com escalar numérico: `hermes -p <profile> config set compression.hygiene_hard_message_limit 5000`.
+4. Alterar somente a mesma chave nos mirrors; não reserializar o YAML inteiro.
+5. Validar `config check` em todos, readback YAML de **tipo e valor** (`int`, `5000`) nos oito arquivos, diff exato contra o backup e PIDs inalterados.
+6. Não reiniciar: a documentação Hermes define hot reload de `compression.*` na próxima mensagem. Não criar thread de smoke apenas para forçar o reload.
+7. Atualizar inventário/audit e enviar REPORT-INFRA canônico.
+
+Pitfalls de validação:
+
+- `diff` retorna código `1` quando encontra a diferença esperada. Sob `set -e`/`pipefail`, trate esse status explicitamente ou valide semanticamente em Python; não classifique a mudança correta como falha.
+- `config check` pode imprimir `config version X → Y (update available)` e ainda retornar código `0`; isso é aviso de migração disponível, não falha da chave alterada.
+- A mudança evita compactação disparada apenas por contagem baixa de mensagens internas. Ela não elimina compactação legítima por tokens nem corrige tool loops excessivos retroativamente.
+- Preserve `threshold`, `target_ratio` e `protect_last_n` quando não fazem parte do escopo autorizado.
+
 ## 6. Context compression / Codex gpt-5.5 notices
 
 Use quando Rodolfo perguntar sobre mensagens do Hermes como:
