@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-12T20:44:59-04:00",
+    "updated_at": "2026-07-12T20:49:52-04:00",
     "generated_by": "zeus"
   },
   "system_packages": [
@@ -519,6 +519,19 @@
       "validation": "All three servers: runtime_old_count=0; permanent_old_count=0; runcloud.xml_old_count=0; nft_old_count=0; fail2ban_old_count=0; current egress rule count=0; fresh Hostinger SSH connection=OK; 22/tcp global zone port unchanged.",
       "status": "removed_validated",
       "updated_at": "2026-07-12T20:43:05-04:00"
+    },
+    {
+      "id": "retired-host-local-cleanup-guard-20260712",
+      "agent": "zeus",
+      "type": "security_guard_and_operational_reference_cleanup",
+      "guard_script": "/root/mgs-agent/scripts/check-retired-host-references.py",
+      "guard_sha256": "7fba9fa0ff6c40b6df879f8e8ee8e62a2d6d9926a9f33a8cb849c6128338cc3a",
+      "integrated_into": "/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh",
+      "integration_sha256": "ca66674d741c209557ebbd6c776832a8ce5913e295962a170cafe9a5a04406d2",
+      "scope": "Removed the retired endpoint from current operational docs/profile references and hashed known-host entries; preserved audit, Discord imports, backups, browser history and inventory evidence.",
+      "validation": "Operational profile hits=0; root crontab=0; systemd and system cron hits=0; hashed known-host matches=0; git tracked literal remains only in infra inventory evidence; guard positive path PASS; fail-closed fixture PASS; full Hermes MGS guard 244 tests PASS.",
+      "status": "deployed_validated",
+      "updated_at": "2026-07-12T20:49:52-04:00"
     },
     {
       "id": "finanzas-topfeed-preloader-css-failsafe-20260711",
@@ -1106,9 +1119,9 @@
       "owner": "Zeus/Ops",
       "risk": "medium",
       "description": "B011 DTR/ChatPion link monitor, renamed from temporary B011 label; validates OAuth connection and syncs X in sheet.",
-      "updated_at": "2026-07-11T20:57:13-04:00",
+      "updated_at": "2026-07-12T20:44:00-04:00",
       "validation": "2026-07-12: bash -n and embedded Python compile PASS; one-target dry-run rc=0 linked=1/1 with 2 item-get calls; full dry-run rc=0, targets=28, linked=23 and 23 item-get calls by item/vault ID.",
-      "last_change": "Replaced volatile /tmp/sb-venv default with /root/.local/share/mgs/sb-venv after reboot cleanup failure.",
+      "last_change": "2026-07-12: shared protected DTR metadata map; one full-item read per login; local Zeus Discord token; no credential values persisted.",
       "schedule": "24 8-23 * * *"
     },
     {
@@ -1123,8 +1136,24 @@
       "cron_job_id": "498fb0d95e10",
       "schedule": "24 8-23 * * *",
       "validation": "2026-07-12: bash -n and embedded Python compile PASS; one-target dry-run rc=0 linked=1/1 with 2 item-get calls; full dry-run rc=0, targets=28, linked=23 and 23 item-get calls by item/vault ID.",
-      "updated_at": "2026-07-11T20:57:13-04:00",
-      "last_change": "Replaced volatile /tmp/sb-venv default with /root/.local/share/mgs/sb-venv after reboot cleanup failure."
+      "updated_at": "2026-07-12T20:44:00-04:00",
+      "last_change": "2026-07-12: shared protected DTR metadata map; one full-item read per login; local Zeus Discord token; no credential values persisted."
+    },
+    {
+      "id": "mgs-1password-metadata-cache-20260712",
+      "agent": "zeus",
+      "type": "protected_runtime_cache",
+      "path": "/root/.cache/mgs/1password-metadata",
+      "owner": "Zeus/Ops",
+      "risk": "low",
+      "git_tracked": false,
+      "mode": "0700",
+      "file_mode": "0600",
+      "contains_secrets": false,
+      "contents": ["vault/item IDs", "scoped item titles", "DigitalTRChat usernames"],
+      "purpose": "Share non-secret 1Password discovery metadata across recurring MGS jobs and prevent repeated field-by-field lookups.",
+      "validation": "2026-07-12: cache scoped to 90 DigitalTRChat and 12 BOT items; no private-key/access-token markers; 8 concurrent synthetic processes produced one vault get, one item list and one item get; secret_persisted=false.",
+      "updated_at": "2026-07-12T20:44:00-04:00"
     },
     {
       "path": "/root/.hermes/profiles/zeus/skills/growth/meta-app-rate-limit-monitor/SKILL.md",
@@ -1604,8 +1633,8 @@
       "timezone": "America/New_York",
       "enabled": true,
       "purpose": "Full Meta app roles/admin and sheet reconciliation for B001-B010/B005-2.",
-      "validation": "cronjob readback enabled; next run 23:04 ET; collision audit start_count=1",
-      "updated_at": "2026-07-10T22:57:13-04:00"
+      "validation": "Cron readback enabled; phase-2 full dry-run exit 0 with 11 item-get calls by item/vault ID and no output/errors.",
+      "updated_at": "2026-07-12T20:44:00-04:00"
     },
     {
       "id": "zeus-hermes-cron-b011-dtr-link-watch",
@@ -1619,8 +1648,8 @@
       "timezone": "America/New_York",
       "enabled": true,
       "purpose": "B011 DTR/ChatPion OAuth link and page connection reconciliation.",
-      "validation": "Enabled schedule readback; runtime dry-run rc=0 linked=1/1 after persistent-vault migration.",
-      "updated_at": "2026-07-11T20:57:13-04:00"
+      "validation": "Enabled schedule readback; phase-2 full dry-run rc=0, targets=28, linked=23, 23 item-get calls by item/vault ID.",
+      "updated_at": "2026-07-12T20:44:00-04:00"
     },
     {
       "id": "hera-meta-library-dedicated-us-residential",

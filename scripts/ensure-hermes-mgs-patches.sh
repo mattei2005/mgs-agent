@@ -354,6 +354,9 @@ grep -q '"linked_files_summary"' "$REPO/tools/skills_tool.py" \
 grep -q "test_view_compacts_large_linked_file_inventory" "$REPO/tests/tools/test_skills_tool.py" \
   || fail "missing compact linked-files regression tests"
 
+"$BASE/scripts/check-retired-host-references.py" \
+  || fail "retired host reference reappeared on an operational surface"
+
 PYBIN="$REPO/venv/bin/python"
 [[ -x "$PYBIN" ]] || PYBIN="python3"
 "$PYBIN" -m py_compile \
