@@ -91,9 +91,12 @@ Operational rules:
 
 ```text
 - Keep `Paginas` as the consolidated view containing every current restricted page.
+- Use incremental reconciliation/upsert, never blind append: compare the live restricted dataset with the existing Sheet, update `Paginas`, and rewrite only site tabs whose desired rows changed. Site tabs with no additions, removals, row changes, or duplicate repair remain untouched.
+- Stable upsert key: primary `bot user + Page ID`; fallback `FB Page ID`. Reprocessing the same restriction must be idempotent and leave zero duplicate keys.
 - Create/update one additional tab for every concrete site value found in `Paginas`; each site tab contains only rows assigned to that site. If one row has multiple sites, include it in every matching site tab. Ignore blank/`?` as tab names.
+- `Data saída`/`Restricted Until` is inclusive: keep the page through that date; on the next calendar day remove it from `Paginas` and the affected site tab. If the same page becomes actively restricted again later, upsert it back into both views once.
 - Do not create or recreate `Resumo`, `Inventario Step1`, or unrelated auxiliary tabs.
-- Refresh `Paginas` and every current site tab from the same live restricted-page dataset, then validate headers and row counts for all tabs before claiming success.
+- Validate exact content and row counts for every managed tab after the incremental write; duplicate stable keys must equal zero.
 - Keep every column in every managed tab at a fixed generous width and use no-wrap/clip formatting for header and data cells so cell content never breaks into multiple lines.
 - The gestores-facing `Paginas` tab contains **only current active restricted pages** from live Smart Bidding where `Status SB = Broadcast` and `Restricted Until >= today`, after active-user scope and the global MGS ignore list. Never include Ready, Campaign, blank-status, On-hold, expired, unrestricted, or general diagnostic rows there.
 - Keep excluded counts only in local JSON logs; do not add summary tabs to the gestores-facing Sheet.

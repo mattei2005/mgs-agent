@@ -22,8 +22,8 @@ Operação                      | OpenzedFinanzas-CC-ES
 Conta piloto                  | 1356770869843984
 Canal                         | Messenger
 Nível de ação                 | Campaign somente
-Cortes intraday               | A cada 30 minutos via cron determinístico na VPS
-Reativar-todas                | 00:30 no timezone da conta Meta via cron determinístico
+Cortes intraday               | R1-R4 a cada 30 minutos, com 2 checkpoints consecutivos, via cron determinístico
+Reativação 00:30              | Somente `paused_by_ares_rule`; pausas humanas/históricas/saturadas/hold/unknown são bloqueadas
 Budget referência             | USD 300/dia; 20% (USD 60/dia) reservado para teste de criativos
 Carência TEST                 | Nome contém TEST => não pausar/excluir por 3 dias
 Log intraday                  | Só quando houver ação/erro; resumido no canal dedicado
@@ -82,7 +82,7 @@ autonomous_guarded  Futuro; exige política, limites e aprovação formal própr
 ## Regras operacionais
 
 1. Intraday e reativar-todas são determinísticos e devem rodar como cron/script na VPS; skill é documentação/contexto operacional, não runtime.
-2. R1-R5 são slots plugáveis por operação, não hardcoded por conta; para conta/Business Manager em USD, thresholds ficam em USD.
+2. R1-R4 são slots plugáveis por operação, não hardcoded por conta; para conta/Business Manager em USD, thresholds ficam em USD.
 3. Em operações Europa/GDPR, usar `MO = actions.complete_registration` e `CPMO = spend / MO` como norte intraday, porque a Meta pode não expor subscribe de forma confiável. Não usar `subs/CPS` como métrica primária dessas operações.
 4. Cortes e reativações ocorrem somente em nível de campanha.
 5. Campanhas com `TEST` no nome têm carência de 3 dias usando `created_time` da Meta; fallback é `first_seen_at` local; durante essa carência ficam imunes a todas as regras R1-R5.
@@ -91,7 +91,7 @@ autonomous_guarded  Futuro; exige política, limites e aprovação formal própr
 8. Teto diário de USD 300 é referência/log/base para orçamento; 20% (USD 60) fica reservado para testes de criativos novos quando houver espaço de budget.
 9. Log intraday no Discord deve ser resumido e enviado quando houver ação/erro. Para OpenzedFinanzas, Rodolfo aprovou heartbeat enxuto: quando o cron roda limpo sem candidatos, o wrapper habilita `ARES_META_INTRADAY_HEARTBEAT_HOURS=3` e o runner emite no máximo 1 sinal de vida a cada 3h, usando state local em `/root/mgs-agent/data/ares/meta-ads/state/intraday-heartbeat-<op>-<account>.json`. Chamadas manuais do runner continuam silenciosas por padrão, salvo se a env var for definida explicitamente.
 10. Logs dos crons Meta em `logs-aquisicao` devem usar título com `nome da conta — dia — horário no timezone da conta — tipo do cron` e tabela alinhada com estas colunas base: `ID REC`, `Nome da campanha`, `PG ID`, `Início`, métricas aplicáveis, `Ação`, `Motivo`, `Status`. `ID REC` é identificador da recomendação, não da campanha, e deve usar sequência de 3 dígitos (`REC-YYYYMMDD-HHMM-001`). `Nome da campanha` deve ser legível no mobile e pode normalizar apenas a exibição para 3 dígitos (`... - 009`) sem renomear a campanha na Meta; o nome bruto fica no audit. `Início` deve ser data real em formato `dd/mm/yyyy`, nunca idade decimal tipo `1.17d`. Não incluir colunas redundantes `Nome da página`, `Página`, `Campaign ID` ou `Meta ID` no relatório normal; IDs técnicos ficam no audit/API. Extrair `PG ID` do padrão `(pg_12345)` no nome da campanha. Em `Regra usada`/`Motivo`, intraday deve mostrar o identificador e a descrição curta (`R1 — ...`, `R2 — ...`, `R3 — ...`, `R4 — ...`, `R5 — ...`). O cron diário separado deve mostrar só `reativar-todas` — não rotular como `fora R1-R5`, porque a distinção já está no tipo do cron/título.
-11. Intraday R1-R5 e HOA são camadas separadas e devem coexistir inicialmente. HOA roda como camada de gestor/tráfego nos checkpoints 08:00, 12:00, 15:00, 18:00 e 22:00 no timezone da conta, usando MO/CPMO em operações Europa/GDPR. O relatório HOA deve abrir com cabeçalho humano: `HOA — relatório das HH:MM (Europe/Madrid) da página em foco`, declarar que é análise sem alteração na Meta e só depois mostrar a tabela. Deve listar todas as campanhas da página em foco (`management_scope.active_focus`) — ativas, pausadas e histórico visível por insights — não só watchlist, ordenadas pela numeração da campanha (`001`, `002`, `003`... até a última). Quando a página deixar de rodar, atualizar `active_focus`; o HOA passa a reportar a próxima página em foco.
+11. Intraday R1-R4 e HOA são camadas separadas e devem coexistir inicialmente. HOA roda como camada de gestor/tráfego nos checkpoints 08:00, 12:00, 15:00, 18:00 e 22:00 no timezone da conta, usando MO/CPMO em operações Europa/GDPR. O relatório HOA deve abrir com cabeçalho humano: `HOA — relatório das HH:MM (Europe/Madrid) da página em foco`, declarar que é análise sem alteração na Meta e só depois mostrar a tabela. Deve listar todas as campanhas da página em foco (`management_scope.active_focus`) — ativas, pausadas e histórico visível por insights — não só watchlist, ordenadas pela numeração da campanha (`001`, `002`, `003`... até a última). Quando a página deixar de rodar, atualizar `active_focus`; o HOA passa a reportar a próxima página em foco.
 12. Durante a fase de calibração de 4 dias, operar em `read_only/dry_run`: Ares deve reportar a ação que tomaria, regra e motivo; Rodolfo executa/declina manualmente e corrige a lógica. Não recomendar liberar write/autonomia antes dessa calibração. Campanhas com menos de 3 dias de campanha ficam em learning/aquecimento: o intraday pode mostrar métricas e regras que teriam acionado, mas a ação sugerida deve ser informativa (`eu observaria`), sem recomendar pausa/reativação até completar a janela de learning.
 13. O cron lê a conta/operação como fonte de dados, mas a gestão deve respeitar `active_scope` e estado local: campanhas pausadas por humano/saturação entram em hold/exclusão; campanhas pausadas por regra do Ares continuam monitoradas para simular reativação.
 14. Para recomendações que exigem ação humana, criar/usar thread do checkpoint em `logs-aquisicao` e incluir `ID recomendação`, `Ação que eu tomaria`, `Motivo` e `Estado local`. Respostas curtas de Rodolfo (`feito`, `ignorar`, `segurar`, `pausei`, `reativei`, `não mexer nessa campanha`) devem ser registradas em state/audit e validadas por GET na próxima leitura.
@@ -101,19 +101,19 @@ autonomous_guarded  Futuro; exige política, limites e aprovação formal própr
 17. Quando Rodolfo der autorização explícita para uma manutenção pontual em Meta Ads (ex.: virada da conta, budget/adset/rules), tratar como `controlled_write` limitado ao escopo nomeado — não como liberação geral de autonomia. Antes de escrever: validar estado vivo, clarificar divergência de escopo/contagem, rodar dry-run, salvar audit, agendar one-shot se for na virada e validar por GET depois.
 17. Mudanças de acesso ao Discord/logs-aquisicao não devem ser assumidas pelo Ares se não houver token/capacidade admin disponível. Se Ares tiver `MANAGE_ROLES`/`MANAGE_CHANNELS`, pode aplicar permission overwrites e validar por GET. Caso contrário, enviar handoff explícito ao Zeus/admin com canal, IDs e motivo; só reportar como concluído após confirmação/API bem-sucedida.
 
-## Defaults R1-R5 atuais — OpenzedFinanzas-CC-ES / Europa / USD
+## Defaults v2 aprovados — OpenzedFinanzas-CC-ES / Europa / USD
 
 ```text
-Regra | Condição                                                   | Ação
-------|------------------------------------------------------------|--------------------
-R1    | MO = 0 e spend > USD 5.00                                  | pausar campanha
-R2    | MO > 0 e CPMO > USD 3.25                                   | pausar campanha
-R3    | MO = 1 e spend > USD 5.00                                  | pausar campanha
-R4    | LOWEST_COST + MO >= 2 + CPMO > USD 2.00 + spend >= USD 8.00| pausar campanha
-R5    | campanha pausada + MO >= 2 + CPMO < USD 2.50               | reativar campanha
+Regra | Condição                                                                 | Persistência | Ação
+------|--------------------------------------------------------------------------|-------------|-------------------
+R1    | MO = 0 e spend >= USD 4.00                                                | 2 checkpoints| pausar campanha
+R2    | MO = 1 e spend >= USD 4.50                                                | 2 checkpoints| pausar campanha
+R3    | MO >= 2 + spend >= USD 6.00 + CPMO > USD 2.00                            | 2 checkpoints| pausar campanha
+R4    | LOWEST_COST/LOWEST_COST_WITHOUT_CAP + MO >= 5 + spend >= 10 + CPMO > 1.75| 2 checkpoints| pausar campanha
+R5    | removida: não existe reativação intraday por métrica congelada            | n/a          | nenhuma
 ```
 
-Exceções: campanha `TEST` com menos de 3 dias ativos é imune a todas as regras; `COST_CAP` não pausa por regra de custo.
+Exceções: `COST_CAP` fica fora de todas as pausas por custo; TEST e learning com menos de 3 dias não acumulam persistência nem recebem ação. Às 00:30, reativar somente campanhas com proveniência persistida `paused_by_ares_rule`, respeitando quantidade ativa e projeção de gasto <= USD 300. HOA usa target CPMO USD 1.30 e replacement exige 2 dias ruins entre 3 dias completos; dia ruim requer CPMO > 1.30, spend >= USD 10 e MO >= 5. ROI Drip/Total é informativo e não aciona write.
 
 ## Métricas Meta atuais
 
@@ -206,7 +206,7 @@ Fase | Critério
 - Quando Rodolfo pedir ação no canal do Zeus, mencionar explicitamente o bot Zeus (`<@1496296175014252634>`); mensagem sem mention pode não ser lida/acionada pelo Zeus.
 - Não confundir controlled-write explícito de setup com autorização geral para write/autonomia; registrar escopo exato aprovado, rodar dry-run, validar por GET e manter os crons de gestão em read-only até nova aprovação.
 - Antes de liberar qualquer regra de custo para write, normalizar a taxonomia real de bid strategy. A Meta pode retornar `LOWEST_COST_WITHOUT_CAP`, enquanto rulesets históricos usam `LOWEST_COST`; o matcher deve mapear ambos para a mesma estratégia lógica ou aceitar explicitamente os dois valores. Dry-run sem candidatos não prova que R4 está funcional.
-- `reativar-todas` só pode permanecer amplo em dry-run. Em write, exige estado persistido de proveniência da pausa e deve alcançar apenas `paused_by_ares_rule`; nunca reativar todo objeto `PAUSED` da página em foco. Aplicar também gate de quantidade ativa, budget configurado e projeção de gasto contra o cap da conta.
+- A rota CLI histórica `reactivate-all` agora é apenas compatibilidade de nome para o passe seguro das 00:30. Mesmo em dry-run, só pode gerar candidato com state persistido `paused_by_ares_rule`; `paused_by_human`, histórico, saturação, hold e proveniência desconhecida são bloqueados. Aplicar também gate de quantidade ativa, budget configurado e projeção de gasto contra o cap da conta.
 - Para ROI Messenger via Smart Bidding, os endpoints `/report/messenger` e `/report/messenger_insights` podem expor `DRIP_REVENUE`, `BD_REVENUE` e `REVENUE`. Usar gasto Meta reconciliado como denominador quando `INVESTIMENT` histórico do SB estiver ausente/zero, unir por `pg_id`/`UTM_CAMPAIGN` + conta + período/timezone e rotular o resultado como cashflow quando não houver coorte de aquisição.
 - Para ROI histórico por data no Smart Bidding, consultar o intervalo completo e agrupar por `DATE`; não fazer apenas uma chamada isolada por dia. Na API observada, `/report/messenger` retornou somente o dia atual quando chamado sozinho, enquanto a sequência `/report/messenger_insights` seguida de `/report/messenger` para o mesmo intervalo devolveu o histórico completo da página. Validar `matched_rows` e datas antes de calcular ROI; ausência de linha deve aparecer como dado indisponível, nunca como receita zero.
 - Antes de executar pedidos como “deixar 20 campanhas”, validar quantas campanhas existem no escopo ativo e esclarecer se deve duplicar, reativar pausadas ou limitar ao escopo atual; não assumir.

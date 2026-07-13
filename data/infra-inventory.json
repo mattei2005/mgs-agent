@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-13T17:38:11-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-13T18:08:22-04:00",
+    "generated_by": "infra-discovery.sh + Ares operational registration"
   },
   "system_packages": [
     {
@@ -943,18 +943,63 @@
         "/root/mgs-agent/tests/test_ares_meta_hoa_roi.py"
       ],
       "sha256": {
-        "ares-meta-hoa-manager.py": "c69a2573e098b2bbd386e3cb86d088354304ab57ec99a66cd588b0c2d5321c2f",
+        "ares-meta-hoa-manager.py": "1b109a8177002c8ceb4fa0822f9e8e0c187ef0dee510bb45851a5149d74741bd",
         "ares-smartbidding-common.py": "2cb736c2c6bf09d63a499b1656ee4b83c905f2d1661e32464afa9e7e9d70b8a3",
-        "OpenzedFinanzas-CC-ES.json": "e678dff5c4715a36911a9da3be59ea71918a29aac84e94dc6f9161356cd15c28",
-        "test_ares_meta_hoa_roi.py": "f8ef764ae8a9d337eec90983d6e69d650dd4f3cebde46b53cdee6c2a0cea01ef"
+        "OpenzedFinanzas-CC-ES.json": "66f47654a6d9f6ec923985b819f1c554d0779f99d00efb6b592fb39f7a34660c",
+        "test_ares_meta_hoa_roi.py": "fd5b1e7dd6d0ba496efc6c7f121ed5b6bf2ec25726c299a9b40f13c91f6ce008"
       },
       "purpose": "Exibir no HOA da página em foco somente ROI Drip e ROI Total em cashflow diário; manter receita/ROI Broadcast apenas no audit para investigação, sem coluna no Discord.",
       "auth": "Auth0 Authorization Code + PKCE; credenciais resolvidas do item Ares - Smartbidding Dashboard no 1Password; token cache local 0600 sem exposição.",
-      "scope": "read_only_dry_run_no_meta_write; ROI informativo sem gatilho de regra; thresholds R1-R5 e target CPMO preservados.",
-      "validation": "4 unit tests OK; py_compile/diff-check OK; integração live 2026-07-13 pg_22091 status OK; display contém ROI Drip/Total e não contém ROI Broad; Broadcast preservado no JSON; target CPMO 2.0 e no Meta write.",
-      "evidence": "/root/mgs-agent/data/ares/meta-ads/reports/hoa/OpenzedFinanzas-CC-ES/hoa-20260713T213449Z.json",
+      "scope": "read_only_dry_run_no_meta_write; ROI Drip/Total informativo sem gatilho de regra; ruleset v2 e target CPMO USD 1.30 configurados separadamente.",
+      "validation": "10 unit tests OK; py_compile/diff-check OK; integração live 2026-07-13 com 20 campanhas + bloco ROI; display contém ROI Drip/Total e não contém ROI Broad; Broadcast preservado no JSON; target CPMO 1.30 e no Meta write.",
+      "evidence": "/root/mgs-agent/data/ares/meta-ads/reports/hoa/OpenzedFinanzas-CC-ES/hoa-20260713T220137Z.json",
       "source_report": "REPORT-INFRA Ares HOA Smart Bidding ROI 2026-07-13",
-      "updated_at": "2026-07-13T17:35:10-04:00"
+      "updated_at": "2026-07-13T18:08:22-04:00"
+    },
+    {
+      "id": "ares-openzedfinanzas-ruleset-v2-20260713",
+      "agent": "ares",
+      "type": "operational_ruleset_runtime",
+      "paths": [
+        "/root/mgs-agent/data/ares/meta-ads/rules/openzedfinanzas_cc_es_intraday_v2.json",
+        "/root/mgs-agent/data/ares/meta-ads/policies/openzedfinanzas_cc_es_hoa_v2.json",
+        "/root/mgs-agent/data/ares/meta-ads/operations/OpenzedFinanzas-CC-ES.json",
+        "/root/mgs-agent/data/ares/meta-ads/state/campaign-action-provenance-OpenzedFinanzas-CC-ES-1356770869843984.json",
+        "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
+        "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
+        "/root/mgs-agent/tests/test_ares_meta_ruleset_v2.py",
+        "/root/mgs-agent/tests/test_ares_meta_hoa_roi.py",
+        "/root/.hermes/profiles/ares/scripts/ares-meta-reactivate-all-cron.sh",
+        "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
+      ],
+      "sha256": {
+        "openzedfinanzas_cc_es_intraday_v2.json": "548f23281632cabcfde377c60e7a74b6ede260ce8b62cde44bb4146d127d07f2",
+        "openzedfinanzas_cc_es_hoa_v2.json": "ecc1b1a86aa7e374b391fd4adb24a5a0e635e25013cc4c46b605b072e2371613",
+        "OpenzedFinanzas-CC-ES.json": "66f47654a6d9f6ec923985b819f1c554d0779f99d00efb6b592fb39f7a34660c",
+        "campaign-action-provenance.json": "24eb0e1a05e19a2f90273ffe6fc070776f8118dce921342d4620ad4f9737cac8",
+        "ares-meta-cron-runner.py": "00c45342f35bdcedf21fe134911588561a546f49b7e4319128293559cc5e90b1",
+        "ares-meta-hoa-manager.py": "1b109a8177002c8ceb4fa0822f9e8e0c187ef0dee510bb45851a5149d74741bd",
+        "test_ares_meta_ruleset_v2.py": "660737da5b4d20db63399e4f6c81c20e7fcaf93d8b1adc02eb0896da773093d6",
+        "test_ares_meta_hoa_roi.py": "fd5b1e7dd6d0ba496efc6c7f121ed5b6bf2ec25726c299a9b40f13c91f6ce008",
+        "ares-meta-reactivate-all-cron.sh": "97a2bbe8570383238608dc0f6dacf21b4c34db0ef7c96dea23653c22220a6e05",
+        "meta-ads-intraday-operations-SKILL.md": "78a0504d249242980cfb3e9ec0e5c79e56c495af9ee17ed0a0a9074ce7ff80f7"
+      },
+      "rules": "R1 MO=0/spend>=4; R2 MO=1/spend>=4.5; R3 MO>=2/spend>=6/CPMO>2; R4 LOWEST_COST variants/MO>=5/spend>=10/CPMO>1.75; all require 2 consecutive checkpoints; R5 removed.",
+      "hoa": "Baseline provisional USD 1.15; target USD 1.30; bad day requires spend>=10, MO>=5 and CPMO>1.30; replacement requires 2 bad days among 3 complete days.",
+      "guardrails": "COST_CAP excluded from cost pauses/replacement; TEST/learning 3d; 00:30 only paused_by_ares_rule; active-count/projected-spend cap USD300; ROI Drip/Total informational; Meta write disabled.",
+      "cron_jobs": {
+        "intraday": "aa9e01a5ec4a",
+        "reactivation_00_30": "c6c737070d3f",
+        "hoa": "e84a8db81fb3"
+      },
+      "validation": "10 unit tests OK; py_compile/bash -n/JSON/diff-check OK; intraday live audit v2 errors=0; reactivation live paused_seen=30/blocked_provenance=30/candidates=0; HOA live target=1.3, gates 10/5/2-of-3, 20 campaign rows + ROI; no credential keys; no Meta write.",
+      "evidence": [
+        "/root/mgs-agent/data/ares/meta-ads/audit/intraday/intraday-20260713T220044Z.json",
+        "/root/mgs-agent/data/ares/meta-ads/audit/reactivate-all/reactivate-all-20260713T220109Z.json",
+        "/root/mgs-agent/data/ares/meta-ads/reports/hoa/OpenzedFinanzas-CC-ES/hoa-20260713T220137Z.json"
+      ],
+      "source_report": "REPORT-INFRA Ares OpenzedFinanzas ruleset v2 2026-07-13",
+      "updated_at": "2026-07-13T18:08:22-04:00"
     },
     {
       "id": "ares-meta-hoa-fixed-discord-thread-20260622",
@@ -3000,8 +3045,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-cron-runner.py",
-      "size_bytes": 28361,
-      "modified_at": "2026-07-08T18:49:07-04:00"
+      "size_bytes": 40424,
+      "modified_at": "2026-07-13T18:06:29-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-elena-asyncbatch-adset-copy-probe.py",
@@ -3030,8 +3075,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-hoa-manager.py",
-      "size_bytes": 27132,
-      "modified_at": "2026-07-13T17:34:33-04:00"
+      "size_bytes": 31223,
+      "modified_at": "2026-07-13T17:59:16-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/ares-meta-intraday-runner.py",
