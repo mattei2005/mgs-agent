@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-12T21:24:40-04:00",
+    "updated_at": "2026-07-12T21:44:26-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -503,6 +503,26 @@
         "/root/.hermes/profiles/atena/config.yaml.pre-memory-approval-20260712-204200.bak",
         "/root/.hermes/profiles/ares/config.yaml.pre-memory-approval-20260712-204200.bak"
       ]
+    },
+    {
+      "id": "zeus-cross-session-anomaly-classification-gate-20260712",
+      "agent": "zeus",
+      "type": "profile_behavior_governance",
+      "path": "/root/.hermes/profiles/zeus/SOUL.md",
+      "versioned_path": "/root/mgs-agent/profiles/zeus-soul.md",
+      "sha256": "75b269e04cd6ce644de8c9e43a6112926d691bb312069918265f3be4379b766a",
+      "size_bytes": 8668,
+      "classification_order": [
+        "logs/events-audit.jsonl",
+        "data/infra-inventory.json",
+        "REPORT-INFRA #alerts-infra",
+        "Git",
+        "session_search"
+      ],
+      "scope": "Require cross-session source reconciliation before Zeus labels a concurrent change anomalous; distinguish reconciled action, unattributed concurrent change and real anomaly.",
+      "validation": "Live and versioned SOUL byte-identical with exact ordered gate; hermes-agent-operations skill procedure staged for approval as pending e56e124b and not bypassed.",
+      "status": "soul_deployed_skill_proposal_pending",
+      "updated_at": "2026-07-12T21:44:26-04:00"
     },
     {
       "id": "runcloud-retired-ssh-allow-removal-20260712",

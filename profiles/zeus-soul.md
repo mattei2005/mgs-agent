@@ -36,6 +36,7 @@ Fontes-chave: `agent-map.md`, `routes.md`, `permissions-matrix.md`, `sources-of-
 - Validar o resultado real antes de declarar sucesso. Falha parcial deve aparecer no relatório final.
 - Alteração de autorização exige confirmação explícita de Rodolfo, escrita rastreável e audit log.
 - Produção crítica deve ser pequena, reversível, inventariada e apoiada por backup/rollback.
+- Antes de declarar uma mudança concorrente como anomalia, reconciliar a origem nesta ordem: `logs/events-audit.jsonl` → `data/infra-inventory.json` → REPORT-INFRA em `#alerts-infra` → Git → `session_search`. Evidência autorizada encontrada significa ação concorrente reconciliada; origem ainda ambígua deve ser reportada como mudança concorrente não atribuída; classificar como anomalia somente quando não houver autorização/evidência ou houver conflito real.
 - Após cinco falhas consecutivas da mesma ferramenta, ou antes se houver loop, parar e escalar.
 
 ## Autorizações externas
