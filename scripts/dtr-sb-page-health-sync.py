@@ -307,8 +307,13 @@ async def get_sb_context():
 
 async def fetch_sb_rows(ctx,h):
     rc=await ctx.request.get('https://api.jbfdigital.com.br/company', headers=h, timeout=120000)
-    companies=await rc.json(); pubs=[]
+    companies=await rc.json()
+    if rc.status != 200 or not isinstance(companies, list):
+        raise RuntimeError(f'bad SB company response status={rc.status} type={type(companies).__name__}')
+    pubs=[]
     for c in companies:
+        if not isinstance(c, dict):
+            raise RuntimeError('bad SB company row type')
         for pub in c.get('publishers') or []:
             if pub.get('active') and pub.get('publisherId'): pubs.append(pub['publisherId'])
     qs='&'.join('companies[]='+urllib.parse.quote(x) for x in pubs)+'&source=Messenger'

@@ -118,7 +118,11 @@ def oauth_credentials() -> dict[str, str]:
 
     token_file = Path(OAUTH_TOKEN_FILE)
     token_data = read_json_file(token_file)
-    if token_data.get("refresh_token"):
+    # The combined client cache is the canonical runtime credential because it
+    # is also the source validated by the OAuth watchdog. The legacy token file
+    # may contain an older/revoked refresh token; use it only when the canonical
+    # cache has no refresh token instead of silently overriding a healthy one.
+    if not creds.get("refresh_token") and token_data.get("refresh_token"):
         creds["refresh_token"] = str(token_data["refresh_token"])
 
     if all(creds.get(k) for k in ("client_id", "client_secret", "refresh_token")):
@@ -139,7 +143,7 @@ def oauth_credentials() -> dict[str, str]:
                 if obj.get(k):
                     creds[k] = obj[k]
 
-    if token_data.get("refresh_token"):
+    if not creds.get("refresh_token") and token_data.get("refresh_token"):
         creds["refresh_token"] = str(token_data["refresh_token"])
 
     missing = [k for k in ("client_id", "client_secret", "refresh_token") if not creds.get(k)]

@@ -31,6 +31,13 @@ Correção importante validada em 2026-07-02: o ID `14ica5TVauTrzAxcl4T-ViJorF89
 
 Regra de REPORT-INFRA para mudanças de skill/script/data/config feitas pelo Ares: não declarar “enviei o REPORT-INFRA” com base apenas em intenção. Primeiro executar o envio real pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh` ou, se usar fallback textual, validar HTTP 204 e confirmar via Discord API que a mensagem aparece em `#alerts-infra` (`1498132022634483894`) antes de afirmar na thread original. Não usar scripts com nome de outro agente como caminho padrão (`ares-report-infra.sh`) quando houver helper canônico MGS.
 
+### Fonte canônica do OAuth Drive
+
+- O runtime de write usa `/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json` como cache combinado canônico (`client_id`, `client_secret`, `refresh_token`), a mesma fonte validada pelo watchdog.
+- `/root/mgs-agent/.secrets/ares-google-drive-oauth.json` é fallback legado de refresh token e só pode ser usado quando o cache canônico não tiver `refresh_token`; nunca deve sobrescrever silenciosamente um token canônico saudável.
+- Se o write retornar `invalid_grant`, comparar as fontes apenas por presença/igualdade interna, sem imprimir token ou hash. Se o watchdog canônico der HTTP 200 e o runner falhar, investigar precedência de cache antes de pedir nova autorização ao usuário.
+- Após correção, validar: refresh HTTP 200, escopo Drive completo, GET de arquivo real e PATCH controlado + GET/readback sem alterar conteúdo.
+
 Estrutura de referência por vertical/operação. `CC_US_ES` é exemplo/piloto; outras verticais devem ser organizadas na pasta correta do Drive:
 
 ```text
