@@ -49,7 +49,7 @@ if (( ${#missing[@]} > 0 )); then
 fi
 
 DISCORD_CHANNEL_ID="1498132022634483894"
-DISCORD_POSTER="${BASE_DIR}/scripts/discord-bot-post.py"
+DISCORD_POSTER="${DISCORD_POSTER:-${BASE_DIR}/scripts/discord-bot-post.py}"
 
 HOST=$(hostname)
 NOW=$(TZ=America/New_York date '+%Y-%m-%d %H:%M:%S %Z')

@@ -156,6 +156,13 @@ def _normalize_tags(tags: Optional[Iterable[str]]) -> List[str]:
     return [str(tag).strip() for tag in (tags or []) if str(tag).strip()]
 
 
+def _require_category(data: Dict[str, Any], category: str) -> None:
+    categories = data.get("categorias") or {}
+    if not isinstance(categories, dict) or category not in categories:
+        allowed = ", ".join(sorted(categories)) if isinstance(categories, dict) else ""
+        raise IntegrityError(f"invalid category {category!r}; allowed: {allowed}")
+
+
 def add_open(
     db_path: Path | str,
     *,
