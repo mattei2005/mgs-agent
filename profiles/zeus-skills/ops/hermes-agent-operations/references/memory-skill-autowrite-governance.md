@@ -156,6 +156,19 @@ Preferred deployed design:
 
 Minimum behavior tests: add/replace/batch overflow preservation; remove and non-capacity errors do not stage; gate-on paths do not double-stage; duplicate retries coalesce; persistence failure is surfaced; `0700/0600` permissions hold; monitor alert/recovery/anti-spam works; and the original MEMORY/USER bytes remain unchanged after rejection.
 
+### Implementation-review chokepoints
+
+When reviewing a proposed overflow dead-letter against deployed Hermes, verify these less-obvious sibling paths:
+
+- A retry-budget or graceful-degradation wrapper must preserve `error_code: capacity_overflow` and numeric usage fields. A wrapper that replaces the whole error dict after repeated failures can silently bypass dispatcher interception on later retries.
+- Intercept overflow only after the approval gate allowed a direct store attempt. Do not intercept approved-pending replay: the original pending record already survives when replay fails, so a second dead letter is duplication.
+- Derive the idempotency key from profile scope + canonical replay payload + a target-state fingerprint computed under the store lock. Exclude timestamps, session/thread IDs, and origin from the key; include them only as record context.
+- Existing pending writers may be best-effort and return plausible IDs after disk failure. A recovery writer must atomically persist, fsync, read back, verify the record, and fail truthfully when persistence is unconfirmed.
+- Create or repair pending directories to `0700` and records to `0600`. Use a unique same-directory temp file and replace the queue entry itself; do not use a symlink-preserving atomic helper for deterministic queue filenames.
+- Validate pending IDs as single safe path components before `get` or `discard`; slash-command IDs are user-controlled.
+- Background-review summaries often ignore every `success: false` result. Special-case staged `capacity_overflow` before that filter, report target/usage/pending ID, and never expose rejected payload content in alerts.
+- The model tool schema usually describes inputs only. Keep the capacity contract in result dictionaries rather than adding overflow as an input action or top-level schema combinator.
+
 ### Buffer ordering and activation semantics
 
 A temporary limit increase is a bridge, not the durable fix. Raising the cap alone adds no prompt tokens until content actually grows; document the possible maximum growth, compact with a reviewed full diff, then reduce or reassess the cap.

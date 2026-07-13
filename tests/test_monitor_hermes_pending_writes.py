@@ -21,15 +21,27 @@ class PendingMonitorTests(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
-    def record(self, profile, subsystem, pid, age_hours, summary="SECRET CONTENT"):
+    def record(
+        self,
+        profile,
+        subsystem,
+        pid,
+        age_hours,
+        summary="SECRET CONTENT",
+        failure_type=None,
+    ):
         target = self.root / profile / "pending" / subsystem
         target.mkdir(parents=True, exist_ok=True)
-        (target / f"{pid}.json").write_text(json.dumps({
+        record = {
             "id": pid,
             "created_at": self.now - age_hours * 3600,
             "summary": summary,
             "payload": {"content": "DO NOT LEAK"},
-        }))
+        }
+        if failure_type:
+            record["failure_type"] = failure_type
+            record["persisted"] = True
+        (target / f"{pid}.json").write_text(json.dumps(record))
 
     def memory_store(self, profile, filename, chars, memory_limit=2200, user_limit=1375):
         target = self.root / profile
@@ -145,6 +157,53 @@ class PendingMonitorTests(unittest.TestCase):
         decision = monitor.decide(summary, state, now_epoch=self.now, reminder_hours=24)
         updated = monitor.next_state(summary, state, decision, now_epoch=self.now)
         self.assertEqual(updated["capacity_warning_ids"], ["zeus.user"])
+
+    def test_capacity_overflow_dead_letter_alerts_immediately_without_content(self):
+        self.record(
+            "ares", "memory", "overflow1", 0.1,
+            failure_type="capacity_overflow",
+        )
+        summary = monitor.scan_pending(self.root, now_epoch=self.now, threshold_hours=24)
+        decision = monitor.decide(summary, {}, now_epoch=self.now, reminder_hours=24)
+        payload = monitor.build_payload(summary, decision)
+        encoded = json.dumps(payload)
+
+        self.assertEqual(summary["aged"], 0)
+        self.assertEqual(summary["dead_letter_ids"], ["ares/memory/overflow1"])
+        self.assertEqual(decision, {"action": "alert", "reason": "first_dead_letter"})
+        self.assertIn("overflow1", encoded)
+        self.assertNotIn("SECRET CONTENT", encoded)
+        self.assertNotIn("DO NOT LEAK", encoded)
+
+    def test_capacity_overflow_dead_letter_anti_spam_and_new_id(self):
+        self.record("ares", "memory", "overflow1", 0.1, failure_type="capacity_overflow")
+        summary = monitor.scan_pending(self.root, now_epoch=self.now)
+        state = {
+            "aged_ids": [],
+            "capacity_warning_ids": [],
+            "dead_letter_ids": ["ares/memory/overflow1"],
+            "last_alert_at": self.now - 3600,
+        }
+        suppressed = monitor.decide(summary, state, now_epoch=self.now, reminder_hours=24)
+        self.assertEqual(suppressed["action"], "none")
+
+        self.record("zeus", "memory", "overflow2", 0.0, failure_type="capacity_overflow")
+        expanded = monitor.scan_pending(self.root, now_epoch=self.now)
+        alerted = monitor.decide(expanded, state, now_epoch=self.now, reminder_hours=24)
+        self.assertEqual(alerted, {"action": "alert", "reason": "new_dead_letter"})
+
+    def test_capacity_overflow_dead_letter_recovery(self):
+        summary = monitor.scan_pending(self.root, now_epoch=self.now)
+        state = {
+            "aged_ids": [],
+            "capacity_warning_ids": [],
+            "dead_letter_ids": ["ares/memory/overflow1"],
+            "last_alert_at": self.now - 3600,
+        }
+        decision = monitor.decide(summary, state, now_epoch=self.now, reminder_hours=24)
+        updated = monitor.next_state(summary, state, decision, now_epoch=self.now)
+        self.assertEqual(decision, {"action": "recovery", "reason": "warnings_cleared"})
+        self.assertEqual(updated["dead_letter_ids"], [])
 
 
 if __name__ == "__main__":

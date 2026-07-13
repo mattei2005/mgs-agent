@@ -87,6 +87,8 @@ Para evidência, comando de retomada e distinção entre perfil reutilizado e se
 
 Para coleta integral, deduplicação SHA-256, sanitização, pacote de referências, upload e readback no Drive, consulte `references/full-collection-drive-packaging.md`.
 
+Para comprovar mudanças task-local sem tocar no collector canônico, use o A/B reproduzível de `references/task-local-collector-controlled-validation.md`: baseline byte-identical, candidato com diff isolado, dois `report.json`, hashes dos downloads, SHA antes/depois do canônico e `git diff --exit-code`.
+
 ## Verificação de encerramento
 
 Uma coleta só está concluída quando houver readback real de:
