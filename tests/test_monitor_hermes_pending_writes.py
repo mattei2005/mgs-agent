@@ -81,6 +81,15 @@ class PendingMonitorTests(unittest.TestCase):
         decision = monitor.decide(summary, state, now_epoch=self.now, reminder_hours=24)
         self.assertEqual(decision["action"], "recovery")
 
+    def test_scanner_error_preserves_last_confirmed_aged_set(self):
+        summary = monitor.scan_pending(self.root, now_epoch=self.now, threshold_hours=24)
+        summary["errors"] = ["zeus/skills/bad.json: JSONDecodeError"]
+        state = {"aged_ids": ["zeus/skills/a1"], "last_alert_at": self.now - 3600}
+        decision = monitor.decide(summary, state, now_epoch=self.now, reminder_hours=24)
+        updated = monitor.next_state(summary, state, decision, now_epoch=self.now)
+        self.assertEqual(decision["action"], "error")
+        self.assertEqual(updated["aged_ids"], ["zeus/skills/a1"])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

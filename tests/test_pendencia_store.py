@@ -120,16 +120,41 @@ class PendenciaStoreTests(unittest.TestCase):
             self.add()
         self.assertEqual(self.db.read_bytes(), before)
 
-    # 6. Ten concurrent adds produce ten unique IDs and no lost writes.
+    # 6. Ten concurrent processes produce ten unique IDs and no lost writes.
     def test_ten_concurrent_adds_are_unique(self):
         self.write_db(base_db([open_item("PEND-100")], root_next=1, meta_next=1))
-        def work(i):
-            return self.add(title=f"Concurrent {i}")["id"]
-        with ThreadPoolExecutor(max_workers=10) as pool:
-            ids = list(pool.map(work, range(10)))
+        processes = [
+            subprocess.Popen(
+                [
+                    sys.executable,
+                    str(SCRIPTS / "pendencia_store.py"),
+                    "--db",
+                    str(self.db),
+                    "add",
+                    f"Concurrent {index}",
+                    "--categoria",
+                    "infra",
+                    "--prioridade",
+                    "baixa",
+                    "--por",
+                    "test",
+                ],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+            )
+            for index in range(10)
+        ]
+        outputs = [process.communicate(timeout=20) for process in processes]
+        self.assertTrue(
+            all(process.returncode == 0 for process in processes),
+            msg=str([(process.returncode, output) for process, output in zip(processes, outputs)]),
+        )
+        data = self.read_db()
+        ids = [item["id"] for item in data["pendencias"] if item["id"] != "PEND-100"]
         self.assertEqual(len(set(ids)), 10)
         self.assertEqual(set(ids), {f"PEND-{n:03d}" for n in range(101, 111)})
-        self.assertEqual(len(self.read_db()["pendencias"]), 11)
+        self.assertEqual(len(data["pendencias"]), 11)
 
     # 7. A concurrent add and done cannot clobber one another.
     def test_add_and_done_concurrency_has_no_lost_update(self):

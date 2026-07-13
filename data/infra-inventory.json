@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-12T21:54:32-04:00",
+    "updated_at": "2026-07-12T22:00:20-04:00",
     "generated_by": "zeus"
   },
   "system_packages": [
@@ -1957,9 +1957,9 @@
         "content_exposure": false,
         "llm": false
       },
-      "validation": "7 unit tests PASS; aged fixture emitted one alert then anti-spam; staged content absent from payload; production scan total=18 aged=0 errors=0; report helper normal and scanner-failure fallback PASS; cron readback PASS.",
+      "validation": "8/8 monitor unit tests PASS; aged fixture emitted one alert then anti-spam; scanner error preserves last confirmed aged set; staged content absent from payload; production scan total=18 aged=0 errors=0; report helper normal and scanner-failure fallback PASS; cron readback PASS.",
       "status": "active",
-      "updated_at": "2026-07-12T21:54:32-04:00"
+      "updated_at": "2026-07-12T22:00:20-04:00"
     },
     {
       "id": "mgs-pendencia-transactional-store-20260712",
@@ -1982,9 +1982,9 @@
         "atomic fsync+replace+readback",
         "arguments passed via argv"
       ],
-      "validation": "11/11 acceptance tests PASS plus wrapper end-to-end fixture; production DB read-only validation next=PEND-092, duplicate IDs=0, counters=92/92. Erroneous PEND-091 resolution was rolled back atomically and verified open; no logical DB change retained.",
+      "validation": "11/11 acceptance tests PASS, including 10 concurrent OS processes, plus wrapper end-to-end fixture; production DB read-only validation next=PEND-092, duplicate IDs=0, counters=92/92. Erroneous PEND-091 resolution was rolled back atomically and verified open; no logical DB change retained.",
       "status": "deployed_validated",
-      "updated_at": "2026-07-12T21:54:32-04:00"
+      "updated_at": "2026-07-12T22:00:20-04:00"
     }
   ],
   "profile_skill_references": [
@@ -3442,16 +3442,16 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor_hermes_pending_writes.py",
-      "size_bytes": 11683,
-      "modified_at": "2026-07-12T21:47:48-04:00",
-      "sha256": "2ea42b956f0deab537e6be0af6da22fb4d9daccb781f9788db7587009471a2d9",
+      "size_bytes": 12152,
+      "modified_at": "2026-07-12T21:58:36-04:00",
+      "sha256": "2f9c8460e74d34fe5825b9013a6ae6b571a8c2d6c1e124c985d1763882f5bdc7",
       "description": "Read-only Hermes pending memory/skill aging monitor with stateful anti-spam and direct Discord embeds."
     },
     {
       "path": "/root/mgs-agent/scripts/pendencia_store.py",
-      "size_bytes": 12008,
-      "modified_at": "2026-07-12T21:49:25-04:00",
-      "sha256": "d4163553c169540b5c26de09b51bd4c83f11789c35581339910a941e844f69cd",
+      "size_bytes": 12452,
+      "modified_at": "2026-07-12T21:55:58-04:00",
+      "sha256": "c11ec4f6657a4964d5251022a5491a6e59d67d6a879b973448e4d3deb24d6b63",
       "description": "Transactional pendencias store: flock, max+1 ID allocation, derived counters, atomic write and readback."
     }
   ],

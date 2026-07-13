@@ -128,6 +128,29 @@ def decide(
     return {"action": "none", "reason": "healthy"}
 
 
+def next_state(
+    summary: Dict[str, Any],
+    state: Dict[str, Any],
+    decision: Dict[str, str],
+    *,
+    now_epoch: float,
+) -> Dict[str, Any]:
+    # A scanner error is an unknown queue state, not proof that aged items
+    # disappeared. Preserve the last confirmed aged set so recovery is emitted
+    # only after a later complete scan confirms zero.
+    confirmed_aged = state.get("aged_ids", []) if summary.get("errors") else summary["aged_ids"]
+    return {
+        "last_check_at": now_epoch,
+        "aged_ids": confirmed_aged,
+        "last_alert_at": now_epoch if decision["action"] in {"alert", "error"} else state.get("last_alert_at"),
+        "last_recovery_at": now_epoch if decision["action"] == "recovery" else state.get("last_recovery_at"),
+        "last_error_signature": "|".join(sorted(summary["errors"])) if summary["errors"] else "",
+        "last_total": summary["total"],
+        "last_aged": summary["aged"],
+        "last_oldest_hours": summary["oldest_hours"],
+    }
+
+
 def report_field(summary: Dict[str, Any]) -> str:
     if summary.get("errors"):
         return f"indisponível ({len(summary['errors'])} erro(s) de leitura)"
@@ -268,17 +291,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         send_result = _send(args.poster, args.channel_id, payload, dry_run=args.dry_run)
 
     if not args.dry_run:
-        new_state = {
-            "last_check_at": now,
-            "aged_ids": summary["aged_ids"],
-            "last_alert_at": now if decision["action"] in {"alert", "error"} else state.get("last_alert_at"),
-            "last_recovery_at": now if decision["action"] == "recovery" else state.get("last_recovery_at"),
-            "last_error_signature": "|".join(sorted(summary["errors"])) if summary["errors"] else "",
-            "last_total": summary["total"],
-            "last_aged": summary["aged"],
-            "last_oldest_hours": summary["oldest_hours"],
-        }
-        _write_state(args.state_file, new_state)
+        _write_state(args.state_file, next_state(summary, state, decision, now_epoch=now))
 
     print(json.dumps({
         "action": decision["action"],

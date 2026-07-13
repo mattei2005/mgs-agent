@@ -179,6 +179,7 @@ def add_open(
     ts = timestamp or _now_iso()
 
     def mutate(data: Dict[str, Any]) -> Dict[str, Any]:
+        _require_category(data, categoria)
         pending_id, _ = next_numeric_id(data)
         item = {
             "id": pending_id,
@@ -215,6 +216,7 @@ def add_historical(
     ts = timestamp or _now_iso()
 
     def mutate(data: Dict[str, Any]) -> Dict[str, Any]:
+        _require_category(data, categoria)
         pending_id, _ = next_numeric_id(data)
         item = {
             "id": pending_id,
