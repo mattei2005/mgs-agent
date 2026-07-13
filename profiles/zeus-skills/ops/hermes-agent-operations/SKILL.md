@@ -97,7 +97,7 @@ Important distinction: visible Discord message count is not context size. Intern
 
 Primary reference: `references/memory-skill-autowrite-governance.md`.
 
-Use it to separate always-active context from routed knowledge, verify SOUL loading semantics, change write gates through the canonical resolver, keep curator policy independent, and report every automatic memory/skill write with readback.
+Use it to separate always-active context from routed knowledge, verify SOUL loading and active-session cutover semantics, change write gates through the canonical resolver, keep curator policy independent, drain legacy staged queues safely, preserve capacity-rejected learning through a failure-only recovery path, and report every successful or failed automatic memory/skill write with readback.
 
 ### VPS migration, restore, cutover, or new MGS agent
 

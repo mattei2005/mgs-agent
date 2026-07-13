@@ -60,12 +60,26 @@ Consequences:
 - SOUL is always-active context, not a routed reference.
 - A SOUL edit applies to newly built sessions; the explicit user instruction in the current conversation governs the current session immediately.
 - Do not claim an exact memory fact is covered by SOUL unless the full invariant is actually present. A narrower reconciliation rule does not necessarily encode the separate fact that sessions are isolated.
+- A write gate can change immediately while the reporting policy remains stale: `write_approval_enabled()` reads `config.yaml` on each gate evaluation, whereas the session keeps its cached SOUL. Treat this as a cutover risk, not as evidence that both settings hot-reload together.
 
 Authoritative implementation checkpoints:
 
 - `agent/system_prompt.py`: SOUL content is appended to `stable_parts`.
 - `agent/prompt_builder.py::load_soul_md`: reads `HERMES_HOME/SOUL.md` as identity.
 - `build_context_files_prompt`: documents that SOUL is always included when present and skipped only when already loaded into the identity slot.
+- `tools/write_approval.py::write_approval_enabled`: reloads config when the gate is evaluated.
+
+### Verify active-session cutover
+
+Do not infer policy activation from the live SOUL file or gateway process alone. For each affected profile:
+
+1. Read `state.db` in SQLite read-only mode.
+2. Inspect `sessions.system_prompt` for an exact distinctive sentence from the new policy; a file mtime or related paraphrase is insufficient.
+3. Inspect `gateway_routing` to identify thread/session mappings that may resume an older cached prompt even when `sessions.ended_at` is populated.
+4. Report open/routed thread IDs whose prompt lacks the policy.
+5. Use a new thread or explicit session reset to build a fresh prompt. A gateway restart is not required merely to load SOUL into a new session.
+
+Until cutover is complete, avoid continuing an old session when direct writes are already enabled but its cached prompt does not require transparency.
 
 ## Safe write-policy change
 
@@ -82,6 +96,41 @@ Authoritative implementation checkpoints:
 7. Do not restart when the user explicitly requests no restart; record that no restart occurred.
 8. Keep the staged-queue monitor: pre-existing or exceptional staged items can remain after direct writing is enabled.
 
+## Drain a legacy staged queue after disabling the gate
+
+Turning `write_approval` off does not resolve records created under the old policy. Do not leave them to age indefinitely and do not bulk-apply them merely because direct writes are now allowed.
+
+For every profile and subsystem:
+
+1. Inventory every pending ID, action, target, origin, summary, and dependency pair.
+2. For patches, compare `old_string` and `new_string` against the current live target:
+   - one `old_string` match and zero `new_string` matches → technically applicable;
+   - zero old/new matches → stale; never force it;
+   - `new_string` already present → likely already applied or superseded; reconcile before removal.
+3. For `write_file`, verify whether the destination now exists and whether a newer reference already covers the same class.
+4. Group reference+router pairs and overlapping patches before recommending a batch decision.
+5. Classify each item:
+   - **apply** — current, non-duplicative, evidence-backed;
+   - **reject** — substantively wrong or unsupported, with rejection evidence;
+   - **discard** — obsolete, stale, or superseded; remove only through the audited/canonical queue path available in the deployment.
+6. Present one line per item plus a batch recommendation. Wait for the human decision; do not mutate the queue during inventory.
+
+A newly generated class-level reference can legitimately supersede several narrow staged proposals. Prefer the current umbrella and discard duplicate one-session variants rather than applying all of them.
+
+## Capacity failure without silent loss
+
+The built-in memory store rejects an add/replace that would exceed its character limit and returns the current entries. That protects existing memory but does not preserve the unsaved proposal if a background reviewer fails to surface the tool error.
+
+Preferred design:
+
+1. Keep normal memory/skill writes direct when the gate is off.
+2. On a capacity rejection only, preserve the rejected payload in a failure-only staged/dead-letter record such as `capacity_overflow`.
+3. Report the failed target, current/limit usage, concise unsaved content summary, and pending ID in the originating conversation.
+4. Let the existing pending/capacity monitor alert on the exception.
+5. Never compact, delete, or replace durable facts automatically to make room.
+
+A temporary limit increase is a bridge, not the durable fix. Raising the cap alone adds no prompt tokens until content actually grows; document the possible maximum growth, compact with a reviewed full diff, then reduce or reassess the cap. The durable safety property is that a failed learning write remains recoverable and visible.
+
 ## Mandatory transparency for automatic writes
 
 Whenever background/self-improvement writes memory or a skill directly, report in the originating conversation:
@@ -91,6 +140,8 @@ Whenever background/self-improvement writes memory or a skill directly, report i
 - concise description of what was saved;
 - validation/readback;
 - any background fork that may still write after the foreground response.
+
+A failed automatic write must also be surfaced when it would otherwise lose a learning: include the failure reason, target, current/limit usage, unsaved summary, and recovery/dead-letter handle when available. Do not phrase a capacity rejection as a successful save.
 
 Never say “nothing changed” when an automatic fork wrote. A conversation-level report satisfies automatic-learning transparency by itself; structural script/config/data/AGENT/SOUL changes still follow formal REPORT-INFRA policy.
 
@@ -112,6 +163,9 @@ Never say “nothing changed” when an automatic fork wrote. A conversation-lev
 - **Canonical-source fallacy** — “it exists in a reference” is not equivalent to “the agent knows it by default.”
 - **Paraphrase loss** — a related SOUL rule may not preserve the exact approved fact.
 - **Hot-reload assumption** — SOUL is stable per built session, not reread from disk each turn.
+- **Split cutover** — the write gate reloads config while an old session keeps cached SOUL, enabling direct writes before the session knows it must report. Verify `sessions.system_prompt` and move work to a fresh thread/reset.
+- **Orphan queue rot** — disabling the gate does not decide old staged items. Inventory applicability, dependencies, overlap, and supersession; never bulk-apply or leave them indefinitely.
+- **Silent capacity rejection** — fail-closed protects existing memory but can lose the proposed learning. Report the failure and preserve the rejected payload in a failure-only dead-letter path.
 - **Policy coupling** — direct writes, curator pruning, user reporting, and context residency are separate controls.
 - **Premature limit increase** — raising char limits before classification can hide misplaced procedure and stale state.
 - **Silent foreground claim** — background writes remain the agent’s responsibility even when performed by a fork.
@@ -123,7 +177,11 @@ Never say “nothing changed” when an automatic fork wrote. A conversation-lev
 - [ ] On-demand claims have exact content plus a working route
 - [ ] SOUL coverage checked semantically, not by keyword only
 - [ ] Config values validated through the runtime resolver
+- [ ] Active/routed sessions checked for the exact new policy in `sessions.system_prompt`
+- [ ] Fresh thread/reset used where an old cached SOUL would permit unreported direct writes
 - [ ] Curator state validated separately from write gates
-- [ ] Existing staged queue preserved and monitored
+- [ ] Existing staged queue inventoried for current, stale, overlapping, and superseded items
+- [ ] Dependency pairs kept together and no stale patch forced
+- [ ] Capacity failures are reported and preserve the unsaved proposal through a recovery/dead-letter handle
 - [ ] Full diff reviewed before compaction
 - [ ] Automatic writes reported with target and readback
