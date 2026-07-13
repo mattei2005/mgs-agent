@@ -44,7 +44,13 @@ RESOLUTION_RE = re.compile(
     r'\b(restabelecido|resolvido|registrado|inventário atualizado|uso hipotético|heartbeat|ok\b|done\b)\b',
     re.I,
 )
+CONFIRMED_RESOLUTION_RE = re.compile(
+    r'\b(resolvido|restabelecido|corrigido|normalizado|recuperado|sem ação adicional|sem acao adicional)\b',
+    re.I,
+)
 SKIP_RE = re.compile(r'\[REPORT-INFRA\]|REPORT-INFRA|Self-improvement review|GPT-5\.5 OAuth', re.I)
+RESOLVED_COLOR = 0x2ECC71
+INVESTIGATED_COLOR = 0xF1C40F
 
 
 def now_utc() -> dt.datetime:
@@ -214,13 +220,23 @@ Alerta original: {url}
     return result
 
 
-def post_reply(token: str, message: dict[str, Any], text: str) -> str | None:
+def build_feedback_payload(message: dict[str, Any], text: str) -> dict[str, Any]:
     channel_id = str(message.get('channel_id') or CHANNEL_ID)
-    content = text.strip()
-    if len(content) > 1900:
-        content = content[:1850].rstrip() + '\n\n[truncado]'
-    body = {
-        'content': content,
+    description = text.strip()
+    if len(description) > 3900:
+        description = description[:3850].rstrip() + '\n\n[truncado]'
+    resolved = bool(CONFIRMED_RESOLUTION_RE.search(description))
+    title = '✅ ALERTA CORRIGIDO' if resolved else '🔎 ALERTA INVESTIGADO'
+    color = RESOLVED_COLOR if resolved else INVESTIGATED_COLOR
+    return {
+        'content': '',
+        'embeds': [{
+            'title': title,
+            'description': description,
+            'color': color,
+            'footer': {'text': 'Zeus · retorno automático do alerta'},
+            'timestamp': iso_z(),
+        }],
         'message_reference': {
             'channel_id': channel_id,
             'message_id': str(message['id']),
@@ -228,6 +244,11 @@ def post_reply(token: str, message: dict[str, Any], text: str) -> str | None:
         },
         'allowed_mentions': {'parse': []},
     }
+
+
+def post_reply(token: str, message: dict[str, Any], text: str) -> str | None:
+    channel_id = str(message.get('channel_id') or CHANNEL_ID)
+    body = build_feedback_payload(message, text)
     status, data = discord_api(token, 'POST', f'/channels/{channel_id}/messages', body)
     if status not in (200, 201):
         raise RuntimeError(f'POST reply HTTP {status}: {data}')
