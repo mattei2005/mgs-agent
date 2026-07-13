@@ -127,6 +127,7 @@ def scan_pending(
                         pending_id = str(raw.get("id") or path.stem)
                         created = _created_epoch(raw.get("created_at"), path.stat().st_mtime)
                         age_seconds = max(0.0, now - created)
+                        failure_type = str(raw.get("failure_type") or "")
                         item = {
                             "key": f"{profile}/{subsystem}/{pending_id}",
                             "id": pending_id,
@@ -134,6 +135,8 @@ def scan_pending(
                             "subsystem": subsystem,
                             "age_hours": round(age_seconds / 3600.0, 1),
                             "aged": age_seconds >= threshold_seconds,
+                            "failure_type": failure_type or None,
+                            "dead_letter": failure_type == "capacity_overflow",
                         }
                         records.append(item)
                         bucket.append(item)
@@ -146,6 +149,7 @@ def scan_pending(
             }
 
     aged_records = [item for item in records if item["aged"]]
+    dead_letter_records = [item for item in records if item["dead_letter"]]
     capacity = scan_capacity(
         root,
         threshold_percent=capacity_threshold_percent,
@@ -159,6 +163,8 @@ def scan_pending(
         "aged": len(aged_records),
         "oldest_hours": max((item["age_hours"] for item in records), default=0.0),
         "aged_ids": sorted(item["key"] for item in aged_records),
+        "dead_letter_count": len(dead_letter_records),
+        "dead_letter_ids": sorted(item["key"] for item in dead_letter_records),
         "records": records,
         "breakdown": breakdown,
         "capacity": capacity,
@@ -178,6 +184,8 @@ def decide(
     previous = set(state.get("aged_ids") or [])
     current_capacity = set((summary.get("capacity") or {}).get("warning_ids") or [])
     previous_capacity = set(state.get("capacity_warning_ids") or [])
+    current_dead_letters = set(summary.get("dead_letter_ids") or [])
+    previous_dead_letters = set(state.get("dead_letter_ids") or [])
     last_alert = float(state.get("last_alert_at") or 0.0)
 
     if summary.get("errors"):
@@ -185,6 +193,13 @@ def decide(
         if signature != state.get("last_error_signature") or now - last_alert >= reminder_hours * 3600:
             return {"action": "error", "reason": "scanner_error"}
         return {"action": "none", "reason": "error_suppressed"}
+    if current_dead_letters:
+        if not previous_dead_letters:
+            return {"action": "alert", "reason": "first_dead_letter"}
+        if current_dead_letters - previous_dead_letters:
+            return {"action": "alert", "reason": "new_dead_letter"}
+        if now - last_alert >= reminder_hours * 3600:
+            return {"action": "alert", "reason": "dead_letter_daily_reminder"}
     if current:
         if not previous:
             return {"action": "alert", "reason": "first_aged"}
@@ -199,9 +214,9 @@ def decide(
             return {"action": "alert", "reason": "new_capacity_warning"}
         if now - last_alert >= reminder_hours * 3600:
             return {"action": "alert", "reason": "capacity_daily_reminder"}
-    if current or current_capacity:
+    if current or current_capacity or current_dead_letters:
         return {"action": "none", "reason": "anti_spam"}
-    if previous or previous_capacity:
+    if previous or previous_capacity or previous_dead_letters:
         return {"action": "recovery", "reason": "warnings_cleared"}
     return {"action": "none", "reason": "healthy"}
 
@@ -222,10 +237,16 @@ def next_state(
         if summary.get("errors")
         else summary["capacity"]["warning_ids"]
     )
+    confirmed_dead_letters = (
+        state.get("dead_letter_ids", [])
+        if summary.get("errors")
+        else summary.get("dead_letter_ids", [])
+    )
     return {
         "last_check_at": now_epoch,
         "aged_ids": confirmed_aged,
         "capacity_warning_ids": confirmed_capacity,
+        "dead_letter_ids": confirmed_dead_letters,
         "last_alert_at": now_epoch if decision["action"] in {"alert", "error"} else state.get("last_alert_at"),
         "last_recovery_at": now_epoch if decision["action"] == "recovery" else state.get("last_recovery_at"),
         "last_error_signature": "|".join(sorted(summary["errors"])) if summary["errors"] else "",
@@ -233,6 +254,7 @@ def next_state(
         "last_aged": summary["aged"],
         "last_oldest_hours": summary["oldest_hours"],
         "last_capacity_warning_count": summary["capacity"]["warning_count"],
+        "last_dead_letter_count": summary.get("dead_letter_count", 0),
     }
 
 
@@ -242,6 +264,7 @@ def report_field(summary: Dict[str, Any]) -> str:
     return (
         f"total={summary['total']} | >={summary['threshold_hours']:g}h={summary['aged']} "
         f"| mais antiga={summary['oldest_hours']:.1f}h "
+        f"| dead-letter={summary.get('dead_letter_count', 0)} "
         f"| memória>={summary['capacity']['threshold_percent']:g}%={summary['capacity']['warning_count']}"
     )
 
@@ -285,6 +308,24 @@ def build_payload(summary: Dict[str, Any], decision: Dict[str, str]) -> Dict[str
                 "fields": [
                     {"name": "Erros", "value": "\n".join(summary["errors"])[:900], "inline": False},
                     {"name": "Ação", "value": "Investigar leitura dos JSONs; nenhum item foi alterado.", "inline": False},
+                ],
+            }],
+        }
+    if decision.get("reason") in {
+        "first_dead_letter",
+        "new_dead_letter",
+        "dead_letter_daily_reminder",
+    }:
+        dead_letter_ids = "\n".join(summary.get("dead_letter_ids") or [])[:900] or "nenhum"
+        return {
+            "content": f"<@{RODOLFO}> write de memória recusado e preservado",
+            "embeds": [{
+                "title": "Dead-letter Hermes — capacity_overflow",
+                "color": 15105570,
+                "fields": [
+                    {"name": "IDs", "value": f"```text\n{dead_letter_ids}\n```", "inline": False},
+                    {"name": "Estado", "value": "Payload preservado; memória original inalterada.", "inline": False},
+                    {"name": "Ação", "value": "Revisar a pending manualmente. O alerta não expõe nem modifica o conteúdo.", "inline": False},
                 ],
             }],
         }
