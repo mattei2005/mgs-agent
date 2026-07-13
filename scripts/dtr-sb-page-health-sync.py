@@ -761,57 +761,103 @@ def ensure_report_tabs(access_token, required_titles):
 def write_google_sheet(rows):
     access_token=google_access_token()
     page_headers=['link da pagina','nome da pagina','fb page id','page id','bot user','segurador','sites','status sb','codigos','data saida']
-    datasets=build_report_datasets(rows,page_headers)
-    tabs=ensure_report_tabs(access_token,list(datasets))
+    unique_rows,input_duplicates=dedupe_report_rows(rows)
+    desired_datasets=build_report_datasets(unique_rows,page_headers)
+    tabs=ensure_report_tabs(access_token,list(desired_datasets))
+    existing_datasets=read_report_datasets(access_token,list(tabs))
+    expected_datasets,updates=plan_incremental_report_updates(desired_datasets,existing_datasets,page_headers)
     base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
-    sheets_api(access_token,'POST',base+'/values:batchClear',{'ranges':[sheet_a1_title(title)+'!A:Z' for title in datasets]})
-    resize=[]
-    for title,values in datasets.items():
-        props=tabs[title]
-        needed_rows=max(100,len(values)+10)
-        needed_cols=max(5,len(values[0]) if values else 1)
-        current=props.get('gridProperties') or {}
-        if current.get('rowCount',0)<needed_rows or current.get('columnCount',0)<needed_cols:
-            resize.append({'updateSheetProperties':{'properties':{'sheetId':props['sheetId'],'gridProperties':{'rowCount':max(current.get('rowCount',0),needed_rows),'columnCount':max(current.get('columnCount',0),needed_cols)}},'fields':'gridProperties.rowCount,gridProperties.columnCount'}})
-    if resize:
-        sheets_api(access_token,'POST',base+':batchUpdate',{'requests':resize})
-    sheets_api(access_token,'POST',base+'/values:batchUpdate',{
-        'valueInputOption':'RAW',
-        'data':[{'range':sheet_a1_title(title)+'!A1','majorDimension':'ROWS','values':values} for title,values in datasets.items()],
-    })
-    navy={'red':31/255,'green':78/255,'blue':121/255}
-    white={'red':1,'green':1,'blue':1}
-    column_widths=[300,230,190,100,290,240,220,120,300,130]
-    format_requests=[]
-    for title,values in datasets.items():
-        sid=tabs[title]['sheetId']; cols=len(page_headers)
-        format_requests.extend([
-            {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':1,'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'backgroundColor':navy,'textFormat':{'bold':True,'foregroundColor':white},'horizontalAlignment':'CENTER','verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat'}},
-            {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':1,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat.verticalAlignment,userEnteredFormat.wrapStrategy'}},
-            {'updateSheetProperties':{'properties':{'sheetId':sid,'gridProperties':{'frozenRowCount':1}},'fields':'gridProperties.frozenRowCount'}},
-        ])
-        for index,pixels in enumerate(column_widths):
-            format_requests.append({'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'COLUMNS','startIndex':index,'endIndex':index+1},'properties':{'pixelSize':pixels},'fields':'pixelSize'}})
-        if len(values)>1:
-            format_requests.append({'setBasicFilter':{'filter':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols}}}})
-    sheets_api(access_token,'POST',base+':batchUpdate',{'requests':format_requests})
-    range_params=[]
-    for title in datasets:
-        range_params.append(('ranges',sheet_a1_title(title)+'!A:J'))
-    range_params.append(('majorDimension','ROWS'))
-    readback=sheets_api(access_token,'GET',base+'/values:batchGet?'+urllib.parse.urlencode(range_params))
-    value_ranges=readback.get('valueRanges') or []
-    if len(value_ranges)!=len(datasets):
-        raise RuntimeError(f'Google Sheets readback incompleto: {len(value_ranges)}/{len(datasets)} abas')
-    values_read=[item.get('values') or [] for item in value_ranges]
-    headers_read=[values[0] if values else [] for values in values_read]
-    expected_headers=[page_headers for _ in datasets]
-    expected_counts=[len(values) for values in datasets.values()]
-    counts_read=[len(values) for values in values_read]
-    if headers_read!=expected_headers or counts_read!=expected_counts:
-        raise RuntimeError(f'Google Sheets readback divergente: headers={headers_read!r} rows={counts_read!r} expected_rows={expected_counts!r}')
-    rows_by_tab={title:counts_read[index]-1 for index,title in enumerate(datasets)}
-    return {'url':REPORT_SHEET_URL,'rows_paginas':rows_by_tab['Paginas'],'site_tabs':len(datasets)-1,'rows_by_tab':rows_by_tab,'restricted_only':True,'readback_ok':True}
+
+    def keyed_rows(values):
+        if not values:
+            return {},0
+        headers=values[0]
+        result={}; duplicates=0
+        for values_row in values[1:]:
+            row={header:(values_row[index] if index<len(values_row) else '') for index,header in enumerate(headers)}
+            key=report_page_identity(row)
+            if key in result:
+                duplicates+=1
+            result[key]=values_row
+        return result,duplicates
+
+    old_paginas,existing_duplicates=keyed_rows(existing_datasets.get('Paginas') or [])
+    new_paginas,_=keyed_rows(desired_datasets['Paginas'])
+    added_keys=set(new_paginas)-set(old_paginas)
+    removed_keys=set(old_paginas)-set(new_paginas)
+    changed_keys={key for key in set(old_paginas)&set(new_paginas) if old_paginas[key]!=new_paginas[key]}
+
+    if updates:
+        sheets_api(access_token,'POST',base+'/values:batchClear',{'ranges':[sheet_a1_title(title)+'!A:Z' for title in updates]})
+        resize=[]
+        for title,values in updates.items():
+            props=tabs[title]
+            needed_rows=max(100,len(values)+10)
+            needed_cols=max(5,len(values[0]) if values else 1)
+            current=props.get('gridProperties') or {}
+            if current.get('rowCount',0)<needed_rows or current.get('columnCount',0)<needed_cols:
+                resize.append({'updateSheetProperties':{'properties':{'sheetId':props['sheetId'],'gridProperties':{'rowCount':max(current.get('rowCount',0),needed_rows),'columnCount':max(current.get('columnCount',0),needed_cols)}},'fields':'gridProperties.rowCount,gridProperties.columnCount'}})
+        if resize:
+            sheets_api(access_token,'POST',base+':batchUpdate',{'requests':resize})
+        sheets_api(access_token,'POST',base+'/values:batchUpdate',{
+            'valueInputOption':'RAW',
+            'data':[{'range':sheet_a1_title(title)+'!A1','majorDimension':'ROWS','values':values} for title,values in updates.items()],
+        })
+        navy={'red':31/255,'green':78/255,'blue':121/255}
+        white={'red':1,'green':1,'blue':1}
+        column_widths=[300,230,190,100,290,240,220,120,300,130]
+        format_requests=[]
+        for title,values in updates.items():
+            sid=tabs[title]['sheetId']; cols=len(page_headers)
+            format_requests.extend([
+                {'clearBasicFilter':{'sheetId':sid}},
+                {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':1,'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'backgroundColor':navy,'textFormat':{'bold':True,'foregroundColor':white},'horizontalAlignment':'CENTER','verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat'}},
+                {'updateSheetProperties':{'properties':{'sheetId':sid,'gridProperties':{'frozenRowCount':1}},'fields':'gridProperties.frozenRowCount'}},
+            ])
+            if len(values)>1:
+                format_requests.extend([
+                    {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':1,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat.verticalAlignment,userEnteredFormat.wrapStrategy'}},
+                    {'setBasicFilter':{'filter':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols}}}},
+                ])
+            for index,pixels in enumerate(column_widths):
+                format_requests.append({'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'COLUMNS','startIndex':index,'endIndex':index+1},'properties':{'pixelSize':pixels},'fields':'pixelSize'}})
+        sheets_api(access_token,'POST',base+':batchUpdate',{'requests':format_requests})
+
+    readback=read_report_datasets(access_token,list(expected_datasets))
+    values_read=list(readback.values())
+    expected_values=list(expected_datasets.values())
+    if values_read!=expected_values:
+        counts_read=[len(values) for values in values_read]
+        expected_counts=[len(values) for values in expected_values]
+        raise RuntimeError(f'Google Sheets readback divergente: rows={counts_read!r} expected_rows={expected_counts!r}')
+    duplicate_keys={}
+    for title,values in readback.items():
+        _,duplicates=keyed_rows(values)
+        if duplicates:
+            duplicate_keys[title]=duplicates
+    if duplicate_keys:
+        raise RuntimeError(f'Google Sheets ainda contém chaves duplicadas: {duplicate_keys!r}')
+    rows_by_tab={title:max(0,len(values)-1) for title,values in readback.items()}
+    updated_tabs=list(updates)
+    return {
+        'url':REPORT_SHEET_URL,
+        'rows_paginas':rows_by_tab['Paginas'],
+        'site_tabs':len(rows_by_tab)-1,
+        'rows_by_tab':rows_by_tab,
+        'updated_tabs':updated_tabs,
+        'updated_site_tabs':[title for title in updated_tabs if title!='Paginas'],
+        'unchanged_tabs':len(rows_by_tab)-len(updated_tabs),
+        'added_pages':len(added_keys),
+        'removed_pages':len(removed_keys),
+        'changed_pages':len(changed_keys),
+        'input_duplicates_removed':input_duplicates,
+        'existing_duplicates_removed':existing_duplicates,
+        'duplicate_keys_after':0,
+        'restricted_only':True,
+        'incremental_upsert':True,
+        'expiry_inclusive':True,
+        'readback_ok':True,
+    }
 
 async def main():
     ap=argparse.ArgumentParser()

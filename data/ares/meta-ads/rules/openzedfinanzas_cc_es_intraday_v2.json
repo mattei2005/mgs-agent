@@ -34,7 +34,7 @@
       "persistence": {"consecutive_checkpoints": 2},
       "action": "pause_campaign",
       "priority": 1,
-      "exclusions": ["TEST_grace_3_days", "learning_grace_3_days", "reactivate_exclusion_list"]
+      "exclusions": ["TEST_grace_3_days", "learning_grace_3_days", "reactivate_exclusion_list", "COST_CAP_no_cost_pause"]
     },
     {
       "id": "R2",
@@ -52,7 +52,7 @@
       "persistence": {"consecutive_checkpoints": 2},
       "action": "pause_campaign",
       "priority": 2,
-      "exclusions": ["TEST_grace_3_days", "learning_grace_3_days", "reactivate_exclusion_list"]
+      "exclusions": ["TEST_grace_3_days", "learning_grace_3_days", "reactivate_exclusion_list", "COST_CAP_no_cost_pause"]
     },
     {
       "id": "R3",

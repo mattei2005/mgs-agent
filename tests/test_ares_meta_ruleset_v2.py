@@ -58,6 +58,8 @@ class RulesetV2Tests(unittest.TestCase):
     def test_cost_cap_is_excluded_from_cost_pause(self):
         campaign = dict(self.campaign, bid_strategy='COST_CAP')
         for rule_id, metrics in [
+            ('R1', {'spend': 4.0, 'MO': 0.0, 'CPMO': None}),
+            ('R2', {'spend': 4.5, 'MO': 1.0, 'CPMO': 4.5}),
             ('R3', {'spend': 10.0, 'MO': 4.0, 'CPMO': 2.5}),
             ('R4', {'spend': 10.0, 'MO': 5.0, 'CPMO': 2.0}),
         ]:
@@ -74,6 +76,10 @@ class RulesetV2Tests(unittest.TestCase):
         self.assertEqual(CRON.apply_persistence(state, 'c1', 'R1', ids, start + timedelta(minutes=30), 30), 2)
         self.assertEqual(CRON.apply_persistence(state, 'c1', None, ids, start + timedelta(minutes=60), 30), 0)
         self.assertEqual(CRON.apply_persistence(state, 'c1', 'R1', ids, start + timedelta(minutes=90), 30), 1)
+        same_checkpoint_state = {}
+        self.assertEqual(CRON.apply_persistence(same_checkpoint_state, 'c2', 'R1', ids, start, 30), 1)
+        self.assertEqual(CRON.apply_persistence(same_checkpoint_state, 'c2', None, ids, start, 30), 0)
+        self.assertEqual(CRON.apply_persistence(same_checkpoint_state, 'c2', 'R1', ids, start, 30), 1)
 
     def test_hoa_bad_day_requires_all_three_gates(self):
         self.assertEqual(HOA.classify_bad_day({'spend': 10, 'MO': 5, 'CPMO': 1.31}, 10, 5, 1.30), (True, 'CPMO alto'))

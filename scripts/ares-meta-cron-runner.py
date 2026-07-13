@@ -523,7 +523,13 @@ def apply_persistence(
         checkpoint_iso = checkpoint.isoformat(timespec='minutes')
         if entry.get('last_checkpoint') == checkpoint_iso:
             if rule_id == selected_rule_id:
+                if not entry.get('last_matched'):
+                    entry['count'] = 1
+                entry['last_matched'] = True
                 selected_count = int(entry.get('count') or 0)
+            else:
+                entry['count'] = 0
+                entry['last_matched'] = False
             continue
         if rule_id == selected_rule_id:
             previous = None
