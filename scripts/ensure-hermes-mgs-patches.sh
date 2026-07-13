@@ -424,6 +424,8 @@ PYBIN="$REPO/venv/bin/python"
   "$REPO/tests/tools/test_skills_tool.py" \
   "$REPO/tests/tools/test_memory_tool.py" \
   "$REPO/tests/tools/test_memory_capacity_dead_letter.py" \
+  "$REPO/tests/tools/test_write_approval.py" \
+  "$REPO/tests/run_agent/test_background_review_summary.py" \
   "$REPO/tests/tools/test_write_trace.py"
 
 log "OK Hermes MGS patches present, py_compile, dead-letter/trace and busy-steer tests passed"

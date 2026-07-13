@@ -82,6 +82,7 @@ SNAPSHOT_FILES=(
   "/root/.hermes/hermes-agent/plugins/platforms/discord/adapter.py"
   "/root/.hermes/hermes-agent/gateway/slash_commands.py"
   "/root/.hermes/hermes-agent/run_agent.py"
+  "/root/.hermes/hermes-agent/agent/background_review.py"
   "/root/.hermes/hermes-agent/tools/memory_tool.py"
   "/root/.hermes/hermes-agent/tools/write_approval.py"
   "/root/.hermes/hermes-agent/tools/skill_manager_tool.py"
@@ -115,6 +116,7 @@ if ! sha256sum -c "\$SNAPSHOT"; then
 fi
 if ! /root/.hermes/hermes-agent/venv/bin/python -m py_compile \
   "\$RUNTIME" \
+  /root/.hermes/hermes-agent/agent/background_review.py \
   /root/.hermes/hermes-agent/tools/memory_tool.py \
   /root/.hermes/hermes-agent/tools/write_approval.py \
   /root/.hermes/hermes-agent/tools/skill_manager_tool.py \

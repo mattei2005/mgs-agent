@@ -161,7 +161,8 @@ Minimum behavior tests: add/replace/batch overflow preservation; remove and non-
 The deployed-on-disk implementation is carried by `/root/mgs-agent/patches/hermes/memory-dead-letter-structural-trace-2026-07-13.patch` and guarded by `scripts/ensure-hermes-mgs-patches.sh`:
 
 - `tools/memory_tool.py` emits machine-readable `capacity_overflow` and stages only failed add/replace/batch operations;
-- `tools/write_approval.py::stage_failure_write` persists and reads back an idempotent failure record atomically with `0700/0600` permissions;
+- `tools/write_approval.py::stage_failure_write` persists and reads back an idempotent failure record atomically with `0700/0600` permissions; its key includes the canonical state fingerprint, and pending-ID lookups reject traversal/path separators;
+- `agent/background_review.py::summarize_background_review_actions` surfaces staged or unpersisted `capacity_overflow` failures even when normal write notifications are off, without echoing rejected content;
 - `tools/write_trace.py` emits metadata-only structural receipts for successful background skill writes;
 - `tools/skill_manager_tool.py` attaches those receipts only to `background_review` writes;
 - `scripts/monitor_hermes_pending_writes.py` alerts on a new capacity dead-letter on the next one-minute monitor tick, keyed only by pending ID and without payload content;
