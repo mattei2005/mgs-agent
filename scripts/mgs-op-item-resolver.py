@@ -18,7 +18,10 @@ from typing import Any, Iterable
 CACHE_DIR = Path(os.environ.get("MGS_OP_METADATA_CACHE_DIR", "/root/.cache/mgs/1password-metadata"))
 INDEX_PATH = CACHE_DIR / "item-index.json"
 DTR_MAP_PATH = CACHE_DIR / "dtr-user-item-map.json"
-LOCK_PATH = CACHE_DIR / ".refresh.lock"
+INDEX_LOCK_PATH = CACHE_DIR / ".index-refresh.lock"
+DTR_LOCK_PATH = CACHE_DIR / ".dtr-refresh.lock"
+CACHE_SCHEMA = 2
+LOCK_TIMEOUT = int(os.environ.get("MGS_OP_METADATA_LOCK_TIMEOUT_SECONDS", "120"))
 INDEX_MAX_AGE = int(os.environ.get("MGS_OP_ITEM_INDEX_MAX_AGE_SECONDS", "86400"))
 DTR_MAP_MAX_AGE = int(os.environ.get("MGS_OP_DTR_MAP_MAX_AGE_SECONDS", "86400"))
 
@@ -48,25 +51,47 @@ def _atomic_json(path: Path, payload: dict[str, Any]) -> None:
             pass
 
 
-def _read_fresh(path: Path, max_age: int, vault: str) -> dict[str, Any] | None:
+def _read_cache(path: Path, vault: str) -> dict[str, Any] | None:
     try:
         st = path.stat()
         if st.st_mode & 0o077:
             return None
         data = json.loads(path.read_text(encoding="utf-8"))
-        age = time.time() - float(data.get("updated_at_epoch") or 0)
-        if data.get("vault") != vault or age < 0 or age > max_age:
+        if data.get("schema") != CACHE_SCHEMA or data.get("vault") != vault:
             return None
         return data
     except (OSError, ValueError, TypeError, json.JSONDecodeError):
         return None
 
 
-def _lock_file():
+def _read_fresh(path: Path, max_age: int, vault: str) -> dict[str, Any] | None:
+    data = _read_cache(path, vault)
+    if not data:
+        return None
+    try:
+        age = time.time() - float(data.get("updated_at_epoch") or 0)
+        return data if 0 <= age <= max_age else None
+    except (ValueError, TypeError):
+        return None
+
+
+def _lock_file(path: Path):
     _ensure_cache_dir()
-    fd = os.open(LOCK_PATH, os.O_CREAT | os.O_RDWR, 0o600)
+    fd = os.open(path, os.O_CREAT | os.O_RDWR, 0o600)
     os.fchmod(fd, 0o600)
     return os.fdopen(fd, "r+")
+
+
+def _acquire_lock(lock, timeout: int = LOCK_TIMEOUT) -> None:
+    deadline = time.monotonic() + max(1, timeout)
+    while True:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            return
+        except BlockingIOError:
+            if time.monotonic() >= deadline:
+                raise TimeoutError(f"1Password metadata refresh lock timed out after {timeout}s")
+            time.sleep(0.2)
 
 
 def _op_json(args: list[str], timeout: int = 90) -> Any:
@@ -91,8 +116,14 @@ def get_vault_index(vault: str | None = None, force_refresh: bool = False) -> di
         cached = _read_fresh(INDEX_PATH, INDEX_MAX_AGE, vault)
         if cached:
             return cached
-    with _lock_file() as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
+    with _lock_file(INDEX_LOCK_PATH) as lock:
+        try:
+            _acquire_lock(lock)
+        except TimeoutError:
+            stale = None if force_refresh else _read_cache(INDEX_PATH, vault)
+            if stale:
+                return stale
+            raise
         if not force_refresh:
             cached = _read_fresh(INDEX_PATH, INDEX_MAX_AGE, vault)
             if cached:
@@ -112,7 +143,7 @@ def get_vault_index(vault: str | None = None, force_refresh: bool = False) -> di
             ):
                 items[title] = {"id": item_id, "title": title}
         payload = {
-            "schema": 1,
+            "schema": CACHE_SCHEMA,
             "vault": vault,
             "vault_id": vault_id,
             "updated_at_epoch": int(time.time()),
@@ -122,7 +153,17 @@ def get_vault_index(vault: str | None = None, force_refresh: bool = False) -> di
         return payload
 
 
-def get_item_json(item_ref: str, vault: str | None = None, index: dict[str, Any] | None = None) -> dict[str, Any]:
+def _is_not_found_error(exc: Exception) -> bool:
+    text = str(exc).casefold()
+    return any(marker in text for marker in ("not found", "isn't an item", "could not find", "does not exist"))
+
+
+def get_item_json(
+    item_ref: str,
+    vault: str | None = None,
+    index: dict[str, Any] | None = None,
+    _retry_index: bool = True,
+) -> dict[str, Any]:
     vault = vault or os.environ.get("OP_DEFAULT_VAULT", "MGS Conteúdo")
     index = index or get_vault_index(vault)
     entry = (index.get("items") or {}).get(item_ref)
@@ -130,7 +171,16 @@ def get_item_json(item_ref: str, vault: str | None = None, index: dict[str, Any]
     vault_id = str(index.get("vault_id") or "").strip()
     if not item_id or not vault_id:
         raise RuntimeError("1Password item/vault ID unavailable")
-    return _op_json(["item", "get", item_id, "--vault", vault_id, "--format", "json", "--reveal"])
+    try:
+        return _op_json(["item", "get", item_id, "--vault", vault_id, "--format", "json", "--reveal"])
+    except RuntimeError as exc:
+        if not (_retry_index and entry and _is_not_found_error(exc)):
+            raise
+        refreshed = get_vault_index(vault, force_refresh=True)
+        refreshed_entry = (refreshed.get("items") or {}).get(item_ref)
+        if not refreshed_entry:
+            raise
+        return get_item_json(item_ref, vault, refreshed, _retry_index=False)
 
 
 def field_value(item: dict[str, Any], *names: str, required: bool = False) -> str:
@@ -161,9 +211,16 @@ def resolve_dtr_items(target_users: Iterable[str], vault: str | None = None, for
             users = cached.get("users") or {}
             return {u: users[u] for u in targets if u in users}, sorted(targets - set(users)), [], cached
 
-    index = get_vault_index(vault)
-    with _lock_file() as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
+    index = get_vault_index(vault, force_refresh=force_refresh)
+    with _lock_file(DTR_LOCK_PATH) as lock:
+        try:
+            _acquire_lock(lock)
+        except TimeoutError:
+            stale = None if force_refresh else _read_cache(DTR_MAP_PATH, vault)
+            if stale:
+                users = stale.get("users") or {}
+                return {u: users[u] for u in targets if u in users}, sorted(targets - set(users)), [], stale
+            raise
         if not force_refresh:
             cached = _read_fresh(DTR_MAP_PATH, DTR_MAP_MAX_AGE, vault)
             if cached:
@@ -185,7 +242,7 @@ def resolve_dtr_items(target_users: Iterable[str], vault: str | None = None, for
             except Exception as exc:
                 errors.append({"item": entry["title"], "error": type(exc).__name__})
         payload = {
-            "schema": 1,
+            "schema": CACHE_SCHEMA,
             "vault": vault,
             "vault_id": index.get("vault_id"),
             "updated_at_epoch": int(time.time()),

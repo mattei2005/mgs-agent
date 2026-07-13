@@ -336,7 +336,7 @@ def main():
         'started_at_et': datetime.now(NY).isoformat(timespec='seconds'),
         'mode': 'dry-run' if args.dry_run else 'apply-report',
         'dtr_users_scanned': len(users),
-        'dtr_login_ok': sum(1 for s in dtr_scans if s.get('login_ok')),
+        'dtr_login_ok': login_ok,
         'dtr_accounts': sum(len(s.get('accounts') or []) for s in dtr_scans),
         'dtr_pages_raw': len(all_dtr_pages),
         'dtr_pages_after_ignore': len(dtr_pages),
