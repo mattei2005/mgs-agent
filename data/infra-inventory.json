@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-12T22:00:20-04:00",
+    "updated_at": "2026-07-12T22:13:12-04:00",
     "generated_by": "zeus"
   },
   "system_packages": [
@@ -512,6 +512,7 @@
       "path": "/root/.hermes/profiles/zeus/SOUL.md",
       "versioned_path": "/root/mgs-agent/profiles/zeus-soul.md",
       "sha256": "75b269e04cd6ce644de8c9e43a6112926d691bb312069918265f3be4379b766a",
+      "skill_sha256": "e132186891f92484ac00b663847a09f07b42aa9849f0271e97de6bc80573a26d",
       "size_bytes": 8668,
       "classification_order": [
         "logs/events-audit.jsonl",
@@ -521,9 +522,9 @@
         "session_search"
       ],
       "scope": "Require cross-session source reconciliation before Zeus labels a concurrent change anomalous; distinguish reconciled action, unattributed concurrent change and real anomaly.",
-      "validation": "Live and versioned SOUL byte-identical with exact ordered gate; hermes-agent-operations skill procedure staged for approval as pending e56e124b and not bypassed.",
-      "status": "soul_deployed_skill_proposal_pending",
-      "updated_at": "2026-07-12T21:44:26-04:00"
+      "validation": "Live/versioned SOUL and live/versioned hermes-agent-operations SKILL.md byte-identical with the exact ordered gate; approved pending e56e124b applied and no longer present in pending/skills.",
+      "status": "deployed_validated",
+      "updated_at": "2026-07-12T22:12:48-04:00"
     },
     {
       "id": "runcloud-retired-ssh-allow-removal-20260712",
@@ -1985,6 +1986,58 @@
       "validation": "11/11 acceptance tests PASS, including 10 concurrent OS processes, plus wrapper end-to-end fixture; production DB read-only validation next=PEND-092, duplicate IDs=0, counters=92/92. Erroneous PEND-091 resolution was rolled back atomically and verified open; no logical DB change retained.",
       "status": "deployed_validated",
       "updated_at": "2026-07-12T22:00:20-04:00"
+    },
+    {
+      "id": "hermes-write-approval-decisions-20260712",
+      "agent": "zeus",
+      "type": "approved_persistent_writes",
+      "authorized_by": "344196393512075265",
+      "approved_skills": [
+        "d9348428",
+        "d97ef7a8",
+        "fc60cb6b",
+        "70038647",
+        "0df2af5c",
+        "89d48387",
+        "c3e42c2f",
+        "d401057c",
+        "0b296742",
+        "e56e124b"
+      ],
+      "rejected_skills": [
+        "c7c40a59",
+        "5e4d72cf",
+        "85ec34b5",
+        "9612e6fe"
+      ],
+      "retained_skills": [
+        "5f3bef2b",
+        "0a6f7faf",
+        "12261f26"
+      ],
+      "new_unreviewed_skills": [
+        "f2280631",
+        "d18557a5",
+        "a3ce4ce6",
+        "9f005f0c"
+      ],
+      "memory_approved_but_not_applied": "a691d018",
+      "memory_blocker": "2084/2200 chars; exact 211-char add exceeds limit and remains pending",
+      "backup": "/root/.mgs-backups/hermes-write-approvals/20260712-221036",
+      "sha256": {
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-company-os-architecture/SKILL.md": "30b428c8e84fabc4aaf900dc33941d4715d4d344df78e874ab08a6a7308fecd1",
+        "/root/.hermes/profiles/zeus/skills/ops/mgs-company-os-architecture/references/agent-consolidation-post-cutover-audit.md": "d216ba745ae20909b96b124ab2cefe0c3597a96a9b07bc03d01961f68ef6481e",
+        "/root/.hermes/profiles/zeus/skills/software-development/software-development-methods/SKILL.md": "880ace83e1aef7dfab592fcbb75835d5f79c814deaebd6ec7b4c082237e020b8",
+        "/root/.hermes/profiles/zeus/skills/software-development/software-development-methods/references/security-concurrency-regression-review.md": "37073d191cea3a66dfad08aa88603d8930b09abe0cc7fef75671bd19f33e1894",
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/SKILL.md": "e132186891f92484ac00b663847a09f07b42aa9849f0271e97de6bc80573a26d",
+        "/root/.hermes/profiles/zeus/skills/ops/hermes-agent-operations/references/post-migration-host-hardening.md": "c776a4f7a367bb83421ea0110824b5724f88a4c4e914ad55cb0ee3cfa8e372bf",
+        "/root/.hermes/profiles/zeus/skills/ops/smartbidding-dashboard-access/references/route-pack-07.md": "0f8c8d51333f4e79f1cbd6f2770a78279edc71b07ee51b9d4d13a1c8beadebcd",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/alerts-infra-failed-alert-resolver-2026-07-05.md": "7289eb20c2e855e30ba89da365cbdf35d8f1edff77266149b07d24134af480a2",
+        "/root/.hermes/profiles/zeus/skills/ops/log-monitor-discord-alert/references/1p-full-consumption-audit.md": "55cffa7749169dd983221f02b25ca5e7cdbab6ce79ccd5b04e1a3af8dec93526"
+      },
+      "validation": "All 10 approved writes applied; 4 rejected records removed; live/versioned mirrors byte-identical; retained IDs preserved; memory exact apply failed closed and record preserved; current pending=9 total across Zeus/Atena/Ares, 0 aged.",
+      "status": "skills_applied_memory_blocked",
+      "updated_at": "2026-07-12T22:13:12-04:00"
     }
   ],
   "profile_skill_references": [

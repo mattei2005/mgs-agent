@@ -24,6 +24,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **6. Safe migration stages** → `references/route-pack-03.md`
 - **7. Inventory deliverable format → Pitfalls** → `references/route-pack-04.md`
 - **Auditoria transversal, credenciais/profile, cutover detached e desativação reversível de agentes** → `references/hera-ares-transversal-dependency-audit.md`
+- **Pós-cutover de agente unificado: validar thread real, permissões por módulo, naming legado, Drive/inventário e dívida documental** → `references/agent-consolidation-post-cutover-audit.md`
 - **Referências operacionais → Verification Checklist** → `references/route-pack-05.md`
 - **References** → `references/route-pack-06.md`
 

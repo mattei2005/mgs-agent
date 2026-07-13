@@ -40,6 +40,21 @@ Remove or replace retired endpoints only on executable/config/operational surfac
 
 If a retired public IP was previously whitelisted on downstream servers, perform a read-only live firewall audit first. Removing the old rule or adding the new egress IP is a separate Critical Subset firewall action requiring explicit confirmation and readback.
 
+## 4. Reconcile parallel sessions before declaring an anomaly
+
+Zeus sessions in different Discord threads do not share live conversational context. A legitimate action from another thread can therefore look unauthorized locally. Before using the word “anomaly”:
+
+1. identify the file, commit, timestamp and apparent actor;
+2. inspect the direct sources first: `events-audit.jsonl`, infra inventory, REPORT-INFRA and Git history/diff;
+3. search Zeus session history by commit, path or operation for the originating authorization;
+4. classify matched evidence as a reconciled concurrent action, ambiguous evidence as an unattributed concurrent change, and only unlogged/conflicting evidence as a governance anomaly.
+
+For every mutable infra operation, prefer a shared correlation tuple in audit/reporting: `operation_id`, origin thread/session, approval message ID, actor and resulting commit. Before saying “nothing changed,” account for background review/forks triggered by the turn and limit the claim to foreground activity while they may still act.
+
+## 5. Preserve YAML types when cleaning Hermes config
+
+`hermes config set` converts booleans and numbers, but a value such as `'[]'` can be stored as the string `"[]"` rather than an empty list. After any structured config write, validate the parsed YAML type and live-versus-versioned equality. If the CLI cannot express the required list/dict type, use Hermes' atomic YAML writer with an actual Python list/dict, then read back the parsed value; never accept a visually plausible scalar as equivalent.
+
 ## Reporting
 
 For each finding, report: confirmed source, operational vs historical classification, proposed action, validation, rollback and exact approval gate. Do not bundle swap, profile config cleanup, repository cleanup and firewall modification into one approval.

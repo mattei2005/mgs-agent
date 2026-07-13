@@ -17,7 +17,9 @@ Rodolfo may ask Zeus to "ficar de olho" on `#alerts-infra` (`1498132022634483894
 3. Background resolution:
    - Persist state as `processing` before calling any external action to avoid loops.
    - Run `hermes -p zeus -z '<self-contained prompt>'` with `HERMES_BACKGROUND_NOTIFICATIONS=off`.
-   - The oneshot investigates/corrects with real checks, returns a concise PT-BR executive result, and the poller posts it as a reply to the original alert via Discord Bot API.
+   - The oneshot investigates/corrects with real checks and returns a concise PT-BR executive result.
+   - Always post visible closure feedback as a reply to the original alert: green Discord Embed `✅ ALERTA CORRIGIDO` only when the result explicitly confirms `resolvido`, `restabelecido`, `corrigido`, `normalizado` or equivalent; otherwise yellow Embed `🔎 ALERTA INVESTIGADO`. Keep `content` empty, disable mentions, and never silently leave a red/failure alert without its closure state.
+   - Keep anti-spam in the persisted `processed` map: one closure message per original alert ID.
 4. Cron:
    - Use `flock -n` and redirect to a dedicated log.
    - Example schedule: `2-57/5 * * * * flock -n /var/lock/alerts_infra_failed_alert_resolver.lock /root/mgs-agent/scripts/alerts-infra-failed-alert-resolver.py >> /root/mgs-agent/logs/alerts-infra-failed-alert-resolver.log 2>&1`.

@@ -85,6 +85,34 @@ For recurring jobs, distinguish three totals:
 
 A strong reconciliation is when effective current approximately matches the account counter. Explain the residual as conditional alerts, manual/on-demand work, telemetry timing, or the audit probes themselves; do not force exact equality.
 
+## Shared resolver and fail-closed contract — 2026-07-12
+
+Recurring MGS consumers use `/root/mgs-agent/scripts/mgs-op-item-resolver.py` instead of field-by-field `op item get` loops.
+
+Security and cache contract:
+
+- `/root/.cache/mgs/1password-metadata/` contains only vault/item IDs, scoped item titles and DTR usernames; never credential values;
+- cache directory is `0700`; JSON and lock files are `0600`; writes are atomic;
+- cache schema changes must increment `CACHE_SCHEMA` so older broader caches are rejected immediately;
+- use separate bounded locks for item-index and DTR-map refreshes; on lock timeout, a valid schema/vault stale metadata cache may be reused, but secrets are never cached by this resolver;
+- `force_refresh` must propagate through the item index; a title that resolves to a deleted/renamed item may refresh the index and retry exactly once—never loop;
+- use vault ID + item ID for full-item reads and parse fields in memory.
+
+Fail-closed consumer rules:
+
+- **Dry-run means no side effects:** no Sheets/Discord writes, no operational state save, and no report artifacts. Verify state hashes and artifact counts before/after.
+- **Meta App Roles:** sheet reconciliation accepts only app keys successfully checked in the current cycle. A failed app's old snapshot preserves its sheet cells and must never look “fresh.”
+- **B011:** use tri-state verdicts `linked`, `unlinked_confirmed`, `unknown`. Only `unlinked_confirmed` may write `X`; `unknown` preserves the cell. Alert infra only after two consecutive inconclusive runs. Keep and use stable item IDs from the DTR map rather than reverting to titles.
+- **DTR/SB daily audit:** stop before SB comparison when any 1Password item is missing, any resolver/collector error exists, or `login_ok != targeted_users`. On incomplete execution, do not update issue state or publish operational divergences; emit only an execution-incomplete alert.
+
+Validation pattern:
+
+1. Wrap `/usr/bin/op` with a temporary PATH shim that logs argument shapes only and delegates to the real binary.
+2. Run synthetic concurrency and assert N processes collapse to one refresh.
+3. Exercise stale lock, force-refresh and renamed-item fixtures deterministically.
+4. Run bounded production dry-runs, assert exact `op` call counts, unchanged state hashes, zero writes/posts and no secret output.
+5. Remove generated dry-run artifacts before auto-push can commit them; preferably make dry-run skip artifact creation in code.
+
 ## Optimization priorities
 
 1. Reduce cadence of heavy full reconcilers before micro-optimizing small monitors.
