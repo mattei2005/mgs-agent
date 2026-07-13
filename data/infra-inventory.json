@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-13T00:01:14-04:00",
+    "updated_at": "2026-07-13T00:10:34-04:00",
     "generated_by": "zeus"
   },
   "system_packages": [
@@ -2110,14 +2110,19 @@
       "memory_compaction": {
         "status": "full_diff_presented_not_applied",
         "current_memory_chars": 2170,
-        "proposed_memory_chars": 260,
+        "proposed_memory_chars": 337,
         "current_user_chars": 1375,
-        "proposed_user_chars": 782
+        "proposed_user_chars": 782,
+        "preserved_noncanonical_facts": [
+          "RunCloud PHP function(){} compatibility rule",
+          "AdsPower/Ially/Samuel/PPO/minimum stock",
+          "Finance manager-tag normalization and Gustavo sheet exclusion"
+        ]
       },
       "backup": "/root/.mgs-backups/hermes-write-approvals/20260712-233415",
       "validation": "Approved pending IDs removed; mirrors byte-identical; router 62c11426 staged only; dbefcf9d/12261f26 retained; Ares evidence request read back; memory/user unchanged; canonical-source matrix and full compaction diff prepared.",
       "status": "validated",
-      "updated_at": "2026-07-13T00:01:14-04:00",
+      "updated_at": "2026-07-13T00:10:34-04:00",
       "dbefcf9d_evidence": {
         "status": "reproduced_and_independently_verified_pending_human_decision",
         "thread_id": "1526069487374307469",
