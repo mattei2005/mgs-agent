@@ -85,6 +85,10 @@ class RulesetV2Tests(unittest.TestCase):
         midnight_half = datetime(2026, 7, 13, 0, 30, tzinfo=self.tz)
         self.assertEqual(CRON.campaign_budget_usd({'daily_budget': '2500'}), 25.0)
         self.assertEqual(CRON.spend_projection_usd(5.0, midnight_half), 240.0)
+        self.assertEqual(CRON.reactivation_gate('paused_by_ares_rule', 'paused_by_ares_rule', 25, 25, 5, 12, 125, 300), (True, 'eligible'))
+        self.assertEqual(CRON.reactivation_gate('unknown', 'paused_by_ares_rule', 25, 25, 5, 12, 125, 300), (False, 'pause_origin_not_allowed'))
+        self.assertEqual(CRON.reactivation_gate('paused_by_ares_rule', 'paused_by_ares_rule', 25, 25, 12, 12, 125, 300), (False, 'active_campaign_count_cap'))
+        self.assertEqual(CRON.reactivation_gate('paused_by_ares_rule', 'paused_by_ares_rule', 25, 25, 5, 12, 290, 300), (False, 'projected_spend_cap'))
 
 
 if __name__ == '__main__':

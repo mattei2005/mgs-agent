@@ -691,6 +691,53 @@ def build_report_datasets(rows, page_headers):
         datasets[title]=[page_headers]+[[row.get(header,'') for header in page_headers] for row in grouped[title]]
     return datasets
 
+def report_page_identity(row):
+    bot_user=norm_email(row.get('bot user'))
+    page_id=norm(row.get('page id'))
+    if bot_user and page_id:
+        return f'bot-page:{bot_user}|{page_id}'
+    fb_page_id=norm(row.get('fb page id'))
+    if fb_page_id:
+        return f'fb:{fb_page_id}'
+    raise RuntimeError(f'página sem chave estável para upsert: {row!r}')
+
+def dedupe_report_rows(rows):
+    unique={}
+    ordered=[]
+    exact_duplicates=0
+    for row in rows:
+        key=report_page_identity(row)
+        if key in unique:
+            if unique[key]!=row:
+                raise RuntimeError(f'chave duplicada com dados conflitantes: {key}')
+            exact_duplicates+=1
+            continue
+        unique[key]=row
+        ordered.append(row)
+    return ordered,exact_duplicates
+
+def read_report_datasets(access_token, titles):
+    if not titles:
+        return {}
+    base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
+    params=[('ranges',sheet_a1_title(title)+'!A:J') for title in titles]
+    params.append(('majorDimension','ROWS'))
+    result=sheets_api(access_token,'GET',base+'/values:batchGet?'+urllib.parse.urlencode(params))
+    ranges=result.get('valueRanges') or []
+    if len(ranges)!=len(titles):
+        raise RuntimeError(f'Google Sheets leitura incremental incompleta: {len(ranges)}/{len(titles)} abas')
+    return {title:(item.get('values') or []) for title,item in zip(titles,ranges)}
+
+def plan_incremental_report_updates(desired_datasets, existing_datasets, page_headers):
+    expected=dict(desired_datasets)
+    for title in existing_datasets:
+        if title!='Paginas' and title not in expected:
+            # Keep a formerly managed site tab, but remove stale/expired rows.
+            # Tab deletion remains a separately confirmed Critical Subset action.
+            expected[title]=[page_headers]
+    updates={title:values for title,values in expected.items() if existing_datasets.get(title)!=values}
+    return expected,updates
+
 def ensure_report_tabs(access_token, required_titles):
     base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
     meta=sheets_api(access_token,'GET',base+'?fields=sheets.properties')

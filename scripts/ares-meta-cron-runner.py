@@ -2,10 +2,10 @@
 """Deterministic Ares Meta Ads cron runner.
 
 Modes:
-- intraday: read Meta, evaluate R1-R5, write local audit, print sanitized Discord log only on proposed action/error.
-- reactivate-all: read Meta paused campaigns, write local audit, print sanitized Discord log only when candidates/error.
+- intraday: read Meta, evaluate R1-R4 with 2-checkpoint persistence, write local audit, print sanitized Discord log only on confirmed proposed action/error.
+- reactivate-all: legacy CLI name for the 00:30 safe reactivation pass; only provenance `paused_by_ares_rule` can become a candidate.
 
-No production write is implemented here. This runner is dry-run/read-only until Rodolfo explicitly approves controlled write and the writer is added with GET-after-write validation.
+No production write is implemented here. Ruleset v2 and HOA target are approved as configuration, but Meta write stays disabled until a separate explicit release with writer + GET-after-write validation.
 Never prints access tokens or raw credentials.
 """
 from __future__ import annotations
@@ -560,6 +560,27 @@ def spend_projection_usd(spend_so_far: float, now_local: dt.datetime) -> float:
     return float(spend_so_far) / elapsed_fraction
 
 
+def reactivation_gate(
+    pause_origin: str,
+    allowed_origin: str,
+    candidate_budget: float,
+    budget_max: float,
+    projected_active_count: int,
+    max_active: int,
+    projected_spend: float,
+    cap: float,
+) -> tuple[bool, str]:
+    if pause_origin != allowed_origin:
+        return False, 'pause_origin_not_allowed'
+    if candidate_budget > budget_max:
+        return False, 'candidate_budget_above_max'
+    if projected_active_count + 1 > max_active:
+        return False, 'active_campaign_count_cap'
+    if projected_spend + candidate_budget > cap:
+        return False, 'projected_spend_cap'
+    return True, 'eligible'
+
+
 def run_intraday(args) -> int:
     common = load_common()
     op_cfg = load_operation(args.operation_id)
@@ -782,14 +803,22 @@ def run_reactivate_all(args) -> int:
                 event.setdefault('skipped_scope', []).append({'campaign_id': campaign_id, 'campaign_name': campaign_name, 'pg_id': pg_id, 'reason': 'manual_hold_or_exclusion' if pg_id in exclusions else scope_reason})
                 continue
             candidate_budget = campaign_budget_usd(campaign, budget_max)
-            if candidate_budget > budget_max:
-                event.setdefault('skipped_budget', []).append({'campaign_id': campaign_id, 'reason': 'candidate_budget_above_max', 'candidate_budget_usd': round(candidate_budget, 2)})
-                continue
-            if projected_active_count + 1 > max_active:
-                event.setdefault('skipped_cap', []).append({'campaign_id': campaign_id, 'reason': 'active_campaign_count_cap', 'projected_active_count': projected_active_count + 1, 'max_active_campaigns': max_active})
-                continue
-            if projected_spend + candidate_budget > cap:
-                event.setdefault('skipped_cap', []).append({'campaign_id': campaign_id, 'reason': 'projected_spend_cap', 'projected_spend_usd': round(projected_spend + candidate_budget, 2), 'cap_usd': cap})
+            eligible, gate_reason = reactivation_gate(
+                pause_origin, allowed_origin, candidate_budget, budget_max,
+                projected_active_count, max_active, projected_spend, cap,
+            )
+            if not eligible:
+                detail = {
+                    'campaign_id': campaign_id,
+                    'reason': gate_reason,
+                    'candidate_budget_usd': round(candidate_budget, 2),
+                    'projected_active_count': projected_active_count + 1,
+                    'max_active_campaigns': max_active,
+                    'projected_spend_usd': round(projected_spend + candidate_budget, 2),
+                    'cap_usd': cap,
+                }
+                bucket = 'skipped_budget' if gate_reason == 'candidate_budget_above_max' else 'skipped_cap'
+                event.setdefault(bucket, []).append(detail)
                 continue
             projected_active_count += 1
             projected_spend += candidate_budget

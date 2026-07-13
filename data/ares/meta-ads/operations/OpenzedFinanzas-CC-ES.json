@@ -113,16 +113,16 @@
       "job_id": "aa9e01a5ec4a",
       "schedule": "every 30m",
       "deliver": "discord:1516887105543077949",
-      "mode": "dry_run_no_write"
+      "mode": "dry_run_v2_R1_R4_persistence_no_write"
     },
     "reactivate_all": {
       "job_id": "c6c737070d3f",
       "schedule": "30 18 * * * America/New_York (00:30 Europe/Madrid current offset)",
       "deliver": "discord:1516887105543077949",
-      "mode": "dry_run_no_write"
+      "mode": "dry_run_safe_paused_by_ares_rule_only_no_write"
     },
     "hoa_manager": {
-      "job_id": "0598c0dc469f",
+      "job_id": "e84a8db81fb3",
       "schedule": "0 2,6,9,12,16 * * * America/New_York (08:00,12:00,15:00,18:00,22:00 Europe/Madrid current offset)",
       "deliver": "discord:1516887105543077949",
       "mode": "read_only_dry_run_no_write",
