@@ -381,7 +381,7 @@ context:
 memory:
   memory_enabled: true
   user_profile_enabled: true
-  write_approval: true
+  write_approval: false
   memory_char_limit: 2200
   user_char_limit: 1375
   provider: ''
@@ -411,7 +411,7 @@ skills:
   inline_shell: false
   inline_shell_timeout: 10
   guard_agent_created: false
-  write_approval: true
+  write_approval: false
   creation_nudge_interval: 15
   disabled:
     - apple-notes

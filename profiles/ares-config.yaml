@@ -404,7 +404,7 @@ context:
 memory:
   memory_enabled: true
   user_profile_enabled: true
-  write_approval: true
+  write_approval: false
   memory_char_limit: 2200
   user_char_limit: 1375
   provider: ''
@@ -435,7 +435,7 @@ skills:
   inline_shell: false
   inline_shell_timeout: 10
   guard_agent_created: false
-  write_approval: true
+  write_approval: false
   creation_nudge_interval: 15
   disabled:
     - apple-notes
@@ -542,21 +542,35 @@ discord:
   history_backfill_limit: 300
   reactions: true
   channel_prompts:
-    '1508853425952133180': |-
-      INSTRUCAO DE THREAD Ares Diretoria:
+    '1508853425952133180': 'INSTRUCAO DE THREAD Ares Diretoria:
 
-      - Canal privado e historico: somente Rodolfo, Zeus e Ares por padrao; nao adicionar gestores automaticamente.
+
+      - Canal privado e historico: somente Rodolfo, Zeus e Ares por padrao; nao adicionar
+      gestores automaticamente.
+
       - Responda na thread atual; nao use send_message para resposta normal.
-      - Titulos de threads: use etiqueta semantica curta de 3 a 6 palavras baseada no assunto principal + contexto especifico; nao sobrescreva titulo manual.
-      - Participantes extras entram somente por pedido explicito de Rodolfo e readback real.
-    '1516887105543077949': |-
-      INSTRUCAO DE THREAD Ares Aquisicao:
+
+      - Titulos de threads: use etiqueta semantica curta de 3 a 6 palavras baseada
+      no assunto principal + contexto especifico; nao sobrescreva titulo manual.
+
+      - Participantes extras entram somente por pedido explicito de Rodolfo e readback
+      real.'
+    '1516887105543077949': 'INSTRUCAO DE THREAD Ares Aquisicao:
+
 
       - Canal operacional compartilhado por Rodolfo, Zeus, Ares e gestores autorizados.
-      - Use threads por conta, estrategia ou assunto; mantenha HOA, Intraday, regras, campanhas e monitoramento neste canal.
+
+      - Use threads por conta, estrategia ou assunto; mantenha HOA, Intraday, regras,
+      campanhas e monitoramento neste canal.
+
       - Responda na thread atual; nao use send_message para resposta normal.
-      - Titulos de threads: use etiqueta semantica curta de 3 a 6 palavras baseada no assunto principal + contexto especifico; nao sobrescreva titulo manual.
-      - Quando Rodolfo pedir para adicionar ou remover gestor, use /root/mgs-agent/scripts/discord-add-thread-member.sh --profile ares --thread <thread_id> --user <user_id> e confirme somente apos readback real.
+
+      - Titulos de threads: use etiqueta semantica curta de 3 a 6 palavras baseada
+      no assunto principal + contexto especifico; nao sobrescreva titulo manual.
+
+      - Quando Rodolfo pedir para adicionar ou remover gestor, use /root/mgs-agent/scripts/discord-add-thread-member.sh
+      --profile ares --thread <thread_id> --user <user_id> e confirme somente apos
+      readback real.'
   dm_role_auth_guild: ''
   server_actions: ''
   allow_any_attachment: false

@@ -35,6 +35,7 @@ Class-level umbrella for software execution methods. Load this when the task is 
 | Cleanup/reuse/perf pass | Simplify-code; see `references/absorbed-skill-md/simplify-code.md` |
 | Async startup/event handoff review | Model the state machine and test controlled interleavings; see `references/async-startup-handoff-review.md` |
 | Read-only security/concurrency/compatibility review of jobs, caches, or credential consumers | Trace real call sites and side effects, model unknown states fail-closed, and verify current line references; see `references/security-concurrency-regression-review.md` |
+| Concurrent JSON register / sequential IDs | Lock every mutator, derive IDs from records, write atomically, and test OS-process races; see `references/transactional-json-registers.md` |
 | Python process needs breakpoints/attach | `references/absorbed-skill-md/python-debugpy.md` |
 | Node process needs inspector/CDP | `references/absorbed-skill-md/node-inspect-debugger.md` |
 
