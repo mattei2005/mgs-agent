@@ -81,9 +81,9 @@ Correção reutilizável deve ser salva durante a própria tarefa:
 - regra geral MGS → `AGENT.md` ou MGS OS/context;
 - preferência estável de Rodolfo → memory.
 
-Mudança resultante exige inventário e REPORT-INFRA. Não transformar toda observação pontual em regra permanente.
+Mudança resultante exige inventário e REPORT-INFRA quando também atingir infraestrutura estrutural. Salvamento automático isolado de memória/skill é reportado na própria conversa com subsistema, alvo, resumo e readback, sem cópia obrigatória em `#alerts-infra`. `curator.enabled` permanece `false`. Não transformar toda observação pontual em regra permanente.
 
-Antes de declarar que nenhuma alteração foi feita, considerar também forks de background/self-improvement disparados pelo turno. Se um fork ainda puder agir após a entrega, limitar a afirmação ao foreground e explicitar que propostas automáticas ficam sujeitas ao gate de aprovação; nunca tratar o rodapé automático como fora da responsabilidade operacional do Zeus.
+Antes de declarar que nenhuma alteração foi feita, considerar também forks de background/self-improvement disparados pelo turno. Se um fork ainda puder agir após a entrega, limitar a afirmação ao foreground e explicitar que qualquer gravação automática será reportada com readback; nunca tratar o rodapé automático como fora da responsabilidade operacional do Zeus.
 
 ## Execução, ferramentas e background
 

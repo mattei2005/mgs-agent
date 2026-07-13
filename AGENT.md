@@ -449,6 +449,12 @@ Zeus mantém visibilidade de todos os artefatos de infra da operação MGS via `
 
 Outros agentes (Atena, futuros) **NÃO precisam pedir autorização** ao Zeus para criar/modificar infra. Mas **DEVEM reportar** no canal `#alerts-infra` (ID: `1498132022634483894`) imediatamente após executar.
 
+### Transparência obrigatória de autoaprendizado
+
+Com `memory.write_approval: false` e `skills.write_approval: false`, qualquer gravação automática de memória ou skill por background/self-improvement deve ser informada ao usuário na própria conversa que originou o aprendizado. O reporte inclui subsistema, alvo/path, resumo do que foi salvo e validação/readback; nunca é permitido encerrar com “nenhuma alteração” se o fork automático escreveu algo.
+
+Esse reporte na conversa satisfaz a transparência do salvamento automático e, isoladamente, não exige cópia em `#alerts-infra`. Se a mesma ação também modificar script, config, data operacional, `AGENT.md`, SOUL estrutural ou outra infraestrutura listada abaixo, o REPORT-INFRA formal continua obrigatório. `curator.enabled` permanece `false`: autoaprendizado pode criar/atualizar, mas curator não arquiva nem faz prune automaticamente.
+
 ### Quando reportar
 
 Ações que disparam report obrigatório:

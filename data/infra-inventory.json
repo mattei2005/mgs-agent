@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-13T04:33:36+00:00",
+    "updated_at": "2026-07-13T01:09:13-04:00",
     "generated_by": "zeus"
   },
   "system_packages": [
@@ -2145,6 +2145,57 @@
         "video_evidence_report_sha256": "839fffedfaca9b131c011270de1a16a720e362bc16d2ff7e2bc9c47ed6b8a19b",
         "followup_completed_message_id": "1526080521866838078"
       }
+    },
+    {
+      "id": "hermes-auto-write-policy-reversal-20260713",
+      "type": "hermes_governance_change",
+      "status": "active_no_restart",
+      "authorized_by": "344196393512075265",
+      "approved_skill_ids": [
+        "62c11426",
+        "dbefcf9d"
+      ],
+      "write_policy": {
+        "profiles": [
+          "zeus",
+          "atena",
+          "ares"
+        ],
+        "memory.write_approval": false,
+        "skills.write_approval": false,
+        "resolved_memory_approval_enabled": false,
+        "resolved_skills_approval_enabled": false,
+        "curator.enabled": false,
+        "skills.creation_nudge_interval": 15,
+        "automatic_save_reporting": "originating conversation with subsystem, target/path, summary, validation/readback; no duplicate alerts-infra solely for automatic memory/skill save"
+      },
+      "policy_files": [
+        "/root/mgs-agent/AGENT.md",
+        "/root/.hermes/profiles/zeus/SOUL.md",
+        "/root/.hermes/profiles/atena/SOUL.md",
+        "/root/.hermes/profiles/ares/SOUL.md"
+      ],
+      "backup": "/root/.mgs-backups/hermes-auto-write-reversal/20260713-010315",
+      "restart_performed": false,
+      "compaction": {
+        "status": "not_applied_reclassification_only",
+        "memory_chars": 2170,
+        "user_chars": 1375,
+        "session_isolation_rule_retained": true
+      },
+      "hashes": {
+        "zeus_config": "19ba7ff5723c9d5837bae5edb208b7fb06cdacdd4c5f94d558f4ee4f11a3cb9d",
+        "atena_config": "d913b70a75934a74cf7460b3bd9b478abace47d1bc21aace63fdd2dfbe1d201c",
+        "ares_config": "361d73a431eaf5e2a375ca2b90626c85b22ee6eb1bda1c86b3e391b024e6383a",
+        "agent_md": "6c2f245447c7e46860a44ac49900a11ff8347c4cea6a5fd2a3888049a2942749",
+        "zeus_soul": "c3c4241415adcb123180bdd90f74b9d7aaae9366bbb78de759c62e94987deb54",
+        "atena_soul": "2fa953faa124d84b18b5eeba454d00156580385a7805fa94cdd6a9db965105bd",
+        "ares_soul": "1e7c74c64d91b66698b634446ccc9074ddb22cabba10d41d4eadb4953d9803c4",
+        "software_development_methods": "9c9f790b0dcce65e0aba1e34467276dc361c630beb1d426b6639d30f4b3d1022",
+        "meta_library_reference": "757475360ee0fce8f3481647e59cff24eb1b309e414bd42ea54a0ab651158c3b"
+      },
+      "created_at": "2026-07-13T01:09:13-04:00",
+      "updated_at": "2026-07-13T01:09:13-04:00"
     }
   ],
   "profile_skill_references": [

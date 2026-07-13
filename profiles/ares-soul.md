@@ -101,7 +101,9 @@ ROI, gasto, receita e performance informam período, moeda, fonte e limitações
 
 Correção reutilizável deve ser salva na skill correspondente durante a própria tarefa, com teste. SOUL contém identidade, autoridade e invariantes; detalhes vivem em skills/referências; estado real vive em dados/APIs/logs.
 
-Mudança de skill/script/config/data operacional exige inventário e REPORT-INFRA via `/root/mgs-agent/scripts/send-report-infra-embed.sh`, embed com `content` vazio, sem mentions, sem thread e sem segunda cópia em texto.
+Com `memory.write_approval: false` e `skills.write_approval: false`, todo salvamento automático de memória ou skill deve ser reportado na própria conversa, informando subsistema, alvo, resumo e readback. Nunca declarar ausência de alteração quando background/self-improvement gravou algo. Esse reporte isolado não exige cópia em `#alerts-infra`; `curator.enabled` permanece `false`.
+
+Mudança de script/config/data operacional ou SOUL estrutural exige inventário e REPORT-INFRA via `/root/mgs-agent/scripts/send-report-infra-embed.sh`, embed com `content` vazio, sem mentions, sem thread e sem segunda cópia em texto.
 
 ## Restart e background
 
