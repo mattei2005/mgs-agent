@@ -192,5 +192,27 @@
       }
     ],
     "decision_response_channel_policy": "Rodolfo replies in the report thread with feito/ignorar/segurar/nao mexer; Ares validates by API on next read"
+  },
+  "smart_bidding_roi": {
+    "enabled": true,
+    "mode": "daily_cashflow_page_read_only",
+    "credential_item": "Ares - Smartbidding Dashboard",
+    "publisher_name": "openzedfinanzas",
+    "domain": "openzedfinanzas",
+    "account_name": "OpenzedFinanzas-ES-CC-ES-03",
+    "country": "ES",
+    "vertical": "CC",
+    "currency": "USD",
+    "revenue_endpoint": "/report/messenger",
+    "join_key": "UTM_CAMPAIGN_equals_pg_id",
+    "spend_source": "meta_insights_campaigns_in_active_focus",
+    "revenue_fields": {
+      "drip": "DRIP_REVENUE",
+      "broadcast": "BD_REVENUE",
+      "total": "REVENUE"
+    },
+    "formula": "(revenue - meta_spend) / meta_spend * 100",
+    "action_policy": "informational_only_no_rule_or_write_trigger",
+    "display": "hoa_separate_page_summary_block"
   }
 }

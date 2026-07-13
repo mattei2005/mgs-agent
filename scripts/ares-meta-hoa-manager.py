@@ -21,12 +21,22 @@ POLICY_DEFAULT = BASE / 'policies' / 'openzedfinanzas_cc_es_hoa_v1.json'
 STATE_DIR = BASE / 'state' / 'hoa'
 REPORT_DIR = BASE / 'reports' / 'hoa'
 COMMON_PATH = Path('/root/mgs-agent/scripts/ares-meta-common.py')
+SB_COMMON_PATH = Path('/root/mgs-agent/scripts/ares-smartbidding-common.py')
 
 
 def load_common():
     spec = importlib.util.spec_from_file_location('ares_meta_common', COMMON_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f'Could not load common module from {COMMON_PATH}')
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def load_smartbidding_common():
+    spec = importlib.util.spec_from_file_location('ares_smartbidding_common', SB_COMMON_PATH)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f'Could not load Smart Bidding helper from {SB_COMMON_PATH}')
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
@@ -240,6 +250,83 @@ def fmt_money(v) -> str:
     return f'{float(v):.2f}'
 
 
+def fmt_percent(v) -> str:
+    if v is None or (isinstance(v, float) and (math.isinf(v) or math.isnan(v))):
+        return '-'
+    return f'{float(v):+.1f}%'
+
+
+def build_roi_summary(op_cfg: dict, report_date: str, focus_spend_by_pg: dict[str, float]) -> list[dict]:
+    config = op_cfg.get('smart_bidding_roi') or {}
+    if not config.get('enabled'):
+        return []
+    rows = []
+    try:
+        smartbidding = load_smartbidding_common()
+    except Exception as exc:
+        for pg_id, spend in sorted(focus_spend_by_pg.items()):
+            rows.append({
+                'pg_id': pg_id,
+                'period': report_date,
+                'currency': str(config.get('currency') or 'USD'),
+                'meta_spend': round(float(spend or 0), 2),
+                'drip_revenue': None,
+                'broadcast_revenue': None,
+                'total_revenue': None,
+                'roi_drip_pct': None,
+                'roi_broadcast_pct': None,
+                'roi_total_pct': None,
+                'status': 'SB helper indisponível',
+                'error': str(exc)[:300],
+            })
+        return rows
+    for pg_id, spend in sorted(focus_spend_by_pg.items()):
+        base = {
+            'pg_id': pg_id,
+            'period': report_date,
+            'currency': str(config.get('currency') or 'USD'),
+            'meta_spend': round(float(spend or 0), 2),
+        }
+        try:
+            revenue = smartbidding.fetch_page_revenue(report_date=report_date, pg_id=pg_id, config=config)
+            matched = int(revenue.get('matched_rows') or 0)
+            drip = float(revenue.get('drip_revenue') or 0)
+            broadcast = float(revenue.get('broadcast_revenue') or 0)
+            total = float(revenue.get('total_revenue') or 0)
+            status = 'OK'
+            if matched <= 0:
+                status = 'SB sem linha'
+            elif float(spend or 0) <= 0:
+                status = 'Meta sem spend'
+            base.update({
+                'matched_rows': matched,
+                'drip_revenue': round(drip, 2),
+                'broadcast_revenue': round(broadcast, 2),
+                'total_revenue': round(total, 2),
+                'revenue_residual': round(float(revenue.get('revenue_residual') or 0), 2),
+                'roi_drip_pct': round(smartbidding.compute_roi_pct(drip, spend), 2) if matched > 0 else None,
+                'roi_broadcast_pct': round(smartbidding.compute_roi_pct(broadcast, spend), 2) if matched > 0 else None,
+                'roi_total_pct': round(smartbidding.compute_roi_pct(total, spend), 2) if matched > 0 else None,
+                'status': status,
+                'revenue_source': revenue.get('source'),
+                'spend_source': config.get('spend_source'),
+                'credential_report': revenue.get('token_report'),
+            })
+        except Exception as exc:
+            base.update({
+                'drip_revenue': None,
+                'broadcast_revenue': None,
+                'total_revenue': None,
+                'roi_drip_pct': None,
+                'roi_broadcast_pct': None,
+                'roi_total_pct': None,
+                'status': 'SB erro',
+                'error': str(exc)[:300],
+            })
+        rows.append(base)
+    return rows
+
+
 def trunc(s, n=34):
     s = str(s)
     return s if len(s) <= n else s[: max(0, n-3)] + '...'
@@ -355,6 +442,15 @@ def main() -> int:
             total_today_spend += spend
 
     focus_pg_ids = active_focus_pg_ids(op_cfg)
+    focus_spend_by_pg = {pg_id: 0.0 for pg_id in focus_pg_ids}
+    for row in insights:
+        if row.get('date_start') != today.isoformat():
+            continue
+        pg_id = page_id_from_name(row.get('campaign_name'))
+        if focus_pg_ids and pg_id not in focus_pg_ids:
+            continue
+        focus_spend_by_pg.setdefault(pg_id, 0.0)
+        focus_spend_by_pg[pg_id] += float(row.get('spend') or 0)
     for cid, camp in campaigns.items():
         cname = camp.get('name') or cid
         pg_id = page_id_from_name(cname)
@@ -479,6 +575,7 @@ def main() -> int:
     test_pool = daily_cap * test_share
     test_budget_left = max(0.0, test_pool - min(total_today_spend, test_pool))
     budget_status = 'sem espaço p/ teste' if test_budget_left <= 0 else f'teste livre USD {test_budget_left:.2f}'
+    roi_summary = build_roi_summary(op_cfg, today.isoformat(), focus_spend_by_pg)
 
     event = {
         'operation_id': args.operation_id,
@@ -494,6 +591,8 @@ def main() -> int:
         'today_spend_usd': round(total_today_spend, 2),
         'budget_left_usd': round(budget_left, 2),
         'test_budget_left_usd': round(test_budget_left, 2),
+        'roi_mode': (op_cfg.get('smart_bidding_roi') or {}).get('mode'),
+        'roi_summary': roi_summary,
         'watch_count': len(watch_rows),
         'watch_rows': watch_rows,
         'campaigns': snapshot_campaigns,
@@ -515,14 +614,33 @@ def main() -> int:
     header_prefix = (
         f'<@344196393512075265> HOA — relatório das {now_local.strftime("%H:%M")} ({args.account_tz}) da página em foco.\n'
         'Estou só analisando as campanhas; não alterei nada na Meta.\n'
+        'ROI = cashflow diário da página (receita SB × spend Meta); Broadcast pode maturar em D+1 e não aciona regra.\n'
         'Para registrar uma decisão, responda usando o nome completo da campanha.'
     )
-    print(output_table(
+    campaign_block = output_table(
         title,
         rows,
         [('campaign_display_name','Nome campanha'),('start_date','Início'),('effective_status','Status'),('spend_today','Spend'),('mo_today','MO'),('cpmo_today','CPMO'),('hoa_cpmo','HOA'),('suggested_action','Ação'),('reason','Motivo')],
-        prefix=header_prefix
-    ))
+    )
+    roi_rows = []
+    for item in roi_summary:
+        roi_rows.append({
+            'pg_id': item.get('pg_id'),
+            'meta_spend': fmt_money(item.get('meta_spend')),
+            'roi_drip': fmt_percent(item.get('roi_drip_pct')),
+            'roi_broadcast': fmt_percent(item.get('roi_broadcast_pct')),
+            'roi_total': fmt_percent(item.get('roi_total_pct')),
+            'status': item.get('status'),
+        })
+    blocks = [header_prefix]
+    if roi_rows:
+        blocks.append(output_table(
+            f'ROI da página — {today.isoformat()} — USD — informativo',
+            roi_rows,
+            [('pg_id','PG'),('meta_spend','Spend'),('roi_drip','ROI Drip'),('roi_broadcast','ROI Broad'),('roi_total','ROI Total'),('status','Status')],
+        ))
+    blocks.append(campaign_block)
+    print('\n\n'.join(blocks))
     return 0
 
 

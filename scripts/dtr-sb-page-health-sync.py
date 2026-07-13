@@ -33,6 +33,7 @@ OP_RESOLVER_PATH=BASE_DIR/'scripts/mgs-op-item-resolver.py'
 REPORT_SHEET_ID='1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI'
 REPORT_SHEET_URL=f'https://docs.google.com/spreadsheets/d/{REPORT_SHEET_ID}/edit?gid=0#gid=0'
 GOOGLE_TOKEN_FILE=BASE_DIR/'.secrets/ares-google-drive-oauth-client.json'
+GLOBAL_IGNORE_PATH=BASE_DIR/'data/mgs-global-page-ignore-list.json'
 
 _op_spec=importlib.util.spec_from_file_location('mgs_op_item_resolver', OP_RESOLVER_PATH)
 if not _op_spec or not _op_spec.loader:
@@ -367,6 +368,67 @@ def active_restricted(row, tday):
     ru=date_only(row.get('RESTRICTED_UNTIL'))
     return bool(ru and ru>=tday)
 
+def load_global_ignore_keys():
+    if not GLOBAL_IGNORE_PATH.exists():
+        return set(), set()
+    data=json.loads(GLOBAL_IGNORE_PATH.read_text(encoding='utf-8'))
+    fb_keys=set(); bot_page_keys=set()
+    for entry in data.get('entries') or []:
+        fb=norm(entry.get('fb_page_id'))
+        bot=norm_email(entry.get('bot_user'))
+        page_id=norm(entry.get('page_id_pg') or entry.get('page_id'))
+        if fb: fb_keys.add(fb)
+        if bot and page_id: bot_page_keys.add((bot,page_id))
+    return fb_keys, bot_page_keys
+
+def globally_ignored_page(row, fb_keys, bot_page_keys):
+    fb=norm(row.get('FB_PAGE_ID'))
+    bot=norm_email(row.get('USER_LOGIN') or row.get('LOGIN'))
+    page_id=norm(row.get('PAGE_ID'))
+    return bool((fb and fb in fb_keys) or (bot and page_id and (bot,page_id) in bot_page_keys))
+
+def restricted_sheet_rows(sb_rows, active_users, tday):
+    active_users={norm_email(user) for user in active_users if norm_email(user)}
+    fb_ignore, bot_page_ignore=load_global_ignore_keys()
+    scoped=[]; globally_ignored=0
+    for row in sb_rows:
+        if norm_email(row.get('USER_LOGIN') or row.get('LOGIN')) not in active_users:
+            continue
+        if globally_ignored_page(row,fb_ignore,bot_page_ignore):
+            globally_ignored+=1
+            continue
+        scoped.append(row)
+    restricted=[row for row in scoped if active_restricted(row,tday)]
+    broadcast=[row for row in restricted if norm(row.get('STATUS')).lower()=='broadcast']
+    on_hold=[row for row in restricted if norm(row.get('STATUS')).lower()=='on-hold']
+    output=[]
+    for row in broadcast:
+        fb=norm(row.get('FB_PAGE_ID'))
+        notes=norm(row.get('NOTES'))
+        codes=[code for code in DELIVERY_ERROR_NOTE_CODES if re.search(r'(?<![\w#])'+re.escape(code)+r'(?![\w#])',notes,re.I)]
+        output.append({
+            'link da pagina':f'https://facebook.com/{fb}' if fb else '',
+            'nome da pagina':norm(row.get('PAGE_NAME')),
+            'fb page id':fb,
+            'page id':norm(row.get('PAGE_ID')),
+            'bot user':norm_email(row.get('USER_LOGIN') or row.get('LOGIN')),
+            'segurador':norm(row.get('PROFILE_NAME')),
+            'sites':derive_sites(row),
+            'status sb':norm(row.get('STATUS')),
+            'codigos':', '.join(codes),
+            'data saida':date_only(row.get('RESTRICTED_UNTIL')),
+        })
+    output.sort(key=lambda row:(row.get('data saida') or '9999-99-99',row.get('nome da pagina') or '',row.get('bot user') or ''))
+    return output, {
+        'sheet_scope':'active restricted pages with Status SB = Broadcast',
+        'sheet_rows_scoped':len(scoped),
+        'sheet_global_ignored':globally_ignored,
+        'sheet_restricted_total':len(restricted),
+        'sheet_broadcast_restricted':len(broadcast),
+        'sheet_on_hold_excluded':len(on_hold),
+        'sheet_other_status_excluded':len(restricted)-len(broadcast)-len(on_hold),
+    }
+
 def public_row(r):
     return {k:r.get(k) for k in ['ID','PAGE_ID','FB_PAGE_ID','PAGE_NAME','USER_LOGIN','PROFILE_NAME','STATUS','RESTRICTED_UNTIL','NOTES','BROADCAST_TEMPLATE_NAME']}
 
@@ -628,12 +690,8 @@ def ensure_report_tabs(access_token):
 def write_google_sheet(rows, summary, inventory_notes=None):
     access_token=google_access_token()
     tabs=ensure_report_tabs(access_token)
-    page_headers=['link da pagina','nome da pagina','fb page id','page id','segurador','bot user','data','codigo dos erros','sb status antes','sb restricted antes','acao','readback ok','observacao']
+    page_headers=['link da pagina','nome da pagina','fb page id','page id','bot user','segurador','sites','status sb','codigos','data saida']
     inv_headers=['user','segurador','status','reason','pages']
-    on_hold_excluded=sum(1 for row in rows if norm(row.get('sb status antes')).lower()=='on-hold')
-    rows=[row for row in rows if norm(row.get('sb status antes')).lower()!='on-hold']
-    summary=dict(summary)
-    summary['sheet_on_hold_excluded']=on_hold_excluded
     page_values=[page_headers]+[[r.get(h,'') for h in page_headers] for r in rows]
     summary_values=[['Campo','Valor']]
     for key,value in summary.items():
@@ -673,7 +731,7 @@ def write_google_sheet(rows, summary, inventory_notes=None):
             format_requests.append({'setBasicFilter':{'filter':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols}}}})
     sheets_api(access_token,'POST',base+':batchUpdate',{'requests':format_requests})
     params=urllib.parse.urlencode([
-        ('ranges',"'Paginas'!A:M"),
+        ('ranges',"'Paginas'!A:J"),
         ('ranges',"'Resumo'!A:B"),
         ('ranges',"'Inventario Step1'!A:E"),
         ('majorDimension','ROWS'),
@@ -689,7 +747,7 @@ def write_google_sheet(rows, summary, inventory_notes=None):
     counts_read=[len(values) for values in values_read]
     if headers_read!=expected_headers or counts_read!=expected_counts:
         raise RuntimeError(f'Google Sheets readback divergente: headers={headers_read!r} rows={counts_read!r} expected_rows={expected_counts!r}')
-    return {'url':REPORT_SHEET_URL,'rows_paginas':counts_read[0],'rows_resumo':counts_read[1],'rows_inventario':counts_read[2],'on_hold_excluded':on_hold_excluded,'readback_ok':True}
+    return {'url':REPORT_SHEET_URL,'rows_paginas':counts_read[0],'rows_resumo':counts_read[1],'rows_inventario':counts_read[2],'restricted_only':True,'readback_ok':True}
 
 async def main():
     ap=argparse.ArgumentParser()
@@ -873,7 +931,10 @@ async def main():
         backup_path.write_text(json.dumps(backups,ensure_ascii=False,indent=2),encoding='utf-8'); summary['backup']=str(backup_path)
         if args.apply:
             try:
-                summary['sheet_update']=write_google_sheet(report_rows,summary,summary.get('step1_inventory_notes'))
+                _, fresh_sb_rows=await fetch_sb_rows(ctx,h)
+                restricted_rows, sheet_stats=restricted_sheet_rows(fresh_sb_rows,active,tday)
+                summary.update(sheet_stats)
+                summary['sheet_update']=write_google_sheet(restricted_rows,summary,summary.get('step1_inventory_notes'))
             except Exception as exc:
                 summary['errors'].append({'sheet_update_failed':f'{type(exc).__name__}: {exc}'})
         else:
