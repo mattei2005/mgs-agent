@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-13T00:10:34-04:00",
+    "updated_at": "2026-07-13T00:23:13-04:00",
     "generated_by": "zeus"
   },
   "system_packages": [
@@ -2122,9 +2122,9 @@
       "backup": "/root/.mgs-backups/hermes-write-approvals/20260712-233415",
       "validation": "Approved pending IDs removed; mirrors byte-identical; router 62c11426 staged only; dbefcf9d/12261f26 retained; Ares evidence request read back; memory/user unchanged; canonical-source matrix and full compaction diff prepared.",
       "status": "validated",
-      "updated_at": "2026-07-13T00:10:34-04:00",
+      "updated_at": "2026-07-13T00:23:13-04:00",
       "dbefcf9d_evidence": {
-        "status": "reproduced_and_independently_verified_pending_human_decision",
+        "status": "video_specific_evidence_independently_verified_pending_human_decision",
         "thread_id": "1526069487374307469",
         "evidence_report_sha256": "f6093220a7bbc3f99af927f96a0b593abbdcb35a46e5bd0d979e0f2c6c31548e",
         "depth10": {
@@ -2133,12 +2133,17 @@
         },
         "depth40": {
           "mediaLinkedToCardCount": 53,
-          "selectedLibraryId": "911928715213204"
+          "selectedLibraryId": "1519644046445494"
         },
-        "same_selected_media_sha256": "d08467483e0e6e4f9f8c9647b37a8173d71622afba4864e79c15f5192d6a4b3f",
+        "same_selected_media_sha256": "ceb0ed25cdb53dc3a097888089b8743e695d26003871c31f7934a6136005daaa",
         "canonical_collector_sha256": "de918767ef6827c7607d7c10d4c0393235d71080fb4cd32e5b56d7dadca877e4",
         "canonical_git_diff_exit_code": 0,
-        "pending_sha256": "39661f566024a70607492700ce5c1819db3f9911d4a35a6a1bdfdf3c7cb4d26e"
+        "pending_sha256": "39661f566024a70607492700ce5c1819db3f9911d4a35a6a1bdfdf3c7cb4d26e",
+        "selected_download_kind": "video",
+        "remaining_gap": null,
+        "followup_message_id": "1526079907208233050",
+        "video_evidence_report_sha256": "839fffedfaca9b131c011270de1a16a720e362bc16d2ff7e2bc9c47ed6b8a19b",
+        "followup_completed_message_id": "1526080521866838078"
       }
     }
   ],
