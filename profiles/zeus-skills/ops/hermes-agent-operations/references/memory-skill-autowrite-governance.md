@@ -171,6 +171,17 @@ The deployed-on-disk implementation is carried by `/root/mgs-agent/patches/herme
 
 Do not call the Hermes runtime branch active in already-running gateway processes until the gateways have been safely restarted after the tests pass. A source-file readback proves deployment to disk, not module activation inside a pre-existing Python process. After restart, run a temporary-profile overflow smoke and verify a newly initialized live agent imports the markers before declaring the protection active.
 
+### Close activation without rewriting history
+
+Treat feature readiness, restart-orchestration success, and prompt-policy cutover as separate gates:
+
+1. A failed restart finalizer remains failed. If the services recover later, never append `gateway_restart_finalizer_finished` to that failed run or describe recovery as retroactive success. Run a separately correlated, read-only revalidation and record a distinct revalidation result.
+2. Diagnose readiness from the real startup path: capture the agent log offset before restart, restart one profile, then poll until systemd is `active/running` **and** a new Discord connection marker appears after that offset. Use observed profile startup distributions plus safety margin rather than one global sleep; stop before restarting the next agent on any failure.
+3. A second restart is justified only when it resolves an unproven runtime property or is explicitly required to test the corrected restart orchestrator. Do not restart merely to create prompt sessions: gateway restart does not construct a new `sessions.system_prompt`.
+4. For `policy_in_prompt`, inspect post-change sessions in `state.db` for the exact policy sentence. No post-change session means **not proven**, even if SOUL is correct on disk and the gateway is connected. Require a fresh validation-only turn/thread or explicit session reset; do not label the policy active in Atena/Ares from file readback alone.
+5. A one-shot validation/governance job that exited blocked is finished; it will not wake up when the dependency recovers. Schedule a new closure explicitly after the missing evidence exists.
+6. Preserve the evidence classes in reporting: code/tests may be PASS while activation remains BLOCKED. State both instead of collapsing the whole proposal into “approved” or “failed.”
+
 ### Implementation-review chokepoints
 
 When reviewing a proposed overflow dead-letter against deployed Hermes, verify these less-obvious sibling paths:
