@@ -1,0 +1,169 @@
+diff --git a/tests/tools/test_memory_capacity_dead_letter.py b/tests/tools/test_memory_capacity_dead_letter.py
+index 3e42e38d2..d0d38336c 100644
+--- a/tests/tools/test_memory_capacity_dead_letter.py
++++ b/tests/tools/test_memory_capacity_dead_letter.py
+@@ -98,15 +98,48 @@ def test_duplicate_retry_coalesces_to_same_pending_id(hermes_home):
+     assert store.add("memory", "a" * 30)["success"] is True
+     before = _bytes(hermes_home / "memories" / "MEMORY.md")
+ 
+-    first = json.loads(memory_tool("add", "memory", "b" * 30, store=store))
+-    second = json.loads(memory_tool("add", "memory", "b" * 30, store=store))
+-
+-    assert first["pending_id"] == second["pending_id"]
+-    assert second["deduplicated"] is True
++    results = [
++        json.loads(memory_tool("add", "memory", "b" * 30, store=store))
++        for _ in range(4)
++    ]
++
++    assert len({result["pending_id"] for result in results}) == 1
++    assert results[1]["deduplicated"] is True
++    assert results[-1]["done"] is True
++    assert len(results[-1]["state_fingerprint"]) == 64
+     assert wa.pending_count(wa.MEMORY) == 1
+     assert _bytes(hermes_home / "memories" / "MEMORY.md") == before
+ 
+ 
++def test_same_payload_against_different_state_gets_new_pending_id(hermes_home):
++    from tools import write_approval as wa
++
++    store = _store()
++    first_state = "a" * 30
++    second_state = "c" * 30
++    rejected = "b" * 30
++    assert store.add("memory", first_state)["success"] is True
++
++    first = json.loads(memory_tool("add", "memory", rejected, store=store))
++    first_record = wa.get_pending(wa.MEMORY, first["pending_id"])
++    assert first_record is not None
++
++    assert store.remove("memory", first_state)["success"] is True
++    assert store.add("memory", second_state)["success"] is True
++    before_second_rejection = _bytes(hermes_home / "memories" / "MEMORY.md")
++
++    second = json.loads(memory_tool("add", "memory", rejected, store=store))
++    second_record = wa.get_pending(wa.MEMORY, second["pending_id"])
++    assert second_record is not None
++
++    assert first["pending_id"] != second["pending_id"]
++    assert first["state_fingerprint"] != second["state_fingerprint"]
++    assert first_record["failure_context"]["state_fingerprint"] == first["state_fingerprint"]
++    assert second_record["failure_context"]["state_fingerprint"] == second["state_fingerprint"]
++    assert wa.pending_count(wa.MEMORY) == 2
++    assert _bytes(hermes_home / "memories" / "MEMORY.md") == before_second_rejection
++
++
+ def test_non_capacity_failure_does_not_create_dead_letter(hermes_home):
+     from tools import write_approval as wa
+ 
+diff --git a/tools/memory_tool.py b/tools/memory_tool.py
+index bf8ce3eac..6d24c78e4 100644
+--- a/tools/memory_tool.py
++++ b/tools/memory_tool.py
+@@ -23,6 +23,7 @@ Design:
+ - Frozen snapshot pattern: system prompt is stable, tool responses show live state
+ """
+ 
++import hashlib
+ import json
+ import logging
+ import os
+@@ -166,9 +167,13 @@ class MemoryStore:
+         }
+         for key in (
+             "error_code",
++            "target",
+             "current_chars",
+             "char_limit",
++            "limit_chars",
+             "attempted_chars",
++            "projected_chars",
++            "state_fingerprint",
+             "usage",
+         ):
+             if key in response:
+@@ -343,6 +348,16 @@ class MemoryStore:
+             return self.user_char_limit
+         return self.memory_char_limit
+ 
++    def _state_fingerprint(self, target: str) -> str:
++        """Hash the canonical capacity-tested state while the caller holds its lock."""
++        canonical = json.dumps(
++            {"target": target, "entries": self._entries_for(target)},
++            ensure_ascii=False,
++            sort_keys=True,
++            separators=(",", ":"),
++        )
++        return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
++
+     def add(self, target: str, content: str) -> Dict[str, Any]:
+         """Append a new entry. Returns error if it would exceed the char limit."""
+         content = content.strip()
+@@ -387,10 +402,14 @@ class MemoryStore:
+                         "recovery."
+                     ),
+                     "current_entries": entries,
++                    "target": target,
+                     "usage": f"{current:,}/{limit:,}",
+                     "current_chars": current,
+                     "char_limit": limit,
++                    "limit_chars": limit,
+                     "attempted_chars": new_total,
++                    "projected_chars": new_total,
++                    "state_fingerprint": self._state_fingerprint(target),
+                 })
+ 
+             entries.append(content)
+@@ -460,10 +479,14 @@ class MemoryStore:
+                         "recovery."
+                     ),
+                     "current_entries": entries,
++                    "target": target,
+                     "usage": f"{current:,}/{limit:,}",
+                     "current_chars": current,
+                     "char_limit": limit,
++                    "limit_chars": limit,
+                     "attempted_chars": new_total,
++                    "projected_chars": new_total,
++                    "state_fingerprint": self._state_fingerprint(target),
+                 })
+ 
+             entries[idx] = new_content
+@@ -612,10 +635,14 @@ class MemoryStore:
+                         "preserve this proposal for reviewed recovery."
+                     ),
+                     "current_entries": self._entries_for(target),
++                    "target": target,
+                     "usage": f"{current:,}/{limit:,}",
+                     "current_chars": current,
+                     "char_limit": limit,
++                    "limit_chars": limit,
+                     "attempted_chars": new_total,
++                    "projected_chars": new_total,
++                    "state_fingerprint": self._state_fingerprint(target),
+                 })
+ 
+             # Commit.
+@@ -992,7 +1019,10 @@ def _stage_capacity_overflow(
+     context: Dict[str, Any] = {
+         "current_chars": result.get("current_chars"),
+         "char_limit": result.get("char_limit"),
++        "limit_chars": result.get("limit_chars"),
+         "attempted_chars": result.get("attempted_chars"),
++        "projected_chars": result.get("projected_chars"),
++        "state_fingerprint": result.get("state_fingerprint"),
+         "usage": result.get("usage"),
+         "profile": get_hermes_home().name,
+     }
+diff --git a/tools/write_approval.py b/tools/write_approval.py
+index 14a2f1b9d..b845d960c 100644
+--- a/tools/write_approval.py
++++ b/tools/write_approval.py
+@@ -175,6 +175,7 @@ def stage_failure_write(
+         "subsystem": subsystem,
+         "failure_type": failure_type,
+         "payload": payload,
++        "state_fingerprint": context.get("state_fingerprint") or "",
+     }
+     canonical = json.dumps(
+         identity,

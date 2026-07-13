@@ -190,6 +190,14 @@ PY
         return 0
       fi
       ;;
+    memory-dead-letter-state-fingerprint-*.patch)
+      if grep -q "def _state_fingerprint" "$REPO/tools/memory_tool.py" \
+        && grep -q '"state_fingerprint": context.get("state_fingerprint")' "$REPO/tools/write_approval.py" \
+        && grep -q "test_same_payload_against_different_state_gets_new_pending_id" "$REPO/tests/tools/test_memory_capacity_dead_letter.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     skill-view-compact-linked-files.patch)
       if grep -q "def _linked_files_for_view" "$REPO/tools/skills_tool.py" \
         && grep -q '"linked_files_summary"' "$REPO/tools/skills_tool.py" \
@@ -222,6 +230,7 @@ log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 # invariant checks/backward-compatible fallback.
 apply_patch_if_needed "mgs-runtime-customizations-2026-07-07.patch"
 apply_patch_if_needed "memory-dead-letter-structural-trace-2026-07-13.patch"
+apply_patch_if_needed "memory-dead-letter-state-fingerprint-2026-07-13.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-07-05.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-06-30.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-06-26.patch"
@@ -373,6 +382,12 @@ grep -q "def emit_structural_write_receipt" "$REPO/tools/write_trace.py" \
   || fail "missing structural autowrite receipt emitter"
 grep -q 'result\["trace_receipt"\]' "$REPO/tools/skill_manager_tool.py" \
   || fail "missing background skill structural receipt integration"
+grep -q "def _state_fingerprint" "$REPO/tools/memory_tool.py" \
+  || fail "missing locked canonical memory-state fingerprint"
+grep -q '"state_fingerprint": context.get("state_fingerprint")' "$REPO/tools/write_approval.py" \
+  || fail "missing state-scoped dead-letter idempotency key"
+grep -q "test_same_payload_against_different_state_gets_new_pending_id" "$REPO/tests/tools/test_memory_capacity_dead_letter.py" \
+  || fail "missing cross-state dead-letter idempotency regression test"
 
 "$BASE/scripts/check-retired-host-references.py" \
   || fail "retired host reference reappeared on an operational surface"
