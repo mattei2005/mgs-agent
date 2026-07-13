@@ -28,9 +28,11 @@ Quando a pergunta for “isso foi bom ou ruim para a MGS?” ou pedir resposta h
 - abrir com o veredito líquido e delimitar o escopo real (ex.: infraestrutura dos agentes, não campanhas/conteúdo/negócio inteiro);
 - explicar em linguagem de impacto: o que melhorou, o que deu errado no caminho, se houve dano, estado vivo e pendências;
 - não usar hashes, commits, contagens de testes ou nomes de funções como corpo da explicação; deixar a evidência técnica em uma nota curta de validação;
-- distinguir “nenhum dado existente foi apagado” de “uma nova proposta falhou ao persistir”; não transformar ausência de dano em certeza mais ampla do que a auditoria provou.
-- Se houver divergência, declarar a decisão recomendada sem iniciar conversa agente→agente.
-- Terminar com `Próximo passo pendente:` quando a conversa envolver execução/patch/infra ou quando o veredito concluir que a ideia faz sentido mas ainda falta implementação/teste.
+- distinguir “nenhum dado existente foi apagado” de “uma nova proposta falhou ao persistir”; não transformar ausência de dano em certeza mais ampla do que a auditoria provou;
+- se Rodolfo disser que a investigação está tomando tempo demais ou pedir para “acabar com isso”, encerrar o ciclo como COO: executar de imediato as correções não críticas já autorizadas, manter intactos os gates críticos, parar de transformar cada achado intermediário em nova decisão técnica para ele e entregar um fechamento único com `feito`, `não feito e por quê`, `risco restante` e `precisa ou não fazer algo`;
+- não prolongar uma auditoria já conclusiva com hardening opcional. Separar higiene/monitoramento futuro de pendência operacional urgente;
+- se houver divergência, declarar a decisão recomendada sem iniciar conversa agente→agente;
+- terminar com `Próximo passo pendente:` somente quando existir uma ação realmente necessária. Se não houver ação do usuário, dizer isso diretamente e encerrar.
 
 O incidente real `1505532189490811081` mostrou que a regra “mencione o outro agente quando falar dele” é perigosa se aplicada como padrão: cada mention acorda o bot destino, gera fila, e qualquer confirmação vira novo input.
 

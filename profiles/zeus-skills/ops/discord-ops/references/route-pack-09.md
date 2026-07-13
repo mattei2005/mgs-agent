@@ -80,9 +80,33 @@ Quando a reorganização também excluir um canal redundante, aplicar este fecha
 
 Criar subagente separado somente quando também houver separação real de área, dados, ferramentas, autoridade ou fonte de verdade. Para mera privacidade de conversa, dois canais do mesmo agente reduzem drift e manutenção.
 
+#### Regressão de auto-add em profile com canal privado + canal de equipe
+
+Quando um mesmo profile atende um canal privado e outro compartilhado, esvaziar o `thread_auto_add_users` global protege o privado, mas também desliga o auto-add do canal de equipe. Isso é uma regressão de escopo, não falha do Discord.
+
+Diagnóstico mínimo:
+
+1. Confirmar o `parent_id` da thread e qual política deveria valer naquele canal.
+2. Ler `discord.thread_auto_add_users` no config vivo e mirror, depois conferir `DISCORD_THREAD_AUTO_ADD_USERS` no processo sem imprimir segredos. O env efetivo vence a hidratação do config.
+3. Consultar `GET /channels/{thread_id}/thread-members?with_member=true`; se houver apenas autor + bot, o auto-add não ocorreu.
+4. Reconciliar Git/audit para descobrir se a lista foi removida deliberadamente durante uma separação de diretoria/equipe.
+5. Reparar imediatamente a thread afetada com o helper canônico para cada participante explicitamente aprovado, respeitando `429 Retry-After`, e validar todos por GET/readback.
+
+Correção durável preferida: suportar uma lista explícita **por canal pai**, com fallback global somente para profiles de política única. Um canal privado deve poder declarar lista vazia sem cair em auto-discovery amplo; o canal de equipe declara sua lista de usuários. Até esse suporte estar implantado e validado, não reativar a lista global em profile misto, pois isso vaza membership/notificações para o canal privado.
+
+Critério de aceite da correção durável:
+
+- teste unitário para canal privado vazio e canal compartilhado com lista explícita;
+- config vivo e mirror com o mesmo mapa por canal;
+- restart seguro do gateway afetado;
+- nova thread de teste em cada canal;
+- GET de membros comprovando que o canal compartilhado recebeu somente os aprovados e o privado não recebeu extras;
+- audit, inventário e REPORT-INFRA quando runtime/config estrutural forem alterados.
+
 Pitfalls:
 
 - Não usar `thread_auto_add_users` para “facilitar” o canal de equipe quando o mesmo profile também atende um canal privado; a configuração não é por canal.
+- Não tratar lista global vazia como autorização para descobrir/adicionar todos os membros visíveis do guild; vazio explícito deve significar “não adicionar ninguém”.
 - Não confundir usuário autorizado a operar o agente com participante automático de toda thread. Autorização, visibilidade do canal e membership da thread são camadas diferentes.
 - Não assumir que renomear um canal atualiza nomes descritivos em dados/scripts: procurar o ID canônico e corrigir labels ativos, preservando referências históricas como histórico.
 - Não confiar em uma chamada de escrita que depois falhou no parser de resposta: fazer GET independente e comparar o estado inteiro antes de repetir writes idempotentes.
