@@ -125,6 +125,14 @@ PY
         return 0
       fi
       ;;
+    discord-thread-auto-add-by-channel-*.patch)
+      if grep -q "def _discord_thread_auto_add_user_ids" "$REPO/plugins/platforms/discord/adapter.py" \
+        && grep -q "DISCORD_THREAD_AUTO_ADD_USERS_BY_CHANNEL" "$REPO/plugins/platforms/discord/adapter.py" \
+        && grep -q "test_auto_add_is_scoped_to_parent_channel" "$REPO/tests/gateway/test_discord_thread_auto_add_by_channel.py"; then
+        log "patch invariants already present despite context drift: $name"
+        return 0
+      fi
+      ;;
     mgs-auto-reasoning-routing.patch)
       if grep -q "def _resolve_turn_reasoning_config" "$REPO/gateway/run.py" \
         && grep -q "def route_reasoning_config" "$REPO/gateway/reasoning_router.py" \
@@ -240,6 +248,7 @@ apply_patch_if_needed "mgs-runtime-customizations-2026-06-26.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-06-20.patch"
 
 apply_patch_if_needed "discord-deterministic-thread-rename-auto-add-users.patch"
+apply_patch_if_needed "discord-thread-auto-add-by-channel-2026-07-13.patch"
 apply_patch_if_needed "planned-restart-auto-resume-active-sessions.patch"
 apply_patch_if_needed "restart-recovery-checkpoint-idempotent.patch"
 apply_patch_if_needed "restart-recovery-natural-continuation-2026-07-11.patch"
@@ -267,6 +276,12 @@ grep -q "DISCORD_THREAD_AUTO_ADD_USERS" "$REPO/plugins/platforms/discord/adapter
   || fail "missing Discord explicit thread auto-add support"
 grep -q "Auto-thread member sync" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord auto-thread member sync log marker"
+grep -q "def _discord_thread_auto_add_user_ids" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord per-channel thread auto-add resolver"
+grep -q "DISCORD_THREAD_AUTO_ADD_USERS_BY_CHANNEL" "$REPO/plugins/platforms/discord/adapter.py" \
+  || fail "missing Discord per-channel thread auto-add config bridge"
+grep -q "test_auto_add_is_scoped_to_parent_channel" "$REPO/tests/gateway/test_discord_thread_auto_add_by_channel.py" \
+  || fail "missing Discord per-channel thread auto-add regression test"
 grep -q "semantic_fallback_title" "$REPO/plugins/platforms/discord/adapter.py" \
   || fail "missing Discord semantic title fallback"
 grep -q "Formatação de Tabelas" "$REPO/plugins/platforms/discord/adapter.py" \
