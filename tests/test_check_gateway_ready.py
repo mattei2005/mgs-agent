@@ -9,6 +9,7 @@ SCRIPT = ROOT / "scripts" / "check-gateway-ready.py"
 
 def load_module():
     spec = importlib.util.spec_from_file_location("check_gateway_ready", SCRIPT)
+    assert spec is not None
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
     spec.loader.exec_module(module)
@@ -88,3 +89,14 @@ def test_cli_json_is_metadata_only(tmp_path, monkeypatch, capsys):
     assert rc == 0
     assert output["ready"] is True
     assert "payload" not in output
+
+
+def test_safe_restart_uses_sequential_weighted_discord_gate():
+    text = (ROOT / "scripts" / "mgs-gateway-restart-safe.sh").read_text(encoding="utf-8")
+    assert 'for wanted in atena ares zeus' in text
+    assert 'zeus) readiness_timeout=180' in text
+    assert 'atena|ares) readiness_timeout=90' in text
+    assert 'check-gateway-ready.py --service' in text
+    assert 'gateway_restart_agent_ready' in text
+    assert 'sleep 12' not in text
+    assert 'systemctl restart --no-block zeus-gateway.service' not in text

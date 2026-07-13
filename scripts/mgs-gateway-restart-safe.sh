@@ -87,6 +87,7 @@ SNAPSHOT_FILES=(
   "/root/.hermes/hermes-agent/tools/write_approval.py"
   "/root/.hermes/hermes-agent/tools/skill_manager_tool.py"
   "/root/.hermes/hermes-agent/tools/write_trace.py"
+  "/root/mgs-agent/scripts/check-gateway-ready.py"
 )
 for agent in "${ORDERED_AGENTS[@]}"; do
   SNAPSHOT_FILES+=("/root/.hermes/profiles/$agent/config.yaml")
@@ -120,7 +121,8 @@ if ! /root/.hermes/hermes-agent/venv/bin/python -m py_compile \
   /root/.hermes/hermes-agent/tools/memory_tool.py \
   /root/.hermes/hermes-agent/tools/write_approval.py \
   /root/.hermes/hermes-agent/tools/skill_manager_tool.py \
-  /root/.hermes/hermes-agent/tools/write_trace.py; then
+  /root/.hermes/hermes-agent/tools/write_trace.py \
+  /root/mgs-agent/scripts/check-gateway-ready.py; then
   log "ABORT runtime/dead-letter/trace py_compile failed"
   audit "gateway_restart_finalizer_aborted" "reason=runtime_pycompile_failed log=\$LOG"
   exit 76
@@ -136,26 +138,33 @@ if ! python3 -c 'import re,sys; s=open(sys.argv[1],encoding="utf-8").read(); def
   exit 77
 fi
 for agent in $AGENT_LIST; do
-  [[ "\$agent" == "zeus" ]] && continue
   svc="\${agent}-gateway.service"
-  log "restart \$svc (detached finalizer, blocking inside external job)"
-  systemctl restart "\$svc"
-done
-if [[ " $AGENT_LIST " == *" zeus "* ]]; then
-  log "restart zeus-gateway.service last (--no-block so this finalizer is not killed by its own caller)"
-  systemctl restart --no-block zeus-gateway.service
-fi
-log "Wait for detached services to reach active state"
-sleep 12
-for agent in $AGENT_LIST; do
-  svc="\${agent}-gateway.service"
-  if ! systemctl is-active --quiet "\$svc"; then
-    log "FAILED \$svc is not active after restart"
-    audit "gateway_restart_finalizer_failed" "service=\$svc reason=not_active log=\$LOG"
+  agent_log="/root/.hermes/profiles/\$agent/logs/agent.log"
+  log_offset=0
+  [[ -f "\$agent_log" ]] && log_offset="\$(stat -c%s "\$agent_log")"
+  case "\$agent" in
+    zeus) readiness_timeout=180 ;;
+    atena|ares) readiness_timeout=90 ;;
+    *) readiness_timeout=90 ;;
+  esac
+  log "restart \$svc timeout=\${readiness_timeout}s log_offset=\$log_offset"
+  if ! systemctl restart "\$svc"; then
+    log "FAILED systemctl restart \$svc"
+    audit "gateway_restart_finalizer_failed" "agent=\$agent service=\$svc reason=restart_failed log=\$LOG"
     exit 79
   fi
+  readiness_json=""
+  if ! readiness_json="\$(/root/mgs-agent/scripts/check-gateway-ready.py --service "\$svc" --log "\$agent_log" --offset "\$log_offset" --timeout "\$readiness_timeout" --poll 2)"; then
+    safe_reason="\$(printf '%s' "\$readiness_json" | python3 -c 'import json,sys; d=json.load(sys.stdin); print("reason=%s active=%s sub=%s pid=%s connected=%s elapsed=%s" % (d.get("reason","unknown"),d.get("ActiveState","unknown"),d.get("SubState","unknown"),d.get("MainPID",0),d.get("discord_connected",False),d.get("elapsed_seconds",0)))' 2>/dev/null || printf 'reason=readiness_probe_failed')"
+    log "FAILED \$agent readiness \$safe_reason"
+    audit "gateway_restart_finalizer_failed" "agent=\$agent service=\$svc \$safe_reason log=\$LOG"
+    exit 80
+  fi
+  safe_ready="\$(printf '%s' "\$readiness_json" | python3 -c 'import json,sys; d=json.load(sys.stdin); print("agent=%s service=%s pid=%s nrestarts=%s connected=%s elapsed=%s" % (sys.argv[1],d.get("service",""),d.get("MainPID",0),d.get("NRestarts",0),d.get("discord_connected",False),d.get("elapsed_seconds",0)))' "\$agent")"
+  log "READY \$safe_ready"
+  audit "gateway_restart_agent_ready" "\$safe_ready log=\$LOG"
 done
-log "Validation completed outside the foreground Discord/tool session."
+log "All requested gateways passed sequential systemd+Discord readiness."
 systemctl show $(printf '%s-gateway.service ' "${ORDERED_AGENTS[@]}") -p Id -p ActiveState -p SubState -p MainPID -p NRestarts -p ExecMainStatus -p ExecMainStartTimestamp --no-pager || true
 for agent in $AGENT_LIST; do
   log "recent markers \$agent"
