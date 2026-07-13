@@ -145,10 +145,16 @@ If `capacity_overflow` exists only in a skill/reference, the runtime is still un
 Preferred deployed design:
 
 1. Keep normal memory/skill writes direct when the gate is off.
-2. On a capacity rejection only, preserve the rejected payload in a failure-only staged/dead-letter record such as `capacity_overflow`.
-3. Report the failed target, current/limit usage, concise unsaved content summary, and pending ID in the originating conversation.
-4. Let the existing pending/capacity monitor alert on the exception.
-5. Never compact, delete, or replace durable facts automatically to make room.
+2. Make the store return a machine-readable `error_code: capacity_overflow` for add, replace, and atomic-batch budget failures; never infer overflow by parsing English error text.
+3. At the `memory_tool` dispatcher, intercept only that error after a direct write fails and preserve the exact rejected operation in a failure-only pending/dead-letter record. Validation errors, missing targets, drift, and user denials must not create dead letters.
+4. Record `failure_type`, target, exact replay payload, current/limit usage, write origin, session/thread identity, and timestamp. Use an idempotency key derived from profile + normalized payload + relevant state so retries do not create duplicate records.
+5. Require proof that staging really persisted. The pending writer must return a persisted/readback result rather than a plausible ID after disk failure. Use atomic rename, directory mode `0700`, and file mode `0600`.
+6. Return the failure honestly: the durable memory file remains unchanged, `success` stays false, and the response includes `staged`, `pending_id`, usage, and a user-report requirement. Do not describe the memory write itself as saved.
+7. Report the failed target, current/limit usage, concise unsaved-content summary, and pending ID in the originating conversation.
+8. Let the existing pending/capacity monitor alert immediately on `capacity_overflow`, with anti-spam keyed by pending ID, no sensitive payload in the alert, and a recovery event only after resolution.
+9. Never compact, delete, or replace durable facts automatically to make room.
+
+Minimum behavior tests: add/replace/batch overflow preservation; remove and non-capacity errors do not stage; gate-on paths do not double-stage; duplicate retries coalesce; persistence failure is surfaced; `0700/0600` permissions hold; monitor alert/recovery/anti-spam works; and the original MEMORY/USER bytes remain unchanged after rejection.
 
 ### Buffer ordering and activation semantics
 
@@ -173,6 +179,14 @@ Whenever background/self-improvement writes memory or a skill directly, report i
 A failed automatic write must also be surfaced when it would otherwise lose a learning: include the failure reason, target, current/limit usage, unsaved summary, and recovery/dead-letter handle when available. Do not phrase a capacity rejection as a successful save.
 
 Never say “nothing changed” when an automatic fork wrote. A conversation-level report satisfies automatic-learning transparency by itself; structural script/config/data/AGENT/SOUL changes still follow formal REPORT-INFRA policy.
+
+### Structural trace closure and Discord readback
+
+For an automatic write in an MGS-synced skill/category, conversation transparency and structural closure are separate obligations. Close the structural trace with a correlated receipt containing profile, subsystem, origin session/thread, exact paths, before/after hashes, and readback result; then synchronize the mirror, regenerate inventory, append audit, and send one canonical REPORT-INFRA.
+
+Never identify a Discord embed from timestamp proximity, author, or blank `content`. Several automated reports can land in the same channel close together, and embeds appear as empty content in compact message listings. Read back the exact message ID through an authenticated Discord GET (without printing credentials) and verify `content` is empty plus the expected embed title/field names. If the candidate message is a different report, correct the attribution explicitly and keep the infrastructure trace open until the real REPORT-INFRA is posted and read back.
+
+A durable finalizer should be idempotent on profile + paths + post-write hashes. It marks the receipt closed only after mirror, inventory, audit, REPORT-INFRA, and Discord readback all succeed; a conversation report alone must not masquerade as that structural completion.
 
 ## Compaction workflow
 
@@ -206,6 +220,7 @@ Never say “nothing changed” when an automatic fork wrote. A conversation-lev
 - [ ] On-demand claims have exact content plus a working route
 - [ ] SOUL coverage checked semantically, not by keyword only
 - [ ] Config values validated through the runtime resolver
+- [ ] Character-limit changes validated on a freshly constructed configured `MemoryStore` or newly initialized agent, not only YAML readback
 - [ ] Active/routed sessions checked for the exact new policy in `sessions.system_prompt`
 - [ ] Fresh thread/reset used where an old cached SOUL would permit unreported direct writes
 - [ ] Curator state validated separately from write gates
@@ -214,3 +229,4 @@ Never say “nothing changed” when an automatic fork wrote. A conversation-lev
 - [ ] Capacity failures are reported and preserve the unsaved proposal through a recovery/dead-letter handle
 - [ ] Full diff reviewed before compaction
 - [ ] Automatic writes reported with target and readback
+- [ ] MGS-synced automatic writes have correlated mirror/inventory/audit/REPORT closure and the exact Discord embed was read back by message ID
