@@ -24,6 +24,7 @@ IGNORE_PATH = BASE / 'data/mgs-global-page-ignore-list.json'
 REPORT_DIR = BASE / 'reports'
 STATE_PATH = BASE / 'data/dtr-sb-daily-match-audit-state.json'
 CHANNEL_ID = '1524631647151198218'
+INFRA_CHANNEL_ID = '1498132022634483894'
 NY = ZoneInfo('America/New_York')
 
 
@@ -215,11 +216,45 @@ def main():
     errors = []
     for i, u in enumerate(users, 1):
         print(f'PROGRESS DTR {i}/{len(users)} {u}', flush=True)
-        scan = asyncio.run(mod.dtr_collect_user(u, matched[u], args.limit_accounts))
+        try:
+            scan = asyncio.run(mod.dtr_collect_user(u, matched[u], args.limit_accounts))
+        except Exception as exc:
+            errors.append({'user': u, 'errors': [f'{type(exc).__name__}: {exc}']})
+            continue
         dtr_scans.append(scan)
         all_dtr_pages.extend(scan.get('pages') or [])
         if scan.get('errors'):
             errors.append({'user': u, 'errors': scan.get('errors')})
+
+    login_ok = sum(1 for s in dtr_scans if s.get('login_ok'))
+    collection_complete = not missing and not op_errors and not errors and login_ok == len(users)
+    if not collection_complete:
+        summary = {
+            'started_at_et': datetime.now(NY).isoformat(timespec='seconds'),
+            'mode': 'dry-run' if args.dry_run else 'incomplete',
+            'execution_complete': False,
+            'dtr_users_targeted': len(users),
+            'dtr_users_scanned': len(dtr_scans),
+            'dtr_login_ok': login_ok,
+            'missing_1p_users': missing,
+            'op_errors': op_errors,
+            'errors': errors,
+        }
+        report = (
+            'DTR x Dash — execução incompleta\n\n'
+            f"Usuários alvo: {len(users)}\n"
+            f"Logins DTR OK: {login_ok}\n"
+            f"Ausentes no 1Password: {len(missing)}\n"
+            f"Erros 1Password: {len(op_errors)}\n"
+            f"Erros de coleta: {len(errors)}\n\n"
+            'Comparação DTR/SB, estado e relatório operacional foram preservados.'
+        )
+        if args.dry_run or args.no_post:
+            print(report)
+        else:
+            discord_post('```\n' + report + '\n```', channel_id=INFRA_CHANNEL_ID)
+        print(json.dumps(summary, ensure_ascii=False, indent=2))
+        raise SystemExit(2)
 
     print('PROGRESS SB fetch', flush=True)
     pubs, sb_rows_raw = asyncio.run(mod.get_sb())
