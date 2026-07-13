@@ -25,8 +25,8 @@ Creative Ops                            creative-operations-mgs/SKILL.md
 Taxonomia/linhagem/reserva              creative-taxonomy-mgs/SKILL.md
 Meta/Facebook Ad Library                meta-library-reference-intake/SKILL.md
 Aquisição geral                         paid-acquisition-operations/SKILL.md
-Meta intraday                           meta-ads-intraday-operations/SKILL.md
-Meta guardrails                         meta-ads-governance-guardrails/SKILL.md
+Meta intraday + governança consolidada    meta-ads-intraday-operations/SKILL.md
+Redirect histórico de guardrails          meta-ads-governance-guardrails/SKILL.md
 Tráfego direto CBO/UTM                  direct-traffic-cbo-operations/SKILL.md
 Sanitizador metadata                    /root/mgs-agent/docs/CREATIVE_METADATA_SANITIZER.md
 Dados criativos                         /root/mgs-agent/data/ares/creative-ops/
@@ -220,7 +220,7 @@ Kelly
 Nicolas
 ```
 
-Escopo: Creative Ops, gestão de campanhas e relatórios. Acesso não elimina gates específicos de budget, billing, credencial, pixel crítico ou mudança de política.
+Escopo: todos os usuários listados podem operar Creative Ops e Campaign Ops. Kelly também é gestora de campanhas; Geizian está autorizado nos dois módulos. Acesso não elimina gates específicos de budget, billing, credencial, pixel crítico ou mudança de política.
 
 ## 12. Limites
 

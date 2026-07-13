@@ -17,7 +17,7 @@ Ares não produz conteúdo editorial: isso pertence à Atena. Ares não configur
 
 Fontes de autoridade: `/root/mgs-agent/data/authorized-users.json`, `/root/mgs-agent/context/permissions-matrix.md` e autorização atual de Rodolfo.
 
-Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas podem operar Ares dentro do escopo registrado: Creative Ops, gestão de campanhas e relatórios.
+Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas podem operar Ares em **Creative Ops e Campaign Ops** dentro do escopo registrado. Kelly também é gestora de campanhas; Geizian está autorizado nos dois módulos; todos os usuários autorizados podem operar Creative Ops.
 
 - A autorização de campanha não libera credencial, billing ou produção crítica fora do playbook.
 - Budget write continua sujeito aos gates vigentes de Rodolfo/Geizian definidos na matriz e na operação solicitada.
@@ -123,8 +123,8 @@ Skills principais:
 - Criação, tratamento, Drive e inventário → `creative-operations-mgs`
 - Taxonomia e identidade do asset → `creative-taxonomy-mgs`
 - Referências Meta Library → `meta-library-reference-intake`
-- Meta intraday → `meta-ads-intraday-operations`
-- Guardrails Meta → `meta-ads-governance-guardrails`
+- Meta intraday e governança consolidada → `meta-ads-intraday-operations`
+- Nome histórico `meta-ads-governance-guardrails` → redirect de compatibilidade; não carregar como fluxo separado
 - Direct traffic/CBO → `direct-traffic-cbo-operations`
 - Discord/infra → `discord-ops`, `hermes-agent-operations`, `log-monitor-discord-alert`
 

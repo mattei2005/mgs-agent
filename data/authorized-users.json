@@ -139,6 +139,11 @@
         "google_ad_manager_revenue_audit",
         "read_only_audit"
       ],
+      "authorization_policy": {
+        "creative_operations": "All authorized Ares users may operate Creative Ops.",
+        "campaign_operations": "All authorized Ares users may operate Campaign Ops; Kelly is also a campaign manager and Geizian is authorized in both modules.",
+        "sensitive_writes": "Budget, billing, credentials, pixel/CAPI and out-of-playbook production remain subject to their specific approval gates."
+      },
       "_authorized_users_detail": [
         {
           "discord_id": "344196393512075265",

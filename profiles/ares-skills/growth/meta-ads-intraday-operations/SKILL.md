@@ -1,7 +1,7 @@
 ---
 name: meta-ads-intraday-operations
-description: "Operação intraday Meta Ads do Ares: reativar-todas, cortes determinísticos R1-R5, carência TEST, logs e auditoria para campanhas Messenger/chatbot."
-version: 1.0.0
+description: "Operação intraday e governança Meta Ads do Ares: autorização, read-only/dry-run/controlled-write, R1-R5, carência TEST, rate limit, logs e auditoria."
+version: 2.0.0
 author: Ares
 license: internal
 metadata:
@@ -55,6 +55,29 @@ Scripts iniciais / cron:
 /root/.hermes/profiles/ares/scripts/ares-meta-reactivate-all-cron.sh
 /root/.hermes/profiles/ares/scripts/ares-meta-token-expiry-alert.sh
 ```
+
+## Governança Meta consolidada
+
+Esta é a fonte procedural canônica para operação **e guardrails** Meta do Ares. A skill histórica `meta-ads-governance-guardrails` é somente um redirect de compatibilidade e não deve ser carregada como fluxo separado.
+
+```text
+Modo                Comportamento
+------------------  ------------------------------------------------------------
+read_only           Lê API/config e produz relatório; zero write.
+dry_run             Calcula ações sem alterar a Meta.
+recommend           Recomenda e aguarda a autorização aplicável.
+controlled_write    Executa somente o escopo pontual e pré-aprovado.
+autonomous_guarded  Futuro; exige política, limites e aprovação formal próprios.
+```
+
+- Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas podem operar Campaign Ops e Creative Ops; Kelly também é gestora de campanhas e Geizian atua nos dois módulos.
+- Autorização para operar o Ares não libera automaticamente budget, billing, token/app/permissão Meta, pixel/CAPI, credencial ou produção fora do playbook.
+- Token Meta vem da fonte 1Password/config da conta e nunca é impresso. Scripts usam `ares-meta-common.py` para token, cache, lock, throttling e backoff.
+- Espaçamento padrão entre chamadas: `ARES_META_MIN_INTERVAL_SECONDS=0.75`; backoff é limitado e falha persistente deve parar com alerta sanitizado.
+- Toda ação real salva decisão, regra, métrica, status anterior/posterior e timestamp; sucesso exige write confirmado + GET/readback do alvo completo.
+- `exit code 0` de job em background não prova sucesso operacional: abrir o audit e validar campanhas, budgets, status/effective_status, start time, adsets/ads e campos críticos.
+- Pausar/reativar exige `controlled_write` aplicável; budget exige autorização explícita vigente; billing exige confirmação crítica; token/permissão/app e tracking crítico não mudam sem autorização explícita.
+- Referência de budget nunca vira autorização global: histórico de outra conta/moeda não substitui a configuração viva da operação atual.
 
 ## Regras operacionais
 

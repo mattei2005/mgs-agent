@@ -1,6 +1,6 @@
 # Plano de Unificação Hera → Ares
 
-> Status: migração aplicada; finalizer detached preparado para desativação, restart e readback
+> Status: **concluída e validada**; Ares ativo e unificado, Hera inativa/arquivada com rollback preservado
 > Dono executivo: Rodolfo Mattei
 > Executor/orquestrador: Zeus
 > Data: 2026-07-12
@@ -191,7 +191,7 @@ Atualizar, no mínimo:
 - `docs/mgs-structure-inventory.md`
 - `data/authorized-users.json`
 
-O registro de autorização do Ares deve conter Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas. Budget write continua subordinado aos gates explícitos do SOUL/matriz.
+O registro de autorização do Ares contém Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas. Todos podem operar Creative Ops e Campaign Ops; Kelly também é gestora de campanhas e Geizian está autorizado nos dois módulos. Budget write continua subordinado aos gates explícitos do SOUL/matriz.
 
 ### Bloco G — Validação Ares
 
