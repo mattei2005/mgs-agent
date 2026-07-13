@@ -156,6 +156,20 @@ Preferred deployed design:
 
 Minimum behavior tests: add/replace/batch overflow preservation; remove and non-capacity errors do not stage; gate-on paths do not double-stage; duplicate retries coalesce; persistence failure is surfaced; `0700/0600` permissions hold; monitor alert/recovery/anti-spam works; and the original MEMORY/USER bytes remain unchanged after rejection.
 
+### MGS implementation surface (2026-07-13)
+
+The deployed-on-disk implementation is carried by `/root/mgs-agent/patches/hermes/memory-dead-letter-structural-trace-2026-07-13.patch` and guarded by `scripts/ensure-hermes-mgs-patches.sh`:
+
+- `tools/memory_tool.py` emits machine-readable `capacity_overflow` and stages only failed add/replace/batch operations;
+- `tools/write_approval.py::stage_failure_write` persists and reads back an idempotent failure record atomically with `0700/0600` permissions;
+- `tools/write_trace.py` emits metadata-only structural receipts for successful background skill writes;
+- `tools/skill_manager_tool.py` attaches those receipts only to `background_review` writes;
+- `scripts/monitor_hermes_pending_writes.py` alerts on a new capacity dead-letter on the next one-minute monitor tick, keyed only by pending ID and without payload content;
+- `scripts/finalize-hermes-structural-write.py` closes MGS-synced receipts idempotently through mirror sync, inventory, correlated REPORT-INFRA readback, audit, and receipt readback;
+- root cron runs the monitor and structural finalizer every minute under separate `flock` locks.
+
+Do not call the Hermes runtime branch active in already-running gateway processes until the gateways have been safely restarted after the tests pass. A source-file readback proves deployment to disk, not module activation inside a pre-existing Python process. After restart, run a temporary-profile overflow smoke and verify a newly initialized live agent imports the markers before declaring the protection active.
+
 ### Implementation-review chokepoints
 
 When reviewing a proposed overflow dead-letter against deployed Hermes, verify these less-obvious sibling paths:
