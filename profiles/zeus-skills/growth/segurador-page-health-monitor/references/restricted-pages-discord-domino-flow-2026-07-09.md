@@ -84,16 +84,18 @@ The DTR → Smart Bidding page-health sync must maintain one shared Google Sheet
 ```text
 Sheet ID: 1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI
 URL: https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0
-Only tab: Paginas
+Tabs: Paginas only
 ```
 
 Operational rules:
 
 ```text
-- Maintain only the `Paginas` tab; do not create or recreate auxiliary `Resumo`, `Inventario Step1`, diagnostics, or audit tabs in the gestores-facing workbook.
-- The `Paginas` tab contains **only current active restricted pages** from live Smart Bidding where `Status SB = Broadcast` and `Restricted Until >= today`, after active-user scope and the global MGS ignore list. Never include Ready, Campaign, blank-status, On-hold, expired, unrestricted, or general diagnostic rows there.
-- Refresh `Paginas` from the latest live SB state and validate its exact header, row count, all-status invariant (`Broadcast` only), and non-expired dates before claiming success.
-- Keep excluded counts, diagnostics, Step1 inventory, JSON logs, and backups local; they do not belong in the gestores-facing Sheet.
+- Keep only the `Paginas` tab; do not create or recreate `Resumo`, `Inventario Step1`, or auxiliary tabs.
+- Refresh `Paginas` from the latest completed run and validate header/row readback before claiming success.
+- Keep every column at a fixed generous width and use no-wrap/clip formatting for header and data cells so cell content never breaks into multiple lines.
+- The gestores-facing `Paginas` tab contains **only current active restricted pages** from live Smart Bidding where `Status SB = Broadcast` and `Restricted Until >= today`, after active-user scope and the global MGS ignore list. Never include Ready, Campaign, blank-status, On-hold, expired, unrestricted, or general diagnostic rows there.
+- Keep excluded counts only in local JSON logs; do not add summary tabs to the gestores-facing Sheet.
+
 - Do not generate a new `dtr-sb-page-health-sync-*.xlsx` artifact.
 - In the Discord alert footer, show `Planilha: <URL>` instead of a local `XLSX:` path.
 - A dry-run must not overwrite the shared production Sheet.

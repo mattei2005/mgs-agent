@@ -684,20 +684,14 @@ def ensure_report_tabs(access_token):
         meta=sheets_api(access_token,'GET',base+'?fields=sheets.properties')
     return {item['properties']['title']:item['properties'] for item in meta.get('sheets',[])}
 
-def write_google_sheet(rows, summary, inventory_notes=None):
+def write_google_sheet(rows):
     access_token=google_access_token()
     tabs=ensure_report_tabs(access_token)
     page_headers=['link da pagina','nome da pagina','fb page id','page id','bot user','segurador','sites','status sb','codigos','data saida']
-    inv_headers=['user','segurador','status','reason','pages']
     page_values=[page_headers]+[[r.get(h,'') for h in page_headers] for r in rows]
-    summary_values=[['Campo','Valor']]
-    for key,value in summary.items():
-        if isinstance(value,(dict,list)): value=json.dumps(value,ensure_ascii=False)
-        summary_values.append([key,'' if value is None else value])
-    inv_values=[inv_headers]+[[item.get(h,'') for h in inv_headers] for item in (inventory_notes or [])]
-    datasets={'Paginas':page_values,'Resumo':summary_values,'Inventario Step1':inv_values}
+    datasets={'Paginas':page_values}
     base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
-    sheets_api(access_token,'POST',base+'/values:batchClear',{'ranges':["'Paginas'!A:Z","'Resumo'!A:Z","'Inventario Step1'!A:Z"]})
+    sheets_api(access_token,'POST',base+'/values:batchClear',{'ranges':["'Paginas'!A:Z"]})
     resize=[]
     for title,values in datasets.items():
         props=tabs[title]
@@ -713,38 +707,35 @@ def write_google_sheet(rows, summary, inventory_notes=None):
         'data':[{'range':f"'{title}'!A1",'majorDimension':'ROWS','values':values} for title,values in datasets.items()],
     })
     navy={'red':31/255,'green':78/255,'blue':121/255}
-    purple={'red':112/255,'green':48/255,'blue':160/255}
     white={'red':1,'green':1,'blue':1}
-    format_requests=[]
-    for title,values in datasets.items():
-        sid=tabs[title]['sheetId']; cols=len(values[0])
-        color=purple if title=='Inventario Step1' else navy
-        format_requests += [
-            {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':1,'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'backgroundColor':color,'textFormat':{'bold':True,'foregroundColor':white},'horizontalAlignment':'CENTER','wrapStrategy':'WRAP'}},'fields':'userEnteredFormat'}},
-            {'updateSheetProperties':{'properties':{'sheetId':sid,'gridProperties':{'frozenRowCount':1}},'fields':'gridProperties.frozenRowCount'}},
-            {'autoResizeDimensions':{'dimensions':{'sheetId':sid,'dimension':'COLUMNS','startIndex':0,'endIndex':cols}}},
-        ]
-        if len(values)>1:
-            format_requests.append({'setBasicFilter':{'filter':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols}}}})
+    sid=tabs['Paginas']['sheetId']; cols=len(page_headers)
+    format_requests=[
+        {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':1,'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'backgroundColor':navy,'textFormat':{'bold':True,'foregroundColor':white},'horizontalAlignment':'CENTER','verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat'}},
+        {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':1,'endRowIndex':len(page_values),'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat.verticalAlignment,userEnteredFormat.wrapStrategy'}},
+        {'updateSheetProperties':{'properties':{'sheetId':sid,'gridProperties':{'frozenRowCount':1}},'fields':'gridProperties.frozenRowCount'}},
+    ]
+    column_widths=[300,230,190,100,290,240,220,120,300,130]
+    for index,pixels in enumerate(column_widths):
+        format_requests.append({'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'COLUMNS','startIndex':index,'endIndex':index+1},'properties':{'pixelSize':pixels},'fields':'pixelSize'}})
+    if len(page_values)>1:
+        format_requests.append({'setBasicFilter':{'filter':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':len(page_values),'startColumnIndex':0,'endColumnIndex':cols}}}})
     sheets_api(access_token,'POST',base+':batchUpdate',{'requests':format_requests})
     params=urllib.parse.urlencode([
         ('ranges',"'Paginas'!A:J"),
-        ('ranges',"'Resumo'!A:B"),
-        ('ranges',"'Inventario Step1'!A:E"),
         ('majorDimension','ROWS'),
     ])
     readback=sheets_api(access_token,'GET',base+'/values:batchGet?'+params)
     value_ranges=readback.get('valueRanges') or []
-    if len(value_ranges)!=3:
-        raise RuntimeError(f'Google Sheets readback incompleto: {len(value_ranges)}/3 abas')
+    if len(value_ranges)!=1:
+        raise RuntimeError(f'Google Sheets readback incompleto: {len(value_ranges)}/1 aba')
     values_read=[item.get('values') or [] for item in value_ranges]
     headers_read=[values[0] if values else [] for values in values_read]
-    expected_headers=[page_headers,['Campo','Valor'],inv_headers]
-    expected_counts=[len(page_values),len(summary_values),len(inv_values)]
+    expected_headers=[page_headers]
+    expected_counts=[len(page_values)]
     counts_read=[len(values) for values in values_read]
     if headers_read!=expected_headers or counts_read!=expected_counts:
         raise RuntimeError(f'Google Sheets readback divergente: headers={headers_read!r} rows={counts_read!r} expected_rows={expected_counts!r}')
-    return {'url':REPORT_SHEET_URL,'rows_paginas':counts_read[0],'rows_resumo':counts_read[1],'rows_inventario':counts_read[2],'restricted_only':True,'readback_ok':True}
+    return {'url':REPORT_SHEET_URL,'rows_paginas':counts_read[0],'tabs':['Paginas'],'restricted_only':True,'readback_ok':True}
 
 async def main():
     ap=argparse.ArgumentParser()
@@ -931,7 +922,7 @@ async def main():
                 _, fresh_sb_rows=await fetch_sb_rows(ctx,h)
                 restricted_rows, sheet_stats=restricted_sheet_rows(fresh_sb_rows,active,tday)
                 summary.update(sheet_stats)
-                summary['sheet_update']=write_google_sheet(restricted_rows,summary,summary.get('step1_inventory_notes'))
+                summary['sheet_update']=write_google_sheet(restricted_rows)
             except Exception as exc:
                 summary['errors'].append({'sheet_update_failed':f'{type(exc).__name__}: {exc}'})
         else:

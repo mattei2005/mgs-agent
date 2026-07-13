@@ -99,8 +99,8 @@ Critério de aceite da correção durável:
 - teste unitário para canal privado vazio e canal compartilhado com lista explícita;
 - config vivo e mirror com o mesmo mapa por canal;
 - restart seguro do gateway afetado;
-- nova thread de teste em cada canal;
-- GET de membros comprovando que o canal compartilhado recebeu somente os aprovados e o privado não recebeu extras;
+- validar no próximo thread real aberto pelo usuário e reportar na thread de origem; criar live smoke visível somente com autorização explícita prévia;
+- quando houver thread real disponível, GET de membros comprovando que o canal compartilhado recebeu somente os aprovados e o privado não recebeu extras;
 - audit, inventário e REPORT-INFRA quando runtime/config estrutural forem alterados.
 
 Pitfalls:
@@ -109,6 +109,7 @@ Pitfalls:
 - Preferir `thread_auto_add_users_by_channel`: lista explícita no canal operacional e `[]` no privado. O vazio explícito deve falhar fechado, sem auto-discovery. Procedimento e testes: `references/discord-thread-auto-add-members-regression.md`.
 - Não tratar lista global vazia como autorização para descobrir/adicionar todos os membros visíveis do guild; vazio explícito deve significar “não adicionar ninguém”.
 - Não confundir usuário autorizado a operar o agente com participante automático de toda thread. Autorização, visibilidade do canal e membership da thread são camadas diferentes.
+- Não criar thread visível de smoke/teste em canal operacional para validar auto-add sem autorização explícita de Rodolfo. Preferir testes automatizados, config/runtime readback e uma thread real aberta pelo próprio usuário; reportar a validação na thread de origem. Se um live smoke isolado for indispensável, explicar antes o artefato visível e pedir autorização específica para criá-lo.
 - Não assumir que renomear um canal atualiza nomes descritivos em dados/scripts: procurar o ID canônico e corrigir labels ativos, preservando referências históricas como histórico.
 - Não confiar em uma chamada de escrita que depois falhou no parser de resposta: fazer GET independente e comparar o estado inteiro antes de repetir writes idempotentes.
 - Ao criar ou reorganizar canal por API, nunca imprimir o bot token; retornar apenas status, channel ID, nome, parent e IDs/contagem dos overwrites.

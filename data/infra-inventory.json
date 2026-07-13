@@ -2250,7 +2250,7 @@
         "test": "fddbac6daa549d1d6d7ae49c6a27b299f8f1fa0e7e48e219ce2f64a3456a4bf6"
       },
       "status": "deployed_validated_live_smoke",
-      "updated_at": "2026-07-13T17:01:13-04:00",
+      "updated_at": "2026-07-13T17:23:46-04:00",
       "restart": {
         "service": "ares-gateway.service",
         "pid": 3571801,
@@ -2268,7 +2268,23 @@
         "expected_humans_present": 7,
         "missing": [],
         "ares_reply_seen": true,
-        "archived_after_test": true
+        "archived_after_test": true,
+        "cleanup": {
+          "status": "deleted_validated",
+          "members_removed_before_delete": 8,
+          "delete_http": 200,
+          "readback_http": 404,
+          "deleted_at": "2026-07-13T17:23:46-04:00",
+          "reason": "Visible smoke thread was not authorized; validation should have been reported in the originating thread."
+        }
+      },
+      "learning_correction": {
+        "rule": "No visible Discord smoke/test thread in operational channels without Rodolfo explicit authorization; validate on user-created real threads and report in origin.",
+        "skill_path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/route-pack-09.md",
+        "versioned_mirror": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/references/route-pack-09.md",
+        "sha256": "c70d8c60f01aac887941d36b9a32e80383ad27643b7d09b7ce1d4bc61801901e",
+        "mirror_equal": true,
+        "readback": "PASS"
       }
     }
   ],
@@ -3244,8 +3260,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.py",
-      "size_bytes": 61390,
-      "modified_at": "2026-07-13T16:49:03-04:00"
+      "size_bytes": 60802,
+      "modified_at": "2026-07-13T17:23:11-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
