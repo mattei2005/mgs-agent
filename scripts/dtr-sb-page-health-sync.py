@@ -703,6 +703,9 @@ def ensure_report_tabs(access_token, required_titles):
             requests.append({'updateSheetProperties':{'properties':{'sheetId':default['sheetId'],'title':'Paginas'},'fields':'title'}})
         else:
             requests.append({'addSheet':{'properties':{'title':'Paginas'}}})
+    for title in required_titles:
+        if title!='Paginas' and title not in by_title:
+            requests.append({'addSheet':{'properties':{'title':title}}})
     if requests:
         sheets_api(access_token,'POST',base+':batchUpdate',{'requests':requests})
         meta=sheets_api(access_token,'GET',base+'?fields=sheets.properties')
@@ -710,12 +713,11 @@ def ensure_report_tabs(access_token, required_titles):
 
 def write_google_sheet(rows):
     access_token=google_access_token()
-    tabs=ensure_report_tabs(access_token)
     page_headers=['link da pagina','nome da pagina','fb page id','page id','bot user','segurador','sites','status sb','codigos','data saida']
-    page_values=[page_headers]+[[r.get(h,'') for h in page_headers] for r in rows]
-    datasets={'Paginas':page_values}
+    datasets=build_report_datasets(rows,page_headers)
+    tabs=ensure_report_tabs(access_token,list(datasets))
     base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
-    sheets_api(access_token,'POST',base+'/values:batchClear',{'ranges':["'Paginas'!A:Z"]})
+    sheets_api(access_token,'POST',base+'/values:batchClear',{'ranges':[sheet_a1_title(title)+'!A:Z' for title in datasets]})
     resize=[]
     for title,values in datasets.items():
         props=tabs[title]
@@ -728,38 +730,41 @@ def write_google_sheet(rows):
         sheets_api(access_token,'POST',base+':batchUpdate',{'requests':resize})
     sheets_api(access_token,'POST',base+'/values:batchUpdate',{
         'valueInputOption':'RAW',
-        'data':[{'range':f"'{title}'!A1",'majorDimension':'ROWS','values':values} for title,values in datasets.items()],
+        'data':[{'range':sheet_a1_title(title)+'!A1','majorDimension':'ROWS','values':values} for title,values in datasets.items()],
     })
     navy={'red':31/255,'green':78/255,'blue':121/255}
     white={'red':1,'green':1,'blue':1}
-    sid=tabs['Paginas']['sheetId']; cols=len(page_headers)
-    format_requests=[
-        {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':1,'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'backgroundColor':navy,'textFormat':{'bold':True,'foregroundColor':white},'horizontalAlignment':'CENTER','verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat'}},
-        {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':1,'endRowIndex':len(page_values),'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat.verticalAlignment,userEnteredFormat.wrapStrategy'}},
-        {'updateSheetProperties':{'properties':{'sheetId':sid,'gridProperties':{'frozenRowCount':1}},'fields':'gridProperties.frozenRowCount'}},
-    ]
     column_widths=[300,230,190,100,290,240,220,120,300,130]
-    for index,pixels in enumerate(column_widths):
-        format_requests.append({'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'COLUMNS','startIndex':index,'endIndex':index+1},'properties':{'pixelSize':pixels},'fields':'pixelSize'}})
-    if len(page_values)>1:
-        format_requests.append({'setBasicFilter':{'filter':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':len(page_values),'startColumnIndex':0,'endColumnIndex':cols}}}})
+    format_requests=[]
+    for title,values in datasets.items():
+        sid=tabs[title]['sheetId']; cols=len(page_headers)
+        format_requests.extend([
+            {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':1,'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'backgroundColor':navy,'textFormat':{'bold':True,'foregroundColor':white},'horizontalAlignment':'CENTER','verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat'}},
+            {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':1,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat.verticalAlignment,userEnteredFormat.wrapStrategy'}},
+            {'updateSheetProperties':{'properties':{'sheetId':sid,'gridProperties':{'frozenRowCount':1}},'fields':'gridProperties.frozenRowCount'}},
+        ])
+        for index,pixels in enumerate(column_widths):
+            format_requests.append({'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'COLUMNS','startIndex':index,'endIndex':index+1},'properties':{'pixelSize':pixels},'fields':'pixelSize'}})
+        if len(values)>1:
+            format_requests.append({'setBasicFilter':{'filter':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':cols}}}})
     sheets_api(access_token,'POST',base+':batchUpdate',{'requests':format_requests})
-    params=urllib.parse.urlencode([
-        ('ranges',"'Paginas'!A:J"),
-        ('majorDimension','ROWS'),
-    ])
-    readback=sheets_api(access_token,'GET',base+'/values:batchGet?'+params)
+    range_params=[]
+    for title in datasets:
+        range_params.append(('ranges',sheet_a1_title(title)+'!A:J'))
+    range_params.append(('majorDimension','ROWS'))
+    readback=sheets_api(access_token,'GET',base+'/values:batchGet?'+urllib.parse.urlencode(range_params))
     value_ranges=readback.get('valueRanges') or []
-    if len(value_ranges)!=1:
-        raise RuntimeError(f'Google Sheets readback incompleto: {len(value_ranges)}/1 aba')
+    if len(value_ranges)!=len(datasets):
+        raise RuntimeError(f'Google Sheets readback incompleto: {len(value_ranges)}/{len(datasets)} abas')
     values_read=[item.get('values') or [] for item in value_ranges]
     headers_read=[values[0] if values else [] for values in values_read]
-    expected_headers=[page_headers]
-    expected_counts=[len(page_values)]
+    expected_headers=[page_headers for _ in datasets]
+    expected_counts=[len(values) for values in datasets.values()]
     counts_read=[len(values) for values in values_read]
     if headers_read!=expected_headers or counts_read!=expected_counts:
         raise RuntimeError(f'Google Sheets readback divergente: headers={headers_read!r} rows={counts_read!r} expected_rows={expected_counts!r}')
-    return {'url':REPORT_SHEET_URL,'rows_paginas':counts_read[0],'tabs':['Paginas'],'restricted_only':True,'readback_ok':True}
+    rows_by_tab={title:counts_read[index]-1 for index,title in enumerate(datasets)}
+    return {'url':REPORT_SHEET_URL,'rows_paginas':rows_by_tab['Paginas'],'site_tabs':len(datasets)-1,'rows_by_tab':rows_by_tab,'restricted_only':True,'readback_ok':True}
 
 async def main():
     ap=argparse.ArgumentParser()

@@ -84,15 +84,17 @@ The DTR → Smart Bidding page-health sync must maintain one shared Google Sheet
 ```text
 Sheet ID: 1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI
 URL: https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0
-Tabs: Paginas only
+Tabs: Paginas + one dynamic tab per site
 ```
 
 Operational rules:
 
 ```text
-- Keep only the `Paginas` tab; do not create or recreate `Resumo`, `Inventario Step1`, or auxiliary tabs.
-- Refresh `Paginas` from the latest completed run and validate header/row readback before claiming success.
-- Keep every column at a fixed generous width and use no-wrap/clip formatting for header and data cells so cell content never breaks into multiple lines.
+- Keep `Paginas` as the consolidated view containing every current restricted page.
+- Create/update one additional tab for every concrete site value found in `Paginas`; each site tab contains only rows assigned to that site. If one row has multiple sites, include it in every matching site tab. Ignore blank/`?` as tab names.
+- Do not create or recreate `Resumo`, `Inventario Step1`, or unrelated auxiliary tabs.
+- Refresh `Paginas` and every current site tab from the same live restricted-page dataset, then validate headers and row counts for all tabs before claiming success.
+- Keep every column in every managed tab at a fixed generous width and use no-wrap/clip formatting for header and data cells so cell content never breaks into multiple lines.
 - The gestores-facing `Paginas` tab contains **only current active restricted pages** from live Smart Bidding where `Status SB = Broadcast` and `Restricted Until >= today`, after active-user scope and the global MGS ignore list. Never include Ready, Campaign, blank-status, On-hold, expired, unrestricted, or general diagnostic rows there.
 - Keep excluded counts only in local JSON logs; do not add summary tabs to the gestores-facing Sheet.
 
