@@ -82,6 +82,10 @@ SNAPSHOT_FILES=(
   "/root/.hermes/hermes-agent/plugins/platforms/discord/adapter.py"
   "/root/.hermes/hermes-agent/gateway/slash_commands.py"
   "/root/.hermes/hermes-agent/run_agent.py"
+  "/root/.hermes/hermes-agent/tools/memory_tool.py"
+  "/root/.hermes/hermes-agent/tools/write_approval.py"
+  "/root/.hermes/hermes-agent/tools/skill_manager_tool.py"
+  "/root/.hermes/hermes-agent/tools/write_trace.py"
 )
 for agent in "${ORDERED_AGENTS[@]}"; do
   SNAPSHOT_FILES+=("/root/.hermes/profiles/$agent/config.yaml")
@@ -109,10 +113,20 @@ if ! sha256sum -c "\$SNAPSHOT"; then
   audit "gateway_restart_finalizer_aborted" "reason=target_drift snapshot=\$SNAPSHOT log=\$LOG"
   exit 75
 fi
-if ! /root/.hermes/hermes-agent/venv/bin/python -m py_compile "\$RUNTIME"; then
-  log "ABORT runtime py_compile failed"
+if ! /root/.hermes/hermes-agent/venv/bin/python -m py_compile \
+  "\$RUNTIME" \
+  /root/.hermes/hermes-agent/tools/memory_tool.py \
+  /root/.hermes/hermes-agent/tools/write_approval.py \
+  /root/.hermes/hermes-agent/tools/skill_manager_tool.py \
+  /root/.hermes/hermes-agent/tools/write_trace.py; then
+  log "ABORT runtime/dead-letter/trace py_compile failed"
   audit "gateway_restart_finalizer_aborted" "reason=runtime_pycompile_failed log=\$LOG"
   exit 76
+fi
+if ! /root/.hermes/hermes-agent/venv/bin/python -c 'from tools.memory_tool import _stage_capacity_overflow; from tools.write_approval import stage_failure_write; from tools.write_trace import emit_structural_write_receipt; print("deadletter_trace_import=PASS")' >/dev/null; then
+  log "ABORT dead-letter/trace import smoke failed"
+  audit "gateway_restart_finalizer_aborted" "reason=deadletter_trace_import_failed log=\$LOG"
+  exit 78
 fi
 if ! python3 -c 'import re,sys; s=open(sys.argv[1],encoding="utf-8").read(); defs=set(re.findall(r"^[ \\t]+def (_[A-Za-z0-9_]*startup_steer[A-Za-z0-9_]*)\\(",s,re.M))|set(re.findall(r"^[ \\t]+async def (_[A-Za-z0-9_]*startup_steer[A-Za-z0-9_]*)\\(",s,re.M)); calls=set(re.findall(r"self\\.(_[A-Za-z0-9_]*startup_steer[A-Za-z0-9_]*)\\(",s)); missing=sorted(calls-defs); print("startup_steer_missing="+",".join(missing)) if missing else None; raise SystemExit(bool(missing))' "\$RUNTIME"; then
   log "ABORT startup-steer method call has no class definition"
@@ -129,7 +143,17 @@ if [[ " $AGENT_LIST " == *" zeus "* ]]; then
   log "restart zeus-gateway.service last (--no-block so this finalizer is not killed by its own caller)"
   systemctl restart --no-block zeus-gateway.service
 fi
-log "Validation is intentionally file-only; no foreground Discord/tool polling."
+log "Wait for detached services to reach active state"
+sleep 12
+for agent in $AGENT_LIST; do
+  svc="\${agent}-gateway.service"
+  if ! systemctl is-active --quiet "\$svc"; then
+    log "FAILED \$svc is not active after restart"
+    audit "gateway_restart_finalizer_failed" "service=\$svc reason=not_active log=\$LOG"
+    exit 79
+  fi
+done
+log "Validation completed outside the foreground Discord/tool session."
 systemctl show $(printf '%s-gateway.service ' "${ORDERED_AGENTS[@]}") -p Id -p ActiveState -p SubState -p MainPID -p NRestarts -p ExecMainStatus -p ExecMainStartTimestamp --no-pager || true
 for agent in $AGENT_LIST; do
   log "recent markers \$agent"
