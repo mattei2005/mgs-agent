@@ -19,7 +19,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, List, Optional
 
-DEFAULT_DB = Path("/root/mgs-agent/data/pendencias.db.json")
+DEFAULT_DB = Path(os.environ.get("PENDENCIA_DB", "/root/mgs-agent/data/pendencias.db.json"))
 NUMERIC_ID_RE = re.compile(r"^PEND-(\d+)$")
 ANY_ID_RE = re.compile(r"^PEND-(?:\d+|R\d+)$")
 

@@ -53,6 +53,17 @@ DISCORD_POSTER="${BASE_DIR}/scripts/discord-bot-post.py"
 
 HOST=$(hostname)
 NOW=$(TZ=America/New_York date '+%Y-%m-%d %H:%M:%S %Z')
+PENDING_SCANNER="${PENDING_SCANNER:-${BASE_DIR}/scripts/monitor_hermes_pending_writes.py}"
+PENDING_FIELD="indisponível"
+if PENDING_JSON=$("$PENDING_SCANNER" --summary-json 2>/dev/null); then
+  if PENDING_FIELD_RESOLVED=$(printf '%s' "$PENDING_JSON" | jq -er '
+      if ((.total | type) == "number") and ((.aged | type) == "number") and ((.oldest_hours | type) == "number") then
+        "total=\(.total) | >=\(.threshold_hours)h=\(.aged) | mais antiga=\(.oldest_hours)h"
+      else error("invalid pending summary types") end
+    ' 2>/dev/null); then
+    PENDING_FIELD="$PENDING_FIELD_RESOLVED"
+  fi
+fi
 ACTION_FIELD="$(printf '%s' "$ACTION" | cut -c1-250)"
 TYPE_FIELD="$(printf '%s' "$TYPE" | cut -c1-250)"
 PATHS_FIELD="$(printf '%s' "$PATHS" | cut -c1-1000)"
@@ -67,6 +78,7 @@ PAYLOAD=$(jq -n \
   --arg paths "$PATHS_FIELD" \
   --arg reason "$REASON_FIELD" \
   --arg evidence "$EVIDENCE_FIELD" \
+  --arg pending "$PENDING_FIELD" \
   --arg host "$HOST" \
   --arg now "$NOW" \
   --argjson color "$COLOR" \
@@ -77,6 +89,7 @@ PAYLOAD=$(jq -n \
     {name:"Path", value:$paths, inline:false},
     {name:"Motivo", value:$reason, inline:false},
     {name:"Evidência", value:$evidence, inline:false},
+    {name:"Pendências Hermes", value:$pending, inline:false},
     {name:"Horário", value:$now, inline:true}
   ]}]}')
 
