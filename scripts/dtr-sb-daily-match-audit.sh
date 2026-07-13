@@ -11,6 +11,8 @@ log() { printf '[%s] dtr-sb-daily-match-audit: %s\n' "$(TZ=America/New_York date
 set -a
 # shellcheck source=/dev/null
 source "${BASE_DIR}/.env" 2>/dev/null || true
+# shellcheck source=/dev/null
+source "/root/.hermes/profiles/zeus/.env" 2>/dev/null || true
 set +a
 
 log "START args=$*"

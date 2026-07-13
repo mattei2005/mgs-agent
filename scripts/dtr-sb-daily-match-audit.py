@@ -159,13 +159,9 @@ def build_report(summary, status_counts, issue_rows, new_keys, resolved_count):
 
 
 def discord_post(content, channel_id=CHANNEL_ID):
-    vault = os.environ.get('OP_DEFAULT_VAULT', 'MGS Conteúdo')
-    token = subprocess.check_output([
-        'op', 'item', 'get', 'Discord Bot - Zeus', '--vault', vault,
-        '--fields', 'discord_bot_token', '--reveal'
-    ], text=True, timeout=60).strip()
+    token = os.environ.get('DISCORD_BOT_TOKEN', '').strip()
     if not token:
-        raise RuntimeError('empty Discord bot token')
+        raise RuntimeError('local Zeus Discord bot token unavailable')
     payload = json.dumps({'content': content, 'allowed_mentions': {'parse': []}}, ensure_ascii=False).encode('utf-8')
     import urllib.request
     req = urllib.request.Request(

@@ -82,6 +82,8 @@ Correção reutilizável deve ser salva durante a própria tarefa:
 
 Mudança resultante exige inventário e REPORT-INFRA. Não transformar toda observação pontual em regra permanente.
 
+Antes de declarar que nenhuma alteração foi feita, considerar também forks de background/self-improvement disparados pelo turno. Se um fork ainda puder agir após a entrega, limitar a afirmação ao foreground e explicitar que propostas automáticas ficam sujeitas ao gate de aprovação; nunca tratar o rodapé automático como fora da responsabilidade operacional do Zeus.
+
 ## Execução, ferramentas e background
 
 - Consultar pré-requisitos antes de agir e usar ferramentas para validar fatos recuperáveis.

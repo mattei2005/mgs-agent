@@ -11,7 +11,7 @@ Validated workflow:
   blocked/down, or the segurador/Facebook profile can be down while the page
   is still public. Never restore Blocked -> Broadcast from public FB URL alone.
 """
-import argparse, asyncio, csv, html, io, json, os, re, subprocess, sys, tempfile, unicodedata, urllib.parse, urllib.request
+import argparse, asyncio, csv, html, importlib.util, io, json, os, re, subprocess, sys, tempfile, unicodedata, urllib.parse, urllib.request
 from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
@@ -36,6 +36,13 @@ LOG_DIR=BASE_DIR/'logs'
 REPORT_DIR=BASE_DIR/'reports'
 STATE_PATH=BASE_DIR/'data/dtr-sb-page-health-sync-state.json'
 TARGET_CHANNEL_ID='1522442220903337984'
+OP_RESOLVER_PATH=BASE_DIR/'scripts/mgs-op-item-resolver.py'
+
+_op_spec=importlib.util.spec_from_file_location('mgs_op_item_resolver', OP_RESOLVER_PATH)
+if not _op_spec or not _op_spec.loader:
+    raise RuntimeError(f'cannot load 1Password resolver: {OP_RESOLVER_PATH}')
+OP_RESOLVER=importlib.util.module_from_spec(_op_spec)
+_op_spec.loader.exec_module(OP_RESOLVER)
 
 MONTHS_EN={'january':1,'february':2,'march':3,'april':4,'may':5,'june':6,'july':7,'august':8,'september':9,'october':10,'november':11,'december':12}
 MONTHS_PT={'janeiro':1,'fevereiro':2,'março':3,'marco':3,'abril':4,'maio':5,'junho':6,'julho':7,'agosto':8,'setembro':9,'outubro':10,'novembro':11,'dezembro':12}
@@ -61,9 +68,6 @@ STEP1_ACTIVE_OVERRIDES=[
     {'user':'disparosinfinitynexx@gmail.com','segurador':'Akew Rider','app':'B009'},
     {'user':'disparosinfinitynexx@gmail.com','segurador':'Anggiat Hutajulu','app':'B009'},
 ]
-
-def op(cmd, timeout=30): return subprocess.check_output(cmd, text=True, env=os.environ.copy(), timeout=timeout).strip()
-def op_json(cmd): return json.loads(op(cmd, timeout=60))
 
 def sheet_rows():
     # Google's `/export?format=csv&gid=...` route intermittently returns 400
@@ -127,24 +131,14 @@ def step1_account_classification(username, account_name, occurrences, scope):
 
 def discover_dtr_items(target_users):
     vault=os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo')
-    items=op_json(['op','item','list','--vault',vault,'--format','json'])
-    # 1Password titles have known spacing/wording variants; match broadly by
-    # title and then verify by the username field from the active Sheet scope.
-    candidates=[(i.get('id') or i.get('uuid') or i.get('title',''), i.get('title','')) for i in items if 'digitaltrchat' in norm(i.get('title')).lower()]
-    matched={}; errors=[]
-    for item_id, title in sorted(candidates, key=lambda x: str(x[1]).lower()):
-        try: u=op(['op','item','get',item_id,'--vault',vault,'--fields','username','--reveal']).lower()
-        except Exception as exc:
-            errors.append({'item':title or item_id,'error':type(exc).__name__}); continue
-        if u in target_users and u not in matched: matched[u]=item_id
-    return matched, sorted(set(target_users)-set(matched)), errors
+    mapped, missing, errors, _cache=OP_RESOLVER.resolve_dtr_items(target_users, vault)
+    matched={u: row['id'] for u,row in mapped.items()}
+    return matched, missing, errors
 
 def op_password(item):
     vault=os.environ.get('OP_DEFAULT_VAULT','MGS Conteúdo')
-    for f in ('credential','password'):
-        try: return op(['op','item','get',item,'--vault',vault,'--fields',f,'--reveal'])
-        except Exception: pass
-    raise RuntimeError(f'password field not found for {item}')
+    data=OP_RESOLVER.get_item_json(item, vault)
+    return OP_RESOLVER.field_value(data, 'credential', 'password', required=True)
 
 def parse_restricted_date(text, year=None):
     t=clean(text); y=year or datetime.now(NY).year

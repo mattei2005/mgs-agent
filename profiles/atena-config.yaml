@@ -411,6 +411,7 @@ skills:
   inline_shell: false
   inline_shell_timeout: 10
   guard_agent_created: false
+  write_approval: true
   creation_nudge_interval: 15
   disabled:
     - apple-notes
@@ -492,7 +493,7 @@ skills:
     - xurl
     - youtube-content
 curator:
-  enabled: true
+  enabled: false
   interval_hours: 168
   min_idle_hours: 2
   stale_after_days: 30
