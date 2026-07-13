@@ -4,8 +4,8 @@
 > Gerado automaticamente a partir de `data/pendencias.db.json`.  
 > Para adicionar/resolver: use scripts em `scripts/pendencia-*.sh`
 
-**Última atualização:** 2026-06-19T19:03:40-04:00  
-**Total abertas:** 53  
+**Última atualização:** 2026-07-12T20:42:41-04:00  
+**Total abertas:** 54  
 **Total resolvidas:** 37
 
 ---
@@ -16,12 +16,12 @@
 |---|---|
 | 🔴 alta | 0 |
 | 🟡 media | 17 |
-| 🟢 baixa | 36 |
+| 🟢 baixa | 37 |
 
 **Por categoria:**
 
 - `agente`: 11
-- `infra`: 9
+- `infra`: 10
 - `skills`: 7
 - `monitor`: 7
 - `conteudo`: 6
@@ -55,7 +55,7 @@
 | `PEND-067` | Auto-discover Discord channel_prompts - validar fix em REC real | `agente` | 5min após próximo REC | — |
 | `PEND-088` | Avaliar Hermes video_gen + Grok/X Search para futuro agente Ares | `agente` | 1h validação + decisão de custo | Quando criar/configurar Ares ou agente de campa... |
 
-## 🟢 BAIXA (36 itens)
+## 🟢 BAIXA (37 itens)
 
 | ID | Título | Categoria | Tempo | Bloqueio |
 |---|---|---|---|---|
@@ -95,6 +95,7 @@
 | `PEND-087` | Avaliar criação de profile cron-worker em Haiku para crons LLM | `infra` | 45min | Aguardar aumento real de crons agent-based ou n... |
 | `PEND-089` | Testar Hermes Kanban Orchestrator em paralelo | `agente` | 2h | Não alterar estrutura operacional Zeus/Atena ne... |
 | `PEND-090` | Testar Browse.sh skills isoladamente do projeto MGS | `skills` | 45min | Executar apenas em ambiente/sessão isolada, sem... |
+| `PEND-091` | Hermes write approval permanece fail-open em falha de config/import | `infra` | 1h investigação/upstream | Aguardar janela de investigação; sem impacto bl... |
 
 ---
 

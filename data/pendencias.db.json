@@ -2,10 +2,10 @@
   "schema_version": "1.0",
   "metadata": {
     "criado_em": "2026-05-03T04:30:00-04:00",
-    "ultima_atualizacao": "2026-06-19T19:03:40-04:00",
-    "total_abertas": 53,
+    "ultima_atualizacao": "2026-07-12T20:42:41-04:00",
+    "total_abertas": 54,
     "total_resolvidas": 37,
-    "proximo_id": 91,
+    "proximo_id": 92,
     "responsavel": "Rodolfo Mattei"
   },
   "categorias": {
@@ -956,6 +956,24 @@
         "teste-isolado"
       ],
       "contexto": "Após update Hermes para HEAD 340d2b6de, ficou disponível integração com browse.sh: catálogo Browserbase de 200+ skills comunitárias para automação web por site. Rodolfo pediu registrar para testar depois, isolado do projeto MGS. Fluxo sugerido: hermes skills search <site> --source browse-sh; hermes skills inspect <id>; revisar segurança; testar em sessão isolada; só depois considerar instalação/uso operacional."
+    },
+    {
+      "id": "PEND-091",
+      "titulo": "Hermes write approval permanece fail-open em falha de config/import",
+      "categoria": "infra",
+      "prioridade": "baixa",
+      "status": "aberta",
+      "tempo_estimado": "1h investigação/upstream",
+      "bloqueio": "Aguardar janela de investigação; sem impacto bloqueante atual",
+      "criada_em": "2026-07-12T20:42:41-04:00",
+      "criada_por": "zeus",
+      "tags": [
+        "hermes",
+        "governanca",
+        "write-approval",
+        "fail-open"
+      ],
+      "contexto": "Limitação arquitetural confirmada no Hermes v0.18.2: write_approval_enabled retorna false em erro de load_config e os gates de memory/skill passam a escrita quando o módulo não carrega. Não bloqueia a operação atual; avaliar monitoramento, patch fail-closed ou correção upstream sem quebrar recuperação de config."
     }
   ],
   "resolvidas": [
@@ -1492,6 +1510,6 @@
       "como": "Descartada por decisão direta do Rodolfo em 2026-05-15."
     }
   ],
-  "proximo_id": 88,
-  "ultima_atualizacao": "2026-05-15T17:17:07-04:00"
+  "proximo_id": 92,
+  "ultima_atualizacao": "2026-07-12T20:42:41-04:00"
 }

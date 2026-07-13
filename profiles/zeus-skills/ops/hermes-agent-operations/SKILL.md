@@ -39,6 +39,7 @@ For auditing and safely splitting monolithic agent skills while preserving conte
 - The restart finalizer must abort before touching any gateway when target hashes drift, runtime compilation fails, or a called critical startup helper has no class definition.
 - Never claim success without a real validation check.
 - Profile changes must account for live config plus the versioned MGS mirror when one exists.
+- Before executing any Hermes config proposal produced by Claude or another LLM, check the deployed Hermes documentation/code for a native writer or CLI command. When a native command exists, use it; rewriting `config.yaml` with a custom YAML script/dump is prohibited. Take a rollback-safe backup, validate the resolved runtime value, and synchronize the versioned MGS mirror.
 - Any script/config/data/skill/SOUL/AGENT infrastructure change requires inventory/audit handling and REPORT-INFRA according to MGS policy before completion.
 - Discord reports to Rodolfo are concise, inline, and free of raw tool traces, unsolicited attachments, Markdown pipe tables, or language-tagged fences.
 

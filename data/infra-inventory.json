@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-12T20:41:10-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-12T20:44:59-04:00",
+    "generated_by": "zeus"
   },
   "system_packages": [
     {
@@ -482,20 +482,43 @@
         "/root/.hermes/profiles/ares/config.yaml"
       ],
       "settings": {
+        "memory.write_approval": true,
         "skills.write_approval": true,
         "skills.creation_nudge_interval": 15,
         "curator.enabled": false
       },
       "sha256": {
-        "zeus_config": "561bcceab925cb01664334aa86cdb7cd1d886573696ee30bfa447e3c42357129",
-        "atena_config": "0cddcaf84290c41a99877f5f9c4114d9acb1ce0adc976295c1d7319d5911e883",
-        "ares_config": "9c71bf8377128a41cd63aa8070b6ec7516f19688cd9334feb9187a8b8451f3ce",
-        "zeus_soul": "d42e2924f60a487d999c7f7aaffdbc07cd7f3db7037a00818449457d1cadd610"
+        "zeus_config": "90776d85495726973e1b7131c51c1a8c0a48bdeee8d904fd363233f78ec81bdb",
+        "atena_config": "763de8bc202b8452eb5125faa9c9277e5f14b218661802755fe456dbe002168f",
+        "ares_config": "d78ed56f69ae80aa00b898fa205bf4fa47176d44d767d335c888c1c5f5ec5d0b",
+        "zeus_soul": "d42e2924f60a487d999c7f7aaffdbc07cd7f3db7037a00818449457d1cadd610",
+        "hermes_agent_operations_skill": "6ab47375611a41172d4b0bb3b3eb52f2c42be18cdf7aa122e9bb0003abb64548"
       },
-      "purpose": "Require Rodolfo approval before any foreground or background skill write in all active MGS agents; keep proposal generation enabled while disabling automatic curator mutation.",
-      "validation": "Live and versioned configs byte-identical; write_approval resolver returned stage=true/allow=false for Zeus, Atena and Ares; curator disabled and creation_nudge_interval=15 in all three profiles.",
+      "purpose": "Require Rodolfo approval before any foreground or background built-in memory or skill write in all active MGS agents; keep proposal generation enabled while disabling automatic curator mutation.",
+      "validation": "Canonical Hermes writer used for memory.write_approval; live and versioned target settings match; runtime resolver returned memory stage=true/allow=false and skills stage=true/allow=false for Zeus, Atena and Ares; curator disabled and creation_nudge_interval=15; no restart required.",
       "status": "deployed_no_restart_required",
-      "updated_at": "2026-07-12T20:29:13-04:00"
+      "updated_at": "2026-07-12T20:44:59-04:00",
+      "rollback_backups": [
+        "/root/.hermes/profiles/zeus/config.yaml.pre-memory-approval-20260712-204200.bak",
+        "/root/.hermes/profiles/atena/config.yaml.pre-memory-approval-20260712-204200.bak",
+        "/root/.hermes/profiles/ares/config.yaml.pre-memory-approval-20260712-204200.bak"
+      ]
+    },
+    {
+      "id": "runcloud-retired-ssh-allow-removal-20260712",
+      "agent": "zeus",
+      "type": "remote_production_firewall_change",
+      "servers": [
+        "162.55.28.178",
+        "162.55.28.179",
+        "46.4.95.117"
+      ],
+      "zone": "runcloud",
+      "removed_rule": "rule family=\"ipv4\" source address=\"87.99.151.107\" port port=\"22\" protocol=\"tcp\" accept",
+      "scope": "Removed only the retired Hetzner IP SSH rich rule from firewalld runtime and permanent configuration on all three servers; no replacement IP or other rule was added.",
+      "validation": "All three servers: runtime_old_count=0; permanent_old_count=0; runcloud.xml_old_count=0; nft_old_count=0; fail2ban_old_count=0; current egress rule count=0; fresh Hostinger SSH connection=OK; 22/tcp global zone port unchanged.",
+      "status": "removed_validated",
+      "updated_at": "2026-07-12T20:43:05-04:00"
     },
     {
       "id": "finanzas-topfeed-preloader-css-failsafe-20260711",
@@ -997,14 +1020,14 @@
       "agent": "zeus",
       "type": "profile_script",
       "path": "/root/.hermes/profiles/zeus/scripts/meta-app-roles-watch.sh",
-      "size_bytes": 62487,
-      "modified_at": "2026-07-09T10:09:13-04:00",
-      "sha256": "76006b579c69006aedbb97aa8ed35081d5f26c2d30cc0f2e81ff5347396b4312",
+      "size_bytes": 64603,
+      "modified_at": "2026-07-12T20:27:40-04:00",
+      "sha256": "107871f1adccad027d46dcade8705210995ce33da68be1d3ce5b9279731966b0",
       "description": "Zeus cron/profile script for Meta app role/rate-limit monitoring; current-user tables now render every row and split across Discord-safe messages instead of hiding overflow.",
-      "validation": "bash -n OK; B007 dry-run exit 0 no output; production cron cycle at 10:10 EDT exit 0, _sheet_removed_sync rows=231 marked=6 updated=false, consecutive_errors=0.",
-      "updated_at": "2026-07-09T10:11:23-04:00",
+      "validation": "2026-07-12: bash -n and embedded Python compile PASS; full dry-run exit 0 with 11 item-get calls by item/vault ID, zero errors and no credential output.",
+      "updated_at": "2026-07-12T20:44:00-04:00",
       "source_report": "REPORT-INFRA Zeus app roles alert full user list 2026-07-04",
-      "last_change": "2026-07-09: Google/Sheets calls retry transient timeouts; sheet-sync alerts require 2 consecutive failures and route to infra channel, not app-rate-limit fallback."
+      "last_change": "2026-07-12: item discovery moved to protected non-secret metadata index; each Meta app now uses one full-item read; Discord transport uses local Zeus bot token."
     },
     {
       "id": "hera-fix-car-br-pt-drive-parent-20260702",
@@ -5965,9 +5988,10 @@
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
-      "size_bytes": 60588,
-      "md5": "6afbccf5e20b649896da22c66f2709e6",
-      "modified_at": "2026-06-19T19:03:40-04:00"
+      "size_bytes": 61465,
+      "md5": "bc35d23f017c2ab96a5648fcab0ab844",
+      "modified_at": "2026-07-12T20:43:10-04:00",
+      "sha256": "b727f5a1c9a83447cf93bfd0c5ddcf201ce5f503afc9ab939b3dc2587c2c6608"
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
