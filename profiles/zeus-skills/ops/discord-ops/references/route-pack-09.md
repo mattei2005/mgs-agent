@@ -105,7 +105,8 @@ Critério de aceite da correção durável:
 
 Pitfalls:
 
-- Não usar `thread_auto_add_users` para “facilitar” o canal de equipe quando o mesmo profile também atende um canal privado; a configuração não é por canal.
+- Não usar `thread_auto_add_users` global para “facilitar” o canal de equipe quando o mesmo profile também atende um canal privado; a lista global atingiria ambos.
+- Preferir `thread_auto_add_users_by_channel`: lista explícita no canal operacional e `[]` no privado. O vazio explícito deve falhar fechado, sem auto-discovery. Procedimento e testes: `references/discord-thread-auto-add-members-regression.md`.
 - Não tratar lista global vazia como autorização para descobrir/adicionar todos os membros visíveis do guild; vazio explícito deve significar “não adicionar ninguém”.
 - Não confundir usuário autorizado a operar o agente com participante automático de toda thread. Autorização, visibilidade do canal e membership da thread são camadas diferentes.
 - Não assumir que renomear um canal atualiza nomes descritivos em dados/scripts: procurar o ID canônico e corrigir labels ativos, preservando referências históricas como histórico.

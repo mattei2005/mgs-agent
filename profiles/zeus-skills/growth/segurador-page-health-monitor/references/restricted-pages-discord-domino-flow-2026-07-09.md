@@ -84,19 +84,20 @@ The DTR → Smart Bidding page-health sync must maintain one shared Google Sheet
 ```text
 Sheet ID: 1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI
 URL: https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0
-Tabs: Paginas | Resumo | Inventario Step1
+Only tab: Paginas
 ```
 
 Operational rules:
 
 ```text
-- Refresh the three tabs from the latest completed run and validate headers/row readback before claiming success.
-- The gestores-facing `Paginas` tab contains **only current active restricted pages** from live Smart Bidding where `Status SB = Broadcast` and `Restricted Until >= today`, after active-user scope and the global MGS ignore list. Never include Ready, Campaign, blank-status, On-hold, expired, unrestricted, or general diagnostic rows there.
-- Record excluded On-hold/other-status counts only in `Resumo` when useful.
+- Maintain only the `Paginas` tab; do not create or recreate auxiliary `Resumo`, `Inventario Step1`, diagnostics, or audit tabs in the gestores-facing workbook.
+- The `Paginas` tab contains **only current active restricted pages** from live Smart Bidding where `Status SB = Broadcast` and `Restricted Until >= today`, after active-user scope and the global MGS ignore list. Never include Ready, Campaign, blank-status, On-hold, expired, unrestricted, or general diagnostic rows there.
+- Refresh `Paginas` from the latest live SB state and validate its exact header, row count, all-status invariant (`Broadcast` only), and non-expired dates before claiming success.
+- Keep excluded counts, diagnostics, Step1 inventory, JSON logs, and backups local; they do not belong in the gestores-facing Sheet.
 - Do not generate a new `dtr-sb-page-health-sync-*.xlsx` artifact.
 - In the Discord alert footer, show `Planilha: <URL>` instead of a local `XLSX:` path.
-- Keep local JSON logs/backups for audit and rollback; the shared Sheet is the gestores-facing artifact.
 - A dry-run must not overwrite the shared production Sheet.
+- Removing already-existing auxiliary tabs is a destructive sheet-tab deletion: back them up and obtain the MGS Critical Subset confirmation before deleting; then patch the writer first so the tabs cannot be recreated.
 ```
 
 ## Dedupe key

@@ -1,8 +1,8 @@
-# Discord thread auto-add members regression (Atena/Zeus)
+# Discord thread auto-add members regression
 
 ## Trigger
 
-Use this when Rodolfo reports that Atena/Zeus still creates Discord threads but no longer adds people to those threads automatically.
+Use this when an MGS agent still creates Discord threads but no longer adds the expected people automatically, especially when one profile serves parent channels with different audiences (team vs. private/director).
 
 ## Durable lesson
 
@@ -33,9 +33,10 @@ PY
 
 Gateway thread creation code:
 
-- `/root/.hermes/hermes-agent/gateway/platforms/discord.py`
-- `_auto_create_thread(...)` normally calls `message.create_thread(...)` or a fallback seed message then `seed_msg.create_thread(...)`.
-- The gateway path should be inspected for `thread.add_user`, `thread-members`, or equivalent `PUT /channels/{THREAD_ID}/thread-members/{uid}`. If absent, member-addition is not happening in core.
+- `/root/.hermes/hermes-agent/plugins/platforms/discord/adapter.py`
+- `_auto_create_thread(...)` creates the thread; `_auto_add_parent_channel_members_to_thread(...)` performs deterministic membership sync immediately afterward.
+- Inspect `_discord_thread_auto_add_user_ids(...)`, `DISCORD_THREAD_AUTO_ADD_USERS_BY_CHANNEL`, `DISCORD_THREAD_AUTO_ADD_USERS`, `thread.add_user`, and the `Auto-thread member sync` log marker.
+- If the runtime has no member-sync call after thread creation, member addition cannot be guaranteed by config alone.
 
 Historical prompt/config evidence:
 
@@ -98,14 +99,27 @@ Fast restoration:
 - After changing profile config, update both the live profile (`/root/.hermes/profiles/{agent}/config.yaml`) and the versioned copy (`/root/mgs-agent/profiles/{agent}-config.yaml`), validate YAML, then restart the affected gateway and verify `Connected as ...` + `Gateway running with 1 platform(s)`.
 - For the already-broken test thread, manually add the missing user with the same `PUT thread-members` endpoint and verify `GET /channels/{THREAD_ID}/thread-members` shows the expected count.
 
-More robust repair:
+More robust repair — required when one profile serves channels with different audiences:
 
-- Implement deterministic post-create member-addition in the Discord gateway/runtime after `_auto_create_thread(...)`.
-- Configure explicit allowed users/roles per profile/channel, e.g. `thread_auto_add_users` and later `thread_auto_add_roles`.
-- Validate with a real new test thread and `GET /channels/{THREAD_ID}/thread-members`.
+- Implement deterministic post-create member addition immediately after `_auto_create_thread(...)`; do not depend on an LLM prompt running later.
+- Keep `discord.thread_auto_add_users` only as the legacy profile-wide fallback.
+- Add `discord.thread_auto_add_users_by_channel` as an explicit parent-channel mapping. Precedence must be:
+  1. exact parent-channel entry;
+  2. legacy profile-wide list;
+  3. broad guild-member discovery only when neither source was configured.
+- An explicit empty list is meaningful and must **fail closed**. Never interpret `[]` or an intentionally empty runtime value as permission to discover/add every visible guild member.
+- If the adapter remains env-driven internally, hydrate the YAML mapping as JSON into `DISCORD_THREAD_AUTO_ADD_USERS_BY_CHANNEL`; keep YAML as the public configuration surface.
+- For Ares, the durable split is:
+  - `ares-aquisicao` (`1516887105543077949`) → Rodolfo, Kelly, Geizian, Icaro, Isliago, Joe and Nicolas.
+  - `ares-diretoria` (`1508853425952133180`) → explicit empty list; no automatic manager inclusion.
+- Update live + versioned profile configs, preserve the runtime patch artifact and patch guard, and take a rollback snapshot before restart.
+- Regression tests must prove all three invariants: channel-specific list wins over global; explicit empty blocks broad discovery; unrelated channels retain the legacy global fallback.
+- Validate config hydration/type, targeted tests, patch guard, detached safe restart, new process env without printing secrets, and a real thread-member API readback when a new operational thread is available.
 
 ## Safety notes
 
 - Do not restore broad, long prompt scripts blindly if the original simplification was done to reduce REC latency or bot loops.
 - Avoid auto-adding all guild members. Prefer explicit user IDs or role-based eligibility with clear audit output.
+- Do not use one global auto-add list when the same profile has both team and private/director channels; that either leaks managers into private threads or silently disables the team channel.
+- Diagnose the exact layer separately: authorization, parent visibility, thread membership, config hydration and active process state are different controls.
 - Do not mention another bot in shared Rodolfo threads unless explicitly asked; membership and notification are separate concerns.
