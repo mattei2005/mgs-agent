@@ -41,6 +41,7 @@ For auditing and safely splitting monolithic agent skills while preserving conte
 - Never claim success without a real validation check.
 - Profile changes must account for live config plus the versioned MGS mirror when one exists.
 - Before executing any Hermes config proposal produced by Claude or another LLM, inspect the deployed Hermes writer and classify the value shape. Use `hermes config set` for boolean and numeric scalars. Do not pass list/object literals such as `[]` or `{}` to that CLI because they resolve as strings; for lists/objects, use Hermes' native atomic YAML writer (`atomic_config_write`) and validate the readback **type** as well as the value. Generic full-file YAML dumps are prohibited when a native writer exists. Always take a rollback-safe backup, validate the resolved runtime value, and synchronize the versioned MGS mirror.
+- Before compacting MEMORY/USER, classify every atomic fact as **always-active** or **on-demand**. Existence in a routed skill/reference is not equivalent to context residency; remove an always-active fact only after proving full semantic coverage in SOUL/AGENT/USER/MEMORY. Treat write gates, curator pruning, automatic-write transparency, and context residency as independent controls.
 - Any script/config/data/skill/SOUL/AGENT infrastructure change requires inventory/audit handling and REPORT-INFRA according to MGS policy before completion.
 - Discord reports to Rodolfo are concise, inline, and free of raw tool traces, unsolicited attachments, Markdown pipe tables, or language-tagged fences.
 
@@ -91,6 +92,12 @@ This branch covers `approvals.mode`, `busy_input_mode`, steering, text/image/aud
 Primary reference: `references/session-context-discord-output.md`.
 
 Important distinction: visible Discord message count is not context size. Internal tool calls, results, schemas, reasoning replay, system prompt, and attachments all contribute. Diagnose with session/runtime evidence before changing thresholds.
+
+### Memory/USER compaction, automatic learning writes, approval gates, or curator
+
+Primary reference: `references/memory-skill-autowrite-governance.md`.
+
+Use it to separate always-active context from routed knowledge, verify SOUL loading semantics, change write gates through the canonical resolver, keep curator policy independent, and report every automatic memory/skill write with readback.
 
 ### VPS migration, restore, cutover, or new MGS agent
 
