@@ -46,6 +46,18 @@ On-hold restritas ignoradas: X
 
 …but do not list On-hold pages in the table.
 
+## Daily aggregate summary automation
+
+The gestores-facing channel also receives one read-only aggregate summary per day:
+
+```text
+Schedule: 08:05 America/New_York
+Channel: 1522442220903337984
+Script: /root/mgs-agent/scripts/dtr-sb-restricted-summary.py
+```
+
+The daily summary reads the current Smart Bidding state after the 07:30 DTR sync, applies the active-user scope and global page ignore list, and groups only restricted `Status SB = Broadcast` pages by `Data saída` with comma-separated `Sites`. `On-hold` appears only as the ignored count. This summary does not replace or suppress the event-driven **NOVAS** report; **NOVAS** remains tied to a new DTR `#2022` apply plus Smart Bidding readback OK. Use `--no-post` for a live validation that must not send a Discord message.
+
 ## Alert table format
 
 The restricted-pages delta report should include:

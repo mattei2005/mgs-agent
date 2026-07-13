@@ -1,8 +1,9 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-13T16:18:02-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-13T16:25:24-04:00",
+    "generated_by": "infra-discovery.sh",
+    "last_manual_update": "Daily restricted Broadcast summary at 08:05 EDT to Discord channel 1522442220903337984."
   },
   "system_packages": [
     {
@@ -2818,6 +2819,9 @@
     },
     {
       "entry": "* * * * * flock -n /var/lock/finalize-hermes-structural-write.lock /root/mgs-agent/scripts/finalize-hermes-structural-write.py >> /root/mgs-agent/logs/hermes-structural-write-finalizer.log 2>&1"
+    },
+    {
+      "entry": "5 8 * * * flock -n /var/lock/dtr_sb_restricted_summary.lock xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python /root/mgs-agent/scripts/dtr-sb-restricted-summary.py >> /root/mgs-agent/logs/dtr-sb-restricted-summary.log 2>&1"
     }
   ],
   "scripts": [
@@ -3660,6 +3664,11 @@
       "path": "/root/mgs-agent/scripts/yoast-scorer/yoast-scorer.js",
       "size_bytes": 4466,
       "modified_at": "2026-04-24T18:05:16-04:00"
+    },
+    {
+      "path": "/root/mgs-agent/scripts/dtr-sb-restricted-summary.py",
+      "size_bytes": 6585,
+      "modified_at": "2026-07-13T16:23:32-04:00"
     }
   ],
   "skills_mgs": [

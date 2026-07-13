@@ -204,6 +204,9 @@ Fase | Critério
 
 - Quando Rodolfo pedir ação no canal do Zeus, mencionar explicitamente o bot Zeus (`<@1496296175014252634>`); mensagem sem mention pode não ser lida/acionada pelo Zeus.
 - Não confundir controlled-write explícito de setup com autorização geral para write/autonomia; registrar escopo exato aprovado, rodar dry-run, validar por GET e manter os crons de gestão em read-only até nova aprovação.
+- Antes de liberar qualquer regra de custo para write, normalizar a taxonomia real de bid strategy. A Meta pode retornar `LOWEST_COST_WITHOUT_CAP`, enquanto rulesets históricos usam `LOWEST_COST`; o matcher deve mapear ambos para a mesma estratégia lógica ou aceitar explicitamente os dois valores. Dry-run sem candidatos não prova que R4 está funcional.
+- `reativar-todas` só pode permanecer amplo em dry-run. Em write, exige estado persistido de proveniência da pausa e deve alcançar apenas `paused_by_ares_rule`; nunca reativar todo objeto `PAUSED` da página em foco. Aplicar também gate de quantidade ativa, budget configurado e projeção de gasto contra o cap da conta.
+- Para ROI Messenger via Smart Bidding, os endpoints `/report/messenger` e `/report/messenger_insights` podem expor `DRIP_REVENUE`, `BD_REVENUE` e `REVENUE`. Usar gasto Meta reconciliado como denominador quando `INVESTIMENT` histórico do SB estiver ausente/zero, unir por `pg_id`/`UTM_CAMPAIGN` + conta + período/timezone e rotular o resultado como cashflow quando não houver coorte de aquisição.
 - Antes de executar pedidos como “deixar 20 campanhas”, validar quantas campanhas existem no escopo ativo e esclarecer se deve duplicar, reativar pausadas ou limitar ao escopo atual; não assumir.
 - Não inferir CPS sem validar qual campo da Meta corresponde ao subscriber real.
 - Não confundir timezone do VPS com timezone da conta; crons finais devem respeitar a conta.
