@@ -182,3 +182,47 @@ def test_hash_drift_fails_closed_before_side_effects(tmp_path):
     persisted = json.loads(receipt_path.read_text())
     assert persisted["status"] == "blocked"
     assert persisted["last_error"] == "live_hash_drift"
+
+
+def test_unrelated_later_drift_does_not_block_receipt(tmp_path):
+    mod = load_module()
+    profiles = tmp_path / "profiles"
+    repo = tmp_path / "repo"
+    skill_dir = profiles / "zeus" / "skills" / "ops" / "demo"
+    live = skill_dir / "SKILL.md"
+    unrelated = skill_dir / "references" / "later.md"
+    unrelated.parent.mkdir(parents=True)
+    live.write_text("new body")
+    unrelated.write_text("state captured by receipt")
+
+    receipt_path = profiles / "zeus" / "pending" / "trace" / "corr123.json"
+    make_receipt(receipt_path, live, mod.sha256_file(live))
+    receipt = json.loads(receipt_path.read_text())
+    unrelated_digest = mod.sha256_file(unrelated)
+    receipt["before"][str(unrelated)] = unrelated_digest
+    receipt["after"][str(unrelated)] = unrelated_digest
+    receipt["paths"].append(str(unrelated))
+    receipt_path.write_text(json.dumps(receipt))
+
+    unrelated.write_text("legitimate later write")
+
+    def run_command(command):
+        if command[0].endswith("sync-souls.sh"):
+            mirror = mod.map_live_to_mirror(live, profiles_root=profiles, repo_root=repo)
+            mirror.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(live, mirror)
+        return "ok"
+
+    result = mod.process_receipt(
+        receipt_path,
+        profiles_root=profiles,
+        repo_root=repo,
+        audit_path=repo / "logs" / "events-audit.jsonl",
+        run_command=run_command,
+        find_report=lambda correlation_id: None,
+        send_report=lambda *args: "message-1",
+        readback_report=lambda *args: True,
+    )
+
+    assert result["status"] == "closed"
+    assert json.loads(receipt_path.read_text())["status"] == "closed"

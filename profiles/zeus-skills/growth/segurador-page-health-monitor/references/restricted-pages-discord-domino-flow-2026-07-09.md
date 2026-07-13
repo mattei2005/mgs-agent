@@ -91,6 +91,7 @@ Operational rules:
 
 ```text
 - Refresh the three tabs from the latest completed run and validate headers/row readback before claiming success.
+- Exclude every row whose Smart Bidding status is `On-hold` from the gestores-facing `Paginas` tab; record only the excluded count in `Resumo` when useful.
 - Do not generate a new `dtr-sb-page-health-sync-*.xlsx` artifact.
 - In the Discord alert footer, show `Planilha: <URL>` instead of a local `XLSX:` path.
 - Keep local JSON logs/backups for audit and rollback; the shared Sheet is the gestores-facing artifact.

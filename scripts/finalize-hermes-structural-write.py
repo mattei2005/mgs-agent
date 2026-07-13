@@ -40,6 +40,17 @@ def sha256_file(path: Path | str) -> str:
     return digest.hexdigest()
 
 
+def changed_paths(receipt: Dict[str, Any]) -> set[str]:
+    """Return only paths whose before/after state was changed by this receipt."""
+    before = receipt.get("before") or {}
+    after = receipt.get("after") or {}
+    return {
+        raw_path
+        for raw_path in set(before) | set(after)
+        if before.get(raw_path) != after.get(raw_path)
+    }
+
+
 def map_live_to_mirror(
     live_path: Path | str,
     *,
@@ -259,14 +270,13 @@ def _append_audit_once(
 
 
 def _validate_live(receipt: Dict[str, Any]) -> bool:
-    before = receipt.get("before") or {}
     after = receipt.get("after") or {}
-    for raw_path, expected in after.items():
+    for raw_path in changed_paths(receipt):
         path = Path(raw_path)
-        if not path.is_file() or sha256_file(path) != expected:
-            return False
-    for raw_path in set(before) - set(after):
-        if Path(raw_path).exists():
+        if raw_path in after:
+            if not path.is_file() or sha256_file(path) != after[raw_path]:
+                return False
+        elif path.exists():
             return False
     return True
 
@@ -277,10 +287,9 @@ def _validate_mirrors(
     profiles_root: Path,
     repo_root: Path,
 ) -> tuple[bool, list[str]]:
-    before = receipt.get("before") or {}
     after = receipt.get("after") or {}
     mirror_paths: list[str] = []
-    for raw_path in sorted(set(before) | set(after)):
+    for raw_path in sorted(changed_paths(receipt)):
         mirror = map_live_to_mirror(
             raw_path, profiles_root=profiles_root, repo_root=repo_root
         )
@@ -320,7 +329,7 @@ def process_receipt(
 
     mapped = [
         map_live_to_mirror(raw, profiles_root=profiles, repo_root=repo)
-        for raw in receipt.get("paths") or []
+        for raw in changed_paths(receipt)
     ]
     if not any(mapped):
         receipt.update({

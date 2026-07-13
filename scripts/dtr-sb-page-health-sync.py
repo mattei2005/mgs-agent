@@ -630,6 +630,10 @@ def write_google_sheet(rows, summary, inventory_notes=None):
     tabs=ensure_report_tabs(access_token)
     page_headers=['link da pagina','nome da pagina','fb page id','page id','segurador','bot user','data','codigo dos erros','sb status antes','sb restricted antes','acao','readback ok','observacao']
     inv_headers=['user','segurador','status','reason','pages']
+    on_hold_excluded=sum(1 for row in rows if norm(row.get('sb status antes')).lower()=='on-hold')
+    rows=[row for row in rows if norm(row.get('sb status antes')).lower()!='on-hold']
+    summary=dict(summary)
+    summary['sheet_on_hold_excluded']=on_hold_excluded
     page_values=[page_headers]+[[r.get(h,'') for h in page_headers] for r in rows]
     summary_values=[['Campo','Valor']]
     for key,value in summary.items():
@@ -685,7 +689,7 @@ def write_google_sheet(rows, summary, inventory_notes=None):
     counts_read=[len(values) for values in values_read]
     if headers_read!=expected_headers or counts_read!=expected_counts:
         raise RuntimeError(f'Google Sheets readback divergente: headers={headers_read!r} rows={counts_read!r} expected_rows={expected_counts!r}')
-    return {'url':REPORT_SHEET_URL,'rows_paginas':counts_read[0],'rows_resumo':counts_read[1],'rows_inventario':counts_read[2],'readback_ok':True}
+    return {'url':REPORT_SHEET_URL,'rows_paginas':counts_read[0],'rows_resumo':counts_read[1],'rows_inventario':counts_read[2],'on_hold_excluded':on_hold_excluded,'readback_ok':True}
 
 async def main():
     ap=argparse.ArgumentParser()
