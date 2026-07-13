@@ -42,15 +42,70 @@ def _created_epoch(value: Any, fallback: float) -> float:
     return fallback
 
 
+def scan_capacity(
+    profiles_root: Path | str = DEFAULT_PROFILES_ROOT,
+    *,
+    threshold_percent: float = DEFAULT_CAPACITY_THRESHOLD_PERCENT,
+    profiles: Iterable[str] = PROFILES,
+) -> Dict[str, Any]:
+    """Return character usage only; memory/user content never leaves this function."""
+    root = Path(profiles_root)
+    rows: Dict[str, Dict[str, Any]] = {}
+    errors: List[str] = []
+
+    for profile in profiles:
+        profile_root = root / profile
+        limits = {"memory": DEFAULT_MEMORY_LIMIT, "user": DEFAULT_USER_LIMIT}
+        config_path = profile_root / "config.yaml"
+        if config_path.exists():
+            try:
+                raw = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
+                memory_config = raw.get("memory") or {}
+                limits["memory"] = int(memory_config.get("memory_char_limit", DEFAULT_MEMORY_LIMIT))
+                limits["user"] = int(memory_config.get("user_char_limit", DEFAULT_USER_LIMIT))
+            except Exception as exc:
+                errors.append(f"{profile}/config.yaml: {type(exc).__name__}")
+                continue
+
+        for store, filename in (("memory", "MEMORY.md"), ("user", "USER.md")):
+            path = profile_root / "memories" / filename
+            try:
+                chars = len(path.read_text(encoding="utf-8")) if path.exists() else 0
+                limit = limits[store]
+                if limit <= 0:
+                    raise ValueError("limit must be positive")
+                percent = round(chars * 100.0 / limit, 1)
+                key = f"{profile}.{store}"
+                rows[key] = {
+                    "chars": chars,
+                    "limit": limit,
+                    "percent": percent,
+                    "warning": percent >= threshold_percent,
+                }
+            except Exception as exc:
+                errors.append(f"{profile}/{filename}: {type(exc).__name__}")
+
+    warning_ids = sorted(key for key, row in rows.items() if row["warning"])
+    return {
+        "threshold_percent": threshold_percent,
+        "warning_count": len(warning_ids),
+        "warning_ids": warning_ids,
+        "rows": rows,
+        "errors": errors,
+    }
+
+
 def scan_pending(
     profiles_root: Path | str = DEFAULT_PROFILES_ROOT,
     *,
     now_epoch: Optional[float] = None,
     threshold_hours: float = 24.0,
+    capacity_threshold_percent: float = DEFAULT_CAPACITY_THRESHOLD_PERCENT,
     profiles: Iterable[str] = PROFILES,
 ) -> Dict[str, Any]:
     """Return metadata-only counts. Never returns staged summary/payload content."""
     root = Path(profiles_root)
+    profiles = tuple(profiles)
     now = float(now_epoch if now_epoch is not None else time.time())
     threshold_seconds = threshold_hours * 3600.0
     records: List[Dict[str, Any]] = []
@@ -90,6 +145,12 @@ def scan_pending(
             }
 
     aged_records = [item for item in records if item["aged"]]
+    capacity = scan_capacity(
+        root,
+        threshold_percent=capacity_threshold_percent,
+        profiles=profiles,
+    )
+    errors.extend(capacity["errors"])
     return {
         "checked_at_epoch": now,
         "threshold_hours": threshold_hours,
@@ -99,6 +160,7 @@ def scan_pending(
         "aged_ids": sorted(item["key"] for item in aged_records),
         "records": records,
         "breakdown": breakdown,
+        "capacity": capacity,
         "errors": errors,
     }
 
@@ -113,6 +175,8 @@ def decide(
     now = float(now_epoch if now_epoch is not None else time.time())
     current = set(summary.get("aged_ids") or [])
     previous = set(state.get("aged_ids") or [])
+    current_capacity = set((summary.get("capacity") or {}).get("warning_ids") or [])
+    previous_capacity = set(state.get("capacity_warning_ids") or [])
     last_alert = float(state.get("last_alert_at") or 0.0)
 
     if summary.get("errors"):
@@ -127,9 +191,17 @@ def decide(
             return {"action": "alert", "reason": "new_aged_ids"}
         if now - last_alert >= reminder_hours * 3600:
             return {"action": "alert", "reason": "daily_reminder"}
+    if current_capacity:
+        if not previous_capacity:
+            return {"action": "alert", "reason": "first_capacity_warning"}
+        if current_capacity - previous_capacity:
+            return {"action": "alert", "reason": "new_capacity_warning"}
+        if now - last_alert >= reminder_hours * 3600:
+            return {"action": "alert", "reason": "capacity_daily_reminder"}
+    if current or current_capacity:
         return {"action": "none", "reason": "anti_spam"}
-    if previous:
-        return {"action": "recovery", "reason": "aged_queue_cleared"}
+    if previous or previous_capacity:
+        return {"action": "recovery", "reason": "warnings_cleared"}
     return {"action": "none", "reason": "healthy"}
 
 
@@ -144,15 +216,22 @@ def next_state(
     # disappeared. Preserve the last confirmed aged set so recovery is emitted
     # only after a later complete scan confirms zero.
     confirmed_aged = state.get("aged_ids", []) if summary.get("errors") else summary["aged_ids"]
+    confirmed_capacity = (
+        state.get("capacity_warning_ids", [])
+        if summary.get("errors")
+        else summary["capacity"]["warning_ids"]
+    )
     return {
         "last_check_at": now_epoch,
         "aged_ids": confirmed_aged,
+        "capacity_warning_ids": confirmed_capacity,
         "last_alert_at": now_epoch if decision["action"] in {"alert", "error"} else state.get("last_alert_at"),
         "last_recovery_at": now_epoch if decision["action"] == "recovery" else state.get("last_recovery_at"),
         "last_error_signature": "|".join(sorted(summary["errors"])) if summary["errors"] else "",
         "last_total": summary["total"],
         "last_aged": summary["aged"],
         "last_oldest_hours": summary["oldest_hours"],
+        "last_capacity_warning_count": summary["capacity"]["warning_count"],
     }
 
 
@@ -161,7 +240,8 @@ def report_field(summary: Dict[str, Any]) -> str:
         return f"indisponível ({len(summary['errors'])} erro(s) de leitura)"
     return (
         f"total={summary['total']} | >={summary['threshold_hours']:g}h={summary['aged']} "
-        f"| mais antiga={summary['oldest_hours']:.1f}h"
+        f"| mais antiga={summary['oldest_hours']:.1f}h "
+        f"| memória>={summary['capacity']['threshold_percent']:g}%={summary['capacity']['warning_count']}"
     )
 
 
@@ -173,6 +253,14 @@ def _breakdown_lines(summary: Dict[str, Any]) -> str:
     return "\n".join(lines) or "zero pendências"
 
 
+def _capacity_lines(summary: Dict[str, Any]) -> str:
+    lines = []
+    for key in summary["capacity"]["warning_ids"]:
+        row = summary["capacity"]["rows"][key]
+        lines.append(f"{key}: {row['chars']}/{row['limit']} ({row['percent']:.1f}%)")
+    return "\n".join(lines) or "stores abaixo do limiar"
+
+
 def build_payload(summary: Dict[str, Any], decision: Dict[str, str]) -> Dict[str, Any]:
     action = decision["action"]
     if action == "recovery":
@@ -182,7 +270,7 @@ def build_payload(summary: Dict[str, Any], decision: Dict[str, str]) -> Dict[str
                 "title": "Fila Hermes regularizada",
                 "color": 3066993,
                 "fields": [
-                    {"name": "Estado", "value": "Nenhuma pendência acima do limite de idade.", "inline": False},
+                    {"name": "Estado", "value": "Nenhuma fila vencida ou store de memória acima do limiar.", "inline": False},
                     {"name": "Fila atual", "value": report_field(summary), "inline": False},
                 ],
             }],
@@ -200,6 +288,19 @@ def build_payload(summary: Dict[str, Any], decision: Dict[str, str]) -> Dict[str
             }],
         }
     ids = "\n".join(summary.get("aged_ids") or [])[:900] or "nenhum"
+    capacity_ids = summary["capacity"]["warning_ids"]
+    if capacity_ids and not summary.get("aged_ids"):
+        return {
+            "content": f"<@{RODOLFO}> capacidade de memória Hermes acima do limiar",
+            "embeds": [{
+                "title": f"Memória Hermes acima de {summary['capacity']['threshold_percent']:g}%",
+                "color": 15844367,
+                "fields": [
+                    {"name": "Uso", "value": f"```text\n{_capacity_lines(summary)[:850]}\n```", "inline": False},
+                    {"name": "Ação", "value": "Revisar/compactar antes que writes válidos sejam recusados. O monitor não altera memória.", "inline": False},
+                ],
+            }],
+        }
     return {
         "content": f"<@{RODOLFO}> pendências Hermes aguardam revisão",
         "embeds": [{
@@ -209,6 +310,7 @@ def build_payload(summary: Dict[str, Any], decision: Dict[str, str]) -> Dict[str
                 {"name": "Resumo", "value": report_field(summary), "inline": False},
                 {"name": "Por perfil", "value": f"```text\n{_breakdown_lines(summary)[:850]}\n```", "inline": False},
                 {"name": "IDs", "value": f"```text\n{ids}\n```", "inline": False},
+                {"name": "Capacidade", "value": f"```text\n{_capacity_lines(summary)[:850]}\n```", "inline": False},
                 {"name": "Ação", "value": "Revisar manualmente; o monitor não aprova, rejeita ou expira itens.", "inline": False},
             ],
         }],
@@ -270,6 +372,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--channel-id", default=DEFAULT_CHANNEL)
     parser.add_argument("--threshold-hours", type=float, default=24.0)
     parser.add_argument("--reminder-hours", type=float, default=24.0)
+    parser.add_argument("--capacity-threshold-percent", type=float, default=DEFAULT_CAPACITY_THRESHOLD_PERCENT)
     parser.add_argument("--summary-json", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--now-epoch", type=float)
@@ -283,6 +386,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         args.profiles_root,
         now_epoch=now,
         threshold_hours=args.threshold_hours,
+        capacity_threshold_percent=args.capacity_threshold_percent,
     )
     if args.summary_json:
         print(json.dumps(summary, ensure_ascii=False, separators=(",", ":")))
