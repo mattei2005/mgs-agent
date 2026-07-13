@@ -35,6 +35,7 @@ For auditing and safely splitting monolithic agent skills while preserving conte
 - Hermes documentation is authoritative for current product behavior. Local runtime/code is authoritative for MGS patches and the deployed version.
 - Never expose tokens, OAuth material, API keys, or credential values.
 - Separate capability, configuration, credential presence, and real smoke-test success.
+- Treat design, approval, implementation, deployment, and active runtime validation as distinct states. An approved design is not an active protection until the code exists, is deployed in the target runtime, and a readback or behavior test proves that the protection is effective.
 - User-requested state changes follow `AGENT.md`; Critical Subset still requires double-confirmation.
 - Never restart Zeus or another MGS gateway from an active foreground tool chain. Use the safe detached finalizer and Zeus last.
 - A detached restart freezes its validated runtime/config targets at preparation time. Do not schedule while independent review is pending; do not edit targets after scheduling. Late findings require cancelling/pausing the pending finalizer, revalidating, snapshotting again, and creating a new finalizer.
