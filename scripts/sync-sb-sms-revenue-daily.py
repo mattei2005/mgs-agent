@@ -220,6 +220,7 @@ def parse_args():
     ap = argparse.ArgumentParser()
     ap.add_argument('--date', default=default_date, help='closed SB date YYYY-MM-DD; default yesterday in America/Sao_Paulo')
     ap.add_argument('--fetch-only', action='store_true', help='fetch and validate without WordPress write')
+    ap.add_argument('--no-alert', action='store_true', help=argparse.SUPPRESS)
     return ap.parse_args()
 
 
@@ -239,10 +240,11 @@ def main():
         error_text = str(exc).replace('\n', ' ')
         safe = f'{type(exc).__name__}: {error_text[-1000:]}'
         print(json.dumps({'status': 'SYNC_FAILED', 'target_date': args.date, 'error': safe}, ensure_ascii=False))
-        try:
-            discord_alert(safe)
-        except Exception:
-            pass
+        if not args.no_alert and not args.fetch_only:
+            try:
+                discord_alert(safe)
+            except Exception:
+                pass
         return 1
 
 

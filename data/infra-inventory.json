@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-14T12:02:44-04:00",
-    "generated_by": "infra-discovery.sh"
+    "updated_at": "2026-07-14T14:44:29-04:00",
+    "generated_by": "zeus/manual validated update"
   },
   "system_packages": [
     {
@@ -1531,22 +1531,22 @@
       "updated_at": "2026-07-10T05:32:59.005815+00:00"
     },
     {
-      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.4-20260712",
+      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.5-20260714",
       "agent": "zeus",
       "type": "wordpress_plugin",
       "site": "creditoparaveiculo.com",
       "host": "RunCloud Inc02",
       "path": "/home/runcloud2/webapps/creditoparaveiculo/wp-content/plugins/mgs-quiz-carro/",
       "plugin": "mgs-quiz-carro",
-      "version": "1.7.4",
+      "version": "1.7.5",
       "status": "active",
-      "feature": "Quiz car BR + custo, receita líquida e ROI estimado SMS por período + seletor visual de intervalo com clique direto",
-      "package_sha256": "5982835509567016469cad1868750cc2a02e10c8b0edb01134404fc650bf3079",
-      "backup_path": "/home/runcloud2/backups/creditoparaveiculo/mgs-quiz-carro-1.7.3-20260712T165409Z",
+      "feature": "Quiz car BR + custo/receita/ROI SMS + calendário de período + correção responsiva do modelo FMYBC/SMS e carro com fundo transparente",
+      "package_sha256": "05e103e7a19dd796b11f706749a503cf6d3cd095bd1fc1b435bddece678fca5e",
+      "backup_path": "/home/runcloud2/backups/creditoparaveiculo/mgs-quiz-carro-1.7.4-pre-responsive-20260714T184042Z",
       "files": [
         {
           "path": "mgs-quiz-carro.php",
-          "sha256": "c2e1c39120362a14efb3829f673f8a596d3eb26dd95d83e04bddc25fd8572e28",
+          "sha256": "5677764cbb2d1e73ae8830566877dad5fa9bbded0d68672090ff0ea8e388bb15",
           "bytes": 2579
         },
         {
@@ -1558,10 +1558,20 @@
           "path": "includes/class-mgs-quiz-activator.php",
           "sha256": "aeef7381a8a01eaaf57441faafca83501b52ca8d7f30c423addc09db871fd803",
           "bytes": 5549
+        },
+        {
+          "path": "public/css/quiz.css",
+          "sha256": "8f4d70e3044795b6e37abb8250bf8a6e0b5b4aeaecd9bcf44f24dedd4b718115",
+          "bytes": 10405
+        },
+        {
+          "path": "public/images/polo-transparent.webp",
+          "sha256": "491b0eeefa1ed8c776817054fce92937ecc46d85ca1cec3d7b429b99e08863e6",
+          "bytes": 185902
         }
       ],
-      "validation": "PHP lint 7/7; calendar source regression 22/22; local browser direct clicks selected start/end and applied hidden from/to; zero JS errors; production revenue/ROI/default-date/direct-listener smoke passed; four quiz routes HTTP 200; remote temp cleanup passed",
-      "updated_at": "2026-07-12T16:54:34Z",
+      "validation": "PHP lint 7/7; package/live hash readback; plugin ativo v1.7.5; DB car_image_url exato; asset WebP 1124x633 HTTP 200, image/webp, SHA-256 e alpha 0..255 validados; rota pública 200 com CSS v1.7.5; viewports 390px e 360px com scrollWidth=clientWidth e zero overflow visível; inspeção visual confirmou carro completo, centralizado e sem retângulo branco.",
+      "updated_at": "2026-07-14T14:42:27-04:00",
       "db_version": "1.3.0",
       "sms_revenue_backfill": {
         "table": "wp_mgs_quiz_sms_revenue",
@@ -1610,7 +1620,22 @@
           "730_day_limit_message"
         ],
         "query_contract": "existing from/to GET parameters preserved"
-      }
+      },
+      "responsive_fmybc": {
+        "route": "/quiz-car-001-cl001/",
+        "layout_template": "fmybc_sms",
+        "css_sha256": "8f4d70e3044795b6e37abb8250bf8a6e0b5b4aeaecd9bcf44f24dedd4b718115",
+        "image_path": "public/images/polo-transparent.webp",
+        "image_sha256": "491b0eeefa1ed8c776817054fce92937ecc46d85ca1cec3d7b429b99e08863e6",
+        "image_size": "1124x633",
+        "alpha_range": "0..255",
+        "validated_viewports_px": [
+          390,
+          360
+        ]
+      },
+      "source_report": "REPORT-INFRA Zeus quiz FMYBC responsive fix 2026-07-14",
+      "report_infra_discord_message_id": "1526660645813092363"
     },
     {
       "id": "hera-meta-library-persistent-runtime",
@@ -2997,6 +3022,22 @@
       "purpose": "Document persistent SB venv/storage-state paths and post-rebuild validation gates.",
       "validation": "skill_manage patch readback; live cron smoke PASS.",
       "updated_at": "2026-07-11T12:18:07-04:00"
+    },
+    {
+      "id": "zeus-wp-quiz-lead-funnel-br-car-reference",
+      "agent": "zeus",
+      "type": "skill_reference",
+      "path": "/root/.hermes/profiles/zeus/skills/ops/wp-quiz-lead-funnel/references/br-car-creditoparaveiculo.md",
+      "mirror_path": "/root/mgs-agent/profiles/zeus-skills/ops/wp-quiz-lead-funnel/references/br-car-creditoparaveiculo.md",
+      "size_bytes": 18690,
+      "modified_at": "2026-07-14T14:42:27-04:00",
+      "sha256": "eb145e5ccd16f24302a33d2d6eefd631cb3514a63bcb6122f5c642db8dce3fb8",
+      "purpose": "Estado operacional e validações do quiz BR/CAR em creditoparaveiculo.com.",
+      "validation": "Active profile and versioned mirror have identical SHA-256 after documenting mgs-quiz-carro v1.7.5 responsive/transparent-image checks.",
+      "updated_at": "2026-07-14T14:42:27-04:00",
+      "skill": "wp-quiz-lead-funnel",
+      "source_report": "REPORT-INFRA Zeus quiz FMYBC responsive fix 2026-07-14",
+      "report_infra_discord_message_id": "1526660645813092363"
     }
   ],
   "systemd_services": [

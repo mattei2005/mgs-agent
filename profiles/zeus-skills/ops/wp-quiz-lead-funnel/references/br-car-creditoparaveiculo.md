@@ -14,7 +14,13 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 
 `creditoparaveiculo.com` usa o plugin de quiz `mgs-quiz-carro`; não há plugin de chat nesse site. Quando Rodolfo disser “chat” informalmente sobre essas URLs, confirmar o produto real no runtime e tratar o pedido como quiz, sem envolver `mgs-chat-funnels`.
 
-Versão validada em produção em 2026-07-12: `mgs-quiz-carro` v1.7.4.
+Versão validada em produção em 2026-07-14: `mgs-quiz-carro` v1.7.5.
+
+Correção responsiva FMYBC/SMS v1.7.5:
+
+- O layout `fmybc_sms` usa `border-box` no contêiner e nos descendentes, largura total limitada ao viewport e `overflow-x: clip` apenas como proteção. A validação em viewports simulados de 390 px e 360 px deve exigir `documentElement.scrollWidth === documentElement.clientWidth` e zero elementos visíveis excedendo a largura.
+- A imagem do carro usa `display:block`, `width:100%`, `max-width:320px`, `height:auto` e `object-fit:contain`.
+- A quiz `/quiz-car-001-cl001/` usa o asset first-party transparente `public/images/polo-transparent.webp`, em vez do JPEG externo com fundo branco. Validar HTTP 200, `image/webp`, hash do asset, canal alpha real e readback exato de `car_image_url`.
 
 Relatório de custo SMS v1.6.2:
 
