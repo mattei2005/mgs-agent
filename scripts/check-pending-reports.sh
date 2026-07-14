@@ -19,6 +19,18 @@ DISCORD_CHANNEL_ID="${MGS_DISCORD_CHANNEL_ID_OVERRIDE:-1498132022634483894}"
 DISCORD_API_URL="${MGS_DISCORD_API_URL_OVERRIDE:-https://discord.com/api/v10/channels/${DISCORD_CHANNEL_ID}/messages}"
 BOT_TOKEN="${MGS_DISCORD_BOT_TOKEN_OVERRIDE:-${DISCORD_BOT_TOKEN:-}}"
 DRY_RUN="${MGS_DRY_RUN:-0}"
+MISSING_CONFIRMATION_RUNS="${MGS_PENDING_REPORT_CONFIRMATION_RUNS:-2}"
+
+if ! [[ "$MISSING_CONFIRMATION_RUNS" =~ ^[1-9][0-9]*$ ]]; then
+    echo "${LOG_PREFIX} ERRO: MGS_PENDING_REPORT_CONFIRMATION_RUNS deve ser inteiro >= 1." >&2
+    exit 2
+fi
+
+persist_state() {
+    local tmp_file="${STATE_FILE}.tmp.$$"
+    printf '%s\n' "$STATE" > "$tmp_file"
+    mv "$tmp_file" "$STATE_FILE"
+}
 
 post_discord_payload() {
     local payload="$1" reason="${2:-pending_report}" http_code
@@ -90,6 +102,7 @@ ANTISPAM_SECONDS=86400  # 24h
 
 PENDING_SKILLS=()
 RESOLVED_SKILLS=()
+CANDIDATE_SKILLS=()
 
 # Verificar cada diretório de skills
 for dir_key in "${!SKILL_DIRS[@]}"; do
@@ -114,6 +127,25 @@ for dir_key in "${!SKILL_DIRS[@]}"; do
 
         # Verificar se skill está no inventário
         if echo "$inventory_skills" | grep -qx "$skill_name"; then
+            # Uma ausência isolada pode ocorrer durante regravações concorrentes do
+            # inventário. Limpar o candidato sem alertar quando o registro reaparece.
+            candidate_count=$(echo "$STATE" | python3 -c "
+import json, sys
+d = json.load(sys.stdin)
+print(d.get('candidates', {}).get('${skill_key}', {}).get('consecutive_misses', 0))
+" 2>/dev/null || echo "0")
+            if (( ${candidate_count:-0} > 0 )); then
+                STATE=$(STATE_JSON="$STATE" python3 - "$skill_key" <<'PY'
+import json, os, sys
+skill_key = sys.argv[1]
+d = json.loads(os.environ["STATE_JSON"])
+d.get('candidates', {}).pop(skill_key, None)
+print(json.dumps(d, indent=2))
+PY
+)
+                echo "${LOG_PREFIX} RECONCILIADO: ${skill_key} reapareceu antes da confirmação; alerta suprimido"
+            fi
+
             # Está no inventário — verificar se estava pendente (resolver)
             was_alerted=$(echo "$STATE" | python3 -c "
 import json, sys
@@ -127,7 +159,36 @@ print(alerted.get('${skill_key}', {}).get('alerted_at', ''))
                 echo "${LOG_PREFIX} RESOLVIDO: ${skill_key} agora está no inventário"
             fi
         else
-            # NÃO está no inventário — verificar anti-spam
+            # NÃO está no inventário — exigir ausências consecutivas antes do alerta.
+            candidate_count=$(STATE_JSON="$STATE" python3 - "$skill_key" "$NOW" "$skill_name" "$agent" "$skill_full_path" <<'PY'
+import json, os, sys
+skill_key, now, skill_name, agent, skill_path = sys.argv[1:6]
+d = json.loads(os.environ["STATE_JSON"])
+candidates = d.setdefault('candidates', {})
+previous = candidates.get(skill_key, {})
+count = int(previous.get('consecutive_misses', 0)) + 1
+candidates[skill_key] = {
+    'first_seen_at': int(previous.get('first_seen_at', now)),
+    'last_seen_at': int(now),
+    'consecutive_misses': count,
+    'skill_name': skill_name,
+    'agent': agent,
+    'path': skill_path,
+}
+print(count)
+print(json.dumps(d, indent=2))
+PY
+)
+            candidate_runs=$(printf '%s\n' "$candidate_count" | head -n1)
+            STATE=$(printf '%s\n' "$candidate_count" | tail -n +2)
+
+            if (( candidate_runs < MISSING_CONFIRMATION_RUNS )); then
+                CANDIDATE_SKILLS+=("${skill_key}")
+                echo "${LOG_PREFIX} CANDIDATO: ${skill_key} ausente (${candidate_runs}/${MISSING_CONFIRMATION_RUNS}); aguardando confirmação"
+                continue
+            fi
+
+            # Ausência confirmada — verificar anti-spam.
             last_alerted=$(echo "$STATE" | python3 -c "
 import json, sys
 d = json.load(sys.stdin)
@@ -162,13 +223,13 @@ if (( ${#PENDING_SKILLS[@]} > 0 )); then
 import json, sys
 mention, rows, count = sys.argv[1], sys.argv[2], sys.argv[3]
 print(json.dumps({
-  'content': f'{mention} pending report detectado',
+  'content': f'{mention} skill não inventariada detectada',
   'embeds': [{
-    'title': 'Skills sem REPORT-INFRA',
+    'title': 'Skill não inventariada',
     'color': 15158332,
     'fields': [
       {'name': 'Pendências', 'value': count, 'inline': True},
-      {'name': 'Ação', 'value': 'Enviar REPORT-INFRA e atualizar `infra-inventory.json`.', 'inline': False},
+      {'name': 'Ação', 'value': 'Revisar o inventário e confirmar o REPORT-INFRA correspondente.', 'inline': False},
       {'name': 'Itens', 'value': f'```text\n{rows[:900]}\n```', 'inline': False},
     ]
   }]
@@ -187,6 +248,7 @@ PY
 import json, os, sys
 skill_key, now, skill_name, agent, skill_path = sys.argv[1:6]
 d = json.loads(os.environ["STATE_JSON"])
+d.get('candidates', {}).pop(skill_key, None)
 d.setdefault('alerted', {})[skill_key] = {
     'alerted_at': int(now),
     'skill_name': skill_name,
@@ -197,12 +259,16 @@ print(json.dumps(d, indent=2))
 PY
 )
         done
-        echo "$STATE" > "$STATE_FILE"
+        persist_state
     else
         echo "${LOG_PREFIX} ERRO ao enviar Discord: HTTP ${HTTP_CODE}"
     fi
 else
-    echo "${LOG_PREFIX} OK — nenhuma skill pendente de REPORT-INFRA"
+    if (( ${#CANDIDATE_SKILLS[@]} > 0 )); then
+        echo "${LOG_PREFIX} AGUARDANDO — ${#CANDIDATE_SKILLS[@]} ausência(s) candidata(s), sem alerta até confirmação"
+    else
+        echo "${LOG_PREFIX} OK — nenhuma skill não inventariada confirmada"
+    fi
 fi
 
 # Enviar notificações de resolução
@@ -220,12 +286,14 @@ if (( ${#RESOLVED_SKILLS[@]} > 0 )); then
         skill_name="${skill_key#*:}"
         agent="${skill_key%%:*}"
 
-        # Buscar commit mais recente do inventário para evidência
-        last_commit=$(cd "$BASE_DIR" && git log --oneline -1 -- data/infra-inventory.json 2>/dev/null | awk '{print $1}' || echo "N/A")
+        # Buscar o commit que introduziu especificamente a entrada da skill, não o
+        # último commit global que tocou o inventário por qualquer outro motivo.
+        entry_commit=$(cd "$BASE_DIR" && git log -S"\"name\": \"${skill_name}\"" --format='%h' -1 -- data/infra-inventory.json 2>/dev/null || true)
+        entry_commit=${entry_commit:-N/A}
 
-        payload=$(python3 - "$skill_name" "$agent" "$last_commit" <<'PY'
+        payload=$(python3 - "$skill_name" "$agent" "$entry_commit" <<'PY'
 import json, sys
-skill_name, agent, last_commit = sys.argv[1:4]
+skill_name, agent, entry_commit = sys.argv[1:4]
 print(json.dumps({
   'content': '',
   'embeds': [{
@@ -234,19 +302,38 @@ print(json.dumps({
     'fields': [
       {'name': 'Skill', 'value': f'`{skill_name}`', 'inline': True},
       {'name': 'Agent', 'value': f'`{agent}`', 'inline': True},
-      {'name': 'Inventário', 'value': f'commit `{last_commit}`', 'inline': False},
+      {'name': 'Evidência', 'value': f'registro validado; commit de inclusão `{entry_commit}`', 'inline': False},
     ]
   }]
 }))
 PY
 )
 
-        # Persistir remoção do state ANTES de enviar (idempotência)
-        STATE=$(STATE_JSON="$STATE" python3 - "$skill_key" "$skill_name" "$agent" <<'PY'
+        # Persistir intenção de entrega, mas manter o alerta aberto até o Discord
+        # confirmar HTTP 2xx. Assim uma falha de transporte não perde a resolução.
+        STATE=$(STATE_JSON="$STATE" python3 - "$skill_key" "$NOW" <<'PY'
+import json, os, sys, datetime
+skill_key, now = sys.argv[1:3]
+d = json.loads(os.environ["STATE_JSON"])
+d.setdefault('delivery', {})[skill_key] = {
+    'kind': 'pending_resolved',
+    'status': 'pending',
+    'attempted_at': int(now),
+}
+print(json.dumps(d, indent=2))
+PY
+)
+        persist_state
+
+        HTTP_CODE=$(post_discord_payload "$payload" "pending_resolved" || true)
+
+        if [[ "$HTTP_CODE" =~ ^20[01]$ ]]; then
+            STATE=$(STATE_JSON="$STATE" python3 - "$skill_key" "$skill_name" "$agent" <<'PY'
 import json, os, sys, datetime
 skill_key, skill_name, agent = sys.argv[1:4]
 d = json.loads(os.environ["STATE_JSON"])
-entry = d.get('alerted', {}).pop(skill_key, None)
+d.get('alerted', {}).pop(skill_key, None)
+d.get('delivery', {}).pop(skill_key, None)
 d.setdefault('resolved', {})[skill_key] = {
     'resolved_at': datetime.datetime.now(datetime.timezone.utc).isoformat() + 'Z',
     'skill_name': skill_name,
@@ -255,16 +342,26 @@ d.setdefault('resolved', {})[skill_key] = {
 print(json.dumps(d, indent=2))
 PY
 )
-        echo "$STATE" > "$STATE_FILE"
-
-        HTTP_CODE=$(post_discord_payload "$payload" "pending_resolved" || true)
-
-        if [[ "$HTTP_CODE" =~ ^20[01]$ ]]; then
+            persist_state
             echo "${LOG_PREFIX} Resolução enviada para ${skill_key}"
         else
+            STATE=$(STATE_JSON="$STATE" python3 - "$skill_key" "$HTTP_CODE" <<'PY'
+import json, os, sys
+skill_key, http_code = sys.argv[1:3]
+d = json.loads(os.environ["STATE_JSON"])
+delivery = d.setdefault('delivery', {}).setdefault(skill_key, {})
+delivery['status'] = 'failed'
+delivery['http_code'] = http_code
+print(json.dumps(d, indent=2))
+PY
+)
+            persist_state
             echo "${LOG_PREFIX} ERRO ao enviar resolução Discord: HTTP ${HTTP_CODE}"
         fi
     done
 fi
+
+# Persistir também candidatos/reconciliações que não geraram POST externo.
+persist_state
 
 echo "${LOG_PREFIX} check-pending-reports.sh concluído"
