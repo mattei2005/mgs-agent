@@ -53,3 +53,5 @@ O lote pode concluir com:
 - Não usar frame inicial sozinho: intro/fade pode ser branco ou preto.
 - Não mover o source antes de concluir o gate correspondente. Para válido, a cópia limpa deve passar readback, checksum e `clean=true`; para rejeitado, a evidência técnica deve estar registrada.
 - `05_REJECTED` é status técnico/operacional, não autorização para deletar o original.
+- Quando houver autorização explícita para enviar um rejeitado à lixeira, consultar antes `ownedByMe` e `capabilities.canTrash/canDelete` no arquivo real. Em pastas My Drive compartilhadas, o Ares pode ter `canEdit=true` e `canMoveItemWithinDrive=true`, mas `canTrash=false` porque o uploader continua proprietário.
+- Se `canTrash=false`, não simular exclusão removendo o parent, deixando o arquivo órfão ou movendo-o para outra pasta. Manter o original no status atual, informar que o proprietário precisa enviá-lo à lixeira e validar depois por readback real.
