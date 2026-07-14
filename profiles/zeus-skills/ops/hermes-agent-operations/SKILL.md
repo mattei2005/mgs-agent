@@ -120,6 +120,12 @@ Primary reference: `references/honcho-git-operations.md`.
 
 Honcho is hypothesis/context only; canonical MGS sources remain authoritative.
 
+### REPORT-INFRA pending alerts, inventory mismatch, or resolver attribution
+
+Primary reference: `references/pending-report-monitor-attribution.md`.
+
+Use it before explaining an alert labeled “sem REPORT-INFRA” or “pending report”. Inspect the monitor’s real predicate, separate inventory presence from actual Discord report evidence, and verify whether a displayed commit changed the named artifact or is merely the latest unrelated commit touching the inventory.
+
 ### Historical or highly specific playbook lookup
 
 Use `references/reference-catalog.md` only to locate the exact support file, then load that file. Do not treat the catalog as required reading.
