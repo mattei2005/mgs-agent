@@ -29,6 +29,7 @@ Quando o GitHub `main` parecer velho apesar de haver commits/mudanças recentes 
 Pitfalls duráveis:
 
 - Watcher `active` não significa GitHub atualizado; ele pode estar abortando por guardrail ou rodando em branch lateral.
+- Um watcher baseado em `inotify` iniciado **depois** que a árvore já ficou dirty não recebe retroativamente esses eventos. Só iniciar/reiniciar `mgs-autocommit.service` pode deixar mudanças antigas indefinidamente sem commit. Para catch-up automático, confirme o monitor pronto, gere um evento real `modify` em um arquivo autorizado já dirty (reescrever conteúdo idêntico é suficiente), aguarde o flush e valide `status` limpo + `HEAD == origin/main`. `utime`/mudança apenas de atributo não serve quando o watcher escuta somente `modify,create,delete,move`. Se reduzir temporariamente `MGS_AUTOCOMMIT_BATCH_MAX_WAIT_SECONDS`, restaure o ambiente e o serviço normal após o commit.
 - Hook hardcoded `git push origin main` pode registrar `Everything up-to-date` mesmo com commits novos em outra branch; em `main`, preferir `git push origin HEAD:main`, e fora de `main` logar falha explícita.
 - Guardrail de nome sensível deve bloquear credenciais reais sem travar ferramentas defensivas com nomes como `*_secret_scan.py`.
 - Monitor deve checar estado Git vivo, não só linhas de `auto-push.log`.
