@@ -55,6 +55,7 @@ This separates three claims that must not be conflated: all original paths were 
 - Before staging, fingerprint `HEAD`, porcelain status, tracked binary diff, cached diff, service PIDs, patch SHA, and target SHA. Abort on any drift.
 - A Git post-merge hook may automatically run the MGS guard and apply the consolidated patch. Therefore, after `merge --ff-only`, inspect the guard log and run reverse-check before issuing a second explicit `git apply`. If the second apply returns nonzero because the patch is already present, do not replay or roll back blindly: verify target `HEAD`, patch reverse-check, expected status count, and byte identity against the reviewed port. Record the wrapper nonzero honestly while classifying the actual staged state from readback.
 - Keep the pre-update stash by immutable commit hash; never pop it during staging. Rollback must avoid `git reset --hard` and preserve the stash until post-restart acceptance is complete.
+- Treat `npm install-scripts approve --dry-run` as potentially mutating on npm 12: it can still add `allowScripts` entries to `package.json`. For read-only inspection, prefer `npm install-scripts ls --all --json`. If an approval dry-run is used, fingerprint Git status first and inspect `git diff -- package.json` immediately; restore any unintended write before accepting the staged surface.
 
 ## Verification output
 

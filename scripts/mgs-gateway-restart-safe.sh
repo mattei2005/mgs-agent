@@ -99,6 +99,15 @@ SNAPSHOT_FILES=(
 for agent in "${ORDERED_AGENTS[@]}"; do
   SNAPSHOT_FILES+=("/root/.hermes/profiles/$agent/config.yaml")
 done
+if printf '%s\n' "${ORDERED_AGENTS[@]}" | grep -qx 'ares'; then
+  SNAPSHOT_FILES+=(
+    "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md"
+    "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/current-pilot-contract.md"
+    "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/current-reporting-contract.md"
+    "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/reference-catalog.md"
+    "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/references/current-operational-pitfalls.md"
+  )
+fi
 : > "$SNAPSHOT"
 for file in "${SNAPSHOT_FILES[@]}"; do
   [[ -f "$file" ]] && sha256sum "$file" >> "$SNAPSHOT"

@@ -2,7 +2,8 @@
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
     "updated_at": "2026-07-13T21:41:02-04:00",
-    "generated_by": "infra-discovery.sh"
+    "generated_by": "infra-discovery.sh",
+    "last_updated": "2026-07-13T21:47:31-04:00"
   },
   "system_packages": [
     {
@@ -757,11 +758,11 @@
       "agent": "zeus",
       "type": "gateway_restart_guardrail",
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
-      "sha256": "928ad98ca981b7a83216e6c1ab2eb9709a91c95fe27c390591f891ec495f6c25",
+      "sha256": "a9987ffcb760e1babcf8ae706a7c07423720ed2a67d3eae38812371fe621a1bc",
       "purpose": "Prevent a detached restart from loading code/config changed after finalizer preparation; preserve the requested non-Zeus order while forcing Zeus last; snapshot every changed runtime module; abort on drift; py_compile/import runtime; and reject startup-steer calls without class method definitions before restarting any gateway.",
-      "validation": "bash -n PASS; requested-order tests PASS for Ares -> Atena -> Zeus and Zeus-last normalization; changed-runtime snapshot coverage PASS with zero missing modules; py_compile/import smoke PASS",
+      "validation": "bash -n PASS; requested-order tests PASS for Ares -> Atena -> Zeus and Zeus-last normalization; changed-runtime snapshot coverage PASS with zero missing modules; Ares refactored skill and four current references included in frozen target; py_compile/import smoke PASS",
       "status": "deployed_validated",
-      "updated_at": "2026-07-13T21:33:46-04:00"
+      "updated_at": "2026-07-13T21:48:25-04:00"
     },
     {
       "id": "mgs-gateway-restart-busy-steer-startup-20260711T043316Z-3105180",
@@ -2367,17 +2368,18 @@
         "tui_build": "PASS",
         "npm_audit": "0 vulnerabilities",
         "port_live_byte_compare": "34/34 identical",
-        "services": "3/3 active, 0 failed, PIDs unchanged"
+        "services": "3/3 active, 0 failed, PIDs unchanged",
+        "deep_recheck": "748 guard + 233 critical runtime + 191 isolated platform tests PASS; watchdog manual run OK"
       },
       "hashes": {
         "patch": "8ce047859605abf2d5929bf0bf098546376bf42c1e22a465905a60a742e1d381",
         "guard": "b4a152f1e289882841cec883b019b1f21157a05bb9cd98b45c9d511af071c9af",
         "updater": "40ea8351283e027eed1cb33b2bb909683b0a4c4fbff971613ea760e4ef25d98d",
         "manifest": "d170669eadfd707ddfbb940fbd441a17c69d3bbb05189eb097a675f2ebbfd733",
-        "procedure_reference": "a032b61e666b6d80df048b36e7f414fa6bf8ca4b4c67d51f38104cccf390f920"
+        "procedure_reference": "1d932920e11d7d0f4b5b0dd2b943cb2524f0254abe5c110f4c0ca80e3909cf1a"
       },
       "activation_gate": "separate Rodolfo confirmation required before venv swap and detached restart Ares -> Atena -> Zeus",
-      "updated_at": "2026-07-13T20:36:36-04:00"
+      "updated_at": "2026-07-13T21:47:31-04:00"
     }
   ],
   "profile_skill_references": [
@@ -2463,12 +2465,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/ares/skills/growth/meta-ads-intraday-operations/SKILL.md",
       "versioned_path": "/root/mgs-agent/profiles/ares-skills/growth/meta-ads-intraday-operations/SKILL.md",
-      "size_bytes": 20143,
-      "modified_at": "2026-07-09T13:01:48-04:00",
-      "sha256": "f15286e414498940aa379bd683fe55a874b6aa99ee38fb9c307f82b7731709a7",
-      "runtime_versioned_sha_match": false,
-      "updated_at": "2026-07-09T13:02:40-04:00",
-      "validation": "versioned skill updated for HOA gestor report format; ID REC hidden from HOA Discord tables; script py_compile/sample output OK; linked reference sha256=7be214ed5bce"
+      "size_bytes": 12336,
+      "modified_at": "2026-07-13T21:45:56-04:00",
+      "sha256": "9dfdfc6662a6913571741c554c6056fe1155895c753564d3fae640a0bd96729a",
+      "runtime_versioned_sha_match": true,
+      "updated_at": "2026-07-13T21:47:11-04:00",
+      "validation": "authorized progressive-disclosure refactor: SKILL.md reduced 24840 -> 12336 bytes; frontmatter and seven extracted source blocks preserved exactly; 19 references/20 files; anti-loop guard present; live/mirror directory hashes identical; Hermes frontmatter validator and Ares skill discovery PASS"
     },
     {
       "profile": "ares",
@@ -3497,8 +3499,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
-      "size_bytes": 10048,
-      "modified_at": "2026-07-13T21:32:59-04:00"
+      "size_bytes": 10686,
+      "modified_at": "2026-07-13T21:48:10-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-grok-generate.py",
