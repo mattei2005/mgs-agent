@@ -31,6 +31,17 @@ Correção importante validada em 2026-07-02: o ID `14ica5TVauTrzAxcl4T-ViJorF89
 
 Regra de REPORT-INFRA para mudanças de skill/script/data/config feitas pelo Ares: não declarar “enviei o REPORT-INFRA” com base apenas em intenção. Primeiro executar o envio real pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh` ou, se usar fallback textual, validar HTTP 204 e confirmar via Discord API que a mensagem aparece em `#alerts-infra` (`1498132022634483894`) antes de afirmar na thread original. Não usar scripts com nome de outro agente como caminho padrão (`ares-report-infra.sh`) quando houver helper canônico MGS.
 
+### Gate de propriedade no UPLOAD MANUAL
+
+Para novos arquivos enviados pela Kelly ou por outro colaborador em `UPLOAD MANUAL`, a propriedade do arquivo bruto deve pertencer à conta Google canônica do Rodolfo antes do processamento.
+
+1. Consultar no Drive real `about.user.permissionId` da conta OAuth canônica e, para cada source, `owners`, `ownedByMe` e `capabilities(canTrash,canDelete,canEdit)`.
+2. Não inferir propriedade pela pasta: em `My Drive`, o uploader pode continuar proprietário mesmo dentro de uma pasta do Rodolfo.
+3. Se o source não pertencer à conta canônica do Rodolfo, marcar o intake como bloqueado por ownership e não tratar, mover ou concluir o arquivo. Solicitar que o proprietário transfira a propriedade ao Rodolfo.
+4. Após a transferência, repetir o GET/readback e processar somente quando o owner/permission ID corresponder à conta canônica.
+5. A cópia limpa enviada pelo OAuth do Rodolfo para `01_READY` normalmente já fica no nome do Rodolfo; o bruto movido para `99_LEGACY` conserva o owner original. Por isso, o gate deve ocorrer antes do tratamento para que toda a linhagem fique sob a propriedade exigida.
+6. Não trocar o OAuth canônico do Ares pela conta do colaborador e não migrar a estrutura para Shared Drive sem plano e aprovação explícita do Rodolfo.
+
 ### Fonte canônica do OAuth Drive
 
 - O runtime de write usa `/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json` como cache combinado canônico (`client_id`, `client_secret`, `refresh_token`), a mesma fonte validada pelo watchdog.
