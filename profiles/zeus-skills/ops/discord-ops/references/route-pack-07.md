@@ -103,6 +103,8 @@ Somente habilitar live progress se Rodolfo pedir explicitamente essa UX. Nesse c
 
 Correção MGS validada: separar progresso técnico de loop entre agentes. Tool progress deve permanecer desligado; loops/ACK chatter também exigem correção própria de filtros, mentions e lifecycle. Ver `references/discord-live-progress-vs-agent-loop-pollution-2026-06-16.md`.
 
+Pitfall confirmado em 2026-07-14: `agent/conversation_loop.py` emite o lifecycle status `📦 Pre-API compression: ...`, mas o filtro `_MOBILE_CHAT_NOISY_STATUS_RE` em `gateway/run.py` cobria `preflight compression` e não `pre-api compression`. Por isso o banner podia aparecer no Discord mesmo com `display.platforms.discord.tool_progress: off`. Primeiro medir a sessão em `state.db` e distinguir compactação legítima por contexto de inflação evitável por tool loop. Para suprimir somente o ruído visual, ampliar o filtro para a classe exata `pre-api compression` e adicionar regressão de `_prepare_gateway_status_message()` para Discord; não desligar compression nem elevar threshold para mascarar tool loop. Patch de runtime e restart continuam sendo ação operacional separada e autorizada.
+
 Padrão correto:
 - Confirmar o sintoma no print/logs (`agent.log`/`errors.log`) e distinguir: retry interno pode continuar, mas não deve poluir Discord.
 - Corrigir no gateway em `_prepare_gateway_status_message(...)`, aplicando a supressão de status ruidoso também para `Platform.DISCORD`.
