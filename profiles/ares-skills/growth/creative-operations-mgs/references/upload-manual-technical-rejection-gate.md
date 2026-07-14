@@ -6,8 +6,14 @@ Use dentro do intake canônico quando um arquivo real da fila não contém mater
 
 1. Não rejeite por nome, tamanho ou thumbnail isoladamente.
 2. Para vídeo, baixe o arquivo e amostre frames próximos de 20%, 50% e 80% da duração real.
-3. Confirme o defeito por evidência técnica e visual. Para vídeo uniforme/branco, registre por frame ao menos média RGB, desvio e extremos; tamanho muito pequeno é apenas indício.
-4. Se algum frame mostrar conteúdo útil, interrompa a rejeição automática e faça classificação visual normal.
+3. Se a primeira amostragem parecer branca, uniforme, corrompida ou inconclusiva, a rejeição ainda não está autorizada. Faça uma segunda tentativa por outra abordagem antes de decidir:
+   - verificar frames no início e no fim, além dos pontos intermediários;
+   - varrer todos os frames decodificados e contar hashes/variação de luminância e cor;
+   - comparar com uma renderização independente quando disponível, como a thumbnail gerada pelo próprio Drive ou outro decoder/player;
+   - consultar revisões e possíveis cópias do arquivo no Drive para descartar versão errada ou upload incompleto.
+4. Confirme o defeito por evidência técnica e visual de pelo menos duas abordagens independentes. Para vídeo uniforme/branco, registre total de frames, hashes distintos, luminância/crominância ou média RGB, variação entre frames e resultado visual; tamanho muito pequeno é apenas indício.
+5. Se algum frame, revisão ou renderização alternativa mostrar conteúdo útil, interrompa a rejeição automática e faça classificação visual normal.
+6. Se a classificação de ângulo/pessoa continuar incerta, tente novamente com frames adicionais/contact sheet antes de usar `UNKNOWN` ou rejeitar. Falha da primeira tentativa nunca encerra a análise.
 
 ## Tratamento do inválido
 

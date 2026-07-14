@@ -14,7 +14,13 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 
 `creditoparaveiculo.com` usa o plugin de quiz `mgs-quiz-carro`; não há plugin de chat nesse site. Quando Rodolfo disser “chat” informalmente sobre essas URLs, confirmar o produto real no runtime e tratar o pedido como quiz, sem envolver `mgs-chat-funnels`.
 
-Versão validada em produção em 2026-07-14: `mgs-quiz-carro` v1.7.5.
+Versão validada em produção em 2026-07-14: `mgs-quiz-carro` v1.7.6.
+
+Correção do filtro de período v1.7.6:
+
+- O botão `Aplicar` do seletor de período grava `from`/`to` e submete o formulário GET completo `mgsqReportFilters`, recarregando cards, custos, receita, ROI, gráficos e listas com todos os filtros atuais.
+- O botão `Filtrar relatório` permanece visível e funcional como caminho alternativo explícito.
+- Datas incompletas continuam bloqueadas no calendário; nenhum submit ocorre até início e fim estarem selecionados.
 
 Correção responsiva FMYBC/SMS v1.7.5:
 

@@ -54,8 +54,9 @@ async def main():
         assert apply_query.get('leads_per_page') == ['25'], apply_query
 
         await page.select_option('select[name="leads_per_page"]', '10')
-        await page.get_by_role('button', name='Filtrar relatório').click()
-        await page.wait_for_load_state('domcontentloaded')
+        filter_button = page.get_by_role('button', name='Filtrar relatório')
+        async with page.expect_navigation(wait_until='domcontentloaded'):
+            await filter_button.evaluate('(el) => el.click()')
         filter_query = parse_qs(urlparse(page.url).query)
         assert filter_query.get('from') == ['2026-07-13'], filter_query
         assert filter_query.get('to') == ['2026-07-14'], filter_query
