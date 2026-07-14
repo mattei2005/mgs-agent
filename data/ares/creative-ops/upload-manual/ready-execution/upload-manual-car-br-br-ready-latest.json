@@ -1,943 +1,1640 @@
 {
   "done": true,
-  "generated_at_utc": "2026-07-12T04:18:46.269422+00:00",
+  "generated_at_utc": "2026-07-14T18:54:38.055786+00:00",
   "auth_mode": "oauth_user",
+  "thread_id": "1526658144183517204",
+  "requested_by": "Kelly",
   "operation": "CAR_BR_BR",
-  "counts": {
-    "total": 27,
-    "IMG": 18,
-    "VID": 9,
-    "clean_true": 27,
-    "drive_readback_verified": 27,
-    "sha256_verified": 27,
-    "sources_archived": 27,
-    "upload_pending_after": 0
+  "source_inventory_csv": "/root/mgs-agent/data/ares/creative-ops/upload-manual/live-intake/upload-manual-inventory-20260714T184710Z.csv",
+  "folders": {
+    "UPLOAD_MANUAL": {
+      "id": "1ghzwA-zjBgv7mBJtS_z4wQQUbr7KgQ_f",
+      "path": "MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL"
+    },
+    "VID_READY": {
+      "id": "1b3WuqfhqNHgj6Xns4mnPiRsVp2rEEdxc",
+      "path": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY"
+    },
+    "VID_REJECTED": {
+      "id": "1tfCBFYNNXVD_VOXJQzUZ39qmCaUUelmF",
+      "path": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/05_REJECTED"
+    },
+    "VID_LEGACY": {
+      "id": "1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+      "path": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/99_LEGACY"
+    }
   },
-  "destinations": {
-    "IMG_READY": "https://drive.google.com/drive/folders/1HXYANWkefJZSZnce1_iKlmI3eHzYQBQ0",
-    "VID_READY": "https://drive.google.com/drive/folders/1b3WuqfhqNHgj6Xns4mnPiRsVp2rEEdxc",
-    "IMG_LEGACY": "https://drive.google.com/drive/folders/1UBrAMUNYTUKYvAKj_NQZVjhrkjEhMpL8",
-    "VID_LEGACY": "https://drive.google.com/drive/folders/1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl"
-  },
-  "report_csv": "/root/mgs-agent/data/hera/upload-manual/ready-execution/upload-manual-car-br-br-ready-20260712T041541Z.csv",
   "rows": [
     {
-      "ts_utc": "2026-07-12T04:15:48.482983+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
+      "index": 1,
       "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "12klliCBTt5-q4lxBlV-LdouNdmgeYqt5",
-      "source_filename": "10_53 - FEED Financiamento (Brasil) (1080 x 1080 px).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NS_002.png",
-      "drive_file_id": "1bs4URBqxKAkBuVdDYsdegdPeh5P76SXB",
-      "webViewLink": "https://drive.google.com/file/d/1bs4URBqxKAkBuVdDYsdegdPeh5P76SXB/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1080,
-      "aspect_ratio": "1:1",
-      "placement_fit": "FEED",
-      "p_orient": "NS",
-      "angle": "ELETRICO_SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "51df5de47981f41301dd6e4294ea4cdc39675aa4e779eec9d069d1fa4a3565e3",
-      "bytes_clean": 1278014,
-      "drive_md5": "730c4f1f8b3a06185f74b50bdacdd3ba",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NS_002.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:15:55.712477+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "18jeM-smPeSA5iZ9Ie2jYM7JSAY6acoKl",
-      "source_filename": "11_57 - Story Financiamento (Brasil).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NV_003.png",
-      "drive_file_id": "1qx2XXB-puiJnDfAElgrnUTADfiQmNX06",
-      "webViewLink": "https://drive.google.com/file/d/1qx2XXB-puiJnDfAElgrnUTADfiQmNX06/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "NV",
-      "angle": "ELETRICO_SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "15a7bc210a86f5cb4105bd086633ab5b63da03c19c64ae70cb0b549302ddd576",
-      "bytes_clean": 1596009,
-      "drive_md5": "3727cfbac224cda438247a3b48126f48",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NV_003.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:16:01.623424+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1jKx-8VcXZBseId1jovhzCnuLRp6EFkNb",
-      "source_filename": "12_50 - FEED Financiamento (Brasil) (1080 x 1080 px).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_SEM_ENTRADA_NS_002.png",
-      "drive_file_id": "1scCkqXnoJXV82WGnUsMdrVr_ortS2N2D",
-      "webViewLink": "https://drive.google.com/file/d/1scCkqXnoJXV82WGnUsMdrVr_ortS2N2D/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1080,
-      "aspect_ratio": "1:1",
-      "placement_fit": "FEED",
-      "p_orient": "NS",
-      "angle": "SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "f4b05a69b14e2675d558b77c6a1f116c5367d4ec6f917709b3a0ec01330e5237",
-      "bytes_clean": 751385,
-      "drive_md5": "e949ede1611ba5d120572484a2f2c836",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_SEM_ENTRADA_NS_002.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:16:09.108093+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1IrnuPrkvwR5aAFXlGl_cM36F3YX4FxKt",
-      "source_filename": "13_55 - Story Financiamento (Brasil).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NV_004.png",
-      "drive_file_id": "1mzLToAEq3ST_4K_BQAX1AZ-skqGCVHPE",
-      "webViewLink": "https://drive.google.com/file/d/1mzLToAEq3ST_4K_BQAX1AZ-skqGCVHPE/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "NV",
-      "angle": "ELETRICO_SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "555bab813387a921ac55bb459ac304e86dc5b8ca81104635c8124919aea1a6d7",
-      "bytes_clean": 1912502,
-      "drive_md5": "95d737e24b0c5064010d6e899bd8ba2f",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NV_004.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:16:16.009467+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1VgDaJCdpm184O66fJJ7-m_xoOiPZK3-w",
-      "source_filename": "14_56 - Story Financiamento (Brasil).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_SEM_ENTRADA_NV_003.png",
-      "drive_file_id": "1qgVJpkH2dgnAJvDQ5bnMJJJtPt-k4frL",
-      "webViewLink": "https://drive.google.com/file/d/1qgVJpkH2dgnAJvDQ5bnMJJJtPt-k4frL/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "NV",
-      "angle": "SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "50bde80da5c6c25fe852d91ea33bacb36f47721e14e4c29e7c45dfea568b5904",
-      "bytes_clean": 1342416,
-      "drive_md5": "65304825fcdb071f91449973ebde8f19",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_SEM_ENTRADA_NV_003.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:16:22.790727+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1weFpsEUFxSrVYOymOLkbFa_rTPqNv8w0",
-      "source_filename": "15_55 - FEED Financiamento (Brasil) (1080 x 1080 px).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NS_003.png",
-      "drive_file_id": "1j3K27mHjdcffv3CcJCKij1pgql83Zr8B",
-      "webViewLink": "https://drive.google.com/file/d/1j3K27mHjdcffv3CcJCKij1pgql83Zr8B/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1080,
-      "aspect_ratio": "1:1",
-      "placement_fit": "FEED",
-      "p_orient": "NS",
-      "angle": "ELETRICO_SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "e7278d1c1da6c1ee997df91240b5d9d7910ea65e4fc3afb0cad37bb68f18dbfb",
-      "bytes_clean": 1326528,
-      "drive_md5": "544400af99bdfb75dea45a10fa77f4bf",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NS_003.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:16:28.815851+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "14V153JGRC4CvuNUBoKqIspFFwC-yf4g_",
-      "source_filename": "16_49 - FEED Financiamento (Brasil) (1080 x 1080 px).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_CARRO_NOVO_NS_001.png",
-      "drive_file_id": "1m08aRoYIA7zvDegmWD1td4Humr5oBNMt",
-      "webViewLink": "https://drive.google.com/file/d/1m08aRoYIA7zvDegmWD1td4Humr5oBNMt/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1080,
-      "aspect_ratio": "1:1",
-      "placement_fit": "FEED",
-      "p_orient": "NS",
-      "angle": "CARRO_NOVO",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "59277e07ea90f6fd4b39aabd1ad148a86d025a5e289437a7266a6ee7ccccf159",
-      "bytes_clean": 1085040,
-      "drive_md5": "5aaefbc5551d6ab33039e668d561ab86",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_CARRO_NOVO_NS_001.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:16:35.210838+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "19jeQSmpTQ4oVe3NQ-SP_ED30G-U6Dgyn",
-      "source_filename": "17_52- Feed Financiamento (Brasil) (1080 x 1080 px).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_CARRO_NOVO_NS_002.png",
-      "drive_file_id": "1QwDiheruYq2uqnovd5SIJm6bhuzbqU5x",
-      "webViewLink": "https://drive.google.com/file/d/1QwDiheruYq2uqnovd5SIJm6bhuzbqU5x/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1080,
-      "aspect_ratio": "1:1",
-      "placement_fit": "FEED",
-      "p_orient": "NS",
-      "angle": "CARRO_NOVO",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "ae4087c4725afd1a51735387f592dc1d3d47ddef533b24e1bd76e9dd0ba4aff6",
-      "bytes_clean": 951608,
-      "drive_md5": "75d3faa0b3690475e347b6cd52bcf9ad",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_CARRO_NOVO_NS_002.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:16:42.090281+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "16A3hEpE1aQMtb1DacCWjuZ2enGYwBe5r",
-      "source_filename": "18_49 - Story Financiamento (Brasil).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_CARRO_NOVO_NV_002.png",
-      "drive_file_id": "1tgewAru-8Da1rIjO_pVDzZAgmQZq7jBv",
-      "webViewLink": "https://drive.google.com/file/d/1tgewAru-8Da1rIjO_pVDzZAgmQZq7jBv/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "NV",
-      "angle": "CARRO_NOVO",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "d4f1489796c0932bc9903dc81a334a7eba27b62b2b3ceda975acb89e585f38e7",
-      "bytes_clean": 1616348,
-      "drive_md5": "4949c2fd6f68b38208cf598d3f6b6341",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_CARRO_NOVO_NV_002.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:16:49.345327+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "19VwwScLHInUXs9GhV2dncJG9l8GFzwsm",
-      "source_filename": "1_54 - Story Financiamento (Brasil).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NV_005.png",
-      "drive_file_id": "1_axifBseMI__YkG-4fHcDMrK40q7vNFY",
-      "webViewLink": "https://drive.google.com/file/d/1_axifBseMI__YkG-4fHcDMrK40q7vNFY/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "NV",
-      "angle": "ELETRICO_SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "5e2dea896604bd7596bc0552e1fc3a7ddb7ba03ad9e512a02f2089cbec5f211f",
-      "bytes_clean": 1884229,
-      "drive_md5": "d8d96cbdda20af1b6d18182d1234f630",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NV_005.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:16:56.512325+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1aQwJwdgZ3aOntHx24KUbJsQjAGAmrkLd",
-      "source_filename": "2_50 - Story Financiamento (Brasil).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_SEM_ENTRADA_NV_004.png",
-      "drive_file_id": "1VsM3TzrOMer5toJ_qD3mKgFc9pRYyQgm",
-      "webViewLink": "https://drive.google.com/file/d/1VsM3TzrOMer5toJ_qD3mKgFc9pRYyQgm/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "NV",
-      "angle": "SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "cd669e589b6d548b6486144c38a14e2b14601a54c00c380b8dcbe57b3681efc2",
-      "bytes_clean": 1283148,
-      "drive_md5": "9e7adc14057e06635570145874e31003",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_SEM_ENTRADA_NV_004.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:17:02.829239+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1zGzSb0CWUjfMfWVs48P-cbD-DlcSAoQO",
-      "source_filename": "3_51 - Feed Financiamento (Brasil) (1080 x 1080 px).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_SEM_ENTRADA_NS_003.png",
-      "drive_file_id": "1T087TItOH9BaKzk_piBKuHQd6UVAYmTf",
-      "webViewLink": "https://drive.google.com/file/d/1T087TItOH9BaKzk_piBKuHQd6UVAYmTf/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1080,
-      "aspect_ratio": "1:1",
-      "placement_fit": "FEED",
-      "p_orient": "NS",
-      "angle": "SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "52ee793c80213171e09e1b1e356edac56af8e5d821f3337cbbd384ce82f480b4",
-      "bytes_clean": 1431676,
-      "drive_md5": "0052bcc930342c6f7e0716bc54b9fb3e",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_SEM_ENTRADA_NS_003.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:17:09.425341+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1LfSu8JpUpWBWr4Qqd0qGy8e-uKZoc0T8",
-      "source_filename": "4_54- FEED Financiamento (Brasil) (1080 x 1080 px).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NS_004.png",
-      "drive_file_id": "1IpvDWfNxgs2wEhxhZgvkVe598qjs4URD",
-      "webViewLink": "https://drive.google.com/file/d/1IpvDWfNxgs2wEhxhZgvkVe598qjs4URD/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1080,
-      "aspect_ratio": "1:1",
-      "placement_fit": "FEED",
-      "p_orient": "NS",
-      "angle": "ELETRICO_SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "06824f70c80bf2c6c5cde73501f2b1479b1b89bcd16e0d88770a085cb8830af0",
-      "bytes_clean": 1401822,
-      "drive_md5": "213f1c93fdc5f087ac43e5fccbde8a67",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NS_004.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:17:16.426856+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1Y0Q7xyxd8lnmSzvnxWde86oHwHglVE78",
-      "source_filename": "5_53 - Story Financiamento (Brasil).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NV_006.png",
-      "drive_file_id": "1wQRmc8Wlh84uSFvh2T8dSCKE6t-JyS0j",
-      "webViewLink": "https://drive.google.com/file/d/1wQRmc8Wlh84uSFvh2T8dSCKE6t-JyS0j/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "NV",
-      "angle": "ELETRICO_SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "27cb479d2b991e67ef6928eff6a1af816786578563e04a42b2fcc8287f45be49",
-      "bytes_clean": 1798498,
-      "drive_md5": "3c89aa3b93a53c3daa7e1c684932866c",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NV_006.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:17:22.629430+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1qBP1cjLSQZZocKC8Hsck--YTxKQ-1pDl",
-      "source_filename": "6_57 - FEED Financiamento (Brasil) (1080 x 1080 px).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NS_005.png",
-      "drive_file_id": "1sy__0-BPMIiuOYGtC9kSSg5nMDQH6gUG",
-      "webViewLink": "https://drive.google.com/file/d/1sy__0-BPMIiuOYGtC9kSSg5nMDQH6gUG/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1080,
-      "aspect_ratio": "1:1",
-      "placement_fit": "FEED",
-      "p_orient": "NS",
-      "angle": "ELETRICO_SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "60ca6d8f7461332d40efa2e3367d48f3f6f0e0cd186ae246f4898b235e0078a7",
-      "bytes_clean": 1058001,
-      "drive_md5": "f4e47b7b59c02e66c6ac3b006f0c3401",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_ELETRICO_SEM_ENTRADA_NS_005.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:17:28.165935+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1G9szO9cDeamXxioCqLXZm-Ur4Ppfsyan",
-      "source_filename": "7_56 - FEED Financiamento (Brasil) (1080 x 1080 px).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_SEM_ENTRADA_NS_004.png",
-      "drive_file_id": "15c6if4pT_PcxAK7hz2X7gBx3oHqqcV0R",
-      "webViewLink": "https://drive.google.com/file/d/15c6if4pT_PcxAK7hz2X7gBx3oHqqcV0R/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1080,
-      "aspect_ratio": "1:1",
-      "placement_fit": "FEED",
-      "p_orient": "NS",
-      "angle": "SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "f82087a9e70df7aa288fc7a3a345b2bcc8b37083f3d1a42aee78a570a86682ca",
-      "bytes_clean": 653461,
-      "drive_md5": "ddb8b5049c2cd26b2f60eb2a57171007",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_SEM_ENTRADA_NS_004.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:17:34.736205+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1iry9OhWR08DLj10nGfQixsM0t_R_Agot",
-      "source_filename": "8_52 - Story Financiamento (Brasil).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_CARRO_NOVO_NV_003.png",
-      "drive_file_id": "1Z5WyRJ2KwKjUcat4Rd9gWycdPX2x58yq",
-      "webViewLink": "https://drive.google.com/file/d/1Z5WyRJ2KwKjUcat4Rd9gWycdPX2x58yq/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "NV",
-      "angle": "CARRO_NOVO",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "1ee0bbbed97caff5156b21e92fd7eda408111936c91c156e10fc1238d318f1c4",
-      "bytes_clean": 1306742,
-      "drive_md5": "d634a500ccc1e11b35b5cc576010e65e",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_CARRO_NOVO_NV_003.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:17:42.099686+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "IMG",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1KagEXw1I9RsAiTDMuqNOAxbYn5d80GnK",
-      "source_filename": "9_51 - Story Financiamento (Brasil).png",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/IMG/01_READY",
-      "destination_filename": "CAR_BR_BR_IMG_SEM_ENTRADA_NV_005.png",
-      "drive_file_id": "1mesvjLOlsfe3pytzxu_Sci6m-LcE5uHm",
-      "webViewLink": "https://drive.google.com/file/d/1mesvjLOlsfe3pytzxu_Sci6m-LcE5uHm/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "NV",
-      "angle": "SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "4922534a7c388badfe79ea47d5ffe4ba26df744d739ae3b008d53b213e16b3bc",
-      "bytes_clean": 2062369,
-      "drive_md5": "2c8c632877fc829a0bef835529d7193c",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/IMG/01_READY/20260712T041541Z/CAR_BR_BR_IMG_SEM_ENTRADA_NV_005.png"
-    },
-    {
-      "ts_utc": "2026-07-12T04:17:48.757987+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "VID",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1-Upm9f86hwRFClBW66gN_gdUP9cCFsRB",
-      "source_filename": "1_carro br 001.mp4",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY",
-      "destination_filename": "CAR_BR_BR_VID_SCORE_BAIXO_PV_001.mp4",
-      "drive_file_id": "1yInCk3Y05FiT1jRLiyK3b0WiDazdh7VX",
-      "webViewLink": "https://drive.google.com/file/d/1yInCk3Y05FiT1jRLiyK3b0WiDazdh7VX/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
+      "source_drive_id": "1dO98RRsY22Ai6-1LF6gA1MazBIRGZMHU",
+      "source_filename": "1_70 - Story KELLY Financiamento (Brasil).mp4",
+      "destination_filename": "CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_PV_001.mp4",
+      "destination_drive_id": "1gy3PeIvU7B-SYd6FOsB0HqzScOCmskMd",
+      "source_final_parent_id": "1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+      "source_sha256": "977685ec7d37f92bba66674b40bb5a0a7493e80c725ceccda39f3f171f12b379",
+      "clean_sha256": "3eca6232bf884d7cb98e1069e082eddc34703720044f43c83facfbaf109d4cf8",
+      "drive_md5": "c997a8dc0a59211fae351c4bb051abb5",
+      "bytes_clean": 8483674,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "PERSON",
       "p_orient": "PV",
-      "angle": "SCORE_BAIXO",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "d788d63b4f3777ea9303c2374ca855f0970dc3f327b62ae7e66e7220cbe16487",
-      "bytes_clean": 9147693,
-      "drive_md5": "ef82394afc03cf740b590553719fe519",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/VID/01_READY/20260712T041541Z/CAR_BR_BR_VID_SCORE_BAIXO_PV_001.mp4"
+      "angle": "ELETRICO_SEM_ENTRADA",
+      "variant": "001",
+      "claim": "CARRO ELETRICO SEM ENTRADA; R$349/MES",
+      "visual_evidence": {
+        "duration_seconds": 15.093,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0186,
+            "mean": [
+              106.2956,
+              110.5978,
+              117.3336
+            ],
+            "stddev": [
+              68.0077,
+              68.6311,
+              68.4817
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "3a0e0c3f1fcdcde4"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.5465,
+            "mean": [
+              95.3287,
+              103.4208,
+              107.4577
+            ],
+            "stddev": [
+              79.4047,
+              76.4252,
+              75.2812
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "cc4ed296c84dce76"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.0744,
+            "mean": [
+              121.2967,
+              117.5088,
+              117.1582
+            ],
+            "stddev": [
+              50.4511,
+              47.9677,
+              49.3836
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "fb31b2b61c4c7bf2"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:3a0e0c3f1fcdcde4/cc4ed296c84dce76/fb31b2b61c4c7bf2",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-01-dlscpjbh/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-01-dlscpjbh/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-01-dlscpjbh/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/1gy3PeIvU7B-SYd6FOsB0HqzScOCmskMd/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260714T185435Z/CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_PV_001.mp4"
     },
     {
-      "ts_utc": "2026-07-12T04:17:55.719240+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "VID",
+      "index": 2,
       "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1gpV554Y-W7ZZNVFJRapiwaDGz0Tp3TOo",
-      "source_filename": "2_carro 009.mp4",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_001.mp4",
-      "drive_file_id": "1s2qsINv1S2OZKlZ8dwc6kA9kIoZRCtJV",
-      "webViewLink": "https://drive.google.com/file/d/1s2qsINv1S2OZKlZ8dwc6kA9kIoZRCtJV/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "PV",
-      "angle": "SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "c9055552e8ce89017eb9723bac53a68bf3aedfa6f02477c8f21f7fdcddbdce18",
-      "bytes_clean": 10605472,
-      "drive_md5": "36438150b512f5eb34b7cab415439e0e",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/VID/01_READY/20260712T041541Z/CAR_BR_BR_VID_SEM_ENTRADA_PV_001.mp4"
-    },
-    {
-      "ts_utc": "2026-07-12T04:18:02.927962+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "VID",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "19QCvokwtXGi9a8t5heq8swYHjBD21ei8",
-      "source_filename": "3_carro 0019.mp4",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_001.mp4",
-      "drive_file_id": "1wTBhsD30k3eWShjx4_7U5Ea6gJyZvslb",
-      "webViewLink": "https://drive.google.com/file/d/1wTBhsD30k3eWShjx4_7U5Ea6gJyZvslb/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "NV",
-      "angle": "SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "c41c7ffb7d9a35e0000037e2812abfd66587da2831606295e9793b85287b14d1",
-      "bytes_clean": 14048997,
-      "drive_md5": "d24872c7dbb66cee8595be6f2842cefb",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/VID/01_READY/20260712T041541Z/CAR_BR_BR_VID_SEM_ENTRADA_NV_001.mp4"
-    },
-    {
-      "ts_utc": "2026-07-12T04:18:09.709002+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "VID",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1RjM1okSTFII7qMbWweW-PkFsuegZOWLp",
-      "source_filename": "4_carro 018.mp4",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_002.mp4",
-      "drive_file_id": "12KhzwuGxYUGdIVmsuwHPSkZDIS5Ef6dm",
-      "webViewLink": "https://drive.google.com/file/d/12KhzwuGxYUGdIVmsuwHPSkZDIS5Ef6dm/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "NV",
-      "angle": "SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "1962c4ab86c88f5359da635bc8004d9156794a304939986db8128b9a1f35d4e6",
-      "bytes_clean": 12069282,
-      "drive_md5": "9123e16fd15cca8a2267cb97d239f0c5",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/VID/01_READY/20260712T041541Z/CAR_BR_BR_VID_SEM_ENTRADA_NV_002.mp4"
-    },
-    {
-      "ts_utc": "2026-07-12T04:18:16.753624+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "VID",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1q5je5V6FaLtfLn73Ft0kfT1Cv5la6whm",
-      "source_filename": "57 - Story Financiamento (Brasil).mp4",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_002.mp4",
-      "drive_file_id": "1xlvRJnI81tQBPNGlbft4J0IhVOats06X",
-      "webViewLink": "https://drive.google.com/file/d/1xlvRJnI81tQBPNGlbft4J0IhVOats06X/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "PV",
-      "angle": "SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "ce87c065b106c2343fb6383ff14790dc06b816563502a4055969a096c5910292",
-      "bytes_clean": 10421242,
-      "drive_md5": "da6fb184c8f4e27263e8e4102e8f0dc0",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/VID/01_READY/20260712T041541Z/CAR_BR_BR_VID_SEM_ENTRADA_PV_002.mp4"
-    },
-    {
-      "ts_utc": "2026-07-12T04:18:23.736587+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "VID",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1fC8f2vlGhxSxV5um5197wQUUJ-vlzATL",
-      "source_filename": "58 - Story Financiamento (Brasil).mp4",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_PV_003.mp4",
-      "drive_file_id": "1iR9hWl0rQhHnde512lQ5ZGwDFWtLvll_",
-      "webViewLink": "https://drive.google.com/file/d/1iR9hWl0rQhHnde512lQ5ZGwDFWtLvll_/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "PV",
-      "angle": "SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "8079f802e71269cef958efade398640f858f3195c022c7a179f0372d07848bf0",
-      "bytes_clean": 8980126,
-      "drive_md5": "e7905c9538bb6eb8b9e80a982c3ce77e",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/VID/01_READY/20260712T041541Z/CAR_BR_BR_VID_SEM_ENTRADA_PV_003.mp4"
-    },
-    {
-      "ts_utc": "2026-07-12T04:18:30.674879+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "VID",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1rKseccO9TVuparE1JtOyyi1x7bT4pOyi",
-      "source_filename": "5_carro 0017.mp4",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY",
-      "destination_filename": "CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_001.mp4",
-      "drive_file_id": "1FAPs2KocZ837yiI4whag_QVEV0TcCwJh",
-      "webViewLink": "https://drive.google.com/file/d/1FAPs2KocZ837yiI4whag_QVEV0TcCwJh/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
-      "p_orient": "NV",
-      "angle": "PARCELAS_BAIXAS",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "23bf8877a296e9c28e3113bac4fc96a1d11685f70b800b761bfebc1e9aeb724d",
-      "bytes_clean": 16073470,
-      "drive_md5": "cc19e1c896e4703fd7758621ab9cda84",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/VID/01_READY/20260712T041541Z/CAR_BR_BR_VID_PARCELAS_BAIXAS_NV_001.mp4"
-    },
-    {
-      "ts_utc": "2026-07-12T04:18:37.887108+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "VID",
-      "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "18LB0PAd4Pb5APok2bhhBUB2wq1XeFjrt",
-      "source_filename": "6_carro 0005.mp4",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY",
-      "destination_filename": "CAR_BR_BR_VID_SUPER_OFERTA_NV_001.mp4",
-      "drive_file_id": "1pa9Rg_pJdEnxetPl7NZ-Zxpv7IiVYQKX",
-      "webViewLink": "https://drive.google.com/file/d/1pa9Rg_pJdEnxetPl7NZ-Zxpv7IiVYQKX/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
+      "source_drive_id": "1oYuhfLgyqapqhWhaHYZV_PQtbnmi4QXm",
+      "source_filename": "2_61 - Story Financiamento (Brasil).mp4",
+      "destination_filename": "CAR_BR_BR_VID_SUPER_OFERTA_NV_002.mp4",
+      "destination_drive_id": "18PaBqliqdEHeMHSaK0hLzgEwAvB2uOg2",
+      "source_final_parent_id": "1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+      "source_sha256": "643b3ff757337ff5e5f1d341f749ace57fc38367fc696be0e1d7454a3e485105",
+      "clean_sha256": "c0211b4c0f18d0aad2f62575d0da83f8910b3856d1422bd36eaceb0827205f7f",
+      "drive_md5": "30fb148cb1e733bf5da16258b28b4eac",
+      "bytes_clean": 11080364,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "NO_PERSON",
       "p_orient": "NV",
       "angle": "SUPER_OFERTA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "498a4edeb865e09bed60e63e26a5a4396f183c4106386b64787c7815efda5057",
-      "bytes_clean": 14880735,
-      "drive_md5": "64236da477afcc8f00f0201fad02f0f4",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/VID/01_READY/20260712T041541Z/CAR_BR_BR_VID_SUPER_OFERTA_NV_001.mp4"
+      "variant": "002",
+      "claim": "OFERTA IMPERDIVEL; CARRO ELETRICO; R$349/MES",
+      "visual_evidence": {
+        "duration_seconds": 15.093,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0186,
+            "mean": [
+              125.0487,
+              120.1617,
+              114.0616
+            ],
+            "stddev": [
+              66.1908,
+              65.1429,
+              63.2913
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "21014073b86b2e9c"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.5465,
+            "mean": [
+              122.4714,
+              117.6804,
+              109.3368
+            ],
+            "stddev": [
+              78.2235,
+              76.2995,
+              72.5939
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "ebb682003be83de3"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.0744,
+            "mean": [
+              94.738,
+              92.8811,
+              92.0948
+            ],
+            "stddev": [
+              75.37,
+              74.9741,
+              71.3654
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "8dc445d6cece93c0"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:21014073b86b2e9c/ebb682003be83de3/8dc445d6cece93c0",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-02-4a6cnsd7/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-02-4a6cnsd7/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-02-4a6cnsd7/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/18PaBqliqdEHeMHSaK0hLzgEwAvB2uOg2/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260714T185435Z/CAR_BR_BR_VID_SUPER_OFERTA_NV_002.mp4"
     },
     {
-      "ts_utc": "2026-07-12T04:18:44.672993+00:00",
-      "thread_id": "1525715819462398122",
-      "requested_by": "Rodolfo Mattei",
-      "created_by": "KELLY",
-      "country": "BR",
-      "vertical": "CAR",
-      "language": "BR",
-      "operation": "CAR_BR_BR",
-      "format": "VID",
+      "index": 3,
       "status": "01_READY",
-      "source": "HUMAN_UPLOAD_DRIVE_UPLOAD_MANUAL",
-      "source_drive_id": "1Q8-umpWVJGZDdWxPE4wDAFIGw-43efI_",
-      "source_filename": "carr0 0020.mp4",
-      "source_archived_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/99_LEGACY",
-      "destination_folder": "MGS-AGENTS/CRIATIVOS/CAR_BR_BR/VID/01_READY",
-      "destination_filename": "CAR_BR_BR_VID_SEM_ENTRADA_NV_003.mp4",
-      "drive_file_id": "1jr-8xt2gTngPEJk1pnA4LLWTScBhmiGk",
-      "webViewLink": "https://drive.google.com/file/d/1jr-8xt2gTngPEJk1pnA4LLWTScBhmiGk/view?usp=drivesdk",
-      "width": 1080,
-      "height": 1920,
-      "aspect_ratio": "9:16",
-      "placement_fit": "STORY",
+      "source_drive_id": "13uxBL--KWzTGqGBFeDr1QOjkEP0dYuyO",
+      "source_filename": "3_60 - Story Financiamento (Brasil).mp4",
+      "destination_filename": "CAR_BR_BR_VID_SUPER_OFERTA_PV_001.mp4",
+      "destination_drive_id": "1ZiWd8YyW5ywae7J8O30uaba2J__7_aBR",
+      "source_final_parent_id": "1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+      "source_sha256": "9d289fb57a5e506315bec7f41c8724860c129ca552f4185328cf9c1cfb65505c",
+      "clean_sha256": "2dd4a6fbc17dc170027a0a3974eee035c30d4990f1aad978e06b30ed83aef62d",
+      "drive_md5": "7cc7fa719fa08ff713a98d5e6fe322d1",
+      "bytes_clean": 6747920,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "PERSON",
+      "p_orient": "PV",
+      "angle": "SUPER_OFERTA",
+      "variant": "001",
+      "claim": "OFERTA IMPERDIVEL; CARRO ELETRICO; R$349/MES",
+      "visual_evidence": {
+        "duration_seconds": 15.093,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0186,
+            "mean": [
+              138.6822,
+              141.7403,
+              141.5979
+            ],
+            "stddev": [
+              56.8279,
+              53.7083,
+              55.0413
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "f278f98d33095a3a"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.5465,
+            "mean": [
+              125.4875,
+              126.8529,
+              123.8217
+            ],
+            "stddev": [
+              83.2284,
+              82.7039,
+              82.1565
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "4085116f7b0d1818"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.0744,
+            "mean": [
+              140.2504,
+              141.9317,
+              141.4315
+            ],
+            "stddev": [
+              56.6175,
+              54.2054,
+              55.8323
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "f278ed85390bde3a"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:f278f98d33095a3a/4085116f7b0d1818/f278ed85390bde3a",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-03-5hji3g3g/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-03-5hji3g3g/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-03-5hji3g3g/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/1ZiWd8YyW5ywae7J8O30uaba2J__7_aBR/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260714T185435Z/CAR_BR_BR_VID_SUPER_OFERTA_PV_001.mp4"
+    },
+    {
+      "index": 4,
+      "status": "01_READY",
+      "source_drive_id": "1_jdGWGdgSqR-u-RxwdtRbtwmlGR633Z7",
+      "source_filename": "4_59 - Story Financiamento (Brasil).mp4",
+      "destination_filename": "CAR_BR_BR_VID_SUPER_OFERTA_NV_003.mp4",
+      "destination_drive_id": "15rO9t7Ye1YGqKeOtap_1rK8uvEkvjmlP",
+      "source_final_parent_id": "1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+      "source_sha256": "e62bd525e774b4263f08b1745a77a4f477995b0ed9f64e1df79ed376896c28c6",
+      "clean_sha256": "9567d86e08cf034a443f3d2a3b7aca44cdf9ecf1114ac7912146a81824b40038",
+      "drive_md5": "49c3c742863b78f9650d3253bd385eb7",
+      "bytes_clean": 12279359,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "NO_PERSON",
       "p_orient": "NV",
-      "angle": "SEM_ENTRADA",
-      "used_by": "ARES",
-      "campaign_owner": "Ares",
-      "clean": true,
-      "harmful_tags_after": 0,
-      "clean_sha256": "26f3fc7750a41f981f9fcfe29bc3ed9fa1c2becb329e2616d209c738f3a50951",
-      "bytes_clean": 10938899,
-      "drive_md5": "9e2c9208ece859db103a57b2123ca70e",
-      "local_clean_path": "/root/mgs-agent/data/hera/ready/CAR_BR_BR/VID/01_READY/20260712T041541Z/CAR_BR_BR_VID_SEM_ENTRADA_NV_003.mp4"
+      "angle": "SUPER_OFERTA",
+      "variant": "003",
+      "claim": "OFERTA IMPERDIVEL; CARRO ELETRICO; R$349/MES",
+      "visual_evidence": {
+        "duration_seconds": 15.07,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0140000000000002,
+            "mean": [
+              126.2055,
+              126.8095,
+              124.0891
+            ],
+            "stddev": [
+              68.2018,
+              69.9122,
+              69.9933
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "c2c9e474782b278c"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.535,
+            "mean": [
+              84.691,
+              87.2328,
+              90.2327
+            ],
+            "stddev": [
+              71.675,
+              71.2527,
+              66.6436
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "f8e0185e0a0edce0"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.056000000000001,
+            "mean": [
+              115.3306,
+              114.8544,
+              107.0185
+            ],
+            "stddev": [
+              73.8496,
+              74.9402,
+              72.7559
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "20642338012ece6c"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:c2c9e474782b278c/f8e0185e0a0edce0/20642338012ece6c",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-04-1gi164dc/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-04-1gi164dc/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-04-1gi164dc/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/15rO9t7Ye1YGqKeOtap_1rK8uvEkvjmlP/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260714T185435Z/CAR_BR_BR_VID_SUPER_OFERTA_NV_003.mp4"
+    },
+    {
+      "index": 5,
+      "status": "01_READY",
+      "source_drive_id": "1SRQpCRVCd00veCmKUQhZdj_qWhecscca",
+      "source_filename": "5_69 - Story KELLY Financiamento (Brasil).mp4",
+      "destination_filename": "CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NV_001.mp4",
+      "destination_drive_id": "1Ga0_FO-JSOUSx-S6g6YifmohFYJwqD4I",
+      "source_final_parent_id": "1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+      "source_sha256": "f5920c2b384c8a3f097ee294dae2eb42b2feb93cf4a8c7c2d974c7408f4f42dc",
+      "clean_sha256": "6174b48ac71f6c3eb664c5f8e5a63522b5fc17b8e2896b7c12ec54cfbe043b21",
+      "drive_md5": "c9baf068712ec39b5cb5c507a0960dff",
+      "bytes_clean": 13714479,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "NO_PERSON",
+      "p_orient": "NV",
+      "angle": "ELETRICO_SEM_ENTRADA",
+      "variant": "001",
+      "claim": "CARRO ELETRICO SEM ENTRADA; R$349/MES",
+      "visual_evidence": {
+        "duration_seconds": 15.07,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0140000000000002,
+            "mean": [
+              122.1371,
+              118.0544,
+              111.7636
+            ],
+            "stddev": [
+              66.0252,
+              67.8072,
+              68.384
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "1cb6fe17730cccfe"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.535,
+            "mean": [
+              105.6564,
+              103.3464,
+              103.2317
+            ],
+            "stddev": [
+              76.4798,
+              76.0469,
+              74.1387
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "0b9ef2f2b00c109c"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.056000000000001,
+            "mean": [
+              124.0759,
+              119.3034,
+              116.8621
+            ],
+            "stddev": [
+              62.9891,
+              65.9712,
+              65.4435
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "8ca5868000eec880"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:1cb6fe17730cccfe/0b9ef2f2b00c109c/8ca5868000eec880",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-05-qpu4hyns/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-05-qpu4hyns/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-05-qpu4hyns/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/1Ga0_FO-JSOUSx-S6g6YifmohFYJwqD4I/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260714T185435Z/CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NV_001.mp4"
+    },
+    {
+      "index": 6,
+      "status": "01_READY",
+      "source_drive_id": "181VC5olQn5cx_52aBNDSB_39c3B2-Wq_",
+      "source_filename": "6_63 - Story Financiamento (Brasil).mp4",
+      "destination_filename": "CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NV_002.mp4",
+      "destination_drive_id": "1Gz1PoEc3mOJCSmyHA0l2DWvgEKHCICiO",
+      "source_final_parent_id": "1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+      "source_sha256": "97eb5430be62a2bcfad27062c25658e57f252eb1cc1f9ba2c047f276a4f94a7e",
+      "clean_sha256": "e607c5157387908a32383da0152d584e1520e279911a34479394a4d0a6788ace",
+      "drive_md5": "eab52cd360e595f6726eea51ec471708",
+      "bytes_clean": 11497797,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "NO_PERSON",
+      "p_orient": "NV",
+      "angle": "ELETRICO_SEM_ENTRADA",
+      "variant": "002",
+      "claim": "CARRO ELETRICO SEM ENTRADA; R$349/MES",
+      "visual_evidence": {
+        "duration_seconds": 15.07,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0140000000000002,
+            "mean": [
+              115.5696,
+              117.6659,
+              114.9131
+            ],
+            "stddev": [
+              51.7243,
+              56.0856,
+              57.6942
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "0cc87bdb9166d460"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.535,
+            "mean": [
+              118.4153,
+              112.9442,
+              108.9162
+            ],
+            "stddev": [
+              79.5418,
+              79.3742,
+              76.4224
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "f49163ff3f30c098"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.056000000000001,
+            "mean": [
+              114.4825,
+              112.1389,
+              107.879
+            ],
+            "stddev": [
+              75.0475,
+              76.0577,
+              71.5541
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "1a9da0e060d41273"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:0cc87bdb9166d460/f49163ff3f30c098/1a9da0e060d41273",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-06-1vr017k3/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-06-1vr017k3/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-06-1vr017k3/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/1Gz1PoEc3mOJCSmyHA0l2DWvgEKHCICiO/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260714T185435Z/CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NV_002.mp4"
+    },
+    {
+      "index": 7,
+      "status": "01_READY",
+      "source_drive_id": "1aaohKlMOR4zYp2qryOyJ7--TAlwDr6iO",
+      "source_filename": "7_67 - Story Financiamento (Brasil).mp4",
+      "destination_filename": "CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_PV_002.mp4",
+      "destination_drive_id": "1CsACJDV9U7-wSJjyF4ZIkWeWZ1QzpTPU",
+      "source_final_parent_id": "1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+      "source_sha256": "a0de46fb4001c3e60e847b1de6cdb2e04292933ce6afe947713f0b023a77599f",
+      "clean_sha256": "afcd23ac28efa448ce92e96256cbe63264778decd1ef6ef01c148b5bf9b99753",
+      "drive_md5": "4a2fab7d6f7126fa2038ab7f6b5eb4ec",
+      "bytes_clean": 8928024,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "PERSON",
+      "p_orient": "PV",
+      "angle": "ELETRICO_SEM_ENTRADA",
+      "variant": "002",
+      "claim": "CARRO ELETRICO SEM ENTRADA; R$349/MES",
+      "visual_evidence": {
+        "duration_seconds": 15.093,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0186,
+            "mean": [
+              125.6836,
+              136.6046,
+              139.2164
+            ],
+            "stddev": [
+              75.6163,
+              75.7546,
+              74.3152
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "0f00c3e1733d9997"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.5465,
+            "mean": [
+              79.2383,
+              91.0469,
+              93.5572
+            ],
+            "stddev": [
+              72.1221,
+              76.3337,
+              76.2466
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "e3d35938474e1613"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.0744,
+            "mean": [
+              120.3457,
+              125.901,
+              124.4759
+            ],
+            "stddev": [
+              66.0647,
+              67.7809,
+              70.5735
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "7c3e1d0d8c3bf6f7"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:0f00c3e1733d9997/e3d35938474e1613/7c3e1d0d8c3bf6f7",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-07-bhn_ldh9/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-07-bhn_ldh9/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-07-bhn_ldh9/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/1CsACJDV9U7-wSJjyF4ZIkWeWZ1QzpTPU/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260714T185435Z/CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_PV_002.mp4"
+    },
+    {
+      "index": 8,
+      "status": "05_REJECTED",
+      "source_drive_id": "1NhdL_feTh2NfWE1x5golA3cL4--oIJp8",
+      "source_filename": "8_Design sem nome.mp4",
+      "destination_filename": null,
+      "destination_drive_id": null,
+      "source_final_parent_id": "1tfCBFYNNXVD_VOXJQzUZ39qmCaUUelmF",
+      "source_sha256": "a86280271db94599f3b08c196098acd4535d2cce7147c3647e2626c5b4aa735f",
+      "clean_sha256": null,
+      "metadata_clean": false,
+      "person": "NO_PERSON",
+      "p_orient": "NH",
+      "angle": "UNKNOWN",
+      "claim": "SEM CONTEUDO VISUAL; FRAMES BRANCOS",
+      "visual_evidence": {
+        "duration_seconds": 5.0,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 1.0,
+            "mean": [
+              255.0,
+              255.0,
+              255.0
+            ],
+            "stddev": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "extrema": [
+              [
+                255,
+                255
+              ],
+              [
+                255,
+                255
+              ],
+              [
+                255,
+                255
+              ]
+            ],
+            "dhash64": "0000000000000000"
+          },
+          {
+            "pct": 0.5,
+            "second": 2.5,
+            "mean": [
+              255.0,
+              255.0,
+              255.0
+            ],
+            "stddev": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "extrema": [
+              [
+                255,
+                255
+              ],
+              [
+                255,
+                255
+              ],
+              [
+                255,
+                255
+              ]
+            ],
+            "dhash64": "0000000000000000"
+          },
+          {
+            "pct": 0.8,
+            "second": 4.0,
+            "mean": [
+              255.0,
+              255.0,
+              255.0
+            ],
+            "stddev": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "extrema": [
+              [
+                255,
+                255
+              ],
+              [
+                255,
+                255
+              ],
+              [
+                255,
+                255
+              ]
+            ],
+            "dhash64": "0000000000000000"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:0000000000000000/0000000000000000/0000000000000000",
+        "blank_white": true,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-08-i4rtyq8m/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-08-i4rtyq8m/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-08-i4rtyq8m/frames/frame-80.jpg"
+        ]
+      },
+      "reason": "TECHNICAL_BLANK_WHITE_VIDEO",
+      "webViewLink": "https://drive.google.com/file/d/1NhdL_feTh2NfWE1x5golA3cL4--oIJp8/view?usp=drivesdk"
+    },
+    {
+      "index": 9,
+      "status": "01_READY",
+      "source_drive_id": "1BauDeIQsSQL5QQoh44oGmGJgdjG4MyKY",
+      "source_filename": "9_64 - Story Financiamento (Brasil).mp4",
+      "destination_filename": "CAR_BR_BR_VID_SUPER_OFERTA_NV_004.mp4",
+      "destination_drive_id": "1HTBwS99Qmj9fyNOZNhe2TkCM5UHYiczN",
+      "source_final_parent_id": "1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+      "source_sha256": "b81888bf177e58e04d540795447c895ebfc5f1862b1990ecd657af9a8d2572f8",
+      "clean_sha256": "ae49e3292e5420c9f178008b043ec03ef314afa4a86b506e290db278de7019d1",
+      "drive_md5": "d4133b8de4209619d8e914aa0d80cca0",
+      "bytes_clean": 66084272,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "NO_PERSON",
+      "p_orient": "NV",
+      "angle": "SUPER_OFERTA",
+      "variant": "004",
+      "claim": "MISTO: SEM ENTRADA + OFERTA IMPERDIVEL; R$349/MES",
+      "visual_evidence": {
+        "duration_seconds": 90.466,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 18.0932,
+            "mean": [
+              115.5476,
+              117.6506,
+              114.8698
+            ],
+            "stddev": [
+              51.7428,
+              56.0935,
+              57.6936
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "0cc87bdb9166d460"
+          },
+          {
+            "pct": 0.5,
+            "second": 45.233,
+            "mean": [
+              123.5985,
+              122.0591,
+              117.508
+            ],
+            "stddev": [
+              56.699,
+              61.1943,
+              66.3746
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "6125f1e1cccce430"
+          },
+          {
+            "pct": 0.8,
+            "second": 72.3728,
+            "mean": [
+              140.1948,
+              142.0892,
+              141.7818
+            ],
+            "stddev": [
+              56.5023,
+              53.9005,
+              55.4876
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "f278ed8d2909de3a"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:0cc87bdb9166d460/6125f1e1cccce430/f278ed8d2909de3a",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-09-lpu9kwa9/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-09-lpu9kwa9/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-09-lpu9kwa9/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/1HTBwS99Qmj9fyNOZNhe2TkCM5UHYiczN/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260714T185435Z/CAR_BR_BR_VID_SUPER_OFERTA_NV_004.mp4"
+    },
+    {
+      "index": 10,
+      "status": "01_READY",
+      "source_drive_id": "1ClOL8_ILnOHlkTa-udQzDVJVZVo5dUol",
+      "source_filename": "10_66 - Story Financiamento (Brasil).mp4",
+      "destination_filename": "CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_PV_003.mp4",
+      "destination_drive_id": "1wrzDeNM3PkVPl4ePHwZO1md_VVqsc9qS",
+      "source_final_parent_id": "1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+      "source_sha256": "818801dec17c5b621c047c4b5a1f73145e26d5d64cc7c90442e1de0855e3675f",
+      "clean_sha256": "4120b1ff4ed9b1a83f4f0d1ad93925fc118fd3a329fdf479e948272acc13d1ff",
+      "drive_md5": "84b257f6243b53a8aa413a1b83c82bce",
+      "bytes_clean": 8792507,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "PERSON",
+      "p_orient": "PV",
+      "angle": "ELETRICO_SEM_ENTRADA",
+      "variant": "003",
+      "claim": "CARRO ELETRICO SEM ENTRADA; R$349/MES",
+      "visual_evidence": {
+        "duration_seconds": 15.093,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0186,
+            "mean": [
+              110.5326,
+              113.7022,
+              116.1334
+            ],
+            "stddev": [
+              67.4517,
+              66.6406,
+              71.3774
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "3f73ac16a6404ace"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.5465,
+            "mean": [
+              116.6166,
+              121.5456,
+              122.8822
+            ],
+            "stddev": [
+              63.7371,
+              64.0109,
+              66.0133
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "7c5e61706947fc62"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.0744,
+            "mean": [
+              137.6726,
+              137.796,
+              132.5274
+            ],
+            "stddev": [
+              83.4002,
+              84.7207,
+              83.8949
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "0b23d8c8c4cc8880"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:3f73ac16a6404ace/7c5e61706947fc62/0b23d8c8c4cc8880",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-10-_cdn5oe_/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-10-_cdn5oe_/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-10-_cdn5oe_/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/1wrzDeNM3PkVPl4ePHwZO1md_VVqsc9qS/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260714T185435Z/CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_PV_003.mp4"
+    },
+    {
+      "index": 11,
+      "status": "01_READY",
+      "source_drive_id": "1MNzj8O_gj77DCCxzdOW-0VlfKlFtROqg",
+      "source_filename": "11_68 - Story KELLY Financiamento (Brasil).mp4",
+      "destination_filename": "CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_PV_004.mp4",
+      "destination_drive_id": "1_5ehdqXXlZ71_gczkWkrm0RJRqvHeXs6",
+      "source_final_parent_id": "1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+      "source_sha256": "beabe82375ca60ba5b0911c828ae78d293e2656e8412873607fdbb4f52518abd",
+      "clean_sha256": "6346cc9c37a0737e7e10a26469f8b5aad91417eaaee43585f4f506708928988d",
+      "drive_md5": "2935fd44414ef8b776aa7edcccbbb4fd",
+      "bytes_clean": 7914726,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "PERSON",
+      "p_orient": "PV",
+      "angle": "ELETRICO_SEM_ENTRADA",
+      "variant": "004",
+      "claim": "CARRO ELETRICO SEM ENTRADA; R$349/MES",
+      "visual_evidence": {
+        "duration_seconds": 15.093,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0186,
+            "mean": [
+              119.6215,
+              122.3742,
+              131.3267
+            ],
+            "stddev": [
+              67.7575,
+              65.9652,
+              66.2999
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "f0792b8bcb0b8670"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.5465,
+            "mean": [
+              87.3104,
+              92.065,
+              96.863
+            ],
+            "stddev": [
+              70.3859,
+              73.0186,
+              70.6677
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "63e39012cc0fa3b3"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.0744,
+            "mean": [
+              121.046,
+              118.7752,
+              125.8057
+            ],
+            "stddev": [
+              61.8366,
+              62.6444,
+              65.3657
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "fc390b1bcb96869e"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:f0792b8bcb0b8670/63e39012cc0fa3b3/fc390b1bcb96869e",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-11-rv90_ams/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-11-rv90_ams/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-11-rv90_ams/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/1_5ehdqXXlZ71_gczkWkrm0RJRqvHeXs6/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260714T185435Z/CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_PV_004.mp4"
+    },
+    {
+      "index": 12,
+      "status": "01_READY",
+      "source_drive_id": "1HZWMkja9Xa_rNHWLOggIIYTHXGdrOSJG",
+      "source_filename": "12_65 - Story Financiamento (Brasil).mp4",
+      "destination_filename": "CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NV_003.mp4",
+      "destination_drive_id": "1c8NIV_eNb_fINfWOWZRZba5l4ffUqRPA",
+      "source_final_parent_id": "1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+      "source_sha256": "83a33c945c23b12e85484ea50210da8090eda809557ab7268621b73aa1af1280",
+      "clean_sha256": "9b3d342e316b81c559bccc813f37ed30eeb80ea7da0aea5b522ba3e651cd6740",
+      "drive_md5": "35a8c5571e282a569a9cacf167b25864",
+      "bytes_clean": 9322466,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "NO_PERSON",
+      "p_orient": "NV",
+      "angle": "ELETRICO_SEM_ENTRADA",
+      "variant": "003",
+      "claim": "CARRO ELETRICO SEM ENTRADA; R$349/MES",
+      "visual_evidence": {
+        "duration_seconds": 15.07,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0140000000000002,
+            "mean": [
+              127.4601,
+              125.2988,
+              123.9974
+            ],
+            "stddev": [
+              63.9871,
+              62.8556,
+              60.6114
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "ed387cb1f8098b6e"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.535,
+            "mean": [
+              112.8437,
+              108.836,
+              107.1641
+            ],
+            "stddev": [
+              73.4546,
+              72.0084,
+              70.5471
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "000f1f7141c8486e"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.056000000000001,
+            "mean": [
+              125.1532,
+              120.2023,
+              116.0494
+            ],
+            "stddev": [
+              49.896,
+              51.1794,
+              55.1405
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "87e92c703a8cc091"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:ed387cb1f8098b6e/000f1f7141c8486e/87e92c703a8cc091",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-12-6q2mgben/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-12-6q2mgben/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-12-6q2mgben/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/1c8NIV_eNb_fINfWOWZRZba5l4ffUqRPA/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260714T185435Z/CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NV_003.mp4"
+    },
+    {
+      "index": 13,
+      "status": "01_READY",
+      "source_drive_id": "11EKyPuPFn7uyHrDMc0_G5f1bXX5_9eYV",
+      "source_filename": "13_62 - Story Financiamento (Brasil).mp4",
+      "destination_filename": "CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NV_004.mp4",
+      "destination_drive_id": "1lwsy-unwio0hWQXZEXdI5TPDcksIw4W3",
+      "source_final_parent_id": "1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+      "source_sha256": "6e260f0fd19281ade010362bc8bee52068ada5acc9ee12d492064e0d0507275c",
+      "clean_sha256": "9d0ca556318221aee572bbd8b903779cb4dcd666d748615c3889f2a7307c48c9",
+      "drive_md5": "ca076cdd4466704d80b2aff3be784f86",
+      "bytes_clean": 12043640,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "NO_PERSON",
+      "p_orient": "NV",
+      "angle": "ELETRICO_SEM_ENTRADA",
+      "variant": "004",
+      "claim": "CARRO ELETRICO SEM ENTRADA; R$349/MES",
+      "visual_evidence": {
+        "duration_seconds": 15.07,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0140000000000002,
+            "mean": [
+              134.453,
+              132.2649,
+              127.8516
+            ],
+            "stddev": [
+              67.4072,
+              67.977,
+              68.5919
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "3b3adcb0a06111e3"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.535,
+            "mean": [
+              132.9284,
+              125.9044,
+              121.6456
+            ],
+            "stddev": [
+              76.2317,
+              78.1604,
+              79.6754
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "9290fdcf7928d67f"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.056000000000001,
+            "mean": [
+              132.7786,
+              127.8033,
+              123.1393
+            ],
+            "stddev": [
+              67.9237,
+              69.1185,
+              69.9976
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "e98a76c0e37e70e0"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:3b3adcb0a06111e3/9290fdcf7928d67f/e98a76c0e37e70e0",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-13-at944rqk/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-13-at944rqk/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-car-br-br-20260714/item-13-at944rqk/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/1lwsy-unwio0hWQXZEXdI5TPDcksIw4W3/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CAR_BR_BR/VID/01_READY/20260714T185435Z/CAR_BR_BR_VID_ELETRICO_SEM_ENTRADA_NV_004.mp4"
     }
-  ]
+  ],
+  "report_csv": "/root/mgs-agent/data/ares/creative-ops/upload-manual/ready-execution/upload-manual-car-br-br-ready-20260714T185435Z.csv",
+  "report_json": "/root/mgs-agent/data/ares/creative-ops/upload-manual/ready-execution/upload-manual-car-br-br-ready-20260714T185435Z.json",
+  "completed_at_utc": "2026-07-14T18:57:00.018174+00:00",
+  "counts": {
+    "total": 13,
+    "ready": 12,
+    "rejected_technical": 1,
+    "clean_true": 12,
+    "drive_readback_verified": 12,
+    "sha256_readback_verified": 12,
+    "sources_archived": 12,
+    "sources_rejected": 1,
+    "upload_pending_after": 0,
+    "inventory_entries": 13
+  },
+  "ready_folder_link": "https://drive.google.com/drive/folders/1b3WuqfhqNHgj6Xns4mnPiRsVp2rEEdxc",
+  "legacy_folder_link": "https://drive.google.com/drive/folders/1-Co98HMnE2nKVR2_MqNpKBdBiBv0cdvl",
+  "rejected_folder_link": "https://drive.google.com/drive/folders/1tfCBFYNNXVD_VOXJQzUZ39qmCaUUelmF"
 }

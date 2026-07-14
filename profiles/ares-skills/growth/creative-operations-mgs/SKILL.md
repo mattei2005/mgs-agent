@@ -32,6 +32,7 @@ Critério de conclusão: asset/estado real validado e apenas o procedimento nece
 - **Transição Creative Ops → Campaign Ops, reserva e QA** → `references/route-pack-06.md`
 - **Identidade Drive × Meta, download do tratado e reserva de gestor** → `references/drive-meta-asset-identity-and-manager-reservation.md`
 - **Lote misto IMG/VID em UPLOAD MANUAL** → `references/mixed-media-drive-intake-ready-legacy.md`
+- **Asset tecnicamente inválido/branco em UPLOAD MANUAL** → `references/upload-manual-technical-rejection-gate.md`
 - **Renomeação segura Drive + local + inventário, com rollback** → `references/safe-rename-and-rollback.md`
 
 ## Regra unificada
