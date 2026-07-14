@@ -17,7 +17,7 @@ from decimal import Decimal, ROUND_HALF_UP
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from playwright.async_api import async_playwright
+from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeoutError
 
 BASE = Path('/root/mgs-agent')
 SB_STATE = Path('/root/.local/share/mgs/smartbidding_state_headed.json')
@@ -215,12 +215,24 @@ def discord_alert(message):
         return resp.status in (200, 201)
 
 
+def is_retryable_error(exc):
+    if isinstance(exc, (TimeoutError, asyncio.TimeoutError, PlaywrightTimeoutError, subprocess.TimeoutExpired, ConnectionError)):
+        return True
+    text = str(exc).upper()
+    return any(marker in text for marker in (
+        'HTTP 401', 'HTTP 408', 'HTTP 425', 'HTTP 429',
+        'HTTP 500', 'HTTP 502', 'HTTP 503', 'HTTP 504',
+        'CONNECTION RESET', 'CONNECTION REFUSED', 'TEMPORARILY UNAVAILABLE',
+    ))
+
+
 def parse_args():
     default_date = (datetime.now(SP).date() - timedelta(days=1)).isoformat()
     ap = argparse.ArgumentParser()
     ap.add_argument('--date', default=default_date, help='closed SB date YYYY-MM-DD; default yesterday in America/Sao_Paulo')
     ap.add_argument('--fetch-only', action='store_true', help='fetch and validate without WordPress write')
     ap.add_argument('--no-alert', action='store_true', help=argparse.SUPPRESS)
+    ap.add_argument('--defer-retryable-alert', action='store_true', help=argparse.SUPPRESS)
     return ap.parse_args()
 
 
@@ -238,14 +250,16 @@ def main():
         return 0
     except Exception as exc:
         error_text = str(exc).replace('\n', ' ')
+        retryable = is_retryable_error(exc)
         safe = f'{type(exc).__name__}: {error_text[-1000:]}'
-        print(json.dumps({'status': 'SYNC_FAILED', 'target_date': args.date, 'error': safe}, ensure_ascii=False))
-        if not args.no_alert and not args.fetch_only:
+        print(json.dumps({'status': 'SYNC_FAILED', 'target_date': args.date, 'retryable': retryable, 'error': safe}, ensure_ascii=False))
+        alert_deferred = args.defer_retryable_alert and retryable
+        if not args.no_alert and not args.fetch_only and not alert_deferred:
             try:
                 discord_alert(safe)
             except Exception:
                 pass
-        return 1
+        return 75 if retryable else 1
 
 
 if __name__ == '__main__':

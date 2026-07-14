@@ -68,6 +68,7 @@ Display the block as total SMS revenue for the domain and state that it respects
 ## Daily closed-day sync pattern
 
 - Schedule at `08:00` in the operator/VPS timezone and fetch yesterday as a closed calendar date in `America/Sao_Paulo`.
+- On a transient fetch/import failure (timeout, HTTP 401/408/425/429/5xx, connection reset/refused, or temporary unavailability), make exactly one automatic retry after 5 minutes. Defer the Discord failure alert until that retry also fails. Do not retry permanent validation errors such as invalid date, escaped scope, missing source PK, or readback mismatch. Keep `flock` around the whole attempt/retry window and make retry count/delay test-overridable without changing production defaults.
 - Query one timezone-safe instant (for example `12:00:00Z` at both boundaries), reject rows outside the target date/scope, require at least one source row, and never write a synthetic zero.
 - Deduplicate by source PK, aggregate by UTM campaign, use centavo integers and deterministic source hashes, then upsert transactionally.
 - Validate the exact date in WordPress by aggregate count, source-row count, gross/net/investment cents; rerun once to prove idempotency.

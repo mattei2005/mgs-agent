@@ -24,6 +24,8 @@ if ! [[ "$max_attempts" =~ ^[1-9][0-9]*$ && "$retry_delay_seconds" =~ ^[0-9]+$ ]
   exit 2
 fi
 
+python_bin="${MGS_SB_PYTHON_BIN:-/root/.local/share/mgs/sb-venv/bin/python}"
+sync_script="${MGS_SB_SCRIPT_PATH:-$BASE/scripts/sync-sb-sms-revenue-daily.py}"
 original_args=("$@")
 has_no_alert=0
 for arg in "${original_args[@]}"; do
@@ -35,14 +37,14 @@ rc=1
 while (( attempt <= max_attempts )); do
   call_args=("${original_args[@]}")
   if (( attempt < max_attempts && has_no_alert == 0 )); then
-    call_args+=(--no-alert)
+    call_args+=(--defer-retryable-alert)
   fi
   printf '[%s] sync-sb-sms-revenue-daily ATTEMPT %s/%s\n' "$(date -Iseconds)" "$attempt" "$max_attempts"
   set +e
-  xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python "$BASE/scripts/sync-sb-sms-revenue-daily.py" "${call_args[@]}"
+  xvfb-run -a "$python_bin" "$sync_script" "${call_args[@]}"
   rc=$?
   set -e
-  if (( rc == 0 || attempt == max_attempts )); then
+  if (( rc == 0 || rc != 75 || attempt == max_attempts )); then
     break
   fi
   printf '[%s] sync-sb-sms-revenue-daily RETRY_SCHEDULED after=%ss previous_rc=%s\n' "$(date -Iseconds)" "$retry_delay_seconds" "$rc"
