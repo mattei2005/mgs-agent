@@ -621,22 +621,28 @@ def restriction_alert_row(row):
         f"{truncate_text(row.get('restricted_until_time') or row.get('restricted_until') or row.get('data saida'),16)}"
     )
 
-def build_new_restrictions_alert(rows, summary):
+def build_new_restrictions_alerts(rows, summary, limit=1900):
     rows=sorted(rows, key=lambda r: (r.get('restricted_until') or '9999-99-99', r.get('page_name') or '', r.get('bot_user') or ''))
-    lines=[
+    timestamp=alert_timestamp(summary)
+    total=len(rows)
+    first_prefix=[
         'PÁGINAS RESTRITAS — NOVAS APLICADAS NA SMART BIDDING',
-        f'Atualizado em: {alert_timestamp(summary)}',
+        f'Atualizado em: {timestamp}',
         'Fonte: último Completed da DigitalTRChat → Smart Bidding',
-        f'Novas nesta execução: {len(rows)}',
+        f'Novas nesta execução: {total}',
         '',
         'Página               FB Page ID          Page ID   Bot user           Segurador            Status SB   Códigos       Data saída',
         '-------------------- ------------------ -------- ------------------ -------------------- ----------- ------------- ----------------',
     ]
-    for row in rows[:20]:
-        lines.append(restriction_alert_row(row))
-    if len(rows)>20:
-        lines.append(f'... +{len(rows)-20} na planilha completa')
-    lines += [
+    continuation_prefix=[
+        'PÁGINAS RESTRITAS — NOVAS APLICADAS (CONTINUAÇÃO)',
+        f'Atualizado em: {timestamp}',
+        f'Novas nesta execução: {total}',
+        '',
+        'Página               FB Page ID          Page ID   Bot user           Segurador            Status SB   Códigos       Data saída',
+        '-------------------- ------------------ -------- ------------------ -------------------- ----------- ------------- ----------------',
+    ]
+    suffix=[
         '',
         '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
         'AÇÃO EXECUTADA',
@@ -644,7 +650,28 @@ def build_new_restrictions_alert(rows, summary):
         '',
         'As páginas restritas acima foram atualizadas com a data de saída na Dash da Smart Bidding.',
     ]
-    return '```\n'+'\n'.join(lines)+'\n```\n\n**Planilha completa:** <'+str(summary.get('sheet') or REPORT_SHEET_URL)+'>'
+    messages=[]; current=list(first_prefix)
+    def render(lines, first):
+        content='```\n'+'\n'.join(lines+suffix)+'\n```'
+        if first:
+            content+='\n\n**Planilha completa:** <'+str(summary.get('sheet') or REPORT_SHEET_URL)+'>'
+        return content
+    for row in rows:
+        line=restriction_alert_row(row)
+        candidate=render(current+[line],not messages)
+        minimum=len(first_prefix) if not messages else len(continuation_prefix)
+        if len(candidate)>limit and len(current)>minimum:
+            messages.append(render(current,not messages))
+            current=list(continuation_prefix)
+        current.append(line)
+    messages.append(render(current,not messages))
+    return messages
+
+def build_new_restrictions_alert(rows, summary):
+    messages=build_new_restrictions_alerts(rows,summary)
+    if len(messages)!=1:
+        raise RuntimeError(f'new restrictions require {len(messages)} Discord messages; use build_new_restrictions_alerts')
+    return messages[0]
 
 def build_no_new_restrictions_alert(summary):
     stats=summary.get('stats') or {}
@@ -1165,12 +1192,13 @@ async def main():
             try:
                 deliveries=[]
                 if alert_rows:
-                    first_content=build_new_restrictions_alert(alert_rows, summary)
+                    first_contents=build_new_restrictions_alerts(alert_rows, summary)
                     summary['discord_alert_kind']='new_restrictions'
                 else:
-                    first_content=build_no_new_restrictions_alert(summary)
+                    first_contents=[build_no_new_restrictions_alert(summary)]
                     summary['discord_alert_kind']='no_new_restrictions'
-                deliveries.append({'kind':summary['discord_alert_kind'],'result':post_discord(first_content)})
+                for index,content in enumerate(first_contents,start=1):
+                    deliveries.append({'kind':f"{summary['discord_alert_kind']}_{index}",'result':post_discord(content)})
                 sheet_ok=bool((summary.get('sheet_update') or {}).get('readback_ok'))
                 if not summary['errors'] and sheet_ok:
                     for index,content in enumerate(build_operational_summary_alerts(restricted_rows,summary),start=1):
