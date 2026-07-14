@@ -1,0 +1,29 @@
+2026-07-13T22:35:09-04:00
+1password-cli	2.34.1-1
+openssh-client	1:9.6p1-3ubuntu13.16
+openssh-server	1:9.6p1-3ubuntu13.16
+openssh-sftp-server	1:9.6p1-3ubuntu13.16
+MainPID=978
+ExecMainStartTimestamp=Sun 2026-07-12 19:09:44 EDT
+Id=ssh.service
+ActiveState=active
+SubState=running
+
+MainPID=344107
+ExecMainStartTimestamp=Mon 2026-07-13 22:05:37 EDT
+Id=zeus-gateway.service
+ActiveState=active
+SubState=running
+
+MainPID=344064
+ExecMainStartTimestamp=Mon 2026-07-13 22:05:25 EDT
+Id=atena-gateway.service
+ActiveState=active
+SubState=running
+
+MainPID=344020
+ExecMainStartTimestamp=Mon 2026-07-13 22:05:09 EDT
+Id=ares-gateway.service
+ActiveState=active
+SubState=running
+518aba69e5948877d6f77c9f14d63df6896e632868208727b2e7f29bbf78ad54  /etc/ssh/sshd_config

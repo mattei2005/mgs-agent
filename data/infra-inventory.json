@@ -2,7 +2,8 @@
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
     "updated_at": "2026-07-13T22:16:02-04:00",
-    "generated_by": "infra-discovery.sh"
+    "generated_by": "infra-discovery.sh",
+    "last_updated": "2026-07-13T22:38:09-04:00"
   },
   "system_packages": [
     {
@@ -2402,6 +2403,86 @@
         "status": "PASS"
       },
       "updated_at": "2026-07-13T22:18:14-04:00"
+    },
+    {
+      "id": "vps-openssh-1password-update-20260713",
+      "agent": "zeus",
+      "type": "vps_package_update",
+      "owner": "Zeus/Infra",
+      "authorized_by": "344196393512075265",
+      "authorization_message_id": "1526416360391835669",
+      "host": "srv1767265",
+      "status": "deployed_validated",
+      "packages_before": {
+        "openssh-client": "1:9.6p1-3ubuntu13.16",
+        "openssh-server": "1:9.6p1-3ubuntu13.16",
+        "openssh-sftp-server": "1:9.6p1-3ubuntu13.16",
+        "1password-cli": "2.34.1-1"
+      },
+      "packages_after": {
+        "openssh-client": "1:9.6p1-3ubuntu13.18",
+        "openssh-server": "1:9.6p1-3ubuntu13.18",
+        "openssh-sftp-server": "1:9.6p1-3ubuntu13.18",
+        "1password-cli": "2.35.0-1"
+      },
+      "backup": "/root/mgs-agent/reports/vps-updates/20260713-223509-openssh-1password/etc-ssh-pre-update.tar.gz",
+      "backup_sha256": "40cc183e467abcd11dca14d32ca08c72c515363340a76846f4fd8f6d14a390b3",
+      "sshd_config_sha256_before": "518aba69e5948877d6f77c9f14d63df6896e632868208727b2e7f29bbf78ad54",
+      "sshd_config_sha256_after": "518aba69e5948877d6f77c9f14d63df6896e632868208727b2e7f29bbf78ad54",
+      "sshd_config_unchanged": true,
+      "validation": {
+        "simulation": "4 upgraded, 0 new, 0 removed",
+        "first_postcheck": "sshd -t returned 255 because package transition left /run/sshd absent and ssh.service inactive while ssh.socket remained listening",
+        "correction": "started ssh.service; RuntimeDirectory recreated; sshd -t PASS",
+        "ssh_service": "active",
+        "ssh_socket": "active/listening port 22",
+        "dpkg_audit": "clean",
+        "apt_upgradable": "0",
+        "gateways": "Zeus/Atena/Ares active",
+        "reboot_required": false
+      },
+      "updated_at": "2026-07-13T22:38:09-04:00"
+    },
+    {
+      "id": "mgs-discord-tool-progress-off-20260713",
+      "agent": "zeus",
+      "type": "profile_display_policy",
+      "owner": "Rodolfo/Zeus",
+      "authorized_by": "344196393512075265",
+      "authorization_message_id": "1526416360391835669",
+      "status": "deployed_validated",
+      "scope": [
+        "zeus",
+        "atena",
+        "ares",
+        "hera"
+      ],
+      "setting": "display.platforms.discord.tool_progress=false",
+      "reason": "Rodolfo requires human-facing operational threads without raw tool commands; infra details go only to #alerts-infra",
+      "configs": {
+        "zeus": {
+          "sha256": "b115b504b195472d88d5c0219b47f2e5da0ebbe16184211f111f9e0e00b99b23",
+          "mirror_sha256": "b115b504b195472d88d5c0219b47f2e5da0ebbe16184211f111f9e0e00b99b23",
+          "discord_tool_progress": false
+        },
+        "atena": {
+          "sha256": "39237a667d6ed33030b5c92c4798e05907070a56e1a923f1bb91e00e285ff761",
+          "mirror_sha256": "39237a667d6ed33030b5c92c4798e05907070a56e1a923f1bb91e00e285ff761",
+          "discord_tool_progress": false
+        },
+        "ares": {
+          "sha256": "8eb8b78dde6927e0231d39a13e671b9213e4a123273e688932b52c0073ff5939",
+          "mirror_sha256": "8eb8b78dde6927e0231d39a13e671b9213e4a123273e688932b52c0073ff5939",
+          "discord_tool_progress": false
+        },
+        "hera": {
+          "sha256": "1b68b78b350a78bbc7a5a47088903908ed943089b7a4526f614a49646f886083",
+          "mirror_sha256": "1b68b78b350a78bbc7a5a47088903908ed943089b7a4526f614a49646f886083",
+          "discord_tool_progress": false
+        }
+      },
+      "validation": "Hermes config check 4/4 PASS; live/mirror SHA equal 4/4; no gateway restart performed",
+      "updated_at": "2026-07-13T22:38:09-04:00"
     }
   ],
   "profile_skill_references": [

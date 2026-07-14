@@ -1,0 +1,40 @@
+2026-07-13T22:35:53-04:00
+1password-cli	2.35.0-1
+openssh-client	1:9.6p1-3ubuntu13.18
+openssh-server	1:9.6p1-3ubuntu13.18
+openssh-sftp-server	1:9.6p1-3ubuntu13.18
+2.35.0
+OpenSSH_9.6p1 Ubuntu-3ubuntu13.18, OpenSSL 3.0.13 30 Jan 2024
+Id=ssh.socket
+ActiveState=active
+SubState=running
+
+MainPID=431894
+ExecMainStartTimestamp=Mon 2026-07-13 22:35:52 EDT
+ExecMainStatus=0
+Id=ssh.service
+ActiveState=active
+SubState=running
+
+MainPID=344107
+ExecMainStartTimestamp=Mon 2026-07-13 22:05:37 EDT
+ExecMainStatus=0
+Id=zeus-gateway.service
+ActiveState=active
+SubState=running
+
+MainPID=344064
+ExecMainStartTimestamp=Mon 2026-07-13 22:05:25 EDT
+ExecMainStatus=0
+Id=atena-gateway.service
+ActiveState=active
+SubState=running
+
+MainPID=344020
+ExecMainStartTimestamp=Mon 2026-07-13 22:05:09 EDT
+ExecMainStatus=0
+Id=ares-gateway.service
+ActiveState=active
+SubState=running
+upgradable=0
+reboot_required=no
