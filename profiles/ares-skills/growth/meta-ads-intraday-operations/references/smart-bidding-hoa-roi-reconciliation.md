@@ -48,13 +48,13 @@ Esse cálculo é ROI de **cashflow diário da página**, não ROI de coorte. Bro
 
 ## Layout OpenzedFinanzas aprovado por Rodolfo
 
-No HOA da operação OpenzedFinanzas-CC-ES, o bloco visível deve mostrar somente:
+No HOA da operação OpenzedFinanzas-CC-ES, o bloco visível deve mostrar:
 
 ```text
-PG | Spend | ROI Drip | ROI Total | Status
+PG | Spend | Receita Drip | Receita Total | ROI Drip | ROI Total | Status
 ```
 
-Não exibir `ROI Broad`. Rodolfo investiga separadamente a ausência de receita Broadcast; `BD_REVENUE` e o ROI Broadcast permanecem no audit técnico.
+Os valores de spend e receita devem indicar a moeda no título do bloco. Não exibir `Receita Broad` nem `ROI Broad`. Rodolfo investiga separadamente a receita Broadcast; `BD_REVENUE`, a receita Broadcast e o ROI Broadcast permanecem no audit técnico.
 
 Para tabela histórica por data, usar o formato compacto:
 

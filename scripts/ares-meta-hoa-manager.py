@@ -708,6 +708,8 @@ def main() -> int:
         roi_rows.append({
             'pg_id': item.get('pg_id'),
             'meta_spend': fmt_money(item.get('meta_spend')),
+            'drip_revenue': fmt_money(item.get('drip_revenue')),
+            'total_revenue': fmt_money(item.get('total_revenue')),
             'roi_drip': fmt_percent(item.get('roi_drip_pct')),
             'roi_total': fmt_percent(item.get('roi_total_pct')),
             'status': item.get('status'),
@@ -717,7 +719,7 @@ def main() -> int:
         blocks.append(output_table(
             f'ROI da página — {today.isoformat()} — USD — informativo',
             roi_rows,
-            [('pg_id','PG'),('meta_spend','Spend'),('roi_drip','ROI Drip'),('roi_total','ROI Total'),('status','Status')],
+            [('pg_id','PG'),('meta_spend','Spend'),('drip_revenue','Receita Drip'),('total_revenue','Receita Total'),('roi_drip','ROI Drip'),('roi_total','ROI Total'),('status','Status')],
         ))
     blocks.append(campaign_block)
     print('\n\n'.join(blocks))
