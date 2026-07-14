@@ -661,15 +661,16 @@ def build_no_new_restrictions_alert(summary):
     return '```\n'+'\n'.join(lines)+'\n```\n\n**Planilha completa:** <'+str(summary.get('sheet') or REPORT_SHEET_URL)+'>'
 
 def build_operational_summary_alerts(rows, summary, limit=1900):
-    grouped=defaultdict(lambda:{'pages':0,'sites':set()})
+    page_counts=Counter()
+    sites_by_date=defaultdict(set)
     for row in rows:
         date=row.get('data saida') or '?'
-        grouped[date]['pages']+=1
-        grouped[date]['sites'].update(site.strip() for site in norm(row.get('sites')).split(',') if site.strip() and site.strip()!='?')
+        page_counts[date]+=1
+        sites_by_date[date].update(site.strip() for site in norm(row.get('sites')).split(',') if site.strip() and site.strip()!='?')
     row_lines=[]
-    for date,data in sorted(grouped.items()):
-        sites=', '.join(sorted(data['sites'],key=site_sort_key))
-        row_lines.append(f"{date:<11}  {data['pages']:>7}  {sites}")
+    for date in sorted(page_counts):
+        sites=', '.join(sorted(sites_by_date[date],key=site_sort_key))
+        row_lines.append(f"{date:<11}  {page_counts[date]:>7}  {sites}")
     timestamp=alert_timestamp(summary)
     first_prefix=[
         'PÁGINAS RESTRITAS — RESUMO OPERACIONAL',
@@ -942,6 +943,11 @@ def write_google_sheet(rows):
         raise RuntimeError(f'Google Sheets ainda contém chaves duplicadas: {duplicate_keys!r}')
     rows_by_tab={title:max(0,len(values)-1) for title,values in readback.items()}
     updated_tabs=list(updates)
+    removed_page_rows=[]
+    for key in sorted(removed_keys):
+        values_row=old_paginas[key]
+        removed_page_rows.append({header:(values_row[index] if index<len(values_row) else '') for index,header in enumerate(page_headers)})
+    removed_page_rows.sort(key=lambda row:(row.get('data saida') or '9999-99-99',row.get('nome da pagina') or '',row.get('bot user') or ''))
     return {
         'url':REPORT_SHEET_URL,
         'rows_paginas':rows_by_tab['Paginas'],
@@ -952,6 +958,7 @@ def write_google_sheet(rows):
         'unchanged_tabs':len(rows_by_tab)-len(updated_tabs),
         'added_pages':len(added_keys),
         'removed_pages':len(removed_keys),
+        'removed_page_rows':removed_page_rows,
         'changed_pages':len(changed_keys),
         'input_duplicates_removed':input_duplicates,
         'existing_duplicates_removed':existing_duplicates,
@@ -999,7 +1006,7 @@ async def main():
                 sb_restricted_pages_by_user[norm_email(r.get('USER_LOGIN'))].add(norm(r.get('PAGE_ID')))
         summary['sb_active_restricted_start']=len(sb_restricted_ids)
         state=load_state(); state.setdefault('alerted_restricted_pages', {})
-        stats=Counter(); report_rows=[]; backups=[]; alert_rows=[]; writes=0
+        stats=Counter(); report_rows=[]; backups=[]; alert_rows=[]; restricted_rows=[]; fresh_sb_rows=[]; exited_rows=[]; writes=0
         for user in users:
             print(f"PROGRESS user_start {user}", flush=True)
             scan=await scan_dtr_user(user, matched[user], step1_scope, args.limit_accounts, args.limit_pages, sb_restricted_pages_by_user.get(user, set()))
@@ -1148,19 +1155,31 @@ async def main():
                 restricted_rows, sheet_stats=restricted_sheet_rows(fresh_sb_rows,active,tday)
                 summary.update(sheet_stats)
                 summary['sheet_update']=write_google_sheet(restricted_rows)
+                exited_rows=exited_restrictions_from_sheet((summary['sheet_update'] or {}).get('removed_page_rows') or [],fresh_sb_rows,tday)
+                summary['exited_restrictions']=exited_rows
             except Exception as exc:
                 summary['errors'].append({'sheet_update_failed':f'{type(exc).__name__}: {exc}'})
         else:
             summary['sheet_update_skipped']='dry-run'
         if args.apply and (alert_rows or not summary['errors']):
             try:
+                deliveries=[]
                 if alert_rows:
-                    alert_content=build_new_restrictions_alert(alert_rows, summary)
+                    first_content=build_new_restrictions_alert(alert_rows, summary)
                     summary['discord_alert_kind']='new_restrictions'
                 else:
-                    alert_content=build_no_new_restrictions_alert(summary)
+                    first_content=build_no_new_restrictions_alert(summary)
                     summary['discord_alert_kind']='no_new_restrictions'
-                summary['discord_alert_http']=post_discord(alert_content)
+                deliveries.append({'kind':summary['discord_alert_kind'],'result':post_discord(first_content)})
+                sheet_ok=bool((summary.get('sheet_update') or {}).get('readback_ok'))
+                if not summary['errors'] and sheet_ok:
+                    for index,content in enumerate(build_operational_summary_alerts(restricted_rows,summary),start=1):
+                        deliveries.append({'kind':f'operational_summary_{index}','result':post_discord(content)})
+                    if exited_rows:
+                        for index,content in enumerate(build_exited_restrictions_alerts(exited_rows,summary),start=1):
+                            deliveries.append({'kind':f'exited_restrictions_{index}','result':post_discord(content)})
+                summary['discord_deliveries']=deliveries
+                summary['discord_alert_http']=(deliveries[0]['result'] or {}).get('status')
             except Exception as exc:
                 summary['errors'].append({'discord_alert_failed':f'{type(exc).__name__}: {exc}'})
         state.setdefault('runs',[]).append({'ts':summary['started_at'],'mode':summary['mode'],'stats':summary['stats'],'writes':writes,'log':str(run_log),'sheet':REPORT_SHEET_URL,'sheet_update_ok':bool((summary.get('sheet_update') or {}).get('readback_ok'))})
