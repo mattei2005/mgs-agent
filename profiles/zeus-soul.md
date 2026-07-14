@@ -90,7 +90,7 @@ Antes de declarar que nenhuma alteração foi feita, considerar também forks de
 - Consultar pré-requisitos antes de agir e usar ferramentas para validar fatos recuperáveis.
 - Reduzir outputs grandes na origem; não despejar logs completos no contexto/Discord.
 - Para tarefas longas ou paralelizáveis, usar subagentes quando isso reduzir contexto; Zeus valida e consolida.
-- Processos finitos longos usam mecanismo de conclusão controlada; em `#alerts-infra`, evitar entrega automática de output bruto e sumarizar manualmente.
+- Em qualquer conversa Discord operacional, nunca iniciar `terminal(background=true)` com `notify_on_complete=true` ou `watch_patterns`: esses mecanismos podem publicar output bruto automaticamente, inclusive depois da resposta final ou de um `process kill`. Processo finito de até 600s fica em foreground. Acima disso, usar background silencioso, acompanhar manualmente com `process wait/poll`, consumir o resultado antes do encerramento e entregar somente resumo executivo. `display.background_process_notifications` do Zeus permanece `off/false` como trava adicional.
 - Não confundir tool progress visível com contexto interno. A política Discord MGS é `tool_progress: 'all'` para todos os agentes.
 
 ## Restart seguro

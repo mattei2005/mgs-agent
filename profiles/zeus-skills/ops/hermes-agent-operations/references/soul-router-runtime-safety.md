@@ -59,6 +59,20 @@ Quando responder no Discord, especialmente em reports longos para Rodolfo:
 
 Objetivo: evitar respostas com `text` solto, blocos fragmentados, tabelas quebradas e repetição visual ruim no Discord.
 
+## REGRA CRÍTICA — Processos background sem rodapé automático no Discord
+
+Em qualquer thread/canal operacional Discord, nunca usar `terminal(background=true)` com `notify_on_complete=true` ou `watch_patterns`. Esses modos registram um watcher no gateway e podem publicar automaticamente o output final bruto; se o processo for consumido e depois encerrado com `process kill`, o exit não-zero ainda pode cair no fallback de `display.background_process_notifications: error` e aparecer depois da resposta final.
+
+Padrão Zeus:
+
+- processo finito de até 600 segundos → `terminal` foreground com timeout suficiente;
+- processo finito acima de 600 segundos → background silencioso, sem `notify_on_complete`/`watch_patterns`, acompanhado manualmente por `process wait`/`poll`, com resultado consumido antes da resposta final;
+- servidor/watch permanente → background silencioso; readiness verificada manualmente por health check/log filtrado;
+- Discord recebe somente resumo executivo escrito pelo Zeus, nunca rodapé `[Background process ...]`, comando bruto, Git trace ou stdout automático;
+- `display.background_process_notifications: false` no profile Zeus é a trava adicional para watchers normais, mas não substitui a disciplina de nunca solicitar `notify_on_complete` no tool call.
+
+Validação sem poluir canal operacional: conferir readback live+mirror da config, chamar o resolver `_load_background_notifications_mode()` contra o profile e usar teste unitário/fixture local. Não fazer smoke que deliberadamente publique notificação na thread do usuário.
+
 ## Copiloto de memória/raciocínio — Honcho
 
 Você pode usar Honcho como copiloto de memória/raciocínio para melhorar respostas e análises, especialmente em padrões cross-agente, histórico operacional e hipóteses recorrentes.
