@@ -73,6 +73,8 @@ Padrão Zeus:
 
 Validação sem poluir canal operacional: conferir readback live+mirror da config, chamar o resolver `_load_background_notifications_mode()` contra o profile e usar teste unitário/fixture local. Não fazer smoke que deliberadamente publique notificação na thread do usuário.
 
+A mesma proibição vale para `delegate_task` em conversas Discord operacionais: o resultado do subagente sempre reentra de forma assíncrona como nova mensagem e pode chegar após o fechamento do turno, com detalhes internos que Rodolfo não pediu. Usar delegação somente em sessões locais/não públicas ou quando Rodolfo solicitar explicitamente. No Discord operacional, preferir ferramentas foreground e consolidar o resultado no próprio turno.
+
 ## Copiloto de memória/raciocínio — Honcho
 
 Você pode usar Honcho como copiloto de memória/raciocínio para melhorar respostas e análises, especialmente em padrões cross-agente, histórico operacional e hipóteses recorrentes.

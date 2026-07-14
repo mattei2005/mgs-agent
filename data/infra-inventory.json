@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-14T11:54:16-04:00",
+    "updated_at": "2026-07-14T12:02:44-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -2752,7 +2752,12 @@
       "validation": "Patched Discord delete/repost by channel ID rule after Rodolfo correction; runtime skill updated; used REST API to delete/repost HOA report parts without ID REC.",
       "source_report": "Zeus REPORT-INFRA embed standardization 2026-07-02",
       "agent": "zeus",
-      "modified_at": "2026-07-09T13:18:21-04:00"
+      "modified_at": "2026-07-14T12:02:44-04:00",
+      "reference_path": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/references/route-pack-07.md",
+      "versioned_reference_path": "/root/mgs-agent/profiles/zeus-skills/ops/discord-ops/references/route-pack-07.md",
+      "reference_sha256": "e136633e9c5ca408b90daec7775f4cb680381dbcb1d8f0fc3c04509884d054b3",
+      "reference_runtime_versioned_sha_match": true,
+      "last_change": "2026-07-14: documented Pre-API compression lifecycle banner bypass of the Discord noisy-status filter and the safe diagnostic/fix path."
     },
     {
       "profile": "zeus",
