@@ -60,6 +60,7 @@ Environment, service names, and baseline posture: `references/operational-postur
 Primary references:
 
 - Read-only review or standard update workflow → `references/hermes-update-core.md`
+- Large customization port, patch-inventory drift, broad-baseline reconciliation, or staged no-restart preservation proof → `references/hermes-update-preport-baseline-and-patch-coverage.md`
 - Failure, drift, ENOSPC, restart collision, stale cache, rollback, or unusual updater behavior → `references/hermes-update-pitfalls.md`
 - Exact scenario playbook → load only the matching file named by those references or by `references/reference-catalog.md`
 

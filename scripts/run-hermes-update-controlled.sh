@@ -19,6 +19,7 @@ NO_UPDATE="${NO_UPDATE:-0}"
 RESTART_GATEWAYS="${RESTART_GATEWAYS:-0}"
 ALLOW_PATCH_DRIFT="${ALLOW_PATCH_DRIFT:-0}"
 RESTORE_LOCAL_DIFFS="${RESTORE_LOCAL_DIFFS:-1}"
+TARGET_REF="${TARGET_REF:-origin/main}"
 GATEWAY_SERVICES="${GATEWAY_SERVICES:-zeus-gateway.service atena-gateway.service ares-gateway.service}"
 # Discord report delivery is opt-in. Do not hardcode a thread here: updates may be
 # launched from any active Rodolfo/Zeus thread, and accidental delivery to an old
@@ -148,6 +149,9 @@ snapshot_pre_state() {
     echo "head_short=$(git -C "$REPO" rev-parse --short HEAD)"
     echo "origin_main=$(git -C "$REPO" rev-parse origin/main)"
     echo "origin_main_short=$(git -C "$REPO" rev-parse --short origin/main)"
+    echo "target_ref=$TARGET_REF"
+    echo "target_sha=$(git -C "$REPO" rev-parse "$TARGET_REF")"
+    echo "target_short=$(git -C "$REPO" rev-parse --short "$TARGET_REF")"
     echo "behind=$(git -C "$REPO" rev-list --count HEAD..origin/main)"
     echo "ahead=$(git -C "$REPO" rev-list --count origin/main..HEAD)"
   } | tee "$REPORT_DIR/pre-revisions.txt"
@@ -293,9 +297,9 @@ readonly_invariant_check() {
 }
 
 check_patches_against_upstream() {
-  log "Checking canonical MGS patches against origin/main in temporary worktree"
+  log "Checking canonical MGS patches against $TARGET_REF in temporary worktree"
   local wt="$REPORT_DIR/upstream-worktree"
-  git -C "$REPO" worktree add --detach "$wt" origin/main > "$REPORT_DIR/worktree-add.txt" 2>&1
+  git -C "$REPO" worktree add --detach "$wt" "$TARGET_REF" > "$REPORT_DIR/worktree-add.txt" 2>&1
   local rc=0
   local runtime_patches=("$PATCH_DIR"/mgs-runtime-customizations-*.patch)
   local latest_runtime_patch=""
@@ -310,16 +314,13 @@ check_patches_against_upstream() {
       echo "DRIFT patch guard does not reference latest runtime patch: $latest_runtime_patch"
       rc=1
     fi
+    # The newest consolidated runtime patch is the complete canonical MGS
+    # surface for its reviewed upstream target. Legacy per-feature artifacts
+    # remain in ensure-hermes-mgs-patches.sh as invariant/fallback checks; testing
+    # them independently here creates false drift because their hunks overlap the
+    # consolidated patch and older upstream layouts.
     local canonical_patches=(
       "$latest_runtime_patch"
-      "restart-recovery-natural-continuation-2026-07-11.patch"
-      "mgs-auto-reasoning-routing.patch"
-      "mgs-busy-steer-universal-media-2026-07-10.patch"
-      "mgs-busy-steer-startup-merge-2026-07-11.patch"
-      "mgs-busy-steer-startup-race-hardening-2026-07-11.patch"
-      "mgs-busy-steer-reentrant-followup-2026-07-12.patch"
-      "mgs-busy-steer-reentrant-rebuild-2026-07-12.patch"
-      "mgs-busy-steer-ack-ptbr-2026-07-11.patch"
     )
     for name in "${canonical_patches[@]}"; do
       [[ -n "$name" ]] || continue
@@ -346,9 +347,9 @@ check_patches_against_upstream() {
 }
 
 check_local_diff_against_upstream() {
-  log "Checking saved live local diffs against origin/main in temporary worktree"
+  log "Checking saved live local diffs against $TARGET_REF in temporary worktree"
   local wt="$REPORT_DIR/local-diff-worktree"
-  git -C "$REPO" worktree add --detach "$wt" origin/main > "$REPORT_DIR/local-diff-worktree-add.txt" 2>&1
+  git -C "$REPO" worktree add --detach "$wt" "$TARGET_REF" > "$REPORT_DIR/local-diff-worktree-add.txt" 2>&1
   local rc=0
   {
     local patch label
@@ -373,7 +374,7 @@ check_local_diff_against_upstream() {
   } | tee "$REPORT_DIR/pre-local-diff-upstream-check.txt"
   git -C "$REPO" worktree remove --force "$wt" >> "$REPORT_DIR/local-diff-worktree-add.txt" 2>&1 || true
   if [[ "$rc" != 0 ]]; then
-    log "Live local diff does not apply cleanly to origin/main. Update must stop before mutation; manual port is required."
+    log "Live local diff does not apply cleanly to $TARGET_REF. Update must stop before mutation; manual port is required."
   fi
   return "$rc"
 }
@@ -611,6 +612,9 @@ post_validate() {
     echo "head_short=$(git -C "$REPO" rev-parse --short HEAD)"
     echo "origin_main=$(git -C "$REPO" rev-parse origin/main)"
     echo "origin_main_short=$(git -C "$REPO" rev-parse --short origin/main)"
+    echo "target_ref=$TARGET_REF"
+    echo "target_sha=$(git -C "$REPO" rev-parse "$TARGET_REF")"
+    echo "target_short=$(git -C "$REPO" rev-parse --short "$TARGET_REF")"
     echo "behind=$(git -C "$REPO" rev-list --count HEAD..origin/main)"
     echo "ahead=$(git -C "$REPO" rev-list --count origin/main..HEAD)"
   } | tee "$REPORT_DIR/post-revisions.txt"
@@ -709,7 +713,12 @@ main() {
   require_path "$ENSURE_SCRIPT"
   log "START MGS controlled Hermes update"
   log "REPORT_DIR=$REPORT_DIR"
-  log "PRECHECK_ONLY=$PRECHECK_ONLY NO_UPDATE=$NO_UPDATE RESTART_GATEWAYS=$RESTART_GATEWAYS ALLOW_PATCH_DRIFT=$ALLOW_PATCH_DRIFT RESTORE_LOCAL_DIFFS=$RESTORE_LOCAL_DIFFS"
+  log "PRECHECK_ONLY=$PRECHECK_ONLY NO_UPDATE=$NO_UPDATE RESTART_GATEWAYS=$RESTART_GATEWAYS ALLOW_PATCH_DRIFT=$ALLOW_PATCH_DRIFT RESTORE_LOCAL_DIFFS=$RESTORE_LOCAL_DIFFS TARGET_REF=$TARGET_REF"
+  git -C "$REPO" rev-parse --verify "$TARGET_REF^{commit}" >/dev/null
+  if [[ "$PRECHECK_ONLY" != "1" && "$TARGET_REF" != "origin/main" ]]; then
+    log "FAIL-CLOSED: mutating updates to an exact TARGET_REF use the reviewed manual staged-update playbook; this wrapper's hermes update path follows origin/main."
+    false
+  fi
   profile_backup
   snapshot_pre_state
   snapshot_profiles_sanitized pre
@@ -718,7 +727,7 @@ main() {
   local_diff_check_rc=0
   check_local_diff_against_upstream || local_diff_check_rc=$?
   if [[ "$local_diff_check_rc" != 0 && "$PRECHECK_ONLY" != "1" && "$RESTORE_LOCAL_DIFFS" != "0" ]]; then
-    log "FAIL-CLOSED: live local diff would not restore cleanly on origin/main. Manual port required before update, or run with RESTORE_LOCAL_DIFFS=0 after validating a canonical port patch."
+    log "FAIL-CLOSED: live local diff would not restore cleanly on $TARGET_REF. Manual port required before update, or run with RESTORE_LOCAL_DIFFS=0 after validating a canonical port patch."
     false
   fi
   if [[ "$local_diff_check_rc" != 0 && "$PRECHECK_ONLY" != "1" && "$RESTORE_LOCAL_DIFFS" == "0" ]]; then

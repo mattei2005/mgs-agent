@@ -167,7 +167,8 @@ PY
       fi
       ;;
     mgs-busy-steer-reentrant-followup-*.patch)
-      if grep -q "direct_unclaimed_run = run_generation is None and current_agent is None" "$REPO/gateway/run.py" \
+      if grep -q "direct_unclaimed_run = current_agent is None" "$REPO/gateway/run.py" \
+        && grep -q "Skipping stale startup agent promotion" "$REPO/gateway/run.py" \
         && grep -q "test_reentrant_followup_promotion_reuses_current_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
         && grep -q "test_reentrant_followup_does_not_mask_replaced_agent" "$REPO/tests/gateway/test_busy_session_ack.py"; then
         log "patch invariants already present despite context drift: $name"
@@ -235,10 +236,10 @@ git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1 || fail "Hermes repo not foun
 log "START ensure Hermes MGS patches"
 log "repo=$(git -C "$REPO" rev-parse --short HEAD 2>/dev/null || echo unknown)"
 
-# Consolidated port for Hermes v0.18.0+ after the 2026-07-07 controlled update.
-# This applies the complete MGS runtime customization surface to a clean
-# upstream checkout first; legacy per-feature patches below then act as
-# invariant checks/backward-compatible fallback.
+# Consolidated port for the exact reviewed upstream 2ccfdb2db (2026-07-13).
+# Apply the complete current MGS runtime customization surface first; legacy
+# per-feature patches below remain invariant checks/backward-compatible fallback.
+apply_patch_if_needed "mgs-runtime-customizations-2026-07-13.patch"
 apply_patch_if_needed "mgs-runtime-customizations-2026-07-07.patch"
 apply_patch_if_needed "memory-dead-letter-structural-trace-2026-07-13.patch"
 apply_patch_if_needed "memory-dead-letter-state-fingerprint-2026-07-13.patch"
@@ -378,6 +379,10 @@ grep -q "allow_same_generation_replacement=_interrupt_depth > 0" "$REPO/gateway/
   || fail "missing MGS recursive rebuilt-agent ownership transfer"
 grep -q "test_reentrant_followup_transfers_same_generation_rebuilt_agent" "$REPO/tests/gateway/test_busy_session_ack.py" \
   || fail "missing MGS rebuilt-agent follow-up regression test"
+grep -q "Skipping stale startup agent promotion" "$REPO/gateway/run.py" \
+  || fail "missing upstream-compatible stale-generation promotion guard"
+grep -q "test_startup_promotion_skips_stale_generation_without_overwrite" "$REPO/tests/gateway/test_busy_session_ack.py" \
+  || fail "missing stale-generation ownership regression test"
 grep -q "Mensagem adicionada à execução atual" "$REPO/gateway/run.py" \
   || fail "missing MGS PT-BR busy-steer acknowledgment"
 grep -q "Vou considerá-la no próximo passo" "$REPO/tests/gateway/test_busy_session_ack.py" \
@@ -416,7 +421,7 @@ grep -q "test_surfaces_capacity_dead_letter_without_rejected_content_even_when_o
 "$BASE/scripts/check-retired-host-references.py" \
   || fail "retired host reference reappeared on an operational surface"
 
-PYBIN="$REPO/venv/bin/python"
+PYBIN="${PYBIN:-$REPO/venv/bin/python}"
 [[ -x "$PYBIN" ]] || PYBIN="python3"
 "$PYBIN" -m py_compile \
   "$REPO/plugins/platforms/discord/adapter.py" \
@@ -435,6 +440,19 @@ PYBIN="$REPO/venv/bin/python"
   "$REPO/tests/gateway/test_restart_resume_pending.py" \
   "$REPO/tests/gateway/test_busy_session_ack.py" \
   "$REPO/tests/gateway/test_discord_send.py" \
+  "$REPO/tests/gateway/test_discord_bot_filter.py" \
+  "$REPO/tests/gateway/test_discord_free_response.py" \
+  "$REPO/tests/gateway/test_discord_channel_controls.py" \
+  "$REPO/tests/gateway/test_discord_edit_message_overflow.py" \
+  "$REPO/tests/gateway/test_discord_slash_commands.py" \
+  "$REPO/tests/gateway/test_extract_local_files.py" \
+  "$REPO/tests/gateway/test_fast_command.py" \
+  "$REPO/tests/gateway/test_session.py" \
+  "$REPO/tests/gateway/test_mirror.py" \
+  "$REPO/tests/gateway/test_agent_cache.py::TestExtractCacheBustingConfig::test_honcho_cache_busting_config_memoized_by_mtime" \
+  "$REPO/tests/gateway/test_discord_thread_auto_add_by_channel.py" \
+  "$REPO/tests/gateway/test_reasoning_command.py" \
+  "$REPO/tests/gateway/test_auto_reasoning_routing.py" \
   "$REPO/tests/gateway/test_telegram_photo_interrupts.py" \
   "$REPO/tests/tools/test_skills_tool.py" \
   "$REPO/tests/tools/test_memory_tool.py" \
