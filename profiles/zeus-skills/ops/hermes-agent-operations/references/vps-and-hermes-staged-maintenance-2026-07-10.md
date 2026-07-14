@@ -25,6 +25,17 @@ When normal `apt upgrade` leaves phased packages pending, do not force everythin
 
 Validated result in this session: 19 APT packages, Corepack 0.34.6→0.35.0, npm 10.9.8→12.0.0, Node v22.23.1 retained, no reboot required.
 
+### Freshness and OpenSSH safety gates
+
+A statement such as “the VPS has no updates” is a timestamped package-index snapshot, not a durable fact. Before giving a categorical answer:
+
+1. Record the check timestamp and inspect `apt-daily`/package-list freshness. If the user asks for the current state and policy permits metadata refresh, refresh first; otherwise state explicitly that the result uses the current cache.
+2. If a later check differs, reconcile repository metadata timestamps before calling the earlier result wrong: 1Password and Ubuntu security indexes can publish or refresh hours after the first audit.
+3. For OpenSSH upgrades, simulate exact packages and require `0 newly installed, 0 removed`; never mix `apt autoremove` into the security batch.
+4. Before install, require `sshd -t`, active `ssh.service`/`ssh.socket`, port 22 listening, clean `dpkg --audit`, package versions, service PIDs, and a mode-0600 archive of `/etc/ssh` with checksum. Preserve local conffiles (`--force-confold`) unless an explicit config migration was reviewed.
+5. On Ubuntu socket activation, the package transition can leave `ssh.socket` listening while `ssh.service` is inactive and `/run/sshd` absent. A bare post-install `sshd -t` then exits 255 even though port 22 remains available. Correct once by starting `ssh.service`; systemd recreates `RuntimeDirectory=sshd`. Then rerun `sshd -t`, verify service + socket + port 22, package versions, `dpkg --audit`, gateways, pending packages, and reboot state. Report both the initial failure and the corrected validation.
+6. Store verbose APT output in a protected report/log. Human operational threads receive only the executive result; structural evidence and anomalies go to `#alerts-infra`.
+
 ## 2. Hermes precheck must follow the promoted canonical patch
 
 A hardcoded patch name in `run-hermes-update-controlled.sh` can become stale even when `ensure-hermes-mgs-patches.sh` already promotes a newer runtime patch. In this session, precheck tested `mgs-runtime-customizations-2026-07-05.patch` while the guard's primary patch was `mgs-runtime-customizations-2026-07-07.patch`, producing a misleading drift report.

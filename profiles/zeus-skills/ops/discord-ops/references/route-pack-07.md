@@ -93,7 +93,11 @@ A política MGS atual é **não exibir tool progress bruto no Discord**. O padr�
 - `discord.gateway_restart_notification: false`
 - logs técnicos completos permanecem em arquivo; a thread recebe somente resumo executivo validado.
 
-Quando surgir breadcrumb como `💻 terminal`, comando truncado ou JSON de processo em thread operacional, tratar como drift de configuração: conferir o valor efetivo do profile afetado, corrigir a config ativa e a cópia versionada, atualizar inventário e emitir REPORT-INFRA. Não reiniciar um gateway no meio da tarefa ativa; se a mudança não tiver hot reload, agendar restart seguro/detached para a primeira janela ociosa.
+Quando surgir breadcrumb como `💻 terminal`, comando truncado ou JSON de processo em thread operacional, tratar como drift de configuração: conferir o valor efetivo de **Zeus, Atena, Ares e Hera**, corrigir a config ativa e a cópia versionada, rodar `config check` 4/4, provar hashes live=mirror, atualizar inventário e emitir REPORT-INFRA. O override Discord pode ficar `off` mesmo que o valor global de progresso permaneça habilitado para outros frontends.
+
+Uma alteração feita no meio de um turno pode não apagar breadcrumbs já criados nem mudar a política carregada naquele turno. Não reiniciar gateway no meio da tarefa só para limpar a UI: validar o arquivo e o valor efetivo, encerrar com resumo executivo e confirmar a ausência de breadcrumbs no **turno seguinte**; só usar restart seguro/detached se o próximo turno ainda reproduzir o drift.
+
+Crons técnicos, callbacks de validação e watchdogs não devem entregar dumps, comandos ou relatórios de múltiplas páginas em `origin`/threads operacionais. Preferir `deliver: local` para sucesso silencioso e enviar anomalias/REPORT-INFRA diretamente ao `#alerts-infra`; quando uma entrega humana for realmente necessária, renderizar um resumo executivo curto e guardar evidência detalhada em log/arquivo.
 
 Somente habilitar live progress se Rodolfo pedir explicitamente essa UX. Nesse caso, consultar `references/discord-live-tool-trace-cleanup.md`, limitar ao profile/canal solicitado e validar cleanup real antes de manter ativo. Não assumir que `cleanup_progress: true` torna aceitável despejar outputs brutos durante uma operação.
 
