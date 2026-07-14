@@ -643,7 +643,7 @@ class MGS_Quiz_Admin {
         ?>
         <script>
         (function(){
-          var trigger=document.getElementById('mgsqDateRangeTrigger'),popover=document.getElementById('mgsqDatePopover'),fromInput=document.getElementById('mgsqDateFrom'),toInput=document.getElementById('mgsqDateTo'),label=document.getElementById('mgsqDateRangeLabel'),summary=document.getElementById('mgsqDateSummary'),error=document.getElementById('mgsqDateError');
+          var form=document.getElementById('mgsqReportFilters'),trigger=document.getElementById('mgsqDateRangeTrigger'),popover=document.getElementById('mgsqDatePopover'),fromInput=document.getElementById('mgsqDateFrom'),toInput=document.getElementById('mgsqDateTo'),label=document.getElementById('mgsqDateRangeLabel'),summary=document.getElementById('mgsqDateSummary'),error=document.getElementById('mgsqDateError');
           if(!trigger||!popover||!fromInput||!toInput)return;
           var months=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
           var appliedStart=fromInput.value,appliedEnd=toInput.value,draftStart=appliedStart,draftEnd=appliedEnd,activePreset='custom';
@@ -683,7 +683,7 @@ class MGS_Quiz_Admin {
             else{setActivePreset('custom');return;}
             draftStart=iso(start);draftEnd=iso(end);viewMonth=firstOfMonth(start);setActivePreset(name);render();
           }
-          function applyDraft(){if(!draftStart||!draftEnd){error.classList.add('is-visible');return;}appliedStart=draftStart;appliedEnd=draftEnd;fromInput.value=appliedStart;toInput.value=appliedEnd;close();updateText();}
+          function applyDraft(){if(!draftStart||!draftEnd){error.classList.add('is-visible');return;}appliedStart=draftStart;appliedEnd=draftEnd;fromInput.value=appliedStart;toInput.value=appliedEnd;close();updateText();if(form){if(typeof form.requestSubmit==='function'){form.requestSubmit();}else{form.submit();}}}
           function open(){draftStart=appliedStart;draftEnd=appliedEnd;viewMonth=firstOfMonth(parseIso(draftStart)||new Date());error.classList.remove('is-visible');popover.classList.add('is-open');trigger.setAttribute('aria-expanded','true');render();}
           function close(){popover.classList.remove('is-open');trigger.setAttribute('aria-expanded','false');}
           trigger.addEventListener('click',function(){popover.classList.contains('is-open')?close():open();});

@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MGS_QUIZ_VERSION', '1.7.5' );
+define( 'MGS_QUIZ_VERSION', '1.7.6' );
 define( 'MGS_QUIZ_PATH', plugin_dir_path( __FILE__ ) );
 define( 'MGS_QUIZ_URL', plugin_dir_url( __FILE__ ) );
 define( 'MGS_QUIZ_DB_VERSION', '1.3.0' );
