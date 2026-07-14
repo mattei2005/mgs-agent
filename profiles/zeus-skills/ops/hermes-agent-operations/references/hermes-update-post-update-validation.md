@@ -91,6 +91,14 @@ Interpretation:
 - Targeted pytest passing → Discord/gateway/send-message surfaces most likely affected by MGS patches are not broken.
 - Service active + no post-stabilization critical logs → operationally healthy.
 
+## Detached activation and callback pitfalls
+
+- When parsing several `systemctl show` properties, do not assume `--value` preserves the requested order. Read labeled `Key=Value` output into a map; otherwise a timestamp can be misclassified as `ActiveState` while the PID still looks plausible.
+- A controlled service replacement can log the old process as `Main process exited, status=1/FAILURE` at the exact handoff timestamp even when the new process starts correctly. Classify the operation from the detached finalizer result, new PID/start timestamp, fresh Discord-connected marker, current `active/running` state, and errors occurring *after* the new start. Preserve the exit-1 observation in the report, but do not treat the old-process line alone as an activation failure.
+- If a one-shot post-activation callback is created before replacing the gateway, make it durable and deliver to the origin thread. Hermes cron lifecycle protection can reject prompts containing literal lifecycle commands even when they are negated; phrase the callback as read-only (`do not alter processes`) and avoid embedding those commands or lifecycle-script paths in the prompt.
+- After activation, `cron list` may still show a past-due one-shot as `scheduled` with `last_run_at=null` while `cron/jobs.json` already has a `run_claim`. Check both surfaces before launching a manual closeout. A claimed callback is an active writer: do not race it with duplicate inventory/audit/REPORT-INFRA updates, and never interpret stale list fields as proof that it did not start.
+- Keep one owner for final closeout. The interactive turn may report verified service readiness immediately, but the durable callback should own inventory/audit/REPORT-INFRA if it is already claimed. If manual validation supersedes an unclaimed callback, cancel it before writing final state so the user does not receive duplicate closeout reports.
+
 ## Reporting expectation
 
 Report success only after update check, service status, local patch verification, and targeted tests. Include any residual infra risk separately (example: zero swap causing OOM risk), but do not call the update validated until the checks above pass.
