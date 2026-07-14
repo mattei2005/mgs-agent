@@ -757,11 +757,11 @@
       "agent": "zeus",
       "type": "gateway_restart_guardrail",
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
-      "sha256": "40de2b501a67042fb029ad90d3270e6974b6ad750b1ae2ce14817cbe6d257a90",
-      "purpose": "Prevent a detached restart from loading code/config changed after finalizer preparation; snapshot target hashes, abort on drift, py_compile runtime, and reject startup-steer calls without class method definitions before restarting any gateway.",
-      "validation": "bash -n PASS; startup-steer definition/call preflight PASS with no missing methods",
+      "sha256": "928ad98ca981b7a83216e6c1ab2eb9709a91c95fe27c390591f891ec495f6c25",
+      "purpose": "Prevent a detached restart from loading code/config changed after finalizer preparation; preserve the requested non-Zeus order while forcing Zeus last; snapshot every changed runtime module; abort on drift; py_compile/import runtime; and reject startup-steer calls without class method definitions before restarting any gateway.",
+      "validation": "bash -n PASS; requested-order tests PASS for Ares -> Atena -> Zeus and Zeus-last normalization; changed-runtime snapshot coverage PASS with zero missing modules; py_compile/import smoke PASS",
       "status": "deployed_validated",
-      "updated_at": "2026-07-11T01:34:32-04:00"
+      "updated_at": "2026-07-13T21:33:46-04:00"
     },
     {
       "id": "mgs-gateway-restart-busy-steer-startup-20260711T043316Z-3105180",
@@ -3497,8 +3497,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh",
-      "size_bytes": 9567,
-      "modified_at": "2026-07-13T14:55:28-04:00"
+      "size_bytes": 10048,
+      "modified_at": "2026-07-13T21:32:59-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/mgs-grok-generate.py",

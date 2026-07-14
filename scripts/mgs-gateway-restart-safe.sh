@@ -6,7 +6,7 @@ set -euo pipefail
 # wait for restarts. Default mode only schedules a detached finalizer via
 # systemd-run --no-block (or cron fallback) and exits with a clean summary.
 
-AGENTS_DEFAULT="atena ares zeus"
+AGENTS_DEFAULT="ares atena zeus"
 ROOT="/root/mgs-agent"
 LOG_DIR="$ROOT/logs"
 AUDIT="$LOG_DIR/events-audit.jsonl"
@@ -57,10 +57,15 @@ audit() {
 normalize_agents() {
   local requested=( $AGENTS )
   local out=() a
-  for wanted in atena ares zeus; do
-    for a in "${requested[@]}"; do
-      [[ "$a" == "$wanted" ]] && out+=("$wanted")
-    done
+  # Preserve the caller's order for non-Zeus agents, but always force Zeus
+  # last so the active orchestrator is the final gateway restarted.
+  for a in "${requested[@]}"; do
+    case "$a" in
+      atena|ares) out+=("$a") ;;
+    esac
+  done
+  for a in "${requested[@]}"; do
+    [[ "$a" == "zeus" ]] && { out+=("zeus"); break; }
   done
   printf '%s\n' "${out[@]}" | awk 'NF && !seen[$0]++'
 }
@@ -81,11 +86,13 @@ SNAPSHOT_FILES=(
   "/root/.hermes/hermes-agent/gateway/platforms/base.py"
   "/root/.hermes/hermes-agent/plugins/platforms/discord/adapter.py"
   "/root/.hermes/hermes-agent/gateway/slash_commands.py"
+  "/root/.hermes/hermes-agent/gateway/reasoning_router.py"
   "/root/.hermes/hermes-agent/run_agent.py"
   "/root/.hermes/hermes-agent/agent/background_review.py"
   "/root/.hermes/hermes-agent/tools/memory_tool.py"
   "/root/.hermes/hermes-agent/tools/write_approval.py"
   "/root/.hermes/hermes-agent/tools/skill_manager_tool.py"
+  "/root/.hermes/hermes-agent/tools/skills_tool.py"
   "/root/.hermes/hermes-agent/tools/write_trace.py"
   "/root/mgs-agent/scripts/check-gateway-ready.py"
 )
@@ -117,17 +124,19 @@ if ! sha256sum -c "\$SNAPSHOT"; then
 fi
 if ! /root/.hermes/hermes-agent/venv/bin/python -m py_compile \
   "\$RUNTIME" \
+  /root/.hermes/hermes-agent/gateway/reasoning_router.py \
   /root/.hermes/hermes-agent/agent/background_review.py \
   /root/.hermes/hermes-agent/tools/memory_tool.py \
   /root/.hermes/hermes-agent/tools/write_approval.py \
   /root/.hermes/hermes-agent/tools/skill_manager_tool.py \
+  /root/.hermes/hermes-agent/tools/skills_tool.py \
   /root/.hermes/hermes-agent/tools/write_trace.py \
   /root/mgs-agent/scripts/check-gateway-ready.py; then
   log "ABORT runtime/dead-letter/trace py_compile failed"
   audit "gateway_restart_finalizer_aborted" "reason=runtime_pycompile_failed log=\$LOG"
   exit 76
 fi
-if ! /root/.hermes/hermes-agent/venv/bin/python -c 'from tools.memory_tool import _stage_capacity_overflow; from tools.write_approval import stage_failure_write; from tools.write_trace import emit_structural_write_receipt; print("deadletter_trace_import=PASS")' >/dev/null; then
+if ! /root/.hermes/hermes-agent/venv/bin/python -c 'import gateway.reasoning_router, tools.skills_tool; from tools.memory_tool import _stage_capacity_overflow; from tools.write_approval import stage_failure_write; from tools.write_trace import emit_structural_write_receipt; print("runtime_deadletter_trace_import=PASS")' >/dev/null; then
   log "ABORT dead-letter/trace import smoke failed"
   audit "gateway_restart_finalizer_aborted" "reason=deadletter_trace_import_failed log=\$LOG"
   exit 78

@@ -47,6 +47,35 @@ Auto-commit secret guards may classify filenames containing words such as `token
 - When a skill already has a large historical library, keep the main routing links explicit and consider a runtime change that returns only explicitly linked files plus counts instead of the complete inventory.
 - Do not call a 3K router “lean” if its automatic linked-file index adds another 10K+ characters.
 
+### Do not confuse index compaction with main-body compaction
+
+Linked-file compaction only reduces the serialized inventory returned beside the skill; it does not shorten `SKILL.md`. Before deciding that an upstream compaction fix eliminated the need for refactoring:
+
+1. Read the active threshold/mode contract and count the target's support files. If the inventory is below the auto threshold, the fix may not activate at all.
+2. Measure both `main_bytes` and `main_bytes + serialized_linked_files_bytes` before and after an in-memory candidate refactor.
+3. Treat a main file above roughly 20K as a review signal even when the linked-file inventory is compacted.
+4. Report separately whether the observed turn explosion came from the main body, linked-file enumeration, broad tool results, or repeated mutation/reload behavior.
+
+### Attribution gate for patch/reload storms
+
+Do not claim that a skill caused repeated self-edits merely because the session patched it many times. Search the current text for direct instructions to edit, patch, reread, reload, or maintain the skill. Distinguish:
+
+- **direct cause** — explicit self-edit/reload instruction;
+- **behavioral contributor** — duplicate rules, broad catalogs, unbounded retry, conflicting routes, or missing progressive-disclosure guard;
+- **external cause** — global auto-learning policy, operator behavior, or runtime orchestration.
+
+When direct self-edit wording is absent, say so plainly. Still propose a guard when useful: one primary reference at a time, no same-turn full reread unless the hash changed, at most one consolidated authorized patch at the end, and hunk/link/hash validation instead of `patch → full reload → patch`.
+
+### Stale-reference safety
+
+Before extracting canonical main-file content into existing references, compare their semantics. Historical references often retain obsolete rule names, thresholds, metrics, IDs, or workflows. If a dated reference conflicts with the current main contract:
+
+1. Do not replace the current rule with a pointer to the stale file.
+2. Create a small `current-*` canonical route pack by moving the current H2 slices literally.
+3. Move the old dated files behind a historical catalog and state that the current canonical pack wins on conflict.
+4. Keep permanent safety gates in the main router when their only other coverage is stale or branch-gated.
+5. For a read-only audit, simulate the proposed extraction entirely in memory and report projected main size, line count, index size, exact source ranges, and verification invariants without creating files.
+
 ## Compact linked-files runtime contract
 
 For MGS Hermes runtime, large support-file inventories use a compact `skill_view` response:
