@@ -550,6 +550,26 @@ def truncate_text(value, limit):
     value=str(value or '')
     return value if len(value)<=limit else value[:limit-1]+'…'
 
+def alert_timestamp(summary=None):
+    raw=norm((summary or {}).get('finished_at') or (summary or {}).get('started_at'))
+    try:
+        return datetime.fromisoformat(raw).astimezone(NY).strftime('%Y-%m-%d %H:%M %Z') if raw else datetime.now(NY).strftime('%Y-%m-%d %H:%M %Z')
+    except ValueError:
+        return datetime.now(NY).strftime('%Y-%m-%d %H:%M %Z')
+
+def site_sort_key(site):
+    """Alphabetical by site family, keeping base + finanzas variants adjacent."""
+    value=norm(site).lower()
+    family=value
+    variant=0
+    if value.startswith('finanzas.'):
+        family=value[len('finanzas.'):]
+        variant=1
+    elif value.endswith('finanzas'):
+        family=value[:-len('finanzas')]
+        variant=1
+    return family, variant, value
+
 def derive_sites(row):
     row=row or {}
     sites=[]
@@ -567,12 +587,14 @@ def derive_sites(row):
         s=re.sub(r'[^A-Za-z0-9._-]+','',s).strip().lower()
         if s and s not in clean:
             clean.append(s)
-    return ','.join(clean) if clean else '?'
+    return ','.join(sorted(clean,key=site_sort_key)) if clean else '?'
 
 def post_discord(content):
     token=discord_token()
     if not token:
         raise RuntimeError('DISCORD_BOT_TOKEN unavailable')
+    if len(content)>2000:
+        raise RuntimeError(f'Discord content exceeds 2000 characters: {len(content)}')
     body=json.dumps({'content':content}, ensure_ascii=False).encode('utf-8')
     req=urllib.request.Request(
         f'https://discord.com/api/v10/channels/{TARGET_CHANNEL_ID}/messages',
@@ -581,64 +603,145 @@ def post_discord(content):
         method='POST',
     )
     with urllib.request.urlopen(req, timeout=20) as r:
-        return r.status
+        payload=json.load(r)
+        return {'status':r.status,'message_id':payload.get('id')}
+
+def restriction_alert_row(row):
+    codes=row.get('codes') or row.get('codigos') or ''
+    if isinstance(codes,list):
+        codes=','.join(codes)
+    return (
+        f"{truncate_text(row.get('page_name') or row.get('nome da pagina'),20):<20} "
+        f"{truncate_text(row.get('fb_page_id') or row.get('fb page id'),18):<18} "
+        f"{truncate_text(row.get('page_id') or row.get('page id'),8):<8} "
+        f"{truncate_text((row.get('bot_user') or row.get('bot user') or '').replace('@gmail.com',''),18):<18} "
+        f"{truncate_text(row.get('segurador'),20):<20} "
+        f"{truncate_text(row.get('status_sb') or row.get('status sb') or '?',11):<11} "
+        f"{truncate_text(codes,13):<13} "
+        f"{truncate_text(row.get('restricted_until_time') or row.get('restricted_until') or row.get('data saida'),16)}"
+    )
 
 def build_new_restrictions_alert(rows, summary):
-    now=datetime.now(NY).strftime('%Y-%m-%d %H:%M %Z')
     rows=sorted(rows, key=lambda r: (r.get('restricted_until') or '9999-99-99', r.get('page_name') or '', r.get('bot_user') or ''))
     lines=[
         'PÁGINAS RESTRITAS — NOVAS APLICADAS NA SMART BIDDING',
-        f'Atualizado em: {now}',
-        f'Fonte: DigitalTRChat último Completed → Smart Bidding readback OK | Novas nesta execução: {len(rows)}',
-        '',
-        'Ação: Restricted Until já aplicado automaticamente na Dash SB.',
+        f'Atualizado em: {alert_timestamp(summary)}',
+        'Fonte: último Completed da DigitalTRChat → Smart Bidding',
+        f'Novas nesta execução: {len(rows)}',
         '',
         'Página               FB Page ID          Page ID   Bot user           Segurador            Status SB   Códigos       Data saída',
         '-------------------- ------------------ -------- ------------------ -------------------- ----------- ------------- ----------------',
     ]
-    for r in rows[:20]:
-        lines.append(
-            f"{truncate_text(r.get('page_name'),20):<20} "
-            f"{truncate_text(r.get('fb_page_id'),18):<18} "
-            f"{truncate_text(r.get('page_id'),8):<8} "
-            f"{truncate_text((r.get('bot_user') or '').replace('@gmail.com',''),18):<18} "
-            f"{truncate_text(r.get('segurador'),20):<20} "
-            f"{truncate_text(r.get('status_sb') or '?',11):<11} "
-            f"{truncate_text(','.join(r.get('codes') or []),13):<13} "
-            f"{truncate_text(r.get('restricted_until_time') or r.get('restricted_until'),16)}"
-        )
+    for row in rows[:20]:
+        lines.append(restriction_alert_row(row))
     if len(rows)>20:
-        lines.append(f'... +{len(rows)-20} na planilha/log')
+        lines.append(f'... +{len(rows)-20} na planilha completa')
     lines += [
         '',
         '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        'AÇÃO EXECUTADA NA SMART BIDDING',
+        'AÇÃO EXECUTADA',
         '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        'Status SB: conforme readback após aplicação',
-        'Restricted Until: data extraída do último Completed da DTR',
-        'Validação: readback SB OK antes do alerta',
         '',
-        f"Planilha: {summary.get('sheet')}",
-        f"Log: {summary.get('log')}",
+        'As páginas restritas acima foram atualizadas com a data de saída na Dash da Smart Bidding.',
     ]
-    return '```\n'+'\n'.join(lines)+'\n```'
+    return '```\n'+'\n'.join(lines)+'\n```\n\n**Planilha completa:** <'+str(summary.get('sheet') or REPORT_SHEET_URL)+'>'
 
 def build_no_new_restrictions_alert(summary):
-    now=datetime.now(NY).strftime('%Y-%m-%d %H:%M %Z')
     stats=summary.get('stats') or {}
     lines=[
         'PÁGINAS RESTRITAS — VARREDURA CONCLUÍDA',
-        f'Atualizado em: {now}',
+        f'Atualizado em: {alert_timestamp(summary)}',
         '',
         'Nenhuma página restrita nova até o momento, comparado com a última varredura concluída.',
         '',
         f"Já restritas na SB no início: {summary.get('sb_active_restricted_start', 0)}",
         f"Páginas DTR no escopo: {stats.get('dtr_pages', 0)}",
         'Novas aplicadas na SB: 0',
-        '',
-        f"Planilha: {summary.get('sheet')}",
     ]
-    return '```\n'+'\n'.join(lines)+'\n```'
+    return '```\n'+'\n'.join(lines)+'\n```\n\n**Planilha completa:** <'+str(summary.get('sheet') or REPORT_SHEET_URL)+'>'
+
+def build_operational_summary_alerts(rows, summary, limit=1900):
+    grouped=defaultdict(lambda:{'pages':0,'sites':set()})
+    for row in rows:
+        date=row.get('data saida') or '?'
+        grouped[date]['pages']+=1
+        grouped[date]['sites'].update(site.strip() for site in norm(row.get('sites')).split(',') if site.strip() and site.strip()!='?')
+    row_lines=[]
+    for date,data in sorted(grouped.items()):
+        sites=', '.join(sorted(data['sites'],key=site_sort_key))
+        row_lines.append(f"{date:<11}  {data['pages']:>7}  {sites}")
+    timestamp=alert_timestamp(summary)
+    first_prefix=[
+        'PÁGINAS RESTRITAS — RESUMO OPERACIONAL',
+        f'Atualizado em: {timestamp}',
+        'Escopo: somente Status SB = Broadcast',
+        '',
+        f"Broadcast restritas: {summary.get('sheet_broadcast_restricted',len(rows))}",
+        f"On-hold ignoradas: {summary.get('sheet_on_hold_excluded',0)}",
+        '',
+        'Data saída   Páginas  Sites',
+        '-----------  -------  --------------------------------------------------',
+    ]
+    continuation_prefix=[
+        'PÁGINAS RESTRITAS — RESUMO OPERACIONAL (CONTINUAÇÃO)',
+        f'Atualizado em: {timestamp}',
+        '',
+        'Data saída   Páginas  Sites',
+        '-----------  -------  --------------------------------------------------',
+    ]
+    messages=[]; current=list(first_prefix)
+    for line in row_lines:
+        candidate='```\n'+'\n'.join(current+[line])+'\n```'
+        if len(candidate)>limit and len(current)>(len(first_prefix) if not messages else len(continuation_prefix)):
+            messages.append('```\n'+'\n'.join(current)+'\n```')
+            current=list(continuation_prefix)
+        current.append(line)
+    messages.append('```\n'+'\n'.join(current)+'\n```')
+    return messages
+
+def build_exited_restrictions_alerts(rows, summary, limit=1900):
+    rows=sorted(rows,key=lambda row:(row.get('data saida') or '9999-99-99',row.get('nome da pagina') or '',row.get('bot user') or ''))
+    timestamp=alert_timestamp(summary)
+    first_prefix=[
+        'PÁGINAS QUE SAÍRAM DA RESTRIÇÃO',
+        f'Atualizado em: {timestamp}',
+        '',
+        'Página               FB Page ID          Page ID   Bot user           Segurador            Status SB   Códigos       Data saída',
+        '-------------------- ------------------ -------- ------------------ -------------------- ----------- ------------- ----------------',
+    ]
+    continuation_prefix=[
+        'PÁGINAS QUE SAÍRAM DA RESTRIÇÃO (CONTINUAÇÃO)',
+        f'Atualizado em: {timestamp}',
+        '',
+        'Página               FB Page ID          Page ID   Bot user           Segurador            Status SB   Códigos       Data saída',
+        '-------------------- ------------------ -------- ------------------ -------------------- ----------- ------------- ----------------',
+    ]
+    messages=[]; current=list(first_prefix)
+    for row in rows:
+        line=restriction_alert_row(row)
+        candidate='```\n'+'\n'.join(current+[line])+'\n```'
+        if len(candidate)>limit and len(current)>(len(first_prefix) if not messages else len(continuation_prefix)):
+            messages.append('```\n'+'\n'.join(current)+'\n```')
+            current=list(continuation_prefix)
+        current.append(line)
+    messages.append('```\n'+'\n'.join(current)+'\n```')
+    return messages
+
+def exited_restrictions_from_sheet(removed_rows, fresh_sb_rows, tday):
+    live={}
+    for row in fresh_sb_rows:
+        bot=norm_email(row.get('USER_LOGIN') or row.get('LOGIN')); page_id=norm(row.get('PAGE_ID'))
+        if bot and page_id:
+            live[f'bot-page:{bot}|{page_id}']=row
+        fb=norm(row.get('FB_PAGE_ID'))
+        if fb:
+            live.setdefault(f'fb:{fb}',row)
+    exited=[]
+    for old in removed_rows:
+        key=report_page_identity(old); current=live.get(key)
+        if current and not active_restricted(current,tday):
+            exited.append(old)
+    return exited
 
 def google_access_token():
     creds=json.loads(GOOGLE_TOKEN_FILE.read_text(encoding='utf-8'))
