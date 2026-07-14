@@ -2338,7 +2338,7 @@
       "type": "hermes_runtime_update",
       "owner": "Zeus/Infra",
       "authorized_by": "344196393512075265",
-      "status": "staged_no_restart_validated",
+      "status": "activated_validated",
       "installed_before": "f8361d29c8e2a2be6ba9ada32f1d694bf47a4b6a",
       "target_sha": "2ccfdb2db4eedf385f6c5b3fe722e183cee1b6de",
       "canonical_patch": "/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-07-13.patch",
@@ -2351,11 +2351,16 @@
       "profile_backup_sha256": "recorded in hermes-profiles-pre-update.tar.gz.sha256",
       "stash_commit": "a65bebce9d82d6c3424568b7f9a1a4f8daed888e",
       "next_venv": "/root/.hermes/hermes-agent/venv-next-2ccfdb2",
-      "restart_performed": false,
-      "gateway_pids": {
+      "restart_performed": true,
+      "gateway_pids_before": {
         "zeus": 3057225,
         "atena": 3056816,
         "ares": 3571801
+      },
+      "gateway_pids": {
+        "zeus": 344107,
+        "atena": 344064,
+        "ares": 344020
       },
       "validation": {
         "fresh_checkout_apply_and_reverse_check": "PASS",
@@ -2367,8 +2372,14 @@
         "tui_build": "PASS",
         "npm_audit": "0 vulnerabilities",
         "port_live_byte_compare": "34/34 identical",
-        "services": "3/3 active, 0 failed, PIDs unchanged",
+        "services": "3/3 active/running, zero failed units, new PIDs and post-activation Discord markers validated",
         "deep_recheck": "748 guard + 233 critical runtime + 191 isolated platform tests PASS; watchdog manual run OK",
+        "post_activation_guard": "748 passed, 6 subtests passed with active venv",
+        "config_active_venv": "4/4 PASS; pip check PASS",
+        "openai_codex_auth": "4/4 logged in; no credential values emitted",
+        "profiles_mirrors": "config and SOUL byte-identical 8/8",
+        "crons": "Zeus Hermes jobs and Ares jobs preserved; activation one-shot consumed as designed; watchdog state ok",
+        "post_activation_logs": "no runtime Traceback/CRITICAL/loop/duplication after new Discord connections; controlled SIGTERM exit-code and startup stale-session pruning classified as restart transients",
         "independent_review": "2 delegated reviews timed out without summaries; not counted as validation or as absence of findings"
       },
       "hashes": {
@@ -2379,8 +2390,18 @@
         "procedure_reference": "17ec072eb62a6efbada3e58e271dd7f4c3a0edae8040efd5ea1ed8f4fde4940c",
         "update_core_reference": "3b626aac42562d1cc8b75a6d8c0a73026a7dd4b06212914dc24377d955b7ca5b"
       },
-      "activation_gate": "separate Rodolfo confirmation required before venv swap and detached restart Ares -> Atena -> Zeus",
-      "updated_at": "2026-07-13T21:55:17-04:00"
+      "activation_gate": "fulfilled by Rodolfo authorization message 1526407778631946270 and detached finalizer completion",
+      "activation_finalizer": {
+        "log": "/root/mgs-agent/logs/mgs-gateway-restart-finalizer-20260714T020445Z-343413.log",
+        "audit_event": "gateway_restart_finalizer_finished at 2026-07-14T02:05:45Z",
+        "order": [
+          "ares",
+          "atena",
+          "zeus"
+        ],
+        "status": "PASS"
+      },
+      "updated_at": "2026-07-13T22:18:14-04:00"
     }
   ],
   "profile_skill_references": [
