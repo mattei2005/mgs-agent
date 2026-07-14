@@ -24,6 +24,18 @@ Use dentro do intake canônico quando um arquivo real da fila não contém mater
 - Persistir `status=05_REJECTED`, `performance_label=REJECTED_TECHNICAL`, `reservation_status=RESERVADO_PELO_GESTOR` e `ares_eligible=false`, com a evidência resumida em `notes`.
 - Validar por readback que o source ID saiu de `UPLOAD MANUAL`, está no parent `05_REJECTED`, mantém nome/ID e não está em lixeira.
 
+## Substituição posterior de um rejeitado
+
+Quando o gestor confirmar que o arquivo rejeitado anterior estava realmente defeituoso e enviar uma nova exportação em `UPLOAD MANUAL`:
+
+1. Trate a nova exportação como um novo `source_drive_id`; não sobrescreva, renomeie nem reutilize o registro do rejeitado antigo.
+2. Inspecione o novo arquivo normalmente por frames reais. Se estiver válido, sanitize, faça upload em `01_READY`, valide readback/hash/`clean=true`, mova o novo bruto para `99_LEGACY` e registre sua própria linhagem.
+3. Relacione a substituição no relatório humano pelo contexto e evidência visual, sem declarar equivalência binária ou reutilizar o `asset_id` anterior.
+4. O arquivo antigo permanece em `05_REJECTED` até uma autorização explícita de descarte. `05_REJECTED` nunca equivale a autorização para excluir.
+5. Se o usuário pedir exclusão, consulte o ID antigo diretamente e mostre antes da ação: nome, pasta atual, tamanho, duração e `trashed`. A exclusão/lixeira segue o gate crítico de confirmação vigente; o pedido de processar a nova exportação não conta como essa confirmação adicional.
+6. Não bloqueie o restante do lote enquanto a exclusão aguarda confirmação. Conclua e valide os novos assets independentes; reporte a exclusão antiga separadamente como pendente.
+7. Após uma exclusão confirmada, valide `trashed=true` por readback e reconcilie inventário/auditoria para que o registro antigo não continue parecendo um candidato disponível.
+
 ## Final gate do lote
 
 O lote pode concluir com:
