@@ -62,22 +62,29 @@ Do not collapse the P1 into the REC date. REC and P1 each need their own date, l
 
 ## Country-tag integrity audits from article inventory Sheets
 
-Use this branch when a Sheet lists WordPress articles by `Page ID`/URL and the operational question is whether each post has exactly one country tag (for example `us`, `es`, or `gb`) controlling country-specific advertising blocks.
+Use this branch when a Sheet lists WordPress articles by `Page ID`/URL and Rodolfo wants only the country taxonomy checked because country tags select the advertising blocks.
 
 1. Treat the Sheet's `Page ID` as the primary lookup key; the edit-link column is a convenience, not a requirement to open every post manually.
-2. Fetch each post by direct ID and resolve all tag IDs to names/slugs. If anonymous REST is denied or incomplete, retry through the approved authenticated REST/admin-session path; do not downgrade to manual article-by-article review merely because the public endpoint is unavailable.
-3. Build the valid country-tag set from the site's live taxonomy and the current ad/Ciro configuration. Do not classify every two-letter slug as a country automatically.
-4. Classify each post:
-   - `OK`: exactly one valid country tag.
-   - `SEM PAÍS`: no valid country tag.
-   - `CONFLITO`: two or more valid country tags.
-   - `REVISAR`: the current state is detectable, but the intended country is not provable.
-5. A single country tag is not automatically the correct country. Determine the intended country only from an explicit source of truth such as editorial metadata/brief, campaign assignment, or unambiguous country-specific evidence in the article. Language, domain, generic title, or whichever tag appears first are not sufficient by themselves.
-6. Add audit columns such as `Tags atuais`, `Tags de país`, `Status`, and `País sugerido/evidência`. Keep ambiguous cases for Rodolfo/Raquel review instead of guessing or auto-correcting.
-7. Run the first pass read-only and report counts by status. Apply taxonomy corrections only as a separate authorized write phase, with before-state capture and post-update readback by direct post ID.
-8. Front-end `rel="tag"` links or visible tag widgets may vary by theme and can omit taxonomy data; use them only as secondary evidence, never as the canonical source across mixed sites.
+2. Fetch each post by direct ID and resolve tag IDs to live term slugs through the approved authenticated REST/admin-session path when needed. Do not downgrade to manual article-by-article review merely because an anonymous route is unavailable.
+3. Two-letter slugs are country candidates, not proof. Maintain a verified non-country exclusion list: MGS uses `cc` for the credit-card vertical, so `cc` must never be reported as a country merely because it has two letters.
+4. Unless Rodolfo requests more, append exactly two operator-facing columns and do not duplicate the complete WordPress tag list or add a redundant status column:
+   - `Tags de país`
+   - `País sugerido (revisar)`
+5. Populate `Tags de país` as follows:
+   - one country tag: normalized slug, e.g. `us`;
+   - multiple country tags: all normalized slugs, e.g. `es, us`;
+   - none: exactly `sem tag de país`.
+6. Populate `País sugerido (revisar)` conservatively:
+   - one country tag: repeat that country;
+   - multiple/no country tag: first prefer an explicit country code in a structured article URL such as `rec-es-*`, `aplicar-ahora-es-*`, or `apply-now-gb-*`;
+   - otherwise use strong title/body evidence such as an explicit country, currency, regulator, or country-specific institution;
+   - if evidence remains ambiguous, write `revisar` rather than silently choosing the site's majority country.
+7. Highlight only actionable exceptions: missing country tag in red and multiple country tags in amber/yellow. The goal is to reduce Rodolfo/Raquel's manual review to those exceptions.
+8. Before writing, confirm the destination columns are empty and save an exact CSV backup of every affected tab. After writing, validate the new cells and prove all pre-existing columns remain value-for-value unchanged.
+9. Required readback: authenticated Sheets API when available plus independent CSV export. Report article count, fetch errors, missing-country count, multi-country count, mismatches, and backup path.
+10. Taxonomy correction in WordPress is a separate authorized write phase. This audit writes only to the Sheet unless Rodolfo explicitly asks to alter post tags.
 
-The operational goal is to reduce human review to exceptions (`SEM PAÍS`, `CONFLITO`, `REVISAR`) rather than asking people to inspect every article.
+Country-tag audit and REC→P1 mapping are separate dimensions. If both are requested, keep country results on the existing article rows while deriving REC→P1 only from real CTA/card/LazyBlock links inside the post body. Never infer a REC→P1 relationship from `rec`, `apply`, or country text in a slug alone; inspect every real CTA/card/LazyBlock link, flag divergent destinations, and do not duplicate a linked P1 as a separate REC row.
 
 ## References
 
