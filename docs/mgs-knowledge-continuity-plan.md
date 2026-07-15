@@ -1,8 +1,8 @@
 # Plano MGS — Memória Institucional e Continuidade
 
-> Status: implementação v1.1, Fase 2 piloto Zeus autorizada  
+> Status: implementação v1.2, Fase 2 piloto Zeus ativa e validada
 > Aprovado por: Rodolfo Mattei em 2026-07-15  
-> Escopo aprovado: Fase 0 + Fase 1, aditivas, sem restart, sem alterar permissões e sem apagar memória.
+> Escopo aprovado: Fases 0–1 aditivas + Fase 2 somente Zeus, sem restart, sem alterar permissões e sem apagar memória.
 
 ## Objetivo executivo
 
@@ -68,7 +68,7 @@ Invariantes implementados:
 ## Fase 2 — Piloto Zeus
 
 ```text
-Status: autorizado por Rodolfo em 2026-07-15; implantação em validação.
+Status: ativo e validado em sessão nova do Zeus em 2026-07-15.
 Escopo: Zeus somente; Atena e Ares permanecem inalterados.
 ```
 
@@ -80,6 +80,14 @@ Escopo: Zeus somente; Atena e Ares permanecem inalterados.
 - `data/knowledge-regression-cases.json` protege perguntas empresariais críticas;
 - `mgs-knowledge-control.py regression` valida fontes e termos obrigatórios/proibidos;
 - cutover de SOUL precisa ser provado em sessão nova; restart não é necessário.
+
+Validação de cutover:
+
+- SOUL live e versionado byte-identical;
+- marker de continuidade presente uma vez em ambos;
+- sessão local nova `20260715_190940_434738` reproduziu a primeira regra da seção;
+- `state.db` read-only confirmou o marker exato em `sessions.system_prompt`;
+- nenhum gateway foi reiniciado.
 
 ## Fase 3 — Atena e Ares
 

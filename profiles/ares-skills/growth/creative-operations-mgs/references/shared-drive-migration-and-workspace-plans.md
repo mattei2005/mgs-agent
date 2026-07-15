@@ -77,6 +77,49 @@ A página oficial de preços também pode mostrar teste de 14 dias e promoções
 - Uma licença interna pode bastar se Rodolfo e `ares-drive` puderem entrar como membros externos. O piloto precisa provar isso.
 - Se a organização recusar a service account externa como Manager, será necessária uma identidade Workspace própria para o Ares, possivelmente uma segunda licença.
 
+## Essentials pago com e-mail em provedor externo
+
+`Enterprise Essentials` é a rota natural quando a empresa mantém e-mail no Zoho, Microsoft 365 ou outro provedor e quer Drive/Shared Drives sem migrar correio.
+
+- A identidade `usuario@dominio-da-empresa` pode continuar recebendo e enviando pelo provedor atual e, ao mesmo tempo, ser login do Google Workspace.
+- Verificação de domínio deve usar registro **TXT**. Ela não exige trocar o provedor de e-mail.
+- Não alterar registros **MX** durante uma migração de Drive. Só apontar MX para o Google quando a empresa decidir explicitamente migrar o correio para Gmail.
+- Edições Business incluem Gmail, mas o uso não é obrigatório: é possível manter MX no provedor atual e deixar Gmail desativado/não utilizado.
+- Em tenant `Essentials Starter`, a oferta de upgrade pode mostrar apenas `Enterprise Essentials` e `Enterprise Essentials Plus`. O caminho oficial para Business pode exigir: upgrade para Enterprise Essentials → verificar domínio → então verificar se a troca para Business foi liberada.
+- `Team dashboard` exibindo pool de 1 TB prova que o upgrade pago foi aplicado; não prova sozinho que um Shared Drive foi criado, que aparece na UI ou que a identidade operacional já o enxerga.
+
+## Licença, colaborador externo e service account
+
+Distinguir sempre três classes:
+
+1. **Usuário criado/adicionado à organização no Admin Console:** consome licença paga quando ativo, conforme o plano.
+2. **Colaborador externo convidado para conteúdo/Shared Drive:** não consome licença da organização, mas a edição da conta externa e as políticas podem limitar o papel disponível.
+3. **Google Cloud service account:** não é assento Workspace, não consome licença mensal e não tem quota própria de armazenamento; deve operar em Shared Drive ou via OAuth de usuário.
+
+Regras práticas:
+
+- Não prometer `Content Manager` a um Gmail pessoal sem piloto. A documentação do Google permite contribuição externa, mas contas cuja edição não inclui Shared Drives podem ser limitadas a `Viewer`; validar o papel oferecido e `capabilities.canAddChildren` por evidência real.
+- Quando o colaborador só precisa enviar mídia e não deve acessar a árvore, preferir intake externo separado: `UPLOAD MANUAL` em My Drive compartilhado como editor → Ares copia o RAW validado para `99_LEGACY` e o tratado para `01_READY` no Shared Drive → remove o item da fila sem apagar o original do colaborador. Assim, tudo canônico no Shared Drive pertence à organização sem licença adicional para o uploader.
+- Registrar a linhagem do intake externo para as duas cópias organizacionais e nunca tratar o RAW externo e sua cópia como candidatos independentes.
+- Adicionar `ares-drive` diretamente ao Shared Drive como `Manager` e confirmar por API. Se a política recusar a service account externa ou limitar o papel, parar e avaliar domínio/política ou uma identidade Workspace própria; não presumir uma segunda licença antes do teste.
+
+## OAuth e validação pós-upgrade
+
+A compra em uma nova identidade Workspace não altera o OAuth já armazenado para outra conta.
+
+- Consultar `about.user.emailAddress` antes de interpretar `canCreateDrives`, `drives.list` ou erro de criação. Um OAuth antigo de Gmail pessoal continuar com `canCreateDrives=false` não diz nada sobre o tenant recém-contratado.
+- Não sobrescrever o refresh token canônico usado na operação atual só para testar a nova conta. Usar uma credencial OAuth separada para a identidade Workspace ou criar o Shared Drive manualmente na UI e compartilhar com a service account.
+- Nunca pedir senha, refresh token ou client secret no chat. Se OAuth for indispensável, usar fluxo de consentimento com armazenamento separado e readback da identidade antes de qualquer write.
+
+Sequência pós-contratação de baixo risco:
+
+1. Confirmar na UI plano/pool aplicado e observar se `Shared drives` aparece, sem confundir storage com entitlement operacional.
+2. Se ainda não houver OAuth da identidade Workspace, criar manualmente um Shared Drive piloto pela conta paga.
+3. Adicionar somente a service account do Ares como `Manager`; não adicionar gestores antes do readback.
+4. Pela API da service account, executar `drives.list`, conferir capabilities e rodar o piloto completo de create/upload/move/trash/restore/delete.
+5. Testar separadamente o intake externo sem licença.
+6. Só depois gerar snapshot delta e iniciar migração em lotes.
+
 ## Papéis corretos
 
 - **Rodolfo:** `Manager`.
@@ -90,10 +133,10 @@ A página oficial de preços também pode mostrar teste de 14 dias e promoções
 Antes de migrar a árvore:
 
 1. Criar `MGS-CREATIVE-OPS` ou outro nome aprovado.
-2. Adicionar Rodolfo e Ares com os papéis acima.
-3. Adicionar um colaborador como `Content Manager`.
-4. Fazer o colaborador criar/uploadar um arquivo e uma pasta reais de teste.
-5. Validar com Rodolfo e Ares, por API e readback:
+2. Manter a identidade Workspace paga como administradora e adicionar Ares como `Manager`.
+3. Validar primeiro o ciclo do Ares sem adicionar gestores.
+4. Testar o uploader externo separadamente: se o Gmail pessoal receber papel com `canAddChildren=true`, fazer upload real; se a edição limitar a `Viewer`, usar o intake externo em My Drive e copiar RAW/tratado para o Shared Drive sem comprar licença automaticamente.
+5. Validar com a identidade Workspace e Ares, por API e readback:
    - criar;
    - baixar;
    - editar/renomear;
@@ -120,11 +163,11 @@ Antes de migrar a árvore:
 
 Quando o objetivo inicial for apenas provar o controle de ownership/exclusão:
 
-1. começar com **Business Starter Flexível** e uma licença;
-2. usar o período de teste quando disponível;
-3. concluir o piloto de Ares/Rodolfo/colaborador;
+1. começar com **uma edição compatível com Shared Drives e uma única licença paga** — por exemplo, Business Starter ou Enterprise Essentials quando o e-mail permanece em provedor externo;
+2. preferir cobrança flexível/período de teste quando disponível;
+3. concluir o piloto de identidade Workspace/Ares e, separadamente, o teste de intake externo;
 4. migrar somente após PASS;
-5. avaliar mudança para anual depois da prova, sem assumir compromisso de um ano antes do teste.
+5. avaliar plano anual ou licenças adicionais apenas depois da prova, sem presumir que colaborador externo ou service account exige assento pago.
 
 ## Fontes oficiais
 
