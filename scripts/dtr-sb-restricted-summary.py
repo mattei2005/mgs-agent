@@ -40,9 +40,10 @@ def truncate(value, limit):
     return value if len(value) <= limit else value[: limit - 1] + '…'
 
 
-def build_snapshot(raw_rows, active_users, daily, sync):
+def build_snapshot(raw_rows, active_users, daily, sync, tday=None):
     fb_ignore, bot_pg_ignore = daily.load_ignore_keys()
     active_users = {daily.low(user) for user in active_users if daily.low(user)}
+    tday = tday or datetime.now(NY).date().isoformat()
     if not active_users:
         raise RuntimeError('active-user scope is empty; refusing to publish an empty summary')
 
@@ -62,7 +63,14 @@ def build_snapshot(raw_rows, active_users, daily, sync):
     if not scoped:
         raise RuntimeError('Smart Bidding active-user scope is empty; refusing to publish')
 
-    restricted = [row for row in scoped if daily.norm(row.get('restricted_until'))]
+    # Keep the summary aligned with the canonical production definition:
+    # a restriction is active through its exit date (inclusive), and expired
+    # dates must not reappear merely because RESTRICTED_UNTIL is still filled.
+    restricted = [
+        row
+        for row in scoped
+        if sync.active_restricted(row.get('_raw') or {}, tday)
+    ]
     broadcast = [row for row in restricted if daily.low(row.get('status')) == 'broadcast']
     on_hold = [row for row in restricted if daily.low(row.get('status')) == 'on-hold']
 

@@ -31,16 +31,17 @@ Correção importante validada em 2026-07-02: o ID `14ica5TVauTrzAxcl4T-ViJorF89
 
 Regra de REPORT-INFRA para mudanças de skill/script/data/config feitas pelo Ares: não declarar “enviei o REPORT-INFRA” com base apenas em intenção. Primeiro executar o envio real pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh` ou, se usar fallback textual, validar HTTP 204 e confirmar via Discord API que a mensagem aparece em `#alerts-infra` (`1498132022634483894`) antes de afirmar na thread original. Não usar scripts com nome de outro agente como caminho padrão (`ares-report-infra.sh`) quando houver helper canônico MGS.
 
-### Gate de propriedade no UPLOAD MANUAL
+### Gate de capacidades no UPLOAD MANUAL
 
-Para novos arquivos enviados pela Kelly ou por outro colaborador em `UPLOAD MANUAL`, a propriedade do arquivo bruto deve pertencer à conta Google canônica do Rodolfo antes do processamento.
+Para arquivos enviados pela Kelly, Evo ou outro colaborador em `UPLOAD MANUAL`, a propriedade individual do arquivo bruto não precisa pertencer à conta Google do Rodolfo. Em `My Drive`, o uploader pode continuar como owner mesmo dentro de uma pasta do Rodolfo; isso não bloqueia o fluxo quando o OAuth canônico do Ares possui as capacidades necessárias.
 
-1. Consultar no Drive real `about.user.permissionId` da conta OAuth canônica e, para cada source, `owners`, `ownedByMe` e `capabilities(canTrash,canDelete,canEdit)`.
-2. Não inferir propriedade pela pasta: em `My Drive`, o uploader pode continuar proprietário mesmo dentro de uma pasta do Rodolfo.
-3. Se o source não pertencer à conta canônica do Rodolfo, marcar o intake como bloqueado por ownership e não tratar, mover ou concluir o arquivo. Solicitar que o proprietário transfira a propriedade ao Rodolfo.
-4. Após a transferência, repetir o GET/readback e processar somente quando o owner/permission ID corresponder à conta canônica.
-5. A cópia limpa enviada pelo OAuth do Rodolfo para `01_READY` normalmente já fica no nome do Rodolfo; o bruto movido para `99_LEGACY` conserva o owner original. Por isso, o gate deve ocorrer antes do tratamento para que toda a linhagem fique sob a propriedade exigida.
-6. Não trocar o OAuth canônico do Ares pela conta do colaborador e não migrar a estrutura para Shared Drive sem plano e aprovação explícita do Rodolfo.
+1. Consultar no Drive real `owners`, `ownedByMe` e `capabilities(canDownload,canEdit,canMoveItemWithinDrive,canTrash,canDelete)` para diagnóstico e auditoria.
+2. No fluxo canônico de tratar/mover, exigir acesso para baixar o bruto, enviar a cópia limpa ao `01_READY` e mover o original para `99_LEGACY`. Em pedidos de copiar/manter, a capacidade de mover o source não é necessária.
+3. `canTrash=false` e `canDelete=false` não bloqueiam o processamento, porque o fluxo canônico preserva o original e não apaga arquivos.
+4. Bloquear somente quando uma capacidade realmente necessária estiver ausente ou quando a API real negar a ação. Informar a ação recusada e o readback correspondente; não solicitar transferência de propriedade por padrão.
+5. A cópia limpa enviada pelo OAuth do Rodolfo para `01_READY` normalmente fica no nome do Rodolfo; o bruto preservado em `99_LEGACY` pode conservar o owner original sem quebrar a linhagem.
+6. Transferência de propriedade é uma decisão opcional de governança, somente quando Rodolfo a exigir expressamente; não é pré-requisito rotineiro de Creative Ops.
+7. Não trocar o OAuth canônico do Ares pela conta do colaborador e não migrar a estrutura para Shared Drive sem plano e aprovação explícita do Rodolfo.
 
 ### Fonte canônica do OAuth Drive
 
