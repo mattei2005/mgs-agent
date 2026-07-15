@@ -50,6 +50,8 @@
 
 16. **Cron de produção não deve depender de runtime ou estado autenticado em diretório temporário** — quando um alerta mostra exit `127`, `not found` ou storage state ausente, não corrija apenas o wrapper que alertou. Primeiro inventarie todos os consumidores do mesmo interpretador, browser profile ou auth state; depois migre runtime e estado para caminho persistente, fixe dependências reproduzíveis e preserve permissões restritas do material autenticado. Validação mínima: sintaxe/imports de todos os consumidores, smoke local do browser/runtime, execução real read-only do fluxo afetado e `cronjob run` com readback de `last_status=ok`. Atualize inventário/audit e o runbook dono do sistema para evitar regressão.
 
+17. **Helper compartilhado pode mudar o formato do retorno sem mudar o sucesso HTTP** — quando um cron acusa falha mas o próprio erro mostra `status: 200` e `message_id`, verificar o contrato atual do helper antes de reenviar. Um poster que antes retornava `200` pode passar a retornar `{'status': 200, 'message_id': '...'}`; comparar o objeto inteiro com `(200, 201)` gera falso erro depois que a mensagem já foi entregue. Normalizar explicitamente os formatos legado e atual, testar ambos com fixture e validar o consumidor com modo `--no-post` para não duplicar a mensagem de produção. Depois, gravar um marcador `OK manual-recovery` no log somente com métricas reais da execução para o control plane deixar de classificar o traceback antigo como sinal atual.
+
 ---
 
 ---
