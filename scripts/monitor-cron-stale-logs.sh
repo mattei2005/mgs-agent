@@ -195,14 +195,22 @@ for job in parse_crons():
                 tail_lines = p.read_text(errors='ignore').splitlines()[-120:]
             except Exception as exc:
                 tail_lines = [f'WARN: não consegui ler log para scan semântico: {exc}']
-            # Avaliar só o bloco de execução mais recente quando houver marcador de start.
-            # Evita alertar erro antigo que já foi seguido por uma execução limpa.
-            last_start = None
+            # Avaliar só o trecho posterior ao marcador operacional mais recente.
+            # Além de START, aceitar um término saudável explícito: logs extensos podem
+            # empurrar o START para fora da janela, deixando um traceback antigo antes
+            # de um "OK" final ser classificado incorretamente como erro atual.
+            last_boundary = None
             for idx, tline in enumerate(tail_lines):
-                if re.search(r'(start|iniciando|===)', tline, re.I):
-                    last_start = idx
-            if last_start is not None:
-                tail_lines = tail_lines[last_start:]
+                is_start = re.search(r'(start|iniciando|===)', tline, re.I)
+                is_success = re.search(
+                    r'^\[[^\]]+\]\s+(?:OK\b|END\b.*\brc=0\b)',
+                    tline,
+                    re.I,
+                )
+                if is_start or is_success:
+                    last_boundary = idx
+            if last_boundary is not None:
+                tail_lines = tail_lines[last_boundary:]
             for line in reversed(tail_lines):
                 if SEMANTIC_ERROR_RE.search(line):
                     clean = line.strip()
