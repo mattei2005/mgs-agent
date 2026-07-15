@@ -128,6 +128,50 @@ class KnowledgeControlTests(unittest.TestCase):
         self.assertEqual(0, status["registry_entries"])
         self.assertEqual(0, status["pending_candidates"])
         self.assertEqual(0, status["active_checkpoints"])
+        self.assertEqual(0, status["regression_cases"])
+
+    def test_business_regression_passes_required_and_forbidden_terms(self):
+        cases = {
+            "schema_version": 1,
+            "cases": [{
+                "id": "KR-001",
+                "question": "Is Hera active?",
+                "source": "context/agent-map.md",
+                "required_all": ["desativada", "Ares"],
+                "forbidden_any": ["Hera recebe novas operações"],
+            }],
+        }
+        (self.root / "context/agent-map.md").write_text(
+            "Hera foi desativada e consolidada no Ares.\n", encoding="utf-8"
+        )
+        (self.root / "data/knowledge-regression-cases.json").write_text(
+            json.dumps(cases), encoding="utf-8"
+        )
+        report = self.json_cli("regression")
+        self.assertEqual("ok", report["status"])
+        self.assertEqual(1, report["passed"])
+        self.assertEqual(0, report["failed"])
+
+    def test_business_regression_fails_when_required_term_is_missing(self):
+        cases = {
+            "schema_version": 1,
+            "cases": [{
+                "id": "KR-001",
+                "question": "Where is the decision registry?",
+                "source": "context/company-os.md",
+                "required_all": ["knowledge-registry.json"],
+                "forbidden_any": [],
+            }],
+        }
+        (self.root / "data/knowledge-regression-cases.json").write_text(
+            json.dumps(cases), encoding="utf-8"
+        )
+        proc = self.run_cli("regression", check=False)
+        self.assertNotEqual(0, proc.returncode)
+        report = json.loads(proc.stdout)
+        self.assertEqual("error", report["status"])
+        self.assertEqual(1, report["failed"])
+        self.assertIn("missing required term", report["results"][0]["errors"][0])
 
 
 if __name__ == "__main__":
