@@ -8,7 +8,7 @@
 6. Chamar o artefato visual de vídeo de **timeline de frames** ou **imagem de revisão**; evitar o termo “sheet” com Rodolfo, porque ele pode entender como Google Sheet/planilha.
 7. Para piloto de nomenclatura, selecionar uma amostra balanceada pequena para validar o método; uma vez validado, escalar para o lote completo restante, não ficar repetindo novas amostras pequenas. Usar lotes apenas como detalhe técnico de estabilidade/auditoria.
 8. Não criar Google Sheet/planilha para esse fluxo salvo pedido explícito; usar CSV/JSON local como log/plano técnico e explicar se algum arquivo é apenas evidência local.
-9. Detectar idioma/país por texto visível, nome, pasta e/ou OCR quando disponível; evidência visual pode corrigir o guess automático. Para vídeos, o classificador OCR-assisted canônico é `/root/mgs-agent/scripts/ares-classify-video-timelines-ocr.py`.
+9. Detectar idioma/país por texto visível, nome, pasta e/ou OCR quando disponível; evidência visual pode corrigir o guess automático. Para vídeos, o classificador OCR-assisted canônico é `/root/mgs-agent/scripts/ares-classify-video-timelines-ocr.py`. Antes de executá-lo, validar `command -v tesseract`: o binário é uma dependência externa do classificador. Se estiver ausente, não encerrar o lote; registrar o fallback e fazer a revisão pelas timelines de frames com evidência visual real. Instalação de pacote no host exige escopo de infra correspondente.
 10. Para escala completa de vídeos, seguir `references/upload-canvas-video-classification-scale.md`.
 11. Classificar vertical por evidência visual/textual; se incerto, `UNKNOWN`.
 12. Classificar pessoa/orientação usando somente `PV/NV` para vertical e `PH/NH` para square/feed 1:1 ou horizontal/landscape; `PS/NS` não entram em nomes finais.
