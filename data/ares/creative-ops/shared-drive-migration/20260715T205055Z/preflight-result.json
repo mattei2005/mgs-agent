@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-07-15T16:53:08-04:00",
+  "status": "BLOCKED_ACCOUNT_ENTITLEMENT",
+  "source": {
+    "root_id": "14ica5TVauTrzAxcl4T-ViJorF89vRKIl",
+    "root_name": "MGS-AGENTS",
+    "creative_root_id": "1NLaOKK6n4fMF5u1Assgq8FKim76NI--i",
+    "creative_root_name": "CRIATIVOS",
+    "storage_type": "MY_DRIVE"
+  },
+  "inventory": {
+    "items": 1435,
+    "files": 1134,
+    "folders": 301,
+    "bytes": 4881497822,
+    "gib": 4.546,
+    "unique_ids": 1435,
+    "duplicate_ids": 0,
+    "owned_by_rodolfo": 1326,
+    "owned_by_collaborators_or_ares": 109,
+    "cannot_trash_or_delete_with_rodolfo_oauth": 109
+  },
+  "shared_drive_discovery": {
+    "rodolfo_oauth": {
+      "canCreateDrives": false,
+      "visible_shared_drives": 0,
+      "create_attempt_http": 403,
+      "reason": "userCannotCreateTeamDrives"
+    },
+    "ares_drive_service_account": {
+      "canCreateDrives": false,
+      "visible_shared_drives": 0,
+      "create_attempt_http": 403,
+      "reason": "userCannotCreateTeamDrives"
+    }
+  },
+  "side_effects": {
+    "shared_drive_created": false,
+    "drive_items_moved": 0,
+    "runtime_ids_changed": false
+  },
+  "required_prerequisite": "A Google Workspace Shared Drive must be created or shared with the Rodolfo OAuth identity and ares-drive before the approved pilot and migration can continue."
+}
