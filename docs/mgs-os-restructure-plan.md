@@ -1,6 +1,6 @@
 # Plano de Reestruturação — MGS OS
 
-> Status: plano de execução v0.3, Fase 4 contextual concluída.
+> Status: plano de execução v0.4, Fase 4 contextual concluída; estado de agentes reconciliado em 2026-07-15.
 > Base: `context/company-current-operating-model.md` e `context/company-os.md`.
 > Regra: nenhuma automação/agente/arquivo produtivo será removido ou movido sem inventário, aprovação e validação.
 
@@ -180,10 +180,9 @@ Zeus     Concluído                       Lê MGS OS como fonte gerencial princi
                                          reporta por área/rota e respeita fontes.
 Atena    Próximo gate recomendado        Ler Content Operations, WordPress editorial,
                                          REC/P1 e fontes de conteúdo.
-Ares     Pendente                        Ler Growth, campanhas, criativos, ROI e
-                                         permissões conforme escopo aprovado.
-Hera     Pendente                        Ler Creative Operations, Drive, handoff para
-                                         Ares e limites de campanha.
+Ares     Ativo e consolidado             Creative Ops + Growth/Campaign Ops conforme
+                                         mapa atual e permissões aprovadas.
+Hera     Histórico/rollback              Desativada em 2026-07-12; sem operação nova.
 Futuros  Pendente                        Só nascer com área, dono, fontes, permissões
                                          e escalonamento definidos.
 ```
@@ -241,15 +240,6 @@ Só depois de tudo validado e com aprovação explícita:
 
 ## Próximo passo imediato
 
-A Fase 4 contextual está concluída. O próximo passo é abrir a **Fase 5 — Ajustar agentes**, com gate explícito antes de alterar qualquer profile.
+A Fase 4 contextual está concluída e Zeus já passou pelo primeiro gate da Fase 5. Ajustes futuros devem seguir o mapa atual: Atena e Ares são agentes ativos; Hera permanece apenas como histórico/rollback e não deve ser recriada como operação nova.
 
-```text
-Próximo bloco                  Fase 5 — Zeus primeiro
-Arquivo provável               profiles/zeus/SOUL.md ou fonte equivalente do profile
-Objetivo                       Fazer Zeus consumir MGS OS como fonte gerencial
-                               principal, sem apagar contexto antigo.
-Validação obrigatória           Diff + secret scan + resposta teste no Discord/logs.
-Escopo proibido                 Crontab, tokens, runtime, permissões e limpeza.
-```
-
-Minha recomendação operacional: começar por Zeus, porque ele é o orquestrador e precisa refletir corretamente a arquitetura antes de Atena/Ares/Hera herdarem rotas e limites.
+A nova frente de preservação de contexto está documentada em `docs/mgs-knowledge-continuity-plan.md`. Qualquer mudança de comportamento nos agents continua sendo executada um agente por vez, com gate, rollback e validação próprios.

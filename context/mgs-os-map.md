@@ -23,6 +23,10 @@ Regra prática:
 - Mapa operacional Ares: `context/ares-operational-map.md`
 - Rotas/handoffs: `context/routes.md`
 - Fontes de verdade: `context/sources-of-truth.md`
+- Governança de conhecimento: `context/knowledge-governance.md`
+- Registro institucional: `data/knowledge-registry.json`
+- Candidatos de conhecimento: `data/knowledge-inbox.jsonl`
+- Checkpoints de iniciativas: `data/agent-checkpoints.json`
 - Permissões conceituais: `context/permissions-matrix.md`
 - Pessoas/equipe: `context/team.md`
 - Sites conceituais: `context/sites.md`
@@ -352,6 +356,9 @@ Regra prática:
 - “Hera fez X antes da desativação?” → histórico em `/root/.hermes/profiles/hera/logs/` e dados preservados; operação atual → Ares
 - “Tem erro no Hermes/VPS?” → `/root/.hermes/profiles/*/logs/errors.log`, systemd, journalctl filtrado, `docs/CRONS.md`, `data/*-state.json`
 - “Cron está ativo?” → `docs/CRONS.md`, crontab real, logs do script, estado do monitor
+- “Já decidimos isso?” → `data/knowledge-registry.json`, depois a `canonical_source` do registro
+- “Onde paramos nessa iniciativa?” → `data/agent-checkpoints.json`, depois a thread/source indicada
+- “Essa informação nova já é canônica?” → `data/knowledge-inbox.jsonl` para candidato; `data/knowledge-registry.json` para promovido
 - “Isso está no Git?” → `git status`, `git log`, `git diff`, `logs/auto-push.log`
 - “Honcho está como quê?” → `scripts/mgs-memory-copilot`, `experiments/honcho-spike/mgs_memory_copilot.py`, `experiments/honcho-spike/README.md`, SOUL dos agentes
 

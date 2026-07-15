@@ -285,8 +285,11 @@ context/agent-map.md                   Agentes, escopos, limites e supervisores.
 context/routes.md                      Roteamento de pedidos/eventos.
 context/sources-of-truth.md            Onde cada dado deve ser lido/escrito.
 context/permissions-matrix.md          Matriz de autoridade e permissões.
+context/knowledge-governance.md        Classificação, promoção e continuidade.
 context/playbooks/                     Playbooks por área/processo.
 data/*.json                            Estado/dados operacionais.
+data/knowledge-registry.json           Índice institucional e supersessão.
+data/agent-checkpoints.json            Continuidade de iniciativas.
 scripts/                               Automações executáveis.
 skills/                                Procedimentos reutilizáveis de agentes.
 docs/                                  Histórico, changelog, pendências e crons.

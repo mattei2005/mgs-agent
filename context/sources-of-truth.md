@@ -19,7 +19,11 @@ Modelo operacional explicado     context/company-current-operating-model.md
 Mapa de agentes                  context/agent-map.md
 Rotas                            context/routes.md
 Fontes de verdade                context/sources-of-truth.md
-Permissões/matriz autoridade      context/permissions-matrix.md
+Governança de conhecimento       context/knowledge-governance.md
+Registro institucional           data/knowledge-registry.json
+Candidatos ainda não canônicos   data/knowledge-inbox.jsonl
+Continuidade de iniciativas      data/agent-checkpoints.json
+Permissões/matriz autoridade     context/permissions-matrix.md
 Sites e verticais conceituais     context/sites.md
 Config técnica de sites           data/sites.json
 Equipe                           context/team.md
@@ -97,6 +101,9 @@ Tipo de dado                   Onde escrever
 Permissões operacionais         data/authorized-users.json
 Decisão/evento relevante        logs/events-audit.jsonl
 Conhecimento estrutural         context/*.md
+Metadados de decisão/fonte      data/knowledge-registry.json
+Conhecimento ainda não aprovado data/knowledge-inbox.jsonl
+Estado de iniciativa/handoff    data/agent-checkpoints.json
 Procedimento reutilizável       skills/*/SKILL.md
 Automação executável            scripts/
 Histórico/plano/pendência       docs/
