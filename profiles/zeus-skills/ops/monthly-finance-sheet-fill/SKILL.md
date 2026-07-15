@@ -129,8 +129,8 @@ Spend in USD / BM `$`:
 
 Special handling:
 
-- `creditoparaveiculo.com`: sum all related FB accounts and write to `Creditoparaveiculo BR-CAR-BR`; also maintain the lower gestor mini-table starting at `ABL100` when filling July 2026+ style tabs (`ABL102:ABP108` summary, `ABL111:ABQ...` detail, with margin/ROI formulas in the detail margin column).
-- `fincgriffin.com`: write aggregated top-row values to `Fincgriffin US-CAR-EN`; also maintain the lower manager mini-table with `Data | Gestor | Gasto | Receita | Lucro | Margem`. Detail margin must be formula-driven (`=IFERROR(Lucro/Gasto, "")`), not a static blank/value.
+- `creditoparaveiculo.com`: sum all related FB accounts for the top aggregate, but route each account to the live manager-specific spend slot. The old July-style lower mini-table at fixed `ABL...ABQ` coordinates is historical only. The live June redesign uses six independent daily blocks (`G001`–`G006`) with direct spend, revenue, tax, profit, and ROI columns; discover their current coordinates from headers before writing.
+- `fincgriffin.com`: preserve the top aggregate while routing manager/account spend to the live dedicated slots. The old consolidated `Data | Gestor | Gasto | Receita | Lucro | Margem` mini-table is historical only. The live June redesign uses six independent daily blocks (`G001`–`G006`) and includes a complete US revenue/spend segment; discover current columns and total rows from the live tab before writing.
 - `openzed.com`: split principal block from `NF100` / `ICARO - G001-D`; do not collapse Ícaro into the principal block.
 - `finanzas.openzed.com`: keep US and ES blocks separate.
 - `gamezonead.com` / `gamingadx.com`: fill only the `Google Ads -R$` input column for BRL spend and preserve the neighboring USD conversion formula column (for example `AAG46 = SUM(AAH46/$E$1)`, `AAV46 = SUM(AAW46/$E$1)`). Broad clears must not blank those formulas.
@@ -150,6 +150,10 @@ Non-negotiable rollover checks learned from July 2026 prep:
 6. Audit formulas that reference `$A$3`, `DATE($B$4,$A$3,...)`, `EOMONTH(DATE($B$4,$A$3,1),0)`, or the daily row number. These control per-day expense distribution and can look visually correct while calculating the wrong month if `A3` is stale.
 7. Manager sheets depend heavily on exact tab-name parity via `SHEETNAME()`. The main sheet and all manager sheets must have the exact same target tab name, e.g. `Julho 2026`; validate imported labels such as manager `A21` after fixing the main sheet date/month labels.
 8. Do a formula inventory before mutating: count formulas, classify `IMPORTRANGE`, `CAIXA SINTETICO`, `$A$3`, hardcoded month literals, and formula errors. Save the audit locally before writing.
+9. **Rebaseline from the live source tab before every rollover.** Historical backups and rollover scripts are evidence, not templates, when Rodolfo has modified the source month. Compare live used row/column extent with the prior baseline, locate site blocks by header text instead of fixed coordinates, and inventory repeated manager/account blocks before duplicating. A structurally stale duplicate must be discarded and recreated from the live source rather than patched piecemeal.
+10. For Fincgriffin and CreditoParaVeiculo, explicitly validate both the top revenue/spend layout and every lower manager block. The June 2026 redesign introduced a complete Fincgriffin US segment, direct manager-specific spend slots, ten direct CreditoParaVeiculo `BM - $` slots, and six independent `G001`–`G006` daily blocks for both sites through row 338. Re-read live positions; do not reuse the old consolidated Fincgriffin table or historical Credit fixed columns.
+
+See `references/june-2026-live-structure-rebaseline.md` for the live-vs-backup structural delta and the required discovery checklist before recreating July 2026 or any later month.
 
 ## Caixa Sintetico monthly column fill
 
@@ -200,3 +204,4 @@ June 2026 validated pattern:
 - `references/june-2026-fill-audit.md` — June 16–29, 2026 live fill lessons, mappings, correction of row 35, and audit results.
 - `references/monthly-rollover-formula-audit.md` — July 2026 rollover prep notes: formula inventory across main + manager sheets, `A3` month-number dependency, column `B` date rebuild, `CAIXA SINTETICO` month-column shift, and Sheets API batching pitfall.
 - `references/july-2026-1-6-fill-audit.md` — July 1–6, 2026 live fill lessons: reconciled totals, formula-column restore pitfall, Fincgriffin date-serial validation, and final validation standard.
+- `references/june-2026-live-structure-rebaseline.md` — live June redesign versus the prior rollover baseline: Fincgriffin US columns, manager-specific spend slots, CreditoParaVeiculo slot expansion, six `G001`–`G006` daily blocks, and mandatory live rebaseline before rollover.
