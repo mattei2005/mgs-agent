@@ -36,6 +36,18 @@ Para garantir exclusão independentemente do uploader, avaliar com plano e aprov
 
 Antes de migrar: inventário read-only, piloto com arquivo de colaborador, teste create/move/trash/restore/delete, validação de IDs/links/checksums, atualização dos runtimes e rollback. Nunca migrar a árvore inteira apenas para resolver um item isolado sem aprovação estrutural.
 
+### Preflight canônico de Shared Drive
+
+Antes de criar o destino ou alterar qualquer ID operacional:
+
+1. Com o OAuth canônico de Rodolfo, consultar `GET /drive/v3/about?fields=canCreateDrives,user(permissionId,displayName)` e listar `GET /drive/v3/drives`.
+2. Repetir a descoberta com `ares-drive` quando essa identidade participar da operação; não inferir que a capacidade de uma identidade vale para a outra.
+3. Se o plano já estiver aprovado e não houver Drive visível, fazer uma tentativa idempotente de `POST /drive/v3/drives` com `requestId` UUID estável e nome de piloto. O HTTP da criação é a prova final; `canCreateDrives` é preflight.
+4. Interpretar `403 userCannotCreateTeamDrives` como falta de entitlement/política administrativa para criar Shared Drives, não como permissão por arquivo nem como defeito do runner. O requisito de continuação é um Shared Drive Google Workspace existente ou uma identidade Workspace/Admin habilitada; nunca solicitar senha/token em chat.
+5. Enquanto o destino não existir, manter **zero itens movidos**, **zero IDs runtime alterados** e **zero mudança na origem**. Não criar uma árvore parcial em My Drive como falso substituto.
+6. Inventariar recursivamente a origem antes do piloto: IDs únicos, caminho, tipo, tamanho, checksum quando disponível, owner, `ownedByMe`, `canTrash`, `canDelete` e contagem por owner. Validar JSON/CSV com igualdade de contagem e ausência de IDs duplicados.
+7. Só depois de o piloto passar create/move/trash/restore/delete: migrar em lotes, validar readback/checksum/IDs, atualizar scripts e watchdogs, e manter rollback até a conferência final.
+
 ## Comunicação
 
 - Não dizer “precisa de permissão da Kelly/gestor” como resposta padrão para itens dentro de `MGS-AGENTS/CRIATIVOS`.
