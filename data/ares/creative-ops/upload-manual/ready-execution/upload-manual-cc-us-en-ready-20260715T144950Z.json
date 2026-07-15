@@ -1,0 +1,416 @@
+{
+  "done": true,
+  "generated_at_utc": "2026-07-15T14:49:53.556757+00:00",
+  "auth_mode": "oauth_user",
+  "thread_id": "1526963069043867800",
+  "requested_by": "Kelly",
+  "operation": "CC_US_EN",
+  "source_inventory_csv": "/root/mgs-agent/data/ares/creative-ops/upload-manual/live-intake-us-cc-en/upload-manual-inventory-20260715T144700Z.csv",
+  "folders": {
+    "UPLOAD_MANUAL": {
+      "id": "1ghzwA-zjBgv7mBJtS_z4wQQUbr7KgQ_f",
+      "path": "MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL"
+    },
+    "VID_READY": {
+      "id": "1t7jNxRoX6t3YBHIGJKCpsPSWJ78B0dAT",
+      "path": "MGS-AGENTS/CRIATIVOS/CC_US_EN/VID/01_READY"
+    },
+    "VID_REJECTED": {
+      "id": "1KiC7Tlw9mQOBTqjG1Wf-TrczjtNUxCY6",
+      "path": "MGS-AGENTS/CRIATIVOS/CC_US_EN/VID/05_REJECTED"
+    },
+    "VID_LEGACY": {
+      "id": "1Qar7_ql3vpfQDipRhngwBEQ95Izmzue7",
+      "path": "MGS-AGENTS/CRIATIVOS/CC_US_EN/VID/99_LEGACY"
+    }
+  },
+  "rows": [
+    {
+      "index": 1,
+      "status": "01_READY",
+      "source_drive_id": "1So03LUXx3kxKqml-eLpcYQn8ul2BU3Hn",
+      "source_filename": "1_ 17 - Story ( ingles) .mp4",
+      "destination_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_001.mp4",
+      "destination_drive_id": "1HQGZf6mPqgVsZnUceZpUu2rnvOVuweqW",
+      "source_final_parent_id": "1Qar7_ql3vpfQDipRhngwBEQ95Izmzue7",
+      "source_sha256": "67b6f0e76945ecbf891a207edf21616867cc6846694ef3136b7a905b09d2526a",
+      "clean_sha256": "8d4a17d3d98547f5bd29820532d70ace73587e01d567113261c051b393174e49",
+      "drive_md5": "d8f49c6885e304f4715b9b8a09374ddf",
+      "bytes_clean": 5720047,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "PERSON",
+      "p_orient": "PV",
+      "angle": "AVAILABLE_LIMIT",
+      "variant": "001",
+      "claim": "AVAILABLE LIMIT $12,790",
+      "visual_evidence": {
+        "duration_seconds": 15.093,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0186,
+            "mean": [
+              123.0494,
+              112.0609,
+              102.8339
+            ],
+            "stddev": [
+              63.7251,
+              61.6313,
+              61.0809
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "c5e1e1e5ccc18398"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.5465,
+            "mean": [
+              123.7558,
+              112.6289,
+              103.341
+            ],
+            "stddev": [
+              63.325,
+              61.1922,
+              60.5626
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "c5e1e1e1cdc59398"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.0744,
+            "mean": [
+              124.0917,
+              113.1053,
+              103.7747
+            ],
+            "stddev": [
+              62.8303,
+              60.9007,
+              60.3134
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "c5e1e1e5e5c19398"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:c5e1e1e5ccc18398/c5e1e1e1cdc59398/c5e1e1e5e5c19398",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-cc-us-en-20260715/item-01-f0ntoa5o/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-cc-us-en-20260715/item-01-f0ntoa5o/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-cc-us-en-20260715/item-01-f0ntoa5o/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/1HQGZf6mPqgVsZnUceZpUu2rnvOVuweqW/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CC_US_EN/VID/01_READY/20260715T144950Z/CC_US_EN_VID_AVAILABLE_LIMIT_PV_001.mp4"
+    },
+    {
+      "index": 2,
+      "status": "01_READY",
+      "source_drive_id": "1zNFaclWuBtOAjdEiiWU_n-MJaH7UO959",
+      "source_filename": "2_ 16 - Story ( ingles) .mp4",
+      "destination_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_002.mp4",
+      "destination_drive_id": "14yGEb8ncSA8mo2WMSy8KX3Lc0iSruF_k",
+      "source_final_parent_id": "1Qar7_ql3vpfQDipRhngwBEQ95Izmzue7",
+      "source_sha256": "0f1b09c41b9f93a97cd897db1ed922b7105d3537ea2d2d7ec22b05d0c31f7235",
+      "clean_sha256": "9ab2b8dfc89b2d28cb251696a683addb06ee3f1207bfce5d7e051cd83c91ad9a",
+      "drive_md5": "c93d48bf992066a01d854cbbd5629885",
+      "bytes_clean": 6076086,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "PERSON",
+      "p_orient": "PV",
+      "angle": "AVAILABLE_LIMIT",
+      "variant": "002",
+      "claim": "AVAILABLE LIMIT $11,780",
+      "visual_evidence": {
+        "duration_seconds": 15.07,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0140000000000002,
+            "mean": [
+              132.5177,
+              124.1977,
+              113.601
+            ],
+            "stddev": [
+              51.9401,
+              54.3587,
+              51.7911
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "9f616969618581d1"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.535,
+            "mean": [
+              132.3188,
+              124.0343,
+              113.7103
+            ],
+            "stddev": [
+              52.4464,
+              54.5397,
+              51.8485
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "9f616169e185c1d1"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.056000000000001,
+            "mean": [
+              132.4134,
+              124.065,
+              113.8633
+            ],
+            "stddev": [
+              51.8993,
+              54.3212,
+              51.5021
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "9f616169e18581d1"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:9f616969618581d1/9f616169e185c1d1/9f616169e18581d1",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-cc-us-en-20260715/item-02-pkaz62y4/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-cc-us-en-20260715/item-02-pkaz62y4/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-cc-us-en-20260715/item-02-pkaz62y4/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/14yGEb8ncSA8mo2WMSy8KX3Lc0iSruF_k/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CC_US_EN/VID/01_READY/20260715T144950Z/CC_US_EN_VID_AVAILABLE_LIMIT_PV_002.mp4"
+    },
+    {
+      "index": 3,
+      "status": "01_READY",
+      "source_drive_id": "1OZKYnLebmcHDjUB5BKPiyWogcA_UmxC-",
+      "source_filename": "3_18 - Story ( ingles) .mp4",
+      "destination_filename": "CC_US_EN_VID_AVAILABLE_LIMIT_PV_003.mp4",
+      "destination_drive_id": "1LwHVTC6d3F6cw4sSgg3cRzaZtcwst360",
+      "source_final_parent_id": "1Qar7_ql3vpfQDipRhngwBEQ95Izmzue7",
+      "source_sha256": "c9725b6a4bb790ee7fd26d1909f45d56e57701c26e2630b802b4e467ecdaa15d",
+      "clean_sha256": "07fbd177333d85b27451adc5f0e7e3c0753aac7eba2e71de9b4e29fc9a2e1a61",
+      "drive_md5": "aeb7f6d3bb5c9f6987e62cf149650b51",
+      "bytes_clean": 10368588,
+      "metadata_clean": true,
+      "harmful_tags_after": null,
+      "drive_readback_verified": true,
+      "sha256_readback_verified": true,
+      "person": "PERSON",
+      "p_orient": "PV",
+      "angle": "AVAILABLE_LIMIT",
+      "variant": "003",
+      "claim": "AVAILABLE LIMIT $11,770",
+      "visual_evidence": {
+        "duration_seconds": 15.07,
+        "samples": [
+          {
+            "pct": 0.2,
+            "second": 3.0140000000000002,
+            "mean": [
+              143.8354,
+              116.9747,
+              110.974
+            ],
+            "stddev": [
+              49.6022,
+              59.2928,
+              56.1424
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "d7d6ca59387c6931"
+          },
+          {
+            "pct": 0.5,
+            "second": 7.535,
+            "mean": [
+              142.1456,
+              118.1372,
+              112.8087
+            ],
+            "stddev": [
+              48.6933,
+              57.0976,
+              55.1716
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "d5e6c8e9786c7830"
+          },
+          {
+            "pct": 0.8,
+            "second": 12.056000000000001,
+            "mean": [
+              143.7851,
+              120.0454,
+              114.2053
+            ],
+            "stddev": [
+              48.6627,
+              56.5686,
+              54.6024
+            ],
+            "extrema": [
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ],
+              [
+                0,
+                255
+              ]
+            ],
+            "dhash64": "c7c6c27878687120"
+          }
+        ],
+        "perceptual_fingerprint": "dhash64:d7d6ca59387c6931/d5e6c8e9786c7830/c7c6c27878687120",
+        "blank_white": false,
+        "frame_paths": [
+          "/root/mgs-agent/tmp/ares-upload-manual-cc-us-en-20260715/item-03-ky4pfzjw/frames/frame-20.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-cc-us-en-20260715/item-03-ky4pfzjw/frames/frame-50.jpg",
+          "/root/mgs-agent/tmp/ares-upload-manual-cc-us-en-20260715/item-03-ky4pfzjw/frames/frame-80.jpg"
+        ]
+      },
+      "webViewLink": "https://drive.google.com/file/d/1LwHVTC6d3F6cw4sSgg3cRzaZtcwst360/view?usp=drivesdk",
+      "local_clean_path": "/root/mgs-agent/data/ares/creative-ops/ready/CC_US_EN/VID/01_READY/20260715T144950Z/CC_US_EN_VID_AVAILABLE_LIMIT_PV_003.mp4"
+    }
+  ],
+  "report_csv": "/root/mgs-agent/data/ares/creative-ops/upload-manual/ready-execution/upload-manual-cc-us-en-ready-20260715T144950Z.csv",
+  "report_json": "/root/mgs-agent/data/ares/creative-ops/upload-manual/ready-execution/upload-manual-cc-us-en-ready-20260715T144950Z.json",
+  "completed_at_utc": "2026-07-15T14:50:24.501142+00:00",
+  "counts": {
+    "total": 3,
+    "ready": 3,
+    "rejected_technical": 0,
+    "clean_true": 3,
+    "drive_readback_verified": 3,
+    "sha256_readback_verified": 3,
+    "sources_archived": 3,
+    "sources_rejected": 0,
+    "upload_pending_after": 0,
+    "inventory_entries": 3
+  },
+  "ready_folder_link": "https://drive.google.com/drive/folders/1t7jNxRoX6t3YBHIGJKCpsPSWJ78B0dAT",
+  "legacy_folder_link": "https://drive.google.com/drive/folders/1Qar7_ql3vpfQDipRhngwBEQ95Izmzue7",
+  "rejected_folder_link": "https://drive.google.com/drive/folders/1KiC7Tlw9mQOBTqjG1Wf-TrczjtNUxCY6"
+}
