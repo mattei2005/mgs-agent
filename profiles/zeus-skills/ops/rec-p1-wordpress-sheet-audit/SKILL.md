@@ -88,6 +88,35 @@ Use this branch when a Sheet lists WordPress articles by `Page ID`/URL and Rodol
 
 Country-tag audit and REC→P1 mapping are separate dimensions. If both are requested, keep country results on the existing article rows while deriving REC→P1 only from real CTA/card/LazyBlock links inside the post body. Never infer a REC→P1 relationship from `rec`, `apply`, or country text in a slug alone; inspect every real CTA/card/LazyBlock link, flag divergent destinations, and do not duplicate a linked P1 as a separate REC row.
 
+## Graph-aware consolidation for human review
+
+Use this branch when Rodolfo wants to prevent Raquel from checking the same article twice because a destination URL appears both in `Links internos encontrados` and as its own `Page URL` row.
+
+1. Model the inventory as a directed graph before removing or hiding anything:
+   - node = one unique canonical article URL;
+   - edge = source article → internal destination found in the real post body;
+   - compute target-only nodes, targets that are also sources, multi-incoming targets, and cycles.
+2. Never delete/clear every target row blindly. A target may also point to a third article, may be referenced by several sources, or may participate in a cycle. Blind deletion loses chains and can recreate duplicate review work elsewhere.
+3. Preserve the complete inventory and add destination-side review columns next to the internal-link column:
+   - `Tags de país do destino`;
+   - `País sugerido do destino`;
+   - `Conferência Raquel`.
+4. Assign each destination a single canonical review owner:
+   - first/selected source row: `REVISAR DESTINO AQUI`, with destination country tags and suggestion populated;
+   - additional source rows pointing to the same target: `JÁ CONSOLIDADO NA LINHA X`;
+   - destination's own `Page URL` row: `NÃO CONFERIR TAG — MIGRADA PARA A LINHA X`.
+5. Target-only rows may be hidden from Raquel's operational view after readback, but not deleted. Keep them available for traceability, rollback, future audits, and URL inventory completeness.
+6. Targets that are also sources must remain visible so their outgoing relationship is not lost. Their own tags can be marked already handled while the row continues to represent the next edge in the chain.
+7. For cycles, choose one stable canonical owner per node and preserve every edge; never resolve a cycle by deleting one of its article rows.
+8. The optimization target is **one tag review per unique article**, not the smallest possible number of stored rows. Denormalizing destination tags beside links is allowed, but repeated destinations must point back to one canonical review row.
+9. Before writing, save an exact backup and calculate the graph statistics. After writing, verify:
+   - every original `Page URL` still exists;
+   - each unique target has exactly one `REVISAR DESTINO AQUI` owner;
+   - every skip/reference points to a valid line;
+   - chains and cycles preserve all edges;
+   - pre-existing columns remain value-for-value unchanged.
+10. If Rodolfo explicitly requests physical deletion after seeing the graph-aware plan, treat that as a separate destructive phase with backup, explicit target set, and rollback/readback validation.
+
 ## References
 
 - `references/full-site-rec-p1-seo-audit-2026-07-09.md` — complete-site audit pattern for REC→P1 plus SEO/single articles, CTA/button link divergence reporting, and Google Sheets paste/readback details.
