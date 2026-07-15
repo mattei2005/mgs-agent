@@ -10,7 +10,10 @@ Use when an authorized request identifies country, vertical and language and ask
    - one labeled image contact sheet;
    - for each video, a labeled strip with frames near 20%, 50% and 80%; inspect a final frame separately if the dominant claim remains unclear.
 4. Classify each asset from visible evidence: `IMG|VID`, dominant `ANGLE`, `PV|NV|PH|NH`, placement and exact operation code. Square/feed 1:1 uses `PH|NH` for final naming. For Brasil + CAR + Português without Portugal context, use `CAR_BR_BR`; use `PT` only when Portuguese-Portugal is explicit.
-5. Before assigning variants, list live READY filenames and calculate the next numeric variant per exact `(FORMAT, ANGLE, P_ORIENT)` group. Use three digits and preserve the real extension.
+5. Before assigning variants, list live READY filenames and calculate the next numeric variant per exact `(FORMAT, ANGLE, P_ORIENT)` group. Use three digits and preserve the real extension. If the exact group has no prior READY asset, start at `001`; an entirely empty READY folder is valid and is not a blocker.
+   - User-supplied country, vertical and language define the operation when explicit; filename/folder guesses such as `UNKNOWN` do not override them.
+   - Derive `ANGLE` from the dominant, persistent visible claim in the asset language. Normalize it to concise `UPPER_SNAKE_CASE` without translating it (for example, visible English `AVAILABLE LIMIT` → `AVAILABLE_LIMIT`). Keep exact amounts or longer claim text in inventory evidence/notes, not in the canonical filename.
+   - For video, confirm claim and person/no-person classification across multiple frames, normally near 20%, 50% and 80%; a single thumbnail is insufficient.
 6. For each item, in this order:
    - clean with the canonical sanitizer using `--agent ares`;
    - verify `clean: true` locally;
