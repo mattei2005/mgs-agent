@@ -19,11 +19,32 @@ Diagnóstico mínimo, antes de afirmar a causa:
 
 Interpretação:
 
-- `tool_progress: false/off` + gateway reiniciado explica o cenário “só fica digitando e não mostra o que está fazendo”.
+- `tool_progress: false/off` explica por que não aparecem mensagens/edições como `Reading skill`, `terminal` e demais ferramentas.
+- Isso **não desliga o indicador nativo** `Zeus is typing…`: ele é controlado separadamente por `typing_indicator` no config da plataforma e tem default `true`.
+- Portanto, nunca atribuir o desaparecimento do `is typing…` a `tool_progress: off` sem validar o valor resolvido de `PlatformConfig.typing_indicator` e o caminho real de `send_typing()`.
 - Isso **não significa perda do histórico do Discord** nem perda do contexto interno; apenas oculta o acompanhamento operacional ao vivo.
 - `cleanup_progress: true` pode remover o progresso transitório após a resposta final, mas não é a causa primária quando o progresso nunca aparece.
 
-Resposta executiva recomendada: informar o valor anterior e atual, o horário/commit da mudança quando confirmados e o restart que a ativou. Se a mudança entrou junto de refactor/sync sem pedido explícito, classificá-la honestamente como possível regressão de visibilidade, não como comportamento intencional presumido.
+### Diagnóstico separado do indicador `is typing…`
+
+Quando Rodolfo apontar especificamente para a linha nativa `Zeus is typing…`:
+
+1. Confirmar qual superfície ele quer dizer; não tratar “digitando” e “progresso das ferramentas” como sinônimos.
+2. Ler o valor resolvido do Discord no runtime, não apenas procurar a chave no YAML. Se `typing_indicator` estiver omitido, o default atual pode continuar sendo `true`.
+3. Conferir o código vivo: o handler base inicia `_keep_typing()` quando `PlatformConfig.typing_indicator` é verdadeiro; o adapter Discord implementa `send_typing()` pelo endpoint `/channels/{channel_id}/typing`.
+4. Procurar erros de typing no journal e executar os testes focados de Discord/typing quando necessário.
+5. Se a credencial já estiver disponível no profile e o pedido for um diagnóstico visual na thread atual, pode-se fazer um smoke efêmero no endpoint de typing, sem imprimir o token, reportando somente o status HTTP. `204` prova que o Discord aceitou o evento; não prova sozinho que o cliente do usuário o exibiu continuamente.
+6. Se o endpoint aceitar e o config resolvido estiver `true`, classificar a ausência como intermitência/continuidade do indicador até haver evidência mais forte — não “configuração desligada”. Inspecionar também a cadência: o adapter mantém uma tarefa persistente e chamadas duplicadas podem ser ignoradas; qualquer intervalo maior que a duração visual do Discord pode criar lacunas.
+
+Teste focado útil no checkout vivo:
+
+```bash
+python -m pytest -q tests/gateway/test_discord_send.py -k typing tests/gateway/test_typing_indicator_toggle.py tests/gateway/test_keep_typing_timeout.py
+```
+
+Ao explicar uma mudança histórica, reconstruir a autorização original antes de chamá-la de regressão. Rodolfo pode ter pedido para remover comandos técnicos brutos das threads humanas, o que justifica `tool_progress: off`, sem ter pedido para remover `Zeus is typing…`. Se ele perguntar por que “o progresso” sumiu, explicar essa diferença e perguntar em linguagem natural qual das duas superfícies deseja restaurar; não reativar automaticamente o despejo bruto.
+
+Resposta executiva recomendada: informar separadamente o estado de `tool_progress` e de `typing_indicator`, o horário/commit da mudança quando confirmados e o restart/hot-read que a ativou. Se a mudança entrou junto de refactor/sync sem pedido explícito, classificá-la honestamente como possível regressão de visibilidade, não como comportamento intencional presumido.
 
 Para restaurar, tratar como mudança de configuração + restart: obter autorização conforme MGS, alterar tanto o profile vivo quanto o mirror canônico, validar com `hermes -p <profile> config check`, usar restart seguro (Zeus por último) e fazer smoke real no Discord confirmando que o progresso reapareceu. A configuração exata deve ser validada contra o schema/runtime da versão instalada; não assumir que strings antigas (`all`, `off`) e booleanos atuais são intercambiáveis.
 
@@ -43,6 +64,7 @@ display:
 Regras operacionais:
 
 - Aplicar nos quatro profiles vivos e nos quatro mirrors versionados; não corrigir apenas Zeus.
+- Uma reclamação de Rodolfo sobre comandos brutos, blocos de terminal ou poluição técnica **não autoriza desligar o acompanhamento ao vivo**. Preservar `tool_progress: all`; corrigir a apresentação, reduzir previews e rotear detalhes extensos para logs/`#alerts-infra` sem remover a visibilidade de progresso.
 - Em refactors/sincronizações YAML, preservar semanticamente `all`; não normalizar para `false` como efeito colateral de formatação.
 - Validar `config check` 4/4 e readback live+mirror 8/8 antes do restart.
 - Ativar via restart seguro, com Zeus por último, e confirmar no Discord real que uma nova execução mostra progresso enquanto o agente trabalha.
