@@ -145,6 +145,15 @@ def render_blocks(snapshot, now=None):
     return blocks
 
 
+def discord_http_status(result):
+    """Normalize the shared Discord poster's legacy and current return shapes."""
+    if isinstance(result, int):
+        return result
+    if isinstance(result, dict):
+        return result.get('status')
+    return None
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--no-post', '--dry-run', action='store_true', dest='no_post')
@@ -171,7 +180,10 @@ def main():
     else:
         for block in blocks:
             post_statuses.append(sync.post_discord(block))
-        if not post_statuses or any(status not in (200, 201) for status in post_statuses):
+        if not post_statuses or any(
+            discord_http_status(result) not in (200, 201)
+            for result in post_statuses
+        ):
             raise RuntimeError(f'Discord delivery failed: statuses={post_statuses}')
 
     result = {
