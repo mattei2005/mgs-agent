@@ -26,6 +26,7 @@ Critério de conclusão: asset/estado real validado e apenas o procedimento nece
 
 - **Pedido natural, brief, copy e produção criativa** → `references/route-pack-01.md`
 - **Status, Drive, READY/LEGACY e rastreabilidade** → `references/route-pack-02.md`
+- **Controle de itens de colaboradores, exclusão e drift de permissões no Drive MGS** → `references/my-drive-collaborator-control-and-deletion.md`
 - **Sanitização, origem e consumidores** → `references/route-pack-03.md`
 - **Naming, imagem estática e providers** → `references/route-pack-04.md`
 - **Vídeo, referência e backend gates** → `references/route-pack-05.md`
