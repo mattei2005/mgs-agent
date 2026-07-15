@@ -60,6 +60,25 @@ Do not collapse the P1 into the REC date. REC and P1 each need their own date, l
 - Missing-tag audit column: when Rodolfo asks to identify missing standard tags, add a new column (e.g. `Tags faltando`) and audit by tag classes, not exact expected values. For each REC article, verify presence of: vertical tag class, country tag class, language tag class (`lang_*`), and `rec`. For each internal P1 article, verify presence of: vertical tag class, country tag class, language tag class (`lang_*`), and `p1`. If a class is missing, write generic labels like `REC faltando: vertical, país` or `P1 faltando: língua, p1`; do not guess the exact country/vertical when it cannot be inferred. If all required classes exist, write `OK`.
 - For Google Sheets browser fallback, an array literal formula in `A1` can populate a small test table quickly, but always validate via CSV export/readback.
 
+## Country-tag integrity audits from article inventory Sheets
+
+Use this branch when a Sheet lists WordPress articles by `Page ID`/URL and the operational question is whether each post has exactly one country tag (for example `us`, `es`, or `gb`) controlling country-specific advertising blocks.
+
+1. Treat the Sheet's `Page ID` as the primary lookup key; the edit-link column is a convenience, not a requirement to open every post manually.
+2. Fetch each post by direct ID and resolve all tag IDs to names/slugs. If anonymous REST is denied or incomplete, retry through the approved authenticated REST/admin-session path; do not downgrade to manual article-by-article review merely because the public endpoint is unavailable.
+3. Build the valid country-tag set from the site's live taxonomy and the current ad/Ciro configuration. Do not classify every two-letter slug as a country automatically.
+4. Classify each post:
+   - `OK`: exactly one valid country tag.
+   - `SEM PAÍS`: no valid country tag.
+   - `CONFLITO`: two or more valid country tags.
+   - `REVISAR`: the current state is detectable, but the intended country is not provable.
+5. A single country tag is not automatically the correct country. Determine the intended country only from an explicit source of truth such as editorial metadata/brief, campaign assignment, or unambiguous country-specific evidence in the article. Language, domain, generic title, or whichever tag appears first are not sufficient by themselves.
+6. Add audit columns such as `Tags atuais`, `Tags de país`, `Status`, and `País sugerido/evidência`. Keep ambiguous cases for Rodolfo/Raquel review instead of guessing or auto-correcting.
+7. Run the first pass read-only and report counts by status. Apply taxonomy corrections only as a separate authorized write phase, with before-state capture and post-update readback by direct post ID.
+8. Front-end `rel="tag"` links or visible tag widgets may vary by theme and can omit taxonomy data; use them only as secondary evidence, never as the canonical source across mixed sites.
+
+The operational goal is to reduce human review to exceptions (`SEM PAÍS`, `CONFLITO`, `REVISAR`) rather than asking people to inspect every article.
+
 ## References
 
 - `references/full-site-rec-p1-seo-audit-2026-07-09.md` — complete-site audit pattern for REC→P1 plus SEO/single articles, CTA/button link divergence reporting, and Google Sheets paste/readback details.
