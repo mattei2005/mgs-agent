@@ -9,6 +9,7 @@ and exact time; this monitor never attributes the writer without direct evidence
 
 import argparse
 import asyncio
+import hashlib
 import importlib.util
 import json
 import os
@@ -21,6 +22,7 @@ from zoneinfo import ZoneInfo
 BASE = Path('/root/mgs-agent')
 DAILY_PATH = BASE / 'scripts/dtr-sb-daily-match-audit.py'
 STATE_PATH = BASE / 'data/sb-restricted-transition-state.json'
+BACKUP_DIR = BASE / 'backups'
 TARGET_CHANNEL_ID = '1522442220903337984'
 SHEET_URL = 'https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0'
 NY = ZoneInfo('America/New_York')
@@ -129,6 +131,31 @@ def snapshot_from_report_sheet(sync):
     return snapshot
 
 
+def backup_report_sheet(sync):
+    token = sync.google_access_token()
+    values = sync.read_report_datasets(token, ['Paginas']).get('Paginas') or []
+    if not values:
+        raise RuntimeError('Paginas report sheet is empty; refusing backup/write')
+    payload = {
+        'created_at': now_iso(),
+        'sheet_url': SHEET_URL,
+        'tab': 'Paginas',
+        'values': values,
+    }
+    encoded = (json.dumps(payload, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
+    BACKUP_DIR.mkdir(parents=True, exist_ok=True)
+    path = BACKUP_DIR / f"sb-restricted-report-sheet-{datetime.now(NY).strftime('%Y%m%d-%H%M%S')}.json"
+    path.write_bytes(encoded)
+    readback = path.read_bytes()
+    if readback != encoded:
+        raise RuntimeError(f'local Sheet backup readback failed: {path}')
+    return {
+        'path': str(path),
+        'rows': max(0, len(values) - 1),
+        'sha256': hashlib.sha256(readback).hexdigest(),
+    }
+
+
 def compare_snapshots(previous, current):
     transitions = []
     for key in sorted(current):
@@ -232,11 +259,18 @@ def render_blocks(transitions, counts, source_label, now=None):
 
     blocks = []
     current = common + rows[:2]
+    sheet_suffix = f"\n\n**Planilha completa:** <{SHEET_URL}>"
     for row in rows[2:]:
-        if len(wrap(current + [row])) <= DISCORD_LIMIT:
+        candidate = wrap(current + [row])
+        if not blocks:
+            candidate += sheet_suffix
+        if len(candidate) <= DISCORD_LIMIT:
             current.append(row)
             continue
-        blocks.append(wrap(current))
+        completed = wrap(current)
+        if not blocks:
+            completed += sheet_suffix
+        blocks.append(completed)
         current = [
             'PÁGINAS RESTRITAS — TRANSIÇÕES DETECTADAS NA SB (continuação)',
             f"Atualizado em: {now.strftime('%Y-%m-%d %H:%M %Z')}",
@@ -244,8 +278,10 @@ def render_blocks(transitions, counts, source_label, now=None):
             *rows[:2],
             row,
         ]
-    blocks.append(wrap(current))
-    blocks[0] += f"\n\n**Planilha completa:** <{SHEET_URL}>"
+    completed = wrap(current)
+    if not blocks:
+        completed += sheet_suffix
+    blocks.append(completed)
     if any(len(block) > DISCORD_LIMIT for block in blocks):
         raise RuntimeError('transition alert block exceeds Discord 2,000-character limit')
     return blocks
@@ -293,6 +329,7 @@ def main():
     transitions, resolved = compare_snapshots(previous, current)
     blocks = render_blocks(transitions, counts, source_label) if transitions else []
     sheet_update = None
+    sheet_backup = None
     post_results = []
 
     if args.dry_run:
@@ -300,6 +337,7 @@ def main():
             print(block)
     else:
         if args.update_sheet:
+            sheet_backup = backup_report_sheet(sync)
             broadcast_rows, _ = sync.restricted_sheet_rows(raw_rows, active_users, sync.today())
             sheet_update = sync.write_google_sheet(broadcast_rows)
             if not sheet_update.get('readback_ok'):
@@ -324,6 +362,7 @@ def main():
         'counts': counts,
         'blocks': len(blocks),
         'block_lengths': [len(block) for block in blocks],
+        'sheet_backup': sheet_backup,
         'sheet_update': sheet_update,
         'post_results': post_results,
         'state_written': bool(args.apply),
