@@ -90,6 +90,40 @@ Country-tag audit and REC→P1 mapping are separate dimensions. If both are requ
 
 ## Graph-aware consolidation for human review
 
+Use this branch when Rodolfo wants Raquel to avoid reviewing the same article twice because an internal-link destination also exists as its own `Page URL` row.
+
+1. Do not delete or clear target `Page URL` rows blindly. Build a directed graph from each source article to its canonical internal destination first.
+2. Classify every target as:
+   - target-only: referenced by another article and has no outgoing internal article link;
+   - target+source: referenced and also links onward, so it participates in a chain;
+   - multi-source target: referenced by more than one source;
+   - cycle member: source/target chain returns to an earlier node.
+3. Append destination-review columns next to the internal-link columns:
+   - `Tags de país do destino`
+   - `País sugerido do destino`
+   - `Conferência Raquel`
+4. Copy the destination article's live country-tag values into every source row. Choose exactly one canonical source row per unique target—normally the lowest sheet row—to own the destination review. Other references must say `DESTINO CONSOLIDADO NA LINHA X`.
+5. Preserve every original row and `Page URL`. Hide only target-only rows after marking them `NÃO REVISAR — MIGRADO PARA LINHA X`. Keep target+source rows visible because removing them would break chains/cycles; mark their own tags as migrated and state whether their outgoing destination is reviewed there or consolidated elsewhere.
+6. Stable operator statuses:
+   - `REVISAR ARTIGO`
+   - `REVISAR ARTIGO + DESTINO`
+   - `REVISAR ARTIGO | DESTINO CONSOLIDADO NA LINHA X`
+   - `TAG PRÓPRIA MIGRADA PARA LINHA X | REVISAR DESTINO AQUI`
+   - `TAG PRÓPRIA MIGRADA PARA LINHA X | DESTINO CONSOLIDADO NA LINHA Y`
+   - `NÃO REVISAR — MIGRADO PARA LINHA X`
+7. Before mutation, back up every tab as CSV **and** export current `hiddenByUser` row metadata. New destination columns must be empty and pre-existing hidden-row count/set must be known.
+8. Acceptance gates:
+   - every article's own tags have exactly one review owner: its own row if it is not a target, otherwise its canonical incoming source row;
+   - every source row has destination tags populated;
+   - all pre-existing columns remain value-for-value unchanged;
+   - hidden-row set equals target-only set exactly;
+   - target+source rows remain visible;
+   - Sheets API readback and independent CSV export have zero mismatches.
+
+This structure reduces visible operational rows without destroying inventory or relationships. Removing every target row is unsafe whenever chains, shared targets, or cycles exist.
+
+## Graph-aware consolidation for human review
+
 Use this branch when Rodolfo wants to prevent Raquel from checking the same article twice because a destination URL appears both in `Links internos encontrados` and as its own `Page URL` row.
 
 1. Model the inventory as a directed graph before removing or hiding anything:

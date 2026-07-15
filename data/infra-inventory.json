@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-14T23:07:02-04:00",
+    "updated_at": "2026-07-14T23:14:06-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -3024,12 +3024,12 @@
       "agent": "zeus",
       "type": "skill",
       "path": "/root/.hermes/profiles/zeus/skills/ops/rec-p1-wordpress-sheet-audit/SKILL.md",
-      "size_bytes": 11462,
-      "modified_at": "2026-07-14T22:43:51-04:00",
-      "sha256": "f699e8cc30d3da15618e9891cb3ff8cf304a0b50892adc1ce97d53568a3339e7",
-      "purpose": "Procedure for auditing WordPress REC→P1/SEO and article-to-article links in Google Sheets, with authenticated inventory/tag checks, country-tag integrity, post-body-only CTA/LazyBlock href extraction, canonical destination mapping, and value-preserving Sheet readback.",
-      "validation": "Updated after a 870-article audit: explicit href-only LazyBlock parsing prevents blob/image false positives; legacy-IP/self destinations are removed after canonical mapping; read-only direct post-ID requests retry without Authorization after Cloudflare 403/526 only when HTTP 200 and expected public post are confirmed. Live/mirror skill hash equal; 870/870 fetched, 354 source rows mapped to 330 listed targets, zero self/blob targets, and Sheet API+CSV readback had zero mismatches.",
-      "updated_at": "2026-07-14T22:44:04-04:00"
+      "size_bytes": 16746,
+      "modified_at": "2026-07-14T23:12:22-04:00",
+      "sha256": "e79fab32f27a332836c2c156c5bbfb2ba6b6a05f640c2708b09276a708fb880f",
+      "purpose": "Procedure for auditing WordPress REC→P1/SEO and article-to-article links in Google Sheets, including country-tag integrity, post-body-only href extraction, canonical destination mapping, and graph-aware consolidation that gives each article exactly one human-review owner without deleting inventory rows.",
+      "validation": "Validated on 870 articles: 354 edges, 330 unique targets, 267 target-only rows hidden, 63 target+source chain rows preserved, 12 shared targets consolidated, one cycle preserved, 603 visible rows, destination tags populated for all 354 sources, original columns unchanged, hidden-row sets exact, and Sheets API+CSV readback mismatches=0. Skill also preserves href-only LazyBlock parsing, self-link removal after legacy mapping, and safe public read fallback after authenticated Cloudflare 403/526.",
+      "updated_at": "2026-07-14T23:12:29-04:00"
     },
     {
       "id": "atena:content-article-quality-audit",
@@ -6658,8 +6658,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 5452,
-      "md5": "351dd467c0f4d879ba6bdb5b4c9cac57",
-      "modified_at": "2026-07-14T23:07:02-04:00"
+      "md5": "04ab741658e56fc90424387ec9f97cf2",
+      "modified_at": "2026-07-14T23:12:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6670,8 +6670,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "642ff5897b0f277846c3d42bce4fdedf",
-      "modified_at": "2026-07-14T22:56:34-04:00"
+      "md5": "009d35ba2619dc9d29c32239cceb41e1",
+      "modified_at": "2026-07-14T23:11:35-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -6748,14 +6748,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 26842,
-      "md5": "4424cfb0367abee81bd79ae10c7dc706",
-      "modified_at": "2026-07-14T23:05:01-04:00"
+      "md5": "ae497c8540d2bbec4e3f15eca7c78d4e",
+      "modified_at": "2026-07-14T23:10:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 468,
-      "md5": "db4f4dc81edd5e21ce84102b3d62ca8b",
-      "modified_at": "2026-07-14T23:07:01-04:00"
+      "md5": "ad00ec669ae8f97a18ae3bd073b7206d",
+      "modified_at": "2026-07-14T23:14:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -6777,9 +6777,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 300461,
-      "md5": "02f3cd23cd71b1d9cb3360498a13cd9a",
-      "modified_at": "2026-07-14T22:44:53-04:00"
+      "size_bytes": 300510,
+      "md5": "5e17c77f9c09e3940b47f732dc37b0bd",
+      "modified_at": "2026-07-14T23:12:54-04:00"
     },
     {
       "path": "/root/mgs-agent/data/lazyblock-credit-card.json",
@@ -6899,7 +6899,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "94a8a638a600cf5f8ca1a27874de94fb",
-      "modified_at": "2026-07-14T23:06:01-04:00"
+      "modified_at": "2026-07-14T23:11:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -6927,9 +6927,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2113,
-      "md5": "b640d7d1fa397ef176318d0fd7b41aa2",
-      "modified_at": "2026-07-14T23:05:03-04:00"
+      "size_bytes": 2112,
+      "md5": "f81f3c6e940526691c065a1f04d6d900",
+      "modified_at": "2026-07-14T23:10:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",

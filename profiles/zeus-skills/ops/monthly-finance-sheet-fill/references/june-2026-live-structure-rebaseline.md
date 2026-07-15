@@ -45,6 +45,25 @@ Each block contains month/year, daily rows, `Gross`, `Net`, `Imposto`, `Gastos`,
 6. Validate formula errors across the full live used range and verify all six manager blocks for both sites.
 7. Treat any old July rollover script or backup as historical evidence only until revalidated against the live source.
 
+## Deleted-target rebind and empty-template pitfalls
+
+A deleted and recreated monthly tab is not equivalent to an always-existing tab for dependent formulas:
+
+1. `CAIXA SINTETICO` formulas can still display a syntactically correct target name under `valueRenderOption=FORMULA` while internally retaining the deleted sheet reference and evaluating as `#REF!`.
+2. Recreating `Julho 2026` repaired only the formulas whose text changed; 9 text-identical external formulas remained bound to the deleted sheet, producing 19 visible `#REF!` cells after dependent summary formulas were included.
+3. The validated fix is to derive every external July formula from the current June formula (`'Junho 2026'` → `'Julho 2026'`) and write **all** of them back to the July summary column, not only textual mismatches. In the validated rollover this rebound 48 formulas, 39 text changes plus 9 text-identical rewrites.
+4. Back up the target summary column and restore it if the rollover fails.
+
+Clearing the new month can also expose formulas that were valid only while the source month contained data. In the validated July rollover, `AHB36` and `AHC36` returned `#DIV/0!` because `AVERAGEIF(...,"<>0")` had no matching values. The safe target-month pattern is `IFERROR(AVERAGEIF(...),"")`, followed by a full formatted-value error scan.
+
+## Validated July recreation result
+
+- Eight month/date blocks rebuilt, including the top revenue/spend blocks and `G001`–`G006` lower blocks.
+- 2,290 confirmed manual input cells cleared; formulas and headers preserved.
+- Formula parity: 40,406 source and 40,406 target formulas.
+- Merge parity: 1,167 source and 1,167 target merges.
+- Independent readback: zero date mismatches, zero formula errors, zero `CAIXA SINTETICO` mismatches, zero changes outside the approved scope.
+
 ## Read-only validation result from the discovery session
 
 - Live grid: 352 rows × 890 columns; active returned content through row 338.
