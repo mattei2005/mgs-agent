@@ -1,0 +1,114 @@
+{
+  "generated_at_utc": "2026-07-15T23:48:34.937649+00:00",
+  "status": "FAIL",
+  "drive": {
+    "id": "0AEwt4Ye690ocUk9PVA",
+    "name": "MGS-CREATIVE-OPS"
+  },
+  "external_uploader": "criativosevo@gmail.com",
+  "pilot_folder_id": "10rXDrVtFtJPDikDLHl9A7tqXa-QpKcVO",
+  "steps": [
+    {
+      "step": "external_folder_permission",
+      "ok": true,
+      "evidence": {
+        "folder": {
+          "id": "10rXDrVtFtJPDikDLHl9A7tqXa-QpKcVO",
+          "name": "_ARES_EXTERNAL_UPLOAD_PILOT_20260715T233624Z",
+          "mimeType": "application/vnd.google-apps.folder",
+          "trashed": false,
+          "parents": [
+            "0AEwt4Ye690ocUk9PVA"
+          ],
+          "createdTime": "2026-07-15T23:36:25.271Z",
+          "modifiedTime": "2026-07-15T23:36:27.736Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "lastModifyingUser": {
+            "displayName": "ares-drive@mgs-ares.iam.gserviceaccount.com",
+            "emailAddress": "ares-drive@mgs-ares.iam.gserviceaccount.com"
+          },
+          "capabilities": {
+            "canAddChildren": true,
+            "canDelete": true,
+            "canDownload": true,
+            "canEdit": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canRename": true,
+            "canTrash": true
+          }
+        },
+        "target_permission": [
+          {
+            "id": "02394942478292864418",
+            "displayName": "criativosevo",
+            "type": "user",
+            "permissionDetails": [
+              {
+                "permissionType": "file",
+                "role": "writer"
+              }
+            ],
+            "emailAddress": "criativosevo@gmail.com",
+            "role": "writer"
+          }
+        ]
+      }
+    },
+    {
+      "step": "external_upload_detected",
+      "ok": true,
+      "evidence": {
+        "children_count": 1,
+        "files": [
+          {
+            "driveId": "0AEwt4Ye690ocUk9PVA",
+            "md5Checksum": "9a6296128588a3daa7779b63cbbc9fbb",
+            "mimeType": "image/jpeg",
+            "parents": [
+              "10rXDrVtFtJPDikDLHl9A7tqXa-QpKcVO"
+            ],
+            "lastModifyingUser": {
+              "displayName": "criativosevo"
+            },
+            "size": "31663",
+            "id": "1tlMDMYM4Pgw_BFjP9vHjkWku2QR5WZXj",
+            "name": "PILOTO-EVO",
+            "createdTime": "2026-07-15T23:46:47.320Z",
+            "modifiedTime": "2026-07-15T23:47:07.776Z",
+            "capabilities": {
+              "canEdit": true,
+              "canDelete": true,
+              "canDownload": true,
+              "canRename": true,
+              "canTrash": true,
+              "canMoveItemOutOfDrive": true,
+              "canMoveItemWithinDrive": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "step": "external_uploader_identity",
+      "ok": false,
+      "evidence": {
+        "lastModifyingUser": {
+          "displayName": "criativosevo"
+        },
+        "source_id": "1tlMDMYM4Pgw_BFjP9vHjkWku2QR5WZXj",
+        "source_name": "PILOTO-EVO"
+      }
+    }
+  ],
+  "error": "RuntimeError: external_uploader_identity failed: {'lastModifyingUser': {'displayName': 'criativosevo'}, 'source_id': '1tlMDMYM4Pgw_BFjP9vHjkWku2QR5WZXj', 'source_name': 'PILOTO-EVO'}",
+  "cleanup": [
+    {
+      "id": "1tlMDMYM4Pgw_BFjP9vHjkWku2QR5WZXj",
+      "deleted": true
+    }
+  ],
+  "side_effects": {
+    "pilot_items_remaining": []
+  }
+}

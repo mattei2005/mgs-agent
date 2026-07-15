@@ -136,6 +136,9 @@ Antes de migrar a árvore:
 2. Manter a identidade Workspace paga como administradora e adicionar Ares como `Manager`.
 3. Validar primeiro o ciclo do Ares sem adicionar gestores.
 4. Testar o uploader externo separadamente: se o Gmail pessoal receber papel com `canAddChildren=true`, fazer upload real; se a edição limitar a `Viewer`, usar o intake externo em My Drive e copiar RAW/tratado para o Shared Drive sem comprar licença automaticamente.
+   - Em upload externo, `lastModifyingUser.emailAddress` pode ser omitido por privacidade mesmo quando `displayName` e a permissão direta identificam o colaborador.
+   - Não falhar nem apagar o arquivo somente porque o e-mail não veio no metadata. Correlacionar a permissão direta da pasta (`emailAddress`/`role`), `lastModifyingUser.displayName`, timestamps, `driveId` e capabilities.
+   - Preservar o upload até concluir download/hash, move, trash, restore e delete. Em falha intermediária, manter o arquivo quando ainda faltar evidência do ciclo completo.
 5. Validar com a identidade Workspace e Ares, por API e readback:
    - criar;
    - baixar;
