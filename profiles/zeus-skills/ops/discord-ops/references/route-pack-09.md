@@ -9,9 +9,13 @@ Canonical helper for the normal path:
 ```
 
 If it returns `403 Missing Access`, diagnose before refusing:
-- `GET /channels/{thread_id}` with the posting bot token to confirm thread access.
+- `GET /channels/{thread_id}` with the posting bot token to confirm thread access and read `type` + `parent_id`.
 - Search/confirm the user ID in the guild if only a human name was provided.
-- If the user is in the guild but lacks access to the private parent channel, Zeus/admin can set a **minimal parent-channel user overwrite** (`VIEW_CHANNEL + SEND_MESSAGES + READ_MESSAGE_HISTORY + SEND_MESSAGES_IN_THREADS`) and retry the thread-member PUT. Validate `PUT .../thread-members/{user_id}` = `204` and `GET .../thread-members/{user_id}` = `200` before claiming success.
+- Distinguish a private thread from a **public thread under a private parent channel**. For a public thread, adding a user who cannot view the parent requires a parent-channel overwrite; this broadens visibility beyond the requested thread because the user can then see the parent channel and its other public threads.
+- When the original request says only “add X to this thread,” report the `403`, explain that parent access is required and broader, and obtain explicit confirmation before changing the parent overwrite. This is a scope-expanding prerequisite, not a routine hidden implementation detail.
+- After confirmation, Zeus/admin can set a **minimal parent-channel user overwrite** (`VIEW_CHANNEL + SEND_MESSAGES + READ_MESSAGE_HISTORY + SEND_MESSAGES_IN_THREADS`) and retry the thread-member PUT. Current permission bitfield for that exact set is `274877975552`; send it as a decimal string with `deny=0` and overwrite `type=1` (member).
+- Validate parent overwrite `PUT=204` and independent channel `GET=200` with exact overwrite readback, then validate `PUT .../thread-members/{user_id}` = `204` and `GET .../thread-members/{user_id}` = `200` before claiming success.
+- Record the authorization, target user, parent/thread IDs, permission bitfield, HTTP statuses, and final result in `logs/events-audit.jsonl` without secrets.
 
 For Zeus, keep this command pattern in `command_allowlist`/Always Allow so routine thread adds do not create approval friction:
 
@@ -21,7 +25,7 @@ For Zeus, keep this command pattern in `command_allowlist`/Always Allow so routi
 
 Do not claim the thread add succeeded until the API returns `204`; verify with `GET /channels/{thread_id}/thread-members/{user_id}` returning `200` when possible.
 
-Zeus-specific correction validated: if the helper returns `403 Missing Access` because the user is not in the parent private channel, apply a narrow parent-channel overwrite for the user first (`VIEW_CHANNEL`, `SEND_MESSAGES`, `READ_MESSAGE_HISTORY`, `SEND_MESSAGES_IN_THREADS`), then retry the helper/API add. Confirm success only after parent overwrite `204` when needed, thread-member PUT `204`, and member GET `200`. Rodolfo expects Zeus to resolve this path, not answer that it cannot add people. For exact reproduction and allowlist details, see `references/discord-thread-member-parent-access-and-allowlist-2026-06-29.md`.
+Zeus-specific correction validated: if the helper returns `403 Missing Access` because the user is not in the parent private channel, first determine whether the required parent overwrite expands visibility beyond the requested thread. For a public thread, explain that broader access and obtain explicit confirmation; then apply the narrow parent-channel overwrite (`VIEW_CHANNEL`, `SEND_MESSAGES`, `READ_MESSAGE_HISTORY`, `SEND_MESSAGES_IN_THREADS`) and retry the helper/API add. Confirm success only after parent overwrite `204` when needed, independent overwrite readback, thread-member PUT `204`, and member GET `200`. Rodolfo expects Zeus to resolve this path rather than answer that it cannot add people, while still surfacing scope expansion before changing permissions. For exact reproduction and allowlist details, see `references/discord-thread-member-parent-access-and-allowlist-2026-06-29.md`.
 
 For Zeus, this helper should be in `command_allowlist` as:
 
