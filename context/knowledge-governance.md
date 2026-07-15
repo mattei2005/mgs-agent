@@ -134,6 +134,7 @@ Script       scripts/mgs-knowledge-control.py
 Registry     data/knowledge-registry.json
 Inbox        data/knowledge-inbox.jsonl
 Checkpoints  data/agent-checkpoints.json
+Regression   data/knowledge-regression-cases.json
 Tests        tests/test_mgs_knowledge_control.py
 Plano        docs/mgs-knowledge-continuity-plan.md
 ```
@@ -147,6 +148,7 @@ mgs-knowledge-control.py register ...
 mgs-knowledge-control.py supersede ...
 mgs-knowledge-control.py checkpoint-upsert ...
 mgs-knowledge-control.py validate
+mgs-knowledge-control.py regression
 mgs-knowledge-control.py status
 ```
 
@@ -160,5 +162,6 @@ Todos os mutadores usam um lock comum, releem o estado sob lock, escrevem atomic
 - `superseded_by` apontando para registro real.
 - Candidatos idempotentes.
 - Checkpoints únicos e completos.
+- Perguntas críticas de regressão apontam para fontes locais e passam sem termos proibidos.
 - Testes de concorrência e escrita atômica aprovados.
 - Alterações estruturais inventariadas, auditadas e reportadas.

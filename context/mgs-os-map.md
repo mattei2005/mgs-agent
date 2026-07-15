@@ -27,6 +27,7 @@ Regra prática:
 - Registro institucional: `data/knowledge-registry.json`
 - Candidatos de conhecimento: `data/knowledge-inbox.jsonl`
 - Checkpoints de iniciativas: `data/agent-checkpoints.json`
+- Regressão de conhecimento: `data/knowledge-regression-cases.json`
 - Permissões conceituais: `context/permissions-matrix.md`
 - Pessoas/equipe: `context/team.md`
 - Sites conceituais: `context/sites.md`
@@ -359,6 +360,7 @@ Regra prática:
 - “Já decidimos isso?” → `data/knowledge-registry.json`, depois a `canonical_source` do registro
 - “Onde paramos nessa iniciativa?” → `data/agent-checkpoints.json`, depois a thread/source indicada
 - “Essa informação nova já é canônica?” → `data/knowledge-inbox.jsonl` para candidato; `data/knowledge-registry.json` para promovido
+- “As rotas e decisões críticas continuam coerentes?” → `scripts/mgs-knowledge-control.py regression` com `data/knowledge-regression-cases.json`
 - “Isso está no Git?” → `git status`, `git log`, `git diff`, `logs/auto-push.log`
 - “Honcho está como quê?” → `scripts/mgs-memory-copilot`, `experiments/honcho-spike/mgs_memory_copilot.py`, `experiments/honcho-spike/README.md`, SOUL dos agentes
 

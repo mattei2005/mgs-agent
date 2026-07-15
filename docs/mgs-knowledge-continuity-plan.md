@@ -1,6 +1,6 @@
 # Plano MGS — Memória Institucional e Continuidade
 
-> Status: implementação inicial v1.0  
+> Status: implementação v1.1, Fase 2 piloto Zeus autorizada  
 > Aprovado por: Rodolfo Mattei em 2026-07-15  
 > Escopo aprovado: Fase 0 + Fase 1, aditivas, sem restart, sem alterar permissões e sem apagar memória.
 
@@ -67,15 +67,19 @@ Invariantes implementados:
 
 ## Fase 2 — Piloto Zeus
 
-Escopo futuro, ainda não ativado:
+```text
+Status: autorizado por Rodolfo em 2026-07-15; implantação em validação.
+Escopo: Zeus somente; Atena e Ares permanecem inalterados.
+```
 
-- Zeus registrar candidatos duráveis durante a operação normal;
-- criar checkpoint para iniciativas longas;
-- promover somente após autoridade e fonte correta;
-- adicionar perguntas de regressão empresarial;
-- medir candidatos pendentes e tempo de resolução.
-
-Essa fase altera comportamento operacional do agente e terá gate separado.
+- SOUL live e versionado apontam para governança, registry e checkpoints;
+- decisões/contextos duráveis passam por classificação antes da escrita;
+- destino canônico claro e autorizado é persistido e registrado na própria tarefa;
+- item bloqueado/ambíguo vira somente candidato, nunca verdade ativa;
+- iniciativas longas recebem checkpoint em transições materiais;
+- `data/knowledge-regression-cases.json` protege perguntas empresariais críticas;
+- `mgs-knowledge-control.py regression` valida fontes e termos obrigatórios/proibidos;
+- cutover de SOUL precisa ser provado em sessão nova; restart não é necessário.
 
 ## Fase 3 — Atena e Ares
 

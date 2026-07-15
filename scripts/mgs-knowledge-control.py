@@ -48,6 +48,7 @@ def paths(root: Path) -> Dict[str, Path]:
         "registry": data / "knowledge-registry.json",
         "inbox": data / "knowledge-inbox.jsonl",
         "checkpoints": data / "agent-checkpoints.json",
+        "regression": data / "knowledge-regression-cases.json",
         "lock": data / ".knowledge-control.lock",
     }
 
@@ -58,6 +59,10 @@ def initial_registry() -> Dict[str, Any]:
 
 def initial_checkpoints() -> Dict[str, Any]:
     return {"schema_version": SCHEMA_VERSION, "updated_at": now_iso(), "checkpoints": []}
+
+
+def initial_regression_cases() -> Dict[str, Any]:
+    return {"schema_version": SCHEMA_VERSION, "cases": []}
 
 
 def atomic_write_json(path: Path, payload: Dict[str, Any]) -> None:
@@ -122,6 +127,9 @@ def initialize(root: Path) -> Dict[str, Any]:
         if not p["checkpoints"].exists():
             atomic_write_json(p["checkpoints"], initial_checkpoints())
             created.append(str(p["checkpoints"]))
+        if not p["regression"].exists():
+            atomic_write_json(p["regression"], initial_regression_cases())
+            created.append(str(p["regression"]))
         if not p["inbox"].exists():
             fd = os.open(p["inbox"], os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o640)
             os.close(fd)
@@ -287,25 +295,97 @@ def validate_inbox(rows: Iterable[Dict[str, Any]]) -> List[str]:
     return errors
 
 
+def validate_regression_cases(root: Path, store: Dict[str, Any]) -> List[str]:
+    errors: List[str] = []
+    if store.get("schema_version") != SCHEMA_VERSION:
+        errors.append("regression schema_version mismatch")
+    cases = store.get("cases")
+    if not isinstance(cases, list):
+        return errors + ["regression cases must be a list"]
+    seen = set()
+    for index, case in enumerate(cases):
+        prefix = f"regression case {index}"
+        if not isinstance(case, dict):
+            errors.append(f"{prefix} must be an object")
+            continue
+        case_id = case.get("id")
+        if not isinstance(case_id, str) or not ID_RE.fullmatch(case_id):
+            errors.append(f"{prefix} invalid id")
+        elif case_id in seen:
+            errors.append(f"duplicate regression id: {case_id}")
+        seen.add(case_id)
+        for field in ("question", "source"):
+            value = case.get(field)
+            if not isinstance(value, str) or not value.strip():
+                errors.append(f"{prefix} missing {field}")
+        for field in ("required_all", "forbidden_any"):
+            values = case.get(field)
+            if not isinstance(values, list) or any(not isinstance(value, str) or not value for value in values):
+                errors.append(f"{prefix} invalid {field}")
+        source = case.get("source")
+        if isinstance(source, str) and source.strip():
+            local = local_source_path(root, source)
+            if local is None or not local.exists():
+                errors.append(f"{prefix} missing local source: {source}")
+    return errors
+
+
+def run_regression(root: Path) -> Dict[str, Any]:
+    p = paths(root)
+    store = load_json(p["regression"], initial_regression_cases())
+    schema_errors = validate_regression_cases(root, store)
+    results: List[Dict[str, Any]] = []
+    if not schema_errors:
+        for case in store.get("cases", []):
+            source_path = local_source_path(root, case["source"])
+            assert source_path is not None
+            text = source_path.read_text(encoding="utf-8", errors="replace").casefold()
+            case_errors = []
+            for term in case["required_all"]:
+                if term.casefold() not in text:
+                    case_errors.append(f"missing required term: {term}")
+            for term in case["forbidden_any"]:
+                if term.casefold() in text:
+                    case_errors.append(f"forbidden term present: {term}")
+            results.append({
+                "id": case["id"],
+                "question": case["question"],
+                "source": case["source"],
+                "status": "ok" if not case_errors else "error",
+                "errors": case_errors,
+            })
+    failed = len(schema_errors) or sum(1 for result in results if result["status"] == "error")
+    return {
+        "status": "ok" if not schema_errors and failed == 0 else "error",
+        "schema_errors": schema_errors,
+        "passed": sum(1 for result in results if result["status"] == "ok"),
+        "failed": failed,
+        "results": results,
+    }
+
+
 def validate_all(root: Path) -> Dict[str, Any]:
     p = paths(root)
     errors: List[str] = []
     try:
         registry = load_json(p["registry"], initial_registry())
         checkpoints = load_json(p["checkpoints"], initial_checkpoints())
+        regression = load_json(p["regression"], initial_regression_cases())
         inbox = read_inbox(p["inbox"])
         errors.extend(validate_registry(root, registry))
         errors.extend(validate_checkpoints(checkpoints))
         errors.extend(validate_inbox(inbox))
+        errors.extend(validate_regression_cases(root, regression))
     except ControlError as exc:
         errors.append(str(exc))
-        registry, checkpoints, inbox = {"entries": []}, {"checkpoints": []}, []
+        registry, checkpoints, regression, inbox = {"entries": []}, {"checkpoints": []}, {"cases": []}, []
     return {
         "status": "ok" if not errors else "error",
         "errors": errors,
         "registry_entries": len(registry.get("entries", [])),
         "inbox_candidates": len(inbox),
         "checkpoints": len(checkpoints.get("checkpoints", [])),
+        "regression_cases": len(regression.get("cases", [])),
     }
 
 
@@ -413,6 +493,7 @@ def status(root: Path) -> Dict[str, Any]:
     p = paths(root)
     registry = load_json(p["registry"], initial_registry())
     checkpoints = load_json(p["checkpoints"], initial_checkpoints())
+    regression = load_json(p["regression"], initial_regression_cases())
     inbox = read_inbox(p["inbox"])
     active = sum(1 for row in checkpoints.get("checkpoints", []) if row.get("state") not in CLOSED_CHECKPOINT_STATES)
     pending = sum(1 for row in inbox if row.get("status") == "pending")
@@ -421,6 +502,7 @@ def status(root: Path) -> Dict[str, Any]:
         "registry_entries": len(registry.get("entries", [])),
         "pending_candidates": pending,
         "active_checkpoints": active,
+        "regression_cases": len(regression.get("cases", [])),
     }
 
 
@@ -470,6 +552,7 @@ def build_parser() -> argparse.ArgumentParser:
     checkpoint_parser.add_argument("--source", required=True)
 
     sub.add_parser("validate")
+    sub.add_parser("regression")
     sub.add_parser("status")
     return parser
 
@@ -496,6 +579,11 @@ def main() -> int:
         elif args.command == "validate":
             initialize(root)
             result = validate_all(root)
+            print_json(result)
+            return 0 if result["status"] == "ok" else 1
+        elif args.command == "regression":
+            initialize(root)
+            result = run_regression(root)
             print_json(result)
             return 0 if result["status"] == "ok" else 1
         elif args.command == "status":

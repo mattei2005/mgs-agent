@@ -18,6 +18,23 @@
       "updated_at": "2026-07-15T22:51:09+00:00"
     },
     {
+      "canonical_key": "capability.knowledge-regression",
+      "canonical_source": "data/knowledge-regression-cases.json",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-15",
+      "id": "CAP-KNOWLEDGE-REGRESSION",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Business knowledge regression suite",
+      "updated_at": "2026-07-15T23:08:46+00:00"
+    },
+    {
       "canonical_key": "decision.knowledge-continuity",
       "canonical_source": "docs/mgs-knowledge-continuity-plan.md",
       "consumers": [
@@ -35,6 +52,23 @@
       "superseded_by": null,
       "title": "Adopt institutional memory and continuity layer",
       "updated_at": "2026-07-15T22:51:09+00:00"
+    },
+    {
+      "canonical_key": "decision.knowledge-continuity.zeus-pilot",
+      "canonical_source": "docs/mgs-knowledge-continuity-plan.md",
+      "consumers": [
+        "zeus"
+      ],
+      "domain": "executive",
+      "effective_at": "2026-07-15",
+      "id": "DEC-2026-002",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Activate institutional continuity pilot in Zeus",
+      "updated_at": "2026-07-15T23:08:46+00:00"
     },
     {
       "canonical_key": "source.company-os",
@@ -76,5 +110,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-15T22:51:09+00:00"
+  "updated_at": "2026-07-15T23:08:46+00:00"
 }

@@ -23,6 +23,7 @@ Governança de conhecimento       context/knowledge-governance.md
 Registro institucional           data/knowledge-registry.json
 Candidatos ainda não canônicos   data/knowledge-inbox.jsonl
 Continuidade de iniciativas      data/agent-checkpoints.json
+Testes de coerência institucional data/knowledge-regression-cases.json
 Permissões/matriz autoridade     context/permissions-matrix.md
 Sites e verticais conceituais     context/sites.md
 Config técnica de sites           data/sites.json
@@ -104,6 +105,7 @@ Conhecimento estrutural         context/*.md
 Metadados de decisão/fonte      data/knowledge-registry.json
 Conhecimento ainda não aprovado data/knowledge-inbox.jsonl
 Estado de iniciativa/handoff    data/agent-checkpoints.json
+Casos de regressão institucional data/knowledge-regression-cases.json
 Procedimento reutilizável       skills/*/SKILL.md
 Automação executável            scripts/
 Histórico/plano/pendência       docs/
