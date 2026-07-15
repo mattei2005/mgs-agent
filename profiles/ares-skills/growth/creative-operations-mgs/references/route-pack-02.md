@@ -38,10 +38,13 @@ Para arquivos enviados pela Kelly, Evo ou outro colaborador em `UPLOAD MANUAL`, 
 1. Consultar no Drive real `owners`, `ownedByMe` e `capabilities(canDownload,canEdit,canMoveItemWithinDrive,canTrash,canDelete)` para diagnóstico e auditoria.
 2. No fluxo canônico de tratar/mover, exigir acesso para baixar o bruto, enviar a cópia limpa ao `01_READY` e mover o original para `99_LEGACY`. Em pedidos de copiar/manter, a capacidade de mover o source não é necessária.
 3. `canTrash=false` e `canDelete=false` não bloqueiam o processamento, porque o fluxo canônico preserva o original e não apaga arquivos.
-4. Bloquear somente quando uma capacidade realmente necessária estiver ausente ou quando a API real negar a ação. Informar a ação recusada e o readback correspondente; não solicitar transferência de propriedade por padrão.
-5. A cópia limpa enviada pelo OAuth do Rodolfo para `01_READY` normalmente fica no nome do Rodolfo; o bruto preservado em `99_LEGACY` pode conservar o owner original sem quebrar a linhagem.
-6. Transferência de propriedade é uma decisão opcional de governança, somente quando Rodolfo a exigir expressamente; não é pré-requisito rotineiro de Creative Ops.
-7. Não trocar o OAuth canônico do Ares pela conta do colaborador e não migrar a estrutura para Shared Drive sem plano e aprovação explícita do Rodolfo.
+4. Quando uma capacidade necessária estiver ausente ou a API negar a ação, distinguir primeiro processamento, movimentação, remoção da hierarquia, lixeira e exclusão definitiva. Não chamar move/remove-parent de exclusão.
+5. Dentro de `MGS-AGENTS/CRIATIVOS`, falha de permissão é drift/defeito de infraestrutura a investigar, não razão rotineira para pedir autorização por arquivo ou transferência de owner ao gestor. Consultar o OAuth canônico de Rodolfo e a identidade `ares-drive` quando registrada, e usar o HTTP/readback da mutação autorizada como prova final.
+6. A cópia limpa enviada pelo OAuth do Rodolfo para `01_READY` normalmente fica no nome do Rodolfo; o bruto preservado em `99_LEGACY` pode conservar o owner original sem quebrar a linhagem.
+7. Transferência de propriedade não é pré-requisito rotineiro de Creative Ops. Se uma exclusão explícita for negada pelas identidades canônicas, preservar a auditoria, retirar o item de `01_READY` quando a movimentação autorizada for possível e escalar a correção estrutural; não encerrar com “o gestor precisa autorizar”.
+8. Não trocar silenciosamente o OAuth canônico do Ares pela conta do colaborador. Mudança para Shared Drive, identidade central de upload ou outra correção estrutural exige inventário, piloto, rollback e aprovação explícita do Rodolfo.
+
+Detalhe operacional: `references/my-drive-collaborator-control-and-deletion.md`.
 
 ### Concorrência, idempotência e lote já em processamento
 
