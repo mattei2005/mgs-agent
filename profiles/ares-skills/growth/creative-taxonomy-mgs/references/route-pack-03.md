@@ -14,15 +14,12 @@
 12. Classificar pessoa/orientação usando somente `PV/NV` para vertical e `PH/NH` para square/feed 1:1 ou horizontal/landscape; `PS/NS` não entram em nomes finais.
 13. Sugerir `ANGLE` somente com evidência suficiente; se incerto, `UNKNOWN` + baixa confiança.
 14. Gerar plano de renomeação/cópia em CSV/JSON com `confidence` e `notes`.
-14. Gerar plano de renomeação/cópia em CSV/JSON com `confidence` e `notes`.
-15. Antes de executar qualquer rename/copy, validar que `VARIANT` está em 3 dígitos (`001-999`) em todos os nomes finais e corrigir qualquer saída legada de script que ainda gere `01`, `02`, etc.
-16. Quando houver itens em `00_REVIEW`, revisar ativamente com evidência visual/contact sheet/timeline e tomar decisão operacional: promover para `01_READY_CANDIDATE`, mover para `05_REJECTED`, ou manter em review somente com motivo concreto. Não deixar `00_REVIEW` como pendência genérica se os arquivos estão acessíveis no Drive.
-15. Antes de executar qualquer rename/copy, validar que `VARIANT` está em 3 dígitos (`001-999`) em todos os nomes finais e corrigir qualquer saída legada de script que ainda gere `01`, `02`, etc.
-16. Mostrar proposta ao Rodolfo antes de qualquer alteração em Drive/campanha.
-17. Após aprovação, executar cópia/renomeação com logs e validação.
-18. No fluxo atual `UPLOAD MANUAL` → clean-copy, preservar a linhagem: validar a cópia limpa no `01_READY`, mover o original para `99_LEGACY` sem deletar e usar o ID da cópia limpa (`dest_drive_id`) para promoção/rejeição/rename final.
-19. Se Rodolfo pedir para corrigir criativos já feitos, executar a correção no Drive, validar por novo scan que não restam nomes finais com 2 dígitos, e atualizar artefatos locais/propostas para o mesmo padrão.
-19. Para colisões de nome já existentes em `01_READY_CANDIDATE`, manter um nome canônico por variante e renomear as cópias conflitantes para a próxima variante livre com 3 dígitos. Simular antes para garantir zero colisões pós-plano e registrar `old_name`, `new_name`, `drive_id`, `verified_name` e relatório hash.
+15. Antes de executar rename/copy, validar `VARIANT` com 3 dígitos (`001-999`) em todos os nomes finais e corrigir qualquer saída legada que ainda gere `01`, `02`, etc.
+16. Quando houver itens em `00_REVIEW`, revisar ativamente com evidência visual/timeline e decidir: promover para `01_READY_CANDIDATE`, mover para `05_REJECTED`, ou manter em review somente com motivo concreto. Não deixar review como pendência genérica quando os arquivos estão acessíveis.
+17. Pedido autorizado de tratar/mover dentro da estrutura canônica já aprova o plano rotineiro; não pedir confirmação redundante. Mostrar proposta e pedir decisão somente para ambiguidade material, nova estrutura, destino não canônico, alteração de campanha ou mudança de escopo.
+18. Executar cópia/renomeação com logs e validação. No fluxo `UPLOAD MANUAL` → clean-copy, validar a cópia limpa em `01_READY`, mover o original para `99_LEGACY` sem deletar e usar `dest_drive_id` para promoção/rejeição/rename final.
+19. Se Rodolfo pedir correção de criativos já feitos, executar no Drive, validar por novo scan que não restam nomes finais com 2 dígitos e atualizar artefatos locais/propostas para o mesmo padrão.
+20. Para colisões de nome em `01_READY_CANDIDATE`, manter um nome canônico por variante e renomear cópias conflitantes para a próxima variante livre com 3 dígitos. Simular antes para garantir zero colisões e registrar `old_name`, `new_name`, `drive_id`, `verified_name` e hash do relatório.
 ## Sanitização antes de campanha
 
 Antes de usar criativo em campanha/teste, validar metadados:
@@ -61,7 +58,7 @@ IDs fora do nome                           | Sim
 Origem/gestor no inventário                | Sim
 RAW preservado                             | Sim
 Metadados verificados antes de campanha    | Sim
-Plano aprovado antes de write              | Sim
+Pedido/plano autorizado antes do write  | Pedido natural basta no fluxo canônico; decisão extra só nos desvios
 ```
 ## Pitfalls comuns
 

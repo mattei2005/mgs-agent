@@ -43,6 +43,17 @@ Para arquivos enviados pela Kelly, Evo ou outro colaborador em `UPLOAD MANUAL`, 
 6. Transferência de propriedade é uma decisão opcional de governança, somente quando Rodolfo a exigir expressamente; não é pré-requisito rotineiro de Creative Ops.
 7. Não trocar o OAuth canônico do Ares pela conta do colaborador e não migrar a estrutura para Shared Drive sem plano e aprovação explícita do Rodolfo.
 
+### Concorrência, idempotência e lote já em processamento
+
+O mesmo pedido Discord pode chegar a mais de uma sessão, e dois fluxos podem observar o mesmo snapshot de `UPLOAD MANUAL`. Evitar qualquer segundo write concorrente sobre a mesma linhagem.
+
+1. Imediatamente antes do primeiro write, obter um lock exclusivo por operação + conjunto ordenado de `source_drive_id` (arquivo sob `/root/mgs-agent/tmp/ares-intake-locks/`, usando `flock`) e repetir o inventário/API read-only dentro do lock.
+2. Se o conjunto live diminuir ou um source sair da entrada, não presumir perda de permissão e não iniciar um lote parcial. Consultar primeiro `assets.jsonl`, o report `ready-execution` mais recente e processos/runners ativos para os mesmos IDs.
+3. Se outra execução estiver ativa, aguardar sua conclusão sem interferir. Se já concluiu, reutilizar o resultado canônico em vez de criar novas cópias ou variantes.
+4. Após execução concorrente concluída, verificar de forma independente: source em `99_LEGACY`, destination em `01_READY`, nome/pasta/tamanho/checksum, download + `clean=true`, inventário com uma única linhagem e entrada sem pendências.
+5. Só montar um novo plano para o subconjunto restante quando houver evidência de que não existe execução ativa nem conclusão registrada. Sempre gerar snapshot fresco; nunca reutilizar CSV stale para write.
+6. O lock cobre a seção crítica desde o re-scan até inventário/report final. Liberar em `finally`/trap mesmo em erro.
+
 ### Fonte canônica do OAuth Drive
 
 - O runtime de write usa `/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json` como cache combinado canônico (`client_id`, `client_secret`, `refresh_token`), a mesma fonte validada pelo watchdog.
