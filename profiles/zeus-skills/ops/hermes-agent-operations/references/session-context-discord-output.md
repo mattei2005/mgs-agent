@@ -42,11 +42,11 @@ Teste focado útil no checkout vivo:
 python -m pytest -q tests/gateway/test_discord_send.py -k typing tests/gateway/test_typing_indicator_toggle.py tests/gateway/test_keep_typing_timeout.py
 ```
 
-Ao explicar uma mudança histórica, reconstruir a autorização original antes de chamá-la de regressão. Rodolfo pode ter pedido para remover comandos técnicos brutos das threads humanas, o que justifica `tool_progress: off`, sem ter pedido para remover `Zeus is typing…`. Se ele perguntar por que “o progresso” sumiu, explicar essa diferença e perguntar em linguagem natural qual das duas superfícies deseja restaurar; não reativar automaticamente o despejo bruto.
+Ao explicar uma mudança histórica, reconstruir a autorização original antes de chamá-la de regressão. Pedido para remover comandos técnicos brutos das threads humanas **não autoriza** desligar `tool_progress`; a correção deve preservar o acompanhamento ao vivo e reduzir/rotear apenas o detalhe excessivo. Se uma interpretação anterior ampliou o escopo para `off`, registrar o erro e restaurar o estado canônico `all` após a correção explícita de Rodolfo.
 
 Resposta executiva recomendada: informar separadamente o estado de `tool_progress` e de `typing_indicator`, o horário/commit da mudança quando confirmados e o restart/hot-read que a ativou. Se a mudança entrou junto de refactor/sync sem pedido explícito, classificá-la honestamente como possível regressão de visibilidade, não como comportamento intencional presumido.
 
-Para restaurar, tratar como mudança de configuração + restart: obter autorização conforme MGS, alterar tanto o profile vivo quanto o mirror canônico, validar com `hermes -p <profile> config check`, usar restart seguro (Zeus por último) e fazer smoke real no Discord confirmando que o progresso reapareceu. A configuração exata deve ser validada contra o schema/runtime da versão instalada; não assumir que strings antigas (`all`, `off`) e booleanos atuais são intercambiáveis.
+Para restaurar, tratar como mudança de configuração: alterar profile vivo e mirror canônico, validar com `hermes -p <profile> config check` e confirmar o valor resolvido no runtime. No checkout Hermes atual, `gateway/run.py` relê a configuração de display por turno; portanto `tool_progress` entra no próximo turno sem restart. Só usar restart seguro (Zeus por último) se a versão implantada não fizer hot-read ou se o smoke real provar que o valor novo não foi carregado. Não assumir que strings antigas (`all`, `off`) e booleanos atuais são intercambiáveis.
 
 ### Estado canônico MGS autorizado
 
@@ -66,8 +66,8 @@ Regras operacionais:
 - Aplicar nos quatro profiles vivos e nos quatro mirrors versionados; não corrigir apenas Zeus.
 - Uma reclamação de Rodolfo sobre comandos brutos, blocos de terminal ou poluição técnica **não autoriza desligar o acompanhamento ao vivo**. Preservar `tool_progress: all`; corrigir a apresentação, reduzir previews e rotear detalhes extensos para logs/`#alerts-infra` sem remover a visibilidade de progresso.
 - Em refactors/sincronizações YAML, preservar semanticamente `all`; não normalizar para `false` como efeito colateral de formatação.
-- Validar `config check` 4/4 e readback live+mirror 8/8 antes do restart.
-- Ativar via restart seguro, com Zeus por último, e confirmar no Discord real que uma nova execução mostra progresso enquanto o agente trabalha.
+- Validar `config check` 4/4 e readback live+mirror 8/8.
+- Confirmar o hot-read no resolver/runtime e fazer smoke real no próximo turno; reiniciar com Zeus por último somente se a versão implantada exigir ou o smoke falhar.
 - `cleanup_progress: true` pode remover as mensagens transitórias no fim; isso é compatível com a preferência, desde que o progresso apareça durante a execução.
 - Não confundir progresso resumido das ferramentas com despejo de logs brutos; outputs extensos continuam reduzidos na origem.
 

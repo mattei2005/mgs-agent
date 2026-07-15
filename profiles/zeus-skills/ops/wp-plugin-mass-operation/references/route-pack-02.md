@@ -60,27 +60,32 @@ def run_wpcli_all_servers(wp_command_template):
     Ex: "sudo -u {user} wp --path={path} plugin activate imagify --allow-root"
     """
     for ip, config in SITES_RUNCLOUD.items():
-        # Pegar senha via terminal (não subprocess)
-        r = terminal(f'op item get "{config["op_item"]}" --vault "MGS Conteúdo" --fields label=password --reveal 2>&1')
-        password = r['output'].strip()
-
-        # Montar script bash
+        # Montar script remoto sem credenciais.
         lines = "#!/bin/bash\n"
         for path, domain, user in config['sites']:
             cmd = wp_command_template.format(path=path, user=user)
             lines += f'echo "=== {domain} ==="\n{cmd} 2>&1 | tail -3\n'
 
-        script_path = f'/tmp/wpcli_{ip.replace(".", "_")}.sh'
+        script_path = f"/tmp/wpcli_{ip.replace('.', '_')}.sh"
         with open(script_path, 'w') as f:
             f.write(lines)
 
-        result = terminal(
-            f'sshpass -p {repr(password)} ssh -o PreferredAuthentications=password '
-            f'-o PubkeyAuthentication=no -o StrictHostKeyChecking=accept-new '
-            f'-o UserKnownHostsFile=/root/.ssh/known_hosts_mgs '
-            f'zeus@{ip} \'bash -s\' < {script_path}',
-            timeout=600
-        )
+        # Resolver a senha dentro do shell, redirecionar para arquivo 600 e usar
+        # sshpass -f. O valor não entra em argv, stdout nem no contexto do agente.
+        shell = f'''set -euo pipefail
+set -a
+source /root/mgs-agent/.env
+set +a
+pw_file=$(mktemp)
+chmod 600 "$pw_file"
+trap 'rm -f "$pw_file"' EXIT
+op item get "{config["op_item"]}" --vault "MGS Conteúdo" --fields label=password --reveal > "$pw_file"
+sshpass -f "$pw_file" ssh -o PreferredAuthentications=password \\
+  -o PubkeyAuthentication=no -o StrictHostKeyChecking=accept-new \\
+  -o UserKnownHostsFile=/root/.ssh/known_hosts_mgs \\
+  zeus@{ip} 'bash -s' < {script_path}
+'''
+        result = terminal(shell, timeout=600)
         print(f"\n=== SERVER {ip} ===")
         print(result['output'])
 ```
@@ -125,15 +130,15 @@ Para estes 4 sites, o padrão é:
 2. Navegar para a página do plugin
 3. Interagir via `mcp_browser_console` com `document.getElementById('ID_DO_BOTAO').click()`
 
-**Credenciais AWS sites:**
+**Credenciais AWS sites — títulos canônicos no 1Password:**
 | Site | Item 1Password |
 |---|---|
-| finanzas.openzed.com | `openzed finanzas wordpress zeus` |
-| openzed.com | `openzed wordpress zeus` |
-| finanzas.cliquet.com | `cliquet finanzas wordpress zeus` |
-| cliquet.com | `cliquet wordpress zeus` |
+| finanzas.openzed.com | `Wordpress - finanzas.openzed.com` |
+| openzed.com | `Wordpress - openzed.com` |
+| finanzas.cliquet.com | `Wordpress - finanzas.cliquet.com` |
+| cliquet.com | `Wordpress - cliquet.com` |
 
-**⚠️ cliquet.com:** senha no WP pode ser `Zeus_Deploy_2024!` (não `Brasil31733@` que está no 1P) — foi alterada emergencialmente em 23/04/2026. Verificar qual funciona.
+Nunca registrar ou repetir senha de login/application password nesta skill. Resolver os campos no 1Password em runtime e manter os valores fora de argv/stdout. Para REST autenticado, os itens atuais expõem `api_auth_user` + `api_application_password`; `cliquet.com` usa `username` + `wp_app_password`. Se houver títulos duplicados, localizar por `op item list`, selecionar o UUID validado e fazer smoke read-only por post ID; sucesso só após HTTP 200 sem imprimir credenciais.
 
 ---
 
