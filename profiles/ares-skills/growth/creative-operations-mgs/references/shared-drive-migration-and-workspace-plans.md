@@ -55,9 +55,23 @@ Plus        US$ 26,40      US$ 22,00    US$ 264,00    5 TB
 
 A página oficial de preços também pode mostrar teste de 14 dias e promoções temporárias. Tratar promoção, moeda local e tributos como dados de checkout, não como garantia persistente.
 
+### Essentials Starter não é Business Starter
+
+- **Google Workspace Essentials Starter (gratuito) não inclui Shared Drives.** Admin Console ativo, Drive, relatórios, 100 licenças gratuitas ou 15 GB por usuário não provam esse recurso.
+- A matriz oficial mostra `Drives compartilhados` vazio para Essentials Starter e disponível nas edições Essentials pagas/Enterprise Essentials e nas Business compatíveis.
+- Não confundir o botão `Buy or upgrade` de um tenant Essentials Starter com entitlement já ativo. Primeiro inspecionar as opções e preços reais; não confirmar billing sem autorização.
+- Não presumir que todo tenant Essentials Starter consegue transição direta para Business Starter. Verificar a oferta real em `Billing > Buy or upgrade`, o estado de verificação do domínio e, se necessário, o caminho oficial de upgrade.
+
+### E-mail comercial, Gmail e domínio
+
+- Um endereço existente em domínio empresarial pode ser reutilizado como identidade administrativa; não é obrigatório criar outro domínio ou outro e-mail apenas para iniciar o upgrade.
+- Para participação, criação e movimentações externas em Shared Drives nas edições Business, a matriz oficial exige inscrição com **e-mail comercial** ou **domínio verificado**.
+- Uma assinatura Business iniciada somente com Gmail pessoal tem recursos administrativos limitados. Não presumir que ela libera o ciclo completo de Shared Drive.
+- Evitar converter o Gmail pessoal principal de Rodolfo quando ele contém grande volume de Drive ou serviços pessoais. A verificação/conversão pode mudar o endereço principal e afetar serviços pessoais. Preferir a identidade empresarial existente e manter o Gmail pessoal como Manager externo.
+
 ### Starter versus Standard
 
-- **Business Starter suporta criação e uso de Shared Drives.** Algumas configurações administrativas avançadas de Shared Drive não estão disponíveis; o compartilhamento tende a permanecer permissivo.
+- **Business Starter suporta criação e uso de Shared Drives quando o requisito de e-mail comercial/domínio acima está atendido.** Algumas configurações administrativas avançadas de Shared Drive não estão disponíveis; o compartilhamento tende a permanecer permissivo.
 - **Business Standard** adiciona 2 TB por usuário e mais controles administrativos, sendo melhor quando segurança/políticas e crescimento justificarem o custo.
 - Para um piloto pequeno e árvore de criativos abaixo de 30 GB, Starter pode ser suficiente.
 - Uma licença interna pode bastar se Rodolfo e `ares-drive` puderem entrar como membros externos. O piloto precisa provar isso.
@@ -114,6 +128,9 @@ Quando o objetivo inicial for apenas provar o controle de ownership/exclusão:
 
 ## Fontes oficiais
 
+- Comparar Business: `https://knowledge.workspace.google.com/admin/getting-started/editions/compare-business-editions`
+- Comparar Essentials: `https://knowledge.workspace.google.com/admin/getting-started/editions/compare-essentials-editions`
+- Contas Business baseadas no Gmail: `https://knowledge.workspace.google.com/admin/domains/about-gmail-based-google-workspace-accounts`
 - Preços: `https://workspace.google.com/pricing?hl=pt-BR`
 - Flexível versus anual: `https://support.google.com/a/answer/1247360?hl=pt-BR`
 - Edições que criam Shared Drives: `https://support.google.com/a/answer/12374228`
