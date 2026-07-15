@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "target_sheet_id": 1509582989,
+  "source_sheet_id": 1859589117,
+  "formula_counts": {
+    "source": 40406,
+    "target": 40406
+  },
+  "formula_errors": [],
+  "date_mismatches": [],
+  "A3": 7,
+  "E1": "=SUM('CAIXA SINTETICO'!I2)",
+  "architecture": {
+    "finc_us_header": true,
+    "credit_header_shifted": true,
+    "manager_headers": [
+      {
+        "row": 101,
+        "expected": "G001",
+        "finc": "G001",
+        "credit": "G001"
+      },
+      {
+        "row": 141,
+        "expected": "G002",
+        "finc": "G002",
+        "credit": "G002"
+      },
+      {
+        "row": 181,
+        "expected": "G003",
+        "finc": "G003",
+        "credit": "G003"
+      },
+      {
+        "row": 221,
+        "expected": "G004",
+        "finc": "G004",
+        "credit": "G004"
+      },
+      {
+        "row": 261,
+        "expected": "G005",
+        "finc": "G005",
+        "credit": "G005"
+      },
+      {
+        "row": 301,
+        "expected": "G006",
+        "finc": "G006",
+        "credit": "G006"
+      }
+    ]
+  },
+  "grid_equal": true,
+  "merge_counts": [
+    1167,
+    1167
+  ],
+  "caixa_external_formula_mismatches": [],
+  "caixa_formula_errors": [],
+  "checked_at": "2026-07-14T23:11:21"
+}

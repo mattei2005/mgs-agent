@@ -1,0 +1,700 @@
+{
+  "spreadsheet": "MGS - Receita dos Sites 2026",
+  "source": "Junho 2026",
+  "target": "Julho 2026",
+  "source_sheet_id": 1859589117,
+  "grid": {
+    "rowCount": 352,
+    "columnCount": 890,
+    "frozenColumnCount": 2,
+    "hideGridlines": true
+  },
+  "merge_count": 1167,
+  "formula_inventory": {
+    "formulas": 40406,
+    "importrange": 5,
+    "caixa_sintetico": 1,
+    "uses_A3": 1291,
+    "hardcoded_junho_2026": 5,
+    "formula_errors": 0,
+    "error_cells": []
+  },
+  "source_E1": "=SUM('CAIXA SINTETICO'!H2)",
+  "month_blocks": [
+    {
+      "label_row": 3,
+      "year_row": 4,
+      "day_start": 5,
+      "day_end": 35,
+      "total_row": 36
+    },
+    {
+      "label_row": 40,
+      "year_row": 41,
+      "day_start": 42,
+      "day_end": 72,
+      "total_row": 73
+    },
+    {
+      "label_row": 103,
+      "year_row": 104,
+      "day_start": 105,
+      "day_end": 135,
+      "total_row": 136
+    },
+    {
+      "label_row": 143,
+      "year_row": 144,
+      "day_start": 145,
+      "day_end": 175,
+      "total_row": 176
+    },
+    {
+      "label_row": 183,
+      "year_row": 184,
+      "day_start": 185,
+      "day_end": 215,
+      "total_row": 216
+    },
+    {
+      "label_row": 223,
+      "year_row": 224,
+      "day_start": 225,
+      "day_end": 255,
+      "total_row": 256
+    },
+    {
+      "label_row": 263,
+      "year_row": 264,
+      "day_start": 265,
+      "day_end": 295,
+      "total_row": 296
+    },
+    {
+      "label_row": 303,
+      "year_row": 304,
+      "day_start": 305,
+      "day_end": 335,
+      "total_row": 336
+    }
+  ],
+  "clear_cell_count": 2290,
+  "clear_reasons": {
+    "top_daily_revenue": 1331,
+    "top_daily_spend": 720,
+    "openzed_icaro_lower": 44,
+    "manager_lower_gross": 195
+  },
+  "clear_detail": {
+    "revenue_columns": 87,
+    "spend_columns": 317,
+    "lower_gross_headers": [
+      {
+        "cell": "TP103",
+        "value": "Fincgriffin  / GROSS / US"
+      },
+      {
+        "cell": "ABS103",
+        "value": "CreditoParaVeiculo / GROSS / US"
+      },
+      {
+        "cell": "TP143",
+        "value": "Fincgriffin  / GROSS / US"
+      },
+      {
+        "cell": "ABS143",
+        "value": "CreditoParaVeiculo / GROSS / US"
+      },
+      {
+        "cell": "TP183",
+        "value": "Fincgriffin  / GROSS / US"
+      },
+      {
+        "cell": "ABS183",
+        "value": "CreditoParaVeiculo / GROSS / US"
+      },
+      {
+        "cell": "TP223",
+        "value": "Fincgriffin  / GROSS / US"
+      },
+      {
+        "cell": "ABS223",
+        "value": "CreditoParaVeiculo / GROSS / US"
+      },
+      {
+        "cell": "TP263",
+        "value": "Fincgriffin  / GROSS / US"
+      },
+      {
+        "cell": "ABS263",
+        "value": "CreditoParaVeiculo / GROSS / US"
+      },
+      {
+        "cell": "TP303",
+        "value": "Fincgriffin  / GROSS / US"
+      },
+      {
+        "cell": "ABS303",
+        "value": "CreditoParaVeiculo / GROSS / US"
+      }
+    ]
+  },
+  "clear_ranges": [
+    "'Julho 2026'!D9:D11",
+    "'Julho 2026'!D13:D14",
+    "'Julho 2026'!D18:D21",
+    "'Julho 2026'!D23:D26",
+    "'Julho 2026'!D28:D28",
+    "'Julho 2026'!D33:D33",
+    "'Julho 2026'!S19:S19",
+    "'Julho 2026'!S28:S28",
+    "'Julho 2026'!AW5:AW34",
+    "'Julho 2026'!AW46:AW70",
+    "'Julho 2026'!BD5:BD30",
+    "'Julho 2026'!BD32:BD34",
+    "'Julho 2026'!BG46:BG47",
+    "'Julho 2026'!BG60:BG70",
+    "'Julho 2026'!BS5:BS34",
+    "'Julho 2026'!BS46:BS70",
+    "'Julho 2026'!CO5:CO34",
+    "'Julho 2026'!CP46:CP70",
+    "'Julho 2026'!DD5:DD34",
+    "'Julho 2026'!DD65:DD66",
+    "'Julho 2026'!DF46:DF51",
+    "'Julho 2026'!DF62:DF64",
+    "'Julho 2026'!DF67:DF70",
+    "'Julho 2026'!DS5:DS29",
+    "'Julho 2026'!DS32:DS32",
+    "'Julho 2026'!DS34:DS34",
+    "'Julho 2026'!FN5:FN34",
+    "'Julho 2026'!FN46:FN67",
+    "'Julho 2026'!GJ5:GJ34",
+    "'Julho 2026'!GJ46:GJ67",
+    "'Julho 2026'!GY5:GY34",
+    "'Julho 2026'!HF5:HF27",
+    "'Julho 2026'!HF29:HF29",
+    "'Julho 2026'!HF33:HF34",
+    "'Julho 2026'!HU5:HU31",
+    "'Julho 2026'!HU33:HU34",
+    "'Julho 2026'!HU46:HU49",
+    "'Julho 2026'!IJ5:IJ34",
+    "'Julho 2026'!IL46:IL70",
+    "'Julho 2026'!JF5:JF30",
+    "'Julho 2026'!JF32:JF33",
+    "'Julho 2026'!JF46:JF47",
+    "'Julho 2026'!JF54:JF54",
+    "'Julho 2026'!JF70:JF70",
+    "'Julho 2026'!JU5:JU34",
+    "'Julho 2026'!JU46:JU67",
+    "'Julho 2026'!KQ5:KQ34",
+    "'Julho 2026'!KS46:KS67",
+    "'Julho 2026'!LF5:LF34",
+    "'Julho 2026'!LH46:LH53",
+    "'Julho 2026'!LH60:LH70",
+    "'Julho 2026'!LM5:LM34",
+    "'Julho 2026'!LN46:LN53",
+    "'Julho 2026'!MB5:MB29",
+    "'Julho 2026'!MB31:MB32",
+    "'Julho 2026'!MB34:MB34",
+    "'Julho 2026'!MB46:MB54",
+    "'Julho 2026'!MQ5:MQ34",
+    "'Julho 2026'!MQ46:MQ64",
+    "'Julho 2026'!NF5:NF34",
+    "'Julho 2026'!NF46:NF59",
+    "'Julho 2026'!NF61:NF74",
+    "'Julho 2026'!NF105:NF134",
+    "'Julho 2026'!NM5:NM34",
+    "'Julho 2026'!NM120:NM133",
+    "'Julho 2026'!NP46:NP54",
+    "'Julho 2026'!NP56:NP57",
+    "'Julho 2026'!OB5:OB34",
+    "'Julho 2026'!OB46:OB59",
+    "'Julho 2026'!OB61:OB74",
+    "'Julho 2026'!OI5:OI34",
+    "'Julho 2026'!OJ46:OJ74",
+    "'Julho 2026'!OL46:OL58",
+    "'Julho 2026'!OL61:OL74",
+    "'Julho 2026'!ON46:ON74",
+    "'Julho 2026'!OX5:OX34",
+    "'Julho 2026'!PE5:PE34",
+    "'Julho 2026'!PF46:PF54",
+    "'Julho 2026'!PF56:PF61",
+    "'Julho 2026'!PT5:PT34",
+    "'Julho 2026'!QP5:QP34",
+    "'Julho 2026'!QT68:QT69",
+    "'Julho 2026'!QX5:QX34",
+    "'Julho 2026'!QZ68:QZ69",
+    "'Julho 2026'!RB46:RB47",
+    "'Julho 2026'!RB49:RB60",
+    "'Julho 2026'!RF5:RF34",
+    "'Julho 2026'!RL61:RL74",
+    "'Julho 2026'!RN5:RN33",
+    "'Julho 2026'!RV5:RV34",
+    "'Julho 2026'!SL5:SL29",
+    "'Julho 2026'!SL32:SL32",
+    "'Julho 2026'!TA5:TA23",
+    "'Julho 2026'!TA25:TA30",
+    "'Julho 2026'!TP51:TP70",
+    "'Julho 2026'!TP108:TP134",
+    "'Julho 2026'!TP145:TP173",
+    "'Julho 2026'!TP188:TP214",
+    "'Julho 2026'!TP228:TP252",
+    "'Julho 2026'!TP254:TP254",
+    "'Julho 2026'!TP268:TP293",
+    "'Julho 2026'!TP309:TP334",
+    "'Julho 2026'!TQ49:TQ70",
+    "'Julho 2026'!TR50:TR54",
+    "'Julho 2026'!TS50:TS70",
+    "'Julho 2026'!TT50:TT70",
+    "'Julho 2026'!TU50:TU70",
+    "'Julho 2026'!UZ5:UZ21",
+    "'Julho 2026'!UZ23:UZ34",
+    "'Julho 2026'!VH5:VH23",
+    "'Julho 2026'!VH26:VH29",
+    "'Julho 2026'!VH31:VH31",
+    "'Julho 2026'!VH33:VH34",
+    "'Julho 2026'!VP5:VP24",
+    "'Julho 2026'!VP26:VP34",
+    "'Julho 2026'!VP46:VP49",
+    "'Julho 2026'!VP62:VP70",
+    "'Julho 2026'!VP75:VP75",
+    "'Julho 2026'!WF5:WF34",
+    "'Julho 2026'!WF46:WF70",
+    "'Julho 2026'!WN5:WN23",
+    "'Julho 2026'!WN25:WN29",
+    "'Julho 2026'!WN34:WN34",
+    "'Julho 2026'!WV23:WV23",
+    "'Julho 2026'!XL5:XL34",
+    "'Julho 2026'!XT5:XT34",
+    "'Julho 2026'!YB5:YB29",
+    "'Julho 2026'!YB34:YB34",
+    "'Julho 2026'!YR5:YR30",
+    "'Julho 2026'!YR32:YR32",
+    "'Julho 2026'!YR34:YR34",
+    "'Julho 2026'!YZ5:YZ23",
+    "'Julho 2026'!YZ26:YZ34",
+    "'Julho 2026'!ZD60:ZD70",
+    "'Julho 2026'!ZP5:ZP7",
+    "'Julho 2026'!ZP9:ZP9",
+    "'Julho 2026'!ZP11:ZP18",
+    "'Julho 2026'!ZP20:ZP22",
+    "'Julho 2026'!ZP34:ZP34",
+    "'Julho 2026'!AAN6:AAN6",
+    "'Julho 2026'!AAN12:AAN13",
+    "'Julho 2026'!AAN17:AAN17",
+    "'Julho 2026'!AAN20:AAN34",
+    "'Julho 2026'!AAO61:AAO75",
+    "'Julho 2026'!ABD5:ABD34",
+    "'Julho 2026'!ABE46:ABE75",
+    "'Julho 2026'!ABS145:ABS174",
+    "'Julho 2026'!ABS213:ABS214",
+    "'Julho 2026'!ABS293:ABS294",
+    "'Julho 2026'!ABT46:ABT69",
+    "'Julho 2026'!ABU70:ABU75",
+    "'Julho 2026'!ABV74:ABV75",
+    "'Julho 2026'!ABX71:ABX75"
+  ],
+  "exact_junho_literals": [
+    "B3",
+    "B40",
+    "B103",
+    "B143",
+    "B183",
+    "B223",
+    "B263",
+    "B303"
+  ],
+  "hardcoded_june_formula_updates": [
+    {
+      "cell": "M146",
+      "before": "=IF(IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ\",\"Junho 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ\",\"Junho 2026!H1\")),IF(IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ\",\"Junho 2026!D16\")<100000,-IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ\",\"Junho 2026!E14\"),-IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ\",\"Junho 2026!F14\")))",
+      "after": "=IF(IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ\",\"Julho 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ\",\"Julho 2026!H1\")),IF(IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ\",\"Julho 2026!D16\")<100000,-IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ\",\"Julho 2026!E14\"),-IMPORTRANGE(\"1syOKCRi-2wpHQNY5fHMcOzjj73EXmFIUbTF1sTIARvQ\",\"Julho 2026!F14\")))"
+    },
+    {
+      "cell": "M147",
+      "before": "=IF(IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Junho 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Junho 2026!H1\")),IF(IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Junho 2026!D16\")<100000,-IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Junho 2026!E14\"),-IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Junho 2026!F14\")))",
+      "after": "=IF(IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Julho 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Julho 2026!H1\")),IF(IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Julho 2026!D16\")<100000,-IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Julho 2026!E14\"),-IMPORTRANGE(\"128fEDdXayhgGGKMdLPf-FTWyJRW8-v6JgHzmUSrsOMU\",\"Julho 2026!F14\")))"
+    },
+    {
+      "cell": "M149",
+      "before": "=IF(IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Junho 2026!D13\")<=3000/7%,-(3000/IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Junho 2026!H1\")),IF(IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Junho 2026!D13\")<100000,-IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Junho 2026!E12\"),-IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Junho 2026!F12\")))",
+      "after": "=IF(IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Julho 2026!D13\")<=3000/7%,-(3000/IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Julho 2026!H1\")),IF(IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Julho 2026!D13\")<100000,-IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Julho 2026!E12\"),-IMPORTRANGE(\"1xi7dx-eS678Zy4j3hoJvXedWY1Mnhhvo7jT_hkFqA2c\",\"Julho 2026!F12\")))"
+    },
+    {
+      "cell": "M151",
+      "before": "=IF(IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Junho 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Junho 2026!H1\")),IF(IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Junho 2026!D16\")<100000,-IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Junho 2026!E14\"),-IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Junho 2026!F14\")))",
+      "after": "=IF(IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Julho 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Julho 2026!H1\")),IF(IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Julho 2026!D16\")<100000,-IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Julho 2026!E14\"),-IMPORTRANGE(\"1huhZFlFVEKmY11fR5DxgCWE2TNC3gvw_eXlW2jylVfs\",\"Julho 2026!F14\")))"
+    },
+    {
+      "cell": "M152",
+      "before": "=IF(IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Junho 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Junho 2026!H1\")),IF(IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Junho 2026!D16\")<100000,-IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Junho 2026!E14\"),-IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Junho 2026!F14\")))",
+      "after": "=IF(IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Julho 2026!D16\")<=3000/7%,-(3000/IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Julho 2026!H1\")),IF(IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Julho 2026!D16\")<100000,-IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Julho 2026!E14\"),-IMPORTRANGE(\"1cFPIlC2NxRG6GQiF4VmbNqRz09ZWkZXWUzP7nINK9vU\",\"Julho 2026!F14\")))"
+    }
+  ],
+  "manager_july_tabs_present": {
+    "Kelly": true,
+    "Isliago": true,
+    "George": true,
+    "Nicolas": true,
+    "Joe": true
+  },
+  "target_E1": "=SUM('CAIXA SINTETICO'!I2)",
+  "caixa_I_formula_rebind_count": 48,
+  "caixa_I_formula_text_change_count": 39,
+  "caixa_I_formula_repairs": [
+    {
+      "row": 9,
+      "cell": "I9",
+      "before": "=SUM('Julho 2026'!EW36)",
+      "after": "=SUM('Julho 2026'!EI36)",
+      "text_changed": true
+    },
+    {
+      "row": 10,
+      "cell": "I10",
+      "before": "=SUM('Julho 2026'!FM36)",
+      "after": "=SUM('Julho 2026'!EY36)",
+      "text_changed": true
+    },
+    {
+      "row": 12,
+      "cell": "I12",
+      "before": "=SUM('Julho 2026'!AH36)",
+      "after": "=SUM('Julho 2026'!AH36)",
+      "text_changed": false
+    },
+    {
+      "row": 13,
+      "cell": "I13",
+      "before": "=SUM('Julho 2026'!D36)",
+      "after": "=SUM('Julho 2026'!D36)",
+      "text_changed": false
+    },
+    {
+      "row": 14,
+      "cell": "I14",
+      "before": "=SUM('Julho 2026'!S36)",
+      "after": "=SUM('Julho 2026'!S36)",
+      "text_changed": false
+    },
+    {
+      "row": 15,
+      "cell": "I15",
+      "before": "=SUM('Julho 2026'!UB36)",
+      "after": "=SUM('Julho 2026'!SL36)",
+      "text_changed": true
+    },
+    {
+      "row": 16,
+      "cell": "I16",
+      "before": "=SUM('Julho 2026'!UQ36)",
+      "after": "=SUM('Julho 2026'!TA36)",
+      "text_changed": true
+    },
+    {
+      "row": 17,
+      "cell": "I17",
+      "before": "=SUM('Julho 2026'!EG36)",
+      "after": "=SUM('Julho 2026'!DS36)",
+      "text_changed": true
+    },
+    {
+      "row": 18,
+      "cell": "I18",
+      "before": "=SUM('Julho 2026'!HM36,'Julho 2026'!HT36)",
+      "after": "=SUM('Julho 2026'!GY36,'Julho 2026'!HF36)",
+      "text_changed": true
+    },
+    {
+      "row": 19,
+      "cell": "I19",
+      "before": "=SUM('Julho 2026'!II36)",
+      "after": "=SUM('Julho 2026'!HU36)",
+      "text_changed": true
+    },
+    {
+      "row": 20,
+      "cell": "I20",
+      "before": "=SUM('Julho 2026'!AW36,'Julho 2026'!BD36)",
+      "after": "=SUM('Julho 2026'!AW36,'Julho 2026'!BD36)",
+      "text_changed": false
+    },
+    {
+      "row": 21,
+      "cell": "I21",
+      "before": "=SUM('Julho 2026'!BZ36)",
+      "after": "=SUM('Julho 2026'!BS36)",
+      "text_changed": true
+    },
+    {
+      "row": 22,
+      "cell": "I22",
+      "before": "=SUM('Julho 2026'!KP36,'Julho 2026'!KW36)",
+      "after": "=SUM('Julho 2026'!JU36,'Julho 2026'!KB36)",
+      "text_changed": true
+    },
+    {
+      "row": 23,
+      "cell": "I23",
+      "before": "=SUM('Julho 2026'!LS36)",
+      "after": "=SUM('Julho 2026'!KQ36)",
+      "text_changed": true
+    },
+    {
+      "row": 24,
+      "cell": "I24",
+      "before": "=SUM('Julho 2026'!MH36,'Julho 2026'!MO36)",
+      "after": "=SUM('Julho 2026'!LF36,'Julho 2026'!LM36)",
+      "text_changed": true
+    },
+    {
+      "row": 25,
+      "cell": "I25",
+      "before": "=SUM('Julho 2026'!NK36)",
+      "after": "=SUM('Julho 2026'!MB36)",
+      "text_changed": true
+    },
+    {
+      "row": 26,
+      "cell": "I26",
+      "before": "=SUM('Julho 2026'!NZ36)",
+      "after": "=SUM('Julho 2026'!MQ36)",
+      "text_changed": true
+    },
+    {
+      "row": 27,
+      "cell": "I27",
+      "before": "=SUM('Julho 2026'!IX36,'Julho 2026'!JE36)",
+      "after": "=SUM('Julho 2026'!IJ36,'Julho 2026'!IQ36)",
+      "text_changed": true
+    },
+    {
+      "row": 28,
+      "cell": "I28",
+      "before": "=SUM('Julho 2026'!KA36)",
+      "after": "=SUM('Julho 2026'!JF36)",
+      "text_changed": true
+    },
+    {
+      "row": 29,
+      "cell": "I29",
+      "before": "=SUM('Julho 2026'!GB36,'Julho 2026'!GI36)",
+      "after": "=SUM('Julho 2026'!FN36,'Julho 2026'!FU36)",
+      "text_changed": true
+    },
+    {
+      "row": 30,
+      "cell": "I30",
+      "before": "=SUM('Julho 2026'!GX36)",
+      "after": "=SUM('Julho 2026'!GJ36)",
+      "text_changed": true
+    },
+    {
+      "row": 31,
+      "cell": "I31",
+      "before": "=SUM('Julho 2026'!QN36,'Julho 2026'!QU36)",
+      "after": "=SUM('Julho 2026'!OX36,'Julho 2026'!PE36)",
+      "text_changed": true
+    },
+    {
+      "row": 32,
+      "cell": "I32",
+      "before": "=SUM('Julho 2026'!RJ36,'Julho 2026'!RQ36)",
+      "after": "=SUM('Julho 2026'!PT36,'Julho 2026'!QA36)",
+      "text_changed": true
+    },
+    {
+      "row": 33,
+      "cell": "I33",
+      "before": "=SUM('Julho 2026'!OO36,'Julho 2026'!OV36)",
+      "after": "=SUM('Julho 2026'!NF36,'Julho 2026'!NM36)",
+      "text_changed": true
+    },
+    {
+      "row": 34,
+      "cell": "I34",
+      "before": "=SUM('Julho 2026'!PR36,'Julho 2026'!PY36)",
+      "after": "=SUM('Julho 2026'!OB36,'Julho 2026'!OI36)",
+      "text_changed": true
+    },
+    {
+      "row": 35,
+      "cell": "I35",
+      "before": "=SUM('Julho 2026'!OO136,'Julho 2026'!OV136)",
+      "after": "=SUM('Julho 2026'!NF136,'Julho 2026'!NM136)",
+      "text_changed": true
+    },
+    {
+      "row": 37,
+      "cell": "I37",
+      "before": "=SUM('Julho 2026'!AAZ36,'Julho 2026'!ABH36)",
+      "after": "=SUM('Julho 2026'!ZQ36,'Julho 2026'!ZY36)",
+      "text_changed": true
+    },
+    {
+      "row": 38,
+      "cell": "I38",
+      "before": "=SUM('Julho 2026'!AAB36,'Julho 2026'!AAJ36)",
+      "after": "=SUM('Julho 2026'!YS36,'Julho 2026'!ZA36)",
+      "text_changed": true
+    },
+    {
+      "row": 39,
+      "cell": "I39",
+      "before": "=SUM('Julho 2026'!WJ36,'Julho 2026'!WR36,'Julho 2026'!WZ36)",
+      "after": "=SUM('Julho 2026'!VA36,'Julho 2026'!VI36,'Julho 2026'!VQ36)",
+      "text_changed": true
+    },
+    {
+      "row": 40,
+      "cell": "I40",
+      "before": "=SUM('Julho 2026'!XP36,'Julho 2026'!XX36,'Julho 2026'!YF36)",
+      "after": "=SUM('Julho 2026'!WG36,'Julho 2026'!WO36,'Julho 2026'!WW36)",
+      "text_changed": true
+    },
+    {
+      "row": 41,
+      "cell": "I41",
+      "before": "=SUM('Julho 2026'!SG36,'Julho 2026'!SO36,'Julho 2026'!SW36,'Julho 2026'!TE36,'Julho 2026'!TM36)",
+      "after": "=SUM('Julho 2026'!QQ36,'Julho 2026'!QY36,'Julho 2026'!RG36,'Julho 2026'!RO36,'Julho 2026'!RW36)",
+      "text_changed": true
+    },
+    {
+      "row": 42,
+      "cell": "I42",
+      "before": "=SUM('Julho 2026'!YV36,'Julho 2026'!ZD36,'Julho 2026'!ZL36)",
+      "after": "=SUM('Julho 2026'!XM36,'Julho 2026'!XU36,'Julho 2026'!YC36)",
+      "text_changed": true
+    },
+    {
+      "row": 43,
+      "cell": "I43",
+      "before": "=SUM('Julho 2026'!VF36,'Julho 2026'!VM36,'Julho 2026'!VT36)",
+      "after": "=SUM('Julho 2026'!TP36,'Julho 2026'!TW36,'Julho 2026'!UK36)",
+      "text_changed": true
+    },
+    {
+      "row": 45,
+      "cell": "I45",
+      "before": "=SUM('Julho 2026'!ABX36)",
+      "after": "=SUM('Julho 2026'!AAO36)",
+      "text_changed": true
+    },
+    {
+      "row": 46,
+      "cell": "I46",
+      "before": "=SUM('Julho 2026'!ACM36)",
+      "after": "=SUM('Julho 2026'!ABD36)",
+      "text_changed": true
+    },
+    {
+      "row": 47,
+      "cell": "I47",
+      "before": "=SUM('Julho 2026'!ADB36)",
+      "after": "=SUM('Julho 2026'!ABS36)",
+      "text_changed": true
+    },
+    {
+      "row": 48,
+      "cell": "I48",
+      "before": "=SUM('Julho 2026'!ADQ36)",
+      "after": "=SUM('Julho 2026'!ACH36)",
+      "text_changed": true
+    },
+    {
+      "row": 49,
+      "cell": "I49",
+      "before": "=SUM('Julho 2026'!AEF36)",
+      "after": "=SUM('Julho 2026'!ACW36)",
+      "text_changed": true
+    },
+    {
+      "row": 50,
+      "cell": "I50",
+      "before": "=SUM('Julho 2026'!AEU36)",
+      "after": "=SUM('Julho 2026'!ADL36)",
+      "text_changed": true
+    },
+    {
+      "row": 52,
+      "cell": "I52",
+      "before": "=SUM('Julho 2026'!DK36)",
+      "after": "=SUM('Julho 2026'!DD36)",
+      "text_changed": true
+    },
+    {
+      "row": 53,
+      "cell": "I53",
+      "before": "=SUM('Julho 2026'!CO36,'Julho 2026'!CV36)",
+      "after": "=SUM('Julho 2026'!CH36,'Julho 2026'!CO36)",
+      "text_changed": true
+    },
+    {
+      "row": 58,
+      "cell": "I58",
+      "before": "=SUM('Julho 2026'!N173)",
+      "after": "=SUM('Julho 2026'!N173)",
+      "text_changed": false
+    },
+    {
+      "row": 59,
+      "cell": "I59",
+      "before": "=SUM('Julho 2026'!N174)",
+      "after": "=SUM('Julho 2026'!N174)",
+      "text_changed": false
+    },
+    {
+      "row": 60,
+      "cell": "I60",
+      "before": "=SUM('Julho 2026'!N175)",
+      "after": "=SUM('Julho 2026'!N175)",
+      "text_changed": false
+    },
+    {
+      "row": 61,
+      "cell": "I61",
+      "before": "=SUM('Julho 2026'!N176)",
+      "after": "=SUM('Julho 2026'!N176)",
+      "text_changed": false
+    },
+    {
+      "row": 71,
+      "cell": "I71",
+      "before": "=SUM('Julho 2026'!AIF36)",
+      "after": "=SUM('Julho 2026'!AGW36)",
+      "text_changed": true
+    },
+    {
+      "row": 72,
+      "cell": "I72",
+      "before": "=SUM('Julho 2026'!M159)",
+      "after": "=SUM('Julho 2026'!M159)",
+      "text_changed": false
+    },
+    {
+      "row": 74,
+      "cell": "I74",
+      "before": "=SUM('Julho 2026'!AII36)",
+      "after": "=SUM('Julho 2026'!AGZ36)",
+      "text_changed": true
+    }
+  ],
+  "empty_safe_formula_updates": [
+    {
+      "row": 36,
+      "col": 886,
+      "cell": "AHB36",
+      "before": "=AVERAGEIF(AHB5:AHB35,\"<>0\")",
+      "after": "=IFERROR(AVERAGEIF(AHB5:AHB35,\"<>0\"),\"\")"
+    },
+    {
+      "row": 36,
+      "col": 887,
+      "cell": "AHC36",
+      "before": "=AVERAGEIF(AHC5:AHC35,\"<>0\")",
+      "after": "=IFERROR(AVERAGEIF(AHC5:AHC35,\"<>0\"),\"\")"
+    }
+  ],
+  "execute_requested": true,
+  "created_at": "2026-07-14T23:10:10"
+}
