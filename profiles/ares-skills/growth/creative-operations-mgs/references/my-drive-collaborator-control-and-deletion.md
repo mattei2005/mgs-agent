@@ -48,6 +48,8 @@ Antes de criar o destino ou alterar qualquer ID operacional:
 6. Inventariar recursivamente a origem antes do piloto: IDs únicos, caminho, tipo, tamanho, checksum quando disponível, owner, `ownedByMe`, `canTrash`, `canDelete` e contagem por owner. Validar JSON/CSV com igualdade de contagem e ausência de IDs duplicados.
 7. Só depois de o piloto passar create/move/trash/restore/delete: migrar em lotes, validar readback/checksum/IDs, atualizar scripts e watchdogs, e manter rollback até a conferência final.
 
+Procedimento detalhado de entitlement, escolha do plano Google Workspace, papéis, piloto e migração: `references/shared-drive-migration-and-workspace-plans.md`.
+
 ## Comunicação
 
 - Não dizer “precisa de permissão da Kelly/gestor” como resposta padrão para itens dentro de `MGS-AGENTS/CRIATIVOS`.
