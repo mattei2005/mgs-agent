@@ -38,6 +38,25 @@ Para uma tabela diária:
 6. Validar `matched_rows`, datas retornadas e moeda antes do cálculo.
 7. Marcar o dia atual como parcial e usar o timezone da conta Meta, não o timezone do VPS.
 
+### Invariante de data exata no HOA diário
+
+Para qualquer consulta de um único dia, aplicar `row.DATE == report_date` **antes** de somar `DRIP_REVENUE`, `BD_REVENUE` ou `REVENUE`. O endpoint `/report/messenger` pode devolver linhas de D-1 mesmo quando o payload pede somente D0; nunca assumir que o intervalo solicitado limita as datas retornadas.
+
+- `matched_rows` conta apenas linhas da data exata e da identidade completa.
+- Datas inesperadas ficam no audit como `unexpected_dates`, mas não entram em receita nem ROI.
+- Se nenhuma linha da data exata existir, retornar dado indisponível; não reaproveitar D-1 nem converter ausência em zero.
+- Em recheck histórico, receita pode maturar e mudar; registrar horário da consulta e não comparar snapshots sem declarar essa limitação.
+
+### Evidência visual no dashboard
+
+Ao comprovar a origem por screenshot em `Reports → Messenger Daily`:
+
+1. Usar o timezone da conta no contexto do navegador.
+2. Isolar um único site/domínio, `Group by = UTM_CAMPAIGN`, filtro do `pg_id`, moeda e coluna da data.
+3. Para Total, usar a métrica geral `REVENUE`; para Drip, selecionar `DRIP → REVENUE`. Como o seletor mostra apenas `REVENUE` após fechar, manter o menu aberto ou rotular a captura sem alterar os valores.
+4. Comparar a célula da data com a linha crua de mesma `DATE`; não usar o `Total` de uma janela multidiária.
+5. Se o screenshot divergir do HOA, interromper a apresentação como válida e reconciliar as linhas por data antes de qualquer correção de script.
+
 ## Semântica do relatório
 
 Esse cálculo é ROI de **cashflow diário da página**, não ROI de coorte. Broadcast pode maturar em D+1 ou depois, e receitas do dia podem vir de leads adquiridos anteriormente. Portanto:
@@ -76,6 +95,8 @@ Evitar repetir ROI em cada campanha quando a receita só é atribuível à pági
 - Testar fórmula com receita acima, abaixo e spend zero.
 - Confirmar que o bloco Discord contém `ROI Drip` e `ROI Total` e não contém `ROI Broad` para Openzed.
 - Confirmar que o JSON mantém `broadcast_revenue` para investigação.
+- Testar resposta single-day contendo D0 + D-1 e provar que somente `row.DATE == report_date` entra em receita, `matched_rows` e ROI; preservar datas extras em `unexpected_dates`.
+- Em screenshot, validar site único, `UTM_CAMPAIGN`, `pg_id`, moeda, coluna da data e caminho da métrica (`REVENUE` ou `DRIP → REVENUE`) antes de apresentar a imagem como evidência.
 - Validar ausência de `access_token`, `password`, `username`, `id_token` e valores reais de credencial em output/report.
 - Rodar geração live read-only e poster Discord em dry-run; validar fences balanceados e chunks dentro do limite.
 - Confirmar que target CPMO, R1–R5, budget e modo Meta write não mudaram quando o escopo era somente reporting.
