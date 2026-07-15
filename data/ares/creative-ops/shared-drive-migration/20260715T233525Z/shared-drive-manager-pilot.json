@@ -1,0 +1,481 @@
+{
+  "generated_at_utc": "2026-07-15T23:35:44.753179+00:00",
+  "status": "PASS",
+  "drive": {
+    "id": "0AEwt4Ye690ocUk9PVA",
+    "name": "MGS-CREATIVE-OPS"
+  },
+  "auth": {
+    "mode": "service_account",
+    "identity": "ares-drive@mgs-ares.iam.gserviceaccount.com"
+  },
+  "steps": [
+    {
+      "step": "shared_drive_visible",
+      "ok": true,
+      "evidence": {
+        "match": {
+          "capabilities": {
+            "canAddChildren": true,
+            "canManageMembers": true,
+            "canRename": true,
+            "canTrashChildren": true
+          },
+          "id": "0AEwt4Ye690ocUk9PVA",
+          "name": "MGS-CREATIVE-OPS",
+          "createdTime": "2026-07-15T23:11:13.097Z"
+        }
+      }
+    },
+    {
+      "step": "manager_capabilities",
+      "ok": true,
+      "evidence": {
+        "capabilities": {
+          "canAddChildren": true,
+          "canManageMembers": true,
+          "canRename": true,
+          "canTrashChildren": true
+        }
+      }
+    },
+    {
+      "step": "ares_manager_permission",
+      "ok": true,
+      "evidence": {
+        "ares_permission": {
+          "id": "16640510454151898871",
+          "displayName": "ares-drive@mgs-ares.iam.gserviceaccount.com",
+          "type": "user",
+          "permissionDetails": [
+            {
+              "permissionType": "member",
+              "role": "organizer"
+            }
+          ],
+          "emailAddress": "ares-drive@mgs-ares.iam.gserviceaccount.com",
+          "role": "organizer"
+        },
+        "member_count": 2
+      }
+    },
+    {
+      "step": "folder_create__ARES_PILOT_20260715T233525Z",
+      "ok": true,
+      "evidence": {
+        "id": "12N0b_0Bd5NwXCtLKtA_NVfAeY-g_8y6m",
+        "metadata": {
+          "id": "12N0b_0Bd5NwXCtLKtA_NVfAeY-g_8y6m",
+          "name": "_ARES_PILOT_20260715T233525Z",
+          "mimeType": "application/vnd.google-apps.folder",
+          "trashed": false,
+          "parents": [
+            "0AEwt4Ye690ocUk9PVA"
+          ],
+          "createdTime": "2026-07-15T23:35:26.642Z",
+          "modifiedTime": "2026-07-15T23:35:26.642Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "capabilities": {
+            "canAddChildren": true,
+            "canDelete": true,
+            "canDownload": true,
+            "canEdit": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canRename": true,
+            "canTrash": true
+          }
+        }
+      }
+    },
+    {
+      "step": "folder_create_UPLOAD_MANUAL",
+      "ok": true,
+      "evidence": {
+        "id": "130gIwIHdCJ0B58hQ5pKI6hSSZxDR0Isg",
+        "metadata": {
+          "id": "130gIwIHdCJ0B58hQ5pKI6hSSZxDR0Isg",
+          "name": "UPLOAD MANUAL",
+          "mimeType": "application/vnd.google-apps.folder",
+          "trashed": false,
+          "parents": [
+            "12N0b_0Bd5NwXCtLKtA_NVfAeY-g_8y6m"
+          ],
+          "createdTime": "2026-07-15T23:35:27.990Z",
+          "modifiedTime": "2026-07-15T23:35:27.990Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "capabilities": {
+            "canAddChildren": true,
+            "canDelete": true,
+            "canDownload": true,
+            "canEdit": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canRename": true,
+            "canTrash": true
+          }
+        }
+      }
+    },
+    {
+      "step": "folder_create_01_READY",
+      "ok": true,
+      "evidence": {
+        "id": "1NR2NIK9hlE4NirE1p52LbmtNooyHiF_S",
+        "metadata": {
+          "id": "1NR2NIK9hlE4NirE1p52LbmtNooyHiF_S",
+          "name": "01_READY",
+          "mimeType": "application/vnd.google-apps.folder",
+          "trashed": false,
+          "parents": [
+            "12N0b_0Bd5NwXCtLKtA_NVfAeY-g_8y6m"
+          ],
+          "createdTime": "2026-07-15T23:35:29.079Z",
+          "modifiedTime": "2026-07-15T23:35:29.079Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "capabilities": {
+            "canAddChildren": true,
+            "canDelete": true,
+            "canDownload": true,
+            "canEdit": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canRename": true,
+            "canTrash": true
+          }
+        }
+      }
+    },
+    {
+      "step": "folder_create_99_LEGACY",
+      "ok": true,
+      "evidence": {
+        "id": "1sCPE6l9R3wMxE5Ey18xT9LLYkaFsPrEL",
+        "metadata": {
+          "id": "1sCPE6l9R3wMxE5Ey18xT9LLYkaFsPrEL",
+          "name": "99_LEGACY",
+          "mimeType": "application/vnd.google-apps.folder",
+          "trashed": false,
+          "parents": [
+            "12N0b_0Bd5NwXCtLKtA_NVfAeY-g_8y6m"
+          ],
+          "createdTime": "2026-07-15T23:35:30.168Z",
+          "modifiedTime": "2026-07-15T23:35:30.168Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "capabilities": {
+            "canAddChildren": true,
+            "canDelete": true,
+            "canDownload": true,
+            "canEdit": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canRename": true,
+            "canTrash": true
+          }
+        }
+      }
+    },
+    {
+      "step": "file_upload",
+      "ok": true,
+      "evidence": {
+        "id": "12ZL3tXtoV5j52Kyul2vq4ZTlrAQN-4AL",
+        "metadata": {
+          "id": "12ZL3tXtoV5j52Kyul2vq4ZTlrAQN-4AL",
+          "name": "pilot-source.png",
+          "mimeType": "image/png",
+          "trashed": false,
+          "parents": [
+            "130gIwIHdCJ0B58hQ5pKI6hSSZxDR0Isg"
+          ],
+          "createdTime": "2026-07-15T23:35:32.544Z",
+          "modifiedTime": "2026-07-15T23:35:32.544Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "capabilities": {
+            "canAddChildren": false,
+            "canDelete": true,
+            "canDownload": true,
+            "canEdit": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canRename": true,
+            "canTrash": true
+          },
+          "md5Checksum": "d8283a73000e9df64b16c2b31c5c3c7d",
+          "size": "82"
+        },
+        "sha256": "39f5a2b6fe96c434adad73cdef4ee6f57a64619a62be97bbd9063e6d81a16ecb"
+      }
+    },
+    {
+      "step": "file_download_hash",
+      "ok": true,
+      "evidence": {
+        "bytes": 82,
+        "sha256": "39f5a2b6fe96c434adad73cdef4ee6f57a64619a62be97bbd9063e6d81a16ecb"
+      }
+    },
+    {
+      "step": "file_content_edit",
+      "ok": true,
+      "evidence": {
+        "update": {
+          "id": "12ZL3tXtoV5j52Kyul2vq4ZTlrAQN-4AL",
+          "name": "pilot-source.png",
+          "modifiedTime": "2026-07-15T23:35:34.612Z",
+          "md5Checksum": "527a0db6c9570fda77032834d3d24b34",
+          "size": "82"
+        },
+        "bytes": 82,
+        "sha256": "143f9735b8d50da2ecc5e27648b2eb38c734d07b0ce6792529a7d9f32c6bdeb6"
+      }
+    },
+    {
+      "step": "file_rename_and_move_ready",
+      "ok": true,
+      "evidence": {
+        "metadata": {
+          "id": "12ZL3tXtoV5j52Kyul2vq4ZTlrAQN-4AL",
+          "name": "pilot-treated.png",
+          "mimeType": "image/png",
+          "trashed": false,
+          "parents": [
+            "1NR2NIK9hlE4NirE1p52LbmtNooyHiF_S"
+          ],
+          "modifiedTime": "2026-07-15T23:35:36.015Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "md5Checksum": "527a0db6c9570fda77032834d3d24b34",
+          "size": "82"
+        }
+      }
+    },
+    {
+      "step": "file_trash",
+      "ok": true,
+      "evidence": {
+        "patch": {
+          "id": "12ZL3tXtoV5j52Kyul2vq4ZTlrAQN-4AL",
+          "name": "pilot-treated.png",
+          "mimeType": "image/png",
+          "trashed": true,
+          "parents": [
+            "1NR2NIK9hlE4NirE1p52LbmtNooyHiF_S"
+          ],
+          "modifiedTime": "2026-07-15T23:35:36.015Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "md5Checksum": "527a0db6c9570fda77032834d3d24b34",
+          "size": "82"
+        },
+        "readback": {
+          "id": "12ZL3tXtoV5j52Kyul2vq4ZTlrAQN-4AL",
+          "name": "pilot-treated.png",
+          "mimeType": "image/png",
+          "trashed": true,
+          "parents": [
+            "1NR2NIK9hlE4NirE1p52LbmtNooyHiF_S"
+          ],
+          "createdTime": "2026-07-15T23:35:32.544Z",
+          "modifiedTime": "2026-07-15T23:35:36.015Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "capabilities": {
+            "canAddChildren": false,
+            "canDelete": true,
+            "canDownload": true,
+            "canEdit": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canRename": true,
+            "canTrash": true
+          },
+          "md5Checksum": "527a0db6c9570fda77032834d3d24b34",
+          "size": "82"
+        }
+      }
+    },
+    {
+      "step": "file_restore",
+      "ok": true,
+      "evidence": {
+        "patch": {
+          "id": "12ZL3tXtoV5j52Kyul2vq4ZTlrAQN-4AL",
+          "name": "pilot-treated.png",
+          "mimeType": "image/png",
+          "trashed": false,
+          "parents": [
+            "1NR2NIK9hlE4NirE1p52LbmtNooyHiF_S"
+          ],
+          "modifiedTime": "2026-07-15T23:35:36.015Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "md5Checksum": "527a0db6c9570fda77032834d3d24b34",
+          "size": "82"
+        },
+        "readback": {
+          "id": "12ZL3tXtoV5j52Kyul2vq4ZTlrAQN-4AL",
+          "name": "pilot-treated.png",
+          "mimeType": "image/png",
+          "trashed": false,
+          "parents": [
+            "1NR2NIK9hlE4NirE1p52LbmtNooyHiF_S"
+          ],
+          "createdTime": "2026-07-15T23:35:32.544Z",
+          "modifiedTime": "2026-07-15T23:35:36.015Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "capabilities": {
+            "canAddChildren": false,
+            "canDelete": true,
+            "canDownload": true,
+            "canEdit": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canRename": true,
+            "canTrash": true
+          },
+          "md5Checksum": "527a0db6c9570fda77032834d3d24b34",
+          "size": "82"
+        }
+      }
+    },
+    {
+      "step": "file_move_legacy",
+      "ok": true,
+      "evidence": {
+        "metadata": {
+          "id": "12ZL3tXtoV5j52Kyul2vq4ZTlrAQN-4AL",
+          "name": "pilot-treated.png",
+          "mimeType": "image/png",
+          "trashed": false,
+          "parents": [
+            "1sCPE6l9R3wMxE5Ey18xT9LLYkaFsPrEL"
+          ],
+          "modifiedTime": "2026-07-15T23:35:36.015Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "md5Checksum": "527a0db6c9570fda77032834d3d24b34",
+          "size": "82"
+        }
+      }
+    },
+    {
+      "step": "file_permanent_delete",
+      "ok": true,
+      "evidence": {
+        "id": "12ZL3tXtoV5j52Kyul2vq4ZTlrAQN-4AL",
+        "final": "HTTP_404"
+      }
+    },
+    {
+      "step": "folder_trash",
+      "ok": true,
+      "evidence": {
+        "patch": {
+          "id": "130gIwIHdCJ0B58hQ5pKI6hSSZxDR0Isg",
+          "name": "UPLOAD MANUAL",
+          "mimeType": "application/vnd.google-apps.folder",
+          "trashed": true,
+          "parents": [
+            "12N0b_0Bd5NwXCtLKtA_NVfAeY-g_8y6m"
+          ],
+          "modifiedTime": "2026-07-15T23:35:27.990Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA"
+        },
+        "readback": {
+          "id": "130gIwIHdCJ0B58hQ5pKI6hSSZxDR0Isg",
+          "name": "UPLOAD MANUAL",
+          "mimeType": "application/vnd.google-apps.folder",
+          "trashed": true,
+          "parents": [
+            "12N0b_0Bd5NwXCtLKtA_NVfAeY-g_8y6m"
+          ],
+          "createdTime": "2026-07-15T23:35:27.990Z",
+          "modifiedTime": "2026-07-15T23:35:27.990Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "capabilities": {
+            "canAddChildren": true,
+            "canDelete": true,
+            "canDownload": true,
+            "canEdit": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canRename": true,
+            "canTrash": true
+          }
+        }
+      }
+    },
+    {
+      "step": "folder_restore",
+      "ok": true,
+      "evidence": {
+        "patch": {
+          "id": "130gIwIHdCJ0B58hQ5pKI6hSSZxDR0Isg",
+          "name": "UPLOAD MANUAL",
+          "mimeType": "application/vnd.google-apps.folder",
+          "trashed": false,
+          "parents": [
+            "12N0b_0Bd5NwXCtLKtA_NVfAeY-g_8y6m"
+          ],
+          "modifiedTime": "2026-07-15T23:35:27.990Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA"
+        },
+        "readback": {
+          "id": "130gIwIHdCJ0B58hQ5pKI6hSSZxDR0Isg",
+          "name": "UPLOAD MANUAL",
+          "mimeType": "application/vnd.google-apps.folder",
+          "trashed": false,
+          "parents": [
+            "12N0b_0Bd5NwXCtLKtA_NVfAeY-g_8y6m"
+          ],
+          "createdTime": "2026-07-15T23:35:27.990Z",
+          "modifiedTime": "2026-07-15T23:35:27.990Z",
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "capabilities": {
+            "canAddChildren": true,
+            "canDelete": true,
+            "canDownload": true,
+            "canEdit": true,
+            "canMoveItemOutOfDrive": true,
+            "canMoveItemWithinDrive": true,
+            "canRename": true,
+            "canTrash": true
+          }
+        }
+      }
+    },
+    {
+      "step": "folder_permanent_delete_UPLOAD_MANUAL",
+      "ok": true,
+      "evidence": {
+        "id": "130gIwIHdCJ0B58hQ5pKI6hSSZxDR0Isg",
+        "final": "HTTP_404"
+      }
+    },
+    {
+      "step": "folder_permanent_delete_01_READY",
+      "ok": true,
+      "evidence": {
+        "id": "1NR2NIK9hlE4NirE1p52LbmtNooyHiF_S",
+        "final": "HTTP_404"
+      }
+    },
+    {
+      "step": "folder_permanent_delete_99_LEGACY",
+      "ok": true,
+      "evidence": {
+        "id": "1sCPE6l9R3wMxE5Ey18xT9LLYkaFsPrEL",
+        "final": "HTTP_404"
+      }
+    },
+    {
+      "step": "folder_permanent_delete__ARES_PILOT_20260715T233525Z",
+      "ok": true,
+      "evidence": {
+        "id": "12N0b_0Bd5NwXCtLKtA_NVfAeY-g_8y6m",
+        "final": "HTTP_404"
+      }
+    }
+  ],
+  "error": "",
+  "cleanup": [],
+  "side_effects": {
+    "pilot_items_remaining": []
+  }
+}
