@@ -124,6 +124,18 @@ Minimum proof:
 
 Generated inventory may omit an intentionally empty JSONL inbox while Git still tracks it. Do not misclassify that as missing infrastructure: verify the executable and non-empty stores in inventory, and verify the empty inbox through Git/readback.
 
+## Phase 2 Zeus pilot implementation pattern
+
+1. Back up live and versioned Zeus SOUL, prove their pre-change hashes match, then patch both with one compact always-active continuity section. Detailed mechanics remain in this reference and `context/knowledge-governance.md`.
+2. Do not restart merely to load SOUL. Prove cutover with a fresh local `hermes -p zeus chat -Q --source tool -q ...` session that asks for an existing section rule without supplying its answer.
+3. Verify the fresh session in `state.db` read-only. The current schema keys `sessions` by `id`, not `session_id`; require the exact distinctive policy sentence once in `sessions.system_prompt`. A successful model answer alone is not sufficient proof.
+4. Keep current-session semantics separate: Rodolfo's explicit current instruction governs immediately, while the new SOUL is guaranteed only for newly constructed sessions.
+5. Add source-backed business regression cases with `required_all` and `forbidden_any`. Tests must fail before implementation, cover PASS and missing-term failure, and run against real canonical files in production.
+6. When a regression fails, distinguish source drift from an over-literal fixture. Read the canonical wording; correct the case only when the same intended invariant is present. Never weaken a gate merely to turn it green.
+7. Register the approved pilot decision and regression capability, update the initiative checkpoint, and keep Atena/Ares outside scope until their own gates.
+8. Reconcile automatic skill writes and unrelated concurrent agent writes before closure. Verify live/mirror equality and exact REPORT-INFRA readback. If auto-commit bundles an attributed concurrent write with the pilot, disclose that path and its separate report instead of claiming the whole commit as Zeus-only.
+9. Final proof should include: full suite PASS, business regressions PASS, registry/checkpoint/inbox counts, SOUL live=mirror, fresh-session prompt marker, inventory hits, secret scan, services active, Git synchronized, audit, and exact REPORT readback.
+
 ## Common pitfalls
 
 1. **Memory-size solution** — increasing USER/MEMORY indefinitely creates prompt bloat and still lacks provenance/supersession.
