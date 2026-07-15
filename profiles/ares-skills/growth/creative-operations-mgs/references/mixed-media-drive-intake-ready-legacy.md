@@ -5,7 +5,10 @@ Use when an authorized request identifies country, vertical and language and ask
 ## Durable execution pattern
 
 1. Resolve the live hierarchy from the configured root and confirm `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`; never assume the root ID is itself `CRIATIVOS`.
-2. List current source files with Drive ID, name, MIME, size/checksum and image/video dimensions. Key all processing by `source_drive_id`, not filename.
+2. List current source files with Drive ID, name, MIME, size/checksum, image/video dimensions, `ownedByMe` and `capabilities(canDownload,canEdit,canMoveItemWithinDrive,canTrash,canDelete)`. Key all processing by `source_drive_id`, not filename.
+   - For the canonical treat/move flow, require the capabilities actually used: download the raw asset, upload the clean copy, and move the source within Drive. `ownedByMe=false`, `canTrash=false`, or `canDelete=false` do not block processing because the original is preserved rather than deleted.
+   - Block only when a required capability is absent or the live API rejects that action. Do not require transfer of ownership by default.
+   - If Drive has not populated dimensions or duration yet, download and inspect with `ffprobe` or the media decoder; missing Drive media metadata alone is not a rejection or ownership blocker.
 3. Download the batch and build compact visual evidence:
    - one labeled image contact sheet;
    - for each video, a labeled strip with frames near 20%, 50% and 80%; inspect a final frame separately if the dominant claim remains unclear.
@@ -36,6 +39,9 @@ For large batches, split the map into `IMG` and `VID`, but do not replace the pe
 
 - Stop moving a source if its clean destination has not passed every verification gate.
 - On a partial rerun, detect already processed `source_drive_id` and destination IDs before creating another copy.
+- Treat an empty intake or missing source IDs during a rerun as a possible completed concurrent execution, not immediately as a failed batch. Before retrying any write, reconcile every expected `source_drive_id` against `assets.jsonl`, the latest execution report, the READY destination IDs and the LEGACY parents. If all sources are complete, switch to verification/reporting; if only some are complete, resume only the missing IDs.
+- Serialize batch writes with an operation/batch-scoped lock when parallel Discord sessions can receive the same continuation message. The lock complements, but never replaces, live source-ID and inventory reconciliation.
+- Preserve the originating request thread as `thread_id`. A separate thread that only supplies authorization, permission context or a continuation message must be recorded separately (for example, `authorization_thread_id` or notes) and must not overwrite the asset lineage thread.
 - Keep status in folders/inventory, never in filenames.
 - Do not create placement/language subfolders under READY.
 - Report consolidated counts and READY links; do not attach the batch unless explicitly requested.

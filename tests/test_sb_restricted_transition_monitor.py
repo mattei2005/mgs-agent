@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+import importlib.util
+import unittest
+from pathlib import Path
+
+SCRIPT = Path('/root/mgs-agent/scripts/sb-restricted-transition-monitor.py')
+spec = importlib.util.spec_from_file_location('sb_restricted_transition_monitor', SCRIPT)
+if spec is None or spec.loader is None:
+    raise RuntimeError(f'cannot load {SCRIPT}')
+monitor = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(monitor)
+
+
+def row(page_id, date, status='Broadcast', name=None):
+    return {
+        'page_name': name or f'Page {page_id}',
+        'profile_name': 'Segurador Teste',
+        'bot_user': 'bot@example.com',
+        'page_id': str(page_id),
+        'fb_page_id': f'90000000000{int(page_id):03d}',
+        'status': status,
+        'restricted_until': date,
+        'sites': 'openzed',
+    }
+
+
+class TransitionComparisonTest(unittest.TestCase):
+    def test_new_renewed_status_change_and_resolved(self):
+        previous = {
+            monitor.stable_key(row(1, '2026-07-14')): row(1, '2026-07-14'),
+            monitor.stable_key(row(2, '2026-08-11', 'Campaign')): row(2, '2026-08-11', 'Campaign'),
+            monitor.stable_key(row(3, '2026-08-11')): row(3, '2026-08-11'),
+        }
+        current = {
+            monitor.stable_key(row(1, '2026-08-11')): row(1, '2026-08-11'),
+            monitor.stable_key(row(2, '2026-08-11', 'Broadcast')): row(2, '2026-08-11', 'Broadcast'),
+            monitor.stable_key(row(4, '2026-08-12', 'Campaign')): row(4, '2026-08-12', 'Campaign'),
+        }
+
+        transitions, resolved = monitor.compare_snapshots(previous, current)
+
+        by_page = {item['after']['page_id']: item for item in transitions}
+        self.assertEqual(set(by_page), {'1', '2', '4'})
+        self.assertEqual(by_page['1']['kind'], 'renovada/alterada')
+        self.assertEqual(by_page['1']['changed'], ['data'])
+        self.assertEqual(by_page['2']['changed'], ['status'])
+        self.assertEqual(by_page['4']['kind'], 'nova')
+        self.assertEqual([item['page_id'] for item in resolved], ['3'])
+
+    def test_renderer_chunks_without_omission_or_duplicate_link(self):
+        transitions = []
+        for page_id in range(1, 36):
+            transitions.append({
+                'kind': 'nova',
+                'key': monitor.stable_key(row(page_id, '2026-08-12')),
+                'before': None,
+                'after': row(page_id, '2026-08-12'),
+            })
+        counts = {
+            'active_status_broadcast': 439,
+            'active_status_campaign': 1,
+            'excluded_status_on-hold': 50,
+        }
+
+        blocks = monitor.render_blocks(transitions, counts, 'fixture')
+
+        self.assertGreater(len(blocks), 1)
+        self.assertTrue(all(len(block) <= monitor.DISCORD_LIMIT for block in blocks))
+        joined = '\n'.join(blocks)
+        for page_id in range(1, 36):
+            fb_page_id = row(page_id, '2026-08-12')['fb_page_id']
+            self.assertEqual(joined.count(fb_page_id), 1)
+        self.assertEqual(joined.count(monitor.SHEET_URL), 1)
+
+
+if __name__ == '__main__':
+    unittest.main()

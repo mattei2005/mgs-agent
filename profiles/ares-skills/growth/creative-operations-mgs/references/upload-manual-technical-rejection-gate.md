@@ -35,6 +35,16 @@ Quando o gestor confirmar que o arquivo rejeitado anterior estava realmente defe
 5. Se o usuário pedir exclusão, consulte o ID antigo diretamente e mostre antes da ação: nome, pasta atual, tamanho, duração e `trashed`. A exclusão/lixeira segue o gate crítico de confirmação vigente; o pedido de processar a nova exportação não conta como essa confirmação adicional.
 6. Não bloqueie o restante do lote enquanto a exclusão aguarda confirmação. Conclua e valide os novos assets independentes; reporte a exclusão antiga separadamente como pendente.
 7. Após uma exclusão confirmada, valide `trashed=true` por readback e reconcilie inventário/auditoria para que o registro antigo não continue parecendo um candidato disponível.
+8. Persistir o descarte de forma inequívoca no inventário, preservando a linhagem anterior:
+   - `status=TRASHED` e `prior_status=05_REJECTED`;
+   - `source_path=null`, pois o arquivo não está mais disponível na pasta ativa;
+   - `drive_trashed=true`, `trashed_at=<UTC ISO-8601>` e `trash_readback_verified=true`;
+   - manter `source_drive_id`, checksum, nome original e `ares_eligible=false` para auditoria;
+   - registrar `trash_authorized_by`, contexto/thread da autorização e atualizar `last_reconciled_at`;
+   - não chamar de exclusão permanente: `trashed=true` significa enviado à lixeira e ainda pode ser restaurado.
+9. Confirmar por listagem da pasta com `trashed=false` que o alvo não aparece mais entre os arquivos ativos. O gate final exige simultaneamente: GET direto com `trashed=true`, alvo ausente da listagem ativa e exatamente um registro de inventário atualizado.
+10. Registrar evento de auditoria com estado anterior/posterior, autorização, readback do Drive e hash do inventário. Como há mudança de Drive e dados operacionais, emitir REPORT-INFRA pelo helper canônico e só reportar sucesso depois do retorno validado.
+11. Tornar a atualização idempotente: se o Drive já estiver com `trashed=true` ou o inventário já estiver em `TRASHED`, não repetir o PATCH nem duplicar o evento; apenas validar e reconciliar campos faltantes.
 
 ## Final gate do lote
 
