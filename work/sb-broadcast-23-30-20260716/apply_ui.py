@@ -39,15 +39,25 @@ async def confirm_if_present(page):
   if await btn.count():await btn.first.click();await page.wait_for_timeout(500);return True
  raise RuntimeError(f'unhandled confirmation: {txt[:300]}')
 async def refresh_rows(page):
- captured=[]
+ captured=[];probe={'url':None,'headers':None}
  async def handler(resp):
   if '/broadcast/Messenger' in resp.url and resp.status==200:
    try:
     d=await resp.json()
-    if isinstance(d,list):captured.extend(d)
+    if isinstance(d,list):
+     captured.extend(d);probe['url']=resp.url;probe['headers']=await resp.request.all_headers()
    except:pass
  page.on('response',handler)
- await page.reload(wait_until='networkidle',timeout=90000);await page.wait_for_timeout(3500)
+ await page.reload(wait_until='networkidle',timeout=90000);await page.wait_for_timeout(2500)
+ if probe['url'] and probe['headers']:
+  # Fresh authenticated API readback avoids stale table state after modal Save.
+  safe_headers={k:v for k,v in probe['headers'].items() if not k.startswith(':') and k.lower() not in ('host','content-length')}
+  for _ in range(4):
+   resp=await page.context.request.get(probe['url'],headers=safe_headers,timeout=90000)
+   if resp.ok:
+    d=await resp.json()
+    if isinstance(d,list):captured=d
+   await page.wait_for_timeout(1200)
  ded={}
  for r in captured:ded[r.get('ID') or r.get('NAME')]=r
  return list(ded.values())

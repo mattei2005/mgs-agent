@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "sb-broadcast-templates-23-30-20260716",
-      "next_step": "Recarregar escopo Ares, parsear TXT corrigido e gerar plano imutável antes do canário.",
-      "objective": "Normalizar templates Messenger SB operacionais: 23 mensagens sem páginas, 30 com páginas, links do TXT em ordem, substituir não-verdes vinculadas e tratar CA-CC-FR especial.",
-      "source": "Discord thread 1527356568578818198; templates_links.txt; Smart Bidding Broadcast Template live",
-      "state": "pré-flight autorizado por rodolfo; acesso ares enxerga 110 templates, financeadx ca-cc-fr recém-criado precisa de recheck ao vivo.",
+      "next_step": "Aplicar os 83 templates restantes via UI Ares, validar cada core e depois atualizar banco/tracker.",
+      "objective": "Normalizar templates Messenger Broadcast usando links TXT",
+      "source": "/root/mgs-agent/work/sb-broadcast-23-30-20260716/plan.json",
+      "state": "preflight validado: 85 templates/85 backups/85 csvs; canários financeadx ca-fr 30 sem página e ducapes finance 30 com página aplicados, core validado ao vivo; sequência run approval→update→save comprovada.",
       "thread_id": "1527356568578818198",
-      "updated_at": "2026-07-16T20:44:34+00:00"
+      "updated_at": "2026-07-16T21:16:36+00:00"
     },
     {
       "agent": "zeus",
@@ -32,5 +32,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T21:12:24+00:00"
+  "updated_at": "2026-07-16T21:16:36+00:00"
 }

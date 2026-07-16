@@ -11,7 +11,7 @@ Validated workflow:
   blocked/down, or the segurador/Facebook profile can be down while the page
   is still public. Never restore Blocked -> Broadcast from public FB URL alone.
 """
-import argparse, asyncio, csv, html, importlib.util, io, json, os, re, subprocess, sys, tempfile, unicodedata, urllib.error, urllib.parse, urllib.request
+import argparse, asyncio, csv, fcntl, html, importlib.util, io, json, os, re, subprocess, sys, tempfile, unicodedata, urllib.error, urllib.parse, urllib.request
 from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
@@ -32,6 +32,10 @@ TARGET_CHANNEL_ID='1522442220903337984'
 OP_RESOLVER_PATH=BASE_DIR/'scripts/mgs-op-item-resolver.py'
 REPORT_SHEET_ID='1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI'
 REPORT_SHEET_URL=f'https://docs.google.com/spreadsheets/d/{REPORT_SHEET_ID}/edit?gid=0#gid=0'
+REPORT_TOTAL_TAB='Paginas Totais'
+REPORT_SUMMARY_TAB='Resumo'
+REPORT_LEGACY_TOTAL_TAB='Paginas'
+REPORT_SHEET_LOCK=Path('/var/lock/sb-restricted-sheet-writer.lock')
 GOOGLE_TOKEN_FILE=BASE_DIR/'.secrets/ares-google-drive-oauth-client.json'
 GLOBAL_IGNORE_PATH=BASE_DIR/'data/mgs-global-page-ignore-list.json'
 
@@ -388,6 +392,13 @@ def globally_ignored_page(row, fb_keys, bot_page_keys):
     return bool((fb and fb in fb_keys) or (bot and page_id and (bot,page_id) in bot_page_keys))
 
 def restricted_sheet_rows(sb_rows, active_users, tday):
+    """Return every active restriction that must be tracked in the report Sheet.
+
+    Broadcast remains the operational headline metric, but any other active
+    restriction that can generate a transition alert (for example Campaign)
+    must also exist in Paginas Totais and the corresponding site tab. On-hold
+    and Blocked stay visible only as excluded counters and never become rows.
+    """
     active_users={norm_email(user) for user in active_users if norm_email(user)}
     fb_ignore, bot_page_ignore=load_global_ignore_keys()
     scoped=[]; globally_ignored=0
@@ -401,8 +412,10 @@ def restricted_sheet_rows(sb_rows, active_users, tday):
     restricted=[row for row in scoped if active_restricted(row,tday)]
     broadcast=[row for row in restricted if norm(row.get('STATUS')).lower()=='broadcast']
     on_hold=[row for row in restricted if norm(row.get('STATUS')).lower()=='on-hold']
+    blocked=[row for row in restricted if norm(row.get('STATUS')).lower()=='blocked']
+    included=[row for row in restricted if norm(row.get('STATUS')).lower() not in {'on-hold','blocked'}]
     output=[]
-    for row in broadcast:
+    for row in included:
         fb=norm(row.get('FB_PAGE_ID'))
         notes=norm(row.get('NOTES'))
         codes=[code for code in DELIVERY_ERROR_NOTE_CODES if re.search(r'(?<![\w#])'+re.escape(code)+r'(?![\w#])',notes,re.I)]
@@ -420,13 +433,15 @@ def restricted_sheet_rows(sb_rows, active_users, tday):
         })
     output.sort(key=lambda row:(row.get('data saida') or '9999-99-99',row.get('nome da pagina') or '',row.get('bot user') or ''))
     return output, {
-        'sheet_scope':'active restricted pages with Status SB = Broadcast',
+        'sheet_scope':'all active restricted pages except On-hold/Blocked; Broadcast reported separately',
         'sheet_rows_scoped':len(scoped),
         'sheet_global_ignored':globally_ignored,
         'sheet_restricted_total':len(restricted),
+        'sheet_rows_included':len(included),
         'sheet_broadcast_restricted':len(broadcast),
         'sheet_on_hold_excluded':len(on_hold),
-        'sheet_other_status_excluded':len(restricted)-len(broadcast)-len(on_hold),
+        'sheet_blocked_excluded':len(blocked),
+        'sheet_other_status_included':len(included)-len(broadcast),
     }
 
 def public_row(r):
@@ -688,6 +703,9 @@ def build_no_new_restrictions_alert(summary):
     return '```\n'+'\n'.join(lines)+'\n```\n\n**Planilha completa:** <'+str(summary.get('sheet') or REPORT_SHEET_URL)+'>'
 
 def build_operational_summary_alerts(rows, summary, limit=1900):
+    # Discord operational summary remains strictly Broadcast, even though the
+    # report Sheet also tracks alertable Campaign/other active restrictions.
+    rows=[row for row in rows if norm(row.get('status sb')).lower()=='broadcast']
     page_counts=Counter()
     sites_by_date=defaultdict(set)
     for row in rows:
@@ -808,7 +826,7 @@ def site_tab_title(site):
     return title[:100]
 
 def build_report_datasets(rows, page_headers):
-    datasets={'Paginas':[page_headers]+[[row.get(header,'') for header in page_headers] for row in rows]}
+    datasets={REPORT_TOTAL_TAB:[page_headers]+[[row.get(header,'') for header in page_headers] for row in rows]}
     title_to_site={}
     grouped=defaultdict(list)
     for row in rows:
@@ -821,6 +839,36 @@ def build_report_datasets(rows, page_headers):
     for title in sorted(grouped,key=str.lower):
         datasets[title]=[page_headers]+[[row.get(header,'') for header in page_headers] for row in grouped[title]]
     return datasets
+
+
+def build_summary_dataset(rows, sheet_stats, updated_at=None):
+    updated_at=updated_at or datetime.now(NY)
+    page_counts=Counter()
+    sites_by_date=defaultdict(set)
+    for row in rows:
+        exit_date=norm(row.get('data saida')) or '?'
+        page_counts[exit_date]+=1
+        sites_by_date[exit_date].update(
+            item.strip() for item in norm(row.get('sites')).split(',')
+            if item.strip() and item.strip()!='?'
+        )
+    values=[
+        ['Páginas Restritas — Resumo'],
+        ['Atualizado em',updated_at.strftime('%Y-%m-%d %H:%M %Z')],
+        [],
+        ['Broadcast restritas',int((sheet_stats or {}).get('sheet_broadcast_restricted',0) or 0)],
+        ['Outras restritas ativas',int((sheet_stats or {}).get('sheet_other_status_included',0) or 0)],
+        ['On-hold ignoradas',int((sheet_stats or {}).get('sheet_on_hold_excluded',0) or 0)],
+        [],
+        ['Data de Saída','Páginas','Sites'],
+    ]
+    for exit_date in sorted(page_counts):
+        values.append([
+            exit_date,
+            page_counts[exit_date],
+            ', '.join(sorted(sites_by_date[exit_date],key=site_sort_key)),
+        ])
+    return values
 
 def report_page_identity(row):
     bot_user=norm_email(row.get('bot user'))
@@ -870,24 +918,43 @@ def plan_incremental_report_updates(desired_datasets, existing_datasets, page_he
     return expected,updates
 
 def ensure_report_tabs(access_token, required_titles):
+    """Ensure all managed tabs exist and Resumo is immediately left of Paginas Totais."""
     base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
     meta=sheets_api(access_token,'GET',base+'?fields=sheets.properties')
     props=[item['properties'] for item in meta.get('sheets',[])]
     by_title={item['title']:item for item in props}
     requests=[]
-    if 'Paginas' not in by_title:
+    if REPORT_TOTAL_TAB not in by_title:
+        legacy=by_title.get(REPORT_LEGACY_TOTAL_TAB)
         default=by_title.get('Sheet1')
-        if default:
-            requests.append({'updateSheetProperties':{'properties':{'sheetId':default['sheetId'],'title':'Paginas'},'fields':'title'}})
+        if legacy:
+            requests.append({'updateSheetProperties':{'properties':{'sheetId':legacy['sheetId'],'title':REPORT_TOTAL_TAB},'fields':'title'}})
+        elif default:
+            requests.append({'updateSheetProperties':{'properties':{'sheetId':default['sheetId'],'title':REPORT_TOTAL_TAB},'fields':'title'}})
         else:
-            requests.append({'addSheet':{'properties':{'title':'Paginas'}}})
+            requests.append({'addSheet':{'properties':{'title':REPORT_TOTAL_TAB}}})
+    if REPORT_SUMMARY_TAB not in by_title:
+        requests.append({'addSheet':{'properties':{'title':REPORT_SUMMARY_TAB,'index':0}}})
     for title in required_titles:
-        if title!='Paginas' and title not in by_title:
+        if title not in {REPORT_TOTAL_TAB,REPORT_SUMMARY_TAB} and title not in by_title:
             requests.append({'addSheet':{'properties':{'title':title}}})
     if requests:
         sheets_api(access_token,'POST',base+':batchUpdate',{'requests':requests})
         meta=sheets_api(access_token,'GET',base+'?fields=sheets.properties')
-    return {item['properties']['title']:item['properties'] for item in meta.get('sheets',[])}
+        props=[item['properties'] for item in meta.get('sheets',[])]
+        by_title={item['title']:item for item in props}
+    if REPORT_SUMMARY_TAB not in by_title or REPORT_TOTAL_TAB not in by_title:
+        raise RuntimeError('Google Sheets não contém Resumo e Paginas Totais após criação')
+    if by_title[REPORT_SUMMARY_TAB].get('index')+1 != by_title[REPORT_TOTAL_TAB].get('index'):
+        sheets_api(access_token,'POST',base+':batchUpdate',{'requests':[
+            {'updateSheetProperties':{'properties':{'sheetId':by_title[REPORT_SUMMARY_TAB]['sheetId'],'index':by_title[REPORT_TOTAL_TAB]['index']},'fields':'index'}}
+        ]})
+        meta=sheets_api(access_token,'GET',base+'?fields=sheets.properties')
+        props=[item['properties'] for item in meta.get('sheets',[])]
+        by_title={item['title']:item for item in props}
+    if by_title[REPORT_SUMMARY_TAB].get('index')+1 != by_title[REPORT_TOTAL_TAB].get('index'):
+        raise RuntimeError('Resumo não ficou imediatamente à esquerda de Paginas Totais')
+    return by_title
 
 def write_google_sheet(rows):
     access_token=google_access_token()
