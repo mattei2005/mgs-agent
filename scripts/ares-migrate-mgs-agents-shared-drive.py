@@ -327,11 +327,21 @@ def main() -> int:
 
         checkpoint['phase'] = 'validate'
         atomic_json(CHECKPOINT, checkpoint)
-        target_tree = list_tree(drive, TARGET_DRIVE)
-        target_folders = [x for x in target_tree if x['mimeType'] == FOLDER_MIME]
-        target_files = [x for x in target_tree if x['mimeType'] != FOLDER_MIME]
+        target_tree = []
+        target_folders = []
+        target_files = []
+        for consistency_attempt in range(1, 7):
+            target_tree = list_tree(drive, TARGET_DRIVE)
+            target_folders = [x for x in target_tree if x['mimeType'] == FOLDER_MIME]
+            target_files = [x for x in target_tree if x['mimeType'] != FOLDER_MIME]
+            if len(target_tree) == 1443 and len(target_folders) == 304 and len(target_files) == 1139:
+                break
+            if consistency_attempt < 6:
+                wait = 5 * consistency_attempt
+                event('validation_consistency_retry', attempt=consistency_attempt, wait_seconds=wait, items=len(target_tree), folders=len(target_folders), files=len(target_files))
+                time.sleep(wait)
         if len(target_tree) != 1443 or len(target_folders) != 304 or len(target_files) != 1139:
-            raise RuntimeError(f'target count mismatch: items={len(target_tree)} folders={len(target_folders)} files={len(target_files)}')
+            raise RuntimeError(f'target count mismatch after consistency retries: items={len(target_tree)} folders={len(target_folders)} files={len(target_files)}')
         if sum(int(x.get('size') or 0) for x in target_files) != 4882460554:
             raise RuntimeError('target total byte count mismatch')
         mapped_targets = set(checkpoint['folder_map'].values()) - {TARGET_DRIVE}
@@ -377,7 +387,7 @@ def main() -> int:
             'moved_file_count': sum(1 for x in checkpoint['file_map'].values() if x['action'] == 'MOVE_PRESERVE_ID'),
             'copied_file_count': sum(1 for x in checkpoint['file_map'].values() if x['action'] == 'COPY_NEW_ID'),
             'copy_policy': 'External-owner originals remain under the old MGS-AGENTS tree, which was moved intact into a My Drive backup container after destination validation.',
-            'artifacts': {'folder_map': 'folder-map.json', 'file_map': 'file-map.json', 'target-tree.json': 'target-tree.json'}
+            'artifacts': {'folder_map': 'folder-map.json', 'file_map': 'file-map.json', 'target_tree': 'target-tree.json'}
         }
         atomic_json(final_dir / 'migration-report.json', final_report)
         atomic_json(final_dir / 'folder-map.json', checkpoint['folder_map'])

@@ -18,16 +18,16 @@ fora_de_escopo         Pedido pertence o Ares, Atena, Zeus ou humano.
 Não marque como `aprovado` ou `pronto_para_ares` se não houver aprovação explícita ou se o asset final não estiver definido.
 ## Drive/Canva — reestruturação multivertical
 
-Pasta raiz operacional atual validada no Drive:
+Shared Drive raiz operacional atual validado por readback:
 
 ```text
 MGS-AGENTS
-https://drive.google.com/drive/folders/14ica5TVauTrzAxcl4T-ViJorF89vRKIl
+https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
 └── CRIATIVOS
     └── {OPERAÇÃO}/{IMG|VID}/{STATUS}
 ```
 
-Correção importante validada em 2026-07-02: o ID `14ica5TVauTrzAxcl4T-ViJorF89vRKIl` resolve para `MGS-AGENTS`, não para uma pasta direta `MGS-CRIATIVOS`. Não criar operações (`CAR_BR_PT`, `CC_US_ES`, etc.) como filhas diretas de `MGS-AGENTS`; criar/mover sempre dentro de `MGS-AGENTS/CRIATIVOS`.
+Migração concluída em 2026-07-15/16: o root canônico é o Shared Drive `0AEwt4Ye690ocUk9PVA`. O ID anterior `14ica5TVauTrzAxcl4T-ViJorF89vRKIl` permanece somente na árvore de backup do My Drive. Não criar operações (`CAR_BR_PT`, `CC_US_ES`, etc.) como filhas diretas de `MGS-AGENTS`; criar/mover sempre dentro de `MGS-AGENTS/CRIATIVOS`.
 
 Regra de REPORT-INFRA para mudanças de skill/script/data/config feitas pelo Ares: não declarar “enviei o REPORT-INFRA” com base apenas em intenção. Primeiro executar o envio real pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh` ou, se usar fallback textual, validar HTTP 204 e confirmar via Discord API que a mensagem aparece em `#alerts-infra` (`1498132022634483894`) antes de afirmar na thread original. Não usar scripts com nome de outro agente como caminho padrão (`ares-report-infra.sh`) quando houver helper canônico MGS.
 

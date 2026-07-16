@@ -27,7 +27,7 @@ https://docs.google.com/spreadsheets/d/1ujiUCCSizcQjKnUAgEa7eXzSPdGPCHaJKJrm9Pbh
 - Linhas de dados: 485
 - Colunas: 17
 - Fonte local: `/root/mgs-agent/data/content-reference-map/financeadx/financeadx_rec_map.csv`
-- Pasta Drive: `1Ac2-b6PQKOO46tQI7kAgmg2_mdegC-OF`
+- Pasta Shared Drive: `1NSmiobgjHH4IrfiYViSqK81Eg9psYqB0`
 
 ## Observações técnicas
 

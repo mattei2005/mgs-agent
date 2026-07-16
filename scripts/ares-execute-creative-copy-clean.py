@@ -32,7 +32,7 @@ from typing import Any
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding, rsa
 
-DEFAULT_ROOT_FOLDER_ID = "14ica5TVauTrzAxcl4T-ViJorF89vRKIl"
+DEFAULT_ROOT_FOLDER_ID = "0AEwt4Ye690ocUk9PVA"
 ROOT_FOLDER_ID = os.environ.get("ARES_DRIVE_ROOT_FOLDER_ID", DEFAULT_ROOT_FOLDER_ID)
 OP_ITEM = os.environ.get("ARES_DRIVE_OP_ITEM", "Google Service Account - Ares Drive")
 OAUTH_OP_ITEM = os.environ.get("ARES_DRIVE_OAUTH_OP_ITEM", "Google OAuth - Ares Drive")

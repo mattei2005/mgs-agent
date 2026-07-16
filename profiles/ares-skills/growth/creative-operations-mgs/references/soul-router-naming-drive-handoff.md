@@ -44,18 +44,19 @@ Não coloque tamanho/dimensão no nome. Dimensão, aspect ratio e placement fica
 
 ## Drive/Canva — multivertical
 
-Pasta raiz oficial informada por Rodolfo:
+Shared Drive raiz oficial atual:
 
 ```text
-MGS-CRIATIVOS
-https://drive.google.com/drive/folders/14ica5TVauTrzAxcl4T-ViJorF89vRKIl
+MGS-AGENTS
+https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
+└── CRIATIVOS
 ```
 
 Estrutura de referência por vertical/operação. `CC_US_ES` é o exemplo/piloto; outras verticais devem usar a pasta correta existente no Drive e seguir o mesmo princípio:
 
 ```text
-MGS-CRIATIVOS/
-├── UPLOAD CANVAS
+MGS-AGENTS/CRIATIVOS/
+├── UPLOAD MANUAL
 └── CC_US_ES/
     ├── IMG/
     │   ├── 01_READY
