@@ -1,0 +1,103 @@
+{
+  "generated_at_utc": "2026-07-16T01:58:10.101683+00:00",
+  "status": "PASS",
+  "checks": {
+    "backup_container_removed_or_trashed": true,
+    "old_source_removed_or_trashed": true,
+    "target_items": true,
+    "target_folders": true,
+    "target_files": true,
+    "target_bytes": true,
+    "direct_children_exact": true,
+    "kelly_destination": true,
+    "evo_destination": true
+  },
+  "old_my_drive": {
+    "source_root": {
+      "http": 200,
+      "item": {
+        "id": "14ica5TVauTrzAxcl4T-ViJorF89vRKIl",
+        "name": "MGS-AGENTS",
+        "mimeType": "application/vnd.google-apps.folder",
+        "trashed": true,
+        "explicitlyTrashed": false,
+        "parents": [
+          "16R-2mGJo3zeXRGZUWs6EerIlWFERT3DG"
+        ],
+        "owners": [
+          {
+            "displayName": "Rodolfo Mattei",
+            "emailAddress": "mattei2005@gmail.com"
+          }
+        ],
+        "ownedByMe": true
+      }
+    },
+    "backup_container": {
+      "http": 200,
+      "item": {
+        "id": "16R-2mGJo3zeXRGZUWs6EerIlWFERT3DG",
+        "name": "_MGS-AGENTS_MIGRATION_BACKUP_20260716T003345Z",
+        "mimeType": "application/vnd.google-apps.folder",
+        "trashed": true,
+        "explicitlyTrashed": true,
+        "parents": [
+          "0AEK1IDaqSuDlUk9PVA"
+        ],
+        "owners": [
+          {
+            "displayName": "Rodolfo Mattei",
+            "emailAddress": "mattei2005@gmail.com"
+          }
+        ],
+        "ownedByMe": true
+      }
+    },
+    "all_external_originals": {
+      "total": 104,
+      "http_200": 104,
+      "http_404": 0,
+      "trashed_true": 0,
+      "explicitly_trashed_true": 0,
+      "no_parents": 0
+    },
+    "kelly_originals": {
+      "total": 23,
+      "http_200": 23,
+      "http_404": 0,
+      "trashed_true": 0,
+      "explicitly_trashed_true": 0,
+      "no_parents": 0
+    },
+    "evo_originals": {
+      "total": 81,
+      "http_200": 81,
+      "http_404": 0,
+      "trashed_true": 0,
+      "explicitly_trashed_true": 0,
+      "no_parents": 0
+    }
+  },
+  "shared_drive": {
+    "items": 1443,
+    "folders": 304,
+    "files": 1139,
+    "bytes": 4882460554,
+    "direct_children": [
+      "Atena - Content Reference Maps",
+      "CRIATIVOS",
+      "Meta Utility Templates",
+      "pipeline gastos x receitas"
+    ],
+    "kelly_destination": {
+      "total": 23,
+      "validated": 23,
+      "mismatches": []
+    },
+    "evo_destination": {
+      "total": 81,
+      "validated": 81,
+      "mismatches": []
+    }
+  }
+}
