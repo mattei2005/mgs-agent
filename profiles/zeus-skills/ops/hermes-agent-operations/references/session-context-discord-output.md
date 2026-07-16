@@ -58,18 +58,28 @@ display:
   platforms:
     discord:
       tool_progress: all
+      interim_assistant_messages: true
       cleanup_progress: true
 ```
+
+Há três superfícies independentes que devem ser diagnosticadas separadamente:
+
+1. `typing_indicator` — indicador nativo “digitando…”; default resolvido `true` quando omitido.
+2. `tool_progress` — breadcrumbs de ferramentas, como leitura, terminal e chamadas de API.
+3. `interim_assistant_messages` — mensagens naturais de andamento emitidas pelo assistente enquanto ainda executa.
+
+Se Rodolfo disser que só vê “digitando…” e não vê o progresso, **não encerrar o diagnóstico ao encontrar `tool_progress: all`**. Verificar `interim_assistant_messages`: ele pode estar `false` enquanto typing e ferramentas continuam habilitados. Um smoke HTTP 204 no endpoint `/typing` prova apenas a superfície 1; não valida as superfícies 2 ou 3.
 
 Regras operacionais:
 
 - Aplicar nos quatro profiles vivos e nos quatro mirrors versionados; não corrigir apenas Zeus.
-- Uma reclamação de Rodolfo sobre comandos brutos, blocos de terminal ou poluição técnica **não autoriza desligar o acompanhamento ao vivo**. Preservar `tool_progress: all`; corrigir a apresentação, reduzir previews e rotear detalhes extensos para logs/`#alerts-infra` sem remover a visibilidade de progresso.
-- Em refactors/sincronizações YAML, preservar semanticamente `all`; não normalizar para `false` como efeito colateral de formatação.
-- Validar `config check` 4/4 e readback live+mirror 8/8.
-- Confirmar o hot-read no resolver/runtime e fazer smoke real no próximo turno; reiniciar com Zeus por último somente se a versão implantada exigir ou o smoke falhar.
-- `cleanup_progress: true` pode remover as mensagens transitórias no fim; isso é compatível com a preferência, desde que o progresso apareça durante a execução.
-- Não confundir progresso resumido das ferramentas com despejo de logs brutos; outputs extensos continuam reduzidos na origem.
+- Para restaurar acompanhamento completo no Discord, preservar `tool_progress: all` e definir `display.platforms.discord.interim_assistant_messages: true` como booleano real pelo writer canônico.
+- Uma reclamação de Rodolfo sobre comandos brutos, blocos de terminal ou poluição técnica **não autoriza desligar o acompanhamento ao vivo**. Preservar o progresso; corrigir a apresentação, reduzir previews e rotear detalhes extensos para logs/`#alerts-infra` sem remover a visibilidade.
+- Em refactors/sincronizações YAML, preservar semanticamente `all` e o booleano `true`; não normalizar para `false` como efeito colateral de formatação.
+- Validar `config check` 4/4, readback live+mirror 8/8 com tipo e valor, e o resolver de runtime 4/4.
+- Confirmar o hot-read no resolver/runtime e fazer smoke real no próximo turno; `interim_assistant_messages` e o display do Discord são relidos por turno no runtime atual, então não reiniciar apenas para essa alteração. Reiniciar com Zeus por último somente se a versão implantada exigir ou o smoke falhar.
+- `cleanup_progress: true` pode remover mensagens transitórias no fim; isso é compatível com a preferência. A ausência delas no histórico após a resposta não prova que faltaram durante o turno — validar durante uma execução real ou por telemetria apropriada.
+- Não confundir progresso resumido das ferramentas ou do assistente com despejo de logs brutos; outputs extensos continuam reduzidos na origem.
 
 ## Discord — suprimir previews automáticos de links
 
