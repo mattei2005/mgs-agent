@@ -90,6 +90,9 @@
     this.started = false;
     this.botName = null;
     this.botPhoto = null;
+    this.smsLeadCaptured = false;
+    this.smsLeadSubmitting = false;
+    this.smsFormStartedAt = Date.now();
   }
 
   ChatFunnel.prototype.init = function () {
@@ -218,10 +221,31 @@
       final.appendChild(el('div', 'mgs-cf-gate-icon', gate.final_icon || '💬'));
       final.appendChild(el('p', 'mgs-cf-gate-title', gate.final_title || 'Oferta encontrada!'));
       final.appendChild(el('p', 'mgs-cf-gate-subtitle', gate.final_subtitle || 'Um especialista foi identificado para te atender agora.'));
+      if (self.config.sms_enabled) {
+        var smsForm = el('div', 'mgs-cf-sms-form');
+        var nameLabel = el('label', '', self.config.sms_name_label || 'Nome');
+        var nameInput = el('input');
+        nameInput.type = 'text'; nameInput.autocomplete = 'name'; nameInput.maxLength = 200; nameInput.placeholder = 'Digite seu nome'; nameInput.id = 'mgs-cf-sms-name';
+        nameLabel.setAttribute('for', nameInput.id);
+        var phoneLabel = el('label', '', self.config.sms_phone_label || 'Telefone');
+        var phoneInput = el('input');
+        phoneInput.type = 'tel'; phoneInput.inputMode = 'numeric'; phoneInput.autocomplete = 'tel'; phoneInput.maxLength = 20; phoneInput.placeholder = '(11) 99999-9999'; phoneInput.id = 'mgs-cf-sms-phone';
+        phoneLabel.setAttribute('for', phoneInput.id);
+        phoneInput.addEventListener('input', function () { this.value = self.formatSmsPhone(this.value); });
+        var websiteInput = el('input'); websiteInput.type = 'text'; websiteInput.id = 'mgs-cf-sms-website'; websiteInput.tabIndex = -1; websiteInput.setAttribute('aria-hidden', 'true');
+        var smsError = el('p', 'mgs-cf-sms-error'); smsError.id = 'mgs-cf-sms-error'; smsError.setAttribute('role', 'alert');
+        smsForm.appendChild(nameLabel); smsForm.appendChild(nameInput); smsForm.appendChild(phoneLabel); smsForm.appendChild(phoneInput); smsForm.appendChild(websiteInput); smsForm.appendChild(smsError);
+        final.appendChild(smsForm);
+      }
       var cta = el('button', 'mgs-cf-gate-cta', gate.cta_label || 'VER OFERTAS →');
-      applyRewardedClass(self.config, cta);
+      if (!self.config.sms_enabled) applyRewardedClass(self.config, cta);
       cta.type = 'button';
       cta.addEventListener('click', function () {
+        if (self.config.sms_enabled && !self.smsLeadCaptured) {
+          self.submitSmsLead(cta);
+          return;
+        }
+        applyRewardedClass(self.config, cta);
         cta.disabled = true;
         showRewardedThen(self.config, function () {
           overlay.remove();
@@ -234,6 +258,43 @@
     }
 
     drawQuestion();
+  };
+
+  ChatFunnel.prototype.formatSmsPhone = function (value) {
+    var digits = String(value || '').replace(/\D/g, '').slice(0, 11);
+    if (digits.length <= 2) return digits;
+    if (digits.length <= 6) return '(' + digits.slice(0, 2) + ') ' + digits.slice(2);
+    if (digits.length <= 10) return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 6) + '-' + digits.slice(6);
+    return '(' + digits.slice(0, 2) + ') ' + digits.slice(2, 7) + '-' + digits.slice(7);
+  };
+
+  ChatFunnel.prototype.smsError = function (message) {
+    var node = this.root.querySelector('#mgs-cf-sms-error');
+    if (node) node.textContent = message || '';
+  };
+
+  ChatFunnel.prototype.submitSmsLead = function (cta) {
+    var self = this;
+    if (this.smsLeadSubmitting || this.smsLeadCaptured) return;
+    var nameInput = this.root.querySelector('#mgs-cf-sms-name');
+    var phoneInput = this.root.querySelector('#mgs-cf-sms-phone');
+    var websiteInput = this.root.querySelector('#mgs-cf-sms-website');
+    var name = nameInput ? nameInput.value.trim() : '';
+    var phone = phoneInput ? phoneInput.value.replace(/\D/g, '') : '';
+    if (name.length < 2) { this.smsError('Digite seu nome.'); if (nameInput) nameInput.focus(); return; }
+    if (phone.length < 10) { this.smsError('Digite um telefone válido com DDD.'); if (phoneInput) phoneInput.focus(); return; }
+    this.smsError(''); this.smsLeadSubmitting = true; cta.disabled = true; cta.textContent = 'ENVIANDO...';
+    var params = new URLSearchParams(window.location.search); var extra = {};
+    params.forEach(function (value, key) { extra[key] = value; });
+    var payload = { chat_id: this.config.id, route: this.config.route, name: name, phone: phone, website: websiteInput ? websiteInput.value : '', ts: this.smsFormStartedAt, extra: extra };
+    ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','fbclid','gclid'].forEach(function (key) { payload[key] = params.get(key) || ''; });
+    fetch(this.config.sms_rest_url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, credentials: 'same-origin', body: JSON.stringify(payload) })
+      .then(function (response) { return response.json().catch(function () { return {}; }).then(function (data) { return { response: response, data: data }; }); })
+      .then(function (result) {
+        if (!result.response.ok || !result.data.ok) throw new Error(result.data.error || 'Não foi possível enviar. Tente novamente.');
+        self.smsLeadCaptured = true; self.smsLeadSubmitting = false; cta.disabled = false; cta.textContent = (self.config.gate && self.config.gate.cta_label) || self.config.sms_submit_label || 'TRANSFERIR PARA ESPECIALISTA →'; cta.click();
+      })
+      .catch(function (error) { self.smsLeadSubmitting = false; cta.disabled = false; cta.textContent = (self.config.gate && self.config.gate.cta_label) || self.config.sms_submit_label || 'TRANSFERIR PARA ESPECIALISTA →'; self.smsError(error && error.message ? error.message : 'Não foi possível enviar. Tente novamente.'); });
   };
 
   ChatFunnel.prototype.showInlineAd = function () {

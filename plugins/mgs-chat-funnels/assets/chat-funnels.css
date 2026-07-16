@@ -285,6 +285,52 @@ body.mgs-chat-funnel-page {
   text-align: center;
 }
 
+.mgs-cf-sms-form {
+  display: grid;
+  gap: 7px;
+  margin: 0 0 16px;
+  text-align: left;
+}
+
+.mgs-cf-sms-form label {
+  color: #344054;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mgs-cf-sms-form input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  background: #fff;
+  color: #101828;
+  font: 500 16px/1.3 Roboto, "Segoe UI", sans-serif;
+  outline: none;
+}
+
+.mgs-cf-sms-form input:focus {
+  border-color: #075e54;
+  box-shadow: 0 0 0 3px rgba(7,94,84,.12);
+}
+
+#mgs-cf-sms-website {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+}
+
+.mgs-cf-sms-error {
+  min-height: 18px;
+  margin: 2px 0 0;
+  color: #b42318;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .mgs-cf-gate-question {
   margin: 0 0 25px;
   font-size: 22px;

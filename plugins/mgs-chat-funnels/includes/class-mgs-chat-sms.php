@@ -131,7 +131,16 @@ final class MGS_Chat_SMS {
             }
             $saved[ $code ] = array( 'code' => $code, 'label' => $label, 'url' => $url );
         }
-        update_option( self::SMS_OPTION, $saved, false );
+        $before = get_option( self::SMS_OPTION, array() );
+        if ( $before !== $saved && ! update_option( self::SMS_OPTION, $saved, false ) ) {
+            wp_safe_redirect( admin_url( 'admin.php?page=mgs-chat-funnels-sms&sms_error=db' ) );
+            exit;
+        }
+        $readback = get_option( self::SMS_OPTION, array() );
+        if ( $readback !== $saved ) {
+            wp_safe_redirect( admin_url( 'admin.php?page=mgs-chat-funnels-sms&sms_error=readback' ) );
+            exit;
+        }
         wp_safe_redirect( admin_url( 'admin.php?page=mgs-chat-funnels-sms&saved=1' ) );
         exit;
     }

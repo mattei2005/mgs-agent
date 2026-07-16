@@ -143,6 +143,7 @@ final class MGS_Chat_Funnels {
             '{{GATE_QUESTION_COUNT_JS}}' => (string) $this->gate_question_count($config),
             '{{SMS_FORM_HTML}}' => MGS_Chat_SMS::form_html($config),
             '{{SMS_CONFIG_JS}}' => MGS_Chat_SMS::template_js_config($config),
+            '{{SMS_CTA_LABEL}}' => esc_html($config['sms_submit_label'] ?? 'TRANSFERIR PARA ESPECIALISTA →'),
             '{{JBF_REWARDED_PRELOAD_JS}}' => $ad_provider === 'jbf' ? "window.jbftag = window.jbftag || { cmd: [] };\n          window.jbftag.cmd.push(() => {\n            if (window.jbftag.requestRewardAds) {\n              window.jbftag.requestRewardAds();\n            }\n          });" : '',
             '{{JBF_REWARDED_SHOW_JS}}' => $ad_provider === 'jbf' ? "try {\n              window.jbftag = window.jbftag || { cmd: [] };\n              window.jbftag.cmd.push(() => {\n                if (window.jbftag.showRewardedAds) {\n                  window.jbftag.showRewardedAds(safeCloseQuiz);\n                } else {\n                  safeCloseQuiz();\n                }\n              });\n            } catch (err) {\n              safeCloseQuiz();\n            }" : '',
 

@@ -3,12 +3,12 @@
     {
       "agent": "zeus",
       "id": "chat-sms-canary-eggbev-20260716",
-      "next_step": "Comparar MGS Chat Funnels local/remoto e reutilizar o contrato de lead/SMS do plugin de quiz antes do patch",
+      "next_step": "Executar fixture WordPress/JS, testes de API e validar que o fluxo antigo permanece inalterado antes do deploy",
       "objective": "Criar variante chat-sms com captura SMS, links por gestor e relatórios, validada primeiro no Eggbev",
-      "source": "discord:message:1527431443024711883",
-      "state": "preflight: escopo autorizado; runtime e referências em auditoria",
+      "source": "/root/mgs-agent/plugins/mgs-chat-funnels",
+      "state": "build local: plugin 0.4.0 com schema, rest, captura no gate, menu sms, leads, relatório e csv; lint php aprovado",
       "thread_id": "1527428793600315533",
-      "updated_at": "2026-07-16T21:48:17+00:00"
+      "updated_at": "2026-07-16T21:56:43+00:00"
     },
     {
       "agent": "zeus",
@@ -42,5 +42,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T21:48:17+00:00"
+  "updated_at": "2026-07-16T21:56:43+00:00"
 }
