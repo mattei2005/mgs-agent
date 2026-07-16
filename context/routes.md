@@ -186,6 +186,17 @@ Fluxo resumido para site novo:
 7. Campanhas iniciam conforme estratégia de tráfego.
 ```
 
+## Alertas de capacidade Hermes
+
+```text
+Evento                         Canal         ID
+-----------------------------  ------------  -------------------
+USER/MEMORY >=90%              #limites-90   1527401973698007060
+REPORT-INFRA da mudança        #alerts-infra 1498132022634483894
+```
+
+O monitor informa Rodolfo e gera proposta before/after somente leitura no limiar de 90%. A proposta nunca é aplicada automaticamente; alteração de USER/MEMORY continua exigindo aprovação explícita. O Discord recebe apenas metadata e ID da proposta, nunca o conteúdo da memória.
+
 ## Escalar para Zeus
 
 Escalar para Zeus quando houver:

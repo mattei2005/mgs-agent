@@ -113,6 +113,10 @@ class PendingMonitorTests(unittest.TestCase):
         self.assertEqual(decision["action"], "error")
         self.assertEqual(updated["aged_ids"], ["zeus/skills/a1"])
 
+    def test_default_alert_channel_is_limites_90(self):
+        args = monitor._parser().parse_args([])
+        self.assertEqual(args.channel_id, "1527401973698007060")
+
     def test_capacity_exactly_90_percent_warns_by_default_without_content(self):
         self.memory_store("zeus", "MEMORY.md", 900, memory_limit=1000)
         summary = monitor.scan_pending(self.root, now_epoch=self.now)

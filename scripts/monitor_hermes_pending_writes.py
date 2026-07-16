@@ -24,7 +24,7 @@ import yaml
 DEFAULT_PROFILES_ROOT = Path("/root/.hermes/profiles")
 DEFAULT_STATE = Path("/root/mgs-agent/data/hermes-pending-write-monitor-state.json")
 DEFAULT_POSTER = Path("/root/mgs-agent/scripts/discord-bot-post.py")
-DEFAULT_CHANNEL = "1498132022634483894"
+DEFAULT_CHANNEL = "1527401973698007060"
 PROFILES = ("zeus", "atena", "ares")
 SUBSYSTEMS = ("memory", "skills")
 RODOLFO = "344196393512075265"
