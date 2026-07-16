@@ -1,0 +1,45 @@
+{
+  "generated_at_utc": "2026-07-16T00:17:27.879605+00:00",
+  "status": "INVENTORIED",
+  "scope": {
+    "root_id": "14ica5TVauTrzAxcl4T-ViJorF89vRKIl",
+    "root_name": "MGS-AGENTS",
+    "path": "MGS-AGENTS",
+    "target_drive_id": "0AEwt4Ye690ocUk9PVA",
+    "preserve_exact_folder_structure": true
+  },
+  "counts": {
+    "items": 1443,
+    "files": 1139,
+    "folders": 304,
+    "bytes": 4882460554,
+    "md5_files": 1134,
+    "google_native_files": 5
+  },
+  "migration_actions": {
+    "RECREATE_NEW_ID": 304,
+    "MOVE_PRESERVE_ID": 1035,
+    "COPY_NEW_ID": 104
+  },
+  "by_owner": {
+    "Rodolfo Mattei": 1335,
+    "criativosevo": 81,
+    "kellynscaraujo": 23,
+    "ares-drive": 4
+  },
+  "by_mime": {
+    "video/mp4": 856,
+    "image/png": 238,
+    "image/jpeg": 32,
+    "application/vnd.google-apps.spreadsheet": 5,
+    "application/json": 3,
+    "text/plain": 3,
+    "video/quicktime": 2
+  },
+  "rules": {
+    "folder_structure": "Recreate MGS-AGENTS and every descendant folder with identical names/paths under Shared Drive; map every old folder ID to new folder ID.",
+    "file_move": "Move individual files when canMoveItemIntoTeamDrive=true to preserve file ID and checksum.",
+    "file_copy": "Copy when move is blocked; verify size/hash and map old ID to new ID.",
+    "source_safety": "Do not remove source until full readback and approval."
+  }
+}
