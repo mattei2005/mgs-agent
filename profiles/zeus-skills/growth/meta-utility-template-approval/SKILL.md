@@ -18,6 +18,8 @@ Production rollout reference: `references/linked-production-rollout-from-approve
 
 23/30 link-bank normalization: `references/broadcast-template-23-30-link-bank-rollout.md` captures full-scope account reconciliation, `PAGES`-based 23/30 targets, one-time replacement of every linked non-green slot, generation-and-bank feedback when unique approved copy is insufficient, exact link-slot handling, and Rodolfo's corrected `Run Approval → Update → Save → readback` sequence.
 
+Fixed-30 repair and purple attribution: `references/production-red-gray-repair-purple-page-audit.md` captures the dedicated red/gray repair policy (12 seconds per message/page, four distinct gray attempts), why the legacy 10/20/30 manager must remain frozen, and the SB→Page→DTR workflow for producing a page-level purple-error Excel without overstating API attribution.
+
 ## Progressive disclosure — mandatory
 
 1. Identify the exact operational branch below.

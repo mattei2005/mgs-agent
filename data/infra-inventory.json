@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-16T19:31:59-04:00",
+    "updated_at": "2026-07-16T19:34:12-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -3436,7 +3436,7 @@
       "entry": "14,29,44,59 * * * * flock -n /var/lock/sb_restricted_transition_monitor.lock xvfb-run -a /root/.local/share/mgs/sb-venv/bin/python /root/mgs-agent/scripts/sb-restricted-transition-monitor.py --apply >> /root/mgs-agent/logs/sb-restricted-transition-monitor.log 2>&1"
     },
     {
-      "entry": "24 0,8-22/2 * * * flock -n /var/lock/monitor_sms_funnel_balance.lock /root/mgs-agent/scripts/monitor-sms-funnel-balance.py >> /root/mgs-agent/logs/monitor-sms-funnel-balance.log 2>&1"
+      "entry": "24 0,1,7-23 * * * flock -n /var/lock/monitor_sms_funnel_balance.lock /root/mgs-agent/scripts/monitor-sms-funnel-balance.py >> /root/mgs-agent/logs/monitor-sms-funnel-balance.log 2>&1"
     },
     {
       "entry": "*/5 13,14 * * 5 flock -n /var/lock/monitor_sms_funnel_balance_friday.lock /root/mgs-agent/scripts/monitor-sms-funnel-balance.py --friday-report >> /root/mgs-agent/logs/monitor-sms-funnel-balance.log 2>&1"
@@ -4076,7 +4076,7 @@
     {
       "path": "/root/mgs-agent/scripts/monitor-sms-funnel-balance.py",
       "size_bytes": 24912,
-      "modified_at": "2026-07-16T19:27:04-04:00"
+      "modified_at": "2026-07-16T19:32:54-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-tool-loops.sh",
@@ -6988,8 +6988,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 356,
-      "md5": "45e18e80536ff5cd5ad08d8e0f0c7459",
-      "modified_at": "2026-07-16T19:32:01-04:00"
+      "md5": "ebd21287138787c2938e375de46ca78f",
+      "modified_at": "2026-07-16T19:34:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -7012,8 +7012,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 311654,
-      "md5": "bc31b4706a25f58acc4bfbf0cae993c5",
-      "modified_at": "2026-07-16T19:28:07-04:00"
+      "md5": "29879f6848639d86198a8e86ec329573",
+      "modified_at": "2026-07-16T19:34:11-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -7167,9 +7167,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 1736,
-      "md5": "a03d2a313a89634ffd0e40ccef8066d8",
-      "modified_at": "2026-07-16T19:27:41-04:00"
+      "size_bytes": 1857,
+      "md5": "4342fbea2162c2b8c915a0cd6138cf07",
+      "modified_at": "2026-07-16T19:33:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
