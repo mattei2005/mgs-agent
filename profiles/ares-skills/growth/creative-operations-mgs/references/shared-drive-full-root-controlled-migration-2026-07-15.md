@@ -13,15 +13,18 @@ Use este caso como implementação de referência quando uma árvore completa do
    - pasta → recriar e mapear `old_folder_id → new_folder_id`;
    - arquivo com `canMoveItemIntoTeamDrive=true` → `files.update(addParents/removeParents)`, preservando `fileId` e checksum;
    - arquivo de owner externo com move negado → `files.copy`, novo ID, `appProperties.mgs_source_id`, checksum e mapa old → new.
-5. Não apagar a origem durante a cópia. Após validação integral e instrução expressa de Rodolfo, mover a árvore fonte inteira para um container de backup no My Drive; isso retira originals copiados da raiz operacional sem perder rollback.
+5. Não apagar a origem durante a cópia. Após validação integral e instrução expressa de Rodolfo, mover a árvore fonte **residual** — shells das pastas antigas e originals externos copiados — para um container de backup no My Drive; isso retira originals copiados da raiz operacional sem perder rollback.
 
 ## Runner/checkpoint robusto
 
 - Inventário imutável antes do write: IDs, parents, paths, MIME, size, MD5, owner e capabilities.
+- Vincular o checkpoint a schema, source/target, tag de migração e SHA-256 do inventário; rejeitar mapa/chaves/actions que não coincidam exatamente.
 - Fresh-run gate: destino vazio + re-scan da origem sem drift de ID/nome/parent/size/MD5.
 - Checkpoint atômico fora do Git após cada pasta/arquivo.
 - Pastas e cópias recebem `appProperties` com source ID para recuperação idempotente após crash.
 - Em retry, itens já concluídos são pulados; a validação final reconcilia todos os IDs.
+- No gate final, validar item a item nome, MIME, parent mapeado, `driveId`, `trashed=false`, tamanho/MD5 e `appProperties`, não apenas contagens.
+- Antes do backup, reenumerar a origem residual e exigir exatamente os folders antigos + originals copiados, comparando novamente os hashes com o destino.
 - Se o processo morrer depois do PATCH e antes do checkpoint, fazer GET: se o arquivo já estiver no parent/drive corretos, considerar o move concluído.
 - A listagem do Drive pode apresentar consistência eventual logo após um lote grande. Repetir a validação de contagem com backoff antes de declarar item ausente; neste caso a primeira leitura viu 1.442/1.443 e a leitura seguinte confirmou 1.443/1.443.
 
