@@ -856,15 +856,15 @@ def build_summary_dataset(rows, sheet_stats, updated_at=None):
     values=[
         ['Páginas Restritas — Resumo'],
         ['Atualizado em',updated_at.strftime('%Y-%m-%d %H:%M %Z')],
-        ['Broadcast restritas',int((sheet_stats or {}).get('sheet_broadcast_restricted',0) or 0)],
-        ['Outras restritas ativas',int((sheet_stats or {}).get('sheet_other_status_included',0) or 0)],
-        ['On-hold ignoradas',int((sheet_stats or {}).get('sheet_on_hold_excluded',0) or 0)],
+        ['Broadcast restritas',str(int((sheet_stats or {}).get('sheet_broadcast_restricted',0) or 0))],
+        ['Outras restritas ativas',str(int((sheet_stats or {}).get('sheet_other_status_included',0) or 0))],
+        ['On-hold ignoradas',str(int((sheet_stats or {}).get('sheet_on_hold_excluded',0) or 0))],
         ['Data de Saída','Páginas','Sites'],
     ]
     for exit_date in sorted(page_counts):
         values.append([
             exit_date,
-            page_counts[exit_date],
+            str(page_counts[exit_date]),
             ', '.join(sorted(sites_by_date[exit_date],key=site_sort_key)),
         ])
     return values

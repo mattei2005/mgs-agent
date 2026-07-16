@@ -66,6 +66,19 @@ change messages and links
 
 This sequence supersedes generic guidance that says Save before Run Approval for this workflow. Never omit the parent Save.
 
+## UI mechanics for full-row replacement
+
+When the batch must preserve selected copy but rewrite the complete slot/link matrix, the validated UI path is:
+
+1. Open the exact row by pencil icon. If the row is not rendered in the initial table page, click the main search icon, enter the exact template name in the global filter (all dimensions selected), and submit with Enter.
+2. Open `<N> Messages` → `Import`.
+3. With a full backup and a prevalidated complete CSV ready, use `Erase all` only inside the still-uncommitted message modal, upload the complete final CSV, and require `Uploaded messages = Total messages = target` before continuing. Never click `Update` or parent `Save` while the staged total is zero or incomplete.
+4. Linked: `Run Approvals` → `Update` → reacquire the visible parent `Save` button → `Save`.
+5. Unlinked: `Update` → reacquire the visible parent `Save` button → `Save`.
+6. The message modal may replace/detach the parent dialog DOM node after `Update`; do not reuse a stale parent locator.
+
+The first table GET immediately after Save can be stale even when production committed correctly. Retry the authenticated `/broadcast/Messenger` readback and compare immutable core before declaring failure or rerunning the template.
+
 ## Safety and verification
 
 - Freeze immutable IDs and current page counts.

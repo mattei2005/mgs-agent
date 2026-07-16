@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/sb-broadcast-23-30-20260716/apply_ui.py", line 139, in <module>
+    asyncio.run(main())
+  File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/work/sb-broadcast-23-30-20260716/apply_ui.py", line 134, in main
+    try:results.append(await apply_one(page,item))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/work/sb-broadcast-23-30-20260716/apply_ui.py", line 81, in apply_one
+    if name not in await msgdlg.inner_text():raise RuntimeError(f'wrong messages modal for {name}')
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: wrong messages modal for Fincgriffin - TR-CC-TR/TR-SR -  g006-d Nicolas

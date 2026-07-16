@@ -102,11 +102,11 @@ class RestrictedSheetDatasetTest(unittest.TestCase):
         self.assertNotIn(sync.REPORT_LEGACY_TOTAL_TAB, datasets)
         self.assertEqual(len(datasets[sync.REPORT_TOTAL_TAB]) - 1, 2)
         self.assertEqual(len(datasets['openzed']) - 1, 2)
-        self.assertEqual(summary[2], ['Broadcast restritas', 1])
-        self.assertEqual(summary[3], ['Outras restritas ativas', 1])
-        self.assertEqual(summary[4], ['On-hold ignoradas', 4])
+        self.assertEqual(summary[2], ['Broadcast restritas', '1'])
+        self.assertEqual(summary[3], ['Outras restritas ativas', '1'])
+        self.assertEqual(summary[4], ['On-hold ignoradas', '4'])
         self.assertEqual(summary[5], ['Data de Saída', 'Páginas', 'Sites'])
-        self.assertEqual(summary[6], ['2026-08-01', 2, 'eggbev, openzed'])
+        self.assertEqual(summary[6], ['2026-08-01', '2', 'eggbev, openzed'])
 
     def test_discord_operational_summary_stays_broadcast_only(self):
         rows = [

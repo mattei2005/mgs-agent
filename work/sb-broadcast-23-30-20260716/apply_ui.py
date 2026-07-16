@@ -51,9 +51,12 @@ async def refresh_rows(page,target_id=None,expected_core=None):
  await page.reload(wait_until='networkidle',timeout=90000);await page.wait_for_timeout(2500)
  if probe['url'] and probe['headers']:
   # Fresh authenticated API readback avoids stale table state after modal Save.
-  raw_headers=probe['headers'];safe_headers={k:v for k,v in raw_headers.items() if not k.startswith(':') and k.lower() not in ('host','content-length')}
-  for _ in range(4):
-   resp=await page.context.request.get(probe['url'],headers=safe_headers,timeout=90000)
+  raw_headers=probe['headers'];drop=('host','content-length','if-none-match','if-modified-since','cache-control','pragma')
+  safe_headers={k:v for k,v in raw_headers.items() if not k.startswith(':') and k.lower() not in drop};safe_headers['cache-control']='no-cache';safe_headers['pragma']='no-cache'
+  sep='&' if '?' in probe['url'] else '?'
+  for attempt in range(4):
+   probe_url=f"{probe['url']}{sep}__mgs_readback={int(dt.datetime.now().timestamp()*1000)}-{attempt}"
+   resp=await page.context.request.get(probe_url,headers=safe_headers,timeout=90000)
    if resp.ok:
     d=await resp.json()
     if isinstance(d,list):
@@ -75,7 +78,7 @@ async def apply_one(page,item):
  if parent_name!=name:raise RuntimeError(f'wrong parent modal for {name}: {parent_name}')
  await parent.locator('button.btn-notifications').first.click(timeout=10000);await page.wait_for_timeout(650)
  dialogs=page.locator('[role="dialog"]:visible,.p-dialog:visible,.modal:visible');msgdlg=dialogs.last
- if name not in await msgdlg.inner_text():raise RuntimeError(f'wrong messages modal for {name}')
+ if compact(name) not in compact(await msgdlg.inner_text()):raise RuntimeError(f'wrong messages modal for {name}')
  await msgdlg.get_by_text('Import',exact=True).click(timeout=10000);await page.wait_for_timeout(350)
  # Stage full replacement inside the modal. It is not persisted until Update + parent Save.
  await msgdlg.get_by_role('button',name=re.compile(r'Erase all',re.I)).click(timeout=10000);await confirm_if_present(page);await page.wait_for_timeout(350)
