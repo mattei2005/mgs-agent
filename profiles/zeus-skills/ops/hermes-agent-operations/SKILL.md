@@ -106,6 +106,12 @@ Primary reference: `references/memory-skill-autowrite-governance.md`.
 
 Use it to separate always-active context from routed knowledge, verify SOUL loading and active-session cutover semantics, change write gates through the canonical resolver, keep curator policy independent, drain legacy staged queues safely, preserve capacity-rejected learning through a failure-only recovery path, and report every successful or failed automatic memory/skill write with readback.
 
+### Canonical resource replacement across MGS agents
+
+Primary reference: `references/canonical-resource-cutover.md`.
+
+Use when a Drive root, folder tree, endpoint, account, channel, or other shared operational resource is replaced while logical names/structure remain. It covers active-vs-audit classification, old-ID/alias sweeps, cross-profile mirror synchronization, path-parser validation, fail-closed one-shot migration tools, inventory, audit, and REPORT-INFRA closure.
+
 ### VPS migration, restore, cutover, or new MGS agent
 
 Primary reference: `references/migration-agent-bootstrap.md`.
