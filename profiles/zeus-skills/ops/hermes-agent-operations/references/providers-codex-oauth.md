@@ -34,11 +34,14 @@ Para produção multi-profile, autenticar cada profile por device-code e validar
 
 Fluxo:
 
-1. Backup de cada `auth.json` fora do Git, com diretório `700`.
+1. Backup de cada `auth.json` fora do Git, com diretório `700`; antes do picker, registrar também hashes do `config.yaml` live e do mirror versionado.
 2. Executar o login OAuth no contexto de cada profile (`hermes -p <profile> model`) e concluir o device-code.
-3. Validar presença de access/refresh sem imprimir valores.
-4. Rodar `hermes -p <profile> -z ...` em cada profile.
-5. Confirmar que os refresh tokens não são clones por comparação booleana/hash interna, sem exibir hashes ou tokens.
+3. Em uma conversa Discord, assim que o device flow mostrar URL e código, enviar imediatamente ao Rodolfo um link Markdown clicável (`[Abrir autorização da OpenAI](https://auth.openai.com/codex/device)`) e o código em destaque. Não depender de URL em tool progress, não enterrar o link em explicação e não responder apenas que está aguardando.
+4. Validar presença de access/refresh sem imprimir valores.
+5. Comparar o refresh token internamente com os demais profiles e exigir cadeia independente; reportar apenas os booleanos de igualdade/independência.
+6. O model picker pode normalizar `config.yaml`, remover defaults vazios e inserir defaults novos mesmo quando a intenção era somente autenticar. Depois do login, comparar o config live com o hash/backup e o mirror. Se houve drift não autorizado e o provider/model pretendidos já eram os mesmos, restaurar exatamente o config pré-login, preservar o novo `auth.json` e provar live=mirror por hash e leitura semântica.
+7. Rodar inferência real em sessão nova do profile e confirmar que o gateway permaneceu ativo; OAuth isolado não exige restart por si só.
+8. Para rollout de comportamento/SOUL, validar também no `state.db` read-only que o marker distintivo aparece exatamente uma vez no `sessions.system_prompt` da nova sessão. Falha OAuth antes da criação da sessão não é prova parcial de cutover.
 
 Copiar apenas o provider block de um profile saudável é permitido somente como recuperação emergencial e temporária após confirmação crítica. Registrar prazo de correção e substituir por sessões OAuth independentes ou por store compartilhado que tenha lock cross-process e write-through comprovados.
 
