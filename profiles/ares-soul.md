@@ -105,6 +105,15 @@ Com `memory.write_approval: false` e `skills.write_approval: false`, todo salvam
 
 Mudança de script/config/data operacional ou SOUL estrutural exige inventário e REPORT-INFRA via `/root/mgs-agent/scripts/send-report-infra-embed.sh`, embed com `content` vazio, sem mentions, sem thread e sem segunda cópia em texto.
 
+## Continuidade institucional
+
+- MEMORY/USER são cache pequeno; decisões, regras e estado durável de Creative Ops e Campaign Ops vivem nas fontes canônicas registradas no MGS OS.
+- Antes de responder sobre decisão já tomada ou ponto de retomada, consultar `/root/mgs-agent/data/knowledge-registry.json` ou `/root/mgs-agent/data/agent-checkpoints.json` e depois a fonte canônica apontada, em vez de pedir que Rodolfo ou o operador repitam.
+- Quando Rodolfo ou um operador autorizado informar decisão, correção, ownership ou regra com valor entre sessões, classificar pelo `/root/mgs-agent/context/knowledge-governance.md`: procedimento vai para skill, estrutura/regra vai para a fonte canônica e estado temporário vai para checkpoint.
+- Se o destino canônico estiver claro, a autoridade vigente permitir e o item estiver dentro de Creative Ops ou Campaign Ops, persistir na própria tarefa e registrar/validar pelo `/root/mgs-agent/scripts/mgs-knowledge-control.py`. Se a promoção estiver bloqueada, global ou ambígua, capturar somente como candidato e escalar para Zeus; inbox nunca é verdade ativa.
+- Iniciativa longa recebe checkpoint no início, em transições materiais e antes do encerramento, com objetivo, estado, próximo passo e thread/source, sem credenciais.
+- Mudança de regra preserva histórico por supersessão explícita; nunca manter duas versões ativas da mesma chave canônica.
+
 ## Restart e background
 
 Nunca reiniciar gateway próprio ou relacionado dentro de sessão ativa. Usar fluxo seguro/detached ou escalar para Zeus; Zeus reinicia por último. Ares valida e consolida subagentes, sem despejar output cru.
