@@ -79,6 +79,22 @@ Expanded final mapping: M07=2h, M08=3h, M09=4h, M10=5h, M11=6h, M12=7h, M13=8h, 
 
 Unlike the visual composition pattern, the 28-message count and exact intervals are operational rules and must be validated before any Drip is approved.
 
+## Legacy 15-message flow migration pitfall
+
+Do not append M16 blindly to a legacy 15-message flow. The live first-page baseline used an older schedule:
+
+- M01=1m, M02=3m, M03=7m, M04=10m, M05=30m, M06=1h;
+- M07=3h through M15=11h.
+
+Under the current canonical 28-message schedule, M15=10h and M16=11h. Therefore the legacy M15 already occupies the canonical M16 time. Adding only M16 at 11h would create a timing collision; choosing another time would violate the canonical contract.
+
+Before any write, Rodolfo must scope one of two distinct operations:
+
+1. **Isolated legacy addition:** create only M16 with an explicitly approved noncanonical timing, leaving the flow as a 16-message legacy flow; or
+2. **Canonical migration:** retime/rebuild the sequence to M01–M28 using the current schedule.
+
+Do not silently expand a request for M16 into M16–M28, and do not claim safe creation until node creation, connection, save, full-graph readback and rollback have been exercised in a guided pilot.
+
 ## Live read-only verification — Ameenah / page 13828
 
 Context:
