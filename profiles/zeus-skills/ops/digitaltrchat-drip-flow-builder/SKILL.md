@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-drip-flow-builder
 description: Use when Rodolfo asks Zeus to access DigitalTRChat/ChatPion, navigate Bot manager > Bot flow builder, inspect a DRIP flow such as Auto Principal Drip, map its nodes/messages/buttons/delays/URLs, or prepare a safe message replacement without touching the red delete action.
-version: 1.0.0
+version: 1.1.0
 author: Hermes Agent
 license: MIT
 metadata:
@@ -14,9 +14,11 @@ metadata:
 
 ## Overview
 
-This skill covers safe access and read-only inspection of Messenger DRIP flows in DigitalTRChat. It was validated on the MGS account `Disparos Openzed US-CC-EN`, page `Hortensia Martínez` (`#1084`), flow `Auto Principal Drip`.
+This is the class-level operating skill for safe access, inspection and eventual narrow editing of Messenger flow-builder graphs in DigitalTRChat/ChatPion. It applies across MGS accounts, pages and named flows; account-specific IDs, baselines and review findings belong under `references/`.
 
 The current version deliberately stops before any message mutation. Opening and extracting the graph are validated; replacing text and saving are not yet validated and must be added only after Rodolfo teaches the exact write path and a real readback proves it.
+
+For the validated Openzed example, load `references/openzed-auto-principal-drip-baseline.md` only when that account/page/flow is in scope. Re-check the live builder because the reference is a dated regression baseline, not production truth.
 
 ## When to Use
 
@@ -33,12 +35,9 @@ Do not use this skill for Smart Bidding Page/Broadcast Template writes. Do not u
 
 ## Credential Source
 
-For the validated Openzed account:
+Resolve the requested DigitalTRChat account from 1Password by its exact item title and vault. Login items may use the standard concealed field `password` or a custom concealed field such as `credential`; the inspector must resolve `password or credential` without printing either.
 
-- Vault: `MGS Conteúdo`
-- Item: `Digitaltrchat - Disparos Openzed US-CC-EN`
-- Username field: `username`
-- Concealed password field: `credential` (not the standard `password` field)
+Account-specific item names, page IDs and known field quirks belong in the matching reference file. For the Openzed baseline, load `references/openzed-auto-principal-drip-baseline.md`.
 
 Retrieve credentials only inside the local process. Never print, log, persist, or pass them through Discord/browser tool arguments. Prefer `op item get ... --format json --reveal` inside the Playwright process and fill the login form in memory.
 
@@ -165,7 +164,7 @@ A later authorized write must be narrow: one account, one page, one flow, one or
 1. **Clicking by icon position.** The yellow edit and red delete controls are adjacent. Fix: locate the exact row, then enforce title/class/href predicates before clicking.
 2. **Assuming an empty table means no flows.** The manager iframe can load before its AJAX table. Fix: wait for the exact flow text and retry/reload before concluding.
 3. **Reading only the screenshot.** Off-screen nodes and crossed connectors make the canvas incomplete. Fix: parse `window.data` and use the screenshot only as visual corroboration.
-4. **Using the standard password field.** The validated 1Password item uses concealed field `credential`. Fix: resolve `password or credential` without printing either.
+4. **Assuming every 1Password item uses `password`.** DigitalTRChat items may use a custom concealed field such as `credential`. Fix: resolve `password or credential` in memory and keep the exact account mapping in its reference file.
 5. **Treating node IDs as chronology.** Imported/copied flows have non-sequential IDs. Fix: map graph edges and sequence delay values.
 6. **Normalizing production copy during inspection.** Hidden Unicode may be intentional or legacy. Fix: normalize only in a derived report, preserve raw values for rollback.
 7. **Declaring a write from a loaded editor.** Opening `Edit flow` is read-only evidence, not a saved mutation. Fix: report inspection separately from any later edit/save/readback.
