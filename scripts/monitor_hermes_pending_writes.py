@@ -358,6 +358,14 @@ def create_compaction_proposals(
             }
 
             existed = proposal_path.exists()
+            if existed:
+                existing = json.loads(proposal_path.read_text(encoding="utf-8"))
+                if (
+                    existing.get("id") != proposal_id
+                    or existing.get("before", {}).get("sha256") != before_hash
+                    or existing.get("policy", {}).get("apply_automatically") is not False
+                ):
+                    raise ValueError("invalid existing proposal readback")
             if not dry_run and not existed:
                 proposal_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
                 os.chmod(proposal_dir, 0o700)

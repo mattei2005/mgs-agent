@@ -158,6 +158,80 @@ class PendingMonitorTests(unittest.TestCase):
         updated = monitor.next_state(summary, state, decision, now_epoch=self.now)
         self.assertEqual(updated["capacity_warning_ids"], ["zeus.user"])
 
+    def test_compaction_proposal_is_secure_idempotent_and_never_mutates_source(self):
+        self.memory_store("zeus", "USER.md", 0, user_limit=15)
+        source = self.root / "zeus" / "memories" / "USER.md"
+        before = "alpha\n§\nalpha\n"
+        source.write_text(before)
+        summary = monitor.scan_pending(self.root, now_epoch=self.now)
+
+        first = monitor.create_compaction_proposals(
+            summary, self.root, now_epoch=self.now
+        )
+        second = monitor.create_compaction_proposals(
+            summary, self.root, now_epoch=self.now
+        )
+
+        self.assertEqual(len(first), 1)
+        self.assertEqual(first[0]["id"], second[0]["id"])
+        self.assertTrue(first[0]["created"])
+        self.assertFalse(second[0]["created"])
+        self.assertEqual(source.read_text(), before)
+        proposal_path = Path(first[0]["path"])
+        record = json.loads(proposal_path.read_text())
+        self.assertEqual(stat.S_IMODE(proposal_path.stat().st_mode), 0o600)
+        self.assertEqual(stat.S_IMODE(proposal_path.parent.stat().st_mode), 0o700)
+        self.assertEqual(record["before"]["text"], before)
+        self.assertEqual(record["after"]["text"], "alpha\n")
+        self.assertEqual(record["duplicate_entries_removed_in_proposal"], 1)
+        self.assertFalse(record["policy"]["apply_automatically"])
+        self.assertTrue(record["policy"]["requires_rodolfo_approval"])
+
+    def test_compaction_proposal_fails_closed_on_tampered_existing_record(self):
+        self.memory_store("zeus", "USER.md", 0, user_limit=15)
+        source = self.root / "zeus" / "memories" / "USER.md"
+        source.write_text("alpha\n§\nalpha\n")
+        summary = monitor.scan_pending(self.root, now_epoch=self.now)
+        first = monitor.create_compaction_proposals(summary, self.root, now_epoch=self.now)
+        proposal_path = Path(first[0]["path"])
+        record = json.loads(proposal_path.read_text())
+        record["policy"]["apply_automatically"] = True
+        proposal_path.write_text(json.dumps(record))
+
+        second = monitor.create_compaction_proposals(summary, self.root, now_epoch=self.now)
+        self.assertEqual(second, [{"key": "zeus.user", "error": "ValueError"}])
+        self.assertEqual(source.read_text(), "alpha\n§\nalpha\n")
+
+    def test_compaction_proposal_noops_when_no_exact_duplicate_exists(self):
+        self.memory_store("ares", "MEMORY.md", 0, memory_limit=10)
+        source = self.root / "ares" / "memories" / "MEMORY.md"
+        before = "unique fact\n"
+        source.write_text(before)
+        summary = monitor.scan_pending(self.root, now_epoch=self.now)
+        proposals = monitor.create_compaction_proposals(
+            summary, self.root, now_epoch=self.now
+        )
+        record = json.loads(Path(proposals[0]["path"]).read_text())
+        self.assertEqual(record["before"]["text"], before)
+        self.assertEqual(record["after"]["text"], before)
+        self.assertEqual(record["savings_chars"], 0)
+        self.assertTrue(record["policy"]["semantic_review_required"])
+
+    def test_capacity_alert_mentions_proposal_without_leaking_store_content(self):
+        self.memory_store("zeus", "USER.md", 900, user_limit=1000)
+        summary = monitor.scan_pending(self.root, now_epoch=self.now)
+        decision = monitor.decide(summary, {}, now_epoch=self.now, reminder_hours=24)
+        proposals = [{
+            "id": "proposal123", "key": "zeus.user", "savings_chars": 12,
+        }]
+        payload = monitor._attach_proposals(
+            monitor.build_payload(summary, decision), proposals
+        )
+        encoded = json.dumps(payload, ensure_ascii=False)
+        self.assertIn("proposal123", encoded)
+        self.assertIn("não aplicada", encoded)
+        self.assertNotIn("x" * 20, encoded)
+
     def test_capacity_overflow_dead_letter_alerts_immediately_without_content(self):
         self.record(
             "ares", "memory", "overflow1", 0.1,
