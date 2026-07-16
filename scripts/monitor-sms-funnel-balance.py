@@ -20,6 +20,7 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 BASE_DIR = Path("/root/mgs-agent")
 PROJECT_ENV = BASE_DIR / ".env"
@@ -35,18 +36,15 @@ DISCORD_API_BASE = "https://discord.com/api/v10"
 MENTION_USER_ID = "344196393512075265"
 
 THRESHOLDS = {
-    "critical": 10_000,
     "emergency": 5_000,
 }
-LEVEL_RANK = {"normal": 0, "critical": 1, "emergency": 2}
+LEVEL_RANK = {"normal": 0, "emergency": 1}
 LEVEL_COLOR = {
     "normal": 3_066_993,
-    "critical": 15_158_332,
     "emergency": 15_158_332,
     "info": 3_447_003,
 }
 REMINDER_SECONDS = {
-    "critical": 12 * 3600,
     "emergency": 4 * 3600,
 }
 
@@ -83,7 +81,6 @@ def default_state(channel_id: str) -> dict[str, Any]:
         "_meta": {
             "description": "Estado do monitor de saldo SMS Funnel.",
             "channel_id": channel_id,
-            "critical_credits": THRESHOLDS["critical"],
             "emergency_credits": THRESHOLDS["emergency"],
             "schedule": "24 * * * *",
         },
@@ -244,8 +241,6 @@ def probe_fixture(path: Path) -> dict[str, int]:
 def balance_level(credits: int) -> str:
     if credits <= THRESHOLDS["emergency"]:
         return "emergency"
-    if credits <= THRESHOLDS["critical"]:
-        return "critical"
     return "normal"
 
 
@@ -320,10 +315,9 @@ def metric_fields(metrics: dict[str, int], projection: dict[str, Any]) -> list[d
 
 def alert_payload(level: str, metrics: dict[str, int], projection: dict[str, Any], *, reminder: bool = False) -> dict[str, Any]:
     titles = {
-        "critical": "Saldo SMS Funnel crítico",
         "emergency": "Saldo SMS Funnel em emergência",
     }
-    mention = level in {"critical", "emergency"}
+    mention = level == "emergency"
     title = titles[level] + (" — lembrete" if reminder else "")
     fields = metric_fields(metrics, projection)
     if level == "emergency":
@@ -339,11 +333,30 @@ def alert_payload(level: str, metrics: dict[str, int], projection: dict[str, Any
     }
 
 
+def friday_payload(metrics: dict[str, int], projection: dict[str, Any]) -> dict[str, Any]:
+    fields = metric_fields(metrics, projection)
+    if metrics["credits"] <= THRESHOLDS["emergency"]:
+        fields.append({
+            "name": "Ação necessária",
+            "value": "Fazer a recarga via PIX com o fornecedor da SMS Funnel para evitar a interrupção dos envios.",
+            "inline": False,
+        })
+    return {
+        "content": f"<@{MENTION_USER_ID}> conferência obrigatória de sexta-feira",
+        "allowed_mentions": {"users": [MENTION_USER_ID]},
+        "embeds": [{
+            "title": "Saldo SMS Funnel — alerta de sexta-feira",
+            "color": LEVEL_COLOR["emergency"] if metrics["credits"] <= THRESHOLDS["emergency"] else LEVEL_COLOR["info"],
+            "fields": fields,
+        }],
+    }
+
+
 def activation_payload(metrics: dict[str, int], projection: dict[str, Any]) -> dict[str, Any]:
     fields = metric_fields(metrics, projection)
     fields.append({
         "name": "Comportamento",
-        "value": "Consulta a cada hora. Não alerta acima de 10.000 SMS; em 5.000 ou menos inclui a orientação de recarga via PIX.",
+        "value": "Consulta a cada hora. Não alerta acima de 5.000 SMS; toda sexta-feira às 15h de São Paulo envia uma conferência obrigatória.",
         "inline": False,
     })
     return {
@@ -391,7 +404,7 @@ def probe_error_payload(error: str, *, resolved: bool = False) -> dict[str, Any]
         "allowed_mentions": {"users": [MENTION_USER_ID]},
         "embeds": [{
             "title": "Falha no monitor SMS Funnel",
-            "color": LEVEL_COLOR["critical"],
+            "color": LEVEL_COLOR["emergency"],
             "fields": [
                 {"name": "Falhas consecutivas", "value": "2 ou mais", "inline": True},
                 {"name": "Detalhe", "value": error[:900], "inline": False},
@@ -432,14 +445,29 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true", help="consulta sem gravar state nem enviar Discord")
     parser.add_argument("--send-test", action="store_true", help="envia o embed informativo de ativação")
+    parser.add_argument("--friday-report", action="store_true", help="envia o alerta obrigatório de sexta às 15h de São Paulo")
+    parser.add_argument("--now-brazil", help=argparse.SUPPRESS)
     parser.add_argument("--fixture", type=Path, help="usa métricas JSON locais em vez da API/1Password")
     parser.add_argument("--state-file", type=Path, default=DEFAULT_STATE_FILE)
     parser.add_argument("--channel-id", default=DEFAULT_CHANNEL_ID)
     parser.add_argument("--discord-api-base", default=DISCORD_API_BASE)
     args = parser.parse_args()
 
+    brazil_now = (
+        datetime.fromisoformat(args.now_brazil).astimezone(ZoneInfo("America/Sao_Paulo"))
+        if args.now_brazil
+        else datetime.now(ZoneInfo("America/Sao_Paulo"))
+    )
+    if args.friday_report and (brazil_now.weekday() != 4 or brazil_now.hour != 15):
+        print(f"SKIP friday_report outside_window brazil={brazil_now.isoformat()}")
+        return 0
+
     env = runtime_env()
     state = load_state(args.state_file, args.channel_id)
+    brazil_date = brazil_now.date().isoformat()
+    if args.friday_report and state.get("last_friday_report_date") == brazil_date:
+        print(f"SKIP friday_report already_sent date={brazil_date}")
+        return 0
     current = now_local()
     now_epoch = int(current.timestamp())
     timestamp = current.isoformat()
@@ -493,6 +521,9 @@ def main() -> int:
         if args.send_test:
             result = discord_post(env, args.channel_id, activation_payload(metrics, projection), args.discord_api_base)
             sent_kind = "activation"
+        elif args.friday_report:
+            result = discord_post(env, args.channel_id, friday_payload(metrics, projection), args.discord_api_base)
+            sent_kind = "friday_report"
         elif error_was_alerted:
             result = discord_post(env, args.channel_id, probe_error_payload("", resolved=True), args.discord_api_base)
             sent_kind = "probe_recovery"
@@ -501,7 +532,7 @@ def main() -> int:
         contracted_increased = metrics["total_contracted"] > int(previous_metrics.get("total_contracted", metrics["total_contracted"]) or metrics["total_contracted"])
         recharge_detected = bool(previous_metrics) and (contracted_increased or recharge_delta >= 100)
 
-        if not args.send_test:
+        if not args.send_test and not args.friday_report:
             if recharge_detected:
                 result = discord_post(env, args.channel_id, recharge_payload(previous_metrics, metrics, projection), args.discord_api_base)
                 sent_kind = "recharge"
@@ -538,6 +569,8 @@ def main() -> int:
         state["last_discord_message_id"] = result["id"]
         if sent_kind in {"threshold", "reminder"}:
             state["last_reminder_sent"] = timestamp
+        if sent_kind == "friday_report":
+            state["last_friday_report_date"] = brazil_date
     save_state(args.state_file, state)
     print(
         f"OK level={level} credits={metrics['credits']} sent={metrics['total_sent']} "

@@ -78,6 +78,48 @@ if (window.MutationObserver) {
 
 Pitfall: when replacing all `chatBox.scrollTop = chatBox.scrollHeight`, do **not** mutate the helper itself into recursive `if (chatBox) scrollChatToBottom();`; that creates an infinite recursion and leaves the chat stuck on a typing indicator/blank state. Verify the helper body explicitly.
 
+### 3. Mobile answer buttons must use a flex-safe border-box contract
+
+In the standalone Ciro template, `.button-container` is a flex child of `#chat-box`. CSS `float:right` is ignored for flex items, and a generic `#chat-container button` rule can force `box-sizing:content-box`. With `width:100%`, horizontal padding is then added outside the declared width, which clips the left or right border on mobile.
+
+Use an explicit cross-axis position for the container and a selector specific enough to beat the generic button reset:
+
+```css
+.button-container {
+  width: calc(75% - 18px) !important;
+  max-width: calc(75% - 18px) !important;
+  margin: 8px 18px 0 18px !important;
+  align-self: flex-end !important;
+  align-items: stretch !important;
+  float: none !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+}
+
+#chat-container .button-container > button,
+#chat-container .button-container > a,
+#chat-container .button-container > a > button {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+```
+
+Do not validate this only by looking at the CSS source. Render a 360 px viewport and measure real rectangles:
+
+```js
+const c = document.getElementById('chat-box').getBoundingClientRect();
+const b = document.querySelector('.button-container button').getBoundingClientRect();
+({
+  insideLeft: b.left >= c.left,
+  insideRight: b.right <= c.right,
+  boxSizing: getComputedStyle(document.querySelector('.button-container button')).boxSizing
+});
+```
+
+Expected: `insideLeft=true`, `insideRight=true`, `boxSizing='border-box'`. Use a cachebuster on production; stale HTML can otherwise show the old `content-box` result after a correct deploy.
+
 ## OpenZed deploy via WP Admin upload/replace
 
 For OpenZed, REST plugin management with the application password may return:

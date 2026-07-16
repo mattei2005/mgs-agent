@@ -3034,12 +3034,12 @@
       "type": "skill",
       "runtime_path": "/root/.hermes/profiles/zeus/skills/ops/cloudflare-operations/SKILL.md",
       "versioned_path": null,
-      "size_bytes": 7701,
-      "sha256": "a647bdda976a58de045aa389d8b1341633cfe801291df3cb0d1eea23a96639d5",
+      "size_bytes": 8781,
+      "sha256": "4ed9a4c5663cddef5452f740fe7a2f5888fa6c7fa091c792bba6299f3a6ba0f4",
       "runtime_versioned_sha_match": null,
-      "updated_at": "2026-07-06T18:59:28.434266+00:00",
-      "validation": "Skill created after successful Cloudflare cache purge via 1Password token; covers purge, zone resolution, confirmation, and audit logging.",
-      "source_report": "REPORT-INFRA Zeus Cloudflare operations skill"
+      "updated_at": "2026-07-16T22:33:14.129884+00:00",
+      "validation": "Skill v1.1.0 validated by readback; routine direct cache purges now use the loaded skill as the complete procedural fast path and skip broad repository/AGENT searches unless an exception requires investigation.",
+      "source_report": "REPORT-INFRA Zeus Cloudflare purge fast path 2026-07-16"
     },
     {
       "profile": "zeus",
