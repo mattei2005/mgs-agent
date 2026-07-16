@@ -45,6 +45,21 @@ Fluxo:
 
 Copiar apenas o provider block de um profile saudável é permitido somente como recuperação emergencial e temporária após confirmação crítica. Registrar prazo de correção e substituir por sessões OAuth independentes ou por store compartilhado que tenha lock cross-process e write-through comprovados.
 
+### Gate pós-isolamento: automações que podem desfazer a separação
+
+Depois de autenticar profiles com cadeias OAuth independentes, auditar **antes de declarar estabilidade** toda automação que possa copiar auth entre stores: crontab, systemd timers/services, scripts de sync, jobs Hermes e finalizers. Procurar especialmente fluxos `~/.hermes/auth.json` global → `profiles/*/auth.json`.
+
+Regras:
+
+1. Comparar access/refresh internamente e reportar apenas booleanos de igualdade; nunca valores ou fingerprints.
+2. Ler a direção e a condição temporal do sincronizador. Um dry-run que faz zero writes porque o global está mais antigo prova apenas o estado atual — se o global renovar depois, um sync baseado em `last_refresh` pode sobrescrever todas as cadeias exclusivas.
+3. Não chamar OAuth independente de “durável/estável” enquanto existir cron/timer ativo capaz de reintroduzir o mesmo refresh token nos profiles.
+4. Se a automação conflitar com a arquitetura atual, parar antes de compactação ou rollout adicional e pedir autorização para neutralizar somente o gatilho ativo. Preferir comentar/desabilitar a linha de cron com backup e preservar o script para rollback, em vez de apagar artefatos.
+5. Validar após a correção: gatilho ausente/inativo, profiles pairwise diferentes, inferência real por profile e nenhuma alteração de credencial fora do escopo.
+6. Corrigir também USER/MEMORY/SOUL que ainda descrevam modelo, curator ou sync legado, mas tratar essa reescrita como mutação separada com diff explícito quando houver promessa de revisão prévia.
+
+Pitfall: três logins device-code independentes podem estar corretos agora e ainda assim serem revertidos silenciosamente quinze minutos ou semanas depois por um sincronizador global legado. A ausência de write no dry-run não elimina o risco futuro.
+
 Formato esperado em cada `config.yaml`:
 
 ```yaml
