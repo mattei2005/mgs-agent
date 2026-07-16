@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-16T18:37:23-04:00",
+    "updated_at": "2026-07-16T18:39:27-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -4076,7 +4076,7 @@
     {
       "path": "/root/mgs-agent/scripts/monitor-sms-funnel-balance.py",
       "size_bytes": 24905,
-      "modified_at": "2026-07-16T18:32:23-04:00"
+      "modified_at": "2026-07-16T18:38:19-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-tool-loops.sh",
@@ -6600,6 +6600,13 @@
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/cloudflare-operations/SKILL.md"
       },
       {
+        "name": "digitaltrchat-drip-flow-builder",
+        "category": "ops",
+        "skill_md": "/root/.hermes/profiles/zeus/skills/ops/digitaltrchat-drip-flow-builder/SKILL.md",
+        "purpose": "Acesso seguro, inspeção read-only e mapeamento completo de flows DRIP no DigitalTRChat sem acionar exclusão ou save.",
+        "reference_implementation": "/root/.hermes/profiles/zeus/skills/ops/digitaltrchat-drip-flow-builder/scripts/inspect_flow.py"
+      },
+      {
         "name": "discord-ops",
         "category": "ops",
         "skill_md": "/root/.hermes/profiles/zeus/skills/ops/discord-ops/SKILL.md"
@@ -6983,8 +6990,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 357,
-      "md5": "e7ff4a363e1821e4e2353992398de20a",
-      "modified_at": "2026-07-16T18:37:01-04:00"
+      "md5": "51e05d41454dfd7511f08b980cc1d6cb",
+      "modified_at": "2026-07-16T18:39:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -7006,9 +7013,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 311450,
-      "md5": "15ce9fc01c858d4f7f2e415d2e6c759c",
-      "modified_at": "2026-07-16T18:34:32-04:00"
+      "size_bytes": 311647,
+      "md5": "d1d53a83b0a059b43bbabfdc096d894d",
+      "modified_at": "2026-07-16T18:39:23-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -7072,9 +7079,9 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1082,
-      "md5": "be845e5e74f10d2ca61270031f4eb2c1",
-      "modified_at": "2026-07-16T17:39:02-04:00"
+      "size_bytes": 1112,
+      "md5": "4fc32c557bfa122b1d6c3227adb41dfe",
+      "modified_at": "2026-07-16T18:39:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -7162,9 +7169,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 1366,
-      "md5": "39e1f058069f6228cfd775a80c4ccb6c",
-      "modified_at": "2026-07-16T18:34:12-04:00"
+      "size_bytes": 1487,
+      "md5": "40b60b6bbafbfec5fc372d1d211059c2",
+      "modified_at": "2026-07-16T18:39:00-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",

@@ -36,7 +36,7 @@ DISCORD_API_BASE = "https://discord.com/api/v10"
 MENTION_USER_ID = "344196393512075265"
 
 THRESHOLDS = {
-    "emergency": 5_000,
+    "emergency": 7_000,
 }
 LEVEL_RANK = {"normal": 0, "emergency": 1}
 LEVEL_COLOR = {
@@ -356,7 +356,7 @@ def activation_payload(metrics: dict[str, int], projection: dict[str, Any]) -> d
     fields = metric_fields(metrics, projection)
     fields.append({
         "name": "Comportamento",
-        "value": "Consulta a cada hora. Não alerta acima de 5.000 SMS; toda sexta-feira às 15h de São Paulo envia uma conferência obrigatória.",
+        "value": "Consulta a cada hora. Não alerta acima de 7.000 SMS; toda sexta-feira às 15h de São Paulo envia uma conferência obrigatória.",
         "inline": False,
     })
     return {

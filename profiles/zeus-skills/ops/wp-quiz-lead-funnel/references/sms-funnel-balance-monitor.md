@@ -25,22 +25,22 @@ Use this reference when Rodolfo asks to monitor SMS Funnel credits, alert before
 
 Default bands:
 
-- No threshold alert: `credits > 5,000`
-- Emergency: `credits <= 5,000`
+- No threshold alert: `credits > 7,000`
+- Emergency: `credits <= 7,000`
 - Mandatory Friday report: every Friday at 15:00 `America/Sao_Paulo`, regardless of balance.
 
 Behavior:
 
-1. Stay silent on threshold monitoring while `credits > 5,000`.
-2. Alert and mention Rodolfo when the balance reaches `5,000` or less.
-3. At `5,000` or less, add an `Ação necessária` field instructing a PIX recharge with the SMS Funnel supplier.
+1. Stay silent on threshold monitoring while `credits > 7,000`.
+2. Alert and mention Rodolfo when the balance reaches `7,000` or less.
+3. At `7,000` or less, add an `Ação necessária` field instructing a PIX recharge with the SMS Funnel supplier.
 4. Remind at most every 4h while the emergency remains active.
 5. Independently of the balance, send a mandatory Friday report at 15:00 in `America/Sao_Paulo`, with mention, available balance, and three-day projection. Deduplicate by Brazil calendar date.
 6. Detect a recharge when contracted credits increase or available balance rises by at least 100, then post a green confirmation.
 7. Fetch `GET /api/daily-sents` and calculate the projection from the three most recent completed calendar days. Exclude the current partial-day bucket so the hourly execution time does not distort the average. If that endpoint fails, keep the balance alert working and mark the projection unavailable.
 8. Alert after two consecutive API/1Password failures and post recovery only if that failure was previously alerted.
 9. If Discord delivery fails, do not consume the state transition; retry it on the next run.
-10. Keep threshold and Friday alerts minimal: show only `Saldo disponível` and `Projeção`; add `Ação necessária` only when `credits <= 5,000`.
+10. Keep threshold and Friday alerts minimal: show only `Saldo disponível` and `Projeção`; add `Ação necessária` only when `credits <= 7,000`.
 11. A manually requested real alert outside the scheduled Friday window must use a neutral title such as `Saldo SMS Funnel — conferência atual`. Never label a manual Thursday/other-day readback as the Friday alert. The `sexta-feira` title/content is reserved for the scheduler's validated Friday 15:00 `America/Sao_Paulo` execution.
 
 ## Validation
