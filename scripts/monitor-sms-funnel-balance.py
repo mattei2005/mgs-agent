@@ -82,7 +82,7 @@ def default_state(channel_id: str) -> dict[str, Any]:
             "description": "Estado do monitor de saldo SMS Funnel.",
             "channel_id": channel_id,
             "emergency_credits": THRESHOLDS["emergency"],
-            "schedule": "24 0,8-22/2 * * *",
+            "schedule": "24 0,1,7-23 * * *",
         },
         "last_check": None,
         "level": "normal",

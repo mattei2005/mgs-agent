@@ -33,12 +33,12 @@
     {
       "agent": "zeus",
       "id": "sb-purple-pages-excel-20260716",
-      "next_step": "Mapear templates roxos para páginas vinculadas e procurar atribuição de erro por Page ID via SB/Meta.",
+      "next_step": "Rodolfo/Ciro validar permissão/app nas 17 páginas; depois fechar especificação do cron de reparo vermelho/cinza com 30 mensagens.",
       "objective": "Identificar páginas vinculadas que causam erro roxo pages_utility_messaging e entregar Excel operacional",
       "source": "discord:1527452748969283705",
-      "state": "início: regra de eta corrigida para 12 segundos por mensagem/página; 132 roxas atuais, 51 com erro #200 pages_utility_messaging agregado por mensagem.",
+      "state": "concluído: 51 são mensagens roxas em 6 templates; 17 páginas ativas vinculadas, todas com último report dtr code 100/subcode 1689001; 1 row adicional on-hold fora do pages. excel validado gerado. regra de eta do futuro reparador corrigida de 8 para 12 segundos por mensagem/página.",
       "thread_id": "1527356568578818198",
-      "updated_at": "2026-07-16T23:12:37+00:00"
+      "updated_at": "2026-07-16T23:31:28+00:00"
     },
     {
       "agent": "zeus",
@@ -52,5 +52,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T23:12:37+00:00"
+  "updated_at": "2026-07-16T23:31:28+00:00"
 }
