@@ -411,15 +411,64 @@ def safe_zip(path: Path) -> None:
                 raise RuntimeError(f"unsafe zip member: {member.filename}")
 
 
-def run_hermes_backup(profile: str, mode: str, output: Path) -> dict[str, Any]:
-    command = [str(HERMES), "-p", profile, "backup"]
+QUICK_PROFILE_ENTRIES = (
+    "state.db", "config.yaml", ".env", "auth.json", "cron", "channel_directory.json",
+    "channel_aliases.json", "pairing", "platforms/pairing", "projects.db",
+    "response_store.db", "memory_store.db", "verification_evidence.db", "kanban",
+    "sessions", "memories",
+)
+PROFILE_SKIP_DIRS = {
+    "home", "lsp", "bin", "cache", "logs", "artifacts", "browser-profiles",
+    "browser-profile-backups", "state-snapshots", "backups", "checkpoints",
+    "node_modules", "__pycache__", ".cache", ".git",
+}
+
+
+def iter_profile_files(profile: str, mode: str) -> Iterable[tuple[Path, Path]]:
+    home = Path("/root/.hermes/profiles") / profile
+    if not home.is_dir():
+        raise RuntimeError(f"Hermes profile home is missing: {profile}")
+    candidates: list[Path] = []
     if mode == "quick":
-        command.extend(["--quick", "--label", "mgs-offsite-hourly"])
-    command.extend(["--output", str(output)])
-    proc = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=3600, check=False)
-    if proc.returncode != 0:
-        detail = (proc.stderr or proc.stdout)[-1000:]
-        raise RuntimeError(f"Hermes backup failed for {profile}: rc={proc.returncode} {detail}")
+        roots = [home / rel for rel in QUICK_PROFILE_ENTRIES]
+    else:
+        roots = [home]
+    for root in roots:
+        if root.is_file():
+            candidates.append(root)
+            continue
+        if not root.is_dir():
+            continue
+        for dirpath, dirnames, filenames in os.walk(root, followlinks=False):
+            current = Path(dirpath)
+            dirnames[:] = [name for name in dirnames if name not in PROFILE_SKIP_DIRS]
+            for filename in filenames:
+                candidates.append(current / filename)
+    seen: set[Path] = set()
+    for path in candidates:
+        if not path.is_file() or path.is_symlink() or path in seen:
+            continue
+        if path.name.endswith((".db-wal", ".db-shm", ".db-journal", ".pyc", ".pyo")):
+            continue
+        seen.add(path)
+        yield path, path.relative_to(home)
+
+
+def run_hermes_backup(profile: str, mode: str, output: Path) -> dict[str, Any]:
+    rows = list(iter_profile_files(profile, mode))
+    with tempfile.TemporaryDirectory(prefix=f"mgs-profile-{profile}-", dir=str(output.parent)) as raw:
+        scratch = Path(raw)
+        with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
+            for source, rel in rows:
+                if source.suffix == ".db":
+                    snapshot = scratch / (hashlib.sha256(str(source).encode()).hexdigest() + ".db")
+                    try:
+                        sqlite_snapshot(source, snapshot)
+                        archive.write(snapshot, rel.as_posix())
+                    finally:
+                        snapshot.unlink(missing_ok=True)
+                else:
+                    archive.write(source, rel.as_posix())
     if not output.is_file() or output.stat().st_size == 0:
         raise RuntimeError(f"Hermes backup did not create {output}")
     safe_zip(output)
