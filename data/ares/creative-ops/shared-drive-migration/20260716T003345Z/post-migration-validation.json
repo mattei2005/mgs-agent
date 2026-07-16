@@ -1,0 +1,35 @@
+{
+  "generated_at_utc": "2026-07-16T01:17:51.285898+00:00",
+  "status": "PASS",
+  "run_id": "20260716T003345Z",
+  "checks": {
+    "target_items": true,
+    "target_folders": true,
+    "target_files": true,
+    "target_bytes": true,
+    "backup_items": true,
+    "backup_folders": true,
+    "backup_files": true,
+    "backup_bytes": true,
+    "backup_source_ids_exact": true,
+    "moved_ids_absent_from_backup": true,
+    "moved_ids_present_in_target": true,
+    "source_root_in_backup_container": true,
+    "copied_source_and_target_hashes": true
+  },
+  "copy_hash_mismatches": [],
+  "target_summary": {
+    "items": 1443,
+    "folders": 304,
+    "files": 1139,
+    "bytes": 4882460554
+  },
+  "backup_summary": {
+    "container_id": "16R-2mGJo3zeXRGZUWs6EerIlWFERT3DG",
+    "source_root_id": "14ica5TVauTrzAxcl4T-ViJorF89vRKIl",
+    "items": 408,
+    "folders": 304,
+    "files": 104,
+    "bytes": 1196858738
+  }
+}

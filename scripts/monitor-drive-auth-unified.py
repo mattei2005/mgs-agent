@@ -26,7 +26,7 @@ from cryptography.hazmat.primitives.asymmetric import padding, rsa
 BASE = Path("/root/mgs-agent")
 TOKEN_FILE = Path(os.environ.get("MGS_DRIVE_OAUTH_TOKEN_FILE", str(BASE / ".secrets/ares-google-drive-oauth-client.json")))
 STATE_FILE = Path(os.environ.get("MGS_DRIVE_AUTH_STATE_FILE", str(BASE / "data/drive-auth-unified-state.json")))
-ROOT_ID = os.environ.get("MGS_DRIVE_ROOT_ID", "14ica5TVauTrzAxcl4T-ViJorF89vRKIl")
+ROOT_ID = os.environ.get("MGS_DRIVE_ROOT_ID", "0AEwt4Ye690ocUk9PVA")
 SA_ITEM = os.environ.get("MGS_DRIVE_SA_ITEM", "Google Service Account - Ares Drive")
 SA_INTERVAL = int(os.environ.get("MGS_DRIVE_SA_INTERVAL_SECONDS", "86400"))
 REMIND_INTERVAL = int(os.environ.get("MGS_DRIVE_ALERT_REPEAT_SECONDS", "21600"))

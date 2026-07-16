@@ -1,0 +1,44 @@
+{
+  "generated_at_utc": "2026-07-16T01:14:06.315074+00:00",
+  "status": "PASS",
+  "run_id": "20260716T003345Z",
+  "source_root_id": "14ica5TVauTrzAxcl4T-ViJorF89vRKIl",
+  "destination_shared_drive_id": "0AEwt4Ye690ocUk9PVA",
+  "destination_shared_drive_name": "MGS-AGENTS",
+  "counts": {
+    "items": 1443,
+    "folders": 304,
+    "files": 1139,
+    "RECREATE_NEW_ID": 304,
+    "MOVE_PRESERVE_ID": 1035,
+    "COPY_NEW_ID": 104
+  },
+  "validation": {
+    "status": "PASS",
+    "target_items": 1443,
+    "target_folders": 304,
+    "target_files": 1139,
+    "target_bytes": 4882460554,
+    "md5_checked": 1134,
+    "md5_mismatches": 0
+  },
+  "source_backup": {
+    "status": "PASS",
+    "container_id": "16R-2mGJo3zeXRGZUWs6EerIlWFERT3DG",
+    "source_root_id": "14ica5TVauTrzAxcl4T-ViJorF89vRKIl",
+    "source_root_name": "MGS-AGENTS",
+    "source_root_parents": [
+      "16R-2mGJo3zeXRGZUWs6EerIlWFERT3DG"
+    ]
+  },
+  "folder_map_count": 305,
+  "file_map_count": 1139,
+  "moved_file_count": 1035,
+  "copied_file_count": 104,
+  "copy_policy": "External-owner originals remain under the old MGS-AGENTS tree, which was moved intact into a My Drive backup container after destination validation.",
+  "artifacts": {
+    "folder_map": "folder-map.json",
+    "file_map": "file-map.json",
+    "target-tree.json": "target-tree.json"
+  }
+}
