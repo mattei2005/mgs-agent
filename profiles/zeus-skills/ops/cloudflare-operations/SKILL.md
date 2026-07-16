@@ -1,7 +1,7 @@
 ---
 name: cloudflare-operations
 description: "Use when Rodolfo asks Zeus to operate Cloudflare for MGS domains: purge cache, inspect zones/DNS/settings, or prepare DNS/SSL/WAF/rules changes. Covers 1Password token handling, zone resolution including subdomains, confirmation rules, API calls, audit logging, and reporting."
-version: 1.0.0
+version: 1.1.0
 author: Zeus MGS
 license: Proprietary
 metadata:
@@ -29,6 +29,12 @@ Use this skill when Rodolfo asks to:
 - prepare or apply specific Cloudflare changes after approval.
 
 Do not use this skill for WordPress application cache, RunCloud cache, plugin cache, browser cache, or CDN providers other than Cloudflare unless Rodolfo explicitly says Cloudflare is involved.
+
+## Routine Cache Purge Fast Path
+
+For a direct cache-purge request from Rodolfo, loading this skill completes the procedural lookup. Execute from this documented procedure immediately; do **not** search the repository for Cloudflare scripts, reopen `AGENT.md`, or run broad confirmation-rule searches when the request and zone scope are already clear.
+
+Limit prerequisite work to the required live checks: validate the token, resolve the requested hostname to its Cloudflare zone, purge, append the audit event, and validate the audit readback. Search other files only when this skill is missing or broken, the hostname-to-parent-zone scope is ambiguous, the API path fails, or Rodolfo explicitly asks for an audit/investigation. This keeps routine purges fast and avoids unnecessary visible `Searching...` churn in Discord.
 
 ## Credential Source
 

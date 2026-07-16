@@ -18,27 +18,30 @@ Use this reference when Rodolfo asks to monitor SMS Funnel credits, alert before
 - Script: `/root/mgs-agent/scripts/monitor-sms-funnel-balance.py`
 - State: `/root/mgs-agent/data/sms-funnel-balance-state.json` (mode `0600`, ignored by Git)
 - Log: `/root/mgs-agent/logs/monitor-sms-funnel-balance.log`
-- Cron: hourly at minute 24 with `flock -n`.
+- Cron regular: hourly at minute 24 with `flock -n` (24 balance consultations/day).
+- Friday cron: every 5 minutes during VPS hours 13–14 on Friday, guarded in-script to act only during 15:00–15:59 `America/Sao_Paulo` and deduplicated after the first successful delivery. Normal success adds one balance consultation on Friday; retries happen only after a failed delivery.
 - Discord destination: `#sms-funnel-balance` (`1527433742233374893`).
 - Transport: Zeus bot API directly. Do not add a recurring 1Password webhook lookup.
 
 Default bands:
 
-- No alert: `credits > 10,000`
-- Critical: `5,000 < credits <= 10,000`
+- No threshold alert: `credits > 5,000`
 - Emergency: `credits <= 5,000`
+- Mandatory Friday report: every Friday at 15:00 `America/Sao_Paulo`, regardless of balance.
 
 Behavior:
 
-1. Stay silent while `credits > 10,000`.
-2. Alert when the balance reaches `10,000` or less; mention Rodolfo.
+1. Stay silent on threshold monitoring while `credits > 5,000`.
+2. Alert and mention Rodolfo when the balance reaches `5,000` or less.
 3. At `5,000` or less, add an `Ação necessária` field instructing a PIX recharge with the SMS Funnel supplier.
-4. Remind at most every 12h in critical and every 4h in emergency.
-5. Detect a recharge when contracted credits increase or available balance rises by at least 100, then post a green confirmation.
-6. Fetch `GET /api/daily-sents` and calculate the projection from the three most recent completed calendar days. Exclude the current partial-day bucket so the hourly execution time does not distort the average. If that endpoint fails, keep the balance alert working and mark the projection unavailable.
-7. Alert after two consecutive API/1Password failures and post recovery only if that failure was previously alerted.
-8. If Discord delivery fails, do not consume the state transition; retry it on the next run.
-9. Keep threshold alerts minimal: show only `Saldo disponível` and `Projeção`. The projection line contains the average of the three most recent completed days in SMS/day and the estimated duration of the current balance. Do not show contracted/used credits or threshold definitions. Add `Ação necessária` only in the emergency band (`credits <= 5,000`).
+4. Remind at most every 4h while the emergency remains active.
+5. Independently of the balance, send a mandatory Friday report at 15:00 in `America/Sao_Paulo`, with mention, available balance, and three-day projection. Deduplicate by Brazil calendar date.
+6. Detect a recharge when contracted credits increase or available balance rises by at least 100, then post a green confirmation.
+7. Fetch `GET /api/daily-sents` and calculate the projection from the three most recent completed calendar days. Exclude the current partial-day bucket so the hourly execution time does not distort the average. If that endpoint fails, keep the balance alert working and mark the projection unavailable.
+8. Alert after two consecutive API/1Password failures and post recovery only if that failure was previously alerted.
+9. If Discord delivery fails, do not consume the state transition; retry it on the next run.
+10. Keep threshold and Friday alerts minimal: show only `Saldo disponível` and `Projeção`; add `Ação necessária` only when `credits <= 5,000`.
+11. A manually requested real alert outside the scheduled Friday window must use a neutral title such as `Saldo SMS Funnel — conferência atual`. Never label a manual Thursday/other-day readback as the Friday alert. The `sexta-feira` title/content is reserved for the scheduler's validated Friday 15:00 `America/Sao_Paulo` execution.
 
 ## Validation
 
