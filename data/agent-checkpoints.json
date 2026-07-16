@@ -3,14 +3,14 @@
     {
       "agent": "zeus",
       "id": "knowledge-continuity-2026",
-      "next_step": "Change capacity alert from 70% to 90%; automatically create a secure read-only before/after compaction proposal at threshold; never apply it without Rodolfo approval; validate and close",
+      "next_step": "Normal monitoring: at >=90% alert Rodolfo and create a secure read-only before/after proposal; never apply USER/MEMORY changes without explicit Rodolfo approval; overflow remains dead-letter protected",
       "objective": "Preserve MGS institutional context without relying on individual agent memory",
       "source": "discord:message:1527396417373470740",
-      "state": "capacity-policy-90-proposal-only-authorized",
+      "state": "closed-stable-capacity-policy-90-proposal-only",
       "thread_id": "1527004682382479380",
-      "updated_at": "2026-07-16T19:33:04+00:00"
+      "updated_at": "2026-07-16T19:42:17+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T19:33:04+00:00"
+  "updated_at": "2026-07-16T19:42:17+00:00"
 }
