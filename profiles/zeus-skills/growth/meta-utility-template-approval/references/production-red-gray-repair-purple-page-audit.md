@@ -13,7 +13,11 @@ Use this reference when Rodolfo asks to keep linked SmartBidding Broadcast Templ
 - Red: replace with a unique same-country/vertical/language copy, then run `Run Approval → Update → Save → readback`.
 - Gray: do not act while approval may still be processing. Eligibility ETA is `pages × 30 × 12 seconds`, plus any explicit safety margin. For an eligible stale slot, install a different copy, run approval, wait its new ETA, and allow at most four distinct copies. Persist attempts by immutable template ID + message ID + normalized text hash. Reset on green or verified manual change.
 - After four gray copy failures, stop that slot and report template name, page count, slot/message count, and attempts to `#cron-temp-templates` (`1524188896215171222`). Suppress duplicate alerts.
-- Purple: never auto-replace in this repair loop. Treat as app/page/segurador connection diagnostics.
+- Purple: ignore completely in the fixed-30 repair loop. Do not replace, retry, alert, split templates, or run recurring page-attribution audits for purple while this hold is active. On 2026-07-16 Rodolfo decided to leave purple handling to a future discussion with Ciro because SB does not expose the causal Page ID. Reopen purple diagnostics only on a new explicit instruction from Rodolfo.
+
+## Current purple hold — 2026-07-16
+
+The prior purple Excel/audit is retained only as historical evidence. It must not drive automatic action. The operational plan now covers red and eligible stale gray only; purple rows are skipped silently. Ciro may be able to resolve or expose page-level attribution because he created the template/color system.
 
 ## Do not revive the legacy rollout manager in place
 
@@ -43,7 +47,7 @@ The old hourly manager contains obsolete 10/20/30 scaling, a stale tracker, and 
    - a page list mapped from affected templates is an operational suspect list unless corroborated. Even with corroboration, distinguish “same page-level failure observed” from proof that a specific Graph permission is missing.
 9. Produce a verified XLSX with:
    - `Resumo`;
-   - `Todas páginas roxas` for the complete active universe;
+   - `Páginas vinculadas` for the complete active universe (never label these rows as confirmed “purple pages”);
    - a named subset sheet such as `Subconjunto #200` when the request singles out one reason;
    - `Rows não ativas` for attached `Ready`/`On-hold`/`Blocked` rows.
    Include `Nome do template` as a prominent explicit column, clickable Facebook links, filters, frozen header, readable widths, purple category/reason, and a methodology caveat. Reopen the workbook and validate sheet names, row counts, column placement, and hyperlinks before delivery.
