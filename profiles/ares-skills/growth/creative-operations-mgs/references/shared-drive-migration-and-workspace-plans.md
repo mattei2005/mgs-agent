@@ -158,6 +158,13 @@ Antes de migrar a árvore:
 
 ## Migração segura
 
+### IDs, folders e Drive for desktop
+
+- Um **move real de arquivo** via `files.update(addParents/removeParents)` pode preservar o `fileId` e o checksum quando a identidade tem `canMoveItemIntoTeamDrive=true`; validar antes/depois.
+- A Drive API rejeita mover **pastas** do My Drive para Shared Drive com HTTP 403 `teamDrivesFolderMoveInNotSupported`. Recriar a árvore no destino e registrar `old_folder_id → new_folder_id`.
+- O Google também não suporta mover pastas do My Drive para Shared Drive pelo Drive for desktop. Não orientar arrastar a árvore pelo Finder/Explorer: pode falhar ou virar cópia sem mapeamento auditável.
+- Arquivo de owner externo com `canMoveItemIntoTeamDrive=false` deve ser copiado sob ownership organizacional, mantendo o original até readback. A cópia recebe novo ID; preservar checksum, fingerprint, linhagem e `old_file_id → new_file_id`.
+
 1. Congelar writes concorrentes com lock e novo snapshot.
 2. Separar itens por owner/capacidade e executar em lotes reversíveis.
 3. Preservar IDs quando o move real permitir; quando houver copy, registrar old ID → new ID, checksums e lineage.

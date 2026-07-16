@@ -1,0 +1,137 @@
+{
+  "generated_at_utc": "2026-07-16T00:02:22.155196+00:00",
+  "source": "14ica5TVauTrzAxcl4T-ViJorF89vRKIl",
+  "target": "0AEwt4Ye690ocUk9PVA",
+  "tests": {
+    "file": {
+      "id": "1F_FhlUe4PT-Mlnac2wRZdbz3D_K3WOoZ",
+      "before": {
+        "id": "1F_FhlUe4PT-Mlnac2wRZdbz3D_K3WOoZ",
+        "name": "_ARES_MOVE_FILE_20260716T000222Z.txt",
+        "mimeType": "text/plain",
+        "trashed": false,
+        "parents": [
+          "14ica5TVauTrzAxcl4T-ViJorF89vRKIl"
+        ],
+        "capabilities": {
+          "canDelete": true,
+          "canMoveItemIntoTeamDrive": true,
+          "canMoveItemOutOfDrive": true,
+          "canMoveItemWithinDrive": true
+        },
+        "md5Checksum": "615ab0aa678123a1282f2dcdc5004688",
+        "size": "32"
+      },
+      "move_into": {
+        "ok": true,
+        "object": {
+          "id": "1F_FhlUe4PT-Mlnac2wRZdbz3D_K3WOoZ",
+          "name": "_ARES_MOVE_FILE_20260716T000222Z.txt",
+          "mimeType": "text/plain",
+          "trashed": false,
+          "parents": [
+            "0AEwt4Ye690ocUk9PVA"
+          ],
+          "driveId": "0AEwt4Ye690ocUk9PVA",
+          "md5Checksum": "615ab0aa678123a1282f2dcdc5004688",
+          "size": "32"
+        }
+      },
+      "after_into": {
+        "id": "1F_FhlUe4PT-Mlnac2wRZdbz3D_K3WOoZ",
+        "name": "_ARES_MOVE_FILE_20260716T000222Z.txt",
+        "mimeType": "text/plain",
+        "trashed": false,
+        "parents": [
+          "0AEwt4Ye690ocUk9PVA"
+        ],
+        "driveId": "0AEwt4Ye690ocUk9PVA",
+        "capabilities": {
+          "canDelete": true,
+          "canMoveItemIntoTeamDrive": true,
+          "canMoveItemOutOfDrive": true,
+          "canMoveItemWithinDrive": true
+        },
+        "md5Checksum": "615ab0aa678123a1282f2dcdc5004688",
+        "size": "32"
+      },
+      "move_back": {
+        "ok": true,
+        "object": {
+          "id": "1F_FhlUe4PT-Mlnac2wRZdbz3D_K3WOoZ",
+          "name": "_ARES_MOVE_FILE_20260716T000222Z.txt",
+          "mimeType": "text/plain",
+          "trashed": false,
+          "parents": [
+            "14ica5TVauTrzAxcl4T-ViJorF89vRKIl"
+          ],
+          "md5Checksum": "615ab0aa678123a1282f2dcdc5004688",
+          "size": "32"
+        }
+      },
+      "after_back": {
+        "id": "1F_FhlUe4PT-Mlnac2wRZdbz3D_K3WOoZ",
+        "name": "_ARES_MOVE_FILE_20260716T000222Z.txt",
+        "mimeType": "text/plain",
+        "trashed": false,
+        "parents": [
+          "14ica5TVauTrzAxcl4T-ViJorF89vRKIl"
+        ],
+        "capabilities": {
+          "canDelete": true,
+          "canMoveItemIntoTeamDrive": true,
+          "canMoveItemOutOfDrive": true,
+          "canMoveItemWithinDrive": true
+        },
+        "md5Checksum": "615ab0aa678123a1282f2dcdc5004688",
+        "size": "32"
+      },
+      "same_id": true,
+      "same_md5": true
+    },
+    "folder": {
+      "id": "1t0yuy_4oNTzQUc5xLuIK4-XXonf1ub2Q",
+      "before": {
+        "id": "1t0yuy_4oNTzQUc5xLuIK4-XXonf1ub2Q",
+        "name": "_ARES_MOVE_FOLDER_20260716T000222Z",
+        "mimeType": "application/vnd.google-apps.folder",
+        "trashed": false,
+        "parents": [
+          "14ica5TVauTrzAxcl4T-ViJorF89vRKIl"
+        ],
+        "capabilities": {
+          "canDelete": true,
+          "canMoveItemIntoTeamDrive": true,
+          "canMoveItemOutOfDrive": true,
+          "canMoveItemWithinDrive": true
+        }
+      },
+      "move_into": {
+        "ok": false,
+        "http_status": 403,
+        "error": {
+          "error": {
+            "code": 403,
+            "message": "Moving folders into shared drives is not supported.",
+            "errors": [
+              {
+                "message": "Moving folders into shared drives is not supported.",
+                "domain": "global",
+                "reason": "teamDrivesFolderMoveInNotSupported"
+              }
+            ]
+          }
+        }
+      },
+      "after_into": null,
+      "move_back": null,
+      "after_back": null,
+      "same_id": false
+    }
+  },
+  "cleanup": {
+    "file_deleted": true,
+    "folder_deleted": true
+  },
+  "status": "PASS"
+}

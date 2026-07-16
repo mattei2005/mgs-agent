@@ -1,0 +1,47 @@
+{
+  "generated_at_utc": "2026-07-16T00:04:21.983817+00:00",
+  "status": "READY_FOR_CONTROLLED_MIGRATION",
+  "source": {
+    "root_id": "14ica5TVauTrzAxcl4T-ViJorF89vRKIl",
+    "creative_root_id": "1NLaOKK6n4fMF5u1Assgq8FKim76NI--i",
+    "storage": "MY_DRIVE"
+  },
+  "destination": {
+    "drive_id": "0AEwt4Ye690ocUk9PVA",
+    "name": "MGS-CREATIVE-OPS"
+  },
+  "manager_readback": {
+    "email": "mattei2005@gmail.com",
+    "role": "organizer",
+    "visible_to_oauth": true
+  },
+  "inventory_baseline": {
+    "items": 1435,
+    "files": 1134,
+    "folders": 301,
+    "bytes": 4881497822,
+    "files_owned_by_rodolfo_move_candidate": 1030,
+    "files_owned_by_external_copy_required": 104,
+    "folders_recreate_with_new_ids": 301
+  },
+  "proof": {
+    "individual_file_move": {
+      "status": "PASS",
+      "same_id": true,
+      "same_md5": true
+    },
+    "folder_move_api": {
+      "status": "BLOCKED",
+      "http_status": 403,
+      "reason": "teamDrivesFolderMoveInNotSupported"
+    },
+    "drive_for_desktop_folder_move": "NOT_SUPPORTED_BY_GOOGLE"
+  },
+  "recommended_strategy": [
+    "Do not drag the tree through Drive for desktop.",
+    "Recreate folders and map old_folder_id to new_folder_id.",
+    "Move 1030 Rodolfo-owned files individually to preserve file IDs and checksums.",
+    "Copy 104 external-owned files, verify checksums/fingerprints, and map old_file_id to new_file_id.",
+    "Keep the source until full count/hash/readback and update operational references selectively."
+  ]
+}

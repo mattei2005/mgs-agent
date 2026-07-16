@@ -1,0 +1,112 @@
+{
+  "generated_at_utc": "2026-07-16T00:01:42.992968+00:00",
+  "status": "FAIL",
+  "auth_identity": "mattei2005@gmail.com",
+  "source_parent_id": "14ica5TVauTrzAxcl4T-ViJorF89vRKIl",
+  "target_shared_drive_id": "0AEwt4Ye690ocUk9PVA",
+  "steps": [
+    {
+      "step": "source_created",
+      "ok": true,
+      "evidence": {
+        "items": {
+          "1PJylC7lOdb_DKJglC2f933lmw1qsrz6C": {
+            "id": "1PJylC7lOdb_DKJglC2f933lmw1qsrz6C",
+            "name": "_ARES_ID_MOVE_PILOT_20260716T000135Z",
+            "mimeType": "application/vnd.google-apps.folder",
+            "trashed": false,
+            "parents": [
+              "14ica5TVauTrzAxcl4T-ViJorF89vRKIl"
+            ],
+            "owners": [
+              {
+                "displayName": "Rodolfo Mattei",
+                "emailAddress": "mattei2005@gmail.com"
+              }
+            ],
+            "ownedByMe": true,
+            "capabilities": {
+              "canAddChildren": true,
+              "canDelete": true,
+              "canEdit": true,
+              "canMoveItemIntoTeamDrive": true,
+              "canMoveItemOutOfDrive": true,
+              "canMoveItemWithinDrive": true,
+              "canTrash": true
+            }
+          },
+          "11tBDIXSs1piN9GoZDN6LQPSU1PYupo42": {
+            "id": "11tBDIXSs1piN9GoZDN6LQPSU1PYupo42",
+            "name": "SUBFOLDER",
+            "mimeType": "application/vnd.google-apps.folder",
+            "trashed": false,
+            "parents": [
+              "1PJylC7lOdb_DKJglC2f933lmw1qsrz6C"
+            ],
+            "owners": [
+              {
+                "displayName": "Rodolfo Mattei",
+                "emailAddress": "mattei2005@gmail.com"
+              }
+            ],
+            "ownedByMe": true,
+            "capabilities": {
+              "canAddChildren": true,
+              "canDelete": true,
+              "canEdit": true,
+              "canMoveItemIntoTeamDrive": true,
+              "canMoveItemOutOfDrive": true,
+              "canMoveItemWithinDrive": true,
+              "canTrash": true
+            }
+          },
+          "1FliccXcW9Mvqasx9AdOxWrdqWhuvgro2": {
+            "id": "1FliccXcW9Mvqasx9AdOxWrdqWhuvgro2",
+            "name": "pilot.txt",
+            "mimeType": "text/plain",
+            "trashed": false,
+            "parents": [
+              "11tBDIXSs1piN9GoZDN6LQPSU1PYupo42"
+            ],
+            "owners": [
+              {
+                "displayName": "Rodolfo Mattei",
+                "emailAddress": "mattei2005@gmail.com"
+              }
+            ],
+            "ownedByMe": true,
+            "capabilities": {
+              "canAddChildren": false,
+              "canDelete": true,
+              "canEdit": true,
+              "canMoveItemIntoTeamDrive": true,
+              "canMoveItemOutOfDrive": true,
+              "canMoveItemWithinDrive": true,
+              "canTrash": true
+            },
+            "md5Checksum": "19a9e673fbf9e256146f1e1bb4708804",
+            "size": "47"
+          }
+        }
+      }
+    }
+  ],
+  "error": "HTTPError: HTTP Error 403: Forbidden",
+  "cleanup": [
+    {
+      "id": "1FliccXcW9Mvqasx9AdOxWrdqWhuvgro2",
+      "deleted": true
+    },
+    {
+      "id": "11tBDIXSs1piN9GoZDN6LQPSU1PYupo42",
+      "deleted": true
+    },
+    {
+      "id": "1PJylC7lOdb_DKJglC2f933lmw1qsrz6C",
+      "deleted": true
+    }
+  ],
+  "side_effects": {
+    "pilot_items_remaining": []
+  }
+}
