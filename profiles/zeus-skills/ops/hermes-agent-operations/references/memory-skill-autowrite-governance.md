@@ -115,6 +115,23 @@ For every profile and subsystem:
    - **discard** — obsolete, stale, or superseded; remove only through the audited/canonical queue path available in the deployment.
 6. Present one line per item plus a batch recommendation. Wait for the human decision; do not mutate the queue during inventory.
 
+### Canonical discard after explicit approval
+
+Discarding a recovered, stale, or superseded pending record is a deletion and therefore requires the exact Critical Subset confirmation. Keep queue deletion separate from USER/MEMORY compaction: approval to discard records does not authorize rewriting the durable stores.
+
+After approval:
+
+1. Freeze the exact profile/subsystem/pending-ID list. Refuse any extra ID discovered later until separately authorized.
+2. Before deletion, create a protected backup outside Git under `/root/.hermes/secure-backups/` with directory mode `0700` and files `0600`. Copy each pending JSON, record its SHA-256 in a manifest, and record pre-action hashes/sizes for the affected `USER.md` and `MEMORY.md` stores.
+3. Read each record through `tools.write_approval.get_pending()` under the correct profile scope. Use `hermes_constants.set_hermes_home_override()` / `reset_hermes_home_override()` for in-process multi-profile work; never rely on the default profile fallback.
+4. Verify the readback ID, subsystem, failure type, action, and classification match the approved batch. A changed or missing record stops that item; do not substitute another pending ID.
+5. Delete only through `tools.write_approval.discard_pending(subsystem, pending_id)`, not raw `rm`/`unlink`. Require `True`, then verify `get_pending(...) is None` and the exact source path is absent.
+6. Re-hash every affected USER/MEMORY store and require byte identity with the pre-action manifest. Queue cleanup must not mutate durable memory.
+7. Run `monitor_hermes_pending_writes.py --summary-json` and validate exact remaining IDs/counts. For an approved full drain, require `total=0`, `dead_letter_count=0`, and `aged=0`; capacity warnings are a separate follow-up, not proof the discard failed.
+8. Append audit with authorized IDs, recovered/superseded classification, backup path, canonical discard method, store-hash proof, and remaining capacity risk. Regenerate inventory and emit/read back the canonical REPORT-INFRA when MGS policy requires it.
+
+Pitfall: a backup proving recoverability does not authorize replaying its payload. Restoring, applying, compacting, and deleting are distinct state changes with distinct scopes.
+
 ### Reconcile evidence before rejecting a proposal
 
 Do not reject a staged proposal merely because its evidence is absent from the current session. Reconcile the exact claim in this order: `logs/events-audit.jsonl` → `data/infra-inventory.json` → REPORT-INFRA → Git → `session_search`. Then:
