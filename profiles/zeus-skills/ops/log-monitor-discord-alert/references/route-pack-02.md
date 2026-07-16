@@ -5,6 +5,7 @@
 | Saúde Yoast SEO/Readability | `#alerts-yoast` (1498193722871910550) | `Discord Webhook - Alerts Yoast Channel` |
 | Infra crítica (auto-push, deploy) | `#mgs-alerts` (1498132022634483894) | `Discord Webhook - Alerts Infra Channel` |
 | Updates do Hermes Agent | `#alerts-hermes-news` (1505609056771899644) | Zeus Bot API (`DISCORD_BOT_TOKEN` do profile zeus) |
+| Capacidade USER/MEMORY >=90% + proposta de compactação | `#limites-90` (1527401973698007060) | Zeus Bot API (`DISCORD_BOT_TOKEN` do profile zeus) |
 | REPORT-INFRA / cobrança operacional ao Zeus | `#alerts-infra` (1498132022634483894) | `Discord Webhook - Alerts Infra Channel` |
 
 **Layout obrigatório das mensagens:** usar Discord embed com `fields` estruturados — nunca mandar alerta como texto bruto em `content`, exceto a mention necessária para push.

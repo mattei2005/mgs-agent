@@ -3,14 +3,14 @@
     {
       "agent": "zeus",
       "id": "knowledge-continuity-2026",
-      "next_step": "Route >=90% memory alerts and proposal metadata to Discord channel 1527401973698007060; validate default route without visible smoke; keep REPORT-INFRA in canonical alerts-infra",
+      "next_step": "Normal monitoring: route >=90% USER/MEMORY alerts and proposal metadata to #limites-90 (1527401973698007060); REPORT-INFRA remains in #alerts-infra; never apply compactation without explicit Rodolfo approval",
       "objective": "Preserve MGS institutional context without relying on individual agent memory",
       "source": "discord:message:1527402042102906882",
-      "state": "capacity-policy-90-channel-cutover-authorized",
+      "state": "closed-stable-capacity-policy-90-channel-limites-90",
       "thread_id": "1527004682382479380",
-      "updated_at": "2026-07-16T19:51:16+00:00"
+      "updated_at": "2026-07-16T19:53:36+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T19:51:16+00:00"
+  "updated_at": "2026-07-16T19:53:36+00:00"
 }
