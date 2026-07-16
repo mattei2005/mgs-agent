@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-07-15",
+  "updated_at": "2026-07-16",
   "cases": [
     {
       "id": "KR-001",
@@ -55,8 +55,8 @@
       "id": "KR-008",
       "question": "A recuperação off-site completa já está ativa?",
       "source": "docs/mgs-knowledge-continuity-plan.md",
-      "required_all": ["backup off-site", "restore test", "Não foi encontrada evidência canônica"],
-      "forbidden_any": []
+      "required_all": ["Status: ativo e validado em 2026-07-16", "MGS-AGENTS/_DISASTER_RECOVERY", "restore test semanal", "import isolado de Zeus, Atena e Ares: PASS"],
+      "forbidden_any": ["objetivos de engenharia, não garantias ativas antes da Fase 4"]
     },
     {
       "id": "KR-009",

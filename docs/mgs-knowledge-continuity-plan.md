@@ -1,8 +1,8 @@
 # Plano MGS — Memória Institucional e Continuidade
 
-> Status: implementação v1.2, Fase 2 piloto Zeus ativa e validada
+> Status: implementação v1.3, Fase 2 piloto Zeus e Fase 4 de recuperação ativas e validadas
 > Aprovado por: Rodolfo Mattei em 2026-07-15  
-> Escopo aprovado: Fases 0–1 aditivas + Fase 2 somente Zeus, sem restart, sem alterar permissões e sem apagar memória.
+> Escopo aprovado: Fases 0–1 aditivas + Fase 2 somente Zeus em 2026-07-15; Fase 4 de backup/recuperação autorizada e ativada em 2026-07-16.
 
 ## Objetivo executivo
 
@@ -102,16 +102,19 @@ Escopo futuro:
 
 ## Fase 4 — Backup e recuperação
 
-Escopo futuro:
+Status: ativo e validado em 2026-07-16.
 
-- backup incremental criptografado fora da VPS;
-- incluir repositório, memórias, sessions/state.db, configs e bancos aprovados;
-- excluir segredos ou protegê-los em fluxo criptografado separado;
-- retenção diária, semanal e mensal;
-- restore drill isolado;
-- monitorar idade do último backup e do último restore aprovado.
+- backup horário e completo criptografado com chave pública antes do upload;
+- chave privada exclusiva preservada no 1Password e ausente da rotina normal de backup;
+- destino off-site no Shared Drive canônico `MGS-AGENTS/_DISASTER_RECOVERY`;
+- inclui MGS OS, memórias, sessions, `state.db`, configs, crons, units e bancos aprovados;
+- segredos locais necessários ficam somente dentro do pacote criptografado;
+- retenção por quantidade: 48 horários, 14 diários, 8 semanais e 12 mensais;
+- restore test semanal em diretório isolado, sem alterar profiles vivos;
+- monitor de SLA silencioso, com alerta somente em atraso/falha;
+- incidente de `.env.save*` foi contido com rotação de token e chave, remoção dos backups afetados e reexecução integral.
 
-Metas iniciais propostas:
+Metas ativas:
 
 ```text
 Conhecimento institucional    RPO <= 1 hora
@@ -120,7 +123,17 @@ Restauração funcional         RTO <= 2 horas
 Dead-letter sem classificação máximo 24 horas
 ```
 
-Essas metas são objetivos de engenharia, não garantias ativas antes da Fase 4.
+Validação real da ativação:
+
+- backup horário criptografado: PASS;
+- backup completo criptografado: PASS;
+- upload e readback Drive por tamanho, MD5 e SHA-256: PASS;
+- download do pacote completo: PASS;
+- descriptografia com a chave privada recuperada do 1Password: PASS;
+- import isolado de Zeus, Atena e Ares: PASS;
+- SQLite `quick_check`: PASS; índices FTS derivados do Ares foram reconstruídos somente na cópia isolada;
+- validação do knowledge registry restaurado: PASS;
+- monitor atual: saudável, sem lacunas de SLA.
 
 ## Critério de sucesso final
 

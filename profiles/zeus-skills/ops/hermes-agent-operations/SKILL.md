@@ -124,6 +124,8 @@ Choose only one branch: migration/restore, deep comparison/decommission, post-mi
 
 Primary reference: `references/honcho-git-operations.md`.
 
+If a credential, `.env` editor copy, token, private key, or other secret enters auto-commit/Git history, load `references/git-autocommit-secret-containment.md` before editing history or rotating derivative keys. It covers auto-commit pause, narrow ref rewriting, explicit force-with-lease, exact-SHA remote verification, GitHub retention, and revalidation of dependent encrypted backups.
+
 Honcho is hypothesis/context only; canonical MGS sources remain authoritative.
 
 ### REPORT-INFRA pending alerts, inventory mismatch, or resolver attribution
