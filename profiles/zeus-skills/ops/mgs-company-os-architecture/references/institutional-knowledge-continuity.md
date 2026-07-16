@@ -93,6 +93,21 @@ A checkpoint answers: objective, current state, next step, responsible agent, th
 - Run an isolated restore drill.
 - A local tar validation proves archive readability, not off-host durability or operational restoration.
 
+#### Phase 4 preflight and authorization gate
+
+Before creating backup artifacts, establish the recovery chain in this order:
+
+1. Re-read the initiative checkpoint and inspect the live backup, profile, disk-usage, and external-destination state.
+2. Validate that the destination is genuinely off-host and writable. For Google Drive automation, require Shared Drive metadata (`driveId`) plus the intended technical identity's write capability; folder visibility alone is not upload proof.
+3. Use Hermes' native `hermes -p <profile> backup` for Hermes state when available. It snapshots SQLite through `sqlite3.backup()` and excludes live WAL/SHM sidecars; do not replace that consistency guarantee with a raw copy of a running `state.db`.
+4. Inventory the encryption-recovery path before uploading anything: dedicated key existence, private-key custody in 1Password, and how a replacement VPS obtains the decryption material. Do not reuse an unrelated application secret as a backup password.
+5. If a dedicated backup key must be created or changed, stop at the MGS Critical Subset gate. The confirmation must name key creation/custody, any automatic cleanup of temporary plaintext, and any retention deletion of expired backup snapshots. A general “continue the backup plan” authorization is not the additional critical confirmation.
+6. Prefer a design in which the scheduled backup host needs only encryption capability while decryption custody remains external to the VPS. Never upload plaintext archives or leave recoverable plaintext staging behind.
+7. Run the proof end to end: create consistent backup → encrypt → upload → read back remote metadata/hash → download → decrypt in an isolated location → validate archive and expected canonical files/databases. Import into a live profile is not a restore test and risks overwriting production; use an isolated restore target.
+8. Only after the first restore drill passes should scheduling, retention, age monitoring, and last-approved-restore monitoring be called active.
+
+Keep scope proportional. Exclude reproducible caches, package trees, browser caches, generated media, prior local backups, and large temporary/update proof directories unless a canonical source explicitly requires them. Include the state that cannot be reconstructed from Git or 1Password: institutional data, checkpoints, sessions, memories, profile configuration, and consistent database snapshots.
+
 ## Transactional control requirements
 
 For JSON registers and checkpoints:
