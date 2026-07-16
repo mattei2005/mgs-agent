@@ -170,18 +170,29 @@ def list_tree(drive, root_id: str) -> list[dict]:
 
 
 def create_backup_container(drive, checkpoint: dict) -> str:
-    if checkpoint.get('backup_container_id'):
-        return checkpoint['backup_container_id']
     name = '_MGS-AGENTS_MIGRATION_BACKUP_' + checkpoint['run_id']
-    query = f"'{SOURCE_PARENT}' in parents and trashed=false and name='{name.replace(chr(39), chr(92)+chr(39))}' and mimeType='{FOLDER_MIME}'"
-    params = {'q': query, 'fields': 'files(id,name,mimeType,parents,trashed)', 'pageSize': '100', 'spaces': 'drive'}
+
+    def validated(folder_id: str) -> str:
+        meta = file_get(drive, folder_id)
+        props = meta.get('appProperties') or {}
+        if meta.get('name') != name or meta.get('mimeType') != FOLDER_MIME or meta.get('parents') != [SOURCE_PARENT] or meta.get('driveId') or meta.get('trashed') is True or props.get('mgs_migration') != MIGRATION_TAG or props.get('mgs_backup_for') != SOURCE_ROOT:
+            raise RuntimeError(f'backup container validation failed: {meta}')
+        return folder_id
+
+    if checkpoint.get('backup_container_id'):
+        return validated(checkpoint['backup_container_id'])
+    query = f"'{SOURCE_PARENT}' in parents and trashed=false and appProperties has {{ key='mgs_backup_for' and value='{SOURCE_ROOT}' }} and appProperties has {{ key='mgs_migration' and value='{MIGRATION_TAG}' }}"
+    params = {'q': query, 'fields': 'files(id,name,mimeType,parents,driveId,trashed,appProperties)', 'pageSize': '100', 'spaces': 'drive'}
     found = api(drive, 'https://www.googleapis.com/drive/v3/files?' + urllib.parse.urlencode(params), action='find_backup_container').get('files', [])
+    if len(found) > 1:
+        raise RuntimeError(f'ambiguous backup containers: {[x["id"] for x in found]}')
     if found:
         folder_id = found[0]['id']
     else:
         body = {'name': name, 'mimeType': FOLDER_MIME, 'parents': [SOURCE_PARENT], 'appProperties': {'mgs_migration': MIGRATION_TAG, 'mgs_backup_for': SOURCE_ROOT}}
         params = {'fields': 'id,name,mimeType,parents,appProperties'}
         folder_id = api(drive, 'https://www.googleapis.com/drive/v3/files?' + urllib.parse.urlencode(params), action='create_backup_container', method='POST', data=json.dumps(body).encode(), headers={'Content-Type': 'application/json'})['id']
+    validated(folder_id)
     checkpoint['backup_container_id'] = folder_id
     atomic_json(CHECKPOINT, checkpoint)
     return folder_id
@@ -213,6 +224,60 @@ def validate_metadata(row: dict, target: dict, dest_parent: str, *, copied: bool
         raise RuntimeError(f"move changed file ID for {row['path']}")
 
 
+def validate_exact_target(rows: list[dict], checkpoint: dict, target_tree: list[dict]) -> None:
+    target_by_id = {x['id']: x for x in target_tree}
+    folder_rows = {x['id']: x for x in rows if x['kind'] == 'FOLDER'}
+    file_rows = {x['id']: x for x in rows if x['kind'] == 'FILE'}
+    expected_folder_keys = {SOURCE_ROOT} | set(folder_rows)
+    if set(checkpoint['folder_map']) != expected_folder_keys:
+        raise RuntimeError('checkpoint folder_map keys do not match inventory')
+    if set(checkpoint['file_map']) != set(file_rows):
+        raise RuntimeError('checkpoint file_map keys do not match inventory')
+    actions = Counter(x['action'] for x in checkpoint['file_map'].values())
+    if actions != Counter({'MOVE_PRESERVE_ID': 1035, 'COPY_NEW_ID': 104}):
+        raise RuntimeError(f'checkpoint action counts mismatch: {dict(actions)}')
+    expected_target_ids = set()
+    for row in rows:
+        copied = row['migration_action'] == 'COPY_NEW_ID'
+        target_id = checkpoint['folder_map'][row['id']] if row['kind'] == 'FOLDER' else checkpoint['file_map'][row['id']]['target_id']
+        expected_target_ids.add(target_id)
+        target = target_by_id.get(target_id)
+        if not target:
+            raise RuntimeError(f"target missing for {row['path']}: {target_id}")
+        dest_parent = TARGET_DRIVE if row['parent_id'] == SOURCE_ROOT else checkpoint['folder_map'][row['parent_id']]
+        validate_metadata(row, target, dest_parent, copied=copied)
+        if row['kind'] == 'FOLDER' or copied:
+            props = target.get('appProperties') or {}
+            if props.get('mgs_source_id') != row['id'] or props.get('mgs_migration') != MIGRATION_TAG:
+                raise RuntimeError(f"migration properties mismatch for {row['path']}: {props}")
+    if set(target_by_id) != expected_target_ids:
+        raise RuntimeError('target contains missing or unrelated IDs')
+
+
+def validate_residual_source(drive, rows: list[dict], checkpoint: dict, target_tree: list[dict]) -> dict:
+    residual = list_tree(drive, SOURCE_ROOT)
+    residual_by_id = {x['id']: x for x in residual}
+    target_by_id = {x['id']: x for x in target_tree}
+    expected = {x['id']: x for x in rows if x['kind'] == 'FOLDER' or x['migration_action'] == 'COPY_NEW_ID'}
+    if set(residual_by_id) != set(expected):
+        missing = sorted(set(expected) - set(residual_by_id))
+        extra = sorted(set(residual_by_id) - set(expected))
+        raise RuntimeError(f'residual source mismatch: missing={missing[:20]} extra={extra[:20]}')
+    for source_id, row in expected.items():
+        item = residual_by_id[source_id]
+        expected_parent = SOURCE_ROOT if row['parent_id'] == SOURCE_ROOT else row['parent_id']
+        if item.get('name') != row['name'] or item.get('mimeType') != row['mimeType'] or item.get('parents') != [expected_parent] or item.get('driveId') or item.get('trashed') is True:
+            raise RuntimeError(f"residual metadata mismatch for {row['path']}: {item}")
+        if int(item.get('size') or 0) != int(row.get('size_bytes') or 0) or (row.get('md5Checksum') and item.get('md5Checksum') != row['md5Checksum']):
+            raise RuntimeError(f"residual content mismatch for {row['path']}")
+        if row['migration_action'] == 'COPY_NEW_ID':
+            target_id = checkpoint['file_map'][source_id]['target_id']
+            dest = target_by_id.get(target_id) or {}
+            if dest.get('md5Checksum') != row.get('md5Checksum') or int(dest.get('size') or 0) != int(row.get('size_bytes') or 0):
+                raise RuntimeError(f"copied destination changed for {row['path']}")
+    return {'items': len(residual), 'folders': sum(x['mimeType'] == FOLDER_MIME for x in residual), 'files': sum(x['mimeType'] != FOLDER_MIME for x in residual), 'bytes': sum(int(x.get('size') or 0) for x in residual if x['mimeType'] != FOLDER_MIME)}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--apply', action='store_true')
@@ -226,6 +291,24 @@ def main() -> int:
     actual = {'items': len(rows), 'folders': len(folders), 'files': len(files), **dict(counts)}
     if actual != expected:
         raise RuntimeError(f'inventory count mismatch: expected={expected} actual={actual}')
+    summary = inv.get('summary') or {}
+    scope = summary.get('scope') or {}
+    if scope.get('root_id') != SOURCE_ROOT or scope.get('target_drive_id') != TARGET_DRIVE or scope.get('root_name') != 'MGS-AGENTS':
+        raise RuntimeError(f'inventory scope mismatch: {scope}')
+    ids = [x['id'] for x in rows]
+    if len(ids) != len(set(ids)):
+        raise RuntimeError('inventory contains duplicate IDs')
+    folder_ids = {x['id'] for x in folders}
+    for row in rows:
+        if row['parent_id'] != SOURCE_ROOT and row['parent_id'] not in folder_ids:
+            raise RuntimeError(f"inventory parent graph broken for {row['path']}: {row['parent_id']}")
+        if row['kind'] == 'FOLDER' and (row['mimeType'] != FOLDER_MIME or row['migration_action'] != 'RECREATE_NEW_ID'):
+            raise RuntimeError(f"invalid folder action for {row['path']}")
+        if row['kind'] == 'FILE' and row['migration_action'] not in {'MOVE_PRESERVE_ID', 'COPY_NEW_ID'}:
+            raise RuntimeError(f"invalid file action for {row['path']}")
+    if sum(int(x.get('size_bytes') or 0) for x in files) != 4882460554 or sum(bool(x.get('md5Checksum')) for x in files) != 1134:
+        raise RuntimeError('inventory byte/MD5 totals mismatch')
+    inventory_sha256 = hashlib.sha256(INVENTORY.read_bytes()).hexdigest()
     if not args.apply:
         print(json.dumps({'status': 'DRY_RUN_PASS', 'inventory': str(INVENTORY), 'actual': actual, 'source_root': SOURCE_ROOT, 'target_drive': TARGET_DRIVE, 'target_name': TARGET_NAME, 'backup_policy': 'move old source root into My Drive backup container after full validation'}, ensure_ascii=False, indent=2))
         return 0
@@ -243,8 +326,12 @@ def main() -> int:
     if CHECKPOINT.exists():
         checkpoint = json.loads(CHECKPOINT.read_text(encoding='utf-8'))
     else:
-        checkpoint = {'run_id': dt.datetime.now(dt.UTC).strftime('%Y%m%dT%H%M%SZ'), 'started_at_utc': dt.datetime.now(dt.UTC).isoformat(), 'phase': 'preflight', 'folder_map': {SOURCE_ROOT: TARGET_DRIVE}, 'file_map': {}, 'completed_folders': [], 'completed_files': [], 'errors': []}
+        checkpoint = {'schema_version': 1, 'inventory_sha256': inventory_sha256, 'source_root_id': SOURCE_ROOT, 'target_drive_id': TARGET_DRIVE, 'migration_tag': MIGRATION_TAG, 'run_id': dt.datetime.now(dt.UTC).strftime('%Y%m%dT%H%M%SZ'), 'started_at_utc': dt.datetime.now(dt.UTC).isoformat(), 'phase': 'preflight', 'folder_map': {SOURCE_ROOT: TARGET_DRIVE}, 'file_map': {}, 'completed_folders': [], 'completed_files': [], 'errors': []}
         atomic_json(CHECKPOINT, checkpoint)
+    binding = {'schema_version': 1, 'inventory_sha256': inventory_sha256, 'source_root_id': SOURCE_ROOT, 'target_drive_id': TARGET_DRIVE, 'migration_tag': MIGRATION_TAG}
+    mismatch = {k: {'expected': v, 'actual': checkpoint.get(k)} for k, v in binding.items() if checkpoint.get(k) != v}
+    if mismatch:
+        raise RuntimeError(f'checkpoint binding mismatch: {mismatch}')
     token = mod.refresh_oauth_access_token(mod.oauth_credentials())
     drive = mod.Drive(token)
     try:
@@ -252,9 +339,15 @@ def main() -> int:
         if dg.get('name') != TARGET_NAME or not (dg.get('capabilities') or {}).get('canAddChildren'):
             raise RuntimeError(f'target drive preflight failed: {dg}')
         source = file_get(drive, SOURCE_ROOT)
-        if source.get('name') != 'MGS-AGENTS' or source.get('driveId'):
-            raise RuntimeError(f'source preflight failed: {source}')
         fresh_run = not checkpoint.get('completed_folders') and not checkpoint.get('completed_files')
+        if source.get('name') != 'MGS-AGENTS' or source.get('mimeType') != FOLDER_MIME or source.get('driveId') or source.get('trashed') is True:
+            raise RuntimeError(f'source preflight failed: {source}')
+        if fresh_run:
+            caps = source.get('capabilities') or {}
+            if source.get('parents') != [SOURCE_PARENT] or not source.get('ownedByMe') or not caps.get('canMoveItemWithinDrive'):
+                raise RuntimeError(f'source destructive prerequisites failed: {source}')
+        elif checkpoint.get('phase') == 'complete' and source.get('parents') != [checkpoint.get('backup_container_id')]:
+            raise RuntimeError(f'completed checkpoint/source placement mismatch: {source}')
         if fresh_run:
             target_before = list_tree(drive, TARGET_DRIVE)
             if target_before:
@@ -351,6 +444,7 @@ def main() -> int:
         file_targets = {x['target_id'] for x in checkpoint['file_map'].values()}
         if file_targets != {x['id'] for x in target_files}:
             raise RuntimeError('target file mapping does not match target tree')
+        validate_exact_target(rows, checkpoint, target_tree)
         md5_by_id = {x['id']: x.get('md5Checksum') for x in target_files}
         md5_mismatches = []
         for source_id, mapped in checkpoint['file_map'].items():
@@ -358,14 +452,18 @@ def main() -> int:
                 md5_mismatches.append(source_id)
         if md5_mismatches:
             raise RuntimeError(f'MD5 mismatches: {md5_mismatches[:20]}')
-        checkpoint['validation'] = {'status': 'PASS', 'target_items': len(target_tree), 'target_folders': len(target_folders), 'target_files': len(target_files), 'target_bytes': sum(int(x.get('size') or 0) for x in target_files), 'md5_checked': sum(bool(x.get('md5Checksum')) for x in target_files), 'md5_mismatches': 0}
+        residual_validation = validate_residual_source(drive, rows, checkpoint, target_tree)
+        checkpoint['validation'] = {'status': 'PASS', 'target_items': len(target_tree), 'target_folders': len(target_folders), 'target_files': len(target_files), 'target_bytes': sum(int(x.get('size') or 0) for x in target_files), 'md5_checked': sum(bool(x.get('md5Checksum')) for x in target_files), 'md5_mismatches': 0, 'exact_hierarchy_metadata': 'PASS', 'residual_source': residual_validation}
         atomic_json(CHECKPOINT, checkpoint)
         event('destination_validation_pass', validation=checkpoint['validation'])
 
         checkpoint['phase'] = 'backup_source'
         atomic_json(CHECKPOINT, checkpoint)
-        backup_readback = move_source_to_backup(drive, checkpoint)
-        checkpoint['source_backup'] = {'status': 'PASS', 'container_id': checkpoint['backup_container_id'], 'source_root_id': SOURCE_ROOT, 'source_root_name': backup_readback.get('name'), 'source_root_parents': backup_readback.get('parents')}
+        move_source_to_backup(drive, checkpoint)
+        backup_readback = file_get(drive, SOURCE_ROOT)
+        if backup_readback.get('name') != 'MGS-AGENTS' or backup_readback.get('mimeType') != FOLDER_MIME or backup_readback.get('parents') != [checkpoint['backup_container_id']] or backup_readback.get('driveId') or backup_readback.get('trashed') is True:
+            raise RuntimeError(f'source backup readback mismatch: {backup_readback}')
+        checkpoint['source_backup'] = {'status': 'PASS', 'container_id': checkpoint['backup_container_id'], 'source_root_id': SOURCE_ROOT, 'source_root_name': backup_readback.get('name'), 'source_root_parents': backup_readback.get('parents'), 'residual_source': residual_validation}
         checkpoint['phase'] = 'complete'
         checkpoint['completed_at_utc'] = dt.datetime.now(dt.UTC).isoformat()
         atomic_json(CHECKPOINT, checkpoint)
@@ -387,7 +485,7 @@ def main() -> int:
             'file_map_count': len(checkpoint['file_map']),
             'moved_file_count': sum(1 for x in checkpoint['file_map'].values() if x['action'] == 'MOVE_PRESERVE_ID'),
             'copied_file_count': sum(1 for x in checkpoint['file_map'].values() if x['action'] == 'COPY_NEW_ID'),
-            'copy_policy': 'External-owner originals remain under the old MGS-AGENTS tree, which was moved intact into a My Drive backup container after destination validation.',
+            'copy_policy': 'The residual source tree contains the 304 original folder shells and 104 externally owned originals, validated and moved into a My Drive backup container after destination PASS.',
             'artifacts': {'folder_map': 'folder-map.json', 'file_map': 'file-map.json', 'target_tree': 'target-tree.json'}
         }
         atomic_json(final_dir / 'migration-report.json', final_report)
