@@ -2,7 +2,7 @@
 
 ## Quando carregar
 
-Use quando Rodolfo exigir que tudo sob `MGS-AGENTS/CRIATIVOS` seja movível, enviável à lixeira e excluível pelo Ares independentemente do uploader, ou quando a correção de ownership do My Drive precisar virar uma solução estrutural.
+Use quando Rodolfo exigir que tudo sob `MGS-AGENTS` — a raiz inteira ou uma subárvore como `MGS-AGENTS/CRIATIVOS` — seja movível, enviável à lixeira e excluível pelo Ares independentemente do uploader, ou quando a correção de ownership do My Drive precisar virar uma solução estrutural.
 
 Este documento complementa `my-drive-collaborator-control-and-deletion.md` e não substitui o fluxo normal READY/LEGACY.
 
@@ -155,6 +155,16 @@ Antes de migrar a árvore:
    - confirmar `404` ou estado final esperado.
 6. Testar também a movimentação de um arquivo **já existente e pertencente a colaborador externo** do My Drive para o Shared Drive. A mudança de ownership pode ser negada mesmo quando o item é editável; não presumir que os itens de todos os owners migrarão da mesma forma.
 7. Se owner externo bloquear move para Shared Drive, não falsificar migração: preservar o original e usar cópia validada sob ownership organizacional, mantendo a linhagem e o mapa de IDs.
+
+## Confirmação de escopo e estrutura
+
+Antes do write, resolver o ID do link pela API e listar os filhos diretos. Não presumir que uma URL aponta para `CRIATIVOS`: ela pode apontar para o pai `MGS-AGENTS` e incluir conteúdo de Creative Ops, Atena, templates e financeiro.
+
+- Repetir ao solicitante `source_id`, nome da raiz e filhos diretos quando houver ambiguidade de escopo.
+- Se Rodolfo ampliar explicitamente para a raiz inteira, refazer o inventário recursivo do root; o inventário parcial de `CRIATIVOS` não serve como baseline final.
+- “Mesma estrutura” significa criar no Shared Drive uma pasta raiz real com o mesmo nome (`MGS-AGENTS`) e reproduzir todos os nomes e paths relativos sem reclassificar, achatar ou omitir siblings.
+- Registrar `old_folder_id → new_folder_id` para a raiz e cada descendente; manter nomes/paths idênticos não significa preservar folder IDs.
+- Conteúdo cross-module pode ser transportado estruturalmente quando Rodolfo autorizar a raiz inteira, mas Ares não altera conteúdo editorial/financeiro nem suas regras funcionais sem escopo próprio.
 
 ## Migração segura
 
