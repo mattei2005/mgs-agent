@@ -91,12 +91,23 @@ Validação de cutover:
 
 ## Fase 3 — Atena e Ares
 
-Escopo futuro:
+Status: piloto da Atena ativo e validado em 2026-07-16; Ares permanece pendente de gate próprio.
 
-- um agente por vez;
+Atena:
+
+- recebeu somente o kernel de continuidade relevante a Content Operations;
+- consulta registry/checkpoint e depois a fonte canônica antes de pedir repetição de decisão editorial;
+- persiste procedimento em skill, regra/fato na fonte canônica e estado temporário em checkpoint;
+- itens globais, ambíguos ou fora da área continuam escalando para Zeus;
+- SOUL live e versionado estão byte-identical, config e permissões permaneceram inalteradas;
+- OAuth OpenAI-Codex foi reautenticado com cadeia independente após o smoke revelar um refresh clonado/inválido;
+- sessão local nova `20260716_034612_a9a42a` respondeu corretamente e contém o marker de continuidade exatamente uma vez no `sessions.system_prompt`;
+- nenhum gateway foi reiniciado.
+
+Ares — próximo gate futuro:
+
 - mapear conhecimento sempre ativo versus roteado;
-- validar conteúdo/WordPress na Atena;
-- validar Creative/Campaign Ops no Ares;
+- validar Creative/Campaign Ops, Meta e Drive;
 - não recriar Hera como agente ativo;
 - preservar rollback e histórico.
 

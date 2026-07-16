@@ -418,19 +418,38 @@ def register(root: Path, args: argparse.Namespace) -> Dict[str, Any]:
         entries = registry.setdefault("entries", [])
         if any(item.get("id") == entry["id"] for item in entries):
             raise ControlError(f"registry id already exists: {entry['id']}")
+        supersedes_id = getattr(args, "supersedes", None)
+        superseded = None
+        if supersedes_id:
+            superseded = next((item for item in entries if item.get("id") == supersedes_id), None)
+            if superseded is None:
+                raise ControlError(f"superseded registry entry missing: {supersedes_id}")
+            if superseded.get("status") != "active":
+                raise ControlError(f"entry is not active: {supersedes_id}")
+            if entry["status"] != "active":
+                raise ControlError("a superseding registry entry must be active")
+            if superseded.get("canonical_key") != entry["canonical_key"]:
+                raise ControlError("superseding registry entry must preserve canonical_key")
         if entry["status"] == "active" and any(
-            item.get("status") == "active" and item.get("canonical_key") == entry["canonical_key"]
+            item.get("status") == "active"
+            and item.get("canonical_key") == entry["canonical_key"]
+            and item.get("id") != supersedes_id
             for item in entries
         ):
             raise ControlError(f"active canonical_key already exists: {entry['canonical_key']}")
         entries.append(entry)
+        if superseded is not None:
+            superseded["status"] = "superseded"
+            superseded["superseded_by"] = entry["id"]
+            superseded["updated_at"] = now_iso()
         entries.sort(key=lambda item: item.get("id", ""))
         registry["updated_at"] = now_iso()
         errors = validate_registry(root, registry)
         if errors:
             raise ControlError("; ".join(errors))
         atomic_write_json(p["registry"], registry)
-    return {"status": "ok", "id": entry["id"], "result": "created"}
+    result = "created_and_superseded" if superseded is not None else "created"
+    return {"status": "ok", "id": entry["id"], "result": result, "supersedes": supersedes_id}
 
 
 def supersede(root: Path, args: argparse.Namespace) -> Dict[str, Any]:
@@ -537,6 +556,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     register_parser = sub.add_parser("register")
     add_common_register_args(register_parser)
+    register_parser.add_argument("--supersedes")
 
     supersede_parser = sub.add_parser("supersede")
     supersede_parser.add_argument("--id", required=True)

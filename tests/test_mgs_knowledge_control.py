@@ -89,6 +89,30 @@ class KnowledgeControlTests(unittest.TestCase):
         self.assertEqual("superseded", old["status"])
         self.assertEqual("DEC-2026-002", old["superseded_by"])
 
+    def test_register_can_atomically_replace_same_canonical_key(self):
+        self.json_cli(
+            "register", "--id", "CAP-001", "--kind", "capability",
+            "--domain", "tech", "--title", "Zeus-only capability", "--owner", "Zeus",
+            "--source", "context/company-os.md", "--canonical-key", "capability.knowledge",
+            "--consumer", "zeus",
+        )
+        replacement = self.json_cli(
+            "register", "--id", "CAP-002", "--kind", "capability",
+            "--domain", "tech", "--title", "Cross-agent capability", "--owner", "Zeus",
+            "--source", "context/company-os.md", "--canonical-key", "capability.knowledge",
+            "--consumer", "zeus", "--consumer", "atena", "--supersedes", "CAP-001",
+        )
+        self.assertEqual("created_and_superseded", replacement["result"])
+        report = self.json_cli("validate")
+        self.assertEqual("ok", report["status"])
+        registry = json.loads((self.root / "data/knowledge-registry.json").read_text())
+        old = next(x for x in registry["entries"] if x["id"] == "CAP-001")
+        new = next(x for x in registry["entries"] if x["id"] == "CAP-002")
+        self.assertEqual("superseded", old["status"])
+        self.assertEqual("CAP-002", old["superseded_by"])
+        self.assertEqual("active", new["status"])
+        self.assertEqual(["atena", "zeus"], new["consumers"])
+
     def test_checkpoint_upsert_preserves_single_record(self):
         first = self.json_cli(
             "checkpoint-upsert", "--id", "initiative-1", "--agent", "zeus",

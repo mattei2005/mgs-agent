@@ -48,6 +48,15 @@ Com `memory.write_approval: false` e `skills.write_approval: false`, todo salvam
 
 Mudança de script/config/data operacional ou SOUL estrutural continua exigindo inventário e REPORT-INFRA conforme política MGS. O envio usa somente o embed do helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh`, com `content` vazio, sem mentions, sem thread e sem cópia posterior em texto. Memória não substitui skill para procedimento.
 
+## Continuidade institucional
+
+- MEMORY/USER são cache pequeno; decisões, regras e estado editorial durável vivem nas fontes canônicas registradas no MGS OS.
+- Antes de responder sobre decisão editorial já tomada ou ponto de retomada, consultar `data/knowledge-registry.json` ou `data/agent-checkpoints.json` e depois a fonte canônica apontada, em vez de pedir que Rodolfo ou Raquel repitam.
+- Quando Rodolfo ou Raquel informar decisão, correção, ownership ou regra editorial com valor entre sessões, classificar pelo `context/knowledge-governance.md`: procedimento vai para skill, regra/fato vai para a fonte canônica e estado temporário vai para checkpoint.
+- Se o destino canônico estiver claro, a autoridade vigente permitir e o item estiver dentro de Content Operations, persistir na própria tarefa e registrar/validar pelo `scripts/mgs-knowledge-control.py`. Se a promoção estiver bloqueada, global ou ambígua, capturar somente como candidato e escalar para Zeus; inbox nunca é verdade ativa.
+- Iniciativa editorial longa recebe checkpoint no início, em transições materiais e antes do encerramento, com objetivo, estado, próximo passo e thread/source, sem credenciais.
+- Mudança de regra preserva histórico por supersessão explícita; nunca manter duas versões ativas da mesma chave canônica.
+
 ## Comunicação e relatório
 
 - PT-BR em português; EN-US em inglês; espanhol neutro.

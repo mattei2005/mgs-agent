@@ -21,19 +21,19 @@ Use when a credential or secret-bearing editor/backup copy may have entered an a
 5. Before rewriting history, record the exact remote head and verify which branches/tags contain the leak.
 6. Rewrite only affected refs. Prefer `git filter-repo --path <file> --invert-paths --refs refs/heads/<branch> --force`. If it is unavailable, use a narrowly scoped `git filter-branch` on the affected branch only after proving no tag/other branch contains the commit. Never use `-- --all` casually: it rewrites tags, remote-tracking refs, and `refs/replace/*`, creates collateral cleanup, and can turn a surgical purge into a repository-wide rewrite.
 7. Push with an explicit lease tied to the recorded remote head, then verify `HEAD == origin/<branch>` and zero secret paths in reachable history.
-8. Test whether the old commit is still fetchable by exact SHA. A clean branch and successful force push do not prove server-side purge. If the old object remains reachable, escalate to GitHub Support sensitive-data removal while keeping the credential revoked.
+8. Test whether the old commit is still fetchable by exact SHA. A clean branch and successful force push do not prove server-side purge. Prefer a disposable repository with explicit SSH/known-host configuration; fetching the old SHA into the production clone rehydrates the secret object and requires another reflog expiry/prune afterward. If the old object remains reachable, escalate to GitHub Support sensitive-data removal while keeping the credential revoked.
 9. Expire local reflogs and prune unreachable objects only after the remote rewrite is validated. Do not run overlapping `git gc` processes; reconcile an existing auto-gc before retrying.
 10. Rotate every derivative secret the leaked credential could read. Example: if an exposed 1Password Service Account token could retrieve a disaster-recovery private key, that encryption key and backups encrypted with it are compromised too. Pause jobs, retire the key, remove affected remote backups, create a new key only after the token is rotated, and repeat backup plus isolated restore validation.
-11. Resume auto-commit and dependent jobs only after token, derivative key, Git history, current tree, and remote readbacks all pass.
+11. After the replacement credential is edited and validated, scan the filesystem again for ignored editor copies such as `.env.save*`. Ignore rules prevent Git propagation but do not remove local plaintext duplicates. Verify absence with a real filesystem glob and delete any copies under the already-approved containment gate; `git status` or `git check-ignore` alone is not proof of absence.
+12. Resume auto-commit and dependent jobs only after token, derivative key, Git history, current tree, local editor copies, and remote readbacks all pass.
 
 ## Validation evidence
 
 - auto-commit and dependent jobs are paused during remediation;
-- secret copies absent from working tree and current remote branch;
+- secret copies absent from the filesystem, working tree, current remote branch, and reachable local history;
 - live credential file never staged;
 - explicit force-with-lease succeeded against the recorded old head;
-- reachable local history contains zero named secret paths;
-- old exact commit fetchability was tested and honestly reported;
+- old exact commit fetchability was tested and honestly reported; if the production clone was used for that probe, its rehydrated unreachable objects were pruned again;
 - replacement credential works without value disclosure;
 - derivative keys/backups were rotated when applicable;
 - auto-commit and jobs resumed only after end-to-end readback.

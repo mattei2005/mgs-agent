@@ -64,6 +64,13 @@
       "source": "context/agent-map.md",
       "required_all": ["não faz setup WordPress/pixel crítico sem Rodolfo"],
       "forbidden_any": []
+    },
+    {
+      "id": "KR-010",
+      "question": "Onde a Atena verifica uma decisão editorial tomada em outra sessão?",
+      "source": "profiles/atena-soul.md",
+      "required_all": ["data/knowledge-registry.json", "data/agent-checkpoints.json", "fonte canônica apontada", "inbox nunca é verdade ativa"],
+      "forbidden_any": []
     }
   ]
 }
