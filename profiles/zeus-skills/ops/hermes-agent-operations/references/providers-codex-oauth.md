@@ -39,7 +39,7 @@ Fluxo:
 3. Em uma conversa Discord, assim que o device flow mostrar URL e código, enviar imediatamente ao Rodolfo um link Markdown clicável (`[Abrir autorização da OpenAI](https://auth.openai.com/codex/device)`) e o código em destaque. Não depender de URL em tool progress, não enterrar o link em explicação e não responder apenas que está aguardando.
 4. Validar presença de access/refresh sem imprimir valores.
 5. Comparar o refresh token internamente com os demais profiles e exigir cadeia independente; reportar apenas os booleanos de igualdade/independência.
-6. O model picker pode normalizar `config.yaml`, remover defaults vazios e inserir defaults novos mesmo quando a intenção era somente autenticar. Depois do login, comparar o config live com o hash/backup e o mirror. Se houve drift não autorizado e o provider/model pretendidos já eram os mesmos, restaurar exatamente o config pré-login, preservar o novo `auth.json` e provar live=mirror por hash e leitura semântica.
+6. O model picker pode normalizar `config.yaml`, remover defaults vazios e inserir defaults novos mesmo quando a intenção era somente autenticar. Em um fluxo auth-only, quando o picker oferecer a opção, selecionar **`Skip (keep current)`** em vez de escolher novamente o modelo atual; isso reduz superfície de drift, mas não substitui o readback. Depois do login, comparar o config live com o hash/backup e o mirror. Se houve drift não autorizado e o provider/model pretendidos já eram os mesmos, restaurar exatamente o config pré-login, preservar o novo `auth.json` e provar live=mirror por hash e leitura semântica.
 7. Rodar inferência real em sessão nova do profile e confirmar que o gateway permaneceu ativo; OAuth isolado não exige restart por si só.
 8. Para rollout de comportamento/SOUL, validar também no `state.db` read-only que o marker distintivo aparece exatamente uma vez no `sessions.system_prompt` da nova sessão. Falha OAuth antes da criação da sessão não é prova parcial de cutover.
 
@@ -49,7 +49,7 @@ Formato esperado em cada `config.yaml`:
 
 ```yaml
 model:
-  default: gpt-5.5
+  default: gpt-5.6-sol
   provider: openai-codex
   base_url: 'https://chatgpt.com/backend-api/codex'
 ```
