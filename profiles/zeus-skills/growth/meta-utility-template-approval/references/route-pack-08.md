@@ -18,11 +18,12 @@
 15. **Zero-width scope/density mistakes.** When Rodolfo asks for zero-width on Utility copies, apply it only where explicitly requested. If he says “apenas nas mensagens”, alter `TEXT` only; do not alter `CTA 1`, links, or tracking params. Preserve Messenger variables/placeholders such as `{{first_name}}` exactly unless he explicitly says to modify them — adding zero-width inside variables can break rendering. If he says the zero-width is too dense, switch to the lighter `2 visible letters + U+200B` pattern.
 16. **Selecting 70 before approval.** When preparing a new country/language approval probe, do not rank down to 70 before approval unless Rodolfo explicitly asks. First export all eligible messages for approval; after approval results come back, filter approved rows and then choose the best 70 for production templates.
 17. **Raw cron JSON in Discord.** For SB Utility rollout crons running script-only/no-agent, stdout is the user-facing message. Do not print raw `{"status":"OK",...}` payloads when templates change. Keep machine payloads in log files and print a compact human summary; print nothing for no-op runs.
-18. **Gray/purple behavior unresolved.** Do not assume gray is safe to replace after N days. Treat persistent gray/no-status as a Ciro/SB verification behavior until clarified; report examples instead of auto-swapping.
+18. **Gray/purple behavior unresolved by default.** Do not assume gray or purple is safe to replace after N days in routine/global automation. Treat persistent gray/no-status and purple/error as Ciro/SB/page diagnosis unless Rodolfo explicitly defines a one-time normalization exception. In the approved 23/30 link-bank rollout, every linked non-green slot (red, gray, and purple) is replaced once; this does not establish a daily auto-repair rule.
 19. **Deleting/editing template resets status.** If the whole template is erased/reuploaded, or a message is edited and Update is clicked, SB can make everything gray again. This is an SB/Ciro bug/behavior, not proof that every message needs reapproval. Avoid destructive erase/update unless explicitly requested and backed up.
-20. **Bank duplicate guard.** Replacement candidates from the approved/reserve bank must be skipped when the same `TEXT+CTA` already exists in the live template. Do not include `LINK` in the duplicate key because links are template-specific and must be preserved from the target template.
+20. **Bank versus template duplicate guards.** The durable bank can remain keyed by normalized `TEXT+CTA`, with `LINK` excluded because it is template-specific. The stricter live-template payload gate is normalized visible `TEXT`: strip zero-width and normalize whitespace, and block a repeated body even when CTA differs.
 21. **Restarting a partial mass rollout from zero.** A timeout or transient 5xx after many successful templates must not replay earlier writes. Persist one validated record per target and resume only pending names; retry one identical 5xx payload once, then stop if it still fails.
 22. **Hashing asynchronous approval counters.** `APPROVED`, `REJECTED`, `INVALID_FORMAT`, and `ERROR` can change after another template's approval starts. Do not use a full `MESSAGES` hash containing those counters as the pre-approval deployment guard. Verify immutable `MESSAGE_ID + TEXT + CTA_1 + LINK_1` separately from status reporting.
+23. **Assuming one dashboard credential has the full inventory.** If Rodolfo's UI count and an API capture disagree, compare authorized dashboard accounts and immutable IDs. A narrower account returning fewer rows is an access-scope divergence, not proof that the missing templates do not exist.
 
 ## Verification Checklist
 
@@ -38,10 +39,11 @@ Before saying a batch is ready:
 - [ ] For production replacement CSVs, `LINK 1` was copied from the exact target template sequence, not normalized from examples.
 - [ ] During SB import, current template JSON/CSV backup was saved before `Erase all`.
 - [ ] Import tab showed the expected uploaded/total count.
-- [ ] `Update` was clicked in Messenger Messages and `Save` was clicked in the parent Edit Messenger Broadcast modal.
-- [ ] Authenticated `/broadcast/Messenger` readback confirms expected message count and first/last text+link match the CSV.
-- [ ] Template is linked to at least 1 page before approval.
-- [ ] `Run Approvals` was executed.
+- [ ] For normal import workflows, `Update` was clicked in Messenger Messages and `Save` was clicked in the parent Edit Messenger Broadcast modal.
+- [ ] For Rodolfo's 23/30 link-bank normalization, the corrected order was followed instead: `Run Approval → Update → Save → readback` for linked templates, and `Update → Save → readback` for unlinked templates.
+- [ ] Authenticated `/broadcast/Messenger` readback confirms expected message count and the complete ordered text+CTA+link payload, not merely first/last rows.
+- [ ] Template is linked to at least 1 page before any approval action.
+- [ ] `Run Approval` was executed only where the selected workflow and live `PAGES > 0` require it.
 - [ ] Dashboard was refreshed with F5.
 - [ ] Approved/rejected/invalid counts were captured.
 - [ ] Approved copies were stored separately as immutable positive bank.
