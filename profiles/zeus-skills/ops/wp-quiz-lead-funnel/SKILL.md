@@ -55,6 +55,7 @@ Recommended split:
 - Skill: type of system — `wp-quiz-lead-funnel`.
 - Reference: country/vertical/site — e.g. `references/br-car-creditoparaveiculo.md`.
 - Reference: integration — e.g. `references/sms-funnel-routing.md`.
+- Reference: balance monitoring and manual-recharge alerts — `references/sms-funnel-balance-monitor.md`.
 - Template/checklist: repeatable execution — e.g. `templates/sms-funnel-test-matrix.md`.
 
 ## Operational Workflow
