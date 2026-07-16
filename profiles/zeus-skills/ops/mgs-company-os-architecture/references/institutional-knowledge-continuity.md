@@ -136,6 +136,15 @@ Generated inventory may omit an intentionally empty JSONL inbox while Git still 
 8. Reconcile automatic skill writes and unrelated concurrent agent writes before closure. Verify live/mirror equality and exact REPORT-INFRA readback. If auto-commit bundles an attributed concurrent write with the pilot, disclose that path and its separate report instead of claiming the whole commit as Zeus-only.
 9. Final proof should include: full suite PASS, business regressions PASS, registry/checkpoint/inbox counts, SOUL live=mirror, fresh-session prompt marker, inventory hits, secret scan, services active, Git synchronized, audit, and exact REPORT readback.
 
+## Executive communication and pilot ownership
+
+- When Rodolfo asks a binary activation question such as “precisa reiniciar?”, answer **yes or no in the first sentence**. Do not lead with routing internals, cached-prompt nuances, or adjacent work. Add one short qualification only if it changes the decision.
+- A SOUL-only change does not require a gateway restart. Existing routed sessions retain their stored system prompt; restarting the gateway generally resumes that session rather than rebuilding it. New sessions load the updated SOUL. Therefore, do not recommend restart as a cutover mechanism unless a live runtime/config component actually requires it.
+- Never assign Rodolfo the job of “observing the pilot” after validation. Zeus owns monitoring, regressions, checkpoints, and exception detection; Rodolfo receives only material failures, authority gates, or decisions.
+- “Observe the pilot” in a plan or checkpoint means an internal Zeus duty. Write checkpoints explicitly as “Zeus monitors...” so they cannot be misread as user work.
+- If Rodolfo says a parallel subject is being handled with another agent, acknowledge ownership and exclude it from Zeus execution. Reconcile concurrent writes internally for attribution, but do not turn that parallel subject into the answer to an unrelated question.
+- Do not imply uncertainty merely because rollout is conservative. State whether the artifact is validated, identify the remaining risk separately, and recommend the next gate without asking Rodolfo to supervise normal operation.
+
 ## Common pitfalls
 
 1. **Memory-size solution** — increasing USER/MEMORY indefinitely creates prompt bloat and still lacks provenance/supersession.
@@ -145,3 +154,5 @@ Generated inventory may omit an intentionally empty JSONL inbox while Git still 
 5. **Stale plan becomes agent truth** — reconcile current agent-map/runtime before updating old restructuring plans.
 6. **Dead-letter cleanup by deletion** — semantic recovery does not authorize deleting the pending file; preserve it or obtain the Critical Subset confirmation.
 7. **Technical report to a nontechnical owner** — lead with the practical outcome, then state what is active, what is not active, and the one next gate.
+8. **Making the owner supervise a validated pilot** — internal monitoring is Zeus work; only exceptions and authority gates go to Rodolfo.
+9. **Over-answering a binary activation question** — first answer the exact yes/no question; diagnostics belong after the decision and only when relevant.

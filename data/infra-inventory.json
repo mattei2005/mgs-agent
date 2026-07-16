@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-15T19:49:01-04:00",
+    "updated_at": "2026-07-15T19:57:19-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -472,6 +472,41 @@
     }
   ],
   "runtime_artifacts": [
+    {
+      "id": "mgs-discord-live-progress-20260715",
+      "agent": "zeus",
+      "type": "multi_profile_discord_display_config",
+      "profile_configs": [
+        "/root/.hermes/profiles/zeus/config.yaml",
+        "/root/.hermes/profiles/atena/config.yaml",
+        "/root/.hermes/profiles/ares/config.yaml",
+        "/root/.hermes/profiles/hera/config.yaml"
+      ],
+      "versioned_configs": [
+        "/root/mgs-agent/profiles/zeus-config.yaml",
+        "/root/mgs-agent/profiles/atena-config.yaml",
+        "/root/mgs-agent/profiles/ares-config.yaml",
+        "/root/mgs-agent/profiles/hera-config.yaml"
+      ],
+      "setting": "display.platforms.discord.interim_assistant_messages=true",
+      "unchanged_related_settings": {
+        "display.tool_progress": "all",
+        "display.platforms.discord.tool_progress": "all",
+        "display.platforms.discord.cleanup_progress": true,
+        "discord.typing_indicator": "default_true"
+      },
+      "sha256": {
+        "zeus_config": "65bd29913ab9bbd5504b0d3b857c6f335edd253d0eb793ed6029f8a197cb5226",
+        "atena_config": "328d01a9ccbad898593f0ba4f4369c793be5541264461128fffcb804010ae11e",
+        "ares_config": "c237502dcddcd34214f3ba0fd5dc51be0fbde15d98eb141ff672686b6a68ef29",
+        "hera_config": "a41eae01b6e0f6df5dc4c5757b12175f304d803701b87d71d627d95a5e2a58b1"
+      },
+      "purpose": "Show natural mid-turn progress from MGS agents in Discord while they are processing, in addition to the already-enabled tool breadcrumbs and native typing indicator.",
+      "validation": "Canonical Hermes scalar writer used on four live profiles; live and versioned readback 8/8 returned bool true; runtime resolver 4/4 returned True; config check 4/4 PASS; Discord typing endpoint smoke Atena/Ares HTTP 204; focused Discord typing tests 10 PASS; Zeus/Atena/Ares gateway PIDs unchanged and active/running; hot-read applies on the next turn without restart.",
+      "status": "deployed_hot_read_no_restart",
+      "updated_at": "2026-07-15T19:56:00-04:00",
+      "rollback_backup": "/root/.hermes/secure-backups/discord-live-progress-20260715T195425-0400"
+    },
     {
       "id": "mgs-skill-write-governance-20260712",
       "agent": "zeus",
@@ -6672,13 +6707,13 @@
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
       "size_bytes": 616,
       "md5": "81ef173f1b8b64a227a128743a984151",
-      "modified_at": "2026-07-15T19:49:01-04:00"
+      "modified_at": "2026-07-15T19:52:52-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 5954,
-      "md5": "5d232b08ab007c3e7e1c9eb217323e93",
-      "modified_at": "2026-07-15T19:47:01-04:00"
+      "md5": "1c9fcde1e8e8ff9ed4466ac942f15be0",
+      "modified_at": "2026-07-15T19:57:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6689,8 +6724,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "f1fb8030ca4586b261b93dc6ee976d86",
-      "modified_at": "2026-07-15T19:41:35-04:00"
+      "md5": "61762ec1691e7832c318be12056d1a4d",
+      "modified_at": "2026-07-15T19:56:40-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -6767,14 +6802,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 27100,
-      "md5": "f59ce0ed74c4fc2ea31058665dc0979f",
-      "modified_at": "2026-07-15T19:45:02-04:00"
+      "md5": "79f9209c8b16b0df6238c80878d364e7",
+      "modified_at": "2026-07-15T19:55:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 579,
-      "md5": "d79bf07dfb1a2f9eceb82e460e17eb25",
-      "modified_at": "2026-07-15T19:49:01-04:00"
+      "md5": "0f9861208f48b98cf6ef653687b889b4",
+      "modified_at": "2026-07-15T19:57:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -6796,9 +6831,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 301943,
-      "md5": "c08316ff49f2f76bccbcbb4fb89f6437",
-      "modified_at": "2026-07-15T19:18:10-04:00"
+      "size_bytes": 304072,
+      "md5": "56bc775094310c108cacdb3ca7293ea7",
+      "modified_at": "2026-07-15T19:57:21-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -6870,7 +6905,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3358,
       "md5": "f55191c98883f6902b4e625b27ca8231",
-      "modified_at": "2026-07-15T19:37:02-04:00"
+      "modified_at": "2026-07-15T19:52:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -6936,7 +6971,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "fad28a6a31adcffe7228c69ec8fc8eb7",
-      "modified_at": "2026-07-15T19:46:01-04:00"
+      "modified_at": "2026-07-15T19:56:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -6965,8 +7000,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2112,
-      "md5": "dcda47522c5c4af9ae8a0934f7c60a26",
-      "modified_at": "2026-07-15T19:45:03-04:00"
+      "md5": "38a61e6193fc7cd8cf517a163224a60c",
+      "modified_at": "2026-07-15T19:55:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",

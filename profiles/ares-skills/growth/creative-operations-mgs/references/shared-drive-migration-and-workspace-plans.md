@@ -6,6 +6,8 @@ Use quando Rodolfo exigir que tudo sob `MGS-AGENTS/CRIATIVOS` seja movível, env
 
 Este documento complementa `my-drive-collaborator-control-and-deletion.md` e não substitui o fluxo normal READY/LEGACY.
 
+Evidência de implementação real, respostas da API e pitfalls do piloto Enterprise Essentials: `shared-drive-enterprise-essentials-pilot-2026-07-15.md`.
+
 ## Princípio
 
 No **My Drive**, compartilhar uma pasta como `writer` não garante `trash/delete` sobre itens pertencentes a colaboradores. Se o requisito for controle de exclusão independente do uploader, as soluções de classe são:
@@ -98,10 +100,11 @@ Distinguir sempre três classes:
 
 Regras práticas:
 
-- Não prometer `Content Manager` a um Gmail pessoal sem piloto. A documentação do Google permite contribuição externa, mas contas cuja edição não inclui Shared Drives podem ser limitadas a `Viewer`; validar o papel oferecido e `capabilities.canAddChildren` por evidência real.
-- Quando o colaborador só precisa enviar mídia e não deve acessar a árvore, preferir intake externo separado: `UPLOAD MANUAL` em My Drive compartilhado como editor → Ares copia o RAW validado para `99_LEGACY` e o tratado para `01_READY` no Shared Drive → remove o item da fila sem apagar o original do colaborador. Assim, tudo canônico no Shared Drive pertence à organização sem licença adicional para o uploader.
+- Não prometer `Content Manager` a um Gmail pessoal sem piloto. Primeiro tentar **permissão direta apenas na pasta de intake** (`permissionType=file`, `role=writer`), sem adicionar a conta como membro do Shared Drive nem usuário do Admin Console.
+- Validar com upload real. Em um tenant Enterprise Essentials, esse modelo permitiu ao Gmail externo enviar diretamente para o Shared Drive sem assento pago; o arquivo recebeu o `driveId` organizacional e o Ares obteve capabilities completas. Políticas de outro tenant ainda podem bloquear ou reduzir o papel.
+- Se a permissão direta não permitir upload, usar intake externo separado: `UPLOAD MANUAL` em My Drive compartilhado como editor → Ares copia o RAW validado para `99_LEGACY` e o tratado para `01_READY` no Shared Drive → remove o item da fila sem apagar o original do colaborador.
 - Registrar a linhagem do intake externo para as duas cópias organizacionais e nunca tratar o RAW externo e sua cópia como candidatos independentes.
-- Adicionar `ares-drive` diretamente ao Shared Drive como `Manager` e confirmar por API. Se a política recusar a service account externa ou limitar o papel, parar e avaliar domínio/política ou uma identidade Workspace própria; não presumir uma segunda licença antes do teste.
+- Adicionar `ares-drive` diretamente ao Shared Drive como `Manager` e confirmar por API `permissionType=member`, `role=organizer` e capabilities do Drive. Service account externa como organizer sem licença foi validada em Enterprise Essentials; se a política do tenant recusar ou limitar o papel, parar e avaliar domínio/política ou identidade Workspace própria.
 
 ## OAuth e validação pós-upgrade
 
@@ -139,6 +142,8 @@ Antes de migrar a árvore:
    - Em upload externo, `lastModifyingUser.emailAddress` pode ser omitido por privacidade mesmo quando `displayName` e a permissão direta identificam o colaborador.
    - Não falhar nem apagar o arquivo somente porque o e-mail não veio no metadata. Correlacionar a permissão direta da pasta (`emailAddress`/`role`), `lastModifyingUser.displayName`, timestamps, `driveId` e capabilities.
    - Preservar o upload até concluir download/hash, move, trash, restore e delete. Em falha intermediária, manter o arquivo quando ainda faltar evidência do ciclo completo.
+   - Para declarar **PASS externo end-to-end**, o mesmo arquivo deve ter identidade externa correlacionada e completar todo o lifecycle. Um segundo arquivo com `lastModifyingUser=support` prova apenas o lifecycle da identidade Workspace, não substitui a prova externa.
+   - Se a evidência vier de arquivos diferentes, rotular como prova composta e listar claramente qual arquivo provou upload externo e qual provou lifecycle; não fundir identidades no relatório.
 5. Validar com a identidade Workspace e Ares, por API e readback:
    - criar;
    - baixar;
