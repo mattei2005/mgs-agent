@@ -1,0 +1,42 @@
+{
+  "generated_at_utc": "2026-07-16T01:27:49.872179+00:00",
+  "status": "PASS",
+  "inventory_sha256": "059ac9b77e232b821546d22462d35bffe004fa02187e2c532f6a88a271225454",
+  "checkpoint_binding": {
+    "folder_map_keys": 305,
+    "file_map_keys": 1139,
+    "actions": {
+      "MOVE_PRESERVE_ID": 1035,
+      "COPY_NEW_ID": 104
+    },
+    "errors": {}
+  },
+  "target": {
+    "items": 1443,
+    "expected_ids": 1443,
+    "metadata_errors": 0,
+    "missing": 0,
+    "extras": 0
+  },
+  "residual_backup": {
+    "items": 408,
+    "expected_ids": 408,
+    "metadata_errors": 0,
+    "missing": 0,
+    "extras": 0
+  },
+  "strict_root_checks": {
+    "errors": {},
+    "source_root_parent": [
+      "16R-2mGJo3zeXRGZUWs6EerIlWFERT3DG"
+    ],
+    "backup_container_parent": [
+      "0AEK1IDaqSuDlUk9PVA"
+    ]
+  },
+  "copy_source_destination_hashes": {
+    "checked": 104,
+    "mismatches": []
+  },
+  "errors": []
+}
