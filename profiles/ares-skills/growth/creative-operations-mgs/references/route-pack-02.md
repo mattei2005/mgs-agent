@@ -27,7 +27,7 @@ https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
     └── {OPERAÇÃO}/{IMG|VID}/{STATUS}
 ```
 
-Migração concluída em 2026-07-15/16: o root canônico é o Shared Drive `0AEwt4Ye690ocUk9PVA`. O ID anterior `14ica5TVauTrzAxcl4T-ViJorF89vRKIl` permanece somente na árvore de backup do My Drive. Não criar operações (`CAR_BR_PT`, `CC_US_ES`, etc.) como filhas diretas de `MGS-AGENTS`; criar/mover sempre dentro de `MGS-AGENTS/CRIATIVOS`.
+Migração e limpeza concluídas em 2026-07-15/16: o root canônico é exclusivamente o Shared Drive `0AEwt4Ye690ocUk9PVA`. A antiga raiz My Drive `14ica5TVauTrzAxcl4T-ViJorF89vRKIl` foi removida definitivamente após aceite; referências a ela são somente auditoria histórica. Não criar operações (`CAR_BR_PT`, `CC_US_ES`, etc.) como filhas diretas de `MGS-AGENTS`; criar/mover sempre dentro de `MGS-AGENTS/CRIATIVOS`.
 
 Regra de REPORT-INFRA para mudanças de skill/script/data/config feitas pelo Ares: não declarar “enviei o REPORT-INFRA” com base apenas em intenção. Primeiro executar o envio real pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh` ou, se usar fallback textual, validar HTTP 204 e confirmar via Discord API que a mensagem aparece em `#alerts-infra` (`1498132022634483894`) antes de afirmar na thread original. Não usar scripts com nome de outro agente como caminho padrão (`ares-report-infra.sh`) quando houver helper canônico MGS.
 

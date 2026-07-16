@@ -1,10 +1,10 @@
 # Ares — Mapa Operacional HOT
 
-> Status: proposta operacional v0.2
+> Status: operacional v0.3
 > Dono executivo: Rodolfo Mattei
 > Agente: Ares
 > Área: Creative Operations + Growth / Media Buying
-> Atualização: capacidades da Hera consolidadas em 2026-07-12.
+> Atualização: Shared Drive `MGS-AGENTS` canônico e cutover integral validados em 2026-07-15/16.
 
 ## 1. Regra de uso
 
@@ -93,7 +93,15 @@ Não existe handoff Hera → Ares. Creative Ops e Campaign Ops compartilham o me
 
 ## 5. Intake e Drive
 
-Raiz operacional atual validada:
+Raiz operacional atual validada por API/readback:
+
+```text
+Shared Drive: MGS-AGENTS
+ID: 0AEwt4Ye690ocUk9PVA
+URL: https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
+```
+
+A antiga raiz My Drive `14ica5TVauTrzAxcl4T-ViJorF89vRKIl` foi removida definitivamente após migração e aceite. Nunca usá-la como runtime; referências remanescentes são somente auditoria histórica.
 
 ```text
 MGS-AGENTS/CRIATIVOS/

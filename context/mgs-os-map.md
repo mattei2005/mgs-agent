@@ -107,6 +107,8 @@ Regra prática:
   - `data/ares/creative-ops/`
   - `scripts/ares-*.py`
   - `logs/ares-*.log`
+  - Shared Drive canônico `MGS-AGENTS`: `https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA`
+  - Evidência do cutover integral: `data/ares/creative-ops/shared-drive-migration/20260716T003345Z/`
 - Usar para:
   - brief, copy, imagem e vídeo
   - referências Meta Library/YouTube
@@ -120,6 +122,7 @@ Regra prática:
   - Ares não é dono de AdOps/precificação.
   - Ares não faz setup WordPress/pixel crítico sem Rodolfo.
   - Budget write segue gates de Rodolfo/Geizian.
+  - A antiga raiz `MGS-AGENTS` do My Drive foi removida definitivamente; operações usam somente o Shared Drive canônico.
 
 ### Revenue / AdOps
 

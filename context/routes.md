@@ -74,7 +74,7 @@ Fluxo unificado:
 1. Usuário autorizado pede ou envia criativo ao Ares.
 2. Ares cria/trata/classifica e sanitiza.
 3. Kelly ou responsável aprova quando o fluxo exigir.
-4. Ares salva no Drive, valida e registra original → tratado.
+4. Ares salva no Shared Drive canônico `MGS-AGENTS` (`0AEwt4Ye690ocUk9PVA`), valida e registra original → tratado.
 5. Upload de gestor permanece reservado e ares_eligible=false.
 6. Antes de campanha, Ares concilia Drive × Meta e reserva o selecionado.
 7. Campaign Ops executa somente com autoridade vigente e valida por readback.

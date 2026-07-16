@@ -43,7 +43,7 @@ MD5 divergentes         0
 Google-native same ID   5
 ```
 
-O backup final reteve as 304 pastas antigas e os 104 originals externos. Os 1.035 arquivos movidos ficaram somente no Shared Drive.
+O backup reteve as 304 pastas antigas e os 104 originals externos durante os gates de validação. Após aceite, Rodolfo removeu a árvore antiga e esvaziou a lixeira: a raiz My Drive e o container retornaram HTTP 404. Os 104 originals externos permanecem sob ownership de Kelly/Evo, enquanto os 1.035 moves e as 104 cópias organizacionais validadas ficam no Shared Drive canônico.
 
 ## Cutover operacional após PASS
 
