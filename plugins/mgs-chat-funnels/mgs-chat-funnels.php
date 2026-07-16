@@ -2,7 +2,7 @@
 /**
  * Plugin Name: MGS Chat Funnels
  * Description: Config-driven WhatsApp-style chat funnels by vertical and country (EMP-BR, CC-BR, CAR-BR) with rewarded/interstitial gate, UTM passthrough, cards/sequential offers, and shortcode/route rendering.
- * Version: 0.3.23
+ * Version: 0.4.0
  * Author: MGS Digital Corp
  */
 
@@ -10,8 +10,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+require_once plugin_dir_path(__FILE__) . 'includes/class-mgs-chat-sms.php';
+MGS_Chat_SMS::boot();
+
 final class MGS_Chat_Funnels {
-    const VERSION = '0.3.23';
+    const VERSION = '0.4.0';
     const SHORTCODE = 'mgs_chat_funnel';
     const MENU_SLUG = 'mgs-chat-funnels';
 
@@ -114,6 +117,7 @@ final class MGS_Chat_Funnels {
         $ad_provider = $this->ad_provider($config);
         $standalone = !empty($config['standalone']);
 
+        $sms_enabled = !empty($config['sms_enabled']);
         $replacements = array(
             '{{HTML_LANG}}' => esc_attr($language),
             '{{TITLE}}' => esc_html($title),
@@ -123,10 +127,10 @@ final class MGS_Chat_Funnels {
             '{{TAGS_SCRIPT}}' => '<script>window.tags = JSON.parse(' . $this->js_json($tags_json) . ');</script>',
             '{{ADS_HEAD}}' => $this->render_ads_head_html($config),
             '{{WRAPPER_URL}}' => esc_url($wrapper_url),
-            '{{REWARDED_BUTTON_CLASS}}' => esc_attr($ad_provider === 'm2' ? 'pg-rewarded' : ($ad_provider === 'actview' ? 'av-rewarded' : '')),
-            '{{REWARDED_BUTTON_CLASS_JS}}' => $this->js_json($ad_provider === 'm2' ? 'pg-rewarded' : ''),
-            '{{REWARDED_CTA_TAG}}' => $ad_provider === 'actview' ? 'a' : 'button',
-            '{{REWARDED_CTA_ATTRS}}' => $ad_provider === 'actview' ? 'role="button" tabindex="0" onclick="window.mgsCloseQuizAfterReward && window.mgsCloseQuizAfterReward(); return false;"' : 'type="button"',
+            '{{REWARDED_BUTTON_CLASS}}' => esc_attr($sms_enabled ? '' : ($ad_provider === 'm2' ? 'pg-rewarded' : ($ad_provider === 'actview' ? 'av-rewarded' : ''))),
+            '{{REWARDED_BUTTON_CLASS_JS}}' => $this->js_json($ad_provider === 'm2' ? 'pg-rewarded' : ($ad_provider === 'actview' ? 'av-rewarded' : '')),
+            '{{REWARDED_CTA_TAG}}' => (!$sms_enabled && $ad_provider === 'actview') ? 'a' : 'button',
+            '{{REWARDED_CTA_ATTRS}}' => (!$sms_enabled && $ad_provider === 'actview') ? 'role="button" tabindex="0" onclick="window.mgsCloseQuizAfterReward && window.mgsCloseQuizAfterReward(); return false;"' : 'type="button"',
             '{{BOT_NAMES_JS}}' => $this->js_json($persona['names'] ?? array('Maria')),
             '{{FEMALE_NAMES_JS}}' => $this->js_json($persona['female_names'] ?? array()),
             '{{MALE_NAMES_JS}}' => $this->js_json($persona['male_names'] ?? array()),
@@ -137,6 +141,8 @@ final class MGS_Chat_Funnels {
             '{{OFFER_URLS_JS}}' => $this->js_json($this->offer_urls_from_config($config)),
             '{{GATE_SLIDES_HTML}}' => $this->render_gate_slides_html($config),
             '{{GATE_QUESTION_COUNT_JS}}' => (string) $this->gate_question_count($config),
+            '{{SMS_FORM_HTML}}' => MGS_Chat_SMS::form_html($config),
+            '{{SMS_CONFIG_JS}}' => MGS_Chat_SMS::template_js_config($config),
             '{{JBF_REWARDED_PRELOAD_JS}}' => $ad_provider === 'jbf' ? "window.jbftag = window.jbftag || { cmd: [] };\n          window.jbftag.cmd.push(() => {\n            if (window.jbftag.requestRewardAds) {\n              window.jbftag.requestRewardAds();\n            }\n          });" : '',
             '{{JBF_REWARDED_SHOW_JS}}' => $ad_provider === 'jbf' ? "try {\n              window.jbftag = window.jbftag || { cmd: [] };\n              window.jbftag.cmd.push(() => {\n                if (window.jbftag.showRewardedAds) {\n                  window.jbftag.showRewardedAds(safeCloseQuiz);\n                } else {\n                  safeCloseQuiz();\n                }\n              });\n            } catch (err) {\n              safeCloseQuiz();\n            }" : '',
 
@@ -418,7 +424,8 @@ final class MGS_Chat_Funnels {
     private function render_container($config) {
         $this->enqueue_assets($config);
         $id = isset($config['id']) ? $this->normalize_id($config['id']) : 'mgs-chat-funnel';
-        $json = wp_json_encode($config, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP);
+        $public_config = MGS_Chat_SMS::public_config($config);
+        $json = wp_json_encode($public_config, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP);
         if (!$json) {
             return '<!-- MGS Chat Funnels: invalid config JSON -->';
         }
@@ -568,7 +575,9 @@ final class MGS_Chat_Funnels {
         );
         add_submenu_page(self::MENU_SLUG, 'Todos os chats', 'Todos os chats', 'manage_options', self::MENU_SLUG, array($this, 'render_admin_page'));
         add_submenu_page(self::MENU_SLUG, 'Criar chat', 'Criar chat', 'manage_options', self::MENU_SLUG . '-new', array($this, 'render_admin_new_page'));
-        add_submenu_page(self::MENU_SLUG, 'Relatórios', 'Relatórios', 'manage_options', self::MENU_SLUG . '-reports', array($this, 'render_admin_reports_page'));
+        add_submenu_page(self::MENU_SLUG, 'Leads SMS', 'Leads', 'manage_options', self::MENU_SLUG . '-leads', array('MGS_Chat_SMS', 'render_leads_page'));
+        add_submenu_page(self::MENU_SLUG, 'Relatórios SMS', 'Relatórios', 'manage_options', self::MENU_SLUG . '-reports', array('MGS_Chat_SMS', 'render_report_page'));
+        add_submenu_page(self::MENU_SLUG, 'SMS Funnel', 'SMS', 'manage_options', self::MENU_SLUG . '-sms', array('MGS_Chat_SMS', 'render_sms_settings_page'));
     }
 
     public function render_admin_new_page() {
@@ -602,7 +611,7 @@ final class MGS_Chat_Funnels {
         echo '<div class="mgs-cf-top-actions">';
         echo '<a class="button button-primary" href="' . esc_url(admin_url('admin.php?page=' . self::MENU_SLUG . '&view=new')) . '">Criar chat novo</a> ';
         echo '<a class="button" href="' . esc_url(admin_url('admin.php?page=' . self::MENU_SLUG . '&view=duplicate')) . '">Duplicar chat</a> ';
-        echo '<a class="button" href="' . esc_url(admin_url('admin.php?page=' . self::MENU_SLUG . '&view=reports')) . '">Relatórios</a>';
+        echo '<a class="button" href="' . esc_url(admin_url('admin.php?page=' . self::MENU_SLUG . '-reports')) . '">Relatórios</a>';
         echo '</div></div>';
 
         if ($notice) {
@@ -617,7 +626,7 @@ final class MGS_Chat_Funnels {
         } elseif ($view === 'duplicate') {
             $this->render_duplicate_panel($configs, $selected_id);
         } elseif ($view === 'reports') {
-            $this->render_reports($configs);
+            MGS_Chat_SMS::render_report_page();
         } elseif ($selected) {
             $this->render_human_editor($selected, false);
         } else {
@@ -730,6 +739,14 @@ final class MGS_Chat_Funnels {
         $config['route'] = is_array($existing) && !empty($existing['route']) ? $existing['route'] : $posted_route;
         $config['theme'] = 'whatsapp';
         $config['mode'] = sanitize_key(wp_unslash($_POST['mode'] ?? 'cards'));
+        $config['sms_enabled'] = !empty($_POST['sms_enabled']);
+        $config['sms_manager_code'] = strtoupper(sanitize_text_field(wp_unslash($_POST['sms_manager_code'] ?? '')));
+        $config['sms_name_label'] = sanitize_text_field(wp_unslash($_POST['sms_name_label'] ?? 'Nome'));
+        $config['sms_phone_label'] = sanitize_text_field(wp_unslash($_POST['sms_phone_label'] ?? 'Telefone'));
+        $config['sms_submit_label'] = sanitize_text_field(wp_unslash($_POST['sms_submit_label'] ?? 'TRANSFERIR PARA ESPECIALISTA →'));
+        if ($config['sms_enabled'] && !MGS_Chat_SMS::manager_is_configured($config['sms_manager_code'])) {
+            return array('type' => 'error', 'message' => 'Configure a URL do gestor no menu SMS antes de ativar a captura neste chat.');
+        }
         $config['standalone'] = !empty($_POST['standalone']);
         $config['tracking_mode'] = sanitize_key(wp_unslash($_POST['tracking_mode'] ?? 'gtm'));
         if (!in_array($config['tracking_mode'], array('gtm', 'direct_ga4'), true)) {
@@ -888,7 +905,17 @@ final class MGS_Chat_Funnels {
         ), 'Selecione o idioma do chat.');
         echo '</div></section>';
 
-        echo '<section class="mgs-cf-section"><h3>3. Monetização e rastreamento</h3><div class="mgs-cf-fields mgs-cf-fields-compact">';
+        echo '<section class="mgs-cf-section"><h3>3. Captura SMS</h3><div class="mgs-cf-fields">';
+        $this->field_checkbox('Ativar nome e telefone antes de transferir', 'sms_enabled', !empty($config['sms_enabled']), 'Ativo somente nesta variante. O chat só continua depois que o lead for salvo e aceito pelo SMS Funnel.');
+        $sms_options = array('' => 'Selecione um gestor') + MGS_Chat_SMS::manager_options();
+        $this->field_select('Gestor / lista SMS Funnel', 'sms_manager_code', strtoupper($config['sms_manager_code'] ?? ''), $sms_options, 'O gestor escolhido é fixo para este chat, com ou sem UTM. As URLs são administradas no menu SMS.');
+        $this->field_text('Label do campo Nome', 'sms_name_label', $config['sms_name_label'] ?? 'Nome', 'Texto mostrado acima do campo de nome.');
+        $this->field_text('Label do campo Telefone', 'sms_phone_label', $config['sms_phone_label'] ?? 'Telefone', 'Texto mostrado acima do campo de telefone.');
+        $this->field_text('Texto do botão de envio', 'sms_submit_label', $config['sms_submit_label'] ?? 'TRANSFERIR PARA ESPECIALISTA →', 'Depois do envio bem-sucedido, o fluxo atual de anúncio e chat continua normalmente.');
+        echo '<div class="mgs-cf-mode-help mgs-cf-full"><strong>URLs por gestor:</strong> cadastre ou altere em <a href="' . esc_url(admin_url('admin.php?page=' . self::MENU_SLUG . '-sms')) . '">MGS Chats → SMS</a>. Nenhuma URL é exposta na página pública.</div>';
+        echo '</div></section>';
+
+        echo '<section class="mgs-cf-section"><h3>4. Monetização e rastreamento</h3><div class="mgs-cf-fields mgs-cf-fields-compact">';
         $ad_domain_value = $this->clean_ad_slug($config['ad_domain'] ?? '', '');
         if ($ad_domain_value === '') {
             $ad_domain_value = $this->current_site_ad_slug();
@@ -935,7 +962,7 @@ final class MGS_Chat_Funnels {
         echo '</div></section>';
 
         $persona = $config['persona'] ?? array();
-        echo '<section class="mgs-cf-section"><h3>4. Persona do atendente</h3><div class="mgs-cf-fields">';
+        echo '<section class="mgs-cf-section"><h3>5. Persona do atendente</h3><div class="mgs-cf-fields">';
         $this->field_textarea('Nomes possíveis', 'persona_names', implode("\n", $persona['names'] ?? array()), 'Um nome por linha.');
         $this->field_textarea('Nomes femininos', 'persona_female_names', implode("\n", $persona['female_names'] ?? array()), 'Usado para escolher foto feminina quando houver fotos configuradas.');
         $this->field_text('Cargo no header', 'persona_role', $persona['role'] ?? 'Consultor', 'Ex: Consultor de Empréstimo.');
@@ -943,7 +970,7 @@ final class MGS_Chat_Funnels {
         echo '</div></section>';
 
         $gate = $config['gate'] ?? array();
-        echo '<section class="mgs-cf-section"><h3>5. Gate inicial</h3><div class="mgs-cf-fields">';
+        echo '<section class="mgs-cf-section"><h3>6. Gate inicial</h3><div class="mgs-cf-fields">';
         $this->field_checkbox('Gate ativo', 'gate_enabled', !isset($gate['enabled']) || !empty($gate['enabled']), 'Mostra perguntas antes do chat.');
         $this->field_textarea('Perguntas do gate', 'gate_questions', $this->questions_to_text($gate['questions'] ?? array()), "Formato: Pergunta | resposta 1; resposta 2; resposta 3");
         $gate_questions_editor = isset($gate['questions']) && is_array($gate['questions']) ? array_values($gate['questions']) : array();
@@ -960,7 +987,7 @@ final class MGS_Chat_Funnels {
         echo '</div></section>';
 
         $chat = $config['chat'] ?? array();
-        echo '<section class="mgs-cf-section"><h3>6. Conversa do chat</h3><div class="mgs-cf-fields">';
+        echo '<section class="mgs-cf-section"><h3>7. Conversa do chat</h3><div class="mgs-cf-fields">';
         $this->field_textarea('Mensagens de abertura', 'chat_intro', implode("\n", $chat['intro'] ?? array()), 'Uma mensagem por linha. Use {botName} para o nome do atendente.');
         $this->field_textarea('Botões iniciais', 'chat_start_answers', implode("\n", $chat['start_answers'] ?? array()), 'Um botão por linha.');
         $this->field_textarea('Perguntas do chat', 'chat_questions', $this->questions_to_text($chat['questions'] ?? array()), "Formato: Pergunta | resposta 1; resposta 2; resposta 3");
@@ -974,7 +1001,7 @@ final class MGS_Chat_Funnels {
         echo '<input type="hidden" name="chat_offer_headline" value="' . esc_attr($chat['offer_headline'] ?? '') . '">';
         echo '</div></section>';
 
-        echo '<section class="mgs-cf-section"><h3>7. Ofertas finais</h3>';
+        echo '<section class="mgs-cf-section"><h3>8. Ofertas finais</h3>';
         echo '<p class="description">Edite como gestor: cada oferta tem nome, URL, CTA e mensagens próprias. Sem pipe, sem formato técnico.</p>';
         $this->render_offer_fields($config['offers'] ?? array(), $mode);
         echo '</section>';
@@ -1325,6 +1352,11 @@ final class MGS_Chat_Funnels {
             'brand' => 'MGS',
             'theme' => 'whatsapp',
             'mode' => 'cards',
+            'sms_enabled' => false,
+            'sms_manager_code' => '',
+            'sms_name_label' => 'Nome',
+            'sms_phone_label' => 'Telefone',
+            'sms_submit_label' => 'TRANSFERIR PARA ESPECIALISTA →',
             'standalone' => false,
             'tracking_mode' => 'gtm',
             'gtm_container_id' => '',
