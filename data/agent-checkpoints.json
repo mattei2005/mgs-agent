@@ -32,6 +32,16 @@
     },
     {
       "agent": "zeus",
+      "id": "sb-purple-pages-excel-20260716",
+      "next_step": "Mapear templates roxos para páginas vinculadas e procurar atribuição de erro por Page ID via SB/Meta.",
+      "objective": "Identificar páginas vinculadas que causam erro roxo pages_utility_messaging e entregar Excel operacional",
+      "source": "discord:1527452748969283705",
+      "state": "início: regra de eta corrigida para 12 segundos por mensagem/página; 132 roxas atuais, 51 com erro #200 pages_utility_messaging agregado por mensagem.",
+      "thread_id": "1527356568578818198",
+      "updated_at": "2026-07-16T23:12:37+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "sb-restricted-sheet-live-sync",
       "next_step": "Operação contínua pelo cron de transições; escalar somente falha de leitura/escrita/entrega ou divergência live",
       "objective": "Reconstruir e manter automaticamente a planilha de páginas restritas com Smart Bidding live, incluindo Resumo, Páginas Totais e abas por site",
@@ -42,5 +52,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T22:26:24+00:00"
+  "updated_at": "2026-07-16T23:12:37+00:00"
 }
