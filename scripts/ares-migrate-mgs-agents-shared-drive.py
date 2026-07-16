@@ -238,7 +238,7 @@ def validate_exact_target(rows: list[dict], checkpoint: dict, target_tree: list[
         raise RuntimeError(f'checkpoint action counts mismatch: {dict(actions)}')
     expected_target_ids = set()
     for row in rows:
-        copied = row['migration_action'] == 'COPY_NEW_ID'
+        copied = row['kind'] == 'FOLDER' or row['migration_action'] == 'COPY_NEW_ID'
         target_id = checkpoint['folder_map'][row['id']] if row['kind'] == 'FOLDER' else checkpoint['file_map'][row['id']]['target_id']
         expected_target_ids.add(target_id)
         target = target_by_id.get(target_id)

@@ -175,14 +175,15 @@ Antes do write, resolver o ID do link pela API e listar os filhos diretos. Não 
 - O Google também não suporta mover pastas do My Drive para Shared Drive pelo Drive for desktop. Não orientar arrastar a árvore pelo Finder/Explorer: pode falhar ou virar cópia sem mapeamento auditável.
 - Arquivo de owner externo com `canMoveItemIntoTeamDrive=false` deve ser copiado sob ownership organizacional, mantendo o original até readback. A cópia recebe novo ID; preservar checksum, fingerprint, linhagem e `old_file_id → new_file_id`.
 
-1. Congelar writes concorrentes com lock e novo snapshot.
+1. Congelar writes concorrentes com lock e novo snapshot; vincular checkpoint a `source_id`, `target_drive_id`, tag de migração e SHA-256 do inventário.
 2. Separar itens por owner/capacidade e executar em lotes reversíveis.
 3. Preservar IDs quando o move real permitir; quando houver copy, registrar old ID → new ID, checksums e lineage.
-4. Conferir contagens, paths, tamanhos e checksums após cada lote.
-5. Não excluir a origem antes do readback completo. Quando Rodolfo determinar que os itens copiados saiam do Meu Drive, após PASS mover a árvore fonte inteira para um container de backup fora da raiz operacional; preservar nela os originals de owner externo e registrar `backup_container_id`/`source_root_id`, em vez de apagar sem rollback.
-6. Atualizar scripts/configs/watchdogs somente depois que o destino estiver validado.
-7. Testar runners reais no novo root.
-8. Enviar REPORT-INFRA com inventário, piloto, migração, IDs e rollback.
+4. Conferir contagens, paths, tamanhos e checksums após cada lote. No gate final, comparar **cada item** por ID, nome, MIME type, parent mapeado, `driveId`, `trashed=false`, tamanho/MD5 e, para pastas recriadas/cópias, `appProperties` de migração; contagem isolada não prova a hierarquia.
+5. Imediatamente antes de arquivar a origem, reenumerar a árvore residual: deve conter exatamente os folders antigos e os originals que foram copiados, sem itens extras; comparar novamente tamanho/MD5 de cada original copiado com o destino. Tratar atraso de consistência da API com readback/retry limitado, nunca ignorando divergência.
+6. Não excluir a origem antes do readback completo. Quando Rodolfo determinar que os itens copiados saiam do Meu Drive, após PASS mover a árvore fonte residual para um container de backup fora da raiz operacional; preservar nela os originals de owner externo e registrar `backup_container_id`/`source_root_id`, em vez de apagar sem rollback. Fazer GET independente após o move e validar nome, MIME, parent, `driveId` ausente e `trashed=false`.
+7. Atualizar scripts/configs/watchdogs somente depois que o destino estiver validado.
+8. Testar runners reais no novo root.
+9. Enviar REPORT-INFRA com inventário, piloto, migração, IDs e rollback.
 
 ## Recomendação operacional de baixo risco
 

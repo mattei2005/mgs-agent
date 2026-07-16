@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-07-16T01:14:06.315074+00:00",
+  "generated_at_utc": "2026-07-16T01:42:40.321864+00:00",
   "status": "PASS",
   "run_id": "20260716T003345Z",
   "source_root_id": "14ica5TVauTrzAxcl4T-ViJorF89vRKIl",
@@ -20,7 +20,14 @@
     "target_files": 1139,
     "target_bytes": 4882460554,
     "md5_checked": 1134,
-    "md5_mismatches": 0
+    "md5_mismatches": 0,
+    "exact_hierarchy_metadata": "PASS",
+    "residual_source": {
+      "items": 408,
+      "folders": 304,
+      "files": 104,
+      "bytes": 1196858738
+    }
   },
   "source_backup": {
     "status": "PASS",
@@ -29,16 +36,22 @@
     "source_root_name": "MGS-AGENTS",
     "source_root_parents": [
       "16R-2mGJo3zeXRGZUWs6EerIlWFERT3DG"
-    ]
+    ],
+    "residual_source": {
+      "items": 408,
+      "folders": 304,
+      "files": 104,
+      "bytes": 1196858738
+    }
   },
   "folder_map_count": 305,
   "file_map_count": 1139,
   "moved_file_count": 1035,
   "copied_file_count": 104,
-  "copy_policy": "External-owner originals remain under the old MGS-AGENTS tree, which was moved intact into a My Drive backup container after destination validation.",
+  "copy_policy": "The residual source tree contains the 304 original folder shells and 104 externally owned originals, validated and moved into a My Drive backup container after destination PASS.",
   "artifacts": {
     "folder_map": "folder-map.json",
     "file_map": "file-map.json",
-    "target-tree.json": "target-tree.json"
+    "target_tree": "target-tree.json"
   }
 }
