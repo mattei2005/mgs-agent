@@ -30,24 +30,22 @@ ITEM_ID = "dtozo3kfqwoglwkmblfsvautyq"
 VAULT = "MGS Conteúdo"
 LOGIN_URL = "https://web2.smsfunnel.com.br/api/login"
 CREDITS_URL = "https://web2.smsfunnel.com.br/api/user-credits-info"
+DAILY_SENTS_URL = "https://web2.smsfunnel.com.br/api/daily-sents"
 DISCORD_API_BASE = "https://discord.com/api/v10"
 MENTION_USER_ID = "344196393512075265"
 
 THRESHOLDS = {
-    "warning": 20_000,
     "critical": 10_000,
     "emergency": 5_000,
 }
-LEVEL_RANK = {"normal": 0, "warning": 1, "critical": 2, "emergency": 3}
+LEVEL_RANK = {"normal": 0, "critical": 1, "emergency": 2}
 LEVEL_COLOR = {
     "normal": 3_066_993,
-    "warning": 15_844_367,
     "critical": 15_158_332,
     "emergency": 15_158_332,
     "info": 3_447_003,
 }
 REMINDER_SECONDS = {
-    "warning": 24 * 3600,
     "critical": 12 * 3600,
     "emergency": 4 * 3600,
 }
@@ -85,7 +83,6 @@ def default_state(channel_id: str) -> dict[str, Any]:
         "_meta": {
             "description": "Estado do monitor de saldo SMS Funnel.",
             "channel_id": channel_id,
-            "warning_credits": THRESHOLDS["warning"],
             "critical_credits": THRESHOLDS["critical"],
             "emergency_credits": THRESHOLDS["emergency"],
             "schedule": "24 * * * *",
@@ -198,7 +195,21 @@ def validate_metrics(data: Any) -> dict[str, int]:
         - metrics["total_reserved"]
         - metrics["credits"]
     )
+    daily_average = data.get("daily_average_3d", 0)
+    if isinstance(daily_average, (int, float)) and not isinstance(daily_average, bool):
+        metrics["daily_average_3d"] = max(0, int(round(daily_average)))
     return metrics
+
+
+def completed_three_day_average(data: Any) -> int:
+    if not isinstance(data, dict) or not isinstance(data.get("data"), list):
+        return 0
+    values = data["data"]
+    numeric = [int(value) for value in values if isinstance(value, (int, float)) and not isinstance(value, bool) and value >= 0]
+    # The API returns the current partial day as the final bucket. Exclude it so
+    # the average is not biased by the time at which the hourly monitor runs.
+    completed = numeric[-4:-1] if len(numeric) >= 4 else []
+    return int(round(sum(completed) / len(completed))) if len(completed) == 3 else 0
 
 
 def probe_live(env: dict[str, str]) -> dict[str, int]:
@@ -212,7 +223,15 @@ def probe_live(env: dict[str, str]) -> dict[str, int]:
     status, credits = http_json(CREDITS_URL, headers={"Authorization": f"Bearer {token}"})
     if status != 200:
         raise RuntimeError(f"consulta de créditos falhou com HTTP {status}")
-    return validate_metrics(credits)
+    metrics = validate_metrics(credits)
+    try:
+        daily_status, daily_sents = http_json(DAILY_SENTS_URL, headers={"Authorization": f"Bearer {token}"})
+        if daily_status == 200:
+            metrics["daily_average_3d"] = completed_three_day_average(daily_sents)
+    except Exception:
+        # Balance is the primary alert. A projection failure must not suppress it.
+        metrics["daily_average_3d"] = 0
+    return metrics
 
 
 def probe_fixture(path: Path) -> dict[str, int]:
@@ -227,8 +246,6 @@ def balance_level(credits: int) -> str:
         return "emergency"
     if credits <= THRESHOLDS["critical"]:
         return "critical"
-    if credits <= THRESHOLDS["warning"]:
-        return "warning"
     return "normal"
 
 
@@ -249,14 +266,21 @@ def append_sample(state: dict[str, Any], metrics: dict[str, int], now_epoch: int
 
 
 def burn_projection(state: dict[str, Any], metrics: dict[str, int], now_epoch: int) -> dict[str, Any]:
+    daily_average = int(metrics.get("daily_average_3d", 0) or 0)
+    if daily_average > 0:
+        return {
+            "daily_sent": daily_average,
+            "hours_left": round(metrics["credits"] / daily_average * 24, 1),
+            "window_hours": 72.0,
+        }
     samples = [sample for sample in state.get("samples", []) if isinstance(sample, dict)]
-    candidates = [sample for sample in samples if now_epoch - int(sample.get("ts", 0)) <= 30 * 3600]
+    candidates = [sample for sample in samples if now_epoch - int(sample.get("ts", 0)) <= 78 * 3600]
     if len(candidates) < 2:
         return {"daily_sent": None, "hours_left": None, "window_hours": 0.0}
     oldest = min(candidates, key=lambda sample: int(sample.get("ts", 0)))
     elapsed = now_epoch - int(oldest.get("ts", now_epoch))
     delta = metrics["total_sent"] - int(oldest.get("total_sent", metrics["total_sent"]))
-    if elapsed < 3600 or delta <= 0:
+    if elapsed < 60 * 3600 or delta <= 0:
         return {"daily_sent": None, "hours_left": None, "window_hours": round(elapsed / 3600, 1)}
     per_hour = delta / (elapsed / 3600)
     return {
@@ -270,26 +294,18 @@ def projection_text(projection: dict[str, Any]) -> str:
     daily = projection.get("daily_sent")
     hours = projection.get("hours_left")
     if daily is None or hours is None:
-        return "Calculando após acumular pelo menos 1 hora de histórico."
+        return "Média dos últimos 3 dias indisponível no momento."
     if hours >= 48:
         remaining = f"aprox. {hours / 24:.1f} dias"
     else:
         remaining = f"aprox. {hours:.1f} horas"
-    return f"Ritmo projetado: {fmt_int(daily)} SMS/dia · duração estimada do saldo: {remaining}."
+    return f"Média dos últimos 3 dias: {fmt_int(daily)} SMS/dia · saldo para {remaining}."
 
 
 def metric_fields(metrics: dict[str, int], projection: dict[str, Any]) -> list[dict[str, Any]]:
-    usage_pct = (metrics["total_sent"] / metrics["total_contracted"] * 100.0) if metrics["total_contracted"] else 0.0
     fields = [
         {"name": "Saldo disponível", "value": f"**{fmt_int(metrics['credits'])} SMS**", "inline": True},
-        {"name": "Créditos contratados", "value": fmt_int(metrics["total_contracted"]), "inline": True},
-        {"name": "Créditos utilizados", "value": f"{fmt_int(metrics['total_sent'])} ({usage_pct:.2f}%)", "inline": True},
-        {"name": "Consumo e projeção", "value": projection_text(projection), "inline": False},
-        {
-            "name": "Faixas de alerta",
-            "value": "Atenção ≤ 20.000 · Crítico ≤ 10.000 · Emergência ≤ 5.000",
-            "inline": False,
-        },
+        {"name": "Projeção", "value": projection_text(projection), "inline": False},
     ]
     if metrics.get("accounting_gap"):
         fields.append({
@@ -302,19 +318,18 @@ def metric_fields(metrics: dict[str, int], projection: dict[str, Any]) -> list[d
 
 def alert_payload(level: str, metrics: dict[str, int], projection: dict[str, Any], *, reminder: bool = False) -> dict[str, Any]:
     titles = {
-        "warning": "Saldo SMS Funnel em atenção",
         "critical": "Saldo SMS Funnel crítico",
         "emergency": "Saldo SMS Funnel em emergência",
-    }
-    actions = {
-        "warning": "Programar a próxima recarga via PIX antes de o saldo entrar na faixa crítica.",
-        "critical": "Solicitar a recarga via PIX agora para evitar interrupção dos SMS.",
-        "emergency": "Recarga imediata necessária; há risco próximo de interrupção dos SMS.",
     }
     mention = level in {"critical", "emergency"}
     title = titles[level] + (" — lembrete" if reminder else "")
     fields = metric_fields(metrics, projection)
-    fields.append({"name": "Ação", "value": actions[level], "inline": False})
+    if level == "emergency":
+        fields.append({
+            "name": "Ação necessária",
+            "value": "Fazer a recarga via PIX com o fornecedor da SMS Funnel para evitar a interrupção dos envios.",
+            "inline": False,
+        })
     return {
         "content": f"<@{MENTION_USER_ID}> saldo SMS Funnel baixo" if mention else "",
         "allowed_mentions": {"users": [MENTION_USER_ID]} if mention else {"parse": []},
@@ -326,7 +341,7 @@ def activation_payload(metrics: dict[str, int], projection: dict[str, Any]) -> d
     fields = metric_fields(metrics, projection)
     fields.append({
         "name": "Comportamento",
-        "value": "Consulta a cada hora. Silêncio enquanto saudável; alerta por faixa, lembrete anti-spam, confirmação de recarga e aviso após duas falhas consecutivas.",
+        "value": "Consulta a cada hora. Não alerta acima de 10.000 SMS; em 5.000 ou menos inclui a orientação de recarga via PIX.",
         "inline": False,
     })
     return {

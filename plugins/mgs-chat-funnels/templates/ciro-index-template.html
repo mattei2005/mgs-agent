@@ -184,13 +184,25 @@
       .button-container {
         display: flex;
         flex-direction: column;
-        margin-top: 8px;
+        width: calc(75% - 18px) !important;
+        max-width: calc(75% - 18px) !important;
+        margin: 8px 18px 0 18px !important;
         opacity: 0;
         transition: opacity 0.5s ease;
-        margin-right: 18px !important;
-        max-width: 75% !important;
-        float: right !important;
-        align-items: flex-end !important;
+        align-self: flex-end !important;
+        align-items: stretch !important;
+        float: none !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
+      }
+
+      #chat-container .button-container > button,
+      #chat-container .button-container > a,
+      #chat-container .button-container > a > button {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
       }
 
       #chat-container button {

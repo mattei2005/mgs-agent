@@ -3,12 +3,12 @@
     {
       "agent": "zeus",
       "id": "chat-sms-canary-eggbev-20260716",
-      "next_step": "Rodolfo preenche MGS Chats > SMS, escolhe o gestor no chat CAR-BR-01-SMS e valida um lead real; após OK explícito, replicar código nos demais sites preservando configs",
+      "next_step": "Corrigir escopo/box model dos botões, validar fixture mobile e reaplicar code-only no Eggbev",
       "objective": "Criar variante chat-sms com captura SMS, links por gestor e relatórios, validada primeiro no Eggbev",
-      "source": "discord:thread:1527428793600315533; https://eggbev.com/chat-sms/car/br1",
-      "state": "canário 0.4.0 implantado e validado no eggbev; rota chat-sms ativa; urls sms e gestor ainda não configurados por ausência de valor/escolha do rodolfo",
+      "source": "discord:message:1527439218157158431",
+      "state": "ajuste pós-validação: rodolfo identificou borda esquerda dos botões cortada no mobile",
       "thread_id": "1527428793600315533",
-      "updated_at": "2026-07-16T22:10:02+00:00"
+      "updated_at": "2026-07-16T22:18:32+00:00"
     },
     {
       "agent": "zeus",
@@ -42,5 +42,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T22:10:02+00:00"
+  "updated_at": "2026-07-16T22:18:32+00:00"
 }

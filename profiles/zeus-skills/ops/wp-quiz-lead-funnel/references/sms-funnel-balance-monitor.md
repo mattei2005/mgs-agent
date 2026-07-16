@@ -38,6 +38,7 @@ Behavior:
 6. Keep up to seven days of samples and estimate daily consumption/depletion only after at least one hour of real history.
 7. Alert after two consecutive API/1Password failures and post recovery only if that failure was previously alerted.
 8. If Discord delivery fails, do not consume the state transition; retry it on the next run.
+9. Keep the alert compact: show available balance, consumption projection, thresholds, and required action. Do not show `Créditos contratados` or `Créditos utilizados` in Discord alerts.
 
 ## Validation
 
