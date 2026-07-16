@@ -7,7 +7,7 @@ from zoneinfo import ZoneInfo
 from openpyxl import Workbook,load_workbook
 from openpyxl.styles import Alignment,Font,PatternFill,Border,Side
 from openpyxl.utils import get_column_letter
-RUN=Path('/root/mgs-agent/work/sb-purple-pages-excel-20260716');BR=Path('/tmp/sb-ares-purple-recheck.json');PG=RUN/'sb-pages-live.json';OUT=RUN/'paginas-vinculadas-templates-roxos-todos-erros.xlsx'
+RUN=Path('/root/mgs-agent/work/sb-purple-pages-excel-20260716');BR=Path('/tmp/sb-ares-purple-recheck.json');PG=RUN/'sb-pages-live.json';OUT=RUN/'paginas-vinculadas-a-templates-com-roxo.xlsx'
 def msgs(r):
  x=r.get('MESSAGES') or [];return json.loads(x) if isinstance(x,str) else x
 def ispurple(m):return int(m.get('INVALID_FORMAT') or 0)>0 or int(m.get('ERROR') or 0)>0
@@ -60,6 +60,6 @@ def add(name,data,color):
  for i,w in enumerate(widths,1):sh.column_dimensions[get_column_letter(i)].width=w
  for row in sh.iter_rows(min_row=2):
   for c in row:c.alignment=Alignment(vertical='top',wrap_text=True);c.border=Border(bottom=thin)
-add('Todas páginas roxas',active,'7030A0');add('Subconjunto #200',[x for x in active if x['Categoria do roxo']=='#200 pages_utility_messaging'],'C000C0');add('Rows não ativas',excluded,'A5A5A5')
-wb.save(OUT);rb=load_workbook(OUT);assert rb['Todas páginas roxas'].max_row-1==162;assert rb['Subconjunto #200'].max_row-1==17
+add('Páginas vinculadas',active,'7030A0');add('Subconjunto #200',[x for x in active if x['Categoria do roxo']=='#200 pages_utility_messaging'],'C000C0');add('Rows não ativas',excluded,'A5A5A5')
+wb.save(OUT);rb=load_workbook(OUT);assert rb['Páginas vinculadas'].max_row-1==162;assert rb['Subconjunto #200'].max_row-1==17
 print(json.dumps({'output':str(OUT),'templates':len(target),'purple_messages':sum(x['purple_messages'] for x in target.values()),'active_pages':len(active),'subset_200':17,'excluded':len(excluded),'categories':dict(Counter(x['category'] for x in target.values()))},ensure_ascii=False))
