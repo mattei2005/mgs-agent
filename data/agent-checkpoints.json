@@ -19,8 +19,18 @@
       "state": "pré-flight autorizado por rodolfo; acesso ares enxerga 110 templates, financeadx ca-cc-fr recém-criado precisa de recheck ao vivo.",
       "thread_id": "1527356568578818198",
       "updated_at": "2026-07-16T20:44:34+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "sb-restricted-sheet-live-sync",
+      "next_step": "Corrigir escritor para reconstrução integral sem backup, incluir todas as restrições alertáveis exceto On-hold/Blocked e gerar Resumo; testar em fixture antes do apply",
+      "objective": "Reconstruir e manter automaticamente a planilha de páginas restritas com Smart Bidding live, incluindo Resumo, Páginas Totais e abas por site",
+      "source": "Discord thread 1527420530792202281; scripts/dtr-sb-page-health-sync.py; Smart Bidding live; Google Sheet 1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI",
+      "state": "escopo autorizado por rodolfo; planilha live auditada; sb live mostra 438 broadcast, 49 on-hold e a página 19265 ativa em campaign, ausente da planilha",
+      "thread_id": "1527420530792202281",
+      "updated_at": "2026-07-16T21:12:24+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T20:44:34+00:00"
+  "updated_at": "2026-07-16T21:12:24+00:00"
 }

@@ -20,12 +20,12 @@ async def navigate_broadcast(page):
 async def find_row(page,name):
  loc=page.get_by_text(name,exact=True)
  if await loc.count():return loc.first.locator('xpath=ancestor::tr')
- # PrimeVue filter row: NAME is the fourth dimension column.
- table=page.locator('table').first
- headers=table.locator('thead tr').last.locator('th')
- if await headers.count()>=4:
-  inp=headers.nth(3).locator('input')
-  if await inp.count():await inp.fill(name);await page.wait_for_timeout(1200)
+ # Main table global filter. The search button reveals the text field; all dimensions are selected by default.
+ fin=page.locator('input.p-inputtext:visible')
+ if not await fin.count():
+  await page.locator('button:has(.pi-search)').first.click(timeout=10000);await page.wait_for_timeout(350);fin=page.locator('input.p-inputtext:visible')
+ if not await fin.count():raise RuntimeError(f'global filter unavailable for: {name}')
+ await fin.last.fill(name);await fin.last.press('Enter');await page.wait_for_timeout(900)
  loc=page.get_by_text(name,exact=True)
  if not await loc.count():raise RuntimeError(f'row not found: {name}')
  return loc.first.locator('xpath=ancestor::tr')
@@ -77,7 +77,7 @@ async def apply_one(page,item):
   await btn.click(timeout=30000);events.append({'step':'run_approval_clicked'});await page.wait_for_timeout(700)
  # Rodolfo-mandated order: Run Approval -> Update -> Save.
  await msgdlg.get_by_role('button',name=re.compile(r'^Update$',re.I)).click(timeout=15000);events.append({'step':'update_clicked'});await page.wait_for_timeout(650)
- save=parent.get_by_role('button',name=re.compile(r'^Save$',re.I))
+ save=page.locator('button:visible').filter(has_text=re.compile(r'^\s*Save\s*$',re.I)).last
  if not await save.count():
   vis=page.locator('[role="dialog"]:visible,.p-dialog:visible,.modal:visible')
   debug=[]
