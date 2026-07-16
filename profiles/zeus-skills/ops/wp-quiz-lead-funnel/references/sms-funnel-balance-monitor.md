@@ -24,21 +24,21 @@ Use this reference when Rodolfo asks to monitor SMS Funnel credits, alert before
 
 Default bands:
 
-- Attention: `credits <= 20,000`
-- Critical: `credits <= 10,000`
+- No alert: `credits > 10,000`
+- Critical: `5,000 < credits <= 10,000`
 - Emergency: `credits <= 5,000`
 
 Behavior:
 
-1. Stay silent while healthy.
-2. Alert on downward band transitions.
-3. Mention Rodolfo only for critical/emergency or two consecutive probe failures.
-4. Remind at most every 24h / 12h / 4h in attention / critical / emergency.
+1. Stay silent while `credits > 10,000`.
+2. Alert when the balance reaches `10,000` or less; mention Rodolfo.
+3. At `5,000` or less, add an `Ação necessária` field instructing a PIX recharge with the SMS Funnel supplier.
+4. Remind at most every 12h in critical and every 4h in emergency.
 5. Detect a recharge when contracted credits increase or available balance rises by at least 100, then post a green confirmation.
-6. Keep up to seven days of samples and estimate daily consumption/depletion only after at least one hour of real history.
+6. Fetch `GET /api/daily-sents` and calculate the projection from the three most recent completed calendar days. Exclude the current partial-day bucket so the hourly execution time does not distort the average. If that endpoint fails, keep the balance alert working and mark the projection unavailable.
 7. Alert after two consecutive API/1Password failures and post recovery only if that failure was previously alerted.
 8. If Discord delivery fails, do not consume the state transition; retry it on the next run.
-9. Keep the alert compact: show available balance, consumption projection, thresholds, and required action. Do not show `Créditos contratados` or `Créditos utilizados` in Discord alerts.
+9. Keep threshold alerts minimal: show only `Saldo disponível` and `Projeção`. The projection line contains the average of the three most recent completed days in SMS/day and the estimated duration of the current balance. Do not show contracted/used credits or threshold definitions. Add `Ação necessária` only in the emergency band (`credits <= 5,000`).
 
 ## Validation
 

@@ -296,9 +296,11 @@ def projection_text(projection: dict[str, Any]) -> str:
     if daily is None or hours is None:
         return "Média dos últimos 3 dias indisponível no momento."
     if hours >= 48:
-        remaining = f"aprox. {hours / 24:.1f} dias"
+        value = f"{hours / 24:.1f}".replace(".", ",")
+        remaining = f"aprox. {value} dias"
     else:
-        remaining = f"aprox. {hours:.1f} horas"
+        value = f"{hours:.1f}".replace(".", ",")
+        remaining = f"aprox. {value} horas"
     return f"Média dos últimos 3 dias: {fmt_int(daily)} SMS/dia · saldo para {remaining}."
 
 
