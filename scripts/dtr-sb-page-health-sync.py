@@ -785,7 +785,8 @@ def exited_restrictions_from_sheet(removed_rows, fresh_sb_rows, tday):
     exited=[]
     for old in removed_rows:
         key=report_page_identity(old); current=live.get(key)
-        if current and not active_restricted(current,tday):
+        current_status=norm(current.get('STATUS')).lower() if current else ''
+        if current and current_status not in {'on-hold','blocked'} and not active_restricted(current,tday):
             exited.append(old)
     return exited
 
@@ -855,11 +856,9 @@ def build_summary_dataset(rows, sheet_stats, updated_at=None):
     values=[
         ['Páginas Restritas — Resumo'],
         ['Atualizado em',updated_at.strftime('%Y-%m-%d %H:%M %Z')],
-        [],
         ['Broadcast restritas',int((sheet_stats or {}).get('sheet_broadcast_restricted',0) or 0)],
         ['Outras restritas ativas',int((sheet_stats or {}).get('sheet_other_status_included',0) or 0)],
         ['On-hold ignoradas',int((sheet_stats or {}).get('sheet_on_hold_excluded',0) or 0)],
-        [],
         ['Data de Saída','Páginas','Sites'],
     ]
     for exit_date in sorted(page_counts):

@@ -16,10 +16,10 @@ spec.loader.exec_module(sync)
 class RestrictedSheetDatasetTest(unittest.TestCase):
     def setUp(self):
         self.original_ignore = sync.load_global_ignore_keys
-        sync.load_global_ignore_keys = lambda: (set(), set())
+        setattr(sync, 'load_global_ignore_keys', lambda: (set(), set()))
 
     def tearDown(self):
-        sync.load_global_ignore_keys = self.original_ignore
+        setattr(sync, 'load_global_ignore_keys', self.original_ignore)
 
     @staticmethod
     def raw(page_id, status, date='2026-07-16', site='openzed'):

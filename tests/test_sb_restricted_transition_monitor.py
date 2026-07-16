@@ -72,6 +72,49 @@ class TransitionComparisonTest(unittest.TestCase):
             self.assertEqual(joined.count(fb_page_id), 1)
         self.assertEqual(joined.count(monitor.SHEET_URL), 1)
 
+    def test_exit_requires_live_inactive_readback_and_ignores_onhold(self):
+        class Daily:
+            @staticmethod
+            def norm(value):
+                return '' if value is None else str(value).strip()
+
+            @classmethod
+            def low(cls, value):
+                return cls.norm(value).lower()
+
+            @classmethod
+            def sb_public_from_raw(cls, raw):
+                return {
+                    'page_id': cls.norm(raw.get('PAGE_ID')),
+                    'fb_page_id': cls.norm(raw.get('FB_PAGE_ID')),
+                    'bot_user': cls.low(raw.get('USER_LOGIN')),
+                }
+
+        class Sync:
+            @staticmethod
+            def derive_sites(raw):
+                return raw.get('SITE', 'openzed')
+
+            @staticmethod
+            def active_restricted(raw, tday):
+                date = str(raw.get('RESTRICTED_UNTIL') or '')[:10]
+                return bool(date and date >= tday)
+
+        previous = [
+            row(1, '2026-08-01'),
+            row(2, '2026-08-01'),
+            row(3, '2026-08-01'),
+        ]
+        live = [
+            {'PAGE_ID': '1', 'FB_PAGE_ID': row(1, '')['fb_page_id'], 'USER_LOGIN': 'bot@example.com', 'STATUS': 'Broadcast', 'RESTRICTED_UNTIL': ''},
+            {'PAGE_ID': '2', 'FB_PAGE_ID': row(2, '')['fb_page_id'], 'USER_LOGIN': 'bot@example.com', 'STATUS': 'On-hold', 'RESTRICTED_UNTIL': ''},
+        ]
+
+        confirmed = monitor.confirmed_resolutions(previous, live, Daily, Sync, '2026-07-16')
+
+        self.assertEqual([item['page id'] for item in confirmed], ['1'])
+        self.assertEqual(confirmed[0]['nome da pagina'], 'Page 1')
+
 
 if __name__ == '__main__':
     unittest.main()
