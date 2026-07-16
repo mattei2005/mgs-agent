@@ -92,6 +92,9 @@ A checkpoint answers: objective, current state, next step, responsible agent, th
 - Define RPO/RTO.
 - Run an isolated restore drill.
 - A local tar validation proves archive readability, not off-host durability or operational restoration.
+- Do not use `hermes backup --quick --output <zip>` as an archive primitive: current Hermes `--quick` ignores the output path, creates a live `state-snapshots/` directory, and may prune older snapshots. For deterministic off-site packaging, enumerate the approved critical state surface and copy SQLite databases with the WAL-safe `sqlite3.backup()` API.
+- Hermes cron script-only jobs accept a script filename relative to the active profile's `scripts/` directory, not an absolute `/root/mgs-agent/...` path. Keep the canonical implementation in MGS and use a small profile-local wrapper when scheduling it.
+- During an isolated restore, `PRAGMA quick_check` can expose a malformed derived FTS5 index even when the source database is otherwise readable. Rebuild only the affected FTS virtual indexes in the isolated restored copy, rerun `quick_check`, and record that repair. Never mutate the live database or call the source healthy merely because the restored derived index was rebuilt.
 
 #### Phase 4 preflight and authorization gate
 

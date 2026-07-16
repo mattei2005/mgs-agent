@@ -107,4 +107,6 @@ data/ares/meta-ads/reports/**/*.json
 data/ares/meta-ads/state/**/*.json
 data/mgs-gateway-restart-finalizer-*.sh
 data/mgs-gateway-restart-snapshot-*.sha256
-.env.save
+# Environment editor/backup copies can contain live credentials.
+.env.save*
+.env.*.save*
