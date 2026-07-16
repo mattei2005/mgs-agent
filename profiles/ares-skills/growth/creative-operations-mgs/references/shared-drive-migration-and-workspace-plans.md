@@ -162,8 +162,8 @@ Antes do write, resolver o ID do link pela API e listar os filhos diretos. Não 
 
 - Repetir ao solicitante `source_id`, nome da raiz e filhos diretos quando houver ambiguidade de escopo.
 - Se Rodolfo ampliar explicitamente para a raiz inteira, refazer o inventário recursivo do root; o inventário parcial de `CRIATIVOS` não serve como baseline final.
-- “Mesma estrutura” significa criar no Shared Drive uma pasta raiz real com o mesmo nome (`MGS-AGENTS`) e reproduzir todos os nomes e paths relativos sem reclassificar, achatar ou omitir siblings.
-- Registrar `old_folder_id → new_folder_id` para a raiz e cada descendente; manter nomes/paths idênticos não significa preservar folder IDs.
+- “Mesma estrutura” significa reproduzir todos os nomes e paths relativos sem reclassificar, achatar ou omitir siblings. Quando Rodolfo aprovar que o próprio Shared Drive se chame `MGS-AGENTS`, o Drive root representa a raiz antiga: colocar `CRIATIVOS` e os demais filhos diretamente nele e **não** criar `MGS-AGENTS/MGS-AGENTS`.
+- Registrar `old_root_folder_id → new_shared_drive_id` e `old_folder_id → new_folder_id` para cada descendente; manter nomes/paths idênticos não significa preservar folder IDs.
 - Conteúdo cross-module pode ser transportado estruturalmente quando Rodolfo autorizar a raiz inteira, mas Ares não altera conteúdo editorial/financeiro nem suas regras funcionais sem escopo próprio.
 
 ## Migração segura
@@ -179,7 +179,7 @@ Antes do write, resolver o ID do link pela API e listar os filhos diretos. Não 
 2. Separar itens por owner/capacidade e executar em lotes reversíveis.
 3. Preservar IDs quando o move real permitir; quando houver copy, registrar old ID → new ID, checksums e lineage.
 4. Conferir contagens, paths, tamanhos e checksums após cada lote.
-5. Não excluir a origem antes do readback completo e do aceite estrutural.
+5. Não excluir a origem antes do readback completo. Quando Rodolfo determinar que os itens copiados saiam do Meu Drive, após PASS mover a árvore fonte inteira para um container de backup fora da raiz operacional; preservar nela os originals de owner externo e registrar `backup_container_id`/`source_root_id`, em vez de apagar sem rollback.
 6. Atualizar scripts/configs/watchdogs somente depois que o destino estiver validado.
 7. Testar runners reais no novo root.
 8. Enviar REPORT-INFRA com inventário, piloto, migração, IDs e rollback.
