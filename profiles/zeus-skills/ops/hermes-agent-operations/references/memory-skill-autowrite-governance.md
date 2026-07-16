@@ -306,9 +306,41 @@ When an existing receipt is blocked by drift:
 
 Regression coverage must include both directions: drift in the receipt's own changed path stays blocked before side effects, while drift in a sibling whose before/after hashes were identical does not block closure.
 
+## Cross-agent USER/MEMORY standardization
+
+Standardize the **governance and residency model**, not identical file contents.
+
+- Every active agent should use the same safety architecture: bounded stores, capacity monitoring, dead-letter recovery, backup/readback, and reviewed compaction.
+- `USER` contains stable Rodolfo preferences that should shape that agent's ordinary work. Truly global interaction preferences may appear across profiles; domain-only preferences stay with the relevant agent.
+- `MEMORY` contains durable agent-specific context and lessons. Do not copy the same operational inventory into every profile merely for symmetry.
+- Institutional ownership, company policy, and cross-agent decisions belong in MGS OS/registry/SOUL rather than duplicated MEMORY entries.
+- Procedures and application-specific constraints belong in routed skills/references or canonical data.
+- Runtime truth such as active model, curator state, service state, and credential topology must be verified from live config/runtime before rewriting a stale memory entry. MEMORY is not the source of truth for those values.
+
+Identical USER/MEMORY files create prompt bloat and multi-copy drift. The desired invariant is: **same schema and governance, shared global preferences where justified, agent-specific content otherwise**.
+
+### Compaction audits must inspect active automation
+
+A stale memory fact can reveal an automation that would recreate the deprecated state. Before treating it as text-only cleanup:
+
+1. Identify any named cron, systemd unit, sync script, finalizer, or background writer in the entry.
+2. Inspect the live scheduler and executable behavior read-only.
+3. Compare the automation direction with the current canonical architecture.
+4. If it can undo a validated state, stop the compaction audit and open a separate system-change gate; do not hide the risk by merely rewriting memory.
+5. After authorization, back up scheduler + affected stores, neutralize the narrow automation reversibly (prefer a commented cron line and preserved script when appropriate), validate readback, then correct the stale entries.
+6. Resume the full no-write compaction matrix only after the runtime contradiction is closed.
+
+For exclusive per-agent OAuth, a legacy global→profiles sync is incompatible even when its current dry-run makes zero writes because the global timestamp is older. A future global refresh can make it destructive. Validate safely by:
+
+- comparing access/refresh fingerprints pairwise without printing token values;
+- confirming the active scheduler line count before/after;
+- running one real inference per active profile;
+- checking a fresh session prompt contains corrected memory and excludes stale model/curator/sync claims;
+- preserving the old script for rollback unless deletion receives its own critical authorization.
+
 ## Compaction workflow
 
-1. Read the live MEMORY, USER, SOUL, AGENT, routed skills, and canonical data sources.
+1. Read the live MEMORY, USER, SOUL, AGENT, routed skills, canonical data sources, and any automation named by the entries.
 2. Record exact current character counts.
 3. Decompose mixed entries into atomic claims.
 4. Classify every claim as always-active or on-demand.
