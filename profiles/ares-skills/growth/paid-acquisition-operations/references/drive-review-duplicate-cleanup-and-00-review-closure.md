@@ -1,6 +1,6 @@
 # Drive review, duplicate cleanup, and 00_REVIEW closure
 
-Use this reference when Rodolfo asks Ares to review/fix all files in `MGS-CRIATIVOS`, clean duplicates, or close remaining `00_REVIEW` assets.
+Use this reference when Rodolfo asks Ares to review/fix all files in `MGS-AGENTS/CRIATIVOS`, clean duplicates, or close remaining `00_REVIEW` assets.
 
 ## Operating principle
 
@@ -10,7 +10,7 @@ Preserve `UPLOAD_CANVAS` RAW unless the user explicitly asks to alter/delete RAW
 
 ## Safe sequence
 
-1. Generate a fresh Drive inventory of `MGS-CRIATIVOS`.
+1. Generate a fresh Drive inventory of `MGS-AGENTS/CRIATIVOS`.
 2. Audit organized outputs separately from RAW:
    - canonical filename format;
    - 3-digit variant;

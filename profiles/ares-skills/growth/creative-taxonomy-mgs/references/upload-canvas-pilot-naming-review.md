@@ -8,7 +8,7 @@ Rodolfo asks to test the nomenclature on a small sample, e.g. “3 criativos de 
 
 ## Validated sequence
 
-1. Run a fresh read-only inventory of `MGS-CRIATIVOS/UPLOAD_CANVAS` after any folder/duplicate cleanup.
+1. Run a fresh read-only inventory of `MGS-AGENTS/CRIATIVOS/UPLOAD_CANVAS` after any folder/duplicate cleanup.
 2. Select a balanced sample: 3 `IMG` + 3 `VID`, preferably covering distinct visible languages and placements.
 3. Generate a contact sheet from Drive thumbnails; do not rely only on filename/folder guesses.
 4. Visually classify each item for:

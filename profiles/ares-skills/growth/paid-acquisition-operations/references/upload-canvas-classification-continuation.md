@@ -1,6 +1,6 @@
 # UPLOAD_CANVAS classification continuation after duplicate cleanup
 
-Use this reference when Rodolfo asks to continue classifying `MGS-CRIATIVOS/UPLOAD_CANVAS` after a focused duplicate cleanup in a subfolder such as `cartao de credito/videos`.
+Use this reference when Rodolfo asks to continue classifying `MGS-AGENTS/CRIATIVOS/UPLOAD_CANVAS` after a focused duplicate cleanup in a subfolder such as `cartao de credito/videos`.
 
 ## Sequence that worked
 

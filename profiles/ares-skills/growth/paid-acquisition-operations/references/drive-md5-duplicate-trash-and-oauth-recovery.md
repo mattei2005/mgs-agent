@@ -1,6 +1,6 @@
 # Drive MD5 duplicate trash + OAuth recovery
 
-Use when Rodolfo approves deleting duplicate creatives from `MGS-CRIATIVOS`.
+Use when Rodolfo approves deleting duplicate creatives from `MGS-AGENTS/CRIATIVOS`.
 
 ## Scope
 

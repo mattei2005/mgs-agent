@@ -17,7 +17,7 @@ Uso       | Cartões de crédito nos EUA em espanhol
 Pasta raiz validada com Service Account:
 
 ```text
-MGS-CRIATIVOS/
+MGS-AGENTS/CRIATIVOS/
 ├── CC_US_EN
 └── CC_US_ES
 ```
@@ -68,7 +68,7 @@ service_account_json          | parse OK
 private_key                   | presente
 service_account_email         | confere com client_email do JSON
 Drive folder access           | OK
-folder_name                   | MGS-CRIATIVOS
+folder_name                   | MGS-AGENTS/CRIATIVOS
 can_edit/can_add_children     | true na configuração atual
 ```
 

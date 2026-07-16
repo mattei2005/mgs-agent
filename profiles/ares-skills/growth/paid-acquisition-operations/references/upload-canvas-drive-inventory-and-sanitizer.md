@@ -1,6 +1,6 @@
 # UPLOAD_CANVAS Drive inventory + metadata sanitizer pattern
 
-Use this when Rodolfo uploads bulk Canva/exported creatives to `MGS-CRIATIVOS/UPLOAD_CANVAS` and asks Ares to organize or prepare them for campaigns.
+Use this when Rodolfo uploads bulk Canva/exported creatives to `MGS-AGENTS/CRIATIVOS/UPLOAD_CANVAS` and asks Ares to organize or prepare them for campaigns.
 
 ## Durable workflow learned
 
@@ -48,6 +48,6 @@ Example report fields:
 Ação: criada/modificada
 Tipo: script / data
 Path: /root/mgs-agent/scripts/<script>; /root/mgs-agent/data/ares/creative-inventory/
-Motivo: inventário read-only do Drive MGS-CRIATIVOS/UPLOAD_CANVAS antes de qualquer alteração no Drive
+Motivo: inventário read-only do Drive MGS-AGENTS/CRIATIVOS/UPLOAD_CANVAS antes de qualquer alteração no Drive
 Evidência: commit=<sha>; csv_rows=<n>; script_sha256=<hash>; csv_sha256=<hash>
 ```

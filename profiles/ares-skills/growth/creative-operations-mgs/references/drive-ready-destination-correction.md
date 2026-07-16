@@ -9,13 +9,13 @@ Quando Kelly/humano manda criativo com país, vertical e língua, o Ares deve de
 O destino aprovado para asset pronto é:
 
 ```text
-MGS-CRIATIVOS/{VERTICAL}_{COUNTRY}_{LANG}/{IMG|VID}/{STATUS}/{FILENAME}
+MGS-AGENTS/CRIATIVOS/{VERTICAL}_{COUNTRY}_{LANG}/{IMG|VID}/{STATUS}/{FILENAME}
 ```
 
 Exemplo validado:
 
 ```text
-MGS-CRIATIVOS/CAR_US_EN/VID/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
+MGS-AGENTS/CRIATIVOS/CAR_US_EN/VID/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
 ```
 
 ## O que não repetir
@@ -23,7 +23,7 @@ MGS-CRIATIVOS/CAR_US_EN/VID/01_READY/CAR_US_EN_VID_NO_DOWN_PAYMENT_PV_001.mp4
 Não criar subpastas finais por placement/idioma:
 
 ```text
-MGS-CRIATIVOS/CAR_US_EN/VID/STORY/EN/01_READY/...
+MGS-AGENTS/CRIATIVOS/CAR_US_EN/VID/STORY/EN/01_READY/...
 ```
 
 `STORY`, `FEED`, `REELS`, idioma visível e dimensões ficam no inventário/handoff, não como caminho final por enquanto.

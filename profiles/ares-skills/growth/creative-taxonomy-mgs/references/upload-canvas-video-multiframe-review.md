@@ -1,6 +1,6 @@
 # UPLOAD_CANVAS video multi-frame review
 
-Use this reference when classifying or renaming Canva/Drive videos in `MGS-CRIATIVOS/UPLOAD_CANVAS`.
+Use this reference when classifying or renaming Canva/Drive videos in `MGS-AGENTS/CRIATIVOS/UPLOAD_CANVAS`.
 
 ## Durable lesson
 

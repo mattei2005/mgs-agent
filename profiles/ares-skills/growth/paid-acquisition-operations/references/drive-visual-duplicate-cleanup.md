@@ -1,6 +1,6 @@
 # Google Drive visual duplicate cleanup for UPLOAD_CANVAS creatives
 
-Use this reference when Rodolfo asks Ares to identify/delete duplicate creatives in Google Drive where the files look identical but filenames differ, especially under `MGS-CRIATIVOS/UPLOAD_CANVAS/<vertical>/<format>`.
+Use this reference when Rodolfo asks Ares to identify/delete duplicate creatives in Google Drive where the files look identical but filenames differ, especially under `MGS-AGENTS/CRIATIVOS/UPLOAD_CANVAS/<vertical>/<format>`.
 
 ## Operating pattern
 

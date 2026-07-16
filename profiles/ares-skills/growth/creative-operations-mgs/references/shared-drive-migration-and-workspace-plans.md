@@ -135,7 +135,7 @@ Sequência pós-contratação de baixo risco:
 
 Antes de migrar a árvore:
 
-1. Criar `MGS-CREATIVE-OPS` ou outro nome aprovado.
+1. Criar `MGS-AGENTS` ou outro nome aprovado.
 2. Manter a identidade Workspace paga como administradora e adicionar Ares como `Manager`.
 3. Validar primeiro o ciclo do Ares sem adicionar gestores.
 4. Testar o uploader externo separadamente: se o Gmail pessoal receber papel com `canAddChildren=true`, fazer upload real; se a edição limitar a `Viewer`, usar o intake externo em My Drive e copiar RAW/tratado para o Shared Drive sem comprar licença automaticamente.

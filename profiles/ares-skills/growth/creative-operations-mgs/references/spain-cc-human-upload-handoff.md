@@ -39,7 +39,7 @@ Map to:
 country=ES
 operation=CC_ES_ES
 language=ES
-destination=MGS-CRIATIVOS/CC_ES_ES/{IMG|VID}/01_READY/
+destination=MGS-AGENTS/CRIATIVOS/CC_ES_ES/{IMG|VID}/01_READY/
 ```
 
 For vertical 1080x1920 static creatives with no person:

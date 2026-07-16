@@ -11,7 +11,7 @@ Não reutilizar IDs abaixo como configuração permanente; descobrir o estado li
 - Edição: Google Workspace Enterprise Essentials.
 - Identidade paga: `support@matteiservicesinc.com`.
 - E-mail permaneceu no Zoho; nenhuma troca de MX foi necessária.
-- Shared Drive criado manualmente na UI: `MGS-CREATIVE-OPS`.
+- Shared Drive criado manualmente na UI: `MGS-AGENTS`.
 - Service account Ares adicionada como `Manager`; a API retornou papel `organizer`.
 - A service account não consumiu assento Workspace.
 

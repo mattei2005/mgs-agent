@@ -60,7 +60,7 @@ Regra atual de Rodolfo: usar somente `PV`, `PH`, `NV`, `NH`. Códigos `PS`, `NS`
 Use pasta por operação, não por site, pois o mesmo criativo pode rodar em sites diferentes.
 
 ```text
-MGS-CRIATIVOS/
+MGS-AGENTS/CRIATIVOS/
 └── <OPERATION>/
     ├── IMG/
     │   ├── 01_READY

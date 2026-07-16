@@ -1,6 +1,6 @@
 # Google Drive OAuth for personal My Drive — device-flow scope pitfall
 
-Session pattern: Rodolfo needed Ares to upload cleaned creative files into `MGS-AGENTS/CRIATIVOS` that must remain in his personal Google Drive, not a Shared Drive.
+Historical generic pattern for personal Drive OAuth only. MGS Creative Ops no longer uses this destination model: its canonical root is the Shared Drive `MGS-AGENTS` (`0AEwt4Ye690ocUk9PVA`), administered by `support@matteiservicesinc.com`.
 
 ## What worked / failed
 

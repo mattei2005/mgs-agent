@@ -1,6 +1,6 @@
 # Drive creative clean/copy pipeline — Service Account quota pitfall
 
-Session learning from Ares organizing Canva-exported creatives in `MGS-CRIATIVOS/UPLOAD_CANVAS`.
+Session learning from Ares organizing Canva-exported creatives in `MGS-AGENTS/CRIATIVOS/UPLOAD_CANVAS`.
 
 ## Durable workflow
 
@@ -66,7 +66,7 @@ OAuth user delegation     Use when files must remain in a user's My Drive
 Manual upload             Avoid for large batches; last-resort only
 ```
 
-Operational recommendation: if Ares must upload cleaned creative files automatically, place `MGS-CRIATIVOS` in a Shared Drive or configure a real user OAuth flow/refresh token. Do not assume Service Account writer access to a My Drive folder is sufficient for uploads.
+Operational state: `MGS-AGENTS/CRIATIVOS` is already in the canonical Shared Drive `0AEwt4Ye690ocUk9PVA`, administered by `support@matteiservicesinc.com`. Use the validated Service Account or OAuth path and confirm `driveId` plus upload readback before batch execution.
 
 ## Reporting
 

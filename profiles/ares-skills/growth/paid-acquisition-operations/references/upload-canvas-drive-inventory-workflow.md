@@ -1,6 +1,6 @@
 # UPLOAD_CANVAS Drive inventory and organization workflow
 
-Use when Rodolfo uploads Canva/exported creatives into `MGS-CRIATIVOS/UPLOAD_CANVAS` and asks Ares to organize by vertical.
+Use when Rodolfo uploads Canva/exported creatives into `MGS-AGENTS/CRIATIVOS/UPLOAD_CANVAS` and asks Ares to organize by vertical.
 
 ## Operational sequence
 

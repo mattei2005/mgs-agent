@@ -1,6 +1,6 @@
 # UPLOAD_CANVAS → organized Drive clean-copy workflow
 
-Use this reference when Rodolfo uploads bulk Canva exports into `MGS-CRIATIVOS/UPLOAD_CANVAS` and asks Ares to organize them for campaign use.
+Use this reference when Rodolfo uploads bulk Canva exports into `MGS-AGENTS/CRIATIVOS/UPLOAD_CANVAS` and asks Ares to organize them for campaign use.
 
 ## Correct sequence
 
@@ -21,39 +21,30 @@ Use this reference when Rodolfo uploads bulk Canva exports into `MGS-CRIATIVOS/U
 ## Recommended destination shape
 
 ```text
-MGS-CRIATIVOS/<OPERATION>/<IMG|VID>/<FEED|STORY|LANDSCAPE|UNKNOWN>/<LANG>/<STATUS>/
+MGS-AGENTS/CRIATIVOS/<OPERATION>/<IMG|VID>/<FEED|STORY|LANDSCAPE|UNKNOWN>/<LANG>/<STATUS>/
 ```
 
 Examples:
 
 ```text
-MGS-CRIATIVOS/CC_REVIEW/VID/STORY/ES/01_READY_CANDIDATE/
-MGS-CRIATIVOS/CC_REVIEW/IMG/FEED/EN/00_REVIEW/
-MGS-CRIATIVOS/JOBS_US_ES/IMG/FEED/ES/01_READY_CANDIDATE/
+MGS-AGENTS/CRIATIVOS/CC_REVIEW/VID/STORY/ES/01_READY_CANDIDATE/
+MGS-AGENTS/CRIATIVOS/CC_REVIEW/IMG/FEED/EN/00_REVIEW/
+MGS-AGENTS/CRIATIVOS/JOBS_US_ES/IMG/FEED/ES/01_READY_CANDIDATE/
 ```
 
 Do not use size as the top-level directory. Vertical/operation remains the primary organizing axis; placement/size is a secondary technical axis.
 
-## Google Drive auth pitfall
+## Google Drive auth state
 
-A Google Service Account can read and create folders in a shared My Drive folder if granted writer permission, but file upload into a personal My Drive can fail with:
+The MGS destination is the Shared Drive `MGS-AGENTS` (`0AEwt4Ye690ocUk9PVA`), administered by `support@matteiservicesinc.com`. Service Account and OAuth modes are valid only when their live preflight confirms access to this `driveId`.
 
-```text
-403 storageQuotaExceeded
-Service Accounts do not have storage quota. Leverage shared drives, or use OAuth delegation instead.
-```
-
-Durable fix options:
-
-- Use OAuth for a real user account that owns/has quota for the target My Drive folder; or
-- move the asset operation to a Shared Drive where Service Account uploads are supported.
-
-For MGS Ares, OAuth user mode was added via `.env` with `ARES_DRIVE_AUTH_MODE=oauth`; credentials must remain root-only and never be printed in chat. Future Drive write scripts should preflight and report only sanitized fields:
+Credentials must remain root-only and never be printed in chat. Drive write scripts should report only sanitized fields:
 
 ```text
 auth_mode: oauth_user or service_account
-storage: my_drive or shared_drive
-folder_name: MGS-CRIATIVOS
+storage: shared_drive
+drive_id: 0AEwt4Ye690ocUk9PVA
+folder_path: MGS-AGENTS/CRIATIVOS
 can_add_children/can_edit: true/false
 ```
 
@@ -70,7 +61,7 @@ Additional ExifTool groups can appear after cleaning, e.g. `Track1:ImageWidth`, 
 When Rodolfo manually reorganizes Drive after an automated pass, treat his current folder structure as the new source of truth. Example observed structure:
 
 ```text
-MGS-CRIATIVOS/UPLOAD_CANVAS/
+MGS-AGENTS/CRIATIVOS/UPLOAD_CANVAS/
 ├── cartao de credito/
 │   ├── imagens/
 │   └── videos/

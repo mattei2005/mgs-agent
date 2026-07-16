@@ -36,8 +36,8 @@ Report both operational meaning and counts. Rodolfo may ask whether UPLOAD_CANVA
 
 1. Inventory the Drive fresh.
 2. Separate layers:
-   - RAW: paths under `MGS-CRIATIVOS/UPLOAD_CANVAS/`
-   - staging/review: `MGS-CRIATIVOS/REVIEW/.../00_REVIEW` or `05_REJECTED`
+   - RAW: paths under `MGS-AGENTS/CRIATIVOS/UPLOAD_CANVAS/`
+   - staging/review: `MGS-AGENTS/CRIATIVOS/REVIEW/.../00_REVIEW` or `05_REJECTED`
    - organized: operation folders (`CC_*`, `JOBS_*`, etc.)
 3. For `00_REVIEW`, review visually. Do not leave ambiguous items because of wording like "manual review" if a contact sheet/frame review can resolve them.
 4. Apply decisions to the CLEANED review copy, not to the RAW source.

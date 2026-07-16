@@ -40,7 +40,7 @@ Use this reference when Kelly/Geizian/gestor uploads a creative directly in Disc
 
 ## Notes
 
-- For Drive writes to Rodolfo's personal `MGS-AGENTS/CRIATIVOS`, use the configured real-user OAuth path when service account quota/My Drive constraints apply. Validate root metadata and upload with the established Drive client/module rather than inventing a new credential flow.
+- For Drive writes, use only the canonical Shared Drive `MGS-AGENTS` (`0AEwt4Ye690ocUk9PVA`) administered by `support@matteiservicesinc.com`. Validate `driveId`, root metadata and upload readback with the established Drive client/module.
 - If Drive OAuth refresh returns HTTP 400 while the Hera watchdog reports `token_ok`, inspect credential precedence without exposing values. The established client currently reads the complete client cache and then lets a separate token-only file override its `refresh_token`; that older override can cause `invalid_grant` even when the client cache is healthy. Do not delete or overwrite canonical credential files during a live task. Bypass only the stale token-only override through an isolated nonexistent root-only path, retain the watchdog-validated client cache, mint the access token, and validate Drive root metadata. Remediate canonical precedence separately with REPORT-INFRA.
 - Keep raw/original upload untouched. The cleaned renamed copy is the organized asset.
 - If the sanitizer reports `clean: true` and `harmful_tags: 0`, report only the summary; never dump raw metadata in Discord.

@@ -35,7 +35,7 @@ Relevant rate-limit signals from OpenAPI: folder item listing and design listing
    - Export PNG/JPG for static creatives; MP4 for animated/video designs when available.
    - Poll async jobs; download URLs expire after 24h, so upload to Drive promptly.
 5. **Upload to Google Drive** using Service Account when possible.
-   - Prefer a shared `MGS-CRIATIVOS` Drive/folder with least-privilege access.
+   - Prefer a shared `MGS-AGENTS/CRIATIVOS` Drive/folder with least-privilege access.
    - Start with Viewer/read checks; Editor/write only after Rodolfo explicitly approves upload.
 6. **Produce audit report.**
    - Counts by manager, folder, format, language, placement, exported, uploaded, skipped, failed.
@@ -46,7 +46,7 @@ Relevant rate-limit signals from OpenAPI: folder item listing and design listing
 Manager-first when Rodolfo/Kelly operationally think by gestor:
 
 ```text
-MGS-CRIATIVOS/
+MGS-AGENTS/CRIATIVOS/
 └── <GESTOR>/
     ├── FEED/
     │   ├── EN/
@@ -63,7 +63,7 @@ MGS-CRIATIVOS/
 Operation-first when syncing directly to ads taxonomy:
 
 ```text
-MGS-CRIATIVOS/
+MGS-AGENTS/CRIATIVOS/
 └── <OPERATION>/
     ├── IMG/
     │   ├── FEED/

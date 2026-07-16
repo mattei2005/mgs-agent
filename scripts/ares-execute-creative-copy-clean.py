@@ -265,10 +265,10 @@ class Drive:
 
     def ensure_path(self, folder_path: str) -> str:
         parts = folder_path.split("/")
-        if not parts or parts[0] != "MGS-AGENTS/CRIATIVOS":
+        if len(parts) < 2 or parts[:2] != ["MGS-AGENTS", "CRIATIVOS"]:
             raise ValueError(f"unexpected destination path: {folder_path}")
         parent = ROOT_FOLDER_ID
-        for part in parts[1:]:
+        for part in parts[2:]:
             parent = self.create_folder(parent, part)
         return parent
 

@@ -139,7 +139,7 @@ def main() -> int:
     if device.get("error"):
         raise RuntimeError("device authorization failed: " + json.dumps(device, ensure_ascii=False))
 
-    print("Open this Google URL and approve Drive access for the personal account that owns MGS-AGENTS/CRIATIVOS:")
+    print("Open this Google URL and approve Drive access for the Workspace identity authorized on the MGS-AGENTS Shared Drive:")
     print(device.get("verification_url") or device.get("verification_uri"))
     print("Code:", device["user_code"])
     print("Waiting for approval; no tokens will be printed.", flush=True)
