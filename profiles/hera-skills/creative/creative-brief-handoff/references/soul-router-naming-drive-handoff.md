@@ -47,8 +47,9 @@ Não coloque tamanho/dimensão no nome. Dimensão, aspect ratio e placement fica
 Pasta raiz oficial informada por Rodolfo:
 
 ```text
-MGS-CRIATIVOS
-https://drive.google.com/drive/folders/14ica5TVauTrzAxcl4T-ViJorF89vRKIl
+MGS-AGENTS/CRIATIVOS
+https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
+Workspace admin: support@matteiservicesinc.com
 ```
 
 Estrutura de referência por vertical/operação. `CC_US_ES` é o exemplo/piloto; outras verticais devem usar a pasta correta existente no Drive e seguir o mesmo princípio:

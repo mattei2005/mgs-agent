@@ -351,17 +351,19 @@ Regra importante: **não colocar tamanho/dimensão no nome do arquivo**. Dimens�
 
 ## 11. Drive/Canva — estrutura multivertical
 
-Pasta raiz informada por Rodolfo:
+Raiz operacional canônica validada por Rodolfo:
 
 ```text
-MGS-CRIATIVOS
-https://drive.google.com/drive/folders/14ica5TVauTrzAxcl4T-ViJorF89vRKIl
+Shared Drive MGS-AGENTS
+Admin Workspace: support@matteiservicesinc.com
+https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
+└── CRIATIVOS
 ```
 
 Estrutura de referência para cada vertical/operação. `CC_US_ES` é o exemplo/piloto já definido; outras verticais devem seguir o mesmo princípio quando a pasta existir ou quando Rodolfo/Kelly/Geizian aprovarem:
 
 ```text
-MGS-CRIATIVOS/
+MGS-AGENTS/CRIATIVOS/
 └── CC_US_ES/
     ├── IMG/
     │   ├── 01_READY
@@ -382,7 +384,7 @@ MGS-CRIATIVOS/
 Área de entrada para material baixado do Canva:
 
 ```text
-MGS-CRIATIVOS/UPLOAD CANVAS
+MGS-AGENTS/CRIATIVOS/UPLOAD CANVAS
 ```
 
 Regra operacional:
@@ -439,7 +441,7 @@ Quando Rodolfo/Kelly/Geizian/gestores colocarem no Drive criativos brutos do Can
 ```text
 Etapa  Ação Hera
 ─────  ─────────────────────────────────────────────────────────────
-1      Ler `MGS-CRIATIVOS/UPLOAD CANVAS` como fonte bruta/original.
+1      Ler `MGS-AGENTS/CRIATIVOS/UPLOAD CANVAS` como fonte bruta/original.
 2      Identificar IMG/VID, dimensão, aspect ratio e placement provável.
 3      Tentar inferir idioma/operação/gestor/origem sem inventar.
 4      Sugerir `ANGLE`; se incerto, usar `UNKNOWN` + nota.

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Controlled, resumable migration of the full My Drive MGS-AGENTS tree.
+"""Historical, one-off migration utility for the MGS-AGENTS cutover.
 
 - Recreates folder hierarchy in Shared Drive (folders receive new IDs).
 - Moves eligible files to preserve IDs/checksums.
 - Copies externally-owned files and records old -> new IDs.
 - Validates the entire destination.
-- Moves the old source tree into a My Drive backup container after PASS.
+- Retained for audit only; execution is disabled after the validated cutover.
 """
 from __future__ import annotations
 
@@ -26,8 +26,8 @@ from pathlib import Path
 REPO = Path('/root/mgs-agent')
 MODULE = REPO / 'scripts/ares-execute-creative-copy-clean.py'
 INVENTORY = REPO / 'data/ares/creative-ops/shared-drive-migration/20260716T001727Z/mgs-agents-full-inventory.json'
-SOURCE_ROOT = '14ica5TVauTrzAxcl4T-ViJorF89vRKIl'
-SOURCE_PARENT = '0AEK1IDaqSuDlUk9PVA'
+SOURCE_ROOT = ''
+SOURCE_PARENT = ''
 TARGET_DRIVE = '0AEwt4Ye690ocUk9PVA'
 TARGET_NAME = 'MGS-AGENTS'
 FOLDER_MIME = 'application/vnd.google-apps.folder'
@@ -204,7 +204,7 @@ def move_source_to_backup(drive, checkpoint: dict) -> dict:
     if current.get('parents') == [backup_id]:
         return current
     if SOURCE_PARENT not in (current.get('parents') or []):
-        raise RuntimeError(f"source root is not under expected My Drive parent; parents={current.get('parents')}")
+        raise RuntimeError(f"source root is not under expected legacy source parent; parents={current.get('parents')}")
     params = {'addParents': backup_id, 'removeParents': SOURCE_PARENT, 'fields': 'id,name,mimeType,parents,driveId,trashed,appProperties'}
     return api(drive, f'https://www.googleapis.com/drive/v3/files/{SOURCE_ROOT}?' + urllib.parse.urlencode(params), action='move_source_root_to_backup', method='PATCH', data=b'{}', headers={'Content-Type': 'application/json'})
 
@@ -279,6 +279,10 @@ def validate_residual_source(drive, rows: list[dict], checkpoint: dict, target_t
 
 
 def main() -> int:
+    raise RuntimeError(
+        'Migration already completed. The only operational root is the '
+        'MGS-AGENTS Shared Drive 0AEwt4Ye690ocUk9PVA.'
+    )
     ap = argparse.ArgumentParser()
     ap.add_argument('--apply', action='store_true')
     args = ap.parse_args()
@@ -310,7 +314,7 @@ def main() -> int:
         raise RuntimeError('inventory byte/MD5 totals mismatch')
     inventory_sha256 = hashlib.sha256(INVENTORY.read_bytes()).hexdigest()
     if not args.apply:
-        print(json.dumps({'status': 'DRY_RUN_PASS', 'inventory': str(INVENTORY), 'actual': actual, 'source_root': SOURCE_ROOT, 'target_drive': TARGET_DRIVE, 'target_name': TARGET_NAME, 'backup_policy': 'move old source root into My Drive backup container after full validation'}, ensure_ascii=False, indent=2))
+        print(json.dumps({'status': 'DRY_RUN_PASS', 'inventory': str(INVENTORY), 'actual': actual, 'source_root': SOURCE_ROOT, 'target_drive': TARGET_DRIVE, 'target_name': TARGET_NAME, 'backup_policy': 'move old source root into legacy source backup container after full validation'}, ensure_ascii=False, indent=2))
         return 0
 
     LOCK.parent.mkdir(parents=True, exist_ok=True)
@@ -485,7 +489,7 @@ def main() -> int:
             'file_map_count': len(checkpoint['file_map']),
             'moved_file_count': sum(1 for x in checkpoint['file_map'].values() if x['action'] == 'MOVE_PRESERVE_ID'),
             'copied_file_count': sum(1 for x in checkpoint['file_map'].values() if x['action'] == 'COPY_NEW_ID'),
-            'copy_policy': 'The residual source tree contains the 304 original folder shells and 104 externally owned originals, validated and moved into a My Drive backup container after destination PASS.',
+            'copy_policy': 'The residual source tree contains the 304 original folder shells and 104 externally owned originals, validated and moved into a legacy source backup container after destination PASS.',
             'artifacts': {'folder_map': 'folder-map.json', 'file_map': 'file-map.json', 'target_tree': 'target-tree.json'}
         }
         atomic_json(final_dir / 'migration-report.json', final_report)

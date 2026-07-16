@@ -51,10 +51,11 @@ Do not put size/dimension in filename; keep width/height/aspect_ratio/placement 
 
 ## Drive structure
 
-Rodolfo provided the Drive root for `MGS-CRIATIVOS`:
+Rodolfo definiu o Shared Drive `MGS-AGENTS/CRIATIVOS` como raiz operacional:
 
 ```text
-https://drive.google.com/drive/folders/14ica5TVauTrzAxcl4T-ViJorF89vRKIl
+https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
+Workspace admin: support@matteiservicesinc.com
 ```
 
 Recommended conceptual structure:

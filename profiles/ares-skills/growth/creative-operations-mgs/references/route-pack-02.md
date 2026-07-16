@@ -27,22 +27,20 @@ https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
     └── {OPERAÇÃO}/{IMG|VID}/{STATUS}
 ```
 
-Migração e limpeza concluídas em 2026-07-15/16: o root canônico é exclusivamente o Shared Drive `0AEwt4Ye690ocUk9PVA`. A antiga raiz My Drive `14ica5TVauTrzAxcl4T-ViJorF89vRKIl` foi removida definitivamente após aceite; referências a ela são somente auditoria histórica. Não criar operações (`CAR_BR_PT`, `CC_US_ES`, etc.) como filhas diretas de `MGS-AGENTS`; criar/mover sempre dentro de `MGS-AGENTS/CRIATIVOS`.
+O root canônico é exclusivamente o Shared Drive `0AEwt4Ye690ocUk9PVA`, administrado no Google Workspace por `support@matteiservicesinc.com`. Nomes, paths e estrutura permanecem iguais. Não criar operações (`CAR_BR_PT`, `CC_US_ES`, etc.) como filhas diretas de `MGS-AGENTS`; criar/mover sempre dentro de `MGS-AGENTS/CRIATIVOS`.
 
 Regra de REPORT-INFRA para mudanças de skill/script/data/config feitas pelo Ares: não declarar “enviei o REPORT-INFRA” com base apenas em intenção. Primeiro executar o envio real pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh` ou, se usar fallback textual, validar HTTP 204 e confirmar via Discord API que a mensagem aparece em `#alerts-infra` (`1498132022634483894`) antes de afirmar na thread original. Não usar scripts com nome de outro agente como caminho padrão (`ares-report-infra.sh`) quando houver helper canônico MGS.
 
 ### Gate de capacidades no UPLOAD MANUAL
 
-Para arquivos enviados pela Kelly, Evo ou outro colaborador em `UPLOAD MANUAL`, a propriedade individual do arquivo bruto não precisa pertencer à conta Google do Rodolfo. Em `My Drive`, o uploader pode continuar como owner mesmo dentro de uma pasta do Rodolfo; isso não bloqueia o fluxo quando o OAuth canônico do Ares possui as capacidades necessárias.
+Arquivos enviados por Kelly, Evo ou outro colaborador diretamente em `UPLOAD MANUAL` pertencem ao Shared Drive/organização, não ao uploader individual. Não exigir transferência de propriedade nem licença Workspace adicional do colaborador.
 
-1. Consultar no Drive real `owners`, `ownedByMe` e `capabilities(canDownload,canEdit,canMoveItemWithinDrive,canTrash,canDelete)` para diagnóstico e auditoria.
-2. No fluxo canônico de tratar/mover, exigir acesso para baixar o bruto, enviar a cópia limpa ao `01_READY` e mover o original para `99_LEGACY`. Em pedidos de copiar/manter, a capacidade de mover o source não é necessária.
-3. `canTrash=false` e `canDelete=false` não bloqueiam o processamento, porque o fluxo canônico preserva o original e não apaga arquivos.
-4. Quando uma capacidade necessária estiver ausente ou a API negar a ação, distinguir primeiro processamento, movimentação, remoção da hierarquia, lixeira e exclusão definitiva. Não chamar move/remove-parent de exclusão.
-5. Dentro de `MGS-AGENTS/CRIATIVOS`, falha de permissão é drift/defeito de infraestrutura a investigar, não razão rotineira para pedir autorização por arquivo ou transferência de owner ao gestor. Consultar o OAuth canônico de Rodolfo e a identidade `ares-drive` quando registrada, e usar o HTTP/readback da mutação autorizada como prova final.
-6. A cópia limpa enviada pelo OAuth do Rodolfo para `01_READY` normalmente fica no nome do Rodolfo; o bruto preservado em `99_LEGACY` pode conservar o owner original sem quebrar a linhagem.
-7. Transferência de propriedade não é pré-requisito rotineiro de Creative Ops. Se uma exclusão explícita for negada pelas identidades canônicas, preservar a auditoria, retirar o item de `01_READY` quando a movimentação autorizada for possível e escalar a correção estrutural; não encerrar com “o gestor precisa autorizar”.
-8. Não trocar silenciosamente o OAuth canônico do Ares pela conta do colaborador. Mudança para Shared Drive, identidade central de upload ou outra correção estrutural exige inventário, piloto, rollback e aprovação explícita do Rodolfo.
+1. Validar que o item possui `driveId=0AEwt4Ye690ocUk9PVA` e está sob `MGS-AGENTS/CRIATIVOS/UPLOAD MANUAL`.
+2. Consultar as capabilities reais e exigir que o Ares consiga baixar, editar, mover, enviar à lixeira e excluir quando a ação estiver autorizada.
+3. No fluxo de tratar/mover, validar a cópia limpa em `01_READY` e mover o bruto para `99_LEGACY`; em pedido explícito de copiar/manter, preservar a entrada conforme solicitado.
+4. Falha de capability dentro do Shared Drive é drift de infraestrutura/acesso. Não pedir transferência de owner ao gestor.
+5. Usar HTTP + readback da operação como prova final e preservar inventário, checksum e linhagem.
+6. Não trocar silenciosamente a identidade canônica do Ares pela conta do colaborador.
 
 Detalhe operacional: `references/my-drive-collaborator-control-and-deletion.md`.
 

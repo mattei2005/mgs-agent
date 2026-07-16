@@ -58,8 +58,9 @@ CC_US_ES_IMG_APROBACION_PS_01.jpg
 A pasta raiz informada por Rodolfo para esse fluxo é:
 
 ```text
-MGS-CRIATIVOS
-https://drive.google.com/drive/folders/14ica5TVauTrzAxcl4T-ViJorF89vRKIl
+MGS-AGENTS/CRIATIVOS
+https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
+Workspace admin: support@matteiservicesinc.com
 ```
 
 ## Como atualizar Hera quando esse padrão aparecer

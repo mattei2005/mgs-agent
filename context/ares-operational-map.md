@@ -101,7 +101,7 @@ ID: 0AEwt4Ye690ocUk9PVA
 URL: https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
 ```
 
-A antiga raiz My Drive `14ica5TVauTrzAxcl4T-ViJorF89vRKIl` foi removida definitivamente após migração e aceite. Nunca usá-la como runtime; referências remanescentes são somente auditoria histórica.
+Esta é a única raiz operacional. O Workspace é administrado por `support@matteiservicesinc.com`; nomes, caminhos e estrutura permanecem iguais aos validados no cutover.
 
 ```text
 MGS-AGENTS/CRIATIVOS/

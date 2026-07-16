@@ -22,12 +22,13 @@ Pasta raiz operacional atual validada no Drive:
 
 ```text
 MGS-AGENTS
-https://drive.google.com/drive/folders/14ica5TVauTrzAxcl4T-ViJorF89vRKIl
+https://drive.google.com/drive/folders/0AEwt4Ye690ocUk9PVA
+Workspace admin: support@matteiservicesinc.com
 └── CRIATIVOS
     └── {OPERAÇÃO}/{IMG|VID}/{STATUS}
 ```
 
-Correção importante validada em 2026-07-02: o ID `14ica5TVauTrzAxcl4T-ViJorF89vRKIl` resolve para `MGS-AGENTS`, não para uma pasta direta `MGS-CRIATIVOS`. Não criar operações (`CAR_BR_PT`, `CC_US_ES`, etc.) como filhas diretas de `MGS-AGENTS`; criar/mover sempre dentro de `MGS-AGENTS/CRIATIVOS`.
+O Shared Drive `0AEwt4Ye690ocUk9PVA` é a única raiz operacional. Não criar operações (`CAR_BR_PT`, `CC_US_ES`, etc.) como filhas diretas de `MGS-AGENTS`; criar/mover sempre dentro de `MGS-AGENTS/CRIATIVOS`.
 
 Regra de REPORT-INFRA para mudanças de skill/script/data/config feitas pela Hera: não declarar “enviei o REPORT-INFRA” com base apenas em intenção. Primeiro executar o envio real pelo helper canônico `/root/mgs-agent/scripts/send-report-infra-embed.sh` ou, se usar fallback textual, validar HTTP 204 e confirmar via Discord API que a mensagem aparece em `#alerts-infra` (`1498132022634483894`) antes de afirmar na thread original. Não usar scripts com nome de outro agente como caminho padrão (`ares-report-infra.sh`) quando houver helper canônico MGS.
 

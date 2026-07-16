@@ -68,8 +68,9 @@ Fonte operacional: `context/hera-creative-agent.md`.
 ```text
 Item                                Regra
 ----------------------------------- ------------------------------------------------------------
-Pasta raiz                          MGS-CRIATIVOS
-Folder ID raiz                      14ica5TVauTrzAxcl4T-ViJorF89vRKIl
+Raiz operacional                    Shared Drive MGS-AGENTS
+Folder ID raiz                      0AEwt4Ye690ocUk9PVA
+Admin Workspace                     support@matteiservicesinc.com
 UPLOAD CANVAS / UPLOAD MANUAL       Entrada pendente; após tratar/mover e validar READY, arquivar bruto em {OP}/{IMG|VID}/99_LEGACY; não apagar
 CC_US_ES                            exemplo/piloto; não tratar como única vertical
 Novos uploads via Hera              exigir País + Vertical + Língua + anexo antes de handoff técnico
