@@ -3,14 +3,14 @@
     {
       "agent": "zeus",
       "id": "knowledge-continuity-2026",
-      "next_step": "Prepare a read-only full before/after compaction diff for Zeus and Ares USER stores, classify every fact as always-active or on-demand, then obtain a separate Critical Subset confirmation before any write",
+      "next_step": "Back up configs, double USER/MEMORY limits for Zeus/Atena/Ares, lower the capacity alert to 70%, validate fresh sessions, then safely restart Ares, Atena and Zeus with Zeus last",
       "objective": "Preserve MGS institutional context without relying on individual agent memory",
-      "source": "discord:message:1527323189112344706",
-      "state": "phase5-dead-letters-cleared-validated",
+      "source": "discord:message:1527356796220604490",
+      "state": "phase5-memory-capacity-expansion-authorized",
       "thread_id": "1527004682382479380",
-      "updated_at": "2026-07-16T14:39:51+00:00"
+      "updated_at": "2026-07-16T16:52:40+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T14:39:51+00:00"
+  "updated_at": "2026-07-16T16:52:40+00:00"
 }

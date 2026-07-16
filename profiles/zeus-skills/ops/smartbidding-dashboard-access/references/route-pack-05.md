@@ -23,6 +23,8 @@ Operational use:
 - read backend `LEADS` and `PAGES` when visible or when the API response includes them;
 - pull the full `MESSAGES` JSON for approval status and link extraction.
 
+Quick live-count question: when Rodolfo asks whether “templates de broad/broadcast” are at 20 messages, interpret this as the Broadcast Template inventory with `PAGES > 0`, not a literal `NAME` substring search. Validate both company scopes, decode `MESSAGES`, and report exact exceptions. Follow `references/broadcast-template-live-message-count-verification.md`.
+
 Critical `PAGES` distinction:
 
 - When Rodolfo asks for the template list with pages/message count from this tab, use **Broadcast Template `PAGES`** from `/broadcast/Messenger[].PAGES` / the visible Broadcast Template column.

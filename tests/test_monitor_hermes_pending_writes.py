@@ -112,14 +112,13 @@ class PendingMonitorTests(unittest.TestCase):
         self.assertEqual(decision["action"], "error")
         self.assertEqual(updated["aged_ids"], ["zeus/skills/a1"])
 
-    def test_capacity_exactly_80_percent_warns_without_content(self):
-        self.memory_store("zeus", "MEMORY.md", 800, memory_limit=1000)
-        summary = monitor.scan_pending(
-            self.root, now_epoch=self.now, capacity_threshold_percent=80
-        )
+    def test_capacity_exactly_70_percent_warns_by_default_without_content(self):
+        self.memory_store("zeus", "MEMORY.md", 700, memory_limit=1000)
+        summary = monitor.scan_pending(self.root, now_epoch=self.now)
         encoded = json.dumps(summary)
+        self.assertEqual(summary["capacity"]["threshold_percent"], 70.0)
         self.assertEqual(summary["capacity"]["warning_ids"], ["zeus.memory"])
-        self.assertEqual(summary["capacity"]["rows"]["zeus.memory"]["percent"], 80.0)
+        self.assertEqual(summary["capacity"]["rows"]["zeus.memory"]["percent"], 70.0)
         self.assertNotIn("x" * 20, encoded)
 
     def test_first_capacity_warning_alerts_and_repeats_are_suppressed(self):
