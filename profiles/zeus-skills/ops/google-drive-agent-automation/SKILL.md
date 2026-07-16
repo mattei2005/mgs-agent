@@ -113,7 +113,7 @@ Large run                   Resume-safe; skip already uploaded IDs
 Use env overrides rather than hardcoding replacement folder IDs/auth choices when possible:
 
 ```text
-ARES_DRIVE_ROOT_FOLDER_ID=<shared-drive-backed MGS-CRIATIVOS folder id>
+ARES_DRIVE_ROOT_FOLDER_ID=<shared-drive-backed MGS-AGENTS/CRIATIVOS folder id>
 ARES_DRIVE_OP_ITEM=<1Password Service Account item title if different>
 ARES_DRIVE_AUTH_MODE=oauth              # when the destination must stay in personal My Drive
 ARES_DRIVE_OAUTH_OP_ITEM="Google OAuth - Ares Drive"
@@ -130,7 +130,7 @@ https://www.googleapis.com/auth/drive.file → device flow may start, but access
 
 Operational handling:
 1. Try the already-created device-flow client once more if Rodolfo asks; do not force a new client before verifying.
-2. If only `drive.file` works, warn that it may upload new/app-created files but may not fully access an existing `MGS-CRIATIVOS` tree; validate with a one-file smoke test before full batch.
+2. If only `drive.file` works, warn that it may upload new/app-created files but may not fully access an existing `MGS-AGENTS/CRIATIVOS` tree; validate with a one-file smoke test before full batch.
 3. For one-person/personal Drive use, keep OAuth app in **Testing** and add Rodolfo's Google account as a Test user; do not push Production/verification unless the app is public.
 4. If full-folder access is required and device flow rejects full Drive scope, fall back to **Desktop app OAuth** and a one-time manual browser/code exchange.
 5. If Google approval succeeds but 1Password cannot update the item, save `refresh_token` to a root-only gitignored local secret file and teach the runtime loader to combine `client_id`/`client_secret` from 1Password with that local token.

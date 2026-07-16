@@ -48,7 +48,7 @@ Pedido do usuário                                   Primeira fonte
 "preciso de copy/hook/CTA"                         creative-brief-handoff/SKILL.md
 "roteiro de vídeo"                                 creative-brief-handoff/SKILL.md
 "organiza esse criativo"                           hera-creative-agent.md + creative-brief-handoff/SKILL.md
-"pasta do Drive" / "MGS-CRIATIVOS"                 hera-creative-agent.md seção Drive/Canva
+"pasta do Drive" / "MGS-AGENTS/CRIATIVOS"                 hera-creative-agent.md seção Drive/Canva
 "UPLOAD CANVAS"                                    hera-creative-agent.md + creative-brief-handoff/SKILL.md
 "handoff para Ares"                                routes.md + templates/ares-handoff.md
 "Ares precisa usar isso"                           templates/ares-handoff.md + ares-operational-map.md

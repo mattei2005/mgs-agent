@@ -75,7 +75,7 @@ def validate_rows(rows: list[dict[str, str]]) -> None:
         if not VARIANT_RE.search(name):
             raise RuntimeError(f"row {i} missing 3-digit variant: {name}")
         folder = row.get("target_folder", "")
-        if not folder.startswith("MGS-CRIATIVOS/") or not folder.endswith("/01_READY_CANDIDATE"):
+        if not folder.startswith("MGS-AGENTS/CRIATIVOS/") or not folder.endswith("/01_READY_CANDIDATE"):
             raise RuntimeError(f"row {i} unexpected target folder: {folder}")
         if not row.get("source_review_drive_id"):
             raise RuntimeError(f"row {i} missing source_review_drive_id")

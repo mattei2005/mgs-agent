@@ -151,7 +151,7 @@ Phase 5 Hera Creative Ops alignment pattern:
    the Hera channel. Hera infers safely, asks only blocking questions, and the
    skill evolves from real usage.
 4. Treat `CC_US_ES` as an example/pilot taxonomy aligned with Ares, not the only
-   Drive operation. MGS-CRIATIVOS is multivertical; Hera must route each request
+   Drive operation. MGS-AGENTS/CRIATIVOS is multivertical; Hera must route each request
    or upload to the correct vertical/operation folder.
 5. For multivertical naming, use the general model
    `{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}`

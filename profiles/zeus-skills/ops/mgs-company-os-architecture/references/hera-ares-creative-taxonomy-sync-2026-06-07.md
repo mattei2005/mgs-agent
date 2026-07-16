@@ -14,9 +14,9 @@ Do not let Hera keep a generic naming/Drive proposal when Ares already has an ap
 
 ```text
 Operation pilot              CC_US_ES
-Drive root                   MGS-CRIATIVOS
-Raw Canva upload area         MGS-CRIATIVOS > UPLOAD CANVAS
-Primary organized structure   MGS-CRIATIVOS/CC_US_ES/IMG and /VID
+Drive root                   MGS-AGENTS/CRIATIVOS
+Raw Canva upload area         MGS-AGENTS/CRIATIVOS > UPLOAD CANVAS
+Primary organized structure   MGS-AGENTS/CRIATIVOS/CC_US_ES/IMG and /VID
 Lifecycle folders             01_READY, 02_TESTING, 03_TESTED,
                               04_WINNERS, 05_REJECTED, 99_LEGACY
 Official naming               CC_US_ES_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}
@@ -58,7 +58,7 @@ Topic                       Required alignment
 --------------------------- ------------------------------------------------
 Naming                      Replace generic [site]_[vertical]... proposal with
                             MGS operation-specific taxonomy, at least for CC_US_ES.
-Drive/Canva                 Add MGS-CRIATIVOS, UPLOAD CANVAS as raw/original,
+Drive/Canva                 Add MGS-AGENTS/CRIATIVOS, UPLOAD CANVAS as raw/original,
                             and CC_US_ES/IMG|VID/01_READY as initial organized destinations.
 P_ORIENT                    Encode PV/NV/PS/NS only for CC_US_ES.
 Sizes                       Encode FEED 1080x1080 and STORY 1080x1920.

@@ -561,7 +561,7 @@ Decisão                                      Opção recomendada inicial
 Kelly entra agora ou depois dos testes?       Depois de 2-3 testes com Rodolfo.
 Geizian entra agora ou depois dos testes?     Depois do fluxo mínimo validado.
 Gestores entram quando?                       Só após treinamento curto.
-Drive oficial de criativos                    MGS-CRIATIVOS definido; validar permissões/fluxo humano.
+Drive oficial de criativos                    MGS-AGENTS/CRIATIVOS definido; validar permissões/fluxo humano.
 Canva/TopView/Grok                            Definir quem opera cada ferramenta.
 Hera pode gerar imagens direto?               Não por padrão; primeiro brief/asset ops.
 Ares pode pedir criativo direto à Hera?        Sim, mas não é o único consumidor dos assets.

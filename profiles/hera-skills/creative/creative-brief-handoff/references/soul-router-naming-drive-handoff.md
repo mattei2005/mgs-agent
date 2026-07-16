@@ -55,7 +55,7 @@ Workspace admin: support@matteiservicesinc.com
 Estrutura de referência por vertical/operação. `CC_US_ES` é o exemplo/piloto; outras verticais devem usar a pasta correta existente no Drive e seguir o mesmo princípio:
 
 ```text
-MGS-CRIATIVOS/
+MGS-AGENTS/CRIATIVOS/
 ├── UPLOAD CANVAS
 └── CC_US_ES/
     ├── IMG/

@@ -1,6 +1,6 @@
 # Google Drive OAuth for personal My Drive — device-flow scope pitfall
 
-Session pattern: Rodolfo needed Ares to upload cleaned creative files into `MGS-CRIATIVOS` that must remain in his personal Google Drive, not a Shared Drive.
+Session pattern: Rodolfo needed Ares to upload cleaned creative files into `MGS-AGENTS/CRIATIVOS` that must remain in his personal Google Drive, not a Shared Drive.
 
 ## What worked / failed
 

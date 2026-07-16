@@ -61,7 +61,7 @@ Workspace admin: support@matteiservicesinc.com
 Recommended conceptual structure:
 
 ```text
-MGS-CRIATIVOS/
+MGS-AGENTS/CRIATIVOS/
 ├── UPLOAD CANVAS              # bruto/original
 └── CC_US_ES/
     ├── IMG/

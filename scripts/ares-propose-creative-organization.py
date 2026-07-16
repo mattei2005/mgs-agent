@@ -72,7 +72,7 @@ def proposal(row: dict[str, str], md5_vertical: dict[str, tuple[str, str]]) -> d
     operation = "JOBS_US_ES" if vertical == "JOBS" else "CC_REVIEW" if vertical in {"CC", "CC_REVIEW"} else "REVIEW"
     status = "01_READY_CANDIDATE" if confidence in {"high", "medium"} else "00_REVIEW"
     fmt = row["format"] if row["format"] in {"IMG", "VID"} else "OTHER"
-    dest = f"MGS-CRIATIVOS/{operation}/{fmt}/{status}"
+    dest = f"MGS-AGENTS/CRIATIVOS/{operation}/{fmt}/{status}"
     return {
         **row,
         "vertical_proposed": vertical,

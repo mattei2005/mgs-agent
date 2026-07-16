@@ -258,14 +258,14 @@ class Drive:
                 "DESTINATION_BLOCKED_MY_DRIVE_SERVICE_ACCOUNT: "
                 f"root '{meta.get('name', ROOT_FOLDER_ID)}' is a My Drive folder owned by {owner or 'unknown owner'}. "
                 "Google Service Accounts do not have storage quota for file uploads in My Drive. "
-                "Move/use MGS-CRIATIVOS in a Shared Drive and set ARES_DRIVE_ROOT_FOLDER_ID to that Shared Drive folder id, "
-                "or switch this script to a real-user OAuth token."
+                "Use the canonical MGS-AGENTS Shared Drive and set ARES_DRIVE_ROOT_FOLDER_ID to "
+                "0AEwt4Ye690ocUk9PVA, then revalidate the configured credential."
             )
         return meta
 
     def ensure_path(self, folder_path: str) -> str:
         parts = folder_path.split("/")
-        if not parts or parts[0] != "MGS-CRIATIVOS":
+        if not parts or parts[0] != "MGS-AGENTS/CRIATIVOS":
             raise ValueError(f"unexpected destination path: {folder_path}")
         parent = ROOT_FOLDER_ID
         for part in parts[1:]:

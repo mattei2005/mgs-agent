@@ -6,7 +6,7 @@ Durante o alinhamento da Hera, Rodolfo corrigiu três pontos importantes:
 
 1. Hera é dona de **Creative Operations**: cria criativos estáticos (imagem) e vídeos, além de organizar assets.
 2. Pedidos de criativo não devem virar formulário técnico. Kelly, Geizian, gestores e Rodolfo devem pedir naturalmente; a Hera infere o que for seguro e pergunta só o que bloquear.
-3. O Drive `MGS-CRIATIVOS` tem várias verticais. `CC_US_ES` é exemplo/piloto alinhado com Ares, não a única operação.
+3. O Drive `MGS-AGENTS/CRIATIVOS` tem várias verticais. `CC_US_ES` é exemplo/piloto alinhado com Ares, não a única operação.
 
 ## Regra operacional da Hera
 

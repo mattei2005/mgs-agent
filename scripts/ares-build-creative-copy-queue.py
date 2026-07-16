@@ -72,7 +72,7 @@ def destination(row: dict[str, str]) -> str:
     if lang not in {"EN", "ES", "DE", "PT", "FR", "TR"}:
         lang = "UNKNOWN"
     status = status_for(row)
-    return f"MGS-CRIATIVOS/{operation}/{fmt}/{placement}/{lang}/{status}"
+    return f"MGS-AGENTS/CRIATIVOS/{operation}/{fmt}/{placement}/{lang}/{status}"
 
 
 def action_for(row: dict[str, str]) -> str:
