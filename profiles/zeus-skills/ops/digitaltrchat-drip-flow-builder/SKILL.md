@@ -18,6 +18,8 @@ This is the class-level operating skill for safe access, inspection and eventual
 
 The current version deliberately stops before any message mutation. Opening and extracting the graph are validated; replacing text and saving are not yet validated and must be added only after Rodolfo teaches the exact write path and a real readback proves it.
 
+For the MGS acquisition/monetization model and the canonical relationship between Get Started, No Match and `Auto Principal Drip`, load `references/messenger-bot-strategy-and-drip-contract.md`.
+
 For the validated Openzed flow example, load `references/openzed-auto-principal-drip-baseline.md` only when that account/page/flow is in scope. For `Saved templates`, load `references/openzed-saved-templates-baseline.md`. Re-check the live UI because these references are dated regression baselines, not production truth.
 
 ## When to Use
@@ -26,6 +28,7 @@ Use this skill when Rodolfo asks to:
 
 - log into `https://digitaltrchat.com/` for an MGS Messenger account;
 - follow `Bot manager > Bot flow builder > Change settings`;
+- inspect `Action button settings` for Get Started/No Match and compare their CTA destinations to the Drip contract;
 - open `Bot manager > Saved templates > Change settings` for read-only inventory without installing/uploading/deleting;
 - find and safely open a named flow;
 - inspect every graph node, delay, message, button, postback, URL or connection;
