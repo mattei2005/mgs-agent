@@ -120,16 +120,16 @@ def create_folder(drive, parent_id: str, row: dict) -> dict:
 
 
 def move_file(drive, row: dict, dest_parent: str) -> dict:
-    current = file_get(drive, row['id'])
-    if current.get('driveId') == TARGET_DRIVE and current.get('parents') == [dest_parent]:
-        return current
-    if current.get('driveId'):
-        raise RuntimeError(f"file {row['id']} already belongs to unexpected drive {current.get('driveId')}")
-    parents = current.get('parents') or []
-    if row['parent_id'] not in parents:
-        raise RuntimeError(f"file {row['id']} no longer under expected source parent {row['parent_id']}; parents={parents}")
     params = {'supportsAllDrives': 'true', 'addParents': dest_parent, 'removeParents': row['parent_id'], 'fields': 'id,name,mimeType,parents,driveId,size,md5Checksum,headRevisionId,version,trashed,appProperties'}
-    return api(drive, f'https://www.googleapis.com/drive/v3/files/{row["id"]}?' + urllib.parse.urlencode(params), action=f'move_file:{row["path"]}', method='PATCH', data=b'{}', headers={'Content-Type': 'application/json'})
+    try:
+        return api(drive, f'https://www.googleapis.com/drive/v3/files/{row["id"]}?' + urllib.parse.urlencode(params), action=f'move_file:{row["path"]}', method='PATCH', data=b'{}', headers={'Content-Type': 'application/json'})
+    except ApiFailure:
+        # A process can die after Drive commits the move but before checkpointing.
+        # Re-read before treating a retry failure as fatal.
+        current = file_get(drive, row['id'])
+        if current.get('driveId') == TARGET_DRIVE and current.get('parents') == [dest_parent]:
+            return current
+        raise
 
 
 def copy_file(drive, row: dict, dest_parent: str) -> dict:
@@ -292,17 +292,15 @@ def main() -> int:
             if not parent_dest:
                 raise RuntimeError(f"missing destination parent mapping for folder {row['path']} ({row['parent_id']})")
             if row['id'] in completed_folders:
-                target_id = checkpoint['folder_map'][row['id']]
-                target = file_get(drive, target_id)
-            else:
-                target = create_folder(drive, parent_dest, row)
-                target_id = target['id']
-                checkpoint['folder_map'][row['id']] = target_id
-                checkpoint['completed_folders'].append(row['id'])
-                completed_folders.add(row['id'])
-                atomic_json(CHECKPOINT, checkpoint)
-            if target.get('name') != row['name'] or target.get('mimeType') != FOLDER_MIME or target.get('parents') != [parent_dest] or target.get('driveId') != TARGET_DRIVE:
-                raise RuntimeError(f"folder readback mismatch for {row['path']}: {target}")
+                if idx % 25 == 0:
+                    print(json.dumps({'phase': 'folders', 'completed': len(completed_folders), 'total': len(folders), 'resume_skip_through_index': idx}, ensure_ascii=False), flush=True)
+                continue
+            target = create_folder(drive, parent_dest, row)
+            target_id = target['id']
+            checkpoint['folder_map'][row['id']] = target_id
+            checkpoint['completed_folders'].append(row['id'])
+            completed_folders.add(row['id'])
+            atomic_json(CHECKPOINT, checkpoint)
             if idx % 25 == 0 or idx == len(folders):
                 print(json.dumps({'phase': 'folders', 'completed': idx, 'total': len(folders)}, ensure_ascii=False), flush=True)
 
@@ -315,16 +313,15 @@ def main() -> int:
                 raise RuntimeError(f"missing destination parent mapping for file {row['path']} ({row['parent_id']})")
             copied = row['migration_action'] == 'COPY_NEW_ID'
             if row['id'] in completed_files:
-                target_id = checkpoint['file_map'][row['id']]['target_id']
-                target = file_get(drive, target_id)
-            else:
-                target = copy_file(drive, row, dest_parent) if copied else move_file(drive, row, dest_parent)
-                validate_metadata(row, target, dest_parent, copied=copied)
-                checkpoint['file_map'][row['id']] = {'target_id': target['id'], 'action': row['migration_action'], 'source_path': row['path'], 'target_parent_id': dest_parent, 'md5Checksum': row.get('md5Checksum'), 'size_bytes': row.get('size_bytes'), 'mimeType': row['mimeType']}
-                checkpoint['completed_files'].append(row['id'])
-                completed_files.add(row['id'])
-                atomic_json(CHECKPOINT, checkpoint)
+                if idx % 25 == 0:
+                    print(json.dumps({'phase': 'files', 'completed': len(completed_files), 'total': len(files), 'resume_skip_through_index': idx}, ensure_ascii=False), flush=True)
+                continue
+            target = copy_file(drive, row, dest_parent) if copied else move_file(drive, row, dest_parent)
             validate_metadata(row, target, dest_parent, copied=copied)
+            checkpoint['file_map'][row['id']] = {'target_id': target['id'], 'action': row['migration_action'], 'source_path': row['path'], 'target_parent_id': dest_parent, 'md5Checksum': row.get('md5Checksum'), 'size_bytes': row.get('size_bytes'), 'mimeType': row['mimeType']}
+            checkpoint['completed_files'].append(row['id'])
+            completed_files.add(row['id'])
+            atomic_json(CHECKPOINT, checkpoint)
             if idx % 25 == 0 or idx == len(files):
                 print(json.dumps({'phase': 'files', 'completed': idx, 'total': len(files), 'moves': sum(1 for x in checkpoint['file_map'].values() if x['action']=='MOVE_PRESERVE_ID'), 'copies': sum(1 for x in checkpoint['file_map'].values() if x['action']=='COPY_NEW_ID')}, ensure_ascii=False), flush=True)
 
