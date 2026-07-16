@@ -1,8 +1,8 @@
 # Plano MGS — Memória Institucional e Continuidade
 
-> Status: implementação v1.3, Fase 2 piloto Zeus e Fase 4 de recuperação ativas e validadas
+> Status: implementação v1.4, Fases 2–4 ativas e validadas nos agentes operacionais
 > Aprovado por: Rodolfo Mattei em 2026-07-15  
-> Escopo aprovado: Fases 0–1 aditivas + Fase 2 somente Zeus em 2026-07-15; Fase 4 de backup/recuperação autorizada e ativada em 2026-07-16.
+> Escopo aprovado: Fases 0–1 aditivas + Fase 2 Zeus em 2026-07-15; Fase 3 Atena e Ares e Fase 4 de backup/recuperação autorizadas e ativadas em 2026-07-16.
 
 ## Objetivo executivo
 
@@ -91,7 +91,7 @@ Validação de cutover:
 
 ## Fase 3 — Atena e Ares
 
-Status: piloto da Atena ativo e validado em 2026-07-16; Ares permanece pendente de gate próprio.
+Status: pilotos da Atena e do Ares ativos e validados em 2026-07-16.
 
 Atena:
 
@@ -104,12 +104,17 @@ Atena:
 - sessão local nova `20260716_034612_a9a42a` respondeu corretamente e contém o marker de continuidade exatamente uma vez no `sessions.system_prompt`;
 - nenhum gateway foi reiniciado.
 
-Ares — próximo gate futuro:
+Ares:
 
-- mapear conhecimento sempre ativo versus roteado;
-- validar Creative/Campaign Ops, Meta e Drive;
-- não recriar Hera como agente ativo;
-- preservar rollback e histórico.
+- recebeu somente o kernel de continuidade relevante a Creative Ops e Campaign Ops;
+- consulta registry/checkpoint e depois a fonte canônica antes de pedir repetição de decisão ou retomada;
+- persiste procedimento em skill, estrutura/regra na fonte canônica e estado temporário em checkpoint dentro da autoridade vigente;
+- itens globais, ambíguos ou fora da área continuam escalando para Zeus;
+- não recria Hera como agente ativo e preserva as rotas canônicas do Ares;
+- SOUL live e versionado estão byte-identical, config e permissões permaneceram inalteradas;
+- OAuth OpenAI-Codex foi reautenticado com cadeia independente após o preflight revelar refresh inválido;
+- sessão local nova `20260716_094808_1d73e9` consultou registry/checkpoint e contém o marker de continuidade exatamente uma vez no `sessions.system_prompt`;
+- nenhum gateway foi reiniciado.
 
 ## Fase 4 — Backup e recuperação
 

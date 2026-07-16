@@ -49,10 +49,29 @@
       "kind": "capability",
       "owner": "Zeus",
       "review_due": null,
+      "status": "superseded",
+      "superseded_by": "CAP-KNOWLEDGE-CONTROL-V3",
+      "title": "Knowledge capture registry and checkpoints for Zeus and Atena",
+      "updated_at": "2026-07-16T13:52:32+00:00"
+    },
+    {
+      "canonical_key": "capability.knowledge-control",
+      "canonical_source": "scripts/mgs-knowledge-control.py",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-16",
+      "id": "CAP-KNOWLEDGE-CONTROL-V3",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
       "status": "active",
       "superseded_by": null,
-      "title": "Knowledge capture registry and checkpoints for Zeus and Atena",
-      "updated_at": "2026-07-16T07:48:54+00:00"
+      "title": "Knowledge capture registry and checkpoints for Zeus, Atena and Ares",
+      "updated_at": "2026-07-16T13:52:32+00:00"
     },
     {
       "canonical_key": "capability.knowledge-regression",
@@ -126,6 +145,24 @@
       "updated_at": "2026-07-16T07:48:54+00:00"
     },
     {
+      "canonical_key": "decision.knowledge-continuity.ares-pilot",
+      "canonical_source": "docs/mgs-knowledge-continuity-plan.md",
+      "consumers": [
+        "ares",
+        "zeus"
+      ],
+      "domain": "executive",
+      "effective_at": "2026-07-16",
+      "id": "DEC-2026-004",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Activate institutional continuity pilot in Ares",
+      "updated_at": "2026-07-16T13:52:32+00:00"
+    },
+    {
       "canonical_key": "source.company-os",
       "canonical_source": "context/company-os.md",
       "consumers": [
@@ -165,5 +202,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T07:48:54+00:00"
+  "updated_at": "2026-07-16T13:52:32+00:00"
 }
