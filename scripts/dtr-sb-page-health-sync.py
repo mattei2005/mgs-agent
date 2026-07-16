@@ -907,16 +907,6 @@ def read_report_datasets(access_token, titles):
         raise RuntimeError(f'Google Sheets leitura incremental incompleta: {len(ranges)}/{len(titles)} abas')
     return {title:(item.get('values') or []) for title,item in zip(titles,ranges)}
 
-def plan_incremental_report_updates(desired_datasets, existing_datasets, page_headers):
-    expected=dict(desired_datasets)
-    for title in existing_datasets:
-        if title!='Paginas' and title not in expected:
-            # Keep a formerly managed site tab, but remove stale/expired rows.
-            # Tab deletion remains a separately confirmed Critical Subset action.
-            expected[title]=[page_headers]
-    updates={title:values for title,values in expected.items() if existing_datasets.get(title)!=values}
-    return expected,updates
-
 def ensure_report_tabs(access_token, required_titles):
     """Ensure all managed tabs exist and Resumo is immediately left of Paginas Totais."""
     base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
@@ -956,42 +946,59 @@ def ensure_report_tabs(access_token, required_titles):
         raise RuntimeError('Resumo não ficou imediatamente à esquerda de Paginas Totais')
     return by_title
 
-def write_google_sheet(rows):
-    access_token=google_access_token()
-    page_headers=['link da pagina','nome da pagina','fb page id','page id','bot user','segurador','sites','status sb','codigos','data saida']
-    unique_rows,input_duplicates=dedupe_report_rows(rows)
-    desired_datasets=build_report_datasets(unique_rows,page_headers)
-    tabs=ensure_report_tabs(access_token,list(desired_datasets))
-    existing_datasets=read_report_datasets(access_token,list(tabs))
-    expected_datasets,updates=plan_incremental_report_updates(desired_datasets,existing_datasets,page_headers)
-    base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
+def write_google_sheet(rows, sheet_stats=None):
+    """Clear and rebuild every managed tab from the desired live dataset."""
+    REPORT_SHEET_LOCK.parent.mkdir(parents=True,exist_ok=True)
+    with REPORT_SHEET_LOCK.open('a+') as lock_handle:
+        fcntl.flock(lock_handle.fileno(),fcntl.LOCK_EX)
+        access_token=google_access_token()
+        page_headers=['link da pagina','nome da pagina','fb page id','page id','bot user','segurador','sites','status sb','codigos','data saida']
+        unique_rows,input_duplicates=dedupe_report_rows(rows)
+        desired_pages=build_report_datasets(unique_rows,page_headers)
+        tabs=ensure_report_tabs(access_token,[REPORT_SUMMARY_TAB,*desired_pages])
+        existing_datasets=read_report_datasets(access_token,list(tabs))
+        base=f'https://sheets.googleapis.com/v4/spreadsheets/{REPORT_SHEET_ID}'
 
-    def keyed_rows(values):
-        if not values:
-            return {},0
-        headers=values[0]
-        result={}; duplicates=0
-        for values_row in values[1:]:
-            row={header:(values_row[index] if index<len(values_row) else '') for index,header in enumerate(headers)}
-            key=report_page_identity(row)
-            if key in result:
-                duplicates+=1
-            result[key]=values_row
-        return result,duplicates
+        def keyed_rows(values):
+            if not values:
+                return {},0
+            headers=values[0]
+            result={}; duplicates=0
+            for values_row in values[1:]:
+                row={header:(values_row[index] if index<len(values_row) else '') for index,header in enumerate(headers)}
+                if not any(norm(value) for value in row.values()):
+                    continue
+                key=report_page_identity(row)
+                if key in result:
+                    duplicates+=1
+                result[key]=values_row
+            return result,duplicates
 
-    old_paginas,existing_duplicates=keyed_rows(existing_datasets.get('Paginas') or [])
-    new_paginas,_=keyed_rows(desired_datasets['Paginas'])
-    added_keys=set(new_paginas)-set(old_paginas)
-    removed_keys=set(old_paginas)-set(new_paginas)
-    changed_keys={key for key in set(old_paginas)&set(new_paginas) if old_paginas[key]!=new_paginas[key]}
+        old_total_values=existing_datasets.get(REPORT_TOTAL_TAB) or existing_datasets.get(REPORT_LEGACY_TOTAL_TAB) or []
+        old_total,existing_duplicates=keyed_rows(old_total_values)
+        new_total,_=keyed_rows(desired_pages[REPORT_TOTAL_TAB])
+        added_keys=set(new_total)-set(old_total)
+        removed_keys=set(old_total)-set(new_total)
+        changed_keys={key for key in set(old_total)&set(new_total) if old_total[key]!=new_total[key]}
 
-    if updates:
-        sheets_api(access_token,'POST',base+'/values:batchClear',{'ranges':[sheet_a1_title(title)+'!A:Z' for title in updates]})
+        # Keep every formerly managed site tab, but clear stale rows and rewrite
+        # the header. This is a complete rebuild, not an incremental append.
+        site_titles={title for title in tabs if title not in {REPORT_SUMMARY_TAB,REPORT_TOTAL_TAB,REPORT_LEGACY_TOTAL_TAB}}
+        expected_pages=dict(desired_pages)
+        for title in site_titles:
+            expected_pages.setdefault(title,[page_headers])
+        summary_values=build_summary_dataset(unique_rows,sheet_stats or {})
+        expected_datasets={REPORT_SUMMARY_TAB:summary_values,REPORT_TOTAL_TAB:expected_pages.pop(REPORT_TOTAL_TAB)}
+        for title in sorted(expected_pages,key=str.lower):
+            expected_datasets[title]=expected_pages[title]
+
+        clear_titles=list(expected_datasets)
+        sheets_api(access_token,'POST',base+'/values:batchClear',{'ranges':[sheet_a1_title(title)+'!A:Z' for title in clear_titles]})
         resize=[]
-        for title,values in updates.items():
+        for title,values in expected_datasets.items():
             props=tabs[title]
             needed_rows=max(100,len(values)+10)
-            needed_cols=max(5,len(values[0]) if values else 1)
+            needed_cols=max(5,max((len(row) for row in values),default=1))
             current=props.get('gridProperties') or {}
             if current.get('rowCount',0)<needed_rows or current.get('columnCount',0)<needed_cols:
                 resize.append({'updateSheetProperties':{'properties':{'sheetId':props['sheetId'],'gridProperties':{'rowCount':max(current.get('rowCount',0),needed_rows),'columnCount':max(current.get('columnCount',0),needed_cols)}},'fields':'gridProperties.rowCount,gridProperties.columnCount'}})
@@ -999,18 +1006,34 @@ def write_google_sheet(rows):
             sheets_api(access_token,'POST',base+':batchUpdate',{'requests':resize})
         sheets_api(access_token,'POST',base+'/values:batchUpdate',{
             'valueInputOption':'RAW',
-            'data':[{'range':sheet_a1_title(title)+'!A1','majorDimension':'ROWS','values':values} for title,values in updates.items()],
+            'data':[{'range':sheet_a1_title(title)+'!A1','majorDimension':'ROWS','values':values} for title,values in expected_datasets.items()],
         })
+
         navy={'red':31/255,'green':78/255,'blue':121/255}
+        light={'red':234/255,'green':243/255,'blue':250/255}
         white={'red':1,'green':1,'blue':1}
         column_widths=[300,230,190,100,290,240,220,120,300,130]
         format_requests=[]
-        for title,values in updates.items():
-            sid=tabs[title]['sheetId']; cols=len(page_headers)
+        for title,values in expected_datasets.items():
+            sid=tabs[title]['sheetId']
+            format_requests.append({'clearBasicFilter':{'sheetId':sid}})
+            if title==REPORT_SUMMARY_TAB:
+                format_requests.extend([
+                    {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':1,'startColumnIndex':0,'endColumnIndex':3},'cell':{'userEnteredFormat':{'backgroundColor':navy,'textFormat':{'bold':True,'foregroundColor':white,'fontSize':14},'verticalAlignment':'MIDDLE'}},'fields':'userEnteredFormat'}},
+                    {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':2,'endRowIndex':5,'startColumnIndex':0,'endColumnIndex':2},'cell':{'userEnteredFormat':{'backgroundColor':light,'textFormat':{'bold':True}}},'fields':'userEnteredFormat'}},
+                    {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':5,'endRowIndex':6,'startColumnIndex':0,'endColumnIndex':3},'cell':{'userEnteredFormat':{'backgroundColor':navy,'textFormat':{'bold':True,'foregroundColor':white},'horizontalAlignment':'CENTER'}},'fields':'userEnteredFormat'}},
+                    {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':6,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':3},'cell':{'userEnteredFormat':{'verticalAlignment':'MIDDLE','wrapStrategy':'WRAP'}},'fields':'userEnteredFormat.verticalAlignment,userEnteredFormat.wrapStrategy'}},
+                    {'updateSheetProperties':{'properties':{'sheetId':sid,'gridProperties':{'frozenRowCount':6,'hideGridlines':True}},'fields':'gridProperties.frozenRowCount,gridProperties.hideGridlines'}},
+                ])
+                if len(values)>6:
+                    format_requests.append({'setBasicFilter':{'filter':{'range':{'sheetId':sid,'startRowIndex':5,'endRowIndex':len(values),'startColumnIndex':0,'endColumnIndex':3}}}})
+                for index,pixels in enumerate([150,90,700]):
+                    format_requests.append({'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'COLUMNS','startIndex':index,'endIndex':index+1},'properties':{'pixelSize':pixels},'fields':'pixelSize'}})
+                continue
+            cols=len(page_headers)
             format_requests.extend([
-                {'clearBasicFilter':{'sheetId':sid}},
                 {'repeatCell':{'range':{'sheetId':sid,'startRowIndex':0,'endRowIndex':1,'startColumnIndex':0,'endColumnIndex':cols},'cell':{'userEnteredFormat':{'backgroundColor':navy,'textFormat':{'bold':True,'foregroundColor':white},'horizontalAlignment':'CENTER','verticalAlignment':'MIDDLE','wrapStrategy':'CLIP'}},'fields':'userEnteredFormat'}},
-                {'updateSheetProperties':{'properties':{'sheetId':sid,'gridProperties':{'frozenRowCount':1}},'fields':'gridProperties.frozenRowCount'}},
+                {'updateSheetProperties':{'properties':{'sheetId':sid,'gridProperties':{'frozenRowCount':1,'hideGridlines':False}},'fields':'gridProperties.frozenRowCount,gridProperties.hideGridlines'}},
             ])
             if len(values)>1:
                 format_requests.extend([
@@ -1021,47 +1044,51 @@ def write_google_sheet(rows):
                 format_requests.append({'updateDimensionProperties':{'range':{'sheetId':sid,'dimension':'COLUMNS','startIndex':index,'endIndex':index+1},'properties':{'pixelSize':pixels},'fields':'pixelSize'}})
         sheets_api(access_token,'POST',base+':batchUpdate',{'requests':format_requests})
 
-    readback=read_report_datasets(access_token,list(expected_datasets))
-    values_read=list(readback.values())
-    expected_values=list(expected_datasets.values())
-    if values_read!=expected_values:
-        counts_read=[len(values) for values in values_read]
-        expected_counts=[len(values) for values in expected_values]
-        raise RuntimeError(f'Google Sheets readback divergente: rows={counts_read!r} expected_rows={expected_counts!r}')
-    duplicate_keys={}
-    for title,values in readback.items():
-        _,duplicates=keyed_rows(values)
-        if duplicates:
-            duplicate_keys[title]=duplicates
-    if duplicate_keys:
-        raise RuntimeError(f'Google Sheets ainda contém chaves duplicadas: {duplicate_keys!r}')
-    rows_by_tab={title:max(0,len(values)-1) for title,values in readback.items()}
-    updated_tabs=list(updates)
-    removed_page_rows=[]
-    for key in sorted(removed_keys):
-        values_row=old_paginas[key]
-        removed_page_rows.append({header:(values_row[index] if index<len(values_row) else '') for index,header in enumerate(page_headers)})
-    removed_page_rows.sort(key=lambda row:(row.get('data saida') or '9999-99-99',row.get('nome da pagina') or '',row.get('bot user') or ''))
-    return {
-        'url':REPORT_SHEET_URL,
-        'rows_paginas':rows_by_tab['Paginas'],
-        'site_tabs':len(rows_by_tab)-1,
-        'rows_by_tab':rows_by_tab,
-        'updated_tabs':updated_tabs,
-        'updated_site_tabs':[title for title in updated_tabs if title!='Paginas'],
-        'unchanged_tabs':len(rows_by_tab)-len(updated_tabs),
-        'added_pages':len(added_keys),
-        'removed_pages':len(removed_keys),
-        'removed_page_rows':removed_page_rows,
-        'changed_pages':len(changed_keys),
-        'input_duplicates_removed':input_duplicates,
-        'existing_duplicates_removed':existing_duplicates,
-        'duplicate_keys_after':0,
-        'restricted_only':True,
-        'incremental_upsert':True,
-        'expiry_inclusive':True,
-        'readback_ok':True,
-    }
+        readback=read_report_datasets(access_token,list(expected_datasets))
+        if list(readback.values())!=list(expected_datasets.values()):
+            counts_read=[len(values) for values in readback.values()]
+            expected_counts=[len(values) for values in expected_datasets.values()]
+            raise RuntimeError(f'Google Sheets readback divergente: rows={counts_read!r} expected_rows={expected_counts!r}')
+        duplicate_keys={}
+        for title,values in readback.items():
+            if title==REPORT_SUMMARY_TAB:
+                continue
+            _,duplicates=keyed_rows(values)
+            if duplicates:
+                duplicate_keys[title]=duplicates
+        if duplicate_keys:
+            raise RuntimeError(f'Google Sheets ainda contém chaves duplicadas: {duplicate_keys!r}')
+        tabs_after=ensure_report_tabs(access_token,list(expected_datasets))
+        rows_by_tab={title:max(0,len(values)-1) for title,values in readback.items() if title!=REPORT_SUMMARY_TAB}
+        removed_page_rows=[]
+        for key in sorted(removed_keys):
+            values_row=old_total[key]
+            removed_page_rows.append({header:(values_row[index] if index<len(values_row) else '') for index,header in enumerate(page_headers)})
+        removed_page_rows.sort(key=lambda row:(row.get('data saida') or '9999-99-99',row.get('nome da pagina') or '',row.get('bot user') or ''))
+        return {
+            'url':REPORT_SHEET_URL,
+            'rows_paginas_totais':rows_by_tab[REPORT_TOTAL_TAB],
+            'rows_resumo_dates':max(0,len(readback[REPORT_SUMMARY_TAB])-6),
+            'site_tabs':len(rows_by_tab)-1,
+            'rows_by_tab':rows_by_tab,
+            'updated_tabs':list(expected_datasets),
+            'updated_site_tabs':[title for title in expected_datasets if title not in {REPORT_SUMMARY_TAB,REPORT_TOTAL_TAB}],
+            'added_pages':len(added_keys),
+            'removed_pages':len(removed_keys),
+            'removed_page_rows':removed_page_rows,
+            'changed_pages':len(changed_keys),
+            'input_duplicates_removed':input_duplicates,
+            'existing_duplicates_removed':existing_duplicates,
+            'duplicate_keys_after':0,
+            'full_rebuild':True,
+            'backup_created':False,
+            'active_restrictions_only':True,
+            'excluded_statuses':['On-hold','Blocked'],
+            'expiry_inclusive':True,
+            'summary_index':tabs_after[REPORT_SUMMARY_TAB]['index'],
+            'total_index':tabs_after[REPORT_TOTAL_TAB]['index'],
+            'readback_ok':True,
+        }
 
 async def main():
     ap=argparse.ArgumentParser()
@@ -1248,7 +1275,7 @@ async def main():
                 _, fresh_sb_rows=await fetch_sb_rows(ctx,h)
                 restricted_rows, sheet_stats=restricted_sheet_rows(fresh_sb_rows,active,tday)
                 summary.update(sheet_stats)
-                summary['sheet_update']=write_google_sheet(restricted_rows)
+                summary['sheet_update']=write_google_sheet(restricted_rows,sheet_stats)
                 exited_rows=exited_restrictions_from_sheet((summary['sheet_update'] or {}).get('removed_page_rows') or [],fresh_sb_rows,tday)
                 summary['exited_restrictions']=exited_rows
             except Exception as exc:

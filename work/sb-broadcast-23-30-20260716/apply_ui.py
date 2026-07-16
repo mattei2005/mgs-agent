@@ -38,7 +38,7 @@ async def confirm_if_present(page):
   btn=dlg.get_by_role('button',name=re.compile(f'^{re.escape(label)}$',re.I))
   if await btn.count():await btn.first.click();await page.wait_for_timeout(500);return True
  raise RuntimeError(f'unhandled confirmation: {txt[:300]}')
-async def refresh_rows(page):
+async def refresh_rows(page,target_id=None,expected_core=None):
  captured=[];probe={'url':None,'headers':None}
  async def handler(resp):
   if '/broadcast/Messenger' in resp.url and resp.status==200:
@@ -51,13 +51,18 @@ async def refresh_rows(page):
  await page.reload(wait_until='networkidle',timeout=90000);await page.wait_for_timeout(2500)
  if probe['url'] and probe['headers']:
   # Fresh authenticated API readback avoids stale table state after modal Save.
-  safe_headers={k:v for k,v in probe['headers'].items() if not k.startswith(':') and k.lower() not in ('host','content-length')}
+  raw_headers=probe['headers'];safe_headers={k:v for k,v in raw_headers.items() if not k.startswith(':') and k.lower() not in ('host','content-length')}
   for _ in range(4):
    resp=await page.context.request.get(probe['url'],headers=safe_headers,timeout=90000)
    if resp.ok:
     d=await resp.json()
-    if isinstance(d,list):captured=d
-   await page.wait_for_timeout(1200)
+    if isinstance(d,list):
+     captured=d
+     if target_id and expected_core is not None:
+      rr=next((r for r in d if r.get('ID')==target_id),None)
+      if rr and core(parse_msgs(rr))==expected_core:break
+   await page.wait_for_timeout(1000)
+ page.remove_listener('response',handler)
  ded={}
  for r in captured:ded[r.get('ID') or r.get('NAME')]=r
  return list(ded.values())
@@ -95,9 +100,9 @@ async def apply_one(page,item):
    d=vis.nth(i);debug.append({'i':i,'text':compact(await d.inner_text())[:700],'buttons':await d.locator('button').all_inner_texts()})
   raise RuntimeError(f'{name}: parent Save missing; dialogs={json.dumps(debug,ensure_ascii=False)}')
  await save.click(timeout=30000);events.append({'step':'save_clicked'});await page.wait_for_timeout(1300)
- rows=await refresh_rows(page);live=next((r for r in rows if r.get('ID')==item['id']),None)
+ expected=core(item['messages']);rows=await refresh_rows(page,item['id'],expected);live=next((r for r in rows if r.get('ID')==item['id']),None)
  if not live:raise RuntimeError(f'{name}: readback row missing')
- live_msgs=parse_msgs(live);expected=core(item['messages']);actual=core(live_msgs)
+ live_msgs=parse_msgs(live);actual=core(live_msgs)
  if actual!=expected:raise RuntimeError(f'{name}: immutable core readback mismatch count={len(actual)} expected={len(expected)}')
  result={'template':name,'id':item['id'],'status':'validated','target':target,'pages':item['pages'],'approval_clicked':bool(item['requires_approval']),'events':events}
  journal(result);return result

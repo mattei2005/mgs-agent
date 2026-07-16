@@ -9,7 +9,6 @@ and exact time; this monitor never attributes the writer without direct evidence
 
 import argparse
 import asyncio
-import hashlib
 import importlib.util
 import json
 import os
@@ -22,7 +21,6 @@ from zoneinfo import ZoneInfo
 BASE = Path('/root/mgs-agent')
 DAILY_PATH = BASE / 'scripts/dtr-sb-daily-match-audit.py'
 STATE_PATH = BASE / 'data/sb-restricted-transition-state.json'
-BACKUP_DIR = BASE / 'backups'
 TARGET_CHANNEL_ID = '1522442220903337984'
 SHEET_URL = 'https://docs.google.com/spreadsheets/d/1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI/edit?gid=0#gid=0'
 NY = ZoneInfo('America/New_York')
@@ -104,9 +102,10 @@ def build_snapshot(raw_rows, active_users, daily, sync, tday=None):
 
 def snapshot_from_report_sheet(sync):
     token = sync.google_access_token()
-    values = sync.read_report_datasets(token, ['Paginas']).get('Paginas') or []
+    tab = getattr(sync, 'REPORT_TOTAL_TAB', 'Paginas Totais')
+    values = sync.read_report_datasets(token, [tab]).get(tab) or []
     if not values:
-        raise RuntimeError('Paginas report sheet is empty; refusing baseline reconciliation')
+        raise RuntimeError(f'{tab} report sheet is empty; refusing baseline reconciliation')
     headers = values[0]
     snapshot = {}
     for values_row in values[1:]:
@@ -126,34 +125,43 @@ def snapshot_from_report_sheet(sync):
         }
         key = stable_key(row)
         if key in snapshot:
-            raise RuntimeError(f'duplicate identity in Paginas report sheet: {key}')
+            raise RuntimeError(f'duplicate identity in {tab} report sheet: {key}')
         snapshot[key] = row
     return snapshot
 
 
-def backup_report_sheet(sync):
-    token = sync.google_access_token()
-    values = sync.read_report_datasets(token, ['Paginas']).get('Paginas') or []
-    if not values:
-        raise RuntimeError('Paginas report sheet is empty; refusing backup/write')
-    payload = {
-        'created_at': now_iso(),
-        'sheet_url': SHEET_URL,
-        'tab': 'Paginas',
-        'values': values,
-    }
-    encoded = (json.dumps(payload, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
-    BACKUP_DIR.mkdir(parents=True, exist_ok=True)
-    path = BACKUP_DIR / f"sb-restricted-report-sheet-{datetime.now(NY).strftime('%Y%m%d-%H%M%S')}.json"
-    path.write_bytes(encoded)
-    readback = path.read_bytes()
-    if readback != encoded:
-        raise RuntimeError(f'local Sheet backup readback failed: {path}')
+def report_row(row):
     return {
-        'path': str(path),
-        'rows': max(0, len(values) - 1),
-        'sha256': hashlib.sha256(readback).hexdigest(),
+        'nome da pagina': row.get('page_name', ''),
+        'fb page id': row.get('fb_page_id', ''),
+        'page id': row.get('page_id', ''),
+        'bot user': row.get('bot_user', ''),
+        'segurador': row.get('profile_name', ''),
+        'sites': row.get('sites', ''),
+        'status sb': row.get('status', ''),
+        'codigos': '',
+        'data saida': row.get('restricted_until', ''),
     }
+
+
+def confirmed_resolutions(resolved, raw_rows, daily, sync, tday):
+    live = {}
+    for raw in raw_rows:
+        try:
+            key = stable_key(public_row(raw, daily, sync))
+        except RuntimeError:
+            continue
+        live[key] = raw
+    confirmed = []
+    for old in resolved:
+        current = live.get(stable_key(old))
+        if not current:
+            continue
+        if daily.low(current.get('STATUS')) in EXCLUDED_STATUSES:
+            continue
+        if not sync.active_restricted(current, tday):
+            confirmed.append(report_row(old))
+    return confirmed
 
 
 def compare_snapshots(previous, current):
@@ -297,15 +305,12 @@ def discord_status(result):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--apply', action='store_true', help='Post transitions and save state after successful readback/delivery.')
-    parser.add_argument('--dry-run', action='store_true', help='Read live data and print result without post or state write.')
-    parser.add_argument('--reconcile-from-sheet', action='store_true', help='Use current Paginas report sheet as the comparison baseline.')
-    parser.add_argument('--update-sheet', action='store_true', help='With --apply --reconcile-from-sheet, upsert the live Broadcast report sheet with readback.')
+    parser.add_argument('--apply', action='store_true', help='Rebuild the report Sheet, post confirmed transitions/exits, and save state after readback.')
+    parser.add_argument('--dry-run', action='store_true', help='Read live data and print result without post, Sheet write, or state write.')
+    parser.add_argument('--reconcile-from-sheet', action='store_true', help='Use current Paginas Totais as the comparison baseline.')
     args = parser.parse_args()
     if args.apply == args.dry_run:
         parser.error('choose exactly one of --apply or --dry-run')
-    if args.update_sheet and not (args.apply and args.reconcile_from_sheet):
-        parser.error('--update-sheet requires --apply --reconcile-from-sheet')
 
     daily = load_module('dtr_sb_daily_match_audit', DAILY_PATH)
     audit = daily.load_audit_mod()
@@ -316,7 +321,7 @@ def main():
 
     if args.reconcile_from_sheet:
         previous = snapshot_from_report_sheet(sync)
-        source_label = 'Sheet Paginas anterior → SB live'
+        source_label = 'Sheet Paginas Totais anterior → SB live'
         source = 'report-sheet-reconciliation'
     else:
         state = load_state()
@@ -326,29 +331,34 @@ def main():
         source_label = 'última leitura SB concluída → SB live'
         source = 'previous-live-state'
 
-    transitions, resolved = compare_snapshots(previous, current)
-    blocks = render_blocks(transitions, counts, source_label) if transitions else []
+    transitions, removed_from_snapshot = compare_snapshots(previous, current)
+    confirmed_exits = confirmed_resolutions(removed_from_snapshot, raw_rows, daily, sync, sync.today())
+    transition_blocks = render_blocks(transitions, counts, source_label) if transitions else []
+    exit_blocks = sync.build_exited_restrictions_alerts(
+        confirmed_exits,
+        {'started_at': now_iso()},
+    ) if confirmed_exits else []
     sheet_update = None
-    sheet_backup = None
+    sheet_stats = None
     post_results = []
 
     if args.dry_run:
-        for block in blocks:
+        for block in [*transition_blocks, *exit_blocks]:
             print(block)
     else:
-        if args.update_sheet:
-            sheet_backup = backup_report_sheet(sync)
-            broadcast_rows, _ = sync.restricted_sheet_rows(raw_rows, active_users, sync.today())
-            sheet_update = sync.write_google_sheet(broadcast_rows)
-            if not sheet_update.get('readback_ok'):
-                raise RuntimeError('Google Sheet update returned no successful readback')
-        for block in blocks:
-            result = sync.post_discord(block)
-            post_results.append(result)
-            if discord_status(result) not in (200, 201):
-                raise RuntimeError(f'Discord transition delivery failed: {result!r}')
-        save_state(current, counts, transitions, resolved, source)
+        sheet_rows, sheet_stats = sync.restricted_sheet_rows(raw_rows, active_users, sync.today())
+        sheet_update = sync.write_google_sheet(sheet_rows, sheet_stats)
+        if not sheet_update.get('readback_ok'):
+            raise RuntimeError('Google Sheet update returned no successful readback')
+        for kind, blocks in [('transition', transition_blocks), ('exit', exit_blocks)]:
+            for block in blocks:
+                result = sync.post_discord(block)
+                post_results.append({'kind': kind, 'result': result})
+                if discord_status(result) not in (200, 201):
+                    raise RuntimeError(f'Discord {kind} delivery failed: {result!r}')
+        save_state(current, counts, transitions, confirmed_exits, source)
 
+    all_blocks = [*transition_blocks, *exit_blocks]
     print(json.dumps({
         'ok': True,
         'mode': 'apply' if args.apply else 'dry-run',
@@ -358,11 +368,12 @@ def main():
         'previous_monitored': len(previous),
         'current_monitored': len(current),
         'transitions': transitions,
-        'resolved_count': len(resolved),
+        'resolved_count': len(confirmed_exits),
+        'unconfirmed_removed_count': len(removed_from_snapshot) - len(confirmed_exits),
         'counts': counts,
-        'blocks': len(blocks),
-        'block_lengths': [len(block) for block in blocks],
-        'sheet_backup': sheet_backup,
+        'sheet_stats': sheet_stats,
+        'blocks': len(all_blocks),
+        'block_lengths': [len(block) for block in all_blocks],
         'sheet_update': sheet_update,
         'post_results': post_results,
         'state_written': bool(args.apply),
