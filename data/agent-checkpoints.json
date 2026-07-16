@@ -23,14 +23,14 @@
     {
       "agent": "zeus",
       "id": "sb-restricted-sheet-live-sync",
-      "next_step": "Concluir REPORT-INFRA, validar audit/inventário/Git e encerrar checkpoint",
+      "next_step": "Operação contínua pelo cron de transições; escalar somente falha de leitura/escrita/entrega ou divergência live",
       "objective": "Reconstruir e manter automaticamente a planilha de páginas restritas com Smart Bidding live, incluindo Resumo, Páginas Totais e abas por site",
-      "source": "Discord thread 1527420530792202281; Smart Bidding live; Google Sheet 1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI; tests restricted=7 passed; audit event sb_restricted_sheet_full_rebuild_and_transition_sync_enabled",
-      "state": "implementação aplicada e validada: 440 páginas ativas rastreadas, 438 broadcast, 2 outros status, 49 on-hold ignoradas; resumo index 0, paginas totais index 1; 20 abas de site; zero duplicidade; página 19265 presente em paginas totais e xyvlov",
+      "source": "Discord thread 1527420530792202281; Smart Bidding live; Google Sheet 1sIBGA_CHMtHF1mWgsvjUHfEkvuF3pb9VC5oeg06tHsI; REPORT-INFRA 1527426669571215462",
+      "state": "concluído e ativo: rebuild integral sem backup por instrução explícita; automação de entrada/saída no cron; readback live 440 linhas, 20 abas de site, zero duplicidade; skill, inventário, audit e report-infra 1527426669571215462 validados",
       "thread_id": "1527420530792202281",
-      "updated_at": "2026-07-16T21:28:06+00:00"
+      "updated_at": "2026-07-16T21:28:49+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T21:28:06+00:00"
+  "updated_at": "2026-07-16T21:28:49+00:00"
 }
