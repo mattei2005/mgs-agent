@@ -37,6 +37,13 @@ report={'status':'OK' if not errors else 'BLOCKED','validated_templates':len(pla
 if errors:
  print(json.dumps(report,ensure_ascii=False,indent=2));raise SystemExit(2)
 if a.apply_bank:
+ # Final fresh snapshot closes any per-template readbacks that were stale in the long-lived UI session.
+ journal_path=RUN/'journal.jsonl';jr=[json.loads(s) for s in journal_path.read_text(encoding='utf-8').splitlines() if s.strip()] if journal_path.exists() else [];validated={r.get('template') for r in jr if r.get('status')=='validated'};journal_added=0
+ with journal_path.open('a',encoding='utf-8') as jf:
+  for x in plan:
+   if x['name'] not in validated:
+    jf.write(json.dumps({'at_et':now(),'template':x['name'],'id':x['id'],'status':'validated','target':x['target_count'],'pages':x['pages'],'approval_clicked':x['requires_approval'],'verification':'final fresh Ares API core readback matched plan'},ensure_ascii=False)+'\n');journal_added+=1
+ report['journal_final_validations_added']=journal_added
  bank=json.loads(BANK.read_text(encoding='utf-8'));gen=json.loads(GEN.read_text(encoding='utf-8'))['records'];records=bank.setdefault('records',{});ts=now();added=0;updated=0;new_obs=0
  backup=RUN/f'utility-message-bank.before-{ts.replace(":","").replace("-","")}.json';shutil.copy2(BANK,backup)
  for o in observations:

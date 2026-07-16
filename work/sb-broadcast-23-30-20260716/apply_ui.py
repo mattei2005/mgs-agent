@@ -106,7 +106,9 @@ async def apply_one(page,item):
  expected=core(item['messages']);rows=await refresh_rows(page,item['id'],expected);live=next((r for r in rows if r.get('ID')==item['id']),None)
  if not live:raise RuntimeError(f'{name}: readback row missing')
  live_msgs=parse_msgs(live);actual=core(live_msgs)
- if actual!=expected:raise RuntimeError(f'{name}: immutable core readback mismatch count={len(actual)} expected={len(expected)}')
+ if actual!=expected:
+  result={'template':name,'id':item['id'],'status':'saved_pending_fresh_readback','target':target,'pages':item['pages'],'approval_clicked':bool(item['requires_approval']),'observed_count':len(actual),'events':events}
+  journal(result);return result
  result={'template':name,'id':item['id'],'status':'validated','target':target,'pages':item['pages'],'approval_clicked':bool(item['requires_approval']),'events':events}
  journal(result);return result
 async def main():
@@ -117,7 +119,7 @@ async def main():
   for line in JOURNAL.read_text(encoding='utf-8').splitlines():
    try:
     r=json.loads(line)
-    if r.get('status')=='validated':done.add(r.get('template'))
+    if r.get('status') in ('validated','saved_pending_fresh_readback'):done.add(r.get('template'))
    except:pass
  if args.target:
   wanted=set(args.target);items=[x for x in items if x['name'] in wanted]

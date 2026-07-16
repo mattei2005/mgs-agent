@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/root/mgs-agent/work/sb-broadcast-23-30-20260716/apply_ui.py", line 139, in <module>
+    asyncio.run(main())
+  File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/work/sb-broadcast-23-30-20260716/apply_ui.py", line 134, in main
+    try:results.append(await apply_one(page,item))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/mgs-agent/work/sb-broadcast-23-30-20260716/apply_ui.py", line 109, in apply_one
+    if actual!=expected:raise RuntimeError(f'{name}: immutable core readback mismatch count={len(actual)} expected={len(expected)}')
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Infinitynexx - US-CC-EN/EN-SR - g004-d Joe: immutable core readback mismatch count=10 expected=23
