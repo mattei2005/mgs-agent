@@ -18,7 +18,7 @@ Use this reference when Rodolfo asks to monitor SMS Funnel credits, alert before
 - Script: `/root/mgs-agent/scripts/monitor-sms-funnel-balance.py`
 - State: `/root/mgs-agent/data/sms-funnel-balance-state.json` (mode `0600`, ignored by Git)
 - Log: `/root/mgs-agent/logs/monitor-sms-funnel-balance.log`
-- Cron regular: hourly at minute 24 with `flock -n` (24 balance consultations/day).
+- Cron regular: every two hours at minute 24 during Eastern hours `00,08,10,12,14,16,18,20,22`; no regular consultations from 02:00 through 07:59. This produces 9 regular balance consultations/day.
 - Friday cron: every 5 minutes during VPS hours 13–14 on Friday, guarded in-script to act only during 15:00–15:59 `America/Sao_Paulo` and deduplicated after the first successful delivery. Normal success adds one balance consultation on Friday; retries happen only after a failed delivery.
 - Discord destination: `#sms-funnel-balance` (`1527433742233374893`).
 - Transport: Zeus bot API directly. Do not add a recurring 1Password webhook lookup.

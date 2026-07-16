@@ -7,11 +7,12 @@
 1. MGS creates a Meta/Facebook sales campaign using a chosen Facebook Page.
 2. The ad opens that Page's Messenger conversation.
 3. The user receives the question flow/JSON configured with the ad account/campaign.
-4. When the user clicks and answers the questions, the user becomes subscribed to the Page.
-5. The subscribed user receives the `Get-started Template`.
-6. Clicking the Get Started CTA sends the user to the MGS site, where monetization occurs.
-7. If the user types arbitrary text in the Messenger conversation, the `No Match Template` is returned.
-8. Because the user is subscribed, the user also begins receiving the timed messages from `Auto Principal Drip`.
+4. That JSON contains a question and renders a button with a link.
+5. The link placed in the JSON button must be the same link stored in the Page's `Get-started Template`; MGS calls this the **M0 link**.
+6. The monetization click originates from the button rendered by the JSON. It is not correctly described as “the Get Started button,” even though its URL is sourced from the Get-started Template/M0 configuration.
+7. When the user clicks and answers the questions, the user becomes subscribed to the Page.
+8. If the user types arbitrary text in the Messenger conversation, the `No Match Template` is returned.
+9. Because the user is subscribed, the user also begins receiving the timed messages from `Auto Principal Drip`.
 
 Do not audit Get Started, No Match and Drip as unrelated assets: they are one acquisition-to-monetization system.
 
@@ -19,8 +20,8 @@ Do not audit Get Started, No Match and Drip as unrelated assets: they are one ac
 
 Under `Bot manager > Action button settings`:
 
-- `Get-started Template`: first CTA after subscription; its button opens the monetized site.
-- `No Match Template`: fallback reply when the subscriber types something not matched by another configured action; its button also points to the intended site/offer.
+- `Get-started Template`: canonical source/configuration for the **M0 URL** reused by the button generated inside the campaign JSON. Do not conflate the JSON-rendered monetization button with a button sent directly by the Get-started Template.
+- `No Match Template`: fallback reply when the subscriber types something not matched by another configured action; its button points to the intended site/offer and is also the exact URL reference for initial Drip block 6.
 
 For Drip audits, the relevant No Match destination is the canonical URL reference for initial Drip block 6. Compare the exact URL, not only the domain.
 
@@ -51,15 +52,32 @@ After the initial chain, a red `New Sequence` node begins the timed Drip:
 
 The sequence fans out to `Sequence item` nodes; each leads to a named `New Postback` (`M01`, `M02`, …) and then to the message composition blocks.
 
-## Message composition pattern
+## Message composition — current production convention
 
-Rodolfo's teaching at this stage:
+The running convention is:
 
-- One composition uses an image/link block, then a button, then a text block.
-- The next composition uses another non-image first block, then a button, then a text block.
-- MGS interleaves these compositions across the timed messages.
+- M01: image/link block → button → text block.
+- M02: button → text block, without the image/link block.
+- Continue interleaving those two compositions across the sequence.
+- Keep the text block last. If a Messenger payload ends on the attachment/button composition, the mobile push can appear as `attachment`; the trailing text makes the notification show a useful message preview.
 
-The final sentence of the teaching named `M01` twice. Do not make the exact M01/M02 alternation a universal write rule until Rodolfo confirms the second label.
+This composition and alternation are **not hard rules**. MGS may design the messages differently. They are the current standardized pattern because it produces the desired Messenger/mobile-notification behavior.
+
+## Hard rules — message count and schedule
+
+`Auto Principal Drip` must contain exactly 28 timed messages, M01 through M28, using this timing contract:
+
+- M01: 3 minutes
+- M02: 7 minutes
+- M03: 10 minutes
+- M04: 20 minutes
+- M05: 30 minutes
+- M06: 1 hour
+- M07 through M28: 2 hours through 23 hours respectively, increasing by one hour per message
+
+Expanded final mapping: M07=2h, M08=3h, M09=4h, M10=5h, M11=6h, M12=7h, M13=8h, M14=9h, M15=10h, M16=11h, M17=12h, M18=13h, M19=14h, M20=15h, M21=16h, M22=17h, M23=18h, M24=19h, M25=20h, M26=21h, M27=22h, M28=23h.
+
+Unlike the visual composition pattern, the 28-message count and exact intervals are operational rules and must be validated before any Drip is approved.
 
 ## Live read-only verification — Ameenah / page 13828
 
@@ -86,7 +104,7 @@ Observed composition:
 - M02, M04, M06, …, M26 used a text/arrow block as the first message block.
 - M28 also used `Generic Template`.
 
-This is live evidence for page 13828, not yet a universal alternation rule.
+This matches the running interleaving convention through M27. M28 also used `Generic Template`; that is a live composition choice, not a hard-rule violation because only the 28-message count and timing contract are mandatory.
 
 ## Confirmed current mismatch — page 13828
 
@@ -99,11 +117,11 @@ No correction is authorized merely by identifying this mismatch. A future write 
 ## Audit checklist
 
 - [ ] Correct segurador/profile and Page ID selected
-- [ ] Get Started CTA leads to the intended monetized site
+- [ ] JSON-rendered button uses the exact Get-started/M0 URL
 - [ ] No Match trigger/template and exact destination recorded
 - [ ] Initial blocks 1–6 match name/language/one-button/URL rules
 - [ ] Block 6 URL exactly equals No Match URL
 - [ ] New Sequence name and 00:00–24:00 window match the contract
-- [ ] M01–M28 exist and every branch is connected
+- [ ] Exactly M01–M28 exist, every branch is connected, and delays match 3m/7m/10m/20m/30m/1h/2h…23h
 - [ ] Message composition type is mapped before editing
 - [ ] No Save/Update/Reset/Delete action executed during inspection
