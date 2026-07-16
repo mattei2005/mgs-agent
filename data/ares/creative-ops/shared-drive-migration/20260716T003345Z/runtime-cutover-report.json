@@ -1,0 +1,41 @@
+{
+  "generated_at_utc": "2026-07-16T01:22:47.099965+00:00",
+  "status": "PASS",
+  "root_mapping": {
+    "old_my_drive_root_id": "14ica5TVauTrzAxcl4T-ViJorF89vRKIl",
+    "new_shared_drive_root_id": "0AEwt4Ye690ocUk9PVA"
+  },
+  "key_folder_mapping": {
+    "CRIATIVOS": "1h8wEYDcn2SYLZI-Cp4dMpxfwFUqQXhpa",
+    "UPLOAD MANUAL": "1ARBvLammWUHuAclNmcriwkkgeedKryBd",
+    "Atena - Content Reference Maps": "1NSmiobgjHH4IrfiYViSqK81Eg9psYqB0",
+    "Meta Utility Templates": "1WwUw5ZxMlNxfwwNTGj21omw2ypg6_ywe"
+  },
+  "updated_runtime_files": [
+    "scripts/monitor-drive-auth-unified.py",
+    "scripts/ares-drive-upload-manual-inventory.py",
+    "scripts/ares-execute-creative-copy-clean.py",
+    "profiles/ares-skills/growth/creative-operations-mgs/references/route-pack-02.md",
+    "profiles/ares-skills/growth/creative-operations-mgs/references/soul-router-naming-drive-handoff.md",
+    "profiles/atena-skills/wordpress/content-reference-map/references/financeadx-google-sheet-2026-06-29.md"
+  ],
+  "tests": {
+    "python_compile": "PASS",
+    "monitor_drive_auth_force_sa_dry_run": "PASS",
+    "upload_manual_inventory_shared_drive": "PASS",
+    "oauth_root_readback": "PASS",
+    "service_account_root_readback": "PASS",
+    "runtime_skill_cmp": "PASS",
+    "atena_reference_cmp": "PASS",
+    "old_root_operational_reference_scan": "PASS_WITH_EXPECTED_HISTORY_ONLY"
+  },
+  "permissions": {
+    "upload_manual_external_writers": [
+      "criativosevo@gmail.com",
+      "geizianp@gmail.com",
+      "geizianpereira@gmail.com"
+    ],
+    "readback": "PASS"
+  },
+  "restart_required": false
+}
