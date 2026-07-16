@@ -261,11 +261,12 @@ def append_sample(state: dict[str, Any], metrics: dict[str, int], now_epoch: int
 
 
 def burn_projection(state: dict[str, Any], metrics: dict[str, int], now_epoch: int) -> dict[str, Any]:
+    credits_until_threshold = max(0, metrics["credits"] - THRESHOLDS["emergency"])
     daily_average = int(metrics.get("daily_average_3d", 0) or 0)
     if daily_average > 0:
         return {
             "daily_sent": daily_average,
-            "hours_left": round(metrics["credits"] / daily_average * 24, 1),
+            "hours_left": round(credits_until_threshold / daily_average * 24, 1),
             "window_hours": 72.0,
         }
     samples = [sample for sample in state.get("samples", []) if isinstance(sample, dict)]
@@ -280,7 +281,7 @@ def burn_projection(state: dict[str, Any], metrics: dict[str, int], now_epoch: i
     per_hour = delta / (elapsed / 3600)
     return {
         "daily_sent": round(per_hour * 24),
-        "hours_left": round(metrics["credits"] / per_hour, 1) if per_hour > 0 else None,
+        "hours_left": round(credits_until_threshold / per_hour, 1) if per_hour > 0 else None,
         "window_hours": round(elapsed / 3600, 1),
     }
 
@@ -290,13 +291,15 @@ def projection_text(projection: dict[str, Any]) -> str:
     hours = projection.get("hours_left")
     if daily is None or hours is None:
         return "Média dos últimos 3 dias indisponível no momento."
+    if hours <= 0:
+        return f"Média dos últimos 3 dias: {fmt_int(daily)} SMS/dia · limite de {fmt_int(THRESHOLDS['emergency'])} SMS já atingido."
     if hours >= 48:
         value = f"{hours / 24:.1f}".replace(".", ",")
         remaining = f"aprox. {value} dias"
     else:
         value = f"{hours:.1f}".replace(".", ",")
         remaining = f"aprox. {value} horas"
-    return f"Média dos últimos 3 dias: {fmt_int(daily)} SMS/dia · saldo para {remaining}."
+    return f"Média dos últimos 3 dias: {fmt_int(daily)} SMS/dia · chega ao limite de {fmt_int(THRESHOLDS['emergency'])} em {remaining}."
 
 
 def metric_fields(metrics: dict[str, int], projection: dict[str, Any]) -> list[dict[str, Any]]:
