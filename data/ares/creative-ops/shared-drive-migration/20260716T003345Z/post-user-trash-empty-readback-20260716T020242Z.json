@@ -1,0 +1,71 @@
+{
+  "generated_at_utc": "2026-07-16T02:02:42.185248+00:00",
+  "status": "PASS",
+  "checks": {
+    "old_source_permanently_removed": true,
+    "backup_container_permanently_removed": true,
+    "target_items": true,
+    "target_folders": true,
+    "target_files": true,
+    "target_bytes": true,
+    "direct_children_exact": true,
+    "kelly_dest": true,
+    "evo_dest": true
+  },
+  "old_my_drive": {
+    "source_root": {
+      "http": 404,
+      "item": null
+    },
+    "backup_container": {
+      "http": 404,
+      "item": null
+    },
+    "external_originals": {
+      "total": 104,
+      "http_200": 104,
+      "http_404": 0,
+      "trashed_true": 0,
+      "no_parents": 0,
+      "still_parented_to_deleted_tree": 104
+    },
+    "kelly_originals": {
+      "total": 23,
+      "http_200": 23,
+      "http_404": 0,
+      "trashed_true": 0,
+      "no_parents": 0,
+      "still_parented_to_deleted_tree": 23
+    },
+    "evo_originals": {
+      "total": 81,
+      "http_200": 81,
+      "http_404": 0,
+      "trashed_true": 0,
+      "no_parents": 0,
+      "still_parented_to_deleted_tree": 81
+    }
+  },
+  "shared_drive": {
+    "items": 1443,
+    "folders": 304,
+    "files": 1139,
+    "bytes": 4882460554,
+    "direct_children": [
+      "Atena - Content Reference Maps",
+      "CRIATIVOS",
+      "Meta Utility Templates",
+      "pipeline gastos x receitas"
+    ],
+    "kelly_destination": {
+      "total": 23,
+      "validated": 23,
+      "mismatches": []
+    },
+    "evo_destination": {
+      "total": 81,
+      "validated": 81,
+      "mismatches": []
+    }
+  }
+}
