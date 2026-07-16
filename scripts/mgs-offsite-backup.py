@@ -768,14 +768,34 @@ def safe_extract(archive: zipfile.ZipFile, destination: Path) -> None:
     archive.extractall(destination)
 
 
-def sqlite_check(path: Path) -> None:
-    connection = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
+def sqlite_check(path: Path, *, repair_derived_fts: bool = False) -> list[str]:
+    connection = sqlite3.connect(path if repair_derived_fts else f"file:{path}?mode=ro", uri=not repair_derived_fts)
+    repaired: list[str] = []
     try:
         row = connection.execute("PRAGMA quick_check").fetchone()
+        result = row[0] if row else "missing quick_check result"
+        if result == "ok":
+            return repaired
+        if repair_derived_fts and "malformed inverted index for FTS5 table" in result:
+            tables = [
+                record[0]
+                for record in connection.execute(
+                    "SELECT name FROM sqlite_master WHERE type='table' "
+                    "AND sql LIKE 'CREATE VIRTUAL TABLE%USING fts5%'"
+                )
+            ]
+            for table in tables:
+                quoted = table.replace('"', '""')
+                connection.execute(f'INSERT INTO "{quoted}"("{quoted}") VALUES (\'rebuild\')')
+                repaired.append(table)
+            connection.commit()
+            row = connection.execute("PRAGMA quick_check").fetchone()
+            result = row[0] if row else "missing post-rebuild quick_check result"
+            if result == "ok":
+                return repaired
+        raise RuntimeError(f"SQLite integrity check failed: {path.name}: {result}")
     finally:
         connection.close()
-    if not row or row[0] != "ok":
-        raise RuntimeError(f"SQLite integrity check failed: {path.name}")
 
 
 def validate_restored_profile(profile: str, component_zip: Path, root: Path) -> dict[str, Any]:
@@ -797,9 +817,16 @@ def validate_restored_profile(profile: str, component_zip: Path, root: Path) -> 
     if not any(path.exists() for path in markers):
         raise RuntimeError(f"isolated Hermes import for {profile} has no expected marker")
     dbs = list(target.rglob("*.db"))
+    repaired_fts: list[str] = []
     for db in dbs:
-        sqlite_check(db)
-    return {"profile": profile, "imported": True, "sqlite_checked": len(dbs), "target_markers": sum(path.exists() for path in markers)}
+        repaired_fts.extend(sqlite_check(db, repair_derived_fts=True))
+    return {
+        "profile": profile,
+        "imported": True,
+        "sqlite_checked": len(dbs),
+        "derived_fts_rebuilt": sorted(set(repaired_fts)),
+        "target_markers": sum(path.exists() for path in markers),
+    }
 
 
 def restore_test(remote_id: str | None = None) -> dict[str, Any]:
