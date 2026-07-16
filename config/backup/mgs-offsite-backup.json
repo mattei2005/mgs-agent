@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "drive_root_id": "0AEwt4Ye690ocUk9PVA",
+  "drive_root_name": "MGS-AGENTS",
+  "drive_folder_name": "_DISASTER_RECOVERY",
+  "service_account_item": "Google Service Account - Ares Drive",
+  "backup_key_item": "MGS Disaster Recovery Backup Key",
+  "public_key_path": "/root/mgs-agent/config/backup/mgs-dr-backup-public.asc",
+  "profiles": [
+    "zeus",
+    "atena",
+    "ares"
+  ],
+  "state_path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
+  "log_path": "/root/mgs-agent/logs/mgs-offsite-backup.jsonl",
+  "lock_path": "/root/mgs-agent/tmp/mgs-offsite-backup.lock",
+  "retention_count": {
+    "hourly": 48,
+    "daily": 14,
+    "weekly": 8,
+    "monthly": 12
+  },
+  "monitor": {
+    "max_quick_age_hours": 2,
+    "max_full_age_hours": 36,
+    "max_restore_age_days": 8
+  }
+}
