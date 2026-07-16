@@ -2,6 +2,16 @@
   "checkpoints": [
     {
       "agent": "zeus",
+      "id": "chat-sms-canary-eggbev-20260716",
+      "next_step": "Comparar MGS Chat Funnels local/remoto e reutilizar o contrato de lead/SMS do plugin de quiz antes do patch",
+      "objective": "Criar variante chat-sms com captura SMS, links por gestor e relatórios, validada primeiro no Eggbev",
+      "source": "discord:message:1527431443024711883",
+      "state": "preflight: escopo autorizado; runtime e referências em auditoria",
+      "thread_id": "1527428793600315533",
+      "updated_at": "2026-07-16T21:48:17+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "knowledge-continuity-2026",
       "next_step": "Normal monitoring: route >=90% USER/MEMORY alerts and proposal metadata to #limites-90 (1527401973698007060); REPORT-INFRA remains in #alerts-infra; never apply compactation without explicit Rodolfo approval",
       "objective": "Preserve MGS institutional context without relying on individual agent memory",
@@ -13,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "sb-broadcast-templates-23-30-20260716",
-      "next_step": "Aplicar os 83 templates restantes via UI Ares, validar cada core e depois atualizar banco/tracker.",
+      "next_step": "Acompanhar a evolução assíncrona dos status de Approval no monitor read-only; não repetir o rollout sem novo escopo.",
       "objective": "Normalizar templates Messenger Broadcast usando links TXT",
-      "source": "/root/mgs-agent/work/sb-broadcast-23-30-20260716/plan.json",
-      "state": "preflight validado: 85 templates/85 backups/85 csvs; canários financeadx ca-fr 30 sem página e ducapes finance 30 com página aplicados, core validado ao vivo; sequência run approval→update→save comprovada.",
+      "source": "/root/mgs-agent/work/sb-broadcast-23-30-20260716/final-validation.json",
+      "state": "concluído: 85 templates validados por core ao vivo; 45 vinculados com 30 mensagens e run approval→update→save; 39 sem página com 23; financeadx ca-fr com 30; 2277 mensagens totais; banco atualizado com 1370 observações e 138 novos registros.",
       "thread_id": "1527356568578818198",
-      "updated_at": "2026-07-16T21:16:36+00:00"
+      "updated_at": "2026-07-16T21:44:53+00:00"
     },
     {
       "agent": "zeus",
@@ -32,5 +42,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T21:28:49+00:00"
+  "updated_at": "2026-07-16T21:48:17+00:00"
 }

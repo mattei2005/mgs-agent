@@ -13,7 +13,9 @@ Use this reference for a controlled Smart Bidding Messenger Broadcast Template n
 
 - Live `PAGES > 0`: normalize to exactly 30 messages.
 - Live `PAGES = 0`: normalize to exactly 23 messages.
+- An explicit per-template instruction from Rodolfo overrides the default count. Example class: a newly created unlinked template containing placeholder copy may be filled with 30 translated candidates now while Rodolfo links a page and runs Approval later.
 - Never infer page linkage from Page-tab counts; use Broadcast Template `PAGES`.
+- For a translation exception, select genuinely approved source-language messages, translate into the requested target language, validate the exact target count and normalized visible-text uniqueness, and do not run Approval while the row remains unlinked unless Rodolfo explicitly requests it.
 
 ## One-time status replacement rule
 
@@ -77,13 +79,17 @@ When the batch must preserve selected copy but rewrite the complete slot/link ma
 5. Unlinked: `Update` → reacquire the visible parent `Save` button → `Save`.
 6. The message modal may replace/detach the parent dialog DOM node after `Update`; do not reuse a stale parent locator.
 
-The first table GET immediately after Save can be stale even when production committed correctly. Retry the authenticated `/broadcast/Messenger` readback and compare immutable core before declaring failure or rerunning the template.
+The first table GET immediately after Save can be stale even when production committed correctly. Retry the authenticated `/broadcast/Messenger` readback and compare immutable core before declaring failure or rerunning the template. If the long-lived browser session continues returning the pre-save core, reconcile through a fresh authenticated dashboard session before reapplying; do not treat a same-session cached mismatch as proof that Save failed.
+
+For long batches, journal both `validated` and `saved_pending_fresh_readback` outcomes. Resume only rows with neither state, then close every pending readback through one final fresh full-scope capture. This prevents an idempotent-but-costly second import and second Approval caused solely by stale reads.
 
 ## Safety and verification
 
 - Freeze immutable IDs and current page counts.
-- Backup every full row before changing it.
+- Backup every full row before changing it and generate rollback-ready CSVs from those snapshots.
 - Validate final count, normalized visible-text uniqueness, exact language/vertical, and full ordered link list before any write.
 - After Save, re-read `/broadcast/Messenger` and compare immutable `MESSAGE_ID + TEXT + CTA_1 + LINK_1`; keep asynchronous status counters separate.
+- Final red, purple, or gray counters after a new Approval are new outcomes, not evidence that the old non-green copies remained. Prove replacement from the immutable core diff, then report the latest counters as asynchronous results.
+- Reconcile the final operational inventory against excluded rows too: confirm `Teste`/`NAO USAR` cores are unchanged and stable metadata (`NAME`, company, domain, language, pages, masks, bot fields) did not drift.
 - Journal one validated result per template and resume only pending rows after interruption.
 - Do not create file-only templates unless Rodolfo explicitly requests creation.

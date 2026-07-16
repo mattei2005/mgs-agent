@@ -1,0 +1,33 @@
+{
+  "status": "OK",
+  "validated_templates": 85,
+  "planned_templates": 85,
+  "linked_templates": 45,
+  "unlinked_templates": 40,
+  "message_status_total": {
+    "gray": 1631,
+    "green": 483,
+    "red": 61,
+    "purple": 102
+  },
+  "linked_status": {
+    "green": 483,
+    "gray": 704,
+    "red": 61,
+    "purple": 102
+  },
+  "unlinked_status": {
+    "gray": 927
+  },
+  "observations_for_bank": 1370,
+  "errors": [],
+  "journal_final_validations_added": 1,
+  "bank_update": {
+    "added_records": 138,
+    "existing_records_touched": 1232,
+    "new_observations": 1370,
+    "backup": "/root/mgs-agent/work/sb-broadcast-23-30-20260716/utility-message-bank.before-20260716T1744340400.json",
+    "records_after": 553,
+    "readback": true
+  }
+}
