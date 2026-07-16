@@ -16,6 +16,8 @@ Session reference: `references/utility-template-rollout-workflow-2026-06-29.md` 
 
 Production rollout reference: `references/linked-production-rollout-from-approved-canaries-2026-07-09.md` captures the validated class workflow for linked templates: same-vertical 20/20 canary banks, preserve green slots and destination links, replace scoped red/purple/gray slots, stage one production canary per vertical, resume partial runs safely, and separate immutable content/link verification from asynchronous approval counters.
 
+23/30 link-bank normalization: `references/broadcast-template-23-30-link-bank-rollout.md` captures full-scope account reconciliation, `PAGES`-based 23/30 targets, one-time replacement of every linked non-green slot, generation-and-bank feedback when unique approved copy is insufficient, exact link-slot handling, and Rodolfo's corrected `Run Approval → Update → Save → readback` sequence.
+
 ## Progressive disclosure — mandatory
 
 1. Identify the exact operational branch below.
