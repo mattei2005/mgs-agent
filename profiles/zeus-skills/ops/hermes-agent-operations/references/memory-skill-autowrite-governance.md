@@ -149,6 +149,31 @@ A newly generated class-level reference can legitimately supersede several narro
 
 The built-in memory store rejects an add/replace that would exceed its character limit and returns the current entries. That protects existing memory but does not preserve the unsaved proposal if a background reviewer fails to surface the tool error.
 
+### Interpret the percentage and create headroom safely
+
+A `98%` USER or MEMORY reading is the usage of that one bounded character store, not the model context window, VPS disk, process memory, or overall agent capacity. The store evaluates the projected result before writing, so a proposal can be rejected before the displayed usage reaches exactly `100%`. Existing bytes remain unchanged; the new proposal is the item at risk and must be surfaced or preserved through the deployed dead-letter path.
+
+Hermes has no practical unlimited sentinel for these limits. The configured value is an integer: zero/non-positive values are invalid for the MGS monitor and make ordinary non-empty writes overflow in the built-in comparison. A very large integer merely moves the ceiling; it does not create infinite context. USER/MEMORY is injected into the stable prompt of newly initialized agents, so actual growth consumes context and attention on every session even when prefix caching reduces repeated billing.
+
+Use layered capacity instead of an unbounded always-active prompt:
+
+1. Keep USER/MEMORY for facts that must shape ordinary turns.
+2. Put procedures and domain detail in routed class-level skills/references or canonical MGS data.
+3. Put institutional decisions/ownership in registry, checkpoints, and MGS OS sources.
+4. Use session history/search for long-tail conversation recall.
+5. Keep the failure-only dead-letter and capacity monitor as the no-silent-loss safety net.
+
+When Rodolfo authorizes a headroom increase, a safe sequence is:
+
+1. freeze scope to the named active profiles and back up live configs, mirrors, and the capacity monitor;
+2. change numeric limits with `hermes config set`, synchronize mirrors, and validate integer type plus semantic diff;
+3. adjust the monitor threshold independently and add a boundary test proving the new default;
+4. initialize a fresh configured `MemoryStore` per profile and verify the resolved limits, current usage, zero queue drift, and live/mirror equality;
+5. run memory/dead-letter tests, business regressions, inventory, audit, Git sync, and REPORT-INFRA;
+6. restart only when explicitly requested, through the detached safe finalizer with non-Zeus order preserved and Zeus last.
+
+A headroom increase and a compaction are separate mutations. If the promised workflow says Rodolfo will review a full before/after diff, approval to increase limits or restart does not waive that compaction gate. Increase the approved buffer first, then prepare the semantic compaction diff read-only, and apply it only after the separate review. Likewise, dead-letter deletion does not authorize rewriting USER/MEMORY.
+
 ### Deployment gate: approved design is not protection
 
 Never say a dead-letter mechanism protects writes merely because its design was approved or documented. Before relying on it, verify all three layers:
