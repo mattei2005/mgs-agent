@@ -3,14 +3,14 @@
     {
       "agent": "zeus",
       "id": "knowledge-continuity-2026",
-      "next_step": "Normal ongoing monitoring only: capacity alerts at 70%, dead-letter exceptions, OAuth health and institutional regression checks; reopen this checkpoint only on a material exception",
+      "next_step": "Change capacity alert from 70% to 90%; automatically create a secure read-only before/after compaction proposal at threshold; never apply it without Rodolfo approval; validate and close",
       "objective": "Preserve MGS institutional context without relying on individual agent memory",
-      "source": "discord:message:1527392129398083706",
-      "state": "phase5-closed-stable-no-compaction",
+      "source": "discord:message:1527396417373470740",
+      "state": "capacity-policy-90-proposal-only-authorized",
       "thread_id": "1527004682382479380",
-      "updated_at": "2026-07-16T19:12:04+00:00"
+      "updated_at": "2026-07-16T19:33:04+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T19:12:04+00:00"
+  "updated_at": "2026-07-16T19:33:04+00:00"
 }

@@ -9,6 +9,7 @@ strictly read-only and is used by REPORT-INFRA.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import subprocess
@@ -29,7 +30,8 @@ SUBSYSTEMS = ("memory", "skills")
 RODOLFO = "344196393512075265"
 DEFAULT_MEMORY_LIMIT = 2200
 DEFAULT_USER_LIMIT = 1375
-DEFAULT_CAPACITY_THRESHOLD_PERCENT = 70.0
+DEFAULT_CAPACITY_THRESHOLD_PERCENT = 90.0
+MEMORY_ENTRY_DELIMITER = "\n§\n"
 
 
 def _created_epoch(value: Any, fallback: float) -> float:
@@ -285,7 +287,141 @@ def _capacity_lines(summary: Dict[str, Any]) -> str:
     return "\n".join(lines) or "stores abaixo do limiar"
 
 
-def build_payload(summary: Dict[str, Any], decision: Dict[str, str]) -> Dict[str, Any]:
+def create_compaction_proposals(
+    summary: Dict[str, Any],
+    profiles_root: Path | str = DEFAULT_PROFILES_ROOT,
+    *,
+    now_epoch: Optional[float] = None,
+    dry_run: bool = False,
+) -> List[Dict[str, Any]]:
+    """Create secure read-only before/after proposals for stores at capacity.
+
+    The automatic transformation is deliberately conservative: it removes only
+    exact duplicate entries while preserving their first occurrence. If there
+    are no exact duplicates, before and after remain byte-identical and the
+    proposal records that semantic review is required. USER.md and MEMORY.md
+    are never modified here.
+    """
+    root = Path(profiles_root)
+    now = float(now_epoch if now_epoch is not None else time.time())
+    created_at = datetime.fromtimestamp(now).astimezone().isoformat()
+    proposals: List[Dict[str, Any]] = []
+
+    for key in summary.get("capacity", {}).get("warning_ids", []):
+        try:
+            profile, store = key.split(".", 1)
+            if profile not in PROFILES or store not in {"memory", "user"}:
+                raise ValueError("unsupported profile/store")
+            filename = "USER.md" if store == "user" else "MEMORY.md"
+            source = root / profile / "memories" / filename
+            before = source.read_text(encoding="utf-8")
+            before_hash = hashlib.sha256(before.encode("utf-8")).hexdigest()
+
+            entries = [part.strip() for part in before.split(MEMORY_ENTRY_DELIMITER) if part.strip()]
+            unique_entries = list(dict.fromkeys(entries))
+            duplicate_entries = len(entries) - len(unique_entries)
+            after = (
+                MEMORY_ENTRY_DELIMITER.join(unique_entries) + ("\n" if unique_entries else "")
+                if duplicate_entries
+                else before
+            )
+            after_hash = hashlib.sha256(after.encode("utf-8")).hexdigest()
+            proposal_id = hashlib.sha256(
+                f"memory-compaction-v1|{key}|{before_hash}".encode("utf-8")
+            ).hexdigest()[:16]
+            proposal_dir = root / profile / "pending" / "memory-compaction"
+            proposal_path = proposal_dir / f"{proposal_id}.json"
+            row = summary["capacity"]["rows"][key]
+            record = {
+                "id": proposal_id,
+                "kind": "memory_compaction_proposal",
+                "created_at": created_at,
+                "profile": profile,
+                "store": store,
+                "source_path": str(source),
+                "threshold_percent": summary["capacity"]["threshold_percent"],
+                "usage": {
+                    "chars": row["chars"],
+                    "limit": row["limit"],
+                    "percent": row["percent"],
+                },
+                "policy": {
+                    "apply_automatically": False,
+                    "requires_rodolfo_approval": True,
+                    "automatic_scope": "exact_duplicate_entries_only",
+                    "semantic_review_required": duplicate_entries == 0,
+                },
+                "before": {"sha256": before_hash, "chars": len(before), "text": before},
+                "after": {"sha256": after_hash, "chars": len(after), "text": after},
+                "savings_chars": len(before) - len(after),
+                "duplicate_entries_removed_in_proposal": duplicate_entries,
+            }
+
+            existed = proposal_path.exists()
+            if not dry_run and not existed:
+                proposal_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
+                os.chmod(proposal_dir, 0o700)
+                temp_name = None
+                try:
+                    with tempfile.NamedTemporaryFile(
+                        mode="w", encoding="utf-8", dir=proposal_dir,
+                        prefix=f".{proposal_id}.", suffix=".tmp", delete=False,
+                    ) as temp:
+                        temp_name = temp.name
+                        json.dump(record, temp, ensure_ascii=False, indent=2)
+                        temp.write("\n")
+                        temp.flush(); os.fsync(temp.fileno())
+                    os.chmod(temp_name, 0o600)
+                    os.replace(temp_name, proposal_path)
+                    os.chmod(proposal_path, 0o600)
+                    temp_name = None
+                finally:
+                    if temp_name:
+                        try: os.unlink(temp_name)
+                        except FileNotFoundError: pass
+
+            proposals.append({
+                "id": proposal_id,
+                "key": key,
+                "path": str(proposal_path),
+                "before_chars": len(before),
+                "after_chars": len(after),
+                "savings_chars": len(before) - len(after),
+                "duplicate_entries_removed": duplicate_entries,
+                "created": not existed and not dry_run,
+                "dry_run": dry_run,
+            })
+        except Exception as exc:
+            proposals.append({"key": key, "error": type(exc).__name__})
+    return proposals
+
+
+def _proposal_lines(proposals: List[Dict[str, Any]]) -> str:
+    lines = []
+    for item in proposals:
+        if item.get("error"):
+            lines.append(f"{item.get('key', 'unknown')}: erro={item['error']}")
+        else:
+            lines.append(f"{item['key']}: id={item['id']} economia={item['savings_chars']} chars")
+    return "\n".join(lines) or "nenhuma proposta"
+
+
+def _attach_proposals(payload: Dict[str, Any], proposals: List[Dict[str, Any]]) -> Dict[str, Any]:
+    if proposals and payload.get("embeds"):
+        payload["embeds"][0].setdefault("fields", []).append({
+            "name": "Proposta automática (não aplicada)",
+            "value": f"```text\n{_proposal_lines(proposals)[:850]}\n```",
+            "inline": False,
+        })
+    return payload
+
+
+def build_payload(
+    summary: Dict[str, Any],
+    decision: Dict[str, str],
+    proposals: Optional[List[Dict[str, Any]]] = None,
+) -> Dict[str, Any]:
+    proposals = proposals or []
     action = decision["action"]
     if action == "recovery":
         return {
@@ -339,7 +475,7 @@ def build_payload(summary: Dict[str, Any], decision: Dict[str, str]) -> Dict[str
                 "color": 15844367,
                 "fields": [
                     {"name": "Uso", "value": f"```text\n{_capacity_lines(summary)[:850]}\n```", "inline": False},
-                    {"name": "Ação", "value": "Revisar/compactar antes que writes válidos sejam recusados. O monitor não altera memória.", "inline": False},
+                    {"name": "Ação", "value": "Revisar a proposta before/after. Aplicação exige aprovação de Rodolfo; o monitor nunca altera USER/MEMORY.", "inline": False},
                 ],
             }],
         }
@@ -436,7 +572,16 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     state = _load_state(args.state_file)
     decision = decide(summary, state, now_epoch=now, reminder_hours=args.reminder_hours)
+    proposals = (
+        create_compaction_proposals(
+            summary, args.profiles_root, now_epoch=now, dry_run=args.dry_run,
+        )
+        if summary.get("capacity", {}).get("warning_count") and not summary.get("errors")
+        else []
+    )
     payload = build_payload(summary, decision) if decision["action"] != "none" else None
+    if payload is not None:
+        payload = _attach_proposals(payload, proposals)
     send_result = "not_sent"
     if payload is not None:
         send_result = _send(args.poster, args.channel_id, payload, dry_run=args.dry_run)
@@ -449,6 +594,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "reason": decision["reason"],
         "summary": report_field(summary),
         "discord": send_result,
+        "compaction_proposals": proposals,
         "dry_run": args.dry_run,
     }, ensure_ascii=False, separators=(",", ":")))
     return 0
