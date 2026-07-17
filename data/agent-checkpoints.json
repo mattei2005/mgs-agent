@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "google-cloud-mgs-core-cutover-20260717",
-      "next_step": "Obter confirmação crítica ampliada nominal; Rodolfo aplica Service Usage Consumer e cria chave Gemini no projeto novo; Zeus migra consumidores, executa canários e somente então remove OAuth/arquivos/membro/jobs/projetos antigos autorizados.",
+      "next_step": "Rodolfo concede Service Usage Consumer à mgsagent no mgs-core-prod, habilita Generative Language API e cria/salva chave Gemini nova; autoriza rotação do token 1Password Zeus. Zeus então executa cron canaries, substitui Gemini, remove OAuth/segredos/jobs/membro antigo, valida segunda varredura, inventário, audit e REPORT-INFRA.",
       "objective": "Consolidar credenciais Google Cloud/Drive/Sheets/Gemini dos agentes MGS no projeto mgs-core-prod e retirar dependências operacionais antigas com canários e readback.",
-      "source": "Discord thread 1527528492391075930, auditoria Zeus 2026-07-17",
-      "state": "auditoria concluída: mgsagent validada no mgs-agents e em três sheets; 13 consumidores/configs ativos ou ad hoc mapeados; root cron drive monitor e dtr/sb, quatro crons zeus e dois jobs desativados envolvidos; item sa antigo ausente; oauth antigo ainda em 1password e três arquivos locais; mattei2005 ainda manager; gemini antigo de projeto não comprovado; service usage consumer obrigatório; nenhuma exclusão executada.",
+      "source": "Discord thread 1527528492391075930; canary Drive/Sheets 2026-07-17T05:15Z",
+      "state": "migração local em andamento: defaults e consumidores drive/sheets alterados para google service account - mgs agent; oauth removido de monitor, criativos, dtr/sb, financeiro, meta app roles e b011; skills live+versionadas atualizadas; sintaxe validada; inventário ares read-only passou; canário real criou sheet no mgs-agents, escreveu/leu/atualizou com readback exato e apagou http 204. bloqueios: mgsagent não possui roles/serviceusage.serviceusageconsumer; sessão web zeus não autenticada; gemini api key atual tem formato válido mas api retorna 400 api_key_invalid. limpeza destrutiva antiga ainda não executada. diff de ferramenta expôs contexto da .env em trace interno; arquivo segue gitignored, mas token 1password precisa rotação separada.",
       "thread_id": "1527528492391075930",
-      "updated_at": "2026-07-17T04:58:50+00:00"
+      "updated_at": "2026-07-17T05:21:23+00:00"
     },
     {
       "agent": "zeus",
@@ -82,5 +82,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T04:58:50+00:00"
+  "updated_at": "2026-07-17T05:21:23+00:00"
 }

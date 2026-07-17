@@ -108,6 +108,39 @@ Drive/Sheets Service Account migration does not migrate a Gemini/Generative Lang
 
 Changing billing remains a separate critical gate.
 
+## Disposable Drive + Sheets canary
+
+Use a disposable Google Sheet in the canonical Shared Drive to prove the complete write contract:
+
+1. create the Sheet under the intended parent;
+2. call `spreadsheets.get` and resolve the real first-tab title — never assume `Sheet1` or `Canary`, because localization changes the default;
+3. write a bounded sentinel range;
+4. read it back exactly;
+5. update the sentinel and read it back exactly again;
+6. delete the canary in `finally` and verify HTTP 204/no residue.
+
+For an existing production Sheet, use a dedicated safe cell/tab, save the original value, restore it, and require exact restoration readback.
+
+## Secret-safe config editing
+
+Do not patch or diff an entire `.env` file when adjacent lines contain credentials: diff context can expose unrelated secrets in tool output or session traces.
+
+Use a deterministic updater that:
+
+- parses locally and modifies only an explicit allowlist of non-secret keys;
+- preserves all other lines byte-for-byte;
+- prints only changed key names, never lines or values;
+- verifies the file remains ignored by Git;
+- validates the runtime through sanitized metadata/readback.
+
+If a secret appears in a diff or trace, treat it as potentially exposed: do not repeat it, verify it was not committed, record the incident, and rotate it through controlled overlap (new token validated before old token revocation).
+
+## 1Password field discovery and anti-loop
+
+Protected field labels vary (`credencial`, `service_account_json`, `api_key`, etc.). Inspect only item metadata and field labels/types before requesting a value; do not assume a generic label such as `credential`.
+
+If a canary fails because a helper function, Sheet tab title, or item schema was guessed, inspect the helper's actual public functions or API metadata before retrying. Keep cleanup in `finally` so failed attempts leave no Drive residue.
+
 ## Destructive-scope confirmation
 
 A request to “move the Service Account” does not automatically authorize deleting every old project, key, OAuth token, membership, local secret file, or historical record. If scope expands, inventory exact targets and obtain a new critical confirmation naming:

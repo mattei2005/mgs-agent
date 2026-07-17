@@ -238,7 +238,7 @@ See `references/service-account-shared-drive-replacement-cutover.md` for a narro
 
 ## References
 
-- `references/google-cloud-service-account-cross-agent-cutover.md` — full-project/identity cutover across agents: permanent Project ID, 1Password attachment pitfall, Shared Drive role parity, Service Usage Consumer, OAuth/Gemini separation, exact destructive confirmation, and validated cleanup.
+- `references/google-cloud-service-account-cross-agent-cutover.md` — full-project/identity cutover across agents: permanent Project ID, 1Password attachment/field pitfalls, Shared Drive role parity, Service Usage Consumer, dynamically resolved Sheet canaries, OAuth/Gemini separation, secret-safe `.env` editing, exact destructive confirmation, and validated cleanup.
 - `references/service-account-shared-drive-replacement-cutover.md` — narrow replacement of an active Shared Drive Service Account, including project-ID naming, role parity, credential preflight, rollback, and 1Password attachment compatibility.
 - `references/service-account-my-drive-quota.md` — concrete MGS/Ares incident pattern and reusable Drive API probes.
 - `references/personal-my-drive-oauth-device-flow.md` — personal Google Drive OAuth setup notes, device-flow `invalid_scope` pitfall, `drive.file` limitation, and Desktop app fallback.
