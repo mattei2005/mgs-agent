@@ -119,13 +119,14 @@ Primary reference: `references/service-account-token-rotation-bootstrap.md`.
 
 Load it before replacing `OP_SERVICE_ACCOUNT_TOKEN`, revoking a service account, or recovering from premature revocation. The old identity must remain valid until the replacement has reached the host and passed a real vault read; `op whoami` alone is not sufficient validation.
 
-### VPS migration, restore, cutover, or new MGS agent
+### VPS migration, restore, cutover, new MGS agent, or final agent retirement
 
-Primary reference: `references/migration-agent-bootstrap.md`.
+- Migration, restore, host cutover, or new-agent bootstrap → `references/migration-agent-bootstrap.md`
+- Final archive-first retirement of an MGS/Hermes agent across profile, systemd, Git, Discord, 1Password, and Honcho → `references/retired-agent-archive-and-removal.md`
 
 For post-cutover OOM/swap, sandboxed credential diagnostics, retired IP/domain sweeps, hashed known-host entries, and downstream firewall allowlists, also load `references/post-migration-host-hardening.md`.
 
-Choose only one branch: migration/restore, deep comparison/decommission, post-migration hardening, or new-agent bootstrap.
+Choose only one branch: migration/restore, deep host decommission, final agent retirement, post-migration hardening, or new-agent bootstrap.
 
 ### Honcho memory/copilot or `/root/mgs-agent` Git auto-push
 

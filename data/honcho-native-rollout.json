@@ -87,6 +87,13 @@
     "content_empty": true,
     "readback": "pass"
   },
+  "capacity_monitor_report_infra": {
+    "channel_id": "1498132022634483894",
+    "message_id": "1527706639669657702",
+    "content_empty": true,
+    "embed_title": "REPORT-INFRA — modificada",
+    "readback": "pass"
+  },
   "runtime_patch": {
     "artifact": "patches/hermes/honcho-provider-shutdown-drain-2026-07-17.patch",
     "guard": "scripts/ensure-hermes-mgs-patches.sh",
