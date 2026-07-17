@@ -24,7 +24,7 @@ Ignore these legacy automation flows completely unless Rodolfo explicitly reopen
 
 They were prior automations that MGS will not use. Do not inspect, compare, edit, include in routine reports, or treat them as relevant alternatives merely because they remain visible in the Bot flow builder list.
 
-## Validated graph baseline
+## Historical baseline — before Rodolfo's M16 demonstration
 
 - 82 nodes, all 82 reachable, no disconnected nodes
 - Types: 32 `Text`, 17 `Button`, 16 `New Postback`, 15 `Sequence Single`, 1 `New Sequence`, 1 `Start Bot Flow`
@@ -35,10 +35,23 @@ They were prior automations that MGS will not use. Do not inspect, compare, edit
 - Immediate CTA: `✔️ ACCEPT CREDIT CARD` to `fineasier.com`
 - Timed CTAs: 15 unique URLs on `tarjeta.openzed.com`, with `utm_content=drip_us_cc_m1-1` through `m15-1`
 
+## Active readback — after Rodolfo's saved M16 demonstration
+
+Rodolfo cloned M15 into M16 and used the global Save during his 2026-07-16 teaching video. Zeus reconciled this as an authorized concurrent change and re-read the live graph afterward:
+
+- 87 nodes, all 87 reachable, no disconnected nodes;
+- types: 34 `Text`, 18 `Button`, 17 `New Postback`, 16 `Sequence Single`, 1 `New Sequence`, 1 `Start Bot Flow`;
+- M16 exists as a five-node cloned branch;
+- M15 and M16 both use an 11-hour Sequence item;
+- M16 inherited M15's message, button label and URL;
+- M16's URL still carries `utm_content=drip_us_cc_m15-1`.
+
+The 82-node state is historical and no longer active. Do not create another M16 on page 1084. This demonstration did not convert the legacy flow to the canonical 28-message schedule.
+
 ## Review findings to re-check live
 
 - **Legacy language mixing is expected:** historically MGS did not separate EN and ES flows/pages consistently. Therefore an account/page labeled `US-CC-EN` may legitimately contain Spanish timed messages or Spanish UTM naming inherited from the older setup. Do not classify this fact alone as an anomaly or current configuration error. Newer operations are separated more carefully, but legacy pages can remain mixed unless Rodolfo explicitly requests a cleanup/migration.
-- Fifteen message nodes contained zero-width Unicode formatting characters.
+- After the demonstrated clone, sixteen message nodes contained zero-width Unicode formatting characters (15 original plus cloned M16 text).
 - M04 used `#LEAD_USER_LAST_NAME#`; most other messages used `#LEAD_USER_FIRST_NAME#`.
 - Visible copy issues included `Chooce`, `asta` where `hasta` was expected, and `sóle`.
 - Advertised limits varied from roughly `$8,700` to `$16,000`.
