@@ -37,6 +37,8 @@ REPORT_SUMMARY_TAB='Resumo'
 REPORT_LEGACY_TOTAL_TAB='Paginas'
 REPORT_SHEET_LOCK=Path('/var/lock/sb-restricted-sheet-writer.lock')
 GOOGLE_TOKEN_FILE=BASE_DIR/'.secrets/ares-google-drive-oauth-client.json'
+GOOGLE_AUTH_MODE=os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE','oauth').strip().lower()
+GOOGLE_AUTH_HELPER_PATH=BASE_DIR/'scripts/mgs_google_workspace_auth.py'
 GLOBAL_IGNORE_PATH=BASE_DIR/'data/mgs-global-page-ignore-list.json'
 
 _op_spec=importlib.util.spec_from_file_location('mgs_op_item_resolver', OP_RESOLVER_PATH)
@@ -44,6 +46,12 @@ if not _op_spec or not _op_spec.loader:
     raise RuntimeError(f'cannot load 1Password resolver: {OP_RESOLVER_PATH}')
 OP_RESOLVER=importlib.util.module_from_spec(_op_spec)
 _op_spec.loader.exec_module(OP_RESOLVER)
+
+_google_auth_spec=importlib.util.spec_from_file_location('mgs_google_workspace_auth',GOOGLE_AUTH_HELPER_PATH)
+if not _google_auth_spec or not _google_auth_spec.loader:
+    raise RuntimeError(f'cannot load Google Service Account helper: {GOOGLE_AUTH_HELPER_PATH}')
+GOOGLE_AUTH=importlib.util.module_from_spec(_google_auth_spec)
+_google_auth_spec.loader.exec_module(GOOGLE_AUTH)
 
 MONTHS_EN={'january':1,'february':2,'march':3,'april':4,'may':5,'june':6,'july':7,'august':8,'september':9,'october':10,'november':11,'december':12}
 MONTHS_PT={'janeiro':1,'fevereiro':2,'março':3,'marco':3,'abril':4,'maio':5,'junho':6,'julho':7,'agosto':8,'setembro':9,'outubro':10,'novembro':11,'dezembro':12}
@@ -791,6 +799,10 @@ def exited_restrictions_from_sheet(removed_rows, fresh_sb_rows, tday):
     return exited
 
 def google_access_token():
+    if GOOGLE_AUTH_MODE=='service_account':
+        return GOOGLE_AUTH.service_account_access_token(GOOGLE_AUTH.SHEETS_SCOPE)
+    if GOOGLE_AUTH_MODE!='oauth':
+        raise RuntimeError(f'unsupported Google Sheets auth mode: {GOOGLE_AUTH_MODE}')
     creds=json.loads(GOOGLE_TOKEN_FILE.read_text(encoding='utf-8'))
     body=urllib.parse.urlencode({
         'client_id':creds['client_id'],

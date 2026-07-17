@@ -1,10 +1,18 @@
 #!/usr/bin/env python3
-import json, pathlib, urllib.parse, urllib.request, urllib.error
+import importlib.util, json, os, pathlib, urllib.parse, urllib.request, urllib.error
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from collections import Counter
 
+GOOGLE_AUTH_HELPER_PATH=pathlib.Path(__file__).resolve().parent/'mgs_google_workspace_auth.py'
+_google_auth_spec=importlib.util.spec_from_file_location('mgs_google_workspace_auth',GOOGLE_AUTH_HELPER_PATH)
+if not _google_auth_spec or not _google_auth_spec.loader:
+    raise RuntimeError(f'cannot load Google Service Account helper: {GOOGLE_AUTH_HELPER_PATH}')
+GOOGLE_AUTH=importlib.util.module_from_spec(_google_auth_spec)
+_google_auth_spec.loader.exec_module(GOOGLE_AUTH)
+
 TOKEN_FILE=pathlib.Path('/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json')
+AUTH_MODE=os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE','oauth').strip().lower()
 SHEET_ID='1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY'; GID=232316676
 STATE_PATH=pathlib.Path('/root/mgs-agent/data/sb-restricted-pages-monitor.json')
 NY=ZoneInfo('America/New_York')
@@ -13,6 +21,10 @@ COLS=8
 ROWS_CLEAR=200
 
 def token():
+    if AUTH_MODE=='service_account':
+        return GOOGLE_AUTH.service_account_access_token(GOOGLE_AUTH.SHEETS_SCOPE)
+    if AUTH_MODE!='oauth':
+        raise RuntimeError(f'unsupported Google Sheets auth mode: {AUTH_MODE}')
     c=json.loads(TOKEN_FILE.read_text())
     body=urllib.parse.urlencode({'client_id':c['client_id'],'client_secret':c['client_secret'],'refresh_token':c['refresh_token'],'grant_type':'refresh_token'}).encode()
     req=urllib.request.Request('https://oauth2.googleapis.com/token',data=body,headers={'Content-Type':'application/x-www-form-urlencoded'})

@@ -203,7 +203,17 @@ A different 403, `PERMISSION_DENIED` with missing `serviceusage.services.enable`
 2. Rodolfo enabling the API from the direct Cloud Console library page for the exact project;
 3. a separately confirmed admin OAuth flow when no admin session/identity exists.
 
-API activation is separate from file sharing. `permissions.create(role=writer)`, Drive HTTP 200, and `canEdit=true` prove the identity can reach the file through Drive; they do **not** prove Sheets cell reads/writes. Do not switch a production consumer until all of these pass with the Service Account: Sheets metadata HTTP 200, bounded write, readback of the exact sentinel, restoration/clear, and readback of the original value. Keep OAuth as rollback; revoking/deleting the refresh token is a later credential-gated action, not part of ordinary script cutover.
+API activation is separate from file sharing. `permissions.create(role=writer)`, Drive HTTP 200, and `canEdit=true` prove the identity can reach the file through Drive; they do **not** prove Sheets cell reads/writes.
+
+After an administrator enables `sheets.googleapis.com`, diagnose the **consumer IAM gate** separately. A Service Account can still receive a misleading disabled/recently-enabled 403 when it lacks `serviceusage.services.use` on its own consumer project. Probe once with `x-goog-user-project=<project-number>`:
+
+- `Caller does not have required permission to use project ...` → grant the Service Account the least-privilege role **Service Usage Consumer** (`roles/serviceusage.serviceUsageConsumer`), not Service Usage Admin.
+- Keep the file-level `writer` permission; the IAM role only authorizes API consumption and does not grant spreadsheet access.
+- Allow propagation, then require `spreadsheets.get` HTTP 200 through the exact Service Account identity.
+
+Do not switch a production consumer until all of these pass with the Service Account: Sheets metadata HTTP 200, bounded write, readback of the exact sentinel, restoration/clear, and readback of the original value. Keep OAuth as rollback; revoking/deleting the refresh token is a later credential-gated action, not part of ordinary script cutover.
+
+See `references/service-account-sheets-api-enablement-and-consumer-iam.md` for the two-layer Service Usage diagnosis, least-privilege IAM gate, and cutover verification sequence.
 
 ## References
 

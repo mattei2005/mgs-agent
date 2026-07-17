@@ -16,8 +16,10 @@ from __future__ import annotations
 import argparse
 import csv
 import datetime as dt
+import importlib.util
 import json
 import math
+import os
 import re
 import sys
 import urllib.error
@@ -29,6 +31,13 @@ from typing import Any
 
 import pandas as pd
 from zoneinfo import ZoneInfo
+
+GOOGLE_AUTH_HELPER_PATH = Path(__file__).resolve().parent / 'mgs_google_workspace_auth.py'
+_google_auth_spec = importlib.util.spec_from_file_location('mgs_google_workspace_auth', GOOGLE_AUTH_HELPER_PATH)
+if not _google_auth_spec or not _google_auth_spec.loader:
+    raise RuntimeError(f'cannot load Google Service Account helper: {GOOGLE_AUTH_HELPER_PATH}')
+GOOGLE_AUTH = importlib.util.module_from_spec(_google_auth_spec)
+_google_auth_spec.loader.exec_module(GOOGLE_AUTH)
 
 DEFAULT_TOKEN_FILE = Path('/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json')
 DEFAULT_OUT_ROOT = Path('/root/mgs-agent/work/revenue-spend-reporting')
@@ -435,7 +444,12 @@ def build_report(input_path: Path, out_dir: Path, fincgriffin_gb_to_us_g006: boo
     return values, audit
 
 
-def access_token(token_file: Path) -> str:
+def access_token(token_file: Path, auth_mode: str | None = None) -> str:
+    mode = (auth_mode or os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE', 'oauth')).strip().lower()
+    if mode == 'service_account':
+        return GOOGLE_AUTH.service_account_access_token(GOOGLE_AUTH.SHEETS_SCOPE)
+    if mode != 'oauth':
+        raise RuntimeError(f'unsupported Google Sheets auth mode: {mode}')
     creds = json.loads(token_file.read_text())
     body = urllib.parse.urlencode({
         'client_id': creds['client_id'], 'client_secret': creds['client_secret'],
@@ -458,8 +472,8 @@ def sheets_api(method: str, url: str, token: str, data: Any = None) -> Any:
         raise RuntimeError(f'HTTP {e.code}: {e.read().decode(errors="ignore")[:1500]}') from e
 
 
-def upload_to_sheet(values: dict[str, list[list[Any]]], sheet_id: str, token_file: Path) -> dict[str, int]:
-    token = access_token(token_file)
+def upload_to_sheet(values: dict[str, list[list[Any]]], sheet_id: str, token_file: Path, auth_mode: str | None = None) -> dict[str, int]:
+    token = access_token(token_file, auth_mode)
     meta = sheets_api('GET', f'https://sheets.googleapis.com/v4/spreadsheets/{sheet_id}?fields=sheets(properties(sheetId,title))', token)
     existing = {s['properties']['title']: s['properties']['sheetId'] for s in meta.get('sheets', [])}
     keep = list(values.keys())
@@ -525,6 +539,7 @@ def main() -> int:
     ap.add_argument('--sheet-id', help='Google Sheet ID to upload. If omitted, only local files are generated.')
     ap.add_argument('--out-dir', type=Path, help='Local audit/output directory.')
     ap.add_argument('--token-file', type=Path, default=DEFAULT_TOKEN_FILE)
+    ap.add_argument('--auth-mode', choices=('oauth', 'service_account'), default=os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE', 'oauth'))
     ap.add_argument('--preflight', action='store_true', help='Only inspect workbook structure; do not build/upload.')
     ap.add_argument('--fincgriffin-gb-to-us-g006', action='store_true', help='Cycle-specific override: reassign fincgriffin _gb to us-car-en/g006-d.')
     args = ap.parse_args()
@@ -539,7 +554,7 @@ def main() -> int:
         raise SystemExit('Reconciliação falhou; upload bloqueado')
     result = {'ok': True, 'audit': audit}
     if args.sheet_id:
-        result['readback_counts'] = upload_to_sheet(values, args.sheet_id, args.token_file)
+        result['readback_counts'] = upload_to_sheet(values, args.sheet_id, args.token_file, args.auth_mode)
         result['url'] = f'https://docs.google.com/spreadsheets/d/{args.sheet_id}/edit'
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
