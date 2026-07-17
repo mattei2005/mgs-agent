@@ -69,7 +69,7 @@ python3 /root/mgs-agent/scripts/monitor-drive-auth-unified.py --dry-run --force-
 Expected:
 
 ```text
-drive_auth status=ok primary=service_account sa=root_access_ok sa_checked=1 dry_run=1
+drive_auth status=ok primary=service_account sa=root_access_ok guard=legacy_runtime_clean guard_hits=0 sa_checked=1 dry_run=1
 ```
 
 A generic watchdog pass does not prove a specific consumer. After this check, run the exact blocked consumer or probe its exact Sheet/file ID.
@@ -142,6 +142,10 @@ Any non-service-account selector               stop as configuration conflict
 
 Scan live scripts, profile skills, `.env` key names, Hermes jobs, root crontab, systemd units, `.secrets` and operational state files. Do not print values.
 
+When Rodolfo asks whether **anything** was left behind, do not stop at active production roots. Perform both operational closure and retention closure across `work/`, `tmp/`, agent artifacts, archived skills, curator snapshots, local backups and encrypted off-site backups. If full disaster-recovery archives included `.secrets` while the retired credential existed, classify those archives as credential-bearing even though encrypted. Create and restore-test a clean replacement before requesting the Critical Subset confirmation needed to delete old remote backups.
+
+Use `references/deep-google-auth-residue-and-backup-closure.md` for the full filesystem/process/backup sequence, neutralization patterns, continuous guard and final reporting contract.
+
 The final state requires:
 
 - no credential-bearing personal Google files;
@@ -168,4 +172,6 @@ Use `references/service-account-identity-replacement-permission-closure.md` for 
 - [ ] All production selectors are `service_account`.
 - [ ] Generic personal-auth helpers fail closed in every MGS profile.
 - [ ] No active legacy credential file, job, cron, service or fallback remains.
+- [ ] Work/tmp/artifact/archive residues are migrated or explicitly fail closed.
+- [ ] Full off-site backups created during the retired credential lifetime are classified; a clean replacement is restore-tested before any Critical Subset deletion.
 - [ ] Inventory, checkpoint, audit and REPORT-INFRA are updated.
