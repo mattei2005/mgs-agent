@@ -12,7 +12,7 @@ GOOGLE_AUTH=importlib.util.module_from_spec(_google_auth_spec)
 _google_auth_spec.loader.exec_module(GOOGLE_AUTH)
 
 TOKEN_FILE=pathlib.Path('/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json')
-AUTH_MODE=os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE','oauth').strip().lower()
+AUTH_MODE=os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE','service_account').strip().lower()
 SHEET_ID='1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY'; GID=232316676
 STATE_PATH=pathlib.Path('/root/mgs-agent/data/sb-restricted-pages-monitor.json')
 NY=ZoneInfo('America/New_York')

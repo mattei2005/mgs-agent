@@ -29,6 +29,7 @@ STATE_FILE = Path(os.environ.get("MGS_DRIVE_AUTH_STATE_FILE", str(BASE / "data/d
 ROOT_ID = os.environ.get("MGS_DRIVE_ROOT_ID", "0AEwt4Ye690ocUk9PVA")
 SA_ITEM = os.environ.get("MGS_DRIVE_SA_ITEM", "Google Service Account - Ares Drive")
 SA_INTERVAL = int(os.environ.get("MGS_DRIVE_SA_INTERVAL_SECONDS", "86400"))
+PRIMARY_MODE = os.environ.get("MGS_DRIVE_AUTH_PRIMARY", "service_account").strip().lower()
 REMIND_INTERVAL = int(os.environ.get("MGS_DRIVE_ALERT_REPEAT_SECONDS", "21600"))
 CHANNEL_ID = os.environ.get("MGS_DRIVE_ALERT_CHANNEL_ID", "1498132022634483894")
 RODOLFO_ID = "344196393512075265"
@@ -236,18 +237,21 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--force-sa", action="store_true")
+    parser.add_argument("--check-user-rollback", action="store_true")
     args = parser.parse_args()
+    if PRIMARY_MODE not in {"service_account", "user_oauth"}:
+        raise RuntimeError(f"unsupported primary auth mode: {PRIMARY_MODE}")
     now = int(time.time())
     state = load_state()
-    user = check_user_oauth()
+    user = check_user_oauth() if PRIMARY_MODE == "user_oauth" or args.check_user_rollback else {"ok": False, "state": "not_checked_rollback"}
     last_sa_check = int(state.get("last_sa_check_ts") or 0)
-    should_check_sa = args.force_sa or not user.get("ok") or not state.get("sa_result") or now - last_sa_check >= SA_INTERVAL
+    should_check_sa = PRIMARY_MODE == "service_account" or args.force_sa or not user.get("ok") or not state.get("sa_result") or now - last_sa_check >= SA_INTERVAL
     if should_check_sa:
         sa = check_service_account()
         last_sa_check = now
     else:
         sa = state.get("sa_result", {"ok": False, "state": "not_checked"})
-    healthy = bool(user.get("ok") or sa.get("ok"))
+    healthy = bool(sa.get("ok")) if PRIMARY_MODE == "service_account" else bool(user.get("ok") or sa.get("ok"))
     previous_healthy = state.get("healthy")
     last_alert = int(state.get("last_alert_ts") or 0)
     should_alert = not healthy and (previous_healthy is not False or now - last_alert >= REMIND_INTERVAL)
@@ -260,7 +264,7 @@ def main() -> int:
         "sa_result": sa,
         "last_sa_check_ts": last_sa_check,
         "last_alert_ts": now if should_alert else last_alert,
-        "primary_credential": "user_oauth" if user.get("ok") else ("service_account" if sa.get("ok") else "none"),
+        "primary_credential": "service_account" if PRIMARY_MODE == "service_account" and sa.get("ok") else ("user_oauth" if PRIMARY_MODE == "user_oauth" and user.get("ok") else "none"),
     }
     if not args.dry_run:
         save_state(new_state)
@@ -269,8 +273,9 @@ def main() -> int:
     elif should_recover:
         send_payload(payload_for(user, sa, recovered=True), args.dry_run)
     print(
-        "drive_auth status={} user={} sa={} sa_checked={} dry_run={}".format(
+        "drive_auth status={} primary={} user={} sa={} sa_checked={} dry_run={}".format(
             "ok" if healthy else "fail",
+            PRIMARY_MODE,
             user.get("state", "unknown"),
             sa.get("state", "unknown"),
             int(should_check_sa),

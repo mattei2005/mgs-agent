@@ -447,7 +447,7 @@ def build_report(input_path: Path, out_dir: Path, fincgriffin_gb_to_us_g006: boo
 
 def access_token(token_file: Path, auth_mode: str | None = None) -> str:
     global GOOGLE_QUOTA_PROJECT
-    mode = (auth_mode or os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE', 'oauth')).strip().lower()
+    mode = (auth_mode or os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE', 'service_account')).strip().lower()
     if mode == 'service_account':
         GOOGLE_QUOTA_PROJECT = GOOGLE_AUTH.service_account_project_id()
         return GOOGLE_AUTH.service_account_access_token(GOOGLE_AUTH.SHEETS_SCOPE)
@@ -544,7 +544,7 @@ def main() -> int:
     ap.add_argument('--sheet-id', help='Google Sheet ID to upload. If omitted, only local files are generated.')
     ap.add_argument('--out-dir', type=Path, help='Local audit/output directory.')
     ap.add_argument('--token-file', type=Path, default=DEFAULT_TOKEN_FILE)
-    ap.add_argument('--auth-mode', choices=('oauth', 'service_account'), default=os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE', 'oauth'))
+    ap.add_argument('--auth-mode', choices=('oauth', 'service_account'), default=os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE', 'service_account'))
     ap.add_argument('--preflight', action='store_true', help='Only inspect workbook structure; do not build/upload.')
     ap.add_argument('--fincgriffin-gb-to-us-g006', action='store_true', help='Cycle-specific override: reassign fincgriffin _gb to us-car-en/g006-d.')
     args = ap.parse_args()
