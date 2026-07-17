@@ -81,8 +81,32 @@ def _protected_literals(text: str) -> List[str]:
     return sorted(_PROTECTED_RE.findall(text))
 
 
+def _entry_budgets(entries: Sequence[str], target_chars: int) -> List[int]:
+    delimiter_chars = len(ENTRY_DELIMITER) * max(0, len(entries) - 1)
+    content_target = target_chars - delimiter_chars
+    if content_target <= 0:
+        raise CompactionError("target_unreachable_under_guard")
+    lengths = [len(entry) for entry in entries]
+    budgets = list(lengths)
+    required = max(0, sum(lengths) - content_target)
+    for index in sorted(range(len(entries)), key=lambda item: lengths[item], reverse=True):
+        if required <= 0:
+            break
+        minimum = max(35, math.ceil(lengths[index] * 0.55))
+        reducible = max(0, budgets[index] - minimum)
+        reduction = min(required, reducible)
+        budgets[index] -= reduction
+        required -= reduction
+    if required > 0:
+        raise CompactionError("target_unreachable_under_guard")
+    return budgets
+
+
 def _validate_candidate(
-    original: Sequence[str], candidate: Dict[str, Any], target_chars: int
+    original: Sequence[str],
+    candidate: Dict[str, Any],
+    target_chars: int,
+    budgets: Sequence[int],
 ) -> List[str]:
     raw_entries = candidate.get("entries")
     if not isinstance(raw_entries, list) or len(raw_entries) != len(original):
@@ -109,10 +133,13 @@ def _validate_candidate(
     result = [by_index[index] for index in expected]
     if len(set(result)) != len(result):
         raise CompactionError("candidate_duplicate_entries")
-
     for old, new in zip(original, result):
         if _protected_literals(old) != _protected_literals(new):
             raise CompactionError("protected_literals_changed")
+    if len(budgets) != len(result):
+        raise CompactionError("candidate_budget_shape_invalid")
+    if any(len(text) > budgets[index] for index, text in enumerate(result)):
+        raise CompactionError("candidate_entry_above_budget")
 
     rendered = _render_entries(result)
     if len(rendered) >= len(_render_entries(original)):
@@ -146,10 +173,14 @@ def _proposal_prompt(
     store: str,
     entries: Sequence[str],
     target_chars: int,
+    budgets: Sequence[int],
     *,
     attempt: int = 1,
 ) -> str:
-    payload = [{"index": i + 1, "text": value} for i, value in enumerate(entries)]
+    payload = [
+        {"index": i + 1, "max_chars": budgets[i], "text": value}
+        for i, value in enumerate(entries)
+    ]
     retry = ""
     if attempt > 1:
         retry = (
@@ -164,7 +195,8 @@ def _proposal_prompt(
         "channel, code literal and exception exactly. Remove filler and repeated phrasing; "
         "use concise labels, semicolons and standard abbreviations where meaning is unchanged. "
         "Return strict JSON with exactly this schema: "
-        "{\"entries\":[{\"index\":1,\"text\":\"...\"}]}. "
+        "{\"entries\":[{\"index\":1,\"text\":\"...\"}]}. Each returned text must "
+        "respect that input entry's max_chars hard limit. "
         f"The rendered entries, joined by {ENTRY_DELIMITER!r}, must total at most "
         f"{target_chars} characters. Store type: {store}.{retry} Data: "
         + json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
@@ -222,17 +254,24 @@ def propose_and_verify(
     retryable = {
         "candidate_not_shorter",
         "candidate_above_target",
+        "candidate_entry_above_budget",
         "protected_literals_changed",
         "candidate_entry_count_mismatch",
         "candidate_indexes_invalid",
     }
     last_error: CompactionError | None = None
+    budgets = _entry_budgets(entries, target_chars)
     for attempt in range(1, max_proposal_attempts + 1):
         try:
             candidate = _validate_candidate(
                 entries,
-                llm_runner(_proposal_prompt(store, entries, target_chars, attempt=attempt)),
+                llm_runner(
+                    _proposal_prompt(
+                        store, entries, target_chars, budgets, attempt=attempt
+                    )
+                ),
                 target_chars,
+                budgets,
             )
             break
         except CompactionError as exc:
