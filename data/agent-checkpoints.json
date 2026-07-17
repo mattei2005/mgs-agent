@@ -13,12 +13,12 @@
     {
       "agent": "zeus",
       "id": "digitaltrchat-portfolio-audit-write-pilot-20260716",
-      "next_step": "Rodolfo define alvo e valores exatos para o primeiro piloto de escrita do Zeus; não duplicar M16 já existente na página 1084; executar backup, mudança estreita, Done/Save ou Update, reload/readback e rollback se necessário",
+      "next_step": "Aguardar próximo escopo explícito de Rodolfo e, para a auditoria global, receber catálogo canônico de links por site/funil/vertical/língua; manter backup→dry-run→Save→readback independente em cada write",
       "objective": "Capacitar Zeus para auditar e corrigir Get-started/M0, No Match e Auto Principal Drip em todas as páginas/seguradores e executar criação segura de mensagens",
-      "source": "discord:message:1527461602431991898; skill:digitaltrchat-drip-flow-builder/references/digitaltrchat-write-procedures.md; live:https://digitaltrchat.com/visual_flow_builder/edit_builder_data/115078/1/fb",
-      "state": "modelo operacional, ciclo saved template e procedimentos de escrita ensinados; vídeos analisados; skill digitaltrchat-drip-flow-builder v1.2.0; mudança de rodolfo na página 1084 reconciliada por readback com 87/87 nós e m16 existente; zeus ainda não realizou seu primeiro write em produção",
+      "source": "discord:message:1527466861019533434; /root/mgs-agent/work/dtr-m17-pilot-20260716/independent-readback.json; skill:digitaltrchat-drip-flow-builder/references/digitaltrchat-write-procedures.md",
+      "state": "primeiro write do zeus validado na página 1084: backup e dry-run, m16 11h→12h, m17 criada a 13h preservando conteúdo/botão/link, save e readback independente; 92/92 nós, zero desconectados, diff restrito aos nós esperados; skill v1.3.0",
       "thread_id": "1527441676975738981",
-      "updated_at": "2026-07-16T23:58:59+00:00"
+      "updated_at": "2026-07-17T00:23:23+00:00"
     },
     {
       "agent": "zeus",
@@ -62,5 +62,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T23:58:59+00:00"
+  "updated_at": "2026-07-17T00:23:23+00:00"
 }

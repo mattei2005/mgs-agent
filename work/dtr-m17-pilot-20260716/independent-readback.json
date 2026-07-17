@@ -1,0 +1,4290 @@
+{
+  "id": "xitFB@0.0.1",
+  "nodes": {
+    "1": {
+      "id": 1,
+      "data": {
+        "title": "Auto Principal Drip",
+        "postbackId": "vTDkmD9g_csUKSy",
+        "xitFbUniqueId": "tH5rh-gjkXXkhSv2nKwkHYs9vHW-PyccvXKx",
+        "labelIds": [],
+        "labelIdTextsArray": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence"
+      },
+      "inputs": {
+        "referenceInput": {
+          "connections": []
+        },
+        "referenceInputActionButton": {
+          "connections": []
+        }
+      },
+      "outputs": {
+        "referenceOutput": {
+          "connections": [
+            {
+              "node": 2,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "referenceOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        -1842.3342949521261,
+        373.92298840466697
+      ],
+      "name": "Start Bot Flow"
+    },
+    "2": {
+      "id": 2,
+      "data": {
+        "textMessage": " Hello #LEAD_USER_FIRST_NAME# Congratulations on your initiative, complete the steps to Receive your card👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false,
+        "uniqueId": "a-9FjITS6U17G4W"
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 1,
+              "output": "referenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 3,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        -1490.3359762155178,
+        316.18884195133523
+      ],
+      "name": "Text"
+    },
+    "3": {
+      "id": 3,
+      "data": {
+        "buttonText": "✔️ CONTINUE",
+        "buttonType": "new_post_back",
+        "text": "New postback",
+        "postbackId": "wjCPZsWJi7zjNIi"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 2,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": [
+            {
+              "node": 4,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        -1114.036957217697,
+        325.2323510141204
+      ],
+      "name": "Button"
+    },
+    "4": {
+      "id": 4,
+      "data": {
+        "title": "Auto Principal Drip",
+        "postbackId": "TVbUl2ygd81ORE0",
+        "labelIds": [],
+        "labelIdTexts": {
+          "length": 0,
+          "prevObject": {
+            "0": {
+              "location": {
+                "ancestorOrigins": {},
+                "href": "https://chatbotilimitado.tk/visual_flow_builder/load_builder/1067/1",
+                "origin": "https://chatbotilimitado.tk",
+                "protocol": "https:",
+                "host": "chatbotilimitado.tk",
+                "hostname": "chatbotilimitado.tk",
+                "port": "",
+                "pathname": "/visual_flow_builder/load_builder/1067/1",
+                "search": "",
+                "hash": ""
+              },
+              "jQuery351077053271120752841": {
+                "events": {
+                  "mouseup": [
+                    {
+                      "type": "mouseup",
+                      "origType": "mouseup",
+                      "guid": 3,
+                      "namespace": ""
+                    }
+                  ],
+                  "click": [
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 4,
+                      "selector": "[data-dismiss=\"alert\"]",
+                      "needsContext": false,
+                      "namespace": "alert.bs.data-api"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 5,
+                      "selector": "[data-toggle^=\"button\"]",
+                      "needsContext": false,
+                      "namespace": "bs.button.data-api"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 8,
+                      "selector": "[data-slide], [data-slide-to]",
+                      "needsContext": false,
+                      "namespace": "bs.carousel.data-api"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 10,
+                      "selector": "[data-toggle=\"collapse\"]",
+                      "needsContext": false,
+                      "namespace": "bs.collapse.data-api"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 13,
+                      "selector": "[data-toggle=\"dropdown\"]",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.dropdown"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 14,
+                      "selector": ".dropdown form",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.dropdown"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 15,
+                      "selector": "[data-toggle=\"modal\"]",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.modal"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 17,
+                      "selector": "[data-toggle=\"tab\"], [data-toggle=\"pill\"], [data-toggle=\"list\"]",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.tab"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 12,
+                      "namespace": "bs.data-api.dropdown"
+                    }
+                  ],
+                  "focusout": [
+                    {
+                      "type": "focusout",
+                      "origType": "blur",
+                      "guid": 6,
+                      "selector": "[data-toggle^=\"button\"]",
+                      "needsContext": false,
+                      "namespace": "bs.button.data-api"
+                    }
+                  ],
+                  "focusin": [
+                    {
+                      "type": "focusin",
+                      "origType": "focus",
+                      "guid": 6,
+                      "selector": "[data-toggle^=\"button\"]",
+                      "needsContext": false,
+                      "namespace": "bs.button.data-api"
+                    }
+                  ],
+                  "keydown": [
+                    {
+                      "type": "keydown",
+                      "origType": "keydown",
+                      "guid": 11,
+                      "selector": "[data-toggle=\"dropdown\"]",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.dropdown"
+                    },
+                    {
+                      "type": "keydown",
+                      "origType": "keydown",
+                      "guid": 11,
+                      "selector": ".dropdown-menu",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.dropdown"
+                    },
+                    {
+                      "type": "keydown",
+                      "origType": "keydown",
+                      "guid": 30,
+                      "namespace": ""
+                    }
+                  ],
+                  "keyup": [
+                    {
+                      "type": "keyup",
+                      "origType": "keyup",
+                      "guid": 12,
+                      "namespace": "bs.data-api.dropdown"
+                    }
+                  ],
+                  "change": [
+                    {
+                      "type": "change",
+                      "origType": "change",
+                      "guid": 569,
+                      "selector": "#sequence-single-promotional, #sequence-single-non-promotional",
+                      "needsContext": false,
+                      "namespace": ""
+                    },
+                    {
+                      "type": "change",
+                      "origType": "change",
+                      "guid": 609,
+                      "selector": "#sequence-single-promotional, #sequence-single-non-promotional",
+                      "needsContext": false,
+                      "namespace": ""
+                    },
+                    {
+                      "type": "change",
+                      "origType": "change",
+                      "guid": 649,
+                      "selector": "#sequence-single-promotional, #sequence-single-non-promotional",
+                      "needsContext": false,
+                      "namespace": ""
+                    },
+                    {
+                      "type": "change",
+                      "origType": "change",
+                      "guid": 689,
+                      "selector": "#sequence-single-promotional, #sequence-single-non-promotional",
+                      "needsContext": false,
+                      "namespace": ""
+                    }
+                  ]
+                },
+                "focusout": 18,
+                "focusin": 18
+              }
+            },
+            "length": 1
+          }
+        },
+        "sequenceIdValue": "newSequence",
+        "sequenceIdText": "New Sequence",
+        "labelIdTextsArray": []
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 3,
+              "output": "buttonOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 12,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": [
+            {
+              "node": 25,
+              "input": "sequenceInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        -814.6945788815206,
+        318.23324897874005
+      ],
+      "name": "New Postback"
+    },
+    "7": {
+      "id": 7,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "3",
+        "promotionalText": "3 min",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 328,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        233.91188055326208,
+        -1561.7542867583911
+      ],
+      "name": "Sequence Single"
+    },
+    "12": {
+      "id": 12,
+      "data": {
+        "textMessage": "URGENT! \nI have important News for #LEAD_USER_FIRST_NAME#\n\nAfter reviewing all your applications, I have a response that could be decisive for the approval of your Credit Card. \n\nChooce your option below:👇 \n",
+        "delayReplyFor": "3",
+        "IsTypingOnDisplayChecked": true,
+        "uniqueId": "cUND1BYOH3oNIyR"
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 4,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 13,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        -539.1434918234412,
+        204.65993375201177
+      ],
+      "name": "Text"
+    },
+    "13": {
+      "id": 13,
+      "data": {
+        "buttonText": "✔️ ACCEPT CREDIT CARD",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://fineasier.com/usa-ccr-eng-nm/?utm_source=facebook&utm_medium=mg01-d&utm_campaign=pg_#PAGE_ID#&utm_content=drip_usa-ccr-eng-nm",
+        "postbackId": "x0A6df-hCmyCOyc"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 12,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        -112.10944768623153,
+        -111.58073841002127
+      ],
+      "name": "Button"
+    },
+    "15": {
+      "id": 15,
+      "data": {
+        "textMessage": "#LEAD_USER_FIRST_NAME#, ¡E‎‍s‎‌t‎‍á‎‌s a‎‍ u‎‌n s‎‍o‎‌l‎‍o p‎‌a‎‍s‎‌o d‎‍e t‎‌u t‎‍a‎‌r‎‍j‎‌e‎‍t‎‌a d‎‍e c‎‌r‎‍é‎‌d‎‍i‎‌t‎‍o! 💳‎‏‎‎‏‏‎ ‎  \nO‎‍b‎‌t‎‍e‎‌n a‎‍p‎‌r‎‍o‎‌b‎‍a‎‌c‎‍i‎‌ó‎‍n d‎‌e a‎‍s‎‌t‎‍a $‎‌1‎‍0‎‌,‎‍0‎‌0‎‍0 — s‎‌i‎‍n c‎‌u‎‍o‎‌t‎‍a a‎‌n‎‍u‎‌a‎‍l ✅‎‏‎‎‏‏‎ ‎  \n\n⏳‎‏‎‎‏‏‎ ‎N‎‍o t‎‌e p‎‍i‎‌e‎‍r‎‌d‎‍a‎‌s e‎‍s‎‌t‎‍a o‎‌f‎‍e‎‌r‎‍t‎‌a p‎‍o‎‌r t‎‍i‎‌e‎‍m‎‌p‎‍o l‎‌i‎‍m‎‌i‎‍t‎‌a‎‍d‎‌o.  \n\n⬆​ ​T​o​q​u​e​ ​e​l​ ​b​o​t​ó​n​ ​d​e​ ​a​r​r​i​b​a​ ​p​a​r​a​ ​a‎‍s‎‌e‎‍g‎‌u‎‍r‎‌a‎‍r t‎‌u t‎‍a‎‌r‎‍j‎‌e‎‍t‎‌a.​\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true,
+        "uniqueId": "-3h_6xmrbhukvPP"
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 236,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1700.344126820865,
+        -1752.427662944968
+      ],
+      "name": "Text"
+    },
+    "22": {
+      "id": 22,
+      "data": {
+        "textMessage": "#LEAD_USER_FIRST_NAME#,​ ​¿​p​u​d​o​ ​s​o​l​i​c​i​t​a​r​ ​l​a​ ​t​a​r​j​e​t​a​?​ 💳\nN​o​ ​h​e​m​o​s​ ​e​n​c​o​n​t​r​a​d​o​ ​s​u​ ​r​e​g​i​s​t​r​o​ ​a​ú​n​.​ ​P​o​r​ ​f​a​v​o​r​,​ ​v​i​s​i​t​e​ ​e​l​ ​s​i​t​i​o​ ​w​e​b​ ​a​ ​c​o​n​t​i​n​u​a​r​ ​c​o​n​ ​s​u​ ​s​o​l​i​c​i​t​u​d​ ​r​á​p​i​d​a​m​e​n​t​e​.​​\n\nO​b​t​e​n​g​a​ ​s​u​ ​t​a​r​j​e​t​a​ ​c​o​n​ ​u​n​ ​lí​m​i​t​e​ ​d​e​ ​$​8​,​7​2​5​ ​✔\n\n⬆​ ​T​o​q​u​e​ ​e​l​ ​b​o​t​ó​n​ ​S​O​L​I​C​I​T​A​R​ ​T​A​R​J​E​T​A​ ​a​r​r​i​b​a​ ​p​a​r​a​ ​c​o​n​t​i​n​u​a​r​.\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true,
+        "uniqueId": "UdxqcOTnFJt7P_6"
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 234,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1705.9391511850347,
+        -2287.5843603472786
+      ],
+      "name": "Text"
+    },
+    "25": {
+      "id": 25,
+      "data": {
+        "xitFbUniqueSequenceId": "V74qzseTSoggn_uthjTrpyultrNdLQM_a_YU",
+        "name": "Auto Principal Drip",
+        "startingTime": "00:00",
+        "closingTime": "24:00",
+        "timezone": "America/New_York",
+        "messageTag": "",
+        "messageTagText": "Select",
+        "uniqueId": "fmBDAsjTsHGwhf2uDmxEaeI0w8CtZ1A0osp2"
+      },
+      "inputs": {
+        "sequenceInput": {
+          "connections": [
+            {
+              "node": 4,
+              "output": "newPostbackOutputSequence",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceOutput": {
+          "connections": [
+            {
+              "node": 7,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 33,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 45,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 58,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 60,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 63,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 67,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 77,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 83,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 91,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 97,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 140,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 141,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 142,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 143,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 341,
+              "input": "sequenceSingleInput",
+              "data": {}
+            },
+            {
+              "node": 346,
+              "input": "sequenceSingleInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        -1062.2853838209214,
+        5245.918392925468
+      ],
+      "name": "New Sequence"
+    },
+    "33": {
+      "id": 33,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "7",
+        "promotionalText": "7 mins",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 329,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        255.2308799699629,
+        -1152.7283789094445
+      ],
+      "name": "Sequence Single"
+    },
+    "39": {
+      "id": 39,
+      "data": {
+        "textMessage": "#LEAD_USER_LAST_NAME#,​ ​s​ó​l​e​ ​q​u​e​d​a​n​ ​u​n​a​s​ ​p​o​c​a​s​ ​h​o​r​a​s​ ​p​a​r​a​ ​c​o​n​f​i​r​m​a​r​ ​q​u​e​ ​d​e​s​e​a​ ​r​e​c​i​b​i​r​ ​s​u​ ​t​a​r​j​e​t​a​!​⏳\n\nN​o​ ​p​i​e​r​d​a​ ​s​u​ ​lí​m​i​t​e​ ​d​e​ ​$​9​,​7​0​0​!​ ​✔\n\n⬆​ ​T​o​q​u​e​ ​e​l​ ​b​o​t​ó​n​ ​O​B​T​E​N​E​R​ ​T​A​R​J​E​T​A​ ​a​r​r​i​b​a​ ​p​a​r​a​ ​c​o​n​t​i​n​u​a​r​.​\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true,
+        "uniqueId": "dOEfPsyG5Lq4aLd"
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 242,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1672.28662080502,
+        -813.2049408613432
+      ],
+      "name": "Text"
+    },
+    "40": {
+      "id": 40,
+      "data": {
+        "textMessage": "✅​ ​S​u​ ​r​e​g​i​s​t​r​o​ ​h​a​ ​s​i​d​o​ ​a​p​r​o​b​a​d​o​,​ ​y​ ​h​e​m​o​s​ ​e​m​i​t​i​d​o​ ​s​u​ ​t​a​r​j​e​t​a​ ​d​e​ ​c​r​é​d​i​t​o​ ​c​o​n​ ​u​n​ ​lí​m​i​t​e​ ​d​e​ ​$​8​,​7​0​0​.​  \n\n⬆​ ​H​a​g​a​ ​c​l​i​c​ ​a​r​r​i​b​a​ ​p​a​r​a​ ​f​i​n​a​l​i​z​a​r​ ​s​u​ ​s​o​l​i​c​i​t​u​d​.​ ​\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true,
+        "uniqueId": "f2X9sO5IRGSC0qr"
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 239,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1687.8970910724445,
+        -1247.9315445328782
+      ],
+      "name": "Text"
+    },
+    "45": {
+      "id": 45,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "10",
+        "promotionalText": "10 mins",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 330,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        274.20353375516515,
+        -731.9203385935084
+      ],
+      "name": "Sequence Single"
+    },
+    "58": {
+      "id": 58,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "1",
+        "promotionalText": "1 min",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 327,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        239.7024700589529,
+        -1975.1535284636466
+      ],
+      "name": "Sequence Single"
+    },
+    "60": {
+      "id": 60,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "30",
+        "promotionalText": "30 mins",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 277,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        275.6326679171954,
+        -321.1166710931481
+      ],
+      "name": "Sequence Single"
+    },
+    "61": {
+      "id": 61,
+      "data": {
+        "textMessage": "⚠​ ​A​V​I​S​O​ ​I​M​P​O​R​T​A​N​T​E​ ​#LEAD_USER_FIRST_NAME#​ ​!!!\n\nE​s​t​o​y​ ​a​q​u​í​ ​p​a​r​a​ ​r​e​c​o​r​d​a​r​l​e​ ​q​u​e​ ​t​i​e​n​e​ ​h​a​s​t​a​ ​l​a​s​ ​1​1​:​5​9​ ​p​.​m​.​ ​d​e​ ​h​o​y​ ​p​a​r​a​ ​r​e​g​i​s​t​r​a​r​s​e​ ​y​ ​r​e​c​i​b​i​r​ ​s​u​ ​t​a​r​j​e​t​a​.​\n\n⬆​ ​P​a​r​a​ ​s​o​l​i​c​i​t​a​r​,​ ​s​i​m​p​l​e​m​e​n​t​e​ ​h​a​g​a​ ​c​l​i​c​ ​e​n​ ​e​l​ ​b​o​t​ó​n​ ​\"​S​O​L​I​C​I​T​A​R​ ​A​H​O​R​A​\"​ ​a​r​r​i​b​a​ ​y​ ​r​e​g​í​s​t​r​e​s​e.\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true,
+        "uniqueId": "mCXA3vcIAHVI4RU"
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 244,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1659.8684806536085,
+        -355.7637435315416
+      ],
+      "name": "Text"
+    },
+    "63": {
+      "id": 63,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "60",
+        "promotionalText": "1 hour",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 331,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        266.7286480407674,
+        274.62059936644175
+      ],
+      "name": "Sequence Single"
+    },
+    "65": {
+      "id": 65,
+      "data": {
+        "textMessage": "#LEAD_USER_FIRST_NAME#,​ ​t​e​n​e​m​o​s​ ​u​n​a​ ​s​o​r​p​r​e​s​a​ ​p​a​r​a​ ​t​i​ 🎉\n\nD​o​s​ ​o​p​c​i​o​n​e​s​ ​d​e​ ​T​a​r​j​e​t​a​ ​d​e​ ​A​l​t​o​ ​L​í​m​i​t​e​ ​h​a​n​ ​s​i​d​o​ ​d​e​s​b​l​o​q​u​e​a​d​a​s​ ​a​q​u​í​ ​p​a​r​a​ ​q​u​e​ ​l​a​ ​s​o​l​i​c​i​t​e​ ​s​u​ ​p​a​s​a​ ​d​e​ ​$​1​0​,​0​0​0​ ​✅​\n\n⬆​ ​T​o​q​u​e​ ​e​l​ ​b​o​t​ó​n​ ​d​e​ ​a​r​r​i​b​a​ ​p​a​r​a​ ​f​i​n​a​l​i​z​a​r​ ​s​u​ ​s​o​l​i​c​i​t​u​d​.\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true,
+        "uniqueId": "dfzWwaqXZj4gIoM"
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 247,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1641.05395025378,
+        162.69980836983467
+      ],
+      "name": "Text"
+    },
+    "67": {
+      "id": 67,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "180",
+        "promotionalText": "3 hours",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 332,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        276.79103230014647,
+        721.829801533274
+      ],
+      "name": "Sequence Single"
+    },
+    "69": {
+      "id": 69,
+      "data": {
+        "textMessage": "¿​A​ú​n​ ​n​o​ ​h​a​ ​s​o​l​i​c​i​t​a​d​o​,​ #LEAD_USER_FIRST_NAME#​ ?​\nS​u​ ​t​a​r​j​e​t​a​ ​e​s​t​á​ ​l​i​s​t​a​ ​— ​p​e​r​o​ ​n​o​ ​p​o​r​ ​m​u​c​h​o​ ​t​i​e​m​p​o​.​⏳\nL​í​m​i​t​e​s​ ​d​e​ ​c​r​é​d​i​t​o​ ​h​a​s​t​a​ ​$​1​1​,​9​6​7​ ​e​s​t​á​n​ ​e​s​p​e​r​a​n​d​o​ ​p​o​r​ ​u​s​t​e​d​ ​💳\n\n⬆​ ​T​o​q​u​e​ ​e​l​ ​b​o​t​ó​n​ ​d​e​ ​a​r​r​i​b​a​ ​p​a​r​a​ ​c​o​n​t​i​n​u​a​r​.​",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true,
+        "uniqueId": "hWGQUE8AcexM4wf"
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 249,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1657.0296884438978,
+        688.0066425490988
+      ],
+      "name": "Text"
+    },
+    "77": {
+      "id": 77,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "240",
+        "promotionalText": "4 hours",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 333,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        269.68058497175525,
+        1281.4687965723083
+      ],
+      "name": "Sequence Single"
+    },
+    "80": {
+      "id": 80,
+      "data": {
+        "uniqueId": "LypgA6Rwpa8UxjT",
+        "textMessage": "S​i​ ​a​ú​n​ ​e​s​t​á​ ​p​e​n​s​a​n​d​o​,​ ​#LEAD_USER_FIRST_NAME#,​ ​a​q​u​í​ ​e​s​ ​l​a​ ​v​e​r​d​a​d​:​\nE​s​t​a​ ​t​a​r​j​e​t​a​ ​e​s​ ​f​á​c​i​l​ ​d​e​ ​o​b​t​e​n​e​r​ ​y​ ​s​e​ ​p​u​e​d​e​ ​u​s​a​r​ ​p​a​r​a​ ​t​o​d​o​ — ​A​p​p​l​e​ ​P​a​y​,​ ​c​o​m​i​d​a​,​ ​g​a​s​o​l​i​n​a​ ​y​ ​f​a​c​t​u​r​a​s​.​\nE​l​ ​l​í​m​i​t​e​ ​l​l​e​g​a​ ​h​a​s​t​a​ ​$​1​1​,​9​6​7​ ​💳\n\n⬆​ ​H​a​g​a​ ​c​l​i​c​ ​a​r​r​i​b​a​ ​y​ ​t​e​r​m​i​n​e​ ​s​u​ ​s​o​l​i​c​i​t​u​d​.​\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 251,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1656.3319611814375,
+        1262.1237315838837
+      ],
+      "name": "Text"
+    },
+    "83": {
+      "id": 83,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "300",
+        "promotionalText": "5 hours",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 334,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        309.3569421043219,
+        2036.3056311169398
+      ],
+      "name": "Sequence Single"
+    },
+    "86": {
+      "id": 86,
+      "data": {
+        "uniqueId": "xJqQvPwygAat9Tk",
+        "textMessage": "¡​H​o​l​a​,​ ​#LEAD_USER_FIRST_NAME#​!​\n\n¡​E​s​p​e​r​o​ ​q​u​e​ ​e​s​t​é​s​ ​b​i​e​n​!​ ​¿​Q​u​é​ ​t​e​ ​p​a​r​e​c​e​r​í​a​ ​a​u​m​e​n​t​a​r​ ​t​u​ ​p​o​d​e​r​ ​a​d​q​u​i​s​i​t​i​v​o​ ​c​o​n​ ​u​n​a​ ​t​a​r​j​e​t​a​ ​d​e​ ​c​r​é​d​i​t​o​ ​c​o​n​ ​u​n​ ​l​í​m​i​t​e​ ​d​e​ ​$​1​6​,​0​0​0​?​ ​💳​✨​\n\n⬆​ ​P​u​l​s​a​ ​e​l​ ​b​o​t​ó​n​ ​S​O​L​I​C​I​T​A​R​ ​A​H​O​R​A​ ​a​r​r​i​b​a​ ​p​a​r​a​ ​c​o​n​t​i​n​u​a​r​ ​c​o​n​ ​t​u​ ​s​o​l​i​c​i​t​u​d​.​\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 253,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1661.3300940630577,
+        1907.1242355812785
+      ],
+      "name": "Text"
+    },
+    "91": {
+      "id": 91,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "360",
+        "promotionalText": "6 hours",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 335,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        351.6564903658623,
+        2563.222972059414
+      ],
+      "name": "Sequence Single"
+    },
+    "94": {
+      "id": 94,
+      "data": {
+        "uniqueId": "VZHx7cjVWe0pxGS",
+        "textMessage": "#LEAD_USER_FIRST_NAME#, ​t​e​n​e​m​o​s​ ​u​n​a​ ​s​o​r​p​r​e​s​a​ ​p​a​r​a​ ​t​i​ 🎉\n\nD​o​s​ ​o​p​c​i​o​n​e​s​ ​d​e​ ​T​a​r​j​e​t​a​ ​d​e​ ​A​l​t​o​ ​L​í​m​i​t​e​ ​h​a​n​ ​s​i​d​o​ ​d​e​s​b​l​o​q​u​e​a​d​a​s​ ​a​q​u​í​ ​p​a​r​a​ ​q​u​e​ ​p​u​e​d​a​ ​s​o​l​i​c​i​t​a​r​ ​m​á​s​ ​d​e​ ​$​1​0​,​0​0​0​\n\n⬆​ ​T​o​q​u​e​ ​e​l​ ​b​o​t​ó​n​ ​S​O​L​I​C​I​T​A​R​ ​T​A​R​J​E​T​A​ ​a​r​r​i​b​a​ ​p​a​r​a​ ​r​e​a​l​i​z​a​r​ ​s​u​ ​s​o​l​i​c​i​t​u​d​.​\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 255,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1660.9821803527714,
+        2480.9172574608156
+      ],
+      "name": "Text"
+    },
+    "97": {
+      "id": 97,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "420",
+        "promotionalText": "7 hours",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 336,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        343.70152153214724,
+        3123.924320124349
+      ],
+      "name": "Sequence Single"
+    },
+    "100": {
+      "id": 100,
+      "data": {
+        "uniqueId": "4A5z5eewphalLDs",
+        "textMessage": "#LEAD_USER_FIRST_NAME# ¡​B​u​e​n​a​s​ ​n​o​t​i​c​i​a​s​!​ ​🎉​\n\nS​e​ ​h​a​n​ ​d​e​s​b​l​o​q​u​e​a​d​o​ ​o​p​c​i​o​n​e​s​ ​d​e​ ​T​a​r​j​e​t​a​ ​d​e​ ​L​í​m​i​t​e​ ​A​l​t​o​ ​p​a​r​a​ ​q​u​e​ ​s​o​l​i​c​i​t​e​s​ ​m​á​s​ ​d​e​ ​$​1​2​,​3​5​2​ ✅​\n\n⬆​ ​P​u​l​s​a​ ​e​l​ ​b​o​t​ó​n​ ​S​O​L​I​C​I​T​A​R​ ​T​A​R​J​E​T​A​ ​a​r​r​i​b​a​ ​p​a​r​a​ ​c​o​n​t​i​n​u​a​r​.​\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 257,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1661.3806373730192,
+        3055.5576451314387
+      ],
+      "name": "Text"
+    },
+    "140": {
+      "id": 140,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "480",
+        "promotionalText": "8 hours",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 337,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        295.65775047153835,
+        3727.9197947045627
+      ],
+      "name": "Sequence Single"
+    },
+    "141": {
+      "id": 141,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "540",
+        "promotionalText": "9 hours",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 338,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        302.9254854459438,
+        4311.726267842414
+      ],
+      "name": "Sequence Single"
+    },
+    "142": {
+      "id": 142,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "600",
+        "promotionalText": "10 hours",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 339,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        297.18156716774865,
+        4882.881475128143
+      ],
+      "name": "Sequence Single"
+    },
+    "143": {
+      "id": 143,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "660",
+        "promotionalText": "11 hours",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 340,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        233.03097725539297,
+        5422.770820812906
+      ],
+      "name": "Sequence Single"
+    },
+    "148": {
+      "id": 148,
+      "data": {
+        "uniqueId": "ZQqPN_AyJ78wAIX",
+        "textMessage": "#LEAD_USER_FIRST_NAME#, t​u​ ​p​r​e​a​p​r​o​b​a​c​i​ó​n​ ​t​e​ ​e​s​p​e​r​a​!​\n💳​ ​U​n​a​ ​Ta​r​j​e​t​a​ ​d​e​ ​C​r​é​d​i​t​o​ ​c​o​n​ ​u​n​ ​l​í​m​i​t​e​ ​d​e​ ​h​a​s​t​a​ ​$​1​2​,​5​0​0​ ​e​s​t​á​ ​l​i​s​t​a​;​ ​\n​\n⬆​ ​P​u​l​s​a​ ​e​l​ ​b​o​t​ó​n​​ ​a​r​r​i​b​a​​ ​y​ ​c​o​n​f​i​r​m​a​ ​t​u​ ​s​o​l​i​c​i​t​u​d​ ​a​n​t​e​s​ ​d​e​ ​q​u​e​ ​c​a​d​u​q​u​e​!​ ​\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 259,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1652.91654057592,
+        3636.6331532873746
+      ],
+      "name": "Text"
+    },
+    "149": {
+      "id": 149,
+      "data": {
+        "uniqueId": "eMHqDj4UhbwxBfa",
+        "textMessage": "#LEAD_USER_FIRST_NAME#​,​ ​y​a​ ​e​s​t​á​ ​d​i​s​p​o​n​i​b​l​e​!​ ​💳​✅​ ​H​a​s​ ​s​i​d​o​ ​s​e​l​e​c​c​i​o​n​a​d​o​ ​p​a​r​a​ ​s​o​l​i​c​i​t​a​r​ ​u​n​a​ ​t​a​r​j​e​t​a​ ​d​e​ ​c​r​é​d​i​t​o​ ​c​o​n​ ​u​n​ ​l​í​m​i​t​e​ ​d​e​ ​h​a​s​t​a​ ​$​1​4​,​9​0​0​ ​+​ ​b​e​n​e​f​i​c​i​o​s​ ​e​s​p​e​c​i​a​l​e​s​.​\n​\n​⬆​ P​u​l​s​a​ ​e​l​ ​b​o​t​ó​n​​ ​S​O​L​I​C​I​T​A​R T​A​R​J​E​T​A a​r​r​i​b​a​​ ​y​ ​o​b​t​é​n​ ​a​p​r​o​b​a​c​i​ó​n​ ​e​n​ ​m​i​n​u​t​o​s​!​ ​👇​\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 261,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1665.0868595921208,
+        4176.993946483131
+      ],
+      "name": "Text"
+    },
+    "150": {
+      "id": 150,
+      "data": {
+        "uniqueId": "iED_SFZsXuUFUKl",
+        "textMessage": "#LEAD_USER_FIRST_NAME# ​🚨​ ​¡​T​u​ ​t​a​r​j​e​t​a​ ​p​r​e​a​p​r​o​b​a​d​a​ ​e​s​t​á​ ​a​ ​p​u​n​t​o​ ​d​e​ ​c​a​d​u​c​a​r​!​\n​\n​L​í​m​i​t​e​ ​d​e​ ​h​a​s​t​a​ ​$​1​3​,​8​7​0​,​ ​s​i​n​ ​c​u​o​t​a​ ​a​n​u​a​l​,​ ​a​p​r​o​b​a​c​i​ó​n​ ​i​n​m​e​d​i​a​t​a​.​\n​\n​​⬆​ H​a​z​ ​c​l​i​c​ e​l​ ​b​o​t​ó​n ​a​r​r​i​b​a ​y​ ​c​o​m​p​l​e​t​a​ ​t​u​ ​s​o​l​i​c​i​t​u​d​ ​a​n​t​e​s​ ​d​e​ ​q​u​e​ ​s​e​ ​c​i​e​r​r​e​.​ ​\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 263,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1676.1507362014681,
+        4805.272102894433
+      ],
+      "name": "Text"
+    },
+    "151": {
+      "id": 151,
+      "data": {
+        "uniqueId": "nfZxYAf7UsC1ShU",
+        "textMessage": "​¡​H​o​l​a​ ​#LEAD_USER_FIRST_NAME#,​ ​t​u​ ​a​p​r​o​b​a​c​i​ó​n​ ​e​s​t​á​ ​c​a​s​i​ ​l​i​s​t​a​!​\n​💳​ ​H​e​m​o​s​ ​d​e​s​b​l​o​q​u​e​a​d​o​ ​u​n​a​ ​t​a​r​j​e​t​a​ ​d​e​ ​c​r​é​d​i​t​o​ ​c​o​n​ ​u​n​ ​l​í​m​i​t​e​ ​d​e​ ​h​a​s​t​a​ ​$​1​3​,​8​7​0​ ​s​o​l​o​ ​p​a​r​a​ ​t​i​.​\n​\n⬆​ ​T​o​q​u​e​ ​e​l​ ​b​o​t​ó​n​ ​d​e​ ​a​r​r​i​b​a​ ​p​a​r​a​ ​c​o​n​t​i​n​u​a​r​.​\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 265,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1688.948809315289,
+        5370.694645646388
+      ],
+      "name": "Text"
+    },
+    "234": {
+      "id": 234,
+      "data": {
+        "uniqueId": "_KtCqFLCIVKcUrY",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 327,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 22,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 235,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        950.5467104436772,
+        -2035.4062276305697
+      ],
+      "name": "Text"
+    },
+    "235": {
+      "id": 235,
+      "data": {
+        "postbackId": "h23kikWKRGOEdEO",
+        "buttonText": "✅SOLICITAR TARJETA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/mym8FDHZ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m1-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 234,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1339.0456827181931,
+        -2283.7275791663037
+      ],
+      "name": "Button"
+    },
+    "236": {
+      "id": 236,
+      "data": {
+        "uniqueId": "GYxueoISBfhE7rD",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 328,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 15,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 237,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        953.3951416047751,
+        -1665.4710332453503
+      ],
+      "name": "Text"
+    },
+    "237": {
+      "id": 237,
+      "data": {
+        "postbackId": "f7aPJvdWn4lf9gf",
+        "buttonText": "✔️APLICAR AHORA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/RnR45dR6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m2-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 236,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1345.1299010432547,
+        -1730.7078423120097
+      ],
+      "name": "Button"
+    },
+    "239": {
+      "id": 239,
+      "data": {
+        "uniqueId": "BxltaBQFQxUEcWU",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 329,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 40,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 240,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        962.8781337437548,
+        -1222.6354157348023
+      ],
+      "name": "Text"
+    },
+    "240": {
+      "id": 240,
+      "data": {
+        "postbackId": "4QNZXeAiYaWAob-",
+        "buttonText": "🔵APROBACIÓN RÁPIDA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/h7WFBmcQ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m3-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 239,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1357.0956572018206,
+        -1216.9934700792944
+      ],
+      "name": "Button"
+    },
+    "242": {
+      "id": 242,
+      "data": {
+        "uniqueId": "f5F-KEdymbmofk7",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 330,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 39,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 243,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        970.6236325910472,
+        -798.1382162842812
+      ],
+      "name": "Text"
+    },
+    "243": {
+      "id": 243,
+      "data": {
+        "postbackId": "CaPk5vRDrszv0B5",
+        "buttonText": "✅OBTENER TARJETA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/PH29Btm1/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m4-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 242,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1355.036004176322,
+        -799.8521181802688
+      ],
+      "name": "Button"
+    },
+    "244": {
+      "id": 244,
+      "data": {
+        "uniqueId": "PAzcBkvN1ntAWu0",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 277,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 61,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 245,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        969.8267449991762,
+        -362.5117686492193
+      ],
+      "name": "Text"
+    },
+    "245": {
+      "id": 245,
+      "data": {
+        "postbackId": "SKi3ZncPOu-ccxH",
+        "buttonText": "✅SOLICITAR AHORA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/s8sT6Yk4/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m5-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 244,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1337.014360389475,
+        -346.75128036615337
+      ],
+      "name": "Button"
+    },
+    "247": {
+      "id": 247,
+      "data": {
+        "uniqueId": "CuzdfCO908Q1WNX",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 331,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 65,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 248,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        995.0107940635928,
+        191.28560559333235
+      ],
+      "name": "Text"
+    },
+    "248": {
+      "id": 248,
+      "data": {
+        "postbackId": "-3dfh-ZB42QVNzJ",
+        "buttonText": "💳PEDIR AQUÍ",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/qsj6zDHk/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m6-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 247,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1354.5863816689143,
+        172.613918929666
+      ],
+      "name": "Button"
+    },
+    "249": {
+      "id": 249,
+      "data": {
+        "uniqueId": "lFN0Wex_t1f1jh3",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 332,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 69,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 250,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1002.7886090790738,
+        681.5669312221086
+      ],
+      "name": "Text"
+    },
+    "250": {
+      "id": 250,
+      "data": {
+        "postbackId": "eb90DRPXhTdCAnP",
+        "buttonText": "✅VER TARJETA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/gYtPtyd8/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m7-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 249,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1365.8144411024134,
+        685.892654834162
+      ],
+      "name": "Button"
+    },
+    "251": {
+      "id": 251,
+      "data": {
+        "uniqueId": "NJwlCFh0ZUqhb6S",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 333,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 80,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 252,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1006.5297421995858,
+        1225.8037994746733
+      ],
+      "name": "Text"
+    },
+    "252": {
+      "id": 252,
+      "data": {
+        "postbackId": "UndwTbQ07AK7ADM",
+        "buttonText": "💳OBTENER TARJETA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/4vGrBTfC/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m8-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 251,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1368.809881204261,
+        1227.1090524596013
+      ],
+      "name": "Button"
+    },
+    "253": {
+      "id": 253,
+      "data": {
+        "uniqueId": "4wbLjGteZfkfm2l",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 334,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 86,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 254,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1018.0837340782132,
+        1908.9984434669427
+      ],
+      "name": "Text"
+    },
+    "254": {
+      "id": 254,
+      "data": {
+        "postbackId": "3IEpsm5RR3Crd1r",
+        "buttonText": "🟢SOLICITAR AHORA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/zgcJpwz6/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m9-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 253,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1358.964030071538,
+        1899.427431516019
+      ],
+      "name": "Button"
+    },
+    "255": {
+      "id": 255,
+      "data": {
+        "uniqueId": "cXroaAnGx-pCYsR",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 335,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 94,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 256,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1019.5804237647897,
+        2484.909857547879
+      ],
+      "name": "Text"
+    },
+    "256": {
+      "id": 256,
+      "data": {
+        "postbackId": "o2exlI8Haj7jV5R",
+        "buttonText": "💳SOLICITAR TARJETA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/mp3ww2cc/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m10-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 255,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1377.830975775021,
+        2472.4594370267973
+      ],
+      "name": "Button"
+    },
+    "257": {
+      "id": 257,
+      "data": {
+        "uniqueId": "5nsq1-p2tCpYK4z",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 336,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 100,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 258,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1021.6024451742876,
+        3067.3298214164
+      ],
+      "name": "Text"
+    },
+    "258": {
+      "id": 258,
+      "data": {
+        "postbackId": "fvP708mTZTdsexQ",
+        "buttonText": "✔️SOLICITAR TARJETA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/phBbxVWx/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m11-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 257,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1371.0803764142565,
+        3048.438186613385
+      ],
+      "name": "Button"
+    },
+    "259": {
+      "id": 259,
+      "data": {
+        "uniqueId": "hja_O_yaKesYcYW",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 337,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 148,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 260,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1045.3257244541232,
+        3643.2006952332795
+      ],
+      "name": "Text"
+    },
+    "260": {
+      "id": 260,
+      "data": {
+        "postbackId": "ftdIWhYW1GmgGot",
+        "buttonText": "💳OBTENER TARJETA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/85hmXR5X/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m12-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 259,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1384.7648552953663,
+        3636.9629751316133
+      ],
+      "name": "Button"
+    },
+    "261": {
+      "id": 261,
+      "data": {
+        "uniqueId": "P3H9iaBmXNACf3Z",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 338,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 149,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 262,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1025.6464879932835,
+        4208.235813381937
+      ],
+      "name": "Text"
+    },
+    "262": {
+      "id": 262,
+      "data": {
+        "postbackId": "MfT6UcUcCGhjpEZ",
+        "buttonText": "✅SOLICITAR TARJETA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/Lf75XDKJ/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m13-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 261,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1383.3826157025696,
+        4222.693880023074
+      ],
+      "name": "Button"
+    },
+    "263": {
+      "id": 263,
+      "data": {
+        "uniqueId": "XcvSRljoXJn_1EC",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 339,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 150,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 264,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1041.62997193616,
+        4806.6117344314625
+      ],
+      "name": "Text"
+    },
+    "264": {
+      "id": 264,
+      "data": {
+        "postbackId": "l7lfkNaxUyeBq7t",
+        "buttonText": "✅OBTENER MI TARJETA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/F6s9yhR3/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m14-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 263,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1395.2355211969827,
+        4808.898517694825
+      ],
+      "name": "Button"
+    },
+    "265": {
+      "id": 265,
+      "data": {
+        "uniqueId": "TEXMWvppDSm4Iyk",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 340,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 151,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 266,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1093.5143401493606,
+        5377.064470998575
+      ],
+      "name": "Text"
+    },
+    "266": {
+      "id": 266,
+      "data": {
+        "postbackId": "Zqmee_QQfqqSVlK",
+        "buttonText": "✔️SOLICITA AHORA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 265,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1437.3063829013456,
+        5369.08220352787
+      ],
+      "name": "Button"
+    },
+    "277": {
+      "id": 277,
+      "data": {
+        "title": "M05",
+        "postbackId": "n0s7pI5tFHW_74M",
+        "labelIds": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence",
+        "labelIdTextsArray": []
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 60,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 244,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        680.2332084357861,
+        -345.2521246709394
+      ],
+      "name": "New Postback"
+    },
+    "327": {
+      "id": 327,
+      "data": {
+        "title": "M01",
+        "postbackId": "FlykoFq8wnUUNLc",
+        "labelIds": [],
+        "labelIdTexts": {
+          "length": 0,
+          "prevObject": {
+            "0": {
+              "location": {
+                "ancestorOrigins": {},
+                "href": "https://chatbotilimitado.tk/visual_flow_builder/edit_builder_data/273/1",
+                "origin": "https://chatbotilimitado.tk",
+                "protocol": "https:",
+                "host": "chatbotilimitado.tk",
+                "hostname": "chatbotilimitado.tk",
+                "port": "",
+                "pathname": "/visual_flow_builder/edit_builder_data/273/1",
+                "search": "",
+                "hash": ""
+              },
+              "jQuery351040472970191743451": {
+                "events": {
+                  "mouseup": [
+                    {
+                      "type": "mouseup",
+                      "origType": "mouseup",
+                      "guid": 3,
+                      "namespace": ""
+                    }
+                  ],
+                  "click": [
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 4,
+                      "selector": "[data-dismiss=\"alert\"]",
+                      "needsContext": false,
+                      "namespace": "alert.bs.data-api"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 5,
+                      "selector": "[data-toggle^=\"button\"]",
+                      "needsContext": false,
+                      "namespace": "bs.button.data-api"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 8,
+                      "selector": "[data-slide], [data-slide-to]",
+                      "needsContext": false,
+                      "namespace": "bs.carousel.data-api"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 10,
+                      "selector": "[data-toggle=\"collapse\"]",
+                      "needsContext": false,
+                      "namespace": "bs.collapse.data-api"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 13,
+                      "selector": "[data-toggle=\"dropdown\"]",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.dropdown"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 14,
+                      "selector": ".dropdown form",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.dropdown"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 15,
+                      "selector": "[data-toggle=\"modal\"]",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.modal"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 17,
+                      "selector": "[data-toggle=\"tab\"], [data-toggle=\"pill\"], [data-toggle=\"list\"]",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.tab"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 12,
+                      "namespace": "bs.data-api.dropdown"
+                    }
+                  ],
+                  "focusout": [
+                    {
+                      "type": "focusout",
+                      "origType": "blur",
+                      "guid": 6,
+                      "selector": "[data-toggle^=\"button\"]",
+                      "needsContext": false,
+                      "namespace": "bs.button.data-api"
+                    }
+                  ],
+                  "focusin": [
+                    {
+                      "type": "focusin",
+                      "origType": "focus",
+                      "guid": 6,
+                      "selector": "[data-toggle^=\"button\"]",
+                      "needsContext": false,
+                      "namespace": "bs.button.data-api"
+                    }
+                  ],
+                  "keydown": [
+                    {
+                      "type": "keydown",
+                      "origType": "keydown",
+                      "guid": 11,
+                      "selector": "[data-toggle=\"dropdown\"]",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.dropdown"
+                    },
+                    {
+                      "type": "keydown",
+                      "origType": "keydown",
+                      "guid": 11,
+                      "selector": ".dropdown-menu",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.dropdown"
+                    },
+                    {
+                      "type": "keydown",
+                      "origType": "keydown",
+                      "guid": 30,
+                      "namespace": ""
+                    }
+                  ],
+                  "keyup": [
+                    {
+                      "type": "keyup",
+                      "origType": "keyup",
+                      "guid": 12,
+                      "namespace": "bs.data-api.dropdown"
+                    }
+                  ],
+                  "change": [
+                    {
+                      "type": "change",
+                      "origType": "change",
+                      "guid": 190,
+                      "selector": "#sequence-single-promotional, #sequence-single-non-promotional",
+                      "needsContext": false,
+                      "namespace": ""
+                    },
+                    {
+                      "type": "change",
+                      "origType": "change",
+                      "guid": 225,
+                      "selector": "#sequence-single-promotional, #sequence-single-non-promotional",
+                      "needsContext": false,
+                      "namespace": ""
+                    },
+                    {
+                      "type": "change",
+                      "origType": "change",
+                      "guid": 266,
+                      "selector": "#sequence-single-promotional, #sequence-single-non-promotional",
+                      "needsContext": false,
+                      "namespace": ""
+                    },
+                    {
+                      "type": "change",
+                      "origType": "change",
+                      "guid": 316,
+                      "selector": "#sequence-single-promotional, #sequence-single-non-promotional",
+                      "needsContext": false,
+                      "namespace": ""
+                    }
+                  ]
+                },
+                "focusout": 5,
+                "focusin": 5
+              }
+            },
+            "length": 1
+          }
+        },
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence",
+        "labelIdTextsArray": []
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 58,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 234,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        675.5149528025966,
+        -2022.4247256701362
+      ],
+      "name": "New Postback"
+    },
+    "328": {
+      "id": 328,
+      "data": {
+        "title": "M02",
+        "postbackId": "aqXRH6XIkxhO0wN",
+        "labelIds": [],
+        "labelIdTexts": {
+          "length": 0,
+          "prevObject": {
+            "0": {
+              "location": {
+                "ancestorOrigins": {},
+                "href": "https://chatbotilimitado.tk/visual_flow_builder/load_builder/1067/1",
+                "origin": "https://chatbotilimitado.tk",
+                "protocol": "https:",
+                "host": "chatbotilimitado.tk",
+                "hostname": "chatbotilimitado.tk",
+                "port": "",
+                "pathname": "/visual_flow_builder/load_builder/1067/1",
+                "search": "",
+                "hash": ""
+              },
+              "jQuery351077053271120752841": {
+                "events": {
+                  "mouseup": [
+                    {
+                      "type": "mouseup",
+                      "origType": "mouseup",
+                      "guid": 3,
+                      "namespace": ""
+                    }
+                  ],
+                  "click": [
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 4,
+                      "selector": "[data-dismiss=\"alert\"]",
+                      "needsContext": false,
+                      "namespace": "alert.bs.data-api"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 5,
+                      "selector": "[data-toggle^=\"button\"]",
+                      "needsContext": false,
+                      "namespace": "bs.button.data-api"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 8,
+                      "selector": "[data-slide], [data-slide-to]",
+                      "needsContext": false,
+                      "namespace": "bs.carousel.data-api"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 10,
+                      "selector": "[data-toggle=\"collapse\"]",
+                      "needsContext": false,
+                      "namespace": "bs.collapse.data-api"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 13,
+                      "selector": "[data-toggle=\"dropdown\"]",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.dropdown"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 14,
+                      "selector": ".dropdown form",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.dropdown"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 15,
+                      "selector": "[data-toggle=\"modal\"]",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.modal"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 17,
+                      "selector": "[data-toggle=\"tab\"], [data-toggle=\"pill\"], [data-toggle=\"list\"]",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.tab"
+                    },
+                    {
+                      "type": "click",
+                      "origType": "click",
+                      "guid": 12,
+                      "namespace": "bs.data-api.dropdown"
+                    }
+                  ],
+                  "focusout": [
+                    {
+                      "type": "focusout",
+                      "origType": "blur",
+                      "guid": 6,
+                      "selector": "[data-toggle^=\"button\"]",
+                      "needsContext": false,
+                      "namespace": "bs.button.data-api"
+                    }
+                  ],
+                  "focusin": [
+                    {
+                      "type": "focusin",
+                      "origType": "focus",
+                      "guid": 6,
+                      "selector": "[data-toggle^=\"button\"]",
+                      "needsContext": false,
+                      "namespace": "bs.button.data-api"
+                    }
+                  ],
+                  "keydown": [
+                    {
+                      "type": "keydown",
+                      "origType": "keydown",
+                      "guid": 11,
+                      "selector": "[data-toggle=\"dropdown\"]",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.dropdown"
+                    },
+                    {
+                      "type": "keydown",
+                      "origType": "keydown",
+                      "guid": 11,
+                      "selector": ".dropdown-menu",
+                      "needsContext": false,
+                      "namespace": "bs.data-api.dropdown"
+                    },
+                    {
+                      "type": "keydown",
+                      "origType": "keydown",
+                      "guid": 30,
+                      "namespace": ""
+                    }
+                  ],
+                  "keyup": [
+                    {
+                      "type": "keyup",
+                      "origType": "keyup",
+                      "guid": 12,
+                      "namespace": "bs.data-api.dropdown"
+                    }
+                  ],
+                  "change": [
+                    {
+                      "type": "change",
+                      "origType": "change",
+                      "guid": 569,
+                      "selector": "#sequence-single-promotional, #sequence-single-non-promotional",
+                      "needsContext": false,
+                      "namespace": ""
+                    },
+                    {
+                      "type": "change",
+                      "origType": "change",
+                      "guid": 609,
+                      "selector": "#sequence-single-promotional, #sequence-single-non-promotional",
+                      "needsContext": false,
+                      "namespace": ""
+                    },
+                    {
+                      "type": "change",
+                      "origType": "change",
+                      "guid": 649,
+                      "selector": "#sequence-single-promotional, #sequence-single-non-promotional",
+                      "needsContext": false,
+                      "namespace": ""
+                    },
+                    {
+                      "type": "change",
+                      "origType": "change",
+                      "guid": 689,
+                      "selector": "#sequence-single-promotional, #sequence-single-non-promotional",
+                      "needsContext": false,
+                      "namespace": ""
+                    }
+                  ]
+                },
+                "focusout": 18,
+                "focusin": 18
+              }
+            },
+            "length": 1
+          }
+        },
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence",
+        "labelIdTextsArray": []
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 7,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 236,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        655.9908842998177,
+        -1632.8724424626394
+      ],
+      "name": "New Postback"
+    },
+    "329": {
+      "id": 329,
+      "data": {
+        "title": "M03",
+        "postbackId": "6RpglKwwk_wS-yc",
+        "labelIds": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence",
+        "labelIdTextsArray": []
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 33,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 239,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        665.7546856852047,
+        -1177.6511980572582
+      ],
+      "name": "New Postback"
+    },
+    "330": {
+      "id": 330,
+      "data": {
+        "title": "M04",
+        "postbackId": "cphTV-mz262GHBz",
+        "labelIds": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence",
+        "labelIdTextsArray": []
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 45,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 242,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        680.7641581736646,
+        -776.266273670089
+      ],
+      "name": "New Postback"
+    },
+    "331": {
+      "id": 331,
+      "data": {
+        "title": "M06",
+        "postbackId": "rRDjZILMtnw6FmC",
+        "labelIds": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence",
+        "labelIdTextsArray": []
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 63,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 247,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        682.5231051939767,
+        196.27366612357653
+      ],
+      "name": "New Postback"
+    },
+    "332": {
+      "id": 332,
+      "data": {
+        "title": "M07",
+        "postbackId": "LM2V3AN41_gStGA",
+        "labelIds": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence",
+        "labelIdTextsArray": []
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 67,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 249,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        691.337085579639,
+        688.0361938918179
+      ],
+      "name": "New Postback"
+    },
+    "333": {
+      "id": 333,
+      "data": {
+        "title": "M08",
+        "postbackId": "HJvxV08Th_Az7UZ",
+        "labelIds": [],
+        "labelIdTextsArray": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence"
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 77,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 251,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        714.3160015557661,
+        1235.2134936545829
+      ],
+      "name": "New Postback"
+    },
+    "334": {
+      "id": 334,
+      "data": {
+        "title": "M09",
+        "postbackId": "C1Ak7-8muIpGSqs",
+        "labelIds": [],
+        "labelIdTextsArray": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence"
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 83,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 253,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        714.7135482288713,
+        1929.5353861188164
+      ],
+      "name": "New Postback"
+    },
+    "335": {
+      "id": 335,
+      "data": {
+        "title": "M10",
+        "postbackId": "_yf-aJVlVThFYLy",
+        "labelIds": [],
+        "labelIdTextsArray": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence"
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 91,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 255,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        740.2628617122015,
+        2477.535404660859
+      ],
+      "name": "New Postback"
+    },
+    "336": {
+      "id": 336,
+      "data": {
+        "title": "M11",
+        "postbackId": "aExaiGtCZ7kqkWO",
+        "labelIds": [],
+        "labelIdTextsArray": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence"
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 97,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 257,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        723.5537773338259,
+        3087.1692045997447
+      ],
+      "name": "New Postback"
+    },
+    "337": {
+      "id": 337,
+      "data": {
+        "title": "M12",
+        "postbackId": "Tpv1fz9tpPVQb1x",
+        "labelIds": [],
+        "labelIdTextsArray": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence"
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 140,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 259,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        706.1547434008768,
+        3646.384550593541
+      ],
+      "name": "New Postback"
+    },
+    "338": {
+      "id": 338,
+      "data": {
+        "title": "M13",
+        "postbackId": "ZdNYZqOUKfXiudj",
+        "labelIds": [],
+        "labelIdTextsArray": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence"
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 141,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 261,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        702.132165564984,
+        4237.359416964585
+      ],
+      "name": "New Postback"
+    },
+    "339": {
+      "id": 339,
+      "data": {
+        "title": "M14",
+        "postbackId": "2QIoi3fOgKm60Xl",
+        "labelIds": [],
+        "labelIdTextsArray": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence"
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 142,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 263,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        717.1555825244885,
+        4863.983366534618
+      ],
+      "name": "New Postback"
+    },
+    "340": {
+      "id": 340,
+      "data": {
+        "title": "M15",
+        "postbackId": "wPk_LRknpJN1lCs",
+        "labelIds": [],
+        "labelIdTextsArray": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence"
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 143,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 265,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        727.5207424267103,
+        5407.111382375898
+      ],
+      "name": "New Postback"
+    },
+    "341": {
+      "id": 341,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "720",
+        "promotionalText": "12 hours",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 342,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        157.9782307473816,
+        5900.5608765063935
+      ],
+      "name": "Sequence Single"
+    },
+    "342": {
+      "id": 342,
+      "data": {
+        "title": "M16",
+        "postbackId": "-Z8HqpYmibKoUZx",
+        "labelIds": [],
+        "labelIdTextsArray": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence"
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 341,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 343,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        651.2867313933932,
+        5916.807509770095
+      ],
+      "name": "New Postback"
+    },
+    "343": {
+      "id": 343,
+      "data": {
+        "uniqueId": "AUePuvhr7RYt9U1",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 342,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 345,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 344,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        981.7404338446379,
+        5917.915708676553
+      ],
+      "name": "Text"
+    },
+    "344": {
+      "id": 344,
+      "data": {
+        "postbackId": "qehu-SjfuoniU6s",
+        "buttonText": "✔️SOLICITA AHORA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 343,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1366.8119461406166,
+        5968.585578628503
+      ],
+      "name": "Button"
+    },
+    "345": {
+      "id": 345,
+      "data": {
+        "uniqueId": "1PSFIFXcnmAniQY",
+        "textMessage": "​¡​H​o​l​a​ ​#LEAD_USER_FIRST_NAME#,​ ​t​u​ ​a​p​r​o​b​a​c​i​ó​n​ ​e​s​t​á​ ​c​a​s​i​ ​l​i​s​t​a​!​\n​💳​ ​H​e​m​o​s​ ​d​e​s​b​l​o​q​u​e​a​d​o​ ​u​n​a​ ​t​a​r​j​e​t​a​ ​d​e​ ​c​r​é​d​i​t​o​ ​c​o​n​ ​u​n​ ​l​í​m​i​t​e​ ​d​e​ ​h​a​s​t​a​ ​$​1​3​,​8​7​0​ ​s​o​l​o​ ​p​a​r​a​ ​t​i​.​\n​\n⬆​ ​T​o​q​u​e​ ​e​l​ ​b​o​t​ó​n​ ​d​e​ ​a​r​r​i​b​a​ ​p​a​r​a​ ​c​o​n​t​i​n​u​a​r​.​\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 343,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1735.568747330394,
+        5870.929299719568
+      ],
+      "name": "Text"
+    },
+    "346": {
+      "id": 346,
+      "data": {
+        "isPromotionalChecked": true,
+        "isNonPromotionalChecked": false,
+        "promotional": "780",
+        "promotionalText": "13 hours",
+        "nonPromotional": "",
+        "nonPromotionalText": ""
+      },
+      "inputs": {
+        "sequenceSingleInput": {
+          "connections": [
+            {
+              "node": 25,
+              "output": "sequenceOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "sequenceSingleOutput": {
+          "connections": [
+            {
+              "node": 347,
+              "input": "newPostbackInput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "position": [
+        157.9782307473816,
+        6400.5608765063935
+      ],
+      "name": "Sequence Single"
+    },
+    "347": {
+      "id": 347,
+      "data": {
+        "title": "M17",
+        "postbackId": "n6r85v68a7lsvdo",
+        "labelIds": [],
+        "labelIdTextsArray": [],
+        "sequenceIdValue": "",
+        "sequenceIdText": "Select a sequence"
+      },
+      "inputs": {
+        "newPostbackInputTrigger": {
+          "connections": []
+        },
+        "newPostbackInput": {
+          "connections": [
+            {
+              "node": 346,
+              "output": "sequenceSingleOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "newPostbackOutput": {
+          "connections": [
+            {
+              "node": 348,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "newPostbackOutputSequence": {
+          "connections": []
+        }
+      },
+      "position": [
+        651.2867313933932,
+        6416.807509770095
+      ],
+      "name": "New Postback"
+    },
+    "348": {
+      "id": 348,
+      "data": {
+        "uniqueId": "v3kxkmhpr930san",
+        "textMessage": "👇 👇 👇",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": false
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 347,
+              "output": "newPostbackOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": [
+            {
+              "node": 350,
+              "input": "textInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputButton": {
+          "connections": [
+            {
+              "node": 349,
+              "input": "buttonInput",
+              "data": {}
+            }
+          ]
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        981.7404338446379,
+        6417.915708676553
+      ],
+      "name": "Text"
+    },
+    "349": {
+      "id": 349,
+      "data": {
+        "postbackId": "jgtjctc6aexydu0",
+        "buttonText": "✔️SOLICITA AHORA",
+        "buttonType": "web_url",
+        "text": "Web URL",
+        "value": "https://tarjeta.openzed.com/XHjXLCc9/?utm_source=facebook&utm_medium=g003-d&utm_campaign=pg_#PAGE_ID#&utm_term=openzed-tarjeta-us-cc-es-funil&utm_content=drip_us_cc_m15-1"
+      },
+      "inputs": {
+        "buttonInput": {
+          "connections": [
+            {
+              "node": 348,
+              "output": "textOutputButton",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "buttonOutput": {
+          "connections": []
+        }
+      },
+      "position": [
+        1366.8119461406166,
+        6468.585578628503
+      ],
+      "name": "Button"
+    },
+    "350": {
+      "id": 350,
+      "data": {
+        "uniqueId": "ynhj6dpjq2odkab",
+        "textMessage": "​¡​H​o​l​a​ ​#LEAD_USER_FIRST_NAME#,​ ​t​u​ ​a​p​r​o​b​a​c​i​ó​n​ ​e​s​t​á​ ​c​a​s​i​ ​l​i​s​t​a​!​\n​💳​ ​H​e​m​o​s​ ​d​e​s​b​l​o​q​u​e​a​d​o​ ​u​n​a​ ​t​a​r​j​e​t​a​ ​d​e​ ​c​r​é​d​i​t​o​ ​c​o​n​ ​u​n​ ​l​í​m​i​t​e​ ​d​e​ ​h​a​s​t​a​ ​$​1​3​,​8​7​0​ ​s​o​l​o​ ​p​a​r​a​ ​t​i​.​\n​\n⬆​ ​T​o​q​u​e​ ​e​l​ ​b​o​t​ó​n​ ​d​e​ ​a​r​r​i​b​a​ ​p​a​r​a​ ​c​o​n​t​i​n​u​a​r​.​\n",
+        "delayReplyFor": "0",
+        "IsTypingOnDisplayChecked": true
+      },
+      "inputs": {
+        "textInput": {
+          "connections": [
+            {
+              "node": 348,
+              "output": "textOutput",
+              "data": {}
+            }
+          ]
+        }
+      },
+      "outputs": {
+        "textOutput": {
+          "connections": []
+        },
+        "textOutputButton": {
+          "connections": []
+        },
+        "textOutputQuickreply": {
+          "connections": []
+        }
+      },
+      "position": [
+        1735.568747330394,
+        6370.929299719568
+      ],
+      "name": "Text"
+    }
+  }
+}
