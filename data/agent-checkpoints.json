@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "google-cloud-mgs-core-cutover-20260717",
-      "next_step": "Obter confirmação crítica de Rodolfo para billing Gemini com conta/budget definidos e para rotação do token 1Password Zeus; depois canário de imagem, backup quick/restore readback, exclusão permanente residual/projetos antigos, varredura final, inventário status completed e REPORT-INFRA final.",
+      "next_step": "Rodolfo decides rotate vs explicitly accept risk for current Zeus 1Password token. If rotate: human admin creates new service account/token and stores it securely for Zeus readback, Zeus swaps/validates, then old token is revoked. Also permanently delete old OAuth item from 1Password Recently Deleted and verify/delete old Cloud projects through human admin; run backup quick/readback, final scan and final REPORT-INFRA.",
       "objective": "Consolidar credenciais Google Cloud/Drive/Sheets/Gemini dos agentes MGS no projeto mgs-core-prod e retirar dependências operacionais antigas com canários e readback.",
-      "source": "Discord thread 1527528492391075930; authorization 1527540826119340163; audit event mgs_google_cloud_cutover_partial_validated",
-      "state": "drive/sheets cutover validated: iam service usage consumer http 200; canary create/write/read/update/delete pass; root monitor, ares preflight, meta app roles/b011 dry-runs and bounded dtr/sb dry-run pass. active legacy refs=0; oauth scripts/local secrets/jobs removed; old 1p oauth item moved to recently deleted; mattei2005 removed from mgs-agents; only support and mgsagent remain managers. gemini auth key/catalog http 200 but image generation blocked resource_exhausted free-tier limit 0. internal trace exposed .env context; gitignored and backup copy removed, but zeus 1password token rotation pending.",
+      "source": "Discord thread 1527528492391075930; Gemini canary audit mgs_gemini_billing_and_image_canary_validated",
+      "state": "drive/sheets/gemini cutover validated. iam quota read http 200; drive/sheets canary pass and deleted; active legacy refs=0; oauth scripts/secrets/jobs removed; old oauth item in recently deleted; mattei2005 removed from shared drive; only support+mgsagent managers. gemini billing active: gemini-3.1-flash-image-preview returned http 200 jpeg 1024x1024, sha256 validated, canary deleted. remaining security gate: current zeus 1password service-account token still works but appeared in internal tool trace; service-account-authenticated cli cannot create replacement.",
       "thread_id": "1527528492391075930",
-      "updated_at": "2026-07-17T06:20:54+00:00"
+      "updated_at": "2026-07-17T06:33:09+00:00"
     },
     {
       "agent": "zeus",
@@ -92,5 +92,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T06:26:31+00:00"
+  "updated_at": "2026-07-17T06:33:09+00:00"
 }

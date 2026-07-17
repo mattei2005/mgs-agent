@@ -529,11 +529,12 @@
         "dtr_sb_bounded_dry_run": "PASS",
         "active_legacy_reference_scan": "0",
         "gemini_models_catalog": "HTTP 200",
-        "gemini_image_generation": "BLOCKED quota free_tier limit=0"
+        "gemini_image_generation": "PASS HTTP 200 JPEG 1024x1024 SHA256 validated and canary deleted",
+        "gemini_billing": "ACTIVE validated by paid-model image generation"
       },
       "security_followup": "Rotate Zeus 1Password service-account token because a tool diff included .env context in internal trace; .env remains gitignored and rollback copy was removed.",
-      "status": "drive_sheets_cutover_validated_gemini_billing_and_1p_token_rotation_pending",
-      "updated_at": "2026-07-17T02:20:26.385046-04:00",
+      "status": "drive_sheets_gemini_cutover_validated_1p_rotation_pending",
+      "updated_at": "2026-07-17T02:33:09.384143-04:00",
       "checkpoint_id": "google-cloud-mgs-core-cutover-20260717"
     },
     {
