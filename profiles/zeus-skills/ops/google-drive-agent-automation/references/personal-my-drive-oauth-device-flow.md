@@ -18,7 +18,7 @@ Desktop app                              https://www.googleapis.com/auth/drive  
 
 1. If the user already created a device-flow OAuth client, retry it with the full Drive scope once; if Google returns `invalid_scope`, try `drive.file` only as a limited smoke-test path.
 2. If the production requirement is broad access to an existing folder tree, prepare a Desktop OAuth fallback instead of repeatedly retrying device flow.
-3. Store `client_id`, `client_secret`, and `refresh_token` in 1Password item `Google OAuth - Ares Drive`; never print the values.
+3. For a future explicitly approved exception, create a new scoped item such as `Google OAuth - Personal Drive Exception`; never reuse a retired operational credential or print values.
 4. Validate OAuth mode safely: if the 1Password item is missing/incomplete, the script should fail before Drive writes or report CSV changes.
 5. After approval, run the Drive batch with `--limit 1 --max-errors 1`; only then run the full queue.
 
@@ -29,7 +29,7 @@ For one-person/internal MGS use, do **not** send the OAuth app through Google ve
 ```text
 Publishing status       Testing
 User type               External
-Test users              mattei2005@gmail.com (or the account approving OAuth)
+Test users              explicitly approved Google account
 Branding/verification   minimum required fields only; no verification center unless app is public
 ```
 
@@ -40,7 +40,7 @@ If Google shows `Access blocked: <app> has not completed the Google verification
 A 1Password service account may be able to **read** an OAuth credential item but fail to **edit** it after Google approval (`Couldn't update the item`). Do not discard the authorization success or expose the token in chat. Preferred handling:
 
 1. Try to save `refresh_token` back into the configured 1Password item using a template/stdin path, not argv assignment.
-2. If 1Password update is denied, save only the `refresh_token` to a root-only local file under a gitignored secret directory, e.g. `/root/mgs-agent/.secrets/ares-google-drive-oauth.json` with mode `0600` and parent `0700`.
+2. If 1Password update is denied, stop and request a storage decision; do not recreate retired MGS local OAuth files as an automatic fallback.
 3. Add `.secrets/`/`secrets/` to `.gitignore` before writing the fallback file.
 4. Update runtime OAuth credential loading to read `client_id`/`client_secret` from 1Password and `refresh_token` from the local fallback file when present.
 5. Report only storage location class (`1Password` or `local root-only secret file`) and token length, never the token value.

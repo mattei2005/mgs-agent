@@ -10,13 +10,11 @@ A cron can return `OK` for the Meta role checks while the sheet sync silently fa
 
 ## Current production auth model
 
-The cron prefers OAuth from:
+The cron uses only `mgsagent@mgs-core-prod.iam.gserviceaccount.com` through `Google Service Account - MGS Agent`. Personal OAuth fallback and its local token files were retired on 2026-07-17. The service account has Sheets API access and `roles/serviceusage.serviceUsageConsumer`, validated by quota-attributed readback.
 
-```text
-/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json
-```
+## Historical OAuth path — superseded
 
-That file contains `client_id`, `client_secret`, and `refresh_token` and is root-only/gitignored. The Google service account fallback may not work for Sheets if the service account project has Sheets API disabled.
+The procedure below records the former incident response for audit only. Do not recreate the retired OAuth item, helper scripts or local token files.
 
 ## Reauth flow
 

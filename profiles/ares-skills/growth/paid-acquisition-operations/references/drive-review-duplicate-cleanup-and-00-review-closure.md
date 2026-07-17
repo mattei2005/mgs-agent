@@ -19,10 +19,10 @@ Preserve `UPLOAD_CANVAS` RAW unless the user explicitly asks to alter/delete RAW
    - remaining `00_REVIEW` items.
 3. Fix canonical-name issues and filename collisions first.
 4. For MD5 duplicates, keep one file per group and trash the rest only after Rodolfo approves deletion.
-5. If Service Account can edit but cannot trash/delete:
+5. If the canonical Service Account can edit but cannot trash/delete:
    - check file capabilities (`canTrash`, `canDelete`, `ownedByMe`);
-   - retry with configured real-user OAuth (`ARES_DRIVE_AUTH_MODE=oauth`);
-   - if refresh token is expired/revoked, use `ares-google-drive-oauth-desktop-init.py` to print an auth URL and exchange the returned `code` without exposing tokens.
+   - verify Shared Drive membership and `organizer` role;
+   - fail closed and escalate the capability mismatch; do not revive personal OAuth as fallback.
 6. For `00_REVIEW` closure:
    - download the cleaned review copies or sample their thumbnails/frames;
    - build a visual contact sheet/timeline for review;

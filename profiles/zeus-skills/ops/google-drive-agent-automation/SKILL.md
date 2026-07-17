@@ -145,7 +145,7 @@ Report CSV                  Record source ID, destination ID, hashes, status, er
 Large run                   Resume-safe; skip already uploaded IDs
 ```
 
-Use the canonical env contract rather than hardcoding another identity:
+Use the canonical env contract rather than hardcoding another identity. Because MGS wrappers load `/root/mgs-agent/.env` with shell `source`, every item title containing spaces must be quoted; validate with `bash -n` plus a sanitized readback of the selected keys.
 
 ```text
 ARES_DRIVE_ROOT_FOLDER_ID=0AEwt4Ye690ocUk9PVA

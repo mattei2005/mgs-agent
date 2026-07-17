@@ -66,7 +66,7 @@ def gemini_key() -> str:
             return os.environ[name]
     try:
         p = subprocess.run(
-            ["op", "item", "get", "Gemini API Key", "--vault", os.getenv("OP_DEFAULT_VAULT", "MGS Conteúdo"), "--fields", "api_key", "--reveal"],
+            ["op", "item", "get", "Gemini API Key - MGS Core", "--vault", os.getenv("OP_DEFAULT_VAULT", "MGS Conteúdo"), "--fields", "api_key", "--reveal"],
             text=True,
             capture_output=True,
             timeout=20,

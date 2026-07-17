@@ -1,5 +1,7 @@
 # Drive OAuth `invalid_grant` self-service reauthorization pattern
 
+> Historical case study only. The Ares OAuth watchdog, helper scripts, 1Password item and local token files were retired in the `mgs-core-prod` cutover on 2026-07-17. Do not execute the legacy commands below or recreate those resources; use the canonical MGS Service Account.
+
 Session pattern: Ares Drive OAuth watchdog detected Google token refresh failure:
 
 ```text
