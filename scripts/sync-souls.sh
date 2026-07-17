@@ -81,6 +81,19 @@ if [ -d "$PROFILES_DIR/ares/skills/growth" ]; then
         && echo "$(date -Iseconds) synced ares skills/growth"
 fi
 
+# Canonical Google Workspace route for Atena and Ares.
+# These profile-local skills replace the generic personal-auth flow with the
+# mgs-core-prod Service Account contract and fail-closed compatibility scripts.
+for agent in atena ares; do
+    if [ -d "$PROFILES_DIR/$agent/skills/productivity/google-workspace" ]; then
+        mkdir -p "$TARGET_DIR/$agent-skills/productivity"
+        rsync -a --delete \
+            "$PROFILES_DIR/$agent/skills/productivity/google-workspace/" \
+            "$TARGET_DIR/$agent-skills/productivity/google-workspace/" \
+            && echo "$(date -Iseconds) synced $agent skills/productivity/google-workspace"
+    fi
+done
+
 # Ares: skills ops MGS compartilhadas, sincronizadas seletivamente.
 # Não sincronizar a categoria ops inteira: preservar apenas as skills operacionais
 # que foram auditadas/refatoradas e precisam de mirror versionado.

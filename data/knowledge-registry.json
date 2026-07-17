@@ -163,6 +163,26 @@
       "updated_at": "2026-07-16T13:52:32+00:00"
     },
     {
+      "canonical_key": "decision.honcho-memory.all-agents",
+      "canonical_source": "docs/mgs-honcho-memory-standard.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "hera",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-17",
+      "id": "DEC-2026-005",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Integrate native Honcho memory across all MGS agents",
+      "updated_at": "2026-07-17T13:50:26+00:00"
+    },
+    {
       "canonical_key": "source.company-os",
       "canonical_source": "context/company-os.md",
       "consumers": [
@@ -202,5 +222,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-16T13:52:32+00:00"
+  "updated_at": "2026-07-17T13:50:26+00:00"
 }

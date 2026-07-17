@@ -28,6 +28,40 @@ Project display names can change; Project IDs cannot. Reject random generated ID
 9. Preserve historical references only when clearly marked `Historical / superseded / do not execute`.
 10. Update infrastructure inventory, audit log, checkpoint and REPORT-INFRA.
 
+## Consumer coverage and exact-runtime proof
+
+A credential catalog or generic API canary is not a complete consumer inventory. Search every operational execution surface, including:
+
+- `/root/mgs-agent/scripts/` and wrappers referenced by cron/systemd;
+- `skills/**/scripts/` and any project-local production skills;
+- live profile scripts and versioned profile mirrors;
+- config/env selectors, 1Password item titles and hard-coded model IDs.
+
+Classify `tmp/`, caches, imports, analysis packs, audit logs and dated evidence separately so historical matches do not hide active ones or trigger destructive cleanup.
+
+After a generic Drive/Sheets/Gemini canary passes, run the **exact real consumer** that was migrated. For Gemini this must verify both independent selectors: the 1Password item title and the model endpoint. A valid new key can coexist with an operational script still pointing to the old item or old model. Exercise the consumer's full dependency chain, validate the produced artifact, then delete the canary. Check declared external commands/packages before the run; if setup is missing, install or configure the dependency through the authorized infrastructure path and rerun the real consumer instead of treating the generic API response as completion.
+
+### Identity-specific Sheet manifest
+
+A successful Sheet inventory belongs to the exact Service Account email that was tested. When the project or Service Account changes, prior `18/18` or similar results do not transfer to the replacement identity.
+
+1. Preserve a named manifest of every in-scope Sheet, including on-demand finance files and My Drive files kept in place to preserve IDs/forms/formulas.
+2. Probe each manifest entry with the replacement identity on both APIs: Drive `files.get` and Sheets `spreadsheets.get`, with quota attribution where required.
+3. Treat Drive 404 plus Sheets 403 after an identity replacement as a likely file-level sharing gap, not proof that the APIs or Shared Drive are unhealthy.
+4. Do not infer portfolio coverage from the Shared Drive root, a disposable Sheet, or the subset of hard-coded IDs found in current scripts. On-demand files may be known only from the canonical workflow manifest/checkpoint.
+5. Keep the old identity until every manifest row passes, unless Rodolfo explicitly accepted no rollback. If the old identity was deleted first, reopen the cutover rather than recording completion.
+
+### Safe consumer probes
+
+Before executing a supposed dry-run or `--help`, inspect the script's entry point and mode gates. Some legacy one-shot scripts execute API calls at module import, ignore `--help`, or write local state/reports even when external writes are disabled. For long portfolio scans:
+
+- confirm the exact interpreter/wrapper used by cron;
+- verify which side effects are gated by `--apply` and which logs/state/backups are not;
+- use real bounded flags such as user/account/page limits rather than inventing `--dry-run`;
+- set a timeout only after estimating the full portfolio duration;
+- after timeout, confirm no process remains and classify the result as partial;
+- never convert zero errors observed before timeout into a completed PASS.
+
 ## Drive + Sheets canary
 
 Use a disposable Google Sheet inside the Shared Drive:
@@ -102,4 +136,25 @@ After cleanup, validate:
 - old human/Service Account absent from Shared Drive permissions;
 - active scripts/config contain zero old item names, OAuth paths, old emails or old Service Account identities.
 
-Project deletion and permanent 1Password deletion may require the human admin UI. Report them as pending until independently verified; never call the cutover complete based on an instruction alone.
+Project deletion and permanent 1Password deletion may require the human admin UI. Keep the evidence level explicit and do not overstate what automation proved.
+
+## Closing human-only deletion gates
+
+When an external cleanup is visible only in a human administrator UI, distinguish three evidence classes:
+
+1. **Automated readback** — API/CLI returns the actual lifecycle/deletion state. This is independently verified.
+2. **Partial automated corroboration** — for example, `op item get` confirms an item is absent from the active vault, but a service-account CLI cannot inspect **Recently Deleted**. Record exactly what was corroborated; absence from the active vault does not prove permanent deletion.
+3. **Human administrator confirmation** — Rodolfo confirms the state after checking the authoritative UI. This can close the manual action operationally, but inventory, checkpoint and audit must label it `manually confirmed`, not `API verified` or `independently verified`.
+
+Closure procedure:
+
+- identify the exact user message that confirms the UI action;
+- run every non-mutating corroboration available without exposing credentials;
+- if an API needed only for verification is disabled, do not enable it merely to obtain a cleaner readback unless that state change is separately requested/authorized;
+- preserve protected resources explicitly (for example, record that the canonical project was retained);
+- clear the operational pending list only when the manual action itself is confirmed, while retaining the verification limitation in structured evidence;
+- update inventory, checkpoint and append-only audit with the confirmation source and evidence class;
+- send the final REPORT-INFRA and validate its Discord message readback;
+- report the outcome as “closed with manual external confirmation” when direct automated proof is unavailable.
+
+Never translate a short confirmation such as “feito” into stronger technical evidence than the source supports. Resolve it against the immediately preceding requested actions, record those actions precisely, and state any readback limitation concisely.

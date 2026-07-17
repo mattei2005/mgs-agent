@@ -73,6 +73,9 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
             "Alert capacity at 90% in #limites-90; ID `1527401973698007060`.",
         ]
         limit = math.floor(len(before) / 0.9)
+        target_chars = math.floor(limit * 0.89)
+        budgets = compactor._entry_budgets(original, target_chars)
+        selected = [i + 1 for i, row in enumerate(original) if budgets[i] < len(row)]
         source = self.write_store(before, user_limit=limit)
         calls = []
 
@@ -80,12 +83,12 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
             calls.append(prompt)
             if len(calls) == 1:
                 return {"entries": [
-                    {"index": 1, "text": candidate[0]},
-                    {"index": 2, "text": candidate[1]},
+                    {"index": index, "text": candidate[index - 1]}
+                    for index in selected
                 ]}
             return {"valid": True, "entries": [
-                {"index": 1, "equivalent": True, "missing": [], "added": []},
-                {"index": 2, "equivalent": True, "missing": [], "added": []},
+                {"index": index, "equivalent": True, "missing": [], "added": []}
+                for index in selected
             ]}
 
         result = compactor.compact_store(
@@ -100,7 +103,10 @@ class HermesMemoryAutocompactorTests(unittest.TestCase):
         self.assertEqual(len(calls), 2)
         self.assertEqual(result["mode"], "semantic_verified")
         self.assertTrue(result["readback_matches"])
-        self.assertEqual(source.read_text(), compactor.ENTRY_DELIMITER.join(candidate))
+        expected = list(original)
+        for index in selected:
+            expected[index - 1] = candidate[index - 1]
+        self.assertEqual(source.read_text(), compactor.ENTRY_DELIMITER.join(expected))
         self.assertLess(result["after_chars"], result["before_chars"])
 
     def test_verifier_failure_keeps_source_unchanged(self):

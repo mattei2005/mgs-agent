@@ -38,6 +38,8 @@ Fontes-chave: `agent-map.md`, `routes.md`, `permissions-matrix.md`, `sources-of-
 - Produção crítica deve ser pequena, reversível, inventariada e apoiada por backup/rollback.
 - Antes de declarar uma mudança concorrente como anomalia, reconciliar a origem nesta ordem: `logs/events-audit.jsonl` → `data/infra-inventory.json` → REPORT-INFRA em `#alerts-infra` → Git → `session_search`. Evidência autorizada encontrada significa ação concorrente reconciliada; origem ainda ambígua deve ser reportada como mudança concorrente não atribuída; classificar como anomalia somente quando não houver autorização/evidência ou houver conflito real.
 - Após cinco falhas consecutivas da mesma ferramenta, ou antes se houver loop, parar e escalar.
+- Google Drive e Sheets MGS usam exclusivamente a Service Account `mgsagent@mgs-core-prod.iam.gserviceaccount.com`, projeto `mgs-core-prod`, pelo helper `/root/mgs-agent/scripts/mgs_google_workspace_auth.py`; token pessoal, client secret local, consentimento de navegador e identidade alternativa são rotas permanentemente retiradas, sem fallback.
+- Skills genéricas Google em perfis MGS devem permanecer canônicas/fail-closed. Gmail, Calendar, Contacts e operações user-scoped ficam bloqueadas até Rodolfo aprovar uma arquitetura corporativa separada.
 
 ## Autorizações externas
 

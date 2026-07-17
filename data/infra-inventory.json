@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-17T02:25:01-04:00",
+    "updated_at": "2026-07-17T10:07:01-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -513,7 +513,7 @@
         "audit-featured-image.py"
       ],
       "removed_legacy": [
-        "Google OAuth - Ares Drive item moved to Recently Deleted",
+        "Google OAuth - Ares Drive item permanently deleted by human administrator; active-vault CLI readback confirms absent",
         "local Ares Google OAuth token/client files",
         "Ares/Hera OAuth watchdog jobs",
         "Ares OAuth init/watchdog scripts",
@@ -530,12 +530,76 @@
         "active_legacy_reference_scan": "0",
         "gemini_models_catalog": "HTTP 200",
         "gemini_image_generation": "PASS HTTP 200 JPEG 1024x1024 SHA256 validated and canary deleted",
-        "gemini_billing": "ACTIVE validated by paid-model image generation"
+        "gemini_billing": "ACTIVE validated by paid-model image generation",
+        "onepassword_rotation": "PASS new UUID active; old UUID retired",
+        "rec_p1_gemini_31_canary": "PASS JPEG 1280x720 115878 bytes SHA256 427dba61b20dfac4837a93988906555f8598c26c7d0325ddf1e2ade2f7b9baf4; deleted",
+        "offsite_quick_backup": "PASS remote 13GCZHyGd5-iyrnn2KVlf0vPoC4IJqHB7 size 769723545",
+        "offsite_isolated_restore": "PASS 4 components duration 56.125s",
+        "backup_crons": "4 active exact readback",
+        "runtime_legacy_reference_scan": "0",
+        "imagemagick_dependency": "installed and REC/P1 canary exercised"
       },
-      "security_followup": "Rotate Zeus 1Password service-account token because a tool diff included .env context in internal trace; .env remains gitignored and rollback copy was removed.",
-      "status": "drive_sheets_gemini_cutover_validated_1p_rotation_pending",
-      "updated_at": "2026-07-17T02:33:09.384143-04:00",
-      "checkpoint_id": "google-cloud-mgs-core-cutover-20260717"
+      "security_followup": "Resolved: Zeus 1Password service-account token rotated to new identity; old identity deleted; .env mode 0600; required item reads, consumers, backup and restore validated.",
+      "status": "revalidation_gap_detected_action_required",
+      "updated_at": "2026-07-17T09:54:49-04:00",
+      "checkpoint_id": "google-cloud-mgs-core-cutover-20260717",
+      "onepassword_runtime": {
+        "service_account_name": "MGS Agent VPS",
+        "new_user_uuid": "FW4K3RLS4VB7LMQK3O5DUZBPPU",
+        "old_user_uuid": "ZLVLCVL74ZGNDIPHBEL6SEEOMA",
+        "old_identity_status": "deleted",
+        "env_path": "/root/mgs-agent/.env",
+        "env_mode": "0600",
+        "required_item_reads": "PASS"
+      },
+      "external_pending": [
+        "Share the six current finance Sheets with mgsagent@mgs-core-prod.iam.gserviceaccount.com as Editor, then require Drive and Sheets HTTP 200 readback for all six.",
+        "Confirm deletion of revoked legacy OAuth backup /root/mgs-agent/.secrets/ares-google-drive-oauth-client.json.bak-20260709-reauth; file deletion requires the Critical Subset confirmation.",
+        "Authorize cleanup or retirement of dormant OAuth retry utility and broken obsolete rebuild-sb-restricted-pages-sheet.py before editing scripts."
+      ],
+      "external_confirmation": {
+        "source": "Discord message 1527664566874538034 from Rodolfo Mattei",
+        "confirmed_at": "2026-07-17T09:16:33-04:00",
+        "onepassword": "Permanent deletion manually confirmed; independent CLI readback confirms item absent from active vault, but service-account CLI cannot inspect Recently Deleted.",
+        "google_cloud_projects": "Deletion or pending deletion of mgs-ares and poised-team-502702-v8 manually confirmed in Resource Manager. Automated readback unavailable because Cloud Resource Manager API is disabled in mgs-core-prod and the browser session is unauthenticated.",
+        "protected_project": "mgs-core-prod retained"
+      },
+      "revalidation_20260717": {
+        "source_message_id": "1527668657784754358",
+        "scanned_files": 4469,
+        "profiles": [
+          "zeus",
+          "atena",
+          "ares"
+        ],
+        "canonical_identity": {
+          "project_id": "mgs-core-prod",
+          "service_account": "mgsagent@mgs-core-prod.iam.gserviceaccount.com",
+          "onepassword_service_account_item": "present",
+          "gemini_item": "present",
+          "old_oauth_item_active_vault": "absent"
+        },
+        "healthy": {
+          "drive_watchdog": "PASS primary=service_account root_access_ok",
+          "shared_drive_root": "HTTP 200; canAddChildren/canEdit/canModifyContent true",
+          "shared_drive_membership_capability": "canManageMembers true",
+          "gemini_models": "HTTP 200; gemini-3.1-flash-image-preview present",
+          "dtr_sheets": "3/3 direct active Sheets Drive+Sheets HTTP 200 via canonical Service Account",
+          "atena_shared_drive_sheets": "3/3 editorial reference Sheets HTTP 200",
+          "shared_drive_sheets_total": "5/5 HTTP 200 and canEdit",
+          "meta_app_roles_dry_run": "exit 0",
+          "b011_dry_run": "PASS 1/1 linked errors=0",
+          "syntax": "PASS for canonical Google, Drive and Gemini consumers"
+        },
+        "findings": {
+          "finance_sheets_access": "FAIL: principal plus Kelly, Isliago, George, Nicolas and Joe return Sheets HTTP 403 and Drive HTTP 404 to the mgs-core-prod Service Account; they were shared only with the retired prior identity.",
+          "legacy_oauth_backup": "FAIL: revoked refresh token, client_id and client_secret remain in root-only gitignored backup /root/mgs-agent/.secrets/ares-google-drive-oauth-client.json.bak-20260709-reauth; refresh probe returns invalid_grant.",
+          "dormant_oauth_retry": "FAIL-CLOSED but stale: ares-promote-review-ready-retry.sh forces ARES_DRIVE_AUTH_MODE=oauth; no cron/job/systemd call site and executor rejects OAuth mode.",
+          "obsolete_rebuild": "BROKEN and unreferenced: rebuild-sb-restricted-pages-sheet.py expects deleted tab GID 232316676 and raises KeyError before write; no cron/job/systemd call site.",
+          "generic_oauth_skills": "Atena and Ares include generic Google Workspace OAuth skill, but no Google OAuth runtime files, jobs or profile env selectors exist.",
+          "dtr_full_dry_run": "PARTIAL: exact wrapper scanned many accounts with zero reported per-account errors but exceeded 300 seconds before completion; no SB/Sheet write because --apply was absent, and no final report/state write was reached."
+        }
+      }
     },
     {
       "id": "mgs-discord-live-progress-20260715",
@@ -1008,10 +1072,12 @@
       "size_bytes": 117,
       "modified_at": "2026-06-20T11:49:37-04:00",
       "sha256": "acdac8c2fcb018c84d3622e33ff2cf7350699046ffc5b073eab02ee47fce1375",
-      "purpose": "Hermes cron wrapper for Ares Drive OAuth watchdog.",
-      "validation": "bash -n OK; referenced by Hermes cron d1a064017e27",
+      "purpose": "Historical record of the retired Ares user-auth watchdog wrapper; not a runtime route.",
+      "validation": "REMOVED: profile script absent; former Hermes cron removed; current jobs contain no reference; canonical monitor-drive-auth-unified.py is Service Account only.",
       "git_tracked": false,
-      "updated_at": "2026-06-20T11:52:28-04:00"
+      "status": "retired_removed",
+      "removed_at": "2026-07-17T09:54:49-04:00",
+      "updated_at": "2026-07-17T09:54:49-04:00"
     },
     {
       "id": "ares-meta-hoa-manager-profile-wrapper",
@@ -1651,11 +1717,13 @@
       "size_bytes": 371,
       "mode": "600",
       "git_tracked": false,
-      "purpose": "Credencial OAuth Google Drive reautorizada por consentimento humano de Rodolfo; usada como caminho válido de upload em My Drive pessoal.",
-      "validation": "Authorization code exchanged; refresh token validated via oauth2 token endpoint HTTP 200; no token values logged in report.",
-      "updated_at": "2026-07-09T19:53:05-04:00",
+      "purpose": "Historical record of the retired personal Google credential; no runtime path remains.",
+      "validation": "REMOVED: primary file and backup absent by readback; former active-vault item absent; production consumers validated on the mgs-core-prod Service Account.",
+      "updated_at": "2026-07-17T09:54:49-04:00",
       "modified_at": "2026-07-09T19:51:39-04:00",
-      "backup_path": "/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json.bak-20260709-reauth"
+      "backup_path": "/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json.bak-20260709-reauth",
+      "status": "retired_removed",
+      "removed_at": "2026-07-17T09:54:49-04:00"
     },
     {
       "id": "hermes-update-v0.18.2-2026-07-10",
@@ -2905,8 +2973,8 @@
       "spreadsheet_id": "16eU20O49_CycSZNDmreBMZBs2l1qhIT7ZQbZOuQc0dg",
       "title": "diferenca de leads",
       "url": "https://docs.google.com/spreadsheets/d/16eU20O49_CycSZNDmreBMZBs2l1qhIT7ZQbZOuQc0dg/edit",
-      "auth_mode": "Google Service Account via canonical mgs_google_workspace_auth.py",
-      "access_readback": "Drive HTTP 200 canEdit/canModify; Sheets HTTP 200 after administrator enabled sheets.googleapis.com",
+      "auth_mode": "Canonical Google Service Account mgsagent@mgs-core-prod.iam.gserviceaccount.com via mgs_google_workspace_auth.py",
+      "access_readback": "Drive HTTP 200 canEdit/canModify; Sheets HTTP 200 with canonical mgs-core-prod Service Account",
       "business_date": "2026-07-15",
       "business_timezone": "America/Sao_Paulo",
       "source_scope": {
@@ -2918,19 +2986,19 @@
           "rows": 6813,
           "unique_normalized_phones": 5900,
           "repeated_occurrences_beyond_unique": 913,
-          "sha256": "572e4dfff30768fba9bcc9e7a74af20e1105768d9b37c1ae4ed5739ee7380d12"
+          "sha256": "3b033e8d68a36dfb9b71adc7f2599a5a33b5c0baa07ea0c3644866d1500c87ee"
         },
         "smsfunnel": {
           "rows": 6339,
           "unique_normalized_phones": 5869,
           "repeated_occurrences_beyond_unique": 470,
-          "sha256": "b86f641e6698690f00c3cc8e3408ee461e23d03e11c7c4c3eb28f8c2ccdc0db9"
+          "sha256": "ded39c78527ecfb4406408c66eab5bc0da57c30d10f3ba8fe825f3aec1eccd0d"
         },
         "diferenca": {
           "rows": 492,
           "unique_normalized_phones": 428,
           "repeated_occurrences_beyond_unique": 64,
-          "sha256": "c3d636160fdf44bce991a192eb876f4541078d4be38cda20e81871ab8668a380"
+          "sha256": "b88a79990d5e0549cd2de1297b5da5664bfa7f644e79494c31b98c631dfe5e0f"
         }
       },
       "comparison": {
@@ -2942,10 +3010,23 @@
         "sms_only_occurrences": 18,
         "net_row_gap": 474
       },
-      "presentation": "Exactly three tabs; columns Nome and Número; frozen header, filter, text phone format, widths and borders.",
-      "validation": "Full Sheets API readback equals expected rows and SHA-256 on all three tabs; exact row counts/grid dimensions/filter/frozen header validated; temporary local PII files removed.",
+      "presentation": "Exactly three tabs; columns Nome, Número and Hora de entrada; frozen header, three-column filter, text phone/time formats, widths and borders.",
+      "validation": "Independent full Sheets API readback: exact rows/hashes on A:C, every hour matches HH:MM:SS, three columns, frozen header and filters validated; temporary source PII files removed.",
       "source_report": "REPORT-INFRA SMS send occurrence comparison sheet 2026-07-17",
-      "updated_at": "2026-07-17T04:22:10.490992+00:00"
+      "updated_at": "2026-07-17T14:04:25.519321+00:00",
+      "time_column": {
+        "header": "Hora de entrada",
+        "format": "HH:MM:SS",
+        "timezone": "America/Sao_Paulo",
+        "ccreditoparaveiculo_source": "wp_mgs_quiz_leads.created_at stored UTC and converted to São Paulo",
+        "smsfunnel_source": "message.lead.created_at returned in UTC and converted to São Paulo",
+        "diferenca_source": "original unmatched WordPress occurrence created_at converted to São Paulo"
+      },
+      "backup": {
+        "path": "/root/.hermes/secure-backups/sms-sheet-hour-column-20260717T140050Z/before.json",
+        "mode": "0600",
+        "sha256": "9e4862ca3b55ac6ac564cfe8bd40d428f3a69a2309cb59fcfbff24c2192a7df8"
+      }
     }
   ],
   "profile_skill_references": [
@@ -3629,6 +3710,18 @@
     },
     {
       "entry": "*/5 13,14 * * 5 flock -n /var/lock/monitor_sms_funnel_balance_friday.lock /root/mgs-agent/scripts/monitor-sms-funnel-balance.py --friday-report >> /root/mgs-agent/logs/monitor-sms-funnel-balance.log 2>&1"
+    },
+    {
+      "entry": "25 * * * * python3 /root/mgs-agent/scripts/mgs-offsite-backup.py backup --mode quick >> /root/mgs-agent/logs/mgs-offsite-backup.log 2>&1"
+    },
+    {
+      "entry": "15 3 * * * python3 /root/mgs-agent/scripts/mgs-offsite-backup.py backup --mode full >> /root/mgs-agent/logs/mgs-offsite-backup.log 2>&1"
+    },
+    {
+      "entry": "40 5 * * 0 python3 /root/mgs-agent/scripts/mgs-offsite-backup.py restore-test >> /root/mgs-agent/logs/mgs-offsite-backup.log 2>&1"
+    },
+    {
+      "entry": "12 * * * * python3 /root/mgs-agent/scripts/mgs-offsite-backup.py monitor >> /root/mgs-agent/logs/mgs-offsite-backup.log 2>&1"
     }
   ],
   "scripts": [
@@ -3829,8 +3922,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/auto-commit-watcher.sh",
-      "size_bytes": 7556,
-      "modified_at": "2026-07-10T22:59:58-04:00"
+      "size_bytes": 7747,
+      "modified_at": "2026-07-17T10:06:31-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/chat-log.sh",
@@ -4048,6 +4141,11 @@
       "modified_at": "2026-06-17T18:25:40-04:00"
     },
     {
+      "path": "/root/mgs-agent/scripts/hermes-memory-autocompactor.py",
+      "size_bytes": 22253,
+      "modified_at": "2026-07-17T03:29:18-04:00"
+    },
+    {
       "path": "/root/mgs-agent/scripts/hermes-mgs-patch-watchdog.sh",
       "size_bytes": 3978,
       "modified_at": "2026-07-11T00:37:32-04:00"
@@ -4199,13 +4297,13 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-auto-push.sh",
-      "size_bytes": 13740,
-      "modified_at": "2026-07-11T00:38:59-04:00"
+      "size_bytes": 13888,
+      "modified_at": "2026-07-17T10:06:31-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-cron-stale-logs.sh",
-      "size_bytes": 9923,
-      "modified_at": "2026-07-15T14:36:26-04:00"
+      "size_bytes": 10044,
+      "modified_at": "2026-07-17T07:06:02-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-discord-thread-archive-warnings.py",
@@ -7064,15 +7162,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 8376,
-      "md5": "f8453b038a184b5aa64bd1a63358f02f",
-      "modified_at": "2026-07-17T02:20:54-04:00"
+      "size_bytes": 10003,
+      "md5": "134a94d14ea4cfbd74647b383735c1e6",
+      "modified_at": "2026-07-17T10:06:05-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
-      "size_bytes": 6958,
-      "md5": "c5027ad52e93d5083cfa7e5f6aac08d6",
-      "modified_at": "2026-07-17T02:22:01-04:00"
+      "size_bytes": 7209,
+      "md5": "2e2d6437c3787746c2be84880be9a3c2",
+      "modified_at": "2026-07-17T10:07:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -7082,9 +7180,9 @@
     },
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
-      "size_bytes": 358,
-      "md5": "e710cec98fbbde07ccebde4062917399",
-      "modified_at": "2026-07-17T02:11:43-04:00"
+      "size_bytes": 441,
+      "md5": "8335b798e29bc449e45b80a9ded5724a",
+      "modified_at": "2026-07-17T09:56:46-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -7095,8 +7193,8 @@
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.json",
       "size_bytes": 27127,
-      "md5": "5c50529488065af56651ebc61aeb0a7f",
-      "modified_at": "2026-07-17T02:01:22-04:00"
+      "md5": "4c43d9dc519ad42ea2897d37d440fe7e",
+      "modified_at": "2026-07-17T09:28:48-04:00"
     },
     {
       "path": "/root/mgs-agent/data/button-colors.json",
@@ -7106,21 +7204,21 @@
     },
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
-      "size_bytes": 716,
-      "md5": "42c8562edeb5f154b09e7baeeb712996",
-      "modified_at": "2026-07-17T02:15:01-04:00"
+      "size_bytes": 359,
+      "md5": "cb4199cf4e0efaa3fc6466ad48ede024",
+      "modified_at": "2026-07-17T10:00:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
-      "size_bytes": 5764,
-      "md5": "3cf8b3e977f7b0ed07f12fba1b8a226a",
-      "modified_at": "2026-07-16T09:16:02-04:00"
+      "size_bytes": 6534,
+      "md5": "89ec77c7ef83a2fd27f7af45c26ae61d",
+      "modified_at": "2026-07-17T09:16:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
       "size_bytes": 281,
-      "md5": "6e5d3bf3a70c7de9daa610292d65de6d",
-      "modified_at": "2026-07-17T02:19:01-04:00"
+      "md5": "35b02d264cfc2a20c7712e1263a927bc",
+      "modified_at": "2026-07-17T09:49:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -7131,14 +7229,14 @@
     {
       "path": "/root/mgs-agent/data/dtr-sb-daily-match-audit-state.json",
       "size_bytes": 2797,
-      "md5": "93abc2b72afc8e2cd896c411dbade52d",
-      "modified_at": "2026-07-16T06:55:07-04:00"
+      "md5": "ff8871573d2f41d55c22018a37d98a01",
+      "modified_at": "2026-07-17T06:55:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
-      "size_bytes": 320737,
-      "md5": "8c73f341894de6dbcfdc886f4bf71d35",
-      "modified_at": "2026-07-17T02:12:45-04:00"
+      "size_bytes": 322715,
+      "md5": "4219e090f94159646c99163b4b964950",
+      "modified_at": "2026-07-17T07:45:18-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-restricted-sync-state.json",
@@ -7155,20 +7253,20 @@
     {
       "path": "/root/mgs-agent/data/hermes-mgs-patch-watchdog-state.json",
       "size_bytes": 117,
-      "md5": "b9d6c3e7bdf246392642774efaa4e1ab",
-      "modified_at": "2026-07-16T21:55:46-04:00"
+      "md5": "16a15626b126bc0250e5cb31d1ae2e83",
+      "modified_at": "2026-07-17T09:57:52-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
-      "size_bytes": 27745,
-      "md5": "c6b3d2853e538e021dfd71cc6b83f0d6",
-      "modified_at": "2026-07-17T02:25:01-04:00"
+      "size_bytes": 27874,
+      "md5": "cbb10d58af31d9210ca1d9b6bd86c404",
+      "modified_at": "2026-07-17T10:05:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
-      "size_bytes": 374,
-      "md5": "d8a120bafebb0f64cfdaea33c23ec0f5",
-      "modified_at": "2026-07-17T02:25:01-04:00"
+      "size_bytes": 355,
+      "md5": "df10dd191f3d9564494fe9e751d54793",
+      "modified_at": "2026-07-17T10:07:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -7179,26 +7277,26 @@
     {
       "path": "/root/mgs-agent/data/hermes-version-state.json",
       "size_bytes": 334,
-      "md5": "02e6e6ae3f6774edeb50e0a51e8f3cfc",
-      "modified_at": "2026-07-16T20:37:03-04:00"
+      "md5": "23ff3eeb054db1c8370bf0c455551802",
+      "modified_at": "2026-07-17T08:37:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/honcho-health-state.json",
       "size_bytes": 438,
-      "md5": "3a37095d03d8ca7e53cb21e8f4fc9694",
-      "modified_at": "2026-07-16T22:54:34-04:00"
+      "md5": "8f5c01159e4dd33031abe2a16bbbf0ea",
+      "modified_at": "2026-07-17T08:54:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 321948,
-      "md5": "92ab161134d88919e90424a5a677bc89",
-      "modified_at": "2026-07-17T02:24:22-04:00"
+      "size_bytes": 328461,
+      "md5": "99e4d59464ed98d07b9174305b6f1017",
+      "modified_at": "2026-07-17T10:04:25-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
-      "size_bytes": 6121,
-      "md5": "acf01d84bd286cdd911b08c3eac78d0f",
-      "modified_at": "2026-07-16T09:52:32-04:00"
+      "size_bytes": 6699,
+      "md5": "1a42ebc1b51f34180fc1f99bc5a09006",
+      "modified_at": "2026-07-17T09:50:26-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-regression-cases.json",
@@ -7226,9 +7324,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 49173,
-      "md5": "7974d96fb7068424addd1510e2cb5020",
-      "modified_at": "2026-07-17T01:57:23-04:00"
+      "size_bytes": 49261,
+      "md5": "c48388087068c193213a4de0f708c6e4",
+      "modified_at": "2026-07-17T10:05:35-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -7244,9 +7342,9 @@
     },
     {
       "path": "/root/mgs-agent/data/mgs-offsite-backup-state.json",
-      "size_bytes": 6681,
-      "md5": "c970c667a7547c583b29310b9219e74a",
-      "modified_at": "2026-07-17T01:25:44-04:00"
+      "size_bytes": 7177,
+      "md5": "4c1fc172738c17edfad2db31cd7d8a79",
+      "modified_at": "2026-07-17T09:25:42-04:00"
     },
     {
       "path": "/root/mgs-agent/data/mgs-ops-control-plane-latest.json",
@@ -7256,9 +7354,9 @@
     },
     {
       "path": "/root/mgs-agent/data/op-rate-limit-monitor.json",
-      "size_bytes": 1110,
-      "md5": "b4dcd9d8840d4109953a66e7bde3d679",
-      "modified_at": "2026-07-17T01:39:01-04:00"
+      "size_bytes": 1112,
+      "md5": "d579574d092cd17df67f04953e3ed60c",
+      "modified_at": "2026-07-17T09:39:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/pendencias.db.json",
@@ -7268,9 +7366,9 @@
     },
     {
       "path": "/root/mgs-agent/data/pending-reports-state.json",
-      "size_bytes": 3358,
-      "md5": "f55191c98883f6902b4e625b27ca8231",
-      "modified_at": "2026-07-17T02:22:02-04:00"
+      "size_bytes": 3378,
+      "md5": "53529ce15b55d2395574004e457e71d8",
+      "modified_at": "2026-07-17T10:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -7292,15 +7390,15 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 208068,
-      "md5": "229775d99e157550e98fd8f3d4a98f32",
-      "modified_at": "2026-07-17T02:14:16-04:00"
+      "size_bytes": 208069,
+      "md5": "bde5f8e65f2a0f0fd005c83e2cddef3d",
+      "modified_at": "2026-07-17T09:59:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
-      "size_bytes": 239827,
-      "md5": "3e2b71a8f7990290c9f4e3afd0ac202a",
-      "modified_at": "2026-07-16T09:00:21-04:00"
+      "size_bytes": 444049,
+      "md5": "3069433b9109ed8216f3c254d2f474f5",
+      "modified_at": "2026-07-17T09:01:12-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-rollout-tracker.before-all-active-20260702-013833.json",
@@ -7335,8 +7433,8 @@
     {
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
-      "md5": "94841a0c722ac90b09f5fb75a2fbb336",
-      "modified_at": "2026-07-17T02:21:01-04:00"
+      "md5": "8de29e29052652e5725409ea47cba85d",
+      "modified_at": "2026-07-17T10:06:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -7346,9 +7444,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 2589,
-      "md5": "1e51a867a297dd50d0c84375a63e918f",
-      "modified_at": "2026-07-17T01:24:03-04:00"
+      "size_bytes": 2955,
+      "md5": "f9a755303ba9dae5259ebdbab1a66b71",
+      "modified_at": "2026-07-17T09:24:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -7371,14 +7469,14 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2111,
-      "md5": "4b81f8481e37da0e93b3642220fe4760",
-      "modified_at": "2026-07-17T02:25:04-04:00"
+      "md5": "2963ef6840d1bac20a4f373d4f163d5e",
+      "modified_at": "2026-07-17T10:05:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",
       "size_bytes": 676,
-      "md5": "119068af71d3c3ff68a21f42faeb0c66",
-      "modified_at": "2026-07-16T20:07:02-04:00"
+      "md5": "6b43ddc44ea0ea9e2e7b5e9febc4ddf2",
+      "modified_at": "2026-07-17T08:07:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/wp-term-cache.json",

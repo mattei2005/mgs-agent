@@ -1,126 +1,17 @@
 ---
 name: google-drive-agent-automation
-description: "Operate and troubleshoot Google Drive automation for MGS agents: Service Account vs user OAuth, My Drive vs Shared Drives, preflight checks, quota errors, folder IDs, and safe batch upload/copy flows."
-tags: [google-drive, service-account, oauth, shared-drive, quota, ares, automation, batch-upload, ops]
+description: "Operate MGS Google Drive and Sheets automation exclusively through the canonical mgs-core-prod Service Account and Shared Drive architecture."
+tags: [google-drive, google-sheets, service-account, shared-drive, quota, ares, automation, ops]
 related_skills: [discord-ops, hermes-agent-operations]
 ---
 
 # Google Drive Agent Automation
 
-## When to use
+## Scope
 
-Use this skill when Rodolfo asks Zeus/Ares/Hera/Atena to debug or enable Google Drive automation, especially:
+Use this skill for MGS Drive/Sheets automation, diagnostics, inventory, batch upload, canaries and access repair across Zeus, Atena and Ares.
 
-- Service Account can read/create folders but file upload fails.
-- Drive API returns `403 storageQuotaExceeded`.
-- A batch creative/content pipeline needs to copy/upload many files.
-- A script needs to choose between My Drive, Shared Drive, or real-user OAuth.
-- A Google Drive folder ID must be validated before a destructive or large write run.
-- A Google Sheet needs column values distributed/updated/colored via API, especially when preserving row grouping by site/bot/gestor matters.
-- Rodolfo wants to inventory and migrate only the operational Sheets used by named MGS agents from personal My Drive into the enterprise Shared Drive, without touching unrelated personal content.
-
-## Executive rule
-
-Do **not** treat Drive `canAddChildren=true`, `canEdit=true`, or successful folder creation as proof that uploads will work. For Google Service Accounts, upload viability depends on destination storage model:
-
-```text
-Destination type              Service Account upload outcome
-----------------------------|----------------------------------------------
-Shared Drive                 normally valid if SA has sufficient role
-My Drive folder shared to SA  can read/create folders, but file upload may fail
-Real-user OAuth in My Drive   valid if the user account has quota/permission
-```
-
-## Shared Drive cutover: separate agent health from legacy OAuth consumers
-
-After an operation moves to a canonical Shared Drive, do not infer from a filename or 1Password item such as `ares-google-drive-oauth-client.json` that the owning agent is still using personal OAuth for its primary Drive workflow. First identify the **exact failing consumer** and its credential path.
-
-A common mixed state is:
-
-```text
-Ares creative Drive operations   Service Account + Shared Drive   healthy
-Legacy Google Sheets writers     user OAuth file                   may fail independently
-```
-
-Required checks:
-
-1. Validate the agent's canonical Shared Drive root with its intended Service Account: HTTP 200, `driveId` present, and edit/add capabilities true.
-2. Inspect the exact failing script and credential constant. Report it as a Sheet/report consumer when that is what failed; do not tell Rodolfo that “Ares needs Google authentication” merely because the reused OAuth file carries the Ares name.
-3. Probe the exact spreadsheet with the Service Account on both surfaces:
-   - Drive API metadata (`files.get`) for visibility and capabilities;
-   - Sheets API (`spreadsheets.get`) for real API availability.
-4. Treat Drive HTTP 200 / `canEdit=true` as insufficient proof that Sheets writes will work. If Sheets returns 403 saying `sheets.googleapis.com` is disabled in the Service Account project, the durable correction is to enable the Sheets API in that project and keep the writer on Service Account auth. Moving the spreadsheet or reauthorizing personal OAuth does not enable the API.
-5. When Rodolfo supplied an enterprise/Workspace Sheet and the intended Service Account already has file-level edit access, preserve that architecture. Do not ask him to share the file with a personal OAuth identity merely because API activation is the remaining gate. Try Service Usage once, classify scope versus IAM failure, provide the exact administrator activation URL when needed, then retry the same Service Account after propagation.
-6. Personal OAuth reauthorization may be used only as an explicitly authorized short-term recovery. Describe it as temporary compatibility—not as a requirement of the Shared Drive architecture or the default workaround for a disabled enterprise API.
-7. After any auth recovery, rerun the **exact blocked consumer** in this order: credential refresh probe → bounded dry-run → apply → external Sheet/state readback. A healthy generic Drive watchdog is not sufficient evidence that the original cron recovered.
-
-## Standard diagnostic sequence
-
-For the current MGS architecture, run the canonical Zeus Service Account watchdog before deeper Drive debugging:
-
-```bash
-python3 /root/mgs-agent/scripts/monitor-drive-auth-unified.py --dry-run --force-sa
-```
-
-Expected healthy summary:
-
-```text
-drive_auth status=ok primary=service_account sa=root_access_ok sa_checked=1 dry_run=1
-```
-
-Interpretation: `service_account` is the only active MGS Drive/Sheets runtime mode. A missing/failed canonical credential is an infrastructure failure; do not fall back to the retired Hera/Ares OAuth watchdogs or local token files. Inspect `/root/mgs-agent/data/drive-auth-unified-state.json`, then validate the exact blocked consumer with the shared helper, quota-attributed Sheets metadata and a bounded write/readback/restore canary.
-
-1. Identify the auth mode used by the script:
-   - Service Account JSON/JWT.
-   - OAuth refresh token for a real user.
-   - Domain-wide delegation (only if Workspace/admin configured).
-2. Fetch destination root metadata with Drive API `files.get` using:
-   - `supportsAllDrives=true`
-   - fields: `id,name,driveId,ownedByMe,owners(emailAddress,displayName),capabilities(canAddChildren,canEdit,canModifyContent)`
-3. Interpret `driveId`:
-   - present = item is in a Shared Drive.
-   - absent = item is in My Drive.
-4. If Service Account + My Drive + upload needed, fail fast before downloading/processing large queues.
-5. Check visible Shared Drives with `drives.list`; zero visible drives means the Service Account has not been added to any Shared Drive.
-6. Only run a batch after a one-file smoke test uploads successfully and returns a destination file ID.
-
-## Required preflight for batch upload scripts
-
-Before the script downloads, sanitizes, transforms, or uploads queue items, add a destination preflight:
-
-```text
-Condition                                      Action
----------------------------------------------|---------------------------------------------
-Service Account + destination has no driveId  stop with clear My Drive quota error
-Shared Drive destination                       proceed to one-file smoke test
-Real-user OAuth destination                    proceed if token and quota are valid
-```
-
-The error should be operational, not just raw HTTP:
-
-```text
-DESTINATION_BLOCKED_MY_DRIVE_SERVICE_ACCOUNT:
-root '<folder name>' is a My Drive folder owned by <owner>.
-Google Service Accounts do not have storage quota for file uploads in My Drive.
-Move/use the folder in a Shared Drive or switch this script to real-user OAuth.
-```
-
-## Fix options
-
-```text
-Fix path                    Best use
---------------------------|--------------------------------------------------
-Shared Drive               Best stable automation path for Service Account uploads
-Real-user OAuth            Best when files must remain in a personal My Drive
-Domain-wide delegation     Only for Workspace setups with admin approval
-Manual upload              Last resort; avoid for large queues
-```
-
-For MGS creative pipelines, prefer Shared Drive when available because it keeps the agent as a technical operator without depending on a personal account session.
-
-## MGS implementation pattern
-
-Current canonical identity after the 2026-07-17 cutover:
+## Canonical production identity
 
 ```text
 Google Cloud project       mgs-core-prod
@@ -128,119 +19,147 @@ Service Account            mgsagent@mgs-core-prod.iam.gserviceaccount.com
 1Password item             Google Service Account - MGS Agent
 Canonical Shared Drive     MGS-AGENTS / 0AEwt4Ye690ocUk9PVA
 Runtime auth mode          service_account
-Personal user OAuth        retired; not a fallback
+Personal user auth         permanently retired; never a fallback
+Shared helper              /root/mgs-agent/scripts/mgs_google_workspace_auth.py
+Watchdog                   /root/mgs-agent/scripts/monitor-drive-auth-unified.py
 ```
 
-For Ares creative Drive flows, keep raw uploaded assets immutable and upload only cleaned/final copies:
+MGS production must fail closed if the Service Account is unavailable. Never create, restore, reauthorize or select a personal Google token, local client-secret file, refresh-token file, browser session, or alternate 1Password item as a compatibility path. A future architecture change requires Rodolfo's explicit Critical Subset authorization and a new isolated design; it must not revive retired artifacts.
+
+## Destination rules
 
 ```text
-Source/raw folder           Keep unchanged
-Final/campaign folder       Upload cleaned copy after approval/preflight
-Report CSV                  Record source ID, destination ID, hashes, status, error
-Large run                   Resume-safe; skip already uploaded IDs
+Use case                                      Required destination
+--------------------------------------------  ---------------------------------------------
+New automated file upload                     MGS-AGENTS Shared Drive
+Existing operational Sheet in My Drive        Keep ID; share current file with canonical SA
+Sheet with Forms/IMPORTRANGE/ID dependencies   Keep location unless migration is proven safe
+Ares creative upload                           Shared Drive root with driveId and write caps
+Service Account cannot access existing Sheet   Add canonical SA as Editor; do not change auth
 ```
 
-Use the canonical env contract rather than hardcoding another identity. Because MGS wrappers load `/root/mgs-agent/.env` with shell `source`, every item title containing spaces must be quoted; validate with `bash -n` plus a sanitized readback of the selected keys.
+A Service Account may edit an existing My Drive Sheet that was explicitly shared with it, but new binary/file uploads belong in the Shared Drive because Service Accounts do not have personal storage quota.
+
+## Required preflight
+
+1. Load `/root/mgs-agent/.env` without printing values.
+2. Require these selectors:
+   - `ARES_DRIVE_AUTH_MODE=service_account`
+   - `MGS_DRIVE_AUTH_PRIMARY=service_account`
+   - `MGS_GOOGLE_SHEETS_AUTH_MODE=service_account`
+   - `MGS_META_APP_ROLES_GOOGLE_AUTH_MODE=service_account`
+3. Resolve the 1Password item and validate only non-secret metadata:
+   - project ID is `mgs-core-prod`;
+   - client email is the canonical Service Account;
+   - private key exists;
+   - required APIs are enabled.
+4. Validate the target on both surfaces:
+   - Drive `files.get(...supportsAllDrives=true)`;
+   - Sheets `spreadsheets.get` for spreadsheets.
+5. For Shared Drive writes, require `driveId` plus the relevant capabilities (`canAddChildren`, `canEdit`, `canModifyContent`).
+6. For a My Drive Sheet, require exact file-level `canEdit=true`; do not attempt file upload to a My Drive folder.
+7. Before a batch, run one bounded canary and restore/clear it.
+
+## Canonical health check
+
+```bash
+python3 /root/mgs-agent/scripts/monitor-drive-auth-unified.py --dry-run --force-sa
+```
+
+Expected:
 
 ```text
-ARES_DRIVE_ROOT_FOLDER_ID=0AEwt4Ye690ocUk9PVA
-ARES_DRIVE_OP_ITEM="Google Service Account - MGS Agent"
-ARES_DRIVE_AUTH_MODE=service_account
-MGS_GOOGLE_SERVICE_ACCOUNT_ITEM="Google Service Account - MGS Agent"
+drive_auth status=ok primary=service_account sa=root_access_ok sa_checked=1 dry_run=1
 ```
 
-Personal My Drive + real-user OAuth is no longer part of the active MGS architecture. Keep the generic recovery procedure below only for a future explicitly authorized exception; never revive the retired Ares OAuth item or local token files as fallback.
+A generic watchdog pass does not prove a specific consumer. After this check, run the exact blocked consumer or probe its exact Sheet/file ID.
 
-For the validated full-project procedure across Drive, Sheets, Gemini authorization keys, IAM, 1Password, canaries, billing gates and destructive cleanup, follow `references/google-cloud-workspace-canonical-cutover.md`.
+## Sheets verification
 
-OAuth setup pitfall validated on Google personal Drive: a **TVs and Limited Input devices** client may reject the full Drive scope with `invalid_scope` for device flow:
+For every cutover or permission change:
+
+1. `spreadsheets.get` must return HTTP 200.
+2. Drive metadata must return HTTP 200 and `canEdit=true`.
+3. Select a currently blank, unmerged and unprotected cell.
+4. Write a unique sentinel with the canonical Service Account.
+5. Read it back exactly.
+6. Clear/restore the cell in `finally`.
+7. Read back the original blank/value.
+8. Validate formula/error parity for any affected operational range.
+
+Never declare success from Drive visibility alone. Sheets API enablement, file permission and quota-project attribution are separate gates.
+
+## Shared Drive verification
+
+For the canonical root, validate:
+
+- HTTP 200;
+- `driveId` present;
+- not trashed;
+- `canAddChildren=true`;
+- `canEdit=true`;
+- `canModifyContent=true`;
+- membership role sufficient for the requested operation.
+
+For Ares, preserve raw assets, upload only cleaned/final copies, and record source ID, destination ID, filename and operation status. Never use the same lineage twice as independent candidates.
+
+## Consumer contract
+
+Active MGS consumers must either import `mgs_google_workspace_auth.py` or implement the same Service Account JWT contract against the same 1Password item. They must reject every auth mode other than `service_account`.
+
+Current critical consumers include:
+
+- `monitor-drive-auth-unified.py`
+- `dtr-sb-page-health-sync.py`
+- `sb-restricted-transition-monitor.py`
+- `process-revenue-spend-report.py`
+- `ares-drive-thumbnail-sampler.py`
+- `ares-drive-upload-manual-inventory.py`
+- `ares-execute-creative-copy-clean.py`
+- `meta-app-roles-watch.sh`
+- `b011-dtr-link-watch.sh`
+- `mgs-offsite-backup.py`
+- REC/P1 Gemini image generation through its separate canonical API-key item
+
+Generic Google Workspace helper scripts that expect a personal token or local client-secret file are not valid MGS routes and must fail closed in MGS profiles.
+
+## Failure handling
 
 ```text
-https://www.googleapis.com/auth/drive      → invalid_scope in device flow
-https://www.googleapis.com/auth/drive.file → device flow may start, but access is narrower
+Failure                                       Required action
+--------------------------------------------  ---------------------------------------------
+Canonical item unreadable                     stop; report infrastructure failure
+Project/client identity mismatch              stop; do not mint token
+Drive 404 / Sheets 403 for known Sheet         share exact file with canonical SA; retry
+Sheets API disabled                            enable in mgs-core-prod; retry same identity
+My Drive upload quota failure                  use MGS-AGENTS; do not change identity
+Shared Drive capability missing                correct membership/role with authorization
+Canary write succeeds, restore fails           stop and restore before further writes
+Any non-service-account selector               stop as configuration conflict
 ```
 
-Operational handling:
-1. Try the already-created device-flow client once more if Rodolfo asks; do not force a new client before verifying.
-2. If only `drive.file` works, warn that it may upload new/app-created files but may not fully access an existing `MGS-AGENTS/CRIATIVOS` tree; validate with a one-file smoke test before full batch.
-3. For one-person/personal Drive use, keep OAuth app in **Testing** and add Rodolfo's Google account as a Test user; do not push Production/verification unless the app is public.
-4. If full-folder access is required and device flow rejects full Drive scope, fall back to **Desktop app OAuth** and a one-time manual browser/code exchange.
-5. If Google approval succeeds but 1Password cannot update the item, save `refresh_token` to a root-only gitignored local secret file and teach the runtime loader to combine `client_id`/`client_secret` from 1Password with that local token.
-6. Keep token handling secret: never paste `client_secret`, `refresh_token`, access token, or authorization URLs containing returned codes into Discord unless the code is explicitly safe/short-lived and the user needs to provide it.
+## Residue audit after cutover
 
-The prior MGS local OAuth consumer path was retired in the `mgs-core-prod` cutover. Active scripts must use the canonical Service Account helper and fail closed if `service_account` is not selected. References to the former Ares OAuth filename in incident reports or historical procedures are audit context, not a valid runtime fallback.
+Scan live scripts, profile skills, `.env` key names, Hermes jobs, root crontab, systemd units, `.secrets` and operational state files. Do not print values.
 
-Never print Service Account JSON, OAuth refresh tokens, access tokens, client secrets, or 1Password field values. Report only item names and non-secret metadata such as `len=X`.
+The final state requires:
 
-## Validation checklist
+- no credential-bearing personal Google files;
+- no active wrapper selecting a retired mode;
+- no active skill instructing personal token setup;
+- no cron/job/systemd consumer of retired utilities;
+- historical Git/audit/backups clearly outside runtime;
+- canonical selectors present and read back;
+- exact consumers tested.
 
-- `py_compile` or syntax check passes for modified scripts.
-- Destination preflight shows whether storage is Shared Drive or My Drive.
-- Smoke test with `--limit 1 --max-errors 1` succeeds before full queue.
-- If blocked, no report CSV/file writes are produced for the attempted run.
-- Canonical watchdog dry-run reports `primary=service_account` and `sa=root_access_ok`.
-- Every Sheets consumer passes metadata, bounded sentinel write, exact readback and restoration with `mgsagent@mgs-core-prod`.
-- Audit log records the decision and evidence.
-- Report to Rodolfo in concise executive format with `Próximo passo pendente:`.
+## Verification checklist
 
-## Legacy OAuth recovery — historical exception only
-
-The former OAuth watchdog and Ares local token files are retired. Do not reauthorize or recreate them during normal MGS operations. The recovery procedure below applies only if Rodolfo explicitly approves a future personal-My-Drive exception with a new scoped credential and separate operational identity.
-
-See `references/drive-oauth-invalid-grant-self-service-reauth.md` for the implementation and smoke-test pattern.
-
-## Enabling Google Workspace APIs from an OAuth flow
-
-If a Drive-backed workflow needs a Google API that is disabled in the OAuth project (example: Sheets API disabled while Drive API works), do not assume Drive scope is enough. Enabling project services through Service Usage requires an access token with `https://www.googleapis.com/auth/cloud-platform` and a user/account that has permission on the Google Cloud project.
-
-Operational pattern:
-
-1. Try the target API and capture the exact disabled-service project number from the 403 message.
-2. Attempt `serviceusage.services.enable` only if the token has cloud-platform scope.
-3. If the token only has Drive scope, generate a reauth URL with both existing needed scopes and `cloud-platform`:
-   - `https://www.googleapis.com/auth/drive`
-   - `https://www.googleapis.com/auth/cloud-platform`
-4. Ask Rodolfo to approve and paste the localhost URL/code.
-5. Exchange the code for a new refresh token and store it in the approved secret file without printing token values.
-6. Enable the service, then poll Service Usage until `state=ENABLED`.
-7. Validate the target API with a real write/readback; for Sheets, create/update tabs and confirm row counts.
-
-Pitfall: a 403 `ACCESS_TOKEN_SCOPE_INSUFFICIENT` from Service Usage is a scope issue, not proof that the account cannot enable the API. Reauth with `cloud-platform` before giving up.
-
-A different 403, `PERMISSION_DENIED` with missing `serviceusage.services.enable`, is an **IAM permission problem**, even when the access token already has `cloud-platform`. Do not expand or replace a personal refresh token merely because the Service Account lacks this IAM role. Try the Service Account once, then use one of these approved gates:
-
-1. an already-authorized GCP admin identity;
-2. Rodolfo enabling the API from the direct Cloud Console library page for the exact project;
-3. a separately confirmed admin OAuth flow when no admin session/identity exists.
-
-API activation is separate from file sharing. `permissions.create(role=writer)`, Drive HTTP 200, and `canEdit=true` prove the identity can reach the file through Drive; they do **not** prove Sheets cell reads/writes.
-
-After an administrator enables `sheets.googleapis.com`, diagnose the **consumer IAM gate** separately. A Service Account can still receive a misleading disabled/recently-enabled 403 when it lacks `serviceusage.services.use` on its own consumer project. Probe once with `x-goog-user-project=<project-number>`:
-
-- `Caller does not have required permission to use project ...` → grant the Service Account the least-privilege role **Service Usage Consumer** (`roles/serviceusage.serviceUsageConsumer`), not Service Usage Admin.
-- Keep the file-level `writer` permission; the IAM role only authorizes API consumption and does not grant spreadsheet access.
-- Allow propagation, then require `spreadsheets.get` HTTP 200 through the exact Service Account identity.
-
-Do not switch a production consumer until all of these pass with the Service Account: Sheets metadata HTTP 200, bounded write, readback of the exact sentinel, restoration/clear, and readback of the original value. Keep OAuth as rollback; revoking/deleting the refresh token is a later credential-gated action, not part of ordinary script cutover.
-
-See `references/service-account-sheets-api-enablement-and-consumer-iam.md` for the two-layer Service Usage diagnosis, least-privilege IAM gate, and cutover verification sequence.
-
-## Service Account replacement and project cutover
-
-When replacing an active Shared Drive Service Account, do not treat Cloud project IAM, Shared Drive membership, credential storage, and runtime cutover as one action. Confirm the immutable project ID before credential creation, match the old identity's live Shared Drive role for parity, validate the new credential outside production, and retain the old identity as rollback until the canary passes unless Rodolfo explicitly accepts a direct cutover with no fallback.
-
-A 1Password item being visible is not proof that the current loader can consume it: an attached JSON file may not appear in item `fields`. Validate the storage shape without printing values and place the JSON in a supported concealed field, or explicitly add/test attachment retrieval.
-
-See `references/service-account-shared-drive-replacement-cutover.md` for a narrow Shared Drive identity replacement. For a full project/account cutover spanning multiple agents, OAuth consumers, Gemini keys, local secrets, jobs, and destructive cleanup, use `references/google-cloud-service-account-cross-agent-cutover.md`.
-
-## References
-
-- `references/google-cloud-service-account-cross-agent-cutover.md` — full-project/identity cutover across agents: permanent Project ID, 1Password attachment/field pitfalls, Shared Drive role parity, Service Usage Consumer, dynamically resolved Sheet canaries, OAuth/Gemini separation, secret-safe `.env` editing, exact destructive confirmation, and validated cleanup.
-- `references/service-account-shared-drive-replacement-cutover.md` — narrow replacement of an active Shared Drive Service Account, including project-ID naming, role parity, credential preflight, rollback, and 1Password attachment compatibility.
-- `references/service-account-my-drive-quota.md` — concrete MGS/Ares incident pattern and reusable Drive API probes.
-- `references/personal-my-drive-oauth-device-flow.md` — personal Google Drive OAuth setup notes, device-flow `invalid_scope` pitfall, `drive.file` limitation, and Desktop app fallback.
-- `references/drive-oauth-invalid-grant-self-service-reauth.md` — watchdog pattern for `invalid_grant`: auto-generate reauth URL, keep healthy checks silent, validate no secret exposure.
-- `references/google-sheets-balanced-column-distribution.md` — Sheets API pattern for filling/formatting a column while preserving group integrity (e.g. one mailbox per bot/site) and balancing group loads.
-- `references/cross-agent-google-sheets-shared-drive-inventory-and-cutover.md` — inventory only the Sheets actually used by named agents, classify personal/shared/historical/stale, and cut over safely to Service Account + enterprise Shared Drive.
-- `references/shared-drive-google-sheets-cluster-cutover.md` — dependency-graph audit for interdependent Sheets, conservative share+Service Account route, and transactional same-ID move gates for formula-heavy clusters.
-- `references/service-account-sheets-api-enablement-and-consumer-iam.md` — distinguish API activation from `serviceusage.services.use`, grant least-privilege Service Usage Consumer, and gate cutover on sentinel write/readback/restore.
+- [ ] Canonical project and client email match.
+- [ ] 1Password item read succeeds without exposing values.
+- [ ] Shared Drive root and capabilities pass.
+- [ ] Every active Sheet returns Drive + Sheets HTTP 200.
+- [ ] One write/readback/restore canary passes after permission changes.
+- [ ] All production selectors are `service_account`.
+- [ ] Generic personal-auth helpers fail closed in every MGS profile.
+- [ ] No active legacy credential file, job, cron, service or fallback remains.
+- [ ] Inventory, checkpoint, audit and REPORT-INFRA are updated.

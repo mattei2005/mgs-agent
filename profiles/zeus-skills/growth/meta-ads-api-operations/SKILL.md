@@ -264,6 +264,21 @@ Critical rules for BM audits:
 
 Session-specific references: `references/meta-business-manager-inventory-sheets-2026-07-06.md`, `references/meta-bm-inventory-sheets-2026-07-06.md`, and `references/bm-audit-assigned-users-email-visibility-2026-07-06.md` (endpoint list, Sheets tab layouts, row deletion by profile, and the documented distinction between BusinessUser email visibility and Ad Account assigned_users e-mail omission).
 
+## Meta Ads MCP Server evaluation and pilots
+
+Use this path when Rodolfo asks whether Meta's Ads MCP Server can help Ares, connect an app directly, discover accounts/Pages, reduce Graph API wiring, or bypass verification/checkpoints.
+
+1. **Separate discovery from authorization.** The MCP can list ad accounts and Pages already accessible to the authenticated user, but it does not verify, release, assign, or grant those assets.
+2. **Never present it as a bypass.** Do not claim it replaces App Review, Advanced Access, Business Verification, user authentication, BM/Page permissions, account restrictions, or Meta checkpoints.
+3. **Use an MGS-controlled app for production assets.** An app owned by a friend/vendor may demonstrate feature availability, but MGS assets should authenticate through an app institutionally owned and controlled by MGS.
+4. **Ares is technically compatible.** Hermes supports remote HTTP MCP servers, OAuth, pre-registered OAuth clients, and per-server tool filtering. Validate the exact Meta OAuth flow in a pilot rather than assuming compatibility from protocol support alone.
+5. **Pilot read-only first.** Compare MCP account/Page discovery, campaign inventory, and reporting against current Graph API/readback before exposing write tools.
+6. **Keep writes paused and bounded.** For a controlled write, create only approved `PAUSED` objects, do not expose activation initially, verify by GET/UI, and clean partials using this skill's normal safety model.
+7. **Treat endpoint isolation as a test, not a conclusion.** Because the MCP is Meta-hosted, it is a useful alternative route for the known `POST /ads` checkpoint boundary. The docs do not promise a bypass; only a controlled comparison can show whether the same `code=31` boundary reproduces.
+8. **Use Meta's own controls.** Where available, enforce Business Suite Ads MCP rules for campaign creation and budget changes in addition to Hermes tool filtering and MGS authorization gates.
+
+Detailed official-source findings, tool names, permissions, interpretation, and pilot checklist: `references/meta-ads-mcp-server-assessment-2026-07-17.md`.
+
 ## Meta Ad Library discovery and creative extraction
 
 Use this path when Rodolfo asks to enumerate Pages, domains, ads, or creatives from a public Meta Ad Library keyword/domain URL.

@@ -338,6 +338,21 @@ For exclusive per-agent OAuth, a legacy global→profiles sync is incompatible e
 - checking a fresh session prompt contains corrected memory and excludes stale model/curator/sync claims;
 - preserving the old script for rollback unless deletion receives its own critical authorization.
 
+## Provider-architecture gate before building a custom compactor
+
+When USER/MEMORY pressure is recurring rather than a one-time cleanup, evaluate Hermes' current native memory-provider architecture before designing a bespoke semantic autocompactor. Honcho can operate as a native `memory.provider`, with cross-session persistence, user modeling, session context, semantic conclusions/search, per-peer isolation, and a bounded injected-context budget. This can reduce dependence on ever-growing file-backed USER/MEMORY; it does not automatically compact or safely migrate the existing files.
+
+Use this sequence:
+
+1. Read the current official Hermes Memory Providers and Honcho documentation; provider behavior changes faster than MGS wrapper notes.
+2. Inspect live profile state separately: `memory.provider`, profile-local `honcho.json`, provider status, and whether the deployment is only using the legacy/manual `mgs-memory-copilot` wrapper. A working manual wrapper is not proof that Honcho is the active Hermes provider.
+3. Classify information before migration: always-active safety/authority remains in SOUL/AGENT or minimal USER/MEMORY; canonical MGS facts remain in JSON/DB/Git/audit; Honcho holds user modeling, session context, and derived conclusions subject to canonical validation.
+4. Decide the data boundary before activation. Managed Honcho must not receive raw private MGS conversations under a sanitized-only policy; use sanitized/manual inputs or approve a separate self-hosted deployment for operational history.
+5. Pilot one profile with backup, bounded `contextTokens`, explicit gateway peer mapping, real cross-session continuity tests, rollback, and readback before broader rollout.
+6. Only after the provider pilot decide whether a residual 90% monitor or autocompactor is still needed. Keep the monitor as a fail-safe until the new provider and migration have passed end-to-end validation.
+
+Pitfall: solving a provider-architecture problem with increasingly complex file rewriting. Before adding retries, validators, or model passes to a custom compactor, ask whether the durable information belongs in file-backed always-active context at all.
+
 ## Compaction workflow
 
 1. Read the live MEMORY, USER, SOUL, AGENT, routed skills, canonical data sources, and any automation named by the entries.
@@ -351,21 +366,23 @@ For exclusive per-agent OAuth, a legacy global→profiles sync is incompatible e
 9. Back up, apply, validate character counts, and read back every retained invariant.
 10. Verify capacity-monitor recovery and report the write.
 
-### Handle a zero-savings automatic proposal
+### Automatic compaction at the 90% threshold
 
-The MGS capacity monitor deliberately proposes only exact-duplicate removal automatically. A proposal with `savings_chars=0` is therefore not a failed write: verify its metadata and classify it as a no-op snapshot when `before` and `after` hashes match, duplicate count is zero, the source hash still matches, and `semantic_review_required=true`. State plainly that the alert is valid but the automatic proposal is not actionable; never imply that USER/MEMORY changed.
+Rodolfo's confirmed policy is automatic compaction of USER/MEMORY when a store reaches 90%, followed by a metadata-only before/after report in `#limites-90`; do not request per-occurrence approval. Keep the configured 3600/6400 limits unless he separately changes them. After Rodolfo approved native Honcho integration for all current and future MGS agents, treat this compaction path as residual capacity protection—not the primary long-term memory architecture.
 
-When headroom is still low:
+Treat desired policy and active protection separately. Hermes upstream does not auto-compact by itself, and an approved Honcho rollout is not evidence that any profile already uses it. Before changing the compactor, inspect `memory.provider`, profile-local Honcho configuration, provider status, peer mapping, and a real cross-session canary for each profile. Until Honcho is active and validated per agent, do not claim it has removed the 90% risk. Likewise, do not claim automatic compaction is active until the monitor is connected to a compactor and an end-to-end temporary-profile canary proves semantic preservation, atomic write, protected backup, readback, failure alerting and anti-loop behavior. A prototype or green unit suite alone is insufficient.
 
-1. Simulate a semantic rewrite in memory only; do not overwrite the monitor proposal or durable store.
-2. Prefer the smallest sufficient diff: keep unaffected entries byte-identical and rewrite only enough long entries to move safely below the alert threshold while preserving every atomic fact.
-3. Report exact before/after characters, percentage, headroom, changed-entry count, and the complete diff for only the changed entries. Do not claim “full diff” if unchanged entries were silently rewritten too.
-4. Treat “continue” after announcing a review step as authorization to present the diff, not authorization to apply it. Apply only after Rodolfo explicitly directs execution of that reviewed scope.
-5. Before applying, create a protected `0700/0600` backup and verify its hash matches the live source.
-6. Apply all reviewed entry replacements atomically in one `memory` tool batch; never perform a sequence that can leave half the compaction committed.
-7. Read back the store and verify exact entry count, exact changed-entry indexes, unchanged-entry count, expected retained semantics, characters, percentage, headroom, file mode, and post-write hash.
-8. Run the capacity monitor in read-only summary mode and require zero capacity warnings/errors. Let the scheduled monitor emit recovery, then verify the exact Discord recovery message by ID, including empty content and the expected embed title; do not repost a duplicate recovery.
-9. Leave stale proposal deletion separate: removing an old proposal or backup is a file deletion and requires its own applicable authorization gate.
+While activation is blocked, preserve the current fail-closed behavior and handle an actual threshold occurrence conservatively:
+
+1. Verify the alert and current source hash; a zero-savings exact-duplicate proposal is a no-op snapshot, not a write.
+2. Create a protected `0700/0600` backup.
+3. Rewrite the smallest sufficient set of long entries, preserving every atomic fact and keeping unaffected entries byte-identical.
+4. Apply replacements atomically, validate exact changed indexes, entry count, characters, percentage, file mode and post-write hash.
+5. Run the monitor read-only and require zero warnings/errors; verify the scheduled recovery embed by exact message ID.
+6. Report that the occurrence was compacted but automatic future activation remains blocked when that is the real state.
+7. Leave stale proposal/backup deletion separate because file deletion has its own authorization gate.
+
+A semantic compactor must fail closed on model timeout, malformed output, protected-literal drift, semantic-verifier rejection or concurrent source change. After repeated failures, stop rather than weakening validation or silently applying an unverifiable rewrite.
 
 ## Pitfalls
 

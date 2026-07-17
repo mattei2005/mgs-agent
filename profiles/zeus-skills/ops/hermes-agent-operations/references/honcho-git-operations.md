@@ -4,13 +4,26 @@
 
 ## 8. Agent memory / conclusion layers
 
-When Rodolfo asks to evaluate or configure external memory infrastructure such as Honcho for Zeus/Atena/Ares/Hera, use `references/honcho-managed-memory-spike.md`, `references/honcho-manual-briefing-command-2026-06-02.md`, the coverage note `references/discord-response-lint-and-honcho-coverage-2026-06-15.md`, and the repair/reporting note `references/hermes-update-reporting-and-honcho-repair-2026-06-21.md`. For cost/credit/billing questions, use `references/honcho-usage-and-billing-check-2026-07-01.md`.
+When Rodolfo asks to evaluate or configure Honcho for Zeus/Atena/Ares/Hera, first determine which architecture is meant:
 
-Operational rule: treat Honcho-like systems as a conclusion/insight layer over sanitized history, not as source of truth. Canonical facts remain in JSON/DB/Git/WordPress/audit logs; procedures remain in Hermes skills; stable preferences remain in Hermes memory. Zeus may use Honcho to generate hypotheses, but must validate them against canonical MGS sources before reporting or acting.
+- **Native Hermes memory provider** — `memory.provider: honcho`, profile-local `honcho.json`, provider status, bounded context injection, and Honcho tools.
+- **Legacy/manual MGS copilot** — `/root/mgs-agent/scripts/mgs-memory-copilot` and the sanitized briefing workflow.
+
+Read the current official Hermes Memory Providers and Honcho documentation before designing the solution; native provider capabilities can supersede older MGS wrapper assumptions. Then use `references/honcho-managed-memory-spike.md`, `references/honcho-manual-briefing-command-2026-06-02.md`, the coverage note `references/discord-response-lint-and-honcho-coverage-2026-06-15.md`, and the repair/reporting note `references/hermes-update-reporting-and-honcho-repair-2026-06-21.md` only for the matching MGS branch. For cost/credit/billing questions, use `references/honcho-usage-and-billing-check-2026-07-01.md`.
+
+Operational rule: Honcho may be the active memory provider and materially reduce dependence on growing file-backed USER/MEMORY, but it remains a user-modeling, session-context, search, and conclusion layer—not the source of truth for MGS operations. Canonical facts remain in JSON/DB/Git/WordPress/audit logs; procedures remain in Hermes skills; global authority and safety remain in SOUL/AGENT or minimal always-active memory. Validate Honcho conclusions against canonical MGS sources before reporting or acting.
+
+Integration audit pitfall: do not infer native activation from an API key, an old `honcho: {}` stanza, successful manual copilot output, or wrapper support. Verify independently: (1) live `memory.provider` resolves to `honcho`; (2) profile-local/global Honcho config exists without exposing credentials; (3) `hermes honcho status` or the current provider status path succeeds; (4) gateway peer mapping is correct; and (5) a real cross-session continuity canary passes. Audit the manual wrapper separately through `AGENT_PROFILES` when that branch is still used.
+
+Before custom semantic compaction for recurring USER/MEMORY pressure, evaluate a one-profile native Honcho pilot. Use a bounded `contextTokens` budget and preserve the 90% monitor as a residual fail-safe until migration, rollback, and continuity are proven. Native Honcho does not itself compact or safely migrate existing USER/MEMORY files.
+
+### MGS cross-agent standard
+
+Rodolfo's approved architecture is native Honcho integration for every current and future MGS agent. Treat this as a rollout objective, not evidence that any profile is already active. Audit Zeus, Atena, Ares, Hera, and each future profile independently; an empty `memory.provider` or absent `honcho.json` means native integration is not configured even when the manual copilot and API credential exist.
+
+Roll out sequentially with one canary per agent: protected backup → provider/config setup → isolated peer and Discord identity mapping → bounded context budget → real cross-session continuity test → rollback proof → readback. Keep MGS OS/runtime/audit as canonical and keep USER/MEMORY minimal for always-active invariants. Do not send unsanitized operational conversations to managed Honcho under the current MGS policy; managed mode remains synthetic/sanitized until Rodolfo makes an explicit data-handling decision. Self-hosted deployment is an infrastructure/credential branch and must pass the applicable MGS authorization gates before implementation.
 
 Billing/usage rule: local MGS logs can prove call volume but not exact dollar spend. As of the 2026-07-01 check, Honcho's public OpenAPI exposed workspace/peer/session/conclusion routes but no billing/usage/credits endpoint; obvious `/v3/usage`, `/v3/billing`, `/v3/credits` probes returned 404. For daily spend questions, report confirmed operational volume first (e.g. health monitor runs × agents checked), then label any dollar figure as an estimate based on observed credit balance changes. If Honcho is only “segunda opinião”, avoid aggressive health polling such as 15-min × 4 agents unless Rodolfo explicitly wants it; hourly or 2–4/day preserves credits better during benchmarking.
-
-Coverage audit pitfall: do not equate `honcho: {}` in a profile config with full operational integration. Check all three layers before answering whether an agent is configured: (1) profile config contains Honcho stanza, (2) agent SOUL contains the Honcho role/rules, and (3) `/root/mgs-agent/scripts/mgs-memory-copilot` / `experiments/honcho-spike/mgs_memory_copilot.py` supports that agent in `AGENT_PROFILES`. As of the 2026-06-21 repair, Zeus/Atena/Ares/Hera are supported by the wrapper; if Honcho returns cold storage, the wrapper classifies it as `cold_storage` and requires manual resume at app.honcho.dev before retrying.
 
 Managed Honcho default for first spike: use only synthetic or sanitized data; store `HONCHO_API_KEY` in 1Password (`MGS Conteúdo` → `Honcho API - MGS` → `api key`); never paste or print the key. Self-hosting requires a separate infra decision because it introduces Docker/Postgres+pgvector/Redis/services.
 

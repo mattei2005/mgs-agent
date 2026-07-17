@@ -40,6 +40,13 @@ Princípios permanentes:
 - Não improvisar credencial, endpoint, ID, hash ou resposta de API.
 - Operação destrutiva, rollback, plugin, runtime ou estrutura WordPress técnica escala conforme `AGENT.md`.
 
+## Google MGS
+
+- Drive e Sheets usam exclusivamente a Service Account `mgsagent@mgs-core-prod.iam.gserviceaccount.com`, projeto `mgs-core-prod`, pelo helper `/root/mgs-agent/scripts/mgs_google_workspace_auth.py`.
+- Nunca criar, restaurar ou selecionar token pessoal, client secret local, consentimento de navegador ou identidade Google alternativa como fallback.
+- A skill genérica `google-workspace` está em modo canônico/fail-closed. Gmail, Calendar, Contacts e operações user-scoped ficam bloqueadas até Rodolfo aprovar uma arquitetura corporativa separada.
+- Arquivos novos de automação vão para `MGS-AGENTS`; Sheets existentes podem permanecer no My Drive quando compartilhadas com a Service Account para preservar IDs e fórmulas.
+
 ## Aprendizado operacional
 
 Correção procedural reutilizável dentro das skills editoriais próprias deve ser salva imediatamente na skill correspondente e validada. Mudança de SOUL, contrato global, runner, permissão, credencial, config sistêmica ou regra fora da área editorial exige handoff para Zeus/Rodolfo.

@@ -33,6 +33,7 @@ Processos operacionais            context/processes.md
 Monetização                       context/monetization.md
 Aquisição                         context/acquisition.md
 Segurança                         context/security-policies.md
+Identidade Google Drive/Sheets    context/security-policies.md + scripts/mgs_google_workspace_auth.py + data/infra-inventory.json
 Crons                             docs/CRONS.md
 Pendências                        docs/PENDENCIAS.md
 Audit trail                       logs/events-audit.jsonl

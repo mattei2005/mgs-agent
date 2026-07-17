@@ -79,6 +79,17 @@ Do not answer these as the same question:
 
 WordPress `created_at` is stored as UTC in the observed quiz table, while SMS Funnel daily/message dates are presented by the São Paulo calendar. Convert the business-day interval before comparing; otherwise the raw dashboards cover different three-hour boundaries. Also separate controls created on a prior day, controls from another source, and messages sent on the next day.
 
+### Timestamp semantics for hour-level audits
+
+When Rodolfo asks for the hour a lead **entered**, do not substitute the outbound send hour:
+
+- WordPress: use `wp_mgs_quiz_leads.created_at`, interpreted as UTC and converted to `America/Sao_Paulo`.
+- SMS Funnel: use `message.lead.created_at`, interpreted as UTC and converted to `America/Sao_Paulo`.
+- `message.sent_date` is the outbound SMS time presented on the São Paulo calendar; it is a different event and commonly occurs about three minutes after entry because of the configured automation delay.
+- Difference rows inherit the original unmatched WordPress occurrence timestamp.
+
+Before a bulk write, verify the timezone contract empirically on a bounded sample: compare `sent_date` with `lead.created_at` and the configured delay. Parse ISO timestamps robustly whether the API uses `T`, a space, fractional seconds, or a trailing `Z`; if the timestamp is naive under this observed contract, treat it as UTC before conversion. Write visible hours as `HH:MM:SS` unless Rodolfo requests another precision.
+
 The aggregate difference answers only a net counter gap. It does not identify rows that can safely be exported or imported. A recovery list must be built from event-level unmatched submissions, and SMS Funnel list import will deduplicate repeated submissions down to contact-level phones.
 
 ### Event-preservation rule for Rodolfo's SMS audits

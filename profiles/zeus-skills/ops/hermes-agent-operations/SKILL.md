@@ -48,6 +48,7 @@ For auditing and safely splitting monolithic agent skills while preserving conte
 - Profile changes must account for live config plus the versioned MGS mirror when one exists.
 - Before executing any Hermes config proposal produced by Claude or another LLM, inspect the deployed Hermes writer and classify the value shape. Use `hermes config set` for boolean and numeric scalars. Do not pass list/object literals such as `[]` or `{}` to that CLI because they resolve as strings; for lists/objects, use Hermes' native atomic YAML writer (`atomic_config_write`) and validate the readback **type** as well as the value. Generic full-file YAML dumps are prohibited when a native writer exists. Always take a rollback-safe backup, validate the resolved runtime value, and synchronize the versioned MGS mirror.
 - Before compacting MEMORY/USER, classify every atomic fact as **always-active** or **on-demand**. Existence in a routed skill/reference is not equivalent to context residency; remove an always-active fact only after proving full semantic coverage in SOUL/AGENT/USER/MEMORY. Treat write gates, curator pruning, automatic-write transparency, and context residency as independent controls.
+- Before designing or extending a custom semantic autocompactor, inspect the active Hermes memory provider and Honcho profile state. For MGS, native Honcho integration is the approved cross-agent architecture for longitudinal context; USER/MEMORY compaction is residual capacity protection, not the primary memory architecture. Distinguish a manual external Honcho copilot from `memory.provider: honcho` plus profile-local provider configuration and a live canary.
 - Any script/config/data/skill/SOUL/AGENT infrastructure change requires inventory/audit handling and REPORT-INFRA according to MGS policy before completion.
 - Discord reports to Rodolfo are concise, inline, and free of raw tool traces, unsolicited attachments, Markdown pipe tables, or language-tagged fences.
 
@@ -111,6 +112,12 @@ Use it to separate always-active context from routed knowledge, verify SOUL load
 Primary reference: `references/canonical-resource-cutover.md`.
 
 Use when a Drive root, folder tree, endpoint, account, channel, or other shared operational resource is replaced while logical names/structure remain. It covers active-vs-audit classification, old-ID/alias sweeps, cross-profile mirror synchronization, path-parser validation, fail-closed one-shot migration tools, inventory, audit, and REPORT-INFRA closure.
+
+### 1Password service-account token rotation or credential bootstrap
+
+Primary reference: `references/service-account-token-rotation-bootstrap.md`.
+
+Load it before replacing `OP_SERVICE_ACCOUNT_TOKEN`, revoking a service account, or recovering from premature revocation. The old identity must remain valid until the replacement has reached the host and passed a real vault read; `op whoami` alone is not sufficient validation.
 
 ### VPS migration, restore, cutover, or new MGS agent
 

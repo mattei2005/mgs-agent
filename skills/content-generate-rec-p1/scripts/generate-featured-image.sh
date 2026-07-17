@@ -22,8 +22,8 @@ trap 'cleanup_temps' EXIT
 
 [ -f "$CARD_IMG" ] || { echo "ERROR: card image not found: $CARD_IMG" >&2; exit 1; }
 
-api_key=$(op item get "Gemini API Key" --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" --fields api_key --reveal 2>/dev/null) || {
-  echo "ERROR: could not read Gemini API Key from 1Password" >&2
+api_key=$(op item get "Gemini API Key - MGS Core" --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" --fields api_key --reveal 2>/dev/null) || {
+  echo "ERROR: could not read Gemini API Key - MGS Core from 1Password" >&2
   exit 1
 }
 
@@ -132,10 +132,10 @@ jq -n \
   --arg text "$prompt" \
   --arg mime "$mime" \
   --rawfile data "$b64_tmp" \
-  '{contents:[{parts:[{text:$text},{inline_data:{mime_type:$mime,data:$data}}]}]}' \
+  '{contents:[{parts:[{text:$text},{inline_data:{mime_type:$mime,data:$data}}]}],generationConfig:{responseModalities:["TEXT","IMAGE"],imageConfig:{aspectRatio:"16:9"}}}' \
   > "$req_tmp"
 
-endpoint="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent?key=$api_key"
+endpoint="https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image-preview:generateContent?key=$api_key"
 out="/tmp/featured-$SLUG.png"
 
 max_attempts=3

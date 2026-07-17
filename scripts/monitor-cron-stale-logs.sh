@@ -198,12 +198,13 @@ for job in parse_crons():
             # Avaliar só o trecho posterior ao marcador operacional mais recente.
             # Além de START, aceitar um término saudável explícito: logs extensos podem
             # empurrar o START para fora da janela, deixando um traceback antigo antes
-            # de um "OK" final ser classificado incorretamente como erro atual.
+            # de um "OK" final ser classificado incorretamente como erro atual. Monitores
+            # de uma linha por execução também usam "status=ok" como fronteira saudável.
             last_boundary = None
             for idx, tline in enumerate(tail_lines):
                 is_start = re.search(r'(start|iniciando|===)', tline, re.I)
                 is_success = re.search(
-                    r'^\[[^\]]+\]\s+(?:OK\b|END\b.*\brc=0\b)',
+                    r'(?:^\[[^\]]+\]\s+(?:OK\b|END\b.*\brc=0\b)|\bstatus=ok\b)',
                     tline,
                     re.I,
                 )

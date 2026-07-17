@@ -12,21 +12,15 @@ Do not silently swallow migration-sheet sync failures. If the monitor can read M
 
 This section records the former working path for audit only. The active architecture now uses `mgsagent@mgs-core-prod.iam.gserviceaccount.com` through item `Google Service Account - MGS Agent`; personal OAuth and its local token files are retired.
 
-## Former validated state
+## Current validated state
 
-The monitor's working path is OAuth, not the Ares Drive service account:
-
-- OAuth token file: `/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json`
-- Default mode in script: `MGS_META_APP_ROLES_GOOGLE_AUTH_MODE=oauth`
-- OAuth validated Sheets API metadata and write successfully.
-
-The service account item `Google Service Account - Ares Drive` can read Drive metadata/export, but its Google Cloud project had Sheets API disabled in this session. Do not conclude the cron is broken from a service-account-only test if the cron is configured to use OAuth.
+The monitor uses only the canonical Service Account from `Google Service Account - MGS Agent`, with `MGS_META_APP_ROLES_GOOGLE_AUTH_MODE=service_account`. The project `mgs-core-prod` has Sheets API enabled and `roles/serviceusage.serviceUsageConsumer`; personal OAuth fallback is forbidden.
 
 ## Validation pattern
 
 1. Source `/root/mgs-agent/.env` with `set -a`/`set +a`.
-2. Validate OAuth file has `client_id`, `client_secret`, `refresh_token`, `token_uri` without printing values.
-3. Exchange refresh token for access token.
+2. Resolve the canonical Service Account JSON through the shared Google auth helper without printing values.
+3. Mint a Sheets-scoped token and attribute quota to `mgs-core-prod` with `x-goog-user-project`.
 4. Call Sheets metadata:
    - `GET https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?fields=sheets(properties(sheetId,title))`
 5. Validate write with a no-op idempotent range update when safe:
@@ -34,6 +28,7 @@ The service account item `Google Service Account - Ares Drive` can read Drive me
    - PUT the same values back to the exact range
    - require HTTP 200 and `updatedCells` matching row count
 6. Run `meta-app-roles-watch.sh` in dry-run and inspect `_sheet_removed_sync` in state.
+7. Fail closed if any code path attempts personal OAuth fallback.
 
 ## Alerting requirement
 

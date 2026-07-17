@@ -9,7 +9,7 @@ Automated pipeline for generating and publishing credit card recommendation (REC
 - **Host**: Hostinger VPS `2.25.165.171` / hostname `srv1767265` (Linux). Antiga Hetzner `mgs-agent-01`: desativada, endereço reatribuído a terceiros e proibido para conexão.
 - **Working dir**: `/root/mgs-agent/`
 - **Credentials**: 1Password Service Account token in `/root/mgs-agent/.env` (never read or exposed). Default vault `MGS Conteúdo` via `OP_DEFAULT_VAULT`. Both shell scripts source `.env` at startup so they work under `systemd`/`cron` too.
-- **Image generation**: Google Gemini 2.5 Flash Image API, Tier 1 Prepay ($300 credits, valid through Jul 2026).
+- **Image generation**: Google Gemini 3.1 Flash Image Preview API through the billed `mgs-core-prod` project and 1Password item `Gemini API Key - MGS Core`.
 - **Skills**:
   - `content-generate-rec-p1` — fetches card data, generates composition image, assembles article from per-country/language/vertical templates.
   - `content-publish-wordpress` — reusable WordPress publishing utility (media upload, post create/update, Yoast meta, term resolution).

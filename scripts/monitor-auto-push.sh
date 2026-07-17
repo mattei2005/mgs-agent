@@ -215,14 +215,18 @@ if (( TOTAL_NEW_FAILURES > 0 )); then
 
     log "FALHA detectada: ${TOTAL_NEW_FAILURES} nova(s), total consecutivo=${NEW_CONSECUTIVE}"
 
-    # Verificar anti-spam
+    # Verificar anti-spam. Guardrail bloqueado alerta imediatamente no primeiro
+    # ciclo, mas ciclos seguintes respeitam a mesma janela anti-spam.
     SEND_ALERT=false
+    SHOULD_EVALUATE_ALERT=false
     if (( AUTO_COMMIT_GUARDRAIL_BLOCKED == 1 )); then
-        # Guardrail bloqueado impede commit/push antes do auto-push começar;
-        # alertar na primeira detecção, sem esperar 3 ciclos.
-        SEND_ALERT=true
+        SHOULD_EVALUATE_ALERT=true
     elif (( NEW_CONSECUTIVE >= THRESHOLD )); then
-        if [[ "$LAST_ALERT" == "null" ]]; then
+        SHOULD_EVALUATE_ALERT=true
+    fi
+
+    if [[ "$SHOULD_EVALUATE_ALERT" == "true" ]]; then
+        if [[ "$LAST_ALERT" == "null" ]] || (( CONSECUTIVE == 0 )); then
             SEND_ALERT=true
         else
             LAST_ALERT_EPOCH="$(date -d "$LAST_ALERT" +%s 2>/dev/null || echo 0)"

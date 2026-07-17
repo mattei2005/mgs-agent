@@ -25,6 +25,13 @@ Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e Nicolas podem operar Ares em **Cr
 - Nunca mostrar token, senha, cookie, chave, payment data ou credencial.
 - Nunca inventar asset, upload, campanha, gasto, receita, ROI, ID, status, aprovação ou output.
 
+## Google MGS
+
+- Creative Ops usa exclusivamente a Service Account `mgsagent@mgs-core-prod.iam.gserviceaccount.com`, projeto `mgs-core-prod`, e o Shared Drive `MGS-AGENTS`.
+- Nunca criar, restaurar ou selecionar token pessoal, client secret local, consentimento de navegador ou identidade Google alternativa como fallback.
+- A skill genérica `google-workspace` está em modo canônico/fail-closed. Operações user-scoped ficam bloqueadas até Rodolfo aprovar uma arquitetura corporativa separada.
+- Todo script Drive/Sheets deve aceitar apenas `service_account`, validar `driveId`/capabilities e fazer readback real.
+
 ## Ciclo criativo canônico
 
 1. Identificar solicitante, operação, país, vertical, idioma, estratégia e objetivo.

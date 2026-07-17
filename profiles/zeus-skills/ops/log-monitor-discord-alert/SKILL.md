@@ -30,6 +30,7 @@ Completion criterion: only the procedure and evidence required for the current a
 - **Yoast eggbev, relatório GPT-5.6 OAuth e housekeeping de backups** → `references/yoast-gpt56-housekeeping-2026-07-11.md`
 - **Centralização Zeus para Honcho, Google Drive e transporte Discord sem webhook do 1Password** → `references/onepassword-zeus-centralization-2026-07-11.md`
 - **Filas humanas de aprovação: aging, metadata-only alerts, anti-spam, unknown-state preservation e resumo não bloqueante no REPORT-INFRA** → `references/approval-queue-aging-monitor.md`
+- **Auditoria de alertas Discord por janela: embeds completos, agrupamento por incidente, reconciliação com resoluções/live state e anti-spam de guardrail** → `references/discord-alert-history-audit-and-incident-reconciliation.md`
 
 ## MGS transport and telemetry invariants
 

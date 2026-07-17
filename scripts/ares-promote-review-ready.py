@@ -2,8 +2,8 @@
 """Promote cleaned Ares review assets from 00_REVIEW to 01_READY_CANDIDATE.
 
 Moves/renames the existing cleaned Drive copy. Does not touch RAW/UPLOAD_CANVAS.
-Uses the shared Drive auth helper, which caches OAuth client credentials in a
-root-only file to avoid repeated 1Password calls during Drive batches.
+Uses the canonical MGS Service Account route through the shared Drive helper.
+No local user credential cache or fallback is supported.
 """
 from __future__ import annotations
 

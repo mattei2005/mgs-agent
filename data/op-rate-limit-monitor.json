@@ -5,7 +5,7 @@
     "warning_percent": 50.0,
     "critical_percent": 90.0
   },
-  "last_check": "2026-07-17T02:39:01.928717-04:00",
+  "last_check": "2026-07-17T09:39:02.019564-04:00",
   "overall_level": "normal",
   "last_metrics": [
     {
@@ -21,26 +21,26 @@
     {
       "type": "token",
       "action": "read",
-      "used": 10,
-      "remaining": 9990,
+      "used": 1,
+      "remaining": 9999,
       "limit": 10000,
-      "percent": 0.1,
+      "percent": 0.01,
       "level": "normal",
-      "reset_at": "2026-07-17T01:41:18.519436-04:00"
+      "reset_at": "2026-07-17T09:54:01.326675-04:00"
     },
     {
       "type": "account",
       "action": "read_write",
-      "used": 5,
-      "remaining": 49995,
+      "used": 174,
+      "remaining": 49826,
       "limit": 50000,
-      "percent": 0.01,
+      "percent": 0.35,
       "level": "normal",
-      "reset_at": "2026-07-18T01:06:28.519436-04:00"
+      "reset_at": "2026-07-18T01:06:28.326675-04:00"
     }
   ],
-  "consecutive_probe_failures": 1,
+  "consecutive_probe_failures": 0,
   "probe_failure_alerted": false,
-  "last_error": "op ratelimit falhou: [ERROR] 2026/07/17 02:39:02 (403) Forbidden (Service Account Deleted): The Service Account used in this integration has been deleted.",
+  "last_error": null,
   "last_alert_sent": "2026-07-10T21:26:59.520698-04:00"
 }
