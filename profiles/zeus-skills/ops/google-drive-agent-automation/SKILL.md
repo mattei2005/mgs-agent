@@ -216,8 +216,17 @@ Do not switch a production consumer until all of these pass with the Service Acc
 
 See `references/service-account-sheets-api-enablement-and-consumer-iam.md` for the two-layer Service Usage diagnosis, least-privilege IAM gate, and cutover verification sequence.
 
+## Service Account replacement and project cutover
+
+When replacing an active Shared Drive Service Account, do not treat Cloud project IAM, Shared Drive membership, credential storage, and runtime cutover as one action. Confirm the immutable project ID before credential creation, match the old identity's live Shared Drive role for parity, validate the new credential outside production, and retain the old identity as rollback until the canary passes unless Rodolfo explicitly accepts a direct cutover with no fallback.
+
+A 1Password item being visible is not proof that the current loader can consume it: an attached JSON file may not appear in item `fields`. Validate the storage shape without printing values and place the JSON in a supported concealed field, or explicitly add/test attachment retrieval.
+
+See `references/service-account-shared-drive-replacement-cutover.md` for the complete sequence, safe metadata checks, role-parity rule, direct-cutover exception, and 1Password attachment pitfall.
+
 ## References
 
+- `references/service-account-shared-drive-replacement-cutover.md` — safe replacement of an active Shared Drive Service Account, including project-ID naming, role parity, credential preflight, rollback, and 1Password attachment compatibility.
 - `references/service-account-my-drive-quota.md` — concrete MGS/Ares incident pattern and reusable Drive API probes.
 - `references/personal-my-drive-oauth-device-flow.md` — personal Google Drive OAuth setup notes, device-flow `invalid_scope` pitfall, `drive.file` limitation, and Desktop app fallback.
 - `references/drive-oauth-invalid-grant-self-service-reauth.md` — watchdog pattern for `invalid_grant`: auto-generate reauth URL, keep healthy checks silent, validate no secret exposure.
