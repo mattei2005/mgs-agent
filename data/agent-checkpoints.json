@@ -22,6 +22,16 @@
     },
     {
       "agent": "zeus",
+      "id": "google-cloud-mgs-core-cutover-20260717",
+      "next_step": "Obter confirmação crítica ampliada nominal; Rodolfo aplica Service Usage Consumer e cria chave Gemini no projeto novo; Zeus migra consumidores, executa canários e somente então remove OAuth/arquivos/membro/jobs/projetos antigos autorizados.",
+      "objective": "Consolidar credenciais Google Cloud/Drive/Sheets/Gemini dos agentes MGS no projeto mgs-core-prod e retirar dependências operacionais antigas com canários e readback.",
+      "source": "Discord thread 1527528492391075930, auditoria Zeus 2026-07-17",
+      "state": "auditoria concluída: mgsagent validada no mgs-agents e em três sheets; 13 consumidores/configs ativos ou ad hoc mapeados; root cron drive monitor e dtr/sb, quatro crons zeus e dois jobs desativados envolvidos; item sa antigo ausente; oauth antigo ainda em 1password e três arquivos locais; mattei2005 ainda manager; gemini antigo de projeto não comprovado; service usage consumer obrigatório; nenhuma exclusão executada.",
+      "thread_id": "1527528492391075930",
+      "updated_at": "2026-07-17T04:58:50+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "google-sheets-enterprise-migration-20260716",
       "next_step": "Rodolfo confirmar separadamente: (1) rotacionar/revogar e substituir OP_SERVICE_ACCOUNT_TOKEN exposto, validando 1Password consumers; (2) revogar/remover refresh token Google OAuth de 1Password/local, tornando SA exclusiva. Não executar sem confirmação crítica explícita.",
       "objective": "Eliminar a dependência operacional do OAuth pessoal nas planilhas usadas por Zeus, Atena e Ares sem mover o cluster financeiro",
@@ -72,5 +82,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T04:21:49+00:00"
+  "updated_at": "2026-07-17T04:58:50+00:00"
 }
