@@ -84,7 +84,7 @@ A checkpoint answers: objective, current state, next step, responsible agent, th
 
 - Atena and Ares receive only domain-relevant routes.
 - Validate live behavior and rollback independently.
-- Historical agents such as Hera remain history/rollback; do not recreate them from stale plans.
+- Historical agents such as agente legado remain history/rollback; do not recreate them from stale plans.
 - Before patching another profile's SOUL, run a read-only inference/auth preflight for that exact profile. Inspect access expiry and refresh presence without printing values, and compare refresh-token equality internally across active profiles. A cloned refresh chain can pass an earlier smoke and later fail when single-use rotation collides.
 - Token presence, refresh-chain independence, and a running gateway are necessary evidence but **not proof that OAuth is usable**: a profile can satisfy all three while its next real inference fails during refresh. Require a fresh minimal inference before creating the SOUL patch/backup set; classify the real inference result as the authentication gate.
 - If the target profile cannot complete inference or shares a refresh chain, keep the continuity rollout unvalidated and stop at a separate credential Critical Subset gate. Do not patch SOUL merely because static auth checks passed. Back up `auth.json` only outside Git, prefer independent device-code reauthentication, and never borrow another profile's OAuth block as the durable fix.

@@ -33,7 +33,7 @@ Ads         | 3 ads/criativos, nem mais nem menos
 Budget      | máximo USD 25/dia inicialmente
 Status      | PAUSED até validação/confirmação
 Start       | D+1 01:00 no timezone da conta, convertido para UTC Z
-Criativos   | vencedores por menor CPMO ou novos via Drive/Hera
+Criativos   | vencedores por menor CPMO ou novos via Drive/agente legado
 Loser       | arquivar/deletar só depois do replacement validado
 ```
 

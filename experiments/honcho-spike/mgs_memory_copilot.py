@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """MGS Honcho memory copilot.
 
-Safe auxiliary layer for Zeus/Atena/Ares/Hera. It sends only caller-provided,
+Safe auxiliary layer for Zeus/Atena/Ares. It sends only caller-provided,
 sanitized context to Honcho and prints hypotheses/context reminders. It is not a
 source of truth and never executes operational actions.
 """
@@ -72,12 +72,7 @@ AGENT_PROFILES = {
         "session": "mgs-memory-copilot-ares",
         "role": "campaign/growth analysis assistant",
     },
-    "hera": {
-        "peer": "hera",
-        "target": "mgs-creative",
-        "session": "mgs-memory-copilot-hera",
-        "role": "creative/asset workflow analysis assistant",
-    },
+
 }
 
 
@@ -181,7 +176,6 @@ def main() -> int:
                 "zeus",
                 "atena",
                 "ares",
-                "hera",
                 "mgs-system",
                 "mgs-content",
                 "mgs-growth",

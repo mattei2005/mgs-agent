@@ -30,8 +30,8 @@ function runtimeUa() {
 
 async function main() {
   const url = validateUrl(process.argv[2] || 'https://www.facebook.com/ads/library/');
-  const profileDir = process.env.ARES_META_LIBRARY_PROFILE || process.env.HERA_META_LIBRARY_PROFILE || '/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium';
-  const statusPath = process.env.ARES_META_LIBRARY_LOGIN_STATUS || process.env.HERA_META_LIBRARY_LOGIN_STATUS || '/root/.hermes/profiles/ares/artifacts/meta-library-login-status.json';
+  const profileDir = process.env.ARES_META_LIBRARY_PROFILE || '/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium';
+  const statusPath = process.env.ARES_META_LIBRARY_LOGIN_STATUS || '/root/.hermes/profiles/ares/artifacts/meta-library-login-status.json';
   fs.mkdirSync(profileDir, { recursive: true, mode: 0o700 });
   fs.mkdirSync(path.dirname(statusPath), { recursive: true, mode: 0o700 });
 

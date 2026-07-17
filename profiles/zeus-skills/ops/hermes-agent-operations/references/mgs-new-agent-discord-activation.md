@@ -52,7 +52,7 @@ Because the interactive `op` account may not be configured in non-interactive/ro
 set -a
 source /root/mgs-agent/.env
 set +a
-op item get "Discord Bot - Hera" --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" --fields discord_bot_token --reveal
+op item get "Discord Bot - agente legado" --vault "${OP_DEFAULT_VAULT:-MGS Conteúdo}" --fields discord_bot_token --reveal
 ```
 
 Do not print the token. Validate only `len`, decoded bot ID, and Discord API identity.
@@ -64,13 +64,13 @@ Discord bot tokens encode the bot/application ID in the first token segment. Val
 Report shape:
 
 ```text
-item=Discord Bot - Hera
+item=Discord Bot - agente legado
 field=discord_bot_token
 token_len=72
 decoded_bot_id=<expected_id>
 api_bot_id=<expected_id>
-api_username=Hera
-env_written=/root/.hermes/profiles/hera/.env
+api_username=agente legado
+env_written=/root/.hermes/profiles/legacy-agent/.env
 ```
 
 ## Channel validation
@@ -98,7 +98,7 @@ Use the existing Ares/Zeus service as template:
 
 ```ini
 [Unit]
-Description=Hermes Gateway — Hera (MGS Digital Corp)
+Description=Hermes Gateway — agente legado (MGS Digital Corp)
 After=network-online.target
 Wants=network-online.target
 
@@ -109,14 +109,14 @@ RestartForceExitStatus=75
 Type=simple
 User=root
 WorkingDirectory=/root
-EnvironmentFile=/root/.hermes/profiles/hera/.env
+EnvironmentFile=/root/.hermes/profiles/legacy-agent/.env
 Environment="PATH=/root/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-ExecStart=/root/.local/bin/hermes -p hera gateway run
+ExecStart=/root/.local/bin/hermes -p legacy-agent gateway run
 Restart=always
 RestartSec=10
 StandardOutput=journal
 StandardError=journal
-SyslogIdentifier=hera-gateway
+SyslogIdentifier=legacy-agent-gateway
 
 [Install]
 WantedBy=multi-user.target

@@ -12,7 +12,7 @@ Exemplos esperados:
 Ao alterar o padrão de títulos Discord MGS:
 1. Não reescrever heurística, prompt, idioma, tamanho, guardrails ou regra de thread antiga.
 2. Tratar o nome da pessoa como pós-processamento final: título_base_existente + ` - PrimeiroNome`.
-3. Aplicar no ponto comum do runtime Discord/Hermes para Zeus, Atena, Ares, Hera e futuros agentes que compartilhem o mesmo runtime.
+3. Aplicar no ponto comum do runtime Discord/Hermes para Zeus, Atena, Ares, agente legado e futuros agentes que compartilhem o mesmo runtime.
 4. Primeiro nome deve vir de `display_name`/`source.user_name`, sem mention/ID e sem sobrenome.
 5. Respeitar limite Discord de 100 caracteres truncando só a base quando necessário, nunca removendo o sufixo.
 
@@ -58,4 +58,4 @@ Invariantes mínimos além do `py_compile`:
 Pitfall validado: em update Hermes recente, o patch do sufixo existia e aplicava limpo, mas não estava no guard canônico. O relatório pós-update marcou os patches antigos como OK e a função `Título - PrimeiroNome` sumiu do runtime. Todo ajuste novo de título Discord deve atualizar procedimento + guard no mesmo ato.
 
 ## Restart
-Restart de Zeus/Atena/Ares/Hera deve seguir o contrato seguro MGS: finalizer externo via `/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh`, Zeus por último, sem polling foreground na thread ativa.
+Restart de Zeus/Atena/Ares/agente legado deve seguir o contrato seguro MGS: finalizer externo via `/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh`, Zeus por último, sem polling foreground na thread ativa.

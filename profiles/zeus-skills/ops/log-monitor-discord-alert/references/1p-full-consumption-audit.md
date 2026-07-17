@@ -11,7 +11,7 @@ Do not stop at the root crontab. Enumerate all of these before calculating:
    - `/root/.hermes/profiles/zeus/cron/jobs.json`
    - `/root/.hermes/profiles/atena/cron/jobs.json`
    - `/root/.hermes/profiles/ares/cron/jobs.json`
-   - `/root/.hermes/profiles/hera/cron/jobs.json`
+   - `/root/.hermes/profiles/legacy-agent/cron/jobs.json`
 3. Scripts referenced by those jobs, including wrapper → Python/shell dependencies.
 4. systemd services/timers and Git hooks.
 5. Conditional/lazy alert paths separately from unconditional credential reads.

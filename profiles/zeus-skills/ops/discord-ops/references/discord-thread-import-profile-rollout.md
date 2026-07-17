@@ -12,7 +12,7 @@ Usar o importador read-only canônico com o profile do agente que recebeu o pedi
 /root/mgs-agent/scripts/import-discord-thread.py --profile zeus --limit 1000 '<id-ou-link>'
 /root/mgs-agent/scripts/import-discord-thread.py --profile atena --limit 1000 '<id-ou-link>'
 /root/mgs-agent/scripts/import-discord-thread.py --profile ares --limit 1000 '<id-ou-link>'
-/root/mgs-agent/scripts/import-discord-thread.py --profile hera --limit 1000 '<id-ou-link>'
+/root/mgs-agent/scripts/import-discord-thread.py --profile legacy-agent --limit 1000 '<id-ou-link>'
 ```
 
 Depois ler o snapshot local:

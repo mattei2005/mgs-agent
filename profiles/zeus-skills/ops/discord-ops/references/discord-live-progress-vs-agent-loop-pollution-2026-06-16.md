@@ -2,7 +2,7 @@
 
 ## Context
 
-Rodolfo corrected Zeus after a Hera thread showed only `Hera is typing...` while Hera was actively generating assets. Zeus initially framed live tool/progress breadcrumbs as the same kind of “pollution” Rodolfo had complained about previously.
+Rodolfo corrected Zeus after a agente legado thread showed only `agente legado is typing...` while agente legado was actively generating assets. Zeus initially framed live tool/progress breadcrumbs as the same kind of “pollution” Rodolfo had complained about previously.
 
 That was wrong.
 
@@ -38,8 +38,8 @@ Meaning:
 When applying this across MGS agents:
 
 1. Patch both active profile configs and versioned copies:
-   - `/root/.hermes/profiles/{zeus,atena,ares,hera}/config.yaml`
-   - `/root/mgs-agent/profiles/{zeus,atena,ares,hera}-config.yaml`
+   - `/root/.hermes/profiles/{zeus,atena,ares,legacy-agent}/config.yaml`
+   - `/root/mgs-agent/profiles/{zeus,atena,ares,legacy-agent}-config.yaml`
 2. Validate YAML and effective values for each agent.
 3. Append an audit event explaining that Rodolfo clarified “pollution” means multi-agent loops, not live progress breadcrumbs.
 4. Let auto-commit capture the versioned config change, or verify that it did.

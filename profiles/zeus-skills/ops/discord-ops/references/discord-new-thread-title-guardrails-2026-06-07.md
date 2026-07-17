@@ -2,7 +2,7 @@
 
 ## Incident
 
-Rodolfo corrected the interpretation of the “do not rename existing threads” rule. A new Hera thread (`1513332390804721730`) was auto-created with the deterministic fallback title:
+Rodolfo corrected the interpretation of the “do not rename existing threads” rule. A new agente legado thread (`1513332390804721730`) was auto-created with the deterministic fallback title:
 
 ```text
 Pedir Criativo Teste Mas Coloque

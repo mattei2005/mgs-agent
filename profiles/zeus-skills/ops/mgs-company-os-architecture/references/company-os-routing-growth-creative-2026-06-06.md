@@ -6,7 +6,7 @@ Session-specific detail from Rodolfo while reviewing the MGS OS derived docs one
 
 - The campaign agent is **Ares** only. Do not use `Aris`.
 - Do not label Ares as `Ares futuro`. Use **Ares** with status/context such as `em configuração` or `implantação progressiva` when needed.
-- The creative agent is **Hera**.
+- The creative agent is **agente legado**.
 - **Kelly** is the human/gestora responsible for creatives, not the agent name.
 
 ## Gestores and UTM tracking
@@ -34,7 +34,7 @@ Agent  Users / control
 Zeus   Rodolfo only by default. Other company people join Zeus threads only if Rodolfo explicitly asks.
 Atena  Content agent. Raquel supervises; Rodolfo/Raquel can handle tasks manually.
 Ares   Campaign agent. Initial users: Rodolfo + Geizian. Later: trained gestores after Ares is tested/approved.
-Hera   Creative agent. Kelly commands the creative operation; Rodolfo, Geizian and gestores can request creatives.
+agente legado   Creative agent. Kelly commands the creative operation; Rodolfo, Geizian and gestores can request creatives.
 ```
 
 ## Routing corrections
@@ -58,7 +58,7 @@ Rodolfo is responsible for manual intervention; Zeus can help as technical/orche
 
 ### Creative
 
-Everything related to creative creation/editing/organization belongs to **Hera**:
+Everything related to creative creation/editing/organization belongs to **agente legado**:
 
 - static creatives;
 - video;
@@ -147,4 +147,4 @@ Approx break-even               ~R$ 42,857 net profit to exceed R$ 3,000.
 
 When Rodolfo says to review files one by one, do not jump to migration/inventory. Present one file at a time, capture corrections, patch the file, then move to the next.
 
-When Rodolfo corrects naming (`Ares not Aris`, `Kelly agent -> Hera`), search for old terms across canonical context files to remove stale variants. Explain the search as cleanup for stale occurrences, not as re-evaluating his decision.
+When Rodolfo corrects naming (`Ares not Aris`, `Kelly agent -> agente legado`), search for old terms across canonical context files to remove stale variants. Explain the search as cleanup for stale occurrences, not as re-evaluating his decision.

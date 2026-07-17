@@ -50,7 +50,7 @@ Para restaurar, tratar como mudança de configuração: alterar profile vivo e m
 
 ### Estado canônico MGS autorizado
 
-Rodolfo prefere o acompanhamento ao vivo ligado em todos os agentes. O estado canônico de Zeus, Atena, Ares e Hera é:
+Rodolfo prefere o acompanhamento ao vivo ligado em todos os agentes. O estado canônico de Zeus, Atena, Ares e agente legado é:
 
 ```yaml
 display:
@@ -233,7 +233,7 @@ Pitfalls:
 
 ## 6. Discord link previews / suppressão de embeds automáticos
 
-Use quando Rodolfo pedir que links enviados por Zeus, Atena, Ares, Hera ou futuros agentes não gerem cards/previews automáticos no Discord.
+Use quando Rodolfo pedir que links enviados por Zeus, Atena, Ares, agente legado ou futuros agentes não gerem cards/previews automáticos no Discord.
 
 ### Diagnóstico canônico
 
@@ -262,7 +262,7 @@ Remover a permissão Discord **Embed Links** do role do bot também impede previ
 ### Contrato de implementação
 
 - Preferir uma chave pública como `discord.suppress_link_previews: true`, traduzida pelo hook YAML do plugin; não criar variável `.env` como superfície de configuração.
-- O default upstream deve preservar compatibilidade; o default MGS pode ser habilitado em Zeus/Atena/Ares/Hera.
+- O default upstream deve preservar compatibilidade; o default MGS pode ser habilitado em Zeus/Atena/Ares/agente legado.
 - Adicionar testes para URL comum sem preview e para embed explícito ainda presente.
 - Validar no Discord real com mensagem contendo URL e readback da flag/ausência do card.
 - Proteger o patch MGS contra updates.
@@ -320,7 +320,7 @@ Exemplo de matriz final:
 Item                    | Estado
 ------------------------|-------------------------------
 Hermes                  | v0.16.0 / behind 0
-Gateways                | Zeus/Atena/Ares/Hera active
+Gateways                | Zeus/Atena/Ares/agente legado active
 Patches MGS             | guard OK / py_compile OK
 Backup                  | removido ou path preservado
 Pendência               | nenhuma ou ação concreta

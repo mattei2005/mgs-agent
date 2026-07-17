@@ -279,6 +279,23 @@ apply_patch_if_needed "mgs-busy-steer-reentrant-rebuild-2026-07-12.patch"
 apply_patch_if_needed "mgs-busy-steer-ack-ptbr-2026-07-11.patch"
 apply_patch_if_needed "skill-view-compact-linked-files.patch"
 
+# A retired Discord bot must never be restored by an older composite patch.
+# Keep this exact cleanup after every patch application so controlled updates
+# converge to the current three-agent runtime.
+python3 - "$REPO/gateway/run.py" <<'PY'
+from pathlib import Path
+import sys
+path = Path(sys.argv[1])
+text = path.read_text()
+retired_id = "1513006098133680290"
+lines = [line for line in text.splitlines(keepends=True) if retired_id not in line]
+cleaned = "".join(lines)
+if cleaned != text:
+    path.write_text(cleaned)
+PY
+! grep -q "1513006098133680290" "$REPO/gateway/run.py" \
+  || fail "retired Discord bot ID restored by patch bundle"
+
 # Invariants that must survive every Hermes update. If any grep fails, the
 # update is not production-safe for MGS gateways.
 grep -q "def _auto_thread_name_from_message" "$REPO/plugins/platforms/discord/adapter.py" \

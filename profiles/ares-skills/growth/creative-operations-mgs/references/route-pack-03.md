@@ -70,7 +70,7 @@ Classifique a origem e o consumidor antes de montar o plano.
 ```text
 Origem                         Tratamento
 ─────────────────────────────  ─────────────────────────────────────────────
-HERA_GENERATED                 Nomear e colocar direto no fluxo organizado.
+LEGACY_AGENT_GENERATED                 Nomear e colocar direto no fluxo organizado.
 HUMAN_UPLOAD                   Validar, inventariar e propor organização.
 CANVA                          Tratar como bruto/original antes de organizar.
 KELLY / GEIZIAN / GESTOR       Registrar como `created_by` quando conhecido.

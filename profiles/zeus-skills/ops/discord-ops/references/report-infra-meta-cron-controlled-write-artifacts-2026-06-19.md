@@ -64,7 +64,7 @@ if key == 'DISCORD_BOT_TOKEN':
     os.environ[key] = value_from_target_profile_env
 ```
 
-Otherwise the check may accidentally validate Zeus’ bot instead of Ares/Hera/etc. Report only bot ID and permission booleans; never print the token.
+Otherwise the check may accidentally validate Zeus’ bot instead of Ares/agente legado/etc. Report only bot ID and permission booleans; never print the token.
 
 ## Commit hygiene
 
@@ -72,6 +72,6 @@ Stage surgically:
 
 - repo script/data/audit files that are meant to be versioned;
 - `data/infra-inventory.json`;
-- not profile-local wrappers, not runtime process state, not unrelated pending Ares/Hera/Zeus files.
+- not profile-local wrappers, not runtime process state, not unrelated pending Ares/agente legado/Zeus files.
 
 Final ACK remains the normal canonical form: `✅ Registrado. Inventário atualizado (commit XXXX).`

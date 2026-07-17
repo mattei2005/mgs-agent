@@ -2,7 +2,7 @@
 
 ## Trigger
 
-Use this reference when updating/restarting Hermes gateways from a live Zeus Discord session, especially when Rodolfo asks to restart Zeus/Atena/Ares/Hera together after a Hermes update.
+Use this reference when updating/restarting Hermes gateways from a live Zeus Discord session, especially when Rodolfo asks to restart Zeus/Atena/Ares/agente legado together after a Hermes update.
 
 ## What happened
 
@@ -14,7 +14,7 @@ Evidence pattern in logs:
 DIRECT RESTART START repeated several times
 Job for zeus-gateway.service canceled
 Failed to kill unit zeus-gateway.service: Failed to send signal SIGKILL to auxiliary processes: Invalid argument
-Zeus/Atena/Ares/Hera eventually active/running
+Zeus/Atena/Ares/agente legado eventually active/running
 ```
 
 The system ended operational, but the experience was bad: Rodolfo had to use another assistant/terminal to recover.
@@ -28,7 +28,7 @@ Good pattern:
 1. Apply update and validate before restart: `HEAD`, `behind=0`, patch guard, `py_compile`, targeted tests.
 2. Write a single restart/finalizer script with `flock` or another lock, so repeated user messages/resume events cannot schedule duplicates.
 3. Launch it once outside the active Zeus process (for example `systemd-run --unit=<unique> --on-active=...`).
-4. The script should restart Atena/Ares/Hera first, then Zeus last, log final statuses, and exit.
+4. The script should restart Atena/Ares/agente legado first, then Zeus last, log final statuses, and exit.
 5. After Zeus resumes, inspect the finalizer log and `systemctl show` before doing anything else.
 6. If Zeus is stuck in `deactivating`, use one explicit recovery/finalizer path; do not schedule a new full multi-agent restart every resume.
 7. Runtime guard now required: startup auto-resume must synthesize an `Internal restart recovery checkpoint` message that explicitly says `Do not re-run` prior side-effecting requests (`restart/update/deploy`). Empty auto-resume events are unsafe because they can make the agent continue/reexecute the previous command.
@@ -51,8 +51,8 @@ After any update/restart maintenance, verify all of these before reporting succe
 
 ```bash
 # gateways live
-systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service
-systemctl --failed --no-legend | grep -Ei 'zeus|atena|ares|hera|gateway|hermes|mgs' || true
+systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service legacy-agent-gateway.service
+systemctl --failed --no-legend | grep -Ei 'zeus|atena|ares|legacy-agent|gateway|hermes|mgs' || true
 
 # root cron parity, especially service restart monitor
 crontab -l | grep -n 'monitor_service_restarts\|monitor-service-restarts'

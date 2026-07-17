@@ -11,7 +11,7 @@ Minimum checks on the old VPS console:
 ```bash
 hostname
 crontab -l
-systemctl is-active zeus-gateway atena-gateway ares-gateway hera-gateway
+systemctl is-active zeus-gateway atena-gateway ares-gateway legacy-agent-gateway
 pgrep -af 'hermes|gateway'
 ```
 
@@ -19,7 +19,7 @@ Green light only if:
 
 - Hostname/IP match the old VPS, not the current production VPS.
 - Root crontab is empty or operationally irrelevant.
-- Zeus/Atena/Ares/Hera gateways are `inactive`/disabled.
+- Zeus/Atena/Ares/agente legado gateways are `inactive`/disabled.
 - `pgrep -af 'hermes|gateway'` returns no live Hermes/gateway processes.
 - Current production VPS has been separately validated healthy.
 

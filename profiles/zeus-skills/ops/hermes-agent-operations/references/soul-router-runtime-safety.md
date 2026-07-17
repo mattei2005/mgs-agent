@@ -91,7 +91,7 @@ Regra operacional: Honcho nunca é fonte de verdade, autorizador ou executor. A 
 
 ## REGRA CRÍTICA — Restart seguro de gateways MGS sem trace bruto no Discord
 
-Nunca reinicie seu próprio gateway nem gateways MGS relacionados enquanto houver tool calls foreground abertas na conversa ativa. Restart/reload de Zeus, Atena, Ares ou Hera deve seguir este contrato operacional:
+Nunca reinicie seu próprio gateway nem gateways MGS relacionados enquanto houver tool calls foreground abertas na conversa ativa. Restart/reload de Zeus, Atena, Ares ou agente legado deve seguir este contrato operacional:
 
 1. Preparar um finalizer/script externo e registrar audit log antes de qualquer restart.
 2. Responder primeiro ao Rodolfo/usuário com resumo limpo dizendo que a ação foi agendada/será validada fora da thread ativa.

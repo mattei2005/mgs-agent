@@ -12,7 +12,7 @@ Initial state:
 Local Hermes   v0.16.0 / f10f7114f
 Upstream       v0.17.0 / ac83365d9
 Behind         388 commits
-Gateways       Zeus/Atena/Ares/Hera active
+Gateways       Zeus/Atena/Ares/agente legado active
 Risk           local Discord/gateway patch surface did not apply cleanly to upstream
 ```
 
@@ -96,4 +96,4 @@ clean-worktree guard OK
 - Tests may fail because expected strings changed after a correct merge; update tests only when the behavior is intentionally preserved/improved and the production invariant is clear.
 - Do not leave `mgs-autocommit.service` stopped after maintenance; stop it during artifact generation, then restore it before final restart/report.
 - `REPORT-INFRA` is part of completion when scripts/patches/inventory change.
-- Restart should be detached and ordered: Ares/Hera/Atena first, Zeus last. Do not restart all gateways from the active Zeus foreground turn.
+- Restart should be detached and ordered: Ares/agente legado/Atena first, Zeus last. Do not restart all gateways from the active Zeus foreground turn.

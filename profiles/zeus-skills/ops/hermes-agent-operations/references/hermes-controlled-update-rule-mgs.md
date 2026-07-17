@@ -8,7 +8,7 @@ Never update Hermes "over the top" without this sequence:
 
 1. Backup profiles and operational state.
 2. Save pre-update Git state: HEAD, origin/main, behind/ahead, status, local diff and untracked list.
-3. Save sanitized profile config/auth presence for Zeus, Atena, Ares and Hera; never print tokens.
+3. Save sanitized profile config/auth presence for Zeus, Atena, Ares and agente legado; never print tokens.
 4. Check canonical MGS patches against upstream in a temporary worktree before mutating the live checkout.
 5. Update Hermes.
 6. Compare post-update Git/config/runtime state against the pre-update artifacts.
@@ -27,7 +27,7 @@ Never update Hermes "over the top" without this sequence:
 Area                         Preserve/validate
 ---------------------------- ----------------------------------------
 Profiles                     config.yaml, SOUL.md, auth presence sanitized
-Gateways                     Zeus, Atena, Ares, Hera systemd units
+Gateways                     Zeus, Atena, Ares, agente legado systemd units
 Discord                      thread titles, bot loop guard, auto-add, REPORT-INFRA inline
 Restart                      planned restart resume, anti-reexecution checkpoints
 Providers                    GPT-5.5/OpenAI-Codex default, zero Claude unless approved

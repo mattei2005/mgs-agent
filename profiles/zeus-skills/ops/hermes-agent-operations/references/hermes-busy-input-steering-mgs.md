@@ -258,7 +258,7 @@ Para localizar/personalizar o texto compartilhado pelos gateways MGS:
 4. Manter testes de startup/race focados em comportamento (`content` não vazio e ausência de `Queued for the next turn`), sem acoplá-los à redação. Isso evita que um patch de localização dependa de testes introduzidos por outro patch MGS e ausentes no upstream limpo.
 5. Criar patch canônico independente em `patches/hermes/`, registrá-lo no guard e no updater controlado, e adicionar invariantes da nova frase.
 6. Validar: `bash -n`, `py_compile`, pytest direcionado, `git apply --reverse --check` no checkout vivo e `git apply --check` contra `origin/main` em worktree temporária.
-7. Se o runtime for compartilhado, um único patch atende Zeus/Atena/Ares/Hera, mas todos os gateways precisam de restart seguro; Zeus sempre por último. Não editar targets depois de gerar o snapshot do finalizer.
+7. Se o runtime for compartilhado, um único patch atende Zeus/Atena/Ares/agente legado, mas todos os gateways precisam de restart seguro; Zeus sempre por último. Não editar targets depois de gerar o snapshot do finalizer.
 
 Pitfall de patches dependentes: se um teste foi criado por um patch MGS anterior e não existe em `origin/main`, não o inclua no patch independente de localização que precisa passar `apply --check` no upstream limpo. Torne o teste anterior neutro em relação à redação e concentre a asserção textual no teste stock que já existe upstream.
 

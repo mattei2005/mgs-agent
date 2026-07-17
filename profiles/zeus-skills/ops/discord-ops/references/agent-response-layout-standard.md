@@ -64,7 +64,7 @@ Config sync                | Active profile and `/root/mgs-agent/profiles/*` mat
 New agents                 | Check newer profiles too; they may lack old style rules
 ```
 
-Audit all active MGS agents (Zeus, Atena, Ares, Hera, future agents) for the style rule, not only the agent that made the bad response. In the 2026-06-07 post-update audit, Zeus/Atena/Ares had the rule but Hera did not; the correct fix was adding the rule to Hera's SOUL and syncing/versioning it, not changing Hermes runtime.
+Audit all active MGS agents (Zeus, Atena, Ares, agente legado, future agents) for the style rule, not only the agent that made the bad response. In the 2026-06-07 post-update audit, Zeus/Atena/Ares had the rule but agente legado did not; the correct fix was adding the rule to agente legado's SOUL and syncing/versioning it, not changing Hermes runtime.
 
 ## Files updated in the originating session
 

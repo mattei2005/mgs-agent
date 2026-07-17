@@ -1,6 +1,6 @@
 ### Adding a user to a private Discord thread
 
-When Rodolfo asks to add Raquel/Kelly/Geizian/Ially/gestor or another approved person to a Zeus/Atena/Ares/Hera thread, **execute it**; do not answer “não consigo” unless API validation proves a real blocker. Use Discord API `PUT /channels/{thread_id}/thread-members/{user_id}`. Do this even when no dedicated `discord_admin` tool is loaded: load the bot token from the active profile `.env` or runtime service environment inside a terminal/shell command, call Discord API directly, and never print the token.
+When Rodolfo asks to add Raquel/Kelly/Geizian/Ially/gestor or another approved person to a Zeus/Atena/Ares/agente legado thread, **execute it**; do not answer “não consigo” unless API validation proves a real blocker. Use Discord API `PUT /channels/{thread_id}/thread-members/{user_id}`. Do this even when no dedicated `discord_admin` tool is loaded: load the bot token from the active profile `.env` or runtime service environment inside a terminal/shell command, call Discord API directly, and never print the token.
 
 Canonical helper for the normal path:
 
@@ -33,7 +33,7 @@ For Zeus, this helper should be in `command_allowlist` as:
 /root/mgs-agent/scripts/discord-add-thread-member.sh --profile zeus --thread * --user *
 ```
 
-Operational correction validated on Hera and Ares: if the agent replied “não consigo adicionar pessoas na thread”, fix the profile so future requests are executable, not just manually handled once:
+Operational correction validated on agente legado and Ares: if the agent replied “não consigo adicionar pessoas na thread”, fix the profile so future requests are executable, not just manually handled once:
 
 ```yaml
 command_allowlist:
@@ -42,7 +42,7 @@ command_allowlist:
 
 Validate via ad-hoc `/tmp/hermes-verify-*` script: YAML parses, entry appears exactly once in active + versioned Zeus config, and a representative command matches the glob. This is not suite green.
 
-Operational correction validated on Hera and Ares: if the agent replied “não consigo adicionar pessoas na thread”, fix the profile so future requests are executable, not just manually handled once:
+Operational correction validated on agente legado and Ares: if the agent replied “não consigo adicionar pessoas na thread”, fix the profile so future requests are executable, not just manually handled once:
 - Add the explicit user IDs to `discord.thread_auto_add_users` in `config.yaml` for automatic inclusion in new threads.
 - If `.env` already defines `DISCORD_THREAD_AUTO_ADD_USERS`, update `.env` too; runtime env takes precedence over config hydration (`config.yaml` only sets env when the env var is absent).
 - Add a short channel prompt/SOUL rule: on Rodolfo’s natural-language “adiciona X na thread”, call `/root/mgs-agent/scripts/discord-add-thread-member.sh --profile <agent> --thread <thread_id> --user <user_id>` or the equivalent Discord API directly, and confirm only after HTTP 204/GET 200; on 403, report Missing Access/parent-channel access needed.
@@ -51,7 +51,7 @@ Operational correction validated on Hera and Ares: if the agent replied “não 
 
 Pitfall: avoid rewriting full `config.yaml` with PyYAML for small profile edits unless necessary; it can reformat unrelated fields and generate noisy auto-commits. Prefer targeted patches, or restore from backup and reapply minimal textual edits before final validation. Auto-push/auto-commit may capture intermediate config states, so inspect recent commits/status if the edit was iterative.
 
-Session reference: `references/discord-thread-member-autonomy-ares-hera-2026-06-16.md`.
+Session reference: `references/discord-thread-member-autonomy-ares-legacy-agent-2026-06-16.md`.
 
 ### Separar canal privado/diretoria e canal de equipe
 
@@ -128,7 +128,7 @@ Quando Rodolfo pedir para “conferir tudo de novo” após update, limpeza ou r
 - separar `runtime íntegro` de `higiene de patch artifact`;
 - dizer claramente quantos markers foram conferidos e quantos faltam, ex.: `35/35 OK, missing=0`.
 
-Pitfall validado: responder “Zeus/Atena/Ares/Hera online” quando Rodolfo perguntou se “recuperou tudo que estava fora” é incompleto e irrita, porque ele já sabe que os serviços estão online; a pergunta é sobre integridade dos patches/configs locais.
+Pitfall validado: responder “Zeus/Atena/Ares/agente legado online” quando Rodolfo perguntou se “recuperou tudo que estava fora” é incompleto e irrita, porque ele já sabe que os serviços estão online; a pergunta é sobre integridade dos patches/configs locais.
 
 ### Diagnóstico de título ruim em auto-thread
 

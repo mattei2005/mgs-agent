@@ -1,0 +1,1 @@
+Rodolfo prefers concise operational reports in BRL with real readback.

@@ -32,7 +32,7 @@ For every Hermes update, the final workflow must produce and report these classe
    - Do not silently continue just because invariants appear present.
 
 4. **Post-update MGS surface comparison**
-   - Compare live `config.yaml`, `SOUL.md`, and sanitized `auth.json` for Zeus/Atena/Ares/Hera against the pre-update backup.
+   - Compare live `config.yaml`, `SOUL.md`, and sanitized `auth.json` for Zeus/Atena/Ares/agente legado against the pre-update backup.
    - Validate profile provider/model/auth presence without printing secrets.
    - Validate MGS invariants in Hermes files after patch guard.
    - Record explicit artifacts such as:
@@ -64,9 +64,9 @@ Minimum profile files:
 /root/.hermes/profiles/ares/config.yaml
 /root/.hermes/profiles/ares/SOUL.md
 /root/.hermes/profiles/ares/auth.json   # sanitized comparison only
-/root/.hermes/profiles/hera/config.yaml
-/root/.hermes/profiles/hera/SOUL.md
-/root/.hermes/profiles/hera/auth.json   # sanitized comparison only
+/root/.hermes/profiles/legacy-agent/config.yaml
+/root/.hermes/profiles/legacy-agent/SOUL.md
+/root/.hermes/profiles/legacy-agent/auth.json   # sanitized comparison only
 ```
 
 For `auth.json`, compare sanitized structure only: active provider, provider keys, auth mode, and token presence/length booleans. Never print access tokens, refresh tokens, passwords, API keys, bot tokens, application passwords, or raw credential values.

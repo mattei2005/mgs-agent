@@ -42,7 +42,7 @@ Services to check by default:
 - `zeus-gateway`
 - `atena-gateway`
 - `ares-gateway`
-- `hera-gateway`
+- `legacy-agent-gateway`
 - `mgs-autocommit`
 
 ## Alerting behavior

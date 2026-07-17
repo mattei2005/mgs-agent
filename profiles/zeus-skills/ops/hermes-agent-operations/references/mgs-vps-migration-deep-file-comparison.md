@@ -25,9 +25,9 @@ Compare at least:
 /root/.hermes/profiles/zeus
 /root/.hermes/profiles/atena
 /root/.hermes/profiles/ares
-/root/.hermes/profiles/hera
+/root/.hermes/profiles/legacy-agent
 /root/.hermes/hermes-agent
-/etc/systemd/system/{zeus,atena,ares,hera,mgs-autocommit}.service
+/etc/systemd/system/{zeus,atena,ares,legacy-agent,mgs-autocommit}.service
 root crontab
 ```
 
@@ -74,7 +74,7 @@ From the 2026-06-18 review, the second detailed pass found issues a first pass m
 After any mirror/sync to old VPS, immediately enforce:
 
 ```bash
-systemctl disable --now zeus-gateway atena-gateway ares-gateway hera-gateway mgs-autocommit
+systemctl disable --now zeus-gateway atena-gateway ares-gateway legacy-agent-gateway mgs-autocommit
 systemctl reset-failed
 crontab -l  # should be empty / 0 lines for standby
 pgrep -af 'hermes|gateway'  # should show 0 relevant old-agent processes

@@ -114,7 +114,7 @@ created_by       ARES / KELLY / GEIZIAN / GESTOR / UNKNOWN
 requested_by     solicitante, quando houver
 used_by          ARES / HUMAN / UNKNOWN
 campaign_owner   Ares, Kelly, Geizian, gestor específico ou UNKNOWN
-source           HERA_GENERATED / CANVA / HUMAN_UPLOAD
+source           LEGACY_AGENT_GENERATED / CANVA / HUMAN_UPLOAD
 ```
 
 Ares e humanos devem consumir assets organizados na pasta da vertical/operação correta. Se humano usar sem Ares, registre `used_by=HUMAN` e `campaign_owner` quando conhecido. Se a vertical ainda não tiver padrão fechado, use `CC_US_ES` como referência e ajuste com a prática no canal.

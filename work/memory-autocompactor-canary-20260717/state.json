@@ -1,0 +1,29 @@
+{
+  "delivered_events": {
+    "d776ddc23565f5209e7ab554": "2026-07-17T15:39:39.335762Z"
+  },
+  "last_check": "2026-07-17T15:39:39.335762Z",
+  "outbox": [],
+  "schema_version": 1,
+  "stores": {
+    "canary:memory": {
+      "chars": 7,
+      "checked_at": "2026-07-17T15:39:39.335762Z",
+      "limit": 200,
+      "percent": 3.5,
+      "sha256": "87695fdac81728b9d7f2d4a1335c2632bb5e6ba1bed21d2dff0254fba31c7d5b",
+      "status": "healthy"
+    },
+    "canary:user": {
+      "backup_path": "/root/mgs-agent/work/memory-autocompactor-canary-20260717/backups/20260717T113939389095-0400/canary/USER.md.before",
+      "chars": 70,
+      "checked_at": "2026-07-17T15:39:39.335762Z",
+      "compacted_at": "2026-07-17T15:39:39.335762Z",
+      "limit": 150,
+      "mode": "exact_dedup",
+      "percent": 46.67,
+      "sha256": "702dba39cb33d676db52d1c68346f23441b526f8a1441885f10eb685761eab23",
+      "status": "compacted"
+    }
+  }
+}

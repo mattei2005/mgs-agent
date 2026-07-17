@@ -20,7 +20,7 @@ Use after Phase 4 contextual review is closed and Rodolfo says to continue into 
    - `context`/MGS OS wins for managerial structure, areas, routes, responsibilities, and agent limits.
    - SOUL governs posture, channel, safety, and behavior but must not contradict MGS OS.
 9. Update stale agent/model wording while there:
-   - Replace `futuramente Ares` with current MGS agents: Atena, Ares, Hera, future agents.
+   - Replace `futuramente Ares` with current MGS agents: Atena, Ares, agente legado, future agents.
    - Remove stale model identity like `Claude Sonnet`; use active profile wording, normally GPT-5.5/OpenAI-Codex unless Rodolfo approved otherwise.
 10. Update `docs/mgs-os-restructure-plan.md` to mark Zeus as concluded and Atena as the next recommended gate.
 11. Append an audit event to `logs/events-audit.jsonl`.

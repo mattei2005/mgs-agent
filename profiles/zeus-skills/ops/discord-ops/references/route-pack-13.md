@@ -4,7 +4,7 @@ Quando Rodolfo mostrar screenshot ou relatar que Geizian/gestores/Kelly veem mui
 
 Checklist curto:
 1. Auditar `/guilds/{guild_id}/threads/active` com os bot tokens dos profiles afetados.
-2. Para cada parent channel de Zeus/Atena/Ares/Hera, comparar `thread_metadata.archived`, `auto_archive_duration` e timestamp do `last_message_id`.
+2. Para cada parent channel de Zeus/Atena/Ares/agente legado, comparar `thread_metadata.archived`, `auto_archive_duration` e timestamp do `last_message_id`.
 3. Se `last_message + auto_archive_duration + grace` já passou e `archived=false`, arquivar via `PATCH /channels/{thread_id}` com `{"archived": true}`.
 4. Manter auto-add e archive como assuntos separados: remover usuário reduz escopo de notificação, mas não corrige thread stale.
 5. Se a correção virar script/cron/config/data, atualizar inventário/audit log e seguir o fluxo REPORT-INFRA.
@@ -73,7 +73,7 @@ Pitfall crítico: separar “não recebo automaticamente o histórico completo n
 ---
 ## SEÇÃO G — Importar histórico de thread antiga por link/ID
 
-Quando Rodolfo/Raquel pedir para Zeus, Atena, Ares, Hera ou outro agente MGS ler uma thread antiga, use o importador read-only canônico por link/ID. Ver `references/discord-thread-history-import.md` e `references/discord-thread-import-profile-rollout.md`.
+Quando Rodolfo/Raquel pedir para Zeus, Atena, Ares, agente legado ou outro agente MGS ler uma thread antiga, use o importador read-only canônico por link/ID. Ver `references/discord-thread-history-import.md` e `references/discord-thread-import-profile-rollout.md`.
 
 Comandos padrão:
 
@@ -81,7 +81,7 @@ Comandos padrão:
 /root/mgs-agent/scripts/import-discord-thread.py --profile zeus '<LINK_OU_ID>'
 /root/mgs-agent/scripts/import-discord-thread.py --profile atena '<LINK_OU_ID>'
 /root/mgs-agent/scripts/import-discord-thread.py --profile ares '<LINK_OU_ID>'
-/root/mgs-agent/scripts/import-discord-thread.py --profile hera '<LINK_OU_ID>'
+/root/mgs-agent/scripts/import-discord-thread.py --profile legacy-agent '<LINK_OU_ID>'
 ```
 
 Regra operacional: nunca responder “só leio o contexto entregue pelo gateway” quando Rodolfo fornece ID/link antes de tentar o importador com o profile correto. O contexto ativo pode não conter histórico completo; isso é diferente de incapacidade de importar histórico read-only.

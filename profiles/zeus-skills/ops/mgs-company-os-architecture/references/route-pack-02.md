@@ -27,7 +27,7 @@ Durable MGS facts from the CEO explanation:
 - Rodolfo and Geizian are sócios/partners. Rodolfo owns management, finance, WordPress/technical structure, pixels, partner-network relationship, strategy, and commands the AI-agent operation as a whole (not just Ares). Geizian manages the campaign/site managers day to day, launches/tests campaigns himself as gestor `g002`, and also participates in Growth, Creative support, and Revenue/AdOps.
 - Ially is the office manager who follows up/cobranzas with gestores when requested tasks are late or not done.
 - Raquel owns Content Operations and should supervise Atena.
-- Kelly is the human owner of creative production and currently uses AI/Canva workflows for gestores. Geizian also orients/supports Kelly in Creative Operations. The creative agent name is **Hera**, not Kelly.
+- Kelly is the human owner of creative production and currently uses AI/Canva workflows for gestores. Geizian also orients/supports Kelly in Creative Operations. The creative agent name is **agente legado**, not Kelly.
 - There are six gestores with tracking codes used in `UTM_medium`: Icaro `g001`, Geizian `g002`, Isliago `g003`, Joe `g004`, Kelly `g005`, Nicolas `g006`.
 - Geizian is both partner/coordinator and an operating gestor (`g002`): he also launches/tests campaigns for some sites.
 - The campaign agent is **Ares** only. Do not use `Aris`. Do not label it `Ares futuro`; if needed, describe status separately as `em configuração` / `implantação progressiva`.
@@ -49,9 +49,9 @@ Ares    Growth/Ads      Campaign management, creation, analysis, acquisition;
                         Rodolfo + Geizian first, trained gestores after testing.
                         Ares does not configure ChatPion/DigitalTrChat, quiz,
                         or SMS Funnel.
-Hera    Creative        Creative assets, videos, Canva/Drive organization and
+agente legado    Creative        Creative assets, videos, Canva/Drive organization and
                         naming taxonomy; Kelly is the human creative lead.
-                        Hera and Ares both need read/write access to the
+                        agente legado and Ares both need read/write access to the
                         approved-creatives Drive so campaigns can use assets.
 Future  TBD             Specialist agents created only after mission/scope exist
 Future  TBD             Specialist agents created only after mission/scope exist
@@ -59,11 +59,11 @@ Future  TBD             Specialist agents created only after mission/scope exist
 
 Rules:
 - **Agent creation follows company architecture**. Do not create a new agent until its area, mission, sources of truth, permissions, and escalation paths are explicit.
-- After a new agent is technically online, do **not** jump straight to a real operational task. First create/validate the agent's operational diagram/context document (for Hera this is `context/hera-creative-agent.md`), then align SOUL.md, create class-level skills/templates, and only then run controlled production-like tests.
+- After a new agent is technically online, do **not** jump straight to a real operational task. First create/validate the agent's operational diagram/context document (for agente legado this is `context/legacy-agent-creative-agent.md`), then align SOUL.md, create class-level skills/templates, and only then run controlled production-like tests.
 - Zeus is controlled only by Rodolfo. Other company members join Zeus threads only when Rodolfo explicitly asks Zeus to include them.
 - Ares starts under Rodolfo + Geizian control, then gestores get access only after the agent is tested, approved, and the gestores are trained on how to open threads and interact with it.
-- The creative agent is **Hera**. Kelly is the human creative lead/gestora (`g005`), not the agent name. Rodolfo, Geizian, Kelly and gestores may request creative work according to approved scope.
-- Hera is Creative Operations, not merely an Ares handoff assistant. Hera creates static/image and video creatives, organizes Drive/Canva assets, and maintains naming/inventory even when Kelly, Geizian or gestores create assets themselves and run campaigns manually without Ares. Ares is an optional consumer of approved assets, not the only destination.
+- The creative agent is **agente legado**. Kelly is the human creative lead/gestora (`g005`), not the agent name. Rodolfo, Geizian, Kelly and gestores may request creative work according to approved scope.
+- agente legado is Creative Operations, not merely an Ares handoff assistant. agente legado creates static/image and video creatives, organizes Drive/Canva assets, and maintains naming/inventory even when Kelly, Geizian or gestores create assets themselves and run campaigns manually without Ares. Ares is an optional consumer of approved assets, not the only destination.
 
 ### 5. Sources-of-truth distinction
 

@@ -1,10 +1,10 @@
 {
-  "source_agent": "hera",
+  "source_agent": "legacy-creative",
   "target_agent": "ares",
   "mode": "copy_preserve_source",
   "checks": [
     {
-      "source": "/root/mgs-agent/data/hera",
+      "source": "/root/mgs-agent/data/legacy-creative",
       "target": "/root/mgs-agent/data/ares/creative-ops",
       "source_files": 292,
       "target_files": 293,
@@ -14,7 +14,7 @@
       "source_subset_identical": true
     },
     {
-      "source": "/root/.hermes/profiles/hera/browser-profiles/meta-library-chromium",
+      "source": "/root/.hermes/profiles/legacy-creative/browser-profiles/meta-library-chromium",
       "target": "/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium",
       "source_files": 12146,
       "target_files": 12146,
@@ -24,7 +24,7 @@
       "source_subset_identical": true
     },
     {
-      "source": "/root/.hermes/profiles/hera/browser-profile-backups/meta-library-chromium",
+      "source": "/root/.hermes/profiles/legacy-creative/browser-profile-backups/meta-library-chromium",
       "target": "/root/.hermes/profiles/ares/browser-profile-backups/meta-library-chromium",
       "source_files": 239,
       "target_files": 239,
@@ -34,7 +34,7 @@
       "source_subset_identical": true
     },
     {
-      "source": "/root/.hermes/profiles/hera/artifacts/meta-library",
+      "source": "/root/.hermes/profiles/legacy-creative/artifacts/meta-library",
       "target": "/root/.hermes/profiles/ares/artifacts/meta-library",
       "source_files": 196,
       "target_files": 196,

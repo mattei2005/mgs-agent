@@ -90,7 +90,7 @@ For MGS Hermes runtime, large support-file inventories use a compact `skill_view
 - Instant rollback: set `skills.linked_files_mode: full` in profile config, or `metadata.hermes.linked_files_mode: full` for one skill. `compact` can force the behavior on a small skill.
 - Persist the runtime change as a selective Hermes patch and protect it with helper/result/test invariants in `ensure-hermes-mgs-patches.sh`.
 
-Required validation: unit tests for auto threshold, small-list compatibility, per-skill override, config rollback, and direct omitted-file access; then E2E profile loads for Zeus, Atena, Ares, and Hera.
+Required validation: unit tests for auto threshold, small-list compatibility, per-skill override, config rollback, and direct omitted-file access; then E2E profile loads for Zeus, Atena, Ares, and agente legado.
 
 ### Runtime rollout and persistence
 

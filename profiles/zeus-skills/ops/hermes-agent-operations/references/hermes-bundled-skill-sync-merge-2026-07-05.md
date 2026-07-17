@@ -17,7 +17,7 @@ Do **not** blindly run `hermes skills reset <skill> --restore` on every modified
 
 ```bash
 hermes skills list-modified
-for p in zeus atena ares hera; do hermes -p "$p" skills list-modified; done
+for p in zeus atena ares legacy-agent; do hermes -p "$p" skills list-modified; done
 ```
 
 2. **Generate diffs before changing anything**
@@ -29,7 +29,7 @@ hermes -p <profile> skills diff <skill> > reports/.../<profile>__<skill>.diff
 
 3. **Backup skill roots**
 
-Back up `/root/.hermes/skills` and `/root/.hermes/profiles/{zeus,atena,ares,hera}/skills` before any restore/merge.
+Back up `/root/.hermes/skills` and `/root/.hermes/profiles/{zeus,atena,ares,legacy-agent}/skills` before any restore/merge.
 
 4. **Apply by classification**
 
@@ -45,7 +45,7 @@ Back up `/root/.hermes/skills` and `/root/.hermes/profiles/{zeus,atena,ares,hera
 
 ```bash
 hermes skills list-modified
-for p in zeus atena ares hera; do hermes -p "$p" skills list-modified; done
+for p in zeus atena ares legacy-agent; do hermes -p "$p" skills list-modified; done
 ```
 
 Expected final state after a clean merge/rebaseline:
@@ -60,13 +60,13 @@ Also validate frontmatter for edited skills: starts at byte 0 with `---`, has `n
 
 In the 2026-07-05 merge:
 
-- `ocr-and-documents` root/Zeus/Ares/Hera: restored stock because local copy was stale/empty.
-- Hera `google-workspace`: removed `scripts/__pycache__` artifact and rebaselined.
-- `ascii-video` root/Zeus/Hera: kept local static ASCII art addition and rebaselined.
+- `ocr-and-documents` root/Zeus/Ares/agente legado: restored stock because local copy was stale/empty.
+- agente legado `google-workspace`: removed `scripts/__pycache__` artifact and rebaselined.
+- `ascii-video` root/Zeus/agente legado: kept local static ASCII art addition and rebaselined.
 - `hermes-agent-skill-authoring` root/Zeus: merged stock 1.1.0 with MGS rename/migration validation rule.
 - Atena `hermes-agent`: merged stock 2.3.0 with local consolidated subsystem notes.
-- Hera `claude-design`: merged stock 1.1.0 with local absorbed subworkflows.
-- Hera `systematic-debugging`: merged stock 1.1.0 with local adjacent validation modes.
+- agente legado `claude-design`: merged stock 1.1.0 with local absorbed subworkflows.
+- agente legado `systematic-debugging`: merged stock 1.1.0 with local adjacent validation modes.
 
 ## Reporting standard
 

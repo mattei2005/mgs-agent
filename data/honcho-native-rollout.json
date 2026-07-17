@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-07-17T15:05:56Z",
+  "updated_at": "2026-07-17T15:48:10Z",
   "status": "active",
   "authorization": {
     "owner": "Rodolfo Mattei",
@@ -56,8 +56,15 @@
     "native_hook_mirrors_memory": false,
     "autocompactor_role": "residual_only",
     "capacity_monitor_threshold_percent": 90,
-    "capacity_monitor_active": false,
-    "capacity_monitor_runtime_readback": "no matching root cron, Hermes cron job, or MGS monitor script found on 2026-07-17",
+    "capacity_monitor_target_percent": 85,
+    "capacity_monitor_active": true,
+    "capacity_monitor_schedule": "4,14,24,34,44,54 * * * *",
+    "capacity_monitor_script": "scripts/monitor-hermes-memory-capacity.py",
+    "capacity_monitor_state": "data/hermes-memory-capacity-state.json",
+    "capacity_monitor_channel_id": "1527401973698007060",
+    "capacity_monitor_runtime_readback": "active root cron with flock; first production run healthy 3 profiles and 6 stores; zero threshold, failures, delivery failures or pending outbox",
+    "capacity_monitor_canary": "exact_dedup_apply_pass_and_semantic_verified_target_85_dry_run_pass",
+    "capacity_monitor_tests": "12_passed",
     "zeus_user_capacity_percent": 89.5
   },
   "validation": {

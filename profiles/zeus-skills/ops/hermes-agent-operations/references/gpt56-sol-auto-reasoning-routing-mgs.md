@@ -1,6 +1,6 @@
 # GPT-5.6 Sol automatic reasoning routing — MGS
 
-Use when Rodolfo wants Zeus/Atena/Ares/Hera to choose reasoning depth automatically while keeping `gpt-5.6-sol` as the principal model.
+Use when Rodolfo wants Zeus/Atena/Ares/agente legado to choose reasoning depth automatically while keeping `gpt-5.6-sol` as the principal model.
 
 ## Runtime contract
 

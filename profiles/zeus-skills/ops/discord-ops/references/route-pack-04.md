@@ -48,7 +48,7 @@ for m in s.get('messages', []):
 "
 ```
 
-### Formato REPORT-INFRA (Atena/Ares/Hera → Zeus)
+### Formato REPORT-INFRA (Atena/Ares/agente legado → Zeus)
 
 Ao processar `[REPORT-INFRA]`, seguir o playbook operacional em `references/report-infra-processing-playbook.md`: validar artefatos/hashes/crons, atualizar `infra-inventory.json` quando aplicável, registrar audit log, commitar só arquivos relevantes e responder apenas com o ACK canônico curto.
 

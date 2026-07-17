@@ -28,7 +28,7 @@ Checks that mattered in this session:
 - stale agent names: `Aris`, `Ares futuro`, `Kelly agent`, `agente Kelly`, `Creative Agent`;
 - Ares overreach into ChatPion/DigitalTrChat, quiz, SMS Funnel, AdOps blocks, or site technical setup;
 - Geizian as `sócio`, not generic partner;
-- Hera as creative agent; Kelly as human gestor/creative lead (`g005`);
+- agente legado as creative agent; Kelly as human gestor/creative lead (`g005`);
 - `data/sites.json` vs `context/sites.md` automation boundary;
 - Smart Bidding main dashboard vs ActiveView exceptions.
 

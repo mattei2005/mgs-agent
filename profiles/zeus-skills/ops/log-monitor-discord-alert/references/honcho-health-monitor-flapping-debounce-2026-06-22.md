@@ -7,7 +7,7 @@ The Honcho managed memory/copilot monitor was posting repeated Discord pairs in 
 1. `Honcho MGS indisponível`
 2. `Honcho MGS restabelecido`
 
-The visible pattern was every cycle or two, with mixed affected agents (`zeus`, `atena`, `ares`, `hera`) and technical details like `unavailable / none / timeout`.
+The visible pattern was every cycle or two, with mixed affected agents (`zeus`, `atena`, `ares`, `legacy-agent`) and technical details like `unavailable / none / timeout`.
 
 Root issue: the monitor treated transient partial failures/timeouts as a full operational outage, then posted a green recovery as soon as the next cycle passed. That made noise look like incident churn.
 

@@ -1,13 +1,13 @@
 # Hermes v0.18.2 controlled no-restart update — 2026-07-10
 
-Use this reference when a large Hermes upstream delta must be staged while Zeus/Atena/Ares/Hera remain online until a separately confirmed activation restart.
+Use this reference when a large Hermes upstream delta must be staged while Zeus/Atena/Ares/agente legado remain online until a separately confirmed activation restart.
 
 ## Validated result before activation
 
 - Live repo: `009b42d00` / v0.18.0 → `f8361d29c` / v0.18.2.
 - Delta: 271 commits, 434 files.
 - Canonical patches `mgs-runtime-customizations-2026-07-07.patch` and `mgs-auto-reasoning-routing.patch` both applied cleanly to the pinned upstream SHA.
-- Isolated and live validation: patch guard + py_compile; targeted suite `222 passed, 6 subtests passed`; web and TUI builds passed; CLI smokes Zeus/Atena/Ares/Hera 4/4.
+- Isolated and live validation: patch guard + py_compile; targeted suite `222 passed, 6 subtests passed`; web and TUI builds passed; CLI smokes Zeus/Atena/Ares/agente legado 4/4.
 - Profiles `config.yaml`, `SOUL.md`, and sanitized auth state matched the pre-update backup exactly.
 - Update was staged without restarting gateways; running gateway PIDs remained unchanged until explicit activation approval.
 
@@ -48,11 +48,11 @@ For an artifact-only diff:
 
 1. Rely on the verified profile backup, and move the artifact to a secure rollback directory instead of irreversibly deleting it when deletion requires critical confirmation.
 2. Run `hermes -p <profile> skills reset <skill>` without `--restore` to rebaseline the cleaned current copy.
-3. Require `No user-modified bundled skills` for root + Zeus/Atena/Ares/Hera before activation.
+3. Require `No user-modified bundled skills` for root + Zeus/Atena/Ares/agente legado before activation.
 
 ## Detached activation finalizer
 
-Restart only after a separate explicit confirmation. Use an external `systemd-run --no-block` finalizer with a lock; Ares/Hera/Atena first and Zeus last. The active Discord turn must not poll the restart.
+Restart only after a separate explicit confirmation. Use an external `systemd-run --no-block` finalizer with a lock; Ares/agente legado/Atena first and Zeus last. The active Discord turn must not poll the restart.
 
 Validation details:
 

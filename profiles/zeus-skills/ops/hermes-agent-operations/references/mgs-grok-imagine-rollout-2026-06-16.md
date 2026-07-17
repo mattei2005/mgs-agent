@@ -4,7 +4,7 @@ Use this reference when Rodolfo asks to implement Grok/xAI for image/video/avata
 
 ## Session context
 
-Rodolfo upgraded to SuperGrok and asked to implement Grok for the whole operation, not just a small sandbox. The operational target is still role-based: Hera owns creative production, Ares consumes/searches campaign creatives, Zeus audits/configures/monitors, and Atena should not become a general creative agent.
+Rodolfo upgraded to SuperGrok and asked to implement Grok for the whole operation, not just a small sandbox. The operational target is still role-based: agente legado owns creative production, Ares consumes/searches campaign creatives, Zeus audits/configures/monitors, and Atena should not become a general creative agent.
 
 ## Durable findings from live Hermes/MGS inspection
 
@@ -29,7 +29,7 @@ Rodolfo upgraded to SuperGrok and asked to implement Grok for the whole operatio
    - Never print the key/token. Report only item name and secret length/presence.
 
 2. **Role-based enablement**
-   - Hera: enable `image_gen` + `video_gen`; set image/video providers to `xai` when Grok is the desired creative backend.
+   - agente legado: enable `image_gen` + `video_gen`; set image/video providers to `xai` when Grok is the desired creative backend.
    - Ares: enable `x_search` and, if needed, `video_gen` for campaign creative iteration/analysis; do not let Ares own Creative Ops or campaign-adjacent systems outside its scope.
    - Zeus: enable only as needed for smoke tests/audit; Zeus is not the daily creative producer.
    - Atena: keep out of general Grok creative production by default; content/editorial image flows remain Atena-specific unless Rodolfo approves an exception.
@@ -48,4 +48,4 @@ Rodolfo upgraded to SuperGrok and asked to implement Grok for the whole operatio
 
 ## Common pitfall
 
-Do not stop at “SuperGrok plan exists”. Hermes still needs either xAI OAuth tokens in the relevant profile auth store or an `XAI_API_KEY` reachable by the gateway/profile. The first implementation step is credential registration, not editing prompts or asking Hera to try generation blindly.
+Do not stop at “SuperGrok plan exists”. Hermes still needs either xAI OAuth tokens in the relevant profile auth store or an `XAI_API_KEY` reachable by the gateway/profile. The first implementation step is credential registration, not editing prompts or asking agente legado to try generation blindly.

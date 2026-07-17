@@ -14,7 +14,7 @@ When normal `apt upgrade` leaves phased packages pending, do not force everythin
    - libheif/image libraries
    - fwupd libraries/runtime
    - Plymouth/boot visuals last
-5. After every batch, require `dpkg --audit` clean and Zeus/Atena/Ares/Hera + cron/autocommit active.
+5. After every batch, require `dpkg --audit` clean and Zeus/Atena/Ares/agente legado + cron/autocommit active.
 6. Keep Node package-manager updates separate from APT:
    - verify target `engines.node` via `npm view`;
    - archive `/usr/lib/node_modules/npm` and `corepack` outside Git;

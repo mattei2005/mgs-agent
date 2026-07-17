@@ -3,7 +3,7 @@
 const fs = require('fs');
 const childProcess = require('child_process');
 
-const CONFIG_PATH = process.env.ARES_META_LIBRARY_PROXY_CONFIG || process.env.HERA_META_LIBRARY_PROXY_CONFIG || '/root/mgs-agent/data/ares/creative-ops/meta-library-proxy.json';
+const CONFIG_PATH = process.env.ARES_META_LIBRARY_PROXY_CONFIG || '/root/mgs-agent/data/ares/creative-ops/meta-library-proxy.json';
 const LOCAL_SOCKS = 'socks5://127.0.0.1:1080';
 
 function fieldMap(item) {
@@ -58,8 +58,8 @@ function resolveDedicated(config) {
 }
 
 function resolveProxyConfig() {
-  const explicitServer = process.env.ARES_META_LIBRARY_PROXY || process.env.HERA_META_LIBRARY_PROXY || '';
-  const explicitMode = process.env.ARES_META_LIBRARY_PROXY_MODE || process.env.HERA_META_LIBRARY_PROXY_MODE || '';
+  const explicitServer = process.env.ARES_META_LIBRARY_PROXY || '';
+  const explicitMode = process.env.ARES_META_LIBRARY_PROXY_MODE || '';
   if (explicitServer || explicitMode === 'windows-home-socks') {
     const server = explicitServer || LOCAL_SOCKS;
     if (server !== LOCAL_SOCKS) throw new Error('Fallback recusado: somente SOCKS local 127.0.0.1:1080.');

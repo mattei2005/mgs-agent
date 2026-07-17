@@ -35,9 +35,9 @@ Check at minimum:
 
 - Ares must be **Ares**, never `Aris`.
 - Do not call Ares `Ares futuro`; use status/context such as `em configuração` or `implantação progressiva`.
-- Hera is the creative agent; Kelly is the human gestor/creative lead (`g005`).
+- agente legado is the creative agent; Kelly is the human gestor/creative lead (`g005`).
 - Ares handles campaigns/media buying, but does **not** configure ChatPion/DigitalTrChat, quiz, SMS Funnel, or SMS structure.
-- Hera and Ares both need read/write access to the approved-creatives Google Drive.
+- agente legado and Ares both need read/write access to the approved-creatives Google Drive.
 - Smart Bidding and ActiveView are Google partner companies with AdX/Ad Manager networks; Smart Bidding is the preferred/main dashboard, while ActiveView remains active for `openzed`, `cliquet`, and subdomains.
 - Geizian is Rodolfo's sócio and also operating gestor `g002`.
 - Ially is Office / Follow-up and handles cobranças/follow-up of gestores when tasks are delayed or not done.

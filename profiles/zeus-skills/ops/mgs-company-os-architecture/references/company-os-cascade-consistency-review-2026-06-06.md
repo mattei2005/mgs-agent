@@ -37,8 +37,8 @@ docs/mgs-structure-inventory.md
 - Geizian is Rodolfo's sócio and also operating gestor `g002`.
 - Ially is Office / Follow-up: she cobras/accompanies pending gestor tasks and escalates to Geizian/Rodolfo.
 - Ares is campaign/Growth agent only; do not write `Aris`, `Ares futuro`, or assign ChatPion/quiz/SMS setup to Ares.
-- Hera is the creative agent. Kelly is a human gestor/creative lead `g005`, not the agent.
-- Hera and Ares can read/write the approved-creatives Google Drive; Kelly/humans approve when needed.
+- agente legado is the creative agent. Kelly is a human gestor/creative lead `g005`, not the agent.
+- agente legado and Ares can read/write the approved-creatives Google Drive; Kelly/humans approve when needed.
 - ChatPion/DigitalTrChat: Rodolfo + Geizian create users; gestores configure operational flows; no Ares.
 - Quiz/SMS/SMS Funnel: Rodolfo configures; no Ares.
 - Smart Bidding and ActiveView are Google partner companies with their own AdX/Ad Manager networks. SB dashboard is preferred/main; AV remains active exception for `openzed`, `cliquet`, and subdomains.

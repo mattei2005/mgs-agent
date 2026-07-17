@@ -64,7 +64,7 @@ Even inside the controlled script with MGS backup already made and `RESTART_GATE
 - restore local changes on top of updated code;
 - drain/restart manual gateway profiles independently of the wrapper script.
 
-Observed again on 2026-07-07: Ares, Atena and Hera were left in `activating` with orphan `gateway run --replace` processes. Recovery matched the 2026-07-05 pattern: stop affected services, kill `--replace`, reset-failed, start Ares/Hera/Atena, validate all services active and `replace_pids=0`. Zeus was not touched.
+Observed again on 2026-07-07: Ares, Atena and agente legado were left in `activating` with orphan `gateway run --replace` processes. Recovery matched the 2026-07-05 pattern: stop affected services, kill `--replace`, reset-failed, start Ares/agente legado/Atena, validate all services active and `replace_pids=0`. Zeus was not touched.
 
 ### 5. Infra-discovery temp files can be accidentally committed by auto-commit
 
@@ -76,4 +76,4 @@ Running `infra-discovery.sh` uses a temporary JSON file near `data/infra-invento
 - New patch: `/root/mgs-agent/patches/hermes/mgs-runtime-customizations-2026-07-07.patch`.
 - Patch sha256: `dd237f99e2b5e792c962797b5ace5bb74a7b353b9bdb2d8595e000abb4a39f51`.
 - Targeted tests: `214 passed, 6 subtests passed`.
-- Gateways after repair: Zeus/Atena/Ares/Hera active; `replace_pids=0`.
+- Gateways after repair: Zeus/Atena/Ares/agente legado active; `replace_pids=0`.

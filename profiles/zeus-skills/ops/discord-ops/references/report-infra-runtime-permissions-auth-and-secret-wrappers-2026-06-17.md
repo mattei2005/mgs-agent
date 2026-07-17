@@ -1,11 +1,11 @@
 # REPORT-INFRA — runtime permissions, OAuth auth stores, and secret-backed wrappers (2026-06-17)
 
-Session pattern captured from Hera infra reports.
+Session pattern captured from agente legado infra reports.
 
 ## Cases handled
 
 1. Discord runtime permission overwrite
-- Hera was granted access to `#alerts-infra` via Discord API permission overwrite.
+- agente legado was granted access to `#alerts-infra` via Discord API permission overwrite.
 - No repo file changed at the time of the runtime action.
 - Zeus still needed to validate and inventory the runtime state.
 
@@ -19,8 +19,8 @@ Inventory pattern:
 - Update `scripts/infra-discovery.sh` to preserve that manual section across future regeneration; otherwise nightly discovery will erase the inventory entry.
 
 2. OAuth reauth / auth store updates
-- Hera reauthenticated `xai-oauth`; the auth store changed outside the repo.
-- Validation included `hermes -p hera auth status xai-oauth => logged in` and a real wrapper generation artifact.
+- agente legado reauthenticated `xai-oauth`; the auth store changed outside the repo.
+- Validation included `hermes -p legacy-agent auth status xai-oauth => logged in` and a real wrapper generation artifact.
 
 Validation pattern:
 - Check auth status without printing tokens.
@@ -32,7 +32,7 @@ Inventory pattern:
 - Update `infra-discovery.sh` to preserve `oauth_auth_states` across regeneration.
 
 3. Secret-backed operational wrapper
-- Hera created `scripts/hera-youtube-reference-download.sh`, which expects private cookies at `/root/.hermes/profiles/hera/secrets/youtube-cookies.txt`.
+- agente legado created `scripts/legacy-agent-youtube-reference-download.sh`, which expects private cookies at `/root/.hermes/profiles/legacy-agent/secrets/youtube-cookies.txt`.
 - Cookies are deliberately outside git and must not be pasted in chat.
 
 Validation pattern:

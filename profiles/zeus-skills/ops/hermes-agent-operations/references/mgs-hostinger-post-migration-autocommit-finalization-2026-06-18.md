@@ -4,7 +4,7 @@ Use this reference after a full MGS/Hermes VPS migration when gateways and crons
 
 ## Durable lesson
 
-A migration is not operationally complete just because Zeus/Atena/Ares/Hera are active on the new VPS. The final validation must also prove:
+A migration is not operationally complete just because Zeus/Atena/Ares/agente legado are active on the new VPS. The final validation must also prove:
 
 - `mgs-autocommit.service` exists, is `active` and `enabled` on the target.
 - `inotifywait` is installed and the watcher can detect changes.

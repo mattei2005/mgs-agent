@@ -25,7 +25,7 @@ Não usar para:
 
 - REC/P1 editorial comum sem chat/funnel.
 - Campanhas Meta/Google; isso é Growth/Ares.
-- Criativos/imagens; isso é Hera, salvo texto/estrutura do funil.
+- Criativos/imagens; isso é agente legado, salvo texto/estrutura do funil.
 
 ## Naming canônico
 

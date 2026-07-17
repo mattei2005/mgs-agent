@@ -1,6 +1,6 @@
 # Controlled profile config migration after Hermes update
 
-Use this when Hermes reports profiles with an older `_config_version` after an update, especially for MGS profiles Zeus/Atena/Ares/Hera.
+Use this when Hermes reports profiles with an older `_config_version` after an update, especially for MGS profiles Zeus/Atena/Ares/agente legado.
 
 ## Decision rule
 
@@ -23,7 +23,7 @@ tar -czf "$backup" \
   /root/.hermes/profiles/zeus/config.yaml /root/.hermes/profiles/zeus/SOUL.md /root/.hermes/profiles/zeus/auth.json \
   /root/.hermes/profiles/atena/config.yaml /root/.hermes/profiles/atena/SOUL.md /root/.hermes/profiles/atena/auth.json \
   /root/.hermes/profiles/ares/config.yaml /root/.hermes/profiles/ares/SOUL.md /root/.hermes/profiles/ares/auth.json \
-  /root/.hermes/profiles/hera/config.yaml /root/.hermes/profiles/hera/SOUL.md /root/.hermes/profiles/hera/auth.json
+  /root/.hermes/profiles/legacy-agent/config.yaml /root/.hermes/profiles/legacy-agent/SOUL.md /root/.hermes/profiles/legacy-agent/auth.json
 
 tar -tzf "$backup" >/dev/null
 ```
@@ -33,7 +33,7 @@ Prefer this targeted backup over a live full-profile tar when agents are active;
 2. Snapshot configs for diff:
 
 ```bash
-for p in zeus atena ares hera; do
+for p in zeus atena ares legacy-agent; do
   cp "/root/.hermes/profiles/$p/config.yaml" "/tmp/${p}-config-before-${stamp}.yaml"
 done
 ```
@@ -41,7 +41,7 @@ done
 3. Run migration for only outdated profiles:
 
 ```bash
-for p in atena ares hera; do
+for p in atena ares legacy-agent; do
   hermes -p "$p" config migrate 2>&1 \
     | sed -E 's/(access_token|refresh_token|api[_ -]?key|token)([^[:alnum:]_-]*)([A-Za-z0-9._~-]{12,})/\1\2<redacted>/Ig'
 done
@@ -52,7 +52,7 @@ done
 ```bash
 python3 - <<'PY'
 import yaml, json
-profiles=['zeus','atena','ares','hera']
+profiles=['zeus','atena','ares','legacy-agent']
 print('Profile  Ver  Provider      Model    Markdown  CodexLen Refresh Anthropic')
 print('-------  ---  ------------  -------  --------  -------- ------- ---------')
 for p in profiles:
@@ -68,7 +68,7 @@ PY
 5. Run config checks and patch guard:
 
 ```bash
-for p in zeus atena ares hera; do
+for p in zeus atena ares legacy-agent; do
   printf '%s: ' "$p"
   hermes -p "$p" config check 2>&1 | grep -m1 'Config version'
 done
@@ -80,11 +80,11 @@ done
 7. Gracefully restart only the migrated gateways, not Zeus if the current Zeus thread is active:
 
 ```bash
-for svc in atena-gateway.service ares-gateway.service hera-gateway.service; do
+for svc in atena-gateway.service ares-gateway.service legacy-agent-gateway.service; do
   systemctl kill -s SIGUSR1 --kill-who=main "$svc"
 done
 sleep 10
-systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service
+systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service legacy-agent-gateway.service
 ```
 
 8. Append audit log with summary, backup path, profiles, validations, and `secrets_exposed=false`.

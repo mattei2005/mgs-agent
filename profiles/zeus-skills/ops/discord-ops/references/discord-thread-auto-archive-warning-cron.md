@@ -7,7 +7,7 @@ Quando Rodolfo pedir para ser avisado antes de threads Discord sumirem/ficarem o
 ## Padrão validado
 
 - Monitor diário com keepalive automático quando Rodolfo pedir esse modo.
-- Consultar Discord API em `/guilds/{guild_id}/threads/active` usando os bot tokens dos perfis MGS relevantes (`zeus`, `atena`, `ares`, `hera`).
+- Consultar Discord API em `/guilds/{guild_id}/threads/active` usando os bot tokens dos perfis MGS relevantes (`zeus`, `atena`, `ares`, `legacy-agent`).
 - Filtrar apenas threads ativas com `thread_metadata.auto_archive_duration == 10080` minutos (7 dias). Threads de 1 dia ficam fora desse monitor.
 - Calcular janela de alerta usando `thread_metadata.archive_timestamp` ou `last_message_id` snowflake como fallback, somando 10080 minutos.
 - Quando faltar até 24h para auto-archive, postar uma mensagem curta na própria thread: `Mantendo a thread ativa para não arquivar automaticamente.`

@@ -30,8 +30,8 @@ npx --yes @openai/codex --version
 corepack --version
 
 # services
-systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service mgs-autocommit.service
-systemctl show zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service \
+systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service legacy-agent-gateway.service mgs-autocommit.service
+systemctl show zeus-gateway.service atena-gateway.service ares-gateway.service legacy-agent-gateway.service \
   -p Id -p ActiveState -p SubState -p MainPID -p NRestarts -p ExecMainStatus -p ExecMainStartTimestamp --no-pager
 
 # system
@@ -86,14 +86,14 @@ Verify MGS-specific invariants by name when reporting:
 
 ## Profile/policy review
 
-For Zeus/Atena/Ares/Hera, summarize without secrets:
+For Zeus/Atena/Ares/agente legado, summarize without secrets:
 
 - `model.provider=openai-codex`
 - `model.default=gpt-5.5`
 - `base_url=https://chatgpt.com/backend-api/codex`
 - `compression.threshold=0.85`
 - channel/free-response/no-thread/thread auto-add settings
-- `image_gen` config, especially Hera (`openai-codex`, `gpt-image-2-medium`)
+- `image_gen` config, especially agente legado (`openai-codex`, `gpt-image-2-medium`)
 - auth presence: active provider, auth mode, access token length, refresh token present
 
 Compare live config to mirrored `/root/mgs-agent/profiles/*-config.yaml` when those mirrors exist. If a pre-update snapshot exists, diff it and distinguish normal Hermes config migrations/comments from MGS policy changes.
@@ -106,7 +106,7 @@ Pick small deterministic probes; do not run full production workflows unless ask
 
 - Web search: use the MGS Brave probe script from this skill.
 - TTS: do **not** generate or send audio to Rodolfo by default. Rodolfo does not find automatic audio useful; only run a tiny MP3 file/header check when he explicitly asks to validate TTS, and do not attach/send the audio unless requested.
-- Image generation: verify **per profile**, not just globally. Hera is the only MGS agent currently expected to generate creative/image assets; Zeus is GM/admin and **does not need image_gen**. Summarize `image_gen` for Zeus/Atena/Ares/Hera, but only treat missing/broken config as a functional gap for profiles whose role requires image generation (currently Hera). Run a tiny `hermes -p <profile> -t image_gen -z ...` only for expected image profiles or when Rodolfo explicitly asks. Do **not** label Zeus image_gen as a failure just because it is unset.
+- Image generation: verify **per profile**, not just globally. agente legado is the only MGS agent currently expected to generate creative/image assets; Zeus is GM/admin and **does not need image_gen**. Summarize `image_gen` for Zeus/Atena/Ares/agente legado, but only treat missing/broken config as a functional gap for profiles whose role requires image generation (currently agente legado). Run a tiny `hermes -p <profile> -t image_gen -z ...` only for expected image profiles or when Rodolfo explicitly asks. Do **not** label Zeus image_gen as a failure just because it is unset.
 - MGS OS: parse `data/sites.json` and `data/authorized-users.json`; confirm context files exist; report pending approvals count.
 
 ## Backup inventory after cleanup

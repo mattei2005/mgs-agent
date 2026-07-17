@@ -26,7 +26,7 @@ hermes model
 # selecionar openai-codex, abrir URL, inserir device code e autorizar
 ```
 
-O login no perfil raiz atualiza `~/.hermes/auth.json`; profiles Zeus/Atena/Ares/Hera mantêm stores próprios.
+O login no perfil raiz atualiza `~/.hermes/auth.json`; profiles Zeus/Atena/Ares/agente legado mantêm stores próprios.
 
 ### OAuth por profile — regra durável
 

@@ -21,7 +21,7 @@ During processing, `infra-discovery.sh` initially preserved only some manual sec
 3. Validate `bash -n scripts/infra-discovery.sh` and `python3 -m json.tool data/infra-inventory.json` before commit.
 4. Verify the preservation explicitly with a compact check, e.g. section length/IDs, not a full JSON dump.
 5. Commit the inventory plus `infra-discovery.sh` together when discovery was patched.
-6. Stage surgically. Leave unrelated sync-souls, Ares/Hera artifacts, state files, and generated media unstaged.
+6. Stage surgically. Leave unrelated sync-souls, Ares/agente legado artifacts, state files, and generated media unstaged.
 
 ## Minimal preservation patch shape
 

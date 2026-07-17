@@ -4,12 +4,12 @@
 
 ## 8. Agent memory / conclusion layers
 
-When Rodolfo asks to evaluate or configure Honcho for Zeus/Atena/Ares/Hera, first determine which architecture is meant:
+When Rodolfo asks to evaluate or configure Honcho for Zeus/Atena/Ares/agente legado, first determine which architecture is meant:
 
 - **Native Hermes memory provider** — `memory.provider: honcho`, profile-local `honcho.json`, provider status, bounded context injection, and Honcho tools.
 - **Legacy/manual MGS copilot** — `/root/mgs-agent/scripts/mgs-memory-copilot` and the sanitized briefing workflow.
 
-Read the current official Hermes Memory Providers and Honcho documentation before designing the solution; native provider capabilities can supersede older MGS wrapper assumptions. For the reusable multi-profile implementation and verification procedure, load `references/native-managed-honcho-rollout.md`. Then use `references/honcho-managed-memory-spike.md`, `references/honcho-manual-briefing-command-2026-06-02.md`, the coverage note `references/discord-response-lint-and-honcho-coverage-2026-06-15.md`, and the repair/reporting note `references/hermes-update-reporting-and-honcho-repair-2026-06-21.md` only for the matching MGS branch. For cost/credit/billing questions, use `references/honcho-usage-and-billing-check-2026-07-01.md`.
+Read the current official Hermes Memory Providers and Honcho documentation before designing the solution; native provider capabilities can supersede older MGS wrapper assumptions. For the reusable multi-profile implementation and verification procedure, load `references/native-managed-honcho-rollout.md`. For post-rollout USER/MEMORY capacity protection and accurate “what remains?” reconciliation across runtime, checkpoints and parallel Discord threads, load `references/post-rollout-memory-capacity-and-pending-reconciliation.md`. Then use `references/honcho-managed-memory-spike.md`, `references/honcho-manual-briefing-command-2026-06-02.md`, the coverage note `references/discord-response-lint-and-honcho-coverage-2026-06-15.md`, and the repair/reporting note `references/hermes-update-reporting-and-honcho-repair-2026-06-21.md` only for the matching MGS branch. For cost/credit/billing questions, use `references/honcho-usage-and-billing-check-2026-07-01.md`.
 
 Operational rule: Honcho may be the active memory provider and materially reduce dependence on growing file-backed USER/MEMORY, but it remains a user-modeling, session-context, search, and conclusion layer—not the source of truth for MGS operations. Canonical facts remain in JSON/DB/Git/WordPress/audit logs; procedures remain in Hermes skills; global authority and safety remain in SOUL/AGENT or minimal always-active memory. Validate Honcho conclusions against canonical MGS sources before reporting or acting.
 
@@ -19,7 +19,7 @@ Before custom semantic compaction for recurring USER/MEMORY pressure, evaluate a
 
 ### MGS cross-agent standard
 
-Rodolfo's approved architecture is native Honcho integration for every current and future MGS agent. Treat this as a rollout objective, not evidence that any profile is already active. Audit Zeus, Atena, Ares, Hera, and each future profile independently; an empty `memory.provider` or absent `honcho.json` means native integration is not configured even when the manual copilot and API credential exist.
+Rodolfo's approved architecture is native Honcho integration for every current and future MGS agent. Treat this as a rollout objective, not evidence that any profile is already active. Audit Zeus, Atena, Ares, agente legado, and each future profile independently; an empty `memory.provider` or absent `honcho.json` means native integration is not configured even when the manual copilot and API credential exist.
 
 Roll out sequentially with one canary per agent: protected backup → provider/config setup → isolated AI peer and Discord identity mapping → bounded context budget → native profile read → full Hermes-agent canary → rollback/readback. Keep MGS OS/runtime/audit as canonical and keep USER/MEMORY minimal for always-active invariants. Rodolfo explicitly authorized managed Honcho to receive operational conversations on 2026-07-17; `saveMessages=true` is therefore permitted for the MGS profiles under this decision. This data-handling decision does not authorize sending credentials or treating Honcho conclusions as operational truth.
 

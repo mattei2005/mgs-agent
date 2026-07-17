@@ -8,7 +8,7 @@ Use when Hermes has already been updated/validated separately and Rodolfo asks t
 2. Snapshot before mutating:
    - package versions for the specific upgradable packages;
    - `apt list --upgradable`;
-   - gateway service status for Zeus/Atena/Ares/Hera;
+   - gateway service status for Zeus/Atena/Ares/agente legado;
    - `node -v`, `npm -v`, `hermes --version`;
    - reboot flag.
 3. Apply low-risk packages first with explicit package names rather than broad unattended `dist-upgrade`.
@@ -44,7 +44,7 @@ Hermes may hard-block `systemctl restart ...` or reboot/shutdown-like commands f
 sudo reboot
 ```
 
-Then validate after the VPS returns: current kernel matches expected, `apt list --upgradable` empty, `dpkg --audit` clean, Zeus/Atena/Ares/Hera active, Hermes up to date, and recent gateway logs clean.
+Then validate after the VPS returns: current kernel matches expected, `apt list --upgradable` empty, `dpkg --audit` clean, Zeus/Atena/Ares/agente legado active, Hermes up to date, and recent gateway logs clean.
 
 ## Forced phased updates in controlled batches
 
@@ -58,7 +58,7 @@ When Rodolfo explicitly wants the VPS fully current instead of waiting for Ubunt
    - `libheif` + plugins;
    - `fwupd` + library;
    - `plymouth` + library/theme last.
-5. After every batch, require empty `dpkg --audit` and Zeus/Atena/Ares/Hera + cron/autocommit active. Stop on the first failed batch.
+5. After every batch, require empty `dpkg --audit` and Zeus/Atena/Ares/agente legado + cron/autocommit active. Stop on the first failed batch.
 6. A phased package is not necessarily broken or held; explicit `--only-upgrade` opts into the candidate early. Keep this distinction in the report.
 
 ## Corepack/npm major update isolation

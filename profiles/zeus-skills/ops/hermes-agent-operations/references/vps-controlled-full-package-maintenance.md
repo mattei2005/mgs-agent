@@ -27,7 +27,7 @@ Pacote em phased rollout não está necessariamente bloqueado por incompatibilid
 4. **APT em lotes explícitos**
    - Aplicar somente os nomes simulados, com `--only-upgrade` e `Dpkg::Options::=--force-confold`.
    - Ordem recomendada para o conjunto Ubuntu observado: `apport/python` → `libheif` → `fwupd` → `plymouth` por último.
-   - Após **cada** lote: `dpkg --audit` vazio e Zeus/Atena/Ares/Hera, cron e autocommit ativos. Parar imediatamente se qualquer gate falhar.
+   - Após **cada** lote: `dpkg --audit` vazio e Zeus/Atena/Ares/agente legado, cron e autocommit ativos. Parar imediatamente se qualquer gate falhar.
    - Segurança/Monarx já liberados podem ser tratados antes desses lotes, também com validação.
 
 5. **Tooling Node separado**
@@ -40,7 +40,7 @@ Pacote em phased rollout não está necessariamente bloqueado por incompatibilid
    - `npm outdated -g` vazio.
    - `dpkg --audit` vazio e nenhum package hold inesperado.
    - `needrestart -b`, kernel atual/esperado e reboot flag.
-   - Zero failed units; Zeus/Atena/Ares/Hera, cron, autocommit e serviços de segurança ativos.
+   - Zero failed units; Zeus/Atena/Ares/agente legado, cron, autocommit e serviços de segurança ativos.
    - Verificar erros de prioridade alta no journal desde o início da manutenção.
    - Atualizar inventário/audit log e registrar REPORT-INFRA no destino correto antes de concluir.
 

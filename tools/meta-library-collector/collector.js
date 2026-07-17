@@ -152,8 +152,8 @@ async function extractSnapshot(page) {
 async function main() {
   const args = parseArgs(process.argv);
   const url = validateSourceUrl(args.url || '');
-  const profileDir = path.resolve(args.profile || process.env.ARES_META_LIBRARY_PROFILE || process.env.HERA_META_LIBRARY_PROFILE || '/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium');
-  const outputRoot = path.resolve(args['output-root'] || process.env.ARES_META_LIBRARY_OUTPUT || process.env.HERA_META_LIBRARY_OUTPUT || '/root/.hermes/profiles/ares/artifacts/meta-library');
+  const profileDir = path.resolve(args.profile || process.env.ARES_META_LIBRARY_PROFILE || '/root/.hermes/profiles/ares/browser-profiles/meta-library-chromium');
+  const outputRoot = path.resolve(args['output-root'] || process.env.ARES_META_LIBRARY_OUTPUT || '/root/.hermes/profiles/ares/artifacts/meta-library');
   const runDir = path.join(outputRoot, safeTimestamp());
   const scrolls = intArg(args.scrolls, 20, 0, 100);
   const waitMs = intArg(args['wait-ms'], 1500, 250, 10000);
@@ -169,7 +169,7 @@ async function main() {
   fs.chmodSync(profileDir, 0o700);
   fs.chmodSync(runDir, 0o700);
   fs.writeFileSync(path.join(profileDir, 'README-MGS.txt'), [
-    'Perfil persistente da Hera para Meta/Facebook Ads Library.',
+    'Perfil persistente do Ares para Meta/Facebook Ads Library.',
     'NÃO APAGAR: pode conter cookies/sessão de login do Rodolfo.',
     'Não versionar, copiar para o Discord ou inspecionar valores de cookies.',
     'Runtime canônico: /root/mgs-agent/tools/meta-library-collector/',

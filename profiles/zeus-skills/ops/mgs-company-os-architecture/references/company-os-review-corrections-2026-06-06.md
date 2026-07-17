@@ -46,8 +46,8 @@ Do not reduce this to “Smart Bidding is monetization and ActiveView is legacy.
 - Ares does not configure ChatPion/DigitalTrChat, quiz, or SMS Funnel.
 - ChatPion/DigitalTrChat users are created by Rodolfo/Geizian; gestores access users and configure operational flows.
 - Quiz/SMS structure/configuration is built by Rodolfo.
-- Hera = creative agent. Kelly is the human creative lead/gestora (`g005`).
-- Ares and Hera both need read/write access to the approved-creatives Google Drive so they can manage and use creative assets.
+- agente legado = creative agent. Kelly is the human creative lead/gestora (`g005`).
+- Ares and agente legado both need read/write access to the approved-creatives Google Drive so they can manage and use creative assets.
 
 ### Gestores and Finance/BI
 

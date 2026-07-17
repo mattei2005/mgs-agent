@@ -66,7 +66,7 @@ Comandos padrão:
 /root/mgs-agent/scripts/import-discord-thread.py --profile zeus '<LINK_OU_ID>'
 /root/mgs-agent/scripts/import-discord-thread.py --profile atena '<LINK_OU_ID>'
 /root/mgs-agent/scripts/import-discord-thread.py --profile ares '<LINK_OU_ID>'
-/root/mgs-agent/scripts/import-discord-thread.py --profile hera '<LINK_OU_ID>'
+/root/mgs-agent/scripts/import-discord-thread.py --profile legacy-agent '<LINK_OU_ID>'
 ```
 
 Pitfall: usar o `--profile` correto evita tentar acessar private threads com o token do bot errado. Os snapshots em `data/discord-thread-imports/` são local-only e não devem ser versionados.

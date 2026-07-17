@@ -34,7 +34,7 @@ display:
       busy_ack_detail: false
 ```
 
-Aplicar nos profiles ativos e mirrors versionados de Zeus, Atena, Ares e Hera. Não reutilizar a configuração histórica `tool_progress: all` como padrão.
+Aplicar nos profiles ativos e mirrors versionados de Zeus, Atena, Ares e agente legado. Não reutilizar a configuração histórica `tool_progress: all` como padrão.
 
 ## Validação
 

@@ -9,7 +9,7 @@ Use this note when Rodolfo asks how much Honcho/Roncho is spending per day or wh
 - The health monitor is `/root/mgs-agent/scripts/monitor-honcho-health.sh` and state is `/root/mgs-agent/data/honcho-health-state.json`.
 - The root crontab ran the monitor every 15 minutes:
   `*/15 * * * * flock -n /var/lock/monitor_honcho_health.lock /root/mgs-agent/scripts/monitor-honcho-health.sh >> /root/mgs-agent/logs/monitor-honcho-health.log 2>&1`
-- Each monitor run checks 4 agents: Zeus, Atena, Ares, Hera.
+- Each monitor run checks 4 agents: Zeus, Atena, Ares, agente legado.
 - Therefore every 15-minute schedule means roughly 96 runs/day × 4 agents = ~384 Honcho copilot calls/day, before any manual/on-demand usage.
 - The public Honcho OpenAPI at `https://api.honcho.dev/openapi.json` did not expose billing/usage/credits endpoints in this check. Tested obvious endpoints such as `/v3/usage`, `/v3/billing`, `/v3/credits`, `/v3/account`, `/v3/user`, `/v3/organization`; they returned 404. Do not claim exact daily dollar spend from the API unless a future endpoint/dashboard is available.
 

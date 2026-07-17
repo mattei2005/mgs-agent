@@ -2,9 +2,9 @@
 
 ## Contexto
 
-Em 2026-07-02, Hera corrigiu a pasta `CAR_BR_PT` no Google Drive e informou na thread que também havia enviado o `REPORT-INFRA` para `#alerts-infra`. Rodolfo não viu a mensagem e pediu verificação.
+Em 2026-07-02, agente legado corrigiu a pasta `CAR_BR_PT` no Google Drive e informou na thread que também havia enviado o `REPORT-INFRA` para `#alerts-infra`. Rodolfo não viu a mensagem e pediu verificação.
 
-A auditoria do Zeus mostrou que o envio existia e retornou HTTP 204, mas o fluxo da Hera ainda permitia afirmar “enviei” sem confirmar no Discord que a mensagem realmente apareceu no canal correto.
+A auditoria do Zeus mostrou que o envio existia e retornou HTTP 204, mas o fluxo da agente legado ainda permitia afirmar “enviei” sem confirmar no Discord que a mensagem realmente apareceu no canal correto.
 
 ## Evidência confirmada
 

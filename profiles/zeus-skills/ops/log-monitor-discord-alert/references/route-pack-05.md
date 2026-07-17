@@ -19,7 +19,7 @@ Cron `*/5 * * * *` → `/root/mgs-agent/scripts/monitor-service-restarts.sh`:
 | `zeus-gateway` | Gateway do agente Zeus (Discord) |
 | `atena-gateway` | Gateway do agente Atena (Discord) |
 | `ares-gateway` | Gateway do agente Ares (Discord) |
-| `hera-gateway` | Gateway do agente Hera (Discord) |
+| `legacy-agent-gateway` | Gateway do agente agente legado (Discord) |
 | `mgs-autocommit` | Watcher de auto-commit git |
 
 ### Thresholds

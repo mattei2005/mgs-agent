@@ -25,10 +25,10 @@ For full migration:
 2. Restore target with all gateways disabled.
 3. Validate target `hermes --version`, profile config checks, Codex auth presence, patch guard, systemd unit syntax, 1Password CLI, Git remote, disk.
 4. During cutover, stop/disable old crons first.
-5. Stop old gateways: Ares/Hera/Atena, then Zeus.
+5. Stop old gateways: Ares/agente legado/Atena, then Zeus.
 6. Final delta sync `/root/.hermes` and `/root/mgs-agent`.
 7. Install target crontab.
-8. Enable/start target gateways: Ares/Hera/Atena first, Zeus last.
+8. Enable/start target gateways: Ares/agente legado/Atena first, Zeus last.
 9. Validate target after startup.
 10. Audit old VPS via its own credential; do not assume root on the new VPS can inspect the old VPS.
 
@@ -38,7 +38,7 @@ Do not call the migration complete until these are checked with real commands:
 
 - Target identity: hostname, public IP, OS, timezone, disk/memory/load.
 - Hermes: `hermes --version`, binary path, repo HEAD, local dirty count.
-- Gateways: Zeus/Atena/Ares/Hera `active` and `enabled`, PIDs, `NRestarts=0` after cutover.
+- Gateways: Zeus/Atena/Ares/agente legado `active` and `enabled`, PIDs, `NRestarts=0` after cutover.
 - Logs: no new traceback/OOM/crash-loop after target start. Treat `Opus codec not found` as text-safe/voice-only.
 - Profiles: config exists for all agents; `model.provider=openai-codex`, `model.default=gpt-5.5`; auth has Codex access token length and refresh token present without printing tokens.
 - `hermes config check` for each profile.

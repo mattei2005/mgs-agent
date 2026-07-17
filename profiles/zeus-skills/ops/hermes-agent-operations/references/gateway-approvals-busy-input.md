@@ -4,7 +4,7 @@
 
 ## 5. Gateway approvals / execução sem prompts para agentes confiáveis
 
-Use quando Rodolfo pedir para um agente MGS confiável parar de pedir `Command Approval Required`, `Allow Once`, `Allow Session` ou `Always Allow` para operações técnicas que já fazem parte do escopo do agente — exemplo: Hera rodando `execute_code`/terminal para processar Drive/criativos quando Kelly/Rodolfo já pediu a ação.
+Use quando Rodolfo pedir para um agente MGS confiável parar de pedir `Command Approval Required`, `Allow Once`, `Allow Session` ou `Always Allow` para operações técnicas que já fazem parte do escopo do agente — exemplo: agente legado rodando `execute_code`/terminal para processar Drive/criativos quando Kelly/Rodolfo já pediu a ação.
 
 Regra operacional MGS: se Rodolfo disser “se pediu é pra fazer”, “não quero esse tipo de notificação”, “dá autorização total” ou equivalente para um agente confiável, a correção é no profile do agente, não em cada thread expirada.
 

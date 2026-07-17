@@ -15,9 +15,9 @@ If the gateway restarts mid-audit and Hermes injects an internal restart recover
 Generate fresh manifests on both servers with SHA256/size/mode for stable files across:
 
 - `/root/mgs-agent`
-- `/root/.hermes/profiles/{zeus,atena,ares,hera}`
+- `/root/.hermes/profiles/{zeus,atena,ares,legacy-agent}`
 - `/root/.hermes/hermes-agent`
-- `/etc/systemd/system/{zeus,atena,ares,hera,mgs-autocommit}.service`
+- `/etc/systemd/system/{zeus,atena,ares,legacy-agent,mgs-autocommit}.service`
 - root crontab hash/line count
 - service active/enabled status
 - failed systemd units
@@ -38,8 +38,8 @@ Skip or classify as runtime rather than failure:
 
 These should be exact matches after final stable sync unless there is a documented intentional reason:
 
-- profile `config.yaml` for Zeus/Atena/Ares/Hera
-- profile `auth.json` for Zeus/Atena/Ares/Hera, but report only sanitized facts
+- profile `config.yaml` for Zeus/Atena/Ares/agente legado
+- profile `auth.json` for Zeus/Atena/Ares/agente legado, but report only sanitized facts
 - `/root/mgs-agent/AGENT.md`
 - `/root/mgs-agent/context/mgs-os-map.md`
 - `/root/mgs-agent/context/company-os.md`
@@ -48,7 +48,7 @@ These should be exact matches after final stable sync unless there is a document
 - `/root/mgs-agent/context/permissions-matrix.md`
 - `/root/mgs-agent/data/authorized-users.json`
 - `/root/mgs-agent/data/sites.json`
-- gateway systemd units for Zeus/Atena/Ares/Hera
+- gateway systemd units for Zeus/Atena/Ares/agente legado
 
 `auth.json` raw hash can differ due to provider metadata or token refresh. Do not print or diff token contents. Compare sanitized facts: `active_provider`, presence of `openai-codex`, access-token length, refresh-token presence, and config provider/model. If sanitized facts differ in a way that affects policy, fix it.
 
@@ -59,7 +59,7 @@ If old standby is missing stable files, sync from production to standby, not the
 1. Mirror stable `/root/mgs-agent` from production to standby, excluding logs, `.git`, browser profiles, generated media, caches and live runtime directories.
 2. Mirror stable profile surfaces: `config.yaml`, `auth.json`, `SOUL.md`, `skills/`, `discord_threads.json`, `.skills_prompt_snapshot.json` when useful.
 3. Keep old standby operationally disabled after syncing:
-   - `systemctl disable --now zeus-gateway atena-gateway ares-gateway hera-gateway mgs-autocommit`
+   - `systemctl disable --now zeus-gateway atena-gateway ares-gateway legacy-agent-gateway mgs-autocommit`
    - `systemctl reset-failed`
    - root crontab should remain empty on standby.
 4. Re-run manifests after correction.

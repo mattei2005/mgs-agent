@@ -210,7 +210,7 @@ Use quando Rodolfo pedir consumo por hora/dia/mês ou quando o limite subir sem 
 ### Escopo obrigatório
 
 1. Root crontab e `/etc/cron.d/`.
-2. Jobs Hermes ativos de **todos** os profiles em `/root/.hermes/profiles/{zeus,atena,ares,hera}/cron/jobs.json`.
+2. Jobs Hermes ativos de **todos** os profiles em `/root/.hermes/profiles/{zeus,atena,ares,legacy-agent}/cron/jobs.json`.
 3. Scripts resolvidos por esses jobs em cada `profiles/<agent>/scripts/` e em `/root/mgs-agent/scripts/`.
 4. Timers/systemd e processos `op` vivos.
 5. Git hooks, especialmente `.git/hooks/post-commit` — consumo é proporcional ao número de commits, não a um cron fixo.

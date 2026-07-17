@@ -24,7 +24,7 @@ When Rodolfo points at the older canonical/runtime sources listed in `sources-of
 Correct agent name        Meaning
 ------------------------ ------------------------------------------------------
 Ares                      Campaign/Growth agent. Never call it Aris.
-Hera                      Creative agent. Do not call the creative agent Kelly.
+agente legado                      Creative agent. Do not call the creative agent Kelly.
 Kelly                     Human/gestora, code g005, creative lead/person.
 Zeus                      Controlled only by Rodolfo by default.
 ```
@@ -105,21 +105,21 @@ Flow:
 5. SMS CTA link opens MGS article/site.
 6. Revenue comes from site monetization.
 
-## Hera / Drive / Ares creative handoff
+## agente legado / Drive / Ares creative handoff
 
-Hera is the creative agent. Kelly is the human creative lead. Rodolfo, Geizian, Kelly, and gestores can request creatives.
+agente legado is the creative agent. Kelly is the human creative lead. Rodolfo, Geizian, Kelly, and gestores can request creatives.
 
 Approved creative flow:
 
 ```text
 1. Kelly/Rodolfo/Geizian/gestor requests creative, e.g. feed + stories.
-2. Hera creates variations.
+2. agente legado creates variations.
 3. Kelly approves when it is her creative flow.
-4. Hera saves approved assets to the correct Google Drive folder.
+4. agente legado saves approved assets to the correct Google Drive folder.
 5. Ares reads/writes Drive to manage approved assets and use them in campaign tests.
 ```
 
-Both Hera and Ares need read/write access to the approved-creatives Drive so they can manage assets.
+Both agente legado and Ares need read/write access to the approved-creatives Drive so they can manage assets.
 
 ## Finance / commissions
 

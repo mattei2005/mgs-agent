@@ -27,13 +27,13 @@ Use this as session-specific support for full maintenance runs where Hermes itse
    - `node -v`, `npm -v`, `npx --yes @openai/codex --version`, `corepack --version`
    - `apt list --upgradable` and `npm outdated -g --depth=0`
 4. Validate services:
-   - `systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service mgs-autocommit.service`
+   - `systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service legacy-agent-gateway.service mgs-autocommit.service`
    - `systemctl show ... -p Id -p ActiveState -p MainPID -p NRestarts -p ExecMainStatus`
 5. Validate MGS local patches:
    - `/root/mgs-agent/scripts/ensure-hermes-mgs-patches.sh`
    - `py_compile` on critical files.
 6. Validate auth sanitized:
-   - root + Zeus/Atena/Ares/Hera `auth.json`
+   - root + Zeus/Atena/Ares/agente legado `auth.json`
    - report `active_provider`, `auth_mode`, token length, refresh-token presence only.
 
 ## Test drift pitfall

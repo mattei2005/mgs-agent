@@ -30,7 +30,7 @@ Referência detalhada: `references/hermes-discord-busy-input-queue.md`.
 
 ### Channel permission overwrites and narrow delegation
 
-When Rodolfo asks Zeus to let another agent (Ares/Hera/Atena) manage future user access to a specific Discord channel, treat it as a channel-scoped permission delegation, not a global admin grant. Validate scope first: list/check the category children before applying category-level changes. If the category contains unrelated infra/admin channels, stop and confirm a narrower channel-only scope.
+When Rodolfo asks Zeus to let another agent (Ares/agente legado/Atena) manage future user access to a specific Discord channel, treat it as a channel-scoped permission delegation, not a global admin grant. Validate scope first: list/check the category children before applying category-level changes. If the category contains unrelated infra/admin channels, stop and confirm a narrower channel-only scope.
 
 For Discord API `PUT /channels/{channel_id}/permissions/{overwrite_id}`, `MANAGE_CHANNELS` alone is not enough. The delegated bot also needs effective `MANAGE_ROLES` in that channel context to edit permission overwrites; otherwise validation with the delegated bot token can return `403 Forbidden` even if Zeus/admin can set the overwrite. Use the delegated bot token for final validation, not only Zeus/admin.
 

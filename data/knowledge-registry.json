@@ -25,7 +25,6 @@
       "consumers": [
         "ares",
         "atena",
-        "hera",
         "zeus"
       ],
       "domain": "tech",
@@ -111,6 +110,25 @@
       "updated_at": "2026-07-15T23:08:46+00:00"
     },
     {
+      "canonical_key": "capability.memory-autocompaction.residual",
+      "canonical_source": "scripts/monitor-hermes-memory-capacity.py",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-17",
+      "id": "CAP-MEMORY-AUTOCOMPACT-MGS",
+      "kind": "capability",
+      "owner": "Zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Proteção residual automática de capacidade USER/MEMORY",
+      "updated_at": "2026-07-17T15:49:14+00:00"
+    },
+    {
       "canonical_key": "decision.knowledge-continuity",
       "canonical_source": "docs/mgs-knowledge-continuity-plan.md",
       "consumers": [
@@ -188,7 +206,6 @@
       "consumers": [
         "ares",
         "atena",
-        "hera",
         "zeus"
       ],
       "domain": "tech",
@@ -201,6 +218,25 @@
       "superseded_by": null,
       "title": "Integrate native Honcho memory across all MGS agents",
       "updated_at": "2026-07-17T13:50:26+00:00"
+    },
+    {
+      "canonical_key": "decision.memory-autocompaction.automatic",
+      "canonical_source": "docs/mgs-honcho-memory-standard.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "tech",
+      "effective_at": "2026-07-17",
+      "id": "DEC-2026-006",
+      "kind": "decision",
+      "owner": "Rodolfo Mattei",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Compactar USER/MEMORY automaticamente ao atingir 90%",
+      "updated_at": "2026-07-17T15:49:14+00:00"
     },
     {
       "canonical_key": "source.company-os",
@@ -261,5 +297,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T14:31:05+00:00"
+  "updated_at": "2026-07-17T15:49:14+00:00"
 }

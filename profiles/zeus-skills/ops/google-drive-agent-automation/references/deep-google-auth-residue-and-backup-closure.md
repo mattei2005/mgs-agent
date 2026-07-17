@@ -29,7 +29,7 @@ Never answer “nothing remains” after scanning only production roots. State w
 4. Search for actual credential material separately from code references. A strong local credential test is a parsed JSON object containing Google `token_uri`, `refresh_token` and `client_secret`; code fixtures or test strings are not credentials.
 5. Query 1Password by exact old title and title-like variants; validate the canonical item is uniquely readable without printing fields.
 6. Inspect the disaster-recovery backup include list. If full backups include `.secrets`, every retained full backup created while the old credential file existed must be treated as containing it, even when encrypted.
-7. Query retained remote backups by metadata and creation time. Classify quick versus full; quick backups may have a different include set.
+7. Query retained remote backups by metadata and creation time. Classify quick versus full from `appProperties.mode` when present, but do not rely on it: older objects may have no app properties. Fall back to the canonical tiered name (`mgs-dr-daily-*`, `mgs-dr-weekly-*`, `mgs-dr-monthly-*`) and the backup state/bundle metadata.
 
 ## Neutralization rules
 
@@ -40,6 +40,7 @@ Never answer “nothing remains” after scanning only production roots. State w
 - Archived personal-auth skills: replace operational setup/API entry points with canonical readiness or exit-64 tombstones so restoration cannot revive consent/token setup.
 - Historical Git, audit logs and imported threads remain read-only evidence. Do not rewrite history merely to remove words.
 - Pre-change backup snapshots may remain immutable evidence, but add an explicit no-restore marker and require migration before reuse.
+- Remove bytecode only for affected source files/directories after validation. Do not recursively purge every `__pycache__` below `/tmp`, because temporary virtual environments and unrelated test trees are outside the credential-cleanup scope.
 
 ## Off-site backup closure
 
@@ -49,7 +50,14 @@ If encrypted full backups contain the retired credential snapshot:
 2. Run an isolated restore test on that exact new remote object.
 3. Preserve the clean replacement before proposing deletion of old archives.
 4. Permanent deletion of remote backup files is Critical Subset: show names/count, current state, clean replacement and post-delete validation, then obtain Rodolfo’s additional confirmation.
-5. After confirmation, permanently delete only the identified pre-cleanup archives, list/read back their absence, retain the clean tested backup, update inventory/checkpoint/audit and send REPORT-INFRA.
+5. After confirmation:
+   - re-list and require exactly one live object for each approved target name;
+   - separately require exactly one clean replacement object in the canonical Shared Drive;
+   - permanently delete only those resolved target IDs and record each HTTP result (Drive normally returns `204`);
+   - re-list by exact target names and require count `0` for every deleted object;
+   - list all retained full backups and require `precleanup_full_count=0` while the clean replacement count remains `1`;
+   - run backup status plus the Drive auth/residue watchdog;
+   - update inventory/checkpoint/audit and send REPORT-INFRA.
 
 ## Continuous regression guard
 

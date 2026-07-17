@@ -1,6 +1,6 @@
 ## Entrada operacional unificada no Ares
 
-Rodolfo, Geizian, Kelly e gestores autorizados enviam criativos diretamente ao Ares. Não existe handoff Hera → Ares.
+Rodolfo, Geizian, Kelly e gestores autorizados enviam criativos diretamente ao Ares. Não existe handoff agente legado → Ares.
 
 Ares trabalha com pedido natural. País, vertical e idioma devem ser inferidos quando houver evidência segura; se faltarem e alterarem destino/naming, perguntar somente o bloqueio mínimo. Nunca inventar esses campos.
 

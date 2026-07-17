@@ -61,4 +61,4 @@ csv_plan_lines: 61
 sha256_manifest: <directory manifest hash>
 ```
 
-This pattern is reusable for Ares/Hera/Zeus audit bundles, naming inventories, creative contact sheets, and any generated evidence directory that should remain auditable without flooding chat or causing inventory churn.
+This pattern is reusable for Ares/agente legado/Zeus audit bundles, naming inventories, creative contact sheets, and any generated evidence directory that should remain auditable without flooding chat or causing inventory churn.

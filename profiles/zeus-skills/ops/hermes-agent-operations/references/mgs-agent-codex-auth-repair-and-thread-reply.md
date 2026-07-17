@@ -1,6 +1,6 @@
 # MGS agent Codex auth repair + answering the blocked Discord thread
 
-Use when an MGS agent (Ares/Atena/Hera/Zeus) posts `Provider authentication failed` in Discord and gateway logs show Codex/OpenAI-Codex refresh failure such as `Invalid refresh token` or `refresh_token_reused`, and Rodolfo asks Zeus to fix it and make the agent answer the original thread.
+Use when an MGS agent (Ares/Atena/agente legado/Zeus) posts `Provider authentication failed` in Discord and gateway logs show Codex/OpenAI-Codex refresh failure such as `Invalid refresh token` or `refresh_token_reused`, and Rodolfo asks Zeus to fix it and make the agent answer the original thread.
 
 ## Operational pattern
 

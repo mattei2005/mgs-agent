@@ -88,8 +88,8 @@ Good pattern:
 Decisão                         Confirmação
 ------------------------------- ------------------------------------------------
 Ares                            Campanhas only; no ChatPion/quiz/SMS.
-Hera                            Criativos + Drive.
-Google Drive                    Source of approved creatives; Hera/Ares R/W.
+agente legado                            Criativos + Drive.
+Google Drive                    Source of approved creatives; agente legado/Ares R/W.
 ```
 
 Avoid overexplaining. Give an operational opinion and the next concrete step.

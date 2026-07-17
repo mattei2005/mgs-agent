@@ -2,12 +2,12 @@
 
 ## Context
 
-During a controlled Hermes update on MGS, the wrapper was invoked with `RESTART_GATEWAYS=0`, but the underlying `hermes update` still attempted to drain/restart manual gateways for Atena/Ares/Hera. It launched replacement gateway processes like:
+During a controlled Hermes update on MGS, the wrapper was invoked with `RESTART_GATEWAYS=0`, but the underlying `hermes update` still attempted to drain/restart manual gateways for Atena/Ares/agente legado. It launched replacement gateway processes like:
 
 ```text
 /root/.hermes/hermes-agent/venv/bin/python -m hermes_cli.main --profile ares gateway run --replace
 /root/.hermes/hermes-agent/venv/bin/python -m hermes_cli.main --profile atena gateway run --replace
-/root/.hermes/hermes-agent/venv/bin/python -m hermes_cli.main --profile hera gateway run --replace
+/root/.hermes/hermes-agent/venv/bin/python -m hermes_cli.main --profile legacy-agent gateway run --replace
 ```
 
 Those replacement processes survived as PPID 1 and held the profile gateway locks/PIDs. Systemd then repeatedly tried to start the services, but each attempt exited with:
@@ -19,7 +19,7 @@ or 'hermes gateway stop' to kill it first.
 Or use 'hermes gateway run --replace' to auto-replace.
 ```
 
-Result: `atena-gateway.service`, `ares-gateway.service`, and `hera-gateway.service` were stuck in `activating (auto-restart)` even though the repo update itself succeeded.
+Result: `atena-gateway.service`, `ares-gateway.service`, and `legacy-agent-gateway.service` were stuck in `activating (auto-restart)` even though the repo update itself succeeded.
 
 ## Durable lesson
 
@@ -29,7 +29,7 @@ After any Hermes update that touches gateways, validate for **two layers**:
 2. orphan replacement processes:
 
 ```bash
-ps -ef | grep -E 'hermes_cli\.main --profile (atena|ares|hera|zeus) gateway run --replace' | grep -v grep
+ps -ef | grep -E 'hermes_cli\.main --profile (atena|ares|legacy-agent|zeus) gateway run --replace' | grep -v grep
 ```
 
 If systemd says `Gateway already running`, do not keep restarting the service in foreground. That loops and adds noise. Repair externally/detached.
@@ -51,21 +51,21 @@ For affected non-Zeus agents only:
 Example minimal finalizer body:
 
 ```bash
-for svc in atena-gateway.service ares-gateway.service hera-gateway.service; do
+for svc in atena-gateway.service ares-gateway.service legacy-agent-gateway.service; do
   systemctl stop "$svc" || true
 done
 sleep 3
-for profile in atena ares hera; do
+for profile in atena ares legacy-agent; do
   pgrep -f "hermes_cli.main --profile ${profile} gateway run --replace" | xargs -r kill -TERM
  done
 sleep 8
-for profile in atena ares hera; do
+for profile in atena ares legacy-agent; do
   pgrep -f "hermes_cli.main --profile ${profile} gateway run --replace" | xargs -r kill -KILL
  done
-systemctl reset-failed atena-gateway.service ares-gateway.service hera-gateway.service || true
-systemctl start ares-gateway.service hera-gateway.service atena-gateway.service
+systemctl reset-failed atena-gateway.service ares-gateway.service legacy-agent-gateway.service || true
+systemctl start ares-gateway.service legacy-agent-gateway.service atena-gateway.service
 sleep 10
-systemctl show atena-gateway.service ares-gateway.service hera-gateway.service \
+systemctl show atena-gateway.service ares-gateway.service legacy-agent-gateway.service \
   -p Id -p ActiveState -p SubState -p MainPID -p NRestarts -p ExecMainStatus --no-pager
 ```
 
@@ -83,7 +83,7 @@ Patch guard: OK
 py_compile: OK
 Gateway tests: passed
 Zeus: active/running, PID unchanged if not restarted
-Atena/Ares/Hera: active/running, new PIDs after repair
+Atena/Ares/agente legado: active/running, new PIDs after repair
 Backup: path + size
 Disk: df -h /
 Known pending: Zeus safe restart / Git push drift if any

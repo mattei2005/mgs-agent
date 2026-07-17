@@ -9,7 +9,7 @@ Default migration order is canary-first, not all-at-once:
 1. Move **Ares first** as the canary when the driver is Growth/browser/AdsPower/Meta tooling.
 2. Keep **Zeus last** because Zeus is the control plane/orchestrator and should not be the first system moved.
 3. Keep **Atena stable** until the new VPS is proven, because Atena owns editorial/WordPress production and crons.
-4. Consider Hera after Ares if the VPS will also host browser/creative tooling.
+4. Consider agente legado after Ares if the VPS will also host browser/creative tooling.
 
 ## First response shape
 
@@ -21,7 +21,7 @@ Give a numbered plan and a direct recommendation. Keep it short:
 4. Validate Ares in Discord.
 5. Add AdsPower/MCP after Ares is alive.
 6. Run parallel for 24–48h.
-7. Migrate Hera/Atena later if warranted.
+7. Migrate agente legado/Atena later if warranted.
 8. Migrate Zeus last.
 
 ## Access handling

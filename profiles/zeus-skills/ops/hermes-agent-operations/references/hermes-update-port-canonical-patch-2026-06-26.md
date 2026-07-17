@@ -10,7 +10,7 @@ Live state at review time:
 - Upstream: `a28b93909`
 - Delta: 724 commits behind
 - Live MGS invariants: 20/20 present
-- Gateways: Zeus/Atena/Ares/Hera active
+- Gateways: Zeus/Atena/Ares/agente legado active
 
 ## Durable lesson
 

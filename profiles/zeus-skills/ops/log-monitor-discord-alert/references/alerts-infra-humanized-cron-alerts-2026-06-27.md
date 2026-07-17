@@ -29,7 +29,7 @@ Fix pattern:
 - after loop, if temp file is non-empty, render one aligned table with columns like `Serviço`, `Start atual`, `Causa provável`, `Ação`;
 - send one embed titled `Restarts de serviços detectados` with `Serviços afetados` count and the table field.
 
-### Hera `drive-auth-watchdog.py`
+### agente legado `drive-auth-watchdog.py`
 
 Problem: Hermes script-only cron delivered stdout directly to Discord as `Cronjob Response` containing raw `[REPORT-INFRA]` text.
 

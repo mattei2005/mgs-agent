@@ -9,7 +9,7 @@ RESTORE_LOCAL_DIFFS=0 RESTART_GATEWAYS=0 STAMP=live-20260705-200622 \
   /root/mgs-agent/scripts/run-hermes-update-controlled.sh
 ```
 
-The intended behavior was update-without-restart. The script itself did not call its `restart_if_requested` block, but the upstream `hermes update` command still performed its own gateway handling and attempted to drain/restart manual gateways for Ares/Atena/Hera.
+The intended behavior was update-without-restart. The script itself did not call its `restart_if_requested` block, but the upstream `hermes update` command still performed its own gateway handling and attempted to drain/restart manual gateways for Ares/Atena/agente legado.
 
 ## Durable lessons
 
@@ -19,37 +19,37 @@ In the current controlled script, `RESTART_GATEWAYS=0` only disables the script'
 
 Operational consequence observed:
 
-- Ares/Atena/Hera were left in `activating/auto-restart`.
+- Ares/Atena/agente legado were left in `activating/auto-restart`.
 - Journals showed `Gateway already running (PID ...)`.
 - Orphan replacement processes existed:
   - `python -m hermes_cli.main --profile ares gateway run --replace`
   - `python -m hermes_cli.main --profile atena gateway run --replace`
-  - `python -m hermes_cli.main --profile hera gateway run --replace`
+  - `python -m hermes_cli.main --profile legacy-agent gateway run --replace`
 - Systemd units then looped because the orphan `--replace` processes held the gateway locks.
 
 Recovery pattern:
 
 ```bash
-for svc in atena-gateway.service ares-gateway.service hera-gateway.service; do
+for svc in atena-gateway.service ares-gateway.service legacy-agent-gateway.service; do
   systemctl stop "$svc" || true
 done
 sleep 2
 
-for profile in atena ares hera; do
+for profile in atena ares legacy-agent; do
   pids=$(pgrep -f "hermes_cli.main --profile $profile gateway run --replace" || true)
   [ -n "$pids" ] && kill $pids || true
 done
 sleep 5
 
-for profile in atena ares hera; do
+for profile in atena ares legacy-agent; do
   pids=$(pgrep -f "hermes_cli.main --profile $profile gateway run --replace" || true)
   [ -n "$pids" ] && kill -9 $pids || true
 done
 
-systemctl reset-failed atena-gateway.service ares-gateway.service hera-gateway.service || true
-systemctl start ares-gateway.service hera-gateway.service atena-gateway.service
+systemctl reset-failed atena-gateway.service ares-gateway.service legacy-agent-gateway.service || true
+systemctl start ares-gateway.service legacy-agent-gateway.service atena-gateway.service
 sleep 25
-systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service
+systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service legacy-agent-gateway.service
 ```
 
 Do not touch Zeus in this repair unless Zeus itself is impacted; Zeus should remain last and preferably via safe detached finalizer.

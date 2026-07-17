@@ -18,7 +18,7 @@ Do not embed a large map directly into Zeus SOUL. Instead:
 
 - quick source list: company OS, areas, agents, routes, permissions, sites, crons, audit log;
 - map by area: Executive, Office, Content, Growth, Creative, Revenue/AdOps, Finance/BI, Tech/Infra, Security;
-- map by agent: Zeus, Atena, Ares, Hera with live and versioned paths;
+- map by agent: Zeus, Atena, Ares, agente legado with live and versioned paths;
 - map by folder: `context/`, `data/`, `docs/`, `scripts/`, `profiles/`, `/root/.hermes/profiles/`, `logs/`, `patches/`, `backups/`, `tools/`, `experiments/`;
 - question → first source, e.g.:
   - “Quem faz o quê?” → `context/agent-map.md`, `context/areas.md`, `context/routes.md`;

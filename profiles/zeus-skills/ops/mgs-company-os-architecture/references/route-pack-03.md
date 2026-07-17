@@ -21,13 +21,13 @@ In a long-running Company OS restructuring thread, preserve thread context aggre
 
 Long-running Company OS threads have persistent objective continuity. A short reply such as “ok”, “continue”, or “vamos continuar” usually approves/continues the current block; if it is a Discord reply, use the quoted/replied message as the primary context anchor. Do not reinterpret a short reply as a new topic, and do not rename an already-open restructuring thread while the objective is still the same. Thread title changes belong only at thread creation or after an explicit, strong topic change — never from a vague message or reply.
 
-When Rodolfo corrects naming or ownership (e.g. `Ares` not `Aris`, `Hera` not `Kelly agent`), search canonical context files for stale variants and clean them up. Explain that search as stale-term cleanup, not as re-litigating the user's correction.
+When Rodolfo corrects naming or ownership (e.g. `Ares` not `Aris`, `agente legado` not `Kelly agent`), search canonical context files for stale variants and clean them up. Explain that search as stale-term cleanup, not as re-litigating the user's correction.
 
 Cascading correction rule: any correction made while reviewing one file can invalidate previously reviewed files. Before marking the current file as ready for Rodolfo review, search/patch the already-reviewed Company OS docs for conflicts, stale terms, redundant sections, duplicated governance sections, and contradictory ownership/routes. Typical cascade targets are `company-os.md`, `company-current-operating-model.md`, `areas.md`, `agent-map.md`, `routes.md`, `sources-of-truth.md`, `permissions-matrix.md`, `team.md`, `acquisition.md`, `monetization.md`, `processes.md`, `sites.md`, and the current file under review. Report the cascade explicitly in a short table. Do this **before** sending the next file for review, not after Rodolfo finds the inconsistency.
 
 Avoid duplicating global rules inside every domain file. Conflict/source precedence belongs primarily in `sources-of-truth.md`; domain files like `sites.md` should stay focused on their content and carry only a short pointer such as “this file is conceptual; `data/sites.json` wins for automation.” If you notice a repeated `## Regra de conflito` section in a domain file, consider removing it after confirming the rule already exists in `sources-of-truth.md`.
 
-Consistency audit rule: after applying a conceptual correction, do not only validate the current file. Run a cross-document consistency check for stale names (`Aris`, `Ares futuro`, `Kelly agent`/`agente Kelly`/`Creative Agent`), Ares overreach into ChatPion/quiz/SMS/AdOps/site setup, SB/AV ownership, gestor codes, Hera/Drive/Kelly boundaries, Ially/follow-up, and `data/sites.json` vs `sites.md` automation boundaries. Use regex/scripts as guardrails, but inspect flagged snippets semantically before reporting; negative statements like “Ares não configura ChatPion” are correct, not conflicts.
+Consistency audit rule: after applying a conceptual correction, do not only validate the current file. Run a cross-document consistency check for stale names (`Aris`, `Ares futuro`, `Kelly agent`/`agente Kelly`/`Creative Agent`), Ares overreach into ChatPion/quiz/SMS/AdOps/site setup, SB/AV ownership, gestor codes, agente legado/Drive/Kelly boundaries, Ially/follow-up, and `data/sites.json` vs `sites.md` automation boundaries. Use regex/scripts as guardrails, but inspect flagged snippets semantically before reporting; negative statements like “Ares não configura ChatPion” are correct, not conflicts.
 
 Cross-file semantic audit rule: after any material correction from Rodolfo, run a semantic consistency check across the already-touched Company OS docs. Do not rely only on `git diff --check`; whitespace validation is necessary but not sufficient. Verify naming, scope, ownership, routes, permissions, sources of truth, and finance/BI implications. If conflicts are found, patch them before asking to proceed. See `references/company-os-cross-file-consistency-audit-2026-06-06.md` for the checklist and reporting pattern.
 
@@ -39,11 +39,11 @@ Phase 2 audit pattern after docs appear reviewed:
 
 ```text
 1. Check stale terms: Aris, Ares futuro, Kelly agent, agente Kelly, Creative Agent.
-2. Check required current concepts: Hera, Ares, Atena, Zeus, Smart Bidding,
+2. Check required current concepts: agente legado, Ares, Atena, Zeus, Smart Bidding,
    ActiveView, Geizian, Ially, gestores g001–g006.
 3. Semantically inspect Ares scope flags around ChatPion/DigitalTrChat,
    quiz, SMS Funnel, AdOps/site setup and pixel setup.
-4. Semantically inspect Hera scope flags around campaign execution, budget,
+4. Semantically inspect agente legado scope flags around campaign execution, budget,
    pixel and Business Manager.
 5. Patch only ambiguous or conflicting language.
 6. Update `docs/mgs-os-restructure-plan.md` to show Fase 1/Fase 2 as
@@ -80,7 +80,7 @@ Phase 4 context-file/block pattern:
 1. Work one approved block at a time; for context files, change conceptual docs
    only unless Rodolfo explicitly expands scope.
 2. After every material correction, run cross-file semantic checks for stale
-   names, Ares/Hera boundaries, SB/AV exceptions, gestor codes, Finance/BI and
+   names, Ares/agente legado boundaries, SB/AV exceptions, gestor codes, Finance/BI and
    source-of-truth conflicts.
 3. Report each block with: arquivo principal, status/version, validation, secret
    scan, audit log, auto-push, HEAD=origin, and repo state.
@@ -138,37 +138,37 @@ Phase 5 agent HOT operational map pattern:
 
 Detailed runbook: `references/agent-hot-operational-maps-2026-06-16.md`.
 
-Phase 5 Hera Creative Ops alignment pattern:
+Phase 5 agente legado Creative Ops alignment pattern:
 
 ```text
-1. Do not frame Hera as an assistant/subagent of Ares. Hera owns Creative
+1. Do not frame agente legado as an assistant/subagent of Ares. agente legado owns Creative
    Operations: creating static/video creatives, receiving human-created assets,
    organizing Drive/naming/inventory, and supporting both Ares and humans.
 2. Ares is an optional consumer of approved assets, not the mandatory path for
    every creative. Kelly, Geizian and gestores may create or use creatives
-   directly in campaigns; Hera still keeps assets organized.
+   directly in campaigns; agente legado still keeps assets organized.
 3. Do not impose a rigid creative request form. Users should ask naturally in
-   the Hera channel. Hera infers safely, asks only blocking questions, and the
+   the agente legado channel. agente legado infers safely, asks only blocking questions, and the
    skill evolves from real usage.
 4. Treat `CC_US_ES` as an example/pilot taxonomy aligned with Ares, not the only
-   Drive operation. MGS-AGENTS/CRIATIVOS is multivertical; Hera must route each request
+   Drive operation. MGS-AGENTS/CRIATIVOS is multivertical; agente legado must route each request
    or upload to the correct vertical/operation folder.
 5. For multivertical naming, use the general model
    `{VERTICAL}_{COUNTRY}_{LANG}_{FORMAT}_{ANGLE}_{P_ORIENT}_{VARIANT}.{ext}`
    and adapt per operation as the real workflow stabilizes.
 6. Inventory should track origin and consumer, at minimum: `created_by`,
    `requested_by`, `used_by`, `campaign_owner`, and `source`.
-7. Creative metadata is a first-class handoff gate: Hera should clean assets
+7. Creative metadata is a first-class handoff gate: agente legado should clean assets
    before Drive/handoff, and Ares should verify/clean before campaign use. The
    canonical wrapper is `/root/mgs-agent/scripts/clean-creative-metadata.sh`;
    avoid deploying ExifCleaner/Electron on the VPS for agent workflows.
-8. When aligning Hera files, patch live + versioned SOUL/skill/templates, verify
+8. When aligning agente legado files, patch live + versioned SOUL/skill/templates, verify
    live/versioned equality, validate with `git diff --check` and secret scan,
-   restart/reload `hera-gateway.service` when SOUL changes, confirm Discord
+   restart/reload `legacy-agent-gateway.service` when SOUL changes, confirm Discord
    connected, and audit log.
 ```
 
-Detailed runbooks: `references/hera-creative-ops-natural-requests-2026-06-07.md` and `references/creative-metadata-sanitizer-hera-ares-2026-06-08.md`.
+Detailed runbooks: `references/legacy-agent-creative-ops-natural-requests-2026-06-07.md` and `references/creative-metadata-sanitizer-legacy-agent-ares-2026-06-08.md`.
 
 Phase 5 Atena reconstruction gate pattern:
 

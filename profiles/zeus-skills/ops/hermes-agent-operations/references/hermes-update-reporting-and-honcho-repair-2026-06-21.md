@@ -34,14 +34,14 @@ Observed failure:
 Durable fix applied:
 
 - `experiments/honcho-spike/mgs_memory_copilot.py` classifies cold-storage errors as `status=cold_storage` with `action_required=manual_resume_app_honcho_dev`.
-- Hera was added to `AGENT_PROFILES` with `mgs-creative` target/session.
-- Atena/Hera SOUL coverage was completed so config, SOUL rule, and wrapper support align.
+- agente legado was added to `AGENT_PROFILES` with `mgs-creative` target/session.
+- Atena/agente legado SOUL coverage was completed so config, SOUL rule, and wrapper support align.
 
 Coverage validation checklist:
 
 ```bash
 python3 -m py_compile /root/mgs-agent/experiments/honcho-spike/mgs_memory_copilot.py
-for agent in zeus atena ares hera; do
+for agent in zeus atena ares legacy-agent; do
   /root/mgs-agent/scripts/mgs-memory-copilot \
     --agent "$agent" \
     --json \
@@ -56,7 +56,7 @@ Acceptable final status:
 zeus  ok  none  mgs-memory-copilot-zeus
 atena ok  none  mgs-memory-copilot-atena
 ares  ok  none  mgs-memory-copilot-ares
-hera  ok  none  mgs-memory-copilot-hera
+legacy-agent  ok  none  mgs-memory-copilot-legacy-agent
 ```
 
 ## Honcho health monitor false-positive pattern

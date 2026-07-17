@@ -40,5 +40,5 @@ Avoid for operational Discord replies:
 
 ## Related validation from the session
 
-- `display.final_response_markdown` was `strip` across Zeus/Atena/Ares/Hera, but the practical issue was the agent choosing Markdown table syntax.
+- `display.final_response_markdown` was `strip` across Zeus/Atena/Ares/agente legado, but the practical issue was the agent choosing Markdown table syntax.
 - The fix was to strengthen SOUL wording and then continue using aligned `text` tables.

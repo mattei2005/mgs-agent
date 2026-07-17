@@ -1,6 +1,6 @@
 # Grok/xAI OAuth for MGS creative media rollout — 2026-06-16
 
-Use this reference when Rodolfo wants Grok/SuperGrok integrated into MGS agents for image/video/avatar generation, especially Hera Creative Ops, while keeping GPT/OpenAI-Codex available.
+Use this reference when Rodolfo wants Grok/SuperGrok integrated into MGS agents for image/video/avatar generation, especially agente legado Creative Ops, while keeping GPT/OpenAI-Codex available.
 
 ## Durable lesson
 
@@ -10,11 +10,11 @@ Hermes now supports xAI/Grok media through built-in provider plugins:
 - video backend: `plugins/video_gen/xai`, selected by `video_gen.provider: xai` and exposed via `video_generate`.
 - X search: `x_search`, using the same xAI auth resolver.
 
-For MGS, do **not** blindly switch Hera's default image provider away from OpenAI-Codex. Rodolfo's intended workflow is natural tool choice:
+For MGS, do **not** blindly switch agente legado's default image provider away from OpenAI-Codex. Rodolfo's intended workflow is natural tool choice:
 
 ```text
-“Hera, faz com GPT”       → GPT/OpenAI-Codex image generation.
-“Hera, faz com Grok”      → Grok/xAI explicit image/video wrapper or xAI video_gen.
+“agente legado, faz com GPT”       → GPT/OpenAI-Codex image generation.
+“agente legado, faz com Grok”      → Grok/xAI explicit image/video wrapper or xAI video_gen.
 “Faz nos dois e compara” → generate one GPT variant + one Grok variant and compare.
 “Anima esse avatar”      → prefer Grok/xAI image-to-video/reference-to-video.
 ```
@@ -24,7 +24,7 @@ For MGS, do **not** blindly switch Hera's default image provider away from OpenA
 Preferred user-facing path when Rodolfo chooses OAuth/SuperGrok:
 
 ```bash
-hermes -p hera auth add xai-oauth --type oauth --manual-paste
+hermes -p legacy-agent auth add xai-oauth --type oauth --manual-paste
 ```
 
 Operational behavior:
@@ -36,7 +36,7 @@ Operational behavior:
 5. Validate without printing secrets:
 
 ```bash
-hermes -p hera auth status xai-oauth
+hermes -p legacy-agent auth status xai-oauth
 ```
 
 If the OAuth was done for one profile and MGS needs shared operational access, copy only the `providers.xai-oauth` auth entry to the other profiles with backups, while preserving their `active_provider` as `openai-codex`. Never print token values; report token length and refresh-token presence only.
@@ -46,13 +46,13 @@ If the OAuth was done for one profile and MGS needs shared operational access, c
 Recommended default scope:
 
 ```text
-Hera   xAI OAuth + video_gen + x_search; GPT remains default image provider.
+agente legado   xAI OAuth + video_gen + x_search; GPT remains default image provider.
 Zeus   xAI OAuth + x_search/video smoke for audit; not day-to-day creative production.
 Ares   xAI OAuth + x_search only; do not make Ares owner of creative generation.
 Atena  xAI OAuth may be present for future auth reuse, but do not enable creative/search by default.
 ```
 
-Config pattern for Hera when GPT should remain default but Grok is also available:
+Config pattern for agente legado when GPT should remain default but Grok is also available:
 
 ```yaml
 image_gen:
@@ -76,8 +76,8 @@ video_gen:
 Toolsets can be enabled with:
 
 ```bash
-hermes -p hera tools enable --platform discord video_gen x_search
-hermes -p hera tools enable --platform cli video_gen x_search
+hermes -p legacy-agent tools enable --platform discord video_gen x_search
+hermes -p legacy-agent tools enable --platform cli video_gen x_search
 hermes -p ares tools enable --platform discord x_search
 hermes -p ares tools enable --platform cli x_search
 ```
@@ -96,14 +96,14 @@ Expected modes:
 
 ```bash
 /root/mgs-agent/scripts/mgs-grok-generate.py image \
-  --profile hera \
+  --profile legacy-agent \
   --prompt '...' \
   --aspect-ratio 1:1 \
   --resolution 1k \
   --output-dir /root/mgs-agent/data/generated/grok
 
 /root/mgs-agent/scripts/mgs-grok-generate.py video \
-  --profile hera \
+  --profile legacy-agent \
   --prompt '...' \
   --duration 8 \
   --aspect-ratio 16:9 \
@@ -125,7 +125,7 @@ Do not claim success from config alone. Run real media generation and validate o
 
 ```bash
 # Image smoke
-/root/mgs-agent/scripts/mgs-grok-generate.py image --profile hera --prompt 'Internal smoke test...' --output-dir /root/mgs-agent/data/generated/grok-smoke
+/root/mgs-agent/scripts/mgs-grok-generate.py image --profile legacy-agent --prompt 'Internal smoke test...' --output-dir /root/mgs-agent/data/generated/grok-smoke
 
 # Validate image dimensions/format
 python3 - <<'PY'
@@ -137,7 +137,7 @@ print(p.exists(), p.stat().st_size, im.format, im.size)
 PY
 
 # Video smoke; background is fine because it may take >1 minute
-/root/mgs-agent/scripts/mgs-grok-generate.py video --profile hera --prompt 'Internal smoke test...' --duration 2 --resolution 480p --output-dir /root/mgs-agent/data/generated/grok-smoke
+/root/mgs-agent/scripts/mgs-grok-generate.py video --profile legacy-agent --prompt 'Internal smoke test...' --duration 2 --resolution 480p --output-dir /root/mgs-agent/data/generated/grok-smoke
 
 # Validate video if ffprobe exists
 ffprobe -v error -show_entries format=duration,size -show_streams -of json /path/to/output.mp4
@@ -163,4 +163,4 @@ If auto-commit already versioned smoke media, remove it from Git with `git rm --
 
 ## Gateway restart rule
 
-Config/SOUL/toolset changes may require gateway reload/restart before Discord sees them. Do not restart Zeus/Hera/Ares from an active Discord tool-call thread. Use the safe detached restart finalizer (`/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh`) and report cleanly before scheduling.
+Config/SOUL/toolset changes may require gateway reload/restart before Discord sees them. Do not restart Zeus/agente legado/Ares from an active Discord tool-call thread. Use the safe detached restart finalizer (`/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh`) and report cleanly before scheduling.

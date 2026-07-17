@@ -1,8 +1,8 @@
-# Agent HOT Operational Maps — Ares/Hera rollout 2026-06-16
+# Agent HOT Operational Maps — Ares/agente legado rollout 2026-06-16
 
 ## Trigger
 
-Rodolfo identified that agents were wasting time with broad `search_files` calls such as `search_files: "drive"` in operational threads, especially Hera/Ares creative and Drive workflows. He asked Zeus to create the same map pattern used by Zeus for other agents, excluding Atena while Atena is being restructured.
+Rodolfo identified that agents were wasting time with broad `search_files` calls such as `search_files: "drive"` in operational threads, especially agente legado/Ares creative and Drive workflows. He asked Zeus to create the same map pattern used by Zeus for other agents, excluding Atena while Atena is being restructured.
 
 ## Class-level pattern
 
@@ -18,7 +18,7 @@ Examples created:
 
 ```text
 /root/mgs-agent/context/ares-operational-map.md
-/root/mgs-agent/context/hera-operational-map.md
+/root/mgs-agent/context/legacy-agent-operational-map.md
 ```
 
 Each map should include:

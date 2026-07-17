@@ -1,6 +1,6 @@
 # OpenAI-Codex multi-profile model rollout
 
-Use this playbook when changing the principal OpenAI-Codex model or reasoning level across Zeus/Atena/Ares/Hera.
+Use this playbook when changing the principal OpenAI-Codex model or reasoning level across Zeus/Atena/Ares/agente legado.
 
 ## Core distinctions
 

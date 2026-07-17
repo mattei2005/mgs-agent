@@ -35,7 +35,16 @@ USER/MEMORY continuam sempre ativos e limitados a preferências e invariantes qu
 
 No provider nativo atual, um `add` bem-sucedido no alvo `user` também é espelhado como conclusão Honcho. Isso não é sincronização bidirecional: `replace`/`remove` de USER e gravações em MEMORY não são espelhados por esse hook. USER/MEMORY permanecem a camada exata e sempre ativa; Honcho é a camada longitudinal e semântica.
 
-O autocompactor de USER/MEMORY deixa de ser a solução principal. O monitor de 90% permanece como proteção residual até a integração Honcho estar implantada e validada em cada agente.
+O autocompactor de USER/MEMORY deixa de ser a solução principal. A proteção residual automática permanece ativa: a cada dez minutos, o monitor descobre os profiles operacionais, mede USER/MEMORY e, quando um store atinge 90%, aciona compactação fail-closed para 85% sem pedir aprovação por ocorrência. Cada aplicação exige backup protegido, lock, preservação de literais, segunda validação semântica, escrita atômica, rollback/readback e relatório metadata-only em `#limites-90`. Falha de modelo, JSON, semântica, timeout ou concorrência preserva a fonte e gera alerta com anti-spam; nenhum conteúdo de memória vai ao Discord.
+
+Artefatos canônicos:
+
+- monitor: `scripts/monitor-hermes-memory-capacity.py`;
+- compactor: `scripts/hermes-memory-autocompactor.py`;
+- estado: `data/hermes-memory-capacity-state.json`;
+- cron: `4,14,24,34,44,54 * * * *`, protegido por `flock`;
+- backup: `/root/.hermes/secure-backups/memory-autocompaction/`;
+- canal: `#limites-90` (`1527401973698007060`).
 
 ## Estado verificado na decisão
 

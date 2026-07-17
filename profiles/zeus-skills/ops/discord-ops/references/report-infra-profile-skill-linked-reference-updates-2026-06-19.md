@@ -4,7 +4,7 @@ Use when another MGS agent reports an update to one profile skill/reference, but
 
 ## Pattern validated
 
-During Hera Creative Ops updates, the reported file was:
+During agente legado Creative Ops updates, the reported file was:
 - `creative-brief-handoff/references/video-variation-gpt-grok-workflow.md`
 
 Validation showed the workflow now linked to an additional precedent file:

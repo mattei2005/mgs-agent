@@ -39,5 +39,5 @@ Some infra reports have no shared code/config change, but still alter durable VP
 
 - Do not ignore a REPORT-INFRA just because it says “sem alteração em código/config compartilhado.” System package installs are durable runtime infra and belong in the inventory.
 - Do not let `infra-discovery.sh` drop manual sections while adding a new one. Preserving `system_packages` but losing `runtime_artifacts` is still an inventory regression.
-- Do not commit unrelated Ares/Hera audit JSONs or sync-souls drift while processing a package report. Staging must be surgical.
+- Do not commit unrelated Ares/agente legado audit JSONs or sync-souls drift while processing a package report. Staging must be surgical.
 - If the report includes an unresolved operational caveat, record it as a pending/risk note instead of treating the report as fully clean.

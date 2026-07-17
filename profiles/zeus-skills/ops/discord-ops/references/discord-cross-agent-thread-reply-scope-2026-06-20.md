@@ -1,10 +1,10 @@
-# Discord cross-agent thread reply scope — Hera/Ares case (2026-06-20)
+# Discord cross-agent thread reply scope — agente legado/Ares case (2026-06-20)
 
 ## Trigger
 
 Use this when Rodolfo reports that every message in a specific thread wakes two agents, especially when the thread belongs to one agent's channel but another agent has been allowed to participate for handoffs.
 
-Validated case: thread `1517911362280493089` belonged to Hera's channel, but both Hera and Ares responded to Rodolfo's normal messages even when he did not mention either bot.
+Validated case: thread `1517911362280493089` belonged to agente legado's channel, but both agente legado and Ares responded to Rodolfo's normal messages even when he did not mention either bot.
 
 ## Root cause pattern
 
@@ -13,12 +13,12 @@ A cross-agent `allowed_channels` grant is safe only if thread mention gating rem
 Bad effective state observed on Ares:
 
 ```text
-allowed_channels         own Ares channel + Hera channel + logs-aquisicao
+allowed_channels         own Ares channel + agente legado channel + logs-aquisicao
 free_response_channels   own Ares channel + logs-aquisicao
 thread_require_mention   false
 ```
 
-Because Ares had Hera's channel in `allowed_channels` and `thread_require_mention=false`, any human message inside the Hera thread was treated as actionable by Ares. Hera also answered because it owned the thread/channel. This created a dual-response pattern and later a bot-to-bot status loop after handoff messages.
+Because Ares had agente legado's channel in `allowed_channels` and `thread_require_mention=false`, any human message inside the agente legado thread was treated as actionable by Ares. agente legado also answered because it owned the thread/channel. This created a dual-response pattern and later a bot-to-bot status loop after handoff messages.
 
 ## Correct state
 
@@ -34,10 +34,10 @@ DISCORD_THREAD_REQUIRE_MENTION=true in the active .env if env overrides config
 
 Expected behavior after fix:
 
-- Human message in Hera thread without mentioning Ares → Hera only.
+- Human message in agente legado thread without mentioning Ares → agente legado only.
 - Human message directly mentioning Ares → Ares may answer.
-- Hera handoff directly mentioning Ares → Ares may answer.
-- Ares must not wake just because the thread is under an allowed Hera channel.
+- agente legado handoff directly mentioning Ares → Ares may answer.
+- Ares must not wake just because the thread is under an allowed agente legado channel.
 
 ## Diagnostic checklist
 
@@ -46,7 +46,7 @@ Expected behavior after fix:
 ```bash
 python3 - <<'PY'
 import yaml
-for agent in ['hera','ares']:
+for agent in ['legacy-agent','ares']:
     p=f'/root/.hermes/profiles/{agent}/config.yaml'
     c=yaml.safe_load(open(p)) or {}
     d=c.get('discord') or {}
@@ -87,16 +87,16 @@ Patch all effective copies when applicable:
 - `/root/mgs-agent/profiles/ares-config.yaml`
 - `/root/.hermes/profiles/ares/.env` if it defines `DISCORD_THREAD_REQUIRE_MENTION`
 
-Then restart only the affected visiting agent via the safe detached restart helper. Do not restart Zeus/Hera unless their configs changed.
+Then restart only the affected visiting agent via the safe detached restart helper. Do not restart Zeus/agente legado unless their configs changed.
 
 ## Reporting note
 
 Tell Rodolfo the behavior in terms of who should answer next:
 
 ```text
-Mensagem sua na thread da Hera sem mencionar ninguém → só Hera.
+Mensagem sua na thread da agente legado sem mencionar ninguém → só agente legado.
 Mensagem sua mencionando Ares diretamente → Ares pode responder.
-Hera mencionando Ares em handoff → Ares pode responder.
+agente legado mencionando Ares em handoff → Ares pode responder.
 ```
 
 This avoids over-explaining implementation when the operational question is whether the loop will continue.

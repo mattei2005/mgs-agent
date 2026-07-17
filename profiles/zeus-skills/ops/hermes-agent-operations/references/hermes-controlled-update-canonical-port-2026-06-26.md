@@ -67,7 +67,7 @@ RESTORE_LOCAL_DIFFS=0 RESTART_GATEWAYS=0 STAMP="live-update-$(date +%Y%m%d-%H%M%
 - MGS patch guard passes.
 - `py_compile` passes for Discord adapter, gateway run, platform base/config, terminal/file tools.
 - Targeted pytest set passes; in this session: `138 passed, 2 warnings, 6 subtests passed`.
-- Codex auth remains present in Zeus/Atena/Ares/Hera without printing secrets.
+- Codex auth remains present in Zeus/Atena/Ares/agente legado without printing secrets.
 - Gateways remain `active`; restart is handled separately.
 
 ## Pitfall: profile config comparison after upstream schema/default migrations

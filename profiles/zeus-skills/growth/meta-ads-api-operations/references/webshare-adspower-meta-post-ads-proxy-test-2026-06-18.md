@@ -2,7 +2,7 @@
 
 ## Context
 
-Rodolfo suspected the MGS VPS provider/IP (Hetzner, Ashburn) was causing challenges in Meta and YouTube/Hera workflows. Hera/YouTube showed a clear browser anti-bot symptom (`Sign in to confirm you’re not a bot`) from VPS browser. For Ares/Meta, the failure was more specific: campaign/adset/adcreative creation could work, but `POST /ads` returned Meta checkpoint/pending-action errors.
+Rodolfo suspected the MGS VPS provider/IP (Hetzner, Ashburn) was causing challenges in Meta and YouTube/agente legado workflows. agente legado/YouTube showed a clear browser anti-bot symptom (`Sign in to confirm you’re not a bot`) from VPS browser. For Ares/Meta, the failure was more specific: campaign/adset/adcreative creation could work, but `POST /ads` returned Meta checkpoint/pending-action errors.
 
 System User was explicitly out of scope per Rodolfo.
 
@@ -139,4 +139,4 @@ The next practical path, with System User excluded, is not another raw proxy ret
 
 ## Reporting pitfall
 
-Report both the proxy evidence and the endpoint-specific failure. Do not overclaim that Hetzner is innocent globally: Hetzner/datacenter remains a strong cause for Hera/YouTube browser challenges. The Meta finding is narrower: proxy did not fix `POST /ads`.
+Report both the proxy evidence and the endpoint-specific failure. Do not overclaim that Hetzner is innocent globally: Hetzner/datacenter remains a strong cause for agente legado/YouTube browser challenges. The Meta finding is narrower: proxy did not fix `POST /ads`.

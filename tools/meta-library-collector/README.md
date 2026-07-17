@@ -1,4 +1,4 @@
-# Hera Meta Library Collector
+# Ares Meta Library Collector
 
 Runtime permanente para abrir URLs públicas da Meta/Facebook Ads Library com Chromium/Playwright, preservar o perfil do navegador e baixar mídia para validação.
 

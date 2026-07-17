@@ -90,7 +90,7 @@ Como `run.py` e `adapter.py` são runtime compartilhado, reiniciar todos os gate
 - Zeus
 - Atena
 - Ares
-- Hera
+- agente legado
 
 Não basta reiniciar só o agente onde o bug apareceu; processos não reiniciados continuam com código antigo em memória.
 

@@ -4,13 +4,13 @@
 
 Use esta referência quando Rodolfo suspeitar que Hetzner/VPS/datacenter IP está causando bloqueios em:
 
-- YouTube/Shorts/referências visuais para Hera.
+- YouTube/Shorts/referências visuais para agente legado.
 - Meta/Ads Manager/Marketing API para Ares.
 - Browser automation que funciona no navegador humano/residencial, mas falha no VPS.
 
 ## Padrão observado
 
-### Hera / YouTube Shorts
+### agente legado / YouTube Shorts
 
 Sinal forte de reputação de IP/datacenter:
 

@@ -2,7 +2,7 @@
 
 ## Incident
 
-Thread `1516587465735934093` looped between Ares and Hera after the real handoff was already complete. The pattern repeated an older Zeus↔Atena class of incident: bot-to-bot mentions are necessary for cross-agent routing, but low-information acknowledgements/status messages can wake the peer bot and create a ping-pong.
+Thread `1516587465735934093` looped between Ares and agente legado after the real handoff was already complete. The pattern repeated an older Zeus↔Atena class of incident: bot-to-bot mentions are necessary for cross-agent routing, but low-information acknowledgements/status messages can wake the peer bot and create a ping-pong.
 
 Observed messages included:
 - `Sem ação pendente`
@@ -15,7 +15,7 @@ Observed messages included:
 
 ## Root cause
 
-`DISCORD_ALLOW_BOTS=mentions` correctly allows bot messages when the destination agent is mentioned. That is needed for explicit handoffs (ex: Ares asking Hera to move/validate a Drive asset). However, mention-gating alone is not enough: once the task is complete, acknowledgement/status messages can still include or trigger bot-visible context, causing the other gateway to process them as new input.
+`DISCORD_ALLOW_BOTS=mentions` correctly allows bot messages when the destination agent is mentioned. That is needed for explicit handoffs (ex: Ares asking agente legado to move/validate a Drive asset). However, mention-gating alone is not enough: once the task is complete, acknowledgement/status messages can still include or trigger bot-visible context, causing the other gateway to process them as new input.
 
 ## Fix applied
 
@@ -49,12 +49,12 @@ Expected result from incident fix:
 Operational restart:
 
 ```
-/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh --agents "ares hera" --reason "urgent-discord-loop-fix-no-content-notice-extension" --delay 2 --execute
+/root/mgs-agent/scripts/mgs-gateway-restart-safe.sh --agents "ares legacy-agent" --reason "urgent-discord-loop-fix-no-content-notice-extension" --delay 2 --execute
 ```
 
 Post-restart evidence:
 - Ares active/running, connected as Ares
-- Hera active/running, connected as Hera
+- agente legado active/running, connected as agente legado
 
 ## Rule going forward
 

@@ -10,7 +10,7 @@ Não interpretar reclamações genéricas de ruído/travamento no Discord como a
 
 ## Config para religar progresso ao vivo
 
-Aplicar nos profiles vivos e mirrors versionados de Zeus/Atena/Ares/Hera:
+Aplicar nos profiles vivos e mirrors versionados de Zeus/Atena/Ares/agente legado:
 
 ```yaml
 display:

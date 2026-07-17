@@ -1,10 +1,10 @@
 # Discord stale thread archive enforcement — 2026-06-30
 
 ## Trigger
-Rodolfo reported that managers added to Hera threads saw many old threads still open in their Discord sidebar. He explicitly required that every added user (Geizian, managers, Kelly, Rodolfo) get the same thread-hide/auto-archive behavior — adding a member must not make old agent threads stay visible indefinitely.
+Rodolfo reported that managers added to agente legado threads saw many old threads still open in their Discord sidebar. He explicitly required that every added user (Geizian, managers, Kelly, Rodolfo) get the same thread-hide/auto-archive behavior — adding a member must not make old agent threads stay visible indefinitely.
 
 ## Finding
-Runtime/API audit across Zeus, Atena, Ares and Hera showed many active Discord threads with `thread_metadata.archived=false` even though their `auto_archive_duration` was `1440` minutes and the last message was older than the auto-archive window.
+Runtime/API audit across Zeus, Atena, Ares and agente legado showed many active Discord threads with `thread_metadata.archived=false` even though their `auto_archive_duration` was `1440` minutes and the last message was older than the auto-archive window.
 
 This was not primarily an auto-add membership policy problem. The issue was stale active threads: private threads remained active/visible for added users after they should have been archived.
 
@@ -25,7 +25,7 @@ Use a deterministic enforcer cron/script that:
 - loads each profile token from the profile `.env` without printing secrets;
 - reads effective channels from profile config/env;
 - lists active guild threads;
-- filters by allowed/free-response parent channels for Zeus/Atena/Ares/Hera;
+- filters by allowed/free-response parent channels for Zeus/Atena/Ares/agente legado;
 - archives stale active threads after `last_message + auto_archive_duration + grace`;
 - logs compact summary only.
 

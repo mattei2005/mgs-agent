@@ -4,10 +4,10 @@ Use when another MGS agent reports updates to its own skill library, reference f
 
 ## Pattern validated
 
-A Hera report updated:
-- runtime skill reference under `/root/.hermes/profiles/hera/skills/.../references/`;
-- versioned copy under `/root/mgs-agent/profiles/hera-skills/.../references/` via `sync-souls.sh`;
-- runtime memory in Hera profile (not versioned by design);
+A agente legado report updated:
+- runtime skill reference under `/root/.hermes/profiles/legacy-agent/skills/.../references/`;
+- versioned copy under `/root/mgs-agent/profiles/legacy-agent-skills/.../references/` via `sync-souls.sh`;
+- runtime memory in agente legado profile (not versioned by design);
 - supporting scripts and validation artifacts for a YouTube/Shorts reference workflow.
 
 ## Zeus processing checklist
@@ -22,7 +22,7 @@ A Hera report updated:
 5. Validate the claimed artifact shape without dumping large media/output. Example: count frames/contact sheet in a directory, or read a small status JSON summary.
 6. Register runtime-only memory updates in `events-audit.jsonl` as audit context; do not try to version another profile's memory store.
 7. Update `infra-inventory.json` with the versioned skill/reference, relevant scripts, and validation summary.
-8. Stage only files in the reported scope. `sync-souls.sh` may surface unrelated untracked Hera/Ares/Atena reference files; leave them unstaged unless they are part of the current REPORT-INFRA.
+8. Stage only files in the reported scope. `sync-souls.sh` may surface unrelated untracked agente legado/Ares/Atena reference files; leave them unstaged unless they are part of the current REPORT-INFRA.
 
 ## Pitfalls
 

@@ -32,7 +32,7 @@ context/monetization.md
 - Ially: office manager / follow-up; cobranças and task follow-up with gestores when tasks are late/not done; escalates to Geizian/Rodolfo.
 - Raquel: human supervisor for Content Operations / Atena.
 - Kelly: human person/gestora, code `g005`, human creative lead; not an agent.
-- Hera: creative agent; does not replace Kelly; creates/organizes approved assets and can read/write Google Drive.
+- agente legado: creative agent; does not replace Kelly; creates/organizes approved assets and can read/write Google Drive.
 - Ares: campaign/Growth agent; Rodolfo + Geizian first, gestores only after testing, approval, and training.
 
 ### Acquisition

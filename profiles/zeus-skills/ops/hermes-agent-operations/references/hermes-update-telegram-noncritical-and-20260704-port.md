@@ -9,7 +9,7 @@ Telegram is not an MGS-critical surface. Do not block Hermes updates on Telegram
 Still validate Telegram-adjacent code only when the changed code path is shared with the MGS-critical surfaces:
 
 - Discord gateway behavior
-- Zeus/Atena/Ares/Hera systemd gateways
+- Zeus/Atena/Ares/agente legado systemd gateways
 - restart safe/auto-resume/checkpoint behavior
 - GPT-5.5/OpenAI-Codex and zero Claude default
 - MGS profile config/SOUL/auth presence
@@ -24,7 +24,7 @@ Live state before port:
 Hermes live      efd87a154
 Origin/main      09693cd3a
 Behind           637 commits
-Gateways         Zeus/Atena/Ares/Hera active
+Gateways         Zeus/Atena/Ares/agente legado active
 ```
 
 Precheck had shown drift in the old canonical patch:

@@ -27,7 +27,7 @@ Regra atual:
 - falha do OAuth força teste imediato do fallback;
 - o estado nunca persiste token ou chave;
 - alertas e recovery usam o bot Zeus;
-- jobs redundantes pausados: Ares `d1a064017e27` e Hera `d2a7853ae86f`.
+- jobs redundantes pausados: Ares `d1a064017e27` e agente legado `d2a7853ae86f`.
 
 Validação real de 2026-07-11: OAuth `token_ok`; fallback identificado como `my_drive_sa_upload_blocked`; ciclos subsequentes passaram com `sa_checked=0` mesmo sem `op` disponível no PATH.
 

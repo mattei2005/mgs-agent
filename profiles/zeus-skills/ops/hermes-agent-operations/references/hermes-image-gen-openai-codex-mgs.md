@@ -1,6 +1,6 @@
 # Hermes image generation via OpenAI-Codex OAuth — MGS
 
-Use this reference when an MGS agent (especially Hera/Creative Ops) can chat with `gpt-5.5` via `openai-codex`, but `image_generate` fails or falls back to FAL.
+Use this reference when an MGS agent (especially agente legado/Creative Ops) can chat with `gpt-5.5` via `openai-codex`, but `image_generate` fails or falls back to FAL.
 
 ## Core distinction
 
@@ -8,7 +8,7 @@ Use this reference when an MGS agent (especially Hera/Creative Ops) can chat wit
 
 If `image_gen.provider` is unset, Hermes keeps the historical in-tree FAL fallback even when other image plugins are registered. A profile can therefore be fully authenticated for GPT-5.5/Codex chat and still fail image generation with missing `FAL_KEY`.
 
-## MGS default for Hera-style creative image generation
+## MGS default for agente legado-style creative image generation
 
 Prefer Codex-backed OpenAI image generation before adding a new API key:
 
@@ -36,7 +36,7 @@ image_gen:
 4. Run a small real tool test under the target profile, e.g. one-shot with image toolset:
 
 ```bash
-hermes -p hera -t image_gen -z "Teste interno: use image_generate para gerar uma imagem quadrada simples. Responda apenas com o caminho do arquivo gerado ou o erro."
+hermes -p legacy-agent -t image_gen -z "Teste interno: use image_generate para gerar uma imagem quadrada simples. Responda apenas com o caminho do arquivo gerado ou o erro."
 ```
 
 5. Verify the returned file exists and has expected dimensions (PNG under the profile cache is enough for the smoke test). Do not claim success from config alone.

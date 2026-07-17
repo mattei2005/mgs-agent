@@ -39,7 +39,7 @@ git -C "$repo" rev-list --count HEAD..origin/main
 
 ### 2. Restarting gateways from an update finalizer can make the finalizer fail even when services are healthy
 
-If a systemd-run update/finalizer restarts Zeus/Atena/Ares/Hera and includes the current Zeus gateway in the restart set, the transient unit can be interrupted or left failed. Do not immediately repeat the update/restart.
+If a systemd-run update/finalizer restarts Zeus/Atena/Ares/agente legado and includes the current Zeus gateway in the restart set, the transient unit can be interrupted or left failed. Do not immediately repeat the update/restart.
 
 Recovery sequence:
 
@@ -56,9 +56,9 @@ systemctl reset-failed mgs-hermes-update-*.service || true
 For future all-agent update scripts, prefer:
 
 ```bash
-systemctl restart --no-block zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service
+systemctl restart --no-block zeus-gateway.service atena-gateway.service ares-gateway.service legacy-agent-gateway.service
 sleep 20
-systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service hera-gateway.service
+systemctl is-active zeus-gateway.service atena-gateway.service ares-gateway.service legacy-agent-gateway.service
 ```
 
 This avoids blocking the finalizer on a service that may terminate the current gateway/session.

@@ -61,7 +61,7 @@ BASE=/root/mgs-agent REPO="$wt" LOG=/tmp/guard-clean.log \
 - Upstream tests may need assertion updates if the MGS patch intentionally strengthens behavior, e.g. adding the read-only/non-actionable header to recent channel context.
 - `npm install` may dirty `package-lock.json`; restore it unless dependency changes are intentional.
 - Manual `git push` can fail in non-interactive shell due missing GitHub username; the post-commit auto-push hook can still succeed using 1Password. Verify with `git ls-remote origin refs/heads/main`.
-- Do not mix the update commit with unrelated Ares/Hera dirty files. Stage only the update infra files and run a targeted secret scan before commit.
+- Do not mix the update commit with unrelated Ares/agente legado dirty files. Stage only the update infra files and run a targeted secret scan before commit.
 - If `mgs-autocommit` was paused, restart it and verify active.
 
 ## Evidence shape Rodolfo expects
@@ -73,7 +73,7 @@ Include, at minimum:
 - services active with PID/start timestamps;
 - root crons count and health-monitor latest outputs;
 - Hermes cron list and patch watchdog status;
-- sanitized profile auth/config for Zeus/Atena/Ares/Hera;
+- sanitized profile auth/config for Zeus/Atena/Ares/agente legado;
 - test counts and guard status;
 - REPORT-INFRA and inventory update status;
 - Git commit/push status for MGS infra changes;

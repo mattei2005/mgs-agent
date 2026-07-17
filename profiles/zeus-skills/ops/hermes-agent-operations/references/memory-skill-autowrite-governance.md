@@ -362,7 +362,7 @@ Pitfall: solving a provider-architecture problem with increasingly complex file 
 5. Identify the exact destination and prove route/load semantics.
 6. Preserve facts with no sufficient destination.
 7. Produce the complete before/after diff and destination matrix.
-8. Obtain the required human review before deleting approved or always-active facts.
+8. For ad hoc/manual compaction, obtain the applicable human review before deleting facts. For the confirmed automatic `>=90%` residual path, use the standing policy plus deterministic and independent semantic gates; do not request per-occurrence approval.
 9. Back up, apply, validate character counts, and read back every retained invariant.
 10. Verify capacity-monitor recovery and report the write.
 
@@ -370,7 +370,9 @@ Pitfall: solving a provider-architecture problem with increasingly complex file 
 
 Rodolfo's confirmed policy is automatic compaction of USER/MEMORY when a store reaches 90%, followed by a metadata-only before/after report in `#limites-90`; do not request per-occurrence approval. Keep the configured 3600/6400 limits unless he separately changes them. After Rodolfo approved native Honcho integration for all current and future MGS agents, treat this compaction path as residual capacity protection—not the primary long-term memory architecture.
 
-Treat desired policy and active protection separately. Hermes upstream does not auto-compact by itself, and an approved Honcho rollout is not evidence that any profile already uses it. Before changing the compactor, inspect `memory.provider`, profile-local Honcho configuration, provider status, peer mapping, and a real cross-session canary for each profile. Until Honcho is active and validated per agent, do not claim it has removed the 90% risk. Likewise, do not claim automatic compaction is active until the monitor is connected to a compactor and an end-to-end temporary-profile canary proves semantic preservation, atomic write, protected backup, readback, failure alerting and anti-loop behavior. A prototype or green unit suite alone is insufficient.
+Treat desired policy and active protection separately. Hermes upstream does not auto-compact by itself. The MGS residual implementation is active through `scripts/monitor-hermes-memory-capacity.py`, which discovers immediate operational profiles, checks USER/MEMORY every ten minutes, and invokes `scripts/hermes-memory-autocompactor.py` at `>=90%` with an `85%` target. The cron schedule is `4,14,24,34,44,54 * * * *` under `flock`; state is `data/hermes-memory-capacity-state.json`; protected backups are under `/root/.hermes/secure-backups/memory-autocompaction/`; success/failure embeds go metadata-only to `#limites-90` (`1527401973698007060`). Do not request per-occurrence approval.
+
+Do not claim the protection is active from code/config alone. Require: profile discovery readback; unit tests for threshold, dry-run, atomic state, cooldown and durable outbox; an exact-dedup apply canary proving backup/write/readback; a real semantic two-pass dry-run at the production 85% target; Discord transport mock; a production run showing active profiles/stores and zero unexpected failures; and exact cron readback. The compactor must fail closed on model timeout, malformed output, protected-literal drift, semantic-verifier rejection, concurrent source change, invalid backup or post-write readback. A failed occurrence preserves the source when provable and produces a metadata-only alert; never weaken validation to force headroom.
 
 While activation is blocked, preserve the current fail-closed behavior and handle an actual threshold occurrence conservatively:
 
@@ -410,6 +412,6 @@ A semantic compactor must fail closed on model timeout, malformed output, protec
 - [ ] Existing staged queue inventoried for current, stale, overlapping, and superseded items
 - [ ] Dependency pairs kept together and no stale patch forced
 - [ ] Capacity failures are reported and preserve the unsaved proposal through a recovery/dead-letter handle
-- [ ] Full diff reviewed before compaction
+- [ ] Automatic compaction candidate passed deterministic literal guards plus independent semantic verification; metadata-only before/after, backup and readback were reported without exposing memory content
 - [ ] Automatic writes reported with target and readback
 - [ ] MGS-synced automatic writes have correlated mirror/inventory/audit/REPORT closure and the exact Discord embed was read back by message ID

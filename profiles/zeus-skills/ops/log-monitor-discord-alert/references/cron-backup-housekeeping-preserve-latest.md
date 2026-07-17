@@ -73,7 +73,7 @@ When doing a broad cron hardening pass, also check:
 - `sync-codex-oauth.sh`: before overwriting `auth.json`, create a chmod `0600` backup and validate candidate JSON/OpenAI-Codex state before atomic replace. Never log token values.
 - `cleanup-zombie-sessions.sh`: use last real message activity (`max(sessions.started_at, messages.timestamp)`) rather than only session `started_at`; include all active profiles; use a conservative grace window (e.g. 180min) and validate with `--dry-run` before applying.
 - `infra-discovery.sh`: write to temp file, validate with `jq -e`, then `mv` atomically.
-- `monitor-service-restarts.sh`: keep service list current as new agents are added (Zeus/Atena/Ares/Hera/autocommit).
+- `monitor-service-restarts.sh`: keep service list current as new agents are added (Zeus/Atena/Ares/agente legado/autocommit).
 - `monitor-gpt55-oauth-cost.sh`: label output as `uso hipotético`/simulated usage, not real cost; OAuth cost is `$0.00`; include all agent profiles.
 - `monitor-yoast-health-eggbev.sh`: support `--dry-run` that may query live data but must not save snapshots or post Discord.
 - `cron-smoke-test.sh`: aim for zero fixed skips by running risky/posting/deleting jobs in dry-run.

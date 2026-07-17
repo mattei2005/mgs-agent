@@ -28,7 +28,7 @@ Because `display.platforms.discord.tool_progress` has higher precedence than `di
 
 ## Correct MGS posture
 
-For Zeus/Atena/Ares/Hera Discord production channels, default to final-answer-first:
+For Zeus/Atena/Ares/agente legado Discord production channels, default to final-answer-first:
 
 ```yaml
 display:
@@ -49,8 +49,8 @@ display:
 ## Workflow for future repairs
 
 1. Inspect both live profile configs and MGS mirrors:
-   - `/root/.hermes/profiles/{zeus,atena,ares,hera}/config.yaml`
-   - `/root/mgs-agent/profiles/{zeus,atena,ares,hera}-config.yaml`
+   - `/root/.hermes/profiles/{zeus,atena,ares,legacy-agent}/config.yaml`
+   - `/root/mgs-agent/profiles/{zeus,atena,ares,legacy-agent}-config.yaml`
 2. Fix global and per-platform Discord settings; platform override wins.
 3. Keep a backup in the live profile; remove temporary backup files from `/root/mgs-agent/profiles/` before committing/reporting.
 4. Validate resolution, not just YAML presence:

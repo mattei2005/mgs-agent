@@ -159,14 +159,14 @@ class KnowledgeControlTests(unittest.TestCase):
             "schema_version": 1,
             "cases": [{
                 "id": "KR-001",
-                "question": "Is Hera active?",
+                "question": "Is the retired agent active?",
                 "source": "context/agent-map.md",
-                "required_all": ["desativada", "Ares"],
-                "forbidden_any": ["Hera recebe novas operações"],
+                "required_all": ["retired agent", "Ares"],
+                "forbidden_any": ["retired agent receives new operations"],
             }],
         }
         (self.root / "context/agent-map.md").write_text(
-            "Hera foi desativada e consolidada no Ares.\n", encoding="utf-8"
+            "The retired agent was consolidated into Ares.\n", encoding="utf-8"
         )
         (self.root / "data/knowledge-regression-cases.json").write_text(
             json.dumps(cases), encoding="utf-8"

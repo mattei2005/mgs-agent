@@ -18,7 +18,7 @@ Do not trust `display.tool_progress: off` alone. Hermes resolves per-platform se
 
 In the MGS profiles, `display.platforms.discord.tool_progress: all` overrode the global `off`, so Discord kept showing every tool call.
 
-MGS desired Discord settings for Zeus/Atena/Ares/Hera:
+MGS desired Discord settings for Zeus/Atena/Ares/agente legado:
 
 ```yaml
 display:
@@ -36,8 +36,8 @@ display:
 
 Apply this to both live profiles and versioned mirrors:
 
-- `/root/.hermes/profiles/{zeus,atena,ares,hera}/config.yaml`
-- `/root/mgs-agent/profiles/{zeus,atena,ares,hera}-config.yaml`
+- `/root/.hermes/profiles/{zeus,atena,ares,legacy-agent}/config.yaml`
+- `/root/mgs-agent/profiles/{zeus,atena,ares,legacy-agent}-config.yaml`
 
 Validation pattern:
 
@@ -45,10 +45,10 @@ Validation pattern:
 hermes -p zeus config check
 hermes -p atena config check
 hermes -p ares config check
-hermes -p hera config check
+hermes -p legacy-agent config check
 python3 - <<'PY'
 import yaml
-for p in ['zeus','atena','ares','hera']:
+for p in ['zeus','atena','ares','legacy-agent']:
     d=yaml.safe_load(open(f'/root/.hermes/profiles/{p}/config.yaml')) or {}
     disp=d.get('display') or {}
     disc=(disp.get('platforms') or {}).get('discord') or {}
