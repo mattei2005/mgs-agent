@@ -41,6 +41,20 @@ Quando o auto-commit bloquear um path apenas por palavra sensível no nome:
 
 Evite branches como `if guardrail_blocked: SEND_ALERT=true` sem verificar primeira ocorrência ou anti-spam; isso transforma um único incidente em mentions a cada execução.
 
+## Ativação do fix e drenagem segura do backlog
+
+O watcher persistente carrega regex/variáveis no startup. Editar o `.sh` no disco não altera o processo Bash já rodando:
+
+1. valide `bash -n`, o match positivo do allowlist exato e casos negativos para outros paths `token/secret`;
+2. antes de liberar o watcher, faça scan sanitizado de **todo o working tree pendente**, não só do arquivo que causou o falso positivo — o próximo flush pode commitar o backlog inteiro;
+3. classifique hits sem imprimir valores: placeholders nulos, exemplos redigidos e documentação podem ser benignos, mas qualquer valor real/ambíguo mantém o bloqueio;
+4. reinicie apenas o supervisor do watcher (ex.: `mgs-autocommit.service`) e valide PID/estado novo; não confunda isso com restart de gateway;
+5. provoque/aguarde um flush real e confirme `HEAD == origin/main`, não apenas `Commit OK` local;
+6. inspecione o commit resultante. Se o auto-commit drenou arquivos concorrentes já pendentes, reconcilie audit → inventário → REPORT-INFRA → Git antes de atribuí-los, e divulgue que o lote foi mais amplo que o fix; não descreva o commit inteiro como trabalho desta sessão;
+7. execute o monitor novamente para zerar o state e comprovar uma única recuperação verde. Leia o Discord por API e confirme que o evento mais recente é a resolução, sem novo vermelho posterior.
+
+Para testar anti-spam sem gerar mensagem de produção, uma verificação real útil é executar o monitor enquanto `last_alert_sent` ainda está dentro da janela e confirmar simultaneamente: log com `Anti-spam ... suprimindo`, timestamp de `last_alert_sent` inalterado e ausência de novo embed vermelho.
+
 ## Verificação mínima
 
 - janela e paginação completas;

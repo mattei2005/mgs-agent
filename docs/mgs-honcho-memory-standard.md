@@ -31,7 +31,9 @@ A regra cobre Zeus, Atena, Ares, Hera e todo novo agente MGS. Cada agente deve m
 
 ## Relação com USER/MEMORY
 
-USER/MEMORY continuam limitados a preferências e invariantes que precisam estar presentes em todo turno. Honcho absorve a pressão de crescimento causada por histórico, contexto longitudinal e conclusões derivadas.
+USER/MEMORY continuam sempre ativos e limitados a preferências e invariantes que precisam estar presentes em todo turno. Honcho atua diretamente sobre o perfil do usuário a partir das conversas persistidas e absorve a pressão de crescimento causada por histórico, contexto longitudinal e conclusões derivadas.
+
+No provider nativo atual, um `add` bem-sucedido no alvo `user` também é espelhado como conclusão Honcho. Isso não é sincronização bidirecional: `replace`/`remove` de USER e gravações em MEMORY não são espelhados por esse hook. USER/MEMORY permanecem a camada exata e sempre ativa; Honcho é a camada longitudinal e semântica.
 
 O autocompactor de USER/MEMORY deixa de ser a solução principal. O monitor de 90% permanece como proteção residual até a integração Honcho estar implantada e validada em cada agente.
 
@@ -41,6 +43,6 @@ Em 2026-07-17, os quatro profiles existentes (`zeus`, `atena`, `ares`, `hera`) e
 
 ## Gate de implantação
 
-A decisão de integrar todos os agentes está aprovada. A implantação deve ocorrer por agente, com backup, configuração nativa, isolamento de peer, orçamento de contexto, canário real, rollback e readback.
+A decisão de integrar todos os agentes e usar Honcho managed com persistência das conversas operacionais foi confirmada por Rodolfo em 2026-07-17. Isso não autoriza o envio de credenciais nem altera a precedência das fontes canônicas.
 
-Antes de enviar conversas operacionais não sanitizadas a um serviço gerenciado externo, deve existir decisão explícita de tratamento de dados. Sob a política vigente, managed Honcho recebe somente dados sintéticos ou sanitizados; uso integral de histórico operacional requer uma solução de hospedagem/política compatível.
+A implantação ocorre por agente, com backup, configuração nativa, isolamento de peer, orçamento de contexto, canário real, rollback e readback. A chave permanece protegida nos ambientes locais dos profiles e nunca entra em Git, logs ou chat.

@@ -1,0 +1,167 @@
+diff --git a/plugins/memory/honcho/__init__.py b/plugins/memory/honcho/__init__.py
+index c9ddc41bc..0d361036b 100644
+--- a/plugins/memory/honcho/__init__.py
++++ b/plugins/memory/honcho/__init__.py
+@@ -1412,13 +1412,26 @@ class HonchoMemoryProvider(MemoryProvider):
+             return tool_error(f"Honcho {tool_name} failed: {e}")
+ 
+     def shutdown(self) -> None:
++        # Background session init can create the prefetch thread after shutdown
++        # begins. Drain init first, then re-read and drain the late-created
++        # prefetch/sync workers so short-lived CLI agents do not exit with
++        # active Honcho daemon threads.
++        if self._init_thread and self._init_thread.is_alive():
++            self._init_thread.join(timeout=30.0)
+         for t in (self._prefetch_thread, self._sync_thread):
+             if t and t.is_alive():
+-                t.join(timeout=5.0)
+-        # Flush any remaining messages
++                t.join(timeout=30.0)
++        # Stop the manager lifecycle as well as flushing it. In async mode the
++        # manager owns a daemon writer thread; flush_all() alone leaves that
++        # thread alive and short-lived CLI processes can abort during Python
++        # interpreter teardown.
+         if self._manager and not (self._init_thread and self._init_thread.is_alive() and not self._session_initialized):
+             try:
+-                self._manager.flush_all()
++                shutdown = getattr(self._manager, "shutdown", None)
++                if callable(shutdown):
++                    shutdown()
++                else:
++                    self._manager.flush_all()
+             except Exception:
+                 pass
+ 
+diff --git a/plugins/memory/honcho/session.py b/plugins/memory/honcho/session.py
+index cff81916a..758e2b3a2 100644
+--- a/plugins/memory/honcho/session.py
++++ b/plugins/memory/honcho/session.py
+@@ -116,6 +116,10 @@ class HonchoSessionManager:
+         # one source of truth; see __init__.py _do_session_init for the prewarm.
+         self._context_cache: dict[str, dict] = {}
+         self._prefetch_cache_lock = threading.Lock()
++        # Track context-prefetch daemon workers so lifecycle shutdown can drain
++        # them before short-lived CLI processes exit.
++        self._context_prefetch_threads: list[threading.Thread] = []
++        self._context_prefetch_threads_lock = threading.Lock()
+         self._dialectic_reasoning_level: str = (
+             config.dialectic_reasoning_level if config else "low"
+         )
+@@ -546,11 +550,20 @@ class HonchoSessionManager:
+                     break
+ 
+     def shutdown(self) -> None:
+-        """Gracefully shut down the async writer thread."""
++        """Gracefully shut down context-prefetch and async writer threads."""
++        # Snapshot under the lock after provider-level init has been drained.
++        # Joining outside the lock avoids blocking a completing worker.
++        lock = getattr(self, "_context_prefetch_threads_lock", None)
++        if lock is not None:
++            with lock:
++                prefetch_threads = list(getattr(self, "_context_prefetch_threads", []))
++            for worker in prefetch_threads:
++                if worker.is_alive():
++                    worker.join(timeout=30)
+         if self._async_queue is not None and self._async_thread is not None:
+             self.flush_all()
+             self._async_queue.put(_ASYNC_SHUTDOWN)
+-            self._async_thread.join(timeout=10)
++            self._async_thread.join(timeout=30)
+ 
+     def delete(self, key: str) -> bool:
+         """Delete a session from local cache."""
+@@ -676,6 +689,11 @@ class HonchoSessionManager:
+                 self.set_context_result(session_key, result)
+ 
+         t = threading.Thread(target=_run, name="honcho-context-prefetch", daemon=True)
++        with self._context_prefetch_threads_lock:
++            self._context_prefetch_threads = [
++                worker for worker in self._context_prefetch_threads if worker.is_alive()
++            ]
++            self._context_prefetch_threads.append(t)
+         t.start()
+ 
+     def set_context_result(self, session_key: str, result: dict[str, str]) -> None:
+diff --git a/tests/test_honcho_startup_fail_open.py b/tests/test_honcho_startup_fail_open.py
+index 7993db5aa..7a3056f94 100644
+--- a/tests/test_honcho_startup_fail_open.py
++++ b/tests/test_honcho_startup_fail_open.py
+@@ -355,3 +355,78 @@ def test_honcho_tools_lazy_hooks_do_not_prestart_background_init(monkeypatch):
+     assert result == {"result": ["ready"]}
+     assert init_calls == ["session-1"]
+     assert not background_started.is_set()
++
++
++def test_honcho_shutdown_joins_init_then_late_prefetch_thread():
++    """Shutdown must drain a prefetch thread spawned by background init."""
++    provider = HonchoMemoryProvider()
++    prefetch_done = threading.Event()
++
++    def late_prefetch():
++        time.sleep(0.05)
++        prefetch_done.set()
++
++    def background_init():
++        time.sleep(0.05)
++        provider._prefetch_thread = threading.Thread(
++            target=late_prefetch,
++            daemon=True,
++            name="honcho-test-late-prefetch",
++        )
++        provider._prefetch_thread.start()
++
++    provider._init_thread = threading.Thread(
++        target=background_init,
++        daemon=True,
++        name="honcho-test-session-init",
++    )
++    provider._init_thread.start()
++
++    provider.shutdown()
++
++    assert not provider._init_thread.is_alive()
++    assert prefetch_done.is_set()
++    assert provider._prefetch_thread is not None
++    assert not provider._prefetch_thread.is_alive()
++
++
++def test_honcho_provider_shutdown_stops_manager_async_writer():
++    """Provider shutdown must call the manager lifecycle shutdown, not flush only."""
++    provider = HonchoMemoryProvider()
++    calls = []
++
++    class Manager:
++        def flush_all(self):
++            calls.append("flush")
++
++        def shutdown(self):
++            calls.append("shutdown")
++
++    object.__setattr__(provider, "_manager", Manager())
++
++    provider.shutdown()
++
++    assert calls == ["shutdown"]
++
++
++def test_honcho_manager_shutdown_joins_context_prefetch_thread():
++    """Manager shutdown must drain context-prefetch daemon workers."""
++    from plugins.memory.honcho.session import HonchoSessionManager
++
++    manager = object.__new__(HonchoSessionManager)
++    done = threading.Event()
++    worker = threading.Thread(
++        target=lambda: (time.sleep(0.05), done.set()),
++        daemon=True,
++        name="honcho-test-context-prefetch",
++    )
++    object.__setattr__(manager, "_context_prefetch_threads", [worker])
++    object.__setattr__(manager, "_context_prefetch_threads_lock", threading.Lock())
++    object.__setattr__(manager, "_async_queue", None)
++    object.__setattr__(manager, "_async_thread", None)
++    worker.start()
++
++    manager.shutdown()
++
++    assert done.is_set()
++    assert not worker.is_alive()

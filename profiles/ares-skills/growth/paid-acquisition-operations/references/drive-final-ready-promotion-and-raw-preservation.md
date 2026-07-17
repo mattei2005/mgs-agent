@@ -56,9 +56,9 @@ Report both operational meaning and counts. Rodolfo may ask whether UPLOAD_CANVA
 - Keep one canonical file per MD5 group; prefer `01_READY`/`01_READY_CANDIDATE` over `REVIEW`, canonical names over raw names, and deterministic ordering.
 - `UPLOAD_CANVAS` vs organized should not be judged solely by MD5 because cleaned derivatives differ at the binary level.
 
-## OAuth/delete pitfall
+## Capability/delete pitfall
 
-Service Account may have `canEdit=true` but `canTrash=false`/`canDelete=false` for files owned by Rodolfo's personal Drive account. If Rodolfo approves deletion and Service Account fails with 403, retry using configured real-user OAuth (`ARES_DRIVE_AUTH_MODE=oauth`). Report sanitized capability status only; never expose tokens.
+The Service Account may have `canEdit=true` but `canTrash=false`/`canDelete=false` when a file is outside the canonical Shared Drive. If Rodolfo approves deletion and capability is missing, stop and move the operation into an authorized Shared Drive context or correct the canonical membership/role. Never change identity. Report sanitized capability status only.
 
 ## Reporting language
 

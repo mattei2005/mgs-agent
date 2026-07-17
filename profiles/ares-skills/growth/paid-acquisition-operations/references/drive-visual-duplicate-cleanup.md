@@ -45,7 +45,7 @@ Service Account read can succeed while write/trash fails with:
 The user does not have sufficient permissions for this file.
 ```
 
-If Rodolfo already approved the delete/trash operation and Service Account write fails, retry using the configured real-user OAuth flow (`ARES_DRIVE_AUTH_MODE=oauth`) without exposing tokens. Report the failed Service Account attempt as part of evidence, but do not treat it as a blocker if OAuth succeeds.
+If Rodolfo already approved the delete/trash operation and the Service Account write fails, stop and report the exact sanitized capability failure. Correct the canonical Shared Drive role or destination before retrying; never change identity.
 
 ## Deletion semantics
 

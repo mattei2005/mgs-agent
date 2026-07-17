@@ -219,8 +219,27 @@
       "superseded_by": null,
       "title": "Knowledge and continuity governance",
       "updated_at": "2026-07-15T22:51:09+00:00"
+    },
+    {
+      "canonical_key": "security.google-workspace-auth",
+      "canonical_source": "context/security-policies.md",
+      "consumers": [
+        "ares",
+        "atena",
+        "zeus"
+      ],
+      "domain": "security",
+      "effective_at": "2026-07-17T10:24:32-04:00",
+      "id": "policy-google-workspace-auth-service-account-only-20260717",
+      "kind": "policy",
+      "owner": "zeus",
+      "review_due": null,
+      "status": "active",
+      "superseded_by": null,
+      "title": "Google Drive e Sheets MGS somente pela Service Account canônica",
+      "updated_at": "2026-07-17T14:26:17+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T13:50:26+00:00"
+  "updated_at": "2026-07-17T14:26:17+00:00"
 }

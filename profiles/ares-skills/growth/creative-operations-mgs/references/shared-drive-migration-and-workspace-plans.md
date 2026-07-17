@@ -29,7 +29,7 @@ Não reintroduzir transferência de ownership por arquivo como rotina. Falha den
 2. Validar o armazenamento atual pelo campo `driveId`:
    - ausente → My Drive;
    - presente → Shared Drive.
-3. Com o OAuth canônico de Rodolfo e, separadamente, com `ares-drive`, consultar:
+3. Com a Service Account canônica, consultar:
    - `about.canCreateDrives`;
    - `drives.list`;
    - Shared Drives visíveis e capabilities.
@@ -96,7 +96,7 @@ Distinguir sempre três classes:
 
 1. **Usuário criado/adicionado à organização no Admin Console:** consome licença paga quando ativo, conforme o plano.
 2. **Colaborador externo convidado para conteúdo/Shared Drive:** não consome licença da organização, mas a edição da conta externa e as políticas podem limitar o papel disponível.
-3. **Google Cloud service account:** não é assento Workspace, não consome licença mensal e não tem quota própria de armazenamento; deve operar em Shared Drive ou via OAuth de usuário.
+3. **Google Cloud service account:** não é assento Workspace, não consome licença mensal e opera nos Shared Drives onde recebeu papel suficiente. Na MGS, novos uploads automatizados pertencem ao `MGS-AGENTS`; Sheets existentes podem permanecer no My Drive quando compartilhadas diretamente para preservar IDs.
 
 Regras práticas:
 
@@ -106,18 +106,18 @@ Regras práticas:
 - Registrar a linhagem do intake externo para as duas cópias organizacionais e nunca tratar o RAW externo e sua cópia como candidatos independentes.
 - Adicionar `ares-drive` diretamente ao Shared Drive como `Manager` e confirmar por API `permissionType=member`, `role=organizer` e capabilities do Drive. Service account externa como organizer sem licença foi validada em Enterprise Essentials; se a política do tenant recusar ou limitar o papel, parar e avaliar domínio/política ou identidade Workspace própria.
 
-## OAuth e validação pós-upgrade
+## Identidade e validação pós-upgrade
 
-A compra em uma nova identidade Workspace não altera o OAuth já armazenado para outra conta.
+A compra ou troca de uma identidade Workspace não altera a identidade técnica canônica da MGS.
 
-- Consultar `about.user.emailAddress` antes de interpretar `canCreateDrives`, `drives.list` ou erro de criação. Um OAuth antigo de Gmail pessoal continuar com `canCreateDrives=false` não diz nada sobre o tenant recém-contratado.
-- Não sobrescrever o refresh token canônico usado na operação atual só para testar a nova conta. Usar uma credencial OAuth separada para a identidade Workspace ou criar o Shared Drive manualmente na UI e compartilhar com a service account.
-- Nunca pedir senha, refresh token ou client secret no chat. Se OAuth for indispensável, usar fluxo de consentimento com armazenamento separado e readback da identidade antes de qualquer write.
+- Consultar a conta administrativa na UI somente para ações de tenant/Shared Drive que exigem usuário Workspace.
+- Não criar credencial alternativa para testar o tenant. Criar o Shared Drive pela conta paga quando necessário e compartilhar com a Service Account canônica.
+- Nunca pedir senha ou credencial no chat. Validar a Service Account por projeto, client email, `driveId`, capabilities e canário antes de qualquer write.
 
 Sequência pós-contratação de baixo risco:
 
 1. Confirmar na UI plano/pool aplicado e observar se `Shared drives` aparece, sem confundir storage com entitlement operacional.
-2. Se ainda não houver OAuth da identidade Workspace, criar manualmente um Shared Drive piloto pela conta paga.
+2. Se ainda não houver Shared Drive, criá-lo manualmente pela conta Workspace paga e compartilhar com a Service Account canônica.
 3. Adicionar somente a service account do Ares como `Manager`; não adicionar gestores antes do readback.
 4. Pela API da service account, executar `drives.list`, conferir capabilities e rodar o piloto completo de create/upload/move/trash/restore/delete.
 5. Testar separadamente o intake externo sem licença.

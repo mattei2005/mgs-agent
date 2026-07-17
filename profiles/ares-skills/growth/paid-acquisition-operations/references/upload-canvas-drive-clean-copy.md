@@ -36,7 +36,7 @@ Do not use size as the top-level directory. Vertical/operation remains the prima
 
 ## Google Drive auth state
 
-The MGS destination is the Shared Drive `MGS-AGENTS` (`0AEwt4Ye690ocUk9PVA`), administered by `support@matteiservicesinc.com`. Service Account and OAuth modes are valid only when their live preflight confirms access to this `driveId`.
+The MGS destination is the Shared Drive `MGS-AGENTS` (`0AEwt4Ye690ocUk9PVA`), administered by `support@matteiservicesinc.com`. Only the canonical Service Account is valid, and live preflight must confirm access to this `driveId`.
 
 Credentials must remain root-only and never be printed in chat. Drive write scripts should report only sanitized fields:
 
@@ -82,7 +82,7 @@ Report both counts clearly, e.g. `MD5 duplicates=0` can coexist with `normalized
 ## Execution guardrails
 
 - `UPLOAD_CANVAS` remains RAW and unchanged unless Rodolfo explicitly changes the structure and instructs cleanup.
-- Never expose OAuth refresh tokens, client secrets, Service Account JSON, or Drive file IDs unless operationally necessary.
+- Never expose Service Account JSON, access tokens or Drive file IDs unless operationally necessary.
 - Record every upload in an execution report CSV with queue ID, source ID, destination ID, hashes, status, and error if any.
 - Use resumable execution: already uploaded queue IDs should be skipped on rerun.
 - Before starting/resuming a long Drive upload, check for an active executor for the exact same script + queue. Do not run parallel uploaders.

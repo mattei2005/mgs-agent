@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-17T10:22:33-04:00",
+    "updated_at": "2026-07-17T10:24:02-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -506,7 +506,7 @@
         "ares-execute-creative-copy-clean.py",
         "process-revenue-spend-report.py",
         "dtr-sb-page-health-sync.py",
-        "rebuild-sb-restricted-pages-sheet.py",
+        "sb-restricted-transition-monitor.py",
         "meta-app-roles-watch.sh",
         "b011-dtr-link-watch.sh",
         "mgs-offsite-backup.py",
@@ -514,9 +514,12 @@
       ],
       "removed_legacy": [
         "Google OAuth - Ares Drive item permanently deleted by human administrator; active-vault CLI readback confirms absent",
-        "local Ares Google OAuth token/client files",
-        "Ares/Hera OAuth watchdog jobs",
-        "Ares OAuth init/watchdog scripts",
+        "local Ares Google user-token/client files including revoked backup; exact paths absent by readback",
+        "Ares/Hera user-auth watchdog jobs, wrappers and state marked retired",
+        "Ares user-auth init/watchdog scripts",
+        "dormant review-ready retry replaced by fail-closed Service Account tombstone",
+        "obsolete restricted-sheet rebuild replaced by fail-closed canonical-writer tombstone",
+        "generic Google Workspace personal-auth scripts disabled in Zeus, Atena and Ares profiles",
         "mattei2005@gmail.com Shared Drive membership"
       ],
       "validation": {
@@ -537,11 +540,22 @@
         "offsite_isolated_restore": "PASS 4 components duration 56.125s",
         "backup_crons": "4 active exact readback",
         "runtime_legacy_reference_scan": "0",
-        "imagemagick_dependency": "installed and REC/P1 canary exercised"
+        "imagemagick_dependency": "installed and REC/P1 canary exercised",
+        "finance_sheets_canonical_access": "PASS 6/6 Drive and Sheets HTTP 200; canEdit/canModifyContent true",
+        "finance_sheet_write_canary": "PASS write/readback/clear/restore on George July 2026; original blank restored",
+        "all_active_sheets": "PASS 14/14 Drive and Sheets HTTP 200; 5 Shared Drive plus 9 My Drive shared",
+        "cross_profile_google_readiness": "PASS Zeus, Atena and Ares canonical setup adapters",
+        "generic_google_personal_helpers": "PASS fail-closed rc=64 in Zeus, Atena and Ares",
+        "retired_utility_tombstones": "PASS retry and obsolete rebuild rc=64",
+        "active_legacy_residue_scan": "PASS 6415 files; 0 credential values, selectors, local file routes or user-credential code",
+        "scheduler_legacy_scan": "PASS root crontab, 17 Hermes jobs and systemd all zero",
+        "removed_secret_paths": "PASS primary, backup and former profile watchdog wrapper absent",
+        "profile_mirrors": "PASS canonical Google skills, references, SOULs and scripts live equal versioned mirrors",
+        "sb_restricted_transition_dry_run": "PASS 52 publishers, 76 active users, 439 monitored, zero transitions, state_written=false"
       },
       "security_followup": "Resolved: Zeus 1Password service-account token rotated to new identity; old identity deleted; .env mode 0600; required item reads, consumers, backup and restore validated.",
-      "status": "revalidation_gap_detected_action_required",
-      "updated_at": "2026-07-17T09:54:49-04:00",
+      "status": "operational_cutover_complete_service_account_only_verified",
+      "updated_at": "2026-07-17T10:24:32-04:00",
       "checkpoint_id": "google-cloud-mgs-core-cutover-20260717",
       "onepassword_runtime": {
         "service_account_name": "MGS Agent VPS",
@@ -552,11 +566,7 @@
         "env_mode": "0600",
         "required_item_reads": "PASS"
       },
-      "external_pending": [
-        "Share the six current finance Sheets with mgsagent@mgs-core-prod.iam.gserviceaccount.com as Editor, then require Drive and Sheets HTTP 200 readback for all six.",
-        "Confirm deletion of revoked legacy OAuth backup /root/mgs-agent/.secrets/ares-google-drive-oauth-client.json.bak-20260709-reauth; file deletion requires the Critical Subset confirmation.",
-        "Authorize cleanup or retirement of dormant OAuth retry utility and broken obsolete rebuild-sb-restricted-pages-sheet.py before editing scripts."
-      ],
+      "external_pending": [],
       "external_confirmation": {
         "source": "Discord message 1527664566874538034 from Rodolfo Mattei",
         "confirmed_at": "2026-07-17T09:16:33-04:00",
@@ -598,6 +608,18 @@
           "obsolete_rebuild": "BROKEN and unreferenced: rebuild-sb-restricted-pages-sheet.py expects deleted tab GID 232316676 and raises KeyError before write; no cron/job/systemd call site.",
           "generic_oauth_skills": "Atena and Ares include generic Google Workspace OAuth skill, but no Google OAuth runtime files, jobs or profile env selectors exist.",
           "dtr_full_dry_run": "PARTIAL: exact wrapper scanned many accounts with zero reported per-account errors but exceeded 300 seconds before completion; no SB/Sheet write because --apply was absent, and no final report/state write was reached."
+        },
+        "resolution_20260717": {
+          "source_message_id": "1527676950045397103",
+          "authorized_scope": "Update Zeus, Atena and Ares completely and remove the former Google user-auth method to prevent conflicts.",
+          "finance_sharing": "RESOLVED: 6/6 current finance Sheets accessible and editable by the canonical Service Account; write/readback/restore canary PASS.",
+          "credential_cleanup": "RESOLVED: retired active-vault item absent; primary and backup local credential paths absent.",
+          "runtime_cleanup": "RESOLVED: no root cron, Hermes job, systemd unit, active script or config selects the former method.",
+          "skills_and_agents": "RESOLVED: Zeus, Atena and Ares SOULs and Google skills enforce mgs-core-prod Service Account only; generic helpers fail closed; mirrors synchronized.",
+          "obsolete_scripts": "RESOLVED: dormant retry and obsolete rebuild are explicit fail-closed tombstones; current canonical consumers validated.",
+          "state_files": "RESOLVED: former Ares/Hera watchdog states marked retired and point to drive-auth-unified-state.json.",
+          "final_scan": "PASS 6415 active/live/versioned files with zero credential values, legacy selectors, local credential file routes or user-credential code.",
+          "completed_at": "2026-07-17T10:24:32-04:00"
         }
       }
     },
@@ -3027,6 +3049,47 @@
         "mode": "0600",
         "sha256": "9e4862ca3b55ac6ac564cfe8bd40d428f3a69a2309cb59fcfbff24c2192a7df8"
       }
+    },
+    {
+      "id": "sms-funnel-manual-list-019f706e-d680-71c6-af06-20cd594e12a7",
+      "agent": "zeus",
+      "type": "sms_funnel_manual_recovery_list",
+      "status": "active",
+      "name": "Leads 15/07 492",
+      "list_id": "019f706e-d680-71c6-af06-20cd594e12a7",
+      "url": "https://app2.smsfunnel.com.br/#/lists/edit/019f706e-d680-71c6-af06-20cd594e12a7",
+      "source": {
+        "spreadsheet_id": "16eU20O49_CycSZNDmreBMZBs2l1qhIT7ZQbZOuQc0dg",
+        "tab": "diferenca",
+        "occurrence_rows_submitted": 492,
+        "unique_normalized_phones": 428,
+        "local_deduplication": false
+      },
+      "import": {
+        "delete_existing_leads": false,
+        "sanitize": true,
+        "http_success": true,
+        "platform_stored_contacts": 428,
+        "repeated_occurrences_collapsed_by_platform": 64
+      },
+      "validation": {
+        "list_initial_contacts": 0,
+        "actual_leads_endpoint_total": 428,
+        "csv_export_rows": 428,
+        "csv_export_unique_phones": 428,
+        "all_source_unique_phones_present": true,
+        "unexpected_phones": 0,
+        "linked_campaigns_before": 0,
+        "linked_campaigns_after": 0,
+        "messages_sent_by_import": false
+      },
+      "known_platform_anomaly": {
+        "cached_list_leads_count": 856,
+        "actual_contacts": 428,
+        "classification": "cached/double-counted list counter; do not retry import because leads endpoint and export are exact"
+      },
+      "skill_procedure_sha256": "3fb825ee99c06a62ac0f73acdeac894a195483e8c31f6dd53077765e1ee5723c",
+      "updated_at": "2026-07-17T14:23:07.854962+00:00"
     }
   ],
   "profile_skill_references": [
@@ -4582,8 +4645,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/sync-souls.sh",
-      "size_bytes": 5090,
-      "modified_at": "2026-07-17T10:14:10-04:00"
+      "size_bytes": 5595,
+      "modified_at": "2026-07-17T10:22:36-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/track-article-cost.sh",
@@ -7265,8 +7328,8 @@
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 356,
-      "md5": "d067b1f13a9052cf3a89f302f6839e21",
-      "modified_at": "2026-07-17T10:22:01-04:00"
+      "md5": "6e9ab8c1a963c3aceee367db2ac63eaa",
+      "modified_at": "2026-07-17T10:24:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -7288,9 +7351,9 @@
     },
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
-      "size_bytes": 329292,
-      "md5": "56a23619c5cc95a79c0f3cf9380676a9",
-      "modified_at": "2026-07-17T10:21:16-04:00"
+      "size_bytes": 330372,
+      "md5": "ec3c32e69113381881c7a9c36d1be3ee",
+      "modified_at": "2026-07-17T10:23:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -7444,9 +7507,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sms-funnel-balance-state.json",
-      "size_bytes": 2955,
-      "md5": "f9a755303ba9dae5259ebdbab1a66b71",
-      "modified_at": "2026-07-17T09:24:03-04:00"
+      "size_bytes": 3077,
+      "md5": "11a399b0b96f7564fd4c49c0261e88b8",
+      "modified_at": "2026-07-17T10:24:04-04:00"
     },
     {
       "path": "/root/mgs-agent/data/tool-loops-state.json",
@@ -7486,9 +7549,9 @@
     },
     {
       "path": "/root/mgs-agent/data/yoast-health-eggbev-snapshots.json",
-      "size_bytes": 24252,
-      "md5": "f58f293015f5e159f2bc7135d6f2c202",
-      "modified_at": "2026-07-16T10:23:08-04:00"
+      "size_bytes": 24616,
+      "md5": "e0e2a61a6c79c432e01a2fd0201a8a5a",
+      "modified_at": "2026-07-17T10:23:07-04:00"
     },
     {
       "path": "/root/mgs-agent/data/yoast-readability-eggbev-snapshots.json",
