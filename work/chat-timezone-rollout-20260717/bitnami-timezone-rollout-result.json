@@ -1,0 +1,26 @@
+{
+  "backup_root": "/root/mgs-agent-backups/chat-timezone-rollout/20260717T033022Z",
+  "sites": [
+    {
+      "domain": "cliquet.com",
+      "ok": true,
+      "version": "0.4.2",
+      "status": "active",
+      "manager": "G002",
+      "sha256": "f61264ce8d790c34d546746ae93fda082ee06beaca6ae3d4a0ea573aa766e414",
+      "backup": "/root/mgs-agent-backups/chat-timezone-rollout/20260717T033022Z/cliquet.com/mgs-chat-funnels.php",
+      "smoke": {
+        "ok": true,
+        "status": "ok:G002",
+        "row_restored": true,
+        "before": 0,
+        "after": 0,
+        "mocked_outbound": true,
+        "timezone": "America/Sao_Paulo",
+        "start": "2026-07-15 03:00:00",
+        "end_exclusive": "2026-07-16 03:00:00",
+        "display": "15/07/2026, 00:00"
+      }
+    }
+  ]
+}

@@ -15,7 +15,7 @@ WORK = ROOT / 'work/chat-timezone-rollout-20260717'
 BASE_MODULE = ROOT / 'work/chat-sms-rollout-20260716/bitnami-rollout.py'
 FINAL_PATH = WORK / 'mgs-chat-funnels-bitnami-inline.php'
 EXPECTED_OLD_SHA = 'b79e64292604d04178f7785cbf24c39c03b94032236e352e10fc1811553ab775'
-EXPECTED_NEW_SHA = '17115575ded0fa48d977cabd3649c7628fc4a720db88bca6ab010ea7e9a55c1e'
+EXPECTED_NEW_SHA = 'f61264ce8d790c34d546746ae93fda082ee06beaca6ae3d4a0ea573aa766e414'
 MANAGERS = {'openzed.com': 'G003', 'cliquet.com': 'G002'}
 BACKUP_ROOT = Path('/root/mgs-agent-backups/chat-timezone-rollout') / datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
 
