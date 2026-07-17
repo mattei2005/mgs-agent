@@ -1,0 +1,55 @@
+{
+  "operation": "MGS plugin business timezone rollout",
+  "authorized_by": "344196393512075265",
+  "source_message_id": "1527511472194850847",
+  "business_timezone": "America/Sao_Paulo",
+  "storage_timezone": "UTC",
+  "range_example": {
+    "local_date": "2026-07-15",
+    "start_utc": "2026-07-15 03:00:00",
+    "end_utc_exclusive": "2026-07-16 03:00:00"
+  },
+  "quiz": {
+    "site": "creditoparaveiculo.com",
+    "plugin": "mgs-quiz-carro",
+    "version": "1.7.7",
+    "hashes": {
+      "mgs-quiz-carro.php": "12fa21fad01e0d7fa7a71a42ae95154c47fa5e31729a4bb31275edf2dd28a0f9",
+      "includes/class-mgs-quiz-admin.php": "3682eca5155181832ecbc5e63da1c50c0827212e35151bfa411869f4e5a3d988",
+      "includes/class-mgs-quiz-csv.php": "e9e9a34546303b14f27d51c435012a749ae937056acf05599466b4951ed79fa4"
+    },
+    "validated_2026_07_15_rows": 6813,
+    "public_http": [200, 200],
+    "backup": "/var/tmp/mgs-production-backups/creditoparaveiculo.com/mgs-quiz-carro-timezone/20260717T032505Z"
+  },
+  "chat": {
+    "plugin": "mgs-chat-funnels",
+    "version": "0.4.2",
+    "runcloud_hashes": {
+      "mgs-chat-funnels.php": "ddd390a604be6df2e295e5d5cd66d2dcbed97fd1af4fb19b094b0cb81cc3268f",
+      "includes/class-mgs-chat-sms.php": "d72ad096a4575674ef74f1b87c1036e2427821bc12b2fe9784514de2c44e9717"
+    },
+    "bitnami_inline_hash": "f61264ce8d790c34d546746ae93fda082ee06beaca6ae3d4a0ea573aa766e414",
+    "sites": [
+      {"domain":"eggbev.com","manager":"G006","mocked_status":"ok:G006","row_count_restored":"9→9","public_http":[200,200],"backup":"/var/tmp/mgs-production-backups/eggbev.com/mgs-chat-funnels-timezone/20260717T032530Z"},
+      {"domain":"newsoun.com","manager":"G005","mocked_status":"ok:G005","row_count_restored":"1→1","public_http":[200,200],"backup":"/var/tmp/mgs-production-backups/newsoun.com/mgs-chat-funnels-timezone/20260717T032554Z"},
+      {"domain":"finance.topfeed.fun","manager":"G004","mocked_status":"ok:G004","row_count_restored":"0→0","public_http":[200,200],"backup":"/var/tmp/mgs-production-backups/finance.topfeed.fun/mgs-chat-funnels-timezone/20260717T032558Z"},
+      {"domain":"wantabrand.com","manager":"G001","mocked_status":"ok:G001","row_count_restored":"0→0","public_http":[200,200],"backup":"/var/tmp/mgs-production-backups-runcloud2/wantabrand.com/mgs-chat-funnels-timezone/20260717T032631Z"},
+      {"domain":"zuout.com","manager":"G002","mocked_status":"ok:G002","row_count_restored":"0→0","public_http":[200,200],"backup":"/var/tmp/mgs-production-backups/zuout.com/mgs-chat-funnels-timezone/20260717T032635Z"},
+      {"domain":"zytiva.com","manager":"G003","mocked_status":"ok:G003","row_count_restored":"0→0","public_http":[200,200],"backup":"/var/tmp/mgs-production-backups/zytiva.com/mgs-chat-funnels-timezone/20260717T032639Z"},
+      {"domain":"openzed.com","manager":"G003","mocked_status":"ok:G003","row_count_restored":"0→0","public_http":[200,200],"backup":"/root/mgs-agent-backups/chat-timezone-rollout/20260717T033002Z/openzed.com/mgs-chat-funnels.php"},
+      {"domain":"cliquet.com","manager":"G002","mocked_status":"ok:G002","row_count_restored":"0→0","public_http":[200,200],"backup":"/root/mgs-agent-backups/chat-timezone-rollout/20260717T033022Z/cliquet.com/mgs-chat-funnels.php"}
+    ],
+    "real_sms_sent_by_validation": 0
+  },
+  "final_scope": "9/9 WordPress installations validated",
+  "rollbacks_during_rollout": [
+    "Quiz first deployed smoke used an incorrect REST probe URL; automatic rollback restored v1.7.6 and exact hashes before corrected redeploy.",
+    "Openzed inline canary exposed the generated config path regression; automatic rollback restored v0.4.1 before regenerating the inline artifact with plugin-root __DIR__/configs."
+  ],
+  "pre_deploy_blockers_without_mutation": [
+    "Quiz full-directory backup could not read an unrelated image directory; switched to a code-only overlay with exact changed-file backups.",
+    "Per-webapp backup root permissions required a separate RunCloud2 backup namespace for wantabrand.com."
+  ],
+  "pre_existing_warning": "creditoparaveiculo.com and wantabrand.com emit a yoast-rest-meta.php mu-plugin permission warning under WP-CLI; it did not block deployment or runtime validation."
+}

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-16T23:28:43-04:00",
+    "updated_at": "2026-07-16T23:36:18-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -1107,14 +1107,14 @@
       "type": "wordpress_plugin",
       "name": "mgs-chat-funnels",
       "path": "/root/mgs-agent/plugins/mgs-chat-funnels/",
-      "version": "0.4.1",
-      "status": "deployed_active_car_generic_offers_and_sms_variant",
+      "version": "0.4.2",
+      "status": "deployed_active_sao_paulo_timezone_8_sites",
       "files_count": 8,
-      "size_bytes": 199231,
-      "sha256_manifest": "88624cd46aef0e7af153516ef49f2302ef349ddd47046f39689387439f979009",
-      "package_path": "/tmp/mgs-chat-funnels-0.4.1-code-only.tar.gz",
-      "package_sha256": "891ebac9a0423656a522aa8bebbe138f665098b0fbf3b3cd71a771ac62152579",
-      "modified_at": "2026-07-16T22:49:29-04:00",
+      "size_bytes": 200923,
+      "sha256_manifest": "76b16dcb801e24656502cb23cc0719708a94e821fba4f1d01e79c925c96215fb",
+      "package_path": "/root/mgs-agent/work/chat-timezone-rollout-20260717/mgs-chat-funnels-0.4.2-code-only.tar.gz",
+      "package_sha256": "abd977bb4352d1a50d5645f945c82a76f9ab5f7addf1424ea14bfad3fedec92d",
+      "modified_at": "2026-07-17T03:37:30.419082+00:00",
       "validations": [
         "local PHP lint, Node syntax and JSON validation OK",
         "RunCloud code-only overlay, plugin/database backups and mocked transactional SMS smoke OK on 6/6 sites",
@@ -1122,7 +1122,11 @@
         "public 16-route matrix OK: legacy and SMS HTTP 200, exact three offers, own-domain targets, UTM hardening and private SMS URLs absent",
         "provider matrix OK: JBF, Wantabrand M2/PubGuru and Zuout ActView preserved",
         "browser Eggbev legacy flow reached all three cards with UTM/fbclid; Eggbev and Zuout SMS forms rendered without CTA provider class before submit",
-        "private six-list SMS catalog exact readback on 8/8 sites; CAR-BR-01-SMS manager map exact on 8/8; mocked transactional status matched assigned G001-G006 on 8/8 with rows restored and no real SMS"
+        "private six-list SMS catalog exact readback on 8/8 sites; CAR-BR-01-SMS manager map exact on 8/8; mocked transactional status matched assigned G001-G006 on 8/8 with rows restored and no real SMS",
+        "Timezone v0.4.2: PHP lint and boundary helper tests OK; UTC storage preserved; filtering/display/CSV use America/Sao_Paulo.",
+        "Final runtime readback 8/8: version 0.4.2, exact canonical hashes on 6 RunCloud and exact inline hash on 2 Bitnami; 16/16 legacy+SMS routes HTTP 200.",
+        "Mocked transactional smoke 8/8 matched assigned G001-G006, intercepted outbound HTTP, and restored the original lead row count; no real SMS was sent.",
+        "Bitnami inline config-path regression fixed and validated: plugin-root __DIR__/configs lookup."
       ],
       "deployed_to": [
         "https://zuout.com/",
@@ -1162,10 +1166,25 @@
         "/root/mgs-agent-backups/chat-sms-rollout/20260717T022116Z/openzed.com/",
         "/root/mgs-agent-backups/chat-sms-rollout/20260717T022143Z/cliquet.com/",
         "/var/backups/mgs-chat-funnels-sms-map/20260717T024612Z/",
-        "/root/mgs-agent-backups/chat-sms-manager-map/20260717T024707Z/"
+        "/root/mgs-agent-backups/chat-sms-manager-map/20260717T024707Z/",
+        "/var/tmp/mgs-production-backups/eggbev.com/mgs-chat-funnels-timezone/20260717T032530Z",
+        "/var/tmp/mgs-production-backups/newsoun.com/mgs-chat-funnels-timezone/20260717T032554Z",
+        "/var/tmp/mgs-production-backups/finance.topfeed.fun/mgs-chat-funnels-timezone/20260717T032558Z",
+        "/var/tmp/mgs-production-backups-runcloud2/wantabrand.com/mgs-chat-funnels-timezone/20260717T032631Z",
+        "/var/tmp/mgs-production-backups/zuout.com/mgs-chat-funnels-timezone/20260717T032635Z",
+        "/var/tmp/mgs-production-backups/zytiva.com/mgs-chat-funnels-timezone/20260717T032639Z",
+        "/root/mgs-agent-backups/chat-timezone-rollout/20260717T033002Z/openzed.com",
+        "/root/mgs-agent-backups/chat-timezone-rollout/20260717T033022Z/cliquet.com"
       ],
-      "source_report": "REPORT-INFRA rollout 1527502930989813761; SMS manager map 1527508400097988691",
-      "description": "CAR-BR legacy chats use the three generic offer cards; separate SMS variants are active only on the same eight sites that already had the CAR chat installed and are linked to the canonical site-specific G001-G006 map. EMP chats were not changed."
+      "source_report": "REPORT-INFRA timezone São Paulo rollout 2026-07-17",
+      "description": "CAR-BR legacy and SMS variants remain active on the same eight sites. v0.4.2 keeps UTC storage and applies America/Sao_Paulo to report filters, day grouping, display and CSV; configs/providers/manager map were preserved.",
+      "business_timezone": "America/Sao_Paulo",
+      "utc_storage_preserved": true,
+      "local_day_utc_example": {
+        "local_date": "2026-07-15",
+        "start_utc": "2026-07-15 03:00:00",
+        "end_utc_exclusive": "2026-07-16 03:00:00"
+      }
     },
     {
       "id": "hermes-mgs-runtime-customizations-2026-06-26",
@@ -1592,28 +1611,28 @@
       "updated_at": "2026-07-10T05:32:59.005815+00:00"
     },
     {
-      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.5-20260714",
+      "id": "creditoparaveiculo-mgs-quiz-carro-1.7.7-20260717",
       "agent": "zeus",
       "type": "wordpress_plugin",
       "site": "creditoparaveiculo.com",
       "host": "RunCloud Inc02",
       "path": "/home/runcloud2/webapps/creditoparaveiculo/wp-content/plugins/mgs-quiz-carro/",
       "plugin": "mgs-quiz-carro",
-      "version": "1.7.5",
+      "version": "1.7.7",
       "status": "active",
-      "feature": "Quiz car BR + custo/receita/ROI SMS + calendário de período + correção responsiva do modelo FMYBC/SMS e carro com fundo transparente",
-      "package_sha256": "05e103e7a19dd796b11f706749a503cf6d3cd095bd1fc1b435bddece678fca5e",
-      "backup_path": "/home/runcloud2/backups/creditoparaveiculo/mgs-quiz-carro-1.7.4-pre-responsive-20260714T184042Z",
+      "feature": "Quiz car BR + custo/receita/ROI SMS + calendário + timezone de negócio America/Sao_Paulo com armazenamento UTC preservado",
+      "package_sha256": "d3625fcd28936c6ce146c91fe2f76c91c5e7d52f276b4a06bd95c5411cddc1c9",
+      "backup_path": "/var/tmp/mgs-production-backups/creditoparaveiculo.com/mgs-quiz-carro-timezone/20260717T032505Z",
       "files": [
         {
           "path": "mgs-quiz-carro.php",
-          "sha256": "5677764cbb2d1e73ae8830566877dad5fa9bbded0d68672090ff0ea8e388bb15",
+          "sha256": "12fa21fad01e0d7fa7a71a42ae95154c47fa5e31729a4bb31275edf2dd28a0f9",
           "bytes": 2579
         },
         {
           "path": "includes/class-mgs-quiz-admin.php",
-          "sha256": "71f6f187e26f7a80ba3d54887104befa3f7ff20684284d2945ccaaf1962f8f1d",
-          "bytes": 97163
+          "sha256": "3682eca5155181832ecbc5e63da1c50c0827212e35151bfa411869f4e5a3d988",
+          "bytes": 99037
         },
         {
           "path": "includes/class-mgs-quiz-activator.php",
@@ -1629,10 +1648,15 @@
           "path": "public/images/polo-transparent.webp",
           "sha256": "491b0eeefa1ed8c776817054fce92937ecc46d85ca1cec3d7b429b99e08863e6",
           "bytes": 185902
+        },
+        {
+          "path": "includes/class-mgs-quiz-csv.php",
+          "sha256": "e9e9a34546303b14f27d51c435012a749ae937056acf05599466b4951ed79fa4",
+          "bytes": 6136
         }
       ],
-      "validation": "PHP lint 7/7; package/live hash readback; plugin ativo v1.7.5; DB car_image_url exato; asset WebP 1124x633 HTTP 200, image/webp, SHA-256 e alpha 0..255 validados; rota pública 200 com CSS v1.7.5; viewports 390px e 360px com scrollWidth=clientWidth e zero overflow visível; inspeção visual confirmou carro completo, centralizado e sem retângulo branco.",
-      "updated_at": "2026-07-14T14:42:27-04:00",
+      "validation": "v1.7.7 lint/local helpers OK; live exact hashes; plugin active; São Paulo 15/07 mapped to UTC [03:00, next-day 03:00) with 6,813 rows; report/display/CSV timezone contract validated; public quiz and REST HTTP 200.",
+      "updated_at": "2026-07-17T03:37:30.419082+00:00",
       "db_version": "1.3.0",
       "sms_revenue_backfill": {
         "table": "wp_mgs_quiz_sms_revenue",
@@ -1661,7 +1685,7 @@
       "report_default_dates": {
         "from": "previous day",
         "to": "previous day",
-        "timezone": "WordPress site timezone",
+        "timezone": "America/Sao_Paulo (plugin business timezone)",
         "explicit_query_dates_preserved": true
       },
       "date_range_picker": {
@@ -1695,8 +1719,17 @@
           360
         ]
       },
-      "source_report": "REPORT-INFRA Zeus quiz FMYBC responsive fix 2026-07-14",
-      "report_infra_discord_message_id": "1526660645813092363"
+      "source_report": "REPORT-INFRA timezone São Paulo rollout 2026-07-17",
+      "report_infra_discord_message_id": "1526660645813092363",
+      "package_path": "/root/mgs-agent/work/mgs-quiz-calendar-177/mgs-quiz-carro-1.7.7.tar.gz",
+      "timezone_reporting": {
+        "business_timezone": "America/Sao_Paulo",
+        "storage_timezone": "UTC",
+        "range_semantics": "half-open UTC boundaries converted from local date",
+        "display_and_csv": "UTC converted to America/Sao_Paulo",
+        "validated_local_date": "2026-07-15",
+        "validated_row_count": 6813
+      }
     },
     {
       "id": "hera-meta-library-persistent-runtime",
@@ -6938,8 +6971,8 @@
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 6456,
-      "md5": "655449126487bb141c89ba1e49b74008",
-      "modified_at": "2026-07-16T23:27:01-04:00"
+      "md5": "7368b82b38772bf0e8d92f3184666dc9",
+      "modified_at": "2026-07-16T23:32:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6974,8 +7007,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 359,
-      "md5": "36864233157f0fcb081b2cf73c45a375",
-      "modified_at": "2026-07-16T23:15:02-04:00"
+      "md5": "9e2b5edd2c9b7534b9717be81654c4ab",
+      "modified_at": "2026-07-16T23:30:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -7028,14 +7061,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 27745,
-      "md5": "7384625ee0108b8627f05ccb671d0651",
-      "modified_at": "2026-07-16T23:25:02-04:00"
+      "md5": "92e1444b20404c2a3d17f4ffd3f49db9",
+      "modified_at": "2026-07-16T23:35:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 357,
-      "md5": "8eab81583f719ea7bf1aedf0722edea8",
-      "modified_at": "2026-07-16T23:28:02-04:00"
+      "md5": "7269adad497a928477f30487f8a6e590",
+      "modified_at": "2026-07-16T23:36:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -7058,8 +7091,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 315133,
-      "md5": "72874b1071d7d4ceb44d613007b49704",
-      "modified_at": "2026-07-16T23:13:20-04:00"
+      "md5": "06f4cc9bd4a1170f5d8581ceb6b92727",
+      "modified_at": "2026-07-16T23:28:52-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -7160,8 +7193,8 @@
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
       "size_bytes": 208550,
-      "md5": "d0686767c6008cc55b3223880541cdca",
-      "modified_at": "2026-07-16T23:14:16-04:00"
+      "md5": "b0c074f2620dc2634ae4cb06f903643f",
+      "modified_at": "2026-07-16T23:29:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
@@ -7203,7 +7236,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "94841a0c722ac90b09f5fb75a2fbb336",
-      "modified_at": "2026-07-16T23:26:01-04:00"
+      "modified_at": "2026-07-16T23:36:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -7237,9 +7270,9 @@
     },
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
-      "size_bytes": 2113,
-      "md5": "fff81f4f5a0c26e261932cd5409e21d2",
-      "modified_at": "2026-07-16T23:25:05-04:00"
+      "size_bytes": 2112,
+      "md5": "ecfacb0d1aebb45fc09d20bda392dbbc",
+      "modified_at": "2026-07-16T23:35:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",

@@ -14,7 +14,14 @@ First MGS WordPress quiz lead funnel migrated from Lovable/Supabase into a first
 
 `creditoparaveiculo.com` usa o plugin de quiz `mgs-quiz-carro`; não há plugin de chat nesse site. Quando Rodolfo disser “chat” informalmente sobre essas URLs, confirmar o produto real no runtime e tratar o pedido como quiz, sem envolver `mgs-chat-funnels`.
 
-Versão validada em produção em 2026-07-14: `mgs-quiz-carro` v1.7.6.
+Versão validada em produção em 2026-07-17: `mgs-quiz-carro` v1.7.7.
+
+Correção de timezone v1.7.7:
+
+- O plugin mantém `created_at` em UTC e usa `America/Sao_Paulo` como timezone de negócio no relatório e no CSV.
+- Datas selecionadas em São Paulo são convertidas para limites UTC semiabertos antes do SQL. Exemplo validado: `15/07/2026` → `2026-07-15 03:00:00` até, sem incluir, `2026-07-16 03:00:00`.
+- Gráficos agrupam por data local de São Paulo; tabelas e CSV convertem os timestamps UTC para São Paulo na apresentação.
+- Readback histórico validado: o período local de 15/07 contém 6.813 linhas; rotas públicas e REST permaneceram HTTP 200.
 
 Correção do filtro de período v1.7.6:
 
@@ -139,14 +146,20 @@ Redirect split UI should be business-facing:
 
 The site option `timezone_string=America/Sao_Paulo` controls WordPress application clocks such as `wp_timezone()`, `current_time()`, default report dates, and the General Settings display. It does not automatically change MySQL `CURRENT_TIMESTAMP`.
 
-Live contract observed on `creditoparaveiculo.com` v1.7.6:
+Historical pre-fix contract observed on `creditoparaveiculo.com` v1.7.6:
 
 - MySQL session/global use `SYSTEM`, and the server system timezone is UTC; therefore `NOW()` equals `UTC_TIMESTAMP()`.
 - `wp_mgs_quiz_leads.created_at` is declared `DEFAULT CURRENT_TIMESTAMP`.
 - The REST insert omits `created_at`, so MySQL stores UTC.
-- The report chooses the default date using `wp_timezone()` but compares raw local-looking strings such as `YYYY-MM-DD 00:00:00` directly against the UTC column. This creates a three-hour boundary mismatch for São Paulo.
+- The old report chose the default date using `wp_timezone()` but compared raw local-looking strings such as `YYYY-MM-DD 00:00:00` directly against the UTC column, creating a three-hour boundary mismatch for São Paulo.
 
-Do not fix this by beginning to write local timestamps into the existing UTC column, because that would mix historical and new semantics. The safe correction is to keep UTC storage, convert selected São Paulo day boundaries to UTC before SQL, and convert UTC timestamps back to the WordPress timezone for display/export. Validate totals across both midnight boundaries before using dashboard subtraction as an SMS reconciliation source.
+Current contract from v1.7.7:
+
+- UTC storage is preserved; never rewrite historical timestamps or begin storing local values in the same column.
+- The plugin business timezone is explicitly `America/Sao_Paulo` for date defaults, filtering, grouping, display, and CSV.
+- Selected local days become UTC half-open ranges (`>= start`, `< next-day start`).
+- Display/export converts UTC back to São Paulo.
+- Validation must cover both midnight boundaries before using dashboard subtraction as an SMS reconciliation source.
 
 ## SMS Cost Reporting
 
