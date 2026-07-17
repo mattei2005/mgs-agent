@@ -41,7 +41,7 @@ The MGS destination is the Shared Drive `MGS-AGENTS` (`0AEwt4Ye690ocUk9PVA`), ad
 Credentials must remain root-only and never be printed in chat. Drive write scripts should report only sanitized fields:
 
 ```text
-auth_mode: oauth_user or service_account
+auth_mode: service_account
 storage: shared_drive
 drive_id: 0AEwt4Ye690ocUk9PVA
 folder_path: MGS-AGENTS/CRIATIVOS

@@ -51,6 +51,15 @@ for skill in meta-utility-template-approval meta-app-rate-limit-monitor segurado
     fi
 done
 
+# Zeus: canonical productivity workspace router with MGS Google fail-closed adapters.
+if [ -d "$PROFILES_DIR/zeus/skills/productivity/productivity-workspace-apis" ]; then
+    mkdir -p "$TARGET_DIR/zeus-skills/productivity"
+    rsync -a --delete \
+        "$PROFILES_DIR/zeus/skills/productivity/productivity-workspace-apis/" \
+        "$TARGET_DIR/zeus-skills/productivity/productivity-workspace-apis/" \
+        && echo "$(date -Iseconds) synced zeus skills/productivity/productivity-workspace-apis"
+fi
+
 # Atena: wordpress/ + devops/ (skills WP e deploy MGS-específicas)
 mkdir -p "$TARGET_DIR/atena-skills"
 for category in wordpress devops; do

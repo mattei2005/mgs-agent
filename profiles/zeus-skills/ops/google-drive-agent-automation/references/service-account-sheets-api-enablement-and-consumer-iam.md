@@ -48,9 +48,9 @@ Do not enable Cloud Resource Manager merely to call `testIamPermissions` during 
 4. Read back the exact sentinel.
 5. Restore the exact original state (clear only if the original cell was blank).
 6. Read back again and require exact restoration.
-7. Add a selectable `oauth`/`service_account` auth mode to consumers while keeping OAuth as the default during staging.
-8. Switch one consumer at a time, run its exact dry-run/apply path, and validate external Sheet/state readback.
-9. Keep OAuth as rollback. Revocation or deletion of its refresh token is a separate credential-critical confirmation.
+7. Convert each consumer directly to the shared Service Account helper and reject every selector other than `service_account`.
+8. Validate each consumer with metadata, bounded canary, restoration and external readback.
+9. Do not retain an alternate authentication route; rollback uses code/config backup while the canonical credential remains the only runtime identity.
 
 ## Reporting
 
@@ -62,4 +62,4 @@ Report each layer independently:
 - Service Usage Consumer IAM: pass/fail;
 - canary write/readback/restore: pass/fail;
 - active consumers switched: count;
-- OAuth retained as rollback: yes/no.
+- Alternate user authentication retained: no; production is Service Account only.

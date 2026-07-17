@@ -1,6 +1,6 @@
 # Cross-agent Google Sheets inventory and Shared Drive cutover
 
-Use when Rodolfo wants to remove personal Google OAuth dependencies by moving only MGS operational spreadsheets used by agents into an enterprise Shared Drive.
+Use when Rodolfo wants to eliminate personal Google dependencies by regularizing only MGS operational spreadsheets used by agents under the canonical Service Account and enterprise Shared Drive architecture.
 
 ## Scope boundary
 
@@ -24,7 +24,7 @@ Treat session imports, backups, one-off work directories, retired staff sheets, 
    - Sheets API endpoints;
    - dynamic IDs loaded from approved config/1Password without exposing values.
 4. Run a broader secondary scan over work/history and classify those hits separately.
-5. For every candidate ID, query Drive `files.get` with user OAuth and Service Account using `supportsAllDrives=true`. Record only non-secret metadata:
+5. For every candidate ID, query Drive `files.get` and Sheets `spreadsheets.get` with the canonical Service Account using `supportsAllDrives=true`. Record only non-secret metadata:
    - name and MIME type;
    - `driveId` present/absent;
    - trashed/404 state;
@@ -51,7 +51,7 @@ For the approved cutover:
 5. If ownership/domain restrictions require a copy, treat it as an ID-changing migration: backup/export first, copy one canary, update every route, and retain rollback mapping `old_id -> new_id`.
 6. Migrate one workflow/agent block at a time. Start with a low-risk canary, then run the exact consumer: token/JWT probe -> bounded dry-run -> apply -> Sheet/state readback.
 7. For finance sheets, validate all `IMPORTRANGE` relationships and cross-sheet tab-name parity; a visually intact sheet is not enough.
-8. Keep personal OAuth available as rollback until every affected script, cron, on-demand procedure, and external report passes. Remove/revoke it only under the credential Critical Subset confirmation.
+8. Keep the previous file IDs and formulas as rollback evidence, not a previous authentication route. Every affected script, cron, on-demand procedure and external report must pass on the canonical Service Account before closure.
 9. Update canonical context, IDs/configs, inventory, checkpoint, audit, and REPORT-INFRA after each authorized block.
 
 ## Executive reporting pattern
@@ -63,4 +63,4 @@ Report concise grouped counts, followed by clickable names:
 - `Historical/retired — owner decision`
 - `Stale/inaccessible`
 
-State explicitly: files moved, files not moved, Service Account coverage, remaining personal OAuth dependency, and the next authorization gate.
+State explicitly: files moved, files not moved, Service Account coverage, confirmation that no alternate authentication route remains, and any file-permission follow-up.

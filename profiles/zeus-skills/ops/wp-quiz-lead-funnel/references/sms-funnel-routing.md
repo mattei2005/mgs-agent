@@ -116,3 +116,15 @@ If the requested quantity is only an aggregate dashboard subtraction and does no
 3. Do not fabricate, pad, or arbitrarily select contacts to reach the aggregate number.
 4. Ask only the single scope-changing question genuinely required by the mismatch; do not debate the instruction or repeat a long rationale.
 5. If Rodolfo explicitly authorizes an arbitrary selection despite the mismatch, record that changed selection rule and execute it as instructed, while keeping the list unattached to automation unless sending was also authorized.
+
+## SMS Funnel list import readback
+
+When importing an occurrence-level cohort into a manual SMS Funnel list:
+
+1. Preflight the exact destination list and confirm there is no linked campaign/automation unless sending was also authorized.
+2. Submit every requested source occurrence without local deduplication, with `delete_leads=false` unless Rodolfo explicitly asked to replace existing contacts.
+3. Expect SMS Funnel to collapse repeated phones at contact storage: 492 submitted occurrence rows may become 428 actual list contacts when there are 428 unique normalized phones.
+4. Do not trust `GET /api/lists/{id}.leads_count` as the sole readback. It can be stale or double-counted after import (observed `856` while both the paginated leads endpoint and CSV export contained exactly `428`).
+5. Validate actual storage with both `GET /api/lists/{id}/leads` pagination `total` and `POST /api/leads/export/{id}`, then compare normalized source/export phone sets.
+6. Never retry an import automatically merely because cached `leads_count` disagrees. First reconcile the leads endpoint and export; a retry can duplicate contacts or distort the cached counter.
+7. Recheck linked campaigns after import and report explicitly that no message was sent when the list remained unattached.

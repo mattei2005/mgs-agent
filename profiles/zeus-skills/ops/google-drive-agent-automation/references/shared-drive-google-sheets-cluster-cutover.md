@@ -36,7 +36,7 @@ Use this when the business goal is authentication durability rather than organiz
 4. Change scripts from personal OAuth to Service Account authentication.
 5. Run affected crons/runners and compare formulas/values to the baseline.
 6. Keep file IDs, tabs, formulas, and My Drive ownership unchanged.
-7. Retain personal OAuth only as rollback until all consumers pass; remove it under the credential gate later.
+7. Remove every alternate authentication selector only after the canonical consumer passes; rollback is code/config restoration, not a second credential.
 
 This removes refresh-token revocation risk from automation while avoiding a formula cutover.
 
@@ -49,9 +49,9 @@ Treat permission rollout and runtime-auth cutover as separate transactions:
 3. Read back the permission through the owner identity and require: target permission present, role `writer`, Service Account Drive HTTP 200, `canEdit=true`, and `canModifyContent=true`.
 4. Only then apply the same idempotent check/create/readback loop to the rest of the dependency closure. Skip an already-correct permission rather than creating duplicates.
 5. Re-read every operational/reference Sheet through the Service Account Drive identity and compare the current-period formula counts and formatted-error baseline through the still-working reader. Permission changes must not change file IDs, tabs, formulas, or values.
-6. Probe `spreadsheets.get` with a Service Account token. If Drive succeeds but Sheets returns 403 because `sheets.googleapis.com` is disabled, permission rollout succeeded but the authentication cutover is **not complete**. Keep production on OAuth until an administrator enables the API.
+6. Probe `spreadsheets.get` with the canonical Service Account token. If Drive succeeds but Sheets returns 403 because `sheets.googleapis.com` is disabled, enable the API in `mgs-core-prod` and keep the same identity; do not switch production to another credential.
 7. After Sheets HTTP 200, use an unused, unprotected cell for a bounded sentinel: capture original formula/value, write a unique marker, read it back, restore/clear to the exact original state, and read back again. Do not use a production formula cell.
-8. Switch consumers one at a time, smoke the exact runner/cron, and retain OAuth only as rollback. Revocation/removal of the OAuth credential requires its own credential gate.
+8. Switch consumers one at a time, smoke the exact runner/cron and remove alternate selectors. Keep rollback in Git/config backup only.
 
 Service Usage diagnosis must distinguish:
 
