@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-07-17T14:29:49Z",
+  "updated_at": "2026-07-17T14:41:40Z",
   "status": "active_with_hera_model_auth_blocker",
   "authorization": {
     "owner": "Rodolfo Mattei",
@@ -76,6 +76,12 @@
   "rollback": {
     "backup": "/root/.hermes/secure-backups/honcho-native-rollout-20260717T140653Z",
     "protected": true
+  },
+  "report_infra": {
+    "channel_id": "1498132022634483894",
+    "message_id": "1527685869597757652",
+    "content_empty": true,
+    "readback": "pass"
   },
   "runtime_patch": {
     "artifact": "patches/hermes/honcho-provider-shutdown-drain-2026-07-17.patch",
