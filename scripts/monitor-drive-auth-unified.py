@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Unified Google Drive auth watchdog owned by Zeus.
+"""Canonical Google Drive Service Account watchdog owned by Zeus.
 
-Checks local user OAuth every cycle. The 1Password-backed Service Account is a
-fallback and is refreshed at most once per 24h while user OAuth is healthy; it
-is checked immediately if user OAuth fails. Alerts are posted by the local Zeus
-bot, never by a 1Password webhook.
+Validates the 1Password-backed MGS Agent identity against the canonical Shared
+Drive. Personal user OAuth is retired and is not accepted as fallback. Alerts
+are posted by the local Zeus bot, never by a 1Password webhook.
 """
 from __future__ import annotations
 
@@ -24,7 +23,6 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding, rsa
 
 BASE = Path("/root/mgs-agent")
-TOKEN_FILE = Path(os.environ.get("MGS_DRIVE_OAUTH_TOKEN_FILE", str(BASE / ".secrets/ares-google-drive-oauth-client.json")))
 STATE_FILE = Path(os.environ.get("MGS_DRIVE_AUTH_STATE_FILE", str(BASE / "data/drive-auth-unified-state.json")))
 ROOT_ID = os.environ.get("MGS_DRIVE_ROOT_ID", "0AEwt4Ye690ocUk9PVA")
 SA_ITEM = os.environ.get("MGS_DRIVE_SA_ITEM", "Google Service Account - MGS Agent")
@@ -70,39 +68,6 @@ def override_result(name: str) -> dict[str, Any] | None:
     if not isinstance(value, dict):
         raise ValueError(f"{name}_not_object")
     return value
-
-
-def check_user_oauth() -> dict[str, Any]:
-    forced = override_result("MGS_DRIVE_AUTH_USER_RESULT_JSON")
-    if forced is not None:
-        return forced
-    if not TOKEN_FILE.exists():
-        return {"ok": False, "state": "missing_file"}
-    try:
-        creds = json.loads(TOKEN_FILE.read_text())
-        missing = [key for key in ("client_id", "client_secret", "refresh_token") if not creds.get(key)]
-        if missing:
-            return {"ok": False, "state": "missing_fields"}
-        body = urllib.parse.urlencode(
-            {
-                "client_id": creds["client_id"],
-                "client_secret": creds["client_secret"],
-                "refresh_token": creds["refresh_token"],
-                "grant_type": "refresh_token",
-            }
-        ).encode()
-        status, data = http_json(
-            urllib.request.Request(
-                "https://oauth2.googleapis.com/token",
-                data=body,
-                headers={"Content-Type": "application/x-www-form-urlencoded"},
-            )
-        )
-        if status == 200 and data.get("access_token"):
-            return {"ok": True, "state": "token_ok", "http": status}
-        return {"ok": False, "state": "token_failed", "http": status, "error": data.get("error", "unknown")}
-    except Exception as exc:
-        return {"ok": False, "state": "exception", "error": type(exc).__name__}
 
 
 def load_service_account() -> dict[str, Any]:
@@ -212,7 +177,7 @@ def send_payload(payload: dict[str, Any], dry_run: bool) -> None:
         raise RuntimeError("discord_bot_post_failed")
 
 
-def payload_for(user: dict[str, Any], sa: dict[str, Any], recovered: bool = False) -> dict[str, Any]:
+def payload_for(sa: dict[str, Any], recovered: bool = False) -> dict[str, Any]:
     title = "Drive auth restabelecida" if recovered else "Drive auth indisponível"
     color = 3066993 if recovered else 15158332
     content = "" if recovered else f"<@{RODOLFO_ID}> alerta de autenticação Google Drive"
@@ -224,9 +189,8 @@ def payload_for(user: dict[str, Any], sa: dict[str, Any], recovered: bool = Fals
                 "title": title,
                 "color": color,
                 "fields": [
-                    {"name": "OAuth usuário", "value": str(user.get("state", "unknown")), "inline": True},
                     {"name": "Service Account", "value": str(sa.get("state", "unknown")), "inline": True},
-                    {"name": "Impacto", "value": "Uploads ficam bloqueados apenas se OAuth usuário e Service Account estiverem ambos indisponíveis.", "inline": False},
+                    {"name": "Impacto", "value": "Drive, Sheets e backups MGS ficam bloqueados se a identidade técnica estiver indisponível.", "inline": False},
                 ],
             }
         ],
@@ -237,21 +201,19 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--force-sa", action="store_true")
-    parser.add_argument("--check-user-rollback", action="store_true")
     args = parser.parse_args()
-    if PRIMARY_MODE not in {"service_account", "user_oauth"}:
+    if PRIMARY_MODE != "service_account":
         raise RuntimeError(f"unsupported primary auth mode: {PRIMARY_MODE}")
     now = int(time.time())
     state = load_state()
-    user = check_user_oauth() if PRIMARY_MODE == "user_oauth" or args.check_user_rollback else {"ok": False, "state": "not_checked_rollback"}
     last_sa_check = int(state.get("last_sa_check_ts") or 0)
-    should_check_sa = PRIMARY_MODE == "service_account" or args.force_sa or not user.get("ok") or not state.get("sa_result") or now - last_sa_check >= SA_INTERVAL
+    should_check_sa = args.force_sa or not state.get("sa_result") or now - last_sa_check >= SA_INTERVAL
     if should_check_sa:
         sa = check_service_account()
         last_sa_check = now
     else:
         sa = state.get("sa_result", {"ok": False, "state": "not_checked"})
-    healthy = bool(sa.get("ok")) if PRIMARY_MODE == "service_account" else bool(user.get("ok") or sa.get("ok"))
+    healthy = bool(sa.get("ok"))
     previous_healthy = state.get("healthy")
     last_alert = int(state.get("last_alert_ts") or 0)
     should_alert = not healthy and (previous_healthy is not False or now - last_alert >= REMIND_INTERVAL)
@@ -260,23 +222,21 @@ def main() -> int:
     new_state = {
         "last_check_ts": now,
         "healthy": healthy,
-        "user_result": user,
         "sa_result": sa,
         "last_sa_check_ts": last_sa_check,
         "last_alert_ts": now if should_alert else last_alert,
-        "primary_credential": "service_account" if PRIMARY_MODE == "service_account" and sa.get("ok") else ("user_oauth" if PRIMARY_MODE == "user_oauth" and user.get("ok") else "none"),
+        "primary_credential": "service_account" if sa.get("ok") else "none",
     }
     if not args.dry_run:
         save_state(new_state)
     if should_alert:
-        send_payload(payload_for(user, sa), args.dry_run)
+        send_payload(payload_for(sa), args.dry_run)
     elif should_recover:
-        send_payload(payload_for(user, sa, recovered=True), args.dry_run)
+        send_payload(payload_for(sa, recovered=True), args.dry_run)
     print(
-        "drive_auth status={} primary={} user={} sa={} sa_checked={} dry_run={}".format(
+        "drive_auth status={} primary={} sa={} sa_checked={} dry_run={}".format(
             "ok" if healthy else "fail",
             PRIMARY_MODE,
-            user.get("state", "unknown"),
             sa.get("state", "unknown"),
             int(should_check_sa),
             int(args.dry_run),

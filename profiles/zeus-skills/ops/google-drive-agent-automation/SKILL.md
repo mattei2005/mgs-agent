@@ -125,6 +125,17 @@ For MGS creative pipelines, prefer Shared Drive when available because it keeps 
 
 ## MGS implementation pattern
 
+Current canonical identity after the 2026-07-17 cutover:
+
+```text
+Google Cloud project       mgs-core-prod
+Service Account            mgsagent@mgs-core-prod.iam.gserviceaccount.com
+1Password item             Google Service Account - MGS Agent
+Canonical Shared Drive     MGS-AGENTS / 0AEwt4Ye690ocUk9PVA
+Runtime auth mode          service_account
+Personal user OAuth        retired; not a fallback
+```
+
 For Ares creative Drive flows, keep raw uploaded assets immutable and upload only cleaned/final copies:
 
 ```text
@@ -134,16 +145,16 @@ Report CSV                  Record source ID, destination ID, hashes, status, er
 Large run                   Resume-safe; skip already uploaded IDs
 ```
 
-Use env overrides rather than hardcoding replacement folder IDs/auth choices when possible:
+Use the canonical env contract rather than hardcoding another identity:
 
 ```text
-ARES_DRIVE_ROOT_FOLDER_ID=<shared-drive-backed MGS-AGENTS/CRIATIVOS folder id>
-ARES_DRIVE_OP_ITEM=<1Password Service Account item title if different>
-ARES_DRIVE_AUTH_MODE=oauth              # when the destination must stay in personal My Drive
-ARES_DRIVE_OAUTH_OP_ITEM="Google OAuth - Ares Drive"
+ARES_DRIVE_ROOT_FOLDER_ID=0AEwt4Ye690ocUk9PVA
+ARES_DRIVE_OP_ITEM="Google Service Account - MGS Agent"
+ARES_DRIVE_AUTH_MODE=service_account
+MGS_GOOGLE_SERVICE_ACCOUNT_ITEM="Google Service Account - MGS Agent"
 ```
 
-If Rodolfo says the folder must stay in his personal Google Drive, stop pushing Shared Drive as the only path. Switch the recommendation to **real-user OAuth** using his current account quota. The durable setup is: OAuth client credentials + refresh token stored in 1Password, script refreshes access tokens at runtime, and the batch still uses the same one-file smoke-test gate before the full run.
+Personal My Drive + real-user OAuth is no longer part of the active MGS architecture. Keep the generic recovery procedure below only for a future explicitly authorized exception; never revive the retired Ares OAuth item or local token files as fallback.
 
 OAuth setup pitfall validated on Google personal Drive: a **TVs and Limited Input devices** client may reject the full Drive scope with `invalid_scope` for device flow:
 
@@ -160,7 +171,7 @@ Operational handling:
 5. If Google approval succeeds but 1Password cannot update the item, save `refresh_token` to a root-only gitignored local secret file and teach the runtime loader to combine `client_id`/`client_secret` from 1Password with that local token.
 6. Keep token handling secret: never paste `client_secret`, `refresh_token`, access token, or authorization URLs containing returned codes into Discord unless the code is explicitly safe/short-lived and the user needs to provide it.
 
-When a Google Drive/Sheets-backed cron uses a local OAuth client token file, reauth must validate the exact runtime path, not a nearby service-account path. MGS example: `meta-app-roles-watch` reads `/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json`; after exchanging the Desktop OAuth code, validate refresh-token exchange, run the cron script itself, and inspect its state (`_sheet_removed_sync`) for real sheet read/write success. If sheet sync fails, treat it as alertable infrastructure failure, not a silent state-only warning.
+The prior MGS local OAuth consumer path was retired in the `mgs-core-prod` cutover. Active scripts must use the canonical Service Account helper and fail closed if `service_account` is not selected. References to the former Ares OAuth filename in incident reports or historical procedures are audit context, not a valid runtime fallback.
 
 Never print Service Account JSON, OAuth refresh tokens, access tokens, client secrets, or 1Password field values. Report only item names and non-secret metadata such as `len=X`.
 
@@ -170,13 +181,14 @@ Never print Service Account JSON, OAuth refresh tokens, access tokens, client se
 - Destination preflight shows whether storage is Shared Drive or My Drive.
 - Smoke test with `--limit 1 --max-errors 1` succeeds before full queue.
 - If blocked, no report CSV/file writes are produced for the attempted run.
-- For OAuth watchdog changes: simulate `invalid_grant` with a temp credential file, confirm the alert contains a reauthorization URL/instruction, confirm no `client_secret`/`refresh_token`/`access_token` markers, then run the real healthy watchdog and confirm stdout is empty.
+- Canonical watchdog dry-run reports `primary=service_account` and `sa=root_access_ok`.
+- Every Sheets consumer passes metadata, bounded sentinel write, exact readback and restoration with `mgsagent@mgs-core-prod`.
 - Audit log records the decision and evidence.
 - Report to Rodolfo in concise executive format with `Próximo passo pendente:`.
 
-## OAuth watchdog self-service reauthorization
+## Legacy OAuth recovery — historical exception only
 
-When a Google Drive OAuth watchdog receives `invalid_grant`, do not frame it as fully auto-fixable. Google requires new human consent. The correct durable automation is self-service recovery: generate the Desktop OAuth URL in the alert, ask Rodolfo to approve and paste the final localhost URL/code, exchange it, store the new refresh token in the approved secret location, then validate with the watchdog.
+The former OAuth watchdog and Ares local token files are retired. Do not reauthorize or recreate them during normal MGS operations. The recovery procedure below applies only if Rodolfo explicitly approves a future personal-My-Drive exception with a new scoped credential and separate operational identity.
 
 See `references/drive-oauth-invalid-grant-self-service-reauth.md` for the implementation and smoke-test pattern.
 

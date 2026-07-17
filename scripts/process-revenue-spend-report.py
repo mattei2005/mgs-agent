@@ -39,7 +39,6 @@ if not _google_auth_spec or not _google_auth_spec.loader:
 GOOGLE_AUTH = importlib.util.module_from_spec(_google_auth_spec)
 _google_auth_spec.loader.exec_module(GOOGLE_AUTH)
 
-DEFAULT_TOKEN_FILE = Path('/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json')
 DEFAULT_OUT_ROOT = Path('/root/mgs-agent/work/revenue-spend-reporting')
 GOOGLE_QUOTA_PROJECT: str | None = None
 
@@ -445,22 +444,13 @@ def build_report(input_path: Path, out_dir: Path, fincgriffin_gb_to_us_g006: boo
     return values, audit
 
 
-def access_token(token_file: Path, auth_mode: str | None = None) -> str:
+def access_token(auth_mode: str | None = None) -> str:
     global GOOGLE_QUOTA_PROJECT
     mode = (auth_mode or os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE', 'service_account')).strip().lower()
-    if mode == 'service_account':
-        GOOGLE_QUOTA_PROJECT = GOOGLE_AUTH.service_account_project_id()
-        return GOOGLE_AUTH.service_account_access_token(GOOGLE_AUTH.SHEETS_SCOPE)
-    if mode != 'oauth':
-        raise RuntimeError(f'unsupported Google Sheets auth mode: {mode}')
-    creds = json.loads(token_file.read_text())
-    body = urllib.parse.urlencode({
-        'client_id': creds['client_id'], 'client_secret': creds['client_secret'],
-        'refresh_token': creds['refresh_token'], 'grant_type': 'refresh_token',
-    }).encode()
-    req = urllib.request.Request('https://oauth2.googleapis.com/token', data=body, headers={'Content-Type': 'application/x-www-form-urlencoded'})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.load(r)['access_token']
+    if mode != 'service_account':
+        raise RuntimeError(f'unsupported Google Sheets auth mode after MGS cutover: {mode}')
+    GOOGLE_QUOTA_PROJECT = GOOGLE_AUTH.service_account_project_id()
+    return GOOGLE_AUTH.service_account_access_token(GOOGLE_AUTH.SHEETS_SCOPE)
 
 
 def sheets_api(method: str, url: str, token: str, data: Any = None) -> Any:
@@ -477,8 +467,8 @@ def sheets_api(method: str, url: str, token: str, data: Any = None) -> Any:
         raise RuntimeError(f'HTTP {e.code}: {e.read().decode(errors="ignore")[:1500]}') from e
 
 
-def upload_to_sheet(values: dict[str, list[list[Any]]], sheet_id: str, token_file: Path, auth_mode: str | None = None) -> dict[str, int]:
-    token = access_token(token_file, auth_mode)
+def upload_to_sheet(values: dict[str, list[list[Any]]], sheet_id: str, auth_mode: str | None = None) -> dict[str, int]:
+    token = access_token(auth_mode)
     meta = sheets_api('GET', f'https://sheets.googleapis.com/v4/spreadsheets/{sheet_id}?fields=sheets(properties(sheetId,title))', token)
     existing = {s['properties']['title']: s['properties']['sheetId'] for s in meta.get('sheets', [])}
     keep = list(values.keys())
@@ -543,8 +533,7 @@ def main() -> int:
     ap.add_argument('--input', required=True, type=Path)
     ap.add_argument('--sheet-id', help='Google Sheet ID to upload. If omitted, only local files are generated.')
     ap.add_argument('--out-dir', type=Path, help='Local audit/output directory.')
-    ap.add_argument('--token-file', type=Path, default=DEFAULT_TOKEN_FILE)
-    ap.add_argument('--auth-mode', choices=('oauth', 'service_account'), default=os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE', 'service_account'))
+    ap.add_argument('--auth-mode', choices=('service_account',), default=os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE', 'service_account'))
     ap.add_argument('--preflight', action='store_true', help='Only inspect workbook structure; do not build/upload.')
     ap.add_argument('--fincgriffin-gb-to-us-g006', action='store_true', help='Cycle-specific override: reassign fincgriffin _gb to us-car-en/g006-d.')
     args = ap.parse_args()
@@ -559,7 +548,7 @@ def main() -> int:
         raise SystemExit('Reconciliação falhou; upload bloqueado')
     result = {'ok': True, 'audit': audit}
     if args.sheet_id:
-        result['readback_counts'] = upload_to_sheet(values, args.sheet_id, args.token_file, args.auth_mode)
+        result['readback_counts'] = upload_to_sheet(values, args.sheet_id, args.auth_mode)
         result['url'] = f'https://docs.google.com/spreadsheets/d/{args.sheet_id}/edit'
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0

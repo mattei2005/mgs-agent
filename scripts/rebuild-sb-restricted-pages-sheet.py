@@ -11,7 +11,6 @@ if not _google_auth_spec or not _google_auth_spec.loader:
 GOOGLE_AUTH=importlib.util.module_from_spec(_google_auth_spec)
 _google_auth_spec.loader.exec_module(GOOGLE_AUTH)
 
-TOKEN_FILE=pathlib.Path('/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json')
 AUTH_MODE=os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE','service_account').strip().lower()
 SHEET_ID='1sTkBE6RQPQ3obq1j6m8RSu_22beEUbZjkQ-OttI01XY'; GID=232316676
 STATE_PATH=pathlib.Path('/root/mgs-agent/data/sb-restricted-pages-monitor.json')
@@ -21,14 +20,9 @@ COLS=8
 ROWS_CLEAR=200
 
 def token():
-    if AUTH_MODE=='service_account':
-        return GOOGLE_AUTH.service_account_access_token(GOOGLE_AUTH.SHEETS_SCOPE)
-    if AUTH_MODE!='oauth':
-        raise RuntimeError(f'unsupported Google Sheets auth mode: {AUTH_MODE}')
-    c=json.loads(TOKEN_FILE.read_text())
-    body=urllib.parse.urlencode({'client_id':c['client_id'],'client_secret':c['client_secret'],'refresh_token':c['refresh_token'],'grant_type':'refresh_token'}).encode()
-    req=urllib.request.Request('https://oauth2.googleapis.com/token',data=body,headers={'Content-Type':'application/x-www-form-urlencoded'})
-    with urllib.request.urlopen(req,timeout=30) as r: return json.load(r)['access_token']
+    if AUTH_MODE!='service_account':
+        raise RuntimeError(f'unsupported Google Sheets auth mode after MGS cutover: {AUTH_MODE}')
+    return GOOGLE_AUTH.service_account_access_token(GOOGLE_AUTH.SHEETS_SCOPE)
 ACCESS=token()
 
 def api(method,url,data=None):
