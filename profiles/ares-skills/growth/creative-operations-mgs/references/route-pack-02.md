@@ -55,12 +55,13 @@ O mesmo pedido Discord pode chegar a mais de uma sessão, e dois fluxos podem ob
 5. Só montar um novo plano para o subconjunto restante quando houver evidência de que não existe execução ativa nem conclusão registrada. Sempre gerar snapshot fresco; nunca reutilizar CSV stale para write.
 6. O lock cobre a seção crítica desde o re-scan até inventário/report final. Liberar em `finally`/trap mesmo em erro.
 
-### Fonte canônica do OAuth Drive
+### Fonte canônica do Google Drive
 
-- O runtime de write usa `/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json` como cache combinado canônico (`client_id`, `client_secret`, `refresh_token`), a mesma fonte validada pelo watchdog.
-- `/root/mgs-agent/.secrets/ares-google-drive-oauth.json` é fallback legado de refresh token e só pode ser usado quando o cache canônico não tiver `refresh_token`; nunca deve sobrescrever silenciosamente um token canônico saudável.
-- Se o write retornar `invalid_grant`, comparar as fontes apenas por presença/igualdade interna, sem imprimir token ou hash. Se o watchdog canônico der HTTP 200 e o runner falhar, investigar precedência de cache antes de pedir nova autorização ao usuário.
-- Após correção, validar: refresh HTTP 200, escopo Drive completo, GET de arquivo real e PATCH controlado + GET/readback sem alterar conteúdo.
+- Projeto: `mgs-core-prod`.
+- Identidade: `mgsagent@mgs-core-prod.iam.gserviceaccount.com`.
+- 1Password: `Google Service Account - MGS Agent`.
+- Runtime: `ARES_DRIVE_AUTH_MODE=service_account`; OAuth pessoal não é fallback.
+- Após correção, validar token, GET de arquivo real, PATCH controlado + GET/readback e Shared Drive `MGS-AGENTS`.
 
 Estrutura de referência por vertical/operação. `CC_US_ES` é exemplo/piloto; outras verticais devem ser organizadas na pasta correta do Drive:
 

@@ -83,12 +83,12 @@ Google Sheet sync:
 Sheet        Migracao 22/06 (gid 542936436)
 Column       A / Removidos acumulado
 Behavior     Full reconciliation every run: rows with NO APP + Segurador/USUARIO that are absent from current Meta /roles get X; rows present in Meta roles are cleared. cumulative_removed is context/history, not the primary source for X.
-Auth         Prefer /root/mgs-agent/.secrets/ares-google-drive-oauth-client.json OAuth token; fallback to Google Service Account - Ares Drive only if configured. The service account project may have Sheets API disabled, so validate the cron's actual OAuth path before concluding the sheet is broken.
+Auth         Canonical Service Account only: item `Google Service Account - MGS Agent`, project `mgs-core-prod`. Personal OAuth fallback was retired on 2026-07-17.
 Write policy Update A2:A{last_row} only when desired values differ, to avoid unnecessary writes every 2 minutes.
 Alerting     Sheet read/write failure is CRITICAL: send Discord alert with Rodolfo mention, sheet ID, GID, auth mode, sanitized error, and cooldown. Do not only store `_sheet_removed_sync.error` in state.
 ```
 
-If Rodolfo asks to reauthenticate Google for this cron, use the Desktop OAuth helper from `google-drive-agent-automation`: generate URL with `/root/mgs-agent/scripts/ares-google-drive-oauth-desktop-init.py`, exchange the pasted localhost URL/code, then validate by running the actual `meta-app-roles-watch.sh` script and reading `_sheet_removed_sync` from `/root/mgs-agent/data/meta-app-role-monitor-state.json`. See `references/meta-app-roles-sheet-sync-oauth-alerting-2026-07-02.md`.
+If Google auth fails for this cron, validate the canonical Service Account item, `roles/serviceusage.serviceUsageConsumer`, Sheets metadata, sentinel write/readback/restore and `_sheet_removed_sync`. Do not recreate the retired Ares OAuth files.
 
 Implementation rules:
 

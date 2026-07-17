@@ -91,10 +91,11 @@ Jeann Carlos Brandão   present 139/196, missing 57
 
 ## Google Sheets export pattern
 
-Use the OAuth client at:
+Use the canonical MGS Service Account through:
 
 ```text
-/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json
+1Password item: Google Service Account - MGS Agent
+Project: mgs-core-prod
 ```
 
 Write tabs by title through Sheets API, but when the user gives a `gid`, resolve `gid -> sheet title` first:

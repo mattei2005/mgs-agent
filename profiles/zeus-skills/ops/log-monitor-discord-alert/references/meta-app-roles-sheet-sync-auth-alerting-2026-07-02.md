@@ -8,7 +8,11 @@ Use when maintaining the `meta-app-roles-watch` cron/Hermes job, the B001–B010
 
 Do not silently swallow migration-sheet sync failures. If the monitor can read Meta app roles but cannot read/write the Google Sheet, Rodolfo must receive an alert; otherwise the cron appears healthy while the sheet and downstream identity mapping are stale.
 
-## Validated auth reality
+## Historical auth reality — superseded 2026-07-17
+
+This section records the former working path for audit only. The active architecture now uses `mgsagent@mgs-core-prod.iam.gserviceaccount.com` through item `Google Service Account - MGS Agent`; personal OAuth and its local token files are retired.
+
+## Former validated state
 
 The monitor's working path is OAuth, not the Ares Drive service account:
 
