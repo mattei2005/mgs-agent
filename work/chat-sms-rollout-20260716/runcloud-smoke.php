@@ -16,6 +16,10 @@ if (!class_exists('MGS_Chat_SMS')) {
 global $wpdb;
 $table = $wpdb->prefix . 'mgs_chat_leads';
 $before = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$table}");
+$expected_manager = strtoupper((string) getenv('MGS_EXPECT_MANAGER'));
+if (!preg_match('/^G00[1-6]$/', $expected_manager)) {
+    $expected_manager = 'G006';
+}
 
 $mock = static function ($preempt, $args, $url) {
     if (is_string($url) && strpos($url, 'v2.smsfunnel.com.br/integrations/lists/') !== false) {
@@ -50,7 +54,7 @@ $lead_id = isset($data['lead_id']) ? (int) $data['lead_id'] : 0;
 $inserted_status = $lead_id ? (string) $wpdb->get_var($wpdb->prepare("SELECT sms_funnel_status FROM {$table} WHERE id=%d", $lead_id)) : '';
 $deleted = $lead_id ? $wpdb->delete($table, array('id' => $lead_id), array('%d')) : false;
 $after = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$table}");
-$ok = !empty($data['ok']) && $inserted_status === 'ok:G006' && $deleted === 1 && $before === $after;
+$ok = !empty($data['ok']) && $inserted_status === 'ok:' . $expected_manager && $deleted === 1 && $before === $after;
 
 $result = array(
     'ok' => $ok,
