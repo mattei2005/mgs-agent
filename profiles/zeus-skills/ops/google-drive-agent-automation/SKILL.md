@@ -56,24 +56,19 @@ Required checks:
 
 ## Standard diagnostic sequence
 
-For Hera/MGS quick checks, run the profile watchdog before deeper Drive debugging:
+For the current MGS architecture, run the canonical Zeus Service Account watchdog before deeper Drive debugging:
 
 ```bash
-python3 /root/.hermes/profiles/hera/scripts/drive-auth-watchdog.py
-python3 - <<'PY'
-import json, datetime
-p='/root/mgs-agent/data/hera/drive-auth-watchdog-state.json'
-d=json.load(open(p)); s=d.get('signature',{})
-print('healthy:', d.get('healthy'))
-print('primary_credential:', d.get('primary_credential'))
-print('fallback_degraded:', d.get('fallback_degraded'))
-print('user:', s.get('user_ok'), s.get('user_state'), s.get('user_http'), s.get('user_error'))
-print('service_account:', s.get('sa_ok'), s.get('sa_state'), s.get('sa_http'))
-print('last_check:', datetime.datetime.fromtimestamp(d.get('last_check_ts')).isoformat() if d.get('last_check_ts') else None)
-PY
+python3 /root/mgs-agent/scripts/monitor-drive-auth-unified.py --dry-run --force-sa
 ```
 
-Interpretation: empty stdout from `drive-auth-watchdog.py` is the healthy/silent path. Hera operational health means at least one real upload credential works. For personal My Drive destinations, Service Account may show folder capabilities but still be blocked for upload (`my_drive_sa_upload_blocked` / `storageQuotaExceeded_risk`); in that case `user_ok=true`, `token_ok`, and `primary_credential=user_oauth` is healthy. If OAuth is `invalid_grant`, generate/send the reauthorization link immediately instead of making Rodolfo ask. If the user asks “Drive auth is OK, right?”, answer from this watchdog/state rather than inferring from absence of logs.
+Expected healthy summary:
+
+```text
+drive_auth status=ok primary=service_account sa=root_access_ok sa_checked=1 dry_run=1
+```
+
+Interpretation: `service_account` is the only active MGS Drive/Sheets runtime mode. A missing/failed canonical credential is an infrastructure failure; do not fall back to the retired Hera/Ares OAuth watchdogs or local token files. Inspect `/root/mgs-agent/data/drive-auth-unified-state.json`, then validate the exact blocked consumer with the shared helper, quota-attributed Sheets metadata and a bounded write/readback/restore canary.
 
 1. Identify the auth mode used by the script:
    - Service Account JSON/JWT.
@@ -155,6 +150,8 @@ MGS_GOOGLE_SERVICE_ACCOUNT_ITEM="Google Service Account - MGS Agent"
 ```
 
 Personal My Drive + real-user OAuth is no longer part of the active MGS architecture. Keep the generic recovery procedure below only for a future explicitly authorized exception; never revive the retired Ares OAuth item or local token files as fallback.
+
+For the validated full-project procedure across Drive, Sheets, Gemini authorization keys, IAM, 1Password, canaries, billing gates and destructive cleanup, follow `references/google-cloud-workspace-canonical-cutover.md`.
 
 OAuth setup pitfall validated on Google personal Drive: a **TVs and Limited Input devices** client may reject the full Drive scope with `invalid_scope` for device flow:
 

@@ -79,8 +79,18 @@
       "state": "concluído e ativo: rebuild integral sem backup por instrução explícita; automação de entrada/saída no cron; readback live 440 linhas, 20 abas de site, zero duplicidade; skill, inventário, audit e report-infra 1527426669571215462 validados",
       "thread_id": "1527420530792202281",
       "updated_at": "2026-07-16T21:28:49+00:00"
+    },
+    {
+      "agent": "zeus",
+      "id": "zeus-memory-autocompact-90",
+      "next_step": "Escolher mecanismo seguro, implementar com testes e canário, atualizar política e fechar inventário/audit/REPORT-INFRA",
+      "objective": "Ativar compactação automática real de USER/MEMORY ao atingir 90%, com before/after e limites 3600/6400",
+      "source": "discord:1527558141397700618#1527561880107745290",
+      "state": "escopo confirmado por rodolfo; auditoria técnica em andamento; nenhuma mudança de runtime aplicada ainda",
+      "thread_id": "1527558141397700618",
+      "updated_at": "2026-07-17T06:26:31+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T06:20:54+00:00"
+  "updated_at": "2026-07-17T06:26:31+00:00"
 }
