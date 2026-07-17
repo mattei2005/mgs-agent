@@ -135,6 +135,19 @@ Redirect split UI should be business-facing:
 - The report date UI uses one business-facing `Período` control: two months side by side on desktop, one month on mobile, manual start/end selection, month navigation, Cancelar/Aplicar, and shortcuts for Hoje, Ontem, Últimos 7 dias, Últimos 30 dias, Este mês, Mês anterior, and Personalizado. It continues submitting the canonical `from`/`to` GET fields. Do not add the reference UI's `Compare to` section or 730-day-limit notice. Bind click handlers directly to generated day buttons and directly to preset/navigation controls; do not rely only on delegated bubbling from the popover, because WordPress admin/runtime handlers can prevent the click from reaching the container. Regression QA must click a start day, click an end day, verify both visual classes/summary, click Aplicar, and read back the hidden `from`/`to` values.
 - For `wp eval-file` report smoke tests, do not pass `--skip-plugins`: that prevents `MGS_Quiz_Admin` from loading. Historical smoke SQL must use the exact same date/publisher/domain scope rendered by the report; querying the entire revenue table becomes stale as the daily sync adds newer dates.
 
+### WordPress timezone vs lead-table timestamps
+
+The site option `timezone_string=America/Sao_Paulo` controls WordPress application clocks such as `wp_timezone()`, `current_time()`, default report dates, and the General Settings display. It does not automatically change MySQL `CURRENT_TIMESTAMP`.
+
+Live contract observed on `creditoparaveiculo.com` v1.7.6:
+
+- MySQL session/global use `SYSTEM`, and the server system timezone is UTC; therefore `NOW()` equals `UTC_TIMESTAMP()`.
+- `wp_mgs_quiz_leads.created_at` is declared `DEFAULT CURRENT_TIMESTAMP`.
+- The REST insert omits `created_at`, so MySQL stores UTC.
+- The report chooses the default date using `wp_timezone()` but compares raw local-looking strings such as `YYYY-MM-DD 00:00:00` directly against the UTC column. This creates a three-hour boundary mismatch for São Paulo.
+
+Do not fix this by beginning to write local timestamps into the existing UTC column, because that would mix historical and new semantics. The safe correction is to keep UTC storage, convert selected São Paulo day boundaries to UTC before SQL, and convert UTC timestamps back to the WordPress timezone for display/export. Validate totals across both midnight boundaries before using dashboard subtraction as an SMS reconciliation source.
+
 ## SMS Cost Reporting
 
 Decision confirmed by Rodolfo for this site/report:
