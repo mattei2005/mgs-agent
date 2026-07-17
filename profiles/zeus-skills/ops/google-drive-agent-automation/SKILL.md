@@ -17,6 +17,7 @@ Use this skill when Rodolfo asks Zeus/Ares/Hera/Atena to debug or enable Google 
 - A script needs to choose between My Drive, Shared Drive, or real-user OAuth.
 - A Google Drive folder ID must be validated before a destructive or large write run.
 - A Google Sheet needs column values distributed/updated/colored via API, especially when preserving row grouping by site/bot/gestor matters.
+- Rodolfo wants to inventory and migrate only the operational Sheets used by named MGS agents from personal My Drive into the enterprise Shared Drive, without touching unrelated personal content.
 
 ## Executive rule
 
@@ -202,3 +203,4 @@ Pitfall: a 403 `ACCESS_TOKEN_SCOPE_INSUFFICIENT` from Service Usage is a scope i
 - `references/personal-my-drive-oauth-device-flow.md` — personal Google Drive OAuth setup notes, device-flow `invalid_scope` pitfall, `drive.file` limitation, and Desktop app fallback.
 - `references/drive-oauth-invalid-grant-self-service-reauth.md` — watchdog pattern for `invalid_grant`: auto-generate reauth URL, keep healthy checks silent, validate no secret exposure.
 - `references/google-sheets-balanced-column-distribution.md` — Sheets API pattern for filling/formatting a column while preserving group integrity (e.g. one mailbox per bot/site) and balancing group loads.
+- `references/cross-agent-google-sheets-shared-drive-inventory-and-cutover.md` — inventory only the Sheets actually used by named agents, classify personal/shared/historical/stale, and cut over safely to Service Account + enterprise Shared Drive.

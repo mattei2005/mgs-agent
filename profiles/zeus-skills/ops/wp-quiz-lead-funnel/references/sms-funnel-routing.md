@@ -25,21 +25,23 @@ Preferred resolution order:
 
 ## Status Semantics
 
-- `ok:G003` — SMS Funnel accepted and the lead was routed as G003.
+- `ok:G003` — the SMS Funnel ingestion endpoint returned an application-level success for the G003 route. This is delivery-attempt evidence, not proof that the lead was persisted or is visible in the dashboard.
 - `fail:500` / `fail:4xx` — HTTP failure from SMS Funnel.
-- `error` — WordPress/network/WP_Error failure.
+- `error` — WordPress/network/WP_Error failure. A timeout is indeterminate: the vendor may still have processed the request, so reconcile by phone before classifying the lead as absent.
 - `skipped` — no URL or sending intentionally skipped.
 - `historical_import` — imported into WP reporting only; not sent to SMS Funnel.
+
+The observed success response can expose the routed list as `lead.list_id`, not necessarily as a top-level `list_id`. Parse both shapes when validating the expected destination.
 
 ## Require SMS Success
 
 When enabled:
 
 - WP still saves the lead first.
-- The frontend only confirms/redirects if SMS Funnel returns success.
-- If SMS Funnel fails, frontend shows an error and does not redirect.
+- The frontend only confirms/redirects if the SMS Funnel endpoint returns application-level success.
+- If SMS Funnel returns an explicit failure, the frontend shows an error and does not redirect.
 
-This prevents false-positive conversions during cutover.
+This blocks known submission failures during cutover, but it does **not** prove downstream persistence or dashboard visibility. Reconciliation is still required when the business symptom is a missing lead.
 
 ## Diagnostic Standard
 

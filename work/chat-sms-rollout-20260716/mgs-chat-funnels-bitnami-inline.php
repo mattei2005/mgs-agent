@@ -233,7 +233,7 @@ final class MGS_Chat_SMS {
     private static function config_by_id( $id ) {
         $id = self::normalize_id( $id );
         if ( $id === '' ) return null;
-        $file = dirname( __DIR__ ) . '/configs/' . strtolower( $id ) . '.json';
+        $file = __DIR__ . '/configs/' . strtolower( $id ) . '.json';
         if ( ! is_file( $file ) ) return null;
         $config = json_decode( (string) file_get_contents( $file ), true );
         return is_array( $config ) ? $config : null;
