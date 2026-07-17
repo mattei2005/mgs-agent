@@ -35,7 +35,7 @@ They were prior automations that MGS will not use. Do not inspect, compare, edit
 - Immediate CTA: `✔️ ACCEPT CREDIT CARD` to `fineasier.com`
 - Timed CTAs: 15 unique URLs on `tarjeta.openzed.com`, with `utm_content=drip_us_cc_m1-1` through `m15-1`
 
-## Active readback — after Rodolfo's saved M16 demonstration
+## Historical readback — after Rodolfo's saved M16 demonstration
 
 Rodolfo cloned M15 into M16 and used the global Save during his 2026-07-16 teaching video. Zeus reconciled this as an authorized concurrent change and re-read the live graph afterward:
 
@@ -46,12 +46,28 @@ Rodolfo cloned M15 into M16 and used the global Save during his 2026-07-16 teach
 - M16 inherited M15's message, button label and URL;
 - M16's URL still carries `utm_content=drip_us_cc_m15-1`.
 
-The 82-node state is historical and no longer active. Do not create another M16 on page 1084. This demonstration did not convert the legacy flow to the canonical 28-message schedule.
+The 82-node state and this 87-node state are historical. The demonstration did not convert the legacy flow to the canonical 28-message schedule.
+
+## Active readback — after Zeus M17 pilot
+
+Authorized by Rodolfo in Discord message `1527466861019533434` and independently re-read after Save:
+
+- 92 nodes, all 92 reachable, no disconnected nodes;
+- types: 36 `Text`, 19 `Button`, 18 `New Postback`, 17 `Sequence Single`, 1 `New Sequence`, 1 `Start Bot Flow`;
+- M16 corrected from 11 hours to 12 hours;
+- M17 created at 13 hours;
+- M17 uses a five-node text/button/text branch;
+- M17 preserves M16's message, button label/type and exact URL;
+- added nodes: 346–350;
+- no nodes removed;
+- existing-node diff limited to node 25's added Sequence connection and node 341's timing fields.
+
+This remains a legacy partial flow with M01–M17, not a canonical M01–M28 migration. Do not create duplicate M16 or M17 branches.
 
 ## Review findings to re-check live
 
 - **Legacy language mixing is expected:** historically MGS did not separate EN and ES flows/pages consistently. Therefore an account/page labeled `US-CC-EN` may legitimately contain Spanish timed messages or Spanish UTM naming inherited from the older setup. Do not classify this fact alone as an anomaly or current configuration error. Newer operations are separated more carefully, but legacy pages can remain mixed unless Rodolfo explicitly requests a cleanup/migration.
-- After the demonstrated clone, sixteen message nodes contained zero-width Unicode formatting characters (15 original plus cloned M16 text).
+- After the M17 pilot, seventeen message nodes contained zero-width Unicode formatting characters (15 original plus cloned M16 and M17 texts).
 - M04 used `#LEAD_USER_LAST_NAME#`; most other messages used `#LEAD_USER_FIRST_NAME#`.
 - Visible copy issues included `Chooce`, `asta` where `hasta` was expected, and `sóle`.
 - Advertised limits varied from roughly `$8,700` to `$16,000`.

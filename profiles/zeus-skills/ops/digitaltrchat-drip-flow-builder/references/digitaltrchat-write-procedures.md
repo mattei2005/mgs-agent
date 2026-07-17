@@ -1,6 +1,6 @@
 # DigitalTRChat write procedures — taught video workflow
 
-> Rodolfo taught these procedures by screen recording on 2026-07-16. Visual/audio steps are understood. Rodolfo performed the demonstrated M16 save; Zeus has validated the resulting graph by live readback but has not yet personally executed a production write. The first Zeus write remains a controlled pilot with backup, exact scope and rollback.
+> Rodolfo taught these procedures by screen recording on 2026-07-16. Zeus validated the first production write on the same date: M16 was retimed and M17 was created on page 1084 with backup, dry-run, Save, reload and independent readback. This procedure is now write-validated for narrow, explicitly authorized node edits/clones.
 
 ## A. Get-started Template and No Match Template
 
@@ -94,27 +94,61 @@ Cloning preserves the source branch's values. Explicitly inspect and change ever
 
 Click `Done` after every node edit. Then Save/Ctrl+S, wait for the green success toast, reload and compare the graph to the backup.
 
-## Demonstrated M16 readback — page 1084
+## Historical demonstrated M16 readback — page 1084
 
-The video itself performed and saved the demonstrated clone on `Hortensia Martínez`, internal page ID 1084. Live readback after the video confirmed:
+The video itself performed and saved the demonstrated clone on `Hortensia Martínez`, internal page ID 1084. The immediate live readback after Rodolfo's video confirmed:
 
 - graph grew from 82 to 87 nodes;
-- all 87 nodes are reachable;
-- M16 exists;
-- M16 is connected through a five-node branch;
-- M16 currently uses 11 hours, the same delay as M15;
+- all 87 nodes were reachable;
+- M16 existed;
+- M16 was connected through a five-node branch;
+- M16 used 11 hours at that moment, the same delay as M15;
 - its button/text/URL were inherited from M15;
-- the M16 button URL still contains the M15 destination/UTM suffix `drip_us_cc_m15-1`.
+- the M16 button URL carried the M15 destination/UTM suffix `drip_us_cc_m15-1`.
 
-This is expected as a demonstration clone, not a compliant 28-message migration. Do not create another M16 on page 1084. A later cleanup or migration is a separate scope.
+That state was superseded by the validated Zeus pilot below. The history remains useful as the original before-state.
 
-## First-Zeus-write pilot gate
+## Validated Zeus pilot — page 1084
 
-Before Zeus performs the first real write:
+Authorized by Rodolfo in Discord message `1527466861019533434`:
+
+- M16 changed from 11 hours to 12 hours;
+- M17 created at 13 hours;
+- M17 preserved M16's message, button label/type and exact URL.
+
+Execution evidence:
+
+- before: 87 nodes, all reachable, no M17;
+- dry-run in an unsaved browser session: 92/92 reachable nodes;
+- after Save/Ctrl+S and reload: 92 nodes, all reachable, no disconnected nodes;
+- independent second-session readback confirmed M16=12h and M17=13h;
+- added nodes: 346–350;
+- no removed nodes;
+- only existing nodes changed: node 25 gained the M17 Sequence connection and node 341 changed `promotional`/`promotionalText` from 11h to 12h.
+
+The Rete editor instance is available through an existing node's Vue component, e.g. `.node-id-342.__vue__.editor`. The validated narrow clone implementation used:
+
+1. `editor.getComponent(name).createNode(deepClonedData)`;
+2. regenerate node-level `postbackId`/`uniqueId` values instead of reusing M16 IDs;
+3. `editor.addNode(node)`;
+4. `editor.connect(output, input)` following the canonical five-node topology;
+5. `editor.toJSON()` for unsaved validation;
+6. `Ctrl+S`, reload and independent inspector readback.
+
+This internal editor path is version-sensitive. Re-inspect the Vue/editor surface before future automation; if it drifts, use the taught visual Clone/Done/Save flow instead of guessing.
+
+A first introspection attempt reused a stale browser storage state and timed out before loading `window.data`. The reliable path is a fresh login using the 1Password item in memory, followed by direct builder navigation. Never treat a stale-state timeout as a production change.
+
+## Routine write gate
+
+For every real write:
 
 1. Rodolfo must identify exact account/segurador/Page/flow/template and exact before/after fields.
-2. Zeus must capture backup and sanitized baseline.
-3. No scope expansion during the write.
-4. Use `Done` per node and one global Save only after the diff is complete.
-5. Validate by reload/readback, not toast alone.
-6. On mismatch, stop and restore the backup or exact original fields; do not stack fixes blindly.
+2. Capture backup and sanitized baseline.
+3. Abort on live drift before mutation.
+4. Run an unsaved dry-run and validate node count, reachability, target timing and inherited fields.
+5. No scope expansion during the write.
+6. Use node-level Done or the validated Rete data update, then one global Save.
+7. Validate by reload and an independent second-session readback, not toast alone.
+8. Produce an exact diff of added/removed/changed nodes.
+9. On mismatch, stop and restore the backup or exact original fields; do not stack fixes blindly.

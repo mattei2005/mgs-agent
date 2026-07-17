@@ -1,7 +1,7 @@
 ---
 name: digitaltrchat-drip-flow-builder
 description: Use when Rodolfo asks Zeus to access DigitalTRChat/ChatPion, inspect Bot flow builder or Saved templates, map a DRIP flow's nodes/messages/buttons/delays/URLs, or prepare a safe narrow change without touching delete/install controls.
-version: 1.2.0
+version: 1.3.0
 author: Hermes Agent
 license: MIT
 metadata:
@@ -16,9 +16,9 @@ metadata:
 
 This is the class-level operating skill for safe access, inspection and eventual narrow editing of Messenger flow-builder graphs in DigitalTRChat/ChatPion. It applies across MGS accounts, pages and named flows; account-specific IDs, baselines and review findings belong under `references/`.
 
-Read-only inspection is validated. Rodolfo has now taught the write path for Action Button templates and Flow Builder nodes by video, including node-level `Done`, global Save/Ctrl+S and the success toast. Zeus has validated Rodolfo's saved M16 by live graph readback but has not yet personally executed a production write. The first Zeus write remains a controlled pilot with backup, reload/readback and rollback.
+Read-only inspection and narrow Flow Builder writes are validated. Rodolfo taught the write path by video; Zeus then completed a production pilot on page 1084 with backup, unsaved dry-run, M16 retiming, M17 creation, Save, reload, independent readback and exact node diff.
 
-For the taught write procedures, load `references/digitaltrchat-write-procedures.md` before any mutation.
+For the validated write procedures, load `references/digitaltrchat-write-procedures.md` before any mutation.
 
 For Saved Template reuse, new-Page installation semantics and the future all-segurador link audit, load `references/saved-template-lifecycle-and-portfolio-audit.md`.
 
@@ -154,29 +154,30 @@ Inspect and report:
 
 Completion criterion: every graph node is accounted for by type and every timed branch has a destination or is explicitly reported as disconnected.
 
-## Write Gate — Taught; First Zeus Pilot Pending
+## Write Gate — Validated for Narrow Authorized Writes
 
 Load `references/digitaltrchat-write-procedures.md` before every mutation.
 
-Validated as visual/live evidence:
+Validated paths:
 
 - Action Button settings exposes message, button text/type and URL, committed with `Update`.
-- Each Flow Builder node edit must be committed with its panel's `Done`; clicking away loses that local edit.
-- The whole graph is then committed with top-right `Save` or `Ctrl+S`.
-- A green `Success! Template has been updated successfully.` toast confirms server acceptance.
-- Rodolfo's demonstrated M16 save was confirmed by Zeus through live readback: 87/87 reachable nodes and M16 present.
-
-Not yet validated: a production write personally executed by Zeus plus rollback. Therefore Zeus's first write must be a controlled pilot with exact before/after scope, graph/config backup, reload/readback and rollback path.
+- Flow Builder node edits can be committed with panel `Done`; clicking away loses that local edit.
+- Narrow programmatic node cloning/connection is validated through the live Rete editor after an unsaved dry-run.
+- The whole graph is committed with top-right `Save` or `Ctrl+S`.
+- A green success toast confirms server acceptance; reload and independent inspector readback confirm the real state.
+- Zeus's first production pilot succeeded: M16 11h→12h, M17 created at 13h, 92/92 nodes reachable, exact link preserved and no unrelated node removed/changed.
 
 For every authorized write:
 
 1. identify exact account, segurador, Page ID, flow/template, node/field and before/after value;
-2. capture the original graph/template values;
-3. apply only the named change, using `Done` per Flow Builder node;
-4. use one final Save/Update;
-5. wait for success toast;
-6. reload and prove the intended diff while confirming no unrelated node, connection, delay or URL changed;
-7. restore the original on mismatch.
+2. capture and hash the original graph/template values;
+3. abort on live drift;
+4. run an unsaved dry-run when node topology changes;
+5. apply only the named change;
+6. use one final Save/Update;
+7. reload and run an independent readback;
+8. produce the exact added/removed/changed-node diff;
+9. restore the original on mismatch.
 
 Scope changes require new authorization. Never infer that a changed No Match URL also authorizes changing Drip block 6, or vice versa.
 
@@ -200,5 +201,5 @@ Scope changes require new authorization. Never infer that a changed No Match URL
 - [ ] Node totals and branches accounted for
 - [ ] No credential value logged or persisted
 - [ ] No save/delete action executed during inspection
-- [ ] Any write used the taught Done→Save/Update workflow and was proven by reload/readback
-- [ ] First Zeus production write remained a controlled pilot with rollback
+- [ ] Any write used the validated backup→dry-run→Save/Update→independent-readback workflow
+- [ ] Exact added/removed/changed-node diff recorded and rollback remained available
