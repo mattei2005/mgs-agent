@@ -14,7 +14,7 @@ HONCHO_ALERT_THRESHOLD="${HONCHO_ALERT_THRESHOLD:-2}"
 # a push is sent only if the next 15-min cron still sees Honcho critically unavailable.
 HONCHO_DISCORD_ALERTS="${HONCHO_DISCORD_ALERTS:-1}"
 DRY_RUN="${DRY_RUN:-0}"
-AGENTS=(zeus atena ares)
+AGENTS=(zeus atena ares hera)
 
 log() { echo "[$(date -Iseconds)] ${LOG_PREFIX}: $*"; }
 
@@ -30,7 +30,7 @@ if [[ ! -f "$STATE_FILE" ]]; then
   cat > "$STATE_FILE" <<'JSON'
 {
   "_meta": {
-    "description": "Estado do monitor Honcho MGS. Monitora mgs-memory-copilot para Zeus/Atena/Ares.",
+    "description": "Estado do monitor Honcho MGS. Monitora provider nativo + copilot para Zeus/Atena/Ares/Hera.",
     "threshold": "alert after 2 consecutive non-ok checks by default",
     "anti_spam_hours": 6
   },
@@ -66,6 +66,20 @@ export HONCHO_API_KEY
 
 # Run health checks with the single shared key loaded above.
 for agent in "${AGENTS[@]}"; do
+  set +e
+  native_status="$(/root/.local/bin/hermes -p "$agent" memory status 2>&1)"
+  native_rc=$?
+  set -e
+  if [[ $native_rc -ne 0 ]] \
+    || ! grep -q 'Provider:  honcho' <<<"$native_status" \
+    || ! grep -q 'Status:    available' <<<"$native_status"; then
+    python3 - <<PY >> "$TMP_RESULTS"
+import json
+print(json.dumps({"agent":"$agent","status":"native_provider_unavailable","action_required":"repair_native_provider","session":"n/a","detail":"memory.provider honcho not available"}, ensure_ascii=False))
+PY
+    continue
+  fi
+
   set +e
   output="$(MGS_MEMORY_COPILOT_TIMEOUT_SECONDS="${HONCHO_COPILOT_TIMEOUT_SECONDS:-90}" "${BASE_DIR}/scripts/mgs-memory-copilot" \
     --agent "$agent" \
@@ -239,7 +253,7 @@ else
   if [[ "$PREV_STATUS" == "fail" && "$ALERT_ACTIVE" == "true" ]]; then
     python3 - <<'PY' > "$TMP_RESULTS.payload"
 import json, sys
-payload={"content":"","embeds":[{"title":"Honcho MGS restabelecido","color":3066993,"fields":[{"name":"Status","value":"Zeus/Atena/Ares health checks OK","inline":False}]}]}
+payload={"content":"","embeds":[{"title":"Honcho MGS restabelecido","color":3066993,"fields":[{"name":"Status","value":"Zeus/Atena/Ares/Hera provider nativo + copilot OK","inline":False}]}]}
 json.dump(payload, sys.stdout, ensure_ascii=False)
 PY
     send_discord_payload "$TMP_RESULTS.payload" >/dev/null || log "WARN: Discord resolution failed"

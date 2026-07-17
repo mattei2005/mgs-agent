@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-07-17T14:29:49Z",
+  "status": "active_with_hera_model_auth_blocker",
+  "authorization": {
+    "owner": "Rodolfo Mattei",
+    "source": "discord:1527558141397700618#1527677052541599774",
+    "managed_operational_messages_allowed": true,
+    "credentials_allowed_in_honcho": false
+  },
+  "provider": {
+    "name": "honcho",
+    "mode": "managed",
+    "workspace": "mgs-agents",
+    "package": "honcho-ai",
+    "package_version": "2.2.0",
+    "recall_mode": "hybrid",
+    "save_messages": true,
+    "context_tokens": 1200,
+    "context_cadence": 1,
+    "dialectic_cadence": 5,
+    "dialectic_depth": 1,
+    "write_frequency": "async",
+    "user_peer": "rodolfo",
+    "rodolfo_discord_alias": "344196393512075265",
+    "unknown_user_prefix": "discord_"
+  },
+  "profiles": {
+    "zeus": {
+      "provider_available": true,
+      "ai_peer": "zeus",
+      "native_profile_read": "pass",
+      "full_agent_canary": "pass",
+      "gateway_service": "active"
+    },
+    "atena": {
+      "provider_available": true,
+      "ai_peer": "atena",
+      "native_profile_read": "pass",
+      "full_agent_canary": "pass",
+      "gateway_service": "active"
+    },
+    "ares": {
+      "provider_available": true,
+      "ai_peer": "ares",
+      "native_profile_read": "pass",
+      "full_agent_canary": "pass",
+      "gateway_service": "active"
+    },
+    "hera": {
+      "provider_available": true,
+      "ai_peer": "hera",
+      "native_profile_read": "pass",
+      "full_agent_canary": "blocked_invalid_openai_refresh_token",
+      "gateway_service": "absent"
+    }
+  },
+  "builtin_memory": {
+    "always_active": true,
+    "honcho_models_user_from_messages": true,
+    "native_hook_mirrors_user_add_to_conclusion": true,
+    "native_hook_mirrors_user_replace_or_remove": false,
+    "native_hook_mirrors_memory": false,
+    "autocompactor_role": "residual_only",
+    "capacity_monitor_threshold_percent": 90
+  },
+  "validation": {
+    "honcho_tests": "26_passed",
+    "monitor": "ok_4_of_4",
+    "config_checks": "pass_4_of_4",
+    "live_mirror_config": "equal_4_of_4",
+    "honcho_json_mode": "0600_4_of_4",
+    "restart_performed": false,
+    "existing_session_cutover": "fresh_session_required"
+  },
+  "rollback": {
+    "backup": "/root/.hermes/secure-backups/honcho-native-rollout-20260717T140653Z",
+    "protected": true
+  },
+  "runtime_patch": {
+    "artifact": "patches/hermes/honcho-provider-shutdown-drain-2026-07-17.patch",
+    "guard": "scripts/ensure-hermes-mgs-patches.sh",
+    "purpose": "drain Honcho init, prefetch and async writer threads before short-lived agent exit"
+  }
+}
