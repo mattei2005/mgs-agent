@@ -80,3 +80,15 @@ Do not answer these as the same question:
 WordPress `created_at` is stored as UTC in the observed quiz table, while SMS Funnel daily/message dates are presented by the São Paulo calendar. Convert the business-day interval before comparing; otherwise the raw dashboards cover different three-hour boundaries. Also separate controls created on a prior day, controls from another source, and messages sent on the next day.
 
 The aggregate difference answers only a net counter gap. It does not identify rows that can safely be exported or imported. A recovery list must be built from event-level unmatched submissions, and SMS Funnel list import will deduplicate repeated submissions down to contact-level phones.
+
+## Execution posture for direct recovery-list requests
+
+When Rodolfo directly instructs creation/import of a recovery list, do not turn the task into a routine approval loop. Reconcile the event-level cohort and platform deduplication first, then execute the exact verified scope without extra confirmation when it matches the request.
+
+If the requested quantity is only an aggregate dashboard subtraction and does not identify that many real contacts:
+
+1. Own any earlier mislabeling immediately.
+2. State the verified event count and importable unique-phone count in one concise block.
+3. Do not fabricate, pad, or arbitrarily select contacts to reach the aggregate number.
+4. Ask only the single scope-changing question genuinely required by the mismatch; do not debate the instruction or repeat a long rationale.
+5. If Rodolfo explicitly authorizes an arbitrary selection despite the mismatch, record that changed selection rule and execute it as instructed, while keeping the list unattached to automation unless sending was also authorized.
