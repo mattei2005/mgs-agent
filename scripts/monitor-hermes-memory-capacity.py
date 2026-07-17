@@ -234,6 +234,22 @@ def _failure_payload(profile: str, store: str, before: Dict[str, Any], limit: in
     }
 
 
+def _profile_failure_payload(profile: str, code: str) -> Dict[str, Any]:
+    return {
+        "embeds": [{
+            "title": "Falha no monitor automático de memória",
+            "description": "O profile não pôde ser validado; nenhum store foi compactado.",
+            "color": 0xE74C3C,
+            "fields": [
+                {"name": "Perfil", "value": profile, "inline": True},
+                {"name": "Código", "value": code[:120], "inline": False},
+                {"name": "Ação", "value": "corrigir configuração antes da próxima tentativa", "inline": False},
+            ],
+            "footer": {"text": "MGS · alerta sem conteúdo de memória"},
+        }]
+    }
+
+
 def _queue_event(state: Dict[str, Any], event: Dict[str, Any], now: datetime) -> bool:
     event_id = event["event_id"]
     if any(item.get("event_id") == event_id for item in state["outbox"]):
@@ -367,6 +383,12 @@ def run_monitor(
                 key = f"{profile.name}:{store}"
                 state["stores"][key] = {"status": "error", "error_code": exc.code, "checked_at": _iso(now)}
             summary["failure_count"] += 1
+            event_id = _event_id("profile_failure", profile.name, exc.code)
+            _queue_event(state, {
+                "event_id": event_id,
+                "kind": "profile_failure",
+                "payload": _profile_failure_payload(profile.name, exc.code),
+            }, now)
             continue
         for store in ("user", "memory"):
             summary["stores_checked"] += 1

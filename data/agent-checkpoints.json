@@ -116,11 +116,11 @@
       "next_step": "Operação normal automática. Zeus só escala falha fechada, source_unchanged não comprovado, entrega Discord pendente ou store que permaneça >=90% após tentativa.",
       "objective": "Manter USER/MEMORY como cache pequeno sempre ativo com Honcho como camada longitudinal principal",
       "source": "discord:1527558141397700618#1527698289439281152; scripts/monitor-hermes-memory-capacity.py; data/hermes-memory-capacity-state.json",
-      "state": "concluído e ativo: root cron com flock executa a cada dez minutos, descobre zeus/atena/ares e futuros profiles operacionais, mede user/memory e compacta automaticamente de >=90% para <=85% sem aprovação por ocorrência. backup 0700/0600, literais protegidos, segunda verificação semântica, escrita atômica, rollback/readback, outbox durável, anti-spam e embeds metadata-only em #limites-90. canários exact-dedup apply e semantic verified target 85 passaram; 12 testes passaram; primeiro ciclo de produção 3 profiles/6 stores saudável, zero threshold/falha/outbox.",
+      "state": "concluído e ativo: root cron com flock executa a cada dez minutos, descobre zeus/atena/ares e futuros profiles operacionais, mede user/memory e compacta automaticamente de >=90% para <=85% sem aprovação por ocorrência. backup 0700/0600, literais protegidos, segunda verificação semântica, escrita atômica, rollback/readback, outbox durável, anti-spam e embeds metadata-only em #limites-90. canários exact-dedup apply e semantic verified target 85 passaram; 13 testes passaram; primeiro ciclo de produção 3 profiles/6 stores saudável, zero threshold/falha/outbox.",
       "thread_id": "1527558141397700618",
-      "updated_at": "2026-07-17T15:49:14+00:00"
+      "updated_at": "2026-07-17T15:53:49+00:00"
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T15:49:14+00:00"
+  "updated_at": "2026-07-17T15:53:49+00:00"
 }

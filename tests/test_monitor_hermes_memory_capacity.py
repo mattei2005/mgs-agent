@@ -201,6 +201,25 @@ class MonitorHermesMemoryCapacityTests(unittest.TestCase):
         self.assertEqual((profile / "memories" / "USER.md").read_bytes(), before)
         self.assertEqual(result["threshold_count"], 1)
 
+    def test_invalid_profile_config_alerts_without_running_compactor(self):
+        profile = self.make_profile()
+        (profile / "config.yaml").write_text("memory: [\n", encoding="utf-8")
+        calls = []
+        posts = []
+
+        result = monitor.run_monitor(
+            self.settings(),
+            compactor_runner=lambda *args: calls.append(args),
+            poster=lambda payload: posts.append(payload) or "77",
+            now=self.now,
+        )
+
+        self.assertEqual(calls, [])
+        self.assertEqual(result["failure_count"], 1)
+        self.assertEqual(len(posts), 1)
+        self.assertIn("falha", posts[0]["embeds"][0]["title"].lower())
+        self.assertNotIn("content", posts[0])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
