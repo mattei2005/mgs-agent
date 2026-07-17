@@ -89,7 +89,7 @@ pedido/upload
 → novas variações
 ```
 
-Não existe handoff Hera → Ares. Creative Ops e Campaign Ops compartilham o mesmo estado.
+Creative Ops e Campaign Ops compartilham o mesmo estado no Ares.
 
 ## 5. Intake e Drive
 
@@ -253,6 +253,4 @@ Produzir relatórios                       Expor credenciais/tokens
 - Git/infra: diff, lint, audit e REPORT-INFRA.
 - Sem evidência: declarar lacuna.
 
-## 14. Hera histórica
 
-Hera está desativada. Profile, dados e logs antigos servem apenas para rollback/auditoria. Não encaminhar pedidos, não mencionar o bot e não usar mapas/skills Hera como procedimento ativo quando houver fonte Ares atual.

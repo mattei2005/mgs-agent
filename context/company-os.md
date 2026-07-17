@@ -192,7 +192,6 @@ Fluxo alvo com agentes:
 
 ```text
 Ares           -> cria/organiza criativos e analisa/sobe/acompanha campanhas conforme permissão; não configura ChatPion, quiz ou SMS Funnel
-Hera           -> inativa; histórico preservado para rollback
 Zeus           -> monitora, audita, escala exceções e reporta para Rodolfo
 ```
 
@@ -240,7 +239,6 @@ Atena                Content Operations        Gestora/agente de conteúdo;
                                               sob supervisão da Raquel.
 Ares                 Creative Ops + Growth    Criativos, Drive, campanhas, análise e
                                               operação de aquisição.
-Hera                 Inativa / rollback        Sem operação nova; histórico preservado.
 Futuros agentes      Área específica           Só devem nascer com área, dono,
                                               fontes, permissões e rotas claras.
 ```

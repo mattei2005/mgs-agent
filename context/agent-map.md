@@ -3,7 +3,7 @@
 > Status: proposta canônica v0.3
 > Fonte-mãe: `context/company-os.md`
 > Base operacional: `context/company-current-operating-model.md`
-> Atualização: Hera consolidada no Ares em 2026-07-12.
+> Atualização: Ares é o agente único de Creative Operations + Growth / Media Buying.
 
 ## Visão geral
 
@@ -14,7 +14,6 @@ Zeus                 Executive / Management                Rodolfo              
 Atena                Content Operations                    Raquel                   Conteúdo, REC/P1, WordPress.
 Ares                 Creative Ops + Growth/Media Buying    Rodolfo + Geizian +      Criativos, Drive, campanhas,
                                                             gestores autorizados     análise e aquisição.
-Hera                 Inativa / arquivo de rollback         Nenhum usuário ativo      Histórico preservado; sem nova operação.
 Futuros agentes      Área específica                       Dono definido             Só com escopo e permissão.
 ```
 
@@ -74,12 +73,6 @@ Guardrails:
 - campanhas usam API/runtime real e readback.
 
 Escala para Zeus/Rodolfo quando envolver credencial, billing, produção crítica, risco financeiro/reputacional, tracking/pixel crítico, autorização externa, conflito de área ou anomalia relevante.
-
-## Hera — estado histórico
-
-Hera foi consolidada no Ares em 2026-07-12 e não recebe novas operações. Profile, dados, canal, logs e unit file são preservados temporariamente para rollback/auditoria.
-
-Fonte ativa para qualquer pedido criativo ou de campanha: Ares. Referências históricas da Hera nunca vencem as skills e mapas atuais do Ares.
 
 ## Regra para agentes futuros
 

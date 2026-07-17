@@ -160,7 +160,6 @@ Zeus        Executive / Management       GM/orquestrador/auditor. Só Rodolfo
 Atena       Content Operations           REC/P1, SEO, conteúdo e WordPress.
 Ares        Growth / Media Buying        Campanhas, análise, ROI e operação
                                          de mídia dentro de escopo aprovado.
-Hera        Creative Operations          Criativos, vídeos, assets e Drive.
 ```
 
 Regras principais:
@@ -168,8 +167,8 @@ Regras principais:
 ```text
 Zeus     Controle somente Rodolfo. Outras pessoas só entram se Rodolfo pedir.
 Atena    Conteúdo/REC/P1/WordPress editorial com supervisão humana.
-Ares     Campanhas. Não configura ChatPion, quiz ou SMS Funnel.
-Hera     Criativos. Pode gerenciar Drive de criativos aprovados.
+Ares     Criativos e campanhas. Pode gerenciar Drive de criativos aprovados;
+         não configura ChatPion, quiz ou SMS Funnel.
 ```
 
 Agentes seguem o desenho da empresa, não o contrário: cada agente deve ter área, fonte de verdade, escopo, permissão e escalação definidos antes de assumir operação real.
@@ -179,14 +178,14 @@ Agentes seguem o desenho da empresa, não o contrário: cada agente deve ter ár
 O fluxo de criativos deve preservar uma fonte oficial de assets aprovados.
 
 ```text
-1. Kelly/Rodolfo/Geizian/gestor pede criativo.
-2. Hera cria variações, por exemplo feed e stories para Facebook/Instagram.
+1. Kelly/Rodolfo/Geizian/gestor pede criativo ao Ares.
+2. Ares cria variações, por exemplo feed e stories para Facebook/Instagram.
 3. Kelly ou responsável avalia/aprova.
-4. Hera salva o criativo aprovado na pasta correta do Google Drive.
-5. Ares acessa o Drive para usar e gerenciar criativos em testes de campanhas.
+4. Ares salva o criativo aprovado na pasta correta do Google Drive.
+5. Ares usa e gerencia os criativos em testes de campanhas.
 ```
 
-Ares e Hera devem ter leitura/escrita no Drive de criativos aprovados para conseguir gerenciar os assets de campanha.
+Ares deve ter leitura/escrita no Drive de criativos aprovados para gerenciar os assets de campanha.
 
 ## Finance / BI
 

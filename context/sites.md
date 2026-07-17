@@ -227,7 +227,7 @@ Camada                         Dono / fonte
 Site WordPress / setup técnico  Rodolfo / Tech / WordPress.
 Conteúdo editorial              Raquel / Atena / Content Operations.
 Campanhas e tráfego             Gestores / Ares conforme escopo aprovado.
-Criativos aprovados             Kelly / Hera / Google Drive.
+Criativos aprovados             Kelly / Ares / Google Drive.
 Monetização / blocos            Smart Bidding ou ActiveView + Rodolfo/AdOps.
 Financeiro / ROI                Rodolfo / planilha financeira.
 ```

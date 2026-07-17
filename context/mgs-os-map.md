@@ -272,13 +272,6 @@ Regra prática:
 - Regra HOT:
   - Antes de busca ampla para `drive`, `campaign`, `meta`, `creative`, `UPLOAD`, `reference`, `video`, `budget` ou `roi`, abrir `context/ares-operational-map.md`.
 
-### Hera — histórico/rollback
-
-- Estado: agente desativada em 2026-07-12; sem novas operações.
-- Profile, dados, logs, canal e unit file preservados temporariamente para rollback/auditoria.
-- Fonte ativa para qualquer pedido criativo/campanha: Ares.
-- Consultar Hera somente para evidência histórica; referências atuais do Ares vencem.
-
 ## 5. Mapa por pasta
 
 ### `context/`
@@ -357,7 +350,6 @@ Regra prática:
 - “Qual site/pixel/config WordPress?” → `data/sites.json`
 - “Atena fez X?” → `/root/.hermes/profiles/atena/logs/`, `data/article-tracker.db`, WordPress/API se necessário
 - “Ares fez X?” → `/root/.hermes/profiles/ares/logs/`, `scripts/ares-*.py`, `data/ares/`, `logs/ares-*.log`
-- “Hera fez X antes da desativação?” → histórico em `/root/.hermes/profiles/hera/logs/` e dados preservados; operação atual → Ares
 - “Tem erro no Hermes/VPS?” → `/root/.hermes/profiles/*/logs/errors.log`, systemd, journalctl filtrado, `docs/CRONS.md`, `data/*-state.json`
 - “Cron está ativo?” → `docs/CRONS.md`, crontab real, logs do script, estado do monitor
 - “Já decidimos isso?” → `data/knowledge-registry.json`, depois a `canonical_source` do registro

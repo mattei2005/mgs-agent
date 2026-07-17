@@ -147,7 +147,7 @@ Etapa   Ação
 Regras:
 
 - Kelly é pessoa humana/gestora `g005`, não agente.
-- Hera está inativa; não existe handoff entre bots.
+- Creative Ops e Campaign Ops operam no mesmo agente e no mesmo estado; não existe handoff entre bots.
 - `01_READY` significa pronto tecnicamente, não inédito.
 - Original e tratado nunca competem como assets independentes sem decisão expressa.
 
@@ -282,7 +282,6 @@ Discord                         Operação dos agentes e threads de trabalho.
 #zeus-admin-agent                Zeus; controle padrão somente Rodolfo.
 #atena-content-agent             Atena / Content Operations.
 Ares                             Canal/thread unificado de criativos, campanhas e relatórios.
-Hera                             Canal histórico; agente desativada.
 Google Drive                     Criativos aprovados.
 Dashboards externos              Ads, monetização, ChatPion, SMS Funnel, reports.
 ```

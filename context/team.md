@@ -96,16 +96,10 @@ Regra de atribuição: o `UTM_medium` carrega o código do gestor. Esse código 
 
 ### Ares — Creative Operations
 
-- Ares assumiu Creative Operations após consolidação da Hera em 2026-07-12.
+- Ares é o agente único de Creative Operations.
 - Cria/organiza criativos, vídeos e assets conforme escopo aprovado.
 - Lê/escreve no Drive, preserva linhagem original → tratado e controla reserva/elegibilidade.
 - A mesma identidade conecta o asset a testes/campanhas, respeitando gates de write e budget.
-
-### Hera
-
-- Agente desativada; profile/dados/canal preservados apenas para rollback e auditoria.
-
----
 
 ## Agentes AI e acesso humano
 
@@ -117,7 +111,6 @@ Zeus     Executive / Management   Rodolfo somente por padrão. Outras pessoas s�
 Atena    Content Operations       Raquel supervisiona e tem acesso operacional.
 Ares     Creative Ops + Growth    Rodolfo, Geizian, Icaro, Isliago, Joe, Kelly e
                                   Nicolas, conforme registry e escopo.
-Hera     Inativa / rollback        Sem operação nova; histórico preservado.
 ```
 
 Acesso humano esperado não substitui o registry operacional. Para acesso real, consultar `data/authorized-users.json`.
@@ -141,12 +134,6 @@ Acesso humano esperado não substitui o registry operacional. Para acesso real, 
 - Pode criar/tratar/inventariar criativos, gerenciar/analisar/criar/operar campanhas e produzir relatórios conforme escopo.
 - Budget write continua subordinado à aprovação vigente de Rodolfo/Geizian.
 - Não configura ChatPion/DigitalTrChat, quiz, SMS Funnel ou estrutura de SMS.
-
-### Hera
-
-- Inativa desde 2026-07-12; sem novas solicitações.
-
----
 
 ## Finance / BI relacionado à equipe
 

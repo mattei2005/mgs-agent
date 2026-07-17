@@ -267,8 +267,6 @@ Ares                 Agente unificado de Creative Operations + mídia paga/aquis
                      criação/tratamento/inventário de criativos, Drive, Facebook Ads,
                      Google Ads e demais canais aprovados. Não configura ChatPion,
                      DigitalTrChat, quiz ou SMS Funnel.
-Hera                 Desativada em 2026-07-12 após consolidação no Ares; profile,
-                     dados e histórico preservados para rollback/auditoria.
 ```
 
 ---
