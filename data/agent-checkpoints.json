@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "google-sheets-enterprise-migration-20260716",
-      "next_step": "Rodolfo enviar captura da linha IAM mostrando principal ares-drive@mgs-ares.iam.gserviceaccount.com e papel Service Usage Consumer no projeto mgs-ares/910132583650; Zeus corrige vínculo ou valida propagação, então executa canário e cutover",
-      "objective": "Eliminar a dependência do OAuth pessoal nas planilhas operacionais sem mover o cluster financeiro",
-      "source": "discord:message:1527514814291775630; quota project Drive/Sheets HTTP 403 missing serviceusage.services.use; skill google-drive-agent-automation reference service-account-sheets-api-enablement-and-consumer-iam.md",
-      "state": "rodolfo informou iam liberado, mas service usage consumer ainda não está efetivo: quota-project probes para drive e sheets retornam 403 missing serviceusage.services.use após mais de 8 minutos de retries. api sheets está enabled e file sharing está ok. helper e 4 consumidores foram preparados para enviar x-goog-user-project; defaults continuam oauth. meta app roles profile script também preparado. py_compile/bash -n ok; zero sheet writes, zero cutover.",
+      "next_step": "Rodolfo confirmar separadamente: (1) rotacionar/revogar e substituir OP_SERVICE_ACCOUNT_TOKEN exposto, validando 1Password consumers; (2) revogar/remover refresh token Google OAuth de 1Password/local, tornando SA exclusiva. Não executar sem confirmação crítica explícita.",
+      "objective": "Eliminar a dependência operacional do OAuth pessoal nas planilhas usadas por Zeus, Atena e Ares sem mover o cluster financeiro",
+      "source": "discord:message:1527527308259491842; /root/mgs-agent/work/google-sheets-sa-cutover-20260716/canary.json; /root/mgs-agent/work/google-sheets-sa-cutover-20260716/final-sheets-validation.json; Sheets/Drive live readbacks",
+      "state": "cutover funcional concluído: sheets api enabled no projeto mgs-ares; service usage consumer efetivo; 18/18 sheets http 200 via sa. canary george julho 2026 bf937 write/readback/clear/restore ok e 49 fórmulas/0 erros. dtr/sb dry-run e transition apply reais ok com sheet readback; meta roles ciclo real 11 apps/0 erros; monitor auth primary=service_account sem consultar oauth; revenue/rebuild auth probes ok; ares drive env mudou para service_account e root shared drive access/canadd/canedit/canmodify ok. julho nas 6 financeiras preservou paridade/0 erros. oauth google retido como rollback aguardando confirmação crítica. incidente: patch tool exibiu valor de op_service_account_token no diff; rotação crítica pendente, valor não registrado em audit/report.",
       "thread_id": "1527491546331611238",
-      "updated_at": "2026-07-17T03:28:42+00:00"
+      "updated_at": "2026-07-17T04:21:49+00:00"
     },
     {
       "agent": "zeus",
@@ -72,5 +72,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T03:28:42+00:00"
+  "updated_at": "2026-07-17T04:21:49+00:00"
 }

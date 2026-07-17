@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Inventário de infraestrutura compartilhada MGS. Gerado por infra-discovery.sh.",
-    "updated_at": "2026-07-17T00:06:02-04:00",
+    "updated_at": "2026-07-17T00:21:49-04:00",
     "generated_by": "infra-discovery.sh"
   },
   "system_packages": [
@@ -2831,6 +2831,56 @@
       ],
       "rollout_evidence": "/root/mgs-agent/work/chat-sms-rollout-20260716/final-validation.json",
       "updated_at": "2026-07-16T22:30:12-04:00"
+    },
+    {
+      "id": "sms-send-occurrence-comparison-sheet-2026-07-15",
+      "agent": "zeus",
+      "type": "google_sheet_operational_analysis",
+      "status": "active",
+      "spreadsheet_id": "16eU20O49_CycSZNDmreBMZBs2l1qhIT7ZQbZOuQc0dg",
+      "title": "diferenca de leads",
+      "url": "https://docs.google.com/spreadsheets/d/16eU20O49_CycSZNDmreBMZBs2l1qhIT7ZQbZOuQc0dg/edit",
+      "auth_mode": "Google Service Account via canonical mgs_google_workspace_auth.py",
+      "access_readback": "Drive HTTP 200 canEdit/canModify; Sheets HTTP 200 after administrator enabled sheets.googleapis.com",
+      "business_date": "2026-07-15",
+      "business_timezone": "America/Sao_Paulo",
+      "source_scope": {
+        "ccreditoparaveiculo": "Every wp_mgs_quiz_leads occurrence in UTC half-open interval [2026-07-15 03:00:00, 2026-07-16 03:00:00); no deduplication.",
+        "smsfunnel": "Every /api/messages event for date=2026-07-15 across the six Creditoparaveiculo quiz G001-G006 lists; no deduplication."
+      },
+      "tabs": {
+        "ccreditoparaveiculo": {
+          "rows": 6813,
+          "unique_normalized_phones": 5900,
+          "repeated_occurrences_beyond_unique": 913,
+          "sha256": "572e4dfff30768fba9bcc9e7a74af20e1105768d9b37c1ae4ed5739ee7380d12"
+        },
+        "smsfunnel": {
+          "rows": 6339,
+          "unique_normalized_phones": 5869,
+          "repeated_occurrences_beyond_unique": 470,
+          "sha256": "b86f641e6698690f00c3cc8e3408ee461e23d03e11c7c4c3eb28f8c2ccdc0db9"
+        },
+        "diferenca": {
+          "rows": 492,
+          "unique_normalized_phones": 428,
+          "repeated_occurrences_beyond_unique": 64,
+          "sha256": "c3d636160fdf44bce991a192eb876f4541078d4be38cda20e81871ab8668a380"
+        }
+      },
+      "comparison": {
+        "unit": "occurrence/registration/message event",
+        "matching": "one-to-one chronological multiset by conservatively normalized phone",
+        "deduplicated": false,
+        "matched_occurrences": 6321,
+        "wordpress_unmatched_occurrences": 492,
+        "sms_only_occurrences": 18,
+        "net_row_gap": 474
+      },
+      "presentation": "Exactly three tabs; columns Nome and Número; frozen header, filter, text phone format, widths and borders.",
+      "validation": "Full Sheets API readback equals expected rows and SHA-256 on all three tabs; exact row counts/grid dimensions/filter/frozen header validated; temporary local PII files removed.",
+      "source_report": "REPORT-INFRA SMS send occurrence comparison sheet 2026-07-17",
+      "updated_at": "2026-07-17T04:22:10.490992+00:00"
     }
   ],
   "profile_skill_references": [
@@ -3864,8 +3914,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.py",
-      "size_bytes": 82162,
-      "modified_at": "2026-07-16T23:24:34-04:00"
+      "size_bytes": 82172,
+      "modified_at": "2026-07-17T00:10:12-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/dtr-sb-page-health-sync.sh",
@@ -4114,8 +4164,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-drive-auth-unified.py",
-      "size_bytes": 11681,
-      "modified_at": "2026-07-15T21:18:56-04:00"
+      "size_bytes": 12299,
+      "modified_at": "2026-07-17T00:15:59-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/monitor-gpt55-oauth-cost.sh",
@@ -4234,8 +4284,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/process-revenue-spend-report.py",
-      "size_bytes": 29999,
-      "modified_at": "2026-07-16T23:24:35-04:00"
+      "size_bytes": 30019,
+      "modified_at": "2026-07-17T00:15:55-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/qa-content-validator.py",
@@ -4249,8 +4299,8 @@
     },
     {
       "path": "/root/mgs-agent/scripts/rebuild-sb-restricted-pages-sheet.py",
-      "size_bytes": 13207,
-      "modified_at": "2026-07-16T23:24:36-04:00"
+      "size_bytes": 13217,
+      "modified_at": "2026-07-17T00:15:58-04:00"
     },
     {
       "path": "/root/mgs-agent/scripts/rec-fingerprint.py",
@@ -6964,15 +7014,15 @@
   "data_files": [
     {
       "path": "/root/mgs-agent/data/agent-checkpoints.json",
-      "size_bytes": 6534,
-      "md5": "807560e166b8b975b7284d0fc1a529eb",
-      "modified_at": "2026-07-16T23:28:42-04:00"
+      "size_bytes": 6908,
+      "md5": "2aa635354878006fef655d65b5873c55",
+      "modified_at": "2026-07-17T00:21:49-04:00"
     },
     {
       "path": "/root/mgs-agent/data/alerts-infra-failed-alert-resolver-state.json",
       "size_bytes": 6456,
-      "md5": "0e6f33b67481530f25704ee9d4358007",
-      "modified_at": "2026-07-17T00:02:01-04:00"
+      "md5": "152ca8adeb8c78d7575145e96ca23b88",
+      "modified_at": "2026-07-17T00:17:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/authorized-users.json",
@@ -6983,8 +7033,8 @@
     {
       "path": "/root/mgs-agent/data/auto-push-monitor.json",
       "size_bytes": 358,
-      "md5": "05a2d8fcec4df3251d89dad96c03dca5",
-      "modified_at": "2026-07-16T23:56:39-04:00"
+      "md5": "16c83a4ed6f6080c31b39bb9f9cd42ad",
+      "modified_at": "2026-07-17T00:11:43-04:00"
     },
     {
       "path": "/root/mgs-agent/data/b011-dtr-link-monitor-state.before-clean-20260704-071749.json",
@@ -7007,8 +7057,8 @@
     {
       "path": "/root/mgs-agent/data/cron-stale-logs-state.json",
       "size_bytes": 359,
-      "md5": "d7f6fe9392cbbedb0cb744eafe480340",
-      "modified_at": "2026-07-17T00:00:02-04:00"
+      "md5": "59dba39598a7fd190c8fceb9ff4029cd",
+      "modified_at": "2026-07-17T00:15:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/discord-thread-archive-warning-state.json",
@@ -7018,9 +7068,9 @@
     },
     {
       "path": "/root/mgs-agent/data/drive-auth-unified-state.json",
-      "size_bytes": 348,
-      "md5": "38ac5292e26b61c0fa4b6acb70f0f1e2",
-      "modified_at": "2026-07-16T23:49:01-04:00"
+      "size_bytes": 349,
+      "md5": "b7dd7d9c39f27932e588551efa5cfd20",
+      "modified_at": "2026-07-17T00:19:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-missing-sb-page-lead-scan-state.json",
@@ -7036,9 +7086,9 @@
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-page-health-sync-state.json",
-      "size_bytes": 319639,
-      "md5": "17056cf8a3e84c9e41a2bddb754ddaf1",
-      "modified_at": "2026-07-16T15:44:59-04:00"
+      "size_bytes": 320188,
+      "md5": "a2882250eedbe0dfb342730e327aa1db",
+      "modified_at": "2026-07-17T00:11:24-04:00"
     },
     {
       "path": "/root/mgs-agent/data/dtr-sb-restricted-sync-state.json",
@@ -7061,14 +7111,14 @@
     {
       "path": "/root/mgs-agent/data/hermes-news-explainer-state.json",
       "size_bytes": 27745,
-      "md5": "fbc050f7d457aee4aceadc05e9e28b2d",
-      "modified_at": "2026-07-17T00:05:02-04:00"
+      "md5": "89441208d7cc6557006a8f6e49af85db",
+      "modified_at": "2026-07-17T00:20:02-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-pending-write-monitor-state.json",
       "size_bytes": 377,
-      "md5": "608ea9cfe56571f8786ad88e0704a484",
-      "modified_at": "2026-07-17T00:06:02-04:00"
+      "md5": "9e6623789a07384aaea5d878dd00dc17",
+      "modified_at": "2026-07-17T00:21:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/hermes-update-20260710-state.json",
@@ -7091,8 +7141,8 @@
     {
       "path": "/root/mgs-agent/data/infra-inventory.json",
       "size_bytes": 317230,
-      "md5": "4404b8d1a5ac9bf1e48a0afab1c7f3ab",
-      "modified_at": "2026-07-16T23:56:12-04:00"
+      "md5": "fc3f4659f47847f1c0e1cd709b630e38",
+      "modified_at": "2026-07-17T00:21:31-04:00"
     },
     {
       "path": "/root/mgs-agent/data/knowledge-registry.json",
@@ -7126,9 +7176,9 @@
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.json",
-      "size_bytes": 49173,
-      "md5": "c65d34f6c5929474e1dc29b69a360982",
-      "modified_at": "2026-07-16T23:05:32-04:00"
+      "size_bytes": 49213,
+      "md5": "a50186b6d63763e2f633d7d8c18f45c3",
+      "modified_at": "2026-07-17T00:14:32-04:00"
     },
     {
       "path": "/root/mgs-agent/data/meta-app-role-monitor-state.pre-fix-20260629-162448.json",
@@ -7170,7 +7220,7 @@
       "path": "/root/mgs-agent/data/pending-reports-state.json",
       "size_bytes": 3358,
       "md5": "f55191c98883f6902b4e625b27ca8231",
-      "modified_at": "2026-07-16T23:52:03-04:00"
+      "modified_at": "2026-07-17T00:07:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/post-p1-54241.json",
@@ -7192,9 +7242,9 @@
     },
     {
       "path": "/root/mgs-agent/data/sb-restricted-transition-state.json",
-      "size_bytes": 208550,
-      "md5": "51ee0a71357dd84a20681b6515210016",
-      "modified_at": "2026-07-16T23:59:21-04:00"
+      "size_bytes": 208068,
+      "md5": "8fc13acff45a15fdaebf273c1909cf59",
+      "modified_at": "2026-07-17T00:14:15-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sb-utility-gray-alert-state.json",
@@ -7236,7 +7286,7 @@
       "path": "/root/mgs-agent/data/service-restart-state.json",
       "size_bytes": 2293,
       "md5": "94841a0c722ac90b09f5fb75a2fbb336",
-      "modified_at": "2026-07-17T00:06:02-04:00"
+      "modified_at": "2026-07-17T00:21:01-04:00"
     },
     {
       "path": "/root/mgs-agent/data/sites.json",
@@ -7271,8 +7321,8 @@
     {
       "path": "/root/mgs-agent/data/vps-health-state.json",
       "size_bytes": 2112,
-      "md5": "6516b9858383cb414add7d7fdc41716b",
-      "modified_at": "2026-07-17T00:05:03-04:00"
+      "md5": "76c68e4dac2c589c51511d0018294c91",
+      "modified_at": "2026-07-17T00:20:03-04:00"
     },
     {
       "path": "/root/mgs-agent/data/webshare-status-state.json",

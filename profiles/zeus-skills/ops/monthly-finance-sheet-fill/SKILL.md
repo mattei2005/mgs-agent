@@ -27,6 +27,7 @@ This is not the same as generating the `Long` report. The job here is to write v
 5. **Respect spend currency.** Meta/Business Manager spend usually goes to `BM - $`; Google Ads BRL goes to `Google Ads - R$`.
 6. **Audit after writing.** Compare expected source values to sheet cells cell-by-cell, not only by totals. Check formula errors and out-of-period rows.
 7. **Do not call success until verified.** Report mismatches honestly and fix if safe.
+8. **Use Service Account auth by default.** Load short-lived Sheets tokens through `/root/mgs-agent/scripts/mgs_google_workspace_auth.py`, send the Service Account quota project, and require Sheets HTTP 200 plus destination writer access. User OAuth is rollback-only and must not be revoked/deleted without the separate credential-critical confirmation.
 
 ## Canonical workflow
 

@@ -30,6 +30,12 @@ Preflight only, before writing a Sheet:
 /root/mgs-agent/scripts/process-revenue-spend-report.py --preflight --input /path/report.xlsx
 ```
 
+### Google authentication invariant
+
+- The validated runner uses the MGS Service Account by default through `/root/mgs-agent/scripts/mgs_google_workspace_auth.py` and sends its `x-goog-user-project` quota project.
+- Require Sheets API HTTP 200, `roles/serviceusage.serviceUsageConsumer`, destination `writer` access, and readback before upload.
+- `--auth-mode oauth` is rollback-only. Do not make user OAuth the default again, and do not revoke/delete its refresh token without the separate credential-critical confirmation.
+
 ## When to Use
 
 Use when Rodolfo provides or references:
