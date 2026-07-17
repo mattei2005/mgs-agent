@@ -197,6 +197,14 @@ Operational pattern:
 
 Pitfall: a 403 `ACCESS_TOKEN_SCOPE_INSUFFICIENT` from Service Usage is a scope issue, not proof that the account cannot enable the API. Reauth with `cloud-platform` before giving up.
 
+A different 403, `PERMISSION_DENIED` with missing `serviceusage.services.enable`, is an **IAM permission problem**, even when the access token already has `cloud-platform`. Do not expand or replace a personal refresh token merely because the Service Account lacks this IAM role. Try the Service Account once, then use one of these approved gates:
+
+1. an already-authorized GCP admin identity;
+2. Rodolfo enabling the API from the direct Cloud Console library page for the exact project;
+3. a separately confirmed admin OAuth flow when no admin session/identity exists.
+
+API activation is separate from file sharing. `permissions.create(role=writer)`, Drive HTTP 200, and `canEdit=true` prove the identity can reach the file through Drive; they do **not** prove Sheets cell reads/writes. Do not switch a production consumer until all of these pass with the Service Account: Sheets metadata HTTP 200, bounded write, readback of the exact sentinel, restoration/clear, and readback of the original value. Keep OAuth as rollback; revoking/deleting the refresh token is a later credential-gated action, not part of ordinary script cutover.
+
 ## References
 
 - `references/service-account-my-drive-quota.md` — concrete MGS/Ares incident pattern and reusable Drive API probes.

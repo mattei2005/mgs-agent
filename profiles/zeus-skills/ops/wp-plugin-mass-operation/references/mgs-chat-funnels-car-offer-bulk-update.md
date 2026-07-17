@@ -106,6 +106,26 @@ Use when Rodolfo asks, in the same operation, to update the three CAR cards on e
 7. Validate delivery with a transactional mock: intercept `pre_http_request`, create one synthetic lead, require `ok:Gxxx`, delete only that synthetic row and prove the row count returns to its original value. Do not send a real SMS during rollout smoke.
 8. Validate both routes on every target: HTTP 200, exact three cards, own-domain targets, legacy without form, SMS with Name/Phone, private URL absent, UTM hardening present and correct provider markers (JBF, M2/PubGuru or ActView).
 
+### Post-rollout site-to-manager remap
+
+Use this when Rodolfo supplies a canonical allocation such as `site → G001…G006` after the SMS chats already exist.
+
+1. Treat the supplied `add-lead` endpoints as private integration material:
+   - use them only in authenticated WordPress options or a root-only ephemeral process;
+   - never commit them to the repository, inventory, skill, audit log or public config;
+   - report only manager codes and exact-match booleans.
+2. On **every eligible site**, update the complete six-entry private manager catalog, not just that site's assigned code. This keeps the WordPress SMS-manager screen canonical and makes future remaps config-only.
+3. Update only `CAR-BR-01-SMS.sms_manager_code` for the site allocation. Do not change `CAR-BR-01`, EMP configs, card targets, providers or tracking.
+4. Back up both rollback surfaces immediately before writing:
+   - `car-br-01-sms.json`;
+   - the serialized `mgs_cf_sms_managers` option, stored root-only because it contains private endpoints.
+5. Validate independently after the write:
+   - all six catalog endpoints equal the supplied map in memory, while output shows only `catalog_exact=true` and `configured=6`;
+   - config manager equals the expected site code;
+   - public SMS route remains HTTP 200 with the form and does not expose any private endpoint.
+6. Parameterize the transactional smoke with the expected manager for each site. A smoke hardcoded to the canary code (for example G006) is invalid after remapping. Require `ok:<assigned-code>`, mocked outbound, deletion of exactly the synthetic row and restored row count.
+7. A site already mapped correctly still receives readback and smoke validation; do not rewrite it merely to claim work if its catalog and manager are already exact.
+
 ### Bitnami plugin-editor fallback pitfall
 
 The WordPress plugin editor can overwrite existing files but cannot create a new include file. If the SMS class must be kept inline in `mgs-chat-funnels.php` as a temporary Bitnami-compatible layout, adjust include-relative paths accordingly: inside the inline class, the config path is `__DIR__ . '/configs/'`, not `dirname(__DIR__) . '/configs/'`. The latter is correct only while the class lives under `includes/` and causes the transactional smoke to return `Chat SMS não encontrado.` when inlined.

@@ -40,6 +40,24 @@ Use this when the business goal is authentication durability rather than organiz
 
 This removes refresh-token revocation risk from automation while avoiding a formula cutover.
 
+## Safe permission rollout before auth cutover
+
+Treat permission rollout and runtime-auth cutover as separate transactions:
+
+1. Build the complete dependency closure and query current permissions plus Service Account Drive visibility before writing. Record a root-only manifest with file IDs, prior target-role state, and later-created permission IDs for rollback; never store the Service Account JSON or tokens.
+2. Pick the smallest current-period-clean spreadsheet as the canary. Create the Service Account permission at `writer` with notifications disabled.
+3. Read back the permission through the owner identity and require: target permission present, role `writer`, Service Account Drive HTTP 200, `canEdit=true`, and `canModifyContent=true`.
+4. Only then apply the same idempotent check/create/readback loop to the rest of the dependency closure. Skip an already-correct permission rather than creating duplicates.
+5. Re-read every operational/reference Sheet through the Service Account Drive identity and compare the current-period formula counts and formatted-error baseline through the still-working reader. Permission changes must not change file IDs, tabs, formulas, or values.
+6. Probe `spreadsheets.get` with a Service Account token. If Drive succeeds but Sheets returns 403 because `sheets.googleapis.com` is disabled, permission rollout succeeded but the authentication cutover is **not complete**. Keep production on OAuth until an administrator enables the API.
+7. After Sheets HTTP 200, use an unused, unprotected cell for a bounded sentinel: capture original formula/value, write a unique marker, read it back, restore/clear to the exact original state, and read back again. Do not use a production formula cell.
+8. Switch consumers one at a time, smoke the exact runner/cron, and retain OAuth only as rollback. Revocation/removal of the OAuth credential requires its own credential gate.
+
+Service Usage diagnosis must distinguish:
+
+- `ACCESS_TOKEN_SCOPE_INSUFFICIENT` → token scope problem; obtain `cloud-platform` through the approved flow.
+- `PERMISSION_DENIED` / missing `serviceusage.services.enable` with a cloud-platform token → IAM problem; use an authorized GCP administrator or the direct Cloud Console API-library page. Do not churn the refresh token to solve missing IAM.
+
 ## Transactional move route
 
 Never promise absolute zero risk before a canary. The acceptable guarantee is procedural: no cutover is declared if parity fails, and rollback is preserved.
