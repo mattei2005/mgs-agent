@@ -49,9 +49,10 @@ Required checks:
 3. Probe the exact spreadsheet with the Service Account on both surfaces:
    - Drive API metadata (`files.get`) for visibility and capabilities;
    - Sheets API (`spreadsheets.get`) for real API availability.
-4. Treat Drive HTTP 200 / `canEdit=true` as insufficient proof that Sheets writes will work. If Sheets returns 403 saying `sheets.googleapis.com` is disabled in the Service Account project, the durable correction is to enable the Sheets API in that project and migrate the writer to Service Account auth. Moving the spreadsheet or reauthorizing personal OAuth alone does not enable the API.
-5. Personal OAuth reauthorization may be used as an explicitly authorized short-term recovery when the blocked consumer must run immediately, but describe it as temporary compatibility—not as a requirement of the Shared Drive architecture.
-6. After any auth recovery, rerun the **exact blocked consumer** in this order: credential refresh probe → bounded dry-run → apply → external Sheet/state readback. A healthy generic Drive watchdog is not sufficient evidence that the original cron recovered.
+4. Treat Drive HTTP 200 / `canEdit=true` as insufficient proof that Sheets writes will work. If Sheets returns 403 saying `sheets.googleapis.com` is disabled in the Service Account project, the durable correction is to enable the Sheets API in that project and keep the writer on Service Account auth. Moving the spreadsheet or reauthorizing personal OAuth does not enable the API.
+5. When Rodolfo supplied an enterprise/Workspace Sheet and the intended Service Account already has file-level edit access, preserve that architecture. Do not ask him to share the file with a personal OAuth identity merely because API activation is the remaining gate. Try Service Usage once, classify scope versus IAM failure, provide the exact administrator activation URL when needed, then retry the same Service Account after propagation.
+6. Personal OAuth reauthorization may be used only as an explicitly authorized short-term recovery. Describe it as temporary compatibility—not as a requirement of the Shared Drive architecture or the default workaround for a disabled enterprise API.
+7. After any auth recovery, rerun the **exact blocked consumer** in this order: credential refresh probe → bounded dry-run → apply → external Sheet/state readback. A healthy generic Drive watchdog is not sufficient evidence that the original cron recovered.
 
 ## Standard diagnostic sequence
 
