@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "source_message_id": "1527698289439281152",
+  "policy": {
+    "threshold_percent": 90,
+    "target_percent": 85,
+    "per_occurrence_approval": false,
+    "role": "residual_after_honcho"
+  },
+  "tests": {
+    "suite": "tests.test_monitor_hermes_memory_capacity + tests.test_hermes_memory_autocompactor",
+    "passed": 13,
+    "failed": 0
+  },
+  "canaries": {
+    "exact_dedup_apply": {
+      "status": "pass",
+      "before_chars": 143,
+      "after_chars": 70,
+      "before_entries": 2,
+      "after_entries": 1,
+      "backup_mode": "0600",
+      "state_mode": "0600",
+      "post_write_hash_readback": "pass"
+    },
+    "semantic_verified_target_85": {
+      "status": "pass",
+      "applied": false,
+      "mode": "semantic_verified",
+      "before_chars": 353,
+      "after_chars": 287,
+      "after_percent": 84.4
+    },
+    "protected_literal_drift": {
+      "status": "fail_closed_pass",
+      "error_code": "protected_literals_changed",
+      "applied": false
+    },
+    "discord_transport_mock": {
+      "status": "pass",
+      "http": 200,
+      "message_id_readback": true,
+      "content_present": false
+    }
+  },
+  "production": {
+    "cron_schedule": "4,14,24,34,44,54 * * * *",
+    "flock": true,
+    "cron_backup": "/root/.hermes/secure-backups/memory-autocompaction-cron/20260717T154616Z",
+    "scheduled_cycle_last_check": "2026-07-17T15:54:02.562201Z",
+    "profiles": ["ares", "atena", "zeus"],
+    "stores_checked": 6,
+    "statuses": ["healthy"],
+    "threshold_count": 0,
+    "failure_count": 0,
+    "delivery_failures": 0,
+    "outbox_pending": 0,
+    "stale_watchdog_threshold_minutes": 40
+  }
+}

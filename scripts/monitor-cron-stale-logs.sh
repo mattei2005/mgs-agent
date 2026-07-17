@@ -61,6 +61,9 @@ def threshold_seconds(schedule: str, script: str = '') -> int:
     # o monitor alvo continua validado separadamente por dry-run.
     if script == 'monitor-gpt55-oauth-cost.sh':
         return 48 * 3600
+    if script == 'monitor-hermes-memory-capacity.py':
+        # Agenda explícita a cada 10 minutos; quatro ciclos de tolerância.
+        return 40 * 60
     # Jobs restritos por dia da semana podem ficar vários dias sem executar.
     # O fallback diário de 30h gerava falso STALE (ex.: terça/sexta). Uma
     # janela semanal completa também cobre a primeira execução após mudança
