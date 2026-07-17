@@ -12,6 +12,7 @@ chmod 700 "$BACKUP_ROOT"
 test -s "$ARTIFACT"
 tar -tzf "$ARTIFACT" >/dev/null
 php -l "$SMOKE" >/dev/null
+chmod 644 "$SMOKE"
 
 # Private SMS catalog source: the validated Eggbev canary. Never print its values.
 sudo -u runcloud wp --path=/home/runcloud/webapps/eggbev option get mgs_cf_sms_managers --format=json --allow-root > "$MANAGERS"
@@ -128,7 +129,7 @@ PY
 
   if [ "$domain" != "eggbev.com" ]; then
     sudo -u "$user" wp --path="$path" eval '
-      $raw=file_get_contents($argv[1]);
+      $raw=stream_get_contents(STDIN);
       $data=json_decode($raw,true);
       if(!is_array($data)){throw new Exception("invalid private SMS catalog");}
       foreach(array("G001","G002","G003","G004","G005","G006") as $code){
@@ -138,7 +139,7 @@ PY
       if(get_option(MGS_Chat_SMS::SMS_OPTION)!==$data){throw new Exception("SMS option readback failed");}
       MGS_Chat_SMS::maybe_upgrade();
       echo "sms_option_readback_ok\n";
-    ' "$MANAGERS" --allow-root
+    ' --allow-root < "$MANAGERS"
   else
     sudo -u "$user" wp --path="$path" eval 'MGS_Chat_SMS::maybe_upgrade(); echo "sms_schema_checked\n";' --allow-root
   fi

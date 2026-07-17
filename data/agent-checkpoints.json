@@ -22,6 +22,16 @@
     },
     {
       "agent": "zeus",
+      "id": "google-sheets-enterprise-migration-20260716",
+      "next_step": "Cruzar referências ativas em scripts/configs/crons com metadados reais do Google Drive e listar planilhas ativas versus históricas por agente e localização",
+      "objective": "Inventariar e preparar a migração somente das planilhas operacionais usadas por Zeus, Atena e Ares para o Shared Drive empresarial MGS-AGENTS",
+      "source": "discord:message:1527497423952285696",
+      "state": "escopo confirmado por rodolfo: excluir todo conteúdo pessoal não usado pelos agentes; fase atual é inventário read-only para conferência, sem mover arquivos",
+      "thread_id": "1527491546331611238",
+      "updated_at": "2026-07-17T02:10:56+00:00"
+    },
+    {
+      "agent": "zeus",
       "id": "knowledge-continuity-2026",
       "next_step": "Normal monitoring: route >=90% USER/MEMORY alerts and proposal metadata to #limites-90 (1527401973698007060); REPORT-INFRA remains in #alerts-infra; never apply compactation without explicit Rodolfo approval",
       "objective": "Preserve MGS institutional context without relying on individual agent memory",
@@ -62,5 +72,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T02:02:26+00:00"
+  "updated_at": "2026-07-17T02:10:56+00:00"
 }
