@@ -817,6 +817,8 @@ def google_access_token():
 def sheets_api(access_token, method, url, data=None):
     body=None
     headers={'Authorization':f'Bearer {access_token}'}
+    if GOOGLE_AUTH_MODE=='service_account':
+        headers['x-goog-user-project']=GOOGLE_AUTH.service_account_project_id()
     if data is not None:
         body=json.dumps(data,ensure_ascii=False).encode('utf-8')
         headers['Content-Type']='application/json; charset=UTF-8'

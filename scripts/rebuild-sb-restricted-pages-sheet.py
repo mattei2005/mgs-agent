@@ -33,6 +33,8 @@ ACCESS=token()
 
 def api(method,url,data=None):
     body=None; h={'Authorization':'Bearer '+ACCESS}
+    if AUTH_MODE=='service_account':
+        h['x-goog-user-project']=GOOGLE_AUTH.service_account_project_id()
     if data is not None:
         body=json.dumps(data).encode(); h['Content-Type']='application/json; charset=UTF-8'
     req=urllib.request.Request(url,method=method,headers=h,data=body)

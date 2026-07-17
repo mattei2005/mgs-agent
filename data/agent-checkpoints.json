@@ -23,12 +23,12 @@
     {
       "agent": "zeus",
       "id": "google-sheets-enterprise-migration-20260716",
-      "next_step": "Rodolfo conceder Service Usage Consumer à Service Account no projeto 910132583650; Zeus valida Sheets HTTP 200, faz canário write/readback/restore, ativa SA nos consumidores, roda smokes e pede confirmação crítica para revogar/remover OAuth",
+      "next_step": "Rodolfo enviar captura da linha IAM mostrando principal ares-drive@mgs-ares.iam.gserviceaccount.com e papel Service Usage Consumer no projeto mgs-ares/910132583650; Zeus corrige vínculo ou valida propagação, então executa canário e cutover",
       "objective": "Eliminar a dependência do OAuth pessoal nas planilhas operacionais sem mover o cluster financeiro",
-      "source": "discord:message:1527509795802976276; Sheets API 403 serviceusage.services.use; https://console.cloud.google.com/iam-admin/iam?project=910132583650",
-      "state": "rodolfo habilitou sheets.googleapis.com e screenshot confirmou enabled. api sa ainda bloqueada: chamada normal reporta propagação/disabled; chamada com x-goog-user-project=910132583650 isolou causa iam: falta serviceusage.services.use/roles.serviceusage.serviceusageconsumer para ares-drive@mgs-ares.iam.gserviceaccount.com. helper validado. dtr-sb-page-health-sync.py, process-revenue-spend-report.py e rebuild-sb-restricted-pages-sheet.py preparados com auth mode selecionável; padrão continua oauth, sintaxe ok e oauth smoke ok; nenhum cutover/write executado.",
+      "source": "discord:message:1527514814291775630; quota project Drive/Sheets HTTP 403 missing serviceusage.services.use; skill google-drive-agent-automation reference service-account-sheets-api-enablement-and-consumer-iam.md",
+      "state": "rodolfo informou iam liberado, mas service usage consumer ainda não está efetivo: quota-project probes para drive e sheets retornam 403 missing serviceusage.services.use após mais de 8 minutos de retries. api sheets está enabled e file sharing está ok. helper e 4 consumidores foram preparados para enviar x-goog-user-project; defaults continuam oauth. meta app roles profile script também preparado. py_compile/bash -n ok; zero sheet writes, zero cutover.",
       "thread_id": "1527491546331611238",
-      "updated_at": "2026-07-17T03:10:03+00:00"
+      "updated_at": "2026-07-17T03:28:42+00:00"
     },
     {
       "agent": "zeus",
@@ -72,5 +72,5 @@
     }
   ],
   "schema_version": 1,
-  "updated_at": "2026-07-17T03:10:03+00:00"
+  "updated_at": "2026-07-17T03:28:42+00:00"
 }

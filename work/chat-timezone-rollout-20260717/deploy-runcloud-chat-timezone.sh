@@ -24,7 +24,9 @@ for entry in "${sites[@]}"; do
   IFS='|' read -r domain site user manager <<< "$entry"
   if [ "$TARGET" != "all" ] && [ "$TARGET" != "$domain" ]; then continue; fi
   plugin="$site/wp-content/plugins/mgs-chat-funnels"
-  backup="/var/tmp/mgs-production-backups/$domain/mgs-chat-funnels-timezone/$TS"
+  backup_root="/var/tmp/mgs-production-backups"
+  if [ "$user" = "runcloud2" ]; then backup_root="/var/tmp/mgs-production-backups-runcloud2"; fi
+  backup="$backup_root/$domain/mgs-chat-funnels-timezone/$TS"
   stage="$site/wp-content/plugins/.mgs-chat-funnels-0.4.2-stage-$TS"
   echo "BEGIN|$domain"
   version=$(sudo -n -u "$user" wp --path="$site" plugin get mgs-chat-funnels --field=version --allow-root)

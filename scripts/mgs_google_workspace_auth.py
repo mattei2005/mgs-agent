@@ -30,6 +30,7 @@ DEFAULT_ITEM = os.environ.get("MGS_GOOGLE_SERVICE_ACCOUNT_ITEM", "Google Service
 TOKEN_URI = "https://oauth2.googleapis.com/token"
 DRIVE_SCOPE = "https://www.googleapis.com/auth/drive"
 SHEETS_SCOPE = "https://www.googleapis.com/auth/spreadsheets"
+_SA_CACHE: dict[tuple[str, str], dict[str, Any]] = {}
 
 
 def load_env(path: Path = BASE / ".env") -> None:
@@ -71,6 +72,9 @@ def load_service_account(item: str | None = None, vault: str | None = None) -> d
     load_env()
     item = item or os.environ.get("MGS_GOOGLE_SERVICE_ACCOUNT_ITEM", DEFAULT_ITEM)
     vault = vault or os.environ.get("OP_DEFAULT_VAULT", DEFAULT_VAULT)
+    cache_key = (item, vault)
+    if cache_key in _SA_CACHE:
+        return _SA_CACHE[cache_key]
     obj = _op_item_json(item, vault)
     candidates: list[str] = []
     for field in obj.get("fields") or []:
@@ -86,8 +90,16 @@ def load_service_account(item: str | None = None, vault: str | None = None) -> d
             continue
         required = ("client_email", "private_key")
         if all(data.get(k) for k in required):
+            _SA_CACHE[cache_key] = data
             return data
     raise RuntimeError("service_account_json_not_found")
+
+
+def service_account_project_id(item: str | None = None, vault: str | None = None) -> str:
+    project_id = str(load_service_account(item=item, vault=vault).get("project_id") or "").strip()
+    if not project_id:
+        raise RuntimeError("service_account_project_id_missing")
+    return project_id
 
 
 def _b64url(data: bytes) -> str:
@@ -146,9 +158,18 @@ def service_account_access_token(
     return str(token)
 
 
-def api_json(method: str, url: str, token: str, payload: Any = None) -> tuple[int, dict[str, Any]]:
+def api_json(
+    method: str,
+    url: str,
+    token: str,
+    payload: Any = None,
+    *,
+    quota_project: str | None = None,
+) -> tuple[int, dict[str, Any]]:
     body = None
     headers = {"Authorization": "Bearer " + token, "User-Agent": "MGS-Google-SA/1.0"}
+    if quota_project:
+        headers["x-goog-user-project"] = quota_project
     if payload is not None:
         body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
         headers["Content-Type"] = "application/json; charset=UTF-8"
@@ -179,6 +200,7 @@ def main() -> int:
     if args.check_sheet_id:
         scopes.append(SHEETS_SCOPE)
     token = service_account_access_token(scopes or None)
+    quota_project = service_account_project_id()
     result: dict[str, Any] = {"token_created": True}
     ok = True
     if args.check_drive_id:
@@ -187,6 +209,7 @@ def main() -> int:
             "GET",
             f"https://www.googleapis.com/drive/v3/files/{args.check_drive_id}?supportsAllDrives=true&fields={fields}",
             token,
+            quota_project=quota_project,
         )
         caps = data.get("capabilities") or {}
         result["drive"] = {
@@ -201,6 +224,7 @@ def main() -> int:
             "GET",
             f"https://sheets.googleapis.com/v4/spreadsheets/{args.check_sheet_id}?fields=spreadsheetId",
             token,
+            quota_project=quota_project,
         )
         error = data.get("error") or {}
         result["sheets"] = {"http": status, "accessible": status == 200, "status": error.get("status")}

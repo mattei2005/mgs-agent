@@ -41,6 +41,7 @@ _google_auth_spec.loader.exec_module(GOOGLE_AUTH)
 
 DEFAULT_TOKEN_FILE = Path('/root/mgs-agent/.secrets/ares-google-drive-oauth-client.json')
 DEFAULT_OUT_ROOT = Path('/root/mgs-agent/work/revenue-spend-reporting')
+GOOGLE_QUOTA_PROJECT: str | None = None
 
 TERM_RE = re.compile(r'(us|gb|es|de|mx|ca|za|ar|br)-(cc|job|car|game)-(en|es|de|pt|br)', re.I)
 CONTENT_RE = re.compile(r'(?:drip|bd)_(us|gb|es|de|mx|ca|za|ar|br)_(cc|job|car|game)_', re.I)
@@ -445,8 +446,10 @@ def build_report(input_path: Path, out_dir: Path, fincgriffin_gb_to_us_g006: boo
 
 
 def access_token(token_file: Path, auth_mode: str | None = None) -> str:
+    global GOOGLE_QUOTA_PROJECT
     mode = (auth_mode or os.environ.get('MGS_GOOGLE_SHEETS_AUTH_MODE', 'oauth')).strip().lower()
     if mode == 'service_account':
+        GOOGLE_QUOTA_PROJECT = GOOGLE_AUTH.service_account_project_id()
         return GOOGLE_AUTH.service_account_access_token(GOOGLE_AUTH.SHEETS_SCOPE)
     if mode != 'oauth':
         raise RuntimeError(f'unsupported Google Sheets auth mode: {mode}')
@@ -462,6 +465,8 @@ def access_token(token_file: Path, auth_mode: str | None = None) -> str:
 
 def sheets_api(method: str, url: str, token: str, data: Any = None) -> Any:
     body = None; headers = {'Authorization': 'Bearer ' + token}
+    if GOOGLE_QUOTA_PROJECT:
+        headers['x-goog-user-project'] = GOOGLE_QUOTA_PROJECT
     if data is not None:
         body = json.dumps(data).encode(); headers['Content-Type'] = 'application/json; charset=UTF-8'
     req = urllib.request.Request(url, method=method, headers=headers, data=body)

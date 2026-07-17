@@ -84,7 +84,7 @@ x=json.loads(sys.argv[1]); expected={'timezone':'America/Sao_Paulo','start':'202
 if x!=expected: raise SystemExit(f'timezone readback mismatch: {x}')
 print('TIMEZONE_READBACK|'+json.dumps(x,separators=(',',':')))
 PY
-for url in 'https://creditoparaveiculo.com/quiz-car-parcelas/' 'https://creditoparaveiculo.com/quiz-car-001-cl001/' 'https://creditoparaveiculo.com/wp-json/mgs-quiz/v1/config/quiz-car-parcelas'; do
+for url in 'https://creditoparaveiculo.com/quiz-car-parcelas/' 'https://creditoparaveiculo.com/quiz-car-001-cl001/' 'https://creditoparaveiculo.com/wp-json/mgs-quiz/v1/config?slug=quiz-car-parcelas'; do
   code=$(curl -L -sS -o /dev/null -w '%{http_code}' "$url"); test "$code" = "200"; echo "HTTP|$code|$url"
 done
 trap - ERR
